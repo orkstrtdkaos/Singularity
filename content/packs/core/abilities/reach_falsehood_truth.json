@@ -26,7 +26,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Fitting Mask",
+     "name": "Fitting Mask",
      "grants": "Craft a convincing illusion or disguise; tell a lie built well enough to hold; SPOT a constructed untruth, because you know the joinery.",
      "cannot": "Illusion is not substance — tested hard, it fails; a Verity read can pierce it; the truly perceptive feel the seam.",
      "functions": [
@@ -39,11 +39,12 @@
       "deceive",
       "conceal",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Fitting Mask"
     },
     {
      "rank": 2,
-     "name": "The Standing Lie",
+     "name": "Standing Lie",
      "grants": "Build an untruth that holds under scrutiny — a false history, a cover that survives questioning, an illusion that persists unwatched; unbuild another's lie by finding its load-bearing falsehood.",
      "cannot": "A lie built on discoverable fact cracks when the fact surfaces; the Cathedral (true pieces) is a different, harder thing; every lie you hold is weight.",
      "functions": [
@@ -58,11 +59,12 @@
       "conceal",
       "reveal",
       "sustain"
-     ]
+     ],
+     "_nameWas": "The Standing Lie"
     },
     {
      "rank": 3,
-     "name": "The Woven Untruth",
+     "name": "Woven Untruth",
      "grants": "Falsehood at scale — a deception a whole people believes, an illusion over a place, a constructed truth that reshapes what everyone knows; and the mastery to unpick any of these in another's work. The Veilwrights' power in miniature; the craft that built the Cathedral of Convincing.",
      "cannot": "The wielder drifts falsehood-hot — until they can no longer find their own true ground; a person who can make anything believed eventually believes nothing, the foreclosure of the world going unreal.",
      "functions": [
@@ -77,7 +79,8 @@
       "conceal",
       "reveal",
       "sustain"
-     ]
+     ],
+     "_nameWas": "The Woven Untruth"
     }
    ],
    "challengeTypes": [
@@ -170,7 +173,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Piercing Eye",
+     "name": "Piercing Eye",
      "grants": "See through illusion, disguise, and the ordinary lie; know when a spoken thing is false; speak a plain truth others can't easily deny.",
      "cannot": "Sees the lie, not always the truth behind it; the Cathedral's true-pieces-false-whole survives raw piercing; a truth spoken is not a truth accepted.",
      "functions": [
@@ -180,11 +183,12 @@
      "harmRung": "none",
      "_functionsWas": [
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Piercing Eye"
     },
     {
      "rank": 2,
-     "name": "The Unmasking",
+     "name": "Unmasking",
      "grants": "Strip a deception bare before others — a false face shown true, a standing lie collapsed, a liar's own words turned to expose them; hold a truth so plainly it becomes hard to bury again.",
      "cannot": "Some unmaskings do more harm than the lie did, and Verity can't tell which; the Cathedral needs the shape-seeing of the True Word braid; the powerful can suppress a proven truth by force.",
      "functions": [
@@ -194,11 +198,12 @@
      "harmRung": "none",
      "_functionsWas": [
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Unmasking"
     },
     {
      "rank": 3,
-     "name": "The Word That Holds",
+     "name": "Word That Holds",
      "grants": "Truth at scale — a deception undone before a people, a buried thing dragged into day, a word spoken so truly it cannot be unsaid or unbelieved. The Truthwardens' power in miniature; the pole Aevi-the-Watcher lives nearest.",
      "cannot": "The wielder drifts truth-hot — toward revealing everything, always, sparing nothing; total truth burns every shelter, the foreclosure of a world with no privacy, no mercy, no shadow left to heal in (the Blaze's cousin on another axis).",
      "functions": [
@@ -211,7 +216,8 @@
       "reveal",
       "bind",
       "restore"
-     ]
+     ],
+     "_nameWas": "The Word That Holds"
     }
    ],
    "challengeTypes": [
@@ -282,8 +288,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
-   "id": "the_whole_truth",
-   "name": "The Whole Truth",
+   "id": "whole_truth",
+   "name": "Whole Truth",
    "levelReq": 5,
    "energyCost": 10,
    "attribute": "mental",
@@ -300,7 +306,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Whole Truth",
+     "name": "Whole Truth",
      "grants": "Reveal the complete hidden truth of a subject at once — the only thing that cracks a lie built from true pieces. And the record rights itself: someone falsely made into a thing they were not is restored to what they actually are, in front of everyone who believed otherwise.",
      "cannot": "Overwhelming — you learn things you can't unlearn; the powerful will kill to keep some truths buried; reveals, cannot compel.",
      "functions": [
@@ -311,7 +317,8 @@
      "_functionsWas": [
       "reveal",
       "restore"
-     ]
+     ],
+     "_nameWas": "The Whole Truth"
     }
    ],
    "powerSystem": "reach_falsehood_truth",
@@ -358,11 +365,13 @@
     "restore",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Whole Truth",
+   "_idWas": "the_whole_truth"
   },
   {
-   "id": "the_wrong_reality",
-   "name": "The Wrong Reality",
+   "id": "wrong_reality",
+   "name": "Wrong Reality",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -393,7 +402,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Wrong Read",
+     "name": "Wrong Read",
      "grants": "Give a person a false read of the situation — convincing enough that they act on it in a way that leaves them exposed to harm or costs them something real.",
      "cannot": "Anything rank 2 adds — hold the false reality long enough that they OPERATE inside it — not one wrong step but a sequence of correct decisions made against a picture you supplied; IT NEEDS A FRAME THEY WOULD PLAUSIBLY ACCEPT.",
      "functions": [
@@ -401,11 +410,12 @@
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Wrong Read"
     },
     {
      "rank": 2,
-     "name": "The Real Consequence",
+     "name": "Real Consequence",
      "grants": "Hold the false reality long enough that they OPERATE inside it — not one wrong step but a sequence of correct decisions made against a picture you supplied. They commit resources, spend goodwill, and close doors that were open, and every loss is genuinely theirs because every choice genuinely was.",
      "cannot": "It needs a frame they would plausibly accept; a picture that contradicts what they can plainly check collapses and takes your credibility with it. And the longer it is held, the more of it must be maintained — a Verist who tugs one loose thread gets the whole of it.",
      "functions": [
@@ -418,11 +428,12 @@
       "deceive",
       "hinder",
       "strike"
-     ]
+     ],
+     "_nameWas": "The Real Consequence"
     },
     {
      "rank": 3,
-     "name": "The Indistinguishable",
+     "name": "Indistinguishable",
      "grants": "The false reality holds until the cost lands. They acted correctly, by their lights. You were just showing them the wrong lights.",
      "cannot": "Nothing further; this is the craft's ceiling; IT NEEDS A FRAME THEY WOULD PLAUSIBLY ACCEPT; and it still costs what it costs: they acted CORRECTLY BY THEIR LIGHTS.",
      "functions": [
@@ -435,7 +446,8 @@
       "deceive",
       "hinder",
       "strike"
-     ]
+     ],
+     "_nameWas": "The Indistinguishable"
     }
    ],
    "nativeOrCombination": "native",
@@ -485,11 +497,13 @@
     "hinder",
     "strike"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Wrong Reality",
+   "_idWas": "the_wrong_reality"
   },
   {
-   "id": "the_better_story",
-   "name": "The Better Story",
+   "id": "better_story",
+   "name": "Better Story",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -519,18 +533,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Liveable Frame",
+     "name": "Liveable Frame",
      "grants": "Give a person a version of what happened that they can carry — not a harmful lie, a true face of the event that allows the wound to close.",
      "cannot": "Anything rank 2 adds — restore someone by showing them their experience from an angle that is also true, but functions — the trauma has a different shape; IT MUST BE TRUE.",
      "functions": [
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Liveable Frame"
     },
     {
      "rank": 2,
-     "name": "The Healing Retelling",
+     "name": "Healing Retelling",
      "grants": "Restore someone by showing them their experience from an angle that is also true, but functions — the trauma has a different shape; a different shape heals differently.",
      "cannot": "Anything rank 3 adds — the better story is also a true story; IT MUST BE TRUE.",
      "functions": [
@@ -538,11 +553,12 @@
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Healing Retelling"
     },
     {
      "rank": 3,
-     "name": "The Better True Story",
+     "name": "Better True Story",
      "grants": "The better story is also a true story. You have not lied; you have shown them a different true face of the real, and it heals what the first face was keeping open.",
      "cannot": "Nothing further; this is the craft's ceiling; IT MUST BE TRUE; and it still costs what it costs: a story that carries someone can carry them AWAY from what they needed to face.",
      "functions": [
@@ -550,7 +566,8 @@
       "restore"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Better True Story"
     }
    ],
    "nativeOrCombination": "native",
@@ -597,11 +614,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A medical/social/psychological action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens restoration; rank 3 adds to special. Limit: iT Must BE True — a comforting lie is a different craft, and it does not heal."
+   "plainly": "A medical/social/psychological action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens restoration; rank 3 adds to special. Limit: iT Must BE True — a comforting lie is a different craft, and it does not heal.",
+   "_nameWas": "The Better Story",
+   "_idWas": "the_better_story"
   },
   {
-   "id": "the_false_target",
-   "name": "The False Target",
+   "id": "false_target",
+   "name": "False Target",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -632,7 +651,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The False Position",
+     "name": "False Position",
      "grants": "Make yourself or another appear to be elsewhere — the attack lands on the appearance, and the person is somewhere else.",
      "cannot": "Anything rank 2 adds — build a false target convincing enough to occupy sustained pursuit — they spend their effort on what you've shown them is there; it draws AIMED action.",
      "functions": [
@@ -640,11 +659,12 @@
       "conceal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The False Position"
     },
     {
      "rank": 2,
-     "name": "The Occupied Pursuit",
+     "name": "Occupied Pursuit",
      "grants": "Build a false target convincing enough to occupy sustained pursuit — they spend their effort on what you've shown them is there.",
      "cannot": "Anything rank 3 adds — wrap a place, a group, or a real thing in a false version that draws all action away from the actual — the target they have is not the target that matters; it draws AIMED action.",
      "functions": [
@@ -652,11 +672,12 @@
       "conceal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Occupied Pursuit"
     },
     {
      "rank": 3,
-     "name": "The Protected Real",
+     "name": "Protected Real",
      "grants": "Wrap a place, a group, or a real thing in a false version that draws all action away from the actual — the target they have is not the target that matters.",
      "cannot": "Nothing further; this is the craft's ceiling; it draws AIMED action; and it still costs what it costs: when the decoy is found out, they know precisely how long they were wasting.",
      "functions": [
@@ -665,7 +686,8 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Protected Real"
     }
    ],
    "nativeOrCombination": "native",
@@ -714,11 +736,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A combat/stealth/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends duration; rank 3 extends targets. Limit: it draws Aimed action — an area effect or an accident does not care what it is aiming at."
+   "plainly": "A combat/stealth/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends duration; rank 3 extends targets. Limit: it draws Aimed action — an area effect or an accident does not care what it is aiming at.",
+   "_nameWas": "The False Target",
+   "_idWas": "the_false_target"
   },
   {
-   "id": "the_made_truth",
-   "name": "The Made Truth",
+   "id": "made_truth",
+   "name": "Made Truth",
    "levelReq": 3,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -749,7 +773,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Working False",
+     "name": "Working False",
      "grants": "Craft a false reality convincing enough to function — the room looks different, the person is a stranger, the event did not happen, and it holds.",
      "cannot": "Anything rank 2 adds — make an untruth that transforms the present — a false history so complete it changes what people do and choose now; it CHANGES WHAT PEOPLE DO, not what is so.",
      "functions": [
@@ -757,11 +781,12 @@
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Working False"
     },
     {
      "rank": 2,
-     "name": "The Transformed History",
+     "name": "Transformed History",
      "grants": "Make an untruth that transforms the present — a false history so complete it changes what people do and choose now.",
      "cannot": "Anything rank 3 adds — construct a version of events, a place, a reality that operates at full fidelity for as long as it needs to, whether or not you're present to maintain it; it CHANGES WHAT PEOPLE DO, not what is so.",
      "functions": [
@@ -770,11 +795,12 @@
       "transform"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Transformed History"
     },
     {
      "rank": 3,
-     "name": "The Built World",
+     "name": "Built World",
      "grants": "Construct a version of events, a place, a reality that operates at full fidelity for as long as it needs to, whether or not you're present to maintain it.",
      "cannot": "Nothing further; this is the craft's ceiling; it CHANGES WHAT PEOPLE DO, not what is so; and it still costs what it costs: a made truth that operates unattended is one YOU NO LONGER FULLY OWN.",
      "functions": [
@@ -783,7 +809,8 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Built World"
     }
    ],
    "nativeOrCombination": "native",
@@ -828,11 +855,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A magical/craft/tactical action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about a day Ranks: rank 2 deepens fidelity; rank 3 extends duration. Limit: it Changes What People DO, not what is so — the real does not bend."
+   "plainly": "A magical/craft/tactical action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about a day Ranks: rank 2 deepens fidelity; rank 3 extends duration. Limit: it Changes What People DO, not what is so — the real does not bend.",
+   "_nameWas": "The Made Truth",
+   "_idWas": "the_made_truth"
   },
   {
-   "id": "the_false_door",
-   "name": "The False Door",
+   "id": "false_door",
+   "name": "False Door",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -863,7 +892,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Made Opening",
+     "name": "Made Opening",
      "grants": "Make a passage appear where there isn't one — and use it, briefly, before the appearance closes.",
      "cannot": "Anything rank 2 adds — open a door through the false version of a space — the wall that appears solid has an opening in the version laid over it; the appearance CLOSES.",
      "functions": [
@@ -871,11 +900,12 @@
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Made Opening"
     },
     {
      "rank": 2,
-     "name": "The False Wall",
+     "name": "False Wall",
      "grants": "Open a door through the false version of a space — the wall that appears solid has an opening in the version laid over it.",
      "cannot": "Anything rank 3 adds — travel through the gap between what appears and what is — a route through the veil itself, from one false face of reality to another; the appearance CLOSES.",
      "functions": [
@@ -883,7 +913,8 @@
       "open"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The False Wall"
     },
     {
      "rank": 3,
@@ -937,11 +968,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A stealth/infiltration/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 adds to access; rank 3 adds to special. Limit: the appearance Closes — a false door is not a real one, and what is on the other side is still real."
+   "plainly": "A stealth/infiltration/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 adds to access; rank 3 adds to special. Limit: the appearance Closes — a false door is not a real one, and what is on the other side is still real.",
+   "_nameWas": "The False Door",
+   "_idWas": "the_false_door"
   },
   {
-   "id": "the_maintained_veil",
-   "name": "The Maintained Veil",
+   "id": "maintained_veil",
+   "name": "Maintained Veil",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -971,29 +1004,31 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Running Falsehood",
+     "name": "Running Falsehood",
      "grants": "Sustain a working illusion or false narrative without active maintenance — set it and it continues.",
      "cannot": "Anything rank 2 adds — hold a falsecraft across a long operation — days, weeks — without it decaying or requiring repair; it sustains the working, IT DOES NOT STRENGTHEN IT.",
      "functions": [
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Running Falsehood"
     },
     {
      "rank": 2,
-     "name": "The Long Veil",
+     "name": "Long Veil",
      "grants": "Hold a falsecraft across a long operation — days, weeks — without it decaying or requiring repair.",
      "cannot": "Anything rank 3 adds — the veil sustains until broken — set and gone; it sustains the working, IT DOES NOT STRENGTHEN IT.",
      "functions": [
       "sustain"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Veil"
     },
     {
      "rank": 3,
-     "name": "The Permanent Feature",
+     "name": "Permanent Feature",
      "grants": "The veil sustains until broken — set and gone; it is a feature of the place now, not a maintained working.",
      "cannot": "Nothing further; this is the craft's ceiling; it sustains the working, IT DOES NOT STRENGTHEN IT.",
      "functions": [
@@ -1001,7 +1036,8 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Permanent Feature"
     }
    ],
    "nativeOrCombination": "native",
@@ -1041,11 +1077,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A stealth/logistics/magical action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about 3 days Ranks: rank 2 extends persistence; rank 3 adds to autonomy. Limit: it sustains the working, IT Does Not Strengthen IT — a weak lie held forever is still a weak lie."
+   "plainly": "A stealth/logistics/magical action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about 3 days Ranks: rank 2 extends persistence; rank 3 adds to autonomy. Limit: it sustains the working, IT Does Not Strengthen IT — a weak lie held forever is still a weak lie.",
+   "_nameWas": "The Maintained Veil",
+   "_idWas": "the_maintained_veil"
   },
   {
-   "id": "the_true_ground",
-   "name": "The True Ground",
+   "id": "true_ground",
+   "name": "True Ground",
    "levelReq": 1,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1075,18 +1113,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Lie Doesn't Stick",
+     "name": "Lie Doesn't Stick",
      "grants": "Resist illusion, deception, and false reading by seeing what is actually true — the lie has no purchase on someone who already knows.",
      "cannot": "Anything rank 2 adds — protect yourself and others from manipulations that depend on misdirection — in the presence of accurate truth-telling, the deception has nowhere to anchor; it resists FALSE BELIEF ONLY.",
      "functions": [
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Lie Doesn't Stick"
     },
     {
      "rank": 2,
-     "name": "The Protected Circle",
+     "name": "Protected Circle",
      "grants": "Protect yourself and others from manipulations that depend on misdirection — in the presence of accurate truth-telling, the deception has nowhere to anchor.",
      "cannot": "Anything rank 3 adds — no working that depends on false belief can function around someone who sees what is so — you and those near you are simply out of reach of what requires the lie to work; it resists FALSE BELIEF ONLY.",
      "functions": [
@@ -1094,11 +1133,12 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Protected Circle"
     },
     {
      "rank": 3,
-     "name": "The Real as Defense",
+     "name": "Real as Defense",
      "grants": "No working that depends on false belief can function around someone who sees what is so — you and those near you are simply out of reach of what requires the lie to work.",
      "cannot": "Nothing further; this is the craft's ceiling; it resists FALSE BELIEF ONLY.",
      "functions": [
@@ -1106,7 +1146,8 @@
       "shield"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Real as Defense"
     }
    ],
    "nativeOrCombination": "native",
@@ -1153,11 +1194,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A defense/magical/social action that reduces incoming harm. Its strength is rated 3 out of 10 and absorbs 3 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 6 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it resists False Belief Only — a sword does not care what you know."
+   "plainly": "A defense/magical/social action that reduces incoming harm. Its strength is rated 3 out of 10 and absorbs 3 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 6 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it resists False Belief Only — a sword does not care what you know.",
+   "_nameWas": "The True Ground",
+   "_idWas": "the_true_ground"
   },
   {
-   "id": "the_established_fact",
-   "name": "The Established Fact",
+   "id": "established_fact",
+   "name": "Established Fact",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1198,7 +1241,7 @@
     },
     {
      "rank": 2,
-     "name": "The Bound Record",
+     "name": "Bound Record",
      "grants": "Make a fact so established it binds — what everyone has heard truly said cannot be quietly taken back or reframed.",
      "cannot": "Anything rank 3 adds — set something in the record of the real so completely it becomes part of what is so — a truth that persists past the telling, shaping what others must acknowledge; it establishes what IS TRUE.",
      "functions": [
@@ -1206,7 +1249,8 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Bound Record"
     },
     {
      "rank": 3,
@@ -1261,11 +1305,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/legal/intellectual action that makes or animates something. Its strength is rated 4 out of 10, and lasts for about 7 days Ranks: rank 2 deepens bindStrength; rank 3 adds to special. Limit: it establishes what IS True — a false claim gains nothing from this craft."
+   "plainly": "A social/legal/intellectual action that makes or animates something. Its strength is rated 4 out of 10, and lasts for about 7 days Ranks: rank 2 deepens bindStrength; rank 3 adds to special. Limit: it establishes what IS True — a false claim gains nothing from this craft.",
+   "_nameWas": "The Established Fact",
+   "_idWas": "the_established_fact"
   },
   {
-   "id": "the_weight_of_truth",
-   "name": "The Weight of Truth",
+   "id": "weight_of_truth",
+   "name": "Weight of Truth",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1295,18 +1341,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Reliable Word",
+     "name": "Reliable Word",
      "grants": "Speak a true thing with the full weight of someone who says only true things — the word lands differently; people who know your record cannot easily dismiss it.",
      "cannot": "Anything rank 2 adds — speak truth plainly into a situation of equivocation — the accurate account breaks what comfortable vagueness was protecting; A PERFECT RECORD IS A THING YOU CAN LOSE EXACTLY ONCE.",
      "functions": [
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Reliable Word"
     },
     {
      "rank": 2,
-     "name": "The Plain Account",
+     "name": "Plain Account",
      "grants": "Speak truth plainly into a situation of equivocation — the accurate account breaks what comfortable vagueness was protecting.",
      "cannot": "Anything rank 3 adds — in a room where you have always been right, your word on a new matter is the word — the weight of a perfect record on past facts carries into the present one; A PERFECT RECORD IS A THING YOU CAN LOSE EXACTLY ONCE.",
      "functions": [
@@ -1317,11 +1364,12 @@
      "_functionsWas": [
       "command",
       "break"
-     ]
+     ],
+     "_nameWas": "The Plain Account"
     },
     {
      "rank": 3,
-     "name": "The Record Commands",
+     "name": "Record Commands",
      "grants": "In a room where you have always been right, your word on a new matter is the word — the weight of a perfect record on past facts carries into the present one.",
      "cannot": "Nothing further; this is the craft's ceiling; A PERFECT RECORD IS A THING YOU CAN LOSE EXACTLY ONCE.",
      "functions": [
@@ -1332,7 +1380,8 @@
      "_functionsWas": [
       "command",
       "break"
-     ]
+     ],
+     "_nameWas": "The Record Commands"
     }
    ],
    "nativeOrCombination": "native",
@@ -1380,11 +1429,13 @@
     "break",
     "command"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Weight of Truth",
+   "_idWas": "the_weight_of_truth"
   },
   {
-   "id": "the_direct_path",
-   "name": "The Direct Path",
+   "id": "direct_path",
+   "name": "Direct Path",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1415,7 +1466,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Real Route",
+     "name": "Real Route",
      "grants": "Navigate any space by seeing it truly — the route that actually exists, not the route that appears to or that others say is there.",
      "cannot": "Anything rank 2 adds — move through deception and misdirection by knowing what is real — where others follow the false path, you follow the one that's actually there; it finds the REAL route, not a SAFE one.",
      "functions": [
@@ -1423,7 +1474,8 @@
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Real Route"
     },
     {
      "rank": 2,
@@ -1439,7 +1491,7 @@
     },
     {
      "rank": 3,
-     "name": "The Actual Way",
+     "name": "Actual Way",
      "grants": "Navigate to the truth of any place — the real exit, the actual center, the genuine threat — by seeing past every falsification of the terrain.",
      "cannot": "Nothing further; this is the craft's ceiling; it finds the REAL route, not a SAFE one.",
      "functions": [
@@ -1452,7 +1504,8 @@
       "reveal",
       "move",
       "travel"
-     ]
+     ],
+     "_nameWas": "The Actual Way"
     }
    ],
    "nativeOrCombination": "native",
@@ -1503,11 +1556,13 @@
     "reveal",
     "travel"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Direct Path",
+   "_idWas": "the_direct_path"
   },
   {
-   "id": "the_held_truth",
-   "name": "The Held Truth",
+   "id": "held_truth",
+   "name": "Held Truth",
    "levelReq": 1,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1537,14 +1592,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Anchored Self",
+     "name": "Anchored Self",
      "grants": "Hold function in conditions of deception, disorientation, or false-reality working by anchoring to what is actually so.",
      "cannot": "Anything rank 2 adds — sustain across the hardest stretch by clinging to what you know is true — the accurate account of what is real is what keeps you; it anchors to WHAT IS ACTUALLY SO.",
      "functions": [
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Anchored Self"
     },
     {
      "rank": 2,
@@ -1560,7 +1616,7 @@
     },
     {
      "rank": 3,
-     "name": "The Real Is Enough",
+     "name": "Real Is Enough",
      "grants": "In any conditions that depend on disorientation or false belief, you remain functional — accurately calibrated to what is so, unmoved by the version others are being shown.",
      "cannot": "Nothing further; this is the craft's ceiling; it anchors to WHAT IS ACTUALLY SO.",
      "functions": [
@@ -1568,7 +1624,8 @@
       "sustain"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Real Is Enough"
     }
    ],
    "nativeOrCombination": "native",
@@ -1607,12 +1664,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A endurance/hardship/psychological action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it anchors to What IS Actually SO — it offers nothing against ordinary hardship."
+   "plainly": "A endurance/hardship/psychological action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it anchors to What IS Actually SO — it offers nothing against ordinary hardship.",
+   "_nameWas": "The Held Truth",
+   "_idWas": "the_held_truth"
   },
   {
    "schemaVersion": 1,
-   "id": "the_perfect_veil",
-   "name": "The Perfect Veil",
+   "id": "perfect_veil",
+   "name": "Perfect Veil",
    "levelReq": 4,
    "energyCost": 12,
    "powerSystem": "reach_falsehood_truth",
@@ -1631,7 +1690,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Perfect Veil",
+     "name": "Perfect Veil",
      "grants": "Veil a thing so completely it is not merely unseen but un-looked-for.",
      "cannot": "It hides but does not protect, it cuts off help as surely as harm, and a thing kept perfectly secret is a thing kept perfectly alone.",
      "functions": [
@@ -1639,11 +1698,12 @@
       "deceive"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Perfect Veil"
     },
     {
      "rank": 2,
-     "name": "The Veil That Keeps",
+     "name": "Veil That Keeps",
      "grants": "The veil no longer needs your attention — set it and it keeps itself. And it can take what is larger than a thing: a route, a meeting, an event, the fact that something happened at all. Those inside a kept veil need not know they are held in one.",
      "cannot": "It still hides without defending, and still cuts off help exactly as well as harm. A veil that keeps itself is a veil you may forget you set. And people held inside one without knowing cannot ask to be let out.",
      "functions": [
@@ -1651,7 +1711,8 @@
       "deceive"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Veil That Keeps"
     }
    ],
    "gated": "learned",
@@ -1699,12 +1760,14 @@
     }
    ],
    "plainly": "A investigate/defend action that reduces incoming harm. Its strength is rated 7 out of 10 and absorbs 0 harm per hit (rank 0 armour) across a scope of 3, and lasts for about 7 days Ranks: rank 2 adds to autonomy. Limit: iT Hides But Does Not Protect.",
-   "_descriptionWas": "The Veilwright art of the perfect veil — a concealment so total that the hidden thing is not merely unseen but un-looked-for, the very question of it smoothed away. The deep gift of those who keep secrets for a living."
+   "_descriptionWas": "The Veilwright art of the perfect veil — a concealment so total that the hidden thing is not merely unseen but un-looked-for, the very question of it smoothed away. The deep gift of those who keep secrets for a living.",
+   "_nameWas": "The Perfect Veil",
+   "_idWas": "the_perfect_veil"
   },
   {
    "schemaVersion": 1,
-   "id": "the_useful_lie",
-   "name": "The Necessary Fiction",
+   "id": "useful_lie",
+   "name": "Necessary Fiction",
    "levelReq": 5,
    "energyCost": 13,
    "powerSystem": "reach_falsehood_truth",
@@ -1722,14 +1785,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Necessary Fiction",
+     "name": "Necessary Fiction",
      "grants": "Craft a fiction so complete it functions as true for as long as it goes unexamined.",
      "cannot": "It fails against determined truth, it costs nearly all you have, and its deepest danger is to its maker — tell a lie well enough and you may forget it was one.",
      "functions": [
       "deceive"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Necessary Fiction"
     }
    ],
    "gated": "learned",
@@ -1776,7 +1840,9 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/investigate action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about a day Limit: iT Fails Against Determined Truth."
+   "plainly": "A social/investigate action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about a day Limit: iT Fails Against Determined Truth.",
+   "_nameWas": "The Necessary Fiction",
+   "_idWas": "the_useful_lie"
   },
   {
    "schemaVersion": 1,
@@ -1884,8 +1950,8 @@
   },
   {
    "schemaVersion": 1,
-   "id": "the_perfect_erasure",
-   "name": "The Perfect Erasure",
+   "id": "perfect_erasure",
+   "name": "Perfect Erasure",
    "levelReq": 5,
    "energyCost": 14,
    "powerSystem": "reach_falsehood_truth",
@@ -1905,7 +1971,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Perfect Erasure",
+     "name": "Perfect Erasure",
      "grants": "Hold a replaced identity long enough to BIND it — the original's name is no longer theirs anywhere it is checked.",
      "cannot": "Anyone unrecorded. Speed: it takes months.",
      "functions": [
@@ -1913,7 +1979,8 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Perfect Erasure"
     },
     {
      "rank": 2,
@@ -1992,11 +2059,13 @@
     "bind",
     "strike"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Perfect Erasure",
+   "_idWas": "the_perfect_erasure"
   },
   {
-   "id": "the_wrong_wound",
-   "name": "The Wrong Wound",
+   "id": "wrong_wound",
+   "name": "Wrong Wound",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_falsehood_truth",
@@ -2016,7 +2085,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Moved Guard",
+     "name": "Moved Guard",
      "grants": "Sell a feint with your whole body — a glance, a shifted weight, a half-drawn weapon on the wrong side — and their defence goes where you sent it. Your next blow lands as if unopposed.",
      "cannot": "You must be CLOSE and VISIBLE — they have to be reading you for there to be anything to lie to. It buys ONE blow. Repeat it on the same opponent and they will have learned you.",
      "functions": [
@@ -2024,11 +2093,12 @@
       "deceive"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Moved Guard"
     },
     {
      "rank": 2,
-     "name": "The Two Knives",
+     "name": "Two Knives",
      "grants": "Sell the lie to a whole line — several opponents commit to a threat that is not there, and the real one goes through the gap they opened.",
      "cannot": "A crowd is harder than a person and the lie must be BIG, which means witnesses remember it. Anyone who has seen you work is no longer easy to sell.",
      "functions": [
@@ -2041,11 +2111,12 @@
       "strike",
       "deceive",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Two Knives"
     },
     {
      "rank": 3,
-     "name": "The Mistaken Man",
+     "name": "Mistaken Man",
      "grants": "The largest lie: they defend against the wrong PERSON. An ally strikes freely, or a blow lands and is credited to someone else entirely.",
      "cannot": "You have put a real wound on someone else's name, and that is a thing that goes on living after the fight. Verity sees straight through this, and Verists are not rare.",
      "functions": [
@@ -2060,7 +2131,8 @@
       "deceive",
       "hinder",
       "conceal"
-     ]
+     ],
+     "_nameWas": "The Mistaken Man"
     }
    ],
    "challengeTypes": [
@@ -2111,11 +2183,13 @@
     "strike",
     "deceive"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Wrong Wound",
+   "_idWas": "the_wrong_wound"
   },
   {
-   "id": "the_unbearable_word",
-   "name": "The Unbearable Word",
+   "id": "unbearable_word",
+   "name": "Unbearable Word",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_falsehood_truth",
@@ -2134,7 +2208,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Said Thing",
+     "name": "Said Thing",
      "grants": "Speak one true thing the target cannot bear, to their face. They lose the thread — the argument, the composure, the readiness, the lie they were maintaining. Nothing blocks it, because there is nothing to block — the word strikes past armour, guard and composure alike.",
      "cannot": "You must KNOW it to be true; a guess that misses makes you cruel and wrong. It is SAID — they must hear you. And you cannot unsay it: they will carry it, and they will remember who handed it over.",
      "functions": [
@@ -2145,11 +2219,12 @@
      "_functionsWas": [
       "strike",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Said Thing"
     },
     {
      "rank": 2,
-     "name": "The Public Fact",
+     "name": "Public Fact",
      "grants": "Say it where it will be heard by the people whose opinion holds them up. Standing, command, and authority go with it.",
      "cannot": "You have done this to their whole life, not their afternoon. Bystanders who liked them will not forgive you for being right.",
      "functions": [
@@ -2160,11 +2235,12 @@
      "_functionsWas": [
       "strike",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Public Fact"
     },
     {
      "rank": 3,
-     "name": "The Unblinking",
+     "name": "Unblinking",
      "grants": "The truth a person has organised everything around avoiding, delivered whole. They stop. Some do not resume — the thing they were is over.",
      "cannot": "This is a rung above a wound. Some who take it never come back, and the Verists' own tradition holds you answerable for what you knew when you said it.",
      "functions": [
@@ -2177,7 +2253,8 @@
       "strike",
       "hinder",
       "break"
-     ]
+     ],
+     "_nameWas": "The Unblinking"
     }
    ],
    "challengeTypes": [
@@ -2231,11 +2308,13 @@
     "strike"
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Unbearable Word",
+   "_idWas": "the_unbearable_word"
   },
   {
-   "id": "the_ordinary_face",
-   "name": "The Ordinary Face",
+   "id": "ordinary_face",
+   "name": "Ordinary Face",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_falsehood_truth",
@@ -2253,7 +2332,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Expected Person",
+     "name": "Expected Person",
      "grants": "Take on the shape of whoever this place would not remark on — a porter, a pilgrim, a clerk, a cousin. People's eyes pass over you and their memory records nothing.",
      "cannot": "It fails against ANYONE WHO KNOWS YOU, and against anyone actively searching for an intruder rather than going about their day. Behave wrongly for the role and it drops instantly.",
      "functions": [
@@ -2261,11 +2340,12 @@
       "deceive"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Expected Person"
     },
     {
      "rank": 2,
-     "name": "The Held Face",
+     "name": "Held Face",
      "grants": "Hold it for hours, through conversation, through being addressed. You can be spoken to and answer.",
      "cannot": "Every exchange is a chance to be wrong about something the real holder of that role would know. Verity sees through it and Verists are not rare.",
      "functions": [
@@ -2273,11 +2353,12 @@
       "deceive"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Held Face"
     },
     {
      "rank": 3,
-     "name": "The Long Belonging",
+     "name": "Long Belonging",
      "grants": "Days. A household, a garrison, a caravan takes you as one of theirs and does not question the gap in their own memory.",
      "cannot": "⚠ THE LONGER IT HOLDS, THE WORSE THE COLLAPSE — people who took you in feel personally deceived, because they were. A Veilwright who does this often has nowhere that knows them.",
      "functions": [
@@ -2286,7 +2367,8 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Belonging"
     }
    ],
    "challengeTypes": [
@@ -2325,11 +2407,13 @@
     }
    ],
    "plainly": "A social/puzzle action that makes you the person a place expects to see. Rated 5 of 10 on one target for about eight hours.",
-   "_descriptionWas": "The Veilwrights' first and most-used craft: the small lie of fitting in, held steady."
+   "_descriptionWas": "The Veilwrights' first and most-used craft: the small lie of fitting in, held steady.",
+   "_nameWas": "The Ordinary Face",
+   "_idWas": "the_ordinary_face"
   },
   {
-   "id": "the_useful_absence",
-   "name": "The Useful Absence",
+   "id": "useful_absence",
+   "name": "Useful Absence",
    "levelReq": 1,
    "energyCost": 5,
    "powerSystem": "reach_falsehood_truth",
@@ -2348,18 +2432,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Uncounted Thing",
+     "name": "Uncounted Thing",
      "grants": "One object stops being noticed — a key on a hook, a door in a corridor, a name on a list, a crate in a yard. Present, unremarked, skipped by every casual accounting.",
      "cannot": "OBJECTS, NOT PEOPLE. Direct deliberate attention finds it immediately. And a Lattice record that counts twice catches the discrepancy on the second pass.",
      "functions": [
       "conceal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Uncounted Thing"
     },
     {
      "rank": 2,
-     "name": "The Quiet Yard",
+     "name": "Quiet Yard",
      "grants": "Several things, or a small place — a storeroom, a stair, a cart's contents. Routine passes through and reports nothing unusual, honestly.",
      "cannot": "The moment someone is TOLD to look, it is over, and now they know something was hidden. Holding it costs continuously.",
      "functions": [
@@ -2367,11 +2452,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Quiet Yard"
     },
     {
      "rank": 3,
-     "name": "The Missing Wing",
+     "name": "Missing Wing",
      "grants": "A whole part of a place drops out of its own routine — a wing, a cellar, a watch-rotation's blind quarter-hour that everyone signs off as walked.",
      "cannot": "⚠ THE GAP IS DISCOVERABLE AFTERWARD and the reconstruction is damning: someone will eventually compare two ledgers. You have bought time, never permanence.",
      "functions": [
@@ -2380,7 +2466,8 @@
       "deceive"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Missing Wing"
     }
    ],
    "challengeTypes": [
@@ -2419,11 +2506,13 @@
     }
    ],
    "plainly": "A puzzle/social action that removes a thing from a place's account of itself. Rated 5 of 10 across a scope of 2 for about twelve hours.",
-   "_descriptionWas": "The Veilwrights' hiding-craft, and it hides by omission rather than cover: nothing is concealed, something is simply not counted."
+   "_descriptionWas": "The Veilwrights' hiding-craft, and it hides by omission rather than cover: nothing is concealed, something is simply not counted.",
+   "_nameWas": "The Useful Absence",
+   "_idWas": "the_useful_absence"
   },
   {
-   "id": "the_standing_word",
-   "name": "The Standing Word",
+   "id": "standing_word",
+   "name": "Standing Word",
    "levelReq": 1,
    "energyCost": 5,
    "powerSystem": "reach_falsehood_truth",
@@ -2442,7 +2531,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Word Set",
+     "name": "Word Set",
      "grants": "State something true before witnesses and it holds — the account cannot be quietly revised, the promise cannot be misremembered, the boundary cannot be walked back next season.",
      "cannot": "It must be TRUE. It records; it does not COMPEL — a person can defy a standing word, they simply cannot pretend it was not said. And you cannot unsay it either.",
      "functions": [
@@ -2450,11 +2539,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Word Set"
     },
     {
      "rank": 2,
-     "name": "The Kept Account",
+     "name": "Kept Account",
      "grants": "Set several, or set one so it outlasts the people present — a boundary, a debt, a lineage, a wrong.",
      "cannot": "A kept account is kept against EVERYONE, including you and yours. Verists are asked to leave places for this.",
      "functions": [
@@ -2467,11 +2557,12 @@
       "bind",
       "sustain",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Kept Account"
     },
     {
      "rank": 3,
-     "name": "The Standing Truth",
+     "name": "Standing Truth",
      "grants": "A thing a whole community cannot un-know. Treaties rest on this; so do feuds nobody can now settle by forgetting.",
      "cannot": "⚠ SOME THINGS WERE BEING SURVIVED BY BEING FORGOTTEN. You have made that impossible, permanently, for people who did not ask you to.",
      "functions": [
@@ -2484,7 +2575,8 @@
       "bind",
       "sustain",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Standing Truth"
     }
    ],
    "challengeTypes": [
@@ -2527,10 +2619,13 @@
     "bind",
     "sustain"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Standing Word",
+   "_idWas": "the_standing_word"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
- "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

@@ -61,6 +61,7 @@
    "functions": [
     "bind",
     "command",
+    "hinder",
     "persuade"
    ],
    "theNames": "⚠️ A person has three: the name they are CALLED (public, cheap to learn), the name they are KNOWN BY (a byname — what the world says), and the name they CALL THEMSELVES, which almost nobody gives away.",
@@ -93,14 +94,26 @@
     {
      "rank": 3,
      "name": "The Name They Call Themselves",
-     "grants": "⛔ ALL THREE. No part of them is left outside the hold. They will do what they would never do, and remember agreeing to it.",
-     "cannot": "⚠️ Almost nobody gives this name away — getting it is a campaign, not a roll.",
+     "grants": "⛔ ALL THREE NAMES. The hold no longer needs your attention and no longer ends when you look away — it runs for a day, and they carry it with them out of the room. ⚠️ They will do what they would never do, and remember agreeing to it.",
+     "cannot": "⚠️ Almost nobody gives this name away — getting it is a campaign, not a roll. One person at a time, and it is the kind of act a person does not come back from being.",
      "functions": [
+      "bind",
+      "command",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "severe",
+     "_grantsWas": "⛔ ALL THREE. No part of them is left outside the hold. They will do what they would never do, and remember agreeing to it.",
+     "_functionsWas": [
       "bind",
       "command"
      ],
-     "gains": "deepen",
-     "harmRung": "severe"
+     "gainAxes": [
+      "duration",
+      "autonomy",
+      "targets"
+     ],
+     "_rebalance": "⛔ MY OWN CAPSTONE'S FINAL RANK GAINED NOTHING. 'No part of them left outside the hold' is qualitative. It now buys AUTONOMY — the hold runs without you — which is the one thing r2 explicitly could not do."
     }
    ],
    "_replaces": "⛔ SNG-453: replaces The True Name (L5, e14, ONE rank, no roll, 'a hold on its very being' — meaning nothing mechanically). Erik: 'A Mind capstone should include DOMINATION. It would rank up and be more effective the more of the target's true names.' ⚠️ Ranks are NAMES HELD, not power tiers, so gathering names becomes play — and the bynames authored in SNG-430 are now weapons.",
@@ -157,8 +170,8 @@
    ],
    "plainly": "An investigate/survive action that links willing minds. Its strength is rated 7 out of 10. Ranks: rank 2 extends to distance and several people; rank 3 shares what each one knows.",
    "functions": [
-    "reveal",
     "empower",
+    "reveal",
     "sustain"
    ],
    "tree": [
@@ -190,15 +203,26 @@
     {
      "rank": 3,
      "name": "The One Mind",
-     "grants": "⛔ ADDS CAPABILITY-SHARING. Everyone linked can use what any one of them KNOWS — the linguist's language, the mason's eye for a load, the fighter's read of a stance.",
-     "cannot": "⚠️ Knowledge, never craft: you cannot use their tradition's power. And what one believes, all believe while it holds.",
+     "grants": "⛔ ADDS CAPABILITY-SHARING. Everyone linked can use what any one of them KNOWS — and the link now survives one of you being unconscious, panicking, or under a working meant to break it.",
+     "cannot": "Knowledge, never craft: you cannot use their tradition's power. What one believes, all believe while it holds.",
      "functions": [
       "reveal",
       "empower",
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_grantsWas": "⛔ ADDS CAPABILITY-SHARING. Everyone linked can use what any one of them KNOWS — the linguist's language, the mason's eye for a load, the fighter's read of a stance.",
+     "_functionsWas": [
+      "reveal",
+      "empower",
+      "sustain"
+     ],
+     "gainAxes": [
+      "quality",
+      "conditions"
+     ],
+     "_rebalance": "⚠️ Was scope, its third. Quality + conditions makes the capstone rank about RELIABILITY, which is what a party actually needs from a link."
     }
    ],
    "_authored": "⛔ SNG-453. Erik: 'It could be a MIND MELD alternatively — meld with your allies or scouts.' Authored as a SECOND capstone rather than an alternative: domination and communion are different crafts and a Mind tradition should have both.",
@@ -255,10 +279,10 @@
    ],
    "plainly": "A survive/fight action that wards a place against a named category. Its strength is rated 5 out of 10. Ranks: rank 2 holds unattended, rank 3 governs a whole site.",
    "functions": [
-    "ward",
     "bind",
+    "command",
     "make",
-    "command"
+    "ward"
    ],
    "tree": [
     {
@@ -351,8 +375,8 @@
    ],
    "plainly": "A survive/investigate action that sustains mental work. Its strength is rated 4 out of 10. Ranks: rank 2 extends to days, rank 3 to conditions that break other people.",
    "functions": [
-    "sustain",
-    "resist"
+    "resist",
+    "sustain"
    ],
    "tree": [
     {

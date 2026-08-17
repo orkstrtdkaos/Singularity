@@ -83,14 +83,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Near Sense",
+     "name": "Near Sense",
      "grants": "⛔ PERCEIVE YOUR DOMAIN IN WHAT IS PRESENT — the thing in front of you, plainly, without instrument or inference.",
      "cannot": "What is present and close. Your domain only.",
      "functions": [
       "reveal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Near Sense"
     },
     {
      "rank": 2,
@@ -105,17 +106,19 @@
     },
     {
      "rank": 3,
-     "name": "The Whole Field",
+     "name": "Whole Field",
      "grants": "⛔ ADDS SCALE. A whole place at once, as one continuous fabric — and where it is torn.",
      "cannot": "One place at a time, and holding it is a minute of standing still.",
      "functions": [
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Whole Field"
     }
    ],
    "_replaces": "⛔ SNG-454: replaces 32 perceive-only abilities across 21 traditions. See po/staged_content/revert_SNG-454_sense_cull.json for the full pre-cut state."
   }
- ]
+ ],
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

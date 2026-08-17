@@ -1783,3 +1783,31 @@ tradition by **what a person will pay to be spared an ending**. **These are low-
 into larger negotiations.**
 
 ⛔ **Every tradition should reach at least two of the four social verbs.**
+
+
+### 32.11 ⛔ THE ASSESSMENT — every skill must pass this, written out
+
+**Erik: *"take all of these and write them up as a coherent logical assessment for every skill."*** ⚠️ The
+questions below are the ones he has actually asked me, in the order he asked them. **A skill that cannot
+answer all six in plain language does not ship.**
+
+| # | question | fails when |
+|---|---|---|
+| **1** | ⛔ **WHAT DOES IT DO?** State the mechanical effect in one sentence a player could act on. | *"Recall perfectly, focus past pain, reason faster"* — a capacity, not an effect |
+| **2** | ⛔ **WHEN WOULD A PLAYER USE IT?** Name a concrete situation at a table. | *"Takes the heat out"* — a mood. **Ends fear, rage or panic as a condition** is an answer |
+| **3** | ⚠️ **HOW OFTEN DOES THAT SITUATION ARISE?** | If it is rare, it is not worth a slot — Erik: *"is it so rare to not be worth the skill slot?"* |
+| **4** | ⛔ **WHY IS THIS BETTER THAN NOT HAVING IT?** What could you not do otherwise? | *"The Kept Count"* — the GM was going to tell you the number anyway |
+| **5** | ⛔ **WHAT DOES EACH RANK ADD?** Name the axis: range · duration · damage · scope · targets · quality · autonomy · conditions. | *"Fear falls away"* → *"stops reaching you"* → *"nothing else exists"* — one rank, three times |
+| **6** | ⚠️ **IS THE FLAVOUR STANDING WHERE A MECHANIC SHOULD BE?** | *"Name the thing they are most afraid is true"* — ⛔ **Erik: "OMG SPIDERS... what??"** The method is flavour; the effect must be mechanical |
+
+⛔ **QUESTION 6 IS THE ONE I FAIL MOST.** Evocative method-description reads as if it specifies something.
+**It does not.** *"The archer comes down off the wall"* is flavour and belongs in `narrationHints`; ⛔ ***"they
+lose their held action and act on your timing"*** is the grant.
+
+**Worked example — Force the Move:**
+1. Enemy loses held action/cover for a round and acts on your timing.
+2. When the enemy has the advantage of patience — an ambush waiting, an archer on a wall.
+3. Common: any fight where the other side is set and you are not.
+4. Without it you must break a prepared position by force.
+5. r2 targets+scope (breaks a formation) · r3 duration+autonomy (a commitment they must honour).
+6. ⚠️ The naming is the method; the tempo loss is the mechanic.

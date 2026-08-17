@@ -147,151 +147,6 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
-   "id": "logos",
-   "name": "Logos",
-   "levelReq": 2,
-   "energyCost": 6,
-   "powerSystem": "reach_emotional_logical",
-   "attribute": "mental",
-   "axes": {
-    "emotional_logical": 0.5,
-    "concrete_abstract": 0.2
-   },
-   "functions": [
-    "bind",
-    "break",
-    "strike"
-   ],
-   "narrationHints": "Reason made a force — an argument that lands like a blow, a contradiction exposed, a conclusion so clean it changes what people must do.",
-   "description": "Build an argument that compels the reasonable, expose a contradiction so it cannot be unseen, and deduce a hidden fact from what is present. The logical-pole mastery — the Reasoners' art.",
-   "notFor": "Reaching a heart set against reason (that's Pathos); wisdom (Logos is valid, not necessarily wise); a premise that's false — Logos builds truly on what it's given, garbage in and all.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Clear Argument",
-     "grants": "Build an argument that compels the reasonable; expose a contradiction so it can't be unseen; deduce a hidden fact from what's present.",
-     "cannot": "The unreasonable and the emotion-ruled resist; a valid argument from a false premise still lands false.",
-     "functions": [
-      "bind"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "bind"
-     ],
-     "_nameWas": "The Clear Argument"
-    },
-    {
-     "rank": 2,
-     "name": "Binding Proof",
-     "grants": "Prove a thing so cleanly the proof itself changes what people must do; corner a liar in their own logic; model a situation and derive its necessary outcome.",
-     "cannot": "Proof binds the honest and the logical; the Cathedral of Convincing (true pieces, false whole) survives it; a proof of the unwelcome can be refused by force.",
-     "functions": [
-      "bind"
-     ],
-     "gains": "deepen",
-     "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "bind"
-     ],
-     "_nameWas": "The Binding Proof"
-    },
-    {
-     "rank": 3,
-     "name": "Necessary Conclusion",
-     "grants": "Reason at the scale of peoples — an argument a whole council cannot answer, a contradiction that topples a doctrine, a conclusion so inescapable it reorganises what everyone present thought they knew. And turned on one person: a contradiction opened in what they have built themselves on, which does not wound the body and takes the ground out from under them all the same. They will keep standing. They will not keep believing.",
-     "cannot": "It needs something true to work with — Logos cannot prove a falsehood, only forge one that the next sound mind unpicks. It fails against those who will simply refuse a true conclusion. And the Syllogists hold that a person you have taken apart this way is owed the time to rebuild, which is a debt many of them do not pay.",
-     "functions": [
-      "break",
-      "strike"
-     ],
-     "gains": "broaden",
-     "harmRung": "damaging",
-     "_functionsWas": [
-      "bind",
-      "break",
-      "strike"
-     ],
-     "_nameWas": "The Necessary Conclusion"
-    }
-   ],
-   "challengeTypes": [
-    "SOCIAL",
-    "FIGHT",
-    "PUZZLE"
-   ],
-   "tradition": "syllogist",
-   "nativeOrCombination": "native",
-   "harmRung": "damaging",
-   "shape": "damage",
-   "operativeAxis": [
-    "damage",
-    "scope"
-   ],
-   "mechanic": {
-    "dice": {
-     "n": 2,
-     "d": 6
-    },
-    "plus": 0,
-    "marginFloorPer": 0.03,
-    "scope": 2,
-    "damageType": "reason",
-    "note": "damaging — 'thought as force' in the argumentative register. Compare cogitant's noesis (also damaging, also mental): noesis out-thinks a SITUATION, logos out-argues a PERSON."
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "damage",
-     "delta": "PROVE A THING SO CLEANLY THE PROOF ITSELF CHANGES WHAT PEOPLE MUST DO; CORNER A LIAR IN THEIR OWN LOGIC",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "extend",
-     "axis": "scope",
-     "delta": "REASON AT THE SCALE OF PEOPLES — an argument A WHOLE COUNCIL CANNOT ANSWER, a contradiction THAT TOPPLES A DOCTRINE",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "make the point — half the force, and it invites reply",
-    "surge": "double it; A VALID ARGUMENT IS NOT A TRUE ONE, and the unreasonable simply resist"
-   },
-   "bounds": [
-    {
-     "text": "THE UNREASONABLE AND THE EMOTION-RULED RESIST",
-     "class": "hard"
-    },
-    {
-     "text": "A VALID ARGUMENT IS NOT A TRUE ONE",
-     "class": "hard"
-    },
-    {
-     "text": "PROOF BINDS THE HONEST AND THE LOGICAL — THE CATHEDRAL OF CERTAINTY IS NEITHER",
-     "class": "hard"
-    },
-    {
-     "text": "IT NEEDS SOMETHING TRUE TO WORK WITH — Logos cannot prove what is not so",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A social/fight/puzzle action that deals damage. It rolls 2d6 reason damage across a scope of 2 Ranks: rank 2 deepens damage; rank 3 extends scope. Limit: the Unreasonable And The Emotion-Ruled Resist.",
-   "_descriptionWas": "The logical-pole mastery: inference, argument, and proof as real forces that move minds and situations. The Reasoners' art.",
-   "_markedForRemoval": "⛔ SNG-453, ERIK'S RULING: 'Those MYSTERIES WERE NON-EXISTENT — leave a reminder to fill in if we get so inspired, but MARK THEM FOR REMOVAL in the meantime.'\n⚠️ Logos is the sect's namesake 'pole mastery' and its ranks summarise the whole sect rather than doing anything — r1 duplicates two or three other abilities in its own sect. ⛔ IF THE MYSTERY IS EVER AUTHORED, THIS IS WHERE IT ATTACHES: a mystery should be the thing the tradition knows that nobody else does, not a digest of its skill list.",
-   "status": "marked-for-removal",
-   "_functionsWas": [
-    "bind",
-    "break",
-    "strike"
-   ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
-  },
-  {
    "id": "turning_word",
    "name": "Turning Word",
    "levelReq": 4,
@@ -1139,7 +994,9 @@
    "downtime": true,
    "_flag": "⚠️ SNG-457: FLAGGED DOWNTIME. Good rank arc — design a system · it self-maintains · it runs at scale without you — but nothing rolls and the effect lands between sessions. Erik: 'ok with flagging built system.'",
    "_nameWas": "The Built System",
-   "_idWas": "the_built_system"
+   "_idWas": "the_built_system",
+   "projectTicks": true,
+   "_downtime": "⛔ SNG-463. Erik: 'yes it can be used as a DELEGATION, DOWNTIME BUILDING skill. These kinds of delegations should flow into the WORLD TICK COUNT so we actually know how long it takes to complete and it PROGRESSES.' ⚠️ Built System is now a PROJECT: it banks progress per tick and completes on a named day, rather than resolving in a scene."
   },
   {
    "schemaVersion": 1,

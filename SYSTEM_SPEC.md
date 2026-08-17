@@ -1595,3 +1595,44 @@ it is clear."*
 ⚠️ **A foothill is a place of ACCESS, not a new ancestry — Hardline teaches the Edge; it does not own
 it.** ⛔ **Filing a craft as `valley_craft` because it is open to anyone confuses access with ancestry.**
 A craft need not be pure to belong to a tradition; **true combinations are braids.**
+
+
+---
+
+## 31. SOP — Naming (2026-08-15)
+
+⛔ **DO NOT PREFIX A CRAFT WITH "THE" UNLESS THE ARTICLE IS DOING WORK.** Erik, twice: first that the
+corpus was 65% "The X" and read as subtitles, then — after I had agreed and then drifted straight back —
+*"you've started adding THE to everything again."*
+
+### 31.1 The default is no article
+
+**`Attunement` · `Ignore Me` · `My Reality` · `Mind Meld` · `Names of Power` · `Physician's Tome` ·
+`Case Closed` · `Radiant Lance` · `Shatterpoint` · `Latticespeak`.**
+
+⚠️ **A craft is a thing you learn and name, the way a trade names its tools.** "The" turns it into a
+title, and when every craft has one the word stops distinguishing anything.
+
+### 31.2 ⛔ WHEN "THE" IS WARRANTED — three cases, and only these
+
+1. **THE ARTICLE IS THE JOKE OR THE POINT.** *The Long Odds Come In* · *The Only Consistent Act*. Remove
+   it and the sentence breaks.
+2. **IT NAMES A SINGULAR, KNOWN THING IN THE WORLD** — one of them exists and everybody means that one.
+   *The Cut Thread* (the Fates' shears) · *The Veil* · *The Crossing*.
+3. **THE NAME IS A CLAUSE, NOT A NOUN PHRASE**, and is deliberately so — a legendary act the world tells
+   stories about. ⚠️ **Rare by design: if more than roughly one craft in ten carries it, it has stopped
+   marking anything.**
+
+### 31.3 The test
+
+⛔ **Say the name across a table: "I use ___."** *"I use Mind Meld"* works. *"I use The Correct
+Restoration"* sounds like reading a chapter heading aloud. **If the article makes it a heading, cut it.**
+
+⚠️ **AND THE SAME APPLIES TO RANK NAMES**, where the drift is worst — a tree of *The Route · The Moving
+Space · The Designed Scene* is three headings, not three things you do.
+
+### 31.4 Why this is an SOP and not a note
+
+**I agreed this once and drifted back within the same session**, on abilities I authored after agreeing.
+⛔ **The rule cannot depend on my remembering it, so it is written where the next authoring pass will hit
+it**, and it belongs in the pre-ship checklist alongside the schema check.

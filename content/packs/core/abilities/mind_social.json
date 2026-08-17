@@ -26,14 +26,9 @@
    "operativeAxis": "emotional_logical",
    "intensity": "moderate",
    "mechanic": {
-    "dice": {
-     "n": 2,
-     "d": 6
-    },
-    "plus": 0,
-    "range": 6,
-    "targets": 1,
-    "marginFloorPer": 0.02
+    "magnitude": 6,
+    "duration": 4,
+    "scope": 2
    },
    "challengeTypes": [
     "SOCIAL",
@@ -58,7 +53,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/duel action that forces an enemy to act early. It rolls 2d6. Range is 6. Ranks: rank 2 breaks a formation, rank 3 forces a binding commitment.",
+   "plainly": "A social/duel action that forces an enemy to act early. Its strength is rated 6 out of 10.",
    "functions": [
     "provoke"
    ],
@@ -107,7 +102,18 @@
      ]
     }
    ],
-   "_authored": "⛔ SNG-462, REWRITTEN. Erik: 'good that it gets action — that's the point of provoke — but limiting it to what they are MOST AFRAID OF? OMG SPIDERS... what?? Make this less flavour and MORE SPECIFIC. How would a player BENEFIT from using this?'\n⚠️ THE OLD TEXT PUT FLAVOUR WHERE THE MECHANIC GOES. ⛔ THE BENEFIT IS TEMPO: you use it when the ENEMY HAS THE ADVANTAGE OF PATIENCE — the archer on the wall, the ambush that is waiting, the captain who has not committed. It converts their good position into a bad one because they had to answer you."
+   "_authored": "⛔ SNG-462, REWRITTEN. Erik: 'good that it gets action — that's the point of provoke — but limiting it to what they are MOST AFRAID OF? OMG SPIDERS... what?? Make this less flavour and MORE SPECIFIC. How would a player BENEFIT from using this?'\n⚠️ THE OLD TEXT PUT FLAVOUR WHERE THE MECHANIC GOES. ⛔ THE BENEFIT IS TEMPO: you use it when the ENEMY HAS THE ADVANTAGE OF PATIENCE — the archer on the wall, the ambush that is waiting, the captain who has not committed. It converts their good position into a bad one because they had to answer you.",
+   "_mechanicWas": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "range": 6,
+    "targets": 1,
+    "marginFloorPer": 0.02
+   },
+   "_diceStrip": "⛔ SNG-471, CCODE Q1: `mechanic.dice` IS consumed — craftmechanics.mechanicFor → rollMagnitude → skill_battle.js:798 — ⚠️ BUT THE GUARD IS `shape === 'damage'`, and only `damage` and `strike` resolve to it. `hobble` and `hinder` DO NOT.\n⛔ SO THIS CRAFT AUTHORED 2d6 THAT NOTHING WOULD EVER ROLL. Erik's shape is right — a hold is not damage — so the DICE GO, not the shape. ⚠️ CCode: 'I would not widen the guard silently — \"this craft does 4d6 of hold\" is a different claim about the world.' AGREED."
   },
   {
    "id": "quiet_the_room",

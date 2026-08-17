@@ -1,0 +1,209 @@
+{
+ "schemaVersion": 1,
+ "id": "mind_conceal",
+ "kind": "content",
+ "note": "⛔ SNG-459. Two Mind conceal abilities. Mind had ZERO conceal at tier 1 against a target of 2 — this closes the last empty cell in the tradition.",
+ "abilities": [
+  {
+   "id": "ignore_me",
+   "name": "Ignore Me",
+   "levelReq": 1,
+   "energyCost": 3,
+   "axes": {
+    "body_mind": 0.4,
+    "falsehood_truth": -0.3
+   },
+   "attribute": "mental",
+   "narrationHints": "They do not fade, crouch, or step behind anything. They stand where they were standing, and the guard's eyes go past them to the wall, and the guard is faintly annoyed at the wall.",
+   "description": "Suggest, without a word, that there is nothing here worth looking at — and walk through a lit room full of people who all decline to notice you.",
+   "notFor": "Anyone already watching you; machines, wards, dogs and anything that does not have a mind to suggest to; being invisible — you are entirely visible and entirely unremarkable.",
+   "tradition": "cogitant",
+   "traditionV2": "Mind",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "metaphysical",
+   "shape": "conceal",
+   "operativeAxis": "body_mind",
+   "intensity": "moderate",
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "scope": 2
+   },
+   "challengeTypes": [
+    "STEALTH",
+    "INFILTRATE",
+    "ESCAPE"
+   ],
+   "bounds": [
+    {
+     "text": "⛔ YOU ARE NOT INVISIBLE. You are present, lit, and photographable — minds decline to attend to you, and nothing else does",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ DOGS, WARDS, MECHANISMS AND RECORDS ARE UNAFFECTED — a tally-clerk's count is still one short",
+     "class": "hard"
+    },
+    {
+     "text": "anyone already watching when you begin keeps watching",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ DOING SOMETHING REMARKABLE BREAKS IT INSTANTLY, and the break is worse than never having used it",
+     "class": "cost"
+    },
+    {
+     "text": "the effort of holding the suggestion is tiring in a way standing still should not be",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A stealth/infiltrate action that conceals you in plain sight. Its strength is rated 5 out of 10. Ranks: rank 2 covers others with you, rank 3 survives being spoken to.",
+   "functions": [
+    "conceal",
+    "deceive"
+   ],
+   "sectFlavour": {
+    "cogitant": "A SUGGESTION, held — you are simply not the interesting thing in the room.",
+    "veilwright": "THE ORDINARY FACE — they see someone, and it is someone they would not remark on.",
+    "umbral": "⚠️ Not this craft. An Umbral carries darkness; this carries indifference."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Nothing Worth Looking At",
+     "grants": "⛔ WALK THROUGH A LIT, OCCUPIED SPACE AND NOT BE ATTENDED TO. Eyes pass over you; people step around you without registering why; a guard's gaze finds the wall behind your head.",
+     "cannot": "You alone, and you must be doing something unremarkable — walking, standing, working. Anyone already watching keeps watching.",
+     "functions": [
+      "conceal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "And Whoever Is With Me",
+     "grants": "⚠️ ADDS OTHERS. Extend it to a small group moving together — they must stay near you and behave ordinarily, and one person breaking it does not break it for everyone else.",
+     "cannot": "⛔ THEY MUST ACT ORDINARY. A drawn weapon, a run, a shout, and that person is suddenly and singularly visible.",
+     "functions": [
+      "conceal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Even Spoken To",
+     "grants": "⛔ ADDS SURVIVING CONTACT. Being addressed no longer ends it — you can answer a question, hand over a paper, be looked at directly, and they will not afterwards be able to say who you were.",
+     "cannot": "⚠️ They know a person was there and dealt with them. What they cannot retain is WHICH person. A determined investigator can still work backwards from what you did.",
+     "functions": [
+      "conceal",
+      "deceive"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "_authored": "⛔ SNG-459. Erik: 'write a full skill for Ignore Me — a skill that uses mental psychic suggestion to HIDE IN PLAIN SIGHT.' ⚠️ Mind had ZERO conceal at t1 against a target of 2. The distinction from Umbral concealment is deliberate and stated in sectFlavour: an Umbral carries darkness, this carries indifference."
+  },
+  {
+   "id": "the_plain_room",
+   "name": "The Plain Room",
+   "levelReq": 3,
+   "energyCost": 6,
+   "axes": {
+    "falsehood_truth": -0.5,
+    "concrete_abstract": 0.3
+   },
+   "attribute": "mental",
+   "narrationHints": "The searchers walk into the cellar, look at a wall of stacked barrels, and leave. There is no door behind the barrels as far as anyone in the room is concerned, including — for an unpleasant moment — you.",
+   "description": "Lay a suggested picture over a place so that everyone who enters sees somewhere ordinary — and at its height, the picture pushes back.",
+   "notFor": "Fooling a machine, a ward, a dog or a map; hiding something already known to be there; anywhere you cannot stand while you set it.",
+   "tradition": "figurist",
+   "traditionV2": "Mind",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "metaphysical",
+   "shape": "conceal",
+   "operativeAxis": "falsehood_truth",
+   "intensity": "moderate",
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 5,
+    "scope": 3
+   },
+   "challengeTypes": [
+    "STEALTH",
+    "INFILTRATE",
+    "SURVIVE"
+   ],
+   "bounds": [
+    {
+     "text": "⛔ MINDS ONLY. A tripwire still trips, a dog still smells it, a surveyor's chain still measures true",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ THE PICTURE MUST BE PLAUSIBLE FOR THE PLACE. A blank wall in a cellar works; a blank wall in a doorway is remarked on",
+     "class": "hard"
+    },
+    {
+     "text": "someone who KNOWS what is really there sees through it, and can point",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ YOU SEE IT TOO while it holds, which has killed people who forgot where they left the stairs",
+     "class": "cost"
+    },
+    {
+     "text": "setting it takes minutes of standing in the place",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A stealth/infiltrate action that conceals a place. Its strength is rated 6 out of 10. Ranks: rank 2 covers a larger area, rank 3 makes the illusion physically real.",
+   "functions": [
+    "conceal",
+    "deceive",
+    "make"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Ordinary Corner",
+     "grants": "⛔ LAY AN ORDINARY PICTURE OVER ONE FEATURE — a door reads as stacked crates, a pit reads as flagstones, a cache reads as a damp patch nobody wants to touch.",
+     "cannot": "One feature, roughly a doorway's worth. Minds only. Someone who knows sees through it.",
+     "functions": [
+      "conceal",
+      "deceive"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Ordinary Room",
+     "grants": "⚠️ ADDS AREA. A whole room, cellar, clearing or courtyard reads as somewhere with nothing in it — and the picture stays consistent as people move through and look from different angles.",
+     "cannot": "⛔ IT MUST STAY PLAUSIBLE FROM EVERY ANGLE. A room whose picture contradicts the building around it draws exactly the attention you were avoiding.",
+     "functions": [
+      "conceal",
+      "deceive"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Room That Pushes Back",
+     "grants": "⛔ ADDS REAL EFFECT. The picture stops being only seen. The wall that is not there STOPS A HAND. The floor that reads as solid takes weight for a step and a half. The door that reads as blank cannot be opened by someone who believes it blank.",
+     "cannot": "⚠️ IT IS CONVICTION MADE BRIEFLY LOAD-BEARING, NOT MATTER — it holds against belief, not against a crowbar swung by someone who was told the truth.",
+     "functions": [
+      "conceal",
+      "deceive",
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "_authored": "⛔ SNG-459. Erik: 'a second skill that creates a PSYCHIC ILLUSION OF AN AREA — to conceal the true nature of it somehow, a trap, a hideout door. r2 is bigger area, r3 can add REAL EFFECTS.' ⚠️ r3 is the interesting rung and the bound is what keeps it honest: it holds against BELIEF, not against a crowbar swung by someone who was told the truth."
+  }
+ ]
+}

@@ -91,7 +91,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Near Sense"
+     "_nameWas": "The Near Sense",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -102,7 +103,10 @@
       "reveal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "duration"
+     ]
     },
     {
      "rank": 3,
@@ -114,11 +118,15 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Whole Field"
+     "_nameWas": "The Whole Field",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "_replaces": "⛔ SNG-454: replaces 32 perceive-only abilities across 21 traditions. See po/staged_content/revert_SNG-454_sense_cull.json for the full pre-cut state."
   }
  ],
- "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
 }

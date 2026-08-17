@@ -35,7 +35,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Churn's Gift"
+     "_nameWas": "The Churn's Gift",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -48,7 +49,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Larger Asking"
+     "_nameWas": "The Larger Asking",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -61,7 +63,10 @@
       "summon"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "gated": "learned",
@@ -154,7 +159,8 @@
      ],
      "harmRung": "incapacitating",
      "gains": "broaden",
-     "_nameWas": "The Wild Flowering"
+     "_nameWas": "The Wild Flowering",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -167,7 +173,11 @@
      ],
      "gains": "deepen",
      "harmRung": "incapacitating",
-     "_nameWas": "The Long Flowering"
+     "_nameWas": "The Long Flowering",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ]
     }
    ],
    "gated": "learned",
@@ -250,7 +260,8 @@
      ],
      "harmRung": "incapacitating",
      "gains": "broaden",
-     "_nameWas": "The Honest Bargain"
+     "_nameWas": "The Honest Bargain",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -263,7 +274,10 @@
      ],
      "gains": "deepen",
      "harmRung": "incapacitating",
-     "_nameWas": "The Standing Bargain"
+     "_nameWas": "The Standing Bargain",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "gated": "learned",
@@ -341,7 +355,8 @@
       "bind",
       "strike"
      ],
-     "_nameWas": "The Collection"
+     "_nameWas": "The Collection",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -357,7 +372,10 @@
       "bind",
       "strike"
      ],
-     "_nameWas": "The Standing Account"
+     "_nameWas": "The Standing Account",
+     "gainAxes": [
+      "range"
+     ]
     }
    ],
    "challengeTypes": [
@@ -447,7 +465,8 @@
       "transform"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -460,7 +479,11 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Long Glide"
+     "_nameWas": "The Long Glide",
+     "gainAxes": [
+      "range",
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -473,7 +496,11 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Given Wing"
+     "_nameWas": "The Given Wing",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ]
     }
    ],
    "challengeTypes": [
@@ -516,5 +543,6 @@
    "plainly": "A travel, chase and explore action, learned rather than inherited — anyone with churnfolk training flies this way, whatever they are. Rank 1 is short flights: over a wall, across a river, out of a fall. Rank 2 flies a whole leg and roughly halves its days, though you drift toward where the churn is going unless you pay to hold a line. Rank 3 gives wings to the rest of the party for a shorter span each. The catch is reliability rather than danger: needing them badly makes them less likely to come, and a failure grounds you rather than dropping you."
   }
  ],
- "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
 }

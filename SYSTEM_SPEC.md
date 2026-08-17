@@ -1906,3 +1906,32 @@ being strictly better.
 
 ⚠️ **MINIMUM VIABLE VERSION IS THE `read` TAG AND THE SENSE SLOT.** Tempo can follow; the sense slot alone
 makes read-then-strike work.
+
+
+### 34.3 ⛔ TEMPO IS A RANK-GAIN AXIS
+
+**Erik: *"we need to document this as another thing that abilities can provide at each rank — think of a
+Somatic Monk doing a flurry of blows, or a Span character able to compress time or distance to allow them
+multiple actions. Many traditions could take advantage of tempo."***
+
+⚠️ **§32.4's list of what a rank may buy gains a ninth entry:**
+
+**range · duration · damage · scope · targets · quality · autonomy · conditions · ⛔ TEMPO**
+
+**A rank that buys tempo gives the character MORE OF THE ROUND**, and there are four distinct ways to do
+it. **They are not interchangeable and a tradition should reach for the one that fits it:**
+
+| form | what the rank grants | who it suits |
+|---|---|---|
+| **SENSE-SLOT USE** | the craft resolves in the sense slot; the action slot stays free | ⛔ Mind — *Deduced Strike r3* |
+| **EXTRA ACTION** | a second action this round, outright | ⚠️ **Body — a Somatic flurry of blows** |
+| **BANKING** | the craft accrues tempo faster, or banks where it normally would not | Breaking, Order — reward for prepared ground |
+| **COMPRESSION** | ⛔ two actions in the space of one, by shortening the distance or the duration between them | **Span — time or distance compressed** |
+
+⛔ **TEMPO IS THE STRONGEST AXIS ON THE LIST AND SHOULD BE PRICED THAT WAY.** A rank that grants an extra
+action is worth more than a rank that grants range, duration or scope. ⚠️ **Reserve it for rank 3, or for a
+rank 2 that gives up something else** — and never grant it unconditionally: *once per round*, *against one
+foe*, *only on ground you prepared*.
+
+⚠️ **AND IT MUST STAY SCARCE ACROSS THE CORPUS.** If most traditions have a tempo rank, the round stops
+meaning anything. **A tradition should have at most one or two, and they should be its signature.**

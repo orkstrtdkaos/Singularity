@@ -15,7 +15,7 @@
    },
    "attribute": "mental",
    "narrationHints": "They watch for one exchange without engaging, and then hit once — the buckle, the old break, the foot that carries the weight — and a much better fighter is suddenly on the ground wondering how.",
-   "description": "Read a foe mid-fight and land an ordinary blow exactly where it does the most — thought aimed through a body, and it hits like a much stronger arm.",
+   "description": "Read a foe mid-fight without breaking stride, and land an ordinary blow exactly where it does the most — thought aimed through a body, and it hits like a much stronger arm.",
    "notFor": "An enemy you have not read; anything you cannot physically reach; a contest that ends before you get a second round.",
    "tradition": "cogitant",
    "traditionV2": "Mind",
@@ -58,7 +58,9 @@
    ],
    "plainly": "A fight/duel action that deals damage. It rolls 2d6. Ranks: rank 2 lets you call the effect, rank 3 reads and strikes in the same round.",
    "functions": [
-    "strike"
+    "strike",
+    "reveal",
+    "hinder"
    ],
    "sectFlavour": {
     "cogitant": "YOU MODELLED THEM — their reach, their favoured side, the joint that has been hurt before.",
@@ -68,15 +70,17 @@
    "tree": [
     {
      "rank": 1,
-     "name": "Read the Exchange",
-     "grants": "⛔ SPEND ONE ROUND OF THE EXCHANGE READING RATHER THAN CONTESTING — you concede that round's momentum — and your NEXT strike lands where they are weakest: an old injury, a badly-set strap, the foot carrying the weight. ⚠️ IN SYSTEM TERMS: a forfeited round buys a large matchup edge on the following one.",
-     "cannot": "You give up a round to get it. Against someone who ends the contest in one blow, that round is fatal.",
+     "name": "Read the Fight",
+     "grants": "⛔ RESOLVES IN THE SENSE SLOT — IT DOES NOT COST YOU YOUR ACTION. Read a foe mid-fight and mark where they are weakest: an old injury, a badly-set strap, the foot carrying the weight. ⚠️ THEN STRIKE WITH IT IN THE SAME ROUND — the mark is worth a large edge on your next blow, and it banks tempo.",
+     "cannot": "One foe at a time, and the mark is spent when you use it. A foe who changes what they are doing clears it.",
      "functions": [
-      "strike"
+      "strike",
+      "reveal"
      ],
      "gains": "deepen",
      "harmRung": "damaging",
-     "gainAxes": []
+     "gainAxes": [],
+     "read": true
     },
     {
      "rank": 2,
@@ -96,24 +100,25 @@
     },
     {
      "rank": 3,
-     "name": "Strike While Reading",
-     "grants": "⛔ ADDS TEMPO — THE POINT OF THE SKILL. You no longer forfeit the round: you read AND strike in the same exchange, so the edge arrives without the cost. ⚠️ Against someone you have fought before, it lands on the opening blow.",
-     "cannot": "A foe genuinely unlike anything you have met still costs you the reading round.",
+     "name": "Read the Room",
+     "grants": "⛔ ADDS TARGETS AND PERSISTENCE. Mark EVERY foe you can see in one sense action, and the marks hold until spent rather than clearing when they change. ⚠️ You are reading the fight, not a fighter.",
+     "cannot": "You must be able to see them. A foe you have never seen fight still gives you less.",
      "functions": [
       "strike",
       "hinder"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "damaging",
      "gainAxes": [
-      "conditions",
-      "targets"
+      "targets",
+      "duration"
      ]
     }
    ],
    "_authored": "⛔ SNG-464. Erik: 'a Mind character should be able to use the mind (LIKE SHERLOCK HOLMES) to perform PHYSICAL ATTACKS with incredible accuracy and effect — a combo ability powered by thought.' ⚠️ `nativeOrCombination: combination` — this is thought aimed through a body, and the sect flavours differ in HOW the answer is reached.",
-   "_systemFit": "⛔ SNG-465, RE-AUTHORED ONTO THE EXISTING SKILL-BATTLE SYSTEM. Erik: 'it can be used in the SENSE ROUND, then again in the main action... I'm not sure we have the wiring for this effect. Plus at r3 you could strike during the sense round.'\n⚠️ THE WIRING LARGELY EXISTS. `skill_battle_system.json` already runs multi-round exchanges with a MOMENTUM METER and a MATCHUP BONUS. ⛔ SO A READING ROUND IS A ROUND YOU FORFEIT: you concede that round's momentum and buy a large matchup edge on the next. r3 removes the forfeit — read and strike in the same exchange.\n⚠️ WHAT CCODE STILL NEEDS TO WIRE: a declared 'read' action that skips contesting and banks a named bonus. That is one flag on the round, not a new subsystem.",
-   "_rangeNote": "⚠️ Erik: 'I don't think we have a measured range to utilise — keep that part defined in the prose for now.' `range` removed from mechanic; reach is described in the text."
+   "_systemFit": "⛔ SNG-466, RE-AUTHORED. Erik: 'I don't know how it will work to CONCEDE THE MOMENTUM that round. Better to make sure it's TAGGED WITH READ at r1 so it can be used in the SENSE ROUND of a fight then used AGAIN in the action round.'\n⚠️ HE IS RIGHT AND MY VERSION WAS WORSE IN FEEL AS WELL AS HARDER TO WIRE — a fighter reading their opponent is not standing still. ⛔ r1 NOW RESOLVES IN THE SENSE SLOT and does not spend the action, so the same round contains the read AND the strike. See content/packs/core/rules/tempo.json.",
+   "_rangeNote": "⚠️ Erik: 'I don't think we have a measured range to utilise — keep that part defined in the prose for now.' `range` removed from mechanic; reach is described in the text.",
+   "read": true
   },
   {
    "id": "psychic_lance",

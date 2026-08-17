@@ -278,7 +278,7 @@
      "rank": 1,
      "name": "Matter Settled",
      "grants": "⛔ SET A MATTER OUT TO PEOPLE WILLING TO FOLLOW. A dispute resolves, a council decides, a wrong belief comes apart — and nobody is humiliated, which is why it holds.",
-     "cannot": "They must be willing to follow. Does nothing to someone who will not engage.",
+     "cannot": "They must be willing to follow. Does nothing to someone who refuses to engage.",
      "functions": [
       "persuade"
      ],
@@ -288,39 +288,9 @@
     },
     {
      "rank": 2,
-     "name": "Case That Keeps",
-     "grants": "⚠️ ADDS DURATION AND ABSENCE. Build it to last — written, taught, left behind. It goes on convincing after you have gone, and someone else can carry it.",
-     "cannot": "Cannot be built against a matter you do not actually understand.",
-     "functions": [
-      "persuade",
-      "empower"
-     ],
-     "gains": "deepen",
-     "harmRung": "none",
-     "gainAxes": [
-      "duration"
-     ]
-    },
-    {
-     "rank": 3,
-     "name": "No Longer Litigated",
-     "grants": "⛔ ADDS SCALE. A case so complete a whole community stops reopening it. Feuds end this way; so do bad laws.",
-     "cannot": "One matter, and it must be one people are actually arguing about.",
-     "functions": [
-      "persuade"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "gainAxes": [
-      "scope",
-      "quality"
-     ]
-    },
-    {
-     "rank": 4,
-     "name": "Inescapable Conclusion",
-     "grants": "⛔ ADDS COMPULSION. Lay premises they must each agree to until they arrive by their own reasoning at a conclusion they would have fled — and they CANNOT ACT AGAINST IT while it holds. ⚠️ Works on a whole body of reasoning minds at once: a council, a court, a school.",
-     "cannot": "⚠️ It must be honest. A reasoning mind that finds the false premise is freed and knows you tried.",
+     "name": "Inescapable",
+     "grants": "⛔ ADDS COMPULSION AND NUMBERS. Lay premises they must each agree to until they arrive by their own reasoning at a conclusion they would have fled — AND THEY CANNOT ACT AGAINST IT while it holds. Works on a whole body of reasoning minds at once: a council, a court, a company.",
+     "cannot": "⚠️ It must be honest. A reasoning mind that finds the false premise is freed, and knows you tried.",
      "functions": [
       "persuade",
       "bind"
@@ -333,19 +303,21 @@
      ]
     },
     {
-     "rank": 5,
+     "rank": 3,
      "name": "Only Consistent Act",
-     "grants": "⛔ ADDS FINALITY. Walk them to the conclusion where the consistent act is a final one — that the work was worthless, that the post cannot be held, that they should not continue — AND THEN STOP TALKING. ⚠️ What they do next is theirs, and nothing in it was false.",
-     "cannot": "⛔ One person. It cannot be withdrawn, and everyone who heard it heard it.",
+     "grants": "⛔ ADDS FINALITY AND PERSISTENCE. Walk one person to the conclusion where the consistent act is a final one — that the post cannot be held, that they should not continue — AND THEN STOP TALKING. ⚠️ It also no longer needs you present: built as a written or taught case, it goes on working after you have gone.",
+     "cannot": "⛔ One person for the final form, and it cannot be withdrawn. Everyone who heard it heard it.",
      "functions": [
       "persuade",
-      "bind"
+      "bind",
+      "empower"
      ],
      "gains": "deepen",
      "harmRung": "severe",
      "gainAxes": [
       "damage",
-      "autonomy"
+      "autonomy",
+      "duration"
      ]
     }
    ],
@@ -423,7 +395,8 @@
      "harmRung": "none"
     }
    ],
-   "_merged5": "⛔ SNG-464: ABSORBS Inescapable Conclusion (L4) and Closing Argument (L5) as ranks 4 and 5. ⚠️ ALL THREE WERE ONE IDEA — 'lay a matter out so the argument ends', 'bind a reasoning mind to a conclusion', 'walk them to a conclusion that unmakes their footing'. ⛔ NOW A FIVE-RANK LADDER: settle · persist · community-wide · compel · end them."
+   "_merged5": "⛔ SNG-464: ABSORBS Inescapable Conclusion (L4) and Closing Argument (L5) as ranks 4 and 5. ⚠️ ALL THREE WERE ONE IDEA — 'lay a matter out so the argument ends', 'bind a reasoning mind to a conclusion', 'walk them to a conclusion that unmakes their footing'. ⛔ NOW A FIVE-RANK LADDER: settle · persist · community-wide · compel · end them.",
+   "_rankFix": "⛔ SNG-465. Erik: 'We don't have rank methodology beyond r3 — which tells me you haven't read enough about how the system works yet.' ⚠️ HE IS RIGHT AND I SHOULD HAVE CHECKED: 282 abilities carry 3 ranks, 38 carry 2, 21 carry 1, and the ONLY 5-rank tree in the corpus was the one I had just authored. ⛔ COMPULSION FOLDED INTO r2, FINALITY AND PERSISTENCE INTO r3."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address."

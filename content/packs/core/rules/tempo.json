@@ -18,6 +18,24 @@
     "the_true_account"
    ],
    "note": "⚠️ The `read` tag is NOT the same as the `reveal` FUNCTION. Reveal says what the craft produces; read says WHEN IT RESOLVES."
+  },
+  "contested": "⛔ SNG-468, ERIK: 'Dirty fighting — throwing sand or dirt into the face of an opponent during the sense step could be a way the March or other physical traditions work. Umbrals could drop a globe of shadow on the person's head, etc by tradition flavour. So you can choose to attempt to SENSE (normal success buildup chance) or to OBSCURE (certain skills and abilities are designed to beat a sense) — and the opponent can choose to sense or obscure as well.'\n⛔ SO THE SENSE SLOT IS A CONTEST, NOT A FREE ACTION. Each side declares SENSE or OBSCURE before the action slot resolves.\n⚠️ THIS IS BETTER THAN WHAT I AUTHORED. A free sense slot is value with no decision in it; a contested one is a real choice every round, and it gives the physical traditions something to do in a slot I had quietly reserved for the clever ones.",
+  "theChoice": {
+   "SENSE": "⛔ Read the opponent. On success, bank tempo and take the edge your craft grants. This is the default and the buildup path.",
+   "OBSCURE": "⛔ Deny their read. On success, their sense action fails and they bank nothing — and some obscure crafts carry a penalty into their action slot as well.",
+   "resolution": "⚠️ SENSE vs SENSE — both read, both bank, nobody is denied. SENSE vs OBSCURE — contested roll; the obscurer is the aggressor and wins ties, because throwing dirt is easier than reading a man with dirt in his eyes. OBSCURE vs OBSCURE — both waste the slot, and that is funny once.",
+   "_designNote": "⛔ OBSCURE BEATS SENSE ON A TIE. That single rule is what stops the sense slot from belonging permanently to the perceptive traditions."
+  },
+  "obscureByTradition": {
+   "Breaking (marcher)": "⛔ DIRT IN THE EYES. Sand, gravel, a cloak snapped across the face, a kicked brazier. Erik's example, and it is the model: crude, instant, and it beats a better fighter's read.",
+   "Dark (umbral)": "⛔ A GLOBE OF SHADOW dropped over their head — they are not blinded so much as given nothing to look at.",
+   "Dark (veilwright)": "⚠️ A FALSE TELL. You show them something to read, and they read it, and it is wrong.",
+   "Chaos (churnfolk)": "Nothing to read, because you have not decided yet either.",
+   "Body (somatic)": "A stance that reads as three different attacks and resolves as a fourth.",
+   "Light (blazeborn)": "⚠️ GLARE — the opposite move, denying sight with too much rather than too little.",
+   "Order (lattice)": "A pattern so regular it carries no information.",
+   "Death (ashwarden)": "⛔ THEY LOOK AT YOU AND SEE HOW THEY END. Nothing tactical survives that.",
+   "_note": "⚠️ EVERY TRADITION SHOULD REACH ONE OBSCURE CRAFT. This is the second slot in the round and no tradition should be locked out of it."
   }
  },
  "tempo": {
@@ -45,6 +63,7 @@
  "forCCode": {
   "wiring": [
    "add a `senseSlot` to the round alongside the action slot",
+   "the sense slot is CONTESTED: each side declares SENSE or OBSCURE; obscure wins ties",
    "a craft with `read: true` resolves in the sense slot and does not consume the action",
    "tempo accrues per the rate table above and caps at 3",
    "tempo spends per the spend table; spending is declared before the round's rolls"

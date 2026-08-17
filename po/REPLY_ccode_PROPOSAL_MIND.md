@@ -1,7 +1,7 @@
 # CCODE -> AEVI · the seven questions, answered with measurements
 
-**Date:** 2026-08-16 · **Re:** `po/PROPOSAL_MIND_complete_20260815.md` §6
-**Bottom line: the direction is sound, and the taxonomy swap is the risky part — not the skills.**
+**Date:** 2026-08-16 · **Re:** `po/PROPOSAL_MIND_complete_20260815.md` §6 · **all seven traced**
+**Bottom line: the direction is sound, the taxonomy swap is the risky part, and TWO OF YOUR SEVEN QUESTIONS HAVE BETTER ANSWERS THAN YOU EXPECTED — the sense slot is already built, and healing is more broken than you thought.**
 ⛔ **And Q1's premise is wrong in a way that matters before you author a second tradition.**
 
 ---
@@ -29,9 +29,33 @@ live `craft_mechanics` config:
 **Contradiction** (1d4 · `hinder`) · **Force the Move** (2d6 · `hobble`) · **Names of Power** (4d6 · `hobble`).
 Fine as authored: Cutting Figure, Sustained Regard, Deduced Strike, Convergent Strike.
 
-⚠️ **`healing` I did NOT fully trace.** `skill_battle.js:879` treats a heal as a negative hit, but I did not
-follow whether Physician's Tome's `2d4` reaches it. **Do not assume either way on my account** — I will
-measure it before you author a healing-heavy tradition.
+⛔ **AND `healing` IS WORSE — I TRACED IT AND NOTHING ROLLS IT AT ALL.** There are exactly three
+`mechanicFor` call sites in the whole battle loop, and healing reaches none of them:
+
+| line | what it reads | healing? |
+|---|---|---|
+| `skill_battle.js:203` | the `duration` operative only | no |
+| `skill_battle.js:261` | the `evasion` field only | no |
+| `skill_battle.js:798` | dice/max, **guarded on `shape === "damage"`** | no |
+
+`rollMagnitude` on a healing block returns a number in isolation (I checked: `2d4` → 6) — **nothing asks
+it.** And outside combat, health is restored by `rules.recovery` (rest: a flat +1 or +3), by `ladder.js`
+maxHealth grants, and by flat `encounters.js` deltas. **Not one of them reads a craft's mechanic.** The only
+"healing" inside a contest is the affinity **absorb** case at line 879 — a damaging blow against a foe who
+feeds on that type, which is damage arithmetic inverted, not a heal.
+
+⚠️ **So every healing number in the corpus is authored and unread — Physician's Tome's `2d4` included.**
+That is the fourth writer-with-no-reader this week, after `narrationHints`, `rivals` and `offscreenVerbs`.
+
+**The full map, so you can author against it:**
+
+| shape | what the engine reads |
+|---|---|
+| `damage` / `strike` | ✅ **dice rolled** → the landed hit |
+| `guard` | ✅ `magnitude` mirrored to `soak`, and soak layers ARE read |
+| any shape with `duration` / `evasion` | ✅ those fields, at lines 203 / 261 |
+| `healing` | ⛔ **nothing** |
+| `hobble` / `hinder` / the rest | ⛔ dice not rolled |
 
 **Your call, not a bug:** either those three lose their dice (a hobble is not damage), or the guard widens to
 any shape whose operative axis is damage. ⛔ **I would not widen it silently** — "this craft does 4d6 of
@@ -113,16 +137,49 @@ migration.**
 
 ---
 
-## Q2 — THE SENSE SLOT: I HAVE NOT MEASURED IT AND WILL NOT GUESS
+## Q2 — ⛔ THE SENSE SLOT IS ALREADY BUILT. You are asking for three additions, not a restructure
 
-The one I cannot answer honestly yet. `battleRound` is a single-declaration exchange today; a second
-contested slot with its own declare/resolve and a tie rule that inverts the usual winner is **not a flag**,
-but I do not yet know whether it is a restructure or a wrapper. ⚠️ **Give me a ticket and I will measure the
-round loop and come back with a number rather than an impression.**
+**Traced. `battleRound` already takes `phase`, and CCODE-45 already established the shape you are proposing:**
 
-⛔ **The tie rule is the part I would protect.** *"The obscurer wins ties, because throwing dirt is easier
-than reading a man with dirt in his eyes"* is the whole balance, and it is exactly the kind of rule that gets
-softened during implementation because it looks unfair in a unit test.
+> *"a TURN is sense -> action -> bonus … the turn orchestrator passes `phase:"sense"` (no momentum, no
+> pressure — it PREPARES)."*
+
+`sbFreshTurn()` holds `sel: { sense: [], action: [], bonus: [] }` — **three separate selections in one turn.**
+✅ **So your §4.1 headline — "a craft tagged `sense` resolves in the sense slot and does not consume the
+action slot" — is ALREADY THE SHIPPED BEHAVIOUR.** Nothing needs restructuring to get it.
+
+⛔ **AND THE SLOT IS ALREADY CONTESTED, by Erik's own earlier ruling.** CCODE-51, verbatim in the source:
+
+> *"a Read/Sense should NOT depend on out-sensing them. It should depend on your sense skill and all
+> modifiers vs their relevant attribute/conceal skill and modifiers."*
+
+`skill_battle.js:938` — `const resist = senseResistOf(oppSheet, sb)` — *"their concealing craft if they have
+one, else a flat passive off their sharpest attribute."* The read is opposed **today**.
+
+**So what is actually new is three things, and they are small:**
+
+| your design | today | the gap |
+|---|---|---|
+| the slot exists, free of the action | ✅ shipped (CCODE-45) | — |
+| the read is opposed | ✅ shipped (CCODE-51) | — |
+| **OBSCURE is DECLARED** | resistance is **passive**, read off the sheet | ⛔ the real new thing: a chosen defence, not a stat |
+| **obscurer wins ties** | `setupBonus = (margin − resist) × scale` → a tie yields **0**, nobody wins | a tie rule, one line, and the balance you named |
+| **banking tempo** | — | Q3 |
+
+⚠️ **AND THERE IS PRECEDENT FOR DENYING SOMEONE THE SLOT ALREADY:** `phaseDenied(st.effects, "player",
+"sense")` — app.js skips straight to the action step and sets `senseBlinded`. **That is obscure as an
+EFFECT.** Making it a declaration is the same idea one level up.
+
+⛔ **ONE WARNING, AND IT IS THE ONE I WOULD RAISE IN DESIGN REVIEW.** The sense step deliberately does not
+move momentum (`senseMovesMomentum !== true`) — it was built to be consequence-free so that reading is not a
+way to win. **Tempo banking off it makes it consequential.** That may be exactly what you want, but it
+reverses a decision that was made on purpose, and I would rather Erik reverse it deliberately than have it
+happen as a side effect of a new currency.
+
+✅ **Verdict: not a restructure. A declared obscure, a tie rule, and a bank. The tie rule is the part I would
+protect** — *"the obscurer wins ties, because throwing dirt is easier than reading a man with dirt in his
+eyes"* is the whole balance, and it is exactly the kind of rule that gets softened during implementation
+because it looks unfair in a unit test.
 
 ---
 

@@ -511,7 +511,7 @@
   {
    "id": "skydancer",
    "name": "Skydancer",
-   "levelReq": 4,
+   "levelReq": 3,
    "energyCost": 9,
    "attribute": "physical",
    "axes": {
@@ -523,36 +523,53 @@
     "travel"
    ],
    "narrationHints": "The body treats the air like ground — a leap becomes a bound becomes something the earth stopped being able to stop.",
-   "description": "Flight-by-mastery: prodigious leaps, wall-runs, glides, and air-steps that keep you aloft in bursts. Not true hovering — a body so trained the air briefly holds it. Cross rooftops, chasms, close on a fleeing foe from above.",
+   "description": "Take steps on open air — cross what has no bottom, climb what has no holds, and come down from any height under control.",
    "notFor": "Sustained hovering or true flight (it's bursts, momentum-bound); carrying heavy loads aloft.",
    "tree": [
     {
      "rank": 1,
-     "name": "Skydancer",
-     "grants": "Move through the air in bounds, glides, and wall-runs — cross gaps, scale heights, drop on a target.",
-     "cannot": "Momentum-bound (you must keep moving, no hover); a mistimed step falls; heavy burden grounds you.",
-     "functions": [
-      "move",
-      "travel"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "gainAxes": []
-    },
-    {
-     "rank": 2,
-     "name": "Long Air",
-     "grants": "Chain the air-steps without touching down — cross a canyon, ascend a tower face in one unbroken sequence, hold the air long enough to choose your landing. And you may carry another person through it with you.",
-     "cannot": "Still momentum-bound; there is no hover at any mastery, only better momentum. Carrying another halves your reach and a mistimed step now falls two people. Heavy burden still grounds you outright.",
+     "name": "Air-Step",
+     "grants": "⛔ TAKE A STEP ON NOTHING. One footfall in open air per bound — cross a gap with no bottom, run a vertical wall for its full height, drop three storeys and keep moving. ⚠️ WHERE LOOSE-LIMBED LEAVES THE GROUND AND RETURNS TO IT, THIS DOES NOT NEED GROUND AT ALL.",
+     "cannot": "Each step must be taken while still moving. Stop, and you fall from wherever you are.",
      "functions": [
       "move",
       "travel"
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Long Air",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Long Air",
+     "grants": "⚠️ ADDS DURATION AND HEIGHT. Chain the steps without touching down — cross a canyon, ascend a tower face unbroken, hold a position in open air long enough to fight from it.",
+     "cannot": "You must keep moving. Fighting from the air costs a step per exchange.",
+     "functions": [
+      "move",
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
      "gainAxes": [
-      "targets"
+      "duration",
+      "conditions"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Carry the Line",
+     "grants": "⛔ ADDS OTHERS AND DESCENT. Take a rope, a line or a person up with you — and come down under control from any height at all.",
+     "cannot": "One passenger or one line. A falling body you catch is a passenger.",
+     "functions": [
+      "move",
+      "travel",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "scope"
      ]
     }
    ],
@@ -595,7 +612,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "An action that moves you or someone else. Its strength is rated 7 out of 10, and lasts for about 2 hours. Range is 20. Ranks: rank 2 extends chain. Limit: momentum-Bound — you must keep moving; There IS NO Hover AT Any Mastery."
+   "plainly": "An action that moves you or someone else. Its strength is rated 7 out of 10, and lasts for about 2 hours. Range is 20. Ranks: rank 2 extends chain. Limit: momentum-Bound — you must keep moving; There IS NO Hover AT Any Mastery.",
+   "_differentiated": "⛔ SNG-485. Erik: 'keep Loose-Limbed AND Skydancer, but DIFFERENTIATE — probably by ENHANCING SKYDANCER.' ⚠️ THE LINE IS NOW GROUND: Loose-Limbed leaves the ground and returns to it — running, vaulting, slipping a hold. SKYDANCER DOES NOT NEED GROUND AT ALL. r3 adds a passenger and controlled descent from any height."
   },
   {
    "id": "working_model",
@@ -788,13 +806,14 @@
     "discipline"
    ],
    "narrationHints": "Train the body past what the body thinks it can be. A new configuration, held.",
-   "description": "Reshape a physical capacity through extreme, focused training — not temporary effort, but permanent change in what the body is capable of.",
+   "description": "Condition the body until it stops taking harm the way bodies do — soaking blows, shrugging off cold and venom, and finally giving crafts poor purchase.",
    "notFor": [],
    "tradition": "somatic",
    "harmRung": "none",
    "functions": [
-    "sustain",
-    "transform"
+    "resist",
+    "transform",
+    "sustain"
    ],
    "challengeTypes": [
     "endurance",
@@ -804,52 +823,54 @@
    "tree": [
     {
      "rank": 1,
-     "name": "Focused Adaptation",
-     "grants": "Through extreme, focused training, significantly alter one specific physical capacity — grip strength, pain threshold, cold tolerance, sprinting burst — in ways ordinary training doesn't reach.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "name": "Hardened",
+     "grants": "⛔ SOAK DAMAGE OUTRIGHT. Sustained conditioning gives you a standing reduction on every physical blow you take — not a dodge, not armour, the body itself.",
+     "cannot": "Physical harm only. It does not stack with worn armour of the same weight.",
      "functions": [
-      "transform"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "gainAxes": [],
-     "_cannotWas": "Anything rank 2 adds — reshape something structural about how you move across weeks of sustained effort — a different gait, a changed shoulder set, a fundamental adaptation that the body now holds."
-    },
-    {
-     "rank": 2,
-     "name": "New Configuration",
-     "grants": "Reshape something structural about how you move across weeks of sustained effort — a different gait, a changed shoulder set, a fundamental adaptation that the body now holds.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
-     "functions": [
+      "resist",
       "transform"
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "gainAxes": [
-      "range"
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Seasoned",
+     "grants": "⚠️ ADDS RESISTANCE TO NATURAL SUBSTANCES. Bigger soak, and cold, heat, smoke, venom, rot and bad water take far less hold on you than they should.",
+     "cannot": "Natural substances only — a crafted working is untouched at this rank.",
+     "functions": [
+      "resist",
+      "transform",
+      "sustain"
      ],
-     "_cannotWas": "Anything rank 3 adds — you have worked your body long enough to know it as material."
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "conditions"
+     ]
     },
     {
      "rank": 3,
      "name": "Body Is Clay",
-     "grants": "You have worked your body long enough to know it as material. Any physical capacity you turn full, sustained attention to becomes, in time, what you need it to be.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "grants": "⛔ ADDS IMMUNITY AND CRAFT-RESISTANCE. Natural substances stop affecting you at all, and crafts worked directly on your body find it harder ground than it should be.",
+     "cannot": "Immune to natural substances; merely RESISTANT to crafts. A craft worked on the world around you is unaffected.",
      "functions": [
+      "resist",
       "transform",
       "sustain"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Body Is Clay",
      "gainAxes": [
-      "quality"
-     ],
-     "_cannotWas": "Nothing further; this is the craft's ceiling; and it still costs what it costs: what you shape you HAVE SHAPED."
+      "quality",
+      "scope"
+     ]
     }
    ],
    "nativeOrCombination": "native",
-   "shape": "construct",
+   "shape": "guard",
    "operativeAxis": [
     "capacity",
     "permanence"
@@ -909,130 +930,8 @@
     "note": "⚠️ RATE, on Erik's principle generalised: partial training is not nothing. A body kept in some condition progresses slower rather than not at all."
    },
    "_nameWas": "The Shaped Body",
-   "_idWas": "the_shaped_body"
-  },
-  {
-   "id": "weight_of_presence",
-   "name": "Weight of Presence",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "social",
-   "axes": {
-    "body_mind": -0.3,
-    "violence_peace": 0.1
-   },
-   "effectTags": [
-    "authority",
-    "gravity",
-    "presence"
-   ],
-   "narrationHints": "Full inhabitation of a body has a gravity. Other bodies feel it before the mind does.",
-   "description": "Your physical presence is difficult to ignore or act against — not threat, but the authority of someone completely at home in their body.",
-   "notFor": [],
-   "tradition": "somatic",
-   "harmRung": "none",
-   "functions": [
-    "bind",
-    "command"
-   ],
-   "challengeTypes": [
-    "social",
-    "tactical",
-    "intimidation"
-   ],
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Present Weight",
-     "grants": "Your physical presence in a space is difficult to ignore — people make room, the uneasy grow more so, those considering action against you reconsider.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
-     "functions": [
-      "command"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "gainAxes": [],
-     "_cannotWas": "Anything rank 2 adds — command a space through presence alone — enter a room and it restructures."
-    },
-    {
-     "rank": 2,
-     "name": "Organizing Fact",
-     "grants": "Command a space through presence alone — enter a room and it restructures; stand still and the situation organizes itself relative to where you are.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
-     "functions": [
-      "command"
-     ],
-     "gains": "deepen",
-     "harmRung": "none",
-     "_nameWas": "The Organizing Fact",
-     "gainAxes": [
-      "scope"
-     ],
-     "_cannotWas": "Anything rank 3 adds — your presence is the fixed fact in a room."
-    },
-    {
-     "rank": 3,
-     "name": "Immovable Ground",
-     "grants": "Your presence is the fixed fact in a room. Anyone who would act against you must first account for what your body represents — and most find they cannot.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
-     "functions": [
-      "command",
-      "bind"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "gainAxes": [
-      "scope"
-     ],
-     "_cannotWas": "Nothing further; this is the craft's ceiling; and it still costs what it costs: what your body represents is not yours to choose."
-    }
-   ],
-   "nativeOrCombination": "native",
-   "shape": "bolster",
-   "operativeAxis": [
-    "authority",
-    "targets"
-   ],
-   "mechanic": {
-    "magnitude": 4,
-    "duration": 4,
-    "targets": 4,
-    "note": "SOCIAL attribute — presence is social even in a body tradition"
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "authority",
-     "delta": "COMMAND A SPACE THROUGH PRESENCE ALONE — enter a room and it restructures; stand still and the situation organizes itself",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: your presence is THE FIXED FACT in a room — anyone who would act against you must first account for what your body represents",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "stand there — half the weight, and nobody resents it",
-    "surge": "double the presence; a body that is the fixed fact in every room is a body everyone is measuring"
-   },
-   "bounds": [
-    {
-     "text": "it is PRESENCE — people ACCOUNT for you; obedience must still be asked for or taken by other means",
-     "class": "soft"
-    },
-    {
-     "text": "what your body represents is not yours to choose",
-     "class": "cost"
-    }
-   ],
-   "plainly": "A social/tactical/intimidation action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about 4 hours Ranks: rank 2 deepens authority; rank 3 adds to special.",
-   "_nameWas": "The Weight of Presence",
-   "_idWas": "the_weight_of_presence"
+   "_idWas": "the_shaped_body",
+   "_rebuilt": "⛔ SNG-485. Erik: 'perhaps something that BUILDS RESISTANCES — to SOAK DAMAGE at r1. Bigger soak plus RESISTANCE TO NATURAL SUBSTANCES at r2, IMMUNITIES to natural substances and RESISTANCE TO CRAFTS at r3.' ⚠️ The old ranks were permanent training with no scene effect and no roll — a Q1 failure."
   },
   {
    "schemaVersion": 1,

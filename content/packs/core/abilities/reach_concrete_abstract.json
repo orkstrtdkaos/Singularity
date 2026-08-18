@@ -554,8 +554,8 @@
     {
      "rank": 1,
      "name": "Correct Fix",
-     "grants": "Repair what is broken by understanding what it truly is — the right material intervention, no more and no less, that makes the thing sound again.",
-     "cannot": "Anything rank 2 adds — restore not just function but structural integrity — the wall that will not sag, the wound that will not fester, the joint that will hold under load; it repairs the MATERIAL.",
+     "grants": "Repair what is broken by understanding what it truly is — the right material intervention, no more and no less.",
+     "cannot": "You must be able to examine it. It repairs the material, never the meaning.",
      "functions": [
       "mend"
      ],
@@ -565,13 +565,15 @@
       "reveal",
       "mend"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "Repair what is broken by understanding what it truly is — the right material intervention, no more and no less, that makes the thing sound again.",
+     "_cannotWas": "Anything rank 2 adds — restore not just function but structural integrity — the wall that will not sag, the wound that will not fester, the joint that will hold under load; it repairs the MATERIAL."
     },
     {
      "rank": 2,
      "name": "Sound Again",
-     "grants": "Restore not just function but structural integrity — the wall that will not sag, the wound that will not fester, the joint that will hold under load.",
-     "cannot": "Anything rank 3 adds — return a thing fully to its proper material state — the building, the body, the system — so that it is indistinguishable from one that was never broken; it repairs the MATERIAL.",
+     "grants": "⚠️ ADDS INTEGRITY, NOT JUST FUNCTION. The wall that will not sag, the wound that will not fester, the joint that holds under load.",
+     "cannot": "One subject per working, and you must have the material to work with.",
      "functions": [
       "mend",
       "restore"
@@ -583,13 +585,18 @@
       "mend",
       "restore"
      ],
-     "gainAxes": []
+     "gainAxes": [
+      "quality",
+      "duration"
+     ],
+     "_grantsWas": "Restore not just function but structural integrity — the wall that will not sag, the wound that will not fester, the joint that will hold under load.",
+     "_cannotWas": "Anything rank 3 adds — return a thing fully to its proper material state — the building, the body, the system — so that it is indistinguishable from one that was never broken; it repairs the MATERIAL."
     },
     {
      "rank": 3,
      "name": "As It Was",
-     "grants": "Return a thing fully to its proper material state — the building, the body, the system — so that it is indistinguishable from one that was never broken.",
-     "cannot": "Nothing further; this is the craft's ceiling; it repairs the MATERIAL.",
+     "grants": "⛔ ADDS COMPLETENESS AND SCALE. Return a thing fully to its proper state — a building, a body, a system — indistinguishable from one never broken.",
+     "cannot": "One thing at a time. It cannot replace what is gone.",
      "functions": [
       "mend",
       "restore"
@@ -602,8 +609,11 @@
       "restore"
      ],
      "gainAxes": [
+      "scope",
       "quality"
-     ]
+     ],
+     "_grantsWas": "Return a thing fully to its proper material state — the building, the body, the system — so that it is indistinguishable from one that was never broken.",
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it repairs the MATERIAL."
     }
    ],
    "nativeOrCombination": "native",
@@ -692,41 +702,53 @@
     {
      "rank": 1,
      "name": "Plain Statement",
-     "grants": "Say the plain thing and have it land with authority — not eloquence, just solidity. The practical fact that settles an argument by being undeniable.",
-     "cannot": "Anything rank 2 adds — make an agreement or declaration that sticks — not because you charmed anyone, but because the weight of your standing and your history of keeping your word makes it so; IT IS SOLIDITY, NOT ELOQUENCE.",
+     "grants": "Say the plain thing and have it land with authority — the practical fact that settles an argument by being undeniable.",
+     "cannot": "It must BE the practical fact. A plain statement that is wrong lands as wrongly.",
      "functions": [
       "command"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "Say the plain thing and have it land with authority — not eloquence, just solidity. The practical fact that settles an argument by being undeniable.",
+     "_cannotWas": "Anything rank 2 adds — make an agreement or declaration that sticks — not because you charmed anyone, but because the weight of your standing and your history of keeping your word makes it so; IT IS SOLIDITY, NOT ELOQUENCE."
     },
     {
      "rank": 2,
      "name": "Word That Holds",
-     "grants": "Make an agreement or declaration that sticks — not because you charmed anyone, but because the weight of your standing and your history of keeping your word makes it so.",
-     "cannot": "Anything rank 3 adds — name the practical truth of a situation so plainly and with such authority that people organize around it as if it were the wall they're building against; IT IS SOLIDITY, NOT ELOQUENCE.",
+     "grants": "⚠️ ADDS DURATION AND BINDING. An agreement or declaration you make sticks — the weight of your standing holds it after the room empties.",
+     "cannot": "One standing agreement at a time; breaking your own word ends the craft until it is rebuilt.",
      "functions": [
-      "command",
-      "bind"
+      "bind",
+      "command"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Word That Holds",
-     "gainAxes": []
+     "gainAxes": [
+      "duration",
+      "autonomy"
+     ],
+     "_grantsWas": "Make an agreement or declaration that sticks — not because you charmed anyone, but because the weight of your standing and your history of keeping your word makes it so.",
+     "_cannotWas": "Anything rank 3 adds — name the practical truth of a situation so plainly and with such authority that people organize around it as if it were the wall they're building against; IT IS SOLIDITY, NOT ELOQUENCE."
     },
     {
      "rank": 3,
      "name": "Set",
-     "grants": "Name the practical truth of a situation so plainly and with such authority that people organize around it as if it were the wall they're building against.",
-     "cannot": "Nothing further; this is the craft's ceiling; IT IS SOLIDITY, NOT ELOQUENCE; and it still costs what it costs: a word that lands like a wall is a word YOU CANNOT WALK BACK.",
+     "grants": "⛔ ADDS SCALE. Name the practical truth of a situation so plainly that people organise around it — a camp, a crew, a town in a crisis.",
+     "cannot": "One situation. It is solidity, not eloquence: it cannot make people want something.",
      "functions": [
       "command",
       "bind"
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [
+      "scope",
+      "targets"
+     ],
+     "_grantsWas": "Name the practical truth of a situation so plainly and with such authority that people organize around it as if it were the wall they're building against.",
+     "_cannotWas": "Nothing further; this is the craft's ceiling; IT IS SOLIDITY, NOT ELOQUENCE; and it still costs what it costs: a word that lands like a wall is a word YOU CANNOT WALK BACK."
     }
    ],
    "nativeOrCombination": "native",
@@ -808,8 +830,8 @@
     {
      "rank": 1,
      "name": "Seam",
-     "grants": "Find the gap, the loose stone, the door that's always in the structure — the mason knows how things are built and knows where they open.",
-     "cannot": "Anything rank 2 adds — move through a built environment at the speed its construction allows — the route that doesn't backtrack, the way that's already there in the material; BUILT structures only.",
+     "grants": "Find the gap, the loose stone, the door that is always in the structure — you know how things are built and where they open.",
+     "cannot": "One opening you can reach and touch. Built structures only; grown, natural or precursor-sealed ground gives you nothing.",
      "functions": [
       "open"
      ],
@@ -820,16 +842,18 @@
       "open"
      ],
      "_nameWas": "The Seam",
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "Find the gap, the loose stone, the door that's always in the structure — the mason knows how things are built and knows where they open.",
+     "_cannotWas": "Anything rank 2 adds — move through a built environment at the speed its construction allows — the route that doesn't backtrack, the way that's already there in the material; BUILT structures only."
     },
     {
      "rank": 2,
      "name": "Material Passage",
-     "grants": "Move through a built environment at the speed its construction allows — the route that doesn't backtrack, the way that's already there in the material.",
-     "cannot": "Anything rank 3 adds — in any built structure, find or make the passage; BUILT structures only.",
+     "grants": "⚠️ ADDS PACE. Move through a built environment at the speed its construction allows — no backtracking, no dead ends, the route that is already there in the material.",
+     "cannot": "Built structures only, and you must be able to touch the fabric as you go.",
      "functions": [
-      "open",
-      "move"
+      "move",
+      "open"
      ],
      "gains": "broaden",
      "harmRung": "none",
@@ -838,17 +862,22 @@
       "open",
       "move"
      ],
-     "gainAxes": []
+     "gainAxes": [
+      "conditions",
+      "duration"
+     ],
+     "_grantsWas": "Move through a built environment at the speed its construction allows — the route that doesn't backtrack, the way that's already there in the material.",
+     "_cannotWas": "Anything rank 3 adds — in any built structure, find or make the passage; BUILT structures only."
     },
     {
      "rank": 3,
      "name": "Way In",
-     "grants": "In any built structure, find or make the passage. Not by brute force — by knowing exactly where the material wants to open.",
-     "cannot": "Nothing further; this is the craft's ceiling; BUILT structures only; and it still costs what it costs: what you open, you have OPENED.",
+     "grants": "⛔ ADDS MAKING. Where no passage exists, open one — not by force, by knowing exactly where the material wants to part.",
+     "cannot": "One passage per structure, and it takes minutes you may not have. Built structures only.",
      "functions": [
-      "open",
+      "make",
       "move",
-      "make"
+      "open"
      ],
      "gains": "broaden",
      "harmRung": "none",
@@ -859,7 +888,12 @@
       "make"
      ],
      "_nameWas": "The Way In",
-     "gainAxes": []
+     "gainAxes": [
+      "scope",
+      "quality"
+     ],
+     "_grantsWas": "In any built structure, find or make the passage. Not by brute force — by knowing exactly where the material wants to open.",
+     "_cannotWas": "Nothing further; this is the craft's ceiling; BUILT structures only; and it still costs what it costs: what you open, you have OPENED."
     }
    ],
    "nativeOrCombination": "native",
@@ -1601,8 +1635,8 @@
     {
      "rank": 1,
      "name": "True Weight",
-     "grants": "Give something present its full and honest weight and send it — a stone, a beam, a pack, a shield, the ground under them. Blunt, total, and exactly as complicated as being hit by masonry.",
-     "cannot": "SOMETHING MUST BE THERE. An empty road offers nothing. It is slow enough to be seen coming by anyone watching for it, and it is very loud.",
+     "grants": "Give something present its full and honest weight and send it — a stone, a beam, a pack, a shield, the ground under them.",
+     "cannot": "⛔ SOMETHING MUST BE THERE. An empty road offers nothing, and it is slow enough to be seen coming.",
      "functions": [
       "strike",
       "break"
@@ -1610,16 +1644,19 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "_nameWas": "The True Weight",
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "Give something present its full and honest weight and send it — a stone, a beam, a pack, a shield, the ground under them. Blunt, total, and exactly as complicated as being hit by masonry.",
+     "_cannotWas": "SOMETHING MUST BE THERE. An empty road offers nothing. It is slow enough to be seen coming by anyone watching for it, and it is very loud."
     },
     {
      "rank": 2,
      "name": "Settled Fact",
-     "grants": "Take the structure rather than the piece — a lintel, a stair, a cart, a section of wall. What was holding is now falling, and it falls honestly.",
-     "cannot": "You have taken part of a building down and buildings are used by people who are not in your fight. Masons are held to account by other Masons for exactly this.",
+     "grants": "⚠️ ADDS SIZE AND TARGETS. Take the structure rather than the piece — a lintel, a stair, a cart, a section of wall. What was holding is now falling.",
+     "cannot": "You are taking part of a building down. Anyone under it is under it.",
      "functions": [
-      "strike",
-      "break"
+      "break",
+      "hinder",
+      "strike"
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
@@ -1629,13 +1666,18 @@
       "hinder"
      ],
      "_nameWas": "The Settled Fact",
-     "gainAxes": []
+     "gainAxes": [
+      "targets",
+      "damage"
+     ],
+     "_grantsWas": "Take the structure rather than the piece — a lintel, a stair, a cart, a section of wall. What was holding is now falling, and it falls honestly.",
+     "_cannotWas": "You have taken part of a building down and buildings are used by people who are not in your fight. Masons are held to account by other Masons for exactly this."
     },
     {
      "rank": 3,
      "name": "Leaden Word",
-     "grants": "Everything nearby remembers its weight at once. Roofs, walls, armour, the load a man is carrying, the man — everything that can fall strikes what is beneath it, and armour breaks under its own weight. AND YOU SET THE FALL NOW: mastery is choosing where the weight goes, so you and anyone you name stand in the one place it does not.",
-     "cannot": "You still cannot make weight where there is none, and a building coming down is used by people who were not in your fight. It remains loud, and everyone knows what happened and who did it.",
+     "grants": "⛔ ADDS AREA AND CONTROL OF THE FALL. Everything nearby remembers its weight at once — roofs, walls, armour, the load a man carries. AND YOU SET WHERE IT GOES: you and anyone you name stand in the one place it does not.",
+     "cannot": "You cannot make weight where there is none. One area, once per contest.",
      "functions": [
       "strike",
       "break"
@@ -1648,7 +1690,12 @@
       "hinder"
      ],
      "_nameWas": "The Leaden Word",
-     "gainAxes": []
+     "gainAxes": [
+      "scope",
+      "quality"
+     ],
+     "_grantsWas": "Everything nearby remembers its weight at once. Roofs, walls, armour, the load a man is carrying, the man — everything that can fall strikes what is beneath it, and armour breaks under its own weight. AND YOU SET THE FALL NOW: mastery is choosing where the weight goes, so you and anyone you name stand in the one place it does not.",
+     "_cannotWas": "You still cannot make weight where there is none, and a building coming down is used by people who were not in your fight. It remains loud, and everyone knows what happened and who did it."
     }
    ],
    "challengeTypes": [

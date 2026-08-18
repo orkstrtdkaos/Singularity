@@ -301,15 +301,129 @@
     "mechanical_spiritual": 0.2
    },
    "functions": [
+    "transform",
+    "make",
+    "reveal"
+   ],
+   "narrationHints": "They do the thing exactly as its own people do it, and slightly wrong in a way only those people would notice — the grammar is right and the accent is from nowhere.",
+   "description": "Take the form of another craft — copy what you have seen worked, then what you have only heard of, then a form you have never encountered that arrives because you needed it.",
+   "notFor": "Crafts nobody has ever worked; anything above tier IV; keeping a borrowed form — it is one use and it goes.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Copied Form",
+     "grants": "⛔ WORK A TIER I CRAFT YOU HAVE PERSONALLY SEEN WORKED, once. Not your tradition, not your power source — you read the form of what they did and take it.",
+     "cannot": "⚠️ You must have WITNESSED it. Tier I only, one use, and it does not stay.",
+     "functions": [
+      "transform",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Form from Report",
+     "grants": "⚠️ ADDS TIER AND SECONDHAND SOURCES. Up to TIER III, and you no longer need to have seen it — a described craft, a page in a text, a story told well enough carries the form.",
+     "cannot": "⛔ Someone must have described it in enough detail to have a form at all. A rumour of a craft is not a craft.",
+     "functions": [
+      "transform",
+      "make",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "quality"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Form Out of Need",
+     "grants": "⛔ ADDS THE UNKNOWN. Up to TIER IV, and you no longer need a source at all — the form arrives because the moment required it, and you work a craft you have never heard of and could not name afterwards.",
+     "cannot": "⚠️ It comes when it comes. You do not choose which form arrives, only that you are open to one.",
+     "functions": [
+      "transform",
+      "make",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "conditions",
+      "autonomy"
+     ]
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SOCIAL",
+    "EXPLORE"
+   ],
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "symbolPower",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 8,
+    "scope": 2,
+    "damageType": "abstraction"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "MAKE A SYMBOL THAT ACTS — a mark, a shape, a figure that DOES IN THE WORLD WHAT IT MEANS",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "BUILD AN IDEA INTO THE WORLD so completely it becomes A FACT OTHERS MUST MOVE AROUND — a rule, a boundary, a truth",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small figure — half the power, and it means exactly what you drew",
+    "surge": "double it; A FIGURE DOES WHAT IT MEANS, NOT WHAT YOU WANTED IT TO MEAN"
+   },
+   "bounds": [
+    {
+     "text": "seeing a form DOES NOT GIVE YOU POWER OVER ITS INSTANCE",
+     "class": "hard"
+    },
+    {
+     "text": "A FIGURE DOES WHAT IT MEANS, NOT WHAT YOU WANTED IT TO MEAN",
+     "class": "hard"
+    },
+    {
+     "text": "THE MASONS CAN DENY IT. REALITY CAN, EVENTUALLY, DECLINE.",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/investigate action that copies another craft. Its strength is rated 5 out of 10. Ranks: rank 2 reaches tier III from description, rank 3 reaches tier IV with no source.",
+   "_descriptionWas": "The abstract-pole mastery: pattern, symbol and idea as the FINER layer of the real. To a Figurist, matter is the coarse residue of form.",
+   "_markedForRemoval": "⛔ SNG-453, ERIK'S RULING: 'Those MYSTERIES WERE NON-EXISTENT — leave a reminder to fill in if we get so inspired, but MARK THEM FOR REMOVAL in the meantime.'\n⚠️ Formcraft is the sect's namesake 'pole mastery' and its ranks summarise the whole sect rather than doing anything — r1 duplicates two or three other abilities in its own sect. ⛔ IF THE MYSTERY IS EVER AUTHORED, THIS IS WHERE IT ATTACHES: a mystery should be the thing the tradition knows that nobody else does, not a digest of its skill list.",
+   "status": "marked-for-removal",
+   "_functionsWas": [
     "bind",
     "deceive",
     "make",
     "reveal"
    ],
-   "narrationHints": "She draws a shape that is not a picture of anything, and the room rearranges itself to agree with it.",
-   "description": "See the pattern, symbol or structure a thing is an instance OF — the form behind the fact. The abstract-pole mastery: to a Figurist, matter is the coarse residue of form.",
-   "notFor": "Anything that requires the touchable to be primary; the Masons' Denial defeats it outright.",
-   "tree": [
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_treeWas": [
     {
      "rank": 1,
      "name": "Pattern Eye",
@@ -369,71 +483,7 @@
      ]
     }
    ],
-   "gated": "learned",
-   "challengeTypes": [
-    "INVESTIGATE",
-    "SOCIAL",
-    "EXPLORE"
-   ],
-   "tradition": "figurist",
-   "nativeOrCombination": "native",
-   "harmRung": "none",
-   "shape": "construct",
-   "operativeAxis": [
-    "symbolPower",
-    "scope"
-   ],
-   "mechanic": {
-    "magnitude": 5,
-    "duration": 8,
-    "scope": 2,
-    "damageType": "abstraction"
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "add",
-     "axis": "special",
-     "delta": "MAKE A SYMBOL THAT ACTS — a mark, a shape, a figure that DOES IN THE WORLD WHAT IT MEANS",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "extend",
-     "axis": "scope",
-     "delta": "BUILD AN IDEA INTO THE WORLD so completely it becomes A FACT OTHERS MUST MOVE AROUND — a rule, a boundary, a truth",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "a small figure — half the power, and it means exactly what you drew",
-    "surge": "double it; A FIGURE DOES WHAT IT MEANS, NOT WHAT YOU WANTED IT TO MEAN"
-   },
-   "bounds": [
-    {
-     "text": "seeing a form DOES NOT GIVE YOU POWER OVER ITS INSTANCE",
-     "class": "hard"
-    },
-    {
-     "text": "A FIGURE DOES WHAT IT MEANS, NOT WHAT YOU WANTED IT TO MEAN",
-     "class": "hard"
-    },
-    {
-     "text": "THE MASONS CAN DENY IT. REALITY CAN, EVENTUALLY, DECLINE.",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A investigate/social/explore action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 adds to special; rank 3 extends scope. Limit: seeing a form Does Not Give You Power Over Its Instance.",
-   "_descriptionWas": "The abstract-pole mastery: pattern, symbol and idea as the FINER layer of the real. To a Figurist, matter is the coarse residue of form.",
-   "_markedForRemoval": "⛔ SNG-453, ERIK'S RULING: 'Those MYSTERIES WERE NON-EXISTENT — leave a reminder to fill in if we get so inspired, but MARK THEM FOR REMOVAL in the meantime.'\n⚠️ Formcraft is the sect's namesake 'pole mastery' and its ranks summarise the whole sect rather than doing anything — r1 duplicates two or three other abilities in its own sect. ⛔ IF THE MYSTERY IS EVER AUTHORED, THIS IS WHERE IT ATTACHES: a mystery should be the thing the tradition knows that nobody else does, not a digest of its skill list.",
-   "status": "marked-for-removal",
-   "_functionsWas": [
-    "bind",
-    "deceive",
-    "make",
-    "reveal"
-   ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_rewritten": "⛔ SNG-478. THE LAST Q1 FAILURE IN MIND. The old ranks were 'see the pattern a thing is an instance OF' / 'make a symbol that ACTS' / 'build an idea into the world' — three ranks, no mechanic, and it was the figurist namesake.\n⚠️ ERIK'S DESIGN: 'Perhaps Formcraft can be a DOPPELGANGER SKILL. r1 mimics a TIER I craft you've experienced. r2 mimics a craft up to TIER III that you've heard of, read about, or seen. r3 lets you mimic things you've NEVER EVEN HEARD ABOUT — the forms come to you out of NEED AND MEANING and you use it. Up to tier IV.'\n⛔ THAT IS THE FIGURIST THESIS MADE PLAYABLE: if matter is the coarse residue of form, then a craft is a form and a form can be taken. ⚠️ AND THE RANK LADDER IS SOURCE, NOT SIZE — witnessed, then described, then unsourced."
   },
   {
    "id": "walking_figure",

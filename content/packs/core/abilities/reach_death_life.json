@@ -918,8 +918,8 @@
     "hinder"
    ],
    "narrationHints": "The strength goes out of him like water out of a cracked jar, and he can feel it going.",
-   "description": "Enfeeblement. You take the vigour out of a LIVING thing by touch or near-hand — not its life, its STRENGTH. It is still standing. It simply cannot do what it could a moment ago. Wither is the same edge turned on things; the Grey Hand is the one that is only ever for people and beasts.",
-   "notFor": "Objects, structures, or terrain — that is Wither, and the two do not substitute for each other. It drains, it does not slay: a weakened thing is still a thing, and a weakened boar is still a boar with tusks. And it is VISIBLE — they know what you are doing to them, and so does everyone watching.",
+   "description": "Enfeeblement. You take the vigour out of a LIVING thing by touch or near-hand — not its life, its STRENGTH. It is still standing. It simply cannot do what it could a moment ago, and it will not until someone mends it.",
+   "notFor": "Objects, structures, or terrain — that is Wither, and the two do not substitute for each other. It drains, it does not slay: a weakened boar is still a boar with tusks. And it is VISIBLE.",
    "tree": [
     {
      "rank": 1,
@@ -937,8 +937,8 @@
     {
      "rank": 2,
      "name": "Long Grey",
-     "grants": "Weaken at a distance, and hold it there — they do not recover while you are attending to them.",
-     "cannot": "Attending costs you continuously. Let go and it comes back, and it comes back angry.",
+     "grants": "⛔ ADDS RANGE AND PERSISTENCE. Weaken at a distance rather than by touch, and the weakness STAYS — it does not lift when you stop attending to it.",
+     "cannot": "⚠️ It lasts until healed or restored. Rest alone does not lift it.",
      "functions": [
       "hinder"
      ],
@@ -946,14 +946,15 @@
      "harmRung": "damaging",
      "_nameWas": "The Long Grey",
      "gainAxes": [
-      "conditions"
+      "range",
+      "duration"
      ]
     },
     {
      "rank": 3,
      "name": "Withered Hour",
      "grants": "Weaken a group, or weaken one thing so thoroughly it cannot stand.",
-     "cannot": "It never kills and never wounds — a Grey Hand that has done its worst leaves someone unable to stand, not dying, and they recover once you stop. Nothing it does is deniable: the Ashwardens hold that this is the honest one, because the victim and every witness can see exactly who is doing it and that it is being chosen.",
+     "cannot": "⛔ It never kills and never wounds — a Grey Hand that has done its worst leaves someone unable to stand, not dying. ⚠️ THE WEAKNESS LASTS UNTIL IT IS HEALED OR RESTORED BY A CRAFT THAT MENDS. Nothing it does is deniable: the victim and every witness can see exactly who is doing it and that it is being chosen.",
      "functions": [
       "hinder"
      ],
@@ -1005,8 +1006,8 @@
     }
    ],
    "intensity": {
-    "conserve": "a light touch — half the weakening, and it fades on its own",
-    "surge": "double it; ATTENDING COSTS YOU CONTINUOUSLY"
+    "conserve": "a light touch — half the weakening",
+    "surge": "double it"
    },
    "bounds": [
     {
@@ -1014,17 +1015,22 @@
      "class": "soft"
     },
     {
-     "text": "attending costs energy every round you hold it, and the moment you stop paying, the condition returns exactly as it was",
+     "text": "⛔ THE WEAKNESS PERSISTS UNTIL HEALED OR RESTORED. It does not lift when you stop attending and it does not fade with rest",
      "class": "hard"
     },
     {
-     "text": "IT NEVER KILLS AND NEVER WOUNDS — a Grey Hand that has done its worst leaves them alive",
+     "text": "⛔ IT NEVER KILLS AND NEVER WOUNDS — a Grey Hand that has done its worst leaves them alive",
      "class": "hard"
+    },
+    {
+     "text": "⚠️ nothing it does is deniable — the victim and every witness sees who is doing it",
+     "class": "cost"
     }
    ],
    "plainly": "A fight/social action that weakens or restricts a target. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours. Range is 1. Ranks: rank 2 extends range+duration; rank 3 extends targets. Limit: attending Costs You Continuously — let go and it comes back.",
    "_nameWas": "The Grey Hand",
-   "_idWas": "the_grey_hand"
+   "_idWas": "the_grey_hand",
+   "_persistence": "⛔ SNG-494. Erik: 'The Grey Hand needs to be updated — IT DOESN'T COME BACK IMMEDIATELY UPON STOPPING. It would have to be HEALED/RESTORED.'\n⚠️ THE OLD VERSION CHARGED ENERGY EVERY ROUND TO MAINTAIN IT and returned the victim to full the moment you stopped — which made it a concentration tax rather than an effect, and made r2's 'hold it there' the same as r1. ⛔ NOW THE WEAKNESS PERSISTS UNTIL A MENDING CRAFT LIFTS IT, and r2 buys range and persistence instead of an upkeep bill."
   },
   {
    "schemaVersion": 1,

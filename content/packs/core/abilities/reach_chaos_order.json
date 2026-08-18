@@ -1081,7 +1081,7 @@
      "rank": 1,
      "name": "Correct Assessment",
      "grants": "Diagnose exactly what's wrong with a broken body, object, or system and apply the precise intervention — no guessing, no waste.",
-     "cannot": "Anything rank 2 adds — restore not just function but the underlying conditions for continued function — the body that heals cleanly, the mechanism that runs without further adjustment; requires knowing what the INTENDED STATE was.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "mend"
      ],
@@ -1091,13 +1091,14 @@
       "reveal",
       "mend"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — restore not just function but the underlying conditions for continued function — the body that heals cleanly, the mechanism that runs without further adjustment; requires knowing what the INTENDED STATE was."
     },
     {
      "rank": 2,
      "name": "Structural Repair",
      "grants": "Restore not just function but the underlying conditions for continued function — the body that heals cleanly, the mechanism that runs without further adjustment.",
-     "cannot": "Anything rank 3 adds — return a thing fully to its intended state — a person to health, a plan to viability, a structure to integrity — through methodical, exhaustive work; requires knowing what the INTENDED STATE was.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "mend",
       "heal",
@@ -1113,13 +1114,14 @@
      ],
      "gainAxes": [
       "range"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — return a thing fully to its intended state — a person to health, a plan to viability, a structure to integrity — through methodical, exhaustive work; requires knowing what the INTENDED STATE was."
     },
     {
      "rank": 3,
      "name": "Full Restoration",
      "grants": "Return a thing fully to its intended state — a person to health, a plan to viability, a structure to integrity — through methodical, exhaustive work.",
-     "cannot": "Nothing further; this is the craft's ceiling; requires knowing what the INTENDED STATE was.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "mend",
       "heal",
@@ -1136,7 +1138,8 @@
      "gainAxes": [
       "targets",
       "quality"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; requires knowing what the INTENDED STATE was."
     }
    ],
    "nativeOrCombination": "native",
@@ -1236,7 +1239,7 @@
      "rank": 1,
      "name": "Protocol Path",
      "grants": "Find the lawful, structured way through a guarded or ordered space — the correct credentials, the right corridor, the official route that no one thinks to deny.",
-     "cannot": "Anything rank 2 adds — navigate any sufficiently structured system — a city's hierarchy, a fortress's regulations, a court's protocols — using its own rules to go where you need to go; requires a system that HAS rules.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "open"
      ],
@@ -1246,13 +1249,14 @@
       "reveal",
       "open"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — navigate any sufficiently structured system — a city's hierarchy, a fortress's regulations, a court's protocols — using its own rules to go where you need to go; requires a system that HAS rules."
     },
     {
      "rank": 2,
      "name": "Seam-Walker",
      "grants": "Navigate any sufficiently structured system — a city's hierarchy, a fortress's regulations, a court's protocols — using its own rules to go where you need to go.",
-     "cannot": "Anything rank 3 adds — move through a system as if you designed it — through the parts only insiders know, at the speed the structure permits at its best, without a door that won't open for you; requires a system that HAS rules.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "open",
       "travel",
@@ -1266,13 +1270,14 @@
       "travel",
       "move"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — move through a system as if you designed it — through the parts only insiders know, at the speed the structure permits at its best, without a door that won't open for you; requires a system that HAS rules."
     },
     {
      "rank": 3,
      "name": "Inside Line",
      "grants": "Move through a system as if you designed it — through the parts only insiders know, at the speed the structure permits at its best, without a door that won't open for you.",
-     "cannot": "Nothing further; this is the craft's ceiling; requires a system that HAS rules; and it still costs what it costs: the route is LAWFUL, which means it is also LOGGED.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "open",
       "travel",
@@ -1287,7 +1292,8 @@
       "move"
      ],
      "_nameWas": "The Inside Line",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; requires a system that HAS rules; and it still costs what it costs: the route is LAWFUL, which means it is also LOGGED."
     }
    ],
    "nativeOrCombination": "native",
@@ -1383,19 +1389,20 @@
      "rank": 1,
      "name": "Kept Running",
      "grants": "Keep an ordered structure — a camp's discipline, a route's safety, an agreement's terms — functioning under the pressure that would normally cause it to drift or collapse.",
-     "cannot": "Anything rank 2 adds — maintain order in a decaying situation across days — a failing supply line, a fragmenting group, a plan that keeps getting attacked — through constant, precise intervention; requires CONTINUOUS ATTENTION.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — maintain order in a decaying situation across days — a failing supply line, a fragmenting group, a plan that keeps getting attacked — through constant, precise intervention; requires CONTINUOUS ATTENTION."
     },
     {
      "rank": 2,
      "name": "Against Entropy",
      "grants": "Maintain order in a decaying situation across days — a failing supply line, a fragmenting group, a plan that keeps getting attacked — through constant, precise intervention.",
-     "cannot": "Anything rank 3 adds — a structure you maintain simply does not collapse while you attend to it — the siege holds, the treaty stands, the organization functions — for as long as the task requires; requires CONTINUOUS ATTENTION.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain",
       "bind"
@@ -1406,13 +1413,14 @@
       "range",
       "duration",
       "scope"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — a structure you maintain simply does not collapse while you attend to it — the siege holds, the treaty stands, the organization functions — for as long as the task requires; requires CONTINUOUS ATTENTION."
     },
     {
      "rank": 3,
      "name": "Standing Order",
      "grants": "A structure you maintain simply does not collapse while you attend to it — the siege holds, the treaty stands, the organization functions — for as long as the task requires.",
-     "cannot": "Nothing further; this is the craft's ceiling; requires CONTINUOUS ATTENTION; and it still costs what it costs: attending costs you everything else you might have done.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain",
       "bind"
@@ -1422,7 +1430,8 @@
      "_nameWas": "The Standing Order",
      "gainAxes": [
       "conditions"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; requires CONTINUOUS ATTENTION; and it still costs what it costs: attending costs you everything else you might have done."
     }
    ],
    "nativeOrCombination": "native",
@@ -1514,20 +1523,21 @@
      "rank": 1,
      "name": "Unpredictable",
      "grants": "Move so erratically that aimed attacks lose you — not blocking, not armoring, just not being where they land.",
-     "cannot": "Anything rank 2 adds — make yourself so hard to anticipate that organized attempts to harm you dissolve — they are always aiming at where you were a moment ago; it works against AIMED and ORGANIZED harm.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move",
       "resist"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — make yourself so hard to anticipate that organized attempts to harm you dissolve — they are always aiming at where you were a moment ago; it works against AIMED and ORGANIZED harm."
     },
     {
      "rank": 2,
      "name": "Moving Gap",
      "grants": "Make yourself so hard to anticipate that organized attempts to harm you dissolve — they are always aiming at where you were a moment ago.",
-     "cannot": "Anything rank 3 adds — the disorder around you actively deflects organized harm — not just you moving unpredictably, but the situation itself refusing to cooperate with anyone trying to fix you in place; it works against AIMED and ORGANIZED harm.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move",
       "resist"
@@ -1535,13 +1545,14 @@
      "gains": "deepen",
      "harmRung": "none",
      "_nameWas": "The Moving Gap",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — the disorder around you actively deflects organized harm — not just you moving unpredictably, but the situation itself refusing to cooperate with anyone trying to fix you in place; it works against AIMED and ORGANIZED harm."
     },
     {
      "rank": 3,
      "name": "Chaos Armor",
      "grants": "The disorder around you actively deflects organized harm — not just you moving unpredictably, but the situation itself refusing to cooperate with anyone trying to fix you in place.",
-     "cannot": "Nothing further; this is the craft's ceiling; it works against AIMED and ORGANIZED harm.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move",
       "resist",
@@ -1549,7 +1560,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it works against AIMED and ORGANIZED harm."
     }
    ],
    "nativeOrCombination": "native",
@@ -1643,7 +1655,7 @@
      "rank": 1,
      "name": "False Signal",
      "grants": "Create a distraction or misdirection convincing enough to buy one clean move — for you, or for a friend.",
-     "cannot": "Anything rank 2 adds — plant a false trail so credible that pursuit follows it seriously, or misdirect a group's full attention at exactly the moment it matters — and a group looking the wrong way is weakened for those moments: slow to turn, slow to answer, and behind whatever happens next; it buys a MOVE, not a victory.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "deceive",
       "move"
@@ -1651,13 +1663,14 @@
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The False Signal",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — plant a false trail so credible that pursuit follows it seriously, or misdirect a group's full attention at exactly the moment it matters — and a group looking the wrong way is weakened for those moments: slow to turn, slow to answer, and behind whatever happens next; it buys a MOVE, not a victory."
     },
     {
      "rank": 2,
      "name": "Wrong Trail",
      "grants": "Plant a false trail so credible that pursuit follows it seriously, or misdirect a group's full attention at exactly the moment it matters — and a group looking the wrong way is weakened for those moments: slow to turn, slow to answer, and behind whatever happens next.",
-     "cannot": "Anything rank 3 adds — introduce a misdirection so fundamental — the wrong door, the wrong figure, the wrong danger — that the opposition organizes around something that isn't there and can't recover before it's over; it buys a MOVE, not a victory.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "deceive",
       "move",
@@ -1669,13 +1682,14 @@
      "gainAxes": [
       "scope",
       "quality"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — introduce a misdirection so fundamental — the wrong door, the wrong figure, the wrong danger — that the opposition organizes around something that isn't there and can't recover before it's over; it buys a MOVE, not a victory."
     },
     {
      "rank": 3,
      "name": "Wrong Threat",
      "grants": "Introduce a misdirection so fundamental — the wrong door, the wrong figure, the wrong danger — that the opposition organizes around something that isn't there and can't recover before it's over.",
-     "cannot": "Nothing further; this is the craft's ceiling; it buys a MOVE, not a victory; and it still costs what it costs: when it breaks, they know they were played.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "deceive",
       "move",
@@ -1684,7 +1698,8 @@
      "gains": "deepen",
      "harmRung": "none",
      "_nameWas": "The Wrong Threat",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it buys a MOVE, not a victory; and it still costs what it costs: when it breaks, they know they were played."
     }
    ],
    "nativeOrCombination": "native",
@@ -1778,19 +1793,20 @@
      "rank": 1,
      "name": "Flexible Need",
      "grants": "Sustain yourself in chaotic, resource-scarce conditions — find food, shelter, tools, and rest in circumstances where others have run dry.",
-     "cannot": "Anything rank 2 adds — sustain a group in chaotic conditions through constant creative improvisation — never enough of anything, always just enough; it finds ENOUGH, never PLENTY.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — sustain a group in chaotic conditions through constant creative improvisation — never enough of anything, always just enough; it finds ENOUGH, never PLENTY."
     },
     {
      "rank": 2,
      "name": "Group Scrounging",
      "grants": "Sustain a group in chaotic conditions through constant creative improvisation — never enough of anything, always just enough.",
-     "cannot": "Anything rank 3 adds — the disorder that strips others bare is your supply line; it finds ENOUGH, never PLENTY.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain"
      ],
@@ -1798,13 +1814,14 @@
      "harmRung": "none",
      "gainAxes": [
       "scope"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — the disorder that strips others bare is your supply line; it finds ENOUGH, never PLENTY."
     },
     {
      "rank": 3,
      "name": "Chaos Supply",
      "grants": "The disorder that strips others bare is your supply line. In total disorder, you and yours have what you need — because you have learned to need what the chaos has.",
-     "cannot": "Nothing further; this is the craft's ceiling; it finds ENOUGH, never PLENTY.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain",
       "restore"
@@ -1813,7 +1830,8 @@
      "harmRung": "none",
      "gainAxes": [
       "targets"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it finds ENOUGH, never PLENTY."
     }
    ],
    "nativeOrCombination": "native",

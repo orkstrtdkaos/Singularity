@@ -141,3 +141,16 @@ three attacks and resolves as a fourth** (Body/somatic) · **they look at you an
 **36 → 24 skills.** PERCEIVE 519 → 111 corpus-wide; CONTROL 372 → 251. SOCIAL 0 → 9. Every function
 present. Revert logs: `revert_SNG-450` · `revert_SNG-453` · `revert_SNG-454` · `revert_SNG-455` ·
 `revert_SNG-456` · `revert_SNG-457` · `revert_SNG-460`.
+
+
+### ⛔ CARRY: 210 unauthored bounds
+
+**219 ranks across 74 abilities carried a `cannot` that pointed at the next rank instead of stating a
+limit.** Nine were fixed in Body; **210 now read `⚠️ BOUND NOT AUTHORED` and must be written as each
+tradition is audited.**
+
+**Worst-affected files:** `reach_space_time` 34 · `reach_falsehood_truth` 32 · `reach_demonic_angelic` 30
+· `reach_dark_light` 27 · `reach_destruction_creation` 27.
+
+⚠️ **Deliberately flagged rather than bulk-written** — 210 bounds I have not thought about would read as
+considered and not be.

@@ -514,8 +514,13 @@
      ],
      "_nameWas": "The Scattering",
      "gainAxes": [
+      "targets",
+      "damage"
+     ],
+     "_gainAxesWas": [
       "scope"
-     ]
+     ],
+     "_gainNote": "⚠️ Throwing into a group is targets. Scope was doing targets' job."
     }
    ],
    "functions": [
@@ -706,5 +711,6 @@
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
- "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
+ "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas."
 }

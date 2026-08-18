@@ -2001,3 +2001,29 @@ arrives worse" is not a rule. It cannot be adjudicated. It is me admiring the co
 
 **Enforcement:** a `cannot` should read like a rule a GM applies without interpretation. **If it needs
 tone to land, it is not a bound.**
+
+
+### 32.14 ⛔ A `cannot` THAT POINTS AT THE NEXT RANK IS NOT A BOUND
+
+**Found 2026-08-16 while closing Body: 219 ranks across 74 abilities carried a `cannot` reading
+*"Anything rank 2 adds — [rank 2's own text]"* or *"Nothing further; this is the craft's ceiling."***
+
+⚠️ **That is a statement about the TREE, not about the CRAFT.** It tells a GM nothing they can apply.
+⛔ **Every one of those ranks is unbounded in play** — the field that exists to say what the craft cannot
+do says only that rank 3 exists.
+
+**A bound answers one of four questions:**
+
+| | example |
+|---|---|
+| **what must be present** | *"Something must be there. An empty road offers nothing."* |
+| **what is out of reach** | *"Built structures only; grown or precursor-sealed ground gives you nothing."* |
+| **how many, how often** | *"One passage per structure."* · *"Once per contest."* |
+| **what it does not touch** | *"It answers physical holds only — a binding on your will is untouched."* |
+
+⛔ **AND IT MUST BE ADJUDICABLE WITHOUT INTERPRETATION** (§32.13). If it needs tone to land, it is not a
+bound.
+
+**Flagged, not silently written:** the 210 remaining pointer-bounds now read `⚠️ BOUND NOT AUTHORED` so
+they surface in the per-tradition audit rather than reading as though someone had considered them. ⚠️
+**Writing 210 bounds I have not thought about would be the same failure one layer down.**

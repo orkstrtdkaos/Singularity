@@ -2027,3 +2027,74 @@ bound.
 **Flagged, not silently written:** the 210 remaining pointer-bounds now read `⚠️ BOUND NOT AUTHORED` so
 they surface in the per-tradition audit rather than reading as though someone had considered them. ⚠️
 **Writing 210 bounds I have not thought about would be the same failure one layer down.**
+
+---
+
+## 35. MIND — the completed tradition (2026-08-16)
+
+**25 skills · 3 schools · SNG-450 → SNG-478.** ⚠️ `tradition` holds the live pole id; `traditionV2` holds `Mind` until the taxonomy migration.
+
+### Psionics — 9
+
+*⛔ THE MIND REACHING ANOTHER MIND DIRECTLY — striking it, holding it, joining it, or changing what it perceives. No vector, no contact, nothing to interpose.*
+
+| skill | L | sect | dice | e | shape | tags | r1 | r2 | r3 |
+|---|---|---|---|---|---|---|---|---|---|
+| **Ignore Me** | 1 | cog | — | 3 | conceal | obscure | **Nothing Worth Looking At** +conceal | **And Whoever Is With Me** — · *scope, targets* | **Even Spoken To** +deceive · *duration, conditions* |
+| **Quiet the Room** | 1 | cog | — | 3 | guard |  | **End the Condition** +soothe | **Stop the Rout** — · *scope, targets* | **Back From It** +restore · *quality, conditions* |
+| **Sustained Regard** | 1 | cog | 1d6 | 6 | strike |  | **Whole of It** +strike, +hinder | **Held Regard** +bind · *duration, autonomy* | **Undivided** — · *duration, conditions* |
+| **Force the Move** | 2 | cog | — | 4 | hobble |  | **Make Them Answer** +provoke | **Break the Line** — · *targets, scope* | **On the Record** +bind · *duration, autonomy* |
+| **My Reality** | 3 | fig | — | 6 | conceal | obscure | **Ordinary Corner** +conceal, +deceive | **Ordinary Room** — · *duration, scope* | **My Reality** +make, +strike · *duration, targets, quality, autonomy, conditions* |
+| **Psychic Lance** | 3 | cog | 3d6 | 7 | strike |  | **The Spike** +strike | **Two at Once** — · *targets, damage* | **Nothing Held** +hinder · *conditions* |
+| **Mind Meld** | 4 | cog | — | 8 | bolster | sense | **Open Door** +reveal, +empower | **Long Room** +sustain · *range, scope* | **One Mind** — · *quality, conditions* |
+| **Convergent Strike** | 5 | cog | 5d6 | 13 | damage | sense | **Convergent Strike** +strike, +foresee | — | — |
+| **Names of Power** | 5 | cog | — | 13 | hobble |  | **Name They Are Called** +bind, +persuade | **Name They Are Known By** +command · *conditions* | **Name They Call Themselves** +hinder · *duration, autonomy, targets* |
+
+### Deduction — 10
+
+*⛔ THOUGHT APPLIED TO A PROBLEM AND CONVERTED INTO ADVANTAGE — a fight read, a route solved, a fault named, an argument closed, a price known.*
+
+| skill | L | sect | dice | e | shape | tags | r1 | r2 | r3 |
+|---|---|---|---|---|---|---|---|---|---|
+| **Case Closed** | 1 | syl | — | 4 | setup |  | **Matter Settled** +persuade | **Inescapable** +bind · *targets, conditions* | **Only Consistent Act** +empower · *damage, autonomy, duration* |
+| **Contradiction** | 1 | syl | — | 5 | hinder |  | **Named Flaw** +hinder, +break | **Reductio** +bind · *targets, conditions* | **Collapse** — · *duration, scope* |
+| **Known Price** | 1 | syl | — | 3 | setup |  | **Open at the Close** +bargain | **Any Coin Is Coin** +persuade · *quality, scope* | **Terms Nobody Else Is Offered** — · *quality, autonomy* |
+| **Unbroken Thread** | 1 | syl | — | 1 | sustain |  | **Held Through** +sustain | **Across Days** +resist · *range, duration* | **Last Thing to Fail** — · *duration* |
+| **Deduced Strike** | 2 | cog | 2d6 | 4 | strike | sense | **Read the Fight** +strike, +reveal | **Called Effect** +hinder · *quality, conditions* | **Strike in the Reading** — · *tempo, conditions* |
+| **Physician's Tome** | 2 | syl | 2d4 | 2 | healing |  | **Diagnosis and First Care** +heal | **Full Sequence** +restore, +mend · *scope, quality* | **Root and Branch** — · *quality, targets* |
+| **Solved Route** | 2 | cog | — | 1 | reposition |  | **Route** +move | **Moving Space** +travel · *conditions, duration* | **Designed Scene** — · *targets, conditions* |
+| **Memory-Palace** | 3 | cog | — | 6 | bolster | sense | **Cross-Reference** +empower, +reveal | **The Whole House** — · *quality* | **The Borrowed Room** +track · *targets, conditions* |
+| **Working Model** | 3 | cog | — | 2 | construct |  | **Single Thing** +make | **Whole Working** +mend · *scope, targets* | **Modelled Country** — · *targets, quality, autonomy* |
+| **Unmoving Mind** | 4 | cog | — | 11 | guard |  | **Still Mind** +resist | **Stillness While Moving** — · *conditions* | **Nothing Lands** — · *conditions, quality* |
+
+### Figurework — 6
+
+*⛔ ABSTRACTION MADE PHYSICALLY REAL — a line that cuts, a threshold that holds, a figure sent to act, a structure that runs without you.*
+
+| skill | L | sect | dice | e | shape | tags | r1 | r2 | r3 |
+|---|---|---|---|---|---|---|---|---|---|
+| **Cutting Figure** | 1 | fig | 1d6 | 6 | strike |  | **Drawn Line** +strike, +break | **Compound Figure** — · *scope* | **Cut Thought** +hinder · *damage, conditions* |
+| **Named Exclusion** | 1 | fig | — | 4 | ward |  | **Set Mark** +ward, +make | **Mark That Keeps** +bind · *scope* | **Governed Ground** +command · *scope* |
+| **Formcraft** | 2 | fig | — | 6 | construct |  | **Copied Form** +transform, +reveal | **Form from Report** +make · *scope, quality* | **Form Out of Need** — · *scope, conditions, autonomy* |
+| **Built System** | 3 | syl | — | 2 | construct | downtime | **Working Rule** +make | **Self-Regulating** +sustain · *autonomy, duration* | **Lasting Structure** +bind · *autonomy* |
+| **Walking Figure** | 3 | fig | — | 7 | ward |  | **Sent Figure** +summon, +bind | **Figure That Stays** +ward · *duration* | **Figure That Judges** — · *autonomy* |
+| **Borrowed Form** | 4 | fig | — | 12 | reposition |  | **Borrowed Form** +travel, +transform | **Long Form** — · *range, duration, targets* | **Shared Form** — · *duration, scope, targets* |
+
+### Allocation
+
+| function | rows | | gain axis | rows |
+|---|---|---|---|---|
+| CONTROL | 16 | | conditions | 18 |
+| HARM | 8 | | duration | 16 |
+| MAKE | 8 | | targets | 15 |
+| SOCIAL | 6 | | scope | 15 |
+| BOLSTER | 6 | | quality | 12 |
+| PERCEIVE | 6 | | autonomy | 11 |
+| RESTORE | 5 | | damage | 3 |
+| DEFEND | 4 | | range | 3 |
+| CONCEAL | 4 | | tempo | 1 |
+| MOVE | 3 | |  |  |
+
+⛔ **All four social verbs reached** — persuade, bargain, provoke, soothe. **4 sense crafts, 2 obscure.** Every function present, all ranks ≤3, full schema, naming SOP applied.
+
+⚠️ **Held for the taxonomy migration:** the `bind` split (9 of 17 CONTROL rows doing four unrelated jobs) and the `traditionV2` swap.

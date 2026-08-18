@@ -97,8 +97,13 @@
      "harmRung": "none",
      "gainAxes": [
       "targets",
+      "conditions"
+     ],
+     "_gainAxesWas": [
+      "targets",
       "scope"
-     ]
+     ],
+     "_gainNote": "⚠️ Different foes taking different false reads is targets plus a condition, not area."
     }
    ],
    "_authored": "⛔ SNG-482. Body had NO OBSCURE — the sense slot belonged to Dark and Mind. Erik's own example: 'a stance that reads as three attacks and resolves as a fourth.'",
@@ -176,9 +181,14 @@
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [
+      "targets",
+      "conditions"
+     ],
+     "_gainAxesWas": [
       "scope",
       "quality"
-     ]
+     ],
+     "_gainNote": "⛔ Work as currency is a new CONDITION you can trade under, and it opens counterparties who had no coin you wanted."
     },
     {
      "rank": 3,
@@ -192,9 +202,14 @@
      "gains": "deepen",
      "harmRung": "none",
      "gainAxes": [
+      "duration",
+      "autonomy"
+     ],
+     "_gainAxesWas": [
       "scope",
       "duration"
-     ]
+     ],
+     "_gainNote": "⛔ Credit extended in advance runs without you present — autonomy, and it persists."
     }
    ],
    "_authored": "⛔ SNG-482. Erik: every tradition bargains because there is an economy. BODY'S LEVER IS WHAT ITS LABOUR IS WORTH — and r2 makes work itself a currency, which is the mason's answer to Known Price r2.",
@@ -292,11 +307,17 @@
      "harmRung": "none",
      "gainAxes": [
       "targets",
+      "conditions"
+     ],
+     "_gainAxesWas": [
+      "targets",
       "scope"
-     ]
+     ],
+     "_gainNote": "⚠️ Everyone within arm's reach is a target count bounded by a condition."
     }
    ],
    "_authored": "⛔ SNG-482. Body had no `soothe`. ⚠️ DISTINCT FROM MIND'S QUIET THE ROOM: that works at range on a room, this works by CONTACT on people you can reach, and it does not touch grief."
   }
- ]
+ ],
+ "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas."
 }

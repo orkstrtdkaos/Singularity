@@ -1983,3 +1983,21 @@ makes a clean effect read as a negotiation with the reader.**
 field is for. ⛔ **Not in `grants`, not in `cannot`, not in `description`.**
 
 **Test:** strike the clause. **If the mechanic is unchanged, it was rationalisation.**
+
+
+### 32.13 ⛔ THE BOUND STATES THE LIMIT. NOTHING ELSE.
+
+**I wrote §32.12 and broke it in the next commit.** Erik, twice: *"Why do you keep doing this. Stop doing
+this."*
+
+⚠️ **The specific tic:** a `cannot` that states a real mechanical limit, then adds a clause about how the
+limit FEELS. *"Everything deferred arrives at once when you stop, **and it arrives worse**."* ⛔ **"And it
+arrives worse" is not a rule. It cannot be adjudicated. It is me admiring the cost I invented.**
+
+**Correct form:** *"Damage ignored is applied when it ends."*
+
+⛔ **AND THE SECOND HALF OF THE TIC IS WORSE: quoting the clause back approvingly when reporting the work.**
+⚠️ **Report what the skill does. Do not point at your own prose.**
+
+**Enforcement:** a `cannot` should read like a rule a GM applies without interpretation. **If it needs
+tone to land, it is not a bound.**

@@ -134,23 +134,31 @@
      "sells": "Burial, mourning, last accounts, a true reckoning of what is failing.",
      "_note": "⚠️ THE LEAST FRIGHTENING PLACE IN THE WORLD, and it is the near bank because it is the one that faces the roads."
     },
-    "FAR BANK": {
-     "name": "⛔ THE OTHER SIDE — reached by one bridge, and not at night",
-     "palette": "⛔ PURPLE AND DEEP GREEN, gold thread, bone worked into regalia rather than buried. Lamplit, loud, and coloured in a way nothing else in the Palelands is.",
-     "who": "⛔ THE GRAVE-CALLERS, the ritualists, the ones who take the tradition's central claim seriously enough to act on it, and the people who pay them.",
-     "ethic": "⛔ IF SOMETHING PERSISTS AFTER AN ENDING, IT CAN BE ADDRESSED — AND THEY DO ADDRESS IT. Not furtively and not in cellars: in procession, in season, with music. ⚠️ THE GREY BANK FINDS THIS TASTELESS. THE FAR BANK FINDS THE GREY BANK COWARDLY. Both are correct.",
-     "sells": "Set labour by the crew. Answers from the recently dead. Attendance at a death that is going to be difficult. ⛔ AND, RARELY AND EXPENSIVELY, A WALK BACK — Calling Back is not a secret here, it is a price.",
-     "celebrations": "⚠️ RITUALS AND FESTIVALS, and they are genuinely celebrations rather than solemnities: the night the names are sung, the setting of the season's crews, the procession where the year's dead are carried across the bridge and BACK. ⛔ THE FAR BANK IS THE ONLY PLACE IN THE WORLD WHERE DEATH IS A PARTY, and visitors find it more disturbing than the graves.",
-     "danger": "⛔ POWER, AND IT IS NOT PRETENDING OTHERWISE. Things are set here that should be asked permission of. Things are asked here that answer. ⚠️ People go across the bridge and come back changed, or come back owing, or do not come back — and the far bank does not regard any of those outcomes as a failure of the service."
-    },
-    "theRiver": "⛔ ONE BRIDGE, AND THE SPLIT IS AN ARGUMENT, NOT A ZONING DECISION. Both banks agree that something persists after an ending. ⚠️ THE GREY BANK THINKS THE RIGHT RESPONSE IS TO TEND IT AND LET IT GO. THE FAR BANK THINKS THE RIGHT RESPONSE IS TO TALK TO IT.\n⛔ THE TOWN IS THE TRADITION'S OWN DISAGREEMENT MADE INTO GEOGRAPHY — which is what a foothill is for, and it means a player can literally choose a side by choosing a bank.",
+    "theRiver": "⛔ ONE BRIDGE. BOTH BANKS AGREE SOMETHING PERSISTS AFTER AN ENDING — they differ on what is owed to it. THE GREY BANK TENDS IT AND LETS IT GO. THE HIGH BANK TALKS TO IT.\n⚠️ AND IT IS MOSTLY NOT A QUARREL. Some on each side hold it as a real disagreement and will say so, but MOST PEOPLE IN GREYHEARTH SIMPLY HAVE A WAY THEY PREFER TO WORK AND KNOW THERE IS A TIME AND A PLACE FOR BOTH. ⛔ A GREY-BANK RECKONER WILL SEND YOU ACROSS THE BRIDGE WITHOUT COMMENT WHEN WHAT YOU NEED IS UP THERE, and a High Bank caller will tell you to go back down when a burial is all you actually want.\n⚠️ The town is the tradition's two answers made into geography, and most of its people use both.",
     "_playHooks": [
      "⚠️ A grey-bank funeral and a far-bank procession for the same body, on the same day.",
      "⛔ The bridge is the only crossing and both banks control an end of it.",
      "⚠️ Someone hires the far bank for something the grey bank would have done cheaper and worse.",
      "⛔ The year's dead are carried across and BACK — and one year, something is carried back that was not carried over."
-    ]
-   }
+    ],
+    "HIGH BANK": {
+     "name": "⛔ THE HIGH BANK — where the town keeps its regalia and its nerve",
+     "palette": "⛔ PURPLE AND DEEP GREEN, gold thread, bone worked into regalia rather than buried. Lamplit, loud, and coloured in a way nothing else in the Palelands is.",
+     "who": "⛔ THE GRAVE-CALLERS, the ritualists, the ones who take the tradition's central claim seriously enough to act on it, and the people who pay them.",
+     "ethic": "⛔ IF SOMETHING PERSISTS AFTER AN ENDING, IT CAN BE ADDRESSED — AND THE HIGH BANK ADDRESSES IT. Not furtively and not in cellars: in procession, in season, with music.",
+     "sells": "Set labour by the crew. Answers from the recently dead. Attendance at a death that is going to be difficult. ⛔ AND, RARELY AND EXPENSIVELY, A WALK BACK — Calling Back is not a secret here, it is a price.",
+     "celebrations": "⚠️ RITUALS AND FESTIVALS, and they are celebrations rather than solemnities: the night the names are sung, the setting of the season's crews, the procession where the year's dead are carried across the bridge and BACK.\n⚠️ HOW A VISITOR TAKES IT VARIES AND SHOULD BE PLAYED THAT WAY. A Threnodist finds it correct. A Blazeborn finds it obscene. A Lattice factor finds it well-run. ⛔ AND SOME FIND IT RESTRAINED — the Wild Half does louder, and the Abyssals do it with worse manners.",
+     "danger": "⛔ POWER, AND IT IS NOT PRETENDING OTHERWISE. Things are set here that should be asked permission of. Things are asked here that answer. ⚠️ People cross the bridge and come back changed, or come back owing, or do not come back — and the High Bank does not regard any of those as a failure of the service.",
+     "_name": "⚠️ ERIK: 'not the FAR BANK — something more MAJESTIC AND DANGEROUS SOUNDING.' ⛔ THE HIGH BANK: it is the upstream side, it stands higher, and 'high' carries both the ceremony and the risk — a high road, a high price, high-handed."
+    },
+    "_designNote": "⛔ CORRECTED TWICE ON THIS ENTRY. (1) 'The only place in the world where death is a party' — NOT THE ONLY PLACE, and I had no basis for the claim. (2) 'Visitors find it more disturbing than the graves' — VISITORS COME IN MANY TYPES and a blanket reaction is worldbuilding by assertion. ⚠️ Erik: 'don't generalize.' (3) 'The split is an argument' — SOME SEE IT THAT WAY; most just have a preferred way of operating."
+   },
+   "_playHooks": [
+    "⚠️ A grey-bank funeral and a High Bank procession for the same body, on the same day — arranged by the same family without friction.",
+    "⛔ The bridge is the only crossing and each bank keeps an end of it.",
+    "⚠️ Someone hires the High Bank for something the grey bank would have done cheaper and worse — or slower and better.",
+    "⛔ The year's dead are carried across and BACK — and one year, something is carried back that was not carried over."
+   ]
   }
  },
  "folk": {

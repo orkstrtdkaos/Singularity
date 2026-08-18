@@ -15,8 +15,8 @@
    },
    "attribute": "mental",
    "narrationHints": "They let the other side name a figure, and then they name one, and the second figure is the one everybody uses. No haggling happens. It is faintly unnerving to watch.",
-   "description": "Work out what the other side will actually accept before they say it — and open there, so the deal closes at your number instead of somewhere between.",
-   "notFor": "Someone who does not want anything; a party you cannot observe or research; making them accept a price they cannot afford.",
+   "description": "Work out what the other side will actually accept — open there, pay in coin they do not use, and at its height buy at a price nobody else is offered.",
+   "notFor": "Someone who does not want anything; a party you cannot observe or research; creating value that is not there.",
    "tradition": "syllogist",
    "traditionV2": "Mind",
    "nativeOrCombination": "native",
@@ -48,11 +48,15 @@
      "class": "hard"
     },
     {
+     "text": "⛔ r3 is ONCE PER COUNTERPARTY PER SEASON",
+     "class": "hard"
+    },
+    {
      "text": "⚠️ someone who notices you never haggle stops negotiating with you in person",
      "class": "cost"
     }
    ],
-   "plainly": "A social/investigate action that opens a negotiation at the closing figure. Its strength is rated 5 out of 10. Ranks: rank 2 finds what they would take instead, rank 3 finds the walk-away.",
+   "plainly": "A social/investigate action that opens a negotiation at the closing figure. Its strength is rated 5 out of 10. Ranks: rank 2 spends any tradition's currency at full value, rank 3 buys at half or two-for-one.",
    "functions": [
     "bargain"
    ],
@@ -65,7 +69,7 @@
     {
      "rank": 1,
      "name": "Open at the Close",
-     "grants": "⛔ NAME A FIGURE THEY WILL ACCEPT, FIRST. The deal closes at your number rather than halfway between two — no haggling round, no anchoring war, and you never overpay or insult them by lowballing.",
+     "grants": "⛔ NAME A FIGURE THEY WILL ACCEPT, FIRST. The deal closes at your number rather than halfway between two — no haggling round, no anchoring war, and you neither overpay nor insult them by lowballing.",
      "cannot": "They must want something and you must have had something to read. It gives you their acceptable price, not a good one.",
      "functions": [
       "bargain"
@@ -76,25 +80,25 @@
     },
     {
      "rank": 2,
-     "name": "What They Would Take Instead",
-     "grants": "⚠️ ADDS SUBSTITUTION. Find the thing they would accept IN PLACE of what they asked for — passage instead of coin, a name instead of a favour, silence instead of either. ⛔ DEALS THAT WERE STUCK BECAUSE NEITHER SIDE HAD WHAT THE OTHER NAMED NOW CLOSE.",
-     "cannot": "The substitute must be something you can actually provide, and they must not already have it.",
+     "name": "Any Coin Is Coin",
+     "grants": "⛔ SPEND ONE TRADITION'S CURRENCY IN ANOTHER'S ECONOMY AT FULL VALUE. A Wright's made goods, a Marcher's owed service, an Ashwarden's tended ending, a Lattice writ of standing, an Hourkeeper's banked days, a Rootkin's living stock — ⚠️ NORMALLY EACH LOSES MOST OF ITS WORTH OUTSIDE THE PEOPLE WHO MINTED IT. You make them fungible, because you can show this seller exactly why that thing is worth what it is to THEM.",
+     "cannot": "⚠️ You must actually hold the thing, and the seller must be able to use or resell it. It converts value, it does not create it.",
      "functions": [
       "bargain",
       "persuade"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [
-      "targets",
-      "quality"
+      "quality",
+      "scope"
      ]
     },
     {
      "rank": 3,
-     "name": "Where They Walk",
-     "grants": "⛔ ADDS THE WALK-AWAY. Know the point past which they leave the table — and know the one thing that would make them stay past it. ⚠️ You can push to the edge deliberately, or hand that edge to someone else to use.",
-     "cannot": "⛔ Knowing the walk-away does not move it. Push past without the one thing, and they go, and they remember why.",
+     "name": "Terms Nobody Else Is Offered",
+     "grants": "⛔ BUY AT HALF, OR TAKE TWO FOR THE PRICE OF ONE. Not a discount — a structure: you find the arrangement in which giving you far more is the seller's best available move, and then you point at it. ⚠️ ONCE PER PARTY PER SEASON, AND THEY DO NOT FEEL CHEATED, WHICH IS WHY IT WORKS TWICE.",
+     "cannot": "⛔ Once per counterparty per season. It must be genuinely their best move — a seller with no alternative to find cannot be shown one.",
      "functions": [
       "bargain",
       "persuade"
@@ -107,7 +111,7 @@
      ]
     }
    ],
-   "_authored": "⛔ SNG-475. `bargain` was zero corpus-wide until SNG-471 retagged nine crafts, and all nine sat in Demonic, Bargainers and Building. ⚠️ ERIK: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'\n⛔ MIND'S LEVER IS KNOWING WHAT THE OTHER SIDE WILL ACCEPT BEFORE THEY SAY IT — which is a different craft from persuading them, and a different one again from the Bargainers' Honest Price, which states a cost rather than predicting acceptance.\n⚠️ ASSESSMENT (§32.11): (1) opens the negotiation at the closing figure. (2) any deal where you have had an hour, a ledger or a reputation to read. (3) common — the game has an economy. (4) without it you haggle and land halfway. (5) r2 substitution, r3 walk-away. (6) the reasoning is flavour; the CLOSING PRICE is the mechanic."
+   "_authored": "⛔ SNG-475, REVISED. Erik: 'r2 is NORMAL BARTERING — we should make it a skill that lets you USE OTHER TRADITION'S MONEY AT FULL VALUE here. And r3 should be used for MASSIVE BENEFIT — like 50% price or 2 FOR 1 kind of deals. That's the only reason someone would take this skill.'\n⚠️ HE IS RIGHT ON BOTH. My r2 was 'find the substitute they would accept', which is what every trader does. My r3 was 'know their walk-away' — INFORMATION, and §32.11 Q4 says information the GM would supply is not a skill.\n⛔ r2 IS NOW AN ECONOMIC MECHANIC: currencies are tradition-specific and lose most of their worth outside the people who minted them. Making them fungible is a real power and it implies a real world. ⛔ r3 IS A PRICE, NOT A FACT — half, or two for one, bounded once per counterparty per season."
   }
  ]
 }

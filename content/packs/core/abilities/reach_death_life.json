@@ -154,8 +154,8 @@
     "still"
    ],
    "narrationHints": "No one asks who they are. Someone moves a chair for them, and the woman who has told the constable nothing tells them everything, because they are the person who will be handling her husband.",
-   "description": "The burying trade, practised. You are the one who handles a death — and that gets you through doors, into rooms, and into confidences nobody offers a stranger.",
-   "notFor": "Anywhere there is no death or dying; authority over anything except the death itself; learning what nobody present knows.",
+   "description": "The burying trade, practised. You are the one who handles a death — which gets you through doors, tells you plainly what ended and how, and leaves nothing behind for anyone to call up.",
+   "notFor": "Anywhere there is no death or dying; preventing an ending; authority over anything except the death itself.",
    "tree": [
     {
      "rank": 1,
@@ -171,42 +171,48 @@
     },
     {
      "rank": 2,
-     "name": "Called For",
-     "grants": "⚠️ ADDS REACH AND REPUTATION. You are sent for rather than admitted — word travels ahead of you, doors are open before you arrive, and people tell you things they have told no one, because telling the person who buries is not the same as telling a stranger.",
-     "cannot": "⚠️ Your standing is regional and it is earned. Somewhere you have handled a death badly, none of this works.",
+     "name": "Attended End",
+     "grants": "⚠️ ADDS THE READING AND THE REACH. Handle a body or a site and know what ended here, how, and how long it has if it is still going — plainly, and it does not soften. ⛔ AND THE SAME HANDLING LEAVES NOTHING TO BE CALLED FROM: a body you have attended cannot be set to work, questioned, or drawn down. You are also sent for rather than admitted, and people tell you things they have told no one.",
+     "cannot": "⚠️ One body or one site per attending, and it takes the time it takes. Standing is regional and earned — somewhere you have handled a death badly, none of this works.",
      "functions": [
       "persuade",
-      "soothe"
+      "reveal",
+      "soothe",
+      "ward"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [
       "range",
-      "targets"
+      "targets",
+      "quality"
      ]
     },
     {
      "rank": 3,
      "name": "Last Authority",
-     "grants": "⛔ ADDS RULING. At a death your judgment carries: what happened, what is owed, what is done with the body, and who may not touch it. Contested only by another Ashwarden.",
+     "grants": "⛔ ADDS RULING AND SCALE. At a death your judgment carries: what happened, what is owed, what is done with the body, who may not touch it — and you can attend a whole field or ward at once, so nothing there can be raised or read by anyone else.",
      "cannot": "⛔ At a death, and about the death. It is not authority over anything else, and a standing law outranks it.",
      "functions": [
       "persuade",
       "soothe",
-      "command"
+      "command",
+      "ward"
      ],
      "gains": "deepen",
      "harmRung": "none",
      "gainAxes": [
-      "quality",
+      "scope",
       "autonomy"
      ]
     }
    ],
    "functions": [
     "persuade",
+    "reveal",
     "soothe",
-    "command"
+    "command",
+    "ward"
    ],
    "challengeTypes": [
     "SOCIAL",
@@ -244,11 +250,15 @@
    },
    "bounds": [
     {
-     "text": "⛔ THERE MUST BE A DEATH OR A DYING. This is a trade, and it needs its occasion",
+     "text": "⛔ THERE MUST BE A DEATH OR A DYING. This is a trade and it needs its occasion",
      "class": "hard"
     },
     {
-     "text": "it gets you IN — it does not tell you what the people there do not know",
+     "text": "⚠️ IT READS WHAT ENDED — it does not prevent an ending. Marrow's own boundary: 'will not hasten an ending, ever, and cannot prevent one'",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ ATTENDING A BODY BLOCKS Set Hand, Ask the Dead and Draw Down on it — one body or site per attending",
      "class": "hard"
     },
     {
@@ -260,7 +270,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/investigate action that grants access and cooperation at a death. Its strength is rated 5 out of 10. Ranks: rank 2 has you sent for, rank 3 gives you authority over the death itself.",
+   "plainly": "A social/investigate action that grants access at a death, reads what ended, and blocks a raising. Its strength is rated 5 out of 10. Ranks: rank 2 adds the reading and the blocking, rank 3 adds authority and scale.",
    "_descriptionWas": "Ease a dying thing's passing, read how and how long ago something died, and grant true rest to what cannot find it. The craft of endings — not killing, but tending the end.",
    "_functionsWas": [
     "hinder",
@@ -328,7 +338,9 @@
      ]
     }
    ],
-   "_rebuilt": "⛔ SNG-495. PALEWORK REBUILT AS THE TRADE, NOT THE MYSTERY. Erik: 'To me it's the basics of the GREYHEARTH type of work — not as flashy as necromancy, but similar results caused.'\n⚠️ WHY THE OLD ONE HAD TO GO: five of its six pieces were already elsewhere. 'Read how something died' is True Account. 'Halt a spreading rot' is Wither r2, verbatim. 'Grant endings at scale' is Hastened Grey r3. 'Grant true rest to what cannot find it' is Death-Ward r1. ⛔ AND DEATHSENSE'S OWN OLD TEXT SAID 'for what has already finished, PALEWORK reads the evidence' — the reading half was redundant before this audit began.\n⛔ AND MY FIRST REPLACEMENT FAILED THE SOP: 'ease a passing / prevent a raising / make ground finished' needs a dying friend or an enemy necromancer, which is §32.11 Q3 — a counter to a specific enemy type is not a skill.\n⚠️ WHAT AN ASHWARDEN ACTUALLY HAS THAT A PLAYER WANTS IS THAT NOBODY STOPS THE PERSON WHO CAME FOR THE BODY. ⛔ IT ALSO OPENS DEATH'S SOCIAL COLUMN — 28 skills, twelve of them about grief, and zero social verbs before this."
+   "_rebuilt": "⛔ SNG-495. PALEWORK REBUILT AS THE TRADE, NOT THE MYSTERY. Erik: 'To me it's the basics of the GREYHEARTH type of work — not as flashy as necromancy, but similar results caused.'\n⚠️ WHY THE OLD ONE HAD TO GO: five of its six pieces were already elsewhere. 'Read how something died' is True Account. 'Halt a spreading rot' is Wither r2, verbatim. 'Grant endings at scale' is Hastened Grey r3. 'Grant true rest to what cannot find it' is Death-Ward r1. ⛔ AND DEATHSENSE'S OWN OLD TEXT SAID 'for what has already finished, PALEWORK reads the evidence' — the reading half was redundant before this audit began.\n⛔ AND MY FIRST REPLACEMENT FAILED THE SOP: 'ease a passing / prevent a raising / make ground finished' needs a dying friend or an enemy necromancer, which is §32.11 Q3 — a counter to a specific enemy type is not a skill.\n⚠️ WHAT AN ASHWARDEN ACTUALLY HAS THAT A PLAYER WANTS IS THAT NOBODY STOPS THE PERSON WHO CAME FOR THE BODY. ⛔ IT ALSO OPENS DEATH'S SOCIAL COLUMN — 28 skills, twelve of them about grief, and zero social verbs before this.",
+   "taughtAlso": "⚠️ Marrow (companion bond) teaches THE ATTENDED END as a standalone grant — the reading half only, at energy 4. A player with Marrow gets the reading without the trade; a Palework practitioner gets both.",
+   "_attendedEnd": "⛔ SNG-495. Erik: 'It could ALSO be used to PREVENT A RAISING — but that shouldn't be the only use. Pull in MARROW'S TAUGHT SKILL too — Attended End.'\n⚠️ MARROW'S BOND GRANT ALREADY EXISTS: 'The Attended End — Marrow tells you plainly what is ending here and how long it has. It is never wrong and it never softens it.' e4, `reveal`, notFor: 'preventing the ending; being asked to be gentle about it'.\n⛔ SO PALEWORK'S READING HALF WAS REDUNDANT FROM THREE DIRECTIONS — True Account, Attunement's deathsense flavour, AND a companion bond. r2 now names it Attended End and folds all three uses into one rank: read it, block a raising from it, and be sent for.\n⚠️ AND MARROW'S BOUNDARY BECAME THE CRAFT'S BOUND: it reads an ending, it never prevents one."
   },
   {
    "id": "staunch",

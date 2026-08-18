@@ -1,0 +1,119 @@
+{
+ "schemaVersion": 1,
+ "id": "body_capstone",
+ "kind": "content",
+ "note": "⛔ SNG-486. Ki Wield — Body's capstone, and the first Body craft to name the tradition's own power source.",
+ "abilities": [
+  {
+   "id": "ki_wield",
+   "name": "Ki Wield",
+   "levelReq": 5,
+   "energyCost": 12,
+   "axes": {
+    "body_mind": -0.5,
+    "violence_peace": -0.4
+   },
+   "attribute": "physical",
+   "narrationHints": "Nothing is drawn and nothing is worn. The air around the hands goes hard and slightly wrong, the way heat does over stone, and then a man in full plate is on his back with a hole in it.",
+   "description": "Draw the body's own force out past the skin and wear it — as edge, as bolt, as armour — and it goes through what stops steel.",
+   "notFor": "Anyone who has not mastered their own body; being worn while unconscious; anything you do not have the breath left to hold.",
+   "tradition": "somatic",
+   "traditionV2": "Body",
+   "nativeOrCombination": "native",
+   "harmRung": "severe",
+   "powerSystem": "metaphysical",
+   "shape": "strike",
+   "operativeAxis": "body_mind",
+   "intensity": "severe",
+   "mechanic": {
+    "dice": {
+     "n": 4,
+     "d": 6
+    },
+    "plus": 0,
+    "targets": 1,
+    "marginFloorPer": 0.02
+   },
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL",
+    "SURVIVE"
+   ],
+   "bounds": [
+    {
+     "text": "⛔ IT COSTS BREATH CONTINUOUSLY. Energy drains each round it is held, and when it runs out it drops mid-exchange",
+     "class": "cost"
+    },
+    {
+     "text": "⚠️ THE WIELDER IS THE SOURCE — a body already spent has nothing to draw",
+     "class": "hard"
+    },
+    {
+     "text": "one form at a time: edge, bolt, or armour. Changing form costs the action",
+     "class": "hard"
+    },
+    {
+     "text": "it pierces RESISTANCE, not distance — a wall is still a wall",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A fight/duel action that deals damage. It rolls 4d6. Ranks: rank 2 fires it at range, rank 3 wears it as armour and holds all three at once.",
+   "functions": [
+    "strike",
+    "shield",
+    "resist"
+   ],
+   "sectFlavour": {
+    "somatic": "THE PERFECTED VESSEL SPENDING ITSELF — what the Flesh-Temples train toward and rarely reach.",
+    "mason": "⚠️ Not this craft. A mason picks up something heavy."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Ki Edge",
+     "grants": "⛔ ARM YOURSELF IN KI. Hands, feet or a held weapon carry the body's force past the skin — and it PIERCES RESISTANCE: armour, hide, soak and craft-resistances all count for far less against it.",
+     "cannot": "Contact range. It costs breath every round it is held.",
+     "functions": [
+      "strike"
+     ],
+     "gains": "deepen",
+     "harmRung": "severe",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Ki Bolt",
+     "grants": "⚠️ ADDS RANGE. Throw it — a bolt of the same force, loosed from an open hand, arriving as hard as the strike and piercing the same way.",
+     "cannot": "One bolt per action, and each one costs more breath than a strike.",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "severe",
+     "gainAxes": [
+      "range",
+      "targets"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Ki Wield",
+     "grants": "⛔ ADDS ARMOUR AND SIMULTANEITY. Wear it as well — force held at the skin that turns blows and crafts alike — and hold edge, bolt and armour AT ONCE rather than choosing.",
+     "cannot": "⛔ The drain triples while all three are held. A body that runs out while armoured is a body with nothing left.",
+     "functions": [
+      "strike",
+      "shield",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "severe",
+     "gainAxes": [
+      "quality",
+      "conditions"
+     ]
+    }
+   ],
+   "_authored": "⛔ SNG-486. Erik: 'I'm not feeling Pathless Way — cut. A BODY CAPSTONE SHOULD BE KI WIELD or something — ARM AND ARMOR YOURSELF IN KI. It PIERCES RESISTANCES, can be FIRED LIKE MAGIC BOLTS and can SHIELD you.'\n⚠️ IT ALSO ANSWERS SOMETHING THE AUDIT FOUND: metaphysical is Body's power source — 'Veil/Psychic/KI type innate power' (SNG-445) — and NOT ONE BODY CRAFT NAMED KI. The tradition's own source was invisible in its own skill list.\n⛔ AND IT IS THE COUNTER TO SHAPED BODY r3, which grants resistance to crafts. Ki Wield pierces resistance. The tradition now contains its own answer."
+  }
+ ]
+}

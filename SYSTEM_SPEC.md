@@ -2098,3 +2098,67 @@ they surface in the per-tradition audit rather than reading as though someone ha
 ⛔ **All four social verbs reached** — persuade, bargain, provoke, soothe. **4 sense crafts, 2 obscure.** Every function present, all ranks ≤3, full schema, naming SOP applied.
 
 ⚠️ **Held for the taxonomy migration:** the `bind` split (9 of 17 CONTROL rows doing four unrelated jobs) and the `traditionV2` swap.
+
+---
+
+## 36. BODY — the completed tradition (2026-08-16)
+
+**22 skills · 2 schools · SNG-479 → SNG-489.** ⚠️ `tradition` holds the live pole id; `traditionV2` holds `Body`.
+
+### Material — 12
+
+*⛔ WHAT A THING IS AND WHAT IT WILL DO — read it, mend it, throw it, take it apart, and move through it. ⚠️ AND THE SAME CRAFT TURNED ON PEOPLE: what your word is worth, what a job costs, and*
+
+| skill | L | sect | dice | e | shape | tags | r1 | r2 | r3 |
+|---|---|---|---|---|---|---|---|---|---|
+| **Hurled Weight** | 1 | som | 1d6 | 4 | damage |  | **Get Under It** +strike, +break | **Committed Throw** — · *targets* | **Scattering** — · *targets, damage* |
+| **Near Way** | 1 | mas | — | 1 | reposition |  | **Seam** +open | **Material Passage** +move · *conditions, duration* | **Way In** +make · *quality, conditions* |
+| **Plain Weight** | 1 | mas | 2d6 | 6 | strike |  | **True Weight** +strike, +break | **Settled Fact** +hinder · *targets, damage* | **Leaden Word** — · *scope, quality* |
+| **Sound Read** | 1 | mas | — | 3 | reveal | sense·downtime | **Hand On It** +reveal | **Whole Fabric** — · *quality, targets* | **Prepare the Ground** +make · *scope, autonomy* |
+| **Worth the Work** | 1 | mas | — | 3 | setup |  | **Days and Stone** +bargain | **Paid in Work** +persuade · *targets, conditions* | **Standing Account** — · *duration, autonomy* |
+| **Set Word** | 2 | mas | — | 1 | bolster |  | **Plain Statement** +command | **Word That Holds** +bind · *duration, autonomy* | **Fixed Point** — · *targets, autonomy* |
+| **Sound Repair** | 2 | mas | 2d4 | 2 | healing |  | **Correct Fix** +mend | **Sound Again** +restore · *quality, duration* | **As It Was** — · *quality, targets* |
+| **Thingcraft** | 2 | mas | — | 6 | construct | sense | **Weighed Thing** +reveal | **Set Stone** +make, +bind · *duration, targets* | **Denial** +shield · *conditions, quality* |
+| **Reduction** | 3 | mas | — | 8 | hobble |  | **Plain Fact** +reveal, +break | **Reduction** — · *targets, damage* | **Nothing Left Standing** — · *quality, duration* |
+| **Keystone Blow** | 4 | mas | 4d6 | 11 | damage |  | **Keystone Blow** +break, +reveal | **Made Keystone** — · *duration* | — |
+| **Rising Step** | 4 | mas | — | 14 | reposition |  | **Rising Step** +travel, +transform | **Company Stair** — · *scope* | **Kept Crossing** — · *duration* |
+| **Unmaking of Walls** | 5 | mas | 5d6 | 13 | damage |  | **Unmaking of Walls** +break, +transform · *quality, targets* | — | — |
+
+### Discipline — 10
+
+*⛔ THE BODY AS THE INSTRUMENT — conditioned until it stops taking harm the way bodies do, trained until it acts before the decision, carried past what ground allows, and finally drawn on dire*
+
+| skill | L | sect | dice | e | shape | tags | r1 | r2 | r3 |
+|---|---|---|---|---|---|---|---|---|---|
+| **Answered Motion** | 1 | som | 1d6 | 5 | strike |  | **Turned Joint** +strike, +break | **Given Fall** +hinder · *targets, damage* | **Taken Apart** — · *scope, conditions* |
+| **False Stance** | 1 | som | — | 3 | conceal | obscure | **False Stance** +deceive | **Wrong Fight** +hinder · *conditions, damage* | **Nothing True** +conceal · *targets, conditions* |
+| **Loose-Limbed** | 1 | som | — | 3 | reposition |  | **Run and Vault** +move, +travel | **Slip Anything** +resist · *conditions, targets* | **Nothing Holds** — · *duration, targets, conditions* |
+| **Quick Hands** | 1 | som | — | 2 | setup |  | **Early Hands** +hinder | **Turned Catch** +strike · *range, damage* | **Both Hands** — · *targets, conditions* |
+| **Second Wind** | 1 | som | — | 4 | bolster |  | **Embrace the Suck** +sustain, +resist, +heal | **Third Wind** +empower · *duration, damage, conditions* | **Dream Breath** — · *duration, quality, conditions* |
+| **Steady Hands** | 1 | som | — | 2 | guard |  | **Hand On Them** +soothe | **Held Together** +sustain · *duration, conditions* | **Everyone Standing** — · *targets, conditions* |
+| **Perfect Motion** | 2 | som | — | 5 | guard |  | **Acrobatics** +move, +resist | **Unwasted Motion** +shield · *conditions, quality* | **Motion Without Thought** +strike · *tempo, damage* |
+| **Shaped Body** | 3 | som | — | 2 | guard |  | **Hardened** +resist, +transform | **Seasoned** +sustain · *quality, conditions* | **Body Is Clay** — · *quality, conditions* |
+| **Skydancer** | 3 | som | — | 9 | reposition |  | **Air-Step** +move, +travel | **Long Air** — · *duration, conditions* | **Carry the Line** +sustain · *targets, quality* |
+| **Ki Wield** | 5 | som | 4d6 | 12 | strike |  | **Ki Edge** +strike | **Ki Bolt** — · *range, targets* | **Ki Wield** +shield, +resist · *quality, conditions* |
+
+### Allocation
+
+| function | rows | | gain axis | rows |
+|---|---|---|---|---|
+| HARM | 12 | | conditions | 19 |
+| DEFEND | 8 | | targets | 18 |
+| CONTROL | 7 | | quality | 14 |
+| MOVE | 7 | | duration | 13 |
+| MAKE | 6 | | damage | 8 |
+| BOLSTER | 5 | | autonomy | 4 |
+| PERCEIVE | 4 | | scope | 4 |
+| SOCIAL | 3 | | range | 2 |
+| RESTORE | 3 | | tempo | 1 |
+| CONCEAL | 2 | |  |  |
+| OPEN | 1 | |  |  |
+
+**Power sources correct 22/22** — `metaphysical` (ki) 10 somatic · `ordered_nanite` (worked matter) 12 mason.
+
+⛔ **FOR BODY THE SCHOOL AND THE SECT COINCIDE**, which is not true of Mind — where Suggestion crossed cogitant and figurist. ⚠️ **Body's two peoples do not share methods:** a mason and a somatic reach the same rooftop by unrelated crafts — one finds the seam already in the wall, the other steps on nothing.
+
+**Authored to close gaps:** False Stance (obscure) · Worth the Work (bargain) · Steady Hands (soothe) · Loose-Limbed (the corpus's only anti-bind) · Ki Wield (capstone, and the first Body craft to name the tradition's own power source).

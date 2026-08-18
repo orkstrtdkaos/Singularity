@@ -9,7 +9,7 @@
    "name": "Thingcraft",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
     "concrete_abstract": -0.5,
@@ -142,7 +142,9 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ BODY'S SENSE — reads condition and soundness by touch\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
-   "_merged": "⛔ SNG-481: absorbs Set Stone (L1 mason), which duplicated this skill's own r2 by name and effect."
+   "_merged": "⛔ SNG-481: absorbs Set Stone (L1 mason), which duplicated this skill's own r2 by name and effect.",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
   },
   {
    "id": "formcraft",
@@ -526,7 +528,7 @@
    "name": "Sound Repair",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
     "concrete_abstract": -0.4
@@ -666,14 +668,16 @@
     "restore",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
   },
   {
    "id": "set_word",
    "name": "Set Word",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "body",
    "attribute": "social",
    "axes": {
     "concrete_abstract": -0.4,
@@ -792,14 +796,16 @@
     "mason": "THE WORD — what you said, and your history of keeping it.",
     "somatic": "THE PRESENCE — absorbs Weight of Presence: the body completely at home in itself, which people organise around without being told to."
    },
-   "_merged": "⛔ SNG-485: absorbs Weight of Presence (L2 somatic). Both were L2, social, `command`, 'authority without persuasion', and their r3s were the same claim."
+   "_merged": "⛔ SNG-485: absorbs Weight of Presence (L2 somatic). Both were L2, social, `command`, 'authority without persuasion', and their r3s were the same claim.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⚠️ PURE BODY, NO SOURCE REACHED FOR. Throwing a rock, catching an arrow, saying a true thing, pricing a job — these are skill and years, and canon defines `body` as the flat floor that 'reaches for nothing, so nothing can be taken from it'."
   },
   {
    "id": "near_way",
    "name": "Near Way",
    "levelReq": 1,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
     "concrete_abstract": -0.3
@@ -945,7 +951,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Near Way",
-   "_idWas": "the_near_way"
+   "_idWas": "the_near_way",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
   },
   {
    "schemaVersion": 1,
@@ -953,7 +961,7 @@
    "name": "Keystone Blow",
    "levelReq": 4,
    "energyCost": 11,
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "ordered_nanite",
    "tradition": "mason",
    "attribute": "practical",
    "axes": {
@@ -1045,7 +1053,9 @@
    "plainly": "A fight/investigate action that deals damage. It rolls 4d6+2 Ranks: rank 2 adds to special. Limit: it works only on Made Structures with a true keystone at r1.",
    "_descriptionWas": "The Mason art of the keystone blow — reading a made structure to its single load-bearing truth and striking exactly there, so the whole comes down for the cost of one perfect blow. To break well is to understand first.",
    "_nameWas": "The Keystone Blow",
-   "_idWas": "the_keystone_blow"
+   "_idWas": "the_keystone_blow",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
   },
   {
    "schemaVersion": 1,
@@ -1053,7 +1063,7 @@
    "name": "Unmaking of Walls",
    "levelReq": 5,
    "energyCost": 13,
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "ordered_nanite",
    "tradition": "mason",
    "attribute": "practical",
    "axes": {
@@ -1129,7 +1139,9 @@
    "plainly": "A fight action that deals damage. It rolls 5d6+6 across a scope of 4 Limit: iT Touches Only The Made.",
    "_nameWas": "The Unmaking of Walls",
    "_idWas": "the_unmaking_of_walls",
-   "_differentiated": "⛔ SNG-485: differentiated from Keystone Blow. That brings a building DOWN with one blow at the load-bearing point; this takes a building APART and nothing falls on anyone."
+   "_differentiated": "⛔ SNG-485: differentiated from Keystone Blow. That brings a building DOWN with one blow at the load-bearing point; this takes a building APART and nothing falls on anyone.",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
   },
   {
    "schemaVersion": 1,
@@ -1137,7 +1149,7 @@
    "name": "Reduction",
    "levelReq": 3,
    "energyCost": 8,
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "ordered_nanite",
    "tradition": "mason",
    "attribute": "mental",
    "axes": {
@@ -1249,7 +1261,9 @@
    "_nameWas": "The Reduction",
    "_idWas": "the_reduction",
    "_notForWas": "Anyone whose footing is ALREADY physical — a stonecutter who believes in stone cannot be reduced further. And it is HONEST: every reduction must be true, which is why it works and why it cannot be aimed at a lie.",
-   "_merged": "⛔ SNG-481: absorbs Plain Fact (L3 mason). Both were 'abstraction cannot get purchase on the real'; this is now the ladder from a public cut-down to a person's whole standing."
+   "_merged": "⛔ SNG-481: absorbs Plain Fact (L3 mason). Both were 'abstraction cannot get purchase on the real'; this is now the ladder from a public cut-down to a person's whole standing.",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
   },
   {
    "schemaVersion": 1,
@@ -1620,7 +1634,7 @@
    "name": "Plain Weight",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "ordered_nanite",
    "attribute": "physical",
    "axes": {
     "concrete_abstract": 0.6,
@@ -1760,14 +1774,16 @@
     "duration": 1,
     "scope": 2
    },
-   "_diceFix": "⛔ SNG-481: shape `strike` rolls dice per CCode's shape→reader map, and this craft carried magnitude only."
+   "_diceFix": "⛔ SNG-481: shape `strike` rolls dice per CCode's shape→reader map, and this craft carried magnitude only.",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
   },
   {
    "id": "sound_read",
    "name": "Sound Read",
    "levelReq": 1,
    "energyCost": 3,
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
     "concrete_abstract": 0.6
@@ -1882,7 +1898,9 @@
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads load path and first failure\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "downtime": true,
    "projectTicks": true,
-   "_project": "⛔ SNG-485. Erik: 'Sound Read can PREPARE GROUND and be for projects.' r3 is now site preparation banking per tick."
+   "_project": "⛔ SNG-485. Erik: 'Sound Read can PREPARE GROUND and be for projects.' r3 is now site preparation banking per tick.",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

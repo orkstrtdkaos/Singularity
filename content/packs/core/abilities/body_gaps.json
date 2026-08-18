@@ -1,0 +1,300 @@
+{
+ "schemaVersion": 1,
+ "id": "body_gaps",
+ "kind": "content",
+ "note": "⛔ SNG-482. Body's three authored gaps: an obscure, a bargain, and a soothe.",
+ "abilities": [
+  {
+   "id": "false_stance",
+   "name": "False Stance",
+   "levelReq": 1,
+   "energyCost": 3,
+   "axes": {
+    "falsehood_truth": -0.4,
+    "body_mind": 0.3
+   },
+   "attribute": "physical",
+   "narrationHints": "The weight is on the wrong foot, the shoulder is loaded for a cut that never comes, and the counter they prepared is for a fight happening somewhere else.",
+   "description": "Show a body that is about to do something else — a stance that reads as three attacks and resolves as a fourth.",
+   "notFor": "Anything that does not read a body — mechanisms, wards, a foe who cannot see you; hiding, which this is not.",
+   "tradition": "somatic",
+   "traditionV2": "Body",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "metaphysical",
+   "shape": "conceal",
+   "operativeAxis": "falsehood_truth",
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 3,
+    "scope": 1
+   },
+   "intensity": "moderate",
+   "bounds": [
+    {
+     "text": "⛔ THEY MUST BE READING YOU. A foe who is not looking cannot be misled",
+     "class": "hard"
+    },
+    {
+     "text": "one declared false read per exchange",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ a foe who has fought you before discounts it",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A fight/duel action. Its strength is rated 5 out of 10.",
+   "functions": [
+    "deceive",
+    "conceal"
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL",
+    "STEALTH"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "False Stance",
+     "grants": "⛔ DECLARE THIS IN THE SENSE SLOT TO DENY THEIR READ. Your body says one thing and does another; whatever they learned about you this exchange is wrong.",
+     "cannot": "They must be reading you. One per exchange.",
+     "functions": [
+      "deceive"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Wrong Fight",
+     "grants": "⚠️ ADDS A PENALTY THEY CARRY. They do not merely fail to read you — they act on the read you gave them, and it is wrong for the fight that happens.",
+     "cannot": "They must commit to the false read before it costs them.",
+     "functions": [
+      "deceive",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "conditions",
+      "damage"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Nothing True",
+     "grants": "⛔ ADDS TARGETS. Every foe watching you takes the false read, and you may give different ones different fights.",
+     "cannot": "Everyone in sight of you. A foe who stops watching is unaffected.",
+     "functions": [
+      "deceive",
+      "hinder",
+      "conceal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "scope"
+     ]
+    }
+   ],
+   "_authored": "⛔ SNG-482. Body had NO OBSCURE — the sense slot belonged to Dark and Mind. Erik's own example: 'a stance that reads as three attacks and resolves as a fourth.'",
+   "obscure": true
+  },
+  {
+   "id": "worth_the_work",
+   "name": "Worth the Work",
+   "levelReq": 1,
+   "energyCost": 3,
+   "axes": {
+    "concrete_abstract": 0.4
+   },
+   "attribute": "practical",
+   "narrationHints": "They name a figure. The mason looks at the job for a while, names the days and the stone and the two people it will actually take, and nobody argues.",
+   "description": "Price labour, materials and time by knowing exactly what they cost — and trade work for what you need where coin will not reach.",
+   "notFor": "Anything nobody needs done; work you cannot actually perform; conjuring value that is not there.",
+   "tradition": "mason",
+   "traditionV2": "Body",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "metaphysical",
+   "shape": "setup",
+   "operativeAxis": "concrete_abstract",
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "scope": 2
+   },
+   "intensity": "moderate",
+   "bounds": [
+    {
+     "text": "⛔ YOU MUST BE ABLE TO DO THE WORK. A price you cannot deliver is a lie",
+     "class": "hard"
+    },
+    {
+     "text": "they must need something done or made",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ prices labour and material — it does not price a favour, a secret or a name",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/investigate action. Its strength is rated 5 out of 10.",
+   "functions": [
+    "bargain"
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Days and Stone",
+     "grants": "⛔ NAME WHAT A JOB ACTUALLY COSTS in labour, material and time, and be believed. Nobody overcharges you and nobody underpays you.",
+     "cannot": "You must have seen the job or the thing.",
+     "functions": [
+      "bargain"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Paid in Work",
+     "grants": "⛔ ADDS WORK AS CURRENCY. Settle a debt, buy passage, or secure lodging by doing the thing they need done — accepted at full value where you have no coin they want.",
+     "cannot": "The work must be worth what you are taking, and they must need it now.",
+     "functions": [
+      "bargain",
+      "persuade"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "quality"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Standing Account",
+     "grants": "⛔ ADDS CREDIT. Your word on a price is taken in advance across a whole region — materials, tools, passage and hands are extended before you have paid.",
+     "cannot": "One region. Defaulting ends it there permanently.",
+     "functions": [
+      "bargain",
+      "persuade"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "duration"
+     ]
+    }
+   ],
+   "_authored": "⛔ SNG-482. Erik: every tradition bargains because there is an economy. BODY'S LEVER IS WHAT ITS LABOUR IS WORTH — and r2 makes work itself a currency, which is the mason's answer to Known Price r2."
+  },
+  {
+   "id": "steady_hands",
+   "name": "Steady Hands",
+   "levelReq": 1,
+   "energyCost": 2,
+   "axes": {
+    "violence_peace": 0.4,
+    "body_mind": 0.2
+   },
+   "attribute": "physical",
+   "narrationHints": "No words. A hand on the shoulder, a grip on the wrist, weight taken. The shaking stops because someone else's body is telling theirs that it can.",
+   "description": "Put hands on someone coming apart — panicking, shaking, bleeding out, about to swing — and steady them enough to act.",
+   "notFor": "Anyone out of reach; grief or despair, which need more than contact; making them agree with you.",
+   "tradition": "somatic",
+   "traditionV2": "Body",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "metaphysical",
+   "shape": "guard",
+   "operativeAxis": "violence_peace",
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 3,
+    "scope": 2
+   },
+   "intensity": "moderate",
+   "bounds": [
+    {
+     "text": "⛔ CONTACT RANGE. This is done with hands",
+     "class": "hard"
+    },
+    {
+     "text": "ends fear, panic and rage — not grief, not despair",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ they must permit the contact",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A social/survive action. Its strength is rated 5 out of 10.",
+   "functions": [
+    "soothe"
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "SURVIVE",
+    "FIGHT"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Hand On Them",
+     "grants": "⛔ END FEAR, PANIC OR RAGE IN ONE PERSON YOU CAN TOUCH. The shaking stops, the breath comes back, and they can act this round.",
+     "cannot": "Contact range, one person, and they must permit it.",
+     "functions": [
+      "soothe"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Held Together",
+     "grants": "⚠️ ADDS DURATION AND WORK. They stay steady while you keep a hand on them — enough to be carried, stitched, talked to, or walked out.",
+     "cannot": "You are occupied while you hold them.",
+     "functions": [
+      "soothe",
+      "sustain"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "conditions"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Everyone Standing",
+     "grants": "⛔ ADDS TARGETS. Steady everyone within arm's reach at once — a stretcher line, a shield wall about to break, a crew in a storm.",
+     "cannot": "Arm's reach. One use per contest.",
+     "functions": [
+      "soothe",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "scope"
+     ]
+    }
+   ],
+   "_authored": "⛔ SNG-482. Body had no `soothe`. ⚠️ DISTINCT FROM MIND'S QUIET THE ROOM: that works at range on a room, this works by CONTACT on people you can reach, and it does not touch grief."
+  }
+ ]
+}

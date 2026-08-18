@@ -3,7 +3,7 @@
  "id": "foothills",
  "kind": "content",
  "note": "⛔ SNG-441. FOOTHILLS AND FOLK — Erik, 2026-08-15: 'Foothills are the FUNCTIONAL VERSION of the pole in many cases; in some cases the place that is APPROACHABLE and the ECONOMIC CENTER. They are also NOT strictly one pole per parent. We need balance, but foothills are most likely a BLEND of a primary domain with 1-2 of its neighbors.'\n⚠️ THERE ARE 26 CANONICAL TRADITIONS — 24 ring poles on 12 axes, plus god_named and bargainers already carrying `pole: foothill`. I had been counting 31 by treating collection-keys as peoples.",
- "_theRule": "⛔ A FOOTHILL IS NOT A LESSER TRADITION — IT IS A POLE MADE USABLE. The pole states the position absolutely; the foothill is what you can actually buy, hire, learn and live beside. ⚠️ AND THE EXISTING TWO PROVE THE BLEND CROSSES AXES rather than staying on neighbours:\n   GOD-NAMED — 'borrowed grandeur worn slightly wrong; a man addressed by a name nobody in this valley can check.' ⛔ THAT IS SERAPHIC (angelic authority) BLENDED WITH VEILWRIGHT (falsehood). The functional version of divine authority is a borrowed one.\n   BARGAINERS — 'a good table, a fair scale, an exit that is always shown to you and always costed.' ⛔ ABYSSAL (the named want, the struck term) BLENDED WITH VERIST (truth). The functional version of the bargain is an HONEST one, which is precisely why anyone sits down twice.\n⚠️ SO THE PATTERN IS: TAKE THE POLE'S POWER AND ADD WHAT MAKES IT SURVIVABLE TO DEAL WITH.\n⛔ ERIK 2026-08-15, REFINEMENT: 'It's likely that these foothills will have THREE DOMAINS, as each character does.' ⚠️ THAT IS THE RULE — a foothill is not a pole plus a qualifier, it is a THREE-DOMAIN BLEND, the same shape a player character has. Which is the point: a foothill is where the world is LIVED IN rather than argued from.\n⛔ HARDLINE IS THE CLEANEST EXAMPLE OF THE PATTERN: pole + neighbour (method) + ANTIPODE (the thing that makes it sellable). god_named blends authority with falsehood, bargainers blends appetite with truth, hardline blends violence with peace. ⚠️ IN EVERY CASE THE SECOND OR THIRD DOMAIN IS WHAT LETS OTHER PEOPLE DEAL WITH THE FIRST.",
+ "_theRule": "⛔ A FOOTHILL IS NOT A LESSER TRADITION — IT IS A POLE MADE USABLE. The pole states the position absolutely; the foothill is what you can actually buy, hire, learn and live beside. ⚠️ AND THE EXISTING TWO PROVE THE BLEND CROSSES AXES rather than staying on neighbours:\n   GOD-NAMED — 'borrowed grandeur worn slightly wrong; a man addressed by a name nobody in this valley can check.' ⛔ THAT IS SERAPHIC (angelic authority) BLENDED WITH VEILWRIGHT (falsehood). The functional version of divine authority is a borrowed one.\n   BARGAINERS — 'a good table, a fair scale, an exit that is always shown to you and always costed.' ⛔ ABYSSAL (the named want, the struck term) BLENDED WITH VERIST (truth). The functional version of the bargain is an HONEST one, which is precisely why anyone sits down twice.\n⚠️ SO THE PATTERN IS: TAKE THE POLE'S POWER AND ADD WHAT MAKES IT SURVIVABLE TO DEAL WITH.\n⛔ ERIK 2026-08-15, REFINEMENT: 'It's likely that these foothills will have THREE DOMAINS, as each character does.' ⚠️ THAT IS THE RULE — a foothill is not a pole plus a qualifier, it is a THREE-DOMAIN BLEND, the same shape a player character has. Which is the point: a foothill is where the world is LIVED IN rather than argued from.\n⛔ HARDLINE IS THE CLEANEST EXAMPLE OF THE PATTERN: pole + neighbour (method) + ANTIPODE (the thing that makes it sellable). god_named blends authority with falsehood, bargainers blends appetite with truth, hardline blends violence with peace. ⚠️ IN EVERY CASE THE SECOND OR THIRD DOMAIN IS WHAT LETS OTHER PEOPLE DEAL WITH THE FIRST.\n⛔ GREYHEARTH ADDS A CASE: A FOOTHILL MAY ALREADY EXIST AS A PLACE BEFORE IT IS AUTHORED AS A TRADITION. ⚠️ Check the location seeds before authoring a foothill — `greyhearth` had its blend, its economy and its ethic written into its own description and was not in this file.",
  "foothills": {
   "god_named": {
    "parents": {
@@ -89,6 +89,41 @@
     }
    ],
    "_abilityGap": "⛔ RESOLVED BY THE TWO-AXIS RULE RATHER THAN BY MOVING CRAFTS INTO IT. Hardline has zero abilities OF ITS OWN and should — it is a place of ACCESS. Five of the six new physical crafts now list it under `learnedAt` while rooting to marcher, somatic or valley_craft.\n⚠️ WHETHER A FOOTHILL SHOULD EVER HAVE ITS OWN ROOTED CRAFTS IS STILL ERIK'S CALL — harmonic and radiant_folk between them hold 29, so the precedent says yes. ⛔ THE DISTINCTION I WOULD DRAW: a foothill roots a craft when the BLEND produces something neither parent has. Glasswork is not Radiance done cheaply; it is light stored and sold, which no Blazeborn would author. Hardline's equivalent would be a craft about CONTRACTED violence — starting, stopping and being paid — that neither the Marchers nor the Stillhold would ever write down."
+  },
+  "greyhearth": {
+   "parents": {
+    "ashwarden": 0.5,
+    "threnodist": 0.3,
+    "wright": 0.2
+   },
+   "axis": "death_life",
+   "craft": "The Burying Trades",
+   "place": "greyhearth",
+   "region": "foothill_greyhearth",
+   "abilities": 0,
+   "ratified": "⛔ ERIK 2026-08-16: 'If we don't have a Foothill for the GRAVE-CALLERS, ASHWARDENS, NECROMANCERS and their adjacents, then yes there needs to be a Foothill.'",
+   "why": "⚠️ IT ALREADY EXISTED AND WAS ALREADY THE RIGHT PLACE. `greyhearth` is authored as 'the burying trades, the mourning trades AND THE QUIET ONES — a town that buries for every road that meets here, the Crossing's dead and the Palelands' both, and does not find it grim: everyone here has handled it.' ⛔ IT ALREADY BLENDS BOTH SECTS IN ITS OWN SEED.\n   ASHWARDEN gives the craft — ending, tending, and what remains addressable.\n   THRENODIST gives the mourning trades. ⚠️ A burial town that could not hold a funeral would be a disposal site.\n   WRIGHT gives the third domain: ⛔ COFFINS, CAIRNS, MARKERS, BARROWS AND THE MACHINERY OF A CEMETERY. Someone makes those, and at scale.",
+   "theFunctionalTurn": "⛔ THE POLE TENDS AN ENDING BECAUSE IT IS OWED. THE FOOTHILL TENDS IT BECAUSE IT WAS PAID FOR — and that is what makes it available to people who are not Ashwardens. ⚠️ Cairnhold will come when your dead are its business. Greyhearth comes when you hire it.",
+   "produces": [
+    {
+     "what": "⛔ THE GRAVE-CALLERS",
+     "detail": "Named in Set Hand and authored nowhere until now. ⚠️ THEY ARE THE FOOTHILL'S NECROMANCERS — set labour, hauling crews, mine-shifts and harvest hands that do not tire. ⛔ THE PALELANDS 'HAVE NEVER PRETENDED OTHERWISE'; Greyhearth invoices for it."
+    },
+    {
+     "what": "Burial and its trades, sold",
+     "detail": "Gravediggers, coffin-wrights, cairn-masons, corpse-carriers, and the people who wash and dress the dead. A trade, with apprentices."
+    },
+    {
+     "what": "Mourning for hire",
+     "detail": "⚠️ Threnodists who sing for people they never met, and do it properly. A town that buries for every road needs mourners who do not run out."
+    },
+    {
+     "what": "Reckonings and last accounts",
+     "detail": "True Account sold as a service — what is failing in a person, a wall or a house, and how long it has. People come here to be told."
+    }
+   ],
+   "_erikRules": "⚠️ whether `wright` is the right third domain, or `mason` (cairns and stone) — both are defensible and wright covers the coffin-and-machinery half better",
+   "_note": "⛔ AND IT ANSWERS THE ADJACENCY ERIK NAMED. Ashwardens, Necromancers, Grave-Callers and 'their adjacents' — the burying trades, the mourning trades, the quiet ones — are one economy, and Greyhearth is where that economy is."
   }
  },
  "folk": {

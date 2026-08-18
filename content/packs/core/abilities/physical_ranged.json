@@ -73,7 +73,7 @@
    "tradition": "marcher",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
-   "powerSystem": "body",
+   "powerSystem": "metaphysical",
    "shape": "damage",
    "operativeAxis": "violence_peace",
    "mechanic": {
@@ -112,7 +112,9 @@
    "learnedAt": "hardline / the wilds",
    "_rootWhy": "⛔ THE EDGE, THROWN. A blade leaving the hand is still skill at arms, and the Marchers teach it even though they consider it a poor cousin of a held weapon. ⚠️ Learned at Hardline for money, or in the wilds by anyone who has had to eat.",
    "_nameWas": "The Thrown Edge",
-   "_idWas": "the_thrown_edge"
+   "_idWas": "the_thrown_edge",
+   "_powerSystemWas": "body",
+   "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current."
   },
   {
    "id": "sling_and_stone",
@@ -183,7 +185,7 @@
    "tradition": "valley_craft",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
-   "powerSystem": "body",
+   "powerSystem": "metaphysical",
    "shape": "damage",
    "operativeAxis": "violence_peace",
    "mechanic": {
@@ -226,7 +228,9 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Sling and Stone",
-   "_idWas": "the_sling_and_stone"
+   "_idWas": "the_sling_and_stone",
+   "_powerSystemWas": "body",
+   "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current."
   },
   {
    "id": "drawn_bow",
@@ -295,7 +299,7 @@
    "tradition": "marcher",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
-   "powerSystem": "body",
+   "powerSystem": "metaphysical",
    "shape": "damage",
    "operativeAxis": "violence_peace",
    "mechanic": {
@@ -334,7 +338,9 @@
    "learnedAt": "hardline",
    "_rootWhy": "⛔ MILITARY ARCHERY. Holding a bridge alone, an arrow every action, the unhurried third shot — that is the March's line-holding doctrine at range and it descends from the Edge. ⚠️ DISTINCT FROM HUNTER'S STRIKE, which is a working hunter's shot for meat. Same weapon, different craft, different root.",
    "_nameWas": "The Drawn Bow",
-   "_idWas": "the_drawn_bow"
+   "_idWas": "the_drawn_bow",
+   "_powerSystemWas": "body",
+   "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current."
   },
   {
    "id": "levelled_crossbow",
@@ -400,7 +406,7 @@
    "tradition": "marcher",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
-   "powerSystem": "body",
+   "powerSystem": "metaphysical",
    "shape": "damage",
    "operativeAxis": "violence_peace",
    "mechanic": {
@@ -439,7 +445,9 @@
    "learnedAt": "hardline / anywhere",
    "_rootWhy": "⚠️ MARCHER ROOT, BUT THE POLITICS ARE THE POINT: 'you can hand one to a farmer and they can do it too.' ⛔ The Marchers teach it and quietly resent that teaching is barely required. Illegal in three cities for exactly this reason.",
    "_nameWas": "The Levelled Crossbow",
-   "_idWas": "the_levelled_crossbow"
+   "_idWas": "the_levelled_crossbow",
+   "_powerSystemWas": "body",
+   "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current."
   },
   {
    "id": "hurled_weight",

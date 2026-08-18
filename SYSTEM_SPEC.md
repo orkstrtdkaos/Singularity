@@ -2235,3 +2235,26 @@ crafts I wrote in one session were incomplete. **Ranks ≤3** — the only 5-ran
    `drawn_ascent`. ⛔ **Always resolve by id.**
 3. **Reaching for a ruling that was already overturned** — I assigned four crafts to `body` a day after
    writing up its elimination. ⚠️ **Re-read the canon file, do not recall it.**
+
+
+### 32.15 ⛔ DO NOT AUTHOR MAGIC THAT APOLOGISES FOR BEING MAGIC
+
+**Erik, 2026-08-16, on Kept Breath: *"You authored this, and many skills, as very conservative — 'it can't
+do magic but barely lets you get by' type skill. There's no fantasy and magic in that."***
+
+⚠️ **The tell is a craft defined by its exclusions.** Kept Breath read: *"the body's minimum, maintained by
+craft. NOT healing, NOT protection from curses. Functional, NOT well."* ⛔ **Three denials and no wonder.**
+
+**The second tell is the price.** It sat at magnitude 4, energy 4 — among the cheapest crafts in its
+tradition. ⛔ **Pricing a craft low is what an author does when they do not believe in it.**
+
+⛔ **THE FIX IS NOT TO ADD POWER — IT IS TO TAKE THE TRADITION'S OWN CLAIM SERIOUSLY.** Ashwardens tend
+endings; therefore an Ashwarden can REFUSE one. **A man fights with a spear through him because someone
+has declined to let that finish.** Same mechanic, same cost, same bound — **stated as a thing that
+happens rather than a thing that nearly happens.**
+
+**Test:** read the craft aloud and ask whether a player would rather have it or a rope. ⚠️ **If the rope
+competes, the craft is apologising.**
+
+**What does NOT change:** the bound still states the limit once (§32.13, §32.14), and the cost is still
+real. ⛔ **Wonder is in the GRANT. Restraint is in the BOUND. Do not put the restraint in both.**

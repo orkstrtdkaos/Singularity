@@ -558,33 +558,35 @@
      "rank": 1,
      "name": "Improvised",
      "grants": "Quickly make a functional weapon from available materials — one that will not break, will land, and will hurt.",
-     "cannot": "Anything rank 2 adds — build a weapon fast enough to matter in a fight and good enough to be dangerous — not a masterwork, but the right thing for what you're facing right now; it makes a WEAPON, not a warrior.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "make",
       "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — build a weapon fast enough to matter in a fight and good enough to be dangerous — not a masterwork, but the right thing for what you're facing right now; it makes a WEAPON, not a warrior."
     },
     {
      "rank": 2,
      "name": "Made to Harm",
      "grants": "Build a weapon fast enough to matter in a fight and good enough to be dangerous — not a masterwork, but the right thing for what you're facing right now.",
-     "cannot": "Anything rank 3 adds — look at the materials at hand and see the weapon they are already; it makes a WEAPON, not a warrior.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "make",
       "strike"
      ],
      "gains": "deepen",
      "harmRung": "damaging",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — look at the materials at hand and see the weapon they are already; it makes a WEAPON, not a warrior."
     },
     {
      "rank": 3,
      "name": "Right Tool",
      "grants": "Look at the materials at hand and see the weapon they are already; build it in moments, and it is exactly what this situation required.",
-     "cannot": "Nothing further; this is the craft's ceiling; it makes a WEAPON, not a warrior.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "make",
       "strike"
@@ -592,7 +594,8 @@
      "gains": "deepen",
      "harmRung": "damaging",
      "_nameWas": "The Right Tool",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it makes a WEAPON, not a warrior."
     }
    ],
    "nativeOrCombination": "native",
@@ -678,7 +681,7 @@
      "rank": 1,
      "name": "Demonstrated Craft",
      "grants": "Show what you have made — or make something now — and let its quality stand as argument; the person who would have dismissed you reconsiders.",
-     "cannot": "Anything rank 2 adds — your work is known enough that naming yourself — or showing it — commands genuine respect and opens doors that stay closed to those who only claim; IT REQUIRES REAL WORK TO SHOW.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "reveal"
      ],
@@ -687,13 +690,14 @@
      "_functionsWas": [
       "reveal"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — your work is known enough that naming yourself — or showing it — commands genuine respect and opens doors that stay closed to those who only claim; IT REQUIRES REAL WORK TO SHOW."
     },
     {
      "rank": 2,
      "name": "Reputation",
      "grants": "Your work is known enough that naming yourself — or showing it — commands genuine respect and opens doors that stay closed to those who only claim.",
-     "cannot": "Anything rank 3 adds — the thing you have built is the argument and the evidence; IT REQUIRES REAL WORK TO SHOW.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "command"
      ],
@@ -704,13 +708,14 @@
       "command"
      ],
      "_nameWas": "The Reputation",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — the thing you have built is the argument and the evidence; IT REQUIRES REAL WORK TO SHOW."
     },
     {
      "rank": 3,
      "name": "Undeniable",
      "grants": "The thing you have built is the argument and the evidence. Anyone who has seen it cannot pretend otherwise — and they have all seen it.",
-     "cannot": "Nothing further; this is the craft's ceiling; IT REQUIRES REAL WORK TO SHOW; and it still costs what it costs: a reputation built on work MUST KEEP PRODUCING WORK.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "command"
      ],
@@ -720,7 +725,8 @@
       "reveal",
       "command"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; IT REQUIRES REAL WORK TO SHOW; and it still costs what it costs: a reputation built on work MUST KEEP PRODUCING WORK."
     }
    ],
    "nativeOrCombination": "native",
@@ -810,7 +816,7 @@
      "rank": 1,
      "name": "Crossing",
      "grants": "Build a passage across an obstacle — a bridge, a stair, a ramp — quickly enough that the party can use it before circumstances change.",
-     "cannot": "Anything rank 2 adds — open a way through or across any natural or built obstacle by constructing what's needed — not by force, by craft; IT TAKES TIME AND MATERIALS.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "make",
       "open"
@@ -818,13 +824,14 @@
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Crossing",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — open a way through or across any natural or built obstacle by constructing what's needed — not by force, by craft; IT TAKES TIME AND MATERIALS."
     },
     {
      "rank": 2,
      "name": "Made Passage",
      "grants": "Open a way through or across any natural or built obstacle by constructing what's needed — not by force, by craft.",
-     "cannot": "Anything rank 3 adds — build a path where there was truly none — spanning what shouldn't be spanned, opening what was sealed — and have it hold the weight it needs to hold; IT TAKES TIME AND MATERIALS.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "make",
       "open"
@@ -833,13 +840,14 @@
      "harmRung": "none",
      "gainAxes": [
       "range"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — build a path where there was truly none — spanning what shouldn't be spanned, opening what was sealed — and have it hold the weight it needs to hold; IT TAKES TIME AND MATERIALS."
     },
     {
      "rank": 3,
      "name": "Road That Wasn't",
      "grants": "Build a path where there was truly none — spanning what shouldn't be spanned, opening what was sealed — and have it hold the weight it needs to hold.",
-     "cannot": "Nothing further; this is the craft's ceiling; IT TAKES TIME AND MATERIALS; and it still costs what it costs: WHAT YOU BUILD TO CROSS BY, OTHERS WILL CROSS BY TOO.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "make",
       "open",
@@ -848,7 +856,8 @@
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Road That Wasn't",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; IT TAKES TIME AND MATERIALS; and it still costs what it costs: WHAT YOU BUILD TO CROSS BY, OTHERS WILL CROSS BY TOO."
     }
    ],
    "nativeOrCombination": "native",
@@ -931,19 +940,20 @@
      "rank": 1,
      "name": "Hands Moving",
      "grants": "As long as you are making something, fear, grief, exhaustion, and cold have less purchase — the work is the anchor that keeps you functional.",
-     "cannot": "Anything rank 2 adds — sustain yourself and your party through hardship by making useful things — shelter, tools, warmth, structure — that make the hardship survivable; YOU MUST ACTUALLY BE MAKING SOMETHING.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — sustain yourself and your party through hardship by making useful things — shelter, tools, warmth, structure — that make the hardship survivable; YOU MUST ACTUALLY BE MAKING SOMETHING."
     },
     {
      "rank": 2,
      "name": "Built Through It",
      "grants": "Sustain yourself and your party through hardship by making useful things — shelter, tools, warmth, structure — that make the hardship survivable.",
-     "cannot": "Anything rank 3 adds — start something building and leave it — the structure grows, the mechanism runs, the work continues; YOU MUST ACTUALLY BE MAKING SOMETHING.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain",
       "empower"
@@ -952,20 +962,22 @@
      "harmRung": "none",
      "gainAxes": [
       "scope"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — start something building and leave it — the structure grows, the mechanism runs, the work continues; YOU MUST ACTUALLY BE MAKING SOMETHING."
     },
     {
      "rank": 3,
      "name": "Left in Motion",
      "grants": "Start something building and leave it — the structure grows, the mechanism runs, the work continues. What you set in motion sustains beyond your direct attention.",
-     "cannot": "Nothing further; this is the craft's ceiling; YOU MUST ACTUALLY BE MAKING SOMETHING.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain",
       "empower"
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; YOU MUST ACTUALLY BE MAKING SOMETHING."
     }
    ],
    "nativeOrCombination": "native",
@@ -1045,7 +1057,7 @@
      "rank": 1,
      "name": "Precise Removal",
      "grants": "Identify and remove exactly what is interfering with a person or system's recovery — the splinter, the bad element, the thing that was keeping it from healing on its own.",
-     "cannot": "Anything rank 2 adds — restore function by ending the specific thing that was consuming it — corruption, disease, obstruction — with precision that doesn't damage what should remain; it removes.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "restore"
      ],
@@ -1055,13 +1067,14 @@
       "reveal",
       "restore"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — restore function by ending the specific thing that was consuming it — corruption, disease, obstruction — with precision that doesn't damage what should remain; it removes."
     },
     {
      "rank": 2,
      "name": "What Shouldn't Be There",
      "grants": "Restore function by ending the specific thing that was consuming it — corruption, disease, obstruction — with precision that doesn't damage what should remain.",
-     "cannot": "Anything rank 3 adds — remove everything that should not be there, completely and correctly, so that what remains can be what it was meant to be without interference; it removes.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "mend",
       "restore"
@@ -1075,13 +1088,14 @@
      ],
      "gainAxes": [
       "damage"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — remove everything that should not be there, completely and correctly, so that what remains can be what it was meant to be without interference; it removes."
     },
     {
      "rank": 3,
      "name": "Clean",
      "grants": "Remove everything that should not be there, completely and correctly, so that what remains can be what it was meant to be without interference.",
-     "cannot": "Nothing further; this is the craft's ceiling; it removes.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "mend",
       "restore"
@@ -1095,7 +1109,8 @@
      ],
      "gainAxes": [
       "quality"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it removes."
     }
    ],
    "nativeOrCombination": "native",
@@ -1189,20 +1204,21 @@
      "rank": 1,
      "name": "Early Intervention",
      "grants": "See a threat forming and end it at the source — the plan that collapses before it executes, the attack that never completes because you dismantled its condition.",
-     "cannot": "Anything rank 2 adds — protect someone by finding and breaking the specific thing that would harm them — not deflecting the blow but ending the arm that swings it; IT REQUIRES SEEING THE THREAT FORM.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "foresee",
       "break"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — protect someone by finding and breaking the specific thing that would harm them — not deflecting the blow but ending the arm that swings it; IT REQUIRES SEEING THE THREAT FORM."
     },
     {
      "rank": 2,
      "name": "Stopped Thing",
      "grants": "Protect someone by finding and breaking the specific thing that would harm them — not deflecting the blow but ending the arm that swings it. The threat is not turned aside; it is disabled at the point it was coming from, and whoever was carrying it is weakened out of the fight rather than merely stopped.",
-     "cannot": "Anything rank 3 adds — identify a danger in its earliest form and end it completely, so it never becomes the threat it was becoming; IT REQUIRES SEEING THE THREAT FORM.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "break",
       "shield"
@@ -1215,13 +1231,14 @@
       "hinder"
      ],
      "_nameWas": "The Stopped Thing",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — identify a danger in its earliest form and end it completely, so it never becomes the threat it was becoming; IT REQUIRES SEEING THE THREAT FORM."
     },
     {
      "rank": 3,
      "name": "Before It Arrives",
      "grants": "Identify a danger in its earliest form and end it completely, so it never becomes the threat it was becoming.",
-     "cannot": "Nothing further; this is the craft's ceiling; IT REQUIRES SEEING THE THREAT FORM; and it still costs what it costs: NOBODY WILL EVER KNOW WHAT YOU PREVENTED.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "break",
       "shield"
@@ -1233,7 +1250,8 @@
       "shield",
       "hinder"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; IT REQUIRES SEEING THE THREAT FORM; and it still costs what it costs: NOBODY WILL EVER KNOW WHAT YOU PREVENTED."
     }
    ],
    "nativeOrCombination": "native",
@@ -1326,32 +1344,34 @@
      "rank": 1,
      "name": "Back to Parts",
      "grants": "Disassemble a made thing into its components without destroying the components — what was one thing becomes usable pieces of something else.",
-     "cannot": "Anything rank 2 adds — break a thing down to the point where it has no remaining identity as what it was — it is now material, and material can become anything; A THING RETURNED TO BEFORE-IT-WAS CANNOT BE RETURNED TO WHAT IT WAS.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "break"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — break a thing down to the point where it has no remaining identity as what it was — it is now material, and material can become anything; A THING RETURNED TO BEFORE-IT-WAS CANNOT BE RETURNED TO WHAT IT WAS."
     },
     {
      "rank": 2,
      "name": "Unformed",
      "grants": "Break a thing down to the point where it has no remaining identity as what it was — it is now material, and material can become anything.",
-     "cannot": "Anything rank 3 adds — return something complex — a structure, a plan, a fixed belief — to the state before it became that specific thing, clearing the way for something new to take form; A THING RETURNED TO BEFORE-IT-WAS CANNOT BE RETURNED TO WHAT IT WAS.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "break",
       "transform"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — return something complex — a structure, a plan, a fixed belief — to the state before it became that specific thing, clearing the way for something new to take form; A THING RETURNED TO BEFORE-IT-WAS CANNOT BE RETURNED TO WHAT IT WAS."
     },
     {
      "rank": 3,
      "name": "Open Form",
      "grants": "Return something complex — a structure, a plan, a fixed belief — to the state before it became that specific thing, clearing the way for something new to take form.",
-     "cannot": "Nothing further; this is the craft's ceiling; A THING RETURNED TO BEFORE-IT-WAS CANNOT BE RETURNED TO WHAT IT WAS.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "break",
       "transform"
@@ -1359,7 +1379,8 @@
      "gains": "deepen",
      "harmRung": "none",
      "_nameWas": "The Open Form",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; A THING RETURNED TO BEFORE-IT-WAS CANNOT BE RETURNED TO WHAT IT WAS."
     }
    ],
    "nativeOrCombination": "native",
@@ -1437,20 +1458,21 @@
      "rank": 1,
      "name": "Known Capacity",
      "grants": "Your reputation for ending things precisely and completely gives weight to what you say — a warning from you lands differently than from someone without your history.",
-     "cannot": "Anything rank 2 adds — show what you can dismantle — or name it plainly — and command the terms of an agreement; IT REQUIRES A REAL RECORD of ending things.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "command"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Known Capacity",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — show what you can dismantle — or name it plainly — and command the terms of an agreement; IT REQUIRES A REAL RECORD of ending things."
     },
     {
      "rank": 2,
      "name": "Demonstrated Threat",
      "grants": "Show what you can dismantle — or name it plainly — and command the terms of an agreement; they know what refusal means.",
-     "cannot": "Anything rank 3 adds — you are the person who decides what ends; IT REQUIRES A REAL RECORD of ending things.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "command",
       "bind"
@@ -1458,13 +1480,14 @@
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Demonstrated Threat",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — you are the person who decides what ends; IT REQUIRES A REAL RECORD of ending things."
     },
     {
      "rank": 3,
      "name": "Final Authority",
      "grants": "You are the person who decides what ends. In a situation where endings are at stake, your word is the one that stands — not because you outranked anyone, but because everyone knows you can do what you say.",
-     "cannot": "Nothing further; this is the craft's ceiling; IT REQUIRES A REAL RECORD of ending things; and it still costs what it costs: authority built on what you can END is authority people OBEY AND DO NOT LOVE.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "command",
       "bind"
@@ -1475,7 +1498,8 @@
      "gainAxes": [
       "targets",
       "autonomy"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; IT REQUIRES A REAL RECORD of ending things; and it still costs what it costs: authority built on what you can END is authority people OBEY AND DO NOT LOVE."
     }
    ],
    "nativeOrCombination": "native",
@@ -1557,7 +1581,7 @@
      "rank": 1,
      "name": "Cut",
      "grants": "Identify precisely what is consuming your capacity — exhaustion, fear, a specific obligation — and end it cleanly so you can continue.",
-     "cannot": "Anything rank 2 adds — sustain yourself by releasing everything non-essential across a hard stretch — not forcing through with more, but needing less through precise subtraction; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "restore"
      ],
@@ -1568,13 +1592,14 @@
       "restore"
      ],
      "_nameWas": "The Cut",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — sustain yourself by releasing everything non-essential across a hard stretch — not forcing through with more, but needing less through precise subtraction; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED."
     },
     {
      "rank": 2,
      "name": "What You Don't Need",
      "grants": "Sustain yourself by releasing everything non-essential across a hard stretch — not forcing through with more, but needing less through precise subtraction.",
-     "cannot": "Anything rank 3 adds — end what is consuming your group — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can actually go on; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain",
       "restore"
@@ -1589,13 +1614,14 @@
      "gainAxes": [
       "range",
       "scope"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — end what is consuming your group — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can actually go on; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED."
     },
     {
      "rank": 3,
      "name": "Lighter Load",
      "grants": "End what is consuming your group — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can actually go on.",
-     "cannot": "Nothing further; this is the craft's ceiling; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain",
       "restore"
@@ -1610,7 +1636,8 @@
      "_nameWas": "The Lighter Load",
      "gainAxes": [
       "scope"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED."
     }
    ],
    "nativeOrCombination": "native",

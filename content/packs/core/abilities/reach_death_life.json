@@ -1679,14 +1679,14 @@
     "endure",
     "threshold"
    ],
-   "narrationHints": "A purple mist stands off the wound, a finger's depth, and the blood does not leave it. Where they are holding someone else, a tether of green and purple runs from hand to chest — you can see it in low light, and you can see it thin.",
+   "narrationHints": "A purple mist stands a finger's depth off the skin, and blades that reach it slow and arrive shallow. Where they are holding someone else, a tether of green and purple runs from hand to chest — visible in low light, and you can see it thin.",
    "description": "Refuse an ending that has already begun — soak the harm meant for someone and mend a little of it besides.",
    "notFor": "Healing — nothing is mended; an ending that has already completed; endings that are not physical.",
    "tree": [
     {
      "rank": 1,
      "name": "Not Yet",
-     "grants": "⛔ SOAK 5 ON YOURSELF FOR THE DURATION — every blow that lands is reduced by 5, and what it takes off is gone, not owed. ⚠️ FLAVOUR: a purple mist stands a finger's depth off the wound, and the blood does not leave it.",
+     "grants": "⛔ SOAK 5 ON YOURSELF FOR THE DURATION — every blow that lands is reduced by 5 before it does anything, and what is taken off is gone, not owed. ⚠️ FLAVOUR: a purple mist stands a finger's depth off the skin, and a blade that reaches it slows and arrives shallow.",
      "cannot": "Self only at this rank. Soak 5, six rounds, and it does not stack with itself.",
      "functions": [
       "sustain",
@@ -1852,7 +1852,8 @@
    ],
    "_descriptionWas": "Sustain a body through physical hardship: starvation, cold, blood loss, wounds, exhaustion. The ashwarden knows the exact threshold a body needs to keep going — and holds someone there. Not healing, not protection from curses. The body's minimum, maintained by craft.",
    "_reauthored": "⛔ SNG-493. Erik: 'Kept Breath needs a FLAVOR SHIFT. You authored this, and many skills, as very conservative — IT CAN'T DO MAGIC BUT BARELY LETS YOU GET BY type skill. THERE'S NO FANTASY AND MAGIC IN THAT.'\n⚠️ HE IS RIGHT. The old text was 'the body's minimum, maintained by craft — not healing, not protection from curses, functional NOT WELL' — a skill defined by what it cannot do, with three bounds and no wonder. ⛔ IT ALSO SAT AT mag4 e4 AS ONE OF THE CHEAPEST THINGS IN THE TRADITION, which is what a designer does when they do not believe in a craft.\n⛔ THE FANTASY VERSION IS THE ASHWARDEN THESIS TAKEN SERIOUSLY: THEY TEND ENDINGS, SO THEY CAN REFUSE ONE. A man fights with a spear through him because an Ashwarden has declined to let that finish. The cost is unchanged and stated once.",
-   "_mechanics": "⛔ SNG-493, FINAL. Erik: 'Do we really need tempHealth or is that functionally the same as Soak?'\n⚠️ NOT THE SAME — soak is PER-HIT REDUCTION FOR A DURATION, temp health is a ONE-SHOT POOL — but ⛔ SOAK IS STRONGER, ALREADY WIRED, AND ALREADY SCALED, so the new field was unnecessary. 18 abilities carry `soak`, values 2-6, and CCode confirms it is read.\n⛔ I INVENTED A MECHANIC WITHOUT CHECKING WHETHER AN EXISTING ONE COVERED IT — the same failure as specifying a sense slot that was already shipped.\n⚠️ SOAK 5 chosen against the corpus band: Death-Ward 5, Shielding Word 5, Unmoving Mind 5. Kept Breath sits with the other serious protective crafts rather than above them."
+   "_mechanics": "⛔ SNG-493, FINAL. Erik: 'Do we really need tempHealth or is that functionally the same as Soak?'\n⚠️ NOT THE SAME — soak is PER-HIT REDUCTION FOR A DURATION, temp health is a ONE-SHOT POOL — but ⛔ SOAK IS STRONGER, ALREADY WIRED, AND ALREADY SCALED, so the new field was unnecessary. 18 abilities carry `soak`, values 2-6, and CCode confirms it is read.\n⛔ I INVENTED A MECHANIC WITHOUT CHECKING WHETHER AN EXISTING ONE COVERED IT — the same failure as specifying a sense slot that was already shipped.\n⚠️ SOAK 5 chosen against the corpus band: Death-Ward 5, Shielding Word 5, Unmoving Mind 5. Kept Breath sits with the other serious protective crafts rather than above them.",
+   "_r1fix": "⚠️ SNG-493. Erik: 'update the r1 text — it ASSUMES YOU ALREADY HAVE A WOUND when this would be something that would STOP A WOUND FROM DAMAGING YOU.' ⛔ Correct: soak is prevention, so the flavour had to move from the wound to the skin. Was 'the mist stands off the wound and the blood does not leave it'."
   },
   {
    "id": "green_claim",

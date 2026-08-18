@@ -56,8 +56,12 @@
   },
   "spend": {
    "1 tempo": "a second action this round",
-   "2 tempo": "an action that would normally take the whole round — a full crafting, a long shot, a considered strike",
-   "3 tempo": "⛔ ACT BEFORE THE ROUND OPENS, ahead of everyone, once"
+   "2 tempo": "an action that would normally take the whole round — a full crafting, a considered strike, a long shot",
+   "3 tempo": "⛔ ACT BEFORE THE ROUND OPENS, ahead of everyone, once",
+   "_alsoSpendable": {
+    "1 tempo": "⚠️ REFUSE A SPEND — cancel an opponent's declared tempo action by matching it. The counter-play that stops tempo being a one-way ratchet.",
+    "2 tempo": "convert to a full recovery of the energy your last craft cost — ⛔ THE ATTRITION OUT, since energy is the real resource"
+   }
   },
   "cap": "⚠️ THREE. Tempo does not bank across a contest — it is momentum, not savings, and it empties when the fight ends.",
   "_whyItIsGood": "⛔ IT REWARDS COMMITTING WELL, NOT OBSERVING. A Marcher wins rounds and banks; a Figurist who prepared the ground banks; a careful fighter conserving banks slowly; ⚠️ AND SURGE BANKS NOTHING, so the greedy line and the patient line stay genuinely different.\n⛔ AND READING STAYS FREE — which is what CCode's warning protects: the sense step is where you learn, not where you win."
@@ -85,5 +89,18 @@
    ]
   }
  },
- "_correction_20260816": "⛔ CCODE, 2026-08-16, AND HE IS RIGHT: 'The sense step DELIBERATELY DOES NOT MOVE MOMENTUM — it was built consequence-free so that READING ISN'T A WAY TO WIN. Tempo banking off it reverses that, and it is the kind of decision that should be reversed ON PURPOSE rather than arrive as a side effect of a new currency.'\n⚠️ MY TABLE HAD 'a read that produced usable information: 1.0' AS THE TOP ACCRUAL — the single largest source, sitting directly on the step that was built to be consequence-free. ⛔ I WOULD HAVE OVERTURNED A DELIBERATE DESIGN DECISION AS A SIDE EFFECT OF A NEW CURRENCY.\n⛔ ALSO CORRECTED: §4.1's headline — 'a sense craft resolves in its own slot and does not consume the action' — IS ALREADY SHIPPED BEHAVIOUR. CCODE-45 established 'a TURN is sense → action → bonus' and `sbFreshTurn()` holds three selections; CCODE-51 already contests the read via `senseResistOf`, and `phaseDenied(…, 'sense')` already exists as obscure-as-an-effect. ⚠️ I WROTE A SPEC SECTION FOR SOMETHING THAT EXISTS. Same class as counting my own hand-applied `sense` tag and concluding the corpus had three sense crafts when it had fifty-six.\n⛔ WHAT IS ACTUALLY NEW IS THREE SMALL THINGS: obscure as a DECLARED choice rather than a passive resistance, the tie rule, and the tempo bank."
+ "_correction_20260816": "⛔ CCODE, 2026-08-16, AND HE IS RIGHT: 'The sense step DELIBERATELY DOES NOT MOVE MOMENTUM — it was built consequence-free so that READING ISN'T A WAY TO WIN. Tempo banking off it reverses that, and it is the kind of decision that should be reversed ON PURPOSE rather than arrive as a side effect of a new currency.'\n⚠️ MY TABLE HAD 'a read that produced usable information: 1.0' AS THE TOP ACCRUAL — the single largest source, sitting directly on the step that was built to be consequence-free. ⛔ I WOULD HAVE OVERTURNED A DELIBERATE DESIGN DECISION AS A SIDE EFFECT OF A NEW CURRENCY.\n⛔ ALSO CORRECTED: §4.1's headline — 'a sense craft resolves in its own slot and does not consume the action' — IS ALREADY SHIPPED BEHAVIOUR. CCODE-45 established 'a TURN is sense → action → bonus' and `sbFreshTurn()` holds three selections; CCODE-51 already contests the read via `senseResistOf`, and `phaseDenied(…, 'sense')` already exists as obscure-as-an-effect. ⚠️ I WROTE A SPEC SECTION FOR SOMETHING THAT EXISTS. Same class as counting my own hand-applied `sense` tag and concluding the corpus had three sense crafts when it had fifty-six.\n⛔ WHAT IS ACTUALLY NEW IS THREE SMALL THINGS: obscure as a DECLARED choice rather than a passive resistance, the tie rule, and the tempo bank.",
+ "_status": "⛔ ERIK 2026-08-16: 'The tempo system is a FIRST DRAFT — that's precisely what I want to augment. We need to FULLY DESIGN/DEVELOP the system and MAKE IT VISIBLE TO THE PLAYER through skills and the battle system. Similarly the contested sense EXISTS but it's PASSIVE ONLY right now — so it can be augmented.'\n⚠️ SO THIS IS A DESIGN DOCUMENT, NOT A PATCH. The turn already runs sense → action → bonus (CCODE-45) and the read is already opposed (CCODE-51). ⛔ WHAT WE ARE ADDING IS AGENCY AND VISIBILITY: a passive resistance becomes a DECLARED CHOICE, and an invisible accrual becomes a NUMBER THE PLAYER WATCHES.",
+ "visibility": {
+  "_principle": "⛔ A CURRENCY THE PLAYER CANNOT SEE IS NOT A CURRENCY — IT IS A DICE MODIFIER WITH EXTRA STEPS. Tempo must be legible at three points or it does not belong in the game.",
+  "1_onTheSkill": "⚠️ Every skill that banks or spends tempo says so IN THE RANK TEXT, in the same place it names its other gains. ⛔ `gainAxes: ['tempo']` is already the ninth axis (SYSTEM_SPEC §34.3) — the player reads it on the card, not in a rulebook.",
+  "2_inTheRound": "⛔ THE BANK IS SHOWN AND THE SOURCE IS NAMED. Not 'tempo 2' but 'tempo 2 — you held the line, and you fought on ground you prepared'. ⚠️ The battle log already names its contest modifiers term by term (`staticAntagonist`: 'its resistance enters as a NAMED contestMod on the same self-summing breakdown'). TEMPO USES THAT SAME BREAKDOWN.",
+  "3_atTheSpend": "⚠️ Spending is DECLARED BEFORE THE ROUND'S ROLLS and the opponent sees it. ⛔ A second action arriving unannounced is a gotcha; a second action announced is a threat, and a threat is playable — they can spend their own to answer."
+ },
+ "obscureAsDeclaration": {
+  "today": "⚠️ `senseResistOf` opposes a read with 'their concealing craft if they have one, else a flat passive'. THE RESISTANCE IS READ OFF THE SHEET — the player never chose it.",
+  "proposed": "⛔ THE OBSCURE BECOMES A DECLARATION IN THE SENSE SLOT, and declaring it means you are NOT reading. ⚠️ THAT IS THE COST AND IT IS WHAT MAKES IT A CHOICE: you give up your own read to deny theirs. A passive resist costs nothing and therefore decides nothing.",
+  "theTieRule": "⛔ THE OBSCURER WINS TIES. CCode: 'the part I would protect — it is exactly the kind of rule that gets softened during implementation because it looks unfair in a unit test.' ⚠️ IT IS NOT UNFAIR: throwing dirt is easier than reading a man with dirt in his eyes, and without it the sense slot belongs permanently to the perceptive traditions.",
+  "visibility": "⚠️ Both declarations resolve openly. ⛔ You know you were blinded, and by whom — `senseBlinded` already exists as a flag; it becomes a stated outcome instead of a silent one."
+ }
 }

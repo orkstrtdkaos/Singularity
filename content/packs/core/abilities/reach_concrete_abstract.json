@@ -1413,7 +1413,7 @@
    "name": "Rising Step",
    "levelReq": 4,
    "energyCost": 14,
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "ordered_nanite",
    "tradition": "mason",
    "attribute": "physical",
    "axes": {
@@ -1454,7 +1454,8 @@
      "harmRung": "none",
      "_nameWas": "The Company Stair",
      "gainAxes": [
-      "scope"
+      "targets",
+      "quality"
      ]
     },
     {
@@ -1513,7 +1514,9 @@
    ],
    "plainly": "A travel and explore action. Stone arrives under each foot as you need it, so you climb or cross open air at ordinary pace — a cliff, a wall, a gorge. It answers a vertical or a gap rather than a distance, so a leg that is merely long stays long. Rank 1 carries one person and their load. Rank 2 raises it broad and steady enough for a whole party and their pack animals. At rank 3 you may leave it standing, putting a permanent crossing on the map that anyone can use, including whoever you were avoiding.",
    "_nameWas": "The Rising Step",
-   "_idWas": "the_raised_road"
+   "_idWas": "the_raised_road",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-488: was `reach_concrete_abstract`, a reach id. Mason primary is ordered_nanite. ⚠️ I missed it first pass because I matched on the NAME (Rising Step) and the id is `raised_road`."
   },
   {
    "id": "cutting_figure",

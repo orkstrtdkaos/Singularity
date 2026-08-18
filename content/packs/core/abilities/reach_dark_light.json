@@ -1546,32 +1546,34 @@
      "rank": 1,
      "name": "Sure Hands",
      "grants": "Treat wounds and illness in total lightlessness — what cannot be seen is still felt, and in the dark the umbral's hands are steadier, not less.",
-     "cannot": "Anything rank 2 adds — in true shadow, recovery proceeds with unusual speed — fever breaks faster, pain quiets, wounds close cleaner than they should; REQUIRES DARKNESS to exceed ordinary mending.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "heal"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — in true shadow, recovery proceeds with unusual speed — fever breaks faster, pain quiets, wounds close cleaner than they should; REQUIRES DARKNESS to exceed ordinary mending."
     },
     {
      "rank": 2,
      "name": "Dark Aids",
      "grants": "In true shadow, recovery proceeds with unusual speed — fever breaks faster, pain quiets, wounds close cleaner than they should.",
-     "cannot": "Anything rank 3 adds — set a person in genuine lightlessness and the healing proceeds past the ordinary — as if darkness itself were medicine for whatever the light had been aggravating; REQUIRES DARKNESS to exceed ordinary mending.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "heal"
      ],
      "gains": "deepen",
      "harmRung": "none",
      "_nameWas": "The Dark Aids",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — set a person in genuine lightlessness and the healing proceeds past the ordinary — as if darkness itself were medicine for whatever the light had been aggravating; REQUIRES DARKNESS to exceed ordinary mending."
     },
     {
      "rank": 3,
      "name": "Dark Heals",
      "grants": "Set a person in genuine lightlessness and the healing proceeds past the ordinary — as if darkness itself were medicine for whatever the light had been aggravating. And the umbral hands mend what the blaze warped: scarring laid down wrong under too much light, a working scorched out of true, a thing the radiance half-finished.",
-     "cannot": "Nothing further; this is the craft's ceiling; REQUIRES DARKNESS to exceed ordinary mending.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "heal",
       "mend"
@@ -1581,7 +1583,8 @@
      "_nameWas": "The Dark Heals",
      "gainAxes": [
       "targets"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; REQUIRES DARKNESS to exceed ordinary mending."
     }
    ],
    "nativeOrCombination": "native",
@@ -1667,20 +1670,21 @@
      "rank": 1,
      "name": "Shaped Pocket",
      "grants": "Shape a pocket of shadow into something functional for a short time — a screen, a concealing wall, a dark door that wasn't there.",
-     "cannot": "Anything rank 2 adds — transform a space's light conditions and give shadow the shape you need — it holds until you release it or something breaks it; it is SHADOW.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "make",
       "conceal"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — transform a space's light conditions and give shadow the shape you need — it holds until you release it or something breaks it; it is SHADOW."
     },
     {
      "rank": 2,
      "name": "Held Dark",
      "grants": "Transform a space's light conditions and give shadow the shape you need — it holds until you release it or something breaks it.",
-     "cannot": "Anything rank 3 adds — work in shadow as a master works in material — make things that persist, transform environments, give the darkness a form that serves a purpose as long as you need it; it is SHADOW.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "make",
       "conceal",
@@ -1689,13 +1693,14 @@
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Held Dark",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — work in shadow as a master works in material — make things that persist, transform environments, give the darkness a form that serves a purpose as long as you need it; it is SHADOW."
     },
     {
      "rank": 3,
      "name": "Shadow Craft",
      "grants": "Work in shadow as a master works in material — make things that persist, transform environments, give the darkness a form that serves a purpose as long as you need it.",
-     "cannot": "Nothing further; this is the craft's ceiling; it is SHADOW.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "make",
       "conceal",
@@ -1705,7 +1710,8 @@
      "harmRung": "none",
      "gainAxes": [
       "duration"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it is SHADOW."
     }
    ],
    "nativeOrCombination": "native",
@@ -1787,19 +1793,20 @@
      "rank": 1,
      "name": "No Fear of Dark",
      "grants": "Function fully in total lightlessness indefinitely — no fear, no disorientation, no degradation of capability in the complete absence of light.",
-     "cannot": "Anything rank 2 adds — draw sustenance from genuine lightlessness — reduced need for warmth, light, and ordinary comforts in conditions of true dark; REQUIRES GENUINE LIGHTLESSNESS.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "resist"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — draw sustenance from genuine lightlessness — reduced need for warmth, light, and ordinary comforts in conditions of true dark; REQUIRES GENUINE LIGHTLESSNESS."
     },
     {
      "rank": 2,
      "name": "Dark Sustains",
      "grants": "Draw sustenance from genuine lightlessness — reduced need for warmth, light, and ordinary comforts in conditions of true dark.",
-     "cannot": "Anything rank 3 adds — in the lightless depths where others run out, you run deeper; REQUIRES GENUINE LIGHTLESSNESS.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "resist",
       "sustain"
@@ -1807,13 +1814,14 @@
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Dark Sustains",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — in the lightless depths where others run out, you run deeper; REQUIRES GENUINE LIGHTLESSNESS."
     },
     {
      "rank": 3,
      "name": "Deepest Ground",
      "grants": "In the lightless depths where others run out, you run deeper. The dark is not deprivation — it is where you are most alive.",
-     "cannot": "Nothing further; this is the craft's ceiling; REQUIRES GENUINE LIGHTLESSNESS.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "resist",
       "sustain"
@@ -1824,7 +1832,8 @@
      "gainAxes": [
       "damage",
       "targets"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; REQUIRES GENUINE LIGHTLESSNESS."
     }
    ],
    "nativeOrCombination": "native",
@@ -1902,19 +1911,20 @@
      "rank": 1,
      "name": "Exposed to Light",
      "grants": "Tend wounds with radiance — expose them to the full light and the healing is unusually clean; infection finds no shadow to persist in.",
-     "cannot": "Anything rank 2 adds — burn away infection, corruption, or a poisonous working — the light doesn't soften, but what survives it is clean; light does not SOOTHE, it purifies.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "heal"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — burn away infection, corruption, or a poisonous working — the light doesn't soften, but what survives it is clean; light does not SOOTHE, it purifies."
     },
     {
      "rank": 2,
      "name": "Burn-Out",
      "grants": "Burn away infection, corruption, or a poisonous working — the light doesn't soften, but what survives it is clean.",
-     "cannot": "Anything rank 3 adds — show a wound or a working to the complete radiance and it is purified entirely — the light returns what it was consuming to nothing; light does not SOOTHE, it purifies.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "heal",
       "break"
@@ -1925,13 +1935,14 @@
      "gainAxes": [
       "quality",
       "conditions"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — show a wound or a working to the complete radiance and it is purified entirely — the light returns what it was consuming to nothing; light does not SOOTHE, it purifies."
     },
     {
      "rank": 3,
      "name": "Full Restoration",
      "grants": "Show a wound or a working to the complete radiance and it is purified entirely — the light returns what it was consuming to nothing.",
-     "cannot": "Nothing further; this is the craft's ceiling; light does not SOOTHE, it purifies.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "heal",
       "break",
@@ -1941,7 +1952,8 @@
      "harmRung": "none",
      "gainAxes": [
       "quality"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; light does not SOOTHE, it purifies."
     }
    ],
    "nativeOrCombination": "native",
@@ -2025,19 +2037,20 @@
      "rank": 1,
      "name": "Dazzle Wall",
      "grants": "Throw up a wall of light intense enough to halt an approach — those without the blazeborn's tolerance for radiance cannot advance through it.",
-     "cannot": "Anything rank 2 adds — a held brightness that genuinely repels sustained approach — not merely dazzling but impassable for those who cannot bear the full blaze; those WITH radiance-tolerance pass it.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "shield"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — a held brightness that genuinely repels sustained approach — not merely dazzling but impassable for those who cannot bear the full blaze; those WITH radiance-tolerance pass it."
     },
     {
      "rank": 2,
      "name": "Radiant Barrier",
      "grants": "A held brightness that genuinely repels sustained approach — not merely dazzling but impassable for those who cannot bear the full blaze.",
-     "cannot": "Anything rank 3 adds — the full radiance walls approach — a brightness so complete that passage through it requires what only a blazeborn has, and most don't; those WITH radiance-tolerance pass it.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "shield",
       "ward"
@@ -2046,13 +2059,14 @@
      "harmRung": "none",
      "gainAxes": [
       "quality"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — the full radiance walls approach — a brightness so complete that passage through it requires what only a blazeborn has, and most don't; those WITH radiance-tolerance pass it."
     },
     {
      "rank": 3,
      "name": "Blaze Itself",
      "grants": "The full radiance walls approach — a brightness so complete that passage through it requires what only a blazeborn has, and most don't.",
-     "cannot": "Nothing further; this is the craft's ceiling; those WITH radiance-tolerance pass it.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "shield",
       "ward"
@@ -2062,7 +2076,8 @@
      "_nameWas": "The Blaze Itself",
      "gainAxes": [
       "quality"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; those WITH radiance-tolerance pass it."
     }
    ],
    "nativeOrCombination": "native",
@@ -2146,40 +2161,43 @@
      "rank": 1,
      "name": "Glass Form",
      "grants": "Shape glass or heat-worked material quickly and precisely, using radiance as the tool — what would take others hours takes moments.",
-     "cannot": "Anything rank 2 adds — work any material susceptible to intense light and heat — glass, metal, crystal — into any form you need with blazeborn precision; requires material that ANSWERS to light and heat.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "make"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Glass Form",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — work any material susceptible to intense light and heat — glass, metal, crystal — into any form you need with blazeborn precision; requires material that ANSWERS to light and heat."
     },
     {
      "rank": 2,
      "name": "Any Heat-Made Thing",
      "grants": "Work any material susceptible to intense light and heat — glass, metal, crystal — into any form you need with blazeborn precision.",
-     "cannot": "Anything rank 3 adds — work light itself into a form — shaped radiance that holds a shape, carries a purpose, persists as an object beyond the moment of making; requires material that ANSWERS to light and heat.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "make",
       "transform"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — work light itself into a form — shaped radiance that holds a shape, carries a purpose, persists as an object beyond the moment of making; requires material that ANSWERS to light and heat."
     },
     {
      "rank": 3,
      "name": "Light as Material",
      "grants": "Work light itself into a form — shaped radiance that holds a shape, carries a purpose, persists as an object beyond the moment of making.",
-     "cannot": "Nothing further; this is the craft's ceiling; requires material that ANSWERS to light and heat.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "make",
       "transform"
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; requires material that ANSWERS to light and heat."
     }
    ],
    "nativeOrCombination": "native",
@@ -2258,20 +2276,21 @@
      "rank": 1,
      "name": "Open Word",
      "grants": "Speak in full light with a blazeborn's authority — what is said in the open, in front of all, carries a weight that shadows and whispers undermine.",
-     "cannot": "Anything rank 2 adds — command through total transparency — a word spoken in the blaze binds because there is no shadow to hide the lie in; it binds the SPEAKER equally.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "command"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Open Word",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — command through total transparency — a word spoken in the blaze binds because there is no shadow to hide the lie in; it binds the SPEAKER equally."
     },
     {
      "rank": 2,
      "name": "Binding Light",
      "grants": "Command through total transparency — a word spoken in the blaze binds because there is no shadow to hide the lie in; what was agreed is agreed.",
-     "cannot": "Anything rank 3 adds — declare something in the blaze and it is real — not a promise, an established fact that those who witnessed the light cannot pretend they didn't see; it binds the SPEAKER equally.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "command",
       "bind"
@@ -2279,13 +2298,14 @@
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Binding Light",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — declare something in the blaze and it is real — not a promise, an established fact that those who witnessed the light cannot pretend they didn't see; it binds the SPEAKER equally."
     },
     {
      "rank": 3,
      "name": "Established Fact",
      "grants": "Declare something in the blaze and it is real — not a promise, an established fact that those who witnessed the light cannot pretend they didn't see.",
-     "cannot": "Nothing further; this is the craft's ceiling; it binds the SPEAKER equally.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "command",
       "bind"
@@ -2293,7 +2313,8 @@
      "gains": "deepen",
      "harmRung": "none",
      "_nameWas": "The Established Fact",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it binds the SPEAKER equally."
     }
    ],
    "nativeOrCombination": "native",
@@ -2374,20 +2395,21 @@
      "rank": 1,
      "name": "Lit Crossing",
      "grants": "Move as fast as a thrown light across any space you can illuminate — arrive at any visible point in a single committed crossing.",
-     "cannot": "Anything rank 2 adds — illuminate a point and cross to it instantly — the path between here and there collapses to the line of light; requires a LIT path.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Lit Crossing",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — illuminate a point and cross to it instantly — the path between here and there collapses to the line of light; requires a LIT path."
     },
     {
      "rank": 2,
      "name": "Light the Target",
      "grants": "Illuminate a point and cross to it instantly — the path between here and there collapses to the line of light.",
-     "cannot": "Anything rank 3 adds — travel along any beam you can throw, with others, as many times as needed — the whole lit world is a road you can walk at the speed of what illuminates it; requires a LIT path.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move",
       "travel"
@@ -2396,13 +2418,14 @@
      "harmRung": "none",
      "gainAxes": [
       "targets"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — travel along any beam you can throw, with others, as many times as needed — the whole lit world is a road you can walk at the speed of what illuminates it; requires a LIT path."
     },
     {
      "rank": 3,
      "name": "Anywhere the Light Reaches",
      "grants": "Travel along any beam you can throw, with others, as many times as needed — the whole lit world is a road you can walk at the speed of what illuminates it.",
-     "cannot": "Nothing further; this is the craft's ceiling; requires a LIT path.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move",
       "travel"
@@ -2412,7 +2435,8 @@
      "gainAxes": [
       "scope",
       "targets"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; requires a LIT path."
     }
    ],
    "nativeOrCombination": "native",
@@ -2493,19 +2517,20 @@
      "rank": 1,
      "name": "Light as Fuel",
      "grants": "Sustain yourself in conditions of intense light that exhaust others — radiance feeds rather than drains; the blaze wastes are home, not hazard.",
-     "cannot": "Anything rank 2 adds — draw genuine sustenance from intense light — reduced need for food, rest, and shelter in conditions of full radiance; requires INTENSE light.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "resist"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — draw genuine sustenance from intense light — reduced need for food, rest, and shelter in conditions of full radiance; requires INTENSE light."
     },
     {
      "rank": 2,
      "name": "Radiant Meal",
      "grants": "Draw genuine sustenance from intense light — reduced need for food, rest, and shelter in conditions of full radiance.",
-     "cannot": "Anything rank 3 adds — in the fullest light, you do not diminish; requires INTENSE light.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "resist",
       "sustain"
@@ -2515,13 +2540,14 @@
      "_nameWas": "The Radiant Meal",
      "gainAxes": [
       "quality"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — in the fullest light, you do not diminish; requires INTENSE light."
     },
     {
      "rank": 3,
      "name": "In the Full Blaze",
      "grants": "In the fullest light, you do not diminish. The blaze sustains you as the deep dark sustains the umbral — completely, and in the place where others cannot follow.",
-     "cannot": "Nothing further; this is the craft's ceiling; requires INTENSE light.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "resist",
       "sustain"
@@ -2531,7 +2557,8 @@
      "gainAxes": [
       "targets",
       "quality"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; requires INTENSE light."
     }
    ],
    "nativeOrCombination": "native",

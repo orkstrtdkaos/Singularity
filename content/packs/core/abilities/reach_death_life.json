@@ -140,10 +140,10 @@
   {
    "id": "palework",
    "name": "Palework",
-   "levelReq": 2,
-   "energyCost": 6,
-   "powerSystem": "reach_death_life",
-   "attribute": "mental",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "metaphysical",
+   "attribute": "social",
    "axes": {
     "death_life": -0.5,
     "chaos_order": 0.2
@@ -153,10 +153,125 @@
     "decay",
     "still"
    ],
-   "narrationHints": "The mercy and the weight of endings — a thing allowed to stop, a rot read like a map, a stillness that is not cruelty.",
-   "description": "Ease a dying thing's passing, read how and how long ago something died, and grant true rest to what cannot find it. The craft of endings — not killing, but tending the end.",
-   "notFor": "It EASES an end and it can BRING one — but it works through what is already in a thing, so it is slow, it is visible, and the dying know what is happening to them. Its offense is taught at rank 2 (hasten a decline already present) and rank 3 (the full ending). It cannot smite a healthy thing dead where it stands (that is The Cut Thread), it cannot animate what it has ended, and it will not stop a death that must happen.",
+   "narrationHints": "No one asks who they are. Someone moves a chair for them, and the woman who has told the constable nothing tells them everything, because they are the person who will be handling her husband.",
+   "description": "The burying trade, practised. You are the one who handles a death — and that gets you through doors, into rooms, and into confidences nobody offers a stranger.",
+   "notFor": "Anywhere there is no death or dying; authority over anything except the death itself; learning what nobody present knows.",
    "tree": [
+    {
+     "rank": 1,
+     "name": "Professional Standing",
+     "grants": "⛔ YOU ARE THE ONE WHO HANDLES THIS. At any death, dying, plague-house, battlefield or burial you get access nobody questions and cooperation nobody offers strangers — the body, the room, the records, and the family's own account of what happened.",
+     "cannot": "There must be a death or a dying. It gets you IN; it does not tell you anything the people there do not know.",
+     "functions": [
+      "persuade"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Called For",
+     "grants": "⚠️ ADDS REACH AND REPUTATION. You are sent for rather than admitted — word travels ahead of you, doors are open before you arrive, and people tell you things they have told no one, because telling the person who buries is not the same as telling a stranger.",
+     "cannot": "⚠️ Your standing is regional and it is earned. Somewhere you have handled a death badly, none of this works.",
+     "functions": [
+      "persuade",
+      "soothe"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "range",
+      "targets"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Last Authority",
+     "grants": "⛔ ADDS RULING. At a death your judgment carries: what happened, what is owed, what is done with the body, and who may not touch it. Contested only by another Ashwarden.",
+     "cannot": "⛔ At a death, and about the death. It is not authority over anything else, and a standing law outranks it.",
+     "functions": [
+      "persuade",
+      "soothe",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "autonomy"
+     ]
+    }
+   ],
+   "functions": [
+    "persuade",
+    "soothe",
+    "command"
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "tradition": "ashwarden",
+   "harmRung": "lethal",
+   "nativeOrCombination": "native",
+   "shape": "setup",
+   "operativeAxis": "death_life",
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "scope": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "READ the physical evidence of death — what killed a ruin, what a plague did and WILL DO NEXT; halt a rot",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "grant endings AT SCALE — a battlefield eased, a plague stopped by stilling its front",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "ease one passing — half the scope, and it costs you little",
+    "surge": "double the scope; THE WIELDER DRIFTS DEATH-HOT"
+   },
+   "bounds": [
+    {
+     "text": "⛔ THERE MUST BE A DEATH OR A DYING. This is a trade, and it needs its occasion",
+     "class": "hard"
+    },
+    {
+     "text": "it gets you IN — it does not tell you what the people there do not know",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ standing is regional and earned; where you have handled a death badly, none of it works",
+     "class": "soft"
+    },
+    {
+     "text": "⛔ r3 rules on the death and nothing else; a standing law outranks it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/investigate action that grants access and cooperation at a death. Its strength is rated 5 out of 10. Ranks: rank 2 has you sent for, rank 3 gives you authority over the death itself.",
+   "_descriptionWas": "Ease a dying thing's passing, read how and how long ago something died, and grant true rest to what cannot find it. The craft of endings — not killing, but tending the end.",
+   "_functionsWas": [
+    "hinder",
+    "reveal",
+    "strike"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "sense": true,
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads how a thing is dying\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_treeWas": [
     {
      "rank": 1,
      "name": "Easing",
@@ -213,84 +328,7 @@
      ]
     }
    ],
-   "functions": [
-    "hinder",
-    "reveal",
-    "strike"
-   ],
-   "challengeTypes": [
-    "INVESTIGATE",
-    "FIGHT",
-    "PUZZLE",
-    "SOCIAL"
-   ],
-   "tradition": "ashwarden",
-   "harmRung": "lethal",
-   "nativeOrCombination": "native",
-   "shape": "setup",
-   "operativeAxis": [
-    "precision",
-    "scope"
-   ],
-   "mechanic": {
-    "magnitude": 4,
-    "duration": 2,
-    "scope": 2,
-    "note": "lethal rung, but NOT a damage shape: its work is EASING and READING. Note this is the craft the ContradictedByItsOwnTag sweep flagged (harmRung lethal vs text that denies killing) — the bound below is classed accordingly."
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "precision",
-     "delta": "READ the physical evidence of death — what killed a ruin, what a plague did and WILL DO NEXT; halt a rot",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "extend",
-     "axis": "scope",
-     "delta": "grant endings AT SCALE — a battlefield eased, a plague stopped by stilling its front",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "ease one passing — half the scope, and it costs you little",
-    "surge": "double the scope; THE WIELDER DRIFTS DEATH-HOT"
-   },
-   "bounds": [
-    {
-     "text": "CANNOT KILL THE HEALTHY",
-     "class": "soft"
-    },
-    {
-     "text": "CANNOT BRING BACK",
-     "class": "hard"
-    },
-    {
-     "text": "THE EASING CAN BE OFFERED OR TAKEN — offered it is a mercy and refusable; taken it is a killing, and the Palelands have a word for that",
-     "class": "hard"
-    },
-    {
-     "text": "READING IS NOT UNDOING; some rots refuse a clean end",
-     "class": "hard"
-    },
-    {
-     "text": "the wielder DRIFTS DEATH-HOT — endings begin to look like solutions, and the Easers and the Grave-Callers are the same tradition drifting in different directions",
-     "class": "cost"
-    }
-   ],
-   "plainly": "A investigate/fight/puzzle/social action that reveals information or sets up a later action. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens precision; rank 3 extends scope. Limit: cannot Bring Back.",
-   "_descriptionWas": "The craft of endings: ease death, read decay, still what should be still. The Ashwardens' art — not killing, but tending the end.",
-   "_functionsWas": [
-    "hinder",
-    "reveal",
-    "strike"
-   ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
-   "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads how a thing is dying\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_rebuilt": "⛔ SNG-495. PALEWORK REBUILT AS THE TRADE, NOT THE MYSTERY. Erik: 'To me it's the basics of the GREYHEARTH type of work — not as flashy as necromancy, but similar results caused.'\n⚠️ WHY THE OLD ONE HAD TO GO: five of its six pieces were already elsewhere. 'Read how something died' is True Account. 'Halt a spreading rot' is Wither r2, verbatim. 'Grant endings at scale' is Hastened Grey r3. 'Grant true rest to what cannot find it' is Death-Ward r1. ⛔ AND DEATHSENSE'S OWN OLD TEXT SAID 'for what has already finished, PALEWORK reads the evidence' — the reading half was redundant before this audit began.\n⛔ AND MY FIRST REPLACEMENT FAILED THE SOP: 'ease a passing / prevent a raising / make ground finished' needs a dying friend or an enemy necromancer, which is §32.11 Q3 — a counter to a specific enemy type is not a skill.\n⚠️ WHAT AN ASHWARDEN ACTUALLY HAS THAT A PLAYER WANTS IS THAT NOBODY STOPS THE PERSON WHO CAME FOR THE BODY. ⛔ IT ALSO OPENS DEATH'S SOCIAL COLUMN — 28 skills, twelve of them about grief, and zero social verbs before this."
   },
   {
    "id": "staunch",

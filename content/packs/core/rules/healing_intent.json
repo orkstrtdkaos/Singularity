@@ -1,0 +1,32 @@
+{
+ "schemaVersion": 1,
+ "id": "healing_intent",
+ "kind": "rules",
+ "note": "⛔ SNG-474. HEALING INTENT. CCode measured it: 57 abilities heal, 27 carry dice, and NOT ONE NUMBER IS READ. `mechanic.dice` reaches skill_battle.js:798 guarded on `shape === 'damage'`; outside combat health comes from `rules.recovery` flat values, `ladder.js` grants and `encounters.js` deltas. ⚠️ FOURTH WRITER-WITH-NO-READER after narrationHints, rivals and offscreenVerbs.\n⛔ ERIK 2026-08-16: 'I don't care HOW healing is implemented as long as it is good coding practice and works. CCODE can decide how. YOU CAN AUTHOR THE INTENT.' This file is the intent.",
+ "whatHealingMustDo": {
+  "1_scale": "⛔ A HEAL'S SIZE COMES FROM ITS DICE, THE SAME WAY A BLOW'S DOES. 1d4 is a field dressing, 2d4 gets someone back on their feet, 3d4–4d4 is a working surgery, 3d6 is a life pulled back. ⚠️ The 27 authored numbers already express a considered ladder and should not be flattened to a constant.",
+  "2_ranksScaleIt": "⚠️ Physician's Tome is the model: r1 SMALL heal on top of the diagnosis, r2 BIG heal — they get up and can fight today, r3 FULL heal. ⛔ Erik's ruling: 'HEALED IS HEALED' — the rank gain is a QUANTITY, not a duration or a permanence.",
+  "3_inContestAndOut": "⛔ HEALING MUST WORK IN BOTH PLACES AND THEY ARE DIFFERENT. In a contest it is an action spent not attacking — its value is tempo-negative and that is the trade. Out of contest it is the difference between travelling tomorrow and travelling next week. ⚠️ THE SAME NUMBER SHOULD MEAN SOMETHING IN BOTH.",
+  "4_notSymmetricWithDamage": "⚠️ A heal is NOT a negative hit. Line 879's affinity absorb is damage arithmetic inverted, which is correct for what it models and wrong as a general heal: ⛔ A HEAL CANNOT CRIT INTO OVERHEALING, CANNOT BE EVADED, AND SHOULD NOT BE REDUCED BY THE TARGET'S SOAK. Nobody armours against being mended."
+ },
+ "boundsThatMatter": [
+  "⛔ A heal restores; it does not regrow what is gone. Every healing craft in the corpus already says so.",
+  "⚠️ Healing the same subject repeatedly in one contest should return less each time, or a party with one healer never loses.",
+  "⛔ The healer must reach the subject. This is the one thing that makes a healer a positioning problem rather than a button.",
+  "⚠️ Traditions differ in WHAT they mend: Life regrows, Order repairs to spec, Death holds a thing where it is, Mind corrects the fault."
+ ],
+ "forCCode": "⛔ YOUR CALL ON MECHANISM. Erik: good coding practice, and it works. ⚠️ Two shapes I can see from the content side, neither prescriptive: (a) widen the 798 guard to any shape whose operative axis is restorative and invert the sign — cheapest, reuses tested arithmetic, but inherits crit/evade/soak unless suppressed; (b) a separate resolveHeal path — more code, but the four asymmetries above are stated once instead of suppressed three times.\n⛔ WHAT I NEED EITHER WAY: `mechanic.dice` ON A HEALING SHAPE MUST BE READ. Until it is, RESTORE is a signature column for Life, Angelic and Spirit — three traditions I have not audited — and I would be authoring their core identity into a field nobody reads.",
+ "_affected": {
+  "abilities": 57,
+  "withDice": 27,
+  "traditions": {
+   "Building": 8,
+   "Order": 6,
+   "Life": 6,
+   "Death": 6,
+   "Light": 3,
+   "Breaking": 3,
+   "unmapped": 12
+  }
+ }
+}

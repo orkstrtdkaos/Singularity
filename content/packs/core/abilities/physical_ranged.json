@@ -517,7 +517,7 @@
    "tradition": "somatic",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
-   "powerSystem": "body",
+   "powerSystem": "metaphysical",
    "shape": "damage",
    "operativeAxis": "violence_peace",
    "mechanic": {
@@ -560,7 +560,9 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Hurled Weight",
-   "_idWas": "the_hurled_weight"
+   "_idWas": "the_hurled_weight",
+   "_powerSystemWas": "body",
+   "_powerSystemFix": "⛔ SNG-487 CORRECTED. I assigned this to `body` — AND `body` WAS ELIMINATED AS A SOURCE ON 2026-08-15, in a ruling I wrote up myself: 'THE STRUCTURAL CHANGE: body IS GONE AS A SOURCE, absorbed into metaphysical as Veil/Psychic/Ki type INNATE power.' Four sources only: precursor, ordered_nanite, wild_nanite, metaphysical.\n⚠️ Erik caught it: 'verify against our latest power source work — we eliminated the body source.'\n⛔ REASSIGNED TO METAPHYSICAL per the somatic primary. A craft of pure skill is not sourceless — it draws the same innate current as the rest of its tradition, more thinly."
   },
   {
    "id": "quick_hands",
@@ -649,7 +651,7 @@
    "tradition": "somatic",
    "nativeOrCombination": "native",
    "harmRung": "none",
-   "powerSystem": "body",
+   "powerSystem": "metaphysical",
    "shape": "setup",
    "operativeAxis": "concrete_abstract",
    "mechanic": {
@@ -689,7 +691,9 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Quick Hands",
-   "_idWas": "the_quick_hands"
+   "_idWas": "the_quick_hands",
+   "_powerSystemWas": "body",
+   "_powerSystemFix": "⛔ SNG-487 CORRECTED. I assigned this to `body` — AND `body` WAS ELIMINATED AS A SOURCE ON 2026-08-15, in a ruling I wrote up myself: 'THE STRUCTURAL CHANGE: body IS GONE AS A SOURCE, absorbed into metaphysical as Veil/Psychic/Ki type INNATE power.' Four sources only: precursor, ordered_nanite, wild_nanite, metaphysical.\n⚠️ Erik caught it: 'verify against our latest power source work — we eliminated the body source.'\n⛔ REASSIGNED TO METAPHYSICAL per the somatic primary. A craft of pure skill is not sourceless — it draws the same innate current as the rest of its tradition, more thinly."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",

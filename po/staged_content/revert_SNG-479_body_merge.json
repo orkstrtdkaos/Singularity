@@ -1,0 +1,612 @@
+{
+ "_note": "⛔ SNG-479 REVERT LOG — Body's endurance/precision merge. Five skills captured before edit.\n⚠️ TWO AXES HIDING IN FIVE SKILLS: OUTLAST (Second Wind, Long Haul, Soma r1-r2) and EXECUTE (Perfect Motion, Whole Act, Soma r3). ⛔ Soma is the tradition-mastery pattern again — 'the body-pole mastery' — cut as Noesis and Logos were, but its r3 strike-with-the-whole-frame survives inside Perfect Motion r3.",
+ "abilities": {
+  "soma": {
+   "id": "soma",
+   "name": "Soma",
+   "levelReq": 2,
+   "energyCost": 5,
+   "powerSystem": "reach_body_mind",
+   "attribute": "physical",
+   "axes": {
+    "body_mind": -0.5,
+    "violence_peace": 0.1,
+    "death_life": 0.2
+   },
+   "effectTags": [
+    "body",
+    "breath",
+    "endure"
+   ],
+   "narrationHints": "The body made instrument — breath, poise, endurance past what should be possible, movement as a language spoken without words.",
+   "description": "Control breath and heartbeat to steady fear, pain and cold; endure past the ordinary; move with a precision that reads as grace. The body-pole mastery — the Flesh-Temples' art.",
+   "notFor": "Thought-work or memory (that's Noesis); brute force alone (Soma is control, not just strength); anything requiring you to leave the body behind.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Trained Body",
+     "grants": "Endurance and poise past the ordinary; control breath and heartbeat to steady fear, pain, or cold; move with a precision that reads as grace.",
+     "cannot": "The body still has limits; Soma raises the ceiling, it doesn't remove it.",
+     "functions": [
+      "sustain",
+      "resist",
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_nameWas": "The Trained Body",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Instrument",
+     "grants": "Feats of body that look impossible — hold a bridge-pose an hour, run past collapse, slow your own bleeding, take a blow and keep the form; teach the body a skill in days that takes others years.",
+     "cannot": "Pushing past the true limit still breaks you; the body remembers what you spend.",
+     "functions": [
+      "sustain",
+      "resist",
+      "move"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "_nameWas": "The Instrument",
+     "gainAxes": [
+      "duration",
+      "targets"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Perfected Vessel",
+     "grants": "The body as a mastered whole — survive what kills others, perform at the edge of the humanly possible, make the physical self answer the will completely. AND THE BODY AS THE INSTRUMENT IT IS: a strike thrown with the whole mastered frame behind it — stance, breath, and timing arriving together — wounds far past what the same arm could do untrained.",
+     "cannot": "The wielder drifts body-hot — and the Temple that rejects thought forgets to warn itself; a perfected body with a starved mind is its own foreclosure, mastery with nothing left to aim it.",
+     "functions": [
+      "sustain",
+      "resist",
+      "move",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "_nameWas": "The Perfected Vessel",
+     "gainAxes": [
+      "damage",
+      "scope",
+      "targets"
+     ]
+    }
+   ],
+   "functions": [
+    "move",
+    "resist",
+    "strike",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "SURVIVE",
+    "CHASE",
+    "FIGHT"
+   ],
+   "tradition": "somatic",
+   "nativeOrCombination": "native",
+   "harmRung": "damaging",
+   "shape": "bolster",
+   "operativeAxis": [
+    "capacity",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "note": "damaging rung — soma includes striking, but its shape is BOLSTER: it raises what the body can do"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "capacity",
+     "delta": "FEATS THAT LOOK IMPOSSIBLE — hold a bridge-pose an hour, run past collapse, SLOW YOUR OWN BLEEDING, take a blow and keep the line",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the body as A MASTERED WHOLE — survive what kills others, perform at the edge of the humanly possible",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "steady the body — half the capacity, and no debt",
+    "surge": "double it; THE WIELDER DRIFTS BODY-HOT, and the Temple that rejects thought entirely is a warning"
+   },
+   "bounds": [
+    {
+     "text": "THE BODY STILL HAS LIMITS — Soma raises the ceiling, IT DOES NOT REMOVE IT",
+     "class": "hard"
+    },
+    {
+     "text": "pushing past the TRUE limit still breaks you",
+     "class": "hard"
+    },
+    {
+     "text": "the wielder DRIFTS BODY-HOT — the Temple that rejects thought entirely is what that becomes",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A survive/chase/fight action that strengthens someone. Its strength is rated 5 out of 10, and lasts for about 6 hours Ranks: rank 2 deepens capacity; rank 3 adds to special. Limit: the Body Still Has Limits — Soma raises the ceiling, IT Does Not Remove IT.",
+   "_descriptionWas": "The body-pole mastery: breath-control, endurance, poise, the physical self honed to an instrument. The Flesh-Temples' art.",
+   "_file": "reach_body_mind.json"
+  },
+  "second_wind": {
+   "id": "second_wind",
+   "name": "Second Wind",
+   "levelReq": 1,
+   "energyCost": 4,
+   "attribute": "physical",
+   "axes": {
+    "body_mind": -0.3
+   },
+   "functions": [
+    "empower",
+    "heal",
+    "resist",
+    "sustain"
+   ],
+   "narrationHints": "Past the wall, and the body finds more.",
+   "description": "Push the body past exhaustion, pain, or shock for a burst — folk-Soma.",
+   "notFor": "True healing; limitless use.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Second Wind",
+     "grants": "Ignore pain, fatigue, or shock for a short, decisive burst of physical effort.",
+     "cannot": "The body remembers the debt; overuse breaks you.",
+     "functions": [
+      "sustain",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Third Wind",
+     "grants": "Find breath and strength past where the body had none — twice, in one day, at a cost. And what you find is not simply more of what you had: for as long as it lasts you are stronger and faster than your own rested self, which is exactly why it costs what it costs.",
+     "cannot": "The body is borrowing from tomorrow, and tomorrow collects with interest.",
+     "functions": [
+      "sustain",
+      "resist",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_nameWas": "The Third Wind",
+     "gainAxes": [
+      "duration"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Wind That Doesn't End",
+     "grants": "Go on past exhaustion for as long as the thing needs doing — the body simply does not stop. And it tends itself as it runs: bleeding slows, shock recedes, the worst of the damage held off until the work is finished.",
+     "cannot": "Held off is not healed — everything deferred arrives at once when you stop, and it arrives worse. This is borrowing, at a rate the Flesh-Temples consider usurious.",
+     "functions": [
+      "sustain",
+      "resist",
+      "empower",
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_nameWas": "The Wind That Doesn't End",
+     "gainAxes": [
+      "damage"
+     ]
+    }
+   ],
+   "powerSystem": "reach_body_mind",
+   "gated": "learned",
+   "challengeTypes": [
+    "SURVIVE",
+    "CHASE",
+    "FIGHT"
+   ],
+   "tradition": "somatic",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "bolster",
+   "operativeAxis": [
+    "burst",
+    "uses"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 1,
+    "uses": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "uses",
+     "delta": "find breath and strength past where the body had none — TWICE IN ONE DAY, at a cost",
+     "from": "r2 grants — its own count"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: go on past exhaustion FOR AS LONG AS THE THING NEEDS DOING — the body simply does not stop, and it TENDS ITSELF as it runs",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small push — half the burst, and the debt is light",
+    "surge": "double it; THE BODY IS BORROWING FROM TOMORROW, AND TOMORROW COLLECTS WITH INTEREST"
+   },
+   "bounds": [
+    {
+     "text": "THE BODY REMEMBERS THE DEBT — overuse breaks you",
+     "class": "cost"
+    },
+    {
+     "text": "the body is BORROWING FROM TOMORROW",
+     "class": "cost"
+    },
+    {
+     "text": "HELD OFF IS NOT HEALED — everything deferred ARRIVES AT ONCE when you stop",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A survive/chase/fight action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about an hour Ranks: rank 2 extends uses; rank 3 adds to special. Limit: held Off IS Not Healed — everything deferred Arrives AT Once when you stop.",
+   "_file": "reach_body_mind.json"
+  },
+  "perfect_motion": {
+   "id": "perfect_motion",
+   "name": "Perfect Motion",
+   "levelReq": 2,
+   "energyCost": 5,
+   "attribute": "physical",
+   "axes": {
+    "body_mind": -0.4
+   },
+   "functions": [
+    "move",
+    "resist",
+    "shield"
+   ],
+   "narrationHints": "The body does exactly and only what's needed, flawlessly.",
+   "description": "Execute a physical feat with impossible precision and economy — mid-tier Soma.",
+   "notFor": "Feats past the body's true ceiling; thought-work.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Perfect Motion",
+     "grants": "Perform a physical act at the very edge of the possible — balance, speed, precision, control.",
+     "cannot": "The true limit still holds; costs the body dearly.",
+     "functions": [
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Unwasted Motion",
+     "grants": "No motion you make is wasted — every step, block, and reach does exactly and only what it must.",
+     "cannot": "Efficiency is not power. A perfect motion still loses to a stronger one.",
+     "functions": [
+      "move",
+      "shield",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_nameWas": "The Unwasted Motion",
+     "gainAxes": [
+      "range"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Motion Without Thought",
+     "grants": "The body acts correctly before the mind knows there was a decision — and it is right.",
+     "cannot": "The body chooses. If you have trained it badly, it will do that beautifully.",
+     "functions": [
+      "move",
+      "shield",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    }
+   ],
+   "powerSystem": "reach_body_mind",
+   "gated": "learned",
+   "challengeTypes": [
+    "DUEL",
+    "CHASE",
+    "EXPLORE"
+   ],
+   "tradition": "somatic",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "guard",
+   "operativeAxis": [
+    "efficiency",
+    "evasion"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 0,
+    "soakRank": 0,
+    "evasion": 4,
+    "evasionRank": 2,
+    "duration": 4,
+    "note": "AN EIGHTH DEFENSIVE LOGIC — EFFICIENT: not armour, not absence, not misdirection, but never making a wasted or wrong motion. Uses Erik's evasion model; zero soak because a perfect motion still takes the blow it cannot avoid."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "efficiency",
+     "delta": "NO MOTION YOU MAKE IS WASTED — every step, block and reach does exactly and only what it must",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THE BODY ACTS CORRECTLY BEFORE THE MIND KNOWS THERE WAS A DECISION — and it is right",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "move cleanly — half the efficiency, and it costs the body nothing",
+    "surge": "double it; EFFICIENCY IS NOT POWER — a perfect motion still loses to a strong enough one"
+   },
+   "bounds": [
+    {
+     "text": "THE TRUE LIMIT STILL HOLDS; it costs the body dearly",
+     "class": "hard"
+    },
+    {
+     "text": "EFFICIENCY IS NOT POWER — a perfect motion still loses to a strong enough one",
+     "class": "hard"
+    },
+    {
+     "text": "THE BODY CHOOSES — if you have trained it badly, IT WILL DO THAT PERFECTLY",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A duel/chase/explore action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour), and lasts for about 4 hours Ranks: rank 2 deepens efficiency; rank 3 adds to special. Limit: the True Limit Still Holds; it costs the body dearly.",
+   "_file": "reach_body_mind.json"
+  },
+  "whole_act": {
+   "id": "whole_act",
+   "name": "Whole Act",
+   "levelReq": 4,
+   "energyCost": 9,
+   "attribute": "physical",
+   "axes": {
+    "body_mind": 0
+   },
+   "functions": [
+    "move"
+   ],
+   "narrationHints": "Thought and motion stop being two things.",
+   "description": "Act with body and mind fused, so perception, decision and motion arrive as one instant. Thought and motion stop being two things — the Middle Way's ideal.",
+   "notFor": "Body-heavy or mind-heavy wielders (needs both near-equal); the extremes.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Whole Act",
+     "grants": "Act with body and mind fused — perception, decision, and motion as a single instant.",
+     "cannot": "Needs both trained near-equal; the pure poles cannot do it.",
+     "functions": [
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_functionsWas": [
+      "move",
+      "reveal"
+     ],
+     "_nameWas": "The Whole Act",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Unbroken Act",
+     "grants": "Hold the fusion across a whole engagement rather than a single instant. Every movement in the exchange is one continuous act — you are already correct before you have consciously read why, and you stay correct as the situation changes under you.",
+     "cannot": "It still needs both trained near-equal and the pure poles still cannot do it; holding it leaves you unable to afterward explain what you did or why, which matters when someone asks; and a whole act cannot be interrupted and resumed — broken, it must be re-entered from stillness.",
+     "functions": [
+      "move"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "_functionsWas": [
+      "move",
+      "reveal"
+     ],
+     "_nameWas": "The Unbroken Act",
+     "gainAxes": [
+      "range",
+      "scope"
+     ]
+    }
+   ],
+   "powerSystem": "reach_body_mind",
+   "gated": "learned",
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL"
+   ],
+   "tradition": "somatic",
+   "nativeOrCombination": "combination",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "fusion",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 2,
+    "note": "⚠️ THE CATALOG'S ONLY DUAL-POLE CRAFT. Its HARD bound: 'needs both trained near-equal; THE PURE POLES CANNOT DO IT.' It requires somatic AND cogitant together. The engine has no concept of a craft gated on two traditions."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "hold the fusion ACROSS A WHOLE ENGAGEMENT rather than a single instant — every movement in the exchange is one continuous correct act",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "one fused instant — half the duration, and it asks less of both halves",
+    "surge": "double it; it still needs both trained near-equal and the pure poles still cannot"
+   },
+   "bounds": [
+    {
+     "text": "NEEDS BOTH TRAINED NEAR-EQUAL — THE PURE POLES CANNOT DO IT",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A fight or duel action, and the catalog's only dual-pole craft — it requires somatic and cogitant training at near-equal depth, which means a pure practitioner of either pole cannot do it at all, ever. You act with perception, decision and motion as one instant, taking your action before the round resolves rather than in it. It sets up rather than strikes: what it buys is going first with full information, which is usually worth more than the blow you would have thrown.",
+   "_descriptionWas": "The braid-craft: body and mind as one instrument, acting faster than either could decide — the Middle Way's ideal.",
+   "_functionsWas": [
+    "move",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Whole Act",
+   "_idWas": "the_whole_act",
+   "_file": "reach_body_mind.json"
+  },
+  "long_haul": {
+   "id": "long_haul",
+   "name": "Long Haul",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "practical",
+   "axes": {
+    "concrete_abstract": -0.3
+   },
+   "effectTags": [
+    "endurance",
+    "steadiness",
+    "persistence"
+   ],
+   "narrationHints": "Lay the next stone. Then the one after that. The wall goes up.",
+   "description": "Endure through material steadiness — not inspiration, not second winds, just the next thing done correctly until the work is complete.",
+   "notFor": [],
+   "tradition": "mason",
+   "harmRung": "none",
+   "functions": [
+    "resist",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "craft",
+    "hardship"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Just Keep Going",
+     "grants": "Work past fatigue, cold, hunger, or pain by not stopping — the mason's endurance is the next correct action taken, not inspiration.",
+     "cannot": "Anything rank 2 adds — sustain useful work across a long haul without the degradation that hits others — the quality doesn't fall, the pace doesn't drop, the hand stays true; it sustains WORK, not rest.",
+     "functions": [
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Steady Pace",
+     "grants": "Sustain useful work across a long haul without the degradation that hits others — the quality doesn't fall, the pace doesn't drop, the hand stays true.",
+     "cannot": "Anything rank 3 adds — continue until the work is finished, regardless of what the body says; it sustains WORK, not rest.",
+     "functions": [
+      "sustain",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_nameWas": "The Steady Pace",
+     "gainAxes": [
+      "range",
+      "duration",
+      "targets"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Until It's Done",
+     "grants": "Continue until the work is finished, regardless of what the body says. The task completes. This is simply what you do.",
+     "cannot": "Nothing further; this is the craft's ceiling; it sustains WORK, not rest; and it still costs what it costs: the task completing regardless of the body is a promise THE BODY HAS TO KEEP.",
+     "functions": [
+      "sustain",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 24
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "upkeepRelief",
+     "delta": "sustain useful work across a long haul WITHOUT THE DEGRADATION that hits others — the QUALITY does not fall",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: CONTINUE UNTIL THE WORK IS FINISHED, regardless of what the body says. THE TASK COMPLETES.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "keep going — half the relief, and you can stop when you like",
+    "surge": "double it; the task completing regardless of the body is a promise the BODY has to keep"
+   },
+   "bounds": [
+    {
+     "text": "it sustains WORK, not rest — there is no version of this that restores you",
+     "class": "hard"
+    },
+    {
+     "text": "the task completing regardless of the body is a promise THE BODY HAS TO KEEP",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A endurance/craft/hardship action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it sustains Work, not rest — there is no version of this that restores you.",
+   "_nameWas": "The Long Haul",
+   "_idWas": "the_long_haul",
+   "_file": "reach_concrete_abstract.json"
+  }
+ }
+}

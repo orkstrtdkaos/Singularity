@@ -1,0 +1,119 @@
+{
+ "schemaVersion": 1,
+ "id": "body_movement",
+ "kind": "content",
+ "note": "⛔ SNG-483. Loose-Limbed — Body's L1 movement craft and the corpus's only escape-from-a-hold. Feeds Skydancer (L4) and Pathless Way (L5).",
+ "abilities": [
+  {
+   "id": "loose_limbed",
+   "name": "Loose-Limbed",
+   "levelReq": 1,
+   "energyCost": 3,
+   "axes": {
+    "body_mind": -0.3,
+    "space_time": 0.3
+   },
+   "attribute": "physical",
+   "narrationHints": "They go over the wall the way water goes over a lip — no visible effort, no pause at the top. And the two men holding their arms are holding each other.",
+   "description": "Run further and jump farther than a body should, and come out of anything meant to hold you — a grip, a rope, a gap too small.",
+   "notFor": "Carrying a load; flight; anything that holds you by something other than your shape — a spell, a weight, a will.",
+   "tradition": "somatic",
+   "traditionV2": "Body",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "metaphysical",
+   "shape": "reposition",
+   "operativeAxis": "space_time",
+   "intensity": "moderate",
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 3,
+    "scope": 2
+   },
+   "challengeTypes": [
+    "CHASE",
+    "ESCAPE",
+    "SURVIVE"
+   ],
+   "bounds": [
+    {
+     "text": "⛔ IT ANSWERS PHYSICAL HOLDS ONLY — rope, hands, bars, a gap. A binding that works on your will or your name is untouched",
+     "class": "hard"
+    },
+    {
+     "text": "you cannot carry a pack or a person and do this at r1",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ armour that fits properly is armour that does not let you fold",
+     "class": "soft"
+    },
+    {
+     "text": "one escape per hold; a second set of hands is a second problem",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A chase/escape action that moves you and frees you. Its strength is rated 5 out of 10. Ranks: rank 2 slips bindings and gaps, rank 3 cannot be physically held at all.",
+   "functions": [
+    "move",
+    "travel",
+    "resist"
+   ],
+   "sectFlavour": {
+    "somatic": "TRAINED JOINTS AND BREATH — the body is an instrument and this is its range.",
+    "mason": "⚠️ Not this craft. A mason goes THROUGH the wall; a somatic goes over it."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Run and Vault",
+     "grants": "⛔ COVER GROUND PAST WHAT A BODY SHOULD — a sustained run nobody keeps up with, a standing jump across a street, a wall taken in one movement. ⚠️ AND YOU DO NOT ARRIVE WINDED.",
+     "cannot": "One burst or one sustained run. No load at this rank.",
+     "functions": [
+      "move",
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Slip Anything",
+     "grants": "⛔ ADDS ESCAPE. Come out of a grip, a grapple, rope, manacles or a press of bodies — and fit through a gap a body that size should not fit through: a window slot, a drain, a portcullis gap, a cell bar.",
+     "cannot": "Physical holds only. A gap must exist; you do not make one.",
+     "functions": [
+      "move",
+      "travel",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "conditions",
+      "targets"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Nothing Holds",
+     "grants": "⛔ ADDS PERSISTENCE AND A PASSENGER. You cannot be physically held or cornered — every grip fails as it closes, and you can take one other person out with you.",
+     "cannot": "One passenger. A hold that is not physical still holds you.",
+     "functions": [
+      "move",
+      "travel",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "targets",
+      "conditions"
+     ]
+    }
+   ],
+   "_authored": "⛔ SNG-483. Erik: 'if you find a place to fit CONTORTIONIST ability — ANTI-BIND, FAST RUNNING and BIG JUMPING — move/travel, let me know.'\n⚠️ TWO REAL GAPS AND THEY ARE THE SAME SKILL: (1) NOTHING IN 342 ABILITIES ESCAPES A BIND — fifteen text matches and every one is a door, a seal or a piece of luck, never a person getting out of a hold. (2) SOMATIC HAD NO L1 MOVEMENT CRAFT: Near Way is mason and built-spaces only, then nothing until Skydancer at L4.\n⛔ AND IT ANSWERS THE LARGEST COLUMN IN THE GAME. CONTROL is 251 rank-rows corpus-wide and `bind` is most of it. Until now there was no physical counter to being held."
+  }
+ ]
+}

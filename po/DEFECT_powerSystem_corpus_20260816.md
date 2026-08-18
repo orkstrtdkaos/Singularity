@@ -1,4 +1,4 @@
-# ⛔ CORPUS DEFECT — 251 abilities carry a `powerSystem` that is not a power source
+# ⛔ CORPUS DEFECT — 295 abilities carry a `powerSystem` that is not a power source
 
 **Filed:** 2026-08-16 · **Found while closing Body (SNG-487)**
 
@@ -9,13 +9,14 @@
 **There are FOUR power sources.** `precursor` · `ordered_nanite` · `wild_nanite` · `metaphysical`.
 Erik's allocation, 2026-08-15, exact coverage across all 24 wheel poles.
 
-⛔ **251 of 342 abilities carry something else in `powerSystem`:**
+⛔ **295 of 340 abilities carry something else in `powerSystem`. ONLY 41 ARE CORRECT.**
 
 | value | n | what it actually is |
 |---|---|---|
 | `attribute` | 70 | ⛔ **a FIELD NAME** |
 | `reach_death_life`, `reach_dark_light`, `reach_violence_peace`, … | 174 | ⛔ **REACH IDS** — the axis a craft sits on, not what powers it |
 | `wild_current`, `living_current` | 7 | pack ids |
+| `valley_craft`, `harmonic`, `radiant` | 40 | ⛔ **TRADITIONS AND FOOTHILLS** — a people is not a power source |
 
 ⚠️ **`body` was a fifth value until today. It was ruled out on 2026-08-15 — absorbed into `metaphysical`
 as innate Ki — and the definition stayed live in `power_sources.json` for a day afterwards. I reached for
@@ -25,7 +26,7 @@ it while fixing this exact defect.** ⛔ **A stale definition is an invitation; 
 
 ## §2 — WHY IT MATTERS
 
-**1 · `aestheticFor` resolves `traditions[t]` then `powerSystems[ps]`.** ⛔ **251 abilities fall through
+**1 · `aestheticFor` resolves `traditions[t]` then `powerSystems[ps]`.** ⛔ **295 abilities fall through
 to the house palette** — precisely the silent fallback CCode flagged in Q7 as the risk of the taxonomy
 swap. **It is already happening, at scale, for a different reason.**
 
@@ -71,8 +72,10 @@ matter), and four are pure skill that still draw their tradition's current, more
 a Wright's `Sound Repair` is worked matter, but a Wright's `Masterwork` may be precursor-assisted. **Those
 are per-craft judgments.**
 
+⚠️ **NUMBER CORRECTED AFTER FILING: my first count was 251 because I had left `valley_craft`, `harmonic` and `radiant` in the legal set. They are a Folk collection and two foothills — PEOPLES, NOT SOURCES — so they are part of the defect. The honest figure is 295 of 340, with 41 correct.**
+
 **Recommend: fixed per tradition as each is audited**, alongside the 210 unauthored bounds. ⚠️ **Bulk-
 assigning 251 sources I have not reasoned about would read as considered and not be** — the same call made
 on the bounds, and the same reason.
 
-**Body is done: 22 of 22 correct.**
+**Body is done: 22 of 22 correct — and they are 41 minus the 19 elsewhere, which is why the corpus figure moves as each tradition closes.**

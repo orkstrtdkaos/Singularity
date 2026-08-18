@@ -2280,3 +2280,48 @@ STRONGER, ALREADY WIRED, AND ALREADY SCALED.** The new field bought nothing.
    differently in principle?
 
 **If the answer to 3 is no, use the existing field.**
+
+
+### 32.17 ⛔ ENERGY COST STRUCTURE — and stop inventing extra costs
+
+**Derived from 342 authored abilities** (`content/packs/core/rules/energy_costs.json`). ⚠️ **The structure
+existed and was consistent; nobody had written it down, so an outlier could not be seen as one.**
+
+| level | n | median | band |
+|---|---|---|---|
+| **1** | 118 | **4** | 2–6 |
+| **2** | 112 | **4** | 2–6 |
+| **3** | 44 | **6** | 4–8 |
+| **4** | 37 | **12** | 8–13 |
+| **5** | 31 | **13** | 10–15 |
+
+⛔ **START AT THE LEVEL MEDIAN, THEN ADJUST BY REACH AND PERMANENCE — never by how dramatic it sounds.**
+**+1–2** area, or persists past the contest · **+1–2** permanent, or needs a mending craft to lift ·
+**−1–2** self-only, single target, or one round.
+
+⚠️ **L1 and L2 share a median of 4 and that is correct** — a second-level craft earns its keep through
+effect, not price.
+
+### 32.18 ⛔ STOP INVENTING EXTRA COSTS
+
+**Erik, 2026-08-16: *"SOP should check for these extra costs you keep coming up with — we don't need
+Keening to land on you too."*** ⛔ **AND HE HAD ALREADY RULED THIS ONCE** (§32.5): *"having a cost is not a
+requirement — it costs energy."* **Two of my invented costs were rejected in a single review, and I kept
+adding them.**
+
+**`energyCost` IS THE COST.** A second cost needs a reason that is not atmosphere.
+
+| legitimate second cost | why |
+|---|---|
+| ⚠️ **it is the craft's whole identity** | Shared Weight — *you are now the one carrying it*. The transfer IS the mechanic |
+| ⚠️ **it creates a real decision** | Grey Hand — *nothing it does is deniable*, so using it is a public act |
+| ⛔ **it bounds a capstone** | Grief That Stops — *some hearts stop* |
+
+| ⛔ NOT a legitimate second cost |
+|---|
+| **atmosphere** — *"it lands on you too"*, *"the body remembers the debt"* |
+| **symmetry** — a harm craft does not need to harm the user to feel fair |
+| **doubt** — pricing low or adding a penalty because you are unsure the craft deserves to exist (§32.15) |
+
+**Test: remove the extra cost. If the craft is still interesting and still bounded, the cost was
+decoration.**

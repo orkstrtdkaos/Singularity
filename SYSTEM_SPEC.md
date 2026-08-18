@@ -2162,3 +2162,76 @@ they surface in the per-tradition audit rather than reading as though someone ha
 ⛔ **FOR BODY THE SCHOOL AND THE SECT COINCIDE**, which is not true of Mind — where Suggestion crossed cogitant and figurist. ⚠️ **Body's two peoples do not share methods:** a mason and a somatic reach the same rooftop by unrelated crafts — one finds the seam already in the wall, the other steps on nothing.
 
 **Authored to close gaps:** False Stance (obscure) · Worth the Work (bargain) · Steady Hands (soothe) · Loose-Limbed (the corpus's only anti-bind) · Ki Wield (capstone, and the first Body craft to name the tradition's own power source).
+
+
+---
+
+## 37. SOP — the one-pass tradition audit (2026-08-16)
+
+⛔ **Assembled after Mind and Body. Everything below was learned by getting it wrong once.** Run in this
+order; each step feeds the next.
+
+### 37.1 ⛔ MEASURE FIRST, AND MEASURE THE CORPUS, NOT YOUR OWN WORK
+
+**Before touching anything, produce:** skill count · sect split · function counts (deduped per §32.4) ·
+gain-axis counts · `powerSystem` values · sense/obscure tags · social verbs present · unauthored bounds ·
+ranks >3 · schema failures.
+
+⚠️ **THE RECURRING ERROR: counting a tag I applied myself and concluding the corpus lacks it.** I reported
+"3 sense crafts" when there were 56, because I counted my own `sense: true` and not `reveal`. ⛔ **Query
+the authored field, not the annotation.**
+
+### 37.2 The known corpus-wide defects — expect all of them
+
+| defect | scale | fix |
+|---|---|---|
+| ⛔ **`powerSystem` holds a reach id or `attribute`** | **295 of 340** | set from `byTradition_primary_20260815`, per-craft where it differs |
+| ⛔ **`cannot` points at the next rank** | **210 ranks** | write a real bound (§32.14) |
+| ⛔ **social crafts tagged mechanically** | 10 of 12 traditions have NO social verb | if it works by speaking, it carries one (§31.5) |
+| ⚠️ **no obscure** | 10 of 14 traditions | author one, tradition-flavoured (§34.4) |
+| ⚠️ **`scope` as the default rank gain** | 22–37% before correction | usually `targets` doing scope's job |
+
+### 37.3 ⛔ THE FIVE MERGE PATTERNS
+
+**Every merge in two traditions fell into one of these. Look for them by name:**
+
+1. ⛔ **THE TRADITION-MASTERY SKILL.** *Noesis · Logos · Formcraft · Soma.* Named for the pole, describes a
+   capacity, duplicates two or three of its own sect's crafts. **Cut it, or rebuild it as a real craft.**
+2. ⛔ **THE SAME SKILL AT IDENTICAL STATS.** Same level, cost, magnitude and rank-arc, only the noun
+   differs. *Twenty-one "first gift" senses. Three navigation skills. Two restore skills.* **Merge, flavour
+   internal via `sectFlavour`.**
+3. ⛔ **THE FOLK VERSION.** A weaker duplicate explicitly labelled as such — *Second Wind was "folk-Soma."*
+   **Merge upward.**
+4. ⚠️ **TWO AXES IN ONE CLUSTER.** *Outlast* and *execute* looked like one skill and were two. **Before
+   merging five into one, check whether it is two.**
+5. ⚠️ **THE SAME NAME TWICE.** *Set Stone* was an L1 mason skill AND Thingcraft's r2.
+
+### 37.4 The six-question assessment (§32.11) — expected failure modes
+
+⛔ **Q1 fails on:** "the pole mastery," "perform a feat at the edge of the possible," anything naming a
+capacity. **Q3 fails on:** project and journey skills judged on scene frequency — ⚠️ **check the clock
+before cutting** (§33). **Q4 fails on:** anything that tells you a fact the GM would supply. **Q6 fails
+on:** evocative method-description standing where a mechanic belongs.
+
+### 37.5 ⛔ SCHOOLS — derive them, do not impose them
+
+**A school is what a craft DOES; a sect is where it descends from.** ⚠️ **They may coincide — Body's did,
+Mind's did not, and that difference is itself a finding.**
+
+**Aim for two or three.** ⛔ **If a school splits evenly along the sect line, it is not a school — it is two
+halves of the other schools sitting together.** *(Traversal.)*
+
+### 37.6 Authoring order
+
+**Cut → merge → repurpose → author gaps → fix bounds → fix sources → rebalance gains → schools → table.**
+
+⚠️ **Log a revert file before the first cut.** ⛔ **Full schema on everything authored** (§32.6) — all nine
+crafts I wrote in one session were incomplete. **Ranks ≤3** — the only 5-rank tree in the corpus was mine.
+
+### 37.7 ⛔ THE THREE THINGS I KEEP DOING
+
+1. **Rationalising a magic skill** (§32.12) and **editorialising in a bound** (§32.13).
+2. **Matching on display name when the id differs** — *Rising Step* is `raised_road`; *Borrowed Form* is
+   `drawn_ascent`. ⛔ **Always resolve by id.**
+3. **Reaching for a ruling that was already overturned** — I assigned four crafts to `body` a day after
+   writing up its elimination. ⚠️ **Re-read the canon file, do not recall it.**

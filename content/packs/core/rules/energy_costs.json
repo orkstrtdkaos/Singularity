@@ -1,0 +1,46 @@
+{
+ "schemaVersion": 1,
+ "id": "energy_costs",
+ "kind": "rules",
+ "note": "⛔ SNG-497. THE ENERGY COST STRUCTURE, DERIVED FROM 342 AUTHORED ABILITIES. Erik: 'we should have a DOCUMENTED ENERGY COST STRUCTURE in the system spec.' ⚠️ It existed implicitly and consistently; nobody had written it down, so outliers could not be seen as outliers.",
+ "byLevel": {
+  "1": {
+   "n": 118,
+   "min": 1,
+   "median": 4,
+   "max": 8,
+   "band": "2-6"
+  },
+  "2": {
+   "n": 112,
+   "min": 1,
+   "median": 4,
+   "max": 12,
+   "band": "2-6"
+  },
+  "3": {
+   "n": 44,
+   "min": 2,
+   "median": 6,
+   "max": 12,
+   "band": "4-8"
+  },
+  "4": {
+   "n": 37,
+   "min": 8,
+   "median": 12,
+   "max": 14,
+   "band": "8-13"
+  },
+  "5": {
+   "n": 31,
+   "min": 10,
+   "median": 13,
+   "max": 15,
+   "band": "10-15"
+  }
+ },
+ "theRule": "⛔ COST IS SET BY LEVEL, THEN ADJUSTED BY REACH AND PERMANENCE — never by how dramatic the craft sounds.\n   START AT THE LEVEL MEDIAN: L1 4 · L2 4 · L3 6 · L4 12 · L5 13.\n   +1 to +2 — hits an area rather than a target, or persists past the contest.\n   +1 to +2 — the effect is PERMANENT or requires a mending craft to lift.\n   −1 to −2 — self-only, single target, or lasts one round.\n⚠️ L1-L2 SHARE A MEDIAN OF 4 AND THAT IS CORRECT — a second-level craft earns its keep through effect, not through price.",
+ "_theInversionCaught": "⛔ THE CASE THAT PROMPTED THIS. KEENING: L1, e7 — nearly double its band's median, and the second most expensive L1 craft in the game. GRIEF STRIKE: L2, e2 — half its median, and it does something permanent. ⚠️ THE CHEAPER CRAFT WAS THE STRONGER ONE, ONE LEVEL HIGHER. Corrected to Keening 4 (area, one round) and Grief Strike 6 (single target, permanent).",
+ "forbidden": "⛔ DO NOT PRICE A CRAFT BY ITS FLAVOUR. A craft that sounds terrible is not therefore expensive, and a modest-sounding one is not therefore cheap. ⚠️ AND DO NOT PRICE LOW BECAUSE YOU DOUBT THE CRAFT — that is the §32.15 tell: Kept Breath sat at e4 because it had been authored apologetically."
+}

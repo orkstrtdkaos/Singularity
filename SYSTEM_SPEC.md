@@ -2258,3 +2258,25 @@ competes, the craft is apologising.**
 
 **What does NOT change:** the bound still states the limit once (§32.13, §32.14), and the cost is still
 real. ⛔ **Wonder is in the GRANT. Restraint is in the BOUND. Do not put the restraint in both.**
+
+
+### 32.16 ⛔ CHECK FOR AN EXISTING MECHANIC BEFORE INVENTING ONE
+
+**Erik: *"Do we really need tempHealth or is that functionally the same as Soak?"*** ⚠️ **It was not
+identical — soak is per-hit reduction for a duration, temp health is a one-shot pool — but SOAK WAS
+STRONGER, ALREADY WIRED, AND ALREADY SCALED.** The new field bought nothing.
+
+⛔ **THIS IS THE THIRD TIME IN ONE SESSION.** I specified a sense slot that was already shipped
+(CCODE-45), built tempo on `charges.json` before checking its lifetime fit, and then invented
+`tempHealth` beside an existing `soak`.
+
+**Before authoring a mechanic, answer three questions:**
+
+1. ⛔ **Does a field already exist that the engine READS?** (`soak`, `duration`, `evasion`, `dice` on
+   damage/strike shapes.)
+2. ⚠️ **What is the corpus band for it?** Soak runs 2–6 across 18 abilities; a new craft should sit inside
+   that, not above it.
+3. ⛔ **Would the new field behave differently in a way that MATTERS at the table** — not merely
+   differently in principle?
+
+**If the answer to 3 is no, use the existing field.**

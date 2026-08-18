@@ -1667,8 +1667,8 @@
    "id": "kept_breath",
    "name": "Kept Breath",
    "levelReq": 2,
-   "energyCost": 4,
-   "powerSystem": "reach_death_life",
+   "energyCost": 5,
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "death_life": -0.3,
@@ -1679,10 +1679,125 @@
     "endure",
     "threshold"
    ],
-   "narrationHints": "Enough. Not well — enough. The ashwarden knows the exact line between alive and not. They hold someone there. The body does what it must; not a thing more.",
-   "description": "Sustain a body through physical hardship: starvation, cold, blood loss, wounds, exhaustion. The ashwarden knows the exact threshold a body needs to keep going — and holds someone there. Not healing, not protection from curses. The body's minimum, maintained by craft.",
-   "notFor": "Metaphysical or unnatural death threats — curses, wraith-touch, necromantic workings (use Death-Ward). The Kept Breath handles the body's physical ledger: rations, warmth, blood, sleep. It holds the threshold; it does not move it.",
+   "narrationHints": "They put a hand flat on the wound and nothing visibly happens, and the man with a spear through him picks up his spear. There is no light and no warmth. Something simply declines to proceed.",
+   "description": "Refuse an ending that has already begun — yours or someone else's — and hold it off while there is still something to be done.",
+   "notFor": "Healing — nothing is mended; an ending that has already completed; endings that are not physical.",
    "tree": [
+    {
+     "rank": 1,
+     "name": "Not Yet",
+     "grants": "⛔ REFUSE YOUR OWN ENDING FOR AS LONG AS YOU HOLD IT. Wounds that should drop you do not drop you, blood you have lost stops counting, cold and starvation stop being able to finish the job. You keep fighting, walking or working at full capacity while the reason you should not accumulates.",
+     "cannot": "⛔ Ending the hold applies all deferred harm at once.",
+     "functions": [
+      "sustain",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Stand Between",
+     "grants": "⛔ PUT YOURSELF BETWEEN ANOTHER PERSON AND THEIR ENDING AND REFUSE IT ON THEIR BEHALF. A mortal wound stops being mortal while you hold. They act at full capacity — fight, run, finish the thing — with an injury that should have stopped them.",
+     "cannot": "One person, and you must have touched them at least once. Ending the hold applies all their deferred harm at once.",
+     "functions": [
+      "sustain",
+      "resist",
+      "heal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "conditions"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Palelands Patience",
+     "grants": "⛔ HOLD A GROUP, AND HOLD THE ALREADY-DYING AT THE THRESHOLD ITSELF. Someone whose ending has begun is stopped there — not dead, not recovering, held — for days if you keep the vigil. Whole crews have crossed the Palelands on this.",
+     "cannot": "As many as you can name, and one at the threshold. Ending the hold applies all deferred harm at once.",
+     "functions": [
+      "sustain",
+      "resist",
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "duration",
+      "targets"
+     ]
+    }
+   ],
+   "functions": [
+    "sustain",
+    "resist",
+    "heal"
+   ],
+   "challengeTypes": [
+    "SURVIVE",
+    "EXPLORE"
+   ],
+   "tradition": "ashwarden",
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "schoolAffinity": "ash_gravehanded",
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "bolster",
+   "operativeAxis": [
+    "threshold",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 5,
+    "scope": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "hold ANOTHER PERSON at minimum — keep a companion alive through what would kill them, or extend a dying person's time",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "sustain a SMALL GROUP through conditions nothing else could survive; bring someone back from the ABSOLUTE THRESHOLD and hold them there",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold your own threshold — half the relief, and you keep your attention free",
+    "surge": "double it; the craft REQUIRES FULL ATTENTION while the other is held"
+   },
+   "bounds": [
+    {
+     "text": "⛔ NOTHING IS HEALED. Every wound is exactly where it was when the hold ends",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ ENDING THE HOLD APPLIES ALL DEFERRED HARM AT ONCE",
+     "class": "cost"
+    },
+    {
+     "text": "you must have touched anyone you hold besides yourself",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ an ending that has already completed is out of reach — that is Calling Back, and it is a different road",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A survive/fight action that refuses an ending. Its strength is rated 6 out of 10. Ranks: rank 2 holds another person, rank 3 holds a group and the already-dying.",
+   "_nameWas": "The Kept Breath",
+   "_idWas": "the_kept_breath",
+   "_treeWas": [
     {
      "rank": 1,
      "name": "Minimum",
@@ -1727,66 +1842,8 @@
      ]
     }
    ],
-   "functions": [
-    "heal",
-    "sustain"
-   ],
-   "challengeTypes": [
-    "SURVIVE",
-    "EXPLORE"
-   ],
-   "tradition": "ashwarden",
-   "harmRung": "none",
-   "nativeOrCombination": "native",
-   "schoolAffinity": "ash_gravehanded",
-   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
-   "shape": "bolster",
-   "operativeAxis": [
-    "threshold",
-    "targets"
-   ],
-   "mechanic": {
-    "magnitude": 4,
-    "duration": 12,
-    "targets": 1
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "extend",
-     "axis": "targets",
-     "delta": "hold ANOTHER PERSON at minimum — keep a companion alive through what would kill them, or extend a dying person's time",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "extend",
-     "axis": "targets",
-     "delta": "sustain a SMALL GROUP through conditions nothing else could survive; bring someone back from the ABSOLUTE THRESHOLD and hold them there",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "hold your own threshold — half the relief, and you keep your attention free",
-    "surge": "double it; the craft REQUIRES FULL ATTENTION while the other is held"
-   },
-   "bounds": [
-    {
-     "text": "THIS HOLDS THE THRESHOLD — IT DOES NOT MOVE IT; you remain in the condition",
-     "class": "hard"
-    },
-    {
-     "text": "ONE PERSON AT A TIME at r2 — full attention required",
-     "class": "soft"
-    },
-    {
-     "text": "THE KEPT BREATH IS NOT A CURE AND NEVER BECOMES ONE",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A survive/explore action that strengthens someone. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends targets. Limit: this Holds The Threshold — IT Does Not Move IT; you remain in the condition.",
-   "_nameWas": "The Kept Breath",
-   "_idWas": "the_kept_breath"
+   "_descriptionWas": "Sustain a body through physical hardship: starvation, cold, blood loss, wounds, exhaustion. The ashwarden knows the exact threshold a body needs to keep going — and holds someone there. Not healing, not protection from curses. The body's minimum, maintained by craft.",
+   "_reauthored": "⛔ SNG-493. Erik: 'Kept Breath needs a FLAVOR SHIFT. You authored this, and many skills, as very conservative — IT CAN'T DO MAGIC BUT BARELY LETS YOU GET BY type skill. THERE'S NO FANTASY AND MAGIC IN THAT.'\n⚠️ HE IS RIGHT. The old text was 'the body's minimum, maintained by craft — not healing, not protection from curses, functional NOT WELL' — a skill defined by what it cannot do, with three bounds and no wonder. ⛔ IT ALSO SAT AT mag4 e4 AS ONE OF THE CHEAPEST THINGS IN THE TRADITION, which is what a designer does when they do not believe in a craft.\n⛔ THE FANTASY VERSION IS THE ASHWARDEN THESIS TAKEN SERIOUSLY: THEY TEND ENDINGS, SO THEY CAN REFUSE ONE. A man fights with a spear through him because an Ashwarden has declined to let that finish. The cost is unchanged and stated once."
   },
   {
    "id": "green_claim",

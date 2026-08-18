@@ -500,8 +500,13 @@
      "harmRung": "none",
      "gainAxes": [
       "targets",
+      "quality"
+     ],
+     "_gainAxesWas": [
+      "targets",
       "scope"
-     ]
+     ],
+     "_gainNote": "⚠️ A passenger is targets; controlled descent from any height is quality."
     }
    ],
    "powerSystem": "metaphysical",
@@ -798,8 +803,13 @@
      "harmRung": "none",
      "gainAxes": [
       "quality",
+      "conditions"
+     ],
+     "_gainAxesWas": [
+      "quality",
       "scope"
-     ]
+     ],
+     "_gainNote": "⛔ Immunity to natural substances and resistance to crafts are CONDITIONS you now operate under."
     }
    ],
    "nativeOrCombination": "native",
@@ -1378,5 +1388,6 @@
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
  "_dramaStrip": "⛔ SNG-480 / SYSTEM_SPEC §32.12. Dramatising tail-clauses removed from `grants` and `cannot`. ⚠️ I WROTE §32.12 AND BROKE IT IN THE NEXT COMMIT. The bound states the limit; it does not editorialise about how the limit feels.",
- "_cut": "⛔ SNG-486: Pathless Way cut. 'Any natural barrier yields to enough skill' is a permission, not an action — Q1 failure at capstone tier. Replaced by Ki Wield."
+ "_cut": "⛔ SNG-486: Pathless Way cut. 'Any natural barrier yields to enough skill' is a permission, not an action — Q1 failure at capstone tier. Replaced by Ki Wield.",
+ "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas."
 }

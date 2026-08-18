@@ -685,7 +685,7 @@
     "plain-dealing"
    ],
    "narrationHints": "A mason's word is set the way a stone is set. It does not shift.",
-   "description": "What the mason says stands. Not persuasion — the plain authority of someone whose word is as solid as their work.",
+   "description": "Say the plain thing and have it hold — the authority of someone whose word is as solid as their work, and whose presence is the fixed point in the room.",
    "notFor": [],
    "tradition": "mason",
    "harmRung": "none",
@@ -702,41 +702,20 @@
     {
      "rank": 1,
      "name": "Plain Statement",
-     "grants": "Say the plain thing and have it land with authority — the practical fact that settles an argument by being undeniable.",
+     "grants": "⛔ SAY THE PLAIN THING AND HAVE IT LAND. The practical fact that settles an argument by being undeniable — and your presence backs it: people make room, and those considering something reconsider.",
      "cannot": "It must BE the practical fact. A plain statement that is wrong lands as wrongly.",
      "functions": [
       "command"
      ],
-     "gains": "broaden",
+     "gains": "deepen",
      "harmRung": "none",
-     "gainAxes": [],
-     "_grantsWas": "Say the plain thing and have it land with authority — not eloquence, just solidity. The practical fact that settles an argument by being undeniable.",
-     "_cannotWas": "Anything rank 2 adds — make an agreement or declaration that sticks — not because you charmed anyone, but because the weight of your standing and your history of keeping your word makes it so; IT IS SOLIDITY, NOT ELOQUENCE."
+     "gainAxes": []
     },
     {
      "rank": 2,
      "name": "Word That Holds",
-     "grants": "⚠️ ADDS DURATION AND BINDING. An agreement or declaration you make sticks — the weight of your standing holds it after the room empties.",
-     "cannot": "One standing agreement at a time; breaking your own word ends the craft until it is rebuilt.",
-     "functions": [
-      "bind",
-      "command"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_nameWas": "The Word That Holds",
-     "gainAxes": [
-      "duration",
-      "autonomy"
-     ],
-     "_grantsWas": "Make an agreement or declaration that sticks — not because you charmed anyone, but because the weight of your standing and your history of keeping your word makes it so.",
-     "_cannotWas": "Anything rank 3 adds — name the practical truth of a situation so plainly and with such authority that people organize around it as if it were the wall they're building against; IT IS SOLIDITY, NOT ELOQUENCE."
-    },
-    {
-     "rank": 3,
-     "name": "Set",
-     "grants": "⛔ ADDS SCALE. Name the practical truth of a situation so plainly that people organise around it — a camp, a crew, a town in a crisis.",
-     "cannot": "One situation. It is solidity, not eloquence: it cannot make people want something.",
+     "grants": "⚠️ ADDS DURATION AND BINDING. An agreement or declaration you make sticks after the room empties, and a space you stand in organises around you — enter and it restructures.",
+     "cannot": "One standing agreement at a time. Breaking your own word ends the craft until it is rebuilt.",
      "functions": [
       "command",
       "bind"
@@ -744,11 +723,25 @@
      "gains": "deepen",
      "harmRung": "none",
      "gainAxes": [
+      "duration",
+      "autonomy"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Fixed Point",
+     "grants": "⛔ ADDS SCALE. Name the practical truth of a situation so plainly that a camp, a crew or a town organises around it — and anyone acting against you must first account for what you have already said and already are.",
+     "cannot": "One situation. It is solidity, not eloquence — it cannot make people want something.",
+     "functions": [
+      "command",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
       "scope",
       "targets"
-     ],
-     "_grantsWas": "Name the practical truth of a situation so plainly and with such authority that people organize around it as if it were the wall they're building against.",
-     "_cannotWas": "Nothing further; this is the craft's ceiling; IT IS SOLIDITY, NOT ELOQUENCE; and it still costs what it costs: a word that lands like a wall is a word YOU CANNOT WALK BACK."
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -794,7 +787,12 @@
    ],
    "plainly": "A social/negotiation/leadership action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about a day Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: iT IS Solidity, Not Eloquence — a mason who is Wrong lands just as hard and is just as wrong.",
    "_nameWas": "The Set Word",
-   "_idWas": "the_set_word"
+   "_idWas": "the_set_word",
+   "sectFlavour": {
+    "mason": "THE WORD — what you said, and your history of keeping it.",
+    "somatic": "THE PRESENCE — absorbs Weight of Presence: the body completely at home in itself, which people organise around without being told to."
+   },
+   "_merged": "⛔ SNG-485: absorbs Weight of Presence (L2 somatic). Both were L2, social, `command`, 'authority without persuasion', and their r3s were the same claim."
   },
   {
    "id": "near_way",
@@ -1065,21 +1063,24 @@
     "break"
    ],
    "narrationHints": "You put your hand flat against the made thing and remember it, stone by stone, back to the un-built quarry it came from — and it goes, willingly almost, back to being nothing that was ever a wall.",
-   "description": "The Mason capstone — the unmaking of a made thing back to its raw un-built state, a whole edifice returned to stone and dust as if it had never risen. The great and grieving gift of those who know building best.",
+   "description": "Take a built structure apart back to its raw material — the join forgets it was a join, and what stood is a heap of dressed stone.",
    "notFor": "One structure, once, at enormous cost — it unmakes only what was made, never the grown or living, and it cannot be reversed; an unmade wall does not remember how to be a wall. Those who build best grieve this most.",
    "tree": [
     {
      "rank": 1,
      "name": "Unmaking of Walls",
-     "grants": "Unmake a whole built structure back to its raw, un-built material.",
-     "cannot": "It touches only the made, it costs nearly all you have, and it CANNOT be undone — the ones who understand building are the ones who feel the unmaking most.",
+     "grants": "⛔ UNMAKE A WHOLE BUILT STRUCTURE BACK TO ITS RAW MATERIAL — not felled, not collapsed: the join forgets it was a join and the wall is a heap of dressed stone. ⚠️ NOTHING FALLS ON ANYONE. Where Keystone Blow brings a building DOWN, this takes a building APART.",
+     "cannot": "Built things only, and one structure. What was inside it is now standing in the open, unhurt and very surprised.",
      "functions": [
-      "break"
+      "break",
+      "transform"
      ],
-     "harmRung": "damaging",
-     "gains": "broaden",
-     "_nameWas": "The Unmaking of Walls",
-     "gainAxes": []
+     "gains": "deepen",
+     "harmRung": "severe",
+     "gainAxes": [
+      "scope",
+      "quality"
+     ]
     }
    ],
    "gated": "learned",
@@ -1127,7 +1128,8 @@
    ],
    "plainly": "A fight action that deals damage. It rolls 5d6+6 across a scope of 4 Limit: iT Touches Only The Made.",
    "_nameWas": "The Unmaking of Walls",
-   "_idWas": "the_unmaking_of_walls"
+   "_idWas": "the_unmaking_of_walls",
+   "_differentiated": "⛔ SNG-485: differentiated from Keystone Blow. That brings a building DOWN with one blow at the load-bearing point; this takes a building APART and nothing falls on anyone."
   },
   {
    "schemaVersion": 1,
@@ -1817,24 +1819,18 @@
     },
     {
      "rank": 3,
-     "name": "Standing Truth of It",
-     "grants": "A site: walls, wells, foundations, the ground under them. Masons are called before sieges and after floods for exactly this.",
-     "cannot": "⚠ YOU WILL BE BELIEVED OR YOU WILL BE IGNORED, and both are worse than you expect. A Mason who condemns a hall is answerable to everyone who used it, and one who clears it is answerable if they were wrong.",
+     "name": "Prepare the Ground",
+     "grants": "⛔ ADDS SITE WORK AND PROJECTS. Read walls, wells, foundations and the ground under them — and then PREPARE that ground: shore what will fail, undermine what should, site a camp or a wall where the earth will hold it. ⚠️ A PROJECT: it banks progress per tick and completes on a threshold.",
+     "cannot": "One site per project. Reading is a scene; preparing is not.",
      "functions": [
       "reveal",
-      "foresee",
-      "empower"
+      "make"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "foresee",
-      "empower"
-     ],
-     "_nameWas": "The Standing Truth of It",
      "gainAxes": [
-      "scope"
+      "scope",
+      "autonomy"
      ]
     }
    ],
@@ -1883,7 +1879,10 @@
    "_nameWas": "The Sound Read",
    "_idWas": "the_sound_read",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads load path and first failure\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads load path and first failure\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "downtime": true,
+   "projectTicks": true,
+   "_project": "⛔ SNG-485. Erik: 'Sound Read can PREPARE GROUND and be for projects.' r3 is now site preparation banking per tick."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

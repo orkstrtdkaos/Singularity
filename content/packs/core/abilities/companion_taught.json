@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "companion_taught",
  "kind": "content",
- "note": "⛔ SNG-496. COMPANION-TAUGHT ABILITIES, FULLY AUTHORED. ⚠️ All nine `bondGrants` in content/packs/valley/companions/ are stubs missing 14 required fields and have no `tree`. This file is the pattern: a bond grant is a REAL ABILITY with real ranks, gated on the companion being present.",
+ "note": "⛔ SNG-496. COMPANION-TAUGHT ABILITIES. ⚠️ Their progression is `stage`, NOT skill rank — each tier keys to the companion's authored `stages[]` entry and advances with BOND, not with spend. All nine `bondGrants` in content/packs/valley/companions/ are stubs missing 14 required fields; this file is the pattern.\n⛔ BLOCKED ON CCODE: `engine/companions.js` `bondOf` returns stage 1 or 2 only. No companion can reach an authored stage 3 today.",
  "abilities": [
   {
    "id": "the_attended_end",
@@ -64,6 +64,56 @@
    "tree": [
     {
      "rank": 1,
+     "stage": 1,
+     "name": "The Attending Bird",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ WHAT IS ENDING HERE, HOW, AND HOW LONG IT HAS — a person, a wound, a beast, a fire. Plainly, in time to matter, and never wrong. ⚠️ At stage 1 you must ASK.",
+     "cannot": "One subject, and Marrow must be able to see it. It reads the ending; it does not prevent it."
+    },
+    {
+     "rank": 2,
+     "stage": 2,
+     "name": "The Told Truth",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "quality"
+     ],
+     "grants": "⚠️ ADDS CAUSE, KIND, AND BEING TOLD UNASKED. Marrow distinguishes endings that were NATURAL from ones that were MADE — and reads things that are not bodies: a truce, a road, a house, a season's grain. ⛔ AND IT TELLS YOU BEFORE YOU ASK, always in time to matter.",
+     "cannot": "It names that an ending was made and roughly by what. It does not name who."
+    },
+    {
+     "rank": 3,
+     "stage": 3,
+     "name": "The One Who Stays",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "duration"
+     ],
+     "grants": "⛔ ADDS PLACE AND FORESIGHT. Every ending in a place at once, ordered by when — and which of them can still be turned aside, and what it would take. ⚠️ INCLUDING YOURS, and it will not leave while it is happening.",
+     "cannot": "⛔ It tells you what would turn an ending aside. Doing it is yours."
+    }
+   ],
+   "_authored": "⛔ SNG-496. Erik: 'the Attended End needs to be able to RANK UP as well — so we have an opportunity to let an AMAZING SKILL FROM A COMPANION... is it written out yet?'\n⛔ IT WAS NOT, AND NEITHER IS ANY OTHER. ALL NINE COMPANION `bondGrants` ARE ONE-LINE STUBS: id, name, description, energyCost, attribute, axes, notFor, functions — and NOTHING ELSE. Missing levelReq, tree, shape, mechanic, bounds, plainly, challengeTypes and six more. ⚠️ COMPANION-TAUGHT SKILLS CANNOT RANK UP ANYWHERE IN THE GAME, and the other eight are Motes' Vigil, Pack-Sense, The Old Procedure, Thin-Place Sense, The Kept Dark, Scholar's Margin, The Taking Root and A Second Pair of Hands.\n⚠️ THE RANK LADDER IS DRAWN FROM MARROW'S OWN `knowledge` AND `stages`, not invented: 'when a thing is ending, how, and roughly when' → 'which endings were natural and which were made' → stage 3 'The One Who Stays'. ⛔ r3's 'including yours' is the companion file's own line: 'it will not lie about what it sees coming, including about you.'",
+   "_treeWas": [
+    {
+     "rank": 1,
      "name": "The Told Truth",
      "grants": "⛔ WHAT IS ENDING HERE, HOW, AND HOW LONG IT HAS — a person, a wound, a beast, a fire. Plainly, in time to matter, and it is never wrong.",
      "cannot": "One subject, and Marrow must be able to see it. It reads the ending; it does not prevent it.",
@@ -107,7 +157,8 @@
      ]
     }
    ],
-   "_authored": "⛔ SNG-496. Erik: 'the Attended End needs to be able to RANK UP as well — so we have an opportunity to let an AMAZING SKILL FROM A COMPANION... is it written out yet?'\n⛔ IT WAS NOT, AND NEITHER IS ANY OTHER. ALL NINE COMPANION `bondGrants` ARE ONE-LINE STUBS: id, name, description, energyCost, attribute, axes, notFor, functions — and NOTHING ELSE. Missing levelReq, tree, shape, mechanic, bounds, plainly, challengeTypes and six more. ⚠️ COMPANION-TAUGHT SKILLS CANNOT RANK UP ANYWHERE IN THE GAME, and the other eight are Motes' Vigil, Pack-Sense, The Old Procedure, Thin-Place Sense, The Kept Dark, Scholar's Margin, The Taking Root and A Second Pair of Hands.\n⚠️ THE RANK LADDER IS DRAWN FROM MARROW'S OWN `knowledge` AND `stages`, not invented: 'when a thing is ending, how, and roughly when' → 'which endings were natural and which were made' → stage 3 'The One Who Stays'. ⛔ r3's 'including yours' is the companion file's own line: 'it will not lie about what it sees coming, including about you.'"
+   "progression": "stage",
+   "_progression": "⛔ SNG-496 CORRECTED. Erik: 'I think there is a RANK UP of the companion skills — you should CHECK THAT.'\n⛔ HE WAS RIGHT AND I HAD ALREADY DOCUMENTED IT MYSELF. `stages[]` IS THE RANK-UP MECHANISM, tied to BOND, not to skill ranks — po/SPEC_SNG-200 says 'stages are the spine' and Marrow authors three of them.\n⚠️ SO A COMPANION-TAUGHT CRAFT MUST NOT CARRY ITS OWN r1/r2/r3 LADDER. Each tier is keyed to the companion's authored stage, and the stage names are the companion's own: The Attending Bird · The Told Truth · The One Who Stays.\n⛔ AND THE BLOCKER IS STILL LIVE: `engine/companions.js:24-28` — `bondOf` is a TERNARY returning stage 1 or 2 only, so MARROW'S STAGE 3 IS UNREACHABLE. Bond caps at 10 and the last stage triggers at 8, so the top 20% of the scale is inert. ⚠️ Attended End r3 cannot be reached until CCode fixes that ternary.\n⚠️ AND THE STAGE PROGRESSION IS ALREADY IN THE CONTENT: stage 1 'watches, does not interfere' → stage 2 'tells you what it sees BEFORE YOU ASK' → stage 3 'it did not leave'. THE RANKS ARE THE RELATIONSHIP."
   }
  ]
 }

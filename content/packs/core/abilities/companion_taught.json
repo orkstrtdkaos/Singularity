@@ -1,0 +1,113 @@
+{
+ "schemaVersion": 1,
+ "id": "companion_taught",
+ "kind": "content",
+ "note": "⛔ SNG-496. COMPANION-TAUGHT ABILITIES, FULLY AUTHORED. ⚠️ All nine `bondGrants` in content/packs/valley/companions/ are stubs missing 14 required fields and have no `tree`. This file is the pattern: a bond grant is a REAL ABILITY with real ranks, gated on the companion being present.",
+ "abilities": [
+  {
+   "id": "the_attended_end",
+   "name": "Attended End",
+   "levelReq": 1,
+   "energyCost": 4,
+   "axes": {
+    "death_life": -0.5,
+    "falsehood_truth": 0.3
+   },
+   "attribute": "mental",
+   "narrationHints": "The bird lands somewhere it can see the whole situation, settles, and does not look away. When it tells you, it uses as few words as the thing requires, and none of them are kind.",
+   "description": "Marrow tells you plainly what is ending here and how long it has — a person, a truce, a building, a road. It is never wrong and it never softens it.",
+   "notFor": "Preventing the ending; being asked to be gentle about it; anything that is not, in fact, ending.",
+   "tradition": "ashwarden",
+   "traditionV2": "Death",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "metaphysical",
+   "shape": "reveal",
+   "operativeAxis": "death_life",
+   "intensity": "moderate",
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 4,
+    "scope": 3
+   },
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SURVIVE",
+    "SOCIAL"
+   ],
+   "taughtBy": "Marrow (companion bond)",
+   "companionTaught": true,
+   "sense": true,
+   "bounds": [
+    {
+     "text": "⛔ MARROW MUST BE PRESENT AND ABLE TO SEE IT. This is the bird's craft, lent to you",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT READS AN ENDING AND NEVER PREVENTS ONE — Marrow will not hasten an ending, ever, for any reason, including mercy",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT DOES NOT SOFTEN, INCLUDING ABOUT YOU. You cannot ask it to be gentle and you cannot ask it to be wrong",
+     "class": "cost"
+    },
+    {
+     "text": "something must actually be ending; a healthy thing gives nothing",
+     "class": "hard"
+    }
+   ],
+   "plainly": "An investigate/survive action declared in the sense slot. Its strength is rated 6 out of 10. Ranks: rank 2 reads made endings and things that are not bodies, rank 3 reads a whole place and how long it has.",
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Told Truth",
+     "grants": "⛔ WHAT IS ENDING HERE, HOW, AND HOW LONG IT HAS — a person, a wound, a beast, a fire. Plainly, in time to matter, and it is never wrong.",
+     "cannot": "One subject, and Marrow must be able to see it. It reads the ending; it does not prevent it.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Which Were Made",
+     "grants": "⚠️ ADDS CAUSE AND KIND. Marrow distinguishes the endings that were NATURAL from the ones that were MADE, and names which — and it reads things that are not bodies: a truce, a road, a house, a season's grain, a marriage.",
+     "cannot": "It names that an ending was made and roughly by what. It does not name who.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "quality"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The One Who Stays",
+     "grants": "⛔ ADDS PLACE AND FORESIGHT. Read every ending in a place at once, ordered by when — and Marrow will tell you which of them can still be turned aside, and what it would take. ⚠️ INCLUDING YOURS.",
+     "cannot": "⛔ It tells you what would turn an ending aside. Doing it is yours.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "duration"
+     ]
+    }
+   ],
+   "_authored": "⛔ SNG-496. Erik: 'the Attended End needs to be able to RANK UP as well — so we have an opportunity to let an AMAZING SKILL FROM A COMPANION... is it written out yet?'\n⛔ IT WAS NOT, AND NEITHER IS ANY OTHER. ALL NINE COMPANION `bondGrants` ARE ONE-LINE STUBS: id, name, description, energyCost, attribute, axes, notFor, functions — and NOTHING ELSE. Missing levelReq, tree, shape, mechanic, bounds, plainly, challengeTypes and six more. ⚠️ COMPANION-TAUGHT SKILLS CANNOT RANK UP ANYWHERE IN THE GAME, and the other eight are Motes' Vigil, Pack-Sense, The Old Procedure, Thin-Place Sense, The Kept Dark, Scholar's Margin, The Taking Root and A Second Pair of Hands.\n⚠️ THE RANK LADDER IS DRAWN FROM MARROW'S OWN `knowledge` AND `stages`, not invented: 'when a thing is ending, how, and roughly when' → 'which endings were natural and which were made' → stage 3 'The One Who Stays'. ⛔ r3's 'including yours' is the companion file's own line: 'it will not lie about what it sees coming, including about you.'"
+  }
+ ]
+}

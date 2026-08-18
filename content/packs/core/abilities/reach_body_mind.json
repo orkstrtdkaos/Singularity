@@ -78,7 +78,7 @@
      "_cannotWas": "⚠️ HELD OFF IS NOT HEALED. Everything deferred arrives at once when you stop, and it arrives worse."
     }
    ],
-   "powerSystem": "reach_body_mind",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "SURVIVE",
@@ -137,7 +137,9 @@
     "somatic": "TRAINED BREATH AND HEARTBEAT — you know exactly what you are spending.",
     "mason": "THE NEXT CORRECT ACTION TAKEN, not inspiration. Absorbs Long Haul."
    },
-   "_merged": "⛔ SNG-479: ABSORBS Long Haul (mason) and Soma r1-r2. Erik: 'r1 subname could be EMBRACE THE SUCK. Plus it should HEAL SOME and ADD SOME DMG SOAK on top of the resist boost. r2 EMPOWERED ATTACKS, no twice-a-day limit, DURATION APPLIES IN FIGHTS. r3 DREAM BREATH — grants soak worth X% of HP and heals half that amount.'"
+   "_merged": "⛔ SNG-479: ABSORBS Long Haul (mason) and Soma r1-r2. Erik: 'r1 subname could be EMBRACE THE SUCK. Plus it should HEAL SOME and ADD SOME DMG SOAK on top of the resist boost. r2 EMPOWERED ATTACKS, no twice-a-day limit, DURATION APPLIES IN FIGHTS. r3 DREAM BREATH — grants soak worth X% of HP and heals half that amount.'",
+   "_powerSystemWas": "reach_body_mind",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki."
   },
   {
    "id": "perfect_motion",
@@ -207,7 +209,7 @@
      ]
     }
    ],
-   "powerSystem": "reach_body_mind",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "DUEL",
@@ -270,7 +272,9 @@
     "somatic": "THE FLESH-TEMPLES' FUSION — perception, decision and motion as one instant. Absorbs Whole Act.",
     "mason": "ECONOMY OF EFFORT LEARNED FROM MATERIAL — nothing spent that the work did not need."
    },
-   "_merged": "⛔ SNG-479: ABSORBS Whole Act and Soma r3. Erik: 'I like your Perfect Motion skill — and the r1 could be used to DODGE/EVADE a blow as well. r1 subname could include ACROBATICS.'\n⚠️ r3 IS BODY'S TEMPO SIGNATURE — the EXTRA ACTION form from SYSTEM_SPEC §34.3, arriving from Whole Act's fusion rather than invented."
+   "_merged": "⛔ SNG-479: ABSORBS Whole Act and Soma r3. Erik: 'I like your Perfect Motion skill — and the r1 could be used to DODGE/EVADE a blow as well. r1 subname could include ACROBATICS.'\n⚠️ r3 IS BODY'S TEMPO SIGNATURE — the EXTRA ACTION form from SYSTEM_SPEC §34.3, arriving from Whole Act's fusion rather than invented.",
+   "_powerSystemWas": "reach_body_mind",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki."
   },
   {
    "id": "memory_palace",
@@ -500,7 +504,7 @@
      ]
     }
    ],
-   "powerSystem": "reach_body_mind",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "tradition": "somatic",
    "nativeOrCombination": "native",
@@ -540,7 +544,9 @@
     }
    ],
    "plainly": "An action that moves you or someone else. Its strength is rated 7 out of 10, and lasts for about 2 hours. Range is 20. Ranks: rank 2 extends chain. Limit: momentum-Bound — you must keep moving; There IS NO Hover AT Any Mastery.",
-   "_differentiated": "⛔ SNG-485. Erik: 'keep Loose-Limbed AND Skydancer, but DIFFERENTIATE — probably by ENHANCING SKYDANCER.' ⚠️ THE LINE IS NOW GROUND: Loose-Limbed leaves the ground and returns to it — running, vaulting, slipping a hold. SKYDANCER DOES NOT NEED GROUND AT ALL. r3 adds a passenger and controlled descent from any height."
+   "_differentiated": "⛔ SNG-485. Erik: 'keep Loose-Limbed AND Skydancer, but DIFFERENTIATE — probably by ENHANCING SKYDANCER.' ⚠️ THE LINE IS NOW GROUND: Loose-Limbed leaves the ground and returns to it — running, vaulting, slipping a hold. SKYDANCER DOES NOT NEED GROUND AT ALL. r3 adds a passenger and controlled descent from any height.",
+   "_powerSystemWas": "reach_body_mind",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki."
   },
   {
    "id": "working_model",
@@ -722,7 +728,7 @@
    "name": "Shaped Body",
    "levelReq": 3,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "physical",
    "axes": {
     "body_mind": -0.4
@@ -858,7 +864,9 @@
    },
    "_nameWas": "The Shaped Body",
    "_idWas": "the_shaped_body",
-   "_rebuilt": "⛔ SNG-485. Erik: 'perhaps something that BUILDS RESISTANCES — to SOAK DAMAGE at r1. Bigger soak plus RESISTANCE TO NATURAL SUBSTANCES at r2, IMMUNITIES to natural substances and RESISTANCE TO CRAFTS at r3.' ⚠️ The old ranks were permanent training with no scene effect and no roll — a Q1 failure."
+   "_rebuilt": "⛔ SNG-485. Erik: 'perhaps something that BUILDS RESISTANCES — to SOAK DAMAGE at r1. Bigger soak plus RESISTANCE TO NATURAL SUBSTANCES at r2, IMMUNITIES to natural substances and RESISTANCE TO CRAFTS at r3.' ⚠️ The old ranks were permanent training with no scene effect and no roll — a Q1 failure.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki."
   },
   {
    "schemaVersion": 1,
@@ -1107,7 +1115,7 @@
    "name": "Answered Motion",
    "levelReq": 1,
    "energyCost": 5,
-   "powerSystem": "reach_body_mind",
+   "powerSystem": "metaphysical",
    "attribute": "physical",
    "axes": {
     "body_mind": -0.6,
@@ -1231,7 +1239,9 @@
     "duration": 1,
     "scope": 1
    },
-   "_diceFix": "⛔ SNG-481: shape `strike` rolls dice per CCode's shape→reader map, and this craft carried magnitude only."
+   "_diceFix": "⛔ SNG-481: shape `strike` rolls dice per CCode's shape→reader map, and this craft carried magnitude only.",
+   "_powerSystemWas": "reach_body_mind",
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki."
   },
   {
    "id": "sustained_regard",

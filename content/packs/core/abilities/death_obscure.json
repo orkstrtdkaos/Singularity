@@ -1,0 +1,112 @@
+{
+ "schemaVersion": 1,
+ "id": "death_obscure",
+ "kind": "content",
+ "note": "⛔ SNG-490. Soul Stare — Death's obscure, and a resistance-drop that sets up the tradition's own ending crafts.",
+ "abilities": [
+  {
+   "id": "soul_stare",
+   "name": "Soul Stare",
+   "levelReq": 2,
+   "energyCost": 4,
+   "axes": {
+    "death_life": -0.5
+   },
+   "attribute": "mental",
+   "narrationHints": "They meet your eyes and hold them a beat too long, and you understand — not as a threat, as a fact — that you are a thing which ends, and roughly how.",
+   "description": "Meet something's gaze and show it its own ending — it stops being able to read you, and what it was relying on to keep it whole stops working as well.",
+   "notFor": "Anything you cannot see; a foe already blinded or looking away; killing — this shows an ending, it does not cause one.",
+   "tradition": "ashwarden",
+   "traditionV2": "Death",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "metaphysical",
+   "shape": "conceal",
+   "operativeAxis": "death_life",
+   "intensity": "moderate",
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 3,
+    "scope": 1
+   },
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL",
+    "SOCIAL"
+   ],
+   "bounds": [
+    {
+     "text": "⛔ THEY MUST BE ABLE TO SEE YOUR EYES. A helm, a turned back or a blindfold ends it",
+     "class": "hard"
+    },
+    {
+     "text": "one subject per sense action",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT SHOWS AN ENDING; IT DOES NOT CAUSE ONE",
+     "class": "hard"
+    },
+    {
+     "text": "they know exactly what you did and who did it",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/duel action declared in the sense slot. Its strength is rated 6 out of 10. Ranks: rank 2 reaches any living thing, rank 3 reaches anything with an essence.",
+   "functions": [
+    "deceive",
+    "hinder"
+   ],
+   "obscure": true,
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Soul Stare",
+     "grants": "⛔ DECLARE IN THE SENSE SLOT TO DENY THEIR READ — a person who is being shown their own death is not reading you. ⚠️ AND IT DROPS THEIR RESISTANCE: whatever they were holding themselves together with counts for less against the next thing that reaches them.",
+     "cannot": "A person, and they must be able to see your eyes. One per sense action.",
+     "functions": [
+      "deceive",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Every Living Thing",
+     "grants": "⚠️ ADDS TARGETS BEYOND PEOPLE. Any living thing — a warhorse, a hound, a beast, a thing grown rather than born. It stops, and what it relied on gives.",
+     "cannot": "It must be alive and it must be able to see you.",
+     "functions": [
+      "deceive",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "conditions"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Everything Has an Address",
+     "grants": "⛔ ADDS THE UNLIVING. Everything has an essence and every essence can be shown its end — a construct, a set body, a warded door, a working someone is sustaining, a bound thing. ⚠️ WHAT IS NOT ALIVE STILL FINISHES.",
+     "cannot": "It must have been made, grown, or bound by someone. Raw stone has no address to show.",
+     "functions": [
+      "deceive",
+      "hinder",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [
+      "scope",
+      "quality"
+     ]
+    }
+   ],
+   "_authored": "⛔ SNG-490. Erik: 'SOUL STARE could be an obscure skill rank 1, plus it would DROP THEIR RESISTANCE. r2 would have a similar effect but on ANY LIVING ENTITY. r3 would work on ANYTHING — everything has an essence (ADDRESS).'\n⚠️ DEATH HAD NO OBSCURE. And the rank ladder is TARGET CLASS, not power: person → living → anything with an address, which is the Ashwarden thesis that everything finishes.\n⛔ THE RESISTANCE DROP IS THE SECOND HALF AND IT MAKES THIS A SETUP FOR THE WHOLE TRADITION — Hastened Grey, Draw Down and Cut Thread all land harder on something that has just been shown its ending."
+  }
+ ]
+}

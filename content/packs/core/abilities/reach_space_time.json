@@ -298,20 +298,21 @@
      "rank": 1,
      "name": "Distance Closed",
      "grants": "Strike from further away than expected — a thrown weapon, a sprint into contact, an attack timed at the moment of arrival.",
-     "cannot": "Anything rank 2 adds — attack in full motion — without losing accuracy or force to the movement; it extends REACH, not power.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move",
       "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — attack in full motion — without losing accuracy or force to the movement; it extends REACH, not power."
     },
     {
      "rank": 2,
      "name": "Running Strike",
      "grants": "Attack in full motion — without losing accuracy or force to the movement; the speed is the weapon.",
-     "cannot": "Anything rank 3 adds — distance ceases to reduce your effectiveness — whether across a room or across a field, you arrive with full force or make the throw as if there were no gap at all; it extends REACH, not power.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move",
       "strike"
@@ -322,13 +323,14 @@
      "gainAxes": [
       "damage",
       "quality"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — distance ceases to reduce your effectiveness — whether across a room or across a field, you arrive with full force or make the throw as if there were no gap at all; it extends REACH, not power."
     },
     {
      "rank": 3,
      "name": "From Wherever You Are",
      "grants": "Distance ceases to reduce your effectiveness — whether across a room or across a field, you arrive with full force or make the throw as if there were no gap at all.",
-     "cannot": "Nothing further; this is the craft's ceiling; it extends REACH, not power; and it still costs what it costs: arriving at full force means ARRIVING.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move",
       "strike"
@@ -339,7 +341,8 @@
       "range",
       "scope",
       "quality"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it extends REACH, not power; and it still costs what it costs: arriving at full force means ARRIVING."
     }
    ],
    "nativeOrCombination": "native",
@@ -427,20 +430,21 @@
      "rank": 1,
      "name": "New Ground",
      "grants": "Move to a new place and the weight of the last one lifts — wounds feel less, fear recedes, the body and will recover in the way only distance makes possible.",
-     "cannot": "Anything rank 2 adds — a journey restores the party — physically and otherwise; IT REQUIRES ACTUALLY GOING.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "heal",
       "restore"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — a journey restores the party — physically and otherwise; IT REQUIRES ACTUALLY GOING."
     },
     {
      "rank": 2,
      "name": "Road Restores",
      "grants": "A journey restores the party — physically and otherwise; the movement is the medicine, and you know how to pace it so it heals rather than depletes.",
-     "cannot": "Anything rank 3 adds — show someone the next horizon and it fills them again — despair fails against the sight of further to go, and you can make that sight real; IT REQUIRES ACTUALLY GOING.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "heal",
       "restore",
@@ -451,13 +455,14 @@
      "_nameWas": "The Road Restores",
      "gainAxes": [
       "scope"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — show someone the next horizon and it fills them again — despair fails against the sight of further to go, and you can make that sight real; IT REQUIRES ACTUALLY GOING."
     },
     {
      "rank": 3,
      "name": "Always More Ahead",
      "grants": "Show someone the next horizon and it fills them again — despair fails against the sight of further to go, and you can make that sight real.",
-     "cannot": "Nothing further; this is the craft's ceiling; IT REQUIRES ACTUALLY GOING; and it still costs what it costs: it heals by LEAVING, and some things should be STAYED WITH.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "heal",
       "restore",
@@ -468,7 +473,8 @@
      "harmRung": "none",
      "gainAxes": [
       "range"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; IT REQUIRES ACTUALLY GOING; and it still costs what it costs: it heals by LEAVING, and some things should be STAYED WITH."
     }
    ],
    "nativeOrCombination": "native",
@@ -555,20 +561,21 @@
      "rank": 1,
      "name": "Out of Reach",
      "grants": "Maintain enough distance that what threatens you cannot effectively reach you — moving before it closes, keeping the gap that keeps you safe.",
-     "cannot": "Anything rank 2 adds — control the distance between yourself and a threat — always too far for it to act, close enough for you to — and maintain that gap through a whole engagement; it needs SOMEWHERE TO GO.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move",
       "resist"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — control the distance between yourself and a threat — always too far for it to act, close enough for you to — and maintain that gap through a whole engagement; it needs SOMEWHERE TO GO."
     },
     {
      "rank": 2,
      "name": "Managed Gap",
      "grants": "Control the distance between yourself and a threat — always too far for it to act, close enough for you to — and maintain that gap through a whole engagement.",
-     "cannot": "Anything rank 3 adds — stay perpetually where the threat isn't — and bring others with you; it needs SOMEWHERE TO GO.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move",
       "resist",
@@ -579,13 +586,14 @@
      "_nameWas": "The Managed Gap",
      "gainAxes": [
       "scope"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — stay perpetually where the threat isn't — and bring others with you; it needs SOMEWHERE TO GO."
     },
     {
      "rank": 3,
      "name": "Untouchable Distance",
      "grants": "Stay perpetually where the threat isn't — and bring others with you. The person who cannot close the gap cannot win.",
-     "cannot": "Nothing further; this is the craft's ceiling; it needs SOMEWHERE TO GO; and it still costs what it costs: keeping distance means NOT HOLDING GROUND.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move",
       "resist",
@@ -595,7 +603,8 @@
      "harmRung": "none",
      "gainAxes": [
       "targets"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it needs SOMEWHERE TO GO; and it still costs what it costs: keeping distance means NOT HOLDING GROUND."
     }
    ],
    "nativeOrCombination": "native",
@@ -684,32 +693,34 @@
      "rank": 1,
      "name": "Found Way",
      "grants": "Find a crossing across an obstacle that wasn't apparent — the shallows, the ledge, the fallen tree — by reading terrain the way a horizon-walker does.",
-     "cannot": "Anything rank 2 adds — identify and exploit the specific point where an obstacle can be crossed — not the obvious attempt but the place where the distance relents; it FINDS or MAKES a crossing.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "reveal"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Found Way",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — identify and exploit the specific point where an obstacle can be crossed — not the obvious attempt but the place where the distance relents; it FINDS or MAKES a crossing."
     },
     {
      "rank": 2,
      "name": "Where the Gap Yields",
      "grants": "Identify and exploit the specific point where an obstacle can be crossed — not the obvious attempt but the place where the distance relents.",
-     "cannot": "Anything rank 3 adds — make the crossing — any crossing — by knowing exactly where to commit and exactly how; it FINDS or MAKES a crossing.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "reveal"
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — make the crossing — any crossing — by knowing exactly where to commit and exactly how; it FINDS or MAKES a crossing."
     },
     {
      "rank": 3,
      "name": "No Uncrossable Gap",
      "grants": "Make the crossing — any crossing — by knowing exactly where to commit and exactly how. What the land calls uncrossable is only waiting for someone who can read its grain.",
-     "cannot": "Nothing further; this is the craft's ceiling; it FINDS or MAKES a crossing; and it still costs what it costs: knowing where to commit means COMMITTING.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "make",
       "open",
@@ -723,7 +734,8 @@
       "open",
       "travel"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it FINDS or MAKES a crossing; and it still costs what it costs: knowing where to commit means COMMITTING."
     }
    ],
    "nativeOrCombination": "native",
@@ -813,7 +825,7 @@
      "rank": 1,
      "name": "Scout's Word",
      "grants": "Speak with the authority of someone who has been where others haven't — your intelligence about terrain, routes, and distances commands genuine trust.",
-     "cannot": "Anything rank 2 adds — use knowledge of land and distance to direct others effectively — the advice that wins a chase, the route that avoids the trap, the position that changes everything; IT REQUIRES HAVING BEEN THERE.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "command"
      ],
@@ -824,13 +836,14 @@
       "command"
      ],
      "_nameWas": "The Scout's Word",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — use knowledge of land and distance to direct others effectively — the advice that wins a chase, the route that avoids the trap, the position that changes everything; IT REQUIRES HAVING BEEN THERE."
     },
     {
      "rank": 2,
      "name": "Strategic Ground",
      "grants": "Use knowledge of land and distance to direct others effectively — the advice that wins a chase, the route that avoids the trap, the position that changes everything.",
-     "cannot": "Anything rank 3 adds — in territory you have walked, your knowledge is comprehensive enough to command any situation that depends on terrain — you are the map and the map is right; IT REQUIRES HAVING BEEN THERE.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "command"
      ],
@@ -843,13 +856,14 @@
      "_nameWas": "The Strategic Ground",
      "gainAxes": [
       "targets"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — in territory you have walked, your knowledge is comprehensive enough to command any situation that depends on terrain — you are the map and the map is right; IT REQUIRES HAVING BEEN THERE."
     },
     {
      "rank": 3,
      "name": "Known Land",
      "grants": "In territory you have walked, your knowledge is comprehensive enough to command any situation that depends on terrain — you are the map and the map is right.",
-     "cannot": "Nothing further; this is the craft's ceiling; IT REQUIRES HAVING BEEN THERE.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "command"
      ],
@@ -859,7 +873,8 @@
       "reveal",
       "command"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; IT REQUIRES HAVING BEEN THERE."
     }
    ],
    "nativeOrCombination": "native",
@@ -947,19 +962,20 @@
      "rank": 1,
      "name": "Keep Walking",
      "grants": "Sustain movement and function past the ordinary limit — as long as there is ground ahead, you cover it.",
-     "cannot": "Anything rank 2 adds — keep a party moving and functional across brutal distances — through exhaustion, injury, and conditions that would stop others — by knowing how to pace the impossible road; it needs GROUND AHEAD.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — keep a party moving and functional across brutal distances — through exhaustion, injury, and conditions that would stop others — by knowing how to pace the impossible road; it needs GROUND AHEAD."
     },
     {
      "rank": 2,
      "name": "Sustained March",
      "grants": "Keep a party moving and functional across brutal distances — through exhaustion, injury, and conditions that would stop others — by knowing how to pace the impossible road. Paced by you they travel better than they know how to — covering more ground, arriving in condition to act, stronger at the end of a march than they would have been at its middle.",
-     "cannot": "Anything rank 3 adds — you and your party can go on for as long as the task requires — rest when you must, move when you must — until the road has been walked; it needs GROUND AHEAD.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain",
       "empower"
@@ -971,13 +987,14 @@
       "range",
       "scope",
       "targets"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — you and your party can go on for as long as the task requires — rest when you must, move when you must — until the road has been walked; it needs GROUND AHEAD."
     },
     {
      "rank": 3,
      "name": "No Stopping Place",
      "grants": "You and your party can go on for as long as the task requires — rest when you must, move when you must — until the road has been walked.",
-     "cannot": "Nothing further; this is the craft's ceiling; it needs GROUND AHEAD.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain",
       "empower"
@@ -986,7 +1003,8 @@
      "harmRung": "none",
      "gainAxes": [
       "scope"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it needs GROUND AHEAD."
     }
    ],
    "nativeOrCombination": "native",
@@ -1069,7 +1087,7 @@
      "rank": 1,
      "name": "Their Bad Moment",
      "grants": "Identify and act in the precise instant when a person is off-balance, distracted, or committed — so your action lands without meaningful response.",
-     "cannot": "Anything rank 2 adds — dictate when the confrontation happens by waiting for the exact moment that advantages you most — the ambush, the interruption, the word at the one instant it cannot be answered; IT NEEDS SOMEONE WHO CAN BE CAUGHT OFF-BALANCE.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "strike"
      ],
@@ -1079,13 +1097,14 @@
       "hinder",
       "strike"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — dictate when the confrontation happens by waiting for the exact moment that advantages you most — the ambush, the interruption, the word at the one instant it cannot be answered; IT NEEDS SOMEONE WHO CAN BE CAUGHT OFF-BALANCE."
     },
     {
      "rank": 2,
      "name": "Chosen Time",
      "grants": "Dictate when the confrontation happens by waiting for the exact moment that advantages you most — the ambush, the interruption, the word at the one instant it cannot be answered.",
-     "cannot": "Anything rank 3 adds — act in a sequence of moments so precisely chosen that the other person is never in a position to respond effectively — they are always recovering from the last thing when the next arrives; IT NEEDS SOMEONE WHO CAN BE CAUGHT OFF-BALANCE.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "strike"
      ],
@@ -1097,7 +1116,8 @@
      ],
      "gainAxes": [
       "quality"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — act in a sequence of moments so precisely chosen that the other person is never in a position to respond effectively — they are always recovering from the last thing when the next arrives; IT NEEDS SOMEONE WHO CAN BE CAUGHT OFF-BALANCE."
     },
     {
      "rank": 3,
@@ -1204,19 +1224,20 @@
      "rank": 1,
      "name": "A Little More Time",
      "grants": "Buy the minutes or hours that make a difference — slow enough that care can happen, or hold the situation open long enough that recovery begins.",
-     "cannot": "Anything rank 2 adds — create the time a person or situation needs — not by stopping anything, but by managing the duration so that what needs time to work has time to work; IT GIVES TIME, IT DOES NOT HEAL.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "heal"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — create the time a person or situation needs — not by stopping anything, but by managing the duration so that what needs time to work has time to work; IT GIVES TIME, IT DOES NOT HEAL."
     },
     {
      "rank": 2,
      "name": "Hour Given",
      "grants": "Create the time a person or situation needs — not by stopping anything, but by managing the duration so that what needs time to work has time to work.",
-     "cannot": "Anything rank 3 adds — hold open the duration of a recovery, a negotiation, or a healing — as long as it requires — without the outside closing in until it is ready; IT GIVES TIME, IT DOES NOT HEAL.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "heal",
       "sustain"
@@ -1227,13 +1248,14 @@
      "gainAxes": [
       "duration",
       "targets"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — hold open the duration of a recovery, a negotiation, or a healing — as long as it requires — without the outside closing in until it is ready; IT GIVES TIME, IT DOES NOT HEAL."
     },
     {
      "rank": 3,
      "name": "All the Time It Needs",
      "grants": "Hold open the duration of a recovery, a negotiation, or a healing — as long as it requires — without the outside closing in until it is ready.",
-     "cannot": "Nothing further; this is the craft's ceiling; IT GIVES TIME, IT DOES NOT HEAL; and it still costs what it costs: the hours you give HAVE TO COME FROM SOMEWHERE.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "heal",
       "sustain",
@@ -1241,7 +1263,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; IT GIVES TIME, IT DOES NOT HEAL; and it still costs what it costs: the hours you give HAVE TO COME FROM SOMEWHERE."
     }
    ],
    "nativeOrCombination": "native",
@@ -1327,32 +1350,34 @@
      "rank": 1,
      "name": "Their Moment Wasted",
      "grants": "See the attack forming early enough to be gone before it lands — not blocking, not armoring, but the exact move that empties the moment of consequence.",
-     "cannot": "Anything rank 2 adds — protect someone by watching their threat's timing and calling the move — the dodge, the step, the word — at the instant that makes the attack miss without effort; it defeats TIMED harm.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "foresee"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — protect someone by watching their threat's timing and calling the move — the dodge, the step, the word — at the instant that makes the attack miss without effort; it defeats TIMED harm."
     },
     {
      "rank": 2,
      "name": "No Good Window",
      "grants": "Protect someone by watching their threat's timing and calling the move — the dodge, the step, the word — at the instant that makes the attack miss without effort.",
-     "cannot": "Anything rank 3 adds — for as long as you attend to a person's safety, no moment that could harm them arrives — you see it and fill or empty it before it becomes a wound; it defeats TIMED harm.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "foresee",
       "shield"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — for as long as you attend to a person's safety, no moment that could harm them arrives — you see it and fill or empty it before it becomes a wound; it defeats TIMED harm."
     },
     {
      "rank": 3,
      "name": "Protected Duration",
      "grants": "For as long as you attend to a person's safety, no moment that could harm them arrives — you see it and fill or empty it before it becomes a wound.",
-     "cannot": "Nothing further; this is the craft's ceiling; it defeats TIMED harm; and it still costs what it costs: attending means ATTENDING.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "foresee",
       "shield"
@@ -1362,7 +1387,8 @@
      "_nameWas": "The Protected Duration",
      "gainAxes": [
       "targets"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it defeats TIMED harm; and it still costs what it costs: attending means ATTENDING."
     }
    ],
    "nativeOrCombination": "native",
@@ -1452,20 +1478,21 @@
      "rank": 1,
      "name": "Stretched Moment",
      "grants": "Make a short span feel and function longer — enough to act fully in what should only be an instant.",
-     "cannot": "Anything rank 2 adds — collapse a long span into less — a day's travel has the fatigue of an hour, a complex process completes in time it shouldn't; IT ONLY BENDS WHAT IS ALREADY RUNNING.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "transform"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Stretched Moment",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — collapse a long span into less — a day's travel has the fatigue of an hour, a complex process completes in time it shouldn't; IT ONLY BENDS WHAT IS ALREADY RUNNING."
     },
     {
      "rank": 2,
      "name": "Compressed Duration",
      "grants": "Collapse a long span into less — a day's travel has the fatigue of an hour, a complex process completes in time it shouldn't.",
-     "cannot": "Anything rank 3 adds — shape how long something takes with precision — bend the duration of any ongoing process to what you need it to be; IT ONLY BENDS WHAT IS ALREADY RUNNING.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "transform"
      ],
@@ -1473,7 +1500,8 @@
      "harmRung": "none",
      "gainAxes": [
       "duration"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — shape how long something takes with precision — bend the duration of any ongoing process to what you need it to be; IT ONLY BENDS WHAT IS ALREADY RUNNING."
     },
     {
      "rank": 3,
@@ -1576,19 +1604,20 @@
      "rank": 1,
      "name": "Between Moments",
      "grants": "Move in the gap between one moment and the next — where attention lapses, where the pattern holds its breath — and arrive without being witnessed.",
-     "cannot": "Anything rank 2 adds — open a window in time — a pause in a guard rotation, a silence in a conversation, a beat between alarms — and move through it cleanly; it moves you through TIME'S gaps, not space's.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — open a window in time — a pause in a guard rotation, a silence in a conversation, a beat between alarms — and move through it cleanly; it moves you through TIME'S gaps, not space's."
     },
     {
      "rank": 2,
      "name": "Cleared Interval",
      "grants": "Open a window in time — a pause in a guard rotation, a silence in a conversation, a beat between alarms — and move through it cleanly.",
-     "cannot": "Anything rank 3 adds — create the gap that didn't exist — find or open the instant that allows passage — and step through it, bringing others if needed; it moves you through TIME'S gaps, not space's.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move",
       "open"
@@ -1596,13 +1625,14 @@
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Cleared Interval",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 3 adds — create the gap that didn't exist — find or open the instant that allows passage — and step through it, bringing others if needed; it moves you through TIME'S gaps, not space's."
     },
     {
      "rank": 3,
      "name": "Moment Made",
      "grants": "Create the gap that didn't exist — find or open the instant that allows passage — and step through it, bringing others if needed.",
-     "cannot": "Nothing further; this is the craft's ceiling; it moves you through TIME'S gaps, not space's.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "move",
       "open",
@@ -1613,7 +1643,8 @@
      "_nameWas": "The Moment Made",
      "gainAxes": [
       "targets"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it moves you through TIME'S gaps, not space's."
     }
    ],
    "nativeOrCombination": "native",
@@ -1693,19 +1724,20 @@
      "rank": 1,
      "name": "Patient Duration",
      "grants": "Hold a position, a vigil, a watch — past the point where others have lost focus or given in — because the passage of time does not wear on you as it does on them.",
-     "cannot": "Anything rank 2 adds — sustain any activity that requires patience across duration — a negotiation, a stake-out, a long recovery — by feeling the time accurately rather than agonizingly; it sustains WAITING, not moving.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_cannotWas": "Anything rank 2 adds — sustain any activity that requires patience across duration — a negotiation, a stake-out, a long recovery — by feeling the time accurately rather than agonizingly; it sustains WAITING, not moving."
     },
     {
      "rank": 2,
      "name": "Longer Wait",
      "grants": "Sustain any activity that requires patience across duration — a negotiation, a stake-out, a long recovery — by feeling the time accurately rather than agonizingly.",
-     "cannot": "Anything rank 3 adds — you can hold as long as the situation requires — the vigil, the wait, the watch — and remain fully functional throughout; it sustains WAITING, not moving.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain",
       "resist"
@@ -1716,13 +1748,14 @@
      "gainAxes": [
       "range",
       "duration"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — you can hold as long as the situation requires — the vigil, the wait, the watch — and remain fully functional throughout; it sustains WAITING, not moving."
     },
     {
      "rank": 3,
      "name": "As Long as It Takes",
      "grants": "You can hold as long as the situation requires — the vigil, the wait, the watch — and remain fully functional throughout. Time is not your enemy.",
-     "cannot": "Nothing further; this is the craft's ceiling; it sustains WAITING, not moving; and it still costs what it costs: a person who can wait indefinitely WILL BE ASKED TO.",
+     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
      "functions": [
       "sustain",
       "resist"
@@ -1731,7 +1764,8 @@
      "harmRung": "none",
      "gainAxes": [
       "quality"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it sustains WAITING, not moving; and it still costs what it costs: a person who can wait indefinitely WILL BE ASKED TO."
     }
    ],
    "nativeOrCombination": "native",

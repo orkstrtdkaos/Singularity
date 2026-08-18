@@ -1680,14 +1680,14 @@
     "threshold"
    ],
    "narrationHints": "A purple mist stands off the wound, a finger's depth, and the blood does not leave it. Where they are holding someone else, a tether of green and purple runs from hand to chest — you can see it in low light, and you can see it thin.",
-   "description": "Refuse an ending that has already begun — a pool of held life that takes the harm meant for someone, and mends a little besides.",
+   "description": "Refuse an ending that has already begun — soak the harm meant for someone and mend a little of it besides.",
    "notFor": "Healing — nothing is mended; an ending that has already completed; endings that are not physical.",
    "tree": [
     {
      "rank": 1,
      "name": "Not Yet",
-     "grants": "⛔ GRANT YOURSELF A POOL OF 6 TEMPORARY HEALTH. It absorbs damage exactly as soak does, and what it absorbs is GONE — not owed. The pool empties when the contest ends. ⚠️ FLAVOUR: a purple mist stands a finger's depth off the wound, and the blood does not leave it.",
-     "cannot": "One pool at a time; re-using this refreshes it rather than stacking. It empties when the contest ends.",
+     "grants": "⛔ SOAK 5 ON YOURSELF FOR THE DURATION — every blow that lands is reduced by 5, and what it takes off is gone, not owed. ⚠️ FLAVOUR: a purple mist stands a finger's depth off the wound, and the blood does not leave it.",
+     "cannot": "Self only at this rank. Soak 5, six rounds, and it does not stack with itself.",
      "functions": [
       "sustain",
       "resist"
@@ -1699,8 +1699,8 @@
     {
      "rank": 2,
      "name": "Stand Between",
-     "grants": "⛔ GRANT THE POOL TO ONE OTHER PERSON YOU HAVE TOUCHED — 6 temporary health for them as well — AND HEAL 1d4 PER ROUND while the tether holds. A mortal wound stops being mortal; they fight, run, or finish the thing. ⚠️ FLAVOUR: a tether of green and purple runs from your hand to their chest, visible in low light, and it thins as they take more.",
-     "cannot": "One person besides yourself, and you must have touched them. The tether breaks at more than a room's distance.",
+     "grants": "⛔ EXTEND THE SOAK TO ONE OTHER PERSON YOU HAVE TOUCHED, AND HEAL THEM 1d4 PER ROUND while the tether holds. A mortal wound stops being mortal; they fight, run, or finish the thing. ⚠️ FLAVOUR: a tether of green and purple runs from your hand to their chest, visible in low light, and it thins as they take more.",
+     "cannot": "One person besides yourself. The tether breaks past a room's distance.",
      "functions": [
       "sustain",
       "resist",
@@ -1716,7 +1716,7 @@
     {
      "rank": 3,
      "name": "Palelands Patience",
-     "grants": "⛔ AS MANY AS YOU CAN NAME — 6 TEMPORARY HEALTH EACH AND 2d4 HEALING PER ROUND ACROSS ALL OF THEM. ⚠️ AND ONE PERSON WHOSE ENDING HAS ALREADY BEGUN IS HELD AT THE THRESHOLD: not dead, not recovering, held, for days if you keep the vigil. FLAVOUR: tethers to every one of them, and over the threshold-held the mist stands a hand deep and does not move with the air.",
+     "grants": "⛔ SOAK 5 AND 2d4 HEALING PER ROUND ACROSS AS MANY AS YOU CAN NAME. ⚠️ AND ONE PERSON WHOSE ENDING HAS ALREADY BEGUN IS HELD AT THE THRESHOLD: not dead, not recovering, held, for days if you keep the vigil. FLAVOUR: tethers to every one of them, and over the threshold-held the mist stands a hand deep and does not move with the air.",
      "cannot": "One at the threshold, and holding them occupies you between contests.",
      "functions": [
       "sustain",
@@ -1753,9 +1753,8 @@
    ],
    "mechanic": {
     "magnitude": 6,
-    "soak": 6,
-    "tempHealth": 6,
-    "duration": 5,
+    "soak": 5,
+    "duration": 6,
     "scope": 3,
     "dice": {
      "n": 2,
@@ -1787,19 +1786,15 @@
    },
    "bounds": [
     {
-     "text": "⛔ 6 TEMPORARY HEALTH PER PERSON HELD. It absorbs like soak; what it absorbs is gone, not owed",
+     "text": "⛔ SOAK 5 PER PERSON HELD, six rounds, and it does not stack with itself",
      "class": "hard"
     },
     {
-     "text": "⛔ THE POOL EMPTIES WHEN THE CONTEST ENDS and does not stack with itself",
+     "text": "⚠️ HEALING IS 1d4 (r2) OR 2d4 (r3) PER ROUND — deliberately below a dedicated healer: Physician's Tome opens at 2d4, Dawn Surgery reaches 3d4",
      "class": "hard"
     },
     {
-     "text": "⚠️ HEALING IS 1d4 (r2) OR 2d4 (r3) PER ROUND — deliberately below a dedicated healer: Physician's Tome opens at 2d4 and Dawn Surgery reaches 3d4",
-     "class": "hard"
-    },
-    {
-     "text": "you must have touched anyone you hold besides yourself, and the tether breaks past a room's distance",
+     "text": "you must have touched anyone you hold besides yourself; the tether breaks past a room's distance",
      "class": "hard"
     },
     {
@@ -1807,7 +1802,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A survive/fight action. Grants 6 TEMPORARY HEALTH that absorbs damage like soak and empties at the end of the contest. Heals 1d4 per round at rank 2, 2d4 at rank 3. Ranks: rank 2 extends to one other person, rank 3 to a group plus one held at the threshold.",
+   "plainly": "A survive/fight action. SOAK 5 for six rounds; heals 1d4 per round at rank 2 and 2d4 at rank 3. Ranks: rank 2 extends to one other person, rank 3 to a group plus one held at the threshold.",
    "_nameWas": "The Kept Breath",
    "_idWas": "the_kept_breath",
    "_treeWas": [
@@ -1857,7 +1852,7 @@
    ],
    "_descriptionWas": "Sustain a body through physical hardship: starvation, cold, blood loss, wounds, exhaustion. The ashwarden knows the exact threshold a body needs to keep going — and holds someone there. Not healing, not protection from curses. The body's minimum, maintained by craft.",
    "_reauthored": "⛔ SNG-493. Erik: 'Kept Breath needs a FLAVOR SHIFT. You authored this, and many skills, as very conservative — IT CAN'T DO MAGIC BUT BARELY LETS YOU GET BY type skill. THERE'S NO FANTASY AND MAGIC IN THAT.'\n⚠️ HE IS RIGHT. The old text was 'the body's minimum, maintained by craft — not healing, not protection from curses, functional NOT WELL' — a skill defined by what it cannot do, with three bounds and no wonder. ⛔ IT ALSO SAT AT mag4 e4 AS ONE OF THE CHEAPEST THINGS IN THE TRADITION, which is what a designer does when they do not believe in a craft.\n⛔ THE FANTASY VERSION IS THE ASHWARDEN THESIS TAKEN SERIOUSLY: THEY TEND ENDINGS, SO THEY CAN REFUSE ONE. A man fights with a spear through him because an Ashwarden has declined to let that finish. The cost is unchanged and stated once.",
-   "_mechanics": "⛔ SNG-493, REVISED. Erik: 'I disagree with the BANKED-SOAK concept — it's not a desirable power if you DIE AFTER YOU USE IT ANYWAY. What we could do is think of the Soak as BANKED TEMPORARY HP — used just like soak if you get hit, but DISAPPEARS WHEN YOU'RE OUT OF THE FIGHT.'\n⚠️ HE IS RIGHT AND MY VERSION WAS A DELAY, NOT A POWER. Deferred damage that always comes due is an expensive way to die on schedule, and no player would spend a slot on it.\n⛔ NOW: 6 TEMPORARY HEALTH, ABSORBS LIKE SOAK, AND WHAT IT ABSORBS IS GONE. Pool empties at end of contest. `energyCost` is the cost (§32.5) and no second cost is needed.\n⚠️ `tempHealth` IS A NEW MECHANIC FIELD — CCode will need to read it. It is close to existing soak and should be cheap: a pool that decrements before health does and clears on contest end."
+   "_mechanics": "⛔ SNG-493, FINAL. Erik: 'Do we really need tempHealth or is that functionally the same as Soak?'\n⚠️ NOT THE SAME — soak is PER-HIT REDUCTION FOR A DURATION, temp health is a ONE-SHOT POOL — but ⛔ SOAK IS STRONGER, ALREADY WIRED, AND ALREADY SCALED, so the new field was unnecessary. 18 abilities carry `soak`, values 2-6, and CCode confirms it is read.\n⛔ I INVENTED A MECHANIC WITHOUT CHECKING WHETHER AN EXISTING ONE COVERED IT — the same failure as specifying a sense slot that was already shipped.\n⚠️ SOAK 5 chosen against the corpus band: Death-Ward 5, Shielding Word 5, Unmoving Mind 5. Kept Breath sits with the other serious protective crafts rather than above them."
   },
   {
    "id": "green_claim",

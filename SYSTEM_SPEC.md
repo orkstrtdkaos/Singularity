@@ -1964,3 +1964,22 @@ perceptive traditions.
 about** (Veilwright) · **glare** (Blazeborn — denying sight with too much rather than too little) · **a
 stance that reads as three attacks and resolves as a fourth** (Somatic) · ⚠️ **they look at you and see how
 they end** (Ashwarden).
+
+
+### 32.12 ⛔ DO NOT RATIONALISE A MAGIC SKILL
+
+**Erik, 2026-08-16: *"Stop this way of thinking. This is a game and this is basically a magic skill. It
+doesn't need to make complete sense."***
+
+⚠️ **The pattern:** I write the mechanic, then append a clause explaining why it would be *sustainable in
+the world* — *"and they do not feel cheated, which is why it works twice"* · *"and nobody is humiliated,
+which is why it holds."*
+
+⛔ **NOBODY ASKED. THE SKILL DOES THE THING.** The grant states the effect; the bound states the limit;
+that is the whole rule. **A justifying clause adds no mechanic, invites argument about the fiction, and
+makes a clean effect read as a negotiation with the reader.**
+
+**Where the impulse is legitimate:** ⚠️ **`narrationHints`** — how it looks and feels is exactly what that
+field is for. ⛔ **Not in `grants`, not in `cannot`, not in `description`.**
+
+**Test:** strike the clause. **If the mechanic is unchanged, it was rationalisation.**

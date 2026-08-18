@@ -1271,104 +1271,6 @@
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads every thread of threat in a contest at once\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
   },
   {
-   "schemaVersion": 1,
-   "id": "taken_apart",
-   "name": "Taken Apart",
-   "levelReq": 4,
-   "energyCost": 11,
-   "powerSystem": "reach_body_mind",
-   "tradition": "somatic",
-   "attribute": "physical",
-   "axes": {
-    "body_mind": 0.6
-   },
-   "functions": [
-    "strike"
-   ],
-   "narrationHints": "They read the body the way a mason reads a wall, and then they go to the seams.",
-   "description": "⚠️ THE BREAKERS' CRAFT. A body is a structure, and a somatic who has mastered their own knows exactly where another one comes apart. Joint, then rhythm, then nerve. It is precise, it is unhurried, and it is entirely survivable right up until it is not.",
-   "notFor": "Anything not built like a body. Speed — this is not a fast kill and was never meant to be; a Breaker who is rushed does damage and nothing more.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Taken Apart",
-     "grants": "Go to the seams — joints and rhythm. They stop being able to fight long before they stop.",
-     "cannot": "A fast resolution. Non-bodies.",
-     "functions": [
-      "strike"
-     ],
-     "gains": "broaden",
-     "harmRung": "damaging",
-     "_nameWas": "The Taken Apart",
-     "gainAxes": []
-    },
-    {
-     "rank": 2,
-     "name": "Last Seam",
-     "grants": "Continue past fighting-stopped to stopped. Precise, and the practitioner is never in doubt about which they did.",
-     "cannot": ": there is no ambiguity available; the tradition does not let you claim you did not mean to.",
-     "functions": [
-      "strike"
-     ],
-     "gains": "deepen",
-     "harmRung": "lethal",
-     "_nameWas": "The Last Seam",
-     "gainAxes": []
-    }
-   ],
-   "challengeTypes": [
-    "FIGHT",
-    "DUEL"
-   ],
-   "harmRung": "lethal",
-   "nativeOrCombination": "native",
-   "shape": "damage",
-   "operativeAxis": [
-    "damage",
-    "precision"
-   ],
-   "mechanic": {
-    "dice": {
-     "n": 4,
-     "d": 6
-    },
-    "plus": 1,
-    "marginFloorPer": 0.03,
-    "targets": 1,
-    "note": "⚠️ SLOW and precise — r1 incapacitates, r2 continues. The two-step IS the craft: a Breaker always passes through 'they cannot fight' on the way."
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: continue past fighting-stopped to stopped",
-     "from": "r2 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "seams only — they cannot fight, and they live",
-    "surge": "the last seam; THERE IS NO AMBIGUITY AVAILABLE ABOUT WHICH YOU DID"
-   },
-   "bounds": [
-    {
-     "text": "BODIES ONLY",
-     "class": "hard"
-    },
-    {
-     "text": "IT IS SLOW — a rushed Breaker only does damage",
-     "class": "hard"
-    },
-    {
-     "text": "IT PASSES THROUGH 'THEY CANNOT FIGHT' FIRST, so continuing is a SECOND DECISION",
-     "class": "cost"
-    }
-   ],
-   "plainly": "A fight or duel attack resolving in two steps. Rank 1 deals 4d6 plus 1 and reduces the target's ability to fight; rank 2 continues from there to a lethal result. You always pass through the first step, so continuing is a separate decision the GM will make you state aloud. It is slow — if you are rushed or interrupted you only get the first step. It works only on things built like bodies.",
-   "_nameWas": "The Taken Apart",
-   "_idWas": "the_taken_apart"
-  },
-  {
    "id": "answered_motion",
    "name": "Answered Motion",
    "levelReq": 1,
@@ -1390,57 +1292,48 @@
     {
      "rank": 1,
      "name": "Turned Joint",
-     "grants": "Meet a committed movement and finish it wrong — an elbow past its travel, a knee folded inward, a wrist that will not close on a weapon again today. Real breakage at contact range.",
-     "cannot": "CONTACT RANGE ONLY and they must be MOVING. A braced, patient opponent offers nothing to answer; a polearm keeps you out entirely.",
-     "functions": [
-      "strike",
-      "break"
-     ],
-     "gains": "broaden",
-     "harmRung": "damaging",
-     "_nameWas": "The Turned Joint",
-     "gainAxes": []
-    },
-    {
-     "rank": 2,
-     "name": "Given Fall",
-     "grants": "Take their weight as well as their limb — put a body into the ground, a wall, a stairwell, or another body, using what they brought.",
-     "cannot": "The harder they come, the harder it lands — which cuts both ways when you misread. A second opponent while you are inside the first one's motion is how Somatics die.",
-     "functions": [
-      "strike",
-      "break"
-     ],
-     "gains": "broaden",
-     "harmRung": "incapacitating",
-     "_functionsWas": [
-      "strike",
-      "break",
-      "hinder"
-     ],
-     "_nameWas": "The Given Fall",
-     "gainAxes": [
-      "targets"
-     ]
-    },
-    {
-     "rank": 3,
-     "name": "Whole Answer",
-     "grants": "Every motion answered as it arrives, for as long as they keep making them. Necks, spines, and the base of the skull are motions like any other.",
-     "cannot": "⚠ IT ONLY WORKS ON THE MOVING. Someone who simply stops — sets a shield, waits, brings up a bow at ten paces — is a problem this craft has no answer for at all.",
+     "grants": "Meet a committed movement and finish it wrong — an elbow past its travel, a knee folded inward, a wrist that will not close on a weapon again today.",
+     "cannot": "They must be committed to a movement. A cautious opponent gives you nothing.",
      "functions": [
       "strike",
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "lethal",
-     "_functionsWas": [
+     "harmRung": "damaging",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Given Fall",
+     "grants": "⚠️ ADDS THEIR WEIGHT AS WELL AS THEIR LIMB — put a body into the ground, a wall, a stairwell, or another body.",
+     "cannot": "One body per action, and you must have the footing to take the weight.",
+     "functions": [
       "strike",
       "break",
       "hinder"
      ],
-     "_nameWas": "The Whole Answer",
+     "gains": "deepen",
+     "harmRung": "damaging",
      "gainAxes": [
-      "scope"
+      "targets",
+      "damage"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Taken Apart",
+     "grants": "⛔ GO TO THE SEAMS. A body is a structure and you know where this one comes apart — joints and rhythm first, so they stop being able to fight long before they stop. Every motion answered as it arrives, for as long as they keep making them.",
+     "cannot": "Contact range. Something with no joints is not taken apart this way.",
+     "functions": [
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "severe",
+     "gainAxes": [
+      "scope",
+      "conditions"
      ]
     }
    ],
@@ -1456,9 +1349,13 @@
     "magnitude"
    ],
    "mechanic": {
-    "magnitude": 7,
-    "duration": 1,
-    "scope": 1
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "plus": 0,
+    "targets": 1,
+    "marginFloorPer": 0.02
    },
    "intensity": {
     "conserve": "turn the joint and let go",
@@ -1495,7 +1392,14 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Answered Motion",
-   "_idWas": "the_answered_motion"
+   "_idWas": "the_answered_motion",
+   "_merged": "⛔ SNG-481: absorbs Taken Apart (L4 somatic). Both were 'a body is a structure, go to the seams'.",
+   "_mechanicWas": {
+    "magnitude": 7,
+    "duration": 1,
+    "scope": 1
+   },
+   "_diceFix": "⛔ SNG-481: shape `strike` rolls dice per CCode's shape→reader map, and this craft carried magnitude only."
   },
   {
    "id": "sustained_regard",

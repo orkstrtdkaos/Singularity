@@ -1,0 +1,113 @@
+{
+ "schemaVersion": 1,
+ "id": "mind_bargain",
+ "kind": "content",
+ "note": "⛔ SNG-475. Mind's bargain craft. Every tradition should reach at least two of the four social verbs (SYSTEM_SPEC §31.5); Mind now has persuade, provoke, soothe and bargain.",
+ "abilities": [
+  {
+   "id": "known_price",
+   "name": "Known Price",
+   "levelReq": 1,
+   "energyCost": 3,
+   "axes": {
+    "body_mind": 0.4,
+    "emotional_logical": 0.3
+   },
+   "attribute": "mental",
+   "narrationHints": "They let the other side name a figure, and then they name one, and the second figure is the one everybody uses. No haggling happens. It is faintly unnerving to watch.",
+   "description": "Work out what the other side will actually accept before they say it — and open there, so the deal closes at your number instead of somewhere between.",
+   "notFor": "Someone who does not want anything; a party you cannot observe or research; making them accept a price they cannot afford.",
+   "tradition": "syllogist",
+   "traditionV2": "Mind",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "metaphysical",
+   "shape": "setup",
+   "operativeAxis": "emotional_logical",
+   "intensity": "minor",
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 3,
+    "scope": 2
+   },
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "bounds": [
+    {
+     "text": "⛔ THEY MUST WANT SOMETHING. A party with nothing to gain cannot be priced",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ YOU MUST HAVE SOMETHING TO READ — a conversation, a ledger, a reputation, an hour in the same room. Cold, you get nothing",
+     "class": "hard"
+    },
+    {
+     "text": "it tells you what they WILL take, never what they SHOULD — a bad deal correctly priced is still a bad deal",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ someone who notices you never haggle stops negotiating with you in person",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/investigate action that opens a negotiation at the closing figure. Its strength is rated 5 out of 10. Ranks: rank 2 finds what they would take instead, rank 3 finds the walk-away.",
+   "functions": [
+    "bargain"
+   ],
+   "sectFlavour": {
+    "syllogist": "YOU REASONED IT — what a person in their position must need, and by when.",
+    "cogitant": "YOU MODELLED THEM — their pressures, their creditors, the thing they have not budgeted for.",
+    "figurist": "YOU READ THE SHAPE OF THE DEAL — every negotiation is an instance of a form, and forms have a settling point."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Open at the Close",
+     "grants": "⛔ NAME A FIGURE THEY WILL ACCEPT, FIRST. The deal closes at your number rather than halfway between two — no haggling round, no anchoring war, and you never overpay or insult them by lowballing.",
+     "cannot": "They must want something and you must have had something to read. It gives you their acceptable price, not a good one.",
+     "functions": [
+      "bargain"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "What They Would Take Instead",
+     "grants": "⚠️ ADDS SUBSTITUTION. Find the thing they would accept IN PLACE of what they asked for — passage instead of coin, a name instead of a favour, silence instead of either. ⛔ DEALS THAT WERE STUCK BECAUSE NEITHER SIDE HAD WHAT THE OTHER NAMED NOW CLOSE.",
+     "cannot": "The substitute must be something you can actually provide, and they must not already have it.",
+     "functions": [
+      "bargain",
+      "persuade"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "quality"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Where They Walk",
+     "grants": "⛔ ADDS THE WALK-AWAY. Know the point past which they leave the table — and know the one thing that would make them stay past it. ⚠️ You can push to the edge deliberately, or hand that edge to someone else to use.",
+     "cannot": "⛔ Knowing the walk-away does not move it. Push past without the one thing, and they go, and they remember why.",
+     "functions": [
+      "bargain",
+      "persuade"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "autonomy"
+     ]
+    }
+   ],
+   "_authored": "⛔ SNG-475. `bargain` was zero corpus-wide until SNG-471 retagged nine crafts, and all nine sat in Demonic, Bargainers and Building. ⚠️ ERIK: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'\n⛔ MIND'S LEVER IS KNOWING WHAT THE OTHER SIDE WILL ACCEPT BEFORE THEY SAY IT — which is a different craft from persuading them, and a different one again from the Bargainers' Honest Price, which states a cost rather than predicting acceptance.\n⚠️ ASSESSMENT (§32.11): (1) opens the negotiation at the closing figure. (2) any deal where you have had an hour, a ledger or a reputation to read. (3) common — the game has an economy. (4) without it you haggle and land halfway. (5) r2 substitution, r3 walk-away. (6) the reasoning is flavour; the CLOSING PRICE is the mechanic."
+  }
+ ]
+}

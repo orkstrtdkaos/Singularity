@@ -29,60 +29,49 @@
     {
      "rank": 1,
      "name": "Weighed Thing",
-     "grants": "Know a thing's true weight, material, soundness and worth by touch — no lie of appearance survives your hand.",
-     "cannot": "It tells you what a thing IS, never what it means or what it is for.",
+     "grants": "Know a thing's true weight, material, soundness and worth by touch. No lie of appearance survives your hand.",
+     "cannot": "You must handle it. Tells you what it IS, not what it means.",
      "functions": [
       "reveal"
      ],
-     "gains": "broaden",
+     "gains": "deepen",
      "harmRung": "none",
-     "_functionsWas": [
-      "reveal"
-     ],
-     "_nameWas": "The Weighed Thing",
      "gainAxes": []
     },
     {
      "rank": 2,
      "name": "Set Stone",
-     "grants": "Set a thing so it STAYS — a wall, a joint, a boundary, a claim. What you set does not shift, sag, or come apart.",
-     "cannot": "What is set is hard to un-set, including by you, including when you were wrong to set it.",
+     "grants": "⛔ SET A THING WHERE YOU PUT IT AND IT STAYS — a wall, a joint, a boundary, a claim, a door in its frame, a wheel on its axle. It resists levers, drift and quiet removal, and you know the instant it is worked at.",
+     "cannot": "One assembly at a time. Deliberate demolition still works.",
      "functions": [
-      "make",
-      "bind"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
       "reveal",
       "make",
       "bind"
      ],
-     "_nameWas": "The Set Stone",
+     "gains": "deepen",
+     "harmRung": "none",
      "gainAxes": [
-      "duration"
+      "duration",
+      "targets"
      ]
     },
     {
      "rank": 3,
      "name": "Denial",
-     "grants": "Deny an abstraction purchase on the real: illusion, glamour, symbol-working and figure all simply fail in your presence. The thing is what it is.",
-     "cannot": "It denies the abstract INDISCRIMINATELY — including meanings you needed, including a Figurist ally's working, including hope.",
+     "grants": "⛔ DENY AN ABSTRACTION PURCHASE ON THE REAL. Illusion, glamour, symbol-working and figure-craft all fail inside the space you hold.",
+     "cannot": "The space you can reach. Physical force is unaffected.",
      "functions": [
+      "reveal",
       "make",
       "bind",
       "shield"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "make",
-      "bind",
-      "shield"
-     ],
-     "_nameWas": "The Denial",
-     "gainAxes": []
+     "gainAxes": [
+      "scope",
+      "conditions"
+     ]
     }
    ],
    "gated": "learned",
@@ -152,142 +141,8 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ BODY'S SENSE — reads condition and soundness by touch\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
-  },
-  {
-   "id": "plain_fact",
-   "name": "Plain Fact",
-   "levelReq": 3,
-   "energyCost": 5,
-   "powerSystem": "reach_concrete_abstract",
-   "attribute": "practical",
-   "axes": {
-    "concrete_abstract": -0.4,
-    "falsehood_truth": 0.2
-   },
-   "functions": [
-    "reveal",
-    "ward"
-   ],
-   "narrationHints": "He says the flat thing and the beautiful argument in the room dies of it.",
-   "description": "Reduce a soaring abstraction to the plain touchable fact under it — and everyone present sees the fact.",
-   "notFor": "Anything that is genuinely NOT reducible to a touchable fact. Some things aren't, and the Masons' great blindness is not believing that.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Plain Fact",
-     "grants": "Cut through a rhetorical or symbolic working to the concrete fact beneath, out loud, and make it land.",
-     "cannot": "Some abstractions are TRUE. Reducing them does not unmake them; it only makes you look small when it fails.",
-     "functions": [
-      "reveal"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "reveal"
-     ],
-     "_nameWas": "The Plain Fact",
-     "gainAxes": []
-    },
-    {
-     "rank": 2,
-     "name": "Bedrock",
-     "grants": "Reduce an argument, a glamour, or a doctrine to its physical basis — and if it has none, that becomes visible to all.",
-     "cannot": "A doctrine with no physical basis is not thereby false. The Masons lose this argument to the Figurists roughly every generation.",
-     "functions": [
-      "reveal"
-     ],
-     "gains": "deepen",
-     "harmRung": "none",
-     "_functionsWas": [
-      "reveal"
-     ],
-     "_nameWas": "The Bedrock",
-     "gainAxes": []
-    },
-    {
-     "rank": 3,
-     "name": "Only Real",
-     "grants": "In your presence the touchable simply IS the real, and abstraction cannot get purchase — no symbol acts, no figure walks.",
-     "cannot": "You have made a world where nothing means anything. Some people find that a relief, and the ones who do worry the Masons most.",
-     "functions": [
-      "ward"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "ward"
-     ],
-     "_nameWas": "The Only Real",
-     "gainAxes": []
-    }
-   ],
-   "gated": "learned",
-   "challengeTypes": [
-    "SOCIAL",
-    "INVESTIGATE",
-    "FIGHT"
-   ],
-   "tradition": "mason",
-   "nativeOrCombination": "native",
-   "harmRung": "none",
-   "shape": "guard",
-   "operativeAxis": [
-    "denial",
-    "scope"
-   ],
-   "mechanic": {
-    "magnitude": 6,
-    "soak": 5,
-    "soakRank": 3,
-    "type": "abstraction",
-    "duration": 4,
-    "note": "A FOURTEENTH DEFENSIVE LOGIC — REDUCED: it does not block, evade or absorb; it REDUCES an abstract working to its physical basis, and if it has none, it stops existing. Typed soak rank 3 against `abstraction`."
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "denial",
-     "delta": "REDUCE an argument, a glamour, or a DOCTRINE to its physical basis — and if it has none, THAT BECOMES VISIBLE TO ALL",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: in your presence THE TOUCHABLE SIMPLY IS THE REAL — abstraction cannot get purchase, NO SYMBOL ACTS, NO FIGURE BINDS",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "state the concrete — half the reduction, and it reads as a fair question",
-    "surge": "double it; YOU HAVE MADE A WORLD WHERE NOTHING MEANS ANYTHING"
-   },
-   "bounds": [
-    {
-     "text": "SOME ABSTRACTIONS ARE TRUE — reducing them does not unmake them",
-     "class": "hard"
-    },
-    {
-     "text": "A DOCTRINE WITH NO PHYSICAL BASIS IS NOT THEREBY FALSE",
-     "class": "hard"
-    },
-    {
-     "text": "YOU HAVE MADE A WORLD WHERE NOTHING MEANS ANYTHING — some people cannot live in it",
-     "class": "cost"
-    }
-   ],
-   "plainly": "A social/investigate/fight action that reduces incoming harm. Its strength is rated 6 out of 10 and absorbs 5 harm per hit (rank 3 armour), and lasts for about 4 hours Ranks: rank 2 deepens denial; rank 3 adds to special. Limit: some Abstractions Are True — reducing them does not unmake them.",
-   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'.",
-   "_functionsWas": [
-    "reveal",
-    "ward"
-   ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_nameWas": "The Plain Fact",
-   "_idWas": "the_plain_fact"
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ BODY'S SENSE — reads condition and soundness by touch\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_merged": "⛔ SNG-481: absorbs Set Stone (L1 mason), which duplicated this skill's own r2 by name and effect."
   },
   {
    "id": "formcraft",
@@ -1244,8 +1099,8 @@
    "schemaVersion": 1,
    "id": "reduction",
    "name": "Reduction",
-   "levelReq": 5,
-   "energyCost": 13,
+   "levelReq": 3,
+   "energyCost": 8,
    "powerSystem": "reach_concrete_abstract",
    "tradition": "mason",
    "attribute": "mental",
@@ -1257,38 +1112,52 @@
     "reveal"
    ],
    "narrationHints": "They take it apart in front of them, honestly, piece by piece, until nothing is left that was worth standing up for.",
-   "description": "⚠️ THE LEVELLERS' CRAFT. A Mason reduces the abstract to what can be touched. Turned on a person it takes their faith, their vow, their grief, their reason for the last twenty years, and shows them the physical basis of each — accurately. What is left is a person in a world where nothing means anything, and some do not go on in it.",
+   "description": "Reduce a soaring abstraction to the plain touchable fact under it — and at its height, take a person's whole basis down to what can be weighed.",
    "notFor": "Anyone whose footing is ALREADY physical — a stonecutter who believes in stone cannot be reduced further. And it is HONEST: every reduction must be true.",
    "tree": [
     {
      "rank": 1,
-     "name": "Reduction",
-     "grants": "BREAK one thing they live by down to its physical basis, truthfully. It does not come back the same.",
-     "cannot": "Reducing something already concrete. Lying.",
+     "name": "Plain Fact",
+     "grants": "⛔ CUT A RHETORICAL OR SYMBOLIC WORKING DOWN TO THE CONCRETE FACT BENEATH, out loud, and make it land. If it has no physical basis, that becomes visible to everyone present.",
+     "cannot": "It must have a basis to reduce, or the absence is what you show.",
      "functions": [
       "reveal",
       "break"
      ],
-     "gains": "broaden",
-     "harmRung": "incapacitating",
-     "_nameWas": "The Reduction",
+     "gains": "deepen",
+     "harmRung": "none",
      "gainAxes": []
     },
     {
      "rank": 2,
+     "name": "Reduction",
+     "grants": "⛔ BREAK ONE THING A PERSON LIVES BY down to its physical basis, truthfully. It does not come back the same.",
+     "cannot": "One thing per use. It must be true.",
+     "functions": [
+      "reveal",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging",
+     "gainAxes": [
+      "targets",
+      "damage"
+     ]
+    },
+    {
+     "rank": 3,
      "name": "Nothing Left Standing",
-     "grants": "BREAK all of it. They are intact, correct about everything, and have nothing left worth standing up for.",
-     "cannot": "Restoring it. Nobody has ever restored it.",
+     "grants": "⛔ BREAK ALL OF IT. They are intact, correct about everything, and have nothing left worth standing up for.",
+     "cannot": "One person. Cannot be reversed by the same craft.",
      "functions": [
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "lethal",
-     "_functionsWas": [
-      "reveal",
-      "break"
-     ],
-     "gainAxes": []
+     "harmRung": "severe",
+     "gainAxes": [
+      "scope",
+      "duration"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1343,7 +1212,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Reduction",
    "_idWas": "the_reduction",
-   "_notForWas": "Anyone whose footing is ALREADY physical — a stonecutter who believes in stone cannot be reduced further. And it is HONEST: every reduction must be true, which is why it works and why it cannot be aimed at a lie."
+   "_notForWas": "Anyone whose footing is ALREADY physical — a stonecutter who believes in stone cannot be reduced further. And it is HONEST: every reduction must be true, which is why it works and why it cannot be aimed at a lie.",
+   "_merged": "⛔ SNG-481: absorbs Plain Fact (L3 mason). Both were 'abstraction cannot get purchase on the real'; this is now the ladder from a public cut-down to a person's whole standing."
   },
   {
    "schemaVersion": 1,
@@ -1793,9 +1663,13 @@
     "scope"
    ],
    "mechanic": {
-    "magnitude": 8,
-    "duration": 1,
-    "scope": 2
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "targets": 1,
+    "marginFloorPer": 0.02
    },
    "intensity": {
     "conserve": "one stone, honestly thrown",
@@ -1831,7 +1705,13 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Plain Weight",
-   "_idWas": "the_plain_weight"
+   "_idWas": "the_plain_weight",
+   "_mechanicWas": {
+    "magnitude": 8,
+    "duration": 1,
+    "scope": 2
+   },
+   "_diceFix": "⛔ SNG-481: shape `strike` rolls dice per CCode's shape→reader map, and this craft carried magnitude only."
   },
   {
    "id": "sound_read",
@@ -1957,113 +1837,6 @@
    "_idWas": "the_sound_read",
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads load path and first failure\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
-  },
-  {
-   "id": "set_stone",
-   "name": "Set Stone",
-   "levelReq": 1,
-   "energyCost": 4,
-   "powerSystem": "reach_concrete_abstract",
-   "attribute": "practical",
-   "axes": {
-    "concrete_abstract": 0.6,
-    "chaos_order": 0.3
-   },
-   "functions": [
-    "bind",
-    "make",
-    "ward"
-   ],
-   "narrationHints": "You set a thing where it is and it STAYS. A stone, a beam, a door, a cart — placed with intent, it now takes far more than ordinary force to shift, and it will not drift, sag, settle or be quietly moved.",
-   "description": "Set one object where you have placed it and it STAYS — resisting levers, drift and quiet removal, and you know the instant it is being worked at. The Masons' holding-craft: half of building is making a thing stay put.",
-   "notFor": "Making the thing stronger (a set rotten beam is a rotten beam that will not move); setting anything alive; setting what you cannot lift or lever into place first; anything already falling.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Placed Thing",
-     "grants": "Set one object you have positioned. It resists being moved, levered, or shifted by anything short of deliberate concerted effort — and you know the instant it is being worked at.",
-     "cannot": "It holds POSITION, not integrity — a set thing still breaks, rots, and burns normally. You must have PLACED it. And a determined crew with tools gets it eventually; this buys time and warning.",
-     "functions": [
-      "bind",
-      "ward"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_nameWas": "The Placed Thing",
-     "gainAxes": []
-    },
-    {
-     "rank": 2,
-     "name": "Kept Course",
-     "grants": "Set several, or set a working assembly — a door in its frame, a wheel on its axle, a raft's lashings — so the whole thing holds true under use.",
-     "cannot": "The more you hold, the more thinly. And a set assembly cannot be adjusted by anyone, including you, without unsetting it first.",
-     "functions": [
-      "bind",
-      "ward",
-      "make"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_nameWas": "The Kept Course",
-     "gainAxes": [
-      "scope"
-     ]
-    },
-    {
-     "rank": 3,
-     "name": "Unmoved Work",
-     "grants": "A structure that does not settle, shift, or subside — a wall on bad ground, a span over a moving river, a gate that will not be forced.",
-     "cannot": "⚠ THE GROUND STILL MOVES; you have only refused to move WITH it. A set structure on failing ground does not sag — it stands until it does not, and there is no warning creak. Masons argue about whether that is a virtue.",
-     "functions": [
-      "bind",
-      "ward",
-      "make"
-     ],
-     "gains": "deepen",
-     "harmRung": "none",
-     "_nameWas": "The Unmoved Work",
-     "gainAxes": []
-    }
-   ],
-   "challengeTypes": [
-    "PUZZLE",
-    "FIGHT"
-   ],
-   "tradition": "mason",
-   "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
-   "shape": "bind",
-   "operativeAxis": [
-    "duration",
-    "scope"
-   ],
-   "mechanic": {
-    "magnitude": 6,
-    "duration": 72,
-    "scope": 2
-   },
-   "intensity": {
-    "conserve": "set one thing",
-    "surge": "the unmoved work; IT STANDS UNTIL IT DOES NOT, and there is no warning creak"
-   },
-   "bounds": [
-    {
-     "text": "holds POSITION, not integrity — it still breaks, rots and burns",
-     "class": "hard"
-    },
-    {
-     "text": "you must have PLACED it",
-     "class": "hard"
-    },
-    {
-     "text": "a determined crew with tools gets it eventually",
-     "class": "soft"
-    }
-   ],
-   "plainly": "A puzzle/fight action that fixes a placed object so it cannot be shifted. Rated 6 of 10 across a scope of 2 for about three days.",
-   "_descriptionWas": "The Masons' holding-craft. Half of building is making a thing stay where you put it.",
-   "_nameWas": "The Set Stone",
-   "_idWas": "the_set_stone"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

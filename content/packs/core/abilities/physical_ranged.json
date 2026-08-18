@@ -583,42 +583,47 @@
     {
      "rank": 1,
      "name": "Early Hands",
-     "grants": "Catch or deflect one thrown object per action if you saw it thrown. Also: take a small thing off a person without them feeling it.",
+     "grants": "Catch or deflect one thrown object per action if you saw it thrown — and take a small thing off a person without them feeling it.",
      "functions": [
       "hinder"
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "cannot": "You must SEE it coming — nothing from behind; one object per action.",
+     "cannot": "⛔ YOU MUST SEE IT COMING. Nothing from behind; one object per action.",
      "_functionsWas": [
       "reveal",
       "hinder"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "Catch or deflect one thrown object per action if you saw it thrown. Also: take a small thing off a person without them feeling it.",
+     "_cannotWas": "You must SEE it coming — nothing from behind; one object per action."
     },
     {
      "rank": 2,
      "name": "Turned Catch",
-     "grants": "Catch it and send it back in the same motion, at the thrower, at short range.",
+     "grants": "⚠️ ADDS THE RETURN. Catch it and send it back in the same motion, at the thrower.",
      "functions": [
       "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "cannot": "Short range only on the return; still nothing from behind.",
+     "cannot": "Short range on the return; still nothing from behind.",
      "_functionsWas": [
       "hinder",
       "strike"
      ],
      "_nameWas": "The Turned Catch",
      "gainAxes": [
-      "range"
-     ]
+      "range",
+      "damage"
+     ],
+     "_grantsWas": "Catch it and send it back in the same motion, at the thrower, at short range.",
+     "_cannotWas": "Short range only on the return; still nothing from behind."
     },
     {
      "rank": 3,
      "name": "Both Hands",
-     "grants": "Two objects, or one arrow from a bow you did not see drawn.",
+     "grants": "⛔ ADDS NUMBER AND SPEED. Two objects at once, or one arrow from a bow you did not see drawn.",
      "functions": [
       "strike"
      ],
@@ -629,7 +634,12 @@
       "hinder",
       "strike"
      ],
-     "gainAxes": []
+     "gainAxes": [
+      "targets",
+      "conditions"
+     ],
+     "_grantsWas": "Two objects, or one arrow from a bow you did not see drawn.",
+     "_cannotWas": "⛔ NOT A BOLT — a crossbow bolt takes the hand off."
     }
    ],
    "functions": [

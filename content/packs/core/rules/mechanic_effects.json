@@ -21,7 +21,7 @@
    "reads": "mechanic.antisoak",
    "states": "antisoak N",
    "wired": false,
-   "note": "⛔ ADDS TO DAMAGE THAT ALREADY GOT PAST SOAK. Stacks with piercing. New in SNG-498."
+   "note": "⛔ CCODE: the layer walk already splits `cutThrough` (rank <= penetration) from `soak`. ANTISOAK IS A THIRD TERM BESIDE THOSE TWO, not a rewrite."
   },
   "HEAL": {
    "reads": "mechanic.dice on healing shape",
@@ -35,15 +35,16 @@
    "wired": true
   },
   "ACTION_LOSS": {
-   "reads": "—",
+   "reads": "nearest shape is phaseDenied(...,'sense')",
    "states": "target loses next action",
    "wired": false,
-   "note": "⚠️ Keening r1. Needs a round-state flag."
+   "note": "⚠️ CCODE: `phaseDenied` denies the sense step and sets `senseBlinded` — the shape to build from."
   },
   "UNCONSCIOUS": {
-   "reads": "—",
-   "states": "target falls unconscious, resist for action-loss instead",
-   "wired": false
+   "reads": "encounters.checkIncapacitation",
+   "states": "target incapacitated",
+   "wired": "partial",
+   "note": "⚠️ CCODE: I WAS HALF WRONG. The engine has its own end-state — 'incapacitation, never engine-imposed death'. Keening does not need a new state, it needs a way to IMPOSE the existing one."
   },
   "TEMPO": {
    "reads": "tempo bank",
@@ -118,7 +119,7 @@
    "reads": "—",
    "states": "effect lasts until a mending craft lifts it",
    "wired": false,
-   "note": "⛔ Grey Hand, Grief Strike r3. A real duration class distinct from rounds/days."
+   "note": "⛔ CCODE: durations are ROUNDS (craftDurationMax default 5). 'Until healed' is NOT A LONGER DURATION, IT IS A DIFFERENT CLOCK — needs a condition the rest-and-recovery path clears."
   },
   "PROJECT_TICKS": {
    "reads": "ability.projectTicks",
@@ -205,5 +206,39 @@
    "Attended End: you may ask what is ending"
   ]
  },
- "_forCCode": "⛔ FILL IN THE `wired` COLUMN AND CORRECT ME. ⚠️ For each ENGINE effect: does a field exist, is it read, and where? For each MODEL effect: is there a prompt path that carries the contract to the model, or is the contract invisible at runtime? ⛔ THE SECOND QUESTION IS THE ONE I CANNOT ANSWER FROM CONTENT — a contract the model never sees is not a contract."
+ "_forCCode": "⛔ FILL IN THE `wired` COLUMN AND CORRECT ME. ⚠️ For each ENGINE effect: does a field exist, is it read, and where? For each MODEL effect: is there a prompt path that carries the contract to the model, or is the contract invisible at runtime? ⛔ THE SECOND QUESTION IS THE ONE I CANNOT ANSWER FROM CONTENT — a contract the model never sees is not a contract.",
+ "_ccodeCorrections_20260816": "⛔ CCODE REPLY. (1) `rank.grants` REACHES THE MODEL VERBATIM via `progression.abilitiesForGM`, registered `reachedBy: always` on turn/ask/gambit. The six model contracts work exactly as written. ⚠️ SO THE WIRE WAS ALWAYS THERE AND NOBODY WAS WRITING CONTRACTS INTO IT.\n⛔ (2) ONLY THE RANK THE PLAYER HOLDS IS SENT — `tree.find(t => t.rank === owned.level)`. EVERY RANK'S `grants` MUST BE SELF-CONTAINED. 'ADDS DURATION AND ABSENCE' tells the model nothing because it never saw r1. ⚠️ THIS INVALIDATES MY ENTIRE 'ADDS X' PHRASING CONVENTION ACROSS BOTH FINISHED TRADITIONS.\n⛔ (3) `cannot` IS SENT TOO as `CANNOT (at this rank)` and is the clamp the model reads. A sharp `grants` with a vague `cannot` is half-specified in the direction that causes trouble.\n⛔ (4) MAX RANK 3 IS ENFORCED, not convention — `rules.leveling.maxAbilityRank` in resolution.json, checked at two sites in progression.js. My five-rank tree was two rows the engine refuses to reach.",
+ "engineTracksButNoCraftNames": {
+  "_note": "⛔ CCODE §4c — real, engine-resolved, and NO ability vocabulary reaches them. This is the biggest authoring opportunity in the file.",
+  "MOMENTUM": {
+   "what": "the meter the margin delta drives; pressure ticks read it",
+   "note": "⚠️ the sense step deliberately does not move it (`senseMovesMomentum !== true`)"
+  },
+  "PRESSURE_EXIT": {
+   "what": "per-kind: what a tick costs each side and how many break them",
+   "note": "⛔ KIND-AGNOSTIC — a debate can break someone, not just a fight"
+  },
+  "EVASION_RANK": {
+   "what": "`evasionOf` — at rank 1 an attacker who read you first still finds you; at rank 2+ the read stops helping",
+   "note": "⛔ AUTHORABLE TODAY AND ALMOST NOTHING AUTHORS IT"
+  },
+  "SOAK_LAYERS_TYPED": {
+   "what": "`answers(l)` matches a layer to a damage KIND; a wrong-type layer contributes nothing",
+   "note": "⛔ `damageType` / `wardTypes` are LIVE and mostly unauthored on crafts"
+  },
+  "AFFINITY": {
+   "what": "absorb / immune / doubled — a foe that FEEDS on a kind takes a negative hit"
+  },
+  "CONTEST_MODS": {
+   "what": "a standing effect modifies the round AFTER the one that created it"
+  },
+  "DEGRADE_IF_SPENT": {
+   "what": "an empty pool silently reduces a declaration to a bare effort",
+   "note": "⚠️ NO CRAFT NAMES WHAT IT DEGRADES TO — worth authoring for a bound ward or a held regard"
+  },
+  "CRIT_PER_CRAFT": {
+   "what": "`critFor` reads the craft's own critical",
+   "note": "⚠️ authored on few"
+  }
+ }
 }

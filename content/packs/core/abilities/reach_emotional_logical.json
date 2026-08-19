@@ -270,8 +270,8 @@
    "id": "grief_strike",
    "name": "Grief Strike",
    "levelReq": 2,
-   "energyCost": 2,
-   "powerSystem": "attribute",
+   "energyCost": 6,
+   "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
     "emotional_logical": -0.4
@@ -281,13 +281,13 @@
     "emotional",
     "wound"
    ],
-   "harmRung": "incapacitating",
-   "narrationHints": "It doesn't hurt where you put your hands. It hurts where you feel.",
-   "description": "Strike at the emotional self — send a true, intense feeling at a person in a way they cannot close off.",
-   "notFor": [],
+   "harmRung": "severe",
+   "narrationHints": "No contact and no weapon. They flinch as though struck, and the next thing that touches them does far more than it should.",
+   "description": "Strike at what a person is holding themselves together with — it wounds, and it leaves them open to everything that comes after.",
+   "notFor": "Anything that cannot feel; armour — this does not pierce soak, it makes what gets past it worse.",
    "tradition": "threnodist",
    "functions": [
-    "break",
+    "strike",
     "hinder"
    ],
    "challengeTypes": [
@@ -299,58 +299,51 @@
     {
      "rank": 1,
      "name": "True Feeling",
-     "grants": "Direct a genuine, intense feeling at a person — grief, shame, terror — that they cannot close off because it is true and they know it.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "grants": "⛔ 2d6 DAMAGE AND ANTISOAK 3. A true, intense feeling arrives where they cannot close it off — and leaves them raw: while the antisoak holds, ANY damage that gets past their soak is increased by 3.",
+     "cannot": "⚠️ Antisoak only applies to damage that already got through. A blow fully absorbed by soak adds nothing.",
      "functions": [
+      "strike",
       "hinder"
      ],
-     "gains": "broaden",
-     "harmRung": "incapacitating",
-     "_nameWas": "The True Feeling",
-     "gainAxes": [],
-     "_cannotWas": "Anything rank 2 adds — find and open the grief a person has been protecting — the loss they haven't admitted, the feeling they've been keeping functional by not opening; IT MUST BE GENUINE FEELING."
+     "gains": "deepen",
+     "harmRung": "damaging",
+     "gainAxes": []
     },
     {
      "rank": 2,
      "name": "Unguarded Place",
-     "grants": "Find and open the grief a person has been protecting — the loss they haven't admitted, the feeling they've been keeping functional by not opening.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "grants": "⛔ ANTISOAK 5 FIRST, THEN 3d6 — you open the grief they have been protecting and strike into it, so your own blow lands against the vulnerability you just created.",
+     "cannot": "One target. Antisoak applies to damage that gets past soak, from any source.",
      "functions": [
-      "break"
+      "strike",
+      "hinder"
      ],
-     "gains": "broaden",
-     "harmRung": "incapacitating",
-     "_functionsWas": [
-      "hinder",
-      "break"
-     ],
-     "_nameWas": "The Unguarded Place",
+     "gains": "deepen",
+     "harmRung": "damaging",
      "gainAxes": [
-      "targets"
-     ],
-     "_cannotWas": "Anything rank 3 adds — break an emotional fortification entirely — what they've been using to stay functional is now open and requires tending before they can operate again; IT MUST BE GENUINE FEELING."
+      "damage",
+      "quality"
+     ]
     },
     {
      "rank": 3,
      "name": "Shattered Fortification",
-     "grants": "Break an emotional fortification entirely — what they've been using to stay functional is now open and requires tending before they can operate again.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "grants": "⛔ ANTISOAK 8, AND IT LASTS UNTIL HEALED OR RESTORED. What they were using to stay whole is open, and every blow anyone lands on them past their soak is increased by 8 until a mending craft closes it.",
+     "cannot": "⛔ It persists until a mending craft lifts it. Rest does not close it.",
      "functions": [
-      "break"
+      "strike",
+      "hinder"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating",
-     "_functionsWas": [
-      "hinder",
-      "break"
-     ],
-     "_nameWas": "The Shattered Fortification",
-     "gainAxes": [],
-     "_cannotWas": "Nothing further; this is the craft's ceiling; IT MUST BE GENUINE FEELING; and it still costs what it costs: breaking what someone was using TO STAY FUNCTIONAL leaves them not functional."
+     "harmRung": "severe",
+     "gainAxes": [
+      "duration",
+      "targets"
+     ]
     }
    ],
    "nativeOrCombination": "native",
-   "shape": "hobble",
+   "shape": "strike",
    "operativeAxis": [
     "emotionalBreach",
     "targets"
@@ -358,9 +351,15 @@
    "mechanic": {
     "magnitude": 5,
     "duration": 4,
+    "scope": 1,
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "antisoak": 3,
     "targets": 1,
-    "damageType": "feeling",
-    "note": "incapacitating. THE CATALOG'S MOST ETHICALLY UNCOMFORTABLE CRAFT — it opens a grief someone has been protecting."
+    "marginFloorPer": 0.02
    },
    "rankDeltas": [
     {
@@ -384,26 +383,31 @@
    },
    "bounds": [
     {
-     "text": "IT MUST BE GENUINE FEELING — a manufactured grief is not this craft and does not land",
+     "text": "⛔ ANTISOAK APPLIES ONLY TO DAMAGE THAT ALREADY GOT PAST SOAK. A blow fully absorbed adds nothing",
      "class": "hard"
     },
     {
-     "text": "what you open DOES NOT CLOSE because you are done with it",
+     "text": "⚠️ IT DOES NOT PIERCE SOAK — a craft that pierces (Ki Wield) ignores soak AND still adds the antisoak, so the two stack",
      "class": "hard"
     },
     {
-     "text": "breaking what someone was using TO STAY FUNCTIONAL leaves them not functional",
-     "class": "cost"
+     "text": "⛔ r3 PERSISTS UNTIL A MENDING CRAFT LIFTS IT; rest does not close it",
+     "class": "hard"
+    },
+    {
+     "text": "anything that cannot feel is unaffected",
+     "class": "hard"
     }
    ],
-   "plainly": "A social/psychological/combat action that weakens or restricts a target. Its strength is rated 5 out of 10 It affects 1 target, and lasts for about 4 hours Ranks: rank 2 deepens emotionalBreach; rank 3 adds to special. Limit: iT Must BE Genuine Feeling — a manufactured grief is not this craft and does not land.",
+   "plainly": "A fight/duel action that deals damage and applies ANTISOAK. It rolls 2d6 and applies antisoak 3. Ranks: rank 2 antisoak 5 then 3d6, rank 3 antisoak 8 until healed.",
    "_functionsWas": [
     "break",
     "hinder"
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Grief Strike",
-   "_idWas": "the_grief_strike"
+   "_idWas": "the_grief_strike",
+   "_antisoak": "⛔ SNG-498. Erik: 'antisoak as NEGATIVE SOAK — Grief Strike's antisoak-based vulnerability activates IF ANYTHING GETS PAST THE PERSON'S SOAK. A 10 damage strike lands, 8 gets soaked, the 2 gets the 6 antisoak added for 8 damage. A Ki Wield using this would STACK the soak pierce and get benefit from the antisoak.'\n⚠️ SO ANTISOAK IS NOT SOAK REDUCTION — it is a BONUS ON DAMAGE THAT ALREADY LANDED, which is why it stacks cleanly with piercing rather than competing with it.\n⛔ AND IT IS THE FIRST TEAM-FACING DEBUFF IN THE GAME: everyone else's blows benefit, not just yours. That is what makes it worth a slot beside Keening.\n⚠️ ENERGY 2 → 6 per §32.17: L2 median 4, +2 for permanence at r3."
   },
   {
    "id": "felt_wall",
@@ -1488,7 +1492,7 @@
    "name": "Keening",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "wild_nanite",
+   "powerSystem": "combination",
    "attribute": "social",
    "axes": {
     "emotional_logical": -0.6,
@@ -1504,9 +1508,9 @@
    "tree": [
     {
      "rank": 1,
-     "name": "Cry Let Go",
-     "grants": "⛔ THE WAIL GOES OUT AND EVERYONE IN EARSHOT WHO CAN FEEL LOSES THEIR NEXT ACTION. Weapons lower, a charge breaks, a pursuit stalls — not because they chose to stop but because for a moment there is nothing in them that can continue. It passes through walls and around corners; there is no cover from it.",
-     "cannot": "Anything that cannot feel is unaffected. One round of action lost, and they act normally after.",
+     "name": "Wail",
+     "grants": "⛔ EVERYONE IN EARSHOT WHO CAN FEEL LOSES THEIR NEXT ACTION. Weapons lower, a charge breaks, a pursuit stalls — not because they chose to stop but because for a moment there is nothing in them that can continue. It passes through walls and around corners; there is no cover from it.",
+     "cannot": "Anything that cannot feel is unaffected. One round of action lost; they act normally after.",
      "functions": [
       "strike",
       "hinder"
@@ -1517,25 +1521,25 @@
     },
     {
      "rank": 2,
-     "name": "Held Note",
-     "grants": "⛔ NARROW THE WAIL TO ONE THROAT AND THEY GO DOWN — unconscious where they stand if it lands. ⚠️ Or hold the broad cry instead: the action-loss continues each round you keen and none of them can rally out of it.",
-     "cannot": "One target for the felling, or the broad cry sustained — not both in the same round.",
+     "name": "Dark Wail",
+     "grants": "⛔ AIM IT AT SEVERAL. Each one you name FALLS UNCONSCIOUS if it lands — and any who resist lose their next action instead.",
+     "cannot": "Up to three named targets in earshot. Anything that cannot feel is unaffected.",
      "functions": [
       "strike",
       "hinder"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "severe",
      "gainAxes": [
       "targets",
-      "duration"
+      "quality"
      ]
     },
     {
      "rank": 3,
-     "name": "Threnody",
-     "grants": "⛔ THE FULL LAMENT. EVERYONE YOU CHOOSE WHO HEARS IT DROPS UNCONSCIOUS — a crowd, a hall, a street. You name who is spared and they hear only grief.",
-     "cannot": "Everyone you choose within earshot. Those spared still lose their next action.",
+     "name": "Oblivion Pulse",
+     "grants": "⛔ EVERYONE YOU CHOOSE WHO HEARS IT DROPS UNCONSCIOUS — a crowd, a hall, a street. You name who is spared, and they lose their next action instead.",
+     "cannot": "Everyone within earshot that you choose. Anything that cannot feel is unaffected.",
      "functions": [
       "strike",
       "hinder"
@@ -1591,7 +1595,7 @@
      "class": "soft"
     }
    ],
-   "plainly": "A fight action that deals damage and costs the target their next action. It rolls 2d6, up to 6 targets. Ranks: rank 2 fells one target outright, rank 3 drops everyone you choose.",
+   "plainly": "A fight action that deals damage and costs the target their next action. It rolls 2d6. Ranks: rank 2 fells up to three, rank 3 drops everyone you choose.",
    "backlash": "The grief turns inward and will not release — the wielder is struck at the surged rung instead of them, and cannot use this craft again until they have slept.",
    "conserveSuppresses": "the cry is aimed as far as a cry can be aimed: allies take no rung",
    "backlashRung": "damaging",
@@ -1664,7 +1668,12 @@
      ]
     }
    ],
-   "_reauthored": "⛔ SNG-498. Erik: 'the mechanic could include sound, but it seems like a SUPERNATURAL BANSHEE'S WAIL to me — so we'd want it flavoured that way, with r1 doing what it says and IN A FIGHT MAKING THE OPPONENT LOSE THEIR NEXT ACTION. If the wail is directed at one being, r2 would KNOCK THEM UNCONSCIOUS if successful. Threnody would be EVERYONE YOU CHOOSE WHO HEARS IT DROPS UNCONSCIOUS.'\n⚠️ 'STAGGERED' WAS THE PROBLEM — a mood word standing in for a mechanic. Now: lose your next action, then fall, then everyone falls.\n⛔ ENERGY 7 → 4, the L1 band median (§32.17). ⚠️ AND THE 'IT LANDS ON YOU TOO' COST IS REMOVED per §32.18 — atmosphere, not a bound. What bounds it is that it cannot distinguish allies until r3.\n⛔ POWER SOURCE `wild_nanite`: was `reach_emotional_logical`, a reach id. Threnodist is the wild half of Death — 'tidal, expressive, public weeping; emotion is not an ordered process'."
+   "_reauthored": "⛔ SNG-498. Erik: 'the mechanic could include sound, but it seems like a SUPERNATURAL BANSHEE'S WAIL to me — so we'd want it flavoured that way, with r1 doing what it says and IN A FIGHT MAKING THE OPPONENT LOSE THEIR NEXT ACTION. If the wail is directed at one being, r2 would KNOCK THEM UNCONSCIOUS if successful. Threnody would be EVERYONE YOU CHOOSE WHO HEARS IT DROPS UNCONSCIOUS.'\n⚠️ 'STAGGERED' WAS THE PROBLEM — a mood word standing in for a mechanic. Now: lose your next action, then fall, then everyone falls.\n⛔ ENERGY 7 → 4, the L1 band median (§32.17). ⚠️ AND THE 'IT LANDS ON YOU TOO' COST IS REMOVED per §32.18 — atmosphere, not a bound. What bounds it is that it cannot distinguish allies until r3.\n⛔ POWER SOURCE `wild_nanite`: was `reach_emotional_logical`, a reach id. Threnodist is the wild half of Death — 'tidal, expressive, public weeping; emotion is not an ordered process'.",
+   "powerMix": {
+    "wild_nanite": 0.6,
+    "veil": 0.4
+   },
+   "_veil": "⛔ SNG-498. Erik: 'it sure seems like Keening could be PARTIALLY VEIL POWERED.' ⚠️ AGREED AND IT FITS THE COSMOLOGY: the Veil is what remains where something enormous stopped being present (SNG-442), and a wail with a death inside it that passes through stone is not a sound the air is carrying. ⛔ `combination`: wild_nanite 0.6 (tidal, ungoverned, threnodist) + veil 0.4 (it reaches through, and there is no cover from it).\n⚠️ r2 SIMPLIFIED per Erik — 'too complicated to combine that with a broad cry'. Now: up to three named targets, each falls unconscious or loses their action on a resist."
   },
   {
    "id": "contradiction",

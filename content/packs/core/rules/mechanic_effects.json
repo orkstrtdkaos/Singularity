@@ -140,5 +140,70 @@
   },
   "_note": "⛔ REVEAL IS THE COMMONEST CLAIM AND THE EMPTIEST — 130 ranks, most of which say 'you know' without naming what is returned. ⚠️ THAT IS THE SAME FINDING AS THE 519 PERCEIVE ROWS, arriving from a different direction."
  },
- "_howToUse": "⛔ FOR EACH RANK: name the effect, give its number, and check the effect is WIRED. If it is not wired, the number is intent and must be flagged for CCode. ⚠️ IF NO EFFECT FITS, THE RANK IS NOT A MECHANIC — it is flavour, a duplicate, or unfinished, and the six questions (§32.11) will say which."
+ "_howToUse": "⛔ FOR EACH RANK: name the effect, give its number, and check the effect is WIRED. If it is not wired, the number is intent and must be flagged for CCode. ⚠️ IF NO EFFECT FITS, THE RANK IS NOT A MECHANIC — it is flavour, a duplicate, or unfinished, and the six questions (§32.11) will say which.",
+ "_threeClasses": "⛔ ERIK 2026-08-16: 'The items that say REVEAL, or a few other areas, MIGHT be RELYING ON THE GM TO AUTHOR THE OUTCOME — and that IS A REAL EFFECT. So let's list out what we're relying on the model for.'\n⚠️ HE IS RIGHT AND MY FIRST LIST WAS WRONG BY OMISSION. I counted 480 ranks as 'claiming no mechanic' when many of them claim a MODEL-ADJUDICATED one. ⛔ IN AN LLM-RUN GAME, 'THE MODEL DECIDES WHAT YOU FIND' IS A MECHANIC — it is simply resolved by a different engine.\n⛔ THREE CLASSES:\n   ENGINE — a number the code computes. Damage, soak, antisoak, duration, tempo.\n   MODEL — an outcome the model authors. ⚠️ THE RANK MUST STATE WHAT THE MODEL IS OBLIGED TO PRODUCE, or it is not a mechanic, it is a mood.\n   PERMISSION — a binary capability that changes what may be attempted at all. Walk on air; be unseen while acting; address the dead. ⚠️ The model adjudicates the attempt; the PERMISSION is not negotiable.",
+ "modelAdjudicated": {
+  "_principle": "⛔ A MODEL EFFECT IS A CONTRACT WITH THE MODEL, NOT AN ABSENCE OF ONE. 'You know what is failing' is not a mechanic. 'THE MODEL MUST NAME ONE SPECIFIC FAILING THING, ITS CAUSE, AND ROUGHLY HOW LONG IT HAS' is. ⚠️ THE TEST: could two different GMs produce answers that differ in KIND rather than in detail? If yes, the contract is underspecified.",
+  "effects": {
+   "NAME_A_FACT": {
+    "contract": "⛔ The model must name ONE specific, checkable fact of a stated kind — not a hint, not an atmosphere.",
+    "examples": [
+     "True Account: what is failing, roughly how long it has, and what it will go from",
+     "Attended End: what ended, how, and whether it was natural or made",
+     "Pattern-Sense: which pattern, by name"
+    ],
+    "underspecified": "⚠️ 'The room remembers correctly' · 'you perceive the meaning-layer' · 'you understand the situation'"
+   },
+   "NAME_A_WEAKNESS": {
+    "contract": "⛔ The model must name a specific exploitable feature that a player can then act on THIS SCENE.",
+    "examples": [
+     "Deduced Strike: the old injury, the badly-set strap, the foot carrying the weight",
+     "Keystone Blow: which stone the structure is resting on"
+    ],
+    "underspecified": "⚠️ 'you see where it is weak'"
+   },
+   "NARRATE_ACCESS": {
+    "contract": "⛔ The model must state WHICH door opens, WHOSE cooperation you get, and what they will not do.",
+    "examples": [
+     "Palework: the body, the room, the records, and the family's own account"
+    ],
+    "underspecified": "⚠️ 'people trust you'"
+   },
+   "ADJUDICATE_PLAUSIBILITY": {
+    "contract": "⚠️ The model rules whether an attempt is within the craft's stated bound — and the bound must be concrete enough to rule on.",
+    "examples": [
+     "My Reality: the picture must be plausible for the place",
+     "Formcraft: was this craft witnessed, described, or neither"
+    ],
+    "underspecified": "⛔ 'if the GM thinks it works'"
+   },
+   "AUTHOR_A_CONSEQUENCE": {
+    "contract": "⛔ The model must author a durable change to the world state and RECORD it.",
+    "examples": [
+     "Shared Grief r3: the grief becomes part of what the place IS — recorded in the world, not the character",
+     "Case Closed r3: a community stops relitigating"
+    ],
+    "underspecified": "⚠️ 'things are different afterward'"
+   },
+   "SPEAK_AS": {
+    "contract": "⛔ The model must voice a specific entity with stated limits on what it knows and will say.",
+    "examples": [
+     "Ask the Dead: the recently dead answer, and they answer as they were",
+     "Attended End: Marrow tells you, and never softens it"
+    ],
+    "underspecified": "⚠️ 'you commune with it'"
+   }
+  }
+ },
+ "permission": {
+  "_principle": "⛔ A PERMISSION CHANGES WHAT MAY BE ATTEMPTED. It is binary, it is not rolled, and the model may not refuse it — only adjudicate the attempt made under it.",
+  "examples": [
+   "Skydancer: you may take a step on nothing",
+   "Loose-Limbed r2: you may attempt to leave any physical hold",
+   "Ignore Me: you may act in the open unattended",
+   "Palework r2: a body you handled cannot be raised",
+   "Attended End: you may ask what is ending"
+  ]
+ },
+ "_forCCode": "⛔ FILL IN THE `wired` COLUMN AND CORRECT ME. ⚠️ For each ENGINE effect: does a field exist, is it read, and where? For each MODEL effect: is there a prompt path that carries the contract to the model, or is the contract invisible at runtime? ⛔ THE SECOND QUESTION IS THE ONE I CANNOT ANSWER FROM CONTENT — a contract the model never sees is not a contract."
 }

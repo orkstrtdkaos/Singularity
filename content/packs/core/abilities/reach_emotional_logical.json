@@ -1487,20 +1487,124 @@
    "id": "keening",
    "name": "Keening",
    "levelReq": 1,
-   "energyCost": 7,
-   "powerSystem": "reach_emotional_logical",
+   "energyCost": 4,
+   "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
     "emotional_logical": -0.6,
     "violence_peace": -0.2
    },
    "functions": [
-    "strike"
+    "strike",
+    "hinder"
    ],
-   "narrationHints": "A grief-cry pitched past speech — not loud so much as TRUE, and the truth of it buckles the knees of everyone in earshot. Heard, never aimed.",
-   "description": "Release a grief you actually hold as sound, and everyone in earshot who can feel is staggered — weapons lowered, a charge broken, a pursuit stalled. It works through walls, and it lands on you too. The Threnodists' first offense: heard, never aimed.",
-   "notFor": "A silent kill (it is heard, always); sparing your friends — ANYONE ELSE IN EARSHOT IS STRUCK ONE RUNG LOWER, and the wielder takes 'damaging' at rank 3; the deaf; anything that does not feel.",
+   "narrationHints": "Not a scream and not a song. A sound with a death inside it that arrives in the chest rather than the ears, and goes through stone as easily as air. People who hear it from three streets away stop walking without knowing why.",
+   "description": "A wail with a death in it. Everything within earshot that can feel stops — and at its height, drops.",
+   "notFor": "Anything that cannot feel — constructs, the set dead, a warded mind; precision; secrecy.",
    "tree": [
+    {
+     "rank": 1,
+     "name": "Cry Let Go",
+     "grants": "⛔ THE WAIL GOES OUT AND EVERYONE IN EARSHOT WHO CAN FEEL LOSES THEIR NEXT ACTION. Weapons lower, a charge breaks, a pursuit stalls — not because they chose to stop but because for a moment there is nothing in them that can continue. It passes through walls and around corners; there is no cover from it.",
+     "cannot": "Anything that cannot feel is unaffected. One round of action lost, and they act normally after.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Held Note",
+     "grants": "⛔ NARROW THE WAIL TO ONE THROAT AND THEY GO DOWN — unconscious where they stand if it lands. ⚠️ Or hold the broad cry instead: the action-loss continues each round you keen and none of them can rally out of it.",
+     "cannot": "One target for the felling, or the broad cry sustained — not both in the same round.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "severe",
+     "gainAxes": [
+      "targets",
+      "duration"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Threnody",
+     "grants": "⛔ THE FULL LAMENT. EVERYONE YOU CHOOSE WHO HEARS IT DROPS UNCONSCIOUS — a crowd, a hall, a street. You name who is spared and they hear only grief.",
+     "cannot": "Everyone you choose within earshot. Those spared still lose their next action.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "severe",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ]
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "SOCIAL"
+   ],
+   "tradition": "threnodist",
+   "nativeOrCombination": "native",
+   "harmRung": "severe",
+   "shape": "strike",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 1,
+    "scope": 4,
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "targets": 6,
+    "marginFloorPer": 0.02
+   },
+   "intensity": "severe",
+   "bounds": [
+    {
+     "text": "⛔ ANYTHING THAT CANNOT FEEL IS UNAFFECTED — constructs, the set dead, a mind already closed",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT HAS NO COVER. Walls, corners and closed doors do not stop it, and it does not distinguish until r3",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ everyone in earshot means EVERYONE — allies included, until you can choose",
+     "class": "hard"
+    },
+    {
+     "text": "one round of effect at r1; sustaining it occupies you",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A fight action that deals damage and costs the target their next action. It rolls 2d6, up to 6 targets. Ranks: rank 2 fells one target outright, rank 3 drops everyone you choose.",
+   "backlash": "The grief turns inward and will not release — the wielder is struck at the surged rung instead of them, and cannot use this craft again until they have slept.",
+   "conserveSuppresses": "the cry is aimed as far as a cry can be aimed: allies take no rung",
+   "backlashRung": "damaging",
+   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
+   "_descriptionWas": "The Threnodists' first offense: a lament released rather than thrown. It lands on everyone who can hear it, including you.",
+   "_functionsWas": [
+    "strike",
+    "hinder"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Keening",
+   "_idWas": "the_keening",
+   "_treeWas": [
     {
      "rank": 1,
      "name": "Cry Let Go",
@@ -1560,58 +1664,7 @@
      ]
     }
    ],
-   "challengeTypes": [
-    "FIGHT",
-    "SOCIAL"
-   ],
-   "tradition": "threnodist",
-   "nativeOrCombination": "native",
-   "harmRung": "lethal",
-   "shape": "strike",
-   "operativeAxis": [
-    "scope",
-    "duration"
-   ],
-   "mechanic": {
-    "magnitude": 5,
-    "duration": 1,
-    "scope": 3
-   },
-   "intensity": {
-    "conserve": "a single sob — one target, brief, and you keep most of the grief",
-    "surge": "double the reach; YOU ARE EMPTIED, and some of what you spent does not come back"
-   },
-   "bounds": [
-    {
-     "text": "UNAIMED — anyone else present, and the wielder, are struck ONE RUNG LOWER",
-     "class": "hard"
-    },
-    {
-     "text": "needs a grief YOU ACTUALLY HOLD; a performed one is only noise",
-     "class": "hard"
-    },
-    {
-     "text": "the DEAF are untouched",
-     "class": "hard"
-    },
-    {
-     "text": "you are EMPTIED by what you spend",
-     "class": "cost"
-    }
-   ],
-   "plainly": "A fight/social action that staggers everyone in earshot. Rated 5 of 10 across a scope of 3, lasting about an hour. Limit: unaimed — allies and the wielder are caught too.",
-   "backlash": "The grief turns inward and will not release — the wielder is struck at the surged rung instead of them, and cannot use this craft again until they have slept.",
-   "conserveSuppresses": "the cry is aimed as far as a cry can be aimed: allies take no rung",
-   "backlashRung": "damaging",
-   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
-   "_descriptionWas": "The Threnodists' first offense: a lament released rather than thrown. It lands on everyone who can hear it, including you.",
-   "_functionsWas": [
-    "strike",
-    "hinder"
-   ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
-   "_nameWas": "The Keening",
-   "_idWas": "the_keening"
+   "_reauthored": "⛔ SNG-498. Erik: 'the mechanic could include sound, but it seems like a SUPERNATURAL BANSHEE'S WAIL to me — so we'd want it flavoured that way, with r1 doing what it says and IN A FIGHT MAKING THE OPPONENT LOSE THEIR NEXT ACTION. If the wail is directed at one being, r2 would KNOCK THEM UNCONSCIOUS if successful. Threnody would be EVERYONE YOU CHOOSE WHO HEARS IT DROPS UNCONSCIOUS.'\n⚠️ 'STAGGERED' WAS THE PROBLEM — a mood word standing in for a mechanic. Now: lose your next action, then fall, then everyone falls.\n⛔ ENERGY 7 → 4, the L1 band median (§32.17). ⚠️ AND THE 'IT LANDS ON YOU TOO' COST IS REMOVED per §32.18 — atmosphere, not a bound. What bounds it is that it cannot distinguish allies until r3.\n⛔ POWER SOURCE `wild_nanite`: was `reach_emotional_logical`, a reach id. Threnodist is the wild half of Death — 'tidal, expressive, public weeping; emotion is not an ordered process'."
   },
   {
    "id": "contradiction",

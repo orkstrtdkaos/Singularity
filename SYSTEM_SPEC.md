@@ -2325,3 +2325,51 @@ adding them.**
 
 **Test: remove the extra cost. If the craft is still interesting and still bounded, the cost was
 decoration.**
+
+
+---
+
+## 38. Live audit artifacts (2026-08-16)
+
+⛔ **These four files are LIVE and both Aevi and CCode update them.** They are the working surface of the
+skill audit; this spec holds the rules, they hold the state.
+
+| file | what it holds | regenerate when |
+|---|---|---|
+| **`po/TRACKER_traditions.md`** | ⛔ **every open item, per tradition** — bad sources, unauthored bounds, missing targets, thin ranks, missing gains, sense/obscure/social coverage — plus corpus-wide carries and their owners | any tradition changes |
+| **`po/MATRIX_mind.md`** | Mind — every rank's full text, target scope, and quantified mechanical columns | any Mind ability changes |
+| **`po/MATRIX_body.md`** | Body — same | any Body ability changes |
+| **`po/MATRIX_death.md`** | Death — same | any Death ability changes |
+
+**A matrix is generated per tradition and one is required before a tradition can be called done** (§37.6).
+
+### 38.1 What the matrix columns mean
+
+**Seven groups:** **HARM** `DMG PRC ASK UNC` · **MITIGATE** `SOAK HEAL EVA WARD` · **CONTROL**
+`ACT BND HIN PER` · **POSITION** `MVS MVO RNG AREA` · **TEMPO** `TMP DUR CRIT` · **CREATE**
+`SUM MAK CNC DNY` · ⛔ **MODEL** `FCT WEK ACC CON SPK PRM`.
+
+**Plus `TGT`** — target scope: `self` · `one` · `multi` · `many` · `area` · ⛔ `—` **not declared.**
+
+**Vocabulary and contracts:** `content/packs/core/rules/mechanic_effects.json`.
+
+### 38.2 ⛔ WHAT THE FIRST THREE MATRICES MEASURED
+
+**287 skills · 796 ranks across 14 traditions.**
+
+| finding | scale |
+|---|---|
+| ⛔ **ranks with no quantified engine effect** | **604 of 796 — 76%** |
+| ⛔ **ranks declaring no target scope** | **436** |
+| ⛔ **`powerSystem` holding a reach id, `attribute`, or a tradition name** | **234** |
+| ⛔ **`cannot` pointing at the next rank instead of stating a limit** | **201** |
+
+⚠️ **Thin ranks run 67–76% in ALL THREE audited traditions.** This is not a Death problem and not an
+un-audited-tradition problem — **it is the corpus.**
+
+⚠️ **`ASK`, `PER`, `CRIT` and `ACC` appear nowhere in Mind or Body.** Antisoak and persist-until-healed
+exist only in Death because they were authored there this session; ⛔ **`CRIT` is authorable today and used
+in none of the three.**
+
+**One encouraging signal:** Mind's most-filled column is `FCT` (name a fact) and Body's is `DMG`. ⚠️ **The
+schools are producing distinct mechanical identities, not just distinct prose.**

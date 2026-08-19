@@ -1,0 +1,144 @@
+{
+ "schemaVersion": 1,
+ "id": "mechanic_effects",
+ "kind": "rules",
+ "note": "⛔ SNG-499. THE MECHANICAL EFFECT VOCABULARY. Erik: 'I think we need a GAME MECHANIC LIST we can evaluate all of these skills against — a full mapping of every skill and rank based on WHAT IT DOES at each level. Then when we get skills like these we can easily see that they are NOT CLEARLY MAPPING to what they do.'\n⚠️ THIS IS THE INSTRUMENT THE AUDIT HAS BEEN MISSING. `functions` say what a craft is FOR (bind, reveal). `shape` says how it resolves (strike, guard). ⛔ NEITHER SAYS WHAT HAPPENS AT THE TABLE. This does.\n⛔ FIRST MEASUREMENT: 480 OF 952 RANKS — 50% — CLAIM NO RECOGNISABLE MECHANIC IN THEIR GRANT TEXT.",
+ "_rule": "⛔ EVERY RANK MUST NAME AT LEAST ONE EFFECT FROM THIS LIST, WITH ITS NUMBER. A rank that cannot is either flavour, a duplicate, or unfinished. ⚠️ A rank may name several; a rank naming none does not ship.",
+ "effects": {
+  "DAMAGE": {
+   "reads": "mechanic.dice on shape damage/strike",
+   "states": "NdX",
+   "wired": true,
+   "note": "⛔ ONLY damage/strike shapes roll. hobble/hinder dice are never rolled (CCode Q1)."
+  },
+  "SOAK": {
+   "reads": "mechanic.soak; guard mirrors magnitude",
+   "states": "soak N for D rounds",
+   "wired": true,
+   "note": "per-hit reduction for a duration. Corpus band 2-6."
+  },
+  "ANTISOAK": {
+   "reads": "mechanic.antisoak",
+   "states": "antisoak N",
+   "wired": false,
+   "note": "⛔ ADDS TO DAMAGE THAT ALREADY GOT PAST SOAK. Stacks with piercing. New in SNG-498."
+  },
+  "HEAL": {
+   "reads": "mechanic.dice on healing shape",
+   "states": "NdX per round or per use",
+   "wired": false,
+   "note": "⛔ AUTHORED AND UNREAD — 57 abilities, 27 with dice. See healing_intent.json. Ladder L1 1d4, L2 2d4, L3 3d4, L4 4d4."
+  },
+  "TEMP_SOAK": {
+   "reads": "mechanic.soak with contest lifetime",
+   "states": "soak N, empties at contest end",
+   "wired": true
+  },
+  "ACTION_LOSS": {
+   "reads": "—",
+   "states": "target loses next action",
+   "wired": false,
+   "note": "⚠️ Keening r1. Needs a round-state flag."
+  },
+  "UNCONSCIOUS": {
+   "reads": "—",
+   "states": "target falls unconscious, resist for action-loss instead",
+   "wired": false
+  },
+  "TEMPO": {
+   "reads": "tempo bank",
+   "states": "+N tempo, or spend N",
+   "wired": false,
+   "note": "see tempo.json"
+  },
+  "SENSE_SLOT": {
+   "reads": "ability.sense / ability.obscure",
+   "states": "resolves in sense slot, action free",
+   "wired": true,
+   "note": "CCODE-45 ships sense→action→bonus; CCODE-51 contests the read."
+  },
+  "DENY_READ": {
+   "reads": "ability.obscure",
+   "states": "opponent's sense fails",
+   "wired": "partial",
+   "note": "⚠️ passive today via senseResistOf; declared choice is new."
+  },
+  "MOVE_SELF": {
+   "reads": "—",
+   "states": "cross N, ignore terrain type",
+   "wired": false
+  },
+  "REPOSITION_OTHER": {
+   "reads": "—",
+   "states": "move target N",
+   "wired": false
+  },
+  "REVEAL": {
+   "reads": "—",
+   "states": "⛔ NAME THE SPECIFIC FACT RETURNED — not 'you know about it'",
+   "wired": false,
+   "note": "⛔ 130 ranks claim this and most do not say WHAT is returned. The commonest empty mechanic."
+  },
+  "CONCEAL": {
+   "reads": "—",
+   "states": "unseen against N, or until you act",
+   "wired": false
+  },
+  "WARD_AREA": {
+   "reads": "—",
+   "states": "named category cannot cross, area A, duration D",
+   "wired": false
+  },
+  "BIND_TARGET": {
+   "reads": "—",
+   "states": "target cannot take named action for D",
+   "wired": false
+  },
+  "VULNERABLE": {
+   "reads": "mechanic.antisoak",
+   "states": "see ANTISOAK",
+   "wired": false
+  },
+  "SUMMON": {
+   "reads": "—",
+   "states": "N entities, duration D, what they can do",
+   "wired": false
+  },
+  "MAKE_OBJECT": {
+   "reads": "—",
+   "states": "what is made, how long it takes, how long it lasts",
+   "wired": false
+  },
+  "SOCIAL_ACCESS": {
+   "reads": "—",
+   "states": "⛔ WHAT DOOR OPENS AND WHOSE COOPERATION — Palework is the model",
+   "wired": false
+  },
+  "PERSIST_UNTIL_HEALED": {
+   "reads": "—",
+   "states": "effect lasts until a mending craft lifts it",
+   "wired": false,
+   "note": "⛔ Grey Hand, Grief Strike r3. A real duration class distinct from rounds/days."
+  },
+  "PROJECT_TICKS": {
+   "reads": "ability.projectTicks",
+   "states": "banks progress per world tick to a threshold",
+   "wired": false,
+   "note": "see SYSTEM_SPEC §33."
+  }
+ },
+ "_measurement": {
+  "ranksTotal": 952,
+  "ranksWithNoMechanic": 480,
+  "pct": 50,
+  "topClaimed": {
+   "REVEAL": 130,
+   "MAKE_OBJECT": 108,
+   "MOVE_SELF": 88,
+   "DAMAGE": 55,
+   "AREA": 49
+  },
+  "_note": "⛔ REVEAL IS THE COMMONEST CLAIM AND THE EMPTIEST — 130 ranks, most of which say 'you know' without naming what is returned. ⚠️ THAT IS THE SAME FINDING AS THE 519 PERCEIVE ROWS, arriving from a different direction."
+ },
+ "_howToUse": "⛔ FOR EACH RANK: name the effect, give its number, and check the effect is WIRED. If it is not wired, the number is intent and must be flagged for CCode. ⚠️ IF NO EFFECT FITS, THE RANK IS NOT A MECHANIC — it is flavour, a duplicate, or unfinished, and the six questions (§32.11) will say which."
+}

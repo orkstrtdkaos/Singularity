@@ -1,8 +1,15 @@
 # TRADITION AUDIT TRACKER
 
+> ⛔ **LIVE DOCUMENT — Aevi and CCode both update this.** Anything set aside gets recorded here rather than remembered.
+>
+> **Matrices:** [`mind`](MATRIX_mind.md) · [`body`](MATRIX_body.md) · [`death`](MATRIX_death.md)
+> **Vocabulary:** [`mechanic_effects.json`](../content/packs/core/rules/mechanic_effects.json) · [`energy_costs.json`](../content/packs/core/rules/energy_costs.json) · [`power_sources.json`](../content/packs/core/rules/power_sources.json)
+> **Defects:** [`powerSystem`](DEFECT_powerSystem_corpus_20260816.md) · [`SNG-499 effects`](SPEC_SNG-499_mechanic_effects.md)
+> **SOP:** `SYSTEM_SPEC.md` §31 naming · §32 authoring · §33 projects/journeys · §34 sense & tempo · §35 Mind table · §36 Body table · §37 one-pass audit
+
 **Every open item, per tradition.** ⚠️ Updated as each tradition is audited; items set aside are recorded here rather than remembered.
 
-**Matrices:** `po/MATRIX_mind_20260816.md` · `po/MATRIX_body_20260816.md` · `po/MATRIX_death_20260816.md`
+**Matrices:** [`mind`](MATRIX_mind.md) · [`body`](MATRIX_body.md) · [`death`](MATRIX_death.md)
 
 **SOPs:** naming §31 · authoring §32 · projects/journeys §33 · sense & tempo §34 · one-pass audit §37
 

@@ -1,0 +1,268 @@
+{
+ "id": "SNG-506_sense_restore",
+ "_status": "⚠️ DRAFT SKELETON BY CCODE — THE MECHANICAL HALF ONLY. The referrer list, the healing map and the\ngate predictions below are DERIVED from the tree, not remembered. The DESIGN half is Aevi's: what the\nshared template contains, and whether `attunement` is retired or becomes that template. Nothing here has\nbeen applied.",
+ "_method": "SNG-505 Layer 2. Validate with: node tests/changeset_check.mjs po/staged_content/changesets/SNG-506_sense_restore.json",
+ "_erikRuling": "Keep the ids, share the stat block. The mechanical identity was the bug; the distinct identity is the feature.",
+ "removed": {
+  "attunement": "→ becomes the shared TEMPLATE the 32 inherit, and leaves the learnable catalogue (CCode's recommendation; Aevi's call)"
+ },
+ "renamed": {},
+ "added": [
+  {
+   "id": "address_sense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "precursor",
+   "_ranks": 3
+  },
+  {
+   "id": "appetite_sense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "abyssal",
+   "_ranks": 3
+  },
+  {
+   "id": "body_read",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "somatic",
+   "_ranks": 3
+  },
+  {
+   "id": "chaos_sense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "churnfolk",
+   "_ranks": 3
+  },
+  {
+   "id": "deathsense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "ashwarden",
+   "_ranks": 3
+  },
+  {
+   "id": "echo_memory",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "harmonic",
+   "_ranks": 3
+  },
+  {
+   "id": "echo_sense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "harmonic",
+   "_ranks": 3
+  },
+  {
+   "id": "fault_sense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "unmaker",
+   "_ranks": 3
+  },
+  {
+   "id": "hour_sense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "hourkeeper",
+   "_ranks": 3
+  },
+  {
+   "id": "keen_appraisal",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "valley_craft",
+   "_ranks": 3
+  },
+  {
+   "id": "lifesense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "rootkin",
+   "_ranks": 3
+  },
+  {
+   "id": "lightsense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "blazeborn",
+   "_ranks": 3
+  },
+  {
+   "id": "numen_sense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "numinous",
+   "_ranks": 3
+  },
+  {
+   "id": "order_sense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "lattice",
+   "_ranks": 3
+  },
+  {
+   "id": "pattern_sense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "figurist",
+   "_ranks": 3
+  },
+  {
+   "id": "prism_sight",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "radiant_folk",
+   "_ranks": 3
+  },
+  {
+   "id": "read_the_fight",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "marcher",
+   "_ranks": 3
+  },
+  {
+   "id": "read_the_room",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "stillhold",
+   "_ranks": 3
+  },
+  {
+   "id": "see_the_made_thing",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "veilwright",
+   "_ranks": 3
+  },
+  {
+   "id": "stone_read",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "mason",
+   "_ranks": 3
+  },
+  {
+   "id": "storykeeper",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "valley_craft",
+   "_ranks": 3
+  },
+  {
+   "id": "tremor_sense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "harmonic",
+   "_ranks": 3
+  },
+  {
+   "id": "way_sense",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "horizon",
+   "_ranks": 3
+  },
+  {
+   "id": "the_plain_seeing",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "verist",
+   "_ranks": 3
+  },
+  {
+   "id": "the_read_hunger",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "abyssal",
+   "_ranks": 3
+  },
+  {
+   "id": "the_read_want",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "bargainers",
+   "_ranks": 3
+  },
+  {
+   "id": "the_true_feeling",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "threnodist",
+   "_ranks": 3
+  },
+  {
+   "id": "the_true_figure",
+   "_source": "revert_SNG-454_sense_cull.json",
+   "_tradition": "figurist",
+   "_ranks": 3
+  },
+  {
+   "id": "mech_sense",
+   "_source": "revert_SNG-454_sense_cull_SUPPLEMENT.json (CCODE-205)",
+   "_tradition": "enginewright",
+   "_ranks": 3
+  },
+  {
+   "id": "mind_read_folk",
+   "_source": "revert_SNG-454_sense_cull_SUPPLEMENT.json (CCODE-205)",
+   "_tradition": "cogitant",
+   "_ranks": 3
+  },
+  {
+   "id": "the_measuring_eye",
+   "_source": "revert_SNG-454_sense_cull_SUPPLEMENT.json (CCODE-205)",
+   "_tradition": "seraphic",
+   "_ranks": 3
+  },
+  {
+   "id": "the_kept_hour",
+   "_source": "revert_SNG-454_sense_cull_SUPPLEMENT.json (CCODE-205)",
+   "_tradition": "hourkeeper",
+   "_ranks": 1
+  }
+ ],
+ "referrers": [
+  "abilities/attunement.json",
+  "rules/ability_rename_map.json",
+  "rules/native_grants.json",
+  "rules/tempo.json"
+ ],
+ "_healsOnApply": {
+  "rules/ability_rename_map.json": 32,
+  "rules/attribute_gates.json": 2,
+  "rules/backgrounds.json": 1,
+  "rules/branch_forks.json": 1,
+  "rules/combination_recipes.json": 8,
+  "rules/emergence_recipes.json": 2,
+  "rules/location_affinities.json": 4,
+  "rules/origins.json": 1,
+  "rules/resolution.json": 2,
+  "rules/skill_utility_audit.json": 17,
+  "rules/tempo.json": 1,
+  "rules/the_accords.json": 2,
+  "rules/traditions.json": 29
+ },
+ "migration": {
+  "mechanism": "engine/reconcile.js CHARACTER_STEPS",
+  "note": "⛔ dangling ids are FLAGGED, never removed — the CONTENT_STEPS.location v2 precedent. A player's earned craft is not deleted to make a gate green."
+ },
+ "expectedGates": [
+  {
+   "name": "every branch_forks key names an ability that exists",
+   "to": "green"
+  },
+  {
+   "name": "SNG-101b: a mental-lean ashwarden gets the death-core spine",
+   "to": "green"
+  },
+  {
+   "name": "SNG-101b: a practical-lean ashwarden gets wither",
+   "to": "green"
+  },
+  {
+   "name": "SNG-101b: the grant keys off domains.primary",
+   "to": "green"
+  },
+  {
+   "name": "chronicle mentions boosted use counts above rank floor",
+   "to": "green"
+  },
+  {
+   "name": "SNG-131 e2e: seraphic.innatePrecursor + abyssal.innatePrecursor are REAL precursor ids",
+   "to": "green"
+  },
+  {
+   "name": "SNG-131 e2e: seeding a real seraphic opens its authored precursor base",
+   "to": "green"
+  },
+  {
+   "name": "193b §2: the authored affinity set is 19 abilities",
+   "to": "green"
+  },
+  {
+   "name": "abilities resolve a palette",
+   "to": "green"
+  }
+ ],
+ "_notes_referrers": "⚠️ `ability_rename_map.json` is in this list because the validator refused to let CCode leave it out. Its 32 sense-cull entries assert the senses became `attunement`; once they are restored those entries are false, and the map is what the next migration reads."
+}

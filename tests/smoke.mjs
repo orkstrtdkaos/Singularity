@@ -16747,6 +16747,52 @@ await (async () => {
     check(`CCODE-201: region references in rules/ that name no real region — ${uniq.length}, and it may only shrink`,
       uniq.length <= 11, uniq.slice(0, 12).join(", "));
   }
+  // 1d · ⛔ CCODE-203: THE SAFETY NET IS GATED. SNG-505 §2 rests the entire recoverability of the
+  // 2026-08-14→16 rework on `_Was` fields and the revert logs — and NOTHING was checking they were still
+  // there. The one artifact standing between a bad call and an unrecoverable tree was itself ungated.
+  // A ratchet: these may only go UP while the sense restore is outstanding.
+  //
+  // ⚠️ EXIT CONDITION, so this does not outlive its purpose: once the restore has landed and Erik and
+  // Aevi agree the net is spent, this gate is RETIRED deliberately — not eroded by lowering the numbers.
+  {
+    const wasCount = (o) => Object.keys(o || {}).filter(k => /Was$/.test(k)).length;
+    let withAny = 0, totalWas = 0;
+    for (const a of abilities) {
+      let n = wasCount(a);
+      for (const r of (a.tree || [])) n += wasCount(r);
+      if (n) { withAny++; totalWas += n; }
+    }
+    check(`CCODE-203: ${withAny} abilities still carry a _Was — the rework stays reversible`,
+      withAny >= 321, `${withAny} < 321: pre-edit state has been stripped from ${321 - withAny} ability(ies)`);
+    check(`CCODE-203: ${totalWas} _Was fields survive across abilities and rank entries`,
+      totalWas >= 1853, `${totalWas} < 1853`);
+    // ⚠️ AND THE REVERT LOGS, which hold what a `_Was` cannot: whole abilities that were CUT.
+    const reverts = readdirSync(join(root, "po/staged_content"))
+      .filter(f => /^revert_SNG-.*\.json$/.test(f))
+      .filter(f => { try { return JSON.parse(readFileSync(join(root, "po/staged_content", f), "utf8")) != null; } catch { return false; } });
+    check(`CCODE-203: ${reverts.length} revert logs present and parseable — including the sense cull's`,
+      reverts.length >= 8 && reverts.includes("revert_SNG-454_sense_cull.json"), reverts.join(", "));
+  }
+  // 1e · ⛔ CCODE-204: EVERY STAGED CHANGE SET VALIDATES. SNG-505 Layer 2 asks a rework to declare every
+  // referrer it must move. Declaring is not checking - a REMEMBERED list has the reach of whoever wrote it,
+  // which is the instrument that failed on the sense cull. tests/changeset_check.mjs DERIVES the referrer
+  // set from the tree and diffs it against the document; this runs it so a broken change set cannot sit in
+  // the tree unnoticed until someone thinks to run the tool by hand.
+  //
+  // ⚠️ It caught its own author within a minute of existing: CCode left `ability_rename_map.json` out of
+  // the SNG-506 referrer list on the grounds that it is "tooling, not content" - and its 32 entries assert
+  // the senses became `attunement`, which the restore makes false. "This one does not count" is the failure
+  // mode the tool exists for.
+  {
+    const { execFileSync } = await import("node:child_process");
+    let out = "", code = 0;
+    try { out = execFileSync(process.execPath, [join(root, "tests/changeset_check.mjs")], { cwd: root, encoding: "utf8" }); }
+    catch (e) { out = String(e.stdout || "") + String(e.stderr || ""); code = e.status ?? 1; }
+    const lines = out.split(/\r?\n/);
+    const failing = lines.filter(l => l.startsWith("FAIL")).map(l => l.slice(6).trim());
+    check("CCODE-204: every staged change set passes changeset_check (derived referrers match the declared)",
+      code === 0, failing.slice(0, 4).join(" · ") || lines.filter(Boolean).slice(-2).join(" "));
+  }
   // 2 · AND THE PICTURE CHANGES, on Erik's own ability.
   {
     const rl = abilities.find(a => /radiant lance/i.test(a.name || ""));

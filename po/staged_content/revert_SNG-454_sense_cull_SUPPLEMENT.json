@@ -1,0 +1,408 @@
+{
+ "_note": "⛔ CCODE-205 — SUPPLEMENT TO revert_SNG-454_sense_cull.json. That log captured 28 of the 32 ids the rename map records as culled into `attunement`. These are the other FOUR, recovered VERBATIM from git at the commit before each removal. They appear nowhere else in po/staged_content/ except as PROSE in the axis-mechanics notes, which carry no rank tree.\n⚠️ RECOVERED BY CCODE, NOT AUTHORED — full pre-edit state, same shape as the main log's entries. With this, the sense cull's safety net is 32 of 32.",
+ "_for": "SNG-506 sense restore",
+ "_recoveredCommits": {
+  "mech_sense": "8a106e55",
+  "mind_read_folk": "305740b6",
+  "the_measuring_eye": "a3f9c8b1",
+  "the_kept_hour": "2c25e800"
+ },
+ "abilities": {
+  "mech_sense": {
+   "id": "mech_sense",
+   "name": "Mechanism-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "attribute": "mental",
+   "axes": {
+    "mechanical_spiritual": -0.3
+   },
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "narrationHints": "The workings of a thing felt like a diagram behind the eyes.",
+   "description": "Perceive how a mechanism or system functions on sight.",
+   "notFor": "The why/meaning of it; living things.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Mechanism-Sense",
+     "grants": "Understand a device or machine-system's function and flaws at a glance.",
+     "cannot": "Function, not purpose; the numinous stays dark.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Whole Mechanism",
+     "grants": "Read a machine entire — what it does, what it was FOR, where it will fail, and what someone changed.",
+     "cannot": "It reads mechanism. What a machine MEANS is the Numinous's country, not yours.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Engine's Confession",
+     "grants": "A mechanism tells you its whole history — every hand that touched it, every misuse, every repair made in a hurry.",
+     "cannot": "The Precursor works do not confess. They only answer, and only sometimes.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_mechanical_spiritual",
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "PUZZLE"
+   ],
+   "tradition": "enginewright",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "history"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read a machine ENTIRE — what it does, what it was FOR, where it will fail, and WHAT SOMEONE CHANGED",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "history",
+     "delta": "SPECIAL: the mechanism tells you its WHOLE HISTORY — every hand that touched it, every misuse, every repair made in a hurry",
+     "from": "r3 grants — provenance is a different act from diagnosis"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the works — half the depth, instant",
+    "surge": "double the read; THE PRECURSOR WORKS DO NOT CONFESS"
+   },
+   "bounds": [
+    {
+     "text": "FUNCTION, NOT PURPOSE — the numinous stays dark",
+     "class": "hard"
+    },
+    {
+     "text": "it reads MECHANISM; what a machine MEANS is the Numinous's country",
+     "class": "hard"
+    },
+    {
+     "text": "THE PRECURSOR WORKS DO NOT CONFESS — they only answer, and only sometimes",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to history. Limit: function, Not Purpose — the numinous stays dark.",
+   "_recoveredFrom": "8a106e55^:content/packs/core/abilities/reach_mechanical_spiritual.json"
+  },
+  "mind_read_folk": {
+   "id": "mind_read_folk",
+   "name": "Cold-Read",
+   "levelReq": 1,
+   "energyCost": 3,
+   "attribute": "mental",
+   "axes": {
+    "body_mind": 0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "The turn of a mind inferred from a hundred small signs.",
+   "description": "Infer another's thoughts and intent from micro-signals — not magic, mastery of tells.",
+   "notFor": "Actual telepathy; the disciplined/alien.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Cold-Read",
+     "grants": "Deduce a person's likely thoughts and next move from their signals.",
+     "cannot": "Inference, not certainty; masters and non-humans resist.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Cold Line",
+     "grants": "Follow a mind's reasoning as it happens — where it is going, what it has already ruled out.",
+     "cannot": "You follow the reasoning, not the reasons. A mind moving on feeling is opaque to a cold line.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Open Book",
+     "grants": "A mind at rest is legible to you — its shape, its habits, the thing it keeps returning to.",
+     "cannot": "The Cogitants consider unbidden reading a violence, and they are right, and they do it anyway.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_body_mind",
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "tradition": "cogitant",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "inference",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 10
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "inference",
+     "delta": "FOLLOW A MIND'S REASONING AS IT HAPPENS — where it is going, what it has already ruled out",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: a mind at rest is LEGIBLE — its shape, its habits, THE THING IT KEEPS RETURNING TO",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a read of the obvious — half the inference, and it is plainly guesswork",
+    "surge": "double it; THE COGITANTS CONSIDER UNBIDDEN READING A VIOLENCE, AND THEY ARE RIGHT"
+   },
+   "bounds": [
+    {
+     "text": "INFERENCE, NOT CERTAINTY — masters and non-humans resist",
+     "class": "hard"
+    },
+    {
+     "text": "you follow THE REASONING, NOT THE REASONS — a mind moving on feeling is opaque",
+     "class": "hard"
+    },
+    {
+     "text": "THE COGITANTS CONSIDER UNBIDDEN READING A VIOLENCE, AND THEY ARE RIGHT",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens inference; rank 3 adds to special. Limit: inference, Not Certainty — masters and non-humans resist.",
+   "_recoveredFrom": "305740b6^:content/packs/core/abilities/reach_body_mind.json"
+  },
+  "the_measuring_eye": {
+   "id": "the_measuring_eye",
+   "name": "The Weighing Look",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.3
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "You are being looked at by something that is adding you up.",
+   "description": "See the moral weight a person carries — the first gift of the Ascent.",
+   "notFor": "Reading want (Appetite-Sense); reading truth (Verity). This reads WEIGHT — deed and cost.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Weighing Look",
+     "grants": "See roughly what a person carries — the harm done, the harm borne.",
+     "cannot": "It sees weight, not story. A heavy person may be heavy for good reasons.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Clear Ledger",
+     "grants": "See the specifics: what was done, to whom, and whether it was ever answered for.",
+     "cannot": "Seeing the ledger tempts you to collect on it. That is the Orders' besetting sin.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Unblinking Measure",
+     "grants": "Weigh anyone, at any distance, without their consent or knowledge.",
+     "cannot": "Nobody survives being weighed forever. Including you, and the Orders do it to their own.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 20,
+    "note": "MENTAL attribute throughout — judgement is mental where appetite is social"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "see THE SPECIFICS: what was done, TO WHOM, and WHETHER IT WAS EVER ANSWERED FOR",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "WEIGH ANYONE, AT ANY DISTANCE, WITHOUT THEIR CONSENT OR KNOWLEDGE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the weight — half the detail, and you can look away",
+    "surge": "double it; NOBODY SURVIVES BEING WEIGHED FOREVER — INCLUDING YOU"
+   },
+   "bounds": [
+    {
+     "text": "IT SEES WEIGHT, NOT STORY — a heavy person may be heavy for good reasons",
+     "class": "hard"
+    },
+    {
+     "text": "SEEING THE LEDGER TEMPTS YOU TO COLLECT ON IT",
+     "class": "cost"
+    },
+    {
+     "text": "NOBODY SURVIVES BEING WEIGHED FOREVER — INCLUDING YOU",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 extends range. Limit: iT Sees Weight, Not Story — a heavy person may be heavy for good reasons.",
+   "_recoveredFrom": "a3f9c8b1^:content/packs/core/abilities/reach_demonic_angelic.json"
+  },
+  "the_kept_hour": {
+   "schemaVersion": 1,
+   "id": "the_kept_hour",
+   "name": "The Long Foreseeing",
+   "levelReq": 5,
+   "energyCost": 14,
+   "powerSystem": "reach_space_time",
+   "tradition": "hourkeeper",
+   "attribute": "mental",
+   "axes": {
+    "space_time": 0.9
+   },
+   "functions": [
+    "foresee"
+   ],
+   "narrationHints": "You follow one thread of what-will-be all the way down — not a glimpse but the whole long braid of consequence, every branch, to where it finally comes to rest.",
+   "description": "The Hourkeeper capstone — the long foreseeing, one possible future traced to its very end rather than glimpsed. To see this far is to carry a certainty most are mercifully spared, and to be bound to what you have seen.",
+   "notFor": "One thread, once, at enormous cost — and what you see, you are bound by; a foreseeing this deep changes how you act, and acting changes the future you saw. You cannot un-know the end you followed to.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Long Foreseeing",
+     "grants": "Trace one possible future to its very end, seeing the whole braid of its consequence.",
+     "cannot": "It costs nearly all you have, it binds you to what you've seen, and the deepest mercy of not-knowing is one you have chosen to give up.",
+     "functions": [
+      "foresee"
+     ],
+     "harmRung": "none",
+     "gains": "broaden"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "INVESTIGATE"
+   ],
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "foresight",
+    "timeReach"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: TRACE ONE POSSIBLE FUTURE TO ITS VERY END, seeing THE WHOLE BRAID OF ITS CONSEQUENCE. The capstone is a KIND (complete consequence-sight) at near-total cost — AND IT BINDS YOU TO WHAT YOU HAVE SEEN.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a half-traced future is a guess, and the Hourkeepers do not dignify guesses.",
+    "surge": "REFUSED — it already costs nearly all you have."
+   },
+   "bounds": [
+    {
+     "text": "it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until you rest a full night",
+     "class": "hard"
+    },
+    {
+     "text": "IT BINDS YOU TO WHAT YOU HAVE SEEN",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate action that reveals information or sets up a later action. Its strength is rated 9 out of 10, and lasts for about an hour Limit: iT Costs Nearly All You Have.",
+   "_recoveredFrom": "2c25e800^:content/packs/core/abilities/reach_space_time.json"
+  }
+ }
+}

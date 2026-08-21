@@ -2785,6 +2785,192 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Standing Word",
    "_idWas": "the_standing_word"
+  },
+  {
+   "id": "see_the_made_thing",
+   "name": "See the Made Thing",
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "falsehood_truth": -0.3
+   },
+   "effectTags": [
+    "detection",
+    "falsecraft",
+    "seams"
+   ],
+   "narrationHints": "She saw the seams in everything. That was the price of the craft.",
+   "description": "Read what is constructed versus what is found — see the falsecrafts in any situation.",
+   "notFor": [],
+   "tradition": "veilwright",
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "investigation",
+    "intellectual",
+    "magical"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Construction",
+     "grants": "Read any falsehood or illusion's construction — see how it was made, what it is made of, where it will fail.",
+     "cannot": "Anything rank 2 adds — see all the falsecrafts in a situation simultaneously — who is building what version of events, what holds, what is already cracking under its own weight; it reads CONSTRUCTION, not truth.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "All the Seams",
+     "grants": "See all the falsecrafts in a situation simultaneously — who is building what version of events, what holds, what is already cracking under its own weight.",
+     "cannot": "Anything rank 3 adds — read what is being constructed before it completes — see the lie before it is fully told, the illusion before it has fully taken shape; it reads CONSTRUCTION, not truth.",
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Unfinished Lie",
+     "grants": "Read what is being constructed before it completes — see the lie before it is fully told, the illusion before it has fully taken shape.",
+     "cannot": "Nothing further; this is the craft's ceiling; it reads CONSTRUCTION, not truth.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    }
+   ],
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "see ALL the falsecrafts in a situation SIMULTANEOUSLY — who is building what version of events, what holds, what is already cracking",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: read what is BEING CONSTRUCTED BEFORE IT COMPLETES — see the lie before it is fully told",
+     "from": "r3 grants — pre-emption is a kind, not a depth"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the seams — half the depth, and instant",
+    "surge": "double the read: every construction in the room at once, and you will see craft where there is only sincerity"
+   },
+   "bounds": [
+    {
+     "text": "it reads CONSTRUCTION, not truth — a sincere person building nothing reads blank",
+     "class": "hard"
+    },
+    {
+     "text": "knowing HOW a lie is made is not knowing WHAT IS TRUE",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigation/intellectual/magical action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: it reads Construction, not truth — a sincere person building nothing reads blank.",
+   "_fromTemplate": "first_gift_template"
+  },
+  {
+   "id": "the_plain_seeing",
+   "name": "The Plain Seeing",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_falsehood_truth",
+   "attribute": "mental",
+   "axes": {
+    "falsehood_truth": 0.6
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "You look at a thing and what is actually so about it is simply available. Not detection, not deduction — the removal of everything that was in the way, including what you were hoping.",
+   "description": "Look at a scene, object, document, wound or room and illusion, disguise and staging come off it — you are told plainly what was added and what was moved. The Verists' first craft, and the one every other Verist craft rests on.",
+   "notFor": "Seeing what is HIDDEN (this strips distortion, it does not open locked boxes); the future; another person's interior; comfort.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Cleared Look",
+     "grants": "Look at a scene, an object, a document, a wound, a room. Illusion, disguise and staging come off it — you are told plainly WHAT WAS ADDED and what was moved: this blood was poured, that seal is recent, this man is not who he is dressed as. ⚠ It also strips what YOU were hoping to find, which in practice means it will contradict you.",
+     "cannot": "It removes DISTORTION, not concealment — a genuinely hidden thing stays hidden. And it strips YOUR preferences too, which is the part Verists warn apprentices about.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Clarity",
+     "grants": "Keep it up while you work through a place, or turn it on a person's account and see where the account and the world part company.",
+     "cannot": "Sustained plain seeing is exhausting in a way that is not only energy. A Falsecraft worker can feel it running and will adjust.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Unobstructed",
+     "grants": "Nothing between you and what is so — a whole site, a whole affair, a whole person's situation, entire.",
+     "cannot": "⚠ YOU DO NOT GET TO CHOOSE WHAT YOU SEE. Verists at this rank learn things about people they love, and about themselves, that they cannot un-see and cannot honestly pretend away.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "verist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 2,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a cleared glance",
+    "surge": "the unobstructed; YOU DO NOT GET TO CHOOSE WHAT YOU SEE"
+   },
+   "bounds": [
+    {
+     "text": "removes DISTORTION, not concealment",
+     "class": "hard"
+    },
+    {
+     "text": "it strips YOUR preferences too",
+     "class": "hard"
+    },
+    {
+     "text": "you do not choose what you see",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A puzzle/social action that strips distortion off what you are looking at. Rated 6 of 10 across a scope of 2 for about two hours.",
+   "_descriptionWas": "The Verists' first craft and the one every other Verist craft rests on. You cannot say the true thing until you can see it."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

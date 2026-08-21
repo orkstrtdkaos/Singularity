@@ -1939,6 +1939,328 @@
    "_project": "⛔ SNG-485. Erik: 'Sound Read can PREPARE GROUND and be for projects.' r3 is now site preparation banking per tick.",
    "_powerSystemWas": "reach_concrete_abstract",
    "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
+  },
+  {
+   "id": "pattern_sense",
+   "name": "Pattern-Sense",
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.3
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "They stop mid-sentence, look at three unrelated things, and tell you what the fourth one is going to be.",
+   "description": "See that a set of particulars is an instance of a pattern, name the pattern, and know what the pattern does next.",
+   "notFor": "Reading material (Stone-Read); reading order-as-structure (Order-Sense). This reads FORM.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Instance",
+     "functions": [
+      "reveal"
+     ],
+     "grants": "See that particulars are an instance of something, and roughly what — a scam, a siege pattern, an illness, a way of building, a way of lying.",
+     "cannot": "Roughly. You get the family, not the name."
+    },
+    {
+     "rank": 2,
+     "name": "The Named Form",
+     "functions": [
+      "reveal"
+     ],
+     "grants": "⚠️ ADDS PRECISION AND REACH. Name it exactly — and once named, its OTHER instances become visible to you everywhere you go, including ones nobody has connected.",
+     "cannot": "You must have seen enough of this one to name it.",
+     "gains": "broaden"
+    },
+    {
+     "rank": 3,
+     "name": "Where the Form Breaks",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "grants": "⛔ ADDS THE ACTIONABLE PART. Read the shape a thing is completing — an event, a campaign, a life — and name THE POINT AT WHICH IT MUST BREAK: the step the pattern cannot survive skipping, the piece it requires and does not have yet. ⚠️ A pattern named at r2 is knowledge; a pattern broken here is an ACT.",
+     "cannot": "One form at a time, and breaking it still has to be done by somebody.",
+     "gains": "deepen"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "tradition": "figurist",
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "NAME THE FORM EXACTLY — and once named, ITS OTHER INSTANCES BECOME VISIBLE TO YOU EVERYWHERE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: read the form of an event, a life, or a history — THE SHAPE IT IS COMPLETING",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the shape — half the depth, and it does not follow you",
+    "surge": "double it; ONCE YOU CAN SEE IT EVERYWHERE, YOU WILL SEE IT WHERE IT ISN'T"
+   },
+   "bounds": [
+    {
+     "text": "SEEING THE PATTERN IS NOT SEEING WHETHER IT IS A TRUE ONE",
+     "class": "hard"
+    },
+    {
+     "text": "ONCE YOU CAN SEE IT EVERYWHERE, YOU WILL SEE IT WHERE IT ISN'T",
+     "class": "cost"
+    },
+    {
+     "text": "KNOWING THE SHAPE A LIFE IS COMPLETING DOES NOT PERMIT YOU TO SAY SO",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: seeing The Pattern IS Not Seeing Whether IT IS A True One.",
+   "_treeWas": [
+    {
+     "rank": 1,
+     "name": "Pattern-Sense",
+     "grants": "See that a set of particulars is an instance of a pattern, and roughly what pattern.",
+     "cannot": "Seeing the pattern is not seeing whether it is a true one. Figurists find patterns in noise, constantly.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Named Form",
+     "grants": "Name the form exactly — and once named, its other instances become visible to you everywhere.",
+     "cannot": "Once you can see it everywhere, you will see it where it is not.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Formal Reach",
+     "grants": "Read the form of an event, a life, or a history — the shape it is completing.",
+     "cannot": "Knowing the shape a life is completing does not permit you to change it, and it is a terrible thing to carry.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "_descriptionWas": "See the pattern beneath particulars — the first gift of the Pattern Reach.",
+   "_revised": "⚠️ SNG-450. Erik: 'DON'T REMOVE r3 FROM PATTERN-SENSE — ADD SOMETHING TO IT.' ⛔ He is right that the fix for a weak rank is to make it do something, not to delete it. r3 was 'read the form of an event, a life, or a history — the shape it is completing', which is an observation. IT NOW ACTS ON THE FORM: name where the pattern must break, and act there.",
+   "_fromTemplate": "first_gift_template"
+  },
+  {
+   "id": "stone_read",
+   "name": "Stone-Read",
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": -0.3
+   },
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "narrationHints": "The material gives up its history under his palm.",
+   "description": "Read a material's truth by touch — the first gift of the Given.",
+   "notFor": "Reading meaning or intent; anything not physically present.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Stone-Read",
+     "grants": "Know what a material truly is, and whether it is sound.",
+     "cannot": "Materials, not makers. It says the beam will fail; not who cut it badly.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Grain",
+     "grants": "Read a thing's history in its material — the stresses it took, the repairs, the day it nearly broke.",
+     "cannot": "History, not future. It reports what happened, not what happens next.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 3,
+     "name": "The Given Word",
+     "grants": "The material of a whole structure is legible at once — every fault, every honest joint, every lie the builder told.",
+     "cannot": "Buildings you love turn out to be full of lies. The Masons say this is why they are hard to live with.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "deepen"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "tradition": "mason",
+   "operativeAxis": [
+    "perceptionDepth",
+    "history"
+   ],
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "history",
+     "delta": "read a thing's HISTORY IN ITS MATERIAL — the stresses it took, the repairs, THE DAY IT NEARLY BROKE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "perceptionDepth",
+     "delta": "a whole structure legible at once — every fault, every honest joint, EVERY LIE THE BUILDER TOLD",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a touch — half the depth, and instant",
+    "surge": "double the read; BUILDINGS YOU LOVE TURN OUT TO BE FULL OF LIES"
+   },
+   "bounds": [
+    {
+     "text": "MATERIALS, NOT MAKERS — it says the beam will fail, not who cut it",
+     "class": "hard"
+    },
+    {
+     "text": "HISTORY, NOT FUTURE — it reports what happened, not what happens next",
+     "class": "hard"
+    },
+    {
+     "text": "BUILDINGS YOU LOVE TURN OUT TO BE FULL OF LIES",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens history; rank 3 extends perceptionDepth. Limit: materials, Not Makers — it says the beam will fail, not who cut it.",
+   "_fromTemplate": "first_gift_template"
+  },
+  {
+   "id": "the_true_figure",
+   "name": "The True Figure",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": -0.5
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "You see the shape a thing is actually making — the pattern under the mess, the geometry a crowd is unknowingly standing in, the figure a set of events describes. Once seen, it cannot be unseen.",
+   "description": "Look at a scene, a record, a route, a crowd, a wound-pattern, and the craft names one thing: the element that does not fit, or the place where a piece is missing. The Figurists' first craft — pattern read rather than imposed.",
+   "notFor": "Patterns that are not there (the craft returns nothing rather than obliging you); reading intent or meaning; anything genuinely random.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Shape Under It",
+     "grants": "Look at a scene, a set of records, a route, a crowd, a wound-pattern — and the craft NAMES ONE THING for you: the element that does not fit, or the place where a piece is missing and what shape it must be. One concrete answer, pointed at: this ledger entry, that stone, the fourth man, the room nobody uses.",
+     "cannot": "It shows the SHAPE, never the reason. And a genuinely chaotic thing has no figure — it returns nothing, which Figurists insist is a real answer.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Continued Line",
+     "grants": "Extend the figure — where the pattern goes next, what the missing piece must be, where the sixth one will be found.",
+     "cannot": "The extension is only as sound as the figure, and a partial pattern extends confidently and wrongly. Say which you have.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Figure",
+     "grants": "The complete shape of a large thing — a campaign, a season of disappearances, a city's flow, a tradition's drift.",
+     "cannot": "⚠ A LARGE FIGURE IS HARD TO STOP SEEING. Figurists at this rank read pattern into things that have none, and the craft cannot tell them apart from inside.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "read the near shape",
+    "surge": "the whole figure; IT IS HARD TO STOP SEEING, and the craft cannot tell you when there is none"
+   },
+   "bounds": [
+    {
+     "text": "shows the SHAPE, never the reason",
+     "class": "hard"
+    },
+    {
+     "text": "a genuinely chaotic thing returns NOTHING",
+     "class": "hard"
+    },
+    {
+     "text": "a partial pattern extends confidently and wrongly",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A puzzle/social action that reads the pattern a thing is making. Rated 5 of 10 across a scope of 2 for about six hours.",
+   "_descriptionWas": "The Figurists' first craft: pattern read rather than imposed."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

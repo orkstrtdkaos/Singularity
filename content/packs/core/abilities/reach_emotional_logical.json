@@ -2047,6 +2047,112 @@
    "_descriptionWas": "The Threnodists' mercy, and it is a real one because it is not free. Grief-singers are the people who will hold your share.",
    "_nameWas": "The Shared Weight",
    "_idWas": "the_shared_weight"
+  },
+  {
+   "id": "the_true_feeling",
+   "name": "The True Feeling",
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.3
+   },
+   "effectTags": [
+    "feeling",
+    "perception",
+    "truth"
+   ],
+   "narrationHints": "She knew what the room was feeling before anyone spoke.",
+   "description": "Read what is actually felt — not what is shown, what is present.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "challengeTypes": [
+    "social",
+    "investigation",
+    "intellectual"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Actual State",
+     "grants": "Feel the true emotional state of a person or room — not what is displayed, what is actually present underneath it.",
+     "cannot": "Anything rank 2 adds — track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched; it reads WHAT IS FELT, not what is TRUE.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "The Feeling Trail",
+     "grants": "Track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched.",
+     "cannot": "Anything rank 3 adds — read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming; it reads WHAT IS FELT, not what is TRUE.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 3,
+     "name": "The Emotional History",
+     "grants": "Read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming.",
+     "cannot": "Nothing further; this is the craft's ceiling; it reads WHAT IS FELT, not what is TRUE; and it still costs what it costs: what you read of a history, you carry some of.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "deepen"
+    }
+   ],
+   "operativeAxis": [
+    "perceptionDepth",
+    "timeReach"
+   ],
+   "mechanic": {
+    "range": 15,
+    "note": "SOCIAL attribute throughout this tradition"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "timeReach",
+     "delta": "TRACK A FEELING OVER TIME — follow grief, find WHERE FEAR DEVELOPED, trace the emotional mark a person left in a place",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read the FEELING-TRUTH OF A WHOLE HISTORY — what a place carries, WHAT A PEOPLE HAVE BEEN RUNNING FROM",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a read of the room — half the depth, and it does not stay with you",
+    "surge": "double it; feeling the truth of a whole history means CARRYING some of it"
+   },
+   "bounds": [
+    {
+     "text": "it reads WHAT IS FELT, not what is TRUE — a person sincerely wrong reads sincere",
+     "class": "hard"
+    },
+    {
+     "text": "THE GUARDED CAN CLOSE",
+     "class": "soft"
+    },
+    {
+     "text": "what you read of a history, you carry some of",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/investigation/intellectual action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 15. Ranks: rank 2 extends timeReach; rank 3 deepens perceptionDepth. Limit: it reads What IS Felt, not what is True — a person sincerely wrong reads sincere.",
+   "_fromTemplate": "first_gift_template"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

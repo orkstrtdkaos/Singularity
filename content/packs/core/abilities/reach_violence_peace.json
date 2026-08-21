@@ -2628,6 +2628,204 @@
    "_idWas": "the_read_field",
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ BREAKING'S SENSE — terrain, chokepoints, where the line fails first\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+  },
+  {
+   "id": "read_the_fight",
+   "name": "Read the Fight",
+   "attribute": "physical",
+   "axes": {
+    "violence_peace": -0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "The shape of the coming violence, seen a beat early.",
+   "description": "Read a fight's flow, a foe's next move, the moment before it breaks.",
+   "notFor": "Winning it for you; non-combat reads.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Read the Fight",
+     "grants": "See a fight's shape and a foe's tell a beat early; know when violence is about to erupt.",
+     "cannot": "Reads, not wins; the truly wild are harder to call.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "The Whole Field",
+     "grants": "Read every fighter at once — who is committed, who is looking for the door, where the line will fail first.",
+     "cannot": "Reading the fight is not surviving it. The field tells you where it breaks, not how to be elsewhere.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Three Moves Ahead",
+     "grants": "See the fight's shape before it takes it — where this ends, and the two or three ways it could end otherwise.",
+     "cannot": "Seeing the end does not mean you can choose it. The Marchers say the field always keeps one move back.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen"
+    }
+   ],
+   "powerSystem": "reach_violence_peace",
+   "gated": "learned",
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL",
+    "INVESTIGATE"
+   ],
+   "tradition": "marcher",
+   "schoolAffinity": "mar_plain",
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "operativeAxis": [
+    "foresight",
+    "perceptionDepth"
+   ],
+   "mechanic": {
+    "note": "PHYSICAL attribute"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read EVERY FIGHTER AT ONCE — who is committed, who is looking for the door, WHERE THE LINE WILL FAIL FIRST",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: see the fight's shape BEFORE IT TAKES IT — where this ends, and the two or three ways it could end otherwise",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the field — half the read, instantly",
+    "surge": "double it; SEEING THE END DOES NOT MEAN YOU CAN CHOOSE IT"
+   },
+   "bounds": [
+    {
+     "text": "READS, NOT WINS — the truly wild are harder to call",
+     "class": "hard"
+    },
+    {
+     "text": "READING THE FIGHT IS NOT SURVIVING IT",
+     "class": "hard"
+    },
+    {
+     "text": "SEEING THE END DOES NOT MEAN YOU CAN CHOOSE IT",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A fight/duel/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: reads, Not Wins — the truly wild are harder to call.",
+   "_fromTemplate": "first_gift_template"
+  },
+  {
+   "id": "read_the_room",
+   "name": "Read the Room",
+   "attribute": "social",
+   "axes": {
+    "violence_peace": 0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "Every unspoken tension in a room, felt at once.",
+   "description": "Sense a room's tensions, alliances, and the true temperature under the words.",
+   "notFor": "Resolving it (that's Stillcraft); combat.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Read the Room",
+     "grants": "Read the social tensions and true feeling in a gathering; find who's about to break the peace.",
+     "cannot": "Reads, not calms; the disciplined mask well.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "The Room's True Weather",
+     "grants": "Read what a room is actually doing under what it is saying — the alliance forming, the grudge about to speak.",
+     "cannot": "It reads the room, not the world. What is decided elsewhere arrives regardless of how well you read this table.",
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Thing Nobody Said",
+     "grants": "Name the thing everyone in the room is carefully not saying — and know what will happen if it is said.",
+     "cannot": "Knowing it and saying it are different acts, and the second one is rarely free.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    }
+   ],
+   "powerSystem": "reach_violence_peace",
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "tradition": "stillhold",
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "mechanic": {
+    "note": "SOCIAL attribute"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read what a room is ACTUALLY DOING under what it is SAYING — the alliance forming, the grudge about to speak",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: NAME THE THING EVERYONE IS CAREFULLY NOT SAYING — and know what will happen if it is said",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a read of the mood — half the depth, and nobody notices you looking",
+    "surge": "double the read; KNOWING IT AND SAYING IT ARE DIFFERENT ACTS, and the second is not always right"
+   },
+   "bounds": [
+    {
+     "text": "READS, NOT CALMS — the disciplined mask well",
+     "class": "hard"
+    },
+    {
+     "text": "it reads THE ROOM, NOT THE WORLD — what is decided elsewhere arrives anyway",
+     "class": "hard"
+    },
+    {
+     "text": "KNOWING IT AND SAYING IT ARE DIFFERENT ACTS, and the second is not always right",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: reads, Not Calms — the disciplined mask well.",
+   "_fromTemplate": "first_gift_template"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

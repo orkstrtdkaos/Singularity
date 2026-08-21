@@ -585,13 +585,13 @@
     "interruptible": true,
     "onInterrupt": "nothing is lost — the vessels keep what they hold and resume",
     "rateBySource": {
-     "direct noon sun": 1.0,
+     "direct noon sun": 1,
      "bright daylight": 0.6,
      "overcast day": 0.3,
      "a large fire": 0.2,
      "a lantern or hearth": 0.08,
      "starlight alone": 0.02,
-     "sealed dark": 0.0
+     "sealed dark": 0
     },
     "fedByCraft": {
      "acceptsDamageType": "light",
@@ -1875,6 +1875,125 @@
     "travel"
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+  },
+  {
+   "id": "prism_sight",
+   "name": "Prism Sight",
+   "energyCost": 4,
+   "axes": {
+    "dark_light": 0.5,
+    "falsehood_truth": 0.4
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "perceive",
+    "reveal",
+    "analyze"
+   ],
+   "narrationHints": "Splitting light into revealing spectra — seeing heat traces, hidden markings, tampering, recent presence, and through glamours.",
+   "description": "See the hidden spectra — heat traces, concealed marks, tampering, and lies of light.",
+   "notFor": "Seeing through solid barriers (it reads light, not matter); reading thoughts; working with eyes closed or in absolute darkness.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "True Spectrum",
+     "grants": "See heat traces (a hand's warmth on a handle, a body's passage within minutes); spot tampering, overpainting, recent digging; notice light-bending at work.",
+     "cannot": "Traces fade in minutes to hours; rain and cold erase them; cannot identify WHO, only THAT.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "Layered Reading",
+     "grants": "Read a scene's last hour of light-history in still places; see through rank-1 veils and mirages; catch the micro-flush of a lie on a face in good light.",
+     "cannot": "Lie-reading is a hint, not proof (one reroll of a social sense, not a truth machine); crowded scenes smear.",
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "opensAccess": {
+      "system": "precursor",
+      "abilityIds": [
+       "address_sense"
+      ],
+      "via": "the Light Beneath showed you the seams of Precursor work, and you learned to read what you were seeing",
+      "note": "SNG-261 §B (CCode wiring — Aevi's to change): this craft's OWN rank-3 text already says it sees 'the seams of Precursor work' and that 'some Precursor light looks back'. address_sense is the craft that reads that layer deliberately. The mapping is a proposal ON YOUR PROSE, not new fiction — swap the id or delete this block and the door closes."
+     },
+     "name": "The Light Beneath",
+     "grants": "See the structural light of things: stress lines in a bridge, sickness in a body, active nanite flows, the seams of Precursor work; pierce any mirage of lower rank instantly.",
+     "cannot": "Minutes of use cost hours of eye-ache; what you see you cannot always name; some Precursor light looks back.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen"
+    }
+   ],
+   "functions": [
+    "reveal"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "STEALTH",
+    "FIGHT"
+   ],
+   "tradition": "radiant_folk",
+   "powerSystem": "radiant",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "note": "KNOW→setup: a read that buys advantage. r1 sees heat traces, tampering, light-bending at work",
+    "range": 10
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read a scene's LAST HOUR of light-history; see through rank-1 veils and mirages; catch the micro-flush of a lie (one reroll of a social sense — a hint, NOT a truth machine)",
+     "from": "r2 grants, incl. its own explicit mechanical bound"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "see STRUCTURAL light: stress lines in a bridge, sickness in a body, active nanite flows, the seams of PRECURSOR work; pierce any mirage",
+     "from": "r3 grants — and note it names Precursor-seam detection, a legitimate hook for SNG-261 §B staging"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance — half the depth, no eye-cost",
+    "surge": "double the read, and pay it in hours of eye-ache"
+   },
+   "bounds": [
+    {
+     "text": "traces fade in minutes to hours; rain and cold erase them",
+     "class": "soft"
+    },
+    {
+     "text": "cannot identify WHO, only that",
+     "class": "hard"
+    },
+    {
+     "text": "lie-reading is a HINT, not proof",
+     "class": "hard"
+    },
+    {
+     "text": "minutes of use cost HOURS of eye-ache",
+     "class": "soft"
+    },
+    {
+     "text": "some Precursor work reads as blank",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/stealth/fight action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens perceptionDepth; rank 3 deepens perceptionDepth. Limit: cannot identify Who, only that.",
+   "_fromTemplate": "first_gift_template"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -214,7 +214,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, firstGiftTemplate] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -262,7 +262,12 @@ export async function loadContent() {
     // SNG-433 — THE CLASH TEMPLATES. Authored at `b197b719` and, like the pools above, in no manifest: the
     // engine kept saying "withdraws to lick their wounds" while the words Erik asked for sat on disk. In
     // THIS array beside the name that receives it, for the reason the `economy` comment gives.
-    loadRule("news_templates", null)
+    loadRule("news_templates", null),
+    // SNG-506 - THE FIRST-GIFT TEMPLATE. 25 senses share one stat block; the template holds it and
+    // each entry holds what makes it that people's craft. Loaded HERE, before the ability merge below,
+    // because inheritance has to happen while the catalogue is being built - an ability that reaches
+    // the consumers without its levelReq is not late, it is wrong.
+    loadRule("first_gift_template", null)
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -406,6 +411,37 @@ export async function loadContent() {
     combinationAxis: a.combinationAxis ?? null,
     rankThresholds: a.rankThresholds || { rank1: "given", rank2: "practiced_use", rank3: "defining_moment" }
   };
+
+  // SNG-506 - TEMPLATE INHERITANCE. Erik's ruling on the sense cull: the mechanical identity was the bug,
+  // the distinct identity is the feature. So 25 first-gift senses keep their own ids, names, traditions and
+  // rank prose, and SHARE one stat block instead of carrying 25 copies of it.
+  //
+  // THE ENTRY ALWAYS WINS. The template FILLS GAPS; it never overwrites. That is the same law as the pack
+  // powerSystem stamp one block up (CCODE-200) and for the same reason - a default that clobbers is a
+  // default that eats authored content silently.
+  //
+  // The template names its own COHORT, so an ability does not opt in; the template opts it in. That keeps
+  // the 25-vs-7 split in ONE place, which is where Aevi measured it.
+  {
+    const fgt = firstGiftTemplate;
+    const shared = fgt?.template || null;
+    const arc = shared?.rankArc || fgt?.rankArc || [];
+    for (const id of (Array.isArray(fgt?.cohort) ? fgt.cohort : [])) {
+      const a = abilities[id];
+      if (!a || !shared) continue;
+      for (const [k, v] of Object.entries(shared)) {
+        if (k === "rankArc" || k.startsWith("_")) continue;
+        if (k === "mechanic" && v && typeof v === "object") a.mechanic = { ...v, ...(a.mechanic || {}) };
+        else if (a[k] === undefined) a[k] = v;
+      }
+      for (const step of arc) {
+        const rank = (a.tree || []).find(x => x.rank === step.rank);
+        if (!rank) continue;
+        for (const [k, v] of Object.entries(step)) if (!k.startsWith("_") && rank[k] === undefined) rank[k] = v;
+      }
+      a._fromTemplate = fgt.id || "first_gift_template";
+    }
+  }
 
   const items = {};
   for (const pack of await coreItemsP) for (const it of pack.items) items[it.id] = it;

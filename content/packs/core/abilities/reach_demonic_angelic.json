@@ -3867,6 +3867,384 @@
    "plainly": "A social/fight action that feeds a hunger something smaller so it disengages. Rated 6 of 10 across a scope of 2 for about eight hours.",
    "_nameWas": "The Offered Lesser",
    "_idWas": "the_offered_lesser"
+  },
+  {
+   "id": "appetite_sense",
+   "name": "Appetite-Sense",
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.3
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "You can feel the shape of what they are hungry for before they say a word.",
+   "description": "Sense the true want under the presented want — the first gift of the Descent.",
+   "notFor": "Reading facts (that is Verity); reading feeling (that is Pathos). This reads HUNGER.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Appetite-Sense",
+     "grants": "Feel what a person actually wants, beneath what they are asking for.",
+     "cannot": "It reads want, not intent. What they will DO about the want is a different craft.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "The Hollow Read",
+     "grants": "Feel the want a person is refusing to admit to themselves — the one doing the most work.",
+     "cannot": "Knowing the want they deny is a weapon, and it is very hard not to use it.",
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Hunger",
+     "grants": "Read the appetite of a crowd, a faction, a city — what the whole thing is actually reaching for.",
+     "cannot": "A crowd's hunger is not the sum of its people's. It is stupider and much stronger.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "tradition": "abyssal",
+   "operativeAxis": [
+    "perceptionDepth",
+    "scope"
+   ],
+   "mechanic": {
+    "range": 10,
+    "note": "SOCIAL attribute throughout"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "feel the want A PERSON IS REFUSING TO ADMIT TO THEMSELVES — the one doing the most work",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "read the appetite of A CROWD, A FACTION, A CITY — what the whole thing is actually reaching for",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a read of the want — half the depth, and it stays surface",
+    "surge": "double it; KNOWING THE WANT THEY DENY IS A WEAPON, and it is very hard to un-know"
+   },
+   "bounds": [
+    {
+     "text": "IT READS WANT, NOT INTENT — what they will DO about it is their own",
+     "class": "hard"
+    },
+    {
+     "text": "KNOWING THE WANT THEY DENY IS A WEAPON, and very hard to un-know",
+     "class": "cost"
+    },
+    {
+     "text": "A CROWD'S HUNGER IS NOT THE SUM OF ITS PEOPLE'S — it is its own thing",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens perceptionDepth; rank 3 extends scope. Limit: iT Reads Want, Not Intent — what they will DO about it is their own.",
+   "_fromTemplate": "first_gift_template"
+  },
+  {
+   "id": "the_read_hunger",
+   "name": "The Read Hunger",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": -0.6
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "Everything that eats has a shape to its eating. You read it — what this thing wants, how badly, what it will cross to get it, and what it will not.",
+   "description": "The Abyssal Choir's first craft, and the reason they survive down there. You do not negotiate with an appetite you have not read.",
+   "notFor": "Reading thought, plan, or loyalty (only APPETITE); the genuinely sated; changing anything; anything with no want at all — a machine, a corpse, a Stopped thing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Shape of Its Eating",
+     "grants": "Read one creature, person, or thing-that-wants and the craft NAMES it: what it hungers for, how strongly, what it will risk, and the one thing it will not do even hungry.",
+     "cannot": "APPETITE ONLY — it tells you nothing about plans, loyalties or what it knows. The truly sated read as empty and are the most dangerous thing in the room for exactly that reason.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Fed and the Starving",
+     "grants": "Read a group or a place — which of them is hungriest, which is nearly full, and where in a warren the eating happens.",
+     "cannot": "Reading a room of appetites is nauseating and it lingers. And knowing what a thing wants is not knowing you can supply it.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Great Appetite",
+     "grants": "Something large — a deep thing, a host, a place's whole hunger — read entire, including the want under the want.",
+     "cannot": "⚠ IT NOTICES BEING READ AT THIS DEPTH. You have introduced yourself, and the Devouring find being understood almost as satisfying as being fed.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "abyssal",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 3,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "read one appetite",
+    "surge": "the great appetite; IT NOTICES BEING READ AT THIS DEPTH"
+   },
+   "bounds": [
+    {
+     "text": "APPETITE ONLY — no plans, loyalties or knowledge",
+     "class": "hard"
+    },
+    {
+     "text": "the truly SATED read as empty",
+     "class": "hard"
+    },
+    {
+     "text": "knowing the want is not being able to supply it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that names what a thing hungers for and what it will risk. Rated 5 of 10 across a scope of 2 for about three hours."
+  },
+  {
+   "id": "the_read_want",
+   "name": "The Read Want",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.4,
+    "falsehood_truth": 0.3
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "You see what someone actually wants, which is reliably not what they are asking for. The Bargainers' whole trade rests on this and they will tell you so without embarrassment.",
+   "description": "Look at a person in conversation and see the want beneath the request — the man asking for money who wants to be taken seriously, the one asking for justice who wants an apology. The Bargainers' first craft: read the want before naming the price.",
+   "notFor": "Reading anything but WANT (not plans, not lies, not history); people who genuinely want nothing; using it without their knowing you can — Bargainers announce it.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Want Under It",
+     "grants": "Look at a person in conversation and see the want beneath the request — the man asking for money who wants to be taken seriously, the one asking for justice who wants an apology.",
+     "cannot": "It reads WANT and nothing else. The self-deceived read as they believe themselves, which is often the useful thing anyway. Someone who wants nothing gives you nothing.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Table Read",
+     "grants": "Read a room of them, or read one deeply enough to see which want they would trade the others for.",
+     "cannot": "Knowing the want does not tell you what it is WORTH to them, and the two are different numbers. A wrong guess at price after a right read of want is the classic Bargainer failure.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Appetite",
+     "grants": "A person's wants entire and in order, including the ones they have never said out loud and the one they would be ruined by getting.",
+     "cannot": "⚠ YOU NOW KNOW SOMETHING ABOUT THEM THEY DO NOT KNOW, and the Bargainers' own rule is that you name what you read before you trade on it. Trading on an unannounced read is the thing that gets a Bargainer refused at every table in the foothills.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "PUZZLE"
+   ],
+   "tradition": "bargainers",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 3,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "read the surface want",
+    "surge": "the whole appetite; NAME WHAT YOU READ BEFORE YOU TRADE ON IT"
+   },
+   "bounds": [
+    {
+     "text": "reads WANT and nothing else",
+     "class": "hard"
+    },
+    {
+     "text": "the self-deceived read as they BELIEVE themselves",
+     "class": "soft"
+    },
+    {
+     "text": "knowing the want does not tell you the PRICE",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/puzzle action that reads what someone actually wants. Rated 6 of 10 on one target for about three hours.",
+   "_descriptionWas": "The Bargainers' first craft: read the want before naming the price, because a price against the wrong want is an insult."
+  },
+  {
+   "id": "the_measuring_eye",
+   "name": "The Weighing Look",
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.3
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "You are being looked at by something that is adding you up.",
+   "description": "See the moral weight a person carries — the first gift of the Ascent.",
+   "notFor": "Reading want (Appetite-Sense); reading truth (Verity). This reads WEIGHT — deed and cost.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Weighing Look",
+     "grants": "See roughly what a person carries — the harm done, the harm borne.",
+     "cannot": "It sees weight, not story. A heavy person may be heavy for good reasons.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "The Clear Ledger",
+     "grants": "See the specifics: what was done, to whom, and whether it was ever answered for.",
+     "cannot": "Seeing the ledger tempts you to collect on it. That is the Orders' besetting sin.",
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Unblinking Measure",
+     "grants": "Weigh anyone, at any distance, without their consent or knowledge.",
+     "cannot": "Nobody survives being weighed forever. Including you, and the Orders do it to their own.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "tradition": "seraphic",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "range": 20,
+    "note": "MENTAL attribute throughout — judgement is mental where appetite is social"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "see THE SPECIFICS: what was done, TO WHOM, and WHETHER IT WAS EVER ANSWERED FOR",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "WEIGH ANYONE, AT ANY DISTANCE, WITHOUT THEIR CONSENT OR KNOWLEDGE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the weight — half the detail, and you can look away",
+    "surge": "double it; NOBODY SURVIVES BEING WEIGHED FOREVER — INCLUDING YOU"
+   },
+   "bounds": [
+    {
+     "text": "IT SEES WEIGHT, NOT STORY — a heavy person may be heavy for good reasons",
+     "class": "hard"
+    },
+    {
+     "text": "SEEING THE LEDGER TEMPTS YOU TO COLLECT ON IT",
+     "class": "cost"
+    },
+    {
+     "text": "NOBODY SURVIVES BEING WEIGHED FOREVER — INCLUDING YOU",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 extends range. Limit: iT Sees Weight, Not Story — a heavy person may be heavy for good reasons.",
+   "_fromTemplate": "first_gift_template"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

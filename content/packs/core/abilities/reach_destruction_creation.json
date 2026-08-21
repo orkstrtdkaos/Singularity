@@ -2972,6 +2972,105 @@
    "_descriptionWas": "The Wrights' field-craft: get it moving, get it home, fix it properly there.",
    "_nameWas": "The Held Repair",
    "_idWas": "the_held_repair"
+  },
+  {
+   "id": "fault_sense",
+   "name": "Fault-Sense",
+   "powerSystem": "reach_destruction_creation",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": -0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "He looks at the thing and sees where it is already halfway to failing.",
+   "description": "See where a thing is failing, or wants to — the first gift of the Unmade.",
+   "notFor": "Seeing what should be built (Maker's-Eye); mending.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Fault-Sense",
+     "grants": "See where a structure, plan, or relationship is under stress and where it will give.",
+     "cannot": "Seeing the fault does not tell you whether to press it.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "The Rotten Beam",
+     "grants": "Find the ONE piece whose failure brings the rest — the keystone of the collapse.",
+     "cannot": "Finding it makes you responsible for knowing it. You cannot un-know where the keystone is.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Failing",
+     "grants": "Read the entire arc of a thing's decline — how it will end, in what order, and how long it has.",
+     "cannot": "You will be right, and nobody will want to hear it, and it will end exactly as you said.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "tradition": "unmaker",
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "mechanic": {
+    "note": "PHYSICAL attribute — the unmaker reads stress in the body of a thing"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "find THE ONE PIECE whose failure brings the rest — THE KEYSTONE OF THE COLLAPSE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: read the ENTIRE ARC of a thing's decline — how it will end, IN WHAT ORDER, and how long it has",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the stress — half the depth, and you can look away",
+    "surge": "double the read; YOU WILL BE RIGHT, AND NOBODY WILL WANT TO HEAR IT"
+   },
+   "bounds": [
+    {
+     "text": "SEEING THE FAULT DOES NOT TELL YOU WHETHER TO PRESS IT",
+     "class": "hard"
+    },
+    {
+     "text": "FINDING IT MAKES YOU RESPONSIBLE FOR KNOWING IT — you cannot un-see it",
+     "class": "cost"
+    },
+    {
+     "text": "YOU WILL BE RIGHT, AND NOBODY WILL WANT TO HEAR IT",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: seeing The Fault Does Not Tell You Whether TO Press IT.",
+   "_fromTemplate": "first_gift_template"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

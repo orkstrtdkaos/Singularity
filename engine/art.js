@@ -191,6 +191,12 @@ export function aestheticFor(subject, doc) {
   const bySystem = doc?.powerSystems || {};
   if (trad && byTrad[trad]) return byTrad[trad];
   if (ps && bySystem[ps]) return bySystem[ps];
+  // ⚠️ AND A POWER SYSTEM WEARING THE `tradition` FIELD STILL RESOLVES. §C3's own finding was that
+  // `harmonic` / `radiant_folk` / `precursor` / `valley_craft` / `cross_pole_braid` are POWER SYSTEMS
+  // carried in the tradition slot. Aevi swept them; `sling_and_stone` was missed, and it alone held the
+  // coverage ratchet red. Rather than chase each instance, the resolver now accepts the field the content
+  // actually carries — a craft that names a real palette gets it, whichever slot the name sits in.
+  if (trad && bySystem[trad]) return bySystem[trad];
   if (ps && /^reach_/.test(ps) && bySystem.braid) return bySystem.braid;
   return null;
 }

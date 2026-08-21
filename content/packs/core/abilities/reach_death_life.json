@@ -3621,6 +3621,198 @@
    "_idWas": "the_true_account",
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ DEATH'S SENSE — what is failing and how long it has\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+  },
+  {
+   "id": "deathsense",
+   "name": "Deathsense",
+   "powerSystem": "reach_death_life",
+   "attribute": "mental",
+   "axes": {
+    "death_life": -0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "A quiet knowing of what has died, is dying, or is near its end nearby.",
+   "description": "Sense death and dying around you — the living whose thread is fraying, the near-gone, the actively failing. Deathsense reads what is HAPPENING NOW. For what has already finished, Palework reads the evidence.",
+   "notFor": "It reads endings; it does not cause them. And it cannot see the future of a death — only the shape of the one already underway.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Deathsense",
+     "grants": "Feel where a living thing is dying or near death. Judge how far along they are. Sense the failing in a person or creature before it shows on the outside.",
+     "cannot": "Reads the living and the dying, not the already-dead. A corpse has nothing left to sense.",
+     "functions": [
+      "foresee"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Count",
+     "grants": "Sense not only that something living is dying but HOW — the cause, the shape, roughly how long. A body tells its ending to the Ashwarden before it tells anyone else.",
+     "cannot": "Knowing the hour does not give you the power to move it, and it will not let you unknow it.",
+     "functions": [
+      "foresee"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Hour Known",
+     "grants": "The dying stands plain: you perceive its cause, its trajectory, and what would turn it aside — if anything would. The Ashwarden reads a living thing's end as clearly as its beginning, and can say aloud what is present in them right now.",
+     "cannot": "Some endings have no turning-aside. Deathsense does not make endings negotiable; it makes them visible.",
+     "functions": [
+      "foresee",
+      "reveal"
+     ]
+    }
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "PUZZLE"
+   ],
+   "tradition": "ashwarden",
+   "schoolAffinity": "ash_plain",
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "operativeAxis": [
+    "foresight",
+    "precision"
+   ],
+   "mechanic": {
+    "range": 20
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "sense not only THAT something is dying but HOW — the cause, the shape, roughly how long",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the dying stands PLAIN — cause, trajectory, and WHAT WOULD TURN IT ASIDE, if anything would",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the failing — half the detail, no weight",
+    "surge": "double the read; KNOWING THE HOUR DOES NOT GIVE YOU THE POWER TO MOVE IT"
+   },
+   "bounds": [
+    {
+     "text": "reads the LIVING AND THE DYING, not the already-dead",
+     "class": "hard"
+    },
+    {
+     "text": "KNOWING THE HOUR DOES NOT GIVE YOU THE POWER TO MOVE IT",
+     "class": "hard"
+    },
+    {
+     "text": "SOME ENDINGS HAVE NO TURNING-ASIDE",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: reads the Living And The Dying, not the already-dead.",
+   "_fromTemplate": "first_gift_template"
+  },
+  {
+   "id": "lifesense",
+   "name": "Lifesense",
+   "powerSystem": "reach_death_life",
+   "attribute": "mental",
+   "axes": {
+    "death_life": 0.3
+   },
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "narrationHints": "The warmth of the living felt like heat through a wall — who is near, how strong their spark.",
+   "description": "Sense living things nearby — number, vigor, hidden presence.",
+   "notFor": "Reading thoughts; distinguishing individuals by identity.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Lifesense",
+     "grants": "Perceive living things through walls and dark — how many, where, and how strong; judge their vigor; notice one holding still to avoid being found.",
+     "cannot": "Vigor, not identity; the barely-alive read faint.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "The Green Read",
+     "grants": "Read the whole living field of a place — what is thriving, what is failing, what is merely holding on.",
+     "cannot": "It reports vitality, not virtue. A thriving thing may be thriving on something you love.",
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Living Field",
+     "grants": "Feel every living thing for a great distance as one continuous fabric, and feel where it is torn.",
+     "cannot": "You cannot stop feeling it. Rootkin at this depth grieve forests the way others grieve people.",
+     "functions": [
+      "reveal",
+      "track"
+     ]
+    }
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "STEALTH"
+   ],
+   "tradition": "rootkin",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "range": 20
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read the whole LIVING FIELD of a place — what thrives, what fails, what merely holds on",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "every living thing for a GREAT DISTANCE as one continuous fabric — and where it is TORN",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick read — half the range, no lingering",
+    "surge": "double the reach; at this depth you cannot stop feeling it"
+   },
+   "bounds": [
+    {
+     "text": "VIGOR, NOT IDENTITY — the barely-alive read faint",
+     "class": "hard"
+    },
+    {
+     "text": "it reports VITALITY, NOT VIRTUE — a thriving thing may be thriving on something terrible",
+     "class": "hard"
+    },
+    {
+     "text": "YOU CANNOT STOP FEELING IT — Rootkin at this depth grieve forests the way others grieve people",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate/stealth action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 extends range. Limit: vigor, Not Identity — the barely-alive read faint.",
+   "_fromTemplate": "first_gift_template"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

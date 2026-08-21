@@ -159,6 +159,31 @@ export function checkChangeSet(cs, label = cs.id || "(unnamed)") {
       `${impact.total} save entries affected and no "migration" declared — register a CHARACTER_STEPS entry in engine/reconcile.js`);
   }
 
+  // 4b · ⛔ EVERY FILE THE CHANGE SET NAMES MUST ACTUALLY LOAD. Added because SNG-506 shipped
+  // `rules/first_gift_template.json` — the file the whole restore inherits from — in NO MANIFEST, and this
+  // tool passed it as a merely-idle referrer. SYSTEM_SPEC §42: a file not in a manifest DOES NOT EXIST, and
+  // a change set whose keystone is invisible applies to nothing. The tool that exists to catch a missed
+  // referrer had no business missing an unloadable one.
+  {
+    const manifestText = readFileSync(join(CORE, "manifest.json"), "utf8");
+    const named = [...new Set([...(cs.referrers || []),
+                               ...(cs.added || []).map(a => a?._file).filter(Boolean),
+                               cs._designDecisions?.template?.file].filter(Boolean))]
+      .map(f => f.replace(/^content\/packs\/core\//, ""))
+      .filter(f => f.endsWith(".json"));
+    // ⚠️ A RETIRED FILE IS NOT AN UNREGISTERED ONE. A change set that removes a craft deregisters its
+    // file on purpose; requiring it to stay in the manifest would forbid the very thing being applied.
+    // The evidence that a removal was deliberate is a record of it in po/staged_content/.
+    const retired = existsSync(join(root, "po/staged_content"))
+      ? readdirSync(join(root, "po/staged_content")).filter(f => f.startsWith("retired_"))
+      : [];
+    const isRetired = (f) => retired.some(r => r.endsWith(f.split("/").pop()));
+    const unloadable = named.filter(f => !manifestText.includes('"' + f + '"') && !isRetired(f));
+    check(`${label}: every content file this change set names is manifest-registered (${named.length} named)`,
+      unloadable.length === 0,
+      `${unloadable.join(", ")} — on disk is not loaded (SYSTEM_SPEC §42)`);
+  }
+
   // 5 · expectedGates must name gates that actually exist, or the prediction cannot be scored.
   if (cs.expectedGates?.length) {
     const suite = readFileSync(join(root, "tests/smoke.mjs"), "utf8");

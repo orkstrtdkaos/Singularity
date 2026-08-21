@@ -1,11 +1,12 @@
 {
- "note": "SNG-101 native-grant content (Aevi). At creation a character is granted their PRIMARY tradition's anchors (always) + up to (grantCap - #anchors) Tier-II basics matching their build lean (highest of mental/physical/practical/social), falling back to mental (the caster spine). Data-driven from nativeOrCombination=='native' && levelReq<=2, tagged by ability.attribute. grantCap tunable in resolution.json (recommend 5). Applies at creation AND as a one-time retro-grant for existing chars (retroNativeGrants, modeled on retroLevelGrants), bumping grantsVersion to 2.\n⛔ SNG-501: re-pointed after the 2026-08-14→16 ability audit. 116 grants named ids that no longer exist. ⚠️ THE LARGEST GROUP WAS THE SENSE CULL — every tradition's L1 'first gift' sense was somebody's native grant, and all 21 now point at `attunement`, whose `sectFlavour` carries what that people perceives. ⛔ WHICH IS THE RIGHT ANSWER RATHER THAN A REPAIR: a people's by-right craft is still their own way of perceiving; it is simply one ability now.\nFull map: content/packs/core/rules/ability_rename_map.json",
+ "note": "⛔ SNG-506 RESTORED THE FIRST GIFTS. SNG-454 pointed 23 traditions at a single `attunement`; Erik ruled the ids come back and share a stat block instead of collapsing into one craft. Each people's anchor names ITS OWN sense again, and `rules/first_gift_template.json` holds what 25 of them have in common. ⚠️ Harmonic and Valley-craft carried TWO senses each and the cull de-duplicated them; both are back.",
  "grantCap": 5,
  "traditionNativeGrants": {
   "harmonic": {
    "anchors": [
     "sonic_resonance",
-    "attunement",
+    "echo_sense",
+    "tremor_sense",
     "stillness_field",
     "drumline_stride"
    ],
@@ -26,7 +27,7 @@
   "radiant_folk": {
    "anchors": [
     "light_bending",
-    "attunement",
+    "prism_sight",
     "light_well",
     "sun_coax",
     "glimmer_script"
@@ -47,7 +48,7 @@
   },
   "somatic": {
    "anchors": [
-    "attunement",
+    "body_read",
     "second_wind"
    ],
    "byLean": {
@@ -60,7 +61,7 @@
   },
   "cogitant": {
    "anchors": [
-    "attunement",
+    "mind_read_folk",
     "unmoving_mind"
    ],
    "byLean": {
@@ -72,7 +73,7 @@
   },
   "churnfolk": {
    "anchors": [
-    "attunement",
+    "chaos_sense",
     "misdirect",
     "catch_as_catch_can"
    ],
@@ -86,7 +87,7 @@
   },
   "lattice": {
    "anchors": [
-    "attunement",
+    "order_sense",
     "established_route"
    ],
    "byLean": {
@@ -102,7 +103,7 @@
   },
   "mason": {
    "anchors": [
-    "attunement",
+    "stone_read",
     "near_way"
    ],
    "byLean": {
@@ -115,7 +116,7 @@
   },
   "figurist": {
    "anchors": [
-    "attunement"
+    "pattern_sense"
    ],
    "byLean": {
     "mental": [
@@ -143,7 +144,7 @@
   },
   "blazeborn": {
    "anchors": [
-    "attunement",
+    "lightsense",
     "kindle"
    ],
    "byLean": {
@@ -156,7 +157,7 @@
   },
   "rootkin": {
    "anchors": [
-    "attunement",
+    "lifesense",
     "staunch"
    ],
    "byLean": {
@@ -173,7 +174,7 @@
   },
   "ashwarden": {
    "anchors": [
-    "attunement"
+    "deathsense"
    ],
    "byLean": {
     "mental": [
@@ -190,7 +191,7 @@
   },
   "abyssal": {
    "anchors": [
-    "attunement"
+    "appetite_sense"
    ],
    "byLean": {
     "social": [
@@ -204,7 +205,7 @@
   },
   "seraphic": {
    "anchors": [
-    "attunement"
+    "the_measuring_eye"
    ],
    "byLean": {
     "mental": [
@@ -216,7 +217,7 @@
   },
   "unmaker": {
    "anchors": [
-    "attunement"
+    "fault_sense"
    ],
    "byLean": {
     "physical": [
@@ -243,7 +244,7 @@
   },
   "threnodist": {
    "anchors": [
-    "attunement"
+    "the_true_feeling"
    ],
    "byLean": {
     "social": [
@@ -269,7 +270,7 @@
   },
   "veilwright": {
    "anchors": [
-    "attunement"
+    "see_the_made_thing"
    ],
    "byLean": {
     "mental": [
@@ -292,7 +293,7 @@
   },
   "enginewright": {
    "anchors": [
-    "attunement",
+    "mech_sense",
     "mend_device"
    ],
    "byLean": {
@@ -304,7 +305,7 @@
   },
   "numinous": {
    "anchors": [
-    "attunement",
+    "numen_sense",
     "steady_soul"
    ],
    "byLean": {
@@ -316,7 +317,7 @@
   },
   "horizon": {
    "anchors": [
-    "attunement"
+    "way_sense"
    ],
    "byLean": {
     "physical": [
@@ -327,7 +328,7 @@
   },
   "hourkeeper": {
    "anchors": [
-    "attunement"
+    "hour_sense"
    ],
    "byLean": {
     "mental": [
@@ -339,7 +340,7 @@
   },
   "marcher": {
    "anchors": [
-    "attunement",
+    "read_the_fight",
     "disarm"
    ],
    "byLean": {
@@ -357,7 +358,7 @@
   },
   "stillhold": {
    "anchors": [
-    "attunement",
+    "read_the_room",
     "calm_word"
    ],
    "byLean": {
@@ -381,7 +382,8 @@
     "stonewise",
     "rivercraft",
     "quiet_step",
-    "attunement",
+    "storykeeper",
+    "keen_appraisal",
     "hearthbinding",
     "blend_in",
     "hunters_strike"

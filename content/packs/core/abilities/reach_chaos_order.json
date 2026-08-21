@@ -2601,6 +2601,205 @@
    "plainly": "A social/puzzle action that structures a disordered effort so it holds without you. Rated 6 of 10 across a scope of 3 for about three days.",
    "_nameWas": "The Working Order",
    "_idWas": "the_working_order"
+  },
+  {
+   "id": "chaos_sense",
+   "name": "Chaos-Sense",
+   "attribute": "mental",
+   "axes": {
+    "chaos_order": -0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "A feel for where a situation is about to come apart.",
+   "description": "Sense instability, imminent disorder, the fault-line in a plan.",
+   "notFor": "Predicting exactly how; ordered systems' inner logic.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Chaos-Sense",
+     "grants": "Feel where and roughly when something will break down; find the loose thread.",
+     "cannot": "Feel, not detail; the truly stable reads quiet.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "The Coming Turbulence",
+     "grants": "Feel where a situation is about to come apart, and roughly how.",
+     "cannot": "You feel the break coming; you do not get to choose where you are standing when it does.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Break Before It Breaks",
+     "grants": "The failure announces itself to you before it happens — the bridge, the alliance, the plan.",
+     "cannot": "Knowing is not preventing, and the Churnfolk have made peace with that in a way others find infuriating.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen"
+    }
+   ],
+   "powerSystem": "reach_chaos_order",
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "PUZZLE"
+   ],
+   "tradition": "churnfolk",
+   "operativeAxis": [
+    "foresight",
+    "timeReach"
+   ],
+   "mechanic": {
+    "note": "r1: feel WHERE and roughly WHEN something will break down; find the loose thread"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "foresight",
+     "delta": "feel where a SITUATION is about to come apart, and roughly HOW — from a thing to a situation, and the failure MODE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the failure ANNOUNCES ITSELF to you before it happens — the bridge, the alliance, the plan. Unprompted warning is a different act from looking for the flaw.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a feel for the loose thread — half the warning, no cost",
+    "surge": "double the reach: the failure comes to you, and you still do not get to choose where you are standing when it lands"
+   },
+   "bounds": [
+    {
+     "text": "FEEL, NOT DETAIL — the truly stable reads quiet",
+     "class": "hard"
+    },
+    {
+     "text": "you feel the break coming; YOU DO NOT GET TO CHOOSE WHERE YOU ARE STANDING when it arrives",
+     "class": "hard"
+    },
+    {
+     "text": "KNOWING IS NOT PREVENTING — and the Churnfolk have made peace with that",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens foresight; rank 3 adds to special. Limit: feel, Not Detail — the truly stable reads quiet.",
+   "_fromTemplate": "first_gift_template"
+  },
+  {
+   "id": "order_sense",
+   "name": "Order-Sense",
+   "attribute": "mental",
+   "axes": {
+    "chaos_order": 0.3
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "The hidden structure of a thing laid bare to a reading eye.",
+   "description": "Perceive the underlying order, rule, or pattern in a system.",
+   "notFor": "Improvised/random things; commanding the structure.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Order-Sense",
+     "grants": "See a system's structure, rules, and load-bearing points at a glance.",
+     "cannot": "Reads structure, not intent; pure chaos returns noise.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "The Pattern Beneath",
+     "grants": "Read the structure under a mess — the schedule behind a crowd, the rule behind a ritual.",
+     "cannot": "Some messes have no pattern. Reading one into them is how the Lattice makes its worst mistakes.",
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Design",
+     "grants": "See the entire design a thing is part of — including the parts of it that are not present.",
+     "cannot": "Seeing the design does not give you standing to change it.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen"
+    }
+   ],
+   "powerSystem": "reach_chaos_order",
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "PUZZLE"
+   ],
+   "tradition": "lattice",
+   "operativeAxis": [
+    "perceptionDepth",
+    "scope"
+   ],
+   "mechanic": {
+    "scope": 1,
+    "note": "r1: see a system's structure, rules, and load-bearing points AT A GLANCE"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read the structure UNDER A MESS — the schedule behind a crowd, the rule behind a ritual",
+     "from": "r2 grants — from visible order to hidden order"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: see the ENTIRE DESIGN a thing is part of — INCLUDING THE PARTS THAT ARE NOT PRESENT. Inferring absent structure is a different act from reading present structure.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance — half the depth, and it costs nothing",
+    "surge": "double the read: the whole design, and you will see patterns that are not there if you push it"
+   },
+   "bounds": [
+    {
+     "text": "reads STRUCTURE, not INTENT",
+     "class": "hard"
+    },
+    {
+     "text": "pure chaos returns noise",
+     "class": "hard"
+    },
+    {
+     "text": "SOME MESSES HAVE NO PATTERN — reading one into them is how the Lattice makes its mistakes",
+     "class": "hard"
+    },
+    {
+     "text": "seeing the design does not give you STANDING to change it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10 across a scope of 1, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: reads Structure, not Intent.",
+   "_fromTemplate": "first_gift_template"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

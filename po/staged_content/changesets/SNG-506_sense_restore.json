@@ -1,6 +1,6 @@
 {
  "id": "SNG-506_sense_restore",
- "_status": "⚠️ DRAFT SKELETON BY CCODE — THE MECHANICAL HALF ONLY. The referrer list, the healing map and the\ngate predictions below are DERIVED from the tree, not remembered. The DESIGN half is Aevi's: what the\nshared template contains, and whether `attunement` is retired or becomes that template. Nothing here has\nbeen applied.",
+ "_status": "⚠️ DESIGN HALF COMPLETE — AEVI. Mechanical half derived by CCode. Ready for validation.",
  "_method": "SNG-505 Layer 2. Validate with: node tests/changeset_check.mjs po/staged_content/changesets/SNG-506_sense_restore.json",
  "_erikRuling": "Keep the ids, share the stat block. The mechanical identity was the bug; the distinct identity is the feature.",
  "removed": {
@@ -12,198 +12,231 @@
    "id": "address_sense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "precursor",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "⛔ NONE — not a first-gift"
   },
   {
    "id": "appetite_sense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "abyssal",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "body_read",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "somatic",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "chaos_sense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "churnfolk",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "deathsense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "ashwarden",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "echo_memory",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "harmonic",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "⛔ NONE — not a first-gift"
   },
   {
    "id": "echo_sense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "harmonic",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "fault_sense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "unmaker",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "hour_sense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "hourkeeper",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "keen_appraisal",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "valley_craft",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "lifesense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "rootkin",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "lightsense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "blazeborn",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "numen_sense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "numinous",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "order_sense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "lattice",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "pattern_sense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "figurist",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "prism_sight",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "radiant_folk",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "read_the_fight",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "marcher",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "read_the_room",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "stillhold",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "see_the_made_thing",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "veilwright",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "stone_read",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "mason",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "storykeeper",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "valley_craft",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "tremor_sense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "harmonic",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "way_sense",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "horizon",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "the_plain_seeing",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "verist",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "⛔ NONE — not a first-gift"
   },
   {
    "id": "the_read_hunger",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "abyssal",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "⛔ NONE — not a first-gift"
   },
   {
    "id": "the_read_want",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "bargainers",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "⛔ NONE — not a first-gift"
   },
   {
    "id": "the_true_feeling",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "threnodist",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "the_true_figure",
    "_source": "revert_SNG-454_sense_cull.json",
    "_tradition": "figurist",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "⛔ NONE — not a first-gift"
   },
   {
    "id": "mech_sense",
    "_source": "revert_SNG-454_sense_cull_SUPPLEMENT.json (CCODE-205)",
    "_tradition": "enginewright",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "mind_read_folk",
    "_source": "revert_SNG-454_sense_cull_SUPPLEMENT.json (CCODE-205)",
    "_tradition": "cogitant",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "the_measuring_eye",
    "_source": "revert_SNG-454_sense_cull_SUPPLEMENT.json (CCODE-205)",
    "_tradition": "seraphic",
-   "_ranks": 3
+   "_ranks": 3,
+   "_template": "first_gift_template"
   },
   {
    "id": "the_kept_hour",
    "_source": "revert_SNG-454_sense_cull_SUPPLEMENT.json (CCODE-205)",
    "_tradition": "hourkeeper",
-   "_ranks": 1
+   "_ranks": 1,
+   "_template": "⛔ NONE — not a first-gift"
   }
  ],
  "referrers": [
   "abilities/attunement.json",
   "rules/ability_rename_map.json",
+  "rules/first_gift_template.json",
   "rules/native_grants.json",
   "rules/tempo.json"
  ],
@@ -264,5 +297,27 @@
    "to": "green"
   }
  ],
- "_notes_referrers": "⚠️ `ability_rename_map.json` is in this list because the validator refused to let CCode leave it out. Its 32 sense-cull entries assert the senses became `attunement`; once they are restored those entries are false, and the map is what the next migration reads."
+ "_notes_referrers": "⚠️ `ability_rename_map.json` is in this list because the validator refused to let CCode leave it out. Its 32 sense-cull entries assert the senses became `attunement`; once they are restored those entries are false, and the map is what the next migration reads.\n⛔ AEVI: `first_gift_template.json` added — it is new content the restore depends on, and it must be manifest-registered in the same apply. ⚠️ The manifest failure is what made 27 files invisible; a changeset that adds a file and does not register it repeats it.",
+ "_designDecisions": {
+  "template": {
+   "file": "content/packs/core/rules/first_gift_template.json",
+   "holds": "levelReq 1 · energyCost 3 · shape `setup` · magnitude 3 · duration 1 · challengeTypes INVESTIGATE/SURVIVE · the three-rank arc (present → depth and history → whole field)",
+   "_why": "⛔ 25 of the 32 share this EXACTLY. The duplicate stat block was the real bug and it stays fixed."
+  },
+  "entryHolds": "id · name · tradition (⛔ AND THEREFORE PALETTE) · powerSystem · description · narrationHints · notFor · bounds · each rank's own `grants` and `cannot` · `functions`. ⚠️ FUNCTIONS ARE NOT UNIFORM AND SHOULD NOT BE — reveal 9, foresee+reveal 13, reveal+track 7.",
+  "attunement": "⛔ RETIRED FROM THE LEARNABLE CATALOGUE, BECOMES THE TEMPLATE. CCode's reason is decisive: `tradition: \"*\"` resolves no palette and holds the §C3 art ratchet red.",
+  "⛔ SEVEN ARE NOT FIRST-GIFTS": {
+   "ids": [
+    "address_sense",
+    "echo_memory",
+    "the_kept_hour",
+    "the_plain_seeing",
+    "the_read_hunger",
+    "the_read_want",
+    "the_true_figure"
+   ],
+   "_finding": "⛔ MEASURED WHILE WRITING THE TEMPLATE, NOT ASSUMED. `echo_memory` L3/e11/mag5 · `address_sense` L3/e8/mag6 · `the_kept_hour` L5/e14/mag9 · and four `reveal`-shaped crafts at mag5-6. ⚠️ MY CULL TREATED ALL 32 AS ONE SKILL WRITTEN 32 TIMES. IT WAS ONE SKILL WRITTEN 25 TIMES, PLUS SEVEN CRAFTS THAT ONLY LOOKED LIKE IT — including an Hourkeeper CAPSTONE. Restored as themselves, no template.",
+   "_action": "restore verbatim from the revert logs; no template inheritance"
+  }
+ }
 }

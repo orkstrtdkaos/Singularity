@@ -16793,6 +16793,28 @@ await (async () => {
     check("CCODE-204: every staged change set passes changeset_check (derived referrers match the declared)",
       code === 0, failing.slice(0, 4).join(" · ") || lines.filter(Boolean).slice(-2).join(" "));
   }
+  // 1f · ⛔ CCODE-206: A REPLY THAT NEVER REACHED THE REPO WAS NEVER SENT. Aevi is not in this session and
+  // never will be — `po/` IS the channel. A note written to disk and left untracked, or written into a path
+  // git ignores, reads to its author as delivered and to its reader as silence. That is the same failure as
+  // an unregistered content file (§42), one layer out: authored, correct, invisible.
+  //
+  // ⚠️ Two ways it happens, and this catches both:
+  //   UNTRACKED — written, never `git add`ed. Recoverable the moment it is noticed.
+  //   IGNORED   — written somewhere `.gitignore` covers. Worse: `git add` says nothing and appears to work.
+  //
+  // It does NOT gate on unpushed commits: committing before pushing is normal, and a gate that goes red on
+  // ordinary work is a gate people learn to skip.
+  {
+    const { execFileSync } = await import("node:child_process");
+    const git = (...a) => { try { return execFileSync("git", a, { cwd: root, encoding: "utf8" }).trim(); } catch { return ""; } };
+    const inRepo = git("rev-parse", "--is-inside-work-tree") === "true";
+    const untracked = inRepo ? git("ls-files", "--others", "--exclude-standard", "po/").split(/\r?\n/).filter(Boolean) : [];
+    const ignored = inRepo ? git("ls-files", "--others", "--ignored", "--exclude-standard", "po/").split(/\r?\n/).filter(Boolean) : [];
+    check("CCODE-206: every file in po/ is tracked — a reply left untracked was never sent",
+      !inRepo || untracked.length === 0, untracked.slice(0, 6).join(", "));
+    check("CCODE-206: nothing in po/ is gitignored — an ignored reply cannot be committed even deliberately",
+      !inRepo || ignored.length === 0, ignored.slice(0, 6).join(", "));
+  }
   // 2 · AND THE PICTURE CHANGES, on Erik's own ability.
   {
     const rl = abilities.find(a => /radiant lance/i.test(a.name || ""));

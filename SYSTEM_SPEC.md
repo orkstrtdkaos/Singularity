@@ -2561,6 +2561,26 @@ can see it. Gated by `CCODE-200: no ability loads without a powerSystem`.
 
 ---
 
+## §42.4 — AND THE SAME LAW GOVERNS `po/`: the repo is the only channel
+
+⛔ **CCode and Aevi do not share a session. `po/` IS the channel.** A reply written to disk and left
+untracked — or written into a path `.gitignore` covers — reads to its author as delivered and to its
+reader as silence. **That is §42 one layer out: authored, correct, invisible.**
+
+**Two ways it happens, and the second is the nastier:**
+
+| | |
+|---|---|
+| **untracked** | written, never `git add`ed. Recoverable the moment anyone notices. |
+| **ignored** | written where `.gitignore` covers it. ⚠️ `git add` reports nothing and appears to work. |
+
+**Gated by `CCODE-206`**, both halves mutation-tested. It deliberately does **not** gate on unpushed
+commits: committing before pushing is ordinary work, and a gate that goes red on ordinary work is a gate
+people learn to skip. ⚠️ **Pushing is still the last step of answering** — a commit sitting on a local
+branch has not been sent either.
+
+---
+
 # §43 — ABILITY IDENTITY: what an id carries, and why merging ids is expensive
 
 ## §43.1 — Everything keyed on an ability id

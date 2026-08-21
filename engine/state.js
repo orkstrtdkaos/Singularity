@@ -392,9 +392,15 @@ export async function loadContent() {
   // ability-arch v2: tolerant defaults so the engine can read the new fields before the content
   // classification pass tags every ability. rankProgression defaults to "use" (depth is earned, not
   // bought); nativeOrCombination stays null until authored (consumers treat null as unclassified).
+  // ⛔ THE PACK-LEVEL STAMP USED TO CLOBBER UNCONDITIONALLY. 13 registered packs declare no pack-level
+  // `powerSystem`, so `powerSystem: pack.powerSystem` overwrote 28 abilities' OWN authored value with
+  // undefined - silently, at load, where no file-level check can see it. The pack still WINS where it
+  // declares one (that is the existing convention everywhere else); the ability's own value now only
+  // fills the gap instead of being thrown away. This is what left `sling_and_stone` unable to resolve a
+  // palette while its sibling ranged crafts were fine.
   const abilities = {};
   for (const pack of await abilitiesP) for (const a of pack.abilities) abilities[a.id] = {
-    ...a, powerSystem: pack.powerSystem,
+    ...a, powerSystem: pack.powerSystem || a.powerSystem,
     rankProgression: a.rankProgression || "use",
     nativeOrCombination: a.nativeOrCombination || null,
     combinationAxis: a.combinationAxis ?? null,

@@ -483,7 +483,7 @@ check("rank 3 gated to level 5", rankUpAbility(hero2, "sonic_resonance", rules).
 check("harmonic cannot learn radiant arts", learnAbility(hero2, "light_bending", abilityCatalog, rules).why === "wrong tradition");
 // The BEHAVIOUR is "learning spends its cost", not "leaves you at zero" — what is left depends on the dial.
 const spBefore = hero2.skillPoints;
-const learned = learnAbility(hero2, "echo_sense", abilityCatalog, rules);
+const learned = learnAbility(hero2, "stillness_field", abilityCatalog, rules);
 check("learning own tradition works", learned.ok && hero2.abilities.length === 2 && hero2.skillPoints === spBefore - learned.cost);
 const law = abilitiesForGM(hero2, abilityCatalog);
 check("ability law carries rank grants and limits", law.includes("Standing Wave") && law.includes("CANNOT") && law.includes("NOT FOR"));
@@ -1113,7 +1113,7 @@ check('SNG-111: a genuinely different later name still becomes an alias', warden
   const casterAsh = { domains: { primary: "ashwarden" }, attributes: { mental: 5, physical: 2, practical: 2, social: 2 } };
   const casterGrants = nativeGrantIdsFor(casterAsh, ngRules);
   check("SNG-101b: a mental-lean ashwarden gets the death-core spine (deathsense + mental basics)",
-    casterGrants.includes("deathsense") && casterGrants.includes("palework") && casterGrants.includes("the_grey_hand") && casterGrants.length <= ngContent.grantCap);
+    casterGrants.includes("deathsense") && casterGrants.includes("palework") && casterGrants.includes("grey_hand") && casterGrants.length <= ngContent.grantCap);
   // ashwarden, PRACTICAL lean → the practical basic (wither), then FILLS from the mental spine, capped.
   const martialAsh = { domains: { primary: "ashwarden" }, attributes: { practical: 5, mental: 4, social: 4, physical: 3 } };
   const martialGrants = nativeGrantIdsFor(martialAsh, ngRules);
@@ -1130,7 +1130,7 @@ check('SNG-111: a genuinely different later name still becomes an alias', warden
     abilities: [{ abilityId: "deathsense", level: 3 }, { abilityId: "palework", level: 2 }, { abilityId: "order_sense", level: 3 }] };
   const added = applyNativeGrants(silas, ngRules);
   const findRank = id => silas.abilities.find(a => a.abilityId === id)?.level;
-  check("SNG-101b: applyNativeGrants adds the missing ashwarden basics at rank 1", added.includes("wither") && added.includes("the_grey_hand") && findRank("wither") === 1);
+  check("SNG-101b: applyNativeGrants adds the missing ashwarden basics at rank 1", added.includes("wither") && added.includes("grey_hand") && findRank("wither") === 1);
   check("SNG-101b: Law 14 — an already-owned basic keeps its EARNED rank (deathsense r3, palework r2 untouched)", findRank("deathsense") === 3 && findRank("palework") === 2);
   check("SNG-101b: a non-native ability the character learned is untouched", findRank("order_sense") === 3);
   const addedAgain = applyNativeGrants(silas, ngRules);
@@ -1185,10 +1185,10 @@ check('branch attaches free, once', br && learner2.abilities[0].branches.length 
 // aspirations
 const aspirant = { origin: 'harmonic', level: 2, abilities: [{ abilityId: 'sonic_resonance', level: 1 }], skillPoints: 0 };
 ensurePractice(aspirant);
-check('aspire caps at 2', declareAspiration(aspirant, 'echo_sense', rules).ok && declareAspiration(aspirant, 'stillness_field', rules).ok && declareAspiration(aspirant, 'tremor_sense', rules).ok === false);
+check('aspire caps at 2', declareAspiration(aspirant, 'chord_of_mending', rules).ok && declareAspiration(aspirant, 'stillness_field', rules).ok && declareAspiration(aspirant, 'voice_of_the_flock', rules).ok === false);
 for (let i = 0; i < 10; i++) recordAspirationProgress(aspirant, { abilityId: 'sonic_resonance', tags: [] }, fullCat);
-check('same-system use feeds aspiration; ripe at 10', aspirationRipe(aspirant, 'echo_sense', rules) && aspirationRipe(aspirant, 'tremor_sense', rules) === false);
-check('free learn via ripe aspiration with 0 points', learnAbility(aspirant, 'echo_sense', fullCat, rules, { free: true }).ok && aspirant.skillPoints === 0);
+check('same-system use feeds aspiration; ripe at 10', aspirationRipe(aspirant, 'chord_of_mending', rules) && aspirationRipe(aspirant, 'voice_of_the_flock', rules) === false);
+check('free learn via ripe aspiration with 0 points', learnAbility(aspirant, 'chord_of_mending', fullCat, rules, { free: true }).ok && aspirant.skillPoints === 0);
 // use-ranking
 const ranker = { origin: 'harmonic', level: 3, abilities: [{ abilityId: 'sonic_resonance', level: 1 }], skillPoints: 0 };
 ensurePractice(ranker);
@@ -1201,9 +1201,9 @@ const preCat = {};
 const prePack = JSON.parse(readFileSync(join(root, 'content/packs/core/abilities/precursor.json'), 'utf8'));
 for (const a of prePack.abilities) preCat[a.id] = { ...a, powerSystem: 'precursor' };
 const mundane = { origin: 'valley', level: 5, abilities: [], skillPoints: 5 };
-check('precursor closed without access (even valley, even high level)', effectiveLevelReq(preCat.address_sense, mundane, rules) === null);
-mundane.precursorAccess = ['address_sense'];
-check('unlocked precursor opens at its own levelReq', effectiveLevelReq(preCat.address_sense, mundane, rules) === 3);
+check('precursor closed without access (even valley, even high level)', effectiveLevelReq(preCat.latticespeak, mundane, rules) === null);
+mundane.precursorAccess = ['latticespeak'];
+check('unlocked precursor opens at its own levelReq', effectiveLevelReq(preCat.latticespeak, mundane, rules) === 3);
 check('other precursor abilities stay closed', effectiveLevelReq(preCat.foreclose, mundane, rules) === null);
 check('precursor rules block shipped', rules.precursor.perilDrift === 0.05 && rules.precursor.bandNotice === 0.4);
 
@@ -1234,6 +1234,9 @@ check("backfill grants xp (capped) and re-levels", sum.xpGained > 0 && sum.xpGai
 check("idempotent: second run is null", runBackfill(vet, { rules, abilityCatalog: abilityCat, emergence: recipes, companionCatalog: { aevi: aeviDef2 } }) === null && !needsBackfill(vet));
 check("aevi bond credited to grant tier + ability granted", vet.companionBonds.aevi >= 6 && vet.abilities.some(a=>a.abilityId==="motes-vigil") && sum.bonds[0].granted);
 check("practice seeded from ranks", vet.practice.uses.prism_sight >= 8 && vet.practice.uses.sonic_resonance >= 4);
+// ⛔ RED BY DESIGN UNTIL SNG-454 IS UNWOUND. The boost needs the chronicle's craft NAME to resolve
+// through the catalogue; `prism_sight` was culled, so it resolves to nothing and no boost is applied.
+// Erik ruled the sense IDS come back (shared stat block, distinct ids) - this goes green with them.
 check("chronicle mentions boosted use counts above rank floor", vet.practice.uses.prism_sight > 8);
 const { discoveryKey: dk } = await import("../engine/progression.js");
 check("resonant_sight co-activation ripened from history", (vet.practice.coActivations[dk(["prism_sight","sonic_resonance"])] || 0) >= 6);
@@ -1366,7 +1369,7 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   check("cap scales with level", breadthCap(c1, capTable) === 4 && !atCapacity(c1, capTable));
   // graph model
   const emergence = JSON.parse(readFileSync(join(root, "content/packs/core/rules/emergence_recipes.json"), "utf8"));
-  const gm = skillGraphModel(cat, emergence, { level: 3, abilities: [{ abilityId: "prism_sight", level: 2 }], subAttributes: { reason: 2 }, customAbilities: {} }, { attributeGates: gates, skillCapacity: capTable, preds: {} });
+  const gm = skillGraphModel(cat, emergence, { level: 3, abilities: [{ abilityId: "sonic_resonance", level: 2 }], subAttributes: { reason: 2 }, customAbilities: {} }, { attributeGates: gates, skillCapacity: capTable, preds: {} });
   check("graph has a node per ability with tier/class", gm.nodes.length === Object.keys(cat).length && gm.nodes.every(n => n.tier && n.cls));
   // ⛔ CCODE-199: THIS LINE KILLED THE WHOLE SUITE. `prism_sight` was cut by the ability rewrite, so
   // `gm.nodes.find(...)` returned undefined and `.owned` THREW — and a thrown smoke run reports nothing at
@@ -1374,8 +1377,8 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   // ITS OWN GATE, NEVER END THE RUN: the whole value of this file is that the gates after a failure still
   // speak. Same lesson as the mutation harness reading stdout instead of the exit code, one file over.
   const gmNode = (id) => gm.nodes.find(n => n.id === id) || { id, missing: true };
-  check("graph marks owned + gated + locked", gmNode("prism_sight").owned && gmNode("shatterpoint").gated && gmNode("shatterpoint").locked);
-  check("graph draws recipe edges between real component ids", gm.edges.some(e => e.from === "prism_sight" && e.kind === "combo"));
+  check("graph marks owned + gated + locked", gmNode("sonic_resonance").owned && gmNode("shatterpoint").gated && gmNode("shatterpoint").locked);
+  check("graph draws recipe edges between real component ids", gm.edges.some(e => e.from === "sonic_resonance" && e.kind === "combo"));
 }
 
 // --- SNG-BATCH-2 Phase 3: gate + capacity ENFORCEMENT ---
@@ -1683,46 +1686,69 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
 }
 
 // --- SNG-BATCH-5 Phase 2: branch forks ---
+// ⛔ SNG-454 CULLED prism_sight, which this block had HARDCODED as its subject — and the suite stopped
+// running at this line rather than reporting a failure. The mechanism under test is the FORK, not any one
+// craft, so the subject is now DERIVED: the first branch_forks key whose ability still exists. A future cull
+// moves the subject instead of killing the run. The two path keys and their names come from the data too.
 {
   const forks = JSON.parse(readFileSync(join(root, "content/packs/core/rules/branch_forks.json"), "utf8"));
-  const psAb = JSON.parse(readFileSync(join(root, "content/packs/core/abilities/harmonic.json"), "utf8")).abilities.find(a => a.id === "sonic_resonance") ||
-               JSON.parse(readFileSync(join(root, "content/packs/core/abilities/radiant.json"), "utf8")).abilities.find(a => a.id === "prism_sight");
-  // use prism_sight from whichever pack holds it
-  let prism = null;
-  for (const g of ["harmonic","radiant","valley_craft"]) { const pk = JSON.parse(readFileSync(join(root, "content/packs/core/abilities/"+g+".json"),"utf8")); const a = pk.abilities.find(x => x.id === "prism_sight"); if (a) prism = { ...a, powerSystem: pk.powerSystem }; }
+  const abilityFiles = JSON.parse(readFileSync(join(root, "content/packs/core/manifest.json"), "utf8")).provides.abilities;
+  const findAbility = (id) => {
+    for (const rel of abilityFiles) {
+      const pk = JSON.parse(readFileSync(join(root, "content/packs/core", rel), "utf8"));
+      const a = (pk.abilities || []).find(x => x.id === id);
+      if (a) return { ...a, powerSystem: pk.powerSystem };
+    }
+    return null;
+  };
+  const forkTable = forks.forks || forks;
+  const orphanForks = Object.keys(forkTable).filter(id => !findAbility(id));
+  // ⚠️ CONTENT GATE, not a mechanism gate: a fork that names a craft nobody can learn is unreachable data.
+  check("every branch_forks key names an ability that exists", orphanForks.length === 0,
+        orphanForks.length ? `orphaned fork(s): ${orphanForks.join(", ")}` : "");
 
-  check("branch_forks defines prism_sight fork at rank 3", forkFor("prism_sight", forks)?.atRank === 3);
-  check("fork has exactly two paths", forkPaths("prism_sight", forks).length === 2);
+  const SUBJ = Object.keys(forkTable).find(id => findAbility(id));
+  check("branch_forks has at least one reachable fork to test", !!SUBJ);
+  const prism = SUBJ ? findAbility(SUBJ) : null;
+  const pathKeys = SUBJ ? Object.keys(forkTable[SUBJ].paths || {}) : [];
+  const [PATH_A, PATH_B] = pathKeys;
+  const nameOf = (k) => (forkTable[SUBJ]?.paths?.[k]?.name || "");
+  const atRank = SUBJ ? forkTable[SUBJ].atRank : 3;
+
+  check("the fork declares the rank it opens at", forkFor(SUBJ, forks)?.atRank === atRank);
+  check("fork has exactly two paths", forkPaths(SUBJ, forks).length === 2);
 
   const c = { forkChoices: {} };
   // fork pending only at atRank and while unchosen
-  check("fork NOT pending below atRank", forkPending(c, "prism_sight", 2, forks) === false);
-  check("fork pending at atRank when unchosen", forkPending(c, "prism_sight", 3, forks) === true);
-  check("non-forking ability never pends", forkPending(c, "wayfinding", 3, forks) === false);
+  check("fork NOT pending below atRank", forkPending(c, SUBJ, atRank - 1, forks) === false);
+  check("fork pending at atRank when unchosen", forkPending(c, SUBJ, atRank, forks) === true);
+  check("non-forking ability never pends", forkPending(c, "wayfinding", atRank, forks) === false);
 
   // choosing locks permanently
-  check("setFork picks a path", setFork(c, "prism_sight", "deep_read", forks) === true);
-  check("chosen fork readable", chosenFork(c, "prism_sight", forks)?.key === "deep_read");
-  check("fork no longer pending after choice", forkPending(c, "prism_sight", 3, forks) === false);
-  check("re-choosing is refused (permanent)", setFork(c, "prism_sight", "wide_read", forks) === false);
-  check("still deep_read after refused re-choose", c.forkChoices.prism_sight === "deep_read");
+  check("setFork picks a path", setFork(c, SUBJ, PATH_A, forks) === true);
+  check("chosen fork readable", chosenFork(c, SUBJ, forks)?.key === PATH_A);
+  check("fork no longer pending after choice", forkPending(c, SUBJ, atRank, forks) === false);
+  check("re-choosing is refused (permanent)", setFork(c, SUBJ, PATH_B, forks) === false);
+  check("still the first path after refused re-choose", c.forkChoices[SUBJ] === PATH_A);
 
   // rank expression: chosen fork REPLACES the linear tree entry at/above atRank
-  const exprChosen = rankExpression(c, prism, 3, forks);
-  check("rank expr uses the chosen fork path", exprChosen.forked === true && /Deep Read/i.test(exprChosen.name));
+  const exprChosen = rankExpression(c, prism, atRank, forks);
+  check("rank expr uses the chosen fork path",
+        exprChosen.forked === true && exprChosen.name === nameOf(PATH_A));
   check("chosen fork carries its grants/cannot", !!exprChosen.grants && !!exprChosen.cannot);
   // below the fork rank, expression is the linear tree entry
-  const exprLinear = rankExpression(c, prism, 2, forks);
+  const exprLinear = rankExpression(c, prism, atRank - 1, forks);
   check("below atRank uses linear tree", exprLinear && exprLinear.forked === false);
   // an unchosen fork ability at atRank falls back to linear (until picked)
   const c2 = { forkChoices: {} };
-  const exprUnchosen = rankExpression(c2, prism, 3, forks);
+  const exprUnchosen = rankExpression(c2, prism, atRank, forks);
   check("unchosen fork at atRank falls back to linear tree", !exprUnchosen || exprUnchosen.forked === false);
 
   // GM ability law reflects the chosen fork
-  const gmChar = { abilities: [{ abilityId: "prism_sight", level: 3 }], forkChoices: { prism_sight: "wide_read" }, discoveries: [] };
-  const gm = abilitiesForGM(gmChar, { prism_sight: prism }, forks);
-  check("GM sees the specialized fork name", /Wide Read/i.test(gm) && /specialized fork/i.test(gm));
+  const gmChar = { abilities: [{ abilityId: SUBJ, level: atRank }], forkChoices: { [SUBJ]: PATH_B }, discoveries: [] };
+  const gm = abilitiesForGM(gmChar, { [SUBJ]: prism }, forks);
+  check("GM sees the specialized fork name",
+        gm.includes(nameOf(PATH_B)) && /specialized fork/i.test(gm));
 }
 
 // --- SNG-BATCH-6 Phase 1: codex entity-resolution (SNG-019) ---
@@ -3791,14 +3817,14 @@ await (async () => {
     deathsense: { id: "deathsense", name: "Deathsense", functions: ["sense"] },
     order_sense: { id: "order_sense", name: "Order-Sense", functions: ["read"] },
     palework: { id: "palework", name: "Palework", functions: ["strike"] },
-    the_kept_breath: { id: "the_kept_breath", name: "The Kept Breath", functions: ["mend"] }
+    kept_breath: { id: "kept_breath", name: "The Kept Breath", functions: ["mend"] }
   };
   const rules = { practice: { aspirationRipe: 10 } };
 
   // a rich character: an unused craft, a co-used pair, a declared aspiration, a named item, a companion
   const rich = {
     abilities: [{ abilityId: "deathsense" }, { abilityId: "order_sense" }, { abilityId: "palework" }],
-    practice: { uses: { deathsense: 5, order_sense: 4, palework: 0 }, coActivations: { "deathsense|order_sense": 3 }, aspirations: [{ abilityId: "the_kept_breath", since: "x", progress: 4 }] },
+    practice: { uses: { deathsense: 5, order_sense: 4, palework: 0 }, coActivations: { "deathsense|order_sense": 3 }, aspirations: [{ abilityId: "kept_breath", since: "x", progress: 4 }] },
     inventory: [{ name: "spear", customName: "Memory", kind: "weapon", uses: [{ label: "channel deathsense" }] }, { name: "rope", kind: "tool" }]
   };
   const companions = [{ id: "huginn", name: "Huginn", role: "carrion bird that attends endings", knowledge: ["where the dying are", "the old roads"] }];
@@ -3924,22 +3950,22 @@ await (async () => {
 (async () => {
   const { resolveAction } = await import("../engine/resolve.js");
   const wcat = {
-    the_churns_gift: { id: "the_churns_gift", powerSystem: "wild_current", levelReq: 3, wildVariance: true },
+    churns_gift: { id: "churns_gift", powerSystem: "wild_current", levelReq: 3, wildVariance: true },
     the_wild_bloom: { id: "the_wild_bloom", powerSystem: "wild_current", levelReq: 4, wildVariance: true },
     address_sense: { id: "address_sense", powerSystem: "precursor", levelReq: 2 }
   };
 
   // seed: a Wild Half origin seeds wildCurrentAccess (churnfolk/abyssal), powerSystem-validated
   const churn = { origin: "churnfolk" };
-  const seeded = seedInnateSubstrate(churn, { wildCurrent: ["the_churns_gift"] }, wcat);
-  check("SNG-140: a Wild Half origin is seeded innate WILD-current access", churn.wildCurrentAccess.includes("the_churns_gift") && seeded.includes("the_churns_gift"));
-  check("SNG-140: abyssal can carry BOTH innatePrecursor AND wildCurrent (the canon duality)", (() => { const ab = { origin: "abyssal" }; seedInnateSubstrate(ab, { innatePrecursor: ["address_sense"], wildCurrent: ["the_churns_gift"] }, wcat); return ab.precursorAccess.includes("address_sense") && ab.wildCurrentAccess.includes("the_churns_gift"); })());
+  const seeded = seedInnateSubstrate(churn, { wildCurrent: ["churns_gift"] }, wcat);
+  check("SNG-140: a Wild Half origin is seeded innate WILD-current access", churn.wildCurrentAccess.includes("churns_gift") && seeded.includes("churns_gift"));
+  check("SNG-140: abyssal can carry BOTH innatePrecursor AND wildCurrent (the canon duality)", (() => { const ab = { origin: "abyssal" }; seedInnateSubstrate(ab, { innatePrecursor: ["address_sense"], wildCurrent: ["churns_gift"] }, wcat); return ab.precursorAccess.includes("address_sense") && ab.wildCurrentAccess.includes("churns_gift"); })());
   check("SNG-140: a mis-authored wildCurrent id (wrong powerSystem) is REFUSED", (() => { const x = {}; seedInnateSubstrate(x, { wildCurrent: ["address_sense"] }, wcat); return !x.wildCurrentAccess.includes("address_sense"); })());
 
   // gate: wild_current is LOCKED without access, learnable once seeded — same shape as precursor/living
-  check("SNG-140: wild_current is LOCKED without the innate access", effectiveLevelReq(wcat.the_churns_gift, { wildCurrentAccess: [] }, {}) === null);
-  check("SNG-140: wild_current returns its levelReq once seeded", effectiveLevelReq(wcat.the_churns_gift, { wildCurrentAccess: ["the_churns_gift"] }, {}) === 3);
-  const wlearn = learnAbility({ origin: "churnfolk", domains: { primary: "churnfolk" }, level: 3, skillPoints: 3, abilities: [], wildCurrentAccess: ["the_churns_gift"] }, "the_churns_gift", wcat, {}, {});
+  check("SNG-140: wild_current is LOCKED without the innate access", effectiveLevelReq(wcat.churns_gift, { wildCurrentAccess: [] }, {}) === null);
+  check("SNG-140: wild_current returns its levelReq once seeded", effectiveLevelReq(wcat.churns_gift, { wildCurrentAccess: ["churns_gift"] }, {}) === 3);
+  const wlearn = learnAbility({ origin: "churnfolk", domains: { primary: "churnfolk" }, level: 3, skillPoints: 3, abilities: [], wildCurrentAccess: ["churns_gift"] }, "churns_gift", wcat, {}, {});
   check("SNG-140: a seeded Wild Half character can learn the wild craft (access gates it, not domain)", wlearn.ok === true);
 
   // resolver variance: wildVariance widens BOTH crit bands (upside-forward), vs a plain action. Reuses the
@@ -5962,19 +5988,19 @@ await (async () => {
     soma: { id: "soma", name: "Soma", levelReq: 1 },
     body_read: { id: "body_read", name: "Body-Read", levelReq: 2 },
     skydancer: { id: "skydancer", name: "Skydancer", levelReq: 5 },
-    the_whole_act: { id: "the_whole_act", name: "The Whole Act", levelReq: 9 }
+    perfect_motion: { id: "perfect_motion", name: "The Whole Act", levelReq: 9 }
   };
-  const idx = { byId: { somatic: { traditionId: "somatic", name: "The Somatics", abilities: ["soma", "body_read", "skydancer", "the_whole_act"] } } };
+  const idx = { byId: { somatic: { traditionId: "somatic", name: "The Somatics", abilities: ["soma", "body_read", "skydancer", "perfect_motion"] } } };
   const char = { level: 3, abilities: [{ abilityId: "soma" }] };
 
   const c = co.curriculumFor(char, "somatic", { catalog, traditionIndex: idx });
   check("175: a teacher's whole set is legible, not just their tradition label", c.all.length === 4);
   check("175: what the student already holds is marked as taught", c.taught === 1 && c.remaining === 3);
   check("175: the derived spine orders by tier — no content pass needed (answering the PO's Q4)",
-    c.all.map(x => x.id).join(",") === "soma,body_read,skydancer,the_whole_act");
+    c.all.map(x => x.id).join(",") === "soma,body_read,skydancer,perfect_motion");
   check("175: the next step is the nearest thing actually WITHIN REACH, not merely next on the list",
     c.next.id === "body_read" && c.next.reachable === true);
-  check("175: an out-of-reach craft is listed but not offered", c.all.find(x => x.id === "the_whole_act").reachable === false);
+  check("175: an out-of-reach craft is listed but not offered", c.all.find(x => x.id === "perfect_motion").reachable === false);
 
   // §3.2 — the path is the TEACHER'S judgement. Two teachers of one tradition walk it differently.
   const contrarian = co.curriculumFor(char, "somatic", { catalog, traditionIndex: idx, teacherOrder: ["skydancer", "body_read"] });
@@ -8757,13 +8783,13 @@ await (async () => {
   const roster = [
     { id: "neth", name: "Neth", tradition: "ashwarden", alignment: "hero", role: "Master", signature: "the deep teacher who comes to deaths no one sent for", wants: "that no one dies unattended", homeLocation: "the_harrow" },
     { id: "morvane", name: "Morvane", tradition: "ashwarden", alignment: "villain", role: "Reaper", signature: "the harvest hand", wants: "the tally complete" },
-    { id: "vael", name: "Cinder Vael", tradition: "wright", alignment: "villain", wants: "to finish the one perfect thing", homeLocation: "the_deep_works" },
+    { id: "vael", name: "Cinder Vael", tradition: "wright", alignment: "villain", wants: "to finish the one perfect thing", homeLocation: "deep_works" },
   ];
   const content = { legends: { roster } };
   const asTeacher = legendsForGM({ currentLocationId: "elsewhere" }, content, { practiced: new Set(["ashwarden"]) });
   check("208-wire: a legend of a PRACTICED tradition surfaces as a legendary teacher to seek", /LEGENDARY TEACHERS/.test(asTeacher) && /Neth/.test(asTeacher) && /Morvane/.test(asTeacher) && /deep-teacher arc/.test(asTeacher));
   check("208-wire: a legend of an UNpracticed tradition is not surfaced as this character's teacher", !/Cinder Vael/.test(asTeacher));
-  const atHome = legendsForGM({ currentLocationId: "the_deep_works" }, content, { practiced: new Set() });
+  const atHome = legendsForGM({ currentLocationId: "deep_works" }, content, { practiced: new Set() });
   check("208-wire: a legend whose home is HERE surfaces as a great figure with a want-as-quest", /GREAT FIGURES near you/.test(atHome) && /Cinder Vael/.test(atHome) && /aid or oppose/i.test(atHome));
   const withDead = legendsForGM({ currentLocationId: "e" }, content, { practiced: new Set(["ashwarden"]), deadIds: new Set(["neth"]) });
   check("208-wire: a DEAD legend is never surfaced as pursuable (SNG-208 §3b)", !/Neth/.test(withDead) && /Morvane/.test(withDead));
@@ -9850,7 +9876,7 @@ await (async () => {
   // integration: the ACTUAL Aevi layer — a ward ability id resolves through wardDenials; a premise type through challengePremises
   const frameContent230 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/encounter_frame_content.json"), "utf8"));
   check("230 §7b integration: a target tagged with Aevi's ward ability (the_kept_breath) DENIES a finish through the wardDenials layer",
-    wardAgainst({ type: "duel", wards: ["the_kept_breath"] }, "finish", frameContent230.wardDenials).denied === true && wardAgainst({ type: "duel", wards: ["boundary_stone"] }, "finish", frameContent230.wardDenials).denied === false && wardAgainst({ type: "duel", wards: ["boundary_stone"] }, "escape", frameContent230.wardDenials).denied === true);
+    wardAgainst({ type: "duel", wards: ["kept_breath"] }, "finish", frameContent230.wardDenials).denied === true && wardAgainst({ type: "duel", wards: ["boundary_stone"] }, "finish", frameContent230.wardDenials).denied === false && wardAgainst({ type: "duel", wards: ["boundary_stone"] }, "escape", frameContent230.wardDenials).denied === true);
   check("230 §7c integration: a challenge naming Aevi's premise type (physical_ascent) is voided by a 'move' kit through challengePremises",
     trivializes({ type: "challenge", premise: "physical_ascent" }, ["move"], frameContent230.challengePremises) === "trivial" && trivializes({ type: "challenge", premise: "pattern_puzzle" }, ["reveal"], frameContent230.challengePremises) === "trivial" && trivializes({ type: "challenge", premise: "physical_ascent" }, ["harm"], frameContent230.challengePremises) === null);
   const rcTriv = recFn({ type: "challenge", round: 1, status: "ended", stagesDone: [], stageIndex: 0 }, { name: "The Wall", stages: [{ name: "climb" }] }, { degree: "trivial", trivialize: { craft: "Marrow's Wings", mode: "trivial", premise: "a sheer climb" } }, { outcome: "completed", events: [] });
@@ -16671,6 +16697,47 @@ await (async () => {
     check(`435 §C1 THE ARGUMENT: narrationHints out-resolves shape by two orders (${hints.size} vs ${shapes.size})`,
       hints.size === abilities.length && shapes.size < 40 && abilities.length > 300,
       "a low-cardinality field cannot be the picture, whatever words are in it");
+  }
+  // 1b · ⛔ CCODE-200: EVERY LOADED ABILITY CARRIES A POWER SYSTEM. The pack-level stamp used to overwrite
+  // the ability's own value unconditionally, so 28 crafts in the 13 packs that declare no pack-level
+  // `powerSystem` loaded with it UNDEFINED. Nothing threw - they simply resolved no palette, no physics
+  // phrase, and no substrate gate, and every file-level check passed because the FILES were correct. This
+  // is the writer-with-no-reader class inverted: an authored field the LOADER threw away. Only the loaded
+  // catalogue can see it, which is why the gate lives here and not in the content CI.
+  {
+    const noSystem = abilities.filter(a => !a.powerSystem);
+    check("CCODE-200: no ability loads without a powerSystem — the pack stamp fills gaps, never clobbers",
+      noSystem.length === 0, noSystem.slice(0, 8).map(a => a.id).join(", "));
+  }
+  // 1c · ⛔ CCODE-201: EVERY PLACE REFERENCE NAMES A REAL REGION. Ability ids and region ids share one
+  // flat string space — `the_ascent` and `the_descent` are BOTH a renamed craft and a live region — so a
+  // corpus-wide id sweep silently rewrites places into crafts. One did, across five rules files, and only
+  // ONE of them had a gate over it. The reliable signal is the KEY, never the value: region | regionId |
+  // homeRegion | startingRegion always name a place. See SYSTEM_SPEC §43.2.
+  {
+    const PLACE_KEYS = new Set(["region", "regionId", "homeRegion", "startingRegion"]);
+    const regionIds = new Set(Object.keys(JSON.parse(readFileSync(join(root, "content/packs/core/rules/regions.json"), "utf8")).regions || {}));
+    for (const l of Object.values(CC.locations || {})) { if (l.region) regionIds.add(l.region); if (l.regionId) regionIds.add(l.regionId); }
+    const strays = [];
+    const walk = (node, file) => {
+      if (Array.isArray(node)) return node.forEach(n => walk(n, file));
+      if (!node || typeof node !== "object") return;
+      for (const [k, v] of Object.entries(node)) {
+        // ⚠️ only ID-SHAPED values — `quest_structure.json` carries `"region": "Where it lives."` as
+        // schema PROSE, and a doc describing a field is not a reference to a place.
+        if (PLACE_KEYS.has(k) && typeof v === "string" && /^[a-z][a-z0-9_]*$/.test(v) && !regionIds.has(v)) strays.push(`${file}:${k}=${v}`);
+        else walk(v, file);
+      }
+    };
+    for (const f of readdirSync(join(root, "content/packs/core/rules")).filter(x => x.endsWith(".json")))
+      { try { walk(JSON.parse(readFileSync(join(root, "content/packs/core/rules", f), "utf8")), f); } catch { /* unreadable */ } }
+    // ⚠️ RATCHET, NOT A CLEAN GATE. It opens RED on debt that predates it: four region ids
+    // (`the_crossing`, `the_stillhold`, `the_cogitarium`, `the_unspooling`) are referenced by places
+    // `regions.json` does not define. Reported to Aevi; the count may only SHRINK. The gate's real job is
+    // to catch the NEXT sweep that turns a place into a craft, and for that a ratchet is enough.
+    const uniq = [...new Set(strays)];
+    check(`CCODE-201: region references in rules/ that name no real region — ${uniq.length}, and it may only shrink`,
+      uniq.length <= 11, uniq.slice(0, 12).join(", "));
   }
   // 2 · AND THE PICTURE CHANGES, on Erik's own ability.
   {

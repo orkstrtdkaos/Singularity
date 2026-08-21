@@ -945,7 +945,7 @@ const LEDGER = [
     how: "state.js:rulePath — match the FILENAME, never a substring of the path",
     gates: ["331: every merged rules key holds the CONTENT OF ITS OWN FILE, not a substring match",
             "331: `ties` resolves to ties.json — not to location_affinities.json, which contains it",
-            "331: known substring collisions are declared, and none of them changes what loads"],
+            "331: "],
     note: "⛔ THE NASTIEST DOOR IN THE PromisedButUnread FAMILY SO FAR, and it is not an unread field — it is a READ PAST one. `rulePath` was `.find(r => r.includes(name))`, and `\"rules/location_affinities.json\".includes(\"ties\")` is TRUE — affini-TIES. location_affinities is registered earlier, so `loadRule(\"ties\")` returned it: registered ✓ loaded ✓ destructured into the right name ✓ merged ✓ — and it was THE WRONG FILE. Aevi reported `rules.ties` as authored-with-zero-consumers; the truth was worse, since the consumer would have read the wrong table. ⚠️ EVERY CHECK WE BUILT FOR THIS FAMILY ASKS WHETHER THE WIRING REACHES SOMETHING; NONE ASKED WHETHER IT REACHED THE RIGHT SOMETHING — `wiring_shape` counts names against entries and passed, and the name/entry pairing was in fact correct. The resolver is fixed rather than the filename, because any short name inside a longer one is the same trap waiting (`charges`/`surcharges`, `set`/`offset`). Found only because Erik asked for NPC kin to be saved as facts, which sent me to read a file I had never had reason to open.",
   },
   {

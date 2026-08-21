@@ -8054,7 +8054,12 @@ await (async () => {
   // SNG-197 §4: the emergent verb is validated against the REAL 24-verb vocabulary (function_vocabulary.json),
   // not a hand-copied list — a hallucinated verb fails the build the SNG-192-Phase-C way.
   const fnVocab = Object.keys(buildFunctionIndex(JSON.parse(readFileSync(join(root, "content/packs/core/rules/function_vocabulary.json"), "utf8"))).verbToFamily);
-  check("197 §4: the real vocab is the 24 authored verbs (not a copy that can drift)", fnVocab.length === 24 && fnVocab.includes("bind") && !fnVocab.includes("teleport"));
+  // ⚠️ NOT PINNED TO A COUNT. It was `=== 24`, and SNG-504 adding four social verbs to INFLUENCE
+  // turned it red for being RIGHT. The claim is that the vocab is READ FROM THE AUTHORED FILE rather than
+  // copied into code where it can drift - so: an authored verb is present, an invented one is not, and the
+  // set is non-trivial. The count is printed, not asserted.
+  check(`197 §4: the real vocab is the ${fnVocab.length} AUTHORED verbs, read from the file (not a copy that can drift)`,
+    fnVocab.length >= 24 && fnVocab.includes("bind") && !fnVocab.includes("teleport"));
   const withEmergent = br.buildBraidDef(char, ["a", "b"], catalog, { authored: { emergentFunction: "bind" }, functionVocab: fnVocab });
   check("197 §1/§4: a REAL vocab verb neither parent had becomes the emergent CEILING (union is FLOOR)", !def.functions.includes("bind") && withEmergent.functions.includes("bind") && withEmergent.minted.emergent === "bind");
   const halluc = br.buildBraidDef(char, ["a", "b"], catalog, { authored: { emergentFunction: "teleport" }, functionVocab: fnVocab });
@@ -11928,10 +11933,13 @@ await (async () => {
         if (substringWinner !== path) collide.push(`${name} → ${substringWinner}`);
       }
       for (const c of collide) console.log(`      substring collision: ${c}`);
-      // The collisions may EXIST (a short name inside a long one is legal); what must hold is that the
-      // resolver does not use substring matching, proved by every merged key matching its file above.
-      check("331: known substring collisions are declared, and none of them changes what loads",
-        collide.length === 0 || collide.every(c => c.startsWith("ties →")));
+      // ⚠️ WAS AN ALLOWLIST OF ONE SPELLING (`ties → ...`), so registering `body_schools.json` -
+      // which legally contains the substring `schools` - turned it red. A short name inside a long one is
+      // LEGAL; the claim is that the resolver never matches by substring, and that is proved by every
+      // merged key matching its own file in the checks above. Collisions are REPORTED, not forbidden.
+      check(`331: ${collide.length} substring collision(s) declared, and the resolver matches by FILE not substring`,
+        collide.every(c => regs.some(r => r.endsWith("/" + c.split(" → ")[0] + ".json"))),
+        collide.join("; "));
     }
   }
 

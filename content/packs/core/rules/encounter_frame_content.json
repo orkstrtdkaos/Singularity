@@ -5,7 +5,7 @@
  "note": "SNG-230 Phase 4 content (Aevi 2026-07-22): the ward-denials (§7b) and challenge-premises (§7c) the engine checks read. Authored as a LAYER (ability_id -> denies/breakDC; challenge premise -> trivializedBy/resistDC) rather than editing 18 ability files surgically. CCode's frameModel/collapse-path looks up an ability's ward-denial here, and a challenge's premise here. Function families use the 24-verb vocab (ward/shield/resist/finish/end/move/know/reveal/foresee/...). Fields match the frame contract (engine/encounterFrame.js). Ability ids verified against Silas's sheet + core abilities.",
  "wardDenials": {
   "_doc": "ability_id -> {denies:[function families this ward makes INAPPLICABLE, not just resisted], breakDC:the margin a collapse attempt must DEMOLISH by to break the ward and apply anyway, breakBand:the resolver degree required to break}. A denied mechanic simply cannot fire while the ward holds; only a demolishing roll breaks it.",
-  "the_shielding_word": {
+  "shielding_word": {
    "denies": [
     "finish",
     "end"
@@ -14,7 +14,7 @@
    "breakBand": "crit_success",
    "flavor": "The Shielding Word speaks a NO over you that a killing stroke cannot argue with — an instakill does not land, it is refused. Only a stroke that demolishes the word (a crit-margin above its tier) reaches past it."
   },
-  "the_warding_mark": {
+  "named_exclusion": {
    "denies": [
     "harm",
     "finish"
@@ -32,7 +32,7 @@
    "breakBand": "crit_success",
    "flavor": "The Boundary Stone denies passage and pursuit — a transit-collapse of a chase (a shadowstep-away, a grey-road exit) simply does not open across it. Only a demolishing move breaks the bound."
   },
-  "the_kept_breath": {
+  "kept_breath": {
    "denies": [
     "end",
     "finish"

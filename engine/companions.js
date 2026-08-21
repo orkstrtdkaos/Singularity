@@ -126,6 +126,14 @@ export function growBond(character, companionId, kind, rules, stages = null, opt
   const before = character.companionBonds[companionId] ?? 0;
   const after = Math.max(-10, Math.min(10, Math.round((before + g) * 100) / 100));
   character.companionBonds[companionId] = after;
+  // ⛔ CCODE-199: A COMPANION-TAUGHT CRAFT RIDES THIS NUMBER. `progression: "stage"` abilities take their
+  // rank from the bond stage, and this is the one place a bond moves — so the sync lives here rather than in
+  // sixteen readers of `owned.level`. `opts.catalog` and `opts.companions` are optional: a caller that does
+  // not pass them simply does not sync, and the load-time pass catches it.
+  if (opts.catalog && opts.companions) {
+    const moved = syncStageTaughtRanks(character, opts.catalog, opts.companions, rules);
+    if (moved.length) opts.onStageRank?.(moved);
+  }
   // ⛔ SNG-361 — THE APPEND-ONLY BOND LOG. `companionBonds` is a SCALAR: {marrow: 10}. No history, no
   // timestamps, no per-source counter. Encounters (+1.5, the dominant source) and assists (+0.25) mutated
   // it and vanished, so the question "what fraction of the campaign was spent at max bond" had no
@@ -260,4 +268,60 @@ export function shareAtOrAbove(character, companionId, level, { actionCount = nu
   }
   if (reachedAt === null) return { reached: false, share: 0, reachedAtAction: null };
   return { reached: true, reachedAtAction: reachedAt, share: Math.max(0, (total - reachedAt) / total) };
+}
+
+// ---------- CCODE-199: A COMPANION-TAUGHT CRAFT RIDES THE BOND, NOT THE SKILL POINT ----------
+//
+// ⛔ AEVI AUTHORED `progression: "stage"` AND NOTHING READ IT. `Attended End` is Marrow's craft, lent to
+// the player, and its three ranks are meant to open as the bird's bond deepens — but `progression` appeared
+// on ZERO abilities as far as the engine was concerned and was read by ZERO sites. She diagnosed the symptom
+// as a stage-3 ceiling in `bondOf`; measured, that ceiling does not exist. THE FIELD WAS THE PROBLEM.
+//
+// ⚠️ AND THE FIX IS ONE WRITER, NOT SIXTEEN READERS. `owned.level` is read in sixteen places in
+// progression.js alone, and more elsewhere. Teaching every one of them about a second kind of rank is the
+// list-that-rots pattern this project keeps finding — so instead the STORED level is SYNCED to the bond at
+// the single place a bond changes, and every existing reader is correct without knowing why.
+//
+// ⛔ AND IT CANNOT BE BOUGHT. A stage craft advances by the relationship or not at all; `canRankUp` refuses
+// it by name, because a skill point spent on something the bond controls is a point burned in silence.
+
+/** Which companion teaches this craft. `companionId` if authored; else the leading name in `taughtBy`
+ *  ("Marrow (companion bond)" -> "marrow"). ⚠️ Prose is a WEAK link and `content_ci` gates it — a craft
+ *  whose teacher does not resolve is a craft whose ranks can never open. PURE. */
+export function stageTaughtBy(ability) {
+  if (!ability || ability.progression !== "stage") return null;
+  if (ability.companionId) return String(ability.companionId);
+  const lead = String(ability.taughtBy || "").trim().match(/^([A-Za-z][A-Za-z'-]*)/);
+  return lead ? lead[1].toLowerCase() : null;
+}
+
+/** The rank a stage-taught craft should sit at: the teacher's bond stage, clamped to the ranks authored.
+ *  Returns null when this is not a stage craft or the teacher cannot be resolved. PURE. */
+export function stageTaughtRank(character, ability, companions = {}, rules = {}) {
+  const cid = stageTaughtBy(ability);
+  if (!cid) return null;
+  const def = companions[cid];
+  if (!def) return null;
+  const stage = bondOf(character, cid, rules, def.stages).stage;
+  const rows = (ability.tree || ability.ranks || []).length || 1;
+  return Math.max(1, Math.min(rows, stage));
+}
+
+/** ⛔ THE ONE WRITER. Sets `owned.level` for every stage-taught craft the character holds. Called wherever a
+ *  bond moves and once at load, so a save that predates this arrives correct rather than frozen at rank 1.
+ *  Returns the crafts whose rank actually changed, so a caller can tell the player. */
+export function syncStageTaughtRanks(character, catalog = {}, companions = {}, rules = {}) {
+  const moved = [];
+  for (const owned of character?.abilities || []) {
+    const ab = catalog[owned.abilityId];
+    if (!ab || ab.progression !== "stage") continue;
+    const want = stageTaughtRank(character, ab, companions, rules);
+    if (want == null || want === owned.level) continue;
+    // ⚠️ IT FOLLOWS THE BOND BOTH WAYS. A relationship that cools takes the craft's depth with it — that is
+    // what "the bird's craft, lent to you" means, and freezing the high-water mark would make the lending
+    // one-directional in the player's favour and silently unlike every other bond consequence.
+    moved.push({ abilityId: owned.abilityId, name: ab.name, from: owned.level, to: want });
+    owned.level = want;
+  }
+  return moved;
 }

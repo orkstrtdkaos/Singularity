@@ -932,7 +932,15 @@ for (let i = 0; i < 2; i++) evts.push(...growBond(bonded, 'aevi', 'encounter', r
 check('grant unlocks exactly once at 6', evts.filter(e => e === 'grant').length === 1);
 evts = [];
 for (let i = 0; i < 2; i++) evts.push(...growBond(bonded, 'aevi', 'encounter', rules).events); // 6 -> 9
-check('stage 2 unlocks at 8', evts.includes('stage2') && bondOf(bonded, 'aevi', rules).stage === 2);
+// ⚠️ CCODE-199: THIS HARDCODED THE DIAL AND WENT RED WHEN ERIK TURNED IT (stage2At 8 -> 3). The claim
+// was never the number — it is that crossing the threshold FIRES the event and MOVES the stage. Read from
+// the rules, so the next turn of the dial is a design decision rather than a broken test.
+{
+  const s2 = rules?.companions?.tiers?.stage2At ?? 8;
+  check(`stage 2 unlocks at the authored threshold (${s2}) and fires its event`,
+    bondOf(bonded, 'aevi', rules).bond >= s2 && bondOf(bonded, 'aevi', rules).stage === 2,
+    `bond ${bondOf(bonded, 'aevi', rules).bond}, stage ${bondOf(bonded, 'aevi', rules).stage}, threshold ${s2}`);
+}
 for (let i = 0; i < 20; i++) growBond(bonded, 'aevi', 'encounter', rules);
 check('bond clamps at 10', bondOf(bonded, 'aevi', rules).bond === 10);
 const aeviDef = JSON.parse(readFileSync(join(root, 'content/packs/valley/companions/aevi.json'), 'utf8'));
@@ -1360,7 +1368,13 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   const emergence = JSON.parse(readFileSync(join(root, "content/packs/core/rules/emergence_recipes.json"), "utf8"));
   const gm = skillGraphModel(cat, emergence, { level: 3, abilities: [{ abilityId: "prism_sight", level: 2 }], subAttributes: { reason: 2 }, customAbilities: {} }, { attributeGates: gates, skillCapacity: capTable, preds: {} });
   check("graph has a node per ability with tier/class", gm.nodes.length === Object.keys(cat).length && gm.nodes.every(n => n.tier && n.cls));
-  check("graph marks owned + gated + locked", gm.nodes.find(n => n.id === "prism_sight").owned && gm.nodes.find(n => n.id === "shatterpoint").gated && gm.nodes.find(n => n.id === "shatterpoint").locked);
+  // ⛔ CCODE-199: THIS LINE KILLED THE WHOLE SUITE. `prism_sight` was cut by the ability rewrite, so
+  // `gm.nodes.find(...)` returned undefined and `.owned` THREW — and a thrown smoke run reports nothing at
+  // all. Everything after this point had silently stopped being checked. ⚠️ A MISSING FIXTURE MUST FAIL
+  // ITS OWN GATE, NEVER END THE RUN: the whole value of this file is that the gates after a failure still
+  // speak. Same lesson as the mutation harness reading stdout instead of the exit code, one file over.
+  const gmNode = (id) => gm.nodes.find(n => n.id === id) || { id, missing: true };
+  check("graph marks owned + gated + locked", gmNode("prism_sight").owned && gmNode("shatterpoint").gated && gmNode("shatterpoint").locked);
   check("graph draws recipe edges between real component ids", gm.edges.some(e => e.from === "prism_sight" && e.kind === "combo"));
 }
 
@@ -16461,6 +16475,67 @@ await (async () => {
   }
 }
 
+// ---- CCODE-199: a craft that rides the bond, and the numbers behind the map ----------------------
+// ⛔ AEVI AUTHORED `progression: "stage"` AND NOTHING READ IT. `Attended End` is Marrow's craft, lent to
+// the player, and its ranks open as the bird's bond deepens. She diagnosed a stage-3 ceiling in `bondOf`;
+// measured, that ceiling does not exist. ⚠️ AND THE ROOT CAUSE WAS ONE STEP EARLIER AGAIN:
+// `abilities/companion_taught.json` was not in the manifest, so the craft did not exist at all. Third time
+// this class has appeared — after minted_names.json and news_templates.json.
+{
+  const CO = await import("../engine/companions.js");
+  const CM = await import("../engine/craftmechanics.js");
+  const { loadContentHeadless: lch199 } = await import("./headless_content.mjs");
+  const C199 = await lch199();
+  const ae = C199.abilities?.the_attended_end;
+  // 1 · registered and loaded — the step before the field
+  check("CCODE-199: the companion-taught craft is REGISTERED and loads (it was on disk and in no manifest)",
+    !!ae && ae.progression === "stage", `the_attended_end ${ae ? "loads" : "MISSING"}`);
+  // 2 · the teacher resolves from prose, which is a weak link and is gated as one
+  check("CCODE-199: the teacher resolves from `taughtBy` when no companionId is authored",
+    CO.stageTaughtBy(ae) === "marrow"
+    && CO.stageTaughtBy({ progression: "stage", companionId: "hush" }) === "hush"
+    && CO.stageTaughtBy({ taughtBy: "Marrow (companion bond)" }) === null,   // not a stage craft: no teacher
+    String(CO.stageTaughtBy(ae)));
+  // 3 · ⛔ THE RANK RIDES THE BOND, BOTH WAYS. A lent craft is lent — freezing the high-water mark would
+  // make the lending one-directional and silently unlike every other bond consequence.
+  {
+    const at = (bond) => { const ch = { abilities: [{ abilityId: "the_attended_end", level: 1 }], companionBonds: { marrow: bond } };
+      CO.syncStageTaughtRanks(ch, C199.abilities, C199.companions, C199.rules); return ch.abilities[0].level; };
+    console.log(`      stage craft: bond 0->r${at(0)} 2->r${at(2)} 3->r${at(3)} 9->r${at(9)} 10->r${at(10)}`);
+    check("CCODE-199: a stage craft's rank follows the bond up",
+      at(0) === 1 && at(2) === 1 && at(3) === 2 && at(10) === 3);
+    const cooled = { abilities: [{ abilityId: "the_attended_end", level: 3 }], companionBonds: { marrow: 0 } };
+    CO.syncStageTaughtRanks(cooled, C199.abilities, C199.companions, C199.rules);
+    check("CCODE-199: …and DOWN when the bond cools (a lent craft is lent)", cooled.abilities[0].level === 1);
+  }
+  // 4 · ⛔ AND IT CANNOT BE BOUGHT. A point spent here would be a point burned in silence.
+  {
+    const PR = await import("../engine/progression.js");
+    const ch = { level: 20, skillPoints: 99, abilities: [{ abilityId: "the_attended_end", level: 1 }], companionBonds: { marrow: 10 } };
+    const r = PR.rankUpAbility(ch, "the_attended_end", C199.rules, { catalog: C199.abilities });
+    check("CCODE-199: a stage craft refuses a skill point, and says why",
+      r.ok === false && /bond/.test(r.why || ""), JSON.stringify(r));
+  }
+  // 5 · ⛔ ANTISOAK, ON ERIK'S OWN THREE EXAMPLES. The middle one is the definition: antisoak AMPLIFIES
+  // a wound and does not create one, so a blow that never landed cannot be made worse.
+  check("CCODE-199: antisoak matches Erik's three worked examples exactly (10/8/6=8 · 6/8/6=0 · 2/0/6=8)",
+    CM.antisoakLanded(10, 8, 6) === 8 && CM.antisoakLanded(6, 8, 6) === 0 && CM.antisoakLanded(2, 0, 6) === 8,
+    `${CM.antisoakLanded(10, 8, 6)} / ${CM.antisoakLanded(6, 8, 6)} / ${CM.antisoakLanded(2, 0, 6)}`);
+  // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
+  // than no map, because it is believed — and every question this week was a question about where a field
+  // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.
+  {
+    const spec199 = readFileSync(join(root, "SYSTEM_SPEC.md"), "utf8");
+    const abs = Object.values(C199.abilities || {});
+    const withCrit = abs.filter(a => a.mechanic?.crit || a.crit).length;
+    const withWard = abs.filter(a => JSON.stringify(a).includes('"wardTypes"')).length;
+    check(`CCODE-199: §39 still tells the truth — crit authored on ${withCrit}, wardTypes on ${withWard}`,
+      /### §39 —|# §39 — THE MECHANIC MAP/.test(spec199)
+      && (withCrit === 0) === /`mechanic\.crit` \/ `crit`.*\*\*0\*\*/s.test(spec199.slice(spec199.indexOf("§39.1"), spec199.indexOf("§39.2")))
+      && (withWard === 0) === /`wardTypes`.*\*\*0\*\*/s.test(spec199.slice(spec199.indexOf("§39.1"), spec199.indexOf("§39.2"))),
+      "the spec claims a count the catalogue no longer has");
+  }
+}
 // ---- CCODE-198: the first picture stays, and the composer waits to be asked ----------------------
 // ⛔ ERIK: "I don't want the first generated image to disappear. sometimes it's quite good... I'm
 // leaning to not even generating a second image immediately. Let the user click regen if they want (that

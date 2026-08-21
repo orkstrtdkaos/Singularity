@@ -223,6 +223,11 @@ export function spendSubPoint(character, sub, rules) {
 export function rankUpAbility(character, abilityId, rules, opts = {}) {
   const owned = character.abilities.find(a => a.abilityId === abilityId);
   if (!owned) return { ok: false, why: "not known" };
+  // ⛔ CCODE-199: A STAGE CRAFT CANNOT BE BOUGHT. `progression: "stage"` means the rank rides the
+  // companion bond, so a skill point spent here would be a point burned in silence — the rank would not move
+  // and nothing would say why. Refused by name, with the reason a player can act on.
+  if (opts.catalog?.[abilityId]?.progression === "stage")
+    return { ok: false, why: "this one deepens with the bond, not with points" };
   const max = rules.leveling?.maxAbilityRank ?? 3;
   if (owned.level >= max) return { ok: false, why: "already mastered" };
   const req = rules.leveling?.rankLevelReq?.[String(owned.level + 1)] ?? 1;

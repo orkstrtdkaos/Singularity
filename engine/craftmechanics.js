@@ -430,3 +430,22 @@ export function deriveMechanic(sources = [], { verbs = null, cfg = null } = {}) 
   }
   return Object.keys(out).length ? out : null;
 }
+
+/** ⛔ SNG-500 §3 / SYSTEM_SPEC §41 — ANTISOAK IS A VULNERABILITY ON DAMAGE THAT ALREADY GOT PAST SOAK.
+ *
+ *  Erik's definition and his three worked examples, which ARE the test:
+ *
+ *      hit 10 · soak 8 · antisoak 6  ->  8    two got through, then the vulnerability applied
+ *      hit  6 · soak 8 · antisoak 6  ->  0    ⛔ ALL OF IT WAS SOAKED BEFORE THE VULNERABILITY COULD ACT
+ *      hit  2 · soak 0 · antisoak 6  ->  8    nothing to soak, so all two got through and took the +6
+ *
+ *  ⚠️ THE MIDDLE ONE IS THE DEFINITION. Antisoak AMPLIFIES a wound; it does not create one. A blow that
+ *  never landed cannot be made worse — which is also why this is not soak reduction, and why it stacks with
+ *  piercing rather than competing: a piercing strike ignores the soak AND then adds the antisoak.
+ *
+ *  Pure, and separated from the layer walk deliberately: the arithmetic is one line and the reason it is
+ *  that line is three paragraphs, so it gets its own name and its own test. */
+export function antisoakLanded(hit, soak = 0, antisoak = 0) {
+  const through = Math.max(0, num(hit, 0) - Math.max(0, num(soak, 0)));
+  return through > 0 ? through + Math.max(0, num(antisoak, 0)) : 0;
+}

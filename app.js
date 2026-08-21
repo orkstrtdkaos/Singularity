@@ -45,7 +45,7 @@ import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainC
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
 import { companyPlaces } from "./engine/ladder.js";   // SNG-390: how many places rapport has earned
-import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds, shareAtOrAbove } from "./engine/companions.js";
+import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds, shareAtOrAbove, syncStageTaughtRanks, stageTaughtRank, stageTaughtBy } from "./engine/companions.js";
 // SNG-309: what happens when the player goes down — and the SAME death ladder every figure is on.
 import { incapacitationOutcome, playerDeathState, deathStopsPlay, deathLine, wireDeathModel } from "./engine/incapacitation.js";
 import * as DeathModel from "./engine/death.js";
@@ -97,7 +97,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.163";
+const APP_VERSION = "1.9.164";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3124,6 +3124,12 @@ function migrate(c) {
   // Idempotent (reconcileVersion gate); player-facing results surface as a login moment.
   // profile passed so the Phase-1 seed step can copy the player's aggregate style once.
   const rec = reconcile(c, "character", { content: CONTENT, profile });
+  // ⛔ CCODE-199: A SAVE THAT PREDATES THE STAGE WIRING ARRIVES CORRECT, NOT FROZEN. A companion-taught
+  // craft takes its rank from the bond, and a character who earned the bond before the engine could read
+  // `progression: "stage"` is sitting at rank 1 with a stage-3 companion. Synced once at load, and at every
+  // bond move after — not because the load is the right place for a rule, but because a save older than the
+  // rule has no other moment to learn it.
+  try { syncStageTaughtRanks(c, fullCatalog(), CONTENT.companions, CONTENT.rules); } catch { /* a rank sync never blocks a load */ }
   if (rec.playerFacing && (rec.notes.length || rec.offers.length)) c._reconcileNotes = rec.notes;
   if (rec.warnings.length) console.warn("[reconcile] character:", rec.warnings);
   // SNG-133 backfill: an arc seeded by reconcile gets the SAME model enrichment a newly-created
@@ -4059,7 +4065,7 @@ function endEncounter(outcome) {
   const t = encXp[enc.def.type] || encXp.default || {};
   const xpMap = { opponent_fell: t.winXp, opponent_yielded: t.winXp, fled: t.fleeXp, yielded: t.yieldXp, completed: t.completeXp, abandoned: t.abandonXp, solved: t.solveXp, walked_away: t.walkAwayXp, incapacitated: 0 };
   character.xp += Math.max(0, xpMap[outcome] ?? 0);
-  for (const c of activeCompanions(character, CONTENT.companions)) growBond(character, c.id, "encounter", CONTENT.rules, c.stages, { worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() }); // SNG-361: the log. ⚠️ c.stages passed for consistency ONLY — this site DISCARDS the events, and a bond that crosses grantAt during an encounter is recovered by backfill.js, not by this line.
+  for (const c of activeCompanions(character, CONTENT.companions)) growBond(character, c.id, "encounter", CONTENT.rules, c.stages, { catalog: fullCatalog(), companions: CONTENT.companions, worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() }); // SNG-361: the log. ⚠️ c.stages passed for consistency ONLY — this site DISCARDS the events, and a bond that crosses grantAt during an encounter is recovered by backfill.js, not by this line.
   character.activeEncounter = null;
   movesOpen = false; // SNG-252b §2a: reset to COLLAPSED, so the next encounter opens clean
   if (outcome === "incapacitated") {
@@ -6107,11 +6113,11 @@ function applyTurn(turn, resolution, playerWords = null) {
     for (const c of comps) {
       const unlocked = [];
       if ((turn.deeds || []).length) {
-        unlocked.push(...growBond(character, c.id, "deed", CONTENT.rules, c.stages, { worldDay: wdNow }).events);
+        unlocked.push(...growBond(character, c.id, "deed", CONTENT.rules, c.stages, { catalog: fullCatalog(), companions: CONTENT.companions, worldDay: wdNow }).events);
         // SNG-200B §2c: a companion present for a deed REMEMBERS it — its shared history with the character.
         for (const deed of turn.deeds) noteCompanionWitnessed(character, c.id, { ...deed, day: dayNow });
       }
-      if (resolution?.equipHelpers?.includes(c.name)) unlocked.push(...growBond(character, c.id, "assist", CONTENT.rules, c.stages, { worldDay: wdNow }).events);
+      if (resolution?.equipHelpers?.includes(c.name)) unlocked.push(...growBond(character, c.id, "assist", CONTENT.rules, c.stages, { catalog: fullCatalog(), companions: CONTENT.companions, worldDay: wdNow }).events);
       if (unlocked.includes("grant") && c.bondGrants) {
         const def = sanitizeNewAbility(c.bondGrants, { verbVocab: genContractDeps().vocabs["function_vocabulary.verbs"] }); // SNG-250 §3: born with real families
         if (def && !character.abilities.some(a => a.abilityId === def.id)) {

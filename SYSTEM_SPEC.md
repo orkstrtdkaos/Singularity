@@ -2373,3 +2373,130 @@ in none of the three.**
 
 **One encouraging signal:** Mind's most-filled column is `FCT` (name a fact) and Body's is `DMG`. ⚠️ **The
 schools are producing distinct mechanical identities, not just distinct prose.**
+
+---
+
+# §39 — THE MECHANIC MAP: which authored field the engine actually reads, and where
+
+⛔ **THIS SECTION EXISTS BECAUSE BOTH OF US KEPT GETTING IT WRONG.** In one week: Aevi authored damage dice
+believing they had no reader (they do), authored healing dice believing they would be wired (they are not),
+asked whether contracts reach the model (they do, verbatim), and diagnosed a companion ceiling that does not
+exist. I told her the rank cap was a convention (it is an enforced dial) and that `crit` was authorable (it
+is, and nothing authors it). **Every one of those was a question about WHERE A FIELD IS READ, and the answer
+was always in the code and never written down.**
+
+⚠️ **THE RULE FOR THIS SECTION: when a change moves a reader, this table moves in the same commit.** A map
+that lags the code is worse than no map, because it is believed.
+
+## §39.1 — The combat mechanic fields
+
+| authored field | read by | where | authored on |
+|---|---|---|---|
+| `mechanic.dice` | `rollMagnitude` → the landed hit | `skill_battle.js` damage path, guarded `shape === "damage"` | 60 |
+| `mechanic.magnitude` | mirrored to `soak` for a guard | `craftmechanics.js` | 261 |
+| `mechanic.soak` + layers | the hit's soak walk, matched by `type` and `rank` | `skill_battle.js` | 30 |
+| `mechanic.evasion` + `evasionRank` | `evasionOf` — rank 1 still findable by a reader, rank 2+ not | `skill_battle.js` | **7** |
+| `penetration` | splits `cutThrough` (rank ≤ pen) from `soak` | `skill_battle.js` | **4** |
+| `mechanic.duration` | craft duration in rounds, capped by `craftDurationMax` | `skill_battle.js` | many |
+| `mechanic.crit` / `crit` | `critFor`, with a per-craft cap | `craftmechanics.js` | ⛔ **0** |
+| `damageType` | `answers(l)` — which soak layers apply | `skill_battle.js` | 26 |
+| `wardTypes` | the same match, from the ward's side | `skill_battle.js` | ⛔ **0** |
+| `mechanic.dice` on a **healing** shape | ⛔ **NOTHING** | — | 27 |
+
+⛔ **SHAPE IS RESOLVED, NOT AUTHORED.** `strike` resolves to `damage` and rolls; `hobble` does not. Author a
+damage number on a hobble-shaped craft and no die is ever thrown.
+
+⛔ **TYPED WARDING HAS NEVER BEEN ALIVE.** `answers = l => !l.type || !dmgType || l.type === dmgType` — an
+untyped layer answers everything. With `wardTypes` on zero crafts, the 26 typed attacks are typed against
+nothing and `wrongType` can never be non-empty.
+
+## §39.2 — What the model is told about a craft
+
+⛔ **`rank.grants` REACHES THE MODEL VERBATIM.** `progression.abilitiesForGM`, registered as
+`abilityLawDetail` with `reachedBy: "always"` in `turn` / `ask` / `gambit`, emits per owned craft:
+
+    ### <name> — rank N "<rank name>" (<energy>)
+    CAN: <rank.grants>
+    CANNOT (at this rank): <rank.cannot>
+    NOT FOR: <notFor>
+    HARM: <harmRungGloss>
+
+⚠️ **Three bounds that decide how a contract must be written:**
+
+1. ⛔ **ONLY THE RANK HELD.** One row, never the ladder. *"As r1, but wider"* tells the model nothing,
+   because it never saw r1. **Every rank's `grants` must be self-contained.**
+2. ⚠️ **ONLY OWNED CRAFTS.** A contract meant to bind when the FOE uses it has no wire.
+3. ⚠️ **`cannot` IS SENT AND IS LOAD-BEARING.** It is the clamp the model reads.
+
+## §39.3 — Rank, and the two ways it moves
+
+| how | dial / field | enforced at |
+|---|---|---|
+| bought with points | `rules.leveling.maxAbilityRank` (**3**) | `progression.js` — `"already mastered"` |
+| ⛔ **carried by a bond** | `ability.progression: "stage"` | `companions.syncStageTaughtRanks` |
+
+**A `progression: "stage"` craft takes its rank from its teacher's companion bond stage** and **cannot be
+bought** — `canRankUp` refuses it with *"this one deepens with the bond, not with points."*
+⚠️ **ONE WRITER, NO NEW READERS:** `owned.level` is synced where the bond moves and once at load, so all
+sixteen existing readers of `owned.level` stay correct without knowing the rule exists. **It follows the
+bond DOWN as well as up** — a lent craft is lent.
+
+**Companion stages:** thresholds spread from `stage2At` (**3**) to `maxBond` (**10**). 2 stages → `[3]`;
+3 → `[3, 10]`; 4 → `[3, 7, 10]`.
+
+---
+
+# §40 — INCAPACITATION AND DEATH: what the engine may impose, and what happens after
+
+⛔ **ERIK'S RULING, 2026-08-16, SUPERSEDING THE OLD LAW.** The engine's previous rule was *"incapacitation,
+never engine-imposed death"* — a floor written when nothing could impose either. **The engine may now impose
+incapacitation AND death when the situation calls for it.**
+
+⚠️ **"WHEN THE SITUATION CALLS FOR IT" IS THE WHOLE OF THE RULE, AND IT IS NOT A DIFFICULTY SETTING.** A
+death is a consequence the fiction earned, not a number the dice reached. The engine imposes it where the
+story has already made it true — not as a failure state attached to a health bar.
+
+## §40.1 — What a craft may impose
+
+- **ACTION_LOSS** — the target loses their next action. `phaseDenied(…, "sense")` is the existing shape;
+  the action step needs the same.
+- **UNCONSCIOUS** — `encounters.checkIncapacitation` already holds the end-state. A craft that imposes it
+  ⛔ **must carry a resist that degrades to ACTION_LOSS**, or it is save-or-lose.
+- **DEATH** — reserved for where the fiction has made it inevitable. ⛔ **Never the result of a single roll.**
+
+## §40.2 — When a PLAYER CHARACTER dies
+
+⚠️ **THIS IS THE PART THAT NEEDS INTENT, NOT MECHANISM.** A death that ends the save is a different game
+from one that ends a chapter, and the difference must be a decision rather than a default.
+
+- **The world remembers.** A dead player character is a figure the valley knows about: their deeds stand,
+  their standing stands, and the codex keeps them. **`enterDeathState` already models a legend's death as a
+  reachable state with a depth, not a deletion** — the same shape applies here.
+- **The death is a LANDMARK, and landmarks are rationed.** The world tick already downgrades a second epic
+  death that comes too soon (`deathCooldownDays`). ⛔ **The same discipline applies to the player: a death
+  that arrives cheaply is a death nobody believes.**
+- **What continues is Erik's call and is NOT yet decided:** a new character in the same world, a return
+  along the death road, or an ending. ⚠️ **Until it is decided, no code may assume one** — and the state
+  must be recorded richly enough that any of the three remains possible.
+
+---
+
+# §41 — ANTISOAK
+
+⛔ **Erik's definition: antisoak is a VULNERABILITY on damage that ALREADY GOT PAST SOAK.** It is not soak
+reduction, and it **stacks with piercing rather than competing** — a piercing strike ignores soak *and* adds
+the antisoak.
+
+    landed = max(0, hit - soak);
+    if (landed > 0) landed += antisoak;
+
+**His three worked examples, and they are the test:**
+
+| hit | soak | antisoak | landed | why |
+|---|---|---|---|---|
+| 10 | 8 | 6 | **8** | 2 got through, then the vulnerability applied |
+| 6 | 8 | 6 | ⛔ **0** | **all of it was soaked before the vulnerability could take effect** |
+| 2 | 0 | 6 | **8** | nothing to soak, so all 2 got through and took the +6 |
+
+⚠️ **THE MIDDLE ROW IS THE ONE THAT DEFINES IT.** Antisoak amplifies a wound; it does not create one. A
+blow that never landed cannot be made worse.

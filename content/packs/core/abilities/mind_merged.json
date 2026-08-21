@@ -119,7 +119,9 @@
    "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field.",
    "_idWas": "the_solved_route",
    "_nameWas": "The Solved Route",
-   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do."
+   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do.",
+   "schoolAffinity": "cog_instrumented",
+   "_schoolAffinity": "⚠️ SNG-508. Inherited from `the_clear_path`, the cogitant parent of the three-way navigation merge. ⛔ THE OTHER TWO PARENTS WERE SYLLOGIST AND FIGURIST AND CARRIED NONE — a merged craft takes the affinity of the sect whose school actually named it."
   },
   {
    "id": "physicians_tome",
@@ -409,7 +411,9 @@
    ],
    "_merged5": "⛔ SNG-464: ABSORBS Inescapable Conclusion (L4) and Closing Argument (L5) as ranks 4 and 5. ⚠️ ALL THREE WERE ONE IDEA — 'lay a matter out so the argument ends', 'bind a reasoning mind to a conclusion', 'walk them to a conclusion that unmakes their footing'. ⛔ NOW A FIVE-RANK LADDER: settle · persist · community-wide · compel · end them.",
    "_rankFix": "⛔ SNG-465. Erik: 'We don't have rank methodology beyond r3 — which tells me you haven't read enough about how the system works yet.' ⚠️ HE IS RIGHT AND I SHOULD HAVE CHECKED: 282 abilities carry 3 ranks, 38 carry 2, 21 carry 1, and the ONLY 5-rank tree in the corpus was the one I had just authored. ⛔ COMPULSION FOLDED INTO r2, FINALITY AND PERSISTENCE INTO r3.",
-   "_rationalising": "⛔ SNG-477. Erik: 'Stop this way of thinking — this is a GAME and this is basically a MAGIC SKILL. It doesn't need to make complete sense.'\n⚠️ I HAD WRITTEN 'and they do not feel cheated, WHICH IS WHY IT WORKS TWICE' — a clause justifying why a magic bargain would be socially sustainable. ⛔ NOBODY ASKED. The skill does the thing; the bound says once per season; that is the whole rule."
+   "_rationalising": "⛔ SNG-477. Erik: 'Stop this way of thinking — this is a GAME and this is basically a MAGIC SKILL. It doesn't need to make complete sense.'\n⚠️ I HAD WRITTEN 'and they do not feel cheated, WHICH IS WHY IT WORKS TWICE' — a clause justifying why a magic bargain would be socially sustainable. ⛔ NOBODY ASKED. The skill does the thing; the bound says once per season; that is the whole rule.",
+   "schoolAffinity": "cog_reaching",
+   "_schoolAffinity": "⚠️ SNG-508. Inherited from `the_necessary_case` (cog_reaching), absorbed at SNG-450."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",

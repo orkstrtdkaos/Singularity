@@ -2500,3 +2500,142 @@ the antisoak.
 
 ⚠️ **THE MIDDLE ROW IS THE ONE THAT DEFINES IT.** Antisoak amplifies a wound; it does not create one. A
 blow that never landed cannot be made worse.
+
+---
+
+# §42 — THE MANIFEST IS THE ONLY DOOR
+
+⛔ **SNG-064 LAW 10: a content file that is not in a manifest DOES NOT EXIST.** Not "loads with a warning" —
+does not exist. `content/packs/<pack>/manifest.json` `provides` is a **load whitelist**, and the loader
+reads nothing else.
+
+**This is the single most expensive recurring failure in the project.** On 2026-08-21 a sweep found
+**27 files on disk and in no manifest** — 12 ability files (27 abilities: the entire Mind rewrite, the Body
+work, `physical_ranged.json`, and `attunement.json`) plus 15 rules/lore files including
+`mechanic_effects.json`, `healing_intent.json` and `tempo.json`, which are the whole SNG-499/500 content
+layer. `native_grants.json` had been pointing 21 traditions at an `attunement` the engine could not load.
+
+## §42.1 — The two failure modes, which look identical and are not
+
+| mode | symptom | fix |
+|---|---|---|
+| **on disk, unregistered** | the content silently does not exist; every file-level check passes | add the manifest entry |
+| **registered, unloaded** | listed in `provides`, but no module ever reads it | find the reader, or accept it as `KNOWN_UNLOADED` with a note saying why |
+
+⚠️ **`state.js` ALSO fetches several rules files by HARDCODED PATH** (`traditions`, `origins`,
+`backgrounds`, `regions`, `the_accords`), bypassing the manifest entirely. **There are two loading
+mechanisms and the manifest is not the sole source of truth.** Until that is unified, "is it in the
+manifest" is necessary but not sufficient — check the hardcoded fetches too.
+
+## §42.2 — ⛔ VERIFYING AGAINST THE FILES ON DISK IS NOT VERIFICATION
+
+**Both CCode and Aevi produced a false "0 dead ids" result within one hour of each other by building a
+"live" id set from the ability FILES.** The files were correct. The catalogue was not.
+
+⛔ **The only honest check is against the LOADED catalogue.** `tests/headless_content.mjs` exists for
+exactly this and runs in Node with no browser:
+
+```js
+global.localStorage = { _d:{}, getItem(k){return this._d[k]??null}, setItem(k,v){this._d[k]=String(v)} };
+const { loadContentHeadless } = await import("./tests/headless_content.mjs");
+const C = await loadContentHeadless();          // C.abilities, C.items, C.locations, C.origins, ...
+const live = new Set(Object.keys(C.abilities)); // ← THIS is what "exists" means
+```
+
+**Corollary for gates:** a check that reads `readdirSync("content/packs/core/abilities")` is checking the
+files, not the game. Both have their place — but only a gate over the loaded catalogue can see a manifest
+gap, and only a gate over the directory can see an unregistered file. **Ship both, and say which is which.**
+
+## §42.3 — The loader fills gaps; it must never clobber (CCODE-200)
+
+`engine/state.js` merges every ability as `{ ...a, powerSystem: pack.powerSystem || a.powerSystem }`.
+
+⚠️ **It used to be `powerSystem: pack.powerSystem`, unconditionally.** 13 registered packs declare no
+pack-level `powerSystem`, so **28 abilities loaded with their own authored value overwritten to
+`undefined`** — no palette, no physics phrase, no substrate gate, and nothing thrown. **The pack wins where
+it declares one; the ability's own value only fills the gap.**
+
+**The general rule this stands for:** a pack-level default is a DEFAULT. When a merge stamps a field
+unconditionally, every authored value underneath it is being thrown away silently, and no file-level check
+can see it. Gated by `CCODE-200: no ability loads without a powerSystem`.
+
+---
+
+# §43 — ABILITY IDENTITY: what an id carries, and why merging ids is expensive
+
+## §43.1 — Everything keyed on an ability id
+
+⛔ **An ability id is not a label. It is a join key**, and these are the tables joined to it. **When an id
+changes or disappears, every row here is orphaned silently — none of it throws.**
+
+| what | file / field | what breaks when the id dies |
+|---|---|---|
+| native grants | `rules/native_grants.json` → `traditionNativeGrants` | a people's by-right craft |
+| branch forks | `rules/branch_forks.json` (keyed BY ability id) | the fork is unreachable data |
+| emergence combos | `rules/emergence_recipes.json` → `components` | the discovery can never be minted |
+| combination recipes | `rules/combination_recipes.json` | same |
+| school affinity | `schoolAffinity` on the ability | the craft leaves its school |
+| innate substrate | `rules/origins.json` → `innatePrecursor`, `wildCurrent` | an origin's birthright |
+| ward denials | `rules/encounter_frame_content.json` → `wardDenials` | ⚠️ **the ward stops denying, silently** |
+| location affinity | `rules/location_affinities.json` | the place stops favouring the craft |
+| art palette | `tradition` / `powerSystem` → `rules/tradition_visual_aesthetics.json` | falls back to the house palette |
+| the wheel | `functions` → `rules/function_vocabulary.json` | ⚠️ **grey badge, and unfilterable** |
+| player saves | `character.abilities[].abilityId`, `practice.uses`, `coActivations`, `forkChoices` | the craft a player earned by name |
+
+**Rule: an id change is a MIGRATION, not a text pass.** Grep the referrers first and write the rename map
+**before** the rename. `rules/ability_rename_map.json` is that map for the 2026-08-14→16 pass.
+
+## §43.2 — ⚠️ THE ID NAMESPACE IS FLAT, AND ABILITIES SHARE IT WITH REGIONS
+
+`the_ascent` and `the_descent` are **both** an ability id and a live region id. `rules/traditions.json`
+carries both meanings **in the same file**:
+
+```json
+"region": "the_ascent",          ← the REGION. Not renamed.
+"abilities": ["ascent", ...]     ← the CRAFT. Renamed.
+```
+
+⛔ **A blind sweep over quoted strings WILL cross them.** One did, on 2026-08-21, across **six files**.
+The nanite-field gate caught the first within the minute; the other five survived until someone asked
+whether the work had been pushed.
+
+⚠️ **THE RELIABLE SIGNAL IS THE KEY, NEVER THE VALUE.** These four keys always name a place and never a
+craft — a sweep must skip them outright:
+
+    region · regionId · homeRegion · startingRegion
+
+**Before any corpus-wide id rewrite:** intersect the id list against region, location, tradition, school
+and people ids, and handle the overlap by hand. Today that intersection is exactly
+`{the_ascent, the_descent}`. **Gated by `CCODE-201`** — every id-shaped value under a place key must name
+a real region. It is a **ratchet at 11**, because it opened red on four region ids nothing defines
+(`the_stillhold`, `the_cogitarium`, `the_unspooling`, `the_crossing`, `the_foothills`); its real job is to
+catch the *next* sweep, and for that a ratchet is enough.
+
+⚠️ Filter to **id-shaped values only** (`/^[a-z][a-z0-9_]*$/`). `quest_structure.json` carries
+`"region": "Where it lives."` as schema prose, and a doc describing a field is not a reference to a place.
+
+## §43.3 — ⛔ ERIK'S RULING: SHARE THE STAT BLOCK, KEEP THE IDS
+
+**SNG-454 collapsed 32 per-tradition senses into one shared `attunement`.** The diagnosis behind it was
+right — 32 crafts carrying identical energy 3 / magnitude 3 / the same three-rank arc is 32 places to get a
+tuning change wrong. **The remedy went one step too far.**
+
+⛔ **Erik's ruling (2026-08-21): the mechanical identity is the bug; the distinct identity is the feature.
+Keep the 32 ids and delete the 32 duplicate stat blocks — one shared template the 32 INHERIT, rather than
+one shared ability they COLLAPSE INTO.**
+
+**Why the id is the part worth keeping**, by §43.1: under a collapse every tradition's L1 wheel node is
+literally the same node; one emergence recipe fires for all 32 traditions instead of `prism_sight +
+sonic_resonance` being a *radiant* discovery; forks, affinities and native grants lose their subject; and a
+player's earned craft loses its name.
+
+⚠️ **The clearest single symptom:** merged `attunement` carried `tradition: "*"` and **resolved no palette
+at all**. A craft that belongs to everyone can be painted as no one. Restore the ids and each inherits its
+own tradition's palette for free.
+
+**The per-tradition prose layer (`sectFlavour`) is still the right idea** — it attaches to 32 real entries
+instead of one wildcard.
+
+**Measured cost of the collapse, as of 2026-08-21:** 88 references to a culled sense still live in `rules/`
+across 12 files · 2 combination recipes collapse to `attunement + attunement` and become unmintable ·
+1 branch fork orphaned · 6 `schoolAffinity` entries lost (19 → 13) · seraphic's innate precursor dead.

@@ -82,7 +82,9 @@
      "wildcraft",
      "scatter"
     ],
-    "physical": []
+    "physical": [
+     "wrong_target"
+    ]
    }
   },
   "lattice": {
@@ -130,12 +132,15 @@
   "umbral": {
    "anchors": [
     "darksight",
-    "dim"
+    "dim",
+    "long_dark"
    ],
    "byLean": {
     "mental": [
      "umbracraft",
-     "shroud"
+     "shroud",
+     "harbor",
+     "shadowed_mending"
     ],
     "practical": [
      "false_trail"
@@ -145,13 +150,16 @@
   "blazeborn": {
    "anchors": [
     "lightsense",
-    "kindle"
+    "kindle",
+    "radiant_ground"
    ],
    "byLean": {
     "mental": [
      "radiance",
      "glass_work",
-     "blazing_word"
+     "blazing_word",
+     "cleansing_light",
+     "blaze_wall"
     ]
    }
   },
@@ -179,7 +187,9 @@
    "byLean": {
     "mental": [
      "palework",
-     "grey_hand"
+     "grey_hand",
+     "grey_road",
+     "kept_breath"
     ],
     "practical": [
      "wither"
@@ -191,7 +201,8 @@
   },
   "abyssal": {
    "anchors": [
-    "appetite_sense"
+    "appetite_sense",
+    "choir_sustains"
    ],
    "byLean": {
     "social": [
@@ -199,19 +210,22 @@
      "offered_price",
      "appetite_strike",
      "dread_mantle",
-     "descent_path"
+     "descent_path",
+     "consumed_wound"
     ]
    }
   },
   "seraphic": {
    "anchors": [
-    "the_measuring_eye"
+    "the_measuring_eye",
+    "sustained_order"
    ],
    "byLean": {
     "mental": [
      "ascent",
      "judged_strike",
-     "raised_form"
+     "raised_form",
+     "ascent_path"
     ]
    }
   },
@@ -233,18 +247,23 @@
   },
   "wright": {
    "anchors": [
-    "makers_eye"
+    "makers_eye",
+    "raised_thing"
    ],
    "byLean": {
     "physical": [
      "makecraft",
-     "work_speaks"
+     "work_speaks",
+     "weapon_at_hand",
+     "built_way",
+     "ongoing_work"
     ]
    }
   },
   "threnodist": {
    "anchors": [
-    "the_true_feeling"
+    "the_true_feeling",
+    "wellspring"
    ],
    "byLean": {
     "social": [
@@ -276,12 +295,18 @@
     "mental": [
      "falsecraft",
      "wrong_reality",
-     "maintained_veil"
+     "maintained_veil",
+     "better_story",
+     "false_target",
+     "false_door"
     ]
    }
   },
   "verist": {
-   "anchors": [],
+   "anchors": [
+    "true_ground",
+    "held_truth"
+   ],
    "byLean": {
     "mental": [
      "verity",
@@ -294,19 +319,22 @@
   "enginewright": {
    "anchors": [
     "mech_sense",
-    "mend_device"
+    "mend_device",
+    "running_engine"
    ],
    "byLean": {
     "practical": [
      "command_engine",
-     "fault_strike"
+     "fault_strike",
+     "mechanical_defense"
     ]
    }
   },
   "numinous": {
    "anchors": [
     "numen_sense",
-    "steady_soul"
+    "steady_soul",
+    "unbroken_practice"
    ],
    "byLean": {
     "social": [
@@ -317,24 +345,30 @@
   },
   "horizon": {
    "anchors": [
-    "way_sense"
+    "way_sense",
+    "road_ahead"
    ],
    "byLean": {
     "physical": [
      "spanwork",
-     "land_knowledge"
+     "land_knowledge",
+     "long_reach",
+     "fresh_horizon",
+     "kept_distance"
     ]
    }
   },
   "hourkeeper": {
    "anchors": [
-    "hour_sense"
+    "hour_sense",
+    "long_watch"
    ],
    "byLean": {
     "mental": [
      "hourcraft",
      "wrong_moment",
-     "wasted_moment"
+     "wasted_moment",
+     "given_time"
     ]
    }
   },
@@ -345,7 +379,10 @@
    ],
    "byLean": {
     "physical": [
-     "long_road"
+     "long_road",
+     "edge",
+     "stand",
+     "advance"
     ],
     "practical": [
      "soldiers_hand",
@@ -365,7 +402,8 @@
     "social": [
      "stillcraft",
      "price_shown",
-     "safe_ground"
+     "safe_ground",
+     "laid_ground"
     ],
     "physical": [
      "step_between"
@@ -397,5 +435,6 @@
     ]
    }
   }
- }
+ },
+ "_notes_SNG507": "⛔ SNG-507. 91 GRANT SLOTS WERE LOST IN THE SNG-501 RE-POINT AND 87 ARE BACK.\n⚠️ CAUSE: my rename map was built from the REVERT LOGS, which only covered abilities I explicitly cut. The de-article pass renamed 342 ids the logs never saw — so a slot reading `the_long_dark` had no map entry, was not live, and I DROPPED IT rather than deriving `long_dark`. ⛔ I FIXED THE MAP AFTERWARDS AND NEVER RE-RAN THE PASS AGAINST THE ORIGINAL.\n⛔ FOUR ARE GENUINELY GONE AND STAY GONE — `noesis`, `logos` (pole-mastery skills, cut SNG-463), `the_held_form` (cut SNG-457), `the_long_haul` (merged into Second Wind, SNG-479). Their traditions are under cap and need a replacement grant chosen deliberately, not backfilled."
 }

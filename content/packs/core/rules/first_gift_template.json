@@ -1,0 +1,132 @@
+{
+ "schemaVersion": 1,
+ "id": "first_gift_template",
+ "kind": "rules",
+ "note": "⛔ SNG-506. THE SHARED STAT BLOCK FOR THE 25 FIRST-GIFT SENSES. Erik's ruling: 'KEEP THE IDS, SHARE THE STAT BLOCK. The mechanical identity was the bug; the distinct identity is the feature.'\n⚠️ THE COLLAPSE I SHIPPED (SNG-454) WAS THE RIGHT DIAGNOSIS AND THE WRONG FIX. 25 copies of one stat block is 25 places to get a tuning change wrong — that stays fixed. Throwing away 32 ids cost 88 live references, 2 unmintable recipes, 3 emergence combos, a branch fork, 6 affinities and a dead seraphic origin — that is undone.",
+ "_measuredNotAssumed": "⛔ I CHECKED BEFORE WRITING THIS AND THE 32 WERE NEVER UNIFORM. 25 share L1 / energy 3-4 / magnitude 3 / duration 1 / shape `setup` exactly. SEVEN DO NOT AND ARE NOT IN THE TEMPLATE — see `excluded`. ⚠️ MY CULL TREATED ALL 32 AS ONE SKILL WRITTEN 32 TIMES; it was one skill written 25 times, plus 7 crafts that only looked like it.",
+ "template": {
+  "levelReq": 1,
+  "energyCost": 3,
+  "shape": "setup",
+  "intensity": "moderate",
+  "harmRung": "none",
+  "nativeOrCombination": "native",
+  "mechanic": {
+   "magnitude": 3,
+   "duration": 1
+  },
+  "challengeTypes": [
+   "INVESTIGATE",
+   "SURVIVE"
+  ],
+  "_energyNote": "⚠️ 19 of 25 sit at 3, six at 4, two at 1. THE TEMPLATE IS 3; an entry may override with a stated reason.",
+  "rankArc": [
+   {
+    "rank": 1,
+    "gains": "deepen",
+    "harmRung": "none",
+    "gainAxes": [],
+    "_shape": "⛔ PERCEIVE THE TRADITION'S DOMAIN IN WHAT IS PRESENT — directly, without instrument or inference. The entry names WHAT is perceived."
+   },
+   {
+    "rank": 2,
+    "gains": "deepen",
+    "harmRung": "none",
+    "gainAxes": [
+     "quality",
+     "duration"
+    ],
+    "_shape": "⚠️ ADDS DEPTH AND HISTORY — what the domain HAS BEEN, and what is deliberately hidden within it."
+   },
+   {
+    "rank": 3,
+    "gains": "broaden",
+    "harmRung": "none",
+    "gainAxes": [
+     "scope"
+    ],
+    "_shape": "⛔ ADDS SCALE — a whole place at once, as one continuous fabric, and where it is torn."
+   }
+  ]
+ },
+ "_whatEachEntryHOLDS": "⛔ THE TEMPLATE HOLDS THE STAT BLOCK. THE ENTRY HOLDS EVERYTHING THAT MAKES IT THAT PEOPLE'S CRAFT:\n   `id` and `name` — ⚠️ THE THING THE COLLAPSE THREW AWAY. 88 references, a player's earned craft, and every recipe that names it.\n   `tradition` — and with it the PALETTE. ⛔ `attunement` carried `tradition: \"*\"` and resolved no palette at all, which is what held the art ratchet red. A craft that belongs to everyone is painted as no one.\n   `powerSystem` · `description` · `narrationHints` · `notFor` · `bounds`\n   THE THREE RANKS' OWN `grants` AND `cannot` — the arc is shared, the words are not.\n   `functions` — ⚠️ NOT UNIFORM AND SHOULD NOT BE: reveal 9 · foresee+reveal 13 · reveal+track 7. A Mason tracks a load path; an Ashwarden foresees an ending; a Lattice factor neither.",
+ "cohort": [
+  "appetite_sense",
+  "body_read",
+  "chaos_sense",
+  "deathsense",
+  "echo_sense",
+  "fault_sense",
+  "hour_sense",
+  "keen_appraisal",
+  "lifesense",
+  "lightsense",
+  "mech_sense",
+  "mind_read_folk",
+  "numen_sense",
+  "order_sense",
+  "pattern_sense",
+  "prism_sight",
+  "read_the_fight",
+  "read_the_room",
+  "see_the_made_thing",
+  "stone_read",
+  "storykeeper",
+  "the_measuring_eye",
+  "the_true_feeling",
+  "tremor_sense",
+  "way_sense"
+ ],
+ "excluded": {
+  "address_sense": {
+   "why": "⛔ NOT A FIRST-GIFT SENSE — different level, cost, magnitude or shape. Restored as its own craft with no template.",
+   "levelReq": 3,
+   "energyCost": 8,
+   "magnitude": 6,
+   "shape": "setup"
+  },
+  "echo_memory": {
+   "why": "⛔ NOT A FIRST-GIFT SENSE — different level, cost, magnitude or shape. Restored as its own craft with no template.",
+   "levelReq": 3,
+   "energyCost": 11,
+   "magnitude": 5,
+   "shape": "setup"
+  },
+  "the_kept_hour": {
+   "why": "⛔ NOT A FIRST-GIFT SENSE — different level, cost, magnitude or shape. Restored as its own craft with no template.",
+   "levelReq": 5,
+   "energyCost": 14,
+   "magnitude": 9,
+   "shape": "setup"
+  },
+  "the_plain_seeing": {
+   "why": "⛔ NOT A FIRST-GIFT SENSE — different level, cost, magnitude or shape. Restored as its own craft with no template.",
+   "levelReq": 1,
+   "energyCost": 4,
+   "magnitude": 6,
+   "shape": "reveal"
+  },
+  "the_read_hunger": {
+   "why": "⛔ NOT A FIRST-GIFT SENSE — different level, cost, magnitude or shape. Restored as its own craft with no template.",
+   "levelReq": 1,
+   "energyCost": 3,
+   "magnitude": 5,
+   "shape": "reveal"
+  },
+  "the_read_want": {
+   "why": "⛔ NOT A FIRST-GIFT SENSE — different level, cost, magnitude or shape. Restored as its own craft with no template.",
+   "levelReq": 1,
+   "energyCost": 4,
+   "magnitude": 6,
+   "shape": "reveal"
+  },
+  "the_true_figure": {
+   "why": "⛔ NOT A FIRST-GIFT SENSE — different level, cost, magnitude or shape. Restored as its own craft with no template.",
+   "levelReq": 1,
+   "energyCost": 4,
+   "magnitude": 5,
+   "shape": "reveal"
+  }
+ },
+ "_attunement": "⛔ RETIRED FROM THE LEARNABLE CATALOGUE AND BECOMES THIS TEMPLATE. CCode's reason decides it: `tradition: \"*\"` resolves no palette and holds the §C3 art ratchet red. ⚠️ The `sectFlavour` map I authored on it is not wasted — it is the per-tradition layer, and it now attaches to 25 real entries instead of one wildcard. ⛔ EIGHT OF THE 32 HAVE NO sectFlavour ENTRY because I keyed it by TRADITION and four traditions carry more than one sense; the restore does not need it, since each entry keeps its own authored prose."
+}

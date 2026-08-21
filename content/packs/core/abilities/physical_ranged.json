@@ -26,19 +26,20 @@
     {
      "rank": 1,
      "name": "Underhand",
-     "grants": "One blade at 8 paces, from concealment or mid-stride. No windup a watcher could call.",
+     "grants": "⛔ DEALS 1d6 DAMAGE at 8 paces. Put a knife, a star or a spike into someone underhand, from concealment or mid-stride — no windup a watcher could call.",
      "cannot": "Cannot punch through mail or a shield; one blade per action.",
      "functions": [
       "strike"
      ],
      "gains": "deepen",
      "harmRung": "damaging",
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "One blade at 8 paces, from concealment or mid-stride. No windup a watcher could call."
     },
     {
      "rank": 2,
      "name": "Second Knife",
-     "grants": "Two blades in the time of one — the same target twice, or two targets standing close.",
+     "grants": "⚠️ TWO BLADES IN THE TIME OF ONE, each dealing 1d6 — the same target twice, or two targets standing close.",
      "functions": [
       "strike"
      ],
@@ -48,12 +49,13 @@
      "_nameWas": "The Second Knife",
      "gainAxes": [
       "targets"
-     ]
+     ],
+     "_grantsWas": "Two blades in the time of one — the same target twice, or two targets standing close."
     },
     {
      "rank": 3,
      "name": "Full Belt",
-     "grants": "Throw anything with a point and an edge, and it flies true: a chisel, a shard, a fork.",
+     "grants": "⛔ THROW ANYTHING WITH A POINT AND AN EDGE for 1d6 — a chisel, a shard, a fork — and it flies true.",
      "functions": [
       "strike",
       "break"
@@ -64,7 +66,8 @@
      "_nameWas": "The Full Belt",
      "gainAxes": [
       "quality"
-     ]
+     ],
+     "_grantsWas": "Throw anything with a point and an edge, and it flies true: a chisel, a shard, a fork."
     }
    ],
    "functions": [
@@ -114,7 +117,8 @@
    "_nameWas": "The Thrown Edge",
    "_idWas": "the_thrown_edge",
    "_powerSystemWas": "body",
-   "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current."
+   "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current.",
+   "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS."
   },
   {
    "id": "sling_and_stone",
@@ -137,7 +141,7 @@
     {
      "rank": 1,
      "name": "Loosed Stone",
-     "grants": "One stone at 40 paces. Ammunition is whatever is underfoot — you are never out.",
+     "grants": "⛔ DEALS 1d6 DAMAGE at 40 paces. Whip a stone out hard enough to drop a man. Ammunition is whatever is underfoot; you are never out.",
      "cannot": "Needs room to swing; useless in a press or a low tunnel.",
      "functions": [
       "strike"
@@ -145,12 +149,13 @@
      "gains": "deepen",
      "harmRung": "damaging",
      "_nameWas": "The Loosed Stone",
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "One stone at 40 paces. Ammunition is whatever is underfoot — you are never out."
     },
     {
      "rank": 2,
      "name": "Aimed Stone",
-     "grants": "Call the hit — a hand, a knee, the lamp, the horse. It goes where you called.",
+     "grants": "⚠️ CALL THE HIT AND IT LANDS THERE for 1d6 — a hand, a knee, the lamp, the horse — and what you called stops working.",
      "functions": [
       "strike"
      ],
@@ -162,12 +167,13 @@
       "hinder"
      ],
      "_nameWas": "The Aimed Stone",
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "Call the hit — a hand, a knee, the lamp, the horse. It goes where you called."
     },
     {
      "rank": 3,
      "name": "Skull-Weight",
-     "grants": "Lead or cast shot instead of river stone: it goes through a helm and keeps going.",
+     "grants": "⛔ LEAD OR CAST SHOT FOR 1d6, and it goes through a helm and keeps going.",
      "functions": [
       "strike",
       "break"
@@ -175,7 +181,8 @@
      "gains": "deepen",
      "harmRung": "lethal",
      "cannot": "Cast shot must be carried and counted; still needs room to swing.",
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "Lead or cast shot instead of river stone: it goes through a helm and keeps going."
     }
    ],
    "functions": [
@@ -230,7 +237,8 @@
    "_nameWas": "The Sling and Stone",
    "_idWas": "the_sling_and_stone",
    "_powerSystemWas": "body",
-   "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current."
+   "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current.",
+   "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS."
   },
   {
    "id": "drawn_bow",
@@ -253,7 +261,7 @@
     {
      "rank": 1,
      "name": "Long Draw",
-     "grants": "One arrow at 120 paces, through leather and gambeson. You can hold at full draw and wait.",
+     "grants": "⛔ DEALS 2d6 DAMAGE at 120 paces, through leather and gambeson. You can hold at full draw and wait.",
      "cannot": "Cannot shoot in a press; a shield-wall stops you cold; wet string, no shot.",
      "functions": [
       "strike"
@@ -261,12 +269,13 @@
      "gains": "deepen",
      "harmRung": "damaging",
      "_nameWas": "The Long Draw",
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "One arrow at 120 paces, through leather and gambeson. You can hold at full draw and wait."
     },
     {
      "rank": 2,
      "name": "Kept Rhythm",
-     "grants": "An arrow every action without losing accuracy — you can hold a corridor or a bridge alone.",
+     "grants": "⚠️ AN ARROW EVERY ACTION AT 2d6 without losing accuracy — you can hold a corridor or a bridge alone.",
      "functions": [
       "strike"
      ],
@@ -274,12 +283,13 @@
      "harmRung": "damaging",
      "cannot": "Arrows are counted — a quiver is twenty and you will notice.",
      "_nameWas": "The Kept Rhythm",
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "An arrow every action without losing accuracy — you can hold a corridor or a bridge alone."
     },
     {
      "rank": 3,
      "name": "Heavy Head",
-     "grants": "Bodkin heads: mail and plate stop mattering at under sixty paces.",
+     "grants": "⛔ BODKIN HEADS: 2d6 that ignores mail and plate under sixty paces.",
      "functions": [
       "strike",
       "break"
@@ -290,7 +300,8 @@
      "_nameWas": "The Heavy Head",
      "gainAxes": [
       "range"
-     ]
+     ],
+     "_grantsWas": "Bodkin heads: mail and plate stop mattering at under sixty paces."
     }
    ],
    "functions": [
@@ -340,7 +351,8 @@
    "_nameWas": "The Drawn Bow",
    "_idWas": "the_drawn_bow",
    "_powerSystemWas": "body",
-   "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current."
+   "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current.",
+   "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS."
   },
   {
    "id": "levelled_crossbow",
@@ -363,19 +375,20 @@
     {
      "rank": 1,
      "name": "Spanned and Levelled",
-     "grants": "One bolt at 90 paces, through mail. Aim is trivial; anyone can be taught in an afternoon.",
+     "grants": "⛔ DEALS 2d6 DAMAGE at 90 paces, through mail. Aim is trivial; anyone can be taught in an afternoon.",
      "cannot": "⛔ SPANNING TAKES A FULL ACTION — one shot, then you are a man holding a stick.",
      "functions": [
       "strike"
      ],
      "gains": "deepen",
      "harmRung": "damaging",
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "One bolt at 90 paces, through mail. Aim is trivial; anyone can be taught in an afternoon."
     },
     {
      "rank": 2,
      "name": "Belt Claw",
-     "grants": "Span and shoot in the same action, if you have both feet under you.",
+     "grants": "⚠️ SPAN AND SHOOT IN THE SAME ACTION for 2d6, if you have both feet under you.",
      "functions": [
       "strike"
      ],
@@ -383,12 +396,13 @@
      "harmRung": "damaging",
      "cannot": "You need both feet under you; a cranked string in the wet is a slow disaster.",
      "_nameWas": "The Belt Claw",
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "Span and shoot in the same action, if you have both feet under you."
     },
     {
      "rank": 3,
      "name": "Windlass",
-     "grants": "A heavy bow that will go through plate, a shield, and the arm behind it.",
+     "grants": "⛔ A HEAVY BOW AT 2d6 that goes through plate, a shield, and the arm behind it.",
      "functions": [
       "strike",
       "break"
@@ -397,7 +411,8 @@
      "harmRung": "lethal",
      "cannot": "Heavy, obvious, and illegal in three cities.",
      "_nameWas": "The Windlass",
-     "gainAxes": []
+     "gainAxes": [],
+     "_grantsWas": "A heavy bow that will go through plate, a shield, and the arm behind it."
     }
    ],
    "functions": [
@@ -447,7 +462,8 @@
    "_nameWas": "The Levelled Crossbow",
    "_idWas": "the_levelled_crossbow",
    "_powerSystemWas": "body",
-   "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current."
+   "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current.",
+   "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS."
   },
   {
    "id": "hurled_weight",

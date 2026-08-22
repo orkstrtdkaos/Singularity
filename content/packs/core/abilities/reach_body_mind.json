@@ -41,7 +41,7 @@
     {
      "rank": 2,
      "name": "Third Wind",
-     "grants": "⛔ ADDS EMPOWERED ATTACKS AND NO DAILY LIMIT. What you find is not simply more of what you had — you are stronger and faster than your own rested self, and your blows land harder for it. ⚠️ AND THE DURATION NOW APPLIES INSIDE A FIGHT, not just across a march.",
+     "grants": "⛔ PUSH PAST EXHAUSTION AND COME OUT STRONGER THAN RESTED — no daily limit, your blows land harder for it, and the state holds inside a fight rather than only across a march.",
      "cannot": "⛔ Damage ignored is applied when it ends; the empowered state ends with it.",
      "functions": [
       "sustain",
@@ -55,7 +55,8 @@
       "damage",
       "conditions"
      ],
-     "_cannotWas": "You are borrowing from tomorrow, and tomorrow collects with interest."
+     "_cannotWas": "You are borrowing from tomorrow, and tomorrow collects with interest.",
+     "_grantsWas_SNG510": "⛔ ADDS EMPOWERED ATTACKS AND NO DAILY LIMIT. What you find is not simply more of what you had — you are stronger and faster than your own rested self, and your blows land harder for it. ⚠️ AND THE DURATION NOW APPLIES INSIDE A FIGHT, not just across a march."
     },
     {
      "rank": 3,
@@ -176,7 +177,7 @@
     {
      "rank": 2,
      "name": "Unwasted Motion",
-     "grants": "⚠️ ADDS ECONOMY AS A CONDITION. Every motion does only what it must — blocks cost you nothing, you are never out of position, and you do not tire from moving well.",
+     "grants": "⛔ MOVE WITH TOTAL ECONOMY — every motion does only what it must. Blocks cost you nothing, you are never out of position, and you do not tire from moving well.",
      "cannot": "Efficiency is not power. A perfect motion still loses to a stronger one.",
      "functions": [
       "move",
@@ -188,7 +189,8 @@
      "gainAxes": [
       "conditions",
       "quality"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS ECONOMY AS A CONDITION. Every motion does only what it must — blocks cost you nothing, you are never out of position, and you do not tire from moving well."
     },
     {
      "rank": 3,
@@ -311,7 +313,7 @@
     {
      "rank": 2,
      "name": "The Whole House",
-     "grants": "⚠️ ADDS RELIABILITY AND CEILING. The search no longer fails to find something usable, and the bonus lands at its maximum rather than being rolled for.",
+     "grants": "⛔ SEARCH YOUR OWN ATTENDED MEMORY AND THE SEARCH NO LONGER FAILS. It always finds something usable, and the bonus to your next attempt lands at its maximum rather than being rolled for.",
      "cannot": "Still your own memory. It takes a quiet moment you may not have in a fight.",
      "functions": [
       "empower"
@@ -320,12 +322,13 @@
      "harmRung": "none",
      "gainAxes": [
       "quality"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS RELIABILITY AND CEILING. The search no longer fails to find something usable, and the bonus lands at its maximum rather than being rolled for."
     },
     {
      "rank": 3,
      "name": "The Borrowed Room",
-     "grants": "⛔ ADDS SOMEONE ELSE'S. Enter a willing — or unresisting — mind and search THEIR memory: their route, their language, their trade. ⚠️ FOR ONE ATTEMPT YOU MAY USE A SKILL THEY HAVE AND YOU DO NOT, at their rank.",
+     "grants": "⛔ SEARCH SOMEONE ELSE'S MEMORY. Enter a willing — or unresisting — mind and read their route, their language, their trade. ⚠️ FOR ONE ATTEMPT YOU MAY USE A SKILL THEY HAVE AND YOU DO NOT, at their rank.",
      "cannot": "⚠️ A resisting mind can refuse and a hostile one costs you. You get what THEY attended to, including what they were wrong about.",
      "functions": [
       "empower",
@@ -336,7 +339,8 @@
      "gainAxes": [
       "targets",
       "conditions"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS SOMEONE ELSE'S. Enter a willing — or unresisting — mind and search THEIR memory: their route, their language, their trade. ⚠️ FOR ONE ATTEMPT YOU MAY USE A SKILL THEY HAVE AND YOU DO NOT, at their rank."
     }
    ],
    "powerSystem": "reach_body_mind",
@@ -473,7 +477,7 @@
     {
      "rank": 2,
      "name": "Long Air",
-     "grants": "⚠️ ADDS DURATION AND HEIGHT. Chain the steps without touching down — cross a canyon, ascend a tower face unbroken, hold a position in open air long enough to fight from it.",
+     "grants": "⛔ CHAIN STEPS ON OPEN AIR WITHOUT TOUCHING DOWN — cross a canyon, ascend a tower face unbroken, or hold a position in open air long enough to fight from it.",
      "cannot": "You must keep moving. Fighting from the air costs a step per exchange.",
      "functions": [
       "move",
@@ -484,12 +488,13 @@
      "gainAxes": [
       "duration",
       "conditions"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS DURATION AND HEIGHT. Chain the steps without touching down — cross a canyon, ascend a tower face unbroken, hold a position in open air long enough to fight from it."
     },
     {
      "rank": 3,
      "name": "Carry the Line",
-     "grants": "⛔ ADDS OTHERS AND DESCENT. Take a rope, a line or a person up with you — and come down under control from any height at all.",
+     "grants": "⛔ TAKE A ROPE, A LINE OR A PERSON UP WITH YOU on steps of open air — and come down under control from any height at all.",
      "cannot": "One passenger or one line. A falling body you catch is a passenger.",
      "functions": [
       "move",
@@ -506,7 +511,8 @@
       "targets",
       "scope"
      ],
-     "_gainNote": "⚠️ A passenger is targets; controlled descent from any height is quality."
+     "_gainNote": "⚠️ A passenger is targets; controlled descent from any height is quality.",
+     "_grantsWas_SNG510": "⛔ ADDS OTHERS AND DESCENT. Take a rope, a line or a person up with you — and come down under control from any height at all."
     }
    ],
    "powerSystem": "metaphysical",
@@ -604,7 +610,7 @@
       "make",
       "mend"
      ],
-     "grants": "⚠️ ADDS SYSTEMS AND COMPOUNDS. A machine with parts that move against each other, a building, a body, a workshop yard — anything whose pieces have to agree. Diagnose its faults and redesign it from the inside.",
+     "grants": "⛔ HOLD A WORKING SYSTEM IN MIND — a machine with parts that move against each other, a building, a body, a workshop yard. Diagnose its faults and redesign it correctly.",
      "cannot": "You must have access to the whole of it; a system half-hidden is modelled half-wrong.",
      "gains": "broaden",
      "harmRung": "none",
@@ -612,7 +618,8 @@
      "gainAxes": [
       "scope",
       "targets"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS SYSTEMS AND COMPOUNDS. A machine with parts that move against each other, a building, a body, a workshop yard — anything whose pieces have to agree. Diagnose its faults and redesign it from the inside."
     },
     {
      "rank": 3,
@@ -621,7 +628,7 @@
       "make",
       "mend"
      ],
-     "grants": "⛔ ADDS COMPLEXITY AND DELEGATION. Hold a working with many interacting parts — a mill and its race, a fortification and its approaches — and hand the model to others: anyone you brief can build their piece correctly without understanding the whole.",
+     "grants": "⛔ HOLD A WORKING WITH MANY INTERACTING PARTS — a mill and its race, a fortification and its approaches — AND HAND THE MODEL TO OTHERS: anyone you brief can build their piece correctly without understanding the whole.",
      "cannot": "One such working at a time, and you must be able to get around the whole of it.",
      "gains": "broaden",
      "harmRung": "none",
@@ -636,7 +643,8 @@
       "autonomy"
      ],
      "_rebalance": "⚠️ Was the third scope-gain in a row for this skill. Delegation is what a modeller actually does at that scale.",
-     "_nameWas": "The Modelled Country"
+     "_nameWas": "The Modelled Country",
+     "_grantsWas_SNG510": "⛔ ADDS COMPLEXITY AND DELEGATION. Hold a working with many interacting parts — a mill and its race, a fortification and its approaches — and hand the model to others: anyone you brief can build their piece correctly without understanding the whole."
     }
    ],
    "nativeOrCombination": "native",
@@ -776,7 +784,7 @@
     {
      "rank": 2,
      "name": "Seasoned",
-     "grants": "⚠️ ADDS RESISTANCE TO NATURAL SUBSTANCES. Bigger soak, and cold, heat, smoke, venom, rot and bad water take far less hold on you than they should.",
+     "grants": "⛔ SOAK DAMAGE OUTRIGHT AND SHRUG OFF NATURAL SUBSTANCES. A standing reduction on every physical blow, and cold, heat, smoke, venom, rot and bad water take far less hold on you than they should.",
      "cannot": "Natural substances only — a crafted working is untouched at this rank.",
      "functions": [
       "resist",
@@ -788,12 +796,13 @@
      "gainAxes": [
       "quality",
       "conditions"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS RESISTANCE TO NATURAL SUBSTANCES. Bigger soak, and cold, heat, smoke, venom, rot and bad water take far less hold on you than they should."
     },
     {
      "rank": 3,
      "name": "Body Is Clay",
-     "grants": "⛔ ADDS IMMUNITY AND CRAFT-RESISTANCE. Natural substances stop affecting you at all, and crafts worked directly on your body find it harder ground than it should be.",
+     "grants": "⛔ NATURAL SUBSTANCES STOP AFFECTING YOU AT ALL, and crafts worked directly on your body find it harder ground than it should be. The standing soak against physical blows continues.",
      "cannot": "Immune to natural substances; merely RESISTANT to crafts. A craft worked on the world around you is unaffected.",
      "functions": [
       "resist",
@@ -810,7 +819,8 @@
       "quality",
       "scope"
      ],
-     "_gainNote": "⛔ Immunity to natural substances and resistance to crafts are CONDITIONS you now operate under."
+     "_gainNote": "⛔ Immunity to natural substances and resistance to crafts are CONDITIONS you now operate under.",
+     "_grantsWas_SNG510": "⛔ ADDS IMMUNITY AND CRAFT-RESISTANCE. Natural substances stop affecting you at all, and crafts worked directly on your body find it harder ground than it should be."
     }
    ],
    "nativeOrCombination": "native",
@@ -914,7 +924,7 @@
     {
      "rank": 2,
      "name": "Stillness While Moving",
-     "grants": "⛔ ADDS ACTING. Hold it while fighting, walking, negotiating or climbing — the clarity comes with you instead of costing you the scene.",
+     "grants": "⛔ HOLD A STILLNESS NOTHING REACHES WHILE YOU ACT. Fear, pain and distraction slide off while you are fighting, walking, negotiating or climbing — the clarity comes with you instead of costing you the scene.",
      "cannot": "You are calm, not faster. It does not help you win, only stop losing to yourself.",
      "functions": [
       "resist"
@@ -923,12 +933,13 @@
      "harmRung": "none",
      "gainAxes": [
       "conditions"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS ACTING. Hold it while fighting, walking, negotiating or climbing — the clarity comes with you instead of costing you the scene."
     },
     {
      "rank": 3,
      "name": "Nothing Lands",
-     "grants": "⛔ ADDS DECEPTION AND DISRUPTION AS CONDITIONS YOU ACT THROUGH. A lie, a feint, a shock or a working meant to unseat you slides off — and you read the attempt AS IT FAILS, which tells you what they wanted.",
+     "grants": "⛔ A LIE, A FEINT, A SHOCK OR A WORKING MEANT TO UNSEAT YOU SLIDES OFF, as fear and pain already do — and you read the attempt AS IT FAILS, which tells you what they wanted.",
      "cannot": "A true thing you cannot bear is still true. This turns aside what is AIMED at you, not what is so.",
      "functions": [
       "resist"
@@ -943,7 +954,8 @@
       "conditions",
       "quality"
      ],
-     "_rebalance": "⛔ I authored this rank in batch 2 and it failed my own test — 'deception slides off too' named no gain. Now it is conditions + quality, and the reading-the-attempt clause makes it an act rather than a state."
+     "_rebalance": "⛔ I authored this rank in batch 2 and it failed my own test — 'deception slides off too' named no gain. Now it is conditions + quality, and the reading-the-attempt clause makes it an act rather than a state.",
+     "_grantsWas_SNG510": "⛔ ADDS DECEPTION AND DISRUPTION AS CONDITIONS YOU ACT THROUGH. A lie, a feint, a shock or a working meant to unseat you slides off — and you read the attempt AS IT FAILS, which tells you what they wanted."
     }
    ],
    "gated": "learned",
@@ -1157,7 +1169,7 @@
     {
      "rank": 2,
      "name": "Given Fall",
-     "grants": "⚠️ ADDS THEIR WEIGHT AS WELL AS THEIR LIMB — put a body into the ground, a wall, a stairwell, or another body.",
+     "grants": "⛔ DEALS 1d6 DAMAGE USING THEIR OWN WEIGHT AS WELL AS THEIR LIMB — meet a committed movement and put the body into the ground, a wall, a stairwell, or another body.",
      "cannot": "One body per action, and you must have the footing to take the weight.",
      "functions": [
       "strike",
@@ -1169,7 +1181,8 @@
      "gainAxes": [
       "targets",
       "damage"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS THEIR WEIGHT AS WELL AS THEIR LIMB — put a body into the ground, a wall, a stairwell, or another body."
     },
     {
      "rank": 3,
@@ -1586,5 +1599,6 @@
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
  "_dramaStrip": "⛔ SNG-480 / SYSTEM_SPEC §32.12. Dramatising tail-clauses removed from `grants` and `cannot`. ⚠️ I WROTE §32.12 AND BROKE IT IN THE NEXT COMMIT. The bound states the limit; it does not editorialise about how the limit feels.",
  "_cut": "⛔ SNG-486: Pathless Way cut. 'Any natural barrier yields to enough skill' is a permission, not an action — Q1 failure at capstone tier. Replaced by Ki Wield.",
- "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas."
+ "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas.",
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
 }

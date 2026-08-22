@@ -16907,6 +16907,92 @@ await (async () => {
     check("CCODE-211: an opponent who did NOT declare obscure gets the passive path and no tie",
       !vsGuard.obscuredBy);
   }
+  // 5g · ⛔ CCODE-212 / SNG-517 — A SUCCESSFUL OBSCURE EARNS THE BONUS ACTION. Erik's ruling, and it
+  // partially reverses a warning of mine that is on the record: the sense step was built consequence-free
+  // so that READING is not a way to win.
+  //
+  // ⚠️ IT HOLDS BECAUSE IT IS ASYMMETRIC, AND THAT ASYMMETRY IS THE FIRST GATE HERE. The reader still banks
+  // nothing. What the change adds is that BEATING a reader is a way to win — a different claim from the one
+  // the guard was protecting, and the one Erik actually ruled on.
+  {
+    const SB212 = await import("../engine/skill_battle.js");
+    const sb212 = (C199.rules?.skillBattle || C199.skillBattle || {});
+    const ss = sb212.engine?.senseStep || sb212.senseStep || {};
+    const cfg212 = { senseStep: ss };
+    const bonus = (o) => SB212.senseBonusFor({ sb: cfg212, ...o });
+
+    // ⛔ THE GUARD'S PROTECTION, RESTATED AS A GATE. If this ever returns anything for a reader, the thing
+    // CCode warned about has happened and nobody noticed.
+    check("CCODE-212: the READER can never earn a bonus from the sense step — reading is still not a way to win",
+      bonus({ obscured: false, opponentSensed: true, gap: -999 }) === null
+      && bonus({ obscured: false, opponentSensed: false, gap: 999 }) === null);
+
+    check("CCODE-212: hiding from nobody is not a win — a passive opponent earns the obscurer nothing",
+      bonus({ obscured: true, opponentSensed: false, gap: -999 }) === null);
+
+    // ⛔ THE NULL BAND IS A SEPARATE AXIS FROM THE TIE RULE, AND AEVI SAID NOT TO MERGE THEM.
+    // At gap 0: the obscurer WINS THE READ (obscurerWinsTie) and EARNS NO BONUS (the band). Both, together,
+    // is the whole point — they broke even.
+    // ⚠️ AND IT MUST TEST INSIDE THE BAND, NOT AT ZERO. The first version of this gate checked gap 0 -
+    // which returns null from the SIGN check whether or not a band exists, so deleting the band left it
+    // green. Green for the wrong reason at the exact boundary it claimed to test. A gap of -1 is inside
+    // the band and on the OBSCURER's side, so only the band can be what withholds the bonus.
+    check("CCODE-212: at gap 0 the obscurer denies the read AND earns no bonus — two axes, not one",
+      SB212.obscurerWinsTie(0) === true
+      && bonus({ obscured: true, opponentSensed: true, gap: 0 }) === null
+      && bonus({ obscured: true, opponentSensed: true, gap: -1 }) === null);
+
+    const band = Math.max(0, Number(ss.bonusNullBand ?? 2));
+    check(`CCODE-212: the null band is ±${band} and its edge is inclusive — the band is a dial, not a literal`,
+      bonus({ obscured: true, opponentSensed: true, gap: -band }) === null
+      && bonus({ obscured: true, opponentSensed: true, gap: -(band + 1) }) === "obscurer"
+      && Number.isFinite(Number(ss.bonusNullBand)), `authored band: ${ss.bonusNullBand}`);
+
+    check("CCODE-212: an obscure that was READ ANYWAY earns nothing — the gambit can lose",
+      bonus({ obscured: true, opponentSensed: true, gap: band + 99 }) === null);
+
+    // ⚠️ SENSE IS AN ACT, NOT A ROLE — deliberately looser than isObscureDecl, and for a measured reason:
+    // opponentPolicy builds declarations with no tags at all, so a tag-only rule could never fire in play.
+    check("CCODE-212: 'did they read' accepts the authored senseFunctions as well as the tag",
+      SB212.declaredSense({ function: "reveal" }, cfg212) === true
+      && SB212.declaredSense({ sense: true, function: "strike" }, cfg212) === true
+      && SB212.declaredSense({ function: "strike" }, cfg212) === false);
+
+    // ---- and end to end, with the sign in the right direction ----
+    {
+      const rules212 = C199.rules || {}, steps212 = C199.resolutionSteps || rules212.resolution || {};
+      const hider = { obscure: true, function: "conceal", tier: 5, attribute: "social", intensity: "press", name: "False Stance" };
+      const looker = { function: "reveal", tier: 1, attribute: "mental", intensity: "conserve", name: "a glance" };
+      const guard = { function: "shield", tier: 1, attribute: "physical", intensity: "conserve", name: "a raised guard" };
+      const strong = { attributes: { mental: 8, physical: 8, social: 8, practical: 8 }, level: 12, health: 30, maxHealth: 30 };
+      const weak = { attributes: { mental: 2, physical: 2, social: 2, practical: 2 }, level: 2, health: 30, maxHealth: 30 };
+      const run = (pd, od) => SB212.battleRound({ playerDecl: pd, oppDecl: od, playerSheet: strong, oppSheet: weak,
+        state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 100, effects: [], pressure: { player: 0, opponent: 0 } },
+        rules: rules212, sb: sb212, steps: steps212, rng: () => 0.5, phase: "sense" });
+
+      const beat = run(hider, looker);
+      check("CCODE-212: a strong obscure against someone who LOOKED earns the bonus action, end to end",
+        beat.bonusEarned?.player === true && beat.senseBonus?.winner === "obscurer",
+        JSON.stringify(beat.senseBonus ?? null));
+      // ⛔ THE SIGN. `readerGap` is the PLAYER's read; for a player who HID, the reader is the opponent and
+      // the gap must run the other way. Paying the bonus off the hider's own read is a sign error that
+      // reads as balance — so it is gated by the case that would expose it.
+      const vsGuard = run(hider, guard);
+      check("CCODE-212: the same strong obscure against a guard earns NOTHING — no watcher, no win",
+        vsGuard.bonusEarned?.player !== true && vsGuard.senseBonus?.opponentSensed === false,
+        JSON.stringify(vsGuard.senseBonus ?? null));
+    }
+
+    // ⚠️ THE RECEIPT IS AUTHORED, and all five variants share the first clause on purpose: "You did not
+    // look" is THE COST, and the player reads it every time regardless of outcome.
+    const rc = ss.obscureReceipt || {};
+    const variants = ["base", "wonBonus", "nullBand", "failed", "noWatcher"];
+    check("CCODE-212: the obscure receipt is authored in content, all five variants, none invented in code",
+      variants.every(k => rc[k]?.head && rc[k]?.body), variants.filter(k => !rc[k]?.head).join(", "));
+    check("CCODE-212: every variant opens with the COST — 'You did not look' is read every time",
+      variants.every(k => /^You did not look/.test(rc[k]?.head || "")),
+      variants.filter(k => !/^You did not look/.test(rc[k]?.head || "")).join(", "));
+  }
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

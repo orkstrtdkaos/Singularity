@@ -663,7 +663,32 @@
      "name": "Read them (Insight)",
      "finds": "their intent and how much resolve is behind it"
     }
-   ]
+   ],
+   "bonusNullBand": 2,
+   "_bonusNullBand": "⛔ SNG-517 §1b - ERIK'S NULL BAND. Where the two rolls are roughly equal, NEITHER side earns a bonus action. ⚠️ THIS IS NOT THE TIE RULE AND MUST NOT BE MERGED WITH IT: the tie rule answers WHO WINS THE READ (gap 0 is the obscurer's, unchanged); this answers WHO EARNS A BONUS. At gap 0 the obscurer still denies the read and earns nothing - they broke even, which is the right feel for a coin-flip. Aevi suggested ±2 as a starting dial; widen if bonus actions prove too common.",
+   "obscureReceipt": {
+    "_note": "⛔ AEVI'S PROSE, SNG-517 §4. THE FOUR VARIANTS SHARE A FIRST CLAUSE ON PURPOSE: \"You did not look\" is the COST, and the player should read it every time regardless of outcome - that is what makes the trade legible rather than a silent absence. Only the second line varies.",
+    "base": {
+     "head": "You did not look.",
+     "body": "You spent the moment being hard to read instead — and they were reading."
+    },
+    "wonBonus": {
+     "head": "You did not look — and neither did they.",
+     "body": "They spent their attention on you and came away with nothing. You have a moment they do not."
+    },
+    "nullBand": {
+     "head": "You did not look, and what they saw was not worth having.",
+     "body": "Neither of you gained on the other."
+    },
+    "failed": {
+     "head": "You did not look, and they saw you anyway.",
+     "body": "You spent the moment and they spent it better."
+    },
+    "noWatcher": {
+     "head": "You did not look, and nobody was looking at you.",
+     "body": "Hiding from no one costs the same as hiding from someone."
+    }
+   }
   },
   "oddsPreview": {
    "note": "CCODE-46 (Erik): 'The skills should also bring in the players read of how likely each are to succeed. just like normal play, but with all the opposed and conditions incorporated. If the enemy uses umbracraft then I might not be able to tell certain success chances as well — unless of course i have a radiant skill.' So each move shows an ESTIMATED chance to win the exchange, and the CONFIDENCE in that estimate is itself fogged: reading them buys precision, and holding a counter-craft to what they are using buys it too (light finds shadow — a reveal-user can price a concealer). Never a lie: low confidence shows a band, not a fake number.",

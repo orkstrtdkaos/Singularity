@@ -635,6 +635,51 @@ export function isSenseDecl(decl) { return decl?.sense === true; }
  *  It is its own function so that softening it requires editing a thing with this comment on it. */
 export function obscurerWinsTie(readerGap) { return readerGap <= 0; }
 
+/** SNG-517 §1 / CCODE-212 — DID THEY SPEND THE SLOT READING? Erik's change pays a successful obscure only
+ *  against an opponent who actually LOOKED, so this is the question that decides whether the gambit paid.
+ *
+ *  ⚠️ AND IT IS DELIBERATELY LOOSER THAN `isObscureDecl`, WHICH IS A TAG AND ONLY A TAG. The asymmetry is
+ *  principled, not sloppy:
+ *    · OBSCURE is a ROLE the author grants. Inferring it from `conceal`/`deceive` would enrol crafts whose
+ *      author never gave them that job — which is why CCODE-211 gates "the tag, never the verb".
+ *    · SENSE here is an ACT, not a role: "did this opponent spend their slot reading?" `senseFunctions`
+ *      (`reveal`/`foresee`/`track`) is already authored for exactly that question and already used by the
+ *      engine, so consulting it is reading content, not guessing.
+ *  ⛔ AND THE PRACTICAL REASON, WHICH IS THE DECIDING ONE: `opponentPolicy` builds declarations as
+ *  `{function, name, tier, attribute, intensity}` and carries NO tags. Requiring `sense: true` would mean
+ *  the bonus could never fire against an AI opponent — a reader with no writer, shipped on purpose. */
+export function declaredSense(decl, sb) {
+  if (decl?.sense === true) return true;
+  const fns = sb?.senseStep?.senseFunctions || ["reveal", "foresee", "track"];
+  return fns.includes(decl?.function);
+}
+
+/** ⛔ SNG-517 §1a/§1b — WHO EARNS A BONUS ACTION OUT OF THE SENSE STEP. Erik: *"successfully obscuring
+ *  against an active sense gives you the bonus action as well… and we should probably have a null band
+ *  where something that's roughly a tie doesn't yield a bonus for either party."*
+ *
+ *  ⛔ ONLY THE OBSCURER CAN EVER EARN HERE, AND THAT IS THE WHOLE SAFETY OF THE CHANGE. CCode's warning on
+ *  record: the sense step was built consequence-free so that READING is not a way to win. This does not
+ *  reverse that — the reader still banks nothing. What it adds is that BEATING a reader is a way to win,
+ *  which is a different claim and the one Erik ruled on.
+ *
+ *  ⚠️ THE NULL BAND IS NOT THE TIE RULE AND MUST NOT TOUCH IT (Aevi's §1b):
+ *    · the TIE RULE answers WHO WINS THE READ    — gap 0 is the obscurer's, unchanged (`obscurerWinsTie`)
+ *    · the NULL BAND answers WHO EARNS A BONUS   — inside it, nobody does
+ *  So at gap 0 the obscurer still denies the read AND earns no bonus. They broke even, which is the right
+ *  feel for a coin-flip.
+ *
+ *  `gap` is the reader's margin over the obscurer's resistance — positive means the reader is ahead.
+ *  Returns "obscurer" or null. It can never return "reader" by construction, not by omission. */
+export function senseBonusFor({ obscured = false, opponentSensed = false, gap = 0, sb } = {}) {
+  if (!obscured) return null;                 // the reader banks nothing — the asymmetry, stated once
+  if (!opponentSensed) return null;           // hiding from nobody is not a win
+  const band = Math.max(0, Number(sb?.senseStep?.bonusNullBand ?? 2));
+  const g = Number(gap) || 0;
+  if (Math.abs(g) <= band) return null;   // roughly a tie: neither side gained
+  return g < 0 ? "obscurer" : null;       // beaten cleanly, or they read you anyway
+}
+
 /** CCODE-51 (Erik's ladder): the sense TIER is earned by the read's DEGREE — fail 0, partial 1, success 2, and a
  *  crit (or a decisive margin) 3. Pure; every band is a content dial. */
 export function senseTierFromDegree(degree, margin, sb) {
@@ -1065,11 +1110,19 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       out.setupBonus = 0;
       out.obscuredInsteadOfReading = { function: playerDecl.function, name: playerDecl.name || playerDecl.function };
     }
+    // ⛔ WHEN THE PLAYER IS THE ONE HIDING, THE GAP RUNS THE OTHER WAY. `readerGap` below is the PLAYER's
+    // read against the opponent; for a player who obscured, the reader is the OPPONENT and the gap must be
+    // their margin over the player's. Using the same number for both would have paid the bonus off the
+    // hider's own read - a sign error that reads as balance.
+    const playerHiding = isObscureDecl(playerDecl);
     // an ACTIVE obscure opposes the read with the roll they actually made, never less than their passive
     // guardedness — working at it cannot leave you easier to read than standing there.
     const oppObscuring = isObscureDecl(oppDecl);
     const activeResist = oppObscuring ? Math.max(resist.value, o.margin) : resist.value;
     const readerGap = p.margin - activeResist;
+    // ⚠️ recorded because SNG-517's null band needs the same number the tie rule used. Two axes, ONE gap -
+    // computing it twice is how they would drift apart.
+    out.senseGap = playerHiding ? (o.margin - Math.max(resist.value, p.margin)) : readerGap;
     if (oppObscuring) out.obscuredBy = { name: oppDecl.name || oppDecl.function, resist: activeResist, was: resist.value };
     out.senseTier = (out.guardedInsteadOfReading || out.obscuredInsteadOfReading) ? 0
       // ⛔ THE TIE GOES TO THE OBSCURER. See obscurerWinsTie — do not soften this.
@@ -1077,6 +1130,17 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       : senseTierFromDegree(p.degree, readerGap, sb);
     const grants = turnCfg.bonusOnDegrees || ["crit_success"];
     out.bonusEarned = { player: grants.includes(p.degree), opponent: grants.includes(o.degree) };
+    // ⛔ SNG-517 / CCODE-212 — AND A SUCCESSFUL OBSCURE EARNS ONE TOO. Without it the trade is pure
+    // denial: you spend your slot, they lose theirs, nobody gains, and obscure is a tax on both sides
+    // rather than a play. `senseBonusFor` states the conditions once; this only routes the answer.
+    const oppSensed = declaredSense(oppDecl, sb);
+    const bonusWinner = senseBonusFor({
+      obscured: !!out.obscuredInsteadOfReading, opponentSensed: oppSensed,
+      gap: (out.senseGap != null ? out.senseGap : 0), sb
+    });
+    if (bonusWinner === "obscurer") out.bonusEarned = { ...out.bonusEarned, player: true };
+    out.senseBonus = { winner: bonusWinner, opponentSensed: oppSensed,
+      band: Math.max(0, Number(sb?.senseStep?.bonusNullBand ?? 2)), gap: out.senseGap ?? null };
   }
   return out;
 }

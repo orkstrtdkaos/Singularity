@@ -611,6 +611,30 @@ export function senseResistOf(oppSheet = {}, sb) {
   return { value: Math.round(best * (cfg.passiveAttributeWeight ?? 3)), label: "their natural guardedness", from: "passive" };
 }
 
+/** SNG-500 §4 / CCODE-211 — OBSCURE IS A DECLARATION, NOT A PROPERTY OF THE SHEET.
+ *
+ *  ⚠️ Read the TAG, never the verb. Aevi's §4.3 says the fields are `ability.sense` (27) and
+ *  `ability.obscure` (15), and inferring obscure from `conceal`/`deceive` would silently enrol every craft
+ *  carrying those verbs into a role its author never gave it. The passive path already reads the sheet for
+ *  a conceal craft (`senseResistOf`); this is the other thing — what you CHOSE this round.
+ */
+export function isObscureDecl(decl) { return decl?.obscure === true; }
+export function isSenseDecl(decl) { return decl?.sense === true; }
+
+/** ⛔ THE OBSCURER WINS TIES, AND THIS IS THE RULE AEVI FLAGGED AS MOST LIKELY TO BE SOFTENED.
+ *
+ *  Her words: *"you flagged this as the rule most likely to get softened during implementation because it
+ *  looks unfair in a unit test. It is not unfair — it is the whole balance. Without it the sense slot
+ *  belongs permanently to the perceptive traditions."*
+ *
+ *  ⚠️ IT DOES LOOK WRONG IN ISOLATION. An equal roll losing to the hider reads as a bug, and the instinct
+ *  is to make ties go to the reader "for symmetry". That instinct is the bug: reading is already the
+ *  advantaged side — the reader picks the moment, and a failed read costs a step the obscurer had to spend
+ *  anyway. The tie is the obscurer's compensation for spending their slot NOT acting.
+ *
+ *  It is its own function so that softening it requires editing a thing with this comment on it. */
+export function obscurerWinsTie(readerGap) { return readerGap <= 0; }
+
 /** CCODE-51 (Erik's ladder): the sense TIER is earned by the read's DEGREE — fail 0, partial 1, success 2, and a
  *  crit (or a decisive margin) 3. Pure; every band is a content dial. */
 export function senseTierFromDegree(degree, margin, sb) {
@@ -1033,7 +1057,24 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     // now, not by a standing character stat — a read is a thing you DO, not a thing you have.
     // ...and a guard earns no sense TIER either. senseTier is what you LEARN — craft names, then GM advice —
     // and learning it from a step you spent raising a shield would be the free upgrade by another door.
-    out.senseTier = out.guardedInsteadOfReading ? 0 : senseTierFromDegree(p.degree, p.margin - resist.value, sb);
+    // ⛔ SNG-500 §4 / CCODE-211 — AND DECLARING OBSCURE IS THE SAME TRADE, ONE STEP FURTHER. The guard
+    // above costs you the read; obscure costs you the read AND works at being unfound. Today the
+    // resistance was passive — read off the sheet whether or not they lifted a finger — so hiding was
+    // something you HAD rather than something you DID.
+    if (isObscureDecl(playerDecl)) {
+      out.setupBonus = 0;
+      out.obscuredInsteadOfReading = { function: playerDecl.function, name: playerDecl.name || playerDecl.function };
+    }
+    // an ACTIVE obscure opposes the read with the roll they actually made, never less than their passive
+    // guardedness — working at it cannot leave you easier to read than standing there.
+    const oppObscuring = isObscureDecl(oppDecl);
+    const activeResist = oppObscuring ? Math.max(resist.value, o.margin) : resist.value;
+    const readerGap = p.margin - activeResist;
+    if (oppObscuring) out.obscuredBy = { name: oppDecl.name || oppDecl.function, resist: activeResist, was: resist.value };
+    out.senseTier = (out.guardedInsteadOfReading || out.obscuredInsteadOfReading) ? 0
+      // ⛔ THE TIE GOES TO THE OBSCURER. See obscurerWinsTie — do not soften this.
+      : (oppObscuring && obscurerWinsTie(readerGap)) ? 0
+      : senseTierFromDegree(p.degree, readerGap, sb);
     const grants = turnCfg.bonusOnDegrees || ["crit_success"];
     out.bonusEarned = { player: grants.includes(p.degree), opponent: grants.includes(o.degree) };
   }

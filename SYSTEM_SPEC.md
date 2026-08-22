@@ -2406,6 +2406,29 @@ that lags the code is worse than no map, because it is believed.
 | `mechanic.imposes` | ✅ `resolveImposition` → the round's `imposed` → `checkIncapacitation` | `craftmechanics.js` → `skill_battle.js` | ⛔ **0** |
 | `mechanic.imposes.onCrit` | ✅ **ESCALATE** — a crit imposes a *different, stronger* condition | `craftmechanics.js` | ⛔ **0** |
 | `deniesPhase: "action"` | ✅ that side loses the exchange **without rolling** | `skill_battle.js` | ⛔ **0** |
+| `ability.obscure` | ✅ `isObscureDecl` — a DECLARED obscure costs you the read and **wins ties** | `skill_battle.js` | **15** |
+| `ability.sense` | ✅ `isSenseDecl` | `skill_battle.js` | **27** |
+| `targetSheet.antisoak` | ✅ `antisoakLanded` — amplifies what got past soak | `skill_battle.js` | ⚠️ sheet-side |
+
+## §39.6 — ⛔ THE OBSCURER WINS TIES, AND THIS IS NOT A BUG
+
+**Aevi named this the rule most likely to be softened during implementation, "because it looks unfair in a
+unit test."** She was right that it looks wrong: an equal roll losing to the hider reads as an off-by-one,
+and the instinct is to make ties go to the reader "for symmetry."
+
+⛔ **That instinct is the bug.** Reading is already the advantaged side — the reader picks the moment, and
+a failed read costs a step the obscurer had to spend anyway. **The tie is the obscurer's compensation for
+spending their slot NOT acting.** Without it the sense slot belongs permanently to the perceptive
+traditions.
+
+**It lives in its own one-line function (`obscurerWinsTie`) carrying that argument, so softening it means
+editing something with the reason written on it**, and `CCODE-211` gates the exact boundary — gap 0 is the
+hider's, gap 1 is the reader's. ⚠️ **The mutation that softens it to `< 0` was run, and the gate goes red.**
+
+**And obscure is a DECLARATION now, not a sheet property.** Declaring it costs the read and the setup
+bonus — the same trade a guard in the sense step already made — and opposes the reader with the roll
+actually made, never below passive guardedness. **Read from `ability.obscure`, never inferred from
+`conceal`/`deceive`:** more crafts carry those verbs than were given the role.
 
 ## §39.4 — HEALING (CCODE-207), and what `crit` can and cannot take
 

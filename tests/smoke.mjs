@@ -16849,6 +16849,64 @@ await (async () => {
       vuln.damage?.amount === plain.damage?.amount + 6,
       );
   }
+  // 5f · ⛔ CCODE-211 / SNG-500 §4 — THE CONTESTED SENSE SLOT. Obscure was something you HAD, read off the
+  // sheet whether or not you lifted a finger. Now it is something you DO, and it costs the same thing a
+  // guard costs: you did not look.
+  {
+    const SB211 = await import("../engine/skill_battle.js");
+    const rules211 = C199.rules || {}, sb211 = rules211.skillBattle || C199.skillBattle || {};
+    const steps211 = C199.resolutionSteps || rules211.resolution || {};
+
+    // ⚠️ THE TAG, NEVER THE VERB. Inferring obscure from `conceal`/`deceive` would enrol every craft
+    // carrying those verbs into a role its author never gave it — 15 crafts are tagged, and more than 15
+    // carry the verbs.
+    check("CCODE-211: obscure is read from the TAG, not from the verb",
+      SB211.isObscureDecl({ obscure: true, function: "strike" }) === true
+      && SB211.isObscureDecl({ function: "conceal" }) === false
+      && SB211.isObscureDecl({ function: "deceive" }) === false);
+    check("CCODE-211: and the sense tag is its own flag, not a guess from the verb",
+      SB211.isSenseDecl({ sense: true }) === true && SB211.isSenseDecl({ function: "reveal" }) === false);
+
+    // ⛔ THE TIE RULE, AT ITS BOUNDARY. Aevi named this as the rule most likely to be softened in
+    // implementation because it looks unfair in a unit test. It is gated at the exact boundary so
+    // softening it cannot pass quietly.
+    check("CCODE-211: THE OBSCURER WINS TIES — a gap of exactly 0 is the hider's, 1 is the reader's",
+      SB211.obscurerWinsTie(0) === true && SB211.obscurerWinsTie(1) === false && SB211.obscurerWinsTie(-1) === true);
+
+    const reader = { sense: true, function: "reveal", tier: 2, attribute: "mental", intensity: "standard", name: "Read" };
+    const hider = { obscure: true, function: "conceal", tier: 5, attribute: "social", intensity: "press", name: "False Stance" };
+    const guard = { function: "shield", tier: 1, attribute: "physical", intensity: "conserve", name: "a raised guard" };
+    const weak = { attributes: { mental: 3, physical: 3, social: 3, practical: 3 }, level: 3, health: 30, maxHealth: 30 };
+    const strong = { attributes: { mental: 8, physical: 8, social: 8, practical: 8 }, level: 12, health: 30, maxHealth: 30 };
+    const sense = (pd, od, ps = weak, os = strong) => SB211.battleRound({ playerDecl: pd, oppDecl: od,
+      playerSheet: ps, oppSheet: os,
+      state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 100, effects: [], pressure: { player: 0, opponent: 0 } },
+      rules: rules211, sb: sb211, steps: steps211, rng: () => 0.5, phase: "sense" });
+
+    // ⛔ DECLARING OBSCURE COSTS YOU THE READ. The same trade the guard already made — it is a choice only
+    // if it is a trade.
+    const asHider = sense(hider, guard, strong, weak);
+    check("CCODE-211: declaring obscure earns NO sense tier — you did not look",
+      asHider.senseTier === 0 && !!asHider.obscuredInsteadOfReading, JSON.stringify(asHider.obscuredInsteadOfReading));
+    check("CCODE-211: and it earns no setup bonus either — the guard's rule, one craft further",
+      asHider.setupBonus === 0);
+
+    // an ACTIVE obscure opposes the read with the roll they actually made
+    const vsHider = sense(reader, hider);
+    check("CCODE-211: a DECLARED obscure raises the bar above passive guardedness",
+      vsHider.obscuredBy && vsHider.obscuredBy.resist > vsHider.obscuredBy.was,
+      JSON.stringify(vsHider.obscuredBy ?? null));
+    // ⛔ AND NEVER LOWERS IT. Working at being unfound cannot leave you easier to read than standing there.
+    const lazyHider = { ...hider, tier: 1, intensity: "conserve" };
+    const vsLazy = sense(reader, lazyHider);
+    check("CCODE-211: a badly-rolled obscure never leaves them EASIER to read than standing there",
+      !vsLazy.obscuredBy || vsLazy.obscuredBy.resist >= vsLazy.obscuredBy.was,
+      JSON.stringify(vsLazy.obscuredBy ?? null));
+    // an undeclared opponent gets the passive path and no tie
+    const vsGuard = sense(reader, guard);
+    check("CCODE-211: an opponent who did NOT declare obscure gets the passive path and no tie",
+      !vsGuard.obscuredBy);
+  }
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

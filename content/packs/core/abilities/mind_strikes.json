@@ -85,7 +85,7 @@
     {
      "rank": 2,
      "name": "Called Effect",
-     "grants": "⚠️ ADDS A DECLARED OUTCOME. Name what the blow does as well as that it lands — the shield arm drops, the weapon goes, the knee gives, they cannot pursue. ⛔ It happens because you aimed at the thing that causes it.",
+     "grants": "⛔ DEALS 2d6 DAMAGE AND A DECLARED OUTCOME. Name what the blow does as well as that it lands — the shield arm drops, the weapon goes, the knee gives, they cannot pursue.",
      "cannot": "One declared effect, and it must be physically plausible from where you hit.",
      "functions": [
       "strike",
@@ -96,7 +96,8 @@
      "gainAxes": [
       "quality",
       "conditions"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS A DECLARED OUTCOME. Name what the blow does as well as that it lands — the shield arm drops, the weapon goes, the knee gives, they cannot pursue. ⛔ It happens because you aimed at the thing that causes it."
     },
     {
      "rank": 3,
@@ -197,7 +198,7 @@
     {
      "rank": 2,
      "name": "Two at Once",
-     "grants": "⚠️ ADDS TARGETS. Split the strike across two minds in sight without losing weight on either — or put both into one, for a great deal more.",
+     "grants": "⛔ DEALS 3d6 DAMAGE SPLIT ACROSS TWO MINDS IN SIGHT without losing weight on either — or put both into one, for a great deal more. Nothing can be interposed.",
      "cannot": "Two at most, and both must be in sight when you begin.",
      "functions": [
       "strike"
@@ -207,12 +208,13 @@
      "gainAxes": [
       "targets",
       "damage"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS TARGETS. Split the strike across two minds in sight without losing weight on either — or put both into one, for a great deal more."
     },
     {
      "rank": 3,
      "name": "Nothing Held",
-     "grants": "⛔ ADDS AFTERMATH. The struck mind cannot hold anything for a round — a sustained craft drops, a held action is lost, a spoken command comes out wrong. ⚠️ Against a caster this is worse than the wound.",
+     "grants": "⛔ DEALS 3d6 DAMAGE AND THE STRUCK MIND CANNOT HOLD ANYTHING FOR A ROUND — a sustained craft drops, a held action is lost, a spoken command comes out wrong.",
      "cannot": "One round, and a mind holding nothing loses nothing.",
      "functions": [
       "strike",
@@ -222,12 +224,14 @@
      "harmRung": "damaging",
      "gainAxes": [
       "conditions"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS AFTERMATH. The struck mind cannot hold anything for a round — a sustained craft drops, a held action is lost, a spoken command comes out wrong. ⚠️ Against a caster this is worse than the wound."
     }
    ],
    "_authored": "⛔ SNG-464. Erik: 'a Mind character should have some GREAT PSYCHIC STRIKES.' ⚠️ Mind's existing damage was Cutting Figure (1d6, figurist geometry) and Sustained Regard (1d6, attention). ⛔ NEITHER WAS A DIRECT PSYCHIC ATTACK — this is the tradition's straight ranged hit, and its defining property is that NOTHING CAN BE INTERPOSED.",
    "_rangeNote": "⚠️ SNG-465: measured `range` removed per Erik — reach stays in the prose ('any mind in sight')."
   }
  ],
- "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
 }

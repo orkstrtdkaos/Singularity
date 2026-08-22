@@ -177,3 +177,78 @@ are real and which are documents.**
 
 ⚠️ **And it will find the interactions.** Soak against typed damage, healing against ongoing harm, tempo
 against a foe that also reads — **none of those pairs have ever met.**
+
+
+---
+
+# ADDENDUM · buildability, and what it changes about the authoring
+
+**Aevi, 2026-08-16, after CCode's v1.9.172 read.**
+
+## A1 — ⛔ §6 COLLECTED BEFORE A ROOM WAS BUILT
+
+**Reading Level 3 against the code found that `antisoakLanded` had no call site.** ⚠️ **`grief_strike`
+authored `antisoak: 3` and it did nothing for a week** — gated on the arithmetic, never on the wiring.
+
+⛔ **THAT IS THE DUNGEON DOING ITS JOB BEFORE IT EXISTS.** The spec's whole premise — *if a mechanic
+cannot be exercised here, it is not finished* — proved out by being read.
+
+**Ruling confirmed, and I have made it unambiguous in content:** `antisoak` → **`antisoakImposed`**.
+⛔ **THE TARGET CARRIES IT.** A Ki Wield striking an antisoaked target gets the benefit; Grief Strike does
+not carry a bonus for itself. ⚠️ **Which is exactly why it is the first team-facing debuff.**
+
+## A2 — WHAT IS BUILDABLE, AND WHAT I CHANGE
+
+| level | status | ⚠️ what changes in the authoring |
+|---|---|---|
+| **L1 Intake** | ✅ **BUILD NOW** | nothing — contested sense, obscure, stealth, bargain all live |
+| **L3 Warden** | ✅ **BUILD NOW** | nothing — impositions, typed soak layers, the duel all live |
+| **L2 Flooded Assay** | ⚠️ **HALF** | ⛔ **TYPED SOAK WORKS VIA AUTHORED `soakLayers[].type`, NOT FROM A WARD CRAFT.** So the hazards stay typed — **but the ANSWER comes from equipment and sheets, not from the 48 `wardTypes` I just authored** |
+| **L4 The Assay** | ⛔ **BLOCKED** | `projectTicks` does not exist in the engine |
+
+### ⛔ A2a — The L2 change is the one that matters
+
+**My hazard table assumed a party answers `decay` by having Death-Ward up.** ⚠️ **It does not — not yet.**
+
+**So L2 is authored the other way round: the ANSWERS ARE OBJECTS.** Oiled leathers against the grey damp.
+A lattice-token against the assay-light. Cut stone and salt against the drowned green. ⛔ **WHICH IS
+BETTER FOR A FIRST DUNGEON ANYWAY** — the party finds the answer in the room rather than needing to have
+brought the right tradition.
+
+⚠️ **And it gives the 48 `wardTypes` a destination rather than a use:** when ward crafts do feed the layer
+walk, L2 gains a second solution path and the equipment becomes the fallback. **I am not re-authoring them
+— they are correct and early.**
+
+### A2b — L4 stays in the spec, unbuilt
+
+⛔ **DO NOT STUB IT.** A project level that resolves in a scene is not the feature. **L4 waits for
+`projectTicks`, and the dungeon ships as three levels with a sealed floor** — which is also the better
+fiction: *the assay is still running and nobody has reached it.*
+
+## A3 — YOUR THREE ANSWERS, TAKEN
+
+**Hazards** — an encounter frame kind with an **authored opponent sheet**, which already carries everything
+my typed hazards need. ⛔ **No new record type. I will author hazards as sheets.**
+
+**The Warden** — the same authored sheet in a duel-typed encounter, ⚠️ **and explicitly NOT a bestiary
+entry**, since that record has no skills, soak or layers and its own design law forbids it.
+
+**The clock** — ⛔ **taking your recommendation: a standing effect with an escalating value**, not a new
+round clock. **Effects already tick per turn and surface on the receipt**, which means the rising water is
+visible to the player every round without new machinery.
+
+## A4 — ⛔ THE CUT THREAD IS LAW, NOT AN EXCEPTION
+
+**`resolveImposition` refuses anything outside `action_loss | staggered | unconscious | incapacitated`** —
+so **the shears failing against a construct is structural**, not a rule written for one room.
+
+⚠️ **And it corrects me twice over.** I first wrote an `imposes` block onto a craft whose own text says
+*"end one living thing — it simply stops"*; Erik caught that the craft DOES slay. **The craft kills through
+`harmRung: lethal` and 5d6+6.** ⛔ **It cannot kill a construct because a construct has no thread** — which
+is the ability's own bound, and the engine happens to agree.
+
+## A5 — ORDER
+
+**You take SNG-500 §4** — declared obscure, which unblocks L1's missing half.
+**I author L1 and L3 as content**, against sheets, next.
+⚠️ **L2 after, once I have authored its answering equipment.** **L4 when `projectTicks` lands.**

@@ -198,8 +198,21 @@ export function checkChangeSet(cs, label = cs.id || "(unnamed)") {
 
 const arg = process.argv[2];
 const dir = join(root, "po", "staged_content", "changesets");
+// ⛔ A CHANGE SET HAS A LIFECYCLE. Its `expectedGates` describe the tree AT APPLY TIME; re-scoring them
+// forever against a moving tree turns a finished, correct change set into a permanent false red - which is
+// exactly what happened to SNG-506 the moment a gate it named was legitimately re-baselined.
+// PENDING change sets are validated. APPLIED ones live in `applied/` and only have to still parse, so an
+// unreadable record of what was done is still caught.
+const appliedDir = join(dir, "applied");
 const targets = arg ? [arg]
   : existsSync(dir) ? readdirSync(dir).filter(f => f.endsWith(".json")).map(f => join(dir, f)) : [];
+if (!arg && existsSync(appliedDir)) {
+  const bad = readdirSync(appliedDir).filter(f => f.endsWith(".json")).filter(f => {
+    try { JSON.parse(readFileSync(join(appliedDir, f), "utf8")); return false; } catch { return true; }
+  });
+  check(`applied/: every applied change set is still readable (${readdirSync(appliedDir).filter(f => f.endsWith(".json")).length} on the shelf)`,
+    bad.length === 0, bad.join(", "));
+}
 
 if (!targets.length) {
   console.log("no change sets found — nothing to check.");

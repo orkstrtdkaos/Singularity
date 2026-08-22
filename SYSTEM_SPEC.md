@@ -2398,10 +2398,45 @@ that lags the code is worse than no map, because it is believed.
 | `mechanic.evasion` + `evasionRank` | `evasionOf` — rank 1 still findable by a reader, rank 2+ not | `skill_battle.js` | **7** |
 | `penetration` | splits `cutThrough` (rank ≤ pen) from `soak` | `skill_battle.js` | **4** |
 | `mechanic.duration` | craft duration in rounds, capped by `craftDurationMax` | `skill_battle.js` | many |
-| `mechanic.crit` / `crit` | `critFor`, with a per-craft cap | `craftmechanics.js` | ⛔ **0** |
+| `mechanic.crit` / `crit` | `critFor` → a per-craft **chance bias** and a **sentence on the receipt**. ⚠️ **Nothing else** — see §39.4 | `craftmechanics.js` → `resolve.js` | ⛔ **0** |
 | `damageType` | `answers(l)` — which soak layers apply | `skill_battle.js` | 26 |
 | `wardTypes` | the same match, from the ward's side | `skill_battle.js` | ⛔ **0** |
-| `mechanic.dice` on a **healing** shape | ⛔ **NOTHING** | — | 27 |
+| `mechanic.dice` on a **healing** shape | ✅ `resolveHeal` → `rollMagnitude` → the round's `healing` | `craftmechanics.js` → `skill_battle.js` healing branch | 25 |
+| `ongoingHarm` on the **SUBJECT** | ✅ the only thing that soaks a heal | `craftmechanics.js` `resolveHeal` | ⛔ **0** |
+
+## §39.4 — HEALING (CCODE-207), and what `crit` can and cannot take
+
+⛔ **A HEAL IS NOT A NEGATIVE HIT.** `resolveHeal` is its own path rather than a sign flip on the damage
+one, because the damage path would have inherited crit, evasion and armour-soak and needed three
+suppressions — and a suppression is a thing a later edit undoes quietly. Stated once, gated instead:
+
+| | |
+|---|---|
+| crit | ⛔ **never** — a heal cannot crit into overhealing |
+| evasion | ⛔ **never** — you do not dodge being mended |
+| armour soak | ⛔ **never** — plate does not stop mending |
+| **ACTIVE ONGOING HARM** | ✅ **the one thing that soaks a heal** — the wound is still opening while you close it |
+| **staunch** | ✅ a heal may spend its whole value ENDING that harm instead of mending |
+
+**Rank scaling is not reinvented** — it comes from `mechanicFor`, which already compounds tier, intensity
+and `rankDeltas`. Erik's ruling holds: **HEALED IS HEALED** — rank buys quantity, never duration.
+
+⚠️ **`healing` was never guarded out of the damage block — it was never let in.** That branch is gated on
+`engine.damage.harmFunctions`, and `heal`/`mend`/`restore` are not harm verbs, so 25 crafts with authored
+dice could **win a round and produce nothing**. The healing verbs are now authored beside the harm ones at
+`engine.damage.healFunctions`. **Dials: `craft_mechanics.healing` (taper).**
+
+⛔ **WHAT `crit` CAN ACTUALLY TAKE TODAY — the answer to "AMPLIFY, ESCALATE or PERSIST":**
+
+| shape | supported? | what it would need |
+|---|---|---|
+| **AMPLIFY** (more of the same) | ⛔ **no** | there is no crit damage multiplier anywhere; a crit raises the *sense tier* and nothing else |
+| **ESCALATE** (a different, better effect) | ⚠️ **as PROSE only** — the sentence reaches the receipt, nothing changes mechanically | a craft able to **impose a named state** with a resist |
+| **PERSIST** (temporary becomes durable) | ⛔ **no** | a duration/permanence hook on the crit branch |
+
+⚠️ **ESCALATE and SNG-500 §2 (Keening) are the same feature.** Keening needs "a craft imposes the existing
+incapacitation state, with a resist that degrades to action-loss." That mechanism *is* ESCALATE. **Build §2
+and ESCALATE comes nearly free; author AMPLIFY before either and it lands on nothing.**
 
 ⛔ **SHAPE IS RESOLVED, NOT AUTHORED.** `strike` resolves to `damage` and rolls; `hobble` does not. Author a
 damage number on a hobble-shaped craft and no die is ever thrown.

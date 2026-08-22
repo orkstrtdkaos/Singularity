@@ -6,7 +6,7 @@
 // narrates the resolved exchange; it never chooses the opponent's mechanical move — that is opponentPolicy.
 
 import { resolveAction } from "./resolve.js";
-import { mechanicFor, rollMagnitude, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
+import { mechanicFor, rollMagnitude, resolveHeal, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const DEFAULT_STEPS = { conserve: { energyMult: 0.6, effectMod: -8 }, standard: { energyMult: 1, effectMod: 0 }, surge: { energyMult: 1.6, effectMod: 10, backlashChance: 0.25 } };
@@ -765,8 +765,13 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // scraping one) — so a turned-aside blow does nothing, which is what Erik watched fail to happen.
   const dcfg = sb.damage || {};
   const harmFns = new Set(dcfg.harmFunctions || sb.persistentEffects?.attackFunctions || ["strike", "break"]);
+  const healFns = new Set(dcfg.healFunctions || ["heal", "mend", "restore"]);
   let opponentHealth = state.opponentHealth ?? oppSheet.health ?? null;
-  let damage = null;
+  let damage = null, healing = null;
+  // ⛔ CCODE-207: HEALING WAS NEVER GUARDED OUT OF THIS BLOCK - IT WAS NEVER LET IN. The branch below is
+  // gated on `harmFns`, and `heal`/`mend`/`restore` are not harm functions, so 25 crafts with authored dice
+  // could win a round and produce nothing at all. Authored beside `harmFunctions` for the same reason that
+  // one is authored: a set of verbs the engine treats specially is content, not code.
   // A kind whose LOSING costs no health deals no DAMAGE either — the same ruling, read once. Caught by the
   // SNG-247 tests the moment damage was added: without this a standoff drew blood, which is exactly what
   // `losingCostsHealth: false` was written to forbid. A contest of wills cannot wound you from either side.
@@ -775,7 +780,35 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     const winDecl = roundWinner === "player" ? playerDecl : oppDecl;
     const winRoll = roundWinner === "player" ? p : o;
     const loseRoll = roundWinner === "player" ? o : p;
-    if (harmFns.has(winDecl.function)) {
+    if (healFns.has(winDecl.function)) {
+      // ⚠️ A HEAL IS SPENT ON ITS OWN SIDE, and the round it wins is a round it did not attack in - the
+      // tempo cost IS the trade (SNG-500 §1.3). `resolveHeal` states the asymmetries; this only decides who
+      // receives it and reports the intermediate numbers so a soaked heal reads as soaked.
+      const marginGap = Math.max(0, (winRoll.margin || 0) - (loseRoll.margin || 0));
+      const cmCfgH = rules?.craftMechanics;
+      const side = roundWinner === "player" ? "player" : "opponent";
+      const subject = roundWinner === "player" ? playerSheet : oppSheet;
+      const r = resolveHeal(winDecl, {
+        rank: winDecl.rank || 1, tier: winDecl.tier, intensity: winDecl.intensity || "standard",
+        cfg: cmCfgH || {}, rng, marginGap,
+        ongoingHarm: subject?.ongoingHarm || [],
+        staunch: winDecl.staunch === true,
+        priorHeals: Number(state.healsBySide?.[side]) || 0
+      });
+      if (r.ok) {
+        healing = { side, amount: r.healed, verb: winDecl.function, by: winDecl.name || winDecl.function,
+          rolled: r.rolled,
+          ...(r.tapered !== r.rolled ? { tapered: r.tapered } : {}),
+          ...(r.soaked ? { soaked: r.soaked } : {}),
+          ...(r.staunched ? { staunched: r.staunched, ended: r.ended } : {}) };
+        // the opponent's health is the one this engine owns; the player's is applied by the caller from
+        // `healing.side`, exactly as it already applies `damage.side`.
+        if (side === "opponent" && opponentHealth != null) {
+          const ceiling = Number(oppSheet?.maxHealth ?? oppSheet?.health);
+          opponentHealth = Number.isFinite(ceiling) ? Math.min(ceiling, opponentHealth + r.healed) : opponentHealth + r.healed;
+        }
+      }
+    } else if (harmFns.has(winDecl.function)) {
       const marginGap = Math.max(0, (winRoll.margin || 0) - (loseRoll.margin || 0));
       // SNG-263 §7: the damage is the CRAFT's now, and it is ROLLED. The formula below was
       // `base + tier*0.5 + marginGap*0.06` keyed off the function FAMILY — so every strike-craft in the game
@@ -917,7 +950,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
 
   // CCODE-45: a sense step doesn't advance the ROUND counter either — the whole turn is one round.
   const newState = { ...state, round: (state.round || 0) + (senseStep ? 0 : 1), momentum, playerEnergy, opponentEnergy, effects, pressure, spent, resolved, opponentHealth, status: resolved ? "resolved" : "active" };
-  const out = { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, damage, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
+  const out = { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback },
     // CCODE-80: an evaded blow must SAY it was evaded. An attack that quietly does less is indistinguishable
     // from a bad roll, and the whole point of the three defensive logics is that they read differently.

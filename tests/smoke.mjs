@@ -6866,7 +6866,29 @@ await (async () => {
   }
   if (badAffinity.length) console.log("   schoolAffinity problems: " + badAffinity.join("; "));
   check("193b §3.5 CI: every schoolAffinity resolves to a school of its own tradition", badAffinity.length === 0);
-  check("193b §2: the authored affinity set is 19 abilities", affinities === 19);
+  // ⛔ RE-BASELINED FROM 19 TO 18 ON AEVI'S OWN ARGUMENT, AND THE NUMBER IS NOT THE FINDING. The 19 was
+  // never a measured target — it was the count on the day the gate was written, which is a census wearing a
+  // gate's clothes. She cannot honestly produce a nineteenth, and said so.
+  //
+  // ⚠️ THE REAL FINDING IS UNDERNEATH IT: only THREE traditions have any craft pointing at a school
+  // (cogitant, ashwarden, marcher). The other 23 have schools defined and nobody in them — schools authored
+  // for peoples whose crafts never claim them. That is the thing worth watching, so it is the thing gated:
+  // a ratchet that may only shrink as she audits each tradition in its own change set.
+  check(`193b §2: ${affinities} abilities carry a schoolAffinity — a floor, raised deliberately per tradition`,
+    affinities >= 18, `${affinities} < 18: an affinity was lost, not authored`);
+  {
+    const schoolsDoc = JSON.parse(readFileSync(join(root, "content/packs/core/rules/schools.json"), "utf8"));
+    const claimed = new Set();
+    for (const f of readdirSync(abDir193)) {
+      if (!f.endsWith(".json")) continue;
+      for (const ab of (JSON.parse(readFileSync(join(abDir193, f), "utf8")).abilities || []))
+        if (ab.schoolAffinity) claimed.add(ab.tradition || ab.powerSystem);
+    }
+    const withSchools = Object.keys(schoolsDoc.traditionSchools || {});
+    const unclaimed = withSchools.filter(t => !claimed.has(t));
+    check(`193b §2b: ${unclaimed.length} traditions have schools no craft claims — may only SHRINK`,
+      unclaimed.length <= 22, unclaimed.slice(0, 10).join(", "));
+  }
 
   // §3.2 — creation seed + the ONE validated write-seam.
   check("193b §3.2: creation seeds each practised domain with its pure/root school", sb.defaultSchoolsForDomains({ primary: "cogitant" }, schools).cogitant === pure.id);
@@ -16555,6 +16577,123 @@ await (async () => {
   check("CCODE-199: antisoak matches Erik's three worked examples exactly (10/8/6=8 · 6/8/6=0 · 2/0/6=8)",
     CM.antisoakLanded(10, 8, 6) === 8 && CM.antisoakLanded(6, 8, 6) === 0 && CM.antisoakLanded(2, 0, 6) === 8,
     `${CM.antisoakLanded(10, 8, 6)} / ${CM.antisoakLanded(6, 8, 6)} / ${CM.antisoakLanded(2, 0, 6)}`);
+  // 5b · ⛔ CCODE-207 / SNG-500 §1 — HEALING HAS A READER. 25 crafts carried authored dice and nothing read
+  // them: `mechanicFor` had three call sites and healing reached none, so `physicians_tome`'s 2d4 was prose
+  // with a number attached. The asymmetries are gated here rather than suppressed on the damage path,
+  // because a suppression is a thing a later edit undoes quietly and a gate is not.
+  {
+    const cfg207 = C199.craftMechanics || {};
+    const tome = C199.abilities?.physicians_tome;
+    const fixed = () => 0.5;                       // a fixed rng, so every number below is the SAME roll
+    const heal = (opts = {}) => CM.resolveHeal(tome, { cfg: cfg207, rng: fixed, rank: 2, ...opts });
+
+    check("CCODE-207: a healing craft resolves at all — the largest inert block in the game has a reader",
+      !!tome && heal().ok === true && heal().healed > 0, JSON.stringify(heal()));
+
+    // ⚠️ RANK IS A QUANTITY, NOT A DURATION. Erik: "HEALED IS HEALED."
+    const r1 = heal({ rank: 1 }).healed, r2 = heal({ rank: 2 }).healed, r3 = heal({ rank: 3 }).healed;
+    check("CCODE-207: rank buys a bigger heal, never a longer one — healed is healed",
+      r1 < r2 && r2 < r3, `r1=${r1} r2=${r2} r3=${r3}`);
+
+    // ⛔ NO CRIT. Hand the craft a crit dial and a rng that would crit on the damage path; nothing changes.
+    const withCrit = { ...tome, mechanic: { ...tome.mechanic, crit: { success: { text: "x", chance: 95 } } } };
+    check("CCODE-207: a heal cannot crit into overhealing — the crit dial is never consulted",
+      CM.resolveHeal(withCrit, { cfg: cfg207, rng: fixed, rank: 2 }).healed === heal().healed);
+
+    // ⛔ NO EVASION. A subject's evasion is not a thing that exists on this path; proving it means the
+    // field can be set to anything and the answer does not move.
+    const withEvade = { ...tome, mechanic: { ...tome.mechanic, evasion: 99, evasionRank: 3 } };
+    check("CCODE-207: a heal cannot be evaded — you do not dodge being mended",
+      CM.resolveHeal(withEvade, { cfg: cfg207, rng: fixed, rank: 2 }).healed === heal().healed);
+
+    // ⛔ ARMOUR DOES NOT SOAK A HEAL. Only ACTIVE ONGOING HARM does.
+    const withSoak = { ...tome, mechanic: { ...tome.mechanic, soak: 99, soakRank: 3 } };
+    check("CCODE-207: armour does not soak a heal — plate does not stop mending",
+      CM.resolveHeal(withSoak, { cfg: cfg207, rng: fixed, rank: 2 }).healed === heal().healed);
+
+    const bleeding = heal({ ongoingHarm: [{ id: "bleed", magnitude: 3 }] });
+    check("CCODE-207: ACTIVE ONGOING HARM soaks a heal — the wound is still opening while you close it",
+      bleeding.soaked === 3 && bleeding.healed === heal().healed - 3,
+      `soaked=${bleeding.soaked} healed=${bleeding.healed} vs clean ${heal().healed}`);
+
+    // ⚠️ THE COUNTER-COUNTER. `Physician's Tome r1` — "the bleeding stopped" — is written for this.
+    const staunched = heal({ ongoingHarm: [{ id: "bleed", magnitude: 3 }], staunch: true });
+    check("CCODE-207: a heal may spend its value ENDING the harm instead of mending",
+      staunched.ended.includes("bleed") && staunched.staunched === 3 && staunched.soaked === 0);
+
+    // ⛔ AND IT MUST BE ABLE TO FAIL. A roll that cannot afford the harm ends nothing — otherwise
+    // staunching is free and the crafts that impose bleeding never matter.
+    const tooBig = heal({ ongoingHarm: [{ id: "grey", magnitude: 99 }], staunch: true });
+    check("CCODE-207: a heal that cannot afford the harm ends nothing and mends nothing",
+      tooBig.ended.length === 0 && tooBig.healed === 0, JSON.stringify(tooBig));
+
+    // partial: two conditions, only the cheaper affordable — and what is still running keeps soaking
+    const partial = heal({ ongoingHarm: [{ id: "nick", magnitude: 2 }, { id: "grey", magnitude: 99 }], staunch: true });
+    check("CCODE-207: staunching some is not staunching all — what still runs still soaks",
+      partial.ended.length === 1 && partial.ended[0] === "nick" && partial.healed === 0, JSON.stringify(partial));
+
+    // ⚠️ THE TAPER, AND ITS FLOOR. Aevi's bound; Erik's numbers.
+    const t0 = heal({ priorHeals: 0 }).healed, t1 = heal({ priorHeals: 1 }).healed, t9 = heal({ priorHeals: 9 }).healed;
+    check("CCODE-207: repeat healing of one subject returns less each time, and never nothing",
+      t1 < t0 && t9 > 0 && t9 >= Math.round(t0 * (cfg207.healing?.taperFloor ?? 0.25)),
+      `t0=${t0} t1=${t1} t9=${t9}`);
+
+    // ⛔ THE DIAL IS AUTHORED, NOT HARDCODED. A balance number that can only be changed by editing engine
+    // source is a number nobody turns — the arc-response lesson.
+    check("CCODE-207: the taper dial is authored in craft_mechanics.json and reaches the engine",
+      Number.isFinite(cfg207.healing?.taperPer) && Number.isFinite(cfg207.healing?.taperFloor),
+      JSON.stringify(cfg207.healing ?? null));
+
+    check("CCODE-207: a craft that is not a heal is REFUSED, not resolved as one",
+      CM.resolveHeal(C199.abilities?.sustained_regard, { cfg: cfg207, rng: fixed }).ok === false);
+
+    // ⛔ COVERAGE, WHICH IS THE WHOLE POINT. Every authored healing craft must actually resolve — a
+    // reader that works on the one craft it was written against is not a reader.
+    const healers = Object.values(C199.abilities || {}).filter(a => a.shape === "healing" && a.mechanic?.dice);
+    const dead = healers.filter(a => { const r = CM.resolveHeal(a, { cfg: cfg207, rng: fixed, rank: 1 }); return !r.ok || r.healed <= 0; });
+    check(`CCODE-207: all ${healers.length} authored healing crafts resolve to a real number`,
+      healers.length >= 20 && dead.length === 0, dead.slice(0, 6).map(a => a.id).join(", "));
+
+    // ⛔ AND IT IS CALLED. A resolver with no call site is the exact bug this whole week has been about —
+    // `resolveHeal` passing its own unit tests while healing stayed inert would be `narrationHints` again,
+    // 376 written and 0 read. This runs a REAL round through `battleRound` and reads the result.
+    //
+    // ⚠️ HEALING WAS NEVER GUARDED OUT OF THE DAMAGE BLOCK — IT WAS NEVER LET IN. That branch is gated on
+    // `harmFunctions`, and `heal`/`mend`/`restore` are not harm verbs, so a healing craft could WIN A ROUND
+    // and produce nothing at all. The verb set is authored at `engine.damage.healFunctions`, beside the
+    // harm one, because a set of verbs the engine treats specially is content.
+    {
+      const SB207 = await import("../engine/skill_battle.js");
+      const rules207 = C199.rules || {};
+      const sb207 = rules207.skillBattle || C199.skillBattle || {};
+      const steps207 = C199.resolutionSteps || rules207.resolution || {};
+      const decl = { ...tome, function: "heal", tier: 2, attribute: "mental", intensity: "standard",
+                     name: "Physician's Tome", rank: 2 };
+      const oppDecl = { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "jab" };
+      const hurt = { attributes: { mental: 6, physical: 4, social: 3, practical: 5 }, level: 8,
+                     health: 20, maxHealth: 40, ongoingHarm: [{ id: "bleed", magnitude: 2 }] };
+      const weak = { attributes: { mental: 1, physical: 2, social: 1, practical: 1 }, level: 1,
+                     health: 20, maxHealth: 20, soak: 0 };
+      const round = SB207.battleRound({ playerDecl: decl, oppDecl, playerSheet: hurt, oppSheet: weak,
+        state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 50, effects: [], pressure: { player: 0, opponent: 0 } },
+        rules: rules207, sb: sb207, steps: steps207, rng: () => 0.5 });
+
+      check("CCODE-207: a heal that WINS A ROUND produces a heal — the resolver is actually called",
+        round.roundWinner === "player" && round.healing?.side === "player" && round.healing.amount > 0,
+        JSON.stringify(round.healing ?? null));
+      // ⛔ AND IT IS NOT A BLOW. A round won by mending must not also deal damage.
+      check("CCODE-207: winning a round by mending deals no damage — a heal is not a negative hit",
+        round.damage === null, JSON.stringify(round.damage));
+      // the subject's ongoing harm reaches the resolver through the round, not just the unit test
+      check("CCODE-207: the SUBJECT's ongoing harm reaches the round — a bleeding healer heals less",
+        round.healing?.soaked === 2 && round.healing.amount === round.healing.rolled - 2,
+        JSON.stringify(round.healing ?? null));
+      // the verb set is authored, not hardcoded in the branch
+      check("CCODE-207: the healing verbs are authored beside the harm verbs, not baked into the engine",
+        Array.isArray((sb207.engine?.damage || sb207.damage || {}).healFunctions),
+        JSON.stringify((sb207.engine?.damage || sb207.damage || {}).healFunctions ?? null));
+    }
+  }
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

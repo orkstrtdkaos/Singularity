@@ -449,3 +449,86 @@ export function antisoakLanded(hit, soak = 0, antisoak = 0) {
   const through = Math.max(0, num(hit, 0) - Math.max(0, num(soak, 0)));
   return through > 0 ? through + Math.max(0, num(antisoak, 0)) : 0;
 }
+
+/** SNG-500 §1 / CCODE-207 — RESOLVE A HEAL. The largest inert block in the game: 25 healing crafts, every
+ *  one of them carrying authored dice, and not one reader. `mechanicFor` had three call sites and healing
+ *  reached none — so `physicians_tome`'s 2d4 and `sun_coax`'s 1d4 were prose with a number attached.
+ *
+ *  ⛔ A HEAL IS NOT A NEGATIVE HIT, and that is why this is its own function rather than a sign flip on the
+ *  damage path. Aevi offered both shapes and left the choice to me; the damage path would have inherited
+ *  crit, evasion and armour-soak and required three suppressions, each of which is a thing a later edit can
+ *  quietly undo. Stated once, here, they are gated instead:
+ *
+ *    · NO CRIT.     A heal cannot crit into overhealing. `critFor` is never consulted on this path.
+ *    · NO EVASION.  You do not dodge being mended. No evasion field is read.
+ *    · SOAK, BUT ONLY BY ACTIVE ONGOING HARM — never by armour. Bleeding, hastened decay, rot, venom and
+ *      sustained holds reduce a heal because the wound is still opening while you close it. Plate does not.
+ *    · AND THE COUNTER-COUNTER: a heal may spend its whole value ENDING that harm instead of mending
+ *      (`staunch`). `Physician's Tome r1` is written for exactly this — "the bleeding stopped".
+ *
+ *  ⚠️ RANK SCALING IS NOT REINVENTED HERE. It comes from `mechanicFor`, which already compounds tier,
+ *  intensity and `rankDeltas` and is tested. Erik's ruling stands unchanged: HEALED IS HEALED — a rank buys
+ *  a bigger QUANTITY, never a duration or a permanence.
+ *
+ *  ⚠️ THE TAPER IS A DIAL, NOT A JUDGEMENT. Aevi's bound: "healing the same subject repeatedly in one
+ *  contest should return less each time, or a party with one healer never loses." The SHAPE is mine; the
+ *  NUMBERS are Erik's, authored at `craft_mechanics.healing` so they can be turned without editing engine
+ *  source — the thing that made 21 arc-response numbers unreachable for weeks.
+ *
+ *  `ongoingHarm` is a property of the SUBJECT, not of the healing craft: [{ id, magnitude }]. ⛔ NOTHING
+ *  AUTHORS IT YET. `Hastened Grey` and `Sustained Regard r2` both claim it in prose and neither carries a
+ *  field, so this reader is live and currently unfed — reported to Aevi with the shape it wants rather than
+ *  invented on her behalf. A reader with no writer is a bug; a reader with a NAMED, REPORTED gap is a
+ *  work order.
+ *
+ *  Returns { ok, why, rolled, tapered, soaked, staunched, ended[], healed, shape } — every intermediate
+ *  kept, because a receipt that says only "healed 5" cannot explain why the 9 that was rolled became 5. */
+export function resolveHeal(ability, {
+  rank = 1, tier = null, intensity = "standard", cfg = {}, verb = null,
+  rng = Math.random, marginGap = 0,
+  ongoingHarm = [], staunch = false, priorHeals = 0
+} = {}) {
+  const v = verb || (ability?.functions || []).find(f => shapeOfVerb(f, cfg)?.shape === "healing") || (ability?.functions || [])[0];
+  const m = mechanicFor(ability, { verb: v, tier: tier ?? ability?.levelReq, rank, intensity, cfg });
+  if (!m || m.shape !== "healing") {
+    return { ok: false, why: "not a healing craft", rolled: 0, tapered: 0, soaked: 0, staunched: 0, ended: [], healed: 0, shape: m?.shape ?? null };
+  }
+  // ⚠️ A REFUSED INTENSITY IS A VALUE. `the_last_light` "cannot be half-given"; carrying the refusal through
+  // rather than quietly resolving the baseline is the same rule the damage path already keeps.
+  if (m.refusedIntensity) {
+    return { ok: false, why: m.refusalMarker || "this craft refuses that intensity", rolled: 0, tapered: 0, soaked: 0, staunched: 0, ended: [], healed: 0, shape: m.shape };
+  }
+
+  const rolled = rollMagnitude(m.fields, rng, { marginGap, marginFloorPer: m.fields.marginFloorPer, cfg });
+
+  // the taper: each prior heal on this subject this contest returns less, never below a floor fraction.
+  const dial = cfg.healing || {};
+  const per = num(dial.taperPer, 0.25);
+  const floorFrac = Math.min(1, Math.max(0, num(dial.taperFloor, 0.25)));
+  const keep = Math.max(floorFrac, 1 - per * Math.max(0, num(priorHeals, 0)));
+  const tapered = Math.max(rolled > 0 ? 1 : 0, Math.round(rolled * keep));
+
+  // ⛔ ACTIVE ONGOING HARM IS THE ONLY THING THAT SOAKS A HEAL.
+  const harm = (Array.isArray(ongoingHarm) ? ongoingHarm : [])
+    .map(h => ({ id: h?.id ?? null, magnitude: Math.max(0, num(h?.magnitude, 0)) }))
+    .filter(h => h.magnitude > 0);
+
+  if (!staunch) {
+    const soaked = Math.min(tapered, harm.reduce((t, h) => t + h.magnitude, 0));
+    return { ok: true, why: null, rolled, tapered, soaked, staunched: 0, ended: [], healed: Math.max(0, tapered - soaked), shape: m.shape };
+  }
+
+  // staunching: buy the harm off, cheapest first, and mend with whatever is left. Cheapest-first is
+  // deliberate — it ends the most conditions the roll can afford rather than the largest one, and a heal
+  // that ends nothing at all is the failure this branch exists to avoid.
+  let purse = tapered, staunched = 0;
+  const ended = [];
+  for (const h of [...harm].sort((a, b) => a.magnitude - b.magnitude)) {
+    if (h.magnitude > purse) break;
+    purse -= h.magnitude; staunched += h.magnitude; ended.push(h.id);
+  }
+  // whatever harm is STILL running keeps soaking the remainder — staunching some is not staunching all.
+  const remainingHarm = harm.filter(h => !ended.includes(h.id)).reduce((t, h) => t + h.magnitude, 0);
+  const soaked = Math.min(purse, remainingHarm);
+  return { ok: true, why: null, rolled, tapered, soaked, staunched, ended, healed: Math.max(0, purse - soaked), shape: m.shape };
+}

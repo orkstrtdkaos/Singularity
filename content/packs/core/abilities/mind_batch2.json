@@ -283,7 +283,13 @@
    "mechanic": {
     "magnitude": 5,
     "duration": 5,
-    "scope": 2
+    "scope": 2,
+    "wardTypes": [
+     "physical",
+     "living",
+     "precursor",
+     "abstraction"
+    ]
    },
    "challengeTypes": [
     "SURVIVE",
@@ -374,7 +380,8 @@
    "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field.",
    "_idWas": "the_named_exclusion",
    "_nameWas": "The Named Exclusion",
-   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do."
+   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do.",
+   "_wardTypes": "⛔ SNG-512. ⛔ A named category cannot cross — the ward names its own type at casting, which is why it reaches four.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "unbroken_thread",

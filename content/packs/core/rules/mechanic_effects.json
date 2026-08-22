@@ -240,5 +240,6 @@
    "what": "`critFor` reads the craft's own critical",
    "note": "⚠️ authored on few"
   }
- }
+ },
+ "_lethalityClarification_20260816": "⛔ SNG-514. TWO DIFFERENT THINGS, AND I CONFLATED THEM:\n   `harmRung: lethal` + `shape: damage` — ⛔ THE CRAFT KILLS. It does so through the damage path like any other killing blow. The Cut Thread, and anything else Erik authors as lethal.\n   `mechanic.imposes` — CONDITIONS SHORT OF DEATH ONLY: action_loss, staggered, unconscious, incapacitated. ⚠️ The engine refuses `slain` HERE because this field exists for the space BELOW killing, not because crafts may not kill.\n⛔ A CRAFT THAT KILLS DOES IT WITH DAMAGE AND A LETHAL RUNG. A craft that takes someone out of a fight WITHOUT killing them uses `imposes`. ⚠️ MOST CRAFTS SHOULD BE THE SECOND KIND — that is the design — BUT 'most' IS NOT 'all', AND I TURNED A FIELD CONSTRAINT INTO A WORLD RULE."
 }

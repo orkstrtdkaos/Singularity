@@ -99,7 +99,11 @@
     "soak": 3,
     "soakRank": 2,
     "type": "abstraction",
-    "note": "⚠️ THE AXIS'S WEAPON. r3 'denies an abstraction purchase on the real: illusion, glamour, SYMBOL-WORKING AND FIGURE all simply fail in your presence.' Authored with a TYPED soak (CCODE-83's mechanic) against `abstraction` — it is a ward against an entire opposing tradition, and it is TRANSPARENT to a sword."
+    "note": "⚠️ THE AXIS'S WEAPON. r3 'denies an abstraction purchase on the real: illusion, glamour, SYMBOL-WORKING AND FIGURE all simply fail in your presence.' Authored with a TYPED soak (CCODE-83's mechanic) against `abstraction` — it is a ward against an entire opposing tradition, and it is TRANSPARENT to a sword.",
+    "wardTypes": [
+     "physical",
+     "abstraction"
+    ]
    },
    "rankDeltas": [
     {
@@ -149,7 +153,8 @@
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ BODY'S SENSE — reads condition and soundness by touch\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_merged": "⛔ SNG-481: absorbs Set Stone (L1 mason), which duplicated this skill's own r2 by name and effect.",
    "_powerSystemWas": "reach_concrete_abstract",
-   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it.",
+   "_wardTypes": "⛔ SNG-512. ⛔ 'Denial' — illusion, glamour, symbol-working and figure-craft FAIL inside it. THE CORPUS'S ONLY ABSTRACTION-WARD, and it was untyped.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "formcraft",
@@ -438,7 +443,11 @@
     "magnitude": 6,
     "duration": 8,
     "damageType": "abstraction",
-    "note": "damaging rung — a sent figure that ACTS"
+    "note": "damaging rung — a sent figure that ACTS",
+    "wardTypes": [
+     "physical",
+     "abstraction"
+    ]
    },
    "rankDeltas": [
     {
@@ -530,7 +539,8 @@
    ],
    "_rewritten": "⛔ SNG-457. The old text was 'carry a meaning somewhere' / 'the figure persists' / 'adapts its meaning' — ⚠️ 'CARRY A MEANING' IS NOT A GAME ACTION and a player could not say what happens. ⛔ WHAT IT REACHES FOR IS THE ONE THING NO OTHER MIND SKILL DOES: ACT SOMEWHERE YOU ARE NOT. The Named Exclusion is a static mark where you stand; this GOES, and at r3 it DECIDES. Erik: 'I like your rewrite and it's a good summon skill. Keep it.'",
    "_nameWas": "The Walking Figure",
-   "_idWas": "the_walking_figure"
+   "_idWas": "the_walking_figure",
+   "_wardTypes": "⛔ SNG-512. A figure that holds a threshold answers what tries to pass it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "sound_repair",

@@ -68,7 +68,15 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "imposes": {
+      "condition": "action_loss",
+      "onCrit": "staggered",
+      "degradesTo": "action_loss",
+      "resist": "mental",
+      "targets": 1
+     },
+     "_imposes": "⛔ SNG-513. ⛔ They lose the held action they were saving. A crit costs them their footing as well."
     },
     {
      "rank": 2,
@@ -84,7 +92,14 @@
       "targets",
       "scope"
      ],
-     "_grantsWas_SNG510": "⚠️ ADDS TARGETS AND FORMATION. Say it to a group and several answer at once — a shield line opens, a patrol turns to look, a council all speak over each other. ⛔ Formations, ambushes and coordinated actions break for a round."
+     "_grantsWas_SNG510": "⚠️ ADDS TARGETS AND FORMATION. Say it to a group and several answer at once — a shield line opens, a patrol turns to look, a council all speak over each other. ⛔ Formations, ambushes and coordinated actions break for a round.",
+     "imposes": {
+      "condition": "action_loss",
+      "onCrit": "staggered",
+      "resist": "mental",
+      "targets": 4
+     },
+     "_imposes": "⛔ SNG-513. A formation breaks for a round."
     },
     {
      "rank": 3,
@@ -225,5 +240,6 @@
   }
  ],
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
- "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",
+ "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation."
 }

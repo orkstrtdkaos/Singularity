@@ -208,7 +208,7 @@
     {
      "rank": 2,
      "name": "Long Room",
-     "grants": "⚠️ ADDS DISTANCE AND NUMBER. Hold it across miles and with several at once — ⛔ A SCOUT WHO REPORTS WITHOUT COMING BACK; a party split across a building acting as one.",
+     "grants": "⛔ LINK WILLING MINDS ACROSS MILES AND WITH SEVERAL AT ONCE. Shared senses and surface thought — ⛔ A SCOUT WHO REPORTS WITHOUT COMING BACK; a party split across a building acting as one.",
      "cannot": "All must be willing and must have been in sight when it opened. You feel what they feel, including dying.",
      "functions": [
       "reveal",
@@ -221,12 +221,13 @@
      "gainAxes": [
       "range",
       "scope"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS DISTANCE AND NUMBER. Hold it across miles and with several at once — ⛔ A SCOUT WHO REPORTS WITHOUT COMING BACK; a party split across a building acting as one."
     },
     {
      "rank": 3,
      "name": "One Mind",
-     "grants": "⛔ ADDS CAPABILITY-SHARING. Everyone linked can use what any one of them KNOWS — and the link now survives one of you being unconscious, panicking, or under a working meant to break it.",
+     "grants": "⛔ EVERYONE LINKED CAN USE WHAT ANY ONE OF THEM KNOWS — the linguist's language, the mason's eye for a load. And the link survives one of you being unconscious, panicking, or under a working meant to break it.",
      "cannot": "Knowledge, never craft: you cannot use their tradition's power. What one believes, all believe while it holds.",
      "functions": [
       "reveal",
@@ -246,7 +247,8 @@
       "conditions"
      ],
      "_rebalance": "⚠️ Was scope, its third. Quality + conditions makes the capstone rank about RELIABILITY, which is what a party actually needs from a link.",
-     "_nameWas": "The One Mind"
+     "_nameWas": "The One Mind",
+     "_grantsWas_SNG510": "⛔ ADDS CAPABILITY-SHARING. Everyone linked can use what any one of them KNOWS — and the link now survives one of you being unconscious, panicking, or under a working meant to break it."
     }
    ],
    "_authored": "⛔ SNG-453. Erik: 'It could be a MIND MELD alternatively — meld with your allies or scouts.' Authored as a SECOND capstone rather than an alternative: domination and communion are different crafts and a Mind tradition should have both.",
@@ -331,7 +333,7 @@
     {
      "rank": 2,
      "name": "Mark That Keeps",
-     "grants": "⚠️ ADDS INDEPENDENCE AND SIZE. It holds without your attention or presence, and covers a room, a camp or a compound rather than a doorway.",
+     "grants": "⛔ SET A THRESHOLD A NAMED CATEGORY CANNOT CROSS, AND IT HOLDS WITHOUT YOU. No attention or presence needed, and it covers a room, a camp or a compound rather than a doorway.",
      "cannot": "You must return to renew it before the season turns; a determined breaker can still break the mark itself.",
      "functions": [
       "ward",
@@ -343,12 +345,13 @@
      "_nameWas": "The Mark That Keeps",
      "gainAxes": [
       "scope"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS INDEPENDENCE AND SIZE. It holds without your attention or presence, and covers a room, a camp or a compound rather than a doorway."
     },
     {
      "rank": 3,
      "name": "Governed Ground",
-     "grants": "⛔ ADDS RULE AND COMPULSION. A figure a whole site obeys — water runs where it says, sound carries where it says, a named thing does not cross anywhere within it — AND a concrete thing within it is bound to match the pattern you set for as long as the figure holds.",
+     "grants": "⛔ SET A FIGURE A WHOLE SITE OBEYS — water runs where it says, sound carries where it says, a named thing does not cross anywhere within it — AND a concrete thing within it is bound to match the pattern you set for as long as it holds.",
      "cannot": "One site, and setting it takes a day. A figure this large is visible to anyone who reads figures.",
      "functions": [
       "ward",
@@ -361,7 +364,8 @@
      "_nameWas": "The Governed Ground",
      "gainAxes": [
       "scope"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS RULE AND COMPULSION. A figure a whole site obeys — water runs where it says, sound carries where it says, a named thing does not cross anywhere within it — AND a concrete thing within it is bound to match the pattern you set for as long as the figure holds."
     }
    ],
    "_merged": "⛔ SNG-453: MERGES The Standing Figure (L1, mag6, e5) and The Warding Mark (L2, mag4, e2) — both 'set a persistent figure that excludes a named category', with the later one strictly cheaper. ⚠️ The Standing Figure's r3 site-rule survives as the new r3.",
@@ -436,7 +440,7 @@
     {
      "rank": 2,
      "name": "Across Days",
-     "grants": "⚠️ ADDS DURATION. Sustain complex work across days without the thinking degrading — a problem, a plan, a translation, a vigil.",
+     "grants": "⛔ SUSTAIN COMPLEX MENTAL WORK ACROSS DAYS without the thinking degrading — a problem, a plan, a translation, a vigil — and return to exactly where you were after any interruption.",
      "cannot": "You must still eat and sleep, though less well than you should.",
      "functions": [
       "sustain",
@@ -447,12 +451,13 @@
      "gainAxes": [
       "range",
       "duration"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS DURATION. Sustain complex work across days without the thinking degrading — a problem, a plan, a translation, a vigil."
     },
     {
      "rank": 3,
      "name": "Last Thing to Fail",
-     "grants": "⛔ ADDS CONDITIONS. Function clearly where better bodies have stopped — cold, blood loss, three days without water, a burning building.",
+     "grants": "⛔ FUNCTION CLEARLY WHERE BETTER BODIES HAVE STOPPED — cold, blood loss, three days without water, a burning building. The work continues and its quality does not fall.",
      "cannot": "⚠️ The body still fails on schedule. This only means you are thinking clearly while it does.",
      "functions": [
       "sustain",
@@ -463,7 +468,8 @@
      "_nameWas": "The Last Thing to Fail",
      "gainAxes": [
       "duration"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS CONDITIONS. Function clearly where better bodies have stopped — cold, blood loss, three days without water, a burning building."
     }
    ],
    "_merged": "⛔ SNG-453: MERGES The Axiom Holds (syllogist, L1, e1) and The Long Form (cogitant, L2, e1) — both 'keep functioning under pressure through mental discipline', same arc: hold → hold for days → you are the last thing to fail. Flavour internal.",
@@ -482,5 +488,6 @@
    "_schoolAffinityWas": "cog_unaided"
   }
  ],
- "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
 }

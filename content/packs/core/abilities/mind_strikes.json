@@ -225,7 +225,15 @@
      "gainAxes": [
       "conditions"
      ],
-     "_grantsWas_SNG510": "⛔ ADDS AFTERMATH. The struck mind cannot hold anything for a round — a sustained craft drops, a held action is lost, a spoken command comes out wrong. ⚠️ Against a caster this is worse than the wound."
+     "_grantsWas_SNG510": "⛔ ADDS AFTERMATH. The struck mind cannot hold anything for a round — a sustained craft drops, a held action is lost, a spoken command comes out wrong. ⚠️ Against a caster this is worse than the wound.",
+     "imposes": {
+      "condition": "action_loss",
+      "onCrit": "staggered",
+      "degradesTo": "action_loss",
+      "resist": "mental",
+      "targets": 1
+     },
+     "_imposes": "⛔ SNG-513. ⛔ The struck mind cannot hold anything for a round — a sustained craft drops."
     }
    ],
    "_authored": "⛔ SNG-464. Erik: 'a Mind character should have some GREAT PSYCHIC STRIKES.' ⚠️ Mind's existing damage was Cutting Figure (1d6, figurist geometry) and Sustained Regard (1d6, attention). ⛔ NEITHER WAS A DIRECT PSYCHIC ATTACK — this is the tradition's straight ranged hit, and its defining property is that NOTHING CAN BE INTERPOSED.",
@@ -233,5 +241,6 @@
   }
  ],
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
- "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",
+ "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation."
 }

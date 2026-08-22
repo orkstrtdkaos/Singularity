@@ -252,7 +252,12 @@
     "soakRank": 1,
     "duration": 1,
     "targets": 1,
-    "note": "THE CROSS-REFERENCE ANCHOR. r1 = ONE impact then gone (soakRank 1). radiant_lance r3 'beats a Harmonic shield's FIRST RANK' — so soakRank 1 is exactly what a T-II lance's top rank overcomes, and r3 below raises the rank so the relationship stays live rather than becoming a permanent hard-counter."
+    "note": "THE CROSS-REFERENCE ANCHOR. r1 = ONE impact then gone (soakRank 1). radiant_lance r3 'beats a Harmonic shield's FIRST RANK' — so soakRank 1 is exactly what a T-II lance's top rank overcomes, and r3 below raises the rank so the relationship stays live rather than becoming a permanent hard-counter.",
+    "wardTypes": [
+     "physical",
+     "light",
+     "shadow"
+    ]
    },
    "rankDeltas": [
     {
@@ -300,7 +305,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/duel action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 1 armour) It affects 1 target, and lasts for about an hour Ranks: rank 2 extends duration+targets; rank 3 extends soak+targets. Limit: immobile once anchored; Collapses Instantly if you take a hit inside it."
+   "plainly": "A fight/duel action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 1 armour) It affects 1 target, and lasts for about an hour Ranks: rank 2 extends duration+targets; rank 3 extends soak+targets. Limit: immobile once anchored; Collapses Instantly if you take a hit inside it.",
+   "_wardTypes": "⛔ SNG-512. A standing wave dampens incoming force and what travels as a wave.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "harmonic_voice",
@@ -531,7 +537,12 @@
     "magnitude": 2,
     "duration": 3,
     "area": 1,
-    "note": "r1: a room-CORNER of hush for a few minutes"
+    "note": "r1: a room-CORNER of hush for a few minutes",
+    "wardTypes": [
+     "physical",
+     "feeling",
+     "temporal"
+    ]
    },
    "rankDeltas": [
     {
@@ -573,7 +584,8 @@
    ],
    "plainly": "A stealth/social action that reduces incoming harm. Its strength is rated 2 out of 10, and lasts for about 3 hours Ranks: rank 2 extends area+duration; rank 3 adds to special. Limit: a Harmonic Adept Notices The Theft OF Sound Instantly.",
    "obscure": true,
-   "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. denies sound; a held pocket rather than a thrown one\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY."
+   "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. denies sound; a held pocket rather than a thrown one\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY.",
+   "_wardTypes": "⛔ SNG-512. A pocket of quiet answers sound-borne force, emotion, and haste.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "chord_of_mending",
@@ -934,7 +946,11 @@
     "soakRank": 2,
     "targets": 1,
     "duration": 3,
-    "note": "r1: hold against a strong man's shove, a river current to the waist"
+    "note": "r1: hold against a strong man's shove, a river current to the waist",
+    "wardTypes": [
+     "physical",
+     "temporal"
+    ]
    },
    "rankDeltas": [
     {
@@ -974,7 +990,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A survive/fight action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 3 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets; rank 3 deepens anchorStrength. Limit: one anchored spot — lifting a foot ends it."
+   "plainly": "A survive/fight action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 3 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets; rank 3 deepens anchorStrength. Limit: one anchored spot — lifting a foot ends it.",
+   "_wardTypes": "⛔ SNG-512. Cannot be pushed, dragged or swept — and holds its own moment.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "drumline_stride",

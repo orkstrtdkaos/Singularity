@@ -1266,7 +1266,11 @@
     "soakRank": 0,
     "duration": 3,
     "targets": 1,
-    "note": "A NINTH DEFENSIVE LOGIC — PRE-EMPTED: soak 0 because it does not withstand the blow, it ENDS THE THING THAT WOULD STRIKE, before it strikes. 'Not deflecting the blow but ending the thing that would swing it.'"
+    "note": "A NINTH DEFENSIVE LOGIC — PRE-EMPTED: soak 0 because it does not withstand the blow, it ENDS THE THING THAT WOULD STRIKE, before it strikes. 'Not deflecting the blow but ending the thing that would swing it.'",
+    "wardTypes": [
+     "physical",
+     "appetite"
+    ]
    },
    "rankDeltas": [
     {
@@ -1308,7 +1312,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Ended Threat",
-   "_idWas": "the_ended_threat"
+   "_idWas": "the_ended_threat",
+   "_wardTypes": "⛔ SNG-512. Prevention rather than blocking — answers what could be ended first.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "open_material",

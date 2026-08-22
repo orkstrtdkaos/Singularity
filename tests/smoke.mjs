@@ -16829,6 +16829,26 @@ await (async () => {
       !Object.keys(coreManifest.provides || {}).includes("world"),
       "a `world` key was added to provides; the loader has none, so those paths would be read by nothing");
   }
+  // 5e · ⛔ CCODE-210: ANTISOAK IS CALLED. It was built against Erik's three examples, gated, and had NO
+  // CALL SITE for a week - my own reader-with-no-writer, and Aevi's dungeon spec found it by asking which
+  // of Level 3's mechanics were real. A gate on the arithmetic is not a gate on the wiring.
+  {
+    const SB210 = await import("../engine/skill_battle.js");
+    const rules210 = C199.rules || {}, sb210 = rules210.skillBattle || C199.skillBattle || {};
+    const steps210 = C199.resolutionSteps || rules210.resolution || {};
+    const hitter = { attributes: { physical: 8, mental: 4, social: 4, practical: 5 }, level: 9, health: 40, maxHealth: 40 };
+    const decl = { function: "strike", tier: 4, attribute: "physical", intensity: "standard", name: "a hard blow" };
+    const jab = { function: "shield", tier: 1, attribute: "physical", intensity: "conserve", name: "guard" };
+    const target = (extra) => ({ attributes: { physical: 1, mental: 1, social: 1, practical: 1 }, level: 1,
+      health: 40, maxHealth: 40, soak: 2, ...extra });
+    const run = (t) => SB210.battleRound({ playerDecl: decl, oppDecl: jab, playerSheet: hitter, oppSheet: t,
+      state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 50, effects: [], pressure: { player: 0, opponent: 0 } },
+      rules: rules210, sb: sb210, steps: steps210, rng: () => 0.5 });
+    const plain = run(target({})), vuln = run(target({ antisoak: 6 }));
+    check("CCODE-210: an ANTISOAKED target takes more from the same blow — the arithmetic is wired, not just gated",
+      vuln.damage?.amount === plain.damage?.amount + 6,
+      );
+  }
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

@@ -6,7 +6,7 @@
 // narrates the resolved exchange; it never chooses the opponent's mechanical move — that is opponentPolicy.
 
 import { resolveAction } from "./resolve.js";
-import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
+import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const DEFAULT_STEPS = { conserve: { energyMult: 0.6, effectMod: -8 }, standard: { energyMult: 1, effectMod: 0 }, surge: { energyMult: 1.6, effectMod: 10, backlashChance: 0.25 } };
@@ -926,7 +926,15 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       const landed = aff === "absorb"
         ? -Math.max(1, Math.round(hit * (acfg.absorbMult ?? 1)))          // it FEEDS — a negative hit is healing
         : aff === "immune" ? 0
-        : Math.max(dcfg.minHit ?? 1, hit - soak);
+        // ⛔ CCODE-210 — ANTISOAK WAS BUILT AND NEVER CALLED. `antisoakLanded` was written against Erik's
+        // three worked examples, gated, and had NO CALL SITE - my own reader-with-no-writer, found by
+        // Aevi's dungeon spec before she built a room of it. His definition is a VULNERABILITY ON THE
+        // TARGET: what got past soak is amplified, so it stacks with piercing rather than competing, and a
+        // blow that never landed cannot be made worse (10/8/6=8 · 6/8/6=0 · 2/0/6=8).
+        // ⚠️ READ FROM THE TARGET, NOT THE ATTACKING CRAFT. `grief_strike` authors `antisoak: 3` and it is
+        // ambiguous whether that means "this blow benefits" or "this blow LEAVES them vulnerable";
+        // reading it from the striker would decide that silently. Reported to Erik instead.
+        : antisoakLanded(hit, soak, Number(targetSheet?.antisoak) || 0) || Math.max(dcfg.minHit ?? 1, hit - soak);
       damage = { side: roundWinner === "player" ? "opponent" : "player", amount: landed, verb: winDecl.function,
         by: winDecl.name || winDecl.function,
         // CCODE-83: a blow that was EATEN, shrugged off or doubled must say so. Silently different arithmetic

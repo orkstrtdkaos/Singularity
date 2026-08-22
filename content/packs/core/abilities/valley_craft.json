@@ -1511,7 +1511,10 @@
     "soak": 0,
     "soakRank": 0,
     "duration": 8,
-    "note": "A NINETEENTH DEFENSIVE LOGIC — UNREMARKED: soak 0, and it is not stealth (quiet_step) or concealment (the_harbor) or misdirection (the_false_target). It is BEING UNWORTH NOTICING. Per Erik's grouping ask this sits in the BEFORE-THE-ROLL family."
+    "note": "A NINETEENTH DEFENSIVE LOGIC — UNREMARKED: soak 0, and it is not stealth (quiet_step) or concealment (the_harbor) or misdirection (the_false_target). It is BEING UNWORTH NOTICING. Per Erik's grouping ask this sits in the BEFORE-THE-ROLL family.",
+    "wardTypes": [
+     "physical"
+    ]
    },
    "rankDeltas": [
     {
@@ -1547,7 +1550,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A stealth/social action that reduces incoming harm. Its strength is rated 3 out of 10 and absorbs 0 harm per hit (rank 0 armour), and lasts for about 8 hours Ranks: rank 2 deepens concealment; rank 3 adds to special. Limit: a Searcher Who Knows Your Face And IS Looking defeats it."
+   "plainly": "A stealth/social action that reduces incoming harm. Its strength is rated 3 out of 10 and absorbs 0 harm per hit (rank 0 armour), and lasts for about 8 hours Ranks: rank 2 deepens concealment; rank 3 adds to special. Limit: a Searcher Who Knows Your Face And IS Looking defeats it.",
+   "_wardTypes": "⛔ SNG-512. Not being noticed answers being targeted at all.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "boundary_stone",
@@ -1627,7 +1631,11 @@
     "soak": 3,
     "soakRank": 1,
     "duration": 168,
-    "note": "A folk ward. Note soakRank 1 and the bound: 'A DETERMINED PERSON WALKS THROUGH IT; it DETERS, not stops.'"
+    "note": "A folk ward. Note soakRank 1 and the bound: 'A DETERMINED PERSON WALKS THROUGH IT; it DETERS, not stops.'",
+    "wardTypes": [
+     "physical",
+     "living"
+    ]
    },
    "rankDeltas": [
     {
@@ -1663,7 +1671,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A survive/explore action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 3 harm per hit (rank 1 armour), and lasts for about 7 days Ranks: rank 2 deepens ward; rank 3 adds to autonomy. Limit: a Determined Person Walks Through IT — it Deters, not stops."
+   "plainly": "A survive/explore action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 3 harm per hit (rank 1 armour), and lasts for about 7 days Ranks: rank 2 deepens ward; rank 3 adds to autonomy. Limit: a Determined Person Walks Through IT — it Deters, not stops.",
+   "_wardTypes": "⛔ SNG-512. Small beasts, weather, casual trespass. A plain threshold ward.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "hunters_strike",

@@ -516,7 +516,12 @@
     "soakRank": 2,
     "duration": 8,
     "targets": 1,
-    "note": "A guard whose soak IS YOUR CONVICTION — 'you must ACTUALLY BELIEVE IT. A hollow word wards nothing.'"
+    "note": "A guard whose soak IS YOUR CONVICTION — 'you must ACTUALLY BELIEVE IT. A hollow word wards nothing.'",
+    "wardTypes": [
+     "physical",
+     "deception",
+     "judgement"
+    ]
    },
    "rankDeltas": [
     {
@@ -555,7 +560,8 @@
    "plainly": "A fight/social action that reduces incoming harm. Its strength is rated 6 out of 10 and absorbs 5 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 8 hours Ranks: rank 2 extends targets; rank 3 adds to autonomy. Limit: you Must Actually Believe IT — A Hollow Word Wards Nothing.",
    "_nameWas": "The Shielding Word",
    "_idWas": "the_shielding_word",
-   "_descriptionWas": "Interpose a spoken certainty between harm and a person — the Seraphic ward, which is why the Orders are loved despite everything."
+   "_descriptionWas": "Interpose a spoken certainty between harm and a person — the Seraphic ward, which is why the Orders are loved despite everything.",
+   "_wardTypes": "⛔ SNG-512. ⛔ A spoken certainty answers force, lies, and judgement — the Seraphic ward is a claim about what is true.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "appetite_strike",
@@ -923,7 +929,11 @@
     "evasion": 3,
     "evasionRank": 1,
     "duration": 8,
-    "note": "A SEVENTEENTH DEFENSIVE LOGIC — DETERRED: soak 0. It does not stop harm; it makes attackers CHOOSE A DIFFERENT TARGET. Per Erik's grouping ask this sits in the BEFORE-THE-ROLL family with DISCOURAGED and NEVER-FOUND."
+    "note": "A SEVENTEENTH DEFENSIVE LOGIC — DETERRED: soak 0. It does not stop harm; it makes attackers CHOOSE A DIFFERENT TARGET. Per Erik's grouping ask this sits in the BEFORE-THE-ROLL family with DISCOURAGED and NEVER-FOUND.",
+    "wardTypes": [
+     "appetite",
+     "feeling"
+    ]
    },
    "rankDeltas": [
     {
@@ -963,7 +973,8 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Dread Mantle",
-   "_idWas": "the_dread_mantle"
+   "_idWas": "the_dread_mantle",
+   "_wardTypes": "⛔ SNG-512. ⛔ What you have been through as armour. It deters WANT and FEELING; it stops nothing with an edge.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "called_form",
@@ -2160,7 +2171,13 @@
     "soakRank": 3,
     "duration": 8,
     "targets": 4,
-    "note": "T-IV — the catalog's purest endurance guard"
+    "note": "T-IV — the catalog's purest endurance guard",
+    "wardTypes": [
+     "physical",
+     "shadow",
+     "decay",
+     "deception"
+    ]
    },
    "rankDeltas": [
     {
@@ -2188,7 +2205,8 @@
    "plainly": "A defend action that reduces incoming harm. Its strength is rated 7 out of 10 and absorbs 6 harm per hit (rank 3 armour) It affects 4 targets, and lasts for about 8 hours Ranks: rank 2 extends targets. Limit: iT Cannot Attack, Only Endure — AT Any Mastery.",
    "_descriptionWas": "The Seraphic art of the light that does not gutter — a radiance sustained past all reason to sustain it, warding a place or a person through what should overwhelm them.",
    "_nameWas": "The Unfaltering Light",
-   "_idWas": "the_unfaltering_light"
+   "_idWas": "the_unfaltering_light",
+   "_wardTypes": "⛔ SNG-512. ⛔ A capstone ward — four kinds, which is what a capstone buys.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "schemaVersion": 1,
@@ -3277,7 +3295,12 @@
    "mechanic": {
     "magnitude": 5,
     "duration": 24,
-    "scope": 2
+    "scope": 2,
+    "wardTypes": [
+     "physical",
+     "appetite",
+     "judgement"
+    ]
    },
    "intensity": {
     "conserve": "name one person, quietly",
@@ -3299,7 +3322,8 @@
    ],
    "plainly": "A social/fight action that places your name's protection over someone else. Rated 5 of 10 across a scope of 2 for about a day.",
    "_nameWas": "The Sheltering Name",
-   "_idWas": "the_sheltering_name"
+   "_idWas": "the_sheltering_name",
+   "_wardTypes": "⛔ SNG-512. ⛔ A name's protection answers those who CREDIT IT. It answers want and moral weight; it does not answer weather.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "borrowed_certainty",
@@ -3735,7 +3759,12 @@
    "mechanic": {
     "magnitude": 6,
     "duration": 4,
-    "scope": 2
+    "scope": 2,
+    "wardTypes": [
+     "physical",
+     "shadow",
+     "decay"
+    ]
    },
    "intensity": {
     "conserve": "interpose briefly for one",
@@ -3761,7 +3790,8 @@
    ],
    "plainly": "A fight/social action that turns harm aside from someone else while you hold it. Rated 6 of 10 across a scope of 2 for about four hours.",
    "_nameWas": "The Shielding Light",
-   "_idWas": "the_shielding_light"
+   "_idWas": "the_shielding_light",
+   "_wardTypes": "⛔ SNG-512. The Order-bearer interposes. Answers what light answers.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "offered_lesser",
@@ -3842,7 +3872,10 @@
    "mechanic": {
     "magnitude": 6,
     "duration": 8,
-    "scope": 2
+    "scope": 2,
+    "wardTypes": [
+     "appetite"
+    ]
    },
    "intensity": {
     "conserve": "a small offering, a short turning",
@@ -3868,7 +3901,8 @@
    ],
    "plainly": "A social/fight action that feeds a hunger something smaller so it disengages. Rated 6 of 10 across a scope of 2 for about eight hours.",
    "_nameWas": "The Offered Lesser",
-   "_idWas": "the_offered_lesser"
+   "_idWas": "the_offered_lesser",
+   "_wardTypes": "⛔ SNG-512. ⛔ Everything down there wants something. Answers WANT, exactly and only.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "appetite_sense",

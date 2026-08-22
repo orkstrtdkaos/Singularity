@@ -604,7 +604,15 @@
      "harmRung": "damaging",
      "_nameWas": "The Unguarded Want",
      "gainAxes": [],
-     "_cannotWas": "Anything rank 2 adds — name the appetite and hit it — not the body, what the body has been protecting; it needs a REAL, HELD appetite."
+     "_cannotWas": "Anything rank 2 adds — name the appetite and hit it — not the body, what the body has been protecting; it needs a REAL, HELD appetite.",
+     "imposes": {
+      "condition": "staggered",
+      "onCrit": "incapacitated",
+      "degradesTo": "action_loss",
+      "resist": "mental",
+      "targets": 1
+     },
+     "_imposes": "⛔ SNG-513. Want turned on its owner."
     },
     {
      "rank": 2,
@@ -2046,7 +2054,11 @@
       "hinder"
      ],
      "_nameWas": "The Drowning Deep",
-     "gainAxes": []
+     "gainAxes": [],
+     "ongoingHarm": {
+      "type": "appetite"
+     },
+     "_ongoingHarm": "⛔ SNG-513. A want that keeps taking.\n⚠️ `mechanic.ongoingHarm` reduces a heal. healing_intent.json §5: A HEAL IS REDUCED BY ACTIVE ONGOING HARM, NEVER BY ARMOUR. Nobody armours against being mended; a wound held open resists it."
     }
    ],
    "gated": "learned",
@@ -4289,5 +4301,6 @@
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
  "_dramaStrip": "⛔ SNG-480 / SYSTEM_SPEC §32.12. Dramatising tail-clauses removed from `grants` and `cannot`. ⚠️ I WROTE §32.12 AND BROKE IT IN THE NEXT COMMIT. The bound states the limit; it does not editorialise about how the limit feels.",
- "_sng510b": "⛔ SNG-510b: nine MORE dangling openers, found by my own verification and NOT MINE — 'Extend it to others', 'Hold it for a day', 'They do not merely feel it'. ⚠️ SAME FAULT, PRE-DATING the rework: a rank whose first words refer to a rank the model is not sent."
+ "_sng510b": "⛔ SNG-510b: nine MORE dangling openers, found by my own verification and NOT MINE — 'Extend it to others', 'Hold it for a day', 'They do not merely feel it'. ⚠️ SAME FAULT, PRE-DATING the rework: a rank whose first words refer to a rank the model is not sent.",
+ "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation."
 }

@@ -492,7 +492,11 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "ongoingHarm": {
+      "type": "decay"
+     },
+     "_ongoingHarm": "⛔ SNG-513. Decay hastened in a thing that is not alive — a wound dressed in withered cloth does not close.\n⚠️ `mechanic.ongoingHarm` reduces a heal. healing_intent.json §5: A HEAL IS REDUCED BY ACTIVE ONGOING HARM, NEVER BY ARMOUR. Nobody armours against being mended; a wound held open resists it."
     },
     {
      "rank": 2,
@@ -989,7 +993,15 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "_nameWas": "The Grey Hand",
-     "gainAxes": []
+     "gainAxes": [],
+     "imposes": {
+      "condition": "staggered",
+      "onCrit": "incapacitated",
+      "degradesTo": "action_loss",
+      "resist": "physical",
+      "targets": 1
+     },
+     "_imposes": "⛔ SNG-513. ⛔ ERIK'S OWN ESCALATE EXAMPLE — a weakening becomes an incapacitation. ⚠️ It never kills; `incapacitated` is the ceiling and `slain` is refused at all three doors."
     },
     {
      "rank": 2,
@@ -1006,7 +1018,15 @@
       "range",
       "duration"
      ],
-     "_grantsWas_SNG510": "⛔ ADDS RANGE AND PERSISTENCE. Weaken at a distance rather than by touch, and the weakness STAYS — it does not lift when you stop attending to it."
+     "_grantsWas_SNG510": "⛔ ADDS RANGE AND PERSISTENCE. Weaken at a distance rather than by touch, and the weakness STAYS — it does not lift when you stop attending to it.",
+     "imposes": {
+      "condition": "staggered",
+      "onCrit": "incapacitated",
+      "degradesTo": "action_loss",
+      "resist": "physical",
+      "targets": 1
+     },
+     "_imposes": "⛔ SNG-513. At range, and it persists until healed."
     },
     {
      "rank": 3,
@@ -1022,7 +1042,15 @@
      "gainAxes": [
       "duration",
       "scope"
-     ]
+     ],
+     "imposes": {
+      "condition": "incapacitated",
+      "onCrit": "incapacitated",
+      "degradesTo": "staggered",
+      "resist": "physical",
+      "targets": 3
+     },
+     "_imposes": "⛔ SNG-513. ⚠️ At r3 the ordinary result IS the incapacitation, so the crit cannot escalate further — it degrades less instead."
     }
    ],
    "gated": "learned",
@@ -1267,7 +1295,14 @@
      "gains": "broaden",
      "harmRung": "incapacitating",
      "_nameWas": "The Dread",
-     "gainAxes": []
+     "gainAxes": [],
+     "imposes": {
+      "condition": "staggered",
+      "onCrit": "action_loss",
+      "resist": "mental",
+      "targets": 1
+     },
+     "_imposes": "⛔ SNG-513. Feeling your own ending approach. You do not choose how they act on it."
     },
     {
      "rank": 2,
@@ -1538,7 +1573,14 @@
      "functions": [
       "strike"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "imposes": {
+      "condition": "incapacitated",
+      "degradesTo": "staggered",
+      "resist": "mental",
+      "targets": 1
+     },
+     "_imposes": "⛔ SNG-513. ⛔ NO onCrit — incapacitated is already the ceiling, and `slain` is refused. The L5 Ashwarden capstone stops exactly where the engine stops it."
     }
    ],
    "gated": "learned",
@@ -3310,7 +3352,11 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "_nameWas": "The Grey Hand",
-     "gainAxes": []
+     "gainAxes": [],
+     "ongoingHarm": {
+      "type": "decay"
+     },
+     "_ongoingHarm": "⛔ SNG-513. ⛔ 'A WOUND ALREADY OPEN GOES GREY AND STOPS CLOSING.' The craft has claimed heal-denial in prose since it was authored and did nothing.\n⚠️ `mechanic.ongoingHarm` reduces a heal. healing_intent.json §5: A HEAL IS REDUCED BY ACTIVE ONGOING HARM, NEVER BY ARMOUR. Nobody armours against being mended; a wound held open resists it."
     },
     {
      "rank": 2,
@@ -3331,7 +3377,11 @@
      "_nameWas": "The Nearer End",
      "gainAxes": [
       "scope"
-     ]
+     ],
+     "ongoingHarm": {
+      "type": "decay"
+     },
+     "_ongoingHarm": "⛔ SNG-513. Deeper, and it spreads from the first fault.\n⚠️ `mechanic.ongoingHarm` reduces a heal. healing_intent.json §5: A HEAL IS REDUCED BY ACTIVE ONGOING HARM, NEVER BY ARMOUR. Nobody armours against being mended; a wound held open resists it."
     },
     {
      "rank": 3,
@@ -3353,7 +3403,11 @@
      "_nameWas": "The Keeper's Due",
      "gainAxes": [
       "range"
-     ]
+     ],
+     "ongoingHarm": {
+      "type": "decay"
+     },
+     "_ongoingHarm": "⛔ SNG-513. Everything within reach that was ever going to stop.\n⚠️ `mechanic.ongoingHarm` reduces a heal. healing_intent.json §5: A HEAL IS REDUCED BY ACTIVE ONGOING HARM, NEVER BY ARMOUR. Nobody armours against being mended; a wound held open resists it."
     }
    ],
    "challengeTypes": [
@@ -3850,5 +3904,6 @@
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",
- "_sng510b": "⛔ SNG-510b: nine MORE dangling openers, found by my own verification and NOT MINE — 'Extend it to others', 'Hold it for a day', 'They do not merely feel it'. ⚠️ SAME FAULT, PRE-DATING the rework: a rank whose first words refer to a rank the model is not sent."
+ "_sng510b": "⛔ SNG-510b: nine MORE dangling openers, found by my own verification and NOT MINE — 'Extend it to others', 'Hold it for a day', 'They do not merely feel it'. ⚠️ SAME FAULT, PRE-DATING the rework: a rank whose first words refer to a rank the model is not sent.",
+ "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation."
 }

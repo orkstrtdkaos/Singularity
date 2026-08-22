@@ -649,7 +649,10 @@
     "duration": 2,
     "targets": 1,
     "damageType": "precursor",
-    "note": "A TWENTIETH DEFENSIVE LOGIC — HELD-OPEN: soak 0, because it does not stop harm; it stops a thing from CLOSING. The only guard in the catalog whose subject is a possibility rather than a person."
+    "note": "A TWENTIETH DEFENSIVE LOGIC — HELD-OPEN: soak 0, because it does not stop harm; it stops a thing from CLOSING. The only guard in the catalog whose subject is a possibility rather than a person.",
+    "wardTypes": [
+     "precursor"
+    ]
    },
    "rankDeltas": [
     {
@@ -685,7 +688,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A survive/puzzle/explore action that reduces incoming harm. Its strength is rated 9 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 2 hours Ranks: rank 2 extends anchorStrength; rank 3 adds to special. Limit: one Thing, One Scene; costs continuously; When You Let GO IT Closes."
+   "plainly": "A survive/puzzle/explore action that reduces incoming harm. Its strength is rated 9 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 2 hours Ranks: rank 2 extends anchorStrength; rank 3 adds to special. Limit: one Thing, One Scene; costs continuously; When You Let GO IT Closes.",
+   "_wardTypes": "⛔ SNG-512. ⛔ The counter-move to the Precursor tendency. Answers precursor work and nothing else — deliberately narrow.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "address_sense",

@@ -509,7 +509,11 @@
     "evasionRank": 2,
     "duration": 4,
     "targets": 1,
-    "note": "A FIFTEENTH DEFENSIVE LOGIC — FORESENSED: soak 0; it reads the EMOTIONAL WEATHER and moves before harm forms. Distinct from PRE-EMPTED (end the threat) and UNTIMED (defeat the timing): this one feels the intent BEFORE it becomes action."
+    "note": "A FIFTEENTH DEFENSIVE LOGIC — FORESENSED: soak 0; it reads the EMOTIONAL WEATHER and moves before harm forms. Distinct from PRE-EMPTED (end the threat) and UNTIMED (defeat the timing): this one feels the intent BEFORE it becomes action.",
+    "wardTypes": [
+     "feeling",
+     "appetite"
+    ]
    },
    "rankDeltas": [
     {
@@ -550,7 +554,8 @@
    "_nameWas": "The Felt Wall",
    "_idWas": "the_felt_wall",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⚠️ emotional early warning — threat felt before it moves. A defensive sense.\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⚠️ emotional early warning — threat felt before it moves. A defensive sense.\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_wardTypes": "⛔ SNG-512. Emotional early warning answers what has intent behind it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "made_elegy",

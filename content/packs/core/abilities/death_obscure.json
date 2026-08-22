@@ -70,7 +70,14 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "imposes": {
+      "condition": "action_loss",
+      "onCrit": "staggered",
+      "resist": "mental",
+      "targets": 1
+     },
+     "_imposes": "⛔ SNG-513. A person shown their own death is not reading you."
     },
     {
      "rank": 2,
@@ -111,5 +118,6 @@
    "_authored": "⛔ SNG-490. Erik: 'SOUL STARE could be an obscure skill rank 1, plus it would DROP THEIR RESISTANCE. r2 would have a similar effect but on ANY LIVING ENTITY. r3 would work on ANYTHING — everything has an essence (ADDRESS).'\n⚠️ DEATH HAD NO OBSCURE. And the rank ladder is TARGET CLASS, not power: person → living → anything with an address, which is the Ashwarden thesis that everything finishes.\n⛔ THE RESISTANCE DROP IS THE SECOND HALF AND IT MAKES THIS A SETUP FOR THE WHOLE TRADITION — Hastened Grey, Draw Down and Cut Thread all land harder on something that has just been shown its ending."
   }
  ],
- "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",
+ "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation."
 }

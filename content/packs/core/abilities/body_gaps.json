@@ -243,7 +243,10 @@
    "mechanic": {
     "magnitude": 5,
     "duration": 3,
-    "scope": 2
+    "scope": 2,
+    "wardTypes": [
+     "feeling"
+    ]
    },
    "intensity": "moderate",
    "bounds": [
@@ -322,7 +325,8 @@
      "_grantsWas_SNG510": "⛔ ADDS TARGETS. Steady everyone within arm's reach at once — a stretcher line, a shield wall about to break, a crew in a storm."
     }
    ],
-   "_authored": "⛔ SNG-482. Body had no `soothe`. ⚠️ DISTINCT FROM MIND'S QUIET THE ROOM: that works at range on a room, this works by CONTACT on people you can reach, and it does not touch grief."
+   "_authored": "⛔ SNG-482. Body had no `soothe`. ⚠️ DISTINCT FROM MIND'S QUIET THE ROOM: that works at range on a room, this works by CONTACT on people you can reach, and it does not touch grief.",
+   "_wardTypes": "⛔ SNG-512. By contact, and feeling only.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   }
  ],
  "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas.",

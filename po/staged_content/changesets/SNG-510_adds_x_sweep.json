@@ -1,0 +1,502 @@
+{
+ "schemaVersion": 1,
+ "id": "SNG-510_adds_x_sweep",
+ "kind": "changeset",
+ "_title": "Make every rank's grant self-contained",
+ "_why": "⛔ CCode measured that `progression.abilitiesForGM` sends ONLY THE RANK THE PLAYER HOLDS — `tree.find(t => t.rank === owned.level)`. ⚠️ 67 RANKS OPEN BY DESCRIBING A DELTA THE MODEL NEVER SEES: '⚠️ ADDS RANGE. Throw it —' with no antecedent for 'it', 'ADDS TARGETS. Every foe watching you takes the false read' with no read established.\n⛔ ALL 67 ARE MINE. The convention was mine and it was wrong from the first batch.",
+ "_findingThatChangedTheFix": "⚠️ I INTENDED A STRIP AND MEASURED THAT IT IS NOT ENOUGH. Removing 'ADDS RANGE.' leaves 'Throw it — a bolt of the same force' — ⛔ 'IT' AND 'THE SAME FORCE' BOTH REFER TO r1, WHICH THE MODEL DOES NOT HAVE. Every one needs its craft restated, not its opener removed.\n⛔ SO THIS IS 67 REWRITES, NOT A REGEX. Doing it as a sweep would have produced 67 grants that PASS a prose check and still tell the model nothing.",
+ "scope": {
+  "ranksAffected": 67,
+  "byRank": {
+   "2": 35,
+   "3": 32
+  },
+  "abilitiesAffected": 37,
+  "byFile": {
+   "body_capstone.json": 2,
+   "body_gaps.json": 6,
+   "body_movement.json": 2,
+   "companion_taught.json": 2,
+   "death_obscure.json": 2,
+   "mind_batch2.json": 6,
+   "mind_conceal.json": 4,
+   "mind_merged.json": 3,
+   "mind_social.json": 4,
+   "mind_strikes.json": 3,
+   "physical_ranged.json": 2,
+   "reach_body_mind.json": 13,
+   "reach_concrete_abstract.json": 15,
+   "reach_death_life.json": 3
+  }
+ },
+ "ids": [
+  "answered_motion",
+  "case_closed",
+  "deduced_strike",
+  "false_stance",
+  "force_the_move",
+  "formcraft",
+  "grey_hand",
+  "ignore_me",
+  "ki_wield",
+  "loose_limbed",
+  "memory_palace",
+  "mind_meld",
+  "my_reality",
+  "named_exclusion",
+  "near_way",
+  "palework",
+  "pattern_sense",
+  "perfect_motion",
+  "plain_weight",
+  "psychic_lance",
+  "quick_hands",
+  "quiet_the_room",
+  "second_wind",
+  "set_word",
+  "shaped_body",
+  "skydancer",
+  "solved_route",
+  "soul_stare",
+  "sound_read",
+  "sound_repair",
+  "steady_hands",
+  "the_attended_end",
+  "unbroken_thread",
+  "unmoving_mind",
+  "walking_figure",
+  "working_model",
+  "worth_the_work"
+ ],
+ "removed": [],
+ "renamed": {},
+ "added": [],
+ "modified": [
+  {
+   "id": "ki_wield",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "ki_wield",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "false_stance",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "false_stance",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "worth_the_work",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "worth_the_work",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "steady_hands",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "steady_hands",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "loose_limbed",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "loose_limbed",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "the_attended_end",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "the_attended_end",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "soul_stare",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "soul_stare",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "mind_meld",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "mind_meld",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "named_exclusion",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "named_exclusion",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "unbroken_thread",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "unbroken_thread",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "ignore_me",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "ignore_me",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "my_reality",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "my_reality",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "solved_route",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "case_closed",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "case_closed",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "force_the_move",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "force_the_move",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "quiet_the_room",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "quiet_the_room",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "deduced_strike",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "psychic_lance",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "psychic_lance",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "quick_hands",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "quick_hands",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "second_wind",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "perfect_motion",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "memory_palace",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "memory_palace",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "skydancer",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "skydancer",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "working_model",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "working_model",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "shaped_body",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "shaped_body",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "unmoving_mind",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "unmoving_mind",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "answered_motion",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "formcraft",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "formcraft",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "walking_figure",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "walking_figure",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "sound_repair",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "sound_repair",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "set_word",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "set_word",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "near_way",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "near_way",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "plain_weight",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "plain_weight",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "sound_read",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "pattern_sense",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "pattern_sense",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "palework",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "palework",
+   "rank": 3,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  },
+  {
+   "id": "grey_hand",
+   "rank": 2,
+   "field": "tree[].grants",
+   "change": "rewrite self-contained — name the craft, its effect at THIS rank, and its numbers, without reference to a rank the model cannot see"
+  }
+ ],
+ "referrers": {
+  "_declared": [
+   "none — `grants` text is read only by progression.abilitiesForGM and sent to the model",
+   "⚠️ NO id, name, mechanic, function, tag or file is touched. Prose only."
+  ],
+  "_checkedAndNotAffected": [
+   "rules/native_grants.json",
+   "rules/ability_rename_map.json",
+   "rules/schools.json",
+   "rules/combination_recipes.json",
+   "rules/branch_forks.json",
+   "rules/emergence.json",
+   "tests fixtures"
+  ]
+ },
+ "expectedGates": {
+  "⛔ abilitiesCombatClaimedNotTaught": "STAYS GREEN — ⚠️ AND THIS IS THE ONE AT RISK. It reads grant text for combat language; a rewrite that drops 'deals Nd6' re-reds it, which is exactly how I broke it last time.",
+  "193b §3.5 schoolAffinity resolves to own tradition": "stays green — no affinity touched",
+  "SNG-101b native grants": "stays green — no grant touched",
+  "content_ci schema": "stays green — no required field touched",
+  "smoke suite": "stays green — no id touched"
+ },
+ "_manifest": "no new files",
+ "_applyNote": "⛔ AEVI APPLIES THIS ONE — it is prose in files I authored. ⚠️ CCode: run `changeset_check` and the suite after, and hold me to `abilitiesCombatClaimedNotTaught` staying green."
+}

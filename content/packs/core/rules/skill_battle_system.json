@@ -667,7 +667,7 @@
    "bonusNullBand": 2,
    "_bonusNullBand": "⛔ SNG-517 §1b - ERIK'S NULL BAND. Where the two rolls are roughly equal, NEITHER side earns a bonus action. ⚠️ THIS IS NOT THE TIE RULE AND MUST NOT BE MERGED WITH IT: the tie rule answers WHO WINS THE READ (gap 0 is the obscurer's, unchanged); this answers WHO EARNS A BONUS. At gap 0 the obscurer still denies the read and earns nothing - they broke even, which is the right feel for a coin-flip. Aevi suggested ±2 as a starting dial; widen if bonus actions prove too common.",
    "obscureReceipt": {
-    "_note": "⛔ AEVI'S PROSE, SNG-517 §4. THE FOUR VARIANTS SHARE A FIRST CLAUSE ON PURPOSE: \"You did not look\" is the COST, and the player should read it every time regardless of outcome - that is what makes the trade legible rather than a silent absence. Only the second line varies.",
+    "_note": "⛔ AEVI'S PROSE, SNG-517 §4 + SNG-519. THE VARIANTS SHARE A FIRST CLAUSE ON PURPOSE: 'You did not look' is the COST, and the player should read it every time regardless of outcome — that is what makes the trade legible rather than a silent absence. Only the second line varies.\n⛔ SNG-519: `uncontested` ADDED for Erik's ruling. And `noWatcher` REWRITTEN — its old body, 'hiding from no one costs the same as hiding from someone', became FALSE the moment one of those two cases started paying. ⚠️ IT NOW COVERS ONLY THE GUARD CASE: they acted, just not on looking.\n⚠️ THE TWO ARE DELIBERATELY DISTINGUISHABLE AT A GLANCE. 'nothing looked back' vs 'they were not looking either' — the first is an empty room, the second is a person facing the other way.",
     "base": {
      "head": "You did not look.",
      "body": "You spent the moment being hard to read instead — and they were reading."
@@ -685,10 +685,15 @@
      "body": "You spent the moment and they spent it better."
     },
     "noWatcher": {
-     "head": "You did not look, and nobody was looking at you.",
-     "body": "Hiding from no one costs the same as hiding from someone."
+     "head": "You did not look, and they were not looking either.",
+     "body": "They put their attention somewhere else. Neither of you learned anything, and neither of you gained."
     },
-    "_gapForAevi": "⛔ CCODE-213 NEEDS A SIXTH VARIANT AND IT IS YOUR PROSE, NOT MINE. Erik ruled that an obscure against an opponent who does NOTHING in the sense round earns the bonus action. Neither existing line fits: `wonBonus` says \"They spent their attention on you and came away with nothing\" — false, they spent nothing; `noWatcher` says \"Hiding from no one costs the same as hiding from someone\" — now false, it costs less. ⚠️ Author `uncontested`, sharing the first clause \"You did not look\" like the others. Until then the engine has no line for this outcome, and that is recorded here rather than covered by a wrong one."
+    "_gapForAevi": "⛔ CCODE-213 NEEDS A SIXTH VARIANT AND IT IS YOUR PROSE, NOT MINE. Erik ruled that an obscure against an opponent who does NOTHING in the sense round earns the bonus action. Neither existing line fits: `wonBonus` says \"They spent their attention on you and came away with nothing\" — false, they spent nothing; `noWatcher` says \"Hiding from no one costs the same as hiding from someone\" — now false, it costs less. ⚠️ Author `uncontested`, sharing the first clause \"You did not look\" like the others. Until then the engine has no line for this outcome, and that is recorded here rather than covered by a wrong one.",
+    "uncontested": {
+     "head": "You did not look — and nothing looked back.",
+     "body": "They spent the moment on nothing at all. You spent it on something, and that is the whole difference."
+    },
+    "_erikCall_narrowOrWide": "⛔ CCODE TOOK THE NARROW READING AND FLAGGED IT: an opponent who GUARDED has acted, so it earns the obscurer nothing; only a genuinely empty declaration pays.\n⚠️ I AGREE AND WOULD KEEP IT. 'Nothing' should mean nothing. A guard is a slot spent — they chose not to look, which is the same choice the obscurer made, and neither should be paid for it. ⛔ THE WIDE READING WOULD PAY YOU FOR OBSCURING AGAINST ANYONE WHO HAPPENED NOT TO READ THAT ROUND, which is most opponents most rounds, and the bonus stops meaning 'you beat someone'.\n⛔ AND CCODE'S SECOND ARGUMENT IS THE STRONGER ONE: `degradeIfSpent` degrades a broke side to a bare strike or guard rather than to nothing, and a static antagonist holds — SO A GENUINELY EMPTY DECLARATION IS RARE. The narrow reading is a rare reward; the wide one is a tap."
    }
   },
   "oddsPreview": {

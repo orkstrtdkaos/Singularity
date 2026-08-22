@@ -114,13 +114,23 @@ export function checkChangeSet(cs, label = cs.id || "(unnamed)") {
   const renamedFrom = Object.keys(cs.renamed || {});
   const leaving = [...new Set([...removed, ...renamedFrom])];
   const arriving = [...new Set([...(cs.added || []).map(a => a?.id || a), ...Object.values(cs.renamed || {})])].filter(Boolean);
+  // ⛔ A CHANGE SET NEED NOT MOVE AN ID. SNG-510 rewrites 67 rank GRANTS and touches no id, no mechanic
+  // and no file - and this tool rejected it as declaring nothing, which would have pushed a well-formed
+  // change set back at its author for the tool's convenience. `modified` is the third way to declare what
+  // you touch, and it gets its own checks below rather than a pass.
+  const modified = Array.isArray(cs.modified) ? cs.modified : [];
 
   check(`${label}: the change set declares what it touches`,
-    leaving.length > 0 || arriving.length > 0, "nothing in removed / renamed / added");
+    leaving.length > 0 || arriving.length > 0 || modified.length > 0,
+    "nothing in removed / renamed / added / modified");
 
   // 1 · ⛔ THE CENTRAL CHECK. Every file that names a departing id must be declared as a referrer.
   const derived = referrersOf(leaving, files);
-  const declared = new Set(cs.referrers || []);
+  // ⚠️ `referrers` may be a bare array, or an object that also records what was CHECKED AND FOUND
+  // UNAFFECTED - which is worth more than a bare list, because it says the author looked.
+  const declaredList = Array.isArray(cs.referrers) ? cs.referrers
+    : Array.isArray(cs.referrers?._declared) ? cs.referrers._declared : [];
+  const declared = new Set(declaredList.filter(f => /\.json$/.test(f)));
   const missed = [...derived.keys()].filter(rel => !declared.has(rel));
   check(`${label}: every file naming a departing id is declared as a referrer (${derived.size} derived)`,
     missed.length === 0,
@@ -139,6 +149,35 @@ export function checkChangeSet(cs, label = cs.id || "(unnamed)") {
     for (const [rel, ids] of healing) console.log(`        ${rel} [${[...new Set(ids)].slice(0, 5).join(", ")}]`);
   }
 
+  // 2b · ⛔ A MODIFICATION MUST NAME A CRAFT THAT EXISTS AND A FIELD IT ACTUALLY HAS. A prose change set
+  // has no referrers to derive, so the check that earns its keep is the other one: is the thing you say you
+  // are editing there at all? 67 rewrites aimed at a mistyped id would apply cleanly to nothing.
+  if (modified.length) {
+    const catalogue = new Map();
+    for (const { rel, text } of files) {
+      if (!rel.startsWith("abilities/")) continue;
+      let pk; try { pk = JSON.parse(text); } catch { continue; }
+      for (const ab of (pk.abilities || [])) catalogue.set(ab.id, ab);
+    }
+    const unknown = [...new Set(modified.map(m => m?.id).filter(Boolean))].filter(id => !catalogue.has(id));
+    check(`${label}: every modified id names a craft that exists (${modified.length} edits)`,
+      unknown.length === 0, unknown.slice(0, 8).join(", "));
+
+    // the field path, for the shapes a change set actually uses
+    const badField = modified.filter(m => {
+      const ab = catalogue.get(m?.id);
+      if (!ab || !m?.field) return false;                 // unknown id is reported above, not twice
+      if (/^tree\[\]\./.test(m.field)) {
+        const key = m.field.replace(/^tree\[\]\./, "");
+        const rank = (ab.tree || []).find(r => r.rank === m.rank);
+        return !rank || rank[key] === undefined;
+      }
+      return m.field.split(".")[0] in ab ? false : true;
+    });
+    check(`${label}: every modified field exists on the craft at the rank named`,
+      badField.length === 0, badField.slice(0, 6).map(m => `${m.id} r${m.rank} ${m.field}`).join(" · "));
+  }
+
   // 3 · ⛔ THE NAMESPACE INTERSECTION — SYSTEM_SPEC §43.2.
   const places = placeIds();
   const collisions = leaving.concat(arriving).filter(id => places.has(id));
@@ -149,7 +188,7 @@ export function checkChangeSet(cs, label = cs.id || "(unnamed)") {
   // 4 · ⛔ THE SAVE SIDE. Never a failure — a declaration. Deleting a player's earned craft to make a gate
   // green is the one outcome this whole method exists to prevent (reconcile.js CONTENT_STEPS.location v2:
   // dangling references are FLAGGED, never removed).
-  const impact = saveImpact(leaving);
+  const impact = leaving.length ? saveImpact(leaving) : null;
   if (impact) {
     const hit = Object.entries(impact.shapes).filter(([, n]) => n > 0);
     console.log(`      SAVES: ${impact.total} entr(ies) across ${impact.saves} save(s) carry a departing id`);
@@ -166,7 +205,7 @@ export function checkChangeSet(cs, label = cs.id || "(unnamed)") {
   // referrer had no business missing an unloadable one.
   {
     const manifestText = readFileSync(join(CORE, "manifest.json"), "utf8");
-    const named = [...new Set([...(cs.referrers || []),
+    const named = [...new Set([...declaredList,
                                ...(cs.added || []).map(a => a?._file).filter(Boolean),
                                cs._designDecisions?.template?.file].filter(Boolean))]
       .map(f => f.replace(/^content\/packs\/core\//, ""))

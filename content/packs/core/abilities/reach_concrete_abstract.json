@@ -1027,7 +1027,15 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "_nameWas": "The Keystone Blow",
-     "gainAxes": []
+     "gainAxes": [],
+     "imposes": {
+      "condition": "staggered",
+      "onCrit": "incapacitated",
+      "degradesTo": "action_loss",
+      "resist": "physical",
+      "targets": 4
+     },
+     "_imposes": "⛔ SNG-513. The structure comes down on whoever is under it."
     },
     {
      "rank": 2,
@@ -1767,7 +1775,15 @@
      ],
      "_grantsWas": "Everything nearby remembers its weight at once. Roofs, walls, armour, the load a man is carrying, the man — everything that can fall strikes what is beneath it, and armour breaks under its own weight. AND YOU SET THE FALL NOW: mastery is choosing where the weight goes, so you and anyone you name stand in the one place it does not.",
      "_cannotWas": "You still cannot make weight where there is none, and a building coming down is used by people who were not in your fight. It remains loud, and everyone knows what happened and who did it.",
-     "_grantsWas_SNG510": "⛔ ADDS AREA AND CONTROL OF THE FALL. Everything nearby remembers its weight at once — roofs, walls, armour, the load a man carries. AND YOU SET WHERE IT GOES: you and anyone you name stand in the one place it does not."
+     "_grantsWas_SNG510": "⛔ ADDS AREA AND CONTROL OF THE FALL. Everything nearby remembers its weight at once — roofs, walls, armour, the load a man carries. AND YOU SET WHERE IT GOES: you and anyone you name stand in the one place it does not.",
+     "imposes": {
+      "condition": "staggered",
+      "onCrit": "incapacitated",
+      "degradesTo": "action_loss",
+      "resist": "physical",
+      "targets": 6
+     },
+     "_imposes": "⛔ SNG-513. ⛔ Everything nearby remembers its weight. A crit means the roof found someone."
     }
    ],
    "challengeTypes": [
@@ -2299,5 +2315,6 @@
  "_dramaStrip": "⛔ SNG-480 / SYSTEM_SPEC §32.12. Dramatising tail-clauses removed from `grants` and `cannot`. ⚠️ I WROTE §32.12 AND BROKE IT IN THE NEXT COMMIT. The bound states the limit; it does not editorialise about how the limit feels.",
  "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas.",
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",
- "_sng510b": "⛔ SNG-510b: nine MORE dangling openers, found by my own verification and NOT MINE — 'Extend it to others', 'Hold it for a day', 'They do not merely feel it'. ⚠️ SAME FAULT, PRE-DATING the rework: a rank whose first words refer to a rank the model is not sent."
+ "_sng510b": "⛔ SNG-510b: nine MORE dangling openers, found by my own verification and NOT MINE — 'Extend it to others', 'Hold it for a day', 'They do not merely feel it'. ⚠️ SAME FAULT, PRE-DATING the rework: a rank whose first words refer to a rank the model is not sent.",
+ "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation."
 }

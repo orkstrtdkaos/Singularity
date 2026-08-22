@@ -83,7 +83,7 @@
     {
      "rank": 2,
      "name": "And Whoever Is With Me",
-     "grants": "⚠️ ADDS OTHERS. Extend it to a small group moving together — they must stay near you and behave ordinarily, and one person breaking it does not break it for everyone else.",
+     "grants": "⛔ WALK A SMALL GROUP THROUGH A LIT, OCCUPIED SPACE UNATTENDED. They must stay near you and behave ordinarily, and one person breaking it does not break it for everyone else.",
      "cannot": "⛔ THEY MUST ACT ORDINARY. A drawn weapon, a run, a shout, and that person is suddenly and singularly visible.",
      "functions": [
       "conceal"
@@ -93,12 +93,13 @@
      "gainAxes": [
       "scope",
       "targets"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS OTHERS. Extend it to a small group moving together — they must stay near you and behave ordinarily, and one person breaking it does not break it for everyone else."
     },
     {
      "rank": 3,
      "name": "Even Spoken To",
-     "grants": "⛔ ADDS SURVIVING CONTACT. Being addressed no longer ends it — you can answer a question, hand over a paper, be looked at directly, and they will not afterwards be able to say who you were.",
+     "grants": "⛔ REMAIN UNATTENDED EVEN WHEN ADDRESSED. You can answer a question, hand over a paper, be looked at directly — and they will not afterwards be able to say who you were.",
      "cannot": "⚠️ They know a person was there and dealt with them. What they cannot retain is WHICH person. A determined investigator can still work backwards from what you did.",
      "functions": [
       "conceal",
@@ -109,7 +110,8 @@
      "gainAxes": [
       "duration",
       "conditions"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS SURVIVING CONTACT. Being addressed no longer ends it — you can answer a question, hand over a paper, be looked at directly, and they will not afterwards be able to say who you were."
     }
    ],
    "_authored": "⛔ SNG-459. Erik: 'write a full skill for Ignore Me — a skill that uses mental psychic suggestion to HIDE IN PLAIN SIGHT.' ⚠️ Mind had ZERO conceal at t1 against a target of 2. The distinction from Umbral concealment is deliberate and stated in sectFlavour: an Umbral carries darkness, this carries indifference.",
@@ -195,7 +197,7 @@
     {
      "rank": 2,
      "name": "Ordinary Room",
-     "grants": "⚠️ ADDS AREA. A whole room, cellar, clearing or courtyard reads as somewhere with nothing in it — and the picture stays consistent as people move through and look from different angles.",
+     "grants": "⛔ LAY AN ORDINARY PICTURE OVER A WHOLE ROOM, CELLAR, CLEARING OR COURTYARD so it reads as somewhere with nothing in it — and the picture stays consistent as people move through and look from different angles.",
      "cannot": "⛔ IT MUST STAY PLAUSIBLE FROM EVERY ANGLE. A room whose picture contradicts the building around it draws exactly the attention you were avoiding.",
      "functions": [
       "conceal",
@@ -207,12 +209,13 @@
      "gainAxes": [
       "duration",
       "scope"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS AREA. A whole room, cellar, clearing or courtyard reads as somewhere with nothing in it — and the picture stays consistent as people move through and look from different angles."
     },
     {
      "rank": 3,
      "name": "My Reality",
-     "grants": "⛔ ADDS ONE REAL EFFECT, DECLARED WHEN YOU SET IT, AND IT WORKS FOR THE FULL DURATION — not only while you attend to it. Choose ONE: a WALL that blocks (stops movement through that face), TEETH that bite or a SPEAR that pierces (1d6 to the first who tries it each round), or GROUND that holds (footing fails, the crosser is hindered for a round).\n⚠️ SIX ROUNDS, OR ABOUT A MINUTE. The effect is part of the picture and does not need you present.",
+     "grants": "⛔ LAY THE PICTURE AND GIVE IT ONE REAL EFFECT, DECLARED WHEN YOU SET IT, WORKING THE FULL SIX ROUNDS WITHOUT YOUR ATTENTION. Choose ONE: a WALL that blocks, TEETH or a SPEAR that deal 1d6 to the first who tries it each round, or GROUND that fails and hinders the crosser for a round.",
      "cannot": "⛔ ONE EFFECT ONLY, chosen at setting and unchangeable. ⚠️ It is conviction made load-bearing, not matter — anyone TOLD THE TRUTH before they act ignores both the picture and its effect.",
      "functions": [
       "conceal",
@@ -228,7 +231,8 @@
       "quality",
       "autonomy",
       "conditions"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS ONE REAL EFFECT, DECLARED WHEN YOU SET IT, AND IT WORKS FOR THE FULL DURATION — not only while you attend to it. Choose ONE: a WALL that blocks (stops movement through that face), TEETH that bite or a SPEAR that pierces (1d6 to the first who tries it each round), or GROUND that holds (footing fails, the crosser is hindered for a round).\n⚠️ SIX ROUNDS, OR ABOUT A MINUTE. The effect is part of the picture and does not need you present."
     }
    ],
    "_authored": "⛔ SNG-459, REVISED. Erik: 'Instead of The Plain Room call it MY REALITY. At r3 the limit could be ONE EFFECT ADDED AS STANDARD — including real teeth bite, spear pierces, wall blocks. I don't like the WHILE IT HOLDS part — it should be FOR THE DURATION.'\n⚠️ SO r3 IS NOW: one declared effect, working the full six rounds without your attention. ⛔ DAMAGE SET AT 1d6 — the L1 rung — deliberately: this is a trap you prepared, not an attack you make, and it should not out-damage a Cutting Figure. ⛔ AND THE 'YOU SEE IT TOO' COST IS REMOVED with the attention requirement; the counter is now being TOLD THE TRUTH, which is cheap and available to anyone.",
@@ -237,5 +241,6 @@
    "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. ⚠️ only where the ground is already prepared; not an in-the-moment obscure\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY."
   }
  ],
- "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
 }

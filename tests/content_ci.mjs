@@ -64,7 +64,16 @@ for (const pack of PACKS) {
   }
 
   // (3) every file in a strictly-manifest-driven dir is listed (no silent unlisted content)
-  for (const sub of (STRICT_DIRS[pack.key] || [])) {
+  // ⛔ CCODE-209 (Aevi's SNG-511 §1 ask): DERIVED, NOT HARDCODED. `STRICT_DIRS` was a hand-kept list, so
+  // a directory the manifest REFERENCES but nobody remembered to add went unchecked — `items/` was exactly
+  // that. Her words: "a rule I have to remember is a rule I will break." Any directory the manifest points
+  // into is now fully covered by it, automatically; the explicit list stays as a FLOOR so nothing that had
+  // coverage can lose it.
+  const referencedDirs = new Set();
+  for (const v of Object.values(provides))
+    for (const path of (Array.isArray(v) ? v : [v]))
+      if (String(path).includes("/")) referencedDirs.add(String(path).split("/")[0]);
+  for (const sub of new Set([...(STRICT_DIRS[pack.key] || []), ...referencedDirs])) {
     const dirAbs = join(root, pack.dir, sub);
     if (!existsSync(dirAbs)) continue;
     const onDisk = readdirSync(dirAbs).filter(f => f.endsWith(".json") || f.endsWith(".md"));

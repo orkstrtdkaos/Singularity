@@ -2581,6 +2581,30 @@ layer. `native_grants.json` had been pointing 21 traditions at an `attunement` t
 mechanisms and the manifest is not the sole source of truth.** Until that is unified, "is it in the
 manifest" is necessary but not sufficient — check the hardcoded fetches too.
 
+⛔ **AND `content/packs/core/world/` IS A THIRD DOOR, DELIBERATELY.** Ten files, read by direct path from
+`app.js`, `scripts/world/*` and `content_ci` — **the manifest has no `world` key at all**, so registering
+them would create paths nothing reads. **That is not the invisibility of §42; it is a different mechanism,
+and Aevi was right to refuse to "fix" it.**
+
+⚠️ **But the manifest cannot protect what it cannot see.** The same failure class lives here wearing a
+different face: not *a file with no manifest entry* but **a file with no READER**. Gated by `CCODE-209` as a
+ratchet — **9 of 10 today; `scale.json` is the one**, and its problem is "nobody has wired it yet," not
+"the loader cannot see it." Those are different problems with different fixes and the gate keeps them apart.
+
+⚠️ **A scanner must not read itself.** That gate first came up green at 10/10 because the only occurrence
+of `scale.json` in the tree was the comment explaining that it has no reader. **A gate satisfied by its own
+documentation is the same bug as one tripped by it.**
+
+## §42.1a — Manifest coverage is DERIVED, not remembered
+
+**`content_ci` checks that every file in a manifest-driven directory is listed.** That list of directories
+used to be hand-kept (`STRICT_DIRS`), so a directory the manifest *references* but nobody remembered to add
+went unchecked — `items/` was exactly that.
+
+⛔ **It is now derived from `provides` itself**, with the explicit list kept as a floor so nothing that had
+coverage can lose it. Aevi's argument, and it is the right one: **"a rule I have to remember is a rule I
+will break."**
+
 ## §42.2 — ⛔ VERIFYING AGAINST THE FILES ON DISK IS NOT VERIFICATION
 
 **Both CCode and Aevi produced a false "0 dead ids" result within one hour of each other by building a

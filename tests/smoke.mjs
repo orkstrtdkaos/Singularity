@@ -16793,6 +16793,42 @@ await (async () => {
         EN208.checkIncapacitation({ health: 30, condition: "slain" }) === null);
     }
   }
+  // 5d · ⛔ CCODE-209 / SNG-511 §2 — `world/` IS A SECOND DOOR, AND A SECOND DOOR NEEDS ITS OWN LOCK.
+  // Aevi asked whether `content/packs/core/world/` is deliberately outside the manifest or "the same
+  // invisibility one directory over." She read it right: it is a different loading mechanism — nine of its
+  // ten files are reached by DIRECT PATH from app.js, scripts/world/* and content_ci, and the manifest has
+  // no `world` key at all. Registering them would have invented a defect.
+  //
+  // ⚠️ BUT THE MANIFEST CANNOT PROTECT WHAT IT CANNOT SEE. The failure class still exists here, wearing a
+  // different face: not "a file with no manifest entry" but "a file with no READER". `scale.json` is
+  // exactly that, and her instinct to separate "the loader cannot see it" from "nobody has wired it yet"
+  // is the whole point — they are different problems with different fixes. So: a ratchet.
+  {
+    const worldDir = join(root, "content/packs/core/world");
+    const scanned = ["app.js", "engine", "scripts", "tests"]
+      .flatMap(rel => {
+        const abs = join(root, rel);
+        if (!existsSync(abs)) return [];
+        if (rel.endsWith(".js")) return [readFileSync(abs, "utf8")];
+        const walk = (d) => readdirSync(d, { withFileTypes: true }).flatMap(e =>
+          e.isDirectory() ? walk(join(d, e.name))
+            // ⛔ AND THE SCANNER MUST NOT READ ITSELF. This gate first came up GREEN at 10/10 because the
+            // only occurrence of `scale.json` anywhere was the comment above explaining that it has no
+            // reader. A gate satisfied by its own documentation is the same bug as one tripped by it.
+            : /\.(js|mjs)$/.test(e.name) && e.name !== "smoke.mjs" ? [readFileSync(join(d, e.name), "utf8")] : []);
+        return walk(abs);
+      }).join("\n");
+    const worldFiles = readdirSync(worldDir).filter(f => f.endsWith(".json"));
+    const unread = worldFiles.filter(f => !scanned.includes(f));
+    check(`CCODE-209: ${worldFiles.length - unread.length}/${worldFiles.length} world/ files have a reader — may only IMPROVE`,
+      unread.length <= 1, `unread: ${unread.join(", ")}`);
+    // ⛔ AND THE DIRECTORY STAYS OUT OF THE MANIFEST ON PURPOSE. If someone "fixes" that later, this says
+    // why not — the loader has no `world` key, so a manifest entry there would be a path nothing reads.
+    const coreManifest = JSON.parse(readFileSync(join(root, "content/packs/core/manifest.json"), "utf8"));
+    check("CCODE-209: world/ is deliberately outside the manifest — a second door, documented in §42.1",
+      !Object.keys(coreManifest.provides || {}).includes("world"),
+      "a `world` key was added to provides; the loader has none, so those paths would be read by nothing");
+  }
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

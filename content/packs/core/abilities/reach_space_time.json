@@ -621,7 +621,11 @@
     "evasionRank": 2,
     "duration": 4,
     "targets": 1,
-    "note": "A TWELFTH DEFENSIVE LOGIC — SPACED: soak 0 because it does not take the blow; it keeps you where the blow cannot reach. Distinct from EVADE (they swing and miss) — here they never get to swing."
+    "note": "A TWELFTH DEFENSIVE LOGIC — SPACED: soak 0 because it does not take the blow; it keeps you where the blow cannot reach. Distinct from EVADE (they swing and miss) — here they never get to swing.",
+    "wardTypes": [
+     "physical",
+     "living"
+    ]
    },
    "rankDeltas": [
     {
@@ -655,7 +659,8 @@
    ],
    "plainly": "A combat/evasion/tactical action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 deepens evasion; rank 3 extends targets. Limit: it needs Somewhere TO GO — cornered, it is worth nothing.",
    "_nameWas": "The Kept Distance",
-   "_idWas": "the_kept_distance"
+   "_idWas": "the_kept_distance",
+   "_wardTypes": "⛔ SNG-512. Range collapses what needs to reach you. Useless against anything that does not.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "made_crossing",
@@ -1405,7 +1410,11 @@
     "evasionRank": 3,
     "duration": 3,
     "targets": 1,
-    "note": "THIRTEENTH DEFENSIVE LOGIC — UNTIMED: soak 0; 'not blocking, not armoring, but the exact move that makes the attack land where you were.' It defeats the attack's TIMING. Highest evasionRank in the catalog because it acts on the moment itself."
+    "note": "THIRTEENTH DEFENSIVE LOGIC — UNTIMED: soak 0; 'not blocking, not armoring, but the exact move that makes the attack land where you were.' It defeats the attack's TIMING. Highest evasionRank in the catalog because it acts on the moment itself.",
+    "wardTypes": [
+     "physical",
+     "temporal"
+    ]
    },
    "rankDeltas": [
     {
@@ -1441,7 +1450,8 @@
    "_nameWas": "The Wasted Moment",
    "_idWas": "the_wasted_moment",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. foreknowledge of timing — reads the attack forming\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. foreknowledge of timing — reads the attack forming\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_wardTypes": "⛔ SNG-512. Foreknowledge of timing answers what arrives at a time.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "shaped_duration",
@@ -2727,7 +2737,10 @@
    "mechanic": {
     "magnitude": 6,
     "duration": 24,
-    "scope": 1
+    "scope": 1,
+    "wardTypes": [
+     "temporal"
+    ]
    },
    "intensity": {
     "conserve": "give a little — the cost is small",
@@ -2750,7 +2763,8 @@
    "plainly": "A puzzle/social action that gives something more duration, paid out of your own life. Rated 6 of 10 on one target for about a day.",
    "_descriptionWas": "The Hourkeepers' giving-craft, and the one they are begged for. It is the exact inverse of the Spent Hour and costs the same in the other direction.",
    "_nameWas": "The Stretched Hour",
-   "_idWas": "the_stretched_hour"
+   "_idWas": "the_stretched_hour",
+   "_wardTypes": "⛔ SNG-512. More duration than a thing has. Temporal, exactly.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "known_way",

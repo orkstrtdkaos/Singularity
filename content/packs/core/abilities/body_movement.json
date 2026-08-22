@@ -80,7 +80,7 @@
     {
      "rank": 2,
      "name": "Slip Anything",
-     "grants": "⛔ ADDS ESCAPE. Come out of a grip, a grapple, rope, manacles or a press of bodies — and fit through a gap a body that size should not fit through: a window slot, a drain, a portcullis gap, a cell bar.",
+     "grants": "⛔ COME OUT OF A GRIP, A GRAPPLE, ROPE, MANACLES OR A PRESS OF BODIES — and fit through a gap a body that size should not fit through: a window slot, a drain, a portcullis gap, a cell bar.",
      "cannot": "Physical holds only. A gap must exist; you do not make one.",
      "functions": [
       "move",
@@ -92,12 +92,13 @@
      "gainAxes": [
       "conditions",
       "targets"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS ESCAPE. Come out of a grip, a grapple, rope, manacles or a press of bodies — and fit through a gap a body that size should not fit through: a window slot, a drain, a portcullis gap, a cell bar."
     },
     {
      "rank": 3,
      "name": "Nothing Holds",
-     "grants": "⛔ ADDS PERSISTENCE AND A PASSENGER. You cannot be physically held or cornered — every grip fails as it closes, and you can take one other person out with you.",
+     "grants": "⛔ YOU CANNOT BE PHYSICALLY HELD OR CORNERED. Every grip fails as it closes, and you can take one other person out with you.",
      "cannot": "One passenger. A hold that is not physical still holds you.",
      "functions": [
       "move",
@@ -110,10 +111,12 @@
       "duration",
       "targets",
       "conditions"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS PERSISTENCE AND A PASSENGER. You cannot be physically held or cornered — every grip fails as it closes, and you can take one other person out with you."
     }
    ],
    "_authored": "⛔ SNG-483. Erik: 'if you find a place to fit CONTORTIONIST ability — ANTI-BIND, FAST RUNNING and BIG JUMPING — move/travel, let me know.'\n⚠️ TWO REAL GAPS AND THEY ARE THE SAME SKILL: (1) NOTHING IN 342 ABILITIES ESCAPES A BIND — fifteen text matches and every one is a door, a seal or a piece of luck, never a person getting out of a hold. (2) SOMATIC HAD NO L1 MOVEMENT CRAFT: Near Way is mason and built-spaces only, then nothing until Skydancer at L4.\n⛔ AND IT ANSWERS THE LARGEST COLUMN IN THE GAME. CONTROL is 251 rank-rows corpus-wide and `bind` is most of it. Until now there was no physical counter to being held."
   }
- ]
+ ],
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
 }

@@ -70,7 +70,7 @@
     {
      "rank": 2,
      "name": "Wrong Fight",
-     "grants": "⚠️ ADDS A PENALTY THEY CARRY. They do not merely fail to read you — they act on the read you gave them, and it is wrong for the fight that happens.",
+     "grants": "⛔ DECLARE IN THE SENSE SLOT. Your body says one thing and does another, and they ACT ON THE FALSE READ — it is wrong for the fight that happens, and they carry the penalty into it.",
      "cannot": "They must commit to the false read before it costs them.",
      "functions": [
       "deceive",
@@ -81,12 +81,13 @@
      "gainAxes": [
       "conditions",
       "damage"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS A PENALTY THEY CARRY. They do not merely fail to read you — they act on the read you gave them, and it is wrong for the fight that happens."
     },
     {
      "rank": 3,
      "name": "Nothing True",
-     "grants": "⛔ ADDS TARGETS. Every foe watching you takes the false read, and you may give different ones different fights.",
+     "grants": "⛔ DECLARE IN THE SENSE SLOT. Every foe watching you takes a false read, and you may give different ones different fights.",
      "cannot": "Everyone in sight of you. A foe who stops watching is unaffected.",
      "functions": [
       "deceive",
@@ -103,7 +104,8 @@
       "targets",
       "scope"
      ],
-     "_gainNote": "⚠️ Different foes taking different false reads is targets plus a condition, not area."
+     "_gainNote": "⚠️ Different foes taking different false reads is targets plus a condition, not area.",
+     "_grantsWas_SNG510": "⛔ ADDS TARGETS. Every foe watching you takes the false read, and you may give different ones different fights."
     }
    ],
    "_authored": "⛔ SNG-482. Body had NO OBSCURE — the sense slot belonged to Dark and Mind. Erik's own example: 'a stance that reads as three attacks and resolves as a fourth.'",
@@ -172,7 +174,7 @@
     {
      "rank": 2,
      "name": "Paid in Work",
-     "grants": "⛔ ADDS WORK AS CURRENCY. Settle a debt, buy passage, or secure lodging by doing the thing they need done — accepted at full value where you have no coin they want.",
+     "grants": "⛔ PAY IN WORK. Settle a debt, buy passage or secure lodging by doing the thing they need done — accepted at full value where you have no coin they want.",
      "cannot": "The work must be worth what you are taking, and they must need it now.",
      "functions": [
       "bargain",
@@ -188,12 +190,13 @@
       "scope",
       "quality"
      ],
-     "_gainNote": "⛔ Work as currency is a new CONDITION you can trade under, and it opens counterparties who had no coin you wanted."
+     "_gainNote": "⛔ Work as currency is a new CONDITION you can trade under, and it opens counterparties who had no coin you wanted.",
+     "_grantsWas_SNG510": "⛔ ADDS WORK AS CURRENCY. Settle a debt, buy passage, or secure lodging by doing the thing they need done — accepted at full value where you have no coin they want."
     },
     {
      "rank": 3,
      "name": "Standing Account",
-     "grants": "⛔ ADDS CREDIT. Your word on a price is taken in advance across a whole region — materials, tools, passage and hands are extended before you have paid.",
+     "grants": "⛔ YOUR WORD ON A PRICE IS TAKEN IN ADVANCE ACROSS A WHOLE REGION. Materials, tools, passage and hands are extended before you have paid.",
      "cannot": "One region. Defaulting ends it there permanently.",
      "functions": [
       "bargain",
@@ -209,7 +212,8 @@
       "scope",
       "duration"
      ],
-     "_gainNote": "⛔ Credit extended in advance runs without you present — autonomy, and it persists."
+     "_gainNote": "⛔ Credit extended in advance runs without you present — autonomy, and it persists.",
+     "_grantsWas_SNG510": "⛔ ADDS CREDIT. Your word on a price is taken in advance across a whole region — materials, tools, passage and hands are extended before you have paid."
     }
    ],
    "_authored": "⛔ SNG-482. Erik: every tradition bargains because there is an economy. BODY'S LEVER IS WHAT ITS LABOUR IS WORTH — and r2 makes work itself a currency, which is the mason's answer to Known Price r2.",
@@ -281,7 +285,7 @@
     {
      "rank": 2,
      "name": "Held Together",
-     "grants": "⚠️ ADDS DURATION AND WORK. They stay steady while you keep a hand on them — enough to be carried, stitched, talked to, or walked out.",
+     "grants": "⛔ END FEAR, PANIC OR RAGE BY TOUCH AND HOLD IT. They stay steady while you keep a hand on them — enough to be carried, stitched, talked to, or walked out.",
      "cannot": "You are occupied while you hold them.",
      "functions": [
       "soothe",
@@ -292,12 +296,13 @@
      "gainAxes": [
       "duration",
       "conditions"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS DURATION AND WORK. They stay steady while you keep a hand on them — enough to be carried, stitched, talked to, or walked out."
     },
     {
      "rank": 3,
      "name": "Everyone Standing",
-     "grants": "⛔ ADDS TARGETS. Steady everyone within arm's reach at once — a stretcher line, a shield wall about to break, a crew in a storm.",
+     "grants": "⛔ END FEAR, PANIC OR RAGE IN EVERYONE WITHIN ARM'S REACH AT ONCE — a stretcher line, a shield wall about to break, a crew in a storm.",
      "cannot": "Arm's reach. One use per contest.",
      "functions": [
       "soothe",
@@ -313,11 +318,13 @@
       "targets",
       "scope"
      ],
-     "_gainNote": "⚠️ Everyone within arm's reach is a target count bounded by a condition."
+     "_gainNote": "⚠️ Everyone within arm's reach is a target count bounded by a condition.",
+     "_grantsWas_SNG510": "⛔ ADDS TARGETS. Steady everyone within arm's reach at once — a stretcher line, a shield wall about to break, a crew in a storm."
     }
    ],
    "_authored": "⛔ SNG-482. Body had no `soothe`. ⚠️ DISTINCT FROM MIND'S QUIET THE ROOM: that works at range on a room, this works by CONTACT on people you can reach, and it does not touch grief."
   }
  ],
- "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas."
+ "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas.",
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
 }

@@ -1577,7 +1577,11 @@
    "mechanic": {
     "magnitude": 4,
     "duration": 12,
-    "note": "PROTECT→guard at T-III (magnitude scaled from the family default 2 by the ladder). r1: ONE doorway warded TILL DAWN; you know THAT something crossed and how big"
+    "note": "PROTECT→guard at T-III (magnitude scaled from the family default 2 by the ladder). r1: ONE doorway warded TILL DAWN; you know THAT something crossed and how big",
+    "wardTypes": [
+     "light",
+     "shadow"
+    ]
    },
    "rankDeltas": [
     {
@@ -1644,7 +1648,8 @@
     "shield",
     "ward"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_wardTypes": "⛔ SNG-512. A standing lattice that reports what crosses. Answers what moves through light.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "sun_seal",
@@ -1741,7 +1746,12 @@
    "mechanic": {
     "magnitude": 4,
     "duration": 24,
-    "note": "T-III guard. r1: ward a place against dark-drawn things; reveal any intrusion in light"
+    "note": "T-III guard. r1: ward a place against dark-drawn things; reveal any intrusion in light",
+    "wardTypes": [
+     "shadow",
+     "decay",
+     "light"
+    ]
    },
    "rankDeltas": [
     {
@@ -1788,7 +1798,8 @@
     "shield",
     "ward"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_wardTypes": "⛔ SNG-512. ⛔ Holds back shadow-things. A light-ward answers dark and rot; it does not answer a sword.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "light_borne",

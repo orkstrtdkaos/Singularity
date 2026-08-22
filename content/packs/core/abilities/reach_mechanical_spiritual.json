@@ -1359,7 +1359,11 @@
     "soak": 4,
     "soakRank": 2,
     "duration": 4,
-    "targets": 1
+    "targets": 1,
+    "wardTypes": [
+     "physical",
+     "precursor"
+    ]
    },
    "rankDeltas": [
     {
@@ -1393,7 +1397,8 @@
    ],
    "plainly": "A combat/craft/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 adds to autonomy; rank 3 extends targets. Limit: what is built in place Stays in place.",
    "_nameWas": "The Mechanical Defense",
-   "_idWas": "the_mechanical_defense"
+   "_idWas": "the_mechanical_defense",
+   "_wardTypes": "⛔ SNG-512. Interlocking parts and redirected force — answers the made and the mechanical.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "running_engine",

@@ -208,7 +208,14 @@
      "gainAxes": [
       "tempo",
       "damage"
-     ]
+     ],
+     "imposes": {
+      "condition": "action_loss",
+      "onCrit": "staggered",
+      "resist": "physical",
+      "targets": 1
+     },
+     "_imposes": "⛔ SNG-513. ⚠️ The body acts before the decision — the foe loses the exchange they had planned."
     }
    ],
    "powerSystem": "metaphysical",
@@ -1198,7 +1205,15 @@
       "targets",
       "damage"
      ],
-     "_grantsWas_SNG510": "⚠️ ADDS THEIR WEIGHT AS WELL AS THEIR LIMB — put a body into the ground, a wall, a stairwell, or another body."
+     "_grantsWas_SNG510": "⚠️ ADDS THEIR WEIGHT AS WELL AS THEIR LIMB — put a body into the ground, a wall, a stairwell, or another body.",
+     "imposes": {
+      "condition": "staggered",
+      "onCrit": "action_loss",
+      "degradesTo": "action_loss",
+      "resist": "physical",
+      "targets": 1
+     },
+     "_imposes": "⛔ SNG-513. A body put into the ground, a wall or a stairwell."
     },
     {
      "rank": 3,
@@ -1334,7 +1349,11 @@
      "gainAxes": [
       "duration",
       "autonomy"
-     ]
+     ],
+     "ongoingHarm": {
+      "type": "decay"
+     },
+     "_ongoingHarm": "⛔ SNG-513. ⛔ 'THEY CANNOT RALLY, CANNOT STEADY, CANNOT STOP BLEEDING, for as long as you hold it.' Authored as anti-healing and unread until now.\n⚠️ `mechanic.ongoingHarm` reduces a heal. healing_intent.json §5: A HEAL IS REDUCED BY ACTIVE ONGOING HARM, NEVER BY ARMOUR. Nobody armours against being mended; a wound held open resists it."
     },
     {
      "rank": 3,
@@ -1616,5 +1635,6 @@
  "_dramaStrip": "⛔ SNG-480 / SYSTEM_SPEC §32.12. Dramatising tail-clauses removed from `grants` and `cannot`. ⚠️ I WROTE §32.12 AND BROKE IT IN THE NEXT COMMIT. The bound states the limit; it does not editorialise about how the limit feels.",
  "_cut": "⛔ SNG-486: Pathless Way cut. 'Any natural barrier yields to enough skill' is a permission, not an action — Q1 failure at capstone tier. Replaced by Ki Wield.",
  "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas.",
- "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",
+ "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation."
 }

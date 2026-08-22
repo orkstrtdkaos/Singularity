@@ -187,7 +187,7 @@
     {
      "rank": 2,
      "name": "Form from Report",
-     "grants": "⚠️ ADDS TIER AND SECONDHAND SOURCES. Up to TIER III, and you no longer need to have seen it — a described craft, a page in a text, a story told well enough carries the form.",
+     "grants": "⛔ WORK A CRAFT UP TO TIER III THAT YOU HAVE ONLY HEARD DESCRIBED — a page in a text, a story told well enough, a witness who saw it. You take the form from the telling and work it once.",
      "cannot": "⛔ Someone must have described it in enough detail to have a form at all. A rumour of a craft is not a craft.",
      "functions": [
       "transform",
@@ -199,12 +199,13 @@
      "gainAxes": [
       "scope",
       "quality"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS TIER AND SECONDHAND SOURCES. Up to TIER III, and you no longer need to have seen it — a described craft, a page in a text, a story told well enough carries the form."
     },
     {
      "rank": 3,
      "name": "Form Out of Need",
-     "grants": "⛔ ADDS THE UNKNOWN. Up to TIER IV, and you no longer need a source at all — the form arrives because the moment required it, and you work a craft you have never heard of and could not name afterwards.",
+     "grants": "⛔ WORK A CRAFT UP TO TIER IV WITH NO SOURCE AT ALL. The form arrives because the moment required it, and you work something you have never heard of and could not name afterwards.",
      "cannot": "⚠️ It comes when it comes. You do not choose which form arrives, only that you are open to one.",
      "functions": [
       "transform",
@@ -217,7 +218,8 @@
       "scope",
       "conditions",
       "autonomy"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS THE UNKNOWN. Up to TIER IV, and you no longer need a source at all — the form arrives because the moment required it, and you work a craft you have never heard of and could not name afterwards."
     }
    ],
    "gated": "learned",
@@ -384,7 +386,7 @@
     {
      "rank": 2,
      "name": "Figure That Stays",
-     "grants": "⚠️ ADDS PERSISTENCE AND REPORT. The ward, the watch or the rule holds after you have gone — and you know when it fires and roughly what tripped it.",
+     "grants": "⛔ SEND A FIGURE TO A PLACE YOU KNOW AND IT STAYS. The ward, the watch or the rule holds after you have gone — and you know when it fires and roughly what tripped it.",
      "cannot": "It holds until broken or until the season turns. A determined breaker can still break the mark.",
      "functions": [
       "summon",
@@ -396,12 +398,13 @@
      "_nameWas": "The Figure That Stays",
      "gainAxes": [
       "duration"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS PERSISTENCE AND REPORT. The ward, the watch or the rule holds after you have gone — and you know when it fires and roughly what tripped it."
     },
     {
      "rank": 3,
      "name": "Figure That Judges",
-     "grants": "⛔ ADDS JUDGEMENT. Give it INTENT rather than instruction — 'let no one through who is carrying steel' becomes 'let no one through who means her harm' — and it decides the cases you did not foresee.",
+     "grants": "⛔ SEND A FIGURE THAT JUDGES. Give it INTENT rather than instruction — 'let no one through who is carrying steel' becomes 'let no one through who means her harm' — and it decides the cases you did not foresee.",
      "cannot": "⚠️ A FIGURE THAT INTERPRETS CAN INTERPRET WRONGLY, and it will not check with you first.",
      "functions": [
       "summon",
@@ -413,7 +416,8 @@
      "_nameWas": "The Figure That Judges",
      "gainAxes": [
       "autonomy"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS JUDGEMENT. Give it INTENT rather than instruction — 'let no one through who is carrying steel' becomes 'let no one through who means her harm' — and it decides the cases you did not foresee."
     }
    ],
    "gated": "learned",
@@ -579,7 +583,7 @@
     {
      "rank": 2,
      "name": "Sound Again",
-     "grants": "⚠️ ADDS INTEGRITY, NOT JUST FUNCTION. The wall that will not sag, the wound that will not fester, the joint that holds under load.",
+     "grants": "⛔ HEALS 2d4+2 AND REPAIRS TO INTEGRITY, NOT MERELY FUNCTION. The wall that will not sag, the wound that will not fester, the joint that holds under load.",
      "cannot": "One subject per working, and you must have the material to work with.",
      "functions": [
       "mend",
@@ -597,12 +601,13 @@
       "duration"
      ],
      "_grantsWas": "Restore not just function but structural integrity — the wall that will not sag, the wound that will not fester, the joint that will hold under load.",
-     "_cannotWas": "Anything rank 3 adds — return a thing fully to its proper material state — the building, the body, the system — so that it is indistinguishable from one that was never broken; it repairs the MATERIAL."
+     "_cannotWas": "Anything rank 3 adds — return a thing fully to its proper material state — the building, the body, the system — so that it is indistinguishable from one that was never broken; it repairs the MATERIAL.",
+     "_grantsWas_SNG510": "⚠️ ADDS INTEGRITY, NOT JUST FUNCTION. The wall that will not sag, the wound that will not fester, the joint that holds under load."
     },
     {
      "rank": 3,
      "name": "As It Was",
-     "grants": "⛔ ADDS COMPLETENESS AND SCALE. Return a thing fully to its proper state — a building, a body, a system — indistinguishable from one never broken.",
+     "grants": "⛔ HEALS 2d4+2 AND RETURNS A THING FULLY TO ITS PROPER STATE — a building, a body, a system — indistinguishable from one never broken.",
      "cannot": "One thing at a time. It cannot replace what is gone.",
      "functions": [
       "mend",
@@ -625,7 +630,8 @@
       "scope",
       "quality"
      ],
-     "_gainNote": "⚠️ 'Indistinguishable from one never broken' is quality; the second subject is targets."
+     "_gainNote": "⚠️ 'Indistinguishable from one never broken' is quality; the second subject is targets.",
+     "_grantsWas_SNG510": "⛔ ADDS COMPLETENESS AND SCALE. Return a thing fully to its proper state — a building, a body, a system — indistinguishable from one never broken."
     }
    ],
    "nativeOrCombination": "native",
@@ -728,7 +734,7 @@
     {
      "rank": 2,
      "name": "Word That Holds",
-     "grants": "⚠️ ADDS DURATION AND BINDING. An agreement or declaration you make sticks after the room empties, and a space you stand in organises around you — enter and it restructures.",
+     "grants": "⛔ SAY THE PLAIN THING AND HAVE IT HOLD AFTER YOU LEAVE. An agreement or declaration you make sticks once the room empties, and a space you stand in organises around you — enter it and it restructures.",
      "cannot": "One standing agreement at a time. Breaking your own word ends the craft until it is rebuilt.",
      "functions": [
       "command",
@@ -739,12 +745,13 @@
      "gainAxes": [
       "duration",
       "autonomy"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS DURATION AND BINDING. An agreement or declaration you make sticks after the room empties, and a space you stand in organises around you — enter and it restructures."
     },
     {
      "rank": 3,
      "name": "Fixed Point",
-     "grants": "⛔ ADDS SCALE. Name the practical truth of a situation so plainly that a camp, a crew or a town organises around it — and anyone acting against you must first account for what you have already said and already are.",
+     "grants": "⛔ NAME THE PRACTICAL TRUTH OF A SITUATION SO PLAINLY THAT A CAMP, A CREW OR A TOWN ORGANISES AROUND IT — and anyone acting against you must first account for what you have already said and already are.",
      "cannot": "One situation. It is solidity, not eloquence — it cannot make people want something.",
      "functions": [
       "command",
@@ -760,7 +767,8 @@
       "scope",
       "targets"
      ],
-     "_gainNote": "⚠️ A camp organising around your word is people, and it holds while you are elsewhere."
+     "_gainNote": "⚠️ A camp organising around your word is people, and it holds while you are elsewhere.",
+     "_grantsWas_SNG510": "⛔ ADDS SCALE. Name the practical truth of a situation so plainly that a camp, a crew or a town organises around it — and anyone acting against you must first account for what you have already said and already are."
     }
    ],
    "nativeOrCombination": "native",
@@ -868,7 +876,7 @@
     {
      "rank": 2,
      "name": "Material Passage",
-     "grants": "⚠️ ADDS PACE. Move through a built environment at the speed its construction allows — no backtracking, no dead ends, the route that is already there in the material.",
+     "grants": "⛔ MOVE THROUGH A BUILT ENVIRONMENT AT THE SPEED ITS CONSTRUCTION ALLOWS — you find the seam, the loose stone and the door that is always there, and take the route already in the material. No backtracking, no dead ends.",
      "cannot": "Built structures only, and you must be able to touch the fabric as you go.",
      "functions": [
       "move",
@@ -886,12 +894,13 @@
       "duration"
      ],
      "_grantsWas": "Move through a built environment at the speed its construction allows — the route that doesn't backtrack, the way that's already there in the material.",
-     "_cannotWas": "Anything rank 3 adds — in any built structure, find or make the passage; BUILT structures only."
+     "_cannotWas": "Anything rank 3 adds — in any built structure, find or make the passage; BUILT structures only.",
+     "_grantsWas_SNG510": "⚠️ ADDS PACE. Move through a built environment at the speed its construction allows — no backtracking, no dead ends, the route that is already there in the material."
     },
     {
      "rank": 3,
      "name": "Way In",
-     "grants": "⛔ ADDS MAKING. Where no passage exists, open one — not by force, by knowing exactly where the material wants to part.",
+     "grants": "⛔ OPEN A PASSAGE WHERE NONE EXISTS. Not by force — you know exactly where the built material wants to part, and you part it.",
      "cannot": "One passage per structure, and it takes minutes you may not have. Built structures only.",
      "functions": [
       "make",
@@ -917,7 +926,8 @@
       "scope",
       "quality"
      ],
-     "_gainNote": "⚠️ Opening a passage where none exists is not AREA — it is doing it where it could not be done. Quality + conditions."
+     "_gainNote": "⚠️ Opening a passage where none exists is not AREA — it is doing it where it could not be done. Quality + conditions.",
+     "_grantsWas_SNG510": "⛔ ADDS MAKING. Where no passage exists, open one — not by force, by knowing exactly where the material wants to part."
     }
    ],
    "nativeOrCombination": "native",
@@ -1700,7 +1710,7 @@
     {
      "rank": 2,
      "name": "Settled Fact",
-     "grants": "⚠️ ADDS SIZE AND TARGETS. Take the structure rather than the piece — a lintel, a stair, a cart, a section of wall. What was holding is now falling.",
+     "grants": "⛔ DEALS 2d6 DAMAGE. Give a STRUCTURE its full and honest weight and send it — a lintel, a stair, a cart, a section of wall. What was holding is now falling, and anyone under it is under it.",
      "cannot": "You are taking part of a building down. Anyone under it is under it.",
      "functions": [
       "break",
@@ -1720,12 +1730,13 @@
       "damage"
      ],
      "_grantsWas": "Take the structure rather than the piece — a lintel, a stair, a cart, a section of wall. What was holding is now falling, and it falls honestly.",
-     "_cannotWas": "You have taken part of a building down and buildings are used by people who are not in your fight. Masons are held to account by other Masons for exactly this."
+     "_cannotWas": "You have taken part of a building down and buildings are used by people who are not in your fight. Masons are held to account by other Masons for exactly this.",
+     "_grantsWas_SNG510": "⚠️ ADDS SIZE AND TARGETS. Take the structure rather than the piece — a lintel, a stair, a cart, a section of wall. What was holding is now falling."
     },
     {
      "rank": 3,
      "name": "Leaden Word",
-     "grants": "⛔ ADDS AREA AND CONTROL OF THE FALL. Everything nearby remembers its weight at once — roofs, walls, armour, the load a man carries. AND YOU SET WHERE IT GOES: you and anyone you name stand in the one place it does not.",
+     "grants": "⛔ DEALS 2d6 DAMAGE ACROSS AN AREA. Everything nearby remembers its weight at once — roofs, walls, armour, the load a man carries — AND YOU SET WHERE IT GOES: you and anyone you name stand in the one place it does not.",
      "cannot": "You cannot make weight where there is none. One area, once per contest.",
      "functions": [
       "strike",
@@ -1744,7 +1755,8 @@
       "quality"
      ],
      "_grantsWas": "Everything nearby remembers its weight at once. Roofs, walls, armour, the load a man is carrying, the man — everything that can fall strikes what is beneath it, and armour breaks under its own weight. AND YOU SET THE FALL NOW: mastery is choosing where the weight goes, so you and anyone you name stand in the one place it does not.",
-     "_cannotWas": "You still cannot make weight where there is none, and a building coming down is used by people who were not in your fight. It remains loud, and everyone knows what happened and who did it."
+     "_cannotWas": "You still cannot make weight where there is none, and a building coming down is used by people who were not in your fight. It remains loud, and everyone knows what happened and who did it.",
+     "_grantsWas_SNG510": "⛔ ADDS AREA AND CONTROL OF THE FALL. Everything nearby remembers its weight at once — roofs, walls, armour, the load a man carries. AND YOU SET WHERE IT GOES: you and anyone you name stand in the one place it does not."
     }
    ],
    "challengeTypes": [
@@ -1874,7 +1886,7 @@
     {
      "rank": 3,
      "name": "Prepare the Ground",
-     "grants": "⛔ ADDS SITE WORK AND PROJECTS. Read walls, wells, foundations and the ground under them — and then PREPARE that ground: shore what will fail, undermine what should, site a camp or a wall where the earth will hold it. ⚠️ A PROJECT: it banks progress per tick and completes on a threshold.",
+     "grants": "⛔ READ WALLS, WELLS, FOUNDATIONS AND THE GROUND UNDER THEM — AND THEN PREPARE THAT GROUND: shore what will fail, undermine what should, site a camp or a wall where the earth will hold it. ⚠️ A PROJECT: it banks progress per tick and completes on a threshold.",
      "cannot": "One site per project. Reading is a scene; preparing is not.",
      "functions": [
       "reveal",
@@ -1885,7 +1897,8 @@
      "gainAxes": [
       "scope",
       "autonomy"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS SITE WORK AND PROJECTS. Read walls, wells, foundations and the ground under them — and then PREPARE that ground: shore what will fail, undermine what should, site a camp or a wall where the earth will hold it. ⚠️ A PROJECT: it banks progress per tick and completes on a threshold."
     }
    ],
    "challengeTypes": [
@@ -1971,9 +1984,10 @@
      "functions": [
       "reveal"
      ],
-     "grants": "⚠️ ADDS PRECISION AND REACH. Name it exactly — and once named, its OTHER instances become visible to you everywhere you go, including ones nobody has connected.",
+     "grants": "⛔ NAME THE PATTERN A THING IS AN INSTANCE OF, EXACTLY — and once named, its OTHER instances become visible to you everywhere you go, including ones nobody has connected.",
      "cannot": "You must have seen enough of this one to name it.",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_grantsWas_SNG510": "⚠️ ADDS PRECISION AND REACH. Name it exactly — and once named, its OTHER instances become visible to you everywhere you go, including ones nobody has connected."
     },
     {
      "rank": 3,
@@ -1982,9 +1996,10 @@
       "reveal",
       "foresee"
      ],
-     "grants": "⛔ ADDS THE ACTIONABLE PART. Read the shape a thing is completing — an event, a campaign, a life — and name THE POINT AT WHICH IT MUST BREAK: the step the pattern cannot survive skipping, the piece it requires and does not have yet. ⚠️ A pattern named at r2 is knowledge; a pattern broken here is an ACT.",
+     "grants": "⛔ READ THE SHAPE A THING IS COMPLETING — an event, a campaign, a life — AND NAME THE POINT AT WHICH IT MUST BREAK: the step the pattern cannot survive skipping.",
      "cannot": "One form at a time, and breaking it still has to be done by somebody.",
-     "gains": "deepen"
+     "gains": "deepen",
+     "_grantsWas_SNG510": "⛔ ADDS THE ACTIONABLE PART. Read the shape a thing is completing — an event, a campaign, a life — and name THE POINT AT WHICH IT MUST BREAK: the step the pattern cannot survive skipping, the piece it requires and does not have yet. ⚠️ A pattern named at r2 is knowledge; a pattern broken here is an ACT."
     }
    ],
    "gated": "learned",
@@ -2271,5 +2286,6 @@
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
  "_dramaStrip": "⛔ SNG-480 / SYSTEM_SPEC §32.12. Dramatising tail-clauses removed from `grants` and `cannot`. ⚠️ I WROTE §32.12 AND BROKE IT IN THE NEXT COMMIT. The bound states the limit; it does not editorialise about how the limit feels.",
- "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas."
+ "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas.",
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
 }

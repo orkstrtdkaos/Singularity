@@ -2400,7 +2400,7 @@ that lags the code is worse than no map, because it is believed.
 | `mechanic.duration` | craft duration in rounds, capped by `craftDurationMax` | `skill_battle.js` | many |
 | `mechanic.crit` / `crit` | `critFor` → a per-craft **chance bias** and a **sentence on the receipt**. ⚠️ **Nothing else** — see §39.4 | `craftmechanics.js` → `resolve.js` | ⛔ **0** |
 | `damageType` | `answers(l)` — which soak layers apply | `skill_battle.js` | 26 |
-| `wardTypes` | the same match, from the ward's side | `skill_battle.js` | ⛔ **0** |
+| `wardTypes` | ⛔ **NOTHING — see §39.5.** The string does not appear in `skill_battle.js` | — | **48** |
 | `mechanic.dice` on a **healing** shape | ✅ `resolveHeal` → `rollMagnitude` → the round's `healing` | `craftmechanics.js` → `skill_battle.js` healing branch | 25 |
 | `ongoingHarm` on the **SUBJECT** | ✅ the only thing that soaks a heal | `craftmechanics.js` `resolveHeal` | ⛔ **0** |
 | `mechanic.imposes` | ✅ `resolveImposition` → the round's `imposed` → `checkIncapacitation` | `craftmechanics.js` → `skill_battle.js` | ⛔ **0** |
@@ -2460,9 +2460,31 @@ evaporates on one roll is the same dead feeling as a heal that heals nothing, so
 ⛔ **SHAPE IS RESOLVED, NOT AUTHORED.** `strike` resolves to `damage` and rolls; `hobble` does not. Author a
 damage number on a hobble-shaped craft and no die is ever thrown.
 
-⛔ **TYPED WARDING HAS NEVER BEEN ALIVE.** `answers = l => !l.type || !dmgType || l.type === dmgType` — an
-untyped layer answers everything. With `wardTypes` on zero crafts, the 26 typed attacks are typed against
-nothing and `wrongType` can never be non-empty.
+## §39.5 — ⛔ TYPED WARDING IS AUTHORED, NOT ALIVE — AND THE MISSING PIECE IS A DECISION, NOT A FIELD
+
+**SNG-512 took `wardTypes` from 0 crafts to 48, and every attack type but one has an answer.** That is real
+authoring and it closed a genuine gap. ⚠️ **The engine still cannot see any of it**, and this section exists
+so nobody reads the count and assumes otherwise.
+
+⛔ **`wardTypes` does not appear anywhere in `skill_battle.js`.** The soak walk is
+`answers = l => !l.type || !dmgType || l.type === dmgType`, and `l` is a **soak layer off the target
+SHEET** — synthesised from threat, untyped, generic armour. Nothing converts a craft's authored `wardTypes`
+into a layer's `type`. **§39.1 claimed this field was read. It was not. The map was wrong, and the §39
+self-check is what caught it.**
+
+⚠️ **AND THE MISSING PIECE IS NOT A LINE OF WIRING.** A standing guard craft today contributes a **contest
+modifier** — "guard up +4" on the roll — and **contributes no soak at all**. So there is no layer for a
+ward's type to sit on. Making guards contribute typed soak layers is a **balance change**, not a fix:
+
+- it would give every standing ward damage reduction it does not have today, and
+- ⛔ **a ward declaring `wardTypes: ["physical"]` would immediately stop answering all 13 typed attacks**,
+  because a typed layer answers only its own type.
+
+**That second consequence is not hypothetical: 30 crafts declare `physical` and NOTHING in the game deals
+typed physical harm.** The mirror of the `grief` gap, and larger. **Erik's call, not the engine's.**
+
+**Until then:** `damageType` is live and does real work through `affinityOf` (immune/resist/vulnerable) and
+through sheet-authored typed layers. `wardTypes` is authored, correct, and inert.
 
 ## §39.2 — What the model is told about a craft
 

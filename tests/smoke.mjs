@@ -16840,7 +16840,10 @@ await (async () => {
     check(`CCODE-199: §39 still tells the truth — crit authored on ${withCrit}, wardTypes on ${withWard}`,
       /### §39 —|# §39 — THE MECHANIC MAP/.test(spec199)
       && (withCrit === 0) === /`mechanic\.crit` \/ `crit`.*\*\*0\*\*/s.test(spec199.slice(spec199.indexOf("§39.1"), spec199.indexOf("§39.2")))
-      && (withWard === 0) === /`wardTypes`.*\*\*0\*\*/s.test(spec199.slice(spec199.indexOf("§39.1"), spec199.indexOf("§39.2"))),
+      // ⚠️ wardTypes went 0 -> 48 and the spec row now has to say the OPPOSITE thing: that the field is
+      // authored and READ BY NOTHING. The gate follows the claim rather than the number - if the row ever
+      // stops pointing at §39.5, the map has drifted again.
+      && (withWard > 0) === /`wardTypes`.*NOTHING.*§39\.5/s.test(spec199.slice(spec199.indexOf("§39.1"), spec199.indexOf("§39.2"))),
       "the spec claims a count the catalogue no longer has");
   }
 }

@@ -1,0 +1,48 @@
+{
+ "schemaVersion": 1,
+ "id": "companion_template",
+ "kind": "rules",
+ "note": "⛔ SNG-511. THE COMPANION TEMPLATE — the one GM-generated content type with no template. Found by cataloguing what the model is asked to generate against what it is given to generate FROM: 13 of 14 categories had one; companions had nine hand-authored files and no shape.\n⚠️ AND IT IS THE GAP I WAS AUTHORING BLIND INTO. I wrote Attended End with its own r1/r2/r3 ladder because I did not know `stages[]` was the progression — which is stated nowhere except in nine examples.",
+ "_derivedNotInvented": "⛔ MEASURED FROM ALL NINE, NOT DESIGNED. 16 fields appear; 14 on every one. `substrateAura` and `substrateNote` appear on 6 of 9 and are OPTIONAL. Stage counts are 2 (four companions) and 3 (five) — ⚠️ THREE IS THE FULL FORM and two is an unfinished one.",
+ "required": {
+  "id": "lowercase, matches filename",
+  "name": "the companion's name as spoken",
+  "startingOption": "⚠️ boolean — may a player begin with this one",
+  "role": "one line: what it is FOR at the table",
+  "appearance": "what a player sees",
+  "persona": "how it behaves, in its own register",
+  "voiceHints": "how it speaks — used by the model directly",
+  "assistTags": "what it helps with mechanically",
+  "knowledge": "⛔ WHAT IT KNOWS THAT THE PLAYER DOES NOT — the rank ladder of any bondGrant is drawn from HERE",
+  "boundaries": "⛔ WHAT IT WILL NOT DO. Marrow: 'will not hasten an ending, ever, for any reason, including mercy.' ⚠️ THE BOUNDARIES BECOME THE BOND GRANT'S `bounds` — do not invent new ones",
+  "hooks": "what it wants, and what it will ask of the player",
+  "bondGrants": "⛔ SEE §bondGrant — a REAL ABILITY, not a stub",
+  "stages": "⛔ SEE §stages — the progression spine"
+ },
+ "optional": {
+  "substrateAura": "present on 6 of 9",
+  "substrateNote": "present on 6 of 9"
+ },
+ "stages": {
+  "_what": "⛔ STAGES ARE THE COMPANION'S RANK-UP MECHANISM AND THEY ADVANCE WITH BOND, NOT WITH POINTS. po/SPEC_SNG-200: 'stages are the spine'. ⚠️ CCode wired the mapping: bond 0-2 → stage 1, 3-9 → 2, 10 → 3.",
+  "shape": {
+   "stage": "1, 2 or 3",
+   "name": "⛔ THE COMPANION'S OWN NAME FOR WHAT IT HAS BECOME — not a tier label",
+   "narrationHints": "how it looks and behaves at this stage"
+  },
+  "_rule": "⚠️ AUTHOR THREE. Two is the unfinished form and four companions carry it.",
+  "_arc": "⛔ THE THREE STAGES ARE A RELATIONSHIP, NOT A POWER CURVE. Marrow: watches and does not interfere → tells you what it sees BEFORE YOU ASK → it did not leave."
+ },
+ "bondGrant": {
+  "_what": "⛔ A BOND GRANT IS A FULL ABILITY AND MUST CARRY THE FULL ABILITY SCHEMA (SYSTEM_SPEC §32.6). ⚠️ ALL NINE ARE CURRENTLY STUBS carrying 9 fields and missing 14 — no `tree`, no `mechanic`, no `bounds`, no `plainly`, no `challengeTypes`.",
+  "extraFields": {
+   "companionId": "⛔ REQUIRED — CCode: resolving the teacher from prose is a weak link",
+   "companionTaught": "true",
+   "progression": "⚠️ DO NOT AUTHOR — CCode reads the bond directly; the field is unread"
+  },
+  "_ranksKeyToStages": "⛔ EACH RANK KEYS TO A `stage`, NOT TO A POINT SPEND. The rank NAME may differ from the stage name — the stage names what the COMPANION becomes, the rank names what it LENDS YOU. ⚠️ Attended End: Patient Gaze / Death's Certainty / Deathly Premonition against Marrow's The Attending Bird / The Told Truth / The One Who Stays.",
+  "_cannotBeBought": "⛔ A point spent on a bond-controlled rank is a point burned. The engine refuses it.",
+  "_pattern": "content/packs/core/abilities/companion_taught.json — Attended End is the worked example."
+ },
+ "_theEight": "⚠️ EIGHT BOND GRANTS STILL NEED AUTHORING TO THIS SHAPE: Motes' Vigil · Pack-Sense · The Old Procedure · Thin-Place Sense · The Kept Dark · Scholar's Margin · The Taking Root · A Second Pair of Hands. ⛔ EACH DRAWS ITS THREE TIERS FROM ITS OWN COMPANION'S `knowledge` AND `stages`, and its bounds from that companion's `boundaries`."
+}

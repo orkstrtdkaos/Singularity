@@ -91,10 +91,11 @@
       "targets",
       "quality"
      ],
-     "grants": "⚠️ ADDS CAUSE, KIND, AND BEING TOLD UNASKED. Marrow distinguishes endings that were NATURAL from ones that were MADE — and reads things that are not bodies: a truce, a road, a house, a season's grain. ⛔ AND IT TELLS YOU BEFORE YOU ASK, always in time to matter.",
+     "grants": "⛔ MARROW TELLS YOU WHAT IS ENDING, HOW, AND WHETHER IT WAS NATURAL OR MADE — and reads things that are not bodies: a truce, a road, a house, a season's grain, a marriage. It tells you before you ask.",
      "cannot": "It names that an ending was made and roughly by what. It does not name who.",
      "_nameWas": "The Told Truth",
-     "companionStageName": "The Told Truth"
+     "companionStageName": "The Told Truth",
+     "_grantsWas_SNG510": "⚠️ ADDS CAUSE, KIND, AND BEING TOLD UNASKED. Marrow distinguishes endings that were NATURAL from ones that were MADE — and reads things that are not bodies: a truce, a road, a house, a season's grain. ⛔ AND IT TELLS YOU BEFORE YOU ASK, always in time to matter."
     },
     {
      "rank": 3,
@@ -110,10 +111,11 @@
       "scope",
       "duration"
      ],
-     "grants": "⛔ ADDS PREMONITION. Every ending in a place at once, ordered by when — and which of them can still be turned aside, and what it would take. ⚠️ INCLUDING YOURS, and it will not leave while it is happening.",
+     "grants": "⛔ MARROW READS EVERY ENDING IN A PLACE AT ONCE, ordered by when — and which of them can still be turned aside, and what it would take. ⚠️ INCLUDING YOURS, and it will not leave while it is happening.",
      "cannot": "⛔ It tells you what would turn an ending aside. Doing it is yours.",
      "_nameWas": "The One Who Stays",
-     "companionStageName": "The One Who Stays"
+     "companionStageName": "The One Who Stays",
+     "_grantsWas_SNG510": "⛔ ADDS PREMONITION. Every ending in a place at once, ordered by when — and which of them can still be turned aside, and what it would take. ⚠️ INCLUDING YOURS, and it will not leave while it is happening."
     }
    ],
    "_authored": "⛔ SNG-496. Erik: 'the Attended End needs to be able to RANK UP as well — so we have an opportunity to let an AMAZING SKILL FROM A COMPANION... is it written out yet?'\n⛔ IT WAS NOT, AND NEITHER IS ANY OTHER. ALL NINE COMPANION `bondGrants` ARE ONE-LINE STUBS: id, name, description, energyCost, attribute, axes, notFor, functions — and NOTHING ELSE. Missing levelReq, tree, shape, mechanic, bounds, plainly, challengeTypes and six more. ⚠️ COMPANION-TAUGHT SKILLS CANNOT RANK UP ANYWHERE IN THE GAME, and the other eight are Motes' Vigil, Pack-Sense, The Old Procedure, Thin-Place Sense, The Kept Dark, Scholar's Margin, The Taking Root and A Second Pair of Hands.\n⚠️ THE RANK LADDER IS DRAWN FROM MARROW'S OWN `knowledge` AND `stages`, not invented: 'when a thing is ending, how, and roughly when' → 'which endings were natural and which were made' → stage 3 'The One Who Stays'. ⛔ r3's 'including yours' is the companion file's own line: 'it will not lie about what it sees coming, including about you.'",
@@ -169,5 +171,6 @@
    "companionId": "marrow",
    "_companionId": "⚠️ SNG-501, CCode: 'the teacher resolves from your `taughtBy` PROSE — that is a weak link. Author `companionId` next time you touch the file and it stops depending on the first word of a sentence.' ⛔ AGREED AND DONE."
   }
- ]
+ ],
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
 }

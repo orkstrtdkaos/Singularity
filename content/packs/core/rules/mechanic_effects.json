@@ -18,10 +18,10 @@
    "note": "per-hit reduction for a duration. Corpus band 2-6."
   },
   "ANTISOAK": {
-   "reads": "mechanic.antisoak",
-   "states": "antisoak N",
-   "wired": false,
-   "note": "⛔ CCODE: the layer walk already splits `cutThrough` (rank <= penetration) from `soak`. ANTISOAK IS A THIRD TERM BESIDE THOSE TWO, not a rewrite."
+   "reads": "mechanic.antisoakImposed → antisoakLanded",
+   "states": "antisoakImposed N",
+   "wired": true,
+   "note": "⛔ THE TARGET CARRIES IT. A craft with `antisoakImposed: N` leaves the target +N vulnerable; ANY damage from ANY source that gets past their soak is increased by N. ⚠️ IT IS NOT A BONUS THE CASTER CARRIES.\n⛔ STACKS WITH PIERCING RATHER THAN COMPETING — piercing ignores soak, antisoak adds to what lands, so a Ki Wield gets both.\n⚠️ CCODE 2026-08-16: `antisoakLanded` HAD NO CALL SITE FOR A WEEK. Gated on the arithmetic, never on the wiring. ⛔ A GATE ON THE ARITHMETIC IS NOT A GATE ON THE WIRING — the same shape as every authored-correct-and-invisible finding this month, arriving in the engine layer."
   },
   "HEAL": {
    "reads": "mechanic.dice on healing shape",

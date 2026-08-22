@@ -632,7 +632,7 @@
     {
      "rank": 2,
      "name": "Turned Catch",
-     "grants": "⚠️ ADDS THE RETURN. Catch it and send it back in the same motion, at the thrower.",
+     "grants": "⛔ CATCH A THROWN OBJECT YOU SAW COMING AND SEND IT BACK IN THE SAME MOTION, at the thrower, for 1d6.",
      "functions": [
       "strike"
      ],
@@ -649,12 +649,13 @@
       "damage"
      ],
      "_grantsWas": "Catch it and send it back in the same motion, at the thrower, at short range.",
-     "_cannotWas": "Short range only on the return; still nothing from behind."
+     "_cannotWas": "Short range only on the return; still nothing from behind.",
+     "_grantsWas_SNG510": "⚠️ ADDS THE RETURN. Catch it and send it back in the same motion, at the thrower."
     },
     {
      "rank": 3,
      "name": "Both Hands",
-     "grants": "⛔ ADDS NUMBER AND SPEED. Two objects at once, or one arrow from a bow you did not see drawn.",
+     "grants": "⛔ CATCH TWO OBJECTS AT ONCE, or one arrow from a bow you did not see drawn.",
      "functions": [
       "strike"
      ],
@@ -670,7 +671,8 @@
       "conditions"
      ],
      "_grantsWas": "Two objects, or one arrow from a bow you did not see drawn.",
-     "_cannotWas": "⛔ NOT A BOLT — a crossbow bolt takes the hand off."
+     "_cannotWas": "⛔ NOT A BOLT — a crossbow bolt takes the hand off.",
+     "_grantsWas_SNG510": "⛔ ADDS NUMBER AND SPEED. Two objects at once, or one arrow from a bow you did not see drawn."
     }
    ],
    "functions": [
@@ -728,5 +730,6 @@
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
- "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas."
+ "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas.",
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
 }

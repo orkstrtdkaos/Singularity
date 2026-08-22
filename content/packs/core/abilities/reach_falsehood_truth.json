@@ -745,7 +745,11 @@
     "evasionRank": 2,
     "duration": 4,
     "targets": 1,
-    "note": "A SECOND ZERO-SOAK GUARD, and it uses Erik's EVASION model: 'the attack lands on the APPEARANCE, and the person is somewhere else.' This is not concealment (the_harbor) — it is misdirection: they DO attack, at the wrong place."
+    "note": "A SECOND ZERO-SOAK GUARD, and it uses Erik's EVASION model: 'the attack lands on the APPEARANCE, and the person is somewhere else.' This is not concealment (the_harbor) — it is misdirection: they DO attack, at the wrong place.",
+    "wardTypes": [
+     "physical",
+     "precursor"
+    ]
    },
    "rankDeltas": [
     {
@@ -779,7 +783,8 @@
    ],
    "plainly": "A combat/stealth/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends duration; rank 3 extends targets. Limit: it draws Aimed action — an area effect or an accident does not care what it is aiming at.",
    "_nameWas": "The False Target",
-   "_idWas": "the_false_target"
+   "_idWas": "the_false_target",
+   "_wardTypes": "⛔ SNG-512. They strike what is not there. Answers anything AIMED; useless against an area or a fact.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "made_truth",
@@ -1240,7 +1245,12 @@
     "soakRank": 2,
     "duration": 6,
     "targets": 1,
-    "note": "A GUARD THAT SOAKS ONLY ONE KIND OF HARM: 'the lie has no purchase on someone who already sees.' soakRank 2 against deception specifically; zero against a sword."
+    "note": "A GUARD THAT SOAKS ONLY ONE KIND OF HARM: 'the lie has no purchase on someone who already sees.' soakRank 2 against deception specifically; zero against a sword.",
+    "wardTypes": [
+     "deception",
+     "abstraction",
+     "truth"
+    ]
    },
    "rankDeltas": [
     {
@@ -1274,7 +1284,8 @@
    ],
    "plainly": "A defense/magical/social action that reduces incoming harm. Its strength is rated 3 out of 10 and absorbs 3 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 6 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it resists False Belief Only — a sword does not care what you know.",
    "_nameWas": "The True Ground",
-   "_idWas": "the_true_ground"
+   "_idWas": "the_true_ground",
+   "_wardTypes": "⛔ SNG-512. ⛔ Deception has no purchase on someone standing on what is so. Answers the false; answers no blade.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "established_fact",
@@ -1853,7 +1864,12 @@
     "soakRank": 0,
     "duration": 168,
     "scope": 3,
-    "note": "T-IV, and a THIRD zero-soak guard. 'Not merely unseen but UN-LOOKED-FOR.'"
+    "note": "T-IV, and a THIRD zero-soak guard. 'Not merely unseen but UN-LOOKED-FOR.'",
+    "wardTypes": [
+     "physical",
+     "precursor",
+     "abstraction"
+    ]
    },
    "rankDeltas": [
     {
@@ -1881,7 +1897,8 @@
    "plainly": "A investigate/defend action that reduces incoming harm. Its strength is rated 7 out of 10 and absorbs 0 harm per hit (rank 0 armour) across a scope of 3, and lasts for about 7 days Ranks: rank 2 adds to autonomy. Limit: iT Hides But Does Not Protect.",
    "_descriptionWas": "The Veilwright art of the perfect veil — a concealment so total that the hidden thing is not merely unseen but un-looked-for, the very question of it smoothed away. The deep gift of those who keep secrets for a living.",
    "_nameWas": "The Perfect Veil",
-   "_idWas": "the_perfect_veil"
+   "_idWas": "the_perfect_veil",
+   "_wardTypes": "⛔ SNG-512. ⛔ Un-looked-for rather than unseen — answers anything that must FIND you first.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "schemaVersion": 1,

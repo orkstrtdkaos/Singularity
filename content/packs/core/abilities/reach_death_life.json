@@ -804,7 +804,11 @@
     "soakRank": 3,
     "duration": 6,
     "targets": 1,
-    "note": "T-III guard — but it wards a KIND of harm (unnatural endings), not impact. soakRank 3 against that kind specifically."
+    "note": "T-III guard — but it wards a KIND of harm (unnatural endings), not impact. soakRank 3 against that kind specifically.",
+    "wardTypes": [
+     "decay",
+     "judgement"
+    ]
    },
    "rankDeltas": [
     {
@@ -840,7 +844,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A survive/fight/stealth action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 5 harm per hit (rank 3 armour) It affects 1 target, and lasts for about 6 hours Ranks: rank 2 deepens soak; rank 3 adds to special. Limit: wards the Threshold, Not The Outcome."
+   "plainly": "A survive/fight/stealth action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 5 harm per hit (rank 3 armour) It affects 1 target, and lasts for about 6 hours Ranks: rank 2 deepens soak; rank 3 adds to special. Limit: wards the Threshold, Not The Outcome.",
+   "_wardTypes": "⛔ SNG-512. ⛔ WARDS AGAINST ENDINGS THAT SHOULD NOT HAPPEN — curse-deaths, unnatural endings. ⚠️ NOT PHYSICAL: a blade still lands. This is the corpus's first decay-ward and the one healing needs.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "last_gift",
@@ -1683,7 +1688,11 @@
     "push": 0,
     "magnitude": 4,
     "targets": 1,
-    "duration": 3
+    "duration": 3,
+    "wardTypes": [
+     "decay",
+     "living"
+    ]
    },
    "rankDeltas": [
     {
@@ -1721,7 +1730,8 @@
    ],
    "plainly": "A explore/survive/stealth action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours. Range is 4. Ranks: rank 2 extends targets+access; rank 3 extends access. Limit: a Ward That Has Never Held A Death Cannot BE Opened This Way.",
    "_nameWas": "The Grey Road",
-   "_idWas": "the_grey_road"
+   "_idWas": "the_grey_road",
+   "_wardTypes": "⛔ SNG-512. Walking where others cannot answers the ground itself.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "kept_breath",
@@ -1822,7 +1832,11 @@
     },
     "plus": 0,
     "targets": 3,
-    "marginFloorPer": 0.02
+    "marginFloorPer": 0.02,
+    "wardTypes": [
+     "physical",
+     "decay"
+    ]
    },
    "rankDeltas": [
     {
@@ -1913,7 +1927,8 @@
    "_descriptionWas": "Sustain a body through physical hardship: starvation, cold, blood loss, wounds, exhaustion. The ashwarden knows the exact threshold a body needs to keep going — and holds someone there. Not healing, not protection from curses. The body's minimum, maintained by craft.",
    "_reauthored": "⛔ SNG-493. Erik: 'Kept Breath needs a FLAVOR SHIFT. You authored this, and many skills, as very conservative — IT CAN'T DO MAGIC BUT BARELY LETS YOU GET BY type skill. THERE'S NO FANTASY AND MAGIC IN THAT.'\n⚠️ HE IS RIGHT. The old text was 'the body's minimum, maintained by craft — not healing, not protection from curses, functional NOT WELL' — a skill defined by what it cannot do, with three bounds and no wonder. ⛔ IT ALSO SAT AT mag4 e4 AS ONE OF THE CHEAPEST THINGS IN THE TRADITION, which is what a designer does when they do not believe in a craft.\n⛔ THE FANTASY VERSION IS THE ASHWARDEN THESIS TAKEN SERIOUSLY: THEY TEND ENDINGS, SO THEY CAN REFUSE ONE. A man fights with a spear through him because an Ashwarden has declined to let that finish. The cost is unchanged and stated once.",
    "_mechanics": "⛔ SNG-493, FINAL. Erik: 'Do we really need tempHealth or is that functionally the same as Soak?'\n⚠️ NOT THE SAME — soak is PER-HIT REDUCTION FOR A DURATION, temp health is a ONE-SHOT POOL — but ⛔ SOAK IS STRONGER, ALREADY WIRED, AND ALREADY SCALED, so the new field was unnecessary. 18 abilities carry `soak`, values 2-6, and CCode confirms it is read.\n⛔ I INVENTED A MECHANIC WITHOUT CHECKING WHETHER AN EXISTING ONE COVERED IT — the same failure as specifying a sense slot that was already shipped.\n⚠️ SOAK 5 chosen against the corpus band: Death-Ward 5, Shielding Word 5, Unmoving Mind 5. Kept Breath sits with the other serious protective crafts rather than above them.",
-   "_r1fix": "⚠️ SNG-493. Erik: 'update the r1 text — it ASSUMES YOU ALREADY HAVE A WOUND when this would be something that would STOP A WOUND FROM DAMAGING YOU.' ⛔ Correct: soak is prevention, so the flavour had to move from the wound to the skin. Was 'the mist stands off the wound and the blood does not leave it'."
+   "_r1fix": "⚠️ SNG-493. Erik: 'update the r1 text — it ASSUMES YOU ALREADY HAVE A WOUND when this would be something that would STOP A WOUND FROM DAMAGING YOU.' ⛔ Correct: soak is prevention, so the flavour had to move from the wound to the skin. Was 'the mist stands off the wound and the blood does not leave it'.",
+   "_wardTypes": "⛔ SNG-512. ⛔ Refusing an ending answers the ending — decay AND the blow. ⚠️ This is why it is the tradition's protective craft.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "green_claim",
@@ -2162,7 +2177,11 @@
     "soak": 4,
     "soakRank": 2,
     "duration": 3,
-    "targets": 1
+    "targets": 1,
+    "wardTypes": [
+     "physical",
+     "living"
+    ]
    },
    "rankDeltas": [
     {
@@ -2198,7 +2217,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/survive/explore action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets+duration; rank 3 deepens soak. Limit: a Living Ward Can BE Broken — Fire IS Its Particular Enemy."
+   "plainly": "A fight/survive/explore action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets+duration; rank 3 deepens soak. Limit: a Living Ward Can BE Broken — Fire IS Its Particular Enemy.",
+   "_wardTypes": "⛔ SNG-512. Bark-skin and thorn. ⚠️ Living answers living — the Rootkin ward is the green turned defensive.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "speaking_grove",
@@ -3474,7 +3494,10 @@
    "mechanic": {
     "magnitude": 5,
     "duration": 12,
-    "scope": 1
+    "scope": 1,
+    "wardTypes": [
+     "decay"
+    ]
    },
    "intensity": {
     "conserve": "hold a moment longer",
@@ -3497,7 +3520,8 @@
    "plainly": "A puzzle/social action that holds a failing thing at its edge. Rated 5 of 10 on one target for about twelve hours.",
    "_descriptionWas": "The Ashwardens' keeping-craft, and the mirror of their hastening one. They tend endings, which means they also know precisely how to postpone one.",
    "_nameWas": "The Kept Vigil",
-   "_idWas": "the_kept_vigil"
+   "_idWas": "the_kept_vigil",
+   "_wardTypes": "⛔ SNG-512. ⛔ Holding a failing thing where it is answers the failing — the second decay-ward.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "true_account",

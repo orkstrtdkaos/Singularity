@@ -16694,6 +16694,105 @@ await (async () => {
         JSON.stringify((sb207.engine?.damage || sb207.damage || {}).healFunctions ?? null));
     }
   }
+  // 5c · ⛔ CCODE-208 / SNG-500 §2 — A CRAFT IMPOSES A CONDITION, AND A DENIED SIDE DOES NOT ACT.
+  // `Keening` is authored and does nothing at any rank. Aevi's correction was the design: it does not need
+  // a new state — `incapacitation.js` already owns what happens once you are down — it needs an ENTRANCE.
+  {
+    const cfg208 = C199.craftMechanics || {};
+    const keening = { id: "keening", name: "Keening", function: "strike", tier: 3, attribute: "social",
+      rank: 2, mechanic: { imposes: { condition: "unconscious", resist: "physical", degradesTo: "action_loss", targets: 3 } } };
+    const imp = (o = {}) => CM.resolveImposition(keening, { cfg: cfg208, rank: 2, ...o });
+
+    check("CCODE-208: a craft with no `imposes` imposes nothing — silence, not a default",
+      CM.resolveImposition({ id: "x" }, { cfg: cfg208 }).ok === false);
+
+    // ⛔ THE ONE THAT MATTERS MOST. Erik's §40: the ENGINE may impose death when the situation calls for it.
+    // A craft is not a situation. Refused LOUDLY — a clamp would let `"slain"` sit in the catalogue looking
+    // like it worked.
+    const killer = { mechanic: { imposes: { condition: "slain" } } };
+    check("CCODE-208: a craft can NEVER impose death — `slain` is refused, not clamped",
+      CM.resolveImposition(killer, { cfg: cfg208, margin: 999 }).ok === false
+      && /not a condition a craft may impose/.test(CM.resolveImposition(killer, { cfg: cfg208, margin: 999 }).why || ""));
+    check("CCODE-208: nor by the back door — a `degradesTo` of `slain` is refused too",
+      CM.resolveImposition({ mechanic: { imposes: { condition: "unconscious", degradesTo: "slain" } } },
+        { cfg: cfg208, margin: 0, targetResist: 99 }).ok === false);
+
+    check("CCODE-208: a decisive exchange puts them under",
+      imp({ margin: 40, targetResist: 2 }).condition === "unconscious");
+
+    // ⚠️ THE RESIST CHANGES WHAT LANDS, NEVER WHETHER ANYTHING DOES.
+    const resisted = imp({ margin: 1, targetResist: 9 });
+    check("CCODE-208: a resisted imposition DEGRADES to action-loss — it never evaporates",
+      resisted.ok === true && resisted.condition === "action_loss"
+      && resisted.resisted === true && resisted.degradedTo === "unconscious", JSON.stringify(resisted));
+
+    check("CCODE-208: rank makes it HARDER TO SHRUG OFF, not a bigger number",
+      imp({ rank: 3, margin: 0, targetResist: 4 }).threshold < imp({ rank: 1, margin: 0, targetResist: 4 }).threshold);
+    check("CCODE-208: what the subject brings raises the bar",
+      imp({ targetResist: 8 }).threshold > imp({ targetResist: 1 }).threshold);
+    check("CCODE-208: the craft's own `targets` caps how many it can reach",
+      imp({ margin: 40, targets: 99 }).targets === 3);
+    // ⛔ ESCALATE — AEVI'S §4 SHAPE, THE ONE SHE EXPECTED TO BE UNSUPPORTED. "A weakening becomes an
+    // incapacitation· an action-loss becomes unconsciousness." It is supported the moment a craft can
+    // impose at all, because escalation is a different argument to the same call rather than a new system.
+    {
+      const grey = { mechanic: { imposes: { condition: "staggered", onCrit: "incapacitated", degradesTo: "action_loss" } } };
+      check("CCODE-208 ESCALATE: a crit makes the effect a DIFFERENT, better effect, not a bigger number",
+        CM.resolveImposition(grey, { cfg: cfg208, margin: 40 }).condition === "staggered"
+        && CM.resolveImposition(grey, { cfg: cfg208, margin: 40, degree: "crit_success" }).condition === "incapacitated");
+      check("CCODE-208 ESCALATE: a craft with no onCrit crits exactly as before — opt-in, not imposed",
+        CM.resolveImposition(keening, { cfg: cfg208, margin: 40, degree: "crit_success" }).condition === "unconscious");
+      // ⛔ AND THE DEATH GUARD HOLDS THROUGH THE ESCALATION PATH, which is the door it would have come in by.
+      check("CCODE-208 ESCALATE: a crit cannot escalate into death either",
+        CM.resolveImposition({ mechanic: { imposes: { condition: "staggered", onCrit: "slain" } } },
+          { cfg: cfg208, margin: 40, degree: "crit_success" }).ok === false);
+    }
+    check("CCODE-208: the imposition dial is authored in craft_mechanics.json, not hardcoded",
+      Number.isFinite(cfg208.imposition?.base) && Number.isFinite(cfg208.imposition?.perRank),
+      JSON.stringify(cfg208.imposition ?? null));
+
+    // ---- and it is CALLED, through a real round ----
+    {
+      const SB208 = await import("../engine/skill_battle.js");
+      const EN208 = await import("../engine/encounters.js");
+      const rules208 = C199.rules || {};
+      const sb208 = rules208.skillBattle || C199.skillBattle || {};
+      const steps208 = C199.resolutionSteps || rules208.resolution || {};
+      const strong = { attributes: { social: 7, physical: 5, mental: 4, practical: 4 }, level: 9, health: 40, maxHealth: 40 };
+      const frail = { attributes: { social: 1, physical: 1, mental: 1, practical: 1 }, level: 1, health: 20, maxHealth: 20, soak: 0 };
+      const jab = { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "jab" };
+      const run = (extra = {}) => SB208.battleRound({ playerDecl: keening, oppDecl: jab, playerSheet: strong, oppSheet: frail,
+        state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 50, effects: [], pressure: { player: 0, opponent: 0 }, ...extra },
+        rules: rules208, sb: sb208, steps: steps208, rng: () => 0.5 });
+
+      const round = run();
+      check("CCODE-208: a winning craft's imposition reaches the round — the resolver is actually called",
+        round.imposed?.side === "opponent" && ["unconscious", "action_loss"].includes(round.imposed.condition),
+        JSON.stringify(round.imposed ?? null));
+
+      // ⛔ ACTION LOSS. `deniesPhase` rode onto live effects since CCODE-41 and NOTHING asked about the
+      // action phase — only "sense", in app.js. A side that gets no turn must not merely roll worse.
+      const denied = run({ effects: [{ kind: "hold", label: "held", side: "player", roundsLeft: 2, deniesPhase: "action", value: 0 }] });
+      check("CCODE-208: a side denied the ACTION phase loses the exchange without rolling for it",
+        denied.roundWinner === "opponent" && denied.deniedAct?.player === true, JSON.stringify(denied.deniedAct));
+      const bothDenied = run({ effects: [
+        { kind: "hold", label: "held", side: "player", roundsLeft: 2, deniesPhase: "action", value: 0 },
+        { kind: "hold", label: "held", side: "opponent", roundsLeft: 2, deniesPhase: "action", value: 0 }] });
+      check("CCODE-208: both sides denied is a wasted round for both, not a win for either",
+        bothDenied.roundWinner === null);
+
+      // ---- and the state is CONSULTED, not merely set ----
+      check("CCODE-208: an imposed unconscious puts someone down — checkIncapacitation reads it",
+        EN208.checkIncapacitation({ health: 30, condition: "unconscious" }) === "incapacitated");
+      check("CCODE-208: health still does it on its own, and an ordinary character is still standing",
+        EN208.checkIncapacitation({ health: 0 }) === "incapacitated"
+        && EN208.checkIncapacitation({ health: 30 }) === null);
+      // ⛔ AND `slain` IS NOT A CONDITION THAT PUTS YOU THERE. Death is the incapacitation table's outcome,
+      // reached after you are down — never a string a craft or a caller can set to skip the weighing.
+      check("CCODE-208: `slain` as a condition does not short-circuit the incapacitation table",
+        EN208.checkIncapacitation({ health: 30, condition: "slain" }) === null);
+    }
+  }
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

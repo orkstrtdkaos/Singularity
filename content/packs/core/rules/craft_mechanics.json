@@ -284,5 +284,16 @@
   "_taperFloor": "⚠️ the floor it can never fall below, as a fraction of the roll. A healer who has already worked twice is worth less, never worthless — without this, a long contest turns the healer off.",
   "_whatDoesNotApply": "⛔ A HEAL CANNOT CRIT (no overhealing) AND CANNOT BE EVADED — those are not dials, they are the reason `resolveHeal` is its own path rather than a sign flip on the damage one. It CAN be soaked, but only by ACTIVE ONGOING HARM (bleeding, hastened decay, rot, venom, a sustained hold) and never by armour.",
   "_ongoingHarmShape": "⚠️ AEVI — THE READER IS LIVE AND UNFED. `resolveHeal` reads ongoing harm off the SUBJECT as [{ id, magnitude }]. `Hastened Grey` (\"a wound already open goes grey and stops closing\") and `Sustained Regard` r2 (\"cannot stop bleeding for as long as you hold it\") both claim it in prose and neither carries a field. Author `mechanic.ongoingHarm: { id, magnitude }` on the crafts that IMPOSE it."
+ },
+ "imposition": {
+  "_note": "⛔ SNG-500 §2 / CCODE-208 — HOW HARD A CRAFT-IMPOSED CONDITION IS TO SHRUG OFF. A craft declares `mechanic.imposes: { condition, resist, degradesTo, targets }`; these decide the bar its margin must clear. ⚠️ The resist changes WHAT lands, never WHETHER anything does — a working that wins the exchange and then evaporates is the same dead feeling as a heal that heals nothing.",
+  "base": 10,
+  "_base": "the bar before anything else. A decisive exchange clears it; a scraped win does not.",
+  "perResist": 1,
+  "_perResist": "how much each point the subject brings raises the bar.",
+  "perRank": 5,
+  "_perRank": "⚠️ how much each rank past the first LOWERS it. Rank here is not a bigger number, it is a harder thing to shrug off — which is what rank means everywhere else.",
+  "_neverDeath": "⛔ A CRAFT CAN NEVER IMPOSE DEATH, and that is structural rather than a dial. `IMPOSABLE` is action_loss | staggered | unconscious | incapacitated. `slain` and `left_for_dead` are OUTCOMES of the incapacitation table, reached after someone is already down and weighed against the aggressor's kind. Erik's §40 ruling lets the ENGINE impose death when the situation calls for it; a craft is not a situation.",
+  "_unauthored": "⚠️ AEVI — NOTHING AUTHORS `mechanic.imposes` YET. `Keening` is the craft SNG-500 §2 was written about and does nothing at any rank. Her own scope: r1 area, action-loss · r2 up to three, unconscious-or-action-loss · r3 everyone you choose."
  }
 }

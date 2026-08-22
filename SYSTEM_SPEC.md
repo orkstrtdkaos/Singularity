@@ -2403,6 +2403,9 @@ that lags the code is worse than no map, because it is believed.
 | `wardTypes` | the same match, from the ward's side | `skill_battle.js` | ⛔ **0** |
 | `mechanic.dice` on a **healing** shape | ✅ `resolveHeal` → `rollMagnitude` → the round's `healing` | `craftmechanics.js` → `skill_battle.js` healing branch | 25 |
 | `ongoingHarm` on the **SUBJECT** | ✅ the only thing that soaks a heal | `craftmechanics.js` `resolveHeal` | ⛔ **0** |
+| `mechanic.imposes` | ✅ `resolveImposition` → the round's `imposed` → `checkIncapacitation` | `craftmechanics.js` → `skill_battle.js` | ⛔ **0** |
+| `mechanic.imposes.onCrit` | ✅ **ESCALATE** — a crit imposes a *different, stronger* condition | `craftmechanics.js` | ⛔ **0** |
+| `deniesPhase: "action"` | ✅ that side loses the exchange **without rolling** | `skill_battle.js` | ⛔ **0** |
 
 ## §39.4 — HEALING (CCODE-207), and what `crit` can and cannot take
 
@@ -2431,12 +2434,28 @@ dice could **win a round and produce nothing**. The healing verbs are now author
 | shape | supported? | what it would need |
 |---|---|---|
 | **AMPLIFY** (more of the same) | ⛔ **no** | there is no crit damage multiplier anywhere; a crit raises the *sense tier* and nothing else |
-| **ESCALATE** (a different, better effect) | ⚠️ **as PROSE only** — the sentence reaches the receipt, nothing changes mechanically | a craft able to **impose a named state** with a resist |
+| **ESCALATE** (a different, better effect) | ✅ **YES, as of CCODE-208** — author `mechanic.imposes.onCrit` | — |
 | **PERSIST** (temporary becomes durable) | ⛔ **no** | a duration/permanence hook on the crit branch |
 
-⚠️ **ESCALATE and SNG-500 §2 (Keening) are the same feature.** Keening needs "a craft imposes the existing
-incapacitation state, with a resist that degrades to action-loss." That mechanism *is* ESCALATE. **Build §2
-and ESCALATE comes nearly free; author AMPLIFY before either and it lands on nothing.**
+⚠️ **ESCALATE and SNG-500 §2 (Keening) turned out to be the same feature**, which is why building §2 made it
+free: escalation is a different argument to `resolveImposition`, not a new system. `onCrit` is **opt-in** —
+a craft that names none crits as prose exactly as before.
+
+## §40.1a — ⛔ A CRAFT MAY PUT YOU DOWN. IT MAY NEVER KILL YOU.
+
+**`IMPOSABLE` = `action_loss` · `staggered` · `unconscious` · `incapacitated`.** That list is the boundary,
+and it is **structural rather than a comment**: `resolveImposition` refuses `slain` and `left_for_dead`
+loudly rather than clamping them, because a clamp would let `"condition": "slain"` sit in the catalogue
+looking like it worked. **The refusal holds through `degradesTo` and through `onCrit`** — both were gated,
+because those are the two doors death would come in by.
+
+⚠️ **This does not narrow §40.** The ENGINE may still impose incapacitation and death when the situation
+calls for it. **A craft is not a situation.** What happens to someone already on the floor stays the
+incapacitation table's call, weighed against the aggressor's kind — which is exactly where Aevi placed it.
+
+**And a resist changes WHAT lands, never WHETHER anything does.** A working that wins the exchange and then
+evaporates on one roll is the same dead feeling as a heal that heals nothing, so a resisted imposition
+**degrades** (`degradesTo`, default `action_loss`) instead of whiffing.
 
 ⛔ **SHAPE IS RESOLVED, NOT AUTHORED.** `strike` resolves to `damage` and rolls; `hobble` does not. Author a
 damage number on a hobble-shaped craft and no die is ever thrown.

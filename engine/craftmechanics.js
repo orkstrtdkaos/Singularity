@@ -532,3 +532,71 @@ export function resolveHeal(ability, {
   const soaked = Math.min(purse, remainingHarm);
   return { ok: true, why: null, rolled, tapered, soaked, staunched, ended, healed: Math.max(0, purse - soaked), shape: m.shape };
 }
+
+/** SNG-500 §2 / CCODE-208 — A CRAFT IMPOSES A CONDITION. `Keening` is authored and does nothing at any rank.
+ *
+ *  ⛔ AEVI'S CORRECTION IS THE DESIGN: Keening does not need a new state. `incapacitation.js` already owns
+ *  what happens once someone is down, and `checkIncapacitation` already holds the end-state. What was
+ *  missing was a way for a CRAFT to put someone there — so this is an entrance, not a new room.
+ *
+ *  ⛔ AND IT DEGRADES RATHER THAN WHIFFS. Her shape: "a resist that degrades to action-loss." A craft that
+ *  wins the exchange and then does nothing because one roll went the other way is the same dead feeling as
+ *  a heal that heals nothing — the resist changes WHAT lands, never WHETHER anything does.
+ *
+ *  ⛔ AND IT CAN NEVER IMPOSE DEATH. Erik's §40 ruling lets the Engine impose incapacitation and death when
+ *  the SITUATION calls for it; a craft is not a situation. `slain` and `left_for_dead` are outcomes of the
+ *  incapacitation table, reached after someone is already down and weighed against the aggressor's kind.
+ *  A craft may put you on the floor. What happens to you there is not its call, and IMPOSABLE is the list
+ *  that makes that structural rather than a comment.
+ *
+ *  Authored as `mechanic.imposes`:
+ *      { "condition": "unconscious", "resist": "physical", "degradesTo": "action_loss", "targets": 3 }
+ *
+ *  ⚠️ NOTHING AUTHORS IT YET — reported to Aevi with Keening's three ranks spelled out from her own spec,
+ *  rather than authored on her behalf. Same rule as `ongoingHarm` in §1: a reader with a named, reported
+ *  gap is a work order; a reader with a silent one is a bug.
+ *
+ *  Returns { ok, condition, degradedTo, resisted, targets, threshold, why }. */
+export const IMPOSABLE = ["action_loss", "staggered", "unconscious", "incapacitated"];
+
+export function resolveImposition(ability, {
+  rank = 1, cfg = {}, margin = 0, targetResist = 0, targets = null, degree = null
+} = {}) {
+  const spec = ability?.mechanic?.imposes || ability?.imposes || null;
+  if (!spec) return { ok: false, condition: null, degradedTo: null, resisted: false, targets: 0, threshold: null, why: "this craft imposes nothing" };
+
+  // ⛔ ESCALATE (Aevi's SNG-509 §4) — a crit makes the effect a DIFFERENT, BETTER effect, not a bigger
+  // number. "Grey Hand: a weakening becomes an incapacitation · Keening: an action-loss becomes
+  // unconsciousness." She named this as the shape she cared most about and the one most likely to be
+  // unsupported; it is supported the moment a craft can impose at all, because escalation is just a
+  // different argument to the same call.  is opt-in — a craft that does not name one crits as
+  // prose, exactly as before.
+  const escalated = degree === "crit_success" && spec.onCrit ? String(spec.onCrit).toLowerCase() : null;
+  const want = escalated || String(spec.condition || "").toLowerCase();
+  if (!IMPOSABLE.includes(want)) {
+    // ⛔ A CRAFT CANNOT AUTHOR ITS WAY TO A KILL. Refused loudly rather than clamped quietly, because a
+    // clamp would let `"condition": "slain"` sit in the catalogue looking like it worked.
+    return { ok: false, condition: null, degradedTo: null, resisted: false, targets: 0, threshold: null,
+      why: `"${spec.condition}" is not a condition a craft may impose (${IMPOSABLE.join(" | ")})` };
+  }
+
+  const dial = cfg.imposition || {};
+  // the bar rises with what the subject brings and falls with the working's rank — a deeper rank is not a
+  // bigger number here, it is a HARDER THING TO SHRUG OFF, which is what rank means everywhere else.
+  const threshold = Math.max(0,
+    num(dial.base, 10)
+    + Math.max(0, num(targetResist, 0)) * num(dial.perResist, 1)
+    - Math.max(0, num(rank, 1) - 1) * num(dial.perRank, 5));
+
+  const cap = Math.max(1, num(spec.targets, 1));
+  const reach = targets == null ? cap : Math.min(cap, Math.max(1, num(targets, 1)));
+  const landed = num(margin, 0) >= threshold;
+  const degradesTo = String(spec.degradesTo || "action_loss").toLowerCase();
+
+  if (landed) return { ok: true, condition: want, degradedTo: null, resisted: false, targets: reach, threshold, why: null };
+  // resisted — but the working still landed, so it degrades rather than evaporating.
+  return IMPOSABLE.includes(degradesTo)
+    ? { ok: true, condition: degradesTo, degradedTo: want, resisted: true, targets: reach, threshold, why: null }
+    : { ok: false, condition: null, degradedTo: want, resisted: true, targets: 0, threshold,
+        why: `"${spec.degradesTo}" is not a condition a craft may impose` };
+}

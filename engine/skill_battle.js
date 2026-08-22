@@ -6,7 +6,7 @@
 // narrates the resolved exchange; it never chooses the opponent's mechanical move — that is opponentPolicy.
 
 import { resolveAction } from "./resolve.js";
-import { mechanicFor, rollMagnitude, resolveHeal, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
+import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const DEFAULT_STEPS = { conserve: { energyMult: 0.6, effectMod: -8 }, standard: { energyMult: 1, effectMod: 0 }, surge: { energyMult: 1.6, effectMod: 10, backlashChance: 0.25 } };
@@ -700,8 +700,23 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // the CCODE-38 pressure pacing (measured over 1200 fights/threat-level) is invalidated. Content dial.
   const turnCfg = sb.turn || {};
   const senseStep = phase === "sense" && turnCfg.senseMovesMomentum !== true;
+  // ⛔ CCODE-208 / SNG-500 §2 — ACTION LOSS. `deniesPhase` already rode from content onto live effects
+  // (CCODE-41), and `phaseDenied` was consulted for exactly one phase: "sense", in app.js. Nothing anywhere
+  // asked whether a side could ACT — so an effect declaring `deniesPhase: "action"` was inert while still
+  // advertised in content, which is the same shape as the blinding counterplay that comment was written for.
+  //
+  // ⚠️ A DENIED SIDE DOES NOT ROLL BADLY — IT DOES NOT ACT. Losing on margin would let a lucky roll
+  // shrug off a condition that says you get no turn, and would make the effect a penalty rather than a
+  // silence. Both sides denied is a wasted round for both, which is the honest reading.
+  const deniedAct = { player: phaseDenied(standing, "player", "action"), opponent: phaseDenied(standing, "opponent", "action") };
   let momentum = state.momentum || 0, roundWinner = null, delta = 0;
-  if (p.margin !== o.margin) {
+  if (phase === "action" && (deniedAct.player || deniedAct.opponent) && !(deniedAct.player && deniedAct.opponent)) {
+    roundWinner = deniedAct.player ? "opponent" : "player";
+    delta = Math.abs(p.margin - o.margin) * marginScale;
+    if (!senseStep) momentum += roundWinner === "player" ? delta : -delta;
+  } else if (phase === "action" && deniedAct.player && deniedAct.opponent) {
+    roundWinner = null;
+  } else if (p.margin !== o.margin) {
     roundWinner = p.margin > o.margin ? "player" : "opponent";
     delta = Math.abs(p.margin - o.margin) * marginScale;
     if (!senseStep) momentum += roundWinner === "player" ? delta : -delta;
@@ -950,7 +965,30 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
 
   // CCODE-45: a sense step doesn't advance the ROUND counter either — the whole turn is one round.
   const newState = { ...state, round: (state.round || 0) + (senseStep ? 0 : 1), momentum, playerEnergy, opponentEnergy, effects, pressure, spent, resolved, opponentHealth, status: resolved ? "resolved" : "active" };
-  const out = { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
+  // ⛔ CCODE-208 — AND A WINNING CRAFT MAY IMPOSE. Aevi's correction is the whole design: Keening does not
+  // need a new state, it needs a way to put someone into the one that already exists. Resolved AFTER the
+  // exchange because only a winner imposes, and read off the SUBJECT's resistance so it is contested.
+  let imposed = null;
+  if (roundWinner && phase === "action") {
+    const impDecl = roundWinner === "player" ? playerDecl : oppDecl;
+    const loserSheet = roundWinner === "player" ? oppSheet : playerSheet;
+    const winRoll = roundWinner === "player" ? p : o, loseRoll = roundWinner === "player" ? o : p;
+    const spec = impDecl?.mechanic?.imposes || impDecl?.imposes || null;
+    if (spec) {
+      const resistKey = String(spec.resist || "physical");
+      const r = resolveImposition(impDecl, {
+        rank: impDecl.rank || 1, cfg: rules?.craftMechanics || {},
+        margin: Math.max(0, (winRoll.margin || 0) - (loseRoll.margin || 0)),
+        targetResist: Number(loserSheet?.attributes?.[resistKey]) || 0,
+        degree: winRoll.degree
+      });
+      if (r.ok) imposed = { side: roundWinner === "player" ? "opponent" : "player", condition: r.condition,
+        by: impDecl.name || impDecl.function, targets: r.targets, threshold: r.threshold,
+        ...(r.resisted ? { resisted: true, degradedFrom: r.degradedTo } : {}) };
+      else if (r.why) imposed = { refused: r.why, by: impDecl.name || impDecl.function };
+    }
+  }
+  const out = { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback },
     // CCODE-80: an evaded blow must SAY it was evaded. An attack that quietly does less is indistinguishable
     // from a bad roll, and the whole point of the three defensive logics is that they read differently.

@@ -219,7 +219,15 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
 
 /** Player incapacitation check (app calls after applying deltas). */
 export function checkIncapacitation(character) {
-  return character.health <= 0 ? "incapacitated" : null;
+  // ⛔ CCODE-208 / SNG-500 §2: health is not the only road down. A craft may IMPOSE unconsciousness
+  // (`craftmechanics.resolveImposition`), and a check that only reads health would let someone Keening put
+  // on the floor keep taking turns — the state existing is not the same as the state being consulted.
+  // ⚠️ IMPOSED, NEVER FATAL. A craft can put you here; what happens to you here is the incapacitation
+  // table's call, weighed against the aggressor's kind. See §40.
+  if (character?.health <= 0) return "incapacitated";
+  const c = String(character?.condition || "").toLowerCase();
+  if (c === "unconscious" || c === "incapacitated") return "incapacitated";
+  return null;
 }
 
 // ---------- challenge ----------

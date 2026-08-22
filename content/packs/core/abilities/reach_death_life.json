@@ -1573,14 +1573,7 @@
      "functions": [
       "strike"
      ],
-     "gainAxes": [],
-     "imposes": {
-      "condition": "incapacitated",
-      "degradesTo": "staggered",
-      "resist": "mental",
-      "targets": 1
-     },
-     "_imposes": "⛔ SNG-513. ⛔ NO onCrit — incapacitated is already the ceiling, and `slain` is refused. The L5 Ashwarden capstone stops exactly where the engine stops it."
+     "gainAxes": []
     }
    ],
    "gated": "learned",
@@ -1634,7 +1627,8 @@
     "prepHours": 0,
     "note": "⚠️ COOLDOWN REMOVED (Erik). It is a T5 ashwarden capstone — the difficulty of OBTAINING it is already the limit, and very few people in the world can use it at all. A weeks-long cooldown on top of that is a second gate behind a locked door. Its cost is what it costs the wielder, not a timer."
    },
-   "_descriptionWas": "The Fates' shears. One life, one cut, done — not a wound, a CESSATION. This is the deepest thing the Ashwardens hold and they teach it to almost nobody, because the argument against it has never been answered and they keep doing it anyway."
+   "_descriptionWas": "The Fates' shears. One life, one cut, done — not a wound, a CESSATION. This is the deepest thing the Ashwardens hold and they teach it to almost nobody, because the argument against it has never been answered and they keep doing it anyway.",
+   "_lethal": "⛔ SNG-514. ERIK: 'The Cut Thread DOES SLAY.' ⚠️ I ADDED AN `imposes` BLOCK SAYING `incapacitated` TO AN ABILITY WHOSE OWN TEXT READS 'END ONE LIVING THING — IT SIMPLY STOPS' AND WHOSE `harmRung` HAS ALWAYS BEEN `lethal`. The craft was never confused; I overwrote it.\n⛔ HOW IT KILLS: `shape: damage`, 5d6+6, `harmRung: lethal`. It kills the way lethal damage kills — through the damage path, not by imposing a condition. ⚠️ `mechanic.imposes` IS FOR CONDITIONS SHORT OF DEATH, which is why the engine refuses `slain` THERE. THAT REFUSAL IS NOT A RULE THAT CRAFTS CANNOT KILL. I read a constraint on one field as a constraint on the game."
   },
   {
    "id": "grey_road",

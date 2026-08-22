@@ -75,7 +75,7 @@
     {
      "rank": 2,
      "name": "Every Living Thing",
-     "grants": "⚠️ ADDS TARGETS BEYOND PEOPLE. Any living thing — a warhorse, a hound, a beast, a thing grown rather than born. It stops, and what it relied on gives.",
+     "grants": "⛔ DECLARE IN THE SENSE SLOT. Show ANY LIVING THING its own ending — a warhorse, a hound, a beast, a thing grown rather than born. It stops reading you, and whatever it relied on to stay whole gives.",
      "cannot": "It must be alive and it must be able to see you.",
      "functions": [
       "deceive",
@@ -86,12 +86,13 @@
      "gainAxes": [
       "targets",
       "conditions"
-     ]
+     ],
+     "_grantsWas_SNG510": "⚠️ ADDS TARGETS BEYOND PEOPLE. Any living thing — a warhorse, a hound, a beast, a thing grown rather than born. It stops, and what it relied on gives."
     },
     {
      "rank": 3,
      "name": "Everything Has an Address",
-     "grants": "⛔ ADDS THE UNLIVING. Everything has an essence and every essence can be shown its end — a construct, a set body, a warded door, a working someone is sustaining, a bound thing. ⚠️ WHAT IS NOT ALIVE STILL FINISHES.",
+     "grants": "⛔ DECLARE IN THE SENSE SLOT. Show ANYTHING WITH AN ESSENCE its own end — a construct, a set body, a warded door, a working someone is sustaining. What is not alive still finishes.",
      "cannot": "It must have been made, grown, or bound by someone. Raw stone has no address to show.",
      "functions": [
       "deceive",
@@ -103,10 +104,12 @@
      "gainAxes": [
       "scope",
       "quality"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS THE UNLIVING. Everything has an essence and every essence can be shown its end — a construct, a set body, a warded door, a working someone is sustaining, a bound thing. ⚠️ WHAT IS NOT ALIVE STILL FINISHES."
     }
    ],
    "_authored": "⛔ SNG-490. Erik: 'SOUL STARE could be an obscure skill rank 1, plus it would DROP THEIR RESISTANCE. r2 would have a similar effect but on ANY LIVING ENTITY. r3 would work on ANYTHING — everything has an essence (ADDRESS).'\n⚠️ DEATH HAD NO OBSCURE. And the rank ladder is TARGET CLASS, not power: person → living → anything with an address, which is the Ashwarden thesis that everything finishes.\n⛔ THE RESISTANCE DROP IS THE SECOND HALF AND IT MAKES THIS A SETUP FOR THE WHOLE TRADITION — Hastened Grey, Draw Down and Cut Thread all land harder on something that has just been shown its ending."
   }
- ]
+ ],
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
 }

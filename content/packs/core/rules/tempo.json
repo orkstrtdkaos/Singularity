@@ -36,6 +36,22 @@
    "Order (lattice)": "A pattern so regular it carries no information.",
    "Death (ashwarden)": "⛔ THEY LOOK AT YOU AND SEE HOW THEY END. Nothing tactical survives that.",
    "_note": "⚠️ EVERY TRADITION SHOULD REACH ONE OBSCURE CRAFT. This is the second slot in the round and no tradition should be locked out of it."
+  },
+  "bonusFromObscure": {
+   "rule": "⛔ A SUCCESSFUL OBSCURE AGAINST AN ACTIVE SENSE EARNS THE BONUS ACTION. Not against a passive target, not against someone who also declared obscure — only against a read that was actually attempted.",
+   "why": "⚠️ OBSCURE COSTS THE SENSE TIER AND THE SETUP BONUS — CCode: 'you guarded, so you did not look.' ⛔ WITHOUT THIS, THE TRADE IS PURE DENIAL: you spend your slot, they lose theirs, and nobody gains. That makes obscure a tax on both sides rather than a play.\n⛔ WITH IT, OBSCURE IS A GAMBIT: give up your read to beat theirs, and if you beat it cleanly you come out of the sense step with more of the round than they have.",
+   "conditions": [
+    "the opponent declared SENSE this round",
+    "⛔ the obscure WON by more than the null band",
+    "⚠️ NOT earned against a passive opponent — hiding from nobody earns nothing",
+    "⚠️ NOT earned in an OBSCURE-vs-OBSCURE round — both wasted the slot"
+   ]
+  },
+  "nullBand": {
+   "rule": "⛔ WHERE THE TWO ROLLS ARE ROUGHLY EQUAL, NEITHER SIDE EARNS A BONUS ACTION.",
+   "_distinctFromTheTieRule": "⛔ TWO DIFFERENT QUESTIONS AND THEY MUST NOT BE MERGED:\n   THE TIE RULE ANSWERS *WHO WINS THE READ*. Gap 0 is the obscurer's — unchanged, gated, and CCode has made softening it require editing a function with the reason written on it.\n   THE NULL BAND ANSWERS *WHO EARNS A BONUS ACTION*. Inside the band, nobody does.\n⚠️ SO AT GAP 0 THE OBSCURER STILL DENIES THE READ — that is their slot refunded — BUT EARNS NO BONUS ACTION. They broke even. That is the correct feel for a coin-flip.",
+   "band": "⚠️ ERIK'S CALL ON THE WIDTH. I would start at ±2 on the contest margin and widen if bonus actions prove too common.",
+   "_whyItIsNeeded": "⛔ WITHOUT IT, A ONE-POINT WIN IS WORTH THE SAME AS A ROUT, and every sense step produces a winner. ⚠️ A round where both sides tried and neither got anywhere is a real outcome and the system should be able to say so."
   }
  },
  "tempo": {
@@ -102,5 +118,6 @@
   "proposed": "⛔ THE OBSCURE BECOMES A DECLARATION IN THE SENSE SLOT, and declaring it means you are NOT reading. ⚠️ THAT IS THE COST AND IT IS WHAT MAKES IT A CHOICE: you give up your own read to deny theirs. A passive resist costs nothing and therefore decides nothing.",
   "theTieRule": "⛔ THE OBSCURER WINS TIES. CCode: 'the part I would protect — it is exactly the kind of rule that gets softened during implementation because it looks unfair in a unit test.' ⚠️ IT IS NOT UNFAIR: throwing dirt is easier than reading a man with dirt in his eyes, and without it the sense slot belongs permanently to the perceptive traditions.",
   "visibility": "⚠️ Both declarations resolve openly. ⛔ You know you were blinded, and by whom — `senseBlinded` already exists as a flag; it becomes a stated outcome instead of a silent one."
- }
+ },
+ "_erikRuling_20260816": "⛔ ERIK: 'I don't like that a successful obscure leaves you without the bonus action — we need to change that so that SUCCESSFULLY OBSCURING AGAINST AN ACTIVE SENSE gives you the bonus action as well. And we should probably have a NULL BAND where something that's roughly a tie doesn't yield a bonus for either party.'\n⚠️ THIS PARTIALLY REVERSES THE CONSEQUENCE-FREE SENSE STEP, AND I AM NAMING THAT RATHER THAN SLIPPING IT PAST. CCode's warning stands on the record: the sense step was built so that READING IS NOT A WAY TO WIN, and my first tempo table would have reversed it as a side effect of a new currency.\n⛔ THIS REVERSAL IS DIFFERENT IN THREE WAYS AND THAT IS WHY IT HOLDS:\n   IT IS DELIBERATE — Erik's ruling, not an emergent consequence.\n   IT IS ASYMMETRIC — the READER still banks nothing. Reading remains free and remains not-a-way-to-win.\n   IT REQUIRES AN OPPONENT WHO CHOSE TO ACT — you cannot earn it by hiding from nobody."
 }

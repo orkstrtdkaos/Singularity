@@ -671,9 +671,30 @@ export function declaredSense(decl, sb) {
  *
  *  `gap` is the reader's margin over the obscurer's resistance — positive means the reader is ahead.
  *  Returns "obscurer" or null. It can never return "reader" by construction, not by omission. */
-export function senseBonusFor({ obscured = false, opponentSensed = false, gap = 0, sb } = {}) {
+/** CCODE-213 — DID THIS SIDE DO NOTHING AT ALL IN THE SENSE STEP? Erik: *"we need to let obscure grant a
+ *  free action in the case the opponent does nothing in the sense round as well."*
+ *
+ *  ⛔ NOTHING MEANS NOTHING — NOT "SOMETHING THAT ISN'T A READ". A guard is an act: they spent the slot,
+ *  they just did not spend it looking, and Aevi's "hiding from nobody is not a win" still governs that
+ *  case. This is the narrower thing: no declaration reached the step at all.
+ *
+ *  ⚠️ THE NARROW READING IS DELIBERATE AND IT IS AN ASSUMPTION, RECORDED SO IT CAN BE OVERTURNED ON
+ *  PURPOSE. `degradeIfSpent` degrades a broke side to a bare strike or guard rather than to nothing, and a
+ *  static antagonist "holds" — so a genuinely empty declaration is rare, which is what keeps this from
+ *  becoming a bonus tap. If Erik meant the wider reading (anyone who did not READ, guard included), it is
+ *  one condition in `senseBonusFor`. */
+export function declaredNothing(decl) {
+  return !decl || !decl.function || decl.noAct === true || decl.idle === true;
+}
+
+export function senseBonusFor({ obscured = false, opponentSensed = false, opponentIdle = false, gap = 0, sb } = {}) {
   if (!obscured) return null;                 // the reader banks nothing — the asymmetry, stated once
-  if (!opponentSensed) return null;           // hiding from nobody is not a win
+  // ⛔ CCODE-213 / ERIK: AN UNCONTESTED OBSCURE PAYS. You spent your slot, they spent nothing, and you
+  // come out of the step holding more of the round than they do. ⚠️ THE NULL BAND DOES NOT APPLY HERE
+  // and that is not an oversight: the band exists to say a COIN-FLIP earns nobody anything, and there was
+  // no flip. Comparing a gap against an opponent who never rolled would be arithmetic about nothing.
+  if (opponentIdle) return "obscurer";
+  if (!opponentSensed) return null;           // they acted, just not at you — hiding from nobody is not a win
   const band = Math.max(0, Number(sb?.senseStep?.bonusNullBand ?? 2));
   const g = Number(gap) || 0;
   if (Math.abs(g) <= band) return null;   // roughly a tie: neither side gained
@@ -1134,12 +1155,13 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     // denial: you spend your slot, they lose theirs, nobody gains, and obscure is a tax on both sides
     // rather than a play. `senseBonusFor` states the conditions once; this only routes the answer.
     const oppSensed = declaredSense(oppDecl, sb);
+    const oppIdle = declaredNothing(oppDecl);
     const bonusWinner = senseBonusFor({
-      obscured: !!out.obscuredInsteadOfReading, opponentSensed: oppSensed,
+      obscured: !!out.obscuredInsteadOfReading, opponentSensed: oppSensed, opponentIdle: oppIdle,
       gap: (out.senseGap != null ? out.senseGap : 0), sb
     });
     if (bonusWinner === "obscurer") out.bonusEarned = { ...out.bonusEarned, player: true };
-    out.senseBonus = { winner: bonusWinner, opponentSensed: oppSensed,
+    out.senseBonus = { winner: bonusWinner, opponentSensed: oppSensed, opponentIdle: oppIdle,
       band: Math.max(0, Number(sb?.senseStep?.bonusNullBand ?? 2)), gap: out.senseGap ?? null };
   }
   return out;

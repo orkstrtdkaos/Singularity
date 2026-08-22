@@ -2425,6 +2425,34 @@ traditions.
 editing something with the reason written on it**, and `CCODE-211` gates the exact boundary — gap 0 is the
 hider's, gap 1 is the reader's. ⚠️ **The mutation that softens it to `< 0` was run, and the gate goes red.**
 
+## §39.7 — WHO EARNS A BONUS ACTION OUT OF THE SENSE STEP (SNG-517 · CCODE-212/213)
+
+⛔ **ONLY THE OBSCURER, EVER.** `senseBonusFor` returns `"obscurer"` or `null` — **it cannot return
+`"reader"` by construction, not by omission.** That is the whole safety of Erik's change against CCode's
+standing warning that the sense step was built consequence-free so **reading** is not a way to win. It
+still isn't. **Beating a reader** is, and that is a different claim.
+
+| the obscurer's opponent | earns |
+|---|---|
+| **did nothing at all** — no declaration, no `function`, or explicitly idle | ✅ **the bonus.** No band applies: the band is about a coin-flip, and there was no flip |
+| **declared a SENSE** and was beaten past the band | ✅ the bonus |
+| **declared a SENSE**, inside the ±2 null band | ⛔ nothing — they broke even |
+| **declared a SENSE** and read them anyway | ⛔ nothing — the gambit can lose |
+| **acted, but not at them** (a guard) | ⛔ nothing — *hiding from nobody is not a win* |
+| **also obscured** | ⛔ nothing — both wasted the slot |
+
+⚠️ **"NOTHING" MEANS NOTHING — NOT "SOMETHING THAT ISN'T A READ".** A guard is an act. The narrow reading
+is deliberate and it is what keeps this from being a bonus tap: `degradeIfSpent` degrades a broke side to a
+bare strike or guard rather than to nothing, and a static antagonist *holds*.
+
+⛔ **AND THE ORDER OF THE BRANCHES IS LOAD-BEARING.** The reader guard comes first. Move the uncontested
+rule above it and the reader starts banking — gated, and the mutation that reorders them goes red.
+
+⚠️ **The balance of all of this lives in `opponentPolicy`, not in the null band.** The default opponent
+pool is `strike` and `shield`, and no authored encounter opponent uses a sense function — so the
+*beat-a-reader* branch is currently unreachable in play and the *uncontested* branch is the only live one.
+**Widening the band does nothing; giving opponents a `reveal` craft does everything.**
+
 **And obscure is a DECLARATION now, not a sheet property.** Declaring it costs the read and the setup
 bonus — the same trade a guard in the sense step already made — and opposes the reader with the roll
 actually made, never below passive guardedness. **Read from `ability.obscure`, never inferred from

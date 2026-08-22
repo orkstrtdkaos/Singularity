@@ -16930,6 +16930,43 @@ await (async () => {
     check("CCODE-212: hiding from nobody is not a win — a passive opponent earns the obscurer nothing",
       bonus({ obscured: true, opponentSensed: false, gap: -999 }) === null);
 
+    // ⛔ CCODE-213 / ERIK'S SECOND RULING: AN UNCONTESTED OBSCURE PAYS. "Let obscure grant a free action
+    // in the case the opponent does nothing in the sense round as well." ⚠️ This REVERSES Aevi's specced
+    // "hiding from nobody is not a win" for the IDLE case only — she still governs the case where they
+    // acted and simply did not look.
+    {
+      check("CCODE-213: an obscure nobody contested earns the bonus — they spent nothing, you spent your slot",
+        bonus({ obscured: true, opponentIdle: true, gap: 0 }) === "obscurer");
+      // ⛔ AND THE ASYMMETRY SURVIVES THE NEW BRANCH. This is the gate that matters: a new early return is
+      // exactly how "the reader banks nothing" would quietly stop being true.
+      check("CCODE-213: the reader STILL banks nothing, even against an opponent who did nothing",
+        SB212.senseBonusFor({ sb: cfg212, obscured: false, opponentIdle: true, gap: -999 }) === null);
+      // ⚠️ NOTHING MEANS NOTHING. A guard is an ACT — they spent the slot, just not on looking — and
+      // Aevi's rule still governs it. Widening this to "did not read" is a different ruling.
+      check("CCODE-213: a guard is an ACT, not nothing — it still earns the obscurer nothing",
+        SB212.declaredNothing({ function: "shield" }) === false
+        && bonus({ obscured: true, opponentSensed: false, opponentIdle: false, gap: -999 }) === null);
+      check("CCODE-213: 'nothing' is no declaration at all — absent, functionless, or explicitly idle",
+        SB212.declaredNothing(null) === true && SB212.declaredNothing({}) === true
+        && SB212.declaredNothing({ function: "strike", noAct: true }) === true);
+      // the band is about a coin-flip, and there was no flip
+      check("CCODE-213: the null band does NOT apply to an uncontested obscure — there was no roll to tie",
+        bonus({ obscured: true, opponentIdle: true, gap: 0 }) === "obscurer"
+        && bonus({ obscured: true, opponentSensed: true, gap: 0 }) === null);
+    }
+
+    // ⛔ OBSCURE vs OBSCURE EARNS NOBODY ANYTHING - BOTH WASTED THE SLOT. Aevi specced this condition
+    // explicitly and it was passing only as a CONSEQUENCE of  rejecting a conceal craft.
+    // ⚠️ That is true today and would stop being true the moment anyone widened , at
+    // which point BOTH sides would start banking a bonus for hiding from each other and nothing would say
+    // so. A specced condition that holds by accident is not held.
+    {
+      const hid = { obscure: true, function: "conceal", name: "False Stance" };
+      check("CCODE-212: obscure vs obscure earns nobody anything — both wasted the slot",
+        SB212.declaredSense(hid, cfg212) === false
+        && bonus({ obscured: true, opponentSensed: SB212.declaredSense(hid, cfg212), gap: -999 }) === null);
+    }
+
     // ⛔ THE NULL BAND IS A SEPARATE AXIS FROM THE TIE RULE, AND AEVI SAID NOT TO MERGE THEM.
     // At gap 0: the obscurer WINS THE READ (obscurerWinsTie) and EARNS NO BONUS (the band). Both, together,
     // is the whole point — they broke even.

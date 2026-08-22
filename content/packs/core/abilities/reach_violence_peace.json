@@ -625,7 +625,10 @@
     "soakRank": 2,
     "duration": 4,
     "targets": 1,
-    "note": "THE CATALOG'S PUREST 'BLUNT' GUARD — high soak, ranked, and it simply does not move. Counterpart to stillhold's the_held_breath."
+    "note": "THE CATALOG'S PUREST 'BLUNT' GUARD — high soak, ranked, and it simply does not move. Counterpart to stillhold's the_held_breath.",
+    "wardTypes": [
+     "physical"
+    ]
    },
    "rankDeltas": [
     {
@@ -663,7 +666,8 @@
    ],
    "plainly": "A fight/survive action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 5 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: holds, Doesn'T Advance — overwhelming force still breaks through.",
    "_nameWas": "The Stand",
-   "_idWas": "the_stand"
+   "_idWas": "the_stand",
+   "_wardTypes": "⛔ SNG-512. ⚠️ The guardian's discipline answers blows. Only blows, and it is the best in the game at it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "broker_truce",
@@ -855,7 +859,11 @@
     "soakRank": 2,
     "duration": 2,
     "targets": 6,
-    "note": "T-IV. 'Hold a razor's-edge standoff open — MAXIMUM THREAT, MAXIMUM RESTRAINT — by sheer presence.' Note the bestiary references this by name: stillcraft r3 'keep a Held Breath from letting out.'"
+    "note": "T-IV. 'Hold a razor's-edge standoff open — MAXIMUM THREAT, MAXIMUM RESTRAINT — by sheer presence.' Note the bestiary references this by name: stillcraft r3 'keep a Held Breath from letting out.'",
+    "wardTypes": [
+     "physical",
+     "feeling"
+    ]
    },
    "rankDeltas": [
     {
@@ -887,7 +895,8 @@
    "plainly": "A duel, fight or social action. You hold a standoff open by presence alone — everyone armed, nobody moving — soaking 5 damage for up to six people while it stands. It does not resolve anything; it buys you the scene to resolve it in, and it ends when you stop paying. It is exhausting, costing energy every round. And one slip looses it: if you are struck, startled, or made to move, everything held breaks at once and the fight starts from where it was.",
    "_descriptionWas": "The braid-craft: hold a moment where violence is total and peace is total in perfect tension — an armed grace.",
    "_nameWas": "The Held Breath",
-   "_idWas": "the_held_breath"
+   "_idWas": "the_held_breath",
+   "_wardTypes": "⛔ SNG-512. ⚠️ A standoff held open answers force and the emotion that would break it. Nothing else.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "last_form",
@@ -1870,7 +1879,12 @@
     "soak": 3,
     "soakRank": 1,
     "duration": 8,
-    "note": "A TENTH DEFENSIVE LOGIC — DISCOURAGED: 'violence becomes HARDER here, not impossible.' It does not block, absorb, evade or pre-empt; it raises the cost of choosing violence at all. soakRank 1 because a determined breaker simply breaks it."
+    "note": "A TENTH DEFENSIVE LOGIC — DISCOURAGED: 'violence becomes HARDER here, not impossible.' It does not block, absorb, evade or pre-empt; it raises the cost of choosing violence at all. soakRank 1 because a determined breaker simply breaks it.",
+    "wardTypes": [
+     "physical",
+     "feeling",
+     "appetite"
+    ]
    },
    "rankDeltas": [
     {
@@ -1908,7 +1922,8 @@
    ],
    "plainly": "A social/explore/survive action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 3 harm per hit (rank 1 armour), and lasts for about 8 hours Ranks: rank 2 adds to autonomy; rank 3 extends duration. Limit: iT Holds AS Long AS NO One Actively Breaks IT — a determined breaker breaks it.",
    "_nameWas": "The Laid Ground",
-   "_idWas": "the_laid_ground"
+   "_idWas": "the_laid_ground",
+   "_wardTypes": "⛔ SNG-512. ⛔ Peace-ground answers violence, the heat that starts it, and the want beneath it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "step_between",
@@ -2001,7 +2016,11 @@
     "soakRank": 1,
     "duration": 2,
     "targets": 1,
-    "note": "AN ELEVENTH DEFENSIVE LOGIC — INTERPOSED: you take the harm meant for someone else, with your own body. Low soak deliberately: its own bound is 'YOU ARE NOT ARMORED. Some people go through anyway.'"
+    "note": "AN ELEVENTH DEFENSIVE LOGIC — INTERPOSED: you take the harm meant for someone else, with your own body. Low soak deliberately: its own bound is 'YOU ARE NOT ARMORED. Some people go through anyway.'",
+    "wardTypes": [
+     "physical",
+     "feeling"
+    ]
    },
    "rankDeltas": [
     {
@@ -2043,7 +2062,8 @@
     "move",
     "shield"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_wardTypes": "⛔ SNG-512. Interposition answers the strike and the heat behind it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "safe_ground",
@@ -2479,7 +2499,11 @@
    "mechanic": {
     "magnitude": 6,
     "duration": 8,
-    "scope": 2
+    "scope": 2,
+    "wardTypes": [
+     "physical",
+     "feeling"
+    ]
    },
    "intensity": {
     "conserve": "hold the near ground",
@@ -2502,7 +2526,8 @@
    "plainly": "A fight/social action that holds a position and steadies everyone on it. Rated 6 of 10 across a scope of 2 for about eight hours.",
    "_descriptionWas": "The Marchers' first craft and the reason the March exists: a line is people, and people hold when someone visibly will not move.",
    "_nameWas": "The Held Line",
-   "_idWas": "the_held_line"
+   "_idWas": "the_held_line",
+   "_wardTypes": "⛔ SNG-512. The line steadies against blows and against the fear that breaks lines.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "read_field",

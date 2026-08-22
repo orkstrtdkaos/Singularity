@@ -801,7 +801,12 @@
     "soakRank": 2,
     "targets": 1,
     "duration": 4,
-    "note": "T-III guard. r1: be the still, reliable point in a chaotic scene; LET OTHERS RALLY TO YOU"
+    "note": "T-III guard. r1: be the still, reliable point in a chaotic scene; LET OTHERS RALLY TO YOU",
+    "wardTypes": [
+     "physical",
+     "temporal",
+     "abstraction"
+    ]
    },
    "rankDeltas": [
     {
@@ -843,7 +848,8 @@
    ],
    "plainly": "A fight/survive action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 4 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 deepens anchorStrength; rank 3 adds to special. Limit: you must Hold Still.",
    "_nameWas": "The Fixed Point",
-   "_idWas": "the_fixed_point"
+   "_idWas": "the_fixed_point",
+   "_wardTypes": "⛔ SNG-512. ⛔ The stable anchor in disorder — answers being moved, being re-timed, and being re-patterned.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "riding_order",
@@ -1576,7 +1582,11 @@
     "soak": 2,
     "soakRank": 1,
     "duration": 3,
-    "note": "EVASION, not armour — Erik's correction. Soak reduces damage AFTER a hit lands; evasion means the attack DOESN'T land. The craft's own prose says it: 'not blocking, not armoring, just not being where they land.' PROPOSED MECHANIC (fits the existing degree ladder exactly, no new resolution stage): evasion DEGRADES the attacker's degree by one step — crit_success→success, success→PARTIAL, partial→FAILURE. Then Erik's second half: on the PARTIAL that remains, the small soak applies — the graze. So a full hit becomes a graze, and the graze is blunted."
+    "note": "EVASION, not armour — Erik's correction. Soak reduces damage AFTER a hit lands; evasion means the attack DOESN'T land. The craft's own prose says it: 'not blocking, not armoring, just not being where they land.' PROPOSED MECHANIC (fits the existing degree ladder exactly, no new resolution stage): evasion DEGRADES the attacker's degree by one step — crit_success→success, success→PARTIAL, partial→FAILURE. Then Erik's second half: on the PARTIAL that remains, the small soak applies — the graze. So a full hit becomes a graze, and the graze is blunted.",
+    "wardTypes": [
+     "physical",
+     "precursor"
+    ]
    },
    "rankDeltas": [
     {
@@ -1614,7 +1624,8 @@
    ],
    "plainly": "A combat/evasion/tactical action that reduces incoming harm. and absorbs 2 harm per hit (rank 1 armour), and lasts for about 3 hours Ranks: rank 2 deepens evasion; rank 3 adds to special. Limit: it works against Aimed and Organized harm — an area effect or a collapsing roof does not care where you are.",
    "_nameWas": "The Wrong Target",
-   "_idWas": "the_wrong_target"
+   "_idWas": "the_wrong_target",
+   "_wardTypes": "⛔ SNG-512. ⛔ Aimed force misses. Answers anything AIMED and nothing that fills a space.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "misdirect",

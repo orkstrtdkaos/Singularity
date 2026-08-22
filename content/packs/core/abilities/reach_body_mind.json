@@ -233,7 +233,10 @@
     "evasion": 4,
     "evasionRank": 2,
     "duration": 4,
-    "note": "AN EIGHTH DEFENSIVE LOGIC — EFFICIENT: not armour, not absence, not misdirection, but never making a wasted or wrong motion. Uses Erik's evasion model; zero soak because a perfect motion still takes the blow it cannot avoid."
+    "note": "AN EIGHTH DEFENSIVE LOGIC — EFFICIENT: not armour, not absence, not misdirection, but never making a wasted or wrong motion. Uses Erik's evasion model; zero soak because a perfect motion still takes the blow it cannot avoid.",
+    "wardTypes": [
+     "physical"
+    ]
    },
    "rankDeltas": [
     {
@@ -276,7 +279,8 @@
    },
    "_merged": "⛔ SNG-479: ABSORBS Whole Act and Soma r3. Erik: 'I like your Perfect Motion skill — and the r1 could be used to DODGE/EVADE a blow as well. r1 subname could include ACROBATICS.'\n⚠️ r3 IS BODY'S TEMPO SIGNATURE — the EXTRA ACTION form from SYSTEM_SPEC §34.3, arriving from Whole Act's fusion rather than invented.",
    "_powerSystemWas": "reach_body_mind",
-   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki."
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki.",
+   "_wardTypes": "⛔ SNG-512. ⚠️ Economy of motion answers blows. It answers NOTHING typed, which is the honest limit of a body's skill.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "memory_palace",
@@ -832,7 +836,12 @@
    "mechanic": {
     "magnitude": 6,
     "duration": 720,
-    "note": "T-III. duration ~a month: these are TRAINED changes that persist"
+    "note": "T-III. duration ~a month: these are TRAINED changes that persist",
+    "wardTypes": [
+     "physical",
+     "living",
+     "decay"
+    ]
    },
    "rankDeltas": [
     {
@@ -887,7 +896,8 @@
    "_idWas": "the_shaped_body",
    "_rebuilt": "⛔ SNG-485. Erik: 'perhaps something that BUILDS RESISTANCES — to SOAK DAMAGE at r1. Bigger soak plus RESISTANCE TO NATURAL SUBSTANCES at r2, IMMUNITIES to natural substances and RESISTANCE TO CRAFTS at r3.' ⚠️ The old ranks were permanent training with no scene effect and no roll — a Q1 failure.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki."
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki.",
+   "_wardTypes": "⛔ SNG-512. ⛔ Conditioning answers blows, natural substances, and rot. ⚠️ NOT abstraction, not precursor — a hardened body is still a body.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "schemaVersion": 1,
@@ -978,7 +988,12 @@
     "soak": 5,
     "soakRank": 3,
     "duration": 4,
-    "note": "T-IV guard — TYPED like the_true_ground: it soaks FEAR, DECEPTION and DISRUPTION at rank 3, and grants NOTHING against physical harm ('it grants no offense, only the unshakeable read')."
+    "note": "T-IV guard — TYPED like the_true_ground: it soaks FEAR, DECEPTION and DISRUPTION at rank 3, and grants NOTHING against physical harm ('it grants no offense, only the unshakeable read').",
+    "wardTypes": [
+     "feeling",
+     "deception",
+     "abstraction"
+    ]
    },
    "rankDeltas": [
     {
@@ -1049,7 +1064,8 @@
    "_merged": "⛔ SNG-457: MERGES Total Focus (L1, e4) — whose three ranks were one sentence with intensifiers: 'fear, pain and distraction fall away' → 'stop reaching you' → 'nothing else exists'. ⚠️ THE UNMOVING MIND'S r2 WAS THE ONLY REAL ADVANCE IN EITHER — 'hold it while fighting, walking, negotiating' — and it had only two ranks. One skill now, and each rank adds a thing: stillness → stillness while acting → deception slides off too.",
    "_nameWas": "The Unmoving Mind",
    "_idWas": "the_unmoving_mind",
-   "_schoolAffinity": "⛔ SNG-508. `the_unmoving_mind` carried `cog_unaided`, and it ABSORBED `total_focus` (also cog_unaided) at SNG-457. Both parents were Unaided; the merge is Unaided."
+   "_schoolAffinity": "⛔ SNG-508. `the_unmoving_mind` carried `cog_unaided`, and it ABSORBED `total_focus` (also cog_unaided) at SNG-457. Both parents were Unaided; the merge is Unaided.",
+   "_wardTypes": "⛔ SNG-512. ⛔ Fear, pain, a lie, a feint slide off. ⚠️ NOT PHYSICAL — a still mind does not stop a spear, and the craft says so.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "schemaVersion": 1,

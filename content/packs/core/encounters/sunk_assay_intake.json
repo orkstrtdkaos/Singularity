@@ -1,0 +1,174 @@
+{
+ "schemaVersion": 1,
+ "id": "sunk_assay_intake",
+ "kind": "content",
+ "note": "⛔ SNG-518. THE SUNK ASSAY, LEVEL 1 — THE INTAKE. Authored opponent sheets, buildable today.\n⚠️ CCODE'S FINDING CHANGED THIS LEVEL BEFORE IT EXISTED: the obscure bonus is INERT because the default declaration pool is `strike`/`shield` and ZERO authored opponents use a sense function. ⛔ SO A LEVEL WHERE ONLY THE OPPONENTS OBSCURE GIVES THE PARTY NOTHING TO EARN FROM — the party can only read, and readers bank nothing.\n⛔ THE FIX IS THE CONTENT, NOT THE DIAL. Three of these five READ. The party's obscure pays here because somebody is looking.",
+ "_theDial": "⚠️ CCode: 'obscure's strength is exactly how often opponents look. Widening the null band does nothing; giving three opponents a `reveal` craft does everything.' ⛔ THIS FILE IS THAT DIAL SET FOR THE FIRST TIME.",
+ "opponents": [
+  {
+   "id": "gravecaller_reader",
+   "name": "A Grave-Caller, watching the stair",
+   "role": "reads the party",
+   "tradition": "ashwarden",
+   "threat": 2,
+   "declarationPool": [
+    "strike",
+    "shield",
+    "reveal"
+   ],
+   "senseFunctions": [
+    "reveal"
+   ],
+   "crafts": [
+    "attunement",
+    "true_account"
+   ],
+   "soakLayers": [
+    {
+     "type": "physical",
+     "value": 3,
+     "source": "oiled leathers and a heavy apron"
+    },
+    {
+     "type": "decay",
+     "value": 4,
+     "source": "⛔ a Greyhearth reckoner's habit — the damp does not touch them"
+    }
+   ],
+   "_designNote": "⛔ THE PARTY'S OBSCURE PAYS AGAINST THIS ONE. It declares `reveal` roughly a third of rounds, and a player who obscures and beats it earns the bonus action. ⚠️ IT IS ALSO THE ONE THE PARTY MOST WANTS TO SLIP — it is the one that will name them.",
+   "damageType": "physical"
+  },
+  {
+   "id": "gravecaller_hider",
+   "name": "A Grave-Caller in the barrel-shadow",
+   "role": "obscures",
+   "tradition": "ashwarden",
+   "threat": 2,
+   "declarationPool": [
+    "strike",
+    "shield"
+   ],
+   "obscureCrafts": [
+    "soul_stare"
+   ],
+   "crafts": [
+    "soul_stare",
+    "grey_hand"
+   ],
+   "soakLayers": [
+    {
+     "type": "physical",
+     "value": 3,
+     "source": "leathers"
+    }
+   ],
+   "_designNote": "⛔ DECLARES OBSCURE AS A MATTER OF COURSE, which is what the level was written for. ⚠️ AGAINST A READING PARTY IT WINS TIES AND COSTS THEM THEIR SENSE TIER — and the party feels the tie rule here, which is the intended lesson.",
+   "damageType": "decay"
+  },
+  {
+   "id": "gravecaller_foreman",
+   "name": "The set-crew foreman",
+   "role": "reads, and bargains",
+   "tradition": "ashwarden",
+   "threat": 3,
+   "declarationPool": [
+    "strike",
+    "shield",
+    "reveal",
+    "bargain"
+   ],
+   "senseFunctions": [
+    "reveal"
+   ],
+   "crafts": [
+    "attunement",
+    "known_price",
+    "set_hand"
+   ],
+   "soakLayers": [
+    {
+     "type": "physical",
+     "value": 4,
+     "source": "a mail shirt under the apron"
+    },
+    {
+     "type": "decay",
+     "value": 4,
+     "source": "the habit"
+    },
+    {
+     "type": "appetite",
+     "value": 3,
+     "source": "⚠️ they already have what they want — there is nothing here to offer them"
+    }
+   ],
+   "_designNote": "⛔ THE BARGAIN DOOR. It will trade passage for the ledgers, and it declares `bargain` when the party has something. ⚠️ ITS APPETITE LAYER IS THE POINT: an Abyssal craft finds nothing to reach for, so the bargain must be a real exchange rather than a lever.",
+   "damageType": "physical"
+  },
+  {
+   "id": "set_hand_labour",
+   "name": "Set labour, hauling",
+   "role": "obstacle, not enemy",
+   "tradition": "ashwarden",
+   "threat": 1,
+   "declarationPool": [
+    "strike"
+   ],
+   "crafts": [],
+   "soakLayers": [
+    {
+     "type": "physical",
+     "value": 6,
+     "source": "⛔ it does not flinch and does not tire"
+    }
+   ],
+   "_designNote": "⛔ NO MIND. Soul Stare r1 and r2 do nothing to it; r3 does — 'everything has an essence' is the rank that reaches a set body. ⚠️ Keening does nothing to it either: anything that cannot feel is unaffected, and this is where a party learns that bound is real.\n⛔ IT ALSO CANNOT BE CUT-THREADED. A set body has no thread — the same law that protects the Warden.",
+   "damageType": "physical",
+   "cannotFeel": true
+  },
+  {
+   "id": "gravecaller_singer",
+   "name": "A mourner who came down with them",
+   "role": "reads emotion",
+   "tradition": "threnodist",
+   "threat": 2,
+   "declarationPool": [
+    "strike",
+    "shield",
+    "reveal"
+   ],
+   "senseFunctions": [
+    "reveal"
+   ],
+   "crafts": [
+    "attunement",
+    "carried_name",
+    "keening"
+   ],
+   "soakLayers": [
+    {
+     "type": "physical",
+     "value": 2,
+     "source": "none to speak of"
+    },
+    {
+     "type": "feeling",
+     "value": 6,
+     "source": "⛔ a threnodist is not moved by what moves other people"
+    }
+   ],
+   "_designNote": "⚠️ THE THIRD READER, AND THE ONE THAT MAKES THE LEVEL'S SENSE STEP LIVE. ⛔ ITS FEELING LAYER IS A WALL: Force the Move, Quiet the Room and Grief Strike all land badly here, and a party leaning on emotional crafts will need another answer.",
+   "damageType": "feeling"
+  }
+ ],
+ "_threeSolutions": {
+  "fight": "⛔ Five opponents, three of whom read. A party that never obscures gives up the sense step entirely.",
+  "bargain": "⚠️ The foreman trades passage for the ledgers. `Known Price` or `Worth the Work` closes it in one exchange; without either it costs the ledgers AND coin.",
+  "slip": "⛔ A route exists past the barrel-shadow. It needs `obscure` or concealment against three readers — which is exactly when the obscure bonus pays.",
+  "_rule": "⛔ THE LEVEL MUST NOT REWARD ONE. Each path costs something the others keep: the fight costs energy and the ledgers stay clean; the bargain costs the ledgers; slipping costs the coin on the floor."
+ },
+ "_treasure": {
+  "the_assay_ledgers": "⚠️ Worth more to Greyhearth than to Amaranth. The party chose an employer by taking them.",
+  "loose_coin": "Enough to pay the foreman rather than fight — ⛔ ON THE FLOOR IN THE ROOM WITH THE READERS."
+ }
+}

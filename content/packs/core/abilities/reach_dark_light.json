@@ -111,7 +111,11 @@
    "mechanic": {
     "magnitude": 4,
     "duration": 4,
-    "scope": 2
+    "scope": 2,
+    "wardTypes": [
+     "shadow",
+     "light"
+    ]
    },
    "rankDeltas": [
     {
@@ -160,7 +164,8 @@
     "reveal",
     "ward"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_wardTypes": "⛔ SNG-512. Wrapping a space in concealment answers what needs to see.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "radiance",
@@ -801,7 +806,11 @@
     "soakRank": 0,
     "duration": 8,
     "targets": 1,
-    "note": "A GUARD SHAPE WITH ZERO SOAK — deliberate. Its own bound: 'concealment hides, it does not defend.' The Harbor protects by never being found, not by absorbing a blow. If it IS found, it offers nothing."
+    "note": "A GUARD SHAPE WITH ZERO SOAK — deliberate. Its own bound: 'concealment hides, it does not defend.' The Harbor protects by never being found, not by absorbing a blow. If it IS found, it offers nothing.",
+    "wardTypes": [
+     "precursor",
+     "abstraction"
+    ]
    },
    "rankDeltas": [
     {
@@ -845,7 +854,8 @@
    "_nameWas": "The Harbor",
    "_idWas": "the_harbor",
    "obscure": true,
-   "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. hides a person or truth so completely a knowing search misses\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY."
+   "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. hides a person or truth so completely a knowing search misses\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY.",
+   "_wardTypes": "⛔ SNG-512. Hides from a KNOWING searcher — answers address-work and pattern-work, not a blade.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "unshadow",
@@ -1844,7 +1854,10 @@
    ],
    "mechanic": {
     "magnitude": 3,
-    "duration": 24
+    "duration": 24,
+    "wardTypes": [
+     "shadow"
+    ]
    },
    "rankDeltas": [
     {
@@ -1874,7 +1887,8 @@
    ],
    "plainly": "A endurance/survival/hardship action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: requires Genuine Lightlessness — a dim room is not the dark.",
    "_nameWas": "The Long Dark",
-   "_idWas": "the_long_dark"
+   "_idWas": "the_long_dark",
+   "_wardTypes": "⛔ SNG-512. The deep dark sustains rather than harms.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "cleansing_light",
@@ -2092,7 +2106,12 @@
     "note": "THE PILOT'S TEST CASE for §11 Gap 2: this craft NEEDS the soak/armor layer to do anything at all",
     "soak": 4,
     "soakRank": 2,
-    "awaitingEngine": "soak/soakRank await the §11 Gap-2 guard layer. Authored now so the layer lands with real content to test against; radiant_lance r2/r3 (penetrates light armor / beats a Harmonic shield's FIRST RANK) is the matching attacker side, which is why soak wants a RANK as well as a magnitude."
+    "awaitingEngine": "soak/soakRank await the §11 Gap-2 guard layer. Authored now so the layer lands with real content to test against; radiant_lance r2/r3 (penetrates light armor / beats a Harmonic shield's FIRST RANK) is the matching attacker side, which is why soak wants a RANK as well as a magnitude.",
+    "wardTypes": [
+     "physical",
+     "shadow",
+     "living"
+    ]
    },
    "rankDeltas": [
     {
@@ -2124,7 +2143,8 @@
    ],
    "plainly": "A combat/defense/magical action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour), and lasts for about 3 hours Ranks: rank 2 adds to duration; rank 3 adds to soak. Limit: those With radiance-tolerance pass it.",
    "_nameWas": "The Blaze Wall",
-   "_idWas": "the_blaze_wall"
+   "_idWas": "the_blaze_wall",
+   "_wardTypes": "⛔ SNG-512. ⛔ A wall of light stops what light stops — a thing carrying dark, a grown thing. It does not stop a fact or a want.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "id": "glass_work",
@@ -2569,7 +2589,10 @@
    ],
    "mechanic": {
     "magnitude": 2,
-    "duration": 8
+    "duration": 8,
+    "wardTypes": [
+     "light"
+    ]
    },
    "rankDeltas": [
     {
@@ -2597,7 +2620,8 @@
    ],
    "plainly": "A endurance/survival/hardship action that strengthens someone. Its strength is rated 2 out of 10, and lasts for about 8 hours Ranks: rank 2 adds to upkeepRelief; rank 3 adds to duration. Limit: requires Intense light — worthless in shade.",
    "_nameWas": "The Radiant Ground",
-   "_idWas": "the_radiant_ground"
+   "_idWas": "the_radiant_ground",
+   "_wardTypes": "⛔ SNG-512. Light is fuel, not damage, for a Blazeborn.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
   },
   {
    "schemaVersion": 1,

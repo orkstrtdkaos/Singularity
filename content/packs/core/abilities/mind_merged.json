@@ -69,7 +69,7 @@
       "move",
       "travel"
      ],
-     "grants": "⚠️ ADDS THE PARTY AND HOSTILE GROUND. Walk a whole group through on your line, calling it as you go — and hold the route through a space that is actively working against you: a rout, a fire, a collapsing floor.",
+     "grants": "⛔ WALK A WHOLE PARTY THROUGH ON YOUR LINE, calling it as you go — and hold the route through a space actively working against you: a rout, a fire, a collapsing floor.",
      "cannot": "They must follow closely and trust it; one person breaking away breaks their own line, not yours.",
      "gains": "broaden",
      "harmRung": "none",
@@ -83,7 +83,8 @@
       "conditions"
      ],
      "_rebalance": "⚠️ Was scope-only ('as though you laid it out'). Targets + conditions is the same fiction with a mechanical edge.",
-     "_nameWas": "The Designed Scene"
+     "_nameWas": "The Designed Scene",
+     "_grantsWas_SNG510": "⚠️ ADDS THE PARTY AND HOSTILE GROUND. Walk a whole group through on your line, calling it as you go — and hold the route through a space that is actively working against you: a rout, a fire, a collapsing floor."
     }
    ],
    "_merged": "⛔ SNG-450: MERGES The Clear Path (cogitant), The Derived Route (syllogist) and The Patterned Way (figurist) — three skills at the same level, same magnitude, same energy, same three-rank arc, differing only in the noun. Erik: 'yes on the nav skills.' Flavour is now internal.",
@@ -303,7 +304,7 @@
     {
      "rank": 2,
      "name": "Inescapable",
-     "grants": "⛔ ADDS COMPULSION AND NUMBERS. Lay premises they must each agree to until they arrive by their own reasoning at a conclusion they would have fled — AND THEY CANNOT ACT AGAINST IT while it holds. Works on a whole body of reasoning minds at once: a council, a court, a company.",
+     "grants": "⛔ LAY PREMISES A BODY OF REASONING MINDS MUST EACH AGREE TO until they arrive by their own reasoning at a conclusion they would have fled — AND THEY CANNOT ACT AGAINST IT while it holds. A council, a court, a company.",
      "cannot": "⚠️ It must be honest. A reasoning mind that finds the false premise is freed, and knows you tried.",
      "functions": [
       "persuade",
@@ -314,12 +315,13 @@
      "gainAxes": [
       "targets",
       "conditions"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS COMPULSION AND NUMBERS. Lay premises they must each agree to until they arrive by their own reasoning at a conclusion they would have fled — AND THEY CANNOT ACT AGAINST IT while it holds. Works on a whole body of reasoning minds at once: a council, a court, a company."
     },
     {
      "rank": 3,
      "name": "Only Consistent Act",
-     "grants": "⛔ ADDS FINALITY AND PERSISTENCE. Walk one person to the conclusion where the consistent act is a final one — that the post cannot be held, that they should not continue — AND THEN STOP TALKING. ⚠️ It also no longer needs you present: built as a written or taught case, it goes on working after you have gone.",
+     "grants": "⛔ WALK ONE PERSON TO THE CONCLUSION WHERE THE CONSISTENT ACT IS A FINAL ONE — that the post cannot be held, that they should not continue — AND THEN STOP TALKING. Built as a written or taught case, it goes on working after you have gone.",
      "cannot": "⛔ One person for the final form, and it cannot be withdrawn. Everyone who heard it heard it.",
      "functions": [
       "persuade",
@@ -332,7 +334,8 @@
       "damage",
       "autonomy",
       "duration"
-     ]
+     ],
+     "_grantsWas_SNG510": "⛔ ADDS FINALITY AND PERSISTENCE. Walk one person to the conclusion where the consistent act is a final one — that the post cannot be held, that they should not continue — AND THEN STOP TALKING. ⚠️ It also no longer needs you present: built as a written or taught case, it goes on working after you have gone."
     }
    ],
    "_merged": "⛔ SNG-450: MERGES The Stated Case (syllogist) and The Necessary Case (cogitant), which did the same job at different energy costs. Erik: 'could be Case Closed, and the flavour goes internal like the move skills did.' ⚠️ RETAGGED SOCIAL — this was `reveal/command/bind` and it is persuasion. ⚠️ ERIK: 'NO to the r3 cost — the case doesn't have to be true.' Removed.",
@@ -418,5 +421,6 @@
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",
- "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
 }

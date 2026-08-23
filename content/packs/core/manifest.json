@@ -114,7 +114,8 @@
    "items/basic.json"
   ],
   "encounters": [
-   "encounters/sunk_assay_intake.json"
+   "encounters/sunk_assay_intake.json",
+   "encounters/sunk_assay_warden.json"
   ]
  },
  "note": "SNG-064 LAW 10 — the manifest is a LOAD WHITELIST. A file not listed here DOES NOT EXIST. Fixed 2026-07-12: 18 of 26 rules files were unlisted, including helper_text.json (SNG-084) and gambit_design.json (the recovered gambit definition). ⚠️ state.js ALSO fetches several of these by HARDCODED PATH (traditions/origins/backgrounds/regions/the_accords), bypassing the manifest entirely — TWO loading mechanisms, and the manifest is not the source of truth. [CCODE: unify — read rules from provides.rules; delete the hardcoded fetches.] And the Content CI did NOT catch this because it checks the VALLEY manifest, not CORE.",

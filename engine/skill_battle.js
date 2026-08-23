@@ -6,7 +6,7 @@
 // narrates the resolved exchange; it never chooses the opponent's mechanical move — that is opponentPolicy.
 
 import { resolveAction } from "./resolve.js";
-import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
+import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, ongoingHarmOf, authoredBlock, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const DEFAULT_STEPS = { conserve: { energyMult: 0.6, effectMod: -8 }, standard: { energyMult: 1, effectMod: 0 }, surge: { energyMult: 1.6, effectMod: 10, backlashChance: 0.25 } };
@@ -1066,12 +1066,27 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // ⛔ CCODE-208 — AND A WINNING CRAFT MAY IMPOSE. Aevi's correction is the whole design: Keening does not
   // need a new state, it needs a way to put someone into the one that already exists. Resolved AFTER the
   // exchange because only a winner imposes, and read off the SUBJECT's resistance so it is contested.
-  let imposed = null;
+  let imposed = null, inflicted = null;
+  // ⛔ CCODE-214 — AND A WINNING CRAFT LEAVES ITS ONGOING HARM ON THEM. Eight crafts have claimed this in
+  // prose since the day they were written; `resolveHeal` has read the condition off the subject since
+  // v1.9.168 and NOTHING PUT IT THERE. The reader had a writer in the catalogue and no hand in between.
+  // ⚠️ Emitted on the round rather than mutated onto a sheet, exactly like `damage` and `healing`: the
+  // caller owns the subject, and an engine that reaches into a character sheet from inside a round is the
+  // thing every other branch here was written to avoid.
+  if (roundWinner && phase === "action") {
+    const infDecl = roundWinner === "player" ? playerDecl : oppDecl;
+    const harm = ongoingHarmOf(infDecl, infDecl?.rank || 1);
+    if (harm && harm.magnitude > 0) inflicted = { side: roundWinner === "player" ? "opponent" : "player",
+      by: infDecl.name || infDecl.function, ...harm };
+  }
   if (roundWinner && phase === "action") {
     const impDecl = roundWinner === "player" ? playerDecl : oppDecl;
     const loserSheet = roundWinner === "player" ? oppSheet : playerSheet;
     const winRoll = roundWinner === "player" ? p : o, loseRoll = roundWinner === "player" ? o : p;
-    const spec = impDecl?.mechanic?.imposes || impDecl?.imposes || null;
+    // ⛔ THE GUARD HAD TO MOVE TOO. `resolveImposition` learned to read a rank-level block; this line did
+    // not, so it kept deciding there was nothing to resolve and never called it. A reader fixed in one
+    // place and gated in another is still a reader nobody reaches.
+    const spec = authoredBlock(impDecl, "imposes", impDecl?.rank || 1);
     if (spec) {
       const resistKey = String(spec.resist || "physical");
       const r = resolveImposition(impDecl, {
@@ -1086,7 +1101,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       else if (r.why) imposed = { refused: r.why, by: impDecl.name || impDecl.function };
     }
   }
-  const out = { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
+  const out = { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback },
     // CCODE-80: an evaded blow must SAY it was evaded. An attack that quietly does less is indistinguishable
     // from a bad roll, and the whole point of the three defensive logics is that they read differently.

@@ -17030,6 +17030,59 @@ await (async () => {
       variants.every(k => /^You did not look/.test(rc[k]?.head || "")),
       variants.filter(k => !/^You did not look/.test(rc[k]?.head || "")).join(", "));
   }
+  // 5h · ⛔ CCODE-214 — AN AUTHORED BLOCK LIVES ON THE RANK. Found by PLAYING the Sunk Assay, not by any
+  // gate: 19 `imposes` blocks and 8 `ongoingHarm` blocks are authored on `tree[]`, and both readers looked
+  // at `ability.mechanic`. None of it fired, and every gate passed — because my fixtures put the block
+  // where my reader looked. A gate written by the same hand as the reader tests the assumption.
+  {
+    const withImposes = Object.values(C199.abilities || {})
+      .filter(a => (a.tree || []).some(r => r.imposes || r.mechanic?.imposes));
+    check(`CCODE-214: all ${withImposes.length} rank-authored imposes blocks RESOLVE — they live on the tree, not the ability`,
+      withImposes.length >= 10 && withImposes.every(a => {
+        const r = (a.tree || []).find(x => x.imposes || x.mechanic?.imposes);
+        return CM.resolveImposition(a, { cfg: C199.craftMechanics || {}, rank: r.rank, margin: 99 }).ok;
+      }), withImposes.filter(a => {
+        const r = (a.tree || []).find(x => x.imposes || x.mechanic?.imposes);
+        return !CM.resolveImposition(a, { cfg: C199.craftMechanics || {}, rank: r.rank, margin: 99 }).ok;
+      }).map(a => a.id).join(", "));
+
+    // ⛔ AND IT WALKS DOWN. A craft whose r1 staggers must still stagger at r3 — an exact-rank lookup made
+    // the capability DISAPPEAR ON RANK-UP, which is worse than never working and which no gate would show
+    // because a gate picks the rank it tests.
+    const ki = C199.abilities?.ki_wield;
+    check("CCODE-214: an r1 block still holds at r3 — a capability must not vanish when its wielder improves",
+      !!ki && CM.resolveImposition(ki, { cfg: C199.craftMechanics || {}, rank: 3, margin: 99 }).ok === true);
+
+    // ⚠️ THE AMOUNT IS DERIVED. Aevi authored `{ "type": "decay" }` — the KIND, no number. Making her author
+    // a second one would be asking content to repeat what `magnitude`/`dice` already say.
+    const harms = Object.values(C199.abilities || {})
+      .filter(a => (a.tree || []).some(r => r.ongoingHarm || r.mechanic?.ongoingHarm));
+    const zero = harms.filter(a => {
+      const r = (a.tree || []).find(x => x.ongoingHarm || x.mechanic?.ongoingHarm);
+      const oh = CM.ongoingHarmOf(a, r.rank);
+      return !oh || oh.magnitude <= 0 || !oh.type;
+    });
+    check(`CCODE-214: all ${harms.length} ongoingHarm blocks derive a TYPE and a real amount`,
+      harms.length >= 6 && zero.length === 0, zero.map(a => a.id).join(", "));
+
+    // ⛔ AND THE GUARD MOVED WITH THE READER. `resolveImposition` learned to read the tree; the `if (spec)`
+    // in skill_battle did not, so it kept deciding there was nothing to resolve. A reader fixed in one
+    // place and gated in another is still a reader nobody reaches.
+    {
+      const rules214 = C199.rules || {}, sb214 = rules214.skillBattle || C199.skillBattle || {};
+      const steps214 = C199.resolutionSteps || rules214.resolution || {};
+      const SB214 = await import("../engine/skill_battle.js");
+      const kiDecl = { ...(ki || {}), function: "strike", tier: 4, attribute: "physical", intensity: "standard", rank: 2, name: "Ki Wield" };
+      const frail = { attributes: { physical: 1, mental: 1, social: 1, practical: 1 }, level: 1, health: 40, maxHealth: 40, soak: 0 };
+      const strong = { attributes: { physical: 8, mental: 6, social: 4, practical: 6 }, level: 10, health: 40, maxHealth: 40 };
+      const r = SB214.battleRound({ playerDecl: kiDecl, oppDecl: { function: "shield", tier: 1, attribute: "physical", intensity: "conserve", name: "guard" },
+        playerSheet: strong, oppSheet: frail,
+        state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 50, effects: [], pressure: { player: 0, opponent: 0 } },
+        rules: rules214, sb: sb214, steps: steps214, rng: () => 0.5 });
+      check("CCODE-214: a rank-authored imposition reaches a real round — the guard reads the tree too",
+        r.imposed?.side === "opponent" && !!r.imposed.condition, JSON.stringify(r.imposed ?? null));
+    }
+  }
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

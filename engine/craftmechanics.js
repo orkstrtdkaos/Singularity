@@ -483,6 +483,30 @@ export function antisoakLanded(hit, soak = 0, antisoak = 0) {
  *
  *  Returns { ok, why, rolled, tapered, soaked, staunched, ended[], healed, shape } — every intermediate
  *  kept, because a receipt that says only "healed 5" cannot explain why the 9 that was rolled became 5. */
+/** ⛔ CCODE-214 — WHAT ONGOING HARM A CRAFT INFLICTS. Aevi authored eight of these and every one is
+ *  `{ "type": "decay" }` or similar — the KIND, with no amount. That is not an omission on her side or a
+ *  mistake on mine; we were answering different questions. Hers: *what kind of harm keeps running.* Mine:
+ *  *how much does it take off a heal.*
+ *
+ *  ⚠️ SO THE AMOUNT IS DERIVED, NOT DEMANDED. A craft already says how hard it works — `mechanic.magnitude`
+ *  is that field — and making her author a second number would be asking content to repeat itself. The
+ *  TYPE carries through, because it is what a ward answers (§39.5) and the reason she typed them at all.
+ *
+ *  Returns `{ id, type, magnitude }` or null. */
+export function ongoingHarmOf(ability, rank = 1) {
+  const oh = authoredBlock(ability, "ongoingHarm", rank);
+  if (!oh) return null;
+  const m = authoredBlock(ability, "magnitude", rank);
+  // ⚠️ AND A DICE CRAFT HAS NO `magnitude` — its size IS its dice. `sustained_regard` and `wither` both
+  // derived 0 on the first run, which would have been an ongoing harm that took nothing off a heal: the
+  // exact inertness this whole change exists to end, reintroduced one layer down. The dice MEAN is the
+  // craft's own statement of how hard it works, so that is what carries.
+  const dice = authoredBlock(ability, "dice", rank);
+  const diceMean = dice ? Math.round((num(dice.n, 1) * (num(dice.d, 6) + 1)) / 2 + num(authoredBlock(ability, "plus", rank), 0)) : 0;
+  const magnitude = Math.max(0, num(oh.magnitude ?? oh.value ?? m ?? ability?.mechanic?.magnitude, 0) || diceMean);
+  return { id: oh.id || ability?.id || "ongoing", type: oh.type || null, magnitude };
+}
+
 export function resolveHeal(ability, {
   rank = 1, tier = null, intensity = "standard", cfg = {}, verb = null,
   rng = Math.random, marginGap = 0,
@@ -559,10 +583,33 @@ export function resolveHeal(ability, {
  *  Returns { ok, condition, degradedTo, resisted, targets, threshold, why }. */
 export const IMPOSABLE = ["action_loss", "staggered", "unconscious", "incapacitated"];
 
+/** ⛔ CCODE-214 — AN AUTHORED BLOCK LIVES ON THE RANK FIRST, AND THE ABILITY SECOND.
+ *
+ *  Found by playing the Sunk Assay rather than by any gate: Aevi authored 19 `imposes` blocks and 8
+ *  `ongoingHarm` blocks, every one of them on a RANK (`tree[].mechanic`), and both readers looked at
+ *  `ability.mechanic`. **None of it fired.** Her shape is the right one — a craft's r1 and r3 impose
+ *  different things, which is what rank MEANS — and mine was the assumption.
+ *
+ *  ⚠️ AND EVERY GATE PASSED, because my fixtures put the block where my reader looked. A gate written
+ *  by the same hand as the reader tests the assumption, not the content. That is the fourth check this
+ *  week that agreed with itself, and the first one no mutation would have caught — only running the
+ *  actual authored data through it did. */
+export function authoredBlock(ability, key, rank = 1) {
+  // ⛔ AND IT WALKS DOWN, NEVER JUST AT. Found by playing the Warden at rank 2 with `imposes` authored on
+  // rank 1: an exact-rank lookup returned nothing, so the craft STOPPED STAGGERING PEOPLE THE MOMENT ITS
+  // WIELDER GOT BETTER AT IT. That is worse than never working - it is a capability that silently
+  // disappears on rank-up, and no gate would have shown it because a gate picks the rank it tests.
+  // A craft's r1 promise holds at r3 unless r3 says otherwise; the highest rank AT OR BELOW wins.
+  const tree = (ability?.tree || []).filter(r => Number(r?.rank) <= Number(rank || 1))
+    .sort((a, b) => Number(b.rank) - Number(a.rank));
+  for (const t of tree) { const v = t?.[key] ?? t?.mechanic?.[key]; if (v != null) return v; }
+  return ability?.mechanic?.[key] ?? ability?.[key] ?? null;
+}
+
 export function resolveImposition(ability, {
   rank = 1, cfg = {}, margin = 0, targetResist = 0, targets = null, degree = null
 } = {}) {
-  const spec = ability?.mechanic?.imposes || ability?.imposes || null;
+  const spec = authoredBlock(ability, "imposes", rank);
   if (!spec) return { ok: false, condition: null, degradedTo: null, resisted: false, targets: 0, threshold: null, why: "this craft imposes nothing" };
 
   // ⛔ ESCALATE (Aevi's SNG-509 §4) — a crit makes the effect a DIFFERENT, BETTER effect, not a bigger

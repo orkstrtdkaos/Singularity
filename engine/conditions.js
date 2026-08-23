@@ -27,8 +27,21 @@ export function authoredFlag(ability, key, rank = 1) {
   return ability?.mechanic?.[key] ?? ability?.[key] ?? null;
 }
 
+/** ⛔ HER SHAPE NAMES WHAT PERSISTS, AND THAT IS BETTER THAN MINE. I asked for `persistUntilHealed: true`
+ *  and Aevi authored `{ "condition": "enfeeblement" }` — `bleeding`, `decay`, `vulnerability`. The boolean
+ *  answers *whether*; hers answers *what*, which is what a receipt needs to say and what a heal needs to
+ *  clear by name. ⚠️ THIRD TIME THIS PATTERN HAS RUN: `{type:"decay"}` on ongoingHarm, the rank-level
+ *  blocks, and now this — every time, she answered the more useful question and my reader tested for the
+ *  narrower one. Both shapes are accepted; the truthy object wins because it carries more. */
 export function persistsUntilHealed(ability, rank = 1) {
-  return authoredFlag(ability, "persistUntilHealed", rank) === true;
+  const v = authoredFlag(ability, "persistUntilHealed", rank);
+  return v === true || (!!v && typeof v === "object");
+}
+
+/** What the persistence is CALLED, when the author said so. Null when it was authored as a bare flag. */
+export function persistedConditionName(ability, rank = 1) {
+  const v = authoredFlag(ability, "persistUntilHealed", rank);
+  return (v && typeof v === "object" && v.condition) ? String(v.condition) : null;
 }
 
 /** Put a condition on someone. Returns the stored record, or the existing one if it is already there —

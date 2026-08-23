@@ -17217,6 +17217,41 @@ await (async () => {
       CD.persistsUntilHealed({ tree: [{ rank: 1, persistUntilHealed: true }] }, 3) === true
       && CD.persistsUntilHealed({ tree: [{ rank: 1 }] }, 3) === false);
   }
+  // 5k · ⛔ CCODE-218 — TWO MORE READERS AEVI'S AUTHORING NEEDED. Both were fields she added that nothing
+  // consulted, and both were found by measuring after her commit rather than by any gate.
+  {
+    const CD218 = await import("../engine/conditions.js");
+    // ⚠️ its own import - `AR` belongs to the §C3 block further down and is not in scope here. The suite
+    // exits on a throw, so a stray reference does not fail ONE gate, it silently deletes every gate after
+    // it: 3,974 passes became 3,923 with zero failures reported.
+    const AR218 = await import("../engine/art.js");
+    const doc218 = C199.visualAesthetics || {};
+    const A218 = Object.values(C199.abilities || {});
+
+    // ⛔ A BODY IS NOT A PEOPLE AND NOT A POWER SOURCE. She opened a third namespace for form kits and she
+    // is right that it is a third thing — an Ent's branch-club looks like an ENT, which is neither the
+    // tradition that taught it nor the physics it runs on.
+    const formed = A218.filter(a => a.aestheticKey);
+    check(`CCODE-218: the form kit's look reaches its grants (${formed.length} craft(s) carry an aestheticKey)`,
+      formed.length >= 5 && formed.every(a => !!AR218.aestheticFor(a, doc218)),
+      formed.filter(a => !AR218.aestheticFor(a, doc218)).map(a => a.id).join(", "));
+    // ⚠️ AND IT WINS, because what a thing is MADE OF is a more specific claim than who taught it.
+    check("CCODE-218: a form look beats a tradition look — the most specific claim wins",
+      AR218.aestheticFor({ aestheticKey: "form_ent", tradition: "rootkin" }, doc218) === doc218.forms?.form_ent);
+
+    // ⛔ HER SHAPE NAMES WHAT PERSISTS, AND IT IS BETTER THAN THE BOOLEAN I ASKED FOR.
+    const persists = A218.filter(a => CD218.persistsUntilHealed(a, 3));
+    check(`CCODE-218: persistUntilHealed reaches ${persists.length} crafts — Grey Hand's design is true in play`,
+      persists.length >= 4 && persists.some(a => a.id === "grey_hand"),
+      persists.map(a => a.id).join(", "));
+    check("CCODE-218: and the condition's NAME comes with it — a receipt can say what will not close",
+      CD218.persistedConditionName(C199.abilities?.grey_hand, 1) === "enfeeblement"
+      && CD218.persistedConditionName(C199.abilities?.hastened_grey, 1) === "decay");
+    // both shapes accepted; the bare flag still works
+    check("CCODE-218: a bare `true` is still accepted — her richer shape did not break the simpler one",
+      CD218.persistsUntilHealed({ tree: [{ rank: 1, persistUntilHealed: true }] }, 1) === true
+      && CD218.persistedConditionName({ tree: [{ rank: 1, persistUntilHealed: true }] }, 1) === null);
+  }
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.
@@ -17587,7 +17622,10 @@ await (async () => {
     // catalogue can say who resolves and who does not. 9 baseline martial abilities carry neither a people
     // nor an authored power system — the known remainder, and it may only shrink.
     check(`435 §C3: ${abilities.length - gap.length}/${abilities.length} abilities resolve a palette — the uncovered remainder may only shrink`,
-      gap.length <= 9, [...new Set(gap.map(a => a.tradition || a.powerSystem || "(neither)"))].join(", "));
+      // ⚠️ TIGHTENED 9 → 4. SNG-531 gave the five form-kit crafts a `forms` palette and CCODE-218 built
+      // the two readers that reach it. What is left is the four TRUE universals - brace, strike, break
+      // away, call for help - which belong to everyone and arguably should not look like anybody.
+      gap.length <= 4, [...new Set(gap.map(a => a.id))].join(", "));
   }
   // 4 · ⛔ AND NO EDITORIAL MARKER REACHES THE GENERATOR. Wiring the palettes surfaced this immediately:
   // every valley-craft ability was minting with "⛔ MUTED EARTH" and "⚠️ THE ABSENCE OF SPECTACLE IS THE

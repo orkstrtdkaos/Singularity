@@ -32,8 +32,14 @@ const tagsFor = (functions = []) => [...new Set(functions.flatMap(f => FUNCTION_
 
 /** One kit entry → a whole ability record. SNG-250 §3: born whole or not born — a record missing
  *  `description`/`notFor` renders blank in the very panels the player uses to choose it. */
-function toAbility(entry, { origin, form }) {
+function toAbility(entry, { origin, form, aestheticKey = null }) {
   return {
+    // ⛔ SNG-531 / CCODE-218 — THE KIT'S LOOK RIDES ONTO EVERY GRANT IT MAKES. Aevi authored
+    // `aestheticKey: "form_ent"` on the KIT, which is the right place - a whole body shares one look - and
+    // this builder produced a fixed record that never copied it, so five crafts stayed unpainted while the
+    // palette for them existed. ⚠️ Same shape as `deniesPhase` (CCODE-41): a flag left on the definition
+    // reads `undefined` on the record and is inert while still advertised in content.
+    ...(aestheticKey ? { aestheticKey } : {}),
     id: entry.id,
     name: entry.name,
     levelReq: 1,
@@ -58,7 +64,7 @@ export function martialAbilityRecords(martial) {
   const out = {};
   for (const e of martial?.baselineDefense?.kit || []) out[e.id] = toAbility(e, { origin: "baselineDefense" });
   for (const k of martial?.formKits?.kits || []) {
-    for (const g of k.grants || []) out[g.id] = toAbility(g, { origin: `formKit:${k.form}`, form: k.form });
+    for (const g of k.grants || []) out[g.id] = toAbility(g, { origin: `formKit:${k.form}`, form: k.form, aestheticKey: k.aestheticKey || null });
   }
   return out;
 }

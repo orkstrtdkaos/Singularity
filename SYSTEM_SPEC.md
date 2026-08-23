@@ -2410,7 +2410,8 @@ that lags the code is worse than no map, because it is believed.
 | `ability.sense` | ✅ `isSenseDecl` | `skill_battle.js` | **27** |
 | `targetSheet.antisoak` | ✅ `antisoakLanded` — amplifies what got past soak | `skill_battle.js` | ⚠️ sheet-side |
 | `mechanic.antisoakImposed` | ✅ the round's `opened` — a winning blow LEAVES the vulnerability on the loser | `skill_battle.js` → `conditions.js` | **1** (3/5/8 by rank) |
-| `persistUntilHealed` | ✅ `conditions.clearOnRest` refuses to clear it — a heal must | `conditions.js` | ⛔ **0** |
+| `persistUntilHealed` | ✅ `conditions.clearOnRest` refuses to clear it — a heal must. ⚠️ Authored as `{ condition: "…" }`, which NAMES what persists | `conditions.js` | **4** |
+| `aestheticKey` (on a form KIT) | ✅ `aestheticFor` → `forms[key]`, **checked FIRST** — a body is the most specific claim | `martial.js` → `art.js` | **5** |
 | `downtime` + `projectTicks` | ✅ `projects.openProject` — a threshold, never a date | `projects.js` | **2** |
 
 ## §39.6 — ⛔ THE OBSCURER WINS TIES, AND THIS IS NOT A BUG
@@ -2530,6 +2531,20 @@ evaporates on one roll is the same dead feeling as a heal that heals nothing, so
 
 ⛔ **SHAPE IS RESOLVED, NOT AUTHORED.** `strike` resolves to `damage` and rolls; `hobble` does not. Author a
 damage number on a hobble-shaped craft and no die is ever thrown.
+
+## §39.4a — THREE NAMESPACES FOR A LOOK, AND THE ORDER IS THE ARGUMENT
+
+**`aestheticFor` asks three questions in this order: what is it MADE OF → who TAUGHT it → what PHYSICS
+does it run on.** `forms` → `traditions` → `powerSystems`.
+
+⛔ **A body is not a people and not a power source.** An Ent's branch-club looks like an ENT — neither
+the tradition that taught it nor the physics it runs on — and Aevi opened the third namespace for exactly
+that. **It is checked FIRST because what a thing is made of is the most specific claim of the three.**
+
+⚠️ **The `aestheticKey` lives on the KIT, not on each grant**, because a whole body shares one look —
+and `martialAbilityRecords` has to carry it onto every craft the kit makes. It did not, so five crafts
+stayed unpainted while their palette existed: **a flag left on the definition reads `undefined` on the
+record**, the same shape as `deniesPhase` in CCODE-41.
 
 ## §39.5 — ⛔ TYPED WARDING IS AUTHORED, NOT ALIVE — AND THE MISSING PIECE IS A DECISION, NOT A FIELD
 

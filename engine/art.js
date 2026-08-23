@@ -189,6 +189,13 @@ export function aestheticFor(subject, doc) {
   const ps = subject?.powerSystem || null;
   const byTrad = doc?.traditions || doc || {};
   const bySystem = doc?.powerSystems || {};
+  // ⛔ SNG-531 / CCODE-218 — A BODY IS NOT A PEOPLE AND NOT A POWER SOURCE. Aevi opened a third
+  // namespace for form kits, and she is right that it is a third thing: an Ent's branch-club looks like an
+  // ENT, which is neither the tradition it was taught by nor the physics it runs on. ⚠️ FIRST, because a
+  // body is the most specific claim of the three - what a thing is made of beats who taught it.
+  const byForm = doc?.forms || {};
+  const fk = subject?.aestheticKey || null;
+  if (fk && byForm[fk]) return byForm[fk];
   if (trad && byTrad[trad]) return byTrad[trad];
   if (ps && bySystem[ps]) return bySystem[ps];
   // ⚠️ AND A POWER SYSTEM WEARING THE `tradition` FIELD STILL RESOLVES. §C3's own finding was that

@@ -768,7 +768,11 @@
    "_idWas": "the_working_model",
    "_schoolAffinity": "⛔ SNG-508. `the_working_model` carried `cog_reaching`; the de-article rename dropped it because I rewrote the record rather than editing it.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "projectThreshold": 21,
+   "downtime": true,
+   "projectTicks": true,
+   "_projectThreshold": "⛔ SNG-527, CCODE'S QUESTION: 'built_system carries duration 8760 — a year in hours — and that is not what I used. If a project's real length is meant to come from `duration` rather than `magnitude`, then a Built System is a YEAR'S work and not twelve days.'\n⛔ NEITHER. `duration` IS HOW LONG THE RESULT LASTS; `projectThreshold` IS HOW LONG THE WORK TAKES. ⚠️ SOUND READ PROVES IT: `duration: 4` is four rounds of reading, and its threshold is ten days. The same field cannot mean both.\n⚠️ AUTHORED RATHER THAN DERIVED, WHICH IS WHY CCODE ASKED. ⛔ THREE WEEKS, and it becomes a project. Erik ruled Built System a project after I judged it on scene frequency; Working Model r3 — 'hand the model to others, anyone you brief can build their piece' — is the same mistake I have not yet corrected. ⚠️ DELEGATION IS THE PROJECT."
   },
   {
    "id": "shaped_body",

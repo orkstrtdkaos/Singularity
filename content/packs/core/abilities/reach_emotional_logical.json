@@ -9,7 +9,7 @@
    "name": "Pathos",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_emotional_logical",
+   "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
     "emotional_logical": -0.5,
@@ -153,7 +153,9 @@
     "heal",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_powerSystemWas": "reach_emotional_logical",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "turning_word",
@@ -213,7 +215,7 @@
      ]
     }
    ],
-   "powerSystem": "reach_emotional_logical",
+   "powerSystem": "combination",
    "gated": "learned",
    "tradition": "cross_pole_braid",
    "nativeOrCombination": "combination",
@@ -264,7 +266,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Turning Word",
-   "_idWas": "the_turning_word"
+   "_idWas": "the_turning_word",
+   "_powerSystemWas": "reach_emotional_logical",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A BRAID IS BY DEFINITION MORE THAN ONE SOURCE.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "grief_strike",
@@ -434,7 +438,7 @@
    "name": "Felt Wall",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
     "emotional_logical": -0.3
@@ -575,14 +579,16 @@
    "_idWas": "the_felt_wall",
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⚠️ emotional early warning — threat felt before it moves. A defensive sense.\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
-   "_wardTypes": "⛔ SNG-512. Emotional early warning answers what has intent behind it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. Emotional early warning answers what has intent behind it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "made_elegy",
    "name": "Made Elegy",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
     "emotional_logical": -0.4,
@@ -699,14 +705,16 @@
    ],
    "plainly": "A art/social/craft action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 adds to special; rank 3 extends scope. Limit: the Feeling Must BE True to bind — a made sentiment does not hold.",
    "_nameWas": "The Made Elegy",
-   "_idWas": "the_made_elegy"
+   "_idWas": "the_made_elegy",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "feeling_road",
    "name": "Feeling Road",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
     "emotional_logical": -0.3
@@ -842,14 +850,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Feeling Road",
-   "_idWas": "the_feeling_road"
+   "_idWas": "the_feeling_road",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "wellspring",
    "name": "Wellspring",
    "levelReq": 1,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
     "emotional_logical": -0.3,
@@ -966,14 +976,16 @@
    ],
    "plainly": "A endurance/hardship/social action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends targets. Limit: it sustains by Feeling, not by easing — a person who wants comfort gets depth instead.",
    "_nameWas": "The Wellspring",
-   "_idWas": "the_wellspring"
+   "_idWas": "the_wellspring",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "built_system",
    "name": "Built System",
    "levelReq": 3,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "emotional_logical": 0.5,
@@ -1099,7 +1111,9 @@
    "_nameWas": "The Built System",
    "_idWas": "the_built_system",
    "projectTicks": true,
-   "_downtime": "⛔ SNG-463. Erik: 'yes it can be used as a DELEGATION, DOWNTIME BUILDING skill. These kinds of delegations should flow into the WORLD TICK COUNT so we actually know how long it takes to complete and it PROGRESSES.' ⚠️ Built System is now a PROJECT: it banks progress per tick and completes on a named day, rather than resolving in a scene."
+   "_downtime": "⛔ SNG-463. Erik: 'yes it can be used as a DELEGATION, DOWNTIME BUILDING skill. These kinds of delegations should flow into the WORLD TICK COUNT so we actually know how long it takes to complete and it PROGRESSES.' ⚠️ Built System is now a PROJECT: it banks progress per tick and completes on a named day, rather than resolving in a scene.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `syllogist` — Argument as architecture; a proof is an ordered process and runs like one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1107,7 +1121,7 @@
    "name": "Shared Grief",
    "levelReq": 3,
    "energyCost": 7,
-   "powerSystem": "reach_emotional_logical",
+   "powerSystem": "wild_nanite",
    "tradition": "threnodist",
    "attribute": "social",
    "axes": {
@@ -1231,7 +1245,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Shared Grief",
-   "_idWas": "the_shared_grief"
+   "_idWas": "the_shared_grief",
+   "_powerSystemWas": "reach_emotional_logical",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1239,7 +1255,7 @@
    "name": "Names of the Lost",
    "levelReq": 4,
    "energyCost": 11,
-   "powerSystem": "reach_emotional_logical",
+   "powerSystem": "wild_nanite",
    "tradition": "threnodist",
    "attribute": "social",
    "axes": {
@@ -1338,7 +1354,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Names of the Lost",
-   "_idWas": "the_names_of_the_lost"
+   "_idWas": "the_names_of_the_lost",
+   "_powerSystemWas": "reach_emotional_logical",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1346,7 +1364,7 @@
    "name": "Last Lament",
    "levelReq": 5,
    "energyCost": 13,
-   "powerSystem": "reach_emotional_logical",
+   "powerSystem": "wild_nanite",
    "tradition": "threnodist",
    "attribute": "social",
    "axes": {
@@ -1417,7 +1435,9 @@
    ],
    "plainly": "A social action that strengthens someone. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 8 hours Limit: iT Costs Nearly All You Have.",
    "_nameWas": "The Last Lament",
-   "_idWas": "the_last_lament"
+   "_idWas": "the_last_lament",
+   "_powerSystemWas": "reach_emotional_logical",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1425,7 +1445,7 @@
    "name": "Grief That Stops",
    "levelReq": 5,
    "energyCost": 13,
-   "powerSystem": "reach_emotional_logical",
+   "powerSystem": "wild_nanite",
    "tradition": "threnodist",
    "attribute": "mental",
    "axes": {
@@ -1510,7 +1530,9 @@
    ],
    "plainly": "A social contest against the target's composure, drawing only on losses they have actually suffered — a target who has lost nothing gets a large bonus to resist. On a win they are incapacitated for several minutes and carry a lasting penalty to composure rolls afterward. At rank 2 the GM additionally rolls a small independent chance that the target's heart stops, scaled to how much they have genuinely lost. You cannot aim for that outcome and you cannot call it off once cast.",
    "_nameWas": "The Grief That Stops",
-   "_idWas": "the_grief_that_stops"
+   "_idWas": "the_grief_that_stops",
+   "_powerSystemWas": "reach_emotional_logical",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "keening",
@@ -1732,7 +1754,7 @@
    "name": "Contradiction",
    "levelReq": 1,
    "energyCost": 5,
-   "powerSystem": "reach_emotional_logical",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "emotional_logical": 0.6,
@@ -1868,14 +1890,16 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Contradiction",
    "_idWas": "the_contradiction",
-   "_diceStrip": "⛔ SNG-471, CCODE Q1: `mechanic.dice` IS consumed — craftmechanics.mechanicFor → rollMagnitude → skill_battle.js:798 — ⚠️ BUT THE GUARD IS `shape === 'damage'`, and only `damage` and `strike` resolve to it. `hobble` and `hinder` DO NOT.\n⛔ SO THIS CRAFT AUTHORED 1d4 THAT NOTHING WOULD EVER ROLL. Erik's shape is right — a hold is not damage — so the DICE GO, not the shape. ⚠️ CCode: 'I would not widen the guard silently — \"this craft does 4d6 of hold\" is a different claim about the world.' AGREED."
+   "_diceStrip": "⛔ SNG-471, CCODE Q1: `mechanic.dice` IS consumed — craftmechanics.mechanicFor → rollMagnitude → skill_battle.js:798 — ⚠️ BUT THE GUARD IS `shape === 'damage'`, and only `damage` and `strike` resolve to it. `hobble` and `hinder` DO NOT.\n⛔ SO THIS CRAFT AUTHORED 1d4 THAT NOTHING WOULD EVER ROLL. Erik's shape is right — a hold is not damage — so the DICE GO, not the shape. ⚠️ CCode: 'I would not widen the guard silently — \"this craft does 4d6 of hold\" is a different claim about the world.' AGREED.",
+   "_powerSystemWas": "reach_emotional_logical",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `syllogist` — Argument as architecture; a proof is an ordered process and runs like one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "carried_name",
    "name": "Carried Name",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_emotional_logical",
+   "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
     "emotional_logical": -0.5
@@ -1991,14 +2015,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Carried Name",
-   "_idWas": "the_carried_name"
+   "_idWas": "the_carried_name",
+   "_powerSystemWas": "reach_emotional_logical",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "shared_weight",
    "name": "Shared Weight",
    "levelReq": 1,
    "energyCost": 5,
-   "powerSystem": "reach_emotional_logical",
+   "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
     "emotional_logical": -0.6
@@ -2102,13 +2128,15 @@
    "plainly": "A social action that transfers part of someone's grief onto you. Rated 6 of 10 on one target for about twelve hours.",
    "_descriptionWas": "The Threnodists' mercy, and it is a real one because it is not free. Grief-singers are the people who will hold your share.",
    "_nameWas": "The Shared Weight",
-   "_idWas": "the_shared_weight"
+   "_idWas": "the_shared_weight",
+   "_powerSystemWas": "reach_emotional_logical",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "the_true_feeling",
    "name": "The True Feeling",
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
     "emotional_logical": -0.3
@@ -2208,7 +2236,9 @@
     }
    ],
    "plainly": "A social/investigation/intellectual action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 15. Ranks: rank 2 extends timeReach; rank 3 deepens perceptionDepth. Limit: it reads What IS Felt, not what is True — a person sincerely wrong reads sincere.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

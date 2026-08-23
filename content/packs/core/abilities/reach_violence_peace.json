@@ -9,7 +9,7 @@
    "name": "Edge",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "physical",
    "axes": {
     "violence_peace": -0.5,
@@ -135,14 +135,16 @@
    "plainly": "A fight/duel action that deals damage. It rolls 2d6 Ranks: rank 2 extends targets; rank 3 adds to special. Limit: force IS Force — it makes enemies and consequences.",
    "_descriptionWas": "The violence-pole mastery: the martial disciplines honed to an art. Not fury — force made exact.",
    "_nameWas": "The Edge",
-   "_idWas": "the_edge"
+   "_idWas": "the_edge",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "stillcraft",
    "name": "Stillcraft",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "social",
    "axes": {
     "violence_peace": 0.5,
@@ -287,7 +289,9 @@
     "shield",
     "sustain"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "disarm",
@@ -356,7 +360,7 @@
      "gainAxes": []
     }
    ],
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "FIGHT",
@@ -415,7 +419,9 @@
     "break",
     "hinder"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "calm_word",
@@ -480,7 +486,7 @@
      "gainAxes": []
     }
    ],
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "SOCIAL",
@@ -534,7 +540,9 @@
     }
    ],
    "plainly": "A social/fight action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about 2 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: iT Cools The Heat, Not The Cause — what made them raise the hand is still there.",
-   "_nameWas": "The Calming Word"
+   "_nameWas": "The Calming Word",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "stand",
@@ -604,7 +612,7 @@
      ]
     }
    ],
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "FIGHT",
@@ -667,7 +675,9 @@
    "plainly": "A fight/survive action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 5 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: holds, Doesn'T Advance — overwhelming force still breaks through.",
    "_nameWas": "The Stand",
    "_idWas": "the_stand",
-   "_wardTypes": "⛔ SNG-512. ⚠️ The guardian's discipline answers blows. Only blows, and it is the best in the game at it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⚠️ The guardian's discipline answers blows. Only blows, and it is the best in the game at it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "broker_truce",
@@ -730,7 +740,7 @@
      "gainAxes": []
     }
    ],
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "SOCIAL",
@@ -782,7 +792,9 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/fight action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 30 days Ranks: rank 2 deepens bindStrength; rank 3 adds to special. Limit: only AS True AS Its Terms — injustice buried buys time, not peace."
+   "plainly": "A social/fight action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 30 days Ranks: rank 2 deepens bindStrength; rank 3 adds to special. Limit: only AS True AS Its Terms — injustice buried buys time, not peace.",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "held_breath",
@@ -837,7 +849,7 @@
      ]
     }
    ],
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "DUEL",
@@ -896,7 +908,9 @@
    "_descriptionWas": "The braid-craft: hold a moment where violence is total and peace is total in perfect tension — an armed grace.",
    "_nameWas": "The Held Breath",
    "_idWas": "the_held_breath",
-   "_wardTypes": "⛔ SNG-512. ⚠️ A standoff held open answers force and the emotion that would break it. Nothing else.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⚠️ A standoff held open answers force and the emotion that would break it. Nothing else.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "last_form",
@@ -933,7 +947,7 @@
      "gainAxes": []
     }
    ],
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "tradition": "marcher",
    "harmRung": "damaging",
@@ -984,14 +998,16 @@
     "strike"
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_nameWas": "The Last Form"
+   "_nameWas": "The Last Form",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "soldiers_hand",
    "name": "Soldier's Hand",
    "levelReq": 2,
    "energyCost": 4,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "practical",
    "axes": {
     "violence_peace": -0.3,
@@ -1130,14 +1146,16 @@
     "heal",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "whats_at_hand",
    "name": "What's At Hand",
    "levelReq": 2,
    "energyCost": 4,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "practical",
    "axes": {
     "violence_peace": -0.3,
@@ -1262,14 +1280,16 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/survive/explore action that deals damage. It rolls 2d6 Ranks: rank 2 extends improvisation; rank 3 adds to special. Limit: the Marcher Makes Weapons, Not Wonders."
+   "plainly": "A fight/survive/explore action that deals damage. It rolls 2d6 Ranks: rank 2 extends improvisation; rank 3 adds to special. Limit: the Marcher Makes Weapons, Not Wonders.",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "weight",
    "name": "Weight",
    "levelReq": 2,
    "energyCost": 5,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "social",
    "axes": {
     "violence_peace": -0.3,
@@ -1385,14 +1405,16 @@
    ],
    "plainly": "A social/fight/duel action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens authority; rank 3 extends scope. Limit: it works IN The Moment violence is still a choice — past that point it is nothing.",
    "_nameWas": "The Weight",
-   "_idWas": "the_weight"
+   "_idWas": "the_weight",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "advance",
    "name": "Advance",
    "levelReq": 2,
    "energyCost": 4,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "physical",
    "axes": {
     "violence_peace": -0.3,
@@ -1510,14 +1532,16 @@
    ],
    "plainly": "A fight/duel/chase action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours. Range is 6. Ranks: rank 2 extends targets; rank 3 adds to special.",
    "_nameWas": "The Advance",
-   "_idWas": "the_advance"
+   "_idWas": "the_advance",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "long_road",
    "name": "Long Road",
    "levelReq": 2,
    "energyCost": 3,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "physical",
    "axes": {
     "violence_peace": -0.2,
@@ -1638,14 +1662,16 @@
      "class": "hard"
     }
    ],
-   "plainly": "A survive/explore action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about 3 days Ranks: rank 2 extends targets; rank 3 extends targets. Limit: not For Acute Crisis — this is days, not moments."
+   "plainly": "A survive/explore action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about 3 days Ranks: rank 2 extends targets; rank 3 extends targets. Limit: not For Acute Crisis — this is days, not moments.",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "price_shown",
    "name": "Price Shown",
    "levelReq": 2,
    "energyCost": 4,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "social",
    "axes": {
     "violence_peace": 0.4,
@@ -1783,14 +1809,16 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Price Shown",
    "_idWas": "the_price_shown",
-   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⚠️ 'Show someone the real cost of the violence they are about to commit' — a bargain offered instead of a fight\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⚠️ 'Show someone the real cost of the violence they are about to commit' — a bargain offered instead of a fight\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "laid_ground",
    "name": "Laid Ground",
    "levelReq": 2,
    "energyCost": 5,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "social",
    "axes": {
     "violence_peace": 0.5,
@@ -1923,14 +1951,16 @@
    "plainly": "A social/explore/survive action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 3 harm per hit (rank 1 armour), and lasts for about 8 hours Ranks: rank 2 adds to autonomy; rank 3 extends duration. Limit: iT Holds AS Long AS NO One Actively Breaks IT — a determined breaker breaks it.",
    "_nameWas": "The Laid Ground",
    "_idWas": "the_laid_ground",
-   "_wardTypes": "⛔ SNG-512. ⛔ Peace-ground answers violence, the heat that starts it, and the want beneath it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ Peace-ground answers violence, the heat that starts it, and the want beneath it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "step_between",
    "name": "Step Between",
    "levelReq": 2,
    "energyCost": 4,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "physical",
    "axes": {
     "violence_peace": 0.4,
@@ -2063,14 +2093,16 @@
     "shield"
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_wardTypes": "⛔ SNG-512. Interposition answers the strike and the heat behind it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. Interposition answers the strike and the heat behind it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "safe_ground",
    "name": "Safe Ground",
    "levelReq": 2,
    "energyCost": 4,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "social",
    "axes": {
     "violence_peace": 0.4,
@@ -2187,7 +2219,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A survive/social/explore action that strengthens someone. Its strength is rated 4 out of 10 It affects 6 targets, and lasts for about a day Ranks: rank 2 extends duration+targets; rank 3 adds to special. Limit: only as safe as The Surrounding World allows."
+   "plainly": "A survive/social/explore action that strengthens someone. Its strength is rated 4 out of 10 It affects 6 targets, and lasts for about a day Ranks: rank 2 extends duration+targets; rank 3 adds to special. Limit: only as safe as The Surrounding World allows.",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2195,7 +2229,7 @@
    "name": "Quieting",
    "levelReq": 4,
    "energyCost": 13,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "tradition": "stillhold",
    "attribute": "physical",
    "axes": {
@@ -2297,14 +2331,16 @@
    ],
    "plainly": "A fight attack available only against someone who has refused an offered truce — you must have made the offer first. It deals 4d6 plus 2 damage face-on and is meant to end the fight in one act. At rank 2 the surrounding fight does not close on you while you do it. Afterward you can never broker a truce again: that standing is spent permanently.",
    "_nameWas": "The Quieting",
-   "_idWas": "the_quieting"
+   "_idWas": "the_quieting",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "broken_quiet",
    "name": "Broken Quiet",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "violence_peace": 0.5,
@@ -2423,14 +2459,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Broken Quiet",
-   "_idWas": "the_broken_quiet"
+   "_idWas": "the_broken_quiet",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "held_line",
    "name": "Held Line",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "physical",
    "axes": {
     "violence_peace": -0.4
@@ -2535,14 +2573,16 @@
    "_descriptionWas": "The Marchers' first craft and the reason the March exists: a line is people, and people hold when someone visibly will not move.",
    "_nameWas": "The Held Line",
    "_idWas": "the_held_line",
-   "_wardTypes": "⛔ SNG-512. The line steadies against blows and against the fear that breaks lines.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. The line steadies against blows and against the fear that breaks lines.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "read_field",
    "name": "Read Field",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "attribute": "practical",
    "axes": {
     "violence_peace": -0.3,
@@ -2660,7 +2700,9 @@
    "_nameWas": "The Read Field",
    "_idWas": "the_read_field",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ BREAKING'S SENSE — terrain, chokepoints, where the line fails first\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ BREAKING'S SENSE — terrain, chokepoints, where the line fails first\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "read_the_fight",
@@ -2710,7 +2752,7 @@
      "gains": "deepen"
     }
    ],
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "FIGHT",
@@ -2762,7 +2804,9 @@
     }
    ],
    "plainly": "A fight/duel/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: reads, Not Wins — the truly wild are harder to call.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "read_the_room",
@@ -2809,7 +2853,7 @@
      ]
     }
    ],
-   "powerSystem": "reach_violence_peace",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "SOCIAL",
@@ -2858,7 +2902,9 @@
     }
    ],
    "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: reads, Not Calms — the disciplined mask well.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_violence_peace",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

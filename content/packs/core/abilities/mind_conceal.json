@@ -28,7 +28,11 @@
    "mechanic": {
     "magnitude": 5,
     "duration": 4,
-    "scope": 2
+    "scope": 2,
+    "crit": {
+     "success": "You are not merely unremarked — afterwards nobody can agree that anyone was there.",
+     "failure": "Something about the effort itself is interesting. Every eye in the room finds you at once."
+    }
    },
    "challengeTypes": [
     "STEALTH",
@@ -143,7 +147,14 @@
    "mechanic": {
     "magnitude": 6,
     "duration": 6,
-    "scope": 3
+    "scope": 3,
+    "crit": {
+     "success": "The picture takes so well that even those who know better hesitate at the wall.",
+     "failure": {
+      "text": "You forget where you left the stairs.",
+      "chance": -2
+     }
+    }
    },
    "challengeTypes": [
     "STEALTH",
@@ -242,5 +253,6 @@
   }
  ],
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
- "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",
+ "_sng523": "⛔ SNG-523: `mechanic.crit` authored. ⚠️ `critFor` HAS EXISTED, WITH A PER-CRAFT CAP AND A STRING SHORTHAND FOR AUTHORS, AND HAS NEVER HAD AN INPUT — 0 of 373. Every critical in the game was generic.\n⛔ BOTH HALVES AUTHORED: `success` is what the craft's best case LOOKS LIKE; `failure` is its disaster. ⚠️ MOST CARRY TEXT ONLY — `chance` is opt-in and shifts nothing unless asked for, so a craft can say what its disaster looks like without claiming it happens more often."
 }

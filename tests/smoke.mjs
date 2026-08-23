@@ -17393,6 +17393,23 @@ await (async () => {
   // catalogue can see it, which is why the gate lives here and not in the content CI.
   {
     const noSystem = abilities.filter(a => !a.powerSystem);
+    // ⛔ CCODE-217: AND NO ABILITY CARRIES A FILENAME AS ITS POWER SYSTEM. The flip that fixed this was
+    // UNGATED when I shipped it - reverting the precedence left the whole suite green, because the palette
+    // routes work under both once the palettes moved to `traditions`. So 260 crafts could quietly go back
+    // to `reach_dark_light` as a "power system" and nothing would say a word.
+    // ⚠️ A change worth arguing for over two rounds is worth a check that notices it being undone.
+    {
+      const filenamed = abilities.filter(a => /^reach_/.test(String(a.powerSystem || "")));
+      check(`CCODE-217: no ability's powerSystem is a FILENAME — the ability's own value wins over its file's header`,
+        filenamed.length === 0,
+        `${filenamed.length} craft(s) carry an axis name as a power system, e.g. ${filenamed.slice(0, 3).map(a => `${a.id}=${a.powerSystem}`).join(", ")}`);
+      // and the vocabulary that replaced them is the real one
+      const vocab = new Set(abilities.map(a => a.powerSystem).filter(Boolean));
+      check("CCODE-217: the loaded power systems are a real vocabulary, not one per file",
+        vocab.size <= 12 && vocab.has("metaphysical") && vocab.has("precursor"),
+        [...vocab].join(", "));
+    }
+
     check("CCODE-200: no ability loads without a powerSystem — the pack stamp fills gaps, never clobbers",
       noSystem.length === 0, noSystem.slice(0, 8).map(a => a.id).join(", "));
   }
@@ -17513,18 +17530,42 @@ await (async () => {
   {
     const doc = CC.visualAesthetics || {};
     check("435 §C3: the WHOLE aesthetics doc reaches CONTENT — `powerSystems` was being flattened away at load",
-      Object.keys(doc.traditions || {}).length > 20 && Object.keys(doc.powerSystems || {}).length >= 5,
+      // ⚠️ NOT A COUNT. This asserted `powerSystems >= 5` and went red when SNG-530 moved radiant,
+      // harmonic and valley_craft into `traditions` - where §C3's own argument always said they belonged,
+      // because they are PEOPLES rather than physics. The claim is that BOTH MAPS SURVIVE THE LOAD (the
+      // bug was `powerSystems` being flattened away entirely), and a census pinned on top of it turns a
+      // correct content move into a failure.
+      Object.keys(doc.traditions || {}).length > 20 && Object.keys(doc.powerSystems || {}).length >= 1,
       `traditions ${Object.keys(doc.traditions || {}).length}, powerSystems ${Object.keys(doc.powerSystems || {}).length}`);
     const rl = abilities.find(a => /radiant lance/i.test(a.name || ""));
-    const vc = abilities.find(a => a.powerSystem === "valley_craft");
+    const vc = abilities.find(a => a.tradition === "valley_craft");
     const br = abilities.find(a => a.tradition === "cross_pole_braid");
     const rk = abilities.find(a => a.tradition === "rootkin");
     check("435 §C3: a people wins where there is one, and the physics answers where there is not",
+      // ⛔ THE ROUTES MOVED AND THE CLAIM DID NOT. CCODE-217 let the ability's own powerSystem win, and
+      // SNG-530 moved radiant/harmonic/valley_craft to `traditions` - so a radiant craft now reaches its
+      // palette as the PEOPLE it belongs to rather than through its file's header. That is the claim this
+      // gate was always making; it had simply been true by a different road.
       AR.aestheticFor(rk, doc) === doc.traditions.rootkin
-      && AR.aestheticFor(rl, doc) === doc.powerSystems.radiant
-      && AR.aestheticFor(vc, doc) === doc.powerSystems.valley_craft
-      && AR.aestheticFor(br, doc) === doc.powerSystems.braid,
-      "a runtime braid carries a reach_* power system and must reach the one braid entry, not be authored per braid");
+      && AR.aestheticFor(rl, doc) === doc.traditions.radiant_folk
+      && AR.aestheticFor(vc, doc) === doc.traditions.valley_craft
+      // ⚠️ BY WHAT IT IS, NOT BY WHICH OBJECT. SNG-530 authored the braid palette a SECOND time under
+      // `combination` (with an `_alias` note saying why), and that copy is reached first - so an identity
+      // check failed while the picture was correct. The claim is that a braid gets THE braid look, and
+      // that is what this asks.
+      && AR.aestheticFor(br, doc)?.name === doc.powerSystems.braid?.name,
+      "a people wins where there is one; a braid reaches the ONE braid entry rather than being authored per braid");
+    // ⛔ AND TWO COPIES OF ONE PALETTE CAN DRIFT. `braid` and `combination` are the same look under two
+    // names - the palette's name and the power source's - and nothing but this stops one of them being
+    // edited alone. ⚠️ `_alias` is excluded because it is the note explaining the duplication, and a
+    // note that made the check fail would be a comment breaking a build.
+    {
+      const b = doc.powerSystems?.braid || {}, c = doc.powerSystems?.combination || {};
+      const strip = (o) => JSON.stringify(Object.fromEntries(Object.entries(o).filter(([k]) => k !== "_alias")));
+      check("435 §C3: `braid` and `combination` are ONE palette under two names — they may not drift apart",
+        !Object.keys(c).length || strip(b) === strip(c),
+        "one of the two aliased braid palettes has been edited without the other");
+    }
     // ⛔ THE ORDER NEEDS A FIXTURE, BECAUSE NO LIVE ABILITY CAN CURRENTLY SHOW IT. Mutation proved that:
     // inverting people-then-physics reddened NOTHING, because the two palette sets are disjoint today — every
     // ability that has a people has no power-system entry and vice versa. The rule exists for the day Aevi

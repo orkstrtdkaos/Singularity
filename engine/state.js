@@ -397,7 +397,25 @@ export async function loadContent() {
   // ability-arch v2: tolerant defaults so the engine can read the new fields before the content
   // classification pass tags every ability. rankProgression defaults to "use" (depth is earned, not
   // bought); nativeOrCombination stays null until authored (consumers treat null as unclassified).
-  // ⚠️ CCODE-217 — I BUILT THE REVERSAL, MEASURED IT REPAINTING 300 CRAFTS, AND PUT IT BACK.
+  // ⛔ CCODE-217 — THE ABILITY WINS. This REVERSES CCODE-200's precedence, deliberately and on evidence.
+  //
+  // CCODE-200 made the PACK win because that was the existing convention and I did not want to move more
+  // than the bug required. Aevi then found 333 abilities whose own `powerSystem` disagreed with their
+  // file's header and refused to guess which should win - correctly, because the answer decides 333 rows.
+  //
+  // MEASURED, THE HEADERS WERE MOSTLY NOT POWER SYSTEMS AT ALL. Thirteen of the fifteen disagreeing files
+  // are `reach_*` - `reach_body_mind`, `reach_dark_light` - which are AXIS NAMES, the file's subject. So
+  // 260+ crafts were loading with a FILENAME where their power system should be, and the real vocabulary
+  // (`metaphysical`, `precursor`, `ordered_nanite`, `wild_nanite`, `combination`) sat unread one line down.
+  //
+  // ⚠️ I BUILT THIS ONCE BEFORE AND PUT IT BACK, because flipping repainted the radiant tradition: the
+  // `radiant` palette was reachable only through the pack HEADER. The coverage COUNT did not move when it
+  // happened - 9 uncovered before and after - so only the §C3 gate, which asserts WHICH palette rather
+  // than WHETHER one, caught it. Aevi then moved radiant/harmonic/valley_craft into `traditions` where
+  // they belonged (they are peoples, not physics) and aliased `combination` to the braid palette. With the
+  // blocker gone she asked for the flip, and this is it.
+  //
+  // ⛔ AND THE PACK-LEVEL STAMP STILL FILLS THE GAP, WHICH IS ALL CCODE-200 WAS EVER PROTECTING.
   //
   // Aevi asked for a ruling on 333 abilities whose own `powerSystem` disagrees with their file's header,
   // and refused to guess. Measured, thirteen of the fifteen disagreeing headers are `reach_*` — AXIS
@@ -436,7 +454,7 @@ export async function loadContent() {
   // palette while its sibling ranged crafts were fine.
   const abilities = {};
   for (const pack of await abilitiesP) for (const a of pack.abilities) abilities[a.id] = {
-    ...a, powerSystem: pack.powerSystem || a.powerSystem,
+    ...a, powerSystem: a.powerSystem || pack.powerSystem,
     rankProgression: a.rankProgression || "use",
     nativeOrCombination: a.nativeOrCombination || null,
     combinationAxis: a.combinationAxis ?? null,

@@ -2717,7 +2717,25 @@ const live = new Set(Object.keys(C.abilities)); // ← THIS is what "exists" mea
 files, not the game. Both have their place — but only a gate over the loaded catalogue can see a manifest
 gap, and only a gate over the directory can see an unregistered file. **Ship both, and say which is which.**
 
-## §42.3 — The loader fills gaps; it must never clobber (CCODE-200)
+## §42.3 — The loader fills gaps; it must never clobber (CCODE-200 → CCODE-217)
+
+⛔ **THE ABILITY'S OWN `powerSystem` WINS; THE PACK HEADER FILLS THE GAP.** CCODE-200 had it the other way
+because that was the existing convention. Measured, **thirteen of the fifteen disagreeing pack headers were
+`reach_*` — AXIS NAMES**, so 260+ crafts loaded with a FILENAME where their power system should be while
+the real vocabulary (`metaphysical`, `precursor`, `ordered_nanite`, `wild_nanite`, `combination`) sat unread
+one line down. **The more specific declaration wins** — the rule this codebase uses everywhere else.
+
+⚠️ **THE FLIP WAS BUILT, MEASURED, AND PUT BACK ONCE BEFORE SHIPPING.** It repainted the radiant tradition,
+because the `radiant` palette was reachable only through the pack header — and **the coverage COUNT did not
+move**, 9 uncovered before and after, so only the §C3 gate that asserts WHICH palette caught it. Aevi then
+moved radiant/harmonic/valley_craft into `traditions`, where §C3's own argument always said they belonged.
+
+⛔ **AND THE FLIP WAS UNGATED ON ITS FIRST DAY.** Reverting the precedence left the entire suite green,
+because the palette routes work under both once the palettes moved. `CCODE-217` now asserts the claim
+itself: **no loaded ability carries a filename as its power system.** A change worth arguing for over two
+rounds is worth a check that notices it being undone.
+
+
 
 `engine/state.js` merges every ability as `{ ...a, powerSystem: pack.powerSystem || a.powerSystem }`.
 

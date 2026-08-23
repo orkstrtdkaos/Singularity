@@ -9,7 +9,7 @@
    "name": "Churn's Gift",
    "levelReq": 3,
    "energyCost": 7,
-   "powerSystem": "wild_current",
+   "powerSystem": "combination",
    "tradition": "churnfolk",
    "attribute": "practical",
    "axes": {
@@ -126,7 +126,13 @@
    "plainly": "An action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens control; rank 3 adds to special. Limit: you Cannot Control Its Precise Form — it gives its own way rather than yours.",
    "_nameWas": "The Churn's Gift",
    "_idWas": "the_churns_gift",
-   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `wild_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-140), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'."
+   "_powerSystemFix": "⛔ SNG-535. Was `wild_current` as if it were a fifth source. ⚠️ IT IS A COMBINATION: ungoverned nanite carrying unrestrained will. The veil fraction is why it varies — wild nanite alone would be merely unordered, and unordered is not the same as LUCKY.\n⛔ `namedCurrent` KEEPS THE NAME. Erik's gate is intact — a Rootkin still works the living current and says so — but the SOURCE now resolves through the four.",
+   "_powerSystemWas": "wild_current",
+   "powerMix": {
+    "wild_nanite": 0.6,
+    "veil": 0.4
+   },
+   "namedCurrent": "wild_current"
   },
   {
    "schemaVersion": 1,
@@ -134,7 +140,7 @@
    "name": "Wild Flowering",
    "levelReq": 4,
    "energyCost": 11,
-   "powerSystem": "wild_current",
+   "powerSystem": "combination",
    "tradition": "churnfolk",
    "attribute": "practical",
    "axes": {
@@ -228,7 +234,13 @@
    "plainly": "An action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 4, and lasts for about 6 hours Ranks: rank 2 adds to special. Limit: iT Cannot BE Aimed AT Pure Creation OR Pure Destruction — it is always both.",
    "_nameWas": "The Wild Flowering",
    "_idWas": "the_wild_flowering",
-   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `wild_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-140), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'."
+   "_powerSystemFix": "⛔ SNG-535. Was `wild_current` as if it were a fifth source. ⚠️ IT IS A COMBINATION: ungoverned nanite carrying unrestrained will. The veil fraction is why it varies — wild nanite alone would be merely unordered, and unordered is not the same as LUCKY.\n⛔ `namedCurrent` KEEPS THE NAME. Erik's gate is intact — a Rootkin still works the living current and says so — but the SOURCE now resolves through the four.",
+   "_powerSystemWas": "wild_current",
+   "powerMix": {
+    "wild_nanite": 0.6,
+    "veil": 0.4
+   },
+   "namedCurrent": "wild_current"
   },
   {
    "schemaVersion": 1,
@@ -236,7 +248,7 @@
    "name": "Honest Bargain",
    "levelReq": 4,
    "energyCost": 11,
-   "powerSystem": "wild_current",
+   "powerSystem": "combination",
    "tradition": "abyssal",
    "attribute": "social",
    "axes": {
@@ -334,7 +346,13 @@
     "command"
    ],
    "_bargainTag": "⛔ SNG-471: `bargain` ADDED. 'a pact struck from the true side' — the Wild Half's demonic bargain\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
-   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `wild_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-140), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'."
+   "_powerSystemFix": "⛔ SNG-535. Was `wild_current` as if it were a fifth source. ⚠️ IT IS A COMBINATION: ungoverned nanite carrying unrestrained will. The veil fraction is why it varies — wild nanite alone would be merely unordered, and unordered is not the same as LUCKY.\n⛔ `namedCurrent` KEEPS THE NAME. Erik's gate is intact — a Rootkin still works the living current and says so — but the SOURCE now resolves through the four.",
+   "_powerSystemWas": "wild_current",
+   "powerMix": {
+    "wild_nanite": 0.6,
+    "veil": 0.4
+   },
+   "namedCurrent": "wild_current"
   },
   {
    "schemaVersion": 1,
@@ -342,7 +360,7 @@
    "name": "Collection",
    "levelReq": 4,
    "energyCost": 12,
-   "powerSystem": "wild_current",
+   "powerSystem": "combination",
    "tradition": "abyssal",
    "attribute": "social",
    "axes": {
@@ -448,9 +466,15 @@
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Collection",
    "_idWas": "the_collection",
-   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `wild_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-140), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'.",
+   "_powerSystemFix": "⛔ SNG-535. Was `wild_current` as if it were a fifth source. ⚠️ IT IS A COMBINATION: ungoverned nanite carrying unrestrained will. The veil fraction is why it varies — wild nanite alone would be merely unordered, and unordered is not the same as LUCKY.\n⛔ `namedCurrent` KEEPS THE NAME. Erik's gate is intact — a Rootkin still works the living current and says so — but the SOURCE now resolves through the four.",
    "wildVariance": true,
-   "_wildVariance": "⛔ SNG-526. Missing. ⚠️ EVERY ability in a wild_current file carries it — SNG-140: 'wildVariance:true marks abilities whose outcome carries an uncontrolled element.' A collection assembled from the tangled deep is exactly that: you get what came."
+   "_wildVariance": "⛔ SNG-526. Missing. ⚠️ EVERY ability in a wild_current file carries it — SNG-140: 'wildVariance:true marks abilities whose outcome carries an uncontrolled element.' A collection assembled from the tangled deep is exactly that: you get what came.",
+   "_powerSystemWas": "wild_current",
+   "powerMix": {
+    "wild_nanite": 0.6,
+    "veil": 0.4
+   },
+   "namedCurrent": "wild_current"
   },
   {
    "schemaVersion": 1,
@@ -458,7 +482,7 @@
    "name": "Fae Wings",
    "levelReq": 4,
    "energyCost": 11,
-   "powerSystem": "wild_current",
+   "powerSystem": "combination",
    "tradition": "churnfolk",
    "attribute": "physical",
    "axes": {
@@ -558,13 +582,20 @@
     }
    ],
    "plainly": "A travel, chase and explore action, learned rather than inherited — anyone with churnfolk training flies this way, whatever they are. Rank 1 is short flights: over a wall, across a river, out of a fall. Rank 2 flies a whole leg and roughly halves its days, though you drift toward where the churn is going unless you pay to hold a line. Rank 3 gives wings to the rest of the party for a shorter span each. The catch is reliability rather than danger: needing them badly makes them less likely to come, and a failure grounds you rather than dropping you.",
-   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `wild_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-140), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'.",
+   "_powerSystemFix": "⛔ SNG-535. Was `wild_current` as if it were a fifth source. ⚠️ IT IS A COMBINATION: ungoverned nanite carrying unrestrained will. The veil fraction is why it varies — wild nanite alone would be merely unordered, and unordered is not the same as LUCKY.\n⛔ `namedCurrent` KEEPS THE NAME. Erik's gate is intact — a Rootkin still works the living current and says so — but the SOURCE now resolves through the four.",
    "_idWas": "the_lucky_fall",
    "wildVariance": true,
    "_wildVariance": "⛔ SNG-526. Missing — and luck is the definitional uncontrolled outcome.",
-   "_namingSOP": "⚠️ SNG-526: `the_lucky_fall` → `lucky_fall`. The SNG-461 de-article pass MISSED IT. ⛔ 342 ids were renamed and this one was not, which is why the rename map should have been written BEFORE the rename rather than after the smoke suite died."
+   "_namingSOP": "⚠️ SNG-526: `the_lucky_fall` → `lucky_fall`. The SNG-461 de-article pass MISSED IT. ⛔ 342 ids were renamed and this one was not, which is why the rename map should have been written BEFORE the rename rather than after the smoke suite died.",
+   "_powerSystemWas": "wild_current",
+   "powerMix": {
+    "wild_nanite": 0.6,
+    "veil": 0.4
+   },
+   "namedCurrent": "wild_current"
   }
  ],
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
- "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
+ "_headerNote": "⚠️ SNG-535: this file's header still names `wild_current`, which is now a NAMED COMBINATION rather than a source. ⛔ Per CCODE-217 the ability wins, so the header is descriptive; kept because the file IS that current's crafts."
 }

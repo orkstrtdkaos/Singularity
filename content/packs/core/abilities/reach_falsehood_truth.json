@@ -9,7 +9,7 @@
    "name": "Falsecraft",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_falsehood_truth",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": -0.5,
@@ -158,14 +158,16 @@
     "reveal",
     "sustain"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_powerSystemWas": "reach_falsehood_truth",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "verity",
    "name": "Verity",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_falsehood_truth",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": 0.5,
@@ -303,7 +305,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads a spoken lie as it is spoken\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads a spoken lie as it is spoken\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_powerSystemWas": "reach_falsehood_truth",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "whole_truth",
@@ -340,7 +344,7 @@
      "gainAxes": []
     }
    ],
-   "powerSystem": "reach_falsehood_truth",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "tradition": "verist",
    "nativeOrCombination": "native",
@@ -386,14 +390,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Whole Truth",
-   "_idWas": "the_whole_truth"
+   "_idWas": "the_whole_truth",
+   "_powerSystemWas": "reach_falsehood_truth",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "wrong_reality",
    "name": "Wrong Reality",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": -0.4
@@ -523,14 +529,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Wrong Reality",
-   "_idWas": "the_wrong_reality"
+   "_idWas": "the_wrong_reality",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "better_story",
    "name": "Better Story",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": -0.3
@@ -646,14 +654,16 @@
    ],
    "plainly": "A medical/social/psychological action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens restoration; rank 3 adds to special. Limit: iT Must BE True — a comforting lie is a different craft, and it does not heal.",
    "_nameWas": "The Better Story",
-   "_idWas": "the_better_story"
+   "_idWas": "the_better_story",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "false_target",
    "name": "False Target",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": -0.4
@@ -784,14 +794,16 @@
    "plainly": "A combat/stealth/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends duration; rank 3 extends targets. Limit: it draws Aimed action — an area effect or an accident does not care what it is aiming at.",
    "_nameWas": "The False Target",
    "_idWas": "the_false_target",
-   "_wardTypes": "⛔ SNG-512. They strike what is not there. Answers anything AIMED; useless against an area or a fact.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. They strike what is not there. Answers anything AIMED; useless against an area or a fact.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "made_truth",
    "name": "Made Truth",
    "levelReq": 3,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": -0.5
@@ -913,14 +925,16 @@
    ],
    "plainly": "A magical/craft/tactical action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about a day Ranks: rank 2 deepens fidelity; rank 3 extends duration. Limit: it Changes What People DO, not what is so — the real does not bend.",
    "_nameWas": "The Made Truth",
-   "_idWas": "the_made_truth"
+   "_idWas": "the_made_truth",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "false_door",
    "name": "False Door",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": -0.4
@@ -1034,14 +1048,16 @@
    ],
    "plainly": "A stealth/infiltration/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 adds to access; rank 3 adds to special. Limit: the appearance Closes — a false door is not a real one, and what is on the other side is still real.",
    "_nameWas": "The False Door",
-   "_idWas": "the_false_door"
+   "_idWas": "the_false_door",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "maintained_veil",
    "name": "Maintained Veil",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": -0.3
@@ -1152,14 +1168,16 @@
    ],
    "plainly": "A stealth/logistics/magical action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about 3 days Ranks: rank 2 extends persistence; rank 3 adds to autonomy. Limit: it sustains the working, IT Does Not Strengthen IT — a weak lie held forever is still a weak lie.",
    "_nameWas": "The Maintained Veil",
-   "_idWas": "the_maintained_veil"
+   "_idWas": "the_maintained_veil",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "true_ground",
    "name": "True Ground",
    "levelReq": 1,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": 0.4
@@ -1285,14 +1303,16 @@
    "plainly": "A defense/magical/social action that reduces incoming harm. Its strength is rated 3 out of 10 and absorbs 3 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 6 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it resists False Belief Only — a sword does not care what you know.",
    "_nameWas": "The True Ground",
    "_idWas": "the_true_ground",
-   "_wardTypes": "⛔ SNG-512. ⛔ Deception has no purchase on someone standing on what is so. Answers the false; answers no blade.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ Deception has no purchase on someone standing on what is so. Answers the false; answers no blade.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "established_fact",
    "name": "Established Fact",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": 0.4
@@ -1404,14 +1424,16 @@
    ],
    "plainly": "A social/legal/intellectual action that makes or animates something. Its strength is rated 4 out of 10, and lasts for about 7 days Ranks: rank 2 deepens bindStrength; rank 3 adds to special. Limit: it establishes what IS True — a false claim gains nothing from this craft.",
    "_nameWas": "The Established Fact",
-   "_idWas": "the_established_fact"
+   "_idWas": "the_established_fact",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "weight_of_truth",
    "name": "Weight of Truth",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": 0.5
@@ -1537,14 +1559,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Weight of Truth",
-   "_idWas": "the_weight_of_truth"
+   "_idWas": "the_weight_of_truth",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "direct_path",
    "name": "Direct Path",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": 0.3
@@ -1672,14 +1696,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Direct Path",
-   "_idWas": "the_direct_path"
+   "_idWas": "the_direct_path",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "held_truth",
    "name": "Held Truth",
    "levelReq": 1,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": 0.3
@@ -1791,7 +1817,9 @@
    ],
    "plainly": "A endurance/hardship/psychological action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it anchors to What IS Actually SO — it offers nothing against ordinary hardship.",
    "_nameWas": "The Held Truth",
-   "_idWas": "the_held_truth"
+   "_idWas": "the_held_truth",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1799,7 +1827,7 @@
    "name": "Perfect Veil",
    "levelReq": 4,
    "energyCost": 12,
-   "powerSystem": "reach_falsehood_truth",
+   "powerSystem": "metaphysical",
    "tradition": "veilwright",
    "attribute": "mental",
    "axes": {
@@ -1898,7 +1926,9 @@
    "_descriptionWas": "The Veilwright art of the perfect veil — a concealment so total that the hidden thing is not merely unseen but un-looked-for, the very question of it smoothed away. The deep gift of those who keep secrets for a living.",
    "_nameWas": "The Perfect Veil",
    "_idWas": "the_perfect_veil",
-   "_wardTypes": "⛔ SNG-512. ⛔ Un-looked-for rather than unseen — answers anything that must FIND you first.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ Un-looked-for rather than unseen — answers anything that must FIND you first.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_falsehood_truth",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1906,7 +1936,7 @@
    "name": "Necessary Fiction",
    "levelReq": 5,
    "energyCost": 13,
-   "powerSystem": "reach_falsehood_truth",
+   "powerSystem": "metaphysical",
    "tradition": "veilwright",
    "attribute": "mental",
    "axes": {
@@ -1979,7 +2009,9 @@
    ],
    "plainly": "A social/investigate action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about a day Limit: iT Fails Against Determined Truth.",
    "_nameWas": "The Necessary Fiction",
-   "_idWas": "the_useful_lie"
+   "_idWas": "the_useful_lie",
+   "_powerSystemWas": "reach_falsehood_truth",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1987,7 +2019,7 @@
    "name": "The Unsurvivable Fact",
    "levelReq": 5,
    "energyCost": 13,
-   "powerSystem": "reach_falsehood_truth",
+   "powerSystem": "metaphysical",
    "tradition": "verist",
    "attribute": "mental",
    "axes": {
@@ -2088,7 +2120,9 @@
     "reveal",
     "strike"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_powerSystemWas": "reach_falsehood_truth",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2096,7 +2130,7 @@
    "name": "Perfect Erasure",
    "levelReq": 5,
    "energyCost": 14,
-   "powerSystem": "reach_falsehood_truth",
+   "powerSystem": "metaphysical",
    "tradition": "veilwright",
    "attribute": "social",
    "axes": {
@@ -2208,14 +2242,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Perfect Erasure",
-   "_idWas": "the_perfect_erasure"
+   "_idWas": "the_perfect_erasure",
+   "_powerSystemWas": "reach_falsehood_truth",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "wrong_wound",
    "name": "Wrong Wound",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_falsehood_truth",
+   "powerSystem": "metaphysical",
    "attribute": "practical",
    "axes": {
     "falsehood_truth": -0.6,
@@ -2339,14 +2375,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Wrong Wound",
-   "_idWas": "the_wrong_wound"
+   "_idWas": "the_wrong_wound",
+   "_powerSystemWas": "reach_falsehood_truth",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "unbearable_word",
    "name": "Unbearable Word",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_falsehood_truth",
+   "powerSystem": "metaphysical",
    "attribute": "social",
    "axes": {
     "falsehood_truth": 0.6,
@@ -2470,14 +2508,16 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Unbearable Word",
-   "_idWas": "the_unbearable_word"
+   "_idWas": "the_unbearable_word",
+   "_powerSystemWas": "reach_falsehood_truth",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "ordinary_face",
    "name": "Ordinary Face",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_falsehood_truth",
+   "powerSystem": "metaphysical",
    "attribute": "social",
    "axes": {
     "falsehood_truth": -0.6
@@ -2575,14 +2615,16 @@
    "plainly": "A social/puzzle action that makes you the person a place expects to see. Rated 5 of 10 on one target for about eight hours.",
    "_descriptionWas": "The Veilwrights' first and most-used craft: the small lie of fitting in, held steady.",
    "_nameWas": "The Ordinary Face",
-   "_idWas": "the_ordinary_face"
+   "_idWas": "the_ordinary_face",
+   "_powerSystemWas": "reach_falsehood_truth",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "useful_absence",
    "name": "Useful Absence",
    "levelReq": 1,
    "energyCost": 5,
-   "powerSystem": "reach_falsehood_truth",
+   "powerSystem": "metaphysical",
    "attribute": "practical",
    "axes": {
     "falsehood_truth": -0.5,
@@ -2682,14 +2724,16 @@
    "plainly": "A puzzle/social action that removes a thing from a place's account of itself. Rated 5 of 10 across a scope of 2 for about twelve hours.",
    "_descriptionWas": "The Veilwrights' hiding-craft, and it hides by omission rather than cover: nothing is concealed, something is simply not counted.",
    "_nameWas": "The Useful Absence",
-   "_idWas": "the_useful_absence"
+   "_idWas": "the_useful_absence",
+   "_powerSystemWas": "reach_falsehood_truth",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "standing_word",
    "name": "Standing Word",
    "levelReq": 1,
    "energyCost": 5,
-   "powerSystem": "reach_falsehood_truth",
+   "powerSystem": "metaphysical",
    "attribute": "social",
    "axes": {
     "falsehood_truth": 0.6,
@@ -2802,13 +2846,15 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Standing Word",
-   "_idWas": "the_standing_word"
+   "_idWas": "the_standing_word",
+   "_powerSystemWas": "reach_falsehood_truth",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "see_the_made_thing",
    "name": "See the Made Thing",
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": -0.3
@@ -2897,14 +2943,16 @@
     }
    ],
    "plainly": "A investigation/intellectual/magical action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: it reads Construction, not truth — a sincere person building nothing reads blank.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "the_plain_seeing",
    "name": "The Plain Seeing",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_falsehood_truth",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "falsehood_truth": 0.6
@@ -2988,7 +3036,9 @@
     }
    ],
    "plainly": "A puzzle/social action that strips distortion off what you are looking at. Rated 6 of 10 across a scope of 2 for about two hours.",
-   "_descriptionWas": "The Verists' first craft and the one every other Verist craft rests on. You cannot say the true thing until you can see it."
+   "_descriptionWas": "The Verists' first craft and the one every other Verist craft rests on. You cannot say the true thing until you can see it.",
+   "_powerSystemWas": "reach_falsehood_truth",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

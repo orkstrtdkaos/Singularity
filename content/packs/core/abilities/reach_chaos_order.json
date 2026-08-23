@@ -9,7 +9,7 @@
    "name": "Wildcraft",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "chaos_order": -0.5,
@@ -161,14 +161,16 @@
     "make",
     "transform"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "latticework",
    "name": "Latticework",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
     "chaos_order": 0.5,
@@ -315,7 +317,9 @@
     "make"
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "scatter",
@@ -391,7 +395,7 @@
      "gainAxes": []
     }
    ],
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "wild_nanite",
    "gated": "learned",
    "challengeTypes": [
     "FIGHT",
@@ -457,7 +461,9 @@
     "hinder",
     "move"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "truename_order",
@@ -521,7 +527,7 @@
      "gainAxes": []
     }
    ],
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "ordered_nanite",
    "gated": "learned",
    "challengeTypes": [
     "SOCIAL",
@@ -576,7 +582,9 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/fight/survive action that strengthens someone. Its strength is rated 3 out of 10 across a scope of 1, and lasts for about 2 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: order Imposed IS Not Order Accepted — what you right, someone may resent."
+   "plainly": "A social/fight/survive action that strengthens someone. Its strength is rated 3 out of 10 across a scope of 1, and lasts for about 2 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: order Imposed IS Not Order Accepted — what you right, someone may resent.",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "probability_tilt",
@@ -648,7 +656,7 @@
      "gainAxes": []
     }
    ],
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "wild_nanite",
    "gated": "learned",
    "challengeTypes": [
     "FIGHT",
@@ -712,7 +720,9 @@
     "empower",
     "foresee"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "fixed_point",
@@ -781,7 +791,7 @@
      ]
     }
    ],
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "ordered_nanite",
    "gated": "learned",
    "challengeTypes": [
     "FIGHT",
@@ -849,7 +859,9 @@
    "plainly": "A fight/survive action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 4 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 deepens anchorStrength; rank 3 adds to special. Limit: you must Hold Still.",
    "_nameWas": "The Fixed Point",
    "_idWas": "the_fixed_point",
-   "_wardTypes": "⛔ SNG-512. ⛔ The stable anchor in disorder — answers being moved, being re-timed, and being re-patterned.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ The stable anchor in disorder — answers being moved, being re-timed, and being re-patterned.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "riding_order",
@@ -904,7 +916,7 @@
      "gainAxes": []
     }
    ],
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "ordered_nanite",
    "gated": "learned",
    "challengeTypes": [
     "FIGHT",
@@ -959,7 +971,9 @@
     "command"
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
-   "_nameWas": "The Riding Order"
+   "_nameWas": "The Riding Order",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "long_odds",
@@ -996,7 +1010,7 @@
      "gainAxes": []
     }
    ],
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "wild_nanite",
    "gated": "learned",
    "tradition": "churnfolk",
    "nativeOrCombination": "native",
@@ -1046,14 +1060,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Long Odds",
-   "_idWas": "the_long_odds"
+   "_idWas": "the_long_odds",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "set_to_rights",
    "name": "Set to Rights",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
     "chaos_order": 0.4
@@ -1203,14 +1219,16 @@
     "restore",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "established_route",
    "name": "Established Route",
    "levelReq": 1,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
     "chaos_order": 0.3,
@@ -1355,14 +1373,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Established Route",
-   "_idWas": "the_established_route"
+   "_idWas": "the_established_route",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "maintained_order",
    "name": "Maintained Order",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
     "chaos_order": 0.5
@@ -1488,14 +1508,16 @@
    ],
    "plainly": "A logistics/leadership/endurance action that strengthens someone. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: requires Continuous Attention — it holds while you attend and not after.",
    "_nameWas": "The Maintained Order",
-   "_idWas": "the_maintained_order"
+   "_idWas": "the_maintained_order",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "wrong_target",
    "name": "Wrong Target",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "chaos_order": -0.4
@@ -1625,14 +1647,16 @@
    "plainly": "A combat/evasion/tactical action that reduces incoming harm. and absorbs 2 harm per hit (rank 1 armour), and lasts for about 3 hours Ranks: rank 2 deepens evasion; rank 3 adds to special. Limit: it works against Aimed and Organized harm — an area effect or a collapsing roof does not care where you are.",
    "_nameWas": "The Wrong Target",
    "_idWas": "the_wrong_target",
-   "_wardTypes": "⛔ SNG-512. ⛔ Aimed force misses. Answers anything AIMED and nothing that fills a space.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ Aimed force misses. Answers anything AIMED and nothing that fills a space.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "misdirect",
    "name": "Misdirect",
    "levelReq": 1,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "chaos_order": -0.3
@@ -1764,14 +1788,16 @@
    "_nameWas": "The Misdirect",
    "_idWas": "the_misdirect",
    "obscure": true,
-   "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. ⛔ a false signal convincing enough to buy a move — Chaos's obscure\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY."
+   "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. ⛔ a false signal convincing enough to buy a move — Chaos's obscure\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "catch_as_catch_can",
    "name": "Catch as Catch Can",
    "levelReq": 1,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "chaos_order": -0.3
@@ -1891,14 +1917,16 @@
      "class": "soft"
     }
    ],
-   "plainly": "A survival/endurance/logistics action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it finds Enough, never Plenty."
+   "plainly": "A survival/endurance/logistics action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it finds Enough, never Plenty.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "the_long_odds_come_in",
    "name": "The Long Odds Come In",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "chaos_order": -0.6,
@@ -2014,14 +2042,16 @@
     "break",
     "hinder"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "predicted_man",
    "name": "Predicted Man",
    "levelReq": 1,
    "energyCost": 5,
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "chaos_order": 0.6,
@@ -2133,14 +2163,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Predicted Man",
-   "_idWas": "the_predicted_man"
+   "_idWas": "the_predicted_man",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "loose_thread",
    "name": "Loose Thread",
    "levelReq": 1,
    "energyCost": 3,
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "chaos_order": -0.6
@@ -2257,14 +2289,16 @@
    "_nameWas": "The Loose Thread",
    "_idWas": "the_loose_thread",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ CHAOS'S SENSE — where and roughly when a thing comes apart\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ CHAOS'S SENSE — where and roughly when a thing comes apart\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "the_way_out",
    "name": "The Way Out",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "chaos_order": -0.5,
@@ -2376,14 +2410,16 @@
     "reveal",
     "conceal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "ordered_record",
    "name": "Ordered Record",
    "levelReq": 1,
    "energyCost": 3,
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "chaos_order": 0.6
@@ -2503,14 +2539,16 @@
    "_nameWas": "The Ordered Record",
    "_idWas": "the_ordered_record",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ ORDER'S SENSE — a system's rules and load-bearing points\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ ORDER'S SENSE — a system's rules and load-bearing points\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "working_order",
    "name": "Working Order",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "chaos_order": 0.6,
@@ -2611,7 +2649,9 @@
    ],
    "plainly": "A social/puzzle action that structures a disordered effort so it holds without you. Rated 6 of 10 across a scope of 3 for about three days.",
    "_nameWas": "The Working Order",
-   "_idWas": "the_working_order"
+   "_idWas": "the_working_order",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "chaos_sense",
@@ -2661,7 +2701,7 @@
      "gains": "deepen"
     }
    ],
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "wild_nanite",
    "gated": "learned",
    "challengeTypes": [
     "INVESTIGATE",
@@ -2710,7 +2750,9 @@
     }
    ],
    "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens foresight; rank 3 adds to special. Limit: feel, Not Detail — the truly stable reads quiet.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "order_sense",
@@ -2756,7 +2798,7 @@
      "gains": "deepen"
     }
    ],
-   "powerSystem": "reach_chaos_order",
+   "powerSystem": "ordered_nanite",
    "gated": "learned",
    "challengeTypes": [
     "INVESTIGATE",
@@ -2810,7 +2852,9 @@
     }
    ],
    "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10 across a scope of 1, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: reads Structure, not Intent.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_chaos_order",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

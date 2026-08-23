@@ -9,7 +9,7 @@
    "name": "Spanwork",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "space_time": -0.5,
@@ -123,14 +123,16 @@
     }
    ],
    "plainly": "A explore/chase/fight action that moves you or someone else. Its strength is rated 5 out of 10 It affects 1 target. Range is 40. Ranks: rank 2 adds to special; rank 3 extends targets. Limit: the Ground IS Still Crossed at r1 — what is on it still meets you.",
-   "_descriptionWas": "The space-pole mastery: distance as a material to be worked. To a Horizon-Walker, 'far' is a claim, and claims can be argued with."
+   "_descriptionWas": "The space-pole mastery: distance as a material to be worked. To a Horizon-Walker, 'far' is a claim, and claims can be argued with.",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "hourcraft",
    "name": "Hourcraft",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "space_time": 0.5,
@@ -261,14 +263,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ SPAN'S SENSE — perceive the moment whole while it is happening\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ SPAN'S SENSE — perceive the moment whole while it is happening\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "long_reach",
    "name": "Long Reach",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "space_time": -0.4,
@@ -392,14 +396,16 @@
    ],
    "plainly": "A combat/ranged/tactical action that deals damage. It rolls 2d6. Range is 20. Ranks: rank 2 deepens damage; rank 3 extends range. Limit: it extends Reach, not power — the same blow, from further.",
    "_nameWas": "The Long Reach",
-   "_idWas": "the_long_reach"
+   "_idWas": "the_long_reach",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "fresh_horizon",
    "name": "Fresh Horizon",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "space_time": -0.3
@@ -524,14 +530,16 @@
    ],
    "plainly": "A healing/morale/endurance action that restores health. It rolls 2d4+1 It affects 1 target Ranks: rank 2 extends targets; rank 3 adds to special. Limit: iT Requires Actually Going — a person who cannot move gets nothing.",
    "_nameWas": "The Fresh Horizon",
-   "_idWas": "the_fresh_horizon"
+   "_idWas": "the_fresh_horizon",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "kept_distance",
    "name": "Kept Distance",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "space_time": -0.3
@@ -660,14 +668,16 @@
    "plainly": "A combat/evasion/tactical action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 deepens evasion; rank 3 extends targets. Limit: it needs Somewhere TO GO — cornered, it is worth nothing.",
    "_nameWas": "The Kept Distance",
    "_idWas": "the_kept_distance",
-   "_wardTypes": "⛔ SNG-512. Range collapses what needs to reach you. Useless against anything that does not.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. Range collapses what needs to reach you. Useless against anything that does not.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "made_crossing",
    "name": "Made Crossing",
    "levelReq": 3,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "practical",
    "axes": {
     "space_time": -0.4
@@ -795,14 +805,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Made Crossing",
-   "_idWas": "the_made_crossing"
+   "_idWas": "the_made_crossing",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "land_knowledge",
    "name": "Land Knowledge",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "space_time": -0.3
@@ -931,14 +943,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Land Knowledge",
-   "_idWas": "the_land_knowledge"
+   "_idWas": "the_land_knowledge",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "road_ahead",
    "name": "Road Ahead",
    "levelReq": 1,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "space_time": -0.3
@@ -1056,14 +1070,16 @@
    ],
    "plainly": "A endurance/survival/travel action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends duration. Limit: it needs Ground Ahead — this sustains Movement, not a siege.",
    "_nameWas": "The Road Ahead",
-   "_idWas": "the_road_ahead"
+   "_idWas": "the_road_ahead",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "wrong_moment",
    "name": "Wrong Moment",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "space_time": 0.4,
@@ -1192,14 +1208,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Wrong Moment",
-   "_idWas": "the_wrong_moment"
+   "_idWas": "the_wrong_moment",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "given_time",
    "name": "Given Time",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "space_time": 0.4
@@ -1319,14 +1337,16 @@
    ],
    "plainly": "A healing/logistics/endurance action that restores health. It rolls 2d4+2 It affects 1 target Ranks: rank 2 deepens duration; rank 3 extends duration. Limit: iT Gives Time, IT Does Not Heal — someone else still has to do the work.",
    "_nameWas": "The Given Time",
-   "_idWas": "the_given_time"
+   "_idWas": "the_given_time",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "wasted_moment",
    "name": "Wasted Moment",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "space_time": 0.3
@@ -1451,14 +1471,16 @@
    "_idWas": "the_wasted_moment",
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. foreknowledge of timing — reads the attack forming\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
-   "_wardTypes": "⛔ SNG-512. Foreknowledge of timing answers what arrives at a time.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. Foreknowledge of timing answers what arrives at a time.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "shaped_duration",
    "name": "Shaped Duration",
    "levelReq": 3,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "space_time": 0.5
@@ -1577,14 +1599,16 @@
     "note": "NO PREP. Erik's principle applied in the negative: this craft is ABOUT time and so its prose reads as a cost, but shaping how long something takes is an act, not a build. The detector flagged it and the judgement rejects it — which is the process working."
    },
    "_nameWas": "The Shaped Duration",
-   "_idWas": "the_shaped_duration"
+   "_idWas": "the_shaped_duration",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "opened_moment",
    "name": "Opened Moment",
    "levelReq": 3,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "space_time": 0.5
@@ -1698,14 +1722,16 @@
    ],
    "plainly": "A stealth/navigation/tactical action that moves you or someone else. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about an hour. Range is 5. Ranks: rank 2 deepens access; rank 3 extends targets. Limit: it moves you through Time'S gaps, not space's — a locked door is still locked.",
    "_nameWas": "The Opened Moment",
-   "_idWas": "the_opened_moment"
+   "_idWas": "the_opened_moment",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "long_watch",
    "name": "Long Watch",
    "levelReq": 1,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "space_time": 0.3
@@ -1820,7 +1846,9 @@
    ],
    "plainly": "A endurance/stealth/hardship action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about 2 days Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it sustains Waiting, not moving — a march gets nothing from it.",
    "_nameWas": "The Long Watch",
-   "_idWas": "the_long_watch"
+   "_idWas": "the_long_watch",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1828,7 +1856,7 @@
    "name": "Far Step",
    "levelReq": 4,
    "energyCost": 11,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "tradition": "horizon",
    "attribute": "physical",
    "axes": {
@@ -1914,7 +1942,9 @@
    "plainly": "A travel action that moves you or someone else. Its strength is rated 7 out of 10 It affects 1 target. Range is 500. Ranks: rank 2 extends targets. Limit: it needs a Seen OR Known place at r1.",
    "_descriptionWas": "The Horizon art of the far step — collapsing a great distance into a single stride, arriving where the eye could only reach. The wandering peoples' deepest gift: no place is truly far.",
    "_nameWas": "The Far Step",
-   "_idWas": "the_far_step"
+   "_idWas": "the_far_step",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1922,7 +1952,7 @@
    "name": "Edge of the Map",
    "levelReq": 5,
    "energyCost": 13,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "tradition": "horizon",
    "attribute": "physical",
    "axes": {
@@ -1993,7 +2023,9 @@
    ],
    "plainly": "A travel action that moves you or someone else. Its strength is rated 9 out of 10 across a scope of 4. Range is 9999 Limit: iT Costs Nearly All You Have.",
    "_nameWas": "The Edge of the Map",
-   "_idWas": "the_edge_of_the_map"
+   "_idWas": "the_edge_of_the_map",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2001,7 +2033,7 @@
    "name": "Held Hour",
    "levelReq": 4,
    "energyCost": 12,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "tradition": "hourkeeper",
    "attribute": "mental",
    "axes": {
@@ -2093,7 +2125,9 @@
    "plainly": "A defend action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 2, and lasts for about an hour Ranks: rank 2 extends scope. Limit: iT Cannot Rewind, Only Delay The Passing.",
    "_descriptionWas": "The Hourkeeper art of the held hour — keeping a single hour open past its natural passing, a pocket of kept time in which the necessary can be finished. The timekeepers' patient gift.",
    "_nameWas": "The Held Hour",
-   "_idWas": "the_held_hour"
+   "_idWas": "the_held_hour",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2101,7 +2135,7 @@
    "name": "Stepped Span",
    "levelReq": 4,
    "energyCost": 12,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "tradition": "horizon",
    "attribute": "mental",
    "axes": {
@@ -2183,7 +2217,9 @@
    ],
    "plainly": "A travel and explore action. A bridge forms one pace ahead of your foot and unmakes behind you, so you walk across open air in a straight line at ordinary walking pace. It removes obstacles rather than distance — a leg blocked by a gorge, flood or closed border becomes passable, but takes exactly as many days as walking it would. At rank 2 you can hold it for a whole crossing. It carries you and what you can lift, not a group.",
    "_nameWas": "The Stepped Span",
-   "_idWas": "the_stepped_span"
+   "_idWas": "the_stepped_span",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2191,7 +2227,7 @@
    "name": "Borrowed Hour",
    "levelReq": 5,
    "energyCost": 15,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "tradition": "hourkeeper",
    "attribute": "mental",
    "axes": {
@@ -2293,14 +2329,16 @@
    ],
    "plainly": "A travel action, and at rank 3 also an attack. You take time out of the things around you — plants bud and wither, timber greys, stone weathers — and spend it on the road, crossing a leg in a fraction of its days. It needs things nearby with time in them, so bare salt or dead rock give almost nothing. What you drew from stays aged: crops fail, wood rots, and the people who live there notice and know what did it. At rank 2 you draw from a whole stretch and cross a route in days rather than weeks. At rank 3 you can take the time from a person instead, who ages the difference while you travel on it, which is a recognised attack and costs you standing.",
    "_nameWas": "The Borrowed Hour",
-   "_idWas": "the_borrowed_hour"
+   "_idWas": "the_borrowed_hour",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "folded_pace",
    "name": "Folded Pace",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "space_time": -0.6,
@@ -2415,14 +2453,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Folded Pace",
-   "_idWas": "the_folded_pace"
+   "_idWas": "the_folded_pace",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "spent_hour",
    "name": "Spent Hour",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "space_time": 0.6,
@@ -2542,14 +2582,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Spent Hour",
-   "_idWas": "the_spent_hour"
+   "_idWas": "the_spent_hour",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "kept_count",
    "name": "Kept Count",
    "levelReq": 1,
    "energyCost": 3,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "space_time": 0.6
@@ -2649,14 +2691,16 @@
    "plainly": "A puzzle/social action that gives the specific remaining time on anything already running. Rated 5 of 10 across a scope of 2 for about six hours.",
    "_descriptionWas": "The Hourkeepers' first craft and the reason valleys keep one. Everyone else estimates.",
    "_nameWas": "The Kept Count",
-   "_idWas": "the_kept_count"
+   "_idWas": "the_kept_count",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "stretched_hour",
    "name": "Stretched Hour",
    "levelReq": 1,
    "energyCost": 5,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "space_time": 0.6,
@@ -2764,14 +2808,16 @@
    "_descriptionWas": "The Hourkeepers' giving-craft, and the one they are begged for. It is the exact inverse of the Spent Hour and costs the same in the other direction.",
    "_nameWas": "The Stretched Hour",
    "_idWas": "the_stretched_hour",
-   "_wardTypes": "⛔ SNG-512. More duration than a thing has. Temporal, exactly.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. More duration than a thing has. Temporal, exactly.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "known_way",
    "name": "Known Way",
    "levelReq": 1,
    "energyCost": 3,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "attribute": "practical",
    "axes": {
     "space_time": -0.6
@@ -2885,14 +2931,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Known Way",
-   "_idWas": "the_known_way"
+   "_idWas": "the_known_way",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "shortened_road",
    "name": "Shortened Road",
    "levelReq": 1,
    "energyCost": 5,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "space_time": -0.6
@@ -2996,12 +3044,14 @@
    ],
    "plainly": "A puzzle/social action that halves a journey's time and cost for the whole party. Rated 6 of 10 across a scope of 3 for about two days.",
    "_nameWas": "The Shortened Road",
-   "_idWas": "the_shortened_road"
+   "_idWas": "the_shortened_road",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "hour_sense",
    "name": "Hour-Sense",
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "space_time": 0.3
@@ -3092,12 +3142,14 @@
     }
    ],
    "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens temporalDepth; rank 3 extends timeReach. Limit: when, Never What — the hour is knowable; The Event IS Not.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "way_sense",
    "name": "Way-Sense",
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "space_time": -0.3
@@ -3192,7 +3244,9 @@
     }
    ],
    "plainly": "A explore/chase action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 100. Ranks: rank 2 deepens navigation; rank 3 extends range. Limit: knowing The Way IS Not Knowing What IS ON IT.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -3200,7 +3254,7 @@
    "name": "The Long Foreseeing",
    "levelReq": 5,
    "energyCost": 14,
-   "powerSystem": "reach_space_time",
+   "powerSystem": "precursor",
    "tradition": "hourkeeper",
    "attribute": "mental",
    "axes": {
@@ -3263,7 +3317,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A investigate action that reveals information or sets up a later action. Its strength is rated 9 out of 10, and lasts for about an hour Limit: iT Costs Nearly All You Have."
+   "plainly": "A investigate action that reveals information or sets up a later action. Its strength is rated 9 out of 10, and lasts for about an hour Limit: iT Costs Nearly All You Have.",
+   "_powerSystemWas": "reach_space_time",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -1402,7 +1402,11 @@
      "ongoingHarm": {
       "type": "decay"
      },
-     "_ongoingHarm": "⛔ SNG-513. ⛔ 'THEY CANNOT RALLY, CANNOT STEADY, CANNOT STOP BLEEDING, for as long as you hold it.' Authored as anti-healing and unread until now.\n⚠️ `mechanic.ongoingHarm` reduces a heal. healing_intent.json §5: A HEAL IS REDUCED BY ACTIVE ONGOING HARM, NEVER BY ARMOUR. Nobody armours against being mended; a wound held open resists it."
+     "_ongoingHarm": "⛔ SNG-513. ⛔ 'THEY CANNOT RALLY, CANNOT STEADY, CANNOT STOP BLEEDING, for as long as you hold it.' Authored as anti-healing and unread until now.\n⚠️ `mechanic.ongoingHarm` reduces a heal. healing_intent.json §5: A HEAL IS REDUCED BY ACTIVE ONGOING HARM, NEVER BY ARMOUR. Nobody armours against being mended; a wound held open resists it.",
+     "persistUntilHealed": {
+      "condition": "bleeding"
+     },
+     "_persistUntilHealed": "⛔ SNG-532. ⛔ 'They cannot rally, cannot steady, CANNOT STOP BLEEDING.' Stops when the regard stops — ⚠️ BUT THE BLEEDING IT OPENED DOES NOT.\n⚠️ CCODE: 'persistUntilHealed is still authored on NOTHING — Grey Hand's design has been one field short of true for two rounds now.' ⛔ HE SHIPPED THE READER AND I NEVER FED IT — the same shape as the 27 blocks one level below their reader, arriving from the other side."
     },
     {
      "rank": 3,

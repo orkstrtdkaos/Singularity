@@ -103,7 +103,11 @@
     "wardTypes": [
      "physical",
      "abstraction"
-    ]
+    ],
+    "crit": {
+     "success": "You know the thing so exactly that its flaws become instructions.",
+     "failure": "It is exactly what it appears to be, and you have spent a minute proving it."
+    }
    },
    "rankDeltas": [
     {
@@ -447,7 +451,11 @@
     "wardTypes": [
      "physical",
      "abstraction"
-    ]
+    ],
+    "crit": {
+     "success": "The figure judges better than you would have.",
+     "failure": "The figure judges. It was not the judgment you would have made."
+    }
    },
    "rankDeltas": [
     {
@@ -1073,7 +1081,11 @@
     },
     "plus": 2,
     "marginFloorPer": 0.03,
-    "note": "T-IV, damaging"
+    "note": "T-IV, damaging",
+    "crit": {
+     "success": "You find the one stone and the whole structure remembers it was only ever leaning.",
+     "failure": "You strike a member that was carrying nothing, loudly."
+    }
    },
    "rankDeltas": [
     {
@@ -1164,7 +1176,14 @@
     },
     "plus": 6,
     "marginFloorPer": 0.03,
-    "scope": 4
+    "scope": 4,
+    "crit": {
+     "success": {
+      "text": "The joins forget in order, top to bottom, and it comes apart like a thing being put away.",
+      "chance": 3
+     },
+     "failure": "You unmake the wrong wall."
+    }
    },
    "rankDeltas": [
     {
@@ -1647,7 +1666,11 @@
     "plus": 0,
     "range": 10,
     "targets": 1,
-    "marginFloorPer": 0.02
+    "marginFloorPer": 0.02,
+    "crit": {
+     "success": "The line resolves through the thing rather than across it, and the two halves stand a moment before parting.",
+     "failure": "The figure closes on itself. You have drawn a very good circle."
+    }
    },
    "intensity": {
     "conserve": "a short line — a cut, not a parting",
@@ -1804,7 +1827,11 @@
     },
     "plus": 0,
     "targets": 1,
-    "marginFloorPer": 0.02
+    "marginFloorPer": 0.02,
+    "crit": {
+     "success": "More comes down than you meant, and it comes down where you said.",
+     "failure": "It comes down. You are under some of it."
+    }
    },
    "intensity": {
     "conserve": "one stone, honestly thrown",
@@ -2316,5 +2343,6 @@
  "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas.",
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",
  "_sng510b": "⛔ SNG-510b: nine MORE dangling openers, found by my own verification and NOT MINE — 'Extend it to others', 'Hold it for a day', 'They do not merely feel it'. ⚠️ SAME FAULT, PRE-DATING the rework: a rank whose first words refer to a rank the model is not sent.",
- "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation."
+ "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation.",
+ "_sng523": "⛔ SNG-523: `mechanic.crit` authored. ⚠️ `critFor` HAS EXISTED, WITH A PER-CRAFT CAP AND A STRING SHORTHAND FOR AUTHORS, AND HAS NEVER HAD AN INPUT — 0 of 373. Every critical in the game was generic.\n⛔ BOTH HALVES AUTHORED: `success` is what the craft's best case LOOKS LIKE; `failure` is its disaster. ⚠️ MOST CARRY TEXT ONLY — `chance` is opt-in and shifts nothing unless asked for, so a craft can say what its disaster looks like without claiming it happens more often."
 }

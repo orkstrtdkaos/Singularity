@@ -1103,7 +1103,7 @@
      "rank": 1,
      "name": "Correct Assessment",
      "grants": "Diagnose exactly what's wrong with a broken body, object, or system and apply the precise intervention — no guessing, no waste.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "You must be able to examine it. A vague fault gets a vague fix.",
      "functions": [
       "mend"
      ],
@@ -1120,7 +1120,7 @@
      "rank": 2,
      "name": "Structural Repair",
      "grants": "Restore not just function but the underlying conditions for continued function — the body that heals cleanly, the mechanism that runs without further adjustment.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ The conditions for continued function — which may require changing things nobody asked you to change.",
      "functions": [
       "mend",
       "heal",
@@ -1143,7 +1143,7 @@
      "rank": 3,
      "name": "Full Restoration",
      "grants": "Return a thing fully to its intended state — a person to health, a plan to viability, a structure to integrity — through methodical, exhaustive work.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⛔ ITS INTENDED STATE, not the state it was in. Those differ more often than people expect.",
      "functions": [
       "mend",
       "heal",
@@ -1263,7 +1263,7 @@
      "rank": 1,
      "name": "Protocol Path",
      "grants": "Find the lawful, structured way through a guarded or ordered space — the correct credentials, the right corridor, the official route that no one thinks to deny.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⛔ THERE MUST BE AN ORDER TO MOVE THROUGH. Chaos has no lawful way and this finds none.",
      "functions": [
       "open"
      ],
@@ -1280,7 +1280,7 @@
      "rank": 2,
      "name": "Seam-Walker",
      "grants": "Navigate any sufficiently structured system — a city's hierarchy, a fortress's regulations, a court's protocols — using its own rules to go where you need to go.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "The system must be sufficiently structured. A place run on whim gives you nothing.",
      "functions": [
       "open",
       "travel",
@@ -1301,7 +1301,7 @@
      "rank": 3,
      "name": "Inside Line",
      "grants": "Move through a system as if you designed it — through the parts only insiders know, at the speed the structure permits at its best, without a door that won't open for you.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ You move as an insider — and insiders are accountable to the system they move in.",
      "functions": [
       "open",
       "travel",
@@ -1415,7 +1415,7 @@
      "rank": 1,
      "name": "Kept Running",
      "grants": "Keep an ordered structure — a camp's discipline, a route's safety, an agreement's terms — functioning under the pressure that would normally cause it to drift or collapse.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "The structure must already exist. You maintain; you do not found.",
      "functions": [
       "sustain"
      ],
@@ -1428,7 +1428,7 @@
      "rank": 2,
      "name": "Against Entropy",
      "grants": "Maintain order in a decaying situation across days — a failing supply line, a fragmenting group, a plan that keeps getting attacked — through constant, precise intervention.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ Against DECAY, not against a determined breaker.",
      "functions": [
       "sustain",
       "bind"
@@ -1446,7 +1446,7 @@
      "rank": 3,
      "name": "Standing Order",
      "grants": "A structure you maintain simply does not collapse while you attend to it — the siege holds, the treaty stands, the organization functions — for as long as the task requires.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⛔ WHILE YOU ATTEND TO IT. Look away and it resumes falling from where it was.",
      "functions": [
       "sustain",
       "bind"
@@ -1551,7 +1551,7 @@
      "rank": 1,
      "name": "Unpredictable",
      "grants": "Move so erratically that aimed attacks lose you — not blocking, not armoring, just not being where they land.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "Aimed attacks only. An area, a collapse or a spreading thing finds you exactly where you are.",
      "functions": [
       "move",
       "resist"
@@ -1565,7 +1565,7 @@
      "rank": 2,
      "name": "Moving Gap",
      "grants": "Make yourself so hard to anticipate that organized attempts to harm you dissolve — they are always aiming at where you were a moment ago.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ Organized attempts dissolve. Disorganized ones occasionally connect by accident.",
      "functions": [
       "move",
       "resist"
@@ -1580,7 +1580,7 @@
      "rank": 3,
      "name": "Chaos Armor",
      "grants": "The disorder around you actively deflects organized harm — not just you moving unpredictably, but the situation itself refusing to cooperate with anyone trying to fix you in place.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⛔ The disorder deflects — including allies' aim, and their plans.",
      "functions": [
       "move",
       "resist",
@@ -1690,7 +1690,7 @@
      "rank": 1,
      "name": "False Signal",
      "grants": "Create a distraction or misdirection convincing enough to buy one clean move — for you, or for a friend.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⛔ ONE CLEAN MOVE. It buys a beat, not an escape.",
      "functions": [
       "deceive",
       "move"
@@ -1705,7 +1705,7 @@
      "rank": 2,
      "name": "Wrong Trail",
      "grants": "Plant a false trail so credible that pursuit follows it seriously, or misdirect a group's full attention at exactly the moment it matters — and a group looking the wrong way is weakened for those moments: slow to turn, slow to answer, and behind whatever happens next.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "The trail must be credible from where they are standing. A bad one tells them you are misdirecting.",
      "functions": [
       "deceive",
       "move",
@@ -1724,7 +1724,7 @@
      "rank": 3,
      "name": "Wrong Threat",
      "grants": "Introduce a misdirection so fundamental — the wrong door, the wrong figure, the wrong danger — that the opposition organizes around something that isn't there and can't recover before it's over.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ So fundamental it reorders their whole approach — including in ways you did not plan.",
      "functions": [
       "deceive",
       "move",
@@ -1830,7 +1830,7 @@
      "rank": 1,
      "name": "Flexible Need",
      "grants": "Sustain yourself in chaotic, resource-scarce conditions — find food, shelter, tools, and rest in circumstances where others have run dry.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "There must be SOMETHING available. It finds; it does not create.",
      "functions": [
       "sustain"
      ],
@@ -1843,7 +1843,7 @@
      "rank": 2,
      "name": "Group Scrounging",
      "grants": "Sustain a group in chaotic conditions through constant creative improvisation — never enough of anything, always just enough.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "The group must move with you and take what is found. A party that will not eat what there is starves politely.",
      "functions": [
       "sustain"
      ],
@@ -1858,7 +1858,7 @@
      "rank": 3,
      "name": "Chaos Supply",
      "grants": "The disorder that strips others bare is your supply line. In total disorder, you and yours have what you need — because you have learned to need what the chaos has.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ ENDURING, NOT THRIVING. Nobody gets comfortable.",
      "functions": [
       "sustain",
       "restore"
@@ -2861,5 +2861,6 @@
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
  "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
- "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
+ "_sng525": "⛔ SNG-525: bounds authored. These ranks carried `⚠️ BOUND NOT AUTHORED` — flagged in SNG-484 rather than bulk-written, because 210 bounds I had not thought about would have read as considered and not been. ⚠️ EACH IS DERIVED FROM THE CRAFT'S OWN GRANT TEXT and answers one of the four questions (§32.14): what must be present · what is out of reach · how many, how often · what it does not touch."
 }

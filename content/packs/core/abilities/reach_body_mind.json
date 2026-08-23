@@ -606,8 +606,8 @@
     "analyze",
     "precision"
    ],
-   "narrationHints": "They stand still for a long moment doing nothing visible, and then work without pausing once, and there are no offcuts.",
-   "description": "Model a thing so completely in your head that the making is only following the thought — and build it faster and truer than your tools should allow.",
+   "narrationHints": "They do not describe it. The shape is simply there between everyone, and the argument that had been going for an hour resolves in four words because now people are pointing at the same thing.",
+   "description": "Hold a thing's true working shape in mind — and put it where others can see it, turn it, and point at the part that is wrong.",
    "notFor": [],
    "tradition": "cogitant",
    "harmRung": "none",
@@ -627,7 +627,7 @@
      "functions": [
       "make"
      ],
-     "grants": "⛔ ONE ITEM, OR A SPACE YOU CAN STAND IN AND SEE. A lock, a brace, a splint, a door, a cart-repair, a small room re-laid. You need no plan and you waste no material.",
+     "grants": "⛔ HOLD ONE THING'S WORKING SHAPE AND SHOW IT — a lock, a brace, a splint, a door, a cart-repair, a small room. ⚠️ IT IS NOT A DESCRIPTION. The shape stands where the others can see it, and they can point at the part they mean.",
      "cannot": "One object or one small space at a time. You must be able to examine it.",
      "gains": "broaden",
      "harmRung": "none",
@@ -641,7 +641,7 @@
       "make",
       "mend"
      ],
-     "grants": "⛔ HOLD A WORKING SYSTEM IN MIND — a machine with parts that move against each other, a building, a body, a workshop yard. Diagnose its faults and redesign it correctly.",
+     "grants": "⛔ HOLD AND SHOW A WORKING SYSTEM — a machine with parts moving against each other, a building, a body, a workshop yard. ⚠️ You can run it forward and let people watch it fail in the place it is going to fail.",
      "cannot": "You must have access to the whole of it; a system half-hidden is modelled half-wrong.",
      "gains": "broaden",
      "harmRung": "none",
@@ -659,7 +659,7 @@
       "make",
       "mend"
      ],
-     "grants": "⛔ HOLD A WORKING WITH MANY INTERACTING PARTS — a mill and its race, a fortification and its approaches — AND HAND THE MODEL TO OTHERS: anyone you brief can build their piece correctly without understanding the whole.",
+     "grants": "⛔ HOLD A WORKING WITH MANY INTERACTING PARTS — a mill and its race, a fortification and its approaches — AND HAND THE MODEL TO OTHERS: anyone you brief can build their piece correctly without understanding the whole. ⚠️ THAT LAST IS A PROJECT: it banks per tick and completes on a threshold.",
      "cannot": "One such working at a time, and you must be able to get around the whole of it.",
      "gains": "broaden",
      "harmRung": "none",
@@ -770,9 +770,9 @@
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "projectThreshold": 21,
-   "downtime": true,
-   "projectTicks": true,
-   "_projectThreshold": "⛔ SNG-527, CCODE'S QUESTION: 'built_system carries duration 8760 — a year in hours — and that is not what I used. If a project's real length is meant to come from `duration` rather than `magnitude`, then a Built System is a YEAR'S work and not twelve days.'\n⛔ NEITHER. `duration` IS HOW LONG THE RESULT LASTS; `projectThreshold` IS HOW LONG THE WORK TAKES. ⚠️ SOUND READ PROVES IT: `duration: 4` is four rounds of reading, and its threshold is ten days. The same field cannot mean both.\n⚠️ AUTHORED RATHER THAN DERIVED, WHICH IS WHY CCODE ASKED. ⛔ THREE WEEKS, and it becomes a project. Erik ruled Built System a project after I judged it on scene frequency; Working Model r3 — 'hand the model to others, anyone you brief can build their piece' — is the same mistake I have not yet corrected. ⚠️ DELEGATION IS THE PROJECT."
+   "projectTicks": "r3",
+   "_projectThreshold": "⛔ SNG-527, CCODE'S QUESTION: 'built_system carries duration 8760 — a year in hours — and that is not what I used. If a project's real length is meant to come from `duration` rather than `magnitude`, then a Built System is a YEAR'S work and not twelve days.'\n⛔ NEITHER. `duration` IS HOW LONG THE RESULT LASTS; `projectThreshold` IS HOW LONG THE WORK TAKES. ⚠️ SOUND READ PROVES IT: `duration: 4` is four rounds of reading, and its threshold is ten days. The same field cannot mean both.\n⚠️ AUTHORED RATHER THAN DERIVED, WHICH IS WHY CCODE ASKED. ⛔ THREE WEEKS, and it becomes a project. Erik ruled Built System a project after I judged it on scene frequency; Working Model r3 — 'hand the model to others, anyone you brief can build their piece' — is the same mistake I have not yet corrected. ⚠️ DELEGATION IS THE PROJECT.",
+   "_notJustAProject": "⛔ SNG-528, ERIK: 'I like to use Working Model as a skill IN THE STORY too. It brings up the shape of what you're talking about really nicely. Silas combines it with Shadow Work to make a SHADOW MODEL — you could combine it with light or other skills as well. IT'S NOT JUST A PROJECT SKILL.'\n⛔ AND I HAD BROKEN THAT. Marking the whole ability `downtime: true` removes the in-scene use entirely. ⚠️ `projectTicks` IS NOW SCOPED TO r3 — the delegation half — and r1/r2 resolve in a scene as they always did.\n⚠️ THE READING ALSO CHANGED, AND ERIK'S PHRASE IS WHY: 'it brings up THE SHAPE of what you're talking about'. This is not diagnosis — IT IS MAKING A THING VISIBLE AND POINTABLE-AT. Which is exactly why it combines: a model needs a medium, and shadow, light and figure-work all supply one."
   },
   {
    "id": "shaped_body",

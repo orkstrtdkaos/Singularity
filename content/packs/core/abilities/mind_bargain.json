@@ -28,7 +28,11 @@
    "mechanic": {
     "magnitude": 5,
     "duration": 3,
-    "scope": 2
+    "scope": 2,
+    "crit": {
+     "success": "You name their number before they do and they take it as a kindness.",
+     "failure": "You price it exactly. They realise you can, and never negotiate in front of you again."
+    }
    },
    "challengeTypes": [
     "SOCIAL",
@@ -115,5 +119,6 @@
    "_authored": "⛔ SNG-475, REVISED. Erik: 'r2 is NORMAL BARTERING — we should make it a skill that lets you USE OTHER TRADITION'S MONEY AT FULL VALUE here. And r3 should be used for MASSIVE BENEFIT — like 50% price or 2 FOR 1 kind of deals. That's the only reason someone would take this skill.'\n⚠️ HE IS RIGHT ON BOTH. My r2 was 'find the substitute they would accept', which is what every trader does. My r3 was 'know their walk-away' — INFORMATION, and §32.11 Q4 says information the GM would supply is not a skill.\n⛔ r2 IS NOW AN ECONOMIC MECHANIC: currencies are tradition-specific and lose most of their worth outside the people who minted them. Making them fungible is a real power and it implies a real world. ⛔ r3 IS A PRICE, NOT A FACT — half, or two for one, bounded once per counterparty per season.",
    "_rationalising": "⛔ SNG-477. Erik: 'Stop this way of thinking — this is a GAME and this is basically a MAGIC SKILL. It doesn't need to make complete sense.'\n⚠️ I HAD WRITTEN 'and they do not feel cheated, WHICH IS WHY IT WORKS TWICE' — a clause justifying why a magic bargain would be socially sustainable. ⛔ NOBODY ASKED. The skill does the thing; the bound says once per season; that is the whole rule."
   }
- ]
+ ],
+ "_sng523": "⛔ SNG-523: `mechanic.crit` authored. ⚠️ `critFor` HAS EXISTED, WITH A PER-CRAFT CAP AND A STRING SHORTHAND FOR AUTHORS, AND HAS NEVER HAD AN INPUT — 0 of 373. Every critical in the game was generic.\n⛔ BOTH HALVES AUTHORED: `success` is what the craft's best case LOOKS LIKE; `failure` is its disaster. ⚠️ MOST CARRY TEXT ONLY — `chance` is opt-in and shifts nothing unless asked for, so a craft can say what its disaster looks like without claiming it happens more often."
 }

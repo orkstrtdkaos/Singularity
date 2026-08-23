@@ -9,7 +9,7 @@
    "name": "Quicken the Ground",
    "levelReq": 3,
    "energyCost": 7,
-   "powerSystem": "wild_nanite",
+   "powerSystem": "living_current",
    "tradition": "rootkin",
    "attribute": "practical",
    "axes": {
@@ -130,8 +130,7 @@
     "sustain"
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_powerSystemWas": "living_current",
-   "_powerSystemFix": "⛔ SNG-524. Was `living_current` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `living_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-131), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'."
   },
   {
    "schemaVersion": 1,
@@ -139,7 +138,7 @@
    "name": "Green Road",
    "levelReq": 4,
    "energyCost": 11,
-   "powerSystem": "wild_nanite",
+   "powerSystem": "living_current",
    "tradition": "rootkin",
    "attribute": "practical",
    "axes": {
@@ -230,8 +229,7 @@
    "plainly": "An action that moves you or someone else. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about 2 hours. Range is 40. Ranks: rank 2 extends targets. Limit: it reaches Only Where Life Runs Unbroken.",
    "_nameWas": "The Green Road",
    "_idWas": "the_green_road",
-   "_powerSystemWas": "living_current",
-   "_powerSystemFix": "⛔ SNG-524. Was `living_current` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `living_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-131), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'."
   }
  ],
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",

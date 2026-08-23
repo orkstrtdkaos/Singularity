@@ -1273,6 +1273,65 @@
    "cultCondemns": "The Hollow would receive an ending in order to justify making more. Those who cannot bear it look away and call that respect. Both leave the dying unattended, which is the only thing the craft exists to prevent.",
    "discovery": "use — sense a death underway and attend it to its finish without turning away; or given by Marrow, who has been present at more endings than anything you have met",
    "_supersededBy": "⛔ SNG-362: THIS DUPLICATES A FULLER ENTRY THAT WAS ALREADY LIVE. `world/braid_recipes.json` (the only braid file the engine reads — app.js:496 RECIPES_PATH) already carried this braid with a description, notFor AND a rank tree. I authored this from a stale `_stillToName` note in THIS file without checking the live layer first — generate-before-verify, my own named failure mode. The live entry wins; this is kept as the parts-keyed crosswalk row only. Do not treat it as a second mechanical authority."
+  },
+  {
+   "id": "shadow_model",
+   "name": "The Shadow Model",
+   "parts": [
+    "working_model",
+    "shadow_work"
+   ],
+   "functions": [
+    "make",
+    "reveal",
+    "conceal"
+   ],
+   "domains": [
+    "reach_body_mind",
+    "reach_dark_light"
+   ],
+   "effect": "⛔ THE SHAPE, BUILT OUT OF SHADOW AND STANDING IN THE ROOM. Walk around it, reach into it, point at the joint that fails. ⚠️ AND IT IS DARK — it shows the thing's FORM and hides its surface, so you can model a fortification in front of the people who own it and they see only a shape.",
+   "cannot": "Needs shadow to work in — a lit room gives it nothing. It holds while attended. ⚠️ THE MODEL IS THE SHAPE, NOT THE THING: it cannot show you what you did not already understand.",
+   "discovery": "⚠️ use — hold a model and shape shadow in the same beat; Silas does it habitually and does not consider it a combination"
+  },
+  {
+   "id": "lit_model",
+   "name": "The Lit Model",
+   "parts": [
+    "working_model",
+    "glass_work"
+   ],
+   "functions": [
+    "make",
+    "reveal"
+   ],
+   "domains": [
+    "reach_body_mind",
+    "reach_dark_light"
+   ],
+   "effect": "⛔ THE SHAPE IN WORKED LIGHT — every load path lit by how hard it is working, the failing member brightest. ⚠️ WHERE THE SHADOW MODEL HIDES SURFACE, THIS ONE ANNOTATES: it shows stress, flow and order as colour, and a room can read it without being told how.",
+   "cannot": "Needs light to work and a place to work it. It is visible from a long way off and it is beautiful, which is not always what you wanted.",
+   "discovery": "use — hold a model and work glass or light in the same beat; taught openly on the Plateau"
+  },
+  {
+   "id": "figured_model",
+   "name": "The Figured Model",
+   "parts": [
+    "working_model",
+    "formcraft"
+   ],
+   "functions": [
+    "make",
+    "reveal",
+    "transform"
+   ],
+   "domains": [
+    "reach_body_mind",
+    "reach_concrete_abstract"
+   ],
+   "effect": "⛔ THE SHAPE OF SOMETHING THAT HAS NO SHAPE — a treaty, adebt, a chain of obligation, a grief. Figurecraft supplies the form the model needs and the model makes it standable-around. ⚠️ AN ARGUMENT BECOMES A THING PEOPLE CAN POINT AT, and most arguments do not survive that.",
+   "cannot": "⛔ It figures what you understand. A muddled thinker gets a muddled shape, standing in the room where everyone can see it.",
+   "discovery": "use — hold a model and read a pattern in the same beat"
   }
  ],
  "discoverability": {
@@ -1322,5 +1381,6 @@
   ],
   "_forErik": "which of each pair keeps the name is a content call — flagged rather than silently resolved."
  },
- "_liveLayerWarning": "⛔ SNG-362 — LOWER LAYER WINS, AND THIS FILE IS NOT THE LOWER LAYER. `world/braid_recipes.json` is read at app.js:496 and drives the mint-time adopt path (recipeFor → def.minted.worldName). THIS file is registered in the manifest and read by nothing. The SNG-344 ruling that 'this file is the MECHANICAL authority' describes an INTENDED architecture the engine does not implement. Until a consumer exists, anything authored here is documentation. ⚠️ Erik's call on whether to wire it or retire it — but nobody should author mechanics here believing they will reach play."
+ "_liveLayerWarning": "⛔ SNG-362 — LOWER LAYER WINS, AND THIS FILE IS NOT THE LOWER LAYER. `world/braid_recipes.json` is read at app.js:496 and drives the mint-time adopt path (recipeFor → def.minted.worldName). THIS file is registered in the manifest and read by nothing. The SNG-344 ruling that 'this file is the MECHANICAL authority' describes an INTENDED architecture the engine does not implement. Until a consumer exists, anything authored here is documentation. ⚠️ Erik's call on whether to wire it or retire it — but nobody should author mechanics here believing they will reach play.",
+ "_sng528": "⛔ SNG-528. Erik: 'Silas combines Working Model with Shadow Work to make a SHADOW MODEL — you could combine it with light or other skills as well.' ⚠️ WORKING MODEL APPEARED IN NONE OF THE 60 RECIPES, which is why I had been reading it as a diagnosis craft rather than a MEDIUM-HUNGRY one.\n⛔ A MODEL NEEDS SOMETHING TO BE MADE OF. That is the whole reason it combines, and the three parts here are the three obvious media: shadow hides surface, light annotates it, figurecraft supplies a shape to things that have none."
 }

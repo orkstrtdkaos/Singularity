@@ -358,7 +358,11 @@
       "type": "feeling"
      },
      "_ongoingHarm": "⛔ SNG-513. ⚠️ Antisoak 8 until healed — the wound stays open because what closed it is gone.\n⚠️ `mechanic.ongoingHarm` reduces a heal. healing_intent.json §5: A HEAL IS REDUCED BY ACTIVE ONGOING HARM, NEVER BY ARMOUR. Nobody armours against being mended; a wound held open resists it.",
-     "antisoakImposed": 8
+     "antisoakImposed": 8,
+     "persistUntilHealed": {
+      "condition": "vulnerability"
+     },
+     "_persistUntilHealed": "⛔ SNG-532. ⛔ 'ANTISOAK 8, AND IT LASTS UNTIL HEALED OR RESTORED.' The antisoak now has a reader (CCODE-216); this is what makes the r3 clause true.\n⚠️ CCODE: 'persistUntilHealed is still authored on NOTHING — Grey Hand's design has been one field short of true for two rounds now.' ⛔ HE SHIPPED THE READER AND I NEVER FED IT — the same shape as the 27 blocks one level below their reader, arriving from the other side."
     }
    ],
    "nativeOrCombination": "native",

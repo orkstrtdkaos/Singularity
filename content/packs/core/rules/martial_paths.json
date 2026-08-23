@@ -1,251 +1,254 @@
 {
-  "schemaVersion": 1,
-  "id": "martial_paths",
-  "kind": "world_structure",
-  "note": "Three linked pieces (Erik 2026-07-07): (1) BASELINE DEFENSE — every character can defend itself, no build required; (2) MARTIAL BACKGROUNDS — warrior paths exist across ALL the axes: a chaos-warrior and an order-warrior share the same basic martial functions (strike/shield/move) expressed utterly differently through their Reach; (3) RACIAL/FORM KITS — a body brings its own weapons: an Ent fights with branch-clubs and root-work. Access model included. Extends universal_roles (Warrior role) + skill_functions (strike/shield by domain). Authored by Aevi (PO).",
-  "baselineDefense": {
-    "principle": "No character is helpless. Every character gets a BASELINE DEFENSE KIT free at creation — not a class, a floor: the universal animal competence of protecting yourself. Small numbers, always available, never gated.",
-    "kit": [
-      {
-        "id": "brace",
-        "name": "Brace",
-        "functions": [
-          "shield"
-        ],
-        "grants": "Guard, block, dodge, cover — reduce incoming harm in a beat. Everyone can raise their arms.",
-        "cannot": "Not armor; a Tier-III strike still hurts through it."
-      },
-      {
-        "id": "strike_basic",
-        "name": "Strike",
-        "functions": [
-          "strike"
-        ],
-        "grants": "Hit with what you have — fist, staff, stone, branch. Modest, honest damage.",
-        "cannot": "Untrained force; the Edge's economy it is not."
-      },
-      {
-        "id": "break_away",
-        "name": "Break Away",
-        "functions": [
-          "move"
-        ],
-        "grants": "Disengage, flee, put distance or an obstacle between you and harm.",
-        "cannot": "The faster or the prepared can still catch you."
-      },
-      {
-        "id": "raise_alarm",
-        "name": "Raise the Alarm",
-        "functions": [
-          "reveal",
-          "bind"
-        ],
-        "grants": "Call for help, alert, rally whoever's near — defense by numbers.",
-        "cannot": "Someone must be near to hear."
-      }
+ "schemaVersion": 1,
+ "id": "martial_paths",
+ "kind": "world_structure",
+ "note": "Three linked pieces (Erik 2026-07-07): (1) BASELINE DEFENSE — every character can defend itself, no build required; (2) MARTIAL BACKGROUNDS — warrior paths exist across ALL the axes: a chaos-warrior and an order-warrior share the same basic martial functions (strike/shield/move) expressed utterly differently through their Reach; (3) RACIAL/FORM KITS — a body brings its own weapons: an Ent fights with branch-clubs and root-work. Access model included. Extends universal_roles (Warrior role) + skill_functions (strike/shield by domain). Authored by Aevi (PO).",
+ "baselineDefense": {
+  "principle": "No character is helpless. Every character gets a BASELINE DEFENSE KIT free at creation — not a class, a floor: the universal animal competence of protecting yourself. Small numbers, always available, never gated.",
+  "kit": [
+   {
+    "id": "brace",
+    "name": "Brace",
+    "functions": [
+     "shield"
     ],
-    "formModifier": "The kit expresses through the FORM: a human's Strike is a fist or staff; an ENT's Strike is a BRANCH-CLUB (a limb swung like a beam) and its Brace is BARKSKIN (the body IS armor); a Blocklands-native braces by raising a quick wall. Form-kits below.",
-    "engineNote": "Baseline kit = 4 free zero-cost abilities at creation, powerSystem 'baseline', excluded from skill-point costs and caps. SNG-022 reconciliation grants them to existing characters on login (your Ent gets its branch-club next login)."
-  },
-  "formKits": {
-    "note": "A body brings its own weapons and defenses — form-kits are small racial/physiology ability sets granted by ORIGIN FORM, on top of baseline. Manifest-race characters especially.",
-    "kits": [
-      {
-        "form": "ent",
-        "name": "The Grove's Arms",
-        "grants": [
-          {
-            "id": "branch_club",
-            "name": "Branch-Club",
-            "functions": [
-              "strike"
-            ],
-            "desc": "A limb swung like a falling beam — slow, enormous, honest. The Ent's Strike, writ in timber.",
-            "cannot": "Slow — the quick sidestep it; fire answers it terribly."
-          },
-          {
-            "id": "barkskin",
-            "name": "Barkskin",
-            "functions": [
-              "shield"
-            ],
-            "desc": "The body is armor — blows land on bark and heartwood. Passive toughness + an active brace that shrugs ordinary strikes.",
-            "cannot": "Fire and axe bite deep; bark regrows slow."
-          },
-          {
-            "id": "root_hold",
-            "name": "Root-Hold",
-            "functions": [
-              "bind",
-              "shield"
-            ],
-            "desc": "Roots driven into earth — immovable stance, or roots snared around a foe's legs. Bind and stand, both from below.",
-            "cannot": "Needs earth (stone floors and city pavement resist); rooted means not moving."
-          },
-          {
-            "id": "root_reach",
-            "name": "Root-Reach",
-            "functions": [
-              "move",
-              "reveal"
-            ],
-            "desc": "Feel through the ground along root-lines — what walks nearby, where water runs; in living earth, a slow tunneling reach.",
-            "cannot": "Range is soil-bound; dead ground is silent."
-          }
-        ],
-        "drift": "Form abilities carry the life/spiritual disposition; heavy use deepens the Ent's green nature.",
-        "aliases": [
-          "ent",
-          "treefolk",
-          "tree-folk",
-          "heartwood",
-          "bark"
-        ],
-        "formAliases": [
-          "ent",
-          "treefolk",
-          "tree-folk",
-          "treeman",
-          "heartwood",
-          "bark",
-          "barkskin",
-          "timber",
-          "greenwood",
-          "oaken",
-          "sapwood",
-          "rootbound",
-          "branching",
-          "boughs",
-          "xylem",
-          "dryad",
-          "wooden"
-        ]
-      },
-      {
-        "form": "blocklands_native",
-        "name": "The Crafter's Reflex",
-        "grants": [
-          {
-            "id": "quick_wall",
-            "name": "Quick Wall",
-            "functions": [
-              "shield"
-            ],
-            "desc": "Snap a barrier together from whatever's near — the block-grammar's defense reflex, working (weakly) even outside the domain.",
-            "cannot": "Outside the Blocklands it's improvised cover, not true block-work."
-          }
-        ],
-        "drift": "order/creation",
-        "aliases": [
-          "blocklands"
-        ],
-        "formAliases": [
-          "blocklands",
-          "blocklander",
-          "block-born",
-          "voxel",
-          "cubic",
-          "gridborn",
-          "tesselate",
-          "latticeform",
-          "stoneblock"
-        ]
-      },
-      {
-        "form": "human_and_default",
-        "name": "—",
-        "grants": [],
-        "note": "Humans and unlisted forms use the plain baseline kit; their depth comes from training (backgrounds below).",
-        "aliases": [],
-        "_aliasNote": "DELIBERATELY EMPTY — the default kit must never be matched from prose; it is what you get when no other kit matches, not a thing to detect.",
-        "formAliases": []
-      }
+    "grants": "Guard, block, dodge, cover — reduce incoming harm in a beat. Everyone can raise their arms.",
+    "cannot": "Not armor; a Tier-III strike still hurts through it."
+   },
+   {
+    "id": "strike_basic",
+    "name": "Strike",
+    "functions": [
+     "strike"
     ],
-    "_aliasNote": "⚠️ CCode/SNG-345: character.form is FREE PROSE, so a form kit cannot be looked up — these aliases are the minimum needed to resolve one, and an AMBIGUOUS match (2+ kits) REFUSES rather than guesses. Aevi: these are drawn from each kit's own text and are the authoring half — review and extend them; an explicit character.formKit always wins over prose matching.\n\n⚠️ AEVI'S PASS (SNG-345): extended from each kit's own grant text — barkskin, root-hold and root-reach give bark/heartwood/roots, so those words are the honest signal. TWO RULES I AUTHORED TO: (1) EVERY ALIAS MUST BE A WHOLE WORD THAT IS NOT A SUBSTRING OF A COMMON ENGLISH WORD. CCode's `prose.includes(\"ent\")` matched gentle, present, different, patient — handing a bark-and-timber combat kit to any politely described human. `ent` survives ONLY because the matcher now uses word boundaries; every alias I added is distinctive on its own (heartwood, sapwood, treefolk, xylem) so the list does not depend on the matcher being careful. (2) NO ALIAS MAY BE CLAIMED BY TWO KITS — asserted at write time, because a 2+ match REFUSES and a shared alias would silently disable both kits rather than pick wrongly. `human_and_default` stays EMPTY on purpose: it is what you get when nothing matches, not a thing to detect.",
-    "_aliasRules": {
-      "wholeWordOnly": "⚠️ an alias must never be a substring of a common English word — this is the bug that gave a treefolk kit to anyone described as 'patient'",
-      "noSharedAliases": "no alias may appear on two kits; a 2+ match REFUSES, so a shared alias disables both",
-      "explicitWins": "character.formKit always beats prose matching",
-      "defaultIsNotDetected": "human_and_default has no aliases by design — it is the fallback, not a form to recognise",
-      "⚠️_whenInDoubtLeaveItOut": "a missing alias costs one player an explicit formKit setting. A wrong alias hands a stranger a combat kit and nobody notices.",
-      "⚠️_theOneException": "⚠️ `ent` VIOLATES THE WHOLE-WORD RULE ABOVE AND IS KEPT DELIBERATELY. I checked it: it is a substring of gentle, present, different, patient, absent, talent, silent, violent, parent, moment and competent — ELEVEN common words. It survives ONLY because the matcher uses word boundaries, which is exactly the dependency my own rule says an alias list should not have. It stays because it is the form's own name and a player WILL write 'an ent'. ⚠️ SO IT IS MARKED RATHER THAN SILENT: if the boundary matching ever regresses, THIS is the alias that breaks, and it hands a bark-and-timber combat kit to anyone described as patient. Every OTHER alias in this file is safe without the matcher's help — `ent` is the single point where content and code are load-bearing for each other.",
-      "_testForNewAliases": "Before adding one, check it against: gentle, present, different, patient, absent, talent, silent, violent, parent, moment, competent, lattice, blocked. If your new alias is a substring of any of them and is NOT the form's own name, do not add it — pick the distinctive word instead (heartwood over wood, treefolk over tree)."
-    }
-  },
-  "martialBackgrounds": {
-    "principle": "Erik: 'A chaos warrior and an order warrior would be very different, but the same basic kind of skills — expressed novelly through their own reach combos.' Exactly. A MARTIAL BACKGROUND = the Warrior role + a Reach = a distinct fighting tradition. Same functions (strike/shield/move/break), utterly different expression. Each background grants: its Reach's martial-facing abilities as HOME tradition + a signature COMBO (the cross-domain braid that defines its style) + a defense identity.",
-    "backgrounds": [
-      {
-        "id": "marcher",
-        "name": "Marcher (violence+order)",
-        "homeReach": "reach_violence_peace",
-        "style": "The formal duelist — the Edge by the forms; economical, decisive, honorable.",
-        "signatureCombo": "the_edge + latticework → 'The Perfect Form' (a fight conducted like a proof — every strike lawful, every opening foreseen)",
-        "defenseIdentity": "discipline — the form IS the armor"
-      },
-      {
-        "id": "churn_reaver",
-        "name": "Churn-Reaver (violence+chaos)",
-        "homeReach": "reach_chaos_order",
-        "style": "The chaos-warrior — improvised weapons, broken footing, wins by the fight coming apart. Same strike/shield functions as the Marcher, nothing alike in expression.",
-        "signatureCombo": "wildcraft + strike_basic → 'The Unraveling Blow' (a strike that lands where the plan broke — damage scales with the disorder you made)",
-        "defenseIdentity": "unpredictability — never where the blow lands"
-      },
-      {
-        "id": "temple_guardian",
-        "name": "Temple Guardian (body+peace)",
-        "homeReach": "reach_body_mind",
-        "style": "The protector — Soma-mastery held as devotion; will not start, will absolutely finish.",
-        "signatureCombo": "soma + stillcraft → 'The Immovable Calm' (a guard that de-escalates — attackers strike, are absorbed, and somehow the fight is over)",
-        "defenseIdentity": "the trained body as sanctuary — yours and others'"
-      },
-      {
-        "id": "war_thinker",
-        "name": "War-Thinker (mind+order)",
-        "homeReach": "reach_body_mind",
-        "style": "The Cogitant fighter — never lifts a blade; the battlefield is a model and you are already checkmated.",
-        "signatureCombo": "noesis + latticework → 'The Foregone Conclusion' (out-model an opponent so completely their attack fails before it starts)",
-        "defenseIdentity": "prediction — harm addressed before it exists"
-      },
-      {
-        "id": "umbral_blade",
-        "name": "Umbral Blade (violence+dark)",
-        "homeReach": "reach_dark_light",
-        "style": "The unseen fighter — war as a thing that happens in the dark; one strike, from nowhere, finished.",
-        "signatureCombo": "umbracraft + the_edge → 'The Unseen Cut' (already authored — the braid IS this background's signature)",
-        "defenseIdentity": "absence — you cannot hit what was never there"
-      },
-      {
-        "id": "green_warden_militant",
-        "name": "Thorn-Warden (life+violence)",
-        "homeReach": "reach_death_life",
-        "style": "The grove's answer to the axe — living weapons, thorn and root and regrowth; the Ent's natural background. Fights so that things may keep living.",
-        "signatureCombo": "root_hold + quickening → 'The Grasping Green' (roots bind while living growth mends you mid-fight — attrition the green always wins)",
-        "defenseIdentity": "regrowth — wound the warden, the warden heals; wound the grove, the grove remembers"
-      },
-      {
-        "id": "blaze_lance",
-        "name": "Blaze-Lance (light+violence)",
-        "homeReach": "reach_dark_light",
-        "style": "The revealing strike — light as a weapon; nothing hidden, nothing spared.",
-        "signatureCombo": "radiance + kindle → 'The Judging Beam' (a strike that reveals as it burns — illusions die first, then the target's cover)",
-        "defenseIdentity": "exposure — an enemy seen truly is half-beaten"
-      },
-      {
-        "id": "pale_reaper",
-        "name": "Pale Reaper (death+peace)",
-        "homeReach": "reach_death_life",
-        "style": "The mercy that fights — an Ashwarden militant; ends what must end, cleanly, without hate. The most feared and gentlest style.",
-        "signatureCombo": "palework + stillcraft → 'The Quiet End' (a strike that concludes — against the dying, the raging, the unnatural, it simply finishes what was already ending)",
-        "defenseIdentity": "acceptance — fear of the end is the opening; the Reaper has none"
-      }
+    "grants": "Hit with what you have — fist, staff, stone, branch. Modest, honest damage.",
+    "cannot": "Untrained force; the Edge's economy it is not."
+   },
+   {
+    "id": "break_away",
+    "name": "Break Away",
+    "functions": [
+     "move"
     ],
-    "designNote": "Eight backgrounds from six Reaches — the axes multiply: violence crossed with order/chaos/dark/light/life/death yields distinct traditions, and body/mind yields two more without 'violence' at all. Any Reach pair with a strike-or-shield function makes a martial background. Generation (SNG-020) can author MORE backgrounds by the same grammar: Warrior role + Reach pair + signature braid."
-  },
-  "access": {
-    "atCreation": "Baseline kit: free, everyone. Form-kit: free with the form (an Ent is born with branches). Martial background: choose at creation as your ROLE+HOMELAND (SNG-017 origins) — grants the home Reach's martial abilities at base levelReq + the signature combo as a KNOWN technique.",
-    "inPlay": "Any background is learnable later through fiction — a teacher of that tradition, training at its home place (the Redline teaches Marcher; the Flesh-Temple teaches Guardian), or a quest — via character.traditionAccess (the generalized precursorAccess pattern from the SNG-017 addendum). The signature combo is discoverable by use like any braid (SNG-026).",
-    "entAnswer": "Erik's Ent, concretely: (1) next login, SNG-022 grants the baseline kit — it can Brace/Strike/Break Away NOW, expressed as timber and bark; (2) the ent form-kit gives Branch-Club, Barkskin, Root-Hold, Root-Reach — the club-branches and root-based skills asked for; (3) Thorn-Warden is its natural martial background, learnable from the Deepwood's Walkers or claimable at creation for new Ents; (4) Harmonic remains learnable at the Heights per the gating fix. The Ent is never again a powerful being that can't defend itself."
-  },
-  "buildImplication": "Content DONE here: baseline kit (4), ent form-kit (4), blocklands reflex (1), 8 martial backgrounds w/ signature combos. Engine (fold into SNG-017 + SNG-022 + SNG-026): (a) grant baseline at creation + reconcile-grant to existing characters; (b) form-kit granted by origin form; (c) background = origins.json entry granting homeReach abilities + signature combo; (d) new combos (Perfect Form, Unraveling Blow, Immovable Calm, Foregone Conclusion, Grasping Green, Judging Beam, Quiet End) added to combination_recipes as discoverable. No new systems — composition of existing ones."
+    "grants": "Disengage, flee, put distance or an obstacle between you and harm.",
+    "cannot": "The faster or the prepared can still catch you."
+   },
+   {
+    "id": "raise_alarm",
+    "name": "Raise the Alarm",
+    "functions": [
+     "reveal",
+     "bind"
+    ],
+    "grants": "Call for help, alert, rally whoever's near — defense by numbers.",
+    "cannot": "Someone must be near to hear."
+   }
+  ],
+  "formModifier": "The kit expresses through the FORM: a human's Strike is a fist or staff; an ENT's Strike is a BRANCH-CLUB (a limb swung like a beam) and its Brace is BARKSKIN (the body IS armor); a Blocklands-native braces by raising a quick wall. Form-kits below.",
+  "engineNote": "Baseline kit = 4 free zero-cost abilities at creation, powerSystem 'baseline', excluded from skill-point costs and caps. SNG-022 reconciliation grants them to existing characters on login (your Ent gets its branch-club next login)."
+ },
+ "formKits": {
+  "note": "A body brings its own weapons and defenses — form-kits are small racial/physiology ability sets granted by ORIGIN FORM, on top of baseline. Manifest-race characters especially.",
+  "kits": [
+   {
+    "form": "ent",
+    "name": "The Grove's Arms",
+    "grants": [
+     {
+      "id": "branch_club",
+      "name": "Branch-Club",
+      "functions": [
+       "strike"
+      ],
+      "desc": "A limb swung like a falling beam — slow, enormous, honest. The Ent's Strike, writ in timber.",
+      "cannot": "Slow — the quick sidestep it; fire answers it terribly."
+     },
+     {
+      "id": "barkskin",
+      "name": "Barkskin",
+      "functions": [
+       "shield"
+      ],
+      "desc": "The body is armor — blows land on bark and heartwood. Passive toughness + an active brace that shrugs ordinary strikes.",
+      "cannot": "Fire and axe bite deep; bark regrows slow."
+     },
+     {
+      "id": "root_hold",
+      "name": "Root-Hold",
+      "functions": [
+       "bind",
+       "shield"
+      ],
+      "desc": "Roots driven into earth — immovable stance, or roots snared around a foe's legs. Bind and stand, both from below.",
+      "cannot": "Needs earth (stone floors and city pavement resist); rooted means not moving."
+     },
+     {
+      "id": "root_reach",
+      "name": "Root-Reach",
+      "functions": [
+       "move",
+       "reveal"
+      ],
+      "desc": "Feel through the ground along root-lines — what walks nearby, where water runs; in living earth, a slow tunneling reach.",
+      "cannot": "Range is soil-bound; dead ground is silent."
+     }
+    ],
+    "drift": "Form abilities carry the life/spiritual disposition; heavy use deepens the Ent's green nature.",
+    "aliases": [
+     "ent",
+     "treefolk",
+     "tree-folk",
+     "heartwood",
+     "bark"
+    ],
+    "formAliases": [
+     "ent",
+     "treefolk",
+     "tree-folk",
+     "treeman",
+     "heartwood",
+     "bark",
+     "barkskin",
+     "timber",
+     "greenwood",
+     "oaken",
+     "sapwood",
+     "rootbound",
+     "branching",
+     "boughs",
+     "xylem",
+     "dryad",
+     "wooden"
+    ],
+    "aestheticKey": "form_ent"
+   },
+   {
+    "form": "blocklands_native",
+    "name": "The Crafter's Reflex",
+    "grants": [
+     {
+      "id": "quick_wall",
+      "name": "Quick Wall",
+      "functions": [
+       "shield"
+      ],
+      "desc": "Snap a barrier together from whatever's near — the block-grammar's defense reflex, working (weakly) even outside the domain.",
+      "cannot": "Outside the Blocklands it's improvised cover, not true block-work."
+     }
+    ],
+    "drift": "order/creation",
+    "aliases": [
+     "blocklands"
+    ],
+    "formAliases": [
+     "blocklands",
+     "blocklander",
+     "block-born",
+     "voxel",
+     "cubic",
+     "gridborn",
+     "tesselate",
+     "latticeform",
+     "stoneblock"
+    ],
+    "aestheticKey": "form_blocklands"
+   },
+   {
+    "form": "human_and_default",
+    "name": "—",
+    "grants": [],
+    "note": "Humans and unlisted forms use the plain baseline kit; their depth comes from training (backgrounds below).",
+    "aliases": [],
+    "_aliasNote": "DELIBERATELY EMPTY — the default kit must never be matched from prose; it is what you get when no other kit matches, not a thing to detect.",
+    "formAliases": []
+   }
+  ],
+  "_aliasNote": "⚠️ CCode/SNG-345: character.form is FREE PROSE, so a form kit cannot be looked up — these aliases are the minimum needed to resolve one, and an AMBIGUOUS match (2+ kits) REFUSES rather than guesses. Aevi: these are drawn from each kit's own text and are the authoring half — review and extend them; an explicit character.formKit always wins over prose matching.\n\n⚠️ AEVI'S PASS (SNG-345): extended from each kit's own grant text — barkskin, root-hold and root-reach give bark/heartwood/roots, so those words are the honest signal. TWO RULES I AUTHORED TO: (1) EVERY ALIAS MUST BE A WHOLE WORD THAT IS NOT A SUBSTRING OF A COMMON ENGLISH WORD. CCode's `prose.includes(\"ent\")` matched gentle, present, different, patient — handing a bark-and-timber combat kit to any politely described human. `ent` survives ONLY because the matcher now uses word boundaries; every alias I added is distinctive on its own (heartwood, sapwood, treefolk, xylem) so the list does not depend on the matcher being careful. (2) NO ALIAS MAY BE CLAIMED BY TWO KITS — asserted at write time, because a 2+ match REFUSES and a shared alias would silently disable both kits rather than pick wrongly. `human_and_default` stays EMPTY on purpose: it is what you get when nothing matches, not a thing to detect.",
+  "_aliasRules": {
+   "wholeWordOnly": "⚠️ an alias must never be a substring of a common English word — this is the bug that gave a treefolk kit to anyone described as 'patient'",
+   "noSharedAliases": "no alias may appear on two kits; a 2+ match REFUSES, so a shared alias disables both",
+   "explicitWins": "character.formKit always beats prose matching",
+   "defaultIsNotDetected": "human_and_default has no aliases by design — it is the fallback, not a form to recognise",
+   "⚠️_whenInDoubtLeaveItOut": "a missing alias costs one player an explicit formKit setting. A wrong alias hands a stranger a combat kit and nobody notices.",
+   "⚠️_theOneException": "⚠️ `ent` VIOLATES THE WHOLE-WORD RULE ABOVE AND IS KEPT DELIBERATELY. I checked it: it is a substring of gentle, present, different, patient, absent, talent, silent, violent, parent, moment and competent — ELEVEN common words. It survives ONLY because the matcher uses word boundaries, which is exactly the dependency my own rule says an alias list should not have. It stays because it is the form's own name and a player WILL write 'an ent'. ⚠️ SO IT IS MARKED RATHER THAN SILENT: if the boundary matching ever regresses, THIS is the alias that breaks, and it hands a bark-and-timber combat kit to anyone described as patient. Every OTHER alias in this file is safe without the matcher's help — `ent` is the single point where content and code are load-bearing for each other.",
+   "_testForNewAliases": "Before adding one, check it against: gentle, present, different, patient, absent, talent, silent, violent, parent, moment, competent, lattice, blocked. If your new alias is a substring of any of them and is NOT the form's own name, do not add it — pick the distinctive word instead (heartwood over wood, treefolk over tree)."
+  }
+ },
+ "martialBackgrounds": {
+  "principle": "Erik: 'A chaos warrior and an order warrior would be very different, but the same basic kind of skills — expressed novelly through their own reach combos.' Exactly. A MARTIAL BACKGROUND = the Warrior role + a Reach = a distinct fighting tradition. Same functions (strike/shield/move/break), utterly different expression. Each background grants: its Reach's martial-facing abilities as HOME tradition + a signature COMBO (the cross-domain braid that defines its style) + a defense identity.",
+  "backgrounds": [
+   {
+    "id": "marcher",
+    "name": "Marcher (violence+order)",
+    "homeReach": "reach_violence_peace",
+    "style": "The formal duelist — the Edge by the forms; economical, decisive, honorable.",
+    "signatureCombo": "the_edge + latticework → 'The Perfect Form' (a fight conducted like a proof — every strike lawful, every opening foreseen)",
+    "defenseIdentity": "discipline — the form IS the armor"
+   },
+   {
+    "id": "churn_reaver",
+    "name": "Churn-Reaver (violence+chaos)",
+    "homeReach": "reach_chaos_order",
+    "style": "The chaos-warrior — improvised weapons, broken footing, wins by the fight coming apart. Same strike/shield functions as the Marcher, nothing alike in expression.",
+    "signatureCombo": "wildcraft + strike_basic → 'The Unraveling Blow' (a strike that lands where the plan broke — damage scales with the disorder you made)",
+    "defenseIdentity": "unpredictability — never where the blow lands"
+   },
+   {
+    "id": "temple_guardian",
+    "name": "Temple Guardian (body+peace)",
+    "homeReach": "reach_body_mind",
+    "style": "The protector — Soma-mastery held as devotion; will not start, will absolutely finish.",
+    "signatureCombo": "soma + stillcraft → 'The Immovable Calm' (a guard that de-escalates — attackers strike, are absorbed, and somehow the fight is over)",
+    "defenseIdentity": "the trained body as sanctuary — yours and others'"
+   },
+   {
+    "id": "war_thinker",
+    "name": "War-Thinker (mind+order)",
+    "homeReach": "reach_body_mind",
+    "style": "The Cogitant fighter — never lifts a blade; the battlefield is a model and you are already checkmated.",
+    "signatureCombo": "noesis + latticework → 'The Foregone Conclusion' (out-model an opponent so completely their attack fails before it starts)",
+    "defenseIdentity": "prediction — harm addressed before it exists"
+   },
+   {
+    "id": "umbral_blade",
+    "name": "Umbral Blade (violence+dark)",
+    "homeReach": "reach_dark_light",
+    "style": "The unseen fighter — war as a thing that happens in the dark; one strike, from nowhere, finished.",
+    "signatureCombo": "umbracraft + the_edge → 'The Unseen Cut' (already authored — the braid IS this background's signature)",
+    "defenseIdentity": "absence — you cannot hit what was never there"
+   },
+   {
+    "id": "green_warden_militant",
+    "name": "Thorn-Warden (life+violence)",
+    "homeReach": "reach_death_life",
+    "style": "The grove's answer to the axe — living weapons, thorn and root and regrowth; the Ent's natural background. Fights so that things may keep living.",
+    "signatureCombo": "root_hold + quickening → 'The Grasping Green' (roots bind while living growth mends you mid-fight — attrition the green always wins)",
+    "defenseIdentity": "regrowth — wound the warden, the warden heals; wound the grove, the grove remembers"
+   },
+   {
+    "id": "blaze_lance",
+    "name": "Blaze-Lance (light+violence)",
+    "homeReach": "reach_dark_light",
+    "style": "The revealing strike — light as a weapon; nothing hidden, nothing spared.",
+    "signatureCombo": "radiance + kindle → 'The Judging Beam' (a strike that reveals as it burns — illusions die first, then the target's cover)",
+    "defenseIdentity": "exposure — an enemy seen truly is half-beaten"
+   },
+   {
+    "id": "pale_reaper",
+    "name": "Pale Reaper (death+peace)",
+    "homeReach": "reach_death_life",
+    "style": "The mercy that fights — an Ashwarden militant; ends what must end, cleanly, without hate. The most feared and gentlest style.",
+    "signatureCombo": "palework + stillcraft → 'The Quiet End' (a strike that concludes — against the dying, the raging, the unnatural, it simply finishes what was already ending)",
+    "defenseIdentity": "acceptance — fear of the end is the opening; the Reaper has none"
+   }
+  ],
+  "designNote": "Eight backgrounds from six Reaches — the axes multiply: violence crossed with order/chaos/dark/light/life/death yields distinct traditions, and body/mind yields two more without 'violence' at all. Any Reach pair with a strike-or-shield function makes a martial background. Generation (SNG-020) can author MORE backgrounds by the same grammar: Warrior role + Reach pair + signature braid."
+ },
+ "access": {
+  "atCreation": "Baseline kit: free, everyone. Form-kit: free with the form (an Ent is born with branches). Martial background: choose at creation as your ROLE+HOMELAND (SNG-017 origins) — grants the home Reach's martial abilities at base levelReq + the signature combo as a KNOWN technique.",
+  "inPlay": "Any background is learnable later through fiction — a teacher of that tradition, training at its home place (the Redline teaches Marcher; the Flesh-Temple teaches Guardian), or a quest — via character.traditionAccess (the generalized precursorAccess pattern from the SNG-017 addendum). The signature combo is discoverable by use like any braid (SNG-026).",
+  "entAnswer": "Erik's Ent, concretely: (1) next login, SNG-022 grants the baseline kit — it can Brace/Strike/Break Away NOW, expressed as timber and bark; (2) the ent form-kit gives Branch-Club, Barkskin, Root-Hold, Root-Reach — the club-branches and root-based skills asked for; (3) Thorn-Warden is its natural martial background, learnable from the Deepwood's Walkers or claimable at creation for new Ents; (4) Harmonic remains learnable at the Heights per the gating fix. The Ent is never again a powerful being that can't defend itself."
+ },
+ "buildImplication": "Content DONE here: baseline kit (4), ent form-kit (4), blocklands reflex (1), 8 martial backgrounds w/ signature combos. Engine (fold into SNG-017 + SNG-022 + SNG-026): (a) grant baseline at creation + reconcile-grant to existing characters; (b) form-kit granted by origin form; (c) background = origins.json entry granting homeReach abilities + signature combo; (d) new combos (Perfect Form, Unraveling Blow, Immovable Calm, Foregone Conclusion, Grasping Green, Judging Beam, Quiet End) added to combination_recipes as discoverable. No new systems — composition of existing ones.",
+ "_sng531": "⛔ SNG-531, CCODE'S MEASUREMENT RULED. He found nine crafts with no palette, five reading 'unmistakably rootkin' — branch_club, barkskin, root_hold, root_reach, quick_wall — and asked whether making them rootkin would give them a palette for free.\n⛔ THEY ARE NOT ROOTKIN AND MUST NOT BECOME ROOTKIN. The first four are AN ENT'S FORM KIT and the fifth is a Blocklands one. ⚠️ THIS FILE'S OWN NOTE SAYS WHY: 'RACIAL/FORM KITS — A BODY BRINGS ITS OWN WEAPONS.' A Rootkin is a PEOPLE WITH A CRAFT; an Ent is a BODY MADE OF WOOD. Barkskin is not a craft an Ent learned — it is what an Ent is.\n⚠️ THEY READ AS ROOTKIN BECAUSE BOTH ARE GREEN, WHICH IS AESTHETIC ADJACENCY, NOT LINEAGE. Filing a body under a tradition to win it a palette is the same error as filing a foothill under `powerSystems` to win it one — ⛔ AND THAT ERROR IS WHAT BLOCKED THE FLIP TWO ROUNDS AGO.\n⛔ THE FIX IS A THIRD PALETTE NAMESPACE: `forms`. A body's look is not a people's look and not a power source's look, and the palette map should say so."
 }

@@ -1021,7 +1021,11 @@
       "resist": "physical",
       "targets": 1
      },
-     "_imposes": "⛔ SNG-513. ⛔ ERIK'S OWN ESCALATE EXAMPLE — a weakening becomes an incapacitation. ⚠️ It never kills; `incapacitated` is the ceiling and `slain` is refused at all three doors."
+     "_imposes": "⛔ SNG-513. ⛔ ERIK'S OWN ESCALATE EXAMPLE — a weakening becomes an incapacitation. ⚠️ It never kills; `incapacitated` is the ceiling and `slain` is refused at all three doors.",
+     "persistUntilHealed": {
+      "condition": "enfeeblement"
+     },
+     "_persistUntilHealed": "⛔ SNG-532. ⛔ ERIK'S RULING, SNG-494: 'The Grey Hand needs to be updated — IT DOESN'T COME BACK IMMEDIATELY UPON STOPPING. It would have to be HEALED/RESTORED.' ⚠️ THE FIELD HAS BEEN MISSING SINCE, so the craft has been describing a persistence it did not have.\n⚠️ CCODE: 'persistUntilHealed is still authored on NOTHING — Grey Hand's design has been one field short of true for two rounds now.' ⛔ HE SHIPPED THE READER AND I NEVER FED IT — the same shape as the 27 blocks one level below their reader, arriving from the other side."
     },
     {
      "rank": 2,
@@ -1046,7 +1050,11 @@
       "resist": "physical",
       "targets": 1
      },
-     "_imposes": "⛔ SNG-513. At range, and it persists until healed."
+     "_imposes": "⛔ SNG-513. At range, and it persists until healed.",
+     "persistUntilHealed": {
+      "condition": "enfeeblement"
+     },
+     "_persistUntilHealed": "⛔ SNG-532. At range, and the weakness stays. This is the rank that BUYS persistence — without the field it bought nothing.\n⚠️ CCODE: 'persistUntilHealed is still authored on NOTHING — Grey Hand's design has been one field short of true for two rounds now.' ⛔ HE SHIPPED THE READER AND I NEVER FED IT — the same shape as the 27 blocks one level below their reader, arriving from the other side."
     },
     {
      "rank": 3,
@@ -1070,7 +1078,11 @@
       "resist": "physical",
       "targets": 3
      },
-     "_imposes": "⛔ SNG-513. ⚠️ At r3 the ordinary result IS the incapacitation, so the crit cannot escalate further — it degrades less instead."
+     "_imposes": "⛔ SNG-513. ⚠️ At r3 the ordinary result IS the incapacitation, so the crit cannot escalate further — it degrades less instead.",
+     "persistUntilHealed": {
+      "condition": "enfeeblement"
+     },
+     "_persistUntilHealed": "⛔ SNG-532. A group, held down until mended.\n⚠️ CCODE: 'persistUntilHealed is still authored on NOTHING — Grey Hand's design has been one field short of true for two rounds now.' ⛔ HE SHIPPED THE READER AND I NEVER FED IT — the same shape as the 27 blocks one level below their reader, arriving from the other side."
     }
    ],
    "gated": "learned",
@@ -3438,7 +3450,11 @@
      "ongoingHarm": {
       "type": "decay"
      },
-     "_ongoingHarm": "⛔ SNG-513. ⛔ 'A WOUND ALREADY OPEN GOES GREY AND STOPS CLOSING.' The craft has claimed heal-denial in prose since it was authored and did nothing.\n⚠️ `mechanic.ongoingHarm` reduces a heal. healing_intent.json §5: A HEAL IS REDUCED BY ACTIVE ONGOING HARM, NEVER BY ARMOUR. Nobody armours against being mended; a wound held open resists it."
+     "_ongoingHarm": "⛔ SNG-513. ⛔ 'A WOUND ALREADY OPEN GOES GREY AND STOPS CLOSING.' The craft has claimed heal-denial in prose since it was authored and did nothing.\n⚠️ `mechanic.ongoingHarm` reduces a heal. healing_intent.json §5: A HEAL IS REDUCED BY ACTIVE ONGOING HARM, NEVER BY ARMOUR. Nobody armours against being mended; a wound held open resists it.",
+     "persistUntilHealed": {
+      "condition": "decay"
+     },
+     "_persistUntilHealed": "⛔ SNG-532. ⚠️ A wound already open goes grey and STOPS CLOSING — the `ongoingHarm` denies the heal, and this keeps the state until something mends it.\n⚠️ CCODE: 'persistUntilHealed is still authored on NOTHING — Grey Hand's design has been one field short of true for two rounds now.' ⛔ HE SHIPPED THE READER AND I NEVER FED IT — the same shape as the 27 blocks one level below their reader, arriving from the other side."
     },
     {
      "rank": 2,

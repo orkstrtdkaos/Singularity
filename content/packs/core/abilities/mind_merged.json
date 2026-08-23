@@ -17,7 +17,11 @@
    "mechanic": {
     "magnitude": 4,
     "duration": 2,
-    "scope": 2
+    "scope": 2,
+    "crit": {
+     "success": "The line you take is shorter than anyone thought the ground allowed.",
+     "failure": "The route was correct an hour ago."
+    }
    },
    "description": "Work out the way through before you take a step, and then take it — the quickest line through a crowd, a ruin, a guard rotation or open country, walked as though you had been given the plan.",
    "narrationHints": "They do not hesitate at junctions. The gap opens a half-second before they reach it, every time, and it looks like luck until the fourth time.",
@@ -142,7 +146,11 @@
     "plus": 0,
     "range": 1,
     "targets": 1,
-    "marginFloorPer": 0.02
+    "marginFloorPer": 0.02,
+    "crit": {
+     "success": "You find the fault under the fault, and both close.",
+     "failure": "You treat what is visible. What is not gets a clear run at them."
+    }
    },
    "description": "Find what is actually wrong and put it right — by procedure or by pattern, but correctly, so that it does not come back.",
    "narrationHints": "No comfort offered and none needed. They find the thing, name it, and fix it, and the patient is left slightly unnerved by how little reassurance was involved.",
@@ -273,7 +281,11 @@
    "mechanic": {
     "magnitude": 5,
     "duration": 4,
-    "scope": 3
+    "scope": 3,
+    "crit": {
+     "success": "The room arrives at it before you finish, and someone else says the last line for you.",
+     "failure": "They find the loose premise. The case comes apart in front of everyone and takes your standing with it."
+    }
    },
    "description": "Lay a matter out so completely that the argument ends — and at its height, walk one person to the conclusion that ends them.",
    "narrationHints": "Nobody is humiliated and nobody is shouted down. The room simply arrives somewhere and stays there, and afterwards no one can quite remember what the disagreement was.",
@@ -422,5 +434,6 @@
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
- "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",
+ "_sng523": "⛔ SNG-523: `mechanic.crit` authored. ⚠️ `critFor` HAS EXISTED, WITH A PER-CRAFT CAP AND A STRING SHORTHAND FOR AUTHORS, AND HAS NEVER HAD AN INPUT — 0 of 373. Every critical in the game was generic.\n⛔ BOTH HALVES AUTHORED: `success` is what the craft's best case LOOKS LIKE; `failure` is its disaster. ⚠️ MOST CARRY TEXT ONLY — `chance` is opt-in and shifts nothing unless asked for, so a craft can say what its disaster looks like without claiming it happens more often."
 }

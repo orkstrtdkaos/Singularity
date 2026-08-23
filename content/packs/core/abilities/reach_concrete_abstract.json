@@ -165,7 +165,7 @@
    "name": "Formcraft",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "wild_nanite",
    "attribute": "mental",
    "axes": {
     "concrete_abstract": 0.5,
@@ -356,14 +356,16 @@
      ]
     }
    ],
-   "_rewritten": "⛔ SNG-478. THE LAST Q1 FAILURE IN MIND. The old ranks were 'see the pattern a thing is an instance OF' / 'make a symbol that ACTS' / 'build an idea into the world' — three ranks, no mechanic, and it was the figurist namesake.\n⚠️ ERIK'S DESIGN: 'Perhaps Formcraft can be a DOPPELGANGER SKILL. r1 mimics a TIER I craft you've experienced. r2 mimics a craft up to TIER III that you've heard of, read about, or seen. r3 lets you mimic things you've NEVER EVEN HEARD ABOUT — the forms come to you out of NEED AND MEANING and you use it. Up to tier IV.'\n⛔ THAT IS THE FIGURIST THESIS MADE PLAYABLE: if matter is the coarse residue of form, then a craft is a form and a form can be taken. ⚠️ AND THE RANK LADDER IS SOURCE, NOT SIZE — witnessed, then described, then unsourced."
+   "_rewritten": "⛔ SNG-478. THE LAST Q1 FAILURE IN MIND. The old ranks were 'see the pattern a thing is an instance OF' / 'make a symbol that ACTS' / 'build an idea into the world' — three ranks, no mechanic, and it was the figurist namesake.\n⚠️ ERIK'S DESIGN: 'Perhaps Formcraft can be a DOPPELGANGER SKILL. r1 mimics a TIER I craft you've experienced. r2 mimics a craft up to TIER III that you've heard of, read about, or seen. r3 lets you mimic things you've NEVER EVEN HEARD ABOUT — the forms come to you out of NEED AND MEANING and you use it. Up to tier IV.'\n⛔ THAT IS THE FIGURIST THESIS MADE PLAYABLE: if matter is the coarse residue of form, then a craft is a form and a form can be taken. ⚠️ AND THE RANK LADDER IS SOURCE, NOT SIZE — witnessed, then described, then unsourced.",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "walking_figure",
    "name": "Walking Figure",
    "levelReq": 3,
    "energyCost": 7,
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "wild_nanite",
    "attribute": "mental",
    "axes": {
     "concrete_abstract": 0.4,
@@ -548,7 +550,9 @@
    "_rewritten": "⛔ SNG-457. The old text was 'carry a meaning somewhere' / 'the figure persists' / 'adapts its meaning' — ⚠️ 'CARRY A MEANING' IS NOT A GAME ACTION and a player could not say what happens. ⛔ WHAT IT REACHES FOR IS THE ONE THING NO OTHER MIND SKILL DOES: ACT SOMEWHERE YOU ARE NOT. The Named Exclusion is a static mark where you stand; this GOES, and at r3 it DECIDES. Erik: 'I like your rewrite and it's a good summon skill. Keep it.'",
    "_nameWas": "The Walking Figure",
    "_idWas": "the_walking_figure",
-   "_wardTypes": "⛔ SNG-512. A figure that holds a threshold answers what tries to pass it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. A figure that holds a threshold answers what tries to pass it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "sound_repair",
@@ -1348,7 +1352,7 @@
    "name": "Borrowed Form",
    "levelReq": 4,
    "energyCost": 12,
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "wild_nanite",
    "tradition": "figurist",
    "attribute": "mental",
    "axes": {
@@ -1453,7 +1457,9 @@
    ],
    "plainly": "A travel and explore action. You take the form of a flying creature and fly as it flies, with your gear folded into the form and your own mind intact. Rank 1 holds about an hour, solo. Rank 2 holds a day — enough to cross a leg — and carries one other person in a form of their own. Rank 3 takes the whole party up together, each in their own shape, for a day. The limit is duration and how many, not what you can do: when the hold ends you are yourself again wherever you are, so if it ends mid-air you fall. Anyone you carry has to be willing.",
    "_nameWas": "The Borrowed Form",
-   "_idWas": "the_drawn_ascent"
+   "_idWas": "the_drawn_ascent",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1571,7 +1577,7 @@
    "name": "Cutting Figure",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "wild_nanite",
    "attribute": "mental",
    "axes": {
     "concrete_abstract": -0.6,
@@ -1712,7 +1718,9 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Cutting Figure",
-   "_idWas": "the_cutting_figure"
+   "_idWas": "the_cutting_figure",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "plain_weight",
@@ -2010,7 +2018,7 @@
   {
    "id": "pattern_sense",
    "name": "Pattern-Sense",
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "wild_nanite",
    "attribute": "mental",
    "axes": {
     "concrete_abstract": 0.3
@@ -2139,12 +2147,14 @@
    ],
    "_descriptionWas": "See the pattern beneath particulars — the first gift of the Pattern Reach.",
    "_revised": "⚠️ SNG-450. Erik: 'DON'T REMOVE r3 FROM PATTERN-SENSE — ADD SOMETHING TO IT.' ⛔ He is right that the fix for a weak rank is to make it do something, not to delete it. r3 was 'read the form of an event, a life, or a history — the shape it is completing', which is an observation. IT NOW ACTS ON THE FORM: name where the pattern must break, and act there.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "stone_read",
    "name": "Stone-Read",
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "concrete_abstract": -0.3
@@ -2235,14 +2245,16 @@
     }
    ],
    "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens history; rank 3 extends perceptionDepth. Limit: materials, Not Makers — it says the beam will fail, not who cut it.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `mason` — ⚠️ Ordered nanite is WORKED MATTER, which is the one immaterial thing a Mason would accept — a load path is real.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "the_true_figure",
    "name": "The True Figure",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_concrete_abstract",
+   "powerSystem": "wild_nanite",
    "attribute": "mental",
    "axes": {
     "concrete_abstract": -0.5
@@ -2329,7 +2341,9 @@
     }
    ],
    "plainly": "A puzzle/social action that reads the pattern a thing is making. Rated 5 of 10 across a scope of 2 for about six hours.",
-   "_descriptionWas": "The Figurists' first craft: pattern read rather than imposed."
+   "_descriptionWas": "The Figurists' first craft: pattern read rather than imposed.",
+   "_powerSystemWas": "reach_concrete_abstract",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

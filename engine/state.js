@@ -455,6 +455,14 @@ export async function loadContent() {
   const abilities = {};
   for (const pack of await abilitiesP) for (const a of pack.abilities) abilities[a.id] = {
     ...a, powerSystem: a.powerSystem || pack.powerSystem,
+    // ⛔ CCODE-219 — AND THE FILE'S OWN GROUPING SURVIVES. CCODE-217 correctly let the ability's physics
+    // win, and SNG-535 then reclassified both currents as `combination` with a `powerMix` - at which point
+    // `seedInnateSubstrate`, which matched `powerSystem === "wild_current"`, could no longer tell a wild
+    // current from any other combination and NO ORIGIN COULD SEED ONE.
+    // ⚠️ Two different questions were being asked of one field: WHAT PHYSICS IS THIS (the ability knows)
+    // and WHICH FAMILY IS IT FROM (the file knows). Discarding the second to answer the first is what broke
+    // it, so both are kept and each question asks the field that can answer it.
+    ...(pack.powerSystem ? { packSystem: pack.powerSystem } : {}),
     rankProgression: a.rankProgression || "use",
     nativeOrCombination: a.nativeOrCombination || null,
     combinationAxis: a.combinationAxis ?? null,

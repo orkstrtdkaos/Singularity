@@ -157,7 +157,12 @@ export function seedInnateSubstrate(character, originRecord = {}, catalog = {}, 
   const seeded = [];
   const seed = (ids, list, sys) => {
     for (const id of ids || []) {
-      if (catalog[id]?.powerSystem === sys && !list.includes(id)) { list.push(id); seeded.push(id); }
+      // ⛔ CCODE-219: ASK THE FILE, NOT THE PHYSICS. "Is this a wild-current craft?" is a question about
+      // which family it belongs to, and SNG-535 made every one of them `combination` - true about its
+      // physics and useless for this. `packSystem` is the file's own answer and it did not change.
+      // ⚠️ `powerSystem` is still accepted, so a craft authored the old way keeps working.
+      const rec = catalog[id];
+      if (rec && (rec.packSystem === sys || rec.powerSystem === sys) && !list.includes(id)) { list.push(id); seeded.push(id); }
     }
   };
   seed(originRecord.innatePrecursor, character.precursorAccess, "precursor");

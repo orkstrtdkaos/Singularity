@@ -3793,13 +3793,21 @@ await (async () => {
   // end-to-end on the REAL authored content (origins.json + precursor.json + living_current.json)
   const rj131 = (rel) => JSON.parse(readFileSync(join(root, rel), "utf8"));
   const origins = rj131("content/packs/core/rules/origins.json").origins;
-  const precursorAbs = rj131("content/packs/core/abilities/precursor.json").abilities;
-  const livingAbs = rj131("content/packs/core/abilities/living_current.json").abilities;
+  // ⚠️ THE FIXTURE HAS TO STAMP WHAT THE LOADER STAMPS. `packSystem` is added at load from the file's
+  // header; a fixture reading the raw JSON sees neither it nor the header, and would have failed for the
+  // fixture's shape rather than for anything about the content.
+  const packOf = (rel) => { const pk = rj131(rel); return (pk.abilities || []).map(a => ({ ...a, packSystem: pk.powerSystem })); };
+  const precursorAbs = packOf("content/packs/core/abilities/precursor.json");
+  const livingAbs = packOf("content/packs/core/abilities/living_current.json");
   const realCat = {};
   for (const a of [...precursorAbs, ...livingAbs]) realCat[a.id] = a;
   const oget = id => origins.find(o => o.id === id);
   check("SNG-131 e2e: seraphic.innatePrecursor + abyssal.innatePrecursor are REAL precursor ids", oget("seraphic").innatePrecursor.every(id => realCat[id]?.powerSystem === "precursor") && oget("abyssal").innatePrecursor.every(id => realCat[id]?.powerSystem === "precursor"));
-  check("SNG-131 e2e: rootkin.innateLivingCurrent is a REAL living_current id", oget("rootkin").innateLivingCurrent.every(id => realCat[id]?.powerSystem === "living_current"));
+  // ⚠️ BY WHICH FILE IT COMES FROM, NOT BY ITS PHYSICS. SNG-535 reclassified both currents as
+  // `combination` with a `powerMix` - true about what they RUN ON and useless for "is this a living
+  // current?", which is a question about family. `packSystem` is the file's own answer and did not change.
+  check("SNG-131 e2e: rootkin.innateLivingCurrent is a REAL living_current craft",
+    oget("rootkin").innateLivingCurrent.every(id => (realCat[id]?.packSystem || realCat[id]?.powerSystem) === "living_current"));
   check("SNG-131 e2e: seeding a real seraphic opens its authored precursor base, gate returns its levelReq", (() => {
     const c = { origin: "seraphic" };
     seedInnateSubstrate(c, oget("seraphic"), realCat);
@@ -4000,10 +4008,33 @@ await (async () => {
   check("SNG-140: app.js flags an action wildVariance from a wild_current ability", /wildVariance: \[choice\.abilityId[\s\S]{0,140}powerSystem === "wild_current"/.test(appSrc));
   const resJson = JSON.parse(readFileSync(join(root, "content/packs/core/rules/resolution.json"), "utf8"));
   check("SNG-140: the wild.critWiden knob is authored + upside-forward", (resJson.wild?.critSuccessWiden || 0) > (resJson.wild?.critFailWiden || 0));
-  const wcReal = JSON.parse(readFileSync(join(root, "content/packs/core/abilities/wild_current.json"), "utf8")).abilities;
+  const wcPack = JSON.parse(readFileSync(join(root, "content/packs/core/abilities/wild_current.json"), "utf8"));
+  const wcReal = (wcPack.abilities || []).map(a => ({ ...a, packSystem: wcPack.powerSystem }));
   const origins140 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/origins.json"), "utf8")).origins;
   const wcIds = new Set(wcReal.map(a => a.id));
-  check("SNG-140 e2e: authored wild_current abilities carry wildVariance", wcReal.every(a => a.powerSystem === "wild_current") && wcReal.some(a => a.wildVariance));
+  check("SNG-140 e2e: authored wild_current abilities carry wildVariance",
+    wcReal.every(a => (a.packSystem || a.powerSystem) === "wild_current") && wcReal.some(a => a.wildVariance));
+  // ⛔ AND THE THING THOSE TWO GATES WERE REALLY PROTECTING: an origin can still SEED a current. When
+  // SNG-535 made every current `combination`, seedInnateSubstrate matched on powerSystem and no origin
+  // could seed one - a capability that vanished behind a correct content change, and both gates above went
+  // red for the SPELLING rather than for that.
+  {
+    // its own imports - the enclosing block's are not in scope, and a stray reference here would not fail
+    // one gate, it would silently delete every gate after it (CCODE-218's lesson, one week old).
+    const PR140 = await import("../engine/progression.js");
+    const { loadContentHeadless: lch140 } = await import("./headless_content.mjs");
+    const C140 = await lch140();
+    const seededCh = {};
+    PR140.seedInnateSubstrate(seededCh, { innateLivingCurrent: ["quicken_the_ground"], wildCurrent: ["churns_gift"] }, C140.abilities);
+    const wrongFamily = {};
+    PR140.seedInnateSubstrate(wrongFamily, { wildCurrent: ["quicken_the_ground"] }, C140.abilities);
+    check("SNG-140/CCODE-219: an origin can still SEED a current after the combination reclassification",
+      seededCh.livingCurrentAccess?.includes("quicken_the_ground")
+      && seededCh.wildCurrentAccess?.includes("churns_gift"),
+      JSON.stringify({ living: seededCh.livingCurrentAccess, wild: seededCh.wildCurrentAccess }));
+    check("SNG-140/CCODE-219: and a LIVING craft offered as a wild seed is still refused",
+      !(wrongFamily.wildCurrentAccess || []).includes("quicken_the_ground"));
+  }
   check("SNG-140 e2e: churnfolk + abyssal wildCurrent point at REAL wild_current ids", ["churnfolk", "abyssal"].every(id => (origins140.find(o => o.id === id)?.wildCurrent || []).every(x => wcIds.has(x))));
 })();
 

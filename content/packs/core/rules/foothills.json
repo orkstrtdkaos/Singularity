@@ -161,6 +161,22 @@
    ],
    "sisterPlace": "amaranth",
    "name": "Greyhearth and Amaranth"
+  },
+  "valley_craft": {
+   "parents": {
+    "stillhold": 0.4,
+    "wright": 0.3,
+    "rootkin": 0.3
+   },
+   "axis": "center",
+   "craft": "Valley Craft",
+   "place": "the_crossing",
+   "region": "the_given_land",
+   "abilities": 18,
+   "ratified": "⛔ ERIK 2026-08-23: 'valley_craft DO have parents — we've established this multiple times.'",
+   "why": "⚠️ I RECORDED IT TWICE AS 'THE FOLK COLLECTION, NO PARENTS' AND WAS CORRECTED BOTH TIMES. ⛔ THE DEFINITION IS THE THING I KEPT MISSING: A FOOTHILL IS WHERE MULTIPLE TRADITIONS COME TOGETHER — A PLACE WHERE A DOMAIN AND ITS ADJACENTS LIVE AND WORK. That is a description of the CROSSING, which is the most foothill-shaped place in the world.\n   STILLHOLD 0.4 — the mediator's share. The Crossing holds because someone stops things.\n   WRIGHT 0.3 — it is a working valley: made goods, repair, the trades.\n   ROOTKIN 0.3 — it is a GROWING valley, and the green is half of what the folk crafts handle.",
+   "theFunctionalTurn": "⛔ THE POLES ARE CLOSED AND VALLEY CRAFT IS OPEN. traditions.json: 'the Valley's folk traditions (harmonic/radiant/valley_craft) are OPEN — they are the near-center crossing; anyone in the Valley may learn them.' ⚠️ THAT IS THE FOOTHILL PROPERTY STATED IN THE ACCESS RULES and I read it as evidence it was NOT a foothill.",
+   "_note": "⛔ AND IT SATISFIES THE ROOTING TEST ALREADY IN THIS FILE: 'a foothill roots a craft when the BLEND produces something neither parent has.' ⚠️ 18 crafts, and they are the crossing's own — not stillhold done cheaply, not wright done small."
   }
  },
  "folk": {
@@ -185,5 +201,6 @@
  "notATradition": {
   "precursor": "⛔ A POWER SOURCE MISFILED AS A TRADITION. 6 abilities — Address-Sense, Latticespeak, Wake the Line, Unmake Seal, Hold the Aperture, Foreclose. No people owns them; anyone who learns to speak to the lattice has them. ⚠️ Should carry `tradition: null` with `powerSystem: precursor`."
  },
- "_twoAxes": "⛔ SNG-443, ERIK'S RULING: 'Skills may be learned at PLACES — or in the wilds as a hunter — but they would be TIED BACK TO THEIR TRADITION ROOTS otherwise.'\n⚠️ TWO SEPARATE AXES, AND I HAD COLLAPSED THEM:\n   `tradition` — THE LINEAGE. Which people's craft this descends from. Permanent, and it is what the power source, the aesthetic and the wheel position all key off.\n   `learnedAt` — THE ACCESS. Where a person can actually be taught it: a foothill, a school, a place, or the wilds.\n⛔ A FOOTHILL IS A PLACE OF ACCESS, NOT A NEW ANCESTRY. Hardline teaches the Edge; it does not own it. That is exactly what makes a foothill an economic centre — it SELLS ACCESS to something it did not invent, which is also true of the Radiant Plateau selling stored light and the Bargainers selling honest terms.\n⚠️ MY ERROR, NAMED: I filed six crafts as `valley_craft` because they were open to anyone, which CONFUSED ACCESS WITH ANCESTRY. Open-to-anyone is a property of the learning, not of the lineage."
+ "_twoAxes": "⛔ SNG-443, ERIK'S RULING: 'Skills may be learned at PLACES — or in the wilds as a hunter — but they would be TIED BACK TO THEIR TRADITION ROOTS otherwise.'\n⚠️ TWO SEPARATE AXES, AND I HAD COLLAPSED THEM:\n   `tradition` — THE LINEAGE. Which people's craft this descends from. Permanent, and it is what the power source, the aesthetic and the wheel position all key off.\n   `learnedAt` — THE ACCESS. Where a person can actually be taught it: a foothill, a school, a place, or the wilds.\n⛔ A FOOTHILL IS A PLACE OF ACCESS, NOT A NEW ANCESTRY. Hardline teaches the Edge; it does not own it. That is exactly what makes a foothill an economic centre — it SELLS ACCESS to something it did not invent, which is also true of the Radiant Plateau selling stored light and the Bargainers selling honest terms.\n⚠️ MY ERROR, NAMED: I filed six crafts as `valley_craft` because they were open to anyone, which CONFUSED ACCESS WITH ANCESTRY. Open-to-anyone is a property of the learning, not of the lineage.",
+ "_theDefinition_20260823": "⛔ ERIK, 2026-08-23, THE DEFINITION I KEPT MISSING: 'FOOTHILLS ARE WHERE MULTIPLE TRADITIONS COME TOGETHER — PLACES WHERE A DOMAIN AND ITS ADJACENTS LIVE AND WORK.'\n⚠️ I HAD BEEN READING A FOOTHILL AS 'A WEAKER VERSION OF A POLE, SOLD.' That is a consequence, not the definition. ⛔ THE DEFINITION IS GEOGRAPHIC AND SOCIAL: it is a PLACE, and the blend is who lives there. Greyhearth/Amaranth is the clearest case — two towns, one river, three parents."
 }

@@ -9,7 +9,7 @@
    "name": "Ruinwork",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "destruction_creation": -0.5,
@@ -146,14 +146,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads where a thing wants to break\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads where a thing wants to break\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "makecraft",
    "name": "Makecraft",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "attribute": "practical",
    "axes": {
     "destruction_creation": 0.5,
@@ -269,14 +271,16 @@
     }
    ],
    "plainly": "A explore/fight/social action that makes or animates something. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 deepens quality; rank 3 adds to special. Limit: quick IS Not Sound.",
-   "_descriptionWas": "The creation-pole mastery: making, at speed and at scale. The Wrights raise things faster than anyone should be able to and never quite complete them."
+   "_descriptionWas": "The creation-pole mastery: making, at speed and at scale. The Wrights raise things faster than anyone should be able to and never quite complete them.",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "makers_eye",
    "name": "Maker's-Eye",
    "levelReq": 1,
    "energyCost": 3,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "destruction_creation": 0.3
@@ -401,14 +405,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ BUILDING'S SENSE — what a thing could become, and what it is now\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ BUILDING'S SENSE — what a thing could become, and what it is now\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "raised_thing",
    "name": "Raised Thing",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "attribute": "practical",
    "axes": {
     "destruction_creation": 0.25
@@ -521,14 +527,16 @@
    ],
    "plainly": "A explore/investigate/fight action that makes or animates something. Its strength is rated 3 out of 10, and lasts for about 3 days Ranks: rank 2 deepens durability; rank 3 adds to special. Limit: quick IS Not Sound — raised things want tending.",
    "_nameWas": "The Raised Thing",
-   "_idWas": "the_raised_thing"
+   "_idWas": "the_raised_thing",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "weapon_at_hand",
    "name": "Weapon at Hand",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "practical",
    "axes": {
     "destruction_creation": 0.3,
@@ -645,14 +653,16 @@
    ],
    "plainly": "A combat/craft/survival action that deals damage. It rolls 2d6 Ranks: rank 2 deepens speed; rank 3 adds to special. Limit: it makes a Weapon, not a warrior — it does not swing itself.",
    "_nameWas": "The Weapon at Hand",
-   "_idWas": "the_weapon_at_hand"
+   "_idWas": "the_weapon_at_hand",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "work_speaks",
    "name": "Work Speaks",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "destruction_creation": 0.3
@@ -778,14 +788,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Work Speaks",
-   "_idWas": "the_work_speaks"
+   "_idWas": "the_work_speaks",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "built_way",
    "name": "Built Way",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "practical",
    "axes": {
     "destruction_creation": 0.4,
@@ -904,14 +916,16 @@
    ],
    "plainly": "A exploration/craft/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 2 days. Range is 10. Ranks: rank 2 deepens access; rank 3 adds to special. Limit: iT Takes Time And Materials — craft is not force.",
    "_nameWas": "The Built Way",
-   "_idWas": "the_built_way"
+   "_idWas": "the_built_way",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "ongoing_work",
    "name": "Ongoing Work",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "destruction_creation": 0.4
@@ -1021,14 +1035,16 @@
    ],
    "plainly": "A endurance/craft/hardship action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to autonomy. Limit: you Must Actually BE Making Something — the work is the anchor, and idleness ends it.",
    "_nameWas": "The Ongoing Work",
-   "_idWas": "the_ongoing_work"
+   "_idWas": "the_ongoing_work",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "clean_removal",
    "name": "Clean Removal",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "destruction_creation": -0.4
@@ -1166,14 +1182,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Clean Removal",
-   "_idWas": "the_clean_removal"
+   "_idWas": "the_clean_removal",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "ended_threat",
    "name": "Ended Threat",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "destruction_creation": -0.4,
@@ -1313,14 +1331,16 @@
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Ended Threat",
    "_idWas": "the_ended_threat",
-   "_wardTypes": "⛔ SNG-512. Prevention rather than blocking — answers what could be ended first.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. Prevention rather than blocking — answers what could be ended first.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "open_material",
    "name": "Open Material",
    "levelReq": 3,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "destruction_creation": -0.3
@@ -1427,14 +1447,16 @@
    ],
    "plainly": "A craft/tactical/intellectual action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens decomposition; rank 3 adds to special. Limit: a Thing Returned TO Before-IT-Was Cannot BE Returned TO What IT Was.",
    "_nameWas": "The Open Material",
-   "_idWas": "the_open_material"
+   "_idWas": "the_open_material",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "demonstrated_end",
    "name": "Demonstrated End",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "destruction_creation": -0.3
@@ -1550,14 +1572,16 @@
    ],
    "plainly": "A social/negotiation/leadership action that strengthens someone. Its strength is rated 4 out of 10 It affects 3 targets, and lasts for about 6 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: iT Requires A Real Record of ending things — an empty threat is an empty threat.",
    "_nameWas": "The Demonstrated End",
-   "_idWas": "the_demonstrated_end"
+   "_idWas": "the_demonstrated_end",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "ended_burden",
    "name": "Ended Burden",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "destruction_creation": -0.3
@@ -1692,7 +1716,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Ended Burden",
-   "_idWas": "the_ended_burden"
+   "_idWas": "the_ended_burden",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1700,7 +1726,7 @@
    "name": "Undoing Word",
    "levelReq": 4,
    "energyCost": 12,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "tradition": "unmaker",
    "attribute": "physical",
    "axes": {
@@ -1794,7 +1820,9 @@
    "plainly": "A fight action that deals damage. It rolls 4d6+2 across a scope of 3 Ranks: rank 2 adds to special. Limit: iT Cannot Touch The Living OR The Singular.",
    "_descriptionWas": "The Unmaker art of the undoing — returning a made or bound thing to its unassembled state, so it is not destroyed but un-done, its making reversed. The clean art of those who end things properly.",
    "_nameWas": "The Undoing Word",
-   "_idWas": "the_undoing_word"
+   "_idWas": "the_undoing_word",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1802,7 +1830,7 @@
    "name": "Last Unmaking",
    "levelReq": 5,
    "energyCost": 14,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "tradition": "unmaker",
    "attribute": "physical",
    "axes": {
@@ -1874,7 +1902,9 @@
    ],
    "plainly": "A fight action that deals damage. It rolls 5d6+6 across a scope of 4 Limit: iT Costs Nearly All You Have.",
    "_nameWas": "The Last Unmaking",
-   "_idWas": "the_last_unmaking"
+   "_idWas": "the_last_unmaking",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1882,7 +1912,7 @@
    "name": "True Making",
    "levelReq": 3,
    "energyCost": 7,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "tradition": "wright",
    "attribute": "practical",
    "axes": {
@@ -1994,7 +2024,9 @@
    "plainly": "A create action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 12 months Ranks: rank 2 deepens quality; rank 3 extends scope. Limit: iT Makes The Made, Not The Living.",
    "_descriptionWas": "The Wright art of true making — building a thing correctly and completely, so it is sound to its core and endures because nothing in it was cut short. The maker's first real mastery: not fast, but right.",
    "_nameWas": "The True Making",
-   "_idWas": "the_true_making"
+   "_idWas": "the_true_making",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2002,7 +2034,7 @@
    "name": "Reforging",
    "levelReq": 4,
    "energyCost": 11,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "tradition": "wright",
    "attribute": "practical",
    "axes": {
@@ -2093,7 +2125,9 @@
    "plainly": "A create action that makes or animates something. Its strength is rated 7 out of 10, and lasts for about 12 months Ranks: rank 2 adds to special. Limit: iT Works ON The Made, Not The Living.",
    "_descriptionWas": "The Wright art of reforging — remaking a broken thing so that its breaking becomes its strength, the flaw worked into a truer form. The deep gift of makers who know that broken is not the same as ruined.",
    "_nameWas": "The Reforging",
-   "_idWas": "the_reforging"
+   "_idWas": "the_reforging",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2101,7 +2135,7 @@
    "name": "Masterwork",
    "levelReq": 5,
    "energyCost": 13,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "tradition": "wright",
    "attribute": "practical",
    "axes": {
@@ -2171,7 +2205,9 @@
    ],
    "plainly": "A create action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 122 months Limit: iT Demands Real Time And Nearly All You Have.",
    "_nameWas": "The Masterwork",
-   "_idWas": "the_masterwork"
+   "_idWas": "the_masterwork",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2179,7 +2215,7 @@
    "name": "Last Fault",
    "levelReq": 5,
    "energyCost": 15,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "tradition": "unmaker",
    "attribute": "mental",
    "axes": {
@@ -2273,14 +2309,16 @@
    ],
    "plainly": "A fight attack dealing 5d6 with the highest damage variance in the game, because you do not control what the fault does when it opens. You cannot choose the effect and you cannot stop it partway. At rank 2 it also hits others near the target, including you. Everything living has a fault, so nothing is immune.",
    "_nameWas": "The Last Fault",
-   "_idWas": "the_last_fault"
+   "_idWas": "the_last_fault",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "found_fault",
    "name": "Found Fault",
    "levelReq": 1,
    "energyCost": 5,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "attribute": "practical",
    "axes": {
     "destruction_creation": -0.6,
@@ -2402,14 +2440,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Found Fault",
-   "_idWas": "the_found_fault"
+   "_idWas": "the_found_fault",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "sudden_work",
    "name": "Sudden Work",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "attribute": "practical",
    "axes": {
     "destruction_creation": 0.6,
@@ -2537,14 +2577,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Sudden Work",
-   "_idWas": "the_sudden_work"
+   "_idWas": "the_sudden_work",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "clean_taking",
    "name": "Clean Taking",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "attribute": "practical",
    "axes": {
     "destruction_creation": -0.5
@@ -2651,14 +2693,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Clean Taking",
-   "_idWas": "the_clean_taking"
+   "_idWas": "the_clean_taking",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "given_way",
    "name": "Given Way",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "attribute": "practical",
    "axes": {
     "destruction_creation": -0.4,
@@ -2764,14 +2808,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Given Way",
-   "_idWas": "the_given_way"
+   "_idWas": "the_given_way",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "quick_work",
    "name": "Quick Work",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "attribute": "practical",
    "axes": {
     "destruction_creation": 0.6
@@ -2867,14 +2913,16 @@
    "plainly": "A puzzle/social action that builds a working object fast from materials at hand. Rated 5 of 10 across a scope of 2.",
    "_descriptionWas": "The Wrights' first craft. A day's carpentry in a quarter of an hour, and it holds.",
    "_nameWas": "The Quick Work",
-   "_idWas": "the_quick_work"
+   "_idWas": "the_quick_work",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "held_repair",
    "name": "Held Repair",
    "levelReq": 1,
    "energyCost": 3,
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "attribute": "practical",
    "axes": {
     "destruction_creation": 0.5
@@ -2976,12 +3024,14 @@
    "plainly": "A puzzle/social action that makes a broken thing work again temporarily. Rated 5 of 10 across a scope of 2 for about a day.",
    "_descriptionWas": "The Wrights' field-craft: get it moving, get it home, fix it properly there.",
    "_nameWas": "The Held Repair",
-   "_idWas": "the_held_repair"
+   "_idWas": "the_held_repair",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "fault_sense",
    "name": "Fault-Sense",
-   "powerSystem": "reach_destruction_creation",
+   "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
     "destruction_creation": -0.3
@@ -3075,7 +3125,9 @@
     }
    ],
    "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: seeing The Fault Does Not Tell You Whether TO Press IT.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_destruction_creation",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -81,7 +81,7 @@
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 116,
-  "energy": 112,
+  "energy": 108,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -143,6 +143,21 @@
       "spread": [],
       "day": 1,
       "worldDay": 54
+    },
+    {
+      "at": "2026-08-23T19:43:44.189Z",
+      "locationId": "glasshome",
+      "communityId": "blazeborn.glasshome",
+      "description": "Solved the mystery of the Ashfall Crater—read the fused-glass ring as a resonance-landing-site, a tuning-ring waiting to answer a pre-Transition structure the valley never knew existed.",
+      "tags": [
+        "discovery",
+        "structural",
+        "insight"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 1,
+      "worldDay": 54
     }
   ],
   "relationships": {},
@@ -165,33 +180,21 @@
         "player": "Use Unbroken Thread to hold this breakthrough steady—you need every detail of the crater's resonance-signature locked in perfect clarity before you move, so you can cross-reference it if the structure ahead tries to hide what it is.",
         "summary": "At dawn in the Ashfall Crater, Aeraqor reads the rim's geometry as a resonance-footprint, a landing-song—not the impact-crater it appeared. The crater is a tuning-ring waiting to answer something in the pre-Transition structure northeast-by-east. Using Unbroken Thread, Aeraqor locks the entire pattern in perfect clarity before setting out toward the source of the water crisis and the waking beneath.",
         "narration": "You place your hand flat against the fused glass and *breathe*. Not the sharp, bright breathing of Kindle or Radiance—this is the opposite: a drawing-in, a *holding*. Unbroken Thread is a small craft, quiet work, the kind that looks like nothing from the outside. Your thoughts scatter across a hundred details—the spiral of ridges, the spacing of the hollows, the way the light refracts differently where the glass fractured and re-fused—and you gather them, *hold* them, lock each one in place like a key in a tumbler.\n\nThe pattern stays. Perfectly clear. Perfectly *held*. You could walk away now and return in three days and still see it exactly as it is this morning.\n\nEmber shifts beside you, its coat flaring warm. It understands what you've just done—not the craft itself, but the *readiness* it means. You have the crater's song mapped. You know what shape to listen for. And northeast-by-east, in a pre-Transition structure the valley has forgotten about, something is humming the answer back.\n\nThe spring light catches the glass one more time as you roll your diagrams. The pattern is yours now. The question is whether you have the strength to reach the structure that holds the final piece—and whether that structure wants to be found."
+      },
+      {
+        "player": "Ask Ember—it senses the thin places and the Precursor stirring before you ever will. If anything wakes in that structure, Ember will know it before you're close enough to see.",
+        "summary": "Aeraqor confirms the Ashfall Crater is a resonance-landing-site and prepares to head northeast toward the pre-Transition structure holding the valley's emergency authentication sequence, with Ember as an early-warning for Precursor activity.",
+        "narration": "You turn to Ember, and the fox-thing's ears swivel toward you before you've even spoken—it's already reading the shape of your thought. \"The structure northeast,\" you say quietly, running your hand across the fused-glass rim one last time. \"Anything wakes in there before we're close enough to see it, you'll feel it first.\"\n\nEmber's coat flares warmer, a ripple of deep red like coals stirring. It makes a low sound—not quite a growl, not quite a purr—and turns its head toward the northeast, where the morning light still struggles against the altitude and the cold. Its eyes, too aware for any animal's, narrow. It's already listening to the frequencies the valley hasn't learned to hear yet.\n\nYou gather your bedroll, secure your pack, and stand at the crater's rim with the resonance-pattern locked in perfect clarity behind your eyes. The authentication sequence waits in that structure. The ring beneath your feet waits for it. And something underneath everything is already moving.\n\nEmber paddles forward to the path that leads down from the crater, then looks back at you—not a question, but an acknowledgment. It's ready. It knows what the thin places sound like when they wake."
       }
     ],
     "lastTurn": {
-      "narration": "You place your hand flat against the fused glass and *breathe*. Not the sharp, bright breathing of Kindle or Radiance—this is the opposite: a drawing-in, a *holding*. Unbroken Thread is a small craft, quiet work, the kind that looks like nothing from the outside. Your thoughts scatter across a hundred details—the spiral of ridges, the spacing of the hollows, the way the light refracts differently where the glass fractured and re-fused—and you gather them, *hold* them, lock each one in place like a key in a tumbler.\n\nThe pattern stays. Perfectly clear. Perfectly *held*. You could walk away now and return in three days and still see it exactly as it is this morning.\n\nEmber shifts beside you, its coat flaring warm. It understands what you've just done—not the craft itself, but the *readiness* it means. You have the crater's song mapped. You know what shape to listen for. And northeast-by-east, in a pre-Transition structure the valley has forgotten about, something is humming the answer back.\n\nThe spring light catches the glass one more time as you roll your diagrams. The pattern is yours now. The question is whether you have the strength to reach the structure that holds the final piece—and whether that structure wants to be found.",
-      "sceneSummary": "At dawn in the Ashfall Crater, Aeraqor reads the rim's geometry as a resonance-footprint, a landing-song—not the impact-crater it appeared. The crater is a tuning-ring waiting to answer something in the pre-Transition structure northeast-by-east. Using Unbroken Thread, Aeraqor locks the entire pattern in perfect clarity before setting out toward the source of the water crisis and the waking beneath.",
+      "narration": "You turn to Ember, and the fox-thing's ears swivel toward you before you've even spoken—it's already reading the shape of your thought. \"The structure northeast,\" you say quietly, running your hand across the fused-glass rim one last time. \"Anything wakes in there before we're close enough to see it, you'll feel it first.\"\n\nEmber's coat flares warmer, a ripple of deep red like coals stirring. It makes a low sound—not quite a growl, not quite a purr—and turns its head toward the northeast, where the morning light still struggles against the altitude and the cold. Its eyes, too aware for any animal's, narrow. It's already listening to the frequencies the valley hasn't learned to hear yet.\n\nYou gather your bedroll, secure your pack, and stand at the crater's rim with the resonance-pattern locked in perfect clarity behind your eyes. The authentication sequence waits in that structure. The ring beneath your feet waits for it. And something underneath everything is already moving.\n\nEmber paddles forward to the path that leads down from the crater, then looks back at you—not a question, but an acknowledgment. It's ready. It knows what the thin places sound like when they wake.",
+      "sceneSummary": "Aeraqor confirms the Ashfall Crater is a resonance-landing-site and prepares to head northeast toward the pre-Transition structure holding the valley's emergency authentication sequence, with Ember as an early-warning for Precursor activity.",
       "choices": [
         {
-          "label": "Set out northeast-by-east immediately—the structure is a day's hard travel, and the water crisis is moving faster than your feet.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Return to the Heights first—you need Sorel, the Radiant archivist who confirmed the structure's existence. She has the archives, the markers, the proof. The valley's leadership won't move on your diagrams alone.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Head down from the crater toward the northeast-by-east bearing, moving deliberately but without delay—the valley's crisis is real, and speed matters now.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
@@ -206,54 +209,73 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Ember—it senses the thin places and the Precursor stirring before you ever will. If anything wakes in that structure, Ember will know it before you're close enough to see.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Before you leave, use Radiance to burn one of your charcoal diagrams into the fused glass—a mark for anyone who comes looking, and a way to prove to yourself that this crater *is* what you think it is.",
+          "attribute": "physical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout"
+            "craft"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "radiance",
+          "energyCost": 6,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Do something else.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Wait a moment longer at the rim and listen—the resonance-singers at the Heights taught you to hear the interference patterns between voices and stone. What does the crater *sound* like now that you understand what it is?",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
-          "intentTags": [],
+          "intentTags": [
+            "study"
+          ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "A pale figure moves across the fused-glass plain to the north—*wrong* angles, *wrong* movement. Ember's coat goes rigid and hot. This is not something the valley should have.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "risky",
+            "defend"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": "beast_pale_reader",
+          "emergenceId": null
         }
       ],
       "deeds": [
         {
-          "description": "Read the Ashfall Crater's geometry as a resonance-footprint—solving a fifteen-year mystery in a moment of breakthrough.",
+          "description": "Solved the mystery of the Ashfall Crater—read the fused-glass ring as a resonance-landing-site, a tuning-ring waiting to answer a pre-Transition structure the valley never knew existed.",
           "tags": [
             "discovery",
-            "insight",
-            "structural"
+            "structural",
+            "insight"
           ],
           "weight": 2,
-          "communityId": "valley.radiant"
+          "communityId": "blazeborn.glasshome"
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -1,
+        "energy": -4,
         "inventoryAdd": [],
         "inventoryRemove": [],
-        "xp": 15
+        "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
@@ -262,80 +284,127 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "the read itself—Unbroken Thread held the pattern perfectly, showing you that the craft works at full clarity when the stakes are highest",
-        "from": "your own readiness and the craft's response to real need; a moment that teaches something about how Unbroken Thread actually performs under pressure"
+        "thing": "A pale figure moving across the fused-glass plain to the north—*wrong* angles, *wrong* movement—a creature that should not be, and Ember knows it.",
+        "from": "The Ashfall Crater itself: as Aeraqor stands ready to leave with the resonance-pattern locked, the world shows its teeth. What wakes beneath is waking *now*."
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Ashfall Crater's rim at early-spring dawn, fused glass catching the first sharp light. The air is thin and cold. You've just locked the crater's resonance-pattern in perfect clarity.",
+        "setting": "The Ashfall Crater's rim at early-spring dawn, fused glass catching the first sharp light. The air is thin and cold. You stand ready to descend, the resonance-footprint locked in your mind. The path down toward the northeast leads into morning shadow and then bright ground beyond.",
         "npcsPresent": [
           {
             "name": "Ember",
-            "state": "Alert and warm, coat flaring at the moment of your breakthrough. Watching northeast-by-east toward the pre-Transition structure."
+            "state": "Alert and warm, coat flaring. Watching northeast toward the pre-Transition structure, ears swiveling toward any frequency the thin places carry. Ready to move or warn."
           }
         ],
         "objects": [
-          "Your bedroll, still warm",
+          "Your bedroll, now rolled and secured",
           "Your traveler's pack",
           "Your waterskin, refilled at the last clean spring",
-          "The fused glass of the crater's rim, now read as a resonance-landing footprint and locked in your perfect memory",
+          "The fused glass of the crater's rim, now understood as a resonance-landing footprint",
           "Your diagrams, angular and hand-drawn, now finally matched to the geometry beneath"
         ],
         "threads": [
-          "The pre-Transition structure northeast-by-east and what it holds",
-          "Whether to seek Sorel's proof before moving, or trust the pattern and your own read",
-          "How to reach the structure before the valley's response to the crisis moves in another direction",
-          "What it means that Ember has gone so still and warm"
+          "The pre-Transition structure northeast-by-east and what it holds—the authentication sequence the valley needs",
+          "Whether something is already waking in that structure, and how close it is",
+          "What it means that Ember has gone so still and warm, and why it chose to step out of the Glade with you"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "ember",
+          "name": "Ember",
+          "role": "Companion—a Glade-touched fox-thing that chose to walk out of the wilds with you",
+          "gender": "nonbinary",
+          "pronouns": "it/its",
+          "description": null,
+          "note": "At the Ashfall Crater's rim, Ember senses the Precursor stirring in the pre-Transition structure to the northeast—goes still and hot with knowing. Ready to warn you of anything that wakes before you're close enough to see.",
+          "learned": [
+            "Ember can feel the thin places and Precursor activity before any ordinary sense would detect it—a frequency it hears that you don't.",
+            "Whatever wakes in the structure ahead, Ember will know it first."
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Present at the Ashfall Crater, alert and bonded to Aeraqor's purpose, senses the stirring ahead",
+          "revealName": null,
+          "nameExtend": null,
+          "bondType": null,
+          "bondStage": null,
+          "deed": null
+        }
+      ],
       "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": {
-        "name": "Pattern-Lock",
-        "description": "When you cast Unbroken Thread not to hold your own mind, but to *capture and preserve a physical geometric pattern in perfect clarity*, the craft becomes a perfect photographic recording—the shape stays locked in your memory exactly as it was, down to the angle of light and the smallest fracture. You can walk away for weeks and return to it unchanged. The cost is the same (1 energy), but the reach is doubled: you now carry evidence, not just memory."
-      },
+      "placeUpdates": [
+        {
+          "note": "The Ashfall Crater's rim is confirmed as a resonance-landing-footprint—a tuning-ring with a standing-wave pattern burned into the fused glass. It is waiting to answer the authentication sequence housed in a pre-Transition structure to the northeast-by-east.",
+          "flag": null,
+          "subPlace": null
+        }
+      ],
+      "discovery": null,
       "codexUpdates": [
         {
           "topic": "ashfall-crater",
           "label": "The Ashfall Crater",
           "kind": "place",
-          "entityId": "place-ashfall-crater",
-          "fact": "The crater's fused-glass rim forms a complete resonance-footprint—a standing-wave pattern that reads as a *landing-song* rather than an impact. It is a tuning-ring waiting to answer something. The pre-Transition structure to the northeast-by-east holds the authentication sequence that would complete the resonance and answer this ring. The crater is not Aeraqor's origin, but it is the lock-stone to everything—to the water crisis, to What Wakes Beneath, to the mystery of what fell here fifteen years ago.",
+          "entityId": null,
+          "fact": "The crater's fused-glass rim is a *resonance-footprint*—a standing-wave pattern, a landing-song. It is not an impact-site but a landing-site, and it is a *lock* waiting for its key. The pre-Transition structure to the northeast-by-east holds the authentication sequence that would answer it. When the two are synchronized, something will be confirmed or activated.",
           "links": [
             "what-wakes-beneath",
-            "the-water-crisis",
-            "precursor-structures"
+            "precursor-structures",
+            "the-water-crisis"
           ]
         }
       ],
+      "holdingOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "Study of the crater's geometry and preparation to depart takes a careful half-hour in the sharp dawn light"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "A figure of fused glass and morning light: Aeraqor standing at the rim of the Ashfall Crater, hand flat against the glassy surface, the sunrise catching the standing-wave pattern burned into the rim—ridges and hollows forming a resonance-footprint that reads like a song written in heat and stone. Ember beside him, coat glowing deep red against the spring dawn, ears swiveled toward something beyond sight. The crater falls away behind them, and the path northeast leads into shadow and then bright, dangerous ground.",
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
       "markDefiningMoment": null,
-      "imagePrompt": "At dawn in the fused-glass crater, a figure traces the rim's geometric pattern with one hand, eyes locked in perfect concentration—holding the standing-wave pattern in memory as a fox-shaped companion watches, its coat burning warm against the cold spring air. The crater's ridges catch the angled light like the grooves of a vast key waiting to turn.",
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Ashfall Crater's rim at early-spring dawn, fused glass catching the first sharp light. The air is thin and cold. You've just locked the crater's resonance-pattern in perfect clarity.",
+      "setting": "The Ashfall Crater's rim at early-spring dawn, fused glass catching the first sharp light. The air is thin and cold. You stand ready to descend, the resonance-footprint locked in your mind. The path down toward the northeast leads into morning shadow and then bright ground beyond.",
       "npcsPresent": [
         {
           "name": "Ember",
-          "state": "Alert and warm, coat flaring at the moment of your breakthrough. Watching northeast-by-east toward the pre-Transition st"
+          "state": "Alert and warm, coat flaring. Watching northeast toward the pre-Transition structure, ears swiveling toward any frequenc"
         }
       ],
       "objects": [
-        "Your bedroll, still warm",
+        "Your bedroll, now rolled and secured",
         "Your traveler's pack",
         "Your waterskin, refilled at the last clean spring",
-        "The fused glass of the crater's rim, now read as a resonance-landing footprint a",
+        "The fused glass of the crater's rim, now understood as a resonance-landing footp",
         "Your diagrams, angular and hand-drawn, now finally matched to the geometry benea"
       ],
       "threads": [
-        "The pre-Transition structure northeast-by-east and what it holds",
-        "Whether to seek Sorel's proof before moving, or trust the pattern and your own read",
-        "How to reach the structure before the valley's response to the crisis moves in another direction",
-        "What it means that Ember has gone so still and warm"
+        "The pre-Transition structure northeast-by-east and what it holds—the authentication sequence the valley needs",
+        "Whether something is already waking in that structure, and how close it is",
+        "What it means that Ember has gone so still and warm, and why it chose to step out of the Glade with you"
       ]
     },
-    "beats": 3
+    "beats": 4
   },
   "clock": {
     "schemaVersion": 1,
@@ -353,7 +422,8 @@
     "glasshome": {
       "visits": 1,
       "notes": [
-        "[d1] The Ashfall Crater serves as Aeraqor's seasonal return-ground. The fused-glass ring shows geometric patterns that may correspond to larger structures."
+        "[d1] The Ashfall Crater serves as Aeraqor's seasonal return-ground. The fused-glass ring shows geometric patterns that may correspond to larger structures.",
+        "[d1] The Ashfall Crater's rim is confirmed as a resonance-landing-footprint—a tuning-ring with a standing-wave pattern burned into the fused glass. It is waiting to answer the authentication sequence housed in a pre-Transition structure to the northeast-by-east."
       ],
       "flags": {},
       "_containmentNotes": [
@@ -466,6 +536,10 @@
       {
         "thing": "the read itself—Unbroken Thread held the pattern perfectly, showing you that the craft works at full clarity when the stakes are highest",
         "from": "your own readiness and the craft's response to real need; a moment that teaches something about how Unbroken Thread actually performs…"
+      },
+      {
+        "thing": "A pale figure moving across the fused-glass plain to the north—*wrong* angles, *wrong* movement—a creature that should not be, and Ember…",
+        "from": "The Ashfall Crater itself: as Aeraqor stands ready to leave with the resonance-pattern locked, the world shows its teeth. What wakes…"
       }
     ]
   },
@@ -560,7 +634,8 @@
         "facts": [
           "[d1] A fused-glass ring on the eastern ridge above the Harmonic Heights, formed by impact fifteen years ago — the same season the world went quiet. Aeraqor returns here seasonally to sleep and study the geometry. The rim's pattern suggests correspondence to larger structures. Something came down hard…",
           "[d1] The crater is a resonance-footprint—a tuning-ring with a standing-wave pattern burned into the fused glass. It was not an impact-site but a landing-site, and it is a lock waiting for its key. The pre-Transition structure to the northeast-by-east holds the authentication sequence that would answer…",
-          "[d1] The crater's fused-glass rim forms a complete resonance-footprint—a standing-wave pattern that reads as a *landing-song* rather than an impact. It is a tuning-ring waiting to answer something. The pre-Transition structure to the northeast-by-east holds the authentication sequence that would…"
+          "[d1] The crater's fused-glass rim forms a complete resonance-footprint—a standing-wave pattern that reads as a *landing-song* rather than an impact. It is a tuning-ring waiting to answer something. The pre-Transition structure to the northeast-by-east holds the authentication sequence that would…",
+          "[d1] The crater's fused-glass rim is a *resonance-footprint*—a standing-wave pattern, a landing-song. It is not an impact-site but a landing-site, and it is a *lock* waiting for its key. The pre-Transition structure to the northeast-by-east holds the authentication sequence that would answer it. When…"
         ],
         "links": [
           "what-wakes-beneath",
@@ -589,16 +664,17 @@
     }
   },
   "tendencies": {
-    "devotion": 13.30875,
-    "patient": 13.30875,
-    "cerebral": 1.975,
-    "cautious": 1
+    "devotion": 12.97603125,
+    "patient": 12.97603125,
+    "cerebral": 1.9256250000000001,
+    "cautious": 0.975,
+    "strategic": 1
   },
   "aptitudes": [
     "long_game",
     "faithful"
   ],
-  "actionCount": 2,
+  "actionCount": 3,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -772,8 +848,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1787514160473,
-  "rev": 15,
+  "updatedAt": 1787514224192,
+  "rev": 17,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -847,7 +923,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "radiant_wastes": 3
+    "radiant_wastes": 4
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -855,10 +931,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-23T19:33:14.203Z",
-      "lastAt": "2026-08-23T19:42:40.470Z",
+      "lastAt": "2026-08-23T19:43:44.189Z",
       "startDay": 54,
       "endDay": 54,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [
@@ -871,51 +947,33 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 2,
+      "applied": 3,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
-  "_pendingLedger": [
-    {
-      "schemaVersion": 1,
-      "at": "2026-08-23T19:33:14.206Z",
-      "worldDay": 54,
-      "who": "char-mt67f8py",
-      "playerKey": "player-s9z9u1",
-      "where": "glasshome",
-      "what": "What Wakes Beneath has advanced to Stirring: the substrate that runs the crafts is flickering in more than one place at once. Something under everything is coming back online.",
-      "tags": [
-        "arc-advance",
-        "precursor",
-        "world-level"
-      ],
-      "spectrumDeltas": {},
-      "visibility": "felt",
-      "impactsLocal": true
-    }
-  ],
+  "_pendingLedger": [],
   "_opEmitted": {
-    "sceneSummary": 3,
-    "choices": 3,
+    "sceneSummary": 4,
+    "choices": 4,
     "ledgerEvents": 1,
-    "offer": 2,
-    "scene": 3,
-    "npcUpdates": 1,
-    "placeUpdates": 1,
-    "codexUpdates": 3,
+    "offer": 3,
+    "scene": 4,
+    "npcUpdates": 2,
+    "placeUpdates": 2,
+    "codexUpdates": 4,
     "generateRequest": 1,
-    "timeOps": 2,
-    "imagePrompt": 3,
-    "sceneEnded": 3,
-    "deeds": 2,
-    "characterDeltas": 2,
+    "timeOps": 3,
+    "imagePrompt": 4,
+    "sceneEnded": 4,
+    "deeds": 3,
+    "characterDeltas": 3,
     "factUpdates": 1,
-    "gambitApt": 1,
+    "gambitApt": 2,
     "discovery": 1
   },
-  "_opTurns": 3,
+  "_opTurns": 4,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -928,7 +986,7 @@
     }
   },
   "companionBonds": {
-    "ember": 1
+    "ember": 1.5
   },
   "bondLogFrom": 0,
   "bondLog": [
@@ -947,6 +1005,14 @@
       "day": 1,
       "worldDay": 54,
       "actionCount": 1
+    },
+    {
+      "companionId": "ember",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 1,
+      "worldDay": 54,
+      "actionCount": 2
     }
   ],
   "companionMemory": {
@@ -960,12 +1026,18 @@
         "text": "Read the Ashfall Crater's geometry as a resonance-footprint—solving a fifteen-year mystery in a moment of breakthrough.",
         "weight": 2,
         "day": 1
+      },
+      {
+        "text": "Solved the mystery of the Ashfall Crater—read the fused-glass ring as a resonance-landing-site, a tuning-ring waiting to answer a pre-Transition structure the valley never knew existed.",
+        "weight": 2,
+        "day": 1
       }
     ]
   },
   "skillUses": {
     "study": 2,
-    "careful": 1
+    "careful": 1,
+    "scout": 1
   },
   "ladderPaid": {
     "strength": 4,

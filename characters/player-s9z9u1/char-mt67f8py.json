@@ -1,0 +1,833 @@
+{
+  "schemaVersion": 1,
+  "id": "char-mt67f8py",
+  "playerKey": "player-s9z9u1",
+  "name": "Aeraqor",
+  "origin": "blazeborn",
+  "nativeTradition": "blazeborn",
+  "whyHere": "The Blaze is expanding. You walked out ahead of it, and you are the first of your people the Valley has seen.",
+  "background": "temple_trained",
+  "level": 1,
+  "xp": 0,
+  "attributes": {
+    "physical": 3,
+    "mental": 3,
+    "social": 3,
+    "practical": 3
+  },
+  "skills": {
+    "ritual": 1,
+    "learn": 1,
+    "radiant": 1,
+    "force": 1
+  },
+  "abilities": [
+    {
+      "abilityId": "unbroken_thread",
+      "level": 1
+    },
+    {
+      "abilityId": "misdirect",
+      "level": 1
+    },
+    {
+      "abilityId": "lightsense",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "kindle",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "radiant_ground",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "radiance",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "glass_work",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "brace",
+      "level": 1,
+      "baseline": true
+    },
+    {
+      "abilityId": "strike_basic",
+      "level": 1,
+      "baseline": true
+    },
+    {
+      "abilityId": "break_away",
+      "level": 1,
+      "baseline": true
+    },
+    {
+      "abilityId": "raise_alarm",
+      "level": 1,
+      "baseline": true
+    }
+  ],
+  "alignment": {},
+  "attunement": 1,
+  "maxHealth": 30,
+  "health": 30,
+  "maxEnergy": 100,
+  "energy": 100,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "bonusTags": [
+        "weather",
+        "travel",
+        "survival"
+      ],
+      "consumable": true,
+      "pinned": true
+    }
+  ],
+  "deeds": [],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "glasshome",
+  "activeScene": {
+    "locationId": "glasshome",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Aeraqor wakes in the Ashfall Crater to news of the water crisis and a pre-Transition structure northeast-by-east holding answers the valley needs. Ember is restless.",
+        "narration": "You wake in the grey pre-dawn of the Ashfall Crater, your bedroll still warm against the fused glass. The ring around you catches the first light like a closed eye opening—each ridge and hollow sharp in the angle of the morning sun, the way it only is in early spring when the air is still thin and cold. Ember is already awake, sitting at the crater's edge with that peculiar stillness it gets when the world speaks in frequencies you don't have ears for. Its coat is warm—warmer than the season should allow.\n\nYou came back to the Heights three days ago to refresh your supplies and check on the temple's newest assessment job. That's when the talk found you: boiled water everywhere now, upstream families sick, the Harmonic and Radiant quarters trading accusations like stones across a river. A Radiant woman—Sorel, the archive keeper, you've seen her name on the Heights' records—confirmed something the Council has been circling: there's a mound out northeast-by-east, a pre-Transition structure, and someone moved the markers that were tracking it. The authentication sequence for the valley's emergency purification system sits inside that thing, locked in whatever passes for a lock fifteen years after the Transition. Whoever reaches it first doesn't just find an artifact. They determine how the valley answers what's coming.\n\nEmber's ears swivel toward you. Still. Waiting. The fox-thing has been stranger than usual since the dreams started—the ones where the light fractures into geometries you half-remember from a time before you had a name."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You wake in the grey pre-dawn of the Ashfall Crater, your bedroll still warm against the fused glass. The ring around you catches the first light like a closed eye opening—each ridge and hollow sharp in the angle of the morning sun, the way it only is in early spring when the air is still thin and cold. Ember is already awake, sitting at the crater's edge with that peculiar stillness it gets when the world speaks in frequencies you don't have ears for. Its coat is warm—warmer than the season should allow.\n\nYou came back to the Heights three days ago to refresh your supplies and check on the temple's newest assessment job. That's when the talk found you: boiled water everywhere now, upstream families sick, the Harmonic and Radiant quarters trading accusations like stones across a river. A Radiant woman—Sorel, the archive keeper, you've seen her name on the Heights' records—confirmed something the Council has been circling: there's a mound out northeast-by-east, a pre-Transition structure, and someone moved the markers that were tracking it. The authentication sequence for the valley's emergency purification system sits inside that thing, locked in whatever passes for a lock fifteen years after the Transition. Whoever reaches it first doesn't just find an artifact. They determine how the valley answers what's coming.\n\nEmber's ears swivel toward you. Still. Waiting. The fox-thing has been stranger than usual since the dreams started—the ones where the light fractures into geometries you half-remember from a time before you had a name.",
+      "sceneSummary": "Aeraqor wakes in the Ashfall Crater to news of the water crisis and a pre-Transition structure northeast-by-east holding answers the valley needs. Ember is restless.",
+      "choices": [
+        {
+          "label": "Head down to the Heights' archive immediately — Sorel may have maps or markers that show the exact bearing.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Study the crater's own geometry one more time before you leave — something in the rim's pattern has been nagging at you, and if what's waking matches what fell here, you need to know.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "unbroken_thread",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Ember what it's sensing — it's been stranger than usual, and if something is moving in the substrate, a Glade-touched thing would know before any instrument does.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Pack up and head northeast-by-east now, before word spreads further — you move quietly, and knowledge of the route first may matter.",
+          "attribute": "practical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "sneak"
+          ],
+          "abilityId": "lightsense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {},
+      "ledgerEvents": [
+        {
+          "what": "The Water Crisis has entered First Sickness across the valley — upstream families fall ill, boiling water becomes universal. The Council's secondary purification system requires an authentication sequence housed at a pre-Transition structure, and the race to reach it has begun.",
+          "tags": [
+            "crisis",
+            "valley-wide",
+            "time-sensitive"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": true
+        },
+        {
+          "what": "What Wakes Beneath has advanced to Stirring: the substrate that runs the crafts is flickering in more than one place at once. Something under everything is coming back online.",
+          "tags": [
+            "arc-advance",
+            "precursor",
+            "world-level"
+          ],
+          "visibility": "felt",
+          "spectrumDeltas": {},
+          "impactsLocal": true
+        }
+      ],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "A sense of wrongness in the substrate itself — your crafts have been steady until now, but Ember's warmth and the quality of light in the crater suggest something is shifting in the deep architecture of things.",
+        "from": "The world moving into Stirring: What Wakes Beneath is no longer rumor but present. A Glade-touched creature would sense it first."
+      },
+      "stageOps": [],
+      "scene": {
+        "setting": "The Ashfall Crater, early spring dawn. A fused-glass ring on the eastern ridge above the Harmonic Heights, shaped by impact fifteen years ago. The rim catches the first sharp light; Ember sits alert at the crater's edge, its coal-red coat warmer than the season allows.",
+        "npcsPresent": [
+          {
+            "name": "Ember",
+            "state": "Sitting at the crater's edge, ears swivelled, radiating an unusual warmth. Still and listening to frequencies you cannot hear."
+          }
+        ],
+        "objects": [
+          "Your bedroll, still warm",
+          "Your traveler's pack",
+          "Your waterskin, refilled at the last clean spring",
+          "The fused glass of the crater's rim, patterned with ridge and hollow"
+        ],
+        "threads": [
+          "What the crater's geometry means — a nagging pattern you haven't yet decoded",
+          "What Ember is sensing in the substrate",
+          "The race to reach the pre-Transition structure northeast-by-east",
+          "The authentication sequence that determines the valley's response"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "ember_companion",
+          "name": "Ember",
+          "role": "Companion — Glade-touched fox-thing",
+          "gender": "nonbinary",
+          "pronouns": "it/its",
+          "description": "Fox-shaped but wrong-sized and too aware. Coat the deep red of banked coals with a faint warmth to it that isn't quite normal fire. Moves like it's listening to two worlds.",
+          "note": "Ember is unusually restless this morning, radiating more heat than normal. It sits still at the crater's edge and seems to be sensing something shifting in the substrate — a response to What Wakes Beneath moving into Stirring.",
+          "learned": [
+            "Senses disturbances in the substrate before instruments do",
+            "Currently aware of something moving in the deep architecture of the world"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Present and alert in the Ashfall Crater. Bonded to Aeraqor; half-wild, testing whether the world beyond the Glade is worth staying for."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "The Ashfall Crater serves as Aeraqor's seasonal return-ground. The fused-glass ring shows geometric patterns that may correspond to larger structures.",
+          "flag": {},
+          "subPlace": {
+            "name": "The Ashfall Crater",
+            "parent": "Harmonic Heights",
+            "note": "A scorched ring of fused glass and split granite on the eastern ridge, formed by impact fifteen years ago. Aeraqor sleeps here once a season and studies the geometry of the rim.",
+            "visited": true
+          }
+        }
+      ],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "what_wakes_beneath",
+          "label": "What Wakes Beneath",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "The arc has advanced to Stirring: the substrate that runs the crafts is flickering in more than one place at once. Something under everything is coming back online. Ember senses it. The timing coincides with the water crisis and something waking in a pre-Transition structure to the northeast.",
+          "links": [
+            "the_water_crisis",
+            "precursor_structures",
+            "the_ashfall_crater"
+          ]
+        },
+        {
+          "topic": "the_water_crisis",
+          "label": "The Water Crisis",
+          "kind": "event",
+          "entityId": null,
+          "fact": "First Sickness stage: upstream fisher families fall ill. Boiling water has become universal. Harmonic and Radiant leadership trade accusations. The Council's secondary purification system requires an authentication sequence housed in a pre-Transition structure to the northeast-by-east. Whoever reaches it first determines the valley's response.",
+          "links": [
+            "what_wakes_beneath",
+            "precursor_structures",
+            "radiant_folk",
+            "harmonic"
+          ]
+        },
+        {
+          "topic": "precursor_structures",
+          "label": "Pre-Transition Structures",
+          "kind": "lore",
+          "entityId": null,
+          "fact": "A pre-Transition mound exists northeast-by-east of the Heights. Sorel, a Radiant archivist, confirmed its existence and noted that survey markers were moved. The structure houses an authentication sequence needed for the valley's emergency purification system. The substrate disturbances correlate with its location.",
+          "links": [
+            "what_wakes_beneath",
+            "the_water_crisis",
+            "sorel"
+          ]
+        },
+        {
+          "topic": "the_ashfall_crater",
+          "label": "The Ashfall Crater",
+          "kind": "place",
+          "entityId": "ashfall_crater",
+          "fact": "A fused-glass ring on the eastern ridge above the Harmonic Heights, formed by impact fifteen years ago — the same season the world went quiet. Aeraqor returns here seasonally to sleep and study the geometry. The rim's pattern suggests correspondence to larger structures. Something came down hard here.",
+          "links": [
+            "what_wakes_beneath",
+            "aeraqor_origin"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "partyOps": [],
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "Sorel, Radiant archivist and water-accountability office witness — she was with the Council survey team, noticed the moved markers, and is now committed to investigating the upstream structure",
+          "why": "A named person from recent valley news who is central to the water crisis and the race to reach the structure"
+        }
+      ],
+      "encounterOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "You woke from sleep and spent time observing the crater in the pre-dawn light. The day is just beginning."
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "A Glade-touched fox-thing sits at the rim of a fused-glass crater, its coal-red coat radiating warmth in the grey pre-dawn light. Behind it, the geometric scars of impact catch the sun's first angle. Below, the valley spreads out small and fragile. Something is waking.",
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The Ashfall Crater, early spring dawn. A fused-glass ring on the eastern ridge above the Harmonic Heights, shaped by impact fifteen years ago. The rim catches the first sharp light; Ember sits alert at the crater's edge, its coal-red coat warmer than the season allows.",
+      "npcsPresent": [
+        {
+          "name": "Ember",
+          "state": "Sitting at the crater's edge, ears swivelled, radiating an unusual warmth. Still and listening to frequencies you cannot"
+        }
+      ],
+      "objects": [
+        "Your bedroll, still warm",
+        "Your traveler's pack",
+        "Your waterskin, refilled at the last clean spring",
+        "The fused glass of the crater's rim, patterned with ridge and hollow"
+      ],
+      "threads": [
+        "What the crater's geometry means — a nagging pattern you haven't yet decoded",
+        "What Ember is sensing in the substrate",
+        "The race to reach the pre-Transition structure northeast-by-east",
+        "The authentication sequence that determines the valley's response"
+      ]
+    },
+    "beats": 1
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 8,
+    "realAnchor": null
+  },
+  "companions": [
+    "ember"
+  ],
+  "companionNames": {},
+  "quests": [],
+  "npcRegistry": {},
+  "placeMemory": {
+    "glasshome": {
+      "visits": 1,
+      "notes": [
+        "[d1] The Ashfall Crater serves as Aeraqor's seasonal return-ground. The fused-glass ring shows geometric patterns that may correspond to larger structures."
+      ],
+      "flags": {},
+      "_containmentNotes": [
+        "\"The Ashfall Crater\" was placed in harmonic_heights_terrace (the fiction named it), not glasshome"
+      ]
+    },
+    "harmonic_heights_terrace": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "subPlaces": {
+        "the-ashfall-crater": {
+          "name": "The Ashfall Crater",
+          "parentId": "harmonic_heights_terrace",
+          "day": 1,
+          "visited": true,
+          "note": "A scorched ring of fused glass and split granite on the eastern ridge, formed by impact fifteen years ago. Aeraqor sleeps here once a season and studies the geometry of the rim."
+        }
+      }
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 2,
+        "sinceDay": 13
+      }
+    },
+    "arcStages": {
+      "arc_what_wakes_beneath": {
+        "othersPush": 1
+      },
+      "the_second_manifestation": {
+        "othersPush": 1
+      }
+    },
+    "spectrumDrift": {
+      "death_life": -0.1,
+      "violence_peace": -0.1,
+      "falsehood_truth": -0.05
+    },
+    "news": [
+      {
+        "day": 1,
+        "worldDay": 54,
+        "text": "The Water Crisis stands at First Sickness across the valley: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "This reaches your area — Sorel, Radiant archivist, arrives on the ridgeline and confirms the mound on the northeast-by-east bearing — she was with the Council survey team until markers were moved; the interval she recorded ma (near gen-the-lower-chamber)",
+        "tier": "event",
+        "section": "elsewhere",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "This reaches your area — Sorel, Radiant archivist and water-accountability office witness, commits to the investigation of the upstream pre-Transition structure and joins Cellaceron's party moving northeast-by-east into the D (near gen-object-object)",
+        "tier": "event",
+        "section": "elsewhere",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "This reaches your area — The Council's secondary purification system is incomplete without the authentication sequence housed at the upstream structure. Whoever reaches it first determines the valley's response to the prepara (near gen-object-object)",
+        "tier": "event",
+        "section": "elsewhere",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 54,
+        "text": "Across the valley, What Wakes Beneath moved forward to Stirring: The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
+        "tier": "event",
+        "section": "world"
+      }
+    ],
+    "unseenNews": [],
+    "lastGenCount": 1315,
+    "newsSpread": {
+      "char-devtest::2026-08-01T15:05:35.966Z": [
+        "valley.disputed_zone_fringe"
+      ],
+      "char-msgpisca::2026-08-05T23:59:30.114Z": [
+        "numinous.numen"
+      ],
+      "char-msgpisca::2026-08-06T18:06:47.572Z": [
+        "numinous.hermitage"
+      ]
+    },
+    "lastSharedReadAt": "2026-08-23T19:32:43.984Z",
+    "lastTickWorldDay": 54,
+    "lastCanonWorldDay": 54,
+    "pressureQueue": [
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_pale_reader",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a pale reader has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_pale_reader",
+          "name": "a pale reader"
+        },
+        "addedDay": 1,
+        "locationId": "glasshome"
+      }
+    ],
+    "turnsSinceOffer": 0,
+    "recentOffers": [
+      {
+        "thing": "A sense of wrongness in the substrate itself — your crafts have been steady until now, but Ember's warmth and the quality of light in the…",
+        "from": "The world moving into Stirring: What Wakes Beneath is no longer rumor but present. A Glade-touched creature would sense it first."
+      }
+    ]
+  },
+  "domains": {
+    "primary": "blazeborn",
+    "secondary": "syllogist",
+    "tertiary": "seraphic"
+  },
+  "schools": {
+    "blazeborn": "bla_burning",
+    "syllogist": "syl_plain",
+    "seraphic": "ser_choir"
+  },
+  "form": "Tall and sharp-edged, skin that catches light oddly — almost too bright at the cheekbones. Eyes colourless in shade, white-gold in any illumination. Armour engraved with lattice-lines that glow faintly at every joint. Hair white, worn severe.",
+  "bio": {
+    "hometown": "Aeraqor claims no valley birthplace — the Heights temple scribes who registered him wrote 'descent point: the Ashfall Crater, eastern ridge' and left the origin column blank. The crater is real: a scorched ring of fused glass and split granite above the Harmonic Heights, where something came down hard fifteen years ago, the same season the world went quiet. Local children dare each other to touch the glassy rim. No one knows what to make of him, so they filed him under blazeborn and moved on.",
+    "residence": "Nomadic — Aeraqor moves in long arcs between the Heights, the Plateau, and the valley floor, returning to the Ashfall Crater once a season to sleep inside the ring. He keeps a bedroll, a satchel of angular hand-drawn diagrams, and a fire-striker. Settlements remember him by the neat geometric chalk marks he leaves on walls and gateposts — structural notations that, uncannily, always identify the one load-bearing beam that needed attention.",
+    "livelihood": "Aeraqor hires out as a structural assessor — he walks a building, a granary, a resonance-arch, a Plateau lightwork frame, and tells the owner what will hold and what will not, and in what order the repairs must proceed. He charges in meals and lodging and occasionally in the small fired-glass beads the Heights use as token currency. His estimates are correct with an unsettling consistency that has kept him fed for several years now.",
+    "hobbies": "He burns things deliberately and studies the residue — not destruction for its own sake, but close attention to what a fire reveals about what a material actually was. He also drafts structural geometries in charcoal on any flat surface available, systems far larger than anything in the valley, annotated in a shorthand nobody else can read. On quiet evenings he listens to the Heights' resonance-singers without joining in, tracking the interference patterns between voices the way an engineer tracks load paths.",
+    "motivation": "The crater is evidence of something, and Aeraqor cannot yet prove what. He needs access — to the Plateau's archived light-records, to the Heights' oldest resonance logs, to the valley farmers who sometimes find fused glass buried in their fields — and access requires being known, trusted, and present. He did not step into the valley's affairs out of heroism; he stepped in because the data he needs is locked inside communities that only open to people who have done something for them.",
+    "story": "Something came down into the eastern ridge fifteen years ago and left a crater of fused glass and a person who remembers, with perfect clarity, a geometry of structures so vast they have no name in any valley language. Aeraqor was taken in by a Heights temple that recognized his aptitude if not his origins, trained him in the formal disciplines of resonance-architecture, and quietly filed away its questions about where he had actually come from. He works now as an itinerant assessor, burning samples and drawing diagrams and slowly building a map of correspondences between what he remembers from above and what he finds down here — the valley's buildings, its fault lines, its light-channels and sound-paths — looking for the structural logic that connects both. The principles he serves are real to him: integrity of load, honesty of joint, nothing hidden in a wall that will one day give way — and he applies them equally to buildings and to the people who shelter inside them."
+  },
+  "subAttributes": {
+    "strength": 3,
+    "agility": 3,
+    "reason": 3,
+    "insight": 3,
+    "presence": 3,
+    "rapport": 3,
+    "craft": 3,
+    "wits": 3
+  },
+  "pendingSubPoints": 2,
+  "skillPoints": 0,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "what-wakes-beneath": {
+        "id": "what-wakes-beneath",
+        "label": "What Wakes Beneath",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The arc has advanced to Stirring: the substrate that runs the crafts is flickering in more than one place at once. Something under everything is coming back online. Ember senses it. The timing coincides with the water crisis and something waking in a pre-Transition structure to the northeast."
+        ],
+        "links": [
+          "the-water-crisis",
+          "precursor-structures",
+          "the-ashfall-crater"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "the-water-crisis": {
+        "id": "the-water-crisis",
+        "label": "The Water Crisis",
+        "kind": "event",
+        "facts": [
+          "[d1] First Sickness stage: upstream fisher families fall ill. Boiling water has become universal. Harmonic and Radiant leadership trade accusations. The Council's secondary purification system requires an authentication sequence housed in a pre-Transition structure to the northeast-by-east. Whoever…"
+        ],
+        "links": [
+          "what-wakes-beneath",
+          "precursor-structures",
+          "radiant-folk",
+          "harmonic"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "precursor-structures": {
+        "id": "precursor-structures",
+        "label": "Pre-Transition Structures",
+        "kind": "lore",
+        "facts": [
+          "[d1] A pre-Transition mound exists northeast-by-east of the Heights. Sorel, a Radiant archivist, confirmed its existence and noted that survey markers were moved. The structure houses an authentication sequence needed for the valley's emergency purification system. The substrate disturbances correlate…"
+        ],
+        "links": [
+          "what-wakes-beneath",
+          "the-water-crisis",
+          "sorel"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "ashfall-crater": {
+        "id": "ashfall-crater",
+        "label": "The Ashfall Crater",
+        "kind": "place",
+        "facts": [
+          "[d1] A fused-glass ring on the eastern ridge above the Harmonic Heights, formed by impact fifteen years ago — the same season the world went quiet. Aeraqor returns here seasonally to sleep and study the geometry. The rim's pattern suggests correspondence to larger structures. Something came down hard…"
+        ],
+        "links": [
+          "what-wakes-beneath",
+          "aeraqor-origin"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "ashfall-crater",
+        "updatedDay": 1
+      }
+    }
+  },
+  "tendencies": {
+    "devotion": 14,
+    "patient": 14
+  },
+  "aptitudes": [
+    "long_game",
+    "faithful"
+  ],
+  "actionCount": 0,
+  "grantsVersion": 1,
+  "precursorAccess": [],
+  "livingCurrentAccess": [],
+  "wildCurrentAccess": [],
+  "braidDiscount": 0,
+  "grantedAptitudes": [
+    "faithful",
+    "long_game"
+  ],
+  "aptitudeEarnCount": {
+    "faithful": 1,
+    "long_game": 1
+  },
+  "peopleDisposition": {
+    "blazeborn": 4,
+    "syllogist": 2,
+    "seraphic": 1,
+    "umbral": -1
+  },
+  "standingLedger": [
+    {
+      "at": 1,
+      "kind": "seed",
+      "entries": [
+        {
+          "people": "blazeborn",
+          "delta": 4,
+          "why": "born to this people"
+        },
+        {
+          "people": "syllogist",
+          "delta": 2,
+          "why": "kin to this people"
+        },
+        {
+          "people": "seraphic",
+          "delta": 1,
+          "why": "a hand in this people's craft"
+        },
+        {
+          "people": "umbral",
+          "delta": -1,
+          "why": "the far side of the circle from your own"
+        }
+      ],
+      "text": "Your birth and training are known: blazeborn +4, syllogist +2, seraphic +1, umbral -1."
+    }
+  ],
+  "nativeGrantsVersion": 1,
+  "reconcileVersion": 30,
+  "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "Aeraqor",
+      "url": "https://image.pollinations.ai/prompt/Tall%20and%20sharp-edged%2C%20skin%20that%20catches%20light%20oddly%20%E2%80%94%20almost%20too%20bright%20at%20the%20cheekbones.%20Eyes%20colourless%20in%20shade%2C%20white-gold%20in%20any%20illumination.%20Armour%20engraved%20with%20lattice-lines%20that%20glow%20faintly%20at%20every%20joint.%20Ha%2C%20full-body%20character%20portrait%2C%20named%20Aeraqor%2C%20of%20the%20blazeborn%2C%20temple%20trained%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20The%20crater%20is%20evidence%20of%20something%2C%20and%20Aeraqor%20cannot%20yet%20prove%20what.%20He%20needs%20access%20%E2%80%94%20to%20the%20Plateau's%20archived%20ligh%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=50266&nologo=true",
+      "caption": "Aeraqor — blazeborn",
+      "worldDay": 54,
+      "at": "2026-08-23T19:32:43.370Z"
+    }
+  ],
+  "portrait": "https://image.pollinations.ai/prompt/Tall%20and%20sharp-edged%2C%20skin%20that%20catches%20light%20oddly%20%E2%80%94%20almost%20too%20bright%20at%20the%20cheekbones.%20Eyes%20colourless%20in%20shade%2C%20white-gold%20in%20any%20illumination.%20Armour%20engraved%20with%20lattice-lines%20that%20glow%20faintly%20at%20every%20joint.%20Ha%2C%20full-body%20character%20portrait%2C%20named%20Aeraqor%2C%20of%20the%20blazeborn%2C%20temple%20trained%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20The%20crater%20is%20evidence%20of%20something%2C%20and%20Aeraqor%20cannot%20yet%20prove%20what.%20He%20needs%20access%20%E2%80%94%20to%20the%20Plateau's%20archived%20ligh%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=50266&nologo=true",
+  "personalArc": {
+    "id": "aeraqor-thread",
+    "name": "The Thread of Aeraqor Claims No Valley Birthplace — The Heights Temple Scribes Who Registered Him Wrote 'Descent Point: The Ashfall Crater, Eastern Ridge' And Left The Origin Column Blank. The Crater Is Real: A Scorched Ring Of Fused Glass And Split Granite Above The Harmonic Heights, Where Something Came Down Hard Fifteen Years Ago, The Same Season The World Went Quiet. Local Children Dare Each Other To Touch The Glassy Rim. No One Knows What To Make Of Him, So They Filed Him Under Blazeborn And Moved On.",
+    "arcId": "aeraqor_personal_arc",
+    "boundToCharacter": "Aeraqor",
+    "boundToPlayer": "player-s9z9u1",
+    "region": "valley",
+    "tier": "personal",
+    "premise": "Aeraqor carries an unfinished thing: The crater is evidence of something, and Aeraqor cannot yet prove what. He needs access — to the Plateau's archived light-records, to the Heights' oldest resonance logs, to the valley farmers who sometimes find fused glass buried in their fields — and access requires being known, trusted, and present. He did not step into the valley's affairs out of heroism; he stepped in because the data he needs is locked inside communities that only open to people who have done something for them.. The valley will give them the chance to face it.",
+    "stakes": "who they become when the thing they left behind finally catches up",
+    "legendNpc": null,
+    "legend": null,
+    "stages": [
+      {
+        "id": "s1",
+        "objective": "a first sign of The crater is evidence of something, and Aeraqor cannot yet prove what. He needs access — to the Plateau's archived light-records, to the Heights' oldest resonance logs, to the valley farmers who sometimes find fused glass buried in their fields — and access requires being known, trusted, and present. He did not step into the valley's affairs out of heroism; he stepped in because the data he needs is locked inside communities that only open to people who have done something for them. surfaces in the valley"
+      },
+      {
+        "id": "s2",
+        "objective": "the thread deepens — what it costs to pull it becomes clear"
+      },
+      {
+        "id": "s3",
+        "objective": "the reckoning — and the choice of what to do with it"
+      }
+    ],
+    "routes": {
+      "blazeborn": "answer it as your people would",
+      "seek": "seek the truth of it, wherever it leads"
+    },
+    "outcomes": [
+      {
+        "id": "blazeborn",
+        "name": "Blazeborn",
+        "effects": []
+      },
+      {
+        "id": "seek",
+        "name": "Seek",
+        "effects": []
+      }
+    ],
+    "structured": true,
+    "source": "personal_fallback",
+    "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
+  },
+  "updatedAt": 1787513594206,
+  "rev": 5,
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {},
+    "location": {},
+    "arc": {},
+    "creature": {},
+    "item": {}
+  },
+  "holdings": [],
+  "company": [],
+  "_pinsInitialized": true,
+  "regionsKnown": {
+    "radiant_wastes": 1
+  },
+  "opLossPending": false,
+  "_applyFailures": null,
+  "sessions": [
+    {
+      "id": "sess-1",
+      "startedAt": "2026-08-23T19:33:14.203Z",
+      "lastAt": "2026-08-23T19:33:14.203Z",
+      "startDay": 54,
+      "endDay": 54,
+      "beats": 1
+    }
+  ],
+  "establishedFacts": [],
+  "_opLedger": {
+    "offer": {
+      "applied": 1,
+      "rejected": 0,
+      "lastWhy": null
+    }
+  },
+  "_pendingArrival": null,
+  "_pendingLedger": [
+    {
+      "schemaVersion": 1,
+      "at": "2026-08-23T19:33:14.206Z",
+      "worldDay": 54,
+      "who": "char-mt67f8py",
+      "playerKey": "player-s9z9u1",
+      "where": "glasshome",
+      "what": "The Water Crisis has entered First Sickness across the valley — upstream families fall ill, boiling water becomes universal. The Council's secondary purification system requires an authentication sequ",
+      "tags": [
+        "crisis",
+        "valley-wide",
+        "time-sensitive"
+      ],
+      "spectrumDeltas": {},
+      "visibility": "witnessed",
+      "impactsLocal": true
+    },
+    {
+      "schemaVersion": 1,
+      "at": "2026-08-23T19:33:14.206Z",
+      "worldDay": 54,
+      "who": "char-mt67f8py",
+      "playerKey": "player-s9z9u1",
+      "where": "glasshome",
+      "what": "What Wakes Beneath has advanced to Stirring: the substrate that runs the crafts is flickering in more than one place at once. Something under everything is coming back online.",
+      "tags": [
+        "arc-advance",
+        "precursor",
+        "world-level"
+      ],
+      "spectrumDeltas": {},
+      "visibility": "felt",
+      "impactsLocal": true
+    }
+  ],
+  "_opEmitted": {
+    "sceneSummary": 1,
+    "choices": 1,
+    "ledgerEvents": 1,
+    "offer": 1,
+    "scene": 1,
+    "npcUpdates": 1,
+    "placeUpdates": 1,
+    "codexUpdates": 1,
+    "generateRequest": 1,
+    "timeOps": 1,
+    "imagePrompt": 1,
+    "sceneEnded": 1
+  },
+  "_opTurns": 1
+}

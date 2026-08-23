@@ -85,7 +85,7 @@
     "PUZZLE",
     "INVESTIGATE"
    ],
-   "tradition": "precursor",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "setup",
@@ -137,7 +137,9 @@
     "bind",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_traditionWas": "precursor",
+   "_traditionFix": "⛔ SNG-537, ERIK: 'The precursor crafts are LATTICE (Precursor's power source, yes.)' ⚠️ `precursor` WAS SITTING IN A `tradition` FIELD — a power source in a people field, the same category error as a reach id in a powerSystem field, running the other direction.\n⛔ THE LATTICE ARE THE PEOPLE; PRECURSOR IS WHAT THEY DRAW ON. These six — Latticespeak, Wake the Line, Foreclose, Unmake Seal, Hold the Aperture, Address-Sense — are Latticework, and they join Order."
   },
   {
    "id": "wake_the_line",
@@ -219,7 +221,7 @@
     "PUZZLE",
     "FIGHT"
    ],
-   "tradition": "precursor",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "construct",
@@ -268,7 +270,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A puzzle/fight action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 3, and lasts for about 6 hours Ranks: rank 2 extends scope+control; rank 3 adds to special. Limit: partial And Brief at r1; you cannot choose exactly what function returns."
+   "plainly": "A puzzle/fight action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 3, and lasts for about 6 hours Ranks: rank 2 extends scope+control; rank 3 adds to special. Limit: partial And Brief at r1; you cannot choose exactly what function returns.",
+   "_traditionWas": "precursor",
+   "_traditionFix": "⛔ SNG-537, ERIK: 'The precursor crafts are LATTICE (Precursor's power source, yes.)' ⚠️ `precursor` WAS SITTING IN A `tradition` FIELD — a power source in a people field, the same category error as a reach id in a powerSystem field, running the other direction.\n⛔ THE LATTICE ARE THE PEOPLE; PRECURSOR IS WHAT THEY DRAW ON. These six — Latticespeak, Wake the Line, Foreclose, Unmake Seal, Hold the Aperture, Address-Sense — are Latticework, and they join Order."
   },
   {
    "id": "foreclose",
@@ -345,7 +349,7 @@
     "FIGHT",
     "DUEL"
    ],
-   "tradition": "precursor",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "incapacitating",
    "shape": "hobble",
@@ -393,7 +397,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/duel action that weakens or restricts a target. Its strength is rated 8 out of 10 It affects 1 target, and lasts for about an hour Ranks: rank 2 extends duration; rank 3 adds to special. Limit: one Narrow Possibility, the moment only."
+   "plainly": "A fight/duel action that weakens or restricts a target. Its strength is rated 8 out of 10 It affects 1 target, and lasts for about an hour Ranks: rank 2 extends duration; rank 3 adds to special. Limit: one Narrow Possibility, the moment only.",
+   "_traditionWas": "precursor",
+   "_traditionFix": "⛔ SNG-537, ERIK: 'The precursor crafts are LATTICE (Precursor's power source, yes.)' ⚠️ `precursor` WAS SITTING IN A `tradition` FIELD — a power source in a people field, the same category error as a reach id in a powerSystem field, running the other direction.\n⛔ THE LATTICE ARE THE PEOPLE; PRECURSOR IS WHAT THEY DRAW ON. These six — Latticespeak, Wake the Line, Foreclose, Unmake Seal, Hold the Aperture, Address-Sense — are Latticework, and they join Order."
   },
   {
    "id": "unmake_seal",
@@ -487,7 +493,7 @@
    "challengeTypes": [
     "PUZZLE"
    ],
-   "tradition": "precursor",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "lethal",
    "shape": "construct",
@@ -551,7 +557,9 @@
     "strike",
     "summon"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_traditionWas": "precursor",
+   "_traditionFix": "⛔ SNG-537, ERIK: 'The precursor crafts are LATTICE (Precursor's power source, yes.)' ⚠️ `precursor` WAS SITTING IN A `tradition` FIELD — a power source in a people field, the same category error as a reach id in a powerSystem field, running the other direction.\n⛔ THE LATTICE ARE THE PEOPLE; PRECURSOR IS WHAT THEY DRAW ON. These six — Latticespeak, Wake the Line, Foreclose, Unmake Seal, Hold the Aperture, Address-Sense — are Latticework, and they join Order."
   },
   {
    "id": "hold_the_aperture",
@@ -634,7 +642,7 @@
     "PUZZLE",
     "EXPLORE"
    ],
-   "tradition": "precursor",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "guard",
@@ -689,7 +697,9 @@
     }
    ],
    "plainly": "A survive/puzzle/explore action that reduces incoming harm. Its strength is rated 9 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 2 hours Ranks: rank 2 extends anchorStrength; rank 3 adds to special. Limit: one Thing, One Scene; costs continuously; When You Let GO IT Closes.",
-   "_wardTypes": "⛔ SNG-512. ⛔ The counter-move to the Precursor tendency. Answers precursor work and nothing else — deliberately narrow.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ The counter-move to the Precursor tendency. Answers precursor work and nothing else — deliberately narrow.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_traditionWas": "precursor",
+   "_traditionFix": "⛔ SNG-537, ERIK: 'The precursor crafts are LATTICE (Precursor's power source, yes.)' ⚠️ `precursor` WAS SITTING IN A `tradition` FIELD — a power source in a people field, the same category error as a reach id in a powerSystem field, running the other direction.\n⛔ THE LATTICE ARE THE PEOPLE; PRECURSOR IS WHAT THEY DRAW ON. These six — Latticespeak, Wake the Line, Foreclose, Unmake Seal, Hold the Aperture, Address-Sense — are Latticework, and they join Order."
   },
   {
    "id": "address_sense",
@@ -755,7 +765,7 @@
     "INVESTIGATE",
     "EXPLORE"
    ],
-   "tradition": "precursor",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "setup",
@@ -803,7 +813,9 @@
      "class": "hard"
     }
    ],
-   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about 2 hours Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: one Target AT A Time; the read fades when you look away."
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about 2 hours Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: one Target AT A Time; the read fades when you look away.",
+   "_traditionWas": "precursor",
+   "_traditionFix": "⛔ SNG-537, ERIK: 'The precursor crafts are LATTICE (Precursor's power source, yes.)' ⚠️ `precursor` WAS SITTING IN A `tradition` FIELD — a power source in a people field, the same category error as a reach id in a powerSystem field, running the other direction.\n⛔ THE LATTICE ARE THE PEOPLE; PRECURSOR IS WHAT THEY DRAW ON. These six — Latticespeak, Wake the Line, Foreclose, Unmake Seal, Hold the Aperture, Address-Sense — are Latticework, and they join Order."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

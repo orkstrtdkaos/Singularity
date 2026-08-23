@@ -9,7 +9,7 @@
    "name": "Quicken the Ground",
    "levelReq": 3,
    "energyCost": 7,
-   "powerSystem": "living_current",
+   "powerSystem": "combination",
    "tradition": "rootkin",
    "attribute": "practical",
    "axes": {
@@ -130,7 +130,13 @@
     "sustain"
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `living_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-131), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'."
+   "_powerSystemFix": "⛔ SNG-535. Was `living_current` as if it were a sixth source. ⚠️ IT IS A COMBINATION: ungoverned nanite resident in living tissue, worked by the oldest human method. The nanite half is why it is a substrate; the metaphysical half is why it answers a practitioner.\n⛔ `namedCurrent` KEEPS THE NAME. Erik's gate is intact — a Rootkin still works the living current and says so — but the SOURCE now resolves through the four.",
+   "_powerSystemWas": "living_current",
+   "powerMix": {
+    "wild_nanite": 0.5,
+    "metaphysical": 0.5
+   },
+   "namedCurrent": "living_current"
   },
   {
    "schemaVersion": 1,
@@ -138,7 +144,7 @@
    "name": "Green Road",
    "levelReq": 4,
    "energyCost": 11,
-   "powerSystem": "living_current",
+   "powerSystem": "combination",
    "tradition": "rootkin",
    "attribute": "practical",
    "axes": {
@@ -229,9 +235,16 @@
    "plainly": "An action that moves you or someone else. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about 2 hours. Range is 40. Ranks: rank 2 extends targets. Limit: it reaches Only Where Life Runs Unbroken.",
    "_nameWas": "The Green Road",
    "_idWas": "the_green_road",
-   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `living_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-131), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'."
+   "_powerSystemFix": "⛔ SNG-535. Was `living_current` as if it were a sixth source. ⚠️ IT IS A COMBINATION: ungoverned nanite resident in living tissue, worked by the oldest human method. The nanite half is why it is a substrate; the metaphysical half is why it answers a practitioner.\n⛔ `namedCurrent` KEEPS THE NAME. Erik's gate is intact — a Rootkin still works the living current and says so — but the SOURCE now resolves through the four.",
+   "_powerSystemWas": "living_current",
+   "powerMix": {
+    "wild_nanite": 0.5,
+    "metaphysical": 0.5
+   },
+   "namedCurrent": "living_current"
   }
  ],
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
- "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
+ "_headerNote": "⚠️ SNG-535: this file's header still names `living_current`, which is now a NAMED COMBINATION rather than a source. ⛔ Per CCODE-217 the ability wins, so the header is descriptive; kept because the file IS that current's crafts."
 }

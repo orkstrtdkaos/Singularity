@@ -52,13 +52,8 @@
   "feeling": {
    "what": "Emotion delivered as force.",
    "n": 1,
-   "wardedBy": "a steadied mind, a held vow, contact with someone calm"
-  },
-  "grief": {
-   "what": "⚠️ Feeling, specifically as loss.",
-   "n": 1,
-   "wardedBy": "as feeling",
-   "_erikCall": "⛔ MERGE INTO `feeling`? Both are threnodist and one craft each. I would merge; it is a flavour distinction the engine cannot use."
+   "wardedBy": "a steadied mind, a held vow, contact with someone calm",
+   "_absorbedGrief": "⛔ SNG-534. `grief` merged in. It was the ONLY damage type in the game that no ward answered — ⚠️ I flagged the merge as an Erik call in this very file and then left it open, and the which-check turned an open question into a failing gate."
   },
   "truth": {
    "what": "A fact that cannot be survived.",

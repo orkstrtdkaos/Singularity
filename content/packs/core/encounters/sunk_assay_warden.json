@@ -1,0 +1,83 @@
+{
+ "schemaVersion": 1,
+ "id": "sunk_assay_warden",
+ "kind": "content",
+ "note": "⛔ SNG-520. THE SUNK ASSAY, LEVEL 3 — THE WARDEN'S FLOOR. One authored opponent sheet in a duel-typed encounter. ⚠️ NOT A BESTIARY ENTRY — that record has no skills, soak or layers and its own design law forbids it (CCode, SNG-515).\n⛔ THIS IS THE FIGHT THE COMBAT SYSTEM WAS BUILT FOR, and the first place these systems meet each other: soak against typed damage, tempo against a foe that also reads, antisoak against layered defence.",
+ "opponent": {
+  "id": "the_assay_warden",
+  "name": "The Warden",
+  "threat": 6,
+  "role": "⛔ IT IS NOT TRYING TO KILL ANYONE. It is trying to finish the assay, and the party is unassayed material.",
+  "appearance": "Precursor work, four centuries into a shift that never ended. It does not hurry and it does not posture. When it moves it is already where it is going.",
+  "tradition": "lattice",
+  "powerSystem": "precursor",
+  "declarationPool": [
+   "strike",
+   "shield",
+   "reveal",
+   "reveal"
+  ],
+  "senseFunctions": [
+   "reveal"
+  ],
+  "_readsOften": "⛔ TWO OF FOUR DECLARATIONS ARE `reveal` — THE HEAVIEST READER IN THE GAME. ⚠️ A party that never obscures will be out-fought by arithmetic, and a party that does will earn bonus actions here more often than anywhere else. This is where a player's obscure pays.",
+  "crafts": [
+   "attunement",
+   "ordered_record",
+   "latticespeak",
+   "shatterpoint"
+  ],
+  "soakLayers": [
+   {
+    "type": "physical",
+    "value": 7,
+    "source": "a shell that was never meant to be struck and is very good at it"
+   },
+   {
+    "type": "precursor",
+    "value": 8,
+    "source": "⛔ it IS lattice — precursor work slides off it"
+   },
+   {
+    "type": "abstraction",
+    "value": 6,
+    "source": "a figure imposed on a thing that is already a figure finds no purchase"
+   },
+   {
+    "type": "decay",
+    "value": 5,
+    "source": "⚠️ it does not die, so hastening its end reaches for something absent"
+   }
+  ],
+  "_theGap": "⛔ IT ANSWERS FOUR TYPES AND NOT THE OTHERS. `feeling`, `appetite`, `light`, `shadow`, `living`, `truth` and `deception` ALL LAND FULLY. ⚠️ A THRENODIST OR AN ABYSSAL IS THE PARTY'S BEST WEAPON HERE and neither of them looks like a siege engine — which is the lesson: the wall is not everywhere.",
+  "damageType": "precursor",
+  "harmRung": "damaging",
+  "_neverLethal": "⛔ NO LETHAL RUNG. It imposes and it does not kill — `staggered`, `action_loss`, escalating to `incapacitated` on a crit. ⚠️ A PARTY THAT LOSES HERE WAKES UP ASSAYED, NOT DEAD, and the incapacitated XP fraction applies. Erik: 'getting beaten should give you a little xp.'",
+  "imposes": {
+   "condition": "staggered",
+   "onCrit": "incapacitated",
+   "degradesTo": "action_loss",
+   "resist": "physical",
+   "targets": 1,
+   "_why": "⛔ THE ASSAY IS A MEASUREMENT, NOT AN EXECUTION. A crit means it finished measuring you."
+  },
+  "_cannotBeCutThreaded": "⛔ A CONSTRUCT HAS NO THREAD. The Cut Thread's own bound and the engine's `resolveImposition` agree — this is law, not an exception written for this room. ⚠️ A party carrying the shears learns what the craft actually says by trying it here.",
+  "_antisoakIsTheAnswer": "⛔ FOUR LAYERS TOTALLING 26 IS WHY GRIEF STRIKE EXISTS. `antisoakImposed` adds to damage that ALREADY GOT PAST soak — so a party that opens with Grief Strike makes EVERYONE'S blows count. ⚠️ THE ONE ANTISOAK CARRIER IN THE GAME GETS ITS PROVING RUN HERE.",
+  "_tempo": "⚠️ IT IS LONG ENOUGH TO BANK. A party that Conserves and fights on prepared ground should have 2–3 tempo by the end; one that Surges will have none. ⛔ BOTH MUST BE ABLE TO WIN — that is the test."
+ },
+ "theDuel": {
+  "_offer": "⛔ IT WILL ACCEPT SINGLE COMBAT IF FORMALLY OFFERED. Not from mercy — a duel is a cleaner assay, one subject at a time, and it says so.",
+  "_whoHasThisDoor": "⚠️ A MARCHER OR A STILLHOLD HAS A DOOR A COGITANT DOES NOT. Formal challenge is a social act with a tradition behind it.",
+  "_theRealPrize": "⛔ `solveXp` EXCEEDS `winXp` BY DESIGN — 'ending a duel WITHOUT winning it by force pays best'. ⚠️ THE WARDEN CAN BE SOLVED: it is running an assay, and an assay can be COMPLETED. Convince it the measurement is done and it stands aside.\n⛔ THAT IS WHAT `Case Closed` r2 IS FOR — 'lay premises a reasoning mind must each agree to'. A lattice construct is the most reasoning mind in the game."
+ },
+ "_whatMeetsWhatHere": [
+  "⛔ SOAK vs TYPED DAMAGE — four layers, seven types unanswered. First real test of the ward/damage pairing.",
+  "⛔ TEMPO vs A FOE THAT READS — the first opponent whose sense declarations are frequent enough to matter.",
+  "⛔ ANTISOAK vs LAYERED DEFENCE — the only carrier, against the heaviest soak.",
+  "⚠️ IMPOSES vs A PARTY THAT HEALS — staggered and action_loss are not wounds; a healer cannot mend them.",
+  "⛔ A LETHAL CRAFT vs SOMETHING THAT CANNOT DIE."
+ ],
+ "_treasure": {
+  "the_assay_key": "⛔ ON THE WARDEN. A precursor token granting `wardTypes: [\"precursor\"]` to its bearer — the answer to Level 2's assay-light, and Level 4 cannot be finished without it. ⚠️ TAKING IT BY SOLVING THE DUEL IS CLEANER THAN TAKING IT OFF A BROKEN CONSTRUCT, and the Warden will hand it over if the assay is complete."
+ }
+}

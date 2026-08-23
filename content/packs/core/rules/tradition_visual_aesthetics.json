@@ -3,7 +3,7 @@
  "id": "tradition_visual_aesthetics",
  "kind": "content",
  "note": "SNG-223: per-tradition visual-prompt guidance so a craft's generated image READS as its tradition (Ashwarden crafts look Ashwarden, Wright crafts look Wright). Built ON TOP of each tradition's canon `aesthetic` field in traditions.json (never replacing it) - this translates that prose aesthetic into image-generator language: palette, materials, light, mood. CCode's ensureImage('ability') prompt (SNG-223) prepends the craft's tradition block here to the craft's own authored description. Aevi-authored 2026-07-22.",
- "usage": "For a craft of tradition T: image_prompt = <craft.description> + ', in the visual style of ' + traditions[T].{palette, materials, light, mood}. The craft's OWN description is the subject; this is the STYLE wrapper so the whole tradition coheres. ⛔ SNG-367 — FOR A PERSON of tradition T: the `people` field is the SUBJECT guidance (build, bearing, dress, what they carry, what the craft has done to the body) and palette/light/mood are the STYLE wrapper. ⚠️ WITHOUT `people`, npcPromptSeed falls through formOf() to the literal string 'a person' — measured: 33 of 34 NPCs in Silas Weir's registry have no `appearance`, so every one of them was being drawn from 'a person, character portrait, named X'. That is why every figure rendered as the same young dark-haired woman. ⚠️ AND `people` DESCRIBES A HUMAN OF THE TRADITION — it is a style layer, never a species claim. A non-human figure must carry its own `form`, which wins over this; an Ent of the Rootkin is an Ent first.",
+ "usage": "For a craft of tradition T: image_prompt = <craft.description> + ', in the visual style of ' + traditions[T].{palette, materials, light, mood}. The craft's OWN description is the subject; this is the STYLE wrapper so the whole tradition coheres. ⛔ SNG-367 — FOR A PERSON of tradition T: the `people` field is the SUBJECT guidance (build, bearing, dress, what they carry, what the craft has done to the body) and palette/light/mood are the STYLE wrapper. ⚠️ WITHOUT `people`, npcPromptSeed falls through formOf() to the literal string 'a person' — measured: 33 of 34 NPCs in Silas Weir's registry have no `appearance`, so every one of them was being drawn from 'a person, character portrait, named X'. That is why every figure rendered as the same young dark-haired woman. ⚠️ AND `people` DESCRIBES A HUMAN OF THE TRADITION — it is a style layer, never a species claim. A non-human figure must carry its own `form`, which wins over this; an Ent of the Rootkin is an Ent first.\n⛔ SNG-531: THREE NAMESPACES. `traditions` — a people. `powerSystems` — a source. `forms` — A BODY. ⚠️ Resolve tradition → form → powerSystem; a body's look should beat a source's look, because a source is borrowed and a body is not.",
  "traditions": {
   "umbral": {
    "name": "The Umbrals",
@@ -383,5 +383,26 @@
    "_alias": "⛔ SNG-530. `braid` IS THE PALETTE'S NAME; `combination` IS THE POWER SOURCE'S NAME. ⚠️ Three cross_pole_braid crafts carry `powerSystem: combination` and reached nothing, because the palette was filed under the word for the CRAFT rather than the word for the SOURCE.\n⛔ BOTH KEYS NOW RESOLVE. `braid` stays for anything already naming it."
   }
  },
- "_sng530": "⛔ SNG-530, CCODE'S BLOCKER, RULED. The `powerSystems` palette block held FIVE keys and only ONE was a power source. `radiant` and `harmonic` are FOOTHILLS; `valley_craft` is a FOLK COLLECTION; `braid` is a COMBINATION. ⚠️ THE SAME CATEGORY ERROR I CLEARED FROM 321 ABILITY RECORDS, surviving one file over in the palette map.\n⛔ THREE MOVED TO `traditions`, KEYED BY THE PEOPLE THEY BELONG TO — `radiant` → `radiant_folk`. Now a radiant craft reaches its palette BY ITS TRADITION, which is what it always meant, and its `powerSystem` is free to be `precursor` without repainting it.\n⚠️ `braid` AND `precursor` STAY IN `powerSystems`: precursor IS a source, and a braid has no single people — those two are the block being used correctly.\n⛔ CCODE-217 IS UNBLOCKED. Flip the loader; the ability wins and the header fills the gap.\n⛔ AND ONE MORE ALIAS: `combination` added beside `braid`. The last three uncovered crafts were cross_pole_braid, whose SOURCE is `combination` and whose PALETTE was filed under `braid`. ⚠️ SAME FAULT AS radiant_folk — the palette map was keyed by what a thing is CALLED rather than by what the loader would ask for."
+ "_sng530": "⛔ SNG-530, CCODE'S BLOCKER, RULED. The `powerSystems` palette block held FIVE keys and only ONE was a power source. `radiant` and `harmonic` are FOOTHILLS; `valley_craft` is a FOLK COLLECTION; `braid` is a COMBINATION. ⚠️ THE SAME CATEGORY ERROR I CLEARED FROM 321 ABILITY RECORDS, surviving one file over in the palette map.\n⛔ THREE MOVED TO `traditions`, KEYED BY THE PEOPLE THEY BELONG TO — `radiant` → `radiant_folk`. Now a radiant craft reaches its palette BY ITS TRADITION, which is what it always meant, and its `powerSystem` is free to be `precursor` without repainting it.\n⚠️ `braid` AND `precursor` STAY IN `powerSystems`: precursor IS a source, and a braid has no single people — those two are the block being used correctly.\n⛔ CCODE-217 IS UNBLOCKED. Flip the loader; the ability wins and the header fills the gap.\n⛔ AND ONE MORE ALIAS: `combination` added beside `braid`. The last three uncovered crafts were cross_pole_braid, whose SOURCE is `combination` and whose PALETTE was filed under `braid`. ⚠️ SAME FAULT AS radiant_folk — the palette map was keyed by what a thing is CALLED rather than by what the loader would ask for.",
+ "forms": {
+  "_note": "⛔ SNG-531. A THIRD NAMESPACE, AND IT IS NOT A CONVENIENCE. `traditions` is what a PEOPLE looks like; `powerSystems` is what a SOURCE looks like; ⚠️ `forms` IS WHAT A BODY LOOKS LIKE. An Ent's Barkskin is not a craft it learned — it is what it is made of.\n⛔ WITHOUT THIS, THE ONLY WAY TO GIVE A FORM KIT A PALETTE IS TO FILE THE BODY UNDER A TRADITION — which is exactly the error that blocked CCODE-217, one namespace over.",
+  "form_ent": {
+   "name": "Ent-bodied",
+   "source": "a body made of living timber",
+   "palette": "heartwood brown, bark grey-green, the pale of split wood; sap-amber where damaged",
+   "materials": "timber, bark, root, leaf-litter, standing water at the base",
+   "light": "dappled and slow — light through a canopy, never direct",
+   "mood": "⛔ ENORMOUS AND UNHURRIED. Nothing an Ent does is quick and nothing it does is undone easily.",
+   "avoid": "quickness, glitter, anything that reads as sorcery — this is a body, not a working"
+  },
+  "form_blocklands": {
+   "name": "Block-formed",
+   "source": "a body that assembles",
+   "palette": "raw stone grey, mortar white, the ochre of cut earth",
+   "materials": "fitted block, rubble fill, dry-stone joint",
+   "light": "flat and even, the light of an unroofed courtyard",
+   "mood": "⚠️ IMPROVISED AND HONEST. Outside the Blocklands it is cover, not craft, and it looks it.",
+   "avoid": "elegance, finish, anything that suggests it was planned"
+  }
+ }
 }

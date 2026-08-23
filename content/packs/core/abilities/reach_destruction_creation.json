@@ -566,7 +566,7 @@
      "rank": 1,
      "name": "Improvised",
      "grants": "Quickly make a functional weapon from available materials — one that will not break, will land, and will hurt.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "There must be materials. An empty stone room offers nothing.",
      "functions": [
       "make",
       "strike"
@@ -580,7 +580,7 @@
      "rank": 2,
      "name": "Made to Harm",
      "grants": "Build a weapon fast enough to matter in a fight and good enough to be dangerous — not a masterwork, but the right thing for what you're facing right now.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ Good enough to be dangerous, not good. It will not survive the fight and neither will its edge.",
      "functions": [
       "make",
       "strike"
@@ -594,7 +594,7 @@
      "rank": 3,
      "name": "Right Tool",
      "grants": "Look at the materials at hand and see the weapon they are already; build it in moments, and it is exactly what this situation required.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⛔ It is exactly what the materials were. Sometimes that is a chair leg.",
      "functions": [
       "make",
       "strike"
@@ -691,7 +691,7 @@
      "rank": 1,
      "name": "Demonstrated Craft",
      "grants": "Show what you have made — or make something now — and let its quality stand as argument; the person who would have dismissed you reconsiders.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "The work must be present or known. Describing it is not showing it.",
      "functions": [
       "reveal"
      ],
@@ -707,7 +707,7 @@
      "rank": 2,
      "name": "Reputation",
      "grants": "Your work is known enough that naming yourself — or showing it — commands genuine respect and opens doors that stay closed to those who only claim.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ It commands respect for the WORK. People can respect your work and refuse you.",
      "functions": [
       "command"
      ],
@@ -725,7 +725,7 @@
      "rank": 3,
      "name": "Undeniable",
      "grants": "The thing you have built is the argument and the evidence. Anyone who has seen it cannot pretend otherwise — and they have all seen it.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⛔ Anyone who has seen it. Anyone who has not is unmoved and possibly irritated.",
      "functions": [
       "command"
      ],
@@ -828,7 +828,7 @@
      "rank": 1,
      "name": "Crossing",
      "grants": "Build a passage across an obstacle — a bridge, a stair, a ramp — quickly enough that the party can use it before circumstances change.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "You need materials in reach and hands to work. It takes minutes you may not have.",
      "functions": [
       "make",
       "open"
@@ -843,7 +843,7 @@
      "rank": 2,
      "name": "Made Passage",
      "grants": "Open a way through or across any natural or built obstacle by constructing what's needed — not by force, by craft.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ It bears what you built it to bear. Weight beyond that is a second problem.",
      "functions": [
       "make",
       "open"
@@ -859,7 +859,7 @@
      "rank": 3,
      "name": "Road That Wasn't",
      "grants": "Build a path where there was truly none — spanning what shouldn't be spanned, opening what was sealed — and have it hold the weight it needs to hold.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⛔ It is a built thing and it can be unbuilt — by weather, by an unmaker, or by whoever comes after you.",
      "functions": [
       "make",
       "open",
@@ -954,7 +954,7 @@
      "rank": 1,
      "name": "Hands Moving",
      "grants": "As long as you are making something, fear, grief, exhaustion, and cold have less purchase — the work is the anchor that keeps you functional.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⛔ YOU MUST ACTUALLY BE MAKING SOMETHING. Intending to work is not working.",
      "functions": [
       "sustain"
      ],
@@ -967,7 +967,7 @@
      "rank": 2,
      "name": "Built Through It",
      "grants": "Sustain yourself and your party through hardship by making useful things — shelter, tools, warmth, structure — that make the hardship survivable.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "The things must be useful HERE. A beautifully made chair in a blizzard is firewood.",
      "functions": [
       "sustain",
       "empower"
@@ -983,7 +983,7 @@
      "rank": 3,
      "name": "Left in Motion",
      "grants": "Start something building and leave it — the structure grows, the mechanism runs, the work continues. What you set in motion sustains beyond your direct attention.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ It continues without you — at the pace and quality you left it at.",
      "functions": [
       "sustain",
       "empower"
@@ -1073,7 +1073,7 @@
      "rank": 1,
      "name": "Precise Removal",
      "grants": "Identify and remove exactly what is interfering with a person or system's recovery — the splinter, the bad element, the thing that was keeping it from healing on its own.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "You must be able to identify the interference exactly. A vague wrongness gives you nothing to remove.",
      "functions": [
       "restore"
      ],
@@ -1090,7 +1090,7 @@
      "rank": 2,
      "name": "What Shouldn't Be There",
      "grants": "Restore function by ending the specific thing that was consuming it — corruption, disease, obstruction — with precision that doesn't damage what should remain.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "It ends the thing consuming function; it does not restore what was already lost.",
      "functions": [
       "mend",
       "restore"
@@ -1111,7 +1111,7 @@
      "rank": 3,
      "name": "Clean",
      "grants": "Remove everything that should not be there, completely and correctly, so that what remains can be what it was meant to be without interference.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ Everything that should not be there — by ITS judgment of should. An unmaker's should is exact and occasionally unwelcome.",
      "functions": [
       "mend",
       "restore"
@@ -1222,7 +1222,7 @@
      "rank": 1,
      "name": "Early Intervention",
      "grants": "See a threat forming and end it at the source — the plan that collapses before it executes, the attack that never completes because you dismantled its condition.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "You must see it FORMING. A threat already in motion is a different problem.",
      "functions": [
       "foresee",
       "break"
@@ -1236,7 +1236,7 @@
      "rank": 2,
      "name": "Stopped Thing",
      "grants": "Protect someone by finding and breaking the specific thing that would harm them — not deflecting the blow but ending the arm that swings it. The threat is not turned aside; it is disabled at the point it was coming from, and whoever was carrying it is weakened out of the fight rather than merely stopped.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ It breaks the specific thing. Whoever wanted it done still wants it done.",
      "functions": [
       "break",
       "shield"
@@ -1256,7 +1256,7 @@
      "rank": 3,
      "name": "Before It Arrives",
      "grants": "Identify a danger in its earliest form and end it completely, so it never becomes the threat it was becoming.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⛔ Ending a danger in its earliest form means ending something that had not yet done anything.",
      "functions": [
       "break",
       "shield"
@@ -1369,7 +1369,7 @@
      "rank": 1,
      "name": "Back to Parts",
      "grants": "Disassemble a made thing into its components without destroying the components — what was one thing becomes usable pieces of something else.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "It must be MADE. Grown and natural things do not come apart into components.",
      "functions": [
       "break"
      ],
@@ -1382,7 +1382,7 @@
      "rank": 2,
      "name": "Unformed",
      "grants": "Break a thing down to the point where it has no remaining identity as what it was — it is now material, and material can become anything.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ No remaining identity means no remaining identity. You cannot change your mind halfway.",
      "functions": [
       "break",
       "transform"
@@ -1396,7 +1396,7 @@
      "rank": 3,
      "name": "Open Form",
      "grants": "Return something complex — a structure, a plan, a fixed belief — to the state before it became that specific thing, clearing the way for something new to take form.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⛔ A fixed belief returned to before-it-was-that is a person who now believes nothing in particular.",
      "functions": [
       "break",
       "transform"
@@ -1485,7 +1485,7 @@
      "rank": 1,
      "name": "Known Capacity",
      "grants": "Your reputation for ending things precisely and completely gives weight to what you say — a warning from you lands differently than from someone without your history.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⛔ YOUR REPUTATION MUST BE REAL AND LOCAL. Nobody fears an unmaker they have not heard of.",
      "functions": [
       "command"
      ],
@@ -1499,7 +1499,7 @@
      "rank": 2,
      "name": "Demonstrated Threat",
      "grants": "Show what you can dismantle — or name it plainly — and command the terms of an agreement; they know what refusal means.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "They must have something they would mind losing.",
      "functions": [
       "command",
       "bind"
@@ -1514,7 +1514,7 @@
      "rank": 3,
      "name": "Final Authority",
      "grants": "You are the person who decides what ends. In a situation where endings are at stake, your word is the one that stands — not because you outranked anyone, but because everyone knows you can do what you say.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ It commands the terms of ENDINGS. It does not make anyone like you.",
      "functions": [
       "command",
       "bind"
@@ -1610,7 +1610,7 @@
      "rank": 1,
      "name": "Cut",
      "grants": "Identify precisely what is consuming your capacity — exhaustion, fear, a specific obligation — and end it cleanly so you can continue.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "You must name what is consuming you, exactly. 'Everything' is not a thing that can be ended.",
      "functions": [
       "restore"
      ],
@@ -1628,7 +1628,7 @@
      "rank": 2,
      "name": "What You Don't Need",
      "grants": "Sustain yourself by releasing everything non-essential across a hard stretch — not forcing through with more, but needing less through precise subtraction.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⚠️ NON-ESSENTIAL BY YOUR JUDGMENT, and you are tired while making it.",
      "functions": [
       "sustain",
       "restore"
@@ -1650,7 +1650,7 @@
      "rank": 3,
      "name": "Lighter Load",
      "grants": "End what is consuming your group — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can actually go on.",
-     "cannot": "⚠️ BOUND NOT AUTHORED — SNG-484. The previous text pointed at the next rank instead of stating a limit.",
+     "cannot": "⛔ Ending a group's despair means ending what it was about. Sometimes that is a plan they liked.",
      "functions": [
       "sustain",
       "restore"
@@ -3134,5 +3134,6 @@
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
  "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
- "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
+ "_sng525": "⛔ SNG-525: bounds authored. These ranks carried `⚠️ BOUND NOT AUTHORED` — flagged in SNG-484 rather than bulk-written, because 210 bounds I had not thought about would have read as considered and not been. ⚠️ EACH IS DERIVED FROM THE CRAFT'S OWN GRANT TEXT and answers one of the four questions (§32.14): what must be present · what is out of reach · how many, how often · what it does not touch."
 }

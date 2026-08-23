@@ -2398,7 +2398,7 @@ that lags the code is worse than no map, because it is believed.
 | `mechanic.evasion` + `evasionRank` | `evasionOf` — rank 1 still findable by a reader, rank 2+ not | `skill_battle.js` | **7** |
 | `penetration` | splits `cutThrough` (rank ≤ pen) from `soak` | `skill_battle.js` | **4** |
 | `mechanic.duration` | craft duration in rounds, capped by `craftDurationMax` | `skill_battle.js` | many |
-| `mechanic.crit` / `crit` | `critFor` → a per-craft **chance bias** and a **sentence on the receipt**. ⚠️ **Nothing else** — see §39.4 | `craftmechanics.js` → `resolve.js` | ⛔ **0** |
+| `mechanic.crit` / `crit` | `critFor` → a per-craft **chance bias** and a **sentence on the receipt**. ⚠️ **Nothing else** — see §39.4 | `craftmechanics.js` → `resolve.js` | **43** |
 | `damageType` | `answers(l)` — which soak layers apply | `skill_battle.js` | 26 |
 | `wardTypes` | ⛔ **NOTHING — see §39.5.** The string does not appear in `skill_battle.js` | — | **48** |
 | `mechanic.dice` on a **healing** shape | ✅ `resolveHeal` → `rollMagnitude` → the round's `healing` | `craftmechanics.js` → `skill_battle.js` healing branch | 25 |
@@ -2485,7 +2485,7 @@ dice could **win a round and produce nothing**. The healing verbs are now author
 | shape | supported? | what it would need |
 |---|---|---|
 | **AMPLIFY** (more of the same) | ⛔ **no** | there is no crit damage multiplier anywhere; a crit raises the *sense tier* and nothing else |
-| **ESCALATE** (a different, better effect) | ✅ **YES, as of CCODE-208** — author `mechanic.imposes.onCrit` | — |
+| **ESCALATE** (a different, better effect) | ✅ **YES** — `mechanic.imposes.onCrit`, **live on 14 crafts, with 43 now carrying a `crit` trigger** | — |
 | **PERSIST** (temporary becomes durable) | ⛔ **no** | a duration/permanence hook on the crit branch |
 
 ⚠️ **ESCALATE and SNG-500 §2 (Keening) turned out to be the same feature**, which is why building §2 made it

@@ -17093,7 +17093,21 @@ await (async () => {
     const withWard = abs.filter(a => JSON.stringify(a).includes('"wardTypes"')).length;
     check(`CCODE-199: §39 still tells the truth — crit authored on ${withCrit}, wardTypes on ${withWard}`,
       /### §39 —|# §39 — THE MECHANIC MAP/.test(spec199)
-      && (withCrit === 0) === /`mechanic\.crit` \/ `crit`.*\*\*0\*\*/s.test(spec199.slice(spec199.indexOf("§39.1"), spec199.indexOf("§39.2")))
+      // ⚠️ crit went 0 -> 43 the moment Aevi authored ESCALATE triggers. The gate follows the COUNT here
+      // rather than a claim, because unlike wardTypes the row says the same thing at any number - what must
+      // not drift is the number itself.
+      // ⛔ THIS CHECK ONCE PASSED AT ANY NUMBER. It was a RegExp built by string concatenation through
+      // three layers of escaping, and the `\\.` / `\\*` in a JS STRING are just `.` and `*` — so the
+      // pattern it actually compiled matched almost anything. Mutating the spec to a wrong count left
+      // it green. A gate assembled out of escapes is a gate nobody can read, including me.
+      // ⚠️ So: find the row, take its last cell, compare the number. No regex construction at all.
+      && (() => {
+        const slice = spec199.slice(spec199.indexOf("§39.1"), spec199.indexOf("§39.2"));
+        const row = slice.split("\n").find(l => l.startsWith("| `mechanic.crit`"));
+        if (!row) return false;
+        const cells = row.split("|").map(c => c.trim()).filter(Boolean);
+        return String(withCrit) === (cells[cells.length - 1] || "").replace(/[*⛔\s]/g, "");
+      })()
       // ⚠️ wardTypes went 0 -> 48 and the spec row now has to say the OPPOSITE thing: that the field is
       // authored and READ BY NOTHING. The gate follows the claim rather than the number - if the row ever
       // stops pointing at §39.5, the map has drifted again.

@@ -2863,3 +2863,102 @@ instead of one wildcard.
 **Measured cost of the collapse, as of 2026-08-21:** 88 references to a culled sense still live in `rules/`
 across 12 files · 2 combination recipes collapse to `attunement + attunement` and become unmintable ·
 1 branch fork orphaned · 6 `schoolAffinity` entries lost (19 → 13) · seraphic's innate precursor dead.
+
+
+---
+
+## 44. Session close — 2026-08-16→23 · the corpus audit
+
+⛔ **Everything below is state a successor needs. The narrative is in `po/`; this is what must be known
+before touching an ability again.**
+
+### 44.1 The four power sources, as two pairs
+
+⛔ **PRECURSOR LATTICE · NANITE (ordered and wild — ONE source, two states) · VEIL · METAPHYSICAL.**
+
+**And the structure Erik restated on 2026-08-23, which was already canon in `power_cosmology.json` and had
+never reached `power_sources.json`:**
+
+> ⛔ **ORDERED NANITES APPROXIMATE SUBSTRATE POWERS. MANY METAPHYSICAL POWERS APPROXIMATE VEIL POWER.**
+> **precursor : ordered_nanite :: veil : metaphysical**
+
+⚠️ **Veil is the power OPPOSITE substrate** — the bands mirror, and thinning one strengthens the other.
+⛔ **A metaphysical craft is not a lesser Veil craft; it is an approximation reached from the human side.**
+
+**`veil` has zero primary carriers and one appearance, in `keening`'s mix.** ⛔ **The remaining tradition
+audits must allocate it deliberately** — Erik: *"as we go through the skill audit we'll need to make sure
+we allocate power sources correctly."*
+
+**Named currents are COMBINATIONS, not sources:** `wild_current` = wild_nanite 0.6 + veil 0.4 ·
+`living_current` = wild_nanite 0.5 + metaphysical 0.5. ⚠️ **If the audit finds another, express it as a
+mix — there are four, and the reason there are four is the two pairs.**
+
+### 44.2 ⛔ WHAT A FOOTHILL IS — the definition I kept missing
+
+> **Erik, 2026-08-23: *"Foothills are where multiple traditions come together — places where a domain and
+> its adjacents LIVE and work."***
+
+⚠️ **I had been reading a foothill as "a weaker version of a pole, sold." That is a CONSEQUENCE, not the
+definition.** ⛔ **The definition is geographic and social: a foothill is a PLACE, and the blend is who
+lives there.**
+
+**Seven foothills:** `god_named` · `bargainers` · `harmonic` · `radiant_folk` · `hardline` · `greyhearth`
+(+ Amaranth) · ⛔ **`valley_craft`** — which I recorded twice as "the folk collection, no parents" and was
+corrected both times. **stillhold 0.4 / wright 0.3 / rootkin 0.3.**
+
+⚠️ **A foothill roots a craft when the BLEND produces something neither parent has.**
+
+### 44.3 The corpus, as of 2026-08-23
+
+**373 abilities · 1,043 ranks.** ⛔ **Every one bounded, sourced, and palette-resolving.**
+
+| | |
+|---|---|
+| `powerSystem` correct | **373/373** — was 321 wrong |
+| bounds authored | **all** — was 201 unauthored |
+| `crit` (success + failure) | **43** — was 0 |
+| `wardTypes` | **48** — was 0 |
+| `imposes` / `ongoingHarm` / `persistUntilHealed` | **19 / 10 / 6** — all were 0 |
+| damage types | **12**, every one warded |
+
+**Traditions closed: Mind (25, 3 schools) · Body (22, 2 schools).** ⚠️ **Death is part-audited.**
+
+### 44.4 ⛔ NEW SYSTEMS, SPECCED AND SHIPPED
+
+**The contested sense slot** — SENSE or OBSCURE, ⛔ **the obscurer wins ties**, and a successful obscure
+against an active reader earns the bonus action. **Null band: a coin-flip pays nobody.**
+
+**Tempo · antisoak (target-carried) · projects with `projectThreshold` ·
+persist-until-healed · `ongoingHarm` denying heals · typed warding.**
+
+⚠️ **`duration` is how long the RESULT lasts; `projectThreshold` is how long the WORK takes.**
+
+### 44.5 The Sunk Assay
+
+**Four levels, authored, and they play in a harness.** ⛔ **NOT PLAYABLE IN GAME — it is not a location,
+Greyhearth does not connect to it, and Amaranth does not exist as a place.** **Spec: `SNG-529`.**
+
+### 44.6 ⛔ THE MERGER
+
+**`traditions_v2.json` — 14 traditions, 24 sects. Audited 2026-08-23: ZERO source mismatches against
+canon.**
+
+**Recommended shape:** `tradition` (the 14) · ⛔ **`sect` (the 24, preserved)** · `traditionKind`.
+⚠️ **CCode's warning stands: 52 reader sites, and the ring goes 24→14 so every antipode moves — a
+game-rule change wearing a rename.**
+
+**Recommendation: audit first, migrate second.** ⛔ **Spirit at 10 crafts against Death at 32 is the
+imbalance the merger will expose.**
+
+### 44.7 ⛔ THE FAILURE THAT RECURRED, AND ITS CORRECTIVE
+
+**Named this session, five instances:** *authored, correct, and invisible.* **27 unregistered files · four
+verbs in no family · 27 blocks one level below their reader · correspondence never written · a palette
+keyed by the wrong namespace.**
+
+⛔ **AND FOUR VERIFICATIONS THAT AGREED WITH THEMSELVES**, including one of mine that reported "0 dropped"
+by diffing against the already-damaged file.
+
+**The corrective is `tests/content_which.mjs`** — ⛔ **six assertions that name WHICH, not WHETHER.** It
+found 10 things on its first run, six of them mine. ⚠️ **A gate asserting whether a palette resolves cannot
+see a craft resolving the wrong one.**

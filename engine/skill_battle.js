@@ -1066,7 +1066,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // ⛔ CCODE-208 — AND A WINNING CRAFT MAY IMPOSE. Aevi's correction is the whole design: Keening does not
   // need a new state, it needs a way to put someone into the one that already exists. Resolved AFTER the
   // exchange because only a winner imposes, and read off the SUBJECT's resistance so it is contested.
-  let imposed = null, inflicted = null;
+  let imposed = null, inflicted = null, opened = null;
   // ⛔ CCODE-214 — AND A WINNING CRAFT LEAVES ITS ONGOING HARM ON THEM. Eight crafts have claimed this in
   // prose since the day they were written; `resolveHeal` has read the condition off the subject since
   // v1.9.168 and NOTHING PUT IT THERE. The reader had a writer in the catalogue and no hand in between.
@@ -1076,8 +1076,18 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   if (roundWinner && phase === "action") {
     const infDecl = roundWinner === "player" ? playerDecl : oppDecl;
     const harm = ongoingHarmOf(infDecl, infDecl?.rank || 1);
-    if (harm && harm.magnitude > 0) inflicted = { side: roundWinner === "player" ? "opponent" : "player",
-      by: infDecl.name || infDecl.function, ...harm };
+    const losingSide = roundWinner === "player" ? "opponent" : "player";
+    if (harm && harm.magnitude > 0) inflicted = { side: losingSide, kind: "ongoingHarm",
+      by: infDecl.name || infDecl.function, persistUntilHealed: authoredBlock(infDecl, "persistUntilHealed", infDecl?.rank || 1) === true, ...harm };
+    // ⛔ CCODE-216 — AND THE VULNERABILITY A BLOW LEAVES BEHIND. Erik's antisoak ruling had one open
+    // question: does `grief_strike`'s number mean "this blow benefits" or "this blow LEAVES them open"?
+    // ⚠️ AEVI ANSWERED IT BY AUTHORING. `antisoakImposed` 3/5/8 across its three ranks - the imposing
+    // reading - and nothing read the field. The target-side half has been wired since CCODE-210; this is
+    // the half that puts it there.
+    const asImposed = Math.max(0, Number(authoredBlock(infDecl, "antisoakImposed", infDecl?.rank || 1)) || 0);
+    if (asImposed > 0) opened = { side: losingSide, kind: "antisoak", magnitude: asImposed,
+      by: infDecl.name || infDecl.function,
+      persistUntilHealed: authoredBlock(infDecl, "persistUntilHealed", infDecl?.rank || 1) === true };
   }
   if (roundWinner && phase === "action") {
     const impDecl = roundWinner === "player" ? playerDecl : oppDecl;
@@ -1101,7 +1111,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       else if (r.why) imposed = { refused: r.why, by: impDecl.name || impDecl.function };
     }
   }
-  const out = { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
+  const out = { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback },
     // CCODE-80: an evaded blow must SAY it was evaded. An attack that quietly does less is indistinguishable
     // from a bad roll, and the whole point of the three defensive logics is that they read differently.

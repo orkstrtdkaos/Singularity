@@ -17141,6 +17141,82 @@ await (async () => {
       Number.isFinite(Number(pcfg.ticksPerMagnitude)) && Number.isFinite(Number(pcfg.perExtraHand)),
       JSON.stringify(pcfg));
   }
+  // 5j · ⛔ CCODE-216 / SNG-522 §3 — PERSIST-UNTIL-HEALED IS A DIFFERENT CLOCK, and `antisoakImposed`
+  // finally has a reader. Erik's antisoak ruling left one question open — does a craft's number mean "this
+  // blow benefits" or "this blow LEAVES them open"? ⚠️ AEVI ANSWERED IT BY AUTHORING: `antisoakImposed`
+  // 3/5/8 across Grief Strike's ranks, the imposing reading, read by nothing.
+  {
+    const CD = await import("../engine/conditions.js");
+    const SB216 = await import("../engine/skill_battle.js");
+    const rules216 = C199.rules || {}, sb216 = rules216.skillBattle || C199.skillBattle || {};
+    const steps216 = C199.resolutionSteps || rules216.resolution || {};
+    const gs = C199.abilities?.grief_strike;
+    const strong = { attributes: { social: 8, physical: 6, mental: 5, practical: 5 }, level: 10, health: 40, maxHealth: 40 };
+    const frail = { attributes: { social: 1, physical: 1, mental: 1, practical: 1 }, level: 1, health: 40, maxHealth: 40, soak: 0 };
+    const swing = (rank) => SB216.battleRound({
+      playerDecl: { ...gs, function: (gs?.functions || [])[0], tier: 4, attribute: "social", intensity: "standard", rank, name: "Grief Strike" },
+      oppDecl: { function: "shield", tier: 1, attribute: "physical", intensity: "conserve", name: "guard" },
+      playerSheet: strong, oppSheet: frail,
+      state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 50, effects: [], pressure: { player: 0, opponent: 0 } },
+      rules: rules216, sb: sb216, steps: steps216, rng: () => 0.5 });
+
+    const r1 = swing(1), r3 = swing(3);
+    check("CCODE-216: `antisoakImposed` reaches a real round, and it SCALES with rank (3 → 8)",
+      r1.opened?.magnitude === 3 && r3.opened?.magnitude === 8,
+      `r1 ${JSON.stringify(r1.opened ?? null)} · r3 ${JSON.stringify(r3.opened ?? null)}`);
+    // ⛔ ON THE LOSER. Reading it off the striker as a self-buff is the other half of the ambiguity, and
+    // this is the gate that says which one shipped.
+    check("CCODE-216: the vulnerability lands on the one who was HIT, not the one who swung",
+      r3.opened?.side === "opponent");
+
+    // ---- the condition lifecycle ----
+    const them = { name: "them" };
+    CD.applyCondition(them, { id: "grief_open", ...r3.opened }, { day: 1 });
+    check("CCODE-216: a carried antisoak sums to what antisoakLanded reads off the sheet",
+      CD.antisoakOn(them) === 8);
+    CD.applyCondition(them, { id: "grief_open", kind: "antisoak", magnitude: 2 }, { day: 2 });
+    check("CCODE-216: a condition is a STATE, not a stack — being greyed twice is being greyed",
+      them.conditions.length === 1 && CD.antisoakOn(them) === 8);
+
+    // ⛔ THE RULE, IN ONE LINE: rest clears what rest can clear.
+    const patient = { name: "patient", conditions: [] };
+    CD.applyCondition(patient, { id: "winded", kind: "ongoingHarm", magnitude: 2 });
+    CD.applyCondition(patient, { id: "grey", kind: "ongoingHarm", magnitude: 4, persistUntilHealed: true });
+    const night = CD.clearOnRest(patient, { kind: "sleep" });
+    check("CCODE-216: a night clears an ordinary condition",
+      night.cleared.some(c => c.id === "winded"));
+    // ⛔ AND THIS IS THE WHOLE FEATURE. Erik on Grey Hand: "it doesn't come back immediately upon stopping —
+    // it would have to be healed/restored." No number of nights fixes a hand that has stopped working.
+    check("CCODE-216: NO amount of rest clears a persist-until-healed condition — that is the different clock",
+      night.persisted.some(c => c.id === "grey")
+      && CD.clearOnRest(patient, { kind: "sleep" }).persisted.some(c => c.id === "grey")
+      && patient.conditions.some(c => c.id === "grey"));
+    check("CCODE-216: and the caller is TOLD what persisted — a rule, not a mystery",
+      night.persisted.length > 0 && night.persisted.every(c => c.id));
+
+    // ⚠️ A BREATHER IS NOT A NIGHT, or "take a breather" becomes a universal cure with a smaller number.
+    const tired = { name: "tired", conditions: [] };
+    CD.applyCondition(tired, { id: "winded", kind: "ongoingHarm", magnitude: 2 });
+    check("CCODE-216: an hour off your feet does not clear what a night would",
+      CD.clearOnRest(tired, { kind: "breather" }).cleared.length === 0 && tired.conditions.length === 1);
+
+    // and the OTHER half of the clock
+    const mended = CD.clearOnHeal(patient, ["grey"]);
+    check("CCODE-216: a heal clears what rest could not — by id, because a mend answers one wrong",
+      mended.cleared.some(c => c.id === "grey") && !patient.conditions.some(c => c.id === "grey"));
+
+    // ⚠️ PERSISTENCE IS CONTAGIOUS. A lighter second application must not make a mending-only condition
+    // sleep-offable again — that would be a cure by reapplying the injury.
+    const twice = { name: "twice", conditions: [] };
+    CD.applyCondition(twice, { id: "grey", kind: "ongoingHarm", magnitude: 4, persistUntilHealed: true });
+    CD.applyCondition(twice, { id: "grey", kind: "ongoingHarm", magnitude: 1 });
+    check("CCODE-216: re-applying a lighter version does not make a mending-only condition sleep-offable",
+      CD.clearOnRest(twice, { kind: "sleep" }).persisted.some(c => c.id === "grey"));
+
+    check("CCODE-216: the persist flag is read rank-first and walks down (the CCODE-214 rule)",
+      CD.persistsUntilHealed({ tree: [{ rank: 1, persistUntilHealed: true }] }, 3) === true
+      && CD.persistsUntilHealed({ tree: [{ rank: 1 }] }, 3) === false);
+  }
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

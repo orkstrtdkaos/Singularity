@@ -2409,6 +2409,9 @@ that lags the code is worse than no map, because it is believed.
 | `ability.obscure` | ✅ `isObscureDecl` — a DECLARED obscure costs you the read and **wins ties** | `skill_battle.js` | **15** |
 | `ability.sense` | ✅ `isSenseDecl` | `skill_battle.js` | **27** |
 | `targetSheet.antisoak` | ✅ `antisoakLanded` — amplifies what got past soak | `skill_battle.js` | ⚠️ sheet-side |
+| `mechanic.antisoakImposed` | ✅ the round's `opened` — a winning blow LEAVES the vulnerability on the loser | `skill_battle.js` → `conditions.js` | **1** (3/5/8 by rank) |
+| `persistUntilHealed` | ✅ `conditions.clearOnRest` refuses to clear it — a heal must | `conditions.js` | ⛔ **0** |
+| `downtime` + `projectTicks` | ✅ `projects.openProject` — a threshold, never a date | `projects.js` | **2** |
 
 ## §39.6 — ⛔ THE OBSCURER WINS TIES, AND THIS IS NOT A BUG
 
@@ -2491,6 +2494,23 @@ dice could **win a round and produce nothing**. The healing verbs are now author
 ⚠️ **ESCALATE and SNG-500 §2 (Keening) turned out to be the same feature**, which is why building §2 made it
 free: escalation is a different argument to `resolveImposition`, not a new system. `onCrit` is **opt-in** —
 a craft that names none crits as prose exactly as before.
+
+## §40.0 — ⛔ PERSIST-UNTIL-HEALED IS A DIFFERENT CLOCK, NOT A LONGER ONE
+
+**Durations are ROUNDS**, capped at `craftDurationMax`, and they tick down whether or not anybody does
+anything. ⛔ **Erik on Grey Hand: *"it doesn't come back immediately upon stopping — it would have to be
+healed/restored."*** A thing that waits out is not that. **A thing a night's sleep does not touch is.**
+
+**The rule is one sentence: rest clears what rest can clear, and a persist-until-healed condition survives
+any amount of rest.** There is no number of nights that fixes a hand that has stopped working — somebody
+has to mend it. `conditions.clearOnRest` returns `{ cleared, persisted }`, and **`persisted` is the point**:
+the caller can tell the player *why* they woke up still broken, which is the difference between a rule and
+a mystery.
+
+⚠️ **Three edges, each gated:** a breather is not a night (or "take a breather" becomes a universal cure
+with a smaller number) · a condition is a STATE, not a stack · **persistence is contagious** — re-applying
+a lighter version must not make a mending-only condition sleep-offable, which would be a cure by repeating
+the injury.
 
 ## §40.1a — ⛔ A CRAFT MAY PUT YOU DOWN. IT MAY NEVER KILL YOU.
 

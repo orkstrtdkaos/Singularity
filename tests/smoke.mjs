@@ -17283,6 +17283,42 @@ await (async () => {
       CD218.persistsUntilHealed({ tree: [{ rank: 1, persistUntilHealed: true }] }, 1) === true
       && CD218.persistedConditionName({ tree: [{ rank: 1, persistUntilHealed: true }] }, 1) === null);
   }
+  // 5l · ⛔ CCODE-220 / WORK ORDER §5 — THE DRIVEN-NPC DIRECTIVE FIRES, AND HERE IS THE TRANSCRIPT.
+  // Aevi asked for evidence rather than a claim: "a driven NPC visibly acts on its directive in a harness
+  // run, and the 890 characters demonstrably reach the model."
+  //
+  // ⚠️ AND THE ANSWER IS NOT WHAT EITHER OF US ASSUMED. The trigger was never missing — `npcRegistryForGM`
+  // appends the directive whenever a driven NPC is in the block. What gates it is POPULATION (7 of 111
+  // have interiority) and MEETING them, which are content and play, not wiring.
+  {
+    const NP = await import("../engine/npcs.js");
+    const inter = C199.npcInteriority || {};
+    const drivenIds = Object.keys(inter.npcs || {});
+    check(`CCODE-220: ${drivenIds.length} NPCs carry authored interiority`, drivenIds.length >= 5, drivenIds.join(", "));
+
+    const who = drivenIds[0];
+    const met = { name: "the player", npcRegistry: { [who]: { id: who, name: "Pell", relationship: 4, status: "active", history: ["met"], knownFacts: [], skillsObserved: [] } } };
+    const block = String(NP.npcRegistryForGM(met, { locationId: null, sceneNpcNames: [], interiority: inter, rules: C199.rules }) || "");
+    const head = String(inter.drivenNpcDirective || "").slice(0, 40);
+    check("CCODE-220: a met driven NPC puts the DIRECTIVE in front of the model — the wire is live",
+      !!head && block.includes(head) && /DRIVEN:/.test(block),
+      `block ${block.length} chars`);
+
+    // ⛔ AND AN ID-LESS ENTRY NO LONGER LOSES ITS DRIVES SILENTLY. `driveOf` reads `n.id`; the registry is
+    // KEYED by id, so an entry without one produced no directive and said nothing about it. CCODE-20
+    // already had to backfill missing ids, which is the evidence that they happen.
+    const idless = { name: "the player", npcRegistry: { [who]: { name: "Pell", relationship: 4, status: "active", history: ["met"], knownFacts: [], skillsObserved: [] } } };
+    const blockNoId = String(NP.npcRegistryForGM(idless, { locationId: null, sceneNpcNames: [], interiority: inter, rules: C199.rules }) || "");
+    check("CCODE-220: an id-less registry entry still gets its drives — the key IS the id",
+      blockNoId.includes(head) && /DRIVEN:/.test(blockNoId), `block ${blockNoId.length} chars`);
+
+    // ⚠️ AND AN UNDRIVEN NPC MUST NOT DRAG THE DIRECTIVE IN. It is 890 characters of instruction; sending
+    // it for a cast with no driven member is prompt budget spent on nothing.
+    const plain = { name: "the player", npcRegistry: { someone: { id: "someone", name: "Someone", relationship: 1, status: "active", history: ["met"], knownFacts: [], skillsObserved: [] } } };
+    const blockPlain = String(NP.npcRegistryForGM(plain, { locationId: null, sceneNpcNames: [], interiority: inter, rules: C199.rules }) || "");
+    check("CCODE-220: a cast with no driven member does NOT carry the directive — 890 chars are not free",
+      !blockPlain.includes(head));
+  }
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

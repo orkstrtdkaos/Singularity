@@ -548,7 +548,13 @@ function renownLine(n, ctx = {}) {
 export function npcRegistryForGM(character, { locationId = null, sceneNpcNames = [], interiority = null, communityId = null, rules = null } = {}) {
   const ctx = { communityId, rules };
   const reg = character.npcRegistry || {};
-  const all = Object.values(reg);
+  // ⛔ CCODE-220 — THE KEY IS THE ID, SO AN ENTRY MISSING ONE BORROWS IT HERE. `driveOf` reads `n.id`, so
+  // an id-less registry entry LOST ITS DRIVES SILENTLY - no directive, no drive line, nothing said. The
+  // registry is keyed BY the id, so taking it from the key is the same fact by another road rather than a
+  // guess. ⚠️ CCODE-20 already had to write a reconcile step to backfill missing ids, which is the
+  // evidence that id-less entries happen; 115 of 115 live entries carry one today, and that is a migration
+  // plus luck, not a guarantee.
+  const all = Object.entries(reg).map(([key, n]) => (n && !n.id ? { ...n, id: key } : n)).filter(Boolean);
   if (!all.length) return null;
   const sceneNames = sceneNpcNames.map(s => s.toLowerCase());
   const relevant = all.filter(n =>

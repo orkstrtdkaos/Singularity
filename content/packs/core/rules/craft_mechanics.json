@@ -295,5 +295,13 @@
   "_perRank": "⚠️ how much each rank past the first LOWERS it. Rank here is not a bigger number, it is a harder thing to shrug off — which is what rank means everywhere else.",
   "_neverDeath": "⛔ A CRAFT CAN NEVER IMPOSE DEATH, and that is structural rather than a dial. `IMPOSABLE` is action_loss | staggered | unconscious | incapacitated. `slain` and `left_for_dead` are OUTCOMES of the incapacitation table, reached after someone is already down and weighed against the aggressor's kind. Erik's §40 ruling lets the ENGINE impose death when the situation calls for it; a craft is not a situation.",
   "_unauthored": "⚠️ AEVI — NOTHING AUTHORS `mechanic.imposes` YET. `Keening` is the craft SNG-500 §2 was written about and does nothing at any rank. Her own scope: r1 area, action-loss · r2 up to three, unconscious-or-action-loss · r3 everyone you choose."
+ },
+ "projects": {
+  "_note": "⛔ SNG-522 §1 / CCODE-215 — PROJECT WORK. A project completes on a THRESHOLD, never on a date: a date can only be waited out, and a threshold can be interrupted, hurried by more hands, set back by sabotage, and inherited. Sunk Assay L4 is built on all four.",
+  "ticksPerMagnitude": 2,
+  "_ticksPerMagnitude": "days of work per point of the craft's `magnitude`, when no `projectThreshold` is authored. Built System (mag 6) -> 12 days; Sound Read (mag 5) -> 10.",
+  "perExtraHand": 0.5,
+  "_perExtraHand": "⚠️ DELIBERATELY SUBLINEAR (divided by sqrt of the hands). A second pair of hands helps; a tenth mostly gets in the way. A party that recruits a village must not finish a year's assay in an afternoon.",
+  "_thresholdSource": "⚠️ AEVI — `built_system` carries `duration: 8760`, a year in hours, which reads like an intended scale and is NOT what the threshold uses. If a project's real length is meant to come from `duration` rather than `magnitude`, author `projectThreshold` on the craft and this derivation steps aside. Reported rather than guessed."
  }
 }

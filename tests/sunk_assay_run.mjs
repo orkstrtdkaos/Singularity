@@ -145,10 +145,37 @@ console.log(`    a 'slain' condition reads as:    ${EN.checkIncapacitation({ hea
 
 // ─────────────────────────────────────────────────────────────────────────────
 rule("LEVEL 4 · THE ASSAY ITSELF — open a project, bank ticks, come back");
-const engineSrc = ["engine/progression.js", "engine/worldtime.js", "engine/quests.js"]
-  .map(f => { try { return readFileSync(join(root, f), "utf8"); } catch { return ""; } }).join("\n");
-if (!/projectTick/.test(engineSrc + sbSrc)) {
-  note("L4", "`projectTicks` exists nowhere in the engine — the level cannot be started, only described");
+const PJ = await import("../engine/projects.js");
+const pcfg = cm.projects || {};
+const assayCraft = A.built_system || A.sound_read;
+if (!assayCraft) note("L4", "no project craft in the catalogue - nothing to open the assay with");
+else {
+  const open = PJ.openProject({ name: "the party" }, assayCraft, { day: 40, name: "The Assay Itself", cfg: pcfg });
+  if (!open.ok) note("L4", "the assay could not be opened: " + open.why);
+  else {
+    const pr = open.project;
+    console.log("  RECEIPT - opening the assay");
+    console.log("    " + pr.name + " \u00b7 " + pr.threshold + " days of work \u00b7 banked " + pr.banked);
+    PJ.tickProject(pr, { days: 3, hands: 4, cfg: pcfg });
+    console.log("  RECEIPT - three days, four hands, then they leave");
+    console.log("    " + JSON.stringify(PJ.projectProgress(pr)));
+    PJ.interruptProject(pr, "the water rose and they went out");
+    const wasted = PJ.tickProject(pr, { days: 30, cfg: pcfg });
+    console.log("  RECEIPT - thirty days away");
+    console.log("    " + wasted.why + " \u00b7 still banked " + pr.banked);
+    PJ.resumeProject(pr);
+    PJ.sabotageProject(pr, 2, "the Grave-Callers");
+    PJ.inheritProject(pr, "Teva");
+    const fin = PJ.tickProject(pr, { days: 20, hands: 2, cfg: pcfg });
+    console.log("  RECEIPT - they come back, find it set back, and hand it on");
+    console.log("    " + JSON.stringify(PJ.projectProgress(pr)));
+    if (!fin.done) note("L4", "the assay never finished - the threshold cannot be reached");
+    // the thing the level is FOR: it could not have been done in the scene it was opened in
+    const impatient = PJ.openProject({ name: "impatient" }, assayCraft, { day: 0, cfg: pcfg }).project;
+    const oneDay = PJ.tickProject(impatient, { days: 1, hands: 8, cfg: pcfg });
+    if (oneDay.done) note("L4", "a project finished in ONE DAY with eight hands - it resolves in a scene, which is the feature's opposite");
+    else console.log("  \u2705 one day, eight hands: banked " + impatient.banked + "/" + impatient.threshold + " - they have to come back");
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

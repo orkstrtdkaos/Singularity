@@ -17083,6 +17083,64 @@ await (async () => {
         r.imposed?.side === "opponent" && !!r.imposed.condition, JSON.stringify(r.imposed ?? null));
     }
   }
+  // 5i · ⛔ CCODE-215 / SNG-522 §1 — A PROJECT IS A THING YOU COME BACK TO. The only item on either
+  // queue that blocked something already built: Sunk Assay L4 could not be started, and Aevi deliberately
+  // did not stub it, because a project level that resolves in a scene is the feature's opposite.
+  {
+    const PJ = await import("../engine/projects.js");
+    const pcfg = (C199.craftMechanics || {}).projects || {};
+    const bs = C199.abilities?.built_system;
+
+    check("CCODE-215: a project craft is one that declares BOTH downtime and projectTicks",
+      PJ.isProjectCraft(bs) === true
+      && PJ.isProjectCraft({ downtime: true }) === false
+      && PJ.isProjectCraft(C199.abilities?.ki_wield) === false);
+
+    // ⛔ A THRESHOLD, NEVER A DATE. Nothing in the record is a day you wait for.
+    const ch = { name: "gate" };
+    const opened = PJ.openProject(ch, bs, { day: 3, cfg: pcfg });
+    check("CCODE-215: opening banks nothing and sets a THRESHOLD, not a completion date",
+      opened.ok && opened.project.banked === 0 && opened.project.threshold > 0
+      && opened.project.completesOn === undefined, JSON.stringify(PJ.projectProgress(opened.project)));
+    check("CCODE-215: the same craft cannot be opened twice — two of one working is a bookkeeping bug",
+      PJ.openProject(ch, bs, { day: 4, cfg: pcfg }).ok === false);
+
+    // ⚠️ MORE HANDS HELP, SUBLINEARLY. A village must not finish a year's assay in an afternoon.
+    const alone = { banked: 0, threshold: 999, lastTickDay: 0, history: [], name: "a" };
+    const crowd = { banked: 0, threshold: 999, lastTickDay: 0, history: [], name: "b" };
+    PJ.tickProject(alone, { days: 10, hands: 1, cfg: pcfg });
+    PJ.tickProject(crowd, { days: 10, hands: 9, cfg: pcfg });
+    check("CCODE-215: more hands bank faster, but never nine times faster for nine hands",
+      crowd.banked > alone.banked && crowd.banked < alone.banked * 9,
+      `1 hand ${alone.banked} · 9 hands ${crowd.banked}`);
+
+    // ⛔ INTERRUPTION KEEPS THE WORK; SABOTAGE TAKES IT. Conflating them would make walking away from a
+    // project the same as having it wrecked.
+    const p2 = PJ.openProject({ name: "x" }, bs, { day: 0, cfg: pcfg }).project;
+    PJ.tickProject(p2, { days: 5, cfg: pcfg });
+    const bankedBefore = p2.banked;
+    PJ.interruptProject(p2, "the water rose");
+    const whileOut = PJ.tickProject(p2, { days: 99, cfg: pcfg });
+    check("CCODE-215: interrupted work banks nothing and LOSES nothing",
+      whileOut.ok === false && p2.banked === bankedBefore);
+    PJ.resumeProject(p2);
+    PJ.sabotageProject(p2, 999, "the Grave-Callers");
+    check("CCODE-215: sabotage takes banked work and never drives it below zero",
+      p2.banked === 0);
+
+    // ⚠️ AND IT OUTLIVES ITS OPENER — which is what lets L4 be inherited rather than restarted.
+    PJ.inheritProject(p2, "Teva");
+    check("CCODE-215: a project can be handed on — the owner moves, the opener is history and does not",
+      p2.owner === "Teva" && p2.opener === "x");
+
+    const fin = PJ.tickProject(p2, { days: 9999, cfg: pcfg });
+    check("CCODE-215: it completes by reaching the threshold, and completing is a one-way door",
+      fin.done === true && PJ.tickProject(p2, { days: 1, cfg: pcfg }).ok === false);
+
+    check("CCODE-215: the project dials are authored in craft_mechanics.json, not hardcoded",
+      Number.isFinite(Number(pcfg.ticksPerMagnitude)) && Number.isFinite(Number(pcfg.perExtraHand)),
+      JSON.stringify(pcfg));
+  }
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

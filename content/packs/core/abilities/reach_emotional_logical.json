@@ -2164,33 +2164,36 @@
      "rank": 1,
      "name": "The Actual State",
      "grants": "Feel the true emotional state of a person or room — not what is displayed, what is actually present underneath it.",
-     "cannot": "Anything rank 2 adds — track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched; it reads WHAT IS FELT, not what is TRUE.",
+     "cannot": "⛔ IT READS WHAT IS FELT, NOT WHAT IS TRUE. A person sincerely feeling a wrong thing reads as sincere.",
      "functions": [
       "reveal"
      ],
-     "gains": "broaden"
+     "gains": "broaden",
+     "_cannotWas": "Anything rank 2 adds — track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched; it reads WHAT IS FELT, not what is TRUE."
     },
     {
      "rank": 2,
      "name": "The Feeling Trail",
      "grants": "Track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched.",
-     "cannot": "Anything rank 3 adds — read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming; it reads WHAT IS FELT, not what is TRUE.",
+     "cannot": "⚠️ The trace fades with time and with distance from the person who left it. A cold trail gives you a direction and no more.",
      "functions": [
       "reveal",
       "track"
      ],
-     "gains": "broaden"
+     "gains": "broaden",
+     "_cannotWas": "Anything rank 3 adds — read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming; it reads WHAT IS FELT, not what is TRUE."
     },
     {
      "rank": 3,
      "name": "The Emotional History",
      "grants": "Read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming.",
-     "cannot": "Nothing further; this is the craft's ceiling; it reads WHAT IS FELT, not what is TRUE; and it still costs what it costs: what you read of a history, you carry some of.",
+     "cannot": "⛔ What you read of a history, you carry some of. A place that has been carrying something for a century does not put it down when you arrive.",
      "functions": [
       "reveal",
       "track"
      ],
-     "gains": "deepen"
+     "gains": "deepen",
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it reads WHAT IS FELT, not what is TRUE; and it still costs what it costs: what you read of a history, you carry some of."
     }
    ],
    "operativeAxis": [
@@ -2238,7 +2241,8 @@
    "plainly": "A social/investigation/intellectual action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 15. Ranks: rank 2 extends timeReach; rank 3 deepens perceptionDepth. Limit: it reads What IS Felt, not what is True — a person sincerely wrong reads sincere.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_sng525b": "⛔ SNG-525b. POINTER BOUNDS THAT SURVIVED THE SWEEP. ⚠️ These two are FIRST-GIFT SENSES RESTORED BY SNG-506 — their bounds came back verbatim from the revert log, carrying the original 'Anything rank 2 adds' fault that SNG-484 had already flagged everywhere else.\n⛔ A RESTORE BRINGS BACK WHAT WAS THERE, INCLUDING WHAT WAS WRONG WITH IT. The sweep ran before the restore, so these were never flagged and never fixed."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

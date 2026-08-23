@@ -9,7 +9,7 @@
    "name": "Descent",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.5,
@@ -144,14 +144,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ DEMONIC'S SENSE — the want beneath the asking\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ DEMONIC'S SENSE — the want beneath the asking\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "offered_price",
    "name": "Offered Price",
    "levelReq": 2,
    "energyCost": 5,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.4,
@@ -282,14 +284,16 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Offered Price",
    "_idWas": "the_offered_price",
-   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⛔ 'Name the true price of a thing someone wants — exactly, honestly, including the part they were hoping you would not mention.' That is a BARGAIN and it was tagged bind/foresee/reveal.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⛔ 'Name the true price of a thing someone wants — exactly, honestly, including the part they were hoping you would not mention.' That is a BARGAIN and it was tagged bind/foresee/reveal.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "ascent",
    "name": "Ascent",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "demonic_angelic": 0.5,
@@ -426,14 +430,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ ANGELIC'S SENSE — a person's moral weight\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ ANGELIC'S SENSE — a person's moral weight\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "shielding_word",
    "name": "Shielding Word",
    "levelReq": 3,
    "energyCost": 6,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "demonic_angelic": 0.4,
@@ -561,14 +567,16 @@
    "_nameWas": "The Shielding Word",
    "_idWas": "the_shielding_word",
    "_descriptionWas": "Interpose a spoken certainty between harm and a person — the Seraphic ward, which is why the Orders are loved despite everything.",
-   "_wardTypes": "⛔ SNG-512. ⛔ A spoken certainty answers force, lies, and judgement — the Seraphic ward is a claim about what is true.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ A spoken certainty answers force, lies, and judgement — the Seraphic ward is a claim about what is true.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "appetite_strike",
    "name": "Appetite Strike",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.4
@@ -703,14 +711,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Appetite Strike",
-   "_idWas": "the_appetite_strike"
+   "_idWas": "the_appetite_strike",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "consumed_wound",
    "name": "Consumed Wound",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.3
@@ -842,14 +852,16 @@
     "heal",
     "restore"
    ],
-   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⚠️ 'Offer a wound or pain to the deep — it will be taken.' An exchange with a price.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⚠️ 'Offer a wound or pain to the deep — it will be taken.' An exchange with a price.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "dread_mantle",
    "name": "Dread Mantle",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.4
@@ -982,14 +994,16 @@
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Dread Mantle",
    "_idWas": "the_dread_mantle",
-   "_wardTypes": "⛔ SNG-512. ⛔ What you have been through as armour. It deters WANT and FEELING; it stops nothing with an edge.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ What you have been through as armour. It deters WANT and FEELING; it stops nothing with an edge.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "called_form",
    "name": "Called Form",
    "levelReq": 3,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.5
@@ -1125,14 +1139,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Called Form",
-   "_idWas": "the_called_form"
+   "_idWas": "the_called_form",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "descent_path",
    "name": "Descent Path",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.4,
@@ -1272,14 +1288,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Descent Path",
-   "_idWas": "the_descent_path"
+   "_idWas": "the_descent_path",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "choir_sustains",
    "name": "Choir Sustains",
    "levelReq": 1,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.3
@@ -1393,14 +1411,16 @@
    ],
    "plainly": "A endurance/hardship/survival action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: the Energy IS Not Yours — it comes from the communion, and the communion is a relationship.",
    "_nameWas": "The Choir Sustains",
-   "_idWas": "the_choir_sustains"
+   "_idWas": "the_choir_sustains",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "judged_strike",
    "name": "Judged Strike",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "demonic_angelic": 0.4,
@@ -1530,14 +1550,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Judged Strike",
-   "_idWas": "the_judged_strike"
+   "_idWas": "the_judged_strike",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "raised_form",
    "name": "Raised Form",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "demonic_angelic": 0.4,
@@ -1652,14 +1674,16 @@
    ],
    "plainly": "A craft/leadership/magical action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 deepens order; rank 3 adds to special. Limit: it instantiates what a thing Should be — which requires being Right about that.",
    "_nameWas": "The Raised Form",
-   "_idWas": "the_raised_form"
+   "_idWas": "the_raised_form",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "ascent_path",
    "name": "Ascent Path",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "demonic_angelic": 0.4,
@@ -1782,14 +1806,16 @@
    ],
    "plainly": "A exploration/tactical/navigation action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 4 hours. Range is 15. Ranks: rank 2 extends targets; rank 3 extends range. Limit: it goes UP — there is no version of this that goes down.",
    "_nameWas": "The Ascent Path",
-   "_idWas": "the_ascent_path"
+   "_idWas": "the_ascent_path",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "sustained_order",
    "name": "Sustained Order",
    "levelReq": 1,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "demonic_angelic": 0.3
@@ -1904,7 +1930,9 @@
    ],
    "plainly": "A endurance/hardship/leadership action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: you Must Hold Your Place IN The Order — a seraphic cast out has nothing.",
    "_nameWas": "The Sustained Order",
-   "_idWas": "the_sustained_order"
+   "_idWas": "the_sustained_order",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1912,7 +1940,7 @@
    "name": "Deep Covenant",
    "levelReq": 4,
    "energyCost": 12,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "tradition": "abyssal",
    "attribute": "social",
    "axes": {
@@ -2018,7 +2046,9 @@
     "bind",
     "command"
    ],
-   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. binds a party to a lasting pact — a bargain with the hook already set\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. binds a party to a lasting pact — a bargain with the hook already set\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2026,7 +2056,7 @@
    "name": "Drowning Deep",
    "levelReq": 5,
    "energyCost": 14,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "tradition": "abyssal",
    "attribute": "social",
    "axes": {
@@ -2109,7 +2139,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Drowning Deep",
-   "_idWas": "the_drowning_deep"
+   "_idWas": "the_drowning_deep",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2117,7 +2149,7 @@
    "name": "Unfaltering Light",
    "levelReq": 4,
    "energyCost": 12,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "ordered_nanite",
    "tradition": "seraphic",
    "attribute": "mental",
    "axes": {
@@ -2218,7 +2250,9 @@
    "_descriptionWas": "The Seraphic art of the light that does not gutter — a radiance sustained past all reason to sustain it, warding a place or a person through what should overwhelm them.",
    "_nameWas": "The Unfaltering Light",
    "_idWas": "the_unfaltering_light",
-   "_wardTypes": "⛔ SNG-512. ⛔ A capstone ward — four kinds, which is what a capstone buys.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ A capstone ward — four kinds, which is what a capstone buys.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2226,7 +2260,7 @@
    "name": "Kept Flame",
    "levelReq": 5,
    "energyCost": 13,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "ordered_nanite",
    "tradition": "seraphic",
    "attribute": "mental",
    "axes": {
@@ -2295,7 +2329,9 @@
    ],
    "plainly": "A defend action that strengthens someone. Its strength is rated 9 out of 10, and lasts for about 8 hours Limit: iT Carries Ongoing Upkeep The Whole Time IT Burns.",
    "_nameWas": "The Kept Flame",
-   "_idWas": "the_kept_flame"
+   "_idWas": "the_kept_flame",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2303,7 +2339,7 @@
    "name": "Hollow That Holds",
    "levelReq": 5,
    "energyCost": 13,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "tradition": "abyssal",
    "attribute": "social",
    "axes": {
@@ -2375,7 +2411,9 @@
    ],
    "plainly": "A social action that makes or animates something. Its strength is rated 9 out of 10, and lasts for about 8 hours Limit: iT Carries Ongoing Upkeep While Open.",
    "_nameWas": "The Hollow That Holds",
-   "_idWas": "the_hollow_that_holds"
+   "_idWas": "the_hollow_that_holds",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2383,7 +2421,7 @@
    "name": "Lever",
    "levelReq": 3,
    "energyCost": 10,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "tradition": "abyssal",
    "attribute": "social",
    "axes": {
@@ -2515,7 +2553,9 @@
     "command",
     "reveal"
    ],
-   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⚠️ finds what a person cannot give up, then trades on it\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⚠️ finds what a person cannot give up, then trades on it\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2523,7 +2563,7 @@
    "name": "Lifted Word",
    "levelReq": 5,
    "energyCost": 15,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "ordered_nanite",
    "tradition": "seraphic",
    "attribute": "mental",
    "axes": {
@@ -2613,7 +2653,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Lifted Word",
-   "_idWas": "the_lifted_word"
+   "_idWas": "the_lifted_word",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2621,7 +2663,7 @@
    "name": "Borne Bargain",
    "levelReq": 5,
    "energyCost": 14,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "tradition": "abyssal",
    "attribute": "social",
    "axes": {
@@ -2702,14 +2744,16 @@
    ],
    "plainly": "A travel and social action. You do not fly; something carries you, fast and silent, on a price named before you leave the ground and paid on arrival — it is not refunded if you land early. At rank 2 you open a standing arrangement you can call on any time, on an account that accrues and is being kept whether or not you keep it, and an abyssal account is collectable. It is the fastest travel in the game and the only one that leaves you owing.",
    "_nameWas": "The Borne Bargain",
-   "_idWas": "the_borne_bargain"
+   "_idWas": "the_borne_bargain",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "name_invoked",
    "name": "Name Invoked",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "ordered_nanite",
    "attribute": "social",
    "axes": {
     "demonic_angelic": 0.5,
@@ -2835,14 +2879,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Name Invoked",
-   "_idWas": "the_name_invoked"
+   "_idWas": "the_name_invoked",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: seraphic 0.6 + lattice 0.2 = ordered_nanite 0.8. ⚠️ The apparatus, run for a different reason.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "struck_term",
    "name": "Struck Term",
    "levelReq": 1,
    "energyCost": 5,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.5,
@@ -2963,14 +3009,16 @@
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Struck Term",
    "_idWas": "the_struck_term",
-   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⛔ THE SHARPEST CASE — 'name a real exchange to someone who wants something, with a real cost attached' was tagged `strike`. A NEGOTIATION FILED AS AN ATTACK.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⛔ THE SHARPEST CASE — 'name a real exchange to someone who wants something, with a real cost attached' was tagged `strike`. A NEGOTIATION FILED AS AN ATTACK.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: abyssal 0.5 = precursor 0.5, over metaphysical 0.3.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "offered_mouth",
    "name": "Offered Mouth",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.6,
@@ -3092,14 +3140,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Offered Mouth",
-   "_idWas": "the_offered_mouth"
+   "_idWas": "the_offered_mouth",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "measured_sentence",
    "name": "Measured Sentence",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "ordered_nanite",
    "attribute": "social",
    "axes": {
     "demonic_angelic": 0.6,
@@ -3220,14 +3270,16 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Measured Sentence",
-   "_idWas": "the_measured_sentence"
+   "_idWas": "the_measured_sentence",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "sheltering_name",
    "name": "Sheltering Name",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "ordered_nanite",
    "attribute": "social",
    "axes": {
     "demonic_angelic": 0.5,
@@ -3335,14 +3387,16 @@
    "plainly": "A social/fight action that places your name's protection over someone else. Rated 5 of 10 across a scope of 2 for about a day.",
    "_nameWas": "The Sheltering Name",
    "_idWas": "the_sheltering_name",
-   "_wardTypes": "⛔ SNG-512. ⛔ A name's protection answers those who CREDIT IT. It answers want and moral weight; it does not answer weather.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ A name's protection answers those who CREDIT IT. It answers want and moral weight; it does not answer weather.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: seraphic 0.6 + lattice 0.2 = ordered_nanite 0.8. ⚠️ The apparatus, run for a different reason.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "borrowed_certainty",
    "name": "Borrowed Certainty",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "ordered_nanite",
    "attribute": "social",
    "axes": {
     "demonic_angelic": 0.4,
@@ -3441,14 +3495,16 @@
    ],
    "plainly": "A social action that lets people act because the name says they may. Rated 5 of 10 across a scope of 3 for about twelve hours.",
    "_nameWas": "The Borrowed Certainty",
-   "_idWas": "the_borrowed_certainty"
+   "_idWas": "the_borrowed_certainty",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: seraphic 0.6 + lattice 0.2 = ordered_nanite 0.8. ⚠️ The apparatus, run for a different reason.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "honest_price",
    "name": "Honest Price",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.5,
@@ -3561,14 +3617,16 @@
     "bind",
     "empower"
    ],
-   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⛔ 'State the full cost of a thing aloud, including the parts everyone was politely not mentioning — and deliver it exactly.' The Bargainers' making-craft.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⛔ 'State the full cost of a thing aloud, including the parts everyone was politely not mentioning — and deliver it exactly.' The Bargainers' making-craft.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: abyssal 0.5 = precursor 0.5, over metaphysical 0.3.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "weighed_word",
    "name": "Weighed Word",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "ordered_nanite",
    "attribute": "social",
    "axes": {
     "demonic_angelic": 0.6,
@@ -3685,14 +3743,16 @@
    "_nameWas": "The Weighed Word",
    "_idWas": "the_weighed_word",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads what a person will and will not stand behind\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads what a person will and will not stand behind\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "shielding_light",
    "name": "Shielding Light",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "ordered_nanite",
    "attribute": "social",
    "axes": {
     "demonic_angelic": 0.5,
@@ -3803,14 +3863,16 @@
    "plainly": "A fight/social action that turns harm aside from someone else while you hold it. Rated 6 of 10 across a scope of 2 for about four hours.",
    "_nameWas": "The Shielding Light",
    "_idWas": "the_shielding_light",
-   "_wardTypes": "⛔ SNG-512. The Order-bearer interposes. Answers what light answers.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. The Order-bearer interposes. Answers what light answers.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "offered_lesser",
    "name": "Offered Lesser",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.5,
@@ -3914,12 +3976,14 @@
    "plainly": "A social/fight action that feeds a hunger something smaller so it disengages. Rated 6 of 10 across a scope of 2 for about eight hours.",
    "_nameWas": "The Offered Lesser",
    "_idWas": "the_offered_lesser",
-   "_wardTypes": "⛔ SNG-512. ⛔ Everything down there wants something. Answers WANT, exactly and only.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ Everything down there wants something. Answers WANT, exactly and only.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "appetite_sense",
    "name": "Appetite-Sense",
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.3
@@ -4010,14 +4074,16 @@
     }
    ],
    "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens perceptionDepth; rank 3 extends scope. Limit: iT Reads Want, Not Intent — what they will DO about it is their own.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "the_read_hunger",
    "name": "The Read Hunger",
    "levelReq": 1,
    "energyCost": 3,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
     "demonic_angelic": -0.6
@@ -4102,14 +4168,16 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/social action that names what a thing hungers for and what it will risk. Rated 5 of 10 across a scope of 2 for about three hours."
+   "plainly": "A puzzle/social action that names what a thing hungers for and what it will risk. Rated 5 of 10 across a scope of 2 for about three hours.",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "the_read_want",
    "name": "The Read Want",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
     "demonic_angelic": -0.4,
@@ -4196,12 +4264,14 @@
     }
    ],
    "plainly": "A social/puzzle action that reads what someone actually wants. Rated 6 of 10 on one target for about three hours.",
-   "_descriptionWas": "The Bargainers' first craft: read the want before naming the price, because a price against the wrong want is an insult."
+   "_descriptionWas": "The Bargainers' first craft: read the want before naming the price, because a price against the wrong want is an insult.",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: abyssal 0.5 = precursor 0.5, over metaphysical 0.3.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "the_measuring_eye",
    "name": "The Weighing Look",
-   "powerSystem": "reach_demonic_angelic",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "demonic_angelic": 0.3
@@ -4292,7 +4362,9 @@
     }
    ],
    "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 extends range. Limit: iT Sees Weight, Not Story — a heavy person may be heavy for good reasons.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_demonic_angelic",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

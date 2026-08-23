@@ -9,7 +9,7 @@
    "name": "Quickening",
    "levelReq": 2,
    "energyCost": 6,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "death_life": 0.5,
@@ -135,7 +135,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A survive/fight action that restores health. It rolls 2d4 Ranks: rank 2 deepens healing; rank 3 extends area. Limit: nothing Past Death'S Threshold."
+   "plainly": "A survive/fight action that restores health. It rolls 2d4 Ranks: rank 2 deepens healing; rank 3 extends area. Limit: nothing Past Death'S Threshold.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "palework",
@@ -353,7 +355,7 @@
    "name": "Staunch",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "death_life": 0.3
@@ -466,14 +468,16 @@
      "class": "cost"
     }
    ],
-   "plainly": "A survive/fight action that restores health. It rolls 1d4+2, and lasts for about 2 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: buys Time; Does Not Mend."
+   "plainly": "A survive/fight action that restores health. It rolls 1d4+2, and lasts for about 2 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: buys Time; Does Not Mend.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "wither",
    "name": "Wither",
    "levelReq": 2,
    "energyCost": 5,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "attribute": "practical",
    "axes": {
     "death_life": -0.4
@@ -610,14 +614,16 @@
     "break",
     "hinder"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "graftlife",
    "name": "Graftlife",
    "levelReq": 3,
    "energyCost": 6,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "death_life": 0.4,
@@ -730,14 +736,16 @@
      "class": "hard"
     }
    ],
-   "plainly": "A survive action that restores health. It rolls 3d4+2 Ranks: rank 2 deepens restoration; rank 3 adds to special. Limit: the Regrown IS Never Quite The Lost."
+   "plainly": "A survive action that restores health. It rolls 3d4+2 Ranks: rank 2 deepens restoration; rank 3 adds to special. Limit: the Regrown IS Never Quite The Lost.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "death_ward",
    "name": "Death-Ward",
    "levelReq": 3,
    "energyCost": 6,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "death_life": -0.3,
@@ -857,14 +865,16 @@
     }
    ],
    "plainly": "A survive/fight/stealth action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 5 harm per hit (rank 3 armour) It affects 1 target, and lasts for about 6 hours Ranks: rank 2 deepens soak; rank 3 adds to special. Limit: wards the Threshold, Not The Outcome.",
-   "_wardTypes": "⛔ SNG-512. ⛔ WARDS AGAINST ENDINGS THAT SHOULD NOT HAPPEN — curse-deaths, unnatural endings. ⚠️ NOT PHYSICAL: a blade still lands. This is the corpus's first decay-ward and the one healing needs.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ WARDS AGAINST ENDINGS THAT SHOULD NOT HAPPEN — curse-deaths, unnatural endings. ⚠️ NOT PHYSICAL: a blade still lands. This is the corpus's first decay-ward and the one healing needs.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "last_gift",
    "name": "Last Gift",
    "levelReq": 4,
    "energyCost": 9,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
     "death_life": 0,
@@ -968,7 +978,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Last Gift",
-   "_idWas": "the_last_gift"
+   "_idWas": "the_last_gift",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -976,7 +988,7 @@
    "name": "Grey Hand",
    "levelReq": 2,
    "energyCost": 5,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "tradition": "ashwarden",
    "attribute": "mental",
    "axes": {
@@ -1128,7 +1140,9 @@
    "plainly": "A fight/social action that weakens or restricts a target. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours. Range is 1. Ranks: rank 2 extends range+duration; rank 3 extends targets. Limit: attending Costs You Continuously — let go and it comes back.",
    "_nameWas": "The Grey Hand",
    "_idWas": "the_grey_hand",
-   "_persistence": "⛔ SNG-494. Erik: 'The Grey Hand needs to be updated — IT DOESN'T COME BACK IMMEDIATELY UPON STOPPING. It would have to be HEALED/RESTORED.'\n⚠️ THE OLD VERSION CHARGED ENERGY EVERY ROUND TO MAINTAIN IT and returned the victim to full the moment you stopped — which made it a concentration tax rather than an effect, and made r2's 'hold it there' the same as r1. ⛔ NOW THE WEAKNESS PERSISTS UNTIL A MENDING CRAFT LIFTS IT, and r2 buys range and persistence instead of an upkeep bill."
+   "_persistence": "⛔ SNG-494. Erik: 'The Grey Hand needs to be updated — IT DOESN'T COME BACK IMMEDIATELY UPON STOPPING. It would have to be HEALED/RESTORED.'\n⚠️ THE OLD VERSION CHARGED ENERGY EVERY ROUND TO MAINTAIN IT and returned the victim to full the moment you stopped — which made it a concentration tax rather than an effect, and made r2's 'hold it there' the same as r1. ⛔ NOW THE WEAKNESS PERSISTS UNTIL A MENDING CRAFT LIFTS IT, and r2 buys range and persistence instead of an upkeep bill.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1136,7 +1150,7 @@
    "name": "Draw Down",
    "levelReq": 3,
    "energyCost": 6,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "tradition": "ashwarden",
    "attribute": "mental",
    "axes": {
@@ -1273,7 +1287,9 @@
     "hinder",
     "strike"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1281,7 +1297,7 @@
    "name": "Dread",
    "levelReq": 2,
    "energyCost": 4,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "tradition": "ashwarden",
    "attribute": "social",
    "axes": {
@@ -1412,7 +1428,9 @@
    ],
    "plainly": "A fight/social action that weakens or restricts a target. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets; rank 3 deepens fear. Limit: the Unafraid Are Unmoved, and there are more of them than you think.",
    "_nameWas": "The Dread",
-   "_idWas": "the_dread"
+   "_idWas": "the_dread",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1420,7 +1438,7 @@
    "name": "Ask the Dead",
    "levelReq": 3,
    "energyCost": 5,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "tradition": "ashwarden",
    "attribute": "mental",
    "axes": {
@@ -1558,7 +1576,9 @@
     "reveal",
     "summon"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1566,7 +1586,7 @@
    "name": "The Cut Thread",
    "levelReq": 5,
    "energyCost": 14,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "tradition": "ashwarden",
    "attribute": "mental",
    "axes": {
@@ -1654,14 +1674,16 @@
     "note": "⚠️ COOLDOWN REMOVED (Erik). It is a T5 ashwarden capstone — the difficulty of OBTAINING it is already the limit, and very few people in the world can use it at all. A weeks-long cooldown on top of that is a second gate behind a locked door. Its cost is what it costs the wielder, not a timer."
    },
    "_descriptionWas": "The Fates' shears. One life, one cut, done — not a wound, a CESSATION. This is the deepest thing the Ashwardens hold and they teach it to almost nobody, because the argument against it has never been answered and they keep doing it anyway.",
-   "_lethal": "⛔ SNG-514. ERIK: 'The Cut Thread DOES SLAY.' ⚠️ I ADDED AN `imposes` BLOCK SAYING `incapacitated` TO AN ABILITY WHOSE OWN TEXT READS 'END ONE LIVING THING — IT SIMPLY STOPS' AND WHOSE `harmRung` HAS ALWAYS BEEN `lethal`. The craft was never confused; I overwrote it.\n⛔ HOW IT KILLS: `shape: damage`, 5d6+6, `harmRung: lethal`. It kills the way lethal damage kills — through the damage path, not by imposing a condition. ⚠️ `mechanic.imposes` IS FOR CONDITIONS SHORT OF DEATH, which is why the engine refuses `slain` THERE. THAT REFUSAL IS NOT A RULE THAT CRAFTS CANNOT KILL. I read a constraint on one field as a constraint on the game."
+   "_lethal": "⛔ SNG-514. ERIK: 'The Cut Thread DOES SLAY.' ⚠️ I ADDED AN `imposes` BLOCK SAYING `incapacitated` TO AN ABILITY WHOSE OWN TEXT READS 'END ONE LIVING THING — IT SIMPLY STOPS' AND WHOSE `harmRung` HAS ALWAYS BEEN `lethal`. The craft was never confused; I overwrote it.\n⛔ HOW IT KILLS: `shape: damage`, 5d6+6, `harmRung: lethal`. It kills the way lethal damage kills — through the damage path, not by imposing a condition. ⚠️ `mechanic.imposes` IS FOR CONDITIONS SHORT OF DEATH, which is why the engine refuses `slain` THERE. THAT REFUSAL IS NOT A RULE THAT CRAFTS CANNOT KILL. I read a constraint on one field as a constraint on the game.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "grey_road",
    "name": "Grey Road",
    "levelReq": 2,
    "energyCost": 5,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "death_life": -0.3,
@@ -1793,7 +1815,9 @@
    "plainly": "A explore/survive/stealth action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours. Range is 4. Ranks: rank 2 extends targets+access; rank 3 extends access. Limit: a Ward That Has Never Held A Death Cannot BE Opened This Way.",
    "_nameWas": "The Grey Road",
    "_idWas": "the_grey_road",
-   "_wardTypes": "⛔ SNG-512. Walking where others cannot answers the ground itself.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. Walking where others cannot answers the ground itself.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "kept_breath",
@@ -2004,7 +2028,7 @@
    "name": "Green Claim",
    "levelReq": 2,
    "energyCost": 5,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "death_life": 0.4,
@@ -2155,14 +2179,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Green Claim",
-   "_idWas": "the_green_claim"
+   "_idWas": "the_green_claim",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "bark_and_briar",
    "name": "Bark and Briar",
    "levelReq": 2,
    "energyCost": 5,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "death_life": 0.3,
@@ -2287,14 +2313,16 @@
     }
    ],
    "plainly": "A fight/survive/explore action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets+duration; rank 3 deepens soak. Limit: a Living Ward Can BE Broken — Fire IS Its Particular Enemy.",
-   "_wardTypes": "⛔ SNG-512. Bark-skin and thorn. ⚠️ Living answers living — the Rootkin ward is the green turned defensive.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. Bark-skin and thorn. ⚠️ Living answers living — the Rootkin ward is the green turned defensive.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "speaking_grove",
    "name": "Speaking Grove",
    "levelReq": 2,
    "energyCost": 4,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "wild_nanite",
    "attribute": "mental",
    "axes": {
     "death_life": 0.3,
@@ -2435,14 +2463,16 @@
    "_nameWas": "The Speaking Grove",
    "_idWas": "the_speaking_grove",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ LIFE'S SENSE — living things, and what they have noticed\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ LIFE'S SENSE — living things, and what they have noticed\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "root_road",
    "name": "Root Road",
    "levelReq": 2,
    "energyCost": 5,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "death_life": 0.3,
@@ -2586,7 +2616,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Root Road",
-   "_idWas": "the_root_road"
+   "_idWas": "the_root_road",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2594,7 +2626,7 @@
    "name": "Set Hand",
    "levelReq": 3,
    "energyCost": 9,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "tradition": "ashwarden",
    "attribute": "mental",
    "axes": {
@@ -2727,7 +2759,9 @@
     "note": "set bodies hold for seasons; the duration IS the craft"
    },
    "_nameWas": "The Set Hand",
-   "_idWas": "the_set_hand"
+   "_idWas": "the_set_hand",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2735,7 +2769,7 @@
    "name": "Forced Bloom",
    "levelReq": 3,
    "energyCost": 10,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "wild_nanite",
    "tradition": "rootkin",
    "attribute": "physical",
    "axes": {
@@ -2852,7 +2886,9 @@
    ],
    "plainly": "A fight/survive action that deals damage. It rolls 3d6 living damage Ranks: rank 2 deepens growth; rank 3 adds to special. Limit: the Living Only.",
    "_nameWas": "The Forced Bloom",
-   "_idWas": "the_forced_bloom"
+   "_idWas": "the_forced_bloom",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2860,7 +2896,7 @@
    "name": "Calling Back",
    "levelReq": 3,
    "energyCost": 12,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "tradition": "ashwarden",
    "attribute": "mental",
    "axes": {
@@ -3014,7 +3050,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Calling Back",
-   "_idWas": "the_calling_back"
+   "_idWas": "the_calling_back",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -3022,7 +3060,7 @@
    "name": "Root That Holds",
    "levelReq": 4,
    "energyCost": 13,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "wild_nanite",
    "tradition": "rootkin",
    "attribute": "physical",
    "axes": {
@@ -3119,7 +3157,9 @@
    ],
    "plainly": "A survive/explore action that restores health. It rolls 2d6+3 It affects 1 target Ranks: rank 2 deepens depth. Limit: iT Does Not Reach The Deep Dark OR The Sealed — the current stops.",
    "_nameWas": "The Root That Holds",
-   "_idWas": "the_root_that_holds"
+   "_idWas": "the_root_that_holds",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -3127,7 +3167,7 @@
    "name": "Carried Green",
    "levelReq": 4,
    "energyCost": 13,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "wild_nanite",
    "tradition": "rootkin",
    "attribute": "physical",
    "axes": {
@@ -3225,14 +3265,16 @@
    ],
    "plainly": "A travel and explore action. Growth lifts you and hands you along — in thick country like forest or marsh that is about twice walking speed and roughly halves a leg's days. At rank 2 you can work with very little: seaweed and lily mats across open water, scrub in a rock seam, the plants at a desert's edge — it carries you at walking pace rather than fast, but it goes where rank 1 cannot. Only genuinely dead ground is closed to it, meaning the Unmade, salt flats, and worked stone with nothing living in the seams. At rank 3 you grow real wings and fly independent of what is below you; held past a day they draw on your own body.",
    "_nameWas": "The Carried Green",
-   "_idWas": "the_carried_green"
+   "_idWas": "the_carried_green",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "snaring_green",
    "name": "Snaring Green",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
     "death_life": 0.6,
@@ -3357,14 +3399,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Snaring Green",
-   "_idWas": "the_snaring_green"
+   "_idWas": "the_snaring_green",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "hastened_grey",
    "name": "Hastened Grey",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "death_life": -0.6,
@@ -3508,14 +3552,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Hastened Grey",
-   "_idWas": "the_hastened_grey"
+   "_idWas": "the_hastened_grey",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "kept_vigil",
    "name": "Kept Vigil",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "death_life": -0.5
@@ -3617,14 +3663,16 @@
    "_descriptionWas": "The Ashwardens' keeping-craft, and the mirror of their hastening one. They tend endings, which means they also know precisely how to postpone one.",
    "_nameWas": "The Kept Vigil",
    "_idWas": "the_kept_vigil",
-   "_wardTypes": "⛔ SNG-512. ⛔ Holding a failing thing where it is answers the failing — the second decay-ward.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ Holding a failing thing where it is answers the failing — the second decay-ward.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "true_account",
    "name": "True Account",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "death_life": -0.4,
@@ -3744,12 +3792,14 @@
    "_nameWas": "The True Account",
    "_idWas": "the_true_account",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ DEATH'S SENSE — what is failing and how long it has\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ DEATH'S SENSE — what is failing and how long it has\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "deathsense",
    "name": "Deathsense",
-   "powerSystem": "reach_death_life",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "death_life": -0.3
@@ -3841,12 +3891,14 @@
     }
    ],
    "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: reads the Living And The Dying, not the already-dead.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "lifesense",
    "name": "Lifesense",
-   "powerSystem": "reach_death_life",
+   "powerSystem": "wild_nanite",
    "attribute": "mental",
    "axes": {
     "death_life": 0.3
@@ -3936,7 +3988,9 @@
     }
    ],
    "plainly": "A investigate/stealth action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 extends range. Limit: vigor, Not Identity — the barely-alive read faint.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_death_life",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

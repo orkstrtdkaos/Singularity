@@ -225,7 +225,11 @@
    "mechanic": {
     "magnitude": 5,
     "duration": 4,
-    "scope": 3
+    "scope": 3,
+    "crit": {
+     "success": "They tell you the thing they had not told the constable, and then the thing they had not told themselves.",
+     "failure": "You handle it wrong in front of the family, and Greyhearth will hear."
+    }
    },
    "rankDeltas": [
     {
@@ -561,7 +565,11 @@
     "plus": 0,
     "marginFloorPer": 0.02,
     "scope": 2,
-    "note": "damaging rung, but against MATERIAL only — see the HARD bound"
+    "note": "damaging rung, but against MATERIAL only — see the HARD bound",
+    "crit": {
+     "success": "It goes at once, root and standing, and the ground under it goes grey too.",
+     "failure": "You wither the support and not the thing standing on it."
+    }
    },
    "rankDeltas": [
     {
@@ -1073,7 +1081,11 @@
     "duration": 3,
     "range": 1,
     "targets": 1,
-    "note": "incapacitating rung. r1 requires TOUCH"
+    "note": "incapacitating rung. r1 requires TOUCH",
+    "crit": {
+     "success": "They fold where they stand and will not stand again today.",
+     "failure": "They feel it start and step out of reach — and everyone saw whose hand it was."
+    }
    },
    "rankDeltas": [
     {
@@ -1497,7 +1509,11 @@
     "duration": 1,
     "questions": 1,
     "timeReach": 168,
-    "note": "r1: ONE question, truthfully and BADLY. timeReach 168h = 'a week is far'"
+    "note": "r1: ONE question, truthfully and BADLY. timeReach 168h = 'a week is far'",
+    "crit": {
+     "success": "It answers more than you asked, in its own order, and does not stop where you wanted.",
+     "failure": "Something answers."
+    }
    },
    "rankDeltas": [
     {
@@ -1597,7 +1613,17 @@
     "plus": 6,
     "marginFloorPer": 0.02,
     "targets": 1,
-    "note": "T-V capstone, lethal. 'End one living thing. No wound, no struggle, no argument. It simply stops.'"
+    "note": "T-V capstone, lethal. 'End one living thing. No wound, no struggle, no argument. It simply stops.'",
+    "crit": {
+     "success": {
+      "text": "There is no moment between. It simply stops, and the room only realises afterwards.",
+      "chance": 2
+     },
+     "failure": {
+      "text": "You reach for a thread that is not there.",
+      "chance": -3
+     }
+    }
    },
    "rankDeltas": [
     {
@@ -1872,7 +1898,14 @@
     "wardTypes": [
      "physical",
      "decay"
-    ]
+    ],
+    "crit": {
+     "success": "You hold them so far past the line that the wound has time to start closing on its own.",
+     "failure": {
+      "text": "You spend it and they go anyway, and you were holding on when it happened.",
+      "chance": -2
+     }
+    }
    },
    "rankDeltas": [
     {
@@ -2644,7 +2677,11 @@
     "targets": 1,
     "scope": 2,
     "damageType": "decay",
-    "note": "CONSTRUCT, not damage — the craft's output is LABOUR. targets/scope are bodies set; duration is how long they hold."
+    "note": "CONSTRUCT, not damage — the craft's output is LABOUR. targets/scope are bodies set; duration is how long they hold.",
+    "crit": {
+     "success": "The crew works better than the living did, and does not need telling twice.",
+     "failure": "It continues the last instruction it was given."
+    }
    },
    "rankDeltas": [
     {
@@ -2913,7 +2950,14 @@
     "targets": 1,
     "duration": 0,
     "damageType": "decay",
-    "note": "RETRIEVAL: the roll is against DEATH DEPTH. r1 reaches depth 0 · r2 depth 1 · r3 depth 2 · depth 3 (sealed) is closed to every rank."
+    "note": "RETRIEVAL: the roll is against DEATH DEPTH. r1 reaches depth 0 · r2 depth 1 · r3 depth 2 · depth 3 (sealed) is closed to every rank.",
+    "crit": {
+     "success": "They come back, and they come back whole.",
+     "failure": {
+      "text": "Something comes back.",
+      "chance": -4
+     }
+    }
    },
    "rankDeltas": [
     {
@@ -3419,7 +3463,11 @@
    "mechanic": {
     "magnitude": 7,
     "duration": 3,
-    "scope": 1
+    "scope": 1,
+    "crit": {
+     "success": "The grey runs further than you set it and finds every fault in the thing.",
+     "failure": "You hasten something that was going to end usefully later."
+    }
    },
    "intensity": {
     "conserve": "a small hastening — a notch deepens, a wound sours",
@@ -3899,5 +3947,6 @@
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",
  "_sng510b": "⛔ SNG-510b: nine MORE dangling openers, found by my own verification and NOT MINE — 'Extend it to others', 'Hold it for a day', 'They do not merely feel it'. ⚠️ SAME FAULT, PRE-DATING the rework: a rank whose first words refer to a rank the model is not sent.",
- "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation."
+ "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation.",
+ "_sng523": "⛔ SNG-523: `mechanic.crit` authored. ⚠️ `critFor` HAS EXISTED, WITH A PER-CRAFT CAP AND A STRING SHORTHAND FOR AUTHORS, AND HAS NEVER HAD AN INPUT — 0 of 373. Every critical in the game was generic.\n⛔ BOTH HALVES AUTHORED: `success` is what the craft's best case LOOKS LIKE; `failure` is its disaster. ⚠️ MOST CARRY TEXT ONLY — `chance` is opt-in and shifts nothing unless asked for, so a craft can say what its disaster looks like without claiming it happens more often."
 }

@@ -197,7 +197,11 @@ export function aestheticFor(subject, doc) {
   // coverage ratchet red. Rather than chase each instance, the resolver now accepts the field the content
   // actually carries — a craft that names a real palette gets it, whichever slot the name sits in.
   if (trad && bySystem[trad]) return bySystem[trad];
-  if (ps && /^reach_/.test(ps) && bySystem.braid) return bySystem.braid;
+  // ⚠️ A BRAID BY ANY OF ITS NAMES. `reach_*` routed here because a FILENAME was standing in for a power
+  // system; once CCODE-217 let the ability's own value win, those three crafts became `combination` and
+  // would have lost their picture to a rename. A combination craft IS a cross-pole braid - so it paints
+  // like one, and the `reach_` route stays for anything still carrying the old shape.
+  if (ps && (/^reach_/.test(ps) || ps === "combination" || ps === "cross_pole_braid") && bySystem.braid) return bySystem.braid;
   return null;
 }
 

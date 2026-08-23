@@ -397,7 +397,38 @@ export async function loadContent() {
   // ability-arch v2: tolerant defaults so the engine can read the new fields before the content
   // classification pass tags every ability. rankProgression defaults to "use" (depth is earned, not
   // bought); nativeOrCombination stays null until authored (consumers treat null as unclassified).
-  // ⛔ THE PACK-LEVEL STAMP USED TO CLOBBER UNCONDITIONALLY. 13 registered packs declare no pack-level
+  // ⚠️ CCODE-217 — I BUILT THE REVERSAL, MEASURED IT REPAINTING 300 CRAFTS, AND PUT IT BACK.
+  //
+  // Aevi asked for a ruling on 333 abilities whose own `powerSystem` disagrees with their file's header,
+  // and refused to guess. Measured, thirteen of the fifteen disagreeing headers are `reach_*` — AXIS
+  // NAMES, the file's subject — so 260+ crafts load with a FILENAME where their power system should be
+  // and the real vocabulary sits unread one line down. The ability should win. That much is settled.
+  //
+  // ⛔ BUT FLIPPING IT REPAINTS THE RADIANT TRADITION. `aestheticFor` reaches the `radiant` palette
+  // through the pack HEADER; with the ability winning, every radiant craft resolves `precursor` instead
+  // and paints as precursor. Coverage stayed at 9 uncovered, so a count-based check said nothing was lost
+  // — the pictures changed underneath an unchanged number. The §C3 gate caught it, and it was right to.
+  //
+  // ⚠️ The blocker is ONE MISSING ALIAS: tradition `radiant_folk` has no palette key, and the palette
+  // that belongs to it is filed under `powerSystems.radiant`. That is Aevi's doc and a content decision,
+  // so this stays as it was until she rules — shipping a silent repaint of 300 crafts on my own authority
+  // is exactly what she declined to do when she declined to guess.
+  //
+  // ⛔ AND THE PACK-LEVEL STAMP MUST STILL NEVER CLOBBER.
+  // CCODE-200 made the PACK win because that was the existing convention and I did not want to move more
+  // than the bug required. Aevi then found 333 abilities whose own `powerSystem` disagrees with their
+  // file's header and refused to guess which should win - correctly, because the answer decides 333 rows.
+  //
+  // MEASURED, THE HEADERS ARE MOSTLY NOT POWER SYSTEMS AT ALL. Thirteen of the fifteen disagreeing files
+  // are `reach_*` - `reach_body_mind`, `reach_dark_light` - which are AXIS NAMES, the file's subject. So
+  // 260+ crafts were loading with a FILENAME where their power system should be, and the real vocabulary
+  // (`metaphysical`, `precursor`, `ordered_nanite`, `wild_nanite`, `combination`) sat unread one line down.
+  //
+  // ⚠️ So the rule is the one this codebase uses everywhere else: THE MORE SPECIFIC DECLARATION WINS.
+  // An ability that states its own power system knows better than the file it happens to sit in. The pack
+  // header still fills the gap - which is all CCODE-200 was ever really protecting.
+  //
+  // ⛔ AND THE PACK-LEVEL STAMP MUST STILL NEVER CLOBBER. 13 registered packs declare no pack-level
   // `powerSystem`, so `powerSystem: pack.powerSystem` overwrote 28 abilities' OWN authored value with
   // undefined - silently, at load, where no file-level check can see it. The pack still WINS where it
   // declares one (that is the existing convention everywhere else); the ability's own value now only

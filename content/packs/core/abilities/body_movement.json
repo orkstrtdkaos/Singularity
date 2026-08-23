@@ -28,7 +28,11 @@
    "mechanic": {
     "magnitude": 5,
     "duration": 3,
-    "scope": 2
+    "scope": 2,
+    "crit": {
+     "success": "You come out of it before the grip has finished closing, and take someone with you.",
+     "failure": "You fit most of the way through the gap."
+    }
    },
    "challengeTypes": [
     "CHASE",
@@ -118,5 +122,6 @@
    "_authored": "⛔ SNG-483. Erik: 'if you find a place to fit CONTORTIONIST ability — ANTI-BIND, FAST RUNNING and BIG JUMPING — move/travel, let me know.'\n⚠️ TWO REAL GAPS AND THEY ARE THE SAME SKILL: (1) NOTHING IN 342 ABILITIES ESCAPES A BIND — fifteen text matches and every one is a door, a seal or a piece of luck, never a person getting out of a hold. (2) SOMATIC HAD NO L1 MOVEMENT CRAFT: Near Way is mason and built-spaces only, then nothing until Skydancer at L4.\n⛔ AND IT ANSWERS THE LARGEST COLUMN IN THE GAME. CONTROL is 251 rank-rows corpus-wide and `bind` is most of it. Until now there was no physical counter to being held."
   }
  ],
- "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",
+ "_sng523": "⛔ SNG-523: `mechanic.crit` authored. ⚠️ `critFor` HAS EXISTED, WITH A PER-CRAFT CAP AND A STRING SHORTHAND FOR AUTHORS, AND HAS NEVER HAD AN INPUT — 0 of 373. Every critical in the game was generic.\n⛔ BOTH HALVES AUTHORED: `success` is what the craft's best case LOOKS LIKE; `failure` is its disaster. ⚠️ MOST CARRY TEXT ONLY — `chance` is opt-in and shifts nothing unless asked for, so a craft can say what its disaster looks like without claiming it happens more often."
 }

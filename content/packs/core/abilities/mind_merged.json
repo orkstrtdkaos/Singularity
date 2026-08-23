@@ -136,7 +136,7 @@
    "attribute": "mental",
    "tradition": "syllogist",
    "nativeOrCombination": "native",
-   "powerSystem": "metaphysical",
+   "powerSystem": "ordered_nanite",
    "shape": "healing",
    "mechanic": {
     "dice": {
@@ -266,7 +266,9 @@
    "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field.",
    "_idWas": "the_correct_restoration",
    "_nameWas": "The Correct Restoration",
-   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do."
+   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do.",
+   "_powerSystemWas": "metaphysical",
+   "_powerSystemFix": "⛔ SNG-533. I AUTHORED THIS `metaphysical` ON INSTINCT because the craft 'felt' psychic. ⛔ SYLLOGIST IS `ordered_nanite` — 'argument as architecture; a proof is an ordered process and runs like one.'\n⚠️ COGITANT IS metaphysical AND I APPLIED IT TO ALL THREE MIND SECTS — the tradition merge made them one people in my head and canon keeps them three. ⛔ FOUND BY WRITING A CHECK THAT ASSERTS WHICH SOURCE rather than whether one, which is the thing CCode's §C3 does and none of mine did."
   },
   {
    "id": "case_closed",
@@ -276,7 +278,7 @@
    "attribute": "social",
    "tradition": "syllogist",
    "nativeOrCombination": "native",
-   "powerSystem": "metaphysical",
+   "powerSystem": "ordered_nanite",
    "shape": "setup",
    "mechanic": {
     "magnitude": 5,
@@ -429,7 +431,9 @@
    "_rationalising": "⛔ SNG-477. Erik: 'Stop this way of thinking — this is a GAME and this is basically a MAGIC SKILL. It doesn't need to make complete sense.'\n⚠️ I HAD WRITTEN 'and they do not feel cheated, WHICH IS WHY IT WORKS TWICE' — a clause justifying why a magic bargain would be socially sustainable. ⛔ NOBODY ASKED. The skill does the thing; the bound says once per season; that is the whole rule.",
    "schoolAffinity": "syl_binding",
    "_schoolAffinity": "⛔ SNG-509 CORRECTION. I gave this `cog_reaching`. ⚠️ `syl_binding` (The Binding Proof — 'those who make a proof BIND, reason as contact with what is actually so') is the right one and it is not a near-miss: r2 COMPELS and r3 is final, which is what binding means here.",
-   "_schoolAffinityWas": "cog_reaching"
+   "_schoolAffinityWas": "cog_reaching",
+   "_powerSystemWas": "metaphysical",
+   "_powerSystemFix": "⛔ SNG-533. I AUTHORED THIS `metaphysical` ON INSTINCT because the craft 'felt' psychic. ⛔ SYLLOGIST IS `ordered_nanite` — 'argument as architecture; a proof is an ordered process and runs like one.'\n⚠️ COGITANT IS metaphysical AND I APPLIED IT TO ALL THREE MIND SECTS — the tradition merge made them one people in my head and canon keeps them three. ⛔ FOUND BY WRITING A CHECK THAT ASSERTS WHICH SOURCE rather than whether one, which is the thing CCode's §C3 does and none of mine did."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",

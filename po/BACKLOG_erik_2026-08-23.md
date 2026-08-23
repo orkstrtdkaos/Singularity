@@ -162,8 +162,9 @@ reference for someone forty hours in, and trying to be both is how you get neith
 1. ⛔ **7** — it is the keystone, and it converts 4 and 6 from authoring into generation
 2. **1** — nearly free, and the wheel already exists
 3. ⛔ **5** — the widest gap between what is authored and what is alive; 104 people are waiting on a trigger
-4. **6** — once 7 exists, this is a template plus a spawner
-5. **4** — after 7, the 117 layouts may become a generator rather than a corpus
+4. **6** — ✅ **Erik ruled: the Sunk Assay is the first SEED.** A template, a spawner, and the variation axes
+5. **4** — ✅ **same ruling: one exemplar per location KIND, not one per location.** `location_kinds.json`
+   already exists, so the corpus is bounded by kinds rather than by places
 6. **2 and 3** — ⚠️ **blocked on Erik saying what he wants**, and unguessable until he does
 7. **8** — ⛔ **but START THE GATE NOW, not the prose.** The manual will be written against systems that are
    still moving; a check that its claims match the dials is worth having before there are claims to check
@@ -176,9 +177,51 @@ reference for someone forty hours in, and trying to be both is how you get neith
    function vocabulary — what does a player choose now that they could not before?
 2. **What is wrong with the sidebar?** Name what should go and what should be nearer the top.
 3. **Who is the manual for** — a first-time player, or a reference for someone forty hours in?
+4. ⚠️ **Confirm the consequence in the ruling above:** generated places persist onto the CHARACTER, so
+   two players get different versions of the same place. **Intended?**
 
-⛔ **AND ONE FOR BOTH OF YOU: should a local layout and a dungeon be GENERATED or AUTHORED?** The answer
-changes item 4 from 117 jobs to one, and item 6 from fifty to one — **and it is a design call about how much
-of the world should be the same on two playthroughs.**
+## ✅ ERIK RULED, 2026-08-23: **BOTH — AUTHORED ONES ARE SEEDS**
+
+> *"the local layouts and dungeons will be authored sometimes, and used as seed to be generated in similar
+> (but variable) format most other times."*
+
+⛔ **AN AUTHORED PLACE IS TWO THINGS AT ONCE: content, and an exemplar the generator varies from.** That
+answers items 4 and 6 together and it is the reason 7 sits first in the order below.
+
+### What already exists, measured
+
+| | |
+|---|---|
+| locations already generated (`gen-` prefixed) | **16 of 135** |
+| generated LAYOUTS | 1 of 18 (`gen-cogitarium-entrance-hall`) |
+| the persistence path | ✅ `generate.persistGenerated(character, type, record)` |
+
+⚠️ **So this is not new machinery from zero.** Generation exists, it persists onto the CHARACTER, and 16
+places already came into the world that way. **What is missing is the seed half.**
+
+### What the ruling requires, and the third one is the one it turns on
+
+1. **A place must be markable as a SEED** — authored, playable, *and* declared as an exemplar. Today an
+   authored layout is only content; nothing says "generate more like this one."
+2. ⛔ **THE VARIATION MUST DECLARE ITS AXES — what may differ, and what must NOT.** "Similar but variable"
+   is a promise about the *invariants*, not about the differences. A Precursor assay-works that generates
+   without its assay is not a variation on the Sunk Assay; it is a different place wearing the name.
+   ⚠️ **The seed has to say which parts are the point.**
+3. ⛔ **AND A PLACE IS GENERATED ONCE, THEN IT IS THAT PLACE.** `persistGenerated` already writes onto
+   the character, so re-entry is stable — **but only because it persists.** A layout regenerated on each
+   visit would mean the world rearranged itself behind you, which is not variation, it is amnesia.
+   ⚠️ **This is already true architecturally and must not be lost when the layout generator is built.**
+
+⚠️ **AND THE CONSEQUENCE ERIK MAY NOT HAVE SAID OUT LOUD: two players get different versions of the same
+place.** That follows from persisting onto the character rather than into content, it is almost certainly
+what "variable" means, and it is worth being sure of — **it makes a walkthrough impossible and a shared
+reference point impossible with it.**
+
+### What it does to the two items
+
+- **Item 4** stops being *117 layouts* and becomes **a generator plus enough authored exemplars to seed it**
+  — one per location KIND rather than one per location. `location_kinds.json` already exists.
+- **Item 6** stops being *fifty dungeons* and becomes **the Sunk Assay as the first seed**, plus the spawner.
+  ⛔ Aevi's SNG-529 is already templating the dungeon kind for exactly this.
 
 — CCode

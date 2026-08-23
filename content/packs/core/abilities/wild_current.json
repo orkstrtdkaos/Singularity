@@ -9,7 +9,7 @@
    "name": "Churn's Gift",
    "levelReq": 3,
    "energyCost": 7,
-   "powerSystem": "wild_nanite",
+   "powerSystem": "wild_current",
    "tradition": "churnfolk",
    "attribute": "practical",
    "axes": {
@@ -126,8 +126,7 @@
    "plainly": "An action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens control; rank 3 adds to special. Limit: you Cannot Control Its Precise Form — it gives its own way rather than yours.",
    "_nameWas": "The Churn's Gift",
    "_idWas": "the_churns_gift",
-   "_powerSystemWas": "wild_current",
-   "_powerSystemFix": "⛔ SNG-524. Was `wild_current` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `wild_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-140), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'."
   },
   {
    "schemaVersion": 1,
@@ -135,7 +134,7 @@
    "name": "Wild Flowering",
    "levelReq": 4,
    "energyCost": 11,
-   "powerSystem": "wild_nanite",
+   "powerSystem": "wild_current",
    "tradition": "churnfolk",
    "attribute": "practical",
    "axes": {
@@ -229,8 +228,7 @@
    "plainly": "An action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 4, and lasts for about 6 hours Ranks: rank 2 adds to special. Limit: iT Cannot BE Aimed AT Pure Creation OR Pure Destruction — it is always both.",
    "_nameWas": "The Wild Flowering",
    "_idWas": "the_wild_flowering",
-   "_powerSystemWas": "wild_current",
-   "_powerSystemFix": "⛔ SNG-524. Was `wild_current` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `wild_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-140), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'."
   },
   {
    "schemaVersion": 1,
@@ -238,7 +236,7 @@
    "name": "Honest Bargain",
    "levelReq": 4,
    "energyCost": 11,
-   "powerSystem": "precursor",
+   "powerSystem": "wild_current",
    "tradition": "abyssal",
    "attribute": "social",
    "axes": {
@@ -336,8 +334,7 @@
     "command"
    ],
    "_bargainTag": "⛔ SNG-471: `bargain` ADDED. 'a pact struck from the true side' — the Wild Half's demonic bargain\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
-   "_powerSystemWas": "wild_current",
-   "_powerSystemFix": "⛔ SNG-524. Was `wild_current` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `wild_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-140), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'."
   },
   {
    "schemaVersion": 1,
@@ -345,7 +342,7 @@
    "name": "Collection",
    "levelReq": 4,
    "energyCost": 12,
-   "powerSystem": "precursor",
+   "powerSystem": "wild_current",
    "tradition": "abyssal",
    "attribute": "social",
    "axes": {
@@ -451,8 +448,7 @@
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Collection",
    "_idWas": "the_collection",
-   "_powerSystemWas": "wild_current",
-   "_powerSystemFix": "⛔ SNG-524. Was `wild_current` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `wild_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-140), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'."
   },
   {
    "schemaVersion": 1,
@@ -460,7 +456,7 @@
    "name": "Fae Wings",
    "levelReq": 4,
    "energyCost": 11,
-   "powerSystem": "wild_nanite",
+   "powerSystem": "wild_current",
    "tradition": "churnfolk",
    "attribute": "physical",
    "axes": {
@@ -560,8 +556,7 @@
     }
    ],
    "plainly": "A travel, chase and explore action, learned rather than inherited — anyone with churnfolk training flies this way, whatever they are. Rank 1 is short flights: over a wall, across a river, out of a fall. Rank 2 flies a whole leg and roughly halves its days, though you drift toward where the churn is going unless you pay to hold a line. Rank 3 gives wings to the rest of the party for a shorter span each. The catch is reliability rather than danger: needing them badly makes them less likely to come, and a failure grounds you rather than dropping you.",
-   "_powerSystemWas": "wild_current",
-   "_powerSystemFix": "⛔ SNG-524. Was `wild_current` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-526 REVERTED. My SNG-524 sweep rewrote this to a four-source value because `wild_current` was not in my legal set. ⚠️ IT WAS NOT A BAD STRING — IT IS A DELIBERATE, DOCUMENTED GATE (SNG-140), and the pack header says so in a note I did not read.\n⛔ CCODE FOUND IT AS A FILE DISAGREEING WITH ITSELF: abilities saying one thing, header saying another. ⚠️ I HAD TREATED 'NOT IN MY LIST' AS 'WRONG' — the same shape as reading `imposes` refusing `slain` as 'crafts cannot kill'."
   }
  ],
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",

@@ -2013,7 +2013,9 @@
    "projectTicks": true,
    "_project": "⛔ SNG-485. Erik: 'Sound Read can PREPARE GROUND and be for projects.' r3 is now site preparation banking per tick.",
    "_powerSystemWas": "reach_concrete_abstract",
-   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it.",
+   "projectThreshold": 10,
+   "_projectThreshold": "⛔ SNG-527, CCODE'S QUESTION: 'built_system carries duration 8760 — a year in hours — and that is not what I used. If a project's real length is meant to come from `duration` rather than `magnitude`, then a Built System is a YEAR'S work and not twelve days.'\n⛔ NEITHER. `duration` IS HOW LONG THE RESULT LASTS; `projectThreshold` IS HOW LONG THE WORK TAKES. ⚠️ SOUND READ PROVES IT: `duration: 4` is four rounds of reading, and its threshold is ten days. The same field cannot mean both.\n⚠️ AUTHORED RATHER THAN DERIVED, WHICH IS WHY CCODE ASKED. ⚠️ TEN DAYS, the derived value, and it is right. Shoring a wall or siting a camp is a fortnight's work, and `duration: 4` on this craft is FOUR ROUNDS OF READING — which is the proof that `duration` and `projectThreshold` are different clocks."
   },
   {
    "id": "pattern_sense",

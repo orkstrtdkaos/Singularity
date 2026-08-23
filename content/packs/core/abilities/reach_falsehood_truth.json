@@ -2882,30 +2882,33 @@
      "rank": 1,
      "name": "The Construction",
      "grants": "Read any falsehood or illusion's construction — see how it was made, what it is made of, where it will fail.",
-     "cannot": "Anything rank 2 adds — see all the falsecrafts in a situation simultaneously — who is building what version of events, what holds, what is already cracking under its own weight; it reads CONSTRUCTION, not truth.",
+     "cannot": "⛔ IT READS CONSTRUCTION, NOT TRUTH. A true account you happen to dislike shows no seams, because there are none.",
      "functions": [
       "reveal"
      ],
-     "gains": "broaden"
+     "gains": "broaden",
+     "_cannotWas": "Anything rank 2 adds — see all the falsecrafts in a situation simultaneously — who is building what version of events, what holds, what is already cracking under its own weight; it reads CONSTRUCTION, not truth."
     },
     {
      "rank": 2,
      "name": "All the Seams",
      "grants": "See all the falsecrafts in a situation simultaneously — who is building what version of events, what holds, what is already cracking under its own weight.",
-     "cannot": "Anything rank 3 adds — read what is being constructed before it completes — see the lie before it is fully told, the illusion before it has fully taken shape; it reads CONSTRUCTION, not truth.",
+     "cannot": "⚠️ All the falsecrafts you can perceive. One built by someone better than you is one you do not see.",
      "functions": [
       "reveal"
-     ]
+     ],
+     "_cannotWas": "Anything rank 3 adds — read what is being constructed before it completes — see the lie before it is fully told, the illusion before it has fully taken shape; it reads CONSTRUCTION, not truth."
     },
     {
      "rank": 3,
      "name": "The Unfinished Lie",
      "grants": "Read what is being constructed before it completes — see the lie before it is fully told, the illusion before it has fully taken shape.",
-     "cannot": "Nothing further; this is the craft's ceiling; it reads CONSTRUCTION, not truth.",
+     "cannot": "⛔ Before it completes — which means before anyone else can be shown it. You are the only witness to a lie that has not been told yet.",
      "functions": [
       "reveal",
       "foresee"
-     ]
+     ],
+     "_cannotWas": "Nothing further; this is the craft's ceiling; it reads CONSTRUCTION, not truth."
     }
    ],
    "operativeAxis": [
@@ -2945,7 +2948,8 @@
    "plainly": "A investigation/intellectual/magical action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: it reads Construction, not truth — a sincere person building nothing reads blank.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_sng525b": "⛔ SNG-525b. POINTER BOUNDS THAT SURVIVED THE SWEEP. ⚠️ These two are FIRST-GIFT SENSES RESTORED BY SNG-506 — their bounds came back verbatim from the revert log, carrying the original 'Anything rank 2 adds' fault that SNG-484 had already flagged everywhere else.\n⛔ A RESTORE BRINGS BACK WHAT WAS THERE, INCLUDING WHAT WAS WRONG WITH IT. The sweep ran before the restore, so these were never flagged and never fixed."
   },
   {
    "id": "the_plain_seeing",

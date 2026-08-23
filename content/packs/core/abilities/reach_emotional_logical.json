@@ -374,7 +374,11 @@
     "plus": 0,
     "targets": 1,
     "marginFloorPer": 0.02,
-    "antisoakImposed": 3
+    "antisoakImposed": 3,
+    "crit": {
+     "success": "What you opened does not close behind you — the next blow anyone lands finds the same seam.",
+     "failure": "You reach for a grief they have already finished. They are steadier for having been reminded they survived it."
+    }
    },
    "rankDeltas": [
     {
@@ -1618,7 +1622,11 @@
     },
     "plus": 0,
     "targets": 6,
-    "marginFloorPer": 0.02
+    "marginFloorPer": 0.02,
+    "crit": {
+     "success": "The cry goes further than the room and everything in it that can feel goes down.",
+     "failure": "It comes out as grief and nothing else. Everyone hears exactly how much you have lost."
+    }
    },
    "intensity": "severe",
    "bounds": [
@@ -2067,7 +2075,11 @@
    "mechanic": {
     "magnitude": 6,
     "duration": 12,
-    "scope": 1
+    "scope": 1,
+    "crit": {
+     "success": "You take it entirely and they are lighter than they have been in years.",
+     "failure": "You take it and it is heavier than it looked from outside."
+    }
    },
    "intensity": {
     "conserve": "take a corner of it",
@@ -2205,5 +2217,6 @@
  "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
- "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation."
+ "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation.",
+ "_sng523": "⛔ SNG-523: `mechanic.crit` authored. ⚠️ `critFor` HAS EXISTED, WITH A PER-CRAFT CAP AND A STRING SHORTHAND FOR AUTHORS, AND HAS NEVER HAD AN INPUT — 0 of 373. Every critical in the game was generic.\n⛔ BOTH HALVES AUTHORED: `success` is what the craft's best case LOOKS LIKE; `failure` is its disaster. ⚠️ MOST CARRY TEXT ONLY — `chance` is opt-in and shifts nothing unless asked for, so a craft can say what its disaster looks like without claiming it happens more often."
 }

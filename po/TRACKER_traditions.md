@@ -146,3 +146,58 @@ Run in this order (§37.6): **cut → merge → repurpose → author gaps → fi
 ### Body
 
 ✅ **Done.** 2 schools, and school = sect, which is not true of Mind. ✅ 0 bad sources, 0 unbound, 0 missing gains. 26 ranks lack a target.
+
+
+---
+
+# ⛔ PICK UP HERE · 2026-08-23
+
+**Read first:** `SYSTEM_SPEC` §44 (session close) · §37 (one-pass audit SOP) · §32 (authoring SOP)
+
+## The state
+
+**373 abilities · 1,043 ranks. Every one bounded, sourced and palette-resolving.**
+**Mind (25) and Body (22) are closed. Death is part-audited.**
+
+## ⛔ NEXT ACTION · finish Death
+
+**64 thin ranks · no bargain craft · 3 schools authored (Palework · Necromancy · Threnody) ·
+Greyhearth/Amaranth foothill authored.**
+
+**Then eleven traditions**, in this order and for these reasons:
+
+| next | why |
+|---|---|
+| ⛔ **Spirit (10)** | **smallest and most exposed** — no sense, no obscure, no social verb, and it carries Parakletos, the Thinnings and the Veil contact point |
+| **Dark (29)** | already holds 5 obscures — more than everyone else combined |
+| **Breaking (28)** | ⚠️ Erik's own obscure example — *dirt in the eyes* — belongs here and does not exist |
+| Span · Light | 34 and 33 unauthored bounds **(now closed — recheck)** |
+
+## ⛔ EVERY TRADITION AUDIT MUST NOW ALSO
+
+- ⛔ **ALLOCATE `veil` DELIBERATELY.** Erik, 2026-08-23: *"as we go through the skill audit we'll need to
+  make sure we allocate power sources correctly."* **`veil` has ZERO primary carriers.** Many crafts
+  currently `metaphysical` are approximations of it; **some are the real thing.**
+- **Author `crit`** (success + failure), **`wardTypes`**, **`imposes`/`onCrit`**, **`ongoingHarm`**,
+  **target scope**, **schools (2–3)**, **the matrix.**
+- ⚠️ **Run `node tests/content_which.mjs`** before shipping.
+
+## Blocked on Erik
+
+1. ⛔ **The merger** — `SPEC_SNG-536`. Shape agreed (`tradition`/`sect`/`traditionKind`); **migration order
+   is the ruling.** I lean audit-first.
+2. **Spirit at 10** — audit and author into it, or accept the asymmetry?
+
+## Blocked on CCode
+
+**Tempo** (⚠️ *and it is blocked on me — one tempo gain in 373 crafts*) · **the Sunk Assay's world wiring**
+(`SPEC_SNG-529`) · **`traditionKind` as a field, or infer foothills from `foothills.json`.**
+
+## ⛔ THE THING TO CARRY
+
+**Five instances this session of *authored, correct, and invisible*, and four verifications that agreed
+with themselves.** ⚠️ **The corrective is `tests/content_which.mjs` — assert WHICH, not WHETHER.**
+
+**And the two corrections I needed twice:** ⛔ **`valley_craft` HAS PARENTS** (stillhold/wright/rootkin),
+and ⛔ **a foothill is a PLACE where a domain and its adjacents live and work** — not a weaker pole sold
+cheap.

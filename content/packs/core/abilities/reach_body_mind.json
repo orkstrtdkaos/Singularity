@@ -97,7 +97,14 @@
    "mechanic": {
     "magnitude": 4,
     "duration": 1,
-    "uses": 1
+    "uses": 1,
+    "crit": {
+     "success": "You find more than you spent, and everyone near you steadies for seeing it.",
+     "failure": {
+      "text": "There was nothing left to find. The debt arrives now instead of later.",
+      "chance": -3
+     }
+    }
    },
    "rankDeltas": [
     {
@@ -243,7 +250,11 @@
     "note": "AN EIGHTH DEFENSIVE LOGIC — EFFICIENT: not armour, not absence, not misdirection, but never making a wasted or wrong motion. Uses Erik's evasion model; zero soak because a perfect motion still takes the blow it cannot avoid.",
     "wardTypes": [
      "physical"
-    ]
+    ],
+    "crit": {
+     "success": "The body acts before the decision and gets it right — you are already elsewhere when the blow arrives.",
+     "failure": "The body acts before the decision. You have trained it badly and it does that beautifully."
+    }
    },
    "rankDeltas": [
     {
@@ -540,7 +551,14 @@
     "range": 20,
     "push": 0,
     "magnitude": 7,
-    "duration": 2
+    "duration": 2,
+    "crit": {
+     "success": "You cross without touching down once and arrive with the line already thrown.",
+     "failure": {
+      "text": "You stop moving.",
+      "chance": -4
+     }
+    }
    },
    "rankDeltas": [
     {
@@ -848,7 +866,11 @@
      "physical",
      "living",
      "decay"
-    ]
+    ],
+    "crit": {
+     "success": "The blow lands and finds nothing that gives.",
+     "failure": "You have conditioned against the wrong thing."
+    }
    },
    "rankDeltas": [
     {
@@ -1000,7 +1022,11 @@
      "feeling",
      "deception",
      "abstraction"
-    ]
+    ],
+    "crit": {
+     "success": "Nothing lands at all — and you read every attempt as it fails.",
+     "failure": "You hold against a true thing. It waits."
+    }
    },
    "rankDeltas": [
     {
@@ -1126,7 +1152,14 @@
     "plus": 6,
     "marginFloorPer": 0.04,
     "targets": 1,
-    "note": "T-V capstone, lethal. The highest marginFloorPer in the catalog: this craft IS the decisive margin — 'read a contest to its ONE DECISIVE INSTANT.'"
+    "note": "T-V capstone, lethal. The highest marginFloorPer in the catalog: this craft IS the decisive margin — 'read a contest to its ONE DECISIVE INSTANT.'",
+    "crit": {
+     "success": {
+      "text": "Every thread arrives at the same instant on the same point, and the contest is simply over.",
+      "chance": 4
+     },
+     "failure": "You commit everything to a place they are no longer standing."
+    }
    },
    "rankDeltas": [
     {
@@ -1251,7 +1284,11 @@
     },
     "plus": 0,
     "targets": 1,
-    "marginFloorPer": 0.02
+    "marginFloorPer": 0.02,
+    "crit": {
+     "success": "Their own commitment finishes them — a joint past its travel, and they will not close that hand today.",
+     "failure": "You meet a movement that was a feint and give them your weight."
+    }
    },
    "intensity": {
     "conserve": "turn the joint and let go",
@@ -1636,5 +1673,6 @@
  "_cut": "⛔ SNG-486: Pathless Way cut. 'Any natural barrier yields to enough skill' is a permission, not an action — Q1 failure at capstone tier. Replaced by Ki Wield.",
  "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas.",
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",
- "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation."
+ "_sng513": "⛔ SNG-513: `imposes` and `ongoingHarm` authored. Both readers were live and unfed — CCode named the fields rather than authoring content. ⚠️ `onCrit` IS ESCALATE: a crit imposes a DIFFERENT, stronger condition. `slain` is refused at all three doors — a craft is not a situation.",
+ "_sng523": "⛔ SNG-523: `mechanic.crit` authored. ⚠️ `critFor` HAS EXISTED, WITH A PER-CRAFT CAP AND A STRING SHORTHAND FOR AUTHORS, AND HAS NEVER HAD AN INPUT — 0 of 373. Every critical in the game was generic.\n⛔ BOTH HALVES AUTHORED: `success` is what the craft's best case LOOKS LIKE; `failure` is its disaster. ⚠️ MOST CARRY TEXT ONLY — `chance` is opt-in and shifts nothing unless asked for, so a craft can say what its disaster looks like without claiming it happens more often."
 }

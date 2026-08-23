@@ -9,7 +9,7 @@
    "name": "Enginecraft",
    "levelReq": 3,
    "energyCost": 8,
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
     "mechanical_spiritual": -0.6,
@@ -148,14 +148,16 @@
     "mend",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "numenwork",
    "name": "Numenwork",
    "levelReq": 3,
    "energyCost": 8,
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "metaphysical",
    "attribute": "social",
    "axes": {
     "mechanical_spiritual": 0.6,
@@ -303,7 +305,9 @@
     "summon",
     "sustain"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "mend_device",
@@ -363,7 +367,7 @@
      "gainAxes": []
     }
    ],
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "ordered_nanite",
    "gated": "learned",
    "challengeTypes": [
     "PUZZLE",
@@ -419,7 +423,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A puzzle/survive action that restores health. It rolls 1d4+2 Ranks: rank 2 deepens quality; rank 3 adds to special. Limit: ordinary Mechanism Only — the deep works resist."
+   "plainly": "A puzzle/survive action that restores health. It rolls 1d4+2 Ranks: rank 2 deepens quality; rank 3 adds to special. Limit: ordinary Mechanism Only — the deep works resist.",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "steady_soul",
@@ -485,7 +491,7 @@
      ]
     }
    ],
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "SOCIAL",
@@ -542,7 +548,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/survive action that restores health. It rolls 1d4+1 It affects 1 target Ranks: rank 2 deepens steadying; rank 3 adds to special."
+   "plainly": "A social/survive action that restores health. It rolls 1d4+1 It affects 1 target Ranks: rank 2 deepens steadying; rank 3 adds to special.",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "command_engine",
@@ -602,7 +610,7 @@
      "gainAxes": []
     }
    ],
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "ordered_nanite",
    "gated": "learned",
    "challengeTypes": [
     "PUZZLE",
@@ -655,7 +663,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A puzzle/fight action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 extends scope; rank 3 deepens fidelity. Limit: only What The Mechanism Allows — meaning stays opaque."
+   "plainly": "A puzzle/fight action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 extends scope; rank 3 deepens fidelity. Limit: only What The Mechanism Allows — meaning stays opaque.",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "thin_place",
@@ -746,7 +756,7 @@
      ]
     }
    ],
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "PUZZLE",
@@ -812,7 +822,9 @@
     "summon",
     "sustain"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "meaning_engine",
@@ -872,7 +884,7 @@
      ]
     }
    ],
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "combination",
    "gated": "learned",
    "challengeTypes": [
     "PUZZLE",
@@ -926,7 +938,9 @@
     "reveal"
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_nameWas": "The Meaning-Engine"
+   "_nameWas": "The Meaning-Engine",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A BRAID IS BY DEFINITION MORE THAN ONE SOURCE.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "shortfold",
@@ -992,7 +1006,7 @@
      ]
     }
    ],
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "ordered_nanite",
    "gated": "learned",
    "tradition": "enginewright",
    "nativeOrCombination": "native",
@@ -1043,7 +1057,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "An action that moves you or someone else. Its strength is rated 5 out of 10 It affects 1 target. Range is 30. Ranks: rank 2 extends range+targets; rank 3 adds to special. Limit: line OF Sight Only at r1; substrate-thin places Refuse it."
+   "plainly": "An action that moves you or someone else. Its strength is rated 5 out of 10 It affects 1 target. Range is 30. Ranks: rank 2 extends range+targets; rank 3 adds to special. Limit: line OF Sight Only at r1; substrate-thin places Refuse it.",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "waygate",
@@ -1079,7 +1095,7 @@
      "gainAxes": []
     }
    ],
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "tradition": "numinous",
    "nativeOrCombination": "native",
@@ -1119,14 +1135,16 @@
      "class": "hard"
     }
    ],
-   "plainly": "An action that moves you or someone else. Its strength is rated 9 out of 10 It affects 3 targets. Range is 9999 Limit: only TO Places Held Clearly IN Memory."
+   "plainly": "An action that moves you or someone else. Its strength is rated 9 out of 10 It affects 3 targets. Range is 9999 Limit: only TO Places Held Clearly IN Memory.",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "fault_strike",
    "name": "Fault Strike",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
     "mechanical_spiritual": -0.4,
@@ -1266,14 +1284,16 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Fault Strike",
-   "_idWas": "the_fault_strike"
+   "_idWas": "the_fault_strike",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "mechanical_defense",
    "name": "Mechanical Defense",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
     "mechanical_spiritual": -0.4,
@@ -1398,14 +1418,16 @@
    "plainly": "A combat/craft/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 adds to autonomy; rank 3 extends targets. Limit: what is built in place Stays in place.",
    "_nameWas": "The Mechanical Defense",
    "_idWas": "the_mechanical_defense",
-   "_wardTypes": "⛔ SNG-512. Interlocking parts and redirected force — answers the made and the mechanical.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. Interlocking parts and redirected force — answers the made and the mechanical.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "running_engine",
    "name": "Running Engine",
    "levelReq": 1,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
     "mechanical_spiritual": -0.3
@@ -1519,14 +1541,16 @@
    ],
    "plainly": "A endurance/craft/hardship action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 extends duration; rank 3 adds to special. Limit: the body is Treated as a mechanism — it is still a body.",
    "_nameWas": "The Running Engine",
-   "_idWas": "the_running_engine"
+   "_idWas": "the_running_engine",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "dimmed_meaning",
    "name": "Dimmed Meaning",
    "levelReq": 2,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "social",
    "axes": {
     "mechanical_spiritual": 0.4
@@ -1649,14 +1673,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Dimmed Meaning",
-   "_idWas": "the_dimmed_meaning"
+   "_idWas": "the_dimmed_meaning",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "weight_of_practice",
    "name": "Weight of Practice",
    "levelReq": 2,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "social",
    "axes": {
     "mechanical_spiritual": 0.4
@@ -1773,14 +1799,16 @@
    ],
    "plainly": "A social/leadership/spiritual action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about 6 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: it is the pull of Genuine Practice — it cannot be faked, and a fraud gets nothing.",
    "_nameWas": "The Weight of Practice",
-   "_idWas": "the_weight_of_practice"
+   "_idWas": "the_weight_of_practice",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "unbroken_practice",
    "name": "Unbroken Practice",
    "levelReq": 1,
    "energyCost": 1,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "social",
    "axes": {
     "mechanical_spiritual": 0.3
@@ -1893,7 +1921,9 @@
    ],
    "plainly": "A endurance/hardship/spiritual action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: requires A Practice — it is not willpower, and it cannot be improvised.",
    "_nameWas": "The Unbroken Practice",
-   "_idWas": "the_unbroken_practice"
+   "_idWas": "the_unbroken_practice",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1901,7 +1931,7 @@
    "name": "Self-Mending Work",
    "levelReq": 4,
    "energyCost": 12,
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "ordered_nanite",
    "tradition": "enginewright",
    "attribute": "practical",
    "axes": {
@@ -1993,7 +2023,9 @@
    "plainly": "A create action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 3, and lasts for about 30 days Ranks: rank 2 adds to special. Limit: iT Cannot Mend The Living, Only The Made.",
    "_descriptionWas": "The Enginewright art of the work that mends itself — a mechanism, a structure, a system built with its own healing folded in, so it survives its maker. To build this well is to build something that no longer needs you.",
    "_nameWas": "The Self-Mending Work",
-   "_idWas": "the_self_mending_work"
+   "_idWas": "the_self_mending_work",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2001,7 +2033,7 @@
    "name": "Deep Works",
    "levelReq": 5,
    "energyCost": 13,
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "ordered_nanite",
    "tradition": "enginewright",
    "attribute": "practical",
    "axes": {
@@ -2070,7 +2102,9 @@
    ],
    "plainly": "A create action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 5, and lasts for about 12 months Limit: iT Demands Real Time And Nearly All You Have.",
    "_nameWas": "The Deep Works",
-   "_idWas": "the_deep_works"
+   "_idWas": "the_deep_works",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -2078,7 +2112,7 @@
    "name": "Open Threshold",
    "levelReq": 4,
    "energyCost": 14,
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "metaphysical",
    "tradition": "numinous",
    "attribute": "mental",
    "axes": {
@@ -2211,14 +2245,16 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Open Threshold",
-   "_idWas": "the_open_threshold"
+   "_idWas": "the_open_threshold",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "thinned_veil",
    "name": "Thinned Veil",
    "levelReq": 1,
    "energyCost": 7,
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "mechanical_spiritual": -0.6,
@@ -2343,14 +2379,16 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Thinned Veil",
-   "_idWas": "the_thinned_veil"
+   "_idWas": "the_thinned_veil",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "seized_works",
    "name": "Seized Works",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
     "mechanical_spiritual": 0.6,
@@ -2473,7 +2511,9 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Seized Works",
-   "_idWas": "the_seized_works"
+   "_idWas": "the_seized_works",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "numen_sense",
@@ -2519,7 +2559,7 @@
      "gains": "deepen"
     }
    ],
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "INVESTIGATE",
@@ -2569,7 +2609,9 @@
     }
    ],
    "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: feel, Not Command — barren places read empty.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "mech_sense",
@@ -2616,7 +2658,7 @@
      ]
     }
    ],
-   "powerSystem": "reach_mechanical_spiritual",
+   "powerSystem": "ordered_nanite",
    "gated": "learned",
    "challengeTypes": [
     "INVESTIGATE",
@@ -2662,7 +2704,9 @@
     }
    ],
    "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to history. Limit: function, Not Purpose — the numinous stays dark.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_mechanical_spiritual",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

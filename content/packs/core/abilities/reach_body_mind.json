@@ -365,7 +365,7 @@
      "_grantsWas_SNG510": "⛔ ADDS SOMEONE ELSE'S. Enter a willing — or unresisting — mind and search THEIR memory: their route, their language, their trade. ⚠️ FOR ONE ATTEMPT YOU MAY USE A SKILL THEY HAVE AND YOU DO NOT, at their rank."
     }
    ],
-   "powerSystem": "reach_body_mind",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "INVESTIGATE",
@@ -463,7 +463,9 @@
    "_descriptionWas": "Hold and instantly retrieve vast structured knowledge; model a person or system in the mind — mid-tier Noesis.",
    "_revised": "⛔ SNG-463. Erik: 'Searching your own memory could be the FLAVOUR TEXT OF AN EMPOWER FUNCTION — something that increases success chance and crit range, a roll to determine by how much. r2 makes it more reliable and maximises the benefit. r3 lets you use someone ELSE'S SKILL.' ⚠️ That fixes assessment Q4: recall was information the GM would have given; empower is a thing you spend an action on.",
    "sense": true,
-   "_senseNote": "⛔ SNG-469: usable in the sense slot as a SENSE. Reads the opponent, banks tempo, takes the craft's edge."
+   "_senseNote": "⛔ SNG-469: usable in the sense slot as a SENSE. Reads the opponent, banks tempo, takes the craft's edge.",
+   "_powerSystemWas": "reach_body_mind",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "skydancer",
@@ -593,7 +595,7 @@
    "name": "Working Model",
    "levelReq": 3,
    "energyCost": 2,
-   "powerSystem": "attribute",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "body_mind": 0.4,
@@ -764,7 +766,9 @@
    "_revised": "⛔ SNG-450. Erik: 'I agree on the working model — but I LIKE that skill. Its rank progression should be r1 A SINGLE ITEM OR SMALL AREA, r2 A SINGLE SYSTEM OR COMPOUND/AREA, r3 COMPLEX SYSTEM AND LARGE AREA.' ⚠️ The old arc added only adverbs — 'near-guaranteed' → 'complex system' → 'uncanny precision and speed', which is r1 again, faster. THE NEW ARC IS SCOPE, and scope is legible at the table. `reveal` stripped: the modelling is HOW it makes, not a separate perception. ⚠️ ERIK: 'NO to the cost' on r3. Removed.",
    "_nameWas": "The Working Model",
    "_idWas": "the_working_model",
-   "_schoolAffinity": "⛔ SNG-508. `the_working_model` carried `cog_reaching`; the de-article rename dropped it because I rewrote the record rather than editing it."
+   "_schoolAffinity": "⛔ SNG-508. `the_working_model` carried `cog_reaching`; the de-article rename dropped it because I rewrote the record rather than editing it.",
+   "_powerSystemWas": "attribute",
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "shaped_body",
@@ -934,7 +938,7 @@
    "name": "Unmoving Mind",
    "levelReq": 4,
    "energyCost": 11,
-   "powerSystem": "reach_body_mind",
+   "powerSystem": "metaphysical",
    "tradition": "cogitant",
    "attribute": "mental",
    "axes": {
@@ -1098,7 +1102,9 @@
    "_nameWas": "The Unmoving Mind",
    "_idWas": "the_unmoving_mind",
    "_schoolAffinity": "⛔ SNG-508. `the_unmoving_mind` carried `cog_unaided`, and it ABSORBED `total_focus` (also cog_unaided) at SNG-457. Both parents were Unaided; the merge is Unaided.",
-   "_wardTypes": "⛔ SNG-512. ⛔ Fear, pain, a lie, a feint slide off. ⚠️ NOT PHYSICAL — a still mind does not stop a spear, and the craft says so.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ Fear, pain, a lie, a feint slide off. ⚠️ NOT PHYSICAL — a still mind does not stop a spear, and the craft says so.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_powerSystemWas": "reach_body_mind",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "schemaVersion": 1,
@@ -1106,7 +1112,7 @@
    "name": "Convergent Strike",
    "levelReq": 5,
    "energyCost": 13,
-   "powerSystem": "reach_body_mind",
+   "powerSystem": "metaphysical",
    "tradition": "cogitant",
    "attribute": "mental",
    "axes": {
@@ -1188,7 +1194,9 @@
    "_nameWas": "The Single Stroke",
    "_renamed": "⛔ SNG-463. Erik: 'rename to Convergent Strike — simply a super powerful strike of multiple threat threads converging: weak spots, unarmoured area, maximum leverage, sharpest part of the blade, or psychic edge. It's a big damage skill so that's good.' ⚠️ Fixes Q6 — the old grant was a mood ('the single decisive instant').",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads every thread of threat in a contest at once\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads every thread of threat in a contest at once\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_powerSystemWas": "reach_body_mind",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "answered_motion",
@@ -1341,7 +1349,7 @@
    "name": "Sustained Regard",
    "levelReq": 1,
    "energyCost": 6,
-   "powerSystem": "reach_body_mind",
+   "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
     "body_mind": 0.6,
@@ -1464,7 +1472,9 @@
    },
    "_diceFix": "⛔ SNG-453: shape `strike`, mag7, NO DICE — the Cogitant first offense could not deal damage. L1 rung is 1d6 (SNG-437).",
    "_nameWas": "The Sustained Regard",
-   "_idWas": "the_sustained_regard"
+   "_idWas": "the_sustained_regard",
+   "_powerSystemWas": "reach_body_mind",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "body_read",
@@ -1511,7 +1521,7 @@
      ]
     }
    ],
-   "powerSystem": "reach_body_mind",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "INVESTIGATE",
@@ -1560,7 +1570,9 @@
     }
    ],
    "plainly": "A investigate/fight action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: body, Not Mind — the trained conceal tells.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_body_mind",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `somatic` — Ki, definitional — 'the body as the only instrument.'\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   },
   {
    "id": "mind_read_folk",
@@ -1610,7 +1622,7 @@
      "gains": "deepen"
     }
    ],
-   "powerSystem": "reach_body_mind",
+   "powerSystem": "metaphysical",
    "gated": "learned",
    "challengeTypes": [
     "SOCIAL",
@@ -1659,7 +1671,9 @@
     }
    ],
    "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens inference; rank 3 adds to special. Limit: inference, Not Certainty — masters and non-humans resist.",
-   "_fromTemplate": "first_gift_template"
+   "_fromTemplate": "first_gift_template",
+   "_powerSystemWas": "reach_body_mind",
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

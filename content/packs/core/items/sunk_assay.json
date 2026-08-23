@@ -1,0 +1,142 @@
+{
+ "schemaVersion": 1,
+ "_note": "⛔ SNG-521. THE SUNK ASSAY, LEVEL 2 — THE ANSWERING EQUIPMENT. Typed soak carried by ITEMS.\n⚠️ CCODE, SNG-515: 'typed soak works today via authored `soakLayers[].type` — just not from a ward craft. Her hazards can be typed and answered right now if the answering comes from EQUIPMENT AND SHEETS rather than standing wards.'\n⛔ AND NO ITEM IN THE GAME CARRIED A soakLayer — 16 items, none typed. These are the first. ⚠️ WHICH IS THE SAME GAP AS `wardTypes` ONE LAYER OVER: the reader existed, nothing fed it.",
+ "_designRule": "⛔ THE PARTY FINDS THE ANSWER IN THE ROOM. Every one of these is recoverable on Level 1 or Level 2 itself. ⚠️ A party does not need to have brought the right tradition — which is what makes the level fair to a group with no Ashwarden and no Lattice.",
+ "items": [
+  {
+   "id": "oiled_leathers",
+   "name": "Oiled Leathers",
+   "kind": "armor",
+   "description": "A Greyhearth reckoner's working habit — waxed, doubled at the cuff, and smelling of the stuff they treat it with. It is not armour. It is what you wear so the damp does not get into you.",
+   "soakLayers": [
+    {
+     "type": "decay",
+     "value": 5
+    },
+    {
+     "type": "physical",
+     "value": 1
+    }
+   ],
+   "bonusTags": [
+    "survival",
+    "weather"
+   ],
+   "consumable": false,
+   "worth": "valuable",
+   "goods": "crafted_good",
+   "_why": "⛔ THE ANSWER TO THE GREY DAMP. ⚠️ AND THE LESSON IS IN THE SECOND LAYER: physical 1. It is nearly useless in a fight, and a party that treats it as armour will be disappointed on Level 3.",
+   "_foundAt": "⚠️ Worn by every Grave-Caller on Level 1. Taken from one, or bought in Greyhearth for the asking."
+  },
+  {
+   "id": "lattice_token",
+   "name": "A Lattice-Token",
+   "kind": "tool",
+   "description": "A palm-sized precursor blank, unmarked, warm on one face. Hold it and the assay-light goes through you as though you had already been measured.",
+   "soakLayers": [
+    {
+     "type": "precursor",
+     "value": 6
+    }
+   ],
+   "bonusTags": [
+    "careful",
+    "precursor"
+   ],
+   "consumable": false,
+   "worth": "precious",
+   "goods": "precursor_relic",
+   "_why": "⛔ THE ANSWER TO THE ASSAY-LIGHT, and the only thing on Level 2 that answers `precursor` at all. ⚠️ IT ANSWERS NOTHING ELSE — a party holding one and nothing else drowns, rots or is throttled by the green.",
+   "_foundAt": "⛔ On the foreman, Level 1. He will trade it — he does not know what it is worth here."
+  },
+  {
+   "id": "cut_stone_and_salt",
+   "name": "Cut Stone and Salt",
+   "kind": "tool",
+   "description": "A satchel of dressed chips and a twist of coarse salt. Mason's leavings. Scatter it and the green will not cross — it has nothing to put roots into and it does not like the salt.",
+   "soakLayers": [
+    {
+     "type": "living",
+     "value": 6
+    }
+   ],
+   "bonusTags": [
+    "survival",
+    "prepare"
+   ],
+   "consumable": true,
+   "worth": "useful",
+   "goods": "raw_material",
+   "_why": "⛔ THE ANSWER TO THE DROWNED GREEN — and it is CONSUMABLE, so a party must decide where to spend it. ⚠️ THIS IS THE ITEM THAT MAKES LEVEL 2 A ROUTE PROBLEM RATHER THAN A GEAR CHECK.",
+   "_foundAt": "⚠️ Anywhere a mason has worked. There is a broken pallet of it on Level 1, in the room with the readers."
+  },
+  {
+   "id": "gantry_line",
+   "name": "A Gantry Line",
+   "kind": "tool",
+   "description": "Forty feet of assay-works cable, still on its drum. Heavier than rope and it does not rot.",
+   "bonusTags": [
+    "travel",
+    "careful",
+    "prepare"
+   ],
+   "consumable": false,
+   "worth": "useful",
+   "goods": "crafted_good",
+   "_why": "⛔ NO SOAK — IT IS A ROUTE, NOT A DEFENCE. ⚠️ With Skydancer r3 it is a crossing for the whole party; without it, the long way and rounds lost to the clock.",
+   "_foundAt": "On the collapsing gantry, which is the hazard it answers."
+  },
+  {
+   "id": "reckoners_tools",
+   "name": "A Greyhearth Reckoner's Tools",
+   "kind": "tool",
+   "description": "Probe, lamp, chalk, a short iron rule. The kit for telling what is failing and how long it has.",
+   "grantsCraft": {
+    "ability": "attunement",
+    "sectFlavour": "ashwarden"
+   },
+   "bonusTags": [
+    "careful",
+    "investigate"
+   ],
+   "consumable": false,
+   "worth": "valuable",
+   "goods": "crafted_good",
+   "_why": "⛔ GRANTS A CRAFT TO A BEARER WHO LACKS IT — Attunement's ashwarden reading, which is what tells you the damp is `decay` before it costs you. ⚠️ TESTS THAT A GRANTED CRAFT BEHAVES LIKE A LEARNED ONE, which nothing in the game currently checks.",
+   "_foundAt": "⚠️ Level 1, on the reader watching the stair."
+  }
+ ],
+ "_hazardsTheseAnswer": {
+  "the_grey_damp": {
+   "damageType": "decay",
+   "ongoingHarm": "decay",
+   "answeredBy": [
+    "oiled_leathers"
+   ],
+   "_note": "⛔ CARRIES `ongoingHarm: decay` — A WOUND TAKEN HERE DOES NOT CLOSE until the condition is lifted. ⚠️ THE FIRST PLACE A HEALER MUST END A CONDITION BEFORE MENDING, and the party will find that out by failing. Physician's Tome r1 — 'name what is actually wrong' — becomes the correct play."
+  },
+  "the_assay_light": {
+   "damageType": "precursor",
+   "answeredBy": [
+    "lattice_token"
+   ],
+   "_note": "⚠️ NO PHYSICAL WARD TOUCHES IT. Armour is irrelevant and a party will try armour first."
+  },
+  "the_drowned_green": {
+   "damageType": "living",
+   "answeredBy": [
+    "cut_stone_and_salt"
+   ],
+   "_note": "⛔ A SHIELD DOES NOTHING. It is not striking you; it is growing through you."
+  },
+  "the_collapsing_gantry": {
+   "damageType": "physical",
+   "answeredBy": [
+    "armour",
+    "gantry_line"
+   ],
+   "_note": "⚠️ THE ONE HAZARD ARMOUR ANSWERS — and Unmoving Mind does not, because a still mind does not stop a spar."
+  }
+ },
+ "_theClock": "⛔ THE WATER RISES AS A STANDING EFFECT WITH AN ESCALATING VALUE — CCode's recommendation over a new round clock, since effects already tick per turn and surface on the receipt. ⚠️ THE PLAYER SEES IT EVERY ROUND WITHOUT NEW MACHINERY."
+}

@@ -166,8 +166,13 @@ else {
     PJ.resumeProject(pr);
     PJ.sabotageProject(pr, 2, "the Grave-Callers");
     PJ.inheritProject(pr, "Teva");
-    const fin = PJ.tickProject(pr, { days: 20, hands: 2, cfg: pcfg });
-    console.log("  RECEIPT - they come back, find it set back, and hand it on");
+    // ⚠️ AND THEY HAVE TO COME BACK MORE THAN ONCE. Aevi authored Built System at 60 days - a SEASON,
+    // "founding a law that runs without you" - and the harness's single 20-day return no longer finished
+    // it. That is the threshold being right, not the project being broken: this now plays the shape the
+    // number actually describes, which is three journeys rather than two.
+    let trips = 1, fin = null;
+    while (!(fin && fin.done) && trips < 12) { fin = PJ.tickProject(pr, { days: 20, hands: 2, cfg: pcfg }); trips++; }
+    console.log("  RECEIPT - they come back " + trips + " times, find it set back, and hand it on");
     console.log("    " + JSON.stringify(PJ.projectProgress(pr)));
     if (!fin.done) note("L4", "the assay never finished - the threshold cannot be reached");
     // the thing the level is FOR: it could not have been done in the scene it was opened in

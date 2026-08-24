@@ -206,11 +206,15 @@ function build(groupKey) {
   if (missing.length) L.push(`⛔ **NAMED IN THE SCHOOLS FILE BUT ABSENT FROM THE CORPUS (${missing.length}):** \`${missing.join("`, `")}\`` , "");
   const g = gaps(list);
   L.push("---", "", "## Gaps, measured", "");
-  L.push("| gap | n | crafts |", "|---|---|---|");
+  // ⛔ THE UNIT IS IN THE HEADER ON PURPOSE. CCode's §45.1 counts CRAFTS (14/7/4) and this counted the
+  // same fields as RANK OCCURRENCES (19/10/6). Both were right and neither said which, so two documents
+  // stated different numbers for the same thing. A number without a unit is a value without a layer.
+  L.push("| gap | n (crafts) | crafts |", "|---|---|---|");
   const fmt = v => v.length ? (v.length > 8 ? v.slice(0, 8).join(", ") + `, +${v.length - 8} more` : v.join(", ")) : "—";
   L.push(`| no \`mechanic.crit\` | ${g.crit.length} | ${esc(fmt(g.crit))} |`);
   L.push(`| no \`wardTypes\` | ${g.ward.length} | ${esc(fmt(g.ward))} |`);
   L.push(`| no \`imposes\` on any rank | ${g.imposes.length} | ${esc(fmt(g.imposes))} |`);
+  L.push(`| ⚠️ *(for reference — \`imposes\` RANK OCCURRENCES in this set: ${list.reduce((n,a)=>n+(a.tree||[]).filter(t=>t.imposes).length,0)})* | | |`);
   L.push(`| no \`ongoingHarm\` on any rank | ${g.ongoing.length} | ${esc(fmt(g.ongoing))} |`);
   L.push(`| ⛔ rolls dice, no \`damageType\` | ${g.noDamageType.length} | ${esc(fmt(g.noDamageType))} |`);
   L.push("", `**social verbs present:** ${[...new Set(list.flatMap(a => (a.tree || []).flatMap(t => t.functions || [])))].filter(v => ["bargain", "provoke", "soothe", "persuade"].includes(v)).join(", ") || "⛔ none"}`);

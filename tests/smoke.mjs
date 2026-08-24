@@ -17963,6 +17963,52 @@ await (async () => {
       CM.shapeOfVerb("bargain", cmCfg)?.operative === "scope");
   }
 
+  // 5y · ⛔ CCODE-237 (Aevi's §0) — A HEAL REACHES A SHEET. Her one non-negotiable was "`mechanic.dice` ON A
+  // HEALING SHAPE MUST BE READ", and `mechanic_effects.json` said `HEAL — wired: false`.
+  //
+  // ⚠️ MEASURED, THE FILE WAS STALE AND THE REAL GAP WAS ONE STEP LATER: the dice ARE read (dawn_surgery
+  // rolls its 3d4 and the round reports 12), the wrapper forwards `healing` — and NOTHING CONSUMED IT.
+  // `deltas.health` started at 0 and the heal never entered it, so 57 healing crafts mended nobody. Same
+  // shape as `imposed`, one file over. ⛔ SO THE GATES BELOW TEST THE SHEET, not the roll.
+  {
+    const EN237 = await import("../engine/encounters.js");
+    const heal237 = Object.values(C199.abilities).find(a => a.id === "dawn_surgery")
+      || Object.values(C199.abilities).find(a => a.mechanic?.dice && (a.functions || []).includes("heal"));
+    const sheet237 = (name, hp) => ({ name, level: 5, health: hp, maxHealth: 20, energy: 40, maxEnergy: 40,
+      attributes: { physical: 5, mental: 4, social: 3, practical: 3 }, subAttributes: {}, alignment: {},
+      skills: [], abilities: [], tacticTags: [] });
+    const runHeal = () => {
+      const ch = sheet237("you", 8);
+      const def = { id: "d", type: "duel", name: "t", opponent: { name: "Foe", health: 20, threat: 20, tacticTags: [] }, skillBattle: true };
+      const st = { mode: "skill_battle", momentum: 0, round: 1, opponentEnergy: 40, opponentHealth: 20,
+        effects: [], pressure: { player: 0, opponent: 0 }, status: "active", opponentSheet: sheet237("Foe", 20) };
+      const decl = { ...heal237, name: heal237.name, function: "heal", intensity: "standard", tier: heal237.levelReq || 1, rank: 1 };
+      return EN237.skillBattleRound(st, def, decl, { character: ch, rules: C199.rules, sb: C199.skillBattle, rng: () => 0.5 });
+    };
+    const rr = runHeal();
+    check(`CCODE-237: the authored dice reach the round — ${heal237?.id} ${JSON.stringify(heal237?.mechanic?.dice)} → ${rr.healing?.amount}`,
+      !!rr.healing && rr.healing.amount > 0);
+    // ⛔ THE GATE THAT WOULD HAVE CAUGHT THIS: not "does it roll" but "does the sheet move".
+    check(`CCODE-237: …and it REACHES THE SHEET — deltas.health ${rr.deltas.health} (it was 0 for every heal ever cast)`,
+      rr.deltas.health === rr.healing.amount);
+    // ⚠️ THE SIGN. A heal on the player must RAISE health. Backwards, every mending craft is a weapon —
+    // the one failure a healing branch must not have, and a plausible one to write.
+    check("CCODE-237: a heal on the player RAISES health — a mending craft is never a weapon",
+      rr.deltas.health > 0);
+    check("CCODE-237: …and the player is told it landed",
+      (rr.events || []).some(e => /MENDS/.test(e)), (rr.events || []).join(" | ").slice(0, 90));
+
+    // the dice are the craft's own: two different crafts with different dice heal differently
+    const healers = Object.values(C199.abilities)
+      .filter(a => a.mechanic?.dice && (a.functions || []).some(f => ["heal", "mend", "restore"].includes(f)));
+    check(`CCODE-237: ${healers.length} healing crafts carry authored dice — the field Aevi asked to be read`,
+      healers.length > 20, `${healers.length}`);
+    const CM237 = await import("../engine/craftmechanics.js");
+    const amounts = healers.slice(0, 8).map(a => CM237.resolveHeal(a, { rank: 1, cfg: C199.craftMechanics, rng: () => 0.5 }).healed);
+    check("CCODE-237: …and the dice are the CRAFT'S OWN — different dice heal different amounts, not one flat number",
+      new Set(amounts).size > 1, amounts.join(","));
+  }
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

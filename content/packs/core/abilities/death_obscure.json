@@ -144,8 +144,8 @@
    "nativeOrCombination": "native",
    "tradition": "threnodist",
    "narrationHints": "She wept, and it was real, and it told them nothing. The grief-house is loud for a reason.",
-   "description": "⛔ THE THRENODIST OBSCURE, AND IT DOES NOT LIE. Open a true grief wide enough that everything else you are goes unread underneath it. ⚠️ A people who hold that feeling is the only true knowing CANNOT hide behind a false feeling — so they hide behind a real one, turned all the way up.",
-   "notFor": "⚠️ A HEART WITH NOTHING TO OPEN — it uses a grief you actually carry, so someone who has lost nothing has no cover. Concealing a THING, a place, or a body (that is Umbracraft). And it does not make you unseen — you are extremely visible. You are simply unreadable.",
+   "description": "Open a grief wide enough that everything else you are goes unread underneath it. ⚠️ THE COVER IS THE SIZE OF THE FEELING, NOT ITS HONESTY — a real grief is simply the easiest one to open that wide, and the one that costs you something to use.",
+   "notFor": "⚠️ A HEART WITH NOTHING TO OPEN — you need a grief big enough to hide behind, whatever its source. Concealing a THING, a place, or a body (that is Umbracraft). And it does not make you unseen — you are extremely visible. You are simply unreadable.",
    "functions": [
     "conceal"
    ],
@@ -160,14 +160,10 @@
     "scope": "self",
     "crit": {
      "success": "The grief is so entirely true that reading you becomes indecent — they stop trying, and afterwards they cannot say why they looked away.",
-     "failure": "You open a grief you had not finished, and it is louder than you meant. They do not learn what you were hiding. They learn that you are hiding something, and that it costs you."
+     "failure": "The grief runs past where you meant to stop it. They do not learn what you were hiding. They learn that you are hiding something, and that it costs you."
     }
    },
    "bounds": [
-    {
-     "text": "⛔ THE GRIEF MUST BE REAL AND YOURS — this craft opens a wound, it does not perform one",
-     "class": "hard"
-    },
     {
      "text": "⛔ IT HIDES A FEELING, NEVER A FACT. What you know, what you carry and where you stand are all still plainly readable",
      "class": "hard"
@@ -186,7 +182,7 @@
     {
      "rank": 1,
      "name": "Open Weeping",
-     "grants": "⛔ DECLARE OBSCURE IN THE SENSE SLOT. Open a real grief and your intent goes unread beneath it — anyone reading your feeling-state finds the grief, entire and true, and nothing under it.",
+     "grants": "⛔ DECLARE OBSCURE IN THE SENSE SLOT. Open a grief and your intent goes unread beneath it — anyone reading your feeling-state finds the grief, entire, and nothing under it.",
      "cannot": "One person: you. And you give up your own read to do it — you are grieving, not watching.",
      "functions": [
       "conceal"
@@ -225,7 +221,7 @@
      ]
     }
    ],
-   "_authored": "⛔ AEVI 2026-08-23, Death audit. Threnodist was 1 of 20 traditions with NO obscure craft — and the only tradition whose own tenet (feeling is the only true knowing) made the gap a contradiction. ⚠️ IT IS `conceal`, NEVER `deceive`: per function_vocabulary, deceive shows what is FALSE and conceal hides what is TRUE. This craft shows a true feeling to hide a true intent, which is why a people who cannot lie with feeling can still have an obscure."
+   "_authored": "⛔ AEVI 2026-08-23, Death audit. Threnodist was 1 of 20 traditions with no obscure craft. ⚠️ CORRECTED SAME DAY (Erik): my first version made 'the grief must be REAL and YOURS' a HARD BOUND and justified it with 'a people who hold feeling is the only true knowing cannot hide behind a false one.' ⛔ THAT WAS OVER-AUTHORING — the tenet is an EPISTEMOLOGY (how a Threnodist knows) and I promoted it to a PROHIBITION on what one may do. ⚠️ It also foreclosed a braid Erik wants open: FALSECRAFT (veilwright `deceive`) × a Threnodist obscure is the false-feeling version of this craft, and my rule had made it illegal by fiat. The craft is `conceal` because THIS one opens a feeling rather than fabricating one — not because the tradition is incapable of the other."
   }
  ],
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",

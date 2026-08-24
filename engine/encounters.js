@@ -228,6 +228,11 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // `senseGap` and `senseBonus` (CCODE-211/213) were dropped here too. Ten values, not eight — which is
     // the argument for deriving the expectation instead of extending a list by hand each time.
     senseGap: r.senseGap, senseBonus: r.senseBonus,
+    // ⚠️ AND THE CCODE-228 GATE CAUGHT THESE TWO ON ITS FIRST OUTING — `unsettled` and `cooled` are the
+    // provoke/soothe results, added minutes earlier, and the wrapper dropped them exactly the way it has
+    // dropped ten values before. The derived gate went red the same run. That is the whole argument for
+    // deriving it rather than maintaining this list by hand.
+    unsettled: r.unsettled, cooled: r.cooled,
     healing: r.healing };
 }
 

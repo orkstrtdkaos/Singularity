@@ -647,3 +647,48 @@ export function resolveImposition(ability, {
     : { ok: false, condition: null, degradedTo: want, resisted: true, targets: 0, threshold,
         why: `"${spec.degradesTo}" is not a condition a craft may impose` };
 }
+
+// ══════════════════════════════════════════════════════════════════════════════════════════════════
+// §6 — `provoke` and `soothe`. ⛔ NEITHER NEEDS A NEW FIELD, WHICH IS AEVI'S POINT: both already have a
+// target in the engine, and the reason they were "unmechanised" is that nobody had connected the verb to
+// the thing it obviously acts on.
+
+/** ⛔ PROVOKE COSTS THE OPPONENT THEIR CHOSEN LINE. Erik: "cost the opponent a chosen action, making them
+ *  revert to basic default." `state.tactic` IS that chosen line — set by the `tactic` op from the
+ *  opponent's authored `tacticTags`, read by the prompt builder as "current tactic: press-in". Clearing it
+ *  drops them to their default, which is exactly the described effect and requires no new state.
+ *
+ *  ⚠️ AND IT DOES NOTHING WHEN THERE IS NOTHING TO TAKE. Provoking a foe who has not committed to a line
+ *  is not a partial success — there is no line to break, and saying so beats reporting a hollow win. */
+export function resolveProvoke(state, { margin = 0 } = {}) {
+  const had = state?.tactic || null;
+  if (!(Number(margin) > 0)) return { ok: false, why: "they did not rise to it", tactic: had };
+  if (!had) return { ok: false, nothingToTake: true, why: "they are not committed to anything you can break" };
+  return { ok: true, broke: had, tactic: null,
+    why: `they lose their line — ${had} abandoned, back to plain fighting` };
+}
+
+/** ⚠️ SOOTHE TAKES THE HEAT OUT — §31.5 — AND HEAT IS NOT DAMAGE. It drops MOMENTUM or lifts an imposed
+ *  condition; it never touches a damage track, because "calmer" is not "unwounded" and a soothe that healed
+ *  would be a second RESTORE verb wearing a social name.
+ *
+ *  ⛔ MOMENTUM IS PULLED TOWARD ZERO, NOT REVERSED. Taking the heat out of a fight the other side is
+ *  winning does not hand you the advantage — it cools it. Overshooting into your own favour would make
+ *  soothe an attack. */
+export function resolveSoothe(state, { margin = 0, cfg = {}, conditions = [] } = {}) {
+  if (!(Number(margin) > 0)) return { ok: false, why: "the heat stays in it" };
+  const per = num(cfg?.soothe?.momentumPerMargin, 0.15);
+  const cap = num(cfg?.soothe?.momentumCap, 4);
+  const mom = num(state?.momentum, 0);
+  const pull = Math.min(cap, Math.max(1, Math.round(Math.abs(Number(margin)) * per)));
+  // toward zero from either side, and never past it
+  const cooled = mom === 0 ? 0 : (mom > 0 ? Math.max(0, mom - pull) : Math.min(0, mom + pull));
+  const lifted = (conditions || []).find(c => c && !c.persistUntilHealed) || null;
+  if (mom === 0 && !lifted) return { ok: false, why: "there is no heat in it to take out" };
+  return { ok: true, momentum: { before: mom, after: cooled, pulled: Math.abs(mom - cooled) },
+    lifted: lifted ? (lifted.id || lifted.name) : null,
+    // ⛔ STATED SO IT CANNOT DRIFT: a soothe that ever moved a damage track would be a RESTORE verb wearing
+    // a social name, and §31.5 is explicit that it removes heat and not reasons.
+    touchedDamage: false,
+    why: lifted ? `the heat goes out of it and ${lifted.name || lifted.id} lifts` : "the heat goes out of it" };
+}

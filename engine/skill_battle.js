@@ -6,7 +6,7 @@
 // narrates the resolved exchange; it never chooses the opponent's mechanical move — that is opponentPolicy.
 
 import { resolveAction } from "./resolve.js";
-import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, ongoingHarmOf, authoredBlock, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
+import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, ongoingHarmOf, authoredBlock, resolveProvoke, resolveSoothe, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const DEFAULT_STEPS = { conserve: { energyMult: 0.6, effectMod: -8 }, standard: { energyMult: 1, effectMod: 0 }, surge: { energyMult: 1.6, effectMod: 10, backlashChance: 0.25 } };
@@ -1111,7 +1111,36 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       else if (r.why) imposed = { refused: r.why, by: impDecl.name || impDecl.function };
     }
   }
-  const out = { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
+
+  // ⛔ CCODE-236 §6 — PROVOKE AND SOOTHE RESOLVE HERE, beside the imposition, because they are contest
+  // verbs and this is where a contest verb lands. Both were "unmechanised" only in the sense that nobody
+  // had connected them to the thing they obviously act on: provoke takes `state.tactic`, soothe takes
+  // MOMENTUM. Neither needed a new field, which was Aevi's §6 point.
+  let unsettled = null, cooled = null;
+  {
+    const winDecl = roundWinner === "player" ? playerDecl : oppDecl;
+    const fns = new Set([winDecl?.function, ...(winDecl?.functions || [])].filter(Boolean));
+    // ⚠️ RE-DERIVED IN THIS SCOPE, NOT BORROWED. My first version reached for `winRoll`/`loseRoll`, which
+    // live inside the imposition block above — a ReferenceError that killed the whole suite and reported
+    // ONE failure while deleting 240 passes. Same mistake, same tell, second time this month.
+    const wr = roundWinner === "player" ? p : o, lr = roundWinner === "player" ? o : p;
+    const winMargin = Math.max(0, (wr?.margin || 0) - (lr?.margin || 0));
+    if (fns.has("provoke")) {
+      const pr = resolveProvoke(newState, { margin: winMargin });
+      // ⚠️ THE STATE CHANGE IS THE EFFECT. Reporting `broke` without clearing the tactic would be the
+      // decorative version of this verb, and the whole complaint about it was that it did nothing.
+      if (pr.ok) newState.tactic = null;
+      unsettled = { by: winDecl?.name || "provoke", side: roundWinner === "player" ? "opponent" : "player", ...pr };
+    }
+    if (fns.has("soothe")) {
+      const so = resolveSoothe(newState, { margin: winMargin, cfg: sb?.engine || {},
+        conditions: (roundWinner === "player" ? oppSheet : playerSheet)?.conditions || [] });
+      if (so.ok) newState.momentum = so.momentum.after;
+      cooled = { by: winDecl?.name || "soothe", ...so };
+    }
+  }
+
+  const out = { state: newState, unsettled, cooled, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback },
     // CCODE-80: an evaded blow must SAY it was evaded. An attack that quietly does less is indistinguishable
     // from a bad roll, and the whole point of the three defensive logics is that they read differently.

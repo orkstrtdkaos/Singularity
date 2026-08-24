@@ -127,3 +127,71 @@ export function economyCoverage(economy, items = []) {
       : "price = band × need × scarcity",
   };
 }
+
+// ══════════════════════════════════════════════════════════════════════════════════════════════════
+// §5 — `bargain`. ⛔ WITH A PURSE AND AN EXCHANGE IT IS NOT A SUBSYSTEM: it is a modifier on the price at
+// the moment of the deal. 11 crafts have carried the verb across abyssal, bargainers, mason, syllogist,
+// stillhold and valley_craft, and it has been unmechanised the whole time.
+//
+// ⛔ ERIK: "bargains are real time deals, not necessarily banked to persist. Once done with the bargain the
+// price is paid and the goods exchanged." So there is no offer state, no haggling round-trip — a bargain
+// resolves INTO a price and the exchange settles it.
+//
+// ⛔ AND THE LOAD-BEARING RULE, AEVI'S §5: RANK SCALES THE STAKE, NOT THE DISCOUNT. "An L1 bargain works on
+// a sack of grain, an L5 bargain works on a caravan contract. That is the axis, and it is `scope`, not
+// `magnitude`." ⚠️ A rank-5 negotiator does not get a deeper cut on a loaf of bread — they get to negotiate
+// things a rank-1 cannot reach at all. Scaling the discount instead would have been the obvious build and
+// the wrong one.
+//
+// ⚠️ §31.5: "both sides give something — the only social verb with a price on both sides." So a won
+// bargain returns a CONCESSION as well as a saving. The engine names that a concession is owed at the
+// moment of the deal; what it is, is the GM's to narrate (and Erik's ruling means it is GIVEN then, never
+// tracked afterwards).
+
+const bargainCfg = (economy) => economy?.bargain || {};
+
+/** ⛔ WHAT SIZE OF DEAL THIS RANK CAN REACH, in crystal. The stake ceiling IS the rank axis. */
+export function bargainReach(rank, economy = null) {
+  const c = bargainCfg(economy);
+  const base = Number.isFinite(Number(c.reachBase)) ? Number(c.reachBase) : 10;
+  const growth = Number.isFinite(Number(c.reachGrowth)) ? Number(c.reachGrowth) : 3;
+  const r = Math.max(1, Number(rank) || 1);
+  return base * Math.pow(growth, r - 1);          // r1 10 · r2 30 · r3 90 · r4 270 · r5 810
+}
+
+/** The saving a won bargain produces. ⚠️ DELIBERATELY RANK-FREE — it reads the contest margin and nothing
+ *  else, because the moment rank enters here it becomes a discount ladder and the scope axis dies. */
+export function bargainSaving(price, margin, economy = null) {
+  const c = bargainCfg(economy);
+  const per = Number.isFinite(Number(c.savingPerMargin)) ? Number(c.savingPerMargin) : 0.01;
+  const cap = Number.isFinite(Number(c.savingCap)) ? Number(c.savingCap) : 0.3;
+  const frac = Math.max(0, Math.min(cap, (Math.max(0, Number(margin) || 0)) * per));
+  return { fraction: frac, amount: Number((Number(price) * frac).toFixed(2)), cap };
+}
+
+/** ⛔ THE WHOLE VERB, RESOLVED. Returns the price the exchange should settle at, or a refusal that says
+ *  WHY — and "this deal is beyond what your bargaining reaches" is the interesting refusal, because it is
+ *  the one that makes rank mean something. */
+export function bargainOutcome({ price, rank = 1, margin = 0, economy = null } = {}) {
+  const p = Number(price);
+  if (!(p > 0)) return { ok: false, why: "there is no price to bargain over" };
+  const reach = bargainReach(rank, economy);
+  // ⛔ THE STAKE GATE. Not a smaller effect on a big deal — NO effect. A rank-1 haggler at a caravan
+  // contract is not slightly less persuasive, they are out of their depth, and the refusal says so.
+  if (p > reach) {
+    return { ok: false, outOfReach: true, reach, price: p,
+      why: `this deal is worth ${p} and a rank-${rank} bargain reaches ${reach} — too big to move`,
+      newPrice: p };
+  }
+  if ((Number(margin) || 0) <= 0) {
+    return { ok: false, price: p, newPrice: p, reach, why: "they did not give ground" };
+  }
+  const saving = bargainSaving(p, margin, economy);
+  const newPrice = Number(Math.max(0, p - saving.amount).toFixed(2));
+  return { ok: true, price: p, newPrice, saved: saving.amount, fraction: saving.fraction, reach, rank,
+    // ⚠️ BOTH SIDES GIVE SOMETHING (§31.5). The engine states that a concession is owed AT THE DEAL; what
+    // it is belongs to the GM, and Erik's ruling means it is given then and never tracked afterwards.
+    concessionOwed: true,
+    math: `${p} − ${(saving.fraction * 100).toFixed(0)}% (margin ${margin}) = ${newPrice}`
+      + (saving.fraction >= saving.cap ? ` · at the ${(saving.cap * 100).toFixed(0)}% cap` : "") };
+}

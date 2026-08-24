@@ -95,13 +95,19 @@ import { lethalOfferClamp, isLethalEncounter, sanitizeNewEncounter, startEncount
 // Six exports reachable only from smoke.mjs. A rest cleared nothing because the module that decides what a
 // rest clears was never in the room. Wired at `rest()`, which is the one door both kinds of rest go through.
 import { clearOnRest, applyCondition, activeConditions } from "./engine/conditions.js";
+// ⛔ CCODE-234 — THE PURSE HAS A CALLER. Erik's `visibility` rule in economy.json is not decoration:
+// "show the purse as a PERMANENT ROW, show a price as a number when a trade is on the table… The trader
+// SAYS 'ten for those, and I'm being generous'; the interface SAYS 10. Both." A purse the player cannot
+// see is the same failure as one that does not exist.
+import { ensurePurse, purseLine, worthOf, applyExchangeOps } from "./engine/purse.js";
+import { bargainOutcome } from "./engine/economy.js";
 import { characterPower } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.193";
+const APP_VERSION = "1.9.195";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6200,7 +6206,17 @@ function applyTurn(turn, resolution, playerWords = null) {
   for (const u of turn.npcUpdates || []) noteGeneratedAttention(u.npcId, "interact", memCtx.day);
   for (const u of turn.codexUpdates || []) if (u.entityId) noteGeneratedAttention(u.entityId, "fact", memCtx.day);
   if (character.activeEncounter && turn.encounterOps) {
-    applyStep("encounterOps", () => { const encA = activeEnc(); if (encA) applyEncounterOps(encA.state, sanitizeEncounterOps(turn.encounterOps, encA.def, encA.state)); });
+    // ⛔ CCODE-235 — THE EXCHANGE IS AN OP GROUP, not a screen. `economy.json`: "There is no shop screen and
+  // there should not be one. A trader is an NPC with wants, and buying is a conversation."
+  applyStep("exchangeOps", () => {
+    const rec = applyExchangeOps(character, turn.exchangeOps || [], {
+      economy: CONTENT.rules?.economy, worldState: character.worldState, bargainOutcome });
+    // ⚠️ A REFUSED TRADE MUST REACH THE PLAYER. Silently dropping it lets the narration describe a purchase
+    // that never happened, which turns a bookkeeping miss into a lie in the fiction. Kept on the sheet and
+    // rendered in the Purse block, because a console warning is not "reaching the player".
+    character._exchangeReceipts = rec.filter(r => r && (r.ok === false || r.settled));
+  });
+  applyStep("encounterOps", () => { const encA = activeEnc(); if (encA) applyEncounterOps(encA.state, sanitizeEncounterOps(turn.encounterOps, encA.def, encA.state)); });
   }
   if (turn.newEncounter) {
     // SNG-231 §2: ISOLATED — the GM-invented fight/duel def MUST register even if an earlier op (npcUpdates on a
@@ -10143,6 +10159,18 @@ function renderCharacterScreen() {
          never appears on screen is the same failure as one that never lands: the player cannot act on what
          they are not told. The `needMending` split is the one that matters — a night will not touch those,
          so the sheet has to say so or the player waits for a rest that will never work. */""}
+    ${(() => {
+      // ⛔ THE PERMANENT ROW. Precise and visible; the narration does not recite it.
+      const purse = ensurePurse(character);
+      const here = hereNow()?.regionId || null;
+      const w = worthOf(purse, CONTENT.rules?.economy, { regionId: here, worldState: character.worldState });
+      const line = purseLine(purse, { regionId: here });
+      return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Purse</h3>
+        <div class="hint" style="font-variant-numeric:tabular-nums">${esc(line)}${w.totalInCrystal ? ` · <strong>${w.totalInCrystal.toFixed(1)}</strong> in crystal` : ""}</div>
+        ${w.lines.some(l => l.usableHere === false) ? `<p class="hint" style="margin-top:4px;color:var(--warn,#e0b25a)">Some of your scrip is another Reach's — it buys nothing here.</p>` : ""}
+        ${(character._exchangeReceipts || []).filter(r => r.ok === false).map(r => `<p class="hint" style="margin-top:4px;color:var(--danger)">A trade did not go through — ${esc(r.why || "refused")}</p>`).join("")}
+        ${(character._exchangeReceipts || []).filter(r => r.settled).map(r => `<p class="hint" style="margin-top:4px">Paid ${r.paid} ${esc(r.currency)}${r.bargain?.ok ? ` — bargained down from ${r.bargain.price}` : ""}.</p>`).join("")}</div>`;
+    })()}
     ${(() => {
       const { all, needMending } = activeConditions(character);
       if (!all.length) return "";

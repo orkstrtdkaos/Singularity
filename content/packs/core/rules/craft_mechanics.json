@@ -95,6 +95,21 @@
    "shape": "bolster",
    "operative": "duration",
    "why": "in RESTORE by vocabulary; mechanically it grants a standing bonus rather than restoring health"
+  },
+  "bargain": {
+   "shape": "price",
+   "operative": "scope",
+   "why": "⛔ CCODE-236. In INFLUENCE by vocabulary; mechanically it moves a SETTLED PRICE and nothing else. `operative` is `scope` and that is the load-bearing part (Aevi §5): RANK SCALES THE STAKE, NOT THE DISCOUNT — an L1 bargain works on a sack of grain, an L5 on a caravan contract, and neither gets a deeper cut on a loaf. Consumed by `engine/economy.js::bargainOutcome`, which refuses a deal beyond the rank's reach outright rather than applying a smaller effect to it. ⚠️ §31.5: both sides give something — a won bargain returns `concessionOwed`, given at the moment of the deal and never tracked after it (Erik's no-escrow ruling)."
+  },
+  "provoke": {
+   "shape": "unsettle",
+   "operative": "targets",
+   "why": "⛔ CCODE-236 §6. In INFLUENCE by vocabulary; mechanically it COSTS THE OPPONENT THEIR CHOSEN LINE. Erik: 'cost the opponent a chosen action, making them revert to basic default' — `state.tactic` IS that chosen line, so clearing it is the effect exactly and needs no new field. Consumed by `engine/craftmechanics.js::resolveProvoke`. ⚠️ It does NOTHING against a foe who has committed to no line: there is nothing to break, and that is a refusal rather than a hollow win."
+  },
+  "soothe": {
+   "shape": "cool",
+   "operative": "magnitude",
+   "why": "⛔ CCODE-236 §6. §31.5: 'you take the heat out.' It REMOVES HEAT, NOT REASONS — it pulls MOMENTUM toward zero or lifts an imposed condition, and it never touches a damage track, because a soothe that healed would be a second RESTORE verb wearing a social name. ⚠️ Momentum is pulled TOWARD zero and never past it: cooling a fight the other side is winning does not hand you the advantage. Consumed by `engine/craftmechanics.js::resolveSoothe`."
   }
  },
  "familyDefaults": {

@@ -17784,6 +17784,185 @@ await (async () => {
       !!harmonicCraft, harmonicCraft ? harmonicCraft.id : "none resolved via foothill");
   }
 
+  // 5v · ⛔ CCODE-234 / §3 — THE PURSE. Six acceptance criteria, and five of them exist because a purse of
+  // five integers would be WRONG: it loses scrip's Reach key, marks' indivisibility and paper's drift.
+  {
+    const PU = await import("../engine/purse.js");
+    const ec234 = C199.rules?.economy;
+    check(`CCODE-234: the economy is loaded and authors its currencies (${(ec234?.currencies || []).length})`,
+      (ec234?.currencies || []).length === 5);
+
+    // 1 · hold, gain and spend each of the five
+    const ch = { name: "t" };
+    const gained = ["crystal", "coin", "paper", "marks"].map(c => PU.credit(ch, c, 10, { origin: "found" }).ok);
+    gained.push(PU.credit(ch, "scrip", 10, { origin: "traded", regionId: "ashlands" }).ok);
+    check("CCODE-234 §1: a character holds, gains and spends each of the five", gained.every(Boolean)
+      && PU.debit(ch, "crystal", 4).ok && PU.held(ch.purse, "crystal") === 6);
+
+    // 2 · ⛔ SCRIP DOES NOT TRAVEL, AND THE REFUSAL IS LEGIBLE — not a silent zero
+    const wrong = PU.canSpendHere(ch.purse, "scrip", "the_fen");
+    check("CCODE-234 §2: scrip earned in one Reach cannot be spent in another",
+      wrong.ok === false && wrong.wrongReach === true);
+    check("CCODE-234 §2: …and the refusal NAMES where it is good — a silent zero is not a refusal",
+      /ashlands/.test(wrong.why) && /the_fen/.test(wrong.why), wrong.why);
+    // ⚠️ "how much scrip do you have" has no answer without a Reach. Returning 0 would be a lie.
+    check("CCODE-234 §2: asking for scrip with no Reach returns null, not zero",
+      PU.held(ch.purse, "scrip") === null && PU.held(ch.purse, "scrip", "ashlands") === 10);
+
+    // 3 · ⛔ NO OPERATION PRODUCES A FRACTIONAL MARK
+    const frac = [PU.credit(ch, "marks", 2.5, { origin: "paid" }), PU.debit(ch, "marks", 0.5)];
+    check("CCODE-234 §3: no operation produces a fractional mark", frac.every(r => !r.ok && r.indivisible));
+    const conv = PU.convert(1, "crystal", "marks", { economy: ec234 });
+    check("CCODE-234 §3: …and the rule survives CONVERSION — a fraction of a mark is nothing, never 0.5",
+      !conv.ok || Number.isInteger(conv.amountOut));
+
+    // 4 · ⚠️ PAPER CARRIES ISSUER RISK: the same notes are worth less after the world moves
+    const pc = { name: "p" }; PU.credit(pc, "paper", 20, { origin: "traded" });
+    const w0 = PU.worthOf(pc.purse, ec234, {});
+    const w1 = PU.worthOf(pc.purse, ec234, { worldState: { economy: { paperValue: 1.5 } } });
+    check(`CCODE-234 §4: paper held across an issuer move reflects the NEW value (${w0.totalInCrystal} → ${w1.totalInCrystal} crystal, same 20 notes)`,
+      w1.totalInCrystal < w0.totalInCrystal);
+    // ⛔ WHICH ONLY WORKS BECAUSE THE PURSE STORES NOTES AND NOT WORTH. A cached worth would freeze paper
+    // at the rate it was earned and defeat the one currency whose character is that it can betray you.
+    check("CCODE-234 §4: …because the purse stores COUNTS — worth is computed, never stored",
+      typeof pc.purse.paper === "number" && !("worth" in pc.purse) && !("value" in pc.purse));
+
+    // 5 · ⛔ NO PATH MINTS A COIN
+    const mints = ["minted", "created", null, "spawned"].map(o => PU.credit({ name: "m" }, "coin", 1, { origin: o }));
+    check("CCODE-234 §5: no path mints a coin — a credit with no honest provenance is refused",
+      mints.every(r => !r.ok && r.unmintable));
+    check("CCODE-234 §5: …but coin can still be FOUND or taken in trade — fixed supply, not frozen",
+      PU.credit({ name: "f" }, "coin", 1, { origin: "found" }).ok
+      && PU.credit({ name: "f2" }, "coin", 1, { origin: "traded" }).ok);
+    // ⚠️ and the rule is scoped: crystal is not fixed-supply and must not inherit the refusal
+    check("CCODE-234 §5: …and the rule is COIN's alone — crystal takes any honest origin",
+      PU.credit({ name: "c" }, "crystal", 1, { origin: "reward" }).ok);
+
+    // 6 · conversion math is inspectable, and reproduces the AUTHORED worked example
+    const wx = PU.convert(20, "coin", "crystal", { economy: ec234 });
+    check(`CCODE-234 §6: conversion reproduces economy.json's own worked example — 20 coin → 10 shards (got ${wx.amountOut})`,
+      wx.ok && wx.amountOut === 10, wx.math);
+    check("CCODE-234 §6: …and every term is returned, so a player can see the bite rather than be told it",
+      wx.baseValueIn === 6 && wx.baseValueOut === 10 && wx.spread === 0.15 && /20 × \(6\/10\)/.test(wx.math));
+  }
+
+  // 5w · ⛔ CCODE-235 / §4 — THE EXCHANGE, WHICH IS NOT A SHOP. `economy.json`: "There is no shop screen
+  // and there should not be one… the price model exists so the GM has a number to be honest about, not so
+  // a UI can render a catalogue." So this gates a TRANSACTION PRIMITIVE, and one of the gates is that no
+  // screen, catalogue or open-trade state came with it.
+  {
+    const PU = await import("../engine/purse.js");
+    const EC = await import("../engine/economy.js");
+    const ec235 = C199.rules?.economy;
+    const item235 = Object.values(C199.items)[0];
+    const line = EC.priceLine(item235, "the_crossing", { economy: ec235 });
+
+    const ch = { name: "t", inventory: [] };
+    PU.credit(ch, "crystal", 50, { origin: "found" });
+    const before = PU.held(ch.purse, "crystal");
+    const r = PU.settleExchange(ch, { price: line.price, economy: ec235, regionId: "the_crossing", take: [item235] });
+    check(`CCODE-235 §4: goods move and the purse moves BY THE SAME NUMBER priceLine showed (${line.price})`,
+      r.ok && r.paid === line.price && before - PU.held(ch.purse, "crystal") === line.price
+      && ch.inventory.length === 1, JSON.stringify({ paid: r.paid, quoted: line.price }));
+
+    // ⛔ ERIK'S RULING: the deal RESOLVES AND CLOSES. "the price is paid and the goods exchanged, even if
+    // those goods are a month's worth of work" — so a month's labour is GIVEN at the deal, not tracked.
+    check("CCODE-235 §4: the transaction leaves NO open state behind it — nothing escrowed, nothing owed",
+      r.open === false && !Object.keys(ch).some(k => /trade|escrow|owed|pending|contract/i.test(k)));
+    // ⚠️ STRIPPED OF COMMENTS FIRST. My first version of this matched its own explanatory comment — the
+    // file says "nothing is escrowed" and "there is deliberately no `openTrades`", so the gate reported the
+    // words it was looking for and went red on a correct file. A scanner reading its own prose is a failure
+    // I catalogued twice this month and then committed a third time, here.
+    const purseCode = readFileSync(join(root, "engine/purse.js"), "utf8")
+      .replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+    check("CCODE-235 §4: …and the engine has no place to PUT an open trade — the absence is structural",
+      !/openTrades|escrow|pendingTrade|owedBy/i.test(purseCode));
+
+    // ⚠️ A FAILED TRADE MUST NOT HALF-SETTLE. Checked before anything moves, which is the only way "no
+    // open state" can actually be guaranteed rather than asserted.
+    const poor = { name: "p", inventory: [] };
+    PU.credit(poor, "crystal", 1, { origin: "found" });
+    const fail = PU.settleExchange(poor, { price: 999, economy: ec235, regionId: "the_crossing", take: [item235] });
+    check("CCODE-235 §4: a trade that cannot be paid changes NOTHING — no goods, no coin, no half-state",
+      !fail.ok && PU.held(poor.purse, "crystal") === 1 && poor.inventory.length === 0, fail.why);
+
+    // ⚠️ AND THE INDIVISIBILITY COST IS STATED RATHER THAN SWALLOWED: paying in marks rounds UP to a whole
+    // mark, and `overpay` says how much that cost you.
+    const mk = { name: "m", inventory: [] };
+    PU.credit(mk, "marks", 20, { origin: "paid" });
+    const inMarks = PU.canSettle(mk, 9, { currency: "marks", economy: ec235 });
+    check("CCODE-235 §4: paying in an indivisible currency rounds UP and SAYS what that cost",
+      inMarks.ok && Number.isInteger(inMarks.due) && inMarks.overpay > 0, inMarks.math);
+  }
+
+  // 5x · ⛔ CCODE-236 / §5–§6 — bargain, provoke, soothe. ⚠️ REGISTERING A VERB IS NOT MECHANISING IT.
+  // `SNG-263 §1` only checks that a verb appears in a family or an override, so adding three lines to
+  // `craft_mechanics.json` would have turned it green while building nothing — laundering a gate. Every
+  // check below tests the CONSUMER; the registration is checked last and only as a consequence.
+  {
+    const EC = await import("../engine/economy.js");
+    const CM = await import("../engine/craftmechanics.js");
+    const ec236 = C199.rules?.economy;
+
+    // ⛔ THE LOAD-BEARING RULE: RANK SCALES THE STAKE, NOT THE DISCOUNT.
+    const small1 = EC.bargainOutcome({ price: 8, rank: 1, margin: 20, economy: ec236 });
+    const small5 = EC.bargainOutcome({ price: 8, rank: 5, margin: 20, economy: ec236 });
+    check("CCODE-236 §5: rank does NOT deepen the cut — r1 and r5 save the same on a sack of grain",
+      small1.ok && small5.ok && small1.newPrice === small5.newPrice,
+      `r1 ${small1.newPrice} vs r5 ${small5.newPrice}`);
+    const big1 = EC.bargainOutcome({ price: 200, rank: 1, margin: 20, economy: ec236 });
+    const big5 = EC.bargainOutcome({ price: 200, rank: 5, margin: 20, economy: ec236 });
+    check("CCODE-236 §5: rank changes what SIZE of deal it reaches — r1 cannot move a caravan contract, r5 can",
+      big1.ok === false && big1.outOfReach === true && big5.ok === true);
+    // ⚠️ AND OUT-OF-REACH IS A REFUSAL, NOT A SMALLER EFFECT. A rank-1 haggler at a caravan contract is out
+    // of their depth, not slightly less persuasive — scaling it down would rebuild the discount ladder.
+    check("CCODE-236 §5: a deal beyond reach moves the price NOT AT ALL — refusal, never a smaller effect",
+      big1.newPrice === 200 && /too big to move/.test(big1.why));
+    check("CCODE-236 §5: a bargain measurably moves the SETTLED price, and says by what",
+      small1.newPrice < 8 && /margin 20/.test(small1.math), small1.math);
+    // ⚠️ §31.5 — both sides give something
+    // ⚠️ AND THE MAGNITUDE ITSELF IS GUARDED, which the rank gates above do NOT do. I mutated the saving to
+    // double and nothing went red: "r1 and r5 save the same" stays true when both are wrong together. The
+    // cap is the only thing standing between a bargain and a free item, so it is gated directly.
+    const capped = EC.bargainOutcome({ price: 100, rank: 5, margin: 9999, economy: ec236 });
+    const authoredCap = Number.isFinite(Number(ec236?.bargain?.savingCap)) ? Number(ec236.bargain.savingCap) : 0.3;
+    check(`CCODE-236 §5: the saving is CAPPED at ${(authoredCap * 100).toFixed(0)}% however good the roll — a bargain is never a gift`,
+      capped.ok && capped.fraction <= authoredCap + 1e-9 && capped.newPrice >= 100 * (1 - authoredCap) - 1e-9,
+      `${(capped.fraction * 100).toFixed(0)}% off`);
+
+    check("CCODE-236 §5: a won bargain owes a concession — the only social verb with a price on both sides",
+      small1.concessionOwed === true);
+    check("CCODE-236 §5: no ground given → no saving", EC.bargainOutcome({ price: 8, rank: 3, margin: 0, economy: ec236 }).ok === false);
+
+    // ⛔ PROVOKE takes the opponent's chosen line — and nothing when there is no line to take
+    check("CCODE-236 §6: provoke CLEARS state.tactic — the chosen action, gone, back to default",
+      CM.resolveProvoke({ tactic: "press-in" }, { margin: 12 }).ok === true
+      && CM.resolveProvoke({ tactic: "press-in" }, { margin: 12 }).tactic === null);
+    check("CCODE-236 §6: …and does NOTHING to a foe committed to nothing — a refusal, not a hollow win",
+      CM.resolveProvoke({ tactic: null }, { margin: 12 }).nothingToTake === true);
+
+    // ⚠️ SOOTHE removes heat, never reasons
+    const cool = CM.resolveSoothe({ momentum: 6 }, { margin: 20 });
+    const losing = CM.resolveSoothe({ momentum: -6 }, { margin: 20 });
+    check("CCODE-236 §6: soothe pulls momentum TOWARD zero from either side",
+      cool.momentum.after === 3 && losing.momentum.after === -3);
+    // ⛔ NEVER PAST ZERO: cooling a fight the other side is winning must not hand you the advantage.
+    const huge = CM.resolveSoothe({ momentum: 2 }, { margin: 200 });
+    check("CCODE-236 §6: …and never past zero — a soothe that overshot would be an attack",
+      huge.momentum.after === 0);
+    check("CCODE-236 §6: soothe never touches a damage track — it removes heat, not reasons (§31.5)",
+      cool.touchedDamage === false && !("health" in cool) && !("damage" in cool));
+
+    // …and ONLY NOW, the registration — as a consequence of the above, never as a substitute for it
+    const cmCfg = C199.craftMechanics || {};
+    for (const v of ["bargain", "provoke", "soothe"]) {
+      const sh = CM.shapeOfVerb(v, cmCfg);
+      check(`CCODE-236: \`${v}\` resolves to an effect-shape (${sh?.shape || "none"}) — SNG-263 §1 drops it`, !!sh?.shape);
+    }
+    check("CCODE-236 §5: bargain's operative is `scope`, because the rank axis IS the stake",
+      CM.shapeOfVerb("bargain", cmCfg)?.operative === "scope");
+  }
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

@@ -1,3 +1,12 @@
+> ⛔ **NUMBERS SUPERSEDED — THIS PLAN WAS BUILT PARTLY ON A STALE MATRIX. Re-measured 2026-08-23:**
+> Death is **32 crafts / 90 ranks**, not 30/84. **Step 2 is STRUCK** — `deathsense` and `the_true_feeling`
+> are `first_gift_template` cohort members and inherit their fields at load; authoring them would detach
+> them permanently (SYSTEM_SPEC §46.4). **Step 5 collapsed** — §31.2 exempts *The Cut Thread* by name and
+> the corpus is under the article threshold. **§4's veil proposal is WITHDRAWN** — Erik ruled 2026-08-23
+> that veil powers thin the Veil and that inward/outward is a per-craft heuristic. **§37.9's ward
+> conclusion is INVERTED** — Mind and Body are not robustness-audited, so their agreement was a shared gap,
+> not a norm. ⚠️ **The MEASUREMENT DISCIPLINE below stands; several of its conclusions do not.**
+
 # PROPOSAL — the Death audit, planned before it is written
 
 **Author:** Aevi (PO) · **Date:** 2026-08-23 · **Status:** ⛔ **FOR CCODE REVIEW — nothing authored yet**

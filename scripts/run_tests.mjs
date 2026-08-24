@@ -1,0 +1,69 @@
+#!/usr/bin/env node
+// ⛔ CCODE-226 — EVERY SUITE RUNS, EVEN AFTER ONE GOES RED.
+//
+// `npm test` chained 18 suites with `&&`. `content_ci` sits fourth and exits 1, so THE FOURTEEN AFTER IT
+// NEVER RAN — balance_sim, tradition_matrix, craft_crit, damage_sensitivity, wiring_audit and
+// engine_map --check among them. Aevi ran `tradition_matrix` by hand and it reported a failure nobody had
+// seen, because nothing had reached it in weeks.
+//
+// ⚠️ THIS IS THE SAME LESSON THIS REPO HAS LEARNED THREE TIMES, ONE LAYER UP: a run that stops early looks
+// exactly like a run that passed. Inside smoke.mjs a thrown reference deletes every gate after it and
+// reports zero failures; here a non-zero exit deletes every SUITE after it and reports one failure. The
+// tell is identical — the count of things that ran drops, and the count of failures does not rise.
+//
+// So: run all of them, always. Report a table. Exit 1 if ANY failed, naming every one.
+import { spawnSync } from "node:child_process";
+
+const SUITES = [
+  ["import_integrity", "node", ["tests/import_integrity.mjs"]],
+  ["smoke", "node", ["tests/smoke.mjs"]],
+  ["parse_probe", "node", ["tests/parse_probe.mjs"]],
+  ["content_ci", "node", ["tests/content_ci.mjs"]],
+  ["balance_sim", "node", ["tests/balance_sim.mjs"]],
+  ["skill_battle_sim", "node", ["tests/skill_battle_sim.mjs"]],
+  ["contest_sim", "node", ["tests/contest_sim.mjs"]],
+  ["growth_sim", "node", ["tests/growth_sim.mjs"]],
+  ["tradition_matrix", "node", ["tests/tradition_matrix.mjs"]],
+  ["roll_sensitivity", "node", ["tests/roll_sensitivity.mjs"]],
+  ["breadth_currency_sweep", "node", ["tests/breadth_currency_sweep.mjs"]],
+  ["endgame_scaling", "node", ["tests/endgame_scaling.mjs"]],
+  ["damage_sensitivity", "node", ["tests/damage_sensitivity.mjs"]],
+  ["staged_crafts_check", "node", ["tests/staged_crafts_check.mjs"]],
+  ["craft_crit", "node", ["tests/craft_crit.mjs"]],
+  ["world_drive_audit", "node", ["tests/world_drive_audit.mjs"]],
+  ["wiring_audit", "node", ["tests/wiring_audit.mjs"]],
+  ["engine_map --check", "node", ["scripts/engine_map.mjs", "--check"]],
+];
+
+const only = process.argv.slice(2).filter(a => !a.startsWith("-"));
+const quiet = process.argv.includes("--quiet");
+const run = only.length ? SUITES.filter(s => only.some(o => s[0].includes(o))) : SUITES;
+
+const results = [];
+for (const [name, cmd, args] of run) {
+  const t0 = Date.now();
+  const r = spawnSync(cmd, args, { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const out = (r.stdout || "") + (r.stderr || "");
+  const ok = r.status === 0;
+  // ⚠️ THE FAILURE COUNT IS READ FROM THE SUITE'S OWN OUTPUT where it prints one, so the table says HOW
+  // BADLY rather than just "red" — one red suite among eighteen is a very different morning from six.
+  const m = out.match(/(\d+)\s+FAILURE\(S\)/i) || out.match(/^FAIL/gm)?.length ? out.match(/(\d+)\s+FAILURE\(S\)/i) : null;
+  const fails = m ? Number(m[1]) : (ok ? 0 : (out.match(/^FAIL/gm) || []).length || null);
+  results.push({ name, ok, fails, ms: Date.now() - t0, out });
+  if (!quiet) process.stdout.write(`${ok ? "ok  " : "FAIL"}  ${name}${fails ? ` — ${fails} failure(s)` : ""}\n`);
+}
+
+const bad = results.filter(r => !r.ok);
+console.log("\n" + "-".repeat(64));
+console.log(`${results.length} suites ran · ${results.length - bad.length} green · ${bad.length} red`);
+if (bad.length) {
+  console.log("\n⛔ RED, AND EVERY ONE OF THEM RAN — no suite was skipped because an earlier one failed:");
+  for (const b of bad) {
+    console.log(`\n=== ${b.name}${b.fails ? ` (${b.fails} failure(s))` : ""} ===`);
+    const lines = b.out.split("\n").filter(l => /^(FAIL|✗|\s*⚠|Error|.*FAILURE\(S\))/.test(l));
+    console.log(lines.slice(0, 12).map(l => "  " + l.slice(0, 160)).join("\n") || "  (exit " + "non-zero" + ", no FAIL lines — read the suite directly)");
+    if (lines.length > 12) console.log(`  … and ${lines.length - 12} more`);
+  }
+  process.exit(1);
+}
+console.log("All suites green.");

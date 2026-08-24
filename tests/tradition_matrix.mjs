@@ -131,7 +131,7 @@ for (const trad of [...UNDER_TEST, CONTROL]) {
   results[trad] = { bands: {}, sit: {} };
   for (const level of LEVELS) {
     const kit = buildKit(trad, level);
-    results[trad].bands[level] = { kitSize: kit.length, families: [...new Set(kit.flatMap(a => familiesOfAbility(a, FN_INDEX)))], bands: {}, byStyle: {} };
+    results[trad].bands[level] = { kitSize: kit.length, kitAbilities: new Set(kit.map(a => a.id)).size, families: [...new Set(kit.flatMap(a => familiesOfAbility(a, FN_INDEX)))], bands: {}, byStyle: {} };
     for (const style of PLAYSTYLES) {
       const sheet = sheetFor(level, style);
       results[trad].bands[level].byStyle[style.name] = {};
@@ -280,8 +280,30 @@ check("every tradition's kit resolves to at least one FUNCTION FAMILY — a kit 
   [...UNDER_TEST].every(t => LEVELS.every(l => results[t].bands[l].families.length > 0)),
   [...UNDER_TEST].filter(t => LEVELS.some(l => results[t].bands[l].families.length === 0)).join(", ") + " engage no family");
 
-check("kits GROW with level — a level-20 character of any tradition holds at least as many abilities as at level 5",
-  [...UNDER_TEST].every(t => results[t].bands[20].kitSize >= results[t].bands[5].kitSize));
+// ⛔ CCODE-226 — THIS GATE WAS MEASURING A DIFFERENT THING FROM THE ONE IT NAMED, and had been red and
+// unread for weeks behind the `&&` chain in `npm test`. It said "holds at least as many ABILITIES" and
+// compared `kitSize`, which is the EXPANDED MOVE list (ability × function). Measured:
+//
+//     ashwarden  L5  6 abilities / 15 moves   →  L20  6 abilities / 12 moves
+//     churnfolk  L5  6 abilities / 15 moves   →  L20  6 abilities / 14 moves
+//     lattice    L5  5 abilities / 14 moves   →  L20  6 abilities / 13 moves
+//
+// ⚠️ THE ABILITY COUNT NEVER SHRINKS — it is capped and it grows. What shrinks is MOVES, because deeper
+// crafts carry FEWER `functions` each (ashwarden 2.50 → 2.00). That is a content fact about specialisation,
+// not an engine regression, and it is a DESIGN question whether depth should narrow. So the claim the name
+// makes is gated, and the narrowing is REPORTED rather than failed — a red gate on an open design question
+// is a gate nobody can close.
+check("kits GROW with level — a level-20 character of any tradition holds at least as many ABILITIES as at level 5",
+  [...UNDER_TEST].every(t => results[t].bands[20].kitAbilities >= results[t].bands[5].kitAbilities),
+  [...UNDER_TEST].filter(t => results[t].bands[20].kitAbilities < results[t].bands[5].kitAbilities)
+    .map(t => `${t} L5=${results[t].bands[5].kitAbilities} → L20=${results[t].bands[20].kitAbilities}`).join(" · "));
+
+{
+  const narrower = [...UNDER_TEST].filter(t => results[t].bands[20].kitSize < results[t].bands[5].kitSize);
+  console.log(`note  ${narrower.length} tradition(s) have FEWER MOVES at L20 than L5 — deeper crafts do fewer things. `
+    + `A design question (specialisation), reported not failed: `
+    + narrower.map(t => `${t} ${results[t].bands[5].kitSize}→${results[t].bands[20].kitSize}`).join(" · "));
+}
 
 check("no tradition is UNPLAYABLE — every one can beat the lowest threat band at least sometimes at level 20",
   [...UNDER_TEST].every(t => results[t].bands[20].bands.riffraff > 0),

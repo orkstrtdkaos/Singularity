@@ -158,6 +158,29 @@ check(`SYSTEM_SPEC header certifies the real core-rules count (${rulesCount})`,
   specRules && Number(specRules[1]) === rulesCount,
   `header says ${specRules?.[1] ?? "?"}, HEAD has ${rulesCount}`);
 
+// ---------- 3a-bis. ⛔ THE SPEC'S SECTIONS STILL EXIST (CCODE-225) ----------
+// Two people edit SYSTEM_SPEC.md from separate machines. On 2026-08-23 a whole section (§45) and a
+// re-measured table (§37.2) were written, gated, pushed — and silently removed a few commits later by an
+// edit made from a copy that predated them. NOTHING WENT RED: every §45 gate tests the CORPUS, so the
+// facts stayed true while the document that stated them was gone.
+//
+// ⚠️ THAT IS "A CHECK THAT AGREES WITH ITSELF" ONE LAYER UP. Gating a claim is not gating the claim's
+// presence. This gate is deliberately cheap and deliberately NOT a spelling test — it pins a section
+// number to one stable phrase, so rewording is free and deletion is not.
+for (const [num, phrase] of [
+  ["37.2", "RE-MEASURE THIS TABLE"],
+  ["44.",  "The corpus, as of"],
+  ["45.1", "RANK-FIRST AUTHORING"],
+  ["45.2", "Change sets"],
+  ["45.3", "seeking clock"],
+  ["45.4", "inheritProject"],
+]) {
+  check(`SYSTEM_SPEC still contains §${num} (${phrase})`,
+    new RegExp(num.replace(".", "\.") + "[\s\S]{0,400}?" + phrase).test(specSrc)
+    || specSrc.includes(phrase),
+    `§${num} is missing from SYSTEM_SPEC.md — restore it rather than deleting this line`);
+}
+
 // ---------- 3b. version coherence (CCODE-07) ----------
 // APP_VERSION stamps every feedback report; index.html's ?v= busts the cache. When they drift, bug
 // reports are filed against a version that was never running — which is how a stale 1.8.104 label

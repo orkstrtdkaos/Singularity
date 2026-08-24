@@ -158,45 +158,7 @@
 
 ---
 
-## 5. Hastened Grey  ·  `hastened_grey`
-
-**L1 · e6 · ashwarden · metaphysical · shape `strike` · harm `incapacitating`**  
-**status:** crit · backlash  
-**ability functions:** break, strike
-
-> Touch what is already failing and bring its end forward — a notched blade shears, a strained rope parts, a wound already open goes grey and stops closing. The Ashwardens' first offense: their work, applied against someone.
-
-**notFor:** Beginning an ending that was not underway — it HASTENS, always; anything new, whole and perfectly kept offers little grip; distance at first rank (this is a hand on the thing); taking it back.
-
-### r1 — Grey Hand
-
-**functions:** strike, break · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** damaging · ongoing · persists
-
-**grants:** Touch what is already failing and bring its end forward — a notched blade shears, a strained rope parts, and a WOUND ALREADY OPEN goes grey and stops closing. On a hurt person this is a killing pace, laid on by hand.
-
-**cannot:** It HASTENS what is underway. An unhurt, unarmoured, unworn target gives you very little to pull on — this craft rewards finishing, not opening. TOUCH ONLY at this rank.
-
-### r2 — Nearer End
-
-**functions:** strike, break · **gainAxes:** scope · **gains:** broaden · **harm:** incapacitating · ongoing
-
-**grants:** Work at a pace's distance, and on the sound as well as the failing — a whole man ends sooner, though a sound thing costs far more and gives less. What you take does not recover.
-
-**cannot:** The cost of taking something whole is real and you pay it in yourself. And a grey hand is a thing the Valley has stories about; people who watched will not travel with you.
-
-### r3 — Keeper's Due
-
-**functions:** strike, break · **gainAxes:** range · **gains:** deepen · **harm:** lethal · ongoing
-
-**grants:** You call the endings due — the failing and the sound, gates and engines and walls and men, everything within reach that was ever going to stop.
-
-**cannot:** ⚠ IT DOES NOT SORT. What is due is due, and EVERYONE ELSE INSIDE THE REACH IS STRUCK ONE RUNG LOWER — everything present is due, including yours. And the Hollow — who would end everything to end suffering — will hear about this and will want to talk to you.
-
-**bounds:** it HASTENS an ending; it does not BEGIN one · an unhurt, well-kept target gives little grip — this craft FINISHES · TOUCH ONLY at rank 1 · what you take does not recover · at rank 3 IT DOES NOT SORT
-
----
-
-## 6. Keening  ·  `keening`
+## 5. Keening  ·  `keening`
 
 **L1 · e4 · threnodist · combination · shape `strike` · harm `incapacitating`**  
 **status:** crit · backlash  
@@ -234,7 +196,7 @@
 
 ---
 
-## 7. Kept Vigil  ·  `kept_vigil`
+## 6. Kept Vigil  ·  `kept_vigil`
 
 **L1 · e4 · ashwarden · metaphysical · shape `sustain` · harm `incapacitating`**  
 **status:** ⚠️ no crit · ward:decay  
@@ -269,6 +231,44 @@
 **cannot:** ⚠ THIS IS THE CRAFT ASHWARDENS ARGUE ABOUT. Holding an ending open is not mercy by default; sometimes it is only refusal, and the thing held knows the difference. The Hollow think it obscene.
 
 **bounds:** it HOLDS, it does not mend · ONE THING, and you can do little else · when you stop, it resumes exactly where it was
+
+---
+
+## 7. Necrotic Strike  ·  `hastened_grey`
+
+**L1 · e6 · ashwarden · metaphysical · shape `strike` · harm `lethal`**  
+**status:** crit · dmg:decay · backlash  
+**ability functions:** break, strike
+
+> ⛔ TOUCH WHAT IS ALREADY FAILING AND BRING ITS END FORWARD. A notched blade shears, a strained rope parts, a wound already open goes grey and stops closing. ⚠️ IT IS A VULNERABILITY, NOT A BLOW — it makes a wound worse, and where there is no wound it has almost nothing to take hold of. The Ashwardens' first offence: their own work, turned on someone.
+
+**notFor:** Beginning an ending that was not underway — it HASTENS, until r3. Anything new, whole and perfectly kept offers almost no grip. Distance at first rank: this is a hand on the thing. Taking it back.
+
+### r1 — Necrotic Touch
+
+**functions:** strike, break · **gainAxes:** ⛔ NONE · **gains:** deepen · **harm:** damaging · ongoing · persists
+
+**grants:** ⛔ A HAND ON WHAT IS ALREADY FAILING. Lay ANTISOAK 4 on it and strike the same instant — the wound that was open goes grey and stops closing, and everything that gets through soak from now on lands harder. ⚠️ ON A HURT PERSON THIS IS A KILLING PACE, laid on by hand.
+
+**cannot:** ⛔ IT AMPLIFIES; IT DOES NOT OPEN. Against something unhurt, unarmoured and well kept there is almost nothing to take hold of, and a blow fully stopped by soak takes the antisoak with it. TOUCH ONLY at this rank.
+
+### r2 — Nearer End
+
+**functions:** strike, break · **gainAxes:** range · **gains:** broaden · **harm:** incapacitating · ongoing
+
+**grants:** ⛔ THE GREY LEAVES YOUR HAND. Work at a pace's distance, ANTISOAK 6, and the failing no longer has to be a body — a gate's hinge, an engine's seam, a rope under load. ⚠️ What you take does not recover.
+
+**cannot:** Still a vulnerability: something must already be giving way. ⛔ AND IT REACHES ONE THING — you can stand back now, you cannot spread it.
+
+### r3 — Keeper's Due
+
+**functions:** strike, break · **gainAxes:** targets, damage · **gains:** broaden · **harm:** lethal · ongoing
+
+**grants:** ⛔ YOU CALL THE ENDINGS DUE — everything within reach at once, ANTISOAK 8, and here alone THE GREY OPENS WHAT WAS CLOSED: a sound thing is given a seam it did not have, and a wound that already existed is torn wider before the tick lands. ⚠️ THIS IS THE ONE RANK THAT DOES NOT NEED A WOUND, and it is why the rank is called what it is.
+
+**cannot:** ⛔ IT DOES NOT SORT. What is due is due, and EVERYONE ELSE INSIDE THE REACH IS STRUCK ONE RUNG LOWER — allies, bystanders, and the ground you are standing on. ⚠️ You cannot aim it and you cannot exclude yourself from what is present.
+
+**bounds:** ⛔ IT AMPLIFIES A WOUND, IT DOES NOT CREATE ONE — until r3, which is the whole reason r3 is a capstone · ⛔ A BLOW FULLY STOPPED BY SOAK TAKES THE ANTISOAK WITH IT. Armour beats this craft in a way it beats almost nothing else · ⚠️ TOUCH ONLY at rank 1; one target until rank 3 · ⛔ AT RANK 3 IT DOES NOT SORT — everyone in reach takes a rung, including the people you came with
 
 ---
 

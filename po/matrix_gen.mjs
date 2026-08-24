@@ -221,9 +221,53 @@ function build(groupKey) {
   return L.join("\n") + "\n";
 }
 
+
+/** ⛔ --detail: THE WALKTHROUGH VIEW. Erik 2026-08-23: "walk through each skill, see its complete text per
+ *  rank as well as by-rank functions and status." The table view SPOTS gaps; this one is for JUDGING a
+ *  craft, so grants and cannot are printed verbatim and nothing is truncated. */
+function detail(groupKey) {
+  const sel = membersOf(groupKey);
+  const all = loadAbilities();
+  const list = all.filter(a => sel.kind === "ids" ? sel.ids.has(a.id) : sel.tids.includes(a.tradition))
+    .sort((x, y) => (x.levelReq || 0) - (y.levelReq || 0) || x.name.localeCompare(y.name));
+  const L = [];
+  L.push(`# WALKTHROUGH — ${groupKey.toUpperCase()}`, "");
+  L.push("⛔ **GENERATED — `node po/matrix_gen.mjs " + groupKey + " --detail`. Full rank text, verbatim.**", "");
+  L.push(`**${list.length} crafts · ${list.reduce((n, a) => n + (a.tree || []).length, 0)} ranks** · ${new Date().toISOString().slice(0, 10)}`, "");
+  let i = 0;
+  for (const a of list) {
+    i++;
+    const m = a.mechanic || {};
+    const st = [];
+    st.push(m.crit ? "crit" : "⚠️ no crit");
+    if ((m.wardTypes || []).length) st.push(`ward:${m.wardTypes.join("/")}`);
+    if (m.damageType) st.push(`dmg:${m.damageType}`);
+    for (const k of ["sense", "obscure", "gated", "backlash", "upkeep", "peril"]) if (a[k]) st.push(k);
+    if (a._fromTemplate) st.push("*first-gift*");
+    L.push("---", "", `## ${i}. ${a.name}  ·  \`${a.id}\``, "");
+    L.push(`**L${a.levelReq ?? "—"} · e${a.energyCost ?? "—"} · ${a.tradition} · ${a.powerSystem} · shape \`${a.shape || "—"}\` · harm \`${a.harmRung || "—"}\`**  `);
+    L.push(`**status:** ${st.join(" · ")}  `);
+    L.push(`**ability functions:** ${(a.functions || []).join(", ") || "⚠️ none"}`, "");
+    if (a.description) L.push(`> ${a.description}`, "");
+    if (a.notFor) L.push(`**notFor:** ${typeof a.notFor === "string" ? a.notFor : (a.notFor || []).join(" · ")}`, "");
+    for (const t of (a.tree || [])) {
+      const rf = [];
+      if (t.imposes) rf.push("imposes");
+      if (t.ongoingHarm) rf.push("ongoing");
+      if (t.persistUntilHealed) rf.push("persists");
+      L.push(`### r${t.rank} — ${t.name}`, "");
+      L.push(`**functions:** ${(t.functions || []).join(", ") || "⚠️ NONE"} · **gainAxes:** ${(t.gainAxes || []).join(", ") || "⛔ NONE"} · **gains:** ${t.gains || "—"} · **harm:** ${t.harmRung || "—"}${rf.length ? " · " + rf.join(" · ") : ""}`, "");
+      L.push(`**grants:** ${t.grants || "⛔ MISSING"}`, "");
+      L.push(`**cannot:** ${t.cannot || "⛔ MISSING"}`, "");
+    }
+    if ((a.bounds || []).length) L.push("**bounds:** " + a.bounds.map(b => typeof b === "string" ? b : b.text).join(" · "), "");
+  }
+  return L.join("\n") + "\n";
+}
+
 const arg = process.argv[2];
 if (!arg) { console.error("usage: node po/matrix_gen.mjs death|mind|body|<tid,...> [--out FILE]"); process.exit(2); }
-const md = build(arg);
+const md = process.argv.includes("--detail") ? detail(arg) : build(arg);
 const oi = process.argv.indexOf("--out");
 if (oi > -1 && process.argv[oi + 1]) { fs.writeFileSync(path.join(ROOT, process.argv[oi + 1]), md); console.log("wrote", process.argv[oi + 1]); }
 else console.log(md);

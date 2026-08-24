@@ -24,9 +24,9 @@ Crafts marked *first-gift* inherit `levelReq`/`energyCost`/`shape`/`harmRung` an
 | **Shared Weight** | 1 | thr | mag 6 | 5 | heal | incap | — | — | **crit** |  | **Portion Taken** +heal, +sustain | **Steady Hand** +heal, +sustain, +empower · *scope* | **Borne Grief** +heal, +sustain, +empower · *scope, targets* |
 | **True Account** | 1 | ash | mag 5 | 4 | reveal | incap | — | — | — | sense | **Reckoning** +reveal | **Ledger of a Place** +reveal · *scope* | **Whole Reckoning** +reveal, +foresee, +empower · *range, scope* |
 | **Wellspring** | 1 | thr | mag 3 | 1 | bolster | — | — | — | — |  | **More in the Depth** +sustain | **Carried Weight** +sustain, +empower · *targets* | **Wellspring Holds** +sustain, +empower · *scope* |
-| **Dread** | 2 | ash | mag 4 | 4 | hobble | incap | — | — | — | gated | **Dread** +hinder ⟨imposes staggered · crit→action_loss · resist mental⟩ | **Cold Room** +hinder, +bind · *scope* | **Certain Hour** +hinder, +bind · *duration* |
+| **Dread** | 2 | ash | mag 4 | 4 | hobble | incap | — | — | **crit** | gated | **Dread** +hinder ⟨imposes staggered · crit→action_loss · resist mental⟩ | **Cold Room** +hinder, +bind · *scope* | **Certain Hour** +hinder, +bind · *duration* |
 | **Feeling Road** | 2 | thr | mag 4 | 1 | reposition | — | — | — | — |  | **Resonance Trail** +reveal | **Feeling Landmark** +travel | **Long Trail** +travel · *range, scope, targets* |
-| **Felt Wall** | 2 | thr | mag 4 | 1 | guard | — | — | feeling, appetite | evade 4 | sense | **Early Feel** +reveal | **Feeling Guard** +shield | **Felt Ward** +shield · *range, scope* |
+| **Felt Wall** | 2 | thr | mag 4 | 1 | guard | — | — | feeling, appetite | **crit** · evade 4 | sense | **Early Feel** +reveal | **Feeling Guard** +shield | **Felt Ward** +shield · *range, scope* |
 | **Grey Hand** | 2 | ash | mag 4 | 5 | hobble | incap | — | — | **crit** | gated | **Grey Hand** +hinder ⟨imposes staggered · crit→incapacitated · resist physical · persists⟩ | **Long Grey** +hinder · *range, duration* ⟨imposes staggered · crit→incapacitated · resist physical · persists⟩ | **Withered Hour** +hinder · *duration, scope* ⟨imposes incapacitated · crit→incapacitated · resist physical · persists⟩ |
 | **Grey Road** | 2 | ash | mag 4 | 5 | reposition | — | — | decay, living | — |  | **Through Here** +move, +resist | **Passage** +move, +resist, +open · *damage, targets* | **Long Walk** +move, +resist, +open · *scope* |
 | **Grief Strike** | 2 | thr | 2d6 | 6 | strike | dmg | — | — | **crit** · antisoak |  | **True Feeling** +strike, +hinder ⟨antisoak⟩ | **Unguarded Place** +strike, +hinder · *damage, quality* ⟨antisoak⟩ | **Shattered Fortification** +strike, +hinder · *duration, targets* ⟨imposes staggered · crit→incapacitated · resist mental · ongoing · persists · antisoak⟩ |
@@ -37,12 +37,12 @@ Crafts marked *first-gift* inherit `levelReq`/`energyCost`/`shape`/`harmRung` an
 | **Wither** | 2 | ash | 2d6 | 5 | damage | dmg | — | — | **crit** |  | **Wither** +hinder ⟨ongoing⟩ | **Grey Touch** +break · *duration, quality* | **Withering** +break · *range* |
 | **Ask the Dead** | 3 | ash | mag 5 | 5 | setup | — | — | — | **crit** | gated upkeep | **Ask the Dead** +summon | **Long Question** +summon · *range* | **Full Account** +summon · *quality* |
 | **Calling Back** | 3 | ash | 2d6+2 | 12 | healing | incap | decay | — | **crit** | upkeep | **From the Threshold** +heal, +summon | **From the Near Dark** +heal, +summon · *range, duration, damage* | **From the Deep Dark** +heal, +summon · *range* |
-| **Death-Ward** | 3 | ash | mag 5 | 6 | guard | — | — | decay, judgement | soak 5 |  | **Death-Ward** +ward | **Turned Hour** +ward, +resist · *duration* | **Not Today** +ward, +resist · *range, targets* |
-| **Draw Down** | 3 | ash | 3d6+2 | 6 | damage | leth | — | — | — | gated | **Draw Down** +strike, +heal | **Long Draught** +strike, +heal · *range* | **Emptied Vessel** +strike, +heal |
+| **Death-Ward** | 3 | ash | mag 5 | 6 | guard | — | — | decay, judgement | **crit** · soak 5 |  | **Death-Ward** +ward | **Turned Hour** +ward, +resist · *duration* | **Not Today** +ward, +resist · *range, targets* |
+| **Draw Down** | 3 | ash | 3d6+2 | 6 | damage | leth | — | — | **crit** | gated | **Draw Down** +strike, +heal | **Long Draught** +strike, +heal · *range* | **Emptied Vessel** +strike, +heal |
 | **Set Hand** | 3 | ash | mag 6 | 9 | construct | leth | decay | — | **crit** | upkeep | **Set Hand** +summon, +bind | **Standing Crew** +summon, +bind, +command · *scope* | **Long Labour** +summon, +bind, +command · *autonomy* |
 | **Shared Grief** | 3 | thr | mag 6 | 7 | bolster | — | — | — | — | gated | **Shared Grief** +empower | **Named Sorrow** +empower, +reveal | **Long Lament** +empower · *range, duration, scope, targets* |
 | **Names of the Lost** | 4 | thr | mag 7 | 11 | bolster | — | — | — | — | gated | **Names of the Lost** +empower | **Kept Names** +empower · *damage, autonomy* | — |
-| **Grief That Stops** | 5 | thr | mag 8 | 13 | hobble | leth | feeling | — | — |  | **Grief That Stops** +bind | **All Of It** +bind | — |
+| **Grief That Stops** | 5 | thr | mag 8 | 13 | hobble | leth | feeling | — | **crit** |  | **Grief That Stops** +bind | **All Of It** +bind | — |
 | **Last Lament** | 5 | thr | mag 9 | 13 | bolster | — | — | — | — | gated | **Last Lament** +empower, +restore | — | — |
 | **The Cut Thread** | 5 | ash | 5d6+6 | 14 | damage | leth | — | — | **crit** | gated upkeep | **The Cut Thread** +strike | — | — |
 
@@ -52,7 +52,7 @@ Crafts marked *first-gift* inherit `levelReq`/`energyCost`/`shape`/`harmRung` an
 
 | gap | n (crafts) | crafts |
 |---|---|---|
-| no `mechanic.crit` | 19 | Attended End, Carried Name, Deathsense, Feeling-Sense, Kept Vigil, True Account, Wellspring, Dread, +11 more |
+| no `mechanic.crit` | 14 | Attended End, Carried Name, Deathsense, Feeling-Sense, Kept Vigil, True Account, Wellspring, Feeling Road, +6 more |
 | no `wardTypes` | 27 | Attended End, Carried Name, Deathsense, Feeling-Sense, Hastened Grey, Keening, Palework, Shared Weight, +19 more |
 | no `imposes` on any rank | 27 | Attended End, Carried Name, Deathsense, Feeling-Sense, Hastened Grey, Kept Vigil, Palework, Shared Weight, +19 more |
 | ⚠️ *(for reference — `imposes` RANK OCCURRENCES in this set: 9)* | | |

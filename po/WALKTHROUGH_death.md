@@ -122,13 +122,13 @@
 
 ## 4. Feeling-Sense  ·  `the_true_feeling`
 
-**L1 · e1 · threnodist · wild_nanite · shape `setup` · harm `none`**  
+**L1 · e3 · threnodist · wild_nanite · shape `setup` · harm `none`**  
 **status:** ⚠️ no crit · *first-gift*  
 **ability functions:** reveal, track
 
 > Read what is actually felt — not what is shown, what is present.
 
-**notFor:** 
+**notFor:** Facts. This is a feeling-sense and it produces feelings — not names, not events, not what happened. ⚠️ Reading the GUARDED, who can close. And catching a liar who believes himself: sincerity is what it measures.
 
 ### r1 — The Actual State
 
@@ -136,25 +136,25 @@
 
 **grants:** Feel the true emotional state of a person or room — not what is displayed, what is actually present underneath it.
 
-**cannot:** ⛔ IT READS WHAT IS FELT, NOT WHAT IS TRUE. A person sincerely feeling a wrong thing reads as sincere.
+**cannot:** ⛔ IT READS WHAT IS FELT, NOT WHAT IS TRUE. A person sincerely feeling a wrong thing reads as sincere — this cannot catch a liar who believes himself, and Veilwrights train for exactly that.
 
 ### r2 — The Feeling Trail
 
-**functions:** reveal, track · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** —
+**functions:** reveal, track · **gainAxes:** duration, range · **gains:** broaden · **harm:** —
 
 **grants:** Track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched.
 
-**cannot:** ⚠️ The trace fades with time and with distance from the person who left it. A cold trail gives you a direction and no more.
+**cannot:** ⛔ FRESH TRAILS GIVE YOU THE PERSON AND THE FEELING. Past a day, or once the trail leaves the place it was laid, you get a DIRECTION AND NOTHING ELSE — and two feelings crossing the same ground read as one.
 
 ### r3 — The Emotional History
 
-**functions:** reveal, track · **gainAxes:** ⛔ NONE · **gains:** deepen · **harm:** —
+**functions:** reveal, track · **gainAxes:** scope, quality · **gains:** deepen · **harm:** —
 
 **grants:** Read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming.
 
-**cannot:** ⛔ What you read of a history, you carry some of. A place that has been carrying something for a century does not put it down when you arrive.
+**cannot:** ⛔ IT GIVES YOU THE FEELING OF A HISTORY AND NONE OF ITS FACTS. You learn that a valley is ashamed; you do not learn what it did. Names, dates and events are not feelings and this will not produce them. ⚠️ And a history nobody felt strongly leaves nothing to read — the quiet crimes are quiet here too.
 
-**bounds:** it reads WHAT IS FELT, not what is TRUE — a person sincerely wrong reads sincere · THE GUARDED CAN CLOSE · what you read of a history, you carry some of
+**bounds:** ⛔ It reads WHAT IS FELT, not what is TRUE — a person sincerely wrong reads sincere · ⛔ THE GUARDED CAN CLOSE. Anyone declaring obscure in the sense slot is answered by the tie rule, and the tie is theirs · ⛔ FEELINGS, NEVER FACTS — at every rank. It will not name a person, a date or an event
 
 ---
 

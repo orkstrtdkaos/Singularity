@@ -828,7 +828,11 @@
     "wardTypes": [
      "decay",
      "judgement"
-    ]
+    ],
+    "crit": {
+     "success": "The sign holds against more than it was laid for — whatever was reaching stops reaching, and does not try that door again.",
+     "failure": "You warded the unnatural and the ordinary walked in. Nothing was stopped, and you spent the vigil watching the wrong direction."
+    }
    },
    "rankDeltas": [
     {
@@ -1257,7 +1261,11 @@
     "marginFloorPer": 0.02,
     "range": 1,
     "targets": 1,
-    "note": "T-III, lethal. The damage it deals RESTORES the wielder — 'their wound is your mending.'"
+    "note": "T-III, lethal. The damage it deals RESTORES the wielder — 'their wound is your mending.'",
+    "crit": {
+     "success": "More comes across than you reached for, and it arrives warm and it does not feel like theft. ⚠️ That is the danger — the craft is easiest exactly when it should be hardest.",
+     "failure": "The life goes out of it and none of it reaches you. You have ended something for nothing, and it is still ending while you stand there."
+    }
    },
    "rankDeltas": [
     {
@@ -1398,7 +1406,11 @@
     "duration": 3,
     "targets": 1,
     "variance": 4,
-    "note": "SOCIAL attribute, incapacitating. variance 4 because its own bound says 'you do not get to choose HOW it acts on that'"
+    "note": "SOCIAL attribute, incapacitating. variance 4 because its own bound says 'you do not get to choose HOW it acts on that'",
+    "crit": {
+     "success": "The ending arrives early and arrives ACCURATE. It is not the fear of dying that stops them, it is the recognition — and recognition does not wear off when the moment does.",
+     "failure": "You show a thing an ending it has already accepted. It looks back at you steadily, and now you are the one who has been read."
+    }
    },
    "rankDeltas": [
     {

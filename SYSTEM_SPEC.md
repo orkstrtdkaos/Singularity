@@ -3126,3 +3126,105 @@ nearly wrote "the engine is ready and no content uses it."** ⛔ **57 crafts car
 ⚠️ **That is the §45.1 failure exactly — a reader looking one level away from the authoring and reading
 the resulting `null` as "unauthored" — committed by me, in the measurement for the section about it, one
 step before it went into the spec as fact.**
+
+---
+
+## 46. ⛔ THE REDISCOVERY TAX — 2026-08-23
+
+**Erik: *"let's not continue to rediscover things but keep the latest up to date AND fix/update things
+that are out of date."*** ⛔ **THIS SECTION EXISTS BECAUSE ONE SESSION REDISCOVERED SIX THINGS THE PROJECT
+ALREADY KNEW, AND TWO OF THEM WERE WRITTEN IN THIS FILE.**
+
+### 46.1 What was rediscovered, and what it cost
+
+| rediscovered | already existed at | cost |
+|---|---|---|
+| the four social verbs and what each means | ⛔ **§31.5, written 2026-08-15** | I re-derived the definitions and proposed a `bargain` contract before finding them |
+| `bargain` is not Demonic-only — any tradition wants it because there is an economy | ⛔ **Erik's ruling, 2026-08-15** | I asked him the same question again |
+| the economy is built | `economy.json` + `engine/economy.js` | I read a doc dated 2026-08-04 saying *"entirely unbuilt"* and nearly repeated it |
+| the veil primary was tried on `numinous` and reverted | Erik, 2026-08-08 | I proposed the same move for Death |
+| `valley_craft` has parents | §44.2, **after two prior corrections** | the third instance |
+| `MATRIX_death.md` was stale | — | a twelve-step audit planned against untrue numbers |
+
+⚠️ **THE PATTERN IS NOT FORGETTING. IT IS DERIVING BEFORE LOOKING.** Every one of these was reachable by a
+search that took under a minute, and in each case deriving felt like rigour. ⛔ **A derivation that
+reproduces an existing ruling is not a confirmation — it is a search that was not run.**
+
+⛔ **STANDING RULE: BEFORE DERIVING A DEFINITION, A VOCABULARY, OR A DESIGN POSITION, GREP THE SPEC AND
+SEARCH PAST SESSIONS FOR IT.** The question is never *"should I search?"* — it is *"is there any reason
+not to?"*
+
+### 46.2 ⛔ CHECK THE CALLER, NOT ONLY THE RULE
+
+**CCode, on `foothills`:** *"351 is the number I reported when I closed the source ticket. True in the
+harness, false in the game, because I checked the rule and never the caller."* **Nothing loaded the file
+and `groundRow` never passed the argument, so the foothill branch read `null` on every call the game has
+ever made.** ⛔ **The harmonic 50/50-tie rule, described to me as proven, had never once executed.**
+
+⚠️ **I made the same error from the other end in the same file on the same day** — I read `craftSource` and
+`fieldOfSource`, built a causal story about silent misgrading, and never traced whether the first could
+reach the second. **It could not: `schoolForTradition` never returns null, so the tradition table was
+unreachable.** I reported *wrong answers* where the truth was *no answer*.
+
+**THE RULE: a function that behaves correctly is not a feature. TRACE THE CALL PATH FROM SOMETHING THE
+GAME ACTUALLY DOES, or you have tested a rule nobody invokes.**
+
+### 46.3 ⛔ A NUMBER WITHOUT A UNIT IS A VALUE WITHOUT A LAYER
+
+**CCode's §45.1 reported `imposes` 14 / `ongoingHarm` 7 / `persistUntilHealed` 4. My generator reported
+19 / 10 / 6. Both correct — his counted CRAFTS, mine counted RANK OCCURRENCES, and neither said which.**
+
+⛔ **TWO DOCUMENTS STATED DIFFERENT FIGURES FOR THE SAME FIELDS AND NOTHING RECONCILED THEM.** ⚠️ **It
+recurred within two days** — his gainAxes detector said 177 where mine said 227.
+
+**THE RULE: EVERY COUNT CARRIES ITS UNIT IN THE COLUMN HEADER.** `imposes (crafts)`, not `imposes`.
+
+### 46.4 ⛔ LOADER PARITY — ANY TOOL WALKING THE CATALOGUE MERGES `first_gift_template`
+
+**`engine/state.js` fills only ABSENT fields and shallow-merges `mechanic`. A tool that reads the FILES
+sees 25 crafts missing `levelReq`, `shape`, `harmRung` and `mechanic` that are not missing at all.**
+
+⛔ **THIS HAS NOW FIRED THREE TIMES:** the old matrix generator could not see `deathsense` or
+`the_true_feeling`; my work order told CCode to author the four fields onto them, **which would have
+detached them from the shared block permanently**; and `SNG-263 §5` reports *"7 crafts LOST their authored
+mechanic"* — ⚠️ **all seven are cohort members, and because it is a RATCHET it reads as a REGRESSION.**
+
+**THE RULE: one shared loader-parity helper. A gate that reads files and calls it the corpus is making the
+same error as reading the matrix and calling it the corpus, one level down.**
+
+### 46.5 ⛔ A REVERSED DECISION LEAVES ARMED RECORDS, NOT STALE ONES
+
+**`ability_rename_map.json` held 32 rows mapping LIVE crafts onto `attunement`, which does not exist.
+SNG-454's sense cull was REVERSED by Erik; the rows outlived the decision.**
+
+⚠️ **A stale row is wrong. AN ARMED ROW IS WRONG AND LOADED** — wiring that map as a save migration would
+have emptied working kits: `deathsense`, `body_read`, `echo_memory` and 29 more.
+
+**THE RULE: WHEN A DECISION IS REVERSED, SWEEP WHAT IT WROTE. The reversal is not complete until its
+artifacts are.** ⛔ **Pruned 2026-08-23; the 8 remaining dead-target rows are inert because their sources
+are dead and can never fire.**
+
+### 46.6 ⛔ A CHAIN THAT HALTS HIDES EVERYTHING AFTER IT
+
+**`npm test` chains on `&&`. `content_ci` exits 1, so FOURTEEN suites after it never run** — `balance_sim`,
+`tradition_matrix`, `craft_crit`, `damage_sensitivity`, `wiring_audit`, `engine_map --check`.
+
+⚠️ **A headline of "4,003 pass / 0 fail" was `smoke.mjs` alone; `content_ci` is another 3,125.** ⛔ **AND
+FAILURES CAN GO DOWN FOR THE WRONG REASON** — untracked `po/` files failed `smoke`, halting the chain
+early, and the count fell 24 → 1 while nothing improved.
+
+**THE RULE: a suite count must state its COVERAGE. `tradition_matrix` reports a failure nobody has seen
+because the chain never reaches it.**
+
+### 46.7 ⛔ DOCUMENTS DESCRIBING SYSTEM STATE GO STALE SILENTLY AND ARE BELIEVED
+
+**`po/REPLY_aevi_SNG-289_priceshift.md` (2026-08-04) says the economy is *"fully specced, entirely
+unbuilt — purse, five currencies, worth bands, conversion, traders-as-NPCs: none of it exists."***
+
+**Measured 2026-08-23: `economy.json` LIVE and loaded · `engine/economy.js` shipping `priceOf`,
+`priceLine`, `shiftNeed`, `regionDemand` · 42 of 42 items carrying `worth` · five currencies authored.**
+⛔ **ONLY THE PURSE IS ACTUALLY MISSING.**
+
+⚠️ **A design document is a snapshot with no expiry and no gate.** ⛔ **THE RULE: a doc asserting what
+EXISTS carries its measurement date in the sentence, and any doc older than a milestone is re-measured
+before it is cited.** **Never cite a state claim you have not re-run.**

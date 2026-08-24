@@ -27,7 +27,8 @@
    "scarce": 1.8,
    "absent": 2.5
   },
-  "rule": "⚠️ NEED DOMINATES AND `none` IS A HARD ZERO — Erik's correction. If a place does not want a thing, scarcity is irrelevant: nobody bids on what nobody uses. Scarcity only MODULATES an existing need, it never creates one. A one-axis model priced engine parts high in the Quickwood because they are rare there; they are rare there because nobody wants them."
+  "rule": "⚠️ NEED DOMINATES AND `none` IS A HARD ZERO — Erik's correction. If a place does not want a thing, scarcity is irrelevant: nobody bids on what nobody uses. Scarcity only MODULATES an existing need, it never creates one. A one-axis model priced engine parts high in the Quickwood because they are rare there; they are rare there because nobody wants them.",
+  "_bargainDoesNotBank_20260823": "⛔ ERIK'S CLARIFICATION, 2026-08-23. \"Not banking the deal\" means A BARGAIN NEVER PERMANENTLY CHANGES WHAT A THING IS WORTH — it does NOT mean the engine has no standard pricing. ⚠️ THE ENGINE KNOWS THE STANDARD PRICE AND MUST: `worthBands[item.worth] × need × scarcity` is the honest number the GM quotes, and it is the SAME number the next time anyone asks. A bargain moves what THIS deal settles at and nothing else. ⛔ VERIFIED AT RUNTIME 2026-08-23: standard price 4 before a won bargain, 3.98 settled, 4 again after — `item.worth`, region `need` and `scarcity` all untouched. ⚠️ THE FAILURE THIS FORBIDS: a haggler who talks a merchant down and thereby REPRICES grain for the region. A bargain is a conversation, not an economic event."
  },
  "currencies": [
   {

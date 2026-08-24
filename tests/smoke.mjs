@@ -8049,10 +8049,14 @@ await (async () => {
 
   // wiring: §1 grants computed + excluded, §3 suggested, §2 folded.
   const appSrc192 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
-  check("192 §1: the ability step computes native grants and EXCLUDES them from the choosable pool", /const grantIds = nativeGrantIdsFor\(\{ domains: state\.domains/.test(appSrc192) && /choosable = okAb\.filter\(a => !grantSet\.has\(a\.id\)\)/.test(appSrc192));
+  check("192 §1: the ability step computes native grants and EXCLUDES them from the choosable pool", // ⚠️ CCODE-224: REPOINTED AT THE CLAIM. This asserted the exact spelling `okAb.filter(a => !grantSet…)`,
+    // and went red when the exclusion moved into `creationPool` — correct behaviour, red gate, which is the
+    // §37.2 failure in miniature. What must be true is that grants are COMPUTED and HANDED to the pool rule;
+    // that they are then really excluded is proven against live content by the CCODE-224 gate below.
+    /const grantIds = nativeGrantIdsFor\(\{ domains: state\.domains/.test(appSrc192) && /creationChoosable\(state, grantSet\)/.test(appSrc192) && /grantIds: grantSet/.test(appSrc192));
   check("192 §1: grants are shown as a non-spendable 'yours by right' group", /Yours by right of being/.test(appSrc192) && /don't spend a pick on these/.test(appSrc192));
   check("192 §3: the ability step calls suggestForCreation with the prologue + bio", /suggestForCreation\(\{/.test(appSrc192) && /prologueTags: state\.prologue\?\.tags/.test(appSrc192));
-  check("192 §2: the full pool is folded behind a details/summary (no 45-button wall)", /See all crafts your domains open/.test(appSrc192));
+  check("192 §2: the full pool is folded behind a details/summary (no 45-button wall)", /<details[\s\S]{0,400}?<summary[\s\S]{0,200}?see all crafts your domains open/i.test(appSrc192));
 }
 
 // --- SNG-192 Phase B §6b: the power-source common-ground window (Erik's provable warning case) ---
@@ -17496,6 +17500,87 @@ await (async () => {
     const menders = A45.filter(a => (a.functions || []).some(f => healFns45.has(String(f).toLowerCase()))).length;
     check(`CCODE-223: §45.6 — healing is authored as a VERB and ${menders} crafts carry one (a \`heal\` FIELD would find zero)`,
       menders > 0, `${menders} crafts`);
+  }
+
+  // 5p · ⛔ CCODE-224 (Erik's backlog 1) — THE CREATE SCREEN DRAWS THE REAL WHEEL, and the rule deciding
+  // what a player may pick is one function shared by the wheel and the list under it.
+  {
+    const WG = await import("../engine/wheelgeom.js");
+    const TR = await import("../engine/traditions.js");
+    const cat224 = C199.abilities || {};
+    const idx224 = C199.traditionIndex;
+    const dom224 = { primary: (idx224?.stations || [])[0]?.traditionId || "death", secondary: null, tertiary: null };
+    const opts224 = { domains: dom224, traditionIndex: idx224, domainAccess: TR.domainAccess };
+    const pool = WG.creationPool(cat224, opts224);
+
+    check(`CCODE-224: creation offers a non-empty pool from one shared rule (${pool.length} crafts for ${dom224.primary})`,
+      pool.length > 0, `${pool.length}`);
+
+    // ⛔ DEPTH IS EARNED IN PLAY, NEVER BOUGHT AT CREATION. The wheel DRAWS rank 2+ (that is the point —
+    // the spoke running out to its capstone), so the rule is the only thing stopping them being clickable.
+    check("CCODE-224: nothing above rank 1 is pickable at creation, however the wheel paints it",
+      pool.every(a => (a.levelReq || 1) === 1), pool.filter(a => (a.levelReq || 1) > 1).map(a => a.id).slice(0, 3).join(","));
+
+    // ⚠️ A PICK SPENT ON A CRAFT YOU ALREADY GET FREE IS A WASTED PICK (SNG-192 §1).
+    const someId = pool[0]?.id;
+    check("CCODE-224: a granted craft is removed from the pool, so no pick is ever wasted on one",
+      someId ? !WG.creationPool(cat224, { ...opts224, grantIds: [someId] }).some(a => a.id === someId) : false);
+    check("CCODE-224: …and the grant list is accepted as a Set as well as an array (app.js passes a Set)",
+      someId ? !WG.creationPool(cat224, { ...opts224, grantIds: new Set([someId]) }).some(a => a.id === someId) : false);
+
+    // ⛔ THE POOL IS THE DOMAIN'S, NOT A CONSTANT. Different people, different wheel.
+    const other = (idx224?.stations || []).map(s => s.traditionId).find(t => t !== dom224.primary);
+    const poolB = WG.creationPool(cat224, { ...opts224, domains: { primary: other } });
+    check(`CCODE-224: a different primary opens a different pool (${dom224.primary} ${pool.length} vs ${other} ${poolB.length})`,
+      JSON.stringify(pool.map(a => a.id)) !== JSON.stringify(poolB.map(a => a.id)));
+
+    // ⚠️ EVERY CRAFT OFFERED IS ACTUALLY ALLOWED BY THE BAND RULE — the rule must not have drifted into
+    // "level 1 and not granted", which would offer the whole rank-1 corpus regardless of who you are.
+    check("CCODE-224: every craft offered passes domainAccess for those domains — the band rule is really applied",
+      pool.every(a => TR.domainAccess(a, 1, dom224, idx224).allowed === true));
+    const rank1All = Object.values(cat224).filter(a => (a.levelReq || 1) === 1).length;
+    check(`CCODE-224: …and it is a real filter, not a pass-through (${pool.length} of ${rank1All} rank-1 crafts)`,
+      pool.length < rank1All, `${pool.length}/${rank1All}`);
+
+    // ⛔ AND THE TWO SURFACES ARE HELD TO IT BY SOURCE: app.js must not grow a second copy of the rule.
+    const appSrc224 = readFileSync(join(root, "app.js"), "utf8");
+    check("CCODE-224: app.js's creation pool DELEGATES to wheelgeom rather than re-implementing the filter",
+      /function creationChoosable[\s\S]{0,600}?creationPool\(/.test(appSrc224));
+    check("CCODE-224: the wheel and the list both pick through ONE toggle, so max-picks cannot be enforced on only one",
+      /const togglePick = \(id\)[\s\S]{0,400}?data-ab[\s\S]{0,200}?togglePick\(b\.dataset\.ab\)[\s\S]{0,200}?togglePick\(g\.dataset\.cwnode\)/.test(appSrc224));
+    check("CCODE-224: the create wheel emits NO hit target for a craft it will not accept (CCODE-196: absent-looking must be absent)",
+      /const hit = open \? `<circle class="hit"/.test(appSrc224));
+    check("CCODE-224: …and a GRANTED craft gets no hit target either — it reads as clickable and has no handler (CCODE-196 inverted)",
+      /const hit = open \?/.test(appSrc224) && !/\(open \|\| granted\) \? `<circle class="hit"/.test(appSrc224));
+    // ⛔ THE MEASUREMENT THAT CHANGED THE DESIGN. 150 of 155 rank-1 crafts are offered to ANY people —
+    // only the antipode is refused — so a binary open/shut wheel is 150 identical bright dots and the
+    // primary spoke means nothing. The wheel paints the BAND instead, and the create copy had to be
+    // corrected: it enumerated "primary, kin, secondary, tertiary, folk" as the whole pool, and 101 far-band
+    // crafts were being offered outside that list.
+    {
+      const closed224 = Object.values(cat224).filter(a => (a.levelReq || 1) === 1
+        && TR.domainAccess(a, 1, dom224, idx224).band === "closed");
+      check(`CCODE-224: the ONLY rank-1 crafts creation refuses are the antipode's (${closed224.length})`,
+        closed224.length > 0 && closed224.every(a => !pool.some(x => x.id === a.id))
+        && (rank1All - pool.length) === closed224.length, `${rank1All - pool.length} refused / ${closed224.length} closed`);
+      const far224 = pool.filter(a => TR.domainAccess(a, 1, dom224, idx224).band === "far").length;
+      check(`CCODE-224: …and ${far224} FAR-band crafts ARE offered, so the wheel must paint the band or say nothing`,
+        far224 > 0 && far224 > pool.length / 3, `${far224} far of ${pool.length}`);
+      check("CCODE-224: the create copy no longer enumerates a whitelist the rule does not enforce",
+        !/The far pole of what you are isn't here/.test(appSrc224) && /antipode<\/strong> isn't here/.test(appSrc224));
+      check("CCODE-224: the wheel classes a far craft as pickable-but-far, never as barred",
+        /near \? "open near" : "open far"/.test(appSrc224));
+    }
+
+    // ⚠️ FOUND BY WALKING THE SCREEN, NOT BY READING IT: the domain step's button said "Next: your
+    // companion" and its handler calls renderAbilityStep. Two steps early, and no gate could see it because
+    // both halves were individually correct.
+    check("CCODE-224: the domain step's button names the step it actually opens (it promised the companion and opened the crafts)",
+      /id="dom-done"[\s\S]{0,200}?Next: what have you learned/.test(appSrc224)
+      && /dom-done"\)\.onclick[\s\S]{0,200}?renderAbilityStep\(\)/.test(appSrc224));
+
+    check("CCODE-224: the create screen and the level-up screen share ONE wheel model (buildWheelModel takes the sheet)",
+      /function buildWheelModel\(sheet = character\)/.test(appSrc224) && /buildWheelModel\(creationSheet\(state\)\)/.test(appSrc224));
   }
 
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse

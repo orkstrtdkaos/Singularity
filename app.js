@@ -26,7 +26,7 @@ import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own
 import { receiptLine, roundVerdict } from "./engine/roundreceipt.js"; // the round receipt, extracted so it can be simulated (it shipped a permanent "it's even" because nothing could test it)   // SNG-250 §4: the born-whole gate + which types it covers
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
-import { braidPlacement, compositionAngle, leanOffset, wheelRejects, inTraditions, matchesFunction } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
+import { braidPlacement, compositionAngle, leanOffset, wheelRejects, inTraditions, matchesFunction, creationPool } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engine/feed.js"; // SNG-168 §2: the world feed (post a turn to the family — never canon)
 // ⚠️ `composeImagePrompt` ONLY. I imported `COMPOSED_MAX` beside it and never called it — the
@@ -97,7 +97,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.187";
+const APP_VERSION = "1.9.188";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4485,17 +4485,14 @@ function renderCreate() {
 
   /** SNG-063 quick-start step 3 (AFTER domains): abilities FILTERED to what the domains permit. */
   function renderAbilityStep() {
-    const okAb = Object.values(CONTENT.abilities).filter(a => {
-      if ((a.levelReq || 1) > 1) return false;
-      const dv = domainAccess(a, a.levelReq || 1, state.domains, CONTENT.traditionIndex);
-      return dv.allowed;
-    });
+    // ⛔ CCODE-224: the pool is computed by `creationChoosable` now - ONE rule, shared with the wheel,
+    // so the two surfaces cannot offer different crafts. The gate holds them to it.
     // SNG-192 §1: the by-right starter kit is computed HERE, not silently at commit, so a pick can never be
     // wasted on a craft the character already gets free. Grants are shown as a non-spendable group and
     // EXCLUDED from the choosable pool. (Recomputed on every entry, so a late attribute change is honoured.)
     const grantIds = nativeGrantIdsFor({ domains: state.domains, attributes: state.attrs, nativeTradition: state.nativeTradition, origin: state.origin }, CONTENT.rules);
     const grantSet = new Set(grantIds);
-    const choosable = okAb.filter(a => !grantSet.has(a.id));
+    const choosable = creationChoosable(state, grantSet);
     state.abilities = state.abilities.filter(id => choosable.some(a => a.id === id)).slice(0, maxAbilities());
     const abTitle = (a) => { const r1 = a.tree?.find(x => x.rank === 1); return esc((r1 ? "Rank 1 “" + r1.name + "” — CAN: " + r1.grants + " | CANNOT: " + r1.cannot : a.description) + (a.notFor ? " | NOT FOR: " + a.notFor : "")); };
     const abBtn = (a, extraCls = "", whyHtml = "") => `<button class="opt ${extraCls} ${state.abilities.includes(a.id) ? "selected" : ""}" data-ab="${a.id}" title="${abTitle(a)}">${esc(a.name)}${whyHtml}</button>`;
@@ -4540,7 +4537,7 @@ function renderCreate() {
     })();
     chrome(`<div class="screen">
       <h2>What have you learned?</h2>
-      <p class="hint" style="margin-bottom:10px">Choose <strong>${maxAbilities()}</strong>. The far pole of what you are isn't here — only your primary, its kin, your secondary and tertiary, and the Valley's open folk arts.</p>
+      <p class="hint" style="margin-bottom:10px">Choose <strong>${maxAbilities()}</strong>. Your <strong>antipode</strong> isn't here — nothing else is barred. Your own people, their kin and the Valley's folk arts are the near ground; anything further is a <em>reach</em>, and it is yours to take.</p>
       ${grantIds.length ? `<div class="sys-group"><div class="sys-label">Yours by right of being ${esc(traditionLabel(state.domains?.primary || state.nativeTradition || state.origin))}</div>
         <p class="hint" style="margin:0 0 6px">Already yours — you don't spend a pick on these.</p>
         <div class="opt-row">${grantIds.map(id => { const g = fullCatalog()[id]; return g ? `<span class="opt" style="opacity:.6;cursor:default;border-style:dashed" title="${abTitle(g)}">✓ ${esc(g.name)}</span>` : ""; }).join("")}</div></div>` : ""}
@@ -4549,8 +4546,11 @@ function renderCreate() {
         ${selectedArch ? `<p class="hint" style="margin-top:6px">${esc(selectedArch.whatItIsHere)} <em>${esc(selectedArch.signature)}</em> The suggestions below lean toward this shape now — change any, or click ${esc(selectedArch.archetype)} again to clear.</p>` : `<p class="hint" style="margin-top:4px">Pick a shape — Magus, Shadow, Seer, Warden… — to see a build lean your way, or ignore it and choose freely.</p>`}</div>` : ""}
       ${suggestions.length ? `<div class="sys-group"><div class="sys-label">Suggested for you</div>
         <div class="opt-row" style="flex-direction:column;align-items:stretch;gap:6px">${suggestions.map(s => { const a = abById[s.abilityId]; return a ? abBtn(a, "", ` <span class="hint" style="opacity:.75">— ${esc(s.why)}</span>`) : ""; }).join("")}</div></div>` : ""}
+      ${CONTENT.traditionIndex ? `<div class="sys-group" style="margin-top:10px"><div class="sys-label">Your wheel — this is your skill tree, and it is the one you will use all game</div>
+        <p class="hint" style="margin:0 0 4px">Your <strong>people's spoke</strong> runs out to its capstone; <strong>kin</strong> stand beside you; <strong>folk</strong> crafts sit at the centre, open to all; and your <strong>antipode is struck through</strong> — that is what choosing costs. Bright nodes are yours to take now (<strong>${maxAbilities() - state.abilities.length}</strong> left); faint ones are earned in play, never bought.</p>
+        <div class="graph-wrap create-wheel-wrap">${creationWheelSvg(state, grantSet, state.abilities)}</div></div>` : ""}
       <details ${suggestions.length ? "" : "open"} style="margin-top:4px">
-        <summary style="cursor:pointer;color:var(--muted,#9aa2ad);padding:6px 0">See all crafts your domains open (${choosable.length})</summary>
+        <summary style="cursor:pointer;color:var(--muted,#9aa2ad);padding:6px 0">…or as a list — see all crafts your domains open (${choosable.length})</summary>
         ${Object.keys(byTrad).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(t => `
           <div class="sys-group"><div class="sys-label">${esc(traditionLabel(t))}</div>
           <div class="opt-row">${byTrad[t].map(a => abBtn(a)).join("")}</div></div>`).join("") || "<div class='insight'>No level-1 abilities available for your domains — you'll learn as you play.</div>"}
@@ -4561,12 +4561,15 @@ function renderCreate() {
         <button class="btn" id="ab-done" ${state.abilities.length === maxAbilities() || !choosable.length ? "" : "disabled"}>Next: your companion</button>
       </div>
     </div>`);
-    for (const b of app.querySelectorAll("[data-ab]")) b.onclick = () => {
-      const id = b.dataset.ab;
+    // ⚠️ ONE TOGGLE, TWO SURFACES. The wheel and the list must not each own a copy of "picking" - the
+    // second copy is where the max-picks bound gets forgotten on one of them.
+    const togglePick = (id) => {
       if (state.abilities.includes(id)) state.abilities = state.abilities.filter(x => x !== id);
       else if (state.abilities.length < maxAbilities()) state.abilities.push(id);
       renderAbilityStep();
     };
+    for (const b of app.querySelectorAll("[data-ab]")) b.onclick = () => togglePick(b.dataset.ab);
+    for (const g of app.querySelectorAll("[data-cwnode]")) g.onclick = () => togglePick(g.dataset.cwnode);
     // SNG-192 §4: the archetype lens toggles — it biases the suggestions, never touches the picks (never locks).
     for (const b of app.querySelectorAll("[data-arch]")) b.onclick = () => {
       state.archetype = (state.archetype === b.dataset.arch) ? null : b.dataset.arch;
@@ -4613,7 +4616,7 @@ function renderCreate() {
       ${closed.size ? `<div class="hint">Closed to you: ${[...closed].map(t => esc(traditionLabel(t))).join(", ")}</div>` : ""}
       <div style="display:flex; gap:8px; margin-top:12px">
         <button class="btn secondary" id="dom-reset">↺ Redo</button>
-        <button class="btn" id="dom-done" ${phase === "done" ? "" : "disabled"}>${state.domainReturn === "prologue" ? "Confirm — this is who I am" : "Next: your companion"}</button>
+        <button class="btn" id="dom-done" ${phase === "done" ? "" : "disabled"}>${state.domainReturn === "prologue" ? "Confirm — this is who I am" : "Next: what have you learned"}</button>
       </div>
     </div>`);
     for (const b of app.querySelectorAll("[data-dom]")) b.onclick = () => {
@@ -8981,14 +8984,19 @@ function wheelAngle(posIndex, n) { return (posIndex / (n || 24)) * Math.PI * 2 -
 function wheelPt(ang, r) { return { x: WHEEL.cx + Math.cos(ang) * r, y: WHEEL.cy + Math.sin(ang) * r }; }
 
 /** Build every ability's position + state for the wheel. Pure over CONTENT + character. */
-function buildWheelModel() {
+// ⛔ CCODE-224 (Erik's backlog 1): THE SHEET IS A PARAMETER, so the CREATE screen can draw the same
+// wheel the level-up screen draws. It defaulted to the module-global `character`, which does not exist yet
+// during creation - and the wheel MODEL is the one part that must never fork between the two screens. The
+// chrome around it legitimately differs (creation picks a starting kit, level-up spends a point); the
+// geometry, the gates and the ring must not, or the wheel a player learns at creation is not the one they use.
+function buildWheelModel(sheet = character) {
   const idx = CONTENT.traditionIndex;
   const order = ringOrder(idx);              // 24 tradition ids by ring position
   const n = order.length || 24;
   const posOf = t => order.indexOf(t);
   const cat = fullCatalog();
-  const owned = new Set((character.abilities || []).map(a => a.abilityId));
-  const domains = character.domains || {};
+  const owned = new Set((sheet?.abilities || []).map(a => a.abilityId));
+  const domains = sheet?.domains || {};
   const nodes = [];
   // group abilities: pole-tradition spokes · folk centre · precursor outer ring · SNG-202 braids by composition
   const byTrad = {}, folk = [], precursor = [], braidAbs = [];
@@ -9009,17 +9017,17 @@ function buildWheelModel() {
     // Learn action — the Cut-Thread bug was `reachable` checking level but not standing. `learnGate` tags
     // WHY a blocked craft is blocked; `aspirational` = not owned, blocked ONLY by standing (earnable "later",
     // §3 renders it dimmed rather than hard-barred).
-    const g = isOwned ? { ok: false, gate: "owned" } : canLearnAbility(character, ab.id, cat, CONTENT.rules, { attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: idx });
+    const g = isOwned ? { ok: false, gate: "owned" } : canLearnAbility(sheet, ab.id, cat, CONTENT.rules, { attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: idx });
     nodes.push({ id: ab.id, name: ab.name, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1, cls: trad || ab.powerSystem || "learned",
       x, y, ang, owned: isOwned, band: v.band, allowed: v.allowed, penalty: v.penalty, closed: v.band === "closed",
       barred: !v.allowed && v.band !== "closed", dim: v.penalty > 1, isFolk: trad && isFolkTradition(trad, idx), isPrecursor: ab.powerSystem === "precursor",
       // SNG-124: function overlay + cost-at-a-glance.
       functions: ab.functions || [], families: familiesOfAbility(ab, FN_INDEX), energyCost: ab.energyCost ?? null,
-      effCost: (() => { try { return effectiveEnergyCost(ab, character, CONTENT.rules); } catch { return ab.energyCost ?? null; } })(),
+      effCost: (() => { try { return effectiveEnergyCost(ab, sheet, CONTENT.rules); } catch { return ab.energyCost ?? null; } })(),
       reachable: g.ok, learnGate: g.ok ? null : (g.gate || "blocked"), learnGateWhy: g.ok ? null : (g.why || null),
       aspirational: !isOwned && !g.ok && g.gate === "standing", // blocked only by standing → earnable "later"
       recommended: wheelRecommended.has(ab.id), // SNG-218 §3: a level-up suggestion pick, lit on the wheel
-      precursorUnlocked: ab.powerSystem === "precursor" && (character.precursorAccess || []).includes(ab.id), // SNG-129: narrative-earned
+      precursorUnlocked: ab.powerSystem === "precursor" && (sheet?.precursorAccess || []).includes(ab.id), // SNG-129: narrative-earned
       ...extra });
   };
   // spokes: SNG-202B §1 — the tradition ANCHORS (a pure craft stays on its ring-angle, the degenerate case =
@@ -9108,6 +9116,98 @@ function wheelBraids(model) {
   }
   return out;
 }
+
+// ⛔ CCODE-224 (Erik's backlog 1): THE CREATE SCREEN DRAWS THE REAL WHEEL. The starting kit was chosen from
+// a <details> of buttons grouped by tradition, so the first thing a player ever learned about their craft
+// was a list - and then the game handed them a circle. THE WHEEL IS THE SKILL TREE; teaching it at level 1
+// is the point.
+//
+// ⚠️ ONE MODEL, TWO CHROMES, AND THE SPLIT IS DELIBERATE. `buildWheelModel(sheet)` is shared, so geometry,
+// bands, antipodes and the ring are IDENTICAL to the level-up wheel and cannot drift. What differs is the
+// AFFORDANCE: level-up spends skill points, creation spends PICKS, and pretending picks are points would
+// have let the cost-by-band rule quietly forbid a craft the create list has always offered. So creation
+// states its own pickability, and a gate holds the two surfaces to the same answer.
+function creationSheet(state) {
+  return { level: 1, domains: state.domains || {}, attributes: state.attrs || {},
+    abilities: (state.abilities || []).map(id => ({ abilityId: id, level: 1 })),
+    skillPoints: 0, standing: {}, discoveries: [], precursorAccess: [] };
+}
+
+/** The crafts creation offers, by creation's own rule — NOT the level-up cost rule. Shared by the list,
+ *  the wheel and the gate that holds them together. */
+function creationChoosable(state, grantSet) {
+  // ⚠️ THE RULE LIVES IN `wheelgeom.js`, not here — the same reason the wheel's click rule does. It decides
+  // what a player may pick on two different surfaces, and a rule that important should be provable against
+  // real content rather than asserted by a regex over this file.
+  return creationPool(CONTENT.abilities, { domains: state.domains, grantIds: grantSet || [],
+    traditionIndex: CONTENT.traditionIndex, domainAccess });
+}
+
+function creationWheelSvg(state, grantSet, picked) {
+  const idx = CONTENT.traditionIndex;
+  if (!idx) return "";
+  const S = WHEEL;
+  const m = buildWheelModel(creationSheet(state));
+  const domains = state.domains || {};
+  const primary = domains.primary, secondary = domains.secondary;
+  const antiP = primary ? antipodeOf(primary, idx) : null, antiS = secondary ? antipodeOf(secondary, idx) : null;
+  const pickSet = new Set(picked || []);
+  const openIds = new Set(creationChoosable(state, grantSet).map(a => a.id));
+  const ringNodes = m.order.map((t, i) => { const ang = wheelAngle(i, m.n); const pt = wheelPt(ang, S.rNode);
+    const st = (idx.stations || []).find(s => s.traditionId === t);
+    return { t, ang, ...pt, pole: st?.pole || t, closed: t === antiP || t === antiS,
+      isPrimary: t === primary, isSecondary: t === secondary, isTertiary: t === domains.tertiary,
+      kin: primary && ringDistance(t, primary, idx) === 1 }; });
+  return `<svg id="create-wheel-svg" viewBox="0 0 ${S.size} ${S.size}" class="world-map skill-wheel create-wheel" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">
+    <circle cx="${S.cx}" cy="${S.cy}" r="${S.rNode}" class="wheel-ring"/>
+    <circle cx="${S.cx}" cy="${S.cy}" r="${S.rInner}" class="wheel-inner"/>
+    <circle cx="${S.cx}" cy="${S.cy}" r="${S.rFolk + 24}" class="wheel-folk-zone"/>
+    <text x="${S.cx}" y="${S.cy - 2}" text-anchor="middle" class="wheel-center-label">FOLK</text>
+    <text x="${S.cx}" y="${S.cy + 14}" text-anchor="middle" class="wheel-center-sub">open to all</text>
+    ${ringNodes.map(rn => { const inner = wheelPt(rn.ang, S.rInner);
+      return `<line x1="${inner.x}" y1="${inner.y}" x2="${rn.x}" y2="${rn.y}" class="wheel-spoke ${rn.isPrimary ? "primary" : rn.isSecondary ? "secondary" : rn.isTertiary ? "tertiary" : rn.kin ? "kin" : rn.closed ? "closed" : ""}"/>`; }).join("")}
+    ${/* ⛔ THE ANTIPODE, STRUCK THROUGH, AT THE MOMENT THE CHOICE IS STILL LIVE. On the level-up wheel this
+         says "you gave that up"; here it says "this is what choosing costs" - which is the same geometry
+         doing the more useful job, and the reason the create screen wants the real wheel and not a list. */""}
+    ${ringNodes.filter(r => r.closed).map(rn => { const opp = wheelPt(rn.ang, S.rNode + 18);
+      return `<line x1="${S.cx}" y1="${S.cy}" x2="${opp.x}" y2="${opp.y}" class="wheel-strike"/>`; }).join("")}
+    ${ringNodes.map(rn => { const lp = wheelPt(rn.ang, S.rNode + 30); const poleLbl = String(rn.pole).slice(0, 12);
+      return `<g class="wheel-trad ${rn.closed ? "closed" : rn.isPrimary ? "primary" : rn.isSecondary ? "secondary" : rn.isTertiary ? "tertiary" : rn.kin ? "kin" : ""}"><title>${esc(traditionLabel(rn.t))}${rn.closed ? " — your antipode: closed to you, and only a braid crosses" : rn.isPrimary ? " — your people" : ""}</title>
+        <circle cx="${rn.x}" cy="${rn.y}" r="7" fill="${rn.closed ? "transparent" : traditionColor(rn.t)}" stroke="${traditionColor(rn.t)}"/>
+        <text x="${lp.x}" y="${lp.y + 3}" text-anchor="middle" class="wheel-pole-label">${esc(poleLbl)}</text></g>`; }).join("")}
+    ${/* ⚠️ EVERY CRAFT IS DRAWN, NOT ONLY THE PICKABLE ONES. The spoke running out to its capstone is what
+         tells a new player depth is earned rather than bought; hiding rank 2+ would make the wheel look
+         like a menu of everything available now. Dim and unclickable, with no hit target - CCODE-196: a
+         node that reads as absent must not behave as present. */""}
+    ${/* ⛔ PAINTED BY BAND, BECAUSE "pickable" TURNED OUT TO BE ALMOST EVERYTHING. Measured: of 155 rank-1
+         crafts, 150 are offered to any given people — only the 5 antipode crafts are refused. A binary
+         open/shut wheel would therefore be a wall of 150 identical bright dots, and the primary spoke —
+         the whole reason to show a wheel at creation — would mean nothing.
+         ⚠️ THE BAND IS ALREADY IN THE MODEL (`nd.band`, `nd.penalty`), computed by the same `domainAccess`
+         the list uses. So this paints a fact rather than inventing a tier: near is bright, FAR is dim but
+         still clickable, and the player can SEE that reaching outward is a reach. */""}
+    ${m.nodes.map(nd => {
+      const granted = grantSet && grantSet.has(nd.id);
+      const open = openIds.has(nd.id), on = pickSet.has(nd.id);
+      const near = nd.band === "primary" || nd.band === "adjacent" || nd.band === "open" || nd.isFolk;
+      const cls = granted ? "granted" : on ? "picked" : !open ? "out" : near ? "open near" : "open far";
+      const r = granted || on ? 9 : open ? (near ? 7 : 5) : 3.5;
+      // ⛔ GRANTED NODES GET NO HIT TARGET EITHER, and finding that took looking at the live DOM rather
+      // than the source. They had one - so they took a pointer cursor and a 13px target - while carrying no
+      // `data-cwnode`, meaning a player clicks the craft they were just told is theirs and NOTHING happens.
+      // That is CCODE-196 inverted: reads as present, behaves as absent. The <title> still works on the
+      // visible circle, so the tooltip is not lost.
+      const hit = open ? `<circle class="hit" cx="${nd.x.toFixed(1)}" cy="${nd.y.toFixed(1)}" r="13"/>` : "";
+      const label = (on || granted) ? `<text x="${nd.x.toFixed(1)}" y="${(nd.y - 13).toFixed(1)}" text-anchor="middle" class="wheel-node-label">${esc(nd.name)}</text>` : "";
+      const why = granted ? " — yours by right, no pick spent"
+        : !open ? (nd.closed ? " — your antipode: closed to you, and only a braid crosses" : " — earned in play, not at creation")
+        : near ? "" : " — a reach: far from your people, and yours to take anyway";
+      return `<g class="create-node ${cls} ${familyClass(nd.families?.[0] || "")}" ${open ? `data-cwnode="${esc(nd.id)}"` : ""}><title>${esc(nd.name)}${why}</title>
+        ${hit}<circle cx="${nd.x.toFixed(1)}" cy="${nd.y.toFixed(1)}" r="${r}" fill="${traditionColor(nd.cls)}" class="create-dot"/>${label}</g>`;
+    }).join("")}
+  </g></svg>`;
+}
+
 
 // SNG-097: learn/deepen a craft directly from the skill wheel/graph selection, and SEE what an
 // upgrade grants before spending. Shared by both views — pure over character + CONTENT, so the two

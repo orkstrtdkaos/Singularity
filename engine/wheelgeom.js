@@ -149,3 +149,28 @@ export function matchesFunction(node, chosen) {
   if (!chosen || !chosen.size) return true;
   return (nd.families || []).some(f => chosen.has(f)) || (nd.functions || []).some(f => chosen.has(f));
 }
+
+// ⛔ CCODE-224 — WHAT CREATION OFFERS, AS ONE RULE IN ONE PLACE. The create screen now has TWO surfaces for
+// the same choice (the wheel and the list beneath it), and the failure that kind of pair invites is each
+// growing its own copy of the rule until they quietly disagree about one craft.
+//
+// ⚠️ AND IT IS DELIBERATELY *NOT* `canLearnAbility`. That gate prices a craft in SKILL POINTS and charges
+// more for an off-band pick; creation spends PICKS, all of which cost exactly one. Feeding the level-up
+// gate a synthetic sheet would have let the cost-by-band rule silently forbid a craft the create list has
+// always offered — the rule and the surface would still "agree", both being wrong together.
+//
+// The band still matters and is still shown: `domainAccess` decides ALLOWED, which is creation's whole
+// question. What it must not do here is decide AFFORDABLE.
+export function creationPickable(ability, { domains, grantIds = [], traditionIndex = null, domainAccess } = {}) {
+  if (!ability) return false;
+  if ((ability.levelReq || 1) > 1) return false;                 // depth is earned in play, never bought at creation
+  if ((grantIds instanceof Set ? grantIds.has(ability.id) : (grantIds || []).includes(ability.id))) return false; // already yours — a pick spent here is wasted
+  if (typeof domainAccess !== "function") return false;
+  return domainAccess(ability, ability.levelReq || 1, domains, traditionIndex).allowed === true;
+}
+
+/** The whole creation pool, in ring-independent order. `catalog` is any {id: ability} map or array. */
+export function creationPool(catalog, opts = {}) {
+  const list = Array.isArray(catalog) ? catalog : Object.values(catalog || {});
+  return list.filter(a => creationPickable(a, opts));
+}

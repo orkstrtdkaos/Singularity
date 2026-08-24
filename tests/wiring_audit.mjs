@@ -105,8 +105,8 @@ for (const f of walkAbilities(join(root, "content", "packs"))) {
   for (const a of arr) abilityRecords.push({ ...a, _file: f.slice(root.length + 1) });
 }
 
-const specModules = specSrc.match(/confirmed against origin: \*{0,2}(\d+) engine modules/);
-const specAbilities = specSrc.match(/(\d+) abilities \/ \d+ traditions/);
+const specModules = specSrc.match(/confirmed against origin: \*{0,2}(\d+)\*{0,2} engine modules/);
+const specAbilities = specSrc.match(/\*{0,2}(\d+)\*{0,2} abilities \/ \*{0,2}\d+/);
 check(`SYSTEM_SPEC header certifies the real engine-module count (${engineCount})`,
   specModules && Number(specModules[1]) === engineCount,
   `header says ${specModules?.[1] ?? "?"}, HEAD has ${engineCount}`);
@@ -153,7 +153,7 @@ check(`SYSTEM_SPEC header certifies the real location count (${locationCount})`,
 check(`SYSTEM_SPEC header certifies the real region count (${regionCount})`,
   specLocations && Number(specLocations[2]) === regionCount,
   `header says ${specLocations?.[2] ?? "?"}, HEAD has ${regionCount}`);
-const specRules = specSrc.match(/(\d+) core rules files/);
+const specRules = specSrc.match(/\*{0,2}(\d+)\*{0,2} core rules files/);
 check(`SYSTEM_SPEC header certifies the real core-rules count (${rulesCount})`,
   specRules && Number(specRules[1]) === rulesCount,
   `header says ${specRules?.[1] ?? "?"}, HEAD has ${rulesCount}`);

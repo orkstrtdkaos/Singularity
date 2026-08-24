@@ -31,6 +31,7 @@
     "player-impact": "node tests/player_impact.mjs",
     "test:chain": "node tests/import_integrity.mjs && node tests/smoke.mjs && node tests/parse_probe.mjs",
     "axis-worklist": "node scripts/axis_worklist.mjs",
-    "effect-audit": "node scripts/effect_audit.mjs"
+    "effect-audit": "node scripts/effect_audit.mjs",
+    "vocab-sweep": "node scripts/vocab_sweep.mjs"
   }
 }

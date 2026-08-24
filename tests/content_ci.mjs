@@ -2604,10 +2604,72 @@ for (const pack of PACKS) {
     // ⚠️ THE FIRST CHECK IS THAT A GUARD LANDS AT ALL — without it the second passes vacuously on two nulls,
     // which is exactly how my first three attempts at this "found" something.
     check(`CCODE-240: a shield declaration lands a guard at all (value ${weak})`, weak != null);
-    check(`CCODE-240: a craft's authored \`mechanic.soak\` sets its guard's strength — ${soakCrafts.length} crafts author one`,
+    // ⛔ THE GATE ASSERTS THE FACT, NOT A REMEDY. My first version said the craft's soak SHOULD set the
+    // guard's strength — and Erik's question ("soak is already temporary, isn't it?") exposed that as the
+    // wrong fix: a guard is a ROLL MODIFIER, not soak. It never touches the damage line. So feeding
+    // `mechanic.soak` into a guard's value would turn a damage-absorption number into a roll bonus, which
+    // is a second confusion on top of the first.
+    // ⚠️ WHAT IS TRUE AND CHECKABLE: 30 crafts author a number that changes nothing anywhere. What it
+    // SHOULD do is a design question, and a gate is the wrong place to answer one.
+    check(`CCODE-240: \`mechanic.soak\` changes SOMETHING when a craft declares it — ${soakCrafts.length} crafts author one`,
       weak != null && strong != null && strong !== weak,
-      `soak 2 → guard ${weak} · soak 20 → guard ${strong} — identical, so the authored number is unread`);
+      `soak 2 → guard ${weak} · soak 20 → guard ${strong}: identical. The authored number is read by nothing.`
+      + ` ⚠️ AND "TEMP_SOAK" IS A MISNOMER — a guard modifies the ROLL, it does not absorb damage,`
+      + ` so the fix is a naming decision before it is a wiring one.`);
   }
+}
+
+
+// ⛔ CCODE-241 — THE LARGEST AUTHORED-AND-UNREAD BLOCK IN THE PROJECT.
+//
+// `gains` is authored on 1,017 ranks and `gainAxes` on 955. NEITHER IS READ BY THE GAME. They appear in
+// exactly three files, all tooling: Aevi's `po/matrix_gen.mjs`, my `scripts/axis_worklist.mjs`, and my own
+// CCODE-230 ratchet in smoke.mjs. Not engine/, not app.js, not the GM prompt.
+//
+// ⚠️ THIS MATTERS RIGHT NOW because CCODE-230 handed Aevi a worklist of 177 ranks to fill in, ratcheted so
+// it may only shrink — and completing all 177 would change nothing a player can experience.
+//
+// ⛔ IT MAY STILL BE CORRECT. A field can exist to make the AUTHOR state what changes, with the `grants`
+// prose being what reaches the player. That is a real discipline and a defensible design. What it cannot
+// be is UNKNOWN, which is what it was until this sweep.
+//
+// ⚠️ THE GATE IS POINTED SO IT GOES GREEN WHEN THIS IS RESOLVED — either by a reader being built, or by the
+// field being declared documentation-only. A gate that reddens when someone fixes the thing punishes the fix.
+{
+  const HEAVY = 200;   // a field this widely authored is a claim about the game, not a note
+  const engineSrc241 = [
+    ...readdirSync(join(root, "engine")).filter(f => f.endsWith(".js") || f.endsWith(".mjs"))
+      .map(f => readFileSync(join(root, "engine", f), "utf8")),
+    readFileSync(join(root, "app.js"), "utf8"),
+  ].join("\n")
+    // comments stripped — a scanner reading its own prose has bitten this project four times
+    .replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+
+  const cls241 = rj("content/packs/core/rules_classification.json");
+  const declaredDoc = new Set(Object.keys(cls241.documentation_only || {}));
+
+  const counts241 = new Map();
+  for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json"))) {
+    for (const a of (rj(`content/packs/core/abilities/${f}`).abilities || [])) {
+      for (const r of (a.tree || [])) {
+        for (const k of Object.keys(r || {})) {
+          if (k.startsWith("_") || ["rank", "name", "grants", "cannot"].includes(k)) continue;
+          counts241.set(k, (counts241.get(k) || 0) + 1);
+        }
+      }
+    }
+  }
+  const heavy241 = [...counts241.entries()].filter(([, n]) => n >= HEAVY);
+  const orphans241 = heavy241.filter(([k]) =>
+    !declaredDoc.has(k) && !new RegExp("\\b" + k + "\\b").test(engineSrc241));
+
+  check(`CCODE-241: every field authored on ${HEAVY}+ ranks is READ by the game, or DECLARED documentation-only (${heavy241.length} heavy fields)`,
+    orphans241.length === 0,
+    orphans241.length
+      ? orphans241.map(([k, n]) => `${k} (${n} ranks)`).join(", ")
+        + " — authored at scale and consumed by nothing. Build a reader, or list it under `documentation_only`"
+        + " in rules_classification.json with a reason."
+      : "");
 }
 
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);

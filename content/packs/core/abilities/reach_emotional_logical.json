@@ -285,7 +285,7 @@
     "emotional",
     "wound"
    ],
-   "harmRung": "severe",
+   "harmRung": "damaging",
    "narrationHints": "No contact and no weapon. They flinch as though struck, and the next thing that touches them does far more than it should.",
    "description": "Strike at what a person is holding themselves together with — it wounds, and it leaves them open to everything that comes after.",
    "notFor": "Anything that cannot feel; armour — this does not pierce soak, it makes what gets past it worse.",
@@ -341,7 +341,7 @@
       "hinder"
      ],
      "gains": "deepen",
-     "harmRung": "severe",
+     "harmRung": "damaging",
      "gainAxes": [
       "duration",
       "targets"
@@ -1504,7 +1504,7 @@
     "magnitude": 8,
     "duration": 6,
     "targets": 1,
-    "damageType": "grief",
+    "damageType": "feeling",
     "note": "⚠️ A HOBBLE WITH A LETHAL TAIL — the kill is a possibility, never a roll you aim. Resolve r2 as incapacitation plus a small independent chance of a stopped heart, weighted by how much the target has actually lost. NOT a FIGHT craft: it does not fight."
    },
    "rankDeltas": [
@@ -1589,7 +1589,7 @@
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "severe",
+     "harmRung": "incapacitating",
      "gainAxes": [
       "targets",
       "quality"
@@ -1613,7 +1613,7 @@
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "severe",
+     "harmRung": "incapacitating",
      "gainAxes": [
       "scope",
       "targets"
@@ -1634,7 +1634,7 @@
    ],
    "tradition": "threnodist",
    "nativeOrCombination": "native",
-   "harmRung": "severe",
+   "harmRung": "incapacitating",
    "shape": "strike",
    "operativeAxis": [
     "scope",

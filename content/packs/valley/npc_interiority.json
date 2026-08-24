@@ -144,7 +144,7 @@
   "_patienceFloor": "nobody arrives the morning after, however strongly they feel.",
   "maxSeekers": 1,
   "_maxSeekers": "⚠️ BOUNDED ON PURPOSE. A world where four people find you the moment you rest is not a world with relationships in it, it is a notification tray.",
-  "line": "{name} has been asking after you.",
-  "_line": "⛔ AEVI - THIS IS A PLACEHOLDER AND IT IS DELIBERATELY PLAIN so it does not read as authored prose. `{name}` and `{want}` are filled. The line a player reads when someone comes looking is yours, and it probably wants to vary by whether they like you: the same clock brings a friend and an enemy."
+  "line": "{name} has been asking after you. More than once.",
+  "_line": "⛔ AUTHORED 2026-08-23 (Aevi), replacing CCode's placeholder. ⚠️ \"MORE THAN ONCE\" IS THE CLOCK MADE VISIBLE — the player should feel accumulated waiting, not a notification. ⛔ AND IT IS DELIBERATELY NEUTRAL ON AFFECTION, because one string has to carry both: the same clock brings a friend who misses you and a rival who wants a debt settled, and ASKING AFTER YOU is true of both while \"missed you\" or \"looking for you\" is not. ⚠️ CCode is right that it wants to vary by relationship and I have NOT authored a `lines` map here — `seekingLine` reads `cfg.line` and nothing else, so a warm/cold map would sit in this file unread, which is the exact failure this session has been cataloguing. The ask is filed; the variants land when the reader does."
  }
 }

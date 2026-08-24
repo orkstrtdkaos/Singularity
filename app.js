@@ -91,13 +91,17 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
 import { lethalOfferClamp, isLethalEncounter, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
+// ⛔ CCODE-227 (Erik backlog 7, step 1): conditions.js was built, gated, shipped — and imported by NOTHING.
+// Six exports reachable only from smoke.mjs. A rest cleared nothing because the module that decides what a
+// rest clears was never in the room. Wired at `rest()`, which is the one door both kinds of rest go through.
+import { clearOnRest, applyCondition, activeConditions } from "./engine/conditions.js";
 import { characterPower } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.189";
+const APP_VERSION = "1.9.190";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7870,6 +7874,19 @@ async function travelTo(locId, { cost } = {}) {
   startScene(`(The character has just arrived here, traveling from elsewhere in the valley. Open the scene with the arrival.)`, news);
 }
 
+/** ⚠️ WHAT A REST DID TO WHAT YOU WERE CARRYING, in one clause. Says nothing when nothing was carried —
+ *  a rest with no conditions in play must read exactly as it always has. */
+function conditionAside(rested, kind) {
+  const gone = (rested?.cleared || []).map(c => c.name || c.id);
+  const held = (rested?.persisted || []).map(c => c.name || c.id);
+  const bits = [];
+  if (gone.length) bits.push(`${gone.join(", ")} lifted`);
+  // ⛔ AND IT NAMES WHY IT HELD, because "still broken after a full night" with no reason given is a
+  // mystery rather than a rule — which is exactly what `persisted` exists to prevent.
+  if (held.length) bits.push(`${held.join(", ")} ${kind === "breather" ? "needs a real night" : "will not lift until it is healed"}`);
+  return bits.length ? ` — ${bits.join("; ")}.` : "";
+}
+
 async function rest(kind = "sleep") {
   if (busy) return;
   const rec = CONTENT.rules.recovery || {};
@@ -7880,17 +7897,27 @@ async function rest(kind = "sleep") {
   character.health = Math.min(character.maxHealth, character.health + r.health);
   if (kind === "breather") {
     advanceClock(character.clock, r.hours);
+    // ⚠️ A BREATHER IS NOT A NIGHT, and the module says so — only `momentary` conditions lift here.
+    const restedB = clearOnRest(character, { kind: "breather" });
     saveCharacter(character);
-    renderPlay(character.activeScene?.lastTurn || null, { aside: `You take an hour off your feet. (+${gainE} energy, +${r.health} health)` });
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `You take an hour off your feet. (+${gainE} energy, +${r.health} health)`
+      + conditionAside(restedB, "breather") });
     return;
   }
   sceneTurns = [];
   sceneState = null; // hours pass — the old scene has dissolved
   advanceClock(character.clock, r.hours);
+  // ⛔ A NIGHT CLEARS WHAT A NIGHT CAN, AND THE PLAYER IS TOLD WHAT IT COULD NOT. `persisted` is the whole
+  // point of the return shape: waking up still broken with no reason given is a mystery, not a rule.
+  const rested = clearOnRest(character, { kind: "sleep" });
   saveCharacter(character);
   const news = await maybeTick();
   if (await maybeRandomEncounter("onRest", news)) return; // the night was not quiet
-  startScene(`(The character takes a real night's rest here — camp, inn, or quiet corner. Narrate the rest briefly, then present what's happening when they get up. ${r.hours} hours have passed; do not grant additional energy — the engine already restored them.)`, news);
+  // ⚠️ AND THE GM IS TOLD, so a persisting condition is narrated instead of silently sitting on the sheet.
+  const persistNote = rested.persisted.length
+    ? ` Still carried, and a night did not touch it: ${rested.persisted.map(c => c.name || c.id).join(", ")} — let it show in how they move and speak.`
+    : "";
+  startScene(`(The character takes a real night's rest here — camp, inn, or quiet corner. Narrate the rest briefly, then present what's happening when they get up. ${r.hours} hours have passed; do not grant additional energy — the engine already restored them.${persistNote})`, news);
 }
 
 async function onAsk(text) {
@@ -12675,6 +12702,18 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
   rr.state.transcript = [...(enc.state.transcript || []), sbFightBeat(rr, decl, beforeMom, scouting)].slice(-24);
   character.health = Math.max(0, Math.min(character.maxHealth, character.health + (rr.deltas?.health || 0)));
   character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
+  // ⛔ CCODE-228 — AN IMPOSITION LANDS ON A SHEET. `battleRound` has computed `imposed` on every round since
+  // CCODE-216 and NOTHING consumed it: `character.conditions` was written by no code path in the game, so a
+  // craft authored to stagger someone staggered nobody and the rest-clearing rules governed an empty list.
+  // ⚠️ A PLAYER-SIDE imposition goes on the SHEET, because that is what outlives the fight — persist-until-
+  // healed is meaningless if the condition dies with the encounter. An OPPONENT-SIDE one rides the encounter
+  // state, because the opponent does not survive it.
+  if (rr.imposed && !rr.imposed.refused) {
+    const cond = { id: rr.imposed.condition, name: rr.imposed.name || rr.imposed.condition,
+      persistUntilHealed: !!rr.imposed.persistUntilHealed, sinceDay: character.clock?.day ?? null };
+    if (rr.imposed.side === "player") applyCondition(character, cond);
+    else rr.state.opponentConditions = [...(rr.state.opponentConditions || []).filter(c => c.id !== cond.id), cond];
+  }
   character.activeEncounter = { defId: enc.def.id, state: rr.state };
   saveCharacter(character);
   if (checkIncapacitation(character)) { sbEnd({ ...rr, ended: true, outcome: "incapacitated" }); return; }

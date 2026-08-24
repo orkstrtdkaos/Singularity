@@ -214,7 +214,21 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     }
   }
   s.log = [...(state.log || []), `r${state.round}: ${playerDecl.function} vs ${oppDecl.function} → momentum ${Math.round(s.momentum)}${outcome ? " — " + outcome : ""}`].slice(-12);
-  return { state: s, player: r.player, opponent: r.opponent, oppDecl, ended, outcome, deltas, events, roundWinner: r.roundWinner, effects: r.effects || [], landed: r.landed || [], pressure: r.pressure, pressureEvent: r.pressureEvent, spent: r.spent, degraded: r.degraded, setupBonus: r.setupBonus, bonusEarned: r.bonusEarned, senseTier: r.senseTier, senseResist: r.senseResist, damage: r.damage };
+  return { state: s, player: r.player, opponent: r.opponent, oppDecl, ended, outcome, deltas, events, roundWinner: r.roundWinner, effects: r.effects || [], landed: r.landed || [], pressure: r.pressure, pressureEvent: r.pressureEvent, spent: r.spent, degraded: r.degraded, setupBonus: r.setupBonus, bonusEarned: r.bonusEarned, senseTier: r.senseTier, senseResist: r.senseResist, damage: r.damage,
+    // ⛔ CCODE-228 — THE FIFTH THROUGH EIGHTH THING THIS SEAM HAS EATEN. The comment above this wrapper already
+    // names `effects`, `pressure`, `phase` and `health` as values it silently dropped. `imposed`, `inflicted`,
+    // `opened` and `deniedAct` were the next four: `battleRound` computes an imposition on EVERY round, and
+    // because this hand-built return did not list it, Aevi's 14 imposing crafts landed on nobody and
+    // `character.conditions` was never written by anything, anywhere.
+    // ⚠️ THE LIST IS NOT THE FIX — a hand-kept list is what failed eight times. The fix is the gate below it
+    // in smoke.mjs, which DERIVES the key set from what `battleRound` actually returns and fails on any key
+    // this wrapper drops. A ninth omission now goes red instead of shipping green.
+    imposed: r.imposed, inflicted: r.inflicted, opened: r.opened, deniedAct: r.deniedAct,
+    // ⚠️ AND TWO MORE THE DERIVED GATE FOUND THAT I DID NOT KNOW ABOUT: the contested sense slot's
+    // `senseGap` and `senseBonus` (CCODE-211/213) were dropped here too. Ten values, not eight — which is
+    // the argument for deriving the expectation instead of extending a list by hand each time.
+    senseGap: r.senseGap, senseBonus: r.senseBonus,
+    healing: r.healing };
 }
 
 /** Player incapacitation check (app calls after applying deltas). */

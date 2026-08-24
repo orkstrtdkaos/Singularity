@@ -17583,6 +17583,100 @@ await (async () => {
       /function buildWheelModel\(sheet = character\)/.test(appSrc224) && /buildWheelModel\(creationSheet\(state\)\)/.test(appSrc224));
   }
 
+  // 5q · ⛔ CCODE-227 (Erik backlog 7, step 1) — conditions.js CAN NOW FIRE IN PLAY. It shipped green with
+  // six exports reachable only from this file: a rest cleared nothing, because the module that decides what
+  // a rest clears was imported by nothing. ⚠️ EVERY GATE IT ALREADY HAD STILL PASSED — they tested the
+  // function, and nothing tested that anything calls it. That is the whole shape of Erik's backlog item 7.
+  {
+    const appSrc227 = readFileSync(join(root, "app.js"), "utf8");
+    check("CCODE-227: app.js IMPORTS conditions.js — the module is no longer reachable only from a test",
+      /import \{[^}]*clearOnRest[^}]*\} from "\.\/engine\/conditions\.js"/.test(appSrc227));
+    check("CCODE-227: …and `rest()` actually CALLS it, on both the night and the breather",
+      (appSrc227.match(/clearOnRest\(character, \{ kind: "(sleep|breather)" \}\)/g) || []).length === 2,
+      (appSrc227.match(/clearOnRest\(character, \{ kind: "\w+" \}\)/g) || []).join(" | "));
+    // ⛔ AND THE PLAYER IS TOLD. `persisted` exists so waking up still broken is a rule and not a mystery;
+    // wiring the call without surfacing the answer would be wiring half of it.
+    check("CCODE-227: what a rest could NOT lift reaches the player, and the GM is told to narrate it",
+      /conditionAside\(rested/.test(appSrc227) && /persistNote/.test(appSrc227)
+      && /will not lift until it is healed/.test(appSrc227));
+
+    // the behaviour itself, through the real module
+    const CD = await import("../engine/conditions.js");
+    const mk = () => ({ conditions: [
+      { id: "winded", name: "Winded", kind: "momentary" },
+      { id: "gash", name: "Gash", persistUntilHealed: true },
+      { id: "shaken", name: "Shaken" } ] });
+    const night = mk(); const rn = CD.clearOnRest(night, { kind: "sleep" });
+    check("CCODE-227: a night lifts what a night can and leaves persist-until-healed standing",
+      rn.cleared.length === 2 && rn.persisted.length === 1 && rn.persisted[0].id === "gash");
+    const breather = mk(); const rb = CD.clearOnRest(breather, { kind: "breather" });
+    check("CCODE-227: an hour off your feet lifts ONLY the momentary — a breather is not a night",
+      rb.cleared.length === 1 && rb.cleared[0].id === "winded" && rb.persisted.length === 2);
+  }
+
+  // 5r · ⛔ CCODE-228 — THE SEAM THAT HAS EATEN EIGHT VALUES, GATED BY DERIVATION.
+  //
+  // `encounters.js::skillBattleRound` hand-builds its return from `battleRound`'s. Its own comment records
+  // that it silently dropped `effects`, `pressure`, `phase` and `health` — four separate bugs, four separate
+  // fixes, each one adding a key to the list. `imposed`, `inflicted`, `opened` and `deniedAct` were the next
+  // four, and the last of those meant NOTHING in the game ever wrote `character.conditions`.
+  //
+  // ⚠️ ADDING FOUR MORE NAMES TO THE LIST WOULD BE THE FIFTH FIX OF THE SAME SHAPE. This gate DERIVES the
+  // expectation from what `battleRound` actually returns on a live round, so key nine cannot ship green.
+  {
+    const SB228 = await import("../engine/skill_battle.js");
+    const sheet228 = (name) => ({ name, level: 5, health: 20, maxHealth: 20, energy: 40, maxEnergy: 40,
+      attributes: { physical: 5, mental: 4, social: 3, practical: 3 }, subAttributes: {}, alignment: {}, skills: [] });
+    const decl228 = { name: "Strike", function: "strike", intensity: "standard", tier: 1 };
+
+    // ⚠️ DERIVED FROM MANY ROUNDS, AND THE DERIVATION ITSELF IS GATED. Two earlier versions of this check
+    // were wrong in opposite directions and I am leaving both on the record: reading keys off ONE live round
+    // missed conditional ones (dropping `senseTier` did not go red), and parsing the source literal for
+    // depth-1 names found ZERO keys and passed vacuously — "none dropped" out of nothing at all.
+    // ⛔ SO THE FLOOR BELOW IS THE POINT: a derived gate that can find nothing must fail, not pass. Every
+    // derived check in this file should carry one.
+    const roundKeys = new Set(); const thrown228 = [];
+    for (const phase of ["action", "sense"]) {
+      for (const fn of ["strike", "obscure", "sense", "mend"]) {
+        try {
+          const r228 = SB228.battleRound({
+            playerDecl: { ...decl228, function: fn }, oppDecl: { ...decl228, name: "Swing" },
+            playerSheet: sheet228("you"), oppSheet: sheet228("them"), phase,
+            state: { momentum: 0, round: 1, playerEnergy: 40, opponentEnergy: 40, opponentHealth: 20, effects: [], pressure: { player: 0, opponent: 0 } },
+            rules: C199.rules, sb: C199.skillBattle, rng: () => 0.5, kind: "fight"
+          });
+          for (const k of Object.keys(r228)) roundKeys.add(k);
+        } catch (e) { thrown228.push(`${phase}/${fn}: ${e.message.slice(0, 60)}`); }
+      }
+    }
+    const OWNED = new Set(["state", "delta", "resolved", "opponentHealth", "player", "opponent", "landed", "degraded"]);
+    const wanted = [...roundKeys].filter(k => !OWNED.has(k));
+    check(`CCODE-228: the seam gate is not vacuous — ${wanted.length} forwardable keys observed across 8 round shapes`,
+      wanted.length >= 12, `only ${wanted.length} — the derivation broke; fix it rather than lowering the floor${thrown228.length ? " · threw: " + thrown228[0] : ""}`);
+    const wrapSrc = readFileSync(join(root, "engine/encounters.js"), "utf8");
+    const retLine = wrapSrc.slice(wrapSrc.indexOf("return { state: s, player: r.player"));
+    const forwarded = new Set([...retLine.slice(0, retLine.indexOf("};")).matchAll(/(\w+):\s*r\.(\w+)/g)].map(m => m[2]));
+    const dropped = wanted.filter(k => !forwarded.has(k));
+    check(`CCODE-228: skillBattleRound forwards EVERY key battleRound produces — ${wanted.length} keys, none dropped`,
+      dropped.length === 0, dropped.length ? `DROPPED: ${dropped.join(", ")} — add them to the wrapper's return` : "");
+
+    // and the four that were actually missing, by name, so the regression is legible
+    for (const k of ["imposed", "inflicted", "opened", "deniedAct"]) {
+      check(`CCODE-228: \`${k}\` survives the wrapper (it did not, and that is why nothing imposed anything)`,
+        forwarded.has(k));
+    }
+
+    // ⛔ AND THE OTHER HALF: something has to APPLY it. Forwarding a value nobody consumes is the same bug
+    // one step later — which is exactly how conditions.js shipped green with six dead exports.
+    const appSrc228 = readFileSync(join(root, "app.js"), "utf8");
+    check("CCODE-228: sbDeclare CONSUMES rr.imposed and writes a condition to the sheet",
+      /if \(rr\.imposed && !rr\.imposed\.refused\)/.test(appSrc228) && /applyCondition\(character, cond\)/.test(appSrc228));
+    check("CCODE-228: a PLAYER-side imposition goes on the SHEET (it outlives the fight); an OPPONENT-side one rides the encounter",
+      /side === "player"\) applyCondition\(character/.test(appSrc228) && /rr\.state\.opponentConditions/.test(appSrc228));
+    check("CCODE-228: a REFUSED imposition writes nothing — `refused` is a reason, not an effect",
+      /!rr\.imposed\.refused/.test(appSrc228));
+  }
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

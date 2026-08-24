@@ -162,6 +162,43 @@ import { economyCoverage } from "./economy.js";
 import { setSeasonCalendar, seasonCalendar } from "./worldtime.js";
 import { aestheticFor } from "./art.js";   // SNG-435 §C3: one resolver, tradition then power system   // CCODE-195: the world's calendar is authored, not compiled in   // SNG-302: say at load whether the second price axis is reachable   // SNG-287: report patterns with no slot source
 
+/** ⛔ CCODE-229 (Aevi's §3) — THE LOADER'S TEMPLATE MERGE, EXPORTED, SO A GATE CAN SEE WHAT THE GAME SEES.
+ *
+ *  `first_gift_template` supplies `mechanic` and `shape` to its 25-craft cohort AT LOAD. On disk those
+ *  crafts have neither. ⚠️ SO ANY CHECK THAT WALKS THE FILES REPORTS PHANTOM DEFECTS — and one of them,
+ *  `SNG-263 §5`, is a RATCHET, so seven crafts that never lost anything were reading as a REGRESSION:
+ *  the most alarming possible framing for a defect that does not exist.
+ *
+ *  ⛔ EXPORTED RATHER THAN COPIED. Aevi's `po/matrix_gen.mjs` had already reimplemented this merge, which
+ *  made two implementations and a third path (the file-reading gates) with none. A shared helper that is
+ *  a COPY of the loader can drift from the loader; this IS the loader's merge, called by the loader on the
+ *  line where it used to be inlined, so parity holds by construction and not by discipline.
+ *
+ *  ⚠️ AND THE RULE IS ABSENT-FIELDS-ONLY: the template fills gaps and never overwrites authored content,
+ *  with `mechanic` shallow-merged so an authored magnitude survives a templated duration. Mutates in place
+ *  and returns the same object, matching how the loader used it. */
+export function applyFirstGiftTemplate(abilities, firstGiftTemplate) {
+  const fgt = firstGiftTemplate;
+  const shared = fgt?.template || null;
+  const arc = shared?.rankArc || fgt?.rankArc || [];
+  for (const id of (Array.isArray(fgt?.cohort) ? fgt.cohort : [])) {
+    const a = abilities?.[id];
+    if (!a || !shared) continue;
+    for (const [k, v] of Object.entries(shared)) {
+      if (k === "rankArc" || k.startsWith("_")) continue;
+      if (k === "mechanic" && v && typeof v === "object") a.mechanic = { ...v, ...(a.mechanic || {}) };
+      else if (a[k] === undefined) a[k] = v;
+    }
+    for (const step of arc) {
+      const rank = (a.tree || []).find(x => x.rank === step.rank);
+      if (!rank) continue;
+      for (const [k, v] of Object.entries(step)) if (!k.startsWith("_") && rank[k] === undefined) rank[k] = v;
+    }
+    a._fromTemplate = fgt.id || "first_gift_template";
+  }
+  return abilities;
+}
+
 export async function loadContent() {
   const index = await fetchJSON("content/packs/core/manifest.json");
   const valley = await fetchJSON("content/packs/valley/manifest.json");
@@ -479,26 +516,7 @@ export async function loadContent() {
   //
   // The template names its own COHORT, so an ability does not opt in; the template opts it in. That keeps
   // the 25-vs-7 split in ONE place, which is where Aevi measured it.
-  {
-    const fgt = firstGiftTemplate;
-    const shared = fgt?.template || null;
-    const arc = shared?.rankArc || fgt?.rankArc || [];
-    for (const id of (Array.isArray(fgt?.cohort) ? fgt.cohort : [])) {
-      const a = abilities[id];
-      if (!a || !shared) continue;
-      for (const [k, v] of Object.entries(shared)) {
-        if (k === "rankArc" || k.startsWith("_")) continue;
-        if (k === "mechanic" && v && typeof v === "object") a.mechanic = { ...v, ...(a.mechanic || {}) };
-        else if (a[k] === undefined) a[k] = v;
-      }
-      for (const step of arc) {
-        const rank = (a.tree || []).find(x => x.rank === step.rank);
-        if (!rank) continue;
-        for (const [k, v] of Object.entries(step)) if (!k.startsWith("_") && rank[k] === undefined) rank[k] = v;
-      }
-      a._fromTemplate = fgt.id || "first_gift_template";
-    }
-  }
+  applyFirstGiftTemplate(abilities, firstGiftTemplate);
 
   const items = {};
   for (const pack of await coreItemsP) for (const it of pack.items) items[it.id] = it;

@@ -8,6 +8,7 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { applyFirstGiftTemplate } from "../engine/state.js";
 import { validate } from "../engine/genschema.js";
 import { structuredQuestRecord } from "../engine/quests.js";
 import { checkBorn, describeBorn, contractedTypes } from "../engine/borncontract.js";
@@ -2123,6 +2124,18 @@ for (const pack of PACKS) {
   for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json"))) {
     const pk = rj(`content/packs/core/abilities/${f}`);
     for (const a of (pk.abilities || [])) crafts.push({ ...a, powerSystem: a.powerSystem || pk.powerSystem });
+  }
+  // ⛔ CCODE-229 (Aevi's §3) — THE FILES ARE NOT WHAT THE GAME SEES. `first_gift_template` gives its
+  // 25-craft cohort `mechanic` and `shape` AT LOAD; on disk they have neither. Walking the directory and
+  // asking "does this craft declare a mechanic?" therefore answered NO for seven crafts that were fine —
+  // and because §5 below is a RATCHET, seven phantoms read as a REGRESSION, which is the most alarming
+  // framing a non-existent defect can have.
+  // ⚠️ THIS IS THE LOADER'S OWN MERGE, imported rather than reimplemented: a copy of a merge can drift
+  // from the merge, and there were already two copies and a third path using neither. §42.2's rule
+  // ("verifying against the files on disk is not verification") with the machinery to actually obey it.
+  {
+    const byId = Object.fromEntries(crafts.map(c => [c.id, c]));
+    applyFirstGiftTemplate(byId, rj("content/packs/core/rules/first_gift_template.json"));
   }
   const shaped = new Set();
   for (const fam of Object.values(cm.families || {})) for (const v of (fam.verbs || [])) shaped.add(v);

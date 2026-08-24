@@ -17677,6 +17677,73 @@ await (async () => {
       /!rr\.imposed\.refused/.test(appSrc228));
   }
 
+  // 5s · ⛔ CCODE-229 (Aevi's §3) — THE FILES AND THE GAME MUST BE RECONCILED BY THE LOADER'S OWN MERGE.
+  {
+    const ST = await import("../engine/state.js");
+    const fgtDoc = JSON.parse(readFileSync(join(root, "content/packs/core/rules/first_gift_template.json"), "utf8"));
+    const cohort = fgtDoc.cohort || [];
+    check(`CCODE-229: the loader's template merge is EXPORTED, not copied (${cohort.length}-craft cohort)`,
+      typeof ST.applyFirstGiftTemplate === "function" && cohort.length > 0);
+
+    // ⛔ THE PHANTOM, REPRODUCED: on disk these crafts have no mechanic; in the game they do.
+    const raw = {};
+    for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json")))
+      for (const a of (JSON.parse(readFileSync(join(root, "content/packs/core/abilities", f), "utf8")).abilities || []))
+        raw[a.id] = { ...a };
+    const bareOnDisk = cohort.filter(id => raw[id] && !(raw[id].mechanic && Object.keys(raw[id].mechanic).length));
+    check(`CCODE-229: ${bareOnDisk.length} cohort crafts carry NO mechanic on disk — a file-walking gate calls these unauthored`,
+      bareOnDisk.length > 0, bareOnDisk.slice(0, 4).join(", "));
+    check("CCODE-229: …and after the loader's merge every one of them is authored — the defect was the reader",
+      (() => { ST.applyFirstGiftTemplate(raw, fgtDoc);
+        return bareOnDisk.every(id => raw[id].mechanic && Object.keys(raw[id].mechanic).length); })());
+
+    // ⚠️ AND THE MERGE FILLS GAPS WITHOUT EATING AUTHORED CONTENT — the rule that makes it safe to apply
+    // everywhere. An authored magnitude must survive a templated duration (shallow merge, entry wins).
+    const probe = { x: { id: "x", mechanic: { magnitude: 9 } } };
+    ST.applyFirstGiftTemplate(probe, { cohort: ["x"], template: { mechanic: { magnitude: 3, duration: 1 }, shape: "setup" } });
+    check("CCODE-229: the template FILLS gaps and never overwrites — authored magnitude 9 survives, duration is filled",
+      probe.x.mechanic.magnitude === 9 && probe.x.mechanic.duration === 1 && probe.x.shape === "setup");
+
+    // and the gate that was reading a regression now reconciles
+    const ciSrc = readFileSync(join(root, "tests/content_ci.mjs"), "utf8");
+    check("CCODE-229: content_ci imports the loader's merge rather than reimplementing it (there were already two copies)",
+      /import \{ applyFirstGiftTemplate \} from "\.\.\/engine\/state\.js"/.test(ciSrc)
+      && /applyFirstGiftTemplate\(byId,/.test(ciSrc));
+  }
+
+  // 5t · ⛔ CCODE-230 (Aevi's §1) — GATE THE FACT, REPORT THE GUESS, AND NEVER THE REVERSE.
+  {
+    let undeclared230 = 0, r2plus230 = 0;
+    for (const a of Object.values(C199.abilities || {}))
+      for (const r of (a.tree || [])) {
+        if (Number(r.rank) < 2) continue;
+        r2plus230++;
+        if (!((r.gainAxes || []).length)) undeclared230++;
+      }
+    // ⚠️ THE UNIT IS IN THE GATE'S OWN NAME. Ranks, not crafts; rank ≥ 2; the LOADED catalogue, not the
+    // files — on disk this reads 227, because `first_gift_template` supplies `gainAxes` to its cohort at
+    // load. Aevi measured 227 and I measured 177 and neither of us was wrong; nobody had said which.
+    const AXIS_BASELINE = 177;
+    check(`CCODE-230: ranks (r≥2, LOADED catalogue) declaring no gain axis = ${undeclared230} of ${r2plus230} (baseline ${AXIS_BASELINE}) — may only go DOWN`,
+      undeclared230 <= AXIS_BASELINE,
+      "a rank lost its gain axis, or a new rank shipped without one — the worklist may only shrink");
+
+    // ⛔ AND THE NON-VACUITY FLOOR, the lesson from CCODE-228: a derived count that can silently become
+    // zero passes forever. If this catalogue ever has no r2+ ranks at all, something is very wrong.
+    check(`CCODE-230: …and the measurement is not vacuous — ${r2plus230} ranks at r≥2 were examined`,
+      r2plus230 > 300, `only ${r2plus230}`);
+
+    // ⚠️ THE PROSE CHECK IS A REPORT AND THE BUILD MUST NOT BE ABLE TO TURN IT INTO A GATE. Aevi: "a regex
+    // gate teaches the author to satisfy the regex… and the PROSE may be the thing that is wrong."
+    const wlSrc = readFileSync(join(root, "scripts/axis_worklist.mjs"), "utf8");
+    check("CCODE-230: the prose-vs-declaration finding is REPORT ONLY — it writes a file and asserts nothing",
+      /REPORT ONLY\. THIS IS NOT A GATE/.test(wlSrc) && !/\bcheck\(|\bassert\(|process\.exit\(1\)/.test(wlSrc));
+    check("CCODE-230: the worklist declares its UNIT in the header (ranks · r≥2 · loaded, not files)",
+      /UNIT: RANKS \(not crafts\), at rank ≥ 2, over the LOADED CATALOGUE/.test(wlSrc));
+    check("CCODE-230: …and flags `rankDeltas` so the mechanical/judgement split falls out rather than being guessed",
+      /hasDeltas/.test(wlSrc) && /near-mechanical/i.test(wlSrc));
+  }
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

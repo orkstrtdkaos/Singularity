@@ -47,9 +47,18 @@ for (const [name, cmd, args] of run) {
   const ok = r.status === 0;
   // ⚠️ THE FAILURE COUNT IS READ FROM THE SUITE'S OWN OUTPUT where it prints one, so the table says HOW
   // BADLY rather than just "red" — one red suite among eighteen is a very different morning from six.
-  const m = out.match(/(\d+)\s+FAILURE\(S\)/i) || out.match(/^FAIL/gm)?.length ? out.match(/(\d+)\s+FAILURE\(S\)/i) : null;
-  const fails = m ? Number(m[1]) : (ok ? 0 : (out.match(/^FAIL/gm) || []).length || null);
-  results.push({ name, ok, fails, ms: Date.now() - t0, out });
+  // ⚠️ THE LAST ONE, NOT THE FIRST. A suite prints a per-section "N FAILURE(S)" as it goes and its TOTAL
+  // at the end; taking the first match reported content_ci as 24 when the suite's own total was 19, and I
+  // repeated that 24 to Erik. A runner that restates a suite's number must restate the number the suite
+  // ends on. Cross-checked against the FAIL lines so the two can never quietly disagree again.
+  const all = [...out.matchAll(/(\d+)\s+FAILURE\(S\)/gi)];
+  const lineCount = (out.match(/^FAIL/gm) || []).length;
+  const fails = all.length ? Number(all[all.length - 1][1]) : (ok ? 0 : lineCount || null);
+  results.push({ name, ok, fails, lineCount, ms: Date.now() - t0, out });
+  // ⛔ AND IF THE SUITE'S TOTAL DISAGREES WITH ITS OWN FAIL LINES, SAY SO rather than picking one.
+  if (fails != null && lineCount && fails !== lineCount && !quiet)
+    process.stdout.write(`      ⚠ ${name}: reported total ${fails} ≠ ${lineCount} FAIL lines — read the suite directly
+`);
   if (!quiet) process.stdout.write(`${ok ? "ok  " : "FAIL"}  ${name}${fails ? ` — ${fails} failure(s)` : ""}\n`);
 }
 

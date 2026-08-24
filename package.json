@@ -29,6 +29,7 @@
     "dev-world": "node tests/dev_world.mjs",
     "endgame-world": "node tests/world_endgame.mjs",
     "player-impact": "node tests/player_impact.mjs",
-    "test:chain": "node tests/import_integrity.mjs && node tests/smoke.mjs && node tests/parse_probe.mjs"
+    "test:chain": "node tests/import_integrity.mjs && node tests/smoke.mjs && node tests/parse_probe.mjs",
+    "axis-worklist": "node scripts/axis_worklist.mjs"
   }
 }

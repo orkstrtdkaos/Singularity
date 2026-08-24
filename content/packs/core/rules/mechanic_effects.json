@@ -26,8 +26,9 @@
   "HEAL": {
    "reads": "mechanic.dice on healing shape",
    "states": "NdX per round or per use",
-   "wired": false,
-   "note": "⛔ AUTHORED AND UNREAD — 57 abilities, 27 with dice. See healing_intent.json. Ladder L1 1d4, L2 2d4, L3 3d4, L4 4d4."
+   "wired": true,
+   "note": "✅ WIRED — verified by probe 2026-08-23. `mechanic.dice` on a healing shape IS read and DOES move a sheet. Ladder L1 1d4, L2 2d4 etc. ⛔ The previous note read 'AUTHORED AND UNREAD — 57 abilities, 27 with dice' and was false.",
+   "_flagWasWrong_20260823": "⛔ THIS FLAG SAID `wired: false` AND THE ENGINE DISAGREED. Corrected by behavioural probe (`npm run effect-audit`, CCode): chord_of_mending 8d6 vs 1d2 -> 32 vs 2. ⚠️ I AUTHORED THE FALSE FLAG AND THEN CONSULTED IT AS EVIDENCE — I told CCode healing dice were unread and gated the Spirit audit on it. A flag nobody can trust is worse than no flag, because it gets consulted."
   },
   "TEMP_SOAK": {
    "reads": "mechanic.soak with contest lifetime",
@@ -37,8 +38,9 @@
   "ACTION_LOSS": {
    "reads": "nearest shape is phaseDenied(...,'sense')",
    "states": "target loses next action",
-   "wired": false,
-   "note": "⚠️ CCODE: `phaseDenied` denies the sense step and sets `senseBlinded` — the shape to build from."
+   "wired": true,
+   "note": "⚠️ CCODE: `phaseDenied` denies the sense step and sets `senseBlinded` — the shape to build from.",
+   "_flagWasWrong_20260823": "⛔ THIS FLAG SAID `wired: false` AND THE ENGINE DISAGREED. Corrected by behavioural probe (`npm run effect-audit`, CCode): ki_wield imposes action_loss -> the opponent's condition block moves. ⚠️ I AUTHORED THE FALSE FLAG AND THEN CONSULTED IT AS EVIDENCE — I told CCode healing dice were unread and gated the Spirit audit on it. A flag nobody can trust is worse than no flag, because it gets consulted."
   },
   "UNCONSCIOUS": {
    "reads": "encounters.checkIncapacitation",
@@ -98,7 +100,8 @@
   "VULNERABLE": {
    "reads": "mechanic.antisoak",
    "states": "see ANTISOAK",
-   "wired": false
+   "wired": true,
+   "_flagWasWrong_20260823": "⛔ THIS FLAG SAID `wired: false` AND THE ENGINE DISAGREED. Corrected by behavioural probe (`npm run effect-audit`, CCode): grief_strike authors antisoakImposed -> the opponent's condition block moves. ⚠️ I AUTHORED THE FALSE FLAG AND THEN CONSULTED IT AS EVIDENCE — I told CCode healing dice were unread and gated the Spirit audit on it. A flag nobody can trust is worse than no flag, because it gets consulted."
   },
   "SUMMON": {
    "reads": "—",
@@ -241,5 +244,6 @@
    "note": "⚠️ authored on few"
   }
  },
- "_lethalityClarification_20260816": "⛔ SNG-514. TWO DIFFERENT THINGS, AND I CONFLATED THEM:\n   `harmRung: lethal` + `shape: damage` — ⛔ THE CRAFT KILLS. It does so through the damage path like any other killing blow. The Cut Thread, and anything else Erik authors as lethal.\n   `mechanic.imposes` — CONDITIONS SHORT OF DEATH ONLY: action_loss, staggered, unconscious, incapacitated. ⚠️ The engine refuses `slain` HERE because this field exists for the space BELOW killing, not because crafts may not kill.\n⛔ A CRAFT THAT KILLS DOES IT WITH DAMAGE AND A LETHAL RUNG. A craft that takes someone out of a fight WITHOUT killing them uses `imposes`. ⚠️ MOST CRAFTS SHOULD BE THE SECOND KIND — that is the design — BUT 'most' IS NOT 'all', AND I TURNED A FIELD CONSTRAINT INTO A WORLD RULE."
+ "_lethalityClarification_20260816": "⛔ SNG-514. TWO DIFFERENT THINGS, AND I CONFLATED THEM:\n   `harmRung: lethal` + `shape: damage` — ⛔ THE CRAFT KILLS. It does so through the damage path like any other killing blow. The Cut Thread, and anything else Erik authors as lethal.\n   `mechanic.imposes` — CONDITIONS SHORT OF DEATH ONLY: action_loss, staggered, unconscious, incapacitated. ⚠️ The engine refuses `slain` HERE because this field exists for the space BELOW killing, not because crafts may not kill.\n⛔ A CRAFT THAT KILLS DOES IT WITH DAMAGE AND A LETHAL RUNG. A craft that takes someone out of a fight WITHOUT killing them uses `imposes`. ⚠️ MOST CRAFTS SHOULD BE THE SECOND KIND — that is the design — BUT 'most' IS NOT 'all', AND I TURNED A FIELD CONSTRAINT INTO A WORLD RULE.",
+ "_wiredFlagsAreClaims_20260823": "⛔ STANDING NOTE. The `wired` flag on every effect below is an ASSERTION ABOUT THE ENGINE MADE IN A CONTENT FILE, and three of 22 were wrong on 2026-08-23 — all three in the same direction, claiming unbuilt what was built. ⚠️ THE ONLY HONEST WAY TO SET ONE IS A BEHAVIOURAL PROBE: run the engine with the field and without it and see whether the output moves. A grep cannot answer it — `foothills` was live in `engine/` and dead in play with every gate green. ⛔ 16 of 22 are still UNPROBED, which is NOT a verdict: it means no honest test exists yet, and they are neither wired nor inert. Do not read an unprobed effect's flag as evidence of anything."
 }

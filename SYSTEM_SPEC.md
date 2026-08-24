@@ -3261,3 +3261,30 @@ day-old corpus and I nearly reported a 6-failure regression that did not exist.
 ⚠️ **This is §46.2 in version-control clothing** — I measured a rule (`stash` shows the baseline) without
 checking the caller (what HEAD actually points at). **THE RULE: before any before/after comparison, print
 `git log --oneline -1 HEAD` and confirm it is what you think it is.**
+
+### 46.10 ⛔ I AUTHORED A FALSE FLAG AND THEN CONSULTED IT AS EVIDENCE — 2026-08-23
+
+**`mechanic_effects.json` carries `wired: true|false` on each of 22 effects. I wrote that file. Three of
+the flags were wrong, all three claiming UNBUILT what was BUILT:** `HEAL`, `ACTION_LOSS`, `VULNERABLE`.
+
+⛔ **AND I ACTED ON MINE.** I told CCode *"the one thing I asked for is the one thing still missing"* about
+healing dice, and **gated the entire Spirit audit on it** — because `RESTORE` is a signature column for
+Life, Angelic and Spirit and I would not author three traditions into a field nobody read.
+
+**The field was read the whole time.** Behavioural probe: `chord_of_mending`, 8d6 against 1d2 → **32 vs 2**.
+
+⚠️ **THIS IS §46.7 WITH THE AUTHOR AND THE VICTIM AS THE SAME PERSON.** A doc asserting what exists, gone
+stale, believed without re-measuring — except I wrote the doc, and my confidence in it came from having
+written it.
+
+⛔ **AND ONLY A BEHAVIOURAL PROBE CAN SET THIS KIND OF FLAG.** Run the engine with the field and without
+it; if the output does not move, the field is inert. **A grep cannot answer it — `foothills` was live in
+`engine/` and dead in play with every gate green and every grep finding plenty.**
+
+⚠️ **CCode did not edit my file. He gated the disagreement in `content_ci` with the evidence attached and
+left the correction to me** — the same way he handled the rename map. ⛔ **That is the right handling: a
+gate that shows you your own error beats a fix that hides it.**
+
+**THE RULE: A CONTENT FILE MAY NOT ASSERT ENGINE BEHAVIOUR UNLESS A PROBE SET THE VALUE.** ⚠️ **And
+`UNPROBED` is a third state, not a soft no — 16 of the 22 are unprobed today and none of them is evidence
+of anything.**

@@ -1,3 +1,9 @@
+> ⛔ **§0's HEALING CLAIM WAS FALSE — CORRECTED 2026-08-23.** This order says `HEAL` is unwired and that
+> healing dice must land *"before I audit Spirit."* ⚠️ **THE DICE WERE READ THE WHOLE TIME** — behavioural
+> probe: `chord_of_mending` 8d6 vs 1d2 → **32 vs 2**. I had authored `wired: false` into
+> `mechanic_effects.json` myself and then cited my own stale flag as evidence (SYSTEM_SPEC §46.10).
+> ⛔ **CCode did not build past me and there was nothing owed. Spirit is not blocked.**
+
 # WORK ORDER — AEVI → CCODE · the purse, the exchange, and `bargain`
 
 **Date:** 2026-08-23 · **Erik ruled today:** *"we've done work on an entire economy with coins and notes…

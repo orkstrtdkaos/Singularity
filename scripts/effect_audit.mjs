@@ -94,16 +94,66 @@ const PROBES = {
     if (shut == null) return { unprobed: "baseline strike landed no damage — probe cannot isolate antisoak" };
     return { with: open, without: shut, probe: `${ab.id} into antisoak 5 vs none` };
   },
-  // ⚠️ UNPROBED, AFTER THREE ATTEMPTS, AND THE THIRD IS THE HONEST ONE. Comparing `sense` / `obscure` /
-  // `conceal` / `reveal` gives byte-identical output — gap -31, tier 0, no bonus — because my declarations
-  // carry no craft, so nothing distinguishes them but the verb string and the contest is decided by rolls
-  // and attributes. That is my harness having no skill behind the verb, NOT the slot being dead.
-  // ⛔ I could have reported INERT and been wrong in a way that read as a real finding. The contested
-  // sense slot has its own direct gates (CCODE-211/213) and they pass; probing it end-to-end needs two
-  // real crafts with authored sense mechanics, which is a bigger harness than this file.
-  SENSE_SLOT: () => ({ unprobed: "identical output across all four sense verbs — my declarations carry no craft, so this tests nothing" }),
-  CONCEAL: () => ({ unprobed: "same reason as SENSE_SLOT — no craft behind the verb" }),
-  REVEAL: () => ({ unprobed: "same reason as SENSE_SLOT — no craft behind the verb" }),
+  // ⛔ THE SENSE CLUSTER — and it took FOUR probe attempts to test it honestly. In order, my failures:
+  // no craft behind the verb · testing `sense`/`obscure`, which NO craft in the game carries (the real
+  // verbs are `reveal` and `conceal`/`deceive`) · reading one field instead of the surface · and finally
+  // handing the opponent an EMPTY KIT, when `senseResistOf` reads their kit for a conceal craft.
+  // ⚠️ EVERY ONE OF THOSE WOULD HAVE PRINTED "INERT" ABOUT A MECHANISM THAT WORKS.
+  SENSE_SLOT: () => {
+    const rev = craftWith(a => (a.functions || []).includes("reveal"));
+    if (!rev) return { unprobed: "no craft carries `reveal`" };
+    const look = (oppSkills) => round({ playerDecl: declFor(rev, "reveal"),
+      opp: sheet("them", { skills: oppSkills }), phase: "sense" });   // ⚠️ the phase, omitted the first time
+    const bare = look([]), hid = look([{ name: "a hiding craft", function: "conceal", tier: 5 }]);
+    return { with: JSON.stringify({ resist: hid.senseResist?.value, from: hid.senseResist?.from, setup: hid.setupBonus }),
+      without: JSON.stringify({ resist: bare.senseResist?.value, from: bare.senseResist?.from, setup: bare.setupBonus }),
+      probe: "a reader against a kit WITH a conceal craft vs without" };
+  },
+  CONCEAL: () => {
+    const rev = craftWith(a => (a.functions || []).includes("reveal"));
+    const con = craftWith(a => (a.functions || []).includes("conceal"));
+    if (!rev || !con) return { unprobed: "need a reveal craft and a conceal craft" };
+    const idle = { name: "Wait", function: "strike", intensity: "standard", tier: 1 };
+    const a = round({ playerDecl: declFor(rev, "reveal"), oppDecl: idle, phase: "sense" });
+    const b = round({ playerDecl: declFor(rev, "reveal"), oppDecl: declFor(con, "conceal"), phase: "sense" });
+    return { with: JSON.stringify(b.senseTier), without: JSON.stringify(a.senseTier),
+      probe: `${con.id} DECLARED against a reader (tier drops)` };
+  },
+  REVEAL: () => {
+    const rev = craftWith(a => (a.functions || []).includes("reveal"));
+    if (!rev) return { unprobed: "no craft carries `reveal`" };
+    const r = round({ playerDecl: declFor(rev, "reveal"), phase: "sense" });
+    return { with: JSON.stringify({ tier: r.senseTier, setup: r.setupBonus }), without: "null",
+      probe: `${rev.id} declared as a read` };
+  },
+  // ⛔ THESE TWO ARE MINE, AND ONE OF THEM IS THE ANSWER NOBODY WANTS. `conditions.js` and `projects.js`
+  // were both shipped green with every export reachable only from a test; conditions got wired, projects
+  // did not. The probe reports what is true rather than what I would like.
+  PERSIST_UNTIL_HEALED: async () => {
+    const CD = await import("../engine/conditions.js");
+    const ch = { conditions: [{ id: "gash", name: "Gash", persistUntilHealed: true }, { id: "winded", name: "Winded" }] };
+    const r = CD.clearOnRest(ch, { kind: "sleep" });
+    return { with: JSON.stringify({ persisted: r.persisted.map(c => c.id), cleared: r.cleared.map(c => c.id) }),
+      without: '{"persisted":[],"cleared":["gash","winded"]}',
+      probe: "a night's rest against a persist-until-healed wound" };
+  },
+  PROJECT_TICKS: async () => {
+    const PR = await import("../engine/projects.js");
+    const app = readFileSync("app.js", "utf8");
+    // ⚠️ THE RULE WORKS AND NOTHING CALLS IT — so the honest answer is INERT, not WIRED. Testing
+    // `advanceProject` directly would prove the function and say nothing about the game, which is the
+    // `foothills` error exactly. The caller is the claim.
+    if (!/engine\/projects\.js/.test(app)) {
+      return { with: null, without: null,
+        probe: "projects.js is imported by NOTHING in app.js — the rule runs, the game never calls it" };
+    }
+    const pc = Object.values(C.abilities).find(a => PR.isProjectCraft(a));
+    if (!pc) return { unprobed: "no craft in the corpus is a project craft" };
+    const p0 = PR.openProject({ projects: [], name: "t" }, pc, { day: 0 }).project;
+    const before = PR.projectProgress(p0).fraction;
+    PR.tickProject(p0, { days: 3, hands: 1 });
+    return { with: PR.projectProgress(p0).fraction, without: before, probe: "3 days of work on a threshold-10 project" };
+  },
   ACTION_LOSS: () => {
     const ab = craftWith(a => (a.tree || []).some(r => /action_loss/.test(JSON.stringify(r?.imposes || ""))));
     if (!ab) return { unprobed: "no craft imposes action_loss" };
@@ -129,7 +179,7 @@ for (const [name, def] of Object.entries(EFFECTS)) {
   const probe = PROBES[name];
   if (!probe) { rows.push({ name, claimed, verdict: "UNPROBED", detail: "no probe written" }); continue; }
   let ev;
-  try { ev = probe(); } catch (e) { ev = { unprobed: `probe threw: ${e.message.slice(0, 60)}` }; }
+  try { ev = await probe(); } catch (e) { ev = { unprobed: `probe threw: ${e.message.slice(0, 60)}` }; }
   if (ev.unprobed) { rows.push({ name, claimed, verdict: "UNPROBED", detail: ev.unprobed }); continue; }
   const moved = JSON.stringify(ev.with) !== JSON.stringify(ev.without)
     && ev.with !== null && ev.with !== "null";

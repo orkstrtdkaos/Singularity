@@ -18047,6 +18047,50 @@ await (async () => {
       hit(shz({ conditions: [{ id: "staggered", kind: "action_loss", magnitude: 5 }] })) === none);
   }
 
+  // 5aa · ⛔ CCODE-239 — PROJECTS ADVANCE WITH THE DAYS. `projects.js` shipped green with every export
+  // reachable only from smoke.mjs: work could be banked and nothing ever advanced it, which makes a
+  // threshold a duration that never elapses. It was the ONE inert verdict in the effect audit.
+  {
+    const appSrc239 = readFileSync(join(root, "app.js"), "utf8");
+    check("CCODE-239: app.js imports projects.js — the module can fire in play",
+      /import \{[^}]*tickAllProjects[^}]*\} from "\.\/engine\/projects\.js"/.test(appSrc239));
+    check("CCODE-239: …and `maybeTick` — the one choke point the clock passes through — calls it",
+      /async function maybeTick\(\)[\s\S]{0,900}?tickAllProjects\(character/.test(appSrc239));
+    // ⚠️ BY THE DELTA, NOT BY THE CALL. maybeTick fires on re-entry as well as on a clock jump, so ticking
+    // one day per call would pay a project for opening the app.
+    check("CCODE-239: it pays the DAY DELTA, not one day per call — reopening the app must not advance work",
+      /const days = Math\.max\(0, currentDay - last\)/.test(appSrc239)
+      && /character\._lastProjectDay = currentDay/.test(appSrc239));
+    check("CCODE-239: a project that COMPLETES reaches the news — silent completion reads as never having run",
+      /_projectNews/.test(appSrc239) && /unseenNews/.test(appSrc239));
+
+    // the rule itself, through the real module and REAL project crafts. ⚠️ My first version fabricated an
+    // ability `{id, threshold}` — `isProjectCraft` requires `projectTicks && downtime`, so openProject
+    // returned a REFUSAL, `projectProgress(refusal)` threw, and the suite died reporting zero failures:
+    // 4,104 passes became 4,057. Third time this session, same tell.
+    const PR239 = await import("../engine/projects.js");
+    const pcraft = Object.values(C199.abilities).filter(a => PR239.isProjectCraft(a));
+    check(`CCODE-239: the corpus authors real project crafts (${pcraft.length}) — the rule has content to act on`,
+      pcraft.length > 0, pcraft.map(a => a.id).join(", "));
+    if (pcraft.length) {
+      // ⚠️ `.project` — openProject returns `{ok, project}`, not the project. Using the wrapper made
+      // `history` undefined and killed the suite a SECOND time on the same block. Two different
+      // mistakes, one gate, and both were me not reading the return shape before calling it.
+      const mk = () => PR239.openProject({ projects: [], name: "t" }, pcraft[0], { day: 0 }).project;
+      const p1 = mk();
+      const before = PR239.projectProgress(p1).fraction;
+      PR239.tickProject(p1, { days: 3, hands: 1 });
+      check(`CCODE-239: days of work move a project toward its threshold (${before}% → ${PR239.projectProgress(p1).fraction}%)`,
+        PR239.projectProgress(p1).fraction > before);
+      // ⛔ THE THRESHOLD IS WORK, NOT A DATE — the rule the whole module exists for.
+      const p2 = mk(); PR239.tickProject(p2, { days: 99, hands: 0 });
+      const p3 = mk(); PR239.tickProject(p3, { days: 1, hands: 4 });
+      check("CCODE-239: hands do the work, not the calendar — 99 days with no hands is not 1 day with four",
+        PR239.projectProgress(p2).fraction !== PR239.projectProgress(p3).fraction,
+        `${PR239.projectProgress(p2).fraction}% vs ${PR239.projectProgress(p3).fraction}%`);
+    }
+  }
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

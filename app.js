@@ -101,13 +101,17 @@ import { clearOnRest, applyCondition, activeConditions } from "./engine/conditio
 // see is the same failure as one that does not exist.
 import { ensurePurse, purseLine, worthOf, applyExchangeOps } from "./engine/purse.js";
 import { bargainOutcome } from "./engine/economy.js";
+// ⛔ CCODE-239 — PROJECTS TICK. `engine/projects.js` shipped green with all six exports reachable only
+// from smoke.mjs: work banked, nothing advanced it, and `PROJECT_TICKS` was the one INERT verdict in the
+// effect audit. A threshold nothing counts toward is a duration that never elapses.
+import { tickAllProjects } from "./engine/projects.js";
 import { characterPower } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.200";
+const APP_VERSION = "1.9.201";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4235,9 +4239,40 @@ function publishPartyBeat(label, degree, summary) {
 
 /** World-tick choke point: run whenever the character (re)enters play or the
  *  clock jumps. Returns fresh news to show the player once. */
+let _projectNews = [];
 async function maybeTick() {
   const currentDay = readClock(character.clock).day;
+  // ⛔ CCODE-239 — BANKED WORK ADVANCES WITH THE DAYS, at the one choke point the clock passes through.
+  // ⚠️ BY THE DELTA, NOT BY THE CALL. `maybeTick` fires on re-entry as well as on a clock jump, so
+  // ticking one day per call would pay a project for opening the app. The last day paid is remembered on
+  // the character, and a day is paid exactly once.
+  {
+    const last = Number.isFinite(Number(character._lastProjectDay)) ? Number(character._lastProjectDay) : currentDay;
+    const days = Math.max(0, currentDay - last);
+    if (days > 0 && (character.projects || []).length) {
+      const moved = tickAllProjects(character, { days, hands: 1 + (character.party || []).length, cfg: {} });
+      // ⚠️ NO DIALS BLOCK IS READ HERE, deliberately — and the comment must not NAME one either: I had one, and the unauthored-rules-keys
+      // the unauthored-rules-keys scanner reads SOURCE, so my first comment here — which spelled out the
+      // key I had just removed — kept the ratchet red on its own. That is a scanner reading its own prose,
+      // the fourth instance this month and the first one I caused by explaining myself.
+      // The rule: reading a dial block no pack provides is a phantom control. `projects.js` carries its own
+      // defaults; when someone wants the dials, author the block and add the read in the same change.
+      // ⚠️ A PROJECT THAT COMPLETES MUST SAY SO. Work that finishes silently is indistinguishable from
+      // work that never ran — which is precisely how this module spent a week looking fine. Held until
+      // after the world tick, because that is what creates `worldState` on a first run.
+      _projectNews = moved.filter(m => m.done).map(m => {
+        const pj = (character.projects || []).find(x => x.id === m.id);
+        return `✓ ${pj?.name || m.id} is finished.`;
+      });
+    }
+    character._lastProjectDay = currentDay;
+  }
   await runWorldTick({ character, content: CONTENT, currentDay });
+  if (_projectNews.length && character.worldState) {
+    character.worldState.unseenNews = [...(character.worldState.unseenNews || []),
+      ..._projectNews.map(text => ({ text, day: currentDay, kind: "project" }))];
+    _projectNews = [];
+  }
   try { await runGenerationTurn({ character, content: CONTENT }); } catch (e) { console.warn("[generation] turn skipped:", e?.message); } // SNG-191 §7: the world's own agenda foments on the world count
   // SNG-204 Phase 2: open wakes generate the NEXT thread — the world continues from its own consequences. The
   // generator is the real generate("arc", …) call (only fires when generation is on); each eligible wake spawns

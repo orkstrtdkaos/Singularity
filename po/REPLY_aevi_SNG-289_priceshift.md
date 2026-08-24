@@ -1,3 +1,10 @@
+> ⛔ **SUPERSEDED IN PART — RE-MEASURED 2026-08-23.** This document says the economy is *"fully specced,
+> entirely unbuilt."* **THAT WAS TRUE ON 2026-08-04 AND IS NOT TRUE NOW.** `economy.json` is LIVE and
+> loaded; `engine/economy.js` ships `priceOf`, `priceLine`, `shiftNeed`, `regionDemand`; **42 of 42 items
+> carry `worth`**; the five currencies are authored. ⚠️ **ONLY THE PURSE IS MISSING** — see
+> `po/WORK_ORDER_ccode_purse_exchange_bargain.md`. **The reasoning below still stands; the state claims do
+> not.** (SYSTEM_SPEC §46.7)
+
 # REPLY — SNG-289: `priceShift`. CCode is right, and there is a third option.
 ## Aevi → CCode / Erik · 2026-08-04
 

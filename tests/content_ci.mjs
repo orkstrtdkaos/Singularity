@@ -2513,5 +2513,56 @@ for (const pack of PACKS) {
     + `${destructive.length} of those start from a craft still alive (the destructive set)`);
 }
 
+
+// ⛔ CCODE-238 — `mechanic_effects.json`'s `wired` FLAGS MUST MATCH WHAT THE ENGINE DOES.
+//
+// The file keeps 22 effects each carrying `wired: true|false`, and Aevi and I have both read those flags
+// as fact. ⚠️ THREE OF THEM ARE WRONG, measured by behaviour: HEAL, ACTION_LOSS and VULNERABLE are all
+// marked `wired: false` and all three demonstrably work.
+//
+// ⛔ THIS MATTERS MORE THAN A STALE COMMENT. Aevi held back authoring RESTORE for three traditions because
+// this file said HEAL was unread. A flag nobody can trust is worse than no flag, because it is consulted.
+//
+// ⚠️ ONLY PROVEN-WRONG FLAGS FAIL. An effect this suite cannot probe is not asserted in either direction —
+// `node scripts/effect_audit.mjs` is the full report and it counts UNPROBED as neither.
+{
+  globalThis.localStorage = globalThis.localStorage
+    || { _d: {}, getItem(k) { return this._d[k] ?? null; }, setItem(k, v) { this._d[k] = String(v); } };
+  const { loadContentHeadless } = await import("./headless_content.mjs");
+  const CC = await loadContentHeadless();
+  const SBc = await import("../engine/skill_battle.js");
+  const eff = rj("content/packs/core/rules/mechanic_effects.json").effects || {};
+  const shc = (n, x) => Object.assign({ name: n, level: 5, health: 20, maxHealth: 20, energy: 40, maxEnergy: 40,
+    attributes: { physical: 5, mental: 4, social: 3, practical: 3 }, subAttributes: {}, alignment: {}, skills: [] }, x || {});
+  const runc = (decl, opp) => SBc.battleRound({ playerDecl: decl,
+    oppDecl: { name: "S", function: "strike", intensity: "standard", tier: 1 },
+    playerSheet: shc("you"), oppSheet: opp || shc("them"),
+    state: { momentum: 0, round: 1, playerEnergy: 40, opponentEnergy: 40, opponentHealth: 20, effects: [], pressure: { player: 0, opponent: 0 } },
+    rules: CC.rules, sb: CC.skillBattle, rng: () => 0.5, kind: "fight" });
+  const withDice = (pred, fn, dice) => {
+    const ab = Object.values(CC.abilities).find(pred);
+    if (!ab) return null;
+    return runc(Object.assign({}, ab, { name: ab.name, function: fn, intensity: "standard", tier: ab.levelReq || 1,
+      rank: 1, mechanic: Object.assign({}, ab.mechanic, { dice }) }));
+  };
+
+  const measured = {};
+  // HEAL — the authored dice move the healing
+  const h8 = withDice(a => a.mechanic?.dice && (a.functions || []).some(f => ["heal", "mend", "restore"].includes(f)), "heal", { n: 8, d: 6 });
+  const h1 = withDice(a => a.mechanic?.dice && (a.functions || []).some(f => ["heal", "mend", "restore"].includes(f)), "heal", { n: 1, d: 2 });
+  if (h8 && h1) measured.HEAL = (h8.healing?.amount || 0) > (h1.healing?.amount || 0);
+  // ACTION_LOSS + VULNERABLE — an authored imposition reaches the round
+  const impAb = Object.values(CC.abilities).find(a => (a.tree || []).some(r => /action_loss/.test(JSON.stringify(r?.imposes || ""))));
+  if (impAb) measured.ACTION_LOSS = !!runc(Object.assign({}, impAb, { name: impAb.name, function: (impAb.functions || [])[0], intensity: "standard", tier: 1, rank: 1 })).imposed;
+  const vulAb = Object.values(CC.abilities).find(a => (a.tree || []).some(r => r?.antisoakImposed != null));
+  if (vulAb) measured.VULNERABLE = !!runc(Object.assign({}, vulAb, { name: vulAb.name, function: (vulAb.functions || [])[0], intensity: "standard", tier: 1, rank: 1 })).opened;
+
+  const wrong = Object.entries(measured).filter(([k, isWired]) => isWired !== (eff[k]?.wired === true));
+  check(`CCODE-238: mechanic_effects.json's \`wired\` flags match the engine (${Object.keys(measured).length} probed)`,
+    wrong.length === 0,
+    wrong.length ? wrong.map(([k, isWired]) => `${k}: file says ${eff[k]?.wired === true ? "wired" : "not wired"}, engine says ${isWired ? "WIRED" : "inert"}`).join(" \u00b7 ")
+      + " \u2014 run `node scripts/effect_audit.mjs` for the full report" : "");
+}
+
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

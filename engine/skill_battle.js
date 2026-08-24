@@ -711,6 +711,16 @@ export function senseTierFromDegree(degree, margin, sb) {
   return cfg.failure ?? 0;
 }
 
+/** ⚠️ THE TARGET'S CARRIED ANTISOAK. Mirrors `conditions.js::antisoakOn` deliberately rather than
+ *  importing it: this file takes SHEETS, not characters, and a sheet is not a character. The rule is one
+ *  line and the shapes differ; a shared helper here would have to know about both.
+ *  ⛔ SUMMED (§41) — two different weaknesses open are worse than one. */
+function antisoakFromConditions(sheet) {
+  return (sheet?.conditions || [])
+    .filter(c => c && c.kind === "antisoak")
+    .reduce((t, c) => t + Math.max(0, Number(c.magnitude) || 0), 0);
+}
+
 export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state = {}, rules, sb, steps, rng = Math.random,
   // CCODE-45: a TURN is sense -> action -> bonus. Both options DEFAULT to today's behaviour, so every existing
   // caller is untouched: phase "action" resolves exactly as before, and tickEffects true ticks per exchange.
@@ -1024,7 +1034,14 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         // ⚠️ READ FROM THE TARGET, NOT THE ATTACKING CRAFT. `grief_strike` authors `antisoak: 3` and it is
         // ambiguous whether that means "this blow benefits" or "this blow LEAVES them vulnerable";
         // reading it from the striker would decide that silently. Reported to Erik instead.
-        : antisoakLanded(hit, soak, Number(targetSheet?.antisoak) || 0) || Math.max(dcfg.minHit ?? 1, hit - soak);
+        // ⛔ CCODE-238 — AND FROM THE TARGET'S CONDITIONS, NOT ONLY A FLAT SHEET FIELD. CCODE-216 built
+        // antisoak as a CONDITION and CCODE-228 wired an imposition to write one onto the sheet — and this
+        // line read `targetSheet.antisoak`, a number nothing populated from them. Measured: a flat
+        // `antisoak: 5` raised a 20 to 25, and the identical antisoak carried as a condition changed
+        // nothing at all. The chain was imposed → condition → [nothing] → antisoakLanded.
+        // ⚠️ SUMMED, not max'd, per §41: two crafts each opening a different weakness is worse than one.
+        : antisoakLanded(hit, soak, (Number(targetSheet?.antisoak) || 0) + antisoakFromConditions(targetSheet))
+          || Math.max(dcfg.minHit ?? 1, hit - soak);
       damage = { side: roundWinner === "player" ? "opponent" : "player", amount: landed, verb: winDecl.function,
         by: winDecl.name || winDecl.function,
         // CCODE-83: a blow that was EATEN, shrugged off or doubled must say so. Silently different arithmetic

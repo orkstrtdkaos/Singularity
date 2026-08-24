@@ -18009,6 +18009,44 @@ await (async () => {
       new Set(amounts).size > 1, amounts.join(","));
   }
 
+  // 5z · ⛔ CCODE-238 — AN ANTISOAK CARRIED AS A CONDITION REACHES THE ROUND.
+  //
+  // CCODE-216 built antisoak as a CONDITION; CCODE-228 wired an imposition to write one onto the sheet.
+  // `skill_battle` read `targetSheet.antisoak` — a flat number nothing populated from them. ⚠️ MEASURED:
+  // a flat `antisoak: 5` took a 20 to 25, and the identical antisoak carried as a condition changed
+  // NOTHING. The chain was imposed → condition → [nothing] → antisoakLanded.
+  //
+  // ⛔ FOUND BY THE EFFECT AUDIT MISFIRING, WHICH IS WORTH RECORDING: my probe put antisoak in
+  // `conditions`, got no movement, and the harness was about to report ANTISOAK as inert. The mechanic was
+  // fine; my probe was wrong; and chasing why it was wrong found a real gap one layer down.
+  {
+    const SBz = await import("../engine/skill_battle.js");
+    const abz = Object.values(C199.abilities).find(a => a.mechanic?.dice && (a.functions || []).includes("strike"));
+    const shz = (x) => Object.assign({ name: "them", level: 5, health: 20, maxHealth: 20, energy: 40, maxEnergy: 40,
+      attributes: { physical: 5, mental: 4, social: 3, practical: 3 }, subAttributes: {}, alignment: {}, skills: [], soak: 4 }, x || {});
+    const dz = Object.assign({}, abz, { name: abz.name, function: "strike", intensity: "standard", tier: 1, rank: 1,
+      mechanic: Object.assign({}, abz.mechanic, { dice: { n: 6, d: 6 } }) });
+    const hit = (opp) => SBz.battleRound({ playerDecl: dz, oppDecl: { name: "S", function: "strike", intensity: "standard", tier: 1 },
+      playerSheet: shz({ name: "you" }), oppSheet: opp,
+      state: { momentum: 0, round: 1, playerEnergy: 40, opponentEnergy: 40, opponentHealth: 20, effects: [], pressure: { player: 0, opponent: 0 } },
+      rules: C199.rules, sb: C199.skillBattle, rng: () => 0.5, kind: "fight" }).damage?.amount ?? null;
+
+    const none = hit(shz({}));
+    const flat = hit(shz({ antisoak: 5 }));
+    const cond = hit(shz({ conditions: [{ id: "opened", kind: "antisoak", magnitude: 5 }] }));
+    const both = hit(shz({ antisoak: 5, conditions: [{ id: "opened", kind: "antisoak", magnitude: 5 }] }));
+
+    check(`CCODE-238: a flat sheet antisoak still lands (${none} → ${flat})`, flat > none);
+    check(`CCODE-238: …and an antisoak carried as a CONDITION lands too (${none} → ${cond}) — it did nothing before`,
+      cond > none, `${none} vs ${cond}`);
+    // ⛔ §41: SUMMED, not max'd — two crafts each opening a different weakness is worse than one.
+    check(`CCODE-238: two sources SUM rather than compete (${both}) — §41's rule, not a max`,
+      both > flat && both - none === (flat - none) + (cond - none), `${both}`);
+    // ⚠️ and a condition of a DIFFERENT kind must not be read as antisoak
+    check("CCODE-238: only conditions of kind `antisoak` count — a stagger is not a weakness",
+      hit(shz({ conditions: [{ id: "staggered", kind: "action_loss", magnitude: 5 }] })) === none);
+  }
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

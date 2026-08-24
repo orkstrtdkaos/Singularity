@@ -2038,47 +2038,34 @@ they surface in the per-tradition audit rather than reading as though someone ha
 
 *⛔ THE MIND REACHING ANOTHER MIND DIRECTLY — striking it, holding it, joining it, or changing what it perceives. No vector, no contact, nothing to interpose.*
 
-| skill | L | sect | dice | e | shape | tags | r1 | r2 | r3 |
-|---|---|---|---|---|---|---|---|---|---|
-| **Ignore Me** | 1 | cog | — | 3 | conceal | obscure | **Nothing Worth Looking At** +conceal | **And Whoever Is With Me** — · *scope, targets* | **Even Spoken To** +deceive · *duration, conditions* |
-| **Quiet the Room** | 1 | cog | — | 3 | guard |  | **End the Condition** +soothe | **Stop the Rout** — · *scope, targets* | **Back From It** +restore · *quality, conditions* |
-| **Sustained Regard** | 1 | cog | 1d6 | 6 | strike |  | **Whole of It** +strike, +hinder | **Held Regard** +bind · *duration, autonomy* | **Undivided** — · *duration, conditions* |
-| **Force the Move** | 2 | cog | — | 4 | hobble |  | **Make Them Answer** +provoke | **Break the Line** — · *targets, scope* | **On the Record** +bind · *duration, autonomy* |
-| **My Reality** | 3 | fig | — | 6 | conceal | obscure | **Ordinary Corner** +conceal, +deceive | **Ordinary Room** — · *duration, scope* | **My Reality** +make, +strike · *duration, targets, quality, autonomy, conditions* |
-| **Psychic Lance** | 3 | cog | 3d6 | 7 | strike |  | **The Spike** +strike | **Two at Once** — · *targets, damage* | **Nothing Held** +hinder · *conditions* |
-| **Mind Meld** | 4 | cog | — | 8 | bolster | sense | **Open Door** +reveal, +empower | **Long Room** +sustain · *range, scope* | **One Mind** — · *quality, conditions* |
-| **Convergent Strike** | 5 | cog | 5d6 | 13 | damage | sense | **Convergent Strike** +strike, +foresee | — | — |
-| **Names of Power** | 5 | cog | — | 13 | hobble |  | **Name They Are Called** +bind, +persuade | **Name They Are Known By** +command · *conditions* | **Name They Call Themselves** +hinder · *duration, autonomy, targets* |
+⛔ **THE TABLE THAT WAS HERE IS NOW GENERATED — see `po/MATRIX_mind.md`.**
+Regenerate with `node po/matrix_gen.mjs mind --out po/MATRIX_mind.md`. ⚠️ **The hand-written
+version printed `skill | L | sect | dice | e | shape | tags | r1..r3` and had no column for
+typed damage, wards, `crit`, `imposes`, `ongoingHarm` or antisoak — a craft could gain a whole
+capability and the table would look unchanged.**
+
 
 ### Deduction — 10
 
 *⛔ THOUGHT APPLIED TO A PROBLEM AND CONVERTED INTO ADVANTAGE — a fight read, a route solved, a fault named, an argument closed, a price known.*
 
-| skill | L | sect | dice | e | shape | tags | r1 | r2 | r3 |
-|---|---|---|---|---|---|---|---|---|---|
-| **Case Closed** | 1 | syl | — | 4 | setup |  | **Matter Settled** +persuade | **Inescapable** +bind · *targets, conditions* | **Only Consistent Act** +empower · *damage, autonomy, duration* |
-| **Contradiction** | 1 | syl | — | 5 | hinder |  | **Named Flaw** +hinder, +break | **Reductio** +bind · *targets, conditions* | **Collapse** — · *duration, scope* |
-| **Known Price** | 1 | syl | — | 3 | setup |  | **Open at the Close** +bargain | **Any Coin Is Coin** +persuade · *quality, scope* | **Terms Nobody Else Is Offered** — · *quality, autonomy* |
-| **Unbroken Thread** | 1 | syl | — | 1 | sustain |  | **Held Through** +sustain | **Across Days** +resist · *range, duration* | **Last Thing to Fail** — · *duration* |
-| **Deduced Strike** | 2 | cog | 2d6 | 4 | strike | sense | **Read the Fight** +strike, +reveal | **Called Effect** +hinder · *quality, conditions* | **Strike in the Reading** — · *tempo, conditions* |
-| **Physician's Tome** | 2 | syl | 2d4 | 2 | healing |  | **Diagnosis and First Care** +heal | **Full Sequence** +restore, +mend · *scope, quality* | **Root and Branch** — · *quality, targets* |
-| **Solved Route** | 2 | cog | — | 1 | reposition |  | **Route** +move | **Moving Space** +travel · *conditions, duration* | **Designed Scene** — · *targets, conditions* |
-| **Memory-Palace** | 3 | cog | — | 6 | bolster | sense | **Cross-Reference** +empower, +reveal | **The Whole House** — · *quality* | **The Borrowed Room** +track · *targets, conditions* |
-| **Working Model** | 3 | cog | — | 2 | construct |  | **Single Thing** +make | **Whole Working** +mend · *scope, targets* | **Modelled Country** — · *targets, quality, autonomy* |
-| **Unmoving Mind** | 4 | cog | — | 11 | guard |  | **Still Mind** +resist | **Stillness While Moving** — · *conditions* | **Nothing Lands** — · *conditions, quality* |
+⛔ **THE TABLE THAT WAS HERE IS NOW GENERATED — see `po/MATRIX_mind.md`.**
+Regenerate with `node po/matrix_gen.mjs mind --out po/MATRIX_mind.md`. ⚠️ **The hand-written
+version printed `skill | L | sect | dice | e | shape | tags | r1..r3` and had no column for
+typed damage, wards, `crit`, `imposes`, `ongoingHarm` or antisoak — a craft could gain a whole
+capability and the table would look unchanged.**
+
 
 ### Figurework — 6
 
 *⛔ ABSTRACTION MADE PHYSICALLY REAL — a line that cuts, a threshold that holds, a figure sent to act, a structure that runs without you.*
 
-| skill | L | sect | dice | e | shape | tags | r1 | r2 | r3 |
-|---|---|---|---|---|---|---|---|---|---|
-| **Cutting Figure** | 1 | fig | 1d6 | 6 | strike |  | **Drawn Line** +strike, +break | **Compound Figure** — · *scope* | **Cut Thought** +hinder · *damage, conditions* |
-| **Named Exclusion** | 1 | fig | — | 4 | ward |  | **Set Mark** +ward, +make | **Mark That Keeps** +bind · *scope* | **Governed Ground** +command · *scope* |
-| **Formcraft** | 2 | fig | — | 6 | construct |  | **Copied Form** +transform, +reveal | **Form from Report** +make · *scope, quality* | **Form Out of Need** — · *scope, conditions, autonomy* |
-| **Built System** | 3 | syl | — | 2 | construct | downtime | **Working Rule** +make | **Self-Regulating** +sustain · *autonomy, duration* | **Lasting Structure** +bind · *autonomy* |
-| **Walking Figure** | 3 | fig | — | 7 | ward |  | **Sent Figure** +summon, +bind | **Figure That Stays** +ward · *duration* | **Figure That Judges** — · *autonomy* |
-| **Borrowed Form** | 4 | fig | — | 12 | reposition |  | **Borrowed Form** +travel, +transform | **Long Form** — · *range, duration, targets* | **Shared Form** — · *duration, scope, targets* |
+⛔ **THE TABLE THAT WAS HERE IS NOW GENERATED — see `po/MATRIX_mind.md`.**
+Regenerate with `node po/matrix_gen.mjs mind --out po/MATRIX_mind.md`. ⚠️ **The hand-written
+version printed `skill | L | sect | dice | e | shape | tags | r1..r3` and had no column for
+typed damage, wards, `crit`, `imposes`, `ongoingHarm` or antisoak — a craft could gain a whole
+capability and the table would look unchanged.**
+
 
 ### Allocation
 
@@ -2109,37 +2096,23 @@ they surface in the per-tradition audit rather than reading as though someone ha
 
 *⛔ WHAT A THING IS AND WHAT IT WILL DO — read it, mend it, throw it, take it apart, and move through it. ⚠️ AND THE SAME CRAFT TURNED ON PEOPLE: what your word is worth, what a job costs, and*
 
-| skill | L | sect | dice | e | shape | tags | r1 | r2 | r3 |
-|---|---|---|---|---|---|---|---|---|---|
-| **Hurled Weight** | 1 | som | 1d6 | 4 | damage |  | **Get Under It** +strike, +break | **Committed Throw** — · *targets* | **Scattering** — · *targets, damage* |
-| **Near Way** | 1 | mas | — | 1 | reposition |  | **Seam** +open | **Material Passage** +move · *conditions, duration* | **Way In** +make · *quality, conditions* |
-| **Plain Weight** | 1 | mas | 2d6 | 6 | strike |  | **True Weight** +strike, +break | **Settled Fact** +hinder · *targets, damage* | **Leaden Word** — · *scope, quality* |
-| **Sound Read** | 1 | mas | — | 3 | reveal | sense·downtime | **Hand On It** +reveal | **Whole Fabric** — · *quality, targets* | **Prepare the Ground** +make · *scope, autonomy* |
-| **Worth the Work** | 1 | mas | — | 3 | setup |  | **Days and Stone** +bargain | **Paid in Work** +persuade · *targets, conditions* | **Standing Account** — · *duration, autonomy* |
-| **Set Word** | 2 | mas | — | 1 | bolster |  | **Plain Statement** +command | **Word That Holds** +bind · *duration, autonomy* | **Fixed Point** — · *targets, autonomy* |
-| **Sound Repair** | 2 | mas | 2d4 | 2 | healing |  | **Correct Fix** +mend | **Sound Again** +restore · *quality, duration* | **As It Was** — · *quality, targets* |
-| **Thingcraft** | 2 | mas | — | 6 | construct | sense | **Weighed Thing** +reveal | **Set Stone** +make, +bind · *duration, targets* | **Denial** +shield · *conditions, quality* |
-| **Reduction** | 3 | mas | — | 8 | hobble |  | **Plain Fact** +reveal, +break | **Reduction** — · *targets, damage* | **Nothing Left Standing** — · *quality, duration* |
-| **Keystone Blow** | 4 | mas | 4d6 | 11 | damage |  | **Keystone Blow** +break, +reveal | **Made Keystone** — · *duration* | — |
-| **Rising Step** | 4 | mas | — | 14 | reposition |  | **Rising Step** +travel, +transform | **Company Stair** — · *scope* | **Kept Crossing** — · *duration* |
-| **Unmaking of Walls** | 5 | mas | 5d6 | 13 | damage |  | **Unmaking of Walls** +break, +transform · *quality, targets* | — | — |
+⛔ **THE TABLE THAT WAS HERE IS NOW GENERATED — see `po/MATRIX_body.md`.**
+Regenerate with `node po/matrix_gen.mjs body --out po/MATRIX_body.md`. ⚠️ **The hand-written
+version printed `skill | L | sect | dice | e | shape | tags | r1..r3` and had no column for
+typed damage, wards, `crit`, `imposes`, `ongoingHarm` or antisoak — a craft could gain a whole
+capability and the table would look unchanged.**
+
 
 ### Discipline — 10
 
 *⛔ THE BODY AS THE INSTRUMENT — conditioned until it stops taking harm the way bodies do, trained until it acts before the decision, carried past what ground allows, and finally drawn on dire*
 
-| skill | L | sect | dice | e | shape | tags | r1 | r2 | r3 |
-|---|---|---|---|---|---|---|---|---|---|
-| **Answered Motion** | 1 | som | 1d6 | 5 | strike |  | **Turned Joint** +strike, +break | **Given Fall** +hinder · *targets, damage* | **Taken Apart** — · *scope, conditions* |
-| **False Stance** | 1 | som | — | 3 | conceal | obscure | **False Stance** +deceive | **Wrong Fight** +hinder · *conditions, damage* | **Nothing True** +conceal · *targets, conditions* |
-| **Loose-Limbed** | 1 | som | — | 3 | reposition |  | **Run and Vault** +move, +travel | **Slip Anything** +resist · *conditions, targets* | **Nothing Holds** — · *duration, targets, conditions* |
-| **Quick Hands** | 1 | som | — | 2 | setup |  | **Early Hands** +hinder | **Turned Catch** +strike · *range, damage* | **Both Hands** — · *targets, conditions* |
-| **Second Wind** | 1 | som | — | 4 | bolster |  | **Embrace the Suck** +sustain, +resist, +heal | **Third Wind** +empower · *duration, damage, conditions* | **Dream Breath** — · *duration, quality, conditions* |
-| **Steady Hands** | 1 | som | — | 2 | guard |  | **Hand On Them** +soothe | **Held Together** +sustain · *duration, conditions* | **Everyone Standing** — · *targets, conditions* |
-| **Perfect Motion** | 2 | som | — | 5 | guard |  | **Acrobatics** +move, +resist | **Unwasted Motion** +shield · *conditions, quality* | **Motion Without Thought** +strike · *tempo, damage* |
-| **Shaped Body** | 3 | som | — | 2 | guard |  | **Hardened** +resist, +transform | **Seasoned** +sustain · *quality, conditions* | **Body Is Clay** — · *quality, conditions* |
-| **Skydancer** | 3 | som | — | 9 | reposition |  | **Air-Step** +move, +travel | **Long Air** — · *duration, conditions* | **Carry the Line** +sustain · *targets, quality* |
-| **Ki Wield** | 5 | som | 4d6 | 12 | strike |  | **Ki Edge** +strike | **Ki Bolt** — · *range, targets* | **Ki Wield** +shield, +resist · *quality, conditions* |
+⛔ **THE TABLE THAT WAS HERE IS NOW GENERATED — see `po/MATRIX_body.md`.**
+Regenerate with `node po/matrix_gen.mjs body --out po/MATRIX_body.md`. ⚠️ **The hand-written
+version printed `skill | L | sect | dice | e | shape | tags | r1..r3` and had no column for
+typed damage, wards, `crit`, `imposes`, `ongoingHarm` or antisoak — a craft could gain a whole
+capability and the table would look unchanged.**
+
 
 ### Allocation
 
@@ -2183,23 +2156,13 @@ the authored field, not the annotation.**
 
 ### 37.2 The known corpus-wide defects — expect all of them
 
-⛔ **RE-MEASURE THIS TABLE BEFORE YOU TRUST IT. DO NOT INHERIT ITS NUMBERS.** Every figure below was
-measured on **2026-08-23**, and four of the five defects it used to name as open have since been closed —
-it was sending auditors to hunt 295 bad `powerSystem` values that no longer exist. ⚠️ **A defect table is a
-snapshot wearing the clothes of a law**, which is the same trap `MATRIX_death.md` set when it was read as
-state, one file over.
-
-| defect | when written | **measured 2026-08-23** | fix |
-|---|---|---|---|
-| ⛔ **`powerSystem` holds a reach id or `attribute`** | 295 of 340 | ✅ **0 of 382** — closed by CCODE-217 | — |
-| ⛔ **`cannot` points at the next rank** | 210 ranks | ✅ **~1** | write a real bound (§32.14) |
-| ⛔ **social crafts tagged mechanically** | 10 of 12 traditions | ✅ **1 of 30** | if it works by speaking, it carries one (§31.5) |
-| ⚠️ **no obscure** | 10 of 14 traditions | ⚠️ **20 of 30** — **grew** | author one, tradition-flavoured (§34.4) |
-| ⚠️ **`scope` as the default rank gain** | 22–37% | not re-measured | usually `targets` doing scope's job |
-
-⚠️ **THE ONE THAT GREW IS THE INTERESTING ROW.** `no obscure` went from 10-of-14 to 20-of-30 not because
-anything regressed but because **the corpus grew faster than the authoring** — the ratio held while the
-absolute number doubled. A table of raw counts cannot tell those two apart, and this one nearly did not.
+| defect | scale | fix |
+|---|---|---|
+| ⛔ **`powerSystem` holds a reach id or `attribute`** | **295 of 340** | set from `byTradition_primary_20260815`, per-craft where it differs |
+| ⛔ **`cannot` points at the next rank** | **210 ranks** | write a real bound (§32.14) |
+| ⛔ **social crafts tagged mechanically** | 10 of 12 traditions have NO social verb | if it works by speaking, it carries one (§31.5) |
+| ⚠️ **no obscure** | 10 of 14 traditions | author one, tradition-flavoured (§34.4) |
+| ⚠️ **`scope` as the default rank gain** | 22–37% before correction | usually `targets` doing scope's job |
 
 ### 37.3 ⛔ THE FIVE MERGE PATTERNS
 
@@ -2338,6 +2301,52 @@ decoration.**
 
 
 ---
+
+### 37.8 ⛔ THE MATRIX IS GENERATED. NEVER HAND-KEEP ONE. (2026-08-23)
+
+**`node po/matrix_gen.mjs death|mind|body --out po/MATRIX_<x>.md` — step 0 of any audit, before measuring
+anything.**
+
+⛔ **THIS IS AN SOP BECAUSE THE HAND-KEPT ONE COST A WHOLE PLANNING PASS.** `MATRIX_death.md` was written
+by hand and drifted: it printed `attribute` and reach-ids in the source column, twelve
+`BOUND NOT AUTHORED` that were already authored, and **it could not see two crafts at all.** I planned a
+twelve-step audit against those numbers before checking them. ⚠️ **A hand-kept matrix is your own work
+wearing the corpus's clothes** — §37.1 says measure the corpus, and a document you maintain is not it.
+
+**Three things the generator does that a person will not do reliably:**
+
+1. ⛔ **IT MERGES `first_gift_template` THE WAY `engine/state.js` MERGES IT** — absent fields only,
+   `mechanic` shallow-merged. `deathsense` and `the_true_feeling` were invisible to the old generator
+   because it read the FILES and the template merges at LOAD. ⚠️ **Reading files and calling it the corpus
+   is the same error one level down.**
+2. ⛔ **IT DERIVES MEMBERSHIP RATHER THAN HARDCODING IT.** Mind and Body are defined by the `skills` lists
+   in their schools files — **25 and 22.** Grouping by tradition id instead returns **39 and 50**, and I
+   generated both before the count disagreed with §35 and caught it.
+3. **It prints the capability columns** — `harm · dmgType · ward · mechanics · tags` and per-rank
+   `⟨imposes · ongoing · persists · antisoak⟩`. ⚠️ **The 2026-08-16 table had none of these, so a craft
+   could gain a whole capability and the table would look identical.**
+
+### 37.9 ⛔ MEASURE A GAP AGAINST THE OTHER TRADITIONS BEFORE CALLING IT A GAP (2026-08-23)
+
+**Generated across Death, Mind and Body on the same day:**
+
+| | Death | Mind | Body |
+|---|---|---|---|
+| no `mechanic.crit` | ⛔ **59%** | 32% | 41% |
+| no `wardTypes` | 84% | 84% | 82% |
+| no `imposes` on any rank | 84% | 92% | 77% |
+| no `ongoingHarm` on any rank | 91% | 96% | 95% |
+| social verbs | ⛔ `persuade, soothe` | **all four** | missing `provoke` |
+
+⛔ **WARDS, `imposes` AND `ongoingHarm` ARE CORPUS NORMS, NOT DEFECTS.** Mind is a COMPLETED tradition and
+sits at 84% missing wards. ⚠️ **I had Death's 27-missing-wards as an audit item to fill; filling it would
+have made Death the outlier and silently repriced the tradition against every other.**
+
+**The real Death-specific defects are the two that DIVERGE:** `crit` at nearly twice Mind's rate, and the
+missing `bargain`/`provoke` — ⛔ **and Death of all traditions should have `bargain`: what a person will
+pay to be spared an ending is the oldest scene there is.**
+
+**THE RULE: a count is not a gap until a completed tradition disagrees with it.**
 
 ## 38. Live audit artifacts (2026-08-16)
 
@@ -2972,95 +2981,3 @@ by diffing against the already-damaged file.
 **The corrective is `tests/content_which.mjs`** — ⛔ **six assertions that name WHICH, not WHETHER.** It
 found 10 things on its first run, six of them mine. ⚠️ **A gate asserting whether a palette resolves cannot
 see a craft resolving the wrong one.**
-
----
-
-## 45. Four systems the spec had never mentioned — 2026-08-23
-
-⚠️ **All four were built, gated and shipped without a line here.** A spec that lags the engine is not
-neutral: §37.2 above spent a week sending auditors after 295 defects that no longer existed, and the four
-below sent them after nothing at all, because nothing here said they were there.
-
-### 45.1 ⛔ RANK-FIRST AUTHORING — the most-repeated failure of the month, four instances
-
-⛔ **AEVI AUTHORS ON `tree[]`. READERS KEPT LOOKING AT THE ABILITY.** Four separate readers were written
-against `ability.mechanic.X` for a field that is authored one level down, and each one silently returned
-nothing.
-
-**This is not a near-miss. Measured across the whole corpus today:**
-
-| field | authored on `tree[]` | on the ability |
-|---|---|---|
-| `imposes` | **14** | ⛔ **0** |
-| `ongoingHarm` | **7** | ⛔ **0** |
-| `persistUntilHealed` | **4** | ⛔ **0** |
-
-⛔ **THE ABILITY LEVEL IS EMPTY FOR EVERY FIELD WHERE THE DISTINCTION MATTERS.** A reader pointed there
-does not find stale data or partial data — it finds `null`, **forever, for all 373 crafts**. And `null` is
-indistinguishable from *"the author has not written this yet,"* which is why it never threw, never failed a
-gate, and took four separate discoveries to see.
-
-**THE READER IS `authoredBlock(ability, key, rank)` in `engine/craftmechanics.js`, AND NOTHING SHOULD READ
-THESE FIELDS ANY OTHER WAY.** It walks `tree[]` down from the character's rank, takes the highest rank at
-or below it that authors the key, and only then falls back to the ability. **Both `r.X` and `r.mechanic.X`
-are accepted, because both spellings exist in the corpus.**
-
-⚠️ **AND THE FALLBACK IS THE DANGEROUS PART OF IT.** `?? ability.mechanic[key] ?? ability[key]` is what
-makes it safe to adopt everywhere — and it is also what would let a reader keep *looking* correct while a
-future field is authored only at the ability level. **The table above is the check: if a column that reads
-0 today ever reads non-zero, someone has authored against the fallback.**
-
-### 45.2 Change sets — how content ships now, and how the claim gets machine-checked
-
-**A change set is a manifest of what a content edit touched, checked by `tests/changeset_check.mjs`,
-which DERIVES the referrers from the tree rather than trusting the list.** It checks four things: every
-new file is registered in the manifest (§42.1a — retired files excepted), no id crosses a namespace
-(§43.2), the save impact is stated, and `expectedGates` names gates that exist.
-
-⛔ **IT EXISTS BECAUSE "I CHANGED THESE FILES" IS A CLAIM, AND EVERY OTHER CLAIM THIS MONTH THAT WENT
-UNCHECKED WAS WRONG.** 27 files were authored, correct, and unregistered — invisible to the loader while
-passing every gate that read the disk.
-
-### 45.3 The seeking clock — `engine/seeking.js` (CCODE-222)
-
-**CCODE-220 made a driven NPC act when they are in the scene. This is what puts them there.**
-
-⛔ **A CLOCK, NOT A QUEUE.** Pressure builds while you are APART and empties when you MEET, so someone who
-wants something comes looking and someone you saw yesterday does not. **`noteSeen` is what empties it, and
-without that call the model is just a queue that fills forever.**
-
-⛔ **THE RATE READS `|relationship|`, NEVER ITS SIGN.** A devoted friend at +8 and a declared enemy at −8
-are **both** impatient (3 days); a neutral acquaintance waits 21. **Keying on the signed value would have
-made hostility a reason to stay away — and "the rival who wants something from you" is the better scene.**
-
-**Three guards, each gated:** no authored `wants` → no seeking, at any relationship, forever (111 people
-are in the registry and 7 have interiority); **at most `maxSeekers` = 1** — *a world where four people
-find you the moment you rest is a notification tray, not a world with relationships in it*; and ⚠️ **the
-tick READS the registry and marks nobody seen** — being sought is not being met, or the arrival is spent
-before the scene happens.
-
-**Dials at `npc_interiority.seeking`. The line is a deliberately flat placeholder so it cannot be mistaken
-for authored prose.**
-
-### 45.4 Projects — `engine/projects.js` (CCODE-215)
-
-⚠️ **`duration` is how long the RESULT lasts. `projectThreshold` is how long the WORK takes.** A project
-completes on **banked work crossing a threshold, never on a date.** Interruption keeps the bank;
-sabotage never drives it below zero; extra hands are **sublinear** (`1 + (h−1)·extra/√h`); and
-`inheritProject` moves the `owner` and never the `opener` — **who opened it is history, not a role.**
-
-### 45.5 The harnesses that assert nothing
-
-**`tests/sunk_assay_run.mjs` plays all four levels and prints receipts. `scripts/audit_images.mjs`
-reports. ⛔ NEITHER ASSERTS, AND `audit_images` WRITES TO NO SAVE.** They exist to be read by a person —
-**a harness that judges its own output is the failure this spec names in five other places.**
-
-### 45.6 ⚠️ AND ONE FROM WRITING THIS SECTION
-
-**Measuring §45.1 I checked whether any healing was authored, looked for a `heal` key, found zero, and
-nearly wrote "the engine is ready and no content uses it."** ⛔ **57 crafts carry `heal`/`mend`/`restore`
-— healing keys off the VERB in `functions`, gated by `engine.damage.healFunctions`, not off a field.**
-
-⚠️ **That is the §45.1 failure exactly — a reader looking one level away from the authoring and reading
-the resulting `null` as "unauthored" — committed by me, in the measurement for the section about it, one
-step before it went into the spec as fact.**

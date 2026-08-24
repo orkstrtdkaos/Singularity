@@ -17607,6 +17607,13 @@ await (async () => {
       { id: "gash", name: "Gash", persistUntilHealed: true },
       { id: "shaken", name: "Shaken" } ] });
     const night = mk(); const rn = CD.clearOnRest(night, { kind: "sleep" });
+    // ⛔ AND THE PLAYER CAN SEE WHAT THEY CARRY. A condition on the sheet that never reaches the screen
+    // is the same failure as one that never lands — and I shipped exactly that for one commit, importing
+    // `activeConditions` and calling it nowhere, inside a change about stranded code.
+    check("CCODE-227b: the character screen SHOWS standing conditions, and marks the ones a night will not lift",
+      /activeConditions\(character\)/.test(appSrc227) && /What you are carrying/.test(appSrc227)
+      && /will not lift with rest/.test(appSrc227));
+
     check("CCODE-227: a night lifts what a night can and leaves persist-until-healed standing",
       rn.cleared.length === 2 && rn.persisted.length === 1 && rn.persisted[0].id === "gash");
     const breather = mk(); const rb = CD.clearOnRest(breather, { kind: "breather" });

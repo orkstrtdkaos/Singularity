@@ -101,7 +101,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.191";
+const APP_VERSION = "1.9.192";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10134,6 +10134,18 @@ function renderCharacterScreen() {
       </div>
     </div>
     ${characterTabBar("traits")}
+    ${/* ⛔ CCODE-227b — WHAT YOU ARE CARRYING, WHERE YOU CAN SEE IT. A condition that sits on the sheet and
+         never appears on screen is the same failure as one that never lands: the player cannot act on what
+         they are not told. The `needMending` split is the one that matters — a night will not touch those,
+         so the sheet has to say so or the player waits for a rest that will never work. */""}
+    ${(() => {
+      const { all, needMending } = activeConditions(character);
+      if (!all.length) return "";
+      const mend = new Set(needMending.map(c => c.id));
+      return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">What you are carrying</h3>
+        <div class="opt-row">${all.map(c => `<span class="opt" style="cursor:default${mend.has(c.id) ? ";border-color:var(--danger)" : ""}" title="${mend.has(c.id) ? "A night will not lift this — it has to be healed." : "A full night's rest will lift this."}">${esc(c.name || c.id)}${mend.has(c.id) ? " — needs mending" : ""}</span>`).join("")}</div>
+        ${needMending.length ? `<p class="hint" style="margin-top:6px">${needMending.length} of these will not lift with rest. Find a mend.</p>` : ""}</div>`;
+    })()}
     ${Object.values(b).some(v => v) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Story</h3>
       ${["hometown", "residence", "livelihood", "hobbies", "motivation"].filter(k => b[k]).map(k => `<div class="codex-fact"><strong style="text-transform:capitalize">${k}:</strong> ${esc(b[k])}</div>`).join("")}
       ${(() => { // SNG-215 §C-2 dedup: the lived "story so far" paragraph is the Chronicle tab's job now; the

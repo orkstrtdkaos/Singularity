@@ -3861,16 +3861,27 @@
      "cannot": "Knowing the hour does not give you the power to move it, and it will not let you unknow it.",
      "functions": [
       "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality"
      ]
     },
     {
      "rank": 3,
      "name": "The Hour Known",
      "grants": "The dying stands plain: you perceive its cause, its trajectory, and what would turn it aside — if anything would. The Ashwarden reads a living thing's end as clearly as its beginning, and can say aloud what is present in them right now.",
-     "cannot": "Some endings have no turning-aside. Deathsense does not make endings negotiable; it makes them visible.",
+     "cannot": "⛔ YOU KNOW EXACTLY WHAT IS HAPPENING AND NOTHING ABOUT WHAT TO DO. Reading a body tells you the shape of its ending, never the remedy — a remedy is not in the body. ⚠️ And it will not let you unknow it.",
      "functions": [
       "foresee",
       "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "targets"
      ]
     }
    ],
@@ -3925,7 +3936,8 @@
    "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: reads the Living And The Dying, not the already-dead.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_tidied_20260823": "⚠️ r2/r3 carried no `gains` and no `harmRung`, and r3 had no `cannot` at all — the first-gift cohort's thin tail, where the template supplies ability-level fields and nothing per-rank. ⛔ r3's ceiling is the Ashwarden's own weight and the reason they need the bird: perception reaches the ending, testimony reaches the way out."
   },
   {
    "id": "lifesense",

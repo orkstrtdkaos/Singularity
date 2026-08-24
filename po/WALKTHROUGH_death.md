@@ -102,7 +102,7 @@
 
 ### r2 — The Long Count
 
-**functions:** foresee · **gainAxes:** ⛔ NONE · **gains:** — · **harm:** —
+**functions:** foresee · **gainAxes:** quality · **gains:** deepen · **harm:** none
 
 **grants:** Sense not only that something living is dying but HOW — the cause, the shape, roughly how long. A body tells its ending to the Ashwarden before it tells anyone else.
 
@@ -110,11 +110,11 @@
 
 ### r3 — The Hour Known
 
-**functions:** foresee, reveal · **gainAxes:** ⛔ NONE · **gains:** — · **harm:** —
+**functions:** foresee, reveal · **gainAxes:** quality, targets · **gains:** deepen · **harm:** none
 
 **grants:** The dying stands plain: you perceive its cause, its trajectory, and what would turn it aside — if anything would. The Ashwarden reads a living thing's end as clearly as its beginning, and can say aloud what is present in them right now.
 
-**cannot:** Some endings have no turning-aside. Deathsense does not make endings negotiable; it makes them visible.
+**cannot:** ⛔ YOU KNOW EXACTLY WHAT IS HAPPENING AND NOTHING ABOUT WHAT TO DO. Reading a body tells you the shape of its ending, never the remedy — a remedy is not in the body. ⚠️ And it will not let you unknow it.
 
 **bounds:** reads the LIVING AND THE DYING, not the already-dead · KNOWING THE HOUR DOES NOT GIVE YOU THE POWER TO MOVE IT · SOME ENDINGS HAVE NO TURNING-ASIDE
 

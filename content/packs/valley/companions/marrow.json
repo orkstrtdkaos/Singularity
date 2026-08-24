@@ -6,7 +6,7 @@
  "role": "Companion — an Ashwarden-touched carrion bird that attends endings, including yours",
  "appearance": "A big grey-black corvid, ragged and unbothered, with an eye that is far too calm. Sits where it can see the whole situation. Has been present at more deaths than anything else you have ever met and it has not made it cruel, only extremely unhurried.",
  "persona": "Marrow tends endings. It is not a harbinger and it is not an omen — it is simply the thing that shows up when something is concluding, because that is its work and it takes the work seriously. It is dry, patient, and entirely without sentiment about death, which reads as cold until the first time you are dying and it stays.",
- "voiceHints": "Croaks. Once, unmistakably, a word. Denies it. Its silences are timed, and the timing is a comment.",
+ "voiceHints": "Croaks. At stage 1, once, unmistakably, a word — and denies it. At stage 2 it stops denying and starts using them, sparingly, badly, only to you. Its silences are timed, and the timing is a comment.",
  "assistTags": [
   "deathsense",
   "scout",
@@ -40,19 +40,20 @@
   {
    "stage": 1,
    "name": "The Attending Bird",
-   "narrationHints": "Turns up where things are concluding. Watches. Does not interfere."
+   "narrationHints": "Turns up where things are concluding. Watches. Does not interfere. Its silences are timed, and the timing is a comment."
   },
   {
    "stage": 2,
-   "name": "The Told Truth",
-   "narrationHints": "Tells you what it sees before you ask, now — plainly, unsparingly, and always in time to matter."
+   "name": "The One Who Speaks",
+   "narrationHints": "⛔ IT TALKS NOW — a little, badly, and only to you. Two or three words in a voice like a door on a cold hinge, always about the work: \"soon.\" \"not that one.\" \"made, not natural.\" ⚠️ IT WILL NOT DISCUSS THE FACT THAT IT IS TALKING. If you remark on it, it is a bird again for the rest of the day. It tells you what it sees before you ask now, and the words are the smallest part of that."
   },
   {
    "stage": 3,
    "name": "The One Who Stays",
-   "narrationHints": "You were dying, once, and it did not leave, and it did not lie to you, and you have not spoken of it since."
+   "narrationHints": "⛔ YOU WERE DYING, ONCE, AND IT DID NOT LEAVE, AND IT DID NOT LIE TO YOU — and at some point in that long night you understood that the thing sitting with you was not a bird and had not been for a very long time. ⚠️ THEY STAND UP. An Ashwarden, grey and unhurried, with an eye that is far too calm, who has attended more endings than anything you have ever met and chose a shape that could reach the ones the March cannot. ⛔ THEY DO NOT EXPLAIN AND THEY DO NOT APOLOGISE. They stay until it is finished, one way or the other, and afterwards they are a bird again and you have not spoken of it since. ⚠️ GM: THIS IS THE ONLY PLACE IT IS EVER CONFIRMED. Anyone who has not reached bond 10 gets a corvid with a good eye, and Marrow will let them keep thinking so."
   }
  ],
  "substrateAura": -0.05,
- "substrateNote": "Ashwarden-touched. What tends endings does not hold a charge."
+ "substrateNote": "Ashwarden-touched. What tends endings does not hold a charge.",
+ "_stagesRevised_20260823": "⛔ ERIK 2026-08-23: 'it would be amazing if Marrow starts talking a little to you at r2 equivalent bond, then you can actually see Marrow transform back into a human Ashwarden at the highest bond level.' ⚠️ THE HOOK SAID 'let it be deniable' AND THIS DOES NOT BREAK THAT — CCode's mapping puts stage 3 at bond 10, the ceiling, so the reveal is EARNED and singular. Everyone below it gets a clever bird, which is what the hook asked for. ⛔ The transformation also loads the schism (po/BACKLOG.md): a shape is a CHOICE, and Marrow's is the choice not to hasten — which only reads as a choice once you have seen there is a person making it."
 }

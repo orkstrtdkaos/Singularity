@@ -17459,6 +17459,45 @@ await (async () => {
         lines.some(l => /Driven/.test(l)), lines.join(" | ").slice(0, 160));
     }
   }
+  // 5o · ⛔ SYSTEM_SPEC §45.1 — RANK-FIRST AUTHORING, CHECKED BOTH WAYS. The spec's table claims these
+  // fields are authored on tree[] and NEVER on the ability. That claim is what makes `authoredBlock`
+  // necessary; if it ever stops being true, a reader pointed at the ability starts looking correct.
+  {
+    const CM45 = await import("../engine/craftmechanics.js");
+    const A45 = Object.values(C199.abilities || {});
+    for (const [key, wantTree] of [["imposes", 14], ["ongoingHarm", 7], ["persistUntilHealed", 4]]) {
+      let onTree = 0, onAbility = 0;
+      for (const a of A45) {
+        if (a?.mechanic?.[key] != null || a?.[key] != null) onAbility++;
+        if ((a.tree || []).some(r => r?.[key] != null || r?.mechanic?.[key] != null)) onTree++;
+      }
+      // ⛔ THE SPEC'S NUMBER IS A FLOOR, NOT A SPELLING — authoring more is fine, losing it is not.
+      check(`CCODE-223: §45.1 — \`${key}\` is authored on tree[] (${onTree}, spec floor ${wantTree})`,
+        onTree >= wantTree, `tree ${onTree} / ability ${onAbility}`);
+      // ⚠️ AND THE COLUMN THAT READS ZERO IS THE ONE THAT MATTERS. Non-zero here means somebody authored
+      // against `authoredBlock`'s FALLBACK, and every rank-aware reader silently stops being rank-aware.
+      check(`CCODE-223: §45.1 — and NOTHING authors \`${key}\` at the ability level, where a reader would find it by accident`,
+        onAbility === 0, `ability-level count ${onAbility}`);
+    }
+
+    // the reader itself: a rank-authored value must beat the ability-level fallback, and must respect rank
+    const probe = { mechanic: { imposes: "ability_level" },
+      tree: [{ rank: 1, imposes: "r1" }, { rank: 3, imposes: "r3" }] };
+    check("CCODE-223: §45.1 — authoredBlock prefers the RANK's value over the ability's",
+      CM45.authoredBlock(probe, "imposes", 1) === "r1");
+    check("CCODE-223: §45.1 — and takes the highest rank AT OR BELOW the character's, not the highest authored",
+      CM45.authoredBlock(probe, "imposes", 2) === "r1" && CM45.authoredBlock(probe, "imposes", 3) === "r3");
+    check("CCODE-223: §45.1 — falling back to the ability only when NO rank authors it",
+      CM45.authoredBlock({ mechanic: { imposes: "ability_level" }, tree: [{ rank: 1 }] }, "imposes", 3) === "ability_level");
+
+    // ⚠️ §45.6 — healing keys off the VERB, not off a field. I measured this the wrong way while writing
+    // the spec and nearly recorded "no content uses healing" as fact.
+    const healFns45 = new Set((C199.skillBattleSystem?.engine?.damage?.healFunctions) || ["heal", "mend", "restore"]);
+    const menders = A45.filter(a => (a.functions || []).some(f => healFns45.has(String(f).toLowerCase()))).length;
+    check(`CCODE-223: §45.6 — healing is authored as a VERB and ${menders} crafts carry one (a \`heal\` FIELD would find zero)`,
+      menders > 0, `${menders} crafts`);
+  }
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

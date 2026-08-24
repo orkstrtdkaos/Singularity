@@ -2183,13 +2183,23 @@ the authored field, not the annotation.**
 
 ### 37.2 The known corpus-wide defects — expect all of them
 
-| defect | scale | fix |
-|---|---|---|
-| ⛔ **`powerSystem` holds a reach id or `attribute`** | **295 of 340** | set from `byTradition_primary_20260815`, per-craft where it differs |
-| ⛔ **`cannot` points at the next rank** | **210 ranks** | write a real bound (§32.14) |
-| ⛔ **social crafts tagged mechanically** | 10 of 12 traditions have NO social verb | if it works by speaking, it carries one (§31.5) |
-| ⚠️ **no obscure** | 10 of 14 traditions | author one, tradition-flavoured (§34.4) |
-| ⚠️ **`scope` as the default rank gain** | 22–37% before correction | usually `targets` doing scope's job |
+⛔ **RE-MEASURE THIS TABLE BEFORE YOU TRUST IT. DO NOT INHERIT ITS NUMBERS.** Every figure below was
+measured on **2026-08-23**, and four of the five defects it used to name as open have since been closed —
+it was sending auditors to hunt 295 bad `powerSystem` values that no longer exist. ⚠️ **A defect table is a
+snapshot wearing the clothes of a law**, which is the same trap `MATRIX_death.md` set when it was read as
+state, one file over.
+
+| defect | when written | **measured 2026-08-23** | fix |
+|---|---|---|---|
+| ⛔ **`powerSystem` holds a reach id or `attribute`** | 295 of 340 | ✅ **0 of 382** — closed by CCODE-217 | — |
+| ⛔ **`cannot` points at the next rank** | 210 ranks | ✅ **~1** | write a real bound (§32.14) |
+| ⛔ **social crafts tagged mechanically** | 10 of 12 traditions | ✅ **1 of 30** | if it works by speaking, it carries one (§31.5) |
+| ⚠️ **no obscure** | 10 of 14 traditions | ⚠️ **20 of 30** — **grew** | author one, tradition-flavoured (§34.4) |
+| ⚠️ **`scope` as the default rank gain** | 22–37% | not re-measured | usually `targets` doing scope's job |
+
+⚠️ **THE ONE THAT GREW IS THE INTERESTING ROW.** `no obscure` went from 10-of-14 to 20-of-30 not because
+anything regressed but because **the corpus grew faster than the authoring** — the ratio held while the
+absolute number doubled. A table of raw counts cannot tell those two apart, and this one nearly did not.
 
 ### 37.3 ⛔ THE FIVE MERGE PATTERNS
 
@@ -2962,3 +2972,95 @@ by diffing against the already-damaged file.
 **The corrective is `tests/content_which.mjs`** — ⛔ **six assertions that name WHICH, not WHETHER.** It
 found 10 things on its first run, six of them mine. ⚠️ **A gate asserting whether a palette resolves cannot
 see a craft resolving the wrong one.**
+
+---
+
+## 45. Four systems the spec had never mentioned — 2026-08-23
+
+⚠️ **All four were built, gated and shipped without a line here.** A spec that lags the engine is not
+neutral: §37.2 above spent a week sending auditors after 295 defects that no longer existed, and the four
+below sent them after nothing at all, because nothing here said they were there.
+
+### 45.1 ⛔ RANK-FIRST AUTHORING — the most-repeated failure of the month, four instances
+
+⛔ **AEVI AUTHORS ON `tree[]`. READERS KEPT LOOKING AT THE ABILITY.** Four separate readers were written
+against `ability.mechanic.X` for a field that is authored one level down, and each one silently returned
+nothing.
+
+**This is not a near-miss. Measured across the whole corpus today:**
+
+| field | authored on `tree[]` | on the ability |
+|---|---|---|
+| `imposes` | **14** | ⛔ **0** |
+| `ongoingHarm` | **7** | ⛔ **0** |
+| `persistUntilHealed` | **4** | ⛔ **0** |
+
+⛔ **THE ABILITY LEVEL IS EMPTY FOR EVERY FIELD WHERE THE DISTINCTION MATTERS.** A reader pointed there
+does not find stale data or partial data — it finds `null`, **forever, for all 373 crafts**. And `null` is
+indistinguishable from *"the author has not written this yet,"* which is why it never threw, never failed a
+gate, and took four separate discoveries to see.
+
+**THE READER IS `authoredBlock(ability, key, rank)` in `engine/craftmechanics.js`, AND NOTHING SHOULD READ
+THESE FIELDS ANY OTHER WAY.** It walks `tree[]` down from the character's rank, takes the highest rank at
+or below it that authors the key, and only then falls back to the ability. **Both `r.X` and `r.mechanic.X`
+are accepted, because both spellings exist in the corpus.**
+
+⚠️ **AND THE FALLBACK IS THE DANGEROUS PART OF IT.** `?? ability.mechanic[key] ?? ability[key]` is what
+makes it safe to adopt everywhere — and it is also what would let a reader keep *looking* correct while a
+future field is authored only at the ability level. **The table above is the check: if a column that reads
+0 today ever reads non-zero, someone has authored against the fallback.**
+
+### 45.2 Change sets — how content ships now, and how the claim gets machine-checked
+
+**A change set is a manifest of what a content edit touched, checked by `tests/changeset_check.mjs`,
+which DERIVES the referrers from the tree rather than trusting the list.** It checks four things: every
+new file is registered in the manifest (§42.1a — retired files excepted), no id crosses a namespace
+(§43.2), the save impact is stated, and `expectedGates` names gates that exist.
+
+⛔ **IT EXISTS BECAUSE "I CHANGED THESE FILES" IS A CLAIM, AND EVERY OTHER CLAIM THIS MONTH THAT WENT
+UNCHECKED WAS WRONG.** 27 files were authored, correct, and unregistered — invisible to the loader while
+passing every gate that read the disk.
+
+### 45.3 The seeking clock — `engine/seeking.js` (CCODE-222)
+
+**CCODE-220 made a driven NPC act when they are in the scene. This is what puts them there.**
+
+⛔ **A CLOCK, NOT A QUEUE.** Pressure builds while you are APART and empties when you MEET, so someone who
+wants something comes looking and someone you saw yesterday does not. **`noteSeen` is what empties it, and
+without that call the model is just a queue that fills forever.**
+
+⛔ **THE RATE READS `|relationship|`, NEVER ITS SIGN.** A devoted friend at +8 and a declared enemy at −8
+are **both** impatient (3 days); a neutral acquaintance waits 21. **Keying on the signed value would have
+made hostility a reason to stay away — and "the rival who wants something from you" is the better scene.**
+
+**Three guards, each gated:** no authored `wants` → no seeking, at any relationship, forever (111 people
+are in the registry and 7 have interiority); **at most `maxSeekers` = 1** — *a world where four people
+find you the moment you rest is a notification tray, not a world with relationships in it*; and ⚠️ **the
+tick READS the registry and marks nobody seen** — being sought is not being met, or the arrival is spent
+before the scene happens.
+
+**Dials at `npc_interiority.seeking`. The line is a deliberately flat placeholder so it cannot be mistaken
+for authored prose.**
+
+### 45.4 Projects — `engine/projects.js` (CCODE-215)
+
+⚠️ **`duration` is how long the RESULT lasts. `projectThreshold` is how long the WORK takes.** A project
+completes on **banked work crossing a threshold, never on a date.** Interruption keeps the bank;
+sabotage never drives it below zero; extra hands are **sublinear** (`1 + (h−1)·extra/√h`); and
+`inheritProject` moves the `owner` and never the `opener` — **who opened it is history, not a role.**
+
+### 45.5 The harnesses that assert nothing
+
+**`tests/sunk_assay_run.mjs` plays all four levels and prints receipts. `scripts/audit_images.mjs`
+reports. ⛔ NEITHER ASSERTS, AND `audit_images` WRITES TO NO SAVE.** They exist to be read by a person —
+**a harness that judges its own output is the failure this spec names in five other places.**
+
+### 45.6 ⚠️ AND ONE FROM WRITING THIS SECTION
+
+**Measuring §45.1 I checked whether any healing was authored, looked for a `heal` key, found zero, and
+nearly wrote "the engine is ready and no content uses it."** ⛔ **57 crafts carry `heal`/`mend`/`restore`
+— healing keys off the VERB in `functions`, gated by `engine.damage.healFunctions`, not off a field.**
+
+⚠️ **That is the §45.1 failure exactly — a reader looking one level away from the authoring and reading
+the resulting `null` as "unauthored" — committed by me, in the measurement for the section about it, one
+step before it went into the spec as fact.**

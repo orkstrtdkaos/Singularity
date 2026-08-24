@@ -154,3 +154,19 @@ tradition is audited.**
 
 ⚠️ **Deliberately flagged rather than bulk-written** — 210 bounds I have not thought about would read as
 considered and not be.
+
+## ⛔ BRAID — Falsecraft × Threnodist obscure (Erik, 2026-08-23)
+
+**Veilwrights *"hold that every truth is a made thing, and make better ones"* (`falsehood` pole).
+Threnodists hold that feeling is the only true knowing (`emotional` pole). ⛔ SO A MADE FEELING IS A MADE
+TRUTH — the braid is the false-feeling counterpart to `public_grief`, which opens a feeling rather than
+fabricating one.**
+
+⚠️ **THIS WAS BLOCKED BY MY OWN OVER-AUTHORING AND ERIK CAUGHT IT.** I had written *"a people who hold
+feeling is the only true knowing cannot hide behind a false one"* into `public_grief` as a HARD BOUND.
+⛔ **The tenet is an EPISTEMOLOGY — how a Threnodist KNOWS — and I promoted it to a PROHIBITION on what one
+may do.** The bound is stripped; the braid is open.
+
+**Shape when authored:** `tradition: cross_pole_braid`, `powerSystem: combination`, verb `deceive` (shows
+what is FALSE) as against `public_grief`'s `conceal` (hides what is TRUE). ⚠️ **The pair is the point —
+the same tradition reachable from either side of the falsehood/truth axis.**

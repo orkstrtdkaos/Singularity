@@ -17391,6 +17391,74 @@ await (async () => {
     check(`CCODE-221: ${answered.length}/${withTrad.length} crafts resolve a source — may only IMPROVE`,
       answered.length >= 351, `${withTrad.length - answered.length} still unanswered`);
   }
+  // 5n · ⛔ CCODE-222 — A REASON FOR THE ENGINE TO BRING SOMEONE TO YOU. CCODE-220 proved the driven-NPC
+  // directive fires for a person already in the scene; nothing put them there. This is that half.
+  {
+    const SK = await import("../engine/seeking.js");
+    const inter222 = C199.npcInteriority || {};
+    const cfg222 = inter222.seeking || {};
+    const driven = Object.keys(inter222.npcs || {})[0];
+
+    // ⛔ THE GUARD THAT STOPS 111 PEOPLE KNOCKING. No authored want, no seeking — however strongly they
+    // feel. Without this the seven authored people are lost in a stream of acquaintances.
+    const noWant = { npcRegistry: { stranger: { id: "stranger", name: "Stranger", relationship: 9, status: "active", lastSeen: { day: 0 } } } };
+    check("CCODE-222: an NPC with no authored want NEVER comes looking, whatever the relationship",
+      SK.seekersAmong(noWant, { interiority: inter222, currentDay: 999, cfg: cfg222 }).length === 0);
+
+    // ⛔ PATIENCE KEYS ON THE MAGNITUDE, NOT THE SIGN. Someone who loves you and someone who cannot stand
+    // you are both impatient; a rival who wants something is the more interesting scene. Keying on the
+    // signed value would make hostility a reason to stay away, which is a different game.
+    check("CCODE-222: an enemy is exactly as impatient as a friend — the rate reads |relationship|",
+      SK.patienceOf(-7, cfg222) === SK.patienceOf(7, cfg222)
+      && SK.patienceOf(7, cfg222) < SK.patienceOf(0, cfg222));
+    check("CCODE-222: nobody arrives the morning after, however strongly they feel",
+      SK.patienceOf(99, cfg222) >= (cfg222.patienceFloor ?? 3));
+
+    // ⚠️ A CLOCK, NOT A QUEUE: pressure builds while APART and empties when you meet.
+    const reg = () => ({ npcRegistry: { [driven]: { id: driven, name: "Driven", relationship: 6, status: "active", lastSeen: { day: 1, locationId: "x" } } } });
+    const waited = reg();
+    check("CCODE-222: pressure builds while you are apart — they come looking on their own schedule",
+      SK.seekersAmong(waited, { interiority: inter222, currentDay: 60, cfg: cfg222 }).length === 1);
+    SK.noteSeen(waited, driven, 60);
+    check("CCODE-222: and MEETING them empties the clock — that is what makes it a clock",
+      SK.seekersAmong(waited, { interiority: inter222, currentDay: 60, cfg: cfg222 }).length === 0);
+
+    // ⛔ BOUNDED. "A world where four people find you the moment you rest is not a world with
+    // relationships in it, it is a notification tray."
+    const crowd = { npcRegistry: {} };
+    for (const id of Object.keys(inter222.npcs || {})) crowd.npcRegistry[id] = { id, name: id, relationship: 8, status: "active", lastSeen: { day: 0 } };
+    check(`CCODE-222: at most ${cfg222.maxSeekers ?? 1} seeker at a time, out of ${Object.keys(crowd.npcRegistry).length} who all qualify`,
+      SK.seekersAmong(crowd, { interiority: inter222, currentDay: 999, cfg: cfg222 }).length <= Math.max(1, cfg222.maxSeekers ?? 1));
+
+    // the dead and the departed do not come looking
+    const gone = { npcRegistry: { [driven]: { id: driven, name: "Gone", relationship: 8, status: "dead", lastSeen: { day: 0 } } } };
+    check("CCODE-222: someone whose status is not active does not come looking",
+      SK.seekersAmong(gone, { interiority: inter222, currentDay: 999, cfg: cfg222 }).length === 0);
+
+    // ⚠️ BEING SOUGHT IS NOT BEING MET. `advanceSeeking` must not mark anyone seen, or the arrival is
+    // spent without the scene ever happening.
+    const untouched = reg();
+    const before = JSON.stringify(untouched.npcRegistry);
+    SK.advanceSeeking(untouched, { interiority: inter222, currentDay: 99, cfg: cfg222 });
+    check("CCODE-222: the tick READS the registry and never marks anyone seen — being sought is not being met",
+      JSON.stringify(untouched.npcRegistry) === before);
+
+    check("CCODE-222: the seeking dials are authored in content, not hardcoded",
+      Number.isFinite(Number(cfg222.patienceDays)) && Number.isFinite(Number(cfg222.patiencePerPoint)),
+      JSON.stringify(cfg222).slice(0, 120));
+
+    // ---- and it reaches the world tick's news, end to end ----
+    {
+      const WT = await import("../engine/worldtick.js");
+      const ch222 = { name: "the player", clock: { day: 60, hour: 8 }, currentLocationId: "millbrook",
+        npcRegistry: { [driven]: { id: driven, name: "Driven", relationship: -7, status: "active", lastSeen: { day: 1, locationId: "millbrook" } } } };
+      ch222.worldState = WT.initWorldState(1);
+      const out = await WT.runWorldTick({ character: ch222, content: C199, currentDay: 60 });
+      const lines = (out.news || []).map(n => (typeof n === "string" ? n : (n.text || n.line || "")));
+      check("CCODE-222: a seeker reaches the world tick's NEWS — the player is told somebody came",
+        lines.some(l => /Driven/.test(l)), lines.join(" | ").slice(0, 160));
+    }
+  }
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

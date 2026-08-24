@@ -11,6 +11,7 @@
 // the shapes here are designed to lift straight into that.
 
 import { callClaudeJSON } from "./claude.js";
+import { advanceSeeking } from "./seeking.js"; // CCODE-222: a reason for the engine to bring someone to you
 import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
@@ -425,6 +426,17 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   if (elapsed <= 0) return { ticked: delegated.moved + holdings358.moved > 0,
     news: [...delegated.news, ...holdings358.news].map(n => stampNews(n, { day: currentDay, worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() })) };
   const news = [...delegated.news, ...holdings358.news];
+  // ⛔ CCODE-222 — AND SOMEBODY COMES LOOKING. The driven-NPC directive has always fired for a person who
+  // is already in the scene; this is the half that puts them there. Pressure builds while you are apart and
+  // empties when you meet, so an NPC with an authored want walks up on their own schedule rather than
+  // waiting to be visited. ⚠️ It READS the registry and does not mark anyone seen - being sought is not
+  // being met, and emptying the clock here would spend the arrival without the scene happening.
+  try {
+    const seek = advanceSeeking(character, { interiority: content?.npcInteriority,
+      currentDay, cfg: content?.npcInteriority?.seeking || {} });
+    for (const line of seek.news) news.push(line);
+    if (seek.seekers.length) ws.seeking = seek.seekers.map(s => ({ id: s.id, since: currentDay - s.daysApart }));
+  } catch { /* a want nobody authored is not an error */ }
   const clampDrift = v => Math.max(-0.5, Math.min(0.5, v));
 
   // 1. event advancement — and SNG-191 §4.2: a crisis RESPONDS to the delegated work. Ignoring a

@@ -133,5 +133,18 @@
    "acknowledgeTone": "Ama's approval is quiet and total — when she's at peace with what Silas is doing, you feel the whole house settle. When she isn't, she says one true thing and finishes what she's doing."
   }
  },
- "drivenNpcDirective": "When a key NPC has an INTERIORITY block (wants/fears/pushesBackWhen/emotionalRange), render them FROM it, not as an agreeable mirror. They have their OWN wants that can pull AGAINST the player's - voice them. When the player does something that hits an NPC's `pushesBackWhen`, they PUSH BACK in character (Pell's jealousy, Veth's craft-anger) - do not smooth it into agreement. When the player does right by an NPC's wants, give the earned approval in their `acknowledgeTone` - and make it MEAN something by not giving it freely. The relationship should have UPS AND DOWNS: an important person who always agrees is furniture; an important person whose regard you can LOSE and REGAIN is alive. Never make an NPC cruel beyond their drives, and never override the content-rating floor - but within that, let them WANT, let them be DISAPPOINTED, let them DESIRE, let them be more than pleasant."
+ "drivenNpcDirective": "When a key NPC has an INTERIORITY block (wants/fears/pushesBackWhen/emotionalRange), render them FROM it, not as an agreeable mirror. They have their OWN wants that can pull AGAINST the player's - voice them. When the player does something that hits an NPC's `pushesBackWhen`, they PUSH BACK in character (Pell's jealousy, Veth's craft-anger) - do not smooth it into agreement. When the player does right by an NPC's wants, give the earned approval in their `acknowledgeTone` - and make it MEAN something by not giving it freely. The relationship should have UPS AND DOWNS: an important person who always agrees is furniture; an important person whose regard you can LOSE and REGAIN is alive. Never make an NPC cruel beyond their drives, and never override the content-rating floor - but within that, let them WANT, let them be DISAPPOINTED, let them DESIRE, let them be more than pleasant.",
+ "seeking": {
+  "_note": "⛔ CCODE-222 — WHY SOMEONE COMES LOOKING. `drivenNpcDirective` describes a person already in front of the player; nothing put them there. This is the clock that does. ⚠️ PRESSURE BUILDS WHILE YOU ARE APART AND EMPTIES WHEN YOU MEET - that is what makes it a clock rather than a queue of people to visit.",
+  "patienceDays": 21,
+  "_patienceDays": "how long a NEUTRAL acquaintance with a want will wait before seeking you out.",
+  "patiencePerPoint": 2.5,
+  "_patiencePerPoint": "⛔ days removed per point of |relationship| - the MAGNITUDE, never the sign. Someone who loves you and someone who cannot stand you are both impatient; a rival who wants something from you is the more interesting scene. Keying on the signed value would make hostility a reason to stay away, which is a different game.",
+  "patienceFloor": 3,
+  "_patienceFloor": "nobody arrives the morning after, however strongly they feel.",
+  "maxSeekers": 1,
+  "_maxSeekers": "⚠️ BOUNDED ON PURPOSE. A world where four people find you the moment you rest is not a world with relationships in it, it is a notification tray.",
+  "line": "{name} has been asking after you.",
+  "_line": "⛔ AEVI - THIS IS A PLACEHOLDER AND IT IS DELIBERATELY PLAIN so it does not read as authored prose. `{name}` and `{want}` are filled. The line a player reads when someone comes looking is yours, and it probably wants to vary by whether they like you: the same clock brings a friend and an enemy."
+ }
 }

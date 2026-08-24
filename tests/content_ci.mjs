@@ -116,6 +116,16 @@ for (const pack of PACKS) {
         check(`ability "${a.id}" harmRung "${a.harmRung}" is a real rung`, HARM_RUNGS.has(a.harmRung),
           "must be lethal | damaging | incapacitating | none");
       }
+      // ⛔ CCODE-223 — AND THE RANKS, WHICH THIS CHECK HAS NEVER WALKED. It validated the ABILITY's rung
+      // and stopped, so five rank-level `severe` values sat invisible to the check that exists for exactly
+      // them — `ki_wield` reported "damaging is a real rung" while its own r3 said `severe`.
+      // ⚠️ FOURTH TIME THIS WEEK A READER LOOKED AT THE ABILITY AND THE AUTHORING WAS ON THE RANK:
+      // `imposes`, `ongoingHarm`, `persistUntilHealed`, and now the oldest check in this file.
+      for (const r of (a.tree || [])) {
+        if (r?.harmRung == null) continue;
+        check(`ability "${a.id}" r${r.rank} harmRung "${r.harmRung}" is a real rung`, HARM_RUNGS.has(r.harmRung),
+          "must be lethal | damaging | incapacitating | none");
+      }
     }
   }
   ok(`the notFor LAW checked ${total} abilities across ${abFiles.length} files`);

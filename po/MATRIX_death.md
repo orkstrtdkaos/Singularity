@@ -4,7 +4,7 @@
 matrix is your own work wearing the corpus's clothes, and the last one drifted far enough to plan
 an audit against numbers that were not true (§37.1).
 
-**32 crafts · 90 ranks · traditions: ashwarden, threnodist** · generated 2026-08-24
+**33 crafts · 93 ranks · traditions: ashwarden, threnodist** · generated 2026-08-24
 
 ⚠️ `first_gift_template` is merged as the LOADER merges it — absent fields only, `mechanic` shallow-merged.
 Crafts marked *first-gift* inherit `levelReq`/`energyCost`/`shape`/`harmRung` and are NOT missing them.
@@ -33,6 +33,7 @@ Crafts marked *first-gift* inherit `levelReq`/`energyCost`/`shape`/`harmRung` an
 | **Kept Breath** | 2 | ash | 2d4 | 5 | guard | — | — | physical, decay | **crit** · soak 5 |  | **Not Yet** +sustain, +resist | **Stand Between** +sustain, +resist, +heal · *targets, conditions* | **Palelands Patience** +sustain, +resist, +heal · *scope, duration, targets* |
 | **Made Elegy** | 2 | thr | mag 5 | 2 | construct | — | feeling | — | — |  | **Feeling Held** +make | **Acting Elegy** +make, +bind | **Lasting Work** +make, +bind · *duration* |
 | **Pathos** | 2 | thr | mag 5 | 6 | bolster | — | — | — | — |  | **Open Heart** +heal | **Shared Fire** +heal, +empower, +command · *targets* | **Deep Chord** +heal, +empower, +command · *range, scope, targets* |
+| **Public Grief** | 2 | thr | — | 4 | conceal | — | — | — | **crit** | obscure | **Open Weeping** +conceal | **Shared Mourning** +conceal · *targets* | **Grief-House** +conceal · *scope, targets* |
 | **Soul Stare** | 2 | ash | mag 6 | 4 | conceal | — | — | — | **crit** | obscure | **Soul Stare** +deceive, +hinder ⟨imposes action_loss · crit→staggered · resist mental⟩ | **Every Living Thing** +deceive, +hinder · *targets, conditions* | **Everything Has an Address** +deceive, +hinder, +break · *scope, quality* |
 | **Wither** | 2 | ash | 2d6 | 5 | damage | dmg | — | — | **crit** |  | **Wither** +hinder ⟨ongoing⟩ | **Grey Touch** +break · *duration, quality* | **Withering** +break · *range* |
 | **Ask the Dead** | 3 | ash | mag 5 | 5 | setup | — | — | — | **crit** | gated upkeep | **Ask the Dead** +summon | **Long Question** +summon · *range* | **Full Account** +summon · *quality* |
@@ -53,10 +54,10 @@ Crafts marked *first-gift* inherit `levelReq`/`energyCost`/`shape`/`harmRung` an
 | gap | n (crafts) | crafts |
 |---|---|---|
 | no `mechanic.crit` | 14 | Attended End, Carried Name, Deathsense, Feeling-Sense, Kept Vigil, True Account, Wellspring, Feeling Road, +6 more |
-| no `wardTypes` | 27 | Attended End, Carried Name, Deathsense, Feeling-Sense, Hastened Grey, Keening, Palework, Shared Weight, +19 more |
-| no `imposes` on any rank | 27 | Attended End, Carried Name, Deathsense, Feeling-Sense, Hastened Grey, Kept Vigil, Palework, Shared Weight, +19 more |
+| no `wardTypes` | 28 | Attended End, Carried Name, Deathsense, Feeling-Sense, Hastened Grey, Keening, Palework, Shared Weight, +20 more |
+| no `imposes` on any rank | 28 | Attended End, Carried Name, Deathsense, Feeling-Sense, Hastened Grey, Kept Vigil, Palework, Shared Weight, +20 more |
 | ⚠️ *(for reference — `imposes` RANK OCCURRENCES in this set: 9)* | | |
-| no `ongoingHarm` on any rank | 29 | Attended End, Carried Name, Deathsense, Feeling-Sense, Keening, Kept Vigil, Palework, Shared Weight, +21 more |
+| no `ongoingHarm` on any rank | 30 | Attended End, Carried Name, Deathsense, Feeling-Sense, Keening, Kept Vigil, Palework, Shared Weight, +22 more |
 | ⛔ rolls dice, no `damageType` | 6 | Keening, Grief Strike, Kept Breath, Wither, Draw Down, The Cut Thread |
 
 **social verbs present:** persuade, soothe

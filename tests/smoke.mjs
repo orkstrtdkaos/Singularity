@@ -18091,6 +18091,64 @@ await (async () => {
     }
   }
 
+
+
+// ⛔ CCODE-242 — EVERY OP THE GM IS TOLD TO EMIT MUST HAVE A CONSUMER.
+//
+// This is Erik's backlog 7 ("can the GM generate every kind of content?") made answerable instead of
+// guessable. ⚠️ I GOT THAT ANSWER WRONG THREE TIMES — "5 of 11 kinds", then "7", then a list of nine
+// unapplied op groups — every time by measuring ONE mechanism (`GEN_TYPES`) and inferring the whole
+// surface. The GM creates content through at least four different routes:
+//
+//   · `generate()` / GEN_TYPES        — npc, location, arc, creature, item
+//   · turn op groups                  — questUpdates, placeUpdates, npcUpdates, itemUpdates, …
+//   · singular creators               — newEncounter, newAbility
+//   · in-play minting                 — braids, from the player's own pairings
+//
+// ⛔ SO COUNTING ONE ROUTE ANSWERS NOTHING. What is checkable is the contract: the GM's prompt is a promise
+// about what the engine will honour, and an advertised op with no consumer is a promise the game breaks
+// silently — the model emits it, the turn succeeds, and the effect vanishes.
+{
+  const gmSrc = readFileSync(join(root, "engine/gm.js"), "utf8");
+  const appSrc242 = readFileSync(join(root, "app.js"), "utf8")
+    // ⛔ COMMENTS STRIPPED. A scanner reading its own prose has bitten this project five times now.
+    .replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+  // ⛔ gm.js IS EXCLUDED FROM ITS OWN CONSUMER CORPUS. My first version included it, so every
+  // advertised op "consumed" itself and the check passed for every possible input — proved by
+  // advertising a `weatherOps` nothing implements and watching the gate stay green. The ADVERTISER
+  // can never count as the CONSUMER; that is the whole claim.
+  const engineSrc242 = readdirSync(join(root, "engine")).filter(f => (f.endsWith(".js") || f.endsWith(".mjs")) && f !== "gm.js")
+    .map(f => readFileSync(join(root, "engine", f), "utf8")).join("\n")
+    .replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+
+  // the op names the prompt's JSON schema advertises, taken from the schema block only
+  // ⚠️ THE WHOLE FILE, NOT A WINDOW. My first version sliced ±4000 chars around `"questUpdates"` and
+  // found 9 of the ~18 ops — and the CONSUMER check below then passed cleanly on that half-list. The
+  // non-vacuity floor is the only reason I noticed; without it this section would have reported a green
+  // contract over half a vocabulary.
+  const advertised = [...new Set([
+    ...[...gmSrc.matchAll(/"([a-zA-Z]+(?:Updates|Ops|Deltas))"\s*:/g)].map(m => m[1]),
+    ...[...gmSrc.matchAll(/"(new[A-Z][a-zA-Z]+)"\s*:/g)].map(m => m[1]),
+  ])];
+
+  // ⚠️ NON-VACUITY FIRST. A derived list that finds nothing would pass this section forever.
+  check(`CCODE-242: the GM prompt advertises a recognisable op vocabulary (${advertised.length} ops)`,
+    advertised.length >= 10, advertised.join(", "));
+
+  // ⚠️ A CONSUMER IS `turn.X` ANYWHERE, OR THE NAME READ OFF A NESTED RECORD. `spectrumDeltas` nearly
+  // became a false finding here: it is a FIELD INSIDE `ledgerEvents`, not a top-level op, and looking only
+  // for `turn.spectrumDeltas` found nothing while the value was being read two files away.
+  const consumed = (op) =>
+    new RegExp("turn\\??\\.?" + op + "\\b").test(appSrc242)
+    || new RegExp("\\b" + op + "\\b").test(appSrc242)
+    || new RegExp("\\b" + op + "\\b").test(engineSrc242);
+
+  const orphaned = advertised.filter(op => !consumed(op));
+  check(`CCODE-242: every advertised GM op has a consumer — an op the model is told to emit and nothing applies is a promise the game breaks silently`,
+    orphaned.length === 0,
+    orphaned.length ? orphaned.join(", ") + " — advertised in engine/gm.js and read by nothing" : "");
+}
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

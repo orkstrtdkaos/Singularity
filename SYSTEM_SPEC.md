@@ -3229,3 +3229,35 @@ unbuilt — purse, five currencies, worth bands, conversion, traders-as-NPCs: no
 ⚠️ **A design document is a snapshot with no expiry and no gate.** ⛔ **THE RULE: a doc asserting what
 EXISTS carries its measurement date in the sentence, and any doc older than a milestone is re-measured
 before it is cited.** **Never cite a state claim you have not re-run.**
+
+### 46.8 ⛔ "NOT BANKED" MEANT THE PRICE, NOT THE PRICING — 2026-08-23
+
+**I wrote into a work order that the exchange *"leaves no open state behind it… nothing is escrowed,
+nothing is owed."* Erik corrected the framing:** *"that was about not permanently changing the price of
+something — not that there are no standard pricing that the engine should know about."*
+
+⛔ **THE ENGINE KNOWS THE STANDARD PRICE AND MUST.** `worthBands[item.worth] × need × scarcity` is the
+honest number the GM quotes, and it is the same number the next time anyone asks. **A bargain moves what
+THIS deal settles at, and nothing else.**
+
+⚠️ **VERIFIED AT RUNTIME rather than argued:** standard price 4 → won bargain settles 3.98 → standard price
+4 again, with `item.worth`, region `need` and `scarcity` all untouched. **And the curve reproduces CCode's
+own table — r1 grain 8 → 6.4 at margin 20, r1 refused at a 200 contract, r5 caps at 30%.**
+
+⛔ **THE FAILURE THIS FORBIDS: a haggler who talks a merchant down and thereby REPRICES the commodity for
+the region.** A bargain is a conversation, not an economic event.
+
+⚠️ **AND THE DRAFTING LESSON: "no persistent state" and "no standard state" are one careless sentence
+apart.** ⛔ **When a work order says what must NOT persist, it must also say what MUST** — a spec that only
+states the negative invites the reader to delete the positive.
+
+### 46.9 ⛔ A BASELINE TAKEN AGAINST THE WRONG HEAD IS WORSE THAN NO BASELINE — 2026-08-23
+
+**I ran `git stash` to get a "before" number and got 22 failures where origin/main has 16.** ⛔ **My HEAD
+was still the ORIGINAL CLONE from the start of the session — I had been syncing the working tree with
+`git checkout origin/main -- .`, which moves files and leaves HEAD behind.** So stashing reverted to a
+day-old corpus and I nearly reported a 6-failure regression that did not exist.
+
+⚠️ **This is §46.2 in version-control clothing** — I measured a rule (`stash` shows the baseline) without
+checking the caller (what HEAD actually points at). **THE RULE: before any before/after comparison, print
+`git log --oneline -1 HEAD` and confirm it is what you think it is.**

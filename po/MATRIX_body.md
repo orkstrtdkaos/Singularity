@@ -51,11 +51,12 @@ Crafts marked *first-gift* inherit `levelReq`/`energyCost`/`shape`/`harmRung` an
 
 ## Gaps, measured
 
-| gap | n | crafts |
+| gap | n (crafts) | crafts |
 |---|---|---|
 | no `mechanic.crit` | 9 | Hurled Weight, Near Way, Quick Hands, Sound Read, Worth the Work, Set Word, Sound Repair, Reduction, +1 more |
 | no `wardTypes` | 18 | Answered Motion, False Stance, Hurled Weight, Loose-Limbed, Near Way, Plain Weight, Quick Hands, Second Wind, +10 more |
 | no `imposes` on any rank | 17 | False Stance, Hurled Weight, Loose-Limbed, Near Way, Quick Hands, Second Wind, Sound Read, Steady Hands, +9 more |
+| ⚠️ *(for reference — `imposes` RANK OCCURRENCES in this set: 5)* | | |
 | no `ongoingHarm` on any rank | 21 | False Stance, Hurled Weight, Loose-Limbed, Near Way, Plain Weight, Quick Hands, Second Wind, Sound Read, +13 more |
 | ⛔ rolls dice, no `damageType` | 7 | Answered Motion, Hurled Weight, Plain Weight, Sound Repair, Keystone Blow, Ki Wield, Unmaking of Walls |
 

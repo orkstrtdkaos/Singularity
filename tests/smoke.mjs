@@ -7788,17 +7788,37 @@ await (async () => {
     const ps382 = rjc193("content/packs/core/rules/power_sources.json");
     check("382: the source mixes are LOADED, not merely registered — a loadRule call, not a CI-only read",
       /loadRule\("power_sources"/.test(stateSrc193) && /powerSources: powerSourcesDoc/.test(stateSrc193));
-    check("382: every tradition that has schools also has an authored mix — the two tables agree",
-      Object.keys(sch382.traditionSchools).every(t => ps382.byTradition?.[t]?.primary));
-    // ⚠️ `combination` IS DELIBERATE, NOT DRIFT, and I checked before saying so: all four traditions
-    // that carry it have genuinely balanced mixes (0.5/0.5, 0.6/0.4). It means "no single source dominates"
-    // and is orthogonal to the ratified source LIST, so it correctly has no band.
-    const RATIFIED = new Set(["precursor", "nanite", "wild", "metaphysical", "body", "veil"]);
-    const combo = Object.entries(ps382.byTradition).filter(([, c]) => c.primary === "combination");
-    check("382: a `combination` primary is only used where the mix really is balanced — not as a shrug",
-      combo.length > 0 && combo.every(([, c]) => Math.max(...Object.values(c.mix || { x: 1 })) <= 0.6));
-    check("382: every mix WEIGHT names a ratified source, whatever the primary says",
-      Object.values(ps382.byTradition).every(c => Object.keys(c.mix || {}).every(k => RATIFIED.has(k))));
+    // ⛔ CCODE-221 REWROTE THESE THREE. They asserted "the two tables agree" — and there are no longer two
+    // tables — with a RATIFIED list still naming `body`, `nanite` and `wild`, all three of which SNG-487
+    // and §30.2 removed. ⚠️ A gate holding the old vocabulary is how the old vocabulary survived in the
+    // file it was meant to be guarding.
+    const RATIFIED = new Set(["precursor", "metaphysical", "veil", "combination", "ordered_nanite", "wild_nanite"]);
+    const rows382 = Object.entries(ps382.byTradition).filter(([k]) => !k.startsWith("_"));
+
+    // ⛔ THE DEAD NAMES ARE GONE AND MAY NOT COME BACK. `fieldOfSource()` ends in `|| "substrate"`, so a
+    // dead source never threw — it silently graded the craft on the lattice axis. That is the whole ticket.
+    check(`382/CCODE-221: all ${rows382.length} rows name a ratified source, or are explicitly DEFERRED`,
+      rows382.every(([, c]) => c.primary === null || RATIFIED.has(c.primary)),
+      rows382.filter(([, c]) => c.primary !== null && !RATIFIED.has(c.primary)).map(([k, c]) => `${k}=${c.primary}`).join(", "));
+    check("382/CCODE-221: no `body`, `nanite` or `wild` survives anywhere in the table — primary or weight",
+      !/"(body|nanite|wild)"\s*:/.test(JSON.stringify(ps382.byTradition)));
+
+    // ⚠️ §2b — AN UNAUTHORED MIX MUST BE MARKED AS ONE. Aevi's own precedent, quoted back at me: "an absent
+    // value doing double duty was the actual trap." `mix: null` has to mean UNAUTHORED and never "the mean
+    // is pure", or a card renders a confident blend out of nothing.
+    const nullMix = rows382.filter(([, c]) => c.mix === null && c.primary !== null);
+    check(`382/CCODE-221: all ${nullMix.length} null mixes are MARKED unauthored — null never means "pure"`,
+      nullMix.every(([, c]) => c._mixUnauthored === true),
+      nullMix.filter(([, c]) => !c._mixUnauthored).map(([k]) => k).join(", "));
+    check("382/CCODE-221: every mix WEIGHT names a ratified source, whatever the primary says",
+      rows382.every(([, c]) => Object.keys(c.mix || {}).every(k => RATIFIED.has(k))));
+
+    // ⛔ AND THE FOOTHILLS ARE NOT IN THE TABLE. §30.6: a foothill is a place of ACCESS, not an ancestry,
+    // so it has no source of its own and inherits from whoever lives there. A stored copy of a derived
+    // value is the failure that produced this ticket; re-adding a row here would recreate it.
+    const FOOT = ["god_named", "bargainers", "harmonic", "radiant_folk", "valley_craft", "precursor", "cross_pole_braid"];
+    check("382/CCODE-221: no foothill or non-tradition has a STORED row — they are computed",
+      FOOT.every(k => !ps382.byTradition[k]), FOOT.filter(k => ps382.byTradition[k]).join(", "));
     // The reader itself — proved by driving it, not by reading the source.
     const abFolk = Object.values(C382.abilities).find(a => a.tradition && !sch382.traditionSchools[a.tradition]);
     check("382: a craft whose tradition has NO school yields nothing without a mix — honest, not defaulted",
@@ -13584,6 +13604,13 @@ await (async () => {
   const waSrc = readFileSync(join(root, "tests/wiring_audit.mjs"), "utf8");
   const present = [
     ...[...(mySrc + ciSrc).matchAll(/check\("((?:[^"\\]|\\.)*)"/g)].map(m => m[1]),
+    // ⛔ BACKTICK-NAMED GATES WERE EXTRACTED FROM `wiring_audit` ONLY, SO EVERY TEMPLATE-NAMED GATE IN
+    // THIS FILE WAS INVISIBLE TO THE LEDGER. A gate whose name carries a live count — "all 24 rows name a
+    // ratified source" — has to be a template, and I have written more of them each week: CCODE-207,
+    // 215, 218, 220 and 221 are all in this class. ⚠️ They PASS; the ledger simply could not confirm they
+    // EXIST, so its "719 claimed" was checking a shrinking fraction of the suite while reporting the same
+    // confidence. The literal head before the first ${ is what a ledger entry matches on.
+    ...[...(mySrc + ciSrc).matchAll(/check\(`([^`$]*)/g)].map(m => m[1]),
     ...[...waSrc.matchAll(/check\(`([^`$]*)/g)].map(m => m[1].trim()),
     ...[...waSrc.matchAll(/check\("((?:[^"\\]|\\.)*)"/g)].map(m => m[1]),
   ];
@@ -17318,6 +17345,51 @@ await (async () => {
     const blockPlain = String(NP.npcRegistryForGM(plain, { locationId: null, sceneNpcNames: [], interiority: inter, rules: C199.rules }) || "");
     check("CCODE-220: a cast with no driven member does NOT carry the directive — 890 chars are not free",
       !blockPlain.includes(head));
+  }
+  // 5m · ⛔ CCODE-221 — THE GROUND CARD ANSWERS FOR 351 OF 373 CRAFTS, AND NONE OF THAT WAS GATED.
+  // Reverting the pure-school fallthrough left the whole suite green, exactly as reverting the CCODE-217
+  // flip did a week ago. ⚠️ Twice now the fix has been the argument and the check has been an afterthought.
+  {
+    const SU = await import("../engine/substrate.js");
+    const ps221 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/power_sources.json"), "utf8"));
+    const fh221 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/foothills.json"), "utf8"));
+    const noSchool = { name: "a practitioner who has chosen nothing", domains: {} };
+    const craftIn = (t) => Object.values(C199.abilities || {}).find(a => a.tradition === t);
+    const srcOf = (t) => SU.craftSource(craftIn(t), noSchool, C199.schools, ps221, fh221);
+
+    // ⛔ A PURE SCHOOL KEEPS ITS TRADITION'S SOURCE — the comment in substrate.js said so and the code
+    // returned `source: school.extension` (null) and stopped. `schoolForTradition` DEFAULTS to the pure
+    // school, so every practitioner who had not chosen one graded against nothing while reporting
+    // `via: "school"` as though it had answered.
+    check("CCODE-221: a practitioner with no chosen school still resolves their tradition's source",
+      srcOf("ashwarden")?.source === "metaphysical", JSON.stringify(srcOf("ashwarden")));
+
+    // ⛔ A FOOTHILL IS COMPUTED FROM ITS PARENTS, NEVER STORED. And harmonic is the proof: its parents
+    // resolve 50/50 between the two nanite states — a tie — which resolves to `combination`, exactly what
+    // its 15 crafts already carry. A computation that reproduces a value nobody derived it from.
+    check("CCODE-221: a foothill computes its source from its parents (harmonic's tie → combination)",
+      srcOf("harmonic")?.source === "combination" && srcOf("harmonic")?.via === "foothill",
+      JSON.stringify(srcOf("harmonic")));
+    check("CCODE-221: valley_craft — the first crafts a player holds — resolves a ground card",
+      srcOf("valley_craft")?.source === "metaphysical", JSON.stringify(srcOf("valley_craft")));
+
+    // ⛔ DEFERRED IS NOT STALE. Erik deferred abyssal to its own audit; the row carries `primary: null` and
+    // the card must DECLINE rather than answer from parents that are not its parents.
+    check("CCODE-221: a deferred tradition declines, and says it is deferred rather than absent",
+      srcOf("abyssal")?.via === "deferred" && srcOf("abyssal")?.source === null,
+      JSON.stringify(srcOf("abyssal")));
+
+    // ⚠️ §2b — AN UNAUTHORED MIX IS DISTINGUISHABLE FROM A PURE ONE. Aevi's own precedent quoted back:
+    // "an absent value doing double duty was the actual trap."
+    check("CCODE-221: `mixAuthored` separates an unauthored mix from a pure mean",
+      srcOf("ashwarden")?.mixAuthored === true && srcOf("rootkin")?.mixAuthored === false,
+      `ashwarden ${srcOf("ashwarden")?.mixAuthored} · rootkin ${srcOf("rootkin")?.mixAuthored}`);
+
+    // and the coverage the whole ticket was for
+    const withTrad = Object.values(C199.abilities || {}).filter(a => a.tradition);
+    const answered = withTrad.filter(a => SU.craftSource(a, noSchool, C199.schools, ps221, fh221)?.source);
+    check(`CCODE-221: ${answered.length}/${withTrad.length} crafts resolve a source — may only IMPROVE`,
+      answered.length >= 351, `${withTrad.length - answered.length} still unanswered`);
   }
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field

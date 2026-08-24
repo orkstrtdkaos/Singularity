@@ -17,58 +17,82 @@
  },
  "method": "Classified against REGION SUBSTRATE DENSITY as evidence, with the craft's own description as the judgement. The prediction was recorded in SNG-172 §4 BEFORE the pass: 'most abilities in low-density traditions should come out natural or wild; if the pass produces a lattice-dominant Rootkin, the pass is wrong.' It held — see validation.",
  "byTradition": {
-  "enginewright": {
-   "primary": "precursor",
+  "_note": "⛔ SNG/CCODE-221 — ONE TABLE. This file held `byTradition` (read by substrate.craftSource) and `byTradition_primary_20260815` (read by one CI script), disagreeing on 20 of 24 shared rows, with eleven old values naming sources that no longer exist. `fieldOfSource()` ends in `|| \"substrate\"`, so a dead source did not throw — it graded the craft on the lattice axis. Wrong answer, confident render, no gate.\n⚠️ AEVI MEASURED THE 20 AND THEY ARE THREE DIFFERENT PROBLEMS, not one; the `_group` on each row says which. And Erik ruled a tradition is a DISTRIBUTION WITH A MEAN, so a row carries `primary` + `mix`.\n⛔ `mix: null` MEANS UNAUTHORED, NEVER 'the mean is pure'. A card that cannot tell those apart will render a confident blend from nothing, which is the bug this reconciliation exists to end.",
+  "churnfolk": {
+   "primary": "wild_nanite",
    "mix": {
-    "precursor": 1.0
+    "wild_nanite": 1.0
    },
-   "density": 0.98,
-   "why": "Enginecraft IS the lattice running. Densest region in the world (0.98)."
+   "density": null,
+   "why": "Wildcraft is the named case. Constant productive disorder is what wild current DOES.",
+   "_group": "A · MECHANICAL — the primary did not change, only its NAME. `body` was absorbed into `metaphysical` (SNG-487) and `wild` is a state of nanite, not a source. The row says what it always said."
   },
-  "lattice": {
-   "primary": "precursor",
+  "somatic": {
+   "primary": "metaphysical",
    "mix": {
-    "precursor": 1.0
+    "metaphysical": 1.0
    },
-   "density": 0.94,
-   "why": "Latticework is built INTO the substrate; the city and the lattice are one structure (0.94)."
+   "density": 0.22,
+   "why": "Soma is the perfected body. Somatic discipline is a retuning AWAY from the lattice (0.22).",
+   "_group": "A · MECHANICAL — the primary did not change, only its NAME. `body` was absorbed into `metaphysical` (SNG-487) and `wild` is a state of nanite, not a source. The row says what it always said."
   },
-  "seraphic": {
-   "primary": "nanite",
+  "verist": {
+   "primary": "metaphysical",
    "mix": {
-    "nanite": 0.6,
-    "precursor": 0.3,
-    "metaphysical": 0.1
+    "metaphysical": 0.9,
+    "precursor": 0.1
    },
-   "density": 0.88,
-   "why": "⛔ ERIK 2026-08-08: 'the Seraphs and Abyssals are mostly nanite.' The Orders' craft is pre-Transition machinery, kept and inherited; the PRECURSOR share is devotional as much as technical — they idealise the builders and have learned a little of the lattice directly. Their faith is the axis; their craft is nanite."
+   "density": 0.46,
+   "why": "Verity is speech and refusal. Saying what is so costs nothing but the saying (0.46).",
+   "_group": "A · MECHANICAL — the primary did not change, only its NAME. `body` was absorbed into `metaphysical` (SNG-487) and `wild` is a state of nanite, not a source. The row says what it always said."
+  },
+  "stillhold": {
+   "primary": "metaphysical",
+   "mix": {
+    "metaphysical": 1.0
+   },
+   "density": null,
+   "why": "Stillcraft is a vow kept. The Stillhold gave the lattice up with the war.",
+   "_group": "A · MECHANICAL — the primary did not change, only its NAME. `body` was absorbed into `metaphysical` (SNG-487) and `wild` is a state of nanite, not a source. The row says what it always said."
+  },
+  "marcher": {
+   "primary": "metaphysical",
+   "mix": {
+    "metaphysical": 1.0
+   },
+   "density": 0.2,
+   "why": "The Edge is skill at arms in a body. Nothing to borrow (0.20).",
+   "_group": "A · MECHANICAL — the primary did not change, only its NAME. `body` was absorbed into `metaphysical` (SNG-487) and `wild` is a state of nanite, not a source. The row says what it always said."
+  },
+  "ashwarden": {
+   "primary": "metaphysical",
+   "mix": {
+    "metaphysical": 0.85,
+    "precursor": 0.15
+   },
+   "density": 0.32,
+   "why": "Palework tends endings. What tends endings does not hold a charge (0.32).",
+   "_group": "A · MECHANICAL — the primary did not change, only its NAME. `body` was absorbed into `metaphysical` (SNG-487) and `wild` is a state of nanite, not a source. The row says what it always said."
   },
   "blazeborn": {
    "primary": "precursor",
    "mix": {
     "precursor": 0.9,
-    "body": 0.1
+    "metaphysical": 0.1
    },
    "density": 0.86,
-   "why": "Radiance burns on lattice, not on fuel (0.86)."
-  },
-  "figurist": {
-   "primary": "precursor",
-   "mix": {
-    "precursor": 0.85,
-    "body": 0.15
-   },
-   "density": 0.85,
-   "why": "Formcraft works in pattern and idea — it needs a medium to impose them on (0.85)."
+   "why": "Radiance burns on lattice, not on fuel (0.86).",
+   "_group": "A · MECHANICAL — the primary did not change, only its NAME. `body` was absorbed into `metaphysical` (SNG-487) and `wild` is a state of nanite, not a source. The row says what it always said."
   },
   "hourkeeper": {
    "primary": "precursor",
    "mix": {
     "precursor": 0.9,
-    "body": 0.1
+    "metaphysical": 0.1
    },
    "density": 0.84,
-   "why": "Duration is tended, not felt. Hourcraft reaches into the substrate to hold time still (0.84)."
+   "why": "Duration is tended, not felt. Hourcraft reaches into the substrate to hold time still (0.84).",
+   "_group": "A · MECHANICAL — the primary did not change, only its NAME. `body` was absorbed into `metaphysical` (SNG-487) and `wild` is a state of nanite, not a source. The row says what it always said."
   },
   "numinous": {
    "primary": "metaphysical",
@@ -78,217 +102,132 @@
     "veil": 0.05
    },
    "density": 0.82,
-   "why": "⛔ REVERTED 2026-08-08, one hour after I reclassified it veil-primary. ERIK: 'are you saying that a Numinous likes a thick boundary?' No — and my sentence contradicted the veil band I had authored the same hour ('a dense lattice closes the way'). THREE pieces of evidence I had and did not check: (1) the_substrate.json theTradeoff lists the Numinous among theContinuous — 'helpless where the lattice is gone'; (2) their region density is 0.82, dense; (3) NINE of their ten abilities are about MEANING-density, not a membrane — numen_sense reads 'where MEANING runs dense', thin_place 'where SIGNIFICANCE runs dense'. ⚠️ Their aesthetic says 'thinning veils' as MYSTIC IDIOM and I read it as the cosmological Veil. Same error as reading a targeting constraint as a fuel source: a phrase in one register taken as a claim in another. The 0.05 veil share is the Beyond-Facing school only (SNG-378), which is rare and disputed among them."
-  },
-  "churnfolk": {
-   "primary": "wild",
-   "mix": {
-    "wild": 1.0
-   },
-   "density": null,
-   "why": "Wildcraft is the named case. Constant productive disorder is what wild current DOES."
-  },
-  "abyssal": {
-   "primary": "nanite",
-   "mix": {
-    "nanite": 0.5,
-    "wild": 0.3,
-    "veil": 0.2
-   },
-   "density": 0.55,
-   "why": "⛔ ERIK 2026-08-08: mostly nanite, like the Seraphs — the two are the same craft pointed at opposite devotions. The WILD share is the Deep Below's untended field. The VEIL share is what makes them Abyssal: they alone reach for what is on the far side, and it reaches back."
-  },
-  "unmaker": {
-   "primary": "wild",
-   "mix": {
-    "wild": 0.7,
-    "body": 0.3
-   },
-   "density": 0.42,
-   "why": "Ruinwork ends things well — it works with what is already coming apart (0.42)."
-  },
-  "veilwright": {
-   "primary": "precursor",
-   "mix": {
-    "precursor": 0.7,
-    "wild": 0.3
-   },
-   "density": 0.66,
-   "why": "Falsecraft needs a medium to carry a false thing. Mid-high density (0.66) and it uses every bit."
+   "why": "⛔ REVERTED 2026-08-08, one hour after I reclassified it veil-primary. ERIK: 'are you saying that a Numinous likes a thick boundary?' No — and my sentence contradicted the veil band I had authored the same hour ('a dense lattice closes the way'). THREE pieces of evidence I had and did not check: (1) the_substrate.json theTradeoff lists the Numinous among theContinuous — 'helpless where the lattice is gone'; (2) their region density is 0.82, dense; (3) NINE of their ten abilities are about MEANING-density, not a membrane — numen_sense reads 'where MEANING runs dense', thin_place 'where SIGNIFICANCE runs dense'. ⚠️ Their aesthetic says 'thinning veils' as MYSTIC IDIOM and I read it as the cosmological Veil. Same error as reading a targeting constraint as a fuel source: a phrase in one register taken as a claim in another. The 0.05 veil share is the Beyond-Facing school only (SNG-378), which is rare and disputed among them.",
+   "_group": "A · MECHANICAL — the primary did not change, only its NAME. `body` was absorbed into `metaphysical` (SNG-487) and `wild` is a state of nanite, not a source. The row says what it always said."
   },
   "umbral": {
    "primary": "precursor",
    "mix": {
     "precursor": 0.6,
-    "body": 0.4
+    "metaphysical": 0.4
    },
    "density": 0.58,
-   "why": "Umbracraft sees by other means — partly instrument, partly trained sense (0.58)."
+   "why": "Umbracraft sees by other means — partly instrument, partly trained sense (0.58).",
+   "_group": "A · MECHANICAL — the primary did not change, only its NAME. `body` was absorbed into `metaphysical` (SNG-487) and `wild` is a state of nanite, not a source. The row says what it always said."
   },
-  "cogitant": {
-   "primary": "combination",
+  "seraphic": {
+   "primary": "ordered_nanite",
+   "why": "'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.",
    "mix": {
-    "precursor": 0.5,
-    "body": 0.5
+    "ordered_nanite": 0.6,
+    "precursor": 0.3,
+    "metaphysical": 0.1
    },
-   "density": null,
-   "why": "ERIK'S WORKED EXAMPLE: nanite to move matter with a mind, natural for the mind itself. Telekinesis borrows the lattice; the thought that aims it does not."
+   "_group": "B · STATE CHOSEN — `nanite` needed one and no ruling was required: its 13 crafts already carry `ordered_nanite`, and 'administration is machinery' is the reason."
+  },
+  "abyssal": {
+   "primary": null,
+   "mix": null,
+   "density": 0.55,
+   "why": "⛔ ERIK 2026-08-08: mostly nanite, like the Seraphs — the two are the same craft pointed at opposite devotions. The WILD share is the Deep Below's untended field. The VEIL share is what makes them Abyssal: they alone reach for what is on the far side, and it reaches back.",
+   "_group": "B · DEFERRED — primary UNKNOWN, not stale",
+   "_ruledPendingAudit": "⛔ ERIK RULED 2026-08-23: Abyssal leans VEIL-primary, details settled at the Abyssal audit — a THIRD value, neither this row's old `nanite` (08-08) nor the superseded table's `precursor` (08-15).\n⚠️ AEVI SAID 'leave the row as it stands'; her own acceptance test says ZERO occurrences of `nanite`. Those conflict on this one row, and leaving `nanite` would keep exactly the silent misgrade this ticket exists to end — `fieldOfSource()` ends in `|| \"substrate\"`, so a dead name does not throw, it grades an Abyssal craft on the lattice axis. ⛔ SO THE PRIMARY IS NULL: not stale, UNKNOWN. A card that cannot answer must decline rather than answer wrongly, which is the same rule §2b sets for the mix.\n⚠️ `veil` is NOT written in, because 'leans veil-primary, details at the audit' is a direction and not yet a value — writing it would be me settling what Erik deferred."
+  },
+  "enginewright": {
+   "primary": "ordered_nanite",
+   "why": "⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation.",
+   "mix": null,
+   "_group": "C · GENUINE RE-PRIMARY — the old mix is not coherent under the new mean and must NOT be carried. Aevi's example: `rootkin` read `{body 1.0}`, which remaps to `{metaphysical 1.0}` and says the Rootkin are a metaphysical people. They are not. Carrying these forward would author a falsehood in twelve places.",
+   "_mixUnauthored": true,
+   "_mixOwner": "Aevi, one per tradition audit, AT the audit — a mix authored away from its tradition's crafts is a guess with weights on it. `threnodist` lands with the Death pass."
   },
   "syllogist": {
-   "primary": "combination",
-   "mix": {
-    "body": 0.6,
-    "precursor": 0.4
-   },
-   "density": 0.6,
-   "why": "Reason is natural; making a proof BIND is not (0.60)."
-  },
-  "horizon": {
-   "primary": "combination",
-   "mix": {
-    "body": 0.5,
-    "precursor": 0.5
-   },
-   "density": 0.44,
-   "why": "Walking is natural. Folding the distance you walk is not (0.44)."
-  },
-  "wright": {
-   "primary": "combination",
-   "mix": {
-    "body": 0.6,
-    "precursor": 0.4
-   },
-   "density": 0.52,
-   "why": "Makecraft is craft-of-hand that reaches for the lattice when the hand is not enough (0.52)."
-  },
-  "rootkin": {
-   "primary": "body",
-   "mix": {
-    "body": 1.0
-   },
-   "density": 0.12,
-   "why": "Vivimancy GROWS. The Rootkin completed the Transition and released the lattice; the green current replaced it. Thinnest region in the world (0.12) and their best ground."
-  },
-  "marcher": {
-   "primary": "body",
-   "mix": {
-    "body": 1.0
-   },
-   "density": 0.2,
-   "why": "The Edge is skill at arms in a body. Nothing to borrow (0.20)."
-  },
-  "somatic": {
-   "primary": "body",
-   "mix": {
-    "body": 1.0
-   },
-   "density": 0.22,
-   "why": "Soma is the perfected body. Somatic discipline is a retuning AWAY from the lattice (0.22)."
+   "primary": "ordered_nanite",
+   "why": "Argument as architecture; a proof is an ordered process and runs like one.",
+   "mix": null,
+   "_group": "C · GENUINE RE-PRIMARY — the old mix is not coherent under the new mean and must NOT be carried. Aevi's example: `rootkin` read `{body 1.0}`, which remaps to `{metaphysical 1.0}` and says the Rootkin are a metaphysical people. They are not. Carrying these forward would author a falsehood in twelve places.",
+   "_mixUnauthored": true,
+   "_mixOwner": "Aevi, one per tradition audit, AT the audit — a mix authored away from its tradition's crafts is a guess with weights on it. `threnodist` lands with the Death pass."
   },
   "mason": {
-   "primary": "body",
-   "mix": {
-    "body": 1.0
-   },
-   "density": 0.3,
-   "why": "Thingcraft holds that only what can be touched is real — weight that stands without the lattice (0.30)."
+   "primary": "ordered_nanite",
+   "why": "⚠️ Ordered nanite is WORKED MATTER, which is the one immaterial thing a Mason would accept — a load path is real.",
+   "mix": null,
+   "_group": "C · GENUINE RE-PRIMARY — the old mix is not coherent under the new mean and must NOT be carried. Aevi's example: `rootkin` read `{body 1.0}`, which remaps to `{metaphysical 1.0}` and says the Rootkin are a metaphysical people. They are not. Carrying these forward would author a falsehood in twelve places.",
+   "_mixUnauthored": true,
+   "_mixOwner": "Aevi, one per tradition audit, AT the audit — a mix authored away from its tradition's crafts is a guess with weights on it. `threnodist` lands with the Death pass."
   },
-  "ashwarden": {
-   "primary": "body",
-   "mix": {
-    "body": 0.85,
-    "precursor": 0.15
-   },
-   "density": 0.32,
-   "why": "Palework tends endings. What tends endings does not hold a charge (0.32)."
+  "lattice": {
+   "primary": "ordered_nanite",
+   "why": "Perfect prediction, the binding of possibility. Definitional.",
+   "mix": null,
+   "_group": "C · GENUINE RE-PRIMARY — the old mix is not coherent under the new mean and must NOT be carried. Aevi's example: `rootkin` read `{body 1.0}`, which remaps to `{metaphysical 1.0}` and says the Rootkin are a metaphysical people. They are not. Carrying these forward would author a falsehood in twelve places.",
+   "_mixUnauthored": true,
+   "_mixOwner": "Aevi, one per tradition audit, AT the audit — a mix authored away from its tradition's crafts is a guess with weights on it. `threnodist` lands with the Death pass."
   },
-  "verist": {
-   "primary": "body",
-   "mix": {
-    "body": 0.9,
-    "precursor": 0.1
-   },
-   "density": 0.46,
-   "why": "Verity is speech and refusal. Saying what is so costs nothing but the saying (0.46)."
+  "rootkin": {
+   "primary": "wild_nanite",
+   "why": "'Grown not built, sap and bark.' Wild nanite as growth.",
+   "mix": null,
+   "_group": "C · GENUINE RE-PRIMARY — the old mix is not coherent under the new mean and must NOT be carried. Aevi's example: `rootkin` read `{body 1.0}`, which remaps to `{metaphysical 1.0}` and says the Rootkin are a metaphysical people. They are not. Carrying these forward would author a falsehood in twelve places.",
+   "_mixUnauthored": true,
+   "_mixOwner": "Aevi, one per tradition audit, AT the audit — a mix authored away from its tradition's crafts is a guess with weights on it. `threnodist` lands with the Death pass."
   },
   "threnodist": {
-   "primary": "body",
-   "mix": {
-    "body": 0.9,
-    "precursor": 0.1
-   },
-   "density": 0.48,
-   "why": "Pathos holds that feeling is the only true instrument. Feeling is not lattice-mediated (0.48)."
+   "primary": "wild_nanite",
+   "why": "⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.",
+   "mix": null,
+   "_group": "C · GENUINE RE-PRIMARY — the old mix is not coherent under the new mean and must NOT be carried. Aevi's example: `rootkin` read `{body 1.0}`, which remaps to `{metaphysical 1.0}` and says the Rootkin are a metaphysical people. They are not. Carrying these forward would author a falsehood in twelve places.",
+   "_mixUnauthored": true,
+   "_mixOwner": "Aevi, one per tradition audit, AT the audit — a mix authored away from its tradition's crafts is a guess with weights on it. `threnodist` lands with the Death pass."
   },
-  "stillhold": {
-   "primary": "body",
-   "mix": {
-    "body": 1.0
-   },
-   "density": null,
-   "why": "Stillcraft is a vow kept. The Stillhold gave the lattice up with the war."
+  "figurist": {
+   "primary": "wild_nanite",
+   "why": "⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Formcraft is the most ordered craft on the wheel, and I was anchoring on skills I authored myself ('buildings that are arguments') that Erik notes may not be useful skills anyway. ABSTRACTION IS NOT ORDER — it is the leap, and the leap is wild.",
+   "mix": null,
+   "_group": "C · GENUINE RE-PRIMARY — the old mix is not coherent under the new mean and must NOT be carried. Aevi's example: `rootkin` read `{body 1.0}`, which remaps to `{metaphysical 1.0}` and says the Rootkin are a metaphysical people. They are not. Carrying these forward would author a falsehood in twelve places.",
+   "_mixUnauthored": true,
+   "_mixOwner": "Aevi, one per tradition audit, AT the audit — a mix authored away from its tradition's crafts is a guess with weights on it. `threnodist` lands with the Death pass."
   },
-  "god_named": {
-   "primary": "nanite",
-   "mix": {
-    "nanite": 0.75,
-    "wild": 0.15,
-    "precursor": 0.1
-   },
-   "density": null,
-   "why": "⛔ ERIK 2026-08-08: 'the God-Named use nanites from pre-transition mostly; some may have learned to harness wild nanites or use some precursor lattice.' ⚠️ AND THE HOME-GROUND EFFECT IS PHYSICAL, NOT BELIEF: their own people carry a store of nanites, so a bearer is strongest among them — power that travels with a population rather than sitting in terrain."
-  },
-  "bargainers": {
-   "primary": "body",
-   "mix": {
-    "body": 0.7,
-    "precursor": 0.2,
-    "veil": 0.1
-   },
-   "density": null,
-   "why": "A table, a ledger, and terms named exactly — almost entirely unaugmented craft. The PRECURSOR share is the Bound Ledger, terms written into something that does not forget. The VEIL share is Far Terms, which nobody advertises."
-  },
-  "valley_craft": {
-   "primary": "body",
-   "mix": {
-    "body": 0.75,
-    "precursor": 0.2,
-    "nanite": 0.05
-   },
-   "density": null,
-   "why": "⛔ CORRECTED BY ERIK 2026-08-08. I first authored this as `body 1.0 — it declines every source`, which ROMANTICISED it. Reading the fifteen crafts, FOUR are not body work: `old_roads` follows PRECURSOR TRACES by name; `boundary_stone` sets a ward that LASTS WITHOUT YOU, which technique alone does not do; `hearthbinding` restores 'BEYOND WHAT REST ALONE GIVES', in its own words; `beastfriend` carries `summon`. ⚠️ ERIK'S POINT IS GEOGRAPHIC AND IT IS THE STRONGER ARGUMENT: Millbrook sits in a valley that also holds harmonic_heights_terrace, radiant_plateau_edge, echo_river_crossing, and the SUNKEN CHOIR — a +0.26 pool, 'a pre-Transition sonic work, flooded and intact.' Valleyfolk do not live in a clean room. They live on top of old works and next door to two craft families, and folk craft is exactly the kind of thing that picks up what is lying around. ⛔ THE CHARACTER OF THE PRECURSOR SHARE IS THAT NOBODY KNOWS IT IS ONE: a valleyfolk does not know the old road is Precursor infrastructure. They know the old road is safe, and that a boundary stone holds, and that their grandmother said so. ⚠️ IT KEEPS THE FLOOR — body-dominant, so valley craft is still never starved anywhere. That part was right."
-  },
-  "harmonic": {
+  "wright": {
    "primary": "precursor",
-   "mix": {
-    "precursor": 0.7,
-    "body": 0.3
-   },
-   "density": null,
-   "why": "⛔ NOT A TRADITION — one of the two LOCAL CRAFT FAMILIES the valley grew for itself, available across peoples. Resonance, echo-perception, standing-wave barriers. ⚠️ The lattice share is explicit in the content: the Resonance Lantern's own note says 'singing is a DRAW ON THE LATTICE and the crystal stays warm.' The body share is real too — a voice, a hand on stone, a held note. `density: null` because a craft FAMILY has no homeland; the practitioner's own ground decides."
+   "why": "Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.",
+   "mix": null,
+   "_group": "C · GENUINE RE-PRIMARY — the old mix is not coherent under the new mean and must NOT be carried. Aevi's example: `rootkin` read `{body 1.0}`, which remaps to `{metaphysical 1.0}` and says the Rootkin are a metaphysical people. They are not. Carrying these forward would author a falsehood in twelve places.",
+   "_mixUnauthored": true,
+   "_mixOwner": "Aevi, one per tradition audit, AT the audit — a mix authored away from its tradition's crafts is a guess with weights on it. `threnodist` lands with the Death pass."
   },
-  "radiant_folk": {
+  "unmaker": {
    "primary": "precursor",
-   "mix": {
-    "precursor": 0.7,
-    "body": 0.3
-   },
-   "density": null,
-   "why": "⛔ NOT A TRADITION — the other local craft family. Light-bending, spectra-sight, coherent beams, mirage. ⚠️ The Prism Chip is authored as a 'Radiant photonic crystal' holding a charge, and the Blazeborn — the tradition nearest this family — sit at precursor 0.9. Sun-coaxing and light-wells are the body share: patience and a vessel. `density: null`, same reason as harmonic."
+   "why": "Controlled ruin — and what they unmake is largely Precursor work.",
+   "mix": null,
+   "_group": "C · GENUINE RE-PRIMARY — the old mix is not coherent under the new mean and must NOT be carried. Aevi's example: `rootkin` read `{body 1.0}`, which remaps to `{metaphysical 1.0}` and says the Rootkin are a metaphysical people. They are not. Carrying these forward would author a falsehood in twelve places.",
+   "_mixUnauthored": true,
+   "_mixOwner": "Aevi, one per tradition audit, AT the audit — a mix authored away from its tradition's crafts is a guess with weights on it. `threnodist` lands with the Death pass."
   },
-  "precursor": {
+  "horizon": {
    "primary": "precursor",
-   "mix": {
-    "precursor": 1.0
-   },
-   "density": null,
-   "why": "⛔ NOT A TRADITION AND NOT A PEOPLE — the six crafts that address the lattice DIRECTLY: latticespeak, address_sense, wake_the_line, unmake_seal. ⚠️ Trivially precursor 1.0, and it is the only entry where the source and the label are the same word. `density: null` because these are learned-only and gated by contact, never by where you stand — though in practice they are useless where there is no lattice to address, which the band already says."
+   "why": "⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.",
+   "mix": null,
+   "_group": "C · GENUINE RE-PRIMARY — the old mix is not coherent under the new mean and must NOT be carried. Aevi's example: `rootkin` read `{body 1.0}`, which remaps to `{metaphysical 1.0}` and says the Rootkin are a metaphysical people. They are not. Carrying these forward would author a falsehood in twelve places.",
+   "_mixUnauthored": true,
+   "_mixOwner": "Aevi, one per tradition audit, AT the audit — a mix authored away from its tradition's crafts is a guess with weights on it. `threnodist` lands with the Death pass."
   },
-  "cross_pole_braid": {
-   "primary": "combination",
-   "mix": {},
-   "density": null,
-   "why": "⛔ DECLINES A PRIMARY, DELIBERATELY, AND THE EMPTY MIX IS THE ANSWER. Three braid-crafts that exist ONLY as a joining of two poles — harbored_flame (concealment + radiance), meaning_engine (significance + mechanism), the_turning_word. ⚠️ A braid's source is WHATEVER ITS PARENTS BRING, and it differs per braid and per practitioner, so a single primary here would be a lie about every one of them. `combination` with an EMPTY mix says 'resolve from the components', which is SNG-172 invariant 3 — scaled by mix, never rounded to a dominant. ⛔ CCode: if the resolver needs a value rather than an absence, it should read the BRAID'S PARENTS, not this row."
+  "cogitant": {
+   "primary": "metaphysical",
+   "why": "⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.",
+   "mix": null,
+   "_group": "C · GENUINE RE-PRIMARY — the old mix is not coherent under the new mean and must NOT be carried. Aevi's example: `rootkin` read `{body 1.0}`, which remaps to `{metaphysical 1.0}` and says the Rootkin are a metaphysical people. They are not. Carrying these forward would author a falsehood in twelve places.",
+   "_mixUnauthored": true,
+   "_mixOwner": "Aevi, one per tradition audit, AT the audit — a mix authored away from its tradition's crafts is a guess with weights on it. `threnodist` lands with the Death pass."
+  },
+  "veilwright": {
+   "primary": "metaphysical",
+   "why": "⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.",
+   "mix": null,
+   "_group": "C · GENUINE RE-PRIMARY — the old mix is not coherent under the new mean and must NOT be carried. Aevi's example: `rootkin` read `{body 1.0}`, which remaps to `{metaphysical 1.0}` and says the Rootkin are a metaphysical people. They are not. Carrying these forward would author a falsehood in twelve places.",
+   "_mixUnauthored": true,
+   "_mixOwner": "Aevi, one per tradition audit, AT the audit — a mix authored away from its tradition's crafts is a guess with weights on it. `threnodist` lands with the Death pass."
   }
  },
  "perAbilityOverrides": {
@@ -298,104 +237,6 @@
  "_fiveFamilies": "SNG-381: valley_craft · harmonic · radiant_folk · precursor · cross_pole_braid are NOT TRADITIONS — none appears in traditions.json. They are craft FAMILIES and categories that abilities declare in their `tradition` field, so they fall through `abilityTradition(ab) || ab.powerSystem` into this lookup and found nothing. 53 crafts were invisible to both tables. ⚠️ They carry `density: null` because a craft family has no homeland — unlike a people, which does.",
  "_valleyCraftGap": "⚠️ SNG-381 AUTHORING GAP, found while correcting the above: valley_craft has NO folk-harmonic and NO folk-radiant craft, and the valley contains harmonic_heights_terrace, radiant_plateau_edge, echo_river_crossing and the sunken_choir. Two craft families next door for generations and the folk tradition borrowed nothing from either. ⛔ That is a hole, not a design: a valley kid who grew up by the Choir should have a plain, unschooled way of using sound, the way `old_roads` is a plain unschooled way of using Precursor work.",
  "_reallocation_20260815": "⛔ ERIK'S PRIMARY ALLOCATION, 2026-08-15. FOUR SOURCES, 24 TRADITIONS, exact coverage — no gaps, no doubles. precursor 7 · metaphysical 8 · ordered_nanite 5 · wild_nanite 4.\n⛔ THE STRUCTURAL CHANGE: `body` IS GONE AS A SOURCE, absorbed into metaphysical as 'Veil/Psychic/Ki type INNATE power'. ⚠️ THIS IS BETTER THAN WHAT I HAD. I was carrying 9 traditions on `body`, a source defined as REACHING FOR NOTHING — a residual bucket for 'no visible power'. Naming it innate gives it a mechanism, and it makes theTradeoff coherent: METAPHYSICAL WORKS ANYWHERE BECAUSE IT IS CARRIED, NOT DRAWN. The Marchers and Somatics become ki-traditions rather than people who merely trained hard.\n⚠️ CONSEQUENCE TO WATCH: 8 traditions are innate and work anywhere; 16 depend on substrate. A two-thirds majority goes weak off the lattice.\n⛔ AND `veil` AND `wild` ARE NO LONGER FREE-STANDING PRIMARIES — veil folds into metaphysical, wild becomes wild_nanite. That resolves 'veil is primary for nobody' by making it part of something.",
- "byTradition_primary_20260815": {
-  "seraphic": {
-   "primary": "ordered_nanite",
-   "why": "'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace."
-  },
-  "enginewright": {
-   "primary": "ordered_nanite",
-   "why": "⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation."
-  },
-  "syllogist": {
-   "primary": "ordered_nanite",
-   "why": "Argument as architecture; a proof is an ordered process and runs like one."
-  },
-  "mason": {
-   "primary": "ordered_nanite",
-   "why": "⚠️ Ordered nanite is WORKED MATTER, which is the one immaterial thing a Mason would accept — a load path is real."
-  },
-  "lattice": {
-   "primary": "ordered_nanite",
-   "why": "Perfect prediction, the binding of possibility. Definitional."
-  },
-  "churnfolk": {
-   "primary": "wild_nanite",
-   "why": "Improvised everything, luck-riding, nothing twice. Definitional."
-  },
-  "rootkin": {
-   "primary": "wild_nanite",
-   "why": "'Grown not built, sap and bark.' Wild nanite as growth."
-  },
-  "threnodist": {
-   "primary": "wild_nanite",
-   "why": "⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too."
-  },
-  "figurist": {
-   "primary": "wild_nanite",
-   "why": "⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Formcraft is the most ordered craft on the wheel, and I was anchoring on skills I authored myself ('buildings that are arguments') that Erik notes may not be useful skills anyway. ABSTRACTION IS NOT ORDER — it is the leap, and the leap is wild."
-  },
-  "abyssal": {
-   "primary": "precursor",
-   "why": "⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the alien source directly."
-  },
-  "wright": {
-   "primary": "precursor",
-   "why": "Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell."
-  },
-  "unmaker": {
-   "primary": "precursor",
-   "why": "Controlled ruin — and what they unmake is largely Precursor work."
-  },
-  "blazeborn": {
-   "primary": "precursor",
-   "why": "Glass plains, revelation as violence. Light shaped through crystal."
-  },
-  "umbral": {
-   "primary": "precursor",
-   "why": "They live in the deeps, which is where the lattice is buried."
-  },
-  "hourkeeper": {
-   "primary": "precursor",
-   "why": "'Archives that RUN FORWARD.' Only one thing in this world does that."
-  },
-  "horizon": {
-   "primary": "precursor",
-   "why": "⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body."
-  },
-  "somatic": {
-   "primary": "metaphysical",
-   "why": "Ki, definitional — 'the body as the only instrument.'"
-  },
-  "cogitant": {
-   "primary": "metaphysical",
-   "why": "⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example."
-  },
-  "verist": {
-   "primary": "metaphysical",
-   "why": "Seeing truly, without an instrument between."
-  },
-  "veilwright": {
-   "primary": "metaphysical",
-   "why": "⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'."
-  },
-  "stillhold": {
-   "primary": "metaphysical",
-   "why": "Inner stillness as a held power, not an absence of one."
-  },
-  "marcher": {
-   "primary": "metaphysical",
-   "why": "⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn."
-  },
-  "ashwarden": {
-   "primary": "metaphysical",
-   "why": "The mercy of stopping needs no apparatus."
-  },
-  "numinous": {
-   "primary": "metaphysical",
-   "why": "Meaning without matter. Definitional."
-  }
- },
  "_theFourSources_20260823": "⛔ ERIK, 2026-08-23, RESTATING THE FRAME SO THE AUDIT CAN ALLOCATE AGAINST IT:\n   1. PRECURSOR LATTICE — the built substrate.\n   2. NANITE — ORDERED AND WILD ARE ONE SOURCE IN TWO STATES, not two sources.\n   3. VEIL — ⛔ UNRESTRAINED WILL OR DESIRE.\n   4. METAPHYSICAL — psychic, ki, and the rest.\n⛔ AND THE STRUCTURE IS TWO PAIRS, EACH A PURE THING AND ITS APPROXIMATION:\n   ORDERED NANITES APPROXIMATE SUBSTRATE POWERS. ⚠️ MANY METAPHYSICAL POWERS APPROXIMATE VEIL POWER.\n   precursor : ordered_nanite  ::  veil : metaphysical\n⚠️ THIS WAS ALREADY CANON IN power_cosmology.json §theSymmetry AND I NEVER PROPAGATED IT HERE — which is why `veil` sits in this file defined and carried by nothing, and why I have been treating four ALLOCATION values as four SOURCES.",
  "_veilIsTheOppositeOfSubstrate": "⛔ ERIK: 'Veil is the power OPPOSITE Substrate.' ⚠️ THAT IS WHY THE BANDS MIRROR — precursor {0.90, 0.20} wants dense ground, veil {0.10, 0.20} wants thin. Thinning one strengthens the other.\n⛔ AND IT IS WHY A METAPHYSICAL CRAFT IS NOT A LESSER VEIL CRAFT — it is an APPROXIMATION reached from the human side, the way an ordered nanite is an approximation of the lattice. ⚠️ A practitioner who reaches the Veil itself is doing what a metaphysical practitioner is imitating.",
  "_allocationNames": "⚠️ NAME RECONCILIATION. This file's `sources` block uses `nanite` and `wild`; the 2026-08-15 allocation and all 373 abilities use `ordered_nanite` and `wild_nanite`. ⛔ THEY ARE THE SAME TWO STATES OF ONE SOURCE. The long names win because the content uses them and because they say which state.",
@@ -429,5 +270,107 @@
   },
   "_whatThisChangesForTheAudit": "⛔ THE SEVEN CRAFTS CARRYING THESE VALUES ARE NOW `combination` WITH A `powerMix`, not exceptions to the four. ⚠️ AND THE which-CHECK'S W1 GATE NO LONGER NEEDS TO SPECIAL-CASE THEM — I taught it to skip `living_current` and `wild_current` as deliberate gates, and the right answer was to make them expressible instead.",
   "_theGeneralRule": "⛔ A NAMED 'CURRENT' IS A COMBINATION SOMEBODY HAS NOTICED OFTEN ENOUGH TO NAME. ⚠️ If the audit finds another, express it as a mix rather than adding a source — there are four, and the reason there are four is the two pairs."
- }
+ },
+ "_supersededTable_20260815": {
+  "_note": "⛔ WAS `byTradition_primary_20260815`. Folded into `byTradition` by CCODE-221 and kept ONLY as history — it is read by nothing. ⚠️ Two tables is what produced this ticket; if you are about to add a third, that is the thing to notice.",
+  "rows": {
+   "seraphic": {
+    "primary": "ordered_nanite",
+    "why": "'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace."
+   },
+   "enginewright": {
+    "primary": "ordered_nanite",
+    "why": "⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation."
+   },
+   "syllogist": {
+    "primary": "ordered_nanite",
+    "why": "Argument as architecture; a proof is an ordered process and runs like one."
+   },
+   "mason": {
+    "primary": "ordered_nanite",
+    "why": "⚠️ Ordered nanite is WORKED MATTER, which is the one immaterial thing a Mason would accept — a load path is real."
+   },
+   "lattice": {
+    "primary": "ordered_nanite",
+    "why": "Perfect prediction, the binding of possibility. Definitional."
+   },
+   "churnfolk": {
+    "primary": "wild_nanite",
+    "why": "Improvised everything, luck-riding, nothing twice. Definitional."
+   },
+   "rootkin": {
+    "primary": "wild_nanite",
+    "why": "'Grown not built, sap and bark.' Wild nanite as growth."
+   },
+   "threnodist": {
+    "primary": "wild_nanite",
+    "why": "⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too."
+   },
+   "figurist": {
+    "primary": "wild_nanite",
+    "why": "⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Formcraft is the most ordered craft on the wheel, and I was anchoring on skills I authored myself ('buildings that are arguments') that Erik notes may not be useful skills anyway. ABSTRACTION IS NOT ORDER — it is the leap, and the leap is wild."
+   },
+   "abyssal": {
+    "primary": "precursor",
+    "why": "⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the alien source directly."
+   },
+   "wright": {
+    "primary": "precursor",
+    "why": "Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell."
+   },
+   "unmaker": {
+    "primary": "precursor",
+    "why": "Controlled ruin — and what they unmake is largely Precursor work."
+   },
+   "blazeborn": {
+    "primary": "precursor",
+    "why": "Glass plains, revelation as violence. Light shaped through crystal."
+   },
+   "umbral": {
+    "primary": "precursor",
+    "why": "They live in the deeps, which is where the lattice is buried."
+   },
+   "hourkeeper": {
+    "primary": "precursor",
+    "why": "'Archives that RUN FORWARD.' Only one thing in this world does that."
+   },
+   "horizon": {
+    "primary": "precursor",
+    "why": "⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body."
+   },
+   "somatic": {
+    "primary": "metaphysical",
+    "why": "Ki, definitional — 'the body as the only instrument.'"
+   },
+   "cogitant": {
+    "primary": "metaphysical",
+    "why": "⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example."
+   },
+   "verist": {
+    "primary": "metaphysical",
+    "why": "Seeing truly, without an instrument between."
+   },
+   "veilwright": {
+    "primary": "metaphysical",
+    "why": "⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'."
+   },
+   "stillhold": {
+    "primary": "metaphysical",
+    "why": "Inner stillness as a held power, not an absence of one."
+   },
+   "marcher": {
+    "primary": "metaphysical",
+    "why": "⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn."
+   },
+   "ashwarden": {
+    "primary": "metaphysical",
+    "why": "The mercy of stopping needs no apparatus."
+   },
+   "numinous": {
+    "primary": "metaphysical",
+    "why": "Meaning without matter. Definitional."
+   }
+  }
+ },
+ "_foothillsAreComputed": "⛔ CCODE-221 — SEVEN KEYS WERE REMOVED FROM `byTradition` AND ARE NOT COMING BACK: god_named, bargainers, harmonic, radiant_folk, valley_craft, precursor, cross_pole_braid. ⚠️ FIVE ARE FOOTHILLS — places of ACCESS, not ancestry (§30.6) — so they have no source of their own and inherit from whoever lives there; `substrate.craftSource` COMPUTES them from `foothills.json` parents. `precursor` is a power source misfiled as a tradition, and `cross_pole_braid` is `combination` definitionally.\n⛔ A STORED COPY OF A DERIVED VALUE IS THE FAILURE THAT PRODUCED THIS TICKET. Do not re-add them."
 }

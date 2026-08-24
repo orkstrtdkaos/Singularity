@@ -75,7 +75,8 @@ export function sourceGround(source, substrateData) {
 }
 
 /** A tradition's band {center, width}, or null for the untuned (folk/learned) — substrate-neutral. */
-export function bandFor(tradition, data) { // registry:internal
+export function bandFor(tradition, data) {
+ // registry:internal
   const b = data?.substrateBand?.[tradition];
   return b && b.center != null ? { center: b.center, width: b.width ?? 0.18 } : null;
 }
@@ -199,13 +200,15 @@ export function schoolsDetailForGM(character, schoolsData, substrateData = null)
 }
 
 /** A place's effective density for a wielder carrying `carried` charge, clamped to [0,1]. */
-export function effectiveDensity(density, carried = 0) { // registry:internal
+export function effectiveDensity(density, carried = 0) {
+ // registry:internal
   return Math.max(0, Math.min(1, (Number(density) || 0) + (Number(carried) || 0)));
 }
 
 /** The output factor [0,1] for a craft of `band` at effective density `eff`. Two-sided: full inside
  *  the band, steep starvation below, mild floored interference above. */
-export function bandFactor(band, eff, t = SUBSTRATE_TUNING) { // registry:internal
+export function bandFactor(band, eff, t = SUBSTRATE_TUNING) {
+ // registry:internal
   if (!band) return 1; // untuned tradition — substrate-neutral
   const lo = band.center - band.width, hi = band.center + band.width;
   if (eff >= lo && eff <= hi) return 1;
@@ -403,11 +406,19 @@ export function applySubstrateField(locations = {}, data = {}) {
 /** The source a craft reaches with FOR THIS CHARACTER — derived from the school they practise in the
  *  craft's tradition, never a field on the ability. Null when the craft has no tradition (9 of 383) or the
  *  character does not practise it: an honest "we do not know" rather than a default that looks like one. */
-export function craftSource(ability, character, schoolsData, powerSources = null) {
+export function craftSource(ability, character, schoolsData, powerSources = null, foothills = null) {
   const tid = ability?.tradition;
   if (!tid) return null;
   const school = schoolForTradition(character, tid, schoolsData);
-  if (school) return { traditionId: tid, school, source: school.extension, via: "school" };
+  // ⛔ CCODE-221 — A PURE SCHOOL FALLS THROUGH TO ITS TRADITION, AND THE COMMENT BELOW ALREADY SAID SO.
+  // "A PURE school (extension null) leans on nothing new, so it keeps the TRADITION'S OWN authored band."
+  // The code returned `source: school.extension` — null — and stopped, so every practitioner who had not
+  // CHOSEN a school (the default is the pure one, line 96) graded against nothing. That is Aevi's
+  // acceptance test 3: an ashwarden craft must score against `metaphysical`, and it was scoring against
+  // no source at all while reporting `via: "school"` as though it had answered.
+  // ⚠️ The school is still RETURNED — it is true and the card should say it — the SOURCE just comes from
+  // the tradition, which is what "leans on nothing new" means.
+  if (school?.extension) return { traditionId: tid, school, source: school.extension, via: "school" };
   // ⛔ SNG-382 — THE TRADITION MIX IS THE FALLBACK, AND WIRING IT IS WHAT GAVE IT A READER. Aevi
   // authored 26 weighted mixes with Erik's reasons into `power_sources.json`; the file was registered,
   // never fetched by the loader, and read by nothing but a CI audit. Five traditions — harmonic,
@@ -417,8 +428,42 @@ export function craftSource(ability, character, schoolsData, powerSources = null
   // ⚠️ `via` IS RETURNED SO THE CARD CAN SAY WHICH IT IS. A school is what THIS practitioner reaches
   // with; a tradition mix is what the craft TYPICALLY leans on. Those are different claims and a card that
   // presented them identically would be overstating the second.
-  const mix = powerSources?.byTradition?.[tid];
-  if (mix?.primary) return { traditionId: tid, school: null, source: mix.primary, mix: mix.mix || null, via: "tradition" };
+  const row = powerSources?.byTradition?.[tid];
+  // ⛔ CCODE-221 — A NULL PRIMARY IS UNKNOWN, NOT ABSENT, AND MUST NOT FALL THROUGH TO A GUESS. `abyssal`
+  // sits at null because Erik deferred it to the Abyssal audit; returning null here makes the card DECLINE,
+  // which is the honest answer. Falling through to the foothill computation would answer it from parents
+  // that are not its parents.
+  if (row && row.primary === null) return { traditionId: tid, school: null, source: null, mix: null, via: "deferred" };
+  // ⚠️ `mixAuthored` IS RETURNED SEPARATELY, AND THAT IS §2b'S WHOLE POINT. `mix: null` must mean
+  // UNAUTHORED and never "the mean is pure" — an absent value doing double duty is the trap, and a card
+  // that cannot tell them apart will render a confident blend out of nothing.
+  if (row?.primary) return { traditionId: tid, school: school || null, source: row.primary, mix: row.mix || null,
+    mixAuthored: !!row.mix && !row._mixUnauthored, via: "tradition" };
+
+  // ⛔ A FOOTHILL HAS NO SOURCE OF ITS OWN — IT INHERITS FROM WHOEVER LIVES THERE. §30.6: `tradition` is
+  // LINEAGE and `learnedAt` is ACCESS; a foothill is a place of access, not a new ancestry. So the seven
+  // keys that used to sit in `byTradition` are COMPUTED here and never stored — a stored copy of a derived
+  // value is the failure that produced this whole ticket.
+  //
+  // ⚠️ AEVI'S PROOF THAT THE DERIVATION IS RIGHT: `harmonic`'s parents resolve 50/50 between the two
+  // nanite states, a tie, which resolves to `combination` — and its 15 crafts already carry exactly that.
+  // A computation that reproduces a value nobody derived it from is the strongest evidence available.
+  const foot = foothills?.foothills?.[tid];
+  if (foot?.parents) {
+    const weight = {};
+    for (const [parent, w] of Object.entries(foot.parents)) {
+      const pr = powerSources?.byTradition?.[parent]?.primary;
+      if (pr) weight[pr] = (weight[pr] || 0) + (Number(w) || 0);
+    }
+    const ranked = Object.entries(weight).sort((a, b) => b[1] - a[1]);
+    if (ranked.length) {
+      // ⛔ A TIE IS `combination`, NOT A COIN FLIP. §30.2: ordered and wild are one source in two states,
+      // and a people standing evenly between two sources IS a combination rather than an arbitrary pick.
+      const tied = ranked.length > 1 && ranked[0][1] === ranked[1][1];
+      return { traditionId: tid, school: null, source: tied ? "combination" : ranked[0][0],
+        mix: weight, mixAuthored: false, via: "foothill", parents: foot.parents };
+    }
+  }
   return null;
 }
 
@@ -427,8 +472,8 @@ export function craftSource(ability, character, schoolsData, powerSources = null
  *
  *  `strength` is 0–4 pips for scanning; `verdict` is the word; `because` is the authored ground line.
  *  Returns null when the source is unknown — a card that cannot answer must not render a confident row. */
-export function groundCardFor(ability, character, { schools, substrate, location, powerSources = null, locations = null } = {}) {
-  const cs = craftSource(ability, character, schools, powerSources);
+export function groundCardFor(ability, character, { schools, substrate, location, powerSources = null, locations = null, foothills = null } = {}) {
+  const cs = craftSource(ability, character, schools, powerSources, foothills);
   if (!cs) return null;
   // ⛔ SNG-385 — THE CARD READS THE SOURCE'S OWN FIELD. A nanite craft scored against lattice density
   // is being marked on the wrong exam: the Heartroot is lattice 0.02 and nanite `wild` 0.75, and a card

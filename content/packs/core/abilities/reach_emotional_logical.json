@@ -541,7 +541,11 @@
     "wardTypes": [
      "feeling",
      "appetite"
-    ]
+    ],
+    "crit": {
+     "success": "The warning arrives early enough to be a decision rather than a flinch — you have time to choose where to stand, and everyone near you inherits it.",
+     "failure": "You feel a threat that is not there. You move, and the moving is what puts you in front of the real one."
+    }
    },
    "rankDeltas": [
     {
@@ -1505,7 +1509,11 @@
     "duration": 6,
     "targets": 1,
     "damageType": "feeling",
-    "note": "⚠️ A HOBBLE WITH A LETHAL TAIL — the kill is a possibility, never a roll you aim. Resolve r2 as incapacitation plus a small independent chance of a stopped heart, weighted by how much the target has actually lost. NOT a FIGHT craft: it does not fight."
+    "note": "⚠️ A HOBBLE WITH A LETHAL TAIL — the kill is a possibility, never a roll you aim. Resolve r2 as incapacitation plus a small independent chance of a stopped heart, weighted by how much the target has actually lost. NOT a FIGHT craft: it does not fight.",
+    "crit": {
+     "success": "The weight settles where their own loss already sits, and finds it load-bearing. What gives way is not their footing — it is the thing their footing was on.",
+     "failure": "You reach for a grief they have finished carrying. They meet it, and it is old, and they are not afraid of it anymore — and now they know what you tried to do."
+    }
    },
    "rankDeltas": [
     {

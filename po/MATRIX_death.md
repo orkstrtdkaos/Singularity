@@ -50,11 +50,12 @@ Crafts marked *first-gift* inherit `levelReq`/`energyCost`/`shape`/`harmRung` an
 
 ## Gaps, measured
 
-| gap | n | crafts |
+| gap | n (crafts) | crafts |
 |---|---|---|
 | no `mechanic.crit` | 19 | Attended End, Carried Name, Deathsense, Feeling-Sense, Kept Vigil, True Account, Wellspring, Dread, +11 more |
 | no `wardTypes` | 27 | Attended End, Carried Name, Deathsense, Feeling-Sense, Hastened Grey, Keening, Palework, Shared Weight, +19 more |
 | no `imposes` on any rank | 27 | Attended End, Carried Name, Deathsense, Feeling-Sense, Hastened Grey, Kept Vigil, Palework, Shared Weight, +19 more |
+| ⚠️ *(for reference — `imposes` RANK OCCURRENCES in this set: 9)* | | |
 | no `ongoingHarm` on any rank | 29 | Attended End, Carried Name, Deathsense, Feeling-Sense, Keening, Kept Vigil, Palework, Shared Weight, +21 more |
 | ⛔ rolls dice, no `damageType` | 6 | Keening, Grief Strike, Kept Breath, Wither, Draw Down, The Cut Thread |
 

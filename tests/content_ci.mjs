@@ -23,12 +23,27 @@ const fail = msg => { console.log("FAIL  " + msg); failures++; };
 const ok = msg => console.log("ok    " + msg);
 const check = (label, cond, detail = "") => cond ? ok(label) : fail(label + (detail ? " — " + detail : ""));
 
-// The provides.* keys each pack's loader (engine/state.js) actually READS. A manifest key not in
-// this set is content the engine cannot see — exactly what bit quests. Keep in sync with state.js.
-const HANDLED = {
-  core: new Set(["spectrums", "rules", "abilities", "items"]),
-  valley: new Set(["locations", "npcs", "events", "companions", "lore", "encounters", "items", "quests", "tradition_arcs", "npc_quests", "bestiary", "tradition_motivations", "npc_interiority"]),
-};
+// ⛔ CCODE-232 — DERIVED FROM state.js, NOT KEPT IN SYNC WITH IT BY HAND.
+//
+// This was a literal Set with the comment "Keep in sync with state.js." It went stale the moment the
+// loader learned to read `core.provides.encounters`: the loader read the key, the list said it did not,
+// and the gate reported working content as broken. ⚠️ The identical hand-kept-list failure cost ten
+// dropped values at the encounters.js seam (CCODE-228); a list that must be kept in sync is a list that
+// will not be.
+//
+// The loader names its packs `index` (core) and `valley`, so `index.provides.X` / `valley.provides.X`
+// IS the answer, read straight out of the source. A floor below keeps a broken derivation from passing
+// as "nothing handled".
+const HANDLED = (() => {
+  const src = readFileSync(join(root, "engine/state.js"), "utf8");
+  const grab = (v) => new Set([...src.matchAll(new RegExp(`\\b${v}\\.provides\\.(\\w+)`, "g"))].map(m => m[1]));
+  return { core: grab("index"), valley: grab("valley") };
+})();
+if (HANDLED.core.size < 4 || HANDLED.valley.size < 8) {
+  // ⛔ NOT A WARNING. If the derivation breaks, every provides key reads as unhandled and this whole
+  // section becomes noise — or, worse, someone "fixes" it by deleting manifest entries.
+  fail(`CCODE-232: the HANDLED derivation broke — core ${HANDLED.core.size}, valley ${HANDLED.valley.size} keys found in state.js`);
+}
 
 const PACKS = [
   { key: "core", dir: "content/packs/core", manifest: "content/packs/core/manifest.json" },
@@ -2463,6 +2478,40 @@ for (const pack of PACKS) {
   }
 }
 
+
+
+// ⛔ CCODE-231 — A STALE RENAME MAP IS A LOADED GUN, and this one is loaded.
+//
+// `ability_rename_map.json` holds 408 old→new ability ids and nothing reads it, which reads like harmless
+// history. ⚠️ THE SENSE CULL IT RECORDS WAS REVERSED — Erik kept the ids — so rows now map crafts that are
+// ALIVE onto `attunement`, which does not exist. Running this map as a save migration today would take
+// working characters and empty their kit.
+//
+// ⛔ THE INVARIANT IS NOT "is it wired" BUT "would wiring it be safe": no row may rename a LIVE id into one
+// the catalogue does not have. Checkable, and it settles nothing about whether the map should ever run.
+// ⚠️ AGAINST THE LOADED CATALOGUE, not the files — `brace` and the other eight martial-floor crafts exist
+// only after the loader synthesises them, and a file-based existence check would call them dead.
+{
+  globalThis.localStorage = globalThis.localStorage
+    || { _d: {}, getItem(k) { return this._d[k] ?? null; }, setItem(k, v) { this._d[k] = String(v); } };
+  const { loadContentHeadless } = await import("./headless_content.mjs");
+  const CAT = (await loadContentHeadless()).abilities || {};
+  const rmap = rj("content/packs/core/rules/ability_rename_map.json").map || {};
+  const dest = (v) => (typeof v === "string" ? v : v?.to);
+  const rows = Object.entries(rmap);
+  check(`CCODE-231: the rename map is non-trivial (${rows.length} rows) — a check over an empty map proves nothing`,
+    rows.length > 100, `${rows.length}`);
+  const destructive = rows.filter(([from, v]) => CAT[from] && !CAT[dest(v)]);
+  check(`CCODE-231: no rename row turns a LIVE craft into one that does not exist (${destructive.length} do)`,
+    destructive.length === 0,
+    destructive.length
+      ? `${destructive.length} rows would empty a kit: ${destructive.slice(0, 5).map(([f, v]) => `${f}→${dest(v) || "?"}`).join(", ")}`
+        + ` — these record the SENSE CULL, which was REVERSED; prune them or the map can never safely be run`
+      : "");
+  const deadTarget = rows.filter(([, v]) => !CAT[dest(v)]).length;
+  console.log(`note  CCODE-231: ${rows.length} rename rows · ${deadTarget} point at an id that no longer exists · `
+    + `${destructive.length} of those start from a craft still alive (the destructive set)`);
+}
 
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

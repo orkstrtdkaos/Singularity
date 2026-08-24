@@ -1,48 +1,49 @@
 {
-  "schemaVersion": 1,
-  "id": "rules_classification",
-  "note": "SNG-342. Aevi: 'today reference doc and forgotten wiring are indistinguishable from outside.' Every rules file registered in the manifest that no loader fetches is listed HERE with a reason, or the build fails. This file is deliberately NOT registered in provides.rules — it is a statement about content, not content. Sits beside rules/ rather than inside it so directory sweeps of the rules corpus do not treat it as a rule.",
-  "kind_vocabulary": {
-    "_note": "⛔ SNG-344. `kind` IS NOT A LABEL. The old orphan gate skipped any file whose kind wasn't 'rules', so authoring an accurate descriptive word — `emergence`, `world_structure`, `social_mechanic_spec` — silently removed that file from the check. Aevi: 'a field I treated as a label was load-bearing for a gate, and my accuracy in naming a thing is exactly what removed it from the check… IN A CONTENT-DRIVEN ENGINE THERE IS NO SUCH THING AS A PURELY DESCRIPTIVE FIELD.' The vocabulary is now CLOSED: a new value fails the build, so inventing a word can never again be a silent behaviour change. Adding one is a two-line edit here — the cost is a sentence, not a ticket.",
-    "rules": "Operational. The engine loads it and behaves differently because of it.",
-    "content": "Authored world material the engine reads (locations, people, items).",
-    "creation": "Character-creation tables read at chargen.",
-    "emergence": "Combination/braid tables — mechanical, engine-facing.",
-    "ui_copy": "Player-facing strings the app renders.",
-    "world_structure": "Structural canon about how the world is arranged.",
-    "design_canon": "Decisions and principles for humans. Never engine-read.",
-    "design_audit": "Findings about the corpus. Never engine-read.",
-    "gm_guidance_doc": "Guidance folded into the GM prompt.",
-    "contest_design": "Spec for contest mechanics.",
-    "social_mechanic_spec": "Spec for social mechanics.",
-    "combat_mechanic_spec": "Spec for combat mechanics.",
-    "tooling_spec": "Spec for build/test tooling.",
-    "progression_rules": "Level/rank progression tables the engine reads (the sub-attribute ladder)."
-  },
-  "runtime_unwired": {
-    "_note": "Operational content with no consumer. These are REAL GAPS, not decisions. Listed so they are visible rather than silent; each needs a consumer that WANTS it (Aevi: 'a file wired without a consumer is the same failure with more steps'), so none is wired here.",
-    "combination_recipes": "⛔ SNG-344 RESOLVED — 'which is canon' had no answer as asked: NEITHER, because they are not duplicates. THE PAIR IS CANON. world/braid_recipes.json (7, loaded) is the NAMING authority: order_sense+palework → 'Ashen Meridian', with no mechanics at all. This file (56, dark) is the MECHANICAL authority: effect, cannot, functions, domains, discovery. One names, the other resolves — so the live system can tell a player their braid is called Shatterlight and cannot tell them what it does. Stays unwired only until Aevi's crosswalk lands; the join is authored content, not an engine merge."
-  },
-  "reference_pending_build": {
-    "_note": "Design specs for work not yet built. Each carries a buildImplication section — the author's own statement that code should follow. Unloaded is CORRECT today; the debt is the unbuilt feature, not the missing wiring.",
-    "cross_axis_modifiers": "Erik's 2026-07-07 correction on how the two thin Reaches (emotional_logical, falsehood_truth, demonic_angelic) modify across axes. Its buildImplication describes a modifier system that does not exist yet. Spec first, wiring after.",
-    "pole_signatures": "Explicitly 'the content-and-resolution layer SNG-027 leans on but left undefined'. It is the missing half of the social contest, written down so it stops being lost. Wire it when social contest is built."
-  },
-  "reference_permanent": {
-    "_note": "Design canon and audits. These are for humans — Aevi authoring, Erik deciding. They will never have an engine consumer and should not be counted as debt.",
-    "peoples_of_kind": "SNG-089 canon: which traditions do not resonate with human civilization. Shapes what Aevi authors; the engine reads the resulting content, never this rationale.",
-    "gambit_design": "RECOVERED canon (2026-07-12) — the gambit definition lost when it lived only in a spec file. Its gmRules are authoring guidance for how Aevi writes gambits, not a runtime table.",
-    "challenge_design": "RECOVERED canon (2026-07-12) — the SNG-049 correction, principle, and modes. Guidance for authoring challenges. Deliberately kept as content so it cannot be lost again the way the original spec was.",
-    "skill_utility_audit": "Erik's meta-critique: in D&D a spell's use is obvious, many of ours are not. An AUDIT — coverageFindings and novelUses are findings about the corpus, not data the engine reads."
-  },
-  "wired_elsewhere": {
-    "_note": "Registered, not fetched by the loader, but genuinely consumed — the consumer is a CI check rather than engine code. Not orphans.",
-    "resolution": "Fetched via rulePath(\"resolution\") + fetchJSON rather than loadRule — a real load through a different door.",
-    "emergence_recipes": "Fetched as loadRule(\"emergence\") — the file name and the rule name differ, which is exactly how the SNG-331 resolver regression hid.",
-    "martial_paths": "SNG-345: WIRED. engine/martial.js reads baselineDefense + formKits; loaded via loadRule(\"martial_paths\") into rules.martialPaths, projected into the ability catalog, granted at creation and by reconcile step 27. Was a REAL GAP for a month with its own engineNote naming the implementation.",
-    "sub_attribute_ladder": "SNG-356: WIRED. loadRule(\"sub_attribute_ladder\") -> rules.subAttributeLadder; resolve.js pays the authored rollCumulative column in place of the retired attributeSoftCap formula; engine/ladder.js pays the pool grants against a high-water mark, from BOTH doors (spendSubPoint in play, reconcile step 29 retroactively). Shipped on SNG-357 harness evidence per Aevi gating the roll column on it."
-  },
-  "_moved": {
-    "power_sources": "SNG-382 — promoted out of `wired_elsewhere` on 2026-08-08. It was honestly classified while its only consumer was a CI audit, and that was true when written. SNG-172 §4 has since been executed: 26 weighted source mixes authored with Erik's reasons. A file that describes how power works cannot reach only a test, so it is now fetched by `loadRule(\"power_sources\")` and read by `craftSource()` as the fallback for a craft whose tradition the character has no school in. ⚠️ IT ANSWERS FOR NOTHING YET — the five school-less traditions (harmonic, radiant_folk, valley_craft, precursor, cross_pole_braid, 53 crafts) have no mix either. The reader ships first so the content can land without code."
-  }
+ "schemaVersion": 1,
+ "id": "rules_classification",
+ "note": "SNG-342. Aevi: 'today reference doc and forgotten wiring are indistinguishable from outside.' Every rules file registered in the manifest that no loader fetches is listed HERE with a reason, or the build fails. This file is deliberately NOT registered in provides.rules — it is a statement about content, not content. Sits beside rules/ rather than inside it so directory sweeps of the rules corpus do not treat it as a rule.",
+ "kind_vocabulary": {
+  "_note": "⛔ SNG-344. `kind` IS NOT A LABEL. The old orphan gate skipped any file whose kind wasn't 'rules', so authoring an accurate descriptive word — `emergence`, `world_structure`, `social_mechanic_spec` — silently removed that file from the check. Aevi: 'a field I treated as a label was load-bearing for a gate, and my accuracy in naming a thing is exactly what removed it from the check… IN A CONTENT-DRIVEN ENGINE THERE IS NO SUCH THING AS A PURELY DESCRIPTIVE FIELD.' The vocabulary is now CLOSED: a new value fails the build, so inventing a word can never again be a silent behaviour change. Adding one is a two-line edit here — the cost is a sentence, not a ticket.",
+  "rules": "Operational. The engine loads it and behaves differently because of it.",
+  "content": "Authored world material the engine reads (locations, people, items).",
+  "creation": "Character-creation tables read at chargen.",
+  "emergence": "Combination/braid tables — mechanical, engine-facing.",
+  "ui_copy": "Player-facing strings the app renders.",
+  "world_structure": "Structural canon about how the world is arranged.",
+  "design_canon": "Decisions and principles for humans. Never engine-read.",
+  "design_audit": "Findings about the corpus. Never engine-read.",
+  "gm_guidance_doc": "Guidance folded into the GM prompt.",
+  "contest_design": "Spec for contest mechanics.",
+  "social_mechanic_spec": "Spec for social mechanics.",
+  "combat_mechanic_spec": "Spec for combat mechanics.",
+  "tooling_spec": "Spec for build/test tooling.",
+  "progression_rules": "Level/rank progression tables the engine reads (the sub-attribute ladder).",
+  "migration": "A one-time id remap recorded for a content migration — old id → what it became. ⚠️ A RECORD, NOT A RUNTIME PATH: nothing loads it, and it must not be applied to saves without an audit first, because a migration that was later REVERSED leaves rows that rewrite a live craft into one that does not exist. See the CCODE-231 gate: 32 of `ability_rename_map`'s 408 rows are exactly that today."
+ },
+ "runtime_unwired": {
+  "_note": "Operational content with no consumer. These are REAL GAPS, not decisions. Listed so they are visible rather than silent; each needs a consumer that WANTS it (Aevi: 'a file wired without a consumer is the same failure with more steps'), so none is wired here.",
+  "combination_recipes": "⛔ SNG-344 RESOLVED — 'which is canon' had no answer as asked: NEITHER, because they are not duplicates. THE PAIR IS CANON. world/braid_recipes.json (7, loaded) is the NAMING authority: order_sense+palework → 'Ashen Meridian', with no mechanics at all. This file (56, dark) is the MECHANICAL authority: effect, cannot, functions, domains, discovery. One names, the other resolves — so the live system can tell a player their braid is called Shatterlight and cannot tell them what it does. Stays unwired only until Aevi's crosswalk lands; the join is authored content, not an engine merge."
+ },
+ "reference_pending_build": {
+  "_note": "Design specs for work not yet built. Each carries a buildImplication section — the author's own statement that code should follow. Unloaded is CORRECT today; the debt is the unbuilt feature, not the missing wiring.",
+  "cross_axis_modifiers": "Erik's 2026-07-07 correction on how the two thin Reaches (emotional_logical, falsehood_truth, demonic_angelic) modify across axes. Its buildImplication describes a modifier system that does not exist yet. Spec first, wiring after.",
+  "pole_signatures": "Explicitly 'the content-and-resolution layer SNG-027 leans on but left undefined'. It is the missing half of the social contest, written down so it stops being lost. Wire it when social contest is built."
+ },
+ "reference_permanent": {
+  "_note": "Design canon and audits. These are for humans — Aevi authoring, Erik deciding. They will never have an engine consumer and should not be counted as debt.",
+  "peoples_of_kind": "SNG-089 canon: which traditions do not resonate with human civilization. Shapes what Aevi authors; the engine reads the resulting content, never this rationale.",
+  "gambit_design": "RECOVERED canon (2026-07-12) — the gambit definition lost when it lived only in a spec file. Its gmRules are authoring guidance for how Aevi writes gambits, not a runtime table.",
+  "challenge_design": "RECOVERED canon (2026-07-12) — the SNG-049 correction, principle, and modes. Guidance for authoring challenges. Deliberately kept as content so it cannot be lost again the way the original spec was.",
+  "skill_utility_audit": "Erik's meta-critique: in D&D a spell's use is obvious, many of ours are not. An AUDIT — coverageFindings and novelUses are findings about the corpus, not data the engine reads."
+ },
+ "wired_elsewhere": {
+  "_note": "Registered, not fetched by the loader, but genuinely consumed — the consumer is a CI check rather than engine code. Not orphans.",
+  "resolution": "Fetched via rulePath(\"resolution\") + fetchJSON rather than loadRule — a real load through a different door.",
+  "emergence_recipes": "Fetched as loadRule(\"emergence\") — the file name and the rule name differ, which is exactly how the SNG-331 resolver regression hid.",
+  "martial_paths": "SNG-345: WIRED. engine/martial.js reads baselineDefense + formKits; loaded via loadRule(\"martial_paths\") into rules.martialPaths, projected into the ability catalog, granted at creation and by reconcile step 27. Was a REAL GAP for a month with its own engineNote naming the implementation.",
+  "sub_attribute_ladder": "SNG-356: WIRED. loadRule(\"sub_attribute_ladder\") -> rules.subAttributeLadder; resolve.js pays the authored rollCumulative column in place of the retired attributeSoftCap formula; engine/ladder.js pays the pool grants against a high-water mark, from BOTH doors (spendSubPoint in play, reconcile step 29 retroactively). Shipped on SNG-357 harness evidence per Aevi gating the roll column on it."
+ },
+ "_moved": {
+  "power_sources": "SNG-382 — promoted out of `wired_elsewhere` on 2026-08-08. It was honestly classified while its only consumer was a CI audit, and that was true when written. SNG-172 §4 has since been executed: 26 weighted source mixes authored with Erik's reasons. A file that describes how power works cannot reach only a test, so it is now fetched by `loadRule(\"power_sources\")` and read by `craftSource()` as the fallback for a craft whose tradition the character has no school in. ⚠️ IT ANSWERS FOR NOTHING YET — the five school-less traditions (harmonic, radiant_folk, valley_craft, precursor, cross_pole_braid, 53 crafts) have no mix either. The reader ships first so the content can land without code."
+ }
 }

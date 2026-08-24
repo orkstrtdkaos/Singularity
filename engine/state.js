@@ -420,7 +420,16 @@ export async function loadContent() {
   const npcsP = jAll((valley.provides.npcs || []).map(valleyPath));
   const eventsP = jAll(eventProvides.map(valleyPath));
   const companionsP = jAll((valley.provides.companions || []).map(valleyPath));
-  const encountersP = jAll((valley.provides.encounters || []).map(valleyPath));
+  // ⛔ CCODE-232 (Aevi's §2 pass 3) — CORE'S ENCOUNTERS LOAD TOO. This read `valley` only, so the two
+  // encounter defs core declares (the Sunk Assay's intake and warden) were whitelisted, on disk, and
+  // reached nothing — SNG-064's own failure inside the loader that enforces it.
+  // ⚠️ SAFE TO LOAD because `CONTENT.encounters` is looked up BY ID everywhere in play; the only
+  // all-values read is a dev preview leg, and random encounters draw from their own pool. Loading a def
+  // nothing links to puts it in front of nobody — which is also why nobody noticed for this long.
+  const encountersP = jAll([
+    ...(index.provides.encounters || []).map(corePath),
+    ...(valley.provides.encounters || []).map(valleyPath),
+  ]);
   const loreP = Promise.all(loreProvides.map(p => fetchText(valleyPath(p))));
   const questsP = jSettled((valley.provides.quests || []).map(valleyPath));
   // SNG-203: the quest hierarchy's new tiers — tradition arcs (tier 2, keyed by traditionId) + npc quests
@@ -599,7 +608,7 @@ export async function loadContent() {
   // fold the two that mutate already-loaded maps (accords tag abilities, legends hydrate into npcs).
   // Failure semantics preserved exactly: `region` stays fatal; every optional one keeps its fallback.
   const [region, substrate, greaterArcs, genNpc, genLoc, genArc, genCreature, originsDoc, backgroundsDoc, regionsDoc,
-         accords, helpDoc, substrateModel, powerSourcesDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc] = await Promise.all([
+         accords, helpDoc, substrateModel, powerSourcesDoc, foothillsDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc] = await Promise.all([
     fetchJSON("world/regions/valley.json"),
     fetchJSON("content/packs/valley/lore/generative_substrate.json").catch(() => null),           // generation off on a miss
     fetchJSON("content/packs/valley/lore/greater_arcs.json").then(x => x.arcs || []).catch(() => []), // no arc few-shot
@@ -614,6 +623,13 @@ export async function loadContent() {
     loadRule("helper_text", { entries: [] }),                                                      // SNG-084 in-context help
     loadRule("the_substrate", null),                                                               // SNG-090 the substrate model
     loadRule("power_sources", null),                                                               // SNG-382: 26 authored source mixes, registered since SNG-172 and never fetched
+    // ⛔ CCODE-233 (Aevi's §2 #4) — `foothills` WAS REGISTERED, WIRED INTO `craftSource`, AND NEVER LOADED.
+    // The foothill branch reads `foothills?.foothills?.[tid]`, so with nothing loaded it was ALWAYS null:
+    // the seven foothill traditions fell through and the harmonic 50/50-tie rule never ran in play. It ran
+    // in tests only, because tests hand the data in directly — a reader with a live gate and a dead caller.
+    // ⚠⚠ IN THIS WAVE, not the next one: SNG-300 lost `economy` exactly that way, destructured from a
+    // Promise.all it was not added to, resolving to undefined and merging nothing.
+    loadRule("foothills", null),
     fetchJSON("content/packs/valley/prologue.json").catch(() => null),                             // SNG-062 the Prologue → form on a miss
     // SNG-042 anchors + the tradition-epics roster (SNG-208 content: 62 epics, 2–3 per tradition, all 24).
     // Merged into ONE roster, deduped by id (the comprehensive epics win the 3 overlaps) so they plug into the
@@ -733,7 +749,7 @@ export async function loadContent() {
       (gap.size ? ` — ${[...gap.values()].reduce((n, v) => n + v, 0)} abilit(ies) still fall back to the house palette: ${[...gap].sort((x, y) => y[1] - x[1]).map(([k, n]) => `${k} (${n})`).join(", ")}` : " — every ability covered"));
   }
 
-  const content = { craftMechanics, spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, visualAesthetics: traditionAestheticsDoc || {},   /* SNG-435 §C3: the WHOLE doc — `powerSystems` was flattened away at load */  bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, startingLocation: valley.startingLocation };
+  const content = { craftMechanics, spectrums, rules, foothills: foothillsDoc, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, visualAesthetics: traditionAestheticsDoc || {},   /* SNG-435 §C3: the WHOLE doc — `powerSystems` was flattened away at load */  bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

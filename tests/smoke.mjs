@@ -17751,6 +17751,39 @@ await (async () => {
       /hasDeltas/.test(wlSrc) && /near-mechanical/i.test(wlSrc));
   }
 
+  // 5u · ⛔ CCODE-233 (Aevi's §2 #4) — foothills WAS REGISTERED, WIRED, AND NEVER LOADED.
+  //
+  // `craftSource` has had a foothill branch since the source reconciliation, and it reads
+  // `foothills?.foothills?.[tid]`. Nothing loaded the file and `groundRow` never passed it, so the
+  // argument was null on every call IN PLAY. The branch ran only in tests, which hand the data in
+  // directly — a live rule with a dead caller, passing its own gates the whole time.
+  //
+  // ⚠️ SO THE GATE HAS TO CHECK THE CALLER, not the rule. Testing `craftSource(…, foothills)` proves
+  // nothing about a game that never passes one — which is exactly how this survived.
+  {
+    const SUB233 = await import("../engine/substrate.js");
+    check(`CCODE-233: the loader exposes CONTENT.foothills (${Object.keys(C199.foothills?.foothills || {}).length} foothill traditions)`,
+      Object.keys(C199.foothills?.foothills || {}).length > 0);
+    const appSrc233 = readFileSync(join(root, "app.js"), "utf8");
+    check("CCODE-233: …and the ground card PASSES it — the rule had a live gate and a dead caller",
+      /foothills: CONTENT\.foothills/.test(appSrc233));
+
+    // what it is worth, measured both ways so the claim is a number and not an adjective
+    const ch233 = { domains: { primary: "harmonic" }, abilities: [], attributes: {} };
+    const resolves = (foot) => Object.values(C199.abilities).filter(a =>
+      SUB233.craftSource(a, ch233, C199.schools, C199.powerSources, foot)?.source).length;
+    const without = resolves(null), withF = resolves(C199.foothills);
+    check(`CCODE-233: passing the foothills answers ${withF - without} more crafts (${without} → ${withF}) — that gap was the bug`,
+      withF > without, `${without} → ${withF}`);
+
+    // ⛔ AND THE HARMONIC TIE, which is the rule's whole reason for existing: two parents at 50/50 resolve
+    // to `combination` rather than picking a winner. It has never once run in play until now.
+    const harmonicCraft = Object.values(C199.abilities).find(a =>
+      SUB233.craftSource(a, ch233, C199.schools, C199.powerSources, C199.foothills)?.via === "foothill");
+    check("CCODE-233: a foothill craft now answers VIA the foothill rule in the same call the game makes",
+      !!harmonicCraft, harmonicCraft ? harmonicCraft.id : "none resolved via foothill");
+  }
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

@@ -959,36 +959,36 @@
 ## 26. Death-Ward  ·  `death_ward`
 
 **L3 · e6 · ashwarden · metaphysical · shape `guard` · harm `none`**  
-**status:** crit · ward:decay/judgement  
-**ability functions:** resist, ward
+**status:** crit · ward:decay/judgement/appetite  
+**ability functions:** ward, resist, shield
 
 > Ward against deaths that should not happen: curse-deaths, unnatural endings, the restless-dead reaching the living. Death-Ward is not about physical hardship — for that, use The Kept Breath. This is protection against death as a working, a curse, or a supernatural force.
 
 **notFor:** Natural deaths — starvation, wounds, cold, exposure (use The Kept Breath). Death-Ward stands against unnatural endings: a death-curse, a necromantic working, a wraith's touch, a plague that is not merely a plague. It cannot hold indefinitely; it can only refuse a specific unnatural threshold.
 
-### r1 — Death-Ward
+### r1 — Warded Ground
 
 **functions:** ward · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** Ward a space so a death goes undisturbed, or so what should stay dead cannot rise or reach in.
+**grants:** ⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against decay, judgement and appetite — the ending-hastened, the curse, and the hungry dead.
 
-**cannot:** Wards the threshold, not the outcome; a strong enough wrongness strains it.
+**cannot:** It wards the threshold, not the outcome, and a strong enough wrongness strains it. ⚠️ It does nothing against a sword, a fall or a fever — that is The Kept Breath. And it stands where you laid it; it does not travel.
 
-### r2 — Turned Hour
+### r2 — Carried Sign
 
-**functions:** ward, resist · **gainAxes:** duration · **gains:** broaden · **harm:** none
+**functions:** ward, resist · **gainAxes:** quality, duration · **gains:** broaden · **harm:** none
 
-**grants:** Turn aside an unnatural death — a curse taking hold, a wraith's grip, a working that was about to close. Not heal the wound, not hold the dying: refuse this specific end, and push it back.
+**grants:** ⛔ THE WARD LEAVES THE GROUND AND GOES ON A PERSON — they carry the soak with them. ⚠️ AND IT ANSWERS ACTIVE WORK: a curse taking hold, a wraith's grip, a working about to close is turned aside as it closes.
 
-**cannot:** Unnatural only. A person dying of their wounds in the cold needs The Kept Breath, not this. And 'later' is still owed.
+**cannot:** One person besides yourself, and unnatural only. A person dying of their wounds in the cold needs The Kept Breath. ⚠️ Turning a working aside does not unmake it — it goes looking elsewhere.
 
 ### r3 — Not Today
 
-**functions:** ward, resist · **gainAxes:** range, targets · **gains:** deepen · **harm:** none
+**functions:** ward, resist, shield · **gainAxes:** targets, range · **gains:** deepen · **harm:** none
 
-**grants:** Stand between a person and a supernatural ending and refuse it wholly, for as long as you can hold — the death-curse does not find them, the wraith cannot reach them, the working slides away. You are the fact that this does not happen today.
+**grants:** ⛔ STAND BETWEEN. The sign covers as many as you can name at reach, and you interpose PERSONALLY against one supernatural ending — the death-curse does not find them, the wraith cannot reach them, the working slides away. ⚠️ You are the fact that this does not happen today.
 
-**cannot:** You are holding it with your own weight. And it is still there when you are not.
+**cannot:** Holding it occupies you entirely — you ward or you act, never both. And the one you interpose against reaches YOU instead if it gets through.
 
 **bounds:** wards the THRESHOLD, NOT THE OUTCOME · UNNATURAL ONLY — a person dying of their wounds in the cold needs The Kept Breath instead · YOU ARE HOLDING IT WITH YOUR OWN WEIGHT — and it is still there when you let go
 

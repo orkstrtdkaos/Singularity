@@ -752,8 +752,9 @@
     "chaos_order": 0.2
    },
    "functions": [
+    "ward",
     "resist",
-    "ward"
+    "shield"
    ],
    "narrationHints": "A sign laid down that the dying may not be disturbed — and the restless dead may not pass.",
    "description": "Ward against deaths that should not happen: curse-deaths, unnatural endings, the restless-dead reaching the living. Death-Ward is not about physical hardship — for that, use The Kept Breath. This is protection against death as a working, a curse, or a supernatural force.",
@@ -761,47 +762,48 @@
    "tree": [
     {
      "rank": 1,
-     "name": "Death-Ward",
-     "grants": "Ward a space so a death goes undisturbed, or so what should stay dead cannot rise or reach in.",
-     "cannot": "Wards the threshold, not the outcome; a strong enough wrongness strains it.",
+     "name": "Warded Ground",
      "functions": [
       "ward"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "grants": "⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against decay, judgement and appetite — the ending-hastened, the curse, and the hungry dead.",
+     "cannot": "It wards the threshold, not the outcome, and a strong enough wrongness strains it. ⚠️ It does nothing against a sword, a fall or a fever — that is The Kept Breath. And it stands where you laid it; it does not travel."
     },
     {
      "rank": 2,
-     "name": "Turned Hour",
-     "grants": "Turn aside an unnatural death — a curse taking hold, a wraith's grip, a working that was about to close. Not heal the wound, not hold the dying: refuse this specific end, and push it back.",
-     "cannot": "Unnatural only. A person dying of their wounds in the cold needs The Kept Breath, not this. And 'later' is still owed.",
+     "name": "Carried Sign",
      "functions": [
       "ward",
       "resist"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Turned Hour",
      "gainAxes": [
+      "quality",
       "duration"
-     ]
+     ],
+     "grants": "⛔ THE WARD LEAVES THE GROUND AND GOES ON A PERSON — they carry the soak with them. ⚠️ AND IT ANSWERS ACTIVE WORK: a curse taking hold, a wraith's grip, a working about to close is turned aside as it closes.",
+     "cannot": "One person besides yourself, and unnatural only. A person dying of their wounds in the cold needs The Kept Breath. ⚠️ Turning a working aside does not unmake it — it goes looking elsewhere."
     },
     {
      "rank": 3,
      "name": "Not Today",
-     "grants": "Stand between a person and a supernatural ending and refuse it wholly, for as long as you can hold — the death-curse does not find them, the wraith cannot reach them, the working slides away. You are the fact that this does not happen today.",
-     "cannot": "You are holding it with your own weight. And it is still there when you are not.",
      "functions": [
       "ward",
-      "resist"
+      "resist",
+      "shield"
      ],
      "gains": "deepen",
      "harmRung": "none",
      "gainAxes": [
-      "range",
-      "targets"
-     ]
+      "targets",
+      "range"
+     ],
+     "grants": "⛔ STAND BETWEEN. The sign covers as many as you can name at reach, and you interpose PERSONALLY against one supernatural ending — the death-curse does not find them, the wraith cannot reach them, the working slides away. ⚠️ You are the fact that this does not happen today.",
+     "cannot": "Holding it occupies you entirely — you ward or you act, never both. And the one you interpose against reaches YOU instead if it gets through."
     }
    ],
    "challengeTypes": [
@@ -824,10 +826,11 @@
     "soakRank": 3,
     "duration": 6,
     "targets": 1,
-    "note": "T-III guard — but it wards a KIND of harm (unnatural endings), not impact. soakRank 3 against that kind specifically.",
+    "note": "T-III guard. ⛔ IT WARDS A KIND OF HARM, NOT IMPACT — soak 5 at soakRank 3 applies ONLY against `decay`, `judgement` and `appetite`, and not at all against a sword. ⚠️ decay is the hastened ending and its own wardedBy is 'a tended vigil, consecrated ground' — Ashwarden work verbatim; judgement is the death-curse; appetite is the restless dead reaching the living, which the description names outright.",
     "wardTypes": [
      "decay",
-     "judgement"
+     "judgement",
+     "appetite"
     ],
     "crit": {
      "success": "The sign holds against more than it was laid for — whatever was reaching stops reaching, and does not try that door again.",
@@ -871,7 +874,8 @@
    "plainly": "A survive/fight/stealth action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 5 harm per hit (rank 3 armour) It affects 1 target, and lasts for about 6 hours Ranks: rank 2 deepens soak; rank 3 adds to special. Limit: wards the Threshold, Not The Outcome.",
    "_wardTypes": "⛔ SNG-512. ⛔ WARDS AGAINST ENDINGS THAT SHOULD NOT HAPPEN — curse-deaths, unnatural endings. ⚠️ NOT PHYSICAL: a blade still lands. This is the corpus's first decay-ward and the one healing needs.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_restructured_20260823": "⛔ ERIK 2026-08-23. THREE FIXES. (1) r1's 'so a death goes undisturbed' REMOVED — that job went to `names_of_the_lost` r3 in the same session and leaving both was a merge overlap I had just created; r1 now owns the BARRIER and gains an explicit ward soak. (2) ⚠️ 'AND LATER IS STILL OWED' CUT — Erik: a colourful cost with no mechanism behind it. The real cost is now stated and checkable: the working goes looking elsewhere, and at r3 it reaches YOU. (3) RANKS REBUILT SO THEY ESCALATE ON ONE AXIS EACH: r1 a warded PLACE (passive soak) -> r2 the ward TRAVELS on a person and answers active work -> r3 MANY people and you interpose personally. Functions build with them: ward -> ward+resist -> ward+resist+shield."
   },
   {
    "id": "last_gift",

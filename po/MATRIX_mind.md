@@ -61,11 +61,12 @@ Crafts marked *first-gift* inherit `levelReq`/`energyCost`/`shape`/`harmRung` an
 
 ## Gaps, measured
 
-| gap | n | crafts |
+| gap | n (crafts) | crafts |
 |---|---|---|
 | no `mechanic.crit` | 8 | Contradiction, Sustained Regard, Unbroken Thread, Formcraft, Built System, Memory-Palace, Working Model, Borrowed Form |
 | no `wardTypes` | 21 | Case Closed, Contradiction, Cutting Figure, Ignore Me, Known Price, Sustained Regard, Unbroken Thread, Deduced Strike, +13 more |
 | no `imposes` on any rank | 23 | Case Closed, Contradiction, Cutting Figure, Ignore Me, Known Price, Named Exclusion, Quiet the Room, Sustained Regard, +15 more |
+| ⚠️ *(for reference — `imposes` RANK OCCURRENCES in this set: 3)* | | |
 | no `ongoingHarm` on any rank | 24 | Case Closed, Contradiction, Cutting Figure, Ignore Me, Known Price, Named Exclusion, Quiet the Room, Unbroken Thread, +16 more |
 | ⛔ rolls dice, no `damageType` | 6 | Cutting Figure, Sustained Regard, Deduced Strike, Physician's Tome, Psychic Lance, Convergent Strike |
 

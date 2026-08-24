@@ -2564,5 +2564,51 @@ for (const pack of PACKS) {
       + " \u2014 run `node scripts/effect_audit.mjs` for the full report" : "");
 }
 
+
+// ⛔ CCODE-240 — 30 CRAFTS AUTHOR `mechanic.soak` AND THE NUMBER NEVER REACHES THE TABLE.
+//
+// `mechanic_effects.json` says TEMP_SOAK `reads: "mechanic.soak with contest lifetime"` and flags it
+// `wired: true`. ⚠️ MEASURED: a guard DOES land, and its strength comes entirely from a flat per-function
+// value in `skill_battle_system.json` (`byFunction.shield.value: 4`). Declaring the same craft with
+// `mechanic.soak: 2` and `mechanic.soak: 20` lands the identical guard.
+//
+// ⛔ SO THE AUTHORED NUMBER IS DECORATION. `resonant_shield` says soak 4; a craft saying soak 12 would
+// guard exactly as well. This is the authored-and-unread pattern at 30 crafts.
+//
+// ⚠️ IT TOOK GETTING THE CONFIG SHAPE RIGHT TO PROVE. My probes passed `CONTENT.skillBattle` where the
+// engine wants `CONTENT.skillBattle.engine`, so `persistentEffects` read undefined and NO guard landed at
+// all — which looked like the same verdict for an entirely wrong reason.
+{
+  globalThis.localStorage = globalThis.localStorage
+    || { _d: {}, getItem(k) { return this._d[k] ?? null; }, setItem(k, v) { this._d[k] = String(v); } };
+  const { loadContentHeadless: lch240 } = await import("./headless_content.mjs");
+  const C240 = await lch240();
+  const SB240 = await import("../engine/skill_battle.js");
+  const sbE = C240.skillBattle?.engine;
+  const soakCrafts = Object.values(C240.abilities).filter(a => a.mechanic?.soak != null);
+  const ab240 = soakCrafts[0];
+  if (sbE && ab240) {
+    const sh = (n, at) => ({ name: n, level: 9, health: 20, maxHealth: 20, energy: 40, maxEnergy: 40,
+      attributes: at, subAttributes: {}, alignment: {}, skills: [] });
+    const guard = (soak) => {
+      const D = Object.assign({}, ab240, { name: ab240.name, function: "shield", intensity: "standard",
+        tier: ab240.levelReq || 1, rank: 1, mechanic: Object.assign({}, ab240.mechanic, { soak }) });
+      const r = SB240.battleRound({ playerDecl: D, oppDecl: { name: "S", function: "strike", intensity: "standard", tier: 1 },
+        playerSheet: sh("you", { physical: 9, mental: 9, social: 9, practical: 9 }),
+        oppSheet: sh("them", { physical: 1, mental: 1, social: 1, practical: 1 }),
+        state: { momentum: 0, round: 1, playerEnergy: 40, opponentEnergy: 40, opponentHealth: 20, effects: [], pressure: { player: 0, opponent: 0 } },
+        rules: C240.rules, sb: sbE, rng: () => 0.95, kind: "fight" });
+      return (r.landed || []).find(e => e.kind === "guard")?.value ?? null;
+    };
+    const weak = guard(2), strong = guard(20);
+    // ⚠️ THE FIRST CHECK IS THAT A GUARD LANDS AT ALL — without it the second passes vacuously on two nulls,
+    // which is exactly how my first three attempts at this "found" something.
+    check(`CCODE-240: a shield declaration lands a guard at all (value ${weak})`, weak != null);
+    check(`CCODE-240: a craft's authored \`mechanic.soak\` sets its guard's strength — ${soakCrafts.length} crafts author one`,
+      weak != null && strong != null && strong !== weak,
+      `soak 2 → guard ${weak} · soak 20 → guard ${strong} — identical, so the authored number is unread`);
+  }
+}
+
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

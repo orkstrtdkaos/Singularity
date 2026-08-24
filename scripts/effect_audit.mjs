@@ -42,7 +42,12 @@ function round({ playerDecl, oppDecl = null, player = null, opp = null, state = 
     oppDecl: oppDecl || { name: "Swing", function: "strike", intensity: "standard", tier: 1 },
     playerSheet: player || sheet("you"), oppSheet: opp || sheet("them"),
     state: state || baseState(), phase,
-    rules: C.rules, sb: C.skillBattle, rng: () => 0.5, kind: "fight",
+    // ⛔ `.engine`, NOT the whole document. The real caller passes `CONTENT.skillBattle.engine` and every
+    // probe here passed one level too high — so `sb.persistentEffects` and `sb.senseStep` read undefined
+    // and the engine fell back to defaults. Verdicts that showed a DIFFERENCE were still real (a difference
+    // proves something was read); a verdict of INERT taken under a mis-shaped config was worthless, and I
+    // had already published one.
+    rules: C.rules, sb: C.skillBattle?.engine || C.skillBattle, rng: () => 0.5, kind: "fight",
   });
 }
 
@@ -154,6 +159,40 @@ const PROBES = {
     PR.tickProject(p0, { days: 3, hands: 1 });
     return { with: PR.projectProgress(p0).fraction, without: before, probe: "3 days of work on a threshold-10 project" };
   },
+  // ⛔ A THIRD CATEGORY, AND IT IS NOT A DODGE. Seven effects declare `reads: "—"` — no content field at
+  // all. There is nothing for the engine to consume and nothing for an author to write, so "inert" is the
+  // wrong word: inert means built and unreached. These were never built. Naming that separately is the
+  // difference between a worklist and a shrug.
+  TEMP_SOAK: () => {
+    const ab = craftWith(a => a.mechanic?.soak != null && (a.functions || []).length);
+    if (!ab) return { unprobed: "no craft authors mechanic.soak" };
+    const hi = round({ playerDecl: { ...declFor(ab, (ab.functions || [])[0]), mechanic: { ...ab.mechanic, soak: 20 } } });
+    const lo = round({ playerDecl: { ...declFor(ab, (ab.functions || [])[0]), mechanic: { ...ab.mechanic, soak: 0 } } });
+    return { with: JSON.stringify((hi.effects || []).filter(e => /soak|guard|ward/i.test(JSON.stringify(e)))),
+      without: JSON.stringify((lo.effects || []).filter(e => /soak|guard|ward/i.test(JSON.stringify(e)))),
+      probe: `${ab.id} declaring soak 20 vs 0 (30 crafts author it)` };
+  },
+  UNCONSCIOUS: async () => {
+    const EN = await import("../engine/encounters.js");
+    const alive = EN.checkIncapacitation({ health: 12, maxHealth: 20, energy: 20 });
+    const down = EN.checkIncapacitation({ health: 0, maxHealth: 20, energy: 0 });
+    return { with: JSON.stringify(down), without: JSON.stringify(alive), probe: "a sheet at 0 health vs 12" };
+  },
+  // ⚠️ TEMPO'S SOURCE FILE DOES NOT LOAD. `tempo.json` is one of the thirteen registered-but-unread rules,
+  // so there is no bank to read and no probe can be honest about the mechanism until it loads. That is a
+  // different problem from an unbuilt effect and it is named as its own thing.
+  TEMPO: () => ({ unprobed: "reads a tempo bank from tempo.json, which is registered and never loaded" }),
+  DENY_READ: () => {
+    // ⛔ THE FIELD IS ON THE ABILITY, and 16 crafts carry it — `ability.obscure`, never a rank (checked).
+    const ab = craftWith(a => a.obscure != null);
+    if (!ab) return { unprobed: "no craft authors `obscure`" };
+    const rev = craftWith(a => (a.functions || []).includes("reveal"));
+    if (!rev) return { unprobed: "no reader craft to deny" };
+    const a = round({ playerDecl: declFor(rev, "reveal"), oppDecl: { name: "Wait", function: "strike", intensity: "standard", tier: 1 }, phase: "sense" });
+    const b = round({ playerDecl: declFor(rev, "reveal"), oppDecl: declFor(ab, (ab.functions || [])[0]), phase: "sense" });
+    return { with: JSON.stringify({ tier: b.senseTier, gap: b.senseGap }), without: JSON.stringify({ tier: a.senseTier, gap: a.senseGap }),
+      probe: `${ab.id} (authors \`obscure\`) declared against a reader` };
+  },
   ACTION_LOSS: () => {
     const ab = craftWith(a => (a.tree || []).some(r => /action_loss/.test(JSON.stringify(r?.imposes || ""))));
     if (!ab) return { unprobed: "no craft imposes action_loss" };
@@ -177,6 +216,12 @@ const rows = [];
 for (const [name, def] of Object.entries(EFFECTS)) {
   const claimed = def?.wired === true;
   const probe = PROBES[name];
+  // ⛔ THE FILE'S OWN `reads: "—"` IS THE ANSWER. No content field means nothing to consume and nothing to
+  // author — UNBUILT, which is a worklist item, not the same as inert (built and unreached).
+  if (!probe && String(def?.reads || "").trim() === "—") {
+    rows.push({ name, claimed, verdict: "UNBUILT", detail: "declares no source field — nothing to read" });
+    continue;
+  }
   if (!probe) { rows.push({ name, claimed, verdict: "UNPROBED", detail: "no probe written" }); continue; }
   let ev;
   try { ev = await probe(); } catch (e) { ev = { unprobed: `probe threw: ${e.message.slice(0, 60)}` }; }
@@ -194,13 +239,14 @@ console.log("-".repeat(110));
 let stale = 0;
 for (const r of rows) {
   const says = r.claimed ? "wired" : "not wired";
-  const disagree = r.verdict !== "UNPROBED" && (r.verdict === "WIRED") !== r.claimed;
+  const disagree = (r.verdict === "WIRED" || r.verdict === "INERT") && (r.verdict === "WIRED") !== r.claimed;
   if (disagree) stale++;
   console.log(pad(r.name, 20) + pad(says, 12) + pad(r.verdict + (disagree ? " ✗" : ""), 11) + String(r.detail).slice(0, 62));
 }
-const probed = rows.filter(r => r.verdict !== "UNPROBED");
+const probed = rows.filter(r => r.verdict === "WIRED" || r.verdict === "INERT");
+const unbuilt = rows.filter(r => r.verdict === "UNBUILT");
 console.log("-".repeat(110));
-console.log(`${rows.length} effects · ${probed.length} probed · ${rows.length - probed.length} unprobed`);
+console.log(`${rows.length} effects · ${probed.length} probed · ${unbuilt.length} unbuilt · ${rows.length - probed.length - unbuilt.length} unprobed`);
 console.log(`${probed.filter(r => r.verdict === "WIRED").length} wired · ${probed.filter(r => r.verdict === "INERT").length} inert`);
 console.log(`⛔ ${stale} of the file's \`wired\` flags DISAGREE with what the engine actually does.`);
 console.log("\n⚠️ UNPROBED is not a verdict. It means this harness could not construct an honest test,");

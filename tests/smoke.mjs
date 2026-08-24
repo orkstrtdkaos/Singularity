@@ -17650,7 +17650,7 @@ await (async () => {
             playerDecl: { ...decl228, function: fn }, oppDecl: { ...decl228, name: "Swing" },
             playerSheet: sheet228("you"), oppSheet: sheet228("them"), phase,
             state: { momentum: 0, round: 1, playerEnergy: 40, opponentEnergy: 40, opponentHealth: 20, effects: [], pressure: { player: 0, opponent: 0 } },
-            rules: C199.rules, sb: C199.skillBattle, rng: () => 0.5, kind: "fight"
+            rules: C199.rules, sb: C199.skillBattle?.engine || C199.skillBattle, rng: () => 0.5, kind: "fight"
           });
           for (const k of Object.keys(r228)) roundKeys.add(k);
         } catch (e) { thrown228.push(`${phase}/${fn}: ${e.message.slice(0, 60)}`); }
@@ -17983,7 +17983,7 @@ await (async () => {
       const st = { mode: "skill_battle", momentum: 0, round: 1, opponentEnergy: 40, opponentHealth: 20,
         effects: [], pressure: { player: 0, opponent: 0 }, status: "active", opponentSheet: sheet237("Foe", 20) };
       const decl = { ...heal237, name: heal237.name, function: "heal", intensity: "standard", tier: heal237.levelReq || 1, rank: 1 };
-      return EN237.skillBattleRound(st, def, decl, { character: ch, rules: C199.rules, sb: C199.skillBattle, rng: () => 0.5 });
+      return EN237.skillBattleRound(st, def, decl, { character: ch, rules: C199.rules, sb: C199.skillBattle?.engine || C199.skillBattle, rng: () => 0.5 });
     };
     const rr = runHeal();
     check(`CCODE-237: the authored dice reach the round — ${heal237?.id} ${JSON.stringify(heal237?.mechanic?.dice)} → ${rr.healing?.amount}`,
@@ -18029,7 +18029,7 @@ await (async () => {
     const hit = (opp) => SBz.battleRound({ playerDecl: dz, oppDecl: { name: "S", function: "strike", intensity: "standard", tier: 1 },
       playerSheet: shz({ name: "you" }), oppSheet: opp,
       state: { momentum: 0, round: 1, playerEnergy: 40, opponentEnergy: 40, opponentHealth: 20, effects: [], pressure: { player: 0, opponent: 0 } },
-      rules: C199.rules, sb: C199.skillBattle, rng: () => 0.5, kind: "fight" }).damage?.amount ?? null;
+      rules: C199.rules, sb: C199.skillBattle?.engine || C199.skillBattle, rng: () => 0.5, kind: "fight" }).damage?.amount ?? null;
 
     const none = hit(shz({}));
     const flat = hit(shz({ antisoak: 5 }));

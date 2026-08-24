@@ -195,6 +195,25 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     if (r.damage.side === "opponent") events.push(`Your ${r.damage.by} LANDS — ${def.opponent.name} takes ${r.damage.amount}${of ? ` (${Math.max(0, hpLeft)}/${of} left)` : ""}.`);
     else { deltas.health -= r.damage.amount; events.push(`${def.opponent.name}'s ${r.damage.by} LANDS on you — ${r.damage.amount} taken.`); }
   }
+  // ⛔ CCODE-237 (Aevi's §0) — A HEAL REACHES A SHEET. `battleRound` has computed `healing` since CCODE-207
+  // and read the authored dice correctly the whole time — `dawn_surgery` rolls its 3d4 and reports 12 —
+  // and NOTHING CONSUMED IT. `deltas.health` started at 0 and the heal never entered it, so 57 healing
+  // crafts mended nobody. Exactly the shape of `imposed`, one file over, found the same way.
+  //
+  // ⚠️ THE SIGN IS THE POINT AND IT IS THE MIRROR OF THE DAMAGE BLOCK ABOVE: a heal on the PLAYER raises
+  // `deltas.health`; a heal on the OPPONENT raises their pool. Getting that backwards would make every
+  // mending craft a weapon, which is the one failure a healing branch must not have.
+  if (r.healing && r.healing.amount > 0) {
+    if (r.healing.side === "player") {
+      deltas.health += r.healing.amount;
+      events.push(`Your ${r.healing.by} MENDS — ${r.healing.amount} back.`);
+    } else {
+      const cap = def.opponent?.health ?? null;
+      s.opponentHealth = cap == null ? (s.opponentHealth ?? 0) + r.healing.amount
+        : Math.min(cap, (s.opponentHealth ?? cap) + r.healing.amount);
+      events.push(`${def.opponent.name}'s ${r.healing.by} MENDS — ${r.healing.amount} back.`);
+    }
+  }
   if (r.degraded?.player) events.push("You are spent — your crafts will not answer. Steel and wit still will.");
   if (r.degraded?.opponent) events.push(`${def.opponent.name} is spent — swinging on will alone now.`);
   // CCODE-38: a PRESSURE event — the meter filled, so someone was driven back hard. Real attrition, not an ending.

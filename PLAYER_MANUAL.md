@@ -13,11 +13,26 @@ every rule here exists because a simpler version was tried and lost something wo
 
 ---
 
+> ### ⛔ A MARKER ON EVERY SECTION: **MADE IN PLAY?**
+>
+> Some of this world is **authored** — written by hand, the same for every player. Some the narrator can
+> **make on the fly**, in response to what you actually do. **That difference changes what you can expect
+> from a playthrough**, so every section below says which it is:
+>
+> **✅ MADE IN PLAY** — the narrator can create these during a scene · **⚠️ AUTHORED ONLY** — fixed content;
+> if it is not written, it does not exist yet · **◑ BOTH** — an authored core the narrator extends.
+
+---
+
 # 1 · What this game is
 
 You play one person in the Valley of Echoes. A narrator — an AI Game Master — describes what is in front
-of you, you say what you do, and the world answers. There are no menus of pre-written choices. **You type
-what you want to do in your own words.**
+of you, you say what you do, and the world answers.
+
+**Every turn ends with three or four distinct options, and a box you can type anything into.** The options
+are not a menu you are being steered through — ⛔ **they are written fresh for this moment, by the narrator,
+out of what is actually in front of you.** There is no pre-written choice tree anywhere in this game. Take
+one of them or ignore all of them and say what you want; both are first-class.
 
 Underneath the conversation there is a real engine: dice, thresholds, resources, a clock, a map, people
 with their own wants. **The narration never decides an outcome the rules should decide.** When your craft
@@ -73,6 +88,8 @@ another, and your ground card tells you which.
 
 # 3 · Making a character
 
+> ⚠️ **AUTHORED ONLY** — you build your character; the narrator never makes one for you.
+
 Three doors, all reaching the same place:
 
 - **Describe yourself** — say who you want to be in plain words. The game shows you where that lands on
@@ -105,6 +122,8 @@ teach you the wrong lesson on turn one.
 
 # 4 · Crafts — what they are and how they read
 
+> ⚠️ **AUTHORED ONLY** — all 382 crafts are hand-written. The narrator cannot invent a new one mid-scene.
+
 A craft is a thing you can do. Every craft carries:
 
 - **Functions** — the verbs it performs, drawn from a vocabulary of **28 verbs** in **8 families**:
@@ -128,6 +147,8 @@ at every level-up, deliberately, so what you learn at the start is still true la
 
 # 5 · Braids — crossing the circle
 
+> ✅ **MADE IN PLAY** — braids are minted from your own pairings and you name them. ⛔ **Except across your antipode — see below.**
+
 A **braid** is a craft made by holding two traditions together — the one thing that reaches across an axis
 otherwise closed to you. Braids are **discovered in play, not bought**: you find one by pairing two crafts
 in a moment where both matter. You name the ones you mint, and the name is yours.
@@ -136,11 +157,35 @@ in a moment where both matter. You name the ones you mint, and the name is yours
 small. **Why they must be rare:** if crossing were routine the closure would mean nothing, and the shape
 the circle gives your character would dissolve.
 
-> ⚠️ **PARTLY BUILT, and the honest state is worth knowing.** The game can tell you a braid's *name* — that
-> layer is live. A separate authored table of **56 braid effects**, saying what each combination actually
-> *does* and cannot do, is **written and not yet connected**. So today a braid is a real discovery with a
-> real name, and its mechanical teeth are still coming. ⛔ **This is also part of the combination spec Erik
-> and Aevi are writing**, so expect this section to change.
+### ⛔ THE CROSS-POLE BRAID CANNOT CURRENTLY BE REACHED, AND THIS IS THE BIGGEST HOLE IN THE GAME
+
+**Erik found this reading the first draft of this manual, and the code confirms it exactly.**
+
+**A braid is discovered by USING TWO CRAFTS TOGETHER until the pairing ripens.** The engine requires you to
+**hold both** (`mintableBraidsFor`: *"you must still hold both crafts"*). ⛔ **But the whole promise of the
+braid is that it crosses your CLOSED axis — and you can never learn a craft from your antipode.**
+
+> **So the one road across the axis requires you to already be standing on the other side of it.**
+
+⚠️ **AND THE ENGINE ALREADY KNOWS WHAT IT MEANT TO DO.** `traditions.js` says of the *foreclosed* band:
+*"a braid is the sanctioned road across the axis and is NEVER foreclosed"* — and it lets a craft marked
+`nativeOrCombination: "combination"` through. ⛔ **The `closed` band, three lines further down, has no such
+exemption**: it refuses everything, unconditionally. **The intent is written and the mechanism contradicts
+it in the same function.**
+
+**Two separate things are missing, and they are different jobs:**
+
+| | |
+|---|---|
+| ⛔ **a way to REACH the far craft** | so a pairing can ripen at all — a loan, a teacher, a temporary hold, a scene where you use it once without owning it. **This is a design question, not a bug to patch.** |
+| ⚠️ **the `closed` band's missing exemption** | `foreclosed` lets a combination through and `closed` does not. **That one is an inconsistency and probably just an oversight.** |
+
+**Until one of those lands, cross-pole braids exist in the fiction and in no save file.**
+
+> ⚠️ **AND SEPARATELY, BRAID EFFECTS ARE NOT WIRED.** The game can tell you a braid's *name* — that layer
+> is live. An authored table of **56 braid effects**, saying what each combination actually *does* and
+> cannot do, is **written and not yet connected**. ⛔ **Both of these are part of the combination spec Erik
+> and Aevi are writing**, so expect this whole section to change.
 
 ---
 
@@ -162,6 +207,8 @@ self-knowledge. Reading your own chances *is* a skill.
 ---
 
 # 7 · Contests
+
+> ✅ **MADE IN PLAY** — the narrator can raise a fight, chase, standoff or puzzle out of the moment, as well as running authored ones.
 
 When something pushes back — a person, a beast, a sealed door, a pursuit — you enter a **contest**. Four
 kinds, on one engine:
@@ -228,6 +275,15 @@ The interesting scenes are the ones you might lose.
   each mend returns less, never below a floor. **Ongoing harm soaks a heal**: you cannot out-mend a wound
   that is still opening unless you *staunch* it first.
 
+> ⚠️ **THE TAPER'S PROVENANCE, because Erik does not recall deciding it.** The rule file records it this
+> way: **Aevi set the bound** — *"healing the same subject repeatedly in one contest should return less each
+> time, or a party with one healer never loses"* — **the shape is the engine's**, and the file attributes
+> **the numbers to Erik** (a second heal returns 75%, a third 50%, floor 25%). ⛔ **That attribution is
+> unconfirmed and worth checking.**
+>
+> ✅ **It is a dial, not a law.** `taperPer: 0` in `craft_mechanics.json` switches the taper off entirely,
+> with no code change. Kept for now at Erik's word.
+
 ### Rest
 
 | | restores | clears |
@@ -244,6 +300,9 @@ smaller number attached.
 ---
 
 # 10 · The world
+
+> ◑ **BOTH** — ✅ **places, people, creatures, items and story arcs can all be made in play.**
+> ⚠️ **Regions, quests and local layouts cannot** — those are authored only.
 
 The valley is **135 places across 37 regions**, with **111 named people**. It runs whether or not you are
 looking at it.
@@ -264,22 +323,37 @@ opening a room that was paused.
 
 # 11 · Companions
 
-You may travel with a companion — **9 authored**, plus those you meet. They are people, not equipment: they
-have their own stages of relationship, their own view of what you do, and things they will and will not do.
+> ⚠️ **AUTHORED ONLY** — 9 written companions. The narrator cannot yet make you a new one.
+
+You may travel with a companion — **9 authored**, plus those you meet.
+
+⚠️ **A companion is not necessarily a person.** They are **entities**: some are people, and others are not —
+a made thing, a bound presence, something the valley produced that travels with you. What they share is
+that they are **not equipment**. Each has its own stages of relationship, its own view of what you do, and
+things it will and will not do.
 
 ---
 
 # 12 · Money and trade
 
+> ◑ **BOTH** — items and their prices can be generated; the five currencies and the price model are authored.
+
 Five currencies, and they are **different kinds of thing**, not five numbers:
 
-| | |
-|---|---|
-| **crystal** | the reference. everything converts through it |
-| **coin** | ⛔ **fixed supply — found, never minted.** nobody can make more |
-| **paper** | ⚠️ **the only one that can betray you.** its issuer can fall, and the notes in your purse fall with it |
-| **scrip** | ⛔ **good only in the Reach that issued it.** carry it out and it buys nothing |
-| **marks** | ⛔ **indivisible.** a settled obligation is whole or it is nothing |
+| | where it comes from | who values it | the rule that defines it |
+|---|---|---|---|
+| **crystal** *(a shard)* | cut — ⚠️ **by whom is not yet authored** | **everyone, everywhere** | the reference. substrate-inert, unforgeable, and every rate in the world is quoted in it |
+| **coin** *(a coin)* | ⛔ **nobody issues it.** old money, **found** — dug up, inherited, looted | anyone who trades outward; its value floats on outland demand | ⛔ **fixed supply.** no one can make more, and no path in the game creates one |
+| **paper** *(a note)* | issued **outland**, beyond the valley | whoever still believes the issuer | ⚠️ **the only one that can betray you.** an outland event moves its worth, and the notes in your purse move with it |
+| **scrip** *(a tally)* | issued by **each Reach, for itself** | that Reach and nowhere else | ⛔ **a Kept Reach tally and a Stark Reach tally are not the same money.** carry it out and it buys nothing |
+| **marks** *(a mark)* | ⛔ **your own name.** a mark is a settled obligation | **wherever your deeds travelled** — acceptance follows your reputation, not the map | ⛔ **indivisible.** whole or nothing |
+
+⛔ **`marks` is the one worth reading twice.** It is not backed by an issuer at all — it is backed by **you**.
+A mark spends where people have heard what you did, which means **the same mark is worth more the further
+your name has carried, and worthless among strangers.**
+
+⚠️ **Crystal's origin is a real gap in the canon**, not an omission from this manual: the rules say what
+crystal *is* and never say who cuts it or where it comes from. **That is a question for Aevi.**
 
 **There is no shop screen and there should not be one.** A trader is a person with wants, and buying is a
 conversation. The engine's price model exists so the narrator has an honest number to be honest *about*.
@@ -334,18 +408,44 @@ nobody believes**, so the world rations them.
 **Kept here on purpose.** A manual that describes only what works reads as complete, and the next person
 cannot tell a missing feature from a missing paragraph.
 
-- ⚠️ **The narrator cannot yet generate every kind of content in response to play.** It can create people,
-  places, story arcs, creatures and items — **5 of the 11 kinds the game has**. Quests, regions,
-  companions, local layouts, dungeons and factions are authored only.
+- ⚠️ **The narrator cannot yet make every kind of content in response to play.** ✅ It CAN make **people,
+  places, story arcs, creatures, items, encounters** and **braids** — seven kinds. ⚠️ It CANNOT make
+  **quests, regions, companions, local layouts, dungeons or factions** — six kinds, authored only.
+  *(An earlier draft of this manual said "5 of 11" and undercounted: encounters are made in play by a
+  different route than the rest, and braids by a third. The count is only meaningful per-route.)*
 - ⚠️ **Local layouts** have a generator built, and nothing in the game calls it yet.
 - ⚠️ **`persuade`** is a verb crafts carry that the engine cannot yet perform.
+- ⛔ **THE CROSS-POLE BRAID IS UNREACHABLE** — minting requires holding both crafts, and one of them is on
+  the axis closed to you. **The one road across the circle needs you to already be across it.** §5.
 - ⚠️ **Braid EFFECTS** — 56 authored `effect`/`cannot` pairs in `combination_recipes` — are written and
   unreachable. Braids name themselves today; they do not yet resolve.
+- ⚠️ **Crystal's origin** is unauthored: the rules say what it is and never who cuts it.
 - ⚠️ **Player death**, as above.
 - ⚠️ **The Great Circle's exact structure** — how many stations, how they pair, and what crossing an
   axis means — is being respecified (§2). The rules built on it are stable; the table is not.
 
 ---
 
-*Baseline written 2026-08-24 against v1.9.196. Sections are meant to be edited in place as the game grows;
-the ⚠️ items above are the honest edge of it.*
+---
+
+# 16 · What this manual still owes you
+
+**This is a baseline, not the finished book.** The sections above explain how the game *works*. They do not
+yet contain **the library** — the actual contents of the world — and that is the larger half:
+
+| | |
+|---|---|
+| **Every craft** | all **382**, with their ranks, what each rank grants and what it still cannot do, their functions, costs and gain axes |
+| **Every tradition** | all **15**, what each believes, what it is good at, what it forecloses |
+| **Every place** | **135** locations across **37** regions, and what the ground gives you there |
+| **Every person** | **111** named figures, who they are and what they want |
+| **Effects and conditions** | the full vocabulary of what can be done to you and what lifts it |
+
+⚠️ **That material should be GENERATED from the content, not typed here.** Hand-keeping a 382-craft table
+is how the matrices went stale — and this manual's own header rule says the game is right and the file is
+wrong. **A library section that is written by hand will be wrong within a week.**
+
+---
+
+*Baseline written 2026-08-24 against v1.9.196; revised the same day against Erik's read. Sections are meant
+to be edited in place as the game grows; the items in §15 are the honest edge of it.*

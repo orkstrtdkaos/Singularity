@@ -256,19 +256,19 @@
 
 **functions:** strike, break · **gainAxes:** range · **gains:** broaden · **harm:** incapacitating · ongoing
 
-**grants:** ⛔ THE GREY LEAVES YOUR HAND. Work at a pace's distance, ANTISOAK 6, and the failing no longer has to be a body — a gate's hinge, an engine's seam, a rope under load. ⚠️ What you take does not recover.
+**grants:** ⛔ THE GREY LEAVES YOUR HAND. Work at a pace's distance, ANTISOAK 6 — and it finds the old wounds: nearly everyone is scarred, and the grey goes to the scars FIRST, blowing them back open as though they were fresh. ⚠️ A body that has been hurt once before is a body this craft can take hold of.
 
-**cannot:** Still a vulnerability: something must already be giving way. ⛔ AND IT REACHES ONE THING — you can stand back now, you cannot spread it.
+**cannot:** ⛔ A DECAY-WARDED TARGET ANSWERS THIS SPECIFICALLY — a soak layer typed against decay stops the grey and lets everything else through. ⚠️ And it still reaches ONE thing: you can stand back now, you cannot spread it.
 
 ### r3 — Keeper's Due
 
 **functions:** strike, break · **gainAxes:** targets, damage · **gains:** broaden · **harm:** lethal · ongoing
 
-**grants:** ⛔ YOU CALL THE ENDINGS DUE — everything within reach at once, ANTISOAK 8. ⚠️ AND IT FINDS THE OLD WOUNDS: nearly everyone is scarred, and the grey goes to the scars FIRST, blowing them back open as though they were fresh. A body that has already been hurt once is a body this craft can always take hold of.
+**grants:** ⛔ YOU CALL THE ENDINGS DUE — every enemy within reach at once, ANTISOAK 8, AND THE GREY NOW PIERCES: `penetration 2` cuts every soak layer an epic carries, so damage lands past armour no matter how much of it there is — and then the antisoak amplifies what landed. ⚠️ THE SCARS STILL OPEN FIRST.
 
-**cannot:** ⛔ IT DOES NOT SORT. What is due is due, and EVERYONE ELSE INSIDE THE REACH IS STRUCK ONE RUNG LOWER — allies, bystanders, and the ground you are standing on. ⚠️ THE UNSCARRED ARE STILL HARD: something new, whole and never once hurt gives even this rank almost nothing, and full soak still takes the antisoak with it.
+**cannot:** ⛔ A DECAY-TYPED WARD IS THE ONE ANSWER — that layer is not cut, it is the RIGHT answer, and against a consecrated ground or a tended vigil the grey finds nothing. ⚠️ AND IT TAKES EVERYTHING PRESENT THAT WAS EVER GOING TO STOP: gates, engines, walls, the rope holding the bridge you are standing on.
 
-**bounds:** ⛔ IT AMPLIFIES A WOUND, IT DOES NOT CREATE ONE. r3 does not break this rule — it finds OLD wounds, and nearly everyone has them · ⛔ A BLOW FULLY STOPPED BY SOAK TAKES THE ANTISOAK WITH IT. Armour beats this craft in a way it beats almost nothing else · ⚠️ TOUCH ONLY at rank 1; one target until rank 3 · ⛔ AT RANK 3 IT DOES NOT SORT — everyone in reach takes a rung, including the people you came with
+**bounds:** ⛔ IT AMPLIFIES A WOUND, IT DOES NOT CREATE ONE. From r2 it finds OLD wounds — scars — and nearly everyone has them · ⛔ A DECAY-TYPED SOAK LAYER IS THE COUNTER, at every rank including r3. Consecrated ground, a tended vigil, a ward laid against rot · ⚠️ TOUCH ONLY at rank 1; one target until rank 3 · ⚠️ At r3 it takes the standing works too — gates, engines, walls, and whatever is holding the floor up
 
 ---
 

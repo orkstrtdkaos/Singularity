@@ -194,3 +194,17 @@ as mechanics; nobody has authored the people.**
 - The March *"cannot reach"* some endings. **Who attends those instead?**
 
 ⚠️ **Keep Marrow deniable per its own hook. The faction can be real long before the bird is confirmed.**
+
+## ⛔ BRAID — Necrotic Strike × a chaos craft: the one that DOES NOT SORT (Erik, 2026-08-23)
+
+**`Necrotic Strike` r3 originally read *"it does not sort — everyone else inside the reach is struck one
+rung lower."* ⛔ ERIK CUT IT AS A DEFAULT: a craft should not hit the party as baseline.** *"Maybe if you
+combined this with a chaos craft, but not as a default."*
+
+⚠️ **THE INDISCRIMINATE VERSION IS A BRAID, NOT A RANK.** Death supplies the ending; chaos supplies the
+refusal to choose who gets it. **That is exactly what a cross-pole braid is for, and it means the terrible
+version has to be BUILT rather than arrived at by levelling.**
+
+**Shape when authored:** `tradition: cross_pole_braid`, `powerSystem: combination`, and the braid's whole
+contribution is removing the target filter — same antisoak, same pierce, no sorting. ⛔ **The pair reads
+well: the base craft is a professional finishing a job; the braid is someone who stopped deciding.**

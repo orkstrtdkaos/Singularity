@@ -2033,7 +2033,7 @@ they surface in the per-tradition audit rather than reading as though someone ha
 
 ---
 
-## 35. MIND — the completed tradition (2026-08-16)
+## 35. MIND — merged and quality-assessed; ⛔ NOT YET ROBUSTNESS-AUDITED (2026-08-16, title corrected 2026-08-23)
 
 **25 skills · 3 schools · SNG-450 → SNG-478.** ⚠️ `tradition` holds the live pole id; `traditionV2` holds `Mind` until the taxonomy migration.
 
@@ -2091,7 +2091,7 @@ capability and the table would look unchanged.**
 
 ---
 
-## 36. BODY — the completed tradition (2026-08-16)
+## 36. BODY — merged and quality-assessed; ⛔ NOT YET ROBUSTNESS-AUDITED (2026-08-16, title corrected 2026-08-23)
 
 **22 skills · 2 schools · SNG-479 → SNG-489.** ⚠️ `tradition` holds the live pole id; `traditionV2` holds `Body`.
 
@@ -2350,27 +2350,50 @@ wearing the corpus's clothes** — §37.1 says measure the corpus, and a documen
    `⟨imposes · ongoing · persists · antisoak⟩`. ⚠️ **The 2026-08-16 table had none of these, so a craft
    could gain a whole capability and the table would look identical.**
 
-### 37.9 ⛔ MEASURE A GAP AGAINST THE OTHER TRADITIONS BEFORE CALLING IT A GAP (2026-08-23)
+### 37.9 ⛔ AGREEMENT PROVES NOTHING. DIVERGENCE STILL POINTS. (2026-08-23, corrected same day)
 
-**Generated across Death, Mind and Body on the same day:**
+⛔ **THE FIRST VERSION OF THIS SECTION WAS WRONG AND ERIK CORRECTED IT WITHIN THE HOUR. THE WRONG VERSION
+IS KEPT BELOW BECAUSE THE ERROR IS THE LESSON.**
 
-| | Death | Mind | Body |
-|---|---|---|---|
-| no `mechanic.crit` | ⛔ **59%** | 32% | 41% |
-| no `wardTypes` | 84% | 84% | 82% |
-| no `imposes` on any rank | 84% | 92% | 77% |
-| no `ongoingHarm` on any rank | 91% | 96% | 95% |
-| social verbs | ⛔ `persuade, soothe` | **all four** | missing `provoke` |
+**What I wrote:** *"a count is not a gap until a COMPLETED tradition disagrees with it"* — citing Mind at
+84% missing wards as proof that 84% is a corpus norm and Death's 27 missing wards were therefore not a
+defect to fill.
 
-⛔ **WARDS, `imposes` AND `ongoingHarm` ARE CORPUS NORMS, NOT DEFECTS.** Mind is a COMPLETED tradition and
-sits at 84% missing wards. ⚠️ **I had Death's 27-missing-wards as an audit item to fill; filling it would
-have made Death the outlier and silently repriced the tradition against every other.**
+⛔ **ERIK: MIND AND BODY ARE NOT COMPLETE.** They have had the tradition/skill merge and the **quality**
+assessment. ⚠️ **They have NOT had the audit that asks whether the skillset is robust and complete** —
+which is the audit that would fill wards, `imposes` and `ongoingHarm` in the first place.
 
-**The real Death-specific defects are the two that DIVERGE:** `crit` at nearly twice Mind's rate, and the
-missing `bargain`/`provoke` — ⛔ **and Death of all traditions should have `bargain`: what a person will
-pay to be spared an ending is the oldest scene there is.**
+⛔ **SO MY EVIDENCE WAS THREE UNAUDITED TRADITIONS AGREEING WITH EACH OTHER, WHICH IS ONE GAP MEASURED
+THREE TIMES AND CALLED A STANDARD.** §35 and §36 are titled *"the completed tradition"* and I read the
+title as the state. ⚠️ **A section heading is a claim, not a measurement — the same error as reading
+`MATRIX_death.md` as state, committed against a document I had just finished rewriting.**
 
-**THE RULE: a count is not a gap until a completed tradition disagrees with it.**
+**THE CORRECTED RULE, IN TWO HALVES:**
+
+1. ⛔ **AGREEMENT ACROSS TRADITIONS AT THE SAME AUDIT STAGE IS EVIDENCE OF A SHARED GAP, NEVER OF A NORM.**
+   You may only calibrate "this is fine" against a tradition that has passed **the stage you are
+   calibrating for.** Until one has, three traditions at 84% means *nobody has done this yet*.
+2. ✅ **DIVERGENCE IS STILL INFORMATIVE, BECAUSE IT COMPARES LIKE WITH LIKE.** Three traditions at the same
+   stage differing sharply on one axis is a real signal about **that axis**, whatever the absolute level.
+
+**Applied to the same table, which is unchanged — only what it licenses has changed:**
+
+| | Death | Mind | Body | reading |
+|---|---|---|---|---|
+| no `mechanic.crit` | **59%** | 32% | 41% | ⚠️ **DIVERGES — real Death signal** |
+| no `wardTypes` | 84% | 84% | 82% | ⛔ **SHARED GAP — all three want filling** |
+| no `imposes` | 84% | 92% | 77% | ⛔ **SHARED GAP** |
+| no `ongoingHarm` | 91% | 96% | 95% | ⛔ **SHARED GAP** |
+| social verbs | `persuade, soothe` | all four | missing `provoke` | ⚠️ **DIVERGES — real** |
+
+⛔ **THE PRACTICAL INVERSION: I had planned NOT to fill Death's wards because Mind lacked them. The
+opposite is true — Mind lacking them is the same unfilled work, and the ward gap is corpus-wide and
+REAL.** ⚠️ **`bargain`/`provoke` and the `crit` rate remain Death-specific, and Death of all traditions
+should have `bargain`: what a person will pay to be spared an ending is the oldest scene there is.**
+
+⚠️ **AND THE SHAPE TO WATCH FOR:** a rule that tells you the work is already done, derived from
+measurements of work not yet done. ⛔ **It is the most comfortable kind of wrong, and it arrives looking
+like rigour.**
 
 ## 38. Live audit artifacts (2026-08-16)
 

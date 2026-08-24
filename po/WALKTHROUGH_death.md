@@ -264,11 +264,11 @@
 
 **functions:** strike, break · **gainAxes:** targets, damage · **gains:** broaden · **harm:** lethal · ongoing
 
-**grants:** ⛔ YOU CALL THE ENDINGS DUE — everything within reach at once, ANTISOAK 8, and here alone THE GREY OPENS WHAT WAS CLOSED: a sound thing is given a seam it did not have, and a wound that already existed is torn wider before the tick lands. ⚠️ THIS IS THE ONE RANK THAT DOES NOT NEED A WOUND, and it is why the rank is called what it is.
+**grants:** ⛔ YOU CALL THE ENDINGS DUE — everything within reach at once, ANTISOAK 8. ⚠️ AND IT FINDS THE OLD WOUNDS: nearly everyone is scarred, and the grey goes to the scars FIRST, blowing them back open as though they were fresh. A body that has already been hurt once is a body this craft can always take hold of.
 
-**cannot:** ⛔ IT DOES NOT SORT. What is due is due, and EVERYONE ELSE INSIDE THE REACH IS STRUCK ONE RUNG LOWER — allies, bystanders, and the ground you are standing on. ⚠️ You cannot aim it and you cannot exclude yourself from what is present.
+**cannot:** ⛔ IT DOES NOT SORT. What is due is due, and EVERYONE ELSE INSIDE THE REACH IS STRUCK ONE RUNG LOWER — allies, bystanders, and the ground you are standing on. ⚠️ THE UNSCARRED ARE STILL HARD: something new, whole and never once hurt gives even this rank almost nothing, and full soak still takes the antisoak with it.
 
-**bounds:** ⛔ IT AMPLIFIES A WOUND, IT DOES NOT CREATE ONE — until r3, which is the whole reason r3 is a capstone · ⛔ A BLOW FULLY STOPPED BY SOAK TAKES THE ANTISOAK WITH IT. Armour beats this craft in a way it beats almost nothing else · ⚠️ TOUCH ONLY at rank 1; one target until rank 3 · ⛔ AT RANK 3 IT DOES NOT SORT — everyone in reach takes a rung, including the people you came with
+**bounds:** ⛔ IT AMPLIFIES A WOUND, IT DOES NOT CREATE ONE. r3 does not break this rule — it finds OLD wounds, and nearly everyone has them · ⛔ A BLOW FULLY STOPPED BY SOAK TAKES THE ANTISOAK WITH IT. Armour beats this craft in a way it beats almost nothing else · ⚠️ TOUCH ONLY at rank 1; one target until rank 3 · ⛔ AT RANK 3 IT DOES NOT SORT — everyone in reach takes a rung, including the people you came with
 
 ---
 

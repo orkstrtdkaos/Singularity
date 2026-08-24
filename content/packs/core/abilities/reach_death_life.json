@@ -3446,7 +3446,7 @@
     "break",
     "strike"
    ],
-   "narrationHints": "The grey does not spread like fire, it spreads like rot finding a seam. ⚠️ HOOK: a grey hand is a thing the Valley has stories about. People who watched will not travel with you, and THE HOLLOW — who would end everything to end suffering — hear about the ones who can do this, and come looking to talk.",
+   "narrationHints": "The grey does not spread like fire, it spreads like rot finding a seam. ⚠️ AT r3 IT GOES STRAIGHT FOR OLD SCARS — the shoulder that never set right, the burn under the sleeve, the place they do not talk about — and opens them as if they happened this morning. ⛔ HOOK: a grey hand is a thing the Valley has stories about. People who watched will not travel with you, and THE HOLLOW — who would end everything to end suffering — hear about the ones who can do this, and come looking to talk.",
    "description": "⛔ TOUCH WHAT IS ALREADY FAILING AND BRING ITS END FORWARD. A notched blade shears, a strained rope parts, a wound already open goes grey and stops closing. ⚠️ IT IS A VULNERABILITY, NOT A BLOW — it makes a wound worse, and where there is no wound it has almost nothing to take hold of. The Ashwardens' first offence: their own work, turned on someone.",
    "notFor": "Beginning an ending that was not underway — it HASTENS, until r3. Anything new, whole and perfectly kept offers almost no grip. Distance at first rank: this is a hand on the thing. Taking it back.",
    "tree": [
@@ -3506,8 +3506,8 @@
      "ongoingHarm": {
       "type": "decay"
      },
-     "grants": "⛔ YOU CALL THE ENDINGS DUE — everything within reach at once, ANTISOAK 8, and here alone THE GREY OPENS WHAT WAS CLOSED: a sound thing is given a seam it did not have, and a wound that already existed is torn wider before the tick lands. ⚠️ THIS IS THE ONE RANK THAT DOES NOT NEED A WOUND, and it is why the rank is called what it is.",
-     "cannot": "⛔ IT DOES NOT SORT. What is due is due, and EVERYONE ELSE INSIDE THE REACH IS STRUCK ONE RUNG LOWER — allies, bystanders, and the ground you are standing on. ⚠️ You cannot aim it and you cannot exclude yourself from what is present."
+     "grants": "⛔ YOU CALL THE ENDINGS DUE — everything within reach at once, ANTISOAK 8. ⚠️ AND IT FINDS THE OLD WOUNDS: nearly everyone is scarred, and the grey goes to the scars FIRST, blowing them back open as though they were fresh. A body that has already been hurt once is a body this craft can always take hold of.",
+     "cannot": "⛔ IT DOES NOT SORT. What is due is due, and EVERYONE ELSE INSIDE THE REACH IS STRUCK ONE RUNG LOWER — allies, bystanders, and the ground you are standing on. ⚠️ THE UNSCARRED ARE STILL HARD: something new, whole and never once hurt gives even this rank almost nothing, and full soak still takes the antisoak with it."
     }
    ],
    "challengeTypes": [
@@ -3540,7 +3540,7 @@
    },
    "bounds": [
     {
-     "text": "⛔ IT AMPLIFIES A WOUND, IT DOES NOT CREATE ONE — until r3, which is the whole reason r3 is a capstone",
+     "text": "⛔ IT AMPLIFIES A WOUND, IT DOES NOT CREATE ONE. r3 does not break this rule — it finds OLD wounds, and nearly everyone has them",
      "class": "hard"
     },
     {
@@ -3572,7 +3572,8 @@
    "_idWas": "the_hastened_grey",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rebuilt_20260823": "⛔ ERIK 2026-08-23. RENAMED Hastened Grey -> NECROTIC STRIKE, r1 Grey Hand -> NECROTIC TOUCH (r1 shared a name with the separate `grey_hand` craft — §37.3 pattern 5). ⚠️ THE MECHANISM IS NOW ANTISOAK, imposed AND invoked in the same stroke, 4/6/8 on the `grief_strike` pattern — Erik: 'this not only imposes it, it invokes it.' r1 touch + needs a wound (which IS what antisoak does), r2 adds RANGE, r3 adds TARGETS and is the one rank that can open a wound where there was none. ⛔ CUT: 'the cost of taking something whole is real and you pay it in yourself' — a narrative debt in a cost field, the third such this session; ENERGY IS THE COST. The Hollow line moved to narrationHints as a HOOK, which is what Erik said it was."
+   "_rebuilt_20260823": "⛔ ERIK 2026-08-23. RENAMED Hastened Grey -> NECROTIC STRIKE, r1 Grey Hand -> NECROTIC TOUCH (r1 shared a name with the separate `grey_hand` craft — §37.3 pattern 5). ⚠️ THE MECHANISM IS NOW ANTISOAK, imposed AND invoked in the same stroke, 4/6/8 on the `grief_strike` pattern — Erik: 'this not only imposes it, it invokes it.' r1 touch + needs a wound (which IS what antisoak does), r2 adds RANGE, r3 adds TARGETS and is the one rank that can open a wound where there was none. ⛔ CUT: 'the cost of taking something whole is real and you pay it in yourself' — a narrative debt in a cost field, the third such this session; ENERGY IS THE COST. The Hollow line moved to narrationHints as a HOOK, which is what Erik said it was.",
+   "_scars_20260823": "⛔ ERIK 2026-08-23: 'most people have scars — this acts in those scarred places first, blowing them back open as if they were fresh wounds.' ⚠️ THIS FIXED A HAND-WAVE OF MINE. I had written r3 as 'the one rank that does not need a wound', but `antisoakLanded(6, 8, 8)` still returns 0 — the arithmetic refused the exception and I had papered over it with prose. ⛔ SCARS MEAN THE CRAFT NEVER HAS TO BREAK ITS OWN LAW: there is nearly always an old wound to amplify, so r3 gets its reach without an arithmetic exception, and THE UNSCARRED stay genuinely hard — which is a better ceiling than the one I invented."
   },
   {
    "id": "kept_vigil",

@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "death_obscure",
  "kind": "content",
- "note": "⛔ SNG-490. Soul Stare — Death's obscure, and a resistance-drop that sets up the tradition's own ending crafts.",
+ "note": "⛔ SNG-490 + Death audit 2026-08-23. DEATH'S OBSCURE CRAFTS, both halves. Soul Stare — the Ashwarden's, a resistance-drop that sets up the tradition's own ending crafts. Public Grief — the Threnodist's, authored because Threnodist was one of 20 traditions with NO obscure and the ONLY one whose own tenet made the gap a contradiction: a people who hold feeling is the only true knowing cannot hide behind a false feeling, so they hide behind a real one turned all the way up. ⚠️ FILED HERE, NOT IN reach_emotional_logical.json, because Soul Stare set the precedent — Death's obscure crafts live together so an audit looking for them finds them.",
  "abilities": [
   {
    "id": "soul_stare",
@@ -120,6 +120,112 @@
     }
    ],
    "_authored": "⛔ SNG-490. Erik: 'SOUL STARE could be an obscure skill rank 1, plus it would DROP THEIR RESISTANCE. r2 would have a similar effect but on ANY LIVING ENTITY. r3 would work on ANYTHING — everything has an essence (ADDRESS).'\n⚠️ DEATH HAD NO OBSCURE. And the rank ladder is TARGET CLASS, not power: person → living → anything with an address, which is the Ashwarden thesis that everything finishes.\n⛔ THE RESISTANCE DROP IS THE SECOND HALF AND IT MAKES THIS A SETUP FOR THE WHOLE TRADITION — Hastened Grey, Draw Down and Cut Thread all land harder on something that has just been shown its ending."
+  },
+  {
+   "id": "public_grief",
+   "name": "Public Grief",
+   "levelReq": 2,
+   "energyCost": 4,
+   "powerSystem": "wild_nanite",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.4
+   },
+   "effectTags": [
+    "feeling",
+    "concealment",
+    "mourning"
+   ],
+   "harmRung": "none",
+   "shape": "conceal",
+   "obscure": true,
+   "operativeAxis": "emotional_logical",
+   "intensity": "moderate",
+   "nativeOrCombination": "native",
+   "tradition": "threnodist",
+   "narrationHints": "She wept, and it was real, and it told them nothing. The grief-house is loud for a reason.",
+   "description": "⛔ THE THRENODIST OBSCURE, AND IT DOES NOT LIE. Open a true grief wide enough that everything else you are goes unread underneath it. ⚠️ A people who hold that feeling is the only true knowing CANNOT hide behind a false feeling — so they hide behind a real one, turned all the way up.",
+   "notFor": "⚠️ A HEART WITH NOTHING TO OPEN — it uses a grief you actually carry, so someone who has lost nothing has no cover. Concealing a THING, a place, or a body (that is Umbracraft). And it does not make you unseen — you are extremely visible. You are simply unreadable.",
+   "functions": [
+    "conceal"
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATION",
+    "STEALTH"
+   ],
+   "mechanic": {
+    "range": 0,
+    "targets": 1,
+    "scope": "self",
+    "crit": {
+     "success": "The grief is so entirely true that reading you becomes indecent — they stop trying, and afterwards they cannot say why they looked away.",
+     "failure": "You open a grief you had not finished, and it is louder than you meant. They do not learn what you were hiding. They learn that you are hiding something, and that it costs you."
+    }
+   },
+   "bounds": [
+    {
+     "text": "⛔ THE GRIEF MUST BE REAL AND YOURS — this craft opens a wound, it does not perform one",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT HIDES A FEELING, NEVER A FACT. What you know, what you carry and where you stand are all still plainly readable",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ You are not concealed — you are the loudest thing in the room. Only what you MEAN is covered",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ It costs what grieving costs. You do not get the grief back afterwards",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A self-only conceal that hides your emotional state, declared in the sense slot. Ranks: r1 hides your own intent, r2 covers another person beside you, r3 covers the room and denies the read outright.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Open Weeping",
+     "grants": "⛔ DECLARE OBSCURE IN THE SENSE SLOT. Open a real grief and your intent goes unread beneath it — anyone reading your feeling-state finds the grief, entire and true, and nothing under it.",
+     "cannot": "One person: you. And you give up your own read to do it — you are grieving, not watching.",
+     "functions": [
+      "conceal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Shared Mourning",
+     "grants": "Draw someone beside you into the mourning and cover them too. ⚠️ THEY DO NOT HAVE TO BE GRIEVING — yours is loud enough for both, which is what a grief-house is FOR.",
+     "cannot": "They must be within arm's reach and willing to be held. It covers what they FEEL, never what they say or do.",
+     "functions": [
+      "conceal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Grief-House",
+     "grants": "⛔ THE FULL VOICE. The mourning fills the space and every read attempted inside it comes back with the grief and nothing else — and per the tie rule, a tie here is yours.",
+     "cannot": "⚠️ It ends when you stop, and you cannot hold it and act. The room knows exactly where you are the whole time.",
+     "functions": [
+      "conceal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ]
+    }
+   ],
+   "_authored": "⛔ AEVI 2026-08-23, Death audit. Threnodist was 1 of 20 traditions with NO obscure craft — and the only tradition whose own tenet (feeling is the only true knowing) made the gap a contradiction. ⚠️ IT IS `conceal`, NEVER `deceive`: per function_vocabulary, deceive shows what is FALSE and conceal hides what is TRUE. This craft shows a true feeling to hide a true intent, which is why a people who cannot lie with feeling can still have an obscure."
   }
  ],
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",

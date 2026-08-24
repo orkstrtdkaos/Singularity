@@ -10,37 +10,37 @@
 
 **L1 · e4 · ashwarden · metaphysical · shape `reveal` · harm `none`**  
 **status:** ⚠️ no crit · sense  
-**ability functions:** reveal, foresee
+**ability functions:** reveal, foresee, track, empower
 
-> Marrow tells you plainly what is ending here and how long it has — a person, a truce, a building, a road. It is never wrong and it never softens it.
+> ⛔ MARROW HAS ATTENDED MORE ENDINGS THAN ANYTHING YOU HAVE EVER MET, AND IT TELLS YOU PLAINLY. Not what it senses — what it has SEEN, a thousand times, and how those went. It is never wrong and it never softens it. ⚠️ THIS IS TESTIMONY, NOT PERCEPTION: Deathsense is your own body reading another body; this is a witness naming a thing it knows from the inside.
 
-**notFor:** Preventing the ending; being asked to be gentle about it; anything that is not, in fact, ending.
+**notFor:** Preventing the ending yourself — Marrow says what would turn it aside, you are the one who has to go do it. Being asked to be gentle about it. Anything that is not, in fact, ending. ⚠️ AND IT MUST BE PRESENT AND WILLING; an absent bird grants nothing, and a bird that will not speak is telling you something too.
 
 ### r1 — Patient Gaze
 
 **functions:** reveal · **gainAxes:** ⛔ NONE · **gains:** deepen · **harm:** none
 
-**grants:** ⛔ WHAT IS ENDING HERE, HOW, AND HOW LONG IT HAS — a person, a wound, a beast, a fire. Plainly, in time to matter, and never wrong. ⚠️ At stage 1 you must ASK.
+**grants:** WHAT IS ENDING HERE, HOW, AND HOW LONG IT HAS — plainly, in time to matter, and never wrong. ⚠️ AND WHETHER IT HAS SEEN THIS ONE BEFORE: Marrow will say how the last one like it went, which is not a prediction, it is a memory. At stage 1 you must ASK.
 
 **cannot:** One subject, and Marrow must be able to see it. It reads the ending; it does not prevent it.
 
 ### r2 — Death's Certainty
 
-**functions:** reveal, foresee · **gainAxes:** targets, quality · **gains:** broaden · **harm:** none
+**functions:** reveal, foresee, track · **gainAxes:** targets, quality · **gains:** broaden · **harm:** none
 
-**grants:** ⛔ MARROW TELLS YOU WHAT IS ENDING, HOW, AND WHETHER IT WAS NATURAL OR MADE — and it tells you before you ask, on more than one subject at once.
+**grants:** ⛔ MARROW TELLS YOU WHAT IS ENDING, HOW, AND WHETHER IT WAS NATURAL OR MADE — unprompted, on more than one subject at once. ⚠️ AND IT KNOWS THE QUIET ROADS: where the ending came from and where what caused it went, because carrion paths are every road in the Valley and Marrow has walked all of them.
 
 **cannot:** It names that an ending was made and roughly by what. It does not name who. ⚠️ LIVING THINGS AND MADE THINGS ONLY — a truce, a road, a marriage is ending too, and at this rank Marrow has no way to say so.
 
 ### r3 — Deathly Premonition
 
-**functions:** reveal, foresee · **gainAxes:** scope, duration, quality · **gains:** broaden · **harm:** none
+**functions:** reveal, foresee, empower · **gainAxes:** scope, duration, quality · **gains:** broaden · **harm:** none
 
-**grants:** ⛔ MARROW READS EVERY ENDING IN A PLACE AT ONCE, ordered by when — and now reads endings THAT ARE NOT BODIES: a truce, a road, a house, a season's grain, a marriage. It says which can still be turned aside and what it would take. ⚠️ INCLUDING YOURS, and it will not leave while it is happening.
+**grants:** ⛔ MARROW READS EVERY ENDING IN A PLACE AT ONCE, ordered by when, and now reads endings THAT ARE NOT BODIES: a truce, a road, a house, a season's grain, a marriage. It says which can still be turned aside and what it would take — ⛔ AND ACTING ON ITS WORD, IMMEDIATELY, IS EMPOWERED: you move as someone who has already seen this go the other way. ⚠️ INCLUDING YOURS, and it will not leave while it is happening.
 
-**cannot:** ⛔ It tells you what would turn an ending aside. Doing it is yours.
+**cannot:** It tells you what would turn an ending aside; doing it is yours, and the edge lasts only as long as you act on what it said. ⛔ AND MARROW WILL NOT HASTEN AN ENDING, EVER — not for you, not for mercy. If that is what you need, you need someone else, and there are some.
 
-**bounds:** ⛔ MARROW MUST BE PRESENT AND ABLE TO SEE IT. This is the bird's craft, lent to you · ⛔ IT READS AN ENDING AND NEVER PREVENTS ONE — Marrow will not hasten an ending, ever, for any reason, including mercy · ⚠️ IT DOES NOT SOFTEN, INCLUDING ABOUT YOU. You cannot ask it to be gentle and you cannot ask it to be wrong · something must actually be ending; a healthy thing gives nothing
+**bounds:** ⛔ MARROW MUST BE PRESENT AND ABLE TO SEE IT — this is the bird's craft, lent to you, and it has its own reasons · ⛔ IT READS AN ENDING AND NEVER PREVENTS ONE. Marrow will not hasten an ending, ever, for any reason, including mercy — that is a CHOICE it made and it holds · ⚠️ It does not soften, including about you · ⚠️ Something must actually be ending; a healthy thing gives nothing. And it leaves during births and will not say why
 
 ---
 

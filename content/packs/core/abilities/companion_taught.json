@@ -15,8 +15,8 @@
    },
    "attribute": "mental",
    "narrationHints": "The bird lands somewhere it can see the whole situation, settles, and does not look away. When it tells you, it uses as few words as the thing requires, and none of them are kind.",
-   "description": "Marrow tells you plainly what is ending here and how long it has — a person, a truce, a building, a road. It is never wrong and it never softens it.",
-   "notFor": "Preventing the ending; being asked to be gentle about it; anything that is not, in fact, ending.",
+   "description": "⛔ MARROW HAS ATTENDED MORE ENDINGS THAN ANYTHING YOU HAVE EVER MET, AND IT TELLS YOU PLAINLY. Not what it senses — what it has SEEN, a thousand times, and how those went. It is never wrong and it never softens it. ⚠️ THIS IS TESTIMONY, NOT PERCEPTION: Deathsense is your own body reading another body; this is a witness naming a thing it knows from the inside.",
+   "notFor": "Preventing the ending yourself — Marrow says what would turn it aside, you are the one who has to go do it. Being asked to be gentle about it. Anything that is not, in fact, ending. ⚠️ AND IT MUST BE PRESENT AND WILLING; an absent bird grants nothing, and a bird that will not speak is telling you something too.",
    "tradition": "ashwarden",
    "traditionV2": "Death",
    "nativeOrCombination": "native",
@@ -40,26 +40,28 @@
    "sense": true,
    "bounds": [
     {
-     "text": "⛔ MARROW MUST BE PRESENT AND ABLE TO SEE IT. This is the bird's craft, lent to you",
+     "text": "⛔ MARROW MUST BE PRESENT AND ABLE TO SEE IT — this is the bird's craft, lent to you, and it has its own reasons",
      "class": "hard"
     },
     {
-     "text": "⛔ IT READS AN ENDING AND NEVER PREVENTS ONE — Marrow will not hasten an ending, ever, for any reason, including mercy",
+     "text": "⛔ IT READS AN ENDING AND NEVER PREVENTS ONE. Marrow will not hasten an ending, ever, for any reason, including mercy — that is a CHOICE it made and it holds",
      "class": "hard"
     },
     {
-     "text": "⚠️ IT DOES NOT SOFTEN, INCLUDING ABOUT YOU. You cannot ask it to be gentle and you cannot ask it to be wrong",
-     "class": "cost"
+     "text": "⚠️ It does not soften, including about you",
+     "class": "hard"
     },
     {
-     "text": "something must actually be ending; a healthy thing gives nothing",
+     "text": "⚠️ Something must actually be ending; a healthy thing gives nothing. And it leaves during births and will not say why",
      "class": "hard"
     }
    ],
    "plainly": "An investigate/survive action declared in the sense slot. Its strength is rated 6 out of 10. Ranks: rank 2 reads made endings and things that are not bodies, rank 3 reads a whole place and how long it has.",
    "functions": [
     "reveal",
-    "foresee"
+    "foresee",
+    "track",
+    "empower"
    ],
    "tree": [
     {
@@ -72,7 +74,7 @@
      "gains": "deepen",
      "harmRung": "none",
      "gainAxes": [],
-     "grants": "⛔ WHAT IS ENDING HERE, HOW, AND HOW LONG IT HAS — a person, a wound, a beast, a fire. Plainly, in time to matter, and never wrong. ⚠️ At stage 1 you must ASK.",
+     "grants": "WHAT IS ENDING HERE, HOW, AND HOW LONG IT HAS — plainly, in time to matter, and never wrong. ⚠️ AND WHETHER IT HAS SEEN THIS ONE BEFORE: Marrow will say how the last one like it went, which is not a prediction, it is a memory. At stage 1 you must ASK.",
      "cannot": "One subject, and Marrow must be able to see it. It reads the ending; it does not prevent it.",
      "_nameWas": "The Attending Bird",
      "companionStageName": "The Attending Bird"
@@ -83,7 +85,8 @@
      "name": "Death's Certainty",
      "functions": [
       "reveal",
-      "foresee"
+      "foresee",
+      "track"
      ],
      "gains": "broaden",
      "harmRung": "none",
@@ -91,7 +94,7 @@
       "targets",
       "quality"
      ],
-     "grants": "⛔ MARROW TELLS YOU WHAT IS ENDING, HOW, AND WHETHER IT WAS NATURAL OR MADE — and it tells you before you ask, on more than one subject at once.",
+     "grants": "⛔ MARROW TELLS YOU WHAT IS ENDING, HOW, AND WHETHER IT WAS NATURAL OR MADE — unprompted, on more than one subject at once. ⚠️ AND IT KNOWS THE QUIET ROADS: where the ending came from and where what caused it went, because carrion paths are every road in the Valley and Marrow has walked all of them.",
      "cannot": "It names that an ending was made and roughly by what. It does not name who. ⚠️ LIVING THINGS AND MADE THINGS ONLY — a truce, a road, a marriage is ending too, and at this rank Marrow has no way to say so.",
      "_nameWas": "The Told Truth",
      "companionStageName": "The Told Truth",
@@ -103,7 +106,8 @@
      "name": "Deathly Premonition",
      "functions": [
       "reveal",
-      "foresee"
+      "foresee",
+      "empower"
      ],
      "gains": "broaden",
      "harmRung": "none",
@@ -112,8 +116,8 @@
       "duration",
       "quality"
      ],
-     "grants": "⛔ MARROW READS EVERY ENDING IN A PLACE AT ONCE, ordered by when — and now reads endings THAT ARE NOT BODIES: a truce, a road, a house, a season's grain, a marriage. It says which can still be turned aside and what it would take. ⚠️ INCLUDING YOURS, and it will not leave while it is happening.",
-     "cannot": "⛔ It tells you what would turn an ending aside. Doing it is yours.",
+     "grants": "⛔ MARROW READS EVERY ENDING IN A PLACE AT ONCE, ordered by when, and now reads endings THAT ARE NOT BODIES: a truce, a road, a house, a season's grain, a marriage. It says which can still be turned aside and what it would take — ⛔ AND ACTING ON ITS WORD, IMMEDIATELY, IS EMPOWERED: you move as someone who has already seen this go the other way. ⚠️ INCLUDING YOURS, and it will not leave while it is happening.",
+     "cannot": "It tells you what would turn an ending aside; doing it is yours, and the edge lasts only as long as you act on what it said. ⛔ AND MARROW WILL NOT HASTEN AN ENDING, EVER — not for you, not for mercy. If that is what you need, you need someone else, and there are some.",
      "_nameWas": "The One Who Stays",
      "companionStageName": "The One Who Stays",
      "_grantsWas_SNG510": "⛔ ADDS PREMONITION. Every ending in a place at once, ordered by when — and which of them can still be turned aside, and what it would take. ⚠️ INCLUDING YOURS, and it will not leave while it is happening.",
@@ -171,7 +175,8 @@
    "_progression": "⛔ SNG-496 CORRECTED. Erik: 'I think there is a RANK UP of the companion skills — you should CHECK THAT.'\n⛔ HE WAS RIGHT AND I HAD ALREADY DOCUMENTED IT MYSELF. `stages[]` IS THE RANK-UP MECHANISM, tied to BOND, not to skill ranks — po/SPEC_SNG-200 says 'stages are the spine' and Marrow authors three of them.\n⚠️ SO A COMPANION-TAUGHT CRAFT MUST NOT CARRY ITS OWN r1/r2/r3 LADDER. Each tier is keyed to the companion's authored stage, and the stage names are the companion's own: The Attending Bird · The Told Truth · The One Who Stays.\n⛔ AND THE BLOCKER IS STILL LIVE: `engine/companions.js:24-28` — `bondOf` is a TERNARY returning stage 1 or 2 only, so MARROW'S STAGE 3 IS UNREACHABLE. Bond caps at 10 and the last stage triggers at 8, so the top 20% of the scale is inert. ⚠️ Attended End r3 cannot be reached until CCode fixes that ternary.\n⚠️ AND THE STAGE PROGRESSION IS ALREADY IN THE CONTENT: stage 1 'watches, does not interfere' → stage 2 'tells you what it sees BEFORE YOU ASK' → stage 3 'it did not leave'. THE RANKS ARE THE RELATIONSHIP.",
    "_stageNames": "⛔ ERIK 2026-08-16: stage names are PATIENT GAZE · DEATH'S CERTAINTY · DEATHLY PREMONITION.\n⚠️ THESE NAME THE CRAFT'S TIERS; the companion's own `stages[]` names — The Attending Bird, The Told Truth, The One Who Stays — stay on MARROW and are carried alongside in `companionStageName`. ⛔ THE BIRD'S ARC AND THE CRAFT'S TIERS ARE THE SAME PROGRESSION SEEN FROM TWO SIDES: what the companion becomes, and what it lends you.\n⚠️ And the three read as a ladder of certainty: a gaze that waits · a fact that is not arguable · knowing before it happens.",
    "companionId": "marrow",
-   "_companionId": "⚠️ SNG-501, CCode: 'the teacher resolves from your `taughtBy` PROSE — that is a weak link. Author `companionId` next time you touch the file and it stops depending on the first word of a sentence.' ⛔ AGREED AND DONE."
+   "_companionId": "⚠️ SNG-501, CCode: 'the teacher resolves from your `taughtBy` PROSE — that is a weak link. Author `companionId` next time you touch the file and it stops depending on the first word of a sentence.' ⛔ AGREED AND DONE.",
+   "_flairPass_20260823": "⛔ ERIK 2026-08-23: 'Marrow's loaned skill does not have enough flair to be more than Deathsense right now — it needs to give more.' ⚠️ THE FIX FOLLOWS FROM WHAT MARROW IS. Deathsense is PERCEPTION (your body reads another body); this is TESTIMONY (a witness names a category it knows from the inside). So it now gives three things perception cannot: PRECEDENT (r1 — how the last one like this went, memory not prophecy), THE QUIET ROADS (r2 — `track`, from Marrow's own knowledge entry 'the paths carrion takes, which is to say every quiet road in the Valley'), and EMPOWER (r3 — acting on its word is mechanically better, and function_vocabulary flags `empower` as 'THIS SPACE WAS EMPTY'). ⛔ Erik ruled Deathsense r3 MAY approximate this; the crafts are distinguished by SOURCE, not by width."
   }
  ],
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."

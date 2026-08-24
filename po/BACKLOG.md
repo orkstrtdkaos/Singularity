@@ -170,3 +170,27 @@ may do.** The bound is stripped; the braid is open.
 **Shape when authored:** `tradition: cross_pole_braid`, `powerSystem: combination`, verb `deceive` (shows
 what is FALSE) as against `public_grief`'s `conceal` (hides what is TRUE). ⚠️ **The pair is the point —
 the same tradition reachable from either side of the falsehood/truth axis.**
+
+## ⛔ THE ASHWARDENS WHO CHOSE THE OTHER WAY (Erik, 2026-08-23)
+
+**Marrow's GM-eyes-only hook: it *"may be an Ashwarden proper — not their bird but one of them, in a shape
+that lets it attend the endings the March cannot reach."* Its hard boundary: it will not hasten an ending,
+ever, for any reason, INCLUDING MERCY.**
+
+⛔ **ERIK'S READING, AND IT TURNS A CHARACTER NOTE INTO A FACTION:** Marrow has agency and wants. If it took
+that shape, then **not hastening is a CHOICE it makes and holds** — and a choice implies others who faced
+it and **chose the opposite.**
+
+⚠️ **THE TRADITION ALREADY HAS THE CRAFTS FOR THE OTHER CHOICE:** `hastened_grey` brings an ending forward,
+`the_cut_thread` ends one living thing with no wound and no struggle. **So the schism is already authored
+as mechanics; nobody has authored the people.**
+
+**Threads worth pulling:**
+- Ashwardens who took shapes to attend endings, versus Ashwardens who took shapes to **cause** them.
+- ⛔ **Mercy is the fault line**, not malice — the opposite choice is not villainy, it is someone who
+  decided that refusing to hasten IS the cruelty. **Both are defensible and that is the point.**
+- Marrow *leaves during births and will not say why* — ⚠️ **whatever that is, the ones who chose otherwise
+  presumably do not.**
+- The March *"cannot reach"* some endings. **Who attends those instead?**
+
+⚠️ **Keep Marrow deniable per its own hook. The faction can be real long before the bird is confirmed.**

@@ -1273,11 +1273,12 @@
     "death_life": 0.2
    },
    "functions": [
-    "empower"
+    "empower",
+    "ward"
    ],
    "narrationHints": "You sing the names — all of them, every one lost — and for the length of the song they are not gone, exactly; they are HELD, present in the keeping of their names.",
-   "description": "Sing the names of the lost — all of them — and for the length of the song they are held present rather than gone. The Threnodist naming-song, and the deep work of those who refuse to let go be the same as forget.",
-   "notFor": "It holds the lost in memory, it does not return them — a name kept is not a life restored. And to sing all the names is to carry all the losses at once, for the length of the song and after.",
+   "description": "Sing the names of the lost — all of them — and for the length of the song they are held present rather than gone. ⛔ AND A NAME HELD IS A NAME THAT CANNOT BE MEDDLED WITH, and one that stays reachable longer.",
+   "notFor": "It holds the lost in memory, it does not return them — a name kept is not a life restored. ⚠️ It makes the road back longer-lived; walking it is Calling Back's work, never this. And to sing all the names is to carry all the losses at once.",
    "tree": [
     {
      "rank": 1,
@@ -1312,9 +1313,24 @@
      ],
      "_nameWas": "The Kept Names",
      "gainAxes": [
-      "damage",
-      "autonomy"
+      "scope",
+      "duration"
      ]
+    },
+    {
+     "rank": 3,
+     "name": "Unmeddled Dead",
+     "functions": [
+      "ward"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "quality"
+     ],
+     "grants": "⛔ A NAME SUNG IS A NAME WARDED. The attended dead cannot be raised, bound, worn or spoken through by anyone else — and they SINK SLOWER: a warded name holds at THE THRESHOLD past its day, and in THE NEAR DARK past its month. ⚠️ The road back stays open longer because someone is still holding it.",
+     "cannot": "⛔ IT DOES NOT WALK THEM BACK — that is Calling Back, and this only keeps the rung they are on. It cannot recover THE SEALED. And it wards only names you actually sang, which means someone had to know them."
     }
    ],
    "gated": "learned",
@@ -1366,7 +1382,8 @@
    "_nameWas": "The Names of the Lost",
    "_idWas": "the_names_of_the_lost",
    "_powerSystemWas": "reach_emotional_logical",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_gainedDeadHalf_20260823": "⛔ ERIK 2026-08-23. Received the dead-keeping half of `carried_name` and given the two jobs Erik named: A WARD AGAINST NEFARIOUS MEDDLING, and EXTENDING HOW LONG THE DEAD STAY REACHABLE. ⚠️ The ladder is not invented — `calling_back` already runs THRESHOLD (a day) -> NEAR DARK (a month) -> DEEP DARK (months) -> SEALED, and a failed reach costs a rung. This holds a rung; it never climbs one. ⛔ r2 gainAxes were `damage, autonomy` on a craft with harmRung `none` and no dice — corrected to `scope, duration`."
   },
   {
    "schemaVersion": 1,
@@ -1919,71 +1936,53 @@
     "emotional_logical": -0.5
    },
    "functions": [
-    "bind",
-    "sustain"
+    "restore"
    ],
    "narrationHints": "You hold a dead person's name the way a room holds a struck bell. Speak it and what they were comes back into the space — not a ghost, a WEIGHT. People remember correctly for as long as you hold it.",
-   "description": "Speak a name you carry and the room remembers that person as they WERE — not the softened version, not the useful one. Lies about the dead do not hold while you hold the name. The Threnodists' keeping-craft.",
-   "notFor": "Raising, speaking with, or asking anything of the dead; a name you never learned; making anyone feel better about it.",
+   "description": "⛔ YOU HOLD HOW A PERSON ACTUALLY IS, AND THE CRAFT PULLS THEM BACK TOWARD IT. Speak a name you carry and what has been done to them starts to come undone — the rewriting, the corruption, the thing wearing their face. ⚠️ THE MEMORY IS THE TEMPLATE, AND YOU CHOSE IT.",
+   "notFor": "Wounds — this undoes a CONDITION, not an injury (that is Shared Weight). A person you never really looked at. Making anyone feel better about it. ⚠️ And it will not restore them to something they never were.",
    "tree": [
     {
      "rank": 1,
      "name": "Name Held",
-     "grants": "Speak a name you carry and the room remembers that person as they WERE — not the softened version, not the useful version. Lies about the dead do not hold while you hold the name.",
-     "cannot": "You must have KNOWN them or been told truly. It corrects memory; it does not summon. And what returns is accurate, which is sometimes worse for everyone present.",
      "functions": [
-      "sustain"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "sustain"
-     ],
-     "_nameWas": "The Name Held",
-     "gainAxes": []
-    },
-    {
-     "rank": 2,
-     "name": "Kept Room",
-     "grants": "Hold several, or hold one long enough that a place keeps them — a threshold, a stone, a hall that will not let the name go crooked.",
-     "cannot": "Holding costs, and the names you carry do not leave you between uses. A Threnodist knows exactly how many they hold.",
-     "functions": [
-      "sustain",
-      "bind"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "sustain",
-      "bind"
-     ],
-     "_nameWas": "The Kept Room",
-     "gainAxes": [
-      "scope"
-     ]
-    },
-    {
-     "rank": 3,
-     "name": "Whole Lament",
-     "grants": "Everyone a place has lost, held at once, correctly. Communities have changed their minds about their own history under this.",
-     "cannot": "You are carrying all of it while you hold it. And an honest accounting of a place's dead will name people that place decided to forget on purpose.",
-     "functions": [
-      "sustain",
-      "bind"
+      "restore"
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "sustain",
-      "bind"
+     "gainAxes": [],
+     "grants": "⛔ SPEAK A NAME YOU CARRY — yours or one other's — AND UNDO A CONDITION LAID ON THEM. Confusion, a compulsion, a false memory, a fear that was put there. They come back toward how you hold them.",
+     "cannot": "One person, within earshot, and you must have KNOWN them. ⚠️ It undoes what was DONE to them; it does not mend a wound and it does not raise the dead."
+    },
+    {
+     "rank": 2,
+     "name": "Kept Shape",
+     "functions": [
+      "restore"
      ],
-     "_nameWas": "The Whole Lament",
+     "gains": "broaden",
+     "harmRung": "none",
      "gainAxes": [
-      "scope"
-     ]
+      "targets",
+      "quality"
+     ],
+     "grants": "⛔ HOLD SEVERAL AT ONCE, AND REACH DEEPER THINGS — possession, a working set into someone, a name taken off them. ⚠️ What returns is ACCURATE, which is sometimes worse for everyone present.",
+     "cannot": "Holding costs, and the names you carry do not leave you between uses. A Threnodist knows exactly how many they hold."
+    },
+    {
+     "rank": 3,
+     "name": "True Shape",
+     "functions": [
+      "restore"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "duration"
+     ],
+     "grants": "⛔ THE ANSWER TO BEING REWRITTEN. Someone remade into something else is pulled the whole way back — not healed, RETURNED. ⚠️ This is the cure the world did not have.",
+     "cannot": "⛔ ONLY AS FAR AS YOUR MEMORY IS TRUE. You restore them toward the person you hold, and no further."
     }
    ],
    "challengeTypes": [
@@ -1992,8 +1991,8 @@
    ],
    "tradition": "threnodist",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
-   "shape": "reveal",
+   "harmRung": "none",
+   "shape": "healing",
    "operativeAxis": [
     "scope",
     "duration"
@@ -2009,15 +2008,19 @@
    },
    "bounds": [
     {
-     "text": "you must have KNOWN them or been told truly",
+     "text": "⛔ YOU CAN ONLY RESTORE SOMEONE TOWARD HOW YOU ACTUALLY HOLD THEM. A Threnodist who never really saw a person restores them badly",
      "class": "hard"
     },
     {
-     "text": "it CORRECTS memory; it does not summon",
+     "text": "⛔ AND IF YOU HOLD THEM AS BETTER THAN THEY WERE, YOU ARE REWRITING THEM TOO — kindly, which is the Veilwright failure arriving through the front door. The craft cannot tell the difference and neither can they",
      "class": "hard"
     },
     {
-     "text": "the names you carry do not leave you between uses",
+     "text": "⚠️ It undoes a CONDITION, never a wound. A dying man restored is a dying man who is himself again",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ The names you carry stay with you between uses",
      "class": "cost"
     }
    ],
@@ -2031,7 +2034,8 @@
    "_nameWas": "The Carried Name",
    "_idWas": "the_carried_name",
    "_powerSystemWas": "reach_emotional_logical",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_split_20260823": "⛔ ERIK 2026-08-23. SPLIT. This craft was doing two jobs: restoring the living toward a held memory, and keeping the dead correctly. ⚠️ THE DEAD HALF MOVED TO `names_of_the_lost`, which already held that territory — leaving both would be the merge pattern §37.3 exists to catch. ⛔ It is `restore` and NOT `heal` per function_vocabulary: restore undoes a CONDITION, heal mends a wound — and the vocabulary names the gap it fills, 'Halvex Coil's rewritten victims have no cure because this verb did not exist.' ⚠️ Ability harmRung was `incapacitating` over three `none` ranks — corrected. The shadow bound is Erik's call and it is the point of the craft."
   },
   {
    "id": "shared_weight",

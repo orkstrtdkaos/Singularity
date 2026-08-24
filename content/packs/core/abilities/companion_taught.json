@@ -91,8 +91,8 @@
       "targets",
       "quality"
      ],
-     "grants": "⛔ MARROW TELLS YOU WHAT IS ENDING, HOW, AND WHETHER IT WAS NATURAL OR MADE — and reads things that are not bodies: a truce, a road, a house, a season's grain, a marriage. It tells you before you ask.",
-     "cannot": "It names that an ending was made and roughly by what. It does not name who.",
+     "grants": "⛔ MARROW TELLS YOU WHAT IS ENDING, HOW, AND WHETHER IT WAS NATURAL OR MADE — and it tells you before you ask, on more than one subject at once.",
+     "cannot": "It names that an ending was made and roughly by what. It does not name who. ⚠️ LIVING THINGS AND MADE THINGS ONLY — a truce, a road, a marriage is ending too, and at this rank Marrow has no way to say so.",
      "_nameWas": "The Told Truth",
      "companionStageName": "The Told Truth",
      "_grantsWas_SNG510": "⚠️ ADDS CAUSE, KIND, AND BEING TOLD UNASKED. Marrow distinguishes endings that were NATURAL from ones that were MADE — and reads things that are not bodies: a truce, a road, a house, a season's grain. ⛔ AND IT TELLS YOU BEFORE YOU ASK, always in time to matter."
@@ -109,13 +109,15 @@
      "harmRung": "none",
      "gainAxes": [
       "scope",
-      "duration"
+      "duration",
+      "quality"
      ],
-     "grants": "⛔ MARROW READS EVERY ENDING IN A PLACE AT ONCE, ordered by when — and which of them can still be turned aside, and what it would take. ⚠️ INCLUDING YOURS, and it will not leave while it is happening.",
+     "grants": "⛔ MARROW READS EVERY ENDING IN A PLACE AT ONCE, ordered by when — and now reads endings THAT ARE NOT BODIES: a truce, a road, a house, a season's grain, a marriage. It says which can still be turned aside and what it would take. ⚠️ INCLUDING YOURS, and it will not leave while it is happening.",
      "cannot": "⛔ It tells you what would turn an ending aside. Doing it is yours.",
      "_nameWas": "The One Who Stays",
      "companionStageName": "The One Who Stays",
-     "_grantsWas_SNG510": "⛔ ADDS PREMONITION. Every ending in a place at once, ordered by when — and which of them can still be turned aside, and what it would take. ⚠️ INCLUDING YOURS, and it will not leave while it is happening."
+     "_grantsWas_SNG510": "⛔ ADDS PREMONITION. Every ending in a place at once, ordered by when — and which of them can still be turned aside, and what it would take. ⚠️ INCLUDING YOURS, and it will not leave while it is happening.",
+     "_movedHere_20260823": "⛔ ERIK: non-body endings MOVED FROM r2 TO r3. r2 was doing three jobs while declaring two axes — unprompted, made-vs-natural, and a whole new CLASS of subject. ⚠️ I first declared the kind-expansion as a new axis `kinds` and REVERTED IT: §34.3 fixes the list at NINE (range · duration · damage · scope · targets · quality · autonomy · conditions · tempo) and a one-use tenth axis is invisible to every aggregate that reads them. ⛔ THE EXPANSION IS `scope` — what counts as a subject widening from bodies to bonds is the same axis as reading a whole place, and `quality` carries the turn-aside judgement."
     }
    ],
    "_authored": "⛔ SNG-496. Erik: 'the Attended End needs to be able to RANK UP as well — so we have an opportunity to let an AMAZING SKILL FROM A COMPANION... is it written out yet?'\n⛔ IT WAS NOT, AND NEITHER IS ANY OTHER. ALL NINE COMPANION `bondGrants` ARE ONE-LINE STUBS: id, name, description, energyCost, attribute, axes, notFor, functions — and NOTHING ELSE. Missing levelReq, tree, shape, mechanic, bounds, plainly, challengeTypes and six more. ⚠️ COMPANION-TAUGHT SKILLS CANNOT RANK UP ANYWHERE IN THE GAME, and the other eight are Motes' Vigil, Pack-Sense, The Old Procedure, Thin-Place Sense, The Kept Dark, Scholar's Margin, The Taking Root and A Second Pair of Hands.\n⚠️ THE RANK LADDER IS DRAWN FROM MARROW'S OWN `knowledge` AND `stages`, not invented: 'when a thing is ending, how, and roughly when' → 'which endings were natural and which were made' → stage 3 'The One Who Stays'. ⛔ r3's 'including yours' is the companion file's own line: 'it will not lie about what it sees coming, including about you.'",

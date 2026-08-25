@@ -1581,19 +1581,19 @@
     "hinder"
    ],
    "narrationHints": "Not a scream and not a song. A sound with a death inside it that arrives in the chest rather than the ears, and goes through stone as easily as air. People who hear it from three streets away stop walking without knowing why.",
-   "description": "A wail with a death in it. Everything within earshot that can feel stops — and at its height, drops.",
-   "notFor": "Anything that cannot feel — constructs, the set dead, a warded mind; precision; secrecy.",
+   "description": "A wail with a death in it. ⛔ YOU CHOOSE WHO HEARS IT AS A WAIL AND WHO HEARS IT AS GRIEF — those you name stop, and at its height they drop. Everyone else present hears a Threnodist mourning and nothing more.",
+   "notFor": "Anything that cannot feel — constructs, the set dead, a warded mind. Secrecy: it is the loudest thing in the Valley. ⚠️ And it is not a blast — it goes where you send it.",
    "tree": [
     {
      "rank": 1,
      "name": "Wail",
-     "grants": "⛔ EVERYONE IN EARSHOT WHO CAN FEEL LOSES THEIR NEXT ACTION. Weapons lower, a charge breaks, a pursuit stalls — not because they chose to stop but because for a moment there is nothing in them that can continue. It passes through walls and around corners; there is no cover from it.",
-     "cannot": "Anything that cannot feel is unaffected. One round of action lost; they act normally after.",
+     "grants": "⛔ NAME WHO HEARS IT — about six within earshot — AND THEY LOSE THEIR NEXT ACTION. Weapons lower, a charge breaks, a pursuit stalls, not because they chose to stop but because for a moment there is nothing in them that can continue. It passes through walls and around corners; there is no cover from it.",
+     "cannot": "⛔ ONLY WHO YOU NAME. Those you do not choose hear a wail and are untouched. Anything that cannot feel is unaffected, and those who lose the action act normally after.",
      "functions": [
       "strike",
       "hinder"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "damaging",
      "gainAxes": [],
      "imposes": {
@@ -1607,17 +1607,16 @@
     {
      "rank": 2,
      "name": "Dark Wail",
-     "grants": "⛔ AIM IT AT SEVERAL. Each one you name FALLS UNCONSCIOUS if it lands — and any who resist lose their next action instead.",
-     "cannot": "Up to three named targets in earshot. Anything that cannot feel is unaffected.",
+     "grants": "⛔ THE WAIL CARRIES FURTHER DOWN. Up to three of those you name FALL UNCONSCIOUS — and any of them who resist lose their next action instead, which is r1 still doing its work underneath.",
+     "cannot": "Three named targets in earshot for the unconscious; the rest of what you named still takes r1. ⚠️ Anything that cannot feel is unaffected.",
      "functions": [
       "strike",
       "hinder"
      ],
-     "gains": "broaden",
+     "gains": "deepen",
      "harmRung": "incapacitating",
      "gainAxes": [
-      "targets",
-      "quality"
+      "conditions"
      ],
      "imposes": {
       "condition": "unconscious",
@@ -1631,8 +1630,8 @@
     {
      "rank": 3,
      "name": "Oblivion Pulse",
-     "grants": "⛔ EVERYONE YOU CHOOSE WHO HEARS IT DROPS UNCONSCIOUS — a crowd, a hall, a street. You name who is spared, and they lose their next action instead.",
-     "cannot": "Everyone within earshot that you choose. Anything that cannot feel is unaffected.",
+     "grants": "⛔ ABOUT SIX OF THOSE YOU NAME DROP UNCONSCIOUS — a knot of guards, a hall, a street's worth of pursuit — and any who resist lose their next action instead. ⚠️ THE GM CALLS WHO IS IN EARSHOT; you call who is a target.",
+     "cannot": "⛔ THE UNNAMED ARE UNAFFECTED — allies standing beside a target hear a Threnodist grieving and nothing else. Anything that cannot feel is unaffected.",
      "functions": [
       "strike",
       "hinder"
@@ -1640,15 +1639,15 @@
      "gains": "broaden",
      "harmRung": "incapacitating",
      "gainAxes": [
-      "scope",
-      "targets"
+      "targets",
+      "scope"
      ],
      "imposes": {
       "condition": "unconscious",
       "onCrit": "incapacitated",
       "degradesTo": "action_loss",
       "resist": "mental",
-      "targets": 12
+      "targets": 6
      },
      "_imposes": "⛔ SNG-513. Everyone you choose. Those spared lose their next action."
     }
@@ -1679,7 +1678,8 @@
     "crit": {
      "success": "The cry goes further than the room and everything in it that can feel goes down.",
      "failure": "It comes out as grief and nothing else. Everyone hears exactly how much you have lost."
-    }
+    },
+    "note": "⛔ TARGETS ARE CHOSEN, NEVER CAUGHT. Erik 2026-08-23: 'the player can choose the targets — unchosen targets are not affected.' ⚠️ ABOUT SIX IN EARSHOT AT r1 AND r3, so the GM can make the call rather than count heads; three at r2 for the unconscious. ⛔ RESIST DOES NOT MEAN ESCAPE: a chosen target who resists the unconscious loses their next action instead — r1 still running underneath, which is the additive model."
    },
    "intensity": "severe",
    "bounds": [
@@ -1778,7 +1778,8 @@
     "wild_nanite": 0.6,
     "veil": 0.4
    },
-   "_veil": "⛔ SNG-498. Erik: 'it sure seems like Keening could be PARTIALLY VEIL POWERED.' ⚠️ AGREED AND IT FITS THE COSMOLOGY: the Veil is what remains where something enormous stopped being present (SNG-442), and a wail with a death inside it that passes through stone is not a sound the air is carrying. ⛔ `combination`: wild_nanite 0.6 (tidal, ungoverned, threnodist) + veil 0.4 (it reaches through, and there is no cover from it).\n⚠️ r2 SIMPLIFIED per Erik — 'too complicated to combine that with a broad cry'. Now: up to three named targets, each falls unconscious or loses their action on a resist."
+   "_veil": "⛔ SNG-498. Erik: 'it sure seems like Keening could be PARTIALLY VEIL POWERED.' ⚠️ AGREED AND IT FITS THE COSMOLOGY: the Veil is what remains where something enormous stopped being present (SNG-442), and a wail with a death inside it that passes through stone is not a sound the air is carrying. ⛔ `combination`: wild_nanite 0.6 (tidal, ungoverned, threnodist) + veil 0.4 (it reaches through, and there is no cover from it).\n⚠️ r2 SIMPLIFIED per Erik — 'too complicated to combine that with a broad cry'. Now: up to three named targets, each falls unconscious or loses their action on a resist.",
+   "_targetsAndAllies_20260823": "⛔ ERIK 2026-08-23, AND I HAD IT BACKWARDS. r3 read 'you name who is SPARED, and they lose their next action instead' — I read that as allies taking a lesser effect AND PRAISED IT as an elegant solution to the ally problem. ⚠️ IT IS THE PROBLEM: a craft that knocks out enemies and costs your own party their actions is the exact thing Erik cut from Necrotic Strike an hour earlier. ⛔ THE MODEL IS CHOOSING: the player names targets, the unnamed are untouched, and 'lose their action instead' is what happens to a CHOSEN target WHO RESISTS. ⚠️ ALSO FIXED: r1 declared `deepen` while being the base, and r2 declared `broaden` on `targets` while what it added was a CONDITION — now `deepen`/`conditions`, which is what the reader will key on."
   },
   {
    "id": "contradiction",

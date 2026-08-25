@@ -67,21 +67,54 @@ behaves as r2: you carry the degraded version.**
 
 ---
 
-## §4 — WHAT I WOULD WANT DECIDED, AND THEY ARE YOURS
+## §4 — ⛔ ERIK'S RULINGS, 2026-08-23 — THREE OF THE FOUR ARE NOW DECIDED
 
-1. ⛔ **Can an intercept be declined?** The old craft's hard bound was *they must GIVE it*. ⚠️ **Consent
-   made sense for taking grief; for eating an incoming `unconscious` it may just be friction.** **My lean:
-   the Threnodist declares the protection, no consent needed — it is a shield, not a confession.**
-2. **One protected ally, or several?** ⚠️ **r1 as one, r2 broadening, feels right and matches the ladder
-   elsewhere — but it is a balance call.**
-3. ⛔ **Does reflection carry the ORIGINAL condition or the DEGRADED one?** **Original is stronger and
-   scarier; degraded is safer.** ⚠️ **I lean ORIGINAL — r3 is the capstone of a craft whose whole story is
-   that what you take does not vanish, and sending back exactly what was sent is the sharpest version of
-   that.**
-4. **What happens when two Threnodists intercept the same ally?** ⚠️ **Probably nearest-declared wins;
-   flagging it because interception is the kind of mechanic that stacks badly.**
+### 4.1 CONSENT IS ELIMINATED
 
----
+**Erik: *"eliminate consent."*** ⛔ **The Threnodist declares the protection and it happens.** The old hard
+bound *they must GIVE it* made sense for taking someone's grief; ⚠️ **for eating an incoming `unconscious`
+it was friction dressed as ethics.** **It is a shield, not a confession.**
+
+### 4.2 ⛔ REFLECTION TIERS OFF THE RESIST ROLL — AND THE LADDER ALREADY EXISTS
+
+**Erik: *"a clean resist sends original, a marginal resist sends the degraded one, a full resist sends
+original boosted."***
+
+⚠️ **`skill_battle.js:406` ALREADY DIALS MARGIN INTO DEGREES — `crit 40 / success 15 / partial 0 /
+failure −15`, content-dialled.** ⛔ **SO THESE ARE NOT NEW NUMBERS.** Erik's three tiers map straight on:
+
+| resist degree | margin | ⛔ what goes back to the source |
+|---|---|---|
+| `crit_success` | ≥ 40 | ⛔ **the ORIGINAL condition, BOOSTED** |
+| `success` | ≥ 15 | **the ORIGINAL condition** |
+| `partial` | ≥ 0 | **the DEGRADED condition** (`degradesTo`) |
+| `failure` | < 0 | ⛔ **nothing reflects — the interceptor carries the degraded condition**, as r2 |
+
+⚠️ **"Boosted" is the one term needing a definition and it should be YOUR call, not mine — the obvious
+candidates are the `onCrit` condition the imposition already carries, or a threshold penalty on the
+source's own resist.** ⛔ **`onCrit` IS ALREADY AUTHORED ON EVERY IMPOSING CRAFT** (`keening` carries
+`onCrit: incapacitated`), **so reusing it invents nothing.**
+
+### 4.3 INTERCEPTION COLLISION — ⚠️ MY RECOMMENDATION IS HIGHEST RESIST
+
+**Erik offered two: *"the last person to use the craft… or maybe the one with the highest resist (highest
+craft skill)."*** **[A] HIGHEST RESIST.**
+
+- ⛔ **It is deterministic.** *Last-used* depends on declaration order, which invites players to sequence
+  their turns to game who catches the hit.
+- **It rewards the right build** — the character who invested in being the tank IS the tank.
+- ⚠️ **It self-balances with 4.2:** `threshold` scales with `targetResist`, so the highest-resist
+  interceptor also degrades and reflects the most. **The rule and the arithmetic agree.**
+- **Ties break by last-declared**, which keeps Erik's other option as the tiebreaker rather than discarding it.
+
+### 4.4 r1 REACH — ⚠️ MY CALL: ONE ALLY, ONE CONDITION
+
+**Erik left this to me. r1 protects ONE named ally and is spent by ONE imposition.**
+
+⛔ **Because r1 must be the floor of a ladder that has somewhere to go:** r2 broadens to sustained coverage,
+r3 adds reflection. ⚠️ **If r1 covered several, r2 would only be able to buy duration and the craft would
+flatten.** **And a single-target, single-use intercept is a real decision at the table — you have to guess
+which hit matters, which is what makes a tank interesting rather than automatic.**
 
 ## §5 — ACCEPTANCE
 
@@ -90,8 +123,10 @@ behaves as r2: you carry the degraded version.**
 2. ⛔ **r1's protection is consumed by one condition.** r2's runs for its duration.
 3. **While r2 runs, the interceptor's `targetResist` is measurably higher**, and the `threshold` arithmetic
    uses it.
-4. ⛔ **r3: resist succeeds → the condition resolves against the SOURCE. Resist fails → the interceptor
-   carries the degraded condition.**
+4. ⛔ **r3 reflects BY DEGREE per §4.2** — crit sends the original boosted, success sends the original,
+   partial sends the degraded, failure reflects nothing and the interceptor carries it.
+6. **Two interceptors on one ally: the higher `targetResist` catches it**, ties to last-declared.
+7. ⚠️ **No consent step anywhere** — declaring the protection is the whole action.
 5. **A GM receipt says who caught what, and for whom.** ⚠️ **A tank mechanic nobody can see is a tank
    mechanic nobody thanks.**
 

@@ -12003,7 +12003,7 @@ function playerBattleSkills() {
       out.push({ id: a.abilityId, function: fn, tier: a.level || 1, attribute: def.attribute || "practical", name: def.name || a.abilityId, energyCost: effectiveEnergyCost(def, character, CONTENT.rules), multi: fns.length > 1,
         ...(() => { const menu = capabilityMenu(def, a.level || 1, { cfg: CONTENT.rules?.energy });
           return menu.tiers.length > 1
-            ? { tiers: menu.tiers.map(t => ({ rank: t.rank, does: t.does.slice(0, 160), cost: t.cost })) }
+            ? { tiers: menu.tiers.map(t => ({ rank: t.rank, does: smartClamp(t.does, 160), cost: t.cost })) }
             : {}; })() });
     }
   }

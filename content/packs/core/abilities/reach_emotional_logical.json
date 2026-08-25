@@ -1581,14 +1581,14 @@
     "hinder"
    ],
    "narrationHints": "Not a scream and not a song. A sound with a death inside it that arrives in the chest rather than the ears, and goes through stone as easily as air. People who hear it from three streets away stop walking without knowing why.",
-   "description": "A wail with a death in it. ⛔ YOU CHOOSE WHO HEARS IT AS A WAIL AND WHO HEARS IT AS GRIEF — those you name stop, and at its height they drop. Everyone else present hears a Threnodist mourning and nothing more.",
-   "notFor": "Anything that cannot feel — constructs, the set dead, a warded mind. Secrecy: it is the loudest thing in the Valley. ⚠️ And it is not a blast — it goes where you send it.",
+   "description": "A wail with a death in it — but what travels is not the sound. ⛔ THE GRIEF ITSELF ARRIVES IN ANYONE NEAR ENOUGH TO FEEL IT, and you decide who that is. Those you choose stop; at its height they drop. Everyone else hears a Threnodist mourning and feels only what mourning usually costs a bystander.",
+   "notFor": "Anything that cannot feel — constructs, the set dead, a warded mind. Secrecy. ⚠️ AND IT IS NOT SOUND: walls, corners and stopped ears are no defence, and covering your head does nothing.",
    "tree": [
     {
      "rank": 1,
      "name": "Wail",
-     "grants": "⛔ NAME WHO HEARS IT — about six within earshot — AND THEY LOSE THEIR NEXT ACTION. Weapons lower, a charge breaks, a pursuit stalls, not because they chose to stop but because for a moment there is nothing in them that can continue. It passes through walls and around corners; there is no cover from it.",
-     "cannot": "⛔ ONLY WHO YOU NAME. Those you do not choose hear a wail and are untouched. Anything that cannot feel is unaffected, and those who lose the action act normally after.",
+     "grants": "⛔ NAME WHO IT REACHES — about six near you — AND THEY LOSE THEIR NEXT ACTION. Weapons lower, a charge breaks, a pursuit stalls, not because they chose to stop but because for a moment there is nothing in them that can continue. ⚠️ IT IS NOT A SOUND: it goes through walls and around corners because it is not travelling as noise.",
+     "cannot": "⛔ ONLY WHO YOU NAME. Those you do not choose feel a Threnodist grieving and are otherwise untouched. Anything that cannot feel is unaffected, and those who lose the action act normally after.",
      "functions": [
       "strike",
       "hinder"
@@ -1630,8 +1630,8 @@
     {
      "rank": 3,
      "name": "Oblivion Pulse",
-     "grants": "⛔ ABOUT SIX OF THOSE YOU NAME DROP UNCONSCIOUS — a knot of guards, a hall, a street's worth of pursuit — and any who resist lose their next action instead. ⚠️ THE GM CALLS WHO IS IN EARSHOT; you call who is a target.",
-     "cannot": "⛔ THE UNNAMED ARE UNAFFECTED — allies standing beside a target hear a Threnodist grieving and nothing else. Anything that cannot feel is unaffected.",
+     "grants": "⛔ THE PULSE. Not a chosen few — EVERYONE NEAR YOU THAT YOU WANT AFFECTED drops unconscious: a knot of guards, a hall, a street, the whole of a room and the rooms next to it. ⚠️ There is no number here. Anyone exposed to it whom you choose is a target, and any who resist lose their next action instead.",
+     "cannot": "⛔ THE UNCHOSEN ARE UNTOUCHED however close they stand — allies in the middle of it feel a Threnodist grieving and nothing else. ⚠️ Anything that cannot feel is unaffected, and exposure is the limit: what the grief cannot reach, it cannot take.",
      "functions": [
       "strike",
       "hinder"
@@ -1639,15 +1639,14 @@
      "gains": "broaden",
      "harmRung": "incapacitating",
      "gainAxes": [
-      "targets",
-      "scope"
+      "scope",
+      "targets"
      ],
      "imposes": {
       "condition": "unconscious",
       "onCrit": "incapacitated",
       "degradesTo": "action_loss",
-      "resist": "mental",
-      "targets": 6
+      "resist": "mental"
      },
      "_imposes": "⛔ SNG-513. Everyone you choose. Those spared lose their next action."
     }
@@ -1679,7 +1678,8 @@
      "success": "The cry goes further than the room and everything in it that can feel goes down.",
      "failure": "It comes out as grief and nothing else. Everyone hears exactly how much you have lost."
     },
-    "note": "⛔ TARGETS ARE CHOSEN, NEVER CAUGHT. Erik 2026-08-23: 'the player can choose the targets — unchosen targets are not affected.' ⚠️ ABOUT SIX IN EARSHOT AT r1 AND r3, so the GM can make the call rather than count heads; three at r2 for the unconscious. ⛔ RESIST DOES NOT MEAN ESCAPE: a chosen target who resists the unconscious loses their next action instead — r1 still running underneath, which is the additive model."
+    "note": "⛔ TARGETS ARE CHOSEN, NEVER CAUGHT. Erik 2026-08-23: 'the player can choose the targets — unchosen targets are not affected.' ⚠️ r1 IS ABOUT SIX NEAR YOU so the GM can make the call rather than count heads; r2 is three of those for the unconscious. ⛔ r3 IS AN AREA, NOT A COUNT — `area 5` with no target cap, per the corpus convention that an authored `area` with `targets: null` means EVERYONE IN THE ZONE. Erik: 'it was always meant to be everyone near you that you want affected that are exposed to the pulse.' ⚠️ AND IT IS NOT EARSHOT: the carrier is the grief, not the sound, so walls and stopped ears are no defence — EXPOSURE is the limit.",
+    "area": 5
    },
    "intensity": "severe",
    "bounds": [

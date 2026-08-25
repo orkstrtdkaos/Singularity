@@ -164,17 +164,17 @@
 **status:** crit · backlash  
 **ability functions:** strike, hinder
 
-> A wail with a death in it. ⛔ YOU CHOOSE WHO HEARS IT AS A WAIL AND WHO HEARS IT AS GRIEF — those you name stop, and at its height they drop. Everyone else present hears a Threnodist mourning and nothing more.
+> A wail with a death in it — but what travels is not the sound. ⛔ THE GRIEF ITSELF ARRIVES IN ANYONE NEAR ENOUGH TO FEEL IT, and you decide who that is. Those you choose stop; at its height they drop. Everyone else hears a Threnodist mourning and feels only what mourning usually costs a bystander.
 
-**notFor:** Anything that cannot feel — constructs, the set dead, a warded mind. Secrecy: it is the loudest thing in the Valley. ⚠️ And it is not a blast — it goes where you send it.
+**notFor:** Anything that cannot feel — constructs, the set dead, a warded mind. Secrecy. ⚠️ AND IT IS NOT SOUND: walls, corners and stopped ears are no defence, and covering your head does nothing.
 
 ### r1 — Wail
 
 **functions:** strike, hinder · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** damaging · imposes
 
-**grants:** ⛔ NAME WHO HEARS IT — about six within earshot — AND THEY LOSE THEIR NEXT ACTION. Weapons lower, a charge breaks, a pursuit stalls, not because they chose to stop but because for a moment there is nothing in them that can continue. It passes through walls and around corners; there is no cover from it.
+**grants:** ⛔ NAME WHO IT REACHES — about six near you — AND THEY LOSE THEIR NEXT ACTION. Weapons lower, a charge breaks, a pursuit stalls, not because they chose to stop but because for a moment there is nothing in them that can continue. ⚠️ IT IS NOT A SOUND: it goes through walls and around corners because it is not travelling as noise.
 
-**cannot:** ⛔ ONLY WHO YOU NAME. Those you do not choose hear a wail and are untouched. Anything that cannot feel is unaffected, and those who lose the action act normally after.
+**cannot:** ⛔ ONLY WHO YOU NAME. Those you do not choose feel a Threnodist grieving and are otherwise untouched. Anything that cannot feel is unaffected, and those who lose the action act normally after.
 
 ### r2 — Dark Wail
 
@@ -186,11 +186,11 @@
 
 ### r3 — Oblivion Pulse
 
-**functions:** strike, hinder · **gainAxes:** targets, scope · **gains:** broaden · **harm:** incapacitating · imposes
+**functions:** strike, hinder · **gainAxes:** scope, targets · **gains:** broaden · **harm:** incapacitating · imposes
 
-**grants:** ⛔ ABOUT SIX OF THOSE YOU NAME DROP UNCONSCIOUS — a knot of guards, a hall, a street's worth of pursuit — and any who resist lose their next action instead. ⚠️ THE GM CALLS WHO IS IN EARSHOT; you call who is a target.
+**grants:** ⛔ THE PULSE. Not a chosen few — EVERYONE NEAR YOU THAT YOU WANT AFFECTED drops unconscious: a knot of guards, a hall, a street, the whole of a room and the rooms next to it. ⚠️ There is no number here. Anyone exposed to it whom you choose is a target, and any who resist lose their next action instead.
 
-**cannot:** ⛔ THE UNNAMED ARE UNAFFECTED — allies standing beside a target hear a Threnodist grieving and nothing else. Anything that cannot feel is unaffected.
+**cannot:** ⛔ THE UNCHOSEN ARE UNTOUCHED however close they stand — allies in the middle of it feel a Threnodist grieving and nothing else. ⚠️ Anything that cannot feel is unaffected, and exposure is the limit: what the grief cannot reach, it cannot take.
 
 **bounds:** ⛔ ANYTHING THAT CANNOT FEEL IS UNAFFECTED — constructs, the set dead, a mind already closed · ⛔ IT HAS NO COVER. Walls, corners and closed doors do not stop it, and it does not distinguish until r3 · ⚠️ everyone in earshot means EVERYONE — allies included, until you can choose · one round of effect at r1; sustaining it occupies you
 

@@ -658,13 +658,13 @@
 **status:** crit · ward:physical/decay  
 **ability functions:** sustain, resist, heal
 
-> Refuse an ending that has already begun — soak the harm meant for someone and mend a little of it besides.
+> ⛔ REFUSE AN ENDING THAT HAS ALREADY BEGUN. Soak the harm meant for someone, mend a little of it as it lands, and at the last stand between a person and the threshold itself. ⚠️ THE ASHWARDEN'S OTHER HAND: the tradition that reads endings and hastens them also knows how to sit down in front of one.
 
-**notFor:** Healing — nothing is mended; an ending that has already completed; endings that are not physical.
+**notFor:** ⛔ RAISING THE DEAD OR RECOVERING THEM — an ending already completed is Calling Back's work, never this. ⚠️ REPAIR AT REST: this mends WHILE IT IS RUNNING and stops when it stops. And it holds a body against harm — a curse, a working or a wraith's grip is Death-Ward.
 
 ### r1 — Not Yet
 
-**functions:** sustain, resist · **gainAxes:** ⛔ NONE · **gains:** deepen · **harm:** none
+**functions:** sustain, resist · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
 **grants:** ⛔ SOAK 5 ON YOURSELF FOR THE DURATION — every blow that lands is reduced by 5 before it does anything, and what is taken off is gone, not owed. ⚠️ FLAVOUR: a purple mist stands a finger's depth off the skin, and a blade that reaches it slows and arrives shallow.
 
@@ -672,7 +672,7 @@
 
 ### r2 — Stand Between
 
-**functions:** sustain, resist, heal · **gainAxes:** targets, conditions · **gains:** deepen · **harm:** none
+**functions:** sustain, resist, heal · **gainAxes:** targets, conditions · **gains:** broaden · **harm:** none
 
 **grants:** ⛔ EXTEND THE SOAK TO ONE OTHER PERSON YOU HAVE TOUCHED, AND HEAL THEM 1d4 PER ROUND while the tether holds. A mortal wound stops being mortal; they fight, run, or finish the thing. ⚠️ FLAVOUR: a tether of green and purple runs from your hand to their chest, visible in low light, and it thins as they take more.
 
@@ -680,11 +680,11 @@
 
 ### r3 — Palelands Patience
 
-**functions:** sustain, resist, heal · **gainAxes:** scope, duration, targets · **gains:** broaden · **harm:** none
+**functions:** sustain, resist, heal · **gainAxes:** targets, duration, scope · **gains:** broaden · **harm:** none
 
-**grants:** ⛔ SOAK 5 AND 2d4 HEALING PER ROUND ACROSS AS MANY AS YOU CAN NAME. ⚠️ AND ONE PERSON WHOSE ENDING HAS ALREADY BEGUN IS HELD AT THE THRESHOLD: not dead, not recovering, held, for days if you keep the vigil. FLAVOUR: tethers to every one of them, and over the threshold-held the mist stands a hand deep and does not move with the air.
+**grants:** ⛔ SOAK 5 AND 2d4 HEALING PER ROUND ACROSS AS MANY AS YOU CAN NAME. ⚠️ AND ONE PERSON WHOSE ENDING HAS ALREADY BEGUN IS HELD AT THE THRESHOLD: not dead, not recovering, HELD — for days, if you keep the vigil. FLAVOUR: tethers to every one of them, and over the threshold-held the mist stands a hand deep and does not move with the air.
 
-**cannot:** One at the threshold, and holding them occupies you between contests.
+**cannot:** ⛔ ONE AT THE THRESHOLD, AND ONLY ONE — the soak and the mending go as wide as you can name, the holding does not. ⚠️ Holding them occupies you between contests, and it stops their ending WITHOUT UNDOING IT: they are still the person who is dying when you let go.
 
 **bounds:** ⛔ SOAK 5 PER PERSON HELD, six rounds, and it does not stack with itself · ⚠️ HEALING IS 1d4 (r2) OR 2d4 (r3) PER ROUND — deliberately below a dedicated healer: Physician's Tome opens at 2d4, Dawn Surgery reaches 3d4 · you must have touched anyone you hold besides yourself; the tether breaks past a room's distance · ⚠️ an ending already completed is out of reach — that is Calling Back
 

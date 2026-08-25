@@ -1864,8 +1864,8 @@
     "threshold"
    ],
    "narrationHints": "A purple mist stands a finger's depth off the skin, and blades that reach it slow and arrive shallow. Where they are holding someone else, a tether of green and purple runs from hand to chest — visible in low light, and you can see it thin.",
-   "description": "Refuse an ending that has already begun — soak the harm meant for someone and mend a little of it besides.",
-   "notFor": "Healing — nothing is mended; an ending that has already completed; endings that are not physical.",
+   "description": "⛔ REFUSE AN ENDING THAT HAS ALREADY BEGUN. Soak the harm meant for someone, mend a little of it as it lands, and at the last stand between a person and the threshold itself. ⚠️ THE ASHWARDEN'S OTHER HAND: the tradition that reads endings and hastens them also knows how to sit down in front of one.",
+   "notFor": "⛔ RAISING THE DEAD OR RECOVERING THEM — an ending already completed is Calling Back's work, never this. ⚠️ REPAIR AT REST: this mends WHILE IT IS RUNNING and stops when it stops. And it holds a body against harm — a curse, a working or a wraith's grip is Death-Ward.",
    "tree": [
     {
      "rank": 1,
@@ -1876,7 +1876,7 @@
       "sustain",
       "resist"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "none",
      "gainAxes": []
     },
@@ -1890,7 +1890,7 @@
       "resist",
       "heal"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [
       "targets",
@@ -1900,8 +1900,8 @@
     {
      "rank": 3,
      "name": "Palelands Patience",
-     "grants": "⛔ SOAK 5 AND 2d4 HEALING PER ROUND ACROSS AS MANY AS YOU CAN NAME. ⚠️ AND ONE PERSON WHOSE ENDING HAS ALREADY BEGUN IS HELD AT THE THRESHOLD: not dead, not recovering, held, for days if you keep the vigil. FLAVOUR: tethers to every one of them, and over the threshold-held the mist stands a hand deep and does not move with the air.",
-     "cannot": "One at the threshold, and holding them occupies you between contests.",
+     "grants": "⛔ SOAK 5 AND 2d4 HEALING PER ROUND ACROSS AS MANY AS YOU CAN NAME. ⚠️ AND ONE PERSON WHOSE ENDING HAS ALREADY BEGUN IS HELD AT THE THRESHOLD: not dead, not recovering, HELD — for days, if you keep the vigil. FLAVOUR: tethers to every one of them, and over the threshold-held the mist stands a hand deep and does not move with the air.",
+     "cannot": "⛔ ONE AT THE THRESHOLD, AND ONLY ONE — the soak and the mending go as wide as you can name, the holding does not. ⚠️ Holding them occupies you between contests, and it stops their ending WITHOUT UNDOING IT: they are still the person who is dying when you let go.",
      "functions": [
       "sustain",
       "resist",
@@ -1910,9 +1910,9 @@
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [
-      "scope",
+      "targets",
       "duration",
-      "targets"
+      "scope"
      ]
     }
    ],
@@ -1957,7 +1957,8 @@
       "text": "You spend it and they go anyway, and you were holding on when it happened.",
       "chance": -2
      }
-    }
+    },
+    "note": "T-II guard. ⛔ THE WARD IS `physical` AND `decay` — a body's own failing and the rot that hastens it. ⚠️ A CURSE, A WORKING OR THE RESTLESS DEAD ARE DEATH-WARD'S, not this. ⛔ HEALING IS LIVE: `mechanic.dice` on a healing shape is read (verified by probe, CCODE-242), so 1d4 at r2 and 2d4 at r3 resolve for real. ⚠️ THE THRESHOLD-HOLD AT r3 PAIRS WITH `calling_back`: that craft walks someone BACK along Threshold -> Near Dark -> Deep Dark; this one stops them WALKING FURTHER IN. Held is not saved."
    },
    "rankDeltas": [
     {
@@ -2049,7 +2050,8 @@
    "_reauthored": "⛔ SNG-493. Erik: 'Kept Breath needs a FLAVOR SHIFT. You authored this, and many skills, as very conservative — IT CAN'T DO MAGIC BUT BARELY LETS YOU GET BY type skill. THERE'S NO FANTASY AND MAGIC IN THAT.'\n⚠️ HE IS RIGHT. The old text was 'the body's minimum, maintained by craft — not healing, not protection from curses, functional NOT WELL' — a skill defined by what it cannot do, with three bounds and no wonder. ⛔ IT ALSO SAT AT mag4 e4 AS ONE OF THE CHEAPEST THINGS IN THE TRADITION, which is what a designer does when they do not believe in a craft.\n⛔ THE FANTASY VERSION IS THE ASHWARDEN THESIS TAKEN SERIOUSLY: THEY TEND ENDINGS, SO THEY CAN REFUSE ONE. A man fights with a spear through him because an Ashwarden has declined to let that finish. The cost is unchanged and stated once.",
    "_mechanics": "⛔ SNG-493, FINAL. Erik: 'Do we really need tempHealth or is that functionally the same as Soak?'\n⚠️ NOT THE SAME — soak is PER-HIT REDUCTION FOR A DURATION, temp health is a ONE-SHOT POOL — but ⛔ SOAK IS STRONGER, ALREADY WIRED, AND ALREADY SCALED, so the new field was unnecessary. 18 abilities carry `soak`, values 2-6, and CCode confirms it is read.\n⛔ I INVENTED A MECHANIC WITHOUT CHECKING WHETHER AN EXISTING ONE COVERED IT — the same failure as specifying a sense slot that was already shipped.\n⚠️ SOAK 5 chosen against the corpus band: Death-Ward 5, Shielding Word 5, Unmoving Mind 5. Kept Breath sits with the other serious protective crafts rather than above them.",
    "_r1fix": "⚠️ SNG-493. Erik: 'update the r1 text — it ASSUMES YOU ALREADY HAVE A WOUND when this would be something that would STOP A WOUND FROM DAMAGING YOU.' ⛔ Correct: soak is prevention, so the flavour had to move from the wound to the skin. Was 'the mist stands off the wound and the blood does not leave it'.",
-   "_wardTypes": "⛔ SNG-512. ⛔ Refusing an ending answers the ending — decay AND the blow. ⚠️ This is why it is the tradition's protective craft.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ Refusing an ending answers the ending — decay AND the blow. ⚠️ This is why it is the tradition's protective craft.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_notForCorrected_20260823": "⛔ ERIK 2026-08-23. The `notFor` read 'Healing — nothing is mended' and 'endings that are not physical' ON A CRAFT THAT DECLARES `heal` AND WARDS `decay` and does 1d4/2d4 per round. ⚠️ It was left over from before the healing was added and flatly contradicted the craft — the kind of stale line a reader trusts because it sits in a constraint field. ⛔ ALSO FIXED: r1 declared `deepen` while BEING the base (same error as keening r1), and r2 declared `deepen` while adding a second PERSON. ⚠️ ONE HELD AT THE THRESHOLD STAYS SINGULAR — Erik: 'this skill is mostly for soak and healing, but at r3 you get to do a bit more.' The cap is the point, not an oversight."
   },
   {
    "id": "green_claim",

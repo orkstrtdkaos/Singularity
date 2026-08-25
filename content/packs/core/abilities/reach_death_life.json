@@ -3587,7 +3587,7 @@
    "name": "Kept Vigil",
    "levelReq": 1,
    "energyCost": 4,
-   "powerSystem": "metaphysical",
+   "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
     "death_life": -0.5
@@ -3596,8 +3596,8 @@
     "sustain",
     "ward"
    ],
-   "narrationHints": "The thing stands at the edge it was already standing on, and stops moving. The rope does not part, the wound does not turn, the truce does not break. ⚠️ NOBODY IS HOLDING IT — IT IS SIMPLY HELD, which is why a Palelands sickroom is so quiet.",
-   "description": "Set a hold on one failing thing and it stays exactly where it is — a wound that would turn septic, a strained beam, a dying fire, a person's last hours. It does not improve and it does not worsen. ⛔ THE HOLD KEEPS ITSELF: you lay it and walk away, and it lasts as long as the rank allows. The Ashwardens' keeping-craft, and the mirror of their hastening one.",
+   "narrationHints": "The thing stands at the edge it was already standing on, and stops moving. The rope does not part, the wound does not turn, the truce does not break. ⚠️ NOBODY IS HOLDING IT — IT IS SIMPLY HELD, which is why a Palelands sickroom is so quiet. ⛔ AND IT WORKS ANYWHERE: on a mountain, in a dense hollow, in the Thinning. The machinery does not care about ground.",
+   "description": "Set a hold on one failing thing and it stays exactly where it is — a wound that would turn septic, a strained beam, a dying fire, a person's last hours. ⛔ MAINTENANCE MACHINERY, SET TO KEEP ONE STATE: the same structured nanite that keeps a Seraph from ageing, turned to holding a wound where it is instead of holding a body where it was. It does not improve and it does not worsen, and it keeps itself — you lay it and walk away.",
    "notFor": "Reversing anything — what is ending still ends when the hold lapses. Healing. Anything not already at its edge.",
    "tree": [
     {
@@ -3670,7 +3670,7 @@
     "wardTypes": [
      "decay"
     ],
-    "note": "T-I sustain. ⛔ THE HOLD IS AUTONOMOUS — set it and leave; `duration 12` is how long it keeps ITSELF, not how long you sit there. Erik 2026-08-23: 'I don't want this to require you to stay present.' ⚠️ NO SOURCE CHANGE WAS NEEDED and I checked rather than assumed: autonomy is a CRAFT property, not a source one — metaphysical uses the `autonomy` axis at 9% against ordered_nanite's 14%, and TWO ASHWARDEN CRAFTS ALREADY RUN UNATTENDED (`palework`, `set_hand`). ⛔ `magnitude 5, duration 12, scope 1` — twelve hours is the BASE, so r2 buys SCOPE and stretches duration; r3 buys QUALITY (holding what should already be over) and duration. ⚠️ r3's axis was `targets`, which contradicted both `bounds` and `notFor` — its grants never mention more than one thing."
+    "note": "T-I sustain. ⛔ ORDERED NANITE, NOT METAPHYSICAL (Erik 2026-08-23). ⚠️ MY FIRST DEFENCE OF `metaphysical` WAS A STATISTIC, NOT A REASON — I measured that autonomy does not correlate with source and called the question closed. Erik asked the fictional question instead: what holds a hull for twelve hours after you have gone home? ⛔ UNATTENDED WILL IS NEARLY A CONTRADICTION; MAINTENANCE MACHINERY IS THE OBVIOUS ANSWER. Canon (`lore/power_systems.md`): Seraphic craft IS structured nanite, and the same maintenance that keeps a Seraph from ageing is what holds a wound at its state here. ⚠️ AND THE SOURCE'S OWN RULE FITS THE CRAFT EXACTLY — nanite 'answers to CONDITION AND SUPPLY, not to ground… the one source with NO best-ground at all', which is why a hold set and abandoned works the same on a mountain and in a dense hollow. ⛔ `magnitude 5, duration 12, scope 1` — twelve hours is the BASE; r2 buys scope and duration, r3 buys quality and duration."
    },
    "intensity": {
     "conserve": "let it lapse a little early and keep the difference",
@@ -3698,7 +3698,8 @@
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_correctedByErik_20260823": "⛔ 2026-08-23. (1) harmRung was `incapacitating` over three `none` ranks — the FOURTH instance of that inversion in Death. (2) ⛔ r2's 'you are spent afterward in a way sleep does not entirely fix' CUT: a narrative debt in a cost field, the fourth I have written this session. ENERGY IS THE COST. What replaced it is a real limit — it is still ONE thing, only a bigger one, and nothing you hold gets closer to being fixed. (3) ⚠️ r2 and r3 declared no axes; reading `plainly` and `mechanic` showed r2 was not buying TIME at all (12 hours is the base) — it buys SCOPE. That only surfaced because Erik asked to see the full record rather than my summary.",
-   "_autonomous_20260823": "⛔ ERIK 2026-08-23: the craft no longer requires attendance. Every 'while you hold it' / 'you can do almost nothing else' clause is gone from description, hints, bounds and all three ranks. ⚠️ `intensity.conserve` was 'hold a moment longer', which assumed a person present — now 'let it lapse a little early and keep the difference'. ⛔ ALSO: challengeTypes were PUZZLE/SOCIAL for a craft about a wound or a beam — now ENDURANCE/INVESTIGATION; and `plainly` restated the attendance model and has been corrected."
+   "_autonomous_20260823": "⛔ ERIK 2026-08-23: the craft no longer requires attendance. Every 'while you hold it' / 'you can do almost nothing else' clause is gone from description, hints, bounds and all three ranks. ⚠️ `intensity.conserve` was 'hold a moment longer', which assumed a person present — now 'let it lapse a little early and keep the difference'. ⛔ ALSO: challengeTypes were PUZZLE/SOCIAL for a craft about a wound or a beam — now ENDURANCE/INVESTIGATION; and `plainly` restated the attendance model and has been corrected.",
+   "_sourceChanged_20260823": "⛔ ERIK 2026-08-23: 'the maintenance nanites (the same ones seraphs use to be immortal) are used to hold the wound and body at the state it's in, just like the hull. I don't think there's any canon problem with death having ordered nanite powered skills.' ⚠️ ASHWARDEN'S MIX HAD NO NANITE AT ALL (metaphysical .85 / precursor .15) — this craft is the tradition's first ordered-nanite carrier and the mix is updated to admit it. ⛔ A DISTRIBUTION HAS A MEAN AND DEVIATIONS (Erik, earlier today); this is a deviation, and `perAbilityOverrides` is what it is for."
   },
   {
    "id": "true_account",

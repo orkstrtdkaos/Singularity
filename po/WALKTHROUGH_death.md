@@ -198,11 +198,11 @@
 
 ## 6. Kept Vigil  ·  `kept_vigil`
 
-**L1 · e4 · ashwarden · metaphysical · shape `sustain` · harm `none`**  
+**L1 · e4 · ashwarden · ordered_nanite · shape `sustain` · harm `none`**  
 **status:** ⚠️ no crit · ward:decay  
 **ability functions:** sustain, ward
 
-> Set a hold on one failing thing and it stays exactly where it is — a wound that would turn septic, a strained beam, a dying fire, a person's last hours. It does not improve and it does not worsen. ⛔ THE HOLD KEEPS ITSELF: you lay it and walk away, and it lasts as long as the rank allows. The Ashwardens' keeping-craft, and the mirror of their hastening one.
+> Set a hold on one failing thing and it stays exactly where it is — a wound that would turn septic, a strained beam, a dying fire, a person's last hours. ⛔ MAINTENANCE MACHINERY, SET TO KEEP ONE STATE: the same structured nanite that keeps a Seraph from ageing, turned to holding a wound where it is instead of holding a body where it was. It does not improve and it does not worsen, and it keeps itself — you lay it and walk away.
 
 **notFor:** Reversing anything — what is ending still ends when the hold lapses. Healing. Anything not already at its edge.
 

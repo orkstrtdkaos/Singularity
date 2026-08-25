@@ -202,35 +202,35 @@
 **status:** ⚠️ no crit · ward:decay  
 **ability functions:** sustain, ward
 
-> Hold one failing thing exactly where it is — a wound that would turn septic, a strained beam, a dying fire, a person's last hours. It does not improve and it does not worsen. The Ashwardens' keeping-craft, and the mirror of their hastening one.
+> Set a hold on one failing thing and it stays exactly where it is — a wound that would turn septic, a strained beam, a dying fire, a person's last hours. It does not improve and it does not worsen. ⛔ THE HOLD KEEPS ITSELF: you lay it and walk away, and it lasts as long as the rank allows. The Ashwardens' keeping-craft, and the mirror of their hastening one.
 
-**notFor:** Reversing anything (what is ending still ends when you stop); attending two things at once; healing; anything not already at its edge.
+**notFor:** Reversing anything — what is ending still ends when the hold lapses. Healing. Anything not already at its edge.
 
 ### r1 — Held Edge
 
 **functions:** sustain, ward · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** Hold one failing thing where it is — a wound that would turn septic, a strained beam, a dying fire, a person's last hours. It does not improve. It does not get worse.
+**grants:** Lay a hold on one failing thing and leave it. About twelve hours: a wound that would turn septic, a strained beam, a dying fire, a person's last hours. It does not improve. It does not get worse.
 
-**cannot:** It HOLDS, it does not mend. The moment you stop attending, it resumes exactly where it was. ONE THING, and you can do almost nothing else while you hold it.
+**cannot:** It HOLDS, it does not mend. When the hold lapses it resumes exactly where it was. One thing, and you must be able to touch it to set the hold.
 
 ### r2 — Long Watch
 
 **functions:** sustain, ward, resist · **gainAxes:** scope, duration · **gains:** broaden · **harm:** none
 
-**grants:** ⛔ HOLD SOMETHING LARGE, OR HOLD IT LONGER — a breach, a flooding hull, a fever, a night and then the day after it. ⚠️ Enough time for someone else to arrive with the actual answer.
+**grants:** ⛔ HOLD SOMETHING LARGE, AND HOLD IT LONGER — a breach, a flooding hull, a fever; a night and the day after it. ⚠️ Enough time for someone else to arrive with the actual answer.
 
-**cannot:** ⛔ IT IS STILL ONE THING, only a bigger one — a hull, not the hull and the crew. ⚠️ AND YOU HAVE BOUGHT TIME, WHICH IS ONLY WORTH WHAT SOMEONE DOES WITH IT: nothing you hold gets closer to being fixed while you hold it.
+**cannot:** ⛔ IT IS STILL ONE THING, only a bigger one — a hull, not the hull and the crew. ⚠️ Nothing you hold gets closer to being fixed while it is held.
 
 ### r3 — Unfinished Ending
 
-**functions:** sustain, ward, resist · **gainAxes:** targets, duration · **gains:** deepen · **harm:** none
+**functions:** sustain, ward, resist · **gainAxes:** quality, duration · **gains:** deepen · **harm:** none
 
-**grants:** Hold something that should already be over — a person past saving, a structure past standing — for as long as you can bear to.
+**grants:** Hold something that should already be over — a person past saving, a structure past standing — and it stays for as long as you are willing to let it.
 
 **cannot:** ⛔ THIS IS THE CRAFT ASHWARDENS ARGUE ABOUT. Holding an ending open is not mercy by default; sometimes it is only refusal, and THE THING HELD KNOWS THE DIFFERENCE — a person held past saving can tell you which one this is, and may ask you to stop. ⚠️ The Hollow think it obscene. It still HOLDS and never mends: what you are keeping is the moment, not the person.
 
-**bounds:** it HOLDS, it does not mend · ONE THING, and you can do little else · when you stop, it resumes exactly where it was
+**bounds:** it HOLDS, it does not mend · ONE THING PER HOLD, however large that thing is · when it lapses, the failing resumes exactly where it was — you have not bought progress, only time
 
 ---
 

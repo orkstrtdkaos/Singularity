@@ -3596,15 +3596,15 @@
     "sustain",
     "ward"
    ],
-   "narrationHints": "You hold a thing at the edge it is already standing on. Not healing, not repair — HOLDING. The rope does not part, the wound does not turn, the truce does not break, for exactly as long as you attend it and no longer.",
-   "description": "Hold one failing thing exactly where it is — a wound that would turn septic, a strained beam, a dying fire, a person's last hours. It does not improve and it does not worsen. The Ashwardens' keeping-craft, and the mirror of their hastening one.",
-   "notFor": "Reversing anything (what is ending still ends when you stop); attending two things at once; healing; anything not already at its edge.",
+   "narrationHints": "The thing stands at the edge it was already standing on, and stops moving. The rope does not part, the wound does not turn, the truce does not break. ⚠️ NOBODY IS HOLDING IT — IT IS SIMPLY HELD, which is why a Palelands sickroom is so quiet.",
+   "description": "Set a hold on one failing thing and it stays exactly where it is — a wound that would turn septic, a strained beam, a dying fire, a person's last hours. It does not improve and it does not worsen. ⛔ THE HOLD KEEPS ITSELF: you lay it and walk away, and it lasts as long as the rank allows. The Ashwardens' keeping-craft, and the mirror of their hastening one.",
+   "notFor": "Reversing anything — what is ending still ends when the hold lapses. Healing. Anything not already at its edge.",
    "tree": [
     {
      "rank": 1,
      "name": "Held Edge",
-     "grants": "Hold one failing thing where it is — a wound that would turn septic, a strained beam, a dying fire, a person's last hours. It does not improve. It does not get worse.",
-     "cannot": "It HOLDS, it does not mend. The moment you stop attending, it resumes exactly where it was. ONE THING, and you can do almost nothing else while you hold it.",
+     "grants": "Lay a hold on one failing thing and leave it. About twelve hours: a wound that would turn septic, a strained beam, a dying fire, a person's last hours. It does not improve. It does not get worse.",
+     "cannot": "It HOLDS, it does not mend. When the hold lapses it resumes exactly where it was. One thing, and you must be able to touch it to set the hold.",
      "functions": [
       "sustain",
       "ward"
@@ -3617,8 +3617,8 @@
     {
      "rank": 2,
      "name": "Long Watch",
-     "grants": "⛔ HOLD SOMETHING LARGE, OR HOLD IT LONGER — a breach, a flooding hull, a fever, a night and then the day after it. ⚠️ Enough time for someone else to arrive with the actual answer.",
-     "cannot": "⛔ IT IS STILL ONE THING, only a bigger one — a hull, not the hull and the crew. ⚠️ AND YOU HAVE BOUGHT TIME, WHICH IS ONLY WORTH WHAT SOMEONE DOES WITH IT: nothing you hold gets closer to being fixed while you hold it.",
+     "grants": "⛔ HOLD SOMETHING LARGE, AND HOLD IT LONGER — a breach, a flooding hull, a fever; a night and the day after it. ⚠️ Enough time for someone else to arrive with the actual answer.",
+     "cannot": "⛔ IT IS STILL ONE THING, only a bigger one — a hull, not the hull and the crew. ⚠️ Nothing you hold gets closer to being fixed while it is held.",
      "functions": [
       "sustain",
       "ward",
@@ -3635,7 +3635,7 @@
     {
      "rank": 3,
      "name": "Unfinished Ending",
-     "grants": "Hold something that should already be over — a person past saving, a structure past standing — for as long as you can bear to.",
+     "grants": "Hold something that should already be over — a person past saving, a structure past standing — and it stays for as long as you are willing to let it.",
      "cannot": "⛔ THIS IS THE CRAFT ASHWARDENS ARGUE ABOUT. Holding an ending open is not mercy by default; sometimes it is only refusal, and THE THING HELD KNOWS THE DIFFERENCE — a person held past saving can tell you which one this is, and may ask you to stop. ⚠️ The Hollow think it obscene. It still HOLDS and never mends: what you are keeping is the moment, not the person.",
      "functions": [
       "sustain",
@@ -3646,14 +3646,14 @@
      "harmRung": "none",
      "_nameWas": "The Unfinished Ending",
      "gainAxes": [
-      "targets",
+      "quality",
       "duration"
      ]
     }
    ],
    "challengeTypes": [
-    "PUZZLE",
-    "SOCIAL"
+    "ENDURANCE",
+    "INVESTIGATION"
    ],
    "tradition": "ashwarden",
    "nativeOrCombination": "native",
@@ -3670,10 +3670,10 @@
     "wardTypes": [
      "decay"
     ],
-    "note": "T-I sustain. ⛔ `magnitude 5, duration 12, scope 1` — the BASE is already about twelve hours on one thing, so r2 does NOT buy a night; a night is r1. ⚠️ r2 BUYS SCOPE (something large) and stretches the duration past it; r3 buys TARGETS (more than one held) and the willingness to hold what should already be over. ⛔ `intensity.surge` already carries r3's theme — 'sometimes it is only refusal, and the thing held knows' — so the argument the Ashwardens have is wired into the craft's own surge, not just its prose."
+    "note": "T-I sustain. ⛔ THE HOLD IS AUTONOMOUS — set it and leave; `duration 12` is how long it keeps ITSELF, not how long you sit there. Erik 2026-08-23: 'I don't want this to require you to stay present.' ⚠️ NO SOURCE CHANGE WAS NEEDED and I checked rather than assumed: autonomy is a CRAFT property, not a source one — metaphysical uses the `autonomy` axis at 9% against ordered_nanite's 14%, and TWO ASHWARDEN CRAFTS ALREADY RUN UNATTENDED (`palework`, `set_hand`). ⛔ `magnitude 5, duration 12, scope 1` — twelve hours is the BASE, so r2 buys SCOPE and stretches duration; r3 buys QUALITY (holding what should already be over) and duration. ⚠️ r3's axis was `targets`, which contradicted both `bounds` and `notFor` — its grants never mention more than one thing."
    },
    "intensity": {
-    "conserve": "hold a moment longer",
+    "conserve": "let it lapse a little early and keep the difference",
     "surge": "hold the unfinished ending; SOMETIMES IT IS ONLY REFUSAL, and the thing held knows"
    },
    "bounds": [
@@ -3682,22 +3682,23 @@
      "class": "hard"
     },
     {
-     "text": "ONE THING, and you can do little else",
+     "text": "ONE THING PER HOLD, however large that thing is",
      "class": "hard"
     },
     {
-     "text": "when you stop, it resumes exactly where it was",
+     "text": "when it lapses, the failing resumes exactly where it was — you have not bought progress, only time",
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/social action that holds a failing thing at its edge. Rated 5 of 10 on one target for about twelve hours.",
+   "plainly": "An endurance/investigation action that sets a hold on a failing thing at its edge. Rated 5 of 10 on one target for about twelve hours, and it runs without you.",
    "_descriptionWas": "The Ashwardens' keeping-craft, and the mirror of their hastening one. They tend endings, which means they also know precisely how to postpone one.",
    "_nameWas": "The Kept Vigil",
    "_idWas": "the_kept_vigil",
    "_wardTypes": "⛔ SNG-512. ⛔ Holding a failing thing where it is answers the failing — the second decay-ward.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_correctedByErik_20260823": "⛔ 2026-08-23. (1) harmRung was `incapacitating` over three `none` ranks — the FOURTH instance of that inversion in Death. (2) ⛔ r2's 'you are spent afterward in a way sleep does not entirely fix' CUT: a narrative debt in a cost field, the fourth I have written this session. ENERGY IS THE COST. What replaced it is a real limit — it is still ONE thing, only a bigger one, and nothing you hold gets closer to being fixed. (3) ⚠️ r2 and r3 declared no axes; reading `plainly` and `mechanic` showed r2 was not buying TIME at all (12 hours is the base) — it buys SCOPE. That only surfaced because Erik asked to see the full record rather than my summary."
+   "_correctedByErik_20260823": "⛔ 2026-08-23. (1) harmRung was `incapacitating` over three `none` ranks — the FOURTH instance of that inversion in Death. (2) ⛔ r2's 'you are spent afterward in a way sleep does not entirely fix' CUT: a narrative debt in a cost field, the fourth I have written this session. ENERGY IS THE COST. What replaced it is a real limit — it is still ONE thing, only a bigger one, and nothing you hold gets closer to being fixed. (3) ⚠️ r2 and r3 declared no axes; reading `plainly` and `mechanic` showed r2 was not buying TIME at all (12 hours is the base) — it buys SCOPE. That only surfaced because Erik asked to see the full record rather than my summary.",
+   "_autonomous_20260823": "⛔ ERIK 2026-08-23: the craft no longer requires attendance. Every 'while you hold it' / 'you can do almost nothing else' clause is gone from description, hints, bounds and all three ranks. ⚠️ `intensity.conserve` was 'hold a moment longer', which assumed a person present — now 'let it lapse a little early and keep the difference'. ⛔ ALSO: challengeTypes were PUZZLE/SOCIAL for a craft about a wound or a beam — now ENDURANCE/INVESTIGATION; and `plainly` restated the attendance model and has been corrected."
   },
   {
    "id": "true_account",

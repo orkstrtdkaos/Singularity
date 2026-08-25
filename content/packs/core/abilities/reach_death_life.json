@@ -156,8 +156,8 @@
     "still"
    ],
    "narrationHints": "No one asks who they are. Someone moves a chair for them, and the woman who has told the constable nothing tells them everything, because they are the person who will be handling her husband.",
-   "description": "The burying trade, practised. You are the one who handles a death — which gets you through doors, into confidences, and leaves nothing behind for anyone to call up.",
-   "notFor": "Anywhere there is no death or dying; preventing an ending; authority over anything except the death itself.",
+   "description": "⛔ THE BURYING TRADE, PRACTISED — AND IT IS NECROMANCY. Handling a death properly means knowing what a body still holds, what can be taken out of it, and how to shut that door behind you. ⚠️ THE STANDING IS THE OTHER HALF: you are the one who handles the death, which gets you through doors, into confidences, and leaves nothing behind for anyone else to call up. The trade is how an Ashwarden carries the craft in daylight, not a substitute for it.",
+   "notFor": "Anywhere there is no death or dying. Preventing an ending. Authority over anything except the death itself — ⚠️ this is a professional's standing and a necromancer's handling, never a magistrate's writ.",
    "tree": [
     {
      "rank": 1,
@@ -167,7 +167,7 @@
      "functions": [
       "persuade"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "none",
      "gainAxes": []
     },
@@ -175,7 +175,7 @@
      "rank": 2,
      "name": "Called For",
      "grants": "⛔ YOU ARE SENT FOR RATHER THAN ADMITTED. Word travels ahead of you, doors are open before you arrive, and people tell you things they have told no one. A body you have handled properly cannot be set to work, questioned, or drawn down.",
-     "cannot": "⚠️ Standing is regional and earned — somewhere you have handled a death badly, none of this works. One body per handling.",
+     "cannot": "⛔ STANDING IS REGIONAL AND EARNED. Somewhere you have handled a death badly the work is HARD (-15) — people still send for you, they are simply slower to open the door and quicker to watch your hands. ⚠️ One body per handling, and the ward holds only what you handled yourself.",
      "functions": [
       "persuade",
       "soothe",
@@ -185,7 +185,8 @@
      "harmRung": "none",
      "gainAxes": [
       "range",
-      "targets"
+      "targets",
+      "conditions"
      ],
      "_grantsWas_SNG510": "⚠️ ADDS REACH AND REPUTATION. You are sent for rather than admitted — word travels ahead of you, doors are open before you arrive, and people tell you things they have told no one, because telling the person who buries is not the same as telling a stranger. ⛔ AND A BODY YOU HAVE HANDLED PROPERLY LEAVES NOTHING TO BE CALLED FROM: it cannot be set to work, questioned, or drawn down."
     },
@@ -200,7 +201,7 @@
       "command",
       "ward"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [
       "scope",
@@ -220,7 +221,7 @@
     "INVESTIGATE"
    ],
    "tradition": "ashwarden",
-   "harmRung": "lethal",
+   "harmRung": "none",
    "nativeOrCombination": "native",
    "shape": "setup",
    "operativeAxis": "death_life",
@@ -231,7 +232,8 @@
     "crit": {
      "success": "They tell you the thing they had not told the constable, and then the thing they had not told themselves.",
      "failure": "You handle it wrong in front of the family, and Greyhearth will hear."
-    }
+    },
+    "note": "⛔ THE r2 WARD IS THE TRADITION'S COUNTER TO ITS OWN WORK — a body handled properly cannot be set to work, questioned or drawn down, which answers `ask_the_dead`, `calling_back` and `set_hand`. ⚠️ ERIK 2026-08-23: the three wards in Death are DELIBERATELY DIFFERENT ROUTES to the same protection — `names_of_the_lost` wards a NAME, `death_ward` wards a PLACE, `palework` wards a BODY YOU HANDLED. ⛔ That is a braid surface, not an overlap: Palework plus another craft reaches a body you did NOT handle."
    },
    "rankDeltas": [
     {
@@ -348,7 +350,8 @@
     }
    ],
    "_rebuilt": "⛔ SNG-495. PALEWORK REBUILT AS THE TRADE, NOT THE MYSTERY. Erik: 'To me it's the basics of the GREYHEARTH type of work — not as flashy as necromancy, but similar results caused.'\n⚠️ WHY THE OLD ONE HAD TO GO: five of its six pieces were already elsewhere. 'Read how something died' is True Account. 'Halt a spreading rot' is Wither r2, verbatim. 'Grant endings at scale' is Hastened Grey r3. 'Grant true rest to what cannot find it' is Death-Ward r1. ⛔ AND DEATHSENSE'S OWN OLD TEXT SAID 'for what has already finished, PALEWORK reads the evidence' — the reading half was redundant before this audit began.\n⛔ AND MY FIRST REPLACEMENT FAILED THE SOP: 'ease a passing / prevent a raising / make ground finished' needs a dying friend or an enemy necromancer, which is §32.11 Q3 — a counter to a specific enemy type is not a skill.\n⚠️ WHAT AN ASHWARDEN ACTUALLY HAS THAT A PLAYER WANTS IS THAT NOBODY STOPS THE PERSON WHO CAME FOR THE BODY. ⛔ IT ALSO OPENS DEATH'S SOCIAL COLUMN — 28 skills, twelve of them about grief, and zero social verbs before this.",
-   "_attendedEnd": "⚠️ SNG-495 CORRECTED. Erik: 'I don't want to mix Marrow's taught skill into Palework. I don't completely mind that Marrow can teach the same EFFECT as Palework's r2, but KEEP IT AS CALLED FOR for Palework.' ⛔ r2 is Called For again; the reading half is out entirely, and Palework is now purely the trade."
+   "_attendedEnd": "⚠️ SNG-495 CORRECTED. Erik: 'I don't want to mix Marrow's taught skill into Palework. I don't completely mind that Marrow can teach the same EFFECT as Palework's r2, but KEEP IT AS CALLED FOR for Palework.' ⛔ r2 is Called For again; the reading half is out entirely, and Palework is now purely the trade.",
+   "_correctedByErik_20260823": "⛔ ERIK 2026-08-23, THREE THINGS. (1) I described the Ashwardens as 'not necromancy, but being the one who handles the death' — ⚠️ SHORTING THE DOMAIN. Necromancy is woven through most of Death and the trade is how it is CARRIED, not a replacement. Description rewritten to lead with it. (2) 'Somewhere you have handled a death badly, none of this works' was a HARD FAIL; Erik: it should be a difficulty modifier. Now `hard` (-15) per `resolution.difficultyBands` — an authored band, not a number I invented. (3) THE THREE-WARD CLUSTER IS INTENDED: name / place / body-you-handled are different routes, and the gap between them is a BRAID SURFACE — Palework braided with another craft could ward a body you never touched. ⛔ Also: harmRung was `lethal` over three `none` ranks."
   },
   {
    "id": "staunch",

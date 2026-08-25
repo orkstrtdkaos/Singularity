@@ -2,7 +2,7 @@
 
 ⛔ **GENERATED — `node po/matrix_gen.mjs death --detail`. Full rank text, verbatim.**
 
-**33 crafts · 94 ranks** · 2026-08-24
+**33 crafts · 94 ranks** · 2026-08-25
 
 ---
 
@@ -264,11 +264,11 @@
 
 **functions:** strike, break · **gainAxes:** targets, damage · **gains:** broaden · **harm:** lethal · ongoing
 
-**grants:** ⛔ YOU CALL THE ENDINGS DUE — every enemy within reach at once, ANTISOAK 8, AND THE GREY NOW PIERCES: `penetration 2` cuts every soak layer an epic carries, so damage lands past armour no matter how much of it there is — and then the antisoak amplifies what landed. ⚠️ THE SCARS STILL OPEN FIRST.
+**grants:** ⛔ YOU CALL THE ENDINGS DUE — every enemy within reach at once, ANTISOAK 8, AND THE GREY NOW PIERCES: PIERCE 4 lands whatever the armour, so the vulnerability ALWAYS takes hold and then amplifies everything that got through beside it. ⚠️ THE SCARS STILL OPEN FIRST.
 
-**cannot:** ⛔ A DECAY-TYPED WARD IS THE ONE ANSWER — that layer is not cut, it is the RIGHT answer, and against a consecrated ground or a tended vigil the grey finds nothing. ⚠️ AND IT TAKES EVERYTHING PRESENT THAT WAS EVER GOING TO STOP: gates, engines, walls, the rope holding the bridge you are standing on.
+**cannot:** ⛔ A DECAY-TYPED WARD IS STILL THE ANSWER — it soaks the ordinary damage entire, so all that reaches them is the pierce and what the vulnerability makes of it. ⚠️ AND IMMUNE IS IMMUNE: a thing that does not decay takes nothing at all. It reaches enemies and standing works, never the people you came with.
 
-**bounds:** ⛔ IT AMPLIFIES A WOUND, IT DOES NOT CREATE ONE. From r2 it finds OLD wounds — scars — and nearly everyone has them · ⛔ A DECAY-TYPED SOAK LAYER IS THE COUNTER, at every rank including r3. Consecrated ground, a tended vigil, a ward laid against rot · ⚠️ TOUCH ONLY at rank 1; one target until rank 3 · ⚠️ At r3 it takes the standing works too — gates, engines, walls, and whatever is holding the floor up
+**bounds:** ⛔ IT AMPLIFIES A WOUND, IT DOES NOT CREATE ONE. From r2 it finds OLD wounds — scars — and nearly everyone has them · ⛔ A DECAY-TYPED SOAK LAYER IS THE COUNTER. It stops r1 and r2 outright when it outvalues the damage, and at r3 it still soaks everything except the pierce — blunted, not beaten. ⚠️ IMMUNE IS ABSOLUTE: pierce does not beat immunity, or nothing in the world would be safe · ⚠️ TOUCH ONLY at rank 1; one target until rank 3 · ⚠️ At r3 it takes the standing works too — gates, engines, walls, and whatever is holding the floor up
 
 ---
 

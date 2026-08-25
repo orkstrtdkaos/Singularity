@@ -3506,9 +3506,9 @@
      "ongoingHarm": {
       "type": "decay"
      },
-     "grants": "⛔ YOU CALL THE ENDINGS DUE — every enemy within reach at once, ANTISOAK 8, AND THE GREY NOW PIERCES: `penetration 2` cuts every soak layer an epic carries, so damage lands past armour no matter how much of it there is — and then the antisoak amplifies what landed. ⚠️ THE SCARS STILL OPEN FIRST.",
-     "cannot": "⛔ A DECAY-TYPED WARD IS THE ONE ANSWER — that layer is not cut, it is the RIGHT answer, and against a consecrated ground or a tended vigil the grey finds nothing. ⚠️ AND IT TAKES EVERYTHING PRESENT THAT WAS EVER GOING TO STOP: gates, engines, walls, the rope holding the bridge you are standing on.",
-     "penetration": 2
+     "grants": "⛔ YOU CALL THE ENDINGS DUE — every enemy within reach at once, ANTISOAK 8, AND THE GREY NOW PIERCES: PIERCE 4 lands whatever the armour, so the vulnerability ALWAYS takes hold and then amplifies everything that got through beside it. ⚠️ THE SCARS STILL OPEN FIRST.",
+     "cannot": "⛔ A DECAY-TYPED WARD IS STILL THE ANSWER — it soaks the ordinary damage entire, so all that reaches them is the pierce and what the vulnerability makes of it. ⚠️ AND IMMUNE IS IMMUNE: a thing that does not decay takes nothing at all. It reaches enemies and standing works, never the people you came with.",
+     "pierce": 4
     }
    ],
    "challengeTypes": [
@@ -3533,7 +3533,7 @@
     },
     "antisoakImposed": 4,
     "damageType": "decay",
-    "note": "⛔ THE MECHANISM IS ANTISOAK, AND IT IS BOTH IMPOSED AND INVOKED IN THE SAME STROKE. Per `antisoakLanded(hit, soak, antisoak)`: damage through soak is amplified, and A BLOW THAT NEVER LANDED CANNOT BE MADE WORSE. ⚠️ THAT ARITHMETIC IS THE CRAFT'S WHOLE CHARACTER — 'needs a wound to activate' is not a special case written for this craft, it is what antisoak already does. Ongoing `decay` derives its magnitude from `mechanic.magnitude` (7) per `ongoingHarmOf`, so the tick is not authored twice."
+    "note": "⛔ THE MECHANISM IS ANTISOAK, AND IT IS BOTH IMPOSED AND INVOKED IN THE SAME STROKE. Per `antisoakLanded(hit, soak, antisoak)`: damage through soak is amplified, and A BLOW THAT NEVER LANDED CANNOT BE MADE WORSE. ⚠️ THAT ARITHMETIC IS THE CRAFT'S WHOLE CHARACTER — 'needs a wound to activate' is not a special case written for this craft, it is what antisoak already does. Ongoing `decay` derives its magnitude from `mechanic.magnitude` (7) per `ongoingHarmOf`, so the tick is not authored twice. ⛔ CCODE-243: r3 carries `pierce 4`, NOT `penetration`. Penetration was a layer-RANK cutter and was read by nothing corpus-wide; pierce is a flat AMOUNT that bypasses soak, per Erik 2026-08-23. ⚠️ Verified live via `pierceLanded`: hit 6 vs soak 8 gives 0 at r2 and 12 at r3, and hit 10 gives 14 — the decay ward shuts r2 down completely and only blunts r3, which is the counter-play the spec was written to create."
    },
    "intensity": {
     "conserve": "a small hastening — a notch deepens, a wound sours",
@@ -3545,7 +3545,7 @@
      "class": "hard"
     },
     {
-     "text": "⛔ A DECAY-TYPED SOAK LAYER IS THE COUNTER, at every rank including r3. Consecrated ground, a tended vigil, a ward laid against rot",
+     "text": "⛔ A DECAY-TYPED SOAK LAYER IS THE COUNTER. It stops r1 and r2 outright when it outvalues the damage, and at r3 it still soaks everything except the pierce — blunted, not beaten. ⚠️ IMMUNE IS ABSOLUTE: pierce does not beat immunity, or nothing in the world would be safe",
      "class": "hard"
     },
     {

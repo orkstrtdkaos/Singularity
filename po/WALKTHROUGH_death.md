@@ -312,39 +312,39 @@
 
 ## 9. Shared Weight  ·  `shared_weight`
 
-**L1 · e5 · threnodist · wild_nanite · shape `heal` · harm `incapacitating`**  
+**L1 · e5 · threnodist · wild_nanite · shape `guard` · harm `none`**  
 **status:** crit  
-**ability functions:** heal, sustain
+**ability functions:** shield, resist, ward
 
-> Take a share of another's grief, fear or despair onto yourself, and they function again — steady hands, clear speech, able to act. Not comfort, TRANSFER. The Threnodists' mercy, and a real one because it is not free.
+> ⛔ STAND IN FRONT OF SOMEONE AND TAKE WHAT WAS AIMED AT THEM. The fear meant to freeze them, the grief meant to drop them, the wail meant to take their next breath — it arrives at YOU instead, and it has to get through your resolve rather than theirs. ⚠️ NOT COMFORT, TRANSFER: it moves, it does not vanish. The Threnodists' mercy, and a real one because you are the one holding it afterwards.
 
-**notFor:** Removing grief (it MOVES, it does not vanish); putting it down again quickly; taking what someone will not give; physical wounds.
+**notFor:** Wounds, blades and fire — this catches what lands on the MIND, never on the body. Undoing a condition already taken (that is Carried Name). ⚠️ And it does not stop the attack; it changes who answers it.
 
 ### r1 — Portion Taken
 
-**functions:** heal, sustain · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
+**functions:** shield · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** Take a share of another's grief, fear, or despair onto yourself. They function again — steady hands, clear speech, able to act. You carry it in their place.
+**grants:** ⛔ NAME ONE ALLY. THE NEXT CONDITION AIMED AT THEM ARRIVES AT YOU INSTEAD — and it has to beat YOUR resist, your wards, your soak. ⚠️ What would have put them down whole may only stagger you.
 
-**cannot:** They must GIVE it; taking uninvited fails and they will know you tried. And you now have it. It does not evaporate because the crisis passed.
+**cannot:** ⛔ ONE ALLY AND ONE CONDITION; after it catches, it is spent. It does not stop the attack — it changes who answers it. ⚠️ And you have it now: it does not evaporate because the fight ended.
 
 ### r2 — Steady Hand
 
-**functions:** heal, sustain, empower · **gainAxes:** scope · **gains:** broaden · **harm:** none
+**functions:** shield, resist · **gainAxes:** duration, quality · **gains:** broaden · **harm:** none
 
-**grants:** Take from several, or take enough that someone catastrophically broken can function through the next hours.
+**grants:** ⛔ THE COVER STAYS OPEN — every condition aimed at them for the duration comes to you. ⚠️ AND YOU HARDEN WHILE IT RUNS: you are fuelling on what you are carrying, and your resist rises with it, so you degrade more of what you catch than you did at the start.
 
-**cannot:** The load is cumulative and does not clear on its own. A Threnodist who takes too much becomes someone who needs a Threnodist.
+**cannot:** ⛔ STILL ONE ALLY. You cannot stand in front of a line. ⚠️ Everything you catch is cumulative and it is all yours — a Threnodist who covers too long becomes someone who needs a Threnodist.
 
 ### r3 — Borne Grief
 
-**functions:** heal, sustain, empower · **gainAxes:** scope, targets · **gains:** deepen · **harm:** none
+**functions:** shield, resist, ward · **gainAxes:** quality, conditions · **gains:** deepen · **harm:** none
 
-**grants:** Carry a person's whole weight for a time — a parent at a graveside, a commander after a rout — so they can do the thing that must be done today.
+**grants:** ⛔ WHAT YOU CATCH, YOU CAN SEND BACK. Resist it and it goes to whoever threw it: a clean resist returns the original, a full resist returns it ESCALATED, a marginal one returns the lesser form. ⚠️ FAIL THE RESIST AND NOTHING REFLECTS — you carry it, exactly as r2.
 
-**cannot:** ⚠ YOU ARE NOW THE ONE CARRYING IT and you may be carrying it long after they have recovered. This is the craft that ends Threnodists, and every one of them knows it and does it anyway.
+**cannot:** ⛔ REFLECTION IS EARNED, EVERY TIME. There is no rank at which catching becomes safe. ⚠️ This is the craft that ends Threnodists, and every one of them knows it and does it anyway.
 
-**bounds:** they must GIVE it — taking uninvited fails · it MOVES, it does not vanish · the load is CUMULATIVE and does not clear on its own
+**bounds:** ⛔ IT CATCHES CONDITIONS, NEVER DAMAGE — the mind's harm, not the body's · ⛔ IT RESOLVES AGAINST YOUR RESIST, NOT THEIRS. That is the whole craft: you are better at eating it · ⚠️ ONE ALLY. You cannot stand in front of a line · ⛔ IT MOVES, IT DOES NOT VANISH — until r3, and even then only if you actually resist it
 
 ---
 

@@ -2050,107 +2050,127 @@
     "emotional_logical": -0.6
    },
    "functions": [
-    "heal",
-    "sustain"
+    "shield",
+    "resist",
+    "ward"
    ],
-   "narrationHints": "You take part of what someone is carrying and carry it yourself. Not comfort — TRANSFER. They can stand up because some of it is on you now.",
-   "description": "Take a share of another's grief, fear or despair onto yourself, and they function again — steady hands, clear speech, able to act. Not comfort, TRANSFER. The Threnodists' mercy, and a real one because it is not free.",
-   "notFor": "Removing grief (it MOVES, it does not vanish); putting it down again quickly; taking what someone will not give; physical wounds.",
+   "narrationHints": "She steps across without being asked and the thing meant for someone else finds her waiting. ⚠️ A Threnodist who has done this often has a stillness other people find hard to look at.",
+   "description": "⛔ STAND IN FRONT OF SOMEONE AND TAKE WHAT WAS AIMED AT THEM. The fear meant to freeze them, the grief meant to drop them, the wail meant to take their next breath — it arrives at YOU instead, and it has to get through your resolve rather than theirs. ⚠️ NOT COMFORT, TRANSFER: it moves, it does not vanish. The Threnodists' mercy, and a real one because you are the one holding it afterwards.",
+   "notFor": "Wounds, blades and fire — this catches what lands on the MIND, never on the body. Undoing a condition already taken (that is Carried Name). ⚠️ And it does not stop the attack; it changes who answers it.",
    "tree": [
     {
      "rank": 1,
      "name": "Portion Taken",
-     "grants": "Take a share of another's grief, fear, or despair onto yourself. They function again — steady hands, clear speech, able to act. You carry it in their place.",
-     "cannot": "They must GIVE it; taking uninvited fails and they will know you tried. And you now have it. It does not evaporate because the crisis passed.",
      "functions": [
-      "heal",
-      "sustain"
+      "shield"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Portion Taken",
-     "gainAxes": []
+     "gainAxes": [],
+     "interceptCondition": {
+      "allies": 1,
+      "charges": 1
+     },
+     "grants": "⛔ NAME ONE ALLY. THE NEXT CONDITION AIMED AT THEM ARRIVES AT YOU INSTEAD — and it has to beat YOUR resist, your wards, your soak. ⚠️ What would have put them down whole may only stagger you.",
+     "cannot": "⛔ ONE ALLY AND ONE CONDITION; after it catches, it is spent. It does not stop the attack — it changes who answers it. ⚠️ And you have it now: it does not evaporate because the fight ended."
     },
     {
      "rank": 2,
      "name": "Steady Hand",
-     "grants": "Take from several, or take enough that someone catastrophically broken can function through the next hours.",
-     "cannot": "The load is cumulative and does not clear on its own. A Threnodist who takes too much becomes someone who needs a Threnodist.",
      "functions": [
-      "heal",
-      "sustain",
-      "empower"
+      "shield",
+      "resist"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Steady Hand",
      "gainAxes": [
-      "scope"
-     ]
+      "duration",
+      "quality"
+     ],
+     "interceptCondition": {
+      "allies": 1,
+      "rounds": 6,
+      "resistBonus": 2
+     },
+     "grants": "⛔ THE COVER STAYS OPEN — every condition aimed at them for the duration comes to you. ⚠️ AND YOU HARDEN WHILE IT RUNS: you are fuelling on what you are carrying, and your resist rises with it, so you degrade more of what you catch than you did at the start.",
+     "cannot": "⛔ STILL ONE ALLY. You cannot stand in front of a line. ⚠️ Everything you catch is cumulative and it is all yours — a Threnodist who covers too long becomes someone who needs a Threnodist."
     },
     {
      "rank": 3,
      "name": "Borne Grief",
-     "grants": "Carry a person's whole weight for a time — a parent at a graveside, a commander after a rout — so they can do the thing that must be done today.",
-     "cannot": "⚠ YOU ARE NOW THE ONE CARRYING IT and you may be carrying it long after they have recovered. This is the craft that ends Threnodists, and every one of them knows it and does it anyway.",
      "functions": [
-      "heal",
-      "sustain",
-      "empower"
+      "shield",
+      "resist",
+      "ward"
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Borne Grief",
      "gainAxes": [
-      "scope",
-      "targets"
-     ]
+      "quality",
+      "conditions"
+     ],
+     "interceptCondition": {
+      "allies": 1,
+      "rounds": 6,
+      "resistBonus": 2
+     },
+     "reflectCondition": true,
+     "grants": "⛔ WHAT YOU CATCH, YOU CAN SEND BACK. Resist it and it goes to whoever threw it: a clean resist returns the original, a full resist returns it ESCALATED, a marginal one returns the lesser form. ⚠️ FAIL THE RESIST AND NOTHING REFLECTS — you carry it, exactly as r2.",
+     "cannot": "⛔ REFLECTION IS EARNED, EVERY TIME. There is no rank at which catching becomes safe. ⚠️ This is the craft that ends Threnodists, and every one of them knows it and does it anyway."
     }
    ],
    "challengeTypes": [
-    "SOCIAL"
+    "SOCIAL",
+    "COMBAT",
+    "ENDURANCE"
    ],
    "tradition": "threnodist",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
-   "shape": "heal",
+   "harmRung": "none",
+   "shape": "guard",
    "operativeAxis": [
-    "magnitude",
-    "duration"
+    "duration",
+    "quality"
    ],
    "mechanic": {
     "magnitude": 6,
     "duration": 12,
     "scope": 1,
     "crit": {
-     "success": "You take it entirely and they are lighter than they have been in years.",
-     "failure": "You take it and it is heavier than it looked from outside."
-    }
+     "success": "It reaches you and finds you ready — it barely marks you, and they never even felt it pass.",
+     "failure": "You catch it whole and it is heavier than it looked from outside."
+    },
+    "note": "T-I guard. ⛔ INTERCEPTION — `engine/intercept.js`, CCODE-245. The imposition is RE-RESOLVED against the interceptor, never inherited from the ally: an `unconscious` aimed at a mental-1 ally, caught by a mental-9 Threnodist, becomes `action_loss` on the Threnodist. ⚠️ THE ALLY WOULD HAVE TAKEN IT WHOLE — that difference IS the craft. ⛔ Collisions go to the HIGHEST RESIST, ties to last-declared. NO CONSENT STEP (Erik): declaring the protection is the whole action. ⚠️ REFLECTION IS EARNED and tiers off the existing margin ladder — crit sends `onCrit`, success the original, partial the degraded, failure reflects nothing and you carry it."
    },
    "intensity": {
-    "conserve": "take a corner of it",
-    "surge": "take the whole weight; YOU MAY CARRY IT LONG AFTER THEY RECOVER"
+    "conserve": "cover them for the one hit you are sure of",
+    "surge": "take everything aimed at them; YOU ARE THE ONE HOLDING IT AFTERWARDS"
    },
    "bounds": [
     {
-     "text": "they must GIVE it — taking uninvited fails",
+     "text": "⛔ IT CATCHES CONDITIONS, NEVER DAMAGE — the mind's harm, not the body's",
      "class": "hard"
     },
     {
-     "text": "it MOVES, it does not vanish",
+     "text": "⛔ IT RESOLVES AGAINST YOUR RESIST, NOT THEIRS. That is the whole craft: you are better at eating it",
      "class": "hard"
     },
     {
-     "text": "the load is CUMULATIVE and does not clear on its own",
-     "class": "cost"
+     "text": "⚠️ ONE ALLY. You cannot stand in front of a line",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT MOVES, IT DOES NOT VANISH — until r3, and even then only if you actually resist it",
+     "class": "hard"
     }
    ],
-   "plainly": "A social action that transfers part of someone's grief onto you. Rated 6 of 10 on one target for about twelve hours.",
+   "plainly": "A guard action. Name an ally: the next condition aimed at them resolves against YOU instead, at your resist. r2 runs for a duration and hardens you while it does. r3 sends it back at whoever threw it.",
    "_descriptionWas": "The Threnodists' mercy, and it is a real one because it is not free. Grief-singers are the people who will hold your share.",
    "_nameWas": "The Shared Weight",
    "_idWas": "the_shared_weight",
    "_powerSystemWas": "reach_emotional_logical",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rebuilt_20260823": "⛔ ERIK 2026-08-23: 'I'm not seeing a reason for a player to want a skill like this.' He was right — the craft removed a condition the engine never applied (nobody's sheet says DESPAIRING) while charging the caster a burden that never cleared. ⚠️ PURE DOWNSIDE, PRICED AT 5, and Death already had five crafts that make an ally better. ⛔ REBUILT AS INTERCEPTION per Erik's design: r1 catches the next condition, r2 runs for a duration and hardens the taker, r3 reflects by resist degree. THE FLAVOUR SURVIVED ENTIRELY — not comfort, transfer; it moves, it does not vanish — because the fiction was never the problem. ⚠️ It is the FIRST craft in Death that removes an imposed condition from anyone, and it answers `keening`, the tradition's own signature."
   },
   {
    "id": "the_true_feeling",

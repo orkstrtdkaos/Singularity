@@ -711,6 +711,26 @@ export function senseTierFromDegree(degree, margin, sb) {
   return cfg.failure ?? 0;
 }
 
+/** ⛔ CCODE-243 / SPEC_pierce_value — WHAT LANDS, IN TWO PORTIONS.
+ *
+ *  SOAKABLE: the ordinary hit, through soak as always. PIERCE: a flat amount that bypasses soak entirely
+ *  and always lands. ⚠️ They are ADDITIVE, and the antisoak sees their SUM — which is the entire reason
+ *  the spec exists: `antisoakLanded` returns 0 when nothing gets through, so armour that outvalues the
+ *  skill damage used to switch off the vulnerability the craft is built around.
+ *
+ *  ⛔ AFFINITY STILL COMES FIRST AND `immune` STILL MEANS IMMUNE. Aevi flagged this as my call and I agree
+ *  with her reasoning: if pierce beat immunity it would be a universal answer and nothing in the bestiary
+ *  would be safe. This function never sees an immune target — that branch returns 0 above it.
+ *  Pure; the caller owns affinity. */
+export function pierceLanded(hit, soak = 0, pierce = 0, antisoak = 0, dcfg = {}) {
+  const n = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0);
+  const soakable = Math.max(0, n(hit) - Math.max(0, n(soak)));
+  const p = Math.max(0, n(pierce));
+  const through = soakable + p;
+  if (through <= 0) return 0;
+  return through + Math.max(0, n(antisoak));
+}
+
 /** ⚠️ THE TARGET'S CARRIED ANTISOAK. Mirrors `conditions.js::antisoakOn` deliberately rather than
  *  importing it: this file takes SHEETS, not characters, and a sheet is not a character. The rule is one
  *  line and the shapes differ; a shared helper here would have to know about both.
@@ -978,7 +998,18 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // rather than subtract from one flat number. A craft cuts every layer whose rank is at or below its
       // penetration; the layers above it still soak. Falls back to the flat value when a sheet carries no
       // layers, so an authored foe with a hand-written `soak` keeps working unchanged.
-      const pen = Math.max(0, Number(winDecl.penetration) || 0);
+      // ⛔ CCODE-243 — READ RANK-FIRST, BECAUSE IT WAS NEVER READ AT ALL. This was
+      // `Number(winDecl.penetration)`, and NEITHER authored craft puts it there: `radiant_lance` carries it
+      // on `mechanic`, `hastened_grey` on a RANK. So `pen` was 0 on every blow in the game's history, the
+      // layer-cutting branch never ran, and `penetrated` never once appeared on a receipt.
+      // ⚠️ THAT IS §45.1 FOR THE FIFTH TIME — a reader looking at the ability level where the authoring is
+      // one layer down. `authoredBlock` is the one reader for this shape and it belongs here too.
+      const pen = Math.max(0, Number(authoredBlock(winDecl, "penetration", winDecl?.rank || 1)) || 0);
+      // ⛔ CCODE-243 / SPEC_pierce_value — PIERCE IS AN AMOUNT, NOT A RANK. Erik: "a pierce value (the
+      // amount that bypasses the soak) along with the normal skill based damage." It is ADDITIVE to whatever
+      // got through normally, and its whole purpose is that it guarantees SOMETHING lands — so a craft
+      // whose identity is a vulnerability cannot have that identity switched off by sufficient armour.
+      const pierce = Math.max(0, Number(authoredBlock(winDecl, "pierce", winDecl?.rank || 1)) || 0);
       const layers = Array.isArray(targetSheet?.soakLayers) ? targetSheet.soakLayers : null;
 
       // CCODE-83 — DAMAGE HAS A KIND, and some things answer a kind rather than an amount.
@@ -1040,8 +1071,13 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         // `antisoak: 5` raised a 20 to 25, and the identical antisoak carried as a condition changed
         // nothing at all. The chain was imposed → condition → [nothing] → antisoakLanded.
         // ⚠️ SUMMED, not max'd, per §41: two crafts each opening a different weakness is worse than one.
-        : antisoakLanded(hit, soak, (Number(targetSheet?.antisoak) || 0) + antisoakFromConditions(targetSheet))
-          || Math.max(dcfg.minHit ?? 1, hit - soak);
+        // ⛔ CCODE-243 — PIERCE ENTERS AS `through`, WHICH IS THE WHOLE POINT. `antisoakLanded` returns 0
+        // when nothing gets past soak, so a craft built around a vulnerability had its vulnerability
+        // switched off by enough armour — Aevi's worked case: hit 6 into soak 8 is 0 through, antisoak 8
+        // never fires, and the most interesting part of the craft is the part that vanishes.
+        // ⚠️ ADDITIVE, NOT AN ALTERNATIVE (Erik: "the pierce damage… plus any unsoaked damage").
+        : pierceLanded(hit, soak, pierce,
+            (Number(targetSheet?.antisoak) || 0) + antisoakFromConditions(targetSheet), dcfg);
       damage = { side: roundWinner === "player" ? "opponent" : "player", amount: landed, verb: winDecl.function,
         by: winDecl.name || winDecl.function,
         // CCODE-83: a blow that was EATEN, shrugged off or doubled must say so. Silently different arithmetic
@@ -1050,7 +1086,10 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         ...(aff ? { affinity: aff } : {}),
         ...(aff === "absorb" ? { absorbed: true } : {}),
         ...(wrongType ? { soakBypassedByType: wrongType } : {}),
-        ...(soak || cutThrough ? { rolled: hit, soaked: hit - landed, soak,
+        // ⚠️ THE TWO PORTIONS ARE NAMED SEPARATELY (acceptance 5) so a player can see WHY armour did not
+        // help. "You hit for 12" against 8 soak is indistinguishable from a bug without this line.
+        ...(pierce ? { pierce, pierceNote: `${pierce} bypassed armour entirely` } : {}),
+        ...(soak || cutThrough || pierce ? { rolled: hit, soaked: Math.max(0, hit - Math.max(0, landed - pierce)), soak,
           ...(cutThrough ? { penetrated: cutThrough, penetration: pen } : {}) } : {}) };
       // CCODE-83: `landed` is NEGATIVE when the target ABSORBS this damage type, so this same line heals it —
       // but `Math.max(0, ...)` bounds only the floor, and an absorbing foe would have healed WITHOUT LIMIT,

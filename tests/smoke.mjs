@@ -18149,6 +18149,59 @@ await (async () => {
     orphaned.length ? orphaned.join(", ") + " — advertised in engine/gm.js and read by nothing" : "");
 }
 
+  // 5ab · ⛔ CCODE-243 / SPEC_pierce_value — PIERCE IS AN AMOUNT THAT BYPASSES SOAK.
+  {
+    const SB243 = await import("../engine/skill_battle.js");
+    // ⚠️ AEVI'S OWN WORKED TABLE IS THE GATE. Her §3 states four cells; if the engine ever stops
+    // reproducing them the spec and the code have diverged and one of them is wrong.
+    check("CCODE-243: hit 6 into soak 8 with NO pierce lands nothing — and so the antisoak never fires (spec: 0)",
+      SB243.pierceLanded(6, 8, 0, 8) === 0);
+    check("CCODE-243: the same blow with pierce 4 lands 4 THROUGH, so antisoak 8 applies (spec: 12)",
+      SB243.pierceLanded(6, 8, 4, 8) === 12);
+    check("CCODE-243: hit 10 into soak 8, no pierce, antisoak 6 (spec: 8)",
+      SB243.pierceLanded(10, 8, 0, 6) === 8);
+    check("CCODE-243: hit 10 into soak 8 WITH pierce 4, antisoak 8 — additive, not an alternative (spec: 14)",
+      SB243.pierceLanded(10, 8, 4, 8) === 14);
+    // ⛔ ACCEPTANCE 1 + 2: at least N lands whatever the soak, and the antisoak fires whenever pierce > 0.
+    check("CCODE-243: a craft carrying pierce N lands at least N against ANY soak",
+      [0, 5, 50, 500].every(sk => SB243.pierceLanded(1, sk, 4, 0) >= 4));
+    // ⚠️ SOAK >= HIT ONLY. My first version included soak 0, where the ordinary damage ALSO gets
+    // through, so the total is 1 + 4 + 7 and not 4 + 7 — my arithmetic, not the engine's.
+    check("CCODE-243: …and the vulnerability always applies when pierce > 0 — the whole point of the spec",
+      [50, 500].every(sk => SB243.pierceLanded(1, sk, 4, 7) === 4 + 7)
+      && SB243.pierceLanded(1, 0, 4, 7) === 1 + 4 + 7);
+    // ⚠️ AND NO PIERCE STILL MEANS NO FLOOR — pierce must not become a universal minimum.
+    check("CCODE-243: without pierce, heavy armour still stops a blow dead",
+      SB243.pierceLanded(2, 50, 0, 9) === 0);
+
+    // ⛔ ACCEPTANCE 3 — `pierce` and `penetration` coexist. They are different mechanisms: penetration cuts
+    // LAYERS BY RANK, pierce adds a flat AMOUNT past whatever soak remains.
+    const cm243 = await import("../engine/craftmechanics.js");
+    const probe = { mechanic: { penetration: 2 }, tree: [{ rank: 3, pierce: 4 }] };
+    check("CCODE-243: a craft may carry both, read from wherever each is authored (ability AND rank)",
+      cm243.authoredBlock(probe, "penetration", 3) === 2 && cm243.authoredBlock(probe, "pierce", 3) === 4);
+
+    // ⛔ AND THE READER FIX THAT CAME WITH IT: `penetration` was authored on two crafts and read on none.
+    // `pen` was `Number(winDecl.penetration)`, and neither craft puts it there — radiant_lance carries it
+    // on `mechanic`, hastened_grey on a RANK. §45.1 for the fifth time.
+    const rl = C199.abilities.radiant_lance, hg = C199.abilities.hastened_grey;
+    check("CCODE-243: both authored penetration values are now REACHABLE by the reader the round uses",
+      cm243.authoredBlock(rl, "penetration", 3) === 2 && cm243.authoredBlock(hg, "penetration", 3) === 2);
+    const src243 = readFileSync(join(root, "engine/skill_battle.js"), "utf8");
+    check("CCODE-243: …and the round reads penetration rank-first rather than off the declaration's top level",
+      /const pen = Math\.max\(0, Number\(authoredBlock\(winDecl, "penetration"/.test(src243));
+    check("CCODE-243: pierce is read the same way — rank-first, so authoring it on a rank works",
+      /const pierce = Math\.max\(0, Number\(authoredBlock\(winDecl, "pierce"/.test(src243));
+
+    // ⚠️ ACCEPTANCE 4: immune still beats pierce. Aevi called it my decision and I agree with her reasoning —
+    // a pierce that beat immunity would be a universal answer and nothing in the bestiary would be safe.
+    check("CCODE-243: `immune` is decided ABOVE this function — pierce never sees an immune target",
+      /if \(aff === "immune"\) hit = 0;/.test(src243) && /aff === "immune" \? 0/.test(src243));
+    // acceptance 5: the receipt separates the portions
+    check("CCODE-243: the receipt names the pierced portion, so a player can see why armour did not help",
+      /pierceNote: `\$\{pierce\} bypassed armour entirely`/.test(src243));
+  }
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

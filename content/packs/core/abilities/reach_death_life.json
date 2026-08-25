@@ -3617,8 +3617,8 @@
     {
      "rank": 2,
      "name": "Long Watch",
-     "grants": "Hold through a night, or hold something large — a breach, a flooding hull, a fever. Enough time for someone else to arrive with the actual answer.",
-     "cannot": "You are spent afterward in a way sleep does not entirely fix. And you have bought TIME, which is only worth what someone does with it.",
+     "grants": "⛔ HOLD SOMETHING LARGE, OR HOLD IT LONGER — a breach, a flooding hull, a fever, a night and then the day after it. ⚠️ Enough time for someone else to arrive with the actual answer.",
+     "cannot": "⛔ IT IS STILL ONE THING, only a bigger one — a hull, not the hull and the crew. ⚠️ AND YOU HAVE BOUGHT TIME, WHICH IS ONLY WORTH WHAT SOMEONE DOES WITH IT: nothing you hold gets closer to being fixed while you hold it.",
      "functions": [
       "sustain",
       "ward",
@@ -3627,13 +3627,16 @@
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Long Watch",
-     "gainAxes": []
+     "gainAxes": [
+      "scope",
+      "duration"
+     ]
     },
     {
      "rank": 3,
      "name": "Unfinished Ending",
      "grants": "Hold something that should already be over — a person past saving, a structure past standing — for as long as you can bear to.",
-     "cannot": "⚠ THIS IS THE CRAFT ASHWARDENS ARGUE ABOUT. Holding an ending open is not mercy by default; sometimes it is only refusal, and the thing held knows the difference. The Hollow think it obscene.",
+     "cannot": "⛔ THIS IS THE CRAFT ASHWARDENS ARGUE ABOUT. Holding an ending open is not mercy by default; sometimes it is only refusal, and THE THING HELD KNOWS THE DIFFERENCE — a person held past saving can tell you which one this is, and may ask you to stop. ⚠️ The Hollow think it obscene. It still HOLDS and never mends: what you are keeping is the moment, not the person.",
      "functions": [
       "sustain",
       "ward",
@@ -3643,7 +3646,8 @@
      "harmRung": "none",
      "_nameWas": "The Unfinished Ending",
      "gainAxes": [
-      "targets"
+      "targets",
+      "duration"
      ]
     }
    ],
@@ -3653,7 +3657,7 @@
    ],
    "tradition": "ashwarden",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "sustain",
    "operativeAxis": [
     "duration",
@@ -3665,7 +3669,8 @@
     "scope": 1,
     "wardTypes": [
      "decay"
-    ]
+    ],
+    "note": "T-I sustain. ⛔ `magnitude 5, duration 12, scope 1` — the BASE is already about twelve hours on one thing, so r2 does NOT buy a night; a night is r1. ⚠️ r2 BUYS SCOPE (something large) and stretches the duration past it; r3 buys TARGETS (more than one held) and the willingness to hold what should already be over. ⛔ `intensity.surge` already carries r3's theme — 'sometimes it is only refusal, and the thing held knows' — so the argument the Ashwardens have is wired into the craft's own surge, not just its prose."
    },
    "intensity": {
     "conserve": "hold a moment longer",
@@ -3691,7 +3696,8 @@
    "_idWas": "the_kept_vigil",
    "_wardTypes": "⛔ SNG-512. ⛔ Holding a failing thing where it is answers the failing — the second decay-ward.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_correctedByErik_20260823": "⛔ 2026-08-23. (1) harmRung was `incapacitating` over three `none` ranks — the FOURTH instance of that inversion in Death. (2) ⛔ r2's 'you are spent afterward in a way sleep does not entirely fix' CUT: a narrative debt in a cost field, the fourth I have written this session. ENERGY IS THE COST. What replaced it is a real limit — it is still ONE thing, only a bigger one, and nothing you hold gets closer to being fixed. (3) ⚠️ r2 and r3 declared no axes; reading `plainly` and `mechanic` showed r2 was not buying TIME at all (12 hours is the base) — it buys SCOPE. That only surfaced because Erik asked to see the full record rather than my summary."
   },
   {
    "id": "true_account",

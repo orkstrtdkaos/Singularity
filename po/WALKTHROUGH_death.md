@@ -198,7 +198,7 @@
 
 ## 6. Kept Vigil  ·  `kept_vigil`
 
-**L1 · e4 · ashwarden · metaphysical · shape `sustain` · harm `incapacitating`**  
+**L1 · e4 · ashwarden · metaphysical · shape `sustain` · harm `none`**  
 **status:** ⚠️ no crit · ward:decay  
 **ability functions:** sustain, ward
 
@@ -216,19 +216,19 @@
 
 ### r2 — Long Watch
 
-**functions:** sustain, ward, resist · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
+**functions:** sustain, ward, resist · **gainAxes:** scope, duration · **gains:** broaden · **harm:** none
 
-**grants:** Hold through a night, or hold something large — a breach, a flooding hull, a fever. Enough time for someone else to arrive with the actual answer.
+**grants:** ⛔ HOLD SOMETHING LARGE, OR HOLD IT LONGER — a breach, a flooding hull, a fever, a night and then the day after it. ⚠️ Enough time for someone else to arrive with the actual answer.
 
-**cannot:** You are spent afterward in a way sleep does not entirely fix. And you have bought TIME, which is only worth what someone does with it.
+**cannot:** ⛔ IT IS STILL ONE THING, only a bigger one — a hull, not the hull and the crew. ⚠️ AND YOU HAVE BOUGHT TIME, WHICH IS ONLY WORTH WHAT SOMEONE DOES WITH IT: nothing you hold gets closer to being fixed while you hold it.
 
 ### r3 — Unfinished Ending
 
-**functions:** sustain, ward, resist · **gainAxes:** targets · **gains:** deepen · **harm:** none
+**functions:** sustain, ward, resist · **gainAxes:** targets, duration · **gains:** deepen · **harm:** none
 
 **grants:** Hold something that should already be over — a person past saving, a structure past standing — for as long as you can bear to.
 
-**cannot:** ⚠ THIS IS THE CRAFT ASHWARDENS ARGUE ABOUT. Holding an ending open is not mercy by default; sometimes it is only refusal, and the thing held knows the difference. The Hollow think it obscene.
+**cannot:** ⛔ THIS IS THE CRAFT ASHWARDENS ARGUE ABOUT. Holding an ending open is not mercy by default; sometimes it is only refusal, and THE THING HELD KNOWS THE DIFFERENCE — a person held past saving can tell you which one this is, and may ask you to stop. ⚠️ The Hollow think it obscene. It still HOLDS and never mends: what you are keeping is the moment, not the person.
 
 **bounds:** it HOLDS, it does not mend · ONE THING, and you can do little else · when you stop, it resumes exactly where it was
 
@@ -274,17 +274,17 @@
 
 ## 8. Palework  ·  `palework`
 
-**L1 · e3 · ashwarden · metaphysical · shape `setup` · harm `lethal`**  
+**L1 · e3 · ashwarden · metaphysical · shape `setup` · harm `none`**  
 **status:** crit · sense  
 **ability functions:** persuade, soothe, command, ward
 
-> The burying trade, practised. You are the one who handles a death — which gets you through doors, into confidences, and leaves nothing behind for anyone to call up.
+> ⛔ THE BURYING TRADE, PRACTISED — AND IT IS NECROMANCY. Handling a death properly means knowing what a body still holds, what can be taken out of it, and how to shut that door behind you. ⚠️ THE STANDING IS THE OTHER HALF: you are the one who handles the death, which gets you through doors, into confidences, and leaves nothing behind for anyone else to call up. The trade is how an Ashwarden carries the craft in daylight, not a substitute for it.
 
-**notFor:** Anywhere there is no death or dying; preventing an ending; authority over anything except the death itself.
+**notFor:** Anywhere there is no death or dying. Preventing an ending. Authority over anything except the death itself — ⚠️ this is a professional's standing and a necromancer's handling, never a magistrate's writ.
 
 ### r1 — Professional Standing
 
-**functions:** persuade · **gainAxes:** ⛔ NONE · **gains:** deepen · **harm:** none
+**functions:** persuade · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
 **grants:** ⛔ YOU ARE THE ONE WHO HANDLES THIS. At any death, dying, plague-house, battlefield or burial you get access nobody questions and cooperation nobody offers strangers — the body, the room, the records, and the family's own account of what happened.
 
@@ -292,15 +292,15 @@
 
 ### r2 — Called For
 
-**functions:** persuade, soothe, ward · **gainAxes:** range, targets · **gains:** broaden · **harm:** none
+**functions:** persuade, soothe, ward · **gainAxes:** range, targets, conditions · **gains:** broaden · **harm:** none
 
 **grants:** ⛔ YOU ARE SENT FOR RATHER THAN ADMITTED. Word travels ahead of you, doors are open before you arrive, and people tell you things they have told no one. A body you have handled properly cannot be set to work, questioned, or drawn down.
 
-**cannot:** ⚠️ Standing is regional and earned — somewhere you have handled a death badly, none of this works. One body per handling.
+**cannot:** ⛔ STANDING IS REGIONAL AND EARNED. Somewhere you have handled a death badly the work is HARD (-15) — people still send for you, they are simply slower to open the door and quicker to watch your hands. ⚠️ One body per handling, and the ward holds only what you handled yourself.
 
 ### r3 — Last Authority
 
-**functions:** persuade, soothe, command, ward · **gainAxes:** scope, autonomy · **gains:** deepen · **harm:** none
+**functions:** persuade, soothe, command, ward · **gainAxes:** scope, autonomy · **gains:** broaden · **harm:** none
 
 **grants:** ⛔ AT A DEATH YOUR JUDGMENT CARRIES: what happened, what is owed, what is done with the body, who may not touch it — and you can handle a whole field or ward at once, so nothing there can be raised or read by anyone else.
 

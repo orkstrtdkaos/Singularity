@@ -22,25 +22,45 @@ checking they agree.** §2 is what that costs.
 
 ---
 
-## §2 — ⛔ THE PROOF CASE, FOUND WHILE MEASURING FOR THIS SPEC
+## §2 — ⛔ RANKS ARE ADDITIVE. PERIOD. THIS IS THE MODEL.
 
-**`keening`, a craft I had not yet audited:**
+**Erik, 2026-08-23:** *"The r2 and r3 of a craft are additive gains — period. You wouldn't be using Kindle
+to light fires, then after you use it to burn a goblin whole, you can't light fires anymore. You can use
+any lower level prose a skill had as well."*
 
-| rank | `gains` | `gainAxes` | `imposes.targets` | condition |
-|---|---|---|---|---|
-| r1 | `deepen` | — | **6** | `action_loss` |
-| r2 | ⛔ `broaden` | ⛔ `targets, quality` | ⛔ **3** | `unconscious` |
-| r3 | `broaden` | `scope, targets` | **12** | `unconscious` |
+⛔ **A RANK NEVER REPLACES. IT ONLY ADDS. A craft at r3 can do everything r1 and r2 could, plus the new
+thing.**
 
-⛔ **r2 DECLARES `broaden` ON `targets` AND THE TARGETS GO 6 → 3.** The rank actually **deepened** — the
-condition went from losing an action to falling unconscious — and **narrowed to pay for it.** The design
-is good; **the declaration says the opposite of what happened.**
+### 2a — ⚠️ I MISREAD THIS AND THE MISREADING WAS THE WHOLE OF MY §4
 
-⚠️ **UNDER OPTION 1 THIS FAILS LOUDLY** — the engine derives more targets and collides with an authored 3.
-**Today it disagrees with itself in silence and no gate can see it.** ⛔ **That is the argument for the
-build, and it is one craft of 374.**
+**`keening`:**
 
----
+| rank | `imposes.targets` | condition | ⛔ what the character can ACTUALLY do |
+|---|---|---|---|
+| r1 | 6 | `action_loss` | 6 in earshot lose their next action |
+| r2 | 3 | `unconscious` | ⛔ **3 fall unconscious — PLUS the 6 from r1** |
+| r3 | 12 | `unconscious` | ⛔ **12 fall unconscious — PLUS everything above** |
+
+**I reported r2 as *"deepened and narrowed to pay for it"* and called it a trade.** ⛔ **THERE IS NO
+TRADE. NOTHING IS PAID.** The 3 is a NEW capability layered over a retained one.
+
+⚠️ **AND THE PROSE ALREADY SAID SO — r2 reads *"any who resist lose their next action instead."* That IS
+r1, still running, inside r2's own text.** I had the evidence on the screen and read a trade into it
+because I was looking for a progression on one field.
+
+⛔ **SO `targets: 6 → 3 → 12` IS NOT A CURVE AND NEVER WAS. It is three separate capabilities, each with
+its own count, all live at once.** Any model that treats a per-rank field as one value moving over time
+will get this craft wrong — and it will get it wrong SILENTLY, because the numbers look like a sequence.
+
+### 2b — WHAT THAT MEANS FOR THE BUILD
+
+**The resolved mechanic at rank N is the UNION of ranks 1..N, not the value authored at N.** `gains` and
+`gainAxes` describe **what the new tier ADDS**, never what the craft has become.
+
+⚠️ **AND THIS IS WHAT ERIK MEANT BY *"we need a way to make this smooth and clear."*** Today a reader —
+human or engine — sees `targets: 3` at r2 and has no way to know the 6 is still there. **The
+representation has to make the accumulation visible, or every future auditor makes the mistake I just
+made.**
 
 ## §3 — ⛔ THERE IS NO CURVE IN THE CORPUS TO EXTRACT. THE STEP MUST BE AUTHORED AS A RULE.
 
@@ -63,24 +83,25 @@ samples that contradict each other. ⚠️ **A median of that is a number, not a
 
 ---
 
-## §4 — THE SHAPE I WOULD ARGUE FOR, AND THE ONE THING IT MUST NOT DO
+## §4 — THE SHAPE I WOULD ARGUE FOR
 
-**Base `mechanic` stays on the ability. Each rank declares `gains` + `gainAxes`. The engine applies a step
-per declared axis per rank.**
+**Base `mechanic` stays on the ability. Each rank declares `gains` + `gainAxes` describing WHAT IT ADDS.
+⛔ The engine resolves rank N as the ACCUMULATION of 1..N.**
 
-- `deepen` → force: `damage`, `duration`, `quality`, `conditions`
-- `broaden` → reach: `targets`, `scope`, `range`
+- `deepen` → adds force: `damage`, `duration`, `quality`, `conditions`
+- `broaden` → adds reach: `targets`, `scope`, `range`
 
-⛔ **AND AN AUTHORED VALUE ON THE RANK ALWAYS WINS.** Absent means *derive*; present means *I meant this*.
-⚠️ **Keening r2's `targets: 3` is exactly why — a craft must be able to say "this rank costs breadth", and
-a purely derived ladder cannot express a trade.**
+⛔ **AN AUTHORED VALUE ON A RANK IS THAT TIER'S OWN NUMBER, NOT AN OVERRIDE OF THE CRAFT.** Keening r2's
+`targets: 3` means *this tier reaches 3* — it does not mean *the craft now reaches 3*. ⚠️ **Absent means
+derive the tier; present means this tier's number is authored. Neither ever cancels a lower tier.**
 
-⛔ **THE FAILURE THIS MUST AVOID IS THE ONE ERIK ALREADY KILLED ONCE.** In `bargain` he ruled that rank
-scales **the size of the deal, not the discount** — because a uniform ladder makes every craft scale
-identically and stops being characterful. ⚠️ **A single global step per axis would reintroduce exactly
-that.** The step probably needs to vary by axis at minimum, and possibly by shape.
+**⚠️ THE THING TO GET RIGHT IS LEGIBILITY, WHICH IS THE PART ERIK ASKED FOR.** A craft sheet at r3 should
+show what the character can do — all of it — not the last rank's line. **Whatever the internal
+representation, the resolved view is the accumulation.**
 
----
+⛔ **AND THE STEP RULE MUST NOT MAKE EVERY CRAFT SCALE IDENTICALLY.** A single global step per axis turns
+374 crafts into one craft with different prose. ⚠️ **That is a concern about THIS build specifically —
+not a general law, and not an extrapolation of any earlier ruling.**
 
 ## §5 — WHAT I NEED FROM YOU BEFORE I AUDIT ANOTHER CRAFT
 

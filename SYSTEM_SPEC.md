@@ -3288,3 +3288,42 @@ gate that shows you your own error beats a fix that hides it.**
 **THE RULE: A CONTENT FILE MAY NOT ASSERT ENGINE BEHAVIOUR UNLESS A PROBE SET THE VALUE.** ⚠️ **And
 `UNPROBED` is a third state, not a soft no — 16 of the 22 are unprobed today and none of them is evidence
 of anything.**
+
+### 46.11 ⛔ RANKS ARE ADDITIVE — AND TWO WAYS I GOT THIS WRONG IN ONE DOCUMENT (2026-08-23)
+
+**Erik:** *"The r2 and r3 of a craft are additive gains — period. You wouldn't be using Kindle to light
+fires, then after you use it to burn a goblin whole, you can't light fires anymore. You can use any lower
+level prose a skill had as well."*
+
+⛔ **A RANK ADDS. IT NEVER REPLACES.** A craft at r3 can do everything r1 and r2 could, plus the new thing.
+
+**⚠️ WHY IT NEEDS WRITING DOWN: a per-rank field READS LIKE A SEQUENCE AND IS NOT ONE.** `keening` carries
+`imposes.targets` 6 → 3 → 12. **I reported that as *"deepened at r2 and narrowed to pay for it"* and built
+a whole design argument on the trade.** ⛔ **THERE IS NO TRADE.** r2 means *three fall unconscious IN
+ADDITION TO the six who lose their action.*
+
+⛔ **AND THE PROSE ALREADY SAID SO.** r2 reads *"any who resist lose their next action instead"* — that is
+r1, still running, inside r2's own text. **I had it on screen and read past it because I was looking for a
+progression on one field and found numbers that could be one.**
+
+**THE RULE: the resolved mechanic at rank N is the UNION of ranks 1..N. `gains`/`gainAxes` describe what
+the new tier ADDS, never what the craft has become. Any reader that treats a per-rank number as one value
+moving over time gets additive crafts wrong, and gets them wrong silently.**
+
+### 46.12 ⛔ A RULING MADE IN A CONTEXT IS NOT A LAW OF THE WORLD (2026-08-23)
+
+**Erik ruled on `bargain` that rank scales the SIZE OF THE DEAL rather than the discount.** ⛔ **I then
+cited it twice as a general principle about uniform ladders — in a work order and in a scaling spec — as
+though it governed every craft in the game.**
+
+**Erik:** *"I stated that in a specific moment and context. Make sure you don't generalize it to the whole
+world."*
+
+⚠️ **THE FAILURE IS SUBTLE AND IT IS FLATTERING TO THE RULING** — I was not contradicting him, I was
+promoting him, turning a sharp local call into a universal law that would then constrain crafts he never
+considered. ⛔ **IT IS THE SAME MOVE AS THE THRENODIST ONE**: *"feeling is the only true knowing"* was an
+epistemology and I made it a prohibition. **Both times I took something true in its place and made it
+binding everywhere.**
+
+**THE RULE: when citing a prior ruling, carry its SCOPE with it. If the scope was not stated, ask — do not
+supply one, and never supply the largest one available.**

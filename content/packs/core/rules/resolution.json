@@ -38,7 +38,9 @@
   "max": 100,
   "regenPerRest": 40,
   "defaultActionCost": 5,
-  "exhaustedPenalty": 10
+  "exhaustedPenalty": 10,
+  "rankReachSurcharge": 3,
+  "_rankReachSurcharge": "⛔ ERIK 2026-08-23: 'set it to 3 in general, for now.' THE PRICE OF REACHING HIGH. Each rank of reach above r1 adds 3 energy: a craft costing 4 is 4 / 7 / 10 at r1 / r2 / r3. ⚠️ IT PAIRS WITH `leveling.rankEnergyDiscount: 1`, which makes LOWER tiers cheaper as you master a craft — so practice makes the familiar cheap and ambition costs more. ⛔ BEFORE THIS, 'knock six down' AND 'knock twelve unconscious' WERE THE SAME PRICE, because rank had only ever discounted (CCODE-244). ⚠️ CCode left the dial at 0 deliberately rather than invent a balance number — reader before field. This is the field. 'For now' is Erik's word: it is a first setting, not a settled one."
  },
  "recovery": {
   "meal": 10,

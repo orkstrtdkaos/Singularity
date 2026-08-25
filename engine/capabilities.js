@@ -34,9 +34,21 @@ const txt = (v) => (typeof v === "string" ? v.trim() : "");
 export const TIER_MARKERS = ["imposes", "antisoakImposed", "pierce", "penetration", "ongoingHarm",
   "persistUntilHealed", "dice", "targets", "scope", "range", "duration", "magnitude"];
 
-/** Does this rank declare something of its own, or is it prose over the tier below? */
-export function tierDeclaresSomething(rankNode) {
+/** ⛔ CCODE-245 / SPEC_rank_zero — DOES THIS TIER ADD SOMETHING OVER THE ACCUMULATION BELOW IT?
+ *
+ *  ⚠️ MY FIRST VERSION ASKED "does this node carry fields", WITH NOTHING TO COMPARE AGAINST — so r1, which
+ *  has no tier beneath it, answered NO on 294 of 383 crafts and was FILTERED OUT OF THE MENU. The narrator
+ *  could not pick the r1 use of three quarters of the corpus.
+ *
+ *  ⛔ AEVI'S r0 IS WHY THIS FUNCTION IS NOW CORRECT AS WRITTEN RATHER THAN SPECIAL-CASED. The additive
+ *  model folds tiers 1..N, and a fold needs an IDENTITY ELEMENT. r0 is it: the empty capability. r1 adds
+ *  over r0, so r1 declares EVERYTHING and "learning a craft gains you all its r1 stuff" is true by
+ *  construction. A guard saying `if (rank <= 1) return true` would have said "r1 is weird"; r0 says the
+ *  rule was always right and the base case was missing. */
+export function tierDeclaresSomething(rankNode, belowRanks = null) {
   if (!rankNode) return false;
+  // the base case: nothing beneath this tier means everything it does is new
+  if (belowRanks != null && belowRanks.length === 0) return true;
   for (const k of TIER_MARKERS) {
     if (rankNode[k] != null) return true;
     if (rankNode.mechanic && rankNode.mechanic[k] != null) return true;
@@ -52,7 +64,11 @@ export function tierDeclaresSomething(rankNode) {
  *  a sheet wants all of them (you can still do the r1 thing), a battle menu wants only the choices. */
 export function capabilitiesOf(ability, ownedRank = 1, { cfg = {}, character = null, costFn = null } = {}) {
   if (!ability) return [];
-  const owned = Math.max(1, num(ownedRank, 1));
+  // ⛔ NO FLOOR OF ONE. `Math.max(1, …)` made `ownedRank: 0` INDISTINGUISHABLE FROM r1 — and the engine
+  // then GRANTED the craft: `resolveTier(craft, 1, 0)` returned ok. That is the absent-vs-explicit trap
+  // this project has hit four times (`mix: null`, `wired: false`, `band: null`, `gainAxes: []`) except the
+  // collapsed state was a PERMISSION. r0 means NOT LEARNED and must stay representable.
+  const owned = Math.max(0, num(ownedRank, 1));
   const tree = (ability.tree || []).slice().sort((a, b) => num(a.rank, 0) - num(b.rank, 0));
   const out = [];
   for (const node of tree) {
@@ -63,7 +79,7 @@ export function capabilitiesOf(ability, ownedRank = 1, { cfg = {}, character = n
       // ⚠️ THE PROSE IS THE DESCRIPTION AND AEVI ALREADY AUTHORS IT. No new authoring for this half.
       does: txt(node.grants) || txt(node.name) || `${ability.name || ability.id} at rank ${r}`,
       cannot: txt(node.cannot) || null,
-      distinct: tierDeclaresSomething(node),
+      distinct: tierDeclaresSomething(node, tree.filter(x => num(x?.rank, 0) < r && num(x?.rank, 0) >= 1)),
       // what this tier itself declares — never the accumulation, per §4: an authored value on a rank is
       // THAT TIER'S own number, not an override of the craft
       imposes: node.imposes ?? node.mechanic?.imposes ?? null,
@@ -96,8 +112,14 @@ export function reachCost(ability, rank = 1, { cfg = {}, character = null, baseC
  *  says WHY, because "you cannot do that" without a reason is the cruellest possible message when the
  *  player has just described something their character plainly could do one tier down. */
 export function resolveTier(ability, wantRank, ownedRank = 1) {
-  const owned = Math.max(1, num(ownedRank, 1));
+  const owned = Math.max(0, num(ownedRank, 1));
   const want = Math.max(1, num(wantRank, 1));
+  // ⛔ r0 IS THE UNLEARNED STATE AND IT REFUSES. Before this, owning 0 resolved as owning 1 and the engine
+  // said yes — a permission granted by a floor.
+  if (owned < 1) {
+    return { ok: false, unlearned: true, rank: null, ownedRank: 0, wanted: want,
+      why: `you have not learned ${ability?.name || ability?.id || "this craft"}` };
+  }
   const caps = capabilitiesOf(ability, owned);
   if (!caps.length) return { ok: false, why: "this craft has no ranks authored", rank: null };
   if (want > owned) {

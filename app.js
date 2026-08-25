@@ -12001,7 +12001,11 @@ function playerBattleSkills() {
       // ⚠️ ONLY THE TIERS THAT DIFFER. One option per craft × function × rank takes a 6-craft kit from 14
       // options to 42, and two thirds of ranks declare nothing of their own. This is a list of CHOICES.
       out.push({ id: a.abilityId, function: fn, tier: a.level || 1, attribute: def.attribute || "practical", name: def.name || a.abilityId, energyCost: effectiveEnergyCost(def, character, CONTENT.rules), multi: fns.length > 1,
-        ...(() => { const menu = capabilityMenu(def, a.level || 1, { cfg: CONTENT.rules?.energy });
+        ...(() => { // ⚠️ `??`, NOT `||` — CCODE-245. `a.level || 1` turns a genuine rank 0 into 1 BEFORE the module
+        // sees it, which re-creates the exact permission bug r0 exists to close, one layer up. It is
+        // latent today (an unlearned craft is ABSENT from `character.abilities`, never present at 0)
+        // and it should stay impossible rather than merely unreached.
+        const menu = capabilityMenu(def, a.level ?? 1, { cfg: CONTENT.rules?.energy });
           return menu.tiers.length > 1
             ? { tiers: menu.tiers.map(t => ({ rank: t.rank, does: smartClamp(t.does, 160), cost: t.cost })) }
             : {}; })() });
@@ -12756,7 +12760,7 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
     const cdef = fullCatalog()[skill.id];
     if (cdef) {
       const want = Number(skill.rank) || (skill.tier || 1);
-      const v = resolveTier(cdef, want, skill.tier || 1);
+      const v = resolveTier(cdef, want, skill.tier ?? 1);   // ⚠️ `??` — see CCODE-245; `||` would swallow a real 0
       // ⚠️ AN OVERREACH IS NOT AN ERROR, IT IS A TIER DOWN. The additive model means the lower capability
       // is always still there, so reaching too high resolves at the best you have rather than refusing —
       // and the receipt says which, so the player is never silently given less than they asked for.

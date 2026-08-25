@@ -18258,22 +18258,65 @@ await (async () => {
       && CAP.capabilityMenu({ id: "x", tree: [{ rank: 1 }] }, 1).tiers.length >= 1);
 
     // ⛔ COST: the mechanism exists and the price is UNCHANGED until a dial is authored.
+    // ⚠️ THE CLAIM IS THE DIAL'S BEHAVIOUR, NOT ITS SETTING. My first version asserted "costs are unchanged
+    // today" — true when I wrote it and false the same afternoon, because Erik authored
+    // `rankReachSurcharge: 3`. A gate pinned to the current value of a dial goes red when someone turns it,
+    // which punishes exactly the person the dial was built for. §37.2 again, and mine again.
     const e = C199.rules?.energy || {};
-    const today = [1, 2, 3].map(r => CAP.reachCost(probe, r, { cfg: e }));
-    check(`CCODE-244: with no surcharge authored, reaching a higher tier costs exactly what it does today (${today.join("/")})`,
-      new Set(today).size === 1 && today[0] === 4);
+    const flatCfg = { ...e, rankReachSurcharge: 0 };
+    const flat244 = [1, 2, 3].map(r => CAP.reachCost(probe, r, { cfg: flatCfg }));
+    check(`CCODE-244: with the surcharge at 0, every tier costs the same (${flat244.join("/")}) — the mechanism adds nothing on its own`,
+      new Set(flat244).size === 1 && flat244[0] === 4);
     const dialled = [1, 2, 3].map(r => CAP.reachCost(probe, r, { cfg: { ...e, rankReachSurcharge: 3 } }));
-    check(`CCODE-244: …and the moment it IS authored, reach costs (${dialled.join("/")})`,
+    check(`CCODE-244: …and a surcharge makes reach cost more, monotonically (${dialled.join("/")})`,
       dialled[2] > dialled[1] && dialled[1] > dialled[0]);
+    // ⛔ AND THE LIVE SETTING IS REPORTED RATHER THAN ASSERTED — Erik owns the number, not this file.
+    const live = [1, 2, 3].map(r => CAP.reachCost(probe, r, { cfg: e }));
+    console.log(`note  CCODE-244: authored surcharge is ${e.rankReachSurcharge ?? 0} — a 4-cost craft reaches at ${live.join(" / ")}`);
     // ⚠️ `null` IS NOT ZERO. `Number(null) === 0` is finite, so the obvious num helper swallowed the
     // fallback and returned a cost of 1 for a craft whose authored energyCost is 4.
     check("CCODE-244: an absent base cost falls back to the craft's authored one — null is not zero",
       CAP.reachCost({ energyCost: 7 }, 1, { cfg: e }) === 7);
 
+    // ⛔ CCODE-245 / SPEC_rank_zero — r0 IS THE UNLEARNED STATE, AND IT WAS A PERMISSION.
+    // `Math.max(1, ownedRank)` made 0 indistinguishable from 1 and the engine GRANTED the craft:
+    // `resolveTier(craft, 1, 0)` returned ok. The absent-vs-explicit trap for the fifth time — except the
+    // collapsed state was permission to use something you have not learned.
+    {
+      const unlearned = C199.abilities.kept_breath || Object.values(C199.abilities).find(a => (a.tree || []).length);
+      check("CCODE-245: a craft you have NOT learned offers no tiers at all",
+        CAP.capabilityMenu(unlearned, 0).tiers.length === 0);
+      const r0 = CAP.resolveTier(unlearned, 1, 0);
+      check("CCODE-245: …and the engine REFUSES it, with a reason naming that it is not learned",
+        r0.ok === false && r0.unlearned === true && /have not learned/.test(r0.why));
+      // ⚠️ HER §4.4: omitted and 0 must be distinguishable, or the fix re-creates the bug.
+      check("CCODE-245: omitting the rank is NOT the same as passing 0",
+        CAP.capabilityMenu(unlearned).tiers.length > 0 && CAP.capabilityMenu(unlearned, 0).tiers.length === 0);
+      // ⛔ AND THE CALLERS MUST NOT COLLAPSE IT EITHER — `|| 1` swallows a real 0 one layer up.
+      const appSrc245 = readFileSync(join(root, "app.js"), "utf8");
+      check("CCODE-245: app.js passes the rank through with `??`, so a genuine 0 survives to the module",
+        /capabilityMenu\(def, a\.level \?\? 1/.test(appSrc245) && /resolveTier\(cdef, want, skill\.tier \?\? 1\)/.test(appSrc245));
+
+      // ⛔ HER §4.2 — r1 WAS FILTERED FROM THE MENU ON MOST OF THE CORPUS, because `tierDeclaresSomething`
+      // compared r1 against a tier that does not exist and found nothing new. With r0 as the identity
+      // element the same function is correct as written.
+      const trees = Object.values(C199.abilities).filter(a => (a.tree || []).length);
+      const withR1 = trees.filter(a => {
+        const top = Math.max(...a.tree.map(r => Number(r.rank) || 1));
+        return CAP.capabilityMenu(a, top).tiers.some(t => t.rank === 1);
+      }).length;
+      check(`CCODE-245: EVERY craft offers its r1 use (${withR1} of ${trees.length}) — it was 89, so three quarters of the corpus could not be used at rank 1`,
+        withR1 === trees.length, `${withR1}/${trees.length}`);
+      // ⚠️ AND THE FILTER STILL FILTERS — her §4.3. Only r1 was ever misclassified.
+      const flat245 = { id: "f2", tree: [{ rank: 1, grants: "a thing" }, { rank: 2, grants: "the same, better said" }] };
+      check("CCODE-245: …while a PURE-PROSE r2 is still filtered — the 508-of-1,056 measurement stands",
+        CAP.capabilityMenu(flat245, 2).tiers.length === 1 && CAP.capabilityMenu(flat245, 2).tiers[0].rank === 1);
+    }
+
     // ⛔ AND THE WIRING: the rank must reach the declaration, or none of this is real in play.
     const appSrc244 = readFileSync(join(root, "app.js"), "utf8");
     check("CCODE-244: the skill list carries the TIERS, so the narrator is offered a rank to choose",
-      /capabilityMenu\(def, a\.level \|\| 1/.test(appSrc244) && /tiers: menu\.tiers\.map/.test(appSrc244));
+      /capabilityMenu\(def, a\.level \?\? 1/.test(appSrc244) && /tiers: menu\.tiers\.map/.test(appSrc244));
     check("CCODE-244: …and sbDeclare puts a VALIDATED rank on the declaration — authoredBlock has always taken one and nothing ever set it",
       /decl\.rank = v\.ok \? v\.rank/.test(appSrc244) && /resolveTier\(cdef, want/.test(appSrc244));
   }

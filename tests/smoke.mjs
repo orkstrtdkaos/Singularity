@@ -18184,9 +18184,19 @@ await (async () => {
     // ⛔ AND THE READER FIX THAT CAME WITH IT: `penetration` was authored on two crafts and read on none.
     // `pen` was `Number(winDecl.penetration)`, and neither craft puts it there — radiant_lance carries it
     // on `mechanic`, hastened_grey on a RANK. §45.1 for the fifth time.
-    const rl = C199.abilities.radiant_lance, hg = C199.abilities.hastened_grey;
-    check("CCODE-243: both authored penetration values are now REACHABLE by the reader the round uses",
-      cm243.authoredBlock(rl, "penetration", 3) === 2 && cm243.authoredBlock(hg, "penetration", 3) === 2);
+    // ⚠️ DERIVED FROM THE CORPUS, NOT NAMED. My first version asserted that `radiant_lance` AND
+    // `hastened_grey` each resolve penetration 2 — and went red the next day when Aevi correctly replaced
+    // hastened_grey's inert penetration with `pierce`. A gate pinned to two craft ids fails when content is
+    // legitimately right, which is the §37.2 failure I have now committed myself.
+    // WHAT MUST BE TRUE: whatever authors penetration ANYWHERE is reachable by the reader the round uses.
+    const penCrafts = Object.values(C199.abilities).filter(a =>
+      a.penetration != null || a.mechanic?.penetration != null
+      || (a.tree || []).some(r => r?.penetration != null || r?.mechanic?.penetration != null));
+    check(`CCODE-243: every craft authoring \`penetration\` is REACHABLE by the round's reader (${penCrafts.length} crafts)`,
+      penCrafts.length > 0 && penCrafts.every(a => {
+        const top = Math.max(1, ...(a.tree || []).map(r => Number(r.rank) || 1));
+        return Number(cm243.authoredBlock(a, "penetration", top)) > 0;
+      }), penCrafts.map(a => `${a.id}=${cm243.authoredBlock(a, "penetration", 3)}`).join(", "));
     const src243 = readFileSync(join(root, "engine/skill_battle.js"), "utf8");
     check("CCODE-243: …and the round reads penetration rank-first rather than off the declaration's top level",
       /const pen = Math\.max\(0, Number\(authoredBlock\(winDecl, "penetration"/.test(src243));
@@ -18200,6 +18210,72 @@ await (async () => {
     // acceptance 5: the receipt separates the portions
     check("CCODE-243: the receipt names the pierced portion, so a player can see why armour did not help",
       /pierceNote: `\$\{pierce\} bypassed armour entirely`/.test(src243));
+  }
+
+
+  // 5ac · ⛔ CCODE-244 — THE CAPABILITY READER. Erik: "I want the player to just say use X skill this way
+  // and the engine should know which rank it takes to do that."
+  {
+    const CAP = await import("../engine/capabilities.js");
+    const keening = C199.abilities.keening;
+
+    // ⛔ AEVI'S WORKED CRAFT IS THE GATE. Her §2a: r2's `targets: 3` does NOT replace r1's 6 — it is a new
+    // capability layered over a retained one, and the prose says so inside r2's own text.
+    if (keening) {
+      const caps = CAP.capabilitiesOf(keening, 3, { cfg: C199.rules?.energy });
+      check(`CCODE-244: an r3 character sees EVERY tier of keening, not just the last (${caps.length})`,
+        caps.length === 3 && caps.map(c => c.rank).join() === "1,2,3");
+      // ⚠️ THE ADDITIVE MODEL, STATED AS A TEST: owning r3 does not remove the r1 option.
+      check("CCODE-244: the r1 capability is still offered at r3 — a rank ADDS, it never replaces",
+        caps.some(c => c.rank === 1));
+      // and owning less shows less
+      check("CCODE-244: an r1 character sees only what they own",
+        CAP.capabilitiesOf(keening, 1).length === 1);
+    }
+
+    // ⛔ WHICH RANK DOES THIS TAKE — the question Erik asked, answered.
+    const probe = { id: "p", name: "Probe", energyCost: 4, tree: [
+      { rank: 1, grants: "one target", imposes: { condition: "action_loss", targets: 1 } },
+      { rank: 2, grants: "three targets", imposes: { condition: "unconscious", targets: 3 } },
+      { rank: 3, grants: "a hall", imposes: { condition: "unconscious", targets: 12 } }] };
+    check("CCODE-244: asking for a tier you own resolves to it",
+      CAP.resolveTier(probe, 2, 3).ok === true && CAP.resolveTier(probe, 2, 3).rank === 2);
+    // ⚠️ AN OVERREACH NAMES WHAT YOU CAN DO INSTEAD. "You cannot do that" with no alternative is the
+    // cruellest possible message when the tier below plainly covers something.
+    const over = CAP.resolveTier(probe, 3, 1);
+    check("CCODE-244: reaching past what you own is refused WITH the capability you do have",
+      over.ok === false && over.overreach === true && over.rank === 1 && /one target/.test(over.insteadCan));
+
+    // ⛔ THE MENU IS A LIST OF CHOICES, NOT OF ROWS. Measured: one option per craft × function × rank takes
+    // a 6-craft kit from 14 options to 42, and only 508 of 1,056 ranks declare anything of their own.
+    const flat = { id: "f", name: "Flat", tree: [{ rank: 1, grants: "a thing" }, { rank: 2, grants: "the same thing, better said" }] };
+    check("CCODE-244: a craft whose ranks declare nothing mechanical offers ONE menu entry, not one per rank",
+      CAP.capabilityMenu(flat, 2).tiers.length === 1);
+    // ⚠️ AND NEVER ZERO — a filter that drops a craft entirely deletes it from play, which is the failure
+    // this file exists to prevent, committed by the filter meant to keep it small.
+    check("CCODE-244: …but never zero — every owned craft is always offerable",
+      CAP.capabilityMenu(flat, 2).tiers.length >= 1
+      && CAP.capabilityMenu({ id: "x", tree: [{ rank: 1 }] }, 1).tiers.length >= 1);
+
+    // ⛔ COST: the mechanism exists and the price is UNCHANGED until a dial is authored.
+    const e = C199.rules?.energy || {};
+    const today = [1, 2, 3].map(r => CAP.reachCost(probe, r, { cfg: e }));
+    check(`CCODE-244: with no surcharge authored, reaching a higher tier costs exactly what it does today (${today.join("/")})`,
+      new Set(today).size === 1 && today[0] === 4);
+    const dialled = [1, 2, 3].map(r => CAP.reachCost(probe, r, { cfg: { ...e, rankReachSurcharge: 3 } }));
+    check(`CCODE-244: …and the moment it IS authored, reach costs (${dialled.join("/")})`,
+      dialled[2] > dialled[1] && dialled[1] > dialled[0]);
+    // ⚠️ `null` IS NOT ZERO. `Number(null) === 0` is finite, so the obvious num helper swallowed the
+    // fallback and returned a cost of 1 for a craft whose authored energyCost is 4.
+    check("CCODE-244: an absent base cost falls back to the craft's authored one — null is not zero",
+      CAP.reachCost({ energyCost: 7 }, 1, { cfg: e }) === 7);
+
+    // ⛔ AND THE WIRING: the rank must reach the declaration, or none of this is real in play.
+    const appSrc244 = readFileSync(join(root, "app.js"), "utf8");
+    check("CCODE-244: the skill list carries the TIERS, so the narrator is offered a rank to choose",
+      /capabilityMenu\(def, a\.level \|\| 1/.test(appSrc244) && /tiers: menu\.tiers\.map/.test(appSrc244));
+    check("CCODE-244: …and sbDeclare puts a VALIDATED rank on the declaration — authoredBlock has always taken one and nothing ever set it",
+      /decl\.rank = v\.ok \? v\.rank/.test(appSrc244) && /resolveTier\(cdef, want/.test(appSrc244));
   }
 
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse

@@ -101,6 +101,7 @@ import { clearOnRest, applyCondition, activeConditions } from "./engine/conditio
 // see is the same failure as one that does not exist.
 import { ensurePurse, purseLine, worthOf, applyExchangeOps } from "./engine/purse.js";
 import { bargainOutcome } from "./engine/economy.js";
+import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 // ⛔ CCODE-239 — PROJECTS TICK. `engine/projects.js` shipped green with all six exports reachable only
 // from smoke.mjs: work banked, nothing advanced it, and `PROJECT_TICKS` was the one INERT verdict in the
 // effect audit. A threshold nothing counts toward is a duration that never elapses.
@@ -111,7 +112,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.205";
+const APP_VERSION = "1.9.206";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -11993,7 +11994,17 @@ function playerBattleSkills() {
     // belongs in mend as well as hinder/sway; the old functions[0] read hid every secondary use a craft had.
     // Each entry declares with THAT function, so picking it from MEND actually mends.
     for (const fn of fns) {
-      out.push({ id: a.abilityId, function: fn, tier: a.level || 1, attribute: def.attribute || "practical", name: def.name || a.abilityId, energyCost: effectiveEnergyCost(def, character, CONTENT.rules), multi: fns.length > 1 });
+      // ⛔ CCODE-244 — THE TIERS RIDE ALONG, so the narrator can pick WHICH capability the player just
+      // described. Erik: "I want the player to just say use X skill this way and the engine should know
+      // which rank it takes." Until now this list sent one entry per craft carrying only the OWNED rank,
+      // so the model was never offered a rank to choose — it could not have picked one if it tried.
+      // ⚠️ ONLY THE TIERS THAT DIFFER. One option per craft × function × rank takes a 6-craft kit from 14
+      // options to 42, and two thirds of ranks declare nothing of their own. This is a list of CHOICES.
+      out.push({ id: a.abilityId, function: fn, tier: a.level || 1, attribute: def.attribute || "practical", name: def.name || a.abilityId, energyCost: effectiveEnergyCost(def, character, CONTENT.rules), multi: fns.length > 1,
+        ...(() => { const menu = capabilityMenu(def, a.level || 1, { cfg: CONTENT.rules?.energy });
+          return menu.tiers.length > 1
+            ? { tiers: menu.tiers.map(t => ({ rank: t.rank, does: t.does.slice(0, 160), cost: t.cost })) }
+            : {}; })() });
     }
   }
   out.push({ id: "_strike", function: "strike", tier: 1, attribute: "physical", name: "A plain strike" });
@@ -12737,6 +12748,23 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
   const beforeMom = enc.state?.momentum ?? 0; // SNG-246: for the per-round receipt (the swing this round)
   const sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
   const decl = { function: skill.function, tier: skill.tier || 1, attribute: skill.attribute || "practical", intensity, name: skill.name };
+  // ⛔ CCODE-244 — THE RANK RIDES ON THE DECLARATION, VALIDATED. `authoredBlock` has always taken a rank
+  // and nothing ever put one here, so every craft resolved at rank 1 no matter what the character owns or
+  // what the narrator meant. `skill.rank` is what the model chose from the tiers; absent, the owned rank
+  // stands, which is exactly today's behaviour.
+  {
+    const cdef = fullCatalog()[skill.id];
+    if (cdef) {
+      const want = Number(skill.rank) || (skill.tier || 1);
+      const v = resolveTier(cdef, want, skill.tier || 1);
+      // ⚠️ AN OVERREACH IS NOT AN ERROR, IT IS A TIER DOWN. The additive model means the lower capability
+      // is always still there, so reaching too high resolves at the best you have rather than refusing —
+      // and the receipt says which, so the player is never silently given less than they asked for.
+      decl.rank = v.ok ? v.rank : (v.rank || 1);
+      if (!v.ok && v.overreach) decl.rankNote = v.why;
+      else if (v.ok && v.rank !== want) decl.rankNote = `resolved at rank ${v.rank}`;
+    }
+  }
   // CCODE-37: a WOVEN second craft rides on the declaration — the engine adds its named roll line, lands its
   // effect, and charges for both. The lead craft's function still drives the matchup.
   if (woven) decl.woven = { function: woven.function, tier: woven.tier || 1, name: woven.name, id: woven.id };

@@ -18321,6 +18321,87 @@ await (async () => {
       /decl\.rank = v\.ok \? v\.rank/.test(appSrc244) && /resolveTier\(cdef, want/.test(appSrc244));
   }
 
+
+  // 5ad · ⛔ CCODE-246 / SPEC_intercept_and_reflect — STANDING IN FRONT OF SOMEONE ELSE.
+  // The game had no interception at all: `shield` and `ward` blunt what reaches YOU, and nothing let a
+  // character take a hit meant for an ally. A whole party role missing from a game that already had soak
+  // layers, typed wards, imposed conditions and resist thresholds.
+  {
+    const IC = await import("../engine/intercept.js");
+    const sheets = { tank: { attributes: { mental: 9 } }, squishy: { attributes: { mental: 1 } },
+      twin: { attributes: { mental: 9 } }, mid: { attributes: { mental: 5 } } };
+    const imp = { condition: "unconscious", degradesTo: "action_loss", onCrit: "incapacitated" };
+
+    // ⛔ §5.2 — r1 IS ONE ALLY, ONE CONDITION, and it is SPENT.
+    const p1 = IC.openProtection({ protectorId: "tank", allyId: "squishy", rank: 1 });
+    check("CCODE-246 §5.2: an r1 protection carries exactly one charge and no duration",
+      p1.chargesLeft === 1 && p1.roundsLeft === null && p1.reflects === false);
+    const first = IC.redirectImposition({ aimedAt: "squishy", sourceId: "foe", protections: [p1], sheets, imposition: imp, degree: "partial" });
+    check("CCODE-246 §5.1: an imposition aimed at a protected ally is caught by the interceptor",
+      !!first && first.caughtBy === "tank" && first.onBehalfOf === "squishy" && first.lands.on === "tank");
+    IC.spendProtection(p1);
+    check("CCODE-246 §5.2: …and once spent it protects nothing — r1 is one hit, not a standing wall",
+      IC.interceptorFor("squishy", [p1], sheets) === null);
+
+    // ⛔ §5.1 — RESOLVED AGAINST THE INTERCEPTOR'S OWN SHEET. Reusing the verdict computed against the ALLY
+    // would make the tank a bookkeeping entry: the whole point is that the tank is BETTER at eating it.
+    const p2 = IC.openProtection({ protectorId: "tank", allyId: "squishy", rank: 2 });
+    const resolveFn = ({ targetResist }) => ({ condition: targetResist >= 8 ? "action_loss" : "unconscious",
+      degradedTo: "action_loss", onCrit: "incapacitated" });
+    const reres = IC.redirectImposition({ aimedAt: "squishy", sourceId: "foe", protections: [p2], sheets, imposition: imp, degree: "partial", resolveFn });
+    const inherited = IC.redirectImposition({ aimedAt: "squishy", sourceId: "foe", protections: [p2], sheets, imposition: imp, degree: "partial" });
+    check("CCODE-246 §5.1: the imposition is RE-RESOLVED against the interceptor — a hard target eats a softer version",
+      reres.reResolved === true && reres.lands.condition === "action_loss"
+      && inherited.reResolved === false && inherited.lands.condition === "unconscious");
+
+    // ⛔ §5.3 — r2 HARDENS THE TAKER, and the existing threshold arithmetic already rewards that.
+    check("CCODE-246 §5.3: an r2 protection raises the interceptor's resist while it runs",
+      p2.resistBonus > 0
+      && IC.effectiveResist(sheets.tank, p2) > IC.effectiveResist(sheets.tank, null));
+
+    // ⛔ §5.4 — REFLECTION BY DEGREE. Erik's three tiers map onto the existing crit/success/partial ladder,
+    // so these are not new numbers.
+    const p3 = IC.openProtection({ protectorId: "tank", allyId: "squishy", rank: 3 });
+    const back = (d) => IC.redirectImposition({ aimedAt: "squishy", sourceId: "foe", protections: [p3], sheets, imposition: imp, degree: d }).lands;
+    check("CCODE-246 §5.4: a FULL resist sends the original back BOOSTED — the craft's own onCrit, not an invented number",
+      back("crit_success").on === "foe" && back("crit_success").condition === "incapacitated" && back("crit_success").boosted === true);
+    check("CCODE-246 §5.4: a clean resist sends the ORIGINAL back",
+      back("success").on === "foe" && back("success").condition === "unconscious");
+    check("CCODE-246 §5.4: a marginal resist sends the DEGRADED form back",
+      back("partial").on === "foe" && back("partial").condition === "action_loss");
+    // ⚠️ REFLECTION IS EARNED. Erik's "maybe" kept as written — automatic reflection turns r3 into a wall.
+    check("CCODE-246 §5.4: a FAILED resist reflects NOTHING and the interceptor carries it",
+      back("failure").on === "tank" && back("failure").reflected === false);
+    // and an r1/r2 protection never reflects at all
+    check("CCODE-246 §5.4: only rank 3 reflects — r2 catches and carries",
+      IC.redirectImposition({ aimedAt: "squishy", sourceId: "foe", protections: [p2], sheets, imposition: imp, degree: "crit_success" }).lands.on === "tank");
+
+    // ⛔ §5.6 — COLLISION: HIGHEST RESIST CATCHES IT, ties to last-declared.
+    const hi = IC.openProtection({ protectorId: "tank", allyId: "squishy", rank: 2 });
+    const lo = IC.openProtection({ protectorId: "mid", allyId: "squishy", rank: 2 });
+    check("CCODE-246 §5.6: the higher resist catches it, whatever the declaration order",
+      IC.interceptorFor("squishy", [hi, lo], sheets).protection.protectorId === "tank"
+      && IC.interceptorFor("squishy", [lo, hi], sheets).protection.protectorId === "tank");
+    const tw = IC.openProtection({ protectorId: "twin", allyId: "squishy", rank: 2 });
+    check("CCODE-246 §5.6: …and a genuine TIE breaks by last-declared — Erik's other option kept as the tiebreaker",
+      IC.interceptorFor("squishy", [hi, tw], sheets).protection.protectorId === "twin"
+      && IC.interceptorFor("squishy", [tw, hi], sheets).protection.protectorId === "tank");
+
+    // ⛔ §5.7 — NO CONSENT STEP. Erik: "eliminate consent." Declaring the protection is the whole action.
+    const icSrc = readFileSync(join(root, "engine/intercept.js"), "utf8")
+      .replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+    check("CCODE-246 §5.7: there is no consent gate anywhere — a shield is not a confession",
+      !/consent|accepted|agree|permission/i.test(icSrc));
+
+    // ⚠️ §5.5 — THE RECEIPT. "A tank mechanic nobody can see is a tank mechanic nobody thanks."
+    check("CCODE-246 §5.5: the receipt says WHO caught WHAT, and for whom",
+      first.caughtBy && first.onBehalfOf && first.lands.condition && typeof first.why === "string" && first.why.length > 5);
+
+    // ⚠️ AND NOBODY IN FRONT MEANS NOTHING CHANGES — this must be additive, not a rewrite of the path.
+    check("CCODE-246: with no protection standing, the redirect returns null and the caller proceeds as before",
+      IC.redirectImposition({ aimedAt: "nobody", protections: [], sheets, imposition: imp, degree: "success" }) === null);
+  }
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

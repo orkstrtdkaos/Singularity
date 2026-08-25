@@ -4,7 +4,7 @@
 > Mechanical columns are derived from the static import graph, which is complete: `app.js` contains **zero dynamic imports**.
 > **`purpose`, `player-visible surface` and `what makes it fire` are AUTHORED** in `scripts/engine_map.authored.json` and are never overwritten by a regeneration.
 
-**92 modules · 79/92 described.** Two flags carry the defect shapes this map exists to catch. **`player-visible surface: NONE`** (L1) is how a capability gets built, tested, and never met. **`what makes it fire: NONE` on a module that DOES have a surface** (L2, "permission isn't initiative") is how a capability the player can reach still never happens — the teacher gate that never fired.
+**93 modules · 79/93 described.** Two flags carry the defect shapes this map exists to catch. **`player-visible surface: NONE`** (L1) is how a capability gets built, tested, and never met. **`what makes it fire: NONE` on a module that DOES have a surface** (L2, "permission isn't initiative") is how a capability the player can reach still never happens — the teacher gate that never fired.
 
 **How each derived column is measured** — so the columns can be trusted or corrected rather than believed:
 
@@ -107,6 +107,7 @@
 | `engine/whois.js` | SNG-299: answers 'who or what is that?' for any name the world has a record of — figures, arcs, titles and tiers — and says where the fuller account lives. | Any known name in any rendered prose is underlined and clickable; the popup gives what the world knows, with a codex button when a page exists. | Clicking a linkified name; the index is rebuilt on every render from the roster, the arcs, the player's codex and the titles actually earned. | 3 | `app.js` | **1** | `.wants` `.appearance` `.pronouns` | — |
 | `engine/worldglobe.js` | *— unstated —* | *—* | *—* | 33 | `app.js` | **1** | `.connections` `.worldPos` `.worldPosInherited` | — |
 | `engine/worldtab.js` | Builds THE WORLD tab — who is doing what to your arcs — as a pure function of world state, so the render can be EXECUTED in a test instead of pattern-matched against its own source. | The World tab on the character sheet: each arc by stage NAME, who is pushing it and who is holding it back (names you have met marked apart), what it cost in casualties and strikes, who is being reached for in the dark, and who has not been home. | Opening the character sheet and choosing The World; fed by arcPeopleView + worldPeopleFooter off the offscreen world tick. | 1 | `app.js` | **1** | — | — |
+| `engine/intercept.js` | *— unstated —* | *—* | *—* | 7 | **nothing** | **0** | — | — |
 
 ## GM verbs handled inside `app.js` itself
 

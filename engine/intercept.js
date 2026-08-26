@@ -40,6 +40,43 @@ export function openProtection({ protectorId, allyId, rank = 1, roundsLeft = nul
   };
 }
 
+/** ⛔ CCODE-246b — THE PROTECTION A CRAFT ACTUALLY AUTHORS. Aevi wrote `shared_weight` to the spec:
+ *
+ *    r1  interceptCondition: { allies: 1, charges: 1 }
+ *    r2  interceptCondition: { allies: 1, rounds: 6, resistBonus: 2 }
+ *    r3  interceptCondition: { … }  +  reflectCondition: true
+ *
+ *  ⚠️ READ RANK-FIRST via `authoredBlock`, which is §45.1's one reader — the field is authored on the
+ *  RANK, and a reader looking at the ability level would find nothing for all three tiers, forever.
+ *
+ *  ⛔ AND THE AUTHORED NUMBERS DECIDE, NOT MY DEFAULTS. `openProtection`'s fallbacks exist for a craft
+ *  that authors a partial spec; where Aevi wrote a number it is the number. That is the difference between
+ *  a reader and a second opinion. */
+export function protectionFromCraft(ability, rank, { protectorId, allyId, authoredBlock } = {}) {
+  if (!ability || typeof authoredBlock !== "function") return null;
+  const r = Math.max(1, num(rank, 1));
+  const spec = authoredBlock(ability, "interceptCondition", r);
+  if (!spec) return null;
+  const reflects = authoredBlock(ability, "reflectCondition", r) === true;
+  const p = openProtection({
+    protectorId, allyId, rank: r,
+    roundsLeft: spec.rounds ?? null,
+    resistBonus: spec.resistBonus ?? null,
+  });
+  // ⚠️ THE AUTHORED SHAPE OVERRIDES THE RANK HEURISTIC. `openProtection` infers charges/duration from
+  // the rank because a craft may author neither; when the craft DOES say, the craft wins.
+  // ⚠️ `roundsLeft` IS ALREADY SET — it rides in through `openProtection` above. I had a second
+  // assignment here and a mutation removing it changed nothing, which is how I learned it was dead code.
+  // A line that cannot be broken is a line that does nothing.
+  if (spec.charges != null) p.chargesLeft = Math.max(0, num(spec.charges, 1));
+  else if (spec.rounds != null) p.chargesLeft = null;
+  // ⛔ REFLECTION IS AUTHORED, NOT INFERRED FROM RANK. A future craft could reflect at r2, or never.
+  p.reflects = reflects;
+  p.allies = Math.max(1, num(spec.allies, 1));
+  p.fromCraft = ability.id || null;
+  return p;
+}
+
 /** The resist a sheet brings, plus whatever a running protection is lending it. */
 export function effectiveResist(sheet, protection = null, { attr = "mental" } = {}) {
   const base = Math.max(0, num(sheet?.attributes?.[attr], 0));

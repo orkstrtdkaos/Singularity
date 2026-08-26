@@ -18397,6 +18397,49 @@ await (async () => {
     check("CCODE-246 §5.5: the receipt says WHO caught WHAT, and for whom",
       first.caughtBy && first.onBehalfOf && first.lands.condition && typeof first.why === "string" && first.why.length > 5);
 
+    // ⛔ CCODE-246b — THE AUTHORED CRAFT DRIVES IT. Aevi wrote `shared_weight` to the spec the same day,
+    // and the risk with any new field is that it is authored and read by nothing — the failure this
+    // project has spent a fortnight cataloguing. These gates read HER numbers, not my defaults.
+    {
+      const CM246 = await import("../engine/craftmechanics.js");
+      const sw = C199.abilities.shared_weight;
+      check("CCODE-246b: the interception craft exists and authors `interceptCondition`",
+        !!sw && !!CM246.authoredBlock(sw, "interceptCondition", 1));
+      if (sw) {
+        const P = (r) => IC.protectionFromCraft(sw, r, { protectorId: "tank", allyId: "ally", authoredBlock: CM246.authoredBlock });
+        const [a1, a2, a3] = [P(1), P(2), P(3)];
+        // ⚠️ READ RANK-FIRST. The field is authored on the RANK; a reader at the ability level finds
+        // nothing for all three tiers, forever (§45.1, the sixth instance).
+        check("CCODE-246b: all three ranks resolve their authored spec — read rank-first, not off the ability",
+          !!a1 && !!a2 && !!a3);
+        check("CCODE-246b: r1 is her one charge and no duration",
+          a1.chargesLeft === 1 && a1.roundsLeft === null && a1.reflects === false);
+        check(`CCODE-246b: r2 is her sustained form — ${a2.roundsLeft} rounds, +${a2.resistBonus} resist, no charge limit`,
+          a2.chargesLeft === null && a2.roundsLeft === 6 && a2.resistBonus === 2);
+        check("CCODE-246b: r3 reflects, and reflection is AUTHORED rather than inferred from the rank",
+          a3.reflects === true && a2.reflects === false);
+        // ⛔ HER NUMBERS BEAT MY DEFAULTS. `openProtection` infers from rank for a craft that authors a
+        // partial spec; where she wrote a number, the number wins. Otherwise this is a second opinion
+        // wearing a reader's clothes.
+        // ⚠️ A SYNTHETIC CRAFT, BECAUSE HERS CANNOT DISTINGUISH THIS. `shared_weight` reflects at r3 and
+        // the heuristic `rank >= 3` agrees, so a mutation inferring reflection FROM THE RANK survives
+        // against her content. Only a craft that DISAGREES with the heuristic tests the claim.
+        // ⛔ AND MY FIRST ATTEMPT AT THIS GATE WAS ITSELF WRONG: I asserted a craft could reflect at r1 and
+        // NOT at r3, which the additive model forbids — a rank never removes a capability, so `authoredBlock`
+        // correctly carries r1's declaration up to r3. The distinguishing case is a craft that reflects
+        // EARLY, where the rank heuristic would refuse.
+        const early = { id: "early", tree: [{ rank: 1, interceptCondition: { allies: 1 }, reflectCondition: true }] };
+        const never = { id: "never", tree: [{ rank: 1, interceptCondition: { allies: 1 } }, { rank: 3, interceptCondition: { allies: 1 } }] };
+        const mk246 = (ab, r) => IC.protectionFromCraft(ab, r, { protectorId: "t", allyId: "a", authoredBlock: CM246.authoredBlock });
+        check("CCODE-246b: reflection follows the AUTHORED field, not the rank — a craft reflects at r1 if it says so, and never if it does not",
+          mk246(early, 1).reflects === true && mk246(never, 3).reflects === false);
+
+        const dflt = IC.openProtection({ protectorId: "t", allyId: "a", rank: 2 });
+        check(`CCODE-246b: the AUTHORED duration overrides the default (${a2.roundsLeft} authored vs ${dflt.roundsLeft} inferred)`,
+          a2.roundsLeft !== dflt.roundsLeft);
+      }
+    }
+
     // ⚠️ AND NOBODY IN FRONT MEANS NOTHING CHANGES — this must be additive, not a rewrite of the path.
     check("CCODE-246: with no protection standing, the redirect returns null and the caller proceeds as before",
       IC.redirectImposition({ aimedAt: "nobody", protections: [], sheets, imposition: imp, degree: "success" }) === null);

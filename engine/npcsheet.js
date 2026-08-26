@@ -163,3 +163,91 @@ export function growthFor(entry, catalog = {}, { day = null, cfg = {} } = {}) {
     thin: crafts.length <= 1 && (entry?.met || 0) > num(cfg.thinAfterMeetings, 3),
   };
 }
+
+// ══════════════════════════════════════════════════════════════════════════════════════════════════
+// ⛔ CCODE-249 — THE SAME MECHANICS AS A PC. Erik: "I want NPCs using the same set of skills available to
+// PCs — that's how they harm or restore… they use the same game mechanics. The roles part likely just sets
+// which ones they have when met and which ones they learn as they grow."
+//
+// ⚠️ SO `contributions` WAS THE WRONG ABSTRACTION AND THIS REPLACES ITS JOB. An NPC does not "bring
+// RESTORE" — an NPC KNOWS `chord_of_mending`, and mending is what that craft does. The families were a
+// summary standing in for a kit, and a summary cannot be resolved in a round.
+//
+// ⛔ AND THE KIT IS DRAWN THE WAY A PC'S IS, by the same function. `domainAccess` decides what a place on
+// the circle opens; `creationPool` is the creation screen asking that question. An NPC asking it too is not
+// a parallel system — it is the SAME system with a different character in it.
+//
+// ⚠️ PERMANENCE IS ALREADY BUILT AND I ALMOST REBUILT IT. Erik: "likely only when you have interacted with
+// them enough to make them permanent." `generate.js` has carried `TIER_SCHEMA` — fresh → established (3) →
+// nominated (8) — since SNG-216, with each tier listing what it OWES. A sheet is the next thing an
+// established person owes, and `unearnedDepth` will name anyone who lacks one.
+
+/** ⛔ IS THIS PERSON PERMANENT ENOUGH TO HAVE A SHEET? ⚠️ A face in a crowd does not get one, and that is
+ *  not stinginess — it is that a stranger with attributes is a stranger the engine has opinions about. */
+export function isPermanent(entry, { at = 3 } = {}) {
+  const tier = entry?._gen?.tier || null;
+  if (tier === "established" || tier === "nominated") return true;
+  // authored people are permanent by construction — somebody wrote them down
+  if (entry?.authored === true || entry?.schemaVersion != null) return true;
+  return num(entry?._gen?.engagementScore, num(entry?.met, 0)) >= num(at, 3);
+}
+
+/** ⛔ THE KIT — real catalogue crafts, drawn by the SAME rule a player's are.
+ *
+ *  Three sources, in the order Erik described:
+ *    1. WHAT HAS BEEN SEEN — `skillsObserved` matched to real crafts. The story is the first authority.
+ *    2. WHAT THEIR DOMAINS OPEN — the same `domainAccess` question the creation wheel asks.
+ *    3. ⚠️ AND NOTHING ELSE. A craft nobody has seen them use and their domains do not open is a craft
+ *       they do not have. The role SEEDS the domains; it does not hand out abilities directly.
+ *
+ *  ⛔ CAPPED BY LEVEL, exactly as a PC is. `skillCapacity` is the same table. */
+export function kitFor(entry, { catalog = {}, traditionIndex = null, domainAccess = null,
+  day = null, cfg = {}, capacity = null } = {}) {
+  const level = derivedLevel(entry, { day, cfg });
+  const cap = Math.max(1, num(capacity, Math.max(1, Math.round(level / Math.max(1, num(cfg.craftsPerLevels, 2))))));
+  const seen = craftsOf(entry, catalog, { limit: cap });
+  const kit = [...seen.crafts];
+
+  // what their place on the circle opens — the same question the creation screen asks
+  const domains = entry?.domains || null;
+  if (domains && typeof domainAccess === "function") {
+    for (const ab of Object.values(catalog || {})) {
+      if (kit.length >= cap) break;
+      if ((ab?.levelReq || 1) > Math.max(1, Math.ceil(level / 5))) continue;
+      if (kit.some(k => k.id === ab.id)) continue;
+      let v = null;
+      try { v = domainAccess(ab, ab.levelReq || 1, domains, traditionIndex); } catch { v = null; }
+      // ⚠️ NEAR GROUND ONLY. An NPC reaches across the circle only where the story has SHOWN them doing it
+      // — that is what `skillsObserved` is for. Filling a kit from the far side would invent a biography.
+      if (v?.allowed && (v.band === "primary" || v.band === "adjacent" || v.band === "open")) kit.push(ab);
+    }
+  }
+  return {
+    level, capacity: cap, crafts: kit.slice(0, cap),
+    fromStory: seen.crafts.map(c => c.id),
+    wantsAuthoring: seen.unmatched,
+    // ⛔ NAMED SO IT IS ACTIONABLE: a permanent person with no domains cannot draw a kit at all, and that
+    // is a gap in the record rather than a person with no talents.
+    needsDomains: !domains,
+  };
+}
+
+/** ⛔ WHAT THIS PERSON CAN DO IN A ROUND — as verbs, read off their actual crafts. ⚠️ THIS IS THE HONEST
+ *  REPLACEMENT FOR `contributions`: not a family summary, but the functions their kit really carries, which
+ *  is the same thing `playerBattleSkills` reads off a PC. */
+export function battleSkillsFor(entry, opts = {}) {
+  const { crafts, level } = kitFor(entry, opts);
+  const out = [];
+  for (const ab of crafts) {
+    for (const fn of (ab.functions || [])) {
+      out.push({ id: ab.id, function: fn, name: ab.name || ab.id, tier: ab.levelReq || 1,
+        attribute: ab.attribute || "practical", energyCost: ab.energyCost ?? null });
+    }
+  }
+  // ⛔ AND THE PLAIN STRIKE, because the PC gets one and an NPC is not a different kind of thing. This is
+  // the line that makes "Pell fights too" true without any authoring at all.
+  if (entry?.canStrike !== false && entry?.incorporeal !== true) {
+    out.push({ id: "_strike", function: "strike", name: "a plain strike", tier: 1, attribute: "physical" });
+  }
+  return { skills: out, level };
+}

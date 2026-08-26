@@ -18645,6 +18645,62 @@ await (async () => {
       gv.crafts.length >= 2 && gv.wantsAuthoring.length === 0);
   }
 
+  // 5ah · ⛔ CCODE-249 — NPCs USE THE SAME MECHANICS AS PCs. Erik: "I want NPCs using the same set of
+  // skills available to PCs — that's how they harm or restore… the roles part likely just sets which ones
+  // they have when met and which ones they learn as they grow."
+  //
+  // ⚠️ `contributions` WAS THE WRONG ABSTRACTION. An NPC does not "bring RESTORE" — an NPC KNOWS
+  // `chord_of_mending`, and mending is what that craft does. A family summary cannot be resolved in a round.
+  {
+    const NS3 = await import("../engine/npcsheet.js");
+    const T3 = await import("../engine/traditions.js");
+    const opts249 = { catalog: C199.abilities, traditionIndex: C199.traditionIndex,
+      domainAccess: T3.domainAccess, day: 420 };
+    const pell3 = { id: "pell", name: "Pell", role: "blacksmith", roles: ["partner"], met: 34,
+      firstMet: { day: 2 }, standing: 40, domains: { primary: "wright" },
+      skillsObserved: ["ironsense", "set hand"] };
+
+    // ⛔ PERMANENCE WAS ALREADY BUILT AND I ALMOST REBUILT IT. `TIER_SCHEMA` fresh → established(3) →
+    // nominated(8) has carried this since SNG-216. Erik: "likely only when you have interacted with them
+    // enough to make them permanent."
+    check("CCODE-249: someone met once is not permanent and gets no sheet",
+      NS3.isPermanent({ id: "x", met: 1 }) === false);
+    check("CCODE-249: …and the existing engagement tier is the threshold, not a new one",
+      NS3.isPermanent({ id: "y", _gen: { tier: "established" } }) === true
+      && NS3.isPermanent({ id: "z", _gen: { tier: "fresh" }, met: 0 }) === false);
+
+    // ⛔ THE KIT IS DRAWN BY THE SAME RULE A PC'S IS — `domainAccess`, the question the creation wheel asks.
+    const kit = NS3.kitFor(pell3, opts249);
+    check(`CCODE-249: a permanent NPC draws a REAL kit from the catalogue (${kit.crafts.length} crafts, cap ${kit.capacity})`,
+      kit.crafts.length > 1 && kit.crafts.every(c => !!C199.abilities[c.id]));
+    // ⚠️ THE STORY IS THE FIRST AUTHORITY: what has been SEEN outranks what a domain merely opens.
+    check("CCODE-249: what the story has SHOWN them doing is in the kit before anything derived",
+      kit.fromStory.includes("set_hand") && kit.crafts[0].id === "set_hand");
+    // ⛔ NEAR GROUND ONLY. Filling from the far side of the circle would invent a biography.
+    check("CCODE-249: a derived kit stays on their own ground — reaching across the circle needs the story to have shown it",
+      kit.crafts.every(c => {
+        const v = T3.domainAccess(c, c.levelReq || 1, pell3.domains, C199.traditionIndex);
+        return kit.fromStory.includes(c.id) || ["primary", "adjacent", "open"].includes(v?.band);
+      }));
+    check("CCODE-249: an observation the catalogue cannot express is still reported, never minted",
+      kit.wantsAuthoring.includes("ironsense"));
+    // ⚠️ AND A PERSON WITH NO DOMAINS IS A GAP IN THE RECORD, NAMED — not a person with no talents.
+    check("CCODE-249: a permanent NPC with no domains is flagged rather than left empty",
+      NS3.kitFor({ ...pell3, domains: null }, opts249).needsDomains === true);
+
+    // ⛔ AND WHAT THEY BRING TO A ROUND IS READ OFF THE CRAFTS — the same shape `playerBattleSkills` builds.
+    const bs = NS3.battleSkillsFor(pell3, opts249);
+    check(`CCODE-249: an NPC's battle options are their CRAFTS' verbs, not a family summary (${bs.skills.length} options)`,
+      bs.skills.length > 5 && bs.skills.every(x => x.id && x.function));
+    // ⛔ THE LINE THAT MAKES "PELL FIGHTS TOO" TRUE WITH NO AUTHORING AT ALL.
+    check("CCODE-249: every NPC with a body gets the plain strike, exactly as the PC does",
+      bs.skills.some(x => x.id === "_strike")
+      && !NS3.battleSkillsFor({ ...pell3, canStrike: false }, opts249).skills.some(x => x.id === "_strike"));
+    // capacity is the same ladder a PC climbs
+    check("CCODE-249: the kit is capped by the level the story earned them",
+      kit.crafts.length <= kit.capacity);
+  }
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

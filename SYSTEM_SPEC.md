@@ -3134,6 +3134,50 @@ nearly wrote "the engine is ready and no content uses it."** ⛔ **57 crafts car
 the resulting `null` as "unauthored" — committed by me, in the measurement for the section about it, one
 step before it went into the spec as fact.**
 
+### 45.7 ⛔ A LADDER MUST CONTAIN WHAT CONTENT AUTHORS — 2026-08-26
+
+**`engine/braids.js` ranked harm severity on `["none","restraint","wounding","lethal","atrocity"]`.
+⛔ The corpus authors exactly four values and three of those five are not among them:**
+
+| authored | n | on the ladder? |
+|---|---|---|
+| `none` | 987 | ✅ |
+| `incapacitating` | 171 | ⛔ **`indexOf` → −1** |
+| `damaging` | 136 | ⛔ **`indexOf` → −1** |
+| `lethal` | 83 | ✅ |
+
+⚠️ **−1 sorts BELOW `none`, so "harsher parent sets the braid's rung" did the opposite of what its own
+comment said.** Seven shipped braids minted as `none` while a parent wounded — and `harmRungGloss("none")`
+tells the GM ***"this craft HARMS NOTHING — NEVER invent a wound from it."***
+
+⛔ **AND THE GATE THAT ASSERTED THIS EXACT BEHAVIOUR WAS GREEN THE WHOLE TIME.** SNG-196's fixture authored
+`harmRung: "wounding"`; the assertion expected `"wounding"`; the engine ranked `"wounding"`. **Three things
+agreeing with each other and disagreeing with the game.** *This is §45's "a check that agrees with itself"
+in its purest form: not a scanner reading its own comment, but a gate, a fixture and an engine sharing one
+vocabulary that no content has ever used.*
+
+**THE RULE.** ⛔ **A gate on a controlled vocabulary must DERIVE that vocabulary from the corpus, never
+restate it.** A restated list is a second copy that drifts silently, and its gate goes green on the drift.
+**And a test fixture is content**: a fixture using values no content authors tests a game nobody plays.
+
+⚠️ **NOTE ALSO WHAT WAS *NOT* WRONG.** `damaging` and `incapacitating` are glossed in `progression.js` as
+different **KINDS** — *"wounds but does not slay"* vs *"stops a threat; never a cut or a break"* — **not
+rungs**. So *"harsher"* is genuinely ill-posed for that pair. It occurs in **0 of 50** shipped recipes, so
+the order between them is arbitrary where content never exercises it, and is marked as such in the code.
+**A ruling nobody needs is not a ruling to invent.**
+
+**How it was found:** reviewing Aevi's `SPEC_craft_lint.md`, whose central rule is *"every check cites the
+schema it measures against."* ⚠️ **I broke that rule in the act of reviewing it** — measured `harmRung`
+against `light/moderate/severe/mortal`, invented on the spot — and going to find the real authority is what
+exposed the engine doing the same thing.
+
+⛔ **NON-VACUITY, AGAIN.** My first measurement of the blast radius returned **"0 braids affected"**, because
+I guessed `sources`/`parents`/`from` for a recipe's parents when the field is `parts`. **An empty set passes
+everything.** *Without a floor I would have filed "no bug here" and moved on.* The gate now asserts
+`resolvable >= 20` before it asserts the property.
+
+---
+
 ---
 
 ## 46. ⛔ THE REDISCOVERY TAX — 2026-08-23

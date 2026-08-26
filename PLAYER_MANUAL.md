@@ -1,5 +1,5 @@
 # SINGULARITY — The Valley of Echoes
-## Player's Manual · baseline v1 · against game v1.9.196
+## Player's Manual · baseline v1 · against game v1.9.217
 
 **This manual explains what everything does and *why* it works that way.** The *why* is the point: almost
 every rule here exists because a simpler version was tried and lost something worth keeping.
@@ -233,6 +233,43 @@ easier than seeing, and an even contest should favour the one who moved first to
 obscure against an active reader earns you a bonus action. If the margin is a coin-flip, **nobody** gets
 the bonus.
 
+### ⛔ What a read actually buys you — and what hiding costs
+
+**A foe chooses who to hit.** It is not obliged to come for you, and most of them will go for **whoever is
+hurting them most** — which means you can *bait* one by being loud, or make it look elsewhere by easing off.
+Some things are crueller and go for the softest target; some go for whoever is keeping the others standing;
+an animal or a rockfall picks nobody in particular.
+
+**So the sense slot is now also asking: who is about to get hit?**
+
+| what your read earns | what you learn about its aim |
+|---|---|
+| nothing — **you obscured instead** | ⛔ **nothing at all** |
+| a weak read | *"it is not looking at you"* |
+| a good read | **it names them** |
+| a decisive read | **names them, and tells you why** — which is what lets you bait it next round |
+
+⛔ **THIS IS THE TRADE, AND IT IS THE POINT.** If you hide, you are safer *and you are blind*. You will not
+see the blow going for your healer, and **you cannot step in front of something you did not see coming.**
+
+**Why it works this way:** a character who could hide *and* keep watch would never have a reason to do
+anything else. Making the two mutually exclusive turns every round into a real question — *am I protecting
+myself, or am I watching the field for someone who needs me?* A party where everyone hides is a party of
+survivors who lose. **Generatable through play:** yes — the policy a given foe uses is part of its authoring,
+and generated foes get one too.
+
+### When there are more than three of you
+
+**Up to three allies, everyone takes a real turn.** Past that, the ones you have not brought forward this
+round resolve as a **melee** — they are still fighting, still landing blows, still able to fall; they simply
+are not narrated one at a time. **A legion is different again**: at that scale you are one figure in a tide
+you can shift but not decide, and you can be a casualty of a battle you are winning.
+
+⚠️ **The arithmetic is deliberately identical across all three.** Crossing from three allies to four costs
+you narration detail and **nothing else** — not survivability, not swinginess, not risk. *That was tested
+rather than assumed*, because the obvious way to build it would have made big fights wildly swingier without
+changing a single average, and nobody would have noticed until parties started dying.
+
 ### Momentum and pressure
 
 **Momentum** swings with the margins and modifies your rolls, up to a cap. **Pressure** builds separately —
@@ -420,6 +457,13 @@ cannot tell a missing feature from a missing paragraph.
 - ⚠️ **Braid EFFECTS** — 56 authored `effect`/`cannot` pairs in `combination_recipes` — are written and
   unreachable. Braids name themselves today; they do not yet resolve.
 - ⚠️ **Crystal's origin** is unauthored: the rules say what it is and never who cuts it.
+- ⚠️ **Allies do not yet TAKE their turns in a live fight.** The seat is built — a foe chooses whom to hit,
+  the blow lands on the ally it chose, and someone can step in front of it — but *your allies declaring their
+  own crafts each round* is the next piece, not a shipped one. **Today they are targetable and protectable
+  before they are actors.**
+- ⚠️ **Difficulty does not yet know how big your party is.** Four of you against one foe is not the fight
+  the threat numbers were tuned for. **Some of that swing is intended** — a party is supposed to make hard
+  things possible — but how much is an open ruling.
 - ⚠️ **Player death**, as above.
 - ⚠️ **The Great Circle's exact structure** — how many stations, how they pair, and what crossing an
   axis means — is being respecified (§2). The rules built on it are stable; the table is not.

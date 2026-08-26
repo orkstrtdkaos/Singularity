@@ -779,7 +779,9 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     ? chooseTarget(allies, { policy: targetPolicy || oppSheet?.targetPolicy || "threat", rng, knowledge: foeKnows })
     : null;
   // the seat. Everything downstream that used to say "the player eats it" says this instead.
-  const defenderSheet = (aimedAt && aimedAt.target && aimedAt.target.id !== "player" && aimedAt.target.sheet)
+  // ⚠️ CCODE-261: ASK THE FLAG, NEVER THE ID. A real save's player id is `char-…`, not "player".
+  const aimedAtPlayer = !!(aimedAt?.target && (aimedAt.target.isPlayer || aimedAt.target.kind === "player"));
+  const defenderSheet = (aimedAt && aimedAt.target && !aimedAtPlayer && aimedAt.target.sheet)
     ? aimedAt.target.sheet : playerSheet;
   const p = rollSide(playerSheet, playerDecl, oppDecl, sb, steps, rules, rng, effectMods(standing, "player", playerDecl, oppDecl, sb), momentumModifier(state.momentum || 0, "player", sb), setupBonus);
   const o = rollSide(oppSheet, oppDecl, playerDecl, sb, steps, rules, rng, effectMods(standing, "opponent", oppDecl, playerDecl, sb), momentumModifier(state.momentum || 0, "opponent", sb), -setupBonus);
@@ -1123,7 +1125,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         // conditions all read the target's sheet) but this receipt still said "player", so a caller
         // would have applied an ally's wound to the player's health. Naming the bearer is the other
         // half of the seat, and without it the swap is a lie that balances.
-        ...(roundWinner === "opponent" && aimedAt && aimedAt.target && aimedAt.target.id !== "player"
+        ...(roundWinner === "opponent" && aimedAt && aimedAt.target && !aimedAtPlayer
           ? { onId: aimedAt.target.id, onName: aimedAt.target.name } : {}), amount: landed, verb: winDecl.function,
         by: winDecl.name || winDecl.function,
         // CCODE-83: a blow that was EATEN, shrugged off or doubled must say so. Silently different arithmetic
@@ -1239,7 +1241,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         // conditions all read the target's sheet) but this receipt still said "player", so a caller
         // would have applied an ally's wound to the player's health. Naming the bearer is the other
         // half of the seat, and without it the swap is a lie that balances.
-        ...(roundWinner === "opponent" && aimedAt && aimedAt.target && aimedAt.target.id !== "player"
+        ...(roundWinner === "opponent" && aimedAt && aimedAt.target && !aimedAtPlayer
           ? { onId: aimedAt.target.id, onName: aimedAt.target.name } : {}), condition: r.condition,
         by: impDecl.name || impDecl.function, targets: r.targets, threshold: r.threshold,
         ...(r.resisted ? { resisted: true, degradedFrom: r.degradedTo } : {}) };
@@ -1288,7 +1290,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         // conditions all read the target's sheet) but this receipt still said "player", so a caller
         // would have applied an ally's wound to the player's health. Naming the bearer is the other
         // half of the seat, and without it the swap is a lie that balances.
-        ...(roundWinner === "opponent" && aimedAt && aimedAt.target && aimedAt.target.id !== "player"
+        ...(roundWinner === "opponent" && aimedAt && aimedAt.target && !aimedAtPlayer
           ? { onId: aimedAt.target.id, onName: aimedAt.target.name } : {}), ...pr };
     }
     if (fns.has("soothe")) {

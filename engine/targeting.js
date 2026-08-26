@@ -176,7 +176,10 @@ export function revealTarget(choice, tier = 0, { viewerId = null, cfg = {} } = {
   const minNamed = num(cfg.namedAtTier, 2);
   const minReason = num(cfg.reasonAtTier, 3);
   if (!choice?.target) return { known: false, tier: t };
-  const isMe = viewerId != null && choice.target.id === viewerId;
+  // ⚠️ CCODE-261: match the flag OR the id. A caller that knows the real id still works; one that says
+  // "player" — as every gate in this repo did — now also matches the actual player on a real save.
+  const isMe = (viewerId != null && choice.target.id === viewerId)
+    || (viewerId === "player" && (choice.target.isPlayer === true || choice.target.kind === "player"));
   if (t <= 0) {
     return { known: false, tier: t,
       // ⚠️ EVEN AT ZERO YOU KNOW IF IT IS COMING FOR YOU — that is not a read, it is being hit.

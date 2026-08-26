@@ -167,6 +167,13 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
     // ⚠️ ERIK, ON EXACTLY THIS: "just because silas isn't physical doesn't mean he doesn't fight... he's
     // lethal." MARTIAL here has never meant "has a high physical" — it means this one fights on purpose,
     // and the person the whole contest is built around always does.
+    // ⛔ CCODE-261 — `isPlayer` IS A FLAG, NOT AN ID COMPARISON, and that distinction is the whole bug.
+    // Downstream code asked `target.id !== "player"`. Every gate I wrote used `id: "player"` so it passed;
+    // a REAL character carries `id: "char-mrhs8286"`, so on Erik's actual save every one of those checks
+    // missed the player and treated Silas as an ordinary ally — his own blows routed to him as if he were
+    // someone else, and "it is going for SILAS" printed beside "not you".
+    // ⚠️ THE FIXTURES AGREED WITH EACH OTHER AND DISAGREED WITH THE GAME. Third time today.
+    isPlayer: true,
     present: true, canAct: true, contributions: ["HARM", "MARTIAL"], record: character, sheet: character,
     downed: character?.downed || null,
   }];
@@ -205,6 +212,7 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
     out.push({
       id: p.id || p.characterId || null, name: p.name || p.id || "an ally", kind: "party",
       // a human party member is a player too — same rule as above.
+      isPlayer: true,   // a human party member is a player too
       present: true, canAct: true, contributions: ["HARM", "MARTIAL"], record: p, sheet: p.sheet || p,
       downed: p.downed || null,
     });

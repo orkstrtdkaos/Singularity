@@ -127,13 +127,24 @@ function turn(n, { sense, action, setup }) {
   say("       bonus action: " + (sr.bonusEarned?.player ? "YES" : "no")
     + (sr.senseBonus?.winner === "obscurer" ? "   — you beat its read" : ""));
 
-  if (canInterveneFor(seen) && aim.target.id !== "player") {
-    const guard = roster.find(a => a.contributions.includes("MARTIAL") && a.id !== aim.target.id && a.id !== "player");
+  if (canInterveneFor(seen) && !aim.target.isPlayer) {
+    const guard = roster.find(a => a.contributions.includes("MARTIAL") && a.id !== aim.target.id && !a.isPlayer);
     if (guard) {
-      protections = [openProtection({ protectorId: guard.id, allyId: aim.target.id, rank: 2 })];
-      say("       ⛔ " + first(guard.name).toUpperCase() + " STEPS IN FRONT OF " + first(aim.target.name).toUpperCase());
+      const prot = openProtection({ protectorId: guard.id, allyId: aim.target.id, rank: 2 });
+      protections = [prot];
+      say("       ⛔ " + first(guard.name).toUpperCase() + " STEPS IN FRONT OF " + first(aim.target.name).toUpperCase()
+        + "   — catches: " + prot.catches.join("+"));
+      // ⚠️ SAY WHAT IT WILL AND WILL NOT STOP, or the next two lines read as a broken mechanic. The only
+      // craft that opens a protection today is `shared_weight` — Threnodist, Death, `interceptCondition` —
+      // and it eats BINDINGS meant for an ally, not blows. Erik: "some skills (yet to be allocated) will
+      // likely let you intercept a blow (damage) as well."
+      if (!prot.catches.includes("damage")) {
+        say("          ⚠️ that is a CONDITION guard. A cut aimed at " + first(aim.target.name)
+          + " still lands on " + first(aim.target.name) + " —");
+        say("             the craft that takes a BLOW for someone does not exist yet.");
+      }
     }
-  } else if (!seen.known && aim.target.id !== "player") {
+  } else if (!seen.known && !aim.target.isPlayer) {
     say("       ⚠️ nobody saw it coming — nobody can step in front of it");
   }
 
@@ -156,7 +167,7 @@ function turn(n, { sense, action, setup }) {
         + "     [" + Math.max(0, state.opponentHealth) + "/" + FOE.health + "]");
     } else if (ar.damage?.side === "player") {
       say("       ← it lands on " + first(ar.damage.onName || "Silas").toUpperCase()
-        + " for " + ar.damage.amount + (ar.damage.onName ? "     ⚠️ not you" : ""));
+        + " for " + ar.damage.amount + (ar.damage.onId ? "     ⚠️ not you" : ""));
     } else {
       say("       → nothing lands this beat");
     }
@@ -170,7 +181,7 @@ function turn(n, { sense, action, setup }) {
   }
 
   say();
-  say("  CARRIES FORWARD — momentum " + (state.momentum ?? 0)
+  say("  CARRIES FORWARD — momentum " + (Math.round((state.momentum ?? 0) * 10) / 10)
     + " · pressure you " + (state.pressure?.player ?? 0) + " / it " + (state.pressure?.opponent ?? 0)
     + " · reaver " + Math.max(0, state.opponentHealth ?? 0) + "/" + FOE.health);
   protections = [];
@@ -196,8 +207,11 @@ line("═");
 say();
 say("  ⛔ A FOE PICKS, AND YOU ONLY KNOW IF YOU LOOKED. Round 2 is the trade in one beat:");
 say("     hiding kept Silas safe and cost him the sight of the blow going somewhere else.");
-say("  ⛔ THE SOFT ONES ARE STILL TARGETS. Calvar and Marrow cannot swing and can still be");
+say("  ⛔ THE SOFT ONES ARE STILL TARGETS. Calvar, Marrow and Siol cannot swing and can still be");
 say("     dropped, which is what makes standing in front of them worth an action.");
+say("  ⚠️ AND ROUND 3 IS THE HONEST GAP: Pell steps in front of Marrow and the blow lands on Marrow");
+say("     anyway. That is not broken — `shared_weight` is a Death craft that eats CONDITIONS. The");
+say("     craft that takes a cut for someone is unwritten, and the engine is ready for it.");
 say("  ⛔ AND SILAS KILLS WITH MENTAL. The heaviest thing on this field is a braid he made");
 say("     himself, and his physical is 5. That is the design working, not a character built oddly.");
 say();

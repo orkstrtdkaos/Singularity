@@ -43,18 +43,66 @@ function scoreThreat(a) {
     + ((a?.contributions || []).includes("HARM") ? 1 : 0) + num(a?.sheet?.level, 1) / 4;
 }
 
+/** ⛔ WHAT THE FOE CAN ACTUALLY SEE — CCODE-255. Erik: "i agree with the foe having to read you as well, in
+ *  addition to being able to obscure your party."
+ *
+ *  ⚠️ UNTIL THIS, A FOE PICKED ITS TARGET WITH PERFECT KNOWLEDGE. It knew which of you was softest and which
+ *  of you was mending, for free, every round — while you had to earn the same information with a read. The
+ *  sense step was one-directional, and that is the asymmetry Erik is closing.
+ *
+ *  ⛔ THE SHAPE THAT FELL OUT OF IT IS BETTER THAN THE ONE I WOULD HAVE DESIGNED: each policy needs a
+ *  DIFFERENT QUALITY OF LOOK, and they happen to rank exactly by how cruel they are.
+ *
+ *    `threat`  — needs NOTHING. A foe always knows who is hurting it; it is being hit by them.
+ *    `weakest` — needs a real look. Judging who will break first means assessing people, not feeling blows.
+ *    `healer`  — needs a GOOD look. Knowing who is holding the others up is reading a ROLE, not a body.
+ *
+ *  ⚠️ SO HIDING YOUR PARTY DOES SOMETHING SPECIFIC AND LEGIBLE: it does not make you untargetable, it makes
+ *  the foe stupider about WHOM it targets. A blinded predator stops finding your healer and starts swinging
+ *  at whoever is hitting it — which is the tank. **That is the whole point of a tank, and it was previously
+ *  impossible to achieve.** */
+export const POLICY_NEEDS = { threat: 0, blind: 0, weakest: 1, healer: 2, only: 0 };
+
+/** How well the foe reads your side this round. `tier` is theirs, earned the same way yours is. */
+export function foeKnowledge(tier = 0, { cfg = {} } = {}) {
+  const t = Math.max(0, num(tier, 0));
+  return {
+    tier: t,
+    canJudgeBodies: t >= num(cfg.weakestAtTier, 1),
+    canReadRoles: t >= num(cfg.healerAtTier, 2),
+    /** ⛔ what a policy DEGRADES to when the foe cannot support it. Not to `blind` — a foe that has been
+     *  blinded is not a foe that has become random, it is a foe reduced to what it can still feel. */
+    fallback: "threat",
+  };
+}
+
 /** ⛔ CHOOSE. Returns the ally a blow is aimed at, and WHY — the reason is not decoration: a player who
  *  learns "it is going for Sprig" should be able to learn "because Sprig has been mending".
  *
  *  ⚠️ THE DOWNED ARE NOT TARGETS. Something already out of the fight is not what a foe swings at, and
  *  hitting them again is a different act the engine should not perform by accident. */
-export function chooseTarget(allies = [], { policy = "threat", rng = Math.random, policies = null } = {}) {
+export function chooseTarget(allies = [], { policy = "threat", rng = Math.random, policies = null, knowledge = null } = {}) {
   const live = (allies || []).filter(a => a && a.present !== false && !a.downed);
   if (!live.length) return null;
   // ⛔ A LONE TARGET IS NOT A CHOICE, and this is the line that keeps every existing 1v1 identical.
   if (live.length === 1) return { target: live[0], policy: "only", why: "there is nobody else" };
   const table = policies || TARGET_POLICIES;
-  const pick = (table[policy] || table.threat)(live, { rng }) || live[0];
+
+  // ⛔ CCODE-255 — CAN IT ACTUALLY SEE WELL ENOUGH TO DO WHAT IT WANTS? `knowledge` absent means yes, so
+  // every existing caller and gate behaves exactly as before; a caller that supplies it opts into the read.
+  let used = policy, blinded = null;
+  if (knowledge) {
+    const need = num(POLICY_NEEDS[policy], 0);
+    const has = knowledge.canReadRoles ? 2 : knowledge.canJudgeBodies ? 1 : 0;
+    if (need > has) { blinded = policy; used = knowledge.fallback || "threat"; }
+  }
+  const pick = (table[used] || table.threat)(live, { rng }) || live[0];
+  if (blinded) {
+    return { target: pick, policy: used, blinded,
+      // ⚠️ THE RECEIPT SAYS THE FOE WAS DENIED, because "it went for the tank" and "it WANTED the healer and
+      // could not find her" are different events and the second one is the party's achievement.
+      why: `it could not pick out ${blinded === "healer" ? "who was mending" : "who was weakest"} — it went for ${pick.name}, who it can feel` };
+  }
   return {
     target: pick,
     policy,

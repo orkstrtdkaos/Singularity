@@ -144,7 +144,13 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // count) and back out onto the encounter state. This hand-built state object is the seam where they'd drop.
     oppSheet, state: { momentum: state.momentum || 0, round: state.round, playerEnergy: before, opponentEnergy: state.opponentEnergy ?? oppSheet.energy,
       // CCODE-51: health rides BOTH ways, like effects and pressure before it — the same seam, the fourth time.
-      opponentHealth: state.opponentHealth ?? def.opponent?.health ?? null, effects: state.effects || [], pressure: state.pressure || { player: 0, opponent: 0 } }, rules, sb, steps, rng,
+      opponentHealth: state.opponentHealth ?? def.opponent?.health ?? null, effects: state.effects || [], pressure: state.pressure || { player: 0, opponent: 0 },
+      // ⛔ CCODE-255 — THE FIFTH VALUE TO RIDE BOTH WAYS THROUGH THIS SEAM (effects, pressure, health, then
+      // this). How well the foe read YOUR side is EARNED in the sense step and SPENT in the action step, so
+      // it has to come back in on the very next call or the read it just made is forgotten before it is used.
+      // ⚠️ `?? null` IS LOAD-BEARING: null means "no read has happened", which the round treats as PERFECT
+      // knowledge — today's behaviour, and what keeps every non-adopting caller unchanged.
+      foeReadTier: state.foeReadTier ?? null }, rules, sb, steps, rng,
     phase, tickEffects, setupBonus,
     // SNG-247: DERIVED here, never passed in. This wrapper has now silently eaten a forwarded option twice
     // (CCODE-35 `effects`, CCODE-45 `phase`) — a value the wrapper computes from what it already holds cannot be
@@ -157,7 +163,9 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const senseOnly = phase === "sense" && sb?.turn?.senseMovesMomentum !== true; // CCODE-45: a sense is part of the turn, not a round of its own
   // CCODE-48 (Erik): a ROUND is a TURN, not a step. Sense never advanced it; now action/bonus only advance it on
   // the step that ENDS the turn (the same signal that ticks effects), so "round 3" means three turns, not six steps.
-  const s = { ...state, round: state.round + ((senseOnly || !tickEffects) ? 0 : 1), momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, opponentHealth: r.state.opponentHealth ?? state.opponentHealth, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, spent: r.state.spent || { player: false, opponent: false }, lastOppFn: oppDecl.function };
+  const s = { ...state, round: state.round + ((senseOnly || !tickEffects) ? 0 : 1), momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, opponentHealth: r.state.opponentHealth ?? state.opponentHealth, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, spent: r.state.spent || { player: false, opponent: false }, lastOppFn: oppDecl.function,
+    // ⛔ CCODE-255: and back out, so the action step of this turn spends the read the sense step just earned.
+    foeReadTier: r.foeReadTier ?? state.foeReadTier ?? null };
   // SNG-247 Tier 3 (Erik's per-kind weighting: "a puzzle's sense step is the whole game — insight IS the meter"):
   // on a sealed thing, WINNING THE READ buys a layer of understanding. That is what makes a puzzle play differently
   // from a fight on the same engine rather than being a reskin of it — and it keeps the hint ladder the authored
@@ -263,6 +271,10 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // `senseGap` and `senseBonus` (CCODE-211/213) were dropped here too. Ten values, not eight — which is
     // the argument for deriving the expectation instead of extending a list by hand each time.
     senseGap: r.senseGap, senseBonus: r.senseBonus,
+    // ⚠️ AND THE ELEVENTH. `foeReadTier` (CCODE-255) is how well the foe read YOUR side, and it is the one
+    // value here that must also RIDE FORWARD onto state — it is earned in the sense step and spent in the
+    // action step of the same turn, so a wrapper that merely reports it has still dropped it.
+    foeReadTier: r.foeReadTier,
     // ⚠️ AND THE CCODE-228 GATE CAUGHT THESE TWO ON ITS FIRST OUTING — `unsettled` and `cooled` are the
     // provoke/soothe results, added minutes earlier, and the wrapper dropped them exactly the way it has
     // dropped ten values before. The derived gate went red the same run. That is the whole argument for

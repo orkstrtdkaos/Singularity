@@ -266,7 +266,33 @@ say("⛔ THIS IS THE TRADE, AND IT IS THE POINT OF THE WHOLE SENSE STEP NOW. Hid
 say("   blinds you. You cannot step in front of a blow you did not see coming.");
 
 // ════════════════════════════════════════════════════════════════════════════
-head(11, "WHAT CARRIES TO NEXT ROUND");
+head(11, "⛔ HIDING YOUR PARTY — the foe has to read you too");
+{
+  const TG = await import("../engine/targeting.js");
+  const pack = [
+    { id: "player", name: "Wren",  contributions: ["HARM","MARTIAL"], threatDealt: 12, sheet: YOU },
+    { id: "sprig",  name: "Sprig", contributions: ["RESTORE"], sheet: { attributes: { mental: 2 }, level: 3 } },
+  ];
+  say("A wolf that hunts healers. What it manages depends on how well it read YOUR side:");
+  say();
+  for (const t of [0, 1, 2, 3]) {
+    const c = TG.chooseTarget(pack, { policy: "healer", knowledge: TG.foeKnowledge(t) });
+    say("    it read you at tier " + t + " →  goes for " + String(c.target.name).padEnd(7)
+      + (c.blinded ? "  ⚠️ blinded: could not pick out who was mending" : "  ⛔ it found her"));
+  }
+  say();
+  say("⛔ EACH POLICY NEEDS A DIFFERENT QUALITY OF LOOK, AND THEY RANK BY HOW CRUEL THEY ARE:");
+  say("     going for who is HURTING it   — needs nothing. It is being hit by them.");
+  say("     going for who is WEAKEST      — needs a real look. Judging people, not feeling blows.");
+  say("     going for who is MENDING      — needs a good look. That is reading a ROLE, not a body.");
+  say();
+  say("⚠️ SO HIDING YOUR PARTY DOES NOT MAKE YOU UNTARGETABLE. It makes the foe STUPIDER about whom it");
+  say("   targets. A blinded predator stops finding your healer and swings at whoever it can still feel —");
+  say("   which is the tank. ⛔ THAT IS THE WHOLE POINT OF A TANK, and it was impossible before this.");
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+head(12, "WHAT CARRIES TO NEXT ROUND");
 say("  MOMENTUM   swings with the margins and modifies your rolls, up to a cap.");
 say("             It says WHO IS WINNING THIS EXCHANGE.");
 say("  PRESSURE   builds separately. Fill it and someone is driven back hard.");
@@ -286,6 +312,5 @@ say("⛔ THE OPEN QUESTIONS THIS SURFACED");
 rule("═");
 say("1. Scenario 9 — two bonus rules disagree, and the blanket one wins ~50% of the time.");
 say("2. Scenario 8 — provoke is inert against a foe the narrator never gave a line to.");
-say("3. A foe currently picks its target with PERFECT knowledge of your party. It probably should");
-say("   have to read you, the way you read it — which would make obscure hide your party too.");
+say("3. ✅ CLOSED — a foe now has to read you too, and hiding your party blinds it. Scenario 11.");
 console.log("");

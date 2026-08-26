@@ -6,7 +6,7 @@
 // narrates the resolved exchange; it never chooses the opponent's mechanical move — that is opponentPolicy.
 
 import { resolveAction } from "./resolve.js";
-import { chooseTarget } from "./targeting.js";   // CCODE-250: a foe chooses who to hit
+import { chooseTarget, foeKnowledge } from "./targeting.js";   // CCODE-250: a foe chooses who to hit
 import { redirectImposition } from "./intercept.js";   // CCODE-250: …and someone may step in front of it
 import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, ongoingHarmOf, authoredBlock, resolveProvoke, resolveSoothe, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
@@ -771,8 +771,12 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // and there WAS no choosing, which is why `intercept.js` had nothing to intercept.
   // ⚠️ I ADDED A SEAT, NOT A TABLE. `playerSheet`/`oppSheet` are untouched; ONE derived binding decides which
   // sheet fills the receiving seat when the opponent lands something. With no allies passed it IS playerSheet.
+  // ⛔ CCODE-255 — AND IT PICKS WITH WHAT IT ACTUALLY LEARNED. `foeReadTier` rides on state from the sense
+  // step. ⚠️ NULL MEANS PERFECT KNOWLEDGE, which is what every caller got before this and what every existing
+  // gate still asserts — the read is opt-in, so nothing silently changes under a caller that has not adopted it.
+  const foeKnows = state.foeReadTier == null ? null : foeKnowledge(state.foeReadTier, { cfg: sb?.foeRead || {} });
   const aimedAt = (allies && allies.length)
-    ? chooseTarget(allies, { policy: targetPolicy || oppSheet?.targetPolicy || "threat", rng })
+    ? chooseTarget(allies, { policy: targetPolicy || oppSheet?.targetPolicy || "threat", rng, knowledge: foeKnows })
     : null;
   // the seat. Everything downstream that used to say "the player eats it" says this instead.
   const defenderSheet = (aimedAt && aimedAt.target && aimedAt.target.id !== "player" && aimedAt.target.sheet)
@@ -1327,6 +1331,19 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       gap: (out.senseGap != null ? out.senseGap : 0), sb
     });
     if (bonusWinner === "obscurer") out.bonusEarned = { ...out.bonusEarned, player: true };
+    // ⛔ CCODE-255 / ERIK: "i agree with the foe having to read you as well, in addition to being able to
+    // obscure your party." Until now the foe picked its target with PERFECT knowledge of your side — it knew
+    // who was softest and who was mending, free, every round, while you had to earn the same by reading.
+    // ⚠️ THE FOE'S READ IS EARNED IN THIS STEP AND SPENT IN THE ACTION STEP, exactly like yours. And it is
+    // the OPPONENT'S roll that earns it, so hiding is not a magic ward — it is a contest they can win.
+    // ⚠️ NO SIGN FLIP. When the player is hiding, `senseGap` above IS ALREADY THE FOE'S reader-gap — that is
+    // exactly what the line computing it says it is. My first version negated it, which inverted who had won
+    // the read and let a foe who was beaten by 23 come away with a tier. A gate caught it in one run.
+    out.foeReadTier = playerHiding
+      // you spent the step working at being unfound: their read is opposed, and a tie is YOURS — the same
+      // `obscurerWinsTie` rule as always, simply pointed at the other reader.
+      ? (obscurerWinsTie(out.senseGap ?? 0) ? 0 : senseTierFromDegree(o.degree, out.senseGap ?? 0, sb))
+      : senseTierFromDegree(o.degree, 0, sb);
     out.senseBonus = { winner: bonusWinner, opponentSensed: oppSensed, opponentIdle: oppIdle,
       band: Math.max(0, Number(sb?.senseStep?.bonusNullBand ?? 2)), gap: out.senseGap ?? null };
   }

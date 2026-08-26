@@ -18914,6 +18914,79 @@ await (async () => {
       JSON.stringify(withParty253?.opponent?.targetChoice?.target?.name ?? null));
   }
 
+  // 5aj · ⛔ CCODE-255 — THE FOE HAS TO READ YOU TOO.
+  //
+  // Erik: "i agree with the foe having to read you as well, in addition to being able to obscure your party."
+  //
+  // ⚠️ UNTIL THIS, A FOE PICKED ITS TARGET WITH PERFECT KNOWLEDGE OF YOUR SIDE. It knew who was softest and
+  // who was mending, for free, every round — while you had to earn the same information with a read. The
+  // sense step was one-directional, which made obscure a purely personal defence.
+  {
+    const TG = await import("../engine/targeting.js");
+    const party = [
+      { id: "player", name: "Wren", contributions: ["HARM","MARTIAL"], threatDealt: 12, sheet: { attributes: { physical: 8 }, level: 9 } },
+      { id: "sprig", name: "Sprig", contributions: ["RESTORE"], sheet: { attributes: { mental: 2 }, level: 3 } },
+    ];
+
+    // ⛔ EACH POLICY NEEDS A DIFFERENT QUALITY OF LOOK, AND THEY RANK BY HOW CRUEL THEY ARE. That fell out of
+    // the design rather than being imposed on it, and it is the part I would defend hardest.
+    check("CCODE-255: a foe always knows who is HURTING it — being hit needs no read",
+      TG.POLICY_NEEDS.threat === 0 && TG.POLICY_NEEDS.blind === 0);
+    check("CCODE-255: judging who is WEAKEST needs a real look; finding the HEALER needs a better one",
+      TG.POLICY_NEEDS.weakest === 1 && TG.POLICY_NEEDS.healer === 2
+      && TG.POLICY_NEEDS.healer > TG.POLICY_NEEDS.weakest);
+
+    // ═══ THE THING ERIK ASKED FOR: hiding your party stops the foe finding your healer ═══
+    const hunt = (tier) => TG.chooseTarget(party, { policy: "healer", knowledge: TG.foeKnowledge(tier) });
+    check("CCODE-255: a predator that wants the healer CANNOT FIND HER on a poor read",
+      hunt(0).blinded === "healer" && hunt(0).target.id === "player"
+      && hunt(1).blinded === "healer");
+    check("CCODE-255: …and DOES find her once it has looked properly — the read is a real contest, not a ward",
+      hunt(2).target.id === "sprig" && !hunt(2).blinded && hunt(3).target.id === "sprig");
+    // ⛔ IT DEGRADES TO `threat`, NOT TO `blind`. A foe that has been blinded is not a foe that has become
+    // random — it is a foe reduced to what it can still FEEL, which is whoever is hitting it. And whoever is
+    // hitting it is the tank. ⚠️ THAT IS THE WHOLE POINT OF A TANK AND IT WAS PREVIOUSLY UNACHIEVABLE.
+    check("CCODE-255: a blinded foe swings at whoever it can feel — which is the tank, by construction",
+      hunt(0).policy === "threat" && hunt(0).target.contributions.includes("MARTIAL"));
+    check("CCODE-255: the receipt records that the foe was DENIED, not merely that it chose the tank",
+      typeof hunt(0).why === "string" && /could not pick out/.test(hunt(0).why));
+
+    // ⚠️ NO KNOWLEDGE PASSED MEANS PERFECT KNOWLEDGE — every existing caller and gate is unchanged, and the
+    // read is opt-in. A default that silently blinded every foe would have rebalanced the whole game quietly.
+    check("CCODE-255: omitting knowledge keeps today's behaviour exactly — the read is opt-in",
+      TG.chooseTarget(party, { policy: "healer" }).target.id === "sprig"
+      && !TG.chooseTarget(party, { policy: "healer" }).blinded);
+    // ⛔ NON-VACUITY: the two paths must actually differ, or every claim above passes on a coincidence.
+    check("CCODE-255: …and blinded-vs-not genuinely pick different people (floor)",
+      TG.chooseTarget(party, { policy: "healer" }).target.id !== hunt(0).target.id);
+
+    // ═══ THROUGH THE ROUND: the foe's read is EARNED in the sense step and SPENT in the action step ═══
+    const { battleRound: BR255 } = await import("../engine/skill_battle.js");
+    const rules255 = C199.rules || {}, sb255 = C199.skillBattle?.engine || {};
+    const sheetsP = { attributes: { physical: 6, mental: 6 }, level: 6, health: 30, maxHealth: 30, soak: 0 };
+    const sheetsO = { attributes: { physical: 5, mental: 4 }, level: 5, health: 30, maxHealth: 30, soak: 0 };
+    const senseRound = (playerDecl) => BR255({
+      playerDecl, oppDecl: { function: "reveal", tier: 2, attribute: "mental", intensity: "standard", name: "study them" },
+      playerSheet: sheetsP, oppSheet: sheetsO, phase: "sense",
+      state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 100, effects: [], pressure: { player: 0, opponent: 0 } },
+      rules: rules255, sb: sb255, steps: rules255.resolution || {}, rng: () => 0.5 });
+    const open = senseRound({ function: "reveal", tier: 2, attribute: "mental", intensity: "standard", name: "read them", sense: true });
+    const hidden = senseRound({ function: "conceal", tier: 2, attribute: "mental", intensity: "standard", name: "go quiet", obscure: true });
+    check("CCODE-255: the sense step now emits how well the FOE read you — the mirror of your own tier",
+      Number.isFinite(open.foeReadTier) && Number.isFinite(hidden.foeReadTier));
+    check("CCODE-255: and spending your step HIDING costs them their read — the trade runs both ways",
+      hidden.foeReadTier < open.foeReadTier,
+      `hidden ${hidden.foeReadTier} vs open ${open.foeReadTier}`);
+
+    // ⛔ AND THE SEAM. `foeReadTier` is earned in one step and spent in the next, so a wrapper that merely
+    // REPORTS it has still dropped it — it must ride back in. This seam has eaten a value five times now.
+    const encSrc = readFileSync(join(root, "engine/encounters.js"), "utf8");
+    const encStrip = encSrc.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+    check("CCODE-255: the wrapper carries the foe's read BOTH ways — out on the receipt AND back in on state",
+      (encStrip.match(/foeReadTier/g) || []).length >= 3);
+  }
+
+
 
   // 5af · ⛔ CCODE-248 — AN NPC WITH A CHARACTER SHEET, AND WHY IRONSENSE GETS OVERDONE.
   //

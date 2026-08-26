@@ -1139,7 +1139,7 @@
   {
    "schemaVersion": 1,
    "id": "shared_grief",
-   "name": "Shared Grief",
+   "name": "Under-Song",
    "levelReq": 3,
    "energyCost": 7,
    "powerSystem": "wild_nanite",
@@ -1150,79 +1150,81 @@
     "death_life": 0.1
    },
    "functions": [
-    "empower",
-    "reveal"
+    "reveal",
+    "provoke"
    ],
-   "narrationHints": "You take up the lament and others find their own grief given shape in it — not lessened, but no longer carried alone, the weight spread across every voice that joins.",
-   "description": "Lead a lament that spreads one grief across many, so no single heart carries the whole. The Threnodist art of the shared song, and the mourning-singers' first true gift.",
-   "notFor": "It shares grief, it does not erase it — a sorrow sung together is still a sorrow. And the one who leads the lament carries the gathering-point; you hold the grief of all who join while you sing.",
+   "narrationHints": "She listens to the sentence and then to whatever is holding the sentence up. ⚠️ WHEN SHE SAYS IT OUT LOUD THE ROOM CHANGES, because everyone present heard it land and so did the person it was about.",
+   "description": "⛔ THERE IS ALWAYS A SONG UNDER THE SONG. A person shows you loyalty and means resentment; shows you grief and means relief; shows you an offer and means a want they would not say aloud. ⚠️ THE UNDER-SONG IS WHAT IS ACTUALLY THERE — rage beneath the courtesy, love beneath the contempt, fear beneath the bravado — and a Threnodist hears it the way anyone else hears a wrong note.",
+   "notFor": "⛔ FACTS. It hears feeling, never events — what someone actually feels about the money, never where the money is. ⚠️ AND IT IS NOT A LIE DETECTOR: a person sincerely wrong feels sincere, and the under-song of an honest man is honesty. Things that cannot feel give nothing.",
    "tree": [
     {
      "rank": 1,
-     "name": "Shared Grief",
-     "grants": "Lead a shared lament that spreads one grief across many, so none carries it alone.",
-     "cannot": "It cannot remove grief, only distribute its weight; the singer bears the gathering of it; and a grief shared is a grief made real to everyone who joins the song.",
+     "name": "Under-Song",
      "functions": [
-      "empower"
+      "reveal"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Shared Grief",
-     "gainAxes": []
+     "gainAxes": [],
+     "grants": "⛔ HEAR WHAT IS UNDER WHAT THEY ARE SHOWING YOU — the resentment under the loyalty, the relief under the mourning, the want under the offer. ⚠️ You know; nobody else does, and they do not know you know.",
+     "cannot": "It hears feeling and never facts. ⚠️ A person sincerely wrong feels sincere, and you do not choose what surfaces — including when what surfaces is about you."
     },
     {
      "rank": 2,
      "name": "Named Sorrow",
-     "grants": "The lament finds the true shape of what is mourned. Singing it, you perceive what the grief is ACTUALLY for — the loss beneath the stated one — and those who join hear it named as well, often for the first time.",
-     "cannot": "Naming is not mending; a sorrow correctly named can wound worse before it eases. The singer cannot choose what surfaces, and what the lament names in company cannot be unnamed.",
      "functions": [
-      "empower",
-      "reveal"
+      "reveal",
+      "provoke"
      ],
-     "gains": "broaden",
+     "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Named Sorrow",
-     "gainAxes": []
+     "gainAxes": [
+      "quality",
+      "conditions"
+     ],
+     "grants": "⛔ SAY IT ALOUD AND IT LANDS. Everyone present hears the true thing named, often for the first time including the person it is about — ⚠️ AND WHATEVER THEY WERE DOING, THEY STOP DOING IT. The negotiation, the performance, the held line does not survive having its real want said in the open.",
+     "cannot": "⛔ WHAT IS NAMED IN COMPANY CANNOT BE UNNAMED, and naming is not mending — a thing correctly named can wound worse before it eases. ⚠️ And if you are wrong, you are wrong out loud."
     },
     {
      "rank": 3,
      "name": "Long Lament",
-     "grants": "Hold a lament across days rather than a night, and across a settlement rather than a room — a whole community may carry one loss together until it is bearable. The gathering-point can be handed to another singer, so the lament outlasts any one voice.",
-     "cannot": "You hold the gathering while you hold the lament, and days of it mark the singer; handing the point on requires a singer able to take it; and a grief carried by everyone becomes part of what that place IS — the GM records it in the world, not the character.",
      "functions": [
-      "empower"
+      "reveal",
+      "provoke"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "none",
-     "_functionsWas": [
-      "empower",
-      "reveal"
-     ],
-     "_nameWas": "The Long Lament",
      "gainAxes": [
-      "range",
-      "duration",
       "scope",
-      "targets"
-     ]
+      "targets",
+      "duration"
+     ],
+     "grants": "⛔ READ THE UNDER-SONG OF A GATHERING — a council, a garrison, a village. What the room actually wants as against what it is saying, and which few in it want something else entirely. ⚠️ Held across days, so you hear a settlement change its mind before it knows it has.",
+     "cannot": "A crowd's under-song is an average and the outliers are the interesting ones — you hear THAT some disagree, not always WHO. ⚠️ And a place whose real feeling has been said aloud does not go back to not knowing."
     }
    ],
    "gated": "learned",
    "nativeOrCombination": "native",
    "challengeTypes": [
-    "SOCIAL"
+    "SOCIAL",
+    "INVESTIGATION",
+    "INTELLECTUAL"
    ],
    "harmRung": "none",
-   "shape": "bolster",
+   "shape": "reveal",
    "operativeAxis": [
-    "distribution",
-    "scope",
-    "duration"
+    "quality",
+    "scope"
    ],
    "mechanic": {
     "magnitude": 6,
     "duration": 12,
-    "scope": 3
+    "scope": 3,
+    "crit": {
+     "success": "You hear it so exactly that they stop arguing and start explaining themselves to you.",
+     "failure": "You name it confidently and wrongly, in front of them, and they will remember that you tried."
+    },
+    "note": "T-III reveal/social. ⛔ THE UNDER-SONG IS EMOTION-AGNOSTIC ON PURPOSE — rage, love, longing, relief, shame; whatever is actually holding the shown feeling up. ⚠️ IT PAIRS WITH `the_true_feeling` (Feeling-Sense), which reads what is felt NOW; this reads what is felt UNDERNEATH. ⛔ r2 CARRIES `provoke` BECAUSE NAMING IT IN COMPANY BREAKS WHAT SOMEONE WAS DOING — per `resolveProvoke`, the committed line is dropped. A person whose real want has just been said out loud is not still running their play."
    },
    "rankDeltas": [
     {
@@ -1241,24 +1243,24 @@
     }
    ],
    "intensity": {
-    "conserve": "a short lament — half the distribution, and it asks little of the gathering",
-    "surge": "double it; YOU HOLD THE GATHERING WHILE YOU HOLD THE LAMENT"
+    "conserve": "listen without saying — you know, and nobody else does",
+    "surge": "name it plainly and in full; WHAT IS NAMED IN COMPANY CANNOT BE UNNAMED"
    },
    "bounds": [
     {
-     "text": "IT CANNOT REMOVE GRIEF, ONLY DISTRIBUTE ITS WEIGHT",
+     "text": "⛔ IT HEARS FEELING, NEVER FACTS — the want under the offer, never the terms of it",
      "class": "hard"
     },
     {
-     "text": "NAMING IS NOT MENDING — a sorrow correctly named CAN WOUND",
+     "text": "⛔ YOU DO NOT CHOOSE WHAT SURFACES. You get what is actually under there, including when it is about you",
      "class": "hard"
     },
     {
-     "text": "you hold the gathering while you hold the lament, and DAYS ARE DAYS",
-     "class": "cost"
+     "text": "⚠️ NAMING IS NOT MENDING — a thing correctly named can wound worse before it eases, and in company it cannot be unnamed",
+     "class": "hard"
     }
    ],
-   "plainly": "A social action that strengthens someone. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about a day Ranks: rank 2 deepens distribution; rank 3 extends scope+duration. Limit: iT Cannot Remove Grief, Only Distribute Its Weight.",
+   "plainly": "A social/investigation action. Hear the feeling under the one being shown. r2 names it aloud, where everyone hears it and it cannot be taken back. r3 reads the under-song of a whole gathering or settlement.",
    "_descriptionWas": "The Threnodist art of the shared lament — a song of grief that lets many carry one sorrow together, so no single heart bears the whole. The mourning-singers' first true gift.",
    "_functionsWas": [
     "empower",
@@ -1268,7 +1270,8 @@
    "_nameWas": "The Shared Grief",
    "_idWas": "the_shared_grief",
    "_powerSystemWas": "reach_emotional_logical",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rebuilt_20260823": "⛔ ERIK 2026-08-23: 'I'm getting tired of these kinds of skills. And for a feeling people, where are the other emotions?' ⚠️ MEASURED: 12 of 15 Threnodist crafts are about GRIEF; joy appears twice and never as the subject; love, hope, longing and awe are absent entirely — in a people whose cities are built around GRIEF-HOUSES AND JOY-HALLS. ⛔ THE OLD CRAFT WAS A THIRD GRIEF-CARRYING SUPPORT CRAFT whose benefit was a mood: 'no single heart carries the whole', when no sheet tracks grief. ⚠️ ITS ONE LIVE IDEA WAS r2 — naming the loss beneath the stated loss — and THAT IS NOW THE WHOLE CRAFT, made EMOTION-AGNOSTIC so it does not pre-empt Erik's pending call on how rage and love enter the tradition. ⛔ CONSENT DROPPED: I had flagged it a third time and Erik cut it — 'this is a fantasy RPG'. The [cost] bound 'days are days' cut as the sixth untracked debt. `operativeAxis: distribution` was not among the nine."
   },
   {
    "schemaVersion": 1,

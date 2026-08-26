@@ -208,3 +208,37 @@ version has to be BUILT rather than arrived at by levelling.**
 **Shape when authored:** `tradition: cross_pole_braid`, `powerSystem: combination`, and the braid's whole
 contribution is removing the target filter — same antisoak, same pierce, no sorting. ⛔ **The pair reads
 well: the base craft is a professional finishing a job; the braid is someone who stopped deciding.**
+
+## ⛔ THRENODY IS A MOURNING TRADITION, NOT A FEELING ONE (Erik, 2026-08-23)
+
+**Erik: *"for a feeling people, where are the other emotions? Rage, love — yes, needed to be worked in.
+Not sure exactly how yet."*** ⚠️ **MEASURED ACROSS ALL 15 THRENODIST CRAFTS:**
+
+| emotion | crafts |
+|---|---|
+| grief | ⛔ **12** |
+| fear | 6 |
+| rage | 3 — ⚠️ never the subject |
+| joy | ⛔ **2 — both passing mentions in a list** |
+| shame | 1 |
+| **love · hope · longing · awe** | ⛔ **0** |
+
+⛔ **AND FIVE OF FIFTEEN CRAFT NAMES CONTAIN "GRIEF" OR "LAMENT".** ⚠️ **Their own canon says their cities
+are built around GRIEF-HOUSES *AND JOY-HALLS*, and there is no joy-hall craft.** The tradition holds that
+FEELING IS THE ONLY TRUE KNOWING and demonstrates one feeling.
+
+**WHY IT WENT UNNOTICED:** ⚠️ **per-craft review cannot see it.** Each craft is individually fine; the
+monoculture is only visible across the set. ⛔ **THIS IS AN ARGUMENT FOR A PALETTE PASS AS A DISTINCT STEP
+IN §37's AUDIT ORDER** — the same way verb coverage is measured, an emotional/thematic range check belongs
+in the tradition-level sweep.
+
+**THREADS, NOT DECISIONS — Erik has not ruled on how these enter:**
+- ⛔ **JOY AS A RESOURCE AND A WEAPON.** The same tidal mechanic as `keening` pointed the other way — a
+  crowd LIFTED rather than levelled. The joy-halls exist and nothing uses them.
+- **RAGE.** Threnody currently touches it only as something other people feel. ⚠️ **A tradition that holds
+  feeling as knowledge should be able to WIELD anger, not merely read it.**
+- **LOVE / LONGING.** Absent entirely, and the likeliest home for the tradition's second face.
+
+⚠️ **NOT to be solved one craft at a time inside the Death audit.** ⛔ **`under_song` (was `shared_grief`)
+was deliberately made EMOTION-AGNOSTIC so it reads whatever is actually underneath — rage, love, relief —
+and therefore does not pre-empt this ruling.**

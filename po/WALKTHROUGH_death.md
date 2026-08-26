@@ -1070,41 +1070,41 @@
 
 ---
 
-## 29. Shared Grief  ·  `shared_grief`
+## 29. Under-Song  ·  `shared_grief`
 
-**L3 · e7 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
-**status:** ⚠️ no crit · gated  
-**ability functions:** empower, reveal
+**L3 · e7 · threnodist · wild_nanite · shape `reveal` · harm `none`**  
+**status:** crit · gated  
+**ability functions:** reveal, provoke
 
-> Lead a lament that spreads one grief across many, so no single heart carries the whole. The Threnodist art of the shared song, and the mourning-singers' first true gift.
+> ⛔ THERE IS ALWAYS A SONG UNDER THE SONG. A person shows you loyalty and means resentment; shows you grief and means relief; shows you an offer and means a want they would not say aloud. ⚠️ THE UNDER-SONG IS WHAT IS ACTUALLY THERE — rage beneath the courtesy, love beneath the contempt, fear beneath the bravado — and a Threnodist hears it the way anyone else hears a wrong note.
 
-**notFor:** It shares grief, it does not erase it — a sorrow sung together is still a sorrow. And the one who leads the lament carries the gathering-point; you hold the grief of all who join while you sing.
+**notFor:** ⛔ FACTS. It hears feeling, never events — what someone actually feels about the money, never where the money is. ⚠️ AND IT IS NOT A LIE DETECTOR: a person sincerely wrong feels sincere, and the under-song of an honest man is honesty. Things that cannot feel give nothing.
 
-### r1 — Shared Grief
+### r1 — Under-Song
 
-**functions:** empower · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
+**functions:** reveal · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** Lead a shared lament that spreads one grief across many, so none carries it alone.
+**grants:** ⛔ HEAR WHAT IS UNDER WHAT THEY ARE SHOWING YOU — the resentment under the loyalty, the relief under the mourning, the want under the offer. ⚠️ You know; nobody else does, and they do not know you know.
 
-**cannot:** It cannot remove grief, only distribute its weight; the singer bears the gathering of it; and a grief shared is a grief made real to everyone who joins the song.
+**cannot:** It hears feeling and never facts. ⚠️ A person sincerely wrong feels sincere, and you do not choose what surfaces — including when what surfaces is about you.
 
 ### r2 — Named Sorrow
 
-**functions:** empower, reveal · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
+**functions:** reveal, provoke · **gainAxes:** quality, conditions · **gains:** deepen · **harm:** none
 
-**grants:** The lament finds the true shape of what is mourned. Singing it, you perceive what the grief is ACTUALLY for — the loss beneath the stated one — and those who join hear it named as well, often for the first time.
+**grants:** ⛔ SAY IT ALOUD AND IT LANDS. Everyone present hears the true thing named, often for the first time including the person it is about — ⚠️ AND WHATEVER THEY WERE DOING, THEY STOP DOING IT. The negotiation, the performance, the held line does not survive having its real want said in the open.
 
-**cannot:** Naming is not mending; a sorrow correctly named can wound worse before it eases. The singer cannot choose what surfaces, and what the lament names in company cannot be unnamed.
+**cannot:** ⛔ WHAT IS NAMED IN COMPANY CANNOT BE UNNAMED, and naming is not mending — a thing correctly named can wound worse before it eases. ⚠️ And if you are wrong, you are wrong out loud.
 
 ### r3 — Long Lament
 
-**functions:** empower · **gainAxes:** range, duration, scope, targets · **gains:** deepen · **harm:** none
+**functions:** reveal, provoke · **gainAxes:** scope, targets, duration · **gains:** broaden · **harm:** none
 
-**grants:** Hold a lament across days rather than a night, and across a settlement rather than a room — a whole community may carry one loss together until it is bearable. The gathering-point can be handed to another singer, so the lament outlasts any one voice.
+**grants:** ⛔ READ THE UNDER-SONG OF A GATHERING — a council, a garrison, a village. What the room actually wants as against what it is saying, and which few in it want something else entirely. ⚠️ Held across days, so you hear a settlement change its mind before it knows it has.
 
-**cannot:** You hold the gathering while you hold the lament, and days of it mark the singer; handing the point on requires a singer able to take it; and a grief carried by everyone becomes part of what that place IS — the GM records it in the world, not the character.
+**cannot:** A crowd's under-song is an average and the outliers are the interesting ones — you hear THAT some disagree, not always WHO. ⚠️ And a place whose real feeling has been said aloud does not go back to not knowing.
 
-**bounds:** IT CANNOT REMOVE GRIEF, ONLY DISTRIBUTE ITS WEIGHT · NAMING IS NOT MENDING — a sorrow correctly named CAN WOUND · you hold the gathering while you hold the lament, and DAYS ARE DAYS
+**bounds:** ⛔ IT HEARS FEELING, NEVER FACTS — the want under the offer, never the terms of it · ⛔ YOU DO NOT CHOOSE WHAT SURFACES. You get what is actually under there, including when it is about you · ⚠️ NAMING IS NOT MENDING — a thing correctly named can wound worse before it eases, and in company it cannot be unnamed
 
 ---
 

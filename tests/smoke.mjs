@@ -18860,6 +18860,61 @@ await (async () => {
       !!caught && caught.caughtBy === "you" && caught.onBehalfOf === "sprig");
   }
 
+  // 5ai · CCODE-253 — THE SEAT NOBODY SAT IN.
+  //
+  // CCODE-250 gave `battleRound` an `allies` seat, gated it thoroughly, and shipped it. Neither caller
+  // filled it. So `chooseTarget` returned null on every round in the actual game, every reveal was absent,
+  // and interception could still never fire — while twenty gates stayed green, because they all called
+  // `battleRound` directly and passed `allies` themselves.
+  //
+  // I found it because `wiring_audit`'s testOnlyExports ratchet went 27 -> 31. I had run that audit and read
+  // "4 failures, same as baseline" — the ratchet was ALREADY RED, so the failure COUNT did not move while
+  // its VALUE got worse. A red check absorbs a regression silently, and I read the count, not the number.
+  {
+    const src = readFileSync(join(root, "engine/encounters.js"), "utf8");
+    const strip = src.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+    check("CCODE-253: the encounter wrapper DERIVES the party and forwards it into the round",
+      /targetableAllies\(/.test(strip) && /allies:/.test(strip));
+    check("CCODE-253: …and it accepts the content it needs to resolve a roster stored as ids",
+      /content = null/.test(strip) || /content,/.test(strip));
+    // the app must actually hand it over, or the derivation resolves nothing
+    const appSrc = readFileSync(join(root, "app.js"), "utf8");
+    check("CCODE-253: the app passes CONTENT to the encounter wrapper — a derivation with no defs finds no party",
+      /content: CONTENT/.test(appSrc));
+
+    // THE BEHAVIOURAL CLAIM, THROUGH THE REAL WRAPPER rather than around it.
+    const EN = await import("../engine/encounters.js");
+    const sb253 = C199.skillBattle?.engine || C199.skillBattle || {};
+    const rules253 = C199.rules || {};
+    const mkChar = (companions) => ({ id: "player", name: "Wren", level: 6, energy: 100,
+      attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, health: 30, maxHealth: 30, companions });
+    // ⚠️ `type: "duel"` and a sheet are what put this on the skill-battle path — without the type,
+    // `startEncounter` returns null and my first version of this probe died on it rather than testing anything.
+    const def253 = { id: "troll_fight", type: "duel", name: "the troll", opponent: { name: "the troll", health: 30, yieldAt: 0 } };
+    const st253 = EN.startEncounter(def253, { oppSheet: { attributes: { physical: 9 }, level: 8, energy: 100, health: 30 } });
+    check("CCODE-253: the probe is on the skill-battle path at all (floor — a null state tests nothing)",
+      !!st253 && st253.mode === "skill_battle");
+    const run = (character) => EN.skillBattleRound(st253, def253,
+      { function: "defend", tier: 1, attribute: "physical", intensity: "standard", name: "guard" },
+      { character, content: { companions: {}, npcs: {} }, rules: rules253, sb: sb253,
+        steps: rules253.resolution || {}, rng: () => 0.5 });
+
+    const alone253 = run(mkChar([]));
+    // ⚠️ NON-VACUITY: if the wrapper threw or returned nothing, every claim below would pass on undefined.
+    check("CCODE-253: the wrapper actually resolves a round (floor — a thrown wrapper would pass anything)",
+      !!alone253 && (alone253.player != null || alone253.opponent != null || alone253.ended === true));
+    check("CCODE-253: travelling ALONE, no aim is recorded — the solo game is untouched",
+      !alone253?.opponent?.targetChoice);
+
+    const withParty253 = run(mkChar([
+      { id: "sprig", name: "Sprig", roles: ["ally"], attributes: { mental: 2 }, level: 3 },
+      { id: "veth", name: "Veth", roles: ["ally"], attributes: { physical: 7 }, level: 9 } ]));
+    check("CCODE-253: travelling WITH COMPANIONS, the foe picks one — reachable from play, not only from a test",
+      !!withParty253?.opponent?.targetChoice?.target?.name,
+      JSON.stringify(withParty253?.opponent?.targetChoice?.target?.name ?? null));
+  }
+
+
   // 5af · ⛔ CCODE-248 — AN NPC WITH A CHARACTER SHEET, AND WHY IRONSENSE GETS OVERDONE.
   //
   // Erik: "as the NPC grows they should gain levels and skills just like the PC… she has ironsense (which

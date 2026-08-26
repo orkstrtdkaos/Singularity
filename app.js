@@ -112,7 +112,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.217";
+const APP_VERSION = "1.9.218";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12579,7 +12579,7 @@ function wireSkillBattlePanel() {
   // Edit goes back to ACTION — never to sense, which the GM has already narrated ("you can't edit back to it").
   const ed = document.getElementById("sb-edit"); if (ed) ed.onclick = () => { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); };
   const fl = document.getElementById("sb-flee"); if (fl) fl.onclick = () => beginChaseFromFight(activeEnc()?.def); // SNG-230 §6a: FLEE a fight → a real CHASE
-  const yl = document.getElementById("sb-yield"); if (yl) yl.onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, rules: CONTENT.rules, sb, steps, yield: true }));
+  const yl = document.getElementById("sb-yield"); if (yl) yl.onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, yield: true }));
 }
 
 /** CCODE-45 · GM CALL #1 — resolve the SENSE step, then narrate what you sensed and what they did. Skipping the
@@ -12592,7 +12592,7 @@ async function sbResolveSense() {
   turn.senseDone = true;
   if (!decl) { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); return; }
   sbBusy = true; sbBusyLabel = `Reading ${enc.def?.opponent?.name || "them"}…`; sbQuickBeat = ""; renderSkillBattle(sbLastRound);
-  const rr = skillBattleRound(character.activeEncounter.state, enc.def, decl, { character, rules: CONTENT.rules, sb, steps,
+  const rr = skillBattleRound(character.activeEncounter.state, enc.def, decl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps,
     seenTendency: sbLastPlayerFn, rng: Math.random, phase: "sense", tickEffects: false });
   character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
   // activeEnc() hands back a FRESH wrapper each call, so `enc.state = ...` writes to a throwaway — the resolved
@@ -12638,7 +12638,7 @@ async function sbExecuteTurn() {
   const beats = [];
   if (turn.senseLine) beats.push(turn.senseLine);
   // ACTION — ticks the turn's effects only if there is no bonus step after it.
-  let rr = skillBattleRound(character.activeEncounter.state, enc.def, aDecl, { character, rules: CONTENT.rules, sb, steps,
+  let rr = skillBattleRound(character.activeEncounter.state, enc.def, aDecl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps,
     seenTendency: sbLastPlayerFn, rng: Math.random, phase: "action", tickEffects: !bDecl, setupBonus: turn.setupBonus || 0 });
   sbLastPlayerFn = aDecl.function;
   const applyRR = (r, d, label) => {
@@ -12704,7 +12704,7 @@ async function sbExecuteTurn() {
   }
   // BONUS — a FULL action; it ticks the turn's effects, being the last step.
   if (!ended && bDecl) {
-    const br = skillBattleRound(character.activeEncounter.state, enc.def, bDecl, { character, rules: CONTENT.rules, sb, steps,
+    const br = skillBattleRound(character.activeEncounter.state, enc.def, bDecl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps,
       seenTendency: sbLastPlayerFn, rng: Math.random, phase: "bonus", tickEffects: true });
     applyRR(br, bDecl, "Bonus action");
     saveCharacter(character);
@@ -12772,7 +12772,7 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
   // CCODE-37: a WOVEN second craft rides on the declaration — the engine adds its named roll line, lands its
   // effect, and charges for both. The lead craft's function still drives the matchup.
   if (woven) decl.woven = { function: woven.function, tier: woven.tier || 1, name: woven.name, id: woven.id };
-  let rr = skillBattleRound(enc.state, enc.def, decl, { character, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random });
+  let rr = skillBattleRound(enc.state, enc.def, decl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random });
   // SNG-230 §6b (Erik: a good roll can end a fight too, easier vs weaker foes): a decisive HARM FINISHER can
   // COLLAPSE the skill-battle EARLY — the round's momentum SWING is mapped to a degree and checked against the
   // foe's collapse floor. A strong swing on the right craft ends it; a lesser swing runs the meter unchanged

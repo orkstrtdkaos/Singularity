@@ -6,6 +6,7 @@
 // Incapacitation, never engine-imposed death.
 
 import { battleRound, opponentPolicy } from "./skill_battle.js";
+import { targetableAllies } from "./combatants.js";   // CCODE-253: who a foe may aim at — DERIVED here, per this seam's own rule
 import { encounterKind } from "./encounterFrame.js"; // SNG-247: which bounded thing this is — it picks the exit rule
 import { smartClamp } from "./namematch.js"; // SNG-152
 
@@ -104,6 +105,10 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // CCODE-45: the TURN options must be ACCEPTED here and FORWARDED below. This wrapper hand-builds its call to
   // battleRound, so an option it does not name is silently dropped — which is exactly how the sense step ran as a
   // normal action round the first time (the SECOND time this seam has bitten; see seam_battle_round_options).
+  // CCODE-253: the companion/NPC DEFS, so `targetableAllies` can resolve a roster stored as ids. ⚠️ ACCEPTED
+  // AND FORWARDED — the failure this seam keeps repeating is an option accepted at the top and dropped below,
+  // or (my version) used below and never accepted at all.
+  content = null,
   phase = "action", tickEffects = true, setupBonus = 0 } = {}) {
   const cfg = rules.encounters?.duel || {};
   // SNG-247 Tier 3: a PUZZLE promoted onto the contest engine has no `opponent` block — the thing itself is the
@@ -119,8 +124,19 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const oppSheet = state.opponentSheet;
   const oppDecl = opponentPolicy(oppSheet, state, seenTendency, sb);
   const before = character.energy ?? 0;
+  // ⛔ CCODE-253 — DERIVED HERE, NEVER PASSED IN, because this wrapper's own comment (three lines down)
+  // records that it has silently eaten a forwarded option TWICE. I made it three: CCODE-250 gave
+  // `battleRound` an `allies` seat and no caller filled it, so `chooseTarget` returned null on every round
+  // in the game and the whole targeting mechanism was unreachable from play while its gates stayed green.
+  // ⚠️ A companion who cannot fight is still TARGETABLE — that is `targetableAllies`, not `actingAllies`,
+  // and the difference is the entire reason interception is worth having.
+  const partyPresent = targetableAllies(character, {
+    companions: content?.companions || {}, npcs: content?.npcs || {}, company: character?.company || null });
   const r = battleRound({
     playerDecl, oppDecl,
+    // one ally means "just you", and `chooseTarget` returns the lone-target case — byte-identical to before.
+    allies: partyPresent.length > 1 ? partyPresent : null,
+    protections: state.protections || null,
     playerSheet: { attributes: character.attributes || {}, subAttributes: character.subAttributes || {}, alignment: character.alignment || {}, skills: character.skills || {}, energy: before },
     // CCODE-35: `effects` must ride BOTH ways — into the round (they modify this roll) and back out onto the
     // encounter state (they persist). This hand-built state object is the seam where they would silently drop.

@@ -105,8 +105,15 @@ const CHECKS = [
   },
   {
     n: 4, id: "r1-deepens", authority: AUTH.gains, floor: 200,
-    severity: "✅ auto-fixable",
-    what: "r1 declares `gains: deepen` — it is the base and there is nothing beneath it to deepen",
+    severity: "⚠️ INFORMATIONAL — DO NOT FIX",
+    // ⛔ DEMOTED FROM AUTO-FIXABLE, 2026-08-24, BEFORE ANY WRITE. Two authorities say leave it alone:
+    //   · `po/function_integrity.mjs:157` gates `gains` only for `rank > 1` — r1 is deliberately exempt,
+    //     because r1 has nothing below it to gain against, so the value is not read there.
+    //   · `first_gift_template.json.rankArc[0]` AUTHORS `{rank: 1, gains: "deepen"}` — the template's own
+    //     documented pattern for all 25 cohort crafts.
+    // ⚠️ SO "FIXING" 42 CRAFTS WOULD HAVE REWRITTEN THE TEMPLATE'S OWN CONVENTION on a field with no r1
+    // consumer. The observation stands (r1 cannot deepen what is not there); the write does not.
+    what: "r1 declares `gains: deepen` — true, but no consumer reads gains at r1 and the template authors it that way",
     applies: c => (c.tree || []).some(t => t.rank === 1),
     run: c => (c.tree || []).some(t => t.rank === 1 && t.gains === "deepen") ? "r1 gains=deepen → should be broaden" : null,
   },

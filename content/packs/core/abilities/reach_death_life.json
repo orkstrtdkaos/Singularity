@@ -1420,8 +1420,9 @@
    "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
    "shape": "hobble",
    "operativeAxis": [
-    "conditions",
-    "targets"
+    "fear",
+    "targets",
+    "variance"
    ],
    "mechanic": {
     "magnitude": 4,
@@ -1483,7 +1484,8 @@
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_dreadMantle_20260823": "⛔ ERIK 2026-08-23. RENAMED to Dread Mantle with new colour — the mantle is worn, and it arrives as a TEMPERATURE not a thought. ⚠️ PROVOKE ADDED, closing Death's last missing verb WITHOUT INVENTING A CRAFT: 'most things run, some freeze, a few come straight at you' was always provoke and was never declared. ⛔ THE PEACE-WITH-DYING IMMUNITY IS DOWNGRADED TO RESISTANCE, per Erik: 'a good practitioner would have them understand that dying isn't the worst part — THAT they would fear.' So r1 is shrugged off by the peaceful and r3 reaches them, because an Ashwarden of all people knows what nobody has made peace with. ⚠️ r2/r3 had `imposes: null` while broadening to a room and deepening the effect — both now impose. TWO FALSE [cost] BOUNDS REMOVED (the stampede was already r2's cannot; 'never be right again' was already r3's). ⛔ `operativeAxis` carried `fear` and `variance`, neither among the nine.",
    "_colourCorrected_20260823": "⛔ ERIK 2026-08-23: 'wrong colour — Dread Mantle is necromancy at its intentionally outward-facing best/worst. It's not a grey wet blanket.' ⚠️ I HAD WRITTEN IT AS A SHROUD LAID ON THE VICTIM — subtle, a temperature, deniable. ⛔ THE MANTLE IS WHAT THE ASHWARDEN PUTS ON, and the craft is DELIBERATE PUBLIC DISPLAY: dead things orienting, carrion birds arriving, cut flowers finishing, a sickroom smell coming off someone standing perfectly still. ⚠️ IT PAIRS WITH `palework`, whose description says the trade is how an Ashwarden carries the craft IN DAYLIGHT — this is what happens when she stops carrying it. A new hard bound records the consequence: it is public and it is remembered.",
-   "_mantleFormIsPersonal_20260823": "⛔ ERIK 2026-08-23, SECOND COLOUR PASS: 'fear made material — ghostly, otherworldly. A mantle that is DISTINCT PER WARDEN. For some it might be the grey wet blanket, but for many it's terrifying armour, or a cape.' ⚠️ MY FIRST TWO PASSES BOTH MISSED: pass one was a shroud laid on the victim, pass two was atmosphere and smells. ⛔ IT IS A MANIFESTATION WORN BY THE NECROMANCER AND ITS FORM IS THAT NECROMANCER'S SIGNATURE — authored once per character, fixed thereafter, and identifying. That makes it a PLAYER-FACING CUSTOMISATION HOOK rather than set dressing, and it gives the Valley a way to say WHICH Ashwarden walked through."
+   "_mantleFormIsPersonal_20260823": "⛔ ERIK 2026-08-23, SECOND COLOUR PASS: 'fear made material — ghostly, otherworldly. A mantle that is DISTINCT PER WARDEN. For some it might be the grey wet blanket, but for many it's terrifying armour, or a cape.' ⚠️ MY FIRST TWO PASSES BOTH MISSED: pass one was a shroud laid on the victim, pass two was atmosphere and smells. ⛔ IT IS A MANIFESTATION WORN BY THE NECROMANCER AND ITS FORM IS THAT NECROMANCER'S SIGNATURE — authored once per character, fixed thereafter, and identifying. That makes it a PLAYER-FACING CUSTOMISATION HOOK rather than set dressing, and it gives the Valley a way to say WHICH Ashwarden walked through.",
+   "_operativeAxisRestored_20260824": "⛔ I CHANGED THIS AND SHOULD NOT HAVE. I linted `operativeAxis` against the NINE GAIN AXES; it is a DIFFERENT AND DELIBERATELY OPEN VOCABULARY. ⚠️ `craft_mechanics.operativeAxis.note` records that I corrected this once before — my own blazeborn pilot broke a closed list and the ruling was that NAMED axes are real, authored and shown to the player; `mechanical` is only the subset carrying a NUMBER. ⛔ RESTORED ['fear', 'targets', 'variance'] (I had written ['conditions', 'targets']). `variance` is IN the mechanical list and `dread` carries `variance: 4`, so removing it was a live regression, not a tidy-up."
   },
   {
    "schemaVersion": 1,
@@ -3802,7 +3804,7 @@
    "harmRung": "none",
    "shape": "reveal",
    "operativeAxis": [
-    "quality",
+    "precision",
     "scope"
    ],
    "mechanic": {
@@ -3845,7 +3847,8 @@
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ DEATH'S SENSE — what is failing and how long it has\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_operativeAxisRestored_20260824": "⛔ I CHANGED THIS AND SHOULD NOT HAVE. I linted `operativeAxis` against the NINE GAIN AXES; it is a DIFFERENT AND DELIBERATELY OPEN VOCABULARY. ⚠️ `craft_mechanics.operativeAxis.note` records that I corrected this once before — my own blazeborn pilot broke a closed list and the ruling was that NAMED axes are real, authored and shown to the player; `mechanical` is only the subset carrying a NUMBER. ⛔ RESTORED ['precision', 'scope'] (I had written ['quality', 'scope']). `variance` is IN the mechanical list and `dread` carries `variance: 4`, so removing it was a live regression, not a tidy-up."
   },
   {
    "id": "deathsense",

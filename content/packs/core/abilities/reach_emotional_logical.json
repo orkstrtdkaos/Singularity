@@ -945,7 +945,7 @@
    "nativeOrCombination": "native",
    "shape": "bolster",
    "operativeAxis": [
-    "duration",
+    "upkeepRelief",
     "targets"
    ],
    "mechanic": {
@@ -997,7 +997,8 @@
    "_idWas": "the_wellspring",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rebuiltAsBolster_20260823": "⛔ ERIK 2026-08-23. The craft's real value was buried in r2's second sentence — 'they attempt things they would not have attempted, and do them better' — and `bolster` was one of only three verbs Death did not have. ⚠️ NOW IT IS THE HEADLINE. Erik asked what it should bolster: resist, energy, damage, crit, across the board? ⛔ ANSWER: ENERGY, RESIST, AND WILLINGNESS — never damage or crit, because feeling does not make a blade sharper and a flat across-the-board buff would have no character of its own. ⚠️ CUT: the [cost] bound 'you carry some of it, that is not a metaphor and it accumulates' — an untracked debt, the same shape that got `shared_weight` rebuilt, and ENERGY IS THE COST. ⛔ ALSO: e1 -> e3 (below the L1 band, unmigrated batch), lowercase challengeTypes fixed, `operativeAxis: upkeepRelief` was not one of the nine axes, empty notFor filled, and the machine-generated `plainly` said r3 'extends targets' when its axis is scope."
+   "_rebuiltAsBolster_20260823": "⛔ ERIK 2026-08-23. The craft's real value was buried in r2's second sentence — 'they attempt things they would not have attempted, and do them better' — and `bolster` was one of only three verbs Death did not have. ⚠️ NOW IT IS THE HEADLINE. Erik asked what it should bolster: resist, energy, damage, crit, across the board? ⛔ ANSWER: ENERGY, RESIST, AND WILLINGNESS — never damage or crit, because feeling does not make a blade sharper and a flat across-the-board buff would have no character of its own. ⚠️ CUT: the [cost] bound 'you carry some of it, that is not a metaphor and it accumulates' — an untracked debt, the same shape that got `shared_weight` rebuilt, and ENERGY IS THE COST. ⛔ ALSO: e1 -> e3 (below the L1 band, unmigrated batch), lowercase challengeTypes fixed, `operativeAxis: upkeepRelief` was not one of the nine axes, empty notFor filled, and the machine-generated `plainly` said r3 'extends targets' when its axis is scope.",
+   "_operativeAxisRestored_20260824": "⛔ I CHANGED THIS AND SHOULD NOT HAVE. I linted `operativeAxis` against the NINE GAIN AXES; it is a DIFFERENT AND DELIBERATELY OPEN VOCABULARY. ⚠️ `craft_mechanics.operativeAxis.note` records that I corrected this once before — my own blazeborn pilot broke a closed list and the ruling was that NAMED axes are real, authored and shown to the player; `mechanical` is only the subset carrying a NUMBER. ⛔ RESTORED ['upkeepRelief', 'targets'] (I had written ['duration', 'targets']). `variance` is IN the mechanical list and `dread` carries `variance: 4`, so removing it was a live regression, not a tidy-up."
   },
   {
    "id": "built_system",

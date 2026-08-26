@@ -17944,8 +17944,26 @@ await (async () => {
     check("CCODE-236 §6: provoke CLEARS state.tactic — the chosen action, gone, back to default",
       CM.resolveProvoke({ tactic: "press-in" }, { margin: 12 }).ok === true
       && CM.resolveProvoke({ tactic: "press-in" }, { margin: 12 }).tactic === null);
-    check("CCODE-236 §6: …and does NOTHING to a foe committed to nothing — a refusal, not a hollow win",
-      CM.resolveProvoke({ tactic: null }, { margin: 12 }).nothingToTake === true);
+    // ⛔ SUPERSEDED BY CCODE-256, AND THE OLD RULE WAS DELIBERATE SO IT IS RECORDED RATHER THAN DELETED.
+    // This asserted that provoke does NOTHING to a foe committed to nothing — "a refusal, not a hollow win."
+    // ⚠️ THE REASONING WAS SOUND AND THE CONSEQUENCE WAS NOT: `state.tactic` is set ONLY by the narrator, so
+    // provoke's entire value hung on the GM having chosen to give this foe a line — invisible to the player
+    // and impossible to play around. Erik: "Seems like you should be able to provoke even those without a
+    // 'line'." ⛔ THE ANSWER ONLY EXISTED AFTER CCODE-250: now that a foe CHOOSES whom to hit, goading
+    // something with no line means MAKING YOURSELF THE THING IT WANTS. Still not a hollow win — a different
+    // one, and the tool a protector was missing.
+    check("CCODE-256 §6: provoking a foe with NO line taunts it instead — you become what it wants",
+      CM.resolveProvoke({ tactic: null }, { margin: 12, taunter: "veth" }).ok === true
+      && CM.resolveProvoke({ tactic: null }, { margin: 12, taunter: "veth" }).taunted?.targetId === "veth");
+    // ⚠️ AND IT IS NOT PERMANENT. A taunt that held for the whole fight would let one character lock a foe
+    // onto themselves forever, which removes the decision instead of creating one.
+    check("CCODE-256 §6: …for a couple of rounds, not for the fight — it has to be re-earned",
+      CM.resolveProvoke({ tactic: null }, { margin: 12 }).taunted?.rounds >= 1
+      && CM.resolveProvoke({ tactic: null }, { margin: 12 }).taunted?.rounds <= 3);
+    // ⛔ AND A FAILED PROVOKE STILL DOES NOTHING — the refusal that survives is the one that was always right.
+    check("CCODE-256 §6: a provoke they do not rise to takes nothing and taunts nobody",
+      CM.resolveProvoke({ tactic: null }, { margin: 0 }).ok === false
+      && !CM.resolveProvoke({ tactic: null }, { margin: 0 }).taunted);
 
     // ⚠️ SOOTHE removes heat, never reasons
     const cool = CM.resolveSoothe({ momentum: 6 }, { margin: 20 });
@@ -18985,6 +19003,89 @@ await (async () => {
     check("CCODE-255: the wrapper carries the foe's read BOTH ways — out on the receipt AND back in on state",
       (encStrip.match(/foeReadTier/g) || []).length >= 3);
   }
+
+  // 5ak · CCODE-256 — CONCEAL HIDES YOU, AND PROVOKE WORKS ON ANYONE.
+  // Erik, two rulings: "A successful conceal can also make people untargetable - or at least have it be very
+  // difficult to actually hit them." and "Seems like you should be able to provoke even those without a
+  // 'line'."
+  {
+    const TG = await import("../engine/targeting.js");
+    const CM = await import("../engine/craftmechanics.js");
+    const party = [
+      { id: "player", name: "Wren", contributions: ["HARM","MARTIAL"], threatDealt: 12, sheet: { attributes: { physical: 8 }, level: 9 } },
+      { id: "sprig", name: "Sprig", contributions: ["RESTORE"], concealment: 2, sheet: { attributes: { mental: 2 }, level: 3 } },
+    ];
+    const hunt = (tier, extra = {}) => TG.chooseTarget(party, { policy: "healer", knowledge: TG.foeKnowledge(tier), rng: () => 0.4, ...extra });
+
+    // ⛔ UNTARGETABLE, not merely un-preferred. CCODE-255 blinded the foe's JUDGEMENT; Erik asked for the
+    // stronger thing — a well-hidden entity is not on the list at all.
+    check("CCODE-256: a concealed ally is not a candidate at all while the foe's read is below her cover",
+      hunt(0).target.id === "player" && hunt(1).target.id === "player" && hunt(1).hiddenFrom === 1);
+    check("CCODE-256: …and a good enough read finds her anyway — cover is a contest, not a ward",
+      hunt(2).target.id === "sprig" && !hunt(2).hiddenFrom);
+
+    // ⛔ THE EXPLOIT, CLOSED IN THE SAME BREATH: striking reveals you.
+    // ⚠️ AT TIER 2 THE FOE CAN READ ROLES (CCODE-255) so the healer policy WORKS — which is what isolates
+    // cover as the only variable. My first probe used tier 0, where the policy is blinded regardless of
+    // concealment, so it could never have shown what it claimed: two mechanisms, one test, no signal.
+    const covered = [party[0], { ...party[1], concealment: 3 }];
+    const struck = [party[0], { ...party[1], concealment: 3, struck: true }];
+    check("CCODE-256: a hidden ally who STRIKES is found — you cannot be hidden and be hitting people",
+      TG.chooseTarget(covered, { policy: "healer", knowledge: TG.foeKnowledge(2) }).target.id === "player"
+      && TG.chooseTarget(struck, { policy: "healer", knowledge: TG.foeKnowledge(2) }).target.id === "sprig");
+    check("CCODE-256: concealedFrom checks aggression FIRST — an order that checked cover first would let a striker keep it",
+      TG.concealedFrom({ concealment: 9, struck: true }, 0) === false
+      && TG.concealedFrom({ concealment: 9 }, 0) === true);
+
+    // ⚠️ AND IF EVERYONE IS HIDDEN IT STILL SWINGS. Untargetable is not invulnerable — otherwise a party
+    // that all concealed would simply be unkillable.
+    const allHidden = party.map(a => ({ ...a, concealment: 3 }));
+    const flail = TG.chooseTarget(allHidden, { policy: "healer", knowledge: TG.foeKnowledge(0), rng: () => 0.4 });
+    check("CCODE-256: with everyone hidden the foe strikes BLINDLY rather than standing paralysed",
+      !!flail?.target && flail.blindly === true && flail.policy === "blind");
+
+    // ⛔ AND A BLIND SWING IS A BAD SWING — Erik's "or at least very difficult to actually hit them".
+    // ⚠️ APPLIED AS EVASION, which is the mechanic that already means exactly this. My first attempt set a
+    // `threshold` field on `applyEvasion`'s return — it returns an ARRAY OF RECEIPTS and does its work by
+    // mutating the roll, so the patch changed nothing while reading as though it worked.
+    const { battleRound: BR } = await import("../engine/skill_battle.js");
+    const rules256 = C199.rules || {}, sb256 = C199.skillBattle?.engine || {};
+    const blindRound = (allies) => BR({
+      playerDecl: { function: "defend", tier: 1, attribute: "physical", intensity: "standard", name: "guard" },
+      oppDecl: { function: "strike", tier: 3, attribute: "physical", intensity: "heavy", name: "cleave" },
+      playerSheet: { id: "player", attributes: { physical: 4 }, level: 4, health: 30, maxHealth: 30, soak: 0 },
+      oppSheet: { attributes: { physical: 11 }, level: 10, health: 30, maxHealth: 30, soak: 0 },
+      allies, targetPolicy: "healer",
+      state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 100, effects: [], pressure: { player: 0, opponent: 0 }, foeReadTier: 0 },
+      rules: rules256, sb: sb256, steps: rules256.resolution || {}, rng: () => 0.5 });
+    const seen256 = blindRound(party.map(a => ({ ...a, concealment: 0, sheet: { ...a.sheet, soak: 0, health: 30 } })));
+    const unseen = blindRound(allHidden.map(a => ({ ...a, sheet: { ...a.sheet, soak: 0, health: 30 } })));
+    check("CCODE-256: a blind swing is recorded on the receipt, and it DEGRADES the attack",
+      !!unseen.blindStrike && unseen.blindStrike.degreeTo !== undefined
+      && unseen.blindStrike.marginFrom > unseen.opponent.margin);
+    check("CCODE-256: …and a swing at someone it CAN see is not degraded — the penalty is not blanket",
+      !seen256.blindStrike);
+
+    // ═══ PROVOKE, THE SECOND RULING ═══
+    check("CCODE-256: provoke still breaks a line when there IS one — the old behaviour survives",
+      CM.resolveProvoke({ tactic: "press-in" }, { margin: 9 }).broke === "press-in");
+    check("CCODE-256: and against a foe with NO line it TAUNTS — you become the thing it wants",
+      CM.resolveProvoke({ tactic: null }, { margin: 9, taunter: "veth" }).taunted?.targetId === "veth");
+    // ⛔ AND THE TAUNT ACTUALLY OVERRIDES TARGETING, or it is a receipt field nobody obeys — which is this
+    // project's single most common defect and I have shipped it twice this week.
+    const roster = [...party, { id: "veth", name: "Veth", contributions: ["PROTECT"], sheet: { attributes: { physical: 9 }, level: 11 } }];
+    const taunted = TG.chooseTarget(roster, { policy: "healer", knowledge: TG.foeKnowledge(3), taunt: { targetId: "veth", rounds: 2 } });
+    check("CCODE-256: a taunt takes the choice away — the foe goes for the taunter, not its preference",
+      taunted.target.id === "veth" && taunted.taunted === true);
+    // ⚠️ NON-VACUITY: without the taunt it must pick someone ELSE, or this proves nothing.
+    check("CCODE-256: …and without the taunt that same foe would have gone for the healer (floor)",
+      TG.chooseTarget(roster, { policy: "healer", knowledge: TG.foeKnowledge(3) }).target.id === "sprig");
+    // ⛔ A TAUNT OUTRANKS COVER ON PURPOSE: you cannot demand something's attention and also be hidden from it.
+    check("CCODE-256: taunting while concealed does not work both ways — demanding attention is the opposite of hiding",
+      TG.chooseTarget(roster.map(a => ({ ...a, concealment: 5 })),
+        { policy: "healer", knowledge: TG.foeKnowledge(0), taunt: { targetId: "veth", rounds: 2 } }).target.id === "veth");
+  }
+
 
 
 

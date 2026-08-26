@@ -660,12 +660,35 @@ export function resolveImposition(ability, {
  *
  *  ⚠️ AND IT DOES NOTHING WHEN THERE IS NOTHING TO TAKE. Provoking a foe who has not committed to a line
  *  is not a partial success — there is no line to break, and saying so beats reporting a hollow win. */
-export function resolveProvoke(state, { margin = 0 } = {}) {
+/** ⛔ CCODE-256 / ERIK: "Seems like you should be able to provoke even those without a 'line'."
+ *
+ *  ⚠️ IT USED TO DO NOTHING AT ALL AGAINST AN UNCOMMITTED FOE — `nothingToTake`, and the round was wasted.
+ *  Since `state.tactic` is only ever set by the narrator, that meant provoke's entire value depended on the
+ *  GM having chosen to give this foe a line, which a player cannot see and cannot influence.
+ *
+ *  ⛔ THE ANSWER ONLY BECAME AVAILABLE THIS WEEK. Now that a foe CHOOSES WHOM TO HIT (CCODE-250), goading
+ *  something that has no line has an obvious meaning: YOU MAKE IT COME FOR YOU. That is a taunt, and it is
+ *  the tool a protector has been missing — interception lets you take a blow meant for someone else, but
+ *  nothing let you stop the blow being aimed there in the first place.
+ *
+ *  ⚠️ SO PROVOKE HAS TWO FORMS AND THEY ARE THE SAME ACT: break the line they are committed to, or, if they
+ *  are committed to nothing, become the thing they are committed to. Both take their choice away.
+ *
+ *  `taunter` is who they will come for. Absent, it is the player — a solo fight keeps working unchanged. */
+export function resolveProvoke(state, { margin = 0, taunter = null, rounds = null, cfg = {} } = {}) {
   const had = state?.tactic || null;
   if (!(Number(margin) > 0)) return { ok: false, why: "they did not rise to it", tactic: had };
-  if (!had) return { ok: false, nothingToTake: true, why: "they are not committed to anything you can break" };
-  return { ok: true, broke: had, tactic: null,
-    why: `they lose their line — ${had} abandoned, back to plain fighting` };
+  if (had) {
+    return { ok: true, broke: had, tactic: null,
+      why: `they lose their line — ${had} abandoned, back to plain fighting` };
+  }
+  // ⛔ NO LINE TO BREAK, SO TAKE THEIR CHOICE INSTEAD. ⚠️ IT IS DELIBERATELY NOT PERMANENT: a taunt that
+  // held forever would let one character lock a foe onto themselves for a whole fight, which removes the
+  // decision rather than creating one. It lasts a couple of rounds and has to be re-earned.
+  const who = taunter || "player";
+  const dur = Math.max(1, Number(rounds ?? cfg?.provoke?.tauntRounds ?? 2));
+  return { ok: true, tactic: null, taunted: { targetId: who, rounds: dur },
+    why: `they are not committed to anything you could break — so you made yourself the thing they want` };
 }
 
 /** ⚠️ SOOTHE TAKES THE HEAT OUT — §31.5 — AND HEAT IS NOT DAMAGE. It drops MOMENTUM or lifts an imposed

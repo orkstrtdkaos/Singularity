@@ -81,11 +81,58 @@ export function foeKnowledge(tier = 0, { cfg = {} } = {}) {
  *
  *  ⚠️ THE DOWNED ARE NOT TARGETS. Something already out of the fight is not what a foe swings at, and
  *  hitting them again is a different act the engine should not perform by accident. */
-export function chooseTarget(allies = [], { policy = "threat", rng = Math.random, policies = null, knowledge = null } = {}) {
+/** ⛔ CCODE-256 / ERIK: "A successful conceal can also make people untargetable - or at least have it be
+ *  very difficult to actually hit them."
+ *
+ *  ⚠️ CCODE-255 made concealment blind the foe's JUDGEMENT — it could no longer pick out the healer. Erik is
+ *  asking for the stronger thing: a well-hidden entity should not be on the list at all.
+ *
+ *  ⛔ AND THE OBVIOUS EXPLOIT HAS TO BE CLOSED IN THE SAME BREATH: if hiding were free and total, a party
+ *  that all concealed would be untouchable. Two things stop that, and neither is a fudge factor.
+ *    · HIDING COSTS YOUR SENSE STEP. A party that all hides has read nothing and set nothing up.
+ *    · ⛔ STRIKING REVEALS YOU. If you swing, you are found — for this round, at the moment you swing.
+ *  A character cannot both be hidden and be hitting people, which is the rule that makes concealment a
+ *  TRADE rather than a wall.
+ *
+ *  ⚠️ AND IF EVERYONE IS HIDDEN, THE FOE STILL SWINGS. It does not stand paralysed — it lashes out at
+ *  someone it cannot see, and `blindly` says so on the receipt so the narrator can describe a miss in the
+ *  dark rather than a clean hit. Untargetable is not invulnerable. */
+export function concealedFrom(entity, foeTier = 0) {
+  // ⚠️ REVEALED BY YOUR OWN AGGRESSION, checked FIRST — a hidden character who strikes is not hidden, and
+  // an order that checked concealment first would let a striker keep it.
+  if (entity?.struck === true || entity?.revealed === true) return false;
+  const hidden = num(entity?.concealment, entity?.concealed === true ? 1 : 0);
+  if (hidden <= 0) return false;
+  return num(foeTier, 0) < hidden;
+}
+
+export function chooseTarget(allies = [], { policy = "threat", rng = Math.random, policies = null, knowledge = null, taunt = null } = {}) {
   const live = (allies || []).filter(a => a && a.present !== false && !a.downed);
   if (!live.length) return null;
+
+  // ⛔ CCODE-256 — A TAUNT TAKES THE CHOICE AWAY ENTIRELY, and it outranks concealment on purpose: you
+  // cannot demand something's attention and also be hidden from it. Making yourself the target is the
+  // opposite of hiding, and a rule that let you do both would make the protector role free.
+  if (taunt?.targetId) {
+    const t = live.find(a => a.id === taunt.targetId);
+    if (t) return { target: t, policy: "taunted", taunted: true,
+      why: `${t.name} made themselves impossible to ignore` };
+  }
+
+  // ⛔ AND THE HIDDEN ARE NOT ON THE LIST. `knowledge` absent means the foe sees perfectly, so this is inert
+  // for every caller that has not adopted the read — same opt-in shape as CCODE-255.
+  const seen = knowledge ? live.filter(a => !concealedFrom(a, knowledge.tier)) : live;
+  if (!seen.length) {
+    // ⚠️ EVERYONE IS HIDDEN. It swings anyway, at someone it cannot see.
+    const flail = live[Math.floor(rng() * live.length)] || live[0];
+    return { target: flail, policy: "blind", blindly: true,
+      why: "it cannot find any of you — it strikes where it thinks you are" };
+  }
+  const hiddenFrom = live.length - seen.length;
   // ⛔ A LONE TARGET IS NOT A CHOICE, and this is the line that keeps every existing 1v1 identical.
-  if (live.length === 1) return { target: live[0], policy: "only", why: "there is nobody else" };
+  if (seen.length === 1) return { target: seen[0], policy: "only",
+    ...(hiddenFrom ? { hiddenFrom } : {}),
+    why: hiddenFrom ? "the only one of you it can still see" : "there is nobody else" };
   const table = policies || TARGET_POLICIES;
 
   // ⛔ CCODE-255 — CAN IT ACTUALLY SEE WELL ENOUGH TO DO WHAT IT WANTS? `knowledge` absent means yes, so
@@ -96,9 +143,9 @@ export function chooseTarget(allies = [], { policy = "threat", rng = Math.random
     const has = knowledge.canReadRoles ? 2 : knowledge.canJudgeBodies ? 1 : 0;
     if (need > has) { blinded = policy; used = knowledge.fallback || "threat"; }
   }
-  const pick = (table[used] || table.threat)(live, { rng }) || live[0];
+  const pick = (table[used] || table.threat)(seen, { rng }) || seen[0];
   if (blinded) {
-    return { target: pick, policy: used, blinded,
+    return { target: pick, policy: used, blinded, ...(hiddenFrom ? { hiddenFrom } : {}),
       // ⚠️ THE RECEIPT SAYS THE FOE WAS DENIED, because "it went for the tank" and "it WANTED the healer and
       // could not find her" are different events and the second one is the party's achievement.
       why: `it could not pick out ${blinded === "healer" ? "who was mending" : "who was weakest"} — it went for ${pick.name}, who it can feel` };

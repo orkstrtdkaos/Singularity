@@ -788,6 +788,26 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // evasion means it does not land. Applied HERE, between the rolls and everything downstream, because both
   // the effect layer and the damage layer read what this changes.
   const evasion = applyEvasion(p, o, playerDecl, oppDecl, sb, rules?.craftMechanics, setupBonus);
+  // ⛔ CCODE-256 / ERIK: "A successful conceal can also make people untargetable — OR AT LEAST HAVE IT BE
+  // VERY DIFFICULT TO ACTUALLY HIT THEM." Both halves of that sentence are now built, and this is the
+  // second half. When a foe could not find ANYBODY it still swings (`blindly`), and a swing at where it
+  // thinks you are should mostly miss.
+  // ⚠️ IT BELONGS IN EVASION, NOT IN A NEW PENALTY. CCODE-80 already means exactly this — "not blocking,
+  // not armoring, just not being where they land" — and inventing a parallel mechanic for the same idea is
+  // how a system grows two names for one thing. (Erik, this week: "temp soak sounds like soak to me.")
+  // ⚠️ AND IT IS APPLIED THE WAY EVASION IS APPLIED — by degrading the attack roll itself. My first version
+  // tried to raise a `threshold` field on the returned value; `applyEvasion` returns an ARRAY OF RECEIPTS and
+  // does its work by mutating the roll, so that patch changed nothing at all while reading as though it did.
+  // I wrote it against a shape I assumed instead of the one I could have read in thirty seconds.
+  let blindStrike = null;
+  if (aimedAt?.blindly) {
+    const per = Math.max(0, Number(sb?.blindStrike?.marginPenalty ?? 6));
+    const before = o.degree, mBefore = o.margin;
+    o.degree = DEGREE_DOWN[before] || before;
+    o.margin = mBefore - per;
+    blindStrike = { penalty: per, degreeFrom: before, degreeTo: o.degree, marginFrom: mBefore,
+      why: "it swung where it thought you were" };
+  }
   // CCODE-45: effects tick ONCE PER TURN, not per step — Erik: "the sustaining effects would not tick down a count
   // until the full round's actions are complete." The orchestrator passes tickEffects:false on every step but the last.
   let effects = doTick ? tickEffects(standing) : standing.slice();
@@ -1256,7 +1276,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // character who obscured themselves simply never sees the field. Absent with no allies — so a 1v1 receipt
   // is byte-identical to the one this engine produced yesterday.
   if (aimedAt) o.targetChoice = aimedAt;
-  const out = { state: newState, unsettled, cooled, player: p, opponent: o, roundWinner, ...(aimedAt ? { aimedAt } : {}), delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
+  const out = { state: newState, unsettled, cooled, player: p, opponent: o, roundWinner, ...(aimedAt ? { aimedAt } : {}), ...(blindStrike ? { blindStrike } : {}), delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback },
     // CCODE-80: an evaded blow must SAY it was evaded. An attack that quietly does less is indistinguishable
     // from a bad roll, and the whole point of the three defensive logics is that they read differently.

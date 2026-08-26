@@ -3707,116 +3707,111 @@
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "metaphysical",
-   "attribute": "mental",
+   "attribute": "social",
    "axes": {
     "death_life": -0.4,
     "falsehood_truth": 0.4
    },
    "functions": [
+    "reveal",
     "empower",
-    "foresee",
-    "reveal"
+    "bargain",
+    "persuade"
    ],
-   "narrationHints": "You read what a thing has left. Not a feeling — a reckoning: what is wearing, how fast, and what it will fail from. Ashwardens are asked to look at bridges as often as at people.",
-   "description": "Look at a person, structure or working and know what is failing in it, roughly how long it has, and what it will go from. The Ashwardens' seeing-craft: everything is ending, and the craft is knowing the schedule.",
-   "notFor": "The healthy and new (nothing is wearing yet worth reading); causing anything; being wrong gently — the account is what it is; reading how something will be REPAIRED.",
+   "narrationHints": "She looks at it a moment too long and then says the number, and it is not the number anyone wanted. ⚠️ Ashwardens are asked to price estates as often as to attend deaths, and for the same reason.",
+   "description": "⛔ READ THE TRUE ACCOUNT OF A THING — what it is actually worth, what it will actually cost, what state it is actually in. The markup is visible as markup. ⚠️ AND A DEAL IS A THING THAT ENDS: a promise has a lifespan, an alliance has a schedule, and an Ashwarden reads those the same way they read a bridge. The leverage is not charm — it is that you cannot be lied to about value, and you cannot lie about it either.",
+   "notFor": "Reading intent — a fair price honestly offered reads fair, and a liar who believes his own figure reads sincere. ⚠️ Making anyone AGREE: they can still refuse, still walk, still send you away. And it never tells you whether you can afford it.",
    "tree": [
     {
      "rank": 1,
      "name": "Reckoning",
-     "grants": "Look at a person, structure, or working and know what is failing in it, roughly how long it has, and what it will go from.",
-     "cannot": "It reads DECLINE, not danger — a healthy man about to be murdered reads as healthy. And you must SAY it plainly; an Ashwarden who softens a reckoning has stopped practising.",
      "functions": [
-      "reveal"
+      "reveal",
+      "empower"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "foresee"
-     ],
-     "_nameWas": "The Reckoning",
-     "gainAxes": []
+     "gainAxes": [],
+     "grants": "⛔ KNOW A THING'S OR AN OFFER'S TRUE ACCOUNT — real worth, real cost, real condition. The mare is eight and not five; the quoted repair is twice the work. ⚠️ AND KNOWING IT IS AN EDGE: acting on a reckoning you have taken enters the haggling as a named term in your favour.",
+     "cannot": "It reads what IS, not what someone INTENDS — a fair price honestly offered reads fair. ⚠️ And it tells you the true cost, never whether you can meet it."
     },
     {
      "rank": 2,
      "name": "Ledger of a Place",
-     "grants": "Read a whole site — which beams, which wells, which people. Ashwardens are hired for exactly this and it is unglamorous, essential work.",
-     "cannot": "Knowing does not fix, and a place told its true account frequently blames the one who read it. Prepare for that or do not take the work.",
      "functions": [
-      "reveal"
+      "reveal",
+      "bargain",
+      "empower"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "foresee"
-     ],
-     "_nameWas": "The Ledger of a Place",
      "gainAxes": [
-      "scope"
-     ]
+      "scope",
+      "conditions"
+     ],
+     "grants": "⛔ SETTLE AT THE TRUE ACCOUNT RATHER THAN THE ASKED ONE. ⚠️ AND READ WHAT SOMEONE CAN ACTUALLY DELIVER: whether the lord has the three hundred he is promising, whether the smith can make market day — and roughly how long an arrangement has before it fails.",
+     "cannot": "⛔ YOU MUST SAY IT PLAINLY. An Ashwarden who softens a reckoning has stopped practising, and everyone knows that about them — which is exactly why the number is accepted. ⚠️ Deals up to a caravan's worth."
     },
     {
      "rank": 3,
      "name": "Whole Reckoning",
-     "grants": "Everything ending in reach, ordered by when. Communities have been evacuated on this and communities have refused to be.",
-     "cannot": "⚠ YOU WILL READ PEOPLE YOU LOVE IN THE SAME PASS, and the craft does not let you skip them. This is why Ashwardens are quiet, and it is not temperament.",
      "functions": [
       "reveal",
-      "foresee",
-      "empower"
+      "bargain",
+      "persuade"
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "foresee",
-      "empower"
-     ],
-     "_nameWas": "The Whole Reckoning",
      "gainAxes": [
-      "range",
+      "quality",
       "scope"
-     ]
+     ],
+     "grants": "⛔ THE ACCOUNT BECOMES PUBLIC AND UNARGUABLE. Say it plainly and it lands as FACT — the guild cannot claim the bridge needs replacing when it needs a beam, the steward cannot claim the granary is full, the merchant cannot hold the price. ⚠️ YOU ARE NOT PERSUADING ANYONE; you are removing their ability to claim otherwise.",
+     "cannot": "⛔ IT DOES NOT MAKE ANYONE AGREE — they can still refuse, still walk, still send you away. It removes exactly one thing: their ability to lie about the number while doing it. ⚠️ AND IT WORKS ON YOU TOO: once said, you cannot walk it back or make an exception for someone you like, and you will have said it in front of them."
     }
    ],
    "challengeTypes": [
-    "PUZZLE",
-    "SOCIAL"
+    "SOCIAL",
+    "INVESTIGATION",
+    "INTELLECTUAL"
    ],
    "tradition": "ashwarden",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "reveal",
    "operativeAxis": [
-    "precision",
+    "quality",
     "scope"
    ],
    "mechanic": {
     "magnitude": 5,
     "duration": 4,
-    "scope": 2
+    "scope": 2,
+    "crit": {
+     "success": "The number lands so cleanly that the other side stops arguing and starts explaining.",
+     "failure": "You price it exactly right and say so in front of the one person who needed it to be wrong."
+    },
+    "note": "T-I reveal/social. ⛔ REFURBISHED FROM A THIRD READING-CRAFT (Erik 2026-08-23). Ashwarden had THREE L1 crafts reading endings — `attended_end`, `deathsense`, `true_account` — and all three converged at r3. ⚠️ `attended_end` is distinguished by SOURCE (Marrow's testimony); the other two were not distinguished at all. BODY-READING NOW BELONGS WHOLLY TO `deathsense`. ⛔ THIS FILLS `bargain`, which Death did not have — and the angle is novel: everyone else bargains by advantage, an Ashwarden bargains by being incorruptible. ⚠️ THE r1 EDGE ENTERS AS A NAMED `contestMod`, which is how the game already carries labelled terms — and since `bargainSaving` reads margin at 1% per point, the edge converts straight into a better settled price. Reach by rank: ~10 / ~30 / ~90."
    },
    "intensity": {
-    "conserve": "read one thing",
-    "surge": "the whole reckoning; YOU WILL READ PEOPLE YOU LOVE IN THE SAME PASS"
+    "conserve": "price the one thing you came to price",
+    "surge": "the whole reckoning; YOU WILL PRICE ARRANGEMENTS YOU ARE PART OF"
    },
    "bounds": [
     {
-     "text": "reads DECLINE, not danger",
+     "text": "⛔ IT READS WHAT IS, NOT WHAT SOMEONE INTENDS",
      "class": "hard"
     },
     {
-     "text": "you must SAY it plainly — softening it is not practising",
+     "text": "⛔ YOU MUST SAY IT PLAINLY — an Ashwarden who softens a reckoning has stopped practising, and everyone in the Valley knows that about them, WHICH IS WHY THE NUMBER IS ACCEPTED",
      "class": "hard"
     },
     {
-     "text": "knowing does not fix",
+     "text": "⚠️ KNOWING DOES NOT FIX, AND KNOWING DOES NOT PAY. It never tells you whether you can afford it",
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/social action that reads what a thing has left and what it will fail from. Rated 5 of 10 across a scope of 2 for about four hours.",
+   "plainly": "A social action that reads a thing's or an offer's true worth, cost and condition, and enters the haggling as a named term. r2 bargains at the true account and reads what someone can actually deliver. r3 says it publicly and nobody present can pretend otherwise.",
    "_descriptionWas": "The Ashwardens' seeing-craft. Everything is ending; the craft is knowing the schedule.",
    "_functionsWas": [
     "reveal",

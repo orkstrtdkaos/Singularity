@@ -2,7 +2,7 @@
 
 ⛔ **GENERATED — `node po/matrix_gen.mjs death --detail`. Full rank text, verbatim.**
 
-**33 crafts · 94 ranks** · 2026-08-25
+**33 crafts · 94 ranks** · 2026-08-26
 
 ---
 
@@ -350,39 +350,39 @@
 
 ## 10. True Account  ·  `true_account`
 
-**L1 · e4 · ashwarden · metaphysical · shape `reveal` · harm `incapacitating`**  
-**status:** ⚠️ no crit · sense  
-**ability functions:** empower, foresee, reveal
+**L1 · e4 · ashwarden · metaphysical · shape `reveal` · harm `none`**  
+**status:** crit · sense  
+**ability functions:** reveal, empower, bargain, persuade
 
-> Look at a person, structure or working and know what is failing in it, roughly how long it has, and what it will go from. The Ashwardens' seeing-craft: everything is ending, and the craft is knowing the schedule.
+> ⛔ READ THE TRUE ACCOUNT OF A THING — what it is actually worth, what it will actually cost, what state it is actually in. The markup is visible as markup. ⚠️ AND A DEAL IS A THING THAT ENDS: a promise has a lifespan, an alliance has a schedule, and an Ashwarden reads those the same way they read a bridge. The leverage is not charm — it is that you cannot be lied to about value, and you cannot lie about it either.
 
-**notFor:** The healthy and new (nothing is wearing yet worth reading); causing anything; being wrong gently — the account is what it is; reading how something will be REPAIRED.
+**notFor:** Reading intent — a fair price honestly offered reads fair, and a liar who believes his own figure reads sincere. ⚠️ Making anyone AGREE: they can still refuse, still walk, still send you away. And it never tells you whether you can afford it.
 
 ### r1 — Reckoning
 
-**functions:** reveal · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
+**functions:** reveal, empower · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** Look at a person, structure, or working and know what is failing in it, roughly how long it has, and what it will go from.
+**grants:** ⛔ KNOW A THING'S OR AN OFFER'S TRUE ACCOUNT — real worth, real cost, real condition. The mare is eight and not five; the quoted repair is twice the work. ⚠️ AND KNOWING IT IS AN EDGE: acting on a reckoning you have taken enters the haggling as a named term in your favour.
 
-**cannot:** It reads DECLINE, not danger — a healthy man about to be murdered reads as healthy. And you must SAY it plainly; an Ashwarden who softens a reckoning has stopped practising.
+**cannot:** It reads what IS, not what someone INTENDS — a fair price honestly offered reads fair. ⚠️ And it tells you the true cost, never whether you can meet it.
 
 ### r2 — Ledger of a Place
 
-**functions:** reveal · **gainAxes:** scope · **gains:** broaden · **harm:** none
+**functions:** reveal, bargain, empower · **gainAxes:** scope, conditions · **gains:** broaden · **harm:** none
 
-**grants:** Read a whole site — which beams, which wells, which people. Ashwardens are hired for exactly this and it is unglamorous, essential work.
+**grants:** ⛔ SETTLE AT THE TRUE ACCOUNT RATHER THAN THE ASKED ONE. ⚠️ AND READ WHAT SOMEONE CAN ACTUALLY DELIVER: whether the lord has the three hundred he is promising, whether the smith can make market day — and roughly how long an arrangement has before it fails.
 
-**cannot:** Knowing does not fix, and a place told its true account frequently blames the one who read it. Prepare for that or do not take the work.
+**cannot:** ⛔ YOU MUST SAY IT PLAINLY. An Ashwarden who softens a reckoning has stopped practising, and everyone knows that about them — which is exactly why the number is accepted. ⚠️ Deals up to a caravan's worth.
 
 ### r3 — Whole Reckoning
 
-**functions:** reveal, foresee, empower · **gainAxes:** range, scope · **gains:** deepen · **harm:** none
+**functions:** reveal, bargain, persuade · **gainAxes:** quality, scope · **gains:** deepen · **harm:** none
 
-**grants:** Everything ending in reach, ordered by when. Communities have been evacuated on this and communities have refused to be.
+**grants:** ⛔ THE ACCOUNT BECOMES PUBLIC AND UNARGUABLE. Say it plainly and it lands as FACT — the guild cannot claim the bridge needs replacing when it needs a beam, the steward cannot claim the granary is full, the merchant cannot hold the price. ⚠️ YOU ARE NOT PERSUADING ANYONE; you are removing their ability to claim otherwise.
 
-**cannot:** ⚠ YOU WILL READ PEOPLE YOU LOVE IN THE SAME PASS, and the craft does not let you skip them. This is why Ashwardens are quiet, and it is not temperament.
+**cannot:** ⛔ IT DOES NOT MAKE ANYONE AGREE — they can still refuse, still walk, still send you away. It removes exactly one thing: their ability to lie about the number while doing it. ⚠️ AND IT WORKS ON YOU TOO: once said, you cannot walk it back or make an exception for someone you like, and you will have said it in front of them.
 
-**bounds:** reads DECLINE, not danger · you must SAY it plainly — softening it is not practising · knowing does not fix
+**bounds:** ⛔ IT READS WHAT IS, NOT WHAT SOMEONE INTENDS · ⛔ YOU MUST SAY IT PLAINLY — an Ashwarden who softens a reckoning has stopped practising, and everyone in the Valley knows that about them, WHICH IS WHY THE NUMBER IS ACCEPTED · ⚠️ KNOWING DOES NOT FIX, AND KNOWING DOES NOT PAY. It never tells you whether you can afford it
 
 ---
 

@@ -3330,3 +3330,153 @@ binding everywhere.**
 
 **THE RULE: when citing a prior ruling, carry its SCOPE with it. If the scope was not stated, ask — do not
 supply one, and never supply the largest one available.**
+
+---
+
+## 47. ⛔ WHAT PER-CRAFT REVIEW TAUGHT — the Death walkthrough, 2026-08-23
+
+**Erik reviewed thirteen Death crafts one at a time and corrected the same handful of mistakes
+repeatedly. ⚠️ THESE ARE NOT STYLE NOTES. Every one below is a correction he had to make more than once,
+or one that changed a craft's mechanics.**
+
+### 47.1 ⛔ ENERGY IS THE COST. A `cannot` IS A SCOPE LIMIT, NOT A BILL.
+
+**I wrote narrative debts into cost fields FIVE TIMES in one session:** *"and later is still owed"* ·
+*"the cost of taking something whole is real and you pay it in yourself"* · *"you are spent afterward in a
+way sleep does not entirely fix"* · *"what you read of a history, you carry some of"* · *"the load is
+cumulative and does not clear on its own."*
+
+⛔ **ERIK, EACH TIME: energy is the cost, except at extreme capstones.** ⚠️ **When I tried to MECHANISE one
+of them — a night's rest plus one-history-at-a-time — that was refused too.** **The answer was never a
+better-specified debt. It was that the debt should not exist.**
+
+**A `cannot` names WHAT THE CRAFT WILL NOT PRODUCE.** *"It gives you the feeling of a history and none of
+its facts"* is a `cannot`. *"You carry some of it"* is narration.
+
+### 47.2 ⛔ THE TEST: NAME WHAT IT STOPS YOU DOING AT THE TABLE
+
+**Erik, on three `cannot` lines I had called excellent:** *"if the cannot lines are so great — tell me in
+game terms what they stop you from doing?"*
+
+**Run it on every one:**
+
+| verdict | example |
+|---|---|
+| ✅ **real** | *reads what is felt, not what is true* — you cannot use it as a lie detector |
+| ⚠️ **half** | *a cold trail gives you a direction* — true, but no threshold, so the GM decides everything |
+| ⛔ **none** | *what you read of a history, you carry some of* — stops nothing, costs nothing, adjudicates nothing |
+
+⚠️ **IF YOU CANNOT NAME THE TABLE CONSEQUENCE, IT BELONGS IN `narrationHints`.**
+
+### 47.3 ⛔ RANKS ARE ADDITIVE — A PER-RANK NUMBER IS THAT TIER'S OWN FIGURE
+
+**Covered in §46.11 and repeated here because it is an AUTHORING trap, not just a modelling one.**
+`keening` runs `imposes.targets` 6 → 3 → 12. ⛔ **THAT IS NOT A CURVE.** r2 means *three fall unconscious
+IN ADDITION TO the six who lose their action.* **I read it as a trade and built a design argument on it.**
+
+### 47.4 ⛔ CRAFTS DO NOT HIT THE PARTY BY DEFAULT
+
+**`Necrotic Strike` r3 read *"everyone else inside the reach is struck one rung lower."* `Keening` r3 read
+*"you name who is SPARED, and they lose their next action instead"* — ⚠️ AND I PRAISED THAT ONE as an
+elegant answer to the ally problem. It IS the ally problem.**
+
+⛔ **THE MODEL IS CHOOSING: the player names targets, the unnamed are untouched however close they stand,
+and a "lesser effect" is what happens to a CHOSEN target WHO RESISTS.** **The indiscriminate version is a
+BRAID (chaos supplies the refusal to choose), never a rank.**
+
+### 47.5 ⚠️ DO NOT PUT A HEADCOUNT ON AN AREA
+
+**I bounded `keening` r3 at "about six." Erik: *"you over-constrained r3 — it was always meant to be
+everyone near you that you want affected."*** ⛔ **An authored `area` with no `targets` is the corpus
+convention for EVERYONE IN THE ZONE.** ⚠️ **Use a count where the GM needs a guide (r1: "about six near
+you"); use an area where the answer is "everyone exposed."**
+
+### 47.6 ⛔ ASK WHAT A PLAYER WOULD WANT — AND CHECK THE BENEFIT IS MECHANICAL
+
+**Erik on `shared_weight`: *"I'm not seeing a reason for a player to want a skill like this."*** He was
+right, and the diagnosis was mechanical: ⛔ **THE BENEFIT WAS FICTION AND THE COST WAS REAL.** It lifted a
+condition the engine never applied — **no sheet ever says DESPAIRING** — while charging the caster a
+burden that never cleared.
+
+**THE CHECK: does the craft change something the engine actually tracks?** ⚠️ **If the good outcome is a
+mood and the price is real, nobody takes it.**
+
+### 47.7 ⛔ ASK THE FICTIONAL QUESTION, NOT THE STATISTICAL ONE
+
+**Defending `kept_vigil`'s power source, I measured that autonomy does not correlate with source and
+called it closed.** ⛔ **ERIK ASKED THE ACTUAL QUESTION: what holds the hull for twelve hours after you
+have gone home?** **Unattended will is nearly a contradiction; maintenance machinery is the obvious
+answer.** ⚠️ **The number I produced was true and irrelevant.**
+
+### 47.8 ⛔ AUDIT THE TRADITION FOR DUPLICATION, NOT JUST THE CRAFT
+
+**Ashwarden had THREE L1 crafts reading endings — `attended_end`, `deathsense`, `true_account` — and all
+three converged at r3.** ⚠️ **`attended_end` is distinguished by SOURCE (a companion's testimony, not your
+perception). The other two were not distinguished at all.** ⛔ **THE FIX WAS NOT TO SPLIT HAIRS BUT TO
+REFURBISH ONE INTO WHAT THE SET LACKED.**
+
+**Measure the tradition's verb coverage before deciding what a redundant craft becomes.** **Death was
+missing `bargain`, `bolster` and `provoke`; all three closed WITHOUT INVENTING A CRAFT.**
+
+### 47.9 ⛔ THE VOCABULARIES ARE CLOSED. CHECK BEFORE AUTHORING.
+
+**Off-vocabulary values found in thirteen crafts:** `kinds` (⚠️ **I invented it**), `precision`, `fear`,
+`variance`, `upkeepRelief` — **none among the nine gain axes.** **Plus SEVEN `harmRung` inversions** where
+the ability declared `lethal` or `incapacitating` over three `none` ranks.
+
+⚠️ **A one-use axis is invisible to every aggregate that reads them, which is the whole point of a fixed
+list.**
+
+### 47.10 ⛔ COLOUR MUST EXPRESS WHAT THE CRAFT ACTUALLY IS
+
+**`Dread Mantle` took THREE passes.** I wrote a shroud laid on the victim; then atmosphere and smells.
+⛔ **ERIK: 'necromancy at its intentionally outward-facing best/worst… fear made material, ghostly, and a
+mantle DISTINCT PER WARDEN.'**
+
+⚠️ **THE MISS WAS NOT PROSE QUALITY — IT WAS THAT I HAD THE SUBJECT WRONG.** The mantle is worn by the
+necromancer, not laid on the target, and **its form is that character's signature: authored once, fixed,
+and identifying.** ⛔ **COLOUR THAT ENCODES A CHARACTER FACT BEATS COLOUR THAT SETS A MOOD.**
+
+### 47.11 ⚠️ DO NOT SHORT THE DOMAIN, AND DO NOT PROMOTE A TENET TO A LAW
+
+**Two of the same shape.** I wrote that the Ashwardens' power *"isn't necromancy, it's being the one who
+handles the death"* — ⛔ **necromancy is woven through most of Death and the trade is how it is CARRIED,
+not a substitute.** And I made *"feeling is the only true knowing"* a HARD BOUND forbidding Threnodists to
+show a false feeling — ⛔ **that is an epistemology, not a prohibition, and it foreclosed a braid Erik
+wanted.**
+
+⚠️ **SAME WITH RULINGS: `bargain` scaling the SIZE OF THE DEAL was a specific call in a specific context,
+and I cited it twice as a general law (§46.12).** **Carry a ruling's scope with it.**
+
+### 47.12 ✅ THE CRAFT'S REAL VALUE IS SOMETIMES IN A SUBORDINATE CLAUSE
+
+**`wellspring` r2's payload — *"they are braver for it: a person who is not carrying it alone attempts
+things they would not have attempted, and does them better"* — was the second half of a sentence about
+carrying someone's burden.** ⚠️ **It was the one thing Death lacked (`bolster`) and it was not the
+headline.** ⛔ **READ THE WHOLE RECORD, NOT THE TREE:** `plainly`, `intensity`, `operativeAxis` and
+`bounds` each caught a defect the rank text hid — including that `kept_vigil` r2 was not buying TIME,
+because twelve hours was already the base.
+
+### 47.13 ⛔ THE PER-CRAFT CHECKLIST — run this on every craft, in this order
+
+1. **Read the WHOLE record** — `description` · `narrationHints` · `notFor` · `plainly` · `intensity` ·
+   `bounds` · `mechanic` · `operativeAxis` · every rank's `grants` AND `cannot`. ⚠️ **Not the tree alone.**
+2. ⛔ **Vocabulary:** every `gainAxes` and `operativeAxis` value among the nine · `harmRung` one of four ·
+   `damageType` one of thirteen · every verb in the function vocabulary.
+3. ⛔ **`harmRung` at ability level equals the MAX across ranks.** Seven crafts failed this.
+4. **Energy in band for the level.** ⚠️ **Below-band usually means an unmigrated craft — check for legacy
+   lowercase `challengeTypes` as the fingerprint.**
+5. ⛔ **Every `cannot`: name what it stops at the table.** No table consequence → `narrationHints`.
+6. ⛔ **Every `[cost]`: is it energy?** If not, delete it.
+7. **Does it hit allies?** ⛔ **If yes and it is not explicitly a braid, it is wrong.**
+8. **Additive check:** does each rank ADD to the ones below, and does `gains`/`gainAxes` describe what the
+   new tier adds rather than what the craft has become?
+9. ⛔ **Would a player choose this?** Name the benefit in engine terms. **Mood is not a benefit.**
+10. **Tradition check:** does another craft in the tradition already do this? ⚠️ **If so, what distinguishes
+    them — SOURCE, SCALE, or nothing?**
+11. **Portfolio check:** what verbs and shapes does the tradition still lack? ⚠️ **A redundant craft is a
+    slot.**
+12. ⛔ **Power source: ask the fictional question.** What is actually doing this, in the world?
+13. **Colour: is the SUBJECT right?** ⚠️ **Then whether it encodes a character fact rather than a mood.**
+14. **Run `content_ci`, `content_which`, `changeset_check`.** ⛔ **Then verify through the live engine —
+    `capabilityMenu`, `pierceLanded`, `redirectImposition` — that the fields authored actually resolve.**

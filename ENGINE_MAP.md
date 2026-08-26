@@ -110,6 +110,7 @@
 | `engine/combatants.js` | *— unstated —* | *—* | *—* | 11 | **nothing** | **0** | — | — |
 | `engine/intercept.js` | *— unstated —* | *—* | *—* | 8 | **nothing** | **0** | — | — |
 | `engine/targeting.js` | *— unstated —* | *—* | *—* | 4 | **nothing** | **0** | — | — |
+| `engine/melee.js` | *— unstated —* | *—* | *—* | 7 | **nothing** | **0** | — | — |
 | `engine/npcsheet.js` | *— unstated —* | *—* | *—* | 6 | **nothing** | **0** | `npc_interiority.json` | — |
 
 ## GM verbs handled inside `app.js` itself

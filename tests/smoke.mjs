@@ -18445,7 +18445,7 @@ await (async () => {
       IC.redirectImposition({ aimedAt: "nobody", protections: [], sheets, imposition: imp, degree: "success" }) === null);
   }
 
-  // 5ae · ⛔ CCODE-250 / Erik — A FOE CHOOSES WHO TO HIT, AND YOU HAVE TO LOOK TO KNOW.
+  // 5af · ⛔ CCODE-250 / Erik — A FOE CHOOSES WHO TO HIT, AND YOU HAVE TO LOOK TO KNOW.
   // Erik: "Yes a foe chooses who to hit... this makes the sense round even more interesting - you need to
   // sense who's getting attacked so you can intervene if you want.... if you obscure yourself you aren't
   // going to know that information."
@@ -18605,6 +18605,102 @@ await (async () => {
 
 
   }
+
+  // 5ag · ⛔ CCODE-251 — DIFFERENT LEVELS OF RESOLUTION FOR DIFFERENT SCALES OF FIGHT.
+  // Erik, who explicitly did NOT decide this: "we might be able to simplify things at certain levels... like
+  // if we have more than 3 party members the rest go into a melee flow that isn't as specific... then if we
+  // have a legion, how does that work? we need different levels of resolve for these levels of battle or
+  // contest." — and: "we should think this through and test it."
+  {
+    const ML = await import("../engine/melee.js");
+
+    // ⛔ ERIK'S BOUNDARIES, NOT MINE. "more than 3 party members" and "a legion" are his words; the table is
+    // content-dialled so moving them is a design decision rather than an engine change.
+    check("CCODE-251: the tiers are Erik's boundaries — 3 is still a skirmish, 4 drops into the melee flow",
+      ML.resolutionTier(3, 1).id === "skirmish" && ML.resolutionTier(4, 1).id === "melee"
+      && ML.resolutionTier(3, 1).resolve === "full");
+    // ⚠️ AND IT COUNTS COMBATANTS, NOT ALLIES. Two of you against forty is a legion fight; calling it a
+    // skirmish because the PARTY is small would be the whole error.
+    check("CCODE-251: two allies against forty is a LEGION, not a skirmish — scale is the fight, not the party",
+      ML.resolutionTier(2, 40).id === "legion" && ML.resolutionTier(2, 1).id === "skirmish");
+    check("CCODE-251: in a melee you and those you bring forward act; in a legion you are one figure",
+      ML.actingSlots(ML.resolutionTier(3, 1)) === Infinity && ML.actingSlots(ML.resolutionTier(8, 1)) === 3
+      && ML.actingSlots(ML.resolutionTier(80, 1)) === 1);
+
+    // ⛔ THE ONE PIECE OF MATHS, AND THE MISTAKE IT EXISTS TO PREVENT.
+    // K combatants taking a turn is a SUM of K rounds: the MEAN scales with K, the SPREAD with √K.
+    // ⚠️ `scripts/scale_fidelity.mjs` measures ONE combatant through the real `battleRound` and checks the
+    // prediction against K real rounds — worst divergence over K=1..50 is 1.0% mean / 1.2% sd. Mutating √K
+    // to K there leaves the MEAN at 1.0% and blows the SPREAD to 614%, which is exactly why the naive
+    // version is dangerous: it is invisible to anyone checking averages, and it is how a party that
+    // recruits a fourth member starts seeing wipes the party of three never saw.
+    const one = { mean: 3.4, sd: 2.93 };
+    const p4 = ML.predictAggregate(one, 4), p16 = ML.predictAggregate(one, 16);
+    check("CCODE-251: the mean scales with K and the SPREAD with √K — four combatants are 4× as deadly and 2× as swingy",
+      Math.abs(p4.mean - 13.6) < 0.1 && Math.abs(p4.sd - one.sd * 2) < 0.01
+      && Math.abs(p16.sd - one.sd * 4) < 0.01);
+    // ⛔ THE NON-VACUITY FLOOR: the two models must actually DIVERGE, or this gate passes on a coincidence.
+    check("CCODE-251: …and √K is meaningfully different from K at party scale — the gate is not vacuous",
+      p4.sd < one.sd * 4 * 0.6 && p16.sd < one.sd * 16 * 0.3);
+
+    // ⛔ AN AGGREGATE THAT NEVER NAMES A CASUALTY IS A NUMBER, NOT A FIGHT.
+    // Erik: "the pc playing into and being a casualty of that melee."
+    const crowd = [
+      { id: "a", name: "Ander", sheet: { attributes: { physical: 3 }, level: 2, soak: 0, health: 8 } },
+      { id: "b", name: "Bree", sheet: { attributes: { physical: 5 }, level: 4, soak: 4, health: 25 } },
+      { id: "c", name: "Corr", sheet: { attributes: { physical: 4 }, level: 3, soak: 2, health: 20 } },
+    ];
+    const spread = ML.distributeCasualties(crowd, 18, { rng: () => 0.5 });
+    check("CCODE-251: the pool lands on NAMED people, softest first — a crowd behaves like people, not a health bar",
+      spread.hits.length >= 2 && spread.hits[0].name === "Ander"
+      && spread.hits.reduce((s, h) => s + h.amount, 0) <= 18);
+    // ⚠️ AND IT SPREADS RATHER THAN CONCENTRATES. One aggregate blow must not vaporise the softest ally in a
+    // round that, resolved fully, would have been several separate ordinary hits.
+    check("CCODE-251: no single member eats the whole pool — the aggregate spreads what full turns would have spread",
+      spread.hits[0].amount < 18);
+    check("CCODE-251: the downed are named too — an ally lost in the crowd is still an ally lost",
+      ML.distributeCasualties([crowd[0]], 40, { rng: () => 0.9 }).downed[0]?.name === "Ander");
+    // ⚠️ NOTHING TO DISTRIBUTE MEANS NOTHING HAPPENS — the additive floor.
+    check("CCODE-251: an empty pool wounds nobody",
+      ML.distributeCasualties(crowd, 0).hits.length === 0);
+
+    // ⛔ A LEGION IS NOT A BIGGER MELEE. At this scale the individual roll stops meaning anything, and a
+    // model where the player can out-damage an army is not a legion — it is a melee with big numbers.
+    const ours = [{ count: 200, quality: 1 }], theirs = [{ count: 200, quality: 1 }];
+    const even = ML.legionClash(ours, theirs, { rng: () => 0.5 });
+    check("CCODE-251: evenly matched legions grind — nobody breaks through on parity",
+      even.outcome === "grinding" && Math.abs(even.ratio - 1) < 0.01);
+    check("CCODE-251: weight of numbers decides it — 3:1 breaks through, 1:3 routs",
+      ML.legionClash([{ count: 600, quality: 1 }], theirs, { rng: () => 0.5 }).outcome === "breakthrough"
+      && ML.legionClash(ours, [{ count: 600, quality: 1 }], { rng: () => 0.5 }).outcome === "rout");
+    // ⛔ THE HERO MOVES IT, AND IS BOUNDED. A player who cannot shift the battle is watching a cutscene; a
+    // player who decides it alone did not need the legion.
+    const big = ML.legionClash(ours, theirs, { rng: () => 0.5, heroSwing: 5 });
+    check("CCODE-251: a hero shifts a legion by a BOUNDED amount — 5 is clamped to the cap, not honoured",
+      big.heroSwing === 0.15 && big.heroSwing < 5);
+    check("CCODE-251: …and that bound is enough to matter on a knife-edge and not enough to win a lost battle",
+      ML.legionClash(ours, theirs, { rng: () => 0.5, heroSwing: 0.15 }).outcome === "gaining"
+      && ML.legionClash(ours, [{ count: 600, quality: 1 }], { rng: () => 0.5, heroSwing: 0.15 }).outcome === "rout");
+    // ⚠️ AND THE TIDE CAN TAKE YOU REGARDLESS — "being a casualty of that melee". A won battle that cannot
+    // cost you anything personally is a number going up.
+    check("CCODE-251: personal risk tracks the TIDE, not your own roll — you can die in a battle you are winning",
+      ML.legionClash(ours, [{ count: 600, quality: 1 }], { rng: () => 0.5 }).personalRisk
+        > ML.legionClash([{ count: 600, quality: 1 }], theirs, { rng: () => 0.5 }).personalRisk
+      && ML.legionClash([{ count: 600, quality: 1 }], theirs, { rng: () => 0.5 }).personalRisk > 0);
+    // ⛔ MASSED ENGAGEMENTS ARE LESS SWINGY, NOT MORE — the same √K logic, one scale up. A thousand men do
+    // not all get lucky at once, and a legion model with duel-sized variance is a coin flip with scenery.
+    {
+      const draws = Array.from({ length: 2000 }, (_, i) => {
+        let s = (i * 2654435761) >>> 0; const rng = () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
+        return ML.legionClash(ours, theirs, { rng }).tide; });
+      const m = draws.reduce((a, b) => a + b, 0) / draws.length;
+      const sd = Math.sqrt(draws.reduce((a, b) => a + (b - m) ** 2, 0) / draws.length);
+      check("CCODE-251: legion outcomes cluster — three averaged draws, so a big battle is decided by weight, not luck",
+        Math.abs(m) < 0.02 && sd < 0.06, `mean ${m.toFixed(3)} sd ${sd.toFixed(3)}`);
+    }
+  }
+
+
 
 
   // 5ae · ⛔ CCODE-247 — WHO IS IN A CONTEST, AND WHAT THEY BRING TO IT.

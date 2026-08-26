@@ -458,7 +458,7 @@
 
 **cannot:** ⛔ YOU STILL DO NOT CHOOSE — not the reaction, and not who they turn on. ⚠️ Some of them will thank you. Some of them will never be right again. You will not be able to tell in advance which.
 
-**bounds:** ⛔ THE UNAFRAID ARE HARDER, NOT IMMUNE — but things that cannot feel, and the set dead, are genuinely unmoved · ⛔ YOU DO NOT GET TO CHOOSE HOW THEY ACT ON IT. Run, freeze, or come at you — that is theirs · ⚠️ IT SHOWS AN ENDING AND NEVER CAUSES ONE. Nothing here kills anybody · ⚠️ IT IS PUBLIC AND IT IS REMEMBERED. Everyone who saw it knows what you are now, and the ones who ran will describe it to people who did not
+**bounds:** ⛔ THE UNAFRAID ARE HARDER, NOT IMMUNE — but things that cannot feel, and the set dead, are genuinely unmoved · ⛔ YOU DO NOT GET TO CHOOSE HOW THEY ACT ON IT. Run, freeze, or come at you — that is theirs · ⚠️ IT SHOWS AN ENDING AND NEVER CAUSES ONE. Nothing here kills anybody · ⚠️ IT IS PUBLIC AND IT IS REMEMBERED. Everyone who saw it knows what you are now, and the ones who ran will describe it to people who did not · ⛔ THE MANTLE'S FORM IS A CHARACTER FACT, AUTHORED ONCE AND FIXED. It is the same every time, everyone who has seen it can name it, and it is how the Valley knows WHICH Ashwarden was there
 
 ---
 

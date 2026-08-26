@@ -31,6 +31,12 @@ const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) 
  *
  *  ⛔ `HARM` IS ABSENT FROM EVERY DEFAULT ON PURPOSE, because it is absent from all thirty authored tags.
  *  An entity that swings says so with a role or a tag that means it; nothing infers a weapon. */
+/** ⛔ OCCUPATIONS THAT ARE ALREADY A DECLARATION OF VIOLENCE. ⚠️ Injectable, and deliberately short: this
+ *  is not "jobs that sound tough", it is jobs whose WHOLE FUNCTION is standing between something and
+ *  someone. A blacksmith is strong and is not on this list. */
+export const DEFAULT_FIGHTING_ROLES = ["warden", "guard", "soldier", "reaver", "hunter", "sentinel",
+  "marshal", "champion", "duelist", "blade"];
+
 export const DEFAULT_TAG_FAMILIES = {
   RESTORE: ["mend", "heal", "tend", "comfort", "warm", "grow"],
   PROTECT: ["guard", "watch", "conceal", "dark", "green"],
@@ -43,18 +49,42 @@ export const DEFAULT_TAG_FAMILIES = {
 
 /** The families an entity can act in. ⚠️ EMPTY IS A REAL ANSWER — an entity with no tags contributes
  *  nothing mechanical yet, which is a prompt to author rather than a reason to exclude it. */
-export function contributionsOf(record, { tagFamilies = null } = {}) {
+export function contributionsOf(record, { tagFamilies = null, fightingRoles = null } = {}) {
   const map = tagFamilies || DEFAULT_TAG_FAMILIES;
   const tags = new Set((record?.assistTags || []).map(t => String(t).toLowerCase()));
   const out = [];
   for (const [family, list] of Object.entries(map)) {
     if ((list || []).some(t => tags.has(String(t).toLowerCase()))) out.push(family);
   }
-  // ⛔ AN AUTHORED `ally` ROLE IS A DECLARATION THAT THIS ONE FIGHTS. Erik's recruited NPCs — the
-  // population that makes hard content possible without a second human — come through here.
-  if ((record?.roles || []).includes("ally") || record?.combatant === true) {
-    if (!out.includes("HARM")) out.push("HARM");
-  }
+  // ⛔ WHO BRINGS HARM — AND ERIK CORRECTED ME TWICE HERE, IN THE SAME DIRECTION BOTH TIMES.
+  //
+  // First I asked whether a companion could fight at all. Then I gated HARM behind a FIGHTING OCCUPATION,
+  // and he answered: "um... Pell fights too... she uses a spear, hammer, shortsword, brigandine." A
+  // blacksmith with a spear is a person with a spear.
+  //
+  // ⛔ AND THE ENGINE ALREADY AGREED WITH HIM. `playerBattleSkills` gives every character `_strike` — "A
+  // plain strike" — with no craft, no role and no weapon required. ANYONE WITH HANDS CAN SWING. I had
+  // built a permission system for something the game has never asked permission for.
+  //
+  // ⚠️ SO HARM IS THE DEFAULT AND THE EXCEPTIONS ARE AUTHORED. "As they are able" cuts this way: Pell is
+  // able, Veth is able, Siol is able. A swarm of nanite-motes is not, and a carrion bird is not, and those
+  // are facts about a BODY rather than about a job.
+  const cannot = record?.canStrike === false || record?.incorporeal === true || record?.noStrike === true;
+  if (!cannot && !out.includes("HARM")) out.push("HARM");
+
+  // ⚠️ A WEAPON, A FIGHTING ROLE OR THE `ally` ROLE DO NOT GRANT HARM — everyone already has it. They
+  // mark someone as GOOD at it, which is a different question and belongs to the sheet, not the roster.
+  const roleText = [record?.role, ...(record?.roles || []), ...(record?.titles || [])]
+    .filter(Boolean).map(r => String(r).toLowerCase()).join(" · ");
+  // ⚠️ WORD BOUNDARIES, NOT SUBSTRINGS. MARROW — "an Ashwarden-touched carrion bird" — came out a
+  // fighter on an earlier version because "Ashwarden" CONTAINS "warden": a tradition name matching an
+  // occupation. A regex over prose finds words, not facts, and I did it an hour after gating against it.
+  const martial = (fightingRoles || DEFAULT_FIGHTING_ROLES).some(w =>
+    new RegExp("\\b" + w + "\\b").test(roleText))
+    || (record?.roles || []).includes("ally")
+    || (record?.inventory || []).some(i => String(i?.kind || "").toLowerCase() === "weapon")
+    || record?.combatant === true;
+  if (martial && !out.includes("MARTIAL")) out.push("MARTIAL");
   return out;
 }
 

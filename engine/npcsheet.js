@@ -44,19 +44,42 @@ export function derivedLevel(entry, { day = null, cfg = {} } = {}) {
  *  practical and physical, a scholar mental — with the rest filling in modestly. ⛔ THE LEAN IS CONTENT,
  *  not a table in here: `roleAttributes` is injectable and these defaults are a floor. */
 export const DEFAULT_ROLE_LEAN = {
+  // what they ARE — the occupational role, from the world
   practical: ["smith", "blacksmith", "wright", "crafter", "mason", "cook", "farmer", "trader", "keeper"],
-  physical: ["guard", "soldier", "hunter", "reaver", "warden", "carter", "miner"],
-  mental: ["scholar", "archivist", "physician", "syllogist", "reader", "cartographer"],
-  social: ["innkeeper", "liaison", "envoy", "singer", "priest", "bargainer", "steward"],
+  physical: ["guard", "soldier", "hunter", "reaver", "warden", "carter", "miner", "ally"],
+  // ⛔ AND WHAT THEY ARE TO YOU — the COMPANY roles, which my first version left out entirely, so Veth's
+  // teaching half vanished and only "warden" counted. Erik: "she's supposed to be a teacher, but she's
+  // also a warden." Both are true; both belong here.
+  mental: ["scholar", "archivist", "physician", "syllogist", "reader", "cartographer", "trainer", "teacher"],
+  social: ["innkeeper", "liaison", "envoy", "singer", "priest", "bargainer", "steward", "partner", "companion"],
 };
 
-export function leanOf(entry, { roleAttributes = null } = {}) {
+/** ⛔ CCODE-248b — ROLES ARE PLURAL AND SO IS THE LEAN. Erik: "Veth… she's supposed to be a teacher, but
+ *  she's also a warden, so she would likely be valuable in a fight too. The NPCs aren't one dimensional."
+ *
+ *  ⚠️ MY FIRST VERSION RETURNED ONE ATTRIBUTE FROM THE FIRST MATCHING WORD — which is one-dimensional in
+ *  the exact way he is correcting. A teacher-and-warden got whichever word the map happened to hit first,
+ *  and the other half of her vanished.
+ *
+ *  ⛔ TWO KINDS OF ROLE FEED THIS AND THEY ARE ORTHOGONAL:
+ *    · the OCCUPATIONAL role — what they ARE. "warden of the palelands", "blacksmith", "archivist".
+ *    · the COMPANY roles — what they are TO YOU. trainer, ally, liaison, partner (engine/company.js).
+ *  Veth is a `trainer` on the roster AND a warden in the world; both are true and both should count. */
+export function leansOf(entry, { roleAttributes = null } = {}) {
   const map = roleAttributes || DEFAULT_ROLE_LEAN;
-  const role = String(entry?.role || "").toLowerCase();
+  // every role string this person carries, from either system
+  const text = [entry?.role, ...(entry?.roles || []), ...(entry?.titles || [])]
+    .filter(Boolean).map(r => String(r).toLowerCase()).join(" · ");
+  const out = [];
   for (const [attr, words] of Object.entries(map)) {
-    if ((words || []).some(w => role.includes(w))) return attr;
+    if ((words || []).some(w => text.includes(w)) && !out.includes(attr)) out.push(attr);
   }
-  return null;
+  return out;
+}
+
+/** The single strongest lean, kept for callers that want one. ⚠️ `leansOf` is the honest answer. */
+export function leanOf(entry, opts = {}) {
+  return leansOf(entry, opts)[0] || null;
 }
 
 /** ⛔ THE SHEET. Same shape a contest already takes, so an NPC can be a combatant without a second format.
@@ -65,10 +88,13 @@ export function leanOf(entry, { roleAttributes = null } = {}) {
 export function sheetFor(entry, { day = null, cfg = {}, roleAttributes = null, authored = null } = {}) {
   if (authored) return { ...authored, id: entry?.id || authored.id, authored: true };
   const level = derivedLevel(entry, { day, cfg });
-  const lean = leanOf(entry, { roleAttributes });
+  const leans = leansOf(entry, { roleAttributes });
   const base = Math.max(1, Math.round(level / 2) + 1);
   const attributes = { physical: base, mental: base, social: base, practical: base };
-  if (lean) attributes[lean] = base + num(cfg.roleLeanBonus, 2);
+  // ⛔ EVERY LEAN COUNTS, and a second one counts for less than the first — a teacher-and-warden is good at
+  // both and best at neither. ⚠️ NOT a flat stack: someone with four roles is not superhuman in all four.
+  const bonus = num(cfg.roleLeanBonus, 2);
+  leans.forEach((attr, i) => { attributes[attr] = base + Math.max(1, Math.round(bonus / (i + 1))); });
   return {
     id: entry?.id || null,
     name: entry?.name || entry?.id || "someone",
@@ -83,7 +109,8 @@ export function sheetFor(entry, { day = null, cfg = {}, roleAttributes = null, a
     skills: [],
     conditions: entry?.conditions || [],
     derived: true,
-    lean,
+    lean: leans[0] || null,
+    leans,
   };
 }
 

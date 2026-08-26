@@ -18460,8 +18460,20 @@ await (async () => {
       contribs.every(c => c.length > 0), contribs.map(c => c.length).join(","));
     // ⛔ AND NOT ONE OF THE 30 AUTHORED TAGS MEANS `HARM`. Everyone is in the fight; almost nobody is in it
     // by hitting — which is the finding, not an oversight.
-    check("CCODE-247: …and none of them brings HARM from tags alone — an entity that swings must say so",
-      Object.values(C199.companions).every(c => !CB.contributionsOf(c).includes("HARM")));
+    // ⛔ ERIK CORRECTED THIS TWICE AND BOTH TIMES THE SAME WAY. I first asked whether a companion could
+    // fight; then I gated HARM behind a fighting OCCUPATION, and he answered "um... Pell fights too... she
+    // uses a spear, hammer, shortsword, brigandine." A blacksmith with a spear is a person with a spear.
+    // ⚠️ AND THE ENGINE ALREADY AGREED: `playerBattleSkills` hands every character `_strike` — "A plain
+    // strike" — with no craft, role or weapon required. I had built a permission system for something the
+    // game has never asked permission for.
+    check("CCODE-247: anyone with a body can swing — HARM is the default, not a privilege",
+      CB.contributionsOf({ role: "archivist", assistTags: ["study"] }).includes("HARM"));
+    check("CCODE-247: …and the exceptions are AUTHORED facts about a body, not about a job",
+      !CB.contributionsOf({ role: "a swarm of motes", assistTags: ["analyze"], canStrike: false }).includes("HARM"));
+    // ⚠️ `MARTIAL` MARKS WHO IS GOOD AT IT, which is a different question from who may.
+    check("CCODE-247: a weapon, a fighting role or the `ally` role mark someone MARTIAL rather than permitted",
+      CB.contributionsOf({ role: "smith", inventory: [{ kind: "weapon" }] }).includes("MARTIAL")
+      && !CB.contributionsOf({ role: "archivist", assistTags: ["study"] }).includes("MARTIAL"));
 
     // ⛔ THE POPULATION ERIK MEANT: recruited NPCs carrying the `ally` role. company.js has held this
     // roster since SNG-126 and my first version never read it.
@@ -18474,21 +18486,25 @@ await (async () => {
     check("CCODE-247: a recruited NPC with the `ally` role is in the fight and brings HARM",
       allies.some(a => a.kind === "company" && a.contributions.includes("HARM")));
     // ⚠️ AND A TRAINER IS NOT A SOLDIER — the role decides, not the membership.
-    check("CCODE-247: …while a TRAINER on the same roster brings no harm — the role decides, not the roster",
-      allies.filter(a => a.kind === "company").some(a => !a.contributions.includes("HARM")));
+    check("CCODE-247: …while a TRAINER on the same roster is not marked MARTIAL — the role decides what they are GOOD at",
+      allies.filter(a => a.kind === "company").some(a => !a.contributions.includes("MARTIAL")));
     check("CCODE-247: someone who has LEFT the company is not in the fight",
       CB.alliesOf({ ...ch247, company: [{ npcId: npcIds[0], roles: ["ally"], leftDay: 9 }] },
         { companions: C199.companions, npcs: C199.npcs }).every(a => a.kind !== "company"));
 
     // ⛔ PARTICIPATION IS NOT A BOOLEAN. Healing is acting; distracting is acting.
     check("CCODE-247: an entity that heals or distracts ACTS — the old yes/no excluded six of nine from a fight they were in",
-      CB.canAct({ assistTags: ["heal"] }) === true && CB.canAct({ assistTags: ["distract"] }) === true
-      && CB.canAct({ assistTags: [] }) === false);
+      CB.contributionsOf({ assistTags: ["heal"] }).includes("RESTORE")
+      && CB.contributionsOf({ assistTags: ["distract"] }).includes("INFLUENCE"));
+    // ⚠️ AND THE ONLY WAY TO CONTRIBUTE NOTHING IS TO HAVE NO BODY. Everyone else can at least swing.
+    check("CCODE-247: …and the only entity that brings nothing is one that cannot act at all",
+      CB.canAct({ assistTags: [] }) === true
+      && CB.canAct({ assistTags: [], canStrike: false }) === false);
 
     // ⚠️ THE TAG MAP IS CONTENT-SHAPED AND INJECTABLE — 30 tags is an authoring vocabulary, and hardcoding
     // it would make every future tag an engine change.
     check("CCODE-247: the tag→family map can be overridden by content",
-      CB.contributionsOf({ assistTags: ["whistling"] }, { tagFamilies: { INFLUENCE: ["whistling"] } }).join() === "INFLUENCE");
+      CB.contributionsOf({ assistTags: ["whistling"] }, { tagFamilies: { INFLUENCE: ["whistling"] } }).includes("INFLUENCE"));
 
     // ⛔ WHAT HAPPENS WHEN ONE IS TAKEN OUT — Erik: "for each we would need to determine what happens when
     // they're taken out, like anything else."
@@ -18563,6 +18579,70 @@ await (async () => {
     // capacity grows with level, so a grown NPC has room for more than a novice
     check("CCODE-248: craft capacity grows with the level the story earned them",
       g.capacity > NS.growthFor(stranger, C199.abilities, { day: 400 }).capacity);
+  }
+
+  // 5ag · ⛔ CCODE-248b — NOBODY IS ONE-DIMENSIONAL. Erik: "Veth… she's supposed to be a teacher, but she's
+  // also a warden, so she would likely be valuable in a fight too. The NPCs aren't one dimensional."
+  //
+  // ⚠️ MY FIRST VERSION WAS ONE-DIMENSIONAL IN EXACTLY THAT WAY: `leanOf` returned ONE attribute from the
+  // first matching word, so a teacher-and-warden got whichever the map hit first and the other half of her
+  // vanished. And the COMPANY roles (trainer, ally, partner) were not in the map at all.
+  {
+    const NS2 = await import("../engine/npcsheet.js");
+    const CB2 = await import("../engine/combatants.js");
+    const veth = { id: "veth-ondra", name: "Veth", role: "warden of the palelands", roles: ["trainer"],
+      met: 60, firstMet: { day: 20 }, standing: 55, assistTags: ["guard", "study", "watch"],
+      skillsObserved: ["palework", "set hand", "the attended end"] };
+    const siol = { id: "siol", name: "Siol", role: "elf of the quickwood", roles: ["ally"],
+      met: 12, firstMet: { day: 180 }, standing: 20, assistTags: ["track", "scout", "green"],
+      skillsObserved: ["green road", "wildcraft"] };
+    const pell2 = { id: "pell", name: "Pell", role: "blacksmith", roles: ["partner"],
+      met: 34, firstMet: { day: 2 }, standing: 40, assistTags: ["craft", "mend"], skillsObserved: ["ironsense"] };
+
+    // ⛔ TWO KINDS OF ROLE, BOTH COUNTING: what they ARE, and what they are TO YOU.
+    const vl = NS2.leansOf(veth);
+    check(`CCODE-248b: a teacher who is also a warden leans BOTH ways (${vl.join("+")})`,
+      vl.includes("physical") && vl.includes("mental") && vl.length >= 2);
+    check("CCODE-248b: …and a smith who is also a partner leans both ways too",
+      NS2.leansOf(pell2).includes("practical") && NS2.leansOf(pell2).includes("social"));
+    // ⚠️ AND A SECOND LEAN COUNTS FOR LESS — good at both, best at neither. Not a flat stack, or someone
+    // with four roles would be superhuman in all four.
+    const vs = NS2.sheetFor(veth, { day: 420 });
+    check("CCODE-248b: the strongest lean still leads — a second role adds less than the first",
+      vs.attributes.physical > vs.attributes.mental && vs.attributes.mental > vs.attributes.social);
+
+    // ⛔ A WARDEN FIGHTS. My first version gave Veth PROTECT and KNOW and left her out of the violence —
+    // her occupation IS the declaration, and requiring a second one restates in data what the role says.
+    check("CCODE-248b: a WARDEN is marked MARTIAL by her occupation alone",
+      CB2.contributionsOf(veth).includes("MARTIAL"));
+    check("CCODE-248b: …as is a recruited ally, by their company role",
+      CB2.contributionsOf(siol).includes("MARTIAL"));
+    // ⚠️ AND NOBODY IS A SOLDIER BY DEFAULT. The list is jobs whose whole function is standing between
+    // something and someone — a blacksmith is strong and is not one of them.
+    // ⛔ PELL FIGHTS. Erik: "she uses a spear, hammer, shortsword, brigandine." She mends, she makes, she
+    // swings, and the spear marks her MARTIAL — four dimensions on one person, which is the whole point.
+    const pellArmed = { ...pell2, inventory: [{ kind: "weapon", name: "spear" }, { kind: "armor", name: "brigandine" }] };
+    const pc = CB2.contributionsOf(pellArmed);
+    check(`CCODE-248b: Pell mends, makes, fights AND is armed — ${pc.join(", ")}`,
+      pc.includes("RESTORE") && pc.includes("SHAPE") && pc.includes("HARM") && pc.includes("MARTIAL"));
+    check("CCODE-248b: an unarmed scholar can still swing, and is not marked martial for it",
+      CB2.contributionsOf({ role: "archivist", roles: ["trainer"], assistTags: ["study"] }).join() === "KNOW,HARM");
+    // the fighting-role list is injectable, like every other vocabulary here
+    // ⛔ AND IT MATCHES WORDS, NOT SUBSTRINGS. MARROW — "an Ashwarden-touched carrion bird" — came out a
+    // combatant on my first version, because "Ashwarden" contains "warden": a TRADITION NAME matching a
+    // fighting occupation. A regex over prose finds words, not facts, and I did it an hour after gating
+    // against it.
+    check("CCODE-248b: a tradition name is not an occupation — Ashwarden-touched is not a warden",
+      !CB2.contributionsOf({ role: "an Ashwarden-touched carrion bird that attends endings" }).includes("MARTIAL")
+      && CB2.contributionsOf({ role: "warden of the palelands" }).includes("MARTIAL"));
+
+    check("CCODE-248b: the fighting-occupation list is content-shaped, not welded in",
+      CB2.contributionsOf({ role: "hedgewitch" }, { fightingRoles: ["hedgewitch"] }).includes("MARTIAL"));
+
+    // ⚠️ AND EVERY ONE OF THEM IS STILL A WHOLE PERSON — the sheet carries the growth, not just the fight.
+    const gv = NS2.growthFor(veth, C199.abilities, { day: 420 });
+    check(`CCODE-248b: Veth's observed crafts resolve against the catalogue (${gv.crafts.map(c => c.id).join(", ")})`,
+      gv.crafts.length >= 2 && gv.wantsAuthoring.length === 0);
   }
 
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse

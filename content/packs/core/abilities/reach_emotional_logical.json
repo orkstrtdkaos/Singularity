@@ -866,7 +866,7 @@
    "id": "wellspring",
    "name": "Wellspring",
    "levelReq": 1,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
@@ -879,78 +879,84 @@
     "depth"
    ],
    "harmRung": "none",
-   "narrationHints": "She was exhausted and the feeling was still there. The feeling was enough.",
-   "description": "Sustain through emotional depth — what others run out of, you find more of in the next wave.",
-   "notFor": [],
+   "narrationHints": "She was exhausted and the feeling was still there. The feeling was enough. ⚠️ A party carried this way is not a cheerful one — they are simply still going, and they know why.",
+   "description": "⛔ FEELING WHERE STAMINA SHOULD BE. What others run out of, you find more of in the next wave — and you can hand it to someone. ⚠️ IT DOES THREE THINGS AND THEY ARE ONE IDEA: you do not run out, you do not break, and you will try the thing. The Threnodists' answer to the question every tradition answers differently — why are you still standing?",
+   "notFor": "⛔ COMFORT — it sustains by FEELING, not by easing, and a person who wants to be soothed gets depth instead (that is Pathos). ⚠️ IT DOES NOT SHARPEN ANYONE: no better swing, no steadier hand, no keener eye. Feeling does not make a blade sharper. And a numb stretch offers nothing to draw on.",
    "tradition": "threnodist",
    "functions": [
-    "empower",
-    "sustain"
+    "sustain",
+    "bolster",
+    "empower"
    ],
    "challengeTypes": [
-    "endurance",
-    "hardship",
-    "social"
+    "ENDURANCE",
+    "SOCIAL",
+    "HARDSHIP"
    ],
    "tree": [
     {
      "rank": 1,
      "name": "More in the Depth",
-     "grants": "Sustain through the depth of feeling — where others run dry, you find the next wave of grief or joy, and it holds you.",
-     "cannot": "There must be feeling to draw on. A numb stretch offers nothing.",
      "functions": [
       "sustain"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [],
-     "_cannotWas": "Anything rank 2 adds — your emotional depth sustains others — not by removing the hardship but by carrying some of it with them so they don't carry it alone; it sustains by FEELING, not by easing."
+     "grants": "⛔ WHERE OTHERS RUN DRY, YOU FIND THE NEXT WAVE — grief or joy, it does not matter which — AND IT HOLDS YOU. Feeling stands in for stamina: you keep going past where the body would have stopped.",
+     "cannot": "There must be feeling to draw on; a numb stretch offers nothing. ⚠️ And it is you only — nobody else gets a share of it at this rank."
     },
     {
      "rank": 2,
      "name": "Carried Weight",
-     "grants": "Your emotional depth sustains others — not by removing the hardship but by carrying some of it with them so they don't carry it alone. And they are braver for it: a person who is not carrying it alone attempts things they would not have attempted, and does them better.",
-     "cannot": "⚠️ You carry some of it. That is not a metaphor and it accumulates.",
      "functions": [
       "sustain",
+      "bolster",
       "empower"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Carried Weight",
      "gainAxes": [
-      "targets"
+      "targets",
+      "quality"
      ],
-     "_cannotWas": "Anything rank 3 adds — the depth sustains the party through the hardest stretch — not comfort, depth; it sustains by FEELING, not by easing."
+     "grants": "⛔ HAND IT TO ONE OTHER PERSON AND THEY GET ALL THREE: they do not run out, they are HARDER TO BREAK — fear, despair, a wail, a dread all find more resolve than they expected — ⚠️ AND THEY WILL TRY THE THING. Someone not carrying it alone attempts what they would have refused, and that willingness is a named edge on the attempt.",
+     "cannot": "⛔ IT DOES NOT MAKE THEM BETTER AT IT — no extra damage, no truer aim. They are harder to stop and more willing to start, and that is all. ⚠️ One person."
     },
     {
      "rank": 3,
      "name": "Wellspring Holds",
-     "grants": "The depth sustains the party through the hardest stretch — not comfort, depth; not peace, feeling so genuine it holds people together until it's over.",
-     "cannot": "⛔ DEPTH, NOT COMFORT. A party sustained this way is not a happy party.",
      "functions": [
       "sustain",
+      "bolster",
       "empower"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Wellspring Holds",
      "gainAxes": [
-      "scope"
+      "targets",
+      "scope",
+      "duration"
      ],
-     "_cannotWas": "Nothing further; this is the craft's ceiling; it sustains by FEELING, not by easing; and it still costs what it costs: carrying some of it with them MEANS CARRYING IT."
+     "grants": "⛔ THE PARTY HOLDS THROUGH THE WORST STRETCH — the retreat, the siege, the crossing, the week nobody should have survived. Not comfort: DEPTH, feeling genuine enough to keep people moving together until it is over.",
+     "cannot": "⛔ DEPTH, NOT COMFORT. A party sustained this way is not a happy party — they are upright, and they know exactly what it is costing. ⚠️ And when it ends they have still felt all of it; nothing was skipped."
     }
    ],
    "nativeOrCombination": "native",
    "shape": "bolster",
    "operativeAxis": [
-    "upkeepRelief",
+    "duration",
     "targets"
    ],
    "mechanic": {
     "magnitude": 3,
     "duration": 24,
-    "targets": 1
+    "targets": 1,
+    "crit": {
+     "success": "The wave arrives exactly when they were going to stop, and they do not stop.",
+     "failure": "You reach for the depth and find the shallow end — there was less there than you thought."
+    },
+    "note": "T-I bolster. ⛔ IT BOLSTERS THREE THINGS AND REFUSES THE REST: energy relief (feeling instead of stamina), `targetResist` (harder to impose on — and `impositionOf`'s threshold scales with it, so a bolstered ally degrades more of what lands), and a named `contestMod` when they attempt what they would otherwise refuse. ⚠️ NOT DAMAGE, NOT CRIT (Erik 2026-08-23): feeling does not make a blade sharper, and an across-the-board buff would have made this the craft every party takes for no reason of its own. ⛔ r1 IS A FAMILY MEMBER, NOT A DUPLICATE — `choir_sustains` (abyssal) and `sustained_order` (seraphic) carry the identical magnitude 3 / duration 24 / targets 1, each tradition answering 'why are you still standing' its own way. Threnody's answer is the next wave."
    },
    "rankDeltas": [
     {
@@ -970,23 +976,28 @@
    ],
    "intensity": {
     "conserve": "draw a little — half the relief, and it costs you nothing",
-    "surge": "double it; CARRYING SOME OF IT WITH THEM means carrying it"
+    "surge": "open the whole wellspring; EVERYTHING YOU ARE CARRYING IS IN IT AND THEY WILL FEEL WHICH"
    },
    "bounds": [
     {
-     "text": "it sustains by FEELING, not by easing — a person who wants comfort gets depth instead",
+     "text": "⛔ IT SUSTAINS BY FEELING, NOT BY EASING — a person who wants comfort gets depth instead",
      "class": "hard"
     },
     {
-     "text": "carrying some of it with them MEANS CARRYING IT",
-     "class": "cost"
+     "text": "⛔ ENERGY, RESIST AND THE WILLINGNESS TO TRY — never damage, never accuracy. It does not make anyone better at their craft, only harder to stop",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ THERE MUST BE FEELING TO DRAW ON. A numb stretch, a deadened room, a person past caring offers nothing",
+     "class": "hard"
     }
    ],
-   "plainly": "A endurance/hardship/social action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends targets. Limit: it sustains by Feeling, not by easing — a person who wants comfort gets depth instead.",
+   "plainly": "An endurance/social action. You run on feeling instead of stamina — energy relief while it holds. r2 gives one other person the same, plus a harder resist and a named edge when they attempt what they would otherwise refuse. r3 carries the party through the worst stretch.",
    "_nameWas": "The Wellspring",
    "_idWas": "the_wellspring",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rebuiltAsBolster_20260823": "⛔ ERIK 2026-08-23. The craft's real value was buried in r2's second sentence — 'they attempt things they would not have attempted, and do them better' — and `bolster` was one of only three verbs Death did not have. ⚠️ NOW IT IS THE HEADLINE. Erik asked what it should bolster: resist, energy, damage, crit, across the board? ⛔ ANSWER: ENERGY, RESIST, AND WILLINGNESS — never damage or crit, because feeling does not make a blade sharper and a flat across-the-board buff would have no character of its own. ⚠️ CUT: the [cost] bound 'you carry some of it, that is not a metaphor and it accumulates' — an untracked debt, the same shape that got `shared_weight` rebuilt, and ENERGY IS THE COST. ⛔ ALSO: e1 -> e3 (below the L1 band, unmigrated batch), lowercase challengeTypes fixed, `operativeAxis: upkeepRelief` was not one of the nine axes, empty notFor filled, and the machine-generated `plainly` said r3 'extends targets' when its axis is scope."
   },
   {
    "id": "built_system",

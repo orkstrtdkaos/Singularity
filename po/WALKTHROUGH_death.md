@@ -388,39 +388,39 @@
 
 ## 11. Wellspring  ·  `wellspring`
 
-**L1 · e1 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
-**status:** ⚠️ no crit  
-**ability functions:** empower, sustain
+**L1 · e3 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
+**status:** crit  
+**ability functions:** sustain, bolster, empower
 
-> Sustain through emotional depth — what others run out of, you find more of in the next wave.
+> ⛔ FEELING WHERE STAMINA SHOULD BE. What others run out of, you find more of in the next wave — and you can hand it to someone. ⚠️ IT DOES THREE THINGS AND THEY ARE ONE IDEA: you do not run out, you do not break, and you will try the thing. The Threnodists' answer to the question every tradition answers differently — why are you still standing?
 
-**notFor:** 
+**notFor:** ⛔ COMFORT — it sustains by FEELING, not by easing, and a person who wants to be soothed gets depth instead (that is Pathos). ⚠️ IT DOES NOT SHARPEN ANYONE: no better swing, no steadier hand, no keener eye. Feeling does not make a blade sharper. And a numb stretch offers nothing to draw on.
 
 ### r1 — More in the Depth
 
 **functions:** sustain · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** Sustain through the depth of feeling — where others run dry, you find the next wave of grief or joy, and it holds you.
+**grants:** ⛔ WHERE OTHERS RUN DRY, YOU FIND THE NEXT WAVE — grief or joy, it does not matter which — AND IT HOLDS YOU. Feeling stands in for stamina: you keep going past where the body would have stopped.
 
-**cannot:** There must be feeling to draw on. A numb stretch offers nothing.
+**cannot:** There must be feeling to draw on; a numb stretch offers nothing. ⚠️ And it is you only — nobody else gets a share of it at this rank.
 
 ### r2 — Carried Weight
 
-**functions:** sustain, empower · **gainAxes:** targets · **gains:** broaden · **harm:** none
+**functions:** sustain, bolster, empower · **gainAxes:** targets, quality · **gains:** broaden · **harm:** none
 
-**grants:** Your emotional depth sustains others — not by removing the hardship but by carrying some of it with them so they don't carry it alone. And they are braver for it: a person who is not carrying it alone attempts things they would not have attempted, and does them better.
+**grants:** ⛔ HAND IT TO ONE OTHER PERSON AND THEY GET ALL THREE: they do not run out, they are HARDER TO BREAK — fear, despair, a wail, a dread all find more resolve than they expected — ⚠️ AND THEY WILL TRY THE THING. Someone not carrying it alone attempts what they would have refused, and that willingness is a named edge on the attempt.
 
-**cannot:** ⚠️ You carry some of it. That is not a metaphor and it accumulates.
+**cannot:** ⛔ IT DOES NOT MAKE THEM BETTER AT IT — no extra damage, no truer aim. They are harder to stop and more willing to start, and that is all. ⚠️ One person.
 
 ### r3 — Wellspring Holds
 
-**functions:** sustain, empower · **gainAxes:** scope · **gains:** deepen · **harm:** none
+**functions:** sustain, bolster, empower · **gainAxes:** targets, scope, duration · **gains:** broaden · **harm:** none
 
-**grants:** The depth sustains the party through the hardest stretch — not comfort, depth; not peace, feeling so genuine it holds people together until it's over.
+**grants:** ⛔ THE PARTY HOLDS THROUGH THE WORST STRETCH — the retreat, the siege, the crossing, the week nobody should have survived. Not comfort: DEPTH, feeling genuine enough to keep people moving together until it is over.
 
-**cannot:** ⛔ DEPTH, NOT COMFORT. A party sustained this way is not a happy party.
+**cannot:** ⛔ DEPTH, NOT COMFORT. A party sustained this way is not a happy party — they are upright, and they know exactly what it is costing. ⚠️ And when it ends they have still felt all of it; nothing was skipped.
 
-**bounds:** it sustains by FEELING, not by easing — a person who wants comfort gets depth instead · carrying some of it with them MEANS CARRYING IT
+**bounds:** ⛔ IT SUSTAINS BY FEELING, NOT BY EASING — a person who wants comfort gets depth instead · ⛔ ENERGY, RESIST AND THE WILLINGNESS TO TRY — never damage, never accuracy. It does not make anyone better at their craft, only harder to stop · ⚠️ THERE MUST BE FEELING TO DRAW ON. A numb stretch, a deadened room, a person past caring offers nothing
 
 ---
 

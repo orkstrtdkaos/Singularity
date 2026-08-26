@@ -424,41 +424,41 @@
 
 ---
 
-## 12. Dread  ·  `dread`
+## 12. Dread Mantle  ·  `dread`
 
 **L2 · e4 · ashwarden · metaphysical · shape `hobble` · harm `incapacitating`**  
 **status:** crit · gated  
-**ability functions:** bind, hinder
+**ability functions:** hinder, bind, provoke
 
-> You let a living thing feel, for a moment, the ending it is walking toward. It is not an illusion and it is not a lie. It is simply EARLY. Most things run. Some things freeze. A few things come straight at you, and those are the ones to watch.
+> ⛔ STOP CARRYING IT DISCREETLY. Palework is necromancy in daylight, kept decent; this is the same power with the lid off and worn where everyone can see it. The Ashwarden puts on what she actually is, and every living thing in front of her understands — correctly — what is standing there. ⚠️ MOST THINGS RUN. SOME FREEZE. A FEW COME STRAIGHT AT YOU, and at the last some turn on whoever is nearest, because terror does not check faces.
 
-**notFor:** It shows them their end; it does not CAUSE it. And a thing that has already made peace with dying — an Ashwarden, an old soldier, a Rootkin who has planted their tree — feels nothing at all, and will look at you with something close to pity.
+**notFor:** ⛔ IT SHOWS THEM AN ENDING; IT DOES NOT CAUSE ONE. ⚠️ AND THE PEACEFUL ARE NOT IMMUNE, THEY ARE HARDER — someone who has made peace with dying shrugs off r1 and will look at you with something close to pity. An Ashwarden knows what they have NOT made peace with: dying badly, dying unattended, dying with the thing unfinished. Reaching that takes rank. ⛔ WHAT IS GENUINELY UNMOVED: things that cannot feel, and the set dead.
 
-### r1 — Dread
+### r1 — Mantle Worn
 
-**functions:** hinder · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** incapacitating · imposes
+**functions:** hinder, provoke · **gainAxes:** conditions · **gains:** broaden · **harm:** incapacitating · imposes
 
-**grants:** One living thing feels its own ending approach. It will act on that, and you do not get to choose how — but it is badly weakened while it lasts: the hands go unsteady, the judgement narrows, and nothing they attempt comes out at the strength they meant.
+**grants:** ⛔ LET IT SHOW. One living thing looks at you and understands exactly what it is standing in front of, and its own ending arrives early on the back of that. It is badly weakened — hands unsteady, judgement narrowed — AND WHATEVER CLEVER THING IT WAS DOING, IT STOPS: the flank, the feint, the held formation abandoned for a wild swing or a run. ⚠️ You do not choose which.
 
-**cannot:** The unafraid are unmoved, and there are more of them than you think.
+**cannot:** ⛔ THE PEACEFUL SHRUG THIS OFF at this rank — an old soldier, a Rootkin who has planted their tree — and look at you with something close to pity. ⚠️ And there is nothing to break in a foe who had committed to nothing.
 
-### r2 — Cold Room
+### r2 — Open Ground
 
-**functions:** hinder, bind · **gainAxes:** scope · **gains:** broaden · **harm:** incapacitating
+**functions:** hinder, bind, provoke · **gainAxes:** targets, scope · **gains:** broaden · **harm:** incapacitating · imposes
 
-**grants:** A room, a line, a crowd feels it at once. Formations come apart; conversations stop.
+**grants:** ⛔ EVERYONE WHO CAN SEE YOU SEES IT. A line, a crowd, a watch-house — formations come apart, conversations stop mid-word, and every committed line in the place is dropped at once. ⚠️ THE CARRION BIRDS ARRIVE DURING THIS, and everyone notices them arrive.
 
-**cannot:** A frightened crowd is a stampede, and a stampede does not check who is in its way. Including you.
+**cannot:** ⛔ A FRIGHTENED CROWD IS A STAMPEDE, and a stampede does not check who is in its way. Including you. ⚠️ You still do not choose how any of them act.
 
 ### r3 — Certain Hour
 
-**functions:** hinder, bind · **gainAxes:** duration · **gains:** deepen · **harm:** incapacitating
+**functions:** hinder, bind, provoke · **gainAxes:** conditions, duration · **gains:** deepen · **harm:** incapacitating · imposes
 
-**grants:** ⛔ ONE LIVING THING KNOWS ITS OWN ENDING with the Ashwarden's own clarity — not merely feels it — and cannot un-know it. It will act on that, and you do not choose how.
+**grants:** ⛔ IT STOPS BEING A DISPLAY AND BECOMES KNOWLEDGE. One living thing knows its ending with your own professional clarity and cannot un-know it — ⚠️ AND HERE THE PEACEFUL ARE REACHED, because you are no longer showing them death. You are showing them dying badly, dying unattended, dying with the thing unfinished. YOU HAVE SEEN ALL THREE AND THEY CAN TELL. ⛔ What comes back is rarely aimed: the terrified turn on whoever is nearest, and nearest is often a friend.
 
-**cannot:** Some of them will thank you. Some of them will never be right again. You will not be able to tell in advance which.
+**cannot:** ⛔ YOU STILL DO NOT CHOOSE — not the reaction, and not who they turn on. ⚠️ Some of them will thank you. Some of them will never be right again. You will not be able to tell in advance which.
 
-**bounds:** THE UNAFRAID ARE UNMOVED, and there are more of them than you think · you do not get to choose HOW they act on it · A FRIGHTENED CROWD IS A STAMPEDE · SOME OF THEM WILL NEVER BE RIGHT AGAIN
+**bounds:** ⛔ THE UNAFRAID ARE HARDER, NOT IMMUNE — but things that cannot feel, and the set dead, are genuinely unmoved · ⛔ YOU DO NOT GET TO CHOOSE HOW THEY ACT ON IT. Run, freeze, or come at you — that is theirs · ⚠️ IT SHOWS AN ENDING AND NEVER CAUSES ONE. Nothing here kills anybody · ⚠️ IT IS PUBLIC AND IT IS REMEMBERED. Everyone who saw it knows what you are now, and the ones who ran will describe it to people who did not
 
 ---
 

@@ -18514,6 +18514,57 @@ await (async () => {
       !!caught && caught.caughtBy === "you" && caught.onBehalfOf === "sprig");
   }
 
+  // 5af · ⛔ CCODE-248 — AN NPC WITH A CHARACTER SHEET, AND WHY IRONSENSE GETS OVERDONE.
+  //
+  // Erik: "as the NPC grows they should gain levels and skills just like the PC… she has ironsense (which
+  // gets overdone because she needs a more robust way to gain crafts)."
+  //
+  // ⚠️ I LOOKED FOR PELL FIRST AND SHE IS NOT AUTHORED CONTENT — she lives in npc_interiority and the
+  // save's registry, and `ironsense` is not in the ability catalogue either. So the case he named is an
+  // EMERGENT NPC and the answer cannot be "author her a sheet": nobody authored her to begin with.
+  {
+    const NS = await import("../engine/npcsheet.js");
+    const pell = { id: "pell", name: "Pell", role: "blacksmith", met: 34, firstMet: { day: 2 },
+      standing: 40, skillsObserved: ["ironsense", "set hand", "worth the work"] };
+
+    // ⛔ THE LEVEL IS A CLAIM ABOUT WHAT THE STORY HAS SHOWN, never a courtesy.
+    const stranger = { id: "x", role: "passerby", met: 1, firstMet: { day: 399 }, skillsObserved: [] };
+    const sp = NS.sheetFor(pell, { day: 400 }), sx = NS.sheetFor(stranger, { day: 400 });
+    check(`CCODE-248: a long-known, well-regarded NPC derives a real sheet (Pell: level ${sp.level}, ${sp.maxHealth} health)`,
+      sp.level > 5 && sp.maxHealth > 10 && sp.attributes.practical > 0);
+    check("CCODE-248: …and a stranger met once is level 1 — the sheet is earned, not granted",
+      sx.level === 1);
+    check("CCODE-248: the sheet leans toward what their ROLE implies — a blacksmith is practical",
+      sp.lean === "practical" && sp.attributes.practical > sp.attributes.mental);
+    // ⚠️ THE LEAN IS CONTENT-SHAPED, not a table welded into the engine.
+    check("CCODE-248: the role→attribute lean is injectable",
+      NS.leanOf({ role: "night-singer" }, { roleAttributes: { social: ["singer"] } }) === "social");
+
+    // ⛔ AN AUTHORED SHEET WINS OUTRIGHT. Aevi's 111 named people should get real ones over time, and the
+    // moment one exists the derivation stops applying to that person.
+    const authored = NS.sheetFor(pell, { day: 400, authored: { level: 3, attributes: { physical: 1 } } });
+    check("CCODE-248: an AUTHORED sheet wins outright — derivation is only for people nobody wrote down",
+      authored.level === 3 && authored.authored === true && !authored.derived);
+
+    // ⛔ THE ANSWER TO "IRONSENSE GETS OVERDONE": the observations were recorded and never became crafts.
+    const g = NS.growthFor(pell, C199.abilities, { day: 400 });
+    check(`CCODE-248: observed skills become REAL CRAFTS where the catalogue has them (${g.crafts.map(c => c.id).join(", ")})`,
+      g.crafts.length >= 2);
+    // ⚠️ AND WHAT IT CANNOT MATCH IS REPORTED, NOT INVENTED. `ironsense` is not in the catalogue; a system
+    // that minted one would be hallucinating a character rather than growing one.
+    check("CCODE-248: …and an observation the catalogue cannot express is REPORTED for authoring, never minted",
+      g.wantsAuthoring.includes("ironsense") && !g.crafts.some(c => /ironsense/i.test(c.id || "")));
+    // ⛔ AND THE ONE-TRICK CASE IS NAMED, because that is the defect Erik actually described.
+    const thin = NS.growthFor({ id: "t", met: 20, firstMet: { day: 1 }, skillsObserved: ["ironsense"] },
+      C199.abilities, { day: 400 });
+    check("CCODE-248: a person the story keeps showing doing ONE thing is flagged as thin — the repetition is a sheet problem, not a narration one",
+      thin.thin === true && thin.crafts.length <= 1);
+
+    // capacity grows with level, so a grown NPC has room for more than a novice
+    check("CCODE-248: craft capacity grows with the level the story earned them",
+      g.capacity > NS.growthFor(stranger, C199.abilities, { day: 400 }).capacity);
+  }
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

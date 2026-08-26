@@ -4,7 +4,7 @@
 > Mechanical columns are derived from the static import graph, which is complete: `app.js` contains **zero dynamic imports**.
 > **`purpose`, `player-visible surface` and `what makes it fire` are AUTHORED** in `scripts/engine_map.authored.json` and are never overwritten by a regeneration.
 
-**94 modules · 79/94 described.** Two flags carry the defect shapes this map exists to catch. **`player-visible surface: NONE`** (L1) is how a capability gets built, tested, and never met. **`what makes it fire: NONE` on a module that DOES have a surface** (L2, "permission isn't initiative") is how a capability the player can reach still never happens — the teacher gate that never fired.
+**95 modules · 79/95 described.** Two flags carry the defect shapes this map exists to catch. **`player-visible surface: NONE`** (L1) is how a capability gets built, tested, and never met. **`what makes it fire: NONE` on a module that DOES have a surface** (L2, "permission isn't initiative") is how a capability the player can reach still never happens — the teacher gate that never fired.
 
 **How each derived column is measured** — so the columns can be trusted or corrected rather than believed:
 
@@ -109,6 +109,7 @@
 | `engine/worldtab.js` | Builds THE WORLD tab — who is doing what to your arcs — as a pure function of world state, so the render can be EXECUTED in a test instead of pattern-matched against its own source. | The World tab on the character sheet: each arc by stage NAME, who is pushing it and who is holding it back (names you have met marked apart), what it cost in casualties and strikes, who is being reached for in the dark, and who has not been home. | Opening the character sheet and choosing The World; fed by arcPeopleView + worldPeopleFooter off the offscreen world tick. | 1 | `app.js` | **1** | — | — |
 | `engine/combatants.js` | *— unstated —* | *—* | *—* | 11 | **nothing** | **0** | — | — |
 | `engine/intercept.js` | *— unstated —* | *—* | *—* | 8 | **nothing** | **0** | — | — |
+| `engine/npcsheet.js` | *— unstated —* | *—* | *—* | 6 | **nothing** | **0** | `npc_interiority.json` | — |
 
 ## GM verbs handled inside `app.js` itself
 

@@ -760,10 +760,10 @@
       "setupBonusScale": 0.3,
       "setupBonusMax": 12,
       "bonusOnDegrees": [
-        "crit_success",
-        "success"
+        "crit_success"
       ],
-      "gmCallsPerTurn": 2
+      "gmCallsPerTurn": 2,
+      "_bonusOnDegrees_ccode257": "⛔ ERIK, 2026-08-26: \"set the dial to crit only and let's see how it plays\". Was [\"crit_success\", \"success\"].\n⚠️ MEASURED BEFORE THE CHANGE (scripts/bonus_dial.mjs, re-runnable): across five sense-step cases the bonus rate goes 57% -> 20%. ⛔ BUT THE ROW THAT DECIDES IT BARELY MOVES: 'you HIDE, they READ' — the intended play — goes 85% -> 78%, because `senseBonusFor` pays for BEATING A READER regardless of degree. So this does not make bonus actions rare; it strips out the incidental payouts and leaves the designed one standing.\n⛔ AND THE REASON ERIK RAISED IT, WHICH IS THE STRONGER ARGUMENT: four crafts exist to GRANT a bonus action (case_closed, perfect_motion, dread_mantle, name_invoked). A craft that hands you one is worth nothing when you already had one — so the old dial quietly devalued the crafts whose whole point is the thing it gave away free. This makes those four 1.9x more valuable.\n⚠️ TO REVERT: put \"success\" back. Re-run scripts/bonus_dial.mjs first — it measures the CURRENT authoring against the alternative either way round."
     },
     "weave": {
       "note": "CCODE-37 (Erik: 'this is where braids really shine'). Turn-by-turn combat makes you pick ONE thing per turn — so the reward for having practised two crafts together is doing BOTH in a single turn. A woven round leads with one craft (its function drives the matchup) and folds a second in: the second adds a NAMED bonus line to the roll, AND its persistent effect lands too, so one turn leaves two things standing. It costs energy for both, so weaving is a real choice, not a free upgrade. It also records a CO-ACTIVATION in the practice ledger — weave a pairing enough times (BRAID_RIPEN_AT) and you EARN the braid as a single minted craft, at which point you get the combined effect for one craft's cost. That is the whole arc: weave by hand, pay double, until the braid makes it one move.",

@@ -44,8 +44,16 @@ function rate(sb, you, foe) {
   }
   return n / N;
 }
-const NOW  = withDial(["crit_success","success"]);
-const TIGHT= withDial(["crit_success"]);
+// ⛔ "TODAY" MUST MEAN WHAT IS ACTUALLY AUTHORED, NOT WHAT WAS AUTHORED WHEN I WROTE THIS. The first
+// version hardcoded ["crit_success","success"] as the current column — so the moment Erik set the dial, this
+// script would have kept reporting the old authoring as "today" and the change as hypothetical. A tool
+// pinned to a value it is supposed to be measuring is the defect this project has caught in me repeatedly.
+const SHIPPED = baseSb?.turn?.bonusOnDegrees || ["crit_success"];
+const OTHER = SHIPPED.includes("success") ? ["crit_success"] : ["crit_success", "success"];
+const NOW = withDial(SHIPPED);
+const TIGHT = withDial(OTHER);
+const nowLabel = SHIPPED.join("+"), otherLabel = OTHER.join("+");
+const tightening = SHIPPED.includes("success");
 
 const cases = [
   ["you READ, they swing",            D.read,  D.swing],
@@ -57,10 +65,11 @@ const cases = [
 
 console.log("");
 console.log("  ".padEnd(2) + "=".repeat(92));
-console.log("  HOW OFTEN YOU GET A BONUS ACTION — and what tightening the dial would do");
+console.log("  HOW OFTEN YOU GET A BONUS ACTION — shipped dial vs the alternative");
+console.log("  shipped: bonusOnDegrees = [" + nowLabel + "]     alternative: [" + otherLabel + "]");
 console.log("  " + "=".repeat(92));
 console.log("");
-console.log("    what you did                       │  today        │  crit-only    │  change");
+console.log("    what you did                       │ " + ("SHIPPED").padEnd(13) + " │ " + ("alt").padEnd(13) + " │  change");
 console.log("    ───────────────────────────────────┼───────────────┼───────────────┼──────────────");
 let sumNow = 0, sumTight = 0;
 for (const [label, you, foe] of cases) {
@@ -99,7 +108,7 @@ console.log("  A craft that GIVES you a bonus action is only worth something whe
 console.log("  otherwise have had one. So its real value is: how often is it NOT redundant?");
 console.log("");
 console.log("    ┌──────────────────────────────────────────┬───────────┬───────────┐");
-console.log("    │                                          │  today    │ crit-only │");
+console.log("    │                                          │ SHIPPED   │ alt       │");
 console.log("    ├──────────────────────────────────────────┼───────────┼───────────┤");
 console.log("    │ chance you already had a bonus           │ " + ((dupNow*100).toFixed(0)+"%").padStart(8) + "  │ " + ((dupTight*100).toFixed(0)+"%").padStart(8) + "  │");
 console.log("    │ …so the craft is WASTED that often       │ " + ((dupNow*100).toFixed(0)+"%").padStart(8) + "  │ " + ((dupTight*100).toFixed(0)+"%").padStart(8) + "  │");
@@ -107,7 +116,9 @@ console.log("    │ ⛔ the craft actually MATTERS            │ " + (((1-dupN
 console.log("    └──────────────────────────────────────────┴───────────┴───────────┘");
 console.log("");
 const gain = ((1-dupTight)/(1-dupNow));
-console.log("  ⛔ TIGHTENING THE DIAL MAKES THOSE FOUR CRAFTS " + gain.toFixed(1) + "× MORE VALUABLE.");
+console.log(tightening
+  ? "  ⛔ TIGHTENING THE DIAL WOULD MAKE THOSE FOUR CRAFTS " + (1/gain > 1 ? (1/gain).toFixed(1) : gain.toFixed(1)) + "× MORE VALUABLE."
+  : "  ✅ THE SHIPPED (TIGHT) DIAL MAKES THOSE FOUR CRAFTS " + (1/gain).toFixed(1) + "× MORE VALUABLE THAN THE ALTERNATIVE.");
 console.log("     Erik's instinct was right, and it is the OPPOSITE of the usual worry: the risk of a");
 console.log("     generous dial is not that fights get too fast — it is that it QUIETLY DEVALUES the");
 console.log("     crafts whose whole point is the thing it hands out for free.");
@@ -116,5 +127,7 @@ console.log("  ⚠️ WHAT IT COSTS: bonus actions become a real event rather th
 console.log("     round is shorter and the sense step's careful rules (the tie, the null band, the");
 console.log("     uncontested obscure) start actually deciding who gets one. That is the trade.");
 console.log("");
-console.log("  ⛔ NOT CHANGED. This measures; it does not touch the dial. That is Erik's call.");
+console.log(tightening
+  ? "  ⛔ NOT CHANGED. This measures; it does not touch the dial. That is Erik's call."
+  : "  ✅ SHIPPED AS THE TIGHT DIAL (Erik, 2026-08-26). Re-run this after any change to check it still holds.");
 console.log("");

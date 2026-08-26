@@ -8107,8 +8107,11 @@ await (async () => {
 // --- SNG-196: the generative braid mint engine — co-activation EARNS a full-schema, tiered, minted craft ---
 {
   const br = await import("../engine/braids.js");
+  // ⛔ CCODE-252: this fixture said `harmRung: "wounding"` — a value NO craft in the corpus authors. The
+  // fixture, the assertion below, and `braids.js`'s HARM_ORDER all used one invented vocabulary, so they
+  // agreed with each other and disagreed with the game.
   const catalog = {
-    a: { id: "a", name: "Aye", tradition: "marcher", levelReq: 2, functions: ["strike"], harmRung: "wounding" },
+    a: { id: "a", name: "Aye", tradition: "marcher", levelReq: 2, functions: ["strike"], harmRung: "damaging" },
     b: { id: "b", name: "Bee", tradition: "marcher", levelReq: 3, functions: ["reveal", "conceal"], harmRung: "none" }
   };
   const char = { level: 6, abilities: [{ abilityId: "a", level: 2 }, { abilityId: "b", level: 3 }], practice: { coActivations: { "a+b": 5, "a+z": 9 } } };
@@ -8124,7 +8127,10 @@ await (async () => {
   const def = br.buildBraidDef(char, ["a", "b"], catalog);
   check("196: a minted braid is a FULL-schema ability (id/name/tree/functions/harmRung/provenance)", !!def.id && !!def.name && Array.isArray(def.tree) && def.tree.length === t.maxRank && def.nativeOrCombination === "combination");
   check("196: functions are the UNION of both parents", ["strike", "reveal", "conceal"].every(f => def.functions.includes(f)));
-  check("196: the braid takes the HARSHER parent's harm rung", def.harmRung === "wounding");
+  // ⛔ CCODE-252 — THIS GATE WAS GREEN FOR AS LONG AS IT WAS WRONG. It asserted "wounding", the fixture
+  // authored "wounding", and `braids.js` ranked "wounding" — and not one craft in the corpus has ever used
+  // that word. The gate, the fixture and the code agreed with each other and disagreed with the game.
+  check("196: the braid takes the HARSHER parent's harm rung", def.harmRung === "damaging");
   check("196: provenance records the two parents + how it was named", br.braidKey(def.minted.from) === "a+b" && def.minted.namedBy === "auto");
   // SNG-197 §1: the FLOOR is the union; the CEILING is the braid's OWN — an emergent function neither parent had.
   check("197 §1: notFor is drawn around the BRAID's own reach, NOT 'anything beyond the parents'", /outside this braid's own reach/.test(def.notFor) && !/beyond the braid of its two parents/.test(def.notFor));
@@ -9587,7 +9593,7 @@ await (async () => {
 {
   const br226 = await import("../engine/braids.js");
   const cat226 = {
-    a: { id: "a", name: "Craft A", tradition: "ashwarden", levelReq: 2, functions: ["strike"], harmRung: "wounding", energyCost: 5 },
+    a: { id: "a", name: "Craft A", tradition: "ashwarden", levelReq: 2, functions: ["strike"], harmRung: "damaging", energyCost: 5 },
     b: { id: "b", name: "Craft B", tradition: "ashwarden", levelReq: 3, functions: ["ward"], harmRung: "none", energyCost: 7 }
   };
   // Marrow's Wings shape: a 2-parent discovery recorded in discoveries[] but NOT in abilities[] (the live bug).
@@ -18699,6 +18705,72 @@ await (async () => {
         Math.abs(m) < 0.02 && sd < 0.06, `mean ${m.toFixed(3)} sd ${sd.toFixed(3)}`);
     }
   }
+
+  // 5ah · ⛔ CCODE-252 — A LADDER MADE OF WORDS THE CORPUS DOES NOT USE.
+  //
+  // Found while reviewing Aevi's `SPEC_craft_lint.md`, whose central rule is "EVERY CHECK CITES THE SCHEMA IT
+  // MEASURES AGAINST — a finding that cannot name its authority is not a finding." ⚠️ I PROMPTLY BROKE THAT
+  // RULE WHILE REVIEWING IT: I measured harmRung against `light/moderate/severe/mortal`, a vocabulary I
+  // invented on the spot. When I went to find the real authority, `engine/braids.js` turned out to have done
+  // the same thing and shipped it.
+  //
+  // `HARM_ORDER` read ["none","restraint","wounding","lethal","atrocity"]. The corpus authors FOUR values and
+  // only TWO were in both lists — so `indexOf` returned -1 for `damaging` and `incapacitating`, sorting them
+  // BELOW `none`. ⛔ "harsher parent sets the braid's rung" did the exact opposite of what it said.
+  {
+    const BR = readFileSync(join(root, "engine/braids.js"), "utf8");
+    const m = BR.match(/const HARM_ORDER = \[([^\]]+)\]/);
+    const ladder = m ? m[1].split(",").map(s => s.trim().replace(/^"|"$/g, "")) : [];
+
+    // ⛔ THE CHECK THAT WOULD HAVE CAUGHT IT, AND IT IS THE ONE AEVI'S SPEC IS BUILT AROUND: the ladder must
+    // contain every value CONTENT ACTUALLY AUTHORS. Derived from the corpus, so it cannot go stale against it.
+    const authored = new Set();
+    for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(f => f.endsWith(".json"))) {
+      const j = JSON.parse(readFileSync(join(root, "content/packs/core/abilities", f), "utf8"));
+      for (const a of (j.abilities || j.items || [])) {
+        if (a.harmRung) authored.add(String(a.harmRung));
+        for (const t of (a.tree || [])) if (t.harmRung) authored.add(String(t.harmRung));
+      }
+    }
+    // ⚠️ NON-VACUITY FLOOR: a corpus that authored nothing would pass this trivially.
+    check("CCODE-252: the corpus authors a real harmRung vocabulary (floor — an empty set would pass anything)",
+      authored.size >= 3 && authored.has("damaging") && authored.has("none"));
+    const orphans = [...authored].filter(v => !ladder.includes(v));
+    check("CCODE-252: every harmRung the CORPUS authors exists on the engine's ladder — no value sorts as -1",
+      orphans.length === 0, `on no ladder rung: ${orphans.join(", ")} · ladder = ${ladder.join("/")}`);
+
+    // ⛔ AND THE BEHAVIOUR, NOT JUST THE LIST. A ladder can contain every word and still be ordered wrongly.
+    const pick = (rungs) => rungs.map(s => s || "none")
+      .sort((a, b) => ladder.indexOf(b) - ladder.indexOf(a))[0] || "none";
+    check("CCODE-252: a wounding parent braided with a harmless one yields a WOUNDING braid — the comment is now true",
+      pick(["damaging", "none"]) === "damaging" && pick(["none", "damaging"]) === "damaging"
+      && pick(["none", "incapacitating"]) === "incapacitating" && pick(["lethal", "none"]) === "lethal");
+    check("CCODE-252: …and two harmless parents still braid to harmless — the fix is not a blanket escalation",
+      pick(["none", "none"]) === "none");
+
+    // ⛔ THE SEVEN SHIPPED BRAIDS THAT CLAIMED TO HARM NOTHING. `harmRungGloss("none")` tells the GM
+    // "this craft HARMS NOTHING — NEVER invent a wound from it", which was false for every one of these.
+    {
+      const abil = {};
+      for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(f => f.endsWith(".json"))) {
+        const j = JSON.parse(readFileSync(join(root, "content/packs/core/abilities", f), "utf8"));
+        for (const a of (j.abilities || j.items || [])) abil[a.id] = a;
+      }
+      const recipes = JSON.parse(readFileSync(join(root, "content/packs/core/rules/combination_recipes.json"), "utf8")).recipes || [];
+      const resolvable = recipes.filter(r => (r.parts || []).map(p => abil[p]).filter(Boolean).length >= 2);
+      // ⚠️ NON-VACUITY AGAIN: if `parts` stopped resolving, this whole check would pass on an empty list —
+      // which is exactly how I measured 0 the first time and nearly concluded the bug was harmless.
+      check("CCODE-252: the braid recipes actually resolve their parts (floor — 0 resolvable would pass anything)",
+        resolvable.length >= 20, `resolvable: ${resolvable.length} of ${recipes.length}`);
+      const understated = resolvable.filter(r => {
+        const rungs = r.parts.map(p => abil[p]?.harmRung || "none");
+        return pick(rungs) === "none" && rungs.some(x => x !== "none");
+      });
+      check("CCODE-252: no braid is minted 'harms nothing' while a parent wounds — seven were, before this",
+        understated.length === 0, `still understated: ${understated.map(r => r.id).join(", ")}`);
+    }
+  }
+
 
 
 

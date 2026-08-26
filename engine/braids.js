@@ -20,7 +20,21 @@ import { deriveMechanic } from "./craftmechanics.js";  // SNG-263 §9: a braid i
 export const BRAID_RIPEN_AT = 5; // co-activations before a pairing is EARNED as a braid — a clearly deliberate
 //   pattern (Silas's Double Register sits at 5, and Erik treats it as canon). Tunable; a lower bar risks
 //   braid-spam from incidental pairings, a higher one is the unreachability this ticket exists to fix.
-const HARM_ORDER = ["none", "restraint", "wounding", "lethal", "atrocity"]; // harsher parent sets the braid's rung
+// ⛔ CCODE-252 — THIS LADDER WAS THE WRONG VOCABULARY AND THE COMMENT BELOW IT WAS THEREFORE FALSE.
+// It read ["none","restraint","wounding","lethal","atrocity"]. The corpus authors exactly FOUR values —
+// `none` (987) `incapacitating` (171) `damaging` (136) `lethal` (83) — and only `none` and `lethal` were in
+// both lists. `indexOf` returned -1 for `damaging` and `incapacitating`, which sorts them BELOW `none`.
+//
+// ⚠️ SO "harsher parent sets the braid's rung" did the opposite: braiding a WOUNDING craft with a harmless
+// one produced `none`, and `harmRungGloss("none")` tells the GM "this craft HARMS NOTHING — NEVER invent a
+// wound from it." SEVEN SHIPPED BRAIDS said that while a parent wounded: the_sounding, the_sung_lattice,
+// the_tended_end, the_singing_dark, the_wild_green, the_measured_ruin, the_beast_read.
+//
+// ⚠️ THE damaging-VS-incapacitating ORDER BELOW IS NOT A RULING. `progression.js` glosses them as different
+// KINDS, not rungs — one wounds without stopping, the other stops without wounding — so "harsher" is
+// ill-posed for that pair. It does not occur in any shipped recipe (measured: 0 of 50), so this order is
+// arbitrary where content never exercises it. If a braid ever pairs them, it wants Erik, not a sort.
+const HARM_ORDER = ["none", "damaging", "incapacitating", "lethal"];
 const ROMAN = ["I", "II", "III"];
 
 /** SNG-196: the pairings a character has EARNED the right to braid — co-activated at least `threshold`

@@ -36,22 +36,36 @@ plate and landing on a two-year-unmaintained body.**
 (*"armour beats this craft in a way it beats almost nothing else"*). **That bound is now wrong too and I
 will fix it once this lands.**
 
-### 1b — WHAT I THINK THE FIX IS, THOUGH THE SHAPE IS YOURS
+### 1b — ⛔ ERIK'S CORRECTION: BASIC ARMOUR IS FINE. THE GAP IS THAT WARDS DO NOT EXIST AS GEAR.
 
-**Synthesised layers should carry a type — almost certainly `physical` — so that:**
+**Erik: *"basic armour is good for most basic things — but that's why you need wards and accessories that
+can carry resistance and soak. Pell's brigandine has some such wards."*** ⚠️ **THIS CHANGES MY PROPOSED
+FIX AND I WITHDRAW THE FIRST VERSION.**
 
-- a sword, a fall, a club → **soaked as now**
-- ⛔ **`decay`, `feeling`, `judgement`, `truth`, `abstraction` → PASS STRAIGHT THROUGH plate**
-- a foe that should resist rot (a warded vigil, a consecrated ground, a construct) **carries an explicit
-  `decay`-typed layer**, authored, and that is what makes it special
+**I was going to ask you to type every synthesised layer `physical`. That is too blunt.** ⛔ **THE MODEL
+ERIK IS DESCRIBING HAS TWO PARTS AND THE GAME HAS ONLY ONE OF THEM:**
 
-⚠️ **THIS IS A BALANCE EVENT, NOT A TIDY-UP.** **Every mind-facing and rot-facing craft in the game gets
-substantially stronger against armoured foes the moment it ships**, and every heavily-armoured foe becomes
-correctly vulnerable to exactly the things plate was never going to help with. ⛔ **It may want a pass over
-the bestiary in the same breath.**
+| | what it does | state |
+|---|---|---|
+| **basic armour** | soaks ordinary harm — blades, falls, clubs | ✅ **works today** |
+| ⛔ **wards and accessories** | carry TYPED resistance: decay, feeling, judgement, truth | ⛔ **DO NOT EXIST** |
 
-**MY ASK IS NOT "SHIP IT" — it is: confirm the read, then tell me whether this is a one-line default or a
-bestiary project.** **I would rather it be the second done properly than the first done quickly.**
+⛔ **MEASURED: ZERO ITEMS IN THE CORPUS CARRY `wardTypes`.** ⚠️ **48 CRAFTS DO, so the concept is authored
+on the ability side and has no equipment counterpart at all.** **A character cannot buy, loot, or forge
+protection against rot.**
+
+**SO THE REAL SHAPE IS:**
+
+1. **Basic soak stays broadly effective** — it is the floor and it should be, and a plate coat SHOULD blunt
+   a lot of things. ⚠️ **My round-eleven zero may not have been as wrong as I first said.**
+2. ⛔ **BUT A PURE-DECAY OR PURE-FEELING WORKING SHOULD NOT BE FULLY ANSWERED BY UNTYPED PLATE** — it should
+   be blunted, not stopped. **A partial answer, not a wall.**
+3. ⛔ **AND THE INTERESTING DEFENCE SHOULD BE GEAR: a warded brigandine, a consecrated pendant, a charm
+   against rot** — authored items carrying `wardTypes`, which is where a player's choices should live.
+
+⚠️ **THE QUESTION FOR YOU IS WHICH HALF IS THE TICKET.** **[A] I think the GEAR half is the real work and
+the more valuable** — it gives the economy something to sell, gives wards a reason to be looted, and makes
+the typed-layer machinery reachable at last. **The soak-tuning half is a dial and can follow.**
 
 ---
 

@@ -242,3 +242,31 @@ in the tradition-level sweep.
 ⚠️ **NOT to be solved one craft at a time inside the Death audit.** ⛔ **`under_song` (was `shared_grief`)
 was deliberately made EMOTION-AGNOSTIC so it reads whatever is actually underneath — rage, love, relief —
 and therefore does not pre-empt this ruling.**
+
+## ⛔ WARDED GEAR DOES NOT EXIST (measured 2026-08-24)
+
+**48 crafts carry `wardTypes`. ⛔ ZERO ITEMS DO.** ⚠️ **The typed-soak machinery in `skill_battle.js`
+(`answers = l => !l.type || !dmgType || l.type === dmgType`) is correct, complete, and has nothing to
+answer with — because nothing a character can WEAR carries a type.**
+
+**Erik 2026-08-24: *"basic armour is good for most basic things — but that's why you need wards and
+accessories that can carry resistance and soak. Pell's brigandine has some such wards."*** ⚠️ **Pell's
+brigandine is not authored as an item; the wards are a character fact with no record.**
+
+**WHAT THIS UNLOCKS:** typed resistance as LOOT and as CRAFT-WORK · a reason to buy a consecrated pendant ·
+Death-Ward's `decay` becoming a thing a smith can approximate in leather · ⛔ **and the whole
+`wardTypes` vocabulary becoming reachable from the equipment side for the first time.**
+
+## ⚠️ THRENODY MAY BE A SCHOOL, NOT A TRADITION (Erik, 2026-08-24)
+
+**Erik: *"I agree that threnodist is less a full tradition and more a flavour or school — which is why
+we're working this audit."*** ⛔ **THIS BEARS DIRECTLY ON THE PARKED 14-TRADITION MERGER
+(`traditions_v2.json`), and it is the first tradition the audit has produced structural evidence about.**
+
+**The evidence, measured:** 12 of 15 crafts are grief · joy appears twice and never as the subject ·
+love, hope, longing, awe absent entirely · ⛔ **six of fifteen crafts were support-shaped with no
+mechanical benefit, and three needed full rebuilds** (`shared_weight` → interception, `wellspring` →
+bolster, `shared_grief` → `under_song`).
+
+⚠️ **A tradition should be able to carry a party role by itself. Threnody could not narrate into a fight
+without borrowing** — every scene ran through the Ashwarden.

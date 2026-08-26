@@ -19086,6 +19086,68 @@ await (async () => {
         { policy: "healer", knowledge: TG.foeKnowledge(0), taunt: { targetId: "veth", rounds: 2 } }).target.id === "veth");
   }
 
+  // 5al · CCODE-260 — INTERCEPTION IS TYPED, AND A SAVE IS NOT AN AUTHORITY.
+  //
+  // ⛔ ERIK: "the skill that lets you intercept was a Death skill and was for conditions - so that was
+  // correct... however, some skills (yet to be allocated) will likely let you intercept a blow (damage) as
+  // well. so keep that in mind."
+  //
+  // ⚠️ I HAD MADE EVERY PROTECTION EAT DAMAGE. Running his party showed "PELL STEPS IN FRONT OF MARROW" and
+  // then "it lands on MARROW for 6", so I joined interception to the damage path — and thereby handed
+  // `shared_weight` (Threnodist, Death, `interceptCondition`) a power its author never gave it. The demo
+  // found a real gap and I fixed it in the wrong place: the gap is a MISSING CRAFT, not a missing join.
+  {
+    const IC = await import("../engine/intercept.js");
+    const base = IC.openProtection({ protectorId: "veth", allyId: "marrow", rank: 2 });
+    check("CCODE-260: a protection catches CONDITIONS by default — the only craft that opens one says so",
+      IC.catchesCondition(base) === true && IC.catchesDamage(base) === false);
+    const bodyguard = IC.openProtection({ protectorId: "veth", allyId: "marrow", rank: 2, catches: ["damage"] });
+    check("CCODE-260: …and a craft that says `damage` catches blows instead — the reader exists before the craft does",
+      IC.catchesDamage(bodyguard) === true && IC.catchesCondition(bodyguard) === false);
+    check("CCODE-260: a protection may catch both, for a craft that eventually does",
+      IC.catchesDamage(IC.openProtection({ protectorId: "v", allyId: "m", rank: 3, catches: ["condition", "damage"] })) === true);
+
+    // ⛔ AND THE AUTHORED CRAFT MUST STILL BE CONDITION-ONLY. If `shared_weight` ever starts catching blows
+    // without its author saying so, this goes red — which is the whole point of the gate.
+    {
+      const CM260 = await import("../engine/craftmechanics.js");
+      const abil = {};
+      for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(f => f.endsWith(".json"))) {
+        const j = JSON.parse(readFileSync(join(root, "content/packs/core/abilities", f), "utf8"));
+        for (const a of (j.abilities || j.items || [])) abil[a.id] = a;
+      }
+      const sw = abil["shared_weight"];
+      check("CCODE-260: the interception craft exists (floor — a missing craft would pass everything below)", !!sw);
+      if (sw) {
+        const p = IC.protectionFromCraft(sw, 2, { protectorId: "veth", allyId: "marrow", authoredBlock: CM260.authoredBlock });
+        check("CCODE-260: Erik's Death craft opens a CONDITION protection and not a damage one",
+          !!p && IC.catchesCondition(p) === true && IC.catchesDamage(p) === false);
+      }
+    }
+
+    // ═══ A SAVE IS NOT AN AUTHORITY ═══
+    // ⛔ I "CORRECTED" A CORRECT FIXTURE USING A CONFUSED SAVE. The fixture said Siol was an "elf of the
+    // quickwood"; her save record said "Traveler and warden of the Pale March"; I took the save as ground
+    // truth and overwrote the fixture. Erik: "Siol IS an Elf of the Quickwood - the game kind of confused
+    // her for a warden."
+    // ⚠️ A SAVE HOLDS GM-GENERATED PROSE WRITTEN A TURN AT A TIME BY A NARRATOR THAT CAN DRIFT. It records
+    // what was SAID, not what is TRUE. Authored content and the person whose game it is are authorities.
+    // ⛔ AND THE DRIFT WAS AN INVERSION ALONG ONE AXIS: the Quickwood is the LIFE pole of death_life and the
+    // Rootkin tend the living current; the Ashwardens are the DEATH pole of that same axis. It put her at
+    // the opposite end of her own axis. That is the shape to watch for — not noise, a mirror.
+    {
+      const orig = JSON.parse(readFileSync(join(root, "content/packs/core/rules/origins.json"), "utf8"));
+      const rootkin = (orig.origins || orig.items || []).find(o => o.id === "rootkin");
+      check("CCODE-260: the Rootkin are an authored people of the Quickwood, at the LIFE pole",
+        !!rootkin && rootkin.homeRegion === "the_quickwood" && rootkin.pole === "Life");
+      // ⚠️ and the pole they were confused WITH is the other end of the same axis — which is why it happened
+      check("CCODE-260: …and 'ashwarden' is the DEATH end of that same axis — an inversion, not a random slip",
+        /ashwarden/i.test(readFileSync(join(root, "content/packs/core/rules/nexuses.json"), "utf8"))
+        || /ashwarden/i.test(JSON.stringify(orig)));
+    }
+  }
+
+
 
 
 
@@ -19152,6 +19214,14 @@ await (async () => {
     const veth = { id: "veth-ondra", name: "Veth", role: "warden of the palelands", roles: ["trainer"],
       met: 60, firstMet: { day: 20 }, standing: 55, assistTags: ["guard", "study", "watch"],
       skillsObserved: ["palework", "set hand", "the attended end"] };
+    // ⛔ CCODE-260 — I "CORRECTED" THIS FIXTURE AND IT WAS ALREADY RIGHT. It said "elf of the quickwood".
+    // I found "Traveler and warden of the Pale March" in Erik's save, treated the save as ground truth, and
+    // overwrote the fixture to match. ⚠️ ERIK: "Siol IS an Elf of the Quickwood - the game kind of confused
+    // her for a warden."
+    // ⛔ THE LESSON IS NOT "CHECK WITH ERIK". IT IS THAT A SAVE IS NOT AN AUTHORITY. A save holds
+    // GM-generated prose about a character, written a turn at a time by a narrator that can drift — it
+    // records what was SAID, not what is TRUE. Authored content and the person whose game it is are
+    // authorities. I had spent the day insisting every check cite its source and then cited the wrong kind.
     const siol = { id: "siol", name: "Siol", role: "elf of the quickwood", roles: ["ally"],
       met: 12, firstMet: { day: 180 }, standing: 20, assistTags: ["track", "scout", "green"],
       skillsObserved: ["green road", "wildcraft"] };
@@ -19174,8 +19244,25 @@ await (async () => {
     // her occupation IS the declaration, and requiring a second one restates in data what the role says.
     check("CCODE-248b: a WARDEN is marked MARTIAL by her occupation alone",
       CB2.contributionsOf(veth).includes("MARTIAL"));
-    check("CCODE-248b: …as is a recruited ally, by their company role",
-      CB2.contributionsOf(siol).includes("MARTIAL"));
+    // ⛔ CCODE-259 — THIS ASSERTED THE WRONG THING AND ERIK'S OWN SAVE PROVED IT. It claimed a recruited
+    // ally is martial "by their company role", and the implementation read `roles: ["ally"]` — which is
+    // exactly what the company roster writes for EVERY member. So the flag marked everyone martial and
+    // meant nothing. In Silas's party it made Calvar a fighter: a past-sixty filtration engineer with a
+    // drafting-pen callus. ⚠️ "ALLY" IS A RELATIONSHIP, NOT A ROLE IN A FIGHT.
+    // Siol is still martial — because she is "Traveler and warden of the Pale March", and WARDEN is the
+    // word doing the work. That is the claim worth gating.
+    check("CCODE-260: a recruited ally is martial by their OCCUPATION, never by being an ally",
+      CB2.contributionsOf({ id: "w", name: "A Warden", roles: ["ally"], role: "warden of the march" }).includes("MARTIAL")
+      && !CB2.contributionsOf({ id: "x", name: "An Ally", roles: ["ally"], role: "filtration engineer" }).includes("MARTIAL"));
+    // ⚠️ AND AN ELF OF THE QUICKWOOD IS NOT A SOLDIER BY OCCUPATION. Whether Siol fights is a fact about
+    // Siol, authored on her record — not something to read out of the word "elf".
+    check("CCODE-260: 'elf of the quickwood' is not a fighting occupation — being uncommon is not being armed",
+      !CB2.contributionsOf(siol).includes("MARTIAL"));
+    // ⛔ AND THE AUTHORED FIELD IS THE ANSWER FOR ANYONE PROSE CANNOT SEE. Erik: "um... Pell fights too...
+    // she uses a spear, hammer, shortsword, brigandine" — and her role reads "Village blacksmith". No regex
+    // will ever find that, which is the whole reason `combatant` exists.
+    check("CCODE-259: …and an authored `combatant: true` overrides prose that cannot see the fighter",
+      CB2.contributionsOf({ id: "p", name: "A Smith", role: "Village blacksmith", combatant: true }).includes("MARTIAL"));
     // ⚠️ AND NOBODY IS A SOLDIER BY DEFAULT. The list is jobs whose whole function is standing between
     // something and someone — a blacksmith is strong and is not one of them.
     // ⛔ PELL FIGHTS. Erik: "she uses a spear, hammer, shortsword, brigandine." She mends, she makes, she

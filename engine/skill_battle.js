@@ -7,7 +7,7 @@
 
 import { resolveAction } from "./resolve.js";
 import { chooseTarget, foeKnowledge } from "./targeting.js";   // CCODE-250: a foe chooses who to hit
-import { redirectImposition } from "./intercept.js";   // CCODE-250: …and someone may step in front of it
+import { redirectImposition, interceptorFor, catchesCondition, catchesDamage } from "./intercept.js";   // CCODE-250: …and someone may step in front of it
 import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, ongoingHarmOf, authoredBlock, resolveProvoke, resolveSoothe, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -1137,6 +1137,33 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         ...(pierce ? { pierce, pierceNote: `${pierce} bypassed armour entirely` } : {}),
         ...(soak || cutThrough || pierce ? { rolled: hit, soaked: Math.max(0, hit - Math.max(0, landed - pierce)), soak,
           ...(cutThrough ? { penetrated: cutThrough, penetration: pen } : {}) } : {}) };
+
+      // ⛔ CCODE-259 — INTERCEPTION CAUGHT CONDITIONS AND NOT BLOWS, AND THAT IS NOT WHAT "STEP IN FRONT OF
+      // SOMEONE" MEANS TO ANYONE. CCODE-246 built `redirectImposition` — the name says imposition — and
+      // CCODE-250 joined it to the imposition path only. So Pell could put herself between the reaver and
+      // Marrow, the receipt would say she had, and the blow would land on Marrow anyway.
+      // ⚠️ FOUND BY RUNNING ERIK'S OWN PARTY rather than by a gate: the demo printed "PELL STEPS IN FRONT OF
+      // MARROW" and then "it lands on MARROW for 6" two lines later.
+      // ⛔ AND THE HIT IS RE-SOAKED BY THE PROTECTOR, not merely relabelled. The whole point of the tank is
+      // that they are BETTER at eating it; moving the number without moving the armour would make Pell a
+      // bookkeeping entry, which is the exact failure CCODE-246 §5.1 exists to prevent.
+      // ⚠️ ONLY A PROTECTION THAT CATCHES BLOWS. Erik: the Death craft that opens one today is FOR
+      // CONDITIONS, and making every protection eat damage handed it a power its author never gave it.
+      // Filtered here rather than in `interceptorFor`, so the condition path keeps using the same chooser.
+      const dmgGuards = (protections || []).filter(catchesDamage);
+      if (damage && damage.onId && dmgGuards.length) {
+        const guard = interceptorFor(damage.onId, dmgGuards, Object.fromEntries((allies || []).map(x => [x.id, x.sheet || {}])));
+        if (guard) {
+          const gs = (allies || []).find(x => x.id === guard.protection.protectorId);
+          const gSoak = Math.max(0, Number(gs?.sheet?.soak) || 0);
+          const raw = Number(damage.rolled ?? (damage.amount + (damage.soaked || 0))) || damage.amount;
+          const through = Math.max(Number(sb?.damage?.minHit ?? 1), raw - gSoak);
+          damage = { ...damage, amount: through, soaked: Math.max(0, raw - through), soak: gSoak,
+            onId: gs?.id ?? guard.protection.protectorId, onName: gs?.name ?? guard.protection.protectorId,
+            intercepted: { caughtBy: guard.protection.protectorId, onBehalfOf: damage.onId,
+              why: (gs?.name || "they") + " took it instead" } };
+        }
+      }
       // CCODE-83: `landed` is NEGATIVE when the target ABSORBS this damage type, so this same line heals it —
       // but `Math.max(0, ...)` bounds only the floor, and an absorbing foe would have healed WITHOUT LIMIT,
       // becoming unkillable by anyone who kept hitting it with the thing it eats. Thematic; still a bug.
@@ -1224,10 +1251,11 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // ⚠️ AND ERIK'S TRADE IS ENFORCED UPSTREAM, NOT HERE — a protection had to be DECLARED, which means
       // the protector had to have SEEN the aim, which means they read instead of hiding. This function only
       // honours a decision already paid for.
-      if (imposed && imposed.onId && protections && protections.length) {
+      const condGuards = (protections || []).filter(catchesCondition);
+      if (imposed && imposed.onId && condGuards.length) {
         const sheetsById = Object.fromEntries((allies || []).map(a => [a.id, a.sheet || {}]));
         const caught = redirectImposition({
-          aimedAt: imposed.onId, sourceId: "opponent", protections, sheets: sheetsById,
+          aimedAt: imposed.onId, sourceId: "opponent", protections: condGuards, sheets: sheetsById,
           imposition: { condition: imposed.condition, degradesTo: spec?.degradesTo, onCrit: spec?.onCrit },
           degree: winRoll.degree });
         // ⚠️ NULL MEANS NOBODY STOOD THERE, and the imposition is exactly what it was. Additive.

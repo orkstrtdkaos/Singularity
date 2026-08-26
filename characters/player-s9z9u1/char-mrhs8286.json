@@ -3830,7 +3830,9 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 21
+      "met": 21,
+      "combatant": true,
+      "_combatantNote": "⛔ ERIK, 2026-08-26: \"pell is martial too.\" And earlier: \"um... Pell fights too... she uses a spear, hammer, shortsword, brigadine, etc...\"\n⚠️ NO PROSE HEURISTIC WILL EVER FIND THIS. Her role reads \"Village blacksmith, traveling companion, partner\", and the fighting-role list keys on words like warden, guard, soldier, marshal. A regex that found the spear in \"blacksmith\" would find a spear in everything.\n⛔ THAT IS THE ENTIRE REASON `combatant` IS AN AUTHORED FIELD RATHER THAN AN INFERENCE. Erik, on the roster generally: \"some of them are more geared toward that than others and for some it would be that they just aren't geared that way.\" Inference handles the obvious cases; the field handles the true ones."
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -4350,8 +4352,8 @@
     "siol": {
       "id": "siol",
       "name": "Siol",
-      "role": "Traveler and warden of the Pale March",
-      "description": "A tall Elven woman of perhaps forty apparent years, long pale coat, hair braided with a dark cord — the stillness of attention held very quiet, not indifference.",
+      "role": "Rootkin of the Quickwood, traveling far from the Heartroot",
+      "description": "A tall Rootkin woman of perhaps forty apparent years — her people measure a life in centuries — long pale coat, hair braided with a dark cord. The stillness of attention held very quiet, not indifference.",
       "firstMet": {
         "locationId": "gen-waygate",
         "day": 6
@@ -4396,10 +4398,11 @@
         "day": 15
       },
       "domains": {
-        "primary": "ashwarden"
+        "primary": "rootkin"
       },
-      "domainsSource": "derived",
-      "met": 2
+      "domainsSource": "erik",
+      "met": 2,
+      "_domainCorrection": "⛔ ERIK, 2026-08-26: \"Siol IS an Elf of the Quickwood - the game kind of confused her for a warden. Make her what an elf would be.\" Was role \"Traveler and warden of the Pale March\", domains {primary: ashwarden}, domainsSource \"derived\".\n⚠️ THE DRIFT WAS AN INVERSION ALONG ONE AXIS, NOT A RANDOM ERROR. The Quickwood is the LIFE pole of death_life and the Rootkin tend the living current; the Ashwardens are the DEATH pole of that same axis and the Palelands is its region. The derivation put her at the opposite end of her own axis, twice.\n⛔ AND THE RECORD WAS NOT CONFUSED THROUGHOUT — only the LABEL was. Every observation the game made of her already reads Rootkin: \"accurate qualification of a living entity's nature\", \"the Ent receives intention, not craft\", \"the grove's receiving the ward\", \"she comes to witness, not to intervene\". The narrator watched her correctly for fifteen meetings and the inference overrode what it had seen.\n⚠️ knownFacts about the Pale March gate and Raven's Home are KEPT: a traveler knowing a gate setting is a thing she knows, not a thing she is."
     },
     "orvil": {
       "id": "orvil",
@@ -13831,7 +13834,7 @@
     "carousing": 0.04655576660915479,
     "amorous": 0.17113875306450785,
     "patient": 0.962773227675111,
-    "stealth": 0.000010007425894571958,
+    "stealth": 1.0007425894571958e-05,
     "devotion": 0.4089364629698379,
     "craft": 2.306299478936478,
     "leadership": 1.3311756428107855,

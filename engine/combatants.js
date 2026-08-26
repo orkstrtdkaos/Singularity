@@ -81,7 +81,12 @@ export function contributionsOf(record, { tagFamilies = null, fightingRoles = nu
   // occupation. A regex over prose finds words, not facts, and I did it an hour after gating against it.
   const martial = (fightingRoles || DEFAULT_FIGHTING_ROLES).some(w =>
     new RegExp("\\b" + w + "\\b").test(roleText))
-    || (record?.roles || []).includes("ally")
+    // ⛔ CCODE-259 — `roles: ["ally"]` WAS HERE AND IT MADE THE WHOLE FLAG MEANINGLESS. That value is what
+    // the COMPANY roster writes when someone joins you; every single company member carries it. So this line
+    // marked everyone martial, including Calvar — a past-sixty filtration engineer with a drafting-pen
+    // callus, in Erik's own save. ⚠️ "ALLY" IS A RELATIONSHIP, NOT A ROLE IN A FIGHT, and conflating them
+    // undid the exact distinction this module exists to draw. Erik: "some of them are more geared toward
+    // that than others and for some it would be that they just aren't geared that way."
     || (record?.inventory || []).some(i => String(i?.kind || "").toLowerCase() === "weapon")
     || record?.combatant === true;
   if (martial && !out.includes("MARTIAL")) out.push("MARTIAL");
@@ -156,7 +161,13 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
   const opts = { tagFamilies };
   const out = [{
     id: character?.id || "player", name: character?.name || "you", kind: "player",
-    present: true, canAct: true, contributions: ["HARM"], record: character, sheet: character,
+    // ⛔ CCODE-259 — THE PLAYER IS A COMBATANT BY DEFINITION AND THIS LINE SAID OTHERWISE. It listed only
+    // HARM, so a roster print of Erik's own party put SILAS in the "cannot swing" column — a level-30
+    // character whose two best crafts are lethal braids he minted himself.
+    // ⚠️ ERIK, ON EXACTLY THIS: "just because silas isn't physical doesn't mean he doesn't fight... he's
+    // lethal." MARTIAL here has never meant "has a high physical" — it means this one fights on purpose,
+    // and the person the whole contest is built around always does.
+    present: true, canAct: true, contributions: ["HARM", "MARTIAL"], record: character, sheet: character,
     downed: character?.downed || null,
   }];
   const level = num(character?.level, 1);
@@ -193,7 +204,8 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
     if (!p) continue;
     out.push({
       id: p.id || p.characterId || null, name: p.name || p.id || "an ally", kind: "party",
-      present: true, canAct: true, contributions: ["HARM"], record: p, sheet: p.sheet || p,
+      // a human party member is a player too — same rule as above.
+      present: true, canAct: true, contributions: ["HARM", "MARTIAL"], record: p, sheet: p.sheet || p,
       downed: p.downed || null,
     });
   }

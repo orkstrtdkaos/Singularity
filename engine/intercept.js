@@ -24,9 +24,17 @@ const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) 
 // returns 0 because 0 is a perfectly good number — so r2 hardened the taker by nothing at all. Third time
 // this session a default has swallowed a fallback, and the same root as `Number(null) === 0`: an ABSENT
 // value has to stay absent long enough for the default to run.
-export function openProtection({ protectorId, allyId, rank = 1, roundsLeft = null, resistBonus = null } = {}) {
+export function openProtection({ protectorId, allyId, rank = 1, roundsLeft = null, resistBonus = null , catches = null } = {}) {
   const r = Math.max(1, num(rank, 1));
   return {
+    // ⛔ CCODE-260 / ERIK: "the skill that lets you intercept was a Death skill and was for conditions - so
+    // that was correct... however, some skills (yet to be allocated) will likely let you intercept a blow
+    // (damage) as well. so keep that in mind."
+    // ⚠️ SO INTERCEPTION IS TYPED, AND CONDITIONS ARE THE DEFAULT because the only craft that opens one
+    // today authors `interceptCondition` — the key name says it. ⛔ I HAD MADE EVERY PROTECTION CATCH BLOWS,
+    // which quietly handed `shared_weight` a power its author never gave it. A reader built ahead of the
+    // content it serves is right; a reader that ASSUMES the content is not.
+    catches: Array.isArray(catches) && catches.length ? catches.slice() : ["condition"],
     protectorId, allyId, rank: r,
     // r1 is spent by ONE imposition; r2+ runs for its duration
     chargesLeft: r >= 2 ? null : 1,
@@ -55,13 +63,23 @@ export function openProtection({ protectorId, allyId, rank = 1, roundsLeft = nul
 export function protectionFromCraft(ability, rank, { protectorId, allyId, authoredBlock } = {}) {
   if (!ability || typeof authoredBlock !== "function") return null;
   const r = Math.max(1, num(rank, 1));
-  const spec = authoredBlock(ability, "interceptCondition", r);
+  // ⛔ CCODE-260 — TWO AUTHORED DOORS, AND ONLY ONE OF THEM EXISTS IN CONTENT TODAY. `interceptCondition`
+  // is `shared_weight`'s (Threnodist, Death) and it catches bindings. `interceptDamage` is the reader for
+  // the crafts Erik says are coming — unauthored by anything right now, and that is the correct state:
+  // build the reader, default the dial to a no-op, let content turn it on.
+  const condSpec = authoredBlock(ability, "interceptCondition", r);
+  const dmgSpec = authoredBlock(ability, "interceptDamage", r);
+  const spec = condSpec || dmgSpec;
   if (!spec) return null;
+  const catches = [];
+  if (condSpec) catches.push("condition");
+  if (dmgSpec) catches.push("damage");
   const reflects = authoredBlock(ability, "reflectCondition", r) === true;
   const p = openProtection({
     protectorId, allyId, rank: r,
     roundsLeft: spec.rounds ?? null,
     resistBonus: spec.resistBonus ?? null,
+    catches,
   });
   // ⚠️ THE AUTHORED SHAPE OVERRIDES THE RANK HEURISTIC. `openProtection` infers charges/duration from
   // the rank because a craft may author neither; when the craft DOES say, the craft wins.
@@ -194,3 +212,8 @@ export function tickProtections(protections = []) {
   }
   return live;
 }
+
+/** ⚠️ WHAT THIS PROTECTION IS ACTUALLY STANDING IN FRONT OF. Two questions, never one — a craft that eats a
+ *  binding meant for an ally is not thereby a craft that eats a spear, and Erik's Death skill is the former. */
+export function catchesCondition(p) { return (p?.catches || ["condition"]).includes("condition"); }
+export function catchesDamage(p) { return (p?.catches || ["condition"]).includes("damage"); }

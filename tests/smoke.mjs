@@ -18445,6 +18445,168 @@ await (async () => {
       IC.redirectImposition({ aimedAt: "nobody", protections: [], sheets, imposition: imp, degree: "success" }) === null);
   }
 
+  // 5ae · ⛔ CCODE-250 / Erik — A FOE CHOOSES WHO TO HIT, AND YOU HAVE TO LOOK TO KNOW.
+  // Erik: "Yes a foe chooses who to hit... this makes the sense round even more interesting - you need to
+  // sense who's getting attacked so you can intervene if you want.... if you obscure yourself you aren't
+  // going to know that information."
+  // Until this, `oppDecl` resolved against `playerSheet` and nothing was aimed anywhere — which meant
+  // `intercept.js` (CCODE-246) protected against a blow that could never have been coming for an ally.
+  {
+    const TG = await import("../engine/targeting.js");
+    const SN = await import("../engine/sense.js");
+    const { battleRound } = await import("../engine/skill_battle.js");
+    const CONTENT = { rules: JSON.parse(readFileSync(join(root, "content/packs/core/rules/resolution.json"), "utf8")),
+      skillBattle: JSON.parse(readFileSync(join(root, "content/packs/core/rules/skill_battle_system.json"), "utf8")),
+      steps: JSON.parse(readFileSync(join(root, "content/packs/core/rules/craft_mechanics.json"), "utf8")) };
+    const party = [
+      { id: "player", name: "Wren", contributions: ["HARM","MARTIAL"], threatDealt: 12, sheet: { attributes: { physical: 8 }, level: 9 } },
+      { id: "sprig", name: "Sprig", contributions: ["RESTORE"], sheet: { attributes: { mental: 2 }, level: 4 } },
+      { id: "veth", name: "Veth", contributions: ["PROTECT","HARM","MARTIAL"], threatDealt: 4, sheet: { attributes: { physical: 7 }, level: 12 } },
+    ];
+
+    // ⛔ THE GATE I WROTE FIRST AND WOULD KEEP: with nobody else present, a round is what it always was.
+    const solo = TG.chooseTarget([party[0]], { policy: "weakest" });
+    check("CCODE-250: a lone target is not a choice — the 1v1 path is untouched",
+      solo.policy === "only" && solo.target.id === "player");
+
+    // ⚠️ AND THE ENGINE-LEVEL VERSION OF THAT SAME CLAIM: no `allies` means no aim on the receipt at all,
+    // so every existing caller, save and receipt reads exactly as before.
+    check("CCODE-250: battleRound with no allies attaches no targetChoice — additive, not a rewrite",
+      (() => { const r = battleRound({ playerDecl: { function: "harm", name: "strike", dice: "1d6" },
+          oppDecl: { function: "harm", name: "strike", dice: "1d6" },
+          playerSheet: { attributes: { physical: 5 }, energy: 20 }, oppSheet: { attributes: { physical: 5 }, energy: 20 },
+          rules: CONTENT.rules, sb: CONTENT.skillBattle.engine, steps: CONTENT.steps, rng: () => 0.5 });
+        return r.opponent.targetChoice === undefined && r.aimedAt === undefined; })());
+
+    // ⛔ THE POLICIES ARE DIFFERENT ANSWERS, not one answer with labels. If they all picked the same ally
+    // the whole mechanic would be decoration.
+    const picks = ["threat","weakest","healer"].map(p => TG.chooseTarget(party, { policy: p }).target.id);
+    check("CCODE-250: the policies genuinely disagree — a predator, a tactician and a veteran pick differently",
+      picks[0] === "player" && picks[1] === "sprig" && picks[2] === "sprig" && new Set(picks).size === 2);
+    // ⚠️ AND `threat` IS THE DEFAULT ON PURPOSE — a foe that always went for the softest target would make
+    // every fight the same fight. Going for what hurts it is BAIT-ABLE, which is a decision.
+    check("CCODE-250: the default is threat, and it is bait-able — drop your threat and it looks elsewhere",
+      TG.chooseTarget(party).target.id === "player"
+      && TG.chooseTarget([{ ...party[0], threatDealt: 0, contributions: [] }, party[1], party[2]]).target.id === "veth");
+
+    // ⛔ THE DOWNED ARE NOT TARGETS.
+    check("CCODE-250: something already out of the fight is not swung at again",
+      TG.chooseTarget([{ ...party[1], downed: true }, party[2]], { policy: "weakest" }).target.id === "veth");
+
+    // ═══ ERIK'S TRADE, WHICH IS THE POINT OF THE WHOLE FILE ═══
+    const choice = TG.chooseTarget(party, { policy: "healer" });
+    const asWren = t => TG.revealTarget(choice, t, { viewerId: "player" });
+    check("CCODE-250: tier 0 — the character who OBSCURED instead of reading learns nothing at all",
+      asWren(0).known === false && asWren(0).targetName === undefined && asWren(0).someoneElse === undefined);
+    check("CCODE-250: tier 1 — a weak read tells you only that it is not looking at YOU",
+      asWren(1).known === false && asWren(1).someoneElse === true);
+    check("CCODE-250: tier 2 — a real read NAMES the mark, which is what makes stepping in front possible",
+      asWren(2).known === true && asWren(2).targetName === "Sprig" && asWren(2).reason === undefined);
+    check("CCODE-250: tier 3 — a decisive read says WHY, and the why is what lets you bait it next round",
+      asWren(3).known === true && typeof asWren(3).reason === "string" && asWren(3).reason.length > 5);
+
+    // ⛔ THE PRICE, STATED AS A MECHANIC: hiding protects you and blinds you. A tank who obscures is safe
+    // and useless. That is a decision every single round, and it did not exist before this build.
+    check("CCODE-250: you cannot intervene for someone you did not see targeted — obscuring FORFEITS the save",
+      TG.canInterveneFor(asWren(0)) === false && TG.canInterveneFor(asWren(1)) === false
+      && TG.canInterveneFor(asWren(2)) === true);
+    check("CCODE-250: …and you never 'intervene' for yourself — that is just defending",
+      TG.canInterveneFor(TG.revealTarget(TG.chooseTarget(party, { policy: "threat" }), 3, { viewerId: "player" })) === false);
+
+    // ⛔ READER BEFORE FIELD, AND THEN THE FIELD. The ladder is content-dialled; tier 0's authored reveals
+    // must NOT contain "target" or the obscurer's blindness evaporates silently.
+    const vis = CONTENT.skillBattle.engine.senseVisibility;
+    check("CCODE-250: the reveal is AUTHORED onto the ladder at 1/2/3 — and deliberately absent at tier 0",
+      !vis["0"].reveals.includes("target") && vis["1"].reveals.includes("target")
+      && vis["2"].reveals.includes("target") && vis["3"].reveals.includes("target"));
+
+    // ⚠️ AND THE READER IS REACHED. A field authored and never read is this project's commonest defect and
+    // I have shipped it repeatedly — so the gate goes through senseOpponent itself, not past it.
+    const oppReceipt = { margin: 3, function: "harm", name: "gutting blow", targetChoice: choice };
+    const seen = t => SN.senseOpponent({ id: "player" }, oppReceipt, CONTENT.rules, CONTENT.skillBattle.engine, { earnedTier: t });
+    check("CCODE-250: senseOpponent ITSELF surfaces the aim — the reveal is wired, not merely authored",
+      seen(2).revealed.target?.targetName === "Sprig" && seen(3).revealed.target?.reason
+      && seen(0).revealed.target === undefined);
+    // ⛔ AND THE REVEAL CARRIES THE ANSWER THE UI NEEDS — not just "who", but "can I do anything about it".
+    check("CCODE-250: the reveal itself says whether you may step in — the option is EARNED by the read",
+      seen(2).revealed.target?.canIntervene === true && seen(1).revealed.target?.canIntervene === false);
+    // and with no aim on the receipt (a 1v1), the fog is exactly what it was
+    check("CCODE-250: a receipt carrying no aim yields no target reveal at any tier",
+      SN.senseOpponent({ id: "player" }, { margin: 3, function: "harm" }, CONTENT.rules, CONTENT.skillBattle.engine, { earnedTier: 3 }).revealed.target === undefined);
+
+    // ═══ THE SEAT: the opponent's blow lands on whoever it was aimed at ═══
+    // ⛔ THIS IS THE CLAIM THAT MATTERS. Before today, the lines of `battleRound` that say "the player eats
+    // it" said `playerSheet`. The player here is armoured to 99 and the soft ally has no soak at all, so if
+    // the blow still resolved against the player it would be blunted to nothing. A LANDED HIT PROVES THE SWAP.
+    const softAlly = { attributes: { mental: 1, physical: 2, social: 1, practical: 1 }, level: 2, health: 20, maxHealth: 20, soak: 0 };
+    const armored = { id: "player", attributes: { mental: 2, physical: 3, social: 2, practical: 2 }, level: 3, health: 30, maxHealth: 30, soak: 99 };
+    const bruiser = { attributes: { mental: 9, physical: 12, social: 6, practical: 6 }, level: 10, health: 40, maxHealth: 40, soak: 0 };
+    const seat = (allies) => battleRound({
+      playerDecl: { function: "defend", tier: 1, attribute: "physical", intensity: "standard", name: "guard" },
+      oppDecl: { function: "strike", tier: 3, attribute: "physical", intensity: "heavy", name: "cleave" },
+      playerSheet: armored, oppSheet: bruiser, allies, targetPolicy: "weakest",
+      state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 100, effects: [], pressure: { player: 0, opponent: 0 } },
+      rules: CONTENT.rules, sb: CONTENT.skillBattle.engine, steps: CONTENT.rules.resolution || {}, rng: () => 0.5 });
+    const withParty = seat([{ id: "player", name: "Wren", contributions: ["HARM","MARTIAL"], threatDealt: 12, sheet: armored },
+                            { id: "sprig", name: "Sprig", contributions: ["RESTORE"], sheet: softAlly }]);
+    const alone = seat(null);
+    check("CCODE-250: with a party present the round records WHO it was aimed at",
+      withParty.aimedAt?.target?.id === "sprig" && withParty.opponent.targetChoice?.target?.name === "Sprig");
+    check("CCODE-250: …and the SOAK that blunts it is the TARGET'S, not the player's — the seat really swapped",
+      alone.damage?.amount === 0 && alone.damage?.soak === 99 && withParty.damage?.amount > 0,
+      `alone=${alone.damage?.amount} party=${withParty.damage?.amount}`);
+    // ⛔ AND THE RECEIPT NAMES THE BEARER. The arithmetic moving without the routing moving would have
+    // applied an ally's wound to the player's health — a swap that balances and still lies.
+    check("CCODE-250: the receipt says WHO it landed on, not merely which side — the wound has an owner",
+      withParty.damage?.onId === "sprig" && withParty.damage?.onName === "Sprig"
+      && alone.damage?.onId === undefined);
+
+    // ═══ ⛔ THE JOIN: the whole chain, in one round ═══
+    // Read the aim → know who is for it → stand in front of them → the blow lands on YOU instead.
+    // ⚠️ I SHIPPED `intercept.js` (CCODE-246) AGAINST NOTHING. Every one of its gates passed on synthetic
+    // protections while, in an actual round, no blow was ever aimed anywhere but the player — so there was
+    // never anything to intercept. This is the gate that says the mechanism is reachable from play.
+    {
+      const IC = await import("../engine/intercept.js");
+      const tankSheet = { attributes: { mental: 12, physical: 12, social: 6, practical: 6 }, level: 12, health: 40, maxHealth: 40, soak: 0 };
+      const roster = [
+        { id: "player", name: "Wren", contributions: ["HARM","MARTIAL"], threatDealt: 1, sheet: armored },
+        { id: "sprig", name: "Sprig", contributions: ["RESTORE"], sheet: softAlly },
+        { id: "veth", name: "Veth", contributions: ["PROTECT","MARTIAL"], threatDealt: 2, sheet: tankSheet },
+      ];
+      const binder = { function: "strike", tier: 3, attribute: "physical", intensity: "heavy", name: "binding cleave",
+        tree: [{ rank: 1, imposes: { condition: "action_loss", resist: "physical", threshold: 1, degradesTo: "slowed", onCrit: "unconscious" } }], rank: 1 };
+      const round = (protections) => battleRound({
+        playerDecl: { function: "defend", tier: 1, attribute: "physical", intensity: "standard", name: "guard" },
+        oppDecl: binder, playerSheet: armored, oppSheet: bruiser,
+        allies: roster, targetPolicy: "weakest", protections,
+        state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 100, effects: [], pressure: { player: 0, opponent: 0 } },
+        rules: CONTENT.rules, sb: CONTENT.skillBattle.engine, steps: CONTENT.rules.resolution || {}, rng: () => 0.5 });
+
+      const unguarded = round(null);
+      check("CCODE-250 JOIN: unprotected, the imposition lands on the ally the foe chose",
+        unguarded.imposed?.onId === "sprig" && !unguarded.imposed?.intercepted,
+        JSON.stringify(unguarded.imposed ?? null));
+
+      // Veth read the round, saw the aim, and put herself between it and Sprig.
+      const guarded = round([IC.openProtection({ protectorId: "veth", allyId: "sprig", rank: 2 })]);
+      check("CCODE-250 JOIN: with a protection standing, the SAME blow lands on the protector instead",
+        guarded.imposed?.intercepted?.caughtBy === "veth" && guarded.imposed?.onId === "veth"
+        && guarded.imposed?.intercepted?.onBehalfOf === "sprig",
+        JSON.stringify(guarded.imposed ?? null));
+      // ⚠️ AND THE RECEIPT SAYS SO BY NAME — "a tank mechanic nobody can see is a tank mechanic nobody thanks."
+      check("CCODE-250 JOIN: the round names the protector, so the save is visible to the player who made it",
+        guarded.imposed?.onName === "Veth" && typeof guarded.imposed?.intercepted?.why === "string");
+      // ⛔ A PROTECTION OVER THE WRONG ALLY CATCHES NOTHING. Standing in front of the person nobody is
+      // swinging at is exactly the cost of a bad read, which is what makes the read worth making.
+      check("CCODE-250 JOIN: guarding the wrong ally saves nobody — a bad read costs you the round",
+        round([IC.openProtection({ protectorId: "veth", allyId: "player", rank: 2 })]).imposed?.onId === "sprig");
+    }
+
+
+  }
+
+
   // 5ae · ⛔ CCODE-247 — WHO IS IN A CONTEST, AND WHAT THEY BRING TO IT.
   //
   // ⚠️ MY FIRST VERSION ASKED A YES/NO QUESTION AND ERIK CORRECTED IT: "the answer is YES — as they are

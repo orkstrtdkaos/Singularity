@@ -9,6 +9,7 @@ import { characterPower, threatBand } from "./threat.js"; // CCODE-52: the band 
  *  Attunement grows with level/ability use; matching the local spectrum sharpens the read;
  *  the Strategist aptitude grants +1 tier on planned actions. */
 import { rateValue } from "./ladder.js";   // SNG-365
+import { revealTarget, canInterveneFor } from "./targeting.js";   // CCODE-250: who the blow is aimed at is a tiered reveal like any other
 
 export function senseTier({ character, action, location, rules, aptitudeMods = {} }) {
   let att = character.attunement || 0;
@@ -77,6 +78,19 @@ export function senseOpponent(viewer, oppRound, rules, sb, { scouting = false, b
   if (reveals.has("band")) revealed.band = marginBand(oppRound?.margin ?? 0);
   if (reveals.has("skill")) revealed.skill = oppRound?.name || oppRound?.function || null;
   if (reveals.has("intensity")) revealed.intensity = oppRound?.intensity || null;
+  // CCODE-250 (Erik): "you need to sense who's getting attacked so you can intervene if you want.... if you
+  // obscure yourself you aren't going to know that information." WHO A BLOW IS AIMED AT is one more thing on
+  // this ladder, and it is the one that makes interception a decision rather than a coin flip. The GRANULARITY
+  // is the tier itself, exactly as `band` and `breakdown` already work: a weak read tells you it is not you, a
+  // real read names them, a decisive read says WHY — which is what lets you bait it next round.
+  // The obscurer earns tier 0, whose authored reveals do NOT include "target", so they learn nothing.
+  if (reveals.has("target") && oppRound?.targetChoice) {
+    revealed.target = revealTarget(oppRound.targetChoice, tier, { viewerId: viewer?.id ?? "player", cfg: sb?.targetReveal || {} });
+    // ⚠️ AND THE ANSWER THE UI ACTUALLY NEEDS, computed here rather than re-derived at the call site: may
+    // this viewer step in front of what they just saw? A read that names the mark earns the option; a read
+    // that does not, and the obscurer's non-read, do not.
+    revealed.target.canIntervene = canInterveneFor(revealed.target);
+  }
   if (reveals.has("breakdown")) revealed.breakdown = oppRound?.breakdown || null; // the tier-3 "see their math" view (SNG-106 popup)
   return { tier, label: vis.label || null, revealed };
 }

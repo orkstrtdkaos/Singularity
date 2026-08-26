@@ -109,6 +109,7 @@
 | `engine/worldtab.js` | Builds THE WORLD tab — who is doing what to your arcs — as a pure function of world state, so the render can be EXECUTED in a test instead of pattern-matched against its own source. | The World tab on the character sheet: each arc by stage NAME, who is pushing it and who is holding it back (names you have met marked apart), what it cost in casualties and strikes, who is being reached for in the dark, and who has not been home. | Opening the character sheet and choosing The World; fed by arcPeopleView + worldPeopleFooter off the offscreen world tick. | 1 | `app.js` | **1** | — | — |
 | `engine/combatants.js` | *— unstated —* | *—* | *—* | 11 | **nothing** | **0** | — | — |
 | `engine/intercept.js` | *— unstated —* | *—* | *—* | 8 | **nothing** | **0** | — | — |
+| `engine/targeting.js` | *— unstated —* | *—* | *—* | 4 | **nothing** | **0** | — | — |
 | `engine/npcsheet.js` | *— unstated —* | *—* | *—* | 6 | **nothing** | **0** | `npc_interiority.json` | — |
 
 ## GM verbs handled inside `app.js` itself

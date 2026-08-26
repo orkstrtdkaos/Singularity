@@ -6,6 +6,8 @@
 // narrates the resolved exchange; it never chooses the opponent's mechanical move — that is opponentPolicy.
 
 import { resolveAction } from "./resolve.js";
+import { chooseTarget } from "./targeting.js";   // CCODE-250: a foe chooses who to hit
+import { redirectImposition } from "./intercept.js";   // CCODE-250: …and someone may step in front of it
 import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, ongoingHarmOf, authoredBlock, resolveProvoke, resolveSoothe, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -742,6 +744,9 @@ function antisoakFromConditions(sheet) {
 }
 
 export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state = {}, rules, sb, steps, rng = Math.random,
+  // CCODE-250 (Erik: "Yes a foe chooses who to hit"): the party seat. `allies` is the live roster a foe may aim
+  // at — ABSENT OR EMPTY MEANS TODAY, and a 1v1 round then resolves byte-identically, which is the gate.
+  allies = null, targetPolicy = null, protections = null,
   // CCODE-45: a TURN is sense -> action -> bonus. Both options DEFAULT to today's behaviour, so every existing
   // caller is untouched: phase "action" resolves exactly as before, and tickEffects true ticks per exchange.
   // The turn orchestrator passes phase:"sense" (no momentum, no pressure — it PREPARES) and tickEffects:false on
@@ -761,6 +766,17 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   playerDecl = degradeIfSpent(playerDecl, state.playerEnergy ?? playerSheet.energy ?? 0, sb, steps, rules);
   oppDecl = degradeIfSpent(oppDecl, state.opponentEnergy ?? oppSheet.energy ?? 0, sb, steps, rules);
   const standing = state.effects || [];
+  // ⛔ CCODE-250 — WHO IS THIS AIMED AT. Erik: "Yes a foe chooses who to hit... you need to sense who's
+  // getting attacked so you can intervene if you want." Until now `oppDecl` resolved against `playerSheet`
+  // and there WAS no choosing, which is why `intercept.js` had nothing to intercept.
+  // ⚠️ I ADDED A SEAT, NOT A TABLE. `playerSheet`/`oppSheet` are untouched; ONE derived binding decides which
+  // sheet fills the receiving seat when the opponent lands something. With no allies passed it IS playerSheet.
+  const aimedAt = (allies && allies.length)
+    ? chooseTarget(allies, { policy: targetPolicy || oppSheet?.targetPolicy || "threat", rng })
+    : null;
+  // the seat. Everything downstream that used to say "the player eats it" says this instead.
+  const defenderSheet = (aimedAt && aimedAt.target && aimedAt.target.id !== "player" && aimedAt.target.sheet)
+    ? aimedAt.target.sheet : playerSheet;
   const p = rollSide(playerSheet, playerDecl, oppDecl, sb, steps, rules, rng, effectMods(standing, "player", playerDecl, oppDecl, sb), momentumModifier(state.momentum || 0, "player", sb), setupBonus);
   const o = rollSide(oppSheet, oppDecl, playerDecl, sb, steps, rules, rng, effectMods(standing, "opponent", oppDecl, playerDecl, sb), momentumModifier(state.momentum || 0, "opponent", sb), -setupBonus);
   // CCODE-80 — EVASION IS NOT SOAK (Erik's correction, Aevi's re-authoring of `the_wrong_target`).
@@ -992,7 +1008,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // stops a level-scaled low-tier craft from becoming universal, because soak is a FLAT subtraction and a
       // bigger die beats it by more. "An armored epic foe needs more than a scaled-up cantrip" is exactly this
       // arithmetic — reported on the receipt so a blunted blow reads as blunted rather than as a bad roll.
-      const targetSheet = roundWinner === "player" ? oppSheet : playerSheet;
+      const targetSheet = roundWinner === "player" ? oppSheet : defenderSheet;   // CCODE-250: the seat, not necessarily you
       // RANKED soak. The catalog authored this before the engine had it: radiant_lance r2 cuts "LIGHT ARMOR"
       // and r3 beats "a Harmonic shield's FIRST RANK", so penetration is meant to beat a guard BY DEGREE
       // rather than subtract from one flat number. A craft cuts every layer whose rank is at or below its
@@ -1078,7 +1094,13 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         // ⚠️ ADDITIVE, NOT AN ALTERNATIVE (Erik: "the pierce damage… plus any unsoaked damage").
         : pierceLanded(hit, soak, pierce,
             (Number(targetSheet?.antisoak) || 0) + antisoakFromConditions(targetSheet), dcfg);
-      damage = { side: roundWinner === "player" ? "opponent" : "player", amount: landed, verb: winDecl.function,
+      damage = { side: roundWinner === "player" ? "opponent" : "player",
+        // ⛔ CCODE-250 — THE SIDE IS NOT THE SUFFERER. The seat swapped the ARITHMETIC (soak, resist,
+        // conditions all read the target's sheet) but this receipt still said "player", so a caller
+        // would have applied an ally's wound to the player's health. Naming the bearer is the other
+        // half of the seat, and without it the swap is a lie that balances.
+        ...(roundWinner === "opponent" && aimedAt && aimedAt.target && aimedAt.target.id !== "player"
+          ? { onId: aimedAt.target.id, onName: aimedAt.target.name } : {}), amount: landed, verb: winDecl.function,
         by: winDecl.name || winDecl.function,
         // CCODE-83: a blow that was EATEN, shrugged off or doubled must say so. Silently different arithmetic
         // is indistinguishable from a bad roll — the same argument evasion needed.
@@ -1147,7 +1169,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   }
   if (roundWinner && phase === "action") {
     const impDecl = roundWinner === "player" ? playerDecl : oppDecl;
-    const loserSheet = roundWinner === "player" ? oppSheet : playerSheet;
+    const loserSheet = roundWinner === "player" ? oppSheet : defenderSheet;   // CCODE-250: an imposition lands on whoever it was aimed at
     const winRoll = roundWinner === "player" ? p : o, loseRoll = roundWinner === "player" ? o : p;
     // ⛔ THE GUARD HAD TO MOVE TOO. `resolveImposition` learned to read a rank-level block; this line did
     // not, so it kept deciding there was nothing to resolve and never called it. A reader fixed in one
@@ -1161,10 +1183,33 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         targetResist: Number(loserSheet?.attributes?.[resistKey]) || 0,
         degree: winRoll.degree
       });
-      if (r.ok) imposed = { side: roundWinner === "player" ? "opponent" : "player", condition: r.condition,
+      if (r.ok) imposed = { side: roundWinner === "player" ? "opponent" : "player",
+        // ⛔ CCODE-250 — THE SIDE IS NOT THE SUFFERER. The seat swapped the ARITHMETIC (soak, resist,
+        // conditions all read the target's sheet) but this receipt still said "player", so a caller
+        // would have applied an ally's wound to the player's health. Naming the bearer is the other
+        // half of the seat, and without it the swap is a lie that balances.
+        ...(roundWinner === "opponent" && aimedAt && aimedAt.target && aimedAt.target.id !== "player"
+          ? { onId: aimedAt.target.id, onName: aimedAt.target.name } : {}), condition: r.condition,
         by: impDecl.name || impDecl.function, targets: r.targets, threshold: r.threshold,
         ...(r.resisted ? { resisted: true, degradedFrom: r.degradedTo } : {}) };
       else if (r.why) imposed = { refused: r.why, by: impDecl.name || impDecl.function };
+
+      // ⛔ CCODE-250 — THE JOIN THAT MAKES `intercept.js` LIVE. I built interception (CCODE-246) against a
+      // blow that could never have been aimed at an ally, so it has been inert since the day it shipped:
+      // there was nothing to step in front of. Now that a foe chooses, someone can.
+      // ⚠️ AND ERIK'S TRADE IS ENFORCED UPSTREAM, NOT HERE — a protection had to be DECLARED, which means
+      // the protector had to have SEEN the aim, which means they read instead of hiding. This function only
+      // honours a decision already paid for.
+      if (imposed && imposed.onId && protections && protections.length) {
+        const sheetsById = Object.fromEntries((allies || []).map(a => [a.id, a.sheet || {}]));
+        const caught = redirectImposition({
+          aimedAt: imposed.onId, sourceId: "opponent", protections, sheets: sheetsById,
+          imposition: { condition: imposed.condition, degradesTo: spec?.degradesTo, onCrit: spec?.onCrit },
+          degree: winRoll.degree });
+        // ⚠️ NULL MEANS NOBODY STOOD THERE, and the imposition is exactly what it was. Additive.
+        if (caught) imposed = { ...imposed, intercepted: caught, condition: caught.lands.condition,
+          onId: caught.lands.on, onName: (allies || []).find(a => a.id === caught.lands.on)?.name || caught.lands.on };
+      }
     }
   }
 
@@ -1186,17 +1231,28 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // ⚠️ THE STATE CHANGE IS THE EFFECT. Reporting `broke` without clearing the tactic would be the
       // decorative version of this verb, and the whole complaint about it was that it did nothing.
       if (pr.ok) newState.tactic = null;
-      unsettled = { by: winDecl?.name || "provoke", side: roundWinner === "player" ? "opponent" : "player", ...pr };
+      unsettled = { by: winDecl?.name || "provoke", side: roundWinner === "player" ? "opponent" : "player",
+        // ⛔ CCODE-250 — THE SIDE IS NOT THE SUFFERER. The seat swapped the ARITHMETIC (soak, resist,
+        // conditions all read the target's sheet) but this receipt still said "player", so a caller
+        // would have applied an ally's wound to the player's health. Naming the bearer is the other
+        // half of the seat, and without it the swap is a lie that balances.
+        ...(roundWinner === "opponent" && aimedAt && aimedAt.target && aimedAt.target.id !== "player"
+          ? { onId: aimedAt.target.id, onName: aimedAt.target.name } : {}), ...pr };
     }
     if (fns.has("soothe")) {
       const so = resolveSoothe(newState, { margin: winMargin, cfg: sb?.engine || {},
-        conditions: (roundWinner === "player" ? oppSheet : playerSheet)?.conditions || [] });
+        conditions: (roundWinner === "player" ? oppSheet : defenderSheet)?.conditions || [] });   // CCODE-250: antisoak reads the SEAT's conditions
       if (so.ok) newState.momentum = so.momentum.after;
       cooled = { by: winDecl?.name || "soothe", ...so };
     }
   }
 
-  const out = { state: newState, unsettled, cooled, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
+  // ⛔ CCODE-250 — THE CHOICE RIDES ON THE OPPONENT RECEIPT, because that is the object the fog reads.
+  // `senseOpponent` gates DISPLAY over true state; putting the aim here means a good read EARNS it and a
+  // character who obscured themselves simply never sees the field. Absent with no allies — so a 1v1 receipt
+  // is byte-identical to the one this engine produced yesterday.
+  if (aimedAt) o.targetChoice = aimedAt;
+  const out = { state: newState, unsettled, cooled, player: p, opponent: o, roundWinner, ...(aimedAt ? { aimedAt } : {}), delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback },
     // CCODE-80: an evaded blow must SAY it was evaded. An attack that quietly does less is indistinguishable
     // from a bad roll, and the whole point of the three defensive logics is that they read differently.

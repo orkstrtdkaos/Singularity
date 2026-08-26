@@ -18445,64 +18445,73 @@ await (async () => {
       IC.redirectImposition({ aimedAt: "nobody", protections: [], sheets, imposition: imp, degree: "success" }) === null);
   }
 
-  // 5ae · ⛔ CCODE-247 — WHO IS IN A CONTEST, AND IN WHAT CAPACITY. Erik: "even a single player has NPC
-  // companions and party members — they need to fight with you and need protection."
+  // 5ae · ⛔ CCODE-247 — WHO IS IN A CONTEST, AND WHAT THEY BRING TO IT.
   //
-  // ⚠️ MEASURED, THOSE ARE TWO ASKS AND THE CONTENT SUPPORTS ONE. Six of nine authored companions say in
-  // their own bond grants that they CANNOT FIGHT. So PRESENCE and PARTICIPATION are separate: everyone is
-  // targetable, only the authored few act — and a companion who cannot fight needs protecting MORE, not
-  // less, because they have no answer of their own.
+  // ⚠️ MY FIRST VERSION ASKED A YES/NO QUESTION AND ERIK CORRECTED IT: "the answer is YES — as they are
+  // able… they support, heal, distract, etc. — so they literally are part of the fights anyway." I had
+  // measured six of nine companions saying "cannot fight" and concluded they were bystanders. They are
+  // participants who do not swing, and the tags saying so were on the records the whole time.
   {
     const CB = await import("../engine/combatants.js");
+
+    // ⛔ EVERY AUTHORED COMPANION CONTRIBUTES SOMETHING. Not one is a bystander.
+    const contribs = Object.values(C199.companions).map(c => CB.contributionsOf(c));
+    check(`CCODE-247: all ${contribs.length} authored companions bring something to a contest — none is a bystander`,
+      contribs.every(c => c.length > 0), contribs.map(c => c.length).join(","));
+    // ⛔ AND NOT ONE OF THE 30 AUTHORED TAGS MEANS `HARM`. Everyone is in the fight; almost nobody is in it
+    // by hitting — which is the finding, not an oversight.
+    check("CCODE-247: …and none of them brings HARM from tags alone — an entity that swings must say so",
+      Object.values(C199.companions).every(c => !CB.contributionsOf(c).includes("HARM")));
+
+    // ⛔ THE POPULATION ERIK MEANT: recruited NPCs carrying the `ally` role. company.js has held this
+    // roster since SNG-126 and my first version never read it.
+    const npcIds = Object.keys(C199.npcs);
     const ch247 = { id: "you", name: "Wren", level: 6,
-      attributes: { physical: 6, mental: 6, social: 4, practical: 5 },
-      companions: [{ id: "aevi" }, { id: "sprig" }], party: [] };
-    const allies = CB.alliesOf(ch247, { companions: C199.companions });
+      companions: [{ id: "sprig" }, { id: "bristle" }],
+      company: [{ npcId: npcIds[0], roles: ["ally"], joinedDay: 3 },
+        { npcId: npcIds[1], roles: ["trainer"], joinedDay: 5 }], party: [] };
+    const allies = CB.alliesOf(ch247, { companions: C199.companions, npcs: C199.npcs });
+    check("CCODE-247: a recruited NPC with the `ally` role is in the fight and brings HARM",
+      allies.some(a => a.kind === "company" && a.contributions.includes("HARM")));
+    // ⚠️ AND A TRAINER IS NOT A SOLDIER — the role decides, not the membership.
+    check("CCODE-247: …while a TRAINER on the same roster brings no harm — the role decides, not the roster",
+      allies.filter(a => a.kind === "company").some(a => !a.contributions.includes("HARM")));
+    check("CCODE-247: someone who has LEFT the company is not in the fight",
+      CB.alliesOf({ ...ch247, company: [{ npcId: npcIds[0], roles: ["ally"], leftDay: 9 }] },
+        { companions: C199.companions, npcs: C199.npcs }).every(a => a.kind !== "company"));
 
-    check("CCODE-247: the player and their companions are all PRESENT in a contest",
-      allies.length === 3 && allies.every(a => a.present));
-    // ⛔ THE SPLIT. Targetable is wider than acting, deliberately.
-    check("CCODE-247: everyone present is TARGETABLE — the healer who never swings can still be dropped",
-      CB.targetableAllies(ch247, { companions: C199.companions }).length === 3);
-    check("CCODE-247: …but only the authored few ACT — a companion the content says cannot fight does not declare",
-      CB.actingAllies(ch247, { companions: C199.companions }).map(a => a.kind).join() === "player");
+    // ⛔ PARTICIPATION IS NOT A BOOLEAN. Healing is acting; distracting is acting.
+    check("CCODE-247: an entity that heals or distracts ACTS — the old yes/no excluded six of nine from a fight they were in",
+      CB.canAct({ assistTags: ["heal"] }) === true && CB.canAct({ assistTags: ["distract"] }) === true
+      && CB.canAct({ assistTags: [] }) === false);
 
-    // ⛔ AUTHORED, NEVER INFERRED FROM PROSE. "Cannot fight" lives in bondGrants.description, and a regex
-    // over prose finds words rather than facts. The field is `combatant: true`.
-    check("CCODE-247: `canAct` reads an authored field — absent means NO, because six of nine cannot fight",
-      CB.isCombatant({ combatant: true }) === true
-      && CB.isCombatant({ combatant: false }) === false
-      && CB.isCombatant({}) === false
-      && CB.isCombatant({ bondGrants: { description: "a mighty warrior who fights" } }) === false);
-    const icSrc247 = readFileSync(join(root, "engine/combatants.js"), "utf8")
-      .replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
-    check("CCODE-247: …and nothing in the module reads prose to decide it",
-      !/bondGrants|description|cannot fight/i.test(icSrc247));
+    // ⚠️ THE TAG MAP IS CONTENT-SHAPED AND INJECTABLE — 30 tags is an authoring vocabulary, and hardcoding
+    // it would make every future tag an engine change.
+    check("CCODE-247: the tag→family map can be overridden by content",
+      CB.contributionsOf({ assistTags: ["whistling"] }, { tagFamilies: { INFLUENCE: ["whistling"] } }).join() === "INFLUENCE");
 
-    // ⚠️ A PARTY MEMBER IS ANOTHER CHARACTER AND ALWAYS ACTS — the multiplayer half Erik also asked for.
-    const withParty = CB.alliesOf({ ...ch247, party: [{ id: "friend", name: "A Friend" }] }, { companions: C199.companions });
-    check("CCODE-247: a party member is another character and always acts",
-      withParty.some(a => a.kind === "party" && a.canAct === true));
+    // ⛔ WHAT HAPPENS WHEN ONE IS TAKEN OUT — Erik: "for each we would need to determine what happens when
+    // they're taken out, like anything else."
+    const sprig = allies.find(a => a.id === "sprig");
+    check("CCODE-247: an entity can be taken out, and stops acting when it is",
+      CB.isDowned(sprig) === false
+      && (CB.downEntity(sprig, { why: "dropped by keening", day: 7 }), CB.isDowned(sprig) === true));
+    const standing = CB.standingContributions(allies);
+    check("CCODE-247: …and the side SEES what went out of the fight with them — a downed healer is a lost capability",
+      !standing.families.includes("RESTORE") && standing.lost.some(l => l.id === "sprig" && l.contributions.includes("RESTORE")));
 
-    // ⛔ AND THE ROSTER REPORTS THE NUMBER THAT MAKES INTERCEPTION WORTH HAVING.
-    const sum = CB.rosterSummary(ch247, { companions: C199.companions });
-    check(`CCODE-247: the roster names how many are present-but-defenceless (${sum.defenceless} of ${sum.total})`,
-      sum.defenceless > 0 && sum.total === sum.acting + sum.defenceless);
+    // ⚠️ TARGETABLE IS STILL WIDER THAN ACTING — the entity that cannot answer is the one interception is for.
+    check("CCODE-247: everyone present is targetable, including anyone who is down",
+      CB.targetableAllies(ch247, { companions: C199.companions, npcs: C199.npcs }).length === allies.length);
 
-    // ⛔ THE JOIN: interception protects someone who cannot protect themselves. That is the whole point.
+    // ⛔ THE JOIN: interception protects someone who cannot protect themselves.
     const IC247 = await import("../engine/intercept.js");
     const sheets247 = Object.fromEntries(allies.map(a => [a.id, a.sheet]));
     const prot = IC247.openProtection({ protectorId: "you", allyId: "sprig", rank: 2 });
     const caught = IC247.redirectImposition({ aimedAt: "sprig", sourceId: "foe", protections: [prot],
       sheets: sheets247, imposition: { condition: "unconscious", degradesTo: "action_loss" }, degree: "partial" });
-    check("CCODE-247: an imposition aimed at a NON-COMBATANT companion is caught by the character standing in front",
+    check("CCODE-247: an imposition aimed at the healer is caught by whoever is standing in front",
       !!caught && caught.caughtBy === "you" && caught.onBehalfOf === "sprig");
-
-    // ⚠️ AND A PRESENCE SHEET IS NOT A FIGHTER'S STATLINE — giving a non-combatant one would invent the
-    // thing the content refuses.
-    const sp = allies.find(a => a.id === "sprig");
-    check("CCODE-247: a present non-combatant has enough sheet to RESIST and no combat skills at all",
-      sp && sp.sheet.attributes.mental > 0 && Array.isArray(sp.sheet.skills) && sp.sheet.skills.length === 0);
   }
 
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse

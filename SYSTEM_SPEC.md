@@ -2468,7 +2468,7 @@ that lags the code is worse than no map, because it is believed.
 | `mechanic.evasion` + `evasionRank` | `evasionOf` — rank 1 still findable by a reader, rank 2+ not | `skill_battle.js` | **7** |
 | `penetration` | splits `cutThrough` (rank ≤ pen) from `soak` | `skill_battle.js` | **4** |
 | `mechanic.duration` | craft duration in rounds, capped by `craftDurationMax` | `skill_battle.js` | many |
-| `mechanic.crit` / `crit` | `critFor` → a per-craft **chance bias** and a **sentence on the receipt**. ⚠️ **Nothing else** — see §39.4 | `craftmechanics.js` → `resolve.js` | **49** |
+| `mechanic.crit` / `crit` | `critFor` → a per-craft **chance bias** and a **sentence on the receipt**. ⚠️ **Nothing else** — see §39.4 | `craftmechanics.js` → `resolve.js` | **52** |
 | `damageType` | `answers(l)` — which soak layers apply | `skill_battle.js` | 26 |
 | `wardTypes` | ⛔ **NOTHING — see §39.5.** The string does not appear in `skill_battle.js` | — | **48** |
 | `mechanic.dice` on a **healing** shape | ✅ `resolveHeal` → `rollMagnitude` → the round's `healing` | `craftmechanics.js` → `skill_battle.js` healing branch | 25 |

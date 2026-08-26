@@ -18445,6 +18445,66 @@ await (async () => {
       IC.redirectImposition({ aimedAt: "nobody", protections: [], sheets, imposition: imp, degree: "success" }) === null);
   }
 
+  // 5ae · ⛔ CCODE-247 — WHO IS IN A CONTEST, AND IN WHAT CAPACITY. Erik: "even a single player has NPC
+  // companions and party members — they need to fight with you and need protection."
+  //
+  // ⚠️ MEASURED, THOSE ARE TWO ASKS AND THE CONTENT SUPPORTS ONE. Six of nine authored companions say in
+  // their own bond grants that they CANNOT FIGHT. So PRESENCE and PARTICIPATION are separate: everyone is
+  // targetable, only the authored few act — and a companion who cannot fight needs protecting MORE, not
+  // less, because they have no answer of their own.
+  {
+    const CB = await import("../engine/combatants.js");
+    const ch247 = { id: "you", name: "Wren", level: 6,
+      attributes: { physical: 6, mental: 6, social: 4, practical: 5 },
+      companions: [{ id: "aevi" }, { id: "sprig" }], party: [] };
+    const allies = CB.alliesOf(ch247, { companions: C199.companions });
+
+    check("CCODE-247: the player and their companions are all PRESENT in a contest",
+      allies.length === 3 && allies.every(a => a.present));
+    // ⛔ THE SPLIT. Targetable is wider than acting, deliberately.
+    check("CCODE-247: everyone present is TARGETABLE — the healer who never swings can still be dropped",
+      CB.targetableAllies(ch247, { companions: C199.companions }).length === 3);
+    check("CCODE-247: …but only the authored few ACT — a companion the content says cannot fight does not declare",
+      CB.actingAllies(ch247, { companions: C199.companions }).map(a => a.kind).join() === "player");
+
+    // ⛔ AUTHORED, NEVER INFERRED FROM PROSE. "Cannot fight" lives in bondGrants.description, and a regex
+    // over prose finds words rather than facts. The field is `combatant: true`.
+    check("CCODE-247: `canAct` reads an authored field — absent means NO, because six of nine cannot fight",
+      CB.isCombatant({ combatant: true }) === true
+      && CB.isCombatant({ combatant: false }) === false
+      && CB.isCombatant({}) === false
+      && CB.isCombatant({ bondGrants: { description: "a mighty warrior who fights" } }) === false);
+    const icSrc247 = readFileSync(join(root, "engine/combatants.js"), "utf8")
+      .replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+    check("CCODE-247: …and nothing in the module reads prose to decide it",
+      !/bondGrants|description|cannot fight/i.test(icSrc247));
+
+    // ⚠️ A PARTY MEMBER IS ANOTHER CHARACTER AND ALWAYS ACTS — the multiplayer half Erik also asked for.
+    const withParty = CB.alliesOf({ ...ch247, party: [{ id: "friend", name: "A Friend" }] }, { companions: C199.companions });
+    check("CCODE-247: a party member is another character and always acts",
+      withParty.some(a => a.kind === "party" && a.canAct === true));
+
+    // ⛔ AND THE ROSTER REPORTS THE NUMBER THAT MAKES INTERCEPTION WORTH HAVING.
+    const sum = CB.rosterSummary(ch247, { companions: C199.companions });
+    check(`CCODE-247: the roster names how many are present-but-defenceless (${sum.defenceless} of ${sum.total})`,
+      sum.defenceless > 0 && sum.total === sum.acting + sum.defenceless);
+
+    // ⛔ THE JOIN: interception protects someone who cannot protect themselves. That is the whole point.
+    const IC247 = await import("../engine/intercept.js");
+    const sheets247 = Object.fromEntries(allies.map(a => [a.id, a.sheet]));
+    const prot = IC247.openProtection({ protectorId: "you", allyId: "sprig", rank: 2 });
+    const caught = IC247.redirectImposition({ aimedAt: "sprig", sourceId: "foe", protections: [prot],
+      sheets: sheets247, imposition: { condition: "unconscious", degradesTo: "action_loss" }, degree: "partial" });
+    check("CCODE-247: an imposition aimed at a NON-COMBATANT companion is caught by the character standing in front",
+      !!caught && caught.caughtBy === "you" && caught.onBehalfOf === "sprig");
+
+    // ⚠️ AND A PRESENCE SHEET IS NOT A FIGHTER'S STATLINE — giving a non-combatant one would invent the
+    // thing the content refuses.
+    const sp = allies.find(a => a.id === "sprig");
+    check("CCODE-247: a present non-combatant has enough sheet to RESIST and no combat skills at all",
+      sp && sp.sheet.attributes.mental > 0 && Array.isArray(sp.sheet.skills) && sp.sheet.skills.length === 0);
+  }
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

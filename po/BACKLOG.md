@@ -475,3 +475,73 @@ against a stable Afterling that is a social problem, not a tactical one.
   live, and the schism may be the tradition's founding rather than a side note.**
 - **The retrieval ladder gives it a moral edge nothing else has:** ⛔ **a people who can raise the body and
   cannot walk the person back** — they have the cheap half of death and not the dear one.
+
+### ⛔ ERIK 2026-08-24 — FOUR RULINGS THAT MAKE UNDEATH MECHANICAL
+
+#### 1. ⛔ HEALING HARMS THE UNDEAD
+
+> *"Straight healing applied to an undead is like straight necrotic to the living."*
+
+⚠️ **AND HALF THE MACHINERY EXISTS.** `skill_battle_system.json` already carries affinities
+`immune · resist · vulnerable · ABSORB`, and its own note says: ⛔ ***"ABSORB reports a NEGATIVE damage
+amount — the blow HEALS its target — rather than becoming zero, which would read as a miss."***
+
+**So an undead authored `decay: absorb` is ONE LINE and already works** — ⚠️ **rot mends it.**
+
+⛔ **THE OTHER DIRECTION IS NOT BUILT: a HEAL that lands as HARM.** Affinity applies to damage types; healing
+is not a damage type. **Needed: applying `heal` to an entity flagged undead deals its magnitude as `decay`
+instead.** ⚠️ **A cleric mercy-healing an Afterling burns it, and does not find out until it is done.**
+
+#### 2. ⛔ RAISING GETS HARDER EACH TIME — AND THAT IS WHY OLD HEROES ARE UNDEAD
+
+> *"I don't agree with cannot be raised twice — however there should be a difficulty that increases per
+> time… which is probably a good reason why after a long time SOME HEROES BECOME UNDEAD: it's too hard to
+> raise them back to living, but they CAN CONTINUE IN UNDEATH."*
+
+⛔ **MY PROPOSED "CANNOT BE RAISED TWICE" IS WITHDRAWN. IT WAS A WALL WHERE A CURVE BELONGS** — the same
+error as `canStrike: false` and the "lite" sheet (SYSTEM_SPEC §47.14, and this is the fourth instance).
+
+⚠️ **TWO LADDERS, AND THEY DIVERGE — THAT IS THE WHOLE IDEA:**
+
+| | to LIVING (`retrieve`) | to UNDEATH (`raise`) |
+|---|---|---|
+| cost per prior raising | ⛔ **rises steeply** | ⚠️ **rises gently, or not at all** |
+| effect of depth/time | ⛔ **rises steeply** | ⚠️ **gently** |
+| ⛔ **the consequence** | **eventually impossible** | **still available** |
+
+⛔ **SO A HERO FOUR CENTURIES DEAD CANNOT BE MADE ALIVE AND CAN BE MADE TO CONTINUE.** ⚠️ **That is not a
+consolation prize, it is how the Palelands got its Afterlings — and it means the oldest, most storied
+undead in the world are the people nobody could afford to bring back properly.** **Every one of them is
+somebody's failure and somebody's mercy.**
+
+#### 3. ⛔ WITHER ON AN UNDEAD DESTROYS THE COCOON
+
+> *"Using Wither on an undead destroys the body — leaving a spirit that is not ready to exist outside it,
+> either destroyed or very vulnerable… but FOR SOME SPIRITS IT MIGHT BE FREEING."*
+
+⚠️ **THREE OUTCOMES FROM ONE ACT, AND THE WARDEN DOES NOT CHOOSE WHICH:**
+
+- **DESTROYED** — nothing was far enough along. ⛔ This is what a warden usually intends.
+- **VULNERABLE** — something IS there, out of its shell early, and now exposed. ⚠️ **A window in which it
+  can be finished — or saved.**
+- ⛔ **FREED** — it was ready. **The cocoon was the last thing holding it in.** ⚠️ **The craft meant to
+  un-make undead is how an Afterling is BORN, and a warden who did not know that has made one.**
+
+⛔ **WHICH ONE DEPENDS ON THE COCOON PHASE** (set / breaching / emerged) — **which gives the phases a
+mechanical consequence rather than only flavour.**
+
+⚠️ **AND IT IS ELEGANT THAT IT IS `wither`:** an Ashwarden craft that un-makes another Ashwarden's work,
+**with a failure mode that creates the thing it was aimed at.**
+
+#### 4. MAINTENANCE, NOT MEDICINE
+
+> *"We need a way to heal undead — by MAINTENANCE for the body, or OTHER POWERS for the spirit."*
+
+⛔ **TWO REPAIRS FOR TWO THINGS, AND BOTH ALREADY HAVE HOMES:**
+
+- **THE BODY: maintenance.** ⚠️ **`kept_vigil` is ALREADY `ordered_nanite` — the same structured nanite
+  behind Seraphic agelessness — and already holds a failing thing at its state.** ⛔ **It is the closest
+  craft in the game to undead repair and it was not written for it.**
+- **THE SPIRIT: not Death's work at all.** ⚠️ **Spirit, and Erik has already flagged the intertwining.**
+  ⛔ **A cocoon-thing whose SHELL is sound and whose OCCUPANT is damaged is a problem no Ashwarden craft
+  addresses, and that gap is deliberate.**

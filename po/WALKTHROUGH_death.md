@@ -1108,17 +1108,17 @@
 
 ---
 
-## 30. Given Errand  ·  `given_errand`
+## 30. Driven Shade  ·  `given_errand`
 
 **L4 · e11 · ashwarden · metaphysical · shape `construct` · harm `lethal`**  
 **status:** crit  
 **ability functions:** summon, bind, command
 
-> ⛔ ONE BODY, ONE PURPOSE, AND IT WILL FIND ANOTHER WAY IN. Where a Raised Hand does what it was set to and nothing adjacent, this is made for a single named errand and it ADAPTS TO COMPLETE IT. A messenger that goes where you cannot. A sentinel that holds one door against one named thing. ⚠️ AND YES, THE OTHER ONE: something patient that has been given a name and will be walking toward it long after you have forgotten giving the order.
+> ⛔ ONE BODY, ONE PURPOSE, AND IT WILL FIND ANOTHER WAY IN. Where a Raised Hand does what it was set to and nothing adjacent, a shade is DRIVEN — made for a single named errand and it ADAPTS TO COMPLETE IT. A messenger that goes where you cannot. A sentinel that holds one door against one named thing. ⚠️ AND YES, THE OTHER ONE: something patient that has been given a name and will be walking toward it long after you have forgotten giving the order.
 
 **notFor:** ⛔ JUDGING CASES YOU DID NOT FORESEE — that is a Figurist's Walking Figure, and it is a different thing entirely. This does not adjudicate; it PURSUES. ⚠️ Changing its mind: the errand is fixed at the setting and cannot be re-given. Anything still ending — the finished only, as always. And it will not pass in a town that knows what it is looking at.
 
-### r1 — Given Errand
+### r1 — Driven Shade
 
 **functions:** summon, bind · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
@@ -1138,7 +1138,7 @@
 
 **functions:** summon, bind, command · **gainAxes:** autonomy, duration, conditions · **gains:** deepen · **harm:** lethal
 
-**grants:** ⛔ NO END DATE. It continues until the errand is complete or it is destroyed — and if the errand is a NAME, it walks toward that name for as long as that takes. ⚠️ IT WILL WAIT. It will wait outside a city for a winter. The Palelands have a word for finding one on your road and the word is not a friendly one.
+**grants:** ⛔ NO END DATE. It continues until the errand is complete or it is destroyed — and if the errand is a NAME, it walks toward that name for as long as that takes. ⚠️ BY NOW IT IS BARELY A BODY: worn to silhouette and purpose, and harder to stop for it. IT WILL WAIT. It will wait outside a city for a winter. The Palelands have a word for finding one on your road and the word is not a friendly one.
 
 **cannot:** ⛔ YOU CANNOT CALL IT OFF. There is no unsetting at this rank — the errand ends when it is done or when someone destroys it, and destroying it is a fight. ⚠️ And it does not distinguish between the person you named and the person now carrying that name.
 

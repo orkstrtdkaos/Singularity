@@ -4063,7 +4063,7 @@
   },
   {
    "id": "given_errand",
-   "name": "Given Errand",
+   "name": "Driven Shade",
    "levelReq": 4,
    "energyCost": 11,
    "powerSystem": "metaphysical",
@@ -4099,8 +4099,8 @@
     "bind",
     "command"
    ],
-   "description": "⛔ ONE BODY, ONE PURPOSE, AND IT WILL FIND ANOTHER WAY IN. Where a Raised Hand does what it was set to and nothing adjacent, this is made for a single named errand and it ADAPTS TO COMPLETE IT. A messenger that goes where you cannot. A sentinel that holds one door against one named thing. ⚠️ AND YES, THE OTHER ONE: something patient that has been given a name and will be walking toward it long after you have forgotten giving the order.",
-   "narrationHints": "It is not clever and it is not fast. It is simply still coming. ⚠️ People who have been the errand describe the same thing: it never hurried, and it was never further away than it had been the day before.",
+   "description": "⛔ ONE BODY, ONE PURPOSE, AND IT WILL FIND ANOTHER WAY IN. Where a Raised Hand does what it was set to and nothing adjacent, a shade is DRIVEN — made for a single named errand and it ADAPTS TO COMPLETE IT. A messenger that goes where you cannot. A sentinel that holds one door against one named thing. ⚠️ AND YES, THE OTHER ONE: something patient that has been given a name and will be walking toward it long after you have forgotten giving the order.",
+   "narrationHints": "It is not clever and it is not fast. It is simply still coming. ⛔ AND IT WEARS DOWN TO THE PURPOSE — a shade set a month ago is less body than it was: thinner, greyer, the parts that were not needed for the errand simply gone. By the second season it is mostly silhouette and intent, and it still walks. ⚠️ People who have been the errand all describe the same thing: it never hurried, and it was never further away than it had been the day before.",
    "notFor": "⛔ JUDGING CASES YOU DID NOT FORESEE — that is a Figurist's Walking Figure, and it is a different thing entirely. This does not adjudicate; it PURSUES. ⚠️ Changing its mind: the errand is fixed at the setting and cannot be re-given. Anything still ending — the finished only, as always. And it will not pass in a town that knows what it is looking at.",
    "plainly": "A create/stealth/social action. Make one finished body into a single-purpose thing — messenger, sentinel, or hunter — fixed at the setting. It acts without you, improvises around obstacles to complete the errand, and at r3 does not stop until the errand is done or it is destroyed.",
    "bounds": [
@@ -4135,7 +4135,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "Given Errand",
+     "name": "Driven Shade",
      "functions": [
       "summon",
       "bind"
@@ -4178,11 +4178,12 @@
       "duration",
       "conditions"
      ],
-     "grants": "⛔ NO END DATE. It continues until the errand is complete or it is destroyed — and if the errand is a NAME, it walks toward that name for as long as that takes. ⚠️ IT WILL WAIT. It will wait outside a city for a winter. The Palelands have a word for finding one on your road and the word is not a friendly one.",
+     "grants": "⛔ NO END DATE. It continues until the errand is complete or it is destroyed — and if the errand is a NAME, it walks toward that name for as long as that takes. ⚠️ BY NOW IT IS BARELY A BODY: worn to silhouette and purpose, and harder to stop for it. IT WILL WAIT. It will wait outside a city for a winter. The Palelands have a word for finding one on your road and the word is not a friendly one.",
      "cannot": "⛔ YOU CANNOT CALL IT OFF. There is no unsetting at this rank — the errand ends when it is done or when someone destroys it, and destroying it is a fight. ⚠️ And it does not distinguish between the person you named and the person now carrying that name."
     }
    ],
-   "_authored": "⛔ ERIK 2026-08-24: 'I also want other skills that summon or build undead constructs — messengers, assassins, special undead… so we either build that into 1-2 skills or one for each. They will need to be distinct purposes.' ⚠️ ONE CRAFT, NOT FIVE: messenger, sentinel and hunter are the SAME MECHANIC (one made body, autonomous, persistent) differing only in the named purpose — five crafts would have shared `summon/bind/command`, `construct`, the autonomy axis and a long duration, and differed in the sentence. ⛔ THAT IS THE CONVERGENCE I FOUND IN DEATH'S THREE READING-CRAFTS and I am not authoring it deliberately. ⚠️ THE AXIS AGAINST `raised_hand` IS ITS OWN HARD BOUND — 'NO JUDGEMENT IN IT'. This one adapts, and that is the escalation and the horror in one move. ⛔ AND THE AXIS AGAINST figurist `walking_figure` (which ALREADY EXISTS and whose capstone JUDGES CASES YOU DID NOT FORESEE) is that this one does NOT adjudicate — IT PURSUES. A magistrate and a hound. Erik ruled the purpose is FIXED at setting; a re-settable, growing version is backlogged as a spirit braid."
+   "_authored": "⛔ ERIK 2026-08-24: 'I also want other skills that summon or build undead constructs — messengers, assassins, special undead… so we either build that into 1-2 skills or one for each. They will need to be distinct purposes.' ⚠️ ONE CRAFT, NOT FIVE: messenger, sentinel and hunter are the SAME MECHANIC (one made body, autonomous, persistent) differing only in the named purpose — five crafts would have shared `summon/bind/command`, `construct`, the autonomy axis and a long duration, and differed in the sentence. ⛔ THAT IS THE CONVERGENCE I FOUND IN DEATH'S THREE READING-CRAFTS and I am not authoring it deliberately. ⚠️ THE AXIS AGAINST `raised_hand` IS ITS OWN HARD BOUND — 'NO JUDGEMENT IN IT'. This one adapts, and that is the escalation and the horror in one move. ⛔ AND THE AXIS AGAINST figurist `walking_figure` (which ALREADY EXISTS and whose capstone JUDGES CASES YOU DID NOT FORESEE) is that this one does NOT adjudicate — IT PURSUES. A magistrate and a hound. Erik ruled the purpose is FIXED at setting; a re-settable, growing version is backlogged as a spirit braid.",
+   "_named_20260824": "⛔ ERIK 2026-08-24: 'Given Errand sucks as a name for this. Something more like DRIVEN SHADE, or Shadow Stalker.' ⚠️ TAKEN — and the flavour now EARNS the word rather than borrowing it: the thing is a corpse, not a spirit, so it WEARS DOWN TO THE PURPOSE over months until it is mostly silhouette and intent. ⛔ That makes 'shade' true by r2/r3 instead of decorative at r1, and it gives the craft a visible clock: the longer it has been walking, the less of it there is and the harder it is to stop. ⚠️ Alternative considered and not taken: DRIVEN HAND, which pairs with `raised_hand` as a set — cleaner, less frightening."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

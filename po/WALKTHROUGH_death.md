@@ -446,7 +446,7 @@
 
 **functions:** hinder, bind, provoke · **gainAxes:** targets, scope · **gains:** broaden · **harm:** incapacitating · imposes
 
-**grants:** ⛔ EVERYONE WHO CAN SEE YOU SEES IT. A line, a crowd, a watch-house — formations come apart, conversations stop mid-word, and every committed line in the place is dropped at once. ⚠️ THE CARRION BIRDS ARRIVE DURING THIS, and everyone notices them arrive.
+**grants:** ⛔ EVERYONE WHO CAN SEE YOU SEES IT. A line, a crowd, a watch-house — formations come apart, conversations stop mid-word, and every committed line in the place is dropped at once. ⚠️ THE CARRION BIRDS ARRIVE DURING THIS, and everyone notices them arrive. ⛔ AND THE MANTLE IS ON YOU, SO IT WORKS ON YOU: while it is worn you take on some of what you are showing them — COLD DOES NOT REACH YOU, and rot finds nothing to start on (`decay: resist`).
 
 **cannot:** ⛔ A FRIGHTENED CROWD IS A STAMPEDE, and a stampede does not check who is in its way. Including you. ⚠️ You still do not choose how any of them act.
 
@@ -454,11 +454,11 @@
 
 **functions:** hinder, bind, provoke · **gainAxes:** conditions, duration · **gains:** deepen · **harm:** incapacitating · imposes
 
-**grants:** ⛔ IT STOPS BEING A DISPLAY AND BECOMES KNOWLEDGE. One living thing knows its ending with your own professional clarity and cannot un-know it — ⚠️ AND HERE THE PEACEFUL ARE REACHED, because you are no longer showing them death. You are showing them dying badly, dying unattended, dying with the thing unfinished. YOU HAVE SEEN ALL THREE AND THEY CAN TELL. ⛔ What comes back is rarely aimed: the terrified turn on whoever is nearest, and nearest is often a friend.
+**grants:** ⛔ IT STOPS BEING A DISPLAY AND BECOMES KNOWLEDGE. One living thing knows its ending with your own professional clarity and cannot un-know it — ⚠️ AND HERE THE PEACEFUL ARE REACHED, because you are no longer showing them death. You are showing them dying badly, dying unattended, dying with the thing unfinished. YOU HAVE SEEN ALL THREE AND THEY CAN TELL. ⛔ What comes back is rarely aimed: the terrified turn on whoever is nearest, and nearest is often a friend. ⛔ AND YOU ARE MOSTLY WEARING IT NOW: `decay: ABSORB` — necrotic work MENDS you — and the strength in your hands is not yours and is not natural. ⚠️ You will notice you are not breathing as often as you should.
 
 **cannot:** ⛔ YOU STILL DO NOT CHOOSE — not the reaction, and not who they turn on. ⚠️ Some of them will thank you. Some of them will never be right again. You will not be able to tell in advance which.
 
-**bounds:** ⛔ THE UNAFRAID ARE HARDER, NOT IMMUNE — but things that cannot feel, and the set dead, are genuinely unmoved · ⛔ YOU DO NOT GET TO CHOOSE HOW THEY ACT ON IT. Run, freeze, or come at you — that is theirs · ⚠️ IT SHOWS AN ENDING AND NEVER CAUSES ONE. Nothing here kills anybody · ⚠️ IT IS PUBLIC AND IT IS REMEMBERED. Everyone who saw it knows what you are now, and the ones who ran will describe it to people who did not · ⛔ THE MANTLE'S FORM IS A CHARACTER FACT, AUTHORED ONCE AND FIXED. It is the same every time, everyone who has seen it can name it, and it is how the Valley knows WHICH Ashwarden was there
+**bounds:** ⛔ THE UNAFRAID ARE HARDER, NOT IMMUNE — but things that cannot feel, and the set dead, are genuinely unmoved · ⛔ YOU DO NOT GET TO CHOOSE HOW THEY ACT ON IT. Run, freeze, or come at you — that is theirs · ⚠️ IT SHOWS AN ENDING AND NEVER CAUSES ONE. Nothing here kills anybody · ⚠️ IT IS PUBLIC AND IT IS REMEMBERED. Everyone who saw it knows what you are now, and the ones who ran will describe it to people who did not · ⛔ THE MANTLE'S FORM IS A CHARACTER FACT, AUTHORED ONCE AND FIXED. It is the same every time, everyone who has seen it can name it, and it is how the Valley knows WHICH Ashwarden was there · ⛔ WHAT YOU WEAR, YOU PARTLY BECOME. At r3 you absorb necrotic work and healing does not sit right — your own tradition's crafts invert on you while the mantle is up
 
 ---
 

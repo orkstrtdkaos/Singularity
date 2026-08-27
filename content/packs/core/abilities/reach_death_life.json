@@ -1389,7 +1389,7 @@
       "resist": "mental",
       "targets": 6
      },
-     "grants": "⛔ EVERYONE WHO CAN SEE YOU SEES IT. A line, a crowd, a watch-house — formations come apart, conversations stop mid-word, and every committed line in the place is dropped at once. ⚠️ THE CARRION BIRDS ARRIVE DURING THIS, and everyone notices them arrive.",
+     "grants": "⛔ EVERYONE WHO CAN SEE YOU SEES IT. A line, a crowd, a watch-house — formations come apart, conversations stop mid-word, and every committed line in the place is dropped at once. ⚠️ THE CARRION BIRDS ARRIVE DURING THIS, and everyone notices them arrive. ⛔ AND THE MANTLE IS ON YOU, SO IT WORKS ON YOU: while it is worn you take on some of what you are showing them — COLD DOES NOT REACH YOU, and rot finds nothing to start on (`decay: resist`).",
      "cannot": "⛔ A FRIGHTENED CROWD IS A STAMPEDE, and a stampede does not check who is in its way. Including you. ⚠️ You still do not choose how any of them act."
     },
     {
@@ -1413,7 +1413,7 @@
       "resist": "mental",
       "targets": 1
      },
-     "grants": "⛔ IT STOPS BEING A DISPLAY AND BECOMES KNOWLEDGE. One living thing knows its ending with your own professional clarity and cannot un-know it — ⚠️ AND HERE THE PEACEFUL ARE REACHED, because you are no longer showing them death. You are showing them dying badly, dying unattended, dying with the thing unfinished. YOU HAVE SEEN ALL THREE AND THEY CAN TELL. ⛔ What comes back is rarely aimed: the terrified turn on whoever is nearest, and nearest is often a friend.",
+     "grants": "⛔ IT STOPS BEING A DISPLAY AND BECOMES KNOWLEDGE. One living thing knows its ending with your own professional clarity and cannot un-know it — ⚠️ AND HERE THE PEACEFUL ARE REACHED, because you are no longer showing them death. You are showing them dying badly, dying unattended, dying with the thing unfinished. YOU HAVE SEEN ALL THREE AND THEY CAN TELL. ⛔ What comes back is rarely aimed: the terrified turn on whoever is nearest, and nearest is often a friend. ⛔ AND YOU ARE MOSTLY WEARING IT NOW: `decay: ABSORB` — necrotic work MENDS you — and the strength in your hands is not yours and is not natural. ⚠️ You will notice you are not breathing as often as you should.",
      "cannot": "⛔ YOU STILL DO NOT CHOOSE — not the reaction, and not who they turn on. ⚠️ Some of them will thank you. Some of them will never be right again. You will not be able to tell in advance which."
     }
    ],
@@ -1437,10 +1437,21 @@
     "duration": 3,
     "targets": 1,
     "variance": 4,
-    "note": "T-II hobble. ⛔ `variance 4` BECAUSE THE CRAFT'S OWN BOUND IS UNPREDICTABILITY — 'you do not get to choose HOW it acts on that'. ⚠️ PROVOKE IS THE VERB IT ALWAYS HAD AND NEVER DECLARED (Erik 2026-08-23). Per `resolveProvoke`, provoke BREAKS THE TARGET'S COMMITTED LINE — `state.tactic` is cleared and they drop to plain fighting — and it honestly reports 'they are not committed to anything you can break' against a foe with no line. ⛔ THAT IS EXACTLY RIGHT HERE: dread does not make anyone fight better, it makes them stop doing the clever thing they were doing. ⚠️ r3's turn-on-an-ally is the terror escalating, not a targeting choice — the Ashwarden still does not pick.",
+    "note": "T-II hobble. ⛔ `variance 4` BECAUSE THE CRAFT'S OWN BOUND IS UNPREDICTABILITY — 'you do not get to choose HOW it acts on that'. ⚠️ PROVOKE IS THE VERB IT ALWAYS HAD AND NEVER DECLARED (Erik 2026-08-23). Per `resolveProvoke`, provoke BREAKS THE TARGET'S COMMITTED LINE — `state.tactic` is cleared and they drop to plain fighting — and it honestly reports 'they are not committed to anything you can break' against a foe with no line. ⛔ THAT IS EXACTLY RIGHT HERE: dread does not make anyone fight better, it makes them stop doing the clever thing they were doing. ⚠️ r3's turn-on-an-ally is the terror escalating, not a targeting choice — the Ashwarden still does not pick. ⛔ ERIK 2026-08-24: 'beyond just the fear, INCREASED RANKS SHOULD GIVE YOU SOME OF THE BENEFITS OF THE UNDEAD — necrotic absorb, immunity to cold, unnatural strength.' ⚠️ THE MANTLE IS WORN, SO IT WORKS ON THE WEARER — that is the whole logic and it was sitting unused in the craft's own framing. r2 `cold: immune` + `decay: resist`; r3 `decay: ABSORB` + unnatural strength. ⛔ THE AFFINITY VOCABULARY ALREADY EXISTS — `immune · resist · vulnerable · absorb` in skill_battle_system.json — so `wornBenefits` needs a READER but invents no vocabulary. ⚠️ AND IT PUTS THE WEARER PARTWAY INTO §48: a warden wearing the mantle at r3 absorbs necrotic damage the way an emerged Afterling does, which means HER OWN TRADITION'S CRAFTS INVERT ON HER while she wears it — Grey Hand bolsters her, healing is a problem. ⛔ THAT IS A COST WITHOUT BEING A BILL.",
     "crit": {
      "success": "The ending arrives early and arrives ACCURATE. It is not the fear of dying that stops them, it is the recognition — and recognition does not wear off when the moment does.",
      "failure": "You show a thing an ending it has already accepted. It looks back at you steadily, and now you are the one who has been read."
+    },
+    "wornBenefits": {
+     "2": {
+      "cold": "immune",
+      "decay": "resist"
+     },
+     "3": {
+      "cold": "immune",
+      "decay": "absorb",
+      "strengthBonus": 2
+     }
     }
    },
    "rankDeltas": [
@@ -1483,9 +1494,13 @@
     {
      "text": "⛔ THE MANTLE'S FORM IS A CHARACTER FACT, AUTHORED ONCE AND FIXED. It is the same every time, everyone who has seen it can name it, and it is how the Valley knows WHICH Ashwarden was there",
      "class": "hard"
+    },
+    {
+     "text": "⛔ WHAT YOU WEAR, YOU PARTLY BECOME. At r3 you absorb necrotic work and healing does not sit right — your own tradition's crafts invert on you while the mantle is up",
+     "class": "drawback"
     }
    ],
-   "plainly": "A fight/social action. The Ashwarden drops her professional restraint and wears the craft openly. r1 staggers one living thing and breaks whatever line it had committed to. r2 does it to everyone who can see her. r3 makes the ending KNOWN rather than felt, and the terrified turn on whoever is nearest, ally or not.",
+   "plainly": "A fight/social action. r1 staggers one living thing and breaks whatever line it had committed to. r2 does it to everyone who can see you, AND the mantle starts working on YOU — immune to cold, resistant to decay. r3 makes the ending KNOWN, the terrified turn on whoever is nearest, and you gain unnatural strength and ABSORB necrotic work — with the catch that healing stops sitting right.",
    "_nameWas": "The Dread",
    "_idWas": "the_dread",
    "_powerSystemWas": "reach_death_life",

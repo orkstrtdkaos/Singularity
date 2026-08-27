@@ -352,6 +352,61 @@ grim: everyone here has handled it."***
 neither Death craft can hold one.** **That is why the spirit braid is backlogged separately — and it may be
 that the braid is not a braid at all but this tradition's own capstone.**
 
+### ⛔ ERIK'S REFRAME, 2026-08-24 — NOT A TRADITION. A PEOPLE.
+
+> *"I'm not necessarily talking about a new tradition — more like a PEOPLE WHO ARE THE BYPRODUCT OF THE
+> YEARS THAT UNDEATH HAS BECOME A THING. The mindless zombies are a tool. The driven shade starts as
+> somewhat one-dimensional but HAS TO ADAPT OVER TIME to achieve its purpose. Eventually they may become a
+> NEW ENTITY through this undeath… and some undead are NEAR DUPLICATE EXTENSIONS of who they were, but with
+> certain traits of the undead. The opportunities here are many."*
+
+⛔ **BETTER THAN A TRADITION, AND IT COSTS NOTHING NEW.** A tradition is a way of working. **This is a
+POPULATION — what exists after four hundred years of a craft practised on an industrial scale.** ⚠️ The
+Palelands' quarries and dykes have run on `raised_hand` for four centuries; **that many raisings produce
+people, not just labour.**
+
+| | what it is | how it got there |
+|---|---|---|
+| **the set crew** | ⛔ a TOOL — no judgement, no self, grabs and slams | `raised_hand`, and it never changes |
+| **the driven shade** | purposed, one-dimensional — ⚠️ **but it ADAPTS, and adaptation is practice at being someone** | `driven_shade`, over seasons |
+| ⛔ **the become** | **a NEW ENTITY** — not who they were, someone the undeath made | ⚠️ **emergent from the row above** |
+| ⛔ **the returned** | **near-duplicate of who they were, carrying undead traits** | ⚠️ **already mechanised — see below** |
+
+#### ⛔ THE MECHANISM FOR "NEAR DUPLICATE" ALREADY EXISTS: IT IS DEPTH
+
+**`engine/death.js` grades how far a person has sunk — Threshold (a day) · Near Dark (a month) · Deep Dark
+(months) · Sealed. ⛔ THAT LADDER ALREADY MEASURES HOW MUCH PERSON IS LEFT.**
+
+- **Threshold** → ⛔ **nearly everything remains. This is the near-duplicate extension.**
+- **Near Dark** → partial. Recognisable, wrong in places, gaps they cannot account for.
+- **Deep Dark** → ⚠️ **a tool. There was not enough left to raise a person out of.**
+- **Sealed** → nothing comes back at all.
+
+⚠️ **ONE LADDER EXPLAINS BOTH RESURRECTION AND WHAT KIND OF UNDEAD EXISTS**, and `calling_back` and
+`raised_hand` stop being two crafts and become **the same act at different depths.** ⛔ **That is a great
+deal of world from machinery that shipped this afternoon.**
+
+#### ⚠️ THE TWO ROUTES DIFFER, WHICH IS THE GOOD PART
+
+- **THE RETURNED WERE RETRIEVED** — someone paid to bring them back, and they are who they were, minus what
+  the dark kept.
+- ⛔ **THE BECOME WERE NEVER RETRIEVED.** They were SET, and they walked, and somewhere in four hundred
+  miles of walking toward a name there started being someone doing the walking. ⚠️ **Nobody chose that.
+  Nobody can be thanked for it.**
+
+**A society holding both would feel very differently about each, and that is where the stories are.**
+
+#### Threads Erik has NOT ruled on
+
+- ⛔ **Which undead traits persist even in a near-duplicate?** cold, tireless, does not heal, reads as dead
+  to Deathsense — ⚠️ **and probably: cannot be raised twice.**
+- **Does a shade that becomes someone STOP pursuing?** ⚠️ **Or is the first act of a new self choosing
+  whether to finish the errand?** ⛔ **That is a scene and it should be one.**
+- ⛔ **SPIRIT INTERTWINING** — Erik: *"definite intertwining opportunities when we get to spirit."* **A body
+  that became someone and a spirit that persists are the same question from two ends, and Spirit is
+  unaudited.** ⚠️ **Do not settle either alone.**
+- **Where do the become LIVE?** `greyhearth` is authored, ratified, and empty.
+
 ### Threads
 
 - ⛔ **DOES IT DISPLACE `driven_shade` AND `raised_hand` OUT OF ASHWARDEN?** ⚠️ Possibly not — a foothill is

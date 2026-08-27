@@ -2827,7 +2827,23 @@
    "_idWas": "the_set_hand",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_reviewed_20260824": "⛔ ERIK 2026-08-24: renamed Set Hand -> RAISED HAND ('better fit to what it is, plus it has lots of utility beyond workers') and the description now says so — doors, loads, lethal ground, boats, gaps, wheels. ⚠️ harmRung was `lethal` ON ALL THREE RANKS for a craft that animates the ALREADY FINISHED and harms nobody — the gloss was telling the GM 'this craft CAN end a life'. Now `none`. ⛔ `damageType: decay` DROPPED: the craft's own mechanic note says 'CONSTRUCT, not damage — the output is LABOUR', so the field contradicted its own block. ⚠️ r2 declared `deepen` while adding scope. TWO [cost] BOUNDS RECLASSIFIED `drawback` per CCode's finding that `cost` is doing the job of a missing class — visibility and outliving-your-attention are real consequences and neither is a bill."
+   "_reviewed_20260824": "⛔ ERIK 2026-08-24: renamed Set Hand -> RAISED HAND ('better fit to what it is, plus it has lots of utility beyond workers') and the description now says so — doors, loads, lethal ground, boats, gaps, wheels. ⚠️ harmRung was `lethal` ON ALL THREE RANKS for a craft that animates the ALREADY FINISHED and harms nobody — the gloss was telling the GM 'this craft CAN end a life'. Now `none`. ⛔ `damageType: decay` DROPPED: the craft's own mechanic note says 'CONSTRUCT, not damage — the output is LABOUR', so the field contradicted its own block. ⚠️ r2 declared `deepen` while adding scope. TWO [cost] BOUNDS RECLASSIFIED `drawback` per CCode's finding that `cost` is doing the job of a missing class — visibility and outliving-your-attention are real consequences and neither is a bill.",
+   "summon": {
+    "tierGap": [
+     -3,
+     -3,
+     -2
+    ],
+    "count": [
+     1,
+     3,
+     8
+    ],
+    "contributions": [
+     "MARTIAL"
+    ],
+    "_why": "⛔ TRIVIAL, AND MANY. A raised hand is `-3` — well below its maker at every rank — because it is UNSKILLED, not weak: Erik 2026-08-24, 'they CAN fight… they don't fight sophisticatedly, but they GRAB AND SLAM AND BITE.' ⚠️ `MARTIAL` and nothing else: no crafts, no tactics, and `provoke` finds NO COMMITTED LINE TO BREAK, which makes a crew the foe you cannot outthink — only out-position. ⛔ THE LADDER IS COUNT, NOT POWER: 1 -> 3 -> a crew. r3 nudges to -2 only because a crew that has worked together for a season moves better, not because any one of them does."
+   }
   },
   {
    "schemaVersion": 1,
@@ -4192,7 +4208,21 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-24: 'I also want other skills that summon or build undead constructs — messengers, assassins, special undead… so we either build that into 1-2 skills or one for each. They will need to be distinct purposes.' ⚠️ ONE CRAFT, NOT FIVE: messenger, sentinel and hunter are the SAME MECHANIC (one made body, autonomous, persistent) differing only in the named purpose — five crafts would have shared `summon/bind/command`, `construct`, the autonomy axis and a long duration, and differed in the sentence. ⛔ THAT IS THE CONVERGENCE I FOUND IN DEATH'S THREE READING-CRAFTS and I am not authoring it deliberately. ⚠️ THE AXIS AGAINST `raised_hand` IS ITS OWN HARD BOUND — 'NO JUDGEMENT IN IT'. This one adapts, and that is the escalation and the horror in one move. ⛔ AND THE AXIS AGAINST figurist `walking_figure` (which ALREADY EXISTS and whose capstone JUDGES CASES YOU DID NOT FORESEE) is that this one does NOT adjudicate — IT PURSUES. A magistrate and a hound. Erik ruled the purpose is FIXED at setting; a re-settable, growing version is backlogged as a spirit braid.",
-   "_named_20260824": "⛔ ERIK 2026-08-24: 'Given Errand sucks as a name for this. Something more like DRIVEN SHADE, or Shadow Stalker.' ⚠️ TAKEN — and the flavour now EARNS the word rather than borrowing it: the thing is a corpse, not a spirit, so it WEARS DOWN TO THE PURPOSE over months until it is mostly silhouette and intent. ⛔ That makes 'shade' true by r2/r3 instead of decorative at r1, and it gives the craft a visible clock: the longer it has been walking, the less of it there is and the harder it is to stop. ⚠️ Alternative considered and not taken: DRIVEN HAND, which pairs with `raised_hand` as a set — cleaner, less frightening."
+   "_named_20260824": "⛔ ERIK 2026-08-24: 'Given Errand sucks as a name for this. Something more like DRIVEN SHADE, or Shadow Stalker.' ⚠️ TAKEN — and the flavour now EARNS the word rather than borrowing it: the thing is a corpse, not a spirit, so it WEARS DOWN TO THE PURPOSE over months until it is mostly silhouette and intent. ⛔ That makes 'shade' true by r2/r3 instead of decorative at r1, and it gives the craft a visible clock: the longer it has been walking, the less of it there is and the harder it is to stop. ⚠️ Alternative considered and not taken: DRIVEN HAND, which pairs with `raised_hand` as a set — cleaner, less frightening.",
+   "summon": {
+    "tierGap": [
+     -1,
+     0,
+     1
+    ],
+    "count": 1,
+    "contributions": [
+     "MARTIAL",
+     "KNOW",
+     "PROTECT"
+    ],
+    "_why": "⛔ ONE, ALWAYS — the hard bound. And the gap RISES because the craft's own fiction is that it WEARS DOWN TO PURPOSE and gets harder to stop: at r3 a `+1` shade is `hard` against its own maker's party, deliberately. ⚠️ ERIK 2026-08-24 TIED IT TO THE ROLL AS WELL — 'I would also tie it to how well you succeeded at the skill and if you crit' — so `summonGap` treats this as a FLOOR: an L5 warden critting r3 raises a LEVEL 7 shade, two above herself, and that happened at the table rather than in this file. ⛔ CONTRIBUTIONS GROW WITH THE RANKS: it hunts (MARTIAL), then it carries word (KNOW), then it holds a door (PROTECT)."
+   }
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -454,6 +454,15 @@ export function sanitizeNewEncounter(raw) {
   const o = raw.opponent;
   return { schemaVersion: 1, id: "gm-" + String(raw.id || raw.name).toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 30),
     type: "duel", name: String(raw.name).slice(0, 60), setup: smartClamp(String(raw.setup || ""), 400), // SNG-152: GM-invented setup is MODEL prose (pack-authored setups never pass here)
+    // ⛔ CCODE-262 — `flavor` WAS DROPPED HERE AND THAT MADE ONE WHOLE FRAME UNREACHABLE. A duel's FLAVOR is
+    // what decides its kind (`encounterKind`: blades → fight, ground → chase, resolve → standoff), and this
+    // constructor never carried it — so every GM-minted encounter was a `fight` by omission.
+    // ⚠️ THE STANDOFF FRAME HAS A TITLE, A WIN CONDITION, A METER LABEL AND AN EXIT RULE IN `collapseMode`,
+    // AND NOTHING IN THE GAME COULD EVER PRODUCE ONE. `chase` is minted by `chaseFromFight`, so it survived
+    // this gap by having a second door; `standoff` had only this one, and it was closed.
+    // ⛔ WHITELISTED, NEVER PASSED THROUGH. An unknown flavor from model output would silently become a kind
+    // with no exit rule, which is worse than being a fight.
+    ...(["standoff", "chase"].includes(String(raw.flavor || "")) ? { flavor: String(raw.flavor) } : {}),
     lethal: !!raw.lethal,
     opponent: { name: String(o.name).slice(0, 60), health: Math.max(2, Math.min(8, o.health | 0 || 4)),
       threat: Math.max(10, Math.min(70, o.threat | 0 || 35)), yieldAt: Math.max(0, Math.min(3, o.yieldAt | 0)),

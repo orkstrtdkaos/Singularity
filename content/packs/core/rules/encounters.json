@@ -1,109 +1,116 @@
 {
- "schemaVersion": 1,
- "id": "encounters",
- "kind": "rules",
- "note": "THE MISSING FILE. app.js:2794 reads CONTENT.rules.encounters?.[enc.def.type] for winXp/solveXp/etc and nothing has ever defined it, so every encounter has awarded ZERO XP. Keys are enc.def.type — VERIFIED against content: the only three types in the repo are `duel` (15), `puzzle` (2) and `challenge` (2). A `default` block catches any type authored later so this can never silently pay zero again.",
- "howToRead": {
-  "base": "Each type carries BASE awards, tuned for a NOTABLE-band opponent (threat ~30).",
-  "threatScale": "Actual award = base × threatScale(opponent.threat). opponent.threat is a real number in content (26-45 observed).",
-  "walkAwayIsSpecial": "walkAwayXp is NOT a flat value — see walkAway below. Erik: 'you should only get xp that way if you are really outclassed and it's a smart move.'"
- },
- "threatScale": {
-  "note": "Multiplier on the base award, from the opponent's threat vs the player's expected threat for their level. CCODE: playerThreat ≈ the same figure synthesizeOpponentSheet uses for an even match at the player's band.",
-  "bands": [
-   {
-    "ratio": "< 0.6",
-    "label": "you outclass it",
-    "mult": 0.4
-   },
-   {
-    "ratio": "0.6 - 1.4",
-    "label": "even match",
-    "mult": 1.0
-   },
-   {
-    "ratio": "1.4 - 2.2",
-    "label": "it outclasses you",
-    "mult": 1.8
-   },
-   {
-    "ratio": "> 2.2",
-    "label": "badly outmatched",
-    "mult": 2.8
-   }
+  "schemaVersion": 1,
+  "id": "encounters",
+  "kind": "rules",
+  "note": "THE MISSING FILE. app.js:2794 reads CONTENT.rules.encounters?.[enc.def.type] for winXp/solveXp/etc and nothing has ever defined it, so every encounter has awarded ZERO XP. Keys are enc.def.type — VERIFIED against content: the only three types in the repo are `duel` (15), `puzzle` (2) and `challenge` (2). A `default` block catches any type authored later so this can never silently pay zero again.",
+  "howToRead": {
+    "base": "Each type carries BASE awards, tuned for a NOTABLE-band opponent (threat ~30).",
+    "threatScale": "Actual award = base × threatScale(opponent.threat). opponent.threat is a real number in content (26-45 observed).",
+    "walkAwayIsSpecial": "walkAwayXp is NOT a flat value — see walkAway below. Erik: 'you should only get xp that way if you are really outclassed and it's a smart move.'"
+  },
+  "threatScale": {
+    "note": "Multiplier on the base award, from the opponent's threat vs the player's expected threat for their level. CCODE: playerThreat ≈ the same figure synthesizeOpponentSheet uses for an even match at the player's band.",
+    "bands": [
+      {
+        "ratio": "< 0.6",
+        "label": "you outclass it",
+        "mult": 0.4
+      },
+      {
+        "ratio": "0.6 - 1.4",
+        "label": "even match",
+        "mult": 1.0
+      },
+      {
+        "ratio": "1.4 - 2.2",
+        "label": "it outclasses you",
+        "mult": 1.8
+      },
+      {
+        "ratio": "> 2.2",
+        "label": "badly outmatched",
+        "mult": 2.8
+      }
+    ]
+  },
+  "walkAway": {
+    "note": "⚠️ ERIK'S CORRECTION, and the reason this is not a flat field. A flat walk-away award does not reward CORRECT disengagement — it rewards disengagement, which is farmable (open encounter, walk away, repeat). Paying on the THREAT GAP makes it a reward for JUDGEMENT, and it cannot be farmed because being genuinely outmatched is not a state a player can cheaply manufacture.",
+    "formula": "walkAwayXp = winXp(base) × walkAwayFraction(threat ratio)",
+    "fractions": [
+      {
+        "ratio": "< 0.6",
+        "label": "you outclass it — walking away from riffraff is a stroll",
+        "fraction": 0.0
+      },
+      {
+        "ratio": "0.6 - 1.4",
+        "label": "even match — a token; you learned a little sizing it up",
+        "fraction": 0.15
+      },
+      {
+        "ratio": "1.4 - 2.2",
+        "label": "outclassed by a band — A REAL READ, CORRECTLY ACTED ON",
+        "fraction": 0.5
+      },
+      {
+        "ratio": "> 2.2",
+        "label": "badly outmatched — recognising a fight you cannot win IS the lesson",
+        "fraction": 0.7
+      }
+    ]
+  },
+  "incapacitated": {
+    "note": "ERIK: 'getting beaten should give you a little xp.' He is right and this overturns my round-1 zero. A zero teaches the player that losing is WORTHLESS TIME, which is false and makes defeat feel like a punishment rather than a beat. You were there, it cost you, and you learned the most expensive lesson available.",
+    "fraction": 0.2,
+    "formula": "incapacitatedXp = winXp(base) × 0.20, threat-scaled like everything else"
+  },
+  "duel": {
+    "winXp": 30,
+    "solveXp": 34,
+    "completeXp": 25,
+    "yieldXp": 12,
+    "fleeXp": 10,
+    "abandonXp": 5,
+    "note": "solveXp EXCEEDS winXp deliberately: the catalog spent 292 crafts insisting most problems are not fights. The XP table should say the same thing — ending a duel WITHOUT winning it by force pays best."
+  },
+  "puzzle": {
+    "solveXp": 36,
+    "completeXp": 30,
+    "winXp": 26,
+    "yieldXp": 8,
+    "fleeXp": 6,
+    "abandonXp": 4,
+    "note": "A puzzle's whole point is the solve; winXp is present only because the engine reads it for opponent_fell, which a puzzle can produce if it has a guardian."
+  },
+  "challenge": {
+    "completeXp": 32,
+    "solveXp": 34,
+    "winXp": 28,
+    "yieldXp": 10,
+    "fleeXp": 8,
+    "abandonXp": 5,
+    "note": "Challenges are the Coliseum's shape (blind grid) — completion is the honest outcome and solving is the clever one.",
+    "defaultFailureCost": {
+      "health": 3,
+      "energy": 5,
+      "hours": 1
+    },
+    "critFailureMultiplier": 2,
+    "_ccode262": "⛔ THESE TWO WERE LOST IN A SILENT CLOBBER AND IT MADE EVERY CHALLENGE FREE TO GRIND. `resolution.json` authors encounters.challenge with defaultFailureCost {health:3, energy:5, hours:1} and critFailureMultiplier 2. THIS FILE'S challenge block replaced it wholesale at load, and carried only XP — so in the loaded game `challengeStage` read no default at all.\n⚠️ THE DAMAGE WAS SPECIFIC AND WELL HIDDEN. `rockslide_crossing` stage 1 authors {energy:4, hours:1} and NO health, plainly relying on the default to supply it; stages 2 and 3 author health explicitly. So the FIRST stage of a challenge — the one a player actually grinds — cost nothing but 4 energy per attempt, forever.\n⛔ FOUND BY DRIVING THE ENCOUNTER, NOT BY READING IT. Both files look correct on their own; only the merged result is wrong, and nothing was comparing them."
+  },
+  "default": {
+    "winXp": 28,
+    "solveXp": 32,
+    "completeXp": 26,
+    "yieldXp": 10,
+    "fleeXp": 8,
+    "abandonXp": 4,
+    "note": "⚠️ SAFETY NET. Any encounter type authored later falls here rather than silently paying zero — which is exactly the failure that made this file necessary. CCODE: app.js should read `rules.encounters[type] || rules.encounters.default`."
+  },
+  "designNotes": [
+    "solveXp > winXp AT EVERY TYPE. This is the single most deliberate choice in the file. 292 crafts insist most problems are not fights; the reward table has to agree or the fiction and the mechanics pull against each other.",
+    "walkAway and incapacitated are FORMULAS, not values, because both are about the SITUATION rather than the act — Erik's correction, and it is the difference between rewarding judgement and rewarding a button.",
+    "Base values are tuned so a NOTABLE encounter (~30) pays ~30 XP against xpPerLevel's L1 cost of 100 — three even encounters is a level at the bottom of the ladder, which is the right early pace. At the top, threat-scaling plus the level curve does the rest.",
+    "⚠️ THE MANIFEST IS THE OTHER HALF. This file does nothing until `rules/encounters.json` is registered in content/packs/core/manifest.json under provides.rules. CCODE: that registration IS the fix — the file alone changes nothing, which is precisely how this bug survived."
   ]
- },
- "walkAway": {
-  "note": "⚠️ ERIK'S CORRECTION, and the reason this is not a flat field. A flat walk-away award does not reward CORRECT disengagement — it rewards disengagement, which is farmable (open encounter, walk away, repeat). Paying on the THREAT GAP makes it a reward for JUDGEMENT, and it cannot be farmed because being genuinely outmatched is not a state a player can cheaply manufacture.",
-  "formula": "walkAwayXp = winXp(base) × walkAwayFraction(threat ratio)",
-  "fractions": [
-   {
-    "ratio": "< 0.6",
-    "label": "you outclass it — walking away from riffraff is a stroll",
-    "fraction": 0.0
-   },
-   {
-    "ratio": "0.6 - 1.4",
-    "label": "even match — a token; you learned a little sizing it up",
-    "fraction": 0.15
-   },
-   {
-    "ratio": "1.4 - 2.2",
-    "label": "outclassed by a band — A REAL READ, CORRECTLY ACTED ON",
-    "fraction": 0.5
-   },
-   {
-    "ratio": "> 2.2",
-    "label": "badly outmatched — recognising a fight you cannot win IS the lesson",
-    "fraction": 0.7
-   }
-  ]
- },
- "incapacitated": {
-  "note": "ERIK: 'getting beaten should give you a little xp.' He is right and this overturns my round-1 zero. A zero teaches the player that losing is WORTHLESS TIME, which is false and makes defeat feel like a punishment rather than a beat. You were there, it cost you, and you learned the most expensive lesson available.",
-  "fraction": 0.2,
-  "formula": "incapacitatedXp = winXp(base) × 0.20, threat-scaled like everything else"
- },
- "duel": {
-  "winXp": 30,
-  "solveXp": 34,
-  "completeXp": 25,
-  "yieldXp": 12,
-  "fleeXp": 10,
-  "abandonXp": 5,
-  "note": "solveXp EXCEEDS winXp deliberately: the catalog spent 292 crafts insisting most problems are not fights. The XP table should say the same thing — ending a duel WITHOUT winning it by force pays best."
- },
- "puzzle": {
-  "solveXp": 36,
-  "completeXp": 30,
-  "winXp": 26,
-  "yieldXp": 8,
-  "fleeXp": 6,
-  "abandonXp": 4,
-  "note": "A puzzle's whole point is the solve; winXp is present only because the engine reads it for opponent_fell, which a puzzle can produce if it has a guardian."
- },
- "challenge": {
-  "completeXp": 32,
-  "solveXp": 34,
-  "winXp": 28,
-  "yieldXp": 10,
-  "fleeXp": 8,
-  "abandonXp": 5,
-  "note": "Challenges are the Coliseum's shape (blind grid) — completion is the honest outcome and solving is the clever one."
- },
- "default": {
-  "winXp": 28,
-  "solveXp": 32,
-  "completeXp": 26,
-  "yieldXp": 10,
-  "fleeXp": 8,
-  "abandonXp": 4,
-  "note": "⚠️ SAFETY NET. Any encounter type authored later falls here rather than silently paying zero — which is exactly the failure that made this file necessary. CCODE: app.js should read `rules.encounters[type] || rules.encounters.default`."
- },
- "designNotes": [
-  "solveXp > winXp AT EVERY TYPE. This is the single most deliberate choice in the file. 292 crafts insist most problems are not fights; the reward table has to agree or the fiction and the mechanics pull against each other.",
-  "walkAway and incapacitated are FORMULAS, not values, because both are about the SITUATION rather than the act — Erik's correction, and it is the difference between rewarding judgement and rewarding a button.",
-  "Base values are tuned so a NOTABLE encounter (~30) pays ~30 XP against xpPerLevel's L1 cost of 100 — three even encounters is a level at the bottom of the ladder, which is the right early pace. At the top, threat-scaling plus the level curve does the rest.",
-  "⚠️ THE MANIFEST IS THE OTHER HALF. This file does nothing until `rules/encounters.json` is registered in content/packs/core/manifest.json under provides.rules. CCODE: that registration IS the fix — the file alone changes nothing, which is precisely how this bug survived."
- ]
 }

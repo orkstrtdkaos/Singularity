@@ -19202,6 +19202,100 @@ await (async () => {
       g.capacity > NS.growthFor(stranger, C199.abilities, { day: 400 }).capacity);
   }
 
+  // 5am · CCODE-262 — THE OTHER CHALLENGE TYPES, AND THE FRAME NOTHING COULD REACH.
+  // ⛔ ERIK: "Proceed with other challenge types to verify they work as intended. fix what needs it."
+  // Every fix this week came out of the duel path. `challenge` and `puzzle` share startEncounter, the
+  // receipt seam and the ops door with it, and nothing had driven them since.
+  {
+    const EN262 = await import("../engine/encounters.js");
+    const EF262 = await import("../engine/encounterFrame.js");
+    const rules262 = C199.rules || {};
+    const res262 = (degree, margin) => ({ degree, margin, chance: 50, roll: 50 });
+
+    const chDef = JSON.parse(readFileSync(join(root, "content/packs/valley/encounters/rockslide_crossing.json"), "utf8"));
+    const ch = (chDef.encounters || [chDef])[0];
+    // ⚠️ NON-VACUITY: a def with no stages would pass every claim below.
+    check("CCODE-262: the challenge fixture is a real staged encounter (floor)",
+      ch?.type === "challenge" && (ch.stages || []).length >= 2);
+
+    // a challenge must FINISH on the win path…
+    let st = EN262.startEncounter(ch), done = null;
+    for (let i = 0; i < 20 && !done; i++) {
+      const r = EN262.challengeStage(st, ch, res262("success", 12), rules262, {});
+      st = r.state || st; if (r.ended) done = r;
+    }
+    check("CCODE-262: a challenge driven with successes completes", done?.outcome === "completed");
+
+    // …and it must cost you when it does not. ⛔ IT HAS NO FAILURE EXIT BY DESIGN — the stage says "it costs
+    // you, but you can try again" — so loss is by ATTRITION, and the only honest test SPENDS the health.
+    // ⚠️ MY FIRST HARNESS WATCHED FOR `ended` WHILE NEVER APPLYING THE DELTAS, so it reported both authored
+    // challenges as unlosable. A test that never spends the currency it measures always finds infinite money.
+    let st2 = EN262.startEncounter(ch), hp = 30, spent = 0;
+    for (let i = 0; i < 60 && hp > 0; i++) {
+      const r = EN262.challengeStage(st2, ch, res262("failure", -14), rules262, {});
+      st2 = r.state || st2; hp += (r.deltas?.health ?? 0); spent++;
+      if (r.ended) break;
+    }
+    check("CCODE-262: …and failing it bleeds you out — a challenge is losable by attrition, not by an exit",
+      hp <= 0 && spent < 60, `hp ${hp} after ${spent} failed attempts`);
+    // ⛔ AND THE ROOT CAUSE, GATED ON THE MERGED CONFIG RATHER THAN ON EITHER FILE. `resolution.json` authors
+    // encounters.challenge WITH a defaultFailureCost; `encounters.json` authors the same key with only XP and
+    // REPLACED it at load. Both files read correctly on their own — only the merge was wrong, and nothing was
+    // comparing them. The result: `rockslide_crossing` stage 1 authors {energy, hours} and no health, relying
+    // on that default, so the FIRST stage of a challenge — the one a player actually grinds — was free.
+    // ⚠️ THIS GATE READS THE LOADED BAG ON PURPOSE. Asserting against resolution.json would have stayed green
+    // through the entire bug.
+    {
+      const merged = C199.rules?.encounters?.challenge || {};
+      check("CCODE-262: the LOADED challenge config still carries a failure cost — merges do not eat it",
+        Number(merged.defaultFailureCost?.health) > 0 && Number(merged.critFailureMultiplier) > 1,
+        JSON.stringify(merged.defaultFailureCost ?? null));
+      // ⚠️ non-vacuity: a stage that authors its own health would mask a missing default
+      const stage1 = (ch.stages || [])[0] || {};
+      check("CCODE-262: …and the first stage still relies on it (floor — an explicit health here hides the bug)",
+        !(Number(stage1.failureCost?.health) > 0));
+    }
+
+    // PUZZLE — the sense step must actually buy something here, or hints are just description
+    const pzDef = JSON.parse(readFileSync(join(root, "content/packs/valley/encounters/precursor_mechanism.json"), "utf8"));
+    const pz = (pzDef.encounters || [pzDef])[0];
+    check("CCODE-262: a blind attempt earns fewer hints than a decisive read — the sense step buys insight",
+      EN262.puzzleHints(pz, 0).length < EN262.puzzleHints(pz, 3).length);
+    let pst = EN262.startEncounter(pz), solved = null;
+    for (let i = 0; i < 20 && !solved; i++) {
+      const r = EN262.puzzleAttempt(pst, pz, res262("success", 14), rules262, {});
+      pst = r.state || pst; if (r.ended) solved = r;
+    }
+    check("CCODE-262: a puzzle can be solved", solved?.outcome === "solved");
+    const pf = EN262.puzzleAttempt(EN262.startEncounter(pz), pz, res262("failure", -16), rules262, {});
+    check("CCODE-262: …and a failed attempt costs something — a sealed thing cannot be brute-forced free",
+      Object.values(pf?.deltas || {}).some(v => Number(v) !== 0));
+
+    // ═══ ⛔ THE FRAME NOTHING COULD REACH ═══
+    // A duel's FLAVOR decides its kind — blades/fight, ground/chase, resolve/standoff. `sanitizeNewEncounter`
+    // never carried `flavor`, so every GM-minted encounter was a fight BY OMISSION. `chase` survived that by
+    // having a second door (`chaseFromFight`); `standoff` had only this one, and it was closed.
+    // ⚠️ IT HAS A TITLE, A WIN CONDITION, A METER LABEL AND AN EXIT RULE IN `collapseMode`, and nothing in
+    // the game could ever produce one. Built, framed, unreachable — this project's signature defect.
+    const mint = (flavor) => EN262.sanitizeNewEncounter({ type: "duel", name: "A tense parley", flavor,
+      opponent: { name: "the toll captain", threat: 40, health: 5 } });
+    check("CCODE-262: a GM-minted duel can now be a STANDOFF — the frame is reachable at last",
+      EF262.encounterKind(mint("standoff")) === "standoff");
+    check("CCODE-262: …and a chase, which had a second door and did not need this one",
+      EF262.encounterKind(mint("chase")) === "chase");
+    // ⛔ WHITELISTED, NOT PASSED THROUGH. An unknown flavor from model output would become a kind with no
+    // exit rule, which is worse than being a fight.
+    check("CCODE-262: an unknown flavor is DROPPED, not honoured — model output does not get to invent kinds",
+      mint("nonsense")?.flavor === undefined && EF262.encounterKind(mint("nonsense")) === "fight"
+      && EF262.encounterKind(mint(undefined)) === "fight");
+    // ⚠️ AND THE FRAME MUST ACTUALLY BE AUTHORED, or we just made a kind that renders as nothing.
+    const fk = (C199.frameKinds?.frameKinds) || JSON.parse(readFileSync(join(root, "content/packs/core/rules/encounter_frame_kinds.json"), "utf8")).frameKinds || {};
+    const ids = Array.isArray(fk) ? fk.map(f => f.id) : Object.keys(fk);
+    check("CCODE-262: every kind encounterKind can return is authored as a frame",
+      ["fight", "chase", "hazard", "puzzle", "standoff"].every(k => ids.includes(k)), ids.join(","));
+  }
+
+
   // 5ag · ⛔ CCODE-248b — NOBODY IS ONE-DIMENSIONAL. Erik: "Veth… she's supposed to be a teacher, but she's
   // also a warden, so she would likely be valuable in a fight too. The NPCs aren't one dimensional."
   //

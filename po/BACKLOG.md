@@ -545,3 +545,52 @@ mechanical consequence rather than only flavour.**
 - **THE SPIRIT: not Death's work at all.** ⚠️ **Spirit, and Erik has already flagged the intertwining.**
   ⛔ **A cocoon-thing whose SHELL is sound and whose OCCUPANT is damaged is a problem no Ashwarden craft
   addresses, and that gap is deliberate.**
+
+---
+
+## ⛔ UNDEATH — PROPOSALS, in the order they unblock each other (2026-08-24)
+
+⚠️ **THE MODEL IS NOW CANON: `SYSTEM_SPEC §48`.** This section is the WORK, not the world.
+
+### P1 · ⛔ ERIK RULES: what decides NARROWING vs STABLE
+**BLOCKS EVERYTHING ELSE.** ⚠️ Until this is ruled, no craft can say what it produces and no Afterling can
+be authored. **Candidates: depth raised from · GIVEN a purpose vs merely set · whether anyone attended
+them · whether a name was kept.** ⛔ **My lean: whether they were GIVEN A PURPOSE** — it makes the narrowing
+something a WARDEN DID rather than something that happened, which puts the moral weight on a player.
+
+### P2 · ⛔ ERIK RULES: undeath with no vessel and no person (§48.1's empty cell)
+**A place that is undead; a working that keeps working.** ⚠️ `grey_road` already touches it. ⛔ **Decide
+whether this exists before Spirit is audited, because it is the same question from the other end.**
+
+### P3 · CCode — `heal` → `decay` on an undead (§48.5)
+⛔ **The smallest real build here.** `absorb` already exists and already reports negative damage; **this is
+the missing inverse.** ⚠️ **One rule, and it makes every healer in the game a hazard to the wrong target.**
+
+### P4 · CCode — the LASH-OUT attack shape (§48.2)
+⛔ **A strike from INSIDE the shell — not from reach, not from limbs, past armour and past position.**
+⚠️ **Genuinely new geometry in this game; nothing else attacks from a place you are already standing next
+to.** **Gate it on the BREACHING phase so the phases mean something.**
+
+### P5 · CCode — divergent raise/retrieve curves (§48.7)
+**`death.js` has the ladder; it does not have the two curves.** ⛔ **This is what produces the setting's
+Afterlings, so it is worldbuilding wearing a difficulty modifier.**
+
+### P6 · Aevi — `wither` cocoon outcomes (§48.8)
+⚠️ **Next in the Death walkthrough anyway.** ⛔ **Three outcomes by phase, and the warden does not choose.**
+
+### P7 · Aevi — Deathsense reads INVERTED life (§48.6)
+⛔ **Its current `cannot` says the opposite.** ⚠️ Already audited; revisit and correct.
+
+### P8 · Aevi — `decay: absorb` on undead sheets
+**One line per sheet once P1 settles what kinds exist.** ⚠️ **Depends on the summon-sheet work
+(`po/HANDOFF_ccode_summon_sheets.md`), since that is where an undead's sheet comes from.**
+
+### P9 · ⚠️ THE SPIRIT INTERTWINING — do not start alone
+**Erik: *"definite intertwining opportunities when we get to spirit."*** ⛔ **A body that became someone and
+a spirit that persists are one question from two ends. Spirit is UNAUDITED.** ⚠️ **P1, P2 and the Spirit
+audit should be ruled together or they will contradict.**
+
+### P10 · Afterlings as NPCs and companions
+**Erik: *"it would be awesome if these undead actually could become NPCs and companions."*** ⛔ **The
+machinery exists — bond bands, stages, `downedEffect`, evolution.** ⚠️ **`greyhearth` is authored, ratified
+as the Grave-Caller foothill, and carries `abilities: 0`.** **The place to put them is empty and waiting.**

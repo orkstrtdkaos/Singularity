@@ -3548,3 +3548,152 @@ thing is temporary, so I walled it off from becoming permanent.
 answer is interesting, the limit is a DEFAULT and must be written as one.** ⚠️ **A hard bound is for things
 that must never happen (`the finished only`, `it does not adjudicate`). ⛔ IT IS NOT FOR THINGS THAT ARE
 MERELY UNUSUAL.**
+
+---
+
+## 48. ⛔ UNDEATH — the model, ratified 2026-08-24
+
+**Erik, across one session, built this from the Death audit. ⛔ IT IS NOT A TRADITION. It is a POPULATION —
+what exists after four hundred years of raising practised at industrial scale in the Palelands.**
+
+⚠️ **Almost none of it needed new machinery.** The retrieval ladder, `absorb`, `contributionsOf`,
+`ordered_nanite` maintenance and the `decay` damage type were all already built. **This section records what
+they mean together.**
+
+### 48.1 ⛔ UNDEATH IS A POWER PUT INTO A VESSEL. PERSONHOOD AND EMBODIMENT ARE SEPARATE QUESTIONS.
+
+> Erik: *"undeath puts power into the body WITH OR WITHOUT A PERSON RETURNING — and sometimes WITH OR
+> WITHOUT A BODY."*
+
+|  | **a person is present** | **no person** |
+|---|---|---|
+| **body** | **THE RETURNED** — retrieved shallow; who they were, minus what the dark kept | the set crew (tool) → the driven (purpose) → ⛔ **AFTERLINGS** |
+| **no body** | what `ask_the_dead` speaks to — *"a person, tired, being asked one more question"* | ⛔ **UNCLAIMED: power with no vessel and nobody in it** |
+
+⚠️ **THE BOTTOM-RIGHT IS UNAUTHORED AND IS THE MOST INTERESTING CELL.** Not a ghost — **a PLACE that is
+undead, a working that keeps working.** ⛔ `grey_road` already gestures at it: *"fitting the space that the
+dead have already shaped."*
+
+### 48.2 ⛔ THE BODY IS A COCOON, NOT A CORPSE
+
+> Erik: *"the undead body is like a COCOON for the undead spirit or energy — as it wears, THE ENTITY GETS
+> STRONGER AND MORE CAPABLE. In between IT CAN LASH OUT FROM THE BODY."*
+
+⛔ **WEARING-DOWN IS GESTATION, NOT DECAY.** ⚠️ **I first modelled it as "how much person is left" and Erik
+inverted it: the body is the SHELL THE THING INSIDE IS OUTGROWING.** **This is why `driven_shade` r3 is
+*harder to stop* the longer it has walked — authored as flavour, and it is the mechanism.**
+
+| phase | shell | occupant |
+|---|---|---|
+| **set** | intact | dormant, or nothing yet |
+| ⛔ **BREACHING** | wearing, thinning | ⛔ **growing — AND IT CAN STRIKE FROM INSIDE** |
+| **emerged** | spent or shed | strong, capable, uncontained |
+
+⚠️ **"LASH OUT FROM THE BODY" IS A DISTINCT ATTACK SHAPE AND SHOULD BE BUILT AS ONE:** it comes not from
+reach or limbs but **from inside the shell — past armour, past position, from a thing you have not met.**
+⛔ **The corpse is the delivery system and it is not the threat.**
+
+### 48.3 ⛔ TWO END STATES. THE NARROWING IS NOT THE DEFAULT.
+
+> Erik: *"purpose-driven is the NARROWING END CASE where undead become UNMINDED PURPOSE. Those are very
+> dangerous. But there are MORE STABLE FORMS THAT HAVE FULL PERSONALITY."*
+
+| | ⛔ **NARROWING** | ⛔ **STABLE — "AFTERLINGS"** |
+|---|---|---|
+| what emerges | unminded purpose; everything that was not the errand is gone | a whole personality |
+| how | a `driven_shade` at its end — four hundred miles of one thought | ⚠️ **not ruled** |
+| danger | ⛔ **cannot be reasoned with — nothing left to reason WITH** | can be talked to, hired, married, wronged |
+
+⚠️ **IF EVERY UNDEAD ENDED AS UNMINDED PURPOSE THE PALELANDS WOULD BE A HORROR SET.** ⛔ **The stable forms
+are what make it a place people LIVE** — cold, tireless, not healing, working the dykes because they always
+did.
+
+**⚠️ WHAT DECIDES WHICH IS NOT RULED.** Candidates: the depth raised from · whether they were GIVEN a
+purpose or merely set · whether anyone attended them · whether a name was kept (`names_of_the_lost`).
+
+### 48.4 THE ATTRIBUTES OF UNDEATH — derived from what the crafts already claim
+
+**Does not tire** (`raised_hand`) · **does not heal** (`calling_back`: *"comes back exactly as hurt as it
+went down"*) · **does not need** food, water, air, sleep · **persists past attention** (*"the Palelands are
+full of crews nobody remembers setting"*) · **wears rather than ages** · **answers to `decay`** ·
+⛔ **holds a purpose better than a self** · ⛔ **reads as INVERTED life, not as absence** (§48.6).
+
+### 48.5 ⛔ HEALING HARMS THE UNDEAD
+
+> Erik: *"straight healing applied to an undead is like straight necrotic to the living."*
+
+⚠️ **HALF OF THIS IS ALREADY BUILT.** `skill_battle_system.json` carries affinities `immune · resist ·
+vulnerable · ABSORB`, and its note reads: ***"ABSORB reports a NEGATIVE damage amount — the blow HEALS its
+target."*** **An undead authored `decay: absorb` is one line and works today: rot mends it.**
+
+⛔ **THE INVERSE IS NOT BUILT.** Affinity applies to damage types and healing is not one. **Needed: `heal`
+applied to an undead delivers its magnitude as `decay`.** ⚠️ **A cleric mercy-healing an Afterling burns
+it, and does not learn that until it is done.**
+
+### 48.6 ⛔ DEATHSENSE IS THE UNDEAD DETECTOR
+
+> Erik: *"Deathsense would read the NEGATIVE LIFE POWER — it would make a great undead detector."*
+
+⚠️ **ITS CURRENT `cannot` FORBIDS EXACTLY THIS** — *"reads the living and the dying, not the already-dead.
+A corpse has nothing left to sense."* ⛔ **TRUE OF A CORPSE. AN UNDEAD HAS THE OPPOSITE OF NOTHING.**
+
+**Revision owed: Deathsense reads life — positive in the living, FALLING in the dying, ⛔ INVERTED in the
+undead.** ⚠️ **A warden walks into a room and knows who in it is not alive, without asking and without
+being subtle — which against a stable Afterling is a SOCIAL problem, not a tactical one.**
+
+### 48.7 ⛔ RAISING GETS HARDER EACH TIME, AND THAT IS WHY THE OLD HEROES ARE UNDEAD
+
+> Erik: *"I don't agree with cannot be raised twice — however there should be a DIFFICULTY THAT INCREASES
+> PER TIME… which is probably a good reason why after a long time SOME HEROES BECOME UNDEAD: it's too hard
+> to raise them back to living, but they CAN CONTINUE IN UNDEATH."*
+
+⛔ **"CANNOT BE RAISED TWICE" WAS MY PROPOSAL AND IT IS WITHDRAWN — A WALL WHERE A CURVE BELONGS**
+(§47.14, fourth instance).
+
+| | to LIVING (`retrieve`) | to UNDEATH (`raise`) |
+|---|---|---|
+| per prior raising | ⛔ rises steeply | gently |
+| per depth and elapsed time | ⛔ rises steeply | gently |
+| **consequence** | ⛔ **eventually impossible** | **still available** |
+
+⚠️ **A hero four centuries dead cannot be made alive and CAN be made to continue.** ⛔ **The oldest and most
+storied undead in the world are the people nobody could afford to bring back properly. Each is somebody's
+failure and somebody's mercy.**
+
+### 48.8 ⛔ WITHER DESTROYS THE COCOON — AND MAY FREE WHAT IS IN IT
+
+> Erik: *"using Wither on an undead destroys the body, leaving a spirit that is not ready to exist outside
+> it — either destroyed or very vulnerable… but FOR SOME SPIRITS IT MIGHT BE FREEING."*
+
+**Three outcomes from one act, ⛔ AND THE WARDEN DOES NOT CHOOSE WHICH** — it follows the cocoon phase:
+
+- **set** → ⛔ **DESTROYED.** Nothing was far enough along. *This is what a warden usually intends.*
+- **breaching** → ⚠️ **VULNERABLE.** Something is there, out early, exposed. **A window to finish it — or save it.**
+- **emerged** → ⛔ **FREED. The cocoon was the last thing holding it in.**
+
+⚠️ **SO THE CRAFT MEANT TO UN-MAKE UNDEAD IS HOW AN AFTERLING IS BORN, AND A WARDEN WHO DID NOT KNOW THAT
+HAS MADE ONE.** ⛔ **It is an Ashwarden craft un-making another Ashwarden's work, with a failure mode that
+creates the thing it was aimed at.**
+
+### 48.9 MAINTENANCE, NOT MEDICINE
+
+> Erik: *"we need a way to heal undead — by MAINTENANCE for the body, or OTHER POWERS for the spirit."*
+
+- ⛔ **THE BODY: MAINTENANCE.** ⚠️ **`kept_vigil` is already `ordered_nanite` — the same structured nanite
+  behind Seraphic agelessness — and already holds a failing thing at its state.** **It is the closest craft
+  in the game to undead repair and was not written for it.**
+- ⛔ **THE SPIRIT: NOT DEATH'S WORK.** ⚠️ **Spirit, and the gap is deliberate. A cocoon whose SHELL is sound
+  and whose OCCUPANT is damaged is a problem no Ashwarden craft addresses.**
+
+### 48.10 WHAT THIS OWES, AND TO WHOM
+
+| owed | to |
+|---|---|
+| `heal` → `decay` on undead | ⛔ CCode — not built |
+| the lash-out attack shape | ⛔ CCode — not built |
+| divergent raise/retrieve difficulty curves | CCode — `death.js` has the ladder, not the curves |
+| Deathsense `cannot` revision (§48.6) | ⚠️ Aevi — the craft is already audited; revisit |
+| `wither` cocoon-phase outcomes | ⚠️ Aevi — next in the Death walkthrough |
+| ⛔ **what decides narrowing vs stable** | ⛔ **ERIK — unruled, and it is the load-bearing one** |
+| the empty cell: undeath with no vessel and no person | ⛔ **ERIK** |
+| Spirit intertwining | ⛔ **ERIK — and Spirit is unaudited; do not settle either alone** |

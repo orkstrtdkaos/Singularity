@@ -294,3 +294,27 @@ would make `retrieve` feel different without needing a different verb (per §5b)
 - **And it pairs with the existing canon** — Seraphic craft is structured nanite, and `lore/power_systems.md`
   already ties Seraphic agelessness to maintenance machinery. ⛔ **A resurrection that is maintenance
   performed by something vast is a genuinely different fiction from a warden walking down a road.**
+
+## ⛔ BRAID — a made thing that GROWS: Given Errand × a spirit craft (Erik, 2026-08-24)
+
+**Erik: *"Fixed at setting, but I really want to use this on other braids to make something more permanent
+that can grow like a companion. Perhaps with a spirit craft."***
+
+⛔ **`given_errand` IS DELIBERATELY FIXED — one body, one purpose, unchangeable, and it comes apart when the
+duration ends.** ⚠️ **That constraint is what makes it frightening rather than useful.**
+
+**THE BRAID LIFTS EXACTLY THAT CONSTRAINT.** Death supplies the body and the persistence; a spirit craft
+supplies the thing a fixed errand cannot have — ⛔ **SOMETHING IN IT THAT CONTINUES.** The result is not a
+better errand, it is a COMPANION: re-settable, bonded, and able to become someone over a campaign.
+
+**Why it works as a braid and not as a rank:**
+- ⚠️ **Death alone cannot do it.** `raised_hand`'s hard bound is NO JUDGEMENT; `given_errand` adapts but
+  cannot be re-given. **Neither can hold a self.**
+- ⛔ **The companion system already exists** — bond bands, stages, `downedEffect`, evolution — so the braid's
+  output has somewhere to live: it becomes a companion record with stages, the way Marrow has stages.
+- **And it inverts the horror into something earned:** the base craft is a thing walking toward a name for
+  a winter. **The braid is a thing that started as that and became someone.**
+
+⚠️ **NEEDS: which spirit tradition, and whether the result is a NEW companion or an existing one restored.**
+⛔ **Erik's call, and it probably wants the retrieval ladder settled first — a made thing that grows and a
+dead person walked back up are adjacent ideas and should not collide.**

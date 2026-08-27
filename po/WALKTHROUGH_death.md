@@ -2,7 +2,7 @@
 
 ⛔ **GENERATED — `node po/matrix_gen.mjs death --detail`. Full rank text, verbatim.**
 
-**33 crafts · 94 ranks** · 2026-08-26
+**34 crafts · 97 ranks** · 2026-08-27
 
 ---
 
@@ -1032,19 +1032,19 @@
 
 ---
 
-## 28. Set Hand  ·  `set_hand`
+## 28. Raised Hand  ·  `set_hand`
 
-**L3 · e9 · ashwarden · metaphysical · shape `construct` · harm `lethal`**  
-**status:** crit · dmg:decay · upkeep  
+**L3 · e9 · ashwarden · metaphysical · shape `construct` · harm `none`**  
+**status:** crit · upkeep  
 **ability functions:** summon, bind, command
 
-> ⚠️ RAISING. The Grave-Callers' craft, and the Palelands have never pretended otherwise: you set a body that has finished back to work. It does not think, does not remember, and does not tire. Labour is short in the Palelands and the dead are many, and this is the arithmetic the polite half of the tradition will not say out loud.
+> ⚠️ RAISING. The Grave-Callers' craft, and the Palelands have never pretended otherwise: you set a body that has finished back to work. It does not think, does not remember, and does not tire. ⛔ AND IT IS NOT ONLY LABOUR — a raised hand hauls, but it also holds a door against a press, bears a load across ground that would kill the living, crews a boat nobody will crew, stands in a gap, carries what must not be dropped, and turns a wheel for thirty days without being fed. Labour is short in the Palelands and the dead are many, and this is the arithmetic the polite half of the tradition will not say out loud.
 
 **notFor:** The recently living who are still ARGUING with their ending — that is The Unfinished, and it is a different working. Anything that requires judgement: a set hand does exactly what it was set to and nothing adjacent. And it will not pass in a town that knows what it is looking at.
 
 ### r1 — Set Hand
 
-**functions:** summon, bind · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** lethal
+**functions:** summon, bind · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
 **grants:** Set one finished body to a simple repeated task — carry, haul, turn, hold. It works until you unset it or it comes apart.
 
@@ -1052,7 +1052,7 @@
 
 ### r2 — Standing Crew
 
-**functions:** summon, bind, command · **gainAxes:** scope · **gains:** deepen · **harm:** lethal
+**functions:** summon, bind, command · **gainAxes:** scope · **gains:** broaden · **harm:** none
 
 **grants:** Set several, and give them a task with STEPS. They will do the steps in order and will not improvise when a step fails.
 
@@ -1060,13 +1060,13 @@
 
 ### r3 — Long Labour
 
-**functions:** summon, bind, command · **gainAxes:** autonomy · **gains:** deepen · **harm:** lethal
+**functions:** summon, bind, command · **gainAxes:** autonomy · **gains:** deepen · **harm:** none
 
 **grants:** Set bodies that hold for SEASONS, and give a standing instruction they resume without you. The Palelands' quarries and dykes have run on this for four hundred years.
 
 **cannot:** What you set outlives your attention, and the Palelands are full of crews nobody remembers setting. Some are still working.
 
-**bounds:** THE FINISHED ONLY — anything still ending is a different working · NO JUDGEMENT IN IT — a set hand does exactly what it was set to and nothing adjacent · IT IS VISIBLE FOR WHAT IT IS, and most places have a law about it · what you set OUTLIVES YOUR ATTENTION — the Palelands are full of crews nobody remembers setting
+**bounds:** ⛔ THE FINISHED ONLY — anything still ending is a different working · ⛔ NO JUDGEMENT IN IT — a raised hand does exactly what it was set to and nothing adjacent · ⚠️ IT IS VISIBLE FOR WHAT IT IS, and most places have a law about it · ⚠️ WHAT YOU SET OUTLIVES YOUR ATTENTION — the Palelands are full of crews nobody remembers setting
 
 ---
 
@@ -1108,7 +1108,45 @@
 
 ---
 
-## 30. Names of the Lost  ·  `names_of_the_lost`
+## 30. Given Errand  ·  `given_errand`
+
+**L4 · e11 · ashwarden · metaphysical · shape `construct` · harm `lethal`**  
+**status:** crit  
+**ability functions:** summon, bind, command
+
+> ⛔ ONE BODY, ONE PURPOSE, AND IT WILL FIND ANOTHER WAY IN. Where a Raised Hand does what it was set to and nothing adjacent, this is made for a single named errand and it ADAPTS TO COMPLETE IT. A messenger that goes where you cannot. A sentinel that holds one door against one named thing. ⚠️ AND YES, THE OTHER ONE: something patient that has been given a name and will be walking toward it long after you have forgotten giving the order.
+
+**notFor:** ⛔ JUDGING CASES YOU DID NOT FORESEE — that is a Figurist's Walking Figure, and it is a different thing entirely. This does not adjudicate; it PURSUES. ⚠️ Changing its mind: the errand is fixed at the setting and cannot be re-given. Anything still ending — the finished only, as always. And it will not pass in a town that knows what it is looking at.
+
+### r1 — Given Errand
+
+**functions:** summon, bind · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
+
+**grants:** ⛔ MAKE ONE FINISHED BODY INTO ONE PURPOSE — carry this there, hold this door, watch this road. It acts without you, and where a Raised Hand would stop at a blocked step, THIS ONE WORKS OUT ANOTHER WAY IN.
+
+**cannot:** One body, one errand, fixed at the setting. ⚠️ It stays within a day's walk of where you set it, and it comes apart when the duration runs out.
+
+### r2 — Long Road
+
+**functions:** summon, bind, command · **gainAxes:** range, duration · **gains:** broaden · **harm:** none
+
+**grants:** ⛔ THE ERRAND TRAVELS. It goes where you are not and keeps going — across a Reach, over a season, through ground that would stop the living. ⚠️ A message you can send to somewhere you will never reach, in the hands of something that does not need the road to be safe.
+
+**cannot:** It cannot report back unless the errand was to return. ⚠️ And you will not know where it is.
+
+### r3 — Does Not Stop
+
+**functions:** summon, bind, command · **gainAxes:** autonomy, duration, conditions · **gains:** deepen · **harm:** lethal
+
+**grants:** ⛔ NO END DATE. It continues until the errand is complete or it is destroyed — and if the errand is a NAME, it walks toward that name for as long as that takes. ⚠️ IT WILL WAIT. It will wait outside a city for a winter. The Palelands have a word for finding one on your road and the word is not a friendly one.
+
+**cannot:** ⛔ YOU CANNOT CALL IT OFF. There is no unsetting at this rank — the errand ends when it is done or when someone destroys it, and destroying it is a fight. ⚠️ And it does not distinguish between the person you named and the person now carrying that name.
+
+**bounds:** ⛔ ONE BODY AND ONE ERRAND, FIXED AT THE SETTING. It cannot be re-given, redirected, or recalled to a different purpose · ⛔ IT ADAPTS TO COMPLETE THE ERRAND AND NOTHING ELSE. It will find another way through a locked door; it will not notice a burning house · ⚠️ IT DOES NOT ADJUDICATE. Give it a name and it goes to that name — if you named wrongly, it goes anyway · ⚠️ IT IS VISIBLE FOR WHAT IT IS, and an errand walking openly is evidence with your handwriting on it
+
+---
+
+## 31. Names of the Lost  ·  `names_of_the_lost`
 
 **L4 · e11 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
 **status:** ⚠️ no crit · gated  
@@ -1146,7 +1184,7 @@
 
 ---
 
-## 31. Grief That Stops  ·  `grief_that_stops`
+## 32. Grief That Stops  ·  `grief_that_stops`
 
 **L5 · e13 · threnodist · wild_nanite · shape `hobble` · harm `lethal`**  
 **status:** crit · dmg:feeling  
@@ -1176,7 +1214,7 @@
 
 ---
 
-## 32. Last Lament  ·  `last_lament`
+## 33. Last Lament  ·  `last_lament`
 
 **L5 · e13 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
 **status:** ⚠️ no crit · gated  
@@ -1198,7 +1236,7 @@
 
 ---
 
-## 33. The Cut Thread  ·  `the_cut_thread`
+## 34. The Cut Thread  ·  `the_cut_thread`
 
 **L5 · e14 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
 **status:** crit · gated · upkeep  

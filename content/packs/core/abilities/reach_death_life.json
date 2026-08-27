@@ -2681,7 +2681,7 @@
   {
    "schemaVersion": 1,
    "id": "set_hand",
-   "name": "Set Hand",
+   "name": "Raised Hand",
    "levelReq": 3,
    "energyCost": 9,
    "powerSystem": "metaphysical",
@@ -2697,7 +2697,7 @@
     "command"
    ],
    "narrationHints": "It stands the way a tool stands. Nothing behind the eyes and nothing wrong with the work.",
-   "description": "⚠️ RAISING. The Grave-Callers' craft, and the Palelands have never pretended otherwise: you set a body that has finished back to work. It does not think, does not remember, and does not tire. Labour is short in the Palelands and the dead are many, and this is the arithmetic the polite half of the tradition will not say out loud.",
+   "description": "⚠️ RAISING. The Grave-Callers' craft, and the Palelands have never pretended otherwise: you set a body that has finished back to work. It does not think, does not remember, and does not tire. ⛔ AND IT IS NOT ONLY LABOUR — a raised hand hauls, but it also holds a door against a press, bears a load across ground that would kill the living, crews a boat nobody will crew, stands in a gap, carries what must not be dropped, and turns a wheel for thirty days without being fed. Labour is short in the Palelands and the dead are many, and this is the arithmetic the polite half of the tradition will not say out loud.",
    "notFor": "The recently living who are still ARGUING with their ending — that is The Unfinished, and it is a different working. Anything that requires judgement: a set hand does exactly what it was set to and nothing adjacent. And it will not pass in a town that knows what it is looking at.",
    "tree": [
     {
@@ -2710,7 +2710,7 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "lethal",
+     "harmRung": "none",
      "_nameWas": "The Set Hand",
      "gainAxes": []
     },
@@ -2724,8 +2724,8 @@
       "bind",
       "command"
      ],
-     "gains": "deepen",
-     "harmRung": "lethal",
+     "gains": "broaden",
+     "harmRung": "none",
      "_nameWas": "The Standing Crew",
      "gainAxes": [
       "scope"
@@ -2742,7 +2742,7 @@
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "lethal",
+     "harmRung": "none",
      "_nameWas": "The Long Labour",
      "gainAxes": [
       "autonomy"
@@ -2753,7 +2753,7 @@
     "CREATE",
     "SURVIVE"
    ],
-   "harmRung": "lethal",
+   "harmRung": "none",
    "nativeOrCombination": "native",
    "shape": "construct",
    "operativeAxis": [
@@ -2766,7 +2766,6 @@
     "duration": 720,
     "targets": 1,
     "scope": 2,
-    "damageType": "decay",
     "note": "CONSTRUCT, not damage — the craft's output is LABOUR. targets/scope are bodies set; duration is how long they hold.",
     "crit": {
      "success": "The crew works better than the living did, and does not need telling twice.",
@@ -2795,20 +2794,20 @@
    },
    "bounds": [
     {
-     "text": "THE FINISHED ONLY — anything still ending is a different working",
+     "text": "⛔ THE FINISHED ONLY — anything still ending is a different working",
      "class": "hard"
     },
     {
-     "text": "NO JUDGEMENT IN IT — a set hand does exactly what it was set to and nothing adjacent",
+     "text": "⛔ NO JUDGEMENT IN IT — a raised hand does exactly what it was set to and nothing adjacent",
      "class": "hard"
     },
     {
-     "text": "IT IS VISIBLE FOR WHAT IT IS, and most places have a law about it",
-     "class": "cost"
+     "text": "⚠️ IT IS VISIBLE FOR WHAT IT IS, and most places have a law about it",
+     "class": "drawback"
     },
     {
-     "text": "what you set OUTLIVES YOUR ATTENTION — the Palelands are full of crews nobody remembers setting",
-     "class": "cost"
+     "text": "⚠️ WHAT YOU SET OUTLIVES YOUR ATTENTION — the Palelands are full of crews nobody remembers setting",
+     "class": "drawback"
     }
    ],
    "plainly": "A create/survive action that makes or animates something. Its strength is rated 6 out of 10 It affects 1 target across a scope of 2, and lasts for about 30 days Ranks: rank 2 extends targets; rank 3 extends persistence. Limit: the Finished Only — anything still ending is a different working.",
@@ -2819,7 +2818,8 @@
    "_nameWas": "The Set Hand",
    "_idWas": "the_set_hand",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_reviewed_20260824": "⛔ ERIK 2026-08-24: renamed Set Hand -> RAISED HAND ('better fit to what it is, plus it has lots of utility beyond workers') and the description now says so — doors, loads, lethal ground, boats, gaps, wheels. ⚠️ harmRung was `lethal` ON ALL THREE RANKS for a craft that animates the ALREADY FINISHED and harms nobody — the gloss was telling the GM 'this craft CAN end a life'. Now `none`. ⛔ `damageType: decay` DROPPED: the craft's own mechanic note says 'CONSTRUCT, not damage — the output is LABOUR', so the field contradicted its own block. ⚠️ r2 declared `deepen` while adding scope. TWO [cost] BOUNDS RECLASSIFIED `drawback` per CCode's finding that `cost` is doing the job of a missing class — visibility and outliving-your-attention are real consequences and neither is a bill."
   },
   {
    "schemaVersion": 1,
@@ -4060,6 +4060,129 @@
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+  },
+  {
+   "id": "given_errand",
+   "name": "Given Errand",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "metaphysical",
+   "attribute": "mental",
+   "tradition": "ashwarden",
+   "nativeOrCombination": "native",
+   "shape": "construct",
+   "harmRung": "lethal",
+   "intensity": {
+    "conserve": "a short errand — days, not seasons, and it comes apart when it is done",
+    "surge": "give it the errand and no end date; IT WILL STILL BE TRYING WHEN YOU HAVE STOPPED CARING"
+   },
+   "challengeTypes": [
+    "CREATE",
+    "STEALTH",
+    "SOCIAL"
+   ],
+   "operativeAxis": [
+    "persistence",
+    "reach",
+    "autonomy"
+   ],
+   "axes": {
+    "death_life": -0.6
+   },
+   "effectTags": [
+    "raising",
+    "purpose",
+    "errand"
+   ],
+   "functions": [
+    "summon",
+    "bind",
+    "command"
+   ],
+   "description": "⛔ ONE BODY, ONE PURPOSE, AND IT WILL FIND ANOTHER WAY IN. Where a Raised Hand does what it was set to and nothing adjacent, this is made for a single named errand and it ADAPTS TO COMPLETE IT. A messenger that goes where you cannot. A sentinel that holds one door against one named thing. ⚠️ AND YES, THE OTHER ONE: something patient that has been given a name and will be walking toward it long after you have forgotten giving the order.",
+   "narrationHints": "It is not clever and it is not fast. It is simply still coming. ⚠️ People who have been the errand describe the same thing: it never hurried, and it was never further away than it had been the day before.",
+   "notFor": "⛔ JUDGING CASES YOU DID NOT FORESEE — that is a Figurist's Walking Figure, and it is a different thing entirely. This does not adjudicate; it PURSUES. ⚠️ Changing its mind: the errand is fixed at the setting and cannot be re-given. Anything still ending — the finished only, as always. And it will not pass in a town that knows what it is looking at.",
+   "plainly": "A create/stealth/social action. Make one finished body into a single-purpose thing — messenger, sentinel, or hunter — fixed at the setting. It acts without you, improvises around obstacles to complete the errand, and at r3 does not stop until the errand is done or it is destroyed.",
+   "bounds": [
+    {
+     "text": "⛔ ONE BODY AND ONE ERRAND, FIXED AT THE SETTING. It cannot be re-given, redirected, or recalled to a different purpose",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT ADAPTS TO COMPLETE THE ERRAND AND NOTHING ELSE. It will find another way through a locked door; it will not notice a burning house",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT DOES NOT ADJUDICATE. Give it a name and it goes to that name — if you named wrongly, it goes anyway",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT IS VISIBLE FOR WHAT IT IS, and an errand walking openly is evidence with your handwriting on it",
+     "class": "drawback"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 720,
+    "targets": 1,
+    "range": 0,
+    "note": "CONSTRUCT — the output is a PURPOSED THING, not damage. `targets: 1` is deliberate and permanent: this is ALWAYS one body. Duration is how long it holds before coming apart; r3 removes the ceiling. ⛔ harmRung `lethal` because the hunter errand kills, and the ability rung must never understate what a rank delivers.",
+    "crit": {
+     "success": "It finds a way in that you would not have thought of, and it does not tell you what that was.",
+     "failure": "It sets off toward something adjacent to what you named, and it is very patient."
+    }
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Given Errand",
+     "functions": [
+      "summon",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ MAKE ONE FINISHED BODY INTO ONE PURPOSE — carry this there, hold this door, watch this road. It acts without you, and where a Raised Hand would stop at a blocked step, THIS ONE WORKS OUT ANOTHER WAY IN.",
+     "cannot": "One body, one errand, fixed at the setting. ⚠️ It stays within a day's walk of where you set it, and it comes apart when the duration runs out."
+    },
+    {
+     "rank": 2,
+     "name": "Long Road",
+     "functions": [
+      "summon",
+      "bind",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "range",
+      "duration"
+     ],
+     "grants": "⛔ THE ERRAND TRAVELS. It goes where you are not and keeps going — across a Reach, over a season, through ground that would stop the living. ⚠️ A message you can send to somewhere you will never reach, in the hands of something that does not need the road to be safe.",
+     "cannot": "It cannot report back unless the errand was to return. ⚠️ And you will not know where it is."
+    },
+    {
+     "rank": 3,
+     "name": "Does Not Stop",
+     "functions": [
+      "summon",
+      "bind",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "autonomy",
+      "duration",
+      "conditions"
+     ],
+     "grants": "⛔ NO END DATE. It continues until the errand is complete or it is destroyed — and if the errand is a NAME, it walks toward that name for as long as that takes. ⚠️ IT WILL WAIT. It will wait outside a city for a winter. The Palelands have a word for finding one on your road and the word is not a friendly one.",
+     "cannot": "⛔ YOU CANNOT CALL IT OFF. There is no unsetting at this rank — the errand ends when it is done or when someone destroys it, and destroying it is a fight. ⚠️ And it does not distinguish between the person you named and the person now carrying that name."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-24: 'I also want other skills that summon or build undead constructs — messengers, assassins, special undead… so we either build that into 1-2 skills or one for each. They will need to be distinct purposes.' ⚠️ ONE CRAFT, NOT FIVE: messenger, sentinel and hunter are the SAME MECHANIC (one made body, autonomous, persistent) differing only in the named purpose — five crafts would have shared `summon/bind/command`, `construct`, the autonomy axis and a long duration, and differed in the sentence. ⛔ THAT IS THE CONVERGENCE I FOUND IN DEATH'S THREE READING-CRAFTS and I am not authoring it deliberately. ⚠️ THE AXIS AGAINST `raised_hand` IS ITS OWN HARD BOUND — 'NO JUDGEMENT IN IT'. This one adapts, and that is the escalation and the horror in one move. ⛔ AND THE AXIS AGAINST figurist `walking_figure` (which ALREADY EXISTS and whose capstone JUDGES CASES YOU DID NOT FORESEE) is that this one does NOT adjudicate — IT PURSUES. A magistrate and a hound. Erik ruled the purpose is FIXED at setting; a re-settable, growing version is backlogged as a spirit braid."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -106,13 +106,14 @@ import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 // from smoke.mjs: work banked, nothing advanced it, and `PROJECT_TICKS` was the one INERT verdict in the
 // effect audit. A threshold nothing counts toward is a duration that never elapses.
 import { tickAllProjects, openProject, projectProgress } from "./engine/projects.js";
+import { holdOpen, slowSink, canReach, resolveRetrieval } from "./engine/death.js"; // CCODE-270: the player's road back — the seven retrieval crafts had no door
 import { characterPower } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.231";
+const APP_VERSION = "1.9.232";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6260,6 +6261,41 @@ function applyTurn(turn, resolution, playerWords = null) {
   // ⚠️ A GM OP, because that is how every other durable thing in this game starts. The narrator says the
   // character sets to work; the engine decides whether that craft can carry a project and refuses with a
   // reason a player can read.
+  // ⛔ CCODE-270 — THE PLAYER'S ROAD BACK. `attemptRetrievals` (SNG-270) already sends NPCs after their own
+  // dead, so the WORLD retrieves; the player never could. Seven crafts across five traditions are written
+  // to act on this ladder and not one of them had a door — `holdOpen`, `slowSink` and `canReach` had no
+  // caller at all, and `resolveRetrieval` was reachable only from author mode and the world tick.
+  // ⚠️ THE VERBS ARE SEPARATE ON PURPOSE. Aevi: "Ashwardens DRAG, Numinous INVITE, Threnody DELAYS, Rootkin
+  // PAY A PRICE — same ladder, five answers." One `retrieve` op would have collapsed five traditions into
+  // one mechanic, which is the single thing her spec asked this build not to do.
+  applyStep("deathOps", () => {
+    for (const op of (Array.isArray(turn.deathOps) ? turn.deathOps : []).slice(0, 3)) {
+      const who = String(op?.npcId || "");
+      const ent = (character.npcRegistry || {})[who];
+      if (!ent || ent.status !== "dead") continue;
+      let day = 0; try { day = absoluteWorldDay(); } catch { day = character.clock?.day ?? 0; }
+      const kind = String(op?.op || "");
+      if (kind === "hold") {
+        holdOpen(ent, character.name || "you", op.willing == null ? {} : { willing: !!op.willing });
+      } else if (kind === "slow") {
+        slowSink(ent, Number(op.factor) || 2);
+      } else if (kind === "retrieve") {
+        // ⛔ RANK GATES THE REACH, and REFUSED IS NOT FAILED. A failure sinks them and can seal them, so a
+        // reach the character simply cannot make must cost nothing — telling someone "that is past you" is
+        // not the same event as watching them slip further because you tried.
+        const ab = fullCatalog()[String(op.abilityId || "")];
+        const owned = ab ? (character.abilities || []).find(x => x.abilityId === ab.id) : null;
+        const gate = canReach(ent, { rank: owned?.level || 1, intensity: String(op.intensity || "standard"),
+          currentDay: day, rules: CONTENT.rules });
+        if (!gate.ok) { character._deathNotes = [...(character._deathNotes || []).slice(-2), gate.why]; continue; }
+        const won = String(op.outcome || "") === "return";
+        const res = resolveRetrieval(ent, won ? "return" : "fail", { currentDay: day, changed: op.changed || null });
+        character._deathNotes = [...(character._deathNotes || []).slice(-2),
+          res.sealed ? `${ent.name || who} is sealed — that reach cost them everything`
+            : won ? `${ent.name || who} comes back` : `${ent.name || who} sinks further`];
+      }
+    }
+  });
   applyStep("projectOps", () => {
     for (const op of (Array.isArray(turn.projectOps) ? turn.projectOps : []).slice(0, 3)) {
       if (String(op?.op || "") !== "open") continue;

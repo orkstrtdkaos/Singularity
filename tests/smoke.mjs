@@ -19899,6 +19899,51 @@ await (async () => {
       !existsSync(join(root, "engine/deathdepth.js")));
   }
 
+  // 5at · CCODE-270 — THE PLAYER'S ROAD BACK.
+  // ⛔ `attemptRetrievals` (SNG-270) already sends NPCs after their own dead, so the WORLD retrieves. The
+  // player never could. Seven crafts across five traditions are written to act on this ladder and not one
+  // had a door: `holdOpen`, `slowSink` and `canReach` had NO caller, and `resolveRetrieval` was reachable
+  // only from author mode and the world tick.
+  // ⚠️ THE VERBS STAY SEPARATE. Aevi: "Ashwardens DRAG, Numinous INVITE, Threnody DELAYS, Rootkin PAY A
+  // PRICE." A single `retrieve` op would have collapsed five traditions into one mechanic — the one thing
+  // her spec asked this build not to do.
+  {
+    const appSrc270 = readFileSync(join(root, "app.js"), "utf8");
+    const gmSrc270 = readFileSync(join(root, "engine/gm.js"), "utf8");
+
+    check("CCODE-270: the app applies a deathOps step and imports the verbs it needs",
+      /applyStep\("deathOps"/.test(appSrc270) && /holdOpen/.test(appSrc270)
+      && /slowSink/.test(appSrc270) && /canReach/.test(appSrc270));
+    // ⛔ ALL THREE VERBS, not one. If a future edit collapses them, this goes red.
+    check("CCODE-270: hold, slow and retrieve are three separate ops — five traditions, not one mechanic",
+      /"hold"/.test(appSrc270) && /"slow"/.test(appSrc270) && /"retrieve"/.test(appSrc270));
+    check("CCODE-270: the GM contract names deathOps and all three verbs",
+      /deathOps/.test(gmSrc270) && /hold \| slow \| retrieve/.test(gmSrc270));
+    // ⚠️ AND IT MUST TELL THE NARRATOR WHAT IT MAY NOT DO. The engine decides reach and sealing; a GM that
+    // narrates "they are gone" on its own has taken a permanent decision the rules own.
+    check("CCODE-270: …and forbids the narrator from declaring someone sealed or returned in prose",
+      /NEVER declare someone sealed or returned in prose/.test(gmSrc270));
+    // ⛔ SALVAGEABLE, or a truncated reply drops it — the gate that caught me on projectOps.
+    check("CCODE-270: deathOps survives a truncated reply",
+      /"deathOps"/.test(gmSrc270.slice(gmSrc270.indexOf("SALVAGEABLE_OPS"))));
+
+    // ── AND THE BEHAVIOUR THE DOOR IS FOR, through the real module
+    {
+      const DTH270 = await import("../engine/death.js");
+      const rules270 = C199.rules || {};
+      // refused costs nothing; failed costs a rung. That distinction is why `canReach` exists.
+      const deep = DTH270.enterDeathState({ id: "d", name: "Veth" }, { diedDay: 0, depthOverride: 2 });
+      const before = DTH270.deathDepth(deep, 1, rules270);
+      const refused = DTH270.canReach(deep, { rank: 1, currentDay: 1, rules: rules270 });
+      check("CCODE-270: a reach past your rank is refused and the dead are exactly where they were",
+        refused.ok === false && DTH270.deathDepth(deep, 1, rules270) === before);
+      DTH270.resolveRetrieval(deep, "fail", { currentDay: 1 });
+      check("CCODE-270: …whereas TRYING and failing at the deep dark seals them — the two are not the same event",
+        DTH270.isSealed(deep, 1, rules270) === true);
+    }
+  }
+
+
 
 
 }

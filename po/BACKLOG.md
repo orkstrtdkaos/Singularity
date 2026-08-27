@@ -369,7 +369,7 @@ people, not just labour.**
 |---|---|---|
 | **the set crew** | ⛔ a TOOL — no judgement, no self, grabs and slams | `raised_hand`, and it never changes |
 | **the driven shade** | purposed, one-dimensional — ⚠️ **but it ADAPTS, and adaptation is practice at being someone** | `driven_shade`, over seasons |
-| ⛔ **the become** | **a NEW ENTITY** — not who they were, someone the undeath made | ⚠️ **emergent from the row above** |
+| ⛔ **AFTERLINGS** | **a NEW ENTITY** — not who they were, someone the undeath made. ⚠️ Erik named them 2026-08-24 | ⚠️ **emergent — see the cocoon model below** |
 | ⛔ **the returned** | **near-duplicate of who they were, carrying undead traits** | ⚠️ **already mechanised — see below** |
 
 #### ⛔ THE MECHANISM FOR "NEAR DUPLICATE" ALREADY EXISTS: IT IS DEPTH
@@ -385,6 +385,63 @@ people, not just labour.**
 ⚠️ **ONE LADDER EXPLAINS BOTH RESURRECTION AND WHAT KIND OF UNDEAD EXISTS**, and `calling_back` and
 `raised_hand` stop being two crafts and become **the same act at different depths.** ⛔ **That is a great
 deal of world from machinery that shipped this afternoon.**
+
+#### ⛔ ERIK 2026-08-24 — THE BODY IS A COCOON. THIS SUPERSEDES THE DECAY READING ABOVE.
+
+> *"The undead body is like a COCOON for the undead spirit or energy — as it wears, THE ENTITY GETS
+> STRONGER AND MORE CAPABLE. In between, IT CAN LASH OUT FROM THE BODY. This is cool and scary."*
+
+⛔ **I HAD WEARING-DOWN AS DECAY — how much person is left. IT IS GESTATION.** ⚠️ **The body is not being
+worn away; it is the SHELL THE THING INSIDE IS OUTGROWING.** That is why `driven_shade` r3 is *harder to
+stop* the longer it has walked — **I authored that as flavour and it is the actual mechanism.**
+
+**THE THREE PHASES:**
+
+| phase | the body | the thing inside | ⚠️ |
+|---|---|---|---|
+| **set** | intact, a tool | ⛔ dormant, or nothing yet | the crew, the labour |
+| ⛔ **BREACHING** | wearing, thinning | **growing, and it can LASH OUT FROM WITHIN** | ⚠️ **the dangerous middle — the shell still holds and the thing inside reaches through it** |
+| **emerged** | spent, or shed | ⛔ **strong and capable, and no longer contained** | an Afterling, or worse |
+
+⚠️ **"LASH OUT FROM THE BODY" IS A MECHANIC AND SHOULD BE ONE:** a strike that does not come from the
+creature's reach or its limbs — ⛔ **it comes from INSIDE the shell, past armour, past position, from a
+thing you have not met yet.** **The corpse is the delivery system and it is not the threat.**
+
+#### ⛔ TWO END STATES, NOT ONE SPECTRUM — Erik's correction
+
+> *"Purpose-driven is the NARROWING END CASE where undead become UNMINDED PURPOSE. Those are very
+> dangerous. But there are MORE STABLE FORMS THAT HAVE FULL PERSONALITY."*
+
+| | **NARROWING** | **STABLE** |
+|---|---|---|
+| what emerges | ⛔ **unminded purpose** — everything that was not the errand is gone | ⛔ **a whole personality** |
+| how | a `driven_shade` taken to its end: four hundred miles of one thought | ⚠️ **retrieved shallow, or shelled slowly, or something else — NOT RULED** |
+| danger | ⛔ **extreme.** It cannot be reasoned with because there is nothing left to reason WITH | it can be talked to, hired, married, wronged |
+| name | *the driven* | ⛔ **AFTERLINGS** (Erik: *"the Beyond — or Afterlings"*) |
+
+⛔ **THE NARROWING IS NOT THE DEFAULT AND MUST NOT BE.** ⚠️ **If every undead ends as unminded purpose the
+Palelands are a horror set. Erik's stable forms are what make it a PLACE PEOPLE LIVE** — Afterlings with
+full personality, cold and tireless and not healing, working the dykes because they always did.
+
+**WHAT DECIDES WHICH: not ruled.** ⚠️ **Candidates: the depth they were raised from · whether they were
+GIVEN a purpose or merely set · whether anyone attended them · whether a name was kept for them
+(`names_of_the_lost` already claims to hold someone reachable).**
+
+#### ⛔ DEATHSENSE IS THE UNDEAD DETECTOR — Erik 2026-08-24
+
+> *"Deathsense would read the NEGATIVE LIFE POWER — it would make a great undead detector."*
+
+⚠️ **AND ITS CURRENT `cannot` FORBIDS EXACTLY THIS:** *"Reads the living and the dying, not the
+already-dead. A corpse has nothing left to sense."*
+
+⛔ **THAT LINE IS NOW WRONG.** A corpse has nothing. **AN UNDEAD HAS THE OPPOSITE OF NOTHING — a negative
+life power, an animation running the wrong way, and it should be LOUD to a craft built to read life.**
+
+**THE REVISION, when the audit returns to it:** ⚠️ **Deathsense reads life — positive in the living,
+FALLING in the dying, ⛔ AND INVERTED IN THE UNDEAD.** **A warden with Deathsense walks into a room and
+knows which of the people in it are not alive, without asking and without being subtle about it** — and
+against a stable Afterling that is a social problem, not a tactical one.
+
 
 #### ⚠️ THE TWO ROUTES DIFFER, WHICH IS THE GOOD PART
 

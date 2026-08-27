@@ -81,14 +81,49 @@ is the closest existing shape and it already scales by rank, which is exactly wh
 
 ---
 
-## §5 — ⚠️ AND A QUESTION THAT IS ERIK'S, NOT OURS
+## §5 — ⛔ ERIK RULED: BUILD IT. AND IT IS NOT AN ASHWARDEN MECHANIC — FIVE TRADITIONS ALREADY RUN ON IT.
 
-**If depth is a real state, then *someone in the party is at depth 1 and sinking* becomes a live clock —
-and `names_of_the_lost` r3 already claims to SLOW it:** *"a warded name holds at the Threshold past its
-day, and in the Near Dark past its month."*
+**Erik 2026-08-24: *"we need to make the death state and these related crafts work, yes."***
 
-⛔ **THAT IS A WHOLE SUBSYSTEM SITTING IN THREE CRAFTS' PROSE:** a dead party member with a timer, one craft
-that slows it, one that walks them back, and a failure state that ends the character permanently.
+⛔ **I SAID THREE CRAFTS. IT IS SEVEN, ACROSS FIVE TRADITIONS**, and every one of them does something
+DIFFERENT to the same ladder. ⚠️ **That is not duplication — it is the strongest cross-tradition structure
+in the game, and it is entirely prose.**
 
-⚠️ **I AM NOT ASKING FOR THAT HERE.** **But 3b is the load-bearing half of it, and it would be worth Erik
-knowing that before you choose where the state lives.**
+| craft | tradition | what it does to the ladder |
+|---|---|---|
+| `calling_back` | ashwarden | ⛔ **WALKS THEM BACK UP** — and a failed reach SINKS or SEALS |
+| `kept_breath` r3 | ashwarden | **HOLDS SOMEONE AT THE THRESHOLD** so they never enter it |
+| `names_of_the_lost` r3 | threnodist | ⛔ **SLOWS THE SINKING** — *"holds at the Threshold past its day, and in the Near Dark past its month"* |
+| `open_threshold` | numinous | **HOLDS THE WAY OPEN** — *"they may come back IF THEY WILL"*, and r3 leaves it open WITHOUT the caster |
+| `root_that_holds` | rootkin | **RETRIEVAL AT A DIFFERENT PRICE** — *"they come back whole and starving"* |
+| `grey_road` | ashwarden | moves through ground where the ladder is thick |
+| `light_well` | radiant_folk | touches it at the edges |
+
+### 5a — WHAT THE STATE HAS TO SUPPORT, DERIVED FROM THOSE SEVEN
+
+⛔ **A depth integer alone is not enough.** The authored crafts need:
+
+1. **`depth: 0|1|2|3`**, 3 terminal — the rung.
+2. ⛔ **A SINK CLOCK.** `names_of_the_lost` slows it and `kept_breath` stops entry, so **there is a rate**,
+   and it must be modifiable by a craft. ⚠️ **A dead party member is a TIMER, not a flag.**
+3. ⛔ **`sink(target, rungs)` AND `seal(target)` as engine acts**, because a FAILED retrieval causes them —
+   the failure is the mechanic.
+4. **A "way held open" flag** — `open_threshold` r3 leaves one standing WITHOUT its caster, which is a
+   persistent object with an owner who has walked away.
+5. ⚠️ **Consent.** `open_threshold` says *"they may come back IF THEY WILL."* ⛔ **Retrieval is not
+   universally involuntary, and one tradition has already ruled that it asks.**
+
+### 5b — WHAT I AM **NOT** ASKING FOR
+
+⚠️ **Do not unify the five into one mechanic.** ⛔ **The whole value is that Ashwardens DRAG, Numinous
+INVITE, Threnody DELAYS, and Rootkin PAY A PRICE — same ladder, five answers.** **The engine owes the
+LADDER and the VERBS (`sink`, `seal`, `hold`, `slow`, `retrieve`); each tradition keeps its own reason.**
+
+### 5c — ⚠️ AND THE THING ERIK SHOULD SEE BEFORE YOU PICK WHERE THE STATE LIVES
+
+⛔ **THIS MAKES DEATH SURVIVABLE-BUT-EXPENSIVE RATHER THAN BINARY, AND IT PUTS A CLOCK ON THE TABLE.** A
+character at depth 1 and sinking is a session's worth of pressure: one craft can slow it, another can hold
+the way open, a third can go and get them — **and a botched attempt makes it permanently worse.**
+
+⚠️ **That is a large change to what dying MEANS in this game.** **It is Erik's to want, and he has said he
+wants it — but the scope belongs in front of him before the seam is chosen, not after.**

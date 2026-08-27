@@ -496,8 +496,8 @@
     {
      "rank": 1,
      "name": "Wither",
-     "grants": "Rot or wilt what grows or once grew — a plant, a rope, a wooden object, a door. Age a material thing faster than it should go: it weakens where it stands, and gives out under the next weight it is asked to take.",
-     "cannot": "It hastens what was ALREADY going in a thing — sound new stone and fresh iron have nothing to hasten and shrug it off. And it stops entirely at a living body: a person is not a material you may age.",
+     "grants": "⛔ ROT OR WILT ONE THING YOU COULD PUT YOUR ARMS AROUND — a plant, a rope, a wooden pin, a door, a shield, a raised body. Age it faster than it should go: 2d6 of decay, and it gives out under the next weight it is asked to take.",
+     "cannot": "⛔ ONE THING, AND A SMALL ONE. It hastens what was ALREADY going — sound new stone and fresh iron have nothing to hasten and shrug it off. ⚠️ And it stops entirely at a LIVING body: a person is not a material you may age.",
      "functions": [
       "hinder"
      ],
@@ -512,8 +512,8 @@
     {
      "rank": 2,
      "name": "Grey Touch",
-     "grants": "Age a structure — a wall, a bridge, a barricade — decades in moments, until it can no longer carry what it was built to carry; a gate you have aged breaks under one shoulder. Halt a spreading blight by giving the growth-front a clean, sudden end.",
-     "cannot": "Withering is not breaking. The thing fails as things fail — structurally, from within. It takes a moment, not an instant.",
+     "grants": "⛔ TAKE A WHOLE STRUCTURE — a wall, a bridge, a barricade, a gate — decades in moments, until it can no longer carry what it was built to carry. ⚠️ A gate you have aged breaks under one shoulder. Or halt a spreading blight by giving the growth-front a clean, sudden end.",
+     "cannot": "⛔ WITHERING IS NOT BREAKING. The thing fails as things fail — structurally, from within, and it takes a moment rather than an instant. ⚠️ One structure, not a street of them.",
      "functions": [
       "break"
      ],
@@ -525,19 +525,19 @@
      ],
      "_nameWas": "The Grey Touch",
      "gainAxes": [
-      "duration",
+      "scope",
       "quality"
      ]
     },
     {
      "rank": 3,
      "name": "Withering",
-     "grants": "Wither at range and at scale — a field of crops, a fortification, a siege engine, a line of wooden shields, all weakened past use and broken by their own weight. The terrain itself becomes unreliable underfoot.",
-     "cannot": "Living flesh is outside it at every rank. At scale it takes fields, fortifications, and siege works — and the Ashwardens note that starving a valley is the commonest use it has ever been put to, which is a harm done to people without the craft ever touching one.",
+     "grants": "⛔ TAKE GROUND. A field of crops, a fortification, a siege train, a line of shields, a stretch of trestle — all of it weakened past use and broken by its own weight, at range. ⚠️ THE AREA GROWS WITH THE PRACTITIONER: a stronger warden takes more of the field, and the terrain itself becomes unreliable underfoot.",
+     "cannot": "⛔ LIVING FLESH IS OUTSIDE IT AT EVERY RANK. ⚠️ And the Ashwardens note that starving a valley is the commonest use it has ever been put to — a harm done to people without the craft ever touching one.",
      "functions": [
       "break"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "damaging",
      "_functionsWas": [
       "hinder",
@@ -545,6 +545,7 @@
      ],
      "_nameWas": "The Withering",
      "gainAxes": [
+      "scope",
       "range"
      ]
     }
@@ -571,12 +572,13 @@
     },
     "plus": 0,
     "marginFloorPer": 0.02,
-    "scope": 2,
-    "note": "damaging rung, but against MATERIAL only — see the HARD bound",
+    "scope": 1,
+    "note": "⛔ DICE APPLY TO ANYTHING WITH HEALTH — a gate, a siege engine, a barricade, a RAISED BODY. 2d6 of `decay`, and decay is the type a warded ground answers and an undead ABSORBS. ⚠️ THE REAL LADDER IS SCOPE: HOW MUCH MATERIAL, not how hard. r1 scope 1 (a thing you could carry or put your arms around) · r2 scope 3 (a structure) · r3 scope 5 (a field, a fortification, a stretch of ground). ⛔ Erik 2026-08-24: 'the limit is the AMOUNT OF MATERIAL it can wither, going from a small/reasonable size at r1 to an entire field or area at r3 — the more powerful the practitioner, the bigger the field of effect.'",
     "crit": {
      "success": "It goes at once, root and standing, and the ground under it goes grey too.",
      "failure": "You wither the support and not the thing standing on it."
-    }
+    },
+    "damageType": "decay"
    },
    "rankDeltas": [
     {
@@ -612,14 +614,15 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/puzzle/chase action that deals damage. It rolls 2d6 across a scope of 2 Ranks: rank 2 extends scope; rank 3 extends scope. Limit: it Hastens What Was Already Going — sound new stone and fresh work resist.",
+   "plainly": "A fight/puzzle/chase action. 2d6 of decay against anything with health — and the limit is HOW MUCH MATERIAL, not how hard. r1 takes something you could put your arms around; r2 takes a structure; r3 takes a field or a fortification, and the reach grows with the practitioner.",
    "_functionsWas": [
     "break",
     "hinder"
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_reviewed_20260824": "⛔ ERIK 2026-08-24: 'add dice to apply to things with HP… but otherwise the limit is the AMOUNT OF MATERIAL it can wither, going from a small/reasonable size at r1 to an entire field or area at r3.' ⚠️ SCOPE IS NOW THE LADDER (1 -> 3 -> 5) AND IT IS STATED IN PROSE AT EACH RANK, because `scope` is a bare integer with no authored meaning — the amounts have to live in the grants. ⛔ `damageType: decay` ADDED: the craft's whole subject is rot and it carried no type, which now matters — a decay-typed ward answers it and an UNDEAD ABSORBS it (§48.5). ⚠️ r3 declared `deepen` while adding range. `plainly` was machine-generated and said 'rank 2 extends scope; rank 3 extends scope' when the ranks declare different axes. ⛔ NO COCOON RULES AUTHORED — Erik: 'I don't know why you have to author cocoon outcomes.' HE IS RIGHT: an undead body is MATERIAL, this craft destroys material, and what happens to the occupant is SYSTEM_SPEC §48.8's business and the GM's. ⚠️ I was about to encode a situation as a mechanic for the fifth time this session."
   },
   {
    "id": "graftlife",

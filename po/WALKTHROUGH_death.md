@@ -845,7 +845,7 @@
 ## 23. Wither  ·  `wither`
 
 **L2 · e5 · ashwarden · metaphysical · shape `damage` · harm `damaging`**  
-**status:** crit  
+**status:** crit · dmg:decay  
 **ability functions:** break, hinder
 
 > Hasten decay in a thing — rot wood, wilt growth, age a structure past its holding. Palework's edge turned on the MATERIAL world. The Grey Hand handles people; Wither handles everything else, and the two are never the same working.
@@ -856,25 +856,25 @@
 
 **functions:** hinder · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none · ongoing
 
-**grants:** Rot or wilt what grows or once grew — a plant, a rope, a wooden object, a door. Age a material thing faster than it should go: it weakens where it stands, and gives out under the next weight it is asked to take.
+**grants:** ⛔ ROT OR WILT ONE THING YOU COULD PUT YOUR ARMS AROUND — a plant, a rope, a wooden pin, a door, a shield, a raised body. Age it faster than it should go: 2d6 of decay, and it gives out under the next weight it is asked to take.
 
-**cannot:** It hastens what was ALREADY going in a thing — sound new stone and fresh iron have nothing to hasten and shrug it off. And it stops entirely at a living body: a person is not a material you may age.
+**cannot:** ⛔ ONE THING, AND A SMALL ONE. It hastens what was ALREADY going — sound new stone and fresh iron have nothing to hasten and shrug it off. ⚠️ And it stops entirely at a LIVING body: a person is not a material you may age.
 
 ### r2 — Grey Touch
 
-**functions:** break · **gainAxes:** duration, quality · **gains:** broaden · **harm:** damaging
+**functions:** break · **gainAxes:** scope, quality · **gains:** broaden · **harm:** damaging
 
-**grants:** Age a structure — a wall, a bridge, a barricade — decades in moments, until it can no longer carry what it was built to carry; a gate you have aged breaks under one shoulder. Halt a spreading blight by giving the growth-front a clean, sudden end.
+**grants:** ⛔ TAKE A WHOLE STRUCTURE — a wall, a bridge, a barricade, a gate — decades in moments, until it can no longer carry what it was built to carry. ⚠️ A gate you have aged breaks under one shoulder. Or halt a spreading blight by giving the growth-front a clean, sudden end.
 
-**cannot:** Withering is not breaking. The thing fails as things fail — structurally, from within. It takes a moment, not an instant.
+**cannot:** ⛔ WITHERING IS NOT BREAKING. The thing fails as things fail — structurally, from within, and it takes a moment rather than an instant. ⚠️ One structure, not a street of them.
 
 ### r3 — Withering
 
-**functions:** break · **gainAxes:** range · **gains:** deepen · **harm:** damaging
+**functions:** break · **gainAxes:** scope, range · **gains:** broaden · **harm:** damaging
 
-**grants:** Wither at range and at scale — a field of crops, a fortification, a siege engine, a line of wooden shields, all weakened past use and broken by their own weight. The terrain itself becomes unreliable underfoot.
+**grants:** ⛔ TAKE GROUND. A field of crops, a fortification, a siege train, a line of shields, a stretch of trestle — all of it weakened past use and broken by its own weight, at range. ⚠️ THE AREA GROWS WITH THE PRACTITIONER: a stronger warden takes more of the field, and the terrain itself becomes unreliable underfoot.
 
-**cannot:** Living flesh is outside it at every rank. At scale it takes fields, fortifications, and siege works — and the Ashwardens note that starving a valley is the commonest use it has ever been put to, which is a harm done to people without the craft ever touching one.
+**cannot:** ⛔ LIVING FLESH IS OUTSIDE IT AT EVERY RANK. ⚠️ And the Ashwardens note that starving a valley is the commonest use it has ever been put to — a harm done to people without the craft ever touching one.
 
 **bounds:** it HASTENS WHAT WAS ALREADY GOING — sound new stone and fresh work resist · WITHERING IS NOT BREAKING — the thing fails as things fail, structurally · LIVING FLESH IS OUTSIDE IT AT EVERY RANK
 
@@ -920,7 +920,7 @@
 
 ## 25. Calling Back  ·  `calling_back`
 
-**L3 · e12 · ashwarden · metaphysical · shape `healing` · harm `incapacitating`**  
+**L3 · e12 · ashwarden · metaphysical · shape `retrieval` · harm `incapacitating`**  
 **status:** crit · dmg:decay · upkeep  
 **ability functions:** heal, summon
 

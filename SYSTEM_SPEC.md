@@ -4,7 +4,7 @@
 |---|---|
 | **Status** | `round-2-complete + BATCH-11 build` — Aevi (PO) authored the DESIGN + CONTRACT layers; CCode ROUND 2 (v1.8.26) substrate-verified every claim; **BATCH-11 (v1.8.105–118, 2026-07-18) added Law 16 + §23 (the Wiring Contract, machine-gated), SNG-145 intent gates (§11), SNG-148 waygates (§9), the 146a–c/f multiplayer fixes (§18), and 147a/d skill-integrity (ratcheted in `npm test`).** |
 | **Supersedes** | System Specification v1.0 (which predates the great circle, traditions, domains, the generative world, shared canon, and ~20 of the 38 engine modules) |
-| **HEAD verified** | **v1.9.188** (2026-08-23) · confirmed against origin: **97 engine modules** · **71 core rules files** · 135 locations / 38 regions · 374 abilities / 26 traditions (+3 folk) · 44 combinations · 41 NPCs · 9 companions · 58 random-encounter entries. **Count freshness is now machine-gated** — `tests/wiring_audit.mjs` fails the build when this line drifts from HEAD (the 38/137-era drift, found by BATCH-11 §0, must not recur silently). | <br>⚠️ **TWO ABILITY COUNTS EXIST AND BOTH ARE RIGHT: 374 AUTHORED, 383 LOADED.** ⛔ **The gap is the MARTIAL FLOOR** — the nine crafts authored in `rules/martial_paths.json`, synthesized by `engine/martial.js` and joined to the catalogue by SNG-345 (§37.2 names all nine). **It is NOT "minted braids and generated crafts" — that was my guess, it was wrong, and it survived here for three weeks after §37.2 was corrected. A document that states the true version in one section and the false one in its own header is not a corrected document.** §44.3 counts authored; §37.2 counts loaded, because that is what a reader actually resolves against. Reconciling them to one number would make one of the two claims false.
+| **HEAD verified** | **v1.9.188** (2026-08-23) · confirmed against origin: **97 engine modules** · **71 core rules files** · 135 locations / 38 regions · 375 abilities / 26 traditions (+3 folk) · 44 combinations · 41 NPCs · 9 companions · 58 random-encounter entries. **Count freshness is now machine-gated** — `tests/wiring_audit.mjs` fails the build when this line drifts from HEAD (the 38/137-era drift, found by BATCH-11 §0, must not recur silently). | <br>⚠️ **TWO ABILITY COUNTS EXIST AND BOTH ARE RIGHT: 375 AUTHORED, 384 LOADED.** ⛔ **The gap is the MARTIAL FLOOR** — the nine crafts authored in `rules/martial_paths.json`, synthesized by `engine/martial.js` and joined to the catalogue by SNG-345 (§37.2 names all nine). **It is NOT "minted braids and generated crafts" — that was my guess, it was wrong, and it survived here for three weeks after §37.2 was corrected. A document that states the true version in one section and the false one in its own header is not a corrected document.** §44.3 counts authored; §37.2 counts loaded, because that is what a reader actually resolves against. Reconciling them to one number would make one of the two claims false.
 | **Authoring rule** | Aevi owns §2 (laws), §4–§18 (design + contracts), §21 (process). **CCode owns implementation detail** — module APIs, signatures, dispatch, data flow — marked `[CCODE]`. A claim in this document that contradicts HEAD is a **bug in this document**; report it. |
 
 > **How to read this.** This is the *contract*, not the code. It states what each system is **supposed** to do and what must remain true. Where it says `[CCODE]`, the implementation is authoritative and CCode fills it. Where it states a **law** or a **floor**, the code must conform — not the other way round.
@@ -2180,8 +2180,8 @@ state, one file over.
 | ⚠️ **no obscure** | 10 of 14 traditions | ⚠️ **20 of 30** — **grew** | author one, tradition-flavoured (§34.4) |
 | ⚠️ **`scope` as the default rank gain** | 22–37% | not re-measured | usually `targets` doing scope's job |
 
-⚠️ **AND THE DENOMINATOR ABOVE IS 383, NOT 374, ON PURPOSE.** The corpus is **374 abilities in
-`content/packs/core/abilities/`**; the CATALOGUE a reader resolves against holds **382**. ⛔ **The nine are the
+⚠️ **AND THE DENOMINATOR ABOVE IS 384, NOT 375, ON PURPOSE.** The corpus is **375 abilities in
+`content/packs/core/abilities/`**; the CATALOGUE a reader resolves against holds **384**. ⛔ **The nine are the
 MARTIAL FLOOR** — `brace` `strike_basic` `break_away` `raise_alarm` `branch_club` `barkskin` `root_hold`
 `root_reach` `quick_wall` — authored in `rules/martial_paths.json`, synthesized into ability records by
 `engine/martial.js`, joined to the catalogue by SNG-345. **They are abilities everywhere except the directory.**
@@ -2471,7 +2471,7 @@ that lags the code is worse than no map, because it is believed.
 | `mechanic.evasion` + `evasionRank` | `evasionOf` — rank 1 still findable by a reader, rank 2+ not | `skill_battle.js` | **7** |
 | `penetration` | splits `cutThrough` (rank ≤ pen) from `soak` | `skill_battle.js` | **4** |
 | `mechanic.duration` | craft duration in rounds, capped by `craftDurationMax` | `skill_battle.js` | many |
-| `mechanic.crit` / `crit` | `critFor` → a per-craft **chance bias** and a **sentence on the receipt**. ⚠️ **Nothing else** — see §39.4 | `craftmechanics.js` → `resolve.js` | **52** |
+| `mechanic.crit` / `crit` | `critFor` → a per-craft **chance bias** and a **sentence on the receipt**. ⚠️ **Nothing else** — see §39.4 | `craftmechanics.js` → `resolve.js` | **53** |
 | `damageType` | `answers(l)` — which soak layers apply | `skill_battle.js` | 26 |
 | `wardTypes` | ⛔ **NOTHING — see §39.5.** The string does not appear in `skill_battle.js` | — | **48** |
 | `mechanic.dice` on a **healing** shape | ✅ `resolveHeal` → `rollMagnitude` → the round's `healing` | `craftmechanics.js` → `skill_battle.js` healing branch | 25 |

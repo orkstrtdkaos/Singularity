@@ -318,3 +318,48 @@ better errand, it is a COMPANION: re-settable, bonded, and able to become someon
 ⚠️ **NEEDS: which spirit tradition, and whether the result is a NEW companion or an existing one restored.**
 ⛔ **Erik's call, and it probably wants the retrieval ladder settled first — a made thing that grows and a
 dead person walked back up are adjacent ideas and should not collide.**
+
+## ⛔ THE UNDEAD TRADITION — Erik 2026-08-24: *"we have a whole undead tradition backlogged for the world"* (it was NOT written down; this is it)
+
+⚠️ **IT IS NOT A NEW IDEA AND IT IS FURTHER ALONG THAN ANYONE REMEMBERED. Four pieces already exist:**
+
+| piece | state |
+|---|---|
+| ⛔ **`greyhearth` foothill** | ✅ **RATIFIED 2026-08-16** — Erik: *"if we don't have a Foothill for the GRAVE-CALLERS, ASHWARDENS, NECROMANCERS and their adjacents, then yes there needs to be a Foothill."* Parents `ashwarden .5 / threnodist .3 / wright .2`, craft **The Burying Trades**, ⛔ **`abilities: 0`** |
+| **the Grave-Callers as a people** | ✅ authored as FOES — five of them in `sunk_assay_intake`, with `targetPolicy`, typed soak layers and design notes |
+| **the Necromancy school** | ✅ authored in `death_domain.json` — *"what remains of a person, ADDRESSED"* |
+| **two crafts that make undead** | ✅ `raised_hand` (labour, and it grabs and slams and bites) · `driven_shade` (one purpose, pursues, wears to silhouette) |
+
+⛔ **SO THE PLACE IS RATIFIED AND EMPTY, THE PEOPLE EXIST ONLY AS ENEMIES, AND THE CRAFTS SIT IN ASHWARDEN.**
+
+### What the tradition would be FOR, that Ashwarden is not
+
+⚠️ **Ashwarden's thesis is *what persists after an ending* — reading, tending, warding, walking back.**
+⛔ **THE GRAVE-CALLERS' THESIS IS THE ARITHMETIC ASHWARDEN WILL NOT SAY OUT LOUD:** `raised_hand`'s own
+description already states it — *"labour is short in the Palelands and the dead are many, and this is the
+arithmetic the polite half of the tradition will not say out loud."*
+
+**That is a whole people: not villains, ⛔ EMPLOYERS.** ⚠️ **A town where the dead crew the boats and turn
+the mills and nobody finds it grim — `greyhearth` is authored as exactly that, *"and does not find it
+grim: everyone here has handled it."***
+
+### ⛔ ERIK'S WANT, AND IT IS THE INTERESTING PART
+
+*"It would be awesome if these undead actually could become NPCs and companions."*
+
+⚠️ **THE LADDER IS ALREADY IMPLIED BY THE TWO CRAFTS:** `raised_hand` has **no judgement in it** →
+`driven_shade` **adapts but cannot be re-given** → ⛔ **the next rung is a thing that carries a SELF, and
+neither Death craft can hold one.** **That is why the spirit braid is backlogged separately — and it may be
+that the braid is not a braid at all but this tradition's own capstone.**
+
+### Threads
+
+- ⛔ **DOES IT DISPLACE `driven_shade` AND `raised_hand` OUT OF ASHWARDEN?** ⚠️ Possibly not — a foothill is
+  ACCESS, not ancestry (§30.6). **The crafts may stay Ashwarden and be LEARNABLE at greyhearth.**
+- **What does the trade look like from the inside?** The Sunk Assay foreman *bargains for passage* rather
+  than fighting — ⚠️ **these people negotiate, and Death now has `bargain`.**
+- ⛔ **THE ASHWARDEN SCHISM (backlogged separately) IS PROBABLY THE SAME STORY.** Marrow will not hasten an
+  ending, ever — **and somewhere there are the ones who chose otherwise.** ⚠️ **Greyhearth may be where they
+  live, and the schism may be the tradition's founding rather than a side note.**
+- **The retrieval ladder gives it a moral edge nothing else has:** ⛔ **a people who can raise the body and
+  cannot walk the person back** — they have the cheap half of death and not the dear one.

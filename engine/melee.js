@@ -39,8 +39,58 @@ export function resolutionTier(allyCount, foeCount = 1, { tiers = null } = {}) {
   return table.find(t => n <= t.max) || table[table.length - 1];
 }
 
+/** ⛔ CCODE-271 / ERIK'S RULING — HOW MANY YOU CAN LEAD IS EARNED, NOT A SETTING.
+ *
+ *  He chose [C] and then improved it: *"as a player gains notoriety tier, hero, epic, etc... they will be
+ *  higher level and more capable with deeds stacking up... that will allow them to own or build more holds
+ *  and have more party members they can include and have act with them — for now 3 is a good number to set
+ *  as the goal, with 1 party member that you get to have take turns per x number of levels... maybe based
+ *  on social skills?"*
+ *
+ *  ⚠️ SO THE PARTY IS A REWARD, NOT A CONFIGURATION. A fixed 3 — my original guess — gave a level-1
+ *  character the same battle line as a level-30 one, which is the opposite of a development arc.
+ *
+ *  ⛔ AND `presence` IS ALREADY THE RIGHT STAT. I did not have to invent a command score: its own authored
+ *  description in `progression.js` reads *"Command and inspiration — leading, being heeded, holding a
+ *  room."* Erik's "maybe based on social skills?" points exactly at it. A second ladder called Leadership
+ *  would be two names for one thing.
+ *
+ *  THREE EARNED SOURCES, each separately legible at the table:
+ *    · LEVEL      — his "1 per x number of levels": you have simply done this longer
+ *    · PRESENCE   — you can hold a room, so you can hold a line
+ *    · RENOWN     — his "notoriety tier, hero, epic": people follow someone they have heard of
+ *
+ *  ⚠️ THE CAP IS A GOAL, NOT A LAW. Erik: "for now 3 is a good number to set AS THE GOAL." Content-dialled
+ *  so raising it later is an authoring decision rather than an engine change — and the comment says so,
+ *  because a number with no note beside it becomes a law by silence. */
+export function commandSlots(character, { cfg = {}, renownBand = null } = {}) {
+  const maxNamed = Math.max(1, num(cfg.maxNamed, 3));
+  const per = Math.max(1, num(cfg.levelsPerSlot, 10));
+  const presenceAt = num(cfg.presenceForSlot, 7);
+  const renowned = new Set(cfg.renownBandsForSlot || ["renowned", "legendary"]);
+
+  const level = num(character?.level, 1);
+  const presence = num(character?.subAttributes?.presence, num(character?.attributes?.social, 0));
+
+  const earned = [];
+  const byLevel = Math.floor(level / per);
+  if (byLevel > 0) earned.push({ from: "level", n: byLevel, why: `level ${level}` });
+  if (presence >= presenceAt) earned.push({ from: "presence", n: 1, why: `presence ${presence} — you can hold a room` });
+  if (renownBand && renowned.has(String(renownBand))) earned.push({ from: "renown", n: 1, why: `${renownBand} — people follow someone they have heard of` });
+
+  const extra = earned.reduce((a, e) => a + e.n, 0);
+  // ⛔ +1 IS ALWAYS YOU. A character who can bring nobody forward still takes their own turn; a slot count
+  // that could reach zero would delete the player from their own fight.
+  const slots = Math.max(1, Math.min(maxNamed, 1 + extra));
+  return { slots, capped: 1 + extra > maxNamed, maxNamed, earned,
+    why: slots >= maxNamed ? `you lead ${slots} — the most anyone leads for now`
+      : `you lead ${slots}: yourself${extra ? " and " + extra + " more" : ", and nobody else yet"}` };
+}
+
 /** ⛔ HOW MANY GET A REAL TURN. In `melee`, Erik's shape: you, plus the ones you bring forward. Everyone
- *  else is IN the fight — they are simply not narrated blow by blow. */
+ *  else is IN the fight — they are simply not narrated blow by blow.
+ *  ⚠️ `namedLimit` NOW COMES FROM `commandSlots` WHERE A CHARACTER IS AVAILABLE. It stays a parameter so the
+ *  tier table can still be reasoned about without one. */
 export function actingSlots(tier, { namedLimit = 3 } = {}) {
   if (tier.resolve === "full") return Infinity;
   if (tier.resolve === "mixed") return namedLimit;

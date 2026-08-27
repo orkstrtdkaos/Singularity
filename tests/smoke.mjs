@@ -19973,6 +19973,59 @@ await (async () => {
     check("CCODE-198: the line a re-roll composes INCLUDES the kept likeness",
       /white hair/i.test(voted) && !/white hair/i.test(bare) && /plain coat/.test(voted), voted.slice(0, 90));
   }
+
+  // 5au · CCODE-271 / ERIK'S RULING — HOW MANY YOU CAN LEAD IS EARNED.
+  // He chose [C] and improved it: "as a player gains notoriety tier, hero, epic, etc... that will allow
+  // them to... have more party members they can include and have act with them — for now 3 is a good
+  // number to set as the goal, with 1 party member that you get to have take turns per x number of
+  // levels... maybe based on social skills?"
+  // ⚠️ MY ORIGINAL WAS A FIXED 3, which gave a level-1 character the same battle line as a level-30 one —
+  // the opposite of a development arc.
+  {
+    const ML271 = await import("../engine/melee.js");
+    const silas271 = JSON.parse(readFileSync(join(root, "characters/player-s9z9u1/char-mrhs8286.json"), "utf8"));
+
+    // ⛔ +1 IS ALWAYS YOU. A slot count that could reach zero would delete the player from their own fight.
+    check("CCODE-271: a level-1 newcomer with nothing still takes their own turn",
+      ML271.commandSlots({ level: 1, subAttributes: { presence: 2 } }).slots === 1);
+
+    // THE THREE EARNED SOURCES, each separately legible
+    check("CCODE-271: levels earn slots — Erik's '1 per x number of levels'",
+      ML271.commandSlots({ level: 12, subAttributes: { presence: 2 } }).slots === 2);
+    // ⛔ AND `presence` IS ALREADY THE RIGHT STAT — its own authored description in progression.js reads
+    // "Command and inspiration — leading, being heeded, holding a room". A second ladder called Leadership
+    // would have been two names for one thing, which is the failure Erik named on temp soak.
+    check("CCODE-271: presence earns one — you can hold a room, so you can hold a line",
+      ML271.commandSlots({ level: 12, subAttributes: { presence: 8 } }).slots >
+      ML271.commandSlots({ level: 12, subAttributes: { presence: 2 } }).slots);
+    check("CCODE-271: renown earns one — people follow someone they have heard of",
+      ML271.commandSlots({ level: 5, subAttributes: { presence: 2 } }, { cfg: { maxNamed: 9 }, renownBand: "renowned" }).slots >
+      ML271.commandSlots({ level: 5, subAttributes: { presence: 2 } }, { cfg: { maxNamed: 9 } }).slots);
+    // ⚠️ and an unremarkable band earns nothing — the source must discriminate or it is decoration
+    check("CCODE-271: …and being merely 'locally known' earns nothing",
+      ML271.commandSlots({ level: 5, subAttributes: { presence: 2 } }, { cfg: { maxNamed: 9 }, renownBand: "locally known" }).slots ===
+      ML271.commandSlots({ level: 5, subAttributes: { presence: 2 } }, { cfg: { maxNamed: 9 } }).slots);
+
+    // ⛔ THE CAP IS A GOAL, NOT A LAW — Erik: "for now 3 is a good number to set AS THE GOAL." The property
+    // that makes that safe is that the ladder KEEPS PAYING when the goal moves: a character who has earned
+    // more than the cap allows must get more the moment it rises, or raising it would require a re-grind.
+    {
+      const at = (cap) => ML271.commandSlots(silas271, { cfg: { maxNamed: cap }, renownBand: "renowned" }).slots;
+      check("CCODE-271: Silas is capped at 3 today and would lead more the instant the goal moves",
+        at(3) === 3 && at(4) === 4 && at(5) === 5 && at(6) === 6);
+      check("CCODE-271: …and the receipt says he is capped, so the earned-but-unspent is visible",
+        ML271.commandSlots(silas271, { cfg: { maxNamed: 3 }, renownBand: "renowned" }).capped === true);
+    }
+    // ⚠️ NON-VACUITY: the cap must actually bind on someone, or every claim above passes on a low ceiling.
+    check("CCODE-271: the cap genuinely binds — Silas has earned more than it allows (floor)",
+      ML271.commandSlots(silas271, { cfg: { maxNamed: 3 } }).earned.reduce((a, e) => a + e.n, 0) + 1 > 3);
+
+    // ⚠️ AND IT READS OFF THE SUB-ATTRIBUTE, falling back to the parent — a character mid-migration must not
+    // silently lose their command.
+    check("CCODE-271: presence falls back to the social parent for a character without sub-attributes",
+      ML271.commandSlots({ level: 1, attributes: { social: 9 } }).slots === 2);
+  }
+
   // 3 · ⛔ AND NOTHING REPLACES A PICTURE THE PLAYER DID NOT ASK ABOUT. The queue verifies; it does not
   // draw. A second draw now costs a click, and the first one stays as a version rather than being overwritten.
   {

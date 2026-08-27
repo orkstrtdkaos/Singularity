@@ -1012,20 +1012,20 @@
    "functions": [
     "hinder"
    ],
-   "narrationHints": "The strength goes out of him like water out of a cracked jar, and he can feel it going.",
-   "description": "Enfeeblement. You take the vigour out of a LIVING thing by touch or near-hand — not its life, its STRENGTH. It is still standing. It simply cannot do what it could a moment ago, and it will not until someone mends it.",
-   "notFor": "Objects, structures, or terrain — that is Wither, and the two do not substitute for each other. It drains, it does not slay: a weakened boar is still a boar with tusks. And it is VISIBLE.",
+   "narrationHints": "The strength goes out of him like water out of a cracked jar, and he can feel it going. ⚠️ WHAT FOLLOWS IS OFTEN WORSE THAN THE CRAFT: a hand that will not grip lets go of a ledge, a rider who cannot hold on comes off, a swimmer stops swimming. ⛔ The Grey Hand did none of that.",
+   "description": "Enfeeblement. You take the vigour out of a LIVING thing by touch or near-hand — not its life, its STRENGTH. ⛔ IT IS NOT A WOUNDING CRAFT: it does not cut, burn or break. What it takes is what they can DO — their blows land softer, their crafts come out weaker, their grip is worse. ⚠️ It is still standing. It simply cannot do what it could a moment ago, and it will not until someone mends it.",
+   "notFor": "Objects, structures, or terrain — that is Wither, and the two do not substitute for each other. ⛔ AND IT INVERTS ON THE UNDEAD: taking vitality out of a thing that runs on the ABSENCE of it FEEDS it. A Grey Hand laid on a raised body or an Afterling BOLSTERS them (SYSTEM_SPEC §48.5). ⚠️ It drains, it does not slay: a weakened boar is still a boar with tusks.",
    "tree": [
     {
      "rank": 1,
      "name": "Grey Hand",
-     "grants": "Weaken a living thing by touch. Its strength fails; its will to use that strength fails with it.",
-     "cannot": "Touch. You must reach them, and reaching a strong thing is the whole problem.",
+     "grants": "Weaken a living thing by touch. ⛔ ITS STRENGTH FAILS AND EVERYTHING IT DOES COMES OUT WEAKER — blows, crafts, grip — and its will to use that strength fails with it.",
+     "cannot": "Touch. You must reach them, and reaching a strong thing is the whole problem. ⚠️ It deals no damage: they are weakened, not hurt.",
      "functions": [
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "damaging",
+     "harmRung": "none",
      "_nameWas": "The Grey Hand",
      "gainAxes": [],
      "imposes": {
@@ -1049,8 +1049,8 @@
      "functions": [
       "hinder"
      ],
-     "gains": "deepen",
-     "harmRung": "damaging",
+     "gains": "broaden",
+     "harmRung": "none",
      "_nameWas": "The Long Grey",
      "gainAxes": [
       "range",
@@ -1078,12 +1078,12 @@
      "functions": [
       "hinder"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "incapacitating",
      "_nameWas": "The Withered Hour",
      "gainAxes": [
-      "duration",
-      "scope"
+      "targets",
+      "duration"
      ],
      "imposes": {
       "condition": "incapacitated",
@@ -1119,7 +1119,7 @@
     "duration": 3,
     "range": 1,
     "targets": 1,
-    "note": "incapacitating rung. r1 requires TOUCH",
+    "note": "hobble. ⛔ NOT A DAMAGING CRAFT — no dice, by design. `magnitude 4` is how much VIGOUR is taken: their damage output and craft effectiveness drop, and the `imposes` conditions are the visible end of it. ⚠️ INDIRECT HARM IS REAL AND IS NOT THE CRAFT'S: a grip that fails on a ledge kills, and the Grey Hand never touched them. ⛔ INVERTS ON UNDEAD PER §48.5 — draining vitality from a thing that runs on the absence of it BOLSTERS it. r1 requires TOUCH.",
     "crit": {
      "success": "They fold where they stand and will not stand again today.",
      "failure": "They feel it start and step out of reach — and everyone saw whose hand it was."
@@ -1155,20 +1155,25 @@
      "class": "hard"
     },
     {
-     "text": "⛔ IT NEVER KILLS AND NEVER WOUNDS — a Grey Hand that has done its worst leaves them alive",
+     "text": "⛔ IT NEVER KILLS AND NEVER WOUNDS — a Grey Hand that has done its worst leaves them alive. ⚠️ What their weakness then causes is another matter",
      "class": "hard"
     },
     {
-     "text": "⚠️ nothing it does is deniable — the victim and every witness sees who is doing it",
-     "class": "cost"
+     "text": "⛔ ON THE UNDEAD IT INVERTS AND BOLSTERS — a warden who reaches for it against a raised body has just helped it",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ Nothing it does is deniable — the victim and every witness sees whose hand it was",
+     "class": "drawback"
     }
    ],
-   "plainly": "A fight/social action that weakens or restricts a target. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours. Range is 1. Ranks: rank 2 extends range+duration; rank 3 extends targets. Limit: attending Costs You Continuously — let go and it comes back.",
+   "plainly": "A fight/social action. Takes the vigour out of one living thing — it does NOT deal damage; it reduces what they can do, so their blows and crafts come out weaker and they may be staggered outright. Rated 4 of 10, one target, range 1, and THE WEAKNESS PERSISTS UNTIL HEALED OR RESTORED. r2 reaches at distance; r3 takes three at once or leaves one unable to stand. ⛔ On an undead it does the opposite and strengthens them.",
    "_nameWas": "The Grey Hand",
    "_idWas": "the_grey_hand",
    "_persistence": "⛔ SNG-494. Erik: 'The Grey Hand needs to be updated — IT DOESN'T COME BACK IMMEDIATELY UPON STOPPING. It would have to be HEALED/RESTORED.'\n⚠️ THE OLD VERSION CHARGED ENERGY EVERY ROUND TO MAINTAIN IT and returned the victim to full the moment you stopped — which made it a concentration tax rather than an effect, and made r2's 'hold it there' the same as r1. ⛔ NOW THE WEAKNESS PERSISTS UNTIL A MENDING CRAFT LIFTS IT, and r2 buys range and persistence instead of an upkeep bill.",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_reviewed_20260824": "⛔ ERIK 2026-08-24. (1) IT INVERTS ON THE UNDEAD AND BOLSTERS THEM — same family as heal->harm (§48.5): taking vitality from a thing that runs on the ABSENCE of vitality feeds it. Now a hard bound, a notFor clause and a plainly line, because a warden reaching for this against a raised body has just helped it. (2) ⚠️ IT IS NOT A DAMAGING CRAFT: 'it steals vitality/strength… primarily DECREASES THEIR DAMAGE AND ABILITIES' — stated in the description and the mechanic note, and r1/r2 harmRung dropped from `damaging` to `none` because the craft's own hard bound says IT NEVER WOUNDS. r3 stays `incapacitating`: it can leave someone unable to stand. (3) INDIRECT HARM IS REAL AND IS NOT THE CRAFT'S — a grip that fails on a ledge. In narrationHints, not in mechanic. ⚠️ (4) ERIK ON MY REVIEW: I called 'nothing it does is deniable' the most interesting thing about the craft. He corrected me — 'this isn't as unusual to the GAME as it is to your thinking; in the game this is fairly normal, as it's a fantasy game.' ⛔ I KEEP IMPORTING REAL-WORLD SOCIAL PHYSICS INTO A FANTASY SETTING. Visible magic is not remarkable here. The clause stays as a `drawback` and is no longer framed as the point of the craft. (5) `plainly` was machine-generated AND CONTRADICTED THE HARD BOUND — it said 'attending costs you continuously, let go and it comes back' on a craft whose weakness PERSISTS UNTIL HEALED. A stale line from before that ruling. (6) r2 and r3 both declared `deepen` while broadening range and targets."
   },
   {
    "schemaVersion": 1,

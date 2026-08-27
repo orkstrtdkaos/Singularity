@@ -544,21 +544,21 @@
 **status:** crit · gated  
 **ability functions:** hinder
 
-> Enfeeblement. You take the vigour out of a LIVING thing by touch or near-hand — not its life, its STRENGTH. It is still standing. It simply cannot do what it could a moment ago, and it will not until someone mends it.
+> Enfeeblement. You take the vigour out of a LIVING thing by touch or near-hand — not its life, its STRENGTH. ⛔ IT IS NOT A WOUNDING CRAFT: it does not cut, burn or break. What it takes is what they can DO — their blows land softer, their crafts come out weaker, their grip is worse. ⚠️ It is still standing. It simply cannot do what it could a moment ago, and it will not until someone mends it.
 
-**notFor:** Objects, structures, or terrain — that is Wither, and the two do not substitute for each other. It drains, it does not slay: a weakened boar is still a boar with tusks. And it is VISIBLE.
+**notFor:** Objects, structures, or terrain — that is Wither, and the two do not substitute for each other. ⛔ AND IT INVERTS ON THE UNDEAD: taking vitality out of a thing that runs on the ABSENCE of it FEEDS it. A Grey Hand laid on a raised body or an Afterling BOLSTERS them (SYSTEM_SPEC §48.5). ⚠️ It drains, it does not slay: a weakened boar is still a boar with tusks.
 
 ### r1 — Grey Hand
 
-**functions:** hinder · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** damaging · imposes · persists
+**functions:** hinder · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none · imposes · persists
 
-**grants:** Weaken a living thing by touch. Its strength fails; its will to use that strength fails with it.
+**grants:** Weaken a living thing by touch. ⛔ ITS STRENGTH FAILS AND EVERYTHING IT DOES COMES OUT WEAKER — blows, crafts, grip — and its will to use that strength fails with it.
 
-**cannot:** Touch. You must reach them, and reaching a strong thing is the whole problem.
+**cannot:** Touch. You must reach them, and reaching a strong thing is the whole problem. ⚠️ It deals no damage: they are weakened, not hurt.
 
 ### r2 — Long Grey
 
-**functions:** hinder · **gainAxes:** range, duration · **gains:** deepen · **harm:** damaging · imposes · persists
+**functions:** hinder · **gainAxes:** range, duration · **gains:** broaden · **harm:** none · imposes · persists
 
 **grants:** ⛔ TAKE THE VIGOUR OUT OF A LIVING THING AT A DISTANCE rather than by touch, and the weakness STAYS — it does not lift when you stop attending to it and lasts until healed or restored.
 
@@ -566,13 +566,13 @@
 
 ### r3 — Withered Hour
 
-**functions:** hinder · **gainAxes:** duration, scope · **gains:** deepen · **harm:** incapacitating · imposes · persists
+**functions:** hinder · **gainAxes:** targets, duration · **gains:** broaden · **harm:** incapacitating · imposes · persists
 
 **grants:** Weaken a group, or weaken one thing so thoroughly it cannot stand.
 
 **cannot:** ⛔ It never kills and never wounds — a Grey Hand that has done its worst leaves someone unable to stand, not dying. ⚠️ THE WEAKNESS LASTS UNTIL IT IS HEALED OR RESTORED BY A CRAFT THAT MENDS. Nothing it does is deniable: the victim and every witness can see exactly who is doing it and that it is being chosen.
 
-**bounds:** TOUCH at r1 — reaching a strong thing is the whole problem · ⛔ THE WEAKNESS PERSISTS UNTIL HEALED OR RESTORED. It does not lift when you stop attending and it does not fade with rest · ⛔ IT NEVER KILLS AND NEVER WOUNDS — a Grey Hand that has done its worst leaves them alive · ⚠️ nothing it does is deniable — the victim and every witness sees who is doing it
+**bounds:** TOUCH at r1 — reaching a strong thing is the whole problem · ⛔ THE WEAKNESS PERSISTS UNTIL HEALED OR RESTORED. It does not lift when you stop attending and it does not fade with rest · ⛔ IT NEVER KILLS AND NEVER WOUNDS — a Grey Hand that has done its worst leaves them alive. ⚠️ What their weakness then causes is another matter · ⛔ ON THE UNDEAD IT INVERTS AND BOLSTERS — a warden who reaches for it against a raised body has just helped it · ⚠️ Nothing it does is deniable — the victim and every witness sees whose hand it was
 
 ---
 

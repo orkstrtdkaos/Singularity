@@ -514,10 +514,33 @@ const readDirSrc = (dir, exts) => {
 // evidence the capability was wired. An instrument that is silenced by describing it is not an
 // instrument. (The original orphan sweep has the same flaw and now shares this corpus.)
 const stripImports = s => s
-  .replace(/^\s*import\s[\s\S]*?from\s*["'][^"']+["'];?\s*$/gm, "")
+  // ⛔ CCODE-267 — `[\s\S]*?` LET THIS SWALLOW 12,830 LINES OF app.js AND IT PRODUCED 81 FALSE POSITIVES.
+  // An import can legally span lines, so the original crossed newlines to find its `from "..."`. But so can
+  // PROSE: a comment ending in the words `from "you outran it"` terminated the match, and everything between
+  // line 108 and that comment — 93% of the file — was stripped out of the consumer corpus. Every export
+  // called only in that region then read as "imported and never invoked".
+  // ⚠️ THE CORPUS WENT NEARLY EMPTY AND THE AUDIT REPORTED IT AS A CODE REGRESSION, which is the exact shape
+  // of every "check that agrees with itself" this project has caught: the instrument broke and blamed the
+  // subject. A ratchet that can be moved by a COMMENT is measuring the wrong thing.
+  // ⛔ `[^;]*?` IS THE FIX: an import statement contains no semicolon before its own terminator, so the match
+  // can still cross newlines for a multi-line import and cannot run past the end of one statement.
+  .replace(/^[ \t]*import\s[^;]*?from\s*["'][^"']+["'];?[ \t]*$/gm, "")
   .replace(/\/\*[\s\S]*?\*\//g, "")
   .replace(/(^|[^:"'`\\])\/\/[^\n]*/g, "$1");   // line comments, but not the // in https://
 const consumerNoImports = [appSrc, read("index.html"), readDirSrc("tests", [".mjs", ".js"]), readDirSrc("scripts", [".mjs", ".js"])].map(stripImports).join("\n");
+// ⛔ CCODE-267 — THE INSTRUMENT CHECKS ITSELF BEFORE IT ACCUSES ANYTHING.
+// `stripImports` once swallowed 90% of app.js because a COMMENT ended in the words `from "you outran it"`,
+// and the two ratchets below then reported 81 exports as unreachable. ⚠️ THE CORPUS WENT NEARLY EMPTY AND
+// THE AUDIT BLAMED THE CODE — a check that cannot tell "nothing calls this" from "I lost the callers" is
+// worse than no check, because it is confidently wrong in the direction of alarm.
+// ⚠️ A NON-VACUITY FLOOR ON THE MEASUREMENT ITSELF. Every derived gate in this project needs one: if the
+// corpus is gone, say THAT — never report a finding computed from an empty set.
+{
+  const kept = stripImports(appSrc).length / Math.max(1, appSrc.length);
+  check("wiring: the consumer corpus survives import-stripping — the instrument is not eating its own input",
+    kept > 0.5, `stripImports kept only ${(kept * 100).toFixed(0)}% of app.js — the "unreachable" ratchets below would be measuring an empty room, not your code`);
+}
+
 const importedNeverCalled = [];
 for (const { f, src } of allSrc) {
   const othersNoImports = allSrc.filter(x => x.f !== f).map(x => stripImports(x.src)).join("\n");

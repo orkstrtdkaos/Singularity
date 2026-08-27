@@ -105,14 +105,14 @@ import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 // ⛔ CCODE-239 — PROJECTS TICK. `engine/projects.js` shipped green with all six exports reachable only
 // from smoke.mjs: work banked, nothing advanced it, and `PROJECT_TICKS` was the one INERT verdict in the
 // effect audit. A threshold nothing counts toward is a duration that never elapses.
-import { tickAllProjects } from "./engine/projects.js";
+import { tickAllProjects, openProject, projectProgress } from "./engine/projects.js";
 import { characterPower } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.228";
+const APP_VERSION = "1.9.229";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6253,6 +6253,28 @@ function applyTurn(turn, resolution, playerWords = null) {
     character._exchangeReceipts = rec.filter(r => r && (r.ok === false || r.settled));
   });
   applyStep("encounterOps", () => { const encA = activeEnc(); if (encA) applyEncounterOps(encA.state, sanitizeEncounterOps(turn.encounterOps, encA.def, encA.state)); });
+  // ⛔ CCODE-268 — THE DOOR PROJECTS NEVER HAD. `tickAllProjects` was wired by CCODE-239, so work BANKED —
+  // against projects nothing could create. `openProject` had no caller, which is why Aevi's "Sunk Assay
+  // Level 4 cannot be started" was true for months: a threshold with no way to open one is a duration that
+  // never begins, which is a stranger failure than one that never elapses.
+  // ⚠️ A GM OP, because that is how every other durable thing in this game starts. The narrator says the
+  // character sets to work; the engine decides whether that craft can carry a project and refuses with a
+  // reason a player can read.
+  applyStep("projectOps", () => {
+    for (const op of (Array.isArray(turn.projectOps) ? turn.projectOps : []).slice(0, 3)) {
+      if (String(op?.op || "") !== "open") continue;
+      const ab = fullCatalog()[String(op.abilityId || "")];
+      if (!ab) continue;
+      // ⛔ THE OWNED RANK DECIDES IT. `working_model` authors `projectTicks: "r3"` — it is a project at rank
+      // three and a scene-length working below that, and opening it early would be honouring a flag its
+      // author qualified.
+      const owned = (character.abilities || []).find(x => x.abilityId === ab.id);
+      if (!owned) continue;
+      const res = openProject(character, ab, { day: currentDay, name: op.name ? String(op.name).slice(0, 60) : null,
+        opener: character.name, ownedRank: owned.level, cfg: {} });
+      if (res?.ok === false && res.why) character._projectRefusals = [...(character._projectRefusals || []).slice(-2), res.why];
+    }
+  });
   }
   if (turn.newEncounter) {
     // SNG-231 §2: ISOLATED — the GM-invented fight/duel def MUST register even if an earlier op (npcUpdates on a

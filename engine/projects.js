@@ -38,13 +38,38 @@ export function projectThreshold(ability, cfg = {}) {
 
 /** Is this craft one you can open a project with? Both flags, because `downtime` alone means "not in a
  *  scene" and plenty of crafts are that without being projects. */
-export function isProjectCraft(ability) {
-  return ability?.projectTicks === true && ability?.downtime === true;
+export function isProjectCraft(ability, ownedRank = null) {
+  const t = ability?.projectTicks;
+  if (t === undefined || t === false || t === null) return false;
+  // ⛔ CCODE-268 — `projectTicks: "r3"` IS RANK-FIRST AUTHORING AND THIS READER DID `=== true`.
+  // `working_model` authors exactly that: it becomes a project AT RANK 3, not before. The old strict test
+  // returned false for it, so a craft its author had marked as a project could never open one — §45.1 again,
+  // the defect this project keeps finding: authored at the rank, read at the ability.
+  // ⚠️ AND WITH NO RANK SUPPLIED IT ANSWERS "CAN THIS EVER BE ONE", which is the honest answer to a question
+  // that did not name a rank — a menu asking "what can I start projects with" wants the craft listed.
+  if (typeof t === "string") {
+    const m = /^r(\d+)$/i.exec(t.trim());
+    if (!m) return false;
+    if (ownedRank == null) return true;
+    if (num(ownedRank, 0) < Number(m[1])) return false;
+  } else if (t !== true) return false;
+  // ⚠️ `downtime` IS NOT REQUIRED WHEN `projectTicks` IS EXPLICIT. The original demanded both because
+  // "downtime alone means not-in-a-scene and plenty of crafts are that without being projects" — true, and
+  // it argues for projectTicks being load-bearing, NOT for a second flag. `working_model` authors the
+  // project marker and no `downtime`, and refusing it on that basis was the reader inventing a requirement
+  // its own comment did not justify.
+  return true;
 }
 
 /** Open one. Returns the project, or a refusal with a reason a player can read. */
-export function openProject(character, ability, { day = 0, name = null, opener = null, cfg = {} } = {}) {
-  if (!isProjectCraft(ability)) return { ok: false, why: "this is not a craft you can open a project with" };
+export function openProject(character, ability, { day = 0, name = null, opener = null, ownedRank = null, cfg = {} } = {}) {
+  // ⚠️ CCODE-268: the RANK is part of the question. A craft authored `projectTicks: "r3"` is a project at
+  // three and a scene-length working below it, and opening it at r1 would honour a flag its author qualified.
+  if (!isProjectCraft(ability, ownedRank)) {
+    return { ok: false, why: isProjectCraft(ability)
+      ? `${ability?.name || "this craft"} only becomes a project at a higher rank`
+      : "this is not a craft you can open a project with" };
+  }
   const list = character.projects || (character.projects = []);
   // ⚠️ ONE PROJECT PER CRAFT PER CHARACTER. Two open projects of the same working is not "twice the work",
   // it is a bookkeeping bug wearing ambition's clothes.

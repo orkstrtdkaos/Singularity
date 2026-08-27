@@ -19724,6 +19724,69 @@ await (async () => {
       && (withWard > 0) === /`wardTypes`.*NOTHING.*§39\.5/s.test(spec199.slice(spec199.indexOf("§39.1"), spec199.indexOf("§39.2"))),
       "the spec claims a count the catalogue no longer has");
   }
+
+  // 5ar · CCODE-268 — PROJECTS COULD TICK AND COULD NEVER BE OPENED.
+  // ⛔ CCODE-239 wired `tickAllProjects`, so work BANKED — against projects nothing could create.
+  // `openProject` had no caller in play. That is why Aevi's "Sunk Assay Level 4 cannot be started" stayed
+  // true: a threshold with no way to OPEN one is a duration that never begins, which is a stranger failure
+  // than one that never elapses, and a green ratchet hid it because six of the module's exports were
+  // reachable from smoke.
+  {
+    const PJ268 = await import("../engine/projects.js");
+    const abil268 = C199.abilities || {};
+    const wm = abil268.working_model, sr = abil268.sound_read;
+
+    // ⛔ THE READER BUG UNDERNEATH IT. `working_model` authors `projectTicks: "r3"` — RANK-FIRST — and
+    // `isProjectCraft` did `=== true`, so a craft its author had marked as a project could never open one.
+    // §45.1 again: authored at the rank, read at the ability.
+    check("CCODE-268: working_model really does author a RANK-qualified project marker (floor)",
+      wm?.projectTicks === "r3");
+    check("CCODE-268: a rank-qualified craft is a project AT its rank and not below",
+      PJ268.isProjectCraft(wm, 3) === true && PJ268.isProjectCraft(wm, 2) === false && PJ268.isProjectCraft(wm, 1) === false);
+    // ⚠️ AND WITH NO RANK ASKED, IT ANSWERS "CAN THIS EVER BE ONE" — the honest answer to a question that
+    // did not name a rank, so a "what can I start?" menu still lists it.
+    check("CCODE-268: …and with no rank supplied it answers CAN-IT-EVER, so a menu still lists it",
+      PJ268.isProjectCraft(wm) === true);
+
+    // ⚠️ AND `downtime` IS NO LONGER A SECOND REQUIRED FLAG. The old reader demanded both; working_model
+    // authors the project marker and no `downtime`, and refusing it on that basis was the reader inventing
+    // a requirement its own comment did not justify.
+    check("CCODE-268: an explicit projectTicks is enough — the second flag was an invented requirement",
+      wm?.downtime === undefined && PJ268.isProjectCraft(wm, 3) === true);
+    // ⛔ but a craft that says NOTHING is still not a project — the additive floor
+    check("CCODE-268: a craft that declares nothing is still not a project",
+      PJ268.isProjectCraft({ id: "x", name: "X" }) === false
+      && PJ268.isProjectCraft({ id: "y", projectTicks: false }) === false);
+
+    // OPENING, AND THE REFUSAL A PLAYER CAN READ
+    const ch1 = { name: "Silas", projects: [] };
+    const early = PJ268.openProject(ch1, wm, { day: 1, ownedRank: 1 });
+    check("CCODE-268: opening it too early is REFUSED with a reason, not silently ignored",
+      early.ok === false && /higher rank/.test(String(early.why)));
+    const ch2 = { name: "Silas", projects: [] };
+    const ok = PJ268.openProject(ch2, wm, { day: 1, ownedRank: 3 });
+    check("CCODE-268: at its rank it opens, with the authored threshold",
+      ok.ok !== false && (ch2.projects || []).length === 1 && ch2.projects[0].threshold === 21);
+    const ch3 = { name: "Silas", projects: [] };
+    PJ268.openProject(ch3, sr, { day: 1, ownedRank: 1 });
+    check("CCODE-268: a plainly-flagged project craft opens at r1 and reports progress from zero",
+      PJ268.projectProgress(ch3.projects[0])?.remaining === 10
+      && PJ268.projectProgress(ch3.projects[0])?.fraction === 0);
+    // ⚠️ AND THE WORK ACTUALLY MOVES — open then tick, which is the pair that was broken.
+    PJ268.tickAllProjects(ch3, { days: 4, hands: 2, cfg: {} });
+    check("CCODE-268: …and banked work advances it — open and tick finally meet",
+      PJ268.projectProgress(ch3.projects[0])?.banked > 0);
+
+    // ⛔ THE DOOR IS IN THE APP, not only in this test. That distinction is the whole bug.
+    const appSrc268 = readFileSync(join(root, "app.js"), "utf8");
+    check("CCODE-268: app.js imports openProject and applies a projectOps step",
+      /openProject/.test(appSrc268) && /applyStep\("projectOps"/.test(appSrc268));
+    // ⚠️ and the narrator knows the op exists — a door nobody is told about is shut
+    const gmSrc268 = readFileSync(join(root, "engine/gm.js"), "utf8");
+    check("CCODE-268: the GM contract names projectOps and says a project completes on a THRESHOLD, not a date",
+      /projectOps/.test(gmSrc268) && /THRESHOLD, never on a date/i.test(gmSrc268));
+  }
+
 }
 // ---- CCODE-198: the first picture stays, and the composer waits to be asked ----------------------
 // ⛔ ERIK: "I don't want the first generated image to disappear. sometimes it's quite good... I'm

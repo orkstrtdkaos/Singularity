@@ -138,11 +138,51 @@ export function resolveTier(ability, wantRank, ownedRank = 1) {
  *  ⚠️ MEASURED REASON FOR THE FILTER: one option per craft × function × rank takes a 6-craft kit from 14
  *  options to 42, and two thirds of those ranks declare nothing of their own. The menu must be a list of
  *  CHOICES, not a list of rows. */
+/** ⛔ CCODE-266 / AEVI's SPEC_typed_soak_and_free_touch §2 — THE TOUCH THAT COSTS NOTHING.
+ *
+ *  Erik: *"so we should allow a zero energy use of certain crafts? Not a bad idea."* Aevi's case: a warden
+ *  at 4 health and 0 energy putting a bare hand on a body, because the craft IS the contact.
+ *
+ *  ⚠️ RIGHT NOW A CHARACTER AT ZERO ENERGY IS A CHARACTER WITH NO TRADITION — everything that made them who
+ *  they are switches off at exactly the moment it should matter most. THE FLOOR OF A CRAFT SHOULD BE FREE
+ *  AND NEARLY USELESS, NOT ABSENT. With `rankReachSurcharge` the ladder now reads r0 nothing → touch free →
+ *  r1 full price → r2/r3 + surcharge, and every step of that is a real state rather than a gap.
+ *
+ *  ⛔ ALWAYS AVAILABLE, NOT GATED ON BEING AT ZERO. Aevi left this open and leaned always-available; I agree,
+ *  and the reason is mechanical rather than aesthetic — a tier that only appears at 0 energy is a tier the
+ *  narrator meets for the first time IN A CRISIS, which is the worst moment to introduce an option.
+ *
+ *  ⚠️ AND IT IS STRIPPED, NOT SCALED DOWN. The identity with no power behind it: one target, at contact, no
+ *  dice, no ongoing, no area. A touch tier that kept a die would be r1 at a discount, which is a different
+ *  and much worse idea.
+ */
+export function touchTierOf(ability, { cfg = {} } = {}) {
+  const declared = ability?.touchTier;
+  if (!declared) return null;
+  const spec = (declared === true || typeof declared === "string") ? {} : (declared || {});
+  return {
+    rank: 0.5,                       // beneath r1 and above r0 — it is LEARNED, unlike the unlearned state
+    name: spec.name || `${ability?.name || "it"}, by hand`,
+    energyCost: 0,
+    contactOnly: true,
+    targets: 1,
+    // ⛔ THE STRIPPING IS THE MECHANIC. Named explicitly so a reader can SEE that a touch carries none of it,
+    // rather than inferring absence from a missing field — this project has shipped that mistake repeatedly.
+    dice: null, ongoingHarm: null, area: null, range: null,
+    why: spec.why || "the craft with no power behind it — you have to be there, and it is barely anything",
+    ...(typeof declared === "string" ? { why: declared } : {}),
+  };
+}
+
 export function capabilityMenu(ability, ownedRank = 1, opts = {}) {
+  // ⚠️ CCODE-266: the free touch sits BELOW r1 in the menu, so a player meets it before they need it.
+  const touch = touchTierOf(ability, opts);
   const all = capabilitiesOf(ability, ownedRank, opts);
   const distinct = all.filter(c => c.distinct);
   // ⛔ ALWAYS OFFER AT LEAST ONE. A craft whose ranks declare nothing mechanical still has a rank-1 use,
   // and dropping it from the menu would delete the craft from play — the failure mode this whole file is
   // meant to prevent, committed by the filter meant to keep it small.
-  return { tiers: distinct.length ? distinct : all.slice(0, 1), all };
+  const tiers = distinct.length ? distinct : all.slice(0, 1);
+  // ⛔ CCODE-266: prepended, never appended — a free floor listed AFTER the paid tiers reads as a footnote.
+  return { tiers: touch ? [touch, ...tiers] : tiers, all, ...(touch ? { touch } : {}) };
 }

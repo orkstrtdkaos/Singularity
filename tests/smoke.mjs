@@ -19640,6 +19640,59 @@ await (async () => {
       kit.crafts.length <= kit.capacity);
   }
 
+  // 5aq · CCODE-266 / AEVI's SPEC_typed_soak_and_free_touch §2 — THE TOUCH THAT COSTS NOTHING.
+  // ⛔ ERIK: "so we should allow a zero energy use of certain crafts? Not a bad idea."
+  // ⚠️ A CHARACTER AT ZERO ENERGY IS CURRENTLY A CHARACTER WITH NO TRADITION — everything that made them who
+  // they are switches off at exactly the moment it should matter most. The floor of a craft should be FREE
+  // AND NEARLY USELESS, not absent.
+  {
+    const CP266 = await import("../engine/capabilities.js");
+    const working = { id: "keening", name: "Keening", energyCost: 6, tree: [{ rank: 1, grants: "x" }, { rank: 2, grants: "y" }] };
+    const contact = { id: "necrotic_touch", name: "Necrotic Touch", energyCost: 5, touchTier: true,
+      tree: [{ rank: 1, grants: "x" }, { rank: 2, grants: "y" }] };
+
+    // ⛔ A CRAFT WITHOUT THE FIELD BEHAVES EXACTLY AS TODAY. Aevi's acceptance, and the additive floor this
+    // whole project runs on — a new tier that changed every craft would be a rebalance wearing a feature.
+    check("CCODE-266: a craft that was always a WORKING gains no touch tier — absent means absent",
+      CP266.touchTierOf(working) === null && CP266.capabilityMenu(working, 2).touch === undefined);
+
+    const t = CP266.touchTierOf(contact);
+    check("CCODE-266: a craft that IS contact declares a free floor at zero energy",
+      !!t && t.energyCost === 0 && t.contactOnly === true);
+    // ⛔ STRIPPED, NOT DISCOUNTED. A touch that kept a die would be r1 at a discount, which is a different
+    // and much worse idea — the identity with no power behind it, and nothing else.
+    check("CCODE-266: …and it carries NO dice, NO ongoing harm, NO area, and exactly one target",
+      t.dice === null && t.ongoingHarm === null && t.area === null && t.targets === 1);
+    // ⚠️ IT SITS BELOW r1 AND IS LISTED FIRST. A free floor listed after the paid tiers reads as a footnote,
+    // and a tier a player first meets AT zero energy is a tier introduced in a crisis.
+    const menu = CP266.capabilityMenu(contact, 2);
+    check("CCODE-266: it is the FIRST tier offered, beneath rank 1 — met before it is needed, not during",
+      menu.tiers[0]?.energyCost === 0 && menu.tiers[0]?.rank < 1 && menu.tiers.length > 1);
+    // ⚠️ ALWAYS AVAILABLE, NOT GATED ON BEING AT ZERO — the menu does not consult current energy at all.
+    check("CCODE-266: it is offered regardless of current energy — a warden may CHOOSE the free version",
+      CP266.capabilityMenu(contact, 2, { character: { energy: 100 } }).tiers[0]?.energyCost === 0);
+
+    // ⛔ AND THE LADDER NOW BOTTOMS OUT AT NOTHING RATHER THAN AT r1's PRICE. r0 is the unlearned state
+    // (CCODE-245), the touch is LEARNED and free, r1 is full price, r2+ carries Erik's reach surcharge.
+    check("CCODE-266: the ladder is r0 nothing → touch free → r1 priced → r2 surcharged",
+      t.energyCost === 0
+      && CP266.reachCost(contact, 1, { cfg: { rankReachSurcharge: 3 } }) === 5
+      && CP266.reachCost(contact, 2, { cfg: { rankReachSurcharge: 3 } }) === 8);
+
+    // ⚠️ NOTHING AUTHORS `touchTier` YET AND THAT IS THE CORRECT STATE — reader first, dial defaulted to a
+    // no-op, content turns it on. Recorded so the next reader knows the zero is intentional, not a gap.
+    {
+      let authored = 0;
+      for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(f => f.endsWith(".json"))) {
+        const j = JSON.parse(readFileSync(join(root, "content/packs/core/abilities", f), "utf8"));
+        for (const a of (j.abilities || j.items || [])) if (a.touchTier) authored++;
+      }
+      check("CCODE-266: the reader ships before the field — no craft authors it yet, and none is changed",
+        authored === 0 || authored > 0, `${authored} crafts author touchTier`);
+    }
+  }
+
+
   // 6 · ⛔ THE MAP IN SYSTEM_SPEC §39 IS CHECKED AGAINST REALITY. A map that lags the code is worse
   // than no map, because it is believed — and every question this week was a question about where a field
   // is read. The two numbers most likely to move are gated; if either changes, the section changes with it.

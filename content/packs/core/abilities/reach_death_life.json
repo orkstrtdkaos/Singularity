@@ -3030,7 +3030,8 @@
    ],
    "harmRung": "incapacitating",
    "nativeOrCombination": "native",
-   "shape": "healing",
+   "shape": "retrieval",
+   "_shapeNote": "⛔ CCODE-269 / SPEC_retrieval_shape acceptance 1. WAS `healing`, which handed a resurrection craft familyDefaults.healing's 1d4 — damage-shaped dice for a job that deals none, contradicted by its own notFor: \"AND IT DOES NOT HEAL: what comes back comes back exactly as hurt as it went down.\" ⚠️ ITS OWN 2d6+2 STAYS AND IS NOT A HEAL — Aevi: \"The number is a reach.\" It rolls against DEATH DEPTH (engine/death.js) — r1 reaches the Threshold, r2 the Near Dark, r3 the Deep Dark, and Sealed is closed to every rank including surge. What changed is what it INHERITS, not what it authors.",
    "operativeAxis": [
     "reach",
     "depth"

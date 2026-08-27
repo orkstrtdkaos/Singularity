@@ -19787,6 +19787,120 @@ await (async () => {
       /projectOps/.test(gmSrc268) && /THRESHOLD, never on a date/i.test(gmSrc268));
   }
 
+  // 5as · CCODE-269 / AEVI's SPEC_retrieval_shape — WHAT THE DEATH LADDER DID NOT HAVE.
+  //
+  // ⛔ AND THE THING TO RECORD FIRST: I BUILT A DUPLICATE. Her spec says "I do not know where that state
+  // lives... That seam is yours", and I read that as "it does not exist" instead of spending one grep.
+  // `engine/death.js` (SNG-209) already had the four rungs, the day thresholds, sealing, the deepening
+  // clock, sink-on-failed-retrieval AND seal-at-the-deep-dark — `resolveRetrieval` implements her
+  // acceptance 2 verbatim. I wrote a parallel `deathdepth.js` and deleted it.
+  // ⚠️ THAT IS THE "two names for one thing" FAILURE I HAVE SPENT THIS MONTH FLAGGING IN OTHER PEOPLE'S
+  // WORK. The gates below are what was genuinely missing, which is four small things.
+  {
+    const DTH = await import("../engine/death.js");
+    const rules269 = C199.rules || {};
+
+    // ── ACCEPTANCE 1 — the shape, which WAS missing
+    const cm269 = C199.craftMechanics || {};
+    check("CCODE-269 §1: `retrieval` is the ninth shape and hands out NO dice",
+      !!cm269.familyDefaults?.retrieval && cm269.familyDefaults.retrieval.dice === undefined
+      && cm269.familyDefaults.retrieval.targets === 1 && cm269.familyDefaults.retrieval.duration === 0);
+    const cb = (C199.abilities || {}).calling_back;
+    check("CCODE-269 §1: calling_back wears it — it was `healing`, inheriting 1d4 for a job that heals nothing",
+      cb?.shape === "retrieval");
+    // ⚠️ ITS OWN ROLL SURVIVES. Aevi: "The number is a reach." Reading "no inherited dice" as "no dice"
+    // would have stripped the craft's own 2d6+2, which is a different and wrong claim.
+    check("CCODE-269 §1: …and its OWN 2d6+2 survives — what changed is what it INHERITS",
+      cb?.mechanic?.dice?.n === 2 && cb?.mechanic?.dice?.d === 6);
+
+    // ── WHAT WAS ALREADY THERE. Gated so the next person does not rebuild it the way I did.
+    {
+      const e = DTH.enterDeathState({ id: "v" }, { diedDay: 0 });
+      check("CCODE-269: the ladder ALREADY EXISTED — four rungs, computed from days (SNG-209)",
+        DTH.deathDepth(e, 0, rules269) === 0 && DTH.deathDepth(e, 10, rules269) === 1
+        && DTH.deathDepth(e, 60, rules269) === 2 && DTH.DEATH_DEPTH_NAMES.length === 4);
+      const deep = DTH.enterDeathState({ id: "w" }, { diedDay: 0, depthOverride: 2 });
+      const failed = DTH.resolveRetrieval(deep, "fail", { currentDay: 1 });
+      check("CCODE-269: …and so did acceptance 2 — a failed retrieval at the deep dark SEALS them",
+        failed.sealed === true && DTH.isSealed(deep, 1, rules269));
+    }
+
+    // ── ① REACH BY RANK — the craft's own note said this and nothing read it
+    check("CCODE-269 §3: r1 reaches the Threshold, r2 the Near Dark, r3 the Deep Dark",
+      DTH.reachOf(1) === 0 && DTH.reachOf(2) === 1 && DTH.reachOf(3) === 2);
+    check("CCODE-269 §4: surge reaches ONE rung further — the authored gamble, no longer prose",
+      DTH.reachOf(1, "surge") === 1 && DTH.reachOf(2, "surge") === 2);
+    check("CCODE-269 §3: SEALED is closed to every rank AND to surge",
+      DTH.reachOf(3, "surge") === 2);
+    // ⛔ REFUSED IS NOT FAILED — a failure sinks them, so "past your reach" must cost nothing.
+    {
+      const deep = DTH.enterDeathState({ id: "x" }, { diedDay: 0, depthOverride: 2 });
+      const no = DTH.canReach(deep, { rank: 1, currentDay: 1, rules: rules269 });
+      check("CCODE-269: reaching past your rank is REFUSED, and refusing does not sink them",
+        no.ok === false && no.refused === true && DTH.deathDepth(deep, 1, rules269) === 2);
+      check("CCODE-269: …and a rank that CAN reach is allowed to try",
+        DTH.canReach(deep, { rank: 3, currentDay: 1, rules: rules269 }).ok === true);
+    }
+
+    // ── ② A WAY HELD OPEN — and its owner may walk away
+    {
+      const e = DTH.enterDeathState({ id: "y" }, { diedDay: 0 });
+      DTH.holdOpen(e, "veth");
+      check("CCODE-269 §5: a way held open STOPS the clock — 400 days and they have not sunk",
+        DTH.deathDepth(e, 400, rules269) === 0);
+      check("CCODE-269 §5: …it records WHO, so it can outlast their presence",
+        e.deathState.heldOpenBy === "veth");
+      check("CCODE-269 §5: …and a held death is not sealed by the deepening pass either",
+        DTH.deepenDeaths([e], 400, rules269).length === 0 && !e.deathState.sealed);
+      DTH.releaseHold(e);
+      check("CCODE-269 §5: release it and the clock resumes — the hold was the only thing stopping it",
+        DTH.deathDepth(e, 400, rules269) === 2);
+    }
+
+    // ── ③ SLOW — lengthens the spans without stopping them. Threnody DELAYS; Ashwarden HOLDS.
+    {
+      // ⚠️ DAY 100 IS CHOSEN TO DISCRIMINATE. My first probe used day 20, where slowed and unslowed both
+      // land on the same rung — it would have passed on a stopped clock, a broken one, or no change at all.
+      // A comparison at a point where the two answers agree is not a comparison.
+      const plainE = DTH.enterDeathState({ id: "z1" }, { diedDay: 0 });
+      const slowE = DTH.enterDeathState({ id: "z2" }, { diedDay: 0 });
+      DTH.slowSink(slowE, 4);
+      check("CCODE-269 §5: SLOW lengthens the rung — at day 100 the slowed one is a rung shallower",
+        DTH.deathDepth(plainE, 100, rules269) === 2 && DTH.deathDepth(slowE, 100, rules269) === 1);
+      // ⛔ AND IT DOES NOT STOP THE CLOCK. Threnody DELAYS; Ashwarden HOLDS. Collapsing the two would erase
+      // the difference between the traditions, which is the one thing Aevi asked this build not to do.
+      check("CCODE-269 §5: …but it does NOT stop it — wait long enough and a slowed death still sinks",
+        DTH.deathDepth(slowE, 1000, rules269) === 2 && DTH.deathDepth(slowE, 400, rules269) > 0);
+    }
+
+    // ── ④ CONSENT — `open_threshold`: "they may come back IF THEY WILL"
+    {
+      const e = DTH.enterDeathState({ id: "q" }, { diedDay: 0 });
+      check("CCODE-269 §5: willingness is a fact about the DEAD — absent until asked, never assumed",
+        e.deathState.willing === undefined);
+      DTH.holdOpen(e, "numinous", { willing: false });
+      check("CCODE-269 §5: …and a refusal is recordable, which is what makes asking mean anything",
+        e.deathState.willing === false);
+    }
+
+    // ⚠️ AND THE ENGINE OWES THE LADDER AND THE VERBS, NOT A UNIFIED MECHANIC. Aevi: "Ashwardens DRAG,
+    // Numinous INVITE, Threnody DELAYS, Rootkin PAY A PRICE — same ladder, five answers." If a craft id
+    // turns up in this module, that rule has been broken.
+    {
+      const src269 = readFileSync(join(root, "engine/death.js"), "utf8")
+        .replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+      const named = ["calling_back", "kept_breath", "names_of_the_lost", "open_threshold", "root_that_holds"]
+        .filter(id => src269.includes(id));
+      check("CCODE-269 §5b: no craft is named in the ladder's code — five traditions, one ladder",
+        named.length === 0, named.join(", "));
+    }
+    // ⛔ AND THE DUPLICATE IS GONE, not merely unused.
+    check("CCODE-269: the parallel module I wrote by not looking is deleted, not orphaned",
+      !existsSync(join(root, "engine/deathdepth.js")));
+  }
+
+
+
 }
 // ---- CCODE-198: the first picture stays, and the composer waits to be asked ----------------------
 // ⛔ ERIK: "I don't want the first generated image to disappear. sometimes it's quite good... I'm

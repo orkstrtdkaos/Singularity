@@ -37,7 +37,12 @@ export function deathDepth(entity, currentDay = null, rules = {}) {
   if (ds.sealed) return 3;
   if (ds.depthOverride != null) return Math.max(0, Math.min(3, ds.depthOverride));
   const cfg = { ...DEFAULTS, ...(rules.death || {}) };
-  const days = (currentDay != null && ds.diedDay != null) ? Math.max(0, currentDay - ds.diedDay) : 0;
+  const rawDays = (currentDay != null && ds.diedDay != null) ? Math.max(0, currentDay - ds.diedDay) : 0;
+  // ⛔ CCODE-269 — A HELD-OPEN WAY STOPS THE CLOCK, and a slowed one lengthens every span. Both are read
+  // HERE rather than in `deepenDeaths`, because depth is COMPUTED — a hold honoured only by the sealing
+  // pass would stop them being sealed while still letting them sink, which is not what holding means.
+  if (ds.heldOpenBy) return Math.max(0, Math.min(3, ds.depthOverride ?? 0));
+  const days = rawDays / Math.max(1, Number(ds.sinkFactor) || 1);
   let depth = days <= cfg.thresholdDays ? 0 : days <= cfg.nearDarkDays ? 1 : 2;
   if (ds.bodyStatus === "lost" || ds.bodyStatus === "unmade") depth = Math.max(depth, 2);
   return Math.min(3, depth);
@@ -56,7 +61,9 @@ export function deepenDeaths(entities = [], currentDay = null, rules = {}) {
   for (const e of entities || []) {
     const ds = e?.deathState;
     if (!ds || ds.sealed || e.status !== "dead" || ds.diedDay == null || currentDay == null) continue;
-    if ((currentDay - ds.diedDay) >= cfg.sealAfterDays) { ds.sealed = true; sealed.push(e); }
+    // ⛔ CCODE-269: a way held open does not seal, and a slowed sinking takes proportionally longer to.
+    if (ds.heldOpenBy) continue;
+    if (((currentDay - ds.diedDay) / Math.max(1, Number(ds.sinkFactor) || 1)) >= cfg.sealAfterDays) { ds.sealed = true; sealed.push(e); }
   }
   return sealed;
 }
@@ -111,3 +118,77 @@ export function resolveRetrieval(entity, outcome, { currentDay = null, changed =
   if (ds.depthOverride >= 3) ds.sealed = true;
   return { ok: true, outcome: "fail", deepened: true, sealed: !!ds.sealed };
 }
+
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+// CCODE-269 / AEVI's SPEC_retrieval_shape — FOUR THINGS THIS LADDER DID NOT HAVE.
+//
+// ⛔ AND FIRST, WHAT IT ALREADY DID, BECAUSE I DID NOT LOOK AND BUILT A SECOND ONE.
+// Aevi's spec says "I do not know where that state lives... That seam is yours", and I read that as "it
+// does not exist" instead of searching for it. It exists — SNG-209, this file, wired into app.js and the
+// world tick. The four rungs, the day thresholds, sealing, the deepening clock, sink-on-failed-retrieval
+// and seal-at-the-deep-dark were ALL ALREADY HERE. `resolveRetrieval` implements her acceptance 2 verbatim.
+// ⚠️ I WROTE A PARALLEL `deathdepth.js` AND DELETED IT. That is the same "two names for one thing" failure
+// I have spent this month flagging in other people's work, committed by not spending one grep.
+//
+// What was genuinely missing is below, and it is small.
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+
+/** ⛔ WHICH RANK REACHES WHICH RUNG. `calling_back`'s own mechanic note has said this all along — "r1
+ *  reaches depth 0 · r2 depth 1 · r3 depth 2 · depth 3 (sealed) is closed to every rank" — and nothing read
+ *  it. The ladder knew how deep someone was and never knew who could get to them.
+ *
+ *  ⚠️ SURGE REACHES ONE RUNG FURTHER, which is acceptance 4 and was pure prose: *"reach past your rank; A
+ *  FAILED REACH SINKS THEM, AND AT THE DEEP DARK IT SEALS THEM."* The sinking half already worked; the
+ *  reaching half did not exist, so the gamble had no upside to gamble for.
+ *
+ *  ⛔ SEALED STAYS CLOSED TO SURGE. Acceptance 3 says every rank, and a surge is not a rank — a top rung you
+ *  can reach by trying harder is not a top rung. */
+export function reachOf(rank, intensity = "standard") {
+  const base = Math.max(0, (Number(rank) || 1) - 1);          // r1→0, r2→1, r3→2
+  return intensity === "surge" ? Math.min(2, base + 1) : base;
+}
+
+/** Can this reach even be attempted? ⚠️ REFUSED IS NOT FAILED, and the distinction is the whole safety of
+ *  the mechanic: a FAILURE sinks them, so being told "that is past your reach" must not cost the person you
+ *  were reaching for. `resolveRetrieval(entity, "fail")` is the costly path; this is the free one. */
+export function canReach(entity, { rank = 1, intensity = "standard", currentDay = null, rules = {} } = {}) {
+  if (!entity || entity.status !== "dead") return { ok: false, why: "there is nobody there to reach for" };
+  const at = deathDepth(entity, currentDay, rules);
+  if (at >= 3) return { ok: false, sealed: true, why: "they are sealed — no rank reaches this" };
+  const reach = reachOf(rank, intensity);
+  if (reach < at) {
+    return { ok: false, refused: true, at, reach,
+      why: `${DEATH_DEPTH_NAMES[at]} is past your reach — you would need rank ${at + 1}${at < 2 ? " or a surge" : ""}` };
+  }
+  return { ok: true, at, reach };
+}
+
+/** ⛔ A WAY HELD OPEN, AND ITS OWNER MAY WALK AWAY. Aevi's point 4 — `open_threshold` r3 leaves one standing
+ *  WITHOUT its caster, and `kept_breath` holds someone at the threshold so they never enter it.
+ *  ⚠️ IT STOPS THE CLOCK, which is why it is a different verb from slowing. `deepenDeaths` honours it. */
+export function holdOpen(entity, byId = null, { willing = null } = {}) {
+  if (!entity?.deathState) return { ok: false, why: "there is nothing to hold open" };
+  if (entity.deathState.sealed) return { ok: false, why: "sealed — there is no way left to hold" };
+  entity.deathState.heldOpenBy = byId || "someone";
+  // ⚠️ CONSENT IS A FACT ABOUT THE DEAD, not a parameter of the craft. `open_threshold` says "they may come
+  // back IF THEY WILL", so one tradition has already ruled that retrieval ASKS — and a field that lives on
+  // the caster could not carry a refusal.
+  if (willing != null) entity.deathState.willing = !!willing;
+  return { ok: true, heldOpenBy: entity.deathState.heldOpenBy };
+}
+export function releaseHold(entity) {
+  if (entity?.deathState) entity.deathState.heldOpenBy = null;
+  return { ok: true };
+}
+
+/** ⚠️ SLOW THE SINKING — `names_of_the_lost`: "holds at the Threshold past its day, and in the Near Dark
+ *  past its month." It LENGTHENS the spans; it does not stop the clock. Collapsing slow into hold would
+ *  erase the difference between what Threnody does and what Ashwarden does, which is the one thing Aevi
+ *  asked this build not to do. */
+export function slowSink(entity, factor = 2) {
+  if (!entity?.deathState) return { ok: false };
+  const f = Math.max(1, Number(entity.deathState.sinkFactor) || 1) * Math.max(1, Number(factor) || 2);
+  entity.deathState.sinkFactor = f;
+  return { ok: true, sinkFactor: f };
+}
+

@@ -60,6 +60,55 @@ export function frameTransition(kind, exitRole) {
  *  chase (abandon) knows which fight to drop back into. The chase is a normal `challenge` (its stages drive the
  *  existing round path; the freefield + GM narrate it like any encounter). Pure — the app persists it + starts
  *  it. The opponent rides along as the pursuer. */
+/** ⛔ CCODE-263 / ERIK: "fleeing a fight should have a CHANCE of turning into a chase. not be a chase by
+ *  default, only if the foe wants to chase you, or you it."
+ *
+ *  ⚠️ BREAKING OFF USED TO BECOME A CHASE UNCONDITIONALLY — `beginChaseFromFight` fired on every flee. That
+ *  made every disengagement the same event and it made a whole category of foe behave wrongly: a thing
+ *  GUARDING something has no reason to leave the thing it is guarding, and a beast that has already been
+ *  hurt enough has no reason to follow you into the dark.
+ *
+ *  ⛔ SO PURSUIT IS A DECISION THE PURSUER MAKES, and it runs in BOTH directions — Erik's "or you it". When
+ *  a foe breaks off, whether you chase THEM is the same question with the roles swapped.
+ *
+ *  ⚠️ AUTHORED FIRST, INFERRED SECOND, RANDOM LAST. `opponent.pursuit` may be "always" / "never" / a 0–1
+ *  chance; absent, tactic tags decide; absent those, a dial. **NEVER a coin flip when the content has said
+ *  something** — an authored "never" that got overridden by a die would make the field decorative. */
+export const PURSUIT_TAGS = {
+  // things that DO follow — this is what they are for
+  chases: ["hunter", "predator", "relentless", "pack", "tracker", "bounty", "vengeful", "swift"],
+  // things that do NOT leave their ground, whatever happens
+  holds: ["unmoving", "guardian", "territorial", "rooted", "sentry", "bound", "warden", "keeper", "slow", "siege"],
+};
+
+export function wouldPursue(pursuer, { rng = Math.random, cfg = {}, hurt = false, wasLosing = false } = {}) {
+  const tags = (pursuer?.tacticTags || []).map(t => String(t).toLowerCase());
+  const roleText = String(pursuer?.role || pursuer?.notes || "").toLowerCase();
+  const authored = pursuer?.pursuit;
+
+  // ⛔ AUTHORED WINS OUTRIGHT, INCLUDING "never". No roll happens.
+  if (authored === "never" || authored === false) return { pursues: false, why: `${pursuer?.name || "it"} does not give chase`, source: "authored" };
+  if (authored === "always" || authored === true) return { pursues: true, why: `${pursuer?.name || "it"} comes after you`, source: "authored" };
+
+  const has = (list) => list.some(w => tags.includes(w) || new RegExp("\b" + w + "\b").test(roleText));
+  // ⚠️ HOLDING BEATS CHASING when a thing is both. Something that guards a place and hunts within it still
+  // does not leave the place — that is what guarding means.
+  if (has(PURSUIT_TAGS.holds)) return { pursues: false, why: `${pursuer?.name || "it"} does not leave its ground`, source: "tags" };
+  if (has(PURSUIT_TAGS.chases)) return { pursues: true, why: `${pursuer?.name || "it"} is built to run things down`, source: "tags" };
+
+  // ⚠️ AND THE SITUATION, WHICH IS THE PART A PLAYER CAN ACTUALLY INFLUENCE. Hurt it enough and it lets you
+  // go; be visibly losing and it smells blood. This is what makes "should I run now or after one more hit"
+  // a real question rather than a mood.
+  let chance = Number.isFinite(Number(authored)) ? Number(authored) : Number(cfg.basePursuitChance ?? 0.5);
+  if (hurt) chance -= Number(cfg.hurtPursuitPenalty ?? 0.3);
+  if (wasLosing) chance += Number(cfg.losingPursuitBonus ?? 0.2);
+  chance = Math.max(0, Math.min(1, chance));
+  const roll = rng();
+  return { pursues: roll < chance, chance: Math.round(chance * 100) / 100,
+    why: roll < chance ? `${pursuer?.name || "it"} comes after you` : `${pursuer?.name || "it"} lets you go`,
+    source: "chance" };
+}
+
 export function chaseFromFight(fightDef) {
   const oppName = fightDef?.opponent?.name || fightDef?.name || "your foe";
   return {

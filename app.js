@@ -107,12 +107,12 @@ import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 // effect audit. A threshold nothing counts toward is a duration that never elapses.
 import { tickAllProjects } from "./engine/projects.js";
 import { characterPower } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
-import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
+import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.224";
+const APP_VERSION = "1.9.225";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12923,8 +12923,30 @@ function contestSheetFor(def) {
  *  drive it). Robust: a GM hiccup still leaves the character in the chase, never wedged. */
 async function beginChaseFromFight(fightDef) {
   if (!fightDef) return;
-  const chase = chaseFromFight(fightDef);
   const nm = fightDef.opponent?.name || "your foe";
+  // ⛔ CCODE-263 / ERIK: "fleeing a fight should have a CHANCE of turning into a chase. not be a chase by
+  // default, only if the foe wants to chase you, or you it."
+  // ⚠️ THIS FUNCTION USED TO ASSUME PURSUIT. Every break-off became a chase, which made disengaging always
+  // the same event and made a whole category of foe behave wrongly — a thing GUARDING something has no
+  // reason to leave it, and something already hurt enough has no reason to follow you into the dark.
+  const st = activeEnc()?.state || {};
+  const hurt = Number.isFinite(st.opponentHealth) && Number.isFinite(fightDef.opponent?.health)
+    && st.opponentHealth <= (fightDef.opponent.health / 2);
+  const verdict = wouldPursue(withKind(fightDef.opponent, fightDef), {
+    cfg: CONTENT.rules?.encounters?.duel || {}, hurt, wasLosing: (st.momentum ?? 0) < 0 });
+  if (!verdict.pursues) {
+    // ⚠️ YOU GOT AWAY, AND THE RECEIPT SAYS WHY. "It let you go" is a different event from "you outran it"
+    // and the player should be able to tell which one happened to them.
+    character.activeEncounter = null;
+    saveCharacter(character);
+    renderPlay(null, { thinking: "You break off…" });
+    try {
+      const result = await runGM({ resolution: null, playerInput: `(The character breaks off the fight with ${nm} and gets clear — ${verdict.why}. Narrate the disengagement in one beat. There is no chase.)` });
+      if (result) renderPlay(result.turn, {}); else renderPlay(character.activeScene?.lastTurn || null, { aside: `You break away — ${verdict.why}.` });
+    } catch { renderPlay(character.activeScene?.lastTurn || null, { aside: `You break away — ${verdict.why}.` }); }
+    return;
+  }
+  const chase = chaseFromFight(fightDef);
   character.customEncounters = character.customEncounters || {};
   character.customEncounters[chase.id] = chase;
   if (fightDef.id && !character.customEncounters[fightDef.id] && !CONTENT.encounters?.[fightDef.id]) character.customEncounters[fightDef.id] = fightDef; // keep the fight to fall back into

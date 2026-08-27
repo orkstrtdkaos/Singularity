@@ -19295,6 +19295,66 @@ await (async () => {
       ["fight", "chase", "hazard", "puzzle", "standoff"].every(k => ids.includes(k)), ids.join(","));
   }
 
+  // 5an · CCODE-263 — A FLED FIGHT IS NOT AUTOMATICALLY A CHASE.
+  // ⛔ ERIK: "fleeing a fight should have a CHANCE of turning into a chase. not be a chase by default, only
+  // if the foe wants to chase you, or you it."
+  // ⚠️ `beginChaseFromFight` fired on EVERY flee. That made disengaging always the same event, and made a
+  // whole category of foe behave wrongly — a thing GUARDING something has no reason to leave it.
+  {
+    const EF263 = await import("../engine/encounterFrame.js");
+    const never = () => 0;   // always inside the chance
+    const always = () => 0.999;
+
+    // ⛔ AUTHORED WINS OUTRIGHT AND NO ROLL HAPPENS. An authored "never" overridden by a die would make the
+    // field decorative, which is the failure mode of every dial this project has shipped badly.
+    check("CCODE-263: an authored `pursuit: never` is honoured even on a roll that would have chased",
+      EF263.wouldPursue({ name: "the statue", pursuit: "never", tacticTags: ["hunter"] }, { rng: never }).pursues === false);
+    check("CCODE-263: …and an authored `always` is honoured on a roll that would not have",
+      EF263.wouldPursue({ name: "the hound", pursuit: "always" }, { rng: always }).pursues === true);
+
+    // tags decide when nothing is authored
+    check("CCODE-263: a hunter runs you down; a guardian does not leave its ground",
+      EF263.wouldPursue({ name: "pack", tacticTags: ["pack"] }, { rng: always }).pursues === true
+      && EF263.wouldPursue({ name: "warden", tacticTags: ["guardian"] }, { rng: never }).pursues === false);
+    // ⚠️ HOLDING BEATS CHASING when a thing is both — guarding a place means not leaving it, and a foe that
+    // hunts WITHIN its ground still does not follow you off it.
+    check("CCODE-263: something that both hunts and guards stays — holding wins the tie",
+      EF263.wouldPursue({ name: "sentry", tacticTags: ["hunter", "sentry"] }, { rng: never }).pursues === false);
+
+    // ⛔ AND IT IS A REAL CHANCE FOR EVERYTHING ELSE, not a default. This is the claim Erik actually made.
+    {
+      let s = 7; const rng = () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
+      let n = 0; const N = 2000;
+      for (let i = 0; i < N; i++) if (EF263.wouldPursue({ name: "a raider" }, { rng }).pursues) n++;
+      const pct = n / N;
+      check("CCODE-263: a plain foe pursues about half the time — a chance, not a default",
+        pct > 0.35 && pct < 0.65, `${(pct * 100).toFixed(0)}%`);
+    }
+    // ⚠️ AND THE SITUATION MOVES IT, which is what makes "run now or after one more hit" a real question
+    check("CCODE-263: hurt it enough and it lets you go; be visibly losing and it smells blood",
+      EF263.wouldPursue({ name: "r" }, { rng: never, hurt: true }).chance
+        < EF263.wouldPursue({ name: "r" }, { rng: never }).chance
+      && EF263.wouldPursue({ name: "r" }, { rng: never, wasLosing: true }).chance
+        > EF263.wouldPursue({ name: "r" }, { rng: never }).chance);
+
+    // ⛔ AND THE APP ACTUALLY ASKS. A decision function nothing consults is this project's signature defect
+    // and I have shipped it twice this month.
+    const appSrc263 = readFileSync(join(root, "app.js"), "utf8");
+    check("CCODE-263: the flee path CONSULTS it — and returns early without a chase when it says no",
+      /wouldPursue\(/.test(appSrc263) && /There is no chase\.\)/.test(appSrc263));
+
+    // ═══ AND THE STANDOFF THE GM CAN NOW ASK FOR ═══
+    // ⚠️ CCODE-262 opened the engine door; a door the narrator does not know about is still shut.
+    const gmSrc = readFileSync(join(root, "engine/gm.js"), "utf8");
+    check("CCODE-263: the GM contract names `standoff` as a flavor it may set",
+      /standoff/.test(gmSrc) && /"flavor"/.test(gmSrc));
+    check("CCODE-263: …and tells it what a standoff IS — resolve, not blood",
+      /RESOLVE/.test(gmSrc) || /bending them, not by wounding/.test(gmSrc));
+    check("CCODE-263: …and names `pursuit` so a guarding foe can be authored to stay put",
+      /pursuit/.test(gmSrc));
+  }
+
+
 
   // 5ag · ⛔ CCODE-248b — NOBODY IS ONE-DIMENSIONAL. Erik: "Veth… she's supposed to be a teacher, but she's
   // also a warden, so she would likely be valuable in a fight too. The NPCs aren't one dimensional."

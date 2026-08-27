@@ -22,7 +22,10 @@
    "harmRung": "none",
    "powerSystem": "metaphysical",
    "shape": "conceal",
-   "operativeAxis": "death_life",
+   "operativeAxis": [
+    "resistance",
+    "scope"
+   ],
    "intensity": "moderate",
    "mechanic": {
     "magnitude": 6,
@@ -31,7 +34,13 @@
     "crit": {
      "success": "They see it whole, and what they were holding themselves together with goes with it.",
      "failure": "They look back."
-    }
+    },
+    "resistDrop": [
+     2,
+     3,
+     4
+    ],
+    "note": "conceal/obscure, declared in the SENSE slot. ⛔ THE RESIST DROP IS THE CRAFT'S COMBAT VALUE AND IT SCALES: −2 / −3 / −4 by rank, for the duration. Per `impositionOf`, `threshold = base + targetResist × perResist − (rank−1) × perRank` — SO LOWERING targetResist MAKES THE NEXT IMPOSITION LAND, and Soul Stare is a setup craft for everything else the tradition does. ⚠️ `mechanic.resistDrop` IS NOT READ BY ANY ENGINE PATH YET — `resistBonus` exists on the intercept path only. The numbers are authored here and stated in `plainly` so a GM can rule on them; see the note to CCode. ⛔ AND IT IS `conceal`, NOT `deceive`: per function_vocabulary, deceive shows what is FALSE and conceal hides what is TRUE. This craft shows a FACT — 'not as a threat, as a fact, that you are a thing which ends' — and hides you behind it. It is the second Death obscure that works by TELLING THE TRUTH; `public_grief` is the other."
    },
    "challengeTypes": [
     "FIGHT",
@@ -52,13 +61,17 @@
      "class": "hard"
     },
     {
+     "text": "⛔ IT IS `conceal`, NOT `deceive` — everything it shows is TRUE. That is why a thing that cannot be lied to is still stopped by it",
+     "class": "hard"
+    },
+    {
      "text": "they know exactly what you did and who did it",
-     "class": "cost"
+     "class": "drawback"
     }
    ],
-   "plainly": "A fight/duel action declared in the sense slot. Its strength is rated 6 out of 10. Ranks: rank 2 reaches any living thing, rank 3 reaches anything with an essence.",
+   "plainly": "A fight/duel action declared in the SENSE slot. It denies their read of you AND DROPS THEIR RESISTANCE so the next thing that reaches them lands harder — RESIST −2 at r1, −3 at r2, −4 at r3, for the duration. r2 reaches any living thing; r3 reaches anything with an essence, including a set body.",
    "functions": [
-    "deceive",
+    "conceal",
     "hinder"
    ],
    "obscure": true,
@@ -66,13 +79,13 @@
     {
      "rank": 1,
      "name": "Soul Stare",
-     "grants": "⛔ DECLARE IN THE SENSE SLOT TO DENY THEIR READ — a person who is being shown their own death is not reading you. ⚠️ AND IT DROPS THEIR RESISTANCE: whatever they were holding themselves together with counts for less against the next thing that reaches them.",
+     "grants": "⛔ DECLARE IN THE SENSE SLOT TO DENY THEIR READ — a person who is being shown their own death is not reading you. ⚠️ AND IT DROPS THEIR RESISTANCE BY 2 for the duration: whatever they were holding themselves together with counts for less against the next thing that reaches them.",
      "cannot": "A person, and they must be able to see your eyes. One per sense action.",
      "functions": [
-      "deceive",
+      "conceal",
       "hinder"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [],
      "imposes": {
@@ -86,10 +99,10 @@
     {
      "rank": 2,
      "name": "Every Living Thing",
-     "grants": "⛔ DECLARE IN THE SENSE SLOT. Show ANY LIVING THING its own ending — a warhorse, a hound, a beast, a thing grown rather than born. It stops reading you, and whatever it relied on to stay whole gives.",
+     "grants": "⛔ DECLARE IN THE SENSE SLOT. Show ANY LIVING THING its own ending — a warhorse, a hound, a beast, a thing grown rather than born. It stops reading you, and ⚠️ THE RESISTANCE DROP DEEPENS TO 3.",
      "cannot": "It must be alive and it must be able to see you.",
      "functions": [
-      "deceive",
+      "conceal",
       "hinder"
      ],
      "gains": "broaden",
@@ -103,10 +116,10 @@
     {
      "rank": 3,
      "name": "Everything Has an Address",
-     "grants": "⛔ DECLARE IN THE SENSE SLOT. Show ANYTHING WITH AN ESSENCE its own end — a construct, a set body, a warded door, a working someone is sustaining. What is not alive still finishes.",
+     "grants": "⛔ DECLARE IN THE SENSE SLOT. Show ANYTHING WITH AN ESSENCE its own end — a construct, A SET BODY, a warded door, a working someone is sustaining. What is not alive still finishes. ⚠️ RESISTANCE DROPS BY 4.",
      "cannot": "It must have been made, grown, or bound by someone. Raw stone has no address to show.",
      "functions": [
-      "deceive",
+      "conceal",
       "hinder",
       "break"
      ],
@@ -119,7 +132,8 @@
      "_grantsWas_SNG510": "⛔ ADDS THE UNLIVING. Everything has an essence and every essence can be shown its end — a construct, a set body, a warded door, a working someone is sustaining, a bound thing. ⚠️ WHAT IS NOT ALIVE STILL FINISHES."
     }
    ],
-   "_authored": "⛔ SNG-490. Erik: 'SOUL STARE could be an obscure skill rank 1, plus it would DROP THEIR RESISTANCE. r2 would have a similar effect but on ANY LIVING ENTITY. r3 would work on ANYTHING — everything has an essence (ADDRESS).'\n⚠️ DEATH HAD NO OBSCURE. And the rank ladder is TARGET CLASS, not power: person → living → anything with an address, which is the Ashwarden thesis that everything finishes.\n⛔ THE RESISTANCE DROP IS THE SECOND HALF AND IT MAKES THIS A SETUP FOR THE WHOLE TRADITION — Hastened Grey, Draw Down and Cut Thread all land harder on something that has just been shown its ending."
+   "_authored": "⛔ SNG-490. Erik: 'SOUL STARE could be an obscure skill rank 1, plus it would DROP THEIR RESISTANCE. r2 would have a similar effect but on ANY LIVING ENTITY. r3 would work on ANYTHING — everything has an essence (ADDRESS).'\n⚠️ DEATH HAD NO OBSCURE. And the rank ladder is TARGET CLASS, not power: person → living → anything with an address, which is the Ashwarden thesis that everything finishes.\n⛔ THE RESISTANCE DROP IS THE SECOND HALF AND IT MAKES THIS A SETUP FOR THE WHOLE TRADITION — Hastened Grey, Draw Down and Cut Thread all land harder on something that has just been shown its ending.",
+   "_reviewed_20260824": "⛔ `deceive` -> `conceal`. Per function_vocabulary, DECEIVE SHOWS WHAT IS FALSE and CONCEAL HIDES WHAT IS TRUE — and this craft shows a FACT and hides you behind it. It was tagged as lying while being the one obscure in the game that works by telling the truth. ⚠️ Second Death obscure to do that; `public_grief` opens a REAL grief for the same reason. ⛔ ERIK 2026-08-24: 'make sure you remember to include the RESIST DROPS and how they SCALE WITH RANK UP' — now −2 / −3 / −4, stated at every rank, in `plainly`, and in `mechanic.resistDrop`. It is the craft's actual combat value and was previously unnumbered at r1, vague at r2 and absent at r3. ⚠️ `operativeAxis` was the bare STRING 'death_life' — an axis of the WORLD, not of the craft. ⛔ r3 ALREADY REACHED UNDEAD ('a set body') before §48 existed; nothing added."
   },
   {
    "id": "public_grief",

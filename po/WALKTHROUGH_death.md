@@ -808,7 +808,7 @@
 
 **L2 · e4 · ashwarden · metaphysical · shape `conceal` · harm `none`**  
 **status:** crit · obscure  
-**ability functions:** deceive, hinder
+**ability functions:** conceal, hinder
 
 > Meet something's gaze and show it its own ending — it stops being able to read you, and what it was relying on to keep it whole stops working as well.
 
@@ -816,29 +816,29 @@
 
 ### r1 — Soul Stare
 
-**functions:** deceive, hinder · **gainAxes:** ⛔ NONE · **gains:** deepen · **harm:** none · imposes
+**functions:** conceal, hinder · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none · imposes
 
-**grants:** ⛔ DECLARE IN THE SENSE SLOT TO DENY THEIR READ — a person who is being shown their own death is not reading you. ⚠️ AND IT DROPS THEIR RESISTANCE: whatever they were holding themselves together with counts for less against the next thing that reaches them.
+**grants:** ⛔ DECLARE IN THE SENSE SLOT TO DENY THEIR READ — a person who is being shown their own death is not reading you. ⚠️ AND IT DROPS THEIR RESISTANCE BY 2 for the duration: whatever they were holding themselves together with counts for less against the next thing that reaches them.
 
 **cannot:** A person, and they must be able to see your eyes. One per sense action.
 
 ### r2 — Every Living Thing
 
-**functions:** deceive, hinder · **gainAxes:** targets, conditions · **gains:** broaden · **harm:** none
+**functions:** conceal, hinder · **gainAxes:** targets, conditions · **gains:** broaden · **harm:** none
 
-**grants:** ⛔ DECLARE IN THE SENSE SLOT. Show ANY LIVING THING its own ending — a warhorse, a hound, a beast, a thing grown rather than born. It stops reading you, and whatever it relied on to stay whole gives.
+**grants:** ⛔ DECLARE IN THE SENSE SLOT. Show ANY LIVING THING its own ending — a warhorse, a hound, a beast, a thing grown rather than born. It stops reading you, and ⚠️ THE RESISTANCE DROP DEEPENS TO 3.
 
 **cannot:** It must be alive and it must be able to see you.
 
 ### r3 — Everything Has an Address
 
-**functions:** deceive, hinder, break · **gainAxes:** scope, quality · **gains:** broaden · **harm:** damaging
+**functions:** conceal, hinder, break · **gainAxes:** scope, quality · **gains:** broaden · **harm:** damaging
 
-**grants:** ⛔ DECLARE IN THE SENSE SLOT. Show ANYTHING WITH AN ESSENCE its own end — a construct, a set body, a warded door, a working someone is sustaining. What is not alive still finishes.
+**grants:** ⛔ DECLARE IN THE SENSE SLOT. Show ANYTHING WITH AN ESSENCE its own end — a construct, A SET BODY, a warded door, a working someone is sustaining. What is not alive still finishes. ⚠️ RESISTANCE DROPS BY 4.
 
 **cannot:** It must have been made, grown, or bound by someone. Raw stone has no address to show.
 
-**bounds:** ⛔ THEY MUST BE ABLE TO SEE YOUR EYES. A helm, a turned back or a blindfold ends it · one subject per sense action · ⚠️ IT SHOWS AN ENDING; IT DOES NOT CAUSE ONE · they know exactly what you did and who did it
+**bounds:** ⛔ THEY MUST BE ABLE TO SEE YOUR EYES. A helm, a turned back or a blindfold ends it · one subject per sense action · ⚠️ IT SHOWS AN ENDING; IT DOES NOT CAUSE ONE · ⛔ IT IS `conceal`, NOT `deceive` — everything it shows is TRUE. That is why a thing that cannot be lied to is still stopped by it · they know exactly what you did and who did it
 
 ---
 

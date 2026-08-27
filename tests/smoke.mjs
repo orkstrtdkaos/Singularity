@@ -20193,6 +20193,85 @@ await (async () => {
       alone.party === undefined && alone.damage?.melee === undefined);
   }
 
+  // 5ax · CCODE-275 / ERIK — AN ENCOUNTER CONTAINS SCALES; IT IS NOT AT ONE.
+  // ⛔ "every encounter could have 1, some or all of the types of battle... even if you're in the middle of
+  // your army you might have to duel an assassin... 1 v army isn't a contest, but the encounter scenario
+  // would drive the details. my party vs guards on a castle wall might be a fair fight... but if they open
+  // the gates to let a unit of cavalry charge it turns lopsided fast, unless I use some majorly big powers
+  // or prepared ground traps."
+  // ⚠️ THAT CORRECTS `resolutionTier`, which picks ONE tier from a headcount. A headcount cannot know the
+  // assassin reaching you is a DUEL inside a LEGION battle — and the duel is the part you play.
+  {
+    const ML275 = await import("../engine/melee.js");
+
+    // ⚠️ ONE LADDER, NOT TWO. The scales must be the same rungs as the tiers, or the system has grown two
+    // names for one idea — the failure Erik named on temp soak and I committed on deathdepth this week.
+    check("CCODE-275: the scale ladder is the tier ladder — individual → party → unit → legion",
+      ML275.SCALES.length === 4 && ML275.scaleRank("individual") === 0 && ML275.scaleRank("legion") === 3);
+
+    // ═══ ERIK'S CASTLE WALL, VERBATIM ═══
+    const wall = { opponent: { name: "the wall guards" }, theatres: [
+      { scale: "party", who: "guards on the wall", opensOn: 1 },
+      { scale: "unit", who: "cavalry through the gate", opensOn: 3, why: "they open the gates" } ] };
+    const openAt = (round) => ML275.theatresOf(wall, { round }).filter(t => t.open);
+    check("CCODE-275: the wall starts as a fair party fight",
+      openAt(1).length === 1 && openAt(1)[0].scale === "party");
+    // ⛔ `opensOn` IS THE CAVALRY. A theatre that opens partway through is how "they open the gates" becomes
+    // a mechanic rather than narration — the fight WAS fair, and then it was not.
+    check("CCODE-275: …and on round 3 a UNIT theatre opens beside it — the fight was fair, then it was not",
+      openAt(3).length === 2 && openAt(3).some(t => t.scale === "unit"));
+
+    // ⛔ THE ASSASSIN INSIDE THE LEGION — his other example, and the one a headcount can never express.
+    const battle = { opponent: { name: "the enemy line" }, theatres: [
+      { scale: "legion", who: "the enemy line" }, { scale: "individual", who: "an assassin" } ] };
+    const t = ML275.theatresOf(battle, { round: 1 });
+    check("CCODE-275: a duel and a legion battle coexist in one encounter — the duel is the part you play",
+      t.length === 2 && t.some(x => x.scale === "legion") && t.some(x => x.scale === "individual"));
+
+    // ⚠️ AND AN UNAUTHORED ENCOUNTER IS UNCHANGED — derived from the headcount exactly as before.
+    check("CCODE-275: an encounter with no theatres authored derives one, as today",
+      ML275.theatresOf({ opponent: { name: "a raider" } }, { allyCount: 1, foeCount: 1 })[0].derived === true);
+
+    // ═══ 1 v ARMY IS NOT A CONTEST ═══
+    // ⚠️ A GAP OF ONE STAYS A ROLL. A party against a unit is lopsided, not hopeless, and making it
+    // unwinnable would delete the fights people actually want to have.
+    check("CCODE-275: outweighed by one scale is a HARD FIGHT and still a roll",
+      ML275.overmatchOf("party", "unit").overmatched === false
+      && ML275.overmatchOf("party", "unit").hard === true);
+    check("CCODE-275: outweighed by two is NOT A CONTEST — no roll wins it",
+      ML275.overmatchOf("party", "legion").overmatched === true
+      && ML275.overmatchOf("individual", "unit").overmatched === true);
+    // ⛔ AND IT RETURNS A SITUATION, NOT A MODIFIER. Handing back "-40 to your chance" would be the same
+    // mistake in a politer form — you do not out-roll an army.
+    {
+      const o = ML275.overmatchOf("individual", "legion");
+      check("CCODE-275: the refusal carries no penalty number — it is a situation, not a difficulty",
+        o.modifier === undefined && o.penalty === undefined && Array.isArray(o.answers) && o.answers.length >= 2);
+    }
+
+    // ═══ AND ERIK'S TWO ANSWERS, AND ONLY HIS TWO ═══
+    {
+      const o = ML275.overmatchOf("party", "legion");
+      check("CCODE-275: holding nothing, an overmatch is not answered — and it says what remains",
+        ML275.answersOvermatch(o).answered === false && /leave/.test(ML275.answersOvermatch(o).remaining));
+      check("CCODE-275: a power big enough answers it — 'some majorly big powers'",
+        ML275.answersOvermatch(o, { powers: [{ id: "ruin", name: "The Measured Ruin", scaleAnswer: 2 }] }).by === "power");
+      // ⚠️ AND A SMALL POWER DOES NOT. A craft that answered any gap would make the wall decorative.
+      check("CCODE-275: …but an ordinary craft does not — the wall is real",
+        ML275.answersOvermatch(o, { powers: [{ id: "jab", name: "a jab", magnitude: 1 }] }).answered === false);
+      check("CCODE-275: prepared ground answers it — 'prepared ground traps'",
+        ML275.answersOvermatch(o, { ground: [{ id: "pits", name: "pit traps at the gate" }] }).by === "ground");
+      // ⛔ NON-VACUITY: an unanswered overmatch and an answered one must differ, or every claim above is
+      // passing on a function that always says yes.
+      check("CCODE-275: answered and unanswered genuinely differ (floor)",
+        ML275.answersOvermatch(o).answered !== ML275.answersOvermatch(o, { ground: [{ id: "x" }] }).answered);
+      // ⚠️ and a fight that is merely HARD needs no answer — nothing to void
+      check("CCODE-275: a hard fight needs no answer — only a wall does",
+        ML275.answersOvermatch(ML275.overmatchOf("party", "unit")).answered === true);
+    }
+  }
+
+
 }
 // ---- CCODE-197: hold several traditions, and ask by exact function ------------------------------
 // ⛔ ERIK, THREE THINGS IN ONE BREATH: "a bare tradition click should hide things too. Also, the bare

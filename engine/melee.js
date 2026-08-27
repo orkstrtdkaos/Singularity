@@ -261,3 +261,95 @@ export function predictAggregate(singleRound, k) {
   const n = Math.max(1, num(k, 1));
   return { mean: num(singleRound?.mean) * n, sd: num(singleRound?.sd) * Math.sqrt(n), count: n };
 }
+
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+// CCODE-275 / ERIK — AN ENCOUNTER CONTAINS SCALES; IT IS NOT AT ONE.
+//
+// ⛔ "every encounter could have 1, some or all of the types of battle... even if you're in the middle of
+// your army you might have to duel an assassin... so 1 v army isn't a contest, but the encounter scenario
+// would drive the details. my party vs guards on a castle wall might be a fair fight... but if they open
+// the gates to let a unit of cavalry charge it turns lopsided fast, unless I use some majorly big powers or
+// prepared ground traps."
+//
+// ⚠️ THAT CORRECTS `resolutionTier`, WHICH PICKS ONE TIER FROM A HEADCOUNT. A headcount cannot know that the
+// assassin reaching you is a DUEL happening inside a LEGION battle — and the duel is the part you play.
+// THE SCENARIO DECIDES, and the scenario is authored.
+//
+// ⛔ AND THE SECOND HALF IS THE MORE IMPORTANT ONE: 1 v army IS NOT A CONTEST. Not a hard roll — not a roll.
+// The answer to being overmatched is not better dice, it is CHANGING THE SITUATION: a big enough power, or
+// ground you prepared. That is the same shape as `trivializes` (SNG-230 §7c, "the right kit VOIDS a
+// challenge's premise") pointed the other way — there, kit makes a hard thing easy; here, preparation makes
+// an impossible thing contestable.
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+
+/** The scales, smallest first. ⚠️ THESE ARE THE SAME RUNGS AS `MELEE_TIERS` and must stay so — two ladders
+ *  for one idea is how a system grows two names for one thing. */
+export const SCALES = ["individual", "party", "unit", "legion"];
+export function scaleRank(s) { const i = SCALES.indexOf(String(s)); return i < 0 ? 0 : i; }
+
+/** ⛔ WHAT SCALES ARE IN PLAY. Authored on the encounter — `theatres: [{ scale, who, opensOn }]` — because
+ *  Erik's whole point is that the SCENARIO drives it. Falls back to a single theatre derived from the
+ *  headcount, so every existing encounter behaves exactly as it does today.
+ *  ⚠️ `opensOn` IS THE CAVALRY. A theatre that opens partway through is how "they open the gates" becomes a
+ *  mechanic rather than narration — the fight was fair, and then it was not. */
+export function theatresOf(def, { round = 1, allyCount = 1, foeCount = 1 } = {}) {
+  const authored = def?.theatres;
+  if (!Array.isArray(authored) || !authored.length) {
+    return [{ scale: resolutionTier(allyCount, foeCount).id === "legion" ? "legion"
+      : resolutionTier(allyCount, foeCount).id === "melee" ? "party" : "individual",
+      who: def?.opponent?.name || "them", derived: true, open: true }];
+  }
+  return authored.map(t => ({
+    scale: String(t.scale || "individual"), who: t.who || def?.opponent?.name || "them",
+    opensOn: num(t.opensOn, 1),
+    open: num(round, 1) >= num(t.opensOn, 1),
+    why: t.why || null,
+  }));
+}
+
+/** ⛔ IS THIS A CONTEST AT ALL? Erik: "1 v army isn't a contest."
+ *
+ *  ⚠️ A GAP OF ONE IS A HARD FIGHT AND STAYS A ROLL — a party against a unit is lopsided, not hopeless, and
+ *  making it unwinnable would delete the fights people actually want to have. TWO OR MORE is the wall.
+ *
+ *  ⛔ AND THIS RETURNS A SITUATION, NOT A MODIFIER. The whole ruling is that you do not out-roll an army;
+ *  handing back "-40 to your chance" would be the same mistake in a politer form. */
+export function overmatchOf(yours, theirs, { cfg = {} } = {}) {
+  const gap = scaleRank(theirs) - scaleRank(yours);
+  const wallAt = Math.max(1, num(cfg.overmatchGap, 2));
+  if (gap < 1) return { overmatched: false, gap, why: "an even meeting, or you have the weight" };
+  if (gap < wallAt) return { overmatched: false, gap, hard: true,
+    why: `they outweigh you — this is a hard fight, not an impossible one` };
+  return { overmatched: true, gap,
+    why: `${theirs} against ${yours} is not a contest — no roll wins this`,
+    // ⚠️ NAMED HERE so the refusal arrives WITH its answers. A wall with no door on it is a cutscene.
+    answers: ["a power big enough to change the ground", "ground you prepared before they came", "not being there"] };
+}
+
+/** ⛔ WHAT MAKES AN OVERMATCH CONTESTABLE AGAIN — Erik's two, and only his two.
+ *
+ *  ⚠️ MIRRORS `trivializes` DELIBERATELY: it reads what the character HAS against what the situation ASKS,
+ *  and answers with a state rather than a number. A third route invented here would be me adding a way to
+ *  beat an army that Erik did not name.
+ *
+ *  `powers` — craft ids or magnitudes big enough to answer a scale. `ground` — prepared-ground keys
+ *  (traps, a chokepoint, a fortification) laid BEFORE this. */
+export function answersOvermatch(overmatch, { powers = [], ground = [], cfg = {} } = {}) {
+  if (!overmatch?.overmatched) return { answered: true, by: null, why: "there is nothing to answer" };
+  const need = Math.max(1, num(overmatch.gap, 2));
+  const bigEnough = (powers || []).filter(p => num(p?.scaleAnswer, num(p?.magnitude, 0)) >= need);
+  const prepared = (ground || []).filter(Boolean);
+  if (bigEnough.length) {
+    return { answered: true, by: "power", using: bigEnough.map(p => p.id || p.name || "a working"),
+      why: `${bigEnough[0].name || bigEnough[0].id} is big enough to change what this is` };
+  }
+  if (prepared.length) {
+    return { answered: true, by: "ground", using: prepared.map(g => g.id || g.name || String(g)),
+      why: `the ground was prepared — ${prepared.map(g => g.name || g.id || g).join(", ")}` };
+  }
+  return { answered: false,
+    why: `nothing you are holding answers ${overmatch.gap} scales of difference`,
+    // ⛔ AND THE HONEST THIRD OPTION IS ALWAYS THERE. Erik's list, verbatim, ends with not being there.
+    remaining: "leave, or be swept up in it" };
+}
+

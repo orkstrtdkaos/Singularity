@@ -56,8 +56,7 @@ rather than tuned.**
 | `duration` | how long before it comes apart — **already authored on most of these** |
 
 ⛔ **`contributions` IS THE ONE THAT MATTERS AND IT IS ALREADY BUILT** — `engine/combatants.js` uses it for
-companions, and `canStrike: false` already exists for things that cannot swing. **A raised hand hauls and
-does not fight; a driven shade set to hunt does.** ⚠️ **Same field, opposite answers, no new vocabulary.**
+companions. ⛔ **BOTH RAISED HANDS AND SHADES FIGHT** — the raised hand crudely (grab, slam, bite), the shade with purpose. ⚠️ **Same field, opposite answers, no new vocabulary.**
 
 ---
 
@@ -77,7 +76,7 @@ mostly silhouette and intent… harder to stop for it."* ⚠️ **A `tierGap` ri
 warden's shade is a genuine threat to an L5 party — which is the point of a thing that does not stop.**
 
 **AND `raised_hand` FOR CONTRAST:** `tierGap: −3` (trivial), `count` 1→several→a crew,
-`contributions: []` with ⛔ **`canStrike: false`** — **it hauls, it holds, it does not fight.** ⚠️ **Two
+`contributions: [MARTIAL]` — ⛔ **IT FIGHTS. Erik 2026-08-24: 'the raised hand undead CAN fight… they don't fight sophisticatedly, but they GRAB AND SLAM AND BITE.'** ⚠️ Unskilled, no tactics, no weapon craft — but a body that takes hold of you is a real problem. ⚠️ **Two
 crafts, same four fields, completely different things arriving.**
 
 ---
@@ -85,7 +84,7 @@ crafts, same four fields, completely different things arriving.**
 ## §5 — ACCEPTANCE
 
 1. A craft declaring a summon block produces a sheet via `synthSheet` from `tierGap` + the caster's level.
-2. ⛔ **A raised hand cannot strike; a driven shade can** — from `contributions`/`canStrike`, not special-casing.
+2. ⛔ **BOTH FIGHT, DIFFERENTLY.** A raised hand grabs, slams and bites — no tactic, no `tacticTags`, and `provoke` finds nothing to break. A driven shade PURSUES with intent. ⚠️ From `contributions` and the sheet, never special-casing.
 3. **The GM receipt says what arrived and how strong** relative to the party. ⚠️ **"What did I just raise?"
    must have an answer at the table.**
 4. **Existing crafts without a summon block behave exactly as today** — ⛔ **19 crafts, and I will author

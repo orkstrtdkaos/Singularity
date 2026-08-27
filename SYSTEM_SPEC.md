@@ -3527,3 +3527,24 @@ because twelve hours was already the base.
 13. **Colour: is the SUBJECT right?** ⚠️ **Then whether it encodes a character fact rather than a mood.**
 14. **Run `content_ci`, `content_which`, `changeset_check`.** ⛔ **Then verify through the live engine —
     `capabilityMenu`, `pierceLanded`, `redirectImposition` — that the fields authored actually resolve.**
+
+### 47.14 ⛔ AUTHORED VALUES ARE FLOORS, NOT CEILINGS — 2026-08-24, third instance
+
+**Erik has now corrected the same instinct three times:**
+
+| what I authored | the correction |
+|---|---|
+| `canStrike: false` on Aevi | ⛔ **the Waystaff exists** — a player spent 8 bond and 14 co-uses building her something to inhabit |
+| a "lite" summon sheet, walled off from growth | ⛔ *"the sheet is a FLOOR not a ceiling"* — **these should be able to become NPCs and companions** |
+| `canStrike: false` on a raised hand | ⛔ *"they CAN fight… they grab and slam and bite"* |
+
+⚠️ **THE PATTERN: I AUTHOR THE TYPICAL CASE AS THOUGH IT WERE THE LIMIT.** A swarm has nothing to swing,
+so I wrote that it never could. A raised corpse is unskilled, so I wrote that it does not fight. A summoned
+thing is temporary, so I walled it off from becoming permanent.
+
+⛔ **EVERY ONE CLOSED A DOOR THE WORLD HAD ALREADY OPENED OR WOULD WANT OPEN.**
+
+**THE RULE: when authoring a limit, ask WHAT WOULD HAVE TO BE TRUE FOR THIS TO BE BEATEN — and if the
+answer is interesting, the limit is a DEFAULT and must be written as one.** ⚠️ **A hard bound is for things
+that must never happen (`the finished only`, `it does not adjudicate`). ⛔ IT IS NOT FOR THINGS THAT ARE
+MERELY UNUSUAL.**

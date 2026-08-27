@@ -38,7 +38,7 @@ thing has no growth arc, no inventory and no reputation.** ⚠️ **`sheetFor` +
 |---|---|---|
 | `tierGap` | strength relative to the CASTER | `raised_hand` −3 · `driven_shade` −1/0/**+1** |
 | `count` | how many | crew vs ⛔ **always one** |
-| `contributions` | ⛔ **what it can DO** — your own `contributionsOf` vocabulary | `[]` + `canStrike:false` vs `MARTIAL, KNOW, PROTECT` |
+| `contributions` | ⛔ **what it can DO** — your own `contributionsOf` vocabulary | `MARTIAL` (grab/slam/bite) vs `MARTIAL, KNOW, PROTECT` |
 | `duration` | before it comes apart | already authored on most |
 
 ⛔ **`contributions` AND `canStrike` ALREADY EXIST AND ALREADY WORK** — I authored them on nine companions

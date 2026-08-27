@@ -19354,6 +19354,51 @@ await (async () => {
       /pursuit/.test(gmSrc));
   }
 
+  // 5ao · CCODE-264 / AEVI's SPEC_harm_gloss_reads_the_rank — THE GM'S HARM LINE READ THE ABILITY.
+  // ⛔ Every other line in that block reads the RANK — the rank name, CAN, CANNOT. Only HARM read `ab`.
+  // ⚠️ AND `harmRungGloss` IS PRESCRIPTIVE PROSE, not a label: "this craft CAN end a life — narrate a real
+  // death when the fiction earns it" vs "this craft HARMS NOTHING — NEVER invent a wound from it". So the
+  // wrong rung is a standing INSTRUCTION to narrate a wound the rank cannot cause.
+  {
+    const PR264 = await import("../engine/progression.js");
+    const abil264 = C199.abilities || {};
+    // ⛔ NON-VACUITY, AND IT IS THE MEASUREMENT THAT JUSTIFIES THE FIX: the two levels must actually
+    // disagree on real content, or this gate passes on a corpus where the bug could not show.
+    const split = Object.values(abil264).filter(a => {
+      const r1 = (a.tree || [])[0]?.harmRung;
+      return a.harmRung && r1 && String(r1) !== String(a.harmRung);
+    });
+    check("CCODE-264: the corpus really does author a different rung at r1 than on the ability (floor)",
+      split.length >= 20, `${split.length} crafts`);
+
+    const gm = (id, rank) => {
+      const out = PR264.abilitiesForGM(
+        { level: 20, attributes: {}, subAttributes: {}, abilities: [{ abilityId: id, level: rank }], discoveries: [] },
+        abil264, null, C199.rules || {});
+      const txt = Array.isArray(out) ? out.join(String.fromCharCode(10)) : String(out);
+      return (txt.match(new RegExp("HARM: ([^"+String.fromCharCode(92)+"n]+)")) || [])[1] || "";
+    };
+    // `unmake_seal` authors [none, damaging, lethal] with `lethal` on the ability — the clearest case there is.
+    const us = abil264.unmake_seal;
+    check("CCODE-264: unmake_seal is the worked case — none → damaging → lethal, ability says lethal (floor)",
+      !!us && us.harmRung === "lethal" && (us.tree || []).map(t => t.harmRung).join(",") === "none,damaging,lethal");
+    check("CCODE-264: at RANK 1 the GM is told it harms nothing — not that it can end a life",
+      /HARMS NOTHING/.test(gm("unmake_seal", 1)) && !/end a life/.test(gm("unmake_seal", 1)));
+    check("CCODE-264: at rank 2 it wounds, and only at rank 3 can it end a life — the gloss climbs with the rank",
+      /WOUNDS but does not slay/.test(gm("unmake_seal", 2)) && /CAN end a life/.test(gm("unmake_seal", 3)));
+
+    // ⚠️ AND THE ABILITY VALUE IS STILL THE FALLBACK. A craft that authors a rung only on the ability must
+    // not lose its HARM line entirely — that would trade one wrong instruction for a missing one.
+    {
+      const onlyAbility = Object.values(abil264).find(a => a.harmRung && a.harmRung !== "none"
+        && !(a.tree || []).some(t => t.harmRung));
+      if (onlyAbility) check("CCODE-264: a craft that authors a rung ONLY on the ability keeps its HARM line",
+        gm(onlyAbility.id, 1).length > 0, onlyAbility.id);
+      else check("CCODE-264: (no ability-only craft in the corpus to check the fallback against)", true);
+    }
+  }
+
+
 
 
   // 5ag · ⛔ CCODE-248b — NOBODY IS ONE-DIMENSIONAL. Erik: "Veth… she's supposed to be a teacher, but she's
@@ -19444,6 +19489,100 @@ await (async () => {
     check(`CCODE-248b: Veth's observed crafts resolve against the catalogue (${gv.crafts.map(c => c.id).join(", ")})`,
       gv.crafts.length >= 2 && gv.wantsAuthoring.length === 0);
   }
+
+  // 5ap · CCODE-265 / AEVI's SPEC_roster_defaults_are_not_ceilings — A FLAG A PLAYER'S INVENTION CAN BEAT.
+  // ⛔ ERIK: "Cellaceron has created a Waystaff that Aevi can merge into and use to express her will (strike
+  // with power) — that seems not only legit but exactly the type of creative adaptation that we should
+  // empower and encourage."
+  // ⚠️ AEVI CANNOT FIGHT AS A SWARM AND THAT STAYS TRUE. It is a statement about a cloud of motes with
+  // nothing to swing, not a rule that no arrangement of the world could ever let her express force.
+  {
+    const CB265 = await import("../engine/combatants.js");
+    const aeviRec = (JSON.parse(readFileSync(join(root, "content/packs/valley/companions/aevi.json"), "utf8")).companions || [])[0]
+      || JSON.parse(readFileSync(join(root, "content/packs/valley/companions/aevi.json"), "utf8"));
+    // floors: the fixture must actually be the constrained case, or every claim below is vacuous
+    check("CCODE-265: Aevi is authored canStrike:false and carries a named override (floor)",
+      aeviRec?.canStrike === false && Array.isArray(aeviRec.canStrikeOverrides) && aeviRec.canStrikeOverrides.length >= 1);
+
+    const at = (n) => ({ stageOf: (id) => (id === "waystaff" ? n : null) });
+    // ⛔ ACCEPTANCE 1 — earned, and only when earned.
+    check("CCODE-265: with the Waystaff at stage 3 Aevi contributes HARM; below it she does not",
+      CB265.contributionsOf(aeviRec, at(3)).includes("HARM")
+      && !CB265.contributionsOf(aeviRec, at(2)).includes("HARM")
+      && !CB265.contributionsOf(aeviRec, at(1)).includes("HARM"));
+    // ⚠️ AND IT FAILS CLOSED. A caller that cannot answer "what stage is that item at" gets the default —
+    // a permission that fails OPEN is not a permission.
+    check("CCODE-265: with no way to check the condition she stays non-striking — the override fails closed",
+      !CB265.contributionsOf(aeviRec).includes("HARM")
+      && !CB265.contributionsOf(aeviRec, { stageOf: () => null }).includes("HARM"));
+    // ⛔ AND IT IS NOT A FLAG ANYONE CAN SET. An unparseable or unmet `when` lifts nothing.
+    check("CCODE-265: an override naming a condition that does not parse lifts nothing",
+      !CB265.contributionsOf({ ...aeviRec, canStrikeOverrides: [{ when: "because I said so" }] }, at(99)).includes("HARM")
+      && !CB265.contributionsOf({ ...aeviRec, canStrikeOverrides: [{ when: "" }] }, at(99)).includes("HARM"));
+    // ⛔ ACCEPTANCE 3 — the receipt says WHY, because "the swarm is holding a staff" is the interesting part.
+    const lift = CB265.liftedBy(aeviRec, at(3));
+    check("CCODE-265: the lift names the item, the stage it needed, and why it counts",
+      lift?.item === "waystaff" && lift?.stage === 3 && typeof lift?.why === "string" && lift.why.length > 20);
+
+    // ⛔ ACCEPTANCE 2 — THE DEFAULT IS UNCHANGED FOR EVERYONE ELSE. Measured over the whole roster with a
+    // deliberately generous stageOf: exactly one companion may move, and it must be Aevi.
+    {
+      const dir = join(root, "content/packs/valley/companions");
+      const moved = [];
+      for (const f of readdirSync(dir).filter(f => f.endsWith(".json"))) {
+        const j = JSON.parse(readFileSync(join(dir, f), "utf8"));
+        const rec = (j.companions || [j])[0];
+        if (!rec) continue;
+        const before = CB265.contributionsOf(rec).join(",");
+        const after = CB265.contributionsOf(rec, { stageOf: () => 99 }).join(",");
+        if (before !== after) moved.push(rec.id || rec.name);
+      }
+      check("CCODE-265: a maximally generous world moves exactly ONE companion, and it is Aevi",
+        moved.length === 1 && String(moved[0]).toLowerCase() === "aevi", moved.join(","));
+    }
+
+    // ⚠️ ACCEPTANCE 4 — an override naming something the world cannot satisfy must fail LOUDLY. Loudly means
+    // HERE, over the corpus; failing loudly in play would mean throwing during a fight.
+    {
+      const items = {};
+      for (const dir of ["content/packs/valley/items", "content/packs/core/items"]) {
+        try {
+          for (const f of readdirSync(join(root, dir)).filter(f => f.endsWith(".json"))) {
+            const j = JSON.parse(readFileSync(join(root, dir, f), "utf8"));
+            for (const it of (j.items || [j])) if (it?.id) items[it.id] = it;
+          }
+        } catch { /* dir may not exist */ }
+      }
+      const bad = [];
+      for (const f of readdirSync(join(root, "content/packs/valley/companions")).filter(f => f.endsWith(".json"))) {
+        const j = JSON.parse(readFileSync(join(root, "content/packs/valley/companions", f), "utf8"));
+        const rec = (j.companions || [j])[0];
+        for (const ov of (rec?.canStrikeOverrides || [])) {
+          const m = /^([a-z0-9_-]+)@(\d+)$/i.exec(String(ov?.when || "").trim());
+          if (!m) { bad.push(`${rec.id}: unparseable "${ov?.when}"`); continue; }
+          const it = items[m[1]];
+          if (!it) { bad.push(`${rec.id}: names item "${m[1]}" which does not exist`); continue; }
+          const stages = it.evolution?.stages || [];
+          if (!stages.some(s => Number(s.stage) >= Number(m[2])))
+            bad.push(`${rec.id}: "${ov.when}" — ${m[1]} has no stage ${m[2]}`);
+        }
+      }
+      check("CCODE-265: every authored override names a condition the world CAN satisfy",
+        bad.length === 0, bad.join(" · "));
+
+    // ⛔ AND THE WORLD IS ACTUALLY ASKED. A reader with no caller is the defect this override exists to fix,
+    // and shipping one here would have been the same mistake one level up.
+    {
+      const cbSrc = readFileSync(join(root, "engine/combatants.js"), "utf8").replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+      const encSrc = readFileSync(join(root, "engine/encounters.js"), "utf8").replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+      check("CCODE-265: alliesOf threads stageOf through to contributionsOf",
+        /stageOf/.test(cbSrc) && /opts = \{ tagFamilies, stageOf \}/.test(cbSrc));
+      check("CCODE-265: …and the encounter wrapper SUPPLIES it from the real item evolution",
+        /stageOf:/.test(encSrc) && /currentStage\(/.test(encSrc));
+    }
+    }
+  }
+
 
   // 5ah · ⛔ CCODE-249 — NPCs USE THE SAME MECHANICS AS PCs. Erik: "I want NPCs using the same set of
   // skills available to PCs — that's how they harm or restore… the roles part likely just sets which ones

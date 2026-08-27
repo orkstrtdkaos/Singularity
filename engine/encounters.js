@@ -6,7 +6,8 @@
 // Incapacitation, never engine-imposed death.
 
 import { battleRound, opponentPolicy } from "./skill_battle.js";
-import { targetableAllies } from "./combatants.js";   // CCODE-253: who a foe may aim at — DERIVED here, per this seam's own rule
+import { targetableAllies } from "./combatants.js";
+import { currentStage } from "./evolution.js";   // CCODE-265: an earned item stage can lift a companion's canStrike:false   // CCODE-253: who a foe may aim at — DERIVED here, per this seam's own rule
 import { encounterKind } from "./encounterFrame.js"; // SNG-247: which bounded thing this is — it picks the exit rule
 import { smartClamp } from "./namematch.js"; // SNG-152
 
@@ -131,7 +132,11 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // ⚠️ A companion who cannot fight is still TARGETABLE — that is `targetableAllies`, not `actingAllies`,
   // and the difference is the entire reason interception is worth having.
   const partyPresent = targetableAllies(character, {
-    companions: content?.companions || {}, npcs: content?.npcs || {}, company: character?.company || null });
+    companions: content?.companions || {}, npcs: content?.npcs || {}, company: character?.company || null,
+    // ⛔ CCODE-265 — THE WORLD'S ANSWER TO "what stage is that item at". Without it a companion whose
+    // `canStrike: false` is liftable by an earned item can never actually lift it in a real fight, and the
+    // override would be a field with a reader and no caller — this project's signature defect, one level up.
+    stageOf: (itemId) => { try { return currentStage(itemId, character, content?.items || {})?.stage ?? null; } catch { return null; } } });
   const r = battleRound({
     playerDecl, oppDecl,
     // one ally means "just you", and `chooseTarget` returns the lone-target case — byte-identical to before.

@@ -14,6 +14,7 @@ import { domainAccess, traditionOf, isFolkTradition, antipodeOf } from "./tradit
 import { standingWithPeople } from "./reputation.js";
 import { trainerFor } from "./company.js";
 import { smartClamp } from "./namematch.js"; // SNG-152
+import { authoredBlock } from "./craftmechanics.js"; // CCODE-264: the rank-first reader — the GM's HARM line must read the RANK, like every other line in its block
 
 // Practiced enough for `targetRank`? Inlined (not imported from practice.js) to avoid a circular
 // import — practice.js already imports discoveryKey from here. Mirrors practice.js practiceRankReady.
@@ -723,7 +724,20 @@ export function abilitiesForGM(character, catalog, branchForks = null, rules = {
     lines.push(`### ${ab.name} — rank ${owned.level}${rank ? ` "${rank.name}"${rank.forked ? " (specialized fork)" : ""}` : ""} (${energyStr})` +
       (rank ? `\nCAN: ${rank.grants}\nCANNOT (at this rank): ${rank.cannot}` : `\n${ab.description}`) +
       (ab.notFor ? `\nNOT FOR: ${ab.notFor}` : "") +
-      (ab.harmRung ? `\nHARM: ${harmRungGloss(ab.harmRung)}` : ""));
+      // ⛔ CCODE-264 / AEVI's SPEC_harm_gloss_reads_the_rank — THIS READ THE ABILITY WHILE EVERY OTHER LINE
+      // IN THIS BLOCK READS THE RANK. The rank name, CAN and CANNOT all come from `rank`; only HARM came
+      // from `ab`. So a craft that WOUNDS at r3 and harms nothing at r1 told the GM it wounds from the
+      // moment it was learned — and `harmRungGloss` is PRESCRIPTIVE prose ("this craft CAN end a life",
+      // "NEVER invent a wound from it"), so the wrong rung is an instruction to narrate a wound the rank
+      // cannot cause.
+      // ⚠️ MEASURED: 349 crafts declare a rung at BOTH levels, and the ability equals the max of its ranks
+      // on only 217 of them — so the two genuinely disagree on 132 crafts. That is §45.1 exactly: authored
+      // rank-first, read one level up.
+      // ⛔ THE ABILITY VALUE IS THE FALLBACK, NOT THE SOURCE. A craft that authors a rung only at its top
+      // rank still needs something to say at r1, and `authoredBlock` walks down to the highest rank at or
+      // below the one held — the additive-ranks rule this project already runs on everywhere else.
+      ((authoredBlock(ab, "harmRung", owned.level) ?? ab.harmRung)
+        ? `\nHARM: ${harmRungGloss(authoredBlock(ab, "harmRung", owned.level) ?? ab.harmRung)}` : ""));
   }
   for (const d of character.discoveries || []) {
     lines.push(`### ✦ Discovered technique: ${d.name}\n${d.description} (combines: ${d.abilities.join(" + ")}; earned through play — no novelty penalty, +bonus)`);

@@ -49,7 +49,32 @@ export const DEFAULT_TAG_FAMILIES = {
 
 /** The families an entity can act in. ⚠️ EMPTY IS A REAL ANSWER — an entity with no tags contributes
  *  nothing mechanical yet, which is a prompt to author rather than a reason to exclude it. */
-export function contributionsOf(record, { tagFamilies = null, fightingRoles = null } = {}) {
+/** ⛔ CCODE-265 — DOES THE WORLD SATISFY A NAMED EXCEPTION? Returns the override that lifts a flat
+ *  `canStrike: false`, or null.
+ *
+ *  ⚠️ `when` GRAMMAR IS DELIBERATELY TINY: `item@stage`. One shape, checkable, and it names a thing the
+ *  player had to BUILD. Widening it later is a decision; guessing at it now would make the field mean
+ *  whatever the first caller wanted.
+ *
+ *  ⛔ AND IT FAILS CLOSED. `stageOf` is injected — this module knows nothing about item evolution and must
+ *  not learn — so a caller that cannot answer the question gets `null` and the companion stays non-striking.
+ *  Aevi's spec asks that an override naming a condition the world cannot satisfy "fails loudly"; the loud
+ *  half is a gate over the corpus, because failing loudly IN PLAY would mean throwing during a fight.
+ */
+export function liftedBy(record, { stageOf = null } = {}) {
+  const list = record?.canStrikeOverrides;
+  if (!Array.isArray(list) || !list.length || typeof stageOf !== "function") return null;
+  for (const ov of list) {
+    const m = /^([a-z0-9_\-]+)@(\d+)$/i.exec(String(ov?.when || "").trim());
+    if (!m) continue;                       // an unparseable condition lifts nothing
+    let at = null;
+    try { at = stageOf(m[1]); } catch { at = null; }
+    if (Number.isFinite(Number(at)) && Number(at) >= Number(m[2])) return { ...ov, item: m[1], stage: Number(m[2]), at: Number(at) };
+  }
+  return null;
+}
+
+export function contributionsOf(record, { tagFamilies = null, fightingRoles = null, stageOf = null } = {}) {
   const map = tagFamilies || DEFAULT_TAG_FAMILIES;
   const tags = new Set((record?.assistTags || []).map(t => String(t).toLowerCase()));
   const out = [];
@@ -69,7 +94,19 @@ export function contributionsOf(record, { tagFamilies = null, fightingRoles = nu
   // ⚠️ SO HARM IS THE DEFAULT AND THE EXCEPTIONS ARE AUTHORED. "As they are able" cuts this way: Pell is
   // able, Veth is able, Siol is able. A swarm of nanite-motes is not, and a carrion bird is not, and those
   // are facts about a BODY rather than about a job.
-  const cannot = record?.canStrike === false || record?.incorporeal === true || record?.noStrike === true;
+  // ⛔ CCODE-265 / AEVI's SPEC_roster_defaults_are_not_ceilings — `canStrike: false` IS A STARTING STATE,
+  // NOT A CEILING. Erik: "Cellaceron has created a Waystaff that Aevi can merge into and use to express her
+  // will (strike with power) — that seems not only legit but exactly the type of creative adaptation that we
+  // should empower and encourage."
+  // ⚠️ AEVI CANNOT FIGHT AS A SWARM AND THAT SHOULD STAY TRUE. It is a statement about a cloud of motes with
+  // nothing to swing — not a rule that no arrangement of the world could ever let her express force.
+  // ⛔ THE EXCEPTION MUST BE EARNED AND NAMED, NEVER A FLAG ANYONE CAN SET. `canStrikeOverrides[].when` names
+  // a condition the WORLD has to satisfy — today `item@stage`, which is gated behind a bond band and a
+  // co-use count that took months of play. An override whose condition cannot be checked is REFUSED, not
+  // assumed true: a permission that fails open is not a permission.
+  const flatCannot = record?.canStrike === false || record?.incorporeal === true || record?.noStrike === true;
+  const lifted = flatCannot ? liftedBy(record, { stageOf }) : null;
+  const cannot = flatCannot && !lifted;
   if (!cannot && !out.includes("HARM")) out.push("HARM");
 
   // ⚠️ A WEAPON, A FIGHTING ROLE OR THE `ally` ROLE DO NOT GRANT HARM — everyone already has it. They
@@ -157,8 +194,10 @@ export function presenceSheet(record, { level = 1, sb = null } = {}) {
  *
  *  ⚠️ THE PLAYER IS ALWAYS FIRST AND ALWAYS PARTICIPATES. Everyone else is present by default and
  *  participates only where the content says so. */
-export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = null, company = null } = {}) {
-  const opts = { tagFamilies };
+export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = null, company = null, stageOf = null } = {}) {
+  // ⚠️ CCODE-265: `stageOf` rides through to `contributionsOf` or the override is reader-only — the exact
+  // defect the override exists to fix, reproduced one level up.
+  const opts = { tagFamilies, stageOf };
   const out = [{
     id: character?.id || "player", name: character?.name || "you", kind: "player",
     // ⛔ CCODE-259 — THE PLAYER IS A COMBATANT BY DEFINITION AND THIS LINE SAID OTHERWISE. It listed only

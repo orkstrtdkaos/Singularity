@@ -20132,6 +20132,67 @@ await (async () => {
     check("CCODE-198: a re-roll ADDS a version rather than replacing the picture it was launched from",
       /versionOf: it\.versionOf \|\| it\.url/.test(app198));
   }
+
+  // 5aw · CCODE-274 — THE MELEE WIRED, AS THE THING YOU GROW INTO.
+  // ⛔ ERIK ruled [C] and then framed the whole ladder: "around when you're hitting the named npc party
+  // member cap you're likely to have enough of a following to have a band or unit that would operate in the
+  // simplified sense... Taken a bit further you'll have multiple units and legions and armies."
+  // ⚠️ SO THE SCALE TIERS ARE A PROGRESSION, NOT A PERFORMANCE OPTIMISATION. The command ladder and the
+  // melee tiers are one arc seen twice, and this wires the first rung of it.
+  {
+    const EN274 = await import("../engine/encounters.js");
+    const melee274 = await import("../engine/melee.js");
+    const silas274 = JSON.parse(readFileSync(join(root, "characters/player-s9z9u1/char-mrhs8286.json"), "utf8"));
+    const mf274 = JSON.parse(readFileSync(join(root, "content/packs/valley/companions/marrow.json"), "utf8"));
+    const marrow274 = { ...((mf274.companions || [mf274])[0]), withdraws: { manner: "takes to the air", auto: true } };
+    // ⚠️ LOADED LOCALLY. `C199` belongs to a block that closed long before this one — my first version
+    // referenced it anyway and the SUITE DIED HERE, which dropped the pass count 4,396 → 4,350 while the
+    // failure count stayed at 1. A suite that exits early looks exactly like one that passed, and reading
+    // the failure count rather than the pass count is how that goes unnoticed.
+    const { loadContentHeadless: lch274 } = await import("./headless_content.mjs");
+    const C274 = await lch274();
+    const rules274 = C274.rules || {}, sb274 = C274.skillBattle?.engine || C274.rules?.skillBattle || {};
+    const def274 = { id: "f", type: "duel", name: "a reaver", opponent: { name: "a reaver", health: 40, yieldAt: 0 } };
+    const mk = (character, content) => EN274.skillBattleRound(
+      EN274.startEncounter(def274, { oppSheet: { attributes: { physical: 9 }, level: 10, energy: 80, health: 40 } }),
+      def274, { function: "strike", tier: 3, attribute: "mental", intensity: "standard", name: "the braid" },
+      { character, content, rules: rules274, sb: sb274, steps: rules274.resolution || {}, rng: () => 0.5 });
+
+    const withParty = mk(silas274, { ...C274, companions: { marrow: marrow274 } });
+    // ⛔ NAMES, NOT IDS. Company members live in `character.npcRegistry`, not in content — passing only
+    // `content.npcs` resolved none of them and the party came back as "pell", "veth-ondra", with every
+    // name-derived read working from nothing.
+    check("CCODE-274: the party resolves by NAME — the character's own registry is in the lookup",
+      withParty.party?.forward?.some(a => /Pell Ran Marsh/.test(a.name))
+      && !withParty.party.forward.some(a => a.name === a.id));
+    check("CCODE-274: you and those you brought forward act; the rest are IN THE MELEE, named",
+      withParty.party.forward.length === withParty.party.slots
+      && withParty.party.folded.length >= 1
+      && withParty.party.folded.every(a => a.name && a.name !== a.id));
+    // ⛔ THE WITHDRAWN LIST COULD NEVER POPULATE. I derived the split from `targetableAllies`, which is
+    // exactly the filter that removes them — a list that can never fill is worse than no list, because it
+    // reads as "nobody withdrew" rather than as "this was never checked".
+    check("CCODE-274: someone who took to the air appears as WITHDRAWN, with the manner",
+      withParty.party.withdrawn.some(a => /Marrow/.test(a.name) && /air/.test(String(a.manner))));
+
+    // ⛔ AND THE FOLDED REACH THE DAMAGE, or "they are in the fight" is decoration. This is the whole
+    // mechanical content of [C]: the party is bigger, the foe takes more, the round stays three beats.
+    check("CCODE-274: the folded party adds to the blow, and the receipt NAMES who",
+      withParty.damage?.melee?.added > 0 && withParty.damage.melee.by.length >= 1
+      && withParty.damage.melee.by.every(n => typeof n === "string" && n.length > 2));
+    // ⚠️ MEASURED COMPRESSION, not a per-ally bonus. `predictAggregate` scales the mean with K and the
+    // spread with √K; the naive K× alternative matches on the average and is 614% wrong on the spread.
+    check("CCODE-274: …and it grows with the party rather than being a flat bonus",
+      (() => { const ML = melee274; const one = ML.predictAggregate({ mean: 2, sd: 1 }, 1).mean;
+        const four = ML.predictAggregate({ mean: 2, sd: 1 }, 4).mean;
+        return four === one * 4 && ML.predictAggregate({ mean: 2, sd: 1 }, 4).sd < one * 4; })());
+
+    // ⛔ AND A SOLO CHARACTER IS UNTOUCHED. The gate I said I would write first and keep.
+    const alone = mk({ ...silas274, companions: [], company: [] }, { ...C274, companions: {} });
+    check("CCODE-274: travelling alone there is no party block and no melee contribution — solo is unchanged",
+      alone.party === undefined && alone.damage?.melee === undefined);
+  }
+
 }
 // ---- CCODE-197: hold several traditions, and ask by exact function ------------------------------
 // ⛔ ERIK, THREE THINGS IN ONE BREATH: "a bare tradition click should hide things too. Also, the bare

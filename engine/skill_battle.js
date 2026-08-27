@@ -6,7 +6,8 @@
 // narrates the resolved exchange; it never chooses the opponent's mechanical move — that is opponentPolicy.
 
 import { resolveAction } from "./resolve.js";
-import { chooseTarget, foeKnowledge } from "./targeting.js";   // CCODE-250: a foe chooses who to hit
+import { chooseTarget, foeKnowledge } from "./targeting.js";
+import { predictAggregate } from "./melee.js";   // CCODE-274: the folded party contributes as a measured aggregate, not as N more rolls   // CCODE-250: a foe chooses who to hit
 import { redirectImposition, interceptorFor, catchesCondition, catchesDamage } from "./intercept.js";   // CCODE-250: …and someone may step in front of it
 import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, ongoingHarmOf, authoredBlock, resolveProvoke, resolveSoothe, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
@@ -747,6 +748,11 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // CCODE-250 (Erik: "Yes a foe chooses who to hit"): the party seat. `allies` is the live roster a foe may aim
   // at — ABSENT OR EMPTY MEANS TODAY, and a 1v1 round then resolves byte-identically, which is the gate.
   allies = null, targetPolicy = null, protections = null,
+  // ⛔ CCODE-274 / ERIK'S [C] — THE ONES YOU DID NOT BRING FORWARD ARE STILL IN THE FIGHT.
+  // "Named companions folded into the aggregate still feel like people... it's just that you only have so
+  // much focus." `folded` is that: allies who are fighting and are not narrated blow by blow this round.
+  // ⚠️ ABSENT MEANS TODAY. With no folded set the round is byte-identical, which is the gate.
+  folded = null,
   // CCODE-45: a TURN is sense -> action -> bonus. Both options DEFAULT to today's behaviour, so every existing
   // caller is untouched: phase "action" resolves exactly as before, and tickEffects true ticks per exchange.
   // The turn orchestrator passes phase:"sense" (no momentum, no pressure — it PREPARES) and tickEffects:false on
@@ -1153,6 +1159,29 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // CONDITIONS, and making every protection eat damage handed it a power its author never gave it.
       // Filtered here rather than in `interceptorFor`, so the condition path keeps using the same chooser.
       const dmgGuards = (protections || []).filter(catchesDamage);
+      // ⛔ CCODE-274 — THE MELEE'S OWN CONTRIBUTION, and it has to reach the DAMAGE or "they are in the
+      // fight" is decoration. This is the whole mechanical content of Erik's [C]: the party is bigger, the
+      // foe takes more, and the round is still three beats long.
+      // ⚠️ IT USES `predictAggregate`, WHICH IS THE MEASURED COMPRESSION — mean scales with K, spread with
+      // √K. The naive alternative (K× one roll) matches on the average and is 614% wrong on the spread,
+      // which is invisible to anyone checking averages and is how a party that recruits a fourth member
+      // starts seeing wipes. `scripts/scale_fidelity.mjs` re-measures it against the real engine.
+      if (damage && roundWinner === "player" && folded && folded.length) {
+        const able = folded.filter(f => f && f.present !== false && !f.downed && (f.contributions || []).includes("HARM"));
+        if (able.length) {
+          const per = Math.max(0, Number(sb?.melee?.perFoldedAlly ?? 2));
+          const agg = predictAggregate({ mean: per, sd: per / 2 }, able.length);
+          const add = Math.max(0, Math.round(agg.mean));
+          if (add > 0) {
+            damage = { ...damage, amount: (Number(damage.amount) || 0) + add,
+              // ⚠️ REPORTED SEPARATELY AND BY NAME. A number folded silently into the total would make the
+              // party invisible at exactly the moment it mattered — and Erik's whole ruling is that these
+              // are people you chose not to narrate, not people who stopped existing.
+              melee: { added: add, by: able.map(f => f.name || f.id), count: able.length,
+                why: `${able.map(f => String(f.name || f.id).split(" ")[0]).join(", ")} are in it too` } };
+          }
+        }
+      }
       if (damage && damage.onId && dmgGuards.length) {
         const guard = interceptorFor(damage.onId, dmgGuards, Object.fromEntries((allies || []).map(x => [x.id, x.sheet || {}])));
         if (guard) {

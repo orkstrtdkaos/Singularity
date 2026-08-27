@@ -6,7 +6,8 @@
 // Incapacitation, never engine-imposed death.
 
 import { battleRound, opponentPolicy } from "./skill_battle.js";
-import { targetableAllies } from "./combatants.js";
+import { targetableAllies, alliesOf } from "./combatants.js";
+import { commandSlots, bringForward } from "./melee.js";   // CCODE-274: how many you lead is earned; who comes forward is chosen
 import { currentStage } from "./evolution.js";   // CCODE-265: an earned item stage can lift a companion's canStrike:false   // CCODE-253: who a foe may aim at — DERIVED here, per this seam's own rule
 import { encounterKind } from "./encounterFrame.js"; // SNG-247: which bounded thing this is — it picks the exit rule
 import { smartClamp } from "./namematch.js"; // SNG-152
@@ -131,14 +132,38 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // in the game and the whole targeting mechanism was unreachable from play while its gates stayed green.
   // ⚠️ A companion who cannot fight is still TARGETABLE — that is `targetableAllies`, not `actingAllies`,
   // and the difference is the entire reason interception is worth having.
+  // ⛔ CCODE-274 — THE CHARACTER'S OWN REGISTRY MUST BE IN THE LOOKUP. Company members like Pell and Veth
+  // live in `character.npcRegistry`, NOT in content — they were met in play. Passing only `content.npcs`
+  // resolved none of them, so the whole party came back as raw ids ("pell", "veth-ondra") and every
+  // name-derived read — leans, martial-by-occupation, the receipt — was working from nothing.
+  // ⚠️ CONTENT FIRST, REGISTRY SECOND: what the player has actually learned about someone beats the
+  // authored stub, which is the same precedence `sheetFor` already uses for an authored sheet.
+  const npcLookup = { ...(content?.npcs || {}), ...(character?.npcRegistry || {}) };
+  // ⛔ THE FULL ROSTER, not the targetable slice — `alliesOf` includes the withdrawn, and `targetableAllies`
+  // is exactly the filter that removes them. Deriving the party split from the filtered list made the
+  // `withdrawn` array on the receipt permanently empty: a list that can never populate.
+  const partyAll = alliesOf(character, {
+    companions: content?.companions || {}, npcs: npcLookup, company: character?.company || null,
+    stageOf: (itemId) => { try { return currentStage(itemId, character, content?.items || {})?.stage ?? null; } catch { return null; } } });
   const partyPresent = targetableAllies(character, {
-    companions: content?.companions || {}, npcs: content?.npcs || {}, company: character?.company || null,
+    companions: content?.companions || {}, npcs: npcLookup, company: character?.company || null,
     // ⛔ CCODE-265 — THE WORLD'S ANSWER TO "what stage is that item at". Without it a companion whose
     // `canStrike: false` is liftable by an earned item can never actually lift it in a real fight, and the
     // override would be a field with a reader and no caller — this project's signature defect, one level up.
     stageOf: (itemId) => { try { return currentStage(itemId, character, content?.items || {})?.stage ?? null; } catch { return null; } } });
+  // ⛔ CCODE-274 — THE FORWARD/FOLDED SPLIT, DERIVED HERE. How many you can lead is EARNED
+  // (`commandSlots`: level + presence + renown, capped at Erik's goal of 3), and WHICH of them come forward
+  // is the player's pick, carried on the encounter state so a swap persists between rounds.
+  // ⚠️ DERIVED, NEVER PASSED IN — this wrapper's own rule, after it silently ate a forwarded option three
+  // times. The character already knows their level, their presence and who they chose.
+  const lead = commandSlots(character, { cfg: rules?.melee || {}, renownBand: state.renownBand || null });
+  const split = partyAll.length > 1
+    ? bringForward(partyAll, { chosen: state.broughtForward || null, slots: lead.slots })
+    : null;
   const r = battleRound({
     playerDecl, oppDecl,
+    // ⚠️ THE FOLDED FIGHT WITHOUT BEING NARRATED. Erik: "you only have so much focus."
+    folded: split ? split.folded : null,
     // one ally means "just you", and `chooseTarget` returns the lone-target case — byte-identical to before.
     allies: partyPresent.length > 1 ? partyPresent : null,
     protections: state.protections || null,
@@ -280,6 +305,12 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // value here that must also RIDE FORWARD onto state — it is earned in the sense step and spent in the
     // action step of the same turn, so a wrapper that merely reports it has still dropped it.
     foeReadTier: r.foeReadTier,
+    // ⛔ THE UI OWES THE PICKING AND THE ENGINE OWES A STABLE ANSWER TO "who is forward". Erik: "this needs
+    // to be a UI pick." Without this on the receipt there is nothing for that control to bind to.
+    ...(split ? { party: { forward: split.forward.map(a => ({ id: a.id, name: a.name })),
+      folded: split.folded.map(a => ({ id: a.id, name: a.name })),
+      withdrawn: split.withdrawn.map(a => ({ id: a.id, name: a.name, manner: a.withdrawal?.manner || null })),
+      slots: lead.slots, capped: lead.capped, why: split.why } } : {}),
     // ⚠️ AND THE CCODE-228 GATE CAUGHT THESE TWO ON ITS FIRST OUTING — `unsettled` and `cooled` are the
     // provoke/soothe results, added minutes earlier, and the wrapper dropped them exactly the way it has
     // dropped ten values before. The derived gate went red the same run. That is the whole argument for

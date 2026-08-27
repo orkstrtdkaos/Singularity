@@ -85,9 +85,15 @@ export function leanOf(entry, opts = {}) {
 /** ⛔ THE SHEET. Same shape a contest already takes, so an NPC can be a combatant without a second format.
  *  ⚠️ AN AUTHORED SHEET WINS OUTRIGHT — this fills in for people nobody has written down yet, and the
  *  moment Aevi authors one the derivation stops applying to them. */
-export function sheetFor(entry, { day = null, cfg = {}, roleAttributes = null, authored = null } = {}) {
+export function sheetFor(entry, { day = null, cfg = {}, roleAttributes = null, authored = null, levelOverride = null } = {}) {
   if (authored) return { ...authored, id: entry?.id || authored.id, authored: true };
-  const level = derivedLevel(entry, { day, cfg });
+  // ⛔ CCODE-273 — THE ONE SEAM A SUMMON NEEDS. Aevi: "A SUMMON IS THAT WITH THE LEVEL COMING FROM SOMEWHERE
+  // ELSE... replaces `derivedLevel(entry)` with `casterLevel + tierGap` and the rest of the function is
+  // already correct." She is right — everything below this line (the base, the leans, the bonus) wants a
+  // level and does not care where it came from.
+  // ⚠️ `?? derivedLevel` RATHER THAN `||`: a legitimate override of 0 must not fall through to the derived
+  // value, and levels are clamped to 1 below anyway.
+  const level = levelOverride != null ? Math.max(1, num(levelOverride, 1)) : derivedLevel(entry, { day, cfg });
   const leans = leansOf(entry, { roleAttributes });
   const base = Math.max(1, Math.round(level / 2) + 1);
   const attributes = { physical: base, mental: base, social: base, practical: base };
@@ -251,3 +257,59 @@ export function battleSkillsFor(entry, opts = {}) {
   }
   return { skills: out, level };
 }
+
+/** ⛔ CCODE-273 / AEVI's SPEC_summoned_sheets, WITH ERIK'S ADDITION — WHAT ARRIVES WHEN YOU SUMMON.
+ *
+ *  Erik: *"let's let CCode help with the summon stats. He worked on some NPC character sheets — this would
+ *  be a LITE VERSION of that."* And Aevi, revising her own spec: *"`synthSheet` builds a FOE from a threat
+ *  band. That is an opponent, and a summoned thing is not always an opponent — `raised_hand` sets a CREW
+ *  THAT HAULS."*
+ *
+ *  ⚠️ SO IT IS `sheetFor` WITH THE LEVEL COMING FROM SOMEWHERE ELSE. Erik's rule: base it off the caster.
+ *  ⛔ THE LITE PART, EXPLICITLY: no `craftsOf`, no `growthFor`, no `kitFor`, no `isPermanent`. A summoned
+ *  thing has no growth arc, no inventory and no reputation — it arrives, it does a thing, it comes apart.
+ *
+ *  ⛔ AND THE GAP IS NOT FIXED — ERIK'S RULING. Aevi asked whether `driven_shade` rising −1 → 0 → +1 with
+ *  rank was too much for a thing a player made. He said fine, *"but i would also tie it to how well you
+ *  succeeded at the skill and if you crit."*
+ *  ⚠️ THAT IS THE BETTER DESIGN AND IT CHANGES WHAT THE FIELD MEANS. An authored `tierGap` was a promise
+ *  about the craft; now it is a FLOOR the roll can beat. A shade raised on a bare success is the shade the
+ *  craft promises; one raised on a crit is worse than its maker — and that is a thing that HAPPENED at the
+ *  table rather than a number sitting in a file. */
+export function summonGap(ability, { rank = 1, degree = "success", cfg = {} } = {}) {
+  const authored = ability?.summon?.tierGap ?? ability?.tierGap;
+  // a per-rank ladder is authored as an array or an object keyed by rank; a bare number is flat
+  let base = 0;
+  if (Array.isArray(authored)) base = num(authored[Math.max(0, num(rank, 1) - 1)], num(authored[authored.length - 1], 0));
+  else if (authored && typeof authored === "object") base = num(authored[String(num(rank, 1))], 0);
+  else base = num(authored, 0);
+  // ⚠️ THE ROLL MOVES IT, AND ONLY UPWARD FROM A CLEAN SUCCESS. A partial gives you less than the craft
+  // promises; a crit gives you more. ⛔ FAILURE IS NOT MODELLED HERE — a failed summon summons nothing, and
+  // returning a weak sheet for it would be the engine inventing a consolation prize.
+  const byDegree = { crit_success: num(cfg.critGap, 1), success: 0, partial: num(cfg.partialGap, -1) };
+  const shift = num(byDegree[String(degree)], 0);
+  return { gap: base + shift, base, shift, degree,
+    why: shift > 0 ? "a crit — it comes back stronger than the craft promises"
+      : shift < 0 ? "a partial — it comes back thinner than it should"
+      : "as the craft promises" };
+}
+
+/** ⛔ THE SHEET ITSELF. `sheetFor` unchanged underneath — this only decides the LEVEL and then stops.
+ *  ⚠️ NO CRAFTS, NO GROWTH, NO KIT, NO PERMANENCE. Aevi listed those exclusions and they are the whole
+ *  difference between a summon and a companion. */
+export function summonSheetFor(ability, casterLevel, { rank = 1, degree = "success", cfg = {}, entry = null } = {}) {
+  const g = summonGap(ability, { rank, degree, cfg });
+  const level = Math.max(1, num(casterLevel, 1) + g.gap);
+  const rec = { ...(entry || {}), id: entry?.id || ability?.id, name: entry?.name || ability?.name,
+    role: entry?.role || ability?.summon?.role || "" };
+  // `sheetFor` reads `leansOf` off the record, so a raised hand ends up physical and a driven shade
+  // physical-and-mental without this function knowing either of those words.
+  const sheet = sheetFor(rec, { cfg, levelOverride: level });
+  return {
+    ...sheet, level, summonedBy: ability?.id || null, gap: g,
+    count: Math.max(1, num(ability?.summon?.count, 1)),
+    duration: ability?.summon?.duration ?? null,
+    contributions: ability?.summon?.contributions || null,
+  };
+}
+

@@ -87,6 +87,57 @@ export function commandSlots(character, { cfg = {}, renownBand = null } = {}) {
       : `you lead ${slots}: yourself${extra ? " and " + extra + " more" : ", and nobody else yet"}` };
 }
 
+/** ⛔ CCODE-272 / ERIK — WHO FILLS THE SLOTS IS A PLAYER CHOICE, AND IT IS SWAPPABLE.
+ *
+ *  *"Named companions folded into the aggregate still feel like people... it's just that you only have so
+ *  much focus... if you want to have them be turn by turned you just swap them out with someone else — so
+ *  this needs to be a UI pick."*
+ *
+ *  ⛔ THAT ANSWERS THE QUESTION NO SIMULATION COULD. I asked whether folding Veth into the aggregate makes
+ *  her feel like equipment; the answer is that it does not, BECAUSE THE FOLD IS REVERSIBLE AND CHOSEN. A
+ *  companion who is not narrated this round is one you decided not to bring forward, which is a statement
+ *  about your attention rather than about her.
+ *
+ *  ⚠️ SO THE ENGINE OWES A STABLE, HONEST ANSWER TO "who is forward", and the UI owes the picking. This
+ *  returns both halves: who acts, and who is present-but-not-narrated — because the second list is the one
+ *  a player needs to see to know what they gave up.
+ *
+ *  `chosen` is the player's pick, in order. ⛔ INVALID PICKS ARE DROPPED, NOT HONOURED: someone who has
+ *  withdrawn, gone down, or is not on the roster cannot be brought forward, and silently keeping them would
+ *  spend a slot on nobody. */
+export function bringForward(allies = [], { chosen = null, slots = 1 } = {}) {
+  const live = (allies || []).filter(a => a && a.present !== false && !a.downed);
+  const n = Math.max(1, num(slots, 1));
+  const byId = new Map(live.map(a => [a.id, a]));
+  const out = [];
+  // ⚠️ THE PLAYER IS ALWAYS FORWARD AND DOES NOT SPEND A PICK. They are the one whose attention this models.
+  const you = live.find(a => a.isPlayer || a.kind === "player");
+  if (you) out.push(you);
+  for (const id of (chosen || [])) {
+    if (out.length >= n) break;
+    const a = byId.get(id);
+    if (a && !out.includes(a)) out.push(a);
+  }
+  // ⛔ FILL FROM THOSE WHO CAN ACT, not from the roster order. An unfilled slot handed to someone who cannot
+  // swing is a slot wasted on a beat that will say "they do nothing".
+  if (out.length < n) {
+    for (const a of live) {
+      if (out.length >= n) break;
+      if (!out.includes(a) && a.canAct !== false) out.push(a);
+    }
+  }
+  const forward = out.slice(0, n);
+  const folded = live.filter(a => !forward.includes(a));
+  const withdrawn = (allies || []).filter(a => a && a.present === false);
+  return {
+    forward, folded, withdrawn,
+    // ⚠️ NAMED, because "two others are helping" is a number and "Veth and Pell are in it" is a party.
+    why: folded.length
+      ? `${forward.map(a => a.name).join(", ")} act; ${folded.map(a => a.name).join(", ")} are in the melee`
+      : `${forward.map(a => a.name).join(", ")} act`,
+  };
+}
+
 /** ⛔ HOW MANY GET A REAL TURN. In `melee`, Erik's shape: you, plus the ones you bring forward. Everyone
  *  else is IN the fight — they are simply not narrated blow by blow.
  *  ⚠️ `namedLimit` NOW COMES FROM `commandSlots` WHERE A CHARACTER IS AVAILABLE. It stays a parameter so the

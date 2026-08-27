@@ -20026,6 +20026,99 @@ await (async () => {
       ML271.commandSlots({ level: 1, attributes: { social: 9 } }).slots === 2);
   }
 
+  // 5av · CCODE-272/273 — ERIK'S RULINGS: withdrawing, the forward pick, and a summon the roll shapes.
+  {
+    const CB272 = await import("../engine/combatants.js");
+    const ML272 = await import("../engine/melee.js");
+    const NS272 = await import("../engine/npcsheet.js");
+
+    // ═══ ① SOME OF THEM GET OUT OF THE FIGHT ENTIRELY ═══
+    // ⛔ ERIK: "we need to make a way to allow for certain entities/party members to avoid a combat
+    // altogether. Marrow might take flight and stay above the fray, or Calvar might dive for cover."
+    // ⚠️ THIS IS A THIRD STATE. Not `canStrike: false` — that one is still standing there being swung at,
+    // which is the whole reason interception exists. Not `downed`. Present in the scene, out of the exchange.
+    check("CCODE-272: `withdraws` authors HOW, because the manner is the point — Marrow goes UP, Calvar DOWN",
+      CB272.withdrawalOf({ withdraws: "takes to the air" })?.manner === "takes to the air"
+      && CB272.withdrawalOf({ withdraws: { manner: "dives for cover", auto: true } })?.auto === true
+      && CB272.withdrawalOf({}) === null);
+    {
+      const ch = { id: "p", name: "You", companions: [{ id: "m" }, { id: "s" }] };
+      const comps = { m: { id: "m", name: "Marrow", withdraws: { manner: "takes to the air", auto: true } },
+                      s: { id: "s", name: "Sprig" } };
+      const names = CB272.targetableAllies(ch, { companions: comps }).map(a => a.name);
+      check("CCODE-272: a withdrawn ally is NOT a target — nothing swings at someone in the air",
+        !names.includes("Marrow") && names.includes("Sprig") && names.includes("You"));
+      // ⛔ ONE FIELD, EVERY CONSUMER. `present` is what chooseTarget, targetableAllies and the interception
+      // chooser already filter on — a parallel `withdrawn` flag would have needed adding to each, and the
+      // one that got missed would be the one that swung at someone who had left.
+      const TG272 = await import("../engine/targeting.js");
+      const roster = CB272.alliesOf(ch, { companions: comps });
+      check("CCODE-272: …and the foe's own chooser honours it without knowing the word 'withdraw'",
+        TG272.chooseTarget(roster, { policy: "weakest" })?.target?.name !== "Marrow");
+    }
+    // ⚠️ CAPABILITY, NOT AUTOMATIC — an entity that always withdrew would never be at risk and never need
+    // protecting; one that never could is a hostage.
+    check("CCODE-272: a companion who CAN withdraw but has not is still present and still targetable",
+      CB272.alliesOf({ id: "p", companions: [{ id: "m" }] },
+        { companions: { m: { id: "m", name: "M", withdraws: { manner: "hides" } } } })
+        .find(a => a.id === "m")?.present === true);
+
+    // ═══ ② WHO IS FORWARD IS A PLAYER PICK, AND IT IS SWAPPABLE ═══
+    // ⛔ ERIK, answering the question no simulation could: "Named companions folded into the aggregate still
+    // feel like people... you only have so much focus... if you want to have them be turn by turned you just
+    // swap them out with someone else — so this needs to be a UI pick."
+    {
+      const roster = [
+        { id: "player", name: "You", isPlayer: true, present: true, canAct: true },
+        { id: "a", name: "Ana", present: true, canAct: true },
+        { id: "b", name: "Bel", present: true, canAct: true },
+        { id: "c", name: "Cor", present: false, withdrawal: { manner: "hides" } },
+      ];
+      const def = ML272.bringForward(roster, { slots: 2 });
+      check("CCODE-272: the player is always forward and does not spend a pick",
+        def.forward[0]?.isPlayer === true && def.forward.length === 2);
+      const picked = ML272.bringForward(roster, { slots: 2, chosen: ["b"] });
+      check("CCODE-272: …and the pick decides who joins them — swapping is the whole mechanic",
+        picked.forward.map(a => a.id).join(",") === "player,b");
+      check("CCODE-272: those not brought forward are NAMED, not counted — a party, not a number",
+        picked.folded.map(a => a.name).join(",") === "Ana" && /Ana/.test(picked.why));
+      // ⛔ AN INVALID PICK IS DROPPED, NOT HONOURED — spending a slot on someone who has withdrawn would
+      // buy a beat that says "they do nothing".
+      check("CCODE-272: picking someone who has withdrawn spends no slot",
+        !ML272.bringForward(roster, { slots: 2, chosen: ["c"] }).forward.some(a => a.id === "c"));
+      check("CCODE-272: …and the withdrawn are reported separately, so the player sees what left",
+        def.withdrawn.map(a => a.id).join(",") === "c");
+    }
+
+    // ═══ ③ A SUMMON THE ROLL SHAPES ═══
+    // ⛔ ERIK on Aevi's rising tierGap: "fine, but i would also tie it to how well you succeeded at the
+    // skill and if you crit." ⚠️ THAT CHANGES WHAT THE FIELD MEANS — an authored gap was a promise about the
+    // craft; now it is a FLOOR the roll can beat, and a shade worse than its maker is a thing that HAPPENED.
+    {
+      const shade = { id: "driven_shade", name: "Driven Shade",
+        summon: { tierGap: [-1, 0, 1], count: 1, contributions: ["MARTIAL", "KNOW"] } };
+      const gap = (rank, degree) => NS272.summonGap(shade, { rank, degree }).gap;
+      check("CCODE-273: the authored ladder is read per rank — Aevi's −1 → 0 → +1",
+        gap(1, "success") === -1 && gap(2, "success") === 0 && gap(3, "success") === 1);
+      check("CCODE-273: a crit beats the craft's promise; a partial falls short of it",
+        gap(3, "crit_success") === 2 && gap(3, "partial") === 0 && gap(1, "partial") === -2);
+      // ⛔ AND IT REACHES THE SHEET, or the ruling is a number nobody reads.
+      check("CCODE-273: the caster's level sets the summon's, shifted by the gap",
+        NS272.summonSheetFor(shade, 5, { rank: 3, degree: "crit_success" }).level === 7
+        && NS272.summonSheetFor(shade, 5, { rank: 1, degree: "partial" }).level === 3);
+      // ⚠️ THE LITE PART, EXPLICITLY — Aevi listed the exclusions and they are the whole difference between
+      // a summon and a companion.
+      const sh = NS272.summonSheetFor(shade, 5, { rank: 2 });
+      check("CCODE-273: a summon has no growth arc, no inventory and no permanence",
+        sh.crafts === undefined && sh.kit === undefined && sh.growth === undefined && sh.permanent === undefined);
+      // ⛔ NON-VACUITY: sheetFor must actually have honoured the override, not just been handed one.
+      check("CCODE-273: …and the level really came from the caster, not from the record (floor)",
+        NS272.summonSheetFor(shade, 20, { rank: 2 }).level === 20
+        && NS272.summonSheetFor(shade, 3, { rank: 2 }).level === 3);
+    }
+  }
+
+
   // 3 · ⛔ AND NOTHING REPLACES A PICTURE THE PLAYER DID NOT ASK ABOUT. The queue verifies; it does not
   // draw. A second draw now costs a click, and the first one stays as a version rather than being overwritten.
   {

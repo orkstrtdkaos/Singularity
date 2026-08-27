@@ -194,6 +194,29 @@ export function presenceSheet(record, { level = 1, sb = null } = {}) {
  *
  *  ⚠️ THE PLAYER IS ALWAYS FIRST AND ALWAYS PARTICIPATES. Everyone else is present by default and
  *  participates only where the content says so. */
+/** ⛔ CCODE-272 / ERIK — SOME OF THEM GET OUT OF THE FIGHT ENTIRELY.
+ *
+ *  *"we need to make a way to allow for certain entities/party members to avoid a combat altogether. Marrow
+ *  might take flight and stay above the fray for example, or Calvar might dive for cover and hide."*
+ *
+ *  ⚠️ THIS IS NOT `canStrike: false` AND IT IS NOT `downed`. A companion who cannot swing is still
+ *  STANDING THERE being swung at — that is the whole reason interception exists. Withdrawing is the third
+ *  thing: present in the scene, out of the exchange, and NOT A TARGET.
+ *
+ *  ⛔ AND IT IS CHARACTERISTIC, NOT GENERIC. Erik named the manner for each of them and the manner is the
+ *  point: Marrow goes UP, Calvar goes DOWN. A shared "hides" would flatten two different creatures into one
+ *  behaviour and lose the only interesting part, so `withdraws` authors HOW.
+ *
+ *  ⚠️ CAPABILITY, NOT AUTOMATIC. An entity that always withdrew would never be at risk and never need
+ *  protecting; one that cannot is a hostage. `auto: true` is for something with no choice about it — a thing
+ *  that bolts — and absent means it is a decision taken in the round (`record.withdrawn`). */
+export function withdrawalOf(record) {
+  const w = record?.withdraws;
+  if (!w) return null;
+  if (typeof w === "string") return { manner: w, auto: false };
+  return { manner: w.manner || "gets clear", auto: w.auto === true, ...(w.why ? { why: w.why } : {}) };
+}
+
 export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = null, company = null, stageOf = null } = {}) {
   // ⚠️ CCODE-265: `stageOf` rides through to `contributionsOf` or the override is reader-only — the exact
   // defect the override exists to fix, reproduced one level up.
@@ -225,7 +248,13 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
     const contrib = contributionsOf(rec, opts);
     out.push({
       id: def.id, name: def.name || def.id, kind: "companion",
-      present: true, canAct: contrib.length > 0, contributions: contrib,
+      // ⛔ CCODE-272: WITHDRAWN READS AS NOT PRESENT, deliberately, because `chooseTarget`,
+      // `targetableAllies` and the interception chooser ALL already filter on `present` — so one field makes
+      // every consumer honour it at once. A parallel `withdrawn` flag would have had to be added to each of
+      // them, and the one that got missed would be the one that swung at someone in the air.
+      present: !(withdrawalOf(rec)?.auto === true) && rec.withdrawn !== true,
+      ...(withdrawalOf(rec) ? { withdrawal: withdrawalOf(rec) } : {}),
+      canAct: contrib.length > 0, contributions: contrib,
       record: rec, sheet: presenceSheet(rec, { level }), downed: rec.downed || null,
     });
   }
@@ -240,7 +269,13 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
     const contrib = contributionsOf(rec, opts);
     out.push({
       id: e.npcId, name: npc.name || e.npcId, kind: "company", roles: e.roles || [],
-      present: true, canAct: contrib.length > 0, contributions: contrib,
+      // ⛔ CCODE-272: WITHDRAWN READS AS NOT PRESENT, deliberately, because `chooseTarget`,
+      // `targetableAllies` and the interception chooser ALL already filter on `present` — so one field makes
+      // every consumer honour it at once. A parallel `withdrawn` flag would have had to be added to each of
+      // them, and the one that got missed would be the one that swung at someone in the air.
+      present: !(withdrawalOf(rec)?.auto === true) && rec.withdrawn !== true,
+      ...(withdrawalOf(rec) ? { withdrawal: withdrawalOf(rec) } : {}),
+      canAct: contrib.length > 0, contributions: contrib,
       record: rec, sheet: presenceSheet(rec, { level }), downed: e.downed || null,
     });
   }

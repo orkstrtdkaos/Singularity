@@ -3624,7 +3624,21 @@ full of crews nobody remembers setting"*) · **wears rather than ages** · **ans
 
 ⚠️ **HALF OF THIS IS ALREADY BUILT.** `skill_battle_system.json` carries affinities `immune · resist ·
 vulnerable · ABSORB`, and its note reads: ***"ABSORB reports a NEGATIVE damage amount — the blow HEALS its
-target."*** **An undead authored `decay: absorb` is one line and works today: rot mends it.**
+target."*** ⛔ **BUT `decay: absorb` IS NOT AN UNDEAD TRAIT AND MUST NOT BE AUTHORED AS ONE.** ⚠️ **Erik 2026-08-24:
+*"not all undead would absorb Wither — just the ones who would be STRONGER WITHOUT THE COCOON, or the ones
+who have that aura/ability."***
+
+⛔ **SO `absorb` IS §48.8's *FREED* OUTCOME WRITTEN AS ARITHMETIC**, and the split falls out of the cocoon
+phases:
+
+| phase | decay affinity | why |
+|---|---|---|
+| **set** · **breaching** | ⚠️ **normal, or VULNERABLE** | ⛔ **rotting the shell is destroying the thing** |
+| ⛔ **emerged / near-emergence** | ⛔ **`absorb`** | **the cocoon was the last thing holding it in** |
+| **an authored aura** | `absorb` | a specific creature's own trait, authored per sheet |
+
+⚠️ **MOST UNDEAD ARE HURT BY WITHER. THE ONES CLOSE TO COMING OUT ARE HELPED BY IT** — and a warden cannot
+tell which is which by looking, which is the whole tension of §48.8.
 
 ⛔ **THE INVERSE IS NOT BUILT.** Affinity applies to damage types and healing is not one. **Needed: `heal`
 applied to an undead delivers its magnitude as `decay`.** ⚠️ **A cleric mercy-healing an Afterling burns

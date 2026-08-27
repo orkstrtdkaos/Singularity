@@ -594,3 +594,24 @@ audit should be ruled together or they will contradict.**
 **Erik: *"it would be awesome if these undead actually could become NPCs and companions."*** ⛔ **The
 machinery exists — bond bands, stages, `downedEffect`, evolution.** ⚠️ **`greyhearth` is authored, ratified
 as the Grave-Caller foothill, and carries `abilities: 0`.** **The place to put them is empty and waiting.**
+
+### P11 · ⚠️ BRAID — WITHER AS GROUND PREPARATION (Erik, 2026-08-24)
+
+**Erik: *"it would be sick to have Wither able to be a GROUND PREP skill… but I think I'll leave that as a
+COMBO/BRAID with other wards."*** ⛔ **Ruled as a braid, not a rank — recorded so it is not quietly authored
+into `wither` later.**
+
+**THE IDEA:** `wither` r3 already takes ground — *"the terrain itself becomes unreliable underfoot."*
+⚠️ **A braid with a WARD craft turns that from an effect into a PREPARED POSITION:** rot a field before
+anyone stands in it, lay the ward into the rotted ground, and the ground itself becomes the working.
+
+**WHY IT IS A BRAID AND NOT A RANK:**
+- ⛔ **`wither` un-makes and a ward holds.** Neither can prepare ground alone — one only destroys, the other
+  only defends what is already there.
+- ⚠️ **It inverts the craft's own morality.** r3's `cannot` says the commonest use of Wither is *starving a
+  valley*. **A braid that makes ground a DEFENCE is the first constructive thing the craft has ever done.**
+- **And it pairs with the existing ward vocabulary** — a decay-typed ward laid into decayed ground is
+  thematically exact, and `death_ward` already wards `decay`.
+
+⚠️ **NEEDS: which ward craft, and whether the prepared ground persists without attention (like `kept_vigil`)
+or requires holding.** ⛔ **Erik's call.**

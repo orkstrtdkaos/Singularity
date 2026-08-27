@@ -113,11 +113,29 @@ in the game, and it is entirely prose.**
 5. ⚠️ **Consent.** `open_threshold` says *"they may come back IF THEY WILL."* ⛔ **Retrieval is not
    universally involuntary, and one tradition has already ruled that it asks.**
 
-### 5b — WHAT I AM **NOT** ASKING FOR
+### 5b — ⛔ ONE SET OF VERBS. THE PROSE CARRIES THE DIFFERENCE.
 
-⚠️ **Do not unify the five into one mechanic.** ⛔ **The whole value is that Ashwardens DRAG, Numinous
-INVITE, Threnody DELAYS, and Rootkin PAY A PRICE — same ladder, five answers.** **The engine owes the
-LADDER and the VERBS (`sink`, `seal`, `hold`, `slow`, `retrieve`); each tradition keeps its own reason.**
+**I wrote *"do not unify the five into one mechanic."* ⛔ ERIK CORRECTED IT: *"the verbs are for the game
+mechanics so they DO need to be combined and efficient. The prose of the skills keeps the distinctions."***
+
+⚠️ **THIS IS MY RECURRING ERROR INVERTED — I keep trying to encode distinction in MECHANISM when it belongs
+in PROSE.** Same as inventing a `kinds` axis, same as a per-craft `touchTier`, same as reading
+`operativeAxis` as closed. **Every time, the fix was fewer mechanical objects and more authored words.**
+
+⛔ **SO: ONE SHARED VERB SET, USED BY ALL FIVE TRADITIONS.**
+
+| verb | what it does | who calls it |
+|---|---|---|
+| `retrieve(target, rank)` | contest against current depth; success walks them up | ashwarden, rootkin, numinous |
+| `sink(target, rungs)` | ⛔ the failure of a retrieval | engine, on failure |
+| `seal(target)` | ⛔ terminal — depth 3, nothing reaches | engine, on failure at depth 2 |
+| `hold(target)` | stop entry to the ladder | ashwarden `kept_breath` |
+| `slow(target, factor)` | change the sink RATE | threnodist `names_of_the_lost` |
+| `holdOpen(target, ownerless)` | a standing way back | numinous `open_threshold` r3 |
+
+⚠️ **`root_that_holds` uses `retrieve` and says *"they come back whole and STARVING."* `calling_back` uses
+`retrieve` and says *"a failed reach SINKS them."*** ⛔ **SAME CALL, DIFFERENT SENTENCE — and the sentence
+is where the tradition lives.** **Six verbs total, not five subsystems.**
 
 ### 5c — ⚠️ AND THE THING ERIK SHOULD SEE BEFORE YOU PICK WHERE THE STATE LIVES
 

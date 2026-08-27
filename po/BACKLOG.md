@@ -270,3 +270,27 @@ bolster, `shared_grief` → `under_song`).
 
 ⚠️ **A tradition should be able to carry a party role by itself. Threnody could not narrate into a fight
 without borrowing** — every scene ran through the Ashwarden.
+
+## ⛔ SERAPHIC WANTS PRAYERS AND MIRACLES — INCLUDING RESURRECTION (Erik, 2026-08-24)
+
+**Erik: *"a note for Seraphs — I want their skills to include prayers and miracles (including
+resurrection)."***
+
+⚠️ **SERAPHIC IS ALREADY ON THE RETRIEVAL LADDER'S DOORSTEP AND IS NOT ON IT.** Five traditions answer the
+Threshold/Near Dark/Deep Dark/Sealed ladder — ashwarden, threnodist, numinous, rootkin, radiant_folk —
+⛔ **and the tradition whose craft IS structured nanite maintenance, and whose own agelessness is the reason
+`kept_vigil` works, has no answer at all.**
+
+**THE ANGLE THAT MAKES IT DISTINCT FROM THE OTHER FIVE:** ⚠️ **everyone else RETRIEVES — drags, invites,
+delays, pays. ⛔ A MIRACLE IS ASKED FOR AND GRANTED BY SOMETHING ELSE.** The Seraph is not the one doing it.
+That is a different relationship to the ladder than any tradition currently has, and it is the one that
+would make `retrieve` feel different without needing a different verb (per §5b).
+
+**Threads:**
+- ⛔ **PRAYER AS A CRAFT SHAPE** — an ask, not an act. What does a refused prayer look like mechanically?
+- **MIRACLES AS RARE AND NOT SELF-DIRECTED** — the Seraph does not choose when it works.
+- ⚠️ **Resurrection specifically:** the ladder's verbs (`retrieve`, `sink`, `seal`) already exist; what a
+  Seraph brings is WHO IS ASKED and WHAT IS OWED afterwards.
+- **And it pairs with the existing canon** — Seraphic craft is structured nanite, and `lore/power_systems.md`
+  already ties Seraphic agelessness to maintenance machinery. ⛔ **A resurrection that is maintenance
+  performed by something vast is a genuinely different fiction from a warden walking down a road.**

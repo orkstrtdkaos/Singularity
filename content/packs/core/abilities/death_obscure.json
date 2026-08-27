@@ -151,7 +151,7 @@
    ],
    "challengeTypes": [
     "SOCIAL",
-    "INVESTIGATION",
+    "INVESTIGATE",
     "STEALTH"
    ],
    "mechanic": {
@@ -221,7 +221,8 @@
      ]
     }
    ],
-   "_authored": "⛔ AEVI 2026-08-23, Death audit. Threnodist was 1 of 20 traditions with no obscure craft. ⚠️ CORRECTED SAME DAY (Erik): my first version made 'the grief must be REAL and YOURS' a HARD BOUND and justified it with 'a people who hold feeling is the only true knowing cannot hide behind a false one.' ⛔ THAT WAS OVER-AUTHORING — the tenet is an EPISTEMOLOGY (how a Threnodist knows) and I promoted it to a PROHIBITION on what one may do. ⚠️ It also foreclosed a braid Erik wants open: FALSECRAFT (veilwright `deceive`) × a Threnodist obscure is the false-feeling version of this craft, and my rule had made it illegal by fiat. The craft is `conceal` because THIS one opens a feeling rather than fabricating one — not because the tradition is incapable of the other."
+   "_authored": "⛔ AEVI 2026-08-23, Death audit. Threnodist was 1 of 20 traditions with no obscure craft. ⚠️ CORRECTED SAME DAY (Erik): my first version made 'the grief must be REAL and YOURS' a HARD BOUND and justified it with 'a people who hold feeling is the only true knowing cannot hide behind a false one.' ⛔ THAT WAS OVER-AUTHORING — the tenet is an EPISTEMOLOGY (how a Threnodist knows) and I promoted it to a PROHIBITION on what one may do. ⚠️ It also foreclosed a braid Erik wants open: FALSECRAFT (veilwright `deceive`) × a Threnodist obscure is the false-feeling version of this craft, and my rule had made it illegal by fiat. The craft is `conceal` because THIS one opens a feeling rather than fabricating one — not because the tradition is incapable of the other.",
+   "_challengeTypesNormalised_20260824": "⛔ I INTRODUCED NON-CANONICAL TYPES DURING THE DEATH WALKTHROUGH AND THE LINT CAUGHT ME. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND. ⚠️ I authored INVESTIGATION, ENDURANCE, INTELLECTUAL, HARDSHIP and COMBAT — plausible English, not the vocabulary. Seven of the eight crafts carrying them were mine, from this session. Normalised ['SOCIAL', 'INVESTIGATION', 'STEALTH'] -> ['SOCIAL', 'INVESTIGATE', 'STEALTH']."
   }
  ],
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",

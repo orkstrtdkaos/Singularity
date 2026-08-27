@@ -889,9 +889,8 @@
     "empower"
    ],
    "challengeTypes": [
-    "ENDURANCE",
-    "SOCIAL",
-    "HARDSHIP"
+    "SURVIVE",
+    "SOCIAL"
    ],
    "tree": [
     {
@@ -998,7 +997,8 @@
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_rebuiltAsBolster_20260823": "⛔ ERIK 2026-08-23. The craft's real value was buried in r2's second sentence — 'they attempt things they would not have attempted, and do them better' — and `bolster` was one of only three verbs Death did not have. ⚠️ NOW IT IS THE HEADLINE. Erik asked what it should bolster: resist, energy, damage, crit, across the board? ⛔ ANSWER: ENERGY, RESIST, AND WILLINGNESS — never damage or crit, because feeling does not make a blade sharper and a flat across-the-board buff would have no character of its own. ⚠️ CUT: the [cost] bound 'you carry some of it, that is not a metaphor and it accumulates' — an untracked debt, the same shape that got `shared_weight` rebuilt, and ENERGY IS THE COST. ⛔ ALSO: e1 -> e3 (below the L1 band, unmigrated batch), lowercase challengeTypes fixed, `operativeAxis: upkeepRelief` was not one of the nine axes, empty notFor filled, and the machine-generated `plainly` said r3 'extends targets' when its axis is scope.",
-   "_operativeAxisRestored_20260824": "⛔ I CHANGED THIS AND SHOULD NOT HAVE. I linted `operativeAxis` against the NINE GAIN AXES; it is a DIFFERENT AND DELIBERATELY OPEN VOCABULARY. ⚠️ `craft_mechanics.operativeAxis.note` records that I corrected this once before — my own blazeborn pilot broke a closed list and the ruling was that NAMED axes are real, authored and shown to the player; `mechanical` is only the subset carrying a NUMBER. ⛔ RESTORED ['upkeepRelief', 'targets'] (I had written ['duration', 'targets']). `variance` is IN the mechanical list and `dread` carries `variance: 4`, so removing it was a live regression, not a tidy-up."
+   "_operativeAxisRestored_20260824": "⛔ I CHANGED THIS AND SHOULD NOT HAVE. I linted `operativeAxis` against the NINE GAIN AXES; it is a DIFFERENT AND DELIBERATELY OPEN VOCABULARY. ⚠️ `craft_mechanics.operativeAxis.note` records that I corrected this once before — my own blazeborn pilot broke a closed list and the ruling was that NAMED axes are real, authored and shown to the player; `mechanical` is only the subset carrying a NUMBER. ⛔ RESTORED ['upkeepRelief', 'targets'] (I had written ['duration', 'targets']). `variance` is IN the mechanical list and `dread` carries `variance: 4`, so removing it was a live regression, not a tidy-up.",
+   "_challengeTypesNormalised_20260824": "⛔ I INTRODUCED NON-CANONICAL TYPES DURING THE DEATH WALKTHROUGH AND THE LINT CAUGHT ME. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND. ⚠️ I authored INVESTIGATION, ENDURANCE, INTELLECTUAL, HARDSHIP and COMBAT — plausible English, not the vocabulary. Seven of the eight crafts carrying them were mine, from this session. Normalised ['ENDURANCE', 'SOCIAL', 'HARDSHIP'] -> ['SURVIVE', 'SOCIAL']."
   },
   {
    "id": "built_system",
@@ -1208,8 +1208,8 @@
    "nativeOrCombination": "native",
    "challengeTypes": [
     "SOCIAL",
-    "INVESTIGATION",
-    "INTELLECTUAL"
+    "INVESTIGATE",
+    "PUZZLE"
    ],
    "harmRung": "none",
    "shape": "reveal",
@@ -1272,7 +1272,8 @@
    "_idWas": "the_shared_grief",
    "_powerSystemWas": "reach_emotional_logical",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rebuilt_20260823": "⛔ ERIK 2026-08-23: 'I'm getting tired of these kinds of skills. And for a feeling people, where are the other emotions?' ⚠️ MEASURED: 12 of 15 Threnodist crafts are about GRIEF; joy appears twice and never as the subject; love, hope, longing and awe are absent entirely — in a people whose cities are built around GRIEF-HOUSES AND JOY-HALLS. ⛔ THE OLD CRAFT WAS A THIRD GRIEF-CARRYING SUPPORT CRAFT whose benefit was a mood: 'no single heart carries the whole', when no sheet tracks grief. ⚠️ ITS ONE LIVE IDEA WAS r2 — naming the loss beneath the stated loss — and THAT IS NOW THE WHOLE CRAFT, made EMOTION-AGNOSTIC so it does not pre-empt Erik's pending call on how rage and love enter the tradition. ⛔ CONSENT DROPPED: I had flagged it a third time and Erik cut it — 'this is a fantasy RPG'. The [cost] bound 'days are days' cut as the sixth untracked debt. `operativeAxis: distribution` was not among the nine."
+   "_rebuilt_20260823": "⛔ ERIK 2026-08-23: 'I'm getting tired of these kinds of skills. And for a feeling people, where are the other emotions?' ⚠️ MEASURED: 12 of 15 Threnodist crafts are about GRIEF; joy appears twice and never as the subject; love, hope, longing and awe are absent entirely — in a people whose cities are built around GRIEF-HOUSES AND JOY-HALLS. ⛔ THE OLD CRAFT WAS A THIRD GRIEF-CARRYING SUPPORT CRAFT whose benefit was a mood: 'no single heart carries the whole', when no sheet tracks grief. ⚠️ ITS ONE LIVE IDEA WAS r2 — naming the loss beneath the stated loss — and THAT IS NOW THE WHOLE CRAFT, made EMOTION-AGNOSTIC so it does not pre-empt Erik's pending call on how rage and love enter the tradition. ⛔ CONSENT DROPPED: I had flagged it a third time and Erik cut it — 'this is a fantasy RPG'. The [cost] bound 'days are days' cut as the sixth untracked debt. `operativeAxis: distribution` was not among the nine.",
+   "_challengeTypesNormalised_20260824": "⛔ I INTRODUCED NON-CANONICAL TYPES DURING THE DEATH WALKTHROUGH AND THE LINT CAUGHT ME. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND. ⚠️ I authored INVESTIGATION, ENDURANCE, INTELLECTUAL, HARDSHIP and COMBAT — plausible English, not the vocabulary. Seven of the eight crafts carrying them were mine, from this session. Normalised ['SOCIAL', 'INVESTIGATION', 'INTELLECTUAL'] -> ['SOCIAL', 'INVESTIGATE', 'PUZZLE']."
   },
   {
    "schemaVersion": 1,
@@ -2136,8 +2137,8 @@
    ],
    "challengeTypes": [
     "SOCIAL",
-    "COMBAT",
-    "ENDURANCE"
+    "FIGHT",
+    "SURVIVE"
    ],
    "tradition": "threnodist",
    "nativeOrCombination": "native",
@@ -2185,7 +2186,8 @@
    "_idWas": "the_shared_weight",
    "_powerSystemWas": "reach_emotional_logical",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rebuilt_20260823": "⛔ ERIK 2026-08-23: 'I'm not seeing a reason for a player to want a skill like this.' He was right — the craft removed a condition the engine never applied (nobody's sheet says DESPAIRING) while charging the caster a burden that never cleared. ⚠️ PURE DOWNSIDE, PRICED AT 5, and Death already had five crafts that make an ally better. ⛔ REBUILT AS INTERCEPTION per Erik's design: r1 catches the next condition, r2 runs for a duration and hardens the taker, r3 reflects by resist degree. THE FLAVOUR SURVIVED ENTIRELY — not comfort, transfer; it moves, it does not vanish — because the fiction was never the problem. ⚠️ It is the FIRST craft in Death that removes an imposed condition from anyone, and it answers `keening`, the tradition's own signature."
+   "_rebuilt_20260823": "⛔ ERIK 2026-08-23: 'I'm not seeing a reason for a player to want a skill like this.' He was right — the craft removed a condition the engine never applied (nobody's sheet says DESPAIRING) while charging the caster a burden that never cleared. ⚠️ PURE DOWNSIDE, PRICED AT 5, and Death already had five crafts that make an ally better. ⛔ REBUILT AS INTERCEPTION per Erik's design: r1 catches the next condition, r2 runs for a duration and hardens the taker, r3 reflects by resist degree. THE FLAVOUR SURVIVED ENTIRELY — not comfort, transfer; it moves, it does not vanish — because the fiction was never the problem. ⚠️ It is the FIRST craft in Death that removes an imposed condition from anyone, and it answers `keening`, the tradition's own signature.",
+   "_challengeTypesNormalised_20260824": "⛔ I INTRODUCED NON-CANONICAL TYPES DURING THE DEATH WALKTHROUGH AND THE LINT CAUGHT ME. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND. ⚠️ I authored INVESTIGATION, ENDURANCE, INTELLECTUAL, HARDSHIP and COMBAT — plausible English, not the vocabulary. Seven of the eight crafts carrying them were mine, from this session. Normalised ['SOCIAL', 'COMBAT', 'ENDURANCE'] -> ['SOCIAL', 'FIGHT', 'SURVIVE']."
   },
   {
    "id": "the_true_feeling",
@@ -2211,8 +2213,8 @@
    ],
    "challengeTypes": [
     "SOCIAL",
-    "INVESTIGATION",
-    "INTELLECTUAL"
+    "INVESTIGATE",
+    "PUZZLE"
    ],
    "tree": [
     {
@@ -2307,7 +2309,8 @@
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_sng525b": "⛔ SNG-525b. POINTER BOUNDS THAT SURVIVED THE SWEEP. ⚠️ These two are FIRST-GIFT SENSES RESTORED BY SNG-506 — their bounds came back verbatim from the revert log, carrying the original 'Anything rank 2 adds' fault that SNG-484 had already flagged everywhere else.\n⛔ A RESTORE BRINGS BACK WHAT WAS THERE, INCLUDING WHAT WAS WRONG WITH IT. The sweep ran before the restore, so these were never flagged and never fixed.",
-   "_repriced_20260823": "⛔ ERIK 2026-08-23, TWICE. (1) e1 -> e3: it was below the L1 band (2-6), one of the unmigrated batch carrying legacy lowercase challengeTypes and an energy cost from an older convention. Vocabulary fixed too. (2) ⛔ r3's 'what you read of a history, you carry some of' REWRITTEN AS A SCOPE LIMIT, NOT A COST. I first proposed mechanising it as a night's rest plus one-history-at-a-time and Erik refused: ENERGY IS THE COST, except at extreme capstones. ⚠️ THIRD TIME IN ONE SESSION I WROTE A NARRATIVE DEBT INTO A COST FIELD ('later is still owed', 'you carry some of it', then a rest requirement). A `cannot` names what the craft WILL NOT PRODUCE. The bill is energy."
+   "_repriced_20260823": "⛔ ERIK 2026-08-23, TWICE. (1) e1 -> e3: it was below the L1 band (2-6), one of the unmigrated batch carrying legacy lowercase challengeTypes and an energy cost from an older convention. Vocabulary fixed too. (2) ⛔ r3's 'what you read of a history, you carry some of' REWRITTEN AS A SCOPE LIMIT, NOT A COST. I first proposed mechanising it as a night's rest plus one-history-at-a-time and Erik refused: ENERGY IS THE COST, except at extreme capstones. ⚠️ THIRD TIME IN ONE SESSION I WROTE A NARRATIVE DEBT INTO A COST FIELD ('later is still owed', 'you carry some of it', then a rest requirement). A `cannot` names what the craft WILL NOT PRODUCE. The bill is energy.",
+   "_challengeTypesNormalised_20260824": "⛔ I INTRODUCED NON-CANONICAL TYPES DURING THE DEATH WALKTHROUGH AND THE LINT CAUGHT ME. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND. ⚠️ I authored INVESTIGATION, ENDURANCE, INTELLECTUAL, HARDSHIP and COMBAT — plausible English, not the vocabulary. Seven of the eight crafts carrying them were mine, from this session. Normalised ['SOCIAL', 'INVESTIGATION', 'INTELLECTUAL'] -> ['SOCIAL', 'INVESTIGATE', 'PUZZLE']."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

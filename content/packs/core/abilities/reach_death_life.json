@@ -1669,7 +1669,8 @@
    ],
    "gated": "learned",
    "challengeTypes": [
-    "FIGHT"
+    "FIGHT",
+    "SOCIAL"
    ],
    "harmRung": "lethal",
    "nativeOrCombination": "native",
@@ -1677,8 +1678,7 @@
    "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
    "shape": "damage",
    "operativeAxis": [
-    "damage",
-    "special"
+    "damage"
    ],
    "mechanic": {
     "dice": {
@@ -1723,7 +1723,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight action that deals damage. It rolls 5d6+6 It affects 1 target Limit: iT Costs Almost Everything You Have.",
+   "plainly": "A single-rank capstone. 5d6+6 to one living thing, and it ends — no wound, no struggle, no roll to survive it. It takes your whole remaining energy and leaves you at zero until a full night's rest, and it cannot be conserved, surged, aimed at anything without a thread, or undone.",
    "upkeep": {
     "prepHours": 0,
     "note": "⚠️ COOLDOWN REMOVED (Erik). It is a T5 ashwarden capstone — the difficulty of OBTAINING it is already the limit, and very few people in the world can use it at all. A weeks-long cooldown on top of that is a second gate behind a locked door. Its cost is what it costs the wielder, not a timer."
@@ -1731,7 +1731,8 @@
    "_descriptionWas": "The Fates' shears. One life, one cut, done — not a wound, a CESSATION. This is the deepest thing the Ashwardens hold and they teach it to almost nobody, because the argument against it has never been answered and they keep doing it anyway.",
    "_lethal": "⛔ SNG-514. ERIK: 'The Cut Thread DOES SLAY.' ⚠️ I ADDED AN `imposes` BLOCK SAYING `incapacitated` TO AN ABILITY WHOSE OWN TEXT READS 'END ONE LIVING THING — IT SIMPLY STOPS' AND WHOSE `harmRung` HAS ALWAYS BEEN `lethal`. The craft was never confused; I overwrote it.\n⛔ HOW IT KILLS: `shape: damage`, 5d6+6, `harmRung: lethal`. It kills the way lethal damage kills — through the damage path, not by imposing a condition. ⚠️ `mechanic.imposes` IS FOR CONDITIONS SHORT OF DEATH, which is why the engine refuses `slain` THERE. THAT REFUSAL IS NOT A RULE THAT CRAFTS CANNOT KILL. I read a constraint on one field as a constraint on the game.",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_reviewed_20260824": "⛔ SINGLE-RANK BY DESIGN (Erik confirmed 2026-08-24) — no r2/r3, and the capability menu correctly shows one tier. ⚠️ `operativeAxis` carried 'special', which is a PLACEHOLDER and not an axis in either register (3 crafts use it: this, Revealing Burn, Last Light) — dropped rather than invented into. ⛔ `challengeTypes` was FIGHT only, on THE MOST SOCIALLY CONSEQUENTIAL ACT IN THE GAME — its own notFor says 'it is done, it is WITNESSED, and it is yours'. SOCIAL added. ⚠️ `plainly` was machine-garbage ('It rolls 5d6+6 It affects 1 target Limit: iT Costs Almost Everything You Have'). ✅ EVERYTHING ELSE LEFT ALONE: the energy-to-zero bound is the ONE legitimate extreme-capstone cost in Death and it is still ENERGY — it is the model for the five narrative debts I wrongly wrote elsewhere. Refusing BOTH intensities is rare and correct."
   },
   {
    "id": "grey_road",
@@ -3676,8 +3677,8 @@
     }
    ],
    "challengeTypes": [
-    "ENDURANCE",
-    "INVESTIGATION"
+    "SURVIVE",
+    "INVESTIGATE"
    ],
    "tradition": "ashwarden",
    "nativeOrCombination": "native",
@@ -3723,7 +3724,8 @@
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_correctedByErik_20260823": "⛔ 2026-08-23. (1) harmRung was `incapacitating` over three `none` ranks — the FOURTH instance of that inversion in Death. (2) ⛔ r2's 'you are spent afterward in a way sleep does not entirely fix' CUT: a narrative debt in a cost field, the fourth I have written this session. ENERGY IS THE COST. What replaced it is a real limit — it is still ONE thing, only a bigger one, and nothing you hold gets closer to being fixed. (3) ⚠️ r2 and r3 declared no axes; reading `plainly` and `mechanic` showed r2 was not buying TIME at all (12 hours is the base) — it buys SCOPE. That only surfaced because Erik asked to see the full record rather than my summary.",
    "_autonomous_20260823": "⛔ ERIK 2026-08-23: the craft no longer requires attendance. Every 'while you hold it' / 'you can do almost nothing else' clause is gone from description, hints, bounds and all three ranks. ⚠️ `intensity.conserve` was 'hold a moment longer', which assumed a person present — now 'let it lapse a little early and keep the difference'. ⛔ ALSO: challengeTypes were PUZZLE/SOCIAL for a craft about a wound or a beam — now ENDURANCE/INVESTIGATION; and `plainly` restated the attendance model and has been corrected.",
-   "_sourceChanged_20260823": "⛔ ERIK 2026-08-23: 'the maintenance nanites (the same ones seraphs use to be immortal) are used to hold the wound and body at the state it's in, just like the hull. I don't think there's any canon problem with death having ordered nanite powered skills.' ⚠️ ASHWARDEN'S MIX HAD NO NANITE AT ALL (metaphysical .85 / precursor .15) — this craft is the tradition's first ordered-nanite carrier and the mix is updated to admit it. ⛔ A DISTRIBUTION HAS A MEAN AND DEVIATIONS (Erik, earlier today); this is a deviation, and `perAbilityOverrides` is what it is for."
+   "_sourceChanged_20260823": "⛔ ERIK 2026-08-23: 'the maintenance nanites (the same ones seraphs use to be immortal) are used to hold the wound and body at the state it's in, just like the hull. I don't think there's any canon problem with death having ordered nanite powered skills.' ⚠️ ASHWARDEN'S MIX HAD NO NANITE AT ALL (metaphysical .85 / precursor .15) — this craft is the tradition's first ordered-nanite carrier and the mix is updated to admit it. ⛔ A DISTRIBUTION HAS A MEAN AND DEVIATIONS (Erik, earlier today); this is a deviation, and `perAbilityOverrides` is what it is for.",
+   "_challengeTypesNormalised_20260824": "⛔ I INTRODUCED NON-CANONICAL TYPES DURING THE DEATH WALKTHROUGH AND THE LINT CAUGHT ME. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND. ⚠️ I authored INVESTIGATION, ENDURANCE, INTELLECTUAL, HARDSHIP and COMBAT — plausible English, not the vocabulary. Seven of the eight crafts carrying them were mine, from this session. Normalised ['ENDURANCE', 'INVESTIGATION'] -> ['SURVIVE', 'INVESTIGATE']."
   },
   {
    "id": "true_account",
@@ -3796,8 +3798,8 @@
    ],
    "challengeTypes": [
     "SOCIAL",
-    "INVESTIGATION",
-    "INTELLECTUAL"
+    "INVESTIGATE",
+    "PUZZLE"
    ],
    "tradition": "ashwarden",
    "nativeOrCombination": "native",
@@ -3848,7 +3850,8 @@
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ DEATH'S SENSE — what is failing and how long it has\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_operativeAxisRestored_20260824": "⛔ I CHANGED THIS AND SHOULD NOT HAVE. I linted `operativeAxis` against the NINE GAIN AXES; it is a DIFFERENT AND DELIBERATELY OPEN VOCABULARY. ⚠️ `craft_mechanics.operativeAxis.note` records that I corrected this once before — my own blazeborn pilot broke a closed list and the ruling was that NAMED axes are real, authored and shown to the player; `mechanical` is only the subset carrying a NUMBER. ⛔ RESTORED ['precision', 'scope'] (I had written ['quality', 'scope']). `variance` is IN the mechanical list and `dread` carries `variance: 4`, so removing it was a live regression, not a tidy-up."
+   "_operativeAxisRestored_20260824": "⛔ I CHANGED THIS AND SHOULD NOT HAVE. I linted `operativeAxis` against the NINE GAIN AXES; it is a DIFFERENT AND DELIBERATELY OPEN VOCABULARY. ⚠️ `craft_mechanics.operativeAxis.note` records that I corrected this once before — my own blazeborn pilot broke a closed list and the ruling was that NAMED axes are real, authored and shown to the player; `mechanical` is only the subset carrying a NUMBER. ⛔ RESTORED ['precision', 'scope'] (I had written ['quality', 'scope']). `variance` is IN the mechanical list and `dread` carries `variance: 4`, so removing it was a live regression, not a tidy-up.",
+   "_challengeTypesNormalised_20260824": "⛔ I INTRODUCED NON-CANONICAL TYPES DURING THE DEATH WALKTHROUGH AND THE LINT CAUGHT ME. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND. ⚠️ I authored INVESTIGATION, ENDURANCE, INTELLECTUAL, HARDSHIP and COMBAT — plausible English, not the vocabulary. Seven of the eight crafts carrying them were mine, from this session. Normalised ['SOCIAL', 'INVESTIGATION', 'INTELLECTUAL'] -> ['SOCIAL', 'INVESTIGATE', 'PUZZLE']."
   },
   {
    "id": "deathsense",

@@ -444,6 +444,77 @@ console.log("\n── §0b · Erik's log requirement, enforced ──");
   check("§0b: the log names the reachOf clamp shipped for it", /reachOf/.test(doc));
 }
 
+/* ══════════ FR — docs/FIELD_REFERENCE.md, ALSO EXECUTED ══════════ */
+console.log("\n── FR · the field reference — measured claims stay measured ──");
+{
+  // ⛔ THE SAME CONTRACT AS THE REST OF THIS FILE: a reference that drifts is worse than none, because it
+  // is believed. Every number below is re-measured here rather than trusted from the prose.
+  const fr = rd("docs/FIELD_REFERENCE.md");
+  check("FR: the reference exists and is substantial", fr.length > 8000, `${fr.length} chars`);
+
+  // ⛔ THE ATLAS TABLE IS GENERATED — assert it is FRESH, not merely present. A stale generated table is a
+  // stored copy of a derived value, which is the exact failure the reference is written to prevent.
+  const { execFileSync } = await import("node:child_process");
+  const live = execFileSync(process.execPath, [join(root, "scripts/field_atlas.mjs"), "--md"], { encoding: "utf8" }).trim();
+  const embedded = fr.slice(fr.indexOf("<!-- ATLAS:BEGIN -->") + 20, fr.indexOf("<!-- ATLAS:END -->")).trim();
+  check("FR: ⛔ the embedded atlas is FRESH — regenerating produces the same table",
+    embedded === live, "run: node scripts/atlas_inject.mjs");
+
+  // ⚠️ AND THE BUCKET COUNTS IN THE PROSE MUST MATCH THE TABLE, since a reader trusts the summary.
+  // ⚠️ COUNT BY CELL, NOT BY REGEX ACROSS AN EMOJI. My first form matched `| ✅ READ |` with a two-dot
+  // wildcard — an emoji is not two characters, so it silently counted ZERO, and `0 === 0` passed. ⛔ A
+  // count of zero agreeing with a count of zero is the vacuous-gate shape, committed inside a gate whose
+  // whole job is guarding against vacuity. The `n > 0` floor below is the fix that generalises.
+  const cnt = (b) => live.split("\n").filter(l => l.startsWith("|") && l.includes(` ${b} |`)).length;
+  for (const label of ["READ", "DARK", "CI-ONLY", "COLLISION"]) {
+    const n = cnt(label);
+    check(`FR: the prose count for ${label} (${n}) matches the table`,
+      n > 0 && new RegExp(`\\*\\*${label}\\*\\*\\s*\\|\\s*\\*\\*${n}\\*\\*`).test(fr),
+      n === 0 ? "⛔ counted ZERO — the counter is broken, not the doc" : `table says ${n}`);
+  }
+
+  // ⛔ THE AXIS FAMILY — the single biggest confusion in the schema, so its four numbers are pinned.
+  let ga = 0, rdAxis = 0, mAxis = 0, opAxis = 0;
+  for (const a of abilities) {
+    if (a.operativeAxis != null) opAxis++;
+    if (a.mechanic?.axis != null) mAxis++;
+    for (const t of (a.tree || [])) ga += (t.gainAxes || []).length;
+    for (const r of (a.rankDeltas || [])) if (r.axis != null) rdAxis++;
+  }
+  check("FR: `gainAxes` value count is as documented", new RegExp(`${ga}`).test(fr), `live ${ga}`);
+  check("FR: `rankDeltas[].axis` count is as documented", new RegExp(`${rdAxis}`).test(fr), `live ${rdAxis}`);
+  check("FR: ⛔ `mechanic.axis` is still authored ZERO times — a reader with no writer",
+    mAxis === 0, `live ${mAxis} — if this is now non-zero the allow-list branch has woken up, UPDATE §2`);
+  check("FR: `operativeAxis` is still authored on every craft", opAxis === abilities.length, `${opAxis}/${abilities.length}`);
+
+  // ⚠️ THE FIVE RANK LADDERS ARE THE ENTIRE EMPIRICAL BASIS FOR THE PROPOSED CURVE. If a sixth appears,
+  // the curve should be re-fitted before it ships, and §3 must say so.
+  const SKIP = new Set(["rank", "levelReq", "cost", "xp", "n", "d", "plus", "marginFloorPer"]);
+  let ladders = 0;
+  for (const a of abilities) {
+    const scan = (blk) => { if (!blk || typeof blk !== "object") return;
+      for (const [k, v] of Object.entries(blk)) { if (SKIP.has(k) || k.startsWith("_")) continue;
+        if (Array.isArray(v) && v.length >= 2 && v.every(x => typeof x === "number")) ladders++;
+        else if (v && typeof v === "object" && !Array.isArray(v)) scan(v); } };
+    scan(a.mechanic);
+    const pf = {};
+    for (const t of (a.tree || [])) for (const [k, v] of Object.entries({ ...(t.mechanic || {}), ...t }))
+      if (!SKIP.has(k) && !k.startsWith("_") && typeof v === "number") (pf[k] = pf[k] || []).push(v);
+    for (const vs of Object.values(pf)) if (vs.length >= 2 && new Set(vs).size >= 2) ladders++;
+  }
+  check("FR: ⛔ still exactly FIVE rank ladders — the whole basis for the proposed curve",
+    ladders === 5, `live ${ladders} — a sixth means the curve must be re-fitted, UPDATE §3`);
+
+  // ⛔ AND THE ONE THAT PROTECTS A CRAFT: wayfinding's timeReach is the template for a bad deletion.
+  const wf = abilities.find(a => a.id === "wayfinding");
+  check("FR: ⛔ `wayfinding` still carries its r1 number — the deletion §7 stopped",
+    wf?.mechanic?.timeReach === 24, `got ${wf?.mechanic?.timeReach}`);
+  check("FR: the reference names the four ways 'unread' lies", /NAME-COLLISION/.test(fr)
+    && /COMMENT-ONLY/.test(fr) && /GENERIC ITERATION/.test(fr) && /BROKEN READER/.test(fr));
+  check("FR: …and carries the defect taxonomy and its countermeasures",
+    /DEFECT TAXONOMY/i.test(fr) && /COUNTERMEASURES/i.test(fr));
+}
+
 /* ══════════ §10 — THE KNOWN GAPS, ASSERTED AS OPEN ══════════ */
 console.log("\n── §10 · the known gaps — these go RED when FIXED ──");
 {

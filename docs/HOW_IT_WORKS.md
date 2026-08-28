@@ -5,6 +5,12 @@ engine — BUILT claims must hold, PROPOSED claims must still be unbuilt, and kn
 ⚠️ **A gap that closes turns its check RED, so a fixed gap forces this file to be edited. The doc cannot
 silently rot.**
 
+⛔ **COMPANION: [`FIELD_REFERENCE.md`](FIELD_REFERENCE.md)** — this file says what the game DOES; that one
+says **what each field IS, who reads it, and what happens when it is absent.** ⚠️ **107 authored fields,
+measured: 84 read, 19 dark, 3 CI-only, 1 name-collision.** It carries the axis-family untangling, the two
+rank-ladder shapes, which `cfg` object each consumer expects, the engine contracts that cost a false
+finding, and the defect taxonomy. **Its atlas table is generated and its numbers are gated.**
+
 ⛔ **REQUIRED FOR SINGULARITY (Erik, 2026-08-28): every spec, every authoring, every wiring, every update is
 logged with its INTENT, HOW IT IS EXECUTED AND TESTED, and WHAT IT IMPACTS AND WHAT IMPACTS IT.** ⚠️ **Aevi
 and CCode maintain this jointly and work toward complete agreement on all content.** The `po/` files are
@@ -30,6 +36,8 @@ working papers; **this is the answer.**
 | 08-28 | §0b log made mechanical | a requirement nobody checks lapses in a week | `how_it_works.mjs` §0b — five columns, non-empty, names its change | ⚠️ Erik's 08-28 logging rule now has teeth |
 | 08-28 | §8 body corrected to match the ruling | the log said "doc corrected" and the sentence was still there — exactly the drift this file is meant to catch | `how_it_works.mjs` §8, now green | ⚠️ a logged change that was never made |
 | 08-28 | ⛔ `blind` policy → **`mindless`** | Erik: *"blind is CAN’T SEE"*; the word named this policy AND the can’t-see receipt, in one function | `how_it_works.mjs` §8 × 5, plus smoke CCODE-255 | `targeting.js`, `sunk_assay_intake.json` migrated, `POLICY_ALIASES` keeps old saves working |
+| 08-28 | ⛔ **`FIELD_REFERENCE.md` created** | Erik: *"we are DONE with forgetting what things are meant to do and how they actually work or not"* | `how_it_works.mjs` FR × 14 — atlas freshness, bucket counts, axis counts, ladder count | ⛔ every authored field; `field_atlas.mjs` generates its table |
+| 08-28 | `field_atlas.mjs` + `atlas_inject.mjs` | a hand-maintained "which fields are read" list is wrong within a week | its table is re-derived and diffed by the FR gate | ⚠️ `NOT_CONSUMERS` — a question file is not a consumer |
 
 **Last verified: 2026-08-28 · v1.9.248 · 378 crafts.**
 

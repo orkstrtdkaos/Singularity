@@ -1,17 +1,27 @@
 # HOW IT WORKS
 
-**The game as it stands, in present tense.** No history, no archaeology, no argument.
+⛔ **THIS DOCUMENT IS EXECUTABLE. `tests/how_it_works.mjs` asserts every claim below against the live
+engine — BUILT claims must hold, PROPOSED claims must still be unbuilt, and known gaps must still be open.**
+⚠️ **A gap that closes turns its check RED, so a fixed gap forces this file to be edited. The doc cannot
+silently rot.**
 
-⛔ **Every section says what is BUILT and what is PROPOSED.** If it is not marked PROPOSED, it runs today.
-⚠️ **This file is maintained by Aevi and CCode jointly and updated as things change.** The specs and replies
-in `po/` are working papers; this is the answer.
+⛔ **REQUIRED FOR SINGULARITY (Erik, 2026-08-28): every spec, every authoring, every wiring, every update is
+logged with its INTENT, HOW IT IS EXECUTED AND TESTED, and WHAT IT IMPACTS AND WHAT IMPACTS IT.** ⚠️ **Aevi
+and CCode maintain this jointly and work toward complete agreement on all content.** The `po/` files are
+working papers; **this is the answer.**
 
-**Last verified: 2026-08-28 · v1.9.247 · 378 crafts.**
+---
 
-⛔ **THIS FILE IS EXECUTED.** `node tests/how_it_works.mjs` asserts every BUILT claim below against the live
-engine and asserts every PROPOSED one is still unbuilt. ⚠️ **A claim that stops being true, or a proposal
-that quietly ships, turns the suite red** — so this file cannot drift from the game without someone being
-told. It runs in `scripts/run_tests.mjs`.
+## 0 · THE LOG
+
+| date | change | intent | tested by | impacts / impacted by |
+|---|---|---|---|---|
+| 08-28 | doc created | Erik: *"tell me how it works and what it does and I verify that's what I want"* | — | replaces reconstructing the model from spec archaeology |
+| 08-28 | doc made executable | a spec nobody runs is a spec that drifts | `tests/how_it_works.mjs`, 97 assertions | ⛔ every section below; a fixed gap goes RED |
+| 08-28 | `reachOf` clamped on the base path | §6 says the sealed rung is reachable by NOTHING at any rank; it was clamped on surge only | `how_it_works.mjs` §6 | ⚠️ latent — no rank-4 craft exists yet |
+| 08-28 | §3 healing inversion → **PROPOSED** | it read BUILT; `absorb` machinery exists but **no sheet authors `decay: absorb`** | measured: 3 files mention absorb, none is a bestiary entry | §48 undeath, which is also PROPOSED |
+| 08-28 | §5 degrade path named | CCode could not find it and asked rather than guess | `resolveImposition` verified live | `impositionOf`, every `imposes` block |
+| 08-28 | §8 blind/taunt → **OPEN RULING** | doc and engine disagree and both are coherent | ⛔ the one red assertion | `targeting.js`; whether `blind` means *no preference* or *unreachable* |
 
 ---
 
@@ -88,8 +98,13 @@ the mix.**
 
 ⚠️ **Elemental types are SIBLINGS, not opposites.** A ward against fire is not a ward against ice.
 
-**HEALING IS NOT A TYPE.** It is an effect, and the source type decides who it mends: `decay` mends the
-undead, `living` and `vitality` mend the living. **Healing an undead harms it.**
+**HEALING IS NOT A TYPE.** It is an effect, and the source type decides who it mends.
+
+⛔ **PROPOSED — the inversion is NOT BUILT.** The intent is that `decay` mends the undead, `living` and
+`vitality` mend the living, and **healing an undead harms it.** ⚠️ **The machinery for half of it exists** —
+`absorb` returns negative damage, so a sheet authored `decay: absorb` would already be mended by rot. ⛔ **But
+NO SHEET AUTHORS IT**, and the other half — a `heal` that lands as `decay` on an undead — has no
+implementation at all.
 
 ---
 
@@ -120,7 +135,9 @@ fires.
 **A craft that stops without wounding does not deal damage.** It imposes a CONDITION — `staggered`,
 `action_loss`, `unconscious`, `incapacitated` — resisted with `mental` or `physical`.
 
-⛔ **A failed resist DEGRADES rather than negating.** You do not shrug it off; you take the lesser version.
+⛔ **A failed resist DEGRADES rather than negating.** You do not shrug it off; you take the lesser version —
+`resolveImposition` returns `{ condition: degradesTo, degradedTo: want, resisted: true }`, so an
+`unconscious` that is resisted lands as `action_loss`.
 
 **`harmRung` is a different axis from damage.** It says what happens when a craft puts someone DOWN —
 `none` / `damaging` / `incapacitating` / `lethal` — and a character can reduce it without reducing damage.

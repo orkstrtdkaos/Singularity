@@ -1019,7 +1019,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "Grey Hand",
+     "name": "Withered Touch",
      "grants": "Weaken a living thing by touch. ⛔ ITS STRENGTH FAILS AND EVERYTHING IT DOES COMES OUT WEAKER — blows, crafts, grip — and its will to use that strength fails with it.",
      "cannot": "Touch. You must reach them, and reaching a strong thing is the whole problem. ⚠️ It deals no damage: they are weakened, not hurt.",
      "functions": [
@@ -1044,7 +1044,7 @@
     },
     {
      "rank": 2,
-     "name": "Long Grey",
+     "name": "Failing Reach",
      "grants": "⛔ TAKE THE VIGOUR OUT OF A LIVING THING AT A DISTANCE rather than by touch, and the weakness STAYS — it does not lift when you stop attending to it and lasts until healed or restored.",
      "cannot": "⚠️ It lasts until healed or restored. Rest alone does not lift it.",
      "functions": [
@@ -1073,7 +1073,7 @@
     },
     {
      "rank": 3,
-     "name": "Withered Hour",
+     "name": "Grey Hand",
      "grants": "Weaken a group, or weaken one thing so thoroughly it cannot stand.",
      "cannot": "⛔ It never kills and never wounds — a Grey Hand that has done its worst leaves someone unable to stand, not dying. ⚠️ THE WEAKNESS LASTS UNTIL IT IS HEALED OR RESTORED BY A CRAFT THAT MENDS. Nothing it does is deniable: the victim and every witness can see exactly who is doing it and that it is being chosen.",
      "functions": [
@@ -1174,7 +1174,8 @@
    "_persistence": "⛔ SNG-494. Erik: 'The Grey Hand needs to be updated — IT DOESN'T COME BACK IMMEDIATELY UPON STOPPING. It would have to be HEALED/RESTORED.'\n⚠️ THE OLD VERSION CHARGED ENERGY EVERY ROUND TO MAINTAIN IT and returned the victim to full the moment you stopped — which made it a concentration tax rather than an effect, and made r2's 'hold it there' the same as r1. ⛔ NOW THE WEAKNESS PERSISTS UNTIL A MENDING CRAFT LIFTS IT, and r2 buys range and persistence instead of an upkeep bill.",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_reviewed_20260824": "⛔ ERIK 2026-08-24. (1) IT INVERTS ON THE UNDEAD AND BOLSTERS THEM — same family as heal->harm (§48.5): taking vitality from a thing that runs on the ABSENCE of vitality feeds it. Now a hard bound, a notFor clause and a plainly line, because a warden reaching for this against a raised body has just helped it. (2) ⚠️ IT IS NOT A DAMAGING CRAFT: 'it steals vitality/strength… primarily DECREASES THEIR DAMAGE AND ABILITIES' — stated in the description and the mechanic note, and r1/r2 harmRung dropped from `damaging` to `none` because the craft's own hard bound says IT NEVER WOUNDS. r3 stays `incapacitating`: it can leave someone unable to stand. (3) INDIRECT HARM IS REAL AND IS NOT THE CRAFT'S — a grip that fails on a ledge. In narrationHints, not in mechanic. ⚠️ (4) ERIK ON MY REVIEW: I called 'nothing it does is deniable' the most interesting thing about the craft. He corrected me — 'this isn't as unusual to the GAME as it is to your thinking; in the game this is fairly normal, as it's a fantasy game.' ⛔ I KEEP IMPORTING REAL-WORLD SOCIAL PHYSICS INTO A FANTASY SETTING. Visible magic is not remarkable here. The clause stays as a `drawback` and is no longer framed as the point of the craft. (5) `plainly` was machine-generated AND CONTRADICTED THE HARD BOUND — it said 'attending costs you continuously, let go and it comes back' on a craft whose weakness PERSISTS UNTIL HEALED. A stale line from before that ruling. (6) r2 and r3 both declared `deepen` while broadening range and targets."
+   "_reviewed_20260824": "⛔ ERIK 2026-08-24. (1) IT INVERTS ON THE UNDEAD AND BOLSTERS THEM — same family as heal->harm (§48.5): taking vitality from a thing that runs on the ABSENCE of vitality feeds it. Now a hard bound, a notFor clause and a plainly line, because a warden reaching for this against a raised body has just helped it. (2) ⚠️ IT IS NOT A DAMAGING CRAFT: 'it steals vitality/strength… primarily DECREASES THEIR DAMAGE AND ABILITIES' — stated in the description and the mechanic note, and r1/r2 harmRung dropped from `damaging` to `none` because the craft's own hard bound says IT NEVER WOUNDS. r3 stays `incapacitating`: it can leave someone unable to stand. (3) INDIRECT HARM IS REAL AND IS NOT THE CRAFT'S — a grip that fails on a ledge. In narrationHints, not in mechanic. ⚠️ (4) ERIK ON MY REVIEW: I called 'nothing it does is deniable' the most interesting thing about the craft. He corrected me — 'this isn't as unusual to the GAME as it is to your thinking; in the game this is fairly normal, as it's a fantasy game.' ⛔ I KEEP IMPORTING REAL-WORLD SOCIAL PHYSICS INTO A FANTASY SETTING. Visible magic is not remarkable here. The clause stays as a `drawback` and is no longer framed as the point of the craft. (5) `plainly` was machine-generated AND CONTRADICTED THE HARD BOUND — it said 'attending costs you continuously, let go and it comes back' on a craft whose weakness PERSISTS UNTIL HEALED. A stale line from before that ruling. (6) r2 and r3 both declared `deepen` while broadening range and targets.",
+   "_deGreyed_20260824": "⚠️ ERIK 2026-08-24: 'you use GREY way too much' — 45 uses in authored Death text, NINE of them in this craft alone, whose three ranks were Grey Touch / Grey Reach / Grey Hand. ⛔ THE CRAFT NAME KEEPS THE WORD because the Valley's stories are about a GREY HAND; the ranks now say what they do — Withered Touch, Failing Reach, Grey Hand."
   },
   {
    "schemaVersion": 1,
@@ -3544,7 +3545,7 @@
     "break",
     "strike"
    ],
-   "narrationHints": "The grey does not spread like fire, it spreads like rot finding a seam. ⚠️ AT r3 IT GOES STRAIGHT FOR OLD SCARS — the shoulder that never set right, the burn under the sleeve, the place they do not talk about — and opens them as if they happened this morning. ⛔ HOOK: a grey hand is a thing the Valley has stories about. People who watched will not travel with you, and THE HOLLOW — who would end everything to end suffering — hear about the ones who can do this, and come looking to talk.",
+   "narrationHints": "It does not spread like fire. It spreads like rot finding a seam. ⚠️ AT r3 IT GOES STRAIGHT FOR OLD SCARS — the shoulder that never set right, the burn under the sleeve, the place they do not talk about — and opens them as if they happened this morning. ⛔ HOOK: a grey hand is a thing the Valley has stories about. People who watched will not travel with you, and THE HOLLOW — who would end everything to end suffering — hear about the ones who can do this, and come looking to talk.",
    "description": "⛔ TOUCH WHAT IS ALREADY FAILING AND BRING ITS END FORWARD. A notched blade shears, a strained rope parts, a wound already open goes grey and stops closing. ⚠️ IT IS A VULNERABILITY, NOT A BLOW — it makes a wound worse, and where there is no wound it has almost nothing to take hold of. The Ashwardens' first offence: their own work, turned on someone.",
    "notFor": "Beginning an ending that was not underway — it HASTENS, until r3. Anything new, whole and perfectly kept offers almost no grip. Distance at first rank: this is a hand on the thing. Taking it back.",
    "tree": [
@@ -3584,7 +3585,7 @@
      "ongoingHarm": {
       "type": "decay"
      },
-     "grants": "⛔ THE GREY LEAVES YOUR HAND. Work at a pace's distance, ANTISOAK 6 — and it finds the old wounds: nearly everyone is scarred, and the grey goes to the scars FIRST, blowing them back open as though they were fresh. ⚠️ A body that has been hurt once before is a body this craft can take hold of.",
+     "grants": "⛔ THE ROT LEAVES YOUR HAND. Work at a pace's distance, ANTISOAK 6 — and it finds the old wounds: nearly everyone is scarred, and the grey goes to the scars FIRST, blowing them back open as though they were fresh. ⚠️ A body that has been hurt once before is a body this craft can take hold of.",
      "cannot": "⛔ A DECAY-WARDED TARGET ANSWERS THIS SPECIFICALLY — a soak layer typed against decay stops the grey and lets everything else through. ⚠️ And it still reaches ONE thing: you can stand back now, you cannot spread it."
     },
     {
@@ -3604,7 +3605,7 @@
      "ongoingHarm": {
       "type": "decay"
      },
-     "grants": "⛔ YOU CALL THE ENDINGS DUE — every enemy within reach at once, ANTISOAK 8, AND THE GREY NOW PIERCES: PIERCE 4 lands whatever the armour, so the vulnerability ALWAYS takes hold and then amplifies everything that got through beside it. ⚠️ THE SCARS STILL OPEN FIRST.",
+     "grants": "⛔ YOU CALL THE ENDINGS DUE — every enemy within reach at once, ANTISOAK 8, AND IT NOW PIERCES: PIERCE 4 lands whatever the armour, so the vulnerability ALWAYS takes hold and then amplifies everything that got through beside it. ⚠️ THE SCARS STILL OPEN FIRST.",
      "cannot": "⛔ A DECAY-TYPED WARD IS STILL THE ANSWER — it soaks the ordinary damage entire, so all that reaches them is the pierce and what the vulnerability makes of it. ⚠️ AND IMMUNE IS IMMUNE: a thing that does not decay takes nothing at all. It reaches enemies and standing works, never the people you came with.",
      "pierce": 4
     }
@@ -3631,7 +3632,8 @@
     },
     "antisoakImposed": 4,
     "damageType": "decay",
-    "note": "⛔ THE MECHANISM IS ANTISOAK, AND IT IS BOTH IMPOSED AND INVOKED IN THE SAME STROKE. Per `antisoakLanded(hit, soak, antisoak)`: damage through soak is amplified, and A BLOW THAT NEVER LANDED CANNOT BE MADE WORSE. ⚠️ THAT ARITHMETIC IS THE CRAFT'S WHOLE CHARACTER — 'needs a wound to activate' is not a special case written for this craft, it is what antisoak already does. Ongoing `decay` derives its magnitude from `mechanic.magnitude` (7) per `ongoingHarmOf`, so the tick is not authored twice. ⛔ CCODE-243: r3 carries `pierce 4`, NOT `penetration`. Penetration was a layer-RANK cutter and was read by nothing corpus-wide; pierce is a flat AMOUNT that bypasses soak, per Erik 2026-08-23. ⚠️ Verified live via `pierceLanded`: hit 6 vs soak 8 gives 0 at r2 and 12 at r3, and hit 10 gives 14 — the decay ward shuts r2 down completely and only blunts r3, which is the counter-play the spec was written to create."
+    "note": "⛔ THE MECHANISM IS ANTISOAK, AND IT IS BOTH IMPOSED AND INVOKED IN THE SAME STROKE. Per `antisoakLanded(hit, soak, antisoak)`: damage through soak is amplified, and A BLOW THAT NEVER LANDED CANNOT BE MADE WORSE. ⚠️ THAT ARITHMETIC IS THE CRAFT'S WHOLE CHARACTER — 'needs a wound to activate' is not a special case written for this craft, it is what antisoak already does. Ongoing `decay` derives its magnitude from `mechanic.magnitude` (7) per `ongoingHarmOf`, so the tick is not authored twice. ⛔ CCODE-243: r3 carries `pierce 4`, NOT `penetration`. Penetration was a layer-RANK cutter and was read by nothing corpus-wide; pierce is a flat AMOUNT that bypasses soak, per Erik 2026-08-23. ⚠️ Verified live via `pierceLanded`: hit 6 vs soak 8 gives 0 at r2 and 12 at r3, and hit 10 gives 14 — the decay ward shuts r2 down completely and only blunts r3, which is the counter-play the spec was written to create. ⛔ `range: 4` DECLARED 2026-08-24 — r2's grants have always said 'the grey leaves your hand, work at a pace's distance' while `mechanic.range` was UNSET. ⚠️ I then measured the tradition's reach off the FIELD, concluded Death had nothing beyond touch, and authored a ranged craft to fill a gap that did not exist. THE PROSE WAS RIGHT AND THE FIELD WAS SILENT.",
+    "range": 4
    },
    "intensity": {
     "conserve": "a small hastening — a notch deepens, a wound sours",
@@ -4269,7 +4271,7 @@
   },
   {
    "id": "grey_ground",
-   "name": "Grey Ground",
+   "name": "Killing Field",
    "levelReq": 3,
    "energyCost": 7,
    "powerSystem": "metaphysical",
@@ -4373,7 +4375,7 @@
     },
     {
      "rank": 3,
-     "name": "Grey Ground",
+     "name": "Killing Field",
      "functions": [
       "strike",
       "hinder",
@@ -4390,121 +4392,8 @@
      "cannot": "⛔ WHAT YOU DENY, YOU DENY TO EVERYONE. ⚠️ And it will still be there after the fight is over, quietly, until it stops."
     }
    ],
-   "_authored": "⛔ ERIK 2026-08-24: 'we need a couple damage dealing skills… I'm thinking A ZONE THAT DAMAGES ALL WITHIN PER TURN.' ⚠️ MEASURED FIRST: Death had THREE damage-shaped crafts in 33 and NO PERSISTENT ZONE — every area craft in the corpus is an instantaneous burst. ⛔ THIS IS THE FIRST TICKING GROUND-DENIAL IN THE GAME, which makes it a different tactical object rather than a bigger Keening. ⚠️ IT DOES NOT SORT AND IT DOES NOT MOVE — both hard bounds, so it stays a positional decision rather than a targeted attack, and per Erik's ruling on Necrotic Strike the indiscriminate part is a PROPERTY OF THE GROUND, not of a craft aimed at people. ⛔ AND IT INHERITS §48 CORRECTLY: the unliving are untouched and one near emergence is MENDED by standing in it."
-  },
-  {
-   "id": "ending_cast",
-   "name": "Sent Ending",
-   "levelReq": 2,
-   "energyCost": 5,
-   "powerSystem": "metaphysical",
-   "attribute": "mental",
-   "tradition": "ashwarden",
-   "nativeOrCombination": "native",
-   "shape": "damage",
-   "harmRung": "lethal",
-   "challengeTypes": [
-    "FIGHT",
-    "DUEL"
-   ],
-   "operativeAxis": [
-    "range",
-    "damage",
-    "targets"
-   ],
-   "axes": {
-    "death_life": -0.5
-   },
-   "effectTags": [
-    "decay",
-    "ranged"
-   ],
-   "functions": [
-    "strike"
-   ],
-   "description": "⛔ SEND AN ENDING ACROSS A ROOM. The Ashwarden's only reaching blow — no ground marked, no wound needed, no touch: a piece of what is coming to everything, arriving early and aimed. ⚠️ IT IS THE PLAINEST THING THE TRADITION DOES, and the one they are least comfortable teaching.",
-   "narrationHints": "She looks at him and he folds like something with a rope cut. ⚠️ THERE IS NO FLASH AND NO SOUND — which is why nobody can ever say afterwards who did it, only that she was looking that way.",
-   "notFor": "⛔ SUBTLETY IT HAS, PRECISION IT HAS NOT — you strike a thing, not a part of it, and it cannot disarm, cripple or wound to a purpose. ⚠️ THE UNLIVING TAKE NOTHING, and one near emergence is MENDED (§48.5). ⛔ And it leaves no mark: a body dropped by this shows no cause, which is a different problem entirely.",
-   "plainly": "A fight/duel action. 2d6 decay at range to one living thing — no touch, no existing wound, no ground needed. r2 reaches further and takes two; r3 takes three at once. ⛔ Warded by anything that answers decay, and the unliving are untouched.",
-   "intensity": {
-    "conserve": "a lesser sending — half the dice, and nobody nearby notices",
-    "surge": "send all of it; IT WILL BE OBVIOUS WHO DID THIS"
-   },
-   "bounds": [
-    {
-     "text": "⛔ THE LIVING ONLY. The unliving take nothing and one near emergence is mended by it",
-     "class": "hard"
-    },
-    {
-     "text": "⛔ WHOLE THINGS, NEVER PARTS — it cannot disarm, cripple, or wound to a purpose",
-     "class": "hard"
-    },
-    {
-     "text": "⚠️ IT LEAVES NO MARK. A body dropped by this shows no cause, which acquits you of nothing and explains nothing",
-     "class": "drawback"
-    }
-   ],
-   "mechanic": {
-    "dice": {
-     "n": 2,
-     "d": 6
-    },
-    "range": 8,
-    "targets": 1,
-    "damageType": "decay",
-    "marginFloorPer": 0.02,
-    "crit": {
-     "success": "It lands the way a held breath ends — all at once, and everyone in the room feels the moment go.",
-     "failure": "You send it and it arrives somewhere behind them, and the wall greys."
-    },
-    "note": "⛔ DEATH'S ONLY RANGED DAMAGE. Before this the tradition's longest reach was `draw_down` at range 1 (touch) — everything else was present-and-adjacent, which left a warden with nothing to do at distance except set up. ⚠️ `range 8` and `damageType: decay`, so a decay ward answers it and the §48 inversions apply unchanged. ⛔ DELIBERATELY PLAIN: 2d6/3d6/4d6, one target then two then three, no conditions and no riders — the tradition already has setup, control and denial, and what it lacked was a straight answer at range."
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Sent Ending",
-     "functions": [
-      "strike"
-     ],
-     "gains": "broaden",
-     "harmRung": "damaging",
-     "gainAxes": [],
-     "grants": "⛔ 2d6 DECAY TO ONE LIVING THING ACROSS A ROOM. No touch, no existing wound, no ground marked — you look at it and a piece of its ending arrives early.",
-     "cannot": "One living thing you can see. ⚠️ It strikes the whole of a thing and never a part: no disarming, no crippling. ⛔ The unliving take nothing."
-    },
-    {
-     "rank": 2,
-     "name": "Two Sendings",
-     "functions": [
-      "strike"
-     ],
-     "gains": "broaden",
-     "harmRung": "lethal",
-     "gainAxes": [
-      "range",
-      "targets",
-      "damage"
-     ],
-     "grants": "⛔ 3d6, FURTHER OUT, AND TWO OF THEM — across a yard, a hall, a street, in the same moment.",
-     "cannot": "Two you can see, and both must be living. ⚠️ Anything between you and them that answers decay answers this."
-    },
-    {
-     "rank": 3,
-     "name": "Told Ending",
-     "functions": [
-      "strike"
-     ],
-     "gains": "broaden",
-     "harmRung": "lethal",
-     "gainAxes": [
-      "targets",
-      "damage"
-     ],
-     "grants": "⛔ 4d6 TO THREE AT ONCE. The tradition's plainest capstone: three people who were standing, and then were not, with nothing in the room to show for it.",
-     "cannot": "⛔ THREE, LIVING, SEEN. ⚠️ And there is no version of this that anyone mistakes for an accident when it happens three times."
-    }
-   ],
-   "_authored": "⛔ ERIK 2026-08-24: 'a DIRECT RANGED BLAST of some kind.' ⚠️ MEASURED: DEATH HAD NO CRAFT WITH RANGE ABOVE 1 — `draw_down` was touch, everything else present-and-adjacent, so a warden at distance could only ever set up. ⛔ DELIBERATELY PLAIN AND WITHOUT RIDERS: the tradition already owns setup (`soul_stare`), control (`dread`, `keening`), denial (`grey_ground`) and attrition (`necrotic_strike`) — WHAT IT LACKED WAS A STRAIGHT ANSWER AT RANGE, and adding conditions to it would have made a fifth control craft instead. ⚠️ `damageType: decay` so the §48 inversions and every decay ward apply unchanged."
+   "_authored": "⛔ ERIK 2026-08-24: 'we need a couple damage dealing skills… I'm thinking A ZONE THAT DAMAGES ALL WITHIN PER TURN.' ⚠️ MEASURED FIRST: Death had THREE damage-shaped crafts in 33 and NO PERSISTENT ZONE — every area craft in the corpus is an instantaneous burst. ⛔ THIS IS THE FIRST TICKING GROUND-DENIAL IN THE GAME, which makes it a different tactical object rather than a bigger Keening. ⚠️ IT DOES NOT SORT AND IT DOES NOT MOVE — both hard bounds, so it stays a positional decision rather than a targeted attack, and per Erik's ruling on Necrotic Strike the indiscriminate part is a PROPERTY OF THE GROUND, not of a craft aimed at people. ⛔ AND IT INHERITS §48 CORRECTLY: the unliving are untouched and one near emergence is MENDED by standing in it.",
+   "_named_20260824": "⛔ ERIK 2026-08-24: 'you use GREY way too much.' MEASURED: 63 uses across 33 Death crafts, and THREE CRAFT NAMES — Grey Hand, Grey Road, and this one. ⚠️ Renamed to KILLING FIELD (Erik's suggestion) and the colour de-greyed: the ring of dead grass carries it without the word. ⛔ ALSO CUT ALONGSIDE THIS: `ending_cast` / Sent Ending, authored an hour earlier as 'Death's only ranged damage' — Erik: 'doesn't Necrotic Touch do a ranged attack at higher rank?' IT DOES. r2 has always read 'the grey leaves your hand, work at a pace's distance' while `mechanic.range` sat UNSET, so I measured reach off the FIELD, found nothing past touch, and filled a gap that did not exist. ⚠️ FOURTH DUPLICATION THIS SESSION, and the first caused by trusting a field over the prose beside it. `range: 4` is now declared on Necrotic Strike."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

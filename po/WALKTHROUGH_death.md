@@ -2,7 +2,7 @@
 
 ⛔ **GENERATED — `node po/matrix_gen.mjs death --detail`. Full rank text, verbatim.**
 
-**35 crafts · 100 ranks** · 2026-08-28
+**34 crafts · 97 ranks** · 2026-08-28
 
 ---
 
@@ -256,7 +256,7 @@
 
 **functions:** strike, break · **gainAxes:** range · **gains:** broaden · **harm:** incapacitating · ongoing
 
-**grants:** ⛔ THE GREY LEAVES YOUR HAND. Work at a pace's distance, ANTISOAK 6 — and it finds the old wounds: nearly everyone is scarred, and the grey goes to the scars FIRST, blowing them back open as though they were fresh. ⚠️ A body that has been hurt once before is a body this craft can take hold of.
+**grants:** ⛔ THE ROT LEAVES YOUR HAND. Work at a pace's distance, ANTISOAK 6 — and it finds the old wounds: nearly everyone is scarred, and the grey goes to the scars FIRST, blowing them back open as though they were fresh. ⚠️ A body that has been hurt once before is a body this craft can take hold of.
 
 **cannot:** ⛔ A DECAY-WARDED TARGET ANSWERS THIS SPECIFICALLY — a soak layer typed against decay stops the grey and lets everything else through. ⚠️ And it still reaches ONE thing: you can stand back now, you cannot spread it.
 
@@ -264,7 +264,7 @@
 
 **functions:** strike, break · **gainAxes:** targets, damage · **gains:** broaden · **harm:** lethal · ongoing
 
-**grants:** ⛔ YOU CALL THE ENDINGS DUE — every enemy within reach at once, ANTISOAK 8, AND THE GREY NOW PIERCES: PIERCE 4 lands whatever the armour, so the vulnerability ALWAYS takes hold and then amplifies everything that got through beside it. ⚠️ THE SCARS STILL OPEN FIRST.
+**grants:** ⛔ YOU CALL THE ENDINGS DUE — every enemy within reach at once, ANTISOAK 8, AND IT NOW PIERCES: PIERCE 4 lands whatever the armour, so the vulnerability ALWAYS takes hold and then amplifies everything that got through beside it. ⚠️ THE SCARS STILL OPEN FIRST.
 
 **cannot:** ⛔ A DECAY-TYPED WARD IS STILL THE ANSWER — it soaks the ordinary damage entire, so all that reaches them is the pierce and what the vulnerability makes of it. ⚠️ AND IMMUNE IS IMMUNE: a thing that does not decay takes nothing at all. It reaches enemies and standing works, never the people you came with.
 
@@ -510,7 +510,7 @@
 
 **notFor:** Objects, structures, or terrain — that is Wither, and the two do not substitute for each other. ⛔ AND IT INVERTS ON THE UNDEAD: taking vitality out of a thing that runs on the ABSENCE of it FEEDS it. A Grey Hand laid on a raised body or an Afterling BOLSTERS them (SYSTEM_SPEC §48.5). ⚠️ It drains, it does not slay: a weakened boar is still a boar with tusks.
 
-### r1 — Grey Hand
+### r1 — Withered Touch
 
 **functions:** hinder · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none · imposes · persists
 
@@ -518,7 +518,7 @@
 
 **cannot:** Touch. You must reach them, and reaching a strong thing is the whole problem. ⚠️ It deals no damage: they are weakened, not hurt.
 
-### r2 — Long Grey
+### r2 — Failing Reach
 
 **functions:** hinder · **gainAxes:** range, duration · **gains:** broaden · **harm:** none · imposes · persists
 
@@ -526,7 +526,7 @@
 
 **cannot:** ⚠️ It lasts until healed or restored. Rest alone does not lift it.
 
-### r3 — Withered Hour
+### r3 — Grey Hand
 
 **functions:** hinder · **gainAxes:** targets, duration · **gains:** broaden · **harm:** incapacitating · imposes · persists
 
@@ -766,45 +766,7 @@
 
 ---
 
-## 21. Sent Ending  ·  `ending_cast`
-
-**L2 · e5 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
-**status:** crit · dmg:decay  
-**ability functions:** strike
-
-> ⛔ SEND AN ENDING ACROSS A ROOM. The Ashwarden's only reaching blow — no ground marked, no wound needed, no touch: a piece of what is coming to everything, arriving early and aimed. ⚠️ IT IS THE PLAINEST THING THE TRADITION DOES, and the one they are least comfortable teaching.
-
-**notFor:** ⛔ SUBTLETY IT HAS, PRECISION IT HAS NOT — you strike a thing, not a part of it, and it cannot disarm, cripple or wound to a purpose. ⚠️ THE UNLIVING TAKE NOTHING, and one near emergence is MENDED (§48.5). ⛔ And it leaves no mark: a body dropped by this shows no cause, which is a different problem entirely.
-
-### r1 — Sent Ending
-
-**functions:** strike · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** damaging
-
-**grants:** ⛔ 2d6 DECAY TO ONE LIVING THING ACROSS A ROOM. No touch, no existing wound, no ground marked — you look at it and a piece of its ending arrives early.
-
-**cannot:** One living thing you can see. ⚠️ It strikes the whole of a thing and never a part: no disarming, no crippling. ⛔ The unliving take nothing.
-
-### r2 — Two Sendings
-
-**functions:** strike · **gainAxes:** range, targets, damage · **gains:** broaden · **harm:** lethal
-
-**grants:** ⛔ 3d6, FURTHER OUT, AND TWO OF THEM — across a yard, a hall, a street, in the same moment.
-
-**cannot:** Two you can see, and both must be living. ⚠️ Anything between you and them that answers decay answers this.
-
-### r3 — Told Ending
-
-**functions:** strike · **gainAxes:** targets, damage · **gains:** broaden · **harm:** lethal
-
-**grants:** ⛔ 4d6 TO THREE AT ONCE. The tradition's plainest capstone: three people who were standing, and then were not, with nothing in the room to show for it.
-
-**cannot:** ⛔ THREE, LIVING, SEEN. ⚠️ And there is no version of this that anyone mistakes for an accident when it happens three times.
-
-**bounds:** ⛔ THE LIVING ONLY. The unliving take nothing and one near emergence is mended by it · ⛔ WHOLE THINGS, NEVER PARTS — it cannot disarm, cripple, or wound to a purpose · ⚠️ IT LEAVES NO MARK. A body dropped by this shows no cause, which acquits you of nothing and explains nothing
-
----
-
-## 22. Soul Stare  ·  `soul_stare`
+## 21. Soul Stare  ·  `soul_stare`
 
 **L2 · e4 · ashwarden · metaphysical · shape `conceal` · harm `damaging`**  
 **status:** crit · obscure  
@@ -842,7 +804,7 @@
 
 ---
 
-## 23. Wither  ·  `wither`
+## 22. Wither  ·  `wither`
 
 **L2 · e5 · ashwarden · metaphysical · shape `damage` · harm `damaging`**  
 **status:** crit · dmg:decay  
@@ -880,7 +842,7 @@
 
 ---
 
-## 24. Ask the Dead  ·  `ask_the_dead`
+## 23. Ask the Dead  ·  `ask_the_dead`
 
 **L3 · e5 · ashwarden · metaphysical · shape `setup` · harm `none`**  
 **status:** crit · gated · upkeep  
@@ -918,7 +880,7 @@
 
 ---
 
-## 25. Calling Back  ·  `calling_back`
+## 24. Calling Back  ·  `calling_back`
 
 **L3 · e12 · ashwarden · metaphysical · shape `retrieval` · harm `lethal`**  
 **status:** crit · dmg:decay · upkeep  
@@ -956,7 +918,7 @@
 
 ---
 
-## 26. Death-Ward  ·  `death_ward`
+## 25. Death-Ward  ·  `death_ward`
 
 **L3 · e6 · ashwarden · metaphysical · shape `guard` · harm `none`**  
 **status:** crit · ward:decay/judgement/appetite/vitality  
@@ -994,7 +956,7 @@
 
 ---
 
-## 27. Draw Down  ·  `draw_down`
+## 26. Draw Down  ·  `draw_down`
 
 **L3 · e6 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
 **status:** crit · dmg:vitality · gated  
@@ -1032,7 +994,7 @@
 
 ---
 
-## 28. Grey Ground  ·  `grey_ground`
+## 27. Killing Field  ·  `grey_ground`
 
 **L3 · e7 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
 **status:** crit · dmg:decay  
@@ -1058,7 +1020,7 @@
 
 **cannot:** ⛔ IT STILL DOES NOT SORT. Your own line takes it too, and a corridor you have denied is denied to you.
 
-### r3 — Grey Ground
+### r3 — Killing Field
 
 **functions:** strike, hinder, ward · **gainAxes:** area, damage, duration · **gains:** broaden · **harm:** lethal
 
@@ -1070,7 +1032,7 @@
 
 ---
 
-## 29. Raised Hand  ·  `set_hand`
+## 28. Raised Hand  ·  `set_hand`
 
 **L3 · e9 · ashwarden · metaphysical · shape `construct` · harm `none`**  
 **status:** crit · upkeep  
@@ -1108,7 +1070,7 @@
 
 ---
 
-## 30. Under-Song  ·  `shared_grief`
+## 29. Under-Song  ·  `shared_grief`
 
 **L3 · e7 · threnodist · wild_nanite · shape `reveal` · harm `none`**  
 **status:** crit · gated  
@@ -1146,7 +1108,7 @@
 
 ---
 
-## 31. Driven Shade  ·  `given_errand`
+## 30. Driven Shade  ·  `given_errand`
 
 **L4 · e11 · ashwarden · metaphysical · shape `construct` · harm `lethal`**  
 **status:** crit  
@@ -1184,7 +1146,7 @@
 
 ---
 
-## 32. Names of the Lost  ·  `names_of_the_lost`
+## 31. Names of the Lost  ·  `names_of_the_lost`
 
 **L4 · e11 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
 **status:** ⚠️ no crit · gated  
@@ -1222,7 +1184,7 @@
 
 ---
 
-## 33. Grief That Stops  ·  `grief_that_stops`
+## 32. Grief That Stops  ·  `grief_that_stops`
 
 **L5 · e13 · threnodist · wild_nanite · shape `hobble` · harm `lethal`**  
 **status:** crit · dmg:feeling  
@@ -1252,7 +1214,7 @@
 
 ---
 
-## 34. Last Lament  ·  `last_lament`
+## 33. Last Lament  ·  `last_lament`
 
 **L5 · e13 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
 **status:** ⚠️ no crit · gated  
@@ -1274,7 +1236,7 @@
 
 ---
 
-## 35. The Cut Thread  ·  `the_cut_thread`
+## 34. The Cut Thread  ·  `the_cut_thread`
 
 **L5 · e14 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
 **status:** crit · gated · upkeep  

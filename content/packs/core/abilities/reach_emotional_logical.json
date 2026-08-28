@@ -636,7 +636,7 @@
    ],
    "harmRung": "none",
    "narrationHints": "She made the grief into something with edges you could touch. ⚠️ People carry these for years. A Threnodist who has been dead a decade can still steady someone's hands from inside a pocket.",
-   "description": "⛔ PUT A FEELING INTO A THING SO IT CAN BE GIVEN LATER. Pathos hands an emotion to someone standing in front of you; this puts one into a song, an object, a carved token, a gesture — and whoever receives it gets that emotion's effect, whether or not you are anywhere near. ⚠️ THE FEELING MUST BE TRUE AND YOURS: a made sentiment holds nothing.",
+   "description": "⛔ PUT A FEELING INTO A THING SO IT CAN BE GIVEN — OR LAID ON SOMEONE — LATER. Pathos hands an emotion to a willing person standing in front of you. This puts one into a song, a token, a carved thing, and whoever receives it gets that emotion's effect whether or not you are anywhere near. ⚠️ AT r1 IT IS A GIFT. AT r2 IT NEED NOT BE: the same five feelings can be INFLICTED by an object, which is the one thing Pathos cannot do.",
    "notFor": "⛔ FACTS, MEMORIES OR MESSAGES — it carries a FEELING and nothing else; a token cannot tell anyone what happened. ⚠️ An emotion you are not having: you cannot make one you have not got. ⛔ AND IT CANNOT HOLD MORE THAN ONE at a time — a thing carrying two feelings carries neither.",
    "tradition": "threnodist",
    "functions": [
@@ -652,7 +652,7 @@
      "rank": 1,
      "name": "Feeling Held",
      "grants": "⛔ MAKE SOMETHING THAT HOLDS ONE NAMED EMOTION — a song, a token, a carved thing, a gesture — AND WHOEVER TAKES IT UP GETS THAT EMOTION'S GRANT, the same five as Pathos. ⚠️ You need not be there. You need not be alive.",
-     "cannot": "⛔ THE FEELING MUST BE REAL AND YOURS; a made grief carries nothing. One feeling, one object, and it holds about a week. ⚠️ They have to choose to take it up.",
+     "cannot": "⛔ THE FEELING MUST BE REAL AND YOURS; a made grief carries nothing. ⚠️ AND AT THIS RANK IT ONLY GIVES — it is a gift that has to be taken up, and it does nothing to someone who does not want it. One feeling, one object, about a week.",
      "functions": [
       "make"
      ],
@@ -665,8 +665,8 @@
     {
      "rank": 2,
      "name": "Acting Elegy",
-     "grants": "⛔ THE MADE THING ACTS WHETHER THEY MEANT IT TO OR NOT — the song that makes a room feel what it carries, the totem that steadies or unsettles whoever is holding it. ⚠️ IT NO LONGER WAITS TO BE TAKEN UP; being near it is enough.",
-     "cannot": "It acts on those who receive or carry it. ⛔ IT DOES NOT SEEK ANYONE OUT — it is an object, not an errand.",
+     "grants": "⛔ THE FEELING CAN BE TURNED. Until now a made thing GIVES; at this rank it can also INFLICT — the same five emotions set on whoever holds it, wanted or not. ⚠️ RAGE ON AN ENEMY COSTS THEM THEIR TACTICS. Grief laid on a guard makes him unreachable. Love bound into a stolen thing makes the thief defend it. ⛔ AND PATHOS CANNOT DO THIS AT ALL — it resonates with the willing; a made thing does not ask.",
+     "cannot": "⛔ IT ACTS ON WHOEVER HOLDS OR CARRIES IT — you do not choose who that turns out to be, and it works on your own people the same way. ⚠️ It does not seek anyone out: it is an object, not an errand.",
      "functions": [
       "make",
       "bind"
@@ -749,16 +749,20 @@
      "class": "hard"
     },
     {
+     "text": "⛔ AT r1 IT ONLY GIVES. Inflicting a feeling on the unwilling is r2, and it is a different kind of act",
+     "class": "hard"
+    },
+    {
      "text": "⚠️ A made thing that carries feeling carries it TO EVERYONE who receives it, including those who did not ask",
      "class": "drawback"
     }
    ],
-   "plainly": "A create/social action. Put one named emotion — rage, joy, grief, love or hope, the same five as Pathos — into a made thing, and whoever holds it gets that emotion's grant when they use it. Rated 5 of 10, lasts about a week, one feeling per object. r2 makes it act on whoever holds it whether they meant to or not; r3 makes something that moves a city and outlives you.",
+   "plainly": "A create/social action. Put one named emotion — rage, joy, grief, love or hope, the same five as Pathos — into a made thing. ⛔ r1 IS A GIFT: whoever takes it up willingly gets that emotion's grant. r2 CAN INFLICT IT: the feeling is set on whoever holds or carries the object, wanted or not — which Pathos cannot do at all. r3 works at city scale and outlives you. One feeling per object, true and yours, about a week at r1.",
    "_nameWas": "The Made Elegy",
    "_idWas": "the_made_elegy",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_reviewed_20260824": "⛔ ERIK 2026-08-24 AGREED r1 SHOULD DO SOMETHING: it made 'a thing that holds a feeling' with NO MECHANICAL EFFECT — a mood at the base of a three-rank craft, the same defect as `last_lament`. ⚠️ NOW IT IS PATHOS DELAYED: the object carries one of the same five named emotions and grants that effect to whoever receives it, WITHOUT THE MAKER PRESENT OR EVEN ALIVE. ⛔ THAT GIVES THRENODY A SPINE ACROSS ONE VOCABULARY — pathos IN PERSON, made_elegy IN AN OBJECT, last_lament TO EVERYONE — instead of three unrelated feeling crafts. ⚠️ e2 -> e4 (unmigrated batch, sitting at the band floor); lowercase challengeTypes `art`/`craft` normalised to CREATE/SOCIAL; empty `notFor` written; r2 declared NO axes while adding the entire ACTING capability; `plainly` said 'rank 2 adds to special' where `special` is not an axis; and the `[cost]` bound DUPLICATED `intensity.surge` verbatim — the third craft today with that exact duplication."
+   "_reviewed_20260824": "⛔ ERIK 2026-08-24 AGREED r1 SHOULD DO SOMETHING: it made 'a thing that holds a feeling' with NO MECHANICAL EFFECT — a mood at the base of a three-rank craft, the same defect as `last_lament`. ⚠️ NOW IT IS PATHOS DELAYED: the object carries one of the same five named emotions and grants that effect to whoever receives it, WITHOUT THE MAKER PRESENT OR EVEN ALIVE. ⛔ THAT GIVES THRENODY A SPINE ACROSS ONE VOCABULARY — pathos IN PERSON, made_elegy IN AN OBJECT, last_lament TO EVERYONE — instead of three unrelated feeling crafts. ⚠️ e2 -> e4 (unmigrated batch, sitting at the band floor); lowercase challengeTypes `art`/`craft` normalised to CREATE/SOCIAL; empty `notFor` written; r2 declared NO axes while adding the entire ACTING capability; `plainly` said 'rank 2 adds to special' where `special` is not an axis; and the `[cost]` bound DUPLICATED `intensity.surge` verbatim — the third craft today with that exact duplication. ⛔ ERIK PUSHED AGAIN: 'how is r2 different from r1 then?' ⚠️ IT WAS NOT DIFFERENT ENOUGH AND I CAUSED THAT — I dropped 'or DESTABILIZES' from the original r2 text, leaving only opt-in vs ambient, which leans on CONSENT, which Erik has already ruled is not a design lever here. ⛔ THE REAL LADDER IS GIVE -> INFLICT: r1 is a gift that must be taken up; r2 SETS the feeling on whoever holds the object, wanted or not — AND PATHOS CANNOT DO THAT AT ALL, since it resonates only with the willing. ⚠️ So r2 is the rank where a Threnodist can make a cursed object, and the five emotions become weapons: rage costs an enemy their tactics, love bound into a stolen thing makes the thief defend it."
   },
   {
    "id": "feeling_road",

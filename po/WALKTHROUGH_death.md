@@ -696,7 +696,7 @@
 **status:** ⚠️ no crit · dmg:feeling  
 **ability functions:** bind, make
 
-> ⛔ PUT A FEELING INTO A THING SO IT CAN BE GIVEN LATER. Pathos hands an emotion to someone standing in front of you; this puts one into a song, an object, a carved token, a gesture — and whoever receives it gets that emotion's effect, whether or not you are anywhere near. ⚠️ THE FEELING MUST BE TRUE AND YOURS: a made sentiment holds nothing.
+> ⛔ PUT A FEELING INTO A THING SO IT CAN BE GIVEN — OR LAID ON SOMEONE — LATER. Pathos hands an emotion to a willing person standing in front of you. This puts one into a song, a token, a carved thing, and whoever receives it gets that emotion's effect whether or not you are anywhere near. ⚠️ AT r1 IT IS A GIFT. AT r2 IT NEED NOT BE: the same five feelings can be INFLICTED by an object, which is the one thing Pathos cannot do.
 
 **notFor:** ⛔ FACTS, MEMORIES OR MESSAGES — it carries a FEELING and nothing else; a token cannot tell anyone what happened. ⚠️ An emotion you are not having: you cannot make one you have not got. ⛔ AND IT CANNOT HOLD MORE THAN ONE at a time — a thing carrying two feelings carries neither.
 
@@ -706,15 +706,15 @@
 
 **grants:** ⛔ MAKE SOMETHING THAT HOLDS ONE NAMED EMOTION — a song, a token, a carved thing, a gesture — AND WHOEVER TAKES IT UP GETS THAT EMOTION'S GRANT, the same five as Pathos. ⚠️ You need not be there. You need not be alive.
 
-**cannot:** ⛔ THE FEELING MUST BE REAL AND YOURS; a made grief carries nothing. One feeling, one object, and it holds about a week. ⚠️ They have to choose to take it up.
+**cannot:** ⛔ THE FEELING MUST BE REAL AND YOURS; a made grief carries nothing. ⚠️ AND AT THIS RANK IT ONLY GIVES — it is a gift that has to be taken up, and it does nothing to someone who does not want it. One feeling, one object, about a week.
 
 ### r2 — Acting Elegy
 
 **functions:** make, bind · **gainAxes:** conditions, quality · **gains:** deepen · **harm:** none
 
-**grants:** ⛔ THE MADE THING ACTS WHETHER THEY MEANT IT TO OR NOT — the song that makes a room feel what it carries, the totem that steadies or unsettles whoever is holding it. ⚠️ IT NO LONGER WAITS TO BE TAKEN UP; being near it is enough.
+**grants:** ⛔ THE FEELING CAN BE TURNED. Until now a made thing GIVES; at this rank it can also INFLICT — the same five emotions set on whoever holds it, wanted or not. ⚠️ RAGE ON AN ENEMY COSTS THEM THEIR TACTICS. Grief laid on a guard makes him unreachable. Love bound into a stolen thing makes the thief defend it. ⛔ AND PATHOS CANNOT DO THIS AT ALL — it resonates with the willing; a made thing does not ask.
 
-**cannot:** It acts on those who receive or carry it. ⛔ IT DOES NOT SEEK ANYONE OUT — it is an object, not an errand.
+**cannot:** ⛔ IT ACTS ON WHOEVER HOLDS OR CARRIES IT — you do not choose who that turns out to be, and it works on your own people the same way. ⚠️ It does not seek anyone out: it is an object, not an errand.
 
 ### r3 — Lasting Work
 
@@ -724,7 +724,7 @@
 
 **cannot:** ⚠️ AT SCALE IT OUTLIVES YOUR INTENTION FOR IT. A city moved by your elegy moves where it likes.
 
-**bounds:** ⛔ THE FEELING MUST BE TRUE AND YOURS to bind — a made sentiment does not hold · ⛔ ONE FEELING PER MADE THING. A thing carrying two carries neither · ⚠️ IT CARRIES A FEELING, NEVER A FACT — no messages, no memories, no names · ⚠️ A made thing that carries feeling carries it TO EVERYONE who receives it, including those who did not ask
+**bounds:** ⛔ THE FEELING MUST BE TRUE AND YOURS to bind — a made sentiment does not hold · ⛔ ONE FEELING PER MADE THING. A thing carrying two carries neither · ⚠️ IT CARRIES A FEELING, NEVER A FACT — no messages, no memories, no names · ⛔ AT r1 IT ONLY GIVES. Inflicting a feeling on the unwilling is r2, and it is a different kind of act · ⚠️ A made thing that carries feeling carries it TO EVERYONE who receives it, including those who did not ask
 
 ---
 

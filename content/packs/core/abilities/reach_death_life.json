@@ -4383,12 +4383,13 @@
      "gains": "broaden",
      "harmRung": "lethal",
      "gainAxes": [
-      "area",
+      "scope",
       "damage",
       "duration"
      ],
      "grants": "⛔ TAKE A PIECE OF THE FIELD OUT OF THE FIGHT — a courtyard, a breach, a whole approach — at 3d6 a round for as long as it holds. ⚠️ ARMIES GO AROUND. That is usually the point: this craft wins ground by making ground unusable, and it is why the Palelands have never been successfully besieged from the south.",
-     "cannot": "⛔ WHAT YOU DENY, YOU DENY TO EVERYONE. ⚠️ And it will still be there after the fight is over, quietly, until it stops."
+     "cannot": "⛔ WHAT YOU DENY, YOU DENY TO EVERYONE. ⚠️ And it will still be there after the fight is over, quietly, until it stops.",
+     "_axisFix": "⚠️ `area` was not one of the nine gain axes — I reached for the craft's `mechanic.area` field name while authoring a gainAxis. Corrected to `scope`. Same class as the rankDeltas/mechanic `axis` collision, one rank deep."
     }
    ],
    "_authored": "⛔ ERIK 2026-08-24: 'we need a couple damage dealing skills… I'm thinking A ZONE THAT DAMAGES ALL WITHIN PER TURN.' ⚠️ MEASURED FIRST: Death had THREE damage-shaped crafts in 33 and NO PERSISTENT ZONE — every area craft in the corpus is an instantaneous burst. ⛔ THIS IS THE FIRST TICKING GROUND-DENIAL IN THE GAME, which makes it a different tactical object rather than a bigger Keening. ⚠️ IT DOES NOT SORT AND IT DOES NOT MOVE — both hard bounds, so it stays a positional decision rather than a targeted attack, and per Erik's ruling on Necrotic Strike the indiscriminate part is a PROPERTY OF THE GROUND, not of a craft aimed at people. ⛔ AND IT INHERITS §48 CORRECTLY: the unliving are untouched and one near emergence is MENDED by standing in it.",

@@ -1,3 +1,8 @@
+> ⛔ **HOW THE GAME WORKS: `docs/HOW_IT_WORKS.md`.** Erik 2026-08-28: *"between the two of you you need to
+> DOCUMENT WHAT YOU'RE FINDING in terms of how the game is supposed to work, and update it as we clear this
+> stuff up."* ⚠️ **That file is the answer, in present tense, marked BUILT or PROPOSED. Everything in `po/`
+> is working papers — specs, replies, findings — and none of it says how the game works.**
+
 # PO Backlog — Singularity
 
 > ⛔ **THE HEADLINE BELOW IS STAMPED 2026-08-14 AND TWO OF ITS CLAIMS ARE NOW FALSE.** `region_maps` and

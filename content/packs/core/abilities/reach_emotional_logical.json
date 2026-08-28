@@ -1552,11 +1552,15 @@
      ],
      "gains": "deepen",
      "harmRung": "lethal",
-     "gainAxes": []
+     "gainAxes": [
+      "conditions",
+      "quality"
+     ]
     }
    ],
    "challengeTypes": [
-    "SOCIAL"
+    "SOCIAL",
+    "DUEL"
    ],
    "harmRung": "lethal",
    "nativeOrCombination": "native",
@@ -1599,15 +1603,16 @@
      "class": "hard"
     },
     {
-     "text": "THE ONES WHO LIVE ARE CHANGED, and they know who did it",
-     "class": "cost"
+     "text": "⚠️ THE ONES WHO LIVE ARE CHANGED, and they know who did it",
+     "class": "drawback"
     }
    ],
    "plainly": "A social contest against the target's composure, drawing only on losses they have actually suffered — a target who has lost nothing gets a large bonus to resist. On a win they are incapacitated for several minutes and carry a lasting penalty to composure rolls afterward. At rank 2 the GM additionally rolls a small independent chance that the target's heart stops, scaled to how much they have genuinely lost. You cannot aim for that outcome and you cannot call it off once cast.",
    "_nameWas": "The Grief That Stops",
    "_idWas": "the_grief_that_stops",
    "_powerSystemWas": "reach_emotional_logical",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_reviewed_20260824": "✅ TWO RANKS BY DESIGN (Erik confirmed 2026-08-24), like `the_cut_thread`. ⛔ r2 declared NO axes while adding the lethal chance — now `conditions, quality`; r1 is the base. ⚠️ The `[cost]` bound was not a cost — 'the ones who live are changed, and they know who did it' is the craft's moral weight, reclassified `drawback`. `challengeTypes` was SOCIAL alone on a craft that can stop a heart; DUEL added. ✅ PROSE UNTOUCHED AND `plainly` IS THE BEST IN THE CORPUS — an actual GM procedure naming the resist bonus and the independent roll, rather than a generated summary. ⛔ IT DISAMBIGUATES ITSELF: 'Pathos SHARES a feeling; this INSTALLS one' — the pairing every other craft needed me to add."
   },
   {
    "id": "keening",

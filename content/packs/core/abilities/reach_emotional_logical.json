@@ -769,151 +769,6 @@
    "_reviewed_20260824": "⛔ ERIK 2026-08-24 AGREED r1 SHOULD DO SOMETHING: it made 'a thing that holds a feeling' with NO MECHANICAL EFFECT — a mood at the base of a three-rank craft, the same defect as `last_lament`. ⚠️ NOW IT IS PATHOS DELAYED: the object carries one of the same five named emotions and grants that effect to whoever receives it, WITHOUT THE MAKER PRESENT OR EVEN ALIVE. ⛔ THAT GIVES THRENODY A SPINE ACROSS ONE VOCABULARY — pathos IN PERSON, made_elegy IN AN OBJECT, last_lament TO EVERYONE — instead of three unrelated feeling crafts. ⚠️ e2 -> e4 (unmigrated batch, sitting at the band floor); lowercase challengeTypes `art`/`craft` normalised to CREATE/SOCIAL; empty `notFor` written; r2 declared NO axes while adding the entire ACTING capability; `plainly` said 'rank 2 adds to special' where `special` is not an axis; and the `[cost]` bound DUPLICATED `intensity.surge` verbatim — the third craft today with that exact duplication. ⛔ ERIK PUSHED AGAIN: 'how is r2 different from r1 then?' ⚠️ IT WAS NOT DIFFERENT ENOUGH AND I CAUSED THAT — I dropped 'or DESTABILIZES' from the original r2 text, leaving only opt-in vs ambient, which leans on CONSENT, which Erik has already ruled is not a design lever here. ⛔ THE REAL LADDER IS GIVE -> INFLICT: r1 is a gift that must be taken up; r2 SETS the feeling on whoever holds the object, wanted or not — AND PATHOS CANNOT DO THAT AT ALL, since it resonates only with the willing. ⚠️ So r2 is the rank where a Threnodist can make a cursed object, and the five emotions become weapons: rage costs an enemy their tactics, love bound into a stolen thing makes the thief defend it. ⛔ ERIK: 'and r3 now?' — IT WAS AN ANTICLIMAX. After a real category jump at r2 (give -> inflict), r3 was only BIGGER AND LONGER. ⚠️ THE CATEGORICAL CHANGE AVAILABLE WAS THAT IT STOPS NEEDING A HOLDER: r1 and r2 both act on whoever takes or carries the object; r3 becomes a FIXTURE OF A PLACE — a monument, a ritual, a song a town cannot stop knowing — working continuously on everyone there with nobody carrying anything. ⛔ SO THE LADDER IS GIVE -> INFLICT -> INSTALL, three different KINDS of act rather than three sizes of one. ⚠️ And it earns the line that was already there: 'a city moved by your elegy moves where it likes', now with 'and the third generation will have decided what it means.' ⛔ It does not step on `last_lament`, which is a ONE-TIME MASS RELEASE; this is a PERMANENT PLACE EFFECT."
   },
   {
-   "id": "feeling_road",
-   "name": "Feeling Road",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "wild_nanite",
-   "attribute": "social",
-   "axes": {
-    "emotional_logical": -0.3
-   },
-   "effectTags": [
-    "navigation",
-    "feeling",
-    "track"
-   ],
-   "harmRung": "none",
-   "narrationHints": "She followed the grief the way others follow a road.",
-   "description": "Navigate by feeling — find a person, a place, or a source by following the emotional resonance it leaves.",
-   "notFor": [],
-   "tradition": "threnodist",
-   "functions": [
-    "reveal",
-    "travel"
-   ],
-   "challengeTypes": [
-    "navigation",
-    "investigation",
-    "social"
-   ],
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Resonance Trail",
-     "grants": "Navigate toward a feeling — find a person, a place, or a source by following the emotional trace they leave across a space.",
-     "cannot": "There must be a feeling strong enough to leave a trace. Ordinary days leave nothing.",
-     "functions": [
-      "reveal"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "track"
-     ],
-     "_nameWas": "The Resonance Trail",
-     "gainAxes": [],
-     "_cannotWas": "Anything rank 2 adds — travel toward a powerful feeling in a region as if it were a beacon — grief, joy, terror — and find what is creating it; it follows FEELING."
-    },
-    {
-     "rank": 2,
-     "name": "Feeling Landmark",
-     "grants": "Travel toward a powerful feeling in a region as if it were a beacon — grief, joy, terror — and find what is creating it.",
-     "cannot": "⚠️ THE STRONGEST FEELING, not the one you wanted. You will find grief before you find the person grieving.",
-     "functions": [
-      "travel"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "track",
-      "travel"
-     ],
-     "_nameWas": "The Feeling Landmark",
-     "gainAxes": [],
-     "_cannotWas": "Anything rank 3 adds — follow a feeling's trace across any distance — track a person by their emotional signature, find the source of what is moving a whole community; it follows FEELING."
-    },
-    {
-     "rank": 3,
-     "name": "Long Trail",
-     "grants": "Follow a feeling's trace across any distance — track a person by their emotional signature, find the source of what is moving a whole community.",
-     "cannot": "⛔ Across any distance — and you feel it the whole way.",
-     "functions": [
-      "travel"
-     ],
-     "gains": "deepen",
-     "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "track",
-      "travel"
-     ],
-     "_nameWas": "The Long Trail",
-     "gainAxes": [
-      "range",
-      "scope",
-      "targets"
-     ],
-     "_cannotWas": "Nothing further; this is the craft's ceiling; it follows FEELING; and it still costs what it costs: arriving at the source of a great feeling means ARRIVING AT ITS SOURCE."
-    }
-   ],
-   "nativeOrCombination": "native",
-   "shape": "reposition",
-   "operativeAxis": [
-    "navigation",
-    "range"
-   ],
-   "mechanic": {
-    "range": 50,
-    "push": 0,
-    "magnitude": 4,
-    "duration": 4
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "extend",
-     "axis": "range",
-     "delta": "travel toward a POWERFUL FEELING in a region as if it were a BEACON — grief, joy, terror — and find what is creating it",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "extend",
-     "axis": "range",
-     "delta": "follow a feeling's trace ACROSS ANY DISTANCE — track a person BY THEIR EMOTIONAL SIGNATURE",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "follow the trace — half the range, and it fades behind you",
-    "surge": "double it; following a feeling to its source means ARRIVING AT ITS SOURCE"
-   },
-   "bounds": [
-    {
-     "text": "it follows FEELING — a person who feels nothing about where they went leaves no road",
-     "class": "hard"
-    },
-    {
-     "text": "arriving at the source of a great feeling means ARRIVING AT ITS SOURCE",
-     "class": "cost"
-    }
-   ],
-   "plainly": "A navigation/investigation/social action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 4 hours. Range is 50. Ranks: rank 2 extends range; rank 3 extends range. Limit: it follows Feeling — a person who feels nothing about where they went leaves no road.",
-   "_functionsWas": [
-    "reveal",
-    "track",
-    "travel"
-   ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_nameWas": "The Feeling Road",
-   "_idWas": "the_feeling_road",
-   "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
-  },
-  {
    "id": "wellspring",
    "name": "Wellspring",
    "levelReq": 1,
@@ -2278,7 +2133,8 @@
    "tradition": "threnodist",
    "functions": [
     "reveal",
-    "track"
+    "track",
+    "travel"
    ],
    "challengeTypes": [
     "SOCIAL",
@@ -2317,17 +2173,19 @@
     {
      "rank": 3,
      "name": "The Emotional History",
-     "grants": "Read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming.",
-     "cannot": "⛔ IT GIVES YOU THE FEELING OF A HISTORY AND NONE OF ITS FACTS. You learn that a valley is ashamed; you do not learn what it did. Names, dates and events are not feelings and this will not produce them. ⚠️ And a history nobody felt strongly leaves nothing to read — the quiet crimes are quiet here too.",
+     "grants": "⛔ READ THE FEELING-TRUTH OF A WHOLE HISTORY — what a place carries, what a people have been running from, what a person has felt for years without naming. ⚠️ AND FOLLOW IT TO ITS SOURCE: a trail you can read is a trail you can walk, across a region and across any distance, until you are standing where the feeling comes from.",
+     "cannot": "⛔ IT GIVES YOU THE FEELING OF A HISTORY AND NONE OF ITS FACTS. You learn that a valley is ashamed; you do not learn what it did. Names, dates and events are not feelings and this will not produce them. ⚠️ A history nobody felt strongly leaves nothing to read — the quiet crimes are quiet here too. ⛔ AND A TRAIL ENDS WHERE THE FEELING IS STILL BEING MADE: follow a region's terror and you arrive in front of whatever is causing it, mid-causing, with no warning and no approach of your choosing.",
      "functions": [
       "reveal",
-      "track"
+      "track",
+      "travel"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "_cannotWas": "Nothing further; this is the craft's ceiling; it reads WHAT IS FELT, not what is TRUE; and it still costs what it costs: what you read of a history, you carry some of.",
      "gainAxes": [
       "scope",
-      "quality"
+      "quality",
+      "range"
      ]
     }
    ],
@@ -2336,7 +2194,7 @@
     "timeReach"
    ],
    "mechanic": {
-    "range": 15,
+    "range": 50,
     "note": "SOCIAL attribute throughout this tradition"
    },
    "rankDeltas": [
@@ -2373,13 +2231,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/investigation/intellectual action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 15. Ranks: rank 2 extends timeReach; rank 3 deepens perceptionDepth. Limit: it reads What IS Felt, not what is True — a person sincerely wrong reads sincere.",
+   "plainly": "A social/investigate action. Hear the feeling under the one being shown. r2 tracks a feeling over time and across ground. ⛔ r3 READS A WHOLE HISTORY AND WALKS IT TO ITS SOURCE — any distance, and you feel it the whole way.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_sng525b": "⛔ SNG-525b. POINTER BOUNDS THAT SURVIVED THE SWEEP. ⚠️ These two are FIRST-GIFT SENSES RESTORED BY SNG-506 — their bounds came back verbatim from the revert log, carrying the original 'Anything rank 2 adds' fault that SNG-484 had already flagged everywhere else.\n⛔ A RESTORE BRINGS BACK WHAT WAS THERE, INCLUDING WHAT WAS WRONG WITH IT. The sweep ran before the restore, so these were never flagged and never fixed.",
    "_repriced_20260823": "⛔ ERIK 2026-08-23, TWICE. (1) e1 -> e3: it was below the L1 band (2-6), one of the unmigrated batch carrying legacy lowercase challengeTypes and an energy cost from an older convention. Vocabulary fixed too. (2) ⛔ r3's 'what you read of a history, you carry some of' REWRITTEN AS A SCOPE LIMIT, NOT A COST. I first proposed mechanising it as a night's rest plus one-history-at-a-time and Erik refused: ENERGY IS THE COST, except at extreme capstones. ⚠️ THIRD TIME IN ONE SESSION I WROTE A NARRATIVE DEBT INTO A COST FIELD ('later is still owed', 'you carry some of it', then a rest requirement). A `cannot` names what the craft WILL NOT PRODUCE. The bill is energy.",
-   "_challengeTypesNormalised_20260824": "⛔ I INTRODUCED NON-CANONICAL TYPES DURING THE DEATH WALKTHROUGH AND THE LINT CAUGHT ME. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND. ⚠️ I authored INVESTIGATION, ENDURANCE, INTELLECTUAL, HARDSHIP and COMBAT — plausible English, not the vocabulary. Seven of the eight crafts carrying them were mine, from this session. Normalised ['SOCIAL', 'INVESTIGATION', 'INTELLECTUAL'] -> ['SOCIAL', 'INVESTIGATE', 'PUZZLE']."
+   "_challengeTypesNormalised_20260824": "⛔ I INTRODUCED NON-CANONICAL TYPES DURING THE DEATH WALKTHROUGH AND THE LINT CAUGHT ME. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND. ⚠️ I authored INVESTIGATION, ENDURANCE, INTELLECTUAL, HARDSHIP and COMBAT — plausible English, not the vocabulary. Seven of the eight crafts carrying them were mine, from this session. Normalised ['SOCIAL', 'INVESTIGATION', 'INTELLECTUAL'] -> ['SOCIAL', 'INVESTIGATE', 'PUZZLE'].",
+   "_absorbedFeelingRoad_20260824": "⛔ ERIK 2026-08-24 RULED THE FOLD: `feeling_road` (L2) DUPLICATED THIS CRAFT'S r2 — 'The Feeling Trail' already tracked feelings across ground, at L1, as the tradition's first gift, and Feeling Road's r1 was strictly weaker. ⚠️ I FLAGGED THIS OVERLAP WHEN I AUDITED THIS CRAFT DAYS AGO AND MOVED ON WITHOUT RESOLVING IT. ⛔ `travel` FOLDED INTO r3, which now reads a history AND walks it to its source; `range: 50` carried across. ⚠️ ERIK EXPLICITLY EXCLUDED Feeling Road's 'THE STRONGEST FEELING, NOT THE ONE YOU WANTED' — it is not carried over. The surge line 'arriving at the source of a great feeling means ARRIVING AT ITS SOURCE' is kept as r3's ceiling. ⚠️ ERIK 2026-08-24: 'arriving at the source of a great feeling means arriving at its source' IS MEANINGLESS — a tautology that SOUNDS like a limit and gives a GM nothing to rule on. ⛔ I inherited it from Feeling Road's surge line and KEPT IT BECAUSE IT SOUNDED LIKE A CEILING. Replaced with what it was reaching for: the thing making the feeling IS STILL MAKING IT when you get there, and the craft chooses neither your timing nor your approach."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

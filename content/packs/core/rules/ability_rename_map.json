@@ -124,7 +124,7 @@
    "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
   },
   "the_feeling_road": {
-   "to": "feeling_road",
+   "to": "the_true_feeling",
    "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
   },
   "the_felt_room": {
@@ -1514,6 +1514,10 @@
   "the_lucky_fall": {
    "to": "lucky_fall",
    "why": "renamed — naming SOP §31; ⛔ MISSED BY THE ORIGINAL PASS, caught by CCode 2026-08-16"
+  },
+  "feeling_road": {
+   "to": "the_true_feeling",
+   "why": "⛔ FOLDED 2026-08-24 (Erik). `feeling_road` duplicated `the_true_feeling` r2 'The Feeling Trail', which already tracked feelings across ground at L1. Its `travel` capability was folded into Feeling-Sense r3, which now reads a history and walks it to its source. ⚠️ A character holding feeling_road maps to the_true_feeling."
   }
  },
  "_note2": "⚠️ EXPANDED. My first map was built from the REVERT LOGS, which only cover abilities I explicitly cut or merged. ⛔ THE DE-ARTICLE PASS TOUCHED 829 NAMES ACROSS THE WHOLE CORPUS and most of those ids were never in a revert log — so the map is now derived from LIVE IDS instead: for every live `X`, `the_X` maps to it.",

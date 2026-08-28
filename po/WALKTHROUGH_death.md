@@ -692,39 +692,39 @@
 
 ## 19. Made Elegy  ·  `made_elegy`
 
-**L2 · e2 · threnodist · wild_nanite · shape `construct` · harm `none`**  
+**L2 · e4 · threnodist · wild_nanite · shape `construct` · harm `none`**  
 **status:** ⚠️ no crit · dmg:feeling  
 **ability functions:** bind, make
 
-> Give feeling a form — make something that holds emotion correctly, so it can persist, be shared, or returned to.
+> ⛔ PUT A FEELING INTO A THING SO IT CAN BE GIVEN LATER. Pathos hands an emotion to someone standing in front of you; this puts one into a song, an object, a carved token, a gesture — and whoever receives it gets that emotion's effect, whether or not you are anywhere near. ⚠️ THE FEELING MUST BE TRUE AND YOURS: a made sentiment holds nothing.
 
-**notFor:** 
+**notFor:** ⛔ FACTS, MEMORIES OR MESSAGES — it carries a FEELING and nothing else; a token cannot tell anyone what happened. ⚠️ An emotion you are not having: you cannot make one you have not got. ⛔ AND IT CANNOT HOLD MORE THAN ONE at a time — a thing carrying two feelings carries neither.
 
 ### r1 — Feeling Held
 
 **functions:** make · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** Make something that holds a feeling correctly — a song, an object, a gesture — so the feeling persists in it and can be shared or returned to.
+**grants:** ⛔ MAKE SOMETHING THAT HOLDS ONE NAMED EMOTION — a song, a token, a carved thing, a gesture — AND WHOEVER TAKES IT UP GETS THAT EMOTION'S GRANT, the same five as Pathos. ⚠️ You need not be there. You need not be alive.
 
-**cannot:** ⛔ THE FEELING MUST BE REAL AND YOURS. A made grief carries nothing.
+**cannot:** ⛔ THE FEELING MUST BE REAL AND YOURS; a made grief carries nothing. One feeling, one object, and it holds about a week. ⚠️ They have to choose to take it up.
 
 ### r2 — Acting Elegy
 
-**functions:** make, bind · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
+**functions:** make, bind · **gainAxes:** conditions, quality · **gains:** deepen · **harm:** none
 
-**grants:** Bind a feeling into a made thing so it acts — the song that makes people feel what it carries, the totem that sustains or destabilizes the one who holds it.
+**grants:** ⛔ THE MADE THING ACTS WHETHER THEY MEANT IT TO OR NOT — the song that makes a room feel what it carries, the totem that steadies or unsettles whoever is holding it. ⚠️ IT NO LONGER WAITS TO BE TAKEN UP; being near it is enough.
 
-**cannot:** It acts on those who receive the made thing. It does not seek anyone out.
+**cannot:** It acts on those who receive or carry it. ⛔ IT DOES NOT SEEK ANYONE OUT — it is an object, not an errand.
 
 ### r3 — Lasting Work
 
-**functions:** make, bind · **gainAxes:** duration · **gains:** deepen · **harm:** none
+**functions:** make, bind · **gainAxes:** scope, duration, targets · **gains:** broaden · **harm:** none
 
-**grants:** Make something that carries feeling at scale — art that moves a city, a ritual that holds a people's grief, something that does what you felt long after you're gone.
+**grants:** ⛔ MAKE SOMETHING THAT CARRIES FEELING AT SCALE — art that moves a city, a ritual that holds a people's grief, a work that does what you felt long after you are gone. ⚠️ THE WEEK BECOMES YEARS.
 
-**cannot:** ⚠️ At scale, and it outlives your intention for it. A city moved by your elegy moves where it likes.
+**cannot:** ⚠️ AT SCALE IT OUTLIVES YOUR INTENTION FOR IT. A city moved by your elegy moves where it likes.
 
-**bounds:** THE FEELING MUST BE TRUE to bind — a made sentiment does not hold · it carries the feeling TO EVERYONE, including those who did not ask
+**bounds:** ⛔ THE FEELING MUST BE TRUE AND YOURS to bind — a made sentiment does not hold · ⛔ ONE FEELING PER MADE THING. A thing carrying two carries neither · ⚠️ IT CARRIES A FEELING, NEVER A FACT — no messages, no memories, no names · ⚠️ A made thing that carries feeling carries it TO EVERYONE who receives it, including those who did not ask
 
 ---
 

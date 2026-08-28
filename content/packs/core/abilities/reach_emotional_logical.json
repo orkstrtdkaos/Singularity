@@ -622,7 +622,7 @@
    "id": "made_elegy",
    "name": "Made Elegy",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
@@ -635,25 +635,24 @@
     "made"
    ],
    "harmRung": "none",
-   "narrationHints": "She made the grief into something with edges you could touch.",
-   "description": "Give feeling a form — make something that holds emotion correctly, so it can persist, be shared, or returned to.",
-   "notFor": [],
+   "narrationHints": "She made the grief into something with edges you could touch. ⚠️ People carry these for years. A Threnodist who has been dead a decade can still steady someone's hands from inside a pocket.",
+   "description": "⛔ PUT A FEELING INTO A THING SO IT CAN BE GIVEN LATER. Pathos hands an emotion to someone standing in front of you; this puts one into a song, an object, a carved token, a gesture — and whoever receives it gets that emotion's effect, whether or not you are anywhere near. ⚠️ THE FEELING MUST BE TRUE AND YOURS: a made sentiment holds nothing.",
+   "notFor": "⛔ FACTS, MEMORIES OR MESSAGES — it carries a FEELING and nothing else; a token cannot tell anyone what happened. ⚠️ An emotion you are not having: you cannot make one you have not got. ⛔ AND IT CANNOT HOLD MORE THAN ONE at a time — a thing carrying two feelings carries neither.",
    "tradition": "threnodist",
    "functions": [
     "bind",
     "make"
    ],
    "challengeTypes": [
-    "art",
-    "social",
-    "craft"
+    "CREATE",
+    "SOCIAL"
    ],
    "tree": [
     {
      "rank": 1,
      "name": "Feeling Held",
-     "grants": "Make something that holds a feeling correctly — a song, an object, a gesture — so the feeling persists in it and can be shared or returned to.",
-     "cannot": "⛔ THE FEELING MUST BE REAL AND YOURS. A made grief carries nothing.",
+     "grants": "⛔ MAKE SOMETHING THAT HOLDS ONE NAMED EMOTION — a song, a token, a carved thing, a gesture — AND WHOEVER TAKES IT UP GETS THAT EMOTION'S GRANT, the same five as Pathos. ⚠️ You need not be there. You need not be alive.",
+     "cannot": "⛔ THE FEELING MUST BE REAL AND YOURS; a made grief carries nothing. One feeling, one object, and it holds about a week. ⚠️ They have to choose to take it up.",
      "functions": [
       "make"
      ],
@@ -666,32 +665,37 @@
     {
      "rank": 2,
      "name": "Acting Elegy",
-     "grants": "Bind a feeling into a made thing so it acts — the song that makes people feel what it carries, the totem that sustains or destabilizes the one who holds it.",
-     "cannot": "It acts on those who receive the made thing. It does not seek anyone out.",
-     "functions": [
-      "make",
-      "bind"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_nameWas": "The Acting Elegy",
-     "gainAxes": [],
-     "_cannotWas": "Anything rank 3 adds — make something that carries feeling at scale — art that moves a city, a ritual that holds a people's grief, something that does what you felt long after you're gone; THE FEELING MUST BE TRUE to bind."
-    },
-    {
-     "rank": 3,
-     "name": "Lasting Work",
-     "grants": "Make something that carries feeling at scale — art that moves a city, a ritual that holds a people's grief, something that does what you felt long after you're gone.",
-     "cannot": "⚠️ At scale, and it outlives your intention for it. A city moved by your elegy moves where it likes.",
+     "grants": "⛔ THE MADE THING ACTS WHETHER THEY MEANT IT TO OR NOT — the song that makes a room feel what it carries, the totem that steadies or unsettles whoever is holding it. ⚠️ IT NO LONGER WAITS TO BE TAKEN UP; being near it is enough.",
+     "cannot": "It acts on those who receive or carry it. ⛔ IT DOES NOT SEEK ANYONE OUT — it is an object, not an errand.",
      "functions": [
       "make",
       "bind"
      ],
      "gains": "deepen",
      "harmRung": "none",
+     "_nameWas": "The Acting Elegy",
+     "gainAxes": [
+      "conditions",
+      "quality"
+     ],
+     "_cannotWas": "Anything rank 3 adds — make something that carries feeling at scale — art that moves a city, a ritual that holds a people's grief, something that does what you felt long after you're gone; THE FEELING MUST BE TRUE to bind."
+    },
+    {
+     "rank": 3,
+     "name": "Lasting Work",
+     "grants": "⛔ MAKE SOMETHING THAT CARRIES FEELING AT SCALE — art that moves a city, a ritual that holds a people's grief, a work that does what you felt long after you are gone. ⚠️ THE WEEK BECOMES YEARS.",
+     "cannot": "⚠️ AT SCALE IT OUTLIVES YOUR INTENTION FOR IT. A city moved by your elegy moves where it likes.",
+     "functions": [
+      "make",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
      "_nameWas": "The Lasting Work",
      "gainAxes": [
-      "duration"
+      "scope",
+      "duration",
+      "targets"
      ],
      "_cannotWas": "Nothing further; this is the craft's ceiling; THE FEELING MUST BE TRUE to bind; and it still costs what it costs: it carries the feeling TO EVERYONE, including those who did not ask."
     }
@@ -700,13 +704,16 @@
    "shape": "construct",
    "operativeAxis": [
     "persistence",
-    "scope"
+    "scope",
+    "targets"
    ],
    "mechanic": {
     "magnitude": 5,
     "duration": 168,
     "scope": 2,
-    "damageType": "feeling"
+    "damageType": "feeling",
+    "carriesEmotion": true,
+    "note": "construct/make. ⛔ IT IS PATHOS, DELAYED AND DELIVERABLE. The object carries one of the same five named emotions (`pathos.mechanic.emotions`) and grants that effect to whoever receives it — RAGE +2 damage and no fleeing · JOY energy relief · GRIEF unfrightenable · LOVE +2 resist while protecting another · HOPE sheds one imposed condition. ⚠️ ONE FEELING PER OBJECT, TRUE AND THE MAKER'S OWN. ⛔ THIS GIVES THRENODY A THREE-CRAFT SPINE FOR THE SAME FIVE EMOTIONS: `pathos` in person, `made_elegy` in an object across time and distance, `last_lament` to everyone at once. Duration 168 = a week at r1; r3 buys duration and outlives the maker."
    },
    "rankDeltas": [
     {
@@ -730,19 +737,28 @@
    },
    "bounds": [
     {
-     "text": "THE FEELING MUST BE TRUE to bind — a made sentiment does not hold",
+     "text": "⛔ THE FEELING MUST BE TRUE AND YOURS to bind — a made sentiment does not hold",
      "class": "hard"
     },
     {
-     "text": "it carries the feeling TO EVERYONE, including those who did not ask",
-     "class": "cost"
+     "text": "⛔ ONE FEELING PER MADE THING. A thing carrying two carries neither",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT CARRIES A FEELING, NEVER A FACT — no messages, no memories, no names",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ A made thing that carries feeling carries it TO EVERYONE who receives it, including those who did not ask",
+     "class": "drawback"
     }
    ],
-   "plainly": "A art/social/craft action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 adds to special; rank 3 extends scope. Limit: the Feeling Must BE True to bind — a made sentiment does not hold.",
+   "plainly": "A create/social action. Put one named emotion — rage, joy, grief, love or hope, the same five as Pathos — into a made thing, and whoever holds it gets that emotion's grant when they use it. Rated 5 of 10, lasts about a week, one feeling per object. r2 makes it act on whoever holds it whether they meant to or not; r3 makes something that moves a city and outlives you.",
    "_nameWas": "The Made Elegy",
    "_idWas": "the_made_elegy",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_reviewed_20260824": "⛔ ERIK 2026-08-24 AGREED r1 SHOULD DO SOMETHING: it made 'a thing that holds a feeling' with NO MECHANICAL EFFECT — a mood at the base of a three-rank craft, the same defect as `last_lament`. ⚠️ NOW IT IS PATHOS DELAYED: the object carries one of the same five named emotions and grants that effect to whoever receives it, WITHOUT THE MAKER PRESENT OR EVEN ALIVE. ⛔ THAT GIVES THRENODY A SPINE ACROSS ONE VOCABULARY — pathos IN PERSON, made_elegy IN AN OBJECT, last_lament TO EVERYONE — instead of three unrelated feeling crafts. ⚠️ e2 -> e4 (unmigrated batch, sitting at the band floor); lowercase challengeTypes `art`/`craft` normalised to CREATE/SOCIAL; empty `notFor` written; r2 declared NO axes while adding the entire ACTING capability; `plainly` said 'rank 2 adds to special' where `special` is not an axis; and the `[cost]` bound DUPLICATED `intensity.surge` verbatim — the third craft today with that exact duplication."
   },
   {
    "id": "feeling_road",

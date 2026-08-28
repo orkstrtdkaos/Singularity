@@ -3711,3 +3711,76 @@ creates the thing it was aimed at.**
 | ⛔ **what decides narrowing vs stable** | ⛔ **ERIK — unruled, and it is the load-bearing one** |
 | the empty cell: undeath with no vessel and no person | ⛔ **ERIK** |
 | Spirit intertwining | ⛔ **ERIK — and Spirit is unaudited; do not settle either alone** |
+
+---
+
+## 49. ⛔ THE DEATH WALKTHROUGH, FINISHED — what 33 crafts taught, 2026-08-24
+
+**§47 was written after 13 crafts. This is the rest, and the lessons changed shape once the tradition was
+whole.**
+
+### 49.1 ⛔ THE ONE QUESTION THAT FOUND EVERYTHING: "WHAT DOES THIS DO?"
+
+**Erik asked it of `shared_weight`, and later — after I had stopped asking — of `last_lament`:**
+*"You're starting to forget the questions. WHAT DOES THIS DO?"*
+
+⛔ **SIX CRAFTS OF 33 WERE REBUILT RATHER THAN TIDIED, AND EVERY ONE WAS FOUND BY THAT QUESTION:**
+
+| craft | what it did | what it does now |
+|---|---|---|
+| `shared_weight` | ⛔ lifted a condition the engine never applied | **intercepts conditions aimed at an ally** |
+| `wellspring` | a mood | **bolsters energy, resist and willingness** |
+| `shared_grief` → `under_song` | carried grief | **hears the feeling under the shown one** |
+| `true_account` | a third reading craft | ⛔ **Death's `bargain`** |
+| ⛔ `last_lament` | ⛔ **NOTHING — an L5 capstone costing everything** | **clears every imposed condition in scope** |
+| `made_elegy` | made a keepsake | **a gift, a curse, or a monument** |
+
+⚠️ **THE DEFECT IS INVISIBLE TO EVERY GATE.** These crafts were well-formed, in-band, correctly typed, and
+did nothing. ⛔ **A LINT CANNOT FIND A MOOD.**
+
+### 49.2 ⛔ THREE FAILURES THAT PASS A "DOES IT SOUND RIGHT" CHECK
+
+**Erik caught all three in one craft, and they are distinct:**
+
+1. ⛔ **THE CRAFT DOES NOTHING** — `last_lament`, above.
+2. ⛔ **A TAUTOLOGY WITH THE GRAMMAR OF A LIMIT** — *"arriving at the source of a great feeling means
+   arriving at its source."* ⚠️ **It cannot fail the "does it stop something?" test because it has no
+   content to test.** **The sharper question is: WHAT DOES A GM DO DIFFERENTLY ON READING THIS?**
+3. ⛔ **A RANK THAT ADDS WHAT THE RANK BELOW ALREADY HAD** — Feeling-Sense r3 gained "walk the trail" when
+   r2 already tracked across ground.
+
+### 49.3 ⛔ I DUPLICATED THREE TIMES, ALWAYS ONTO MY OWN RECENT WORK
+
+**`pathos` r1 was `under_song` verbatim. `made_elegy` r2 collapsed into r1. Feeling-Sense r3 was
+`true_account`'s named edge.** ⚠️ **Every one reached for a mechanic I had authored HOURS EARLIER.**
+
+⛔ **THE CHECK: BEFORE AUTHORING A RANK'S BENEFIT, NAME WHICH CRAFT ALREADY PROVIDES IT.** ⚠️ **Recency is
+the risk, not distance — the crafts I had just written were the ones I copied.**
+
+### 49.4 ⛔ AND I INVENTED VOCABULARY WHILE CORRECTING INVENTED VOCABULARY
+
+**`questions` and `access` — two `gainAxes` outside the nine — were authored BY ME during this walkthrough,
+in the same pass where I was fixing `kinds`, `precision`, `fear` and `upkeepRelief`.**
+
+⚠️ **KNOWING THE RULE DID NOT MAKE ME RUN IT.** ⛔ **This is why the lint exists and why it must run per
+tradition BEFORE the per-craft pass, not after.**
+
+### 49.5 ⚠️ WHAT THE PER-CRAFT PASS IS ACTUALLY FOR
+
+**The lint found 33 mechanical defects across Death. ⛔ IT FOUND NONE OF THE SIX REBUILDS, NONE OF THE THREE
+DUPLICATIONS, AND NEITHER TAUTOLOGY.**
+
+**So the division of labour is now measured, not assumed:**
+- ⛔ **LINT** — vocabulary, bands, rung inversions, empty fields, shape. **Run it first, per tradition.**
+- ⛔ **THE HUMAN PASS** — *does this do anything · does the rank add anything · does another craft already
+  do it · is the colour the right subject.* ⚠️ **None of these is machine-detectable and all four produced
+  the session's real work.**
+
+### 49.6 DEATH'S FINAL SHAPE
+
+**33 crafts · 25 of 27 verbs · absent: `deceive` and `travel`, both correctly** — Death's two obscures work
+by TELLING THE TRUTH (`soul_stare`, `public_grief`), and its movement craft is INFILTRATION rather than
+travel (`grey_road`). ⛔ **Both absences are characterisation, not gaps.**
+
+**Gained in the pass:** a damage type (`vitality`), a craft (`driven_shade`), an obscure (`public_grief`),
+a shape (`retrieval`), and §48's whole undeath model. **Lost:** one duplicate (`feeling_road`).

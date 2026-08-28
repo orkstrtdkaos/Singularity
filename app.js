@@ -108,14 +108,14 @@ import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 import { tickAllProjects, openProject, projectProgress } from "./engine/projects.js";
 import { holdOpen, slowSink, canReach, resolveRetrieval } from "./engine/death.js"; // CCODE-270: the player's road back — the seven retrieval crafts had no door
 import { alliesOf } from "./engine/combatants.js"; // CCODE-276: the roster the party block renders
-import { commandSlots, bringForward } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+import { commandSlots, bringForward, canRaiseBand, raiseBand, bandStrength, bloodBand, legionClash } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { characterPower } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.239";
+const APP_VERSION = "1.9.240";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6270,6 +6270,38 @@ function applyTurn(turn, resolution, playerWords = null) {
   // ⚠️ THE VERBS ARE SEPARATE ON PURPOSE. Aevi: "Ashwardens DRAG, Numinous INVITE, Threnody DELAYS, Rootkin
   // PAY A PRICE — same ladder, five answers." One `retrieve` op would have collapsed five traditions into
   // one mechanic, which is the single thing her spec asked this build not to do.
+  // ⛔ CCODE-278 — THE BAND'S DOOR, IN THE SAME CHANGE AS THE BAND. Erik asked one commit ago whether the
+  // UI allowed for these features and the answer was no, ten for ten; building four more exports with no
+  // caller would have been the same mistake with the ink still wet.
+  // ⚠️ TWO VERBS, because raising a following and marching it into something are different decisions taken
+  // at different times — one is a season's work, the other is a moment.
+  applyStep("bandOps", () => {
+    let day = 0; try { day = absoluteWorldDay(); } catch { day = character.clock?.day ?? 0; }
+    for (const op of (Array.isArray(turn.bandOps) ? turn.bandOps : []).slice(0, 2)) {
+      const kind = String(op?.op || "");
+      if (kind === "raise") {
+        // ⛔ EARNED, AND THE ENGINE DECIDES. A narrator that could hand out a warband would make the whole
+        // command ladder decorative.
+        const gate = canRaiseBand(character, { cfg: CONTENT.rules?.melee || {}, renownBand: character.renownBand || null });
+        if (!gate.ready) { character._bandNotes = [...(character._bandNotes || []).slice(-2), gate.why]; continue; }
+        const r = raiseBand(character, { id: String(op.id || "").slice(0, 40), name: op.name ? String(op.name).slice(0, 60) : null,
+          count: Math.max(1, Math.min(500, op.count | 0 || 20)), quality: Math.max(1, Math.min(3, op.quality | 0 || 1)),
+          from: op.from || null, day });
+        character._bandNotes = [...(character._bandNotes || []).slice(-2), r.ok ? `${r.band.name} answers to you now` : r.why];
+      } else if (kind === "clash") {
+        const band = (character.bands || []).find(b => b.id === String(op.id || ""));
+        if (!band || band.condition === "broken") continue;
+        const theirs = [{ count: Math.max(1, Math.min(2000, op.against | 0 || 20)), quality: Math.max(1, Math.min(3, op.quality | 0 || 1)) }];
+        const c = legionClash([bandStrength(band, { cfg: CONTENT.rules?.melee || {} })], theirs,
+          { heroSwing: Math.max(-1, Math.min(1, Number(op.heroSwing) || 0)), cfg: CONTENT.rules?.melee || {} });
+        // ⚠️ THE CLASH DECIDES THE BATTLE; `bloodBand` decides what it did to the people who fought it. Two
+        // results, because a won battle that costs nobody anything is a number going up.
+        const b = bloodBand(band, c.tide, { cfg: CONTENT.rules?.melee || {} });
+        character.bands = (character.bands || []).map(x => x.id === band.id ? b.band : x);
+        character._bandNotes = [...(character._bandNotes || []).slice(-2), `${c.outcome} — ${b.why}`];
+      }
+    }
+  });
   applyStep("deathOps", () => {
     for (const op of (Array.isArray(turn.deathOps) ? turn.deathOps : []).slice(0, 3)) {
       const who = String(op?.npcId || "");

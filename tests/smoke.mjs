@@ -20443,6 +20443,101 @@ await (async () => {
       && Number(C277.rules?.melee?.overmatchedDamageKept) > 0);
   }
 
+  // 5ba · CCODE-278 — A BAND, AND THE ASYMMETRY THAT MADE EVERY ONE OF THEM ROUT.
+  // ⛔ ERIK: "around when you're hitting the named npc party member cap you're likely to have enough of a
+  // following to have a band or unit... that allows for you to go into larger battles and operate against
+  // other units... nearing end game you'll have multiple units and legions and armies."
+  {
+    const ML278 = await import("../engine/melee.js");
+    const silas278 = JSON.parse(readFileSync(join(root, "characters/player-s9z9u1/char-mrhs8286.json"), "utf8"));
+
+    // ⛔ EARNED ON THE SAME LADDER AS THE COMPANION CAP, deliberately — a second ladder would let a character
+    // command a unit while being unable to lead three people.
+    check("CCODE-278: a newcomer cannot raise a band; someone who leads a line can",
+      ML278.canRaiseBand({ level: 3, subAttributes: { presence: 3 } }).ready === false
+      && ML278.canRaiseBand(silas278, { renownBand: "renowned" }).ready === true);
+    // ⚠️ AND A HOLDING COUNTS — "you'll own or build more holds"; a post is where a following comes from.
+    check("CCODE-278: …and holdings are the other road to one",
+      ML278.canRaiseBand({ level: 2, subAttributes: { presence: 2 },
+        holdings: [{ id: "a", condition: "holding" }, { id: "b", condition: "thriving" }] }).ready === true);
+
+    // the record is what legionClash consumes — designed against each other, not bolted together
+    {
+      const ch = { level: 30, subAttributes: { presence: 9 }, bands: [] };
+      const r = ML278.raiseBand(ch, { id: "sw", name: "the Stillwater Watch", count: 40, quality: 2, day: 20 });
+      check("CCODE-278: a raised band is count + quality + provenance, and starts fresh",
+        r.ok && ch.bands.length === 1 && ch.bands[0].condition === "fresh" && ch.bands[0].count === 40);
+      check("CCODE-278: …and you cannot raise the same one twice",
+        ML278.raiseBand(ch, { id: "sw", count: 10 }).ok === false && ch.bands.length === 1);
+      // ⛔ CONDITION IS A MULTIPLIER, NOT A SUBTRACTION. A worn band is the same people, slower and warier;
+      // modelling that as fewer heads would lose the distinction between losses and morale.
+      const fresh = ML278.bandStrength({ count: 40, quality: 2, condition: "fresh" });
+      const worn = ML278.bandStrength({ count: 40, quality: 2, condition: "worn" });
+      check("CCODE-278: a worn band is the same COUNT and less worth — losses and morale are different things",
+        worn.count === fresh.count && worn.effective < fresh.effective);
+    }
+
+    // ⛔ THE ASYMMETRY, WHICH IS THE REAL FIND. `tide = ratio − 1` is bounded below at −1 and unbounded
+    // above, so DEFEAT SATURATED TWICE AS FAST AS VICTORY: outnumbered 2:1 gave −0.50, outnumbering 2:1 gave
+    // +1.00. A band at 2:3 — not a scale gap, just worse numbers — read −0.33 and routed on contact.
+    // ⚠️ FOUND BY PLAYING IT, NOT BY READING IT: forty of the Stillwater Watch met sixty and broke in four
+    // clashes without ever having a bad round.
+    {
+      const flat = () => 0.5;   // no luck either way — isolate the force ratio
+      const at = (us, them) => ML278.legionClash([{ count: us, quality: 1 }], [{ count: them, quality: 1 }], { rng: flat });
+      check("CCODE-278: being outnumbered 2:3 is GIVING GROUND, not a rout",
+        at(40, 60).outcome === "giving ground");
+      check("CCODE-278: …and 1:3 still routs — the fix widened the middle, it did not remove the bottom",
+        at(20, 60).outcome === "rout");
+      // ⛔ SYMMETRY IS THE PROPERTY. Winning by a margin and losing by the same margin must be mirror images.
+      check("CCODE-278: outnumbering 3:2 and being outnumbered 2:3 are mirror images",
+        Math.abs(at(60, 40).tide + at(40, 60).tide) < 0.001);
+      check("CCODE-278: …and an even meeting is still a grind",
+        at(60, 60).outcome === "grinding" && Math.abs(at(60, 60).tide) < 0.001);
+    }
+
+    // ⚠️ AND A BAND CAN BREAK WITHOUT BEING DESTROYED — the difference between a unit and a health bar, and
+    // the state a commander actually has to manage.
+    {
+      let b = { id: "x", name: "the Watch", count: 40, quality: 2, condition: "fresh", losses: 0 };
+      const r1 = ML278.bloodBand(b, 0.4);
+      check("CCODE-278: winning still costs you people, and marks them blooded",
+        r1.lost > 0 && r1.band.condition === "blooded" && r1.band.count < 40);
+      let losing = b;
+      for (let i = 0; i < 6 && losing.condition !== "broken"; i++) losing = ML278.bloodBand(losing, -0.8).band;
+      check("CCODE-278: …and a beaten band BREAKS with people still standing — not a health bar",
+        losing.condition === "broken" && losing.count > 0);
+      // ⛔ NON-VACUITY: winning and losing must actually differ, or the whole clash is scenery.
+      check("CCODE-278: losing costs more than winning (floor)",
+        ML278.bloodBand(b, -0.8).lost > ML278.bloodBand(b, 0.8).lost);
+    }
+
+    // ⛔ AND THE DOOR, IN THE SAME CHANGE AS THE BAND. Erik asked one commit ago whether the UI allowed for
+    // these features and the answer was no, ten for ten. Adding four more exports with no caller would have
+    // been the same mistake with the ink still wet — and `testOnlyExports` went 26 → 29 before I wired it,
+    // which is the ratchet doing exactly its job.
+    {
+      const appSrc278 = readFileSync(join(root, "app.js"), "utf8");
+      const gmSrc278 = readFileSync(join(root, "engine/gm.js"), "utf8");
+      check("CCODE-278: the app applies a bandOps step and imports every verb it uses",
+        /applyStep\("bandOps"/.test(appSrc278) && appSrc278.includes("canRaiseBand")
+        && appSrc278.includes("raiseBand") && appSrc278.includes("bandStrength")
+        && appSrc278.includes("bloodBand") && appSrc278.includes("legionClash"));
+      // ⚠️ TWO VERBS, because raising a following and marching it into something are decisions taken at
+      // different times — one is a season's work, the other is a moment.
+      check("CCODE-278: raise and clash are separate ops",
+        /"raise"/.test(appSrc278) && /"clash"/.test(appSrc278));
+      // ⛔ THE ENGINE DECIDES WHETHER THEY HAVE EARNED IT. A narrator that could hand out a warband would
+      // make the whole command ladder decorative.
+      check("CCODE-278: the GM is told the engine refuses an unearned band, and not to narrate losses",
+        /never assert that people follow them/i.test(gmSrc278)
+        && /NEVER narrate a band's losses yourself/i.test(gmSrc278));
+      check("CCODE-278: bandOps survives a truncated reply",
+        /"bandOps"/.test(gmSrc278.slice(gmSrc278.indexOf("SALVAGEABLE_OPS"))));
+    }
+  }
+
+
   // 3 · ⛔ THE 24 VERBS, NOT THE 8 BUCKETS. "HARM" cannot tell `strike` from `break`.
   {
     const abs = Object.values(C197.abilities || {});

@@ -231,7 +231,16 @@ export function legionClash(ours, theirs, { rng = Math.random, heroSwing = 0, cf
   const swing = Math.max(-cap, Math.min(cap, num(heroSwing, 0)));
   const ratio = us / Math.max(1, them);
   const luck = (rng() + rng() + rng()) / 3;            // massed engagements are LESS swingy, not more
-  const tide = (ratio - 1) + swing + (luck - 0.5) * num(cfg.legionVariance, 0.3);
+  // ⛔ CCODE-278 — `ratio - 1` WAS ASYMMETRIC AND IT MADE EVERY OUTNUMBERED BAND ROUT INSTANTLY. It is
+  // bounded below at −1 and unbounded above, so DEFEAT SATURATED TWICE AS FAST AS VICTORY: outnumbered 2:1
+  // gave −0.50, outnumbering 2:1 gave +1.00. A band at 2:3 odds — not even a scale gap, just worse numbers —
+  // read as −0.33 and routed on contact.
+  // ⚠️ FOUND BY PLAYING IT, not by reading it: forty of the Stillwater Watch met sixty and broke in four
+  // clashes without ever having a bad round.
+  // ⛔ `(us − them) / (us + them)` IS SYMMETRIC AND BOUNDED [−1, 1]. 40 v 60 now reads "giving ground";
+  // 20 v 60 still routs. The outcome bands did not need touching — they were never the problem.
+  const edge = (us - them) / Math.max(1, us + them);
+  const tide = edge + swing + (luck - 0.5) * num(cfg.legionVariance, 0.3);
   const outcome = tide > 0.25 ? "breakthrough" : tide > 0.05 ? "gaining" : tide > -0.05 ? "grinding"
     : tide > -0.25 ? "giving ground" : "rout";
   return {
@@ -351,5 +360,87 @@ export function answersOvermatch(overmatch, { powers = [], ground = [], cfg = {}
     why: `nothing you are holding answers ${overmatch.gap} scales of difference`,
     // ⛔ AND THE HONEST THIRD OPTION IS ALWAYS THERE. Erik's list, verbatim, ends with not being there.
     remaining: "leave, or be swept up in it" };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+// CCODE-278 / ERIK — A BAND: THE THING THAT MAKES THE UNIT RUNG REAL.
+//
+// ⛔ "around when you're hitting the named npc party member cap you're likely to have enough of a following
+// to have a band or unit that would operate in the simplified sense... that allows for you to go into
+// larger battles and operate against other units... nearing end game you'll have multiple units and legions
+// and armies."
+//
+// ⚠️ IT LIVES HERE AND NOT IN `holdings.js`, AND I CHECKED BEFORE DECIDING. A holding is a PLACE — it has a
+// `locationId`, a steward, an obligation, and a condition that drifts between thriving and failing. A band
+// MOVES and its failure mode is casualties. Forcing them into one record would have made `locationId`
+// meaningless on half the rows, which is the opposite of the reason holdings has one record for two kinds.
+//
+// ⛔ AND IT LIVES IN THIS FILE RATHER THAN A NEW ONE BECAUSE `legionClash` IS ITS ONLY CONSUMER. Two modules
+// that only talk to each other are one module with a seam in it — and I built a duplicate death ladder this
+// week by reaching for a new file before looking.
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+
+/** ⚠️ CONDITION MOVES BOTH WAYS, like a holding's — a band that has been through something is not simply
+ *  smaller, it is DIFFERENT, and a one-way counter would make every campaign a slow bleed. */
+export const BAND_CONDITIONS = ["fresh", "blooded", "worn", "broken"];
+
+/** ⛔ CAN YOU EVEN RAISE ONE? The same three sources as `commandSlots`, deliberately — Erik tied the band to
+ *  the same arc as the named-companion cap, and a second ladder would let a character command a unit while
+ *  being unable to lead three people.
+ *  ⚠️ AND A HOLDING COUNTS. "you'll own or build more holds" — a post is where a following comes from. */
+export function canRaiseBand(character, { cfg = {}, renownBand = null } = {}) {
+  const lead = commandSlots(character, { cfg, renownBand });
+  const holds = (character?.holdings || []).filter(h => h && h.condition !== "failed").length;
+  const need = Math.max(1, num(cfg.bandAtSlots, 3));
+  const ready = lead.slots >= need || holds >= Math.max(1, num(cfg.bandAtHoldings, 2));
+  return { ready, slots: lead.slots, holdings: holds,
+    why: ready
+      ? (lead.slots >= need ? "you lead enough people that others follow them" : "your holdings can raise a following")
+      : `you lead ${lead.slots} and hold ${holds} — not yet a following` };
+}
+
+/** Raise one. ⚠️ A BAND IS `{count, quality}` PLUS PROVENANCE, because that is exactly what `legionClash`
+ *  consumes — the record and the resolver were designed against each other rather than bolted together. */
+export function raiseBand(character, { id, name = null, count = 20, quality = 1, from = null, day = 0 } = {}) {
+  if (!id) return { ok: false, why: "a band needs a name to be called by" };
+  const list = character.bands || (character.bands = []);
+  if (list.some(b => b.id === id)) return { ok: false, why: `${name || id} is already yours` };
+  const band = { id, name: name || id, count: Math.max(1, num(count, 20)),
+    quality: Math.max(1, num(quality, 1)), from, condition: "fresh", raisedDay: num(day, 0), losses: 0 };
+  list.push(band);
+  return { ok: true, band };
+}
+
+/** ⛔ WHAT IT IS WORTH IN A CLASH — and condition is a MULTIPLIER, not a subtraction. A worn band is not a
+ *  smaller band: it is the same people, slower and warier, and modelling that as fewer heads would lose the
+ *  distinction between losses and morale. */
+export function bandStrength(band, { cfg = {} } = {}) {
+  const mult = { fresh: 1, blooded: num(cfg.bloodedMult, 0.9), worn: num(cfg.wornMult, 0.7), broken: num(cfg.brokenMult, 0.3) };
+  const m = num(mult[String(band?.condition || "fresh")], 1);
+  return { count: Math.max(0, num(band?.count, 0)), quality: Math.max(0, num(band?.quality, 1)) * m,
+    effective: Math.round(num(band?.count, 0) * num(band?.quality, 1) * m) };
+}
+
+/** ⚠️ WHAT A CLASH COSTS THEM. Erik's tide decides the battle; this decides what it did to the people who
+ *  fought it. ⛔ AND A BAND CAN BREAK WITHOUT BEING DESTROYED — that is the difference between a unit and a
+ *  health bar, and it is the state a commander actually has to manage. */
+export function bloodBand(band, tide, { cfg = {} } = {}) {
+  if (!band) return { band, lost: 0 };
+  const t = num(tide, 0);
+  const rate = Math.max(0, num(cfg.lossPerTide, 0.12));
+  // losing costs more than winning, and a rout costs most
+  const share = t >= 0 ? rate * (1 - Math.min(0.8, t)) : rate * (1 + Math.min(2, -t) * 1.5);
+  const lost = Math.min(num(band.count, 0), Math.round(num(band.count, 0) * share));
+  const left = Math.max(0, num(band.count, 0) - lost);
+  const hurt = num(band.count, 0) ? (num(band.losses, 0) + lost) / (num(band.count, 0) + num(band.losses, 0)) : 0;
+  const condition = left === 0 ? "broken"
+    : hurt > num(cfg.brokenAt, 0.5) ? "broken"
+    : hurt > num(cfg.wornAt, 0.25) ? "worn"
+    : lost > 0 || band.condition !== "fresh" ? "blooded" : "fresh";
+  return { band: { ...band, count: left, losses: num(band.losses, 0) + lost, condition },
+    lost, condition, broke: condition === "broken" && band.condition !== "broken",
+    why: lost === 0 ? `${band.name} comes through it whole`
+      : condition === "broken" ? `${band.name} breaks — ${lost} lost and the rest will not hold`
+      : `${band.name} loses ${lost}` };
 }
 

@@ -2,7 +2,7 @@
 
 ⛔ **GENERATED — `node po/matrix_gen.mjs death --detail`. Full rank text, verbatim.**
 
-**34 crafts · 97 ranks** · 2026-08-28
+**33 crafts · 94 ranks** · 2026-08-28
 
 ---
 
@@ -124,7 +124,7 @@
 
 **L1 · e3 · threnodist · wild_nanite · shape `setup` · harm `none`**  
 **status:** ⚠️ no crit · *first-gift*  
-**ability functions:** reveal, track
+**ability functions:** reveal, track, empower
 
 > Read what is actually felt — not what is shown, what is present.
 
@@ -148,11 +148,11 @@
 
 ### r3 — The Emotional History
 
-**functions:** reveal, track · **gainAxes:** scope, quality · **gains:** deepen · **harm:** —
+**functions:** reveal, track, empower · **gainAxes:** quality, scope · **gains:** deepen · **harm:** —
 
-**grants:** Read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming.
+**grants:** ⛔ READ THE FEELING-TRUTH OF A WHOLE HISTORY — what a place carries, what a people have been running from, what a person has felt for years without naming. ⚠️ AND THE READING IS AN EDGE: knowing what someone has actually been carrying tells you WHAT WOULD MOVE THEM, and acting on that enters as a named term in your favour — against that person, or that town, for as long as the reading holds.
 
-**cannot:** ⛔ IT GIVES YOU THE FEELING OF A HISTORY AND NONE OF ITS FACTS. You learn that a valley is ashamed; you do not learn what it did. Names, dates and events are not feelings and this will not produce them. ⚠️ And a history nobody felt strongly leaves nothing to read — the quiet crimes are quiet here too.
+**cannot:** ⛔ IT GIVES YOU THE FEELING OF A HISTORY AND NONE OF ITS FACTS. You learn that a valley is ashamed; you do not learn what it did. Names, dates and events are not feelings and this will not produce them. ⚠️ A history nobody felt strongly leaves nothing to read — the quiet crimes are quiet here too. ⛔ AND THE EDGE IS ONLY EVER FOR MOVING THEM: it helps you reach a person, never fight one.
 
 **bounds:** ⛔ It reads WHAT IS FELT, not what is TRUE — a person sincerely wrong reads sincere · ⛔ THE GUARDED CAN CLOSE. Anyone declaring obscure in the sense slot is answered by the tie rule, and the tie is theirs · ⛔ FEELINGS, NEVER FACTS — at every rank. It will not name a person, a date or an event
 
@@ -462,45 +462,7 @@
 
 ---
 
-## 13. Feeling Road  ·  `feeling_road`
-
-**L2 · e1 · threnodist · wild_nanite · shape `reposition` · harm `none`**  
-**status:** ⚠️ no crit  
-**ability functions:** reveal, travel
-
-> Navigate by feeling — find a person, a place, or a source by following the emotional resonance it leaves.
-
-**notFor:** 
-
-### r1 — Resonance Trail
-
-**functions:** reveal · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
-
-**grants:** Navigate toward a feeling — find a person, a place, or a source by following the emotional trace they leave across a space.
-
-**cannot:** There must be a feeling strong enough to leave a trace. Ordinary days leave nothing.
-
-### r2 — Feeling Landmark
-
-**functions:** travel · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
-
-**grants:** Travel toward a powerful feeling in a region as if it were a beacon — grief, joy, terror — and find what is creating it.
-
-**cannot:** ⚠️ THE STRONGEST FEELING, not the one you wanted. You will find grief before you find the person grieving.
-
-### r3 — Long Trail
-
-**functions:** travel · **gainAxes:** range, scope, targets · **gains:** deepen · **harm:** none
-
-**grants:** Follow a feeling's trace across any distance — track a person by their emotional signature, find the source of what is moving a whole community.
-
-**cannot:** ⛔ Across any distance — and you feel it the whole way.
-
-**bounds:** it follows FEELING — a person who feels nothing about where they went leaves no road · arriving at the source of a great feeling means ARRIVING AT ITS SOURCE
-
----
-
-## 14. Felt Wall  ·  `felt_wall`
+## 13. Felt Wall  ·  `felt_wall`
 
 **L2 · e1 · threnodist · wild_nanite · shape `guard` · harm `none`**  
 **status:** crit · ward:feeling/appetite · sense  
@@ -538,7 +500,7 @@
 
 ---
 
-## 15. Grey Hand  ·  `grey_hand`
+## 14. Grey Hand  ·  `grey_hand`
 
 **L2 · e5 · ashwarden · metaphysical · shape `hobble` · harm `incapacitating`**  
 **status:** crit · gated  
@@ -576,7 +538,7 @@
 
 ---
 
-## 16. Grey Road  ·  `grey_road`
+## 15. Grey Road  ·  `grey_road`
 
 **L2 · e5 · ashwarden · metaphysical · shape `reposition` · harm `none`**  
 **status:** ⚠️ no crit · ward:decay/living  
@@ -614,7 +576,7 @@
 
 ---
 
-## 17. Grief Strike  ·  `grief_strike`
+## 16. Grief Strike  ·  `grief_strike`
 
 **L2 · e6 · threnodist · wild_nanite · shape `strike` · harm `damaging`**  
 **status:** crit · dmg:feeling  
@@ -652,7 +614,7 @@
 
 ---
 
-## 18. Kept Breath  ·  `kept_breath`
+## 17. Kept Breath  ·  `kept_breath`
 
 **L2 · e5 · ashwarden · metaphysical · shape `guard` · harm `none`**  
 **status:** crit · ward:physical/decay  
@@ -690,7 +652,7 @@
 
 ---
 
-## 19. Made Elegy  ·  `made_elegy`
+## 18. Made Elegy  ·  `made_elegy`
 
 **L2 · e4 · threnodist · wild_nanite · shape `construct` · harm `none`**  
 **status:** ⚠️ no crit · dmg:feeling  
@@ -728,7 +690,7 @@
 
 ---
 
-## 20. Pathos  ·  `pathos`
+## 19. Pathos  ·  `pathos`
 
 **L2 · e6 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
 **status:** ⚠️ no crit  
@@ -766,7 +728,7 @@
 
 ---
 
-## 21. Public Grief  ·  `public_grief`
+## 20. Public Grief  ·  `public_grief`
 
 **L2 · e4 · threnodist · wild_nanite · shape `conceal` · harm `none`**  
 **status:** crit · obscure  
@@ -804,7 +766,7 @@
 
 ---
 
-## 22. Soul Stare  ·  `soul_stare`
+## 21. Soul Stare  ·  `soul_stare`
 
 **L2 · e4 · ashwarden · metaphysical · shape `conceal` · harm `none`**  
 **status:** crit · obscure  
@@ -842,7 +804,7 @@
 
 ---
 
-## 23. Wither  ·  `wither`
+## 22. Wither  ·  `wither`
 
 **L2 · e5 · ashwarden · metaphysical · shape `damage` · harm `damaging`**  
 **status:** crit · dmg:decay  
@@ -880,7 +842,7 @@
 
 ---
 
-## 24. Ask the Dead  ·  `ask_the_dead`
+## 23. Ask the Dead  ·  `ask_the_dead`
 
 **L3 · e5 · ashwarden · metaphysical · shape `setup` · harm `none`**  
 **status:** crit · gated · upkeep  
@@ -918,7 +880,7 @@
 
 ---
 
-## 25. Calling Back  ·  `calling_back`
+## 24. Calling Back  ·  `calling_back`
 
 **L3 · e12 · ashwarden · metaphysical · shape `retrieval` · harm `incapacitating`**  
 **status:** crit · dmg:decay · upkeep  
@@ -956,7 +918,7 @@
 
 ---
 
-## 26. Death-Ward  ·  `death_ward`
+## 25. Death-Ward  ·  `death_ward`
 
 **L3 · e6 · ashwarden · metaphysical · shape `guard` · harm `none`**  
 **status:** crit · ward:decay/judgement/appetite/vitality  
@@ -994,7 +956,7 @@
 
 ---
 
-## 27. Draw Down  ·  `draw_down`
+## 26. Draw Down  ·  `draw_down`
 
 **L3 · e6 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
 **status:** crit · dmg:vitality · gated  
@@ -1032,7 +994,7 @@
 
 ---
 
-## 28. Raised Hand  ·  `set_hand`
+## 27. Raised Hand  ·  `set_hand`
 
 **L3 · e9 · ashwarden · metaphysical · shape `construct` · harm `none`**  
 **status:** crit · upkeep  
@@ -1070,7 +1032,7 @@
 
 ---
 
-## 29. Under-Song  ·  `shared_grief`
+## 28. Under-Song  ·  `shared_grief`
 
 **L3 · e7 · threnodist · wild_nanite · shape `reveal` · harm `none`**  
 **status:** crit · gated  
@@ -1108,7 +1070,7 @@
 
 ---
 
-## 30. Driven Shade  ·  `given_errand`
+## 29. Driven Shade  ·  `given_errand`
 
 **L4 · e11 · ashwarden · metaphysical · shape `construct` · harm `lethal`**  
 **status:** crit  
@@ -1146,7 +1108,7 @@
 
 ---
 
-## 31. Names of the Lost  ·  `names_of_the_lost`
+## 30. Names of the Lost  ·  `names_of_the_lost`
 
 **L4 · e11 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
 **status:** ⚠️ no crit · gated  
@@ -1184,7 +1146,7 @@
 
 ---
 
-## 32. Grief That Stops  ·  `grief_that_stops`
+## 31. Grief That Stops  ·  `grief_that_stops`
 
 **L5 · e13 · threnodist · wild_nanite · shape `hobble` · harm `lethal`**  
 **status:** crit · dmg:feeling  
@@ -1214,7 +1176,7 @@
 
 ---
 
-## 33. Last Lament  ·  `last_lament`
+## 32. Last Lament  ·  `last_lament`
 
 **L5 · e13 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
 **status:** ⚠️ no crit · gated  
@@ -1236,7 +1198,7 @@
 
 ---
 
-## 34. The Cut Thread  ·  `the_cut_thread`
+## 33. The Cut Thread  ·  `the_cut_thread`
 
 **L5 · e14 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
 **status:** crit · gated · upkeep  

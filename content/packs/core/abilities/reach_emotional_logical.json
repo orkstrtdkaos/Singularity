@@ -2128,13 +2128,12 @@
     "truth"
    ],
    "narrationHints": "She knew what the room was feeling before anyone spoke.",
-   "description": "Read what is actually felt — not what is shown, what is present.",
+   "description": "⛔ THE THRENODIST FIRST GIFT, AND IT READS ACROSS TIME. Hear what is actually felt rather than what is shown — now, along a trail, or across the years a place has been standing. ⚠️ IT IS THE ONLY CRAFT THAT ASKS A ROOM WHAT HAPPENED AND GETS AN ANSWER.",
    "notFor": "Facts. This is a feeling-sense and it produces feelings — not names, not events, not what happened. ⚠️ Reading the GUARDED, who can close. And catching a liar who believes himself: sincerity is what it measures.",
    "tradition": "threnodist",
    "functions": [
     "reveal",
-    "track",
-    "empower"
+    "track"
    ],
    "challengeTypes": [
     "SOCIAL",
@@ -2173,24 +2172,24 @@
     {
      "rank": 3,
      "name": "The Emotional History",
-     "grants": "⛔ READ THE FEELING-TRUTH OF A WHOLE HISTORY — what a place carries, what a people have been running from, what a person has felt for years without naming. ⚠️ AND THE READING IS AN EDGE: knowing what someone has actually been carrying tells you WHAT WOULD MOVE THEM, and acting on that enters as a named term in your favour — against that person, or that town, for as long as the reading holds.",
-     "cannot": "⛔ IT GIVES YOU THE FEELING OF A HISTORY AND NONE OF ITS FACTS. You learn that a valley is ashamed; you do not learn what it did. Names, dates and events are not feelings and this will not produce them. ⚠️ A history nobody felt strongly leaves nothing to read — the quiet crimes are quiet here too. ⛔ AND THE EDGE IS ONLY EVER FOR MOVING THEM: it helps you reach a person, never fight one.",
+     "grants": "⛔ READ A PLACE'S EMOTIONAL HISTORY, IN ORDER, WITH NOBODY LEFT TO ASK. What happened in this room, what was felt here and in what sequence, across years — who was afraid first, when it turned to resignation, the night everything changed. ⚠️ NO WITNESS, NO SURVIVOR, NO RECORD AND NO BODY IS REQUIRED. The room kept it.",
+     "cannot": "⛔ FEELINGS IN SEQUENCE, NEVER EVENTS. You get fear, then grief, then a long flat nothing — you do not get who, what, or why, and two things felt the same way are indistinguishable. ⚠️ A history nobody felt strongly leaves nothing: the quiet crimes are quiet here too. ⛔ AND THE OLDER IT IS THE COARSER IT READS — a century gives you a shape, not a sequence.",
      "functions": [
       "reveal",
-      "track",
-      "empower"
+      "track"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "_cannotWas": "Nothing further; this is the craft's ceiling; it reads WHAT IS FELT, not what is TRUE; and it still costs what it costs: what you read of a history, you carry some of.",
      "gainAxes": [
-      "quality",
+      "duration",
       "scope"
      ]
     }
    ],
    "operativeAxis": [
-    "perceptionDepth",
-    "timeReach"
+    "timeReach",
+    "scope",
+    "quality"
    ],
    "mechanic": {
     "range": 50,
@@ -2228,9 +2227,13 @@
     {
      "text": "⛔ FEELINGS, NEVER FACTS — at every rank. It will not name a person, a date or an event",
      "class": "hard"
+    },
+    {
+     "text": "⚠️ THE OLDER THE FEELING, THE COARSER THE READ — a century gives you a shape, not a sequence",
+     "class": "hard"
     }
    ],
-   "plainly": "A social/investigate action. Hear the feeling under the one being shown. r2 tracks a feeling over time and across ground — and a trail you can read is a trail you can follow. ⛔ r3 READS A WHOLE HISTORY AND TURNS IT INTO LEVERAGE: you learn what has actually been carried, which tells you what would move them, and acting on it is a named edge. It never produces facts, and the edge never helps you hurt anyone.",
+   "plainly": "A social/investigate action. r1 hears what someone actually feels beneath what they are showing. r2 tracks a feeling over time and across ground. ⛔ r3 READS A PLACE'S EMOTIONAL HISTORY IN SEQUENCE — years of it, with no witness, no survivor and no record needed. ⚠️ It gives feelings in order and never events: not who, not what, not why.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
@@ -2238,7 +2241,8 @@
    "_repriced_20260823": "⛔ ERIK 2026-08-23, TWICE. (1) e1 -> e3: it was below the L1 band (2-6), one of the unmigrated batch carrying legacy lowercase challengeTypes and an energy cost from an older convention. Vocabulary fixed too. (2) ⛔ r3's 'what you read of a history, you carry some of' REWRITTEN AS A SCOPE LIMIT, NOT A COST. I first proposed mechanising it as a night's rest plus one-history-at-a-time and Erik refused: ENERGY IS THE COST, except at extreme capstones. ⚠️ THIRD TIME IN ONE SESSION I WROTE A NARRATIVE DEBT INTO A COST FIELD ('later is still owed', 'you carry some of it', then a rest requirement). A `cannot` names what the craft WILL NOT PRODUCE. The bill is energy.",
    "_challengeTypesNormalised_20260824": "⛔ I INTRODUCED NON-CANONICAL TYPES DURING THE DEATH WALKTHROUGH AND THE LINT CAUGHT ME. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND. ⚠️ I authored INVESTIGATION, ENDURANCE, INTELLECTUAL, HARDSHIP and COMBAT — plausible English, not the vocabulary. Seven of the eight crafts carrying them were mine, from this session. Normalised ['SOCIAL', 'INVESTIGATION', 'INTELLECTUAL'] -> ['SOCIAL', 'INVESTIGATE', 'PUZZLE'].",
    "_absorbedFeelingRoad_20260824": "⛔ ERIK 2026-08-24 RULED THE FOLD: `feeling_road` (L2) DUPLICATED THIS CRAFT'S r2 — 'The Feeling Trail' already tracked feelings across ground, at L1, as the tradition's first gift, and Feeling Road's r1 was strictly weaker. ⚠️ I FLAGGED THIS OVERLAP WHEN I AUDITED THIS CRAFT DAYS AGO AND MOVED ON WITHOUT RESOLVING IT. ⛔ `travel` FOLDED INTO r3, which now reads a history AND walks it to its source; `range: 50` carried across. ⚠️ ERIK EXPLICITLY EXCLUDED Feeling Road's 'THE STRONGEST FEELING, NOT THE ONE YOU WANTED' — it is not carried over. The surge line 'arriving at the source of a great feeling means ARRIVING AT ITS SOURCE' is kept as r3's ceiling. ⚠️ ERIK 2026-08-24: 'arriving at the source of a great feeling means arriving at its source' IS MEANINGLESS — a tautology that SOUNDS like a limit and gives a GM nothing to rule on. ⛔ I inherited it from Feeling Road's surge line and KEPT IT BECAUSE IT SOUNDED LIKE A CEILING. Replaced with what it was reaching for: the thing making the feeling IS STILL MAKING IT when you get there, and the craft chooses neither your timing nor your approach.",
-   "_r3IsABoostNow_20260824": "⛔ ERIK 2026-08-24: 'the r3 isn't a boost — YOU CAN ALREADY WALK A TRAIL. It should give you some benefit.' ⚠️ HE IS RIGHT: r2 tracks across ground, so folding `travel` in gave r3 nothing a rank below did not already do. ⛔ r3 NOW GIVES LEVERAGE: reading what a person or a place has carried for years tells you WHAT WOULD MOVE THEM, entering as a named `contestMod` the way `true_account`'s reckoning does. ⚠️ AND ITS CEILING KEEPS IT OUT OF COMBAT — the edge is only ever for MOVING someone, never for fighting them, which keeps Feeling-Sense a social craft and stops it becoming a damage setup like `soul_stare`. ⛔ `travel` dropped from the function list: it was the fold from `feeling_road` and r2 already covers following a trail."
+   "_r3IsABoostNow_20260824": "⛔ ERIK 2026-08-24: 'the r3 isn't a boost — YOU CAN ALREADY WALK A TRAIL. It should give you some benefit.' ⚠️ HE IS RIGHT: r2 tracks across ground, so folding `travel` in gave r3 nothing a rank below did not already do. ⛔ r3 NOW GIVES LEVERAGE: reading what a person or a place has carried for years tells you WHAT WOULD MOVE THEM, entering as a named `contestMod` the way `true_account`'s reckoning does. ⚠️ AND ITS CEILING KEEPS IT OUT OF COMBAT — the edge is only ever for MOVING someone, never for fighting them, which keeps Feeling-Sense a social craft and stops it becoming a damage setup like `soul_stare`. ⛔ `travel` dropped from the function list: it was the fold from `feeling_road` and r2 already covers following a trail.",
+   "_r3IsTimeNotLeverage_20260824": "⛔ ERIK 2026-08-24, TWICE: first 'the r3 isn't a boost — you can already walk a trail', then 'BUT TRUE ACCOUNT GIVES THAT EDGE. This needs to do its own thing. Step back and look again.' ⚠️ MY SECOND ATTEMPT GAVE IT `true_account`'s NAMED CONTEST EDGE VERBATIM — the THIRD craft I have duplicated onto an existing one this session (pathos r1 onto under_song, made_elegy r2 blurred, this). ⛔ STEPPING BACK: THIS CRAFT OWNS TIME. r1 reads NOW, r2 reads a trail OVER TIME, so r3 is YEARS — a place's emotional history read in sequence with no witness, no survivor, no record and no body. ⚠️ NOTHING ELSE IN THE GAME DOES THAT: `ask_the_dead` needs someone to ask, `true_account` reads a thing's WORTH, `under_song` reads what is beneath NOW. ⛔ AND ITS CEILING IS ITS OWN LIMIT MADE SHARPER — feelings in sequence, never events: you get fear, then grief, then a long flat nothing, and never who or why. `travel` and `empower` both dropped; r2 already follows a trail and the edge was not ours."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

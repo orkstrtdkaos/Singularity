@@ -124,9 +124,9 @@
 
 **L1 · e3 · threnodist · wild_nanite · shape `setup` · harm `none`**  
 **status:** ⚠️ no crit · *first-gift*  
-**ability functions:** reveal, track, empower
+**ability functions:** reveal, track
 
-> Read what is actually felt — not what is shown, what is present.
+> ⛔ THE THRENODIST FIRST GIFT, AND IT READS ACROSS TIME. Hear what is actually felt rather than what is shown — now, along a trail, or across the years a place has been standing. ⚠️ IT IS THE ONLY CRAFT THAT ASKS A ROOM WHAT HAPPENED AND GETS AN ANSWER.
 
 **notFor:** Facts. This is a feeling-sense and it produces feelings — not names, not events, not what happened. ⚠️ Reading the GUARDED, who can close. And catching a liar who believes himself: sincerity is what it measures.
 
@@ -148,13 +148,13 @@
 
 ### r3 — The Emotional History
 
-**functions:** reveal, track, empower · **gainAxes:** quality, scope · **gains:** deepen · **harm:** —
+**functions:** reveal, track · **gainAxes:** duration, scope · **gains:** broaden · **harm:** —
 
-**grants:** ⛔ READ THE FEELING-TRUTH OF A WHOLE HISTORY — what a place carries, what a people have been running from, what a person has felt for years without naming. ⚠️ AND THE READING IS AN EDGE: knowing what someone has actually been carrying tells you WHAT WOULD MOVE THEM, and acting on that enters as a named term in your favour — against that person, or that town, for as long as the reading holds.
+**grants:** ⛔ READ A PLACE'S EMOTIONAL HISTORY, IN ORDER, WITH NOBODY LEFT TO ASK. What happened in this room, what was felt here and in what sequence, across years — who was afraid first, when it turned to resignation, the night everything changed. ⚠️ NO WITNESS, NO SURVIVOR, NO RECORD AND NO BODY IS REQUIRED. The room kept it.
 
-**cannot:** ⛔ IT GIVES YOU THE FEELING OF A HISTORY AND NONE OF ITS FACTS. You learn that a valley is ashamed; you do not learn what it did. Names, dates and events are not feelings and this will not produce them. ⚠️ A history nobody felt strongly leaves nothing to read — the quiet crimes are quiet here too. ⛔ AND THE EDGE IS ONLY EVER FOR MOVING THEM: it helps you reach a person, never fight one.
+**cannot:** ⛔ FEELINGS IN SEQUENCE, NEVER EVENTS. You get fear, then grief, then a long flat nothing — you do not get who, what, or why, and two things felt the same way are indistinguishable. ⚠️ A history nobody felt strongly leaves nothing: the quiet crimes are quiet here too. ⛔ AND THE OLDER IT IS THE COARSER IT READS — a century gives you a shape, not a sequence.
 
-**bounds:** ⛔ It reads WHAT IS FELT, not what is TRUE — a person sincerely wrong reads sincere · ⛔ THE GUARDED CAN CLOSE. Anyone declaring obscure in the sense slot is answered by the tie rule, and the tie is theirs · ⛔ FEELINGS, NEVER FACTS — at every rank. It will not name a person, a date or an event
+**bounds:** ⛔ It reads WHAT IS FELT, not what is TRUE — a person sincerely wrong reads sincere · ⛔ THE GUARDED CAN CLOSE. Anyone declaring obscure in the sense slot is answered by the tie rule, and the tie is theirs · ⛔ FEELINGS, NEVER FACTS — at every rank. It will not name a person, a date or an event · ⚠️ THE OLDER THE FEELING, THE COARSER THE READ — a century gives you a shape, not a sequence
 
 ---
 

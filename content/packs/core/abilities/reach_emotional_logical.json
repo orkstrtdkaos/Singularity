@@ -468,7 +468,7 @@
    "id": "felt_wall",
    "name": "Felt Wall",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "wild_nanite",
    "attribute": "social",
    "axes": {
@@ -482,23 +482,23 @@
    "harmRung": "none",
    "narrationHints": "She felt the danger before the knife moved. Feeling was always faster.",
    "description": "Protect through emotional early warning — the feeling of threat before it fully forms.",
-   "notFor": [],
+   "notFor": "⛔ ANYTHING WITHOUT A SELF — a rockfall, a deadfall, a mechanism, a set crew. It reads INTENT, and a thing with no intent arrives unannounced. ⚠️ IT IS NOT ARMOUR: it soaks nothing. You are not hit because you are not there, and if you cannot move you gain nothing from knowing.",
    "tradition": "threnodist",
    "functions": [
     "reveal",
     "shield"
    ],
    "challengeTypes": [
-    "combat",
-    "social",
-    "defense"
+    "FIGHT",
+    "SOCIAL",
+    "DEFEND"
    ],
    "tree": [
     {
      "rank": 1,
      "name": "Early Feel",
      "grants": "Feel a threat forming in a room's emotional weather — in a person's shifting feeling-state — in time to move before the action completes.",
-     "cannot": "Emotional weather only. A construct, a mechanism or a set body approaches unfelt.",
+     "cannot": "⛔ INTENT ONLY. A mechanism, a deadfall or a MINDLESS RAISED CREW arrives unfelt — there is no self in one to give it away. ⚠️ BUT A DRIVEN SHADE OR AN AFTERLING READS FINE: they want something, and wanting is weather. ⛔ WHICH MEANS THE SILENCE ITSELF IS INFORMATION — undead you cannot feel are the simple kind.",
      "functions": [
       "reveal"
      ],
@@ -514,7 +514,7 @@
      "rank": 2,
      "name": "Feeling Guard",
      "grants": "Protect someone by feeling the danger around them — your emotional sense is the guard watching what eyes don't catch.",
-     "cannot": "⚠️ You feel it forming. Whether you can act in time is a separate question.",
+     "cannot": "⚠️ You feel it forming. Whether you can act in time is a separate question — and if you are pinned or cornered, knowing is all you get.",
      "functions": [
       "shield"
      ],
@@ -525,7 +525,9 @@
       "shield"
      ],
      "_nameWas": "The Feeling Guard",
-     "gainAxes": [],
+     "gainAxes": [
+      "targets"
+     ],
      "_cannotWas": "Anything rank 3 adds — what shifts toward violence or harm in a space reaches you first, across the whole space, and you act in the gap it gives; it senses INTENT."
     },
     {
@@ -536,7 +538,7 @@
      "functions": [
       "shield"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "none",
      "_functionsWas": [
       "foresee",
@@ -564,7 +566,7 @@
     "evasionRank": 2,
     "duration": 4,
     "targets": 1,
-    "note": "A FIFTEENTH DEFENSIVE LOGIC — FORESENSED: soak 0; it reads the EMOTIONAL WEATHER and moves before harm forms. Distinct from PRE-EMPTED (end the threat) and UNTIMED (defeat the timing): this one feels the intent BEFORE it becomes action.",
+    "note": "⛔ A FIFTEENTH DEFENSIVE LOGIC — FORESENSED: soak 0, EVASION 4 at rank 2. It reads the emotional weather and moves before harm forms. Distinct from PRE-EMPTED (end the threat) and UNTIMED (defeat the timing): this one feels the INTENT before it becomes an act. ⚠️ THE BLIND SPOT IS ONLY THE MINDLESS (Erik 2026-08-24): a `raised_hand` crew has no self and arrives unfelt — but a `driven_shade` and a typical AFTERLING still have something to read, and this works on them normally. ⛔ SO IT IS ALSO A DIAGNOSTIC: if the undead in front of you cannot be felt, it is a tool; if it can, it is further along the cocoon (§48.2) AND MORE DANGEROUS.",
     "wardTypes": [
      "feeling",
      "appetite"
@@ -596,15 +598,19 @@
    },
    "bounds": [
     {
-     "text": "it senses INTENT — a rockfall, a machine, or an animal has no feeling to read",
+     "text": "⛔ IT SENSES INTENT. A rockfall, a machine, or a mindless raised body has no feeling to read and arrives unannounced",
      "class": "hard"
     },
     {
-     "text": "feeling every shift toward harm means FEELING EVERY SHIFT",
-     "class": "cost"
+     "text": "⛔ IT IS EVASION AND NOT ARMOUR — it soaks nothing. Pinned, bound or cornered, the warning is all you get",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AT r3 YOU FEEL EVERY SHIFT TOWARD HARM IN THE SPACE, including your own party's fear",
+     "class": "drawback"
     }
    ],
-   "plainly": "A combat/social/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it senses Intent — a rockfall, a machine, or an animal has no feeling to read.",
+   "plainly": "A fight/social/defend action, declared in the SENSE slot. ⛔ IT IS EVASION, NOT ARMOUR — rated 4, evasion rank 2, soaking nothing: you feel harm forming in the emotional weather and are elsewhere when it lands. One person at r1, another at r2, the whole space at r3, about four hours. ⚠️ Blind to anything with no intent to read — a mechanism, a deadfall, or a mindless raised crew.",
    "_functionsWas": [
     "foresee",
     "shield"
@@ -616,7 +622,8 @@
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⚠️ emotional early warning — threat felt before it moves. A defensive sense.\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_wardTypes": "⛔ SNG-512. Emotional early warning answers what has intent behind it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_reviewed_20260824": "⛔ ERIK 2026-08-24: 'this is only LESS EFFECTIVE AGAINST SIMPLE UNDEAD. Against a SHADE or typical AFTERLING, they still have emotion and this works well.' ⚠️ THE OLD BOUND SAID 'a set body approaches unfelt' FLAT — which would have blinded the craft to every undead in §48, including the ones with full personalities. ⛔ THE BLIND SPOT IS THE MINDLESS ONLY, and that makes the craft a DIAGNOSTIC: silence means a tool, and anything you CAN feel is further along the cocoon and more dangerous. ⚠️ e1 -> e4 (below band; last of the five unmigrated Death crafts), lowercase challengeTypes normalised, empty notFor written. ⛔ `plainly` ACTIVELY MISINFORMED — it led with 'absorbs 0 harm per hit (rank 0 armour)', which reads as USELESS when the real defence is EVASION 4. r1/r2 declared no axes; r3 said `deepen` while adding range and scope; the [cost] bound duplicated `intensity.surge` verbatim — the fifth such duplication found today. ✅ THE FORESENSED LOGIC IS UNTOUCHED."
   },
   {
    "id": "made_elegy",

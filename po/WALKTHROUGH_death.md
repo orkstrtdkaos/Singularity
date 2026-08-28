@@ -464,13 +464,13 @@
 
 ## 13. Felt Wall  ·  `felt_wall`
 
-**L2 · e1 · threnodist · wild_nanite · shape `guard` · harm `none`**  
+**L2 · e4 · threnodist · wild_nanite · shape `guard` · harm `none`**  
 **status:** crit · ward:feeling/appetite · sense  
 **ability functions:** reveal, shield
 
 > Protect through emotional early warning — the feeling of threat before it fully forms.
 
-**notFor:** 
+**notFor:** ⛔ ANYTHING WITHOUT A SELF — a rockfall, a deadfall, a mechanism, a set crew. It reads INTENT, and a thing with no intent arrives unannounced. ⚠️ IT IS NOT ARMOUR: it soaks nothing. You are not hit because you are not there, and if you cannot move you gain nothing from knowing.
 
 ### r1 — Early Feel
 
@@ -478,25 +478,25 @@
 
 **grants:** Feel a threat forming in a room's emotional weather — in a person's shifting feeling-state — in time to move before the action completes.
 
-**cannot:** Emotional weather only. A construct, a mechanism or a set body approaches unfelt.
+**cannot:** ⛔ INTENT ONLY. A mechanism, a deadfall or a MINDLESS RAISED CREW arrives unfelt — there is no self in one to give it away. ⚠️ BUT A DRIVEN SHADE OR AN AFTERLING READS FINE: they want something, and wanting is weather. ⛔ WHICH MEANS THE SILENCE ITSELF IS INFORMATION — undead you cannot feel are the simple kind.
 
 ### r2 — Feeling Guard
 
-**functions:** shield · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
+**functions:** shield · **gainAxes:** targets · **gains:** broaden · **harm:** none
 
 **grants:** Protect someone by feeling the danger around them — your emotional sense is the guard watching what eyes don't catch.
 
-**cannot:** ⚠️ You feel it forming. Whether you can act in time is a separate question.
+**cannot:** ⚠️ You feel it forming. Whether you can act in time is a separate question — and if you are pinned or cornered, knowing is all you get.
 
 ### r3 — Felt Ward
 
-**functions:** shield · **gainAxes:** range, scope · **gains:** deepen · **harm:** none
+**functions:** shield · **gainAxes:** range, scope · **gains:** broaden · **harm:** none
 
 **grants:** What shifts toward violence or harm in a space reaches you first, across the whole space, and you act in the gap it gives.
 
 **cannot:** ⛔ Across the whole space — which means everything in it, all at once, including your own party's fear.
 
-**bounds:** it senses INTENT — a rockfall, a machine, or an animal has no feeling to read · feeling every shift toward harm means FEELING EVERY SHIFT
+**bounds:** ⛔ IT SENSES INTENT. A rockfall, a machine, or a mindless raised body has no feeling to read and arrives unannounced · ⛔ IT IS EVASION AND NOT ARMOUR — it soaks nothing. Pinned, bound or cornered, the warning is all you get · ⚠️ AT r3 YOU FEEL EVERY SHIFT TOWARD HARM IN THE SPACE, including your own party's fear
 
 ---
 

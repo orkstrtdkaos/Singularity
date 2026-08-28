@@ -20559,6 +20559,90 @@ await (async () => {
       && matchesFunction(life, new Set(["HARM", "heal"]))  // mixed set, matched on the verb
       && !matchesFunction(life, new Set(["HARM", "strike"])));
   }
+
+  // 5bb · CCODE-279 / ERIK — A BAND IS NOT A NUMBER.
+  // ⛔ "Band's should have something that measures their capability better than raw numbers... what threat
+  // level do they add up to - are they mixed units so they can attack ranged and ward and heal, or are they
+  // all cavalry? How can we structure this to give it some logical complexity while maintaining simplicity?"
+  // ⚠️ BOTH VOCABULARIES ALREADY EXISTED. `contributionsOf`'s families answer "what can they do" — the same
+  // words a companion is described with — and `threatBand` answers "what do they add up to". Inventing unit
+  // types would have been two ladders for ideas the game already has.
+  {
+    const ML279 = await import("../engine/melee.js");
+    const cav = { id: "c", name: "the Redline Horse", condition: "fresh", losses: 0,
+      contingents: [{ n: 40, does: ["HARM", "MARTIAL"], quality: 2, what: "lancers" }] };
+    const mix = { id: "m", name: "the Stillwater Watch", condition: "fresh", losses: 0,
+      contingents: [{ n: 24, does: ["HARM", "MARTIAL"], quality: 2, what: "spears" },
+                    { n: 10, does: ["HARM", "MARTIAL"], quality: 2, what: "bows" },
+                    { n: 4, does: ["RESTORE"], quality: 2, what: "menders" },
+                    { n: 4, does: ["PROTECT", "KNOW"], quality: 2, what: "wardens" }] };
+
+    // ⚠️ A FLAT BAND STILL WORKS — nothing authored before this changes.
+    check("CCODE-279: a plain {count, quality} band reads as one martial contingent",
+      ML279.contingentsOf({ count: 20, quality: 2 }).length === 1
+      && ML279.bandStrength({ count: 20, quality: 2 }).count === 20);
+
+    // ⛔ CAPABILITY IS THE UNION, AND IT USES THE COMPANION VOCABULARY
+    check("CCODE-279: what a band can do is the union of its contingents, in the same words as a companion",
+      ML279.bandCan(cav).join(",") === "HARM,MARTIAL"
+      && ["HARM", "MARTIAL", "RESTORE", "PROTECT", "KNOW"].every(k => ML279.bandCan(mix).includes(k)));
+
+    // ⛔ THREE GAPS, EACH WITH A CONSEQUENCE — and that is what earns the extra field.
+    check("CCODE-279: all-cavalry has three named gaps; a mixed band has none",
+      ML279.bandGaps(cav).length === 3 && ML279.bandGaps(mix).length === 0);
+    // ① unwarded bleeds harder — SAME size, SAME quality, SAME tide
+    {
+      const a = ML279.bloodBand(cav, -0.5), b = ML279.bloodBand(mix, -0.5);
+      check("CCODE-279: ① unwarded — the same tide takes more of them",
+        a.lost > b.lost, `cavalry ${a.lost} vs mixed ${b.lost}`);
+    }
+    // ② no menders means the losses are permanent, and menders are the reason to spend places on them
+    {
+      const hurtCav = ML279.bloodBand(cav, -0.5).band;
+      const hurtMix = ML279.bloodBand(mix, -0.5).band;
+      const rc = ML279.recoverBand(hurtCav, { days: 7 });
+      const rm = ML279.recoverBand(hurtMix, { days: 7 });
+      check("CCODE-279: ② no menders → nobody comes back, ever",
+        rc.back === 0 && /cost for good/.test(rc.why));
+      check("CCODE-279: …and menders bring the walking wounded back to the line",
+        rm.back > 0 && ML279.bandStrength(rm.band).count > ML279.bandStrength(hurtMix).count);
+      // ⛔ CAPPED BY WHO IS MENDING, or a token healer would heal an army and composition would stop
+      // mattering one layer down.
+      const many = { ...mix, losses: 200,
+        contingents: [{ n: 200, does: ["HARM"], quality: 1 }, { n: 1, does: ["RESTORE"], quality: 1 }] };
+      check("CCODE-279: …and one mender cannot put two hundred back on their feet",
+        ML279.recoverBand(many, { days: 1 }).back <= 2);
+      // ⚠️ AND NEVER PAST WHERE THEY STARTED — these are the wounded returning, not resurrection.
+      check("CCODE-279: …and recovery stops at the losses actually taken",
+        ML279.recoverBand({ ...mix, losses: 0 }, { days: 30 }).back === 0);
+      // ⛔ A BROKEN BAND DOES NOT COME BACK. Breaking is the terminal state a commander has to avoid.
+      check("CCODE-279: …and nothing recovers a band that broke",
+        ML279.recoverBand({ ...mix, condition: "broken", losses: 20 }, { days: 30 }).back === 0);
+    }
+    // ③ losses come off the CONTINGENTS, or a band keeps its menders forever while its spears evaporate
+    {
+      const after = ML279.bloodBand(mix, -0.9).band;
+      const before = ML279.contingentsOf(mix), now = ML279.contingentsOf(after);
+      check("CCODE-279: ③ losses fall across the contingents, not off a top-level number",
+        now.every((c, i) => c.n <= before[i].n) && now.some((c, i) => c.n < before[i].n));
+    }
+
+    // ⛔ THE BUG THAT WOULD HAVE READ AS A FEATURE. My first version left `bloodBand` reading `band.count`,
+    // which a composed band does not have — so a contingent band had a count of ZERO: it lost nobody and was
+    // BROKEN on contact, every time, and it would have read as "bands are fragile" rather than as a bug.
+    check("CCODE-279: a composed band takes real losses and is NOT broken on contact",
+      (() => { const r = ML279.bloodBand(mix, -0.3); return r.lost > 0 && r.condition !== "broken"; })());
+
+    // ⚠️ THREAT IS READ IN THE GAME'S OWN UNITS, and √ for the same reason the melee compression uses one:
+    // doubling a body of people does not double what it can do to ONE character.
+    {
+      const t1 = ML279.bandThreat({ count: 40, quality: 2 }).power;
+      const t2 = ML279.bandThreat({ count: 160, quality: 2 }).power;
+      check("CCODE-279: four times the band is twice the threat to a person, not four times",
+        Math.abs(t2 - t1 * 2) <= 1, `${t1} → ${t2}`);
+    }
+  }
+
   // 4 · the surfaces: the verb row exists, it is scoped to what the wheel HAS, and clear drops the traditions
   {
     const app197 = readFileSync(join(root, "app.js"), "utf8");

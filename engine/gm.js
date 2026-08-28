@@ -78,7 +78,7 @@ REPLY FORMAT — a single JSON object, no other text:
   "generateRequest": [{"type": "npc|location|arc", "hint": "what the fiction reaches for — 'a tollhand at the lower gate', 'a hollow beyond this door', 'a feud between the ferrymen and the millers'", "why": "the in-fiction reason it's needed now"}],
   "encounterOps": [{"op": "tactic", "tag": "an opponent tacticTag"}, {"op": "complication", "text": "environmental pressure, once per encounter"}],
   "projectOps": [{"op": "open", "abilityId": "a downtime craft the character HOLDS", "name": "what they are building"}],
-  "bandOps": [{"op": "raise | clash", "id": "the band", "name": "what they are called", "count": 20, "quality": 1, "against": 40, "heroSwing": 0.1}],
+  "bandOps": [{"op": "raise | muster | clash", "id": "the band", "name": "what they are called", "count": 20, "quality": 1, "against": 40, "heroSwing": 0.1}],
   "deathOps": [{"op": "hold | slow | retrieve", "npcId": "a DEAD npc in the registry", "abilityId": "the craft used (retrieve only)", "intensity": "standard | surge", "outcome": "return | fail", "willing": true}],
   "newEncounter": {"type": "duel", "flavor": "fight | standoff", "name": "...", "setup": "...", "lethal": false, "opponent": {"name": "...", "health": 4, "threat": 35, "yieldAt": 1, "fleeDifficulty": 15, "pursuit": "always | never | 0.0-1.0", "tacticTags": ["..."]}},
   "unlockPrecursor": {"abilityId": "a precursor ability id", "via": "how the fiction granted access — remnant, quest reward, teacher"},

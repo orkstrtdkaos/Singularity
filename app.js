@@ -108,14 +108,14 @@ import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 import { tickAllProjects, openProject, projectProgress } from "./engine/projects.js";
 import { holdOpen, slowSink, canReach, resolveRetrieval } from "./engine/death.js"; // CCODE-270: the player's road back — the seven retrieval crafts had no door
 import { alliesOf } from "./engine/combatants.js"; // CCODE-276: the roster the party block renders
-import { commandSlots, bringForward, canRaiseBand, raiseBand, bandStrength, bloodBand, legionClash } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
-import { characterPower } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
+import { commandSlots, bringForward, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.240";
+const APP_VERSION = "1.9.241";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4255,6 +4255,19 @@ async function maybeTick() {
     const days = Math.max(0, currentDay - last);
     if (days > 0 && (character.projects || []).length) {
       const moved = tickAllProjects(character, { days, hands: 1 + (character.party || []).length, cfg: {} });
+      // ⛔ CCODE-279 — AND THE WOUNDED COME BACK, on the same paid-once day counter. A band with menders
+      // recovers between clashes; one without keeps exactly what it has left, forever. That asymmetry is the
+      // entire reason to spend four places on menders, and it has to happen in the WORLD rather than in a
+      // fight — recovery is what the days between battles are for.
+      // ⚠️ RIDES THE PROJECT TICK DELIBERATELY: `_lastProjectDay` already guarantees a day is paid exactly
+      // once, and a second day-counter would drift from it the first time one of them was reset.
+      for (const b of (character.bands || [])) {
+        const r = recoverBand(b, { days, cfg: CONTENT.rules?.melee || {} });
+        if (r.back > 0) {
+          character.bands = character.bands.map(x => x.id === b.id ? r.band : x);
+          character._bandNotes = [...(character._bandNotes || []).slice(-2), `${b.name}: ${r.why}`];
+        }
+      }
       // ⚠️ NO DIALS BLOCK IS READ HERE, deliberately — and the comment must not NAME one either: I had one, and the unauthored-rules-keys
       // the unauthored-rules-keys scanner reads SOURCE, so my first comment here — which spelled out the
       // key I had just removed — kept the ratchet red on its own. That is a scanner reading its own prose,
@@ -6288,6 +6301,24 @@ function applyTurn(turn, resolution, playerWords = null) {
           count: Math.max(1, Math.min(500, op.count | 0 || 20)), quality: Math.max(1, Math.min(3, op.quality | 0 || 1)),
           from: op.from || null, day });
         character._bandNotes = [...(character._bandNotes || []).slice(-2), r.ok ? `${r.band.name} answers to you now` : r.why];
+      } else if (kind === "muster") {
+        // ⚠️ WHAT A BAND IS WORTH, ASKED AND ANSWERED IN THE GAME'S OWN UNITS. Erik: "what threat level do
+        // they add up to". `bandThreat` reads against the same ladder `threatBand` uses for a foe, so the
+        // narrator can say "these forty are above you" and mean the same thing it means anywhere else.
+        const band = (character.bands || []).find(b => b.id === String(op.id || ""));
+        if (!band) continue;
+        const t = bandThreat(band, { cfg: CONTENT.rules?.melee || {} });
+        const mine = characterPower(character, CONTENT.rules || {});
+        // ⚠️ `null` RATHER THAN A READ OFF THE RULES BAG. Reading a key no pack provides is a phantom control
+        // — my third this session — and `threatBand` already falls back to DEFAULT_BANDS by design. When
+        // someone wants to author them, the read and the block arrive in the same change.
+        // ⛔ AND THE COMMENT MUST NOT NAME THE KEY. The unauthored-key scanner reads SOURCE: my first version
+        // of this note spelled out the very key it was explaining the removal of, and kept the ratchet red on
+        // its own. There is ALREADY a comment ninety lines up in this file recording that I did exactly this
+        // before — a scanner reading its own prose, and I walked into it again the same day I re-read it.
+        const rung = threatBand(mine, t.power, null);
+        character._bandNotes = [...(character._bandNotes || []).slice(-2),
+          `${band.name}: ${t.effective} effective · ${rung?.label || "unmeasured"} · can ${t.can.join(", ")}`];
       } else if (kind === "clash") {
         const band = (character.bands || []).find(b => b.id === String(op.id || ""));
         if (!band || band.condition === "broken") continue;

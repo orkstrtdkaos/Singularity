@@ -213,6 +213,43 @@ export function distributeCasualties(side, pool, { rng = Math.random, maxSharePe
   return { hits, downed, unspent: Math.max(0, left) };
 }
 
+/** ⛔ CCODE-279 — AND WHAT THE MENDERS ARE FOR. `bandGaps` named `lossesArePermanent` and nothing acted on
+ *  it, which would have made one of the three consequences a label — the defect this whole session has been
+ *  about, committed inside the fix for it.
+ *
+ *  ⚠️ A BAND WITH RESTORE GETS PEOPLE BACK BETWEEN CLASHES. Not all of them, and never past the number it
+ *  started with: these are the walking wounded returning to the line, not resurrection. A band without
+ *  menders keeps exactly what it has left, forever, which is the whole reason to spend four places on them.
+ *
+ *  ⛔ AND RECOVERY IS CAPPED BY WHO IS DOING THE MENDING. Four menders cannot put a hundred back on their
+ *  feet, so the rate scales with the RESTORE contingent rather than with the band — otherwise a token
+ *  healer would heal an army and composition would stop mattering again one layer down. */
+export function recoverBand(band, { days = 1, cfg = {} } = {}) {
+  if (!band || band.condition === "broken") {
+    return { band, back: 0, why: band?.condition === "broken" ? "they are broken — nobody is coming back to this" : "nothing to recover" };
+  }
+  const cs = contingentsOf(band);
+  const menders = cs.filter(c => c.does.includes("RESTORE")).reduce((a, c) => a + c.n, 0);
+  if (!menders) return { band, back: 0, why: "nobody mends them — what this cost, it cost for good" };
+  const lost = Math.max(0, num(band.losses, 0));
+  if (!lost) return { band, back: 0, why: "nobody to bring back" };
+  const per = Math.max(0, num(cfg.recoveredPerMenderPerDay, 0.5));
+  const back = Math.min(lost, Math.floor(menders * per * Math.max(0, num(days, 1))));
+  if (back <= 0) return { band, back: 0, why: "too few hands, too little time" };
+  // ⚠️ THEY COME BACK TO THE CONTINGENTS THEY LEFT, proportionally — a band does not recover as an
+  // undifferentiated pool, and putting them all back in the spears would quietly reshape it every campaign.
+  const total = Math.max(1, cs.reduce((a, x) => a + x.n, 0));
+  const healed = cs.map(c => ({ ...c, n: c.n + Math.round(back * (c.n / total)) }));
+  const head = healed.reduce((a, c) => a + c.n, 0);
+  const hurt = head ? (lost - back) / (head + (lost - back)) : 0;
+  return {
+    band: { ...band, losses: lost - back, count: head, condition:
+        hurt > num(cfg.wornAt, 0.25) ? "worn" : (lost - back) > 0 ? "blooded" : "fresh",
+      ...(band.contingents ? { contingents: healed } : {}) },
+    back, why: `${back} come back to the line — ${menders} mending`,
+  };
+}
+
 /** ⛔ A LEGION IS NOT A BIGGER MELEE, and treating it as one is the trap. At this scale the individual roll
  *  stops meaning anything: the tide is decided by weight of numbers and the PC is ONE FIGURE inside it.
  *
@@ -411,14 +448,84 @@ export function raiseBand(character, { id, name = null, count = 20, quality = 1,
   return { ok: true, band };
 }
 
-/** ⛔ WHAT IT IS WORTH IN A CLASH — and condition is a MULTIPLIER, not a subtraction. A worn band is not a
- *  smaller band: it is the same people, slower and warier, and modelling that as fewer heads would lose the
- *  distinction between losses and morale. */
+/** ⛔ CCODE-279 / ERIK — A BAND IS NOT A NUMBER. "Band's should have something that measures their
+ *  capability better than raw numbers... what threat level do they add up to - are they mixed units so they
+ *  can attack ranged and ward and heal, or are they all cavalry? How can we structure this to give it some
+ *  logical complexity while maintaining simplicity?"
+ *
+ *  ⚠️ THE ANSWER IS THAT BOTH VOCABULARIES ALREADY EXIST AND I DID NOT HAVE TO INVENT EITHER.
+ *    · WHAT THEY CAN DO → `contributionsOf`'s families (HARM · MARTIAL · PROTECT · RESTORE · KNOW · …), the
+ *      same words a companion is described with. A band and a companion answer the same question.
+ *    · WHAT THEY ADD UP TO → `threatBand`, the game's existing RELATIVE ladder. "What threat level" is
+ *      already a question this game answers; answering it a second way here would be two ladders.
+ *
+ *  ⛔ SO THE COMPLEXITY IS ONE FIELD: `contingents`. A band is groups of people who each do something.
+ *  Simple to author, and it produces the three consequences below with no further machinery.
+ *
+ *  ⚠️ A FLAT `{count, quality}` BAND STILL WORKS — it reads as a single martial contingent, so nothing
+ *  authored before this changes. */
+export function contingentsOf(band) {
+  const list = band?.contingents;
+  if (Array.isArray(list) && list.length) {
+    return list.map(c => ({ n: Math.max(0, num(c?.n, 0)), quality: Math.max(0, num(c?.quality, 1)),
+      does: (c?.does || ["MARTIAL"]).map(String), what: c?.what || null }));
+  }
+  return [{ n: Math.max(0, num(band?.count, 0)), quality: Math.max(0, num(band?.quality, 1)),
+    does: ["HARM", "MARTIAL"], what: band?.name || null }];
+}
+
+/** ⛔ WHAT A BAND CAN DO — the union of its contingents. A band of all cavalry answers exactly one
+ *  question, and that is a REAL WEAKNESS rather than a flavour note: see `bandGaps`. */
+export function bandCan(band) {
+  const out = new Set();
+  for (const c of contingentsOf(band)) if (c.n > 0) for (const d of c.does) out.add(d);
+  return [...out];
+}
+
+/** ⚠️ WHAT THEY ARE WORTH. Count × quality across the contingents, times the condition multiplier — a
+ *  worn band is the same people, slower and warier, so condition multiplies rather than subtracting. */
 export function bandStrength(band, { cfg = {} } = {}) {
   const mult = { fresh: 1, blooded: num(cfg.bloodedMult, 0.9), worn: num(cfg.wornMult, 0.7), broken: num(cfg.brokenMult, 0.3) };
   const m = num(mult[String(band?.condition || "fresh")], 1);
-  return { count: Math.max(0, num(band?.count, 0)), quality: Math.max(0, num(band?.quality, 1)) * m,
-    effective: Math.round(num(band?.count, 0) * num(band?.quality, 1) * m) };
+  const cs = contingentsOf(band);
+  const count = cs.reduce((a, c) => a + c.n, 0);
+  const raw = cs.reduce((a, c) => a + c.n * c.quality, 0);
+  return { count, quality: count ? (raw / count) * m : 0, effective: Math.round(raw * m),
+    can: bandCan(band), contingents: cs.length };
+}
+
+/** ⛔ WHAT THEY ADD UP TO, IN THE GAME'S OWN UNITS. `threatBand` is relative by construction — the same
+ *  company is a real fight at level 5 and beneath notice at level 20 — so a band's threat is read AGAINST
+ *  someone. ⚠️ THAT IS THE POINT: "what threat level do they add up to" has no absolute answer, and
+ *  inventing one here would be a second ladder disagreeing with the first.
+ *
+ *  ⚠️ SQUARE ROOT, for the same reason the melee compression uses one: doubling a body of people does not
+ *  double what it can do to ONE CHARACTER — it doubles what it can do to another body of people. A linear
+ *  read would make a hundred militia strictly more dangerous to a hero than any single foe. */
+export function bandThreat(band, { cfg = {} } = {}) {
+  const st = bandStrength(band, { cfg });
+  return { power: Math.round(Math.sqrt(Math.max(0, st.effective)) * num(cfg.bandThreatScale, 6)),
+    effective: st.effective, can: st.can };
+}
+
+/** ⛔ WHAT THEY CANNOT DO, AND WHAT IT COSTS — the consequence that earns the extra field. Erik: "are they
+ *  mixed units so they can attack ranged and ward and heal, or are they all cavalry?"
+ *
+ *  ⚠️ THREE GAPS, EACH WITH ONE CONSEQUENCE, AND NO MORE THAN THAT. A wargame's worth of unit types would
+ *  buy detail nobody reads; three answerable questions buy a decision about who to recruit.
+ *    · no RESTORE → losses do not come back between clashes. You bleed permanently.
+ *    · no PROTECT → the same tide takes more of them.
+ *    · no KNOW    → nobody reads the ground, so they meet what comes as it comes. */
+export function bandGaps(band, { cfg = {} } = {}) {
+  const can = new Set(bandCan(band));
+  const gaps = [];
+  if (!can.has("RESTORE")) gaps.push({ missing: "RESTORE", effect: "lossesArePermanent",
+    why: "nobody mends them — what this costs, it costs for good" });
+  if (!can.has("PROTECT")) gaps.push({ missing: "PROTECT", effect: "lossMultiplier",
+    value: num(cfg.unwardedLossMult, 1.4), why: "nothing shields them — the same tide takes more of them" });
+  if (!can.has("KNOW")) gaps.push({ missing: "KNOW", effect: "blindToTheField",
+    why: "nobody is reading the ground — they meet what comes as it comes" });
+  return gaps;
 }
 
 /** ⚠️ WHAT A CLASH COSTS THEM. Erik's tide decides the battle; this decides what it did to the people who
@@ -427,18 +534,38 @@ export function bandStrength(band, { cfg = {} } = {}) {
 export function bloodBand(band, tide, { cfg = {} } = {}) {
   if (!band) return { band, lost: 0 };
   const t = num(tide, 0);
-  const rate = Math.max(0, num(cfg.lossPerTide, 0.12));
+  // ⛔ CCODE-279 — READ THE COUNT FROM THE CONTINGENTS, NOT FROM A TOP-LEVEL FIELD A COMPOSED BAND DOES NOT
+  // HAVE. My first version kept `num(band.count, 0)` here, so a band described by contingents had a count of
+  // ZERO: it lost nobody and was BROKEN on contact, every time. New representation, consumer still reading
+  // the old field — the same defect as every other one this week, and it would have read as "bands are
+  // fragile" rather than as a bug.
+  const head = contingentsOf(band).reduce((a, c) => a + c.n, 0);
+  // ⛔ CCODE-279 — AN UNWARDED BAND LOSES MORE FOR THE SAME TIDE. This is the consequence that makes
+  // composition a decision rather than a description: a band of pure cavalry hits hard and bleeds hard.
+  const gaps = bandGaps(band, { cfg });
+  const unwarded = gaps.find(g => g.effect === "lossMultiplier");
+  const rate = Math.max(0, num(cfg.lossPerTide, 0.12)) * (unwarded ? num(unwarded.value, 1.4) : 1);
   // losing costs more than winning, and a rout costs most
   const share = t >= 0 ? rate * (1 - Math.min(0.8, t)) : rate * (1 + Math.min(2, -t) * 1.5);
-  const lost = Math.min(num(band.count, 0), Math.round(num(band.count, 0) * share));
-  const left = Math.max(0, num(band.count, 0) - lost);
-  const hurt = num(band.count, 0) ? (num(band.losses, 0) + lost) / (num(band.count, 0) + num(band.losses, 0)) : 0;
+  const lost = Math.min(head, Math.round(head * share));
+  const left = Math.max(0, head - lost);
+  // ⚠️ `hurt` IS CUMULATIVE — losses so far against everyone who has ever stood in this band. A band that
+  // has bled twice is closer to breaking than one taking its first losses, which is what makes a campaign
+  // different from a series of unrelated fights.
+  const hurt = head ? (num(band.losses, 0) + lost) / (head + num(band.losses, 0)) : 0;
   const condition = left === 0 ? "broken"
     : hurt > num(cfg.brokenAt, 0.5) ? "broken"
     : hurt > num(cfg.wornAt, 0.25) ? "worn"
     : lost > 0 || band.condition !== "fresh" ? "blooded" : "fresh";
-  return { band: { ...band, count: left, losses: num(band.losses, 0) + lost, condition },
-    lost, condition, broke: condition === "broken" && band.condition !== "broken",
+  // ⚠️ AND THE LOSSES COME OFF THE CONTINGENTS, proportionally — a band that loses forty people has lost
+  // forty SOMEBODIES, and taking them off a top-level count would let a band keep its menders forever while
+  // its spears evaporated.
+  const cs = contingentsOf(band);
+  const total = Math.max(1, cs.reduce((a, x) => a + x.n, 0));
+  const bled = cs.map(c => ({ ...c, n: Math.max(0, c.n - Math.round(lost * (c.n / total))) }));
+  return { band: { ...band, count: left, losses: num(band.losses, 0) + lost, condition,
+      ...(band.contingents ? { contingents: bled } : {}) },
+    lost, condition, gaps, broke: condition === "broken" && band.condition !== "broken",
     why: lost === 0 ? `${band.name} comes through it whole`
       : condition === "broken" ? `${band.name} breaks — ${lost} lost and the rest will not hold`
       : `${band.name} loses ${lost}` };

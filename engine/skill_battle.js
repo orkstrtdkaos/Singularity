@@ -1106,8 +1106,13 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // 48 crafts, and read by nothing in the resolution path until now.
       const dmgMix = damageMixOf(winDecl, dmgType);
       const wardRec = targetSheet?.ward || (targetSheet?.wardTypes ? targetSheet : null);
+      // ⛔ CCODE-282 — THE LOADED TABLE WINS. `rules.damageFamilies` is Aevi v2 (four families, 20 types,
+      // no polar); `craftMechanics.damageFamilies` is the v1 copy this line used to read exclusively, which
+      // made her whole file inert. ⚠️ THE v1 COPY STAYS AS THE FALLBACK so a pack that ships only
+      // craft_mechanics.json resolves exactly as it did — absent means today, which is the gate.
+      const famTable = rules?.damageFamilies || cmCfg?.damageFamilies;
       const wardAns = wardRec ? wardAnswer(wardRec, num(wardRec.wardRank, targetSheet?.wardRank) || 1,
-        { families: cmCfg?.damageFamilies, ladder: cmCfg?.wardLadder, breadth: cmCfg?.wardBreadth }) : null;
+        { families: famTable, ladder: cmCfg?.wardLadder, breadth: cmCfg?.wardBreadth }) : null;
       const answers = l => !l.type || !dmgType || l.type === dmgType;
       const soak = layers
         ? layers.filter(l => answers(l) && (Number(l.rank) || 1) > pen).reduce((a, l) => a + (Number(l.value) || 0), 0)
@@ -1146,7 +1151,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       let composite = null;
       if (wardAns && dmgMix.length && landed > 0) {
         const rc = resolveComposite(landed, dmgMix, wardAns,
-          { minHit: num(dcfg?.minHit, 1), cfg: cmCfg?.wardLadder || {}, families: cmCfg?.damageFamilies });
+          { minHit: num(dcfg?.minHit, 1), cfg: cmCfg?.wardLadder || {}, families: famTable });
         if (rc.blocked > 0) { composite = { ...rc, ward: wardAns.depth, answers: wardAns.answers }; landed = rc.landed; }
       }
       damage = { side: roundWinner === "player" ? "opponent" : "player",

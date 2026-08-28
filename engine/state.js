@@ -310,7 +310,7 @@ export async function loadContent() {
     // and defaults to {}, so an unloaded file leaves every type family-less and every composite blow
     // unwardable — registered is only half; CCODE-55 asks whether it is ever READ.
     loadRule("first_gift_template", null),
-    loadRule("damage_families", { physical: {}, elemental: {}, polar: { pairs: [], unpaired: [] } })
+    loadRule("damage_families", { families: {} })
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -387,6 +387,20 @@ export async function loadContent() {
   // manifest a day before anything loaded it, and registration is not arrival. It is declared a live gap
   // in rules_classification until this line exists.
   if (ladderRule) rules.subAttributeLadder = ladderRule;
+  // ⛔ CCODE-282 — THE DAMAGE FAMILIES REACH THE RESOLUTION PATH. Aevi flagged this against herself six
+  // lines above the load ("registered is only half; CCODE-55 asks whether it is ever READ") and she was
+  // right: `content.damageFamilies` appeared exactly twice in the engine — this destructure and the
+  // assignment onto `content` — while `skill_battle` resolved every ward against the OLDER copy inside
+  // craft_mechanics.json. Her v2 (four families, 20 types, no polar) was authored, registered, loaded,
+  // and inert. ⚠️ MERGED, NOT MERELY FETCHED, for the reason the XP table gives: a loaded-but-unread
+  // value is the same bug one layer up.
+  // ⚠️ THE DOC IS UNWRAPPED TO ITS FAMILY MAP HERE so every consumer sees one shape. A pack still on the
+  // v1 bare-map shape passes through untouched.
+  // ⚠️ THE WHOLE DOC, NOT ITS INNER BLOCK. My first pass unwrapped to `.families` here and gate 331 —
+  // "every merged rules key holds the CONTENT OF ITS OWN FILE" — caught it immediately. That gate exists
+  // because a merged key once held the wrong file entirely. The unwrap belongs at READ time, in
+  // `familyMapOf`, where it happens once for every shape rather than once per load site.
+  if (damageFamilies) rules.damageFamilies = damageFamilies;
   rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
   rules.grantCap = nativeGrants.grantCap ?? 5;
   // SNG-263: the craft-mechanics config rides the rules bag so battleRound reads it off a value it already

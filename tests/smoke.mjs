@@ -20740,6 +20740,61 @@ await (async () => {
     // ⚠️ AND A TARGET WITH NO WARD IS UNTOUCHED — the arithmetic is byte-identical to before.
     check("CCODE-281: with no wardTypes on the target, nothing changes",
       DT.wardAnswer(null, 3, { families: F }) === null);
+
+    // ═══ CCODE-282 — THE v2 TABLE, AND THE READER THAT COULD NOT SEE IT ═══
+    // ⛔ AEVI AUTHORED v2 (four families, 20 types, no polar), REGISTERED IT, AND state.js LOADED IT —
+    // and `skill_battle` resolved every ward against the OLDER copy inside craft_mechanics.json. She had
+    // flagged the risk against herself six lines above the load: "registered is only half; CCODE-55 asks
+    // whether it is ever READ." It was not. Authored ✓ registered ✓ loaded ✓ read ✗ — the fourth door.
+    // ⚠️ MY READER WAS THE OTHER HALF: familyOf and wardAnswer NAMED physical/elemental/polar in source,
+    // so v2 families read as ordinary types. A "vital ward" answered a type called "vital" that no craft
+    // deals, and never widened to decay/living/vitality. Two correct halves that could not meet.
+    {
+      const v2 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/damage_families.json"), "utf8"));
+      const V = v2.families;
+      const famNames = Object.keys(V).filter(k => !k.startsWith("_"));
+      const allTypes = famNames.flatMap(f => V[f].types || []);
+      // ⛔ NON-VACUITY FIRST: an empty table passes every check below it.
+      check("CCODE-282: the v2 table is non-empty — four families and twenty types",
+        famNames.length === 4 && allTypes.length >= 20);
+      check("CCODE-282: EVERY v2 type resolves to a family — none is family-less",
+        allTypes.length > 0 && allTypes.every(t => DT.familyOf(t, V) !== null));
+      // ⚠️ THE SHAPE CHANGED AND THE READER MUST TAKE EITHER. v2 wraps its families under `.families`;
+      // handing the DOC in unwrapped made every type family-less — silently, since that is a legal answer.
+      check("CCODE-282: the doc and the bare map read identically — the unwrap is in one place",
+        DT.familyOf("decay", v2) === "vital" && DT.familyOf("decay", V) === "vital");
+      // ⛔ THE PAYOFF ERIK NAMED: "some higher level wards will protect against multiple types."
+      const vital3 = DT.wardAnswer({ wardTypes: ["vital"] }, 3, { families: V, ladder: L, breadth: B });
+      check("CCODE-282: a ward naming a v2 FAMILY widens to its types at rank",
+        vital3.breadthEarned === true && ["decay", "living", "vitality"].every(t => vital3.answers.includes(t)));
+      check("CCODE-282: …and does NOT widen at rank 1 — breadth is still earned",
+        DT.wardAnswer({ wardTypes: ["vital"] }, 1, { families: V, ladder: L, breadth: B }).answers.length === 1);
+      // ⚠️ v2 DROPPED OPPOSITES DELIBERATELY. null for every type is CORRECT here, not a broken lookup —
+      // and the gate says so explicitly so nobody "fixes" it back into existence.
+      check("CCODE-282: v2 has no polar pairs, so nothing has an opposite — by design, not by breakage",
+        allTypes.every(t => DT.oppositeOf(t, V) === null));
+      // ⛔ AND ERIK'S Q2: vitality is not special. decay, living and vitality are SIBLINGS now.
+      const mix = t => DT.damageMixOf({ damageType: t });
+      const land = (t, w) => DT.resolveComposite(20, mix(t), w, { minHit: 1, families: V }).landed;
+      const wardFor = t => DT.wardAnswer({ wardTypes: [t] }, 3, { families: V, ladder: L, breadth: B });
+      check("CCODE-282: vitality resolves EXACTLY like decay — same family, same warded and unwarded result",
+        DT.familyOf("vitality", V) === DT.familyOf("decay", V)
+        && land("vitality", wardFor("vitality")) === land("decay", wardFor("decay"))
+        && land("vitality", wardFor("heat")) === land("decay", wardFor("heat")));
+      // ⛔ THE WIRING GATE — THE ONE THAT WOULD HAVE CAUGHT THIS. A module-only gate leaves the whole
+      // defect invisible: both halves were individually green while the live path read neither.
+      {
+        const stSrc = readFileSync(join(root, "engine/state.js"), "utf8");
+        const sb2 = readFileSync(join(root, "engine/skill_battle.js"), "utf8");
+        check("CCODE-282: the loaded table is MERGED into the rules bag, not merely fetched",
+          stSrc.includes("rules.damageFamilies = damageFamilies"));
+        check("CCODE-282: and the resolution path READS it, preferring it over the v1 copy",
+          sb2.includes("rules?.damageFamilies || cmCfg?.damageFamilies") && sb2.includes("famTable"));
+      }
+      // ⚠️ AND THE v1 PACK STILL RESOLVES — absent means today, which is the gate for every dial here.
+      check("CCODE-282: a pack still on the v1 shape is untouched — heat is elemental, decay opposes living",
+        DT.familyOf("heat", F) === "elemental" && DT.oppositeOf("decay", F) === "living");
+    }
   }
 
 }

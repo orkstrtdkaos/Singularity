@@ -41,22 +41,45 @@ export function damageMixOf(decl, fallbackType = null) {
 /** Which family a type belongs to. ⚠️ UNKNOWN TYPES ANSWER `null` RATHER THAN A GUESS — a type nobody has
  *  classified must not silently join a family and become warded by accident. */
 export function familyOf(type, families = null) {
-  const F = families || {};
+  const F = familyMapOf(families);
   const t = String(type || "");
-  if ((F.physical?.types || []).includes(t)) return "physical";
-  if ((F.elemental?.types || []).includes(t)) return "elemental";
-  const polar = F.polar || {};
-  if ((polar.unpaired || []).includes(t)) return "polar";
-  if ((polar.pairs || []).some(p => p.minus === t || p.plus === t)) return "polar";
+  for (const [name, fam] of Object.entries(F)) {
+    if (name.startsWith("_")) continue;
+    if ((fam?.types || []).includes(t)) return name;
+    // ⚠️ v1 CARRIED ITS AXIS INSIDE THE FAMILY. Kept so a pack still on the old shape resolves unchanged.
+    if ((fam?.unpaired || []).includes(t)) return name;
+    if ((fam?.pairs || []).some(p => p?.minus === t || p?.plus === t)) return name;
+  }
   return null;
+}
+
+/** ⛔ CCODE-282 — THE TABLE ARRIVES IN TWO SHAPES AND BOTH ARE LIVE.
+ *  v1 was a bare map of families inside `craft_mechanics.json`; v2 is a rules DOC whose families sit
+ *  under `.families`. ⚠️ HANDING THE DOC TO `familyOf` UNWRAPPED MAKES EVERY TYPE FAMILY-LESS AND
+ *  EVERY BLOW UNWARDABLE — silently, because a family-less type is a legal answer. The unwrap lives here. */
+export function familyMapOf(families) {
+  if (!families) return {};
+  return families.families && typeof families.families === "object" ? families.families : families;
+}
+
+/** Every type a family holds, including a v1 family that kept its types inside an axis. */
+export function typesOfFamily(name, families = null) {
+  const fam = familyMapOf(families)[name];
+  if (!fam) return [];
+  return [...(fam.types || []), ...(fam.unpaired || []),
+    ...((fam.pairs || []).flatMap(p => [p?.minus, p?.plus]))].filter(Boolean);
 }
 
 /** ⛔ THE OPPOSITE END OF AN AXIS, WHERE THERE IS ONE. Only polar PAIRS have one — a sibling is not an
  *  opposite, which is the distinction that keeps a fire ward from answering ice. */
 export function oppositeOf(type, families = null) {
-  for (const p of ((families || {}).polar?.pairs || [])) {
-    if (p.minus === type) return p.plus;
-    if (p.plus === type) return p.minus;
+  // ⚠️ v2 HAS NO PAIRS AT ALL, so this answers null for every type — correct, not broken: the four-family
+  // model dropped opposites deliberately. Scanning every family keeps a pack still on v1 working.
+  for (const fam of Object.values(familyMapOf(families))) {
+    for (const p of (fam?.pairs || [])) {
+      if (p?.minus === type) return p.plus;
+      if (p?.plus === type) return p.minus;
+    }
   }
   return null;
 }
@@ -79,16 +102,16 @@ export function wardAnswer(ward, rank = 1, { families = null, ladder = null, bre
   const listed = (ward.wardTypes || []).map(String);
   // ⚠️ A WARD MAY NAME A FAMILY DIRECTLY — "elemental" — but only once it is ranked to hold one. Naming a
   // family at r1 does not widen it; it narrows to the family's first type, because breadth is EARNED.
-  const named = listed.filter(t => ["physical", "elemental", "polar"].includes(t));
+  // ⛔ CCODE-282 — A NAMED FAMILY IS ANY KEY IN THE TABLE. Hardcoding three names meant the v2 families
+  // (physics, vital, intrinsic) read as ordinary TYPES: a "vital ward" answered a type called "vital"
+  // that no craft deals, and never widened to decay/living/vitality. Authored-correct, silently inert.
+  const FM = familyMapOf(families);
+  const named = listed.filter(t => Object.prototype.hasOwnProperty.call(FM, t));
   const canHoldFamily = r >= num(B.familyAtRank, 3);
   const answers = new Set();
   for (const t of listed) {
     if (named.includes(t)) {
-      const fam = (families || {})[t];
-      const types = fam?.types || (t === "polar"
-        ? [...((families || {}).polar?.unpaired || []),
-           ...(((families || {}).polar?.pairs || []).flatMap(p => [p.minus, p.plus]))]
-        : []);
+      const types = typesOfFamily(t, families);
       if (canHoldFamily) for (const x of types) answers.add(x);
       else if (types.length) answers.add(types[0]);
     } else answers.add(t);

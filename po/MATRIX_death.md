@@ -4,7 +4,7 @@
 matrix is your own work wearing the corpus's clothes, and the last one drifted far enough to plan
 an audit against numbers that were not true (§37.1).
 
-**34 crafts · 97 ranks · traditions: ashwarden, threnodist** · generated 2026-08-28
+**37 crafts · 106 ranks · traditions: ashwarden, threnodist** · generated 2026-08-28
 
 ⚠️ `first_gift_template` is merged as the LOADER merges it — absent fields only, `mechanic` shallow-merged.
 Crafts marked *first-gift* inherit `levelReq`/`energyCost`/`shape`/`harmRung` and are NOT missing them.
@@ -30,17 +30,20 @@ Crafts marked *first-gift* inherit `levelReq`/`energyCost`/`shape`/`harmRung` an
 | **Grey Road** | 2 | ash | mag 4 | 5 | reposition | — | — | decay, living | — |  | **Through Here** +move, +resist | **Passage** +move, +resist, +open · *targets, scope* | **Long Walk** +move, +resist, +open · *scope, targets* |
 | **Grief Strike** | 2 | thr | 2d6 | 6 | strike | dmg | feeling | — | **crit** · antisoak |  | **True Feeling** +strike, +hinder ⟨antisoak⟩ | **Unguarded Place** +strike, +hinder · *damage, quality* ⟨antisoak⟩ | **Shattered Fortification** +strike, +hinder · *duration, targets* ⟨imposes staggered · crit→incapacitated · resist mental · ongoing · persists · antisoak⟩ |
 | **Kept Breath** | 2 | ash | 2d4 | 5 | guard | — | — | physical, decay | **crit** · soak 5 |  | **Not Yet** +sustain, +resist | **Stand Between** +sustain, +resist, +heal · *targets, conditions* | **Palelands Patience** +sustain, +resist, +heal · *targets, duration, scope* |
+| **Last Cold** | 2 | ash | 2d6 | 5 | damage | leth | cold | — | **crit** |  | **Cold Reach** +strike | **Deep Cold** +strike, +hinder · *targets, damage* | **Last Cold** +strike, +hinder · *targets, damage* |
 | **Made Elegy** | 2 | thr | mag 5 | 4 | construct | — | feeling | — | — |  | **Feeling Held** +make | **Acting Elegy** +make, +bind · *conditions, quality* | **Lasting Work** +make, +bind · *scope, duration, targets* |
 | **Pathos** | 2 | thr | mag 5 | 6 | bolster | — | — | — | — |  | **Open Heart** +empower | **Shared Fire** +empower, +heal · *targets* | **Deep Chord** +empower, +heal, +command · *scope, targets, range* |
 | **Public Grief** | 2 | thr | — | 4 | conceal | — | — | — | **crit** | obscure | **Open Weeping** +conceal | **Shared Mourning** +conceal · *targets* | **Grief-House** +conceal · *scope, targets* |
 | **Soul Stare** | 2 | ash | mag 6 | 4 | conceal | dmg | — | — | **crit** | obscure | **Soul Stare** +conceal, +hinder ⟨imposes action_loss · crit→staggered · resist mental⟩ | **Every Living Thing** +conceal, +hinder · *targets, conditions* | **Everything Has an Address** +conceal, +hinder, +break · *scope, quality* |
 | **Wither** | 2 | ash | 2d6 | 5 | damage | dmg | decay | — | **crit** |  | **Wither** +hinder ⟨ongoing⟩ | **Grey Touch** +break · *scope, quality* | **Withering** +break · *scope, range* |
 | **Ask the Dead** | 3 | ash | mag 5 | 5 | setup | — | — | — | **crit** | gated upkeep | **Ask the Dead** +reveal | **Long Question** +summon · *targets, range* | **Full Account** +summon · *quality, range* |
+| **Bone Lance** | 3 | ash | 3d6 | 6 | strike | leth | physical | — | **crit** |  | **Drawn Splinter** +strike | **Bone Lance** +strike, +break · *damage, quality, targets* | **Ossuary Volley** +strike, +break · *targets, damage* |
 | **Calling Back** | 3 | ash | 2d6+2 | 12 | retrieval | leth | decay | — | **crit** | upkeep | **From the Threshold** +heal, +summon | **From the Near Dark** +heal, +summon · *range, duration, damage* | **From the Deep Dark** +heal, +summon · *range* |
-| **Death-Ward** | 3 | ash | mag 5 | 6 | guard | — | — | decay, judgement, appetite, vitality | **crit** · soak 5 |  | **Warded Ground** +ward | **Carried Sign** +ward, +resist · *quality, duration* | **Not Today** +ward, +resist, +shield · *targets, range* |
+| **Death-Ward** | 3 | ash | mag 5 | 6 | guard | — | — | decay, judgement, appetite, vitality, cold | **crit** · soak 5 |  | **Warded Ground** +ward | **Carried Sign** +ward, +resist · *quality, duration* | **Not Today** +ward, +resist, +shield · *targets, range* |
 | **Draw Down** | 3 | ash | 3d6+2 | 6 | damage | leth | vitality | — | **crit** | gated | **Draw Down** +strike, +heal | **Long Draught** +strike, +heal · *range, targets* | **Emptied Vessel** +strike, +heal · *quality, damage* |
 | **Killing Field** | 3 | ash | 2d6 | 7 | damage | leth | decay | — | **crit** · area |  | **Marked Ground** +strike | **Wearing Field** +strike, +hinder · *damage, scope* | **Killing Field** +strike, +hinder, +ward · *area, damage, duration* |
 | **Raised Hand** | 3 | ash | mag 6 | 9 | construct | — | — | — | **crit** | upkeep | **Set Hand** +summon, +bind | **Standing Crew** +summon, +bind, +command · *scope* | **Long Labour** +summon, +bind, +command · *autonomy* |
+| **Reaping Sickle** | 3 | ash | 3d6 | 7 | strike | leth | physical | — | **crit** · area |  | **Conjured Sickle** +strike | **Reaping Arc** +strike, +hinder · *targets, scope* | **The Whole Field** +strike, +hinder · *targets, scope, conditions* |
 | **Under-Song** | 3 | thr | mag 6 | 7 | reveal | — | — | — | **crit** | gated | **Under-Song** +reveal | **Named Sorrow** +reveal, +provoke · *quality, conditions* | **Long Lament** +reveal, +provoke · *scope, targets, duration* |
 | **Driven Shade** | 4 | ash | mag 6 | 11 | construct | leth | — | — | **crit** |  | **Driven Shade** +summon, +bind | **Long Road** +summon, +bind, +command · *range, duration* | **Does Not Stop** +summon, +bind, +command · *autonomy, duration, conditions* |
 | **Names of the Lost** | 4 | thr | mag 7 | 11 | bolster | — | — | — | — | gated | **Names of the Lost** +empower | **Kept Names** +empower · *scope, duration* | **Unmeddled Dead** +ward · *duration, quality* |
@@ -55,10 +58,10 @@ Crafts marked *first-gift* inherit `levelReq`/`energyCost`/`shape`/`harmRung` an
 | gap | n (crafts) | crafts |
 |---|---|---|
 | no `mechanic.crit` | 10 | Attended End, Carried Name, Deathsense, Feeling-Sense, Kept Vigil, Grey Road, Made Elegy, Pathos, +2 more |
-| no `wardTypes` | 29 | Attended End, Carried Name, Deathsense, Feeling-Sense, Keening, Necrotic Strike, Palework, Shared Weight, +21 more |
-| no `imposes` on any rank | 29 | Attended End, Carried Name, Deathsense, Feeling-Sense, Kept Vigil, Necrotic Strike, Palework, Shared Weight, +21 more |
+| no `wardTypes` | 32 | Attended End, Carried Name, Deathsense, Feeling-Sense, Keening, Necrotic Strike, Palework, Shared Weight, +24 more |
+| no `imposes` on any rank | 32 | Attended End, Carried Name, Deathsense, Feeling-Sense, Kept Vigil, Necrotic Strike, Palework, Shared Weight, +24 more |
 | ⚠️ *(for reference — `imposes` RANK OCCURRENCES in this set: 11)* | | |
-| no `ongoingHarm` on any rank | 31 | Attended End, Carried Name, Deathsense, Feeling-Sense, Keening, Kept Vigil, Palework, Shared Weight, +23 more |
+| no `ongoingHarm` on any rank | 34 | Attended End, Carried Name, Deathsense, Feeling-Sense, Keening, Kept Vigil, Palework, Shared Weight, +26 more |
 | ⛔ rolls dice, no `damageType` | 3 | Keening, Kept Breath, The Cut Thread |
 
 **social verbs present:** persuade, soothe, bargain, provoke

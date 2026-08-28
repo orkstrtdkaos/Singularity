@@ -775,7 +775,7 @@
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [],
-     "grants": "⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against decay, judgement, appetite and vitality — the ending-hastened, the curse, the hungry dead, and anything that would draw the life out of them.",
+     "grants": "⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against decay, judgement, appetite, vitality and cold — the ending-hastened, the curse, the hungry dead, anything that would draw the life out of them, and the cold that comes for what is left.",
      "cannot": "It wards the threshold, not the outcome, and a strong enough wrongness strains it. ⚠️ It does nothing against a sword, a fall or a fever — that is The Kept Breath. And it stands where you laid it; it does not travel."
     },
     {
@@ -832,12 +832,13 @@
     "soakRank": 3,
     "duration": 6,
     "targets": 1,
-    "note": "T-III guard. ⛔ IT WARDS A KIND OF HARM, NOT IMPACT — soak 5 at soakRank 3 applies ONLY against `decay`, `judgement` and `appetite`, and not at all against a sword. ⚠️ decay is the hastened ending and its own wardedBy is 'a tended vigil, consecrated ground' — Ashwarden work verbatim; judgement is the death-curse; appetite is the restless dead reaching the living, which the description names outright. ⛔ ERIK 2026-08-23 ON `judgement`: \"those pesky Seraphs like to judge people to death.\" The ward answers the Seraphic signature deliberately — it is the one thing in the game that kills you by being RIGHT about you, and an Ashwarden vigil standing against it is the tradition refusing an ending it did not agree to, regardless of whether the ending is deserved. ⛔ `vitality` ADDED 2026-08-24 with the type itself. A ward against unnatural takings must answer the taking of LIFE — and Death-Ward is the tradition's answer to its own Draw Down, exactly as it already answers Necrotic Strike's decay. ⚠️ IT IS ALSO THE ONLY ANSWER IN THE CORPUS: `consumed_wound` (abyssal) carries the same type and nothing else wards it, which the which-check caught the moment the type was added.",
+    "note": "T-III guard. ⛔ IT WARDS A KIND OF HARM, NOT IMPACT — soak 5 at soakRank 3 applies ONLY against `decay`, `judgement` and `appetite`, and not at all against a sword. ⚠️ decay is the hastened ending and its own wardedBy is 'a tended vigil, consecrated ground' — Ashwarden work verbatim; judgement is the death-curse; appetite is the restless dead reaching the living, which the description names outright. ⛔ ERIK 2026-08-23 ON `judgement`: \"those pesky Seraphs like to judge people to death.\" The ward answers the Seraphic signature deliberately — it is the one thing in the game that kills you by being RIGHT about you, and an Ashwarden vigil standing against it is the tradition refusing an ending it did not agree to, regardless of whether the ending is deserved. ⛔ `vitality` ADDED 2026-08-24 with the type itself. A ward against unnatural takings must answer the taking of LIFE — and Death-Ward is the tradition's answer to its own Draw Down, exactly as it already answers Necrotic Strike's decay. ⚠️ IT IS ALSO THE ONLY ANSWER IN THE CORPUS: `consumed_wound` (abyssal) carries the same type and nothing else wards it, which the which-check caught the moment the type was added. ⛔ `cold` ADDED 2026-08-24 with the type. A ward against unnatural takings must answer heat TAKEN as surely as life taken — and per `damage_types.cold` the answer to cold is a thing that MAKES heat, which is what a tended vigil is.",
     "wardTypes": [
      "decay",
      "judgement",
      "appetite",
-     "vitality"
+     "vitality",
+     "cold"
     ],
     "crit": {
      "success": "The sign holds against more than it was laid for — whatever was reaching stops reaching, and does not try that door again.",
@@ -4394,6 +4395,358 @@
    ],
    "_authored": "⛔ ERIK 2026-08-24: 'we need a couple damage dealing skills… I'm thinking A ZONE THAT DAMAGES ALL WITHIN PER TURN.' ⚠️ MEASURED FIRST: Death had THREE damage-shaped crafts in 33 and NO PERSISTENT ZONE — every area craft in the corpus is an instantaneous burst. ⛔ THIS IS THE FIRST TICKING GROUND-DENIAL IN THE GAME, which makes it a different tactical object rather than a bigger Keening. ⚠️ IT DOES NOT SORT AND IT DOES NOT MOVE — both hard bounds, so it stays a positional decision rather than a targeted attack, and per Erik's ruling on Necrotic Strike the indiscriminate part is a PROPERTY OF THE GROUND, not of a craft aimed at people. ⛔ AND IT INHERITS §48 CORRECTLY: the unliving are untouched and one near emergence is MENDED by standing in it.",
    "_named_20260824": "⛔ ERIK 2026-08-24: 'you use GREY way too much.' MEASURED: 63 uses across 33 Death crafts, and THREE CRAFT NAMES — Grey Hand, Grey Road, and this one. ⚠️ Renamed to KILLING FIELD (Erik's suggestion) and the colour de-greyed: the ring of dead grass carries it without the word. ⛔ ALSO CUT ALONGSIDE THIS: `ending_cast` / Sent Ending, authored an hour earlier as 'Death's only ranged damage' — Erik: 'doesn't Necrotic Touch do a ranged attack at higher rank?' IT DOES. r2 has always read 'the grey leaves your hand, work at a pace's distance' while `mechanic.range` sat UNSET, so I measured reach off the FIELD, found nothing past touch, and filled a gap that did not exist. ⚠️ FOURTH DUPLICATION THIS SESSION, and the first caused by trusting a field over the prose beside it. `range: 4` is now declared on Necrotic Strike."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "ashwarden",
+   "nativeOrCombination": "native",
+   "axes": {
+    "death_life": -0.5
+   },
+   "id": "last_cold",
+   "name": "Last Cold",
+   "levelReq": 2,
+   "energyCost": 5,
+   "attribute": "mental",
+   "shape": "damage",
+   "harmRung": "lethal",
+   "challengeTypes": [
+    "FIGHT",
+    "SURVIVE"
+   ],
+   "operativeAxis": [
+    "range",
+    "damage",
+    "targets"
+   ],
+   "effectTags": [
+    "cold",
+    "ranged"
+   ],
+   "functions": [
+    "strike",
+    "hinder"
+   ],
+   "description": "⛔ TAKE THE HEAT OUT OF SOMETHING AT A DISTANCE. Not rot and not a wound — the cold a body goes when it is finished, arriving early and from across a room. ⚠️ THEIR BREATH SHOWS FIRST. Then their hands stop working, then their judgement, and there is no injury on them anywhere.",
+   "narrationHints": "Frost finds the seams of his coat from the inside. ⚠️ THE ROOM DOES NOT GET COLDER — only he does, and everyone can see it happening and cannot feel it.",
+   "notFor": "⛔ WARMING ANYTHING, or cold as weather — it takes heat from ONE THING, it does not chill a place. ⚠️ THINGS THAT WERE NEVER WARM: a construct, a mechanism, a raised crew. ⛔ AND FIRE ANSWERS IT PLAINLY — armour does not.",
+   "plainly": "A fight/survive action. 2d6 cold to one living thing at range 8 — no touch, no wound needed, and it hinders as it lands: hands and judgement go before anything else. r2 reaches two, r3 three at 4d6. ⛔ Warded by anything that MAKES heat; armour is no defence.",
+   "intensity": {
+    "conserve": "a chill only — half the dice, and they will think it was the room",
+    "surge": "take all of it; THEY WILL NOT BE WARM AGAIN UNTIL SOMEONE WARMS THEM"
+   },
+   "bounds": [
+    {
+     "text": "⛔ THE LIVING AND THE WARM ONLY — a construct, a mechanism or a raised crew was never warm and takes nothing",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ FIRE, SHELTER AND A PRESS OF BODIES ANSWER IT. Armour does not — you are not being struck",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT TAKES HEAT FROM A THING, NEVER FROM A PLACE. It will not freeze a river or chill a hall",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "range": 8,
+    "targets": 1,
+    "damageType": "cold",
+    "marginFloorPer": 0.02,
+    "crit": {
+     "success": "It goes all the way in at once, and they sit down where they are standing.",
+     "failure": "You take the heat out of the air between you instead, and now you are both cold."
+    },
+    "note": "⛔ DEATH'S FIRST COLD CRAFT AND ITS FIRST UNCONDITIONAL RANGED DAMAGE. `necrotic_strike` reaches at r2 but AMPLIFIES an existing wound; this needs nothing to be true first. ⚠️ `damageType: cold` — warded by things that MAKE heat, so armour is no answer and a campfire is. ⛔ It hinders as it lands because that is what cold does: hands and judgement go before the body stops."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Cold Reach",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [],
+     "grants": "⛔ 2d6 COLD TO ONE LIVING THING AT REACH. Their breath shows, their fingers stop closing properly, and there is no mark on them anywhere.",
+     "cannot": "One living, warm thing you can see. ⚠️ The never-warm take nothing, and a fire nearby answers it."
+    },
+    {
+     "rank": 2,
+     "name": "Deep Cold",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "targets",
+      "damage"
+     ],
+     "grants": "⛔ 3d6 AND TWO OF THEM — and the cold HINDERS: what they attempt comes out slow and badly aimed while it holds.",
+     "cannot": "⚠️ Two, living, seen. And it still chills PEOPLE, never the room they are standing in."
+    },
+    {
+     "rank": 3,
+     "name": "Last Cold",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "targets",
+      "damage"
+     ],
+     "grants": "⛔ 4d6 TO THREE AT ONCE — the cold a body goes when it is done, given early to whoever you are looking at.",
+     "cannot": "⚠️ Three, and they must be warm to begin with. ⛔ A fire between you and them is a real defence and they will use it."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-24: 'it could be COLD… you die from cold just as easily and your body goes cold when you die.' ⚠️ NEW DAMAGE TYPE `cold` AUTHORED WITH IT — heat REMOVED, structurally vitality's sibling, warded by things that MAKE heat rather than keep it, WHICH MAKES ARMOUR NO ANSWER. ⛔ AND IT IS THE UNCONDITIONAL RANGED BLAST Death lacked: `necrotic_strike` reaches at r2 but must amplify an existing wound; this needs nothing to be true first, which is the real distinction the cut `ending_cast` never had."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "ashwarden",
+   "nativeOrCombination": "native",
+   "axes": {
+    "death_life": -0.5
+   },
+   "id": "bone_lance",
+   "name": "Bone Lance",
+   "levelReq": 3,
+   "energyCost": 6,
+   "attribute": "practical",
+   "shape": "strike",
+   "harmRung": "lethal",
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL"
+   ],
+   "operativeAxis": [
+    "range",
+    "damage",
+    "penetration"
+   ],
+   "effectTags": [
+    "bone",
+    "ranged",
+    "physical"
+   ],
+   "functions": [
+    "strike",
+    "break"
+   ],
+   "description": "⛔ THE DEAD ARE FULL OF SPIKES AND YOU ARE STANDING IN A GRAVEYARD. Draw bone — from the ground, from an ossuary, from a body on the floor, from your own hand if there is nothing else — and send it. ⚠️ IT IS EDGE AND WEIGHT, NOT ROT: it makes an ordinary hole in an ordinary way, and everything that stops a spear stops this.",
+   "narrationHints": "Three splinters come up out of the turf like a thing surfacing and go through the man behind the shield. ⚠️ THE VALLEY FINDS THIS ONE PARTICULARLY HARD TO FORGIVE, because afterwards there is bone in the wound and everyone can see whose it was not.",
+   "notFor": "⛔ SOMEWHERE WITH NO BONE — a clean floor, a new-built room, open water. You must have material, and looking for it is visible. ⚠️ It is PHYSICAL harm: no rot, no cold, no condition, and armour works exactly as armour.",
+   "plainly": "A fight/duel action. Draw bone from nearby remains and fire it: 3d6 physical at range 10, one target. r2 pierces 2 and takes two; r3 fires a volley at three. ⛔ You must have bone to draw — otherwise it is your own, and that costs.",
+   "intensity": {
+    "conserve": "one splinter — half the dice, and nobody sees where it came from",
+    "surge": "empty the ground; THERE WILL BE NOTHING LEFT TO BURY AFTERWARDS"
+   },
+   "bounds": [
+    {
+     "text": "⛔ YOU MUST HAVE BONE TO DRAW. Remains, an ossuary, a battlefield, a graveyard — or your own, which is a wound",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT IS PHYSICAL HARM. Armour, shields and cover work exactly as they always do",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ DRAWING FROM THE RECENT DEAD IS SEEN AND IS NOT FORGIVEN — the Valley can tell whose bone that was",
+     "class": "drawback"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 3,
+     "d": 6
+    },
+    "range": 10,
+    "targets": 1,
+    "damageType": "physical",
+    "pierce": 0,
+    "crit": {
+     "success": "It goes through him and into the man behind, and neither of them saw it leave the ground.",
+     "failure": "The bone comes up short and stands out of the turf between you, pointing."
+    },
+    "note": "⛔ THE FIRST `physical`-TYPED CRAFT IN THE GAME — `damage_types.physical` is authored as 'the default when no type is named' and NOTHING declares it. ⚠️ THAT IS THE POINT: Death's harm has been rot, feeling and vitality, all of which have exotic wards; THIS ONE IS ANSWERED BY A SHIELD. ⛔ It needs MATERIAL — bone nearby — which makes it a craft about WHERE YOU ARE STANDING, and a graveyard is an arsenal."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Drawn Splinter",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [],
+     "grants": "⛔ DRAW ONE SPIKE OF BONE FROM NEARBY REMAINS AND SEND IT — 3d6 physical at reach, through cloth and flesh in the ordinary way.",
+     "cannot": "You must have bone within a few paces. ⚠️ Without it you may use your own, and that is a wound you keep."
+    },
+    {
+     "rank": 2,
+     "name": "Bone Lance",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "damage",
+      "quality",
+      "targets"
+     ],
+     "grants": "⛔ A PROPER LANCE, DRAWN LONG AND SENT HARD — PIERCE 2, through a shield-rim and the arm behind it, and two of them.",
+     "cannot": "⚠️ Bone enough for two. ⛔ And it is still ordinary harm: good armour is a real answer."
+    },
+    {
+     "rank": 3,
+     "name": "Ossuary Volley",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "targets",
+      "damage"
+     ],
+     "grants": "⛔ THE GROUND EMPTIES ITSELF UPWARD — a volley at three, wherever the dead are thick enough to supply it.",
+     "cannot": "⛔ IT TAKES THE GROUND WITH IT. A graveyard you have fought in is a graveyard you have unmade, and someone will notice."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-24: 'BONE SPIKES can be fired out and would be a cool aesthetic.' ⚠️ FIRST `physical`-TYPED CRAFT IN THE CORPUS — the type is authored as the untyped default and NOTHING declares it. ⛔ DELIBERATE: Death's harm has been decay, feeling and vitality, all warded exotically; this one is answered by a SHIELD, which makes it the tradition's most ordinary and most usable attack. ⚠️ IT NEEDS MATERIAL, so it is a craft about WHERE YOU ARE STANDING — and it carries a social cost the others do not: everyone can see whose bone that was."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "ashwarden",
+   "nativeOrCombination": "native",
+   "axes": {
+    "death_life": -0.5
+   },
+   "id": "reaping_sickle",
+   "name": "Reaping Sickle",
+   "levelReq": 3,
+   "energyCost": 7,
+   "attribute": "physical",
+   "shape": "strike",
+   "harmRung": "lethal",
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL"
+   ],
+   "operativeAxis": [
+    "targets",
+    "damage",
+    "scope"
+   ],
+   "effectTags": [
+    "conjured",
+    "melee",
+    "reaping"
+   ],
+   "functions": [
+    "strike",
+    "hinder"
+   ],
+   "description": "⛔ CONJURE THE SICKLE AND SWING IT. A scythe of cold dark metal that was not there a moment ago, taken in both hands and reaped through everything standing within its arc. ⚠️ IT IS NOT SUBTLE, IT IS NOT DENIABLE, AND IT IS THE ONLY THING THIS TRADITION DOES THAT LOOKS LIKE WHAT PEOPLE ALREADY THINK IT LOOKS LIKE.",
+   "narrationHints": "The blade arrives already moving, as though it had been swung somewhere else first. ⚠️ IT MAKES NO SOUND GOING THROUGH — the sound comes afterwards, from the people.",
+   "notFor": "⛔ REACH — it is a melee weapon and a wide one, and it does nothing at distance. ⚠️ Precision: it takes everything in the arc including what you would rather it did not. ⛔ AND IT CANNOT BE PUT DOWN AND PICKED UP: it exists while you swing it and not otherwise.",
+   "plainly": "A fight/duel action. Conjure a scythe and sweep it: 3d6 physical to everything in the arc — two adjacent at r1, four at r2, everything within reach at r3, and at r3 it also stops them from closing again. ⛔ Melee only, and the arc does not sort.",
+   "intensity": {
+    "conserve": "a short cut — half the arc, and only what is directly in front of you",
+    "surge": "the full sweep; YOU WILL FINISH THE SWING WHATEVER IS IN THE WAY"
+   },
+   "bounds": [
+    {
+     "text": "⛔ MELEE, AND WIDE. It has no reach at all and cannot be thrown, set, or left standing",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ THE ARC DOES NOT SORT — everything standing in it is reaped, and you choose where to swing, not what it finds",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT EXISTS ONLY WHILE YOU SWING IT. There is no scythe to disarm, and none to carry away",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 3,
+     "d": 6
+    },
+    "range": 1,
+    "targets": 2,
+    "area": 1,
+    "damageType": "physical",
+    "crit": {
+     "success": "The arc comes round further than it should and takes one more than you meant.",
+     "failure": "It arrives half-formed and you swing a shape of cold air, hard, in front of everyone."
+    },
+    "note": "⛔ DEATH'S ONLY CONJURED WEAPON AND ITS ONLY WIDE MELEE. `physical` damage, so ordinary armour answers it. ⚠️ THE ARC DOES NOT SORT — same rule as `killing_field`: the indiscriminate part is a property of the SWEEP, not of a craft aimed at people, per Erik's ruling on Necrotic Strike. ⛔ It cannot be disarmed because it does not persist: there is no object between swings."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Conjured Sickle",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [],
+     "grants": "⛔ A SHORT SICKLE OF COLD DARK METAL, TAKEN IN ONE HAND — 3d6 to two adjacent things in one cut.",
+     "cannot": "Two, adjacent, within arm's reach. ⚠️ It is a weapon and behaves like one: armour answers it."
+    },
+    {
+     "rank": 2,
+     "name": "Reaping Arc",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "targets",
+      "scope"
+     ],
+     "grants": "⛔ THE FULL SCYTHE, IN BOTH HANDS — a sweep that takes four, and anything it touches finds its footing wrong afterwards.",
+     "cannot": "⛔ THE ARC DOES NOT SORT. Your own people standing in it are reaped with everyone else."
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Field",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "targets",
+      "scope",
+      "conditions"
+     ],
+     "grants": "⛔ EVERYTHING WITHIN REACH, IN ONE SWEEP — and the ground behind the blade is BAD FOOTING: what you cut cannot close with you again this round.",
+     "cannot": "⚠️ Still melee, still unsorted. ⛔ And you have to be standing in the middle of it to do it."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-24: 'REAPING SICKLE could be a MULTI-TARGET MELEE ATTACK that uses a CONJURED METAL SCYTHE.' ⚠️ DEATH'S ONLY CONJURED WEAPON AND ONLY WIDE MELEE — the tradition had strike, damage and hobble but nothing that swept. ⛔ `physical` type, so armour answers it plainly; the arc DOES NOT SORT, which follows Erik's Necrotic Strike ruling (indiscriminate is a property of the SWEEP, not of a craft aimed at allies). ⚠️ AND IT CANNOT BE DISARMED because it does not persist between swings, which is a defensive property nothing else has."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

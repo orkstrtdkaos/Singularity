@@ -2,7 +2,7 @@
 
 ⛔ **GENERATED — `node po/matrix_gen.mjs death --detail`. Full rank text, verbatim.**
 
-**34 crafts · 97 ranks** · 2026-08-28
+**37 crafts · 106 ranks** · 2026-08-28
 
 ---
 
@@ -652,7 +652,45 @@
 
 ---
 
-## 18. Made Elegy  ·  `made_elegy`
+## 18. Last Cold  ·  `last_cold`
+
+**L2 · e5 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
+**status:** crit · dmg:cold  
+**ability functions:** strike, hinder
+
+> ⛔ TAKE THE HEAT OUT OF SOMETHING AT A DISTANCE. Not rot and not a wound — the cold a body goes when it is finished, arriving early and from across a room. ⚠️ THEIR BREATH SHOWS FIRST. Then their hands stop working, then their judgement, and there is no injury on them anywhere.
+
+**notFor:** ⛔ WARMING ANYTHING, or cold as weather — it takes heat from ONE THING, it does not chill a place. ⚠️ THINGS THAT WERE NEVER WARM: a construct, a mechanism, a raised crew. ⛔ AND FIRE ANSWERS IT PLAINLY — armour does not.
+
+### r1 — Cold Reach
+
+**functions:** strike · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** damaging
+
+**grants:** ⛔ 2d6 COLD TO ONE LIVING THING AT REACH. Their breath shows, their fingers stop closing properly, and there is no mark on them anywhere.
+
+**cannot:** One living, warm thing you can see. ⚠️ The never-warm take nothing, and a fire nearby answers it.
+
+### r2 — Deep Cold
+
+**functions:** strike, hinder · **gainAxes:** targets, damage · **gains:** broaden · **harm:** lethal
+
+**grants:** ⛔ 3d6 AND TWO OF THEM — and the cold HINDERS: what they attempt comes out slow and badly aimed while it holds.
+
+**cannot:** ⚠️ Two, living, seen. And it still chills PEOPLE, never the room they are standing in.
+
+### r3 — Last Cold
+
+**functions:** strike, hinder · **gainAxes:** targets, damage · **gains:** broaden · **harm:** lethal
+
+**grants:** ⛔ 4d6 TO THREE AT ONCE — the cold a body goes when it is done, given early to whoever you are looking at.
+
+**cannot:** ⚠️ Three, and they must be warm to begin with. ⛔ A fire between you and them is a real defence and they will use it.
+
+**bounds:** ⛔ THE LIVING AND THE WARM ONLY — a construct, a mechanism or a raised crew was never warm and takes nothing · ⛔ FIRE, SHELTER AND A PRESS OF BODIES ANSWER IT. Armour does not — you are not being struck · ⚠️ IT TAKES HEAT FROM A THING, NEVER FROM A PLACE. It will not freeze a river or chill a hall
+
+---
+
+## 19. Made Elegy  ·  `made_elegy`
 
 **L2 · e4 · threnodist · wild_nanite · shape `construct` · harm `none`**  
 **status:** ⚠️ no crit · dmg:feeling  
@@ -690,7 +728,7 @@
 
 ---
 
-## 19. Pathos  ·  `pathos`
+## 20. Pathos  ·  `pathos`
 
 **L2 · e6 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
 **status:** ⚠️ no crit  
@@ -728,7 +766,7 @@
 
 ---
 
-## 20. Public Grief  ·  `public_grief`
+## 21. Public Grief  ·  `public_grief`
 
 **L2 · e4 · threnodist · wild_nanite · shape `conceal` · harm `none`**  
 **status:** crit · obscure  
@@ -766,7 +804,7 @@
 
 ---
 
-## 21. Soul Stare  ·  `soul_stare`
+## 22. Soul Stare  ·  `soul_stare`
 
 **L2 · e4 · ashwarden · metaphysical · shape `conceal` · harm `damaging`**  
 **status:** crit · obscure  
@@ -804,7 +842,7 @@
 
 ---
 
-## 22. Wither  ·  `wither`
+## 23. Wither  ·  `wither`
 
 **L2 · e5 · ashwarden · metaphysical · shape `damage` · harm `damaging`**  
 **status:** crit · dmg:decay  
@@ -842,7 +880,7 @@
 
 ---
 
-## 23. Ask the Dead  ·  `ask_the_dead`
+## 24. Ask the Dead  ·  `ask_the_dead`
 
 **L3 · e5 · ashwarden · metaphysical · shape `setup` · harm `none`**  
 **status:** crit · gated · upkeep  
@@ -880,7 +918,45 @@
 
 ---
 
-## 24. Calling Back  ·  `calling_back`
+## 25. Bone Lance  ·  `bone_lance`
+
+**L3 · e6 · ashwarden · metaphysical · shape `strike` · harm `lethal`**  
+**status:** crit · dmg:physical  
+**ability functions:** strike, break
+
+> ⛔ THE DEAD ARE FULL OF SPIKES AND YOU ARE STANDING IN A GRAVEYARD. Draw bone — from the ground, from an ossuary, from a body on the floor, from your own hand if there is nothing else — and send it. ⚠️ IT IS EDGE AND WEIGHT, NOT ROT: it makes an ordinary hole in an ordinary way, and everything that stops a spear stops this.
+
+**notFor:** ⛔ SOMEWHERE WITH NO BONE — a clean floor, a new-built room, open water. You must have material, and looking for it is visible. ⚠️ It is PHYSICAL harm: no rot, no cold, no condition, and armour works exactly as armour.
+
+### r1 — Drawn Splinter
+
+**functions:** strike · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** damaging
+
+**grants:** ⛔ DRAW ONE SPIKE OF BONE FROM NEARBY REMAINS AND SEND IT — 3d6 physical at reach, through cloth and flesh in the ordinary way.
+
+**cannot:** You must have bone within a few paces. ⚠️ Without it you may use your own, and that is a wound you keep.
+
+### r2 — Bone Lance
+
+**functions:** strike, break · **gainAxes:** damage, quality, targets · **gains:** deepen · **harm:** lethal
+
+**grants:** ⛔ A PROPER LANCE, DRAWN LONG AND SENT HARD — PIERCE 2, through a shield-rim and the arm behind it, and two of them.
+
+**cannot:** ⚠️ Bone enough for two. ⛔ And it is still ordinary harm: good armour is a real answer.
+
+### r3 — Ossuary Volley
+
+**functions:** strike, break · **gainAxes:** targets, damage · **gains:** broaden · **harm:** lethal
+
+**grants:** ⛔ THE GROUND EMPTIES ITSELF UPWARD — a volley at three, wherever the dead are thick enough to supply it.
+
+**cannot:** ⛔ IT TAKES THE GROUND WITH IT. A graveyard you have fought in is a graveyard you have unmade, and someone will notice.
+
+**bounds:** ⛔ YOU MUST HAVE BONE TO DRAW. Remains, an ossuary, a battlefield, a graveyard — or your own, which is a wound · ⛔ IT IS PHYSICAL HARM. Armour, shields and cover work exactly as they always do · ⚠️ DRAWING FROM THE RECENT DEAD IS SEEN AND IS NOT FORGIVEN — the Valley can tell whose bone that was
+
+---
+
+## 26. Calling Back  ·  `calling_back`
 
 **L3 · e12 · ashwarden · metaphysical · shape `retrieval` · harm `lethal`**  
 **status:** crit · dmg:decay · upkeep  
@@ -918,10 +994,10 @@
 
 ---
 
-## 25. Death-Ward  ·  `death_ward`
+## 27. Death-Ward  ·  `death_ward`
 
 **L3 · e6 · ashwarden · metaphysical · shape `guard` · harm `none`**  
-**status:** crit · ward:decay/judgement/appetite/vitality  
+**status:** crit · ward:decay/judgement/appetite/vitality/cold  
 **ability functions:** ward, resist, shield
 
 > Ward against deaths that should not happen: curse-deaths, unnatural endings, the restless-dead reaching the living. Death-Ward is not about physical hardship — for that, use The Kept Breath. This is protection against death as a working, a curse, or a supernatural force.
@@ -932,7 +1008,7 @@
 
 **functions:** ward · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** ⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against decay, judgement, appetite and vitality — the ending-hastened, the curse, the hungry dead, and anything that would draw the life out of them.
+**grants:** ⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against decay, judgement, appetite, vitality and cold — the ending-hastened, the curse, the hungry dead, anything that would draw the life out of them, and the cold that comes for what is left.
 
 **cannot:** It wards the threshold, not the outcome, and a strong enough wrongness strains it. ⚠️ It does nothing against a sword, a fall or a fever — that is The Kept Breath. And it stands where you laid it; it does not travel.
 
@@ -956,7 +1032,7 @@
 
 ---
 
-## 26. Draw Down  ·  `draw_down`
+## 28. Draw Down  ·  `draw_down`
 
 **L3 · e6 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
 **status:** crit · dmg:vitality · gated  
@@ -994,7 +1070,7 @@
 
 ---
 
-## 27. Killing Field  ·  `grey_ground`
+## 29. Killing Field  ·  `grey_ground`
 
 **L3 · e7 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
 **status:** crit · dmg:decay  
@@ -1032,7 +1108,7 @@
 
 ---
 
-## 28. Raised Hand  ·  `set_hand`
+## 30. Raised Hand  ·  `set_hand`
 
 **L3 · e9 · ashwarden · metaphysical · shape `construct` · harm `none`**  
 **status:** crit · upkeep  
@@ -1070,7 +1146,45 @@
 
 ---
 
-## 29. Under-Song  ·  `shared_grief`
+## 31. Reaping Sickle  ·  `reaping_sickle`
+
+**L3 · e7 · ashwarden · metaphysical · shape `strike` · harm `lethal`**  
+**status:** crit · dmg:physical  
+**ability functions:** strike, hinder
+
+> ⛔ CONJURE THE SICKLE AND SWING IT. A scythe of cold dark metal that was not there a moment ago, taken in both hands and reaped through everything standing within its arc. ⚠️ IT IS NOT SUBTLE, IT IS NOT DENIABLE, AND IT IS THE ONLY THING THIS TRADITION DOES THAT LOOKS LIKE WHAT PEOPLE ALREADY THINK IT LOOKS LIKE.
+
+**notFor:** ⛔ REACH — it is a melee weapon and a wide one, and it does nothing at distance. ⚠️ Precision: it takes everything in the arc including what you would rather it did not. ⛔ AND IT CANNOT BE PUT DOWN AND PICKED UP: it exists while you swing it and not otherwise.
+
+### r1 — Conjured Sickle
+
+**functions:** strike · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** damaging
+
+**grants:** ⛔ A SHORT SICKLE OF COLD DARK METAL, TAKEN IN ONE HAND — 3d6 to two adjacent things in one cut.
+
+**cannot:** Two, adjacent, within arm's reach. ⚠️ It is a weapon and behaves like one: armour answers it.
+
+### r2 — Reaping Arc
+
+**functions:** strike, hinder · **gainAxes:** targets, scope · **gains:** broaden · **harm:** lethal
+
+**grants:** ⛔ THE FULL SCYTHE, IN BOTH HANDS — a sweep that takes four, and anything it touches finds its footing wrong afterwards.
+
+**cannot:** ⛔ THE ARC DOES NOT SORT. Your own people standing in it are reaped with everyone else.
+
+### r3 — The Whole Field
+
+**functions:** strike, hinder · **gainAxes:** targets, scope, conditions · **gains:** broaden · **harm:** lethal
+
+**grants:** ⛔ EVERYTHING WITHIN REACH, IN ONE SWEEP — and the ground behind the blade is BAD FOOTING: what you cut cannot close with you again this round.
+
+**cannot:** ⚠️ Still melee, still unsorted. ⛔ And you have to be standing in the middle of it to do it.
+
+**bounds:** ⛔ MELEE, AND WIDE. It has no reach at all and cannot be thrown, set, or left standing · ⛔ THE ARC DOES NOT SORT — everything standing in it is reaped, and you choose where to swing, not what it finds · ⚠️ IT EXISTS ONLY WHILE YOU SWING IT. There is no scythe to disarm, and none to carry away
+
+---
+
+## 32. Under-Song  ·  `shared_grief`
 
 **L3 · e7 · threnodist · wild_nanite · shape `reveal` · harm `none`**  
 **status:** crit · gated  
@@ -1108,7 +1222,7 @@
 
 ---
 
-## 30. Driven Shade  ·  `given_errand`
+## 33. Driven Shade  ·  `given_errand`
 
 **L4 · e11 · ashwarden · metaphysical · shape `construct` · harm `lethal`**  
 **status:** crit  
@@ -1146,7 +1260,7 @@
 
 ---
 
-## 31. Names of the Lost  ·  `names_of_the_lost`
+## 34. Names of the Lost  ·  `names_of_the_lost`
 
 **L4 · e11 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
 **status:** ⚠️ no crit · gated  
@@ -1184,7 +1298,7 @@
 
 ---
 
-## 32. Grief That Stops  ·  `grief_that_stops`
+## 35. Grief That Stops  ·  `grief_that_stops`
 
 **L5 · e13 · threnodist · wild_nanite · shape `hobble` · harm `lethal`**  
 **status:** crit · dmg:feeling  
@@ -1214,7 +1328,7 @@
 
 ---
 
-## 33. Last Lament  ·  `last_lament`
+## 36. Last Lament  ·  `last_lament`
 
 **L5 · e13 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
 **status:** ⚠️ no crit · gated  
@@ -1236,7 +1350,7 @@
 
 ---
 
-## 34. The Cut Thread  ·  `the_cut_thread`
+## 37. The Cut Thread  ·  `the_cut_thread`
 
 **L5 · e14 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
 **status:** crit · gated · upkeep  

@@ -696,7 +696,7 @@
 **status:** ⚠️ no crit · dmg:feeling  
 **ability functions:** bind, make
 
-> ⛔ PUT A FEELING INTO A THING SO IT CAN BE GIVEN — OR LAID ON SOMEONE — LATER. Pathos hands an emotion to a willing person standing in front of you. This puts one into a song, a token, a carved thing, and whoever receives it gets that emotion's effect whether or not you are anywhere near. ⚠️ AT r1 IT IS A GIFT. AT r2 IT NEED NOT BE: the same five feelings can be INFLICTED by an object, which is the one thing Pathos cannot do.
+> ⛔ PUT A FEELING INTO A THING SO IT CAN BE GIVEN, LAID ON SOMEONE, OR LEFT STANDING. Pathos hands an emotion to a willing person in front of you; this puts one into a song, a token, a monument. ⚠️ AT r1 IT IS A GIFT. AT r2 IT NEED NOT BE — the same five feelings INFLICTED by an object, which Pathos cannot do. ⛔ AT r3 IT NEEDS NOBODY AT ALL: a fixture that works on a place for generations, and the people it moves will never have met you.
 
 **notFor:** ⛔ FACTS, MEMORIES OR MESSAGES — it carries a FEELING and nothing else; a token cannot tell anyone what happened. ⚠️ An emotion you are not having: you cannot make one you have not got. ⛔ AND IT CANNOT HOLD MORE THAN ONE at a time — a thing carrying two feelings carries neither.
 
@@ -720,11 +720,11 @@
 
 **functions:** make, bind · **gainAxes:** scope, duration, targets · **gains:** broaden · **harm:** none
 
-**grants:** ⛔ MAKE SOMETHING THAT CARRIES FEELING AT SCALE — art that moves a city, a ritual that holds a people's grief, a work that does what you felt long after you are gone. ⚠️ THE WEEK BECOMES YEARS.
+**grants:** ⛔ IT STOPS NEEDING A HOLDER. r1 and r2 act on whoever takes the thing up; this one becomes a FIXTURE — a monument, a ritual everyone performs, a song a town cannot stop knowing — and it works on the PLACE, continuously, with nobody carrying anything. ⚠️ THE WEEK BECOMES YEARS AND THEN GENERATIONS: a work that does what you felt long after you are gone, to people who never met you.
 
-**cannot:** ⚠️ AT SCALE IT OUTLIVES YOUR INTENTION FOR IT. A city moved by your elegy moves where it likes.
+**cannot:** ⛔ A FIXTURE CANNOT BE PICKED UP, AIMED, OR TAKEN WITH YOU — you have made a property of a place, and the place keeps it. ⚠️ AND AT SCALE IT OUTLIVES YOUR INTENTION FOR IT: a city moved by your elegy moves where it likes, and the third generation will have decided what it means.
 
-**bounds:** ⛔ THE FEELING MUST BE TRUE AND YOURS to bind — a made sentiment does not hold · ⛔ ONE FEELING PER MADE THING. A thing carrying two carries neither · ⚠️ IT CARRIES A FEELING, NEVER A FACT — no messages, no memories, no names · ⛔ AT r1 IT ONLY GIVES. Inflicting a feeling on the unwilling is r2, and it is a different kind of act · ⚠️ A made thing that carries feeling carries it TO EVERYONE who receives it, including those who did not ask
+**bounds:** ⛔ THE FEELING MUST BE TRUE AND YOURS to bind — a made sentiment does not hold · ⛔ ONE FEELING PER MADE THING. A thing carrying two carries neither · ⚠️ IT CARRIES A FEELING, NEVER A FACT — no messages, no memories, no names · ⛔ AT r1 IT ONLY GIVES. Inflicting a feeling on the unwilling is r2, and it is a different kind of act · ⚠️ A made thing that carries feeling carries it TO EVERYONE who receives it, including those who did not ask · ⛔ AT r3 IT IS A FIXTURE — it cannot be picked up, aimed, or taken with you, and the place decides what it comes to mean
 
 ---
 

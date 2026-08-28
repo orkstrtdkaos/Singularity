@@ -24,7 +24,10 @@
    "powerSystem": "metaphysical",
    "shape": "reveal",
    "operativeAxis": "death_life",
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "ask about one ending only — the nearest, and nothing else in the room",
+    "surge": "the whole reckoning at once; MARROW WILL NOT SOFTEN ANY OF IT, INCLUDING YOURS"
+   },
    "mechanic": {
     "magnitude": 6,
     "duration": 4,
@@ -176,7 +179,8 @@
    "_stageNames": "⛔ ERIK 2026-08-16: stage names are PATIENT GAZE · DEATH'S CERTAINTY · DEATHLY PREMONITION.\n⚠️ THESE NAME THE CRAFT'S TIERS; the companion's own `stages[]` names — The Attending Bird, The Told Truth, The One Who Stays — stay on MARROW and are carried alongside in `companionStageName`. ⛔ THE BIRD'S ARC AND THE CRAFT'S TIERS ARE THE SAME PROGRESSION SEEN FROM TWO SIDES: what the companion becomes, and what it lends you.\n⚠️ And the three read as a ladder of certainty: a gaze that waits · a fact that is not arguable · knowing before it happens.",
    "companionId": "marrow",
    "_companionId": "⚠️ SNG-501, CCode: 'the teacher resolves from your `taughtBy` PROSE — that is a weak link. Author `companionId` next time you touch the file and it stops depending on the first word of a sentence.' ⛔ AGREED AND DONE.",
-   "_flairPass_20260823": "⛔ ERIK 2026-08-23: 'Marrow's loaned skill does not have enough flair to be more than Deathsense right now — it needs to give more.' ⚠️ THE FIX FOLLOWS FROM WHAT MARROW IS. Deathsense is PERCEPTION (your body reads another body); this is TESTIMONY (a witness names a category it knows from the inside). So it now gives three things perception cannot: PRECEDENT (r1 — how the last one like this went, memory not prophecy), THE QUIET ROADS (r2 — `track`, from Marrow's own knowledge entry 'the paths carrion takes, which is to say every quiet road in the Valley'), and EMPOWER (r3 — acting on its word is mechanically better, and function_vocabulary flags `empower` as 'THIS SPACE WAS EMPTY'). ⛔ Erik ruled Deathsense r3 MAY approximate this; the crafts are distinguished by SOURCE, not by width."
+   "_flairPass_20260823": "⛔ ERIK 2026-08-23: 'Marrow's loaned skill does not have enough flair to be more than Deathsense right now — it needs to give more.' ⚠️ THE FIX FOLLOWS FROM WHAT MARROW IS. Deathsense is PERCEPTION (your body reads another body); this is TESTIMONY (a witness names a category it knows from the inside). So it now gives three things perception cannot: PRECEDENT (r1 — how the last one like this went, memory not prophecy), THE QUIET ROADS (r2 — `track`, from Marrow's own knowledge entry 'the paths carrion takes, which is to say every quiet road in the Valley'), and EMPOWER (r3 — acting on its word is mechanically better, and function_vocabulary flags `empower` as 'THIS SPACE WAS EMPTY'). ⛔ Erik ruled Deathsense r3 MAY approximate this; the crafts are distinguished by SOURCE, not by width.",
+   "_lintFix_20260824": "⚠️ `intensity` was the bare string 'moderate' — a harm word in the intensity field, from an older schema. Authored as a real conserve/surge pair."
   }
  ],
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."

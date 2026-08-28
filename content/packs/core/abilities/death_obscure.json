@@ -19,14 +19,17 @@
    "tradition": "ashwarden",
    "traditionV2": "Death",
    "nativeOrCombination": "native",
-   "harmRung": "none",
+   "harmRung": "damaging",
    "powerSystem": "metaphysical",
    "shape": "conceal",
    "operativeAxis": [
     "resistance",
     "scope"
    ],
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "a glance — half the resist drop, and they can tell themselves they imagined it",
+    "surge": "hold the stare; THEY WILL NOT BE ABLE TO LOOK AT YOU AFTERWARDS"
+   },
    "mechanic": {
     "magnitude": 6,
     "duration": 3,
@@ -133,7 +136,8 @@
     }
    ],
    "_authored": "⛔ SNG-490. Erik: 'SOUL STARE could be an obscure skill rank 1, plus it would DROP THEIR RESISTANCE. r2 would have a similar effect but on ANY LIVING ENTITY. r3 would work on ANYTHING — everything has an essence (ADDRESS).'\n⚠️ DEATH HAD NO OBSCURE. And the rank ladder is TARGET CLASS, not power: person → living → anything with an address, which is the Ashwarden thesis that everything finishes.\n⛔ THE RESISTANCE DROP IS THE SECOND HALF AND IT MAKES THIS A SETUP FOR THE WHOLE TRADITION — Hastened Grey, Draw Down and Cut Thread all land harder on something that has just been shown its ending.",
-   "_reviewed_20260824": "⛔ `deceive` -> `conceal`. Per function_vocabulary, DECEIVE SHOWS WHAT IS FALSE and CONCEAL HIDES WHAT IS TRUE — and this craft shows a FACT and hides you behind it. It was tagged as lying while being the one obscure in the game that works by telling the truth. ⚠️ Second Death obscure to do that; `public_grief` opens a REAL grief for the same reason. ⛔ ERIK 2026-08-24: 'make sure you remember to include the RESIST DROPS and how they SCALE WITH RANK UP' — now −2 / −3 / −4, stated at every rank, in `plainly`, and in `mechanic.resistDrop`. It is the craft's actual combat value and was previously unnumbered at r1, vague at r2 and absent at r3. ⚠️ `operativeAxis` was the bare STRING 'death_life' — an axis of the WORLD, not of the craft. ⛔ r3 ALREADY REACHED UNDEAD ('a set body') before §48 existed; nothing added."
+   "_reviewed_20260824": "⛔ `deceive` -> `conceal`. Per function_vocabulary, DECEIVE SHOWS WHAT IS FALSE and CONCEAL HIDES WHAT IS TRUE — and this craft shows a FACT and hides you behind it. It was tagged as lying while being the one obscure in the game that works by telling the truth. ⚠️ Second Death obscure to do that; `public_grief` opens a REAL grief for the same reason. ⛔ ERIK 2026-08-24: 'make sure you remember to include the RESIST DROPS and how they SCALE WITH RANK UP' — now −2 / −3 / −4, stated at every rank, in `plainly`, and in `mechanic.resistDrop`. It is the craft's actual combat value and was previously unnumbered at r1, vague at r2 and absent at r3. ⚠️ `operativeAxis` was the bare STRING 'death_life' — an axis of the WORLD, not of the craft. ⛔ r3 ALREADY REACHED UNDEAD ('a set body') before §48 existed; nothing added.",
+   "_lintFix_20260824": "⛔ ability rung `none` while r3 reaches `damaging` — and `none` GLOSSES to the GM as 'this craft HARMS NOTHING, NEVER invent a wound from it'. Corrected to the max rank."
   },
   {
    "id": "public_grief",

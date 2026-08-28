@@ -1573,7 +1573,7 @@
      ],
      "_nameWas": "The Long Question",
      "gainAxes": [
-      "questions",
+      "targets",
       "range"
      ]
     },
@@ -1674,7 +1674,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_reviewed_20260824": "⛔ ERIK 2026-08-24: 'it should track the death ladder.' `timeReach: 168` REPLACED BY `reachesDepth: [0,1,2]`, which is exactly `reachOf(rank)` in death.js. ⚠️ The old week aligned to nothing and predated the ladder. ⛔ THE PAYOFF IS FREE INTERACTION: `deathDepth` already reads `heldOpenBy` and `sinkFactor`, so `open_threshold` (holds the way) and `names_of_the_lost` (slows the sink) now KEEP SOMEONE ANSWERABLE LONGER — three crafts across three traditions cooperating, none written for the others. ⚠️ `summon` -> `reveal`: nothing arrives. `sense: null` removed. r2 declared `deepen` while adding questions AND range. `plainly` was generic machine text on a craft with a very specific act. ✅ EVERY LINE OF PROSE KEPT — 'they are a person, tired, being asked one more question' and the two-word crit failure 'Something answers.'"
+   "_reviewed_20260824": "⛔ ERIK 2026-08-24: 'it should track the death ladder.' `timeReach: 168` REPLACED BY `reachesDepth: [0,1,2]`, which is exactly `reachOf(rank)` in death.js. ⚠️ The old week aligned to nothing and predated the ladder. ⛔ THE PAYOFF IS FREE INTERACTION: `deathDepth` already reads `heldOpenBy` and `sinkFactor`, so `open_threshold` (holds the way) and `names_of_the_lost` (slows the sink) now KEEP SOMEONE ANSWERABLE LONGER — three crafts across three traditions cooperating, none written for the others. ⚠️ `summon` -> `reveal`: nothing arrives. `sense: null` removed. r2 declared `deepen` while adding questions AND range. `plainly` was generic machine text on a craft with a very specific act. ✅ EVERY LINE OF PROSE KEPT — 'they are a person, tired, being asked one more question' and the two-word crit failure 'Something answers.'",
+   "_lintFix_20260824": "⛔ `questions` IS NOT ONE OF THE NINE AND I AUTHORED IT THIS SESSION while fixing other crafts' invented axes. More questions is `targets` — the dead are the targets and r2 asks three of them."
   },
   {
    "schemaVersion": 1,
@@ -1823,7 +1824,7 @@
      "_nameWas": "The Passage",
      "gainAxes": [
       "targets",
-      "access"
+      "scope"
      ]
     },
     {
@@ -1921,7 +1922,8 @@
    "_wardTypes": "⛔ SNG-512. Walking where others cannot answers the ground itself.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_reviewed_20260824": "⛔ ERIK 2026-08-24: 'this skill is not just a travel skill — it is INFILTRATION. Through TRAPS AND KILLING FIELDS.' ⚠️ THE CRAFT ALREADY DID THIS AND NEVER SAID SO. Its own hard bound — a ward that has never held a death cannot be opened — is an INFILTRATION rule: a trap that has KILLED is a road; a trap that has never killed is just a trap. ⛔ Description, hints, notFor, plainly and r1/r2 now lead with trapped corridors, killing fields and warded approaches. ⚠️ AND THE NEW HARD BOUND IS THE INTERESTING HALF: IT DOES NOT HIDE YOU. You walk visibly through the thing that kills people while it fails to kill you, and everyone watching sees it — which makes it infiltration that costs you secrecy, not stealth. ⛔ FIXED: r2 declared `damage` on a craft with no dice and harmRung none at every rank; r3 declared `deepen` while adding scope; `plainly` was machine-generated with title-cased noise and named axes the ranks do not declare."
+   "_reviewed_20260824": "⛔ ERIK 2026-08-24: 'this skill is not just a travel skill — it is INFILTRATION. Through TRAPS AND KILLING FIELDS.' ⚠️ THE CRAFT ALREADY DID THIS AND NEVER SAID SO. Its own hard bound — a ward that has never held a death cannot be opened — is an INFILTRATION rule: a trap that has KILLED is a road; a trap that has never killed is just a trap. ⛔ Description, hints, notFor, plainly and r1/r2 now lead with trapped corridors, killing fields and warded approaches. ⚠️ AND THE NEW HARD BOUND IS THE INTERESTING HALF: IT DOES NOT HIDE YOU. You walk visibly through the thing that kills people while it fails to kill you, and everyone watching sees it — which makes it infiltration that costs you secrecy, not stealth. ⛔ FIXED: r2 declared `damage` on a craft with no dice and harmRung none at every rank; r3 declared `deepen` while adding scope; `plainly` was machine-generated with title-cased noise and named axes the ranks do not declare.",
+   "_lintFix_20260824": "⛔ `access` IS NOT ONE OF THE NINE AND I AUTHORED IT THIS SESSION. Opening a threshold widens what the craft reaches: `scope`."
   },
   {
    "id": "kept_breath",
@@ -3092,7 +3094,7 @@
     "SURVIVE",
     "INVESTIGATE"
    ],
-   "harmRung": "incapacitating",
+   "harmRung": "lethal",
    "nativeOrCombination": "native",
    "shape": "retrieval",
    "_shapeNote": "⛔ CCODE-269 / SPEC_retrieval_shape acceptance 1. WAS `healing`, which handed a resurrection craft familyDefaults.healing's 1d4 — damage-shaped dice for a job that deals none, contradicted by its own notFor: \"AND IT DOES NOT HEAL: what comes back comes back exactly as hurt as it went down.\" ⚠️ ITS OWN 2d6+2 STAYS AND IS NOT A HEAL — Aevi: \"The number is a reach.\" It rolls against DEATH DEPTH (engine/death.js) — r1 reaches the Threshold, r2 the Near Dark, r3 the Deep Dark, and Sealed is closed to every rank including surge. What changed is what it INHERITS, not what it authors.",
@@ -3175,7 +3177,8 @@
    "_nameWas": "The Calling Back",
    "_idWas": "the_calling_back",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_lintFix_20260824": "⛔ ability rung `incapacitating` while r3 reaches `lethal` — the GM was told a resurrection craft could not kill. Corrected to the max rank."
   },
   {
    "schemaVersion": 1,

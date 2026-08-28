@@ -20343,10 +20343,16 @@ await (async () => {
       check("CCODE-276: the melee dials are authored, and every one is read by name",
         Number(mel.maxNamed) === 3 && Number(mel.levelsPerSlot) > 0
         && Number(mel.presenceForSlot) > 0 && Array.isArray(mel.renownBandsForSlot));
-      // ⛔ AND `overmatchGap` IS DELIBERATELY ABSENT — nothing in play calls `overmatchOf` yet, so authoring
-      // it would be a knob with nothing on the other end. It gets authored in the change that wires it.
-      check("CCODE-276: …and no dial is authored ahead of the code that reads it",
-        mel.overmatchGap === undefined);
+      // ⛔ SUPERSEDED BY CCODE-277, AND THE SUPERSESSION IS THE POINT. This asserted `overmatchGap` was
+      // ABSENT, because at CCODE-276 nothing in play called `overmatchOf` and a dial ahead of its reader is
+      // a knob with nothing on the other end. CCODE-277 wired the reader, so the dial is authored now —
+      // in the same change, which is the rule. ⚠️ THE CLAIM SURVIVES, INVERTED: every dial in this block
+      // must have a reader, and the test is now that the two arrived together.
+      check("CCODE-277: every melee dial has a reader — none is authored ahead of the code that reads it",
+        Object.keys(mel).filter(k => !k.startsWith("_")).every(k =>
+          readFileSync(join(root, "engine/melee.js"), "utf8").includes(k)
+          || readFileSync(join(root, "engine/encounters.js"), "utf8").includes(k)),
+        Object.keys(mel).filter(k => !k.startsWith("_")).join(","));
     }
   }
 
@@ -20362,6 +20368,81 @@ await (async () => {
       inTraditions(braid, new Set(["death"])) && inTraditions(braid, new Set(["order"]))
       && !inTraditions(braid, new Set(["life"])));
   }
+
+  // 5az · CCODE-277 — THEATRES AND OVERMATCH REACH PLAY, BOTH ENDS IN ONE CHANGE.
+  // ⛔ Last time I built an engine feature and shipped no UI, and Erik had to ask. This gate asserts the
+  // engine caller, the state carry, the damage floor AND the render — because any one of them missing makes
+  // the other three unreachable, and only the last one is visible to a player.
+  {
+    const EN277 = await import("../engine/encounters.js");
+    const { loadContentHeadless: lch277 } = await import("./headless_content.mjs");
+    const C277 = await lch277();
+    const silas277 = JSON.parse(readFileSync(join(root, "characters/player-s9z9u1/char-mrhs8286.json"), "utf8"));
+    const alone277 = { ...silas277, companions: [], company: [] };
+    const run = (character, def) => {
+      const st = EN277.startEncounter(def, { oppSheet: { attributes: { physical: 9 }, level: 10, energy: 80, health: 40 } });
+      return EN277.skillBattleRound(st, def, { function: "strike", tier: 3, attribute: "mental", intensity: "standard", name: "braid" },
+        { character, content: C277, rules: C277.rules, sb: C277.skillBattle?.engine || {}, steps: C277.rules.resolution || {}, rng: () => 0.5 });
+    };
+    const host = { id: "a", type: "duel", name: "the host", opponent: { name: "the host", health: 40, yieldAt: 0 },
+      theatres: [{ scale: "legion", who: "the host" }] };
+
+    // ⛔ "NO ROLL WINS THIS" IS MECHANICAL, NOT A BANNER. A warning above a round that resolved normally
+    // would let a player beat an army by rolling well — which is the thing Erik ruled out, and exactly how a
+    // warning becomes decoration.
+    const solo = run(alone277, host);
+    check("CCODE-277: one character against a host is NOT A CONTEST, and the state says so",
+      solo.state.yourScale === "individual" && solo.state.overmatch?.overmatched === true);
+    check("CCODE-277: …and the blow is floored — the wall is real, not a label",
+      solo.damage?.overmatched?.was > solo.damage.amount && solo.damage.amount > 0);
+    // ⚠️ FLOORED, NOT ZEROED. You can still hurt an army; you cannot beat one. Zero would read as a bug.
+    check("CCODE-277: …but not zeroed — a 0 reads as broken rather than as a wall",
+      solo.damage.amount > 0);
+    // ⛔ AND THE REFUSAL ARRIVES WITH ITS ANSWERS. A wall with no door on it is a cutscene.
+    check("CCODE-277: the refusal carries Erik's answers, including the honest third one",
+      (solo.state.overmatch.answers || []).length >= 3
+      && solo.state.overmatch.answers.some(a => /prepared/.test(a))
+      && solo.state.overmatch.answers.some(a => /not being there/.test(a)));
+
+    // ⚠️ AND IT LIFTS THE MOMENT IT IS ANSWERED — the answer is to change the situation, never to roll harder.
+    {
+      const st = EN277.startEncounter(host, { oppSheet: { attributes: { physical: 9 }, level: 10, energy: 80, health: 40 } });
+      const prepared = EN277.skillBattleRound({ ...st, preparedGround: [{ id: "pits", name: "pit traps" }] }, host,
+        { function: "strike", tier: 3, attribute: "mental", intensity: "standard", name: "braid" },
+        { character: alone277, content: C277, rules: C277.rules, sb: C277.skillBattle?.engine || {},
+          steps: C277.rules.resolution || {}, rng: () => 0.5 });
+      check("CCODE-277: prepared ground answers it, and the floor lifts — it is a fight again",
+        prepared.state.overmatch?.answer?.answered === true && !prepared.damage?.overmatched);
+    }
+
+    // ⛔ A PARTY IS ONLY OUTWEIGHED, NOT WALLED. One scale of difference stays a roll — making it unwinnable
+    // would delete the fights people actually want to have.
+    {
+      const party = run(silas277, { ...host, theatres: [{ scale: "legion", who: "the host" }] });
+      check("CCODE-277: a band against a host is a HARD FIGHT, not a wall — one gap stays a roll",
+        party.state.overmatch === null && party.state.outweighed && !party.damage?.overmatched);
+    }
+
+    // ⚠️ AND AN UNAUTHORED ENCOUNTER IS UNTOUCHED.
+    const plain = run(silas277, { id: "p", type: "duel", name: "a raider", opponent: { name: "a raider", health: 20, yieldAt: 0 } });
+    check("CCODE-277: an ordinary fight has one derived theatre and no wall",
+      (plain.state.theatres || []).length === 1 && plain.state.overmatch === null && plain.state.outweighed === null);
+
+    // ⛔ AND THE UI RENDERS IT — the half I shipped without last time.
+    {
+      const appSrc277 = readFileSync(join(root, "app.js"), "utf8");
+      check("CCODE-277: the panel renders the scale banner from STATE, with the answers beside the refusal",
+        appSrc277.includes("sbScale") && appSrc277.includes("st.overmatch")
+        && appSrc277.includes("st.theatres") && /overmatch\.answers/.test(appSrc277));
+      check("CCODE-277: …and shows the merely-outweighed case differently from the wall",
+        appSrc277.includes("st.outweighed"));
+    }
+    // ⚠️ AND THE DIALS ARE AUTHORED IN THIS CHANGE, not ahead of it — the rule I broke and then followed.
+    check("CCODE-277: overmatchGap and its damage floor are authored now that something reads them",
+      Number(C277.rules?.melee?.overmatchGap) === 2
+      && Number(C277.rules?.melee?.overmatchedDamageKept) > 0);
+  }
+
   // 3 · ⛔ THE 24 VERBS, NOT THE 8 BUCKETS. "HARM" cannot tell `strike` from `break`.
   {
     const abs = Object.values(C197.abilities || {});

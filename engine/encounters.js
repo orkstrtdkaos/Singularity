@@ -7,7 +7,7 @@
 
 import { battleRound, opponentPolicy } from "./skill_battle.js";
 import { targetableAllies, alliesOf } from "./combatants.js";
-import { commandSlots, bringForward } from "./melee.js";   // CCODE-274: how many you lead is earned; who comes forward is chosen
+import { commandSlots, bringForward, theatresOf, overmatchOf, answersOvermatch, scaleRank } from "./melee.js";   // CCODE-274: how many you lead is earned; who comes forward is chosen
 import { currentStage } from "./evolution.js";   // CCODE-265: an earned item stage can lift a companion's canStrike:false   // CCODE-253: who a foe may aim at — DERIVED here, per this seam's own rule
 import { encounterKind } from "./encounterFrame.js"; // SNG-247: which bounded thing this is — it picks the exit rule
 import { smartClamp } from "./namematch.js"; // SNG-152
@@ -157,6 +157,26 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // ⚠️ DERIVED, NEVER PASSED IN — this wrapper's own rule, after it silently ate a forwarded option three
   // times. The character already knows their level, their presence and who they chose.
   const lead = commandSlots(character, { cfg: rules?.melee || {}, renownBand: state.renownBand || null });
+
+  // ⛔ CCODE-277 / ERIK — WHAT SCALES ARE IN PLAY, AND WHETHER THIS IS A CONTEST AT ALL.
+  // "every encounter could have 1, some or all of the types of battle... 1 v army isn't a contest, but the
+  // encounter scenario would drive the details."
+  // ⚠️ THE SCENARIO DECIDES. `theatres` is authored on the encounter; an unauthored one derives a single
+  // theatre from the headcount, so every existing encounter behaves exactly as it does today.
+  const yourScale = partyPresent.length > 3 ? "unit" : partyPresent.length > 1 ? "party" : "individual";
+  const openTheatres = theatresOf(def, { round: state.round || 1,
+    allyCount: partyPresent.length, foeCount: 1 }).filter(t => t.open !== false);
+  // ⛔ THE HEAVIEST OPEN THEATRE IS THE ONE THAT DECIDES. A duel inside a legion battle is still a legion
+  // battle you are standing in — the duel is the part you PLAY, and the legion is the part that can kill
+  // you regardless of how the duel goes.
+  const heaviest = openTheatres.reduce((w, t) => (scaleRank(t.scale) > scaleRank(w?.scale || "individual") ? t : w), null);
+  const over = heaviest ? overmatchOf(yourScale, heaviest.scale, { cfg: rules?.melee || {} }) : null;
+  // ⚠️ WHAT THE CHARACTER IS HOLDING THAT COULD ANSWER IT — Erik's two, read from what they actually have
+  // rather than assumed. `scaleAnswer` is unauthored on every craft today, so this finds nothing until
+  // content says otherwise: reader before field, and the wall stays real in the meantime.
+  const answer = over?.overmatched ? answersOvermatch(over, {
+    powers: (character.abilities || []).map(a => content?.abilities?.[a.abilityId]).filter(Boolean),
+    ground: state.preparedGround || [] }) : null;
   const split = partyAll.length > 1
     ? bringForward(partyAll, { chosen: state.broughtForward || null, slots: lead.slots })
     : null;
@@ -195,13 +215,34 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // the step that ENDS the turn (the same signal that ticks effects), so "round 3" means three turns, not six steps.
   const s = { ...state, round: state.round + ((senseOnly || !tickEffects) ? 0 : 1), momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, opponentHealth: r.state.opponentHealth ?? state.opponentHealth, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, spent: r.state.spent || { player: false, opponent: false }, lastOppFn: oppDecl.function,
     // ⛔ CCODE-255: and back out, so the action step of this turn spends the read the sense step just earned.
-    foeReadTier: r.foeReadTier ?? state.foeReadTier ?? null };
+    foeReadTier: r.foeReadTier ?? state.foeReadTier ?? null,
+    // ⛔ CCODE-277 — THE SCALES RIDE ON STATE, NOT ONLY ON THE RECEIPT. The panel renders from the ENCOUNTER
+    // STATE; a value that exists only on the round's return is invisible to it, which is the seam that has
+    // eaten a value five times in this file and would have eaten this one too — the banner would have been
+    // written, correct, and blank.
+    theatres: openTheatres.map(t => ({ scale: t.scale, who: t.who, why: t.why || null })),
+    yourScale,
+    ...(over?.overmatched ? { overmatch: { ...over, answer } } : { overmatch: null }),
+    ...(over?.hard ? { outweighed: over } : { outweighed: null }) };
   // SNG-247 Tier 3 (Erik's per-kind weighting: "a puzzle's sense step is the whole game — insight IS the meter"):
   // on a sealed thing, WINNING THE READ buys a layer of understanding. That is what makes a puzzle play differently
   // from a fight on the same engine rather than being a reskin of it — and it keeps the hint ladder the authored
   // puzzles already carry, instead of replacing it with a second progress mechanic.
   const senseBoughtALayer = phase === "sense" && state.hintsRevealed != null && r.player?.margin > (r.opponent?.margin ?? 0);
   if (senseBoughtALayer) s.hintsRevealed = Math.min((def.hintTiers || []).length || Infinity, (state.hintsRevealed || 0) + 1);
+  // ⛔ CCODE-277 — "NO ROLL WINS THIS" HAS TO BE TRUE, NOT A LABEL. Erik: "1 v army isn't a contest."
+  // A banner saying so above a round that resolves normally would let a player beat an army by rolling
+  // well, which is the thing he ruled out — and it is exactly how a warning becomes decoration.
+  // ⚠️ SO AN UNANSWERED OVERMATCH FLOORS WHAT YOU LAND ON IT. Not zero: you can still hurt something, you
+  // simply cannot BEAT it, and zeroing the number would read as a bug rather than as a wall.
+  // ⛔ AND IT IS LIFTED THE MOMENT IT IS ANSWERED — a big enough power or prepared ground makes the fight a
+  // fight again. That is the whole point: the answer is to change the situation, never to roll harder.
+  if (over?.overmatched && answer && !answer.answered && r.damage?.side === "opponent") {
+    const keep = Math.max(0, Number(rules?.melee?.overmatchedDamageKept ?? 0.15));
+    const was = Number(r.damage.amount) || 0;
+    r.damage = { ...r.damage, amount: Math.max(0, Math.round(was * keep)), overmatched: { was, kept: keep,
+      why: over.why } };
+  }
   const deltas = { health: 0, energy: r.state.playerEnergy - before }; // the player's own energy attrition (<= 0)
   const events = []; let ended = false, outcome = null;
   if (senseBoughtALayer && s.hintsRevealed > (state.hintsRevealed || 0)) events.push("A layer gives — you understand it better than you did.");
@@ -307,6 +348,9 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     foeReadTier: r.foeReadTier,
     // ⛔ THE UI OWES THE PICKING AND THE ENGINE OWES A STABLE ANSWER TO "who is forward". Erik: "this needs
     // to be a UI pick." Without this on the receipt there is nothing for that control to bind to.
+    // ⛔ THE SCALES ON THE RECEIPT, so the UI can say what this actually is before the player commits.
+    ...(openTheatres.length ? { theatres: openTheatres.map(t => ({ scale: t.scale, who: t.who, why: t.why || null })),
+      yourScale, ...(over?.overmatched ? { overmatch: { ...over, answer } } : over?.hard ? { outweighed: over } : {}) } : {}),
     ...(split ? { party: { forward: split.forward.map(a => ({ id: a.id, name: a.name })),
       folded: split.folded.map(a => ({ id: a.id, name: a.name })),
       withdrawn: split.withdrawn.map(a => ({ id: a.id, name: a.name, manner: a.withdrawal?.manner || null })),

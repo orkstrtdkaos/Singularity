@@ -115,7 +115,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.237";
+const APP_VERSION = "1.9.238";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12512,7 +12512,30 @@ function skillBattlePanel() {
     } catch { return ""; }
   })();
 
+  // ⛔ CCODE-277 — WHAT SCALE THIS ACTUALLY IS, SHOWN BEFORE THE PLAYER COMMITS. Erik: "1 v army isn't a
+  // contest, but the encounter scenario would drive the details... unless I use some majorly big powers or
+  // prepared ground traps."
+  // ⚠️ A WALL WITH NO DOOR ON IT IS A CUTSCENE, so the banner carries the ANSWERS beside the refusal. And it
+  // renders from the receipt the engine already builds — no second computation to drift from the first.
+  const sbScale = (() => {
+    const th = st.theatres;
+    if (!Array.isArray(th) || !th.length) return "";
+    const line = th.map(t => `${esc(t.scale)}${t.who ? ` <span class="hint">(${esc(t.who)})</span>` : ""}`).join(" + ");
+    if (st.overmatch) {
+      const a = st.overmatch.answer;
+      return `<div class="sb-overmatch">
+        <div class="sys-label">⛔ ${esc(st.overmatch.why || "this is not a contest")}</div>
+        ${a?.answered
+          ? `<div class="hint">${esc(a.why)} — this is a fight again.</div>`
+          : `<div class="hint">Nothing you are holding answers it. ${(st.overmatch.answers || []).map(x => esc(x)).join(" · ")}</div>`}
+      </div>`;
+    }
+    if (st.outweighed) return `<div class="sb-outweighed"><span class="hint">${esc(st.outweighed.why)}</span></div>`;
+    return th.length > 1 ? `<div class="sb-scales"><span class="hint">${line}</span></div>` : "";
+  })();
+
   return `<div class="sb-panel">
+    ${sbScale}
     ${sbParty}
     ${/* ERIK (2026-08-01, live): "this is a weird result to exit the fight." The round said "neither gains —
           it's even" and the fight ENDED. It was not weird — it was INVISIBLE. Momentum stopped being an exit

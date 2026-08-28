@@ -1002,7 +1002,7 @@
 
 > You take the life out of a thing and put it into yourself. The classic bargain of the death-craft: the necromancer sustains himself by ending. It works. It is also exactly what people are afraid of when they are afraid of you.
 
-**notFor:** It moves life, it does not create it — you cannot draw from nothing, and you cannot draw from the already-dead. And it will not top you up past what you were; it heals a wound, it does not make you more than a man.
+**notFor:** It moves life, it does not create it — you cannot draw from nothing, and it will not top you up past what you were; it heals a wound, it does not make you more than a man. ⛔ AND NOT FROM THE UNDEAD: a raised body runs on the ABSENCE of life, so there is nothing there to take and the reach comes back wrong — ⚠️ see the ruling pending on what that costs the drawer (SYSTEM_SPEC §48.5).
 
 ### r1 — Draw Down
 
@@ -1010,11 +1010,11 @@
 
 **grants:** Take vitality from a living thing you are touching and take it into yourself. Their wound is your mending.
 
-**cannot:** Touch, and only from the living. The dead have nothing left to give and will be insulted by the asking.
+**cannot:** Touch, and only from the living. ⚠️ The dead have nothing left to give and will be insulted by the asking. ⛔ AND AN UNDEAD IS WORSE THAN NOTHING — there is no vitality in one to take.
 
 ### r2 — Long Draught
 
-**functions:** strike, heal · **gainAxes:** range · **gains:** deepen · **harm:** incapacitating
+**functions:** strike, heal · **gainAxes:** range, targets · **gains:** broaden · **harm:** incapacitating
 
 **grants:** Draw at reach, and from more than one — a battlefield is, to a Draw-Down, a table set.
 
@@ -1022,13 +1022,13 @@
 
 ### r3 — Emptied Vessel
 
-**functions:** strike, heal · **gainAxes:** ⛔ NONE · **gains:** deepen · **harm:** lethal
+**functions:** strike, heal · **gainAxes:** quality, damage · **gains:** deepen · **harm:** lethal
 
 **grants:** Draw a thing entirely down. What is left is not dead, exactly. It is finished.
 
 **cannot:** There is no partial version of this rank — a thing drawn entirely down does not recover, and what is left is not a corpse anyone can grieve properly. It requires the drawer to keep going past every point where stopping was possible. The Ashwardens do not forbid Draw-Down; they forbid teaching rank three to anyone who asked for it.
 
-**bounds:** TOUCH, and only from the LIVING — the dead have nothing to give · EVERY PERSON WATCHING YOU DO THIS WILL REMEMBER IT · THERE IS NO PARTIAL VERSION OF R3
+**bounds:** ⛔ TOUCH at r1, and only from the LIVING — the dead have nothing to give · ⛔ IT MOVES LIFE, IT DOES NOT MAKE IT — you cannot draw from nothing, and it will not top you up past what you were · ⛔ THERE IS NO PARTIAL VERSION OF R3 · ⚠️ Every person watching you do this will remember it, and some of them will decide something about you
 
 ---
 

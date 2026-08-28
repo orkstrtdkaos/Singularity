@@ -1194,13 +1194,13 @@
    ],
    "narrationHints": "What leaves him arrives in you, and it is warm, and that is the worst part.",
    "description": "You take the life out of a thing and put it into yourself. The classic bargain of the death-craft: the necromancer sustains himself by ending. It works. It is also exactly what people are afraid of when they are afraid of you.",
-   "notFor": "It moves life, it does not create it — you cannot draw from nothing, and you cannot draw from the already-dead. And it will not top you up past what you were; it heals a wound, it does not make you more than a man.",
+   "notFor": "It moves life, it does not create it — you cannot draw from nothing, and it will not top you up past what you were; it heals a wound, it does not make you more than a man. ⛔ AND NOT FROM THE UNDEAD: a raised body runs on the ABSENCE of life, so there is nothing there to take and the reach comes back wrong — ⚠️ see the ruling pending on what that costs the drawer (SYSTEM_SPEC §48.5).",
    "tree": [
     {
      "rank": 1,
      "name": "Draw Down",
      "grants": "Take vitality from a living thing you are touching and take it into yourself. Their wound is your mending.",
-     "cannot": "Touch, and only from the living. The dead have nothing left to give and will be insulted by the asking.",
+     "cannot": "Touch, and only from the living. ⚠️ The dead have nothing left to give and will be insulted by the asking. ⛔ AND AN UNDEAD IS WORSE THAN NOTHING — there is no vitality in one to take.",
      "functions": [
       "strike",
       "heal"
@@ -1223,7 +1223,7 @@
       "strike",
       "heal"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "incapacitating",
      "_functionsWas": [
       "strike",
@@ -1232,7 +1232,8 @@
      ],
      "_nameWas": "The Long Draught",
      "gainAxes": [
-      "range"
+      "range",
+      "targets"
      ]
     },
     {
@@ -1252,7 +1253,10 @@
       "heal"
      ],
      "_nameWas": "The Emptied Vessel",
-     "gainAxes": []
+     "gainAxes": [
+      "quality",
+      "damage"
+     ]
     }
    ],
    "gated": "learned",
@@ -1276,7 +1280,7 @@
     "marginFloorPer": 0.02,
     "range": 1,
     "targets": 1,
-    "note": "T-III, lethal. The damage it deals RESTORES the wielder — 'their wound is your mending.'",
+    "note": "T-III, lethal. The damage it deals RESTORES the wielder — 'their wound is your mending.' ⛔ DAMAGE TYPE IS DELIBERATELY UNSET AND THAT IS A GAP, NOT AN OVERSIGHT. Erik 2026-08-24: 'this is VAMPIRIC LIFE STEALING, not quite decay — closer to INVERSE LIFE DAMAGE. We might not have a damage type appropriate for this yet.' ⚠️ CHECKED ALL THIRTEEN: `decay` is AN ENDING HASTENED, `living` is GROWTH TURNED AGAINST. Neither is LIFE TAKEN OUT AND MOVED INTO SOMEONE ELSE. The closest structural match is `temporal` — 'duration taken or spent' — which is the same shape one axis over. ⛔ SEE po/SPEC_vitality_damage_type.md; DO NOT TYPE THIS CRAFT UNTIL THAT IS RULED.",
     "crit": {
      "success": "More comes across than you reached for, and it arrives warm and it does not feel like theft. ⚠️ That is the danger — the craft is easiest exactly when it should be hardest.",
      "failure": "The life goes out of it and none of it reaches you. You have ended something for nothing, and it is still ending while you stand there."
@@ -1304,19 +1308,23 @@
    },
    "bounds": [
     {
-     "text": "TOUCH, and only from the LIVING — the dead have nothing to give",
+     "text": "⛔ TOUCH at r1, and only from the LIVING — the dead have nothing to give",
      "class": "hard"
     },
     {
-     "text": "EVERY PERSON WATCHING YOU DO THIS WILL REMEMBER IT",
-     "class": "cost"
+     "text": "⛔ IT MOVES LIFE, IT DOES NOT MAKE IT — you cannot draw from nothing, and it will not top you up past what you were",
+     "class": "hard"
     },
     {
-     "text": "THERE IS NO PARTIAL VERSION OF R3",
+     "text": "⛔ THERE IS NO PARTIAL VERSION OF R3",
      "class": "hard"
+    },
+    {
+     "text": "⚠️ Every person watching you do this will remember it, and some of them will decide something about you",
+     "class": "drawback"
     }
    ],
-   "plainly": "A fight action that deals damage. It rolls 3d6+2 It affects 1 target. Range is 1. Ranks: rank 2 extends range+targets; rank 3 adds to special. Limit: touch, and only from the Living — the dead have nothing to give.",
+   "plainly": "A fight action. 3d6+2 taken out of a living thing and put into you — the damage it deals is the amount it heals you. Touch at r1, at reach and from several at r2, and at r3 a thing can be drawn ENTIRELY down. ⛔ It moves life; it cannot create it, cannot draw from the dead, and will not take you past what you were.",
    "_functionsWas": [
     "heal",
     "hinder",
@@ -1324,7 +1332,8 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_reviewed_20260824": "⛔ DAMAGE TYPE LEFT UNSET ON PURPOSE — Erik ruled this is VAMPIRIC LIFE-STEALING and no existing type fits (`decay` hastens an ending; `living` turns growth against you; neither MOVES life). Specced as a fourteenth type rather than mistyped as decay — which is what I was about to do because Wither and Grey Hand both carry it and I was pattern-matching within the tradition. ⚠️ r2 declared `deepen` while adding range AND targets; r3 declared NO axes at all while being the capstone. `plainly` was machine-generated and ended 'rank 3 adds to special', where `special` is not an axis in any register. ⛔ THE UNDEAD CASE IS NOW STATED — a raised body runs on the absence of life, so there is nothing to take — with the COST to the drawer flagged as pending rather than invented. ✅ 'The Ashwardens do not forbid Draw-Down; they forbid teaching rank three to anyone who asked for it' is untouched."
   },
   {
    "schemaVersion": 1,

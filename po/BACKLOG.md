@@ -1,5 +1,13 @@
 # PO Backlog — Singularity
 
+> ⛔ **THE HEADLINE BELOW IS STAMPED 2026-08-14 AND TWO OF ITS CLAIMS ARE NOW FALSE.** `region_maps` and
+> `precursor_lines` **have since been wired**; `areas` too. ⚠️ **`local_layouts` and `scale` are still
+> unread** — and `local_layouts` is worse than unwired: its only consumer is `content_ci`, and `SNG-404`
+> is red because the engine placer and the authored bearings **disagree by sign**.
+>
+> ✅ **Measured afresh today in [`po/STOCKTAKE_20260828.md`](STOCKTAKE_20260828.md)** — one list, all of it
+> run rather than remembered. **Read that first; this file is the queue behind it.**
+
 > ⛔ **STATE AS OF 2026-08-14.** *(Moved here from a root `STATE.md` I created in error — **`STATE.md` is
 > the Tether/ErikIAm name** and duplicating it in this repo made two files with one name and two meanings.
 > PO state belongs in the backlog it drives.)*

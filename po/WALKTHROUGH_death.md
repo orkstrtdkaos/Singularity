@@ -997,7 +997,7 @@
 ## 27. Death-Ward  ·  `death_ward`
 
 **L3 · e6 · ashwarden · metaphysical · shape `guard` · harm `none`**  
-**status:** crit · ward:decay/judgement/appetite/vitality/cold  
+**status:** crit · ward:decay/vitality/cold  
 **ability functions:** ward, resist, shield
 
 > Ward against deaths that should not happen: curse-deaths, unnatural endings, the restless-dead reaching the living. Death-Ward is not about physical hardship — for that, use The Kept Breath. This is protection against death as a working, a curse, or a supernatural force.
@@ -1008,7 +1008,7 @@
 
 **functions:** ward · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** ⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against decay, judgement, appetite, vitality and cold — the ending-hastened, the curse, the hungry dead, anything that would draw the life out of them, and the cold that comes for what is left.
+**grants:** ⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against the three unnatural takings — DECAY, the ending hastened; VITALITY, life drawn out; and COLD, the heat that goes when a body is finished.
 
 **cannot:** It wards the threshold, not the outcome, and a strong enough wrongness strains it. ⚠️ It does nothing against a sword, a fall or a fever — that is The Kept Breath. And it stands where you laid it; it does not travel.
 
@@ -1028,7 +1028,7 @@
 
 **cannot:** Holding it occupies you entirely — you ward or you act, never both. And the one you interpose against reaches YOU instead if it gets through.
 
-**bounds:** wards the THRESHOLD, NOT THE OUTCOME · UNNATURAL ONLY — a person dying of their wounds in the cold needs The Kept Breath instead · YOU ARE HOLDING IT WITH YOUR OWN WEIGHT — and it is still there when you let go
+**bounds:** wards the THRESHOLD, NOT THE OUTCOME · ⛔ IT ANSWERS TAKINGS, NOT ALL HARM — decay, vitality and cold. A blade, a curse or an appetite goes straight through it, and a vigil is not a shield · YOU ARE HOLDING IT WITH YOUR OWN WEIGHT — and it is still there when you let go
 
 ---
 

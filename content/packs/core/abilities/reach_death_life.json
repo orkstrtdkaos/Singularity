@@ -775,7 +775,7 @@
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [],
-     "grants": "⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against decay, judgement, appetite, vitality and cold — the ending-hastened, the curse, the hungry dead, anything that would draw the life out of them, and the cold that comes for what is left.",
+     "grants": "⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against the three unnatural takings — DECAY, the ending hastened; VITALITY, life drawn out; and COLD, the heat that goes when a body is finished.",
      "cannot": "It wards the threshold, not the outcome, and a strong enough wrongness strains it. ⚠️ It does nothing against a sword, a fall or a fever — that is The Kept Breath. And it stands where you laid it; it does not travel."
     },
     {
@@ -832,11 +832,9 @@
     "soakRank": 3,
     "duration": 6,
     "targets": 1,
-    "note": "T-III guard. ⛔ IT WARDS A KIND OF HARM, NOT IMPACT — soak 5 at soakRank 3 applies ONLY against `decay`, `judgement` and `appetite`, and not at all against a sword. ⚠️ decay is the hastened ending and its own wardedBy is 'a tended vigil, consecrated ground' — Ashwarden work verbatim; judgement is the death-curse; appetite is the restless dead reaching the living, which the description names outright. ⛔ ERIK 2026-08-23 ON `judgement`: \"those pesky Seraphs like to judge people to death.\" The ward answers the Seraphic signature deliberately — it is the one thing in the game that kills you by being RIGHT about you, and an Ashwarden vigil standing against it is the tradition refusing an ending it did not agree to, regardless of whether the ending is deserved. ⛔ `vitality` ADDED 2026-08-24 with the type itself. A ward against unnatural takings must answer the taking of LIFE — and Death-Ward is the tradition's answer to its own Draw Down, exactly as it already answers Necrotic Strike's decay. ⚠️ IT IS ALSO THE ONLY ANSWER IN THE CORPUS: `consumed_wound` (abyssal) carries the same type and nothing else wards it, which the which-check caught the moment the type was added. ⛔ `cold` ADDED 2026-08-24 with the type. A ward against unnatural takings must answer heat TAKEN as surely as life taken — and per `damage_types.cold` the answer to cold is a thing that MAKES heat, which is what a tended vigil is.",
+    "note": "T-III guard. ⛔ IT WARDS A KIND OF HARM, NOT IMPACT — soak 5 at soakRank 3 applies ONLY against `decay`, `judgement` and `appetite`, and not at all against a sword. ⚠️ decay is the hastened ending and its own wardedBy is 'a tended vigil, consecrated ground' — Ashwarden work verbatim; judgement is the death-curse; appetite is the restless dead reaching the living, which the description names outright. ⛔ ERIK 2026-08-23 ON `judgement`: \"those pesky Seraphs like to judge people to death.\" The ward answers the Seraphic signature deliberately — it is the one thing in the game that kills you by being RIGHT about you, and an Ashwarden vigil standing against it is the tradition refusing an ending it did not agree to, regardless of whether the ending is deserved. ⛔ `vitality` ADDED 2026-08-24 with the type itself. A ward against unnatural takings must answer the taking of LIFE — and Death-Ward is the tradition's answer to its own Draw Down, exactly as it already answers Necrotic Strike's decay. ⚠️ IT IS ALSO THE ONLY ANSWER IN THE CORPUS: `consumed_wound` (abyssal) carries the same type and nothing else wards it, which the which-check caught the moment the type was added. ⛔ NARROWED TO THREE 2026-08-24. It carried decay, judgement, appetite, vitality and cold, and the which-check objected: 'a ward that answers everything has no character.' ⚠️ THE THREE IT KEEPS ARE ONE IDEA — DECAY (an ending hastened), VITALITY (life taken), COLD (heat taken). ALL THREE ARE UNNATURAL TAKINGS, which is what an Ashwarden vigil is FOR. ⛔ `judgement` and `appetite` DROPPED: a death-curse and a hungry dead are threats the tradition meets in other ways, and a ward that answered them too was a wall rather than a craft.",
     "wardTypes": [
      "decay",
-     "judgement",
-     "appetite",
      "vitality",
      "cold"
     ],
@@ -871,7 +869,7 @@
      "class": "hard"
     },
     {
-     "text": "UNNATURAL ONLY — a person dying of their wounds in the cold needs The Kept Breath instead",
+     "text": "⛔ IT ANSWERS TAKINGS, NOT ALL HARM — decay, vitality and cold. A blade, a curse or an appetite goes straight through it, and a vigil is not a shield",
      "class": "hard"
     },
     {

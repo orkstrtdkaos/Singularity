@@ -1446,18 +1446,18 @@
     "empower",
     "restore"
    ],
-   "narrationHints": "You sing the whole of it — every grief you have ever held, gathered into one lament so complete that those who hear it are, at the end, somehow lighter, having grieved fully at last the thing they never finished grieving.",
-   "description": "The Threnodist capstone — the complete lament, all grief given full voice at once, that lets those who hear it finally finish a mourning they could not finish alone. The greatest and costliest gift of the singers: to be grieved completely is to be freed.",
-   "notFor": "One lament, once, at enormous cost — it lets others complete a grief, but the singer must carry the whole of it to give it, and a grief fully sung is fully felt. It cannot make loss not have happened; it can only let it be, at last, mourned.",
+   "narrationHints": "You sing the whole of it — every grief you have ever held, gathered into one lament so complete that those who hear it are, at the end, somehow lighter. ⚠️ PEOPLE WHO WERE ON THE GROUND GET UP. Not healed — FINISHED. Whatever was holding them is over, and they can feel that it is over.",
+   "description": "⛔ THE THRENODIST CAPSTONE — the complete lament, every grief given full voice at once, and EVERYTHING SET ON THE PEOPLE WHO HEAR IT COMES OFF. Fear, despair, the staggered, the grief-weight, the thing that was put in them — all of it finished and released together. ⚠️ To be grieved completely is to be freed, and this is the only craft in the world that does it for a crowd.",
+   "notFor": "⛔ WOUNDS, ILLNESS AND DAMAGE — it clears what was SET on someone, never what was cut into them. A dying man is freed and still dying. ⚠️ AND IT DOES NOT UNDO LOSS: it cannot make a thing not have happened; it can only let it be, at last, mourned. One lament, once, for everything you have.",
    "tree": [
     {
      "rank": 1,
      "name": "Last Lament",
-     "grants": "Sing a complete lament that lets all who hear finish a grief they could not finish alone.",
-     "cannot": "It costs nearly all you have, it makes the singer feel every grief entire, and it does not undo loss — it only, mercifully, completes the mourning of it.",
+     "grants": "⛔ SING THE WHOLE OF IT. EVERY IMPOSED CONDITION LIFTS FROM EVERYONE WHO HEARS — the frightened stop being frightened, the staggered stand, the unconscious wake, and whatever was set in them is finished rather than suppressed. ⚠️ They are not healed. They are FREED, and they know the difference.",
+     "cannot": "⛔ IT DOES NOT SORT: your enemies hear it too, and they are freed as completely as your own. ⚠️ It clears what was SET and never what was CUT — a dying man is released and still dying. And it costs nearly all you have, makes the singer feel every grief entire, and does not undo the loss itself.",
      "functions": [
-      "empower",
-      "restore"
+      "restore",
+      "empower"
      ],
      "harmRung": "none",
      "gains": "broaden",
@@ -1468,18 +1468,22 @@
    "gated": "learned",
    "nativeOrCombination": "native",
    "challengeTypes": [
-    "SOCIAL"
+    "SOCIAL",
+    "SURVIVE"
    ],
    "harmRung": "none",
    "shape": "bolster",
    "operativeAxis": [
     "completion",
-    "scope"
+    "scope",
+    "targets"
    ],
    "mechanic": {
     "magnitude": 9,
     "duration": 8,
-    "scope": 4
+    "scope": 4,
+    "clearsConditions": "all",
+    "note": "bolster/restore, single-rank capstone. ⛔ IT CLEARS EVERY IMPOSED CONDITION FROM EVERYONE IN SCOPE — the mass counterpart to `shared_weight`'s single-target intercept, and the only craft in the game that can clear a battlefield. ⚠️ `restore` IS THE CORRECT VERB AND IS NOW LOAD-BEARING: per the function vocabulary it undoes a CONDITION, never a wound (§48 made that distinction matter). ⛔ IT ANSWERS THE TRADITION'S OWN WEAPONS — `keening` (action_loss, unconscious), `dread`/Dread Mantle (staggered), `grief_that_stops` — which is why Threnody's capstone is a RELEASE where Ashwarden's is an ENDING. ⚠️ AND THE REFUSALS ARE NOW MECHANICALLY TRUE: a partial clear that leaves conditions behind IS worse than not beginning."
    },
    "rankDeltas": [
     {
@@ -1491,24 +1495,33 @@
     }
    ],
    "intensity": {
-    "conserve": "REFUSED — a half-sung lament leaves a grief half-finished, which is worse than not beginning.",
+    "conserve": "REFUSED — a half-sung lament leaves the conditions half-lifted, and a grief half-finished is worse than one not begun.",
     "surge": "REFUSED — the singer already feels every grief in it."
    },
    "bounds": [
     {
-     "text": "it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until you rest a full night",
+     "text": "⛔ IT CLEARS WHAT WAS SET, NOT WHAT WAS DONE. Conditions come off; wounds, illness and poison do not",
      "class": "hard"
     },
     {
-     "text": "THE SINGER FEELS EVERY GRIEF IN IT",
-     "class": "cost"
+     "text": "⛔ IT DOES NOT SORT — everyone who hears it is freed, including the people you are fighting",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until you rest a full night",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ THE SINGER FEELS EVERY GRIEF IN IT, entire, and is the one person in earshot the lament does not free",
+     "class": "drawback"
     }
    ],
-   "plainly": "A social action that strengthens someone. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 8 hours Limit: iT Costs Nearly All You Have.",
+   "plainly": "A social/survive action, once, for your entire energy pool. ⛔ EVERY IMPOSED CONDITION IS CLEARED FROM EVERYONE WHO HEARS IT — staggered, action-loss, unconscious, fear, despair, grief-weight — across a scope of 4, friend and stranger alike. ⚠️ IT DOES NOT HEAL: wounds, poison and illness are untouched. You end at zero energy and can use no craft until a full night's rest, and both conserve and surge are refused.",
    "_nameWas": "The Last Lament",
    "_idWas": "the_last_lament",
    "_powerSystemWas": "reach_emotional_logical",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rebuilt_20260824": "⛔ ERIK 2026-08-24, ASKING THE QUESTION I HAD STOPPED ASKING: 'you're starting to forget the questions. WHAT DOES THIS DO?' ⚠️ IT DID NOTHING. The tradition's L5 capstone cost the ENTIRE energy pool, refused both intensities, and granted 'lets all who hear finish a grief they could not finish alone' — no condition cleared, no number moved, `magnitude 9 / scope 4` attached to nothing. ⛔ THE SAME DEFECT ERIK NAMED IN THE OLD `shared_weight` ('I'm not seeing a reason for a player to want a skill like this'), except worse, because this is the CAPSTONE — and I had started listing `plainly` defects instead of noticing. ⛔ NOW: IT CLEARS EVERY IMPOSED CONDITION FROM EVERYONE IN SCOPE. `restore` was already the right verb and §48 made it load-bearing. ⚠️ IT DOES NOT SORT — enemies are freed too, which is the cost that makes it a decision — and it clears what was SET, never what was CUT. ✅ Threnody's capstone is now a RELEASE where Ashwarden's `the_cut_thread` is an ENDING; the two mirror each other at L5, e13, single-rank, both intensities refused."
   },
   {
    "schemaVersion": 1,

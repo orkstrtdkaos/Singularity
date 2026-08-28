@@ -617,7 +617,7 @@
 ## 17. Grief Strike  ·  `grief_strike`
 
 **L2 · e6 · threnodist · wild_nanite · shape `strike` · harm `damaging`**  
-**status:** crit  
+**status:** crit · dmg:feeling  
 **ability functions:** strike, hinder
 
 > Strike at what a person is holding themselves together with — it wounds, and it leaves them open to everything that comes after.
@@ -626,7 +626,7 @@
 
 ### r1 — True Feeling
 
-**functions:** strike, hinder · **gainAxes:** ⛔ NONE · **gains:** deepen · **harm:** damaging
+**functions:** strike, hinder · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** damaging
 
 **grants:** ⛔ 2d6 DAMAGE AND ANTISOAK 3. A true, intense feeling arrives where they cannot close it off — and leaves them raw: while the antisoak holds, ANY damage that gets past their soak is increased by 3.
 
@@ -642,7 +642,7 @@
 
 ### r3 — Shattered Fortification
 
-**functions:** strike, hinder · **gainAxes:** duration, targets · **gains:** deepen · **harm:** damaging · imposes · ongoing · persists
+**functions:** strike, hinder · **gainAxes:** duration, targets · **gains:** broaden · **harm:** damaging · imposes · ongoing · persists
 
 **grants:** ⛔ ANTISOAK 8, AND IT LASTS UNTIL HEALED OR RESTORED. What they were using to stay whole is open, and every blow anyone lands on them past their soak is increased by 8 until a mending craft closes it.
 
@@ -1204,13 +1204,13 @@
 
 ### r2 — All Of It
 
-**functions:** bind · **gainAxes:** ⛔ NONE · **gains:** deepen · **harm:** lethal
+**functions:** bind · **gainAxes:** conditions, quality · **gains:** deepen · **harm:** lethal
 
 **grants:** Set every loss down together with nothing held back. A heart sometimes stops. You will not know beforehand which.
 
 **cannot:** Knowing beforehand. Taking it back once set.
 
-**bounds:** IT USES THEIR OWN LOSSES — someone who has lost nothing is nearly immune · IT CANNOT BE AIMED AT AN OUTCOME — you set the weight down, the body decides · THE ONES WHO LIVE ARE CHANGED, and they know who did it
+**bounds:** IT USES THEIR OWN LOSSES — someone who has lost nothing is nearly immune · IT CANNOT BE AIMED AT AN OUTCOME — you set the weight down, the body decides · ⚠️ THE ONES WHO LIVE ARE CHANGED, and they know who did it
 
 ---
 
@@ -1220,19 +1220,19 @@
 **status:** ⚠️ no crit · gated  
 **ability functions:** empower, restore
 
-> The Threnodist capstone — the complete lament, all grief given full voice at once, that lets those who hear it finally finish a mourning they could not finish alone. The greatest and costliest gift of the singers: to be grieved completely is to be freed.
+> ⛔ THE THRENODIST CAPSTONE — the complete lament, every grief given full voice at once, and EVERYTHING SET ON THE PEOPLE WHO HEAR IT COMES OFF. Fear, despair, the staggered, the grief-weight, the thing that was put in them — all of it finished and released together. ⚠️ To be grieved completely is to be freed, and this is the only craft in the world that does it for a crowd.
 
-**notFor:** One lament, once, at enormous cost — it lets others complete a grief, but the singer must carry the whole of it to give it, and a grief fully sung is fully felt. It cannot make loss not have happened; it can only let it be, at last, mourned.
+**notFor:** ⛔ WOUNDS, ILLNESS AND DAMAGE — it clears what was SET on someone, never what was cut into them. A dying man is freed and still dying. ⚠️ AND IT DOES NOT UNDO LOSS: it cannot make a thing not have happened; it can only let it be, at last, mourned. One lament, once, for everything you have.
 
 ### r1 — Last Lament
 
-**functions:** empower, restore · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
+**functions:** restore, empower · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** Sing a complete lament that lets all who hear finish a grief they could not finish alone.
+**grants:** ⛔ SING THE WHOLE OF IT. EVERY IMPOSED CONDITION LIFTS FROM EVERYONE WHO HEARS — the frightened stop being frightened, the staggered stand, the unconscious wake, and whatever was set in them is finished rather than suppressed. ⚠️ They are not healed. They are FREED, and they know the difference.
 
-**cannot:** It costs nearly all you have, it makes the singer feel every grief entire, and it does not undo loss — it only, mercifully, completes the mourning of it.
+**cannot:** ⛔ IT DOES NOT SORT: your enemies hear it too, and they are freed as completely as your own. ⚠️ It clears what was SET and never what was CUT — a dying man is released and still dying. And it costs nearly all you have, makes the singer feel every grief entire, and does not undo the loss itself.
 
-**bounds:** it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until you rest a full night · THE SINGER FEELS EVERY GRIEF IN IT
+**bounds:** ⛔ IT CLEARS WHAT WAS SET, NOT WHAT WAS DONE. Conditions come off; wounds, illness and poison do not · ⛔ IT DOES NOT SORT — everyone who hears it is freed, including the people you are fighting · ⛔ it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until you rest a full night · ⚠️ THE SINGER FEELS EVERY GRIEF IN IT, entire, and is the one person in earshot the lament does not free
 
 ---
 

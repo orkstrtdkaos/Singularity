@@ -1,47 +1,56 @@
 {
- "schemaVersion": 1,
+ "schemaVersion": 2,
  "id": "damage_families",
  "kind": "rules",
- "note": "⛔ THREE FAMILIES. Erik 2026-08-24: 'boil things down a bit, BACK TO THE POLE AXES as a guide for what types there are… ELEMENTAL is heat, cold, lightning, etc. Look up how other RPGs have allocated damage types.' ⚠️ D&D 5e's thirteen fall into three groups — three PHYSICAL, six ELEMENTAL, four POLAR — and its own variant rules state the principle: 'radiant and necrotic channel positive and negative energy respectively' and 'force and psychic can be seen as opposites'. ⛔ SO NOT EVERY TYPE IS ON AN AXIS, which was the error in Aevi's first table and the thing CCode caught from the other side: cold and fire are both TAKINGS, which is exactly why neither is polar. They are SIBLINGS. A ward against fire is not a ward against ice.",
+ "note": "⛔ FOUR FAMILIES. A WARD ANSWERS A FAMILY; A NARROW WARD ANSWERS ONE TYPE INSIDE IT. Erik 2026-08-24: 'cold, heat, lightning etc are all EXAMPLES of elemental damage. This is what we want — DAMAGE FAMILIES.' ⚠️ AND NAMED EFFECTS ARE COMBINATIONS: 'Seraphs use JUDGEMENT to smite their foes — this is a combination of light and other things like force or heat or one of the intrinsics. THE COMBINATIONS SHOULD GENERALLY DESCRIBE THE WORD BEING USED. Necrotic blast is probably combo decay and force.' ⛔ SO THE TYPES BELOW ARE A BASE VOCABULARY, NOT A LIST OF SPELLS — a craft names a MIX, and the mix is what the word means.",
 
- "physical": {
-  "types": ["physical"],
-  "what": "⛔ EDGE, WEIGHT, IMPACT — the default when no type is named, and the only harm a shield answers plainly.",
-  "ownedBy": null,
-  "_why": "⚠️ OWNED BY NOBODY. Any tradition reaches it through its own idiom — an Ashwarden conjures bone (`bone_lance`) and a Marcher swings a blade, and the ward is the same in both cases."
+ "families": {
+  "physics": {
+   "what": "⛔ THE FABRIC OF THE WORLD — matter, space, time, and the two kinds of matter you can see by.",
+   "types": ["physical", "force", "spatial", "temporal", "radiance", "shadow"],
+   "_why": "⛔ ERIK 2026-08-24: 'temporal and SPATIAL move into the PHYSICS family, of which physical is one. LIGHT AND DARK COULD BE PHYSICS — light matter and dark matter manipulation as the basic real-world tie.' ⚠️ THAT IS THE MOVE THAT MAKES THE FAMILY COHERE: it stops `radiance` being 'holy' and `shadow` being 'spooky' and makes them MEDIA YOU CAN PUSH ON, like mass and momentum. A physics ward answers the world's fabric being bent at you — a thrown rock, a folded space, a stolen hour, a lance of light."
+  },
+  "elemental": {
+   "what": "The energies moving through the fabric. Siblings, never opposites.",
+   "types": ["heat", "cold", "lightning", "corrosive"],
+   "_why": "⛔ SIBLINGS, NOT OPPOSITES — CCode's objection turned into the structure: cold and fire are both TAKINGS, which is exactly why neither is the other's plus. ⚠️ A ward against fire is not a ward against ice, and under a family model it never can be. Owned by NOBODY: any tradition reaches one through its own method."
+  },
+  "vital": {
+   "what": "Life ended, grown, or moved.",
+   "types": ["decay", "living", "vitality"],
+   "_why": "⚠️ HEALING NEEDS NO TYPE. Erik: healing is an EFFECT, and the SOURCE type decides who it mends — `decay` mends the undead, `living` and `vitality` mend the living, and `absorb` already implements exactly that. ⛔ `vitality` is the only CONSERVED type: minus here and plus there in the same act."
+  },
+  "intrinsic": {
+   "what": "⛔ HARM THAT REQUIRES A WILL TO MAKE IT. A rockfall cannot do this.",
+   "types": ["feeling", "appetite", "judgement", "psychic", "abstraction", "truth", "deception"],
+   "axis": {"spiritual": ["feeling", "appetite", "judgement"], "mental": ["psychic", "abstraction", "truth", "deception"]},
+   "_why": "⛔ ERIK 2026-08-24: 'what means WILL, DRIVE, EMOTION — it's not Mental. Mental is the METHOD for one end of the spectrum. It's ENTITY-SOURCED damage, from a person, or creature, or something with a WILL OR SPIRIT.' ⚠️ THE SPIRITUAL/MENTAL SPLIT IS THE AXIS INSIDE THE FAMILY, not two families — which is Erik's earlier ruling that 'appetite and feelings are the opposite pole from Mind, logic, thinking, psionic.' ⛔ An intrinsic ward answers both ends; a narrow one answers a single type."
+  }
  },
 
- "elemental": {
-  "types": ["heat", "cold", "lightning", "corrosive", "force"],
-  "what": "⛔ HOW THE WORLD HURTS YOU. Not a tradition's signature — a medium any tradition can reach through its own method.",
-  "ownedBy": null,
-  "_why": "⛔ SIBLINGS, NOT OPPOSITES. `cold` and `heat` are both TAKINGS and neither is the other's plus — that is CCode's objection turned into the structure rather than argued with. ⚠️ AND THIS RECLASSIFIES `cold`, which Aevi authored as Death's own on 2026-08-24: Death REACHES it ('your body goes cold when you die') and so does anyone else. Blazeborn reaches `heat` hardest; that is why 7 blazeborn harm crafts sat untyped."
+ "combinations": {
+  "_what": "⛔ NAMED EFFECTS ARE MIXES, AND THE MIX IS WHAT THE WORD MEANS. These are worked examples, not a catalogue — a craft authors its own `damageMix` and the resolver does the rest.",
+  "examples": [
+   {"name": "a Seraphic smite", "mix": {"radiance": 0.4, "judgement": 0.4, "force": 0.2},
+    "_why": "⛔ ERIK'S OWN EXAMPLE. Light to see it by, moral weight to make it land, and force to knock him down. ⚠️ A physics ward blunts the radiance and the force and LEAVES THE JUDGEMENT ENTIRELY — which is the point: you cannot armour against being found guilty."},
+   {"name": "a necrotic blast", "mix": {"decay": 0.6, "force": 0.4},
+    "_why": "⛔ ERIK: 'necrotic blast is probably combo decay and force.' The rot is what it does; the force is why it arrives across a room."},
+   {"name": "a psionic blast", "mix": {"psychic": 0.5, "physical": 0.5},
+    "_why": "⚠️ Erik: 'psionics are a METHOD of causing types of damage — a psionic blast can be PARTIALLY PHYSICAL.' A shield stops half of it and the other half walks in."},
+   {"name": "a keening", "mix": {"feeling": 0.7, "force": 0.3},
+    "_why": "The grief is the harm; the force is why it goes through a wall."}
+  ]
  },
 
- "polar": {
-  "what": "⛔ ONE PAIR PER AXIS, WHERE THE AXIS HAS TWO REAL ENDS. A polar type has an opposite; a sibling does not.",
-  "pairs": [
-   {"axis": "death_life",            "minus": "decay",      "plus": "living",
-    "_why": "⛔ AN ENDING HASTENED against GROWTH TURNED. And it is why HEALING NEEDS NO TYPE — Erik 2026-08-24: healing is an EFFECT, and the SOURCE type decides who it mends. `decay` mends the undead; `living` and `vitality` mend the living. `absorb` already implements exactly this."},
-   {"axis": "emotional_logical",     "minus": "feeling",    "plus": "psychic",
-    "_why": "⚠️ Erik: 'APPETITE AND FEELINGS ARE SOMETHING OPPOSITE POLE FROM Mind, logic, thinking, psionic.' ⛔ VISCERAL against CEREBRAL — `appetite` folds in as visceral rather than holding a type of its own."},
-   {"axis": "falsehood_truth",       "minus": "deception",  "plus": "truth"},
-   {"axis": "dark_light",            "minus": "shadow",     "plus": "radiance",
-    "_why": "⚠️ `radiance` IS NOT `heat`. CCode measured it: 6 of 7 blazeborn harm crafts use burn language while `radiant_folk`'s light is about ILLUMINATION AND BEING SEEN. Burning and shining are the same source and different harms — burning is elemental `heat`, shining is polar `radiance`."},
-   {"axis": "demonic_angelic",       "minus": "appetite",   "plus": "judgement",
-    "_why": "⚠️ `appetite` is kept as the DEMONIC pole and reads as visceral in the emotional sense — Erik: 'appetite is visceral, as are all the other feelings.' It pairs against moral weight."},
-   {"axis": "destruction_creation",  "minus": "unmaking",   "plus": "shaping",
-    "_why": "⛔ 26 unmaker+wright crafts, a whole reach, entirely untyped. NEITHER TYPE EXISTS YET — authored here as the axis demands them, and each tradition's audit types its own crafts."},
-   {"axis": "concrete_abstract",     "minus": "physical",   "plus": "abstraction",
-    "_why": "⚠️ `physical` appears here AND in its own family — that is correct and not a duplicate. It is the untyped default AND the concrete pole; the mason reaches it as a signature where a marcher reaches it as a weapon."},
-   {"axis": "space_time",            "minus": "temporal",   "plus": "precursor",
-    "_why": "⚠️ THE WEAKEST PAIR IN THE TABLE and flagged as such. `temporal` is duration taken; `precursor` is the lattice worked directly. They share an axis in the tradition map and may not share one here — ERIK'S CALL, and nothing should be typed against this pair until he rules."}
-  ],
-  "unpaired": ["vitality"],
-  "_unpairedWhy": "⛔ `vitality` IS THE ONLY CONSERVED TYPE — minus here and plus there in the same act, which is why it belongs to no axis. It is a TRANSFER ALONG ANY of them. Two carriers across two traditions: `draw_down` (ashwarden) takes life to mend himself; `consumed_wound` (abyssal) is OFFERED a wound and takes it away. Same conservation, opposite consent."
+ "_notTypesAtAll": {
+  "methods": "⛔ PSIONICS, VEIL, AND PRECURSOR/LATTICE-CRYSTAL WORK ARE METHODS, NOT TYPES. Erik 2026-08-24: 'Veil and Precursor Lattice Crystal are METHODS — they clean up into the other actual types.' ⚠️ MEASURED: six crafts carried `damageType: precursor` and NONE OF THEM DEAL DAMAGE — they interface, seal, open, perceive, foreclose. The field was set because it existed. ⛔ THREE THINGS KEPT APART: POWER SOURCE (what you draw on) · METHOD (how you deliver it) · DAMAGE TYPE (what lands, and what the ward answers).",
+  "healing": "An EFFECT, not a type — see families.vital.",
+  "incapacitating": "⛔ A CRAFT THAT STOPS WITHOUT WOUNDING HAS NO DAMAGE TYPE — it has a RESIST type. `progression.js` glosses `incapacitating` as 'STOPS a threat; it does not wound it… NEVER a cut or a break', and `impositionOf` already resolves `resist: mental|physical`. ⚠️ That takes 57 crafts out of the typing job entirely."
  },
 
- "_notATypeAtAll": "⛔ HEALING, AND METHOD. Healing is an EFFECT whose source type decides who it mends (see death_life). And PSIONICS IS A METHOD, NOT A TYPE — Erik: 'psionics are a METHOD of causing types of damage; a psionic blast can be PARTIALLY PHYSICAL.' ⚠️ Three things kept apart: POWER SOURCE (what you draw on), METHOD (how you deliver it), DAMAGE TYPE (what lands and what the ward answers).",
-
- "_incapacitatingIsNotDamage": "⛔ A CRAFT THAT STOPS WITHOUT WOUNDING HAS NO DAMAGE TYPE — it has a RESIST type. `progression.js` glosses `incapacitating` as 'STOPS a threat; it does not wound it… NEVER a cut or a break', and `impositionOf` already resolves `resist: mental|physical`. ⚠️ That takes 57 crafts out of the typing job entirely and means a soak-ward was never the right answer to a binding."
+ "_migrations": {
+  "light -> radiance": "⚠️ 2 crafts. `light` was 'radiance at intensity' and is superseded — burning is elemental `heat`, shining is physics `radiance`. CCode measured the split: 6 of 7 blazeborn harm crafts use burn language while radiant_folk's light is about ILLUMINATION AND BEING SEEN.",
+  "precursor -> (drop)": "⛔ 6 crafts + 1 braid. None deal damage; the field should be REMOVED, not remapped.",
+  "unmaking / shaping -> (never minted)": "⚠️ I authored these into the v1 families for the destruction_creation axis and NO CRAFT EVER USED THEM. Dropped rather than carried — the 26 unmaker/wright crafts should be typed from the four families when that tradition is audited, and `unmaking a wall` is PHYSICS, not a type of its own."
+ }
 }

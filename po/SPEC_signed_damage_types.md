@@ -66,11 +66,32 @@ needed a type nothing else had — it is the only craft that fires BOTH SIGNS AT
 
 1. ⛔ **Does healing get a type?** **[A] It must** — 26 crafts, and without one nothing can ward or invert
    against it.
-2. **Do `living` and `decay` collapse into one signed axis, or stay two names for two directions?**
-   ⚠️ **[A] KEEP BOTH NAMES.** *"Growth turned against — root, bloom, choking green"* is not the positive
-   direction of decay; **it is its own thing.** ⛔ **The axis is `life`, and `decay` is its minus. `living`
-   is a separate axis about GROWTH.** **Erik should overrule me if he sees it differently, because this is
-   the one place the model could over-collapse.**
+2. ⛔ **`living` AND `decay` ARE NOT THE TWO SIGNS OF ONE AXIS — ERIK RESOLVED THIS.** *"Maybe the
+   DESTRUCTION PEOPLE will have the negative growth type."* ⚠️ **So `living` (*growth turned against —
+   root, bloom, choking green*) is the PLUS of a GROWTH axis, and its minus belongs to the UNMAKERS.**
+
+   **MEASURED, AND IT IS A WHOLE REACH SITTING TYPELESS:**
+
+   | | crafts | typed |
+   |---|---|---|
+   | ⛔ `unmaker` — the destruction pole | **13** | ⛔ **0** |
+   | ⛔ `wright` — the creation pole | **13** | ⛔ **0** |
+
+   ⚠️ **AND THEIR PROSE IS UNAMBIGUOUS ABOUT WHICH DIRECTION THEY ARE:** *"Unmake the current form of a
+   thing so completely that what remains is raw material"* · *"Restore by precise SUBTRACTION — not by
+   adding what's missing but by ending what's wrong."* ⛔ **26 CRAFTS ACROSS ONE REACH, ALL DOING A TYPED
+   THING WITH NO TYPE.**
+
+   **SO THE AXES ARE:**
+
+   | axis | **−** | **+** |
+   |---|---|---|
+   | **life** | `decay` (3) | ⛔ healing — **26 crafts, untyped** |
+   | **growth** | ⛔ **unmaking — 13 crafts, untyped** | `living` (2) |
+   | **vitality** | taking | giving — ⚠️ **conserved, both at once** |
+
+   ⛔ **THAT IS 65 CRAFTS ACROSS THREE AXES CURRENTLY CARRYING NO TYPE**, against 28 that carry one.
+
 3. **Is `vitality` still needed as its own type?** ⛔ **YES — it is the only CONSERVED one**, and
    conservation is a property no single-signed type has.
 

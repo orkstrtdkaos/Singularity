@@ -734,35 +734,35 @@
 **status:** ⚠️ no crit  
 **ability functions:** command, empower, heal
 
-> Feel the true emotion under a room or a person past what they show, share a feeling so it eases, and kindle a genuine passion in the willing. The emotional-pole mastery — not manipulation, resonance.
+> ⛔ FEEL IT FIRST AND HARDEST, AND HAND IT TO SOMEONE. Pathos does not read and does not persuade — it KINDLES A NAMED EMOTION IN A WILLING PERSON, and each one does a different thing. ⚠️ RAGE makes their blows land harder and burns off fear. JOY gives them back what exhaustion took. GRIEF makes them unfrightenable, because a person who has already lost has nothing left to threaten. LOVE hardens them when they stand for someone else. HOPE throws off a condition that was set on them. ⛔ NOT MANIPULATION — RESONANCE: you have to actually feel it.
 
-**notFor:** Forcing a feeling on the unwilling (Pathos resonates, it does not compel); cold analysis (that's Logos); faking an emotion — Pathos works by feeling it truly first.
+**notFor:** ⛔ READING — feeling out what someone is actually carrying is Feeling-Sense, and what is UNDER it is Under-Song. This craft only GIVES. ⚠️ Forcing a feeling on the unwilling: Pathos resonates, it does not compel, and a will set against you is set against you. Cold analysis (that is Logos). ⛔ AND FAKING IT: you cannot hand over an emotion you are not having.
 
 ### r1 — Open Heart
 
-**functions:** heal · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
+**functions:** empower · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** Feel the true emotion under a room or a person, past what they show; share a feeling so it eases (a grief halved, a fear steadied); kindle a genuine passion in the willing.
+**grants:** ⛔ NAME AN EMOTION YOU ARE GENUINELY FEELING AND KINDLE IT IN ONE WILLING PERSON — rage, joy, grief, love or hope — and they get that emotion's effect for the duration.
 
-**cannot:** Reads and shares; does not command; the guarded can close to it; feeling their pain means feeling it.
+**cannot:** One person, willing, within speaking distance. ⚠️ It gives and does not read: what they are ALREADY feeling is Feeling-Sense's business. ⛔ And the guarded can close to it.
 
 ### r2 — Shared Fire
 
-**functions:** heal, empower, command · **gainAxes:** targets · **gains:** broaden · **harm:** none
+**functions:** empower, heal · **gainAxes:** targets · **gains:** broaden · **harm:** none
 
-**grants:** Move a crowd by feeling-with-them; carry a person through an emotion too big to bear alone; make an unspoken feeling undeniable in the open.
+**grants:** ⛔ KINDLE IT IN A HANDFUL AT ONCE — a squad, a crew, a knot of frightened people — or pour the whole of it into one person and carry them through something too big to feel alone.
 
-**cannot:** You take on what you move — the cost is real; a will set against feeling resists; moving a mob is riding a wave, not steering it.
+**cannot:** ⚠️ Still one emotion, and still true. ⛔ Moving a crowd is riding a wave, not steering it: they get the feeling, not your intentions for it.
 
 ### r3 — Deep Chord
 
-**functions:** heal, empower, command · **gainAxes:** range, scope, targets · **gains:** deepen · **harm:** none
+**functions:** empower, heal, command · **gainAxes:** scope, targets, range · **gains:** broaden · **harm:** none
 
-**grants:** Feeling at the scale of peoples — turn a room, a mob, a mourning-crowd by the truth of shared feeling; reach a heart no reason could; hold another's whole emotional weight for a time. The Deepfeelers' power in miniature.
+**grants:** ⛔ FEELING AT THE SCALE OF PEOPLES — a hall, a mob, a mourning-crowd, a line about to break — all of them given the same true thing at once, at reach. ⚠️ The Deepfeelers' power in miniature.
 
-**cannot:** The wielder drifts emotion-hot — feeling everything, all the time, until the self drowns; emotion without reason to shape it becomes storm, and a storm forecloses on thought as surely as ice does on feeling.
+**cannot:** ⛔ EMOTION WITHOUT REASON TO SHAPE IT BECOMES STORM, and a storm forecloses on thought as surely as ice does on feeling. ⚠️ And you have felt all of it, at that scale, first.
 
-**bounds:** READS AND SHARES readily; SETTING a feeling that was not there is far harder, and the guarded can close · YOU TAKE ON WHAT YOU MOVE — the cost is real · A WILL SET AGAINST YOU IS SET AGAINST YOU · the wielder DRIFTS EMOTION-HOT
+**bounds:** ⛔ YOU MUST ACTUALLY FEEL IT. Pathos hands over a real emotion, and you cannot hand over one you are not having · ⛔ ONE EMOTION PER USE, NAMED WHEN YOU SPEND IT · ⛔ A WILL SET AGAINST YOU IS SET AGAINST YOU — it resonates, it does not compel, and the guarded can close · ⚠️ YOU KEEP WHAT YOU KINDLED. A Threnodist who hands out rage is furious for a while afterwards, and it shows
 
 ---
 

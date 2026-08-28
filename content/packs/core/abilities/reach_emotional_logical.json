@@ -20,17 +20,17 @@
     "empower",
     "heal"
    ],
-   "narrationHints": "Feeling made a force — the true emotion of a room surfaced, a grief shared and eased, a passion kindled or cooled by one who feels it first and hardest.",
-   "description": "Feel the true emotion under a room or a person past what they show, share a feeling so it eases, and kindle a genuine passion in the willing. The emotional-pole mastery — not manipulation, resonance.",
-   "notFor": "Forcing a feeling on the unwilling (Pathos resonates, it does not compel); cold analysis (that's Logos); faking an emotion — Pathos works by feeling it truly first.",
+   "narrationHints": "She does not tell them to be angry. She is angry, entirely and in front of them, and it goes through the line like heat through a bar. ⚠️ THE EMOTION IS ALWAYS TRUE AND ALWAYS HERS FIRST — a Threnodist who kindles rage is furious, and will be for a while after.",
+   "description": "⛔ FEEL IT FIRST AND HARDEST, AND HAND IT TO SOMEONE. Pathos does not read and does not persuade — it KINDLES A NAMED EMOTION IN A WILLING PERSON, and each one does a different thing. ⚠️ RAGE makes their blows land harder and burns off fear. JOY gives them back what exhaustion took. GRIEF makes them unfrightenable, because a person who has already lost has nothing left to threaten. LOVE hardens them when they stand for someone else. HOPE throws off a condition that was set on them. ⛔ NOT MANIPULATION — RESONANCE: you have to actually feel it.",
+   "notFor": "⛔ READING — feeling out what someone is actually carrying is Feeling-Sense, and what is UNDER it is Under-Song. This craft only GIVES. ⚠️ Forcing a feeling on the unwilling: Pathos resonates, it does not compel, and a will set against you is set against you. Cold analysis (that is Logos). ⛔ AND FAKING IT: you cannot hand over an emotion you are not having.",
    "tree": [
     {
      "rank": 1,
      "name": "Open Heart",
-     "grants": "Feel the true emotion under a room or a person, past what they show; share a feeling so it eases (a grief halved, a fear steadied); kindle a genuine passion in the willing.",
-     "cannot": "Reads and shares; does not command; the guarded can close to it; feeling their pain means feeling it.",
+     "grants": "⛔ NAME AN EMOTION YOU ARE GENUINELY FEELING AND KINDLE IT IN ONE WILLING PERSON — rage, joy, grief, love or hope — and they get that emotion's effect for the duration.",
+     "cannot": "One person, willing, within speaking distance. ⚠️ It gives and does not read: what they are ALREADY feeling is Feeling-Sense's business. ⛔ And the guarded can close to it.",
      "functions": [
-      "heal"
+      "empower"
      ],
      "gains": "broaden",
      "harmRung": "none",
@@ -44,12 +44,11 @@
     {
      "rank": 2,
      "name": "Shared Fire",
-     "grants": "Move a crowd by feeling-with-them; carry a person through an emotion too big to bear alone; make an unspoken feeling undeniable in the open.",
-     "cannot": "You take on what you move — the cost is real; a will set against feeling resists; moving a mob is riding a wave, not steering it.",
+     "grants": "⛔ KINDLE IT IN A HANDFUL AT ONCE — a squad, a crew, a knot of frightened people — or pour the whole of it into one person and carry them through something too big to feel alone.",
+     "cannot": "⚠️ Still one emotion, and still true. ⛔ Moving a crowd is riding a wave, not steering it: they get the feeling, not your intentions for it.",
      "functions": [
-      "heal",
       "empower",
-      "command"
+      "heal"
      ],
      "gains": "broaden",
      "harmRung": "none",
@@ -67,14 +66,14 @@
     {
      "rank": 3,
      "name": "Deep Chord",
-     "grants": "Feeling at the scale of peoples — turn a room, a mob, a mourning-crowd by the truth of shared feeling; reach a heart no reason could; hold another's whole emotional weight for a time. The Deepfeelers' power in miniature.",
-     "cannot": "The wielder drifts emotion-hot — feeling everything, all the time, until the self drowns; emotion without reason to shape it becomes storm, and a storm forecloses on thought as surely as ice does on feeling.",
+     "grants": "⛔ FEELING AT THE SCALE OF PEOPLES — a hall, a mob, a mourning-crowd, a line about to break — all of them given the same true thing at once, at reach. ⚠️ The Deepfeelers' power in miniature.",
+     "cannot": "⛔ EMOTION WITHOUT REASON TO SHAPE IT BECOMES STORM, and a storm forecloses on thought as surely as ice does on feeling. ⚠️ And you have felt all of it, at that scale, first.",
      "functions": [
-      "heal",
       "empower",
+      "heal",
       "command"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "none",
      "_functionsWas": [
       "reveal",
@@ -84,9 +83,9 @@
      ],
      "_nameWas": "The Deep Chord",
      "gainAxes": [
-      "range",
       "scope",
-      "targets"
+      "targets",
+      "range"
      ]
     }
    ],
@@ -100,12 +99,36 @@
    "shape": "bolster",
    "operativeAxis": [
     "resonance",
+    "targets",
     "scope"
    ],
    "mechanic": {
     "magnitude": 5,
     "duration": 6,
-    "scope": 2
+    "scope": 2,
+    "emotions": {
+     "rage": {
+      "grants": "+2 damage on their attacks, and they cannot be made to flee or freeze",
+      "note": "⚠️ they will also not be talked out of anything"
+     },
+     "joy": {
+      "grants": "energy relief — exhaustion lifts and they act as though rested",
+      "note": ""
+     },
+     "grief": {
+      "grants": "immune to fear and dread while it lasts",
+      "note": "⛔ a person who has already lost has nothing left to threaten"
+     },
+     "love": {
+      "grants": "+2 resist while they are standing between a threat and someone else",
+      "note": "⚠️ only while PROTECTING — it does nothing for them alone"
+     },
+     "hope": {
+      "grants": "sheds one imposed condition immediately",
+      "note": "⛔ one, and only one, and only what was SET on them"
+     }
+    },
+    "note": "bolster. ⛔ THE EMOTION IS THE MECHANIC (Erik 2026-08-24: 'make the emotions SPECIFIC AND INTENTIONAL to the effects they grant'). One named emotion per use, chosen by the wielder, and each grants a different thing — see `emotions`. ⚠️ IT ONLY GIVES: reading moved to `the_true_feeling` (now) and `under_song` (underneath), because r1 previously duplicated Under-Song verbatim. ⛔ AND IT FILLS THE TRADITION'S PALETTE GAP IN PLACE: Threnody was 12 of 15 crafts about grief with no joy, rage or love anywhere — this craft now names all three and gives each a mechanical consequence, without a new craft being authored."
    },
    "rankDeltas": [
     {
@@ -124,28 +147,28 @@
     }
    ],
    "intensity": {
-    "conserve": "share a little — half the effect, and you take on less",
+    "conserve": "kindle it small — half the effect, and it passes quickly",
     "surge": "double it; THE WIELDER DRIFTS EMOTION-HOT, feeling everything, all the time"
    },
    "bounds": [
     {
-     "text": "READS AND SHARES readily; SETTING a feeling that was not there is far harder, and the guarded can close",
-     "class": "soft"
-    },
-    {
-     "text": "YOU TAKE ON WHAT YOU MOVE — the cost is real",
-     "class": "cost"
-    },
-    {
-     "text": "A WILL SET AGAINST YOU IS SET AGAINST YOU",
+     "text": "⛔ YOU MUST ACTUALLY FEEL IT. Pathos hands over a real emotion, and you cannot hand over one you are not having",
      "class": "hard"
     },
     {
-     "text": "the wielder DRIFTS EMOTION-HOT",
-     "class": "cost"
+     "text": "⛔ ONE EMOTION PER USE, NAMED WHEN YOU SPEND IT",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ A WILL SET AGAINST YOU IS SET AGAINST YOU — it resonates, it does not compel, and the guarded can close",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ YOU KEEP WHAT YOU KINDLED. A Threnodist who hands out rage is furious for a while afterwards, and it shows",
+     "class": "drawback"
     }
    ],
-   "plainly": "A social/fight action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: a Will Set Against You IS Set Against You.",
+   "plainly": "A social/fight action. Name an emotion you genuinely feel and kindle it in a willing person for about six hours: RAGE +damage and immune to fear · JOY energy relief · GRIEF cannot be frightened · LOVE +resist while protecting another · HOPE sheds one imposed condition. r1 one person, r2 a handful or a crowd, r3 a whole gathering at reach. ⛔ One emotion per use, and it must be true.",
    "_descriptionWas": "The emotional-pole mastery: reading, moving, and sharing feeling as a real force. Not manipulation — resonance; the Deepfeelers' art.",
    "_functionsWas": [
     "command",
@@ -155,7 +178,8 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "reach_emotional_logical",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_reviewed_20260824": "⛔ ERIK 2026-08-24: 'make the emotions SPECIFIC AND INTENTIONAL to the effects they grant.' Pathos now names FIVE emotions with five distinct mechanical grants (`mechanic.emotions`) instead of being a general-purpose feeling craft. ⚠️ THIS FIXES THE TRADITION'S PALETTE GAP IN PLACE — Threnody measured 12 of 15 crafts about grief, joy twice and never as a subject, and love/hope/rage absent entirely; all three are now authored, with consequences, and no new craft was needed. ⛔ READING STRIPPED: r1 was 'feel the true emotion under a room or a person past what they show', which is VERBATIM what I rebuilt `under_song` to be four hours earlier — I authored a craft on top of an existing one and did not check. Threnody's spine is now clean: Feeling-Sense reads NOW, Under-Song reads BENEATH, Pathos GIVES. ⚠️ TWO [cost] BOUNDS REMOVED — one ('the wielder drifts emotion-hot') DUPLICATED `intensity.surge` verbatim, the other ('you take on what you move') was the seventh untracked debt. What replaced them is checkable: you keep the emotion you kindled. ⛔ r3 declared `deepen` while adding range, scope AND targets. `plainly` was machine-generated with title-cased noise."
   },
   {
    "id": "turning_word",

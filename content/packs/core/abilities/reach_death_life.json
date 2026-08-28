@@ -4460,7 +4460,7 @@
      "success": "It goes all the way in at once, and they sit down where they are standing.",
      "failure": "You take the heat out of the air between you instead, and now you are both cold."
     },
-    "note": "⛔ DEATH'S FIRST COLD CRAFT AND ITS FIRST UNCONDITIONAL RANGED DAMAGE. `necrotic_strike` reaches at r2 but AMPLIFIES an existing wound; this needs nothing to be true first. ⚠️ `damageType: cold` — warded by things that MAKE heat, so armour is no answer and a campfire is. ⛔ It hinders as it lands because that is what cold does: hands and judgement go before the body stops."
+    "note": "⛔ DEATH'S FIRST COLD CRAFT AND ITS FIRST UNCONDITIONAL RANGED DAMAGE. `necrotic_strike` reaches at r2 but AMPLIFIES an existing wound; this needs nothing to be true first. ⚠️ `damageType: cold` — warded by things that MAKE heat, so armour is no answer and a campfire is. ⛔ It hinders as it lands because that is what cold does: hands and judgement go before the body stops. ⚠️ `ongoingHarm: cold` ON r1 BECAUSE THE PROSE ALWAYS CLAIMED IT — 'there is no mark on them anywhere' is a heal-denial claim, and the which-check caught it as prose without a mechanic. ⛔ THE FIX IS THE RIGHT ONE ANYWAY: cold is not a wound and is not closed by mending. It PERSISTS until the target is WARMED, which is the type's own `wardedBy` — fire, shelter, a press of bodies — applied as a cure rather than a defence."
    },
    "tree": [
     {
@@ -4472,8 +4472,11 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "gainAxes": [],
-     "grants": "⛔ 2d6 COLD TO ONE LIVING THING AT REACH. Their breath shows, their fingers stop closing properly, and there is no mark on them anywhere.",
-     "cannot": "One living, warm thing you can see. ⚠️ The never-warm take nothing, and a fire nearby answers it."
+     "grants": "⛔ 2d6 COLD TO ONE LIVING THING AT REACH, AND IT KEEPS GOING. Their breath shows, their fingers stop closing properly, and there is no wound to find and none to bind — the cold stays in them, taking a little more each round, until someone WARMS them.",
+     "cannot": "One living, warm thing you can see. ⚠️ The never-warm take nothing. ⛔ AND IT IS NOT MENDED, IT IS WARMED: a fire, a shelter, a press of bodies ends it, and stitching does nothing at all.",
+     "ongoingHarm": {
+      "type": "cold"
+     }
     },
     {
      "rank": 2,

@@ -664,11 +664,11 @@
 
 ### r1 — Cold Reach
 
-**functions:** strike · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** damaging
+**functions:** strike · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** damaging · ongoing
 
-**grants:** ⛔ 2d6 COLD TO ONE LIVING THING AT REACH. Their breath shows, their fingers stop closing properly, and there is no mark on them anywhere.
+**grants:** ⛔ 2d6 COLD TO ONE LIVING THING AT REACH, AND IT KEEPS GOING. Their breath shows, their fingers stop closing properly, and there is no wound to find and none to bind — the cold stays in them, taking a little more each round, until someone WARMS them.
 
-**cannot:** One living, warm thing you can see. ⚠️ The never-warm take nothing, and a fire nearby answers it.
+**cannot:** One living, warm thing you can see. ⚠️ The never-warm take nothing. ⛔ AND IT IS NOT MENDED, IT IS WARMED: a fire, a shelter, a press of bodies ends it, and stitching does nothing at all.
 
 ### r2 — Deep Cold
 

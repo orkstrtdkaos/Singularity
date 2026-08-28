@@ -1524,7 +1524,7 @@
     "falsehood_truth": 0.3
    },
    "functions": [
-    "summon"
+    "reveal"
    ],
    "narrationHints": "It answers. It is not glad to. It tells you the small thing it knew and nothing more.",
    "description": "The recently dead will answer you — poorly, briefly, and only about what they actually knew in life. They are not oracles. They are a person, tired, being asked one more question.",
@@ -1533,10 +1533,10 @@
     {
      "rank": 1,
      "name": "Ask the Dead",
-     "grants": "The recently dead answer one question, truthfully, and badly.",
-     "cannot": "Recently. A week is far. A season is gone.",
+     "grants": "⛔ ONE QUESTION, ANSWERED TRUTHFULLY AND BADLY, to someone at THE THRESHOLD — dead about a day, the wall still thin enough to talk through.",
+     "cannot": "The threshold only. ⚠️ Past a day they have gone into the near dark and this rank cannot reach them — a surge will, once.",
      "functions": [
-      "summon"
+      "reveal"
      ],
      "gains": "broaden",
      "harmRung": "none",
@@ -1549,12 +1549,12 @@
     {
      "rank": 2,
      "name": "Long Question",
-     "grants": "Ask further back, and ask more — three questions, and the answers are clearer.",
-     "cannot": "Each question takes something from what is left of them. You will feel it go.",
+     "grants": "⛔ REACH INTO THE NEAR DARK — out to about a month — AND ASK MORE: three questions, and the answers come clearer.",
+     "cannot": "Each question takes something from what is left of them. You will feel it go. ⚠️ Past the near dark they are in the deep dark and this rank stops.",
      "functions": [
       "summon"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "none",
      "_functionsWas": [
       "reveal",
@@ -1562,14 +1562,15 @@
      ],
      "_nameWas": "The Long Question",
      "gainAxes": [
+      "questions",
       "range"
      ]
     },
     {
      "rank": 3,
      "name": "Full Account",
-     "grants": "The dead tell you what they knew, entire, and what they wanted, and what they were afraid of.",
-     "cannot": "You will hear things about them that were not yours to know, and you cannot give them back.",
+     "grants": "⛔ REACH THE DEEP DARK, out to the edge of sealing, and take THE WHOLE ACCOUNT: what they knew, entire, and what they wanted, and what they were afraid of.",
+     "cannot": "⛔ THE SEALED ANSWER NOTHING — there is no rank and no surge that reaches past the fourth rung. ⚠️ And you will hear things about them that were not yours to know, and you cannot give them back.",
      "functions": [
       "summon"
      ],
@@ -1581,7 +1582,8 @@
      ],
      "_nameWas": "The Full Account",
      "gainAxes": [
-      "quality"
+      "quality",
+      "range"
      ]
     }
    ],
@@ -1604,12 +1606,16 @@
     "magnitude": 5,
     "duration": 1,
     "questions": 1,
-    "timeReach": 168,
-    "note": "r1: ONE question, truthfully and BADLY. timeReach 168h = 'a week is far'",
+    "note": "setup/reveal. ⛔ IT TRACKS THE DEATH LADDER (Erik 2026-08-24) — `reachesDepth` [0,1,2] is exactly `reachOf(rank)` in `engine/death.js`: r1 THE THRESHOLD (to a day), r2 THE NEAR DARK (to a month), r3 THE DEEP DARK (to sealing at 120 days). ⚠️ IT PREVIOUSLY CARRIED `timeReach: 168` — a week — WHICH ALIGNED TO NOTHING: it sat between the threshold and the near dark and predated the ladder existing. ⛔ THE SEALED ANSWER NOTHING AT ANY RANK, and a surge reaches one rung further exactly as `reachOf` allows. ⚠️ AND A HELD-OPEN WAY OR A SLOWED SINK KEEPS THEM ANSWERABLE LONGER, because `deathDepth` reads both — so `names_of_the_lost` and `open_threshold` extend this craft without either being written for it. ⛔ IT IS `reveal`, NOT `summon`: nothing arrives and nothing is animated. It was one of 19 crafts in the summon-sheet spec and should never have been.",
     "crit": {
      "success": "It answers more than you asked, in its own order, and does not stop where you wanted.",
      "failure": "Something answers."
-    }
+    },
+    "reachesDepth": [
+     0,
+     1,
+     2
+    ]
    },
    "rankDeltas": [
     {
@@ -1633,7 +1639,7 @@
    },
    "bounds": [
     {
-     "text": "RECENTLY — a week is far, a season is gone",
+     "text": "⛔ THE LADDER IS THE LIMIT, NOT THE CALENDAR — r1 reaches the threshold, r2 the near dark, r3 the deep dark. ⚠️ THE SEALED ANSWER NOTHING, at any rank, on any roll",
      "class": "hard"
     },
     {
@@ -1642,10 +1648,10 @@
     },
     {
      "text": "YOU WILL HEAR THINGS ABOUT THEM THAT WERE NOT YOURS TO KNOW, AND YOU CANNOT GIVE THEM BACK",
-     "class": "cost"
+     "class": "drawback"
     }
    ],
-   "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 5 out of 10, and lasts for about an hour Ranks: rank 2 extends questions; rank 3 deepens recallDepth. Limit: recently — a week is far, a season is gone.",
+   "plainly": "An investigate/social action. The recently dead answer questions — truthfully, badly, and only about what they knew alive. ⛔ REACH IS THE DEATH LADDER: r1 reaches THE THRESHOLD (dead about a day), r2 THE NEAR DARK (about a month), r3 THE DEEP DARK (out to sealing). A surge reaches one rung further; THE SEALED ANSWER NOTHING. One question at r1, three at r2, the whole account at r3 — and each costs 2 energy and takes something from them permanently.",
    "upkeep": {
     "targetAgeHoursMax": 168,
     "note": "a week is far, a season is gone — the reach is measured from time of death"
@@ -1656,7 +1662,8 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_reviewed_20260824": "⛔ ERIK 2026-08-24: 'it should track the death ladder.' `timeReach: 168` REPLACED BY `reachesDepth: [0,1,2]`, which is exactly `reachOf(rank)` in death.js. ⚠️ The old week aligned to nothing and predated the ladder. ⛔ THE PAYOFF IS FREE INTERACTION: `deathDepth` already reads `heldOpenBy` and `sinkFactor`, so `open_threshold` (holds the way) and `names_of_the_lost` (slows the sink) now KEEP SOMEONE ANSWERABLE LONGER — three crafts across three traditions cooperating, none written for the others. ⚠️ `summon` -> `reveal`: nothing arrives. `sense: null` removed. r2 declared `deepen` while adding questions AND range. `plainly` was generic machine text on a craft with a very specific act. ✅ EVERY LINE OF PROSE KEPT — 'they are a person, tired, being asked one more question' and the two-word crit failure 'Something answers.'"
   },
   {
    "schemaVersion": 1,

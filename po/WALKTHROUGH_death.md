@@ -2,7 +2,7 @@
 
 ⛔ **GENERATED — `node po/matrix_gen.mjs death --detail`. Full rank text, verbatim.**
 
-**34 crafts · 97 ranks** · 2026-08-27
+**34 crafts · 97 ranks** · 2026-08-28
 
 ---
 
@@ -884,7 +884,7 @@
 
 **L3 · e5 · ashwarden · metaphysical · shape `setup` · harm `none`**  
 **status:** crit · gated · upkeep  
-**ability functions:** summon
+**ability functions:** reveal
 
 > The recently dead will answer you — poorly, briefly, and only about what they actually knew in life. They are not oracles. They are a person, tired, being asked one more question.
 
@@ -892,29 +892,29 @@
 
 ### r1 — Ask the Dead
 
-**functions:** summon · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
+**functions:** reveal · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** The recently dead answer one question, truthfully, and badly.
+**grants:** ⛔ ONE QUESTION, ANSWERED TRUTHFULLY AND BADLY, to someone at THE THRESHOLD — dead about a day, the wall still thin enough to talk through.
 
-**cannot:** Recently. A week is far. A season is gone.
+**cannot:** The threshold only. ⚠️ Past a day they have gone into the near dark and this rank cannot reach them — a surge will, once.
 
 ### r2 — Long Question
 
-**functions:** summon · **gainAxes:** range · **gains:** deepen · **harm:** none
+**functions:** summon · **gainAxes:** questions, range · **gains:** broaden · **harm:** none
 
-**grants:** Ask further back, and ask more — three questions, and the answers are clearer.
+**grants:** ⛔ REACH INTO THE NEAR DARK — out to about a month — AND ASK MORE: three questions, and the answers come clearer.
 
-**cannot:** Each question takes something from what is left of them. You will feel it go.
+**cannot:** Each question takes something from what is left of them. You will feel it go. ⚠️ Past the near dark they are in the deep dark and this rank stops.
 
 ### r3 — Full Account
 
-**functions:** summon · **gainAxes:** quality · **gains:** deepen · **harm:** none
+**functions:** summon · **gainAxes:** quality, range · **gains:** deepen · **harm:** none
 
-**grants:** The dead tell you what they knew, entire, and what they wanted, and what they were afraid of.
+**grants:** ⛔ REACH THE DEEP DARK, out to the edge of sealing, and take THE WHOLE ACCOUNT: what they knew, entire, and what they wanted, and what they were afraid of.
 
-**cannot:** You will hear things about them that were not yours to know, and you cannot give them back.
+**cannot:** ⛔ THE SEALED ANSWER NOTHING — there is no rank and no surge that reaches past the fourth rung. ⚠️ And you will hear things about them that were not yours to know, and you cannot give them back.
 
-**bounds:** RECENTLY — a week is far, a season is gone · each question costs you 2 energy and permanently reduces what that particular dead can still answer — a third question of the same body usually returns nothing · YOU WILL HEAR THINGS ABOUT THEM THAT WERE NOT YOURS TO KNOW, AND YOU CANNOT GIVE THEM BACK
+**bounds:** ⛔ THE LADDER IS THE LIMIT, NOT THE CALENDAR — r1 reaches the threshold, r2 the near dark, r3 the deep dark. ⚠️ THE SEALED ANSWER NOTHING, at any rank, on any roll · each question costs you 2 energy and permanently reduces what that particular dead can still answer — a third question of the same body usually returns nothing · YOU WILL HEAR THINGS ABOUT THEM THAT WERE NOT YOURS TO KNOW, AND YOU CANNOT GIVE THEM BACK
 
 ---
 

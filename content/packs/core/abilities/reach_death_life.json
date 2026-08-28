@@ -4545,26 +4545,26 @@
     "strike",
     "break"
    ],
-   "description": "⛔ THE DEAD ARE FULL OF SPIKES AND YOU ARE STANDING IN A GRAVEYARD. Draw bone — from the ground, from an ossuary, from a body on the floor, from your own hand if there is nothing else — and send it. ⚠️ IT IS EDGE AND WEIGHT, NOT ROT: it makes an ordinary hole in an ordinary way, and everything that stops a spear stops this.",
-   "narrationHints": "Three splinters come up out of the turf like a thing surfacing and go through the man behind the shield. ⚠️ THE VALLEY FINDS THIS ONE PARTICULARLY HARD TO FORGIVE, because afterwards there is bone in the wound and everyone can see whose it was not.",
-   "notFor": "⛔ SOMEWHERE WITH NO BONE — a clean floor, a new-built room, open water. You must have material, and looking for it is visible. ⚠️ It is PHYSICAL harm: no rot, no cold, no condition, and armour works exactly as armour.",
-   "plainly": "A fight/duel action. Draw bone from nearby remains and fire it: 3d6 physical at range 10, one target. r2 pierces 2 and takes two; r3 fires a volley at three. ⛔ You must have bone to draw — otherwise it is your own, and that costs.",
+   "description": "⛔ CALL BONE OUT OF THE AIR AND SEND IT. It comes from the death-side — a spike of grey bone that was nowhere a moment before — and it goes through a man the way a spear does. ⚠️ IT IS EDGE AND WEIGHT, NOT ROT: an ordinary hole made in an ordinary way, and everything that stops a spear stops this.",
+   "narrationHints": "It surfaces out of nothing a hand's breadth from his shoulder and is already moving. ⚠️ WHERE THE DEAD ARE THICK IT COMES EASIER AND COMES MORE — a barrow, an ossuary, a field the day after — and a warden who knows the ground picks where to stand.",
+   "notFor": "⛔ SUBTLETY — a bone standing out of a man is not a mystery, and everyone saw where you were looking. ⚠️ It is PHYSICAL harm: no rot, no cold, no condition, and armour works exactly as armour. ⛔ AND IT STRIKES WHOLE THINGS, not parts: it cannot disarm or cripple to a purpose.",
+   "plainly": "A fight/duel action. Conjure bone from the death-side and fire it: 3d6 physical at range 10, one target. r2 pierces 2 and takes two; r3 volleys at three. ⚠️ SITUATIONAL: where the dead lie thick — a barrow, an ossuary, a battlefield — the ground gives freely and the work is EASY (+1 band). Nowhere is it impossible.",
    "intensity": {
     "conserve": "one splinter — half the dice, and nobody sees where it came from",
     "surge": "empty the ground; THERE WILL BE NOTHING LEFT TO BURY AFTERWARDS"
    },
    "bounds": [
     {
-     "text": "⛔ YOU MUST HAVE BONE TO DRAW. Remains, an ossuary, a battlefield, a graveyard — or your own, which is a wound",
+     "text": "⛔ IT IS PHYSICAL HARM. Armour, shields and cover work exactly as they always do — this is the one Death craft a shield answers",
      "class": "hard"
     },
     {
-     "text": "⛔ IT IS PHYSICAL HARM. Armour, shields and cover work exactly as they always do",
+     "text": "⛔ WHOLE THINGS, NEVER PARTS — it cannot disarm, cripple, or wound to a purpose",
      "class": "hard"
     },
     {
-     "text": "⚠️ DRAWING FROM THE RECENT DEAD IS SEEN AND IS NOT FORGIVEN — the Valley can tell whose bone that was",
-     "class": "drawback"
+     "text": "⚠️ WHERE THE DEAD LIE THICK IT IS EASY; on clean ground it is merely ordinary. It is never impossible",
+     "class": "soft"
     }
    ],
    "mechanic": {
@@ -4580,20 +4580,20 @@
      "success": "It goes through him and into the man behind, and neither of them saw it leave the ground.",
      "failure": "The bone comes up short and stands out of the turf between you, pointing."
     },
-    "note": "⛔ THE FIRST `physical`-TYPED CRAFT IN THE GAME — `damage_types.physical` is authored as 'the default when no type is named' and NOTHING declares it. ⚠️ THAT IS THE POINT: Death's harm has been rot, feeling and vitality, all of which have exotic wards; THIS ONE IS ANSWERED BY A SHIELD. ⛔ It needs MATERIAL — bone nearby — which makes it a craft about WHERE YOU ARE STANDING, and a graveyard is an arsenal."
+    "note": "⛔ THE FIRST `physical`-TYPED CRAFT IN THE GAME — `damage_types.physical` is authored as 'the default when no type is named' and NOTHING declares it. ⚠️ THAT IS THE POINT: Death's harm has been rot, feeling, vitality and cold, all warded exotically; THIS ONE IS ANSWERED BY A SHIELD, which makes it the tradition's most ordinary and most usable attack. ⛔ ERIK 2026-08-24: 'you don't have to have bones to use the skill — it can just MAGICALLY CONJURE THEM, say from the land of the dead. But being in a graveyard should definitely be a SITUATIONAL BONUS.' So material is NOT a requirement: it conjures. Ground thick with the dead is `easy` (+15 per `resolution.difficultyBands`), which is the GM's band to set, not a gate in the craft. ⚠️ I had authored it as a HARD REQUIREMENT — the typical case written as the limit, SYSTEM_SPEC §47.14, fifth instance."
    },
    "tree": [
     {
      "rank": 1,
-     "name": "Drawn Splinter",
+     "name": "Called Splinter",
      "functions": [
       "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
      "gainAxes": [],
-     "grants": "⛔ DRAW ONE SPIKE OF BONE FROM NEARBY REMAINS AND SEND IT — 3d6 physical at reach, through cloth and flesh in the ordinary way.",
-     "cannot": "You must have bone within a few paces. ⚠️ Without it you may use your own, and that is a wound you keep."
+     "grants": "⛔ CALL ONE SPIKE OF BONE OUT OF THE DEATH-SIDE AND SEND IT — 3d6 physical at reach, through cloth and flesh in the ordinary way.",
+     "cannot": "One target you can see. ⚠️ It is a spear, not a working: armour answers it, cover answers it, and a shield answers it."
     },
     {
      "rank": 2,
@@ -4610,11 +4610,11 @@
       "targets"
      ],
      "grants": "⛔ A PROPER LANCE, DRAWN LONG AND SENT HARD — PIERCE 2, through a shield-rim and the arm behind it, and two of them.",
-     "cannot": "⚠️ Bone enough for two. ⛔ And it is still ordinary harm: good armour is a real answer."
+     "cannot": "⚠️ Two you can see. ⛔ And it is still ordinary harm: good armour is a real answer."
     },
     {
      "rank": 3,
-     "name": "Ossuary Volley",
+     "name": "Bone Volley",
      "functions": [
       "strike",
       "break"
@@ -4625,11 +4625,12 @@
       "targets",
       "damage"
      ],
-     "grants": "⛔ THE GROUND EMPTIES ITSELF UPWARD — a volley at three, wherever the dead are thick enough to supply it.",
-     "cannot": "⛔ IT TAKES THE GROUND WITH IT. A graveyard you have fought in is a graveyard you have unmade, and someone will notice."
+     "grants": "⛔ A VOLLEY AT THREE — and where the dead lie thick the air is full of it, coming up out of the ground as much as out of nothing.",
+     "cannot": "⚠️ Three you can see. ⛔ And there is no version of this anyone mistakes for something else."
     }
    ],
-   "_authored": "⛔ ERIK 2026-08-24: 'BONE SPIKES can be fired out and would be a cool aesthetic.' ⚠️ FIRST `physical`-TYPED CRAFT IN THE CORPUS — the type is authored as the untyped default and NOTHING declares it. ⛔ DELIBERATE: Death's harm has been decay, feeling and vitality, all warded exotically; this one is answered by a SHIELD, which makes it the tradition's most ordinary and most usable attack. ⚠️ IT NEEDS MATERIAL, so it is a craft about WHERE YOU ARE STANDING — and it carries a social cost the others do not: everyone can see whose bone that was."
+   "_authored": "⛔ ERIK 2026-08-24: 'BONE SPIKES can be fired out and would be a cool aesthetic.' ⚠️ FIRST `physical`-TYPED CRAFT IN THE CORPUS — the type is authored as the untyped default and NOTHING declares it. ⛔ DELIBERATE: Death's harm has been decay, feeling and vitality, all warded exotically; this one is answered by a SHIELD, which makes it the tradition's most ordinary and most usable attack. ⚠️ IT NEEDS MATERIAL, so it is a craft about WHERE YOU ARE STANDING — and it carries a social cost the others do not: everyone can see whose bone that was.",
+   "_correctedByErik_20260824": "⛔ ERIK 2026-08-24, TWO CORRECTIONS. (1) THE SOCIAL COST LINE CUT — I had authored 'everyone can see whose bone that was' as a bound. Erik: 'that MIGHT be true and might be a social thing, BUT ISN'T THE RULE.' ⚠️ I keep writing social consequences into constraint fields; a bound is what the craft cannot do, not what a town might think. (2) MATERIAL IS NOT REQUIRED — the craft CONJURES bone from the death-side, and a graveyard is a SITUATIONAL BONUS (`easy`, +15) rather than a precondition. ⛔ I had made the typical case the limit for the fifth time this session (§47.14)."
   },
   {
    "powerSystem": "metaphysical",

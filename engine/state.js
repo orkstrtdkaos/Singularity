@@ -251,7 +251,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, firstGiftTemplate] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, firstGiftTemplate, damageFamilies] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -304,7 +304,13 @@ export async function loadContent() {
     // each entry holds what makes it that people's craft. Loaded HERE, before the ability merge below,
     // because inheritance has to happen while the catalogue is being built - an ability that reaches
     // the consumers without its levelReq is not late, it is wrong.
-    loadRule("first_gift_template", null)
+    // ⛔ CCODE-281 / Aevi 2026-08-24 — APPENDED AT THE END ON PURPOSE. This is a POSITIONAL destructure:
+    // inserting mid-array shifts every rule after it, which is the SNG-092 failure ("rules[0] silently
+    // became attribute_gates.json") in a new costume. ⚠️ `damagetypes.js` takes `families` as an argument
+    // and defaults to {}, so an unloaded file leaves every type family-less and every composite blow
+    // unwardable — registered is only half; CCODE-55 asks whether it is ever READ.
+    loadRule("first_gift_template", null),
+    loadRule("damage_families", { physical: {}, elemental: {}, polar: { pairs: [], unpaired: [] } })
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -749,7 +755,7 @@ export async function loadContent() {
       (gap.size ? ` — ${[...gap.values()].reduce((n, v) => n + v, 0)} abilit(ies) still fall back to the house palette: ${[...gap].sort((x, y) => y[1] - x[1]).map(([k, n]) => `${k} (${n})`).join(", ")}` : " — every ability covered"));
   }
 
-  const content = { craftMechanics, spectrums, rules, foothills: foothillsDoc, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, visualAesthetics: traditionAestheticsDoc || {},   /* SNG-435 §C3: the WHOLE doc — `powerSystems` was flattened away at load */  bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, startingLocation: valley.startingLocation };
+  const content = { craftMechanics, damageFamilies, spectrums, rules, foothills: foothillsDoc, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, visualAesthetics: traditionAestheticsDoc || {},   /* SNG-435 §C3: the WHOLE doc — `powerSystems` was flattened away at load */  bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

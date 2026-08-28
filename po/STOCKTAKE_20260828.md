@@ -35,23 +35,40 @@ river"*), and `millbrook` carries the note recording that rebuild. **The game dr
 
 ### §1b — ⛔ AND WIRING IT IS BLOCKED, WHICH IS WHY IT NEVER HAPPENED
 
-**`SNG-404` is red: the engine's placer disagrees with Aevi's measurements on every one of the eight
-layouts it checks.**
+**`SNG-404` is red: the engine placer does not reproduce Aevi's measurements on any of the eight authored
+layouts. ⚠️ I FIRST READ THIS AS AN INVERTED SIGN CONVENTION, AND THAT WAS WRONG** — the full list of
+sixteen disagreements does not support it.
+
+| kind | n | spread |
+|---|---|---|
+| **river distance** | ⛔ **13 of 16** | a smooth gradient, **1% → 32%** |
+| **uphill bearing** | 3 | **15°, 45°, 150°** |
 
 ```
-millbrook:            uphill  300  vs  -75      echo_river_crossing: river 3.83 vs 5.06
-echo_river_crossing:  uphill   75  vs  -75      greyhearth:          river 2.57 vs 2.35
-the_cogitarium:       river 12.29 vs 12.45      greywater_stilts:    river 6.94 vs 5.50
-greywater_stilts:     uphill   90  vs   45      kindlerow:           river 8.99 vs 6.47
+river  echo_river_crossing  3.83 vs  5.06  32%   uphill  echo_river_crossing   75 vs -75  150°
+       kindlerow            8.99 vs  6.47  28%           greywater_stilts      90 vs  45   45°
+       greywater_stilts     6.94 vs  5.50  21%           millbrook            300 vs -75   15°
+       the_cogitarium      12.29 vs 12.45   1%
 ```
 
-⛔ **THE UPHILL BEARINGS ARE NOT DRIFT — THEY ARE INVERTED.** `300 vs -75` and `75 vs -75` are sign
-disagreements, not tolerance misses. **A river at `12.29 vs 12.45` is a rounding argument; a `+75 vs −75`
-is two people pointing at opposite hills.**
+⛔ **NO SINGLE CONVENTION EXPLAINS 15°, 45° AND 150°**, and a 1%-to-32% distance gradient is drift, not a
+flipped sign. **This is derivation FIDELITY — not a one-line fix, and bigger than I first said.**
 
-✅ **THIS IS THE ONE TO FIX FIRST, AND IT IS SMALL.** Reconcile the uphill convention and `SNG-404`,
-`SNG-404 §2` and `SNG-414` become one fix rather than three tickets. ⚠️ **Wiring `local_layouts` before
-that reconciles would ship whichever of the two is wrong.**
+### ⚠️ THE QUESTION THAT DECIDES IT: WHICH SIDE IS AUTHORITATIVE?
+
+**Two explanations fit the evidence, and they call for opposite fixes.**
+
+1. ⛔ **The authored numbers are STALE SNAPSHOTS.** `millbrook._measured` carries its own note — *"roadsOut
+   re-derived after the SNG-427 cluster move and the waystone region fix"* — **so this data has already
+   been re-derived once, after the world moved under it.** If further moves have landed since, the authored
+   file is a photograph of a world that no longer exists, and **the fix is to re-derive, not to touch the
+   engine.**
+2. **The engine derivation is lossy** and the hand measurements are ground truth — in which case the placer
+   is what needs work.
+
+⚠️ **I DO NOT KNOW WHICH, AND I WILL NOT GUESS — I already guessed once on this gate and was wrong.**
+✅ **One check settles it: re-derive the eight layouts against today's world and see whether the engine
+reproduces the AUTHORED numbers or a third set.** That is a script, not a redesign.
 
 ### §1c — `scale.json` has no consumer because the feature it exists for does not exist
 
@@ -180,8 +197,9 @@ yesterday's review, neither built.
 
 ## ✅ §7 — WHAT I WOULD DO, IN ORDER
 
-1. ⛔ **The uphill sign convention** (§1b). Small, unblocks three geography gates, and until it is settled
-   the authored layouts can be neither trusted nor wired.
+1. ⛔ **Settle which side of `SNG-404` is authoritative** (§1b) — re-derive the eight layouts against
+   today's world and see which set the engine reproduces. **A script, not a redesign.** Until that is
+   settled the authored layouts can be neither trusted nor wired.
 2. ⛔ **`SNG-391` determinism** (§1d). A red determinism gate makes every other geography number provisional.
 3. ⛔ **Load the 12 registered rules files** (§2), or classify each with a reason. **`damage_types` first —
    it is 24 hours old and directly overlaps a file I wired yesterday.**

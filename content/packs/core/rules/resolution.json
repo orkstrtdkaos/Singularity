@@ -1,1077 +1,1087 @@
 {
- "schemaVersion": 1,
- "d100": {
-  "partialBand": 15,
-  "floorChance": 5,
-  "ceilingChance": 95
- },
- "crit": {
-  "baseSuccessChance": 5,
-  "baseFailChance": 5,
-  "perAbilityRankSuccess": 3,
-  "perAbilityRankFail": -2,
-  "perSkillLevelSuccess": 2,
-  "perSkillLevelFail": -1,
-  "perCraftCap": 10,
-  "minChance": 1,
-  "maxChance": 60
- },
- "baseChance": {
-  "attributeMultiplier": 10,
-  "attributeSoftCap": 4,
-  "attributePerPointBeyond": 5,
-  "skillBonus": 10,
-  "abilityLevelBonus": 5,
-  "equipmentBonus": 5,
-  "equipmentBonusCap": 10,
-  "companionBonus": 5,
-  "companionBonusCap": 10,
-  "evoStageStep": 2
- },
- "spectrumModifier": {
-  "alignmentWeight": 15,
-  "locationWeight": 10,
-  "maxTotal": 25,
-  "minTotal": -25
- },
- "energy": {
-  "max": 100,
-  "regenPerRest": 40,
-  "defaultActionCost": 5,
-  "exhaustedPenalty": 10,
-  "rankReachSurcharge": 3,
-  "_rankReachSurcharge": "⛔ ERIK 2026-08-23: 'set it to 3 in general, for now.' THE PRICE OF REACHING HIGH. Each rank of reach above r1 adds 3 energy: a craft costing 4 is 4 / 7 / 10 at r1 / r2 / r3. ⚠️ IT PAIRS WITH `leveling.rankEnergyDiscount: 1`, which makes LOWER tiers cheaper as you master a craft — so practice makes the familiar cheap and ambition costs more. ⛔ BEFORE THIS, 'knock six down' AND 'knock twelve unconscious' WERE THE SAME PRICE, because rank had only ever discounted (CCODE-244). ⚠️ CCode left the dial at 0 deliberately rather than invent a balance number — reader before field. This is the field. 'For now' is Erik's word: it is a first setting, not a settled one."
- },
- "recovery": {
-  "meal": 10,
-  "heartyMeal": 15,
-  "drink": 5,
-  "breather": {
-   "energy": 10,
-   "health": 1,
-   "hours": 1
+  "schemaVersion": 1,
+  "d100": {
+    "partialBand": 15,
+    "floorChance": 5,
+    "ceilingChance": 95
   },
-  "sleep": {
-   "energy": 40,
-   "health": 3,
-   "hours": 8
+  "crit": {
+    "baseSuccessChance": 5,
+    "baseFailChance": 5,
+    "perAbilityRankSuccess": 3,
+    "perAbilityRankFail": -2,
+    "perSkillLevelSuccess": 2,
+    "perSkillLevelFail": -1,
+    "perCraftCap": 10,
+    "minChance": 1,
+    "maxChance": 60
   },
-  "meditationBase": 10,
-  "meditationPerAttunement": 2
- },
- "senseTiers": [
-  {
-   "tier": 0,
-   "minAttunement": 0,
-   "label": "none",
-   "precision": "nothing"
+  "baseChance": {
+    "attributeMultiplier": 10,
+    "attributeSoftCap": 4,
+    "attributePerPointBeyond": 5,
+    "skillBonus": 10,
+    "abilityLevelBonus": 5,
+    "equipmentBonus": 5,
+    "equipmentBonusCap": 10,
+    "companionBonus": 5,
+    "companionBonusCap": 10,
+    "evoStageStep": 2
   },
-  {
-   "tier": 1,
-   "minAttunement": 2,
-   "label": "vibes",
-   "precision": "risky-or-safe only"
+  "spectrumModifier": {
+    "alignmentWeight": 15,
+    "locationWeight": 10,
+    "maxTotal": 25,
+    "minTotal": -25
   },
-  {
-   "tier": 2,
-   "minAttunement": 5,
-   "label": "bands",
-   "precision": "five qualitative bands"
+  "energy": {
+    "max": 100,
+    "regenPerRest": 40,
+    "defaultActionCost": 5,
+    "exhaustedPenalty": 10,
+    "rankReachSurcharge": 3,
+    "_rankReachSurcharge": "⛔ ERIK 2026-08-23: 'set it to 3 in general, for now.' THE PRICE OF REACHING HIGH. Each rank of reach above r1 adds 3 energy: a craft costing 4 is 4 / 7 / 10 at r1 / r2 / r3. ⚠️ IT PAIRS WITH `leveling.rankEnergyDiscount: 1`, which makes LOWER tiers cheaper as you master a craft — so practice makes the familiar cheap and ambition costs more. ⛔ BEFORE THIS, 'knock six down' AND 'knock twelve unconscious' WERE THE SAME PRICE, because rank had only ever discounted (CCODE-244). ⚠️ CCode left the dial at 0 deliberately rather than invent a balance number — reader before field. This is the field. 'For now' is Erik's word: it is a first setting, not a settled one."
   },
-  {
-   "tier": 3,
-   "minAttunement": 9,
-   "label": "precise",
-   "precision": "close numeric read plus reasons"
-  }
- ],
- "renownBands": [
-  {
-   "min": 40,
-   "band": "legendary"
-  },
-  {
-   "min": 18,
-   "band": "renowned"
-  },
-  {
-   "min": 6,
-   "band": "talked about"
-  },
-  {
-   "min": 1,
-   "band": "locally known"
-  },
-  {
-   "min": -5,
-   "band": "unremarkable"
-  },
-  {
-   "min": -17,
-   "band": "ill-regarded"
-  },
-  {
-   "min": -999,
-   "band": "notorious"
-  }
- ],
- "reputationBands": [
-  {
-   "min": 50,
-   "band": "revered"
-  },
-  {
-   "min": 20,
-   "band": "trusted"
-  },
-  {
-   "min": 5,
-   "band": "known"
-  },
-  {
-   "min": -4,
-   "band": "neutral"
-  },
-  {
-   "min": -19,
-   "band": "wary"
-  },
-  {
-   "min": -49,
-   "band": "distrusted"
-  },
-  {
-   "min": -999,
-   "band": "hated"
-  }
- ],
- "peopleStandingBands": [
-  {
-   "min": 20,
-   "band": "kin"
-  },
-  {
-   "min": 10,
-   "band": "trusted"
-  },
-  {
-   "min": 4,
-   "band": "known"
-  },
-  {
-   "min": 0,
-   "band": "neutral"
-  },
-  {
-   "min": -4,
-   "band": "wary"
-  },
-  {
-   "min": -999,
-   "band": "estranged"
-  }
- ],
- "capstoneStanding": {
-  "capstoneTier": 4,
-  "capstoneThreshold": 10,
-  "requiresTeacher": true
- },
- "bond": {
-  "stageFloors": {
-   "courting": 2,
-   "together": 4,
-   "committed": 6,
-   "partner": 8
-  },
-  "partyAdjacentStage": "partner"
- },
- "promotion": {
-  "tertiaryToSecondary": {
-   "minReputation": 8,
-   "requiresTeacher": true,
-   "minInDomainRanks": 3
-  },
-  "secondaryToPrimary": {
-   "minReputation": 12,
-   "requiresTeacher": true,
-   "minInDomainRanks": 6,
-   "requiresRegionStanding": true,
-   "minRegionTurns": 12,
-   "requiresCeilingExhausted": true
-  }
- },
- "acquisition": {
-  "minReputation": 8,
-  "requiresTeacherOrTome": true,
-  "startingCeiling": 1
- },
- "recoveryFractions": {
-  "sleep": 0.32,
-  "breather": 0.08,
-  "meal": 0.08,
-  "heartyMeal": 0.12,
-  "drink": 0.04
- },
- "subAttributes": {
-  "physical": [
-   "strength",
-   "agility"
-  ],
-  "mental": [
-   "reason",
-   "insight"
-  ],
-  "social": [
-   "presence",
-   "rapport"
-  ],
-  "practical": [
-   "craft",
-   "wits"
-  ]
- },
- "scene": {
-  "softCloseBeats": 8,
-  "_softCloseBeats": "SNG-266/1d: the GM starts LOOKING for the close here — a directive, not an order. Never mid-action.",
-  "hardCloseBeats": 14,
-  "_hardCloseBeats": "…and here the ENGINE closes the scene itself if the GM did not. A scene is a UNIT, not a session; the narrative-XP per-scene cap is meaningless without a boundary."
- },
- "leveling": {
-  "xpPerLevel": 100,
-  "levelCostCap": 40,
-  "_levelCostCap": "SNG-266/1b (Erik approved): cost rises with level up to this rung, then holds flat. L1-40 unchanged; L41-100 cost 4,000 each instead of climbing to 9,900. Remove the field and the curve is bit-identical to the old one.",
-  "subPointPerLevel": 1,
-  "skillPointPerLevel": 2,
-  "subAttributeCap": 20,
-  "maxAbilityRank": 3,
-  "rankLevelReq": {
-   "2": 3,
-   "3": 5
-  },
-  "energyEfficiencyPerTenLevels": 1,
-  "rankEnergyDiscount": 1,
-  "minEnergyCostFraction": 0.5,
-  "braidCheaperParentFraction": 0.5,
-  "crossTraditionLevelPenalty": 1,
-  "_skillPointPerLevel": "⛔ SNG-351 — ERIK RATIFIED 2026-08-07: 1 → 2. NOT a free tuning; the measurement is in skill_capacity._bindingConstraint. Points bind IFF skillPointPerLevel < average craft cost (2.511) — level does not enter it, both curves are linear, so the ratio settles at s/2.511 and holds forever. At 1 a character could reach 40% of their own breadth cap at EVERY level, permanently: not tuned scarcity, a system shadowing another by 60% since ability-arch v2 removed the depth branch of the broad-vs-deep fork. At 2 that becomes 80% — points still bind (deliberately: choosing is the game), but capacity comes into view and the 'at capacity' copy stops describing a state a paying character never occupies. 2.5 is parity and was REJECTED: both ceilings exhaust together and the player never learns which one stopped them. 3+ flips capacity to binding from level 2 and retires points as a decision. Aevi's earlier 'crossover near level 16' claim was FALSE and is corrected in po/SPEC_SNG-350 §3."
- },
- "novel": {
-  "difficultySurcharge": 15,
-  "critFailWiden": 3,
-  "backlashHealth": 4,
-  "backlashEnergy": 10,
-  "discoveryBonus": 20
- },
- "wild": {
-  "critSuccessWiden": 6,
-  "critFailWiden": 3,
-  "note": "SNG-140: a wild_current (wildVariance) craft amplifies BOTH crit tails — upside-forward (crit-success +6, crit-fail +3). SNG-258 moved crits to a SECOND roll, so these now raise the two crit DIALS rather than widening bands on the first roll; the values and their meaning are unchanged. Potent + generous with a real but smaller tail; the Wild Half's 'lethally unreliable' made tunable."
- },
- "gambit": {
-  "maxSteps": 5,
-  "adaptationBase": 1,
-  "strategistBonusPoints": 1,
-  "partialComplicationNote": "a wrinkle — it works, but not cleanly",
-  "stepEnergyCost": 4,
-  "completionBonusXp": 10
- },
- "playerAptitudes": [
-  {
-   "id": "strategist",
-   "tendency": "strategic",
-   "threshold": 11,
-   "tier": "A",
-   "axis": "earned",
-   "mods": {
-    "plannedActionBonus": 5,
-    "senseTierBonus": 1
-   },
-   "description": "You think ahead. Planned and prepared actions succeed more often, and your read on the odds sharpens."
-  },
-  {
-   "id": "silver_tongue",
-   "tendency": "social",
-   "threshold": 11,
-   "tier": "A",
-   "axis": "earned",
-   "mods": {
-    "socialBonus": 5
-   },
-   "description": "Words come easily. People open up to you."
-  },
-  {
-   "id": "scholar",
-   "tendency": "cerebral",
-   "threshold": 11,
-   "tier": "A",
-   "axis": "earned",
-   "mods": {
-    "mentalBonus": 5
-   },
-   "description": "Study and investigation compound into insight."
-  },
-  {
-   "id": "rough_and_ready",
-   "tendency": "physical",
-   "threshold": 11,
-   "tier": "A",
-   "axis": "earned",
-   "mods": {
-    "physicalBonus": 5,
-    "socialFinessePenalty": -3
-   },
-   "description": "You grow hard and capable, but subtlety suffers."
-  },
-  {
-   "id": "carouser",
-   "tendency": "carousing",
-   "threshold": 9,
-   "tier": "A",
-   "axis": "earned",
-   "mods": {
-    "rapportBonus": 5,
-    "disciplinePenalty": -5
-   },
-   "description": "Everyone likes a good companion at the table — but focus and restraint decay."
-  },
-  {
-   "id": "daredevil",
-   "tendency": "risky",
-   "threshold": 11,
-   "tier": "A",
-   "axis": "earned",
-   "mods": {
-    "critSuccessBonus": 2,
-    "critFailPenalty": 2
-   },
-   "description": "Fortune favors you — and punishes you. Wider extremes both ways."
-  },
-  {
-   "id": "good_samaritan",
-   "tendency": "generous",
-   "threshold": 9,
-   "tier": "A",
-   "axis": "earned",
-   "mods": {
-    "reputationGainBonus": 0.25
-   },
-   "description": "Your kindnesses are remembered a little longer and travel a little farther."
-  },
-  {
-   "id": "tactician",
-   "tendency": "strategic",
-   "threshold": 18,
-   "tier": "A",
-   "axis": "earned",
-   "mods": {
-    "plannedActionBonus": 8,
-    "senseTierBonus": 1,
-    "critSuccessBonus": 1
-   },
-   "description": "Deep planning becomes second nature — you see three moves out and the odds bend to it. (Deeper strategist.)"
-  },
-  {
-   "id": "orator",
-   "tendency": "social",
-   "threshold": 18,
-   "tier": "A",
-   "axis": "earned",
-   "mods": {
-    "socialBonus": 8,
-    "reputationGainBonus": 0.15
-   },
-   "description": "A voice that moves rooms. People don't just open up — they follow. (Deeper silver_tongue.)"
-  },
-  {
-   "id": "sage",
-   "tendency": "cerebral",
-   "threshold": 18,
-   "tier": "A",
-   "axis": "earned",
-   "mods": {
-    "mentalBonus": 8,
-    "senseTierBonus": 1
-   },
-   "description": "Knowledge deepens into wisdom; you perceive what others miss entirely. (Deeper scholar.)"
-  },
-  {
-   "id": "stalwart",
-   "tendency": "cautious",
-   "threshold": 11,
-   "tier": "B",
-   "axis": "earned",
-   "mods": {
-    "defenseBonus": 5,
-    "plannedActionBonus": -2
-   },
-   "description": "You hold the line. Harder to break, slower to seize the moment.",
-   "needs": [
-    "defenseBonus"
-   ]
-  },
-  {
-   "id": "shadow",
-   "tendency": "stealth",
-   "threshold": 11,
-   "tier": "B",
-   "axis": "earned",
-   "mods": {
-    "stealthBonus": 6,
-    "socialBonus": -3
-   },
-   "description": "You move unseen — but a person who lives in shadow is little known in the light.",
-   "needs": [
-    "stealthBonus"
-   ]
-  },
-  {
-   "id": "trickster",
-   "tendency": "deception",
-   "threshold": 11,
-   "tier": "B",
-   "axis": "earned",
-   "mods": {
-    "deceiveBonus": 6,
-    "reputationGainBonus": -0.15
-   },
-   "description": "Lies land clean — but a reputation for it precedes you.",
-   "needs": [
-    "deceiveBonus"
-   ]
-  },
-  {
-   "id": "peacemaker",
-   "tendency": "generous",
-   "threshold": 16,
-   "tier": "B",
-   "axis": "earned",
-   "mods": {
-    "deEscalationBonus": 6,
-    "intimidateBonus": -4
-   },
-   "description": "You cool a room with a word — but no one fears you, and sometimes they should.",
-   "needs": [
-    "deEscalationBonus",
-    "intimidateBonus"
-   ]
-  },
-  {
-   "id": "dread",
-   "tendency": "ruthless",
-   "threshold": 12,
-   "tier": "B",
-   "axis": "earned",
-   "mods": {
-    "intimidateBonus": 6,
-    "rapportBonus": -4
-   },
-   "description": "Your presence chills — obedience comes easy, warmth does not.",
-   "needs": [
-    "intimidateBonus"
-   ]
-  },
-  {
-   "id": "long_game",
-   "tendency": "patient",
-   "threshold": 12,
-   "tier": "B",
-   "axis": "earned",
-   "mods": {
-    "sustainedActionBonus": 6,
-    "burstPenalty": -4
-   },
-   "description": "Rituals, sieges, slow work — yours. But you're caught flat in a sudden moment.",
-   "needs": [
-    "sustainedActionBonus",
-    "burstPenalty"
-   ]
-  },
-  {
-   "id": "artisan",
-   "tendency": "craft",
-   "threshold": 12,
-   "tier": "B",
-   "axis": "earned",
-   "mods": {
-    "craftBonus": 6,
-    "improvisationPenalty": -4
-   },
-   "description": "What you make, you make well — but away from your tools you're at a loss.",
-   "needs": [
-    "craftBonus",
-    "improvisationPenalty"
-   ]
-  },
-  {
-   "id": "banner",
-   "tendency": "leadership",
-   "threshold": 12,
-   "tier": "B",
-   "axis": "earned",
-   "mods": {
-    "allyActionBonus": 6,
-    "soloPenalty": -4
-   },
-   "description": "Others fight harder beside you — but you were never meant to stand alone.",
-   "needs": [
-    "allyActionBonus",
-    "soloPenalty"
-   ]
-  },
-  {
-   "id": "faithful",
-   "tendency": "devotion",
-   "threshold": 12,
-   "tier": "B",
-   "axis": "earned",
-   "mods": {
-    "alignedTraditionBonus": 6,
-    "crossPolePenalty": -5
-   },
-   "description": "Deep in your own tradition you are strong; the far pole closes harder against you.",
-   "needs": [
-    "alignedTraditionBonus",
-    "crossPolePenalty"
-   ]
-  },
-  {
-   "id": "berserk",
-   "tendency": "risky",
-   "threshold": 16,
-   "tier": "B",
-   "axis": "earned",
-   "mods": {
-    "physicalBonus": 6,
-    "defenseBonus": -5
-   },
-   "description": "All fury, no guard. You hit like a storm and leave yourself open. (Deeper/rougher daredevil path.)",
-   "needs": [
-    "defenseBonus"
-   ]
-  },
-  {
-   "id": "charmer",
-   "tendency": "amorous",
-   "threshold": 10,
-   "tier": "B",
-   "axis": "amorous",
-   "mods": {
-    "flirtationBonus": 5,
-    "gravitasPenalty": -3
-   },
-   "description": "Woo, banter, ease — you draw people close. But it's hard to be taken gravely.",
-   "needs": [
-    "flirtationBonus",
-    "gravitasPenalty"
-   ],
-   "ratingCeilingBounded": true
-  },
-  {
-   "id": "devoted_lover",
-   "tendency": "amorous",
-   "threshold": 14,
-   "tier": "B",
-   "axis": "amorous",
-   "mods": {
-    "allyActionBonus": 6
-   },
-   "description": "In service of the one you love, you are more than yourself. Love as sustained attention, made real.",
-   "needs": [
-    "allyActionBonus"
-   ],
-   "dependsOn": "SNG-108 partner bond",
-   "shipInertUntilDependency": true
-  },
-  {
-   "id": "ardent",
-   "tendency": "amorous",
-   "threshold": 14,
-   "tier": "B",
-   "axis": "amorous",
-   "mods": {
-    "flirtationBonus": 8,
-    "composurePenalty": -4
-   },
-   "description": "Passion runs hot in you — magnetic in intimacy, but composure frays under pressure elsewhere.",
-   "needs": [
-    "flirtationBonus",
-    "composurePenalty"
-   ],
-   "ratingCeilingBounded": true
-  },
-  {
-   "id": "innocent",
-   "axis": "inverse",
-   "tier": "B",
-   "worldlinessCeiling": 10,
-   "worldlinessComponents": [
-    "ruthless",
-    "deception",
-    "amorous",
-    "carousing"
-   ],
-   "mods": {
-    "trustedBonus": 5,
-    "worldlyCunningPenalty": -5
-   },
-   "description": "The world hasn't marked you yet. People trust you, lower their guard, extend the benefit of the doubt — but cunning, deception, and menace come hard to you.",
-   "needs": [
-    "trustedBonus",
-    "worldlyCunningPenalty"
-   ],
-   "oneWay": true,
-   "backgroundGrantable": true
-  },
-  {
-   "id": "naive",
-   "axis": "inverse",
-   "tier": "B",
-   "worldlinessCeiling": 6,
-   "worldlinessComponents": [
-    "ruthless",
-    "deception",
-    "carousing"
-   ],
-   "mods": {
-    "sincerityReadBonus": 5,
-    "worldlyCunningPenalty": -3
-   },
-   "description": "You believe, so you are believed — but a lie slips past you, and cynical minds run circles.",
-   "needs": [
-    "sincerityReadBonus",
-    "worldlyCunningPenalty"
-   ],
-   "oneWay": true,
-   "backgroundGrantable": true
-  },
-  {
-   "id": "sheltered",
-   "axis": "inverse",
-   "tier": "B",
-   "worldlinessCeiling": 4,
-   "worldlinessComponents": [
-    "ruthless",
-    "deception",
-    "amorous",
-    "carousing",
-    "physical"
-   ],
-   "mods": {
-    "trustedBonus": 3,
-    "chargedSituationPenalty": -5
-   },
-   "description": "You have not yet seen violence or intimacy up close. A clean slate — but charged moments overwhelm you until you've weathered a few.",
-   "needs": [
-    "trustedBonus",
-    "chargedSituationPenalty"
-   ],
-   "oneWay": true,
-   "backgroundOnly": true
-  }
- ],
- "xp": {
-  "crit_success": 8,
-  "success": 5,
-  "partial": 3,
-  "failure": 2,
-  "crit_failure": 2,
-  "novelBonus": 8,
-  "completed": 12,
-  "completed_rough": 10,
-  "abandoned": 3
- },
- "encounters": {
-  "duel": {
-   "margins": {
-    "crit_success": {
-     "opponent": -3,
-     "player": 0
+  "recovery": {
+    "meal": 10,
+    "heartyMeal": 15,
+    "drink": 5,
+    "breather": {
+      "energy": 10,
+      "health": 1,
+      "hours": 1
     },
-    "success": {
-     "opponent": -2,
-     "player": 0
+    "sleep": {
+      "energy": 40,
+      "health": 3,
+      "hours": 8
     },
-    "partial": {
-     "opponent": -1,
-     "player": -1
+    "meditationBase": 10,
+    "meditationPerAttunement": 2
+  },
+  "senseTiers": [
+    {
+      "tier": 0,
+      "minAttunement": 0,
+      "label": "none",
+      "precision": "nothing"
     },
-    "failure": {
-     "opponent": 0,
-     "player": -2
+    {
+      "tier": 1,
+      "minAttunement": 2,
+      "label": "vibes",
+      "precision": "risky-or-safe only"
     },
-    "crit_failure": {
-     "opponent": 0,
-     "player": -3
+    {
+      "tier": 2,
+      "minAttunement": 5,
+      "label": "bands",
+      "precision": "five qualitative bands"
+    },
+    {
+      "tier": 3,
+      "minAttunement": 9,
+      "label": "precise",
+      "precision": "close numeric read plus reasons"
     }
-   },
-   "playerHealthPerHit": 4,
-   "threatToDifficulty": 0.3,
-   "energyPerRound": 3,
-   "fleeFailFreeHit": 1,
-   "winXp": 15,
-   "fleeXp": 5,
-   "yieldXp": 3
-  },
-  "challenge": {
-   "defaultFailureCost": {
-    "health": 3,
-    "energy": 5,
-    "hours": 1
-   },
-   "critFailureMultiplier": 2,
-   "completeXp": 12,
-   "abandonXp": 3
-  },
-  "puzzle": {
-   "attemptEnergy": 4,
-   "attemptHours": 1,
-   "solveXp": 15,
-   "walkAwayXp": 2
-  }
- },
- "companions": {
-  "bondGrowth": {
-   "deed": 0.5,
-   "assist": 0.25,
-   "encounter": 1.5
-  },
-  "tiers": {
-   "assistCapBonusAt": 3,
-   "assistCapBonus": 3,
-   "grantAt": 6,
-   "stage2At": 3
-  }
- },
- "practice": {
-  "useRankThreshold": {
-   "2": 8,
-   "3": 16
-  },
-  "aspirationRipe": 10,
-  "maxAspirations": 2
- },
- "precursor": {
-  "perilDrift": 0.05,
-  "bandNotice": 0.4
- },
- "backfill": {
-  "xpPerBeat": 4,
-  "maxLevels": 3,
-  "bondCap": 6,
-  "comboBeatsPer": 3,
-  "bondPerBeat": 0.1
- },
- "vectors": {
-  "strongThreshold": 0.5,
-  "midThreshold": 0.3,
-  "attunementForMid": 6,
-  "perceivingAbilities": [
-   "prism_sight",
-   "old_roads"
   ],
-  "fullRevealAbilities": [
-   "address_sense"
-  ]
- },
- "aptitudeDecay": 0.975,
- "aptitudeKeepMargin": 4,
- "aptitudeFadeBand": 2,
- "startingSkills": {
-  "_note": "⚠️ SNG-339 §2. What a character KNOWS HOW TO DO before anyone teaches them a craft. Keyed on the action-tag vocabulary the game already uses — the same 54 tags authored on item.bonusTags — so a background's training and a trade's tools answer the same question in the same words. No ninth vocabulary.",
-  "grantCap": 2,
-  "usesPerRank": 25,
-  "maxRank": 2,
-  "_theRule": "A background grants what that LIFE taught, and a tradition grants what the CRAFT needs alongside itself. They stack to a cap of 2, so a hunter of the horizon is genuinely better at scouting than either alone — and no combination exceeds the cap, which is what stops a build reaching rank 3 at creation.",
-  "_whyTwoEach": "Two tags per source, never more. ⚠️ A background is a LIFE, not a career package: an orphan learned to move unseen and to go without, and everything else they picked up later belongs to play.",
-  "_orphanNote": "⚠️ ERIK'S CASE. `orphan` grants stealth + survival — which is what the shadow aptitude's -3 social was, until now, THE ONLY EXPRESSION OF. The penalty stays and stops being the whole story.",
-  "byBackground": {
-   "orphan": {
-    "stealth": 1,
-    "survival": 1
-   },
-   "exile": {
-    "travel": 1,
-    "survival": 1
-   },
-   "drifter": {
-    "travel": 1,
-    "barter": 1
-   },
-   "spy": {
-    "stealth": 1,
-    "investigate": 1
-   },
-   "ruin_picker": {
-    "scout": 1,
-    "precursor-glimpse": 1
-   },
-   "former_professional": {
-    "careful": 1,
-    "analyze": 1
-   },
-   "line_soldier": {
-    "melee": 1,
-    "protection": 1
-   },
-   "skirmisher": {
-    "attack": 1,
-    "escape": 1
-   },
-   "warden": {
-    "protection": 1,
-    "scout": 1
-   },
-   "hunter": {
-    "hunt": 1,
-    "scout": 1
-   },
-   "bodyguard": {
-    "protection": 1,
-    "careful": 1
-   },
-   "arena_fighter": {
-    "melee": 1,
-    "force": 1
-   },
-   "duelist": {
-    "edge": 1,
-    "focus": 1
-   },
-   "war_leader": {
-    "force": 1,
-    "standing": 1
-   },
-   "craftsman": {
-    "structural": 1,
-    "grip": 1
-   },
-   "mechanist": {
-    "structural": 1,
-    "analyze": 1
-   },
-   "smith": {
-    "structural": 1,
-    "energy": 1
-   },
-   "builder": {
-    "structural": 1,
-    "climb": 1
-   },
-   "trader": {
-    "barter": 1,
-    "negotiate": 1
-   },
-   "farmer": {
-    "plants": 1,
-    "weather": 1
-   },
-   "river_runner": {
-    "water": 1,
-    "travel": 1
-   },
-   "survivalist": {
-    "survival": 1,
-    "weather": 1
-   },
-   "scholar": {
-    "knowledge": 1,
-    "analyze": 1
-   },
-   "archivist": {
-    "knowledge": 1,
-    "witness": 1
-   },
-   "physician": {
-    "heal": 1,
-    "remedy": 1
-   },
-   "lawspeaker": {
-    "negotiate": 1,
-    "witness": 1
-   },
-   "cartographer": {
-    "travel": 1,
-    "scout": 1
-   },
-   "envoy": {
-    "negotiate": 1,
-    "etiquette": 1
-   },
-   "performer": {
-    "social": 1,
-    "favor": 1
-   },
-   "broker": {
-    "barter": 1,
-    "favor": 1
-   },
-   "organizer": {
-    "help": 1,
-    "social": 1
-   },
-   "smuggler": {
-    "stealth": 1,
-    "barter": 1
-   },
-   "devotee": {
-    "ritual": 1,
-    "focus": 1
-   },
-   "temple_trained": {
-    "ritual": 1,
-    "learn": 1
-   },
-   "self_taught": {
-    "learn": 1,
-    "careful": 1
-   },
-   "lineage_taught": {
-    "learn": 1,
-    "honor": 1
-   },
-   "precursor_marked": {
-    "precursor-glimpse": 1,
-    "reveal": 1
-   },
-   "battlefield_taught": {
-    "melee": 1,
-    "survival": 1
-   },
-   "apprenticed_to_a_legend": {
-    "learn": 1,
-    "analyze": 1
-   },
-   "found_it_by_accident": {
-    "reveal": 1,
-    "careful": 1
-   }
+  "renownBands": [
+    {
+      "min": 40,
+      "band": "legendary"
+    },
+    {
+      "min": 18,
+      "band": "renowned"
+    },
+    {
+      "min": 6,
+      "band": "talked about"
+    },
+    {
+      "min": 1,
+      "band": "locally known"
+    },
+    {
+      "min": -5,
+      "band": "unremarkable"
+    },
+    {
+      "min": -17,
+      "band": "ill-regarded"
+    },
+    {
+      "min": -999,
+      "band": "notorious"
+    }
+  ],
+  "reputationBands": [
+    {
+      "min": 50,
+      "band": "revered"
+    },
+    {
+      "min": 20,
+      "band": "trusted"
+    },
+    {
+      "min": 5,
+      "band": "known"
+    },
+    {
+      "min": -4,
+      "band": "neutral"
+    },
+    {
+      "min": -19,
+      "band": "wary"
+    },
+    {
+      "min": -49,
+      "band": "distrusted"
+    },
+    {
+      "min": -999,
+      "band": "hated"
+    }
+  ],
+  "peopleStandingBands": [
+    {
+      "min": 20,
+      "band": "kin"
+    },
+    {
+      "min": 10,
+      "band": "trusted"
+    },
+    {
+      "min": 4,
+      "band": "known"
+    },
+    {
+      "min": 0,
+      "band": "neutral"
+    },
+    {
+      "min": -4,
+      "band": "wary"
+    },
+    {
+      "min": -999,
+      "band": "estranged"
+    }
+  ],
+  "capstoneStanding": {
+    "capstoneTier": 4,
+    "capstoneThreshold": 10,
+    "requiresTeacher": true
   },
-  "byTradition": {
-   "ashwarden": {
-    "death": 1,
-    "quiet": 1
-   },
-   "rootkin": {
-    "plants": 1,
-    "heal": 1
-   },
-   "blazeborn": {
-    "radiant": 1,
-    "force": 1
-   },
-   "radiant_folk": {
-    "radiant": 1,
-    "reveal": 1
-   },
-   "umbral": {
-    "stealth": 1,
-    "quiet": 1
-   },
-   "harmonic": {
-    "resonance": 1,
-    "social": 1
-   },
-   "numinous": {
-    "focus": 1,
-    "ritual": 1
-   },
-   "threnodist": {
-    "resonance": 1,
-    "witness": 1
-   },
-   "verist": {
-    "witness": 1,
-    "reveal": 1
-   },
-   "veilwright": {
-    "stealth": 1,
-    "social": 1
-   },
-   "syllogist": {
-    "analyze": 1,
-    "knowledge": 1
-   },
-   "cogitant": {
-    "analyze": 1,
-    "focus": 1
-   },
-   "lattice": {
-    "structural": 1,
-    "binding": 1
-   },
-   "enginewright": {
-    "structural": 1,
-    "energy": 1
-   },
-   "precursor": {
-    "precursor-glimpse": 1,
-    "translate": 1
-   },
-   "mason": {
-    "structural": 1,
-    "grip": 1
-   },
-   "wright": {
-    "structural": 1,
-    "grip": 1
-   },
-   "unmaker": {
-    "force": 1,
-    "analyze": 1
-   },
-   "marcher": {
-    "melee": 1,
-    "honor": 1
-   },
-   "stillhold": {
-    "peace": 1,
-    "mediate": 1
-   },
-   "somatic": {
-    "grip": 1,
-    "climb": 1
-   },
-   "churnfolk": {
-    "wild": 1,
-    "escape": 1
-   },
-   "figurist": {
-    "analyze": 1,
-    "reveal": 1
-   },
-   "horizon": {
-    "travel": 1,
-    "scout": 1
-   },
-   "hourkeeper": {
-    "focus": 1,
-    "careful": 1
-   },
-   "abyssal": {
-    "barter": 1,
-    "bind": 1
-   },
-   "valley_craft": {
-    "survival": 1,
-    "help": 1
-   },
-   "god_named": {
-    "standing": 1,
-    "honor": 1
-   },
-   "bargainers": {
-    "barter": 1,
-    "negotiate": 1
-   }
+  "bond": {
+    "stageFloors": {
+      "courting": 2,
+      "together": 4,
+      "committed": 6,
+      "partner": 8
+    },
+    "partyAdjacentStage": "partner"
+  },
+  "promotion": {
+    "tertiaryToSecondary": {
+      "minReputation": 8,
+      "requiresTeacher": true,
+      "minInDomainRanks": 3
+    },
+    "secondaryToPrimary": {
+      "minReputation": 12,
+      "requiresTeacher": true,
+      "minInDomainRanks": 6,
+      "requiresRegionStanding": true,
+      "minRegionTurns": 12,
+      "requiresCeilingExhausted": true
+    }
+  },
+  "acquisition": {
+    "minReputation": 8,
+    "requiresTeacherOrTome": true,
+    "startingCeiling": 1
+  },
+  "recoveryFractions": {
+    "sleep": 0.32,
+    "breather": 0.08,
+    "meal": 0.08,
+    "heartyMeal": 0.12,
+    "drink": 0.04
+  },
+  "subAttributes": {
+    "physical": [
+      "strength",
+      "agility"
+    ],
+    "mental": [
+      "reason",
+      "insight"
+    ],
+    "social": [
+      "presence",
+      "rapport"
+    ],
+    "practical": [
+      "craft",
+      "wits"
+    ]
+  },
+  "scene": {
+    "softCloseBeats": 8,
+    "_softCloseBeats": "SNG-266/1d: the GM starts LOOKING for the close here — a directive, not an order. Never mid-action.",
+    "hardCloseBeats": 14,
+    "_hardCloseBeats": "…and here the ENGINE closes the scene itself if the GM did not. A scene is a UNIT, not a session; the narrative-XP per-scene cap is meaningless without a boundary."
+  },
+  "leveling": {
+    "xpPerLevel": 100,
+    "levelCostCap": 40,
+    "_levelCostCap": "SNG-266/1b (Erik approved): cost rises with level up to this rung, then holds flat. L1-40 unchanged; L41-100 cost 4,000 each instead of climbing to 9,900. Remove the field and the curve is bit-identical to the old one.",
+    "subPointPerLevel": 1,
+    "skillPointPerLevel": 2,
+    "subAttributeCap": 20,
+    "maxAbilityRank": 3,
+    "rankLevelReq": {
+      "2": 3,
+      "3": 5
+    },
+    "energyEfficiencyPerTenLevels": 1,
+    "rankEnergyDiscount": 1,
+    "minEnergyCostFraction": 0.5,
+    "braidCheaperParentFraction": 0.5,
+    "crossTraditionLevelPenalty": 1,
+    "_skillPointPerLevel": "⛔ SNG-351 — ERIK RATIFIED 2026-08-07: 1 → 2. NOT a free tuning; the measurement is in skill_capacity._bindingConstraint. Points bind IFF skillPointPerLevel < average craft cost (2.511) — level does not enter it, both curves are linear, so the ratio settles at s/2.511 and holds forever. At 1 a character could reach 40% of their own breadth cap at EVERY level, permanently: not tuned scarcity, a system shadowing another by 60% since ability-arch v2 removed the depth branch of the broad-vs-deep fork. At 2 that becomes 80% — points still bind (deliberately: choosing is the game), but capacity comes into view and the 'at capacity' copy stops describing a state a paying character never occupies. 2.5 is parity and was REJECTED: both ceilings exhaust together and the player never learns which one stopped them. 3+ flips capacity to binding from level 2 and retires points as a decision. Aevi's earlier 'crossover near level 16' claim was FALSE and is corrected in po/SPEC_SNG-350 §3."
+  },
+  "novel": {
+    "difficultySurcharge": 15,
+    "critFailWiden": 3,
+    "backlashHealth": 4,
+    "backlashEnergy": 10,
+    "discoveryBonus": 20
+  },
+  "wild": {
+    "critSuccessWiden": 6,
+    "critFailWiden": 3,
+    "note": "SNG-140: a wild_current (wildVariance) craft amplifies BOTH crit tails — upside-forward (crit-success +6, crit-fail +3). SNG-258 moved crits to a SECOND roll, so these now raise the two crit DIALS rather than widening bands on the first roll; the values and their meaning are unchanged. Potent + generous with a real but smaller tail; the Wild Half's 'lethally unreliable' made tunable."
+  },
+  "gambit": {
+    "maxSteps": 5,
+    "adaptationBase": 1,
+    "strategistBonusPoints": 1,
+    "partialComplicationNote": "a wrinkle — it works, but not cleanly",
+    "stepEnergyCost": 4,
+    "completionBonusXp": 10
+  },
+  "playerAptitudes": [
+    {
+      "id": "strategist",
+      "tendency": "strategic",
+      "threshold": 11,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "plannedActionBonus": 5,
+        "senseTierBonus": 1
+      },
+      "description": "You think ahead. Planned and prepared actions succeed more often, and your read on the odds sharpens."
+    },
+    {
+      "id": "silver_tongue",
+      "tendency": "social",
+      "threshold": 11,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "socialBonus": 5
+      },
+      "description": "Words come easily. People open up to you."
+    },
+    {
+      "id": "scholar",
+      "tendency": "cerebral",
+      "threshold": 11,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "mentalBonus": 5
+      },
+      "description": "Study and investigation compound into insight."
+    },
+    {
+      "id": "rough_and_ready",
+      "tendency": "physical",
+      "threshold": 11,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "physicalBonus": 5,
+        "socialFinessePenalty": -3
+      },
+      "description": "You grow hard and capable, but subtlety suffers."
+    },
+    {
+      "id": "carouser",
+      "tendency": "carousing",
+      "threshold": 9,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "rapportBonus": 5,
+        "disciplinePenalty": -5
+      },
+      "description": "Everyone likes a good companion at the table — but focus and restraint decay."
+    },
+    {
+      "id": "daredevil",
+      "tendency": "risky",
+      "threshold": 11,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "critSuccessBonus": 2,
+        "critFailPenalty": 2
+      },
+      "description": "Fortune favors you — and punishes you. Wider extremes both ways."
+    },
+    {
+      "id": "good_samaritan",
+      "tendency": "generous",
+      "threshold": 9,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "reputationGainBonus": 0.25
+      },
+      "description": "Your kindnesses are remembered a little longer and travel a little farther."
+    },
+    {
+      "id": "tactician",
+      "tendency": "strategic",
+      "threshold": 18,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "plannedActionBonus": 8,
+        "senseTierBonus": 1,
+        "critSuccessBonus": 1
+      },
+      "description": "Deep planning becomes second nature — you see three moves out and the odds bend to it. (Deeper strategist.)"
+    },
+    {
+      "id": "orator",
+      "tendency": "social",
+      "threshold": 18,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "socialBonus": 8,
+        "reputationGainBonus": 0.15
+      },
+      "description": "A voice that moves rooms. People don't just open up — they follow. (Deeper silver_tongue.)"
+    },
+    {
+      "id": "sage",
+      "tendency": "cerebral",
+      "threshold": 18,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "mentalBonus": 8,
+        "senseTierBonus": 1
+      },
+      "description": "Knowledge deepens into wisdom; you perceive what others miss entirely. (Deeper scholar.)"
+    },
+    {
+      "id": "stalwart",
+      "tendency": "cautious",
+      "threshold": 11,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "defenseBonus": 5,
+        "plannedActionBonus": -2
+      },
+      "description": "You hold the line. Harder to break, slower to seize the moment.",
+      "needs": [
+        "defenseBonus"
+      ]
+    },
+    {
+      "id": "shadow",
+      "tendency": "stealth",
+      "threshold": 11,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "stealthBonus": 6,
+        "socialBonus": -3
+      },
+      "description": "You move unseen — but a person who lives in shadow is little known in the light.",
+      "needs": [
+        "stealthBonus"
+      ]
+    },
+    {
+      "id": "trickster",
+      "tendency": "deception",
+      "threshold": 11,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "deceiveBonus": 6,
+        "reputationGainBonus": -0.15
+      },
+      "description": "Lies land clean — but a reputation for it precedes you.",
+      "needs": [
+        "deceiveBonus"
+      ]
+    },
+    {
+      "id": "peacemaker",
+      "tendency": "generous",
+      "threshold": 16,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "deEscalationBonus": 6,
+        "intimidateBonus": -4
+      },
+      "description": "You cool a room with a word — but no one fears you, and sometimes they should.",
+      "needs": [
+        "deEscalationBonus",
+        "intimidateBonus"
+      ]
+    },
+    {
+      "id": "dread",
+      "tendency": "ruthless",
+      "threshold": 12,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "intimidateBonus": 6,
+        "rapportBonus": -4
+      },
+      "description": "Your presence chills — obedience comes easy, warmth does not.",
+      "needs": [
+        "intimidateBonus"
+      ]
+    },
+    {
+      "id": "long_game",
+      "tendency": "patient",
+      "threshold": 12,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "sustainedActionBonus": 6,
+        "burstPenalty": -4
+      },
+      "description": "Rituals, sieges, slow work — yours. But you're caught flat in a sudden moment.",
+      "needs": [
+        "sustainedActionBonus",
+        "burstPenalty"
+      ]
+    },
+    {
+      "id": "artisan",
+      "tendency": "craft",
+      "threshold": 12,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "craftBonus": 6,
+        "improvisationPenalty": -4
+      },
+      "description": "What you make, you make well — but away from your tools you're at a loss.",
+      "needs": [
+        "craftBonus",
+        "improvisationPenalty"
+      ]
+    },
+    {
+      "id": "banner",
+      "tendency": "leadership",
+      "threshold": 12,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "allyActionBonus": 6,
+        "soloPenalty": -4
+      },
+      "description": "Others fight harder beside you — but you were never meant to stand alone.",
+      "needs": [
+        "allyActionBonus",
+        "soloPenalty"
+      ]
+    },
+    {
+      "id": "faithful",
+      "tendency": "devotion",
+      "threshold": 12,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "alignedTraditionBonus": 6,
+        "crossPolePenalty": -5
+      },
+      "description": "Deep in your own tradition you are strong; the far pole closes harder against you.",
+      "needs": [
+        "alignedTraditionBonus",
+        "crossPolePenalty"
+      ]
+    },
+    {
+      "id": "berserk",
+      "tendency": "risky",
+      "threshold": 16,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "physicalBonus": 6,
+        "defenseBonus": -5
+      },
+      "description": "All fury, no guard. You hit like a storm and leave yourself open. (Deeper/rougher daredevil path.)",
+      "needs": [
+        "defenseBonus"
+      ]
+    },
+    {
+      "id": "charmer",
+      "tendency": "amorous",
+      "threshold": 10,
+      "tier": "B",
+      "axis": "amorous",
+      "mods": {
+        "flirtationBonus": 5,
+        "gravitasPenalty": -3
+      },
+      "description": "Woo, banter, ease — you draw people close. But it's hard to be taken gravely.",
+      "needs": [
+        "flirtationBonus",
+        "gravitasPenalty"
+      ],
+      "ratingCeilingBounded": true
+    },
+    {
+      "id": "devoted_lover",
+      "tendency": "amorous",
+      "threshold": 14,
+      "tier": "B",
+      "axis": "amorous",
+      "mods": {
+        "allyActionBonus": 6
+      },
+      "description": "In service of the one you love, you are more than yourself. Love as sustained attention, made real.",
+      "needs": [
+        "allyActionBonus"
+      ],
+      "dependsOn": "SNG-108 partner bond",
+      "shipInertUntilDependency": true
+    },
+    {
+      "id": "ardent",
+      "tendency": "amorous",
+      "threshold": 14,
+      "tier": "B",
+      "axis": "amorous",
+      "mods": {
+        "flirtationBonus": 8,
+        "composurePenalty": -4
+      },
+      "description": "Passion runs hot in you — magnetic in intimacy, but composure frays under pressure elsewhere.",
+      "needs": [
+        "flirtationBonus",
+        "composurePenalty"
+      ],
+      "ratingCeilingBounded": true
+    },
+    {
+      "id": "innocent",
+      "axis": "inverse",
+      "tier": "B",
+      "worldlinessCeiling": 10,
+      "worldlinessComponents": [
+        "ruthless",
+        "deception",
+        "amorous",
+        "carousing"
+      ],
+      "mods": {
+        "trustedBonus": 5,
+        "worldlyCunningPenalty": -5
+      },
+      "description": "The world hasn't marked you yet. People trust you, lower their guard, extend the benefit of the doubt — but cunning, deception, and menace come hard to you.",
+      "needs": [
+        "trustedBonus",
+        "worldlyCunningPenalty"
+      ],
+      "oneWay": true,
+      "backgroundGrantable": true
+    },
+    {
+      "id": "naive",
+      "axis": "inverse",
+      "tier": "B",
+      "worldlinessCeiling": 6,
+      "worldlinessComponents": [
+        "ruthless",
+        "deception",
+        "carousing"
+      ],
+      "mods": {
+        "sincerityReadBonus": 5,
+        "worldlyCunningPenalty": -3
+      },
+      "description": "You believe, so you are believed — but a lie slips past you, and cynical minds run circles.",
+      "needs": [
+        "sincerityReadBonus",
+        "worldlyCunningPenalty"
+      ],
+      "oneWay": true,
+      "backgroundGrantable": true
+    },
+    {
+      "id": "sheltered",
+      "axis": "inverse",
+      "tier": "B",
+      "worldlinessCeiling": 4,
+      "worldlinessComponents": [
+        "ruthless",
+        "deception",
+        "amorous",
+        "carousing",
+        "physical"
+      ],
+      "mods": {
+        "trustedBonus": 3,
+        "chargedSituationPenalty": -5
+      },
+      "description": "You have not yet seen violence or intimacy up close. A clean slate — but charged moments overwhelm you until you've weathered a few.",
+      "needs": [
+        "trustedBonus",
+        "chargedSituationPenalty"
+      ],
+      "oneWay": true,
+      "backgroundOnly": true
+    }
+  ],
+  "xp": {
+    "crit_success": 8,
+    "success": 5,
+    "partial": 3,
+    "failure": 2,
+    "crit_failure": 2,
+    "novelBonus": 8,
+    "completed": 12,
+    "completed_rough": 10,
+    "abandoned": 3
+  },
+  "encounters": {
+    "duel": {
+      "margins": {
+        "crit_success": {
+          "opponent": -3,
+          "player": 0
+        },
+        "success": {
+          "opponent": -2,
+          "player": 0
+        },
+        "partial": {
+          "opponent": -1,
+          "player": -1
+        },
+        "failure": {
+          "opponent": 0,
+          "player": -2
+        },
+        "crit_failure": {
+          "opponent": 0,
+          "player": -3
+        }
+      },
+      "playerHealthPerHit": 4,
+      "threatToDifficulty": 0.3,
+      "energyPerRound": 3,
+      "fleeFailFreeHit": 1,
+      "winXp": 15,
+      "fleeXp": 5,
+      "yieldXp": 3
+    },
+    "challenge": {
+      "defaultFailureCost": {
+        "health": 3,
+        "energy": 5,
+        "hours": 1
+      },
+      "critFailureMultiplier": 2,
+      "completeXp": 12,
+      "abandonXp": 3
+    },
+    "puzzle": {
+      "attemptEnergy": 4,
+      "attemptHours": 1,
+      "solveXp": 15,
+      "walkAwayXp": 2
+    }
+  },
+  "companions": {
+    "bondGrowth": {
+      "deed": 0.5,
+      "assist": 0.25,
+      "encounter": 1.5
+    },
+    "tiers": {
+      "assistCapBonusAt": 3,
+      "assistCapBonus": 3,
+      "grantAt": 6,
+      "stage2At": 3
+    }
+  },
+  "practice": {
+    "useRankThreshold": {
+      "2": 8,
+      "3": 16
+    },
+    "aspirationRipe": 10,
+    "maxAspirations": 2
+  },
+  "precursor": {
+    "perilDrift": 0.05,
+    "bandNotice": 0.4
+  },
+  "backfill": {
+    "xpPerBeat": 4,
+    "maxLevels": 3,
+    "bondCap": 6,
+    "comboBeatsPer": 3,
+    "bondPerBeat": 0.1
+  },
+  "vectors": {
+    "strongThreshold": 0.5,
+    "midThreshold": 0.3,
+    "attunementForMid": 6,
+    "perceivingAbilities": [
+      "prism_sight",
+      "old_roads"
+    ],
+    "fullRevealAbilities": [
+      "address_sense"
+    ]
+  },
+  "aptitudeDecay": 0.975,
+  "aptitudeKeepMargin": 4,
+  "aptitudeFadeBand": 2,
+  "startingSkills": {
+    "_note": "⚠️ SNG-339 §2. What a character KNOWS HOW TO DO before anyone teaches them a craft. Keyed on the action-tag vocabulary the game already uses — the same 54 tags authored on item.bonusTags — so a background's training and a trade's tools answer the same question in the same words. No ninth vocabulary.",
+    "grantCap": 2,
+    "usesPerRank": 25,
+    "maxRank": 2,
+    "_theRule": "A background grants what that LIFE taught, and a tradition grants what the CRAFT needs alongside itself. They stack to a cap of 2, so a hunter of the horizon is genuinely better at scouting than either alone — and no combination exceeds the cap, which is what stops a build reaching rank 3 at creation.",
+    "_whyTwoEach": "Two tags per source, never more. ⚠️ A background is a LIFE, not a career package: an orphan learned to move unseen and to go without, and everything else they picked up later belongs to play.",
+    "_orphanNote": "⚠️ ERIK'S CASE. `orphan` grants stealth + survival — which is what the shadow aptitude's -3 social was, until now, THE ONLY EXPRESSION OF. The penalty stays and stops being the whole story.",
+    "byBackground": {
+      "orphan": {
+        "stealth": 1,
+        "survival": 1
+      },
+      "exile": {
+        "travel": 1,
+        "survival": 1
+      },
+      "drifter": {
+        "travel": 1,
+        "barter": 1
+      },
+      "spy": {
+        "stealth": 1,
+        "investigate": 1
+      },
+      "ruin_picker": {
+        "scout": 1,
+        "precursor-glimpse": 1
+      },
+      "former_professional": {
+        "careful": 1,
+        "analyze": 1
+      },
+      "line_soldier": {
+        "melee": 1,
+        "protection": 1
+      },
+      "skirmisher": {
+        "attack": 1,
+        "escape": 1
+      },
+      "warden": {
+        "protection": 1,
+        "scout": 1
+      },
+      "hunter": {
+        "hunt": 1,
+        "scout": 1
+      },
+      "bodyguard": {
+        "protection": 1,
+        "careful": 1
+      },
+      "arena_fighter": {
+        "melee": 1,
+        "force": 1
+      },
+      "duelist": {
+        "edge": 1,
+        "focus": 1
+      },
+      "war_leader": {
+        "force": 1,
+        "standing": 1
+      },
+      "craftsman": {
+        "structural": 1,
+        "grip": 1
+      },
+      "mechanist": {
+        "structural": 1,
+        "analyze": 1
+      },
+      "smith": {
+        "structural": 1,
+        "energy": 1
+      },
+      "builder": {
+        "structural": 1,
+        "climb": 1
+      },
+      "trader": {
+        "barter": 1,
+        "negotiate": 1
+      },
+      "farmer": {
+        "plants": 1,
+        "weather": 1
+      },
+      "river_runner": {
+        "water": 1,
+        "travel": 1
+      },
+      "survivalist": {
+        "survival": 1,
+        "weather": 1
+      },
+      "scholar": {
+        "knowledge": 1,
+        "analyze": 1
+      },
+      "archivist": {
+        "knowledge": 1,
+        "witness": 1
+      },
+      "physician": {
+        "heal": 1,
+        "remedy": 1
+      },
+      "lawspeaker": {
+        "negotiate": 1,
+        "witness": 1
+      },
+      "cartographer": {
+        "travel": 1,
+        "scout": 1
+      },
+      "envoy": {
+        "negotiate": 1,
+        "etiquette": 1
+      },
+      "performer": {
+        "social": 1,
+        "favor": 1
+      },
+      "broker": {
+        "barter": 1,
+        "favor": 1
+      },
+      "organizer": {
+        "help": 1,
+        "social": 1
+      },
+      "smuggler": {
+        "stealth": 1,
+        "barter": 1
+      },
+      "devotee": {
+        "ritual": 1,
+        "focus": 1
+      },
+      "temple_trained": {
+        "ritual": 1,
+        "learn": 1
+      },
+      "self_taught": {
+        "learn": 1,
+        "careful": 1
+      },
+      "lineage_taught": {
+        "learn": 1,
+        "honor": 1
+      },
+      "precursor_marked": {
+        "precursor-glimpse": 1,
+        "reveal": 1
+      },
+      "battlefield_taught": {
+        "melee": 1,
+        "survival": 1
+      },
+      "apprenticed_to_a_legend": {
+        "learn": 1,
+        "analyze": 1
+      },
+      "found_it_by_accident": {
+        "reveal": 1,
+        "careful": 1
+      }
+    },
+    "byTradition": {
+      "ashwarden": {
+        "death": 1,
+        "quiet": 1
+      },
+      "rootkin": {
+        "plants": 1,
+        "heal": 1
+      },
+      "blazeborn": {
+        "radiant": 1,
+        "force": 1
+      },
+      "radiant_folk": {
+        "radiant": 1,
+        "reveal": 1
+      },
+      "umbral": {
+        "stealth": 1,
+        "quiet": 1
+      },
+      "harmonic": {
+        "resonance": 1,
+        "social": 1
+      },
+      "numinous": {
+        "focus": 1,
+        "ritual": 1
+      },
+      "threnodist": {
+        "resonance": 1,
+        "witness": 1
+      },
+      "verist": {
+        "witness": 1,
+        "reveal": 1
+      },
+      "veilwright": {
+        "stealth": 1,
+        "social": 1
+      },
+      "syllogist": {
+        "analyze": 1,
+        "knowledge": 1
+      },
+      "cogitant": {
+        "analyze": 1,
+        "focus": 1
+      },
+      "lattice": {
+        "structural": 1,
+        "binding": 1
+      },
+      "enginewright": {
+        "structural": 1,
+        "energy": 1
+      },
+      "precursor": {
+        "precursor-glimpse": 1,
+        "translate": 1
+      },
+      "mason": {
+        "structural": 1,
+        "grip": 1
+      },
+      "wright": {
+        "structural": 1,
+        "grip": 1
+      },
+      "unmaker": {
+        "force": 1,
+        "analyze": 1
+      },
+      "marcher": {
+        "melee": 1,
+        "honor": 1
+      },
+      "stillhold": {
+        "peace": 1,
+        "mediate": 1
+      },
+      "somatic": {
+        "grip": 1,
+        "climb": 1
+      },
+      "churnfolk": {
+        "wild": 1,
+        "escape": 1
+      },
+      "figurist": {
+        "analyze": 1,
+        "reveal": 1
+      },
+      "horizon": {
+        "travel": 1,
+        "scout": 1
+      },
+      "hourkeeper": {
+        "focus": 1,
+        "careful": 1
+      },
+      "abyssal": {
+        "barter": 1,
+        "bind": 1
+      },
+      "valley_craft": {
+        "survival": 1,
+        "help": 1
+      },
+      "god_named": {
+        "standing": 1,
+        "honor": 1
+      },
+      "bargainers": {
+        "barter": 1,
+        "negotiate": 1
+      }
+    }
+  },
+  "difficultyBands": {
+    "_note": "⛔ SNG-346 — ERIK'S SYMMETRIC SCALE. Values are MODIFIERS TO THE ROLL (positive helps), not penalties. Aevi: \"the insight is that EASY BECOMES A BONUS rather than the absence of a penalty\" — a flat base lifts every band equally, so easy and hard stay 15 apart no matter how high you push it. This widens the spread instead of raising the floor, which was the actual defect. Every band is 15 points apart so the ladder is learnable: a player can hold the whole scale in their head.",
+    "_target": "Erik: a level 1 should succeed 2/3 of the time at easy things and fail 2/3 of the time at hard things. Modelled at attr 4 + starting training: 65% easy / 35% hard. Target was 67/33.",
+    "very_easy": 30,
+    "easy": 15,
+    "normal": 0,
+    "hard": -15,
+    "very_hard": -30
+  },
+  "melee": {
+    "maxNamed": 3,
+    "levelsPerSlot": 10,
+    "presenceForSlot": 7,
+    "renownBandsForSlot": [
+      "renowned",
+      "legendary"
+    ],
+    "_maxNamed": "⛔ CCODE-276 / ERIK — HOW MANY YOU LEAD IS EARNED, AND THE CAP IS A GOAL RATHER THAN A LAW. His words: \"for now 3 is a good number to set AS THE GOAL, with 1 party member that you get to have take turns per x number of levels... maybe based on social skills?\"\n⚠️ RAISING `maxNamed` REQUIRES NO RE-GRIND. The ladder keeps paying past the cap — Silas has already earned six and is handed three; set this to five and he leads five on the next round. `capped` on the receipt is how a player sees what they have earned and cannot yet spend.\n⛔ `presenceForSlot` READS `presence`, WHICH ALREADY MEANS THIS. Its own description in progression.js is \"Command and inspiration — leading, being heeded, holding a room\". A second stat called Leadership would have been two names for one thing.\n⚠️ `overmatchGap` IS DELIBERATELY ABSENT. `overmatchOf` reads it and defaults to 2 — one scale of difference is a hard fight and still a roll; two is not a contest (Erik: \"1 v army isn't a contest\"). ⛔ BUT NOTHING IN PLAY CALLS `overmatchOf` YET, so authoring the dial here would be a knob with nothing on the other end — the exact defect the phantom-control rule names, pointed the other way. It gets authored in the change that wires overmatch, not before.\n⛔ AUTHORED BECAUSE IT IS READ. This file previously carried no `melee` block while app.js read one — a phantom control, which the wiring audit caught in the same session that created it. The standing rule: author the block and add the read in the same change."
   }
- },
- "difficultyBands": {
-  "_note": "⛔ SNG-346 — ERIK'S SYMMETRIC SCALE. Values are MODIFIERS TO THE ROLL (positive helps), not penalties. Aevi: \"the insight is that EASY BECOMES A BONUS rather than the absence of a penalty\" — a flat base lifts every band equally, so easy and hard stay 15 apart no matter how high you push it. This widens the spread instead of raising the floor, which was the actual defect. Every band is 15 points apart so the ladder is learnable: a player can hold the whole scale in their head.",
-  "_target": "Erik: a level 1 should succeed 2/3 of the time at easy things and fail 2/3 of the time at hard things. Modelled at attr 4 + starting training: 65% easy / 35% hard. Target was 67/33.",
-  "very_easy": 30,
-  "easy": 15,
-  "normal": 0,
-  "hard": -15,
-  "very_hard": -30
- }
 }

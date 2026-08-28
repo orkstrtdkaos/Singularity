@@ -20295,6 +20295,61 @@ await (async () => {
     check("CCODE-197: an empty selection filters nothing (releasing the last one restores the wheel)",
       !wheelRejects({ cls: "chaos" }, { selTrads: new Set() }));
   }
+
+  // 5ay · CCODE-276 — THE UI. Erik: "have you made sure the ui allows for these new features?"
+  // ⛔ THE ANSWER WAS NO, TEN FOR TEN. Every combat feature built this week — the target reveal, the forward
+  // pick, the melee contribution, interception receipts, withdrawal — was engine-only. A player could see
+  // none of it and use none of it.
+  // ⚠️ THAT IS THE "built, tested, unreachable" DEFECT I HAVE SPENT THE WEEK FINDING IN OTHER PEOPLE'S WORK,
+  // committed at the layer where it is most visible, while narrating the lesson. A gate that only tests the
+  // engine will stay green through exactly this.
+  {
+    const appSrc276 = readFileSync(join(root, "app.js"), "utf8");
+    const has = (s) => appSrc276.includes(s);
+
+    // ⛔ THE SENSE ROUND'S WHOLE PAYOFF. Erik: "you need to sense who's getting attacked so you can intervene
+    // if you want." Revealed by the engine since CCODE-250 and shown nowhere.
+    check("CCODE-276: the fog renders WHO the foe is going for, and whether you could step in",
+      has("fog.revealed.target") && has("canIntervene"));
+
+    // ⛔ "SO THIS NEEDS TO BE A UI PICK" — his words, and there was no control at all.
+    check("CCODE-276: the party block renders, with the forward pick as clickable names",
+      has("sb-fwd") && has("data-sbfwd") && has("bringForward") && has("commandSlots"));
+    check("CCODE-276: …and clicking one persists the swap on the ENCOUNTER state, not just the render",
+      /enc\.state\.broughtForward = /.test(appSrc276));
+    // ⚠️ the folded and the withdrawn must be NAMED in the panel — "two others are helping" is a number
+    check("CCODE-276: the folded and the withdrawn are shown by name, not counted",
+      has("in the melee — fighting, not narrated") && has("withdrawal?.manner"));
+
+    // ⛔ THE RECEIPT LINES. A silent bonus makes the party stop existing at the moment it mattered.
+    check("CCODE-276: the round log says the folded party added to the blow, and names them",
+      has("rr.damage?.melee") && has("are in it too"));
+    check("CCODE-276: …and that a blow landed on an ALLY rather than on you",
+      /rr\.damage\?\.onName/.test(appSrc276));
+    check("CCODE-276: …and who caught what — a tank mechanic nobody can see is one nobody thanks",
+      has("rr.imposed?.intercepted") && has("rr.damage?.intercepted"));
+    check("CCODE-276: …and that a swing went where the foe THOUGHT you were",
+      has("rr.blindStrike"));
+
+    // ⚠️ AND THE DIALS ARE AUTHORED BECAUSE THEY ARE READ. app.js reads `rules.melee`; a block no pack
+    // provides is a phantom control, and the audit caught me creating one in the same session.
+    {
+      // ⚠️ LOADED LOCALLY, AGAIN. This is the SECOND time today I reached for `C199` from a block that had
+      // closed, and both times the suite exited early — pass count 4,416 → 4,380 while the failure count
+      // stayed at 1. `C199` is scoped to one block a thousand lines up; there is no shared corpus at this
+      // depth, and treating it as a global is a habit that costs a silent suite death every time.
+      const { loadContentHeadless: lch276 } = await import("./headless_content.mjs");
+      const mel = ((await lch276()).rules || {}).melee || {};
+      check("CCODE-276: the melee dials are authored, and every one is read by name",
+        Number(mel.maxNamed) === 3 && Number(mel.levelsPerSlot) > 0
+        && Number(mel.presenceForSlot) > 0 && Array.isArray(mel.renownBandsForSlot));
+      // ⛔ AND `overmatchGap` IS DELIBERATELY ABSENT — nothing in play calls `overmatchOf` yet, so authoring
+      // it would be a knob with nothing on the other end. It gets authored in the change that wires it.
+      check("CCODE-276: …and no dial is authored ahead of the code that reads it",
+        mel.overmatchGap === undefined);
+    }
+  }
+
   // 2 · ⛔ AND ADJACENCY IS NOT MEMBERSHIP. This is the one Erik called a mistake: the ring-neighbours of
   // a held tradition were being shown as though they belonged to it, so a narrowing silently widened.
   {

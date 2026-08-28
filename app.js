@@ -107,13 +107,15 @@ import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 // effect audit. A threshold nothing counts toward is a duration that never elapses.
 import { tickAllProjects, openProject, projectProgress } from "./engine/projects.js";
 import { holdOpen, slowSink, canReach, resolveRetrieval } from "./engine/death.js"; // CCODE-270: the player's road back — the seven retrieval crafts had no door
+import { alliesOf } from "./engine/combatants.js"; // CCODE-276: the roster the party block renders
+import { commandSlots, bringForward } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { characterPower } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.236";
+const APP_VERSION = "1.9.237";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12235,7 +12237,22 @@ function sbLogRound(enc, decl, rr, beforeMom, scouting, receipt = sbLastRoundRec
     energyLeft: { you: character.energy, them: num(rr.state?.opponentEnergy) },
     ended: rr.ended || false,
     outcome: rr.outcome || null,
-    events: rr.events || [],
+    events: [
+      ...(rr.events || []),
+      // ⛔ CCODE-276 — THE PARTY'S WORK, VISIBLE. The engine has added the folded party's contribution to the
+      // blow since CCODE-274 and NOTHING SHOWED IT — so a player with five companions saw a bigger number and
+      // no reason for it. Erik's ruling was that these are people you chose not to narrate, not people who
+      // stopped existing; a silent bonus makes them stop existing.
+      ...(rr.damage?.melee ? [`${rr.damage.melee.by.map(n => String(n).split(" ")[0]).join(", ")} are in it too — +${rr.damage.melee.added}`] : []),
+      // ⚠️ AND A SWING AT NOBODY. `blindStrike` degrades a blow aimed where the foe THINKS you are; unshown,
+      // a hidden party just looks lucky.
+      ...(rr.blindStrike ? [`It swung where it thought you were — the blow came apart.`] : []),
+      // ⛔ AND WHO CAUGHT WHAT. "A tank mechanic nobody can see is a tank mechanic nobody thanks."
+      ...(rr.imposed?.intercepted ? [`${rr.imposed.intercepted.caughtBy} took it for ${rr.imposed.intercepted.onBehalfOf}`] : []),
+      ...(rr.damage?.intercepted ? [`${rr.damage.intercepted.caughtBy} took the blow meant for ${rr.damage.intercepted.onBehalfOf}`] : []),
+      // ⚠️ AND WHO IT LANDED ON, when it was not you — otherwise an ally's wound reads as a miss.
+      ...(rr.damage?.onName && rr.damage.side === "player" ? [`It lands on ${rr.damage.onName}, not you.`] : []),
+    ],
     // CCODE-35: the effects in play — what modified THIS roll (each side's named contestMods) and what the
     // round left standing. This is the part that makes a "why did that roll land?" question answerable.
     effectsApplied: { you: (p?.effectMods || []).map(m => `${m.label} ${m.value >= 0 ? "+" : ""}${m.value}`), them: (o?.effectMods || []).map(m => `${m.label} ${m.value >= 0 ? "+" : ""}${m.value}`) },
@@ -12469,7 +12486,34 @@ function skillBattlePanel() {
     const open = sbOpenFams[f] !== false;
     return `<details class="moves-group" data-sbfam="${esc(f)}"${open ? " open" : ""}><summary class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(SB_FAM_LABEL[f] || f.toLowerCase())} <span class="hint">(${byFam[f].length})</span>${sharedDoes ? `<span class="moves-group-hint"> · ${esc(sharedDoes)}</span>` : ""}</summary>${chips}</details>`;
   }).join("");
+  // ⛔ CCODE-276 — THE PARTY BLOCK AND THE FORWARD PICK. Erik: "Named companions folded into the aggregate
+  // still feel like people... if you want to have them be turn by turned you just swap them out with someone
+  // else — SO THIS NEEDS TO BE A UI PICK."
+  // ⚠️ I BUILT THE ENGINE FOR THIS AND SHIPPED NO CONTROL. `bringForward` has returned forward/folded/
+  // withdrawn since CCODE-274 and a player could neither see the split nor change it — a swap mechanic with
+  // nothing to swap with. That is the "built, tested, unreachable" defect I have spent the week finding in
+  // other people's work, committed at the layer where it is most visible.
+  const sbParty = (() => {
+    try {
+      const all = alliesOf(character, { companions: CONTENT.companions || {},
+        npcs: { ...(CONTENT.npcs || {}), ...(character.npcRegistry || {}) }, company: character.company || null });
+      if (all.length < 2) return "";
+      const lead = commandSlots(character, { cfg: CONTENT.rules?.melee || {} });
+      const split = bringForward(all, { chosen: st.broughtForward || null, slots: lead.slots });
+      const fwd = new Set(split.forward.map(a => a.id));
+      const pip = (a) => `<button class="opt sb-fwd${fwd.has(a.id) ? " on" : ""}" data-sbfwd="${esc(a.id)}"${a.isPlayer ? " disabled" : ""} title="${a.isPlayer ? "you are always forward" : fwd.has(a.id) ? "acting this round — click to fold back" : "bring forward"}">${esc(String(a.name).split(" ")[0])}</button>`;
+      const canPick = all.filter(a => a.present !== false && !a.downed);
+      return `<div class="sb-party">
+        <div class="sys-label">Your line — you lead ${lead.slots}${lead.capped ? " <span class=\"hint\">(the most, for now)</span>" : ""}</div>
+        <div class="sb-fwd-row">${canPick.map(pip).join("")}</div>
+        ${split.folded.length ? `<div class="hint">${esc(split.folded.map(a => String(a.name).split(" ")[0]).join(", "))} ${split.folded.length === 1 ? "is" : "are"} in the melee — fighting, not narrated.</div>` : ""}
+        ${split.withdrawn.length ? `<div class="hint">${split.withdrawn.map(a => `${esc(String(a.name).split(" ")[0])} ${esc(a.withdrawal?.manner || "is clear of it")}`).join(" · ")}</div>` : ""}
+      </div>`;
+    } catch { return ""; }
+  })();
+
   return `<div class="sb-panel">
+    ${sbParty}
     ${/* ERIK (2026-08-01, live): "this is a weird result to exit the fight." The round said "neither gains —
           it's even" and the fight ENDED. It was not weird — it was INVISIBLE. Momentum stopped being an exit
           at CCODE-38; what actually ends a fight now is the PRESSURE counter, and `breakAtPressure` is 2, so
@@ -12507,7 +12551,15 @@ function skillBattlePanel() {
     })()}
     <div class="sb-fog">${fog ? `
       <div class="sb-fog-line">${esc(fog.revealed.outcome || "They move.")}${fog.revealed.intent ? ` — gathering to <strong>${esc(fog.revealed.intent)}</strong>` : ""}${fog.revealed.band ? ` <span class="hint">(${esc(fog.revealed.band)})</span>` : ""}</div>
-      ${fog.revealed.skill ? `<div class="sb-fog-line">${esc(fog.revealed.skill)}${fog.revealed.intensity ? ` · ${esc(fog.revealed.intensity)}` : ""}${fog.revealed.breakdown ? ` <button class="data-link" data-breakdown='${attrJson(fog.revealed.breakdown)}'>see their math</button>` : ""}</div>` : ""}` :
+      ${fog.revealed.skill ? `<div class="sb-fog-line">${esc(fog.revealed.skill)}${fog.revealed.intensity ? ` · ${esc(fog.revealed.intensity)}` : ""}${fog.revealed.breakdown ? ` <button class="data-link" data-breakdown='${attrJson(fog.revealed.breakdown)}'>see their math</button>` : ""}</div>` : ""}
+      ${/* ⛔ CCODE-276 — WHO IT IS GOING FOR. Erik's whole reason for the sense round: "you need to sense
+            who's getting attacked so you can intervene if you want.... if you obscure yourself you aren't
+            going to know that information." The engine has revealed this since CCODE-250 and the UI showed
+            NONE of it — a read that bought the player something they could not see, which is the exact
+            defect CCODE-46 fixed for the fog itself and I reproduced one field over. */""}
+      ${fog.revealed.target ? `<div class="sb-fog-line sb-aim">${fog.revealed.target.known
+        ? `⚔ going for <strong>${esc(String(fog.revealed.target.targetName || "someone"))}</strong>${fog.revealed.target.reason ? ` <span class="hint">— ${esc(fog.revealed.target.reason)}</span>` : ""}${fog.revealed.target.canIntervene ? ` <span class="rep-band trusted">you could step in</span>` : ""}`
+        : `<span class="hint">${esc(String(fog.revealed.target.why || "you cannot tell who it is looking at"))}</span>`}</div>` : ""}` :
       `<div class="hint">You size each other up. Choose ONE move — or read them first.</div>`}</div>
     ${sbLastRoundReceipt && st.round > 1 ? `<div class="sb-receipt">${esc(sbLastRoundReceipt)}${(() => {
       // CCODE-36 (Erik): the ROLLS behind this round, in the same breakdown popover normal play uses. Your own math
@@ -12636,6 +12688,19 @@ function wireSkillBattlePanel() {
   const exec = document.getElementById("sb-execute"); if (exec) exec.onclick = () => sbExecuteTurn();
   // Edit goes back to ACTION — never to sense, which the GM has already narrated ("you can't edit back to it").
   const ed = document.getElementById("sb-edit"); if (ed) ed.onclick = () => { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); };
+  // ⛔ CCODE-276 — THE SWAP. Erik: "you just swap them out with someone else." Clicking a name toggles who
+  // is forward this round; the pick lives on the ENCOUNTER STATE so it persists between rounds rather than
+  // resetting every time the panel redraws.
+  // ⚠️ THE PLAYER CANNOT BE FOLDED — they are the attention this whole mechanic models.
+  for (const b of document.querySelectorAll("[data-sbfwd]")) b.onclick = () => {
+    const enc = activeEnc(); if (!enc) return;
+    const id = b.dataset.sbfwd;
+    const cur = new Set(enc.state.broughtForward || []);
+    if (cur.has(id)) cur.delete(id); else cur.add(id);
+    enc.state.broughtForward = [...cur];
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, {});
+  };
   const fl = document.getElementById("sb-flee"); if (fl) fl.onclick = () => beginChaseFromFight(activeEnc()?.def); // SNG-230 §6a: FLEE a fight → a real CHASE
   const yl = document.getElementById("sb-yield"); if (yl) yl.onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, yield: true }));
 }

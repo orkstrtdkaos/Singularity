@@ -21,7 +21,9 @@ working papers; **this is the answer.**
 | 08-28 | `reachOf` clamped on the base path | §6 says the sealed rung is reachable by NOTHING at any rank; it was clamped on surge only | `how_it_works.mjs` §6 | ⚠️ latent — no rank-4 craft exists yet |
 | 08-28 | §3 healing inversion → **PROPOSED** | it read BUILT; `absorb` machinery exists but **no sheet authors `decay: absorb`** | measured: 3 files mention absorb, none is a bestiary entry | §48 undeath, which is also PROPOSED |
 | 08-28 | §5 degrade path named | CCode could not find it and asked rather than guess | `resolveImposition` verified live | `impositionOf`, every `imposes` block |
-| 08-28 | §8 blind/taunt → **OPEN RULING** | doc and engine disagree and both are coherent | ⛔ the one red assertion | `targeting.js`; whether `blind` means *no preference* or *unreachable* |
+| 08-28 | §8 blind/taunt → **RULED** | Erik: *"you can taunt from the darkness"*; the engine was right | `how_it_works.mjs` §8 — doc corrected, assertion should now pass | `targeting.js` unchanged |
+| 08-28 | §8 **a hazard is not a foe** | Erik: *"a rockfall isn't a foe, it's an obstacle or a hazard"* | — | ⚠️ targeting policy applies to things that CHOOSE; hazards need no policy |
+| 08-28 | ⛔ **`blind` policy misnamed — OPEN** | Erik: *"blind is CAN'T SEE"*; the policy is a random picker | ⚠️ needs a rename, not a behaviour change | `targeting.js` `POLICY_NEEDS`, `set_hand_labour` and any foe authored `blind` |
 
 **Last verified: 2026-08-28 · v1.9.247 · 378 crafts.**
 

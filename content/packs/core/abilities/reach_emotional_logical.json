@@ -319,9 +319,9 @@
     "hinder"
    ],
    "challengeTypes": [
-    "social",
-    "psychological",
-    "combat"
+    "SOCIAL",
+    "FIGHT",
+    "DUEL"
    ],
    "tree": [
     {
@@ -333,7 +333,7 @@
       "strike",
       "hinder"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "damaging",
      "gainAxes": [],
      "antisoakImposed": 3
@@ -364,7 +364,7 @@
       "strike",
       "hinder"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "damaging",
      "gainAxes": [
       "duration",
@@ -410,7 +410,9 @@
     "crit": {
      "success": "What you opened does not close behind you — the next blow anyone lands finds the same seam.",
      "failure": "You reach for a grief they have already finished. They are steadier for having been reminded they survived it."
-    }
+    },
+    "damageType": "feeling",
+    "note": "strike. ⛔ `damageType: feeling` ADDED 2026-08-24 — Threnody's damage craft was UNTYPED and therefore UNWARDABLE. `feeling` is the right type (it is what `grief` was merged into under SNG-534) and TEN WARDS IN THE CORPUS ALREADY ANSWER IT, so this costs nothing and closes a real hole. ⚠️ THE ANTISOAK LADDER 3/5/8 IS THE MODEL THE TRADITION WAS BUILT AGAINST — `hastened_grey`/Necrotic Strike copied it — and its bounds TEACH the mechanic rather than restating it, including the pierce interaction, which turned out correct when `pierceLanded` shipped."
    },
    "rankDeltas": [
     {
@@ -459,7 +461,8 @@
    "_nameWas": "The Grief Strike",
    "_idWas": "the_grief_strike",
    "_antisoak": "⛔ SNG-498. Erik: 'antisoak as NEGATIVE SOAK — Grief Strike's antisoak-based vulnerability activates IF ANYTHING GETS PAST THE PERSON'S SOAK. A 10 damage strike lands, 8 gets soaked, the 2 gets the 6 antisoak added for 8 damage. A Ki Wield using this would STACK the soak pierce and get benefit from the antisoak.'\n⚠️ SO ANTISOAK IS NOT SOAK REDUCTION — it is a BONUS ON DAMAGE THAT ALREADY LANDED, which is why it stacks cleanly with piercing rather than competing with it.\n⛔ AND IT IS THE FIRST TEAM-FACING DEBUFF IN THE GAME: everyone else's blows benefit, not just yours. That is what makes it worth a slot beside Keening.\n⚠️ ENERGY 2 → 6 per §32.17: L2 median 4, +2 for permanence at r3.",
-   "_antisoakRuling": "⛔ SNG-516, ERIK'S CALL VIA CCODE. `antisoak: 3` was ambiguous — 'this blow benefits from +3' or 'this blow leaves them +3 vulnerable'. ⚠️ CCODE READ IT OFF MY OWN WORDING: 'a Ki Wield striking an ANTISOAKED TARGET' means THE TARGET CARRIES IT.\n⛔ RENAMED `antisoakImposed` SO IT CANNOT BE READ THE OTHER WAY. Grief Strike is a craft that IMPOSES a vulnerability; it does not carry a bonus for itself. ⚠️ AND THAT IS WHY IT IS THE FIRST TEAM-FACING DEBUFF — everyone's blows benefit, not just the caster's.\n⚠️ THE CRAFT SIDE STAYS UNWIRED AND UNAUTHORED. No craft yet says 'I hit harder against an antisoaked target' — piercing and antisoak already stack without one."
+   "_antisoakRuling": "⛔ SNG-516, ERIK'S CALL VIA CCODE. `antisoak: 3` was ambiguous — 'this blow benefits from +3' or 'this blow leaves them +3 vulnerable'. ⚠️ CCODE READ IT OFF MY OWN WORDING: 'a Ki Wield striking an ANTISOAKED TARGET' means THE TARGET CARRIES IT.\n⛔ RENAMED `antisoakImposed` SO IT CANNOT BE READ THE OTHER WAY. Grief Strike is a craft that IMPOSES a vulnerability; it does not carry a bonus for itself. ⚠️ AND THAT IS WHY IT IS THE FIRST TEAM-FACING DEBUFF — everyone's blows benefit, not just the caster's.\n⚠️ THE CRAFT SIDE STAYS UNWIRED AND UNAUTHORED. No craft yet says 'I hit harder against an antisoaked target' — piercing and antisoak already stack without one.",
+   "_reviewed_20260824": "⛔ `damageType: feeling` added — it was the tradition's damage craft with no type, so nothing could ward it. ⚠️ `challengeTypes` were lowercase AND carried `psychological`, which is not among the canonical fifteen — one of the 74 crafts bearing the unmigrated-batch fingerprint. ⛔ All three ranks declared `deepen`; r1 is the base and r3 broadens to targets. ✅ PROSE UNTOUCHED. This is the best-authored craft in Threnody and its crit failure is the best line in it: 'You reach for a grief they have already finished. They are steadier for having been reminded they survived it.' ⚠️ It pairs with `dread` r3 — both reach what someone has NOT finished; Dread SHOWS it, this STRIKES it."
   },
   {
    "id": "felt_wall",

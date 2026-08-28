@@ -23,6 +23,8 @@ working papers; **this is the answer.**
 | 08-28 | §5 degrade path named | CCode could not find it and asked rather than guess | `resolveImposition` verified live | `impositionOf`, every `imposes` block |
 | 08-28 | §8 blind/taunt → **OPEN RULING** | doc and engine disagree and both are coherent | ⛔ the one red assertion | `targeting.js`; whether `blind` means *no preference* or *unreachable* |
 
+**Last verified: 2026-08-28 · v1.9.247 · 378 crafts.**
+
 ---
 
 ## 1 · WHAT A CRAFT IS

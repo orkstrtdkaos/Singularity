@@ -7,6 +7,7 @@
 
 import { resolveAction } from "./resolve.js";
 import { chooseTarget, foeKnowledge } from "./targeting.js";
+import { damageMixOf, wardAnswer, resolveComposite } from "./damagetypes.js";   // CCODE-281: composite damage, and the reader `wardTypes` never had
 import { predictAggregate } from "./melee.js";   // CCODE-274: the folded party contributes as a measured aggregate, not as N more rolls   // CCODE-250: a foe chooses who to hit
 import { redirectImposition, interceptorFor, catchesCondition, catchesDamage } from "./intercept.js";   // CCODE-250: …and someone may step in front of it
 import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, ongoingHarmOf, authoredBlock, resolveProvoke, resolveSoothe, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
@@ -1095,6 +1096,18 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
 
       // A TYPED layer answers only its own type; an untyped layer answers everything, which is what every
       // layer does today — so with nothing typed this arithmetic is identical to before.
+      // ⛔ CCODE-281 — COMPOSITE DAMAGE AND THE WARD THAT ANSWERS PART OF IT. Erik: "once we get the basic
+      // damage types down, we can start showing COMBINATIONS — that makes WARDING ABLE TO BE PARTIAL, and
+      // makes attacks more viable because they can BRING CERTAIN DAMAGE TYPES THROUGH."
+      // ⚠️ A SINGLE `damageType` IS A MIX OF ONE, so a craft authored before this resolves identically and
+      // the whole corpus keeps working untouched. Only a craft that authors `damageMix`, or a target that
+      // authors `wardTypes`, takes the new path.
+      // ⛔ AND THIS IS WHERE `wardTypes` FINALLY GETS A READER — documented to the GM at length, authored on
+      // 48 crafts, and read by nothing in the resolution path until now.
+      const dmgMix = damageMixOf(winDecl, dmgType);
+      const wardRec = targetSheet?.ward || (targetSheet?.wardTypes ? targetSheet : null);
+      const wardAns = wardRec ? wardAnswer(wardRec, num(wardRec.wardRank, targetSheet?.wardRank) || 1,
+        { families: cmCfg?.damageFamilies, ladder: cmCfg?.wardLadder, breadth: cmCfg?.wardBreadth }) : null;
       const answers = l => !l.type || !dmgType || l.type === dmgType;
       const soak = layers
         ? layers.filter(l => answers(l) && (Number(l.rank) || 1) > pen).reduce((a, l) => a + (Number(l.value) || 0), 0)
@@ -1102,7 +1115,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       const cutThrough = layers
         ? layers.filter(l => answers(l) && (Number(l.rank) || 1) <= pen).reduce((a, l) => a + (Number(l.value) || 0), 0) : 0;
       const wrongType = layers ? layers.filter(l => !answers(l)).reduce((a, l) => a + (Number(l.value) || 0), 0) : 0;
-      const landed = aff === "absorb"
+      let landed = aff === "absorb"
         ? -Math.max(1, Math.round(hit * (acfg.absorbMult ?? 1)))          // it FEEDS — a negative hit is healing
         : aff === "immune" ? 0
         // ⛔ CCODE-210 — ANTISOAK WAS BUILT AND NEVER CALLED. `antisoakLanded` was written against Erik's
@@ -1126,7 +1139,18 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         // ⚠️ ADDITIVE, NOT AN ALTERNATIVE (Erik: "the pierce damage… plus any unsoaked damage").
         : pierceLanded(hit, soak, pierce,
             (Number(targetSheet?.antisoak) || 0) + antisoakFromConditions(targetSheet), dcfg);
+      // ⛔ CCODE-281 — AND THE WARD ANSWERS ITS PART. Applied HERE, after soak and antisoak have sized the
+      // blow, because a ward answers what LANDS rather than competing with armour over what lands at all.
+      // ⚠️ ONLY WHEN THERE IS A WARD AND MORE THAN ONE COMPONENT, OR A WARD THAT NAMES THIS TYPE. With no
+      // `wardTypes` on the target the whole path is skipped and the arithmetic is byte-identical to before.
+      let composite = null;
+      if (wardAns && dmgMix.length && landed > 0) {
+        const rc = resolveComposite(landed, dmgMix, wardAns,
+          { minHit: num(dcfg?.minHit, 1), cfg: cmCfg?.wardLadder || {}, families: cmCfg?.damageFamilies });
+        if (rc.blocked > 0) { composite = { ...rc, ward: wardAns.depth, answers: wardAns.answers }; landed = rc.landed; }
+      }
       damage = { side: roundWinner === "player" ? "opponent" : "player",
+        ...(composite ? { composite } : {}),
         // ⛔ CCODE-250 — THE SIDE IS NOT THE SUFFERER. The seat swapped the ARITHMETIC (soak, resist,
         // conditions all read the target's sheet) but this receipt still said "player", so a caller
         // would have applied an ally's wound to the player's health. Naming the bearer is the other

@@ -323,5 +323,64 @@
     "perExtraHand": 0.5,
     "_perExtraHand": "⚠️ DELIBERATELY SUBLINEAR (divided by sqrt of the hands). A second pair of hands helps; a tenth mostly gets in the way. A party that recruits a village must not finish a year's assay in an afternoon.",
     "_thresholdSource": "⚠️ AEVI — `built_system` carries `duration: 8760`, a year in hours, which reads like an intended scale and is NOT what the threshold uses. If a project's real length is meant to come from `duration` rather than `magnitude`, author `projectThreshold` on the craft and this derivation steps aside. Reported rather than guessed."
+  },
+  "damageFamilies": {
+    "_note": "⛔ CCODE-281 / ERIK: \"boil things down a bit, BACK TO THE POLE AXES as a guide for what types there are… ELEMENTAL is heat, cold, lightning, etc.\" And Aevi's correction of her own axis table: NOT EVERY TYPE IS ON AN AXIS.\n⚠️ THREE FAMILIES, AND THE FAMILY DECIDES WHAT A WARD CAN ANSWER. CCode's objection was that cold and fire are both TAKINGS rather than two ends of one thing — which is exactly why neither is polar. They are SIBLINGS. A ward against fire is not a ward against ice, and under a family model it never can be.\n⛔ POLAR PAIRS ONLY WHERE AN AXIS WARRANTS ONE. A pair means the two ends genuinely oppose: one gives what the other takes. Anything else is siblings in a family, and pairing them would let a ward against one answer the other for free.",
+    "physical": {
+      "types": [
+        "physical"
+      ],
+      "owner": null,
+      "_owner": "⛔ NOBODY OWNS IT. It is the default and it is answered by armour. A tradition does not reach `physical` — it simply hits you, and that is why plain steel works on everything."
+    },
+    "elemental": {
+      "types": [
+        "heat",
+        "cold",
+        "lightning",
+        "corrosive",
+        "force"
+      ],
+      "owner": null,
+      "_owner": "⛔ NOBODY OWNS THESE EITHER — they are how the WORLD hurts you, and any tradition REACHES one through its own idiom. ⚠️ THIS IS WHAT UNBLOCKS BLAZEBORN: seven untyped harm crafts, six of which use burn/flame language in their own text, and `heat` was not available to them because every type had been minted as one tradition's signature.\n⚠️ AND IT RECLASSIFIES `cold`, which was authored as Death's own the day before this. Death REACHES it — your body goes cold when you die — and so does anyone else."
+    },
+    "polar": {
+      "pairs": [
+        {
+          "axis": "life",
+          "minus": "decay",
+          "plus": "living",
+          "why": "one ends what the other grows — the death_life axis the world is built on"
+        },
+        {
+          "axis": "truth",
+          "minus": "deception",
+          "plus": "truth",
+          "why": "what is hidden against what is shown; veilwright and verist hold the two ends"
+        }
+      ],
+      "unpaired": [
+        "appetite",
+        "feeling",
+        "shadow",
+        "light",
+        "judgement",
+        "precursor",
+        "abstraction",
+        "vitality"
+      ],
+      "_unpaired": "⚠️ A TYPE WITHOUT AN OPPOSITE IS STILL POLAR — it belongs to a pole, it simply has no partner yet. ⛔ LISTING THEM HERE RATHER THAN INVENTING PARTNERS IS THE POINT: `appetite` has no natural opposite, and minting one so the table looks tidy is exactly the piecemeal Erik called a halt to.\n⚠️ `vitality` IS THE INTERESTING ONE and Aevi already found it: an Ashwarden TAKES life to mend himself, an Abyssal is OFFERED a wound and takes it away — same type, opposite consent. That may be a pair whose axis is CONSENT rather than direction, and it is not mine to rule."
+    }
+  },
+  "wardLadder": {
+    "r1": "resist",
+    "r2": "soak",
+    "r3": "immunity",
+    "_r1": "⛔ ERIK: \"initial ranks will add resist then soak then immunity.\" THREE DIFFERENT KINDS OF ANSWER, not three sizes of the same one:\n  · RESIST  — you are harder to land on. It moves the ROLL.\n  · SOAK    — it lands and takes less off you. It moves the DAMAGE.\n  · IMMUNITY— that type does not touch you at all.\n⚠️ AND IMMUNITY IS PER TYPE, NEVER PER BLOW, which is what makes composite damage matter: a ward immune to `heat` meets a blow that is half heat and half physical, and the physical half lands in full. ⛔ NOTHING IS EVER FULLY BLOCKED — the same principle as `minHit`, which already says no foe is immune to everything."
+  },
+  "wardBreadth": {
+    "oneTypeAtRank": 1,
+    "familyAtRank": 3,
+    "_oneTypeAtRank": "⛔ ERIK: \"wards can start with just one type, like Cold... but some higher level wards will protect against multiple types - elemental ward for example.\"\n⚠️ SO BREADTH IS EARNED SEPARATELY FROM DEPTH. A rank-1 ward answers ONE type; a high-rank ward may answer a whole FAMILY — and `elemental ward` is exactly that, which is why the families have to exist before the wards can.\n⛔ A WARD THAT ANSWERS EVERYTHING STILL HAS NO CHARACTER. The which-check already enforces this and it forced `death_ward` from five types to three; a FAMILY is the widest a ward should reach, because the family is a real idea and 'everything' is not."
   }
 }

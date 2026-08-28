@@ -20660,6 +20660,88 @@ await (async () => {
       /fnClear\.onclick = \(\) => \{ wheelFnFilter = new Set\(\); wheelSelTrads = new Set\(\);/.test(app197)
       && /\(wheelFnFilter\.size \|\| wheelSelTrads\.size \|\| wheelSuggestFilter/.test(app197));
   }
+
+  // 5bc · CCODE-281 — DAMAGE FAMILIES, COMPOSITE DAMAGE, AND THE READER `wardTypes` NEVER HAD.
+  // ⛔ ERIK: "wards can start with just one type, like Cold... but some higher level wards will protect
+  // against multiple types - elemental ward for example. also, initial ranks will add resist then soak then
+  // immunity." And: "COMBINATIONS — that makes WARDING ABLE TO BE PARTIAL… attacks more viable because they
+  // can BRING CERTAIN DAMAGE TYPES THROUGH."
+  // ⚠️ THREE FAMILIES, FROM AEVI'S CORRECTION OF HER OWN AXIS TABLE. My objection was that cold and fire are
+  // both TAKINGS rather than opposites; her answer is that this is why neither is polar — they are SIBLINGS.
+  {
+    const DT = await import("../engine/damagetypes.js");
+    const cm281 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/craft_mechanics.json"), "utf8"));
+    const F = cm281.damageFamilies, L = cm281.wardLadder, B = cm281.wardBreadth;
+
+    check("CCODE-281: the three families are authored, with polar pairs only where an axis warrants one",
+      !!F?.physical && !!F?.elemental && Array.isArray(F?.polar?.pairs) && F.polar.pairs.length >= 1);
+    // ⛔ THE DISTINCTION THAT SETTLED MY OBJECTION: siblings are not opposites.
+    check("CCODE-281: heat and cold are SIBLINGS in one family, and neither has an opposite",
+      DT.familyOf("heat", F) === "elemental" && DT.familyOf("cold", F) === "elemental"
+      && DT.oppositeOf("heat", F) === null && DT.oppositeOf("cold", F) === null);
+    check("CCODE-281: …whereas a real pair does — decay opposes living",
+      DT.oppositeOf("decay", F) === "living" && DT.oppositeOf("living", F) === "decay");
+    // ⚠️ AN UNCLASSIFIED TYPE ANSWERS null RATHER THAN A GUESS — joining a family by accident would ward it.
+    check("CCODE-281: a type nobody has classified belongs to no family",
+      DT.familyOf("nonsense", F) === null);
+
+    // ═══ ERIK'S LADDER: resist → soak → immunity ═══
+    const cold = { name: "Cold Ward", wardTypes: ["cold"] };
+    const at = (w, r) => DT.wardAnswer(w, r, { families: F, ladder: L, breadth: B });
+    check("CCODE-281: the same ward answers deeper with rank — resist, then soak, then immunity",
+      at(cold, 1).depth === "resist" && at(cold, 2).depth === "soak" && at(cold, 3).depth === "immunity");
+    // ⛔ THREE KINDS OF ANSWER, NOT THREE SIZES OF ONE — and the breadth stays one type at every rank.
+    check("CCODE-281: …and depth does not widen it — a cold ward answers cold at every rank",
+      [1, 2, 3].every(r => at(cold, r).answers.join(",") === "cold"));
+
+    // ═══ AND BREADTH IS EARNED SEPARATELY — "elemental ward for example" ═══
+    const elem = { name: "Elemental Ward", wardTypes: ["elemental"] };
+    check("CCODE-281: a ward naming a FAMILY holds the whole family only once ranked for it",
+      at(elem, 3).answers.length >= 4 && at(elem, 3).answers.includes("cold") && at(elem, 3).answers.includes("heat"));
+    // ⚠️ NAMING A FAMILY EARLY DOES NOT WIDEN IT. Breadth is earned, or every r1 ward would answer five types.
+    check("CCODE-281: …and naming it at rank 1 does NOT — breadth is earned, not claimed",
+      at(elem, 1).answers.length === 1 && at(elem, 1).breadthEarned === false);
+
+    // ═══ COMPOSITE: the payoff ═══
+    const blast = { damageMix: [{ type: "physical", share: 1 }, { type: "psychic", share: 1 }] };
+    const mix = DT.damageMixOf(blast);
+    check("CCODE-281: a mix normalises, so authored shares cannot inflate a blow",
+      Math.abs(mix.reduce((a, p) => a + p.share, 0) - 1) < 1e-9
+      && Math.abs(DT.damageMixOf({ damageMix: [{ type: "a", share: 5 }, { type: "b", share: 5 }] })[0].share - 0.5) < 1e-9);
+    // ⚠️ A SINGLE `damageType` IS A MIX OF ONE — the whole corpus keeps working untouched.
+    check("CCODE-281: a craft with a plain damageType reads as a mix of one",
+      DT.damageMixOf({ damageType: "decay" }).length === 1
+      && DT.damageMixOf({ damageType: "decay" })[0].share === 1);
+
+    const shield = at({ wardTypes: ["physical"] }, 3);
+    const r = DT.resolveComposite(20, mix, shield, { minHit: 1 });
+    check("CCODE-281: a shield stops the physical half and the psychic half COMES THROUGH",
+      r.through.length === 1 && r.through[0].type === "psychic" && r.landed === 10 && r.blocked === 10);
+    // ⛔ NOTHING IS EVER FULLY BLOCKED — the same principle as minHit, which already says no foe is immune.
+    const pure = DT.resolveComposite(20, DT.damageMixOf({ damageType: "physical" }), shield, { minHit: 1 });
+    check("CCODE-281: a blow whose every part is warded still lands the floor — a 0 reads as broken",
+      pure.landed === 1 && pure.flooredBy === "minHit");
+    // ⚠️ AND RESIST DOES NOT APPLY HERE. It moved the roll before the blow was sized; charging it again
+    // would make a rank-1 ward better than a rank-2 one against the same type.
+    check("CCODE-281: a RESIST ward does not also reduce the blow — that would charge it twice",
+      DT.resolveComposite(20, DT.damageMixOf({ damageType: "cold" }), at(cold, 1), { minHit: 1 }).landed === 20);
+    check("CCODE-281: …a SOAK ward reduces it, and an IMMUNITY ward removes it",
+      DT.resolveComposite(20, DT.damageMixOf({ damageType: "cold" }), at(cold, 2), { minHit: 1 }).landed < 20
+      && DT.resolveComposite(20, DT.damageMixOf({ damageType: "cold" }), at(cold, 3), { minHit: 1 }).landed === 1);
+
+    // ⛔ AND IT REACHES THE ROUND — `wardTypes` is documented to the GM at length, authored on 48 crafts,
+    // and was read by NOTHING in the resolution path. A gate on the module alone would have left that true.
+    {
+      const sbSrc = readFileSync(join(root, "engine/skill_battle.js"), "utf8");
+      check("CCODE-281: the damage path reads the mix and the ward",
+        sbSrc.includes("damageMixOf(") && sbSrc.includes("wardAnswer(") && sbSrc.includes("resolveComposite(")
+        && sbSrc.includes("wardTypes"));
+    }
+    // ⚠️ AND A TARGET WITH NO WARD IS UNTOUCHED — the arithmetic is byte-identical to before.
+    check("CCODE-281: with no wardTypes on the target, nothing changes",
+      DT.wardAnswer(null, 3, { families: F }) === null);
+  }
+
 }
 
 // ---- SNG-435 §C: the picture field was authored on all 376 and read by nothing ------------------

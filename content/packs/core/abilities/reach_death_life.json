@@ -4266,6 +4266,245 @@
     ],
     "_why": "⛔ ONE, ALWAYS — the hard bound. And the gap RISES because the craft's own fiction is that it WEARS DOWN TO PURPOSE and gets harder to stop: at r3 a `+1` shade is `hard` against its own maker's party, deliberately. ⚠️ ERIK 2026-08-24 TIED IT TO THE ROLL AS WELL — 'I would also tie it to how well you succeeded at the skill and if you crit' — so `summonGap` treats this as a FLOOR: an L5 warden critting r3 raises a LEVEL 7 shade, two above herself, and that happened at the table rather than in this file. ⛔ CONTRIBUTIONS GROW WITH THE RANKS: it hunts (MARTIAL), then it carries word (KNOW), then it holds a door (PROTECT)."
    }
+  },
+  {
+   "id": "grey_ground",
+   "name": "Grey Ground",
+   "levelReq": 3,
+   "energyCost": 7,
+   "powerSystem": "metaphysical",
+   "attribute": "mental",
+   "tradition": "ashwarden",
+   "nativeOrCombination": "native",
+   "shape": "damage",
+   "harmRung": "lethal",
+   "challengeTypes": [
+    "FIGHT",
+    "DEFEND",
+    "SURVIVE"
+   ],
+   "operativeAxis": [
+    "area",
+    "duration",
+    "damage"
+   ],
+   "axes": {
+    "death_life": -0.6
+   },
+   "effectTags": [
+    "decay",
+    "zone",
+    "attrition"
+   ],
+   "functions": [
+    "strike",
+    "hinder",
+    "ward"
+   ],
+   "description": "⛔ MARK GROUND AND LET IT DO THE WORK. Everything living standing on it comes apart a little every moment it stays — not struck, WORN. ⚠️ IT IS NOT A BLAST AND IT DOES NOT CARE HOW FAST YOU ARE: the only defence is to not be there, and the ground does not move.",
+   "narrationHints": "The grass goes first, in a ring, and then people notice their hands. ⚠️ NOBODY DIES IN THE FIRST MOMENT. That is what makes it work — they think they have time, and they spend it deciding.",
+   "notFor": "⛔ SUDDENNESS — it kills nobody quickly and anyone who leaves is fine. ⚠️ THE UNLIVING: a raised crew, a construct or a mechanism walks it untouched, and an undead near emergence is MENDED by standing in it (§48.5). ⛔ And it does not sort: your own people wear down at exactly the same rate.",
+   "plainly": "A fight/defend action. Mark an area and every LIVING thing in it takes 2d6 decay at the end of each round it remains — 1d6 at r1's smaller reach, 3d6 at r3. It lasts about four rounds and stays where you put it. ⛔ It does not sort friend from foe, and the unliving are untouched.",
+   "intensity": {
+    "conserve": "a smaller circle — half the ground, and it goes quiet sooner",
+    "surge": "double the ground; YOU WILL NOT BE ABLE TO CROSS IT EITHER"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT DOES NOT MOVE. You mark ground, and ground stays marked — including under you",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT DOES NOT SORT. Everything living in it wears down, allies included, at the same rate",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ THE UNLIVING ARE UNTOUCHED, and one near emergence is MENDED by it",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ Anyone who leaves is fine. It punishes standing still, and only that",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "area": 3,
+    "duration": 4,
+    "range": 6,
+    "damageType": "decay",
+    "crit": {
+     "success": "The ground takes longer to stop than it should, and the far edge is further out than you marked.",
+     "failure": "You mark ground you are standing on and realise it a moment later."
+    },
+    "note": "⛔ DEATH'S FIRST PERSISTENT ZONE. Every other area craft in the corpus (`radiance`, `keening`, `green_claim`) is an INSTANTANEOUS BURST; this one PERSISTS and ticks at end of round, which is a different tactical object — it denies ground rather than clearing it. ⚠️ `damageType: decay` so a decay-typed ward answers it and an undead ABSORBS it (§48.5). ⛔ `range 6` PLACES it; it does not follow you. Ladder is AREA and DICE together: 1d6/area 2 -> 2d6/area 3 -> 3d6/area 5."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Marked Ground",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [],
+     "grants": "⛔ MARK A SMALL PATCH AT REACH — a doorway, a stair-head, a ford. Every living thing standing in it takes 1d6 decay at the end of each round it stays. ⚠️ IT DOES NOT CHASE THEM; it makes standing there cost.",
+     "cannot": "A small area, and it does not move once marked. ⚠️ Anyone who steps off is unharmed, and the unliving never noticed."
+    },
+    {
+     "rank": 2,
+     "name": "Wearing Field",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "damage",
+      "scope"
+     ],
+     "grants": "⛔ A REAL FIELD — a room, a yard, a bridge — at 2d6 a round, and the wearing SLOWS what crosses it: everything living in the ground moves as though the air were thicker.",
+     "cannot": "⛔ IT STILL DOES NOT SORT. Your own line takes it too, and a corridor you have denied is denied to you."
+    },
+    {
+     "rank": 3,
+     "name": "Grey Ground",
+     "functions": [
+      "strike",
+      "hinder",
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "area",
+      "damage",
+      "duration"
+     ],
+     "grants": "⛔ TAKE A PIECE OF THE FIELD OUT OF THE FIGHT — a courtyard, a breach, a whole approach — at 3d6 a round for as long as it holds. ⚠️ ARMIES GO AROUND. That is usually the point: this craft wins ground by making ground unusable, and it is why the Palelands have never been successfully besieged from the south.",
+     "cannot": "⛔ WHAT YOU DENY, YOU DENY TO EVERYONE. ⚠️ And it will still be there after the fight is over, quietly, until it stops."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-24: 'we need a couple damage dealing skills… I'm thinking A ZONE THAT DAMAGES ALL WITHIN PER TURN.' ⚠️ MEASURED FIRST: Death had THREE damage-shaped crafts in 33 and NO PERSISTENT ZONE — every area craft in the corpus is an instantaneous burst. ⛔ THIS IS THE FIRST TICKING GROUND-DENIAL IN THE GAME, which makes it a different tactical object rather than a bigger Keening. ⚠️ IT DOES NOT SORT AND IT DOES NOT MOVE — both hard bounds, so it stays a positional decision rather than a targeted attack, and per Erik's ruling on Necrotic Strike the indiscriminate part is a PROPERTY OF THE GROUND, not of a craft aimed at people. ⛔ AND IT INHERITS §48 CORRECTLY: the unliving are untouched and one near emergence is MENDED by standing in it."
+  },
+  {
+   "id": "ending_cast",
+   "name": "Sent Ending",
+   "levelReq": 2,
+   "energyCost": 5,
+   "powerSystem": "metaphysical",
+   "attribute": "mental",
+   "tradition": "ashwarden",
+   "nativeOrCombination": "native",
+   "shape": "damage",
+   "harmRung": "lethal",
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL"
+   ],
+   "operativeAxis": [
+    "range",
+    "damage",
+    "targets"
+   ],
+   "axes": {
+    "death_life": -0.5
+   },
+   "effectTags": [
+    "decay",
+    "ranged"
+   ],
+   "functions": [
+    "strike"
+   ],
+   "description": "⛔ SEND AN ENDING ACROSS A ROOM. The Ashwarden's only reaching blow — no ground marked, no wound needed, no touch: a piece of what is coming to everything, arriving early and aimed. ⚠️ IT IS THE PLAINEST THING THE TRADITION DOES, and the one they are least comfortable teaching.",
+   "narrationHints": "She looks at him and he folds like something with a rope cut. ⚠️ THERE IS NO FLASH AND NO SOUND — which is why nobody can ever say afterwards who did it, only that she was looking that way.",
+   "notFor": "⛔ SUBTLETY IT HAS, PRECISION IT HAS NOT — you strike a thing, not a part of it, and it cannot disarm, cripple or wound to a purpose. ⚠️ THE UNLIVING TAKE NOTHING, and one near emergence is MENDED (§48.5). ⛔ And it leaves no mark: a body dropped by this shows no cause, which is a different problem entirely.",
+   "plainly": "A fight/duel action. 2d6 decay at range to one living thing — no touch, no existing wound, no ground needed. r2 reaches further and takes two; r3 takes three at once. ⛔ Warded by anything that answers decay, and the unliving are untouched.",
+   "intensity": {
+    "conserve": "a lesser sending — half the dice, and nobody nearby notices",
+    "surge": "send all of it; IT WILL BE OBVIOUS WHO DID THIS"
+   },
+   "bounds": [
+    {
+     "text": "⛔ THE LIVING ONLY. The unliving take nothing and one near emergence is mended by it",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ WHOLE THINGS, NEVER PARTS — it cannot disarm, cripple, or wound to a purpose",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT LEAVES NO MARK. A body dropped by this shows no cause, which acquits you of nothing and explains nothing",
+     "class": "drawback"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "range": 8,
+    "targets": 1,
+    "damageType": "decay",
+    "marginFloorPer": 0.02,
+    "crit": {
+     "success": "It lands the way a held breath ends — all at once, and everyone in the room feels the moment go.",
+     "failure": "You send it and it arrives somewhere behind them, and the wall greys."
+    },
+    "note": "⛔ DEATH'S ONLY RANGED DAMAGE. Before this the tradition's longest reach was `draw_down` at range 1 (touch) — everything else was present-and-adjacent, which left a warden with nothing to do at distance except set up. ⚠️ `range 8` and `damageType: decay`, so a decay ward answers it and the §48 inversions apply unchanged. ⛔ DELIBERATELY PLAIN: 2d6/3d6/4d6, one target then two then three, no conditions and no riders — the tradition already has setup, control and denial, and what it lacked was a straight answer at range."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Sent Ending",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [],
+     "grants": "⛔ 2d6 DECAY TO ONE LIVING THING ACROSS A ROOM. No touch, no existing wound, no ground marked — you look at it and a piece of its ending arrives early.",
+     "cannot": "One living thing you can see. ⚠️ It strikes the whole of a thing and never a part: no disarming, no crippling. ⛔ The unliving take nothing."
+    },
+    {
+     "rank": 2,
+     "name": "Two Sendings",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "range",
+      "targets",
+      "damage"
+     ],
+     "grants": "⛔ 3d6, FURTHER OUT, AND TWO OF THEM — across a yard, a hall, a street, in the same moment.",
+     "cannot": "Two you can see, and both must be living. ⚠️ Anything between you and them that answers decay answers this."
+    },
+    {
+     "rank": 3,
+     "name": "Told Ending",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "targets",
+      "damage"
+     ],
+     "grants": "⛔ 4d6 TO THREE AT ONCE. The tradition's plainest capstone: three people who were standing, and then were not, with nothing in the room to show for it.",
+     "cannot": "⛔ THREE, LIVING, SEEN. ⚠️ And there is no version of this that anyone mistakes for an accident when it happens three times."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-24: 'a DIRECT RANGED BLAST of some kind.' ⚠️ MEASURED: DEATH HAD NO CRAFT WITH RANGE ABOVE 1 — `draw_down` was touch, everything else present-and-adjacent, so a warden at distance could only ever set up. ⛔ DELIBERATELY PLAIN AND WITHOUT RIDERS: the tradition already owns setup (`soul_stare`), control (`dread`, `keening`), denial (`grey_ground`) and attrition (`necrotic_strike`) — WHAT IT LACKED WAS A STRAIGHT ANSWER AT RANGE, and adding conditions to it would have made a fifth control craft instead. ⚠️ `damageType: decay` so the §48 inversions and every decay ward apply unchanged."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -2,7 +2,7 @@
 
 ⛔ **GENERATED — `node po/matrix_gen.mjs death --detail`. Full rank text, verbatim.**
 
-**33 crafts · 94 ranks** · 2026-08-28
+**35 crafts · 100 ranks** · 2026-08-28
 
 ---
 
@@ -558,7 +558,7 @@
 
 ### r2 — Passage
 
-**functions:** move, resist, open · **gainAxes:** targets, access · **gains:** broaden · **harm:** none
+**functions:** move, resist, open · **gainAxes:** targets, scope · **gains:** broaden · **harm:** none
 
 **grants:** ⛔ BRING ONE PERSON THROUGH, AND OPEN WHAT THE DEAD HAVE CROSSED — sealed doors, tombs, quarantine gates, the postern they carried the bodies out of. Not by breaking. By fitting. ⚠️ AND YOU CAN READ THE SAFE LINE THROUGH A LETHAL SPACE BEFORE YOU COMMIT TO IT, which is the difference between infiltration and a guess.
 
@@ -766,9 +766,47 @@
 
 ---
 
-## 21. Soul Stare  ·  `soul_stare`
+## 21. Sent Ending  ·  `ending_cast`
 
-**L2 · e4 · ashwarden · metaphysical · shape `conceal` · harm `none`**  
+**L2 · e5 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
+**status:** crit · dmg:decay  
+**ability functions:** strike
+
+> ⛔ SEND AN ENDING ACROSS A ROOM. The Ashwarden's only reaching blow — no ground marked, no wound needed, no touch: a piece of what is coming to everything, arriving early and aimed. ⚠️ IT IS THE PLAINEST THING THE TRADITION DOES, and the one they are least comfortable teaching.
+
+**notFor:** ⛔ SUBTLETY IT HAS, PRECISION IT HAS NOT — you strike a thing, not a part of it, and it cannot disarm, cripple or wound to a purpose. ⚠️ THE UNLIVING TAKE NOTHING, and one near emergence is MENDED (§48.5). ⛔ And it leaves no mark: a body dropped by this shows no cause, which is a different problem entirely.
+
+### r1 — Sent Ending
+
+**functions:** strike · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** damaging
+
+**grants:** ⛔ 2d6 DECAY TO ONE LIVING THING ACROSS A ROOM. No touch, no existing wound, no ground marked — you look at it and a piece of its ending arrives early.
+
+**cannot:** One living thing you can see. ⚠️ It strikes the whole of a thing and never a part: no disarming, no crippling. ⛔ The unliving take nothing.
+
+### r2 — Two Sendings
+
+**functions:** strike · **gainAxes:** range, targets, damage · **gains:** broaden · **harm:** lethal
+
+**grants:** ⛔ 3d6, FURTHER OUT, AND TWO OF THEM — across a yard, a hall, a street, in the same moment.
+
+**cannot:** Two you can see, and both must be living. ⚠️ Anything between you and them that answers decay answers this.
+
+### r3 — Told Ending
+
+**functions:** strike · **gainAxes:** targets, damage · **gains:** broaden · **harm:** lethal
+
+**grants:** ⛔ 4d6 TO THREE AT ONCE. The tradition's plainest capstone: three people who were standing, and then were not, with nothing in the room to show for it.
+
+**cannot:** ⛔ THREE, LIVING, SEEN. ⚠️ And there is no version of this that anyone mistakes for an accident when it happens three times.
+
+**bounds:** ⛔ THE LIVING ONLY. The unliving take nothing and one near emergence is mended by it · ⛔ WHOLE THINGS, NEVER PARTS — it cannot disarm, cripple, or wound to a purpose · ⚠️ IT LEAVES NO MARK. A body dropped by this shows no cause, which acquits you of nothing and explains nothing
+
+---
+
+## 22. Soul Stare  ·  `soul_stare`
+
+**L2 · e4 · ashwarden · metaphysical · shape `conceal` · harm `damaging`**  
 **status:** crit · obscure  
 **ability functions:** conceal, hinder
 
@@ -804,7 +842,7 @@
 
 ---
 
-## 22. Wither  ·  `wither`
+## 23. Wither  ·  `wither`
 
 **L2 · e5 · ashwarden · metaphysical · shape `damage` · harm `damaging`**  
 **status:** crit · dmg:decay  
@@ -842,7 +880,7 @@
 
 ---
 
-## 23. Ask the Dead  ·  `ask_the_dead`
+## 24. Ask the Dead  ·  `ask_the_dead`
 
 **L3 · e5 · ashwarden · metaphysical · shape `setup` · harm `none`**  
 **status:** crit · gated · upkeep  
@@ -862,7 +900,7 @@
 
 ### r2 — Long Question
 
-**functions:** summon · **gainAxes:** questions, range · **gains:** broaden · **harm:** none
+**functions:** summon · **gainAxes:** targets, range · **gains:** broaden · **harm:** none
 
 **grants:** ⛔ REACH INTO THE NEAR DARK — out to about a month — AND ASK MORE: three questions, and the answers come clearer.
 
@@ -880,9 +918,9 @@
 
 ---
 
-## 24. Calling Back  ·  `calling_back`
+## 25. Calling Back  ·  `calling_back`
 
-**L3 · e12 · ashwarden · metaphysical · shape `retrieval` · harm `incapacitating`**  
+**L3 · e12 · ashwarden · metaphysical · shape `retrieval` · harm `lethal`**  
 **status:** crit · dmg:decay · upkeep  
 **ability functions:** heal, summon
 
@@ -918,7 +956,7 @@
 
 ---
 
-## 25. Death-Ward  ·  `death_ward`
+## 26. Death-Ward  ·  `death_ward`
 
 **L3 · e6 · ashwarden · metaphysical · shape `guard` · harm `none`**  
 **status:** crit · ward:decay/judgement/appetite/vitality  
@@ -956,7 +994,7 @@
 
 ---
 
-## 26. Draw Down  ·  `draw_down`
+## 27. Draw Down  ·  `draw_down`
 
 **L3 · e6 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
 **status:** crit · dmg:vitality · gated  
@@ -994,7 +1032,45 @@
 
 ---
 
-## 27. Raised Hand  ·  `set_hand`
+## 28. Grey Ground  ·  `grey_ground`
+
+**L3 · e7 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
+**status:** crit · dmg:decay  
+**ability functions:** strike, hinder, ward
+
+> ⛔ MARK GROUND AND LET IT DO THE WORK. Everything living standing on it comes apart a little every moment it stays — not struck, WORN. ⚠️ IT IS NOT A BLAST AND IT DOES NOT CARE HOW FAST YOU ARE: the only defence is to not be there, and the ground does not move.
+
+**notFor:** ⛔ SUDDENNESS — it kills nobody quickly and anyone who leaves is fine. ⚠️ THE UNLIVING: a raised crew, a construct or a mechanism walks it untouched, and an undead near emergence is MENDED by standing in it (§48.5). ⛔ And it does not sort: your own people wear down at exactly the same rate.
+
+### r1 — Marked Ground
+
+**functions:** strike · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** damaging
+
+**grants:** ⛔ MARK A SMALL PATCH AT REACH — a doorway, a stair-head, a ford. Every living thing standing in it takes 1d6 decay at the end of each round it stays. ⚠️ IT DOES NOT CHASE THEM; it makes standing there cost.
+
+**cannot:** A small area, and it does not move once marked. ⚠️ Anyone who steps off is unharmed, and the unliving never noticed.
+
+### r2 — Wearing Field
+
+**functions:** strike, hinder · **gainAxes:** damage, scope · **gains:** broaden · **harm:** lethal
+
+**grants:** ⛔ A REAL FIELD — a room, a yard, a bridge — at 2d6 a round, and the wearing SLOWS what crosses it: everything living in the ground moves as though the air were thicker.
+
+**cannot:** ⛔ IT STILL DOES NOT SORT. Your own line takes it too, and a corridor you have denied is denied to you.
+
+### r3 — Grey Ground
+
+**functions:** strike, hinder, ward · **gainAxes:** area, damage, duration · **gains:** broaden · **harm:** lethal
+
+**grants:** ⛔ TAKE A PIECE OF THE FIELD OUT OF THE FIGHT — a courtyard, a breach, a whole approach — at 3d6 a round for as long as it holds. ⚠️ ARMIES GO AROUND. That is usually the point: this craft wins ground by making ground unusable, and it is why the Palelands have never been successfully besieged from the south.
+
+**cannot:** ⛔ WHAT YOU DENY, YOU DENY TO EVERYONE. ⚠️ And it will still be there after the fight is over, quietly, until it stops.
+
+**bounds:** ⛔ IT DOES NOT MOVE. You mark ground, and ground stays marked — including under you · ⛔ IT DOES NOT SORT. Everything living in it wears down, allies included, at the same rate · ⛔ THE UNLIVING ARE UNTOUCHED, and one near emergence is MENDED by it · ⚠️ Anyone who leaves is fine. It punishes standing still, and only that
+
+---
+
+## 29. Raised Hand  ·  `set_hand`
 
 **L3 · e9 · ashwarden · metaphysical · shape `construct` · harm `none`**  
 **status:** crit · upkeep  
@@ -1032,7 +1108,7 @@
 
 ---
 
-## 28. Under-Song  ·  `shared_grief`
+## 30. Under-Song  ·  `shared_grief`
 
 **L3 · e7 · threnodist · wild_nanite · shape `reveal` · harm `none`**  
 **status:** crit · gated  
@@ -1070,7 +1146,7 @@
 
 ---
 
-## 29. Driven Shade  ·  `given_errand`
+## 31. Driven Shade  ·  `given_errand`
 
 **L4 · e11 · ashwarden · metaphysical · shape `construct` · harm `lethal`**  
 **status:** crit  
@@ -1108,7 +1184,7 @@
 
 ---
 
-## 30. Names of the Lost  ·  `names_of_the_lost`
+## 32. Names of the Lost  ·  `names_of_the_lost`
 
 **L4 · e11 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
 **status:** ⚠️ no crit · gated  
@@ -1146,7 +1222,7 @@
 
 ---
 
-## 31. Grief That Stops  ·  `grief_that_stops`
+## 33. Grief That Stops  ·  `grief_that_stops`
 
 **L5 · e13 · threnodist · wild_nanite · shape `hobble` · harm `lethal`**  
 **status:** crit · dmg:feeling  
@@ -1176,7 +1252,7 @@
 
 ---
 
-## 32. Last Lament  ·  `last_lament`
+## 34. Last Lament  ·  `last_lament`
 
 **L5 · e13 · threnodist · wild_nanite · shape `bolster` · harm `none`**  
 **status:** ⚠️ no crit · gated  
@@ -1198,7 +1274,7 @@
 
 ---
 
-## 33. The Cut Thread  ·  `the_cut_thread`
+## 35. The Cut Thread  ·  `the_cut_thread`
 
 **L5 · e14 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
 **status:** crit · gated · upkeep  

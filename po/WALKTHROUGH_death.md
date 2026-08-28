@@ -582,35 +582,35 @@
 **status:** ⚠️ no crit · ward:decay/living  
 **ability functions:** move, open, resist
 
-> Move through places lethal or forbidden to others. The ashwarden walks where others cannot stay: not by force, but by fitting the space that the dead have already shaped.
+> ⛔ GO THROUGH THE PART THAT KILLS PEOPLE. The ashwarden walks where others cannot stay — not by force and not by stealth, but by FITTING THE SPACE THE DEAD HAVE ALREADY SHAPED. ⚠️ THIS IS AN INFILTRATION CRAFT: a trapped corridor, a killing field, a warded approach, a plague ward, an aftermath — anywhere enough people have died that the place has a shape, you can walk it. THE FRONT DOOR OF A FORTRESS IS OFTEN THE BEST-USED ROAD IN IT.
 
-**notFor:** Speed — this is about access, not pace; the Grey Road does not outrun anything. The living cannot be pulled through freely.
+**notFor:** ⛔ SPEED — access, not pace; the Grey Road outruns nothing. ⚠️ AND NOT STEALTH: it does not hide you. You are plainly visible walking through the place that should have killed you, and anyone looking will see you do it. The living cannot be pulled through freely. ⛔ A trap, ward or approach THAT HAS NEVER KILLED ANYONE offers no road at all — a brand-new killing ground is just a killing ground.
 
 ### r1 — Through Here
 
 **functions:** move, resist · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** Move through places lethal or restricted to others — a plague ward, a collapsed site, a grief-sealed room, a battlefield's aftermath — without the danger touching you. Stand where others cannot stay.
+**grants:** ⛔ WALK THROUGH WHAT KILLS. A trapped approach, a plague ward, a collapsed site, a grief-sealed room, an aftermath field — at a normal pace, with the danger not touching you. ⚠️ THE TRAPS DO NOT FIRE AND YOU DO NOT DISARM THEM: you are simply not where the killing goes.
 
-**cannot:** You go alone. The Road does not widen for company without further craft.
+**cannot:** You go alone; the Road does not widen for company without further craft. ⛔ AND THE PLACE MUST HAVE KILLED — a corridor trapped last week has no road in it yet.
 
 ### r2 — Passage
 
-**functions:** move, resist, open · **gainAxes:** damage, targets · **gains:** broaden · **harm:** none
+**functions:** move, resist, open · **gainAxes:** targets, access · **gains:** broaden · **harm:** none
 
-**grants:** Bring one person through with you. Open sealed doors, tombs, and quarantine gates that the dead have passed before — not by breaking, by fitting. Sense the safe path through a lethal space before you commit.
+**grants:** ⛔ BRING ONE PERSON THROUGH, AND OPEN WHAT THE DEAD HAVE CROSSED — sealed doors, tombs, quarantine gates, the postern they carried the bodies out of. Not by breaking. By fitting. ⚠️ AND YOU CAN READ THE SAFE LINE THROUGH A LETHAL SPACE BEFORE YOU COMMIT TO IT, which is the difference between infiltration and a guess.
 
-**cannot:** One only. A ward that has never held a death cannot be opened this way — only thresholds that have been crossed before.
+**cannot:** One only, and they must keep hold of you. ⛔ A threshold that has never had a death carried across it is just a door.
 
 ### r3 — Long Walk
 
-**functions:** move, resist, open · **gainAxes:** scope · **gains:** deepen · **harm:** none
+**functions:** move, resist, open · **gainAxes:** scope, targets · **gains:** broaden · **harm:** none
 
 **grants:** Move through any space where death has been substantial and recent — major battlefields, plague grounds, sealed necropolises, active collapse sites — as if they were open road. Bring a small group. Move through quarantine cordons and siege-lines that are held by mortal hands, not wards.
 
-**cannot:** Substantial and recent. A meadow where someone died a hundred years ago is not a Grey Road. A magically-sealed door with no death behind it is not a Grey Road. The Advance moves in fights; the Grey Road moves through places of death. The two do not substitute for each other.
+**cannot:** ⛔ SUBSTANTIAL AND RECENT. A meadow where someone died a century ago is not a Grey Road; a sealed door with no death behind it is not a Grey Road. ⚠️ The Advance moves in fights; the Grey Road moves through places of death. The two do not substitute for each other.
 
-**bounds:** YOU GO ALONE at r1 — the Road does not widen for company · A WARD THAT HAS NEVER HELD A DEATH CANNOT BE OPENED THIS WAY · SUBSTANTIAL AND RECENT — a meadow where someone died a hundred years ago is just a meadow
+**bounds:** YOU GO ALONE at r1 — the Road does not widen for company · ⛔ A WARD, DOOR OR TRAP THAT HAS NEVER HELD A DEATH CANNOT BE OPENED THIS WAY — the dead have to have gone first · ⛔ SUBSTANTIAL AND RECENT — a meadow where someone died a hundred years ago is just a meadow, and a corridor that has killed twice in ten years is nearly one · ⚠️ IT DOES NOT HIDE YOU. You are walking, visibly, through the place that kills people, and everyone watching can see that it is not killing you
 
 ---
 

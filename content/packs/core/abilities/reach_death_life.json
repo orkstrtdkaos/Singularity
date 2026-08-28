@@ -1791,15 +1791,15 @@
     "move",
     "open"
    ],
-   "narrationHints": "Not faster. Through different. The places between that are only open from the death-side — plague grounds, aftermath fields, grief-thick dark. The ashwarden moves through while the living wait for the space to be safe.",
-   "description": "Move through places lethal or forbidden to others. The ashwarden walks where others cannot stay: not by force, but by fitting the space that the dead have already shaped.",
-   "notFor": "Speed — this is about access, not pace; the Grey Road does not outrun anything. The living cannot be pulled through freely.",
+   "narrationHints": "Not faster. THROUGH DIFFERENT. ⚠️ She does not disarm the corridor and she does not sneak past it — she walks down it at a normal pace while it kills nobody, because it has killed so often that she knows the shape of the killing. ⛔ THE GUARDS SEE NOTHING WRONG. That is the part that unsettles them afterwards.",
+   "description": "⛔ GO THROUGH THE PART THAT KILLS PEOPLE. The ashwarden walks where others cannot stay — not by force and not by stealth, but by FITTING THE SPACE THE DEAD HAVE ALREADY SHAPED. ⚠️ THIS IS AN INFILTRATION CRAFT: a trapped corridor, a killing field, a warded approach, a plague ward, an aftermath — anywhere enough people have died that the place has a shape, you can walk it. THE FRONT DOOR OF A FORTRESS IS OFTEN THE BEST-USED ROAD IN IT.",
+   "notFor": "⛔ SPEED — access, not pace; the Grey Road outruns nothing. ⚠️ AND NOT STEALTH: it does not hide you. You are plainly visible walking through the place that should have killed you, and anyone looking will see you do it. The living cannot be pulled through freely. ⛔ A trap, ward or approach THAT HAS NEVER KILLED ANYONE offers no road at all — a brand-new killing ground is just a killing ground.",
    "tree": [
     {
      "rank": 1,
      "name": "Through Here",
-     "grants": "Move through places lethal or restricted to others — a plague ward, a collapsed site, a grief-sealed room, a battlefield's aftermath — without the danger touching you. Stand where others cannot stay.",
-     "cannot": "You go alone. The Road does not widen for company without further craft.",
+     "grants": "⛔ WALK THROUGH WHAT KILLS. A trapped approach, a plague ward, a collapsed site, a grief-sealed room, an aftermath field — at a normal pace, with the danger not touching you. ⚠️ THE TRAPS DO NOT FIRE AND YOU DO NOT DISARM THEM: you are simply not where the killing goes.",
+     "cannot": "You go alone; the Road does not widen for company without further craft. ⛔ AND THE PLACE MUST HAVE KILLED — a corridor trapped last week has no road in it yet.",
      "functions": [
       "move",
       "resist"
@@ -1811,8 +1811,8 @@
     {
      "rank": 2,
      "name": "Passage",
-     "grants": "Bring one person through with you. Open sealed doors, tombs, and quarantine gates that the dead have passed before — not by breaking, by fitting. Sense the safe path through a lethal space before you commit.",
-     "cannot": "One only. A ward that has never held a death cannot be opened this way — only thresholds that have been crossed before.",
+     "grants": "⛔ BRING ONE PERSON THROUGH, AND OPEN WHAT THE DEAD HAVE CROSSED — sealed doors, tombs, quarantine gates, the postern they carried the bodies out of. Not by breaking. By fitting. ⚠️ AND YOU CAN READ THE SAFE LINE THROUGH A LETHAL SPACE BEFORE YOU COMMIT TO IT, which is the difference between infiltration and a guess.",
+     "cannot": "One only, and they must keep hold of you. ⛔ A threshold that has never had a death carried across it is just a door.",
      "functions": [
       "move",
       "resist",
@@ -1822,25 +1822,26 @@
      "harmRung": "none",
      "_nameWas": "The Passage",
      "gainAxes": [
-      "damage",
-      "targets"
+      "targets",
+      "access"
      ]
     },
     {
      "rank": 3,
      "name": "Long Walk",
      "grants": "Move through any space where death has been substantial and recent — major battlefields, plague grounds, sealed necropolises, active collapse sites — as if they were open road. Bring a small group. Move through quarantine cordons and siege-lines that are held by mortal hands, not wards.",
-     "cannot": "Substantial and recent. A meadow where someone died a hundred years ago is not a Grey Road. A magically-sealed door with no death behind it is not a Grey Road. The Advance moves in fights; the Grey Road moves through places of death. The two do not substitute for each other.",
+     "cannot": "⛔ SUBSTANTIAL AND RECENT. A meadow where someone died a century ago is not a Grey Road; a sealed door with no death behind it is not a Grey Road. ⚠️ The Advance moves in fights; the Grey Road moves through places of death. The two do not substitute for each other.",
      "functions": [
       "move",
       "resist",
       "open"
      ],
-     "gains": "deepen",
+     "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Long Walk",
      "gainAxes": [
-      "scope"
+      "scope",
+      "targets"
      ]
     }
    ],
@@ -1862,7 +1863,8 @@
    "shape": "reposition",
    "operativeAxis": [
     "access",
-    "targets"
+    "targets",
+    "reach"
    ],
    "mechanic": {
     "range": 4,
@@ -1901,20 +1903,25 @@
      "class": "soft"
     },
     {
-     "text": "A WARD THAT HAS NEVER HELD A DEATH CANNOT BE OPENED THIS WAY",
+     "text": "⛔ A WARD, DOOR OR TRAP THAT HAS NEVER HELD A DEATH CANNOT BE OPENED THIS WAY — the dead have to have gone first",
      "class": "hard"
     },
     {
-     "text": "SUBSTANTIAL AND RECENT — a meadow where someone died a hundred years ago is just a meadow",
+     "text": "⛔ SUBSTANTIAL AND RECENT — a meadow where someone died a hundred years ago is just a meadow, and a corridor that has killed twice in ten years is nearly one",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT DOES NOT HIDE YOU. You are walking, visibly, through the place that kills people, and everyone watching can see that it is not killing you",
      "class": "hard"
     }
    ],
-   "plainly": "A explore/survive/stealth action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours. Range is 4. Ranks: rank 2 extends targets+access; rank 3 extends access. Limit: a Ward That Has Never Held A Death Cannot BE Opened This Way.",
+   "plainly": "An explore/survive/stealth action. Walk through places that kill — trapped corridors, killing fields, plague wards, collapse sites — at a normal pace, unharmed, IF ENOUGH PEOPLE HAVE DIED THERE TO GIVE THE PLACE A SHAPE. Rated 4 of 10, range 4, about 3 hours. r1 you go alone; r2 brings one person and opens death-crossed thresholds; r3 brings a small group through battlefields, necropolises, cordons and siege-lines. ⛔ It does not hide you and it does not disarm anything.",
    "_nameWas": "The Grey Road",
    "_idWas": "the_grey_road",
    "_wardTypes": "⛔ SNG-512. Walking where others cannot answers the ground itself.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_reviewed_20260824": "⛔ ERIK 2026-08-24: 'this skill is not just a travel skill — it is INFILTRATION. Through TRAPS AND KILLING FIELDS.' ⚠️ THE CRAFT ALREADY DID THIS AND NEVER SAID SO. Its own hard bound — a ward that has never held a death cannot be opened — is an INFILTRATION rule: a trap that has KILLED is a road; a trap that has never killed is just a trap. ⛔ Description, hints, notFor, plainly and r1/r2 now lead with trapped corridors, killing fields and warded approaches. ⚠️ AND THE NEW HARD BOUND IS THE INTERESTING HALF: IT DOES NOT HIDE YOU. You walk visibly through the thing that kills people while it fails to kill you, and everyone watching sees it — which makes it infiltration that costs you secrecy, not stealth. ⛔ FIXED: r2 declared `damage` on a craft with no dice and harmRung none at every rank; r3 declared `deepen` while adding scope; `plainly` was machine-generated with title-cased noise and named axes the ranks do not declare."
   },
   {
    "id": "kept_breath",

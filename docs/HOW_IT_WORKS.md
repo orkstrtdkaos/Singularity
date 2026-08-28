@@ -6,7 +6,12 @@
 ⚠️ **This file is maintained by Aevi and CCode jointly and updated as things change.** The specs and replies
 in `po/` are working papers; this is the answer.
 
-**Last verified: 2026-08-28 · v1.9.246 · 378 crafts.**
+**Last verified: 2026-08-28 · v1.9.247 · 378 crafts.**
+
+⛔ **THIS FILE IS EXECUTED.** `node tests/how_it_works.mjs` asserts every BUILT claim below against the live
+engine and asserts every PROPOSED one is still unbuilt. ⚠️ **A claim that stops being true, or a proposal
+that quietly ships, turns the suite red** — so this file cannot drift from the game without someone being
+told. It runs in `scripts/run_tests.mjs`.
 
 ---
 

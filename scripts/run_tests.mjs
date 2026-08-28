@@ -32,6 +32,11 @@ const SUITES = [
   ["craft_crit", "node", ["tests/craft_crit.mjs"]],
   ["world_drive_audit", "node", ["tests/world_drive_audit.mjs"]],
   ["wiring_audit", "node", ["tests/wiring_audit.mjs"]],
+  // ⛔ CCODE-285 — docs/HOW_IT_WORKS.md EXECUTED. The doc states what the game does in present tense and
+  // marks every claim BUILT or PROPOSED, which makes it a specification. This asserts the BUILT claims
+  // against the live engine AND asserts the PROPOSED ones are still unbuilt — a two-way ratchet, because a
+  // feature shipping without the doc moving is the same silent drift as a field authored and never read.
+  ["how_it_works", "node", ["tests/how_it_works.mjs"]],
   ["engine_map --check", "node", ["scripts/engine_map.mjs", "--check"]],
 ];
 

@@ -144,7 +144,13 @@ export function resolveRetrieval(entity, outcome, { currentDay = null, changed =
  *  ⛔ SEALED STAYS CLOSED TO SURGE. Acceptance 3 says every rank, and a surge is not a rank — a top rung you
  *  can reach by trying harder is not a top rung. */
 export function reachOf(rank, intensity = "standard") {
-  const base = Math.max(0, (Number(rank) || 1) - 1);          // r1→0, r2→1, r3→2
+  // ⛔ CCODE-285 — CLAMPED ON BOTH PATHS. The SURGE path stopped at 2; the BASE path did not, so `reachOf(4)`
+  // answered 3 — THE SEALED RUNG — and `reachOf(9)` answered 8. The paragraph directly above says "acceptance
+  // 3 says EVERY RANK", and `docs/HOW_IT_WORKS.md` §6 says the sealed rung is reachable by nothing at any
+  // rank. Both were true only because ranks happen to stop at 3 today.
+  // ⚠️ A LATENT BREACH IS STILL A BREACH: a braid, a stacked surge, or any future rank-4 craft would have
+  // reached past the end of the ladder, and nothing anywhere would have said so. Found by executing the doc.
+  const base = Math.min(2, Math.max(0, (Number(rank) || 1) - 1));   // r1→0, r2→1, r3→2, r4+→2
   return intensity === "surge" ? Math.min(2, base + 1) : base;
 }
 

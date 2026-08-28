@@ -959,7 +959,7 @@
 ## 26. Death-Ward  ·  `death_ward`
 
 **L3 · e6 · ashwarden · metaphysical · shape `guard` · harm `none`**  
-**status:** crit · ward:decay/judgement/appetite  
+**status:** crit · ward:decay/judgement/appetite/vitality  
 **ability functions:** ward, resist, shield
 
 > Ward against deaths that should not happen: curse-deaths, unnatural endings, the restless-dead reaching the living. Death-Ward is not about physical hardship — for that, use The Kept Breath. This is protection against death as a working, a curse, or a supernatural force.
@@ -970,7 +970,7 @@
 
 **functions:** ward · **gainAxes:** ⛔ NONE · **gains:** broaden · **harm:** none
 
-**grants:** ⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against decay, judgement and appetite — the ending-hastened, the curse, and the hungry dead.
+**grants:** ⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against decay, judgement, appetite and vitality — the ending-hastened, the curse, the hungry dead, and anything that would draw the life out of them.
 
 **cannot:** It wards the threshold, not the outcome, and a strong enough wrongness strains it. ⚠️ It does nothing against a sword, a fall or a fever — that is The Kept Breath. And it stands where you laid it; it does not travel.
 
@@ -997,7 +997,7 @@
 ## 27. Draw Down  ·  `draw_down`
 
 **L3 · e6 · ashwarden · metaphysical · shape `damage` · harm `lethal`**  
-**status:** crit · gated  
+**status:** crit · dmg:vitality · gated  
 **ability functions:** heal, strike
 
 > You take the life out of a thing and put it into yourself. The classic bargain of the death-craft: the necromancer sustains himself by ending. It works. It is also exactly what people are afraid of when they are afraid of you.

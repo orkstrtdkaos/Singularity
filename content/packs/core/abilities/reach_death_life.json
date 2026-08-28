@@ -775,7 +775,7 @@
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [],
-     "grants": "⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against decay, judgement and appetite — the ending-hastened, the curse, and the hungry dead.",
+     "grants": "⛔ LAY THE SIGN OVER A PLACE. What should stay dead cannot rise inside it or reach into it, and everyone within takes SOAK 5 against decay, judgement, appetite and vitality — the ending-hastened, the curse, the hungry dead, and anything that would draw the life out of them.",
      "cannot": "It wards the threshold, not the outcome, and a strong enough wrongness strains it. ⚠️ It does nothing against a sword, a fall or a fever — that is The Kept Breath. And it stands where you laid it; it does not travel."
     },
     {
@@ -832,11 +832,12 @@
     "soakRank": 3,
     "duration": 6,
     "targets": 1,
-    "note": "T-III guard. ⛔ IT WARDS A KIND OF HARM, NOT IMPACT — soak 5 at soakRank 3 applies ONLY against `decay`, `judgement` and `appetite`, and not at all against a sword. ⚠️ decay is the hastened ending and its own wardedBy is 'a tended vigil, consecrated ground' — Ashwarden work verbatim; judgement is the death-curse; appetite is the restless dead reaching the living, which the description names outright. ⛔ ERIK 2026-08-23 ON `judgement`: \"those pesky Seraphs like to judge people to death.\" The ward answers the Seraphic signature deliberately — it is the one thing in the game that kills you by being RIGHT about you, and an Ashwarden vigil standing against it is the tradition refusing an ending it did not agree to, regardless of whether the ending is deserved.",
+    "note": "T-III guard. ⛔ IT WARDS A KIND OF HARM, NOT IMPACT — soak 5 at soakRank 3 applies ONLY against `decay`, `judgement` and `appetite`, and not at all against a sword. ⚠️ decay is the hastened ending and its own wardedBy is 'a tended vigil, consecrated ground' — Ashwarden work verbatim; judgement is the death-curse; appetite is the restless dead reaching the living, which the description names outright. ⛔ ERIK 2026-08-23 ON `judgement`: \"those pesky Seraphs like to judge people to death.\" The ward answers the Seraphic signature deliberately — it is the one thing in the game that kills you by being RIGHT about you, and an Ashwarden vigil standing against it is the tradition refusing an ending it did not agree to, regardless of whether the ending is deserved. ⛔ `vitality` ADDED 2026-08-24 with the type itself. A ward against unnatural takings must answer the taking of LIFE — and Death-Ward is the tradition's answer to its own Draw Down, exactly as it already answers Necrotic Strike's decay. ⚠️ IT IS ALSO THE ONLY ANSWER IN THE CORPUS: `consumed_wound` (abyssal) carries the same type and nothing else wards it, which the which-check caught the moment the type was added.",
     "wardTypes": [
      "decay",
      "judgement",
-     "appetite"
+     "appetite",
+     "vitality"
     ],
     "crit": {
      "success": "The sign holds against more than it was laid for — whatever was reaching stops reaching, and does not try that door again.",
@@ -1280,11 +1281,12 @@
     "marginFloorPer": 0.02,
     "range": 1,
     "targets": 1,
-    "note": "T-III, lethal. The damage it deals RESTORES the wielder — 'their wound is your mending.' ⛔ DAMAGE TYPE IS DELIBERATELY UNSET AND THAT IS A GAP, NOT AN OVERSIGHT. Erik 2026-08-24: 'this is VAMPIRIC LIFE STEALING, not quite decay — closer to INVERSE LIFE DAMAGE. We might not have a damage type appropriate for this yet.' ⚠️ CHECKED ALL THIRTEEN: `decay` is AN ENDING HASTENED, `living` is GROWTH TURNED AGAINST. Neither is LIFE TAKEN OUT AND MOVED INTO SOMEONE ELSE. The closest structural match is `temporal` — 'duration taken or spent' — which is the same shape one axis over. ⛔ SEE po/SPEC_vitality_damage_type.md; DO NOT TYPE THIS CRAFT UNTIL THAT IS RULED.",
+    "note": "T-III, lethal. The damage it deals RESTORES the wielder — 'their wound is your mending.' ⛔ `damageType: vitality` — LIFE MOVED, NOT LIFE ENDED, added to the vocabulary on Erik's ruling 2026-08-24: 'heal is life added, the other side is harm; this skill steals vitality by TRANSFORMING HARM ON ONE INTO HEALING FOR ANOTHER.' ⚠️ NOT `decay`: hastening an ending is not taking something. I nearly typed it decay because Wither and Grey Hand both carry it — pattern-matching inside the tradition instead of reading the definition. ⛔ WARDED BY a full vessel, a thing with nothing left to give, or being already dead. AGAINST AN UNDEAD IT IS EMPTY — a raised body runs on the absence of life and there is nothing to take.",
     "crit": {
      "success": "More comes across than you reached for, and it arrives warm and it does not feel like theft. ⚠️ That is the danger — the craft is easiest exactly when it should be hardest.",
      "failure": "The life goes out of it and none of it reaches you. You have ended something for nothing, and it is still ending while you stand there."
-    }
+    },
+    "damageType": "vitality"
    },
    "rankDeltas": [
     {

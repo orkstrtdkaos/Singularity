@@ -18949,7 +18949,10 @@ await (async () => {
     // ⛔ EACH POLICY NEEDS A DIFFERENT QUALITY OF LOOK, AND THEY RANK BY HOW CRUEL THEY ARE. That fell out of
     // the design rather than being imposed on it, and it is the part I would defend hardest.
     check("CCODE-255: a foe always knows who is HURTING it — being hit needs no read",
-      TG.POLICY_NEEDS.threat === 0 && TG.POLICY_NEEDS.blind === 0);
+      // ⛔ CCODE-286: `blind` → `mindless` on Erik’s ruling ("blind is CAN’T SEE"). The word named this
+      // policy AND the can’t-see receipt asserted further down at line ~19045, which correctly keeps it.
+      TG.POLICY_NEEDS.threat === 0 && TG.POLICY_NEEDS.mindless === 0
+      && TG.canonPolicy("blind") === "mindless");
     check("CCODE-255: judging who is WEAKEST needs a real look; finding the HEALER needs a better one",
       TG.POLICY_NEEDS.weakest === 1 && TG.POLICY_NEEDS.healer === 2
       && TG.POLICY_NEEDS.healer > TG.POLICY_NEEDS.weakest);

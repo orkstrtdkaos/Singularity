@@ -301,17 +301,27 @@ console.log("\n── §8 · how a foe chooses ──");
   check("§8: ⛔ a threat-picker CAN BE BAITED — a taunt moves it",
     pickId(T.chooseTarget(allies, { policy: "threat", knowledge: know, taunt: { targetId: "squishy" }, rng: () => 0 })) === "squishy");
 
-  // ⛔ THE ONE PLACE THE DOC AND THE ENGINE DISAGREE, AND BOTH HAVE A REASON.
-  // DOC §8: "A thing with no mind is `blind` and cannot be drawn."
-  // ENGINE (targeting.js:113): "A TAUNT TAKES THE CHOICE AWAY ENTIRELY, and it outranks concealment on
-  //   purpose: you cannot demand something's attention and also be hidden from it."
-  // ⚠️ The taunt short-circuits BEFORE the policy branch, so a blind foe IS drawn. Neither is obviously
-  // wrong — Erik has said provoke should reach things without a line — but they cannot both be the rule.
-  const blindTaunt = T.chooseTarget(allies, { policy: "blind", knowledge: know, taunt: { targetId: "squishy" }, rng: () => 0 });
-  check("§8: ⛔ DOC vs ENGINE — a BLIND foe cannot be drawn by a taunt",
-    pickId(blindTaunt) !== "squishy",
-    `engine drew it to '${pickId(blindTaunt)}' via policy '${blindTaunt?.policy}'. `
-    + `Either targeting.js must check mindlessness before the taunt, or §8 must stop claiming it. NEEDS A RULING.`);
+  // ⛔ RULED 2026-08-28. This was the one red: the doc said a mindless foe "cannot be drawn", the engine
+  // let a taunt reach it. ERIK: *"you can taunt from the darkness"* — THE ENGINE WAS RIGHT, and the doc
+  // has been corrected. ⚠️ Having no preference is not the same as being unreachable.
+  const mindlessTaunt = T.chooseTarget(allies, { policy: "mindless", knowledge: know, taunt: { targetId: "squishy" }, rng: () => 0 });
+  check("§8: ⛔ a taunt reaches even a MINDLESS thing — you can taunt from the darkness",
+    pickId(mindlessTaunt) === "squishy" && mindlessTaunt?.policy === "taunted", JSON.stringify(mindlessTaunt));
+
+  // ⛔ AND THE RENAME ERIK OPENED: "blind is CAN'T SEE." The word named two things in one function — this
+  // policy, and the receipt for a foe that genuinely cannot find anyone. ⚠️ THE ALIAS IS THE SAFETY: a
+  // rename that dropped `blind` would fall through to `threat` and hand a mindless thing a PREFERENCE.
+  check("§8: the no-preference policy is now `mindless`, not `blind`",
+    "mindless" in T.TARGET_POLICIES && !("blind" in T.TARGET_POLICIES), Object.keys(T.TARGET_POLICIES).join(","));
+  check("§8: ⛔ an authored or saved `blind` still RESOLVES — aliased, never dropped",
+    T.canonPolicy("blind") === "mindless"
+    && T.chooseTarget(allies, { policy: "blind", knowledge: know, rng: () => 0 })?.policy === "mindless");
+  check("§8: …and `blind` is reserved for the can't-see receipt, where every ally is hidden",
+    /policy: "blind", blindly: true/.test(rd("engine/targeting.js")));
+  check("§8: no content authors the retired policy name",
+    !/"targetPolicy"\s*:\s*"blind"/.test(readdirSync(join(root, "content/packs/core/encounters"))
+      .map(f => rd(`content/packs/core/encounters/${f}`)).join("\n")));
+  check("§8: the doc records the rename and its reason", /blind is CAN'T SEE|CAN’T SEE/.test(doc));
 
   // "The downed are not targets."
   const withDown = [...allies, { id: "corpse", name: "Corpse", threat: 99, downed: true }];
@@ -320,6 +330,118 @@ console.log("\n── §8 · how a foe chooses ──");
   // ⚠️ AND A TAUNT CANNOT RESURRECT ONE AS A TARGET EITHER — the downed filter runs first, which is right.
   check("§8: …and a taunt cannot make a downed ally a target",
     pickId(T.chooseTarget(withDown, { policy: "threat", knowledge: know, taunt: { targetId: "corpse" }, rng: () => 0 })) !== "corpse");
+}
+
+/* ══════════ §5 — CONDITIONS DEGRADE ══════════ */
+console.log("\n── §5 · a failed resist degrades rather than negating ──");
+{
+  // ⛔ AEVI NAMED THE PATH so I did not have to guess a fifth time: `resolveImposition` -> `impositionOf`.
+  const { resolveImposition, IMPOSABLE } = await import("../engine/craftmechanics.js");
+  const craft = { id: "probe", imposes: { condition: "unconscious", resist: "physical", degradesTo: "action_loss", targets: 3 } };
+  const cfg = { imposition: { base: 10, perResist: 1, perRank: 5 } };
+  const landed = resolveImposition(craft, { rank: 3, cfg, margin: 99, targetResist: 0 });
+  const resisted = resolveImposition(craft, { rank: 1, cfg, margin: 0, targetResist: 20 });
+  check("§5: a landed imposition delivers what the craft named",
+    landed.ok && landed.condition === "unconscious" && landed.resisted === false, JSON.stringify(landed));
+  // ⛔ THE DOC'S CLAIM, EXACTLY: "You do not shrug it off; you take the lesser version."
+  check("§5: ⛔ a RESISTED unconscious LANDS as action_loss — it degrades, it does not evaporate",
+    resisted.ok === true && resisted.condition === "action_loss"
+    && resisted.degradedTo === "unconscious" && resisted.resisted === true, JSON.stringify(resisted));
+  // ⚠️ AND THE VOCABULARY IS CLOSED — a degradesTo outside IMPOSABLE must FAIL rather than impose a word
+  // nobody implements. That is the enum-vocab seam, restated for conditions.
+  const bogus = resolveImposition({ id: "p", imposes: { condition: "unconscious", degradesTo: "vibes" } },
+    { rank: 1, cfg, margin: 0, targetResist: 20 });
+  check("§5: …and a degradesTo outside the imposable set refuses rather than inventing a condition",
+    bogus.ok === false && bogus.condition === null, JSON.stringify(bogus));
+  for (const c of ["staggered", "action_loss", "unconscious", "incapacitated"])
+    check(`§5: the doc names the condition '${c}'`, new RegExp(`\`${c}\``).test(doc));
+  check("§5: the doc names the function that does it", /resolveImposition/.test(doc));
+}
+
+/* ══════════ §9 — DERIVED VS AUTHORED ══════════ */
+console.log("\n── §9 · what is derived, and what is AUTHORED and must not be deleted ──");
+{
+  // ⛔ THIS GATE CUTS BOTH WAYS AND THE SECOND EDGE IS THE IMPORTANT ONE. §9 is headed "a stored copy of a
+  // derived value is the failure this project finds most often" — which is an INSTRUCTION TO DELETE stored
+  // copies. So a value wrongly listed there is a deletion order against correct content.
+  const ps = rj("content/packs/core/rules/power_sources.json");
+  const byTrad = Object.keys(ps.byTradition || {}).filter(k => !k.startsWith("_"));
+  const dtByTrad = Object.keys(cm.damageTypeByTradition || {}).filter(k => !k.startsWith("_") && k !== "note");
+
+  // ⚠️ AUTHORED, DELIBERATELY — and `craftSource` READS them. Not derived, and not to be swept.
+  check("§9: ⛔ tradition power-source mixes are AUTHORED and non-empty — do NOT delete them",
+    byTrad.length >= 20, `${byTrad.length} authored rows in power_sources.byTradition`);
+  check("§9: …and the resolution path reads them",
+    /powerSources\?\.byTradition/.test(rd("engine/substrate.js")));
+  check("§9: ⛔ tradition damage mixes are AUTHORED too, and skill_battle reads them",
+    dtByTrad.length >= 10 && /damageTypeByTradition/.test(rd("engine/skill_battle.js")),
+    `${dtByTrad.length} authored rows`);
+  // ⚠️ AND THE AUTHORED/UNAUTHORED DISTINCTION IS ITSELF LOAD-BEARING — `mix: null` must mean UNAUTHORED,
+  // never "the mean is pure". An absent value doing double duty is the trap substrate.js calls out by name.
+  check("§9: an unauthored mix is FLAGGED, so absence never poses as a value",
+    Object.values(ps.byTradition).some(r => r && r._mixUnauthored));
+
+  // ✅ GENUINELY DERIVED, NEVER STORED — the two the doc is right about.
+  const { craftSource } = await import("../engine/substrate.js");
+  const foot = rj("content/packs/core/rules/foothills.json");
+  const footIds = Object.keys(foot.foothills || {}).filter(k => !k.startsWith("_"));
+  check("§9: there are foothills to derive from (non-vacuity)", footIds.length > 0, `${footIds.length}`);
+  const fid = footIds[0];
+  const cs = craftSource({ tradition: fid }, {}, null, ps, foot);
+  check("§9: ✅ a foothill's source is COMPUTED from its parents, and says so",
+    cs?.via === "foothill" && cs?.mixAuthored === false && !!cs?.parents, JSON.stringify(cs).slice(0, 140));
+  check("§9: ⛔ …and no foothill has a stored row in byTradition — that copy is the failure",
+    footIds.every(id => !byTrad.includes(id)),
+    footIds.filter(id => byTrad.includes(id)).join(", "));
+  const { summonSheetFor } = await import("../engine/npcsheet.js");
+  const plain = summonSheetFor({ id: "s", summon: { tierGap: 0 } }, 10, { rank: 1, degree: "success" });
+  const crit = summonSheetFor({ id: "s", summon: { tierGap: 0 } }, 10, { rank: 1, degree: "crit" });
+  check("§9: ✅ a summoned sheet derives from the caster's level", plain != null);
+  check("§9: ⛔ …and a CRIT raises something stronger than the craft promises",
+    JSON.stringify(crit) !== JSON.stringify(plain), "crit and success produced identical sheets");
+}
+
+/* ══════════ §11 — THE TESTING CONTRACT ══════════ */
+console.log("\n── §11 · the testing contract — how we are allowed to claim a defect ──");
+{
+  // ⛔ AEVI OFFERED ME THIS SECTION AND I AM TAKING IT, because both rules are mine and both were learned
+  // the expensive way in one afternoon.
+  //
+  // RULE 1 — A TOOL THAT REPORTS DEFECTS HAS A SELF-TEST, AND THE SELF-TEST RUNS FIRST.
+  //   Five of this harness's first-draft failures were the harness's own, and each read exactly like an
+  //   engine defect. Aevi's craft-lint produced 1,198 findings of which 663 were hers. A checker with no
+  //   floor cannot tell you whether a green run means "clean" or "broken".
+  // RULE 2 — A REGEX ASKS WHETHER A WORD APPEARS; THE QUESTION IS WHETHER A NUMBER CHANGES ANYTHING.
+  //   Two gap probes here reported still-open gaps as FIXED because `bolster` is a SHAPE and a VERB.
+  //   Behavioural probes (soak 2 vs soak 20) cannot make that mistake.
+  const HARNESSES = ["tests/how_it_works.mjs", "scripts/safe_delete.mjs"];
+  for (const h of HARNESSES) {
+    const src = rd(h);
+    check(`§11: '${h}' has a self-test or a stated floor`,
+      /selfTest|self-test|non-vacuity|NON-VACUITY/.test(src), "a defect-reporting tool with no floor");
+  }
+  // ⚠️ AND THIS FILE MUST NOT BECOME VACUOUS. If the assertion count collapses, someone has commented out a
+  // section and the suite will read green while testing nothing — the failure mode this project hits most.
+  check("§11: this harness makes a substantial number of assertions (non-vacuity floor)",
+    pass > 90, `only ${pass} so far`);
+  check("§11: the doc carries the testing contract so it binds both authors", /## 11/.test(doc) || /TESTING CONTRACT/i.test(doc));
+}
+
+/* ══════════ §0b — THE LOG IS MANDATORY ══════════ */
+console.log("\n── §0b · Erik's log requirement, enforced ──");
+{
+  // ⛔ ERIK 2026-08-28: "every spec, every authoring, every wiring, every update is logged as to the INTENT,
+  // the details of HOW IT IS EXECUTED AND TESTED, and WHAT IMPACTS IT AND WHAT IT IMPACTS."
+  // ⚠️ A REQUIREMENT NOBODY CHECKS IS A REQUIREMENT THAT LAPSES IN A WEEK. This makes it mechanical.
+  const hasLog = /##\s*0\s*·\s*THE LOG/i.test(doc);
+  check("§0b: the log section exists", hasLog);
+  const rows = doc.split("\n").filter(l => /^\|\s*\d\d-\d\d\s*\|/.test(l));
+  check("§0b: the log has entries (non-vacuity)", rows.length >= 5, `${rows.length} rows`);
+  check("§0b: every log row carries all five columns — date, change, intent, tested by, impacts",
+    rows.every(r => r.split("|").filter(c => c.trim()).length >= 5),
+    rows.filter(r => r.split("|").filter(c => c.trim()).length < 5).slice(0, 2).join(" ⏎ "));
+  // ⛔ AND THE STRONGEST FORM: a change that ships without a log line is what the rule exists to stop.
+  check("§0b: the log names the reachOf clamp shipped for it", /reachOf/.test(doc));
 }
 
 /* ══════════ §10 — THE KNOWN GAPS, ASSERTED AS OPEN ══════════ */

@@ -29,8 +29,15 @@ export const TARGET_POLICIES = {
   weakest: (allies) => allies.slice().sort((a, b) => resistOf(a) - resistOf(b))[0] || null,
   /** the one keeping the others up — right for something that has fought a party before */
   healer: (allies) => allies.find(a => (a.contributions || []).includes("RESTORE")) || null,
-  /** no pattern at all — a beast, a rockfall, something without intent */
-  blind: (allies, { rng = Math.random } = {}) => allies[Math.floor(rng() * allies.length)] || null,
+  /** ⛔ CCODE-286 — RENAMED FROM `blind` ON ERIK'S RULING: *"blind is CAN'T SEE."* The word was doing two
+   *  jobs inside this one function — this policy (no preference) and the everyone-is-hidden receipt below,
+   *  which genuinely means the foe cannot find you. ⚠️ TWO MEANINGS, ONE WORD, A HUNDRED LINES APART.
+   *  `mindless` names the REASON there is no preference instead of describing an eye that does not work.
+   *
+   *  ⚠️ AND ERIK NARROWED IT FURTHER: *"a rockfall isn't a foe, it's an obstacle or a hazard."* A targeting
+   *  policy is for things that CHOOSE. This is the floor for a thing that ACTS WITHOUT CHOOSING — a set
+   *  body, a swarm — not for scenery, which needs no policy at all. */
+  mindless: (allies, { rng = Math.random } = {}) => allies[Math.floor(rng() * allies.length)] || null,
 };
 
 function resistOf(a) {
@@ -61,7 +68,13 @@ function scoreThreat(a) {
  *  the foe stupider about WHOM it targets. A blinded predator stops finding your healer and starts swinging
  *  at whoever is hitting it — which is the tank. **That is the whole point of a tank, and it was previously
  *  impossible to achieve.** */
-export const POLICY_NEEDS = { threat: 0, blind: 0, weakest: 1, healer: 2, only: 0 };
+export const POLICY_NEEDS = { threat: 0, mindless: 0, weakest: 1, healer: 2, only: 0 };
+
+/** ⛔ OLD NAMES THAT STILL RESOLVE. One encounter authors `blind` and old saves may carry it; a rename that
+ *  silently dropped it would fall through to `threat` and hand a mindless thing a PREFERENCE it must not
+ *  have — the failure being renamed away, re-committed by the rename. ⚠️ ALIASED, NOT DELETED. */
+export const POLICY_ALIASES = { blind: "mindless" };
+export const canonPolicy = (p) => POLICY_ALIASES[String(p || "")] || p || "threat";
 
 /** How well the foe reads your side this round. `tier` is theirs, earned the same way yours is. */
 export function foeKnowledge(tier = 0, { cfg = {} } = {}) {
@@ -137,6 +150,9 @@ export function chooseTarget(allies = [], { policy = "threat", rng = Math.random
 
   // ⛔ CCODE-255 — CAN IT ACTUALLY SEE WELL ENOUGH TO DO WHAT IT WANTS? `knowledge` absent means yes, so
   // every existing caller and gate behaves exactly as before; a caller that supplies it opts into the read.
+  // ⛔ CCODE-286: canonicalise first, so an authored or saved `blind` still resolves to `mindless` rather
+  // than missing the table and silently becoming `threat`.
+  policy = canonPolicy(policy);
   let used = policy, blinded = null;
   if (knowledge) {
     const need = num(POLICY_NEEDS[policy], 0);

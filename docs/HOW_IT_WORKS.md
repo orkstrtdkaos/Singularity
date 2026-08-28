@@ -24,8 +24,14 @@ working papers; **this is the answer.**
 | 08-28 | §8 blind/taunt → **RULED** | Erik: *"you can taunt from the darkness"*; the engine was right | `how_it_works.mjs` §8 — doc corrected, assertion should now pass | `targeting.js` unchanged |
 | 08-28 | §8 **a hazard is not a foe** | Erik: *"a rockfall isn't a foe, it's an obstacle or a hazard"* | — | ⚠️ targeting policy applies to things that CHOOSE; hazards need no policy |
 | 08-28 | ⛔ **`blind` policy misnamed — OPEN** | Erik: *"blind is CAN'T SEE"*; the policy is a random picker | ⚠️ needs a rename, not a behaviour change | `targeting.js` `POLICY_NEEDS`, `set_hand_labour` and any foe authored `blind` |
+| 08-28 | §9 corrected — two "derived" values are **AUTHORED** | §9 is an instruction to DELETE; a value wrongly listed there is a deletion order against correct content | `how_it_works.mjs` §9, both directions | ⛔ `power_sources.byTradition` (24 rows) and `damageTypeByTradition` (13) are now protected, not condemned |
+| 08-28 | §5 degrade asserted | Aevi named `resolveImposition`; a named path with no test is still untested | `how_it_works.mjs` §5 — resisted `unconscious` lands as `action_loss` | closed vocabulary: a `degradesTo` outside IMPOSABLE now refuses |
+| 08-28 | §11 testing contract added | two rules learned the expensive way in one afternoon | `how_it_works.mjs` §11 asserts every defect-reporting tool has a floor | binds both authors; `safe_delete.mjs` and this harness |
+| 08-28 | §0b log made mechanical | a requirement nobody checks lapses in a week | `how_it_works.mjs` §0b — five columns, non-empty, names its change | ⚠️ Erik's 08-28 logging rule now has teeth |
+| 08-28 | §8 body corrected to match the ruling | the log said "doc corrected" and the sentence was still there — exactly the drift this file is meant to catch | `how_it_works.mjs` §8, now green | ⚠️ a logged change that was never made |
+| 08-28 | ⛔ `blind` policy → **`mindless`** | Erik: *"blind is CAN’T SEE"*; the word named this policy AND the can’t-see receipt, in one function | `how_it_works.mjs` §8 × 5, plus smoke CCODE-255 | `targeting.js`, `sunk_assay_intake.json` migrated, `POLICY_ALIASES` keeps old saves working |
 
-**Last verified: 2026-08-28 · v1.9.247 · 378 crafts.**
+**Last verified: 2026-08-28 · v1.9.248 · 378 crafts.**
 
 ---
 
@@ -190,22 +196,52 @@ eight bond bands building it a staff to inhabit.
 hurting it can be BAITED, and baiting is a decision.** A foe that always goes for the weakest can only be
 tanked.
 
-**`weakest`, `healer` and `blind` are characterisation** — a thing that goes for the healer is saying
-something about itself. A thing with no mind is `blind` and cannot be drawn.
+**`weakest`, `healer` and `mindless` are characterisation** — a thing that goes for the healer is saying
+something about itself.
 
-**The downed are not targets.**
+⛔ **A TAUNT REACHES ANYTHING THAT ACTS.** Erik, 2026-08-28: *"you can taunt from the darkness."* Making
+yourself impossible to ignore outranks concealment **and** outranks the policy — you cannot demand
+something's attention and also be hidden from it. ⚠️ **Even a `mindless` thing turns**: having no preference
+is not the same as being unreachable.
+
+⚠️ **AND A HAZARD IS NOT A FOE.** Erik: *"a rockfall isn't a foe, it's an obstacle or a hazard."* A targeting
+policy is for things that CHOOSE; scenery needs no policy at all.
+
+⛔ **`mindless` WAS CALLED `blind` UNTIL 2026-08-28**, and the rename is Erik's: *"blind is CAN'T SEE."* The
+word was doing two jobs in one function — this policy, and the receipt for a foe that genuinely cannot find
+you. **`blind` is now reserved for that second meaning**, and still resolves as an alias so the one authored
+encounter and any old save keep working rather than silently falling back to `threat`.
+
+**The downed are not targets** — and a taunt cannot make one a target either.
 
 ---
 
 ## 9 · WHAT IS AUTHORED VS WHAT IS DERIVED
 
-⛔ **A stored copy of a derived value is the failure this project finds most often.** Derived, never stored:
+⛔ **A stored copy of a derived value is the failure this project finds most often** — so this list is an
+instruction to delete. ⚠️ **WHICH MEANS A VALUE WRONGLY LISTED HERE IS A DELETION ORDER AGAINST CORRECT
+CONTENT, and two were.** Both halves are now stated, and both are asserted by `how_it_works.mjs` §9.
 
-- **tradition power-source mixes** — computed from what the crafts actually carry
-- **tradition damage mixes** — same
-- **foothill parentage** — computed from parents, never written down
+### ✅ DERIVED, NEVER STORED
+
+- **foothill parentage** — computed from the parents' primaries in `craftSource`, and **no foothill has a
+  row in `byTradition`**. A tie resolves to `combination` rather than a coin flip.
 - **summoned creature sheets** — from the caster's level plus the craft's `tierGap`, **and the roll: a crit
   raises something stronger than the craft promises**
+
+### ⛔ AUTHORED ON PURPOSE — DO NOT SWEEP THESE
+
+- **tradition power-source mixes** — ⚠️ **24 authored rows in `power_sources.byTradition`, with Erik's
+  reasons**, read by `craftSource`. `perAbilityOverrides` is empty **by design**: a tradition-level default
+  plus explicit deviations is far less content than 285 authored fields, and a deviation is the interesting
+  fact. ⛔ **An unauthored mix is FLAGGED `_mixUnauthored`, so `mix: null` means UNAUTHORED and never
+  "the mean is pure"** — an absent value doing double duty is the trap.
+- **tradition damage mixes** — ⚠️ **13 authored rows in `craft_mechanics.damageTypeByTradition`**, read by
+  `skill_battle`. The kind a tradition's harm is **when the craft does not say for itself**.
+
+⚠️ **The distinction is direction.** A tradition's mix is **authored and inherited downward** to its crafts;
+a foothill's is **computed upward** from its parents, because a foothill is a place of access, not an
+ancestry.
 
 ---
 
@@ -219,3 +255,39 @@ something about itself. A thing with no mind is `blind` and cannot be drawn.
 | ⛔ **`rankDeltas[].axis` (495) has no reader; `mechanic.axis` (0) has one** | a reader with no writer, and a writer with no reader |
 | ⚠️ **the map layer** | 18 of 135 locations have authored layouts and the renderer draws circles instead |
 | ⚠️ **method is not recorded anywhere** | *psionics*, *song*, *blade* — a real layer with no field |
+
+**Each gap above is asserted OPEN by `how_it_works.mjs`.** ⛔ **Closing one turns its check RED, which is
+the signal to edit this table.** A gap that quietly closes is a doc that quietly rots.
+
+---
+
+## 11 · THE TESTING CONTRACT
+
+**How we are allowed to claim a defect.** ⚠️ **Both rules were learned in one afternoon and both cost real
+time, so they are rules now rather than habits.**
+
+### ⛔ RULE 1 — A TOOL THAT REPORTS DEFECTS HAS A SELF-TEST, AND IT RUNS FIRST
+
+**Five of `how_it_works.mjs`'s first-draft failures were the harness's own, and every one read exactly like
+an engine defect.** ⛔ **One was a breath from reporting *"the entire rank-reach cost mechanic is inert"* —
+about a system that works and that Erik ruled on personally.** The cause was passing `craft_mechanics.json`
+where the game passes `rules.energy`: **a harness that builds its own config tests its own config.**
+
+**Aevi's craft-lint produced 1,198 findings of which 663 were hers, found by *running* it rather than
+testing it.** ⚠️ **A checker with no floor cannot tell you whether a green run means clean or broken.**
+
+### ⛔ RULE 2 — A REGEX ASKS WHETHER A WORD APPEARS; THE QUESTION IS WHETHER A NUMBER CHANGES ANYTHING
+
+**Two gap probes reported still-open gaps as FIXED**, because `bolster` is a **shape** in `familyDefaults`
+*and* an unmechanised **verb** — the word appearing proved nothing. ✅ **The behavioural form cannot make
+that mistake: author `soak 2`, author `soak 20`, and see whether the outcome differs.**
+
+⚠️ **The same trap in the other direction:** `operativeAxis` read as *live* on two hits that were
+`cfg.operativeAxis` — a rules dial, not the craft field. **Same word, two owners.** ✅ **Capture the
+receiver, not the name.**
+
+### ⚠️ RULE 3 — "UNREAD" IS NOT "USELESS", AND NEITHER IS A VERDICT
+
+`damage_families.json` measured as unread and was **a correct file with a reader pointed at the wrong
+copy.** ⛔ **The signal is identical to cruft; only the diagnosis differs, and only a person can make it.**
+`scripts/safe_delete.mjs` sorts candidates and **refuses to output "delete"** for that reason.

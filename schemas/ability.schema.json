@@ -210,6 +210,26 @@
     "timeReach": {
      "type": "number",
      "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "damageMix": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "type",
+       "share"
+      ],
+      "properties": {
+       "type": {
+        "type": "string"
+       },
+       "share": {
+        "type": "number",
+        "minimum": 0
+       }
+      }
+     },
+     "description": "⛔ A COMPOSITE BLOW — the craft deals several damage types at once, and a ward answers only the parts it answers. Read by `damageMixOf` in engine/damagetypes.js, which normalises the shares to 1. ⚠️ DECLARED 2026-08-29: the READER shipped with CCODE-281 and the SCHEMA never learned the field, so the first craft to author one (`ki_wield`) was rejected by the closed schema. A reader with no schema entry — the four-doors failure at the AUTHORED door. ⛔ USE THIS INSTEAD OF `damageType` when the fiction names more than one kind of harm: a ki bolt is `force` and `physical`, and armour answers only the second."
     }
    }
   },

@@ -792,9 +792,17 @@ console.log("\n── §12 · the interface — reachability, phases, apparatus 
   // surprise that the game cannot ask is worse than reading it here.
   const pgSrc = rd("docs/PLAYERS_GUIDE.md");
   check("§12: the player's guide carries PART I½ · WHERE EVERYTHING IS", pgSrc.includes("PART I½ · WHERE EVERYTHING IS"));
-  check("§12: both docs name all three missing affordances",
-    ["provoke", "bringForward"].every(k => doc.includes(k)) &&
-    ["provoke", "steps up", "which ally"].every(k => pgSrc.includes(k)));
+  // ⛔ THIS CHECK USED TO ASSERT A LIST THAT WAS TWO-THIRDS FALSE. It demanded both docs name three
+  // "missing affordances"; `bringForward` has had a picker since CCODE-276 and `provoke` needs no pick.
+  // ⚠️ A GATE ON AN UNMEASURED CLAIM DOES NOT MAKE IT TRUE — IT MAKES IT DURABLE. What it guards now is
+  // the CORRECTION, so the false version cannot quietly come back.
+  check("§12: the corrected affordance record is present, not the false three-item list",
+    doc.includes("CCODE-276") && doc.includes("FALSE — it has a full picker"));
+  check("§12: the one genuinely open affordance is still named in both docs",
+    doc.includes("interceptCondition") && pgSrc.includes("which ally"));
+  // ✅ AND THE FIX IS ASSERTED AGAINST THE ENGINE, not against prose about the engine.
+  check("§12: provoke's taunt is actually passed to chooseTarget",
+    rd("engine/skill_battle.js").includes("taunt: standingTaunt(state)"));
 }
 
 // ⛔ docs/APPARATUS.md — THE FACTORY FLOOR. `scripts/apparatus.mjs` classifies every harness; this asserts

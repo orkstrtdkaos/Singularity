@@ -38,9 +38,13 @@ missing, and the evidence is on the record three times.**
 ⛔ **THE INTERFACE SCOPE HAS FAILED THREE TIMES IN ONE MONTH, THE SAME WAY EACH TIME:** a mechanic was
 built correctly and had **no way for a player to invoke it.**
 
-- `bringForward` — you choose who acts blow by blow, and **there is no pick.**
-- `provoke` — it needs a target, and **there is no way to name one.**
-- a named-ally intercept — `shared_weight` guards ONE ally, and **there is no way to say which.**
+- ⬜ a named-ally intercept — `shared_weight` guards ONE ally, and **there is no way to say which.**
+- ✅ **`provoke`'s taunt was produced and never delivered** — `chooseTarget` implemented the override,
+  `resolveProvoke` produced the value, and nothing passed it. **Fixed, CCODE-306.**
+
+⛔ **AND TWO ITEMS THAT WERE ON THIS LIST WERE NEVER TRUE.** `bringForward` has had a working picker
+since CCODE-276, and `provoke` needs no pick at all. ⚠️ **I carried an unmeasured list into three
+documents and gated it.** A review measures; this one agreed. **The correction is in `HOW_IT_WORKS §12.4`.**
 
 ⚠️ **EACH WAS FOUND AT STAGE 7, NOT STAGE 4.** By then the mechanic is built and the gap looks like a
 UI ticket rather than an unfinished feature. ✅ **A SPEC IS NOT DONE UNTIL IT SAYS HOW THE PLAYER REACHES

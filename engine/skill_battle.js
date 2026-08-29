@@ -784,6 +784,20 @@ function antisoakFromConditions(sheet) {
     .reduce((t, c) => t + Math.max(0, Number(c.magnitude) || 0), 0);
 }
 
+/** ⛔ CCODE-306 — IS SOMEONE STILL IMPOSSIBLE TO IGNORE? A taunt is deliberately not permanent (CCODE-256:
+ *  "a taunt that held forever would let one character lock a foe onto themselves for a whole fight"), so it
+ *  carries the round it lapses on and this is where that is honoured.
+ *
+ *  ⚠️ RETURNS null FOR EVERY STATE THAT PREDATES IT, so a save written before this shipped simply has no
+ *  taunt — the same opt-in shape as `knowledge` and `foeReadTier` on the same call. */
+export function standingTaunt(state) {
+  const t = state?.taunted;
+  if (!t || !t.targetId) return null;
+  const now = Number(state?.round) || 0;
+  if (Number.isFinite(t.until) && now >= t.until) return null;   // lapsed
+  return { targetId: t.targetId, rounds: t.until != null ? t.until - now : null };
+}
+
 export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state = {}, rules, sb, steps, rng = Math.random,
   // CCODE-250 (Erik: "Yes a foe chooses who to hit"): the party seat. `allies` is the live roster a foe may aim
   // at — ABSENT OR EMPTY MEANS TODAY, and a 1v1 round then resolves byte-identically, which is the gate.
@@ -822,7 +836,12 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // gate still asserts — the read is opt-in, so nothing silently changes under a caller that has not adopted it.
   const foeKnows = state.foeReadTier == null ? null : foeKnowledge(state.foeReadTier, { cfg: sb?.foeRead || {} });
   const aimedAt = (allies && allies.length)
-    ? chooseTarget(allies, { policy: targetPolicy || oppSheet?.targetPolicy || "threat", rng, knowledge: foeKnows })
+    // ⛔ CCODE-306 — THE TAUNT NOW REACHES THE PICK. `chooseTarget` has implemented the override since
+    // CCODE-256, with a written rationale, and NOTHING HAS EVER PASSED IT. `resolveProvoke` produced
+    // `taunted` 650 lines below, spread it into a RECEIPT, and let it fall on the floor.
+    // ⚠️ PRODUCER GREEN, CONSUMER GREEN, LIVE PATH CONNECTING NEITHER — a wiring gap, not a module gap.
+    ? chooseTarget(allies, { policy: targetPolicy || oppSheet?.targetPolicy || "threat", rng, knowledge: foeKnows,
+        taunt: standingTaunt(state) })
     : null;
   // the seat. Everything downstream that used to say "the player eats it" says this instead.
   // ⚠️ CCODE-261: ASK THE FLAG, NEVER THE ID. A real save's player id is `char-…`, not "player".
@@ -1476,10 +1495,21 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     const wr = roundWinner === "player" ? p : o, lr = roundWinner === "player" ? o : p;
     const winMargin = Math.max(0, (wr?.margin || 0) - (lr?.margin || 0));
     if (fns.has("provoke")) {
-      const pr = resolveProvoke(newState, { margin: winMargin });
+      // ⛔ CCODE-306 / CCODE-261 — THE REAL ID, NOT THE WORD "player". `resolveProvoke` defaults its
+      // taunter to the literal string "player", and `chooseTarget` resolves a taunt by `a.id === targetId`.
+      // ⚠️ A REAL SAVE'S PLAYER ID IS `char-…`, so the default could NEVER have matched even once the
+      // wiring existed — the same trap CCODE-261 names two hundred lines above: ask the flag, not the word.
+      const mePick = (allies || []).find(a => a && (a.isPlayer || a.kind === "player"));
+      const pr = resolveProvoke(newState, { margin: winMargin, taunter: mePick?.id || null });
       // ⚠️ THE STATE CHANGE IS THE EFFECT. Reporting `broke` without clearing the tactic would be the
       // decorative version of this verb, and the whole complaint about it was that it did nothing.
       if (pr.ok) newState.tactic = null;
+      // ⛔ AND THE EFFECT IS NOW STATE, NOT A SENTENCE. Spreading `pr` into the receipt below reported the
+      // taunt to the reader and stored nothing, so the next round could not act on it. THE RECEIPT IS NOT
+      // THE MECHANIC — the same shape as the folded-casualty receipt built before the branch that set it.
+      if (pr.ok && pr.taunted?.targetId) {
+        newState.taunted = { targetId: pr.taunted.targetId, until: (newState.round || 0) + Math.max(1, Number(pr.taunted.rounds) || 1) };
+      }
       unsettled = { by: winDecl?.name || "provoke", side: roundWinner === "player" ? "opponent" : "player",
         // ⛔ CCODE-250 — THE SIDE IS NOT THE SUFFERER. The seat swapped the ARITHMETIC (soak, resist,
         // conditions all read the target's sheet) but this receipt still said "player", so a caller

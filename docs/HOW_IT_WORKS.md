@@ -93,8 +93,14 @@ working papers; **this is the answer.**
 | 08-29 | ✅ **the AWAITING gate replaced, not deleted** | Aevi wrote Parts X–XII and flagged it herself: *"AWAITING gate now correctly red, CCode's to change"* | `how_it_works.mjs` — a part is now either WRITTEN or MARKED, and thinness names which part | ⛔ **a gate that only watched for a placeholder is worth nothing once the placeholder is gone** — it now checks the writing against the corpus |
 | 08-29 | ✅ **the nine companions checked against the pack** | prose about authored people should be verifiable against the people | derived from `content/packs/valley/companions`, never a typed list | ⚠️ all nine are named and all nine carry a `downedEffect`; **a tenth companion goes red until the guide mentions them** |
 | 08-29 | ✅ **`docs/ARCS.md` placed, and a gate so the next one is too** | Erik: *"it is NOT OK to leave it at 'we don't know what's underneath' in an authored arc"* — Aevi wrote the GM copy and nothing pointed at it | `how_it_works.mjs` — every `.md` in `docs/` must appear in PIPELINE's table | ⛔ **a document nobody links is the same unread failure**, one layer up from a field |
+| 08-29 | ⛔ **I CORRECTED MY OWN §12 — two of three "interface gaps" were FALSE** | Erik approved a target affordance on the strength of a list I had not measured. `bringForward` has had a picker since **CCODE-276**; `provoke` needs no pick at all | measured against `app.js` and `craftmechanics.js`; the gate now guards the CORRECTION | ⚠️ **a gate on an unmeasured claim does not make it true — it makes it durable.** I wrote it into three documents and gated it |
+| 08-29 | ✅ **CCODE-306 — provoke's taunt reaches the pick** | `chooseTarget` implemented the override (CCODE-256, with a rationale), `resolveProvoke` produced `taunted`, **and nothing ever connected them** — the value was spread into a receipt and dropped | `tests/taunt_wiring.mjs`, 10 assertions, **run over two real rounds** | ⛔ producer green, consumer green, live path using neither — **a wiring gate, not a module gate** |
+| 08-29 | ✅ **and the taunter id was the word "player"** | `resolveProvoke` defaulted to the literal string; `chooseTarget` matches `a.id === targetId`; a real save's id is `char-…` | gated separately — it goes red on its own | ⚠️ **it could never have matched even once the wiring existed** — the exact trap **CCODE-261** names 200 lines above the call site |
+| 08-29 | ⛔ **CCODE-304 — the casualty pool is OUT OF RANGE, not under-tuned** | Erik: *"we need to take a look at the folded party and damage and casualty pool so we structure it well"* | `scripts/casualty_sim.mjs`, deterministic, on the real engine functions | ⛔ `health = level × 2`; `pool = per × K` mentions no level. **A fall needs pool ≥ 2 × health**, so the mechanic is in range at level 1–2 and dead from level 3 forever |
+| 08-29 | ⚠️ **the mechanic is a CLIFF and the window is a factor of two** | below `2 × health` nobody can fall at any roll; above `4 × health` everyone the pool reaches falls | measured at every level; the closed form is `r ≥ 4/BASE − 1`, in which **health cancels** | ⛔ **that is why proportionality is the fix and a bigger constant never could be**. Three dials — BASE, threat, `maxSharePer` — and they are **not independent** |
+| 08-29 | ⚠️ **I did NOT ship a general target-affordance module** | with two of three cases false, the only remaining case is the intercept — **blocked on Aevi's spec** | — | ⛔ **a reader with no caller is `testOnlyExports`** — the exact defect I spend this file finding. Written, then deleted rather than shipped |
 
-**Last verified: 2026-08-28 · v1.9.257 · 378 crafts.**
+**Last verified: 2026-08-28 · v1.9.258 · 378 crafts.**
 
 ---
 
@@ -459,11 +465,29 @@ one tap away from the number.**
 ⛔ **A MECHANIC CAN BE BUILT, TESTED, GREEN, AND HAVE NO WAY FOR A PLAYER TO INVOKE IT.** This is the
 interface twin of the four doors, and it has happened three times:
 
-| built | ⛔ missing |
+⛔ **AND I GOT THIS TABLE WRONG ON 2026-08-29, IN THIS FILE, WITH A GATE ASSERTING IT.** I repeated a
+three-item list without measuring it. **Two of the three were false.** Corrected, measured:
+
+| claimed | ⛔ what is actually true |
 |---|---|
-| `bringForward` — choose who acts blow by blow | **there is no pick** |
-| `provoke` — needs a target | **there is no way to name one** |
-| a named-ally intercept (`shared_weight` guards ONE ally) | **there is no way to say which** |
+| ~~`bringForward` has no pick~~ | ✅ **FALSE — it has a full picker.** CCODE-276, `data-sbfwd`: clicking a name toggles who is forward, persisted on encounter state so it survives a redraw |
+| ~~`provoke` cannot name a target~~ | ✅ **FALSE — it needs no pick.** Provoke makes *you* the thing they want; the target is implicit |
+| a named-ally intercept picks for you | ⬜ **TRUE, and still open** — blocked on Aevi's `interceptCondition` spec, not on a missing picker |
+
+⚠️ **BUT MEASURING IT FOUND A REAL DEFECT UNDERNEATH, AND A WORSE ONE.** `chooseTarget` has implemented
+a taunt override since CCODE-256 with a written rationale; `resolveProvoke` has produced `taunted` since
+the same ticket; **the two were never connected.** The produced value was spread into a RECEIPT and the
+consumer was called without the argument. ⛔ **Both halves green, live path using neither — a wiring gap,
+not a module gap.** And beneath it a second trap: `resolveProvoke` defaulted its taunter to the literal
+string `"player"`, which `chooseTarget` resolves by `a.id === targetId`, and a real save's id is
+`char-…`. **It could never have matched even once the wiring existed** — the exact trap CCODE-261 names
+two hundred lines above the call site.
+
+✅ **BOTH FIXED (CCODE-306), gated by `tests/taunt_wiring.mjs`, and both proven able to go RED.**
+
+⚠️ **THE LESSON IS THE ONE ALREADY IN `FIELD_REFERENCE §11` AND I BROKE IT: a review MEASURES, it does
+not agree.** I inherited a list, found it plausible, wrote it into three documents and gated it. **A gate
+on an unmeasured claim does not make it true — it makes it durable.**
 
 ⚠️ **ALL THREE ARE THE SAME SHAPE:** the engine accepts a choice the interface never asks for. ✅ The
 likely fix is general rather than per-craft — **a craft declares what KIND of choice its resolution needs,

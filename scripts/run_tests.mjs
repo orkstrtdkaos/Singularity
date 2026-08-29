@@ -47,6 +47,9 @@ const SUITES = [
   ["dev_world", "node", ["tests/dev_world.mjs"]],
   ["playthrough_sim", "node", ["tests/playthrough_sim.mjs"]],
   ["verification_ledger", "node", ["tests/verification_ledger.mjs"]],
+  // ⛔ CCODE-306 — THE TAUNT REACHES THE PICK. A wiring gate, not a module gate: both halves were green
+  // and the live path connected neither. It asserts where the blow ACTUALLY LANDS across two real rounds.
+  ["taunt_wiring", "node", ["tests/taunt_wiring.mjs"]],
   ["engine_map --check", "node", ["scripts/engine_map.mjs", "--check"]],
 ];
 

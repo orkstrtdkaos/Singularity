@@ -10,7 +10,7 @@ place, person and belief in X–XII is drawn from authored content — , ,
 , the nine companion files and  — and where the world has not decided
 something, the guide says so rather than filling it in.
 
-**Last verified: 2026-08-29 · v1.9.257 · 387 crafts · 135 places · 111 people · 9 companions.**
+**Last verified: 2026-08-29 · v1.9.258 · 387 crafts · 135 places · 111 people · 9 companions.**
 
 ---
 
@@ -79,9 +79,13 @@ order:**
 **Three things the engine knows how to do and has no way to ask you about.** They are listed here rather
 than hidden, because finding out by being surprised is worse:
 
-- **You cannot yet choose who steps up** when the order of your companions would matter.
-- **You cannot yet pick who to provoke** when more than one target would take the bait.
 - **You cannot yet name which ally** a protecting craft is protecting — it chooses.
+
+✅ **AND TWO THINGS THIS GUIDE BRIEFLY CLAIMED YOU COULD NOT DO, YOU CAN.** You *can* choose who steps
+forward — tap a companion's name in a fight and they swap into the front, and it sticks between rounds.
+And provoking needs no pick: **it works by making *you* the thing they cannot ignore**, which is the
+whole point of the verb. ⚠️ **That now actually reaches the fight** — until this build the taunt was
+calculated and quietly dropped, so provoking read as though it did nothing. **It does something.**
 
 ⛔ **THESE ARE MISSING QUESTIONS, NOT MISSING FEATURES.** The mechanics behind them work; nothing on the
 screen asks you. They are tracked as open gaps, and when the game learns to ask, this section shrinks.

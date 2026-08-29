@@ -19,7 +19,7 @@
    "notFor": "Anyone whose names you have not honestly learned; crowds; anything that does not have a name for itself.",
    "tradition": "cogitant",
    "nativeOrCombination": "native",
-   "harmRung": "damaging",
+   "harmRung": "incapacitating",
    "powerSystem": "metaphysical",
    "shape": "hobble",
    "operativeAxis": "body_mind",
@@ -63,8 +63,7 @@
    "functions": [
     "bind",
     "command",
-    "hinder",
-    "persuade"
+    "hinder"
    ],
    "theNames": "⚠️ A person has three: the name they are CALLED (public, cheap to learn), the name they are KNOWN BY (a byname — what the world says), and the name they CALL THEMSELVES, which almost nobody gives away.",
    "tree": [
@@ -74,8 +73,7 @@
      "grants": "⛔ ONE NAME. Speak it and they must stop, turn, or answer — one compelled act, briefly, and nothing that harms them or theirs.",
      "cannot": "⚠️ A public name compels only a public act. They know exactly what happened and who did it.",
      "functions": [
-      "bind",
-      "persuade"
+      "bind"
      ],
      "gains": "deepen",
      "harmRung": "damaging",
@@ -89,8 +87,7 @@
      "cannot": "You must hold attention; doing anything else releases them. They can still refuse an act that would end them.",
      "functions": [
       "bind",
-      "command",
-      "persuade"
+      "command"
      ],
      "gains": "deepen",
      "harmRung": "damaging",
@@ -142,7 +139,8 @@
     "targets": 1,
     "marginFloorPer": 0.02
    },
-   "_diceStrip": "⛔ SNG-471, CCODE Q1: `mechanic.dice` IS consumed — craftmechanics.mechanicFor → rollMagnitude → skill_battle.js:798 — ⚠️ BUT THE GUARD IS `shape === 'damage'`, and only `damage` and `strike` resolve to it. `hobble` and `hinder` DO NOT.\n⛔ SO THIS CRAFT AUTHORED 4d6 THAT NOTHING WOULD EVER ROLL. Erik's shape is right — a hold is not damage — so the DICE GO, not the shape. ⚠️ CCode: 'I would not widen the guard silently — \"this craft does 4d6 of hold\" is a different claim about the world.' AGREED."
+   "_diceStrip": "⛔ SNG-471, CCODE Q1: `mechanic.dice` IS consumed — craftmechanics.mechanicFor → rollMagnitude → skill_battle.js:798 — ⚠️ BUT THE GUARD IS `shape === 'damage'`, and only `damage` and `strike` resolve to it. `hobble` and `hinder` DO NOT.\n⛔ SO THIS CRAFT AUTHORED 4d6 THAT NOTHING WOULD EVER ROLL. Erik's shape is right — a hold is not damage — so the DICE GO, not the shape. ⚠️ CCode: 'I would not widen the guard silently — \"this craft does 4d6 of hold\" is a different claim about the world.' AGREED.",
+   "_persuadeRemoved_20260829": "⛔ `persuade` REMOVED — the third verb-in-the-wrong-slot after `bolster` on `wellspring` and this craft's own shape mismatch. ⚠️ THE LADDER SETTLES IT: r1 'they MUST stop, turn, or answer' · r2 'SUSTAINED CONTROL' · r3 'the hold no longer needs your attention'. THAT IS COMPULSION — `bind` and `command`, both already declared. ⛔ AND THE VOCABULARY IS EXPLICIT: persuade means 'bring someone to AGREE — they act because they now think it right', and is 'NOT `command`, which does not need agreement'. NOBODY AGREES TO ANYTHING IN THIS CRAFT. ⚠️ r3 ALREADY DROPPED `persuade` ON ITS OWN, which is the craft saying so. ⛔ ALSO: ability rung was `damaging` while r3 reaches `incapacitating` — a craft that binds and never wounds was glossed to the GM as one that hurts."
   },
   {
    "id": "mind_meld",

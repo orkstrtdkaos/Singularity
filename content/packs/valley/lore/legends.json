@@ -5,10 +5,14 @@
  "note": "Authored anchor figures for SNG-042 (Legends & Villains). High-power universal-role instances the living world deploys in dramatic beats and threads through recurrence. First-draft canon (Aevi 2026-07-11); broadened 2026-07-22 to cover the death axis, the wild half, and the arc antagonists (villains drawn from tradition cult-of-purity) — Erik reshapes; the generate path mints mid/low-tier figures in-grain from these as taste. · 2026-07-22: arcAffinity + rivals + offscreenVerbs added (SNG-198B epic-actor hook — epics nudge their arc offscreen and act against named rivals). · DEDUP 2026-07-22: removed kesh_ardent + iselde_wend (superseded by tradition_epics the_edge_that_holds / iselde_the_wanderer, which now alias the old ids). Remaining anchors have no epic double.",
  "principle": "A world feels large when greatness passes through it. Heroes are witnessed, not owned; villains scale from riffraff to arc. Every figure is a disposition made person — power expressed through the local grain.",
  "tiers": {
-  "legendary": "arc-scale; hand-authored anchors (this file) + rare generation at high birth-weight; recur as the measure others are held against",
-  "regional": "notable local powers (a warlord, a corrupt overseer); generatable, seeded by these anchors; mid-arc antagonists/allies",
-  "riffraff": "petty — bandits, enforcers, the altered; NOT anchored here; generate at low tier in-grain per locale",
-  "mythical": "⛔ NEAR-LEVEL-100 AND STILL HERE. Erik 2026-08-29: 'THE WORLD'S MYTHICALS ARE THOSE HIGH NEAR-LEVEL-100 NPCs.' ⚠️ A Mythical is not a bigger legend — it is someone who has climbed the whole ladder and has NOT YET CROSSED. ⛔ THEY ARE THE PEOPLE THE WORLD ARCS ACTUALLY MOVE THROUGH (see `_theMythicalRung`), they can be killed and injured like anyone, and the thing waiting at the end of their road is not retirement."
+  "_ladder": "⛔ THE CANONICAL RUNG LADDER IS SEVEN AND LIVES IN `arc_response.attentionByTier`: mythic · legendary · epic · heroic · regional · notable · riffraff. ⚠️ THIS FILE'S ORIGINAL THREE-TIER LIST WAS OUT OF DATE and Aevi briefly made it worse on 2026-08-29 by authoring `mythical` as a NEW fourth tier — `mythic` HAD ALREADY EXISTED SINCE SNG-280, with 126 references across the corpus, its own attention budget of 3, and Erik's directive attached. ⛔ CORRECTED: the ladder is named here by REFERENCE, not restated, so it cannot drift out of date again.",
+  "mythic": "⛔ THE TOP RUNG. Attention budget 3 — a mythic pushes THREE FRONTS AT ONCE where a legendary pushes two. ⚠️ Erik, SNG-280: 'between arc pushes there are ever-present assassination risks, duel-to-the-death challenges — WE CAN USE THESE TO KEEP THE MYTHICALS UNDER CONTROL.' ⛔ AND THE CHALLENGE RATE IS PROMINENCE, NOT MERIT: 'a mythic of the Maw and a mythic who has spent forty years mending the same wall are challenged identically, because WHAT DRAWS A CHALLENGER IS BEING WORTH BEATING.'",
+  "legendary": "arc-scale; hand-authored anchors here + rare generation at high birth-weight; the measure others are held against. Attention 2",
+  "epic": "attention 1 — an arc-defining figure who can press one front",
+  "heroic": "attention 0.5",
+  "regional": "notable local powers — a warlord, a corrupt overseer; generatable, seeded by these anchors. Attention 0.5",
+  "notable": "attention 0.5",
+  "riffraff": "petty — bandits, enforcers, the altered; generated at low tier in-grain per locale. Attention 0.25"
  },
  "deploymentBeats": {
   "witness_power": "a set-piece battle where the character SEES what the best can do (scale-setting)",
@@ -619,6 +623,13 @@
    "fall": "toward what Kenosis did — emptying downward, taking a shape, arguing that the seeded have standing",
    "_note": "⚠️ NEITHER IS GOOD. ⛔ The Three's disagreement was never good-versus-evil — it was 'an ancient disagreement between two entities of ONE PEOPLE', and a Mythical crossing chooses which of them was right."
   },
-  "_openForErik": "⬜ NOT RULED: whether a crossing is VOLUNTARY, whether anyone has crossed within living memory, and whether a crossed Mythical can be reached, answered, or called back. ⚠️ `open_threshold` and `calling_back` are crafts about exactly that verb at a smaller scale, which is suggestive and not a ruling."
+  "_openForErik": "⬜ NOT RULED: whether a crossing is VOLUNTARY, whether anyone has crossed within living memory, and whether a crossed Mythical can be reached, answered, or called back. ⚠️ `open_threshold` and `calling_back` are crafts about exactly that verb at a smaller scale, which is suggestive and not a ruling.",
+  "_correction_20260829": "⛔ I AUTHORED THIS AS NEW CANON AND THE RUNG ALREADY EXISTED. Erik: 'we've talked about mythical before, so I'm surprised you had to add it.' ⚠️ MEASURED AFTER HE ASKED: 126 uses of `mythic` across content, docs and specs — `arc_response.attentionByTier` (SNG-280, attention 3), `the_lightless_seraph`, `SPEC_SNG-367`, `foothills._ruling`. ⛔ AND ERIK HAD ALREADY TIED MYTHICALS TO THE PRECURSOR–VEIL BRAID ON 2026-08-15: 'a MYSTERY OF THE WORLD that it exists — massive quests are here, WITH A MYTHICAL BEHIND IT. Likely a BRAID OF PRECURSOR AND VEIL that harmonizes all power sources.' ⚠️ I presented that connection as my own discovery two weeks later. ✅ WHAT IS GENUINELY NEW HERE IS ONLY THE VEIL-CROSSING AT ~L100 — the ascend-or-fall, and that the crossing joins the primary conflict. THE RUNG, THE NAME, THE ATTENTION BUDGET AND THE CHALLENGE MECHANISM ARE ALL PRIOR CANON. ⛔ THE FAILURE: I searched `legends.json` and stopped. One grep for the word would have found all of it.",
+  "_priorCanonItInheritsFrom": {
+   "SNG-280 challenge rate": "⛔ mythics are kept in check by assassination and duel-to-the-death challenges, keyed to PROMINENCE not merit",
+   "attention 3": "a mythic presses three arc fronts at once",
+   "the crossroads ruling 2026-08-15": "⚠️ a mythical stands behind the perfect-power-source crossroads — A BRAID OF PRECURSOR AND VEIL. ⛔ ERIK HAD ALREADY CONNECTED MYTHICALS TO THE VEIL",
+   "the_lightless_seraph": "a `legendary` fallen Seraph reaching across the world for a daughter he no longer remembers loving — the rung below, and what one looks like authored"
+  }
  }
 }

@@ -1,1096 +1,1097 @@
 {
-  "schemaVersion": 1,
-  "id": "skill_battle_system",
-  "kind": "combat_mechanic_spec",
-  "note": "Erik 2026-07-07: when using skills and having skills used against you, there should sometimes be a SKILL BATTLE — the types of skills used, the energy applied, etc. all determine the effect, resolving over several turns. This is contested skill-vs-skill: not one roll, but an exchange where matchup + investment + tier decide who prevails. Builds on the d100 resolution, intensity_scaling (energy), challengeProfile (matchup), and the social-contest structure (SNG-027 is the SOCIAL flavor of this). Authored by Aevi (PO).",
-  "whenItTriggers": {
-    "principle": "Not every skill use is a battle. A skill-battle happens when two wills contest the SAME outcome with skills — my Umbracraft conceal vs your Radiance reveal; my Foreclose vs your Hold-the-Aperture; my the-Edge strike vs your the-Stand shield; my Falsecraft lie vs your Verity. When one side acts and the other RESISTS with a skill (rather than just taking it), it's a battle.",
-    "vsSingleCheck": "A skill used against the unresisting WORLD is a single check (pick a lock, cross a river). A skill used against a RESISTING will that answers with its own skill escalates to a battle. The GM (or engine) flags the contest when both sides commit skills to opposite outcomes.",
-    "duration": "Short battles resolve in one exchange (one skill each, compare). Bigger ones run MULTIPLE ROUNDS — a back-and-forth where each round shifts a momentum meter until one side breaks, yields, or achieves their outcome. Tier and stakes set the length: a Tier-V clash of masters is a several-round set-piece."
-  },
-  "resolution": {
-    "theExchange": "Each round, both sides declare a skill + an INTENSITY (energy poured in: Conserve 0.6x / Standard / Surge 1.6x, per intensity_scaling). Each rolls d100 + attribute + ability-tier bonus + MATCHUP bonus. Higher net wins the round and shifts the momentum meter toward their outcome by the margin.",
-    "matchup": "The core of it — skills are strong/weak against each other by FUNCTION and DOMAIN (like the pole relationships). A conceal vs a reveal: reveal has the edge (light finds shadow) unless the concealer out-tiers or out-spends. A strike vs a shield: shield blunts but doesn't win; a strike vs a bind: the bound striker is at disadvantage. The matchup table (below) gives a bonus/penalty; being the RIGHT tool for the contest is worth more than raw rolls.",
-    "energyEconomy": "Intensity is the gamble: Surge (1.6x) adds power but drains energy fast and risks backlash (25% by tier); Conserve (0.6x) is sustainable but weak. A skill-battle is also a WAR OF ATTRITION — whoever runs out of energy first loses the ability to contest, even if winning on rolls. Managing the energy curve across rounds IS the skill of skill-battling. A master who Surges every round wins fast or collapses.",
-    "tierWeight": "Higher-tier skills hit harder in the matchup (a Tier-V ability brings a large flat edge) AND have the stamina to sustain more rounds (their epic proficiency means fewer wasted exchanges). This is why tier matters: not just bigger numbers, but the ability to WIN or OUTLAST across a multi-round contest.",
-    "momentumMeter": "A -X..+X meter; each round's winner pushes it by their margin. Reaching one end = that side achieves their outcome (the truth revealed, the escape made, the lie held, the strike landed decisively). A big enough single-round win (a Surged Tier-V crit) can end it in one blow; evenly matched wills grind across rounds.",
-    "outcomes": "Win (your outcome happens), Break (opponent out of energy/yields — your outcome + they're spent), Stalemate (both exhausted, neither prevails, the situation resolves by fiction), Backlash-loss (you Surged and botched — your outcome fails AND you take the backlash)."
-  },
-  "matchupTable": {
-    "note": "Function-vs-function edges in a contest. +2 strong edge, +1 slight, 0 neutral, defensive functions BLUNT rather than beat. Domain/pole relationships (cofiring, opposition) modify further. The GM/engine reads this to set each round's matchup bonus.",
-    "edges": [
-      {
-        "attacker": "reveal",
-        "vs": "conceal",
-        "result": "+2 reveal — light finds shadow (unless concealer out-tiers/out-spends)"
-      },
-      {
-        "attacker": "conceal",
-        "vs": "reveal",
-        "result": "-2 — but a Tier gap or Surge can flip it; the Never-There beats ordinary reveal"
-      },
-      {
-        "attacker": "strike",
-        "vs": "shield",
-        "result": "0 — shield BLUNTS (reduces margin), doesn't win; sustained striking wears a shield down"
-      },
-      {
-        "attacker": "strike",
-        "vs": "bind",
-        "result": "+1 attacker if free; -2 if the striker is the one bound"
-      },
-      {
-        "attacker": "break",
-        "vs": "ward",
-        "result": "+1 break — unmaking beats holding, but a Tier-V ward (hold_the_aperture) resists"
-      },
-      {
-        "attacker": "bind",
-        "vs": "move",
-        "result": "+2 bind — you can't flee what holds you (unless move out-tiers)"
-      },
-      {
-        "attacker": "move",
-        "vs": "bind",
-        "result": "-2 — but Break-Away/Pathless-Way can slip a lesser bind"
-      },
-      {
-        "attacker": "reveal(truth)",
-        "vs": "conceal(falsehood)",
-        "result": "+2 — Verity vs Falsecraft; the Whole Truth beats even the true-pieces lie"
-      },
-      {
-        "attacker": "heal",
-        "vs": "break/strike",
-        "result": "attrition — heal doesn't beat a strike but OUTLASTS it (Rooted Stand); a war of endurance"
-      },
-      {
-        "attacker": "same-function",
-        "vs": "same-function",
-        "result": "pure contest — tier + energy + roll decide; two concealers, two strikers: the better-invested wins"
-      }
-    ],
-    "domainModifiers": "Opposed poles clash HARDER (bigger swings, faster resolution): life vs death, order vs chaos, light vs dark contesting is volatile. Co-firing/adjacent poles interact oddly (a life-user vs a death-user at the Quiet-in-the-Quickwood fight on strange ground). The GM applies a situational modifier from the location's disposition too — fighting a shadow-battle in the Radiant Wastes favors the light."
-  },
-  "examples": [
-    {
-      "battle": "Umbral infiltrator (the Never-There, T5) vs a Radiant warden (Radiance, T2)",
-      "how": "conceal vs reveal = -2 base for the concealer, BUT the T5-vs-T2 gap (+large) and a Surge flip it. Round 1 the warden's Radiance sweeps (reveal edge), infiltrator Surges the Never-There to erase the trace faster than light maps it. 2-3 rounds; if the infiltrator's energy holds, the warden is left staring at an empty room. If it runs out, the light catches the afterimage."
-    },
-    {
-      "battle": "Falsecraft liar vs Verity truth-reader",
-      "how": "the signature skill-battle. Each round the liar layers falsehood, the reader peels it. Verity has the +2 truth-vs-falsehood edge, so the liar must out-tier or out-spend. A master liar (Woven Untruth, T3) vs an apprentice reader can hold; the Whole Truth (T5) cracks anything. Momentum = how much of the lie stands when the dust settles."
-    },
-    {
-      "battle": "the Edge duelist (Last Form, T5) vs a Churn-reaver (Unraveling Blow, T3)",
-      "how": "strike vs strike, but the reaver's CHAOS domain resists the Edge's ORDER-read — the Last Form needs a form to read, and chaos gives it none (-matchup). The duelist's tier edge vs the reaver's matchup edge: a real contest, several rounds, decided by who commits energy at the right moment."
-    }
+ "schemaVersion": 1,
+ "id": "skill_battle_system",
+ "kind": "combat_mechanic_spec",
+ "note": "Erik 2026-07-07: when using skills and having skills used against you, there should sometimes be a SKILL BATTLE — the types of skills used, the energy applied, etc. all determine the effect, resolving over several turns. This is contested skill-vs-skill: not one roll, but an exchange where matchup + investment + tier decide who prevails. Builds on the d100 resolution, intensity_scaling (energy), challengeProfile (matchup), and the social-contest structure (SNG-027 is the SOCIAL flavor of this). Authored by Aevi (PO).",
+ "whenItTriggers": {
+  "principle": "Not every skill use is a battle. A skill-battle happens when two wills contest the SAME outcome with skills — my Umbracraft conceal vs your Radiance reveal; my Foreclose vs your Hold-the-Aperture; my the-Edge strike vs your the-Stand shield; my Falsecraft lie vs your Verity. When one side acts and the other RESISTS with a skill (rather than just taking it), it's a battle.",
+  "vsSingleCheck": "A skill used against the unresisting WORLD is a single check (pick a lock, cross a river). A skill used against a RESISTING will that answers with its own skill escalates to a battle. The GM (or engine) flags the contest when both sides commit skills to opposite outcomes.",
+  "duration": "Short battles resolve in one exchange (one skill each, compare). Bigger ones run MULTIPLE ROUNDS — a back-and-forth where each round shifts a momentum meter until one side breaks, yields, or achieves their outcome. Tier and stakes set the length: a Tier-V clash of masters is a several-round set-piece."
+ },
+ "resolution": {
+  "theExchange": "Each round, both sides declare a skill + an INTENSITY (energy poured in: Conserve 0.6x / Standard / Surge 1.6x, per intensity_scaling). Each rolls d100 + attribute + ability-tier bonus + MATCHUP bonus. Higher net wins the round and shifts the momentum meter toward their outcome by the margin.",
+  "matchup": "The core of it — skills are strong/weak against each other by FUNCTION and DOMAIN (like the pole relationships). A conceal vs a reveal: reveal has the edge (light finds shadow) unless the concealer out-tiers or out-spends. A strike vs a shield: shield blunts but doesn't win; a strike vs a bind: the bound striker is at disadvantage. The matchup table (below) gives a bonus/penalty; being the RIGHT tool for the contest is worth more than raw rolls.",
+  "energyEconomy": "Intensity is the gamble: Surge (1.6x) adds power but drains energy fast and risks backlash (25% by tier); Conserve (0.6x) is sustainable but weak. A skill-battle is also a WAR OF ATTRITION — whoever runs out of energy first loses the ability to contest, even if winning on rolls. Managing the energy curve across rounds IS the skill of skill-battling. A master who Surges every round wins fast or collapses.",
+  "tierWeight": "Higher-tier skills hit harder in the matchup (a Tier-V ability brings a large flat edge) AND have the stamina to sustain more rounds (their epic proficiency means fewer wasted exchanges). This is why tier matters: not just bigger numbers, but the ability to WIN or OUTLAST across a multi-round contest.",
+  "momentumMeter": "A -X..+X meter; each round's winner pushes it by their margin. Reaching one end = that side achieves their outcome (the truth revealed, the escape made, the lie held, the strike landed decisively). A big enough single-round win (a Surged Tier-V crit) can end it in one blow; evenly matched wills grind across rounds.",
+  "outcomes": "Win (your outcome happens), Break (opponent out of energy/yields — your outcome + they're spent), Stalemate (both exhausted, neither prevails, the situation resolves by fiction), Backlash-loss (you Surged and botched — your outcome fails AND you take the backlash)."
+ },
+ "matchupTable": {
+  "note": "Function-vs-function edges in a contest. +2 strong edge, +1 slight, 0 neutral, defensive functions BLUNT rather than beat. Domain/pole relationships (cofiring, opposition) modify further. The GM/engine reads this to set each round's matchup bonus.",
+  "edges": [
+   {
+    "attacker": "reveal",
+    "vs": "conceal",
+    "result": "+2 reveal — light finds shadow (unless concealer out-tiers/out-spends)"
+   },
+   {
+    "attacker": "conceal",
+    "vs": "reveal",
+    "result": "-2 — but a Tier gap or Surge can flip it; the Never-There beats ordinary reveal"
+   },
+   {
+    "attacker": "strike",
+    "vs": "shield",
+    "result": "0 — shield BLUNTS (reduces margin), doesn't win; sustained striking wears a shield down"
+   },
+   {
+    "attacker": "strike",
+    "vs": "bind",
+    "result": "+1 attacker if free; -2 if the striker is the one bound"
+   },
+   {
+    "attacker": "break",
+    "vs": "ward",
+    "result": "+1 break — unmaking beats holding, but a Tier-V ward (hold_the_aperture) resists"
+   },
+   {
+    "attacker": "bind",
+    "vs": "move",
+    "result": "+2 bind — you can't flee what holds you (unless move out-tiers)"
+   },
+   {
+    "attacker": "move",
+    "vs": "bind",
+    "result": "-2 — but Break-Away/Pathless-Way can slip a lesser bind"
+   },
+   {
+    "attacker": "reveal(truth)",
+    "vs": "conceal(falsehood)",
+    "result": "+2 — Verity vs Falsecraft; the Whole Truth beats even the true-pieces lie"
+   },
+   {
+    "attacker": "heal",
+    "vs": "break/strike",
+    "result": "attrition — heal doesn't beat a strike but OUTLASTS it (Rooted Stand); a war of endurance"
+   },
+   {
+    "attacker": "same-function",
+    "vs": "same-function",
+    "result": "pure contest — tier + energy + roll decide; two concealers, two strikers: the better-invested wins"
+   }
   ],
-  "engine": {
-    "staticAntagonist": {
-      "note": "SNG-247 Tier 3. The other side of an UNOPPOSED encounter - a sealed door, hard ground. It never chooses (opponentPolicy returns early) and never rolls (rollSide returns its standing resistance). Its resistance enters as a NAMED contestMod on the same self-summing breakdown as every other term, so a bind laid on the door still weakens it AND the player can see that it did.",
-      "defaultResist": 18,
-      "resistLabel": "it holds — not fighting you, simply made to hold, and made well",
-      "degreeVoice": {
-        "crit": "the whole order comes clear at once — it has no answer to being understood",
-        "success": "a piece gives — you feel the thing loosen toward you",
-        "partial": "it holds, but you've learned the shape of how",
-        "failure": "it holds, and closes a little — it has taken your measure now"
-      },
-      "holdFunction": "ward",
-      "defaultGive": 60,
-      "giveNote": "each thing you understand about it is give taken out of it; it does not tire, it YIELDS — the door was always going to open for whoever read it right",
-      "degreeBands": {
-        "crit": 40,
-        "success": 15,
-        "partial": 0,
-        "failure": -15
-      }
-    },
-    "damage": {
-      "note": "SNG-248 (Erik: 'the fight ends even though the strike didn't seem to land... I can't seem to actually wound/damage an opponent'). CCODE-38 replaced momentum-as-death with PRESSURE and never put damage back, so opponentHealth was set at startEncounter and never moved again - a skill battle had no wounds and no kill. Damage is what a WON exchange with a HARM verb does. The two tracks answer different questions: PRESSURE is position (being driven back), HEALTH is injury. Only the winner of the exchange deals it, only with a harming verb, and it scales with the MARGIN GAP - so a turned-aside blow does nothing.",
-      "enabled": true,
-      "harmFunctions": [
-        "strike",
-        "break"
-      ],
-      "base": 1,
-      "perTier": 0.5,
-      "perMarginPoint": 0.06,
-      "minHit": 1,
-      "scaling": {
-        "note": "SNG-263 r4 §11: damage = DICE(tier,rank) + SCALING(level,attribute,uses) - SOAK(target). The DICE are what the craft IS; SCALING is the WIELDER — a master's kindle hits harder than a novice's (the D&D cantrip answer, and the same earned-through-repetition spine as skill-use and aptitudes). Deliberately MODEST: scaling is a flat add, so it lifts a low tier into usefulness without closing the gap to a high tier, and SOAK is the limiter that stops a scaled cantrip becoming universal. Calibrated so a level-20 master adds about +2 — enough that a T-I stays worth casting at epic, not enough to rival a T-III.",
-        "perLevel": 0.06,
-        "perAttributePoint": 0.15,
-        "attributeBase": 3,
-        "perUse": 0,
-        "useCap": 0,
-        "useNote": "INERT until SNG-258 §2's skill-use counter writes `uses` onto a declared move. Left at 0 rather than guessed: a term that scales on a field nobody supplies is a dial with nothing on the other end. Owner: whoever builds §2.",
-        "maxScaling": 6
-      },
-      "tuning": "A synthesized foe has health 3-8 (3 + threat/15). At base 1 + t3*0.5 + a 20-margin gap*0.06 that is a ~4-point hit, so a clean exchange or two puts down a riffraff and a regional takes real work. Raise perMarginPoint to reward decisive blows more; raise base to make every landed hit matter.",
-      "healFunctions": [
-        "heal",
-        "mend",
-        "restore"
-      ],
-      "_healFunctions": "⛔ CCODE-207 - THE VERBS THAT MEND. Healing was not guarded out of the damage block, it was never let in: that branch is gated on harmFunctions and these are not harm verbs, so 25 crafts with authored dice could win a round and produce nothing. ⚠️ A heal resolves through craftmechanics.resolveHeal, not the damage path - it cannot crit, cannot be evaded, and is soaked only by ACTIVE ONGOING HARM, never by armour."
-    },
-    "kinds": {
-      "note": "SNG-247 Tier 1: THE EXIT RULE, PER BOUNDED-THING KIND. The contest core (battleRound) is symmetric and kind-agnostic - two sheets, two rolls, a margin delta driving a meter. The ONE fight-shaped thing left in it was what a PRESSURE TICK costs each side and what it is called. That now lives here, keyed by encounterKind(def) - the SAME function the frame uses to pick its border colour, so the exit rule and the colour can never disagree about what kind of thing you are in. An absent kind falls back to the fight's numbers, so a kind works before anyone authors it.",
-      "dialDiscipline": "The fight deliberately authors NO playerLoss/opponentLoss here - its tick costs keep flowing from momentum.pressure (playerHealthLoss / opponentEnergyLoss / breakAtPressure) so those COMBAT_DIALS knobs stay live. An explicit playerLoss/opponentLoss on a kind SHADOWS those dials for that kind - use it only where the cost is a genuinely different currency (a chase takes wind, not blood; a standoff takes composure and cannot hurt you at all).",
-      "lossShape": "playerLoss / opponentLoss: { health, energy } - what ONE pressure tick takes from that side. pressure: {} - per-kind overrides of momentum.pressure (breakAtPressure, resetTo).",
-      "puzzle": {
-        "lexicon": {
-          "_note": "SNG-250 (Erik: 'this is a sealed door right? not a stranger with feet'). CCode DEFAULTS - Aevi authors the real voice. A puzzle's other side is a THING: no intent, no resolve, no gaze. Any key left unauthored falls back to the fight's word, so a partial lexicon is never worse than none.",
-          "other": "the sealed thing",
-          "them": "it",
-          "their": "its",
-          "they": "it",
-          "it": "it",
-          "craftsLabel": "how it resists",
-          "fullKit": "the whole of its order",
-          "unreadNote": "unread - study it and the order starts to show",
-          "readVerb": "studies IT - finds another turn of the order",
-          "senseHint": "Study it first - it costs the craft's energy, and what you understand carries into the working. Skip it to conserve.",
-          "actionHint": "Your working this turn."
-        },
-        "moveFunctions": [
-          "reveal",
-          "foresee",
-          "track",
-          "break",
-          "shape",
-          "restore",
-          "empower",
-          "sustain",
-          "ward"
-        ],
-        "moveNote": "SNG-248: a sealed thing yields to KNOWING and MAKING - reveal/foresee to read the order, break/shape to work it. Striking a door is in the free-text field if you want it, not a shortcut.",
-        "note": "SNG-247 Tier 3. A puzzle is UNOPPOSED - the sealed thing has no turn - so its other side is a STATIC ANTAGONIST: it resists at one number and never chooses. That is honest rather than a fudge, because a fixed margin is exactly what a DC is. Per Erik's per-kind weighting the SENSE step is the whole game here: winning the read buys a layer of understanding, which is what keeps the authored hint ladder alive inside the contest instead of replacing it. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-4.",
-        "playerLoss": {
-          "health": 0,
-          "energy": 8
-        },
-        "opponentLoss": {
-          "health": 0,
-          "energy": 25
-        },
-        "pressure": {
-          "breakAtPressure": 2,
-          "playerBreaksAtPressure": 3
-        },
-        "pressureLabel": {
-          "player": "the sealed thing gives you nothing back — an approach fails, and you've spent effort learning it was the wrong one",
-          "opponent": "a piece of the order comes clear — {them} loosens toward you, one understanding closer to open"
-        },
-        "outcomes": {
-          "opponentYields": "the last of it gives — {them} opens on what it kept, and it was always going to be whoever read it right",
-          "opponentBreaks": "the last of it gives — {them} opens on what it kept, and it was always going to be whoever read it right",
-          "playerOvercome": "you're spent on it — the thing stays sealed, and it has learned you now; come back warier or leave it to its keeping",
-          "losingCostsHealth": false,
-          "healthNote": "A sealed thing that BITES is a hazard wearing a puzzle's clothes - author the bite as a landed effect (persistentEffects) rather than as damage on the loss, so the player sees what hurt them."
-        }
-      },
-      "chase": {
-        "lexicon": {
-          "_note": "SNG-250 CCode DEFAULTS - Aevi authors. A chase is GROUND and BREATH; nobody is trading blows.",
-          "other": "the one you are running from",
-          "craftsLabel": "how they run",
-          "fullKit": "everything they can do on their feet",
-          "unreadNote": "unread - a look back shows you how they move",
-          "readVerb": "reads THEIR line - where they will be, and where the ground gives",
-          "senseHint": "Read the route first - it costs wind, and there is not much time to look. Skip it to save your breath.",
-          "actionHint": "Your move for this stretch of ground."
-        },
-        "moveFunctions": [
-          "move",
-          "conceal",
-          "bind",
-          "hinder",
-          "reveal",
-          "foresee",
-          "track",
-          "empower",
-          "sustain",
-          "restore",
-          "shield"
-        ],
-        "moveNote": "SNG-248 (Erik): a chase is won with LEGS and GROUND, not blades - move/conceal to break away, bind/hinder to slow them, the senses to read the route. A strike does not close a gap, so it is not offered as a shortcut here. The free-text field still takes anything.",
-        "note": "SNG-247 Tier 2b. A chase is an OPPOSED contest - the same person who was swinging at you is running you down, with their own wind and their own choices - so it runs the one contest engine. What differs is the CURRENCY: ground is bought with WIND, not blood. Short by design: breakAtPressure 1, because a chase that grinds is a fight with extra steps. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-4.",
-        "playerLoss": {
-          "health": 0,
-          "energy": 12
-        },
-        "opponentLoss": {
-          "health": 0,
-          "energy": 18
-        },
-        "pressure": {
-          "breakAtPressure": 1,
-          "playerBreaksAtPressure": 1
-        },
-        "pressureLabel": {
-          "player": "{them} closes — the gap shrinks the wrong way and your wind goes with it",
-          "opponent": "you open the gap — {them} is losing you, breath by hard breath"
-        },
-        "outcomes": {
-          "opponentYields": "{them} falls off the pace — blown, or beaten to the ground you needed; either way, clear",
-          "opponentBreaks": "{them} falls off the pace — blown, or beaten to the ground you needed; either way, clear",
-          "playerOvercome": "your wind goes — {them} runs you down, or you lose them and the thing you were chasing both; if you were fleeing a fight, it's on you again",
-          "losingCostsHealth": false,
-          "healthNote": "losingCostsHealth:false because being CAUGHT is not damage - it is the fight resuming (FRAME_TRANSITIONS chase.fail = fight). The toll comes from the fight you dropped back into."
-        },
-        "openQuestion": "AEVI: a chase is DIRECTIONALLY AMBIGUOUS and the frame copy currently assumes you are the PURSUER ('Give up the pursuit'), while every chase the engine actually mints today is one you are FLEEING. Either two flavors (chase_fleeing / chase_pursuing) or copy that reads both ways."
-      },
-      "standoff": {
-        "lexicon": {
-          "_note": "SNG-250 CCode DEFAULTS - Aevi authors. A standoff is WILL; nothing is laid a hand on.",
-          "other": "the one standing against you",
-          "craftsLabel": "how they hold",
-          "fullKit": "the whole of their position",
-          "unreadNote": "unread - take their measure and their footing shows",
-          "readVerb": "reads THEM - what they actually want, and what they fear losing",
-          "senseHint": "Take their measure first - it costs you nothing but the moment, and the moment is the exchange.",
-          "actionHint": "Your press this turn."
-        },
-        "moveFunctions": [
-          "command",
-          "deceive",
-          "reveal",
-          "foresee",
-          "resist",
-          "ward",
-          "shield",
-          "sustain",
-          "empower",
-          "bind",
-          "restore"
-        ],
-        "moveNote": "SNG-248: a standoff is won on WILL - command/deceive to press, resist/ward to hold, the senses to read them. Drawing a blade is not a standoff move; it is the MORPH into a fight.",
-        "note": "SNG-247 Tier 2a. A standoff is structurally a DUEL - two wills, two rolls, a meter between them - so it runs the one contest engine. What differs is the CURRENCY: pressing a point costs composure, never blood. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-3.",
-        "playerLoss": {
-          "health": 0,
-          "energy": 6
-        },
-        "opponentLoss": {
-          "health": 0,
-          "energy": 20
-        },
-        "pressure": {
-          "breakAtPressure": 2,
-          "playerBreaksAtPressure": 2
-        },
-        "pressureLabel": {
-          "player": "{them} holds the line - your position weakens, though nothing has been laid a hand on.",
-          "opponent": "{them}'s certainty cracks - they are closer to standing aside than they were."
-        },
-        "outcomes": {
-          "opponentYields": "{them}'s certainty gives — they stand aside, or grant the point; not beaten, PERSUADED, and they'll remember it went to you clean",
-          "opponentBreaks": "{them}'s certainty gives — they stand aside, or grant the point; not beaten, PERSUADED, and they'll remember it went to you clean",
-          "playerOvercome": "your position collapses — you've lost the exchange, and {them} holds the ground you were contesting; nothing was laid a hand on, and you feel it anyway",
-          "losingCostsHealth": false,
-          "healthNote": "losingCostsHealth:false is the RULING that a contest of wills cannot hurt you. A toll-keeper who draws is a MORPH into a fight - a different mechanic - not a standoff that deals damage."
-        }
-      },
-      "fight": {
-        "pressureLabel": {
-          "player": "{them} drives you back hard - you give ground but you are still standing.",
-          "opponent": "You drive {them} back hard - they are shaken, but not done."
-        },
-        "note": "Costs intentionally omitted - see dialDiscipline. Only the prose is authored here; the numbers stay on the live momentum.pressure dials."
-      }
-    },
-    "note": "SNG-098 machine layer — structured so skill_battle.js reads NUMBERS, never the prose above (the §7b lesson). The prose stays as the design record; this is what the engine executes.",
-    "functionMatchup": {
-      "note": "SNG-254 (Aevi 2026-08-01): the function MATCHUP MATRIX. edges[attacker][defender]=signed bonus for attacker. Only the MARGIN (my edge minus theirs) decides a round, so a pair must be ASYMMETRIC to do anything - equal-both-ways cancels to a no-op (the SNG-254b inert-pair fix). KNOW sees through INFLUENCE (reveal>deceive/conceal, foresee>the telegraphed strike); BREAK/OPEN break defenses (break>shield/ward, break>bind); BIND/HINDER lock the mobile but a seer breaks free (reveal/foresee>bind, foresee>hinder); DECEIVE beats the aimed but a reader sees through; TRACK/CONCEAL LEAN to the hider (conceal>track slightly - not a cycle, a lean; a true cycle would need a third verb A>B>C>A); SUSTAIN outlasts a burst (sustain>break). Range ~-3..+4; PROTECT blunted. Relationships are the design; magnitudes tunable.",
-      "edges": {
-        "strike": {
-          "reveal": 2,
-          "foresee": -2,
-          "track": 2,
-          "make": 1,
-          "summon": 1,
-          "bind": 1,
-          "command": 1,
-          "conceal": 1,
-          "deceive": -1,
-          "move": -2,
-          "travel": -1,
-          "sustain": 2
-        },
-        "break": {
-          "shield": 2,
-          "ward": 3,
-          "resist": 2,
-          "make": 1,
-          "summon": 1,
-          "transform": 1,
-          "bind": 2
-        },
-        "hinder": {
-          "move": 1,
-          "travel": 2,
-          "open": 1,
-          "empower": 1,
-          "heal": 1,
-          "restore": 1,
-          "track": 2,
-          "summon": 1,
-          "mend": 1
-        },
-        "empower": {
-          "strike": 1,
-          "break": 1,
-          "resist": 1
-        },
-        "ward": {
-          "transform": 1,
-          "summon": 1,
-          "bind": 1
-        },
-        "resist": {
-          "bind": 2,
-          "command": 2,
-          "deceive": 1,
-          "hinder": 1
-        },
-        "reveal": {
-          "deceive": 1,
-          "conceal": 3,
-          "bind": 1,
-          "command": 1,
-          "transform": 1,
-          "make": 1
-        },
-        "foresee": {
-          "strike": 1,
-          "break": 1,
-          "hinder": 1,
-          "command": 2,
-          "deceive": 1,
-          "summon": 1,
-          "transform": 1
-        },
-        "track": {
-          "conceal": 2,
-          "move": 2,
-          "travel": 2,
-          "deceive": 2,
-          "open": 1
-        },
-        "make": {
-          "break": -1,
-          "strike": -1
-        },
-        "transform": {
-          "shield": 2,
-          "ward": 2,
-          "bind": 2,
-          "resist": 1,
-          "make": 1
-        },
-        "summon": {
-          "strike": -1
-        },
-        "bind": {
-          "move": 2,
-          "travel": 3,
-          "strike": 2,
-          "break": 1,
-          "summon": 1,
-          "foresee": -2,
-          "heal": 2,
-          "mend": 1,
-          "restore": 2
-        },
-        "command": {
-          "strike": 2,
-          "move": 2,
-          "make": 1,
-          "summon": 1,
-          "resist": -2,
-          "reveal": -1,
-          "heal": 2,
-          "restore": 1,
-          "foresee": 1
-        },
-        "deceive": {
-          "strike": 1,
-          "track": 1,
-          "command": 1,
-          "reveal": -3,
-          "foresee": -2
-        },
-        "conceal": {
-          "track": 3,
-          "reveal": 2,
-          "strike": 2,
-          "foresee": 1
-        },
-        "move": {
-          "strike": 1,
-          "break": 1,
-          "summon": 1,
-          "track": -2,
-          "bind": -2,
-          "hinder": -2
-        },
-        "travel": {
-          "hinder": 1,
-          "bind": -1
-        },
-        "open": {
-          "ward": 3,
-          "shield": 2,
-          "bind": 2,
-          "make": 1
-        },
-        "sustain": {
-          "strike": 1,
-          "break": 1,
-          "hinder": 2,
-          "empower": 1
-        },
-        "heal": {
-          "strike": 2,
-          "break": 1
-        },
-        "mend": {
-          "strike": 1,
-          "break": 1
-        },
-        "restore": {
-          "strike": 1
-        }
-      },
-      "defensiveFunctions": [
-        "shield",
-        "ward",
-        "resist"
-      ],
-      "defensiveBluntCap": 3,
-      "default": 0
-    },
-    "intensityLevels": [
-      "conserve",
-      "standard",
-      "surge"
-    ],
-    "momentum": {
-      "meterMax": 10,
-      "marginScale": 0.2,
-      "surgeCrushEndsIt": 20,
-      "asModifier": {
-        "perPoint": 0.5,
-        "max": 8
-      },
-      "pressure": {
-        "resetTo": 0.35,
-        "playerHealthLoss": 3,
-        "opponentEnergyLoss": 22,
-        "breakAtPressure": 2
-      },
-      "redesignNote": "CCODE-38 (Erik, decisive): 'momentum should be a MODIFIER mechanic, not the primary exit encounter metric.' He ended a fight at 37/45 hp and 90/115 energy — beaten by a meter while holding every real resource. So momentum no longer ENDS anything. It does two things now: (1) asModifier — whoever is ahead carries a named roll bonus (pressure/advantage), the side behind carries the penalty, capped at ±max; (2) filling the meter is a PRESSURE EVENT, not a death — the dominated side takes real attrition (the player loses health, the opponent loses energy/composure), a pressure counter ticks, and the meter resets to resetTo so they are driven back but still IN it. The fight now ends only on things the player can feel and manage: health gone, energy gone, the opponent breaking after breakAtPressure pressure events, a stalemate of mutual exhaustion, or a deliberate exit (Yield / Break away / Finish it).",
-      "note": "CCODE-34 (Erik, MEASURED — the SNG-246 widening was not enough because marginScale stayed at 0.5): two d100 rolls differ by ~33 on average, so a TYPICAL round's delta was ~16.5 — past BOTH meterMax and the crush threshold at once. Simulated 4000 fights/dial against the real battleRound: the old 16/0.5/16 ended 47% of fights in ONE round and 90.6% by crush. 16/0.20/20 gives median 4-5 rounds, ~5% one-round ends (mostly vs weak foes — correct), and ~4% crush ends, so an overwhelming blow stays a rare real beat. bidirectional -meterMax..+meterMax; a round shifts it toward the winner by round-margin * marginScale; reaching +/-meterMax resolves. The deliberate Finish-it (the §6b collapse) is a SEPARATE path and still ends a fight in one beat BY CHOICE. DIAL: Aevi/Erik tune to taste."
-    },
-    "attrition": {
-      "outOfEnergyLosesContest": true,
-      "note": "a side that cannot pay a round's energy cost can only Conserve; at 0 energy it forfeits the contest even if ahead on rolls — attrition is the second win condition."
-    },
-    "appraisal": {
-      "note": "CCODE-44 (Erik): 'When a fight offer is given… stand and fight, or run away. You should be able to tell something about how hard the opponent will be to beat.' Rule 18 offers a lethal fight rather than imposing it — but a decline you cannot inform is not a real choice. The comparison is CODE (always relative to THIS character); the wording is content. dispositionByTag maps an opponent's own tacticTags to what they are after — read, never invented.",
-      "relativeTolerance": 1,
-      "threatBands": [
-        {
-          "at": 80,
-          "label": "deadly"
-        },
-        {
-          "at": 60,
-          "label": "dangerous"
-        },
-        {
-          "at": 40,
-          "label": "serious"
-        },
-        {
-          "at": 20,
-          "label": "modest"
-        },
-        {
-          "at": 0,
-          "label": "slight"
-        }
-      ],
-      "dispositionByTag": {
-        "berserker": "out to kill — they will not stop",
-        "duelist": "out to beat you, not to murder you",
-        "thief": "out to take what you carry",
-        "brigand": "out to take what you carry",
-        "ambusher": "out to end it before you are ready",
-        "skirmisher": "out to wound you and withdraw",
-        "coward": "looking for a way out already",
-        "guardian": "out to stop you passing — no more than that"
-      }
-    },
-    "items": {
-      "note": "CCODE-43 (Erik): 'Item use itself needs to be weaved in as well... do I use my dagger, or my axe... my metal shield or my energy shield? Inventory becomes functional - throw a chemical at them or drink a potion.' Two ways an item reaches a fight. (1) WIELDED: what you carry quietly modifies the moves it suits — a blade helps a strike, a shield helps a guard — as a NAMED line in the roll, read off the item's own bonusTags (the same field normal play already uses, so nothing needs re-authoring). (2) USED: a consumable is a MOVE you spend a step on — drink it to restore, throw it to harm. Spending an item is the honest answer to being spent, which is why drinking is a real option when your crafts have gone quiet.",
-      "tagFunctions": {
-        "melee": [
-          "strike",
-          "break"
-        ],
-        "blade": [
-          "strike"
-        ],
-        "axe": [
-          "break",
-          "strike"
-        ],
-        "spear": [
-          "strike"
-        ],
-        "bow": [
-          "strike"
-        ],
-        "thrown": [
-          "strike"
-        ],
-        "shield": [
-          "shield",
-          "ward"
-        ],
-        "armor": [
-          "resist",
-          "shield"
-        ],
-        "focus": [
-          "reveal",
-          "foresee",
-          "empower"
-        ],
-        "light": [
-          "reveal"
-        ],
-        "rope": [
-          "bind"
-        ],
-        "tool": [
-          "make",
-          "open"
-        ]
-      },
-      "wieldBonusPerItem": 4,
-      "wieldBonusCap": 8,
-      "throwFunction": "strike",
-      "throwTier": 2,
-      "drinkFunction": "restore",
-      "restoreIsFreeOfContest": true,
-      "maxItemMovesShown": 6
-    },
-    "unmaking": {
-      "note": "CCODE-84 (Aevi CHECKS 6f): the_undoing_word r2 reaches WHAT IS BOUND as well as what is BUILT - a working, a ward, a seal, a pact held by craft. Nothing in the engine could REMOVE a standing effect; they only ticked down, so the destruction pole's T-IV kind-change did nothing against every tradition whose crafts work by leaving something standing. Ranked like soak and evasion: a craft unmakes workings up to its own `unmakeRank` and a deeper binding holds. It strips the OTHER side's workings only, and only on a roll that landed - a botched unmaking tears nothing down. Set kinds to restrict WHICH effects can be unmade; empty means all of them.",
-      "enabled": true,
-      "requiresDegree": [
-        "crit_success",
-        "success"
-      ],
-      "kinds": []
-    },
-    "damageTypes": {
-      "note": "CCODE-83 (Aevi CHECKS A6): damage has a KIND, and some things answer the kind rather than the amount. Two concepts kept apart: a soak LAYER may name a `type` and then answers only that type (the_true_ground soaks DECEPTION at rank 2 and nothing against a blade); and a sheet may carry an `affinity` per type, applied BEFORE soak, because absorbing light is not thicker skin. ABSORB reports a NEGATIVE damage amount - the blow heals its target - rather than becoming zero, which would read as a miss. With nothing typed and no affinity authored, the arithmetic is identical to before.",
-      "affinities": [
-        "immune",
-        "resist",
-        "vulnerable",
-        "absorb"
-      ],
-      "untypedIsNote": "CCODE-83c: the kind that harm with NO TRADITION AT ALL carries - a sword, a thrown rock, bare hands. the_unmoored_choir is authored `physical: immune`, which plainly means immune to blades, and nothing else produces a physical kind. IT DOES NOT APPLY TO A CRAFT WHOSE TRADITION IS MERELY UNTYPED YET: that is UNDECIDED, not mundane, and typing it here made logos, the_grief_strike and noesis all deal physical damage and bounce off the choir for no authored reason. Absent is not zero.",
-      "untypedIs": "physical",
-      "resistMult": 0.5,
-      "vulnerableMult": 1.5,
-      "absorbMult": 1
-    },
-    "evasion": {
-      "note": "CCODE-80 (Erik): evasion is NOT soak. Soak reduces damage after a hit lands; evasion means it does not land. Applied in BOTH of the engine's currencies because degree drives the effect layer while DAMAGE is computed from roundWinner and marginGap and never looks at degree - degrading only the degree would print 'partial' and deal a full hit. marginPerPoint is how much one authored point of evasion takes off the attacker's margin; rankToBeatARead is the evasionRank needed to dodge an attacker who READ you first (Aevi's r2: 'degrades even a well-set-up attack'). THE GRAZE is not here on purpose - the craft's own small soak already blunts what remains, through the ranked-soak path.",
-      "enabled": true,
-      "marginPerPoint": 4,
-      "rankToBeatARead": 2
-    },
-    "senseStep": {
-      "concealFunctions": [
-        "conceal",
-        "deceive"
-      ],
-      "concealTierWeight": 6,
-      "passiveAttributeWeight": 3,
-      "senseOppositionNote": "SNG-248 (Erik): a read is opposed by what resists BEING READ - their concealing craft, else a flat passive off their sharpest attribute - NOT by whatever they happened to declare. Reading a foe who is swinging should not mean beating their swing with your eyes.",
-      "tierByDegree": {
-        "failure": 0,
-        "partial": 1,
-        "success": 2,
-        "crit": 3,
-        "decisiveMargin": 25
-      },
-      "tierByDegreeNote": "SNG-248 (Erik's ladder): what you LEARN is earned by the roll, not by a standing stat. Craft NAMES come in at tier 1; tier 3 additionally earns GM-narrated advice on the read.",
-      "note": "CCODE-46 (Erik): 'During the sense action, you shouldn’t be able to use clearly attacks during the sense round — it should only allow skills that can sense, or an attribute based generic type sense.' senseFunctions gates the craft list for the SENSE step. genericSenses are the always-available attribute reads — you can always LOOK, even with no sensing craft — and the attribute you look WITH changes what you find: 'a wits sense could find a solution that a Reason based sense might miss.'",
-      "guardFunctions": [
-        "ward",
-        "shield",
-        "resist"
-      ],
-      "guardFunctionsNote": "CCODE-78 (Erik): 'we may want to add the wards as an option to the sense step... that way they have a chance of taking effect for that round and the next.' A ward is not an ATTACK, so offering it here keeps the CCODE-46 constraint above rather than bending it, and the effect machinery already worked: a guard laid on the sense step is standing before the action step of the same turn resolves, and still standing on the next. What makes it a CHOICE rather than a free upgrade is the trade in guardEarnsNoRead: spend the step guarding and you did not read, so there is no setup bonus and no sense tier. Empty this list to take the option away.",
-      "guardEarnsNoRead": true,
-      "senseFunctions": [
-        "reveal",
-        "foresee",
-        "track"
-      ],
-      "genericSenses": [
-        {
-          "sub": "wits",
-          "name": "Size them up (Wits)",
-          "finds": "the opening, the trick, the thing they are not guarding"
-        },
-        {
-          "sub": "reason",
-          "name": "Reason it out (Reason)",
-          "finds": "the pattern in how they fight, and where it breaks"
-        },
-        {
-          "sub": "insight",
-          "name": "Read them (Insight)",
-          "finds": "their intent and how much resolve is behind it"
-        }
-      ],
-      "bonusNullBand": 2,
-      "_bonusNullBand": "⛔ SNG-517 §1b - ERIK'S NULL BAND. Where the two rolls are roughly equal, NEITHER side earns a bonus action. ⚠️ THIS IS NOT THE TIE RULE AND MUST NOT BE MERGED WITH IT: the tie rule answers WHO WINS THE READ (gap 0 is the obscurer's, unchanged); this answers WHO EARNS A BONUS. At gap 0 the obscurer still denies the read and earns nothing - they broke even, which is the right feel for a coin-flip. Aevi suggested ±2 as a starting dial; widen if bonus actions prove too common.",
-      "obscureReceipt": {
-        "_note": "⛔ AEVI'S PROSE, SNG-517 §4 + SNG-519. THE VARIANTS SHARE A FIRST CLAUSE ON PURPOSE: 'You did not look' is the COST, and the player should read it every time regardless of outcome — that is what makes the trade legible rather than a silent absence. Only the second line varies.\n⛔ SNG-519: `uncontested` ADDED for Erik's ruling. And `noWatcher` REWRITTEN — its old body, 'hiding from no one costs the same as hiding from someone', became FALSE the moment one of those two cases started paying. ⚠️ IT NOW COVERS ONLY THE GUARD CASE: they acted, just not on looking.\n⚠️ THE TWO ARE DELIBERATELY DISTINGUISHABLE AT A GLANCE. 'nothing looked back' vs 'they were not looking either' — the first is an empty room, the second is a person facing the other way.",
-        "base": {
-          "head": "You did not look.",
-          "body": "You spent the moment being hard to read instead — and they were reading."
-        },
-        "wonBonus": {
-          "head": "You did not look — and neither did they.",
-          "body": "They spent their attention on you and came away with nothing. You have a moment they do not."
-        },
-        "nullBand": {
-          "head": "You did not look, and what they saw was not worth having.",
-          "body": "Neither of you gained on the other."
-        },
-        "failed": {
-          "head": "You did not look, and they saw you anyway.",
-          "body": "You spent the moment and they spent it better."
-        },
-        "noWatcher": {
-          "head": "You did not look, and they were not looking either.",
-          "body": "They put their attention somewhere else. Neither of you learned anything, and neither of you gained."
-        },
-        "_gapForAevi": "⛔ CCODE-213 NEEDS A SIXTH VARIANT AND IT IS YOUR PROSE, NOT MINE. Erik ruled that an obscure against an opponent who does NOTHING in the sense round earns the bonus action. Neither existing line fits: `wonBonus` says \"They spent their attention on you and came away with nothing\" — false, they spent nothing; `noWatcher` says \"Hiding from no one costs the same as hiding from someone\" — now false, it costs less. ⚠️ Author `uncontested`, sharing the first clause \"You did not look\" like the others. Until then the engine has no line for this outcome, and that is recorded here rather than covered by a wrong one.",
-        "uncontested": {
-          "head": "You did not look — and nothing looked back.",
-          "body": "They spent the moment on nothing at all. You spent it on something, and that is the whole difference."
-        },
-        "_erikCall_narrowOrWide": "⛔ CCODE TOOK THE NARROW READING AND FLAGGED IT: an opponent who GUARDED has acted, so it earns the obscurer nothing; only a genuinely empty declaration pays.\n⚠️ I AGREE AND WOULD KEEP IT. 'Nothing' should mean nothing. A guard is a slot spent — they chose not to look, which is the same choice the obscurer made, and neither should be paid for it. ⛔ THE WIDE READING WOULD PAY YOU FOR OBSCURING AGAINST ANYONE WHO HAPPENED NOT TO READ THAT ROUND, which is most opponents most rounds, and the bonus stops meaning 'you beat someone'.\n⛔ AND CCODE'S SECOND ARGUMENT IS THE STRONGER ONE: `degradeIfSpent` degrades a broke side to a bare strike or guard rather than to nothing, and a static antagonist holds — SO A GENUINELY EMPTY DECLARATION IS RARE. The narrow reading is a rare reward; the wide one is a tap."
-      }
-    },
-    "oddsPreview": {
-      "note": "CCODE-46 (Erik): 'The skills should also bring in the players read of how likely each are to succeed. just like normal play, but with all the opposed and conditions incorporated. If the enemy uses umbracraft then I might not be able to tell certain success chances as well — unless of course i have a radiant skill.' So each move shows an ESTIMATED chance to win the exchange, and the CONFIDENCE in that estimate is itself fogged: reading them buys precision, and holding a counter-craft to what they are using buys it too (light finds shadow — a reveal-user can price a concealer). Never a lie: low confidence shows a band, not a fake number.",
-      "confidenceByFogTier": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "counterCraftBonus": 1,
-      "bands": [
-        {
-          "at": 80,
-          "label": "near certain"
-        },
-        {
-          "at": 62,
-          "label": "likely"
-        },
-        {
-          "at": 45,
-          "label": "even odds"
-        },
-        {
-          "at": 28,
-          "label": "unlikely"
-        },
-        {
-          "at": 0,
-          "label": "a long shot"
-        }
-      ],
-      "unreadableLabel": "you can't sense this yet"
-    },
-    "finisher": {
-      "note": "CCODE-46 (Erik): 'the finish It button should be an indicator on skills instead of a button. any harm skill, even the basic, could eventually be tagged with finish it. Instakill skills have that from the beginning.' A craft that CAN kill carries finishing potential from the start (harmRung lethal/atrocity); an ordinary harm craft EARNS it by reaching finisherTierAt. The tag is shown on the move itself, and declaring a tagged move in the ACTION step is what arms the one-beat collapse — no separate button.",
-      "alwaysAtHarmRung": [
-        "lethal",
-        "atrocity"
-      ],
-      "finisherTierAt": 3,
-      "odds": {
-        "note": "CCODE-42 (Erik): 'hunter's strike has that potential, but it's a lower percent chance to end it completely unless the damage output would exceed the enemies HP... then it's a finishing move. The cut thread is an opposed roll, so against a healthy foe of equal level it might be a 50/50 ... but against a run down opponent when you have the momentum it's a near certainty of success... just like it's a lower chance with the momentum against you or against a high level opponent.' So a finisher's chance to END the fight outright is SITUATIONAL: base by how lethal the craft is, then moved by the foe's condition (spent/pressured), the momentum you hold, and the tier gap between you.",
-        "baseByRung": {
-          "atrocity": 55,
-          "lethal": 48,
-          "wounding": 22,
-          "restraint": 10,
-          "none": 6
-        },
-        "perMomentumPoint": 2.5,
-        "perTierGap": 7,
-        "wornDownBonus": 30,
-        "pressureBonus": 12,
-        "floor": 2,
-        "ceiling": 95,
-        "wornDownAtEnergyPct": 0.3
-      }
-    },
-    "turn": {
-      "note": "CCODE-45 (Erik): a TURN is sense -> action -> bonus, not a single exchange. 'the sense action, the main action, then the bonus action - for each player and opponent get tallied up and then narrated - the net result sets up the next round.' The sense step is OPTIONAL (skip to conserve energy, if you have no sense skill, or if a craft has blinded you), carries the cost of the ability used, and is LOCKED once its GM narration lands. A good sense buys a NAMED bonus on the action roll — never a hidden fudge. CCode's calls, all dials: senseMovesMomentum false (else momentum swings 3x/turn and the measured CCODE-38 pacing is void); the bonus step grant threshold was MEASURED, not guessed — CCode first proposed crit-only, and the simulation overturned it: crit-only left 20% of peer fights UNRESOLVED at 30 turns (median 21). crit+success gives median 13 turns, 0% unresolved, 82% player win / 18% down. The sim also proved the sense step is worth taking at all: sensing every turn raises the peer win-rate from 53% to 71%.",
-      "senseMovesMomentum": false,
-      "setupBonusScale": 0.3,
-      "setupBonusMax": 12,
-      "bonusOnDegrees": [
-        "crit_success"
-      ],
-      "gmCallsPerTurn": 2,
-      "_bonusOnDegrees_ccode257": "⛔ ERIK, 2026-08-26: \"set the dial to crit only and let's see how it plays\". Was [\"crit_success\", \"success\"].\n⚠️ MEASURED BEFORE THE CHANGE (scripts/bonus_dial.mjs, re-runnable): across five sense-step cases the bonus rate goes 57% -> 20%. ⛔ BUT THE ROW THAT DECIDES IT BARELY MOVES: 'you HIDE, they READ' — the intended play — goes 85% -> 78%, because `senseBonusFor` pays for BEATING A READER regardless of degree. So this does not make bonus actions rare; it strips out the incidental payouts and leaves the designed one standing.\n⛔ AND THE REASON ERIK RAISED IT, WHICH IS THE STRONGER ARGUMENT: four crafts exist to GRANT a bonus action (case_closed, perfect_motion, dread_mantle, name_invoked). A craft that hands you one is worth nothing when you already had one — so the old dial quietly devalued the crafts whose whole point is the thing it gave away free. This makes those four 1.9x more valuable.\n⚠️ TO REVERT: put \"success\" back. Re-run scripts/bonus_dial.mjs first — it measures the CURRENT authoring against the alternative either way round."
-    },
-    "weave": {
-      "note": "CCODE-37 (Erik: 'this is where braids really shine'). Turn-by-turn combat makes you pick ONE thing per turn — so the reward for having practised two crafts together is doing BOTH in a single turn. A woven round leads with one craft (its function drives the matchup) and folds a second in: the second adds a NAMED bonus line to the roll, AND its persistent effect lands too, so one turn leaves two things standing. It costs energy for both, so weaving is a real choice, not a free upgrade. It also records a CO-ACTIVATION in the practice ledger — weave a pairing enough times (BRAID_RIPEN_AT) and you EARN the braid as a single minted craft, at which point you get the combined effect for one craft's cost. That is the whole arc: weave by hand, pay double, until the braid makes it one move.",
-      "bonusPerTier": 2,
-      "maxBonus": 8,
-      "energyMultiplier": 1.8
-    },
-    "persistentEffects": {
-      "note": "CCODE-35 (Erik): 'Each action should produce something that could persist, such as raising a shield at the beginning, or gaining a sense/insight gives you bonuses to defense or striking.' A move that LANDS leaves a standing effect for a few rounds. The effect is not a hidden fudge: it enters the next round's roll as a NAMED, SIGNED contestMod on the SNG-106 self-summing breakdown, so 'guard up +4' is visible in the same math as the matchup and intensity terms. applies: whenAttacked (it answers incoming harm) / whenAttacking (it sharpens your own blow) / always (knowledge and hindrance cut both ways). target: self (a boon on the actor) / opponent (a hindrance laid on the other side).",
-      "requiresDegree": [
-        "crit_success",
-        "success",
-        "partial"
-      ],
-      "partialValueMult": 0.5,
-      "critBonusRounds": 1,
-      "maxActivePerSide": 3,
-      "refreshesSameKind": true,
-      "craftDuration": {
-        "note": "CCODE-77: how long a landed move STANDS comes from the craft that made it, not from one number per verb. Before this a T-V bind held exactly as long as a T-I one and an authored `duration` reached nothing. roundsPerPoint converts the craft's duration ladder into rounds; craftDurationMax clamps it, because that ladder runs to 17 and a fight is not 17 rounds long - the tier advantage should be FELT, not decisive on its own. Set enabled:false to go back to the flat per-verb rounds.",
-        "enabled": true,
-        "roundsPerPoint": 0.35,
-        "craftDurationMax": 5
-      },
-      "byFunction": {
-        "shield": {
-          "kind": "guard",
-          "label": "guard up",
-          "value": 4,
-          "rounds": 2,
-          "applies": "whenAttacked",
-          "target": "self"
-        },
-        "ward": {
-          "kind": "ward",
-          "label": "warded",
-          "value": 4,
-          "rounds": 2,
-          "applies": "whenAttacked",
-          "target": "self"
-        },
-        "resist": {
-          "kind": "brace",
-          "label": "braced",
-          "value": 3,
-          "rounds": 2,
-          "applies": "whenAttacked",
-          "target": "self"
-        },
-        "conceal": {
-          "kind": "unseen",
-          "label": "hard to find",
-          "value": 3,
-          "rounds": 1,
-          "applies": "whenAttacked",
-          "target": "self"
-        },
-        "reveal": {
-          "kind": "insight",
-          "label": "you have their measure",
-          "value": 3,
-          "rounds": 2,
-          "applies": "always",
-          "target": "self"
-        },
-        "foresee": {
-          "kind": "insight",
-          "label": "reading their next beat",
-          "value": 4,
-          "rounds": 2,
-          "applies": "always",
-          "target": "self"
-        },
-        "track": {
-          "kind": "insight",
-          "label": "on their line",
-          "value": 3,
-          "rounds": 2,
-          "applies": "always",
-          "target": "self"
-        },
-        "empower": {
-          "kind": "empowered",
-          "label": "empowered",
-          "value": 4,
-          "rounds": 2,
-          "applies": "whenAttacking",
-          "target": "self"
-        },
-        "sustain": {
-          "kind": "steady",
-          "label": "steadied",
-          "value": 3,
-          "rounds": 3,
-          "applies": "always",
-          "target": "self"
-        },
-        "bind": {
-          "kind": "bound",
-          "label": "bound",
-          "value": -4,
-          "rounds": 2,
-          "applies": "always",
-          "target": "opponent"
-        },
-        "hinder": {
-          "kind": "hampered",
-          "label": "hampered",
-          "value": -3,
-          "rounds": 2,
-          "applies": "always",
-          "target": "opponent"
-        },
-        "command": {
-          "kind": "swayed",
-          "label": "swayed",
-          "value": -3,
-          "rounds": 2,
-          "applies": "always",
-          "target": "opponent"
-        },
-        "deceive": {
-          "kind": "misled",
-          "label": "misled — cannot read you",
-          "value": -3,
-          "rounds": 1,
-          "applies": "always",
-          "target": "opponent",
-          "deniesPhase": "setup"
-        }
-      },
-      "phaseDenialNote": "CCODE-41 (Erik): 'perhaps if the opposing skill has blinded you to the sense skills you might have' — an effect may carry deniesPhase, which locks that phase for the side it sits on. A blinded fighter cannot take a SETUP this round: they go straight to their action. This is the counterplay to a setup-heavy build, and the reason skipping setup has to be a first-class option rather than an error state.",
-      "attackFunctions": [
-        "strike",
-        "break"
-      ]
-    },
-    "opponentPolicy": {
-      "note": "deterministic + seeded — the ENGINE picks the opponent's skill+intensity, never the narrative GM. Behind on momentum -> press (Surge); ahead -> pace (Conserve); tacticTags bias it. Skill pick: the function that matches up best against the player's last-SHOWN tendency (only what fog let them reveal to the engine's memory of the player).",
-      "behindSurgeAt": -3,
-      "aheadConserveAt": 3,
-      "defaultIntensity": "standard",
-      "tacticBias": {
-        "berserker": {
-          "surge": true
-        },
-        "reckless": {
-          "surge": true
-        },
-        "duelist": {
-          "pace": true
-        },
-        "cautious": {
-          "pace": true
-        }
-      }
-    },
-    "senseVisibility": {
-      "0": {
-        "reveals": [
-          "outcome"
-        ],
-        "label": "blind — you fight by feel; only the aftermath"
-      },
-      "1": {
-        "reveals": [
-          "outcome",
-          "intent",
-          "skill",
-          "target"
-        ],
-        "label": "a read — their intent, the craft's name, and whether they are looking at YOU"
-      },
-      "2": {
-        "reveals": [
-          "outcome",
-          "intent",
-          "skill",
-          "band",
-          "target"
-        ],
-        "label": "a measure — the craft, a band on their roll, and WHO they are going for"
-      },
-      "3": {
-        "reveals": [
-          "outcome",
-          "intent",
-          "band",
-          "skill",
-          "intensity",
-          "breakdown",
-          "target"
-        ],
-        "label": "near-precise — their skill, intensity, full breakdown, and who they are going for AND WHY"
-      },
-      "note": "your senseTier vs the opponent gates what their round shows. Fog is presentation over TRUE state — the engine computes both full rolls; this table only hides display. NEVER fabricate a number to fill fog: show less, never false. CCODE-250: tier 0 has no `target` reveal ON PURPOSE — a character who obscured themselves instead of reading cannot see the blow coming for an ally, and so cannot step in front of it. That is the price of having hidden."
-    },
-    "revealActionBuysTier": 1,
-    "opponentSheetSynthesis": {
-      "note": "a duel opponent carries threat + tacticTags but no skills[]. Synthesize a modest sheet; an authored opponent.skills[] overrides. threat -> attribute level + ability tier; energy from a threat-scaled pool.",
-      "threatToAttribute": 0.08,
-      "attributeFloor": 2,
-      "attributeKnee": 6,
-      "threatToTier": 0.06,
-      "tierFloor": 1,
-      "tierKnee": 4,
-      "aboveKneeExponent": 0.75,
-      "uncappedNote": "SNG-249 (Erik): the CEILINGS are gone - they capped every foe at threat ~70, so an epic was mechanically identical to a threat-70 raider and the world had no upper tail to run from. Past the knee, growth is sub-linear so a threat-300 thing is fearsome without the arithmetic running away. Re-add attributeCeiling/tierCeiling only if you deliberately want a hard top.",
-      "energyBase": 40,
-      "threatToEnergy": 1.2,
-      "healthBase": 10,
-      "threatToHealth": 0.12,
-      "healthKnee": 12,
-      "healthFloor": 3,
-      "healthNote": "SNG-263 r4 GAP1 (Aevi, verified by CCode): this block derived attribute, tier and ENERGY from threat and carried no health term at all, so every synthesised foe fell back to the hardcoded 5 in encounters.js — an epic and a rat had the same 5 hit points. Health now scales on the SAME knee-curve as attribute and tier (aboveKneeExponent), so a threat-300 thing is genuinely durable without the arithmetic running away. An AUTHORED def.opponent.health still wins — this only fills the gap where nothing was authored. Erik's dials.",
-      "soakBase": 0,
-      "threatToSoak": 0.02,
-      "soakKnee": 4,
-      "soakNote": "SNG-263 r4 GAP2: nothing in the engine reduced damage — no soak, armor or temp HP anywhere — so there was nothing for a strike to overcome and nothing for ward/shield to DO. Soak is subtracted from a landed hit and is what stops a scaled-up low-tier craft becoming universal (r4 §11: 'an armored epic foe needs more than a scaled-up cantrip'). Floored by damage.minHit so a hit always hurts a little. Erik owns how hard this should bite.",
-      "archetypeSkills": {
-        "berserker": [
-          {
-            "function": "strike",
-            "name": "the reaving blow"
-          },
-          {
-            "function": "break",
-            "name": "the shatter"
-          }
-        ],
-        "duelist": [
-          {
-            "function": "strike",
-            "name": "the measured cut"
-          },
-          {
-            "function": "shield",
-            "name": "the turned guard"
-          }
-        ],
-        "trickster": [
-          {
-            "function": "conceal",
-            "name": "the feint"
-          },
-          {
-            "function": "move",
-            "name": "the slip"
-          }
-        ],
-        "warden": [
-          {
-            "function": "ward",
-            "name": "the held line"
-          },
-          {
-            "function": "bind",
-            "name": "the pin"
-          }
-        ],
-        "default": [
-          {
-            "function": "strike",
-            "name": "a hard strike"
-          },
-          {
-            "function": "shield",
-            "name": "a raised guard"
-          }
-        ],
-        "kind:standoff": [
-          {
-            "function": "command",
-            "name": "presses a point",
-            "attribute": "social"
-          },
-          {
-            "function": "resist",
-            "name": "holds the line",
-            "attribute": "social"
-          },
-          {
-            "function": "reveal",
-            "name": "reads your certainty",
-            "attribute": "mental"
-          },
-          {
-            "function": "bind",
-            "name": "presses their advantage",
-            "attribute": "social"
-          }
-        ],
-        "kind:chase": [
-          {
-            "function": "move",
-            "name": "closes the gap",
-            "attribute": "physical"
-          },
-          {
-            "function": "track",
-            "name": "cuts off your line",
-            "attribute": "practical"
-          },
-          {
-            "function": "move",
-            "name": "gains ground",
-            "attribute": "physical"
-          },
-          {
-            "function": "foresee",
-            "name": "anticipates your turn",
-            "attribute": "mental"
-          }
-        ]
-      },
-      "soakRankAt": [
-        0,
-        3,
-        6
-      ],
-      "soakRankNote": "SNG-263: soak is a STACK of ranked layers, not a flat number. A foe gains its rank-N layer once its total soak reaches soakRankAt[N-1], so a riffraff has none, a notable has one thin layer, and an epic has a layered guard. A craft's `penetration` cuts every layer of rank <= penetration; the rest still soak. Total soak is unchanged — this only decides how it is DISTRIBUTED, and therefore what a penetrating craft can bypass."
-    },
-    "targetReveal": {
-      "namedAtTier": 2,
-      "reasonAtTier": 3,
-      "note": "tier 1 tells you only whether it is looking at you; tier 2 names the mark; tier 3 says why, which is what makes baiting possible."
-    }
+  "domainModifiers": "Opposed poles clash HARDER (bigger swings, faster resolution): life vs death, order vs chaos, light vs dark contesting is volatile. Co-firing/adjacent poles interact oddly (a life-user vs a death-user at the Quiet-in-the-Quickwood fight on strange ground). The GM applies a situational modifier from the location's disposition too — fighting a shadow-battle in the Radiant Wastes favors the light."
+ },
+ "examples": [
+  {
+   "battle": "Umbral infiltrator (the Never-There, T5) vs a Radiant warden (Radiance, T2)",
+   "how": "conceal vs reveal = -2 base for the concealer, BUT the T5-vs-T2 gap (+large) and a Surge flip it. Round 1 the warden's Radiance sweeps (reveal edge), infiltrator Surges the Never-There to erase the trace faster than light maps it. 2-3 rounds; if the infiltrator's energy holds, the warden is left staring at an empty room. If it runs out, the light catches the afterimage."
   },
-  "buildImplication": "Engine: a skill-battle mode alongside single-check resolution — triggered when two wills contest with skills. Per round: both declare skill+intensity; roll d100+attr+tierBonus+matchupBonus; winner shifts momentum by margin; track energy (attrition); resolve at meter-end or exhaustion. Reads challengeProfile (matchup relevance), functions (the edge table), intensity_scaling (energy), tier (weight). SNG-027 social contest is the SOCIAL-flavored instance of this same engine — unify them: a skill-battle is the general case, social-contest and combat and the duel are flavors. Matchup table authored here; expand per-function. Flag SNG-045. Smoke: a conceal-vs-reveal contest runs multiple rounds; energy attrition can decide it independent of rolls; tier gives both power and stamina; a Surge-botch backlashes; matchup edge beats raw rolls; social-contest resolves through the same engine."
+  {
+   "battle": "Falsecraft liar vs Verity truth-reader",
+   "how": "the signature skill-battle. Each round the liar layers falsehood, the reader peels it. Verity has the +2 truth-vs-falsehood edge, so the liar must out-tier or out-spend. A master liar (Woven Untruth, T3) vs an apprentice reader can hold; the Whole Truth (T5) cracks anything. Momentum = how much of the lie stands when the dust settles."
+  },
+  {
+   "battle": "the Edge duelist (Last Form, T5) vs a Churn-reaver (Unraveling Blow, T3)",
+   "how": "strike vs strike, but the reaver's CHAOS domain resists the Edge's ORDER-read — the Last Form needs a form to read, and chaos gives it none (-matchup). The duelist's tier edge vs the reaver's matchup edge: a real contest, several rounds, decided by who commits energy at the right moment."
+  }
+ ],
+ "engine": {
+  "staticAntagonist": {
+   "note": "SNG-247 Tier 3. The other side of an UNOPPOSED encounter - a sealed door, hard ground. It never chooses (opponentPolicy returns early) and never rolls (rollSide returns its standing resistance). Its resistance enters as a NAMED contestMod on the same self-summing breakdown as every other term, so a bind laid on the door still weakens it AND the player can see that it did.",
+   "defaultResist": 18,
+   "resistLabel": "it holds — not fighting you, simply made to hold, and made well",
+   "degreeVoice": {
+    "crit": "the whole order comes clear at once — it has no answer to being understood",
+    "success": "a piece gives — you feel the thing loosen toward you",
+    "partial": "it holds, but you've learned the shape of how",
+    "failure": "it holds, and closes a little — it has taken your measure now"
+   },
+   "holdFunction": "ward",
+   "defaultGive": 60,
+   "giveNote": "each thing you understand about it is give taken out of it; it does not tire, it YIELDS — the door was always going to open for whoever read it right",
+   "degreeBands": {
+    "crit": 40,
+    "success": 15,
+    "partial": 0,
+    "failure": -15
+   }
+  },
+  "damage": {
+   "note": "SNG-248 (Erik: 'the fight ends even though the strike didn't seem to land... I can't seem to actually wound/damage an opponent'). CCODE-38 replaced momentum-as-death with PRESSURE and never put damage back, so opponentHealth was set at startEncounter and never moved again - a skill battle had no wounds and no kill. Damage is what a WON exchange with a HARM verb does. The two tracks answer different questions: PRESSURE is position (being driven back), HEALTH is injury. Only the winner of the exchange deals it, only with a harming verb, and it scales with the MARGIN GAP - so a turned-aside blow does nothing.",
+   "enabled": true,
+   "harmFunctions": [
+    "strike",
+    "break"
+   ],
+   "base": 1,
+   "perTier": 0.5,
+   "perMarginPoint": 0.06,
+   "minHit": 1,
+   "scaling": {
+    "note": "SNG-263 r4 §11: damage = DICE(tier,rank) + SCALING(level,attribute,uses) - SOAK(target). The DICE are what the craft IS; SCALING is the WIELDER — a master's kindle hits harder than a novice's (the D&D cantrip answer, and the same earned-through-repetition spine as skill-use and aptitudes). Deliberately MODEST: scaling is a flat add, so it lifts a low tier into usefulness without closing the gap to a high tier, and SOAK is the limiter that stops a scaled cantrip becoming universal. Calibrated so a level-20 master adds about +2 — enough that a T-I stays worth casting at epic, not enough to rival a T-III.",
+    "perLevel": 0.06,
+    "perAttributePoint": 0.15,
+    "attributeBase": 3,
+    "perUse": 0,
+    "useCap": 0,
+    "useNote": "INERT until SNG-258 §2's skill-use counter writes `uses` onto a declared move. Left at 0 rather than guessed: a term that scales on a field nobody supplies is a dial with nothing on the other end. Owner: whoever builds §2.",
+    "maxScaling": 6
+   },
+   "tuning": "A synthesized foe has health 3-8 (3 + threat/15). At base 1 + t3*0.5 + a 20-margin gap*0.06 that is a ~4-point hit, so a clean exchange or two puts down a riffraff and a regional takes real work. Raise perMarginPoint to reward decisive blows more; raise base to make every landed hit matter.",
+   "healFunctions": [
+    "heal",
+    "mend",
+    "restore"
+   ],
+   "_healFunctions": "⛔ CCODE-207 - THE VERBS THAT MEND. Healing was not guarded out of the damage block, it was never let in: that branch is gated on harmFunctions and these are not harm verbs, so 25 crafts with authored dice could win a round and produce nothing. ⚠️ A heal resolves through craftmechanics.resolveHeal, not the damage path - it cannot crit, cannot be evaded, and is soaked only by ACTIVE ONGOING HARM, never by armour.",
+   "_minHitFlagged_20260828": "⚠️ FLAGGED BY ERIK 2026-08-28: \"I'm not certain about the minHit concept. We'll keep it for now, but flag it.\" ⛔ IT IS KEPT AND IT IS NOT SETTLED. What it does today: a landed blow always takes at least 1 off, so NO FOE IS EVER FULLY IMMUNE and a fully-soaked hit reads as a graze rather than a miss. ⚠️ THE TENSION IS REAL IN BOTH DIRECTIONS: (a) it is why `antisoakLanded` returning a hard 0 was reported as a defect — a craft that reduces to nothing reads as broken; (b) BUT IT ALSO MEANS ARMOUR CAN NEVER FULLY ANSWER ANYTHING, so a heavily-warded foe still bleeds to a cantrip, and typed immunity — which the ward ladder ends in — cannot actually mean immune. ⛔ AND ERIK'S SOAK RULING (A: a guard ABSORBS) puts the same floor on the PLAYER'S side, where 'you always take at least 1' is a different feeling from 'the boss always takes at least 1'. NOT DECIDED. See docs/HOW_IT_WORKS.md §4."
+  },
+  "kinds": {
+   "note": "SNG-247 Tier 1: THE EXIT RULE, PER BOUNDED-THING KIND. The contest core (battleRound) is symmetric and kind-agnostic - two sheets, two rolls, a margin delta driving a meter. The ONE fight-shaped thing left in it was what a PRESSURE TICK costs each side and what it is called. That now lives here, keyed by encounterKind(def) - the SAME function the frame uses to pick its border colour, so the exit rule and the colour can never disagree about what kind of thing you are in. An absent kind falls back to the fight's numbers, so a kind works before anyone authors it.",
+   "dialDiscipline": "The fight deliberately authors NO playerLoss/opponentLoss here - its tick costs keep flowing from momentum.pressure (playerHealthLoss / opponentEnergyLoss / breakAtPressure) so those COMBAT_DIALS knobs stay live. An explicit playerLoss/opponentLoss on a kind SHADOWS those dials for that kind - use it only where the cost is a genuinely different currency (a chase takes wind, not blood; a standoff takes composure and cannot hurt you at all).",
+   "lossShape": "playerLoss / opponentLoss: { health, energy } - what ONE pressure tick takes from that side. pressure: {} - per-kind overrides of momentum.pressure (breakAtPressure, resetTo).",
+   "puzzle": {
+    "lexicon": {
+     "_note": "SNG-250 (Erik: 'this is a sealed door right? not a stranger with feet'). CCode DEFAULTS - Aevi authors the real voice. A puzzle's other side is a THING: no intent, no resolve, no gaze. Any key left unauthored falls back to the fight's word, so a partial lexicon is never worse than none.",
+     "other": "the sealed thing",
+     "them": "it",
+     "their": "its",
+     "they": "it",
+     "it": "it",
+     "craftsLabel": "how it resists",
+     "fullKit": "the whole of its order",
+     "unreadNote": "unread - study it and the order starts to show",
+     "readVerb": "studies IT - finds another turn of the order",
+     "senseHint": "Study it first - it costs the craft's energy, and what you understand carries into the working. Skip it to conserve.",
+     "actionHint": "Your working this turn."
+    },
+    "moveFunctions": [
+     "reveal",
+     "foresee",
+     "track",
+     "break",
+     "shape",
+     "restore",
+     "empower",
+     "sustain",
+     "ward"
+    ],
+    "moveNote": "SNG-248: a sealed thing yields to KNOWING and MAKING - reveal/foresee to read the order, break/shape to work it. Striking a door is in the free-text field if you want it, not a shortcut.",
+    "note": "SNG-247 Tier 3. A puzzle is UNOPPOSED - the sealed thing has no turn - so its other side is a STATIC ANTAGONIST: it resists at one number and never chooses. That is honest rather than a fudge, because a fixed margin is exactly what a DC is. Per Erik's per-kind weighting the SENSE step is the whole game here: winning the read buys a layer of understanding, which is what keeps the authored hint ladder alive inside the contest instead of replacing it. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-4.",
+    "playerLoss": {
+     "health": 0,
+     "energy": 8
+    },
+    "opponentLoss": {
+     "health": 0,
+     "energy": 25
+    },
+    "pressure": {
+     "breakAtPressure": 2,
+     "playerBreaksAtPressure": 3
+    },
+    "pressureLabel": {
+     "player": "the sealed thing gives you nothing back — an approach fails, and you've spent effort learning it was the wrong one",
+     "opponent": "a piece of the order comes clear — {them} loosens toward you, one understanding closer to open"
+    },
+    "outcomes": {
+     "opponentYields": "the last of it gives — {them} opens on what it kept, and it was always going to be whoever read it right",
+     "opponentBreaks": "the last of it gives — {them} opens on what it kept, and it was always going to be whoever read it right",
+     "playerOvercome": "you're spent on it — the thing stays sealed, and it has learned you now; come back warier or leave it to its keeping",
+     "losingCostsHealth": false,
+     "healthNote": "A sealed thing that BITES is a hazard wearing a puzzle's clothes - author the bite as a landed effect (persistentEffects) rather than as damage on the loss, so the player sees what hurt them."
+    }
+   },
+   "chase": {
+    "lexicon": {
+     "_note": "SNG-250 CCode DEFAULTS - Aevi authors. A chase is GROUND and BREATH; nobody is trading blows.",
+     "other": "the one you are running from",
+     "craftsLabel": "how they run",
+     "fullKit": "everything they can do on their feet",
+     "unreadNote": "unread - a look back shows you how they move",
+     "readVerb": "reads THEIR line - where they will be, and where the ground gives",
+     "senseHint": "Read the route first - it costs wind, and there is not much time to look. Skip it to save your breath.",
+     "actionHint": "Your move for this stretch of ground."
+    },
+    "moveFunctions": [
+     "move",
+     "conceal",
+     "bind",
+     "hinder",
+     "reveal",
+     "foresee",
+     "track",
+     "empower",
+     "sustain",
+     "restore",
+     "shield"
+    ],
+    "moveNote": "SNG-248 (Erik): a chase is won with LEGS and GROUND, not blades - move/conceal to break away, bind/hinder to slow them, the senses to read the route. A strike does not close a gap, so it is not offered as a shortcut here. The free-text field still takes anything.",
+    "note": "SNG-247 Tier 2b. A chase is an OPPOSED contest - the same person who was swinging at you is running you down, with their own wind and their own choices - so it runs the one contest engine. What differs is the CURRENCY: ground is bought with WIND, not blood. Short by design: breakAtPressure 1, because a chase that grinds is a fight with extra steps. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-4.",
+    "playerLoss": {
+     "health": 0,
+     "energy": 12
+    },
+    "opponentLoss": {
+     "health": 0,
+     "energy": 18
+    },
+    "pressure": {
+     "breakAtPressure": 1,
+     "playerBreaksAtPressure": 1
+    },
+    "pressureLabel": {
+     "player": "{them} closes — the gap shrinks the wrong way and your wind goes with it",
+     "opponent": "you open the gap — {them} is losing you, breath by hard breath"
+    },
+    "outcomes": {
+     "opponentYields": "{them} falls off the pace — blown, or beaten to the ground you needed; either way, clear",
+     "opponentBreaks": "{them} falls off the pace — blown, or beaten to the ground you needed; either way, clear",
+     "playerOvercome": "your wind goes — {them} runs you down, or you lose them and the thing you were chasing both; if you were fleeing a fight, it's on you again",
+     "losingCostsHealth": false,
+     "healthNote": "losingCostsHealth:false because being CAUGHT is not damage - it is the fight resuming (FRAME_TRANSITIONS chase.fail = fight). The toll comes from the fight you dropped back into."
+    },
+    "openQuestion": "AEVI: a chase is DIRECTIONALLY AMBIGUOUS and the frame copy currently assumes you are the PURSUER ('Give up the pursuit'), while every chase the engine actually mints today is one you are FLEEING. Either two flavors (chase_fleeing / chase_pursuing) or copy that reads both ways."
+   },
+   "standoff": {
+    "lexicon": {
+     "_note": "SNG-250 CCode DEFAULTS - Aevi authors. A standoff is WILL; nothing is laid a hand on.",
+     "other": "the one standing against you",
+     "craftsLabel": "how they hold",
+     "fullKit": "the whole of their position",
+     "unreadNote": "unread - take their measure and their footing shows",
+     "readVerb": "reads THEM - what they actually want, and what they fear losing",
+     "senseHint": "Take their measure first - it costs you nothing but the moment, and the moment is the exchange.",
+     "actionHint": "Your press this turn."
+    },
+    "moveFunctions": [
+     "command",
+     "deceive",
+     "reveal",
+     "foresee",
+     "resist",
+     "ward",
+     "shield",
+     "sustain",
+     "empower",
+     "bind",
+     "restore"
+    ],
+    "moveNote": "SNG-248: a standoff is won on WILL - command/deceive to press, resist/ward to hold, the senses to read them. Drawing a blade is not a standoff move; it is the MORPH into a fight.",
+    "note": "SNG-247 Tier 2a. A standoff is structurally a DUEL - two wills, two rolls, a meter between them - so it runs the one contest engine. What differs is the CURRENCY: pressing a point costs composure, never blood. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-3.",
+    "playerLoss": {
+     "health": 0,
+     "energy": 6
+    },
+    "opponentLoss": {
+     "health": 0,
+     "energy": 20
+    },
+    "pressure": {
+     "breakAtPressure": 2,
+     "playerBreaksAtPressure": 2
+    },
+    "pressureLabel": {
+     "player": "{them} holds the line - your position weakens, though nothing has been laid a hand on.",
+     "opponent": "{them}'s certainty cracks - they are closer to standing aside than they were."
+    },
+    "outcomes": {
+     "opponentYields": "{them}'s certainty gives — they stand aside, or grant the point; not beaten, PERSUADED, and they'll remember it went to you clean",
+     "opponentBreaks": "{them}'s certainty gives — they stand aside, or grant the point; not beaten, PERSUADED, and they'll remember it went to you clean",
+     "playerOvercome": "your position collapses — you've lost the exchange, and {them} holds the ground you were contesting; nothing was laid a hand on, and you feel it anyway",
+     "losingCostsHealth": false,
+     "healthNote": "losingCostsHealth:false is the RULING that a contest of wills cannot hurt you. A toll-keeper who draws is a MORPH into a fight - a different mechanic - not a standoff that deals damage."
+    }
+   },
+   "fight": {
+    "pressureLabel": {
+     "player": "{them} drives you back hard - you give ground but you are still standing.",
+     "opponent": "You drive {them} back hard - they are shaken, but not done."
+    },
+    "note": "Costs intentionally omitted - see dialDiscipline. Only the prose is authored here; the numbers stay on the live momentum.pressure dials."
+   }
+  },
+  "note": "SNG-098 machine layer — structured so skill_battle.js reads NUMBERS, never the prose above (the §7b lesson). The prose stays as the design record; this is what the engine executes.",
+  "functionMatchup": {
+   "note": "SNG-254 (Aevi 2026-08-01): the function MATCHUP MATRIX. edges[attacker][defender]=signed bonus for attacker. Only the MARGIN (my edge minus theirs) decides a round, so a pair must be ASYMMETRIC to do anything - equal-both-ways cancels to a no-op (the SNG-254b inert-pair fix). KNOW sees through INFLUENCE (reveal>deceive/conceal, foresee>the telegraphed strike); BREAK/OPEN break defenses (break>shield/ward, break>bind); BIND/HINDER lock the mobile but a seer breaks free (reveal/foresee>bind, foresee>hinder); DECEIVE beats the aimed but a reader sees through; TRACK/CONCEAL LEAN to the hider (conceal>track slightly - not a cycle, a lean; a true cycle would need a third verb A>B>C>A); SUSTAIN outlasts a burst (sustain>break). Range ~-3..+4; PROTECT blunted. Relationships are the design; magnitudes tunable.",
+   "edges": {
+    "strike": {
+     "reveal": 2,
+     "foresee": -2,
+     "track": 2,
+     "make": 1,
+     "summon": 1,
+     "bind": 1,
+     "command": 1,
+     "conceal": 1,
+     "deceive": -1,
+     "move": -2,
+     "travel": -1,
+     "sustain": 2
+    },
+    "break": {
+     "shield": 2,
+     "ward": 3,
+     "resist": 2,
+     "make": 1,
+     "summon": 1,
+     "transform": 1,
+     "bind": 2
+    },
+    "hinder": {
+     "move": 1,
+     "travel": 2,
+     "open": 1,
+     "empower": 1,
+     "heal": 1,
+     "restore": 1,
+     "track": 2,
+     "summon": 1,
+     "mend": 1
+    },
+    "empower": {
+     "strike": 1,
+     "break": 1,
+     "resist": 1
+    },
+    "ward": {
+     "transform": 1,
+     "summon": 1,
+     "bind": 1
+    },
+    "resist": {
+     "bind": 2,
+     "command": 2,
+     "deceive": 1,
+     "hinder": 1
+    },
+    "reveal": {
+     "deceive": 1,
+     "conceal": 3,
+     "bind": 1,
+     "command": 1,
+     "transform": 1,
+     "make": 1
+    },
+    "foresee": {
+     "strike": 1,
+     "break": 1,
+     "hinder": 1,
+     "command": 2,
+     "deceive": 1,
+     "summon": 1,
+     "transform": 1
+    },
+    "track": {
+     "conceal": 2,
+     "move": 2,
+     "travel": 2,
+     "deceive": 2,
+     "open": 1
+    },
+    "make": {
+     "break": -1,
+     "strike": -1
+    },
+    "transform": {
+     "shield": 2,
+     "ward": 2,
+     "bind": 2,
+     "resist": 1,
+     "make": 1
+    },
+    "summon": {
+     "strike": -1
+    },
+    "bind": {
+     "move": 2,
+     "travel": 3,
+     "strike": 2,
+     "break": 1,
+     "summon": 1,
+     "foresee": -2,
+     "heal": 2,
+     "mend": 1,
+     "restore": 2
+    },
+    "command": {
+     "strike": 2,
+     "move": 2,
+     "make": 1,
+     "summon": 1,
+     "resist": -2,
+     "reveal": -1,
+     "heal": 2,
+     "restore": 1,
+     "foresee": 1
+    },
+    "deceive": {
+     "strike": 1,
+     "track": 1,
+     "command": 1,
+     "reveal": -3,
+     "foresee": -2
+    },
+    "conceal": {
+     "track": 3,
+     "reveal": 2,
+     "strike": 2,
+     "foresee": 1
+    },
+    "move": {
+     "strike": 1,
+     "break": 1,
+     "summon": 1,
+     "track": -2,
+     "bind": -2,
+     "hinder": -2
+    },
+    "travel": {
+     "hinder": 1,
+     "bind": -1
+    },
+    "open": {
+     "ward": 3,
+     "shield": 2,
+     "bind": 2,
+     "make": 1
+    },
+    "sustain": {
+     "strike": 1,
+     "break": 1,
+     "hinder": 2,
+     "empower": 1
+    },
+    "heal": {
+     "strike": 2,
+     "break": 1
+    },
+    "mend": {
+     "strike": 1,
+     "break": 1
+    },
+    "restore": {
+     "strike": 1
+    }
+   },
+   "defensiveFunctions": [
+    "shield",
+    "ward",
+    "resist"
+   ],
+   "defensiveBluntCap": 3,
+   "default": 0
+  },
+  "intensityLevels": [
+   "conserve",
+   "standard",
+   "surge"
+  ],
+  "momentum": {
+   "meterMax": 10,
+   "marginScale": 0.2,
+   "surgeCrushEndsIt": 20,
+   "asModifier": {
+    "perPoint": 0.5,
+    "max": 8
+   },
+   "pressure": {
+    "resetTo": 0.35,
+    "playerHealthLoss": 3,
+    "opponentEnergyLoss": 22,
+    "breakAtPressure": 2
+   },
+   "redesignNote": "CCODE-38 (Erik, decisive): 'momentum should be a MODIFIER mechanic, not the primary exit encounter metric.' He ended a fight at 37/45 hp and 90/115 energy — beaten by a meter while holding every real resource. So momentum no longer ENDS anything. It does two things now: (1) asModifier — whoever is ahead carries a named roll bonus (pressure/advantage), the side behind carries the penalty, capped at ±max; (2) filling the meter is a PRESSURE EVENT, not a death — the dominated side takes real attrition (the player loses health, the opponent loses energy/composure), a pressure counter ticks, and the meter resets to resetTo so they are driven back but still IN it. The fight now ends only on things the player can feel and manage: health gone, energy gone, the opponent breaking after breakAtPressure pressure events, a stalemate of mutual exhaustion, or a deliberate exit (Yield / Break away / Finish it).",
+   "note": "CCODE-34 (Erik, MEASURED — the SNG-246 widening was not enough because marginScale stayed at 0.5): two d100 rolls differ by ~33 on average, so a TYPICAL round's delta was ~16.5 — past BOTH meterMax and the crush threshold at once. Simulated 4000 fights/dial against the real battleRound: the old 16/0.5/16 ended 47% of fights in ONE round and 90.6% by crush. 16/0.20/20 gives median 4-5 rounds, ~5% one-round ends (mostly vs weak foes — correct), and ~4% crush ends, so an overwhelming blow stays a rare real beat. bidirectional -meterMax..+meterMax; a round shifts it toward the winner by round-margin * marginScale; reaching +/-meterMax resolves. The deliberate Finish-it (the §6b collapse) is a SEPARATE path and still ends a fight in one beat BY CHOICE. DIAL: Aevi/Erik tune to taste."
+  },
+  "attrition": {
+   "outOfEnergyLosesContest": true,
+   "note": "a side that cannot pay a round's energy cost can only Conserve; at 0 energy it forfeits the contest even if ahead on rolls — attrition is the second win condition."
+  },
+  "appraisal": {
+   "note": "CCODE-44 (Erik): 'When a fight offer is given… stand and fight, or run away. You should be able to tell something about how hard the opponent will be to beat.' Rule 18 offers a lethal fight rather than imposing it — but a decline you cannot inform is not a real choice. The comparison is CODE (always relative to THIS character); the wording is content. dispositionByTag maps an opponent's own tacticTags to what they are after — read, never invented.",
+   "relativeTolerance": 1,
+   "threatBands": [
+    {
+     "at": 80,
+     "label": "deadly"
+    },
+    {
+     "at": 60,
+     "label": "dangerous"
+    },
+    {
+     "at": 40,
+     "label": "serious"
+    },
+    {
+     "at": 20,
+     "label": "modest"
+    },
+    {
+     "at": 0,
+     "label": "slight"
+    }
+   ],
+   "dispositionByTag": {
+    "berserker": "out to kill — they will not stop",
+    "duelist": "out to beat you, not to murder you",
+    "thief": "out to take what you carry",
+    "brigand": "out to take what you carry",
+    "ambusher": "out to end it before you are ready",
+    "skirmisher": "out to wound you and withdraw",
+    "coward": "looking for a way out already",
+    "guardian": "out to stop you passing — no more than that"
+   }
+  },
+  "items": {
+   "note": "CCODE-43 (Erik): 'Item use itself needs to be weaved in as well... do I use my dagger, or my axe... my metal shield or my energy shield? Inventory becomes functional - throw a chemical at them or drink a potion.' Two ways an item reaches a fight. (1) WIELDED: what you carry quietly modifies the moves it suits — a blade helps a strike, a shield helps a guard — as a NAMED line in the roll, read off the item's own bonusTags (the same field normal play already uses, so nothing needs re-authoring). (2) USED: a consumable is a MOVE you spend a step on — drink it to restore, throw it to harm. Spending an item is the honest answer to being spent, which is why drinking is a real option when your crafts have gone quiet.",
+   "tagFunctions": {
+    "melee": [
+     "strike",
+     "break"
+    ],
+    "blade": [
+     "strike"
+    ],
+    "axe": [
+     "break",
+     "strike"
+    ],
+    "spear": [
+     "strike"
+    ],
+    "bow": [
+     "strike"
+    ],
+    "thrown": [
+     "strike"
+    ],
+    "shield": [
+     "shield",
+     "ward"
+    ],
+    "armor": [
+     "resist",
+     "shield"
+    ],
+    "focus": [
+     "reveal",
+     "foresee",
+     "empower"
+    ],
+    "light": [
+     "reveal"
+    ],
+    "rope": [
+     "bind"
+    ],
+    "tool": [
+     "make",
+     "open"
+    ]
+   },
+   "wieldBonusPerItem": 4,
+   "wieldBonusCap": 8,
+   "throwFunction": "strike",
+   "throwTier": 2,
+   "drinkFunction": "restore",
+   "restoreIsFreeOfContest": true,
+   "maxItemMovesShown": 6
+  },
+  "unmaking": {
+   "note": "CCODE-84 (Aevi CHECKS 6f): the_undoing_word r2 reaches WHAT IS BOUND as well as what is BUILT - a working, a ward, a seal, a pact held by craft. Nothing in the engine could REMOVE a standing effect; they only ticked down, so the destruction pole's T-IV kind-change did nothing against every tradition whose crafts work by leaving something standing. Ranked like soak and evasion: a craft unmakes workings up to its own `unmakeRank` and a deeper binding holds. It strips the OTHER side's workings only, and only on a roll that landed - a botched unmaking tears nothing down. Set kinds to restrict WHICH effects can be unmade; empty means all of them.",
+   "enabled": true,
+   "requiresDegree": [
+    "crit_success",
+    "success"
+   ],
+   "kinds": []
+  },
+  "damageTypes": {
+   "note": "CCODE-83 (Aevi CHECKS A6): damage has a KIND, and some things answer the kind rather than the amount. Two concepts kept apart: a soak LAYER may name a `type` and then answers only that type (the_true_ground soaks DECEPTION at rank 2 and nothing against a blade); and a sheet may carry an `affinity` per type, applied BEFORE soak, because absorbing light is not thicker skin. ABSORB reports a NEGATIVE damage amount - the blow heals its target - rather than becoming zero, which would read as a miss. With nothing typed and no affinity authored, the arithmetic is identical to before.",
+   "affinities": [
+    "immune",
+    "resist",
+    "vulnerable",
+    "absorb"
+   ],
+   "untypedIsNote": "CCODE-83c: the kind that harm with NO TRADITION AT ALL carries - a sword, a thrown rock, bare hands. the_unmoored_choir is authored `physical: immune`, which plainly means immune to blades, and nothing else produces a physical kind. IT DOES NOT APPLY TO A CRAFT WHOSE TRADITION IS MERELY UNTYPED YET: that is UNDECIDED, not mundane, and typing it here made logos, the_grief_strike and noesis all deal physical damage and bounce off the choir for no authored reason. Absent is not zero.",
+   "untypedIs": "physical",
+   "resistMult": 0.5,
+   "vulnerableMult": 1.5,
+   "absorbMult": 1
+  },
+  "evasion": {
+   "note": "CCODE-80 (Erik): evasion is NOT soak. Soak reduces damage after a hit lands; evasion means it does not land. Applied in BOTH of the engine's currencies because degree drives the effect layer while DAMAGE is computed from roundWinner and marginGap and never looks at degree - degrading only the degree would print 'partial' and deal a full hit. marginPerPoint is how much one authored point of evasion takes off the attacker's margin; rankToBeatARead is the evasionRank needed to dodge an attacker who READ you first (Aevi's r2: 'degrades even a well-set-up attack'). THE GRAZE is not here on purpose - the craft's own small soak already blunts what remains, through the ranked-soak path.",
+   "enabled": true,
+   "marginPerPoint": 4,
+   "rankToBeatARead": 2
+  },
+  "senseStep": {
+   "concealFunctions": [
+    "conceal",
+    "deceive"
+   ],
+   "concealTierWeight": 6,
+   "passiveAttributeWeight": 3,
+   "senseOppositionNote": "SNG-248 (Erik): a read is opposed by what resists BEING READ - their concealing craft, else a flat passive off their sharpest attribute - NOT by whatever they happened to declare. Reading a foe who is swinging should not mean beating their swing with your eyes.",
+   "tierByDegree": {
+    "failure": 0,
+    "partial": 1,
+    "success": 2,
+    "crit": 3,
+    "decisiveMargin": 25
+   },
+   "tierByDegreeNote": "SNG-248 (Erik's ladder): what you LEARN is earned by the roll, not by a standing stat. Craft NAMES come in at tier 1; tier 3 additionally earns GM-narrated advice on the read.",
+   "note": "CCODE-46 (Erik): 'During the sense action, you shouldn’t be able to use clearly attacks during the sense round — it should only allow skills that can sense, or an attribute based generic type sense.' senseFunctions gates the craft list for the SENSE step. genericSenses are the always-available attribute reads — you can always LOOK, even with no sensing craft — and the attribute you look WITH changes what you find: 'a wits sense could find a solution that a Reason based sense might miss.'",
+   "guardFunctions": [
+    "ward",
+    "shield",
+    "resist"
+   ],
+   "guardFunctionsNote": "CCODE-78 (Erik): 'we may want to add the wards as an option to the sense step... that way they have a chance of taking effect for that round and the next.' A ward is not an ATTACK, so offering it here keeps the CCODE-46 constraint above rather than bending it, and the effect machinery already worked: a guard laid on the sense step is standing before the action step of the same turn resolves, and still standing on the next. What makes it a CHOICE rather than a free upgrade is the trade in guardEarnsNoRead: spend the step guarding and you did not read, so there is no setup bonus and no sense tier. Empty this list to take the option away.",
+   "guardEarnsNoRead": true,
+   "senseFunctions": [
+    "reveal",
+    "foresee",
+    "track"
+   ],
+   "genericSenses": [
+    {
+     "sub": "wits",
+     "name": "Size them up (Wits)",
+     "finds": "the opening, the trick, the thing they are not guarding"
+    },
+    {
+     "sub": "reason",
+     "name": "Reason it out (Reason)",
+     "finds": "the pattern in how they fight, and where it breaks"
+    },
+    {
+     "sub": "insight",
+     "name": "Read them (Insight)",
+     "finds": "their intent and how much resolve is behind it"
+    }
+   ],
+   "bonusNullBand": 2,
+   "_bonusNullBand": "⛔ SNG-517 §1b - ERIK'S NULL BAND. Where the two rolls are roughly equal, NEITHER side earns a bonus action. ⚠️ THIS IS NOT THE TIE RULE AND MUST NOT BE MERGED WITH IT: the tie rule answers WHO WINS THE READ (gap 0 is the obscurer's, unchanged); this answers WHO EARNS A BONUS. At gap 0 the obscurer still denies the read and earns nothing - they broke even, which is the right feel for a coin-flip. Aevi suggested ±2 as a starting dial; widen if bonus actions prove too common.",
+   "obscureReceipt": {
+    "_note": "⛔ AEVI'S PROSE, SNG-517 §4 + SNG-519. THE VARIANTS SHARE A FIRST CLAUSE ON PURPOSE: 'You did not look' is the COST, and the player should read it every time regardless of outcome — that is what makes the trade legible rather than a silent absence. Only the second line varies.\n⛔ SNG-519: `uncontested` ADDED for Erik's ruling. And `noWatcher` REWRITTEN — its old body, 'hiding from no one costs the same as hiding from someone', became FALSE the moment one of those two cases started paying. ⚠️ IT NOW COVERS ONLY THE GUARD CASE: they acted, just not on looking.\n⚠️ THE TWO ARE DELIBERATELY DISTINGUISHABLE AT A GLANCE. 'nothing looked back' vs 'they were not looking either' — the first is an empty room, the second is a person facing the other way.",
+    "base": {
+     "head": "You did not look.",
+     "body": "You spent the moment being hard to read instead — and they were reading."
+    },
+    "wonBonus": {
+     "head": "You did not look — and neither did they.",
+     "body": "They spent their attention on you and came away with nothing. You have a moment they do not."
+    },
+    "nullBand": {
+     "head": "You did not look, and what they saw was not worth having.",
+     "body": "Neither of you gained on the other."
+    },
+    "failed": {
+     "head": "You did not look, and they saw you anyway.",
+     "body": "You spent the moment and they spent it better."
+    },
+    "noWatcher": {
+     "head": "You did not look, and they were not looking either.",
+     "body": "They put their attention somewhere else. Neither of you learned anything, and neither of you gained."
+    },
+    "_gapForAevi": "⛔ CCODE-213 NEEDS A SIXTH VARIANT AND IT IS YOUR PROSE, NOT MINE. Erik ruled that an obscure against an opponent who does NOTHING in the sense round earns the bonus action. Neither existing line fits: `wonBonus` says \"They spent their attention on you and came away with nothing\" — false, they spent nothing; `noWatcher` says \"Hiding from no one costs the same as hiding from someone\" — now false, it costs less. ⚠️ Author `uncontested`, sharing the first clause \"You did not look\" like the others. Until then the engine has no line for this outcome, and that is recorded here rather than covered by a wrong one.",
+    "uncontested": {
+     "head": "You did not look — and nothing looked back.",
+     "body": "They spent the moment on nothing at all. You spent it on something, and that is the whole difference."
+    },
+    "_erikCall_narrowOrWide": "⛔ CCODE TOOK THE NARROW READING AND FLAGGED IT: an opponent who GUARDED has acted, so it earns the obscurer nothing; only a genuinely empty declaration pays.\n⚠️ I AGREE AND WOULD KEEP IT. 'Nothing' should mean nothing. A guard is a slot spent — they chose not to look, which is the same choice the obscurer made, and neither should be paid for it. ⛔ THE WIDE READING WOULD PAY YOU FOR OBSCURING AGAINST ANYONE WHO HAPPENED NOT TO READ THAT ROUND, which is most opponents most rounds, and the bonus stops meaning 'you beat someone'.\n⛔ AND CCODE'S SECOND ARGUMENT IS THE STRONGER ONE: `degradeIfSpent` degrades a broke side to a bare strike or guard rather than to nothing, and a static antagonist holds — SO A GENUINELY EMPTY DECLARATION IS RARE. The narrow reading is a rare reward; the wide one is a tap."
+   }
+  },
+  "oddsPreview": {
+   "note": "CCODE-46 (Erik): 'The skills should also bring in the players read of how likely each are to succeed. just like normal play, but with all the opposed and conditions incorporated. If the enemy uses umbracraft then I might not be able to tell certain success chances as well — unless of course i have a radiant skill.' So each move shows an ESTIMATED chance to win the exchange, and the CONFIDENCE in that estimate is itself fogged: reading them buys precision, and holding a counter-craft to what they are using buys it too (light finds shadow — a reveal-user can price a concealer). Never a lie: low confidence shows a band, not a fake number.",
+   "confidenceByFogTier": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "counterCraftBonus": 1,
+   "bands": [
+    {
+     "at": 80,
+     "label": "near certain"
+    },
+    {
+     "at": 62,
+     "label": "likely"
+    },
+    {
+     "at": 45,
+     "label": "even odds"
+    },
+    {
+     "at": 28,
+     "label": "unlikely"
+    },
+    {
+     "at": 0,
+     "label": "a long shot"
+    }
+   ],
+   "unreadableLabel": "you can't sense this yet"
+  },
+  "finisher": {
+   "note": "CCODE-46 (Erik): 'the finish It button should be an indicator on skills instead of a button. any harm skill, even the basic, could eventually be tagged with finish it. Instakill skills have that from the beginning.' A craft that CAN kill carries finishing potential from the start (harmRung lethal/atrocity); an ordinary harm craft EARNS it by reaching finisherTierAt. The tag is shown on the move itself, and declaring a tagged move in the ACTION step is what arms the one-beat collapse — no separate button.",
+   "alwaysAtHarmRung": [
+    "lethal",
+    "atrocity"
+   ],
+   "finisherTierAt": 3,
+   "odds": {
+    "note": "CCODE-42 (Erik): 'hunter's strike has that potential, but it's a lower percent chance to end it completely unless the damage output would exceed the enemies HP... then it's a finishing move. The cut thread is an opposed roll, so against a healthy foe of equal level it might be a 50/50 ... but against a run down opponent when you have the momentum it's a near certainty of success... just like it's a lower chance with the momentum against you or against a high level opponent.' So a finisher's chance to END the fight outright is SITUATIONAL: base by how lethal the craft is, then moved by the foe's condition (spent/pressured), the momentum you hold, and the tier gap between you.",
+    "baseByRung": {
+     "atrocity": 55,
+     "lethal": 48,
+     "wounding": 22,
+     "restraint": 10,
+     "none": 6
+    },
+    "perMomentumPoint": 2.5,
+    "perTierGap": 7,
+    "wornDownBonus": 30,
+    "pressureBonus": 12,
+    "floor": 2,
+    "ceiling": 95,
+    "wornDownAtEnergyPct": 0.3
+   }
+  },
+  "turn": {
+   "note": "CCODE-45 (Erik): a TURN is sense -> action -> bonus, not a single exchange. 'the sense action, the main action, then the bonus action - for each player and opponent get tallied up and then narrated - the net result sets up the next round.' The sense step is OPTIONAL (skip to conserve energy, if you have no sense skill, or if a craft has blinded you), carries the cost of the ability used, and is LOCKED once its GM narration lands. A good sense buys a NAMED bonus on the action roll — never a hidden fudge. CCode's calls, all dials: senseMovesMomentum false (else momentum swings 3x/turn and the measured CCODE-38 pacing is void); the bonus step grant threshold was MEASURED, not guessed — CCode first proposed crit-only, and the simulation overturned it: crit-only left 20% of peer fights UNRESOLVED at 30 turns (median 21). crit+success gives median 13 turns, 0% unresolved, 82% player win / 18% down. The sim also proved the sense step is worth taking at all: sensing every turn raises the peer win-rate from 53% to 71%.",
+   "senseMovesMomentum": false,
+   "setupBonusScale": 0.3,
+   "setupBonusMax": 12,
+   "bonusOnDegrees": [
+    "crit_success"
+   ],
+   "gmCallsPerTurn": 2,
+   "_bonusOnDegrees_ccode257": "⛔ ERIK, 2026-08-26: \"set the dial to crit only and let's see how it plays\". Was [\"crit_success\", \"success\"].\n⚠️ MEASURED BEFORE THE CHANGE (scripts/bonus_dial.mjs, re-runnable): across five sense-step cases the bonus rate goes 57% -> 20%. ⛔ BUT THE ROW THAT DECIDES IT BARELY MOVES: 'you HIDE, they READ' — the intended play — goes 85% -> 78%, because `senseBonusFor` pays for BEATING A READER regardless of degree. So this does not make bonus actions rare; it strips out the incidental payouts and leaves the designed one standing.\n⛔ AND THE REASON ERIK RAISED IT, WHICH IS THE STRONGER ARGUMENT: four crafts exist to GRANT a bonus action (case_closed, perfect_motion, dread_mantle, name_invoked). A craft that hands you one is worth nothing when you already had one — so the old dial quietly devalued the crafts whose whole point is the thing it gave away free. This makes those four 1.9x more valuable.\n⚠️ TO REVERT: put \"success\" back. Re-run scripts/bonus_dial.mjs first — it measures the CURRENT authoring against the alternative either way round."
+  },
+  "weave": {
+   "note": "CCODE-37 (Erik: 'this is where braids really shine'). Turn-by-turn combat makes you pick ONE thing per turn — so the reward for having practised two crafts together is doing BOTH in a single turn. A woven round leads with one craft (its function drives the matchup) and folds a second in: the second adds a NAMED bonus line to the roll, AND its persistent effect lands too, so one turn leaves two things standing. It costs energy for both, so weaving is a real choice, not a free upgrade. It also records a CO-ACTIVATION in the practice ledger — weave a pairing enough times (BRAID_RIPEN_AT) and you EARN the braid as a single minted craft, at which point you get the combined effect for one craft's cost. That is the whole arc: weave by hand, pay double, until the braid makes it one move.",
+   "bonusPerTier": 2,
+   "maxBonus": 8,
+   "energyMultiplier": 1.8
+  },
+  "persistentEffects": {
+   "note": "CCODE-35 (Erik): 'Each action should produce something that could persist, such as raising a shield at the beginning, or gaining a sense/insight gives you bonuses to defense or striking.' A move that LANDS leaves a standing effect for a few rounds. The effect is not a hidden fudge: it enters the next round's roll as a NAMED, SIGNED contestMod on the SNG-106 self-summing breakdown, so 'guard up +4' is visible in the same math as the matchup and intensity terms. applies: whenAttacked (it answers incoming harm) / whenAttacking (it sharpens your own blow) / always (knowledge and hindrance cut both ways). target: self (a boon on the actor) / opponent (a hindrance laid on the other side).",
+   "requiresDegree": [
+    "crit_success",
+    "success",
+    "partial"
+   ],
+   "partialValueMult": 0.5,
+   "critBonusRounds": 1,
+   "maxActivePerSide": 3,
+   "refreshesSameKind": true,
+   "craftDuration": {
+    "note": "CCODE-77: how long a landed move STANDS comes from the craft that made it, not from one number per verb. Before this a T-V bind held exactly as long as a T-I one and an authored `duration` reached nothing. roundsPerPoint converts the craft's duration ladder into rounds; craftDurationMax clamps it, because that ladder runs to 17 and a fight is not 17 rounds long - the tier advantage should be FELT, not decisive on its own. Set enabled:false to go back to the flat per-verb rounds.",
+    "enabled": true,
+    "roundsPerPoint": 0.35,
+    "craftDurationMax": 5
+   },
+   "byFunction": {
+    "shield": {
+     "kind": "guard",
+     "label": "guard up",
+     "value": 4,
+     "rounds": 2,
+     "applies": "whenAttacked",
+     "target": "self"
+    },
+    "ward": {
+     "kind": "ward",
+     "label": "warded",
+     "value": 4,
+     "rounds": 2,
+     "applies": "whenAttacked",
+     "target": "self"
+    },
+    "resist": {
+     "kind": "brace",
+     "label": "braced",
+     "value": 3,
+     "rounds": 2,
+     "applies": "whenAttacked",
+     "target": "self"
+    },
+    "conceal": {
+     "kind": "unseen",
+     "label": "hard to find",
+     "value": 3,
+     "rounds": 1,
+     "applies": "whenAttacked",
+     "target": "self"
+    },
+    "reveal": {
+     "kind": "insight",
+     "label": "you have their measure",
+     "value": 3,
+     "rounds": 2,
+     "applies": "always",
+     "target": "self"
+    },
+    "foresee": {
+     "kind": "insight",
+     "label": "reading their next beat",
+     "value": 4,
+     "rounds": 2,
+     "applies": "always",
+     "target": "self"
+    },
+    "track": {
+     "kind": "insight",
+     "label": "on their line",
+     "value": 3,
+     "rounds": 2,
+     "applies": "always",
+     "target": "self"
+    },
+    "empower": {
+     "kind": "empowered",
+     "label": "empowered",
+     "value": 4,
+     "rounds": 2,
+     "applies": "whenAttacking",
+     "target": "self"
+    },
+    "sustain": {
+     "kind": "steady",
+     "label": "steadied",
+     "value": 3,
+     "rounds": 3,
+     "applies": "always",
+     "target": "self"
+    },
+    "bind": {
+     "kind": "bound",
+     "label": "bound",
+     "value": -4,
+     "rounds": 2,
+     "applies": "always",
+     "target": "opponent"
+    },
+    "hinder": {
+     "kind": "hampered",
+     "label": "hampered",
+     "value": -3,
+     "rounds": 2,
+     "applies": "always",
+     "target": "opponent"
+    },
+    "command": {
+     "kind": "swayed",
+     "label": "swayed",
+     "value": -3,
+     "rounds": 2,
+     "applies": "always",
+     "target": "opponent"
+    },
+    "deceive": {
+     "kind": "misled",
+     "label": "misled — cannot read you",
+     "value": -3,
+     "rounds": 1,
+     "applies": "always",
+     "target": "opponent",
+     "deniesPhase": "setup"
+    }
+   },
+   "phaseDenialNote": "CCODE-41 (Erik): 'perhaps if the opposing skill has blinded you to the sense skills you might have' — an effect may carry deniesPhase, which locks that phase for the side it sits on. A blinded fighter cannot take a SETUP this round: they go straight to their action. This is the counterplay to a setup-heavy build, and the reason skipping setup has to be a first-class option rather than an error state.",
+   "attackFunctions": [
+    "strike",
+    "break"
+   ]
+  },
+  "opponentPolicy": {
+   "note": "deterministic + seeded — the ENGINE picks the opponent's skill+intensity, never the narrative GM. Behind on momentum -> press (Surge); ahead -> pace (Conserve); tacticTags bias it. Skill pick: the function that matches up best against the player's last-SHOWN tendency (only what fog let them reveal to the engine's memory of the player).",
+   "behindSurgeAt": -3,
+   "aheadConserveAt": 3,
+   "defaultIntensity": "standard",
+   "tacticBias": {
+    "berserker": {
+     "surge": true
+    },
+    "reckless": {
+     "surge": true
+    },
+    "duelist": {
+     "pace": true
+    },
+    "cautious": {
+     "pace": true
+    }
+   }
+  },
+  "senseVisibility": {
+   "0": {
+    "reveals": [
+     "outcome"
+    ],
+    "label": "blind — you fight by feel; only the aftermath"
+   },
+   "1": {
+    "reveals": [
+     "outcome",
+     "intent",
+     "skill",
+     "target"
+    ],
+    "label": "a read — their intent, the craft's name, and whether they are looking at YOU"
+   },
+   "2": {
+    "reveals": [
+     "outcome",
+     "intent",
+     "skill",
+     "band",
+     "target"
+    ],
+    "label": "a measure — the craft, a band on their roll, and WHO they are going for"
+   },
+   "3": {
+    "reveals": [
+     "outcome",
+     "intent",
+     "band",
+     "skill",
+     "intensity",
+     "breakdown",
+     "target"
+    ],
+    "label": "near-precise — their skill, intensity, full breakdown, and who they are going for AND WHY"
+   },
+   "note": "your senseTier vs the opponent gates what their round shows. Fog is presentation over TRUE state — the engine computes both full rolls; this table only hides display. NEVER fabricate a number to fill fog: show less, never false. CCODE-250: tier 0 has no `target` reveal ON PURPOSE — a character who obscured themselves instead of reading cannot see the blow coming for an ally, and so cannot step in front of it. That is the price of having hidden."
+  },
+  "revealActionBuysTier": 1,
+  "opponentSheetSynthesis": {
+   "note": "a duel opponent carries threat + tacticTags but no skills[]. Synthesize a modest sheet; an authored opponent.skills[] overrides. threat -> attribute level + ability tier; energy from a threat-scaled pool.",
+   "threatToAttribute": 0.08,
+   "attributeFloor": 2,
+   "attributeKnee": 6,
+   "threatToTier": 0.06,
+   "tierFloor": 1,
+   "tierKnee": 4,
+   "aboveKneeExponent": 0.75,
+   "uncappedNote": "SNG-249 (Erik): the CEILINGS are gone - they capped every foe at threat ~70, so an epic was mechanically identical to a threat-70 raider and the world had no upper tail to run from. Past the knee, growth is sub-linear so a threat-300 thing is fearsome without the arithmetic running away. Re-add attributeCeiling/tierCeiling only if you deliberately want a hard top.",
+   "energyBase": 40,
+   "threatToEnergy": 1.2,
+   "healthBase": 10,
+   "threatToHealth": 0.12,
+   "healthKnee": 12,
+   "healthFloor": 3,
+   "healthNote": "SNG-263 r4 GAP1 (Aevi, verified by CCode): this block derived attribute, tier and ENERGY from threat and carried no health term at all, so every synthesised foe fell back to the hardcoded 5 in encounters.js — an epic and a rat had the same 5 hit points. Health now scales on the SAME knee-curve as attribute and tier (aboveKneeExponent), so a threat-300 thing is genuinely durable without the arithmetic running away. An AUTHORED def.opponent.health still wins — this only fills the gap where nothing was authored. Erik's dials.",
+   "soakBase": 0,
+   "threatToSoak": 0.02,
+   "soakKnee": 4,
+   "soakNote": "SNG-263 r4 GAP2: nothing in the engine reduced damage — no soak, armor or temp HP anywhere — so there was nothing for a strike to overcome and nothing for ward/shield to DO. Soak is subtracted from a landed hit and is what stops a scaled-up low-tier craft becoming universal (r4 §11: 'an armored epic foe needs more than a scaled-up cantrip'). Floored by damage.minHit so a hit always hurts a little. Erik owns how hard this should bite.",
+   "archetypeSkills": {
+    "berserker": [
+     {
+      "function": "strike",
+      "name": "the reaving blow"
+     },
+     {
+      "function": "break",
+      "name": "the shatter"
+     }
+    ],
+    "duelist": [
+     {
+      "function": "strike",
+      "name": "the measured cut"
+     },
+     {
+      "function": "shield",
+      "name": "the turned guard"
+     }
+    ],
+    "trickster": [
+     {
+      "function": "conceal",
+      "name": "the feint"
+     },
+     {
+      "function": "move",
+      "name": "the slip"
+     }
+    ],
+    "warden": [
+     {
+      "function": "ward",
+      "name": "the held line"
+     },
+     {
+      "function": "bind",
+      "name": "the pin"
+     }
+    ],
+    "default": [
+     {
+      "function": "strike",
+      "name": "a hard strike"
+     },
+     {
+      "function": "shield",
+      "name": "a raised guard"
+     }
+    ],
+    "kind:standoff": [
+     {
+      "function": "command",
+      "name": "presses a point",
+      "attribute": "social"
+     },
+     {
+      "function": "resist",
+      "name": "holds the line",
+      "attribute": "social"
+     },
+     {
+      "function": "reveal",
+      "name": "reads your certainty",
+      "attribute": "mental"
+     },
+     {
+      "function": "bind",
+      "name": "presses their advantage",
+      "attribute": "social"
+     }
+    ],
+    "kind:chase": [
+     {
+      "function": "move",
+      "name": "closes the gap",
+      "attribute": "physical"
+     },
+     {
+      "function": "track",
+      "name": "cuts off your line",
+      "attribute": "practical"
+     },
+     {
+      "function": "move",
+      "name": "gains ground",
+      "attribute": "physical"
+     },
+     {
+      "function": "foresee",
+      "name": "anticipates your turn",
+      "attribute": "mental"
+     }
+    ]
+   },
+   "soakRankAt": [
+    0,
+    3,
+    6
+   ],
+   "soakRankNote": "SNG-263: soak is a STACK of ranked layers, not a flat number. A foe gains its rank-N layer once its total soak reaches soakRankAt[N-1], so a riffraff has none, a notable has one thin layer, and an epic has a layered guard. A craft's `penetration` cuts every layer of rank <= penetration; the rest still soak. Total soak is unchanged — this only decides how it is DISTRIBUTED, and therefore what a penetrating craft can bypass."
+  },
+  "targetReveal": {
+   "namedAtTier": 2,
+   "reasonAtTier": 3,
+   "note": "tier 1 tells you only whether it is looking at you; tier 2 names the mark; tier 3 says why, which is what makes baiting possible."
+  }
+ },
+ "buildImplication": "Engine: a skill-battle mode alongside single-check resolution — triggered when two wills contest with skills. Per round: both declare skill+intensity; roll d100+attr+tierBonus+matchupBonus; winner shifts momentum by margin; track energy (attrition); resolve at meter-end or exhaustion. Reads challengeProfile (matchup relevance), functions (the edge table), intensity_scaling (energy), tier (weight). SNG-027 social contest is the SOCIAL-flavored instance of this same engine — unify them: a skill-battle is the general case, social-contest and combat and the duel are flavors. Matchup table authored here; expand per-function. Flag SNG-045. Smoke: a conceal-vs-reveal contest runs multiple rounds; energy attrition can decide it independent of rolls; tier gives both power and stamina; a Surge-botch backlashes; matchup edge beats raw rolls; social-contest resolves through the same engine."
 }

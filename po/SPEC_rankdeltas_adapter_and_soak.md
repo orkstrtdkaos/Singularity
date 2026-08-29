@@ -86,8 +86,22 @@ author it.**
 ⚠️ **and it should be TYPED where the craft names a type**, so `death_ward`'s soak-5 answers decay, vitality
 and cold rather than everything, exactly as §4 of `HOW_IT_WORKS` describes.
 
-⛔ **ONE THING TO GET RIGHT: a guard's soak must not stack into immunity.** **`minHit` already says no foe
-is immune; the same floor must hold when the soak is on the player's side.**
+⛔ **ONE THING TO GET RIGHT, AND IT IS NOW FLAGGED RATHER THAN ASSUMED.** ⚠️ **Erik 2026-08-28: *"I'm not
+certain about the minHit concept. We'll keep it for now, but flag it."***
+
+**So build the guard's soak against `minHit` AS IT STANDS — the floor holds, a guarded player still takes at
+least 1 — ⛔ BUT DO NOT WRITE THE FLOOR INTO THE GUARD'S OWN LOGIC.** ⚠️ **It must keep reading
+`damage.minHit` from content, so that if Erik later rules it out, the guard follows without a second edit.**
+
+**The tension, recorded in `skill_battle_system.json` and `HOW_IT_WORKS §4`:**
+- ⛔ **without the floor**, a fully-soaked blow returns 0 and reads as a MISS rather than a graze — which is
+  exactly how `antisoakLanded` got reported as a defect;
+- ⛔ **with it**, armour can never fully answer anything, and **the ward ladder's top rung — IMMUNITY —
+  cannot actually mean immune**, which contradicts its own definition in `craft_mechanics._r1`.
+
+⚠️ **AND ERIK'S RULING PUTS THE FLOOR ON THE PLAYER'S SIDE FOR THE FIRST TIME.** *"You always take at least
+1"* is a different feeling from *"the boss always takes at least 1"*, and this ticket is where that becomes
+real. ⛔ **Report what it feels like in the before/after; do not resolve it.**
 
 ---
 

@@ -35,6 +35,7 @@ working papers; **this is the answer.**
 | 08-28 | §11 testing contract added | two rules learned the expensive way in one afternoon | `how_it_works.mjs` §11 asserts every defect-reporting tool has a floor | binds both authors; `safe_delete.mjs` and this harness |
 | 08-28 | §0b log made mechanical | a requirement nobody checks lapses in a week | `how_it_works.mjs` §0b — five columns, non-empty, names its change | ⚠️ Erik's 08-28 logging rule now has teeth |
 | 08-28 | §8 body corrected to match the ruling | the log said "doc corrected" and the sentence was still there — exactly the drift this file is meant to catch | `how_it_works.mjs` §8, now green | ⚠️ a logged change that was never made |
+| 08-28 | ⚠️ **`minHit` FLAGGED, kept** | Erik: *"not certain about the minHit concept… keep it for now, but flag it"* | ⛔ **no test — it is a design question, not a defect** | §4 warding · the ward ladder's IMMUNITY rung · Erik's soak ruling puts the floor on the player's side too |
 | 08-28 | ⛔ `blind` policy → **`mindless`** | Erik: *"blind is CAN’T SEE"*; the word named this policy AND the can’t-see receipt, in one function | `how_it_works.mjs` §8 × 5, plus smoke CCODE-255 | `targeting.js`, `sunk_assay_intake.json` migrated, `POLICY_ALIASES` keeps old saves working |
 | 08-28 | ⛔ **`FIELD_REFERENCE.md` created** | Erik: *"we are DONE with forgetting what things are meant to do and how they actually work or not"* | `how_it_works.mjs` FR × 14 — atlas freshness, bucket counts, axis counts, ladder count | ⛔ every authored field; `field_atlas.mjs` generates its table |
 | 08-28 | `field_atlas.mjs` + `atlas_inject.mjs` | a hand-maintained "which fields are read" list is wrong within a week | its table is re-derived and diffed by the FR gate | ⚠️ `NOT_CONSUMERS` — a question file is not a consumer |
@@ -142,8 +143,15 @@ not three sizes of one — resist moves the roll, soak moves the damage, immunit
 touch you.
 
 ⛔ **PARTIAL WARDING IS THE POINT.** A shield answers the physical half of a psionic blast and **the psychic
-half goes through untouched.** ⚠️ **Nothing is ever fully immune and nothing is ever fully blocked** —
-a blow whose every component is warded still lands its floor.
+half goes through untouched.** ⚠️ **Nothing is ever fully immune and nothing is ever fully blocked** — a blow whose every component is
+warded still lands its floor (`minHit`).
+
+⛔ **FLAGGED, NOT SETTLED — Erik 2026-08-28: *"I'm not certain about the minHit concept. We'll keep it for
+now, but flag it."*** ⚠️ **The tension runs both ways: without the floor, a fully-soaked blow returns 0 and
+reads as a miss rather than a graze — which is how `antisoakLanded` got reported as broken. ⛔ WITH it,
+armour can never fully answer anything and the ward ladder's top rung, IMMUNITY, cannot actually mean
+immune.** ⚠️ **And Erik's ruling that a guard ABSORBS puts the same floor on the player's side, where
+*"you always take at least 1"* feels different from *"the boss always takes at least 1."***
 
 ⚠️ **A ward that answers everything has no character.** The interesting thing about a ward is the list of
 what it does *not* stop.

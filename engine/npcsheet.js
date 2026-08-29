@@ -28,7 +28,23 @@ const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
  *  how often they have been met, how long they have been known, and whether they carry a role that implies
  *  standing. ⚠️ A STRANGER IS LEVEL 1 AND THAT IS CORRECT — the level is a claim about what the story has
  *  shown, not a courtesy. */
-export function derivedLevel(entry, { day = null, cfg = {} } = {}) {
+/** ⛔ CCODE-309 / ERIK 2026-08-29: "the npc cap is garbage cruft — the world arcs move mainly from npcs
+ *  who have climbed the ladder... after or around lvl 100 a character and/or npc will either ASCEND or FALL
+ *  ACROSS THE VEIL. They will go to join the primary conflict. The World's Mythicals are those high near
+ *  level 100 npcs."
+ *
+ *  ⛔ THE CRUFT WAS NOT THE NUMBER 20, IT WAS THE INPUTS. Every term in this function measured the PLAYER'S
+ *  RELATIONSHIP with the NPC — how often you met them, how long you have known them, your standing. So an
+ *  NPC's power in the world was a function of the player's address book, and **a world-moving Mythical the
+ *  player has never met was LEVEL 1**. The cap of 20 was only the visible half of that.
+ *
+ *  ✅ SO AN AUTHORED LEVEL IS WHAT THEY ARE, AND THE RELATIONSHIP TERMS BECOME GROWTH ON TOP OF IT. Erik:
+ *  "they get killed and injured and they need to grow too." An unauthored entry behaves EXACTLY as before —
+ *  reader before field, so nothing moves until content says so.
+ *
+ *  ⚠️ AND THE CEILING IS NOW CANON RATHER THAN AN ARBITRARY WALL. 100 is where the Veil is crossed, so a
+ *  clamp at 100 means "as far as anyone goes on THIS side" instead of "as far as we bothered to model". */
+export function derivedLevel(entry, { day = null, cfg = {}, authored = null } = {}) {
   const met = num(entry?.met, 1);
   const known = day != null && entry?.firstMet?.day != null
     ? Math.max(0, num(day, 0) - num(entry.firstMet.day, 0)) : 0;
@@ -37,7 +53,16 @@ export function derivedLevel(entry, { day = null, cfg = {} } = {}) {
   const fromDeeds = Math.floor(met / Math.max(1, perMeet));
   const fromTime = Math.floor(known / Math.max(1, perSeason));
   const standing = Math.max(0, Math.round(num(entry?.standing, 0) / Math.max(1, num(cfg.levelPerStanding, 25))));
-  return clamp(1 + fromDeeds + fromTime + standing, 1, num(cfg.levelCap, 20));
+  const growth = fromDeeds + fromTime + standing;
+  // ⛔ THE ASCENSION THRESHOLD, NOT A MODELLING LIMIT. At or around 100 an NPC crosses the Veil and leaves
+  // this side entirely — so nobody standing here is above it, and the clamp finally means something.
+  const ceiling = Math.max(1, num(cfg.ascendAt, num(cfg.levelCap, 100)));
+  // ⚠️ WHAT THEY ARE IN THE WORLD, if anyone has said. `entry` is checked too because a merged record and
+  // a separate authored record are both shapes this codebase passes, and reading only one is how
+  // `persistUntilHealed` missed all six of its authored objects.
+  const inWorld = num(authored?.level ?? entry?.level, 0);
+  if (inWorld > 0) return clamp(inWorld + growth, 1, ceiling);
+  return clamp(1 + growth, 1, ceiling);
 }
 
 /** ⚠️ THE SPINE THEY BRING. An NPC's attributes lean toward what their ROLE implies — a smith is
@@ -93,7 +118,7 @@ export function sheetFor(entry, { day = null, cfg = {}, roleAttributes = null, a
   // level and does not care where it came from.
   // ⚠️ `?? derivedLevel` RATHER THAN `||`: a legitimate override of 0 must not fall through to the derived
   // value, and levels are clamped to 1 below anyway.
-  const level = levelOverride != null ? Math.max(1, num(levelOverride, 1)) : derivedLevel(entry, { day, cfg });
+  const level = levelOverride != null ? Math.max(1, num(levelOverride, 1)) : derivedLevel(entry, { day, cfg, authored });
   const leans = leansOf(entry, { roleAttributes });
   const base = Math.max(1, Math.round(level / 2) + 1);
   const attributes = { physical: base, mental: base, social: base, practical: base };

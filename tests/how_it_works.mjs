@@ -843,6 +843,43 @@ console.log("\n── the document set — everything in docs/ is placed ──"
     `${docs.length} docs; unlisted: ${unlisted.join(", ") || "none"}`);
 }
 
+/* ══════════ §13 — WHO AN NPC IS IN THE WORLD, NOT IN YOUR ADDRESS BOOK ══════════ */
+// ⛔ ERIK 2026-08-29: "the npc cap is garbage cruft — the world arcs move mainly from npcs who have climbed
+// the ladder... after or around lvl 100 a character and/or npc will either ASCEND or FALL ACROSS THE VEIL...
+// the World's Mythicals are those high near level 100 npcs."
+//
+// ⚠️ THE CRUFT WAS THE INPUTS, NOT THE NUMBER. Every term of `derivedLevel` measured the PLAYER'S
+// RELATIONSHIP — met, known, standing — so a world-moving Mythical the player had never met was LEVEL 1.
+console.log("\n── §13 · an NPC's level is what they ARE, plus what you have seen ──");
+{
+  const NS = await import("../engine/npcsheet.js");
+  const lvl = (entry, authored = null) => NS.derivedLevel(entry, { cfg: {}, authored });
+
+  // ⛔ NON-VACUITY FIRST: the unauthored path must be BIT-IDENTICAL to what shipped, or this is a
+  // behaviour change wearing a bug-fix's name.
+  check("§13: an unauthored NPC is unchanged — a stranger is still level 1",
+    lvl({ met: 1 }) === 1);
+  check("§13: …and relationship growth still works exactly as before (met 40 → 11)",
+    lvl({ met: 40 }) === 11, String(lvl({ met: 40 })));
+
+  // ⛔ THE FIX ITSELF.
+  check("§13: an authored Mythical is who they are even unmet",
+    lvl({ met: 1 }, { level: 92 }) === 92, String(lvl({ met: 1 }, { level: 92 })));
+  check("§13: …and still GROWS — Erik: 'they get killed and injured and they need to grow too'",
+    lvl({ met: 40 }, { level: 60 }) > 60);
+
+  // ⚠️ THE CEILING IS CANON NOW. 100 is where the Veil is crossed, so nobody on this side is above it.
+  check("§13: nobody standing on this side exceeds the ascension threshold",
+    lvl({ met: 400 }, { level: 98 }) === 100, String(lvl({ met: 400 }, { level: 98 })));
+  check("§13: the old arbitrary wall of 20 is gone",
+    lvl({ met: 1 }, { level: 55 }) === 55);
+
+  // ⛔ AND BOTH SHAPES ARE READ. A merged record and a separate authored record are both passed in this
+  // codebase; reading only one is how `persistUntilHealed` missed all six of its authored objects.
+  check("§13: an authored level is read from the ENTRY as well as the authored record",
+    lvl({ met: 1, level: 77 }) === 77, String(lvl({ met: 1, level: 77 })));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

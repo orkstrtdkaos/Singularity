@@ -1,4 +1,4 @@
-# Singularity — The Valley of Echoes
+# Singularity — The Arcs of Exesa
 
 An AI-game-mastered narrative RPG. **Code owns the rules and the dice; the model owns the words.**
 Pure ES modules on GitHub Pages — no backend, no build step (same architecture as Tether).

@@ -1,4 +1,4 @@
-# THE VALLEY OF ECHOES — a player's guide
+# SINGULARITY — THE ARCS OF EXESA · a player's guide
 
 **What it is like to play, from the first screen to the far end.** ⛔ **This is the nouns-and-verbs manual,
 not the machine one.** If you want to know which JSON field carries a number, that is

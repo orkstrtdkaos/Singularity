@@ -60,8 +60,10 @@ working papers; **this is the answer.**
 | 08-28 | ⚠️ the §4 gate read a LITERAL `minHit: 1` | so the dial moved to 0, the doc's claim went false, and the gate stayed GREEN | now reads `skill_battle_system.engine.damage.minHit` | ⛔ a harness that builds its own config tests its own config — FIELD_REFERENCE §4, broken in the file asserting it |
 | 08-28 | ✅ **RULING C: `add` splits on whether the rank grants a VERB** | 92 with a new verb take no bump; the 89 without add a QUALITATIVE capability and keep the default | `rankdelta_report.mjs` §4: **124 → 60** kept-numbers | ⚠️ **scaling now depends on the `functions` array** — a tidying lint could silently remove a 35% bump |
 | 08-28 | ✅ **self-variant canon repair APPLIED** | 7 shared-canon records were each a rumour of THEMSELVES (`rivalId === entityId`) — corruption from a non-idempotent retry, unrepaired since CCODE-04 | before/after counted: 15 records in, 15 out · 7 → 0 self-variants · 0 genuine variants touched · 20 suites green | ⛔ `world/canon/valley.json` — Low Lamp Inn, Siol, Tessvel Cairn, Warden Coll, Deni Cors, Ossivyn Tallow, Stillwater's Trouble are canonical again |
+| 08-28 | ⛔ **`ability_rename_map` WIRED (CCODE-294)** | 377 old→new ids, registered and 57 KB, loaded by NOTHING — so 22 ability references across 7 real saves pointed at ids the catalogue no longer answered to, 11 of them on one L30 character | reconcile step 31 · `save_fixtures` now checks RESOLUTION, proved able to go RED | ✅ **22 → 0 unresolved** · nothing was permanently lost |
+| 08-28 | ⚠️ `save_fixtures` counted array LENGTHS | so it reported "nothing shrank" while 22 entries dangled — counting the container instead of the contents, in the test written to catch that | the new check fails when the map is unwired | ⛔ an id has THREE homes: catalogue, minted `customAbilities`, runtime braid |
 
-**Last verified: 2026-08-28 · v1.9.252 · 378 crafts.**
+**Last verified: 2026-08-28 · v1.9.253 · 378 crafts.**
 
 ---
 

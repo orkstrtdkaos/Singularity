@@ -37,6 +37,41 @@ import { startingSkills } from "./inventory.js"; // SNG-339b: the training an ex
 
 export const CHARACTER_STEPS = [
   {
+    version: 31, id: "ability-rename-map", playerFacing: true,
+    // ⛔ CCODE-294 — 22 ABILITY REFERENCES ACROSS 7 REAL SAVES POINT AT IDS THAT NO LONGER EXIST.
+    // `ability_rename_map.json` holds 377 old→new mappings from the naming-SOP pass. It is registered,
+    // whitelisted, 57 KB — and was NEVER LOADED and read by NOTHING, so every save written before that
+    // rename carried ids the catalogue had stopped answering to.
+    //
+    // ⚠️ MEASURED, NOT ASSUMED: 142 ability references across 16 saves — 107 resolve in the catalogue,
+    // 13 as GM-minted custom abilities, and 22 resolve ONLY through this map. Eleven of those 22 are on
+    // one L30 character. ⛔ NOTHING WAS PERMANENTLY LOST; the map is the whole repair.
+    //
+    // ⛔ AND THE THREE RESOLUTION PATHS ARE WHY THIS TOOK MEASURING TWICE. An id may resolve in the
+    // CATALOGUE, as a MINTED custom ability on the character, or as a runtime BRAID. My first pass knew
+    // only the first and reported 6 abilities "lost" that were minted and perfectly fine. A migration
+    // that rewrites an id it does not understand would DESTROY a minted ability, so this one only ever
+    // touches an id the map explicitly names AND whose target exists.
+    apply: (c, ctx) => {
+      const map = ctx?.content?.rules?.abilityRenames || ctx?.rules?.abilityRenames || null;
+      if (!map || !Array.isArray(c.abilities)) return {};
+      const known = ctx?.content?.abilities || {};
+      const renamed = [];
+      for (const entry of c.abilities) {
+        const id = typeof entry === "string" ? null : entry?.abilityId;
+        if (!id) continue;
+        if (known[id]) continue;                       // already resolves — never touch it
+        const to = map[id]?.to;
+        if (!to || !known[to]) continue;               // ⚠️ no target, no rewrite. A guess here loses a craft.
+        entry.abilityId = to;
+        renamed.push(`${id} → ${to}`);
+      }
+      if (!renamed.length) return {};
+      return { notes: [`${renamed.length} of your craft${renamed.length === 1 ? "" : "s"} answered to an older name and ${renamed.length === 1 ? "has" : "have"} been reconnected.`],
+               applied: renamed };
+    }
+  },
+  {
     version: 1, id: "codex-entity-merge", playerFacing: true,
     // SNG-019's one-shot repair for pre-fragmented saves: collapse duplicate codex
     // topics into their primary nodes. High-confidence auto-merge only.

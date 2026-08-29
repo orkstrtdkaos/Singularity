@@ -92,6 +92,37 @@ check(`all ${saves.length} real saves reconcile without throwing`, threw === 0, 
 check("⛔ nothing SHRANK — no ability, item, companion or quest was dropped on load",
   shrank === 0, losses.slice(0, 8).join("\n      "));
 
+/* ── ⛔ RESOLUTION, NOT JUST COUNT. This is the check that was missing. ─────────────────────────── */
+{
+  // ⛔ CCODE-294 — THIS FILE SAID "NOTHING SHRANK" WHILE 22 ABILITY REFERENCES POINTED AT NOTHING.
+  // It counted array LENGTHS. The arrays were intact; the ENTRIES were dangling, because
+  // `ability_rename_map.json` (377 old→new ids) was registered and never loaded. ⚠️ COUNTING THE
+  // CONTAINER INSTEAD OF THE CONTENTS — the same shape as every other finding this week, in the test
+  // written to catch exactly this.
+  //
+  // ⚠️ AND AN ID HAS THREE LEGITIMATE HOMES, which is why this took measuring twice: the CATALOGUE, a
+  // GM-MINTED entry in `customAbilities`, or a runtime BRAID. My first pass knew only the first and
+  // called six minted abilities "lost". A check that does not know all three manufactures alarm.
+  const cat = new Set(Object.keys(CONTENT.abilities || {}));
+  let refs = 0, dangling = 0; const bad = [];
+  for (const { path, obj } of saves) {
+    const ca = obj.customAbilities || {};
+    const custom = new Set(Array.isArray(ca) ? ca.map(x => x?.id || x?.abilityId).filter(Boolean) : Object.keys(ca));
+    const copy = JSON.parse(JSON.stringify(obj));
+    try { reconcile(copy, "character", { content: CONTENT, rules: CONTENT.rules, ...CONTENT }); } catch { /* counted above */ }
+    for (const a of (copy.abilities || [])) {
+      const id = typeof a === "string" ? a : a?.abilityId;
+      if (!id) continue;
+      refs++;
+      if (cat.has(id) || custom.has(id) || /^braid_/.test(id)) continue;
+      dangling++; if (bad.length < 8) bad.push(`${path}: ${id}`);
+    }
+  }
+  check("there are ability references to resolve (non-vacuity)", refs > 100, `${refs} refs`);
+  check("⛔ every ability a real save carries RESOLVES after reconcile — catalogue, minted, or braid",
+    dangling === 0, `${dangling} dangling of ${refs} — ` + bad.join(" · "));
+}
+
 /* ── vocabulary: a renamed value from an old save must still resolve ─────────────────────────── */
 {
   // ⛔ THE 2026-08-28 CASE, KEPT AS A STANDING GUARD. `blind` was renamed to `mindless`; a save or an

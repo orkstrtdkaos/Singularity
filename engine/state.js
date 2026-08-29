@@ -251,7 +251,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, firstGiftTemplate, damageFamilies] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, firstGiftTemplate, damageFamilies, abilityRenameMap] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -310,7 +310,8 @@ export async function loadContent() {
     // and defaults to {}, so an unloaded file leaves every type family-less and every composite blow
     // unwardable — registered is only half; CCODE-55 asks whether it is ever READ.
     loadRule("first_gift_template", null),
-    loadRule("damage_families", { families: {} })
+    loadRule("damage_families", { families: {} }),
+    loadRule("ability_rename_map", { map: {} })
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -401,6 +402,11 @@ export async function loadContent() {
   // because a merged key once held the wrong file entirely. The unwrap belongs at READ time, in
   // `familyMapOf`, where it happens once for every shape rather than once per load site.
   if (damageFamilies) rules.damageFamilies = damageFamilies;
+  // ⛔ CCODE-294 — THE RENAME MAP REACHES THE MIGRATION. 377 old→new ability ids from the naming-SOP pass,
+  // registered and 57 KB, loaded by nothing — so 22 references across 7 real saves pointed at ids the
+  // catalogue no longer answered to. ⚠️ Merged rather than merely fetched, for the reason the XP table
+  // above gives: a loaded-but-unread value is the same bug one layer up.
+  if (abilityRenameMap?.map) rules.abilityRenames = abilityRenameMap.map;
   rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
   rules.grantCap = nativeGrants.grantCap ?? 5;
   // SNG-263: the craft-mechanics config rides the rules bag so battleRound reads it off a value it already

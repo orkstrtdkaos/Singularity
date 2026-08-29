@@ -12,7 +12,7 @@ node scripts/field_atlas.mjs --md     # …as markdown, to paste back in
 node scripts/safe_delete.mjs <field>  # triage one candidate before deleting it
 ```
 
-**Last measured: 2026-08-28 · v1.9.252 · 378 crafts · 107 distinct authored fields.**
+**Last measured: 2026-08-28 · v1.9.253 · 378 crafts · 107 distinct authored fields.**
 
 ---
 
@@ -276,11 +276,11 @@ but cited by its own note, extended by its `rankDeltas`, and named in its player
 
 ## 8 · ⛔ RULES FILES REGISTERED AND NEVER LOADED — ~140 KB DARK
 
-**`CCODE-55` names twelve. Each is whitelisted, validated, and reaches nothing.**
+**`CCODE-55` named twelve. ✅ `ability_rename_map` is now WIRED (CCODE-294) — it was not documentation, it was a live save-migration map, and 22 ability references across 7 real saves resolved only through it. ⚠️ THE REMAINING ELEVEN ARE MOSTLY AUTHORING AND GM DOCUMENTATION, not dark engine content — `energy_costs.byLevel` is a corpus census with "start at the level median" guidance for authors; `healing_intent.forCCode` is a spec whose ask (`mechanic.dice` must be read on a healing shape) is ALREADY SATISFIED by `resolveHeal`; `mechanic_effects` is consumed by `content_ci` CCODE-238. ⛔ THE GATE'S PREMISE IS WRONG FOR THAT CLASS, and the remedy it names — `rules_classification.json` — does not exist.**
 
 | file | size | | file | size |
 |---|---|---|---|---|
-| `ability_rename_map` | 58.0 KB | | `mechanic_effects` | 16.5 KB |
+| ~~`ability_rename_map`~~ ✅ **WIRED** | 58.0 KB | | `mechanic_effects` | 16.5 KB |
 | `tempo` | 15.1 KB | | `ability_distribution_target` | 8.3 KB |
 | `the_veil` | 7.9 KB | | `power_cosmology` | 7.5 KB |
 | ⛔ `damage_types` | 6.8 KB | | `healing_intent` | 4.9 KB |

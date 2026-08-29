@@ -473,6 +473,11 @@
        },
        "costsAction": {
         "type": "boolean"
+       },
+       "soakBonus": {
+        "type": "integer",
+        "minimum": 0,
+        "description": "⚠️ EXTRA SOAK THE INTERCEPTOR BRINGS WHEN THE BLOW RESOLVES AGAINST THEM. ⛔ DECLARED 2026-08-29 AND NOT YET READ — `openProtection` has `resistBonus` and no soak equivalent. Declared so the field is authorable and the gap is visible rather than silent; see `step_between._soakBonusNotRead`."
        }
       },
       "description": "⛔ THIS RANK CATCHES BLOWS AIMED AT AN ALLY — the damage counterpart of `interceptCondition`, which catches bindings. Read by `protectionFromCraft` in engine/intercept.js. ⚠️ DECLARED 2026-08-29: the reader shipped with CCODE-260 carrying the note 'build the reader, default the dial to a no-op, LET CONTENT TURN IT ON' — and the schema was never told, so the first craft to turn it on (`step_between`) was rejected. ⛔ SECOND INSTANCE OF THE FOUR-DOORS FAILURE AT THE **AUTHORED** DOOR, after `mechanic.damageMix`. ⚠️ `costsAction` IS THE DESIGN, NOT A LIMIT: a guard that catches for free is a wall, and casualties go to zero."

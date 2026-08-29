@@ -1988,8 +1988,8 @@
     {
      "rank": 1,
      "name": "Step Between",
-     "grants": "⛔ PLACE YOURSELF BETWEEN TWO PARTIES AT THE MOMENT BEFORE HARM, AND TAKE THE NEXT BLOW MEANT FOR THE ONE YOU ARE COVERING — it resolves against YOUR body, your soak, your resist. ⚠️ ONE BLOW, AND IT COSTS YOU YOUR ACTION: you are standing somewhere, not doing something.",
-     "cannot": "⛔ ONE ALLY, ONE BLOW, AND YOUR WHOLE ACTION FOR IT. ⚠️ You must be able to REACH the space between them — this is placement, not a working, and a wall or a distance ends it. ⛔ AND IT TAKES WHAT WAS AIMED, not what it becomes: you cannot catch a thing already landed.",
+     "grants": "⛔ PLACE YOURSELF BETWEEN TWO PARTIES AT THE MOMENT BEFORE HARM AND TAKE THE NEXT BLOW MEANT FOR THE ONE YOU ARE COVERING — it resolves against YOUR body, your soak, your resist. ⚠️ One blow, one person, and you must already be able to reach the space between them.",
+     "cannot": "⛔ ONE ALLY, ONE BLOW. ⚠️ You must be able to REACH the space between them — this is placement, not a working, and a wall or a distance ends it. ⛔ It takes what was AIMED, not what has already landed.",
      "functions": [
       "move",
       "shield"
@@ -2005,8 +2005,8 @@
     {
      "rank": 2,
      "name": "Living Line",
-     "grants": "⛔ DRAW A LINE WITH YOUR BODY — cover TWO people for three rounds rather than one blow, and bring a companion into the interposition so the two of you become a wall rather than a person. ⚠️ STILL YOUR ACTION, EVERY ROUND YOU HOLD IT.",
-     "cannot": "⛔ HOLDING THE LINE IS ALL YOU DO. Two people, three rounds, and each round costs the action. ⚠️ A companion drawn in is choosing the same cost.",
+     "grants": "⛔ YOU TAKE IT BETTER, AND YOU KEEP TAKING IT — the interposition holds for three rounds rather than a single blow, and your body answers what it catches: SOAK 5 AGAINST PHYSICAL HARM while you stand there. ⚠️ A Stillhold practitioner at this rank is not enduring the blow; they are ANSWERING it, and the attacker feels the difference in their arm.",
+     "cannot": "⛔ STILL ONE PERSON — you cannot stand in front of a line, and the soak answers PHYSICAL harm and nothing else. ⚠️ A working, a fear, a grief goes through you and into them untouched.",
      "functions": [
       "move",
       "shield"
@@ -2015,18 +2015,20 @@
      "harmRung": "none",
      "_nameWas": "The Living Line",
      "gainAxes": [
-      "targets"
+      "duration",
+      "quality"
      ],
      "interceptDamage": {
-      "allies": 2,
-      "rounds": 3
+      "allies": 1,
+      "rounds": 3,
+      "soakBonus": 3
      }
     },
     {
      "rank": 3,
      "name": "Already There",
-     "grants": "⛔ READ WHERE THE HARM IS GOING AND BE THERE BEFORE IT ARRIVES — and at this rank the placing IS the act: ⚠️ YOU NO LONGER SPEND YOUR ACTION TO COVER. You sense the moment forming, you are already standing in it, and you still have your hands free.",
-     "cannot": "⛔ IT IS STILL YOUR BODY THAT TAKES IT, and two is still the limit — you cannot stand in front of a line. ⚠️ And you cannot do it for yourself, at any rank.",
+     "grants": "⛔ YOU ARE WHERE THE HARM IS GOING BEFORE IT ARRIVES. Read the moment forming and STEP — a hop of a few paces, no further, and only ever INTO the path of a blow. ⚠️ THAT IS WHY YOU CAN COVER THREE PEOPLE AT ONCE: you are not standing in front of all of them, you are ARRIVING IN FRONT OF EACH IN TURN, faster than the strikes land. ⛔ AND SOAK 7 AGAINST PHYSICAL AND FORCE — the whole mastered frame set against what it catches.",
+     "cannot": "⛔ THE STEP ONLY EVER GOES WHERE A BLOW IS ARRIVING — it is not travel, not escape, and not a way across a room. You cannot step out of a fight, only further into one. ⚠️ Three is the limit, it is still your body that takes it, and you cannot do it for yourself at any rank.",
      "functions": [
       "move",
       "shield"
@@ -2038,10 +2040,15 @@
       "shield",
       "foresee"
      ],
-     "gainAxes": [],
+     "gainAxes": [
+      "targets",
+      "quality",
+      "range"
+     ],
      "interceptDamage": {
-      "allies": 2,
-      "rounds": 3
+      "allies": 3,
+      "rounds": 3,
+      "soakBonus": 5
      }
     }
    ],
@@ -2073,7 +2080,8 @@
      "physical",
      "feeling"
     ],
-    "_interceptNote": "⛔ THE FIRST CRAFT IN THE GAME TO AUTHOR `interceptDamage` — the reader has been in `intercept.js` since CCODE-260 with a note saying 'build the reader, default the dial to a no-op, LET CONTENT TURN IT ON'. ⚠️ THIS TURNS IT ON. `interceptCondition` (shared_weight) catches BINDINGS; this catches BLOWS, and they are different verbs on the same machinery. ⛔ ERIK 2026-08-29 STRUCK `costsAction`: \"I don't think it needs costs action on top of the fact that you're using your action to use the skill.\" He is right and it was DOUBLE-CHARGING — a turn is sense → action → bonus and `app.js` advances the phase the moment a craft is declared, so declaring Step Between ALREADY SPENDS THE ACTION. ⚠️ IT DISSOLVES MY OWN OBJECTION RATHER THAN OVERRULING IT: I argued a guard must cost something or a tank is a wall, and the cost was always there, in the declaration. ⛔ BUT IT LEAVES r3 BUYING NOTHING. `costsAction: false` was the ONLY difference between r2 and r3, so both rungs are now `{allies: 2, rounds: 3}` and the third rank is inert. ⚠️ THAT IS A REAL GAP AND IT IS AEVI'S TO CLOSE — r3's own fiction is being there BEFORE the harm arrives, which suggests reach or anticipation rather than a freed action. ⚠️ AND WHAT REMAINS TUNABLE IS REACH AND DURATION (`allies`, `charges`, `rounds`): one action buying two allies for three rounds is the rung to watch, not the missing flag."
+    "_interceptNote": "⛔ THE FIRST CRAFT TO AUTHOR `interceptDamage` — the reader has been in `intercept.js` since CCODE-260 with the note 'let content turn it on'. ⚠️ `interceptCondition` (shared_weight) catches BINDINGS; this catches BLOWS. ⛔ ERIK 2026-08-29 CORRECTED THE RANK LADDER: I had used the ACTION COST as the progression, and 'it already uses the action to use the skill' — every craft does, so that was not a rank difference at all. THE REAL LADDER IS: r1 one blow · r2 SOAK 5 vs physical, held three rounds · r3 SOAK 7 vs physical AND force, three allies, AND A SHORT HOP. ⚠️ THE HOP IS THE FICTION THAT EARNS THE MULTI-INTERCEPT: you do not stand in front of three people, you ARRIVE IN FRONT OF EACH IN TURN. ⛔ IT IS NOT A TELEPORT CRAFT — `shortfold` (enginewright, range 30) and `opened_moment` (hourkeeper, range 5) are `reposition` crafts for GOING SOMEWHERE. This goes only where a blow is arriving and only to take it.",
+    "_soakBonusNotRead": "⛔ `soakBonus` IS AUTHORED AND READ BY NOTHING — I checked before leaving it, having documented this exact failure an hour earlier. `openProtection` takes `resistBonus` and has no soak equivalent (`intercept.js:27`). ⚠️ AUTHORED ANYWAY AND FLAGGED, NOT REMOVED: Erik ruled the ladder is SOAK, the numbers are his design, and deleting them would lose the ruling. ⛔ CCode: `openProtection` needs `soakBonus` alongside `resistBonus`, applied to the interceptor's own soak when the blow resolves against them. Until then r2 and r3 hold longer and cover more, and the soak half is prose."
    },
    "rankDeltas": [
     {
@@ -2109,7 +2117,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A defend action. ⛔ TAKE A BLOW MEANT FOR SOMEONE ELSE — it resolves against your body, your soak 2, your resist. r1 one ally, one blow, AND IT COSTS YOUR ACTION. r2 covers two for three rounds, still costing the action each round. ⛔ r3 IS FREE — you are already standing there. ⚠️ Never for yourself, and never more than two.",
+   "plainly": "A defend action. ⛔ TAKE A BLOW MEANT FOR SOMEONE ELSE — it resolves against your body. r1 one ally, one blow. r2 holds three rounds and gives you SOAK 5 against physical harm while you stand there. ⛔ r3 COVERS THREE, SOAK 7 AGAINST PHYSICAL AND FORCE, and you step a few paces into each blow's path as it arrives — which is how one person covers three. ⚠️ Never for yourself, and the step only ever goes toward harm.",
    "_functionsWas": [
     "foresee",
     "move",
@@ -2119,7 +2127,7 @@
    "_wardTypes": "⛔ SNG-512. Interposition answers the strike and the heat behind it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_violence_peace",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_authored_20260829": "⛔ CCODE'S DESIGN §6.3, AUTHORED HERE: 'a guard craft that catches blows, and SPENDS AN ACTION to do it — the action cost IS the design; without it the tank is a wall and casualties go to zero.' ⚠️ CHOSE THIS CRAFT RATHER THAN A NEW ONE: its description already reads 'THE ACT OF PLACEMENT IS THE ACT OF PROTECTION', its hard bound already refuses self-protection, and `stillhold` is the peace pole — a tradition whose tank works by standing somewhere rather than by hitting back. ⛔ AND IT KEEPS ERIK'S `allies` RULING: 1 at r1, 2 above, never a line."
+   "_authored_20260829": "⛔ CCode's design §6.3 authored onto `stillhold` — a tank belonging to the PEACE POLE, who protects by standing somewhere rather than hitting back. Its description already read 'THE ACT OF PLACEMENT IS THE ACT OF PROTECTION' and its bound already refused self-protection. ⚠️ ERIK RULED THE LADDER: soak at r2, broader and higher soak at r3, plus the short hop that explains covering several at once."
   },
   {
    "id": "safe_ground",

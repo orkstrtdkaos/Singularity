@@ -68,7 +68,7 @@ vocabularies, and only two are read.**
 
 | field | where | n | vocabulary | read by |
 |---|---|---|---|---|
-| `tree[].gainAxes` | rank node | **970 nodes / 781 values** | ⛔ **the NINE** | ✅ `capabilities.js` — **for PRESENCE only** |
+| `tree[].gainAxes` | rank node | **970 nodes / 781 values** | ⛔ **the KINDS-OF-IMPROVEMENT list (9)** | ✅ `capabilities.js` — **for PRESENCE only** |
 | `rankDeltas[].axis` | rank delta | **512** | ⚠️ **86 names — the engine-field ones now LAND via the adapter** | ⚠️ **`extend` reads it as `dimension`; the rest is prose** |
 | `mechanic.axis` | craft mechanic | ⛔ **0** | the 19-name allow-list | ⚠️ `craftmechanics.js` — **a reader with no writer** |
 | `operativeAxis` | craft root | **378** | 67 free-form names | ⛔ nothing — `cfg.operativeAxis` is a **different field** |
@@ -78,7 +78,7 @@ vocabularies, and only two are read.**
 - ⛔ **`gainAxes` DECIDES WHICH RANKS APPEAR IN THE PLAYER'S CAPABILITY MENU.** The chain is
   `app.js → capabilityMenu → capabilitiesOf → tierDeclaresSomething → (rankNode.gainAxes||[]).length > 0`,
   and `capabilityMenu` then filters on that flag. ⚠️ **It is read for PRESENCE, never CONTENT** — nothing
-  switches on *which* of the nine it is. **So the field is load-bearing and the 781 individual values are
+  switches on *which* kind of improvement it names. **So the field is load-bearing and the 781 individual values are
   decorative.** ⛔ **Deleting the field silently collapses ranks out of the menu.**
 - ⚠️ **`rankDeltas[].axis` has 512 authored values and IS NOW READ for `extend`** (CCODE-289 adapter). ⛔ **21 of 25 compound axes were split 2026-08-28 so each delta names ONE dimension — the engine extends one per delta, so a compound extended NOTHING.** The remainder is a rich narrative
   vocabulary — `scope` ×33, `perceptionDepth` ×22, `foresight`/`persistence`/`precision`/`autonomy` ×10
@@ -86,7 +86,7 @@ vocabularies, and only two are read.**
   compound (`timeReach+travelSpeed`) and could never match a table anyway.
 - ⛔ **`mechanic.axis` is the field the engine actually reads** — `craftmechanics.js:102` sets
   `authored = ability.mechanic`, then tests `authored.axis` against `cfg.operativeAxis.mechanical`, a
-  19-name allow-list (`damage`, `healing`, `duration`, `range`, `soak`, …). ⚠️ **NOBODY HAS EVER AUTHORED
+  ENGINE-FIELD list (`damage`, `healing`, `duration`, `range`, `soak`, …) — **field names the engine can do arithmetic on**. ⚠️ **NOBODY HAS EVER AUTHORED
   IT.** The whole branch is dead machinery.
 - ⚠️ **`operativeAxis` on a craft is unread**; `cfg.operativeAxis` is the rules dial holding that
   allow-list. **Same word, opposite ends of the same comparison.**
@@ -589,3 +589,26 @@ the author gets a rejection rather than a feature.**
 
 ✅ **THE TEST: for every engine reader that names an authored field, does `ability.schema.json` declare it?**
 ⚠️ **This is checkable and nothing checks it.**
+
+## ⛔ THE TWO AXIS VOCABULARIES — NAMED, BECAUSE COUNTING THEM IS WHY THEY GET CONFUSED
+
+**Added 2026-08-29. Erik: *"maybe you shouldn't use these kind of references — 'which is the nine, not the
+nineteen'."*** ⚠️ **He is right: two lists distinguished only by a COUNT carry no meaning, and I confused
+them one step after correcting a mistake caused by the same confusion.**
+
+| ⛔ call it | what it is | where | contains |
+|---|---|---|---|
+| ⛔ **KINDS OF IMPROVEMENT** | ⚠️ **what a RANK BUYS, in the player's terms** | `tree[].gainAxes` | `range` `duration` `damage` `scope` `targets` `quality` `autonomy` `conditions` `tempo` |
+| ⛔ **ENGINE FIELDS** | ⚠️ **field names the engine can do ARITHMETIC on** | `rankDeltas[].axis`, `operativeAxis.mechanical` | `damage` `healing` `duration` `range` `area` `targets` `soak` `soakRank` `penetration` `magnitude` `setup` `push` `variance` `evasion` `evasionRank` `requiresAttention` `autonomous` `damageType` `unmakeRank` |
+
+⛔ **THE TEST THAT TELLS THEM APART, AND IT IS NOT THE LENGTH:**
+
+- **Is it something a PLAYER would say a rank gave them?** → **KINDS OF IMPROVEMENT.** *"It lasts longer",
+  "it hits more people", "it's better."*
+- **Is it a FIELD ON THE MECHANIC BLOCK that holds a number?** → **ENGINE FIELDS.** ⚠️ `soak`, `evasionRank`
+  and `penetration` are not things a player says; they are things the engine multiplies.
+
+⚠️ **THEY OVERLAP AND THAT IS FINE** — `damage`, `duration`, `range` and `targets` are in both, because
+they are both a kind of improvement AND a field. ⛔ **`quality` is ONLY an improvement; `soak` is ONLY a
+field.** **A rank that raises soak declares the IMPROVEMENT `quality` and the ENGINE FIELD `soak`, in two
+different places, and both are correct.**

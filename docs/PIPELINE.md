@@ -56,7 +56,7 @@ measuring across every craft that needs a pick.**
 
 ---
 
-## ⛔ THE SIX RULES THAT MAKE IT WORK
+## ⛔ THE SEVEN RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
 
@@ -150,6 +150,26 @@ harder"* — a modifier on a swing you were making. `perfect_motion` grants A SE
 
 ✅ **NEVER BATCH A GATE'S FINDINGS WITH ONE-LINE JUSTIFICATIONS.** ⛔ **A batch of three with three
 one-liners is how both errors shipped in a single commit.**
+
+### 7. ⛔ NAME A VOCABULARY FOR WHAT IT IS, NEVER FOR HOW LONG IT IS
+
+**Added 2026-08-29. Erik: *"maybe you shouldn't use these kind of references — 'which is the nine, not the
+nineteen'."***
+
+⚠️ **I had two lists in this codebase called THE NINE and THE NINETEEN, and I mixed them up ONE STEP AFTER
+correcting a mistake caused by mixing them up.** ⛔ **A name that is a count tells you nothing about what
+belongs in it, so it cannot stop you putting the wrong thing there.**
+
+✅ **RENAMED AT SOURCE — in `craft_mechanics.json`, not only in the docs:**
+
+- ⛔ **KINDS OF IMPROVEMENT** (`gainAxes`) — what a rank buys, in the player's terms
+- ⛔ **ENGINE FIELDS** (`rankDeltas[].axis`, `operativeAxis.mechanical`) — names the engine does arithmetic on
+
+**And the names carry their own test**, which a count never could: *would a player say a rank gave them
+this?* → improvement. *Is it a field on the mechanic block holding a number?* → engine field.
+
+⚠️ **THE GENERAL RULE: if a vocabulary's name does not tell you what belongs in it, the name is the
+defect.** ⛔ **Do not write a rule telling people to be careful — RENAME THE THING.**
 
 ---
 

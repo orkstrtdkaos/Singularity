@@ -1012,9 +1012,9 @@
    "functions": [
     "hinder"
    ],
-   "narrationHints": "The strength goes out of him like water out of a cracked jar, and he can feel it going. ⚠️ WHAT FOLLOWS IS OFTEN WORSE THAN THE CRAFT: a hand that will not grip lets go of a ledge, a rider who cannot hold on comes off, a swimmer stops swimming. ⛔ The Grey Hand did none of that.",
+   "narrationHints": "The strength goes out of him like water out of a cracked jar, and he can feel it going. ⚠️ WHAT FOLLOWS IS OFTEN WORSE THAN THE CRAFT: a hand that will not grip lets go of a ledge, a rider who cannot hold on comes off, a swimmer stops swimming. ⛔ The craft did none of that.",
    "description": "Enfeeblement. You take the vigour out of a LIVING thing by touch or near-hand — not its life, its STRENGTH. ⛔ IT IS NOT A WOUNDING CRAFT: it does not cut, burn or break. What it takes is what they can DO — their blows land softer, their crafts come out weaker, their grip is worse. ⚠️ It is still standing. It simply cannot do what it could a moment ago, and it will not until someone mends it.",
-   "notFor": "Objects, structures, or terrain — that is Wither, and the two do not substitute for each other. ⛔ AND IT INVERTS ON THE UNDEAD: taking vitality out of a thing that runs on the ABSENCE of it FEEDS it. A Grey Hand laid on a raised body or an Afterling BOLSTERS them (SYSTEM_SPEC §48.5). ⚠️ It drains, it does not slay: a weakened boar is still a boar with tusks.",
+   "notFor": "Objects, structures, or terrain — that is Wither, and the two do not substitute for each other. ⛔ AND IT INVERTS ON THE UNDEAD: taking vitality out of a thing that runs on the ABSENCE of it FEEDS it. This laid on a raised body or an Afterling BOLSTERS them (SYSTEM_SPEC §48.5). ⚠️ It drains, it does not slay: a weakened boar is still a boar with tusks.",
    "tree": [
     {
      "rank": 1,
@@ -1074,7 +1074,7 @@
      "rank": 3,
      "name": "Grey Hand",
      "grants": "Weaken a group, or weaken one thing so thoroughly it cannot stand.",
-     "cannot": "⛔ It never kills and never wounds — a Grey Hand that has done its worst leaves someone unable to stand, not dying. ⚠️ THE WEAKNESS LASTS UNTIL IT IS HEALED OR RESTORED BY A CRAFT THAT MENDS. Nothing it does is deniable: the victim and every witness can see exactly who is doing it and that it is being chosen.",
+     "cannot": "⛔ It never kills and never wounds — a hand that has done its worst leaves someone unable to stand, not dying. ⚠️ THE WEAKNESS LASTS UNTIL IT IS HEALED OR RESTORED BY A CRAFT THAT MENDS. Nothing it does is deniable: the victim and every witness can see exactly who is doing it and that it is being chosen.",
      "functions": [
       "hinder"
      ],
@@ -1373,7 +1373,7 @@
     "bind",
     "provoke"
    ],
-   "narrationHints": "⛔ FEAR MADE MATERIAL, AND IT TAKES A SHAPE. The mantle is not on them — it is on YOU, and it is not cloth and not light and not quite there: it stands off the body, holds its form against wind and against sense, and the air behind it reads further away than it should. ⚠️ THE SHAPE IS YOURS AND ONLY YOURS. Nobody chooses it. It arrives the first time and it is the same every time after: plate of bone-coloured nothing over the shoulders and down the arms · a cape that moves like water going the wrong way · a high grey collar that keeps rising · antlers of no animal · a hood with the wearer's own face some way back inside it. ⛔ FOR A FEW IT IS A GREY WET SHROUD AND THEY ARE LUCKY. For most it is armour, and armour is worse, because armour means she came prepared. ⚠️ CUT FLOWERS FINISH IN THE ROOM. THE WEARER NEVER SEES THEIR OWN — they only ever learn what it looks like from the faces of people who will not describe it twice.",
+   "narrationHints": "⛔ FEAR MADE MATERIAL, AND IT TAKES A SHAPE. The mantle is not on them — it is on YOU, and it is not cloth and not light and not quite there: it stands off the body, holds its form against wind and against sense, and the air behind it reads further away than it should. ⚠️ THE SHAPE IS YOURS AND ONLY YOURS. Nobody chooses it. It arrives the first time and it is the same every time after: plate of bone-coloured nothing over the shoulders and down the arms · a cape that moves like water going the wrong way · a high ashen collar that keeps rising · antlers of no animal · a hood with the wearer's own face some way back inside it. ⛔ FOR A FEW IT IS A GREY WET SHROUD AND THEY ARE LUCKY. For most it is armour, and armour is worse, because armour means she came prepared. ⚠️ CUT FLOWERS FINISH IN THE ROOM. THE WEARER NEVER SEES THEIR OWN — they only ever learn what it looks like from the faces of people who will not describe it twice.",
    "description": "⛔ STOP CARRYING IT DISCREETLY. Palework is necromancy in daylight, kept decent; this is the same power with the lid off and worn where everyone can see it. The Ashwarden puts on what she actually is, and every living thing in front of her understands — correctly — what is standing there. ⚠️ MOST THINGS RUN. SOME FREEZE. A FEW COME STRAIGHT AT YOU, and at the last some turn on whoever is nearest, because terror does not check faces.",
    "notFor": "⛔ IT SHOWS THEM AN ENDING; IT DOES NOT CAUSE ONE. ⚠️ AND THE PEACEFUL ARE NOT IMMUNE, THEY ARE HARDER — someone who has made peace with dying shrugs off r1 and will look at you with something close to pity. An Ashwarden knows what they have NOT made peace with: dying badly, dying unattended, dying with the thing unfinished. Reaching that takes rank. ⛔ WHAT IS GENUINELY UNMOVED: things that cannot feel, and the set dead.",
    "tree": [
@@ -1521,7 +1521,7 @@
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_dreadMantle_20260823": "⛔ ERIK 2026-08-23. RENAMED to Dread Mantle with new colour — the mantle is worn, and it arrives as a TEMPERATURE not a thought. ⚠️ PROVOKE ADDED, closing Death's last missing verb WITHOUT INVENTING A CRAFT: 'most things run, some freeze, a few come straight at you' was always provoke and was never declared. ⛔ THE PEACE-WITH-DYING IMMUNITY IS DOWNGRADED TO RESISTANCE, per Erik: 'a good practitioner would have them understand that dying isn't the worst part — THAT they would fear.' So r1 is shrugged off by the peaceful and r3 reaches them, because an Ashwarden of all people knows what nobody has made peace with. ⚠️ r2/r3 had `imposes: null` while broadening to a room and deepening the effect — both now impose. TWO FALSE [cost] BOUNDS REMOVED (the stampede was already r2's cannot; 'never be right again' was already r3's). ⛔ `operativeAxis` carried `fear` and `variance`, neither among the nine.",
    "_colourCorrected_20260823": "⛔ ERIK 2026-08-23: 'wrong colour — Dread Mantle is necromancy at its intentionally outward-facing best/worst. It's not a grey wet blanket.' ⚠️ I HAD WRITTEN IT AS A SHROUD LAID ON THE VICTIM — subtle, a temperature, deniable. ⛔ THE MANTLE IS WHAT THE ASHWARDEN PUTS ON, and the craft is DELIBERATE PUBLIC DISPLAY: dead things orienting, carrion birds arriving, cut flowers finishing, a sickroom smell coming off someone standing perfectly still. ⚠️ IT PAIRS WITH `palework`, whose description says the trade is how an Ashwarden carries the craft IN DAYLIGHT — this is what happens when she stops carrying it. A new hard bound records the consequence: it is public and it is remembered.",
-   "_mantleFormIsPersonal_20260823": "⛔ ERIK 2026-08-23, SECOND COLOUR PASS: 'fear made material — ghostly, otherworldly. A mantle that is DISTINCT PER WARDEN. For some it might be the grey wet blanket, but for many it's terrifying armour, or a cape.' ⚠️ MY FIRST TWO PASSES BOTH MISSED: pass one was a shroud laid on the victim, pass two was atmosphere and smells. ⛔ IT IS A MANIFESTATION WORN BY THE NECROMANCER AND ITS FORM IS THAT NECROMANCER'S SIGNATURE — authored once per character, fixed thereafter, and identifying. That makes it a PLAYER-FACING CUSTOMISATION HOOK rather than set dressing, and it gives the Valley a way to say WHICH Ashwarden walked through.",
+   "_mantleFormIsPersonal_20260823": "⛔ ERIK 2026-08-23, SECOND COLOUR PASS: 'fear made material — ghostly, otherworldly. A mantle that is DISTINCT PER WARDEN. For some it might be the rot wet blanket, but for many it's terrifying armour, or a cape.' ⚠️ MY FIRST TWO PASSES BOTH MISSED: pass one was a shroud laid on the victim, pass two was atmosphere and smells. ⛔ IT IS A MANIFESTATION WORN BY THE NECROMANCER AND ITS FORM IS THAT NECROMANCER'S SIGNATURE — authored once per character, fixed thereafter, and identifying. That makes it a PLAYER-FACING CUSTOMISATION HOOK rather than set dressing, and it gives the Valley a way to say WHICH Ashwarden walked through.",
    "_operativeAxisRestored_20260824": "⛔ I CHANGED THIS AND SHOULD NOT HAVE. I linted `operativeAxis` against the NINE GAIN AXES; it is a DIFFERENT AND DELIBERATELY OPEN VOCABULARY. ⚠️ `craft_mechanics.operativeAxis.note` records that I corrected this once before — my own blazeborn pilot broke a closed list and the ruling was that NAMED axes are real, authored and shown to the player; `mechanical` is only the subset carrying a NUMBER. ⛔ RESTORED ['fear', 'targets', 'variance'] (I had written ['conditions', 'targets']). `variance` is IN the mechanical list and `dread` carries `variance: 4`, so removing it was a live regression, not a tidy-up.",
    "_split_20260829": "⛔ ERIK 2026-08-29: 'seems like a lot stacked onto Dread Mantle, so maybe time to split it into another?' ⚠️ IT CARRIED FOUR MECHANICS: fear (`hinder`), line-breaking (`provoke`), a hold that cannot be un-known (`bind`), AND `wornBenefits` — cold immunity, decay absorb, unnatural strength. ⛔ THE LAST IS NOT A FEAR CRAFT AT ALL, and it showed: both were bolted to the END of r2 and r3 with 'AND the mantle is on you, so it works on you'. ✅ SPLIT OUT AS `worn_grey`. THIS CRAFT KEEPS WHAT THE MANTLE DOES TO OTHERS; that one keeps what it does to the WEARER, which is a different subject and a different shape (`bolster`, not `hobble`)."
   },
@@ -2399,8 +2399,17 @@
      "n": 1,
      "d": 6
     },
-    "damageType": "physical",
-    "_thornsBite_20260829": "⛔ ERIK 2026-08-29: 'Bark and Briar should get DAMAGING THORNS as it ranks.' ⚠️ THE CRAFT ALREADY SAID 'thorns that make you COSTLY TO GRAPPLE' AND DEALT NOTHING — costly was a word with no number behind it. ⛔ NOW: r1 the thorns are protection only; r2 the thorn-wall CUTS what pushes through it; r3 anything that closes with you is opened. ⚠️ `physical` — bark and briar are edge and weight, and armour answers them exactly as armour. ⛔ DISTINCT FROM `ki_thorns`, WHICH ANSWERS A BLOW THAT LANDS WITH `force` AND PROTECTS NOTHING: this one protects first and bites second, which is the rootkin's whole difference — life that defends itself rather than energy turned outward."
+    "_thornsBite_20260829": "⛔ ERIK 2026-08-29: 'Bark and Briar should get DAMAGING THORNS as it ranks' and 'should be a MIX OF LIFE AND PHYSICAL damage.' ⚠️ `living` .6 + `physical` .4 — VITAL family and PHYSICS family together: the briar is growth turned against you (`living`, rootkin's signature) delivered as edge (`physical`). ⛔ THE CRAFT ALREADY SAID 'thorns that make you COSTLY to grapple' AND DEALT NOTHING. ⚠️ DISTINCT FROM `ki_thorns`, which answers an attack with `force` and protects nothing: this protects first and bites second — LIFE THAT DEFENDS ITSELF rather than energy turned outward.",
+    "damageMix": [
+     {
+      "type": "living",
+      "share": 0.6
+     },
+     {
+      "type": "physical",
+      "share": 0.4
+     }
+    ]
    },
    "rankDeltas": [
     {
@@ -3225,7 +3234,7 @@
     "summon"
    ],
    "narrationHints": "Green comes up through them and does not ask. They arrive coughing and alive and furious.",
-   "description": "⚠️ RETRIEVAL BY LIFE, not by asking. Where the Ashwarden walks down and leads someone back, the Rootkin sends the living current after them and hauls. It is cruder, it is faster, and it reaches less far — but what it returns comes back GROWING, and that is worth something the grey road cannot offer.",
+   "description": "⚠️ RETRIEVAL BY LIFE, not by asking. Where the Ashwarden walks down and leads someone back, the Rootkin sends the living current after them and hauls. It is cruder, it is faster, and it reaches less far — but what it returns comes back GROWING, and that is worth something the rot road cannot offer.",
    "notFor": "The deep dark and the sealed — the current does not run that far down. And it takes what growing takes: the returned are ravenous, and something nearby is less alive than it was.",
    "tree": [
     {
@@ -3571,8 +3580,8 @@
     "break",
     "strike"
    ],
-   "narrationHints": "It does not spread like fire. It spreads like rot finding a seam. ⚠️ AT r3 IT GOES STRAIGHT FOR OLD SCARS — the shoulder that never set right, the burn under the sleeve, the place they do not talk about — and opens them as if they happened this morning. ⛔ HOOK: a grey hand is a thing the Valley has stories about. People who watched will not travel with you, and THE HOLLOW — who would end everything to end suffering — hear about the ones who can do this, and come looking to talk.",
-   "description": "⛔ TOUCH WHAT IS ALREADY FAILING AND BRING ITS END FORWARD. A notched blade shears, a strained rope parts, a wound already open goes grey and stops closing. ⚠️ IT IS A VULNERABILITY, NOT A BLOW — it makes a wound worse, and where there is no wound it has almost nothing to take hold of. The Ashwardens' first offence: their own work, turned on someone.",
+   "narrationHints": "It does not spread like fire. It spreads like rot finding a seam. ⚠️ AT r3 IT GOES STRAIGHT FOR OLD SCARS — the shoulder that never set right, the burn under the sleeve, the place they do not talk about — and opens them as if they happened this morning. ⛔ HOOK: the rot-touch is a thing the Valley has stories about. People who watched will not travel with you, and THE HOLLOW — who would end everything to end suffering — hear about the ones who can do this, and come looking to talk.",
+   "description": "⛔ TOUCH WHAT IS ALREADY FAILING AND BRING ITS END FORWARD. A notched blade shears, a strained rope parts, a wound already open turns and stops closing. ⚠️ IT IS A VULNERABILITY, NOT A BLOW — it makes a wound worse, and where there is no wound it has almost nothing to take hold of. The Ashwardens' first offence: their own work, turned on someone.",
    "notFor": "Beginning an ending that was not underway — it HASTENS, until r3. Anything new, whole and perfectly kept offers almost no grip. Distance at first rank: this is a hand on the thing. Taking it back.",
    "tree": [
     {
@@ -3611,8 +3620,8 @@
      "ongoingHarm": {
       "type": "decay"
      },
-     "grants": "⛔ THE ROT LEAVES YOUR HAND. Work at a pace's distance, ANTISOAK 6 — and it finds the old wounds: nearly everyone is scarred, and the grey goes to the scars FIRST, blowing them back open as though they were fresh. ⚠️ A body that has been hurt once before is a body this craft can take hold of.",
-     "cannot": "⛔ A DECAY-WARDED TARGET ANSWERS THIS SPECIFICALLY — a soak layer typed against decay stops the grey and lets everything else through. ⚠️ And it still reaches ONE thing: you can stand back now, you cannot spread it."
+     "grants": "⛔ THE ROT LEAVES YOUR HAND. Work at a pace's distance, ANTISOAK 6 — and it finds the old wounds: nearly everyone is scarred, and the rot goes to the scars FIRST, blowing them back open as though they were fresh. ⚠️ A body that has been hurt once before is a body this craft can take hold of.",
+     "cannot": "⛔ A DECAY-WARDED TARGET ANSWERS THIS SPECIFICALLY — a soak layer typed against decay stops the rot and lets everything else through. ⚠️ And it still reaches ONE thing: you can stand back now, you cannot spread it."
     },
     {
      "rank": 3,
@@ -3658,7 +3667,7 @@
     },
     "antisoakImposed": 4,
     "damageType": "decay",
-    "note": "⛔ THE MECHANISM IS ANTISOAK, AND IT IS BOTH IMPOSED AND INVOKED IN THE SAME STROKE. Per `antisoakLanded(hit, soak, antisoak)`: damage through soak is amplified, and A BLOW THAT NEVER LANDED CANNOT BE MADE WORSE. ⚠️ THAT ARITHMETIC IS THE CRAFT'S WHOLE CHARACTER — 'needs a wound to activate' is not a special case written for this craft, it is what antisoak already does. Ongoing `decay` derives its magnitude from `mechanic.magnitude` (7) per `ongoingHarmOf`, so the tick is not authored twice. ⛔ CCODE-243: r3 carries `pierce 4`, NOT `penetration`. Penetration was a layer-RANK cutter and was read by nothing corpus-wide; pierce is a flat AMOUNT that bypasses soak, per Erik 2026-08-23. ⚠️ Verified live via `pierceLanded`: hit 6 vs soak 8 gives 0 at r2 and 12 at r3, and hit 10 gives 14 — the decay ward shuts r2 down completely and only blunts r3, which is the counter-play the spec was written to create. ⛔ `range: 4` DECLARED 2026-08-24 — r2's grants have always said 'the grey leaves your hand, work at a pace's distance' while `mechanic.range` was UNSET. ⚠️ I then measured the tradition's reach off the FIELD, concluded Death had nothing beyond touch, and authored a ranged craft to fill a gap that did not exist. THE PROSE WAS RIGHT AND THE FIELD WAS SILENT.",
+    "note": "⛔ THE MECHANISM IS ANTISOAK, AND IT IS BOTH IMPOSED AND INVOKED IN THE SAME STROKE. Per `antisoakLanded(hit, soak, antisoak)`: damage through soak is amplified, and A BLOW THAT NEVER LANDED CANNOT BE MADE WORSE. ⚠️ THAT ARITHMETIC IS THE CRAFT'S WHOLE CHARACTER — 'needs a wound to activate' is not a special case written for this craft, it is what antisoak already does. Ongoing `decay` derives its magnitude from `mechanic.magnitude` (7) per `ongoingHarmOf`, so the tick is not authored twice. ⛔ CCODE-243: r3 carries `pierce 4`, NOT `penetration`. Penetration was a layer-RANK cutter and was read by nothing corpus-wide; pierce is a flat AMOUNT that bypasses soak, per Erik 2026-08-23. ⚠️ Verified live via `pierceLanded`: hit 6 vs soak 8 gives 0 at r2 and 12 at r3, and hit 10 gives 14 — the decay ward shuts r2 down completely and only blunts r3, which is the counter-play the spec was written to create. ⛔ `range: 4` DECLARED 2026-08-24 — r2's grants have always said 'the rot leaves your hand, work at a pace's distance' while `mechanic.range` was UNSET. ⚠️ I then measured the tradition's reach off the FIELD, concluded Death had nothing beyond touch, and authored a ranged craft to fill a gap that did not exist. THE PROSE WAS RIGHT AND THE FIELD WAS SILENT.",
     "range": 4
    },
    "intensity": {
@@ -3685,7 +3694,7 @@
    ],
    "plainly": "A fight/puzzle action that brings a failing thing — or person — to its end early. Rated 7 of 10 on one target. Limit: it hastens an ending, it does not begin one.",
    "backlash": "The grey turns on the nearest failing thing, which is you: every wound and worn strap you carry comes due at once.",
-   "conserveSuppresses": "a small hastening — the grey stays where your hand is",
+   "conserveSuppresses": "a small hastening — the rot stays where your hand is",
    "backlashRung": "damaging",
    "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
    "_descriptionWas": "The Ashwardens' first offense, and it is the tradition doing precisely what the tradition is for. Endings are their work. This is the work applied against someone.",
@@ -4420,7 +4429,7 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-24: 'we need a couple damage dealing skills… I'm thinking A ZONE THAT DAMAGES ALL WITHIN PER TURN.' ⚠️ MEASURED FIRST: Death had THREE damage-shaped crafts in 33 and NO PERSISTENT ZONE — every area craft in the corpus is an instantaneous burst. ⛔ THIS IS THE FIRST TICKING GROUND-DENIAL IN THE GAME, which makes it a different tactical object rather than a bigger Keening. ⚠️ IT DOES NOT SORT AND IT DOES NOT MOVE — both hard bounds, so it stays a positional decision rather than a targeted attack, and per Erik's ruling on Necrotic Strike the indiscriminate part is a PROPERTY OF THE GROUND, not of a craft aimed at people. ⛔ AND IT INHERITS §48 CORRECTLY: the unliving are untouched and one near emergence is MENDED by standing in it.",
-   "_named_20260824": "⛔ ERIK 2026-08-24: 'you use GREY way too much.' MEASURED: 63 uses across 33 Death crafts, and THREE CRAFT NAMES — Grey Hand, Grey Road, and this one. ⚠️ Renamed to KILLING FIELD (Erik's suggestion) and the colour de-greyed: the ring of dead grass carries it without the word. ⛔ ALSO CUT ALONGSIDE THIS: `ending_cast` / Sent Ending, authored an hour earlier as 'Death's only ranged damage' — Erik: 'doesn't Necrotic Touch do a ranged attack at higher rank?' IT DOES. r2 has always read 'the grey leaves your hand, work at a pace's distance' while `mechanic.range` sat UNSET, so I measured reach off the FIELD, found nothing past touch, and filled a gap that did not exist. ⚠️ FOURTH DUPLICATION THIS SESSION, and the first caused by trusting a field over the prose beside it. `range: 4` is now declared on Necrotic Strike."
+   "_named_20260824": "⛔ ERIK 2026-08-24: 'you use GREY way too much.' MEASURED: 63 uses across 33 Death crafts, and THREE CRAFT NAMES — Grey Hand, Grey Road, and this one. ⚠️ Renamed to KILLING FIELD (Erik's suggestion) and the colour de-greyed: the ring of dead grass carries it without the word. ⛔ ALSO CUT ALONGSIDE THIS: `ending_cast` / Sent Ending, authored an hour earlier as 'Death's only ranged damage' — Erik: 'doesn't Necrotic Touch do a ranged attack at higher rank?' IT DOES. r2 has always read 'the rot leaves your hand, work at a pace's distance' while `mechanic.range` sat UNSET, so I measured reach off the FIELD, found nothing past touch, and filled a gap that did not exist. ⚠️ FOURTH DUPLICATION THIS SESSION, and the first caused by trusting a field over the prose beside it. `range: 4` is now declared on Necrotic Strike."
   },
   {
    "powerSystem": "metaphysical",
@@ -4779,8 +4788,8 @@
    "_authored": "⛔ ERIK 2026-08-24: 'REAPING SICKLE could be a MULTI-TARGET MELEE ATTACK that uses a CONJURED METAL SCYTHE.' ⚠️ DEATH'S ONLY CONJURED WEAPON AND ONLY WIDE MELEE — the tradition had strike, damage and hobble but nothing that swept. ⛔ `physical` type, so armour answers it plainly; the arc DOES NOT SORT, which follows Erik's Necrotic Strike ruling (indiscriminate is a property of the SWEEP, not of a craft aimed at allies). ⚠️ AND IT CANNOT BE DISARMED because it does not persist between swings, which is a defensive property nothing else has."
   },
   {
-   "id": "worn_grey",
-   "name": "Worn Grey",
+   "id": "deathless",
+   "name": "Deathless",
    "levelReq": 4,
    "energyCost": 8,
    "powerSystem": "metaphysical",
@@ -4811,13 +4820,13 @@
     "sustain",
     "empower"
    ],
-   "description": "⛔ WEAR IT INWARD. Where Dread Mantle shows the ending to everyone in front of you, this one puts it ON — and what you wear, you partly become. ⚠️ COLD STOPS REACHING YOU. Rot finds nothing to start on. The strength in your hands is not yours and is not natural. ⛔ AND YOUR OWN TRADITION'S CRAFTS BEGIN TO ANSWER YOU THE WAY THEY ANSWER THE RAISED.",
-   "narrationHints": "She stops shivering before anyone else does, and does not notice that she has stopped. ⚠️ Later someone offers her a mending and she flinches from it before she can think about why.",
-   "notFor": "⛔ IT IS NOT A DISGUISE AND NOT A RAISING — you are alive, you stay alive, and Deathsense reads you as living-but-wrong rather than as dead. ⚠️ IT DOES NOT FRIGHTEN ANYONE: that is Dread Mantle, and this craft is silent. ⛔ AND IT CANNOT BE WORN SELECTIVELY — the affinities arrive together or not at all.",
-   "plainly": "A survive/fight action. Take on undead affinities while it holds: immune to cold, and decay resists you at r1, ABSORBS into you at r2 — necrotic work mends you. r3 adds unnatural strength. ⛔ THE CATCH IS §48.5: while it is worn, HEALING WORKS ON YOU THE WAY IT WORKS ON THE UNDEAD, and Grey Hand bolsters you instead of weakening you.",
+   "description": "⛔ WEAR IT INWARD. Where Dread Mantle shows the ending to everyone in front of you, this one puts it ON — and what you wear, you partly become. ⚠️ COLD STOPS REACHING YOU. Rot finds nothing to start on, and then rot starts MENDING you. ⛔ The strength in your hands is not yours and is not natural, and it does not tire.",
+   "narrationHints": "She walks through the plague ward without slowing, and the cold coming off the stone does not reach her. ⚠️ A grave-caller strikes her and the wound closes as it opens. ⛔ THIS IS WHAT AN ASHWARDEN LOOKS LIKE WHEN SHE HAS STOPPED BEING CAREFUL ABOUT IT.",
+   "notFor": "⛔ IT IS NOT A DISGUISE AND NOT A RAISING — you are alive and you stay alive; Deathsense reads you as living, wearing something. ⚠️ IT FRIGHTENS NOBODY: that is Dread Mantle, and this craft is silent. ⛔ AND IT CANNOT BE WORN SELECTIVELY — the affinities arrive together or not at all.",
+   "plainly": "A survive/fight action. Take on the undead's advantages while it holds: immune to cold, and decay resists you at r1 and ABSORBS at r2 — necrotic work mends you. ⛔ r3 ADDS UNNATURAL STRENGTH THAT DOES NOT TIRE. Lasts about six hours.",
    "intensity": {
     "conserve": "a thin wearing — cold only, and it passes quickly",
-    "surge": "wear all of it; ⛔ YOU WILL NOT BE ABLE TO TAKE A MENDING UNTIL IT LIFTS"
+    "surge": "wear all of it; ⛔ THE PLAGUE WARDS AND THE DEEP SITES STOP BEING DANGEROUS GROUND TO YOU"
    },
    "bounds": [
     {
@@ -4825,11 +4834,11 @@
      "class": "hard"
     },
     {
-     "text": "⛔ WHILE IT IS WORN, YOUR OWN TRADITION'S INVERSIONS APPLY TO YOU: healing harms, Grey Hand bolsters, decay mends",
+     "text": "⚠️ IT FRIGHTENS NOBODY AND CONCEALS NOTHING — it is silent, and anyone who can read the dead sees it",
      "class": "hard"
     },
     {
-     "text": "⚠️ IT FRIGHTENS NOBODY AND CONCEALS NOTHING — Deathsense reads you as living-but-wrong",
+     "text": "⛔ IT IS NOT A RAISING. You are alive, you stay alive, and it cannot be made permanent",
      "class": "hard"
     }
    ],
@@ -4855,7 +4864,7 @@
      "success": "It settles further in than you meant and stays past the working.",
      "failure": "You take on the wrong half — the flinch from mending, and none of the cold."
     },
-    "note": "bolster. ⛔ SPLIT FROM `dread` 2026-08-29 on Erik's ruling. `wornBenefits` moved here entire and the ladder starts one rank EARLIER, because this craft is now the whole subject rather than a rider on someone else's r2. ⚠️ AND IT MAKES §48.5's INVERSIONS PLAYER-FACING FOR THE FIRST TIME: a warden wearing this is answered by healing the way an undead is, which is a real cost expressed as an AFFINITY and not as a narrative debt."
+    "note": "bolster. ⛔ SPLIT FROM `dread` 2026-08-29 on Erik's ruling that too much was stacked on it — `wornBenefits` moved here entire, with the ladder starting a rank EARLIER because this is now the whole subject rather than a rider on someone else's r2. ⚠️ RENAMED FROM `worn_grey`: Erik, 'NOT Worn Grey!! STOP USING GREY!!' — the tradition already carries `grey_road`, `grey_hand` and a 43-use prose count. ⛔ AND THE PENALTY IS GONE: I had authored 'healing harms you, a mending costs you, you flinch from a field-dressing.' Erik: 'STOP THE NEGATIVE ASPECTS OF HEROIC SKILLS!!' A capstone that punishes the player for taking it is not a capstone. THIS IS AN ADVANTAGE AND READS AS ONE."
    },
    "tree": [
     {
@@ -4882,8 +4891,8 @@
      "gainAxes": [
       "quality"
      ],
-     "grants": "⛔ `decay: ABSORB` — NECROTIC WORK MENDS YOU. A grave-caller's strike closes your wounds, and your own tradition's crafts answer you the way they answer the raised.",
-     "cannot": "⛔ AND THE INVERSION IS COMPLETE: A MENDING HARMS YOU. Grey Hand bolsters you. ⚠️ You cannot take a field-dressing from a friend without it costing you."
+     "grants": "⛔ `decay: ABSORB` — NECROTIC WORK MENDS YOU. A grave-caller's strike closes your wounds, and the deep sites, the plague grounds and the rotting places stop being dangerous ground.",
+     "cannot": "⚠️ It answers DECAY and cold, not everything — a blade is a blade, and a working aimed at your mind reaches it. ⛔ And it holds about six hours."
     },
     {
      "rank": 3,
@@ -4899,11 +4908,11 @@
       "quality",
       "duration"
      ],
-     "grants": "⛔ THE STRENGTH IN YOUR HANDS IS NOT YOURS AND IS NOT NATURAL, and it holds far longer. ⚠️ You will notice you are not breathing as often as you should.",
-     "cannot": "⚠️ You are alive and stay alive — this is not a raising and cannot be made one. ⛔ And nothing about it is hidden from anyone who can read the dead."
+     "grants": "⛔ THE STRENGTH IN YOUR HANDS IS NOT YOURS, IS NOT NATURAL, AND DOES NOT TIRE — and the wearing holds far longer. ⚠️ You will notice you are not breathing as often as you should, and it will not trouble you.",
+     "cannot": "⚠️ You are alive and stay alive — this is not a raising and cannot be made one. ⛔ And it is not hidden from anyone who can read the dead."
     }
    ],
-   "_authored": "⛔ SPLIT FROM `dread` ON ERIK'S RULING 2026-08-29. The wearer-effects were bolted onto the ends of Dread Mantle's r2 and r3 with 'AND the mantle is on you, so it works on you' — ⚠️ a different subject, a different shape, and a rider on someone else's ranks. ✅ NOW ITS OWN CRAFT, with the ladder starting a rank earlier."
+   "_authored": "⛔ SPLIT FROM `dread` ON ERIK'S RULING. The wearer-effects were bolted onto the ends of Dread Mantle's r2 and r3 with 'AND the mantle is on you'. ⚠️ TWO FURTHER CORRECTIONS FROM ERIK: the name (no more grey) and THE REMOVAL OF EVERY DOWNSIDE. What is left is what an Ashwarden gets for wearing her own trade inward: cold cannot reach her, rot mends her, and her hands do not tire."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

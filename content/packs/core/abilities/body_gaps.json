@@ -378,9 +378,9 @@
     "strike",
     "resist"
    ],
-   "description": "⛔ SET THE BODY SO THAT HITTING IT COSTS SOMETHING. The same force a blazeborn throws and a warden draws, held just under the skin and pointed OUTWARD — a strike lands, and the striker's own momentum comes back through their arm. ⚠️ YOU DO NOTHING. That is the whole craft: it is on while you are on, and it answers whoever chose to touch you.",
+   "description": "⛔ SET THE BODY SO THAT ATTACKING IT COSTS SOMETHING. The same force a blazeborn throws and a warden draws, held just under the skin and pointed OUTWARD — a strike lands, and the striker's own momentum comes back through their arm. ⚠️ YOU DO NOTHING. It is on while you are on, and it answers whoever chose to attack you.",
    "narrationHints": "He hits her once, hard, and steps back holding his hand. ⚠️ NOTHING VISIBLE HAPPENED — no flare, no shove. The force he brought simply did not stay where he put it.",
-   "notFor": "⛔ IT ANSWERS BLOWS THAT LAND ON YOU AND NOTHING ELSE — an arrow from a roof, a working, a fire, a fall: none of those get answered, because none of them is someone's arm. ⚠️ AND IT DOES NOT PROTECT YOU: the blow lands in full and hurts exactly as much as it would have. ⛔ Nor can it be aimed, held for a moment, or spent — it is a state, not an act, and it answers your friends' clumsiness as readily as an enemy's intent.",
+   "notFor": "⛔ IT ANSWERS ATTACKS THAT LAND ON YOU AND NOTHING ELSE — an arrow from a roof, a working, a fire, a fall: none of those is someone striking you. ⚠️ AND IT DOES NOT PROTECT YOU: the blow lands in full and hurts exactly as much as it would have. ⛔ IT KNOWS AN ATTACK FROM A HAND — a grip to steady you, a companion hauling you clear, a surgeon at a wound: the ki does not answer any of them.",
    "plainly": "A fight/defend action, then it runs by itself. ⛔ ANYONE WHO LANDS A MELEE BLOW ON YOU TAKES 1d6 FORCE BACK, without you spending anything. Lasts about three rounds. r2 raises it to 2d6 and staggers a striker who commits hard; r3 answers everyone in reach and holds until the fight ends. ⚠️ It does not reduce the blow you took.",
    "intensity": {
     "conserve": "half the answer, and only for a round",
@@ -396,7 +396,7 @@
      "class": "hard"
     },
     {
-     "text": "⚠️ IT CANNOT BE AIMED OR WITHHELD — a state, not an act. It answers a friend's grab exactly as it answers an enemy's",
+     "text": "⛔ IT ANSWERS AN ATTACK, NOT CONTACT — ki reads intent. A friend's grip, a stretcher-carry or a surgeon's hands are not struck back",
      "class": "hard"
     }
    ],
@@ -427,7 +427,7 @@
      "harmRung": "damaging",
      "gainAxes": [],
      "grants": "⛔ ANYONE WHO LANDS A MELEE BLOW ON YOU TAKES 1d6 FORCE BACK, and you spend nothing to answer. ⚠️ The blow still lands on you in full — this is a price on hitting you, not a defence against it.",
-     "cannot": "Three rounds, melee blows only, one answer per strike. ⚠️ An arrow, a working or a fall goes unanswered. ⛔ And you cannot switch it off for someone you like."
+     "cannot": "Three rounds, melee attacks only, one answer per strike. ⚠️ An arrow, a working or a fall goes unanswered. ⛔ And it answers what is meant as a blow — not a hand laid on you."
     },
     {
      "rank": 2,
@@ -461,11 +461,12 @@
       "duration"
      ],
      "grants": "⛔ EVERY HAND THAT REACHES YOU IS ANSWERED, from all sides at once, and it holds until the fighting stops rather than for a count of rounds. ⚠️ A somatic at this rank is not hard to kill — they are EXPENSIVE, and a line that has to grapple them arrives at the far side shorter than it started.",
-     "cannot": "⛔ IT ANSWERS EVERY HAND, WITHOUT EXCEPTION — a companion pulling you out of a fire, someone catching you as you fall, a surgeon reaching for a wound. ⚠️ You cannot exempt anyone and cannot switch it off for a moment. ⛔ AND IT STILL ANSWERS ONLY ARMS: an arrow, a working, or a fall goes unanswered at every rank."
+     "cannot": "⛔ IT STILL ANSWERS ONLY ARMS: an arrow, a working, or a fall goes unanswered at every rank. ⚠️ And it does not reduce what you take — the strike lands in full."
     }
    ],
    "_authored": "⛔ ERIK 2026-08-29: 'I think KI THORNS might be cool too — something that damages someone who hits you.' ⚠️ MEASURED FIRST: NOTHING IN 380 CRAFTS RETALIATES. `reflectByDegree` exists and reflects CONDITIONS on an intercepted binding (built for `shared_weight` r3); this is a PASSIVE answer to DAMAGE, which is a different mechanism. ⛔ AND IT IS THE STRONGEST ARGUMENT FOR ERIK'S RULE 8 SO FAR: I had just written that Body's missing verbs 'read as characterisation'. Body had no retaliation because nobody had thought of it, and 'ki is energy and this is a fantasy game' produced two crafts in one sitting.",
-   "_costRuling_20260829": "⛔ ERIK 2026-08-29: 'NO on the r3 cost… geezus. COST IS ENERGY!' ⚠️ I had written 'at this rank people stop touching you, and that is A COST THE CRAFT DOES NOT MEASURE' — a narrative debt in a `cannot`, dressed up as insight. ⛔ THE SIXTH TIME THIS RULING HAS BEEN NEEDED. A `cannot` is a SCOPE LIMIT: what the craft will not do. The fact that it answers allies is a scope limit and is stated as one; the fact that people find it unnerving is COLOUR and belongs in narrationHints or nowhere."
+   "_costRuling_20260829": "⛔ ERIK 2026-08-29: 'NO on the r3 cost… geezus. COST IS ENERGY!' ⚠️ I had written 'at this rank people stop touching you, and that is A COST THE CRAFT DOES NOT MEASURE' — a narrative debt in a `cannot`, dressed up as insight. ⛔ THE SIXTH TIME THIS RULING HAS BEEN NEEDED. A `cannot` is a SCOPE LIMIT: what the craft will not do. The fact that it answers allies is a scope limit and is stated as one; the fact that people find it unnerving is COLOUR and belongs in narrationHints or nowhere.",
+   "_kiReadsIntent_20260829": "⛔ ERIK 2026-08-29: 'It's KI. It responds to an ATTACK, not when friends touch you.' ⚠️ I had it answering every hand, which made a heroic craft into a liability — and it is wrong on the fiction too: ki is the practitioner's own energy answering aggression, not a mechanical trap that cannot tell a blow from a hand."
   }
  ],
  "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas.",

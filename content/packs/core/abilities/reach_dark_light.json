@@ -3705,6 +3705,235 @@
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_dark_light",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+  },
+  {
+   "powerSystem": "precursor",
+   "tradition": "blazeborn",
+   "nativeOrCombination": "native",
+   "axes": {
+    "dark_light": 0.7
+   },
+   "id": "focused_array",
+   "name": "Focused Array",
+   "levelReq": 3,
+   "energyCost": 6,
+   "attribute": "practical",
+   "shape": "setup",
+   "harmRung": "none",
+   "challengeTypes": [
+    "CREATE",
+    "FIGHT",
+    "DEFEND"
+   ],
+   "operativeAxis": [
+    "range",
+    "quality",
+    "targets"
+   ],
+   "effectTags": [
+    "lens",
+    "focus",
+    "array"
+   ],
+   "functions": [
+    "empower",
+    "make",
+    "command"
+   ],
+   "description": "⛔ LIGHT THAT SOMEONE ELSE THROWS, MADE WORSE. Set lenses, mirrors and standing glass so that another blazeborn's working arrives further, harder and where it was not expected. ⚠️ THIS IS WHAT THE LENSWARD IS — the great focusing arrays, and the beam-craft that makes the Blazeborn FEARED rather than merely bright.",
+   "narrationHints": "The array takes an hour to set and half a heartbeat to use. ⚠️ What arrives at the far end is not bigger, it is NARROWER — and a thing narrow enough goes through what a wide thing would have washed over.",
+   "notFor": "⛔ IT MAKES NO LIGHT OF ITS OWN — without someone to throw a working into it, an array is furniture. ⚠️ AND IT MUST BE SET IN ADVANCE, in place, with line of sight: it is a fortification, not a manoeuvre. ⛔ It cannot be moved once aligned, and an army that walks around it has beaten it.",
+   "plainly": "A create/fight action. Spend time setting lenses and mirrors; afterwards any blazeborn working thrown into the array reaches much further and lands harder. Rated 4 of 10, three beneficiaries, and it holds until broken. ⛔ It makes no light itself, cannot move, and needs line of sight.",
+   "intensity": {
+    "conserve": "a single lens — half the reach, and one person may use it",
+    "surge": "align everything you have; ⛔ THE ARRAY BURNS OUT WITH THE SHOT AND THE GLASS IS SLAG"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT MAKES NO LIGHT — it only carries and narrows what someone else throws",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ SET IN ADVANCE, IN PLACE, AND IT CANNOT BE MOVED once aligned",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ LINE OF SIGHT ALONG THE WHOLE PATH — a hill, a fog or a thrown-up wall breaks the array as surely as smashing it",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 8,
+    "targets": 3,
+    "range": 40,
+    "crit": {
+     "success": "The alignment is truer than you meant and the beam arrives somewhere you had not measured to.",
+     "failure": "You align it on yourself and see, for one moment, exactly what it does."
+    },
+    "note": "setup. ⛔ THE FIRST FORCE-MULTIPLIER CRAFT IN THE TRADITION and the one `the_lensward` describes: 'where the Blazeborn WORK light instead of merely LIVING IN IT — lenses, mirrors, the great focusing arrays, and the beam-craft that makes them feared.' ⚠️ It scales OTHER crafts rather than dealing its own harm, which is why it is `setup` and carries no damage type."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Set Lens",
+     "functions": [
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ SET ONE LENS. A blazeborn working thrown through it reaches roughly twice as far and narrows as it goes.",
+     "cannot": "One lens, one line, and it takes real time to align. ⚠️ Break the glass and it is over."
+    },
+    {
+     "rank": 2,
+     "name": "The Array",
+     "functions": [
+      "make",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "range",
+      "targets"
+     ],
+     "grants": "⛔ A FIELD OF MIRRORS AND STANDING GLASS — several throwers may use it, from cover, and the light arrives from an angle nobody was watching. ⚠️ This is how a handful of Blazeborn hold a border.",
+     "cannot": "⚠️ It must be set before the fight. ⛔ An enemy who arrives from off-axis meets people, not an array."
+    },
+    {
+     "rank": 3,
+     "name": "The Lensward",
+     "functions": [
+      "make",
+      "empower",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "range"
+     ],
+     "grants": "⛔ AN ARRAY THAT REACHES BEYOND SIGHT — set with measurement rather than eye, and worked by people who cannot see what they are hitting. ⚠️ THE LENSWARD'S OWN CRAFT: light delivered to a place named on a chart.",
+     "cannot": "⛔ AND YOU WILL NOT SEE WHAT YOU HIT EITHER. A named place is not a known one, and the array does not ask who is standing there."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29: 'think about the RADIANT PEOPLES — what do they DO? Then make sure they can do the things this world needs, with skills.' ⚠️ MEASURED FIRST: blazeborn had 14 crafts and NO force-multiplier, while `the_lensward` — an authored PLACE — describes exactly this and says it is what makes them FEARED. ⛔ THE PLACE EXISTED AND THE CRAFT DID NOT."
+  },
+  {
+   "powerSystem": "precursor",
+   "tradition": "blazeborn",
+   "nativeOrCombination": "native",
+   "axes": {
+    "dark_light": 0.7
+   },
+   "id": "beacon_chain",
+   "name": "Beacon Chain",
+   "levelReq": 2,
+   "energyCost": 4,
+   "attribute": "mental",
+   "shape": "setup",
+   "harmRung": "none",
+   "challengeTypes": [
+    "TRAVEL",
+    "EXPLORE",
+    "SOCIAL"
+   ],
+   "operativeAxis": [
+    "range",
+    "persistence"
+   ],
+   "effectTags": [
+    "signal",
+    "beacon",
+    "waymark"
+   ],
+   "functions": [
+    "reveal",
+    "sustain",
+    "make"
+   ],
+   "description": "⛔ LIGHT AS A MESSAGE ACROSS A DISTANCE NOBODY CAN WALK IN A DAY. Set a fire that says something — and on a glass plain with no landmarks, a beacon is the difference between a road and a direction. ⚠️ THE UNROMANTIC CRAFT OF A PEOPLE WHOSE COUNTRY HAS NO SHADE AND NO EDGES.",
+   "narrationHints": "Three flashes, a pause, two more. ⚠️ Everyone on the plain who was taught the count now knows, and the ones who were not know only that something is happening far away.",
+   "notFor": "⛔ IT CARRIES A SIGNAL, NEVER A CONVERSATION — an agreed meaning, briefly, and nothing you did not arrange beforehand. ⚠️ AND ANYONE CAN SEE IT: a beacon is not private and cannot be aimed at one reader. ⛔ Cloud, a fold of ground, or a long enough night with no relay all break the chain.",
+   "plainly": "A travel/social action. Set a beacon that carries an agreed signal to anyone in line of sight, and holds for about a day. r2 chains beacons across a region; r3 makes a waymark that burns for a season and can be steered toward. ⛔ Public, pre-arranged meanings only.",
+   "intensity": {
+    "conserve": "one beacon, one night",
+    "surge": "light every beacon you have; ⚠️ EVERYONE WILL COME, INCLUDING THE ONES YOU DID NOT WANT"
+   },
+   "bounds": [
+    {
+     "text": "⛔ AGREED MEANINGS ONLY — a beacon says what was arranged and cannot improvise",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT IS PUBLIC. Everyone in sight receives it, including whoever you are signalling about",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ LINE OF SIGHT OR A RELAY. Cloud, a fold of ground, or a gap too long breaks the chain",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 24,
+    "range": 60,
+    "crit": {
+     "success": "Someone relays it onward who was not part of your chain, and it goes further than you built for.",
+     "failure": "The signal is read, correctly, by exactly the wrong people."
+    },
+    "note": "setup/reveal. ⛔ A COMMUNICATION CRAFT, WHICH THE TRADITION HAD NONE OF — `kindle` r1 mentions 'signal' in passing and no craft did it. ⚠️ On a GLASS PLAIN with no landmarks (regions.radiant_wastes: 'glass plain — land fused to glass by the Blaze; flat, glaring') a beacon is infrastructure, not flavour."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Set Beacon",
+     "functions": [
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ A LIGHT THAT CARRIES AN AGREED MEANING to everyone in sight, and holds through a night.",
+     "cannot": "One beacon, one meaning, and it must have been agreed beforehand. ⚠️ Anyone looking sees it."
+    },
+    {
+     "rank": 2,
+     "name": "The Chain",
+     "functions": [
+      "make",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "range",
+      "duration"
+     ],
+     "grants": "⛔ BEACON TO BEACON ACROSS A WHOLE REGION — word crosses the Wastes in an evening, which no rider does. ⚠️ A people who can do this govern differently from a people who cannot.",
+     "cannot": "⛔ Every link must be lit and watched. A broken link is a message that stops halfway and means nothing."
+    },
+    {
+     "rank": 3,
+     "name": "Standing Waymark",
+     "functions": [
+      "make",
+      "sustain"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "quality"
+     ],
+     "grants": "⛔ A LIGHT THAT BURNS FOR A SEASON WITHOUT TENDING and can be walked toward from over the horizon. ⚠️ On ground with no landmarks this is not a signal, it is A PLACE — and places on the glass are made, not found.",
+     "cannot": "⚠️ It cannot be hidden and cannot be moved. ⛔ A waymark tells your enemies where the road is, exactly as clearly as it tells everyone else."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29. ⚠️ MEASURED: the tradition had NO communication craft at all — `kindle` r1 says 'signal' and nothing does it. ⛔ AND THE GEOGRAPHY DEMANDS IT: the Radiant Wastes are 'a glass plain, flat, glaring' with no landmarks, and `origins.blazeborn` says 'THE BLAZE IS EXPANDING — you walked out ahead of it.' A people fleeing a moving frontier across featureless ground need beacons more than they need another beam."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

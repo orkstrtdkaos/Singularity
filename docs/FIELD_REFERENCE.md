@@ -12,7 +12,7 @@ node scripts/field_atlas.mjs --md     # …as markdown, to paste back in
 node scripts/safe_delete.mjs <field>  # triage one candidate before deleting it
 ```
 
-**Last measured: 2026-08-28 · v1.9.253 · 378 crafts · 107 distinct authored fields.**
+**Last measured: 2026-08-28 · v1.9.254 · 378 crafts · 107 distinct authored fields.**
 
 ---
 
@@ -20,9 +20,9 @@ node scripts/safe_delete.mjs <field>  # triage one candidate before deleting it
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **84** | a play-path file names it outside a comment |
+| ✅ **READ** | **83** | a play-path file names it outside a comment |
 | ⛔ **DARK** | **19** | **no literal reader anywhere** — see the four lies below |
-| ⚠️ **CI-ONLY** | **3** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
+| ⚠️ **CI-ONLY** | **4** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
 
 ### ⛔ THE FOUR WAYS "UNREAD" LIES — all four produced a false finding here inside one day
@@ -38,6 +38,19 @@ node scripts/safe_delete.mjs <field>  # triage one candidate before deleting it
 4. ⛔ **BROKEN READER.** A reader exists and looks at the **wrong copy**. `damage_families.json` measured
    unread and was **correct content with a reader pointed at an older file.** ⚠️ **The signal is identical
    to cruft. Only the diagnosis differs, and only a person can make it.**
+
+### ⚠️ A SIXTH: A NAMED READER HIDES THE FIELD IT READS
+
+**`persistUntilHealed` moved from READ to CI-ONLY on 2026-08-28 BECAUSE IT GOT BETTER.** `skill_battle`
+used to inline `authoredBlock(decl, "persistUntilHealed", rank) === true` — the literal was visible, and
+the check was **wrong** (all six crafts author an object, none authors `true`). Replacing it with
+`persistsUntilHealed(decl, rank)` fixed the defect **and removed the literal**, so the atlas sees one
+reader fewer while the field is read correctly for the first time.
+
+⛔ **THE ATLAS COUNTS LITERAL MENTIONS. A WELL-NAMED READER IN ANOTHER MODULE IS INVISIBLE TO IT** — the
+same blind spot as generic iteration, arriving from the opposite direction: not a field consumed without
+being named, but a field named in only one place and consumed from many. ✅ **A bucket falling is not
+always a regression. Check which way the code moved before believing the table.**
 
 ### ⛔ AND A FIFTH, LEARNED BUILDING THIS FILE: A QUESTION IS NOT A CONSUMER
 
@@ -485,7 +498,7 @@ The damage families did not, which is why they were dark.**
 | `backlashRungNone` | 3 | `root`×3 | ⛔ DARK | — |
 | `interceptCondition` | 3 | `tree`×3 | ✅ READ | `intercept.js` |
 | `opensAccess` | 2 | `tree`×2 | ✅ READ | `progression.js` |
-| `downtime` | 2 | `root`×2 | ✅ READ | `gm.js` |
+| `downtime` | 2 | `root`×2 | ⚠️ CI-ONLY | _1 test/script only_ |
 | `summon` | 2 | `root`×2 | ✅ READ | `gm.js`, `npcsheet.js`, `roundreceipt.js` |
 | `pierce` | 2 | `tree`×1 `mechanic`×1 | ✅ READ | `capabilities.js`, `skill_battle.js` |
 | `innatePrecursor` | 2 | `root`×2 | ✅ READ | `progression.js`, `app.js` |

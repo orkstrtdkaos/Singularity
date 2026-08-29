@@ -62,8 +62,11 @@ working papers; **this is the answer.**
 | 08-28 | ✅ **self-variant canon repair APPLIED** | 7 shared-canon records were each a rumour of THEMSELVES (`rivalId === entityId`) — corruption from a non-idempotent retry, unrepaired since CCODE-04 | before/after counted: 15 records in, 15 out · 7 → 0 self-variants · 0 genuine variants touched · 20 suites green | ⛔ `world/canon/valley.json` — Low Lamp Inn, Siol, Tessvel Cairn, Warden Coll, Deni Cors, Ossivyn Tallow, Stillwater's Trouble are canonical again |
 | 08-28 | ⛔ **`ability_rename_map` WIRED (CCODE-294)** | 377 old→new ids, registered and 57 KB, loaded by NOTHING — so 22 ability references across 7 real saves pointed at ids the catalogue no longer answered to, 11 of them on one L30 character | reconcile step 31 · `save_fixtures` now checks RESOLUTION, proved able to go RED | ✅ **22 → 0 unresolved** · nothing was permanently lost |
 | 08-28 | ⚠️ `save_fixtures` counted array LENGTHS | so it reported "nothing shrank" while 22 entries dangled — counting the container instead of the contents, in the test written to catch that | the new check fails when the map is unwired | ⛔ an id has THREE homes: catalogue, minted `customAbilities`, runtime braid |
+| 08-28 | ✅ **the four project verbs reach play (CCODE-295)** | `interruptProject` / `resumeProject` / `sabotageProject` / `inheritProject` were built and called by NOTHING — while `craft_mechanics` says *"Sunk Assay L4 is built on all four"* | end-to-end run of all four · refusals return reasons · `testOnlyExports` 26 → 22 | ⛔ GM contract §18b + the op shape + the `projectOps` handler; `sabotageMax` dial bounds a setback |
+| 08-28 | ⛔ **`persistUntilHealed` was stamped NEVER (CCODE-296)** | `skill_battle` compared `=== true`; all SIX crafts author an OBJECT naming what persists, none authors `true` | the condition now carries `persistUntilHealed` **and** `persistedAs` | ⚠️ third `=== true` against a richer authored shape this week · `resolveSoothe` finally has something to honour |
+| 08-28 | ⚠️ a phantom control, mine | I read `rules.projects.sabotageMax`; the dials live at `craftMechanics.projects` | `unauthoredRulesKeys` caught it within the minute | ⛔ the wrong-config-object mistake, made 20 minutes after documenting it |
 
-**Last verified: 2026-08-28 · v1.9.253 · 378 crafts.**
+**Last verified: 2026-08-28 · v1.9.254 · 378 crafts.**
 
 ---
 

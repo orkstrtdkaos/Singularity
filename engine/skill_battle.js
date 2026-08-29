@@ -9,7 +9,8 @@ import { resolveAction } from "./resolve.js";
 import { chooseTarget, foeKnowledge } from "./targeting.js";
 import { damageMixOf, wardAnswer, resolveComposite } from "./damagetypes.js";   // CCODE-281: composite damage, and the reader `wardTypes` never had
 import { predictAggregate } from "./melee.js";   // CCODE-274: the folded party contributes as a measured aggregate, not as N more rolls   // CCODE-250: a foe chooses who to hit
-import { redirectImposition, interceptorFor, catchesCondition, catchesDamage } from "./intercept.js";   // CCODE-250: …and someone may step in front of it
+import { redirectImposition, interceptorFor, catchesCondition, catchesDamage } from "./intercept.js";
+import { persistsUntilHealed, persistedConditionName } from "./conditions.js";   // CCODE-296: the readers that accept BOTH authored shapes   // CCODE-250: …and someone may step in front of it
 import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, ongoingHarmOf, authoredBlock, resolveProvoke, resolveSoothe, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -1341,8 +1342,21 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     const infDecl = roundWinner === "player" ? playerDecl : oppDecl;
     const harm = ongoingHarmOf(infDecl, infDecl?.rank || 1);
     const losingSide = roundWinner === "player" ? "opponent" : "player";
+    // ⛔ CCODE-296 — `=== true` NEVER FIRED. `persistUntilHealed` is authored as an OBJECT that NAMES what
+    // persists — `{condition:"bleeding"}`, `{condition:"enfeeblement"}` — on all SIX crafts that use it, and
+    // NOT ONE authors the bare `true` this compared against. So a flag six crafts rely on was stamped
+    // exactly never, and `resolveSoothe`, which already honours `c.persistUntilHealed`, had nothing to honour.
+    // ⚠️ `conditions.js` HAD THE RIGHT READER ALL ALONG: `persistsUntilHealed()` accepts both shapes and
+    // `persistedConditionName()` returns the name the object carries. Both were exported and called by
+    // nothing. ⛔ A READER AND A WRITER THAT NEVER MET — and the third `=== true` against a richer authored
+    // shape this week, after `isProjectCraft` vs `projectTicks: "r3"`.
+    const persists = persistsUntilHealed(infDecl, infDecl?.rank || 1);
+    const persistName = persistedConditionName(infDecl, infDecl?.rank || 1);
     if (harm && harm.magnitude > 0) inflicted = { side: losingSide, kind: "ongoingHarm",
-      by: infDecl.name || infDecl.function, persistUntilHealed: authoredBlock(infDecl, "persistUntilHealed", infDecl?.rank || 1) === true, ...harm };
+      by: infDecl.name || infDecl.function, persistUntilHealed: persists,
+      // ⚠️ THE NAME IS THE POINT OF HER SHAPE. "bleeding" and "enfeeblement" are different things to be
+      // carrying, and a bare boolean throws that away — which is why the object form is the better one.
+      ...(persists && persistName ? { persistedAs: persistName } : {}), ...harm };
     // ⛔ CCODE-216 — AND THE VULNERABILITY A BLOW LEAVES BEHIND. Erik's antisoak ruling had one open
     // question: does `grief_strike`'s number mean "this blow benefits" or "this blow LEAVES them open"?
     // ⚠️ AEVI ANSWERED IT BY AUTHORING. `antisoakImposed` 3/5/8 across its three ranks - the imposing
@@ -1350,8 +1364,8 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     // the half that puts it there.
     const asImposed = Math.max(0, Number(authoredBlock(infDecl, "antisoakImposed", infDecl?.rank || 1)) || 0);
     if (asImposed > 0) opened = { side: losingSide, kind: "antisoak", magnitude: asImposed,
-      by: infDecl.name || infDecl.function,
-      persistUntilHealed: authoredBlock(infDecl, "persistUntilHealed", infDecl?.rank || 1) === true };
+      by: infDecl.name || infDecl.function, persistUntilHealed: persists,
+      ...(persists && persistName ? { persistedAs: persistName } : {}) };
   }
   if (roundWinner && phase === "action") {
     const impDecl = roundWinner === "player" ? playerDecl : oppDecl;

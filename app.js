@@ -105,7 +105,7 @@ import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 // ⛔ CCODE-239 — PROJECTS TICK. `engine/projects.js` shipped green with all six exports reachable only
 // from smoke.mjs: work banked, nothing advanced it, and `PROJECT_TICKS` was the one INERT verdict in the
 // effect audit. A threshold nothing counts toward is a duration that never elapses.
-import { tickAllProjects, openProject, projectProgress } from "./engine/projects.js";
+import { tickAllProjects, openProject, projectProgress, interruptProject, resumeProject, sabotageProject, inheritProject } from "./engine/projects.js";   // CCODE-295: the four verbs the content already depends on
 import { holdOpen, slowSink, canReach, resolveRetrieval } from "./engine/death.js"; // CCODE-270: the player's road back — the seven retrieval crafts had no door
 import { alliesOf } from "./engine/combatants.js"; // CCODE-276: the roster the party block renders
 import { commandSlots, bringForward, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
@@ -115,7 +115,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.253";
+const APP_VERSION = "1.9.254";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6363,7 +6363,39 @@ function applyTurn(turn, resolution, playerWords = null) {
   });
   applyStep("projectOps", () => {
     for (const op of (Array.isArray(turn.projectOps) ? turn.projectOps : []).slice(0, 3)) {
-      if (String(op?.op || "") !== "open") continue;
+      const pv = String(op?.op || "");
+      // ⛔ CCODE-295 — THE OTHER FOUR VERBS. `interruptProject`, `resumeProject`, `sabotageProject` and
+      // `inheritProject` were built, exported, and called by NOTHING — not app.js, not another module, not
+      // even inside projects.js. This loop already read `projectOps` and silently `continue`d on anything
+      // that was not "open", so four capabilities sat one line away from reachable.
+      // ⚠️ AND CONTENT ALREADY DEPENDS ON THEM. `craft_mechanics.json` says a threshold "can be interrupted,
+      // hurried by more hands, set back by sabotage, and inherited — SUNK ASSAY L4 IS BUILT ON ALL FOUR."
+      // An authored dungeon leaned on four things the player could never trigger.
+      if (pv && pv !== "open") {
+        // ⚠️ ONE OPEN PROJECT PER CRAFT is `openProject`'s own rule, so abilityId is the natural key; a
+        // projectId is accepted too because a finished-and-reopened craft can have more than one record.
+        const pj = (character.projects || []).find(x => !x.done
+          && (x.abilityId === String(op.abilityId || "") || x.id === String(op.projectId || "")));
+        if (!pj) continue;
+        let pres = null;
+        if (pv === "interrupt") pres = interruptProject(pj, op.why ? String(op.why).slice(0, 80) : "interrupted");
+        else if (pv === "resume") pres = resumeProject(pj);
+        else if (pv === "sabotage") {
+          // ⛔ BOUNDED. `sabotageProject` already clamps to what is banked, so it can never go negative —
+          // ⚠️ AND THE PATH IS `craftMechanics.projects`, NOT `rules.projects`. My first version read the
+          // latter — a key no pack provides — and the unauthoredRulesKeys ratchet caught it within the
+          // minute: the wrong-config-object mistake, made twenty minutes after documenting it.
+          // but an unbounded op could still wipe a long work in one hallucinated number. The cap is a dial
+          // defaulting to a third of the threshold: sabotage is a setback, not a delete key.
+          const cap = Math.max(1, Math.round(num(CONTENT.rules?.craftMechanics?.projects?.sabotageMax, Math.ceil(num(pj.threshold, 3) / 3))));
+          pres = sabotageProject(pj, Math.min(cap, Math.max(0, Number(op.amount) || 1)), op.by ? String(op.by).slice(0, 60) : null);
+        }
+        else if (pv === "inherit") pres = inheritProject(pj, op.newOwner ? String(op.newOwner).slice(0, 60) : null);
+        else continue;
+        if (pres?.ok === false && pres.why) character._projectRefusals = [...(character._projectRefusals || []).slice(-2), pres.why];
+        continue;
+      }
+      if (pv !== "open") continue;
       const ab = fullCatalog()[String(op.abilityId || "")];
       if (!ab) continue;
       // ⛔ THE OWNED RANK DECIDES IT. `working_model` authors `projectTicks: "r3"` — it is a project at rank

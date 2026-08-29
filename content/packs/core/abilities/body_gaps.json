@@ -343,6 +343,128 @@
    "_authored": "⛔ SNG-482. Body had no `soothe`. ⚠️ DISTINCT FROM MIND'S QUIET THE ROOM: that works at range on a room, this works by CONTACT on people you can reach, and it does not touch grief.",
    "_wardTypes": "⛔ SNG-512. By contact, and feeling only.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
+  },
+  {
+   "id": "ki_thorns",
+   "name": "Ki Thorns",
+   "levelReq": 3,
+   "energyCost": 6,
+   "powerSystem": "metaphysical",
+   "attribute": "physical",
+   "tradition": "somatic",
+   "nativeOrCombination": "native",
+   "axes": {
+    "body_mind": -0.6
+   },
+   "shape": "guard",
+   "harmRung": "damaging",
+   "challengeTypes": [
+    "FIGHT",
+    "DEFEND",
+    "DUEL"
+   ],
+   "operativeAxis": [
+    "damage",
+    "duration",
+    "targets"
+   ],
+   "effectTags": [
+    "ki",
+    "retaliation",
+    "passive"
+   ],
+   "functions": [
+    "ward",
+    "strike",
+    "resist"
+   ],
+   "description": "⛔ SET THE BODY SO THAT HITTING IT COSTS SOMETHING. The same force a blazeborn throws and a warden draws, held just under the skin and pointed OUTWARD — a strike lands, and the striker's own momentum comes back through their arm. ⚠️ YOU DO NOTHING. That is the whole craft: it is on while you are on, and it answers whoever chose to touch you.",
+   "narrationHints": "He hits her once, hard, and steps back holding his hand. ⚠️ NOTHING VISIBLE HAPPENED — no flare, no shove. The force he brought simply did not stay where he put it.",
+   "notFor": "⛔ IT ANSWERS BLOWS THAT LAND ON YOU AND NOTHING ELSE — an arrow from a roof, a working, a fire, a fall: none of those get answered, because none of them is someone's arm. ⚠️ AND IT DOES NOT PROTECT YOU: the blow lands in full and hurts exactly as much as it would have. ⛔ Nor can it be aimed, held for a moment, or spent — it is a state, not an act, and it answers your friends' clumsiness as readily as an enemy's intent.",
+   "plainly": "A fight/defend action, then it runs by itself. ⛔ ANYONE WHO LANDS A MELEE BLOW ON YOU TAKES 1d6 FORCE BACK, without you spending anything. Lasts about three rounds. r2 raises it to 2d6 and staggers a striker who commits hard; r3 answers everyone in reach and holds until the fight ends. ⚠️ It does not reduce the blow you took.",
+   "intensity": {
+    "conserve": "half the answer, and only for a round",
+    "surge": "set it as hard as you can hold; ⛔ IT ANSWERS EVERY TOUCH, INCLUDING A HAND ON YOUR SHOULDER"
+   },
+   "bounds": [
+    {
+     "text": "⛔ MELEE ONLY — it answers an arm, not an arrow, a working, or a fall",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT DOES NOT SOFTEN THE BLOW. You take the strike in full; the striker simply also pays",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT CANNOT BE AIMED OR WITHHELD — a state, not an act. It answers a friend's grab exactly as it answers an enemy's",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "duration": 3,
+    "targets": 1,
+    "damageType": "force",
+    "crit": {
+     "success": "It comes back harder than it went in, and everyone watching decides not to be next.",
+     "failure": "You hold it wrong and the force stays in you — you take your own answer."
+    },
+    "note": "guard, and ⛔ THE FIRST RETALIATION CRAFT IN THE GAME — grepped 380 crafts and nothing answers being hit. ⚠️ `reflectByDegree` (intercept.js) exists but reflects CONDITIONS on an INTERCEPTED binding; this is a PASSIVE answer to DAMAGE that lands on you, which is a different mechanism and needs its own. ⛔ `damageType: force` — PHYSICS family, the striker's own momentum returned, and the same type `ki_wield` throws outward. ⚠️ THE CRAFT COSTS NO ACTION WHILE IT RUNS, which is what makes it worth an action to set.",
+    "_notBarkAndBriar": "⚠️ CHECKED AGAINST `bark_and_briar` (rootkin), whose r1 is 'bark-skin that deflects a blow, THORNS THAT MAKE YOU COSTLY TO GRAPPLE'. ⛔ NO CONFLICT: that craft is `resist/shield/ward` and DEALS NO DAMAGE — it is protection that discourages. This one deals damage and does NOT protect. ⚠️ Same image, opposite mechanics, and the distinction is stated here so nobody merges them in a later pass."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Set Thorns",
+     "functions": [
+      "ward",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [],
+     "grants": "⛔ ANYONE WHO LANDS A MELEE BLOW ON YOU TAKES 1d6 FORCE BACK, and you spend nothing to answer. ⚠️ The blow still lands on you in full — this is a price on hitting you, not a defence against it.",
+     "cannot": "Three rounds, melee blows only, one answer per strike. ⚠️ An arrow, a working or a fall goes unanswered. ⛔ And you cannot switch it off for someone you like."
+    },
+    {
+     "rank": 2,
+     "name": "Barbed Frame",
+     "functions": [
+      "ward",
+      "strike",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging",
+     "gainAxes": [
+      "damage",
+      "quality"
+     ],
+     "grants": "⛔ 2d6 BACK, AND A STRIKER WHO COMMITTED HARD IS STAGGERED BY THEIR OWN BLOW — the heavier the swing, the worse the answer. ⚠️ Careful fighters learn to tap at you, which is itself the point.",
+     "cannot": "⛔ It still does not reduce what you take, and a patient enemy simply stops closing. ⚠️ You cannot make anyone hit you."
+    },
+    {
+     "rank": 3,
+     "name": "Every Touch Answered",
+     "functions": [
+      "ward",
+      "strike",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [
+      "targets",
+      "duration"
+     ],
+     "grants": "⛔ EVERY HAND THAT REACHES YOU IS ANSWERED, from all sides at once, and it holds until the fighting stops rather than for a count of rounds. ⚠️ A somatic at this rank is not hard to kill — they are EXPENSIVE, and a line that has to grapple them arrives at the far side shorter than it started.",
+     "cannot": "⛔ AND IT ANSWERS EVERYONE. A companion dragging you out of a fire is answered; someone catching you as you fall is answered. ⚠️ At this rank people stop touching you, and that is a cost the craft does not measure."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29: 'I think KI THORNS might be cool too — something that damages someone who hits you.' ⚠️ MEASURED FIRST: NOTHING IN 380 CRAFTS RETALIATES. `reflectByDegree` exists and reflects CONDITIONS on an intercepted binding (built for `shared_weight` r3); this is a PASSIVE answer to DAMAGE, which is a different mechanism. ⛔ AND IT IS THE STRONGEST ARGUMENT FOR ERIK'S RULE 8 SO FAR: I had just written that Body's missing verbs 'read as characterisation'. Body had no retaliation because nobody had thought of it, and 'ki is energy and this is a fantasy game' produced two crafts in one sitting."
   }
  ],
  "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas.",

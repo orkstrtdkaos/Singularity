@@ -469,7 +469,7 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `rankDeltas` | 284 | `root`×284 | ✅ READ | `craftmechanics.js` |
 | `duration` | 279 | `mechanic`×279 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `npcsheet.js` |
 | `magnitude` | 278 | `mechanic`×278 | ✅ READ | `capabilities.js`, `conditions.js`, `craftmechanics.js` |
-| `note` | 197 | `mechanic`×197 | ✅ READ | `art.js`, `authormode.js`, `borncontract.js` |
+| `note` | 198 | `mechanic`×198 | ✅ READ | `art.js`, `authormode.js`, `borncontract.js` |
 | `effectTags` | 154 | `root`×154 | ✅ READ | `battleprompt.js`, `braids.js`, `martial.js` |
 | `scope` | 135 | `mechanic`×135 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `app.js` |
 | `targets` | 110 | `mechanic`×110 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
@@ -520,6 +520,7 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `summon` | 2 | `root`×2 | ✅ READ | `gm.js`, `npcsheet.js`, `roundreceipt.js` |
 | `pierce` | 2 | `tree`×1 `mechanic`×1 | ✅ READ | `capabilities.js`, `skill_battle.js` |
 | `innatePrecursor` | 2 | `root`×2 | ✅ READ | `progression.js`, `app.js` |
+| `damageMix` | 1 | `mechanic`×1 | ✅ READ | `damagetypes.js` |
 | `taughtBy` | 1 | `root`×1 | ✅ READ | `companions.js`, `gm.js`, `progression.js` |
 | `companionTaught` | 1 | `root`×1 | ⛔ DARK | — |
 | `progression` | 1 | `root`×1 | ✅ READ | `authormode.js`, `backfill.js`, `braids.js` |

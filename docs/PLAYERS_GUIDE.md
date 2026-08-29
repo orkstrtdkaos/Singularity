@@ -294,19 +294,36 @@ does.
 | **The Quiet Ground** | still grey water and wide windows. ⚠️ **The water is what the dying look at.** People are brought here |
 | **Thinwater** | *"the water runs thin here, and so does everything else"* |
 
-## What is wrong
+## What is pressing, where you are
 
-**The water is moving.**
+⛔ **THERE IS NO SINGLE STORY WAITING FOR YOU.** The valley carries **six live arcs** at once, and they move
+whether you touch them or not. ⚠️ **The one nearest your hand depends on where you are standing** — start in
+the Deepwood and the water is somebody else's problem, and stays that way.
 
-Eleven places in the valley are on a shoreline that is not where it was. A pre-Transition amphitheatre is
-under a lake and the name **Sunken Choir** is simply the fact. Archive Hollow was a floor until a spring
-flood took it. Greywater stands on stilts because standing on the ground stopped working.
+| arc | pressure | what it is doing |
+|---|---|---|
+| **The Second River** | high | contamination spreading from the Echo outward — well-water, then gardens, then the cities' lower districts |
+| **The Patient Buyer** | medium | someone buying pass-debts cheaply and patiently, assembling the free crossroads **by arithmetic instead of force** |
+| **The Long Reach** | medium | two aligned cities extending quiet control over unaligned places — **safety in exchange for autonomy** |
+| **The Question of Knowledge** | medium | the Lost Archive, and the pressure to seize, burn or open it building from every side |
+| **What Sleeps Under** | slow-building | the Precursor lattice stirring beneath the valley |
+| **The Failing Accord** | slow-building | the Green Accord failing as the Old Stag dies |
 
-**On day one you should know exactly what a farmer knows:** the river is not behaving, the old people say
-it used to be different, and the people who measure such things have started arguing in public.
+⛔ **ARCS RESOLVE.** Not "advance" — **finish.** One way or another, and the result is permanent: a valley
+where the Second River was answered is a different valley from one where it was not, and neither goes back.
 
-⛔ **You should NOT know why**, and the guide will not tell you. There is something under the water that
-is older than the valley and was built rather than grown. **Finding that out is play, not setup.**
+⚠️ **AND CLOSED ARCS LEAVE WAKES.** What a resolution changes becomes the ground the next arc rises from.
+**The list above is not the game's plot; it is the weather at one moment**, and it will not be the same
+list a season in.
+
+## What you should expect to know
+
+**About as much as anyone standing where you are.** ⚠️ **A Millbrook farmer knows the river is not
+behaving.** A Deepwood walker knows the Moot has been arguing for a very long time and that the argument has
+started to have a winner.
+
+⛔ **YOU ARE NOT OWED THE SHAPE OF IT.** Which arc you meet, whether you engage, and whether it resolves for
+good or ill is play — **and an arc you ignore does not wait politely.**
 
 ## Who you deal with
 

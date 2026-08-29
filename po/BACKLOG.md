@@ -629,3 +629,30 @@ anyone stands in it, lay the ward into the rotted ground, and the ground itself 
 
 ⚠️ **NEEDS: which ward craft, and whether the prepared ground persists without attention (like `kept_vigil`)
 or requires holding.** ⛔ **Erik's call.**
+
+## ⛔ BROKEN RELATIONSHIPS — no authored break-states (Erik, 2026-08-29)
+
+**Erik: *"I agree with you that we need to work broken relationships."***
+
+⛔ **THE ENGINE HAS BOND BANDS AND `downedEffect`. IT HAS NOTHING FOR A RELATIONSHIP GOING WRONG.**
+⚠️ Surfaced while writing `PLAYERS_GUIDE` Part XI: I could describe what each of the nine companions
+BRINGS and what their loss COSTS, and could not describe **what it looks like when one stops trusting you**
+— because nobody has authored it.
+
+**What exists to build from:**
+- ⚠️ **Two cases the content already implies:** `ember` is half-wild and *"whether it returns is a real
+  question"*; `hush` *"had not finished deciding about you."*
+- **Bond bands run 0–10** and drive companion stages, so the mechanism for a relationship having a STATE
+  is already there — ⛔ **it only moves upward.**
+
+**What is missing, and it is content before it is engine:**
+1. ⛔ **What a break IS, per companion.** ⚠️ **It should not be one rule — Bristle leaving is not Hush
+   withdrawing is not Quill going quiet.**
+2. **What causes it.** Bond decay from disuse? A specific act? ⚠️ **Erik's ruling that relationships are
+   held by ATTENTION suggests disuse is the honest driver, not a betrayal flag.**
+3. ⛔ **Whether it is recoverable, and at what cost** — and whether any of them are NOT.
+4. **What the player sees before it happens.** ⚠️ **A break with no warning is a punishment; a break with a
+   warning is a relationship.**
+
+⛔ **ADJACENT AND PROBABLY THE SAME WORK: §48's Afterlings.** A driven shade that becomes someone, and a
+companion who stops being yours, are the same question about a bond that has changed state.

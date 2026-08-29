@@ -38,16 +38,28 @@ check("§1: `step_between` exists and authors interceptDamage", !!step && !!auth
 // you're using your action to use the skill." Declaring a craft ALREADY spends the action.
 check("§1: no rung re-charges the action — declaring the craft already spends it",
   (step?.tree || []).every(r => !(r.interceptDamage && "costsAction" in r.interceptDamage)));
-// ⚠️ NON-VACUITY: the rungs must differ from each other, or the ladder is decoration.
+// ⚠️ NON-VACUITY, AND IT CAUGHT A REAL GAP. When Erik struck `costsAction` it was the ONLY difference
+// between r2 and r3, so both rungs became `{allies:2, rounds:3}` and the third rank bought NOTHING. Aevi
+// reshaped the ladder on 2026-08-29 — one blow → duration → reach. ⛔ THIS ASSERTS EVERY RUNG STILL BUYS
+// SOMETHING, generally, so the gap cannot quietly reopen the next time a flag is struck.
 const rungs = [1, 2, 3].map(r => JSON.stringify(authoredBlock(step, "interceptDamage", r)));
-check("§1: r1 differs from r2 — the ladder buys something",
-  rungs[0] !== rungs[1], rungs.join(" | "));
+check("§1: every rank buys something the one below it did not",
+  rungs[0] !== rungs[1] && rungs[1] !== rungs[2], rungs.join("  |  "));
 
 /* ══ §2 — THE READER DOOR ════════════════════════════════════════════════════════════════════════ */
 const prot = protectionFromCraft(step, 2, { protectorId: "brann", allyId: "sprig", authoredBlock });
 check("§2: it opens a protection that CATCHES BLOWS, not only bindings", !!prot && catchesDamage(prot));
 check("§2: …carrying the authored duration rather than a rank guess", prot?.roundsLeft === 3, String(prot?.roundsLeft));
 check("§2: …and naming the craft it came from", prot?.fromCraft === "step_between");
+// ✅ AEVI'S RESHAPED LADDER, LOCKED: one blow → duration → REACH. r3's whole point is covering more than
+// one person, and it is the number `sbOpenGuards` slices the pick to — so if it stops arriving, a player
+// who paid for r3 silently gets r2.
+{
+  const r1 = protectionFromCraft(step, 1, { protectorId: "brann", allyId: "sprig", authoredBlock });
+  const r3 = protectionFromCraft(step, 3, { protectorId: "brann", allyId: "sprig", authoredBlock });
+  check("§2: r1 is ONE blow for ONE ally", r1.allies === 1 && r1.chargesLeft === 1 && r1.roundsLeft == null);
+  check("§2: r3 buys REACH — the number the pick is sliced to", r3.allies > r1.allies, `r1=${r1.allies} r3=${r3.allies}`);
+}
 
 /* ══ §3 — THE WRITER DOOR, which is the one that did not exist ═══════════════════════════════════ */
 const appSrc = rd("app.js");

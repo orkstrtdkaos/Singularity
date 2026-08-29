@@ -188,6 +188,8 @@ working papers; **this is the answer.**
 | 08-29 | ✅ **the missing question is finally asked** | a craft that catches a blow for someone must know WHO, and nothing on the screen asked | `§3: data-sbguard` | ⚠️ **the row only exists when the selected action authors an intercept** — a permanent control for a craft you have not chosen is clutter that teaches players to ignore the panel |
 | 08-29 | ✅ **dispatched on the AUTHORED BLOCK, never a craft name** | `step_between` has no single `function` — it is `["move","shield"]` | gated: `app.js` must not contain the string `step_between` | ⛔ **a name-based branch would have worked for exactly one craft and silently ignored the next one Aevi writes** |
 | 08-29 | ⚠️ **and the decay, which nothing had ever run** | `tickProtections` existed since CCODE-260 with no caller | `§5`: a rank-2 guard lapses after its authored rounds | ⛔ **without it a 3-round guard stands forever** — exactly the wall Erik's action ruling relies on it not being |
+| 08-29 | ✅ **Aevi reshaped the `step_between` ladder and the r3 gap is closed** | striking `costsAction` had left r2 and r3 identical, so the third rank bought nothing | `interpose_wiring §1/§2`, and **the collapse was reproduced to prove the gate catches it** | ✅ the ladder is now **one blow → duration → REACH**: r1 `{allies:1, charges:1}` · r2 `{allies:1, rounds:3}` · r3 `{allies:3, rounds:3}` |
+| 08-29 | ✅ **the rung check is now GENERAL, not a named pair** | I first asserted only “r1 differs from r2” — which would have stayed green through the exact collapse it was written for | every rung must differ from the one below | ⚠️ **a non-vacuity floor that only covers one pair is a floor with a hole in it** |
 
 **Last verified: 2026-08-28 · v1.9.262 · 400 crafts.**
 

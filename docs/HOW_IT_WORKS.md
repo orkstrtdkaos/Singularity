@@ -50,8 +50,11 @@ working papers; **this is the answer.**
 | 08-28 | ✅ **RULING: each craft says how its rank grows** | Erik: *"a default is ok AS LONG AS AUTHORING OVERRULES IT"* — the default is a floor, 4th time | `how_it_works.mjs` FR × 5 + `scripts/rankdelta_report.mjs` | ⛔ 323 of 546 rank-resolutions changed kind |
 | 08-28 | ⛔ **the rankDeltas adapter (CCODE-289)** | 495 authored deltas, 0 read — the largest disconnected system in the project | before/after report across all 274 crafts | ⚠️ THREE mismatches: shape, field name (`axis` vs `dimension`), and MAGNITUDE |
 | 08-28 | ⚠️ **`add` ranks lose their magnitude bump** | follows from the ruling: a rank that grants a NEW thing should not also grow the old one 35% | 124 rank-resolutions measured and listed in the report | ⛔ **the largest single effect; needs its own ruling if `add` should keep the bump** |
+| 08-28 | ✅ **RULING: a guard ABSORBS damage** | Erik: *"A"* — the blow gets smaller, not likelier to miss. `soak` is the right word; it needed a CONSUMER, not a rename | `content_ci` CCODE-240 × 3, rewritten to measure absorption | ✅ **content_ci 17 → 16 · damage_sensitivity 1 → 0** |
+| 08-28 | ⛔ a guard may not stack into IMMUNITY | Aevi's condition; the first run reduced a connected blow to ZERO at soak 20 | `damage_sensitivity` — its standing red was exactly this | ⚠️ smoke CCODE-250 expected 0 and now expects the floor |
+| 08-28 | ⛔ **`num` was undefined in `skill_battle.js`** | CCODE-281 called it in the composite path and it existed nowhere — a ReferenceError waiting behind `wardTypes` on a target sheet, which nothing ever set | found by walking into it; now covered by the soak path | ⚠️ a crash that waits is not a crash that hides |
 
-**Last verified: 2026-08-28 · v1.9.250 · 378 crafts.**
+**Last verified: 2026-08-28 · v1.9.251 · 378 crafts.**
 
 ---
 
@@ -180,6 +183,17 @@ immune.** ⚠️ **And Erik's ruling that a guard ABSORBS puts the same floor on
 ⚠️ **A ward that answers everything has no character.** The interesting thing about a ward is the list of
 what it does *not* stop.
 
+✅ **A GUARD ABSORBS (CCODE-290).** Erik: *"raising a guard makes the blow SMALLER, not more likely to
+miss."* **30 crafts author `mechanic.soak`; a landed guard now stands as a soak LAYER on its raiser**, with
+the craft's own `wardTypes` — so `death_ward`'s soak 5 answers **decay, vitality and cold** and nothing
+else. ⚠️ **It is a second currency:** the guard's roll-mod `value` is untouched, because a contest-mod
+and a craft magnitude are different things and making one drive the other is how a number ends up serving
+two masters.
+
+⛔ **AND A GUARD MAY NOT STACK INTO IMMUNITY.** A blow that CONNECTED always lands at least `minHit`,
+however large the soak — the same floor that says no foe is immune, held on the player's side. The receipt
+says so: `soakFloored` with its reason, and `guardedBy` naming the craft that blunted it.
+
 **Also live:** `antisoak` makes a wound worse but **cannot create one** — a blow fully stopped by soak takes
 the antisoak with it. `pierce` is an amount that lands regardless of armour, so it guarantees the antisoak
 fires.
@@ -296,7 +310,6 @@ ancestry.
 | | |
 |---|---|
 | ⛔ **`persuade` and `bolster` are unmechanised verbs** | crafts describe what the engine cannot do |
-| ⛔ **`mechanic.soak` is read by nothing** | 30 crafts author it; `soak 2` and `soak 20` resolve identically |
 | ⛔ **12 rules files are registered and never loaded** | ~140 KB dark, including `damage_types` |
 | ⛔ **`rankDeltas[].axis` (495) has no reader; `mechanic.axis` (0) has one** | a reader with no writer, and a writer with no reader |
 | ⚠️ **the map layer** | 18 of 135 locations have authored layouts and the renderer draws circles instead |

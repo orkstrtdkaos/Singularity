@@ -2624,24 +2624,25 @@ for (const pack of PACKS) {
         oppSheet: sh("them", { physical: 1, mental: 1, social: 1, practical: 1 }),
         state: { momentum: 0, round: 1, playerEnergy: 40, opponentEnergy: 40, opponentHealth: 20, effects: [], pressure: { player: 0, opponent: 0 } },
         rules: C240.rules, sb: sbE, rng: () => 0.95, kind: "fight" });
-      return (r.landed || []).find(e => e.kind === "guard")?.value ?? null;
+      return (r.landed || []).find(e => e.kind === "guard") ?? null;
     };
     const weak = guard(2), strong = guard(20);
-    // ⚠️ THE FIRST CHECK IS THAT A GUARD LANDS AT ALL — without it the second passes vacuously on two nulls,
-    // which is exactly how my first three attempts at this "found" something.
-    check(`CCODE-240: a shield declaration lands a guard at all (value ${weak})`, weak != null);
-    // ⛔ THE GATE ASSERTS THE FACT, NOT A REMEDY. My first version said the craft's soak SHOULD set the
-    // guard's strength — and Erik's question ("soak is already temporary, isn't it?") exposed that as the
-    // wrong fix: a guard is a ROLL MODIFIER, not soak. It never touches the damage line. So feeding
-    // `mechanic.soak` into a guard's value would turn a damage-absorption number into a roll bonus, which
-    // is a second confusion on top of the first.
-    // ⚠️ WHAT IS TRUE AND CHECKABLE: 30 crafts author a number that changes nothing anywhere. What it
-    // SHOULD do is a design question, and a gate is the wrong place to answer one.
-    check(`CCODE-240: \`mechanic.soak\` changes SOMETHING when a craft declares it — ${soakCrafts.length} crafts author one`,
-      weak != null && strong != null && strong !== weak,
-      `soak 2 → guard ${weak} · soak 20 → guard ${strong}: identical. The authored number is read by nothing.`
-      + ` ⚠️ AND "TEMP_SOAK" IS A MISNOMER — a guard modifies the ROLL, it does not absorb damage,`
-      + ` so the fix is a naming decision before it is a wiring one.`);
+    // ⚠️ THE FIRST CHECK IS THAT A GUARD LANDS AT ALL — without it the rest passes vacuously on two nulls,
+    // which is exactly how the first three attempts at this "found" something.
+    check(`CCODE-240: a shield declaration lands a guard at all (value ${weak?.value})`, weak != null);
+    // ✅ CCODE-290 — ERIK RULED IT: *"raising a guard makes the blow SMALLER, not more likely to miss."*
+    // ⛔ SO THE GATE NOW MEASURES ABSORPTION, NOT THE ROLL-MOD. The old form compared the effect's `value`
+    // and reported the number "read by nothing" — true, and it was measuring the wrong currency. `value` is
+    // a contest-mod and is deliberately left alone; `soak` is the absorption, and it is what carries the
+    // authored number.
+    check(`CCODE-240: \`mechanic.soak\` reaches the standing guard — ${soakCrafts.length} crafts author one`,
+      Number.isFinite(weak?.soak) && Number.isFinite(strong?.soak) && strong.soak !== weak.soak,
+      `soak 2 → ${weak?.soak} · soak 20 → ${strong?.soak}: the authored number is still not reaching the guard`);
+    // ⛔ AND IT IS TYPED. `death_ward` answers decay/vitality/cold, not everything — all 30 soak crafts
+    // carry `wardTypes`, so a layer that answered every type would be wrong on all thirty.
+    check("CCODE-240: …and the guard carries the craft's ward TYPES, so it does not answer everything",
+      !ab240.mechanic?.wardTypes?.length || (strong?.soakTypes || []).length === ab240.mechanic.wardTypes.length,
+      `craft wards ${(ab240.mechanic?.wardTypes || []).join(",")} → guard carries ${(strong?.soakTypes || []).join(",") || "(none)"}`);
   }
 }
 

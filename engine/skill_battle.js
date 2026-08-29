@@ -13,7 +13,14 @@ import { redirectImposition, interceptorFor, catchesCondition, catchesDamage } f
 import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, ongoingHarmOf, authoredBlock, resolveProvoke, resolveSoothe, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-const DEFAULT_STEPS = { conserve: { energyMult: 0.6, effectMod: -8 }, standard: { energyMult: 1, effectMod: 0 }, surge: { energyMult: 1.6, effectMod: 10, backlashChance: 0.25 } };
+/** ⛔ CCODE-290 — THIS WAS MISSING AND ALREADY BEING CALLED. `num(dcfg?.minHit, 1)` entered the composite
+ *  damage path in CCODE-281, and `num` was never defined in this file nor imported into it.
+ *  ⚠️ IT HAS NEVER THROWN, because that line runs only when the TARGET SHEET carries `wardTypes` — and no
+ *  test, fixture or authored foe ever gave one. So a ReferenceError sat in the damage path for two days,
+ *  behind a condition nothing met. ⛔ A CRASH LIKE THAT DOES NOT HIDE, IT WAITS. Found by walking into it
+ *  while wiring soak, which is the only reason it is not still there. */
+const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) ? d : Number(v));
+const DEFAULT_STEPS ={ conserve: { energyMult: 0.6, effectMod: -8 }, standard: { energyMult: 1, effectMod: 0 }, surge: { energyMult: 1.6, effectMod: 10, backlashChance: 0.25 } };
 
 /** The matchup edge for an attacker function vs a defender function — STRUCTURED, from the content, never
  *  parsed from prose (the §7b lesson). A defensive defender (shield/ward/resist) BLUNTS: it caps the
@@ -203,9 +210,17 @@ function effectFrom(decl, roll, actor, sb, { cm = null, rng = Math.random } = {}
                  autonomous: !!(decl?.mechanic?.[decl.function]?.autonomous ?? decl?.mechanic?.autonomous),
                  rank: decl?.mechanic?.[decl.function]?.soakRank ?? decl?.mechanic?.soakRank ?? null };
   const durCfg = cfg.craftDuration || {};
+  // ⛔ CCODE-290 — RESOLVED ONCE, USED TWICE. The mechanic was computed inside the duration branch only; the
+  // soak below needs the same resolution, and resolving one craft twice is how two call sites quietly
+  // disagree about the same number.
+  const m = cm?.families
+    ? mechanicFor(decl, { verb: decl.function, tier: decl.tier, rank: decl.rank || 1,
+        intensity: decl.intensity || "standard", cfg: cm })
+    : null;
+  // ⛔ DID A PERSON WRITE THIS NUMBER? §45.1 shape — authored at the rank, read at the ability — so check
+  // the per-verb block and the rank as well as the craft root. A default is not an authoring decision.
+  const authoredSoak = decl?.mechanic?.[decl.function]?.soak ?? decl?.mechanic?.soak ?? null;
   if (durCfg.enabled !== false && cm?.families) {
-    const m = mechanicFor(decl, { verb: decl.function, tier: decl.tier, rank: decl.rank || 1,
-      intensity: decl.intensity || "standard", cfg: cm });
     if (m && m.operative === "duration") {
       const rolled = rollOperative(m, rng, { cfg: cm })?.value;
       if (Number.isFinite(rolled)) {
@@ -230,6 +245,28 @@ function effectFrom(decl, roll, actor, sb, { cm = null, rng = Math.random } = {}
     // something to measure itself against. A ward's own `soakRank` is that rank where it has one; otherwise
     // the craft's tier stands in, which is the only other thing on the table that means "how strong a working".
     rank: Math.max(1, Number(tend.rank) || Number(decl.tier) || 1),
+    // ⛔ CCODE-290 — THE GUARD ABSORBS. Erik ruled it: *"raising a guard makes the blow SMALLER, not more
+    // likely to miss."* 30 crafts author `mechanic.soak`; it was carried faithfully into `fields.soak`
+    // (2 → 2, 20 → 20) and NOTHING DOWNSTREAM SPENT IT. The number arrived and stopped.
+    //
+    // ⚠️ THIS IS A SECOND CURRENCY, NOT A REPLACEMENT FOR `value`. The comment above says why `value` is
+    // left alone — "a contest-mod and a craft magnitude are different currencies, and quietly making one
+    // drive the other is how a number ends up serving two masters." Absorption is the OTHER currency, so
+    // it rides as its own field and the roll-mod is untouched.
+    //
+    // ⛔ TYPED WHERE THE CRAFT NAMES TYPES (Aevi): `death_ward`'s soak 5 answers decay, vitality and cold —
+    // not everything. All 30 soak crafts carry `wardTypes`, so this is the norm rather than the exception.
+    // ⚠️ ONE LAYER ANSWERING SEVERAL TYPES, never several layers — three layers of 5 would be 15 soak.
+    // ⚠️ AUTHORED SOAK ONLY — AND THIS NEARLY SHIPPED TOO WIDE. `craftmechanics` MIRRORS `magnitude` into
+    // `soak` for every guard-shape craft, so reading the resolved field alone gave absorption to every
+    // shield in the game, authored or not. Erik and Aevi scoped this to the 30 crafts that AUTHOR the
+    // number; a family default is not an authoring decision. ⛔ The resolved value is still what lands,
+    // so rank scaling applies — the gate is `authoredSoak`, the amount is `m.fields.soak`.
+    ...(authoredSoak != null && Number.isFinite(m?.fields?.soak) && m.fields.soak > 0
+      ? { soak: m.fields.soak,
+          ...(Array.isArray(decl?.mechanic?.wardTypes) && decl.mechanic.wardTypes.length
+            ? { soakTypes: decl.mechanic.wardTypes.map(String) } : {}) }
+      : {}),
     source: decl.name || decl.function, from: actor
   };
 }
@@ -1059,7 +1096,21 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // got through normally, and its whole purpose is that it guarantees SOMETHING lands — so a craft
       // whose identity is a vulnerability cannot have that identity switched off by sufficient armour.
       const pierce = Math.max(0, Number(authoredBlock(winDecl, "pierce", winDecl?.rank || 1)) || 0);
-      const layers = Array.isArray(targetSheet?.soakLayers) ? targetSheet.soakLayers : null;
+      // ⛔ CCODE-290 — A STANDING GUARD IS A SOAK LAYER. The consumer already existed and was correct;
+      // `soakLayers` has resolved ranked, typed soak against `pierce` and `penetration` since CCODE-83.
+      // What was missing was a WRITER: nothing turned an authored guard into one. So a craft that says it
+      // absorbs 5 absorbed nothing, and `soak 2` and `soak 20` produced identical fights.
+      // ⚠️ `fx.side` IS WHOSE ROLL THE EFFECT MODIFIES, which for a guard is the character who raised it —
+      // so the layers that matter here are the SUFFERER's, not the winner's.
+      const sufferer = roundWinner === "player" ? "opponent" : "player";
+      const guardLayers = (effects || [])
+        .filter(fx => fx.side === sufferer && Number.isFinite(fx.soak) && fx.soak > 0)
+        .map(fx => ({ value: fx.soak, rank: fx.rank, types: fx.soakTypes || null, from: fx.source || fx.kind }));
+      const sheetLayers = Array.isArray(targetSheet?.soakLayers) ? targetSheet.soakLayers : null;
+      // ⚠️ ABSENT MEANS TODAY: with no standing guard and no authored layers this is null exactly as before,
+      // and the flat-`soak` fallback below keeps every hand-authored foe resolving unchanged.
+      const layers = (sheetLayers || guardLayers.length)
+        ? [...(sheetLayers || []), ...guardLayers] : null;
 
       // CCODE-83 — DAMAGE HAS A KIND, and some things answer a kind rather than an amount.
       //
@@ -1113,13 +1164,21 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       const famTable = rules?.damageFamilies || cmCfg?.damageFamilies;
       const wardAns = wardRec ? wardAnswer(wardRec, num(wardRec.wardRank, targetSheet?.wardRank) || 1,
         { families: famTable, ladder: cmCfg?.wardLadder, breadth: cmCfg?.wardBreadth }) : null;
-      const answers = l => !l.type || !dmgType || l.type === dmgType;
+      // ⛔ CCODE-290 — A LAYER MAY ANSWER SEVERAL TYPES. `wardTypes` is a LIST on all 30 soak crafts
+      // (`death_ward`: decay, vitality, cold), and the single-`type` form could not express that. Splitting
+      // one ward into three layers would have TRIPLED its soak, so the layer answers a set instead.
+      // ⚠️ The old single-`type` shape still works untouched — an authored foe sheet keeps resolving.
+      const answers = l => (!l.type && !l.types) || !dmgType
+        || (l.types ? l.types.includes(dmgType) : l.type === dmgType);
       const soak = layers
         ? layers.filter(l => answers(l) && (Number(l.rank) || 1) > pen).reduce((a, l) => a + (Number(l.value) || 0), 0)
         : Math.max(0, Number(targetSheet?.soak) || 0);
       const cutThrough = layers
         ? layers.filter(l => answers(l) && (Number(l.rank) || 1) <= pen).reduce((a, l) => a + (Number(l.value) || 0), 0) : 0;
       const wrongType = layers ? layers.filter(l => !answers(l)).reduce((a, l) => a + (Number(l.value) || 0), 0) : 0;
+      // ⚠️ DECLARED BEFORE ITS USE. My first placement put this after the branch that sets it — `let` is
+      // hoisted into a temporal dead zone, so it would have thrown on the first blow a big guard stopped.
+      let soakFloored = false;
       let landed = aff === "absorb"
         ? -Math.max(1, Math.round(hit * (acfg.absorbMult ?? 1)))          // it FEEDS — a negative hit is healing
         : aff === "immune" ? 0
@@ -1144,6 +1203,16 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         // ⚠️ ADDITIVE, NOT AN ALTERNATIVE (Erik: "the pierce damage… plus any unsoaked damage").
         : pierceLanded(hit, soak, pierce,
             (Number(targetSheet?.antisoak) || 0) + antisoakFromConditions(targetSheet), dcfg);
+      // ⛔ CCODE-290 — A GUARD MAY NOT STACK INTO IMMUNITY. Aevi named this before I built it, and the first
+      // run did it: `death_ward` at soak 20 reduced a connected blow to ZERO. ⚠️ `minHit` already says no
+      // FOE is immune — the same floor has to hold when the soak is on the PLAYER's side, or a big enough
+      // guard is an off switch. The floor applies only where the blow CONNECTED: a miss stays a miss, and
+      // an authored `immune` affinity is untouched, because that is a deliberate property of a creature
+      // rather than a number stacking up.
+      if (aff !== "immune" && aff !== "absorb" && hit > 0 && landed <= 0) {
+        landed = num(dcfg?.minHit, 1);
+        soakFloored = true;
+      }
       // ⛔ CCODE-281 — AND THE WARD ANSWERS ITS PART. Applied HERE, after soak and antisoak have sized the
       // blow, because a ward answers what LANDS rather than competing with armour over what lands at all.
       // ⚠️ ONLY WHEN THERE IS A WARD AND MORE THAN ONE COMPONENT, OR A WARD THAT NAMES THIS TYPE. With no
@@ -1156,6 +1225,12 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       }
       damage = { side: roundWinner === "player" ? "opponent" : "player",
         ...(composite ? { composite } : {}),
+        // ⛔ CCODE-290 — THE FLOOR ANNOUNCES ITSELF. A guard big enough to stop everything reduces the blow
+        // to the minimum instead of to nothing, and a player who sees "1" needs to know WHY it was not 0.
+        // ⚠️ An unannounced floor is indistinguishable from a rounding artefact, and this project has
+        // spent a week finding numbers that arrive without saying where they came from.
+        ...(soakFloored ? { soakFloored: true, soakFlooredWhy: "the guard stopped everything — nothing is ever fully immune" } : {}),
+        ...(guardLayers.length ? { guardedBy: guardLayers.map(l => l.from).filter(Boolean) } : {}),
         // ⛔ CCODE-250 — THE SIDE IS NOT THE SUFFERER. The seat swapped the ARITHMETIC (soak, resist,
         // conditions all read the target's sheet) but this receipt still said "player", so a caller
         // would have applied an ally's wound to the player's health. Naming the bearer is the other

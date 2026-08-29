@@ -609,9 +609,15 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
   check("§10: the soak probe produces real numbers (non-vacuity floor)",
     typeof lo === "number" && typeof hi === "number" && lo !== hi,
     `lo=${lo} hi=${hi} from ${realSoak?.id} - if these are null the probe is broken, not the engine`);
-  gap("§10: `mechanic.soak` reaches `fields.soak` and NOTHING DOWNSTREAM SPENDS IT",
-    !/fields\.soak|mech\w*\.fields\?\.soak/.test(rd("engine/skill_battle.js")),
-    `${soakCrafts.length} crafts author it; the value carries (${lo}/${hi}) and the damage path never names it`);
+  // ✅ CLOSED 2026-08-28 (CCODE-290). This was a `gap()` asserting the number was never spent; Erik ruled
+  // that a guard ABSORBS, the writer was built, and the ratchet turned RED to force this edit — which is
+  // exactly what a gap-tracking check is for. It is now an assertion that the fix HOLDS.
+  const sbSoakSrc = rd("engine/skill_battle.js");
+  check("§4: ✅ a landed guard becomes a SOAK LAYER — the authored number is spent, not merely carried",
+    /fx\.soak/.test(sbSoakSrc) && /guardLayers/.test(sbSoakSrc) && /soakTypes/.test(sbSoakSrc),
+    `${soakCrafts.length} crafts author it`);
+  check("§4: ⛔ …and it cannot stack into immunity — a connected blow always lands the floor",
+    /soakFloored/.test(sbSoakSrc) && /aff !== "immune"/.test(sbSoakSrc));
 
   const stSrc = rd("engine/state.js");
   const DARK = ["damage_types", "tempo", "the_veil", "nexuses", "death_domain", "healing_intent",

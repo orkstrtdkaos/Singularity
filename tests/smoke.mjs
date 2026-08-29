@@ -18576,8 +18576,14 @@ await (async () => {
     const alone = seat(null);
     check("CCODE-250: with a party present the round records WHO it was aimed at",
       withParty.aimedAt?.target?.id === "sprig" && withParty.opponent.targetChoice?.target?.name === "Sprig");
+    // ⚠️ CCODE-290: THIS EXPECTED 0 AND NOW EXPECTS THE FLOOR. Erik ruled that a guard ABSORBS, and Aevi's
+    // condition on it was that absorption must never stack into immunity — "minHit already says no foe is
+    // immune; the same floor must hold when the soak is on the player's side." So an armoured-to-99 player
+    // takes the MINIMUM, not nothing. ⛔ THE ASSERTION'S POINT IS UNCHANGED and still proves the seat
+    // swapped: the armoured player is blunted to the floor while the soft ally takes the full blow.
     check("CCODE-250: …and the SOAK that blunts it is the TARGET'S, not the player's — the seat really swapped",
-      alone.damage?.amount === 0 && alone.damage?.soak === 99 && withParty.damage?.amount > 0,
+      alone.damage?.amount <= 1 && alone.damage?.soak === 99
+      && withParty.damage?.amount > alone.damage?.amount,
       `alone=${alone.damage?.amount} party=${withParty.damage?.amount}`);
     // ⛔ AND THE RECEIPT NAMES THE BEARER. The arithmetic moving without the routing moving would have
     // applied an ally's wound to the player's health — a swap that balances and still lies.

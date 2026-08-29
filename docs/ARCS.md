@@ -1,4 +1,4 @@
-# THE ARCS — the GM's copy, with the answers in it
+# THE ARCS OF EXESA — the GM's copy, with the answers in it
 
 ⛔ **ERIK, 2026-08-29: *"Even if we don't show a player all the spoilers, WE DO need to document them all
 for ourselves. It is NOT OK to leave it at 'we don't know what's underneath' in an authored arc. There's

@@ -692,7 +692,10 @@ Reaches"*, the Gearlands, the Blocklands, the manifest domains and *"every deep 
 ✅ **The work is separating the two senses and naming the world**, which as far as I can measure **has no
 name at all** — the greater arcs say *"world-wide"* and *"the whole world"* and never a proper noun.
 
-⚠️ **AND THE WORLD NEEDS A NAME BEFORE THE RENAME CAN HAPPEN. THAT IS ERIK'S.**
+✅ **RESOLVED 2026-08-29 — THE WORLD IS `EXESA`.** Latin `exedō`, *eaten away, gnawed hollow from within*.
+⚠️ Erik: *"sounds like Earth, but less and further along."* ⛔ **The world is about a third of its former
+size, spent by its own people on their own workings.** Authored in `world_framing.the_world_is_named`.
+**The rename is unblocked; the classification work in `po/SPEC_staleness_ratchet.md` is what remains.**
 
 ---
 

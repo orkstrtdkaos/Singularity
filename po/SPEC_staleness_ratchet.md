@@ -90,8 +90,16 @@ A staleness scan with hardcoded verdicts would rot exactly the same way.**
 
 ## §6 — ⚠️ WHAT I AM DOING ALONGSIDE, WHICH IS THE CONTENT HALF
 
-**The tool finds it; it cannot fix it.** ⛔ **The rename is blocked on a decision only Erik can make: THE
-WORLD HAS NO NAME.** The greater arcs say *"world-wide"* and *"the whole world"* and never a proper noun.
+**The tool finds it; it cannot fix it.** ✅ **AND THE BLOCKER IS GONE — ERIK NAMED THE WORLD 2026-08-29:**
 
-✅ **Once it has one, the 337 split cleanly into "the region" and "the world" and the ratchet drops fast.**
-⚠️ **Until then the scan is the map of the work, and that is worth having on its own.**
+⛔ **EXESA** — Latin `exesa`, from `exedō`: **eaten away, gnawed hollow, consumed from within.** ⚠️ Erik:
+*"sounds like Earth, but LESS and FURTHER ALONG."*
+
+**And the name carries the history:** the world is **about one third the size it was**, spent by its own
+inhabitants on their own workings — *"the craving for power to fuel AI-driven nanotechnology works was
+insatiable, until the decision was made to cast off technology."* ⛔ **Nothing external ate it. The eating
+was small and everywhere**, which is why `exedō` fits where a word for devouring would not.
+
+✅ **SO THE 337 NOW SPLIT CLEANLY:** *the Valley of Echoes* is one region of **135 places**; **Exesa** is the
+world. ⚠️ **The scan's job is telling those apart — and `content/packs/valley/lore/world_framing.json`
+already ruled the distinction; it simply had no proper noun to offer instead.**

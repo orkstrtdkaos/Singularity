@@ -1,49 +1,58 @@
 {
-  "schemaVersion": 1,
-  "id": "world_framing",
-  "kind": "canon_correction",
-  "note": "Two canon corrections (Erik 2026). (1) The axes are CULTURAL/ENERGETIC disposition, not literal geography — a quality that saturates a people and their land, discovered by moving among peoples, not by walking miles on a grid. (2) 'The Valley' is ONE area, the first detailed; the content pack named 'valley/' is really the WORLD pack. This doc is the authoritative framing; the folder name is legacy and can be renamed later without breaking the manifest. Authored by Aevi (PO).",
-  "axes_are_disposition": {
-    "principle": "A Reach or a pole-intensity is not a place on a map you could survey. It is a CHARACTER OF PLACE-AND-PEOPLE — an ambient energy and a cultural temperature. A people can be 'order-steeped' the way a culture is formal; a valley can 'feel' grieving or teeming. The pole-intensities live in inhabitants, customs, mood, and the felt energy of the land, not in coordinates.",
-    "why_it_matters": [
-      "Co-firing makes sense as disposition: a people can be death-steeped AND teeming with life at once (the Quickwood) because it's a quality, not a location — two energies in one culture.",
-      "The map is a map of CHARACTERS-OF-PLACE, discovered by encountering peoples and their felt energy, not by measuring distance. Adjacency = cultural/energetic kinship, not miles.",
-      "A traveler doesn't 'walk up the order-gradient' geographically so much as move deeper into order-steeped peoples and lands until the energy is overwhelming. The pole is where a disposition runs pure enough to be dangerous.",
-      "Individuals carry pole-intensities too (see innate_talents, and a character's own drift): a person IS a small coordinate of dispositions. The land and its people share and shape each other's energy."
-    ],
-    "engine_note": "poleIntensity on a location = the ambient cultural/energetic disposition of that place-and-people. The Rune Dice read this disposition; affinities flex from it; drift moves a character's own disposition toward the poles they steep in. Nothing changes mechanically — only the FRAMING: describe places by their energy and people, not their grid position. The GM narrates a Reach as a felt quality, never as a region on a literal map."
-  },
-  "this_is_a_world": {
-    "principle": "The Valley of Echoes is ONE area — the first detailed, the starting basin. It is not the world. The content pack currently named 'valley/' holds world-wide content (the Reaches, the legends, the coordinate model, the far poles) and is properly the WORLD pack.",
-    "corrections": [
-      "Wherever lore says 'the valley' as if it were everything, read 'the known world' or the specific area meant. The Valley of Echoes is a named basin; the Reaches and poles are elsewhere in the world.",
-      "The four original power systems (Harmonic, Radiant, Valley Craft, Precursor) are the crafts of the VALLEY basin specifically — its local folk-traditions. The Reach traditions (Vivimancy, the Edge, Soma, etc.) are the crafts of OTHER parts of the world. This is already true in structure; the framing just makes it explicit.",
-      "Character origins should eventually be able to start OUTSIDE the Valley (a Marcher of the Redline, a Churnfolk maker, a Rootkin of the Quickwood) — not only Valley-natives. See creation_update spec.",
-      "'Begin in Millbrook' (the hardcoded start) is the VALLEY's starting town — correct for a Valley origin, wrong as a universal default. Start location should follow origin."
-    ],
-    "rename_note": "Do NOT rename the valley/ folder mid-flight (breaks manifest + CCode in-flight). Flagged for a later clean rename to world/ (or a world/ pack alongside a valley/ area-pack). Canon is corrected here now; the folder catches up later."
-  },
-  "bearers_vary": {
-    "principle": "A pole is borne by whatever can hold it — NOT always a full civilization. Bearer-form tracks how PURE and how LIVABLE the disposition is: a CIVILIZATION occupies the livable near-pole (functioning at scale); a RELIGION or ORDER organizes around the axis as devotion; a CULT OF PURITY occupies the extreme, where the axis runs pure. Refinement (Erik 2026-07-11) atop the reach-civilizations model.",
-    "why_it_matters": [
-      "A pure pole is UNLIVABLE at civilization-scale — no people can sustain absolute falsehood, death, or order and still function as a people. Only a cult can hold the pure extreme, because a cult does not have to WORK, only to BELIEVE. Civilizations cluster NEAR their pole; the true extremes are held by orders and cults of purity.",
-      "This maps the framework's evil-as-contraction onto geography: the cult of the pure pole IS the foreclosure — a people who stopped propagating and only intensified. The reach-civilizations (Rootkin, Marchers, Umbrals, Blazeborn) are the livable near-pole; past them, at the true extreme, live the cults that worship the pole alone and have burned everything else away.",
-      "Bearer-type is readable from position: near-pole = civilization; deeper = order/religion; the pure LOCUS (already canon — the Redline, the Blaze, the Churn) is where the cult, not the civilization, lives."
-    ]
-  },
-  "cultures_are_profiles": {
-    "principle": "A culture is not a single axis-pole — it is a multi-axis DISPOSITION PROFILE: a primary pole plus secondary leans, a full spectrum fingerprint like a location or a character. The Radiants/Blazeborn are LIGHT-primary but also ORDER-leaning (revelation tends toward structure). Refinement (Erik 2026-07-11).",
-    "why_it_matters": [
-      "This is why adjacency=kinship reads as a smooth field, not single-axis pins: neighboring peoples share SECONDARY leans. The Valley crossing is order+light+practical because the peoples there — order-leaning Harmonics, light-and-order Radiants, practical valleyfolk — share those secondary axes; that shared profile is WHY they are neighbors.",
-      "A generated or authored people carries a spectrum fingerprint (primary + 1-2 secondary leans), not a single tag. Its crafts, customs, and neighbors follow from the whole profile."
-    ]
-  },
-  "cultures_are_distributions": {
-    "principle": "A culture is a DISTRIBUTION, not a monolith — the spread of lives its disposition tends to produce, with a center of gravity and heterodox tails. Among the light-and-order Radiants you find the rare light-and-CHAOS practitioner; the heretic at the edge is not a bug but the culture's interiority. Refinement (Erik 2026-07-11); extends 'individuals carry pole-intensities' — the clone-tree/variance principle at civilization scale.",
-    "why_it_matters": [
-      "A people is a center others scatter around. A generated member should sometimes come back OFF the cultural norm on purpose — that variance is what gives a culture texture, internal conflict, and reasons for story.",
-      "Orthodoxy vs heresy is a live axis within every people: the pure-pole cult is orthodoxy taken to foreclosure; the heterodox tail is where a people stays alive to its opposite."
-    ]
-  },
-  "open_reconciliation_harmonic": "RESOLVED (Erik 2026-07-11): both valley traditions (Radiant, Harmonic) lean MECHANICAL because both CRAFT — resonance-instruments, light-works. Harmonic is a PROFILE, not a single pole: order + mechanical(crafting) + sound-medium; Radiant is light + order + mechanical(crafting). The earlier 'mechanical vs order' was a false either/or — the cultures_are_profiles model holds both. The Valley is a MAKING-crossing: order + light + practical + MECHANICAL, which is exactly why its folk-traditions are CRAFTS. Crafting (a mechanical lean) is the shared secondary that makes Radiant and Harmonic neighbors in the valley basin."
+ "schemaVersion": 1,
+ "id": "world_framing",
+ "kind": "canon_correction",
+ "note": "Two canon corrections (Erik 2026). (1) The axes are CULTURAL/ENERGETIC disposition, not literal geography — a quality that saturates a people and their land, discovered by moving among peoples, not by walking miles on a grid. (2) 'The Valley' is ONE area, the first detailed; the content pack named 'valley/' is really the WORLD pack. This doc is the authoritative framing; the folder name is legacy and can be renamed later without breaking the manifest. Authored by Aevi (PO). ⛔ (3) THE WORLD IS NAMED — EXESA, 2026-08-29. It had none until now, and 'the Valley' had been standing in for it, which is why the setting read tiny. See `the_world_is_named`.",
+ "axes_are_disposition": {
+  "principle": "A Reach or a pole-intensity is not a place on a map you could survey. It is a CHARACTER OF PLACE-AND-PEOPLE — an ambient energy and a cultural temperature. A people can be 'order-steeped' the way a culture is formal; a valley can 'feel' grieving or teeming. The pole-intensities live in inhabitants, customs, mood, and the felt energy of the land, not in coordinates.",
+  "why_it_matters": [
+   "Co-firing makes sense as disposition: a people can be death-steeped AND teeming with life at once (the Quickwood) because it's a quality, not a location — two energies in one culture.",
+   "The map is a map of CHARACTERS-OF-PLACE, discovered by encountering peoples and their felt energy, not by measuring distance. Adjacency = cultural/energetic kinship, not miles.",
+   "A traveler doesn't 'walk up the order-gradient' geographically so much as move deeper into order-steeped peoples and lands until the energy is overwhelming. The pole is where a disposition runs pure enough to be dangerous.",
+   "Individuals carry pole-intensities too (see innate_talents, and a character's own drift): a person IS a small coordinate of dispositions. The land and its people share and shape each other's energy."
+  ],
+  "engine_note": "poleIntensity on a location = the ambient cultural/energetic disposition of that place-and-people. The Rune Dice read this disposition; affinities flex from it; drift moves a character's own disposition toward the poles they steep in. Nothing changes mechanically — only the FRAMING: describe places by their energy and people, not their grid position. The GM narrates a Reach as a felt quality, never as a region on a literal map."
+ },
+ "this_is_a_world": {
+  "principle": "The Valley of Echoes is ONE area — the first detailed, the starting basin. It is not the world. The content pack currently named 'valley/' holds world-wide content (the Reaches, the legends, the coordinate model, the far poles) and is properly the WORLD pack.",
+  "corrections": [
+   "Wherever lore says 'the valley' as if it were everything, read 'the known world' or the specific area meant. The Valley of Echoes is a named basin; the Reaches and poles are elsewhere in the world.",
+   "The four original power systems (Harmonic, Radiant, Valley Craft, Precursor) are the crafts of the VALLEY basin specifically — its local folk-traditions. The Reach traditions (Vivimancy, the Edge, Soma, etc.) are the crafts of OTHER parts of the world. This is already true in structure; the framing just makes it explicit.",
+   "Character origins should eventually be able to start OUTSIDE the Valley (a Marcher of the Redline, a Churnfolk maker, a Rootkin of the Quickwood) — not only Valley-natives. See creation_update spec.",
+   "'Begin in Millbrook' (the hardcoded start) is the VALLEY's starting town — correct for a Valley origin, wrong as a universal default. Start location should follow origin."
+  ],
+  "rename_note": "Do NOT rename the valley/ folder mid-flight (breaks manifest + CCode in-flight). Flagged for a later clean rename to world/ (or a world/ pack alongside a valley/ area-pack). Canon is corrected here now; the folder catches up later."
+ },
+ "bearers_vary": {
+  "principle": "A pole is borne by whatever can hold it — NOT always a full civilization. Bearer-form tracks how PURE and how LIVABLE the disposition is: a CIVILIZATION occupies the livable near-pole (functioning at scale); a RELIGION or ORDER organizes around the axis as devotion; a CULT OF PURITY occupies the extreme, where the axis runs pure. Refinement (Erik 2026-07-11) atop the reach-civilizations model.",
+  "why_it_matters": [
+   "A pure pole is UNLIVABLE at civilization-scale — no people can sustain absolute falsehood, death, or order and still function as a people. Only a cult can hold the pure extreme, because a cult does not have to WORK, only to BELIEVE. Civilizations cluster NEAR their pole; the true extremes are held by orders and cults of purity.",
+   "This maps the framework's evil-as-contraction onto geography: the cult of the pure pole IS the foreclosure — a people who stopped propagating and only intensified. The reach-civilizations (Rootkin, Marchers, Umbrals, Blazeborn) are the livable near-pole; past them, at the true extreme, live the cults that worship the pole alone and have burned everything else away.",
+   "Bearer-type is readable from position: near-pole = civilization; deeper = order/religion; the pure LOCUS (already canon — the Redline, the Blaze, the Churn) is where the cult, not the civilization, lives."
+  ]
+ },
+ "cultures_are_profiles": {
+  "principle": "A culture is not a single axis-pole — it is a multi-axis DISPOSITION PROFILE: a primary pole plus secondary leans, a full spectrum fingerprint like a location or a character. The Radiants/Blazeborn are LIGHT-primary but also ORDER-leaning (revelation tends toward structure). Refinement (Erik 2026-07-11).",
+  "why_it_matters": [
+   "This is why adjacency=kinship reads as a smooth field, not single-axis pins: neighboring peoples share SECONDARY leans. The Valley crossing is order+light+practical because the peoples there — order-leaning Harmonics, light-and-order Radiants, practical valleyfolk — share those secondary axes; that shared profile is WHY they are neighbors.",
+   "A generated or authored people carries a spectrum fingerprint (primary + 1-2 secondary leans), not a single tag. Its crafts, customs, and neighbors follow from the whole profile."
+  ]
+ },
+ "cultures_are_distributions": {
+  "principle": "A culture is a DISTRIBUTION, not a monolith — the spread of lives its disposition tends to produce, with a center of gravity and heterodox tails. Among the light-and-order Radiants you find the rare light-and-CHAOS practitioner; the heretic at the edge is not a bug but the culture's interiority. Refinement (Erik 2026-07-11); extends 'individuals carry pole-intensities' — the clone-tree/variance principle at civilization scale.",
+  "why_it_matters": [
+   "A people is a center others scatter around. A generated member should sometimes come back OFF the cultural norm on purpose — that variance is what gives a culture texture, internal conflict, and reasons for story.",
+   "Orthodoxy vs heresy is a live axis within every people: the pure-pole cult is orthodoxy taken to foreclosure; the heterodox tail is where a people stays alive to its opposite."
+  ]
+ },
+ "open_reconciliation_harmonic": "RESOLVED (Erik 2026-07-11): both valley traditions (Radiant, Harmonic) lean MECHANICAL because both CRAFT — resonance-instruments, light-works. Harmonic is a PROFILE, not a single pole: order + mechanical(crafting) + sound-medium; Radiant is light + order + mechanical(crafting). The earlier 'mechanical vs order' was a false either/or — the cultures_are_profiles model holds both. The Valley is a MAKING-crossing: order + light + practical + MECHANICAL, which is exactly why its folk-traditions are CRAFTS. Crafting (a mechanical lean) is the shared secondary that makes Radiant and Harmonic neighbors in the valley basin.",
+ "the_world_is_named": {
+  "name": "Exesa",
+  "pronounce": "ex-EE-sa",
+  "principle": "⛔ THE WORLD IS CALLED EXESA. Latin `exesa`, from `exedō` — EATEN AWAY, GNAWED HOLLOW, CONSUMED FROM WITHIN. ⚠️ ERIK 2026-08-29, NAMING IT AND SAYING WHY: 'sounds like Earth, but LESS and FURTHER ALONG.' The name and the old name are the same shape worn down, which is what happened to the place.",
+  "why": "⛔ THE WORLD IS ABOUT ONE THIRD THE SIZE IT WAS. Erik: 'humans started consuming it in their workings — the craving for power to fuel AI-driven nanotechnology works was INSATIABLE, until the decision was made to cast off technology and/or evolve on from depending on it.' ⚠️ NOTHING EXTERNAL ATE THIS WORLD. It was spent, by its own inhabitants, on their own workings, one working at a time — and the eating was small and everywhere, which is why the Latin `exedō` (gnawed hollow from within) fits where a Greek word for devouring would not.",
+  "_registerNote": "⚠️ The Precursors carry GREEK names — Akinetos, Kenosis, Parakletos (`the_three.md`). ⛔ THE WORLD CARRIES A LATIN ONE ON PURPOSE: the Three named themselves in the older register; EXESA IS WHAT WAS LEFT, and it is named in the tongue of the people who did the consuming, not the ones who built it.",
+  "_usage": "⛔ `Exesa` IS THE WORLD. `The Valley of Echoes` is ONE REGION of it — 11 places of 135, about 8%. ⚠️ THE 337 USES OF 'the valley' ACROSS content/ AND docs/ ARE THE REPAIR JOB (see po/SPEC_staleness_ratchet.md): most correctly name the region and must not change; the ones standing in for the WORLD become Exesa. ⛔ Until 2026-08-29 the world had NO NAME AT ALL — the greater arcs say 'world-wide' and 'the whole world' and never a proper noun, which is why the setting has read smaller than it is.",
+  "_counterpoint": "⚠️ Offered and not taken: the surviving third could be `to loipon` (τὸ λοιπόν, 'the remainder'). Available if a people ever needs a name for what is LEFT rather than what was spent."
+ }
 }

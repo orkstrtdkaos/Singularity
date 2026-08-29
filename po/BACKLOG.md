@@ -755,10 +755,27 @@ craft already declared `shape: hobble`, so the shape said it impairs and no rank
 
 ### ⛔ WHAT THE FULL CHECK MUST ASK
 
-1. ⛔ **Is a verb ABSENT or REFUSED?** ⚠️ Body has no `bind`, `ward`, `make`, `command` or `summon` — **that
-   reads as characterisation, not a hole**: a somatic does things with a body and cannot make anything or
-   call something. **Death has `summon`, `open`, `bargain` and `persuade` alone.** The check must
-   distinguish *"nobody thought of it"* from *"this people would not."*
+1. ⛔ **EVERY TRADITION SHOULD HAVE A WAY TO DO EVERY VERB, IN ITS OWN IDIOM. A GAP IS A GAP UNTIL SOMEONE
+   ARGUES IT THEMATICALLY.**
+
+   **Erik 2026-08-29, correcting me: *"Body doesn't need to be limited as you are thinking it should be.
+   EVERY TRADITION WILL LIKELY HAVE A WAY TO DO ALL THE THINGS IN THEIR OWN WAY. KI IS ENERGY AND THIS IS A
+   FANTASY GAME. I can think of a STUNNING STRIKE pretty easily."***
+
+   ⚠️ **I had written the opposite** — that Body's missing `bind`, `ward`, `make`, `command` and `summon`
+   *"read as characterisation, not a hole."* ⛔ **THAT IS ME IMPORTING REAL-WORLD LIMITS INTO A FANTASY
+   SETTING AGAIN** — the same error as reading visible magic as socially remarkable, and as treating consent
+   as a design lever. **A somatic cannot bind? A joint lock. Cannot ward? An iron body. Cannot hinder? A
+   STUNNING STRIKE, which is trivially obvious the moment it is said.**
+
+   ✅ **SO THE DEFAULT INVERTS: assume the craft is missing, not that the people refuse it.** ⛔ **The burden
+   is on the THEMATIC ARGUMENT, not on the gap.** ⚠️ **If a gap survives at the end, it must be defensible
+   from the tradition's own `civilization` and `aesthetic` lines — and written down as a refusal, so nobody
+   re-opens it as a hole.**
+
+   **Known candidates to check for, not assume away:** ⛔ **BODY: a stunning strike (`hinder`), a joint lock
+   (`bind`), an iron-body ward, a shout that carries command.** ⚠️ **LIGHT/MIND/DEATH: whatever the same
+   question turns up when asked in their idiom rather than mine.**
 2. **Does every tradition span at least two families?** ⚠️ Body did not until today.
 3. ⛔ **Is any type stranded in one tradition that should be shared?** `vitality` now spans Death and Body,
    which is better than Death alone.

@@ -56,7 +56,7 @@ measuring across every craft that needs a pick.**
 
 ---
 
-## ⛔ THE SEVEN RULES THAT MAKE IT WORK
+## ⛔ THE EIGHT RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
 
@@ -170,6 +170,29 @@ this?* → improvement. *Is it a field on the mechanic block holding a number?* 
 
 ⚠️ **THE GENERAL RULE: if a vocabulary's name does not tell you what belongs in it, the name is the
 defect.** ⛔ **Do not write a rule telling people to be careful — RENAME THE THING.**
+
+### 8. ⛔ THIS IS A FANTASY GAME. A MISSING CRAFT IS MISSING, NOT REFUSED.
+
+**Added 2026-08-29. Erik: *"Body doesn't need to be limited as you are thinking it should be. Every
+tradition will likely have a way to do all the things IN THEIR OWN WAY. Ki is energy and this is a fantasy
+game. I can think of a stunning strike pretty easily."***
+
+⚠️ **I had just written that a tradition's five missing verbs *"read as characterisation, not a hole."*
+⛔ THAT IS THE THIRD TIME I HAVE IMPORTED REAL-WORLD LIMITS INTO THIS SETTING:**
+
+| I wrote | the correction |
+|---|---|
+| *"nothing it does is deniable"* is the interesting thing about a craft | ⛔ *"this isn't as unusual to the GAME as it is to your thinking — it's a fantasy game"* |
+| consent as a design lever on social crafts | ⛔ dropped — *"things happen to people"* |
+| a somatic cannot bind, ward, make or command | ⛔ **a joint lock, an iron body, a stunning strike** |
+
+⛔ **THE DEFAULT: A TRADITION CAN DO EVERYTHING, IN ITS OWN IDIOM. THE BURDEN IS ON THE ARGUMENT FOR A
+REFUSAL, NEVER ON THE GAP.** ⚠️ **And a refusal that survives must be defensible from the tradition's own
+authored `civilization` and `aesthetic` lines and WRITTEN DOWN as a refusal** — otherwise the next person
+audits it as a hole and fills it.
+
+⚠️ **THE TELL: if I catch myself explaining why a people COULDN'T, I am reasoning about physics.** ⛔ **The
+question is what their craft would look like if they DID.**
 
 ---
 

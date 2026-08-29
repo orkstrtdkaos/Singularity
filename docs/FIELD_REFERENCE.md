@@ -481,7 +481,7 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `crit` | 59 | `mechanic`×59 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
 | `wardTypes` | 48 | `mechanic`×48 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `marginFloorPer` | 45 | `mechanic`×45 | ✅ READ | `craftmechanics.js` |
-| `damageType` | 40 | `mechanic`×40 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
+| `damageType` | 41 | `mechanic`×41 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `soak` | 30 | `mechanic`×30 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `melee.js` |
 | `soakRank` | 29 | `mechanic`×29 | ✅ READ | `skill_battle.js`, `app.js` |
 | `sense` | 27 | `root`×27 | ✅ READ | `combatants.js`, `encounters.js`, `gambit.js` |

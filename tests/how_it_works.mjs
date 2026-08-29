@@ -543,26 +543,44 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
   // familyDefaults AND an unmechanised VERB — my probe conflated the two vocabularies. And grepping
   // skill_battle for ".soak" matched a different soak entirely. ⚠️ A REGEX ASKS WHETHER A WORD APPEARS;
   // THE QUESTION IS WHETHER A NUMBER CHANGES ANYTHING. Behavioural probes, like CI's own CCODE-240.
-  const { mechanicsOf } = await import("../engine/craftmechanics.js");
+  // ⛔ `mechanicFor`, NOT `mechanicsOf` - which does not exist. My first version imported the wrong name,
+  // got `undefined`, returned null from guardOf, and PASSED via the `lo == null` escape hatch below. A
+  // probe that tests nothing and reports green: the vacuous gate, inside the gap-tracking section.
+  const { mechanicFor } = await import("../engine/craftmechanics.js");
   const VERB_FAMILIES = cm.verbFamilies || cm.functionFamilies || {};
-  const knownVerbs = new Set(Object.keys(VERB_FAMILIES).length
+  // ⚠️ NAMED `verbFamilyMembers`, NOT `knownVerbs`: `craftmechanics.js` EXPORTS a `knownVerbs`, and a local
+  // of the same name in a test file moved that export from orphan to TEST-ONLY, inflating the ratchet by
+  // one. A name collision faking a reader - the thing FIELD_REFERENCE §1 documents, committed here.
+  const verbFamilyMembers = new Set(Object.keys(VERB_FAMILIES).length
     ? Object.values(VERB_FAMILIES).flat() : []);
   const usedVerbs = new Set();
   for (const a of abilities) for (const v of (a.functions || [])) usedVerbs.add(v);
-  const unmechanised = ["persuade", "bolster"].filter(v => usedVerbs.has(v) && !knownVerbs.has(v));
+  const unmechanised = ["persuade", "bolster"].filter(v => usedVerbs.has(v) && !verbFamilyMembers.has(v));
   gap("§10: `persuade` and `bolster` are still unmechanised",
     unmechanised.length > 0, `unmechanised: ${unmechanised.join(", ") || "(none)"}`);
 
   // ⛔ THE REAL TEST: does the authored NUMBER change the outcome? soak 2 and soak 20 must differ.
+  // ⛔ MEASURE THE REAL CRAFT, NOT AN INVENTED ONE. My first probe built a fixture with `shape:"guard"`
+  // as its VERB - guard is a SHAPE - so `shapeOfVerb` returned null, `mechanicFor` returned null, and the
+  // check passed through a `lo == null` escape hatch while testing nothing.
+  // ⚠️ AND THE FINDING IS MORE PRECISE THAN "READ BY NOTHING": `mechanic.soak` IS carried into
+  // `fields.soak` faithfully (2 -> 2, 20 -> 20). What is missing is a CONSUMER of that field in the damage
+  // path - `skill_battle` never names it, which is why content_ci's CCODE-240 measures soak 2 and soak 20
+  // resolving to an identical guard. The number arrives and nothing spends it.
   const soakCrafts = abilities.filter(a => a.mechanic?.soak != null);
-  const guardOf = (soak) => {
-    const probe = { id: "probe", shape: "guard", functions: ["guard"], mechanic: { soak, magnitude: soak } };
-    const m = mechanicsOf ? mechanicsOf(probe, { cfg: cm }) : null;
-    return m?.fields?.soak ?? m?.fields?.magnitude ?? null;
+  const realSoak = soakCrafts[0];
+  const soakField = (n) => {
+    const probe = JSON.parse(JSON.stringify(realSoak));
+    probe.mechanic.soak = n;
+    return mechanicFor(probe, { rank: 1, cfg: cm })?.fields?.soak ?? null;
   };
-  const lo = guardOf(2), hi = guardOf(20);
-  gap("§10: `mechanic.soak` is still read by nothing",
-    lo === hi || lo == null, `soak 2 -> ${lo} · soak 20 -> ${hi} · ${soakCrafts.length} crafts author it`);
+  const lo = soakField(2), hi = soakField(20);
+  check("§10: the soak probe produces real numbers (non-vacuity floor)",
+    typeof lo === "number" && typeof hi === "number" && lo !== hi,
+    `lo=${lo} hi=${hi} from ${realSoak?.id} - if these are null the probe is broken, not the engine`);
+  gap("§10: `mechanic.soak` reaches `fields.soak` and NOTHING DOWNSTREAM SPENDS IT",
+    !/fields\.soak|mech\w*\.fields\?\.soak/.test(rd("engine/skill_battle.js")),
+    `${soakCrafts.length} crafts author it; the value carries (${lo}/${hi}) and the damage path never names it`);
 
   const stSrc = rd("engine/state.js");
   const DARK = ["damage_types", "tempo", "the_veil", "nexuses", "death_domain", "healing_intent",

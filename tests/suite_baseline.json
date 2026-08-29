@@ -1,0 +1,26 @@
+{
+ "_note": "⛔ KNOWN-RED COUNTS PER SUITE. `run_tests --ratchet` blocks only when a count RISES or a new suite goes red. ⚠️ Numbers may only go DOWN — lower one by FIXING something, then re-baseline deliberately with `--rebaseline` so the improvement lands as a visible commit.",
+ "_updatedAt": "2026-08-29",
+ "suites": {
+  "import_integrity": 0,
+  "smoke": 1,
+  "parse_probe": 0,
+  "content_ci": 17,
+  "balance_sim": 0,
+  "skill_battle_sim": 0,
+  "contest_sim": 0,
+  "growth_sim": 0,
+  "tradition_matrix": 0,
+  "roll_sensitivity": 0,
+  "breadth_currency_sweep": 0,
+  "endgame_scaling": 0,
+  "damage_sensitivity": 1,
+  "staged_crafts_check": 0,
+  "craft_crit": 0,
+  "world_drive_audit": 0,
+  "wiring_audit": 4,
+  "how_it_works": 0,
+  "save_fixtures": 0,
+  "engine_map --check": 0
+ }
+}

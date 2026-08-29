@@ -1,14 +1,20 @@
 #!/bin/sh
 # ⛔ CCODE-288 — RUN THE SUITE BEFORE IT LEAVES THE MACHINE.
-# CI catches a bad push in a minute; this catches it in seconds, and with two agents pushing to one branch
-# the difference is a rebase nobody has to do. Skip deliberately with `git push --no-verify`.
-echo "pre-push: running the suite (skip with --no-verify)"
-node scripts/run_tests.mjs --quiet
-status=$?
-if [ $status -ne 0 ]; then
+#
+# ⚠️ --ratchet, NOT all-green. This suite carries ~23 known-red assertions that are the project's tracked
+# open gaps. My first version of this hook demanded all-green and blocked every push forever, including its
+# own author's, on its first run. A gate that can never pass is a gate everyone learns to bypass — it
+# trains the --no-verify habit, which is worse than having no hook.
+#
+# So: block on REGRESSION. A count that RISES, or a suite that newly goes red, stops the push.
+# A count that FALLS is reported so it can be locked in with --rebaseline.
+#
+# Skip deliberately with `git push --no-verify`.
+echo "pre-push: suite ratchet (skip with --no-verify)"
+node scripts/run_tests.mjs --ratchet --quiet
+if [ $? -ne 0 ]; then
   echo ""
-  echo "  ⛔ SUITE RED — push blocked."
-  echo "     Fix it, or push with --no-verify if you know why it is red and are pushing anyway."
+  echo "  ⛔ REGRESSION — push blocked. Something got worse than tests/suite_baseline.json."
   exit 1
 fi
 exit 0

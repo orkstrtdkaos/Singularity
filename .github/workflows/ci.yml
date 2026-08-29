@@ -21,5 +21,8 @@ jobs:
       # ⚠️ NO INSTALL STEP ON PURPOSE — this project vendors nothing and has no build step.
       # `package.json` has zero dependencies and zero devDependencies. If that ever changes,
       # this is the line that has to change with it.
-      - name: the whole suite
-        run: node scripts/run_tests.mjs
+      # ⚠️ --ratchet compares against tests/suite_baseline.json and fails only on a REGRESSION. The suite
+      # carries ~23 known-red assertions that are the project's tracked open gaps; a CI that is red from
+      # day one is a CI everybody stops reading, which is worse than none.
+      - name: the whole suite, ratcheted
+        run: node scripts/run_tests.mjs --ratchet

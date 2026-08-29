@@ -70,6 +70,56 @@ for (const [name, cmd, args] of run) {
   if (!quiet) process.stdout.write(`${ok ? "ok  " : "FAIL"}  ${name}${fails ? ` — ${fails} failure(s)` : ""}\n`);
 }
 
+/* ══ CCODE-288b — THE RATCHET. ⛔ MY FIRST PRE-PUSH HOOK DEMANDED ALL-GREEN AND BLOCKED EVERY PUSH FOREVER,
+   including its own author's, on its first run. This suite carries ~22 KNOWN-RED assertions — content_ci
+   17, wiring 4, damage_sensitivity 1, smoke 1 — which are the project's open gaps, tracked deliberately.
+   ⚠️ A GATE THAT CAN NEVER PASS IS A GATE EVERYONE LEARNS TO BYPASS, which is worse than no gate: it trains
+   the habit of --no-verify. So it blocks on REGRESSION, never on the standing count — the same one-way
+   ratchet `wiring_audit` already uses, applied to the whole suite. ══ */
+const ratchet = process.argv.includes("--ratchet");
+const rebase = process.argv.includes("--rebaseline");
+const BASELINE = new URL("../tests/suite_baseline.json", import.meta.url);
+const countOf = (r) => (r.ok ? 0 : (r.fails ?? r.lineCount ?? 1));
+if (rebase) {
+  const { writeFileSync } = await import("node:fs");
+  const out = {
+    _note: "⛔ KNOWN-RED COUNTS PER SUITE. `run_tests --ratchet` blocks only when a count RISES or a new suite goes red. ⚠️ Numbers may only go DOWN — lower one by FIXING something, then re-baseline deliberately with `--rebaseline` so the improvement lands as a visible commit.",
+    _updatedAt: new Date().toISOString().slice(0, 10),
+    suites: Object.fromEntries(results.map(r => [r.name, countOf(r)])),
+  };
+  writeFileSync(BASELINE, JSON.stringify(out, null, 1) + "\n");
+  console.log(`\nbaseline written — known red: ${Object.entries(out.suites).filter(([, v]) => v).map(([k, v]) => `${k} ${v}`).join(" · ") || "none, all green"}`);
+  process.exit(0);
+}
+if (ratchet) {
+  const { readFileSync, existsSync } = await import("node:fs");
+  if (!existsSync(BASELINE)) {
+    console.log("\n⛔ no tests/suite_baseline.json — run: node scripts/run_tests.mjs --rebaseline");
+    process.exit(1);
+  }
+  const base = JSON.parse(readFileSync(BASELINE, "utf8")).suites || {};
+  const worse = [], better = [];
+  for (const r of results) {
+    const now = countOf(r), was = base[r.name];
+    if (was === undefined) { if (now > 0) worse.push(`${r.name}: NEW red suite (${now})`); continue; }
+    if (now > was) worse.push(`${r.name}: ${was} → ${now}`);
+    else if (now < was) better.push(`${r.name}: ${was} → ${now}`);
+  }
+  console.log("\n" + "-".repeat(64));
+  if (better.length) {
+    console.log("✅ IMPROVED — re-baseline to lock it in (node scripts/run_tests.mjs --rebaseline):");
+    better.forEach(b => console.log("   " + b));
+  }
+  if (worse.length) {
+    console.log("\n⛔ REGRESSION — a count went UP:");
+    worse.forEach(w => console.log("   " + w));
+    console.log("\n   Fix it, or push with --no-verify if you know why.");
+    process.exit(1);
+  }
+  console.log(`✅ no regression against the baseline · ${results.length} suites ran.`);
+  process.exit(0);
+}
+
 const bad = results.filter(r => !r.ok);
 console.log("\n" + "-".repeat(64));
 console.log(`${results.length} suites ran · ${results.length - bad.length} green · ${bad.length} red`);

@@ -104,7 +104,8 @@
       "text": "There was nothing left to find. The debt arrives now instead of later.",
       "chance": -3
      }
-    }
+    },
+    "damageType": "vitality"
    },
    "rankDeltas": [
     {
@@ -149,7 +150,8 @@
    "_merged": "⛔ SNG-479: ABSORBS Long Haul (mason) and Soma r1-r2. Erik: 'r1 subname could be EMBRACE THE SUCK. Plus it should HEAL SOME and ADD SOME DMG SOAK on top of the resist boost. r2 EMPOWERED ATTACKS, no twice-a-day limit, DURATION APPLIES IN FIGHTS. r3 DREAM BREATH — grants soak worth X% of HP and heals half that amount.'",
    "_powerSystemWas": "reach_body_mind",
    "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki.",
-   "_rungFix_20260829": "⛔ REVERSED — I HAD THIS BACKWARDS. The craft deals NO damage: no dice, and its functions are sustain/resist/empower/move. ⚠️ `harmRung` asks WHAT HAPPENS WHEN THIS CRAFT PUTS SOMEONE DOWN, and this craft puts nobody down — 'your blows land harder' and 'a second physical action' make the CHARACTER'S OWN WEAPON better, which is `empower`, not harm. ⛔ THE RANK WAS WRONG AND I MATCHED THE ABILITY TO IT. The lint reports a DISAGREEMENT and cannot say which side is wrong; I assumed the ability was, and propagated a rank's error upward instead of reading what the rank does. Erik caught it. ⚠️ `quick_hands` was the only true inversion of the three — its r2 declares `strike` and deals 1d6."
+   "_rungFix_20260829": "⛔ REVERSED — I HAD THIS BACKWARDS. The craft deals NO damage: no dice, and its functions are sustain/resist/empower/move. ⚠️ `harmRung` asks WHAT HAPPENS WHEN THIS CRAFT PUTS SOMEONE DOWN, and this craft puts nobody down — 'your blows land harder' and 'a second physical action' make the CHARACTER'S OWN WEAPON better, which is `empower`, not harm. ⛔ THE RANK WAS WRONG AND I MATCHED THE ABILITY TO IT. The lint reports a DISAGREEMENT and cannot say which side is wrong; I assumed the ability was, and propagated a rank's error upward instead of reading what the rank does. Erik caught it. ⚠️ `quick_hands` was the only true inversion of the three — its r2 declares `strike` and deals 1d6.",
+   "_typed_20260829": "⛔ `vitality` — VITAL family, and it gives Body its life side. Erik 2026-08-29: 'seems like body should have vital in it.' ⚠️ r1 'closes some of what is open' and r3 'HEALS HALF THAT AMOUNT OUTRIGHT' — that is life MOVED, not life ended, which is exactly `vitality`'s definition. ⛔ AND IT IS THE CONSERVED TYPE USED IN THE GIVING DIRECTION: `draw_down` takes vitality from another and `consumed_wound` is offered it; this one takes it FROM YOUR OWN RESERVE AND SPENDS IT NOW — which is why the craft is about pushing past exhaustion rather than about being healed. ⚠️ The type is on the ability so a vitality ward answers it; the craft still deals no harm and its rung stays `none`."
   },
   {
    "id": "perfect_motion",

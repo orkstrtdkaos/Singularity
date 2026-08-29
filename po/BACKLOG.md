@@ -723,3 +723,50 @@ systems a player uses, the pushing should cost them what it costs a player.**
 
 ⛔ **AND THE REVERSE, WHICH IS THE GENERATIVE HALF ERIK ASKED FOR: a closed arc leaves a wake, and its
 hinge NPCs are the most likely seeds of what rises next.**
+
+## ⛔ FULL BALANCE AND GAP CHECK — after the first audit pass (Erik, 2026-08-29)
+
+**Erik: *"put a full balance and gap check in the backlog for when we're done with the first audit pass."***
+
+⚠️ **NOT NOW.** ⛔ **Four traditions of thirteen are audited, and a cross-tradition comparison run on a
+third of the corpus measures the AUDIT ORDER, not the design.** The Death numbers below are the proof:
+Death looks broadest at 24/28 verbs **because it was audited first and had every gap closed**, not
+necessarily because it is broad.
+
+### What the first pass has already shown, and what to re-run at the end
+
+**As of four traditions — Death (ashwarden+threnodist), Mind (cogitant), Body (somatic), Light (blazeborn):**
+
+| | crafts | harm | verbs | families |
+|---|---|---|---|---|
+| **DEATH** | 37 | 15 | ⛔ **24/28** | vital 5 · intrinsic 3 · physics 2 · elemental 1 |
+| **MIND** | 14 | 6 | 19/28 | intrinsic 4 · physics 2 |
+| **BODY** | 12 | 3 | 16/28 | physics 4 · **vital 1** |
+| **LIGHT** | 16 | 6 | 19/28 | physics 4 · elemental 3 · intrinsic 3 |
+
+✅ **THE MODEL IS HOLDING:** no damage type appears in two traditions except `physical`, which
+`damage_types` calls *"the default when no type is named."* **Signature/secondary is emerging without
+anyone enforcing it.**
+
+⚠️ **TWO GAPS FOUND AND CLOSED THIS SESSION, BOTH BY ERIK READING THE TABLE:**
+`second_wind` → `vitality` (Body had no vital family at all, in a tradition whose r3 *heals outright*) ·
+`unshadow` → `hinder` (Light had none, in a tradition whose signature act is DAZZLE AND BLIND — **and the
+craft already declared `shape: hobble`, so the shape said it impairs and no rank said how**).
+
+### ⛔ WHAT THE FULL CHECK MUST ASK
+
+1. ⛔ **Is a verb ABSENT or REFUSED?** ⚠️ Body has no `bind`, `ward`, `make`, `command` or `summon` — **that
+   reads as characterisation, not a hole**: a somatic does things with a body and cannot make anything or
+   call something. **Death has `summon`, `open`, `bargain` and `persuade` alone.** The check must
+   distinguish *"nobody thought of it"* from *"this people would not."*
+2. **Does every tradition span at least two families?** ⚠️ Body did not until today.
+3. ⛔ **Is any type stranded in one tradition that should be shared?** `vitality` now spans Death and Body,
+   which is better than Death alone.
+4. **Does each tradition's damage mix match its authored `aesthetic` and `civilization` line?** ⚠️ Light's
+   three families came directly from *"revelation as violence… no shadow permitted."*
+5. ⛔ **READ THE AUTHORED PLACES AND ORIGIN TEXT, not just the craft list.** ⚠️ **`the_lensward` described
+   the focusing arrays as *"the beam-craft that makes them feared"* and no such craft existed.** **The
+   world says what a people does before the craft list catches up, and that check found two crafts.**
+6. **Energy bands, harm rungs and intensity pairs across all thirteen at once** — ⛔ **the unmigrated-batch
+   fingerprint (empty `notFor` + lowercase challengeTypes + below-band energy TOGETHER) has now appeared in
+   Death, Mind, Body and Light. Expect it in the remaining nine.**

@@ -916,6 +916,7 @@
    },
    "functions": [
     "break",
+    "hinder",
     "reveal"
    ],
    "narrationHints": "Every concealment in the place falls away at once.",
@@ -925,11 +926,12 @@
     {
      "rank": 1,
      "name": "Unshadow",
-     "grants": "Strip away disguise, shadow, and illusion from a target at once.",
+     "grants": "⛔ STRIP AWAY DISGUISE, SHADOW AND ILLUSION FROM A TARGET AT ONCE — and the light that does it BLINDS: while it holds, they fight, aim and read worse for having been shown.",
      "cannot": "The Cathedral's true-piece lie survives; some truths harm more revealed.",
      "functions": [
       "reveal",
-      "break"
+      "break",
+      "hinder"
      ],
      "gains": "broaden",
      "harmRung": "none",
@@ -938,11 +940,12 @@
     {
      "rank": 2,
      "name": "Stripping Light",
-     "grants": "Strip concealment from a place, not merely a thing — every shadow in a room gives up what it held.",
+     "grants": "⛔ STRIP CONCEALMENT FROM A PLACE, not merely a thing — every shadow in a room gives up what it held. ⚠️ AND EVERYONE IN IT IS DAZZLED: the glare is not aimed and does not sort.",
      "cannot": "It reveals indiscriminately: yours, theirs, and things nobody wanted found.",
      "functions": [
       "reveal",
-      "break"
+      "break",
+      "hinder"
      ],
      "gains": "deepen",
      "harmRung": "none",
@@ -957,7 +960,8 @@
      "grants": "Nothing within your reach can stay concealed — shroud, harbor, and false trail all fail at once in your presence. Those who were relying on cover are badly weakened by its loss: an infiltrator stripped mid-work is exposed, off-plan, and acts worse for the rest of it.",
      "cannot": "The Umbrals consider this an atrocity, and they are not entirely wrong. Some things were harbored for a reason.",
      "functions": [
-      "break"
+      "break",
+      "hinder"
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
@@ -1038,7 +1042,8 @@
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_powerSystemWas": "reach_dark_light",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_typed_20260829": "⛔ NOT FIRE AT ALL. 'Strip a place or person of ALL CONCEALMENT AND ILLUSION' — nothing burns, nothing is warmed. ⚠️ THE HARM IS THAT A LIE STOPS WORKING, which is `truth`, INTRINSIC family, and it is why `unshadow` hobbles rather than damages: what it takes is a person's cover, not their health. ⛔ A shield is no answer."
+   "_typed_20260829": "⛔ NOT FIRE AT ALL. 'Strip a place or person of ALL CONCEALMENT AND ILLUSION' — nothing burns, nothing is warmed. ⚠️ THE HARM IS THAT A LIE STOPS WORKING, which is `truth`, INTRINSIC family, and it is why `unshadow` hobbles rather than damages: what it takes is a person's cover, not their health. ⛔ A shield is no answer.",
+   "_hinderAdded_20260829": "⛔ `hinder` ADDED AT ALL THREE RANKS. Erik 2026-08-29 agreed with the coverage finding: LIGHT WAS THE ONLY AUDITED TRADITION WITH NO `hinder`, in a tradition whose signature act is DAZZLE AND BLIND. ⚠️ AND THE CRAFT ALREADY DECLARED `shape: hobble` — the shape said it impairs and no rank said how. ⛔ THE VERB WAS MISSING, NOT THE FICTION: 'revelation as violence' is the tradition's own aesthetic, and being shown is now mechanically worse for you."
   },
   {
    "id": "harbored_flame",

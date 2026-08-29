@@ -1086,5 +1086,24 @@
     "overmatchGap": 2,
     "overmatchedDamageKept": 0.15,
     "_overmatchGap": "⛔ CCODE-277 / ERIK: \"1 v army isn't a contest.\" ONE scale of difference is a hard fight and STILL A ROLL — a party against a unit is lopsided, not hopeless, and making it unwinnable would delete the fights people actually want to have. TWO is the wall.\n⚠️ `overmatchedDamageKept` IS WHAT MAKES THE WALL REAL RATHER THAN A LABEL. A banner saying \"no roll wins this\" above a round that resolved normally would let a player beat an army by rolling well. It is 0.15 and NOT 0 deliberately: you can still hurt an army, you simply cannot beat one, and zeroing it would read as a bug rather than as a wall.\n⛔ BOTH ARE LIFTED THE INSTANT THE OVERMATCH IS ANSWERED — a power big enough, or ground you prepared. The answer is to change the situation, never to roll harder.\n⚠️ AUTHORED IN THE CHANGE THAT WIRES THEM. `overmatchGap` was deliberately left out of the previous commit because nothing called `overmatchOf` yet — a dial ahead of its reader is a knob with nothing on the other end, which is the same defect as a reader ahead of its dial, pointed the other way."
+  },
+  "npcStanding": {
+    "note": "⛔ CCODE-310 / AEVI's SPEC_mythicals_and_the_npc_cap §4: \"REMOVE THE HARD 20. Do not replace it with 100 — a Mythical is NEAR 100 and the number is a consequence of the ladder, not a cap on it. If a bound is needed for arithmetic safety, put it in CONTENT with a reason, at a height no ordinary NPC reaches.\" ⚠️ MY FIRST FIX CLAMPED TO 100 IN CODE, which is the same shape Erik has ruled against four times: a default acting as a ceiling. This is the correction. ⛔ AND THE CROSSING IS CANON, NOT A DIAL: at or around level 100 a character or NPC ascends or falls across the Veil (Erik, new canon 2026-08-29). That lives in `legends.json` and `the_veil.json`. It is deliberately NOT a constant here — nothing in the engine reads it yet, and a dial with nothing on the other end is exactly what `wiring_audit` exists to catch.",
+    "_tierFloor": "⛔ WHAT AN NPC IS, BEFORE THE PLAYER HAS ANYTHING TO DO WITH IT. The rung ladder is canon and lives in `arc_response.attentionByTier` — mythic · legendary · epic · heroic · regional · notable · riffraff (SNG-280, 126 uses). ⚠️ A FLOOR, NOT A VALUE: deeds, time known and standing still add on top, so tier is a thing that MOVES rather than a label — Erik: \"they grow in tier\".",
+    "tierFloor": {
+      "mythic": 85,
+      "legendary": 60,
+      "epic": 40,
+      "heroic": 25,
+      "regional": 12,
+      "notable": 5,
+      "riffraff": 1
+    },
+    "_levelPerMeetings": "⚠️ THE THREE INPUTS ARE ERIK'S AND THEY ARE RIGHT — they were simply the ONLY inputs, which is why an unmet world-mover was level 1. They are now growth on top of a floor rather than the whole story. These rates were code defaults with no content dial at all until now.",
+    "levelPerMeetings": 4,
+    "levelPerDaysKnown": 96,
+    "levelPerStanding": 25,
+    "_safetyBound": "⚠️ AN ARITHMETIC GUARD AND NOTHING ELSE, deliberately set ABOVE the crossing so it can never be mistaken for the cap this replaces. If a level ever reaches this, something has gone wrong upstream and the number should be read as a bug, not as a Mythical.",
+    "safetyBound": 200
   }
 }

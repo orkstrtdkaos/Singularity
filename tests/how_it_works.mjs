@@ -868,9 +868,20 @@ console.log("\n── §13 · an NPC's level is what they ARE, plus what you hav
   check("§13: …and still GROWS — Erik: 'they get killed and injured and they need to grow too'",
     lvl({ met: 40 }, { level: 60 }) > 60);
 
-  // ⚠️ THE CEILING IS CANON NOW. 100 is where the Veil is crossed, so nobody on this side is above it.
-  check("§13: nobody standing on this side exceeds the ascension threshold",
-    lvl({ met: 400 }, { level: 98 }) === 100, String(lvl({ met: 400 }, { level: 98 })));
+  // ⛔ AEVI CORRECTED THIS AND THE ASSERTION HAD TO MOVE WITH IT. My first fix clamped to 100 in CODE;
+  // her ruling is that 100 is a DOOR, not a ceiling, and any arithmetic bound belongs in CONTENT with a
+  // reason, set ABOVE the crossing so it can never be read as the cap it replaces.
+  // ⚠️ SO WHAT IS ASSERTED NOW IS THE ABSENCE OF A CODE CEILING, not the presence of one.
+  const cfgNS = rj("content/packs/core/rules/resolution.json").npcStanding;
+  check("§13: there is no code ceiling at 100 — the bound is content, and sits above the crossing",
+    cfgNS && cfgNS.safetyBound > 100 && !rd("engine/npcsheet.js").includes("levelCap, 20"),
+    `safetyBound=${cfgNS?.safetyBound}`);
+  check("§13: a Mythical can be reached from the ladder — Aevi §4.2",
+    NS.derivedLevel({ met: 60 }, { cfg: cfgNS, authored: { tier: "mythic" } }) >= 100);
+  // ✅ AND TIER MOVES RATHER THAN LABELS — Erik: "they grow in tier."
+  check("§13: tierOf reads the rung back from a level, off the SAME content floors",
+    NS.tierOf(1,{cfg:cfgNS})==="riffraff" && NS.tierOf(90,{cfg:cfgNS})==="mythic" && NS.tierOf(50,{cfg:cfgNS})==="epic");
+  check("§13: …and it refuses to guess without the dial", NS.tierOf(90,{cfg:{}})===null);
   check("§13: the old arbitrary wall of 20 is gone",
     lvl({ met: 1 }, { level: 55 }) === 55);
 

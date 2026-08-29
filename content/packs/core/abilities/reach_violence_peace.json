@@ -1999,8 +1999,7 @@
      "gainAxes": [],
      "interceptDamage": {
       "allies": 1,
-      "charges": 1,
-      "costsAction": true
+      "charges": 1
      }
     },
     {
@@ -2020,8 +2019,7 @@
      ],
      "interceptDamage": {
       "allies": 2,
-      "rounds": 3,
-      "costsAction": true
+      "rounds": 3
      }
     },
     {
@@ -2043,8 +2041,7 @@
      "gainAxes": [],
      "interceptDamage": {
       "allies": 2,
-      "rounds": 3,
-      "costsAction": false
+      "rounds": 3
      }
     }
    ],
@@ -2076,7 +2073,7 @@
      "physical",
      "feeling"
     ],
-    "_interceptNote": "⛔ THE FIRST CRAFT IN THE GAME TO AUTHOR `interceptDamage` — the reader has been in `intercept.js` since CCODE-260 with a note saying 'build the reader, default the dial to a no-op, LET CONTENT TURN IT ON'. ⚠️ THIS TURNS IT ON. `interceptCondition` (shared_weight) catches BINDINGS; this catches BLOWS, and they are different verbs on the same machinery. ⛔ `costsAction: true` AT r1 AND r2 IS THE DESIGN, NOT A LIMIT: without it a tank is a wall and casualties go to zero. r3 is what you buy — the placing becomes free, which is exactly the craft's own r3 fiction of being there before the harm arrives."
+    "_interceptNote": "⛔ THE FIRST CRAFT IN THE GAME TO AUTHOR `interceptDamage` — the reader has been in `intercept.js` since CCODE-260 with a note saying 'build the reader, default the dial to a no-op, LET CONTENT TURN IT ON'. ⚠️ THIS TURNS IT ON. `interceptCondition` (shared_weight) catches BINDINGS; this catches BLOWS, and they are different verbs on the same machinery. ⛔ ERIK 2026-08-29 STRUCK `costsAction`: \"I don't think it needs costs action on top of the fact that you're using your action to use the skill.\" He is right and it was DOUBLE-CHARGING — a turn is sense → action → bonus and `app.js` advances the phase the moment a craft is declared, so declaring Step Between ALREADY SPENDS THE ACTION. ⚠️ IT DISSOLVES MY OWN OBJECTION RATHER THAN OVERRULING IT: I argued a guard must cost something or a tank is a wall, and the cost was always there, in the declaration. ⛔ BUT IT LEAVES r3 BUYING NOTHING. `costsAction: false` was the ONLY difference between r2 and r3, so both rungs are now `{allies: 2, rounds: 3}` and the third rank is inert. ⚠️ THAT IS A REAL GAP AND IT IS AEVI'S TO CLOSE — r3's own fiction is being there BEFORE the harm arrives, which suggests reach or anticipation rather than a freed action. ⚠️ AND WHAT REMAINS TUNABLE IS REACH AND DURATION (`allies`, `charges`, `rounds`): one action buying two allies for three rounds is the rung to watch, not the missing flag."
    },
    "rankDeltas": [
     {

@@ -54,15 +54,50 @@ export function derivedLevel(entry, { day = null, cfg = {}, authored = null } = 
   const fromTime = Math.floor(known / Math.max(1, perSeason));
   const standing = Math.max(0, Math.round(num(entry?.standing, 0) / Math.max(1, num(cfg.levelPerStanding, 25))));
   const growth = fromDeeds + fromTime + standing;
-  // ⛔ THE ASCENSION THRESHOLD, NOT A MODELLING LIMIT. At or around 100 an NPC crosses the Veil and leaves
-  // this side entirely — so nobody standing here is above it, and the clamp finally means something.
-  const ceiling = Math.max(1, num(cfg.ascendAt, num(cfg.levelCap, 100)));
-  // ⚠️ WHAT THEY ARE IN THE WORLD, if anyone has said. `entry` is checked too because a merged record and
-  // a separate authored record are both shapes this codebase passes, and reading only one is how
-  // `persistUntilHealed` missed all six of its authored objects.
-  const inWorld = num(authored?.level ?? entry?.level, 0);
-  if (inWorld > 0) return clamp(inWorld + growth, 1, ceiling);
-  return clamp(1 + growth, 1, ceiling);
+
+  // ⛔ AEVI'S CORRECTION, AND SHE IS RIGHT: "do not replace it with 100 — a Mythical is NEAR 100 and the
+  // number is a CONSEQUENCE of the ladder, not a cap on it. If a bound is needed for arithmetic safety,
+  // put it in CONTENT with a reason." ⚠️ MY FIRST FIX CLAMPED TO 100 IN CODE — the same shape Erik has
+  // ruled against four times, a default acting as a ceiling. The bound now comes from
+  // `resolution.npcStanding` and sits at 200, deliberately ABOVE the crossing so it can never be read as
+  // the cap it replaces. ⛔ 100 IS A DOOR, NOT A CEILING.
+  const bound = Math.max(1, num(cfg.safetyBound, 200));
+
+  // ⛔ WHAT THEY ARE, BEFORE THE PLAYER HAS ANYTHING TO DO WITH IT. An authored level wins; otherwise the
+  // FLOOR of their tier on the canon ladder (mythic…riffraff — `arc_response.attentionByTier`, SNG-280).
+  // ⚠️ `entry` is read as well as `authored` because this codebase passes both a merged record and a
+  // separate authored one, and reading only one is how `persistUntilHealed` missed all six of its objects.
+  //
+  // ⛔ THERE IS DELIBERATELY NO CODE DEFAULT FOR `tierFloor`. If the content dial does not reach here a
+  // mythic NPC quietly stays a nobody — so a built-in map would MASK a broken thread instead of exposing
+  // it, and `wiring_audit` would report the dial as unread while the engine looked fine.
+  const floors = cfg.tierFloor || null;
+  const tier = String(authored?.tier ?? entry?.tier ?? "").toLowerCase();
+  const base = num(authored?.level ?? entry?.level, 0)
+    || (floors ? num(floors[tier], 0) : 0)
+    || 1;
+
+  // ⚠️ AND TIER IS A THING THAT MOVES. Erik: "they grow in tier." A floor is where a rung STARTS, not
+  // where its people stay — growth carries them up and eventually across into the next rung.
+  return clamp(base + growth, 1, bound);
+}
+
+/** ⛔ CCODE-310 — THE RUNG A LEVEL LANDS IN, which is what makes tier something that MOVES rather than a
+ *  label. Erik: "they get killed and injured and they need to grow too (which they do in tier)."
+ *
+ *  ⚠️ DERIVED FROM THE SAME CONTENT FLOORS `derivedLevel` USES, never a second table — two ladders that
+ *  can disagree is the stored-copy-of-a-derived-value failure, committed twice in this project already.
+ *  ⛔ RETURNS null WITHOUT THE DIAL, because guessing a rung is worse than admitting there is no ladder. */
+export function tierOf(level, { cfg = {} } = {}) {
+  const floors = cfg.tierFloor;
+  if (!floors) return null;
+  const lv = num(level, 1);
+  let best = null, bestFloor = -Infinity;
+  for (const [rung, floor] of Object.entries(floors)) {
+    const f = num(floor, 0);
+    if (lv >= f && f > bestFloor) { best = rung; bestFloor = f; }
+  }
+  return best;
 }
 
 /** ⚠️ THE SPINE THEY BRING. An NPC's attributes lean toward what their ROLE implies — a smith is

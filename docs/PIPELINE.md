@@ -102,6 +102,7 @@ IMPACTED BY**. `§0b` asserts the five columns are present.
 | `docs/HOW_IT_WORKS.md` | **what does the game do**, present tense, BUILT vs PROPOSED | us |
 | `docs/FIELD_REFERENCE.md` | **what is each field**, who reads it, what breaks without it | us |
 | ⛔ `docs/PLAYERS_GUIDE.md` | **what is it like to play** — nouns and verbs, not fields | ⛔ **the player** |
+| ⛔ `docs/ARCS.md` | ⛔ **the same arcs WITH the answers** — Erik: *"it is NOT OK to leave it at 'we don't know what's underneath'"* | us, never the player |
 | `docs/APPARATUS.md` | ⛔ **every harness, what it is for, and whether it RUNS** | us |
 | `docs/PIPELINE.md` | how work moves | us |
 | `po/*.md` | working papers — proposals, reviews, replies | us, in flight |

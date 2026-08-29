@@ -647,8 +647,29 @@ console.log("── PG · the player's guide — the nouns-and-verbs manual ─�
 
   // ⛔ AND THE PARTS AEVI OWNS ARE MARKED, NOT QUIETLY EMPTY. A section awaiting content must SAY so, or
   // it reads as a section that decided there was nothing to say.
-  const awaiting = (pg.match(/AWAITING AEVI/g) || []).length;
-  check("PG: every section she owns is marked AWAITING, never left silently thin", awaiting >= 3, `${awaiting} marked`);
+  // ⛔ AEVI WROTE PARTS X–XII ON 2026-08-29, WHICH TURNED THIS CHECK RED ON PURPOSE. The old form asserted
+  // the three parts stayed MARKED as awaiting her; she filled them in and flagged it herself — "AWAITING gate
+  // now correctly red, CCode's to change." ⚠️ THE REPLACEMENT MUST NOT BE A DELETION. A gate that only watched
+  // for a placeholder is worth nothing once the placeholder is gone, so it now checks the WRITING, against the
+  // authored corpus, which is the thing the placeholder was standing in for.
+  const parts = pg.split(/^# PART /m).slice(1);
+  const thin = parts.filter(s => !s.includes("AWAITING") && s.split("\n").length < 12)
+    .map(s => s.split("\n")[0].trim());
+  check("PG: no part is silently thin — it is either written or marked AWAITING",
+    parts.length >= 12 && thin.length === 0,
+    `${parts.length} parts; thin: ${thin.join(", ") || "none"}`);
+
+  // ✅ AND THE PEOPLE SHE WROTE ARE THE PEOPLE THE ENGINE HAS. Derived from the companion pack, never a typed
+  // list — a tenth companion authored tomorrow makes this red until the guide mentions them.
+  const comps = [];
+  for (const x of readdirSync(join(root, "content/packs/valley/companions")).filter(y => y.endsWith(".json"))) {
+    const j2 = rj(`content/packs/valley/companions/${x}`);
+    for (const c of (j2.companions || j2.items || (Array.isArray(j2) ? j2 : [j2]))) if (c && c.id) comps.push(c);
+  }
+  const unnamed = comps.filter(c => c.name && !pg.includes(c.name)).map(c => c.name);
+  check("PG: every authored companion is named in the guide",
+    comps.length >= 9 && unnamed.length === 0,
+    `${comps.length} authored; missing: ${unnamed.join(", ") || "none"}`);
   check("PG: it points at the machine reference rather than duplicating it", /FIELD_REFERENCE\.md/.test(pg));
 
   // ⚠️ AND THE PIPELINE DOC, since it is the other half of what Erik asked for.
@@ -799,6 +820,19 @@ console.log("\n── §12 · the interface — reachability, phases, apparatus 
   const runner = rd("scripts/run_tests.mjs");
   check("APPARATUS: the four newly-wired suites are in the runner",
     ["changeset_check", "dev_world", "playthrough_sim", "verification_ledger"].every(x => runner.includes(x)));
+}
+
+// ⛔ CCODE-303 — A DOCUMENT NOBODY LINKS IS THE SAME UNREAD FAILURE. `docs/ARCS.md` landed on 2026-08-29 and
+// nothing pointed at it; the table in PIPELINE is where a person looks to find out what exists and what each
+// file is FOR. ⚠️ DERIVED FROM THE DIRECTORY, so a doc added tomorrow goes red until it is placed.
+console.log("\n── the document set — everything in docs/ is placed ──");
+{
+  const pipeSrc = rd("docs/PIPELINE.md");
+  const docs = readdirSync(join(root, "docs")).filter(x => x.endsWith(".md"));
+  const unlisted = docs.filter(d => !pipeSrc.includes("docs/" + d));
+  check("PIPELINE lists every document in docs/",
+    docs.length >= 5 && unlisted.length === 0,
+    `${docs.length} docs; unlisted: ${unlisted.join(", ") || "none"}`);
 }
 
 /* ══════════ REPORT ══════════ */

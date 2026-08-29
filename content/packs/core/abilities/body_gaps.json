@@ -384,7 +384,7 @@
    "plainly": "A fight/defend action, then it runs by itself. ⛔ ANYONE WHO LANDS A MELEE BLOW ON YOU TAKES 1d6 FORCE BACK, without you spending anything. Lasts about three rounds. r2 raises it to 2d6 and staggers a striker who commits hard; r3 answers everyone in reach and holds until the fight ends. ⚠️ It does not reduce the blow you took.",
    "intensity": {
     "conserve": "half the answer, and only for a round",
-    "surge": "set it as hard as you can hold; ⛔ IT ANSWERS EVERY TOUCH, INCLUDING A HAND ON YOUR SHOULDER"
+    "surge": "set it as hard as you can hold; ⛔ THE ANSWER COMES BACK HARD ENOUGH TO END SOMEONE WHO COMMITTED TO THE BLOW"
    },
    "bounds": [
     {
@@ -466,7 +466,8 @@
    ],
    "_authored": "⛔ ERIK 2026-08-29: 'I think KI THORNS might be cool too — something that damages someone who hits you.' ⚠️ MEASURED FIRST: NOTHING IN 380 CRAFTS RETALIATES. `reflectByDegree` exists and reflects CONDITIONS on an intercepted binding (built for `shared_weight` r3); this is a PASSIVE answer to DAMAGE, which is a different mechanism. ⛔ AND IT IS THE STRONGEST ARGUMENT FOR ERIK'S RULE 8 SO FAR: I had just written that Body's missing verbs 'read as characterisation'. Body had no retaliation because nobody had thought of it, and 'ki is energy and this is a fantasy game' produced two crafts in one sitting.",
    "_costRuling_20260829": "⛔ ERIK 2026-08-29: 'NO on the r3 cost… geezus. COST IS ENERGY!' ⚠️ I had written 'at this rank people stop touching you, and that is A COST THE CRAFT DOES NOT MEASURE' — a narrative debt in a `cannot`, dressed up as insight. ⛔ THE SIXTH TIME THIS RULING HAS BEEN NEEDED. A `cannot` is a SCOPE LIMIT: what the craft will not do. The fact that it answers allies is a scope limit and is stated as one; the fact that people find it unnerving is COLOUR and belongs in narrationHints or nowhere.",
-   "_kiReadsIntent_20260829": "⛔ ERIK 2026-08-29: 'It's KI. It responds to an ATTACK, not when friends touch you.' ⚠️ I had it answering every hand, which made a heroic craft into a liability — and it is wrong on the fiction too: ki is the practitioner's own energy answering aggression, not a mechanical trap that cannot tell a blow from a hand."
+   "_kiReadsIntent_20260829": "⛔ ERIK 2026-08-29: 'It's KI. It responds to an ATTACK, not when friends touch you.' ⚠️ I had it answering every hand, which made a heroic craft into a liability — and it is wrong on the fiction too: ki is the practitioner's own energy answering aggression, not a mechanical trap that cannot tell a blow from a hand.",
+   "_surgeFix_20260829": "⛔ THE SURGE STILL SAID 'IT ANSWERS EVERY TOUCH, INCLUDING A HAND ON YOUR SHOULDER' after Erik ruled that ki answers an ATTACK. ⚠️ I fixed the ranks and left the surge contradicting them. Now the surge does what a surge should: MORE, not WORSE FOR YOU."
   }
  ],
  "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas.",

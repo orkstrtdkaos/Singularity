@@ -56,7 +56,7 @@ measuring across every craft that needs a pick.**
 
 ---
 
-## ⛔ THE EIGHT RULES THAT MAKE IT WORK
+## ⛔ THE NINE RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
 
@@ -193,6 +193,33 @@ audits it as a hole and fills it.
 
 ⚠️ **THE TELL: if I catch myself explaining why a people COULDN'T, I am reasoning about physics.** ⛔ **The
 question is what their craft would look like if they DID.**
+
+### 9. ⛔ A SURGE SAYS WHAT GOING ALL-OUT ACHIEVES. IT IS NOT A PUNISHMENT.
+
+**Added 2026-08-29. Erik: *"STOP THE NEGATIVE ASPECTS OF HEROIC SKILLS!! Stop!"***
+
+⚠️ **I reviewed all 35 crafts I have authored and the habit was consistent enough to be a rule.**
+
+⛔ **THE TEST — A SURGE MAY COST THREE THINGS AND NOTHING ELSE:**
+
+| ✅ legitimate | example |
+|---|---|
+| **ENERGY** | *"empty yourself into the stroke; you will be able to do nothing afterwards"* — the capstone rule |
+| **CONTROL** | *"the whole line moves; YOU WILL NOT BE ABLE TO PICK WHO STAYS"* · *"double the ground; you will not be able to cross it either"* |
+| **SCOPE that cuts both ways** | *"what you deny, you deny to everyone"* |
+
+| ⛔ NOT legitimate | what I wrote |
+|---|---|
+| **the craft harming its own user** | *"YOU WILL FEEL WHAT YOU DID TO THEM"* (psychic_lance) |
+| **a taint on the user** | *"some of what you bring back WILL NOT BE YOURS"* (mind_meld) |
+| **turning the craft against the player's allies** | *"it answers every touch, INCLUDING A HAND ON YOUR SHOULDER"* (ki_thorns) |
+
+⛔ **THE DISCRIMINATOR: does the surge describe the craft doing MORE, or the craft doing something TO THE
+PERSON WHO CAST IT?** ⚠️ **More is a surge. Backlash is a punishment, and this game does not price power in
+punishment.**
+
+**And it is the same error one level up from the cost rule** — ⛔ **`[cost]` bounds were narrative debts;
+these are narrative debts wearing a surge.** ✅ **Both answer to the same ruling: THE COST IS ENERGY.**
 
 ---
 

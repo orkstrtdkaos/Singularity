@@ -481,7 +481,7 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `crit` | 61 | `mechanic`×61 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
 | `wardTypes` | 48 | `mechanic`×48 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `marginFloorPer` | 45 | `mechanic`×45 | ✅ READ | `craftmechanics.js` |
-| `damageType` | 43 | `mechanic`×43 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
+| `damageType` | 42 | `mechanic`×42 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `soak` | 30 | `mechanic`×30 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `melee.js` |
 | `soakRank` | 29 | `mechanic`×29 | ✅ READ | `skill_battle.js`, `app.js` |
 | `sense` | 27 | `root`×27 | ✅ READ | `combatants.js`, `encounters.js`, `gambit.js` |
@@ -498,9 +498,9 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `area` | 14 | `mechanic`×14 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
 | `sectFlavour` | 12 | `root`×12 | ⛔ DARK | — |
 | `ongoingHarm` | 11 | `tree`×11 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
+| `damageMix` | 8 | `mechanic`×8 | ✅ READ | `damagetypes.js` |
 | `powerMix` | 8 | `root`×8 | ⛔ DARK | — |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |
-| `damageMix` | 7 | `mechanic`×7 | ✅ READ | `damagetypes.js` |
 | `namedCurrent` | 7 | `root`×7 | ⛔ DARK | — |
 | `evasion` | 7 | `mechanic`×7 | ✅ READ | `craftmechanics.js`, `skill_battle.js`, `app.js` |
 | `evasionRank` | 7 | `mechanic`×7 | ✅ READ | `skill_battle.js` |

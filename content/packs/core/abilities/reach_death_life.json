@@ -1418,7 +1418,7 @@
       "resist": "mental",
       "targets": 6
      },
-     "grants": "⛔ EVERYONE WHO CAN SEE YOU SEES IT. A line, a crowd, a watch-house — formations come apart, conversations stop mid-word, and every committed line in the place is dropped at once. ⚠️ THE CARRION BIRDS ARRIVE DURING THIS, and everyone notices them arrive. ⛔ AND THE MANTLE IS ON YOU, SO IT WORKS ON YOU: while it is worn you take on some of what you are showing them — COLD DOES NOT REACH YOU, and rot finds nothing to start on (`decay: resist`).",
+     "grants": "⛔ EVERYONE WHO CAN SEE YOU SEES IT. A line, a crowd, a watch-house — formations come apart, conversations stop mid-word, and every committed line in the place is dropped at once. ⚠️ THE CARRION BIRDS ARRIVE DURING THIS, and everyone notices them arrive.",
      "cannot": "⛔ A FRIGHTENED CROWD IS A STAMPEDE, and a stampede does not check who is in its way. Including you. ⚠️ You still do not choose how any of them act."
     },
     {
@@ -1442,7 +1442,7 @@
       "resist": "mental",
       "targets": 1
      },
-     "grants": "⛔ IT STOPS BEING A DISPLAY AND BECOMES KNOWLEDGE. One living thing knows its ending with your own professional clarity and cannot un-know it — ⚠️ AND HERE THE PEACEFUL ARE REACHED, because you are no longer showing them death. You are showing them dying badly, dying unattended, dying with the thing unfinished. YOU HAVE SEEN ALL THREE AND THEY CAN TELL. ⛔ What comes back is rarely aimed: the terrified turn on whoever is nearest, and nearest is often a friend. ⛔ AND YOU ARE MOSTLY WEARING IT NOW: `decay: ABSORB` — necrotic work MENDS you — and the strength in your hands is not yours and is not natural. ⚠️ You will notice you are not breathing as often as you should.",
+     "grants": "⛔ IT STOPS BEING A DISPLAY AND BECOMES KNOWLEDGE. One living thing knows its ending with your own professional clarity and cannot un-know it — ⚠️ AND HERE THE PEACEFUL ARE REACHED, because you are no longer showing them death. You are showing them dying badly, dying unattended, dying with the thing unfinished. YOU HAVE SEEN ALL THREE AND THEY CAN TELL. ⛔ What comes back is rarely aimed: the terrified turn on whoever is nearest, and nearest is often a friend.",
      "cannot": "⛔ YOU STILL DO NOT CHOOSE — not the reaction, and not who they turn on. ⚠️ Some of them will thank you. Some of them will never be right again. You will not be able to tell in advance which."
     }
    ],
@@ -1470,17 +1470,6 @@
     "crit": {
      "success": "The ending arrives early and arrives ACCURATE. It is not the fear of dying that stops them, it is the recognition — and recognition does not wear off when the moment does.",
      "failure": "You show a thing an ending it has already accepted. It looks back at you steadily, and now you are the one who has been read."
-    },
-    "wornBenefits": {
-     "2": {
-      "cold": "immune",
-      "decay": "resist"
-     },
-     "3": {
-      "cold": "immune",
-      "decay": "absorb",
-      "strengthBonus": 2
-     }
     }
    },
    "rankDeltas": [
@@ -1523,13 +1512,9 @@
     {
      "text": "⛔ THE MANTLE'S FORM IS A CHARACTER FACT, AUTHORED ONCE AND FIXED. It is the same every time, everyone who has seen it can name it, and it is how the Valley knows WHICH Ashwarden was there",
      "class": "hard"
-    },
-    {
-     "text": "⛔ WHAT YOU WEAR, YOU PARTLY BECOME. At r3 you absorb necrotic work and healing does not sit right — your own tradition's crafts invert on you while the mantle is up",
-     "class": "drawback"
     }
    ],
-   "plainly": "A fight/social action. r1 staggers one living thing and breaks whatever line it had committed to. r2 does it to everyone who can see you, AND the mantle starts working on YOU — immune to cold, resistant to decay. r3 makes the ending KNOWN, the terrified turn on whoever is nearest, and you gain unnatural strength and ABSORB necrotic work — with the catch that healing stops sitting right.",
+   "plainly": "A fight/social action. r1 staggers one living thing and breaks whatever line it had committed to. r2 does it to everyone who can see you — formations come apart and every committed line drops at once. r3 makes the ending KNOWN and cannot be un-known, and reaches even the peaceful. ⚠️ The terror is rarely aimed: the frightened turn on whoever is nearest.",
    "_nameWas": "The Dread",
    "_idWas": "the_dread",
    "_powerSystemWas": "reach_death_life",
@@ -1537,7 +1522,8 @@
    "_dreadMantle_20260823": "⛔ ERIK 2026-08-23. RENAMED to Dread Mantle with new colour — the mantle is worn, and it arrives as a TEMPERATURE not a thought. ⚠️ PROVOKE ADDED, closing Death's last missing verb WITHOUT INVENTING A CRAFT: 'most things run, some freeze, a few come straight at you' was always provoke and was never declared. ⛔ THE PEACE-WITH-DYING IMMUNITY IS DOWNGRADED TO RESISTANCE, per Erik: 'a good practitioner would have them understand that dying isn't the worst part — THAT they would fear.' So r1 is shrugged off by the peaceful and r3 reaches them, because an Ashwarden of all people knows what nobody has made peace with. ⚠️ r2/r3 had `imposes: null` while broadening to a room and deepening the effect — both now impose. TWO FALSE [cost] BOUNDS REMOVED (the stampede was already r2's cannot; 'never be right again' was already r3's). ⛔ `operativeAxis` carried `fear` and `variance`, neither among the nine.",
    "_colourCorrected_20260823": "⛔ ERIK 2026-08-23: 'wrong colour — Dread Mantle is necromancy at its intentionally outward-facing best/worst. It's not a grey wet blanket.' ⚠️ I HAD WRITTEN IT AS A SHROUD LAID ON THE VICTIM — subtle, a temperature, deniable. ⛔ THE MANTLE IS WHAT THE ASHWARDEN PUTS ON, and the craft is DELIBERATE PUBLIC DISPLAY: dead things orienting, carrion birds arriving, cut flowers finishing, a sickroom smell coming off someone standing perfectly still. ⚠️ IT PAIRS WITH `palework`, whose description says the trade is how an Ashwarden carries the craft IN DAYLIGHT — this is what happens when she stops carrying it. A new hard bound records the consequence: it is public and it is remembered.",
    "_mantleFormIsPersonal_20260823": "⛔ ERIK 2026-08-23, SECOND COLOUR PASS: 'fear made material — ghostly, otherworldly. A mantle that is DISTINCT PER WARDEN. For some it might be the grey wet blanket, but for many it's terrifying armour, or a cape.' ⚠️ MY FIRST TWO PASSES BOTH MISSED: pass one was a shroud laid on the victim, pass two was atmosphere and smells. ⛔ IT IS A MANIFESTATION WORN BY THE NECROMANCER AND ITS FORM IS THAT NECROMANCER'S SIGNATURE — authored once per character, fixed thereafter, and identifying. That makes it a PLAYER-FACING CUSTOMISATION HOOK rather than set dressing, and it gives the Valley a way to say WHICH Ashwarden walked through.",
-   "_operativeAxisRestored_20260824": "⛔ I CHANGED THIS AND SHOULD NOT HAVE. I linted `operativeAxis` against the NINE GAIN AXES; it is a DIFFERENT AND DELIBERATELY OPEN VOCABULARY. ⚠️ `craft_mechanics.operativeAxis.note` records that I corrected this once before — my own blazeborn pilot broke a closed list and the ruling was that NAMED axes are real, authored and shown to the player; `mechanical` is only the subset carrying a NUMBER. ⛔ RESTORED ['fear', 'targets', 'variance'] (I had written ['conditions', 'targets']). `variance` is IN the mechanical list and `dread` carries `variance: 4`, so removing it was a live regression, not a tidy-up."
+   "_operativeAxisRestored_20260824": "⛔ I CHANGED THIS AND SHOULD NOT HAVE. I linted `operativeAxis` against the NINE GAIN AXES; it is a DIFFERENT AND DELIBERATELY OPEN VOCABULARY. ⚠️ `craft_mechanics.operativeAxis.note` records that I corrected this once before — my own blazeborn pilot broke a closed list and the ruling was that NAMED axes are real, authored and shown to the player; `mechanical` is only the subset carrying a NUMBER. ⛔ RESTORED ['fear', 'targets', 'variance'] (I had written ['conditions', 'targets']). `variance` is IN the mechanical list and `dread` carries `variance: 4`, so removing it was a live regression, not a tidy-up.",
+   "_split_20260829": "⛔ ERIK 2026-08-29: 'seems like a lot stacked onto Dread Mantle, so maybe time to split it into another?' ⚠️ IT CARRIED FOUR MECHANICS: fear (`hinder`), line-breaking (`provoke`), a hold that cannot be un-known (`bind`), AND `wornBenefits` — cold immunity, decay absorb, unnatural strength. ⛔ THE LAST IS NOT A FEAR CRAFT AT ALL, and it showed: both were bolted to the END of r2 and r3 with 'AND the mantle is on you, so it works on you'. ✅ SPLIT OUT AS `worn_grey`. THIS CRAFT KEEPS WHAT THE MANTLE DOES TO OTHERS; that one keeps what it does to the WEARER, which is a different subject and a different shape (`bolster`, not `hobble`)."
   },
   {
    "schemaVersion": 1,
@@ -2336,7 +2322,7 @@
     {
      "rank": 1,
      "name": "Bark-Skin",
-     "grants": "Harden your own body: bark-skin that deflects a blow, thorns that make you costly to grapple. Immediate protection for yourself in the moment of contact.",
+     "grants": "Harden your own body: bark-skin that deflects a blow, thorns that make you awkward to hold. ⚠️ Immediate protection for yourself in the moment of contact — the thorns DISCOURAGE at this rank and do not yet cut.",
      "cannot": "Protects you only, and only for the encounter's length. Slow to invoke — this is before the blow, not after.",
      "functions": [
       "shield"
@@ -2348,33 +2334,36 @@
     {
      "rank": 2,
      "name": "Thorn-Ward",
-     "grants": "Ward a space with living growth: a thorn-wall, a living barricade, a grove-perimeter that turns intruders aside. The ward persists after you've moved on. Others can shelter inside it.",
+     "grants": "⛔ WARD A SPACE WITH LIVING GROWTH — a thorn-wall, a living barricade, a grove-perimeter that turns intruders aside, AND OPENS WHAT PUSHES THROUGH IT: 1d6 to anything that forces the wall. ⚠️ The ward persists after you have moved on, and it keeps biting.",
      "cannot": "A living ward can be broken. Fire is its particular enemy.",
      "functions": [
       "shield",
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none",
+     "harmRung": "damaging",
      "gainAxes": [
-      "duration",
-      "targets"
+      "scope",
+      "damage"
      ]
     },
     {
      "rank": 3,
      "name": "Grove's Resilience",
-     "grants": "Resist effects that would take hold in a lesser life: disease, poison, cold, a working aimed at you — because the life-force present in you is so strong it crowds them out. Extend this to those sheltered within your ward.",
-     "cannot": "Resilience is not immunity. Very strong effects still land; the Rootkin just takes longer to fall.",
+     "grants": "⛔ RESIST WHAT WOULD TAKE HOLD IN A LESSER LIFE — disease, poison, cold, a working aimed at you — because the life-force in you is too strong for it. ⚠️ AND THE BRIAR ANSWERS CONTACT: anything that closes with you is opened as it comes, 2d6, without you doing anything about it.",
+     "cannot": "⛔ IT IS GROWTH AND IT NEEDS SOMETHING TO GROW FROM — bare stone, deep water and the glass of the Radiant Wastes give it nothing. ⚠️ And the briar does not sort: whoever closes with you is opened, including whoever is helping.",
      "functions": [
       "shield",
       "ward",
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none",
+     "harmRung": "damaging",
      "_nameWas": "The Grove's Resilience",
-     "gainAxes": []
+     "gainAxes": [
+      "quality",
+      "targets"
+     ]
     }
    ],
    "functions": [
@@ -2388,7 +2377,7 @@
     "EXPLORE"
    ],
    "tradition": "rootkin",
-   "harmRung": "none",
+   "harmRung": "damaging",
    "nativeOrCombination": "native",
    "shape": "guard",
    "operativeAxis": [
@@ -2405,7 +2394,13 @@
     "wardTypes": [
      "physical",
      "living"
-    ]
+    ],
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "damageType": "physical",
+    "_thornsBite_20260829": "⛔ ERIK 2026-08-29: 'Bark and Briar should get DAMAGING THORNS as it ranks.' ⚠️ THE CRAFT ALREADY SAID 'thorns that make you COSTLY TO GRAPPLE' AND DEALT NOTHING — costly was a word with no number behind it. ⛔ NOW: r1 the thorns are protection only; r2 the thorn-wall CUTS what pushes through it; r3 anything that closes with you is opened. ⚠️ `physical` — bark and briar are edge and weight, and armour answers them exactly as armour. ⛔ DISTINCT FROM `ki_thorns`, WHICH ANSWERS A BLOW THAT LANDS WITH `force` AND PROTECTS NOTHING: this one protects first and bites second, which is the rootkin's whole difference — life that defends itself rather than energy turned outward."
    },
    "rankDeltas": [
     {
@@ -4782,6 +4777,133 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-24: 'REAPING SICKLE could be a MULTI-TARGET MELEE ATTACK that uses a CONJURED METAL SCYTHE.' ⚠️ DEATH'S ONLY CONJURED WEAPON AND ONLY WIDE MELEE — the tradition had strike, damage and hobble but nothing that swept. ⛔ `physical` type, so armour answers it plainly; the arc DOES NOT SORT, which follows Erik's Necrotic Strike ruling (indiscriminate is a property of the SWEEP, not of a craft aimed at allies). ⚠️ AND IT CANNOT BE DISARMED because it does not persist between swings, which is a defensive property nothing else has."
+  },
+  {
+   "id": "worn_grey",
+   "name": "Worn Grey",
+   "levelReq": 4,
+   "energyCost": 8,
+   "powerSystem": "metaphysical",
+   "attribute": "mental",
+   "tradition": "ashwarden",
+   "nativeOrCombination": "native",
+   "axes": {
+    "death_life": -0.7
+   },
+   "shape": "bolster",
+   "harmRung": "none",
+   "challengeTypes": [
+    "SURVIVE",
+    "FIGHT",
+    "DEFEND"
+   ],
+   "operativeAxis": [
+    "quality",
+    "duration"
+   ],
+   "effectTags": [
+    "undeath",
+    "worn",
+    "affinity"
+   ],
+   "functions": [
+    "resist",
+    "sustain",
+    "empower"
+   ],
+   "description": "⛔ WEAR IT INWARD. Where Dread Mantle shows the ending to everyone in front of you, this one puts it ON — and what you wear, you partly become. ⚠️ COLD STOPS REACHING YOU. Rot finds nothing to start on. The strength in your hands is not yours and is not natural. ⛔ AND YOUR OWN TRADITION'S CRAFTS BEGIN TO ANSWER YOU THE WAY THEY ANSWER THE RAISED.",
+   "narrationHints": "She stops shivering before anyone else does, and does not notice that she has stopped. ⚠️ Later someone offers her a mending and she flinches from it before she can think about why.",
+   "notFor": "⛔ IT IS NOT A DISGUISE AND NOT A RAISING — you are alive, you stay alive, and Deathsense reads you as living-but-wrong rather than as dead. ⚠️ IT DOES NOT FRIGHTEN ANYONE: that is Dread Mantle, and this craft is silent. ⛔ AND IT CANNOT BE WORN SELECTIVELY — the affinities arrive together or not at all.",
+   "plainly": "A survive/fight action. Take on undead affinities while it holds: immune to cold, and decay resists you at r1, ABSORBS into you at r2 — necrotic work mends you. r3 adds unnatural strength. ⛔ THE CATCH IS §48.5: while it is worn, HEALING WORKS ON YOU THE WAY IT WORKS ON THE UNDEAD, and Grey Hand bolsters you instead of weakening you.",
+   "intensity": {
+    "conserve": "a thin wearing — cold only, and it passes quickly",
+    "surge": "wear all of it; ⛔ YOU WILL NOT BE ABLE TO TAKE A MENDING UNTIL IT LIFTS"
+   },
+   "bounds": [
+    {
+     "text": "⛔ THE AFFINITIES ARRIVE TOGETHER — you cannot take the cold-immunity and refuse the rest",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ WHILE IT IS WORN, YOUR OWN TRADITION'S INVERSIONS APPLY TO YOU: healing harms, Grey Hand bolsters, decay mends",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT FRIGHTENS NOBODY AND CONCEALS NOTHING — Deathsense reads you as living-but-wrong",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "duration": 6,
+    "targets": 1,
+    "wornBenefits": {
+     "1": {
+      "cold": "immune",
+      "decay": "resist"
+     },
+     "2": {
+      "cold": "immune",
+      "decay": "absorb"
+     },
+     "3": {
+      "cold": "immune",
+      "decay": "absorb",
+      "strengthBonus": 2
+     }
+    },
+    "crit": {
+     "success": "It settles further in than you meant and stays past the working.",
+     "failure": "You take on the wrong half — the flinch from mending, and none of the cold."
+    },
+    "note": "bolster. ⛔ SPLIT FROM `dread` 2026-08-29 on Erik's ruling. `wornBenefits` moved here entire and the ladder starts one rank EARLIER, because this craft is now the whole subject rather than a rider on someone else's r2. ⚠️ AND IT MAKES §48.5's INVERSIONS PLAYER-FACING FOR THE FIRST TIME: a warden wearing this is answered by healing the way an undead is, which is a real cost expressed as an AFFINITY and not as a narrative debt."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Cold Enough",
+     "functions": [
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ COLD STOPS REACHING YOU AND ROT FINDS NOTHING TO START ON — `cold: immune`, `decay: resist`. ⚠️ You will notice you have stopped shivering before you notice why.",
+     "cannot": "It holds about six hours and takes real attention to put on. ⚠️ It frightens nobody. ⛔ And healing already sits wrong on you."
+    },
+    {
+     "rank": 2,
+     "name": "Rot Mends",
+     "functions": [
+      "resist",
+      "sustain"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality"
+     ],
+     "grants": "⛔ `decay: ABSORB` — NECROTIC WORK MENDS YOU. A grave-caller's strike closes your wounds, and your own tradition's crafts answer you the way they answer the raised.",
+     "cannot": "⛔ AND THE INVERSION IS COMPLETE: A MENDING HARMS YOU. Grey Hand bolsters you. ⚠️ You cannot take a field-dressing from a friend without it costing you."
+    },
+    {
+     "rank": 3,
+     "name": "Not Breathing Often",
+     "functions": [
+      "resist",
+      "sustain",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "duration"
+     ],
+     "grants": "⛔ THE STRENGTH IN YOUR HANDS IS NOT YOURS AND IS NOT NATURAL, and it holds far longer. ⚠️ You will notice you are not breathing as often as you should.",
+     "cannot": "⚠️ You are alive and stay alive — this is not a raising and cannot be made one. ⛔ And nothing about it is hidden from anyone who can read the dead."
+    }
+   ],
+   "_authored": "⛔ SPLIT FROM `dread` ON ERIK'S RULING 2026-08-29. The wearer-effects were bolted onto the ends of Dread Mantle's r2 and r3 with 'AND the mantle is on you, so it works on you' — ⚠️ a different subject, a different shape, and a rider on someone else's ranks. ✅ NOW ITS OWN CRAFT, with the ladder starting a rank earlier."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

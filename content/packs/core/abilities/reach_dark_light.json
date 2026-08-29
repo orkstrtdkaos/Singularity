@@ -1593,7 +1593,7 @@
    "id": "shadowed_mending",
    "name": "Shadowed Mending",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -1607,16 +1607,16 @@
    "harmRung": "none",
    "narrationHints": "The dark holds still, and what cannot be seen can still be mended.",
    "description": "Tend wounds in darkness with an umbral's sure-handedness — the dark is a healing environment, not an obstacle.",
-   "notFor": [],
+   "notFor": "⛔ IT NEEDS THE DARK. In full light this craft does nothing at all — an umbral surgeon works by touch and certainty, and a lamp held helpfully over the patient takes both away. ⚠️ IT MENDS; IT DOES NOT PURIFY: rot, poison and a working already taken hold are outside it. ⛔ And it is slow — this is tending, not a battlefield closing.",
    "tradition": "umbral",
    "functions": [
     "heal",
     "mend"
    ],
    "challengeTypes": [
-    "medical",
-    "survival",
-    "hardship"
+    "SURVIVE",
+    "DEFEND",
+    "EXPLORE"
    ],
    "tree": [
     {
@@ -1712,13 +1712,14 @@
    "_nameWas": "The Shadowed Mending",
    "_idWas": "the_shadowed_mending",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT AGAIN — empty `notFor`, off-vocabulary challengeTypes ['medical', 'survival', 'hardship'], energy e2 below band, ALL THREE TOGETHER. ⛔ Fifth tradition where the same three appear on the same crafts; it identifies a BATCH, not a sloppy author."
   },
   {
    "id": "shadow_work",
    "name": "Shadow Work",
    "levelReq": 3,
-   "energyCost": 2,
+   "energyCost": 5,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -1732,7 +1733,7 @@
    "harmRung": "none",
    "narrationHints": "She had her hands in the dark the way a potter has hands in clay.",
    "description": "Shape shadow into functional form — darkness as a material that can be worked.",
-   "notFor": [],
+   "notFor": "⛔ SHADOW IS A MATERIAL AND IT IS NOT A STRONG ONE — a worked shadow holds a shape, holds a weight for a while, and will not hold an edge. ⚠️ NOTHING MADE THIS WAY SURVIVES FULL LIGHT: it is not destroyed, it is simply not there while the light is. ⛔ And it must be worked from shadow that already exists — you cannot make the dark you need out of nothing.",
    "tradition": "umbral",
    "functions": [
     "conceal",
@@ -1740,9 +1741,9 @@
     "transform"
    ],
    "challengeTypes": [
-    "craft",
-    "stealth",
-    "magical"
+    "CREATE",
+    "STEALTH",
+    "PUZZLE"
    ],
    "tree": [
     {
@@ -1838,13 +1839,14 @@
    "_nameWas": "The Shadow Work",
    "_idWas": "the_shadow_work",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT AGAIN — empty `notFor`, off-vocabulary challengeTypes ['craft', 'stealth', 'magical'], energy e2 below band, ALL THREE TOGETHER. ⛔ Fifth tradition where the same three appear on the same crafts; it identifies a BATCH, not a sloppy author."
   },
   {
    "id": "long_dark",
    "name": "Long Dark",
    "levelReq": 1,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -1858,16 +1860,16 @@
    "harmRung": "none",
    "narrationHints": "She had no lamp and felt no need of one. The dark was enough.",
    "description": "Endure in total lightlessness — the deep dark sustains the umbral where it breaks others.",
-   "notFor": [],
+   "notFor": "⛔ IT SUSTAINS YOU IN LIGHTLESSNESS AND NOWHERE ELSE — the craft that makes an umbral untroubled a mile down does nothing on an open road at noon. ⚠️ IT REDUCES NEED; IT DOES NOT REMOVE IT. You eat less, sleep less and feel the cold less, and you still eat, sleep and freeze eventually. ⛔ Nor does it grant sight: that is Darksight, and an umbral without it is as blind as anyone.",
    "tradition": "umbral",
    "functions": [
     "resist",
     "sustain"
    ],
    "challengeTypes": [
-    "endurance",
-    "survival",
-    "hardship"
+    "SURVIVE",
+    "TRAVEL",
+    "EXPLORE"
    ],
    "tree": [
     {
@@ -1961,7 +1963,8 @@
    "_idWas": "the_long_dark",
    "_wardTypes": "⛔ SNG-512. The deep dark sustains rather than harms.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT AGAIN — empty `notFor`, off-vocabulary challengeTypes ['endurance', 'survival', 'hardship'], energy e1 below band, ALL THREE TOGETHER. ⛔ Fifth tradition where the same three appear on the same crafts; it identifies a BATCH, not a sloppy author."
   },
   {
    "id": "cleansing_light",
@@ -3210,7 +3213,7 @@
    ],
    "tradition": "umbral",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "conceal",
    "operativeAxis": [
     "scope",
@@ -3244,7 +3247,8 @@
    "_nameWas": "The Carried Dark",
    "_idWas": "the_carried_dark",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260829": "⚠️ ability rung `incapacitating` -> `none`: a craft that draws dark around you and lets you cross a lit room — it conceals, it stops nobody, at any rank."
   },
   {
    "id": "felt_room",
@@ -3334,7 +3338,7 @@
    ],
    "tradition": "umbral",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "reveal",
    "operativeAxis": [
     "scope",
@@ -3375,7 +3379,8 @@
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ DARK'S SENSE — knows a lightless space and what lives in it\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260829": "⚠️ ability rung `incapacitating` -> `none`: a craft that knows a lightless space entire — it is a READING and puts nobody down, at any rank."
   },
   {
    "id": "kept_fire",
@@ -3939,6 +3944,130 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-29. ⚠️ MEASURED: the tradition had NO communication craft at all — `kindle` r1 says 'signal' and nothing does it. ⛔ AND THE GEOGRAPHY DEMANDS IT: the Radiant Wastes are 'a glass plain, flat, glaring' with no landmarks, and `origins.blazeborn` says 'THE BLAZE IS EXPANDING — you walked out ahead of it.' A people fleeing a moving frontier across featureless ground need beacons more than they need another beam."
+  },
+  {
+   "id": "the_kept_dark",
+   "name": "The Kept Dark",
+   "levelReq": 3,
+   "energyCost": 7,
+   "powerSystem": "precursor",
+   "attribute": "mental",
+   "tradition": "umbral",
+   "nativeOrCombination": "native",
+   "axes": {
+    "dark_light": -0.7
+   },
+   "shape": "guard",
+   "harmRung": "none",
+   "challengeTypes": [
+    "DEFEND",
+    "SURVIVE",
+    "SOCIAL"
+   ],
+   "operativeAxis": [
+    "scope",
+    "persistence",
+    "targets"
+   ],
+   "effectTags": [
+    "sanctuary",
+    "refuge",
+    "threshold"
+   ],
+   "functions": [
+    "ward",
+    "bind",
+    "sustain"
+   ],
+   "description": "⛔ HOLD A DARK AGAINST SOMEONE WHO HAS ALREADY FOUND IT. Umbracraft hides; this KEEPS. Set a threshold on a deep place and name what may not cross it, and the dark stops being a place people fail to find and becomes a place they cannot enter. ⚠️ THIS IS THE CRAFT THE UNDERLIGHT IS BUILT ON: 'the Underlight harbors what the light would destroy' — and harbouring is not hiding, it is REFUSING TO GIVE SOMEONE UP.",
+   "narrationHints": "The searchers reach the stair and stop at the top of it. ⚠️ Nothing bars them. The dark below simply does not admit them, and they can see perfectly well that it is only a stair.",
+   "notFor": "⛔ IT KEEPS A PLACE, NOT A PERSON — walk out of the kept dark and you are as findable as anyone. ⚠️ AND IT REFUSES BY NAME OR BY KIND, declared when the threshold is set: 'the Blaze's people', 'anyone carrying a lit flame', 'the man who was here yesterday'. Something you did not name walks in. ⛔ Nor does it conceal — a kept dark is FOUND easily and entered with difficulty, which is the opposite of everything else this tradition does.",
+   "plainly": "A defend/survive action. Set a threshold on a dark place and name what cannot cross it — by name or by kind. Rated 5 of 10, holds about twelve hours, and shelters up to six. ⛔ r2 holds without you present; r3 holds for a season and admits whoever you have named as WELCOME even if they arrive alone and unannounced. ⚠️ It does not hide the place and does not protect anyone outside it.",
+   "intensity": {
+    "conserve": "one doorway, one night",
+    "surge": "keep the whole deep; ⛔ NOTHING YOU NAMED COMES IN, AND THE DARK HOLDS EVEN WHERE YOU HAVE NEVER STOOD"
+   },
+   "bounds": [
+    {
+     "text": "⛔ A PLACE, NOT A PERSON — it keeps ground, and whoever leaves the ground leaves the keeping",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ REFUSED BY NAME OR KIND, DECLARED AT SETTING — what you did not name walks in",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT DOES NOT CONCEAL. A kept dark is easy to find and hard to enter — the reverse of every other umbral craft",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT NEEDS REAL DARKNESS TO HOLD. A lit place cannot be kept this way",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 12,
+    "targets": 6,
+    "scope": 3,
+    "wardTypes": [
+     "shadow",
+     "radiance"
+    ],
+    "crit": {
+     "success": "The keeping settles deeper than you set it and the place holds a memory of being refused.",
+     "failure": "You name the kind too broadly and shut out someone you meant to shelter."
+    },
+    "note": "guard/ward. ⛔ THE GAP THE PEOPLE HAD: 15 umbral crafts and NOT ONE KEEPS ANYONE. The tradition could HIDE a person (`harbor`, `shroud`, `carried_dark`) and could not HOLD a refuge against someone who had found it — no `ward` on a threshold, no `bind`, nothing that refuses entry. ⚠️ AND THE CANON SAYS THIS IS WHAT THEY ARE: 'the Underlight HARBORS WHAT THE LIGHT WOULD DESTROY, including things that should perhaps be destroyed. Neither pole is innocent.' ⛔ `wardTypes: [shadow, radiance]` — it answers the Blaze specifically, which is the fiction: a kept dark is a refusal aimed at the light."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Set Threshold",
+     "functions": [
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ NAME WHAT MAY NOT CROSS AND SET IT ON A DARK DOORWAY. They can see the stair, reach the stair, and not go down it. ⚠️ Shelters those already inside for as long as it holds.",
+     "cannot": "You must be present and it holds about twelve hours. ⚠️ Name a kind too narrowly and the wrong cousin walks in; too broadly and you have shut out a friend."
+    },
+    {
+     "rank": 2,
+     "name": "Kept Without You",
+     "functions": [
+      "ward",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ],
+     "grants": "⛔ THE KEEPING NO LONGER NEEDS YOU STANDING IN IT — set the threshold and go. ⚠️ A whole deep can be kept: chambers, stairs, the ways between, all refusing the same named thing.",
+     "cannot": "⚠️ It holds what you set and cannot be changed at a distance. ⛔ Whoever you sheltered is sheltered there and nowhere else."
+    },
+    {
+     "rank": 3,
+     "name": "The Underlight",
+     "functions": [
+      "ward",
+      "bind",
+      "sustain"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "conditions"
+     ],
+     "grants": "⛔ A KEEPING THAT HOLDS FOR A SEASON — and it knows who is WELCOME as surely as who is refused. Someone you named arrives alone, unannounced, in the dark, and the way opens for them. ⚠️ THIS IS HOW A PEOPLE HARBOURS ANOTHER: not by hiding them, but by having somewhere that will let them in and will not let the others follow.",
+     "cannot": "⛔ IT IS STILL A PLACE. It cannot travel with a refugee, cannot be moved once set, and cannot keep out someone you never thought to name."
+    }
+   ],
+   "_authored": "⛔ AUTHORED 2026-08-29 from the coverage gap and the canon. ⚠️ MEASURED: 15 umbral crafts, `conceal` on ELEVEN of them — the most concentrated tradition audited — and NOTHING that keeps a person once found. ⛔ AND THE REACH'S OWN CRISIS LINE NAMES THE PEOPLE: 'the Underlight HARBORS WHAT THE LIGHT WOULD DESTROY, including things that should perhaps be destroyed. NEITHER POLE IS INNOCENT.' ⚠️ Harbouring is not hiding. Under rule 8 the absent `ward` and `bind` were gaps until argued, and the argument went the other way: this is the tradition's whole purpose and it had no craft for it."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

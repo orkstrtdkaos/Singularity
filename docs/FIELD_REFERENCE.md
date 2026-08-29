@@ -82,6 +82,36 @@ vocabularies, and only two are read.**
 the mechanic in another; the two have never met.** ⚠️ **Neither side is broken. They are two ships
 passing, and the 73%-miss-rate I first reported was an artefact of comparing one to the other's list.**
 
+### ⛔ AND IT IS ONE LEVEL UP: THE WHOLE `rankDeltas` BLOCK IS DISCONNECTED, NOT JUST ITS `axis`
+
+**Aevi found this and it is the larger half.** ⚠️ **The engine and the corpus disagree about `rankDeltas`'
+LOCATION *and* its SHAPE:**
+
+```
+ENGINE WANTS    craftmechanics.js:132 — authored?.rankDeltas?.[String(rank)]
+                where `authored = ability.mechanic`
+                i.e.  mechanic: { rankDeltas: { "2": {kind, mult}, "3": {...} } }   <- rank-KEYED, NUMERIC
+
+CONTENT WRITES  rankDeltas: [ {rank:2, kind:"extend", axis:"timeReach+travelSpeed",
+                               delta:"trails DAYS old...", from:"r2 grants"} ]      <- ROOT, a LIST, PROSE
+```
+
+| | |
+|---|---|
+| crafts authoring `rankDeltas` at the **root, as a list** | **284** |
+| crafts authoring **`mechanic.rankDeltas`** | ⛔ **0** |
+| authored rank deltas in total | **495** |
+| ⛔ **read by the engine** | ⛔ **ZERO** |
+
+⛔ **SO EVERY CRAFT FALLS THROUGH TO `cfg.rankDeltas.default` AND SCALES BY THE SAME `mult^steps`.**
+⚠️ **Which is precisely the complaint quoted in that function's own comment — Erik: *"I can't tell how
+ranks differ."*** **The fix written for that complaint is itself unreachable.**
+
+⚠️ **THIS IS THE LARGEST DISCONNECTED SYSTEM FOUND SO FAR** — larger than the 12 dark rules files, because
+it is not merely unread content, it is **the mechanism by which ranks were supposed to differ at all.**
+✅ **The fix is well-defined: one adapter reading the authored list and keying it by rank.** ⛔ **But it
+changes how every ranked craft resolves, so it is a RULING before it is a build.**
+
 ---
 
 ## 3 · ⛔ RANK LADDERS — TWO AUTHORING SHAPES, AND A HARDCODED FIELD LIST FINDS NEITHER

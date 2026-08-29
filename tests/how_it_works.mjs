@@ -455,10 +455,15 @@ console.log("\n── FR · the field reference — measured claims stay measure
   // ⛔ THE ATLAS TABLE IS GENERATED — assert it is FRESH, not merely present. A stale generated table is a
   // stored copy of a derived value, which is the exact failure the reference is written to prevent.
   const { execFileSync } = await import("node:child_process");
-  const live = execFileSync(process.execPath, [join(root, "scripts/field_atlas.mjs"), "--md"], { encoding: "utf8" }).trim();
-  const embedded = fr.slice(fr.indexOf("<!-- ATLAS:BEGIN -->") + 20, fr.indexOf("<!-- ATLAS:END -->")).trim();
+  // ⛔ NORMALISE LINE ENDINGS BEFORE COMPARING. The generator emits LF; git re-materialises the doc with
+  // CRLF on checkout, so a byte comparison reported the table STALE when it was character-identical — and
+  // it fired on this hook's very first push. ⚠️ A CRLF-vs-LF diff is the trap this repo produces most
+  // often, and I put it in the gate meant to catch staleness.
+  const norm = (s) => s.replace(/\r\n/g, "\n").trim();
+  const live = execFileSync(process.execPath, [join(root, "scripts/field_atlas.mjs"), "--md"], { encoding: "utf8" });
+  const embedded = fr.slice(fr.indexOf("<!-- ATLAS:BEGIN -->") + 20, fr.indexOf("<!-- ATLAS:END -->"));
   check("FR: ⛔ the embedded atlas is FRESH — regenerating produces the same table",
-    embedded === live, "run: node scripts/atlas_inject.mjs");
+    norm(embedded) === norm(live), "run: node scripts/atlas_inject.mjs");
 
   // ⚠️ AND THE BUCKET COUNTS IN THE PROSE MUST MATCH THE TABLE, since a reader trusts the summary.
   // ⚠️ COUNT BY CELL, NOT BY REGEX ACROSS AN EMOJI. My first form matched `| ✅ READ |` with a two-dot
@@ -486,6 +491,21 @@ console.log("\n── FR · the field reference — measured claims stay measure
   check("FR: ⛔ `mechanic.axis` is still authored ZERO times — a reader with no writer",
     mAxis === 0, `live ${mAxis} — if this is now non-zero the allow-list branch has woken up, UPDATE §2`);
   check("FR: `operativeAxis` is still authored on every craft", opAxis === abilities.length, `${opAxis}/${abilities.length}`);
+
+  // ⛔ THE LARGEST DISCONNECTED SYSTEM FOUND SO FAR (Aevi, 2026-08-28). The engine reads
+  // `mechanic.rankDeltas` KEYED BY RANK; 284 crafts author `rankDeltas` at the ROOT as a LIST. Zero match,
+  // so every craft falls through to one default multiplier - which IS the complaint the feature was
+  // written to fix. ⚠️ Pinned so that connecting it is a deliberate act that updates the reference.
+  let rdRoot = 0, rdMech = 0, rdTotal = 0;
+  for (const a2 of abilities) {
+    if (Array.isArray(a2.rankDeltas)) { rdRoot++; rdTotal += a2.rankDeltas.length; }
+    if (a2.mechanic?.rankDeltas != null) rdMech++;
+  }
+  check("FR: ⛔ `rankDeltas` is still authored at the ROOT and read at `mechanic` - still ZERO match",
+    rdRoot > 200 && rdMech === 0,
+    `root ${rdRoot} - mechanic ${rdMech} - if mechanic is now non-zero the adapter shipped, UPDATE §2`);
+  check("FR: the reference records the rankDeltas disconnection with its counts",
+    new RegExp(`${rdRoot}`).test(fr) && new RegExp(`${rdTotal}`).test(fr), `${rdRoot} crafts, ${rdTotal} deltas`);
 
   // ⚠️ THE FIVE RANK LADDERS ARE THE ENTIRE EMPIRICAL BASIS FOR THE PROPOSED CURVE. If a sixth appears,
   // the curve should be re-fitted before it ships, and §3 must say so.

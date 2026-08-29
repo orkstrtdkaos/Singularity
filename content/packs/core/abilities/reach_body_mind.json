@@ -793,7 +793,7 @@
    ],
    "narrationHints": "Train the body past what the body thinks it can be. A new configuration, held.",
    "description": "Condition the body until it stops taking harm the way bodies do — soaking blows, shrugging off cold and venom, and finally giving crafts poor purchase.",
-   "notFor": [],
+   "notFor": "⛔ IT IS CONDITIONING, NOT ARMOUR — it does not stack with worn plate; the better of the two answers. ⚠️ AND IT ANSWERS WHAT A BODY MEETS: blows, venom, rot. It does nothing against `force`, against anything `intrinsic` — a fear, a grief, a judgement reaches you exactly as it reaches anyone — and nothing against a working aimed at the ground you stand on rather than at you. ⛔ Nor is it rest: a conditioned body still tires.",
    "tradition": "somatic",
    "harmRung": "none",
    "functions": [
@@ -874,13 +874,14 @@
     "note": "T-III. duration ~a month: these are TRAINED changes that persist",
     "wardTypes": [
      "physical",
-     "living",
+     "corrosive",
      "decay"
     ],
     "crit": {
      "success": "The blow lands and finds nothing that gives.",
      "failure": "You have conditioned against the wrong thing."
-    }
+    },
+    "_wardNote": "⛔ REVISED 2026-08-29 under the four-family model. WAS `physical, living, decay`. ⚠️ `living` IS GROWTH TURNED AGAINST — root, bloom, choking green — AND THAT IS NOT WHAT THIS CRAFT SHRUGS OFF. Its own text says 'natural substances' and 'cold and venom': venom is `corrosive` (elemental). ⛔ SO THE WARD NOW ANSWERS ONE IDEA — what a conditioned body genuinely resists: blows (`physical`), venoms and acids (`corrosive`), and rot (`decay`). ⚠️ COLD IS DELIBERATELY NOT IN THE LIST: the craft says 'shrugging off cold' in prose, but a conditioned body enduring cold is ENDURANCE, not immunity, and adding it would make this the ward that answers everything — which the which-check already refused once on `death_ward`."
    },
    "rankDeltas": [
     {
@@ -936,7 +937,8 @@
    "_rebuilt": "⛔ SNG-485. Erik: 'perhaps something that BUILDS RESISTANCES — to SOAK DAMAGE at r1. Bigger soak plus RESISTANCE TO NATURAL SUBSTANCES at r2, IMMUNITIES to natural substances and RESISTANCE TO CRAFTS at r3.' ⚠️ The old ranks were permanent training with no scene effect and no roll — a Q1 failure.",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki.",
-   "_wardTypes": "⛔ SNG-512. ⛔ Conditioning answers blows, natural substances, and rot. ⚠️ NOT abstraction, not precursor — a hardened body is still a body.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ Conditioning answers blows, natural substances, and rot. ⚠️ NOT abstraction, not precursor — a hardened body is still a body.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_reviewed_20260829": "⚠️ It WARDS rather than deals, so it has no damageType and correctly should not. ⛔ Its `notFor` was an EMPTY LIST on a craft that grants standing soak, immunity to natural substances, and resistance to crafts worked on the body — the most defensively powerful thing in the tradition."
   },
   {
    "schemaVersion": 1,
@@ -1029,14 +1031,15 @@
     "duration": 4,
     "note": "T-IV guard — TYPED like the_true_ground: it soaks FEAR, DECEPTION and DISRUPTION at rank 3, and grants NOTHING against physical harm ('it grants no offense, only the unshakeable read').",
     "wardTypes": [
+     "psychic",
      "feeling",
-     "deception",
-     "abstraction"
+     "deception"
     ],
     "crit": {
      "success": "Nothing lands at all — and you read every attempt as it fails.",
      "failure": "You hold against a true thing. It waits."
-    }
+    },
+    "_wardNote": "⛔ `psychic` ADDED 2026-08-29 — Mind's own crafts (`psychic_lance`, `sustained_regard`) now carry it and NOTHING IN THE CORPUS ANSWERED IT; the which-check caught that within seconds of the typing, as it did for grief, vitality and cold. ⚠️ THIS IS THE RIGHT ANSWER RATHER THAN A CONVENIENT ONE: the craft's own text is 'a stillness nothing can move — FEAR, PAIN, DECEPTION and the fastest attack all slide off it', and a psychic lance is exactly a thing that moves a mind. ⛔ `abstraction` DROPPED: it is the mental pole of the concrete/abstract axis — pattern and idea as harm — and a stillness does not answer a THEOREM aimed at you. ⚠️ The three it keeps are ONE IDEA: harm that needs your mind to be reachable. `death_ward` was narrowed on the same principle, and 'a ward that answers everything has no character' is the rule."
    },
    "rankDeltas": [
     {
@@ -1171,7 +1174,17 @@
       "chance": 4
      },
      "failure": "You commit everything to a place they are no longer standing."
-    }
+    },
+    "damageMix": [
+     {
+      "type": "physical",
+      "share": 0.6
+     },
+     {
+      "type": "psychic",
+      "share": 0.4
+     }
+    ]
    },
    "rankDeltas": [
     {
@@ -1202,7 +1215,8 @@
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads every thread of threat in a contest at once\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_body_mind",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ THE CAPSTONE OF THE SAME IDEA, at 5d6 — 'read every thread of threat at once… the unarmoured seam, the worst possible instant'. ⚠️ MORE `psychic` THAN `deduced_strike` because the reading is doing more of the work at r3, and the craft is one stroke at enormous cost of focus."
   },
   {
    "id": "answered_motion",
@@ -1307,7 +1321,8 @@
     "crit": {
      "success": "Their own commitment finishes them — a joint past its travel, and they will not close that hand today.",
      "failure": "You meet a movement that was a feint and give them your weight."
-    }
+    },
+    "damageType": "physical"
    },
    "intensity": {
     "conserve": "turn the joint and let go",
@@ -1353,7 +1368,8 @@
    },
    "_diceFix": "⛔ SNG-481: shape `strike` rolls dice per CCode's shape→reader map, and this craft carried magnitude only.",
    "_powerSystemWas": "reach_body_mind",
-   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki."
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki.",
+   "_typed_20260829": "⛔ `physical` — 'an elbow past its travel, a knee folded inward'. Edge, weight and impact delivered by a body, and armour answers it exactly as armour. ⚠️ NOT `force` (nothing travels past the skin) and NOT `vital` (nothing is drained or rotted). ⛔ Rung stays `incapacitating` and is correct: the craft's whole subject is a joint that stops working, and its `notFor` says a spear is a real answer to it."
   },
   {
    "id": "sustained_regard",
@@ -1458,7 +1474,8 @@
     "plus": 0,
     "range": 8,
     "targets": 1,
-    "marginFloorPer": 0.02
+    "marginFloorPer": 0.02,
+    "damageType": "psychic"
    },
    "intensity": {
     "conserve": "a moment's regard — a stumble, a greying",
@@ -1493,7 +1510,8 @@
    "_nameWas": "The Sustained Regard",
    "_idWas": "the_sustained_regard",
    "_powerSystemWas": "reach_body_mind",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `psychic`, INTRINSIC — attention itself as harm. ⚠️ 'Balance, breath, grip AND THE CLOTTING OF A WOUND all get worse' — the body fails because the mind is being held, which is intrinsic harm with physical symptoms, NOT physical harm. ⛔ The distinction matters at the ward: armour does nothing here."
   },
   {
    "id": "body_read",

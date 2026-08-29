@@ -5,6 +5,8 @@ engine — BUILT claims must hold, PROPOSED claims must still be unbuilt, and kn
 ⚠️ **A gap that closes turns its check RED, so a fixed gap forces this file to be edited. The doc cannot
 silently rot.**
 
+⛔ **THE DOCUMENT SET.** [`PIPELINE.md`](PIPELINE.md) is how work moves from a concept into the game and who owns each stage. [`PLAYERS_GUIDE.md`](PLAYERS_GUIDE.md) is the same game told to a PLAYER — nouns and verbs, no field names, and gated so it cannot quietly stop being true. `SYSTEM_SPEC.md` is why the design is this way.
+
 ⛔ **COMPANION: [`FIELD_REFERENCE.md`](FIELD_REFERENCE.md)** — this file says what the game DOES; that one
 says **what each field IS, who reads it, and what happens when it is absent.** ⚠️ **107 authored fields,
 measured: 84 read, 19 dark, 3 CI-only, 1 name-collision.** It carries the axis-family untangling, the two
@@ -70,6 +72,8 @@ working papers; **this is the answer.**
 | 08-28 | ✅ **folded allies take losses (CCODE-298)** | Erik: yes. A folded party was PURE UPSIDE — it hurt the foe and could not be hurt | `scripts/folded_casualties_report.mjs` · non-combatants verified exposed | ⛔ `distributeCasualties` + `downEntity` both had NO caller; ⚠️ nobody actually goes down yet — the pool is party-sized, not threat-sized |
 | 08-28 | ✅ **`persuade` resolves as SETUP (CCODE-299)** | Erik ruled A+C: it makes the NEXT social action land better; agreement is table business | `content_ci` SNG-263 §1 now reports **zero** unmechanised verbs | ⚠️ `names_of_power` is `hobble` and excluded pending Aevi's ruling · **smoke 1 → 0** |
 | 08-28 | ⚠️ I built the casualty receipt in the wrong ORDER | the spread read `foldedLosses` 82 lines before the branch set it — computed and thrown away every round | caught by the probe, not by a gate | ⛔ "computed and never spent", 30 minutes after fixing the identical thing for soak |
+| 08-29 | ✅ **`docs/PIPELINE.md`** | Erik: bring the development pipeline together intentionally — eight stages, owners, and what each produces | it names the two places the pipeline actually breaks, both measured | ⛔ the four rules: a script per number · a review MEASURES · a before/after where play moves · docs gate done |
+| 08-29 | ✅ **`docs/PLAYERS_GUIDE.md` Parts I–IX** | Erik: a guide walking a player start to finish — *"the nouns and verbs transformed into game mechanics kind"* | `how_it_works.mjs` PG × 18 — counts, cost ladder, families, death ladder, the minHit dial | ⚠️ Parts X–XII are Aevi's and are gated to stay MARKED rather than go quietly thin |
 
 **Last verified: 2026-08-28 · v1.9.255 · 378 crafts.**
 

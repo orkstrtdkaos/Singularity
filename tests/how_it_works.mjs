@@ -601,6 +601,63 @@ console.log("\n── FR · the field reference — measured claims stay measure
     /DEFECT TAXONOMY/i.test(fr) && /COUNTERMEASURES/i.test(fr));
 }
 
+/* ══════════ PG — docs/PLAYERS_GUIDE.md, ALSO EXECUTED ══════════ */
+console.log("");
+console.log("── PG · the player's guide — the nouns-and-verbs manual ──");
+{
+  // ⛔ ERIK, 2026-08-29: a guide that "walks a user through their Experience of the game from start to
+  // finish". ⚠️ IT IS GATED LIKE THE OTHER TWO, and for the same reason: a manual that quietly stops
+  // matching the game is worse than none, because a player believes it.
+  const pg = rd("docs/PLAYERS_GUIDE.md");
+  check("PG: the guide exists and is substantial", pg.length > 8000, `${pg.length} chars`);
+  check("PG: it carries the live version", new RegExp(rd("app.js").match(/APP_VERSION = "([\d.]+)"/)[1].replace(/\./g, "\.")).test(pg));
+
+  // ⛔ ITS COUNTS ARE CLAIMS ABOUT THE CORPUS, so they are measured, not trusted.
+  const { loadContentHeadless } = await import("./headless_content.mjs");
+  const CT = await loadContentHeadless();
+  const n = (o) => (o ? (Array.isArray(o) ? o.length : Object.keys(o).filter(k => !k.startsWith("_")).length) : 0);
+  for (const [label, got] of [["crafts", n(CT.abilities)], ["places", n(CT.locations)],
+                              ["people", n(CT.npcs)], ["companions", n(CT.companions)]]) {
+    check(`PG: the guide's stated ${label} count (${got}) matches the corpus`,
+      // ⛔ `.includes`, NOT A REGEX. My first form built `new RegExp(`${got}\s*${label}`)` inside a
+      // TEMPLATE LITERAL, where `\s` is not a valid escape and JS silently collapses it to `s` — so the
+      // pattern was `387scrafts` and could never match. ⚠️ A TEMPLATE LITERAL EATS SINGLE BACKSLASHES,
+      // and §11's own rule says prefer the behavioural form. This is that rule applied to itself.
+      pg.includes(`${got} ${label}`), `corpus has ${got} ${label}`);
+  }
+
+  // ⚠️ THE MECHANICAL CLAIMS MUST AGREE WITH THE ENGINE. These are the ones a player would act on, and
+  // each is asserted elsewhere in this file against the live code — here we check the GUIDE says the same.
+  const energy = rj("content/packs/core/rules/resolution.json").energy || {};
+  check("PG: the cost example matches the authored surcharge",
+    pg.includes("costs 4 at rank 1")
+      && pg.includes(`costs ${4 + Number(energy.rankReachSurcharge)} at rank 2`)
+      && pg.includes(`${4 + 2 * Number(energy.rankReachSurcharge)} at rank 3`),
+    `surcharge is ${energy.rankReachSurcharge}, so the ladder is 4 / ${4 + Number(energy.rankReachSurcharge)} / ${4 + 2 * Number(energy.rankReachSurcharge)}`);
+  for (const fam of ["PHYSICS", "ELEMENTAL", "VITAL", "INTRINSIC"])
+    check(`PG: it names the '${fam}' family`, new RegExp(fam).test(pg));
+  check("PG: it states the death ladder and that SEALED is reachable by nothing",
+    /Threshold/.test(pg) && /Near Dark/.test(pg) && /Deep Dark/.test(pg) && /SEALED/.test(pg));
+  check("PG: it states ranks are additive", /RANKS ARE ADDITIVE/.test(pg));
+  check("PG: …and that a fully-answered blow lands nothing (the minHit 0 ruling)",
+    Number(rj("content/packs/core/rules/skill_battle_system.json").engine?.damage?.minHit) === 0
+      ? /LANDS NOTHING/i.test(pg) : /lands its floor/i.test(pg));
+  check("PG: it states that folded companions take losses",
+    /FOLDED COMPANION IS NOT SAFE/i.test(pg));
+
+  // ⛔ AND THE PARTS AEVI OWNS ARE MARKED, NOT QUIETLY EMPTY. A section awaiting content must SAY so, or
+  // it reads as a section that decided there was nothing to say.
+  const awaiting = (pg.match(/AWAITING AEVI/g) || []).length;
+  check("PG: every section she owns is marked AWAITING, never left silently thin", awaiting >= 3, `${awaiting} marked`);
+  check("PG: it points at the machine reference rather than duplicating it", /FIELD_REFERENCE\.md/.test(pg));
+
+  // ⚠️ AND THE PIPELINE DOC, since it is the other half of what Erik asked for.
+  const pl = rd("docs/PIPELINE.md");
+  check("PG: the pipeline document exists and names all eight stages",
+    ["CONCEPT", "PROPOSAL", "REVIEW", "SPEC", "IMPLEMENTATION PLAN", "INTENT DOCS", "BUILD & TEST", "DEPLOY & DOCUMENT"]
+      .every(st => pl.includes(st)));
+}
+
 /* ══════════ §10 — THE KNOWN GAPS, ASSERTED AS OPEN ══════════ */
 console.log("\n── §10 · the known gaps — these go RED when FIXED ──");
 {

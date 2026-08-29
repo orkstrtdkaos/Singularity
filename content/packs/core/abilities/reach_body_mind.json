@@ -204,7 +204,7 @@
     {
      "rank": 3,
      "name": "Motion Without Thought",
-     "grants": "⛔ THE BODY ACTS BEFORE THE DECISION — A SECOND PHYSICAL ACTION THIS ROUND. ⚠️ And a strike thrown with the whole mastered frame behind it, stance and breath and timing arriving together, wounds far past what the same arm could do untrained.",
+     "grants": "⛔ THE BODY ACTS BEFORE THE DECISION — A SECOND PHYSICAL ACTION THIS ROUND, and the strikes come as a flurry: stance and breath and timing arriving together, each blow set up by the last. ⚠️ IT WOUNDS FAR PAST WHAT THE SAME ARM COULD DO UNTRAINED — not because you are stronger, but because nothing is wasted and nothing is telegraphed.",
      "cannot": "⛔ Once per round. The body chooses — if you have trained it badly, it will do that beautifully.",
      "functions": [
       "move",
@@ -213,7 +213,7 @@
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "none",
+     "harmRung": "damaging",
      "gainAxes": [
       "tempo",
       "damage"
@@ -236,7 +236,7 @@
    ],
    "tradition": "somatic",
    "nativeOrCombination": "native",
-   "harmRung": "none",
+   "harmRung": "damaging",
    "shape": "guard",
    "operativeAxis": [
     "efficiency",
@@ -292,7 +292,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A duel/chase/explore action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour), and lasts for about 4 hours Ranks: rank 2 deepens efficiency; rank 3 adds to special. Limit: the True Limit Still Holds; it costs the body dearly.",
+   "plainly": "A duel/chase/explore action. It is EVASION, not armour — rated 4, evasion rank 2, soaking nothing: you are not where the blow goes. Lasts about four hours. r2 makes every motion cost nothing; ⛔ r3 GRANTS A SECOND PHYSICAL ACTION AND A FLURRY OF STRIKES that wound past what the arm alone could. ⚠️ Efficiency is not power — a perfect motion still loses to a strong enough one.",
    "sectFlavour": {
     "somatic": "THE FLESH-TEMPLES' FUSION — perception, decision and motion as one instant. Absorbs Whole Act.",
     "mason": "ECONOMY OF EFFORT LEARNED FROM MATERIAL — nothing spent that the work did not need."
@@ -301,7 +301,7 @@
    "_powerSystemWas": "reach_body_mind",
    "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki.",
    "_wardTypes": "⛔ SNG-512. ⚠️ Economy of motion answers blows. It answers NOTHING typed, which is the honest limit of a body's skill.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
-   "_rungFix_20260829": "⛔ REVERSED — I HAD THIS BACKWARDS. The craft deals NO damage: no dice, and its functions are sustain/resist/empower/move. ⚠️ `harmRung` asks WHAT HAPPENS WHEN THIS CRAFT PUTS SOMEONE DOWN, and this craft puts nobody down — 'your blows land harder' and 'a second physical action' make the CHARACTER'S OWN WEAPON better, which is `empower`, not harm. ⛔ THE RANK WAS WRONG AND I MATCHED THE ABILITY TO IT. The lint reports a DISAGREEMENT and cannot say which side is wrong; I assumed the ability was, and propagated a rank's error upward instead of reading what the rank does. Erik caught it. ⚠️ `quick_hands` was the only true inversion of the three — its r2 declares `strike` and deals 1d6."
+   "_rungFix_20260829": "⛔ ERIK 2026-08-29: 'are you sure perfect motion doesn't deal damage? I thought that one was supposed to be A FLURRY OF BLOWS?' HE IS RIGHT AND I REVERSED IT WRONGLY. ⚠️ THE CRAFT DECLARES `strike` IN ITS FUNCTIONS and r3 'wounds far past what the same arm could do untrained'. ⛔ THE DISTINCTION FROM `second_wind`, WHICH I HAD COLLAPSED: Second Wind says 'your blows land HARDER' — a modifier on a swing you were already making, which is `empower`. THIS grants A SECOND ACTION AND DECLARES `strike`, so the extra blow is THE CRAFT'S, not the arm's. A second action plus a strike is a flurry. ⚠️ I read the same phrase in two crafts and did not check that they were making different claims — twice, in opposite directions, on the same craft in one session."
   },
   {
    "id": "memory_palace",

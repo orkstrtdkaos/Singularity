@@ -101,6 +101,11 @@
    "operative": "scope",
    "why": "⛔ CCODE-236. In INFLUENCE by vocabulary; mechanically it moves a SETTLED PRICE and nothing else. `operative` is `scope` and that is the load-bearing part (Aevi §5): RANK SCALES THE STAKE, NOT THE DISCOUNT — an L1 bargain works on a sack of grain, an L5 on a caravan contract, and neither gets a deeper cut on a loaf. Consumed by `engine/economy.js::bargainOutcome`, which refuses a deal beyond the rank's reach outright rather than applying a smaller effect to it. ⚠️ §31.5: both sides give something — a won bargain returns `concessionOwed`, given at the moment of the deal and never tracked after it (Erik's no-escrow ruling)."
   },
+  "persuade": {
+   "shape": "setup",
+   "operative": "magnitude",
+   "why": "⛔ CCODE-299 / ERIK RULED A+C. In INFLUENCE by vocabulary; mechanically it is SETUP WITH A SOCIAL TARGET — it does not change a mind, it makes the NEXT social action land better. ⚠️ WHETHER THEY AGREE IS TABLE BUSINESS, like a named axis: shown to the player, never computed. The definition in the fiction is unchanged (\"bring someone to AGREE — they act because they now think it right\"); this says only what the ENGINE does about it, which is less. ⛔ IT NEVER PRODUCES AGREEMENT, COMPLIANCE OR A CONDITION — `command` and `bind` exist for those and the vocabulary is explicit that persuade is neither. `operative` is `magnitude` because the size of the leverage is what a rank buys; `familyDefaults.setup` already reads \"the setup bonus a read buys for the next exchange\", which is exactly this. ⚠️ NO `modelAdjudicated` LAYER, per Aevi §4: a verb that resolves to \"the model decides\" is one the engine cannot test, balance or report. ⚠️ `names_of_power` is `shape: hobble` and carries this verb; Aevi is ruling on it separately and it must NOT be forced through here."
+  },
   "provoke": {
    "shape": "unsettle",
    "operative": "targets",

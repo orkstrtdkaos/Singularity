@@ -12,7 +12,7 @@ node scripts/field_atlas.mjs --md     # …as markdown, to paste back in
 node scripts/safe_delete.mjs <field>  # triage one candidate before deleting it
 ```
 
-**Last measured: 2026-08-28 · v1.9.254 · 378 crafts · 107 distinct authored fields.**
+**Last measured: 2026-08-28 · v1.9.255 · 378 crafts · 107 distinct authored fields.**
 
 ---
 
@@ -362,6 +362,24 @@ The damage families did not, which is why they were dark.**
 - **Shapes with no family defaults:** `price`, `unsettle`, `cool`.
 
 ---
+
+### ⛔ RULE 4 — IF THE VALUE IS A NOUN, THE FIELD NAME MUST NOT READ AS A QUESTION
+
+**Aevi's half of the `persistUntilHealed` finding, and it is the fixable half.**
+
+⛔ **`persistUntilHealed` reads BOOLEAN and holds `{condition: "bleeding"}`.** She authored the object
+deliberately — *bleeding* and *enfeeblement* are different things to be carrying — and I wrote
+`=== true` against it, because **the name answers "does it?" while the value answers "what?".**
+
+⚠️ **THAT IS THE THIRD TIME THIS SHAPE HAS BITTEN**, after `isProjectCraft` vs `projectTicks: "r3"` and
+`operativeAxis`. Her diagnosis of her own side: *"I keep AUTHORING RICHER THAN THE FIELD NAME SUGGESTS."*
+
+✅ **THE RULE: a field whose name reads as a yes/no question may only hold a boolean.** If it needs to
+carry WHAT, name it for the noun — `persistsAs` rather than `persistUntilHealed`, and the comparison that
+went wrong would never have been written.
+
+⚠️ **NOT renaming `persistUntilHealed` now** — six crafts author it and it has live readers. **Recorded so
+the next field of this shape gets the right name at authoring time**, which is the only cheap moment.
 
 ## 11 · THE DEFECT TAXONOMY — the classes this project keeps producing
 

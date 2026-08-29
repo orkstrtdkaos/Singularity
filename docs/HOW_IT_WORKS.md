@@ -67,8 +67,11 @@ working papers; **this is the answer.**
 | 08-28 | ✅ **the four project verbs reach play (CCODE-295)** | `interruptProject` / `resumeProject` / `sabotageProject` / `inheritProject` were built and called by NOTHING — while `craft_mechanics` says *"Sunk Assay L4 is built on all four"* | end-to-end run of all four · refusals return reasons · `testOnlyExports` 26 → 22 | ⛔ GM contract §18b + the op shape + the `projectOps` handler; `sabotageMax` dial bounds a setback |
 | 08-28 | ⛔ **`persistUntilHealed` was stamped NEVER (CCODE-296)** | `skill_battle` compared `=== true`; all SIX crafts author an OBJECT naming what persists, none authors `true` | the condition now carries `persistUntilHealed` **and** `persistedAs` | ⚠️ third `=== true` against a richer authored shape this week · `resolveSoothe` finally has something to honour |
 | 08-28 | ⚠️ a phantom control, mine | I read `rules.projects.sabotageMax`; the dials live at `craftMechanics.projects` | `unauthoredRulesKeys` caught it within the minute | ⛔ the wrong-config-object mistake, made 20 minutes after documenting it |
+| 08-28 | ✅ **folded allies take losses (CCODE-298)** | Erik: yes. A folded party was PURE UPSIDE — it hurt the foe and could not be hurt | `scripts/folded_casualties_report.mjs` · non-combatants verified exposed | ⛔ `distributeCasualties` + `downEntity` both had NO caller; ⚠️ nobody actually goes down yet — the pool is party-sized, not threat-sized |
+| 08-28 | ✅ **`persuade` resolves as SETUP (CCODE-299)** | Erik ruled A+C: it makes the NEXT social action land better; agreement is table business | `content_ci` SNG-263 §1 now reports **zero** unmechanised verbs | ⚠️ `names_of_power` is `hobble` and excluded pending Aevi's ruling · **smoke 1 → 0** |
+| 08-28 | ⚠️ I built the casualty receipt in the wrong ORDER | the spread read `foldedLosses` 82 lines before the branch set it — computed and thrown away every round | caught by the probe, not by a gate | ⛔ "computed and never spent", 30 minutes after fixing the identical thing for soak |
 
-**Last verified: 2026-08-28 · v1.9.254 · 378 crafts.**
+**Last verified: 2026-08-28 · v1.9.255 · 378 crafts.**
 
 ---
 
@@ -264,6 +267,21 @@ not "may take part"** — four of nine companions do not swing and all nine cont
 **Going down costs something specific and authored** — losing Marrow means nothing is attended; losing Coil
 means Precursor mechanisms stop answering.
 
+✅ **AND A FOLDED PARTY IS MORTAL (CCODE-298).** Allies you did not bring forward still fight — they add
+to your blow when you win the round — and **they take losses when you lose it.** ⛔ **Until 2026-08-28 they
+could not be hurt at all**, which made a folded ally read as a damage stat rather than someone standing
+next to you. Erik's *"still feel like people"* ruling argues FOR this: a companion who can be hurt is more
+of a person than one who cannot.
+
+⚠️ **NON-COMBATANTS ARE EXPOSED, DELIBERATELY.** Aevi cannot swing and can still be hurt — being unable to
+fight is not being safe, and the reverse would make non-combatants the optimal thing to fold. **The losses
+land softest-first and are reported BY NAME on the receipt** (`foldedLosses`), never folded into the total.
+
+⛔ **OPEN: the pool does not scale with the foe.** Measured across 300 fights at four tiers — a folded ally
+has **never** gone down, because the pool is a function of party size (√K over `perFoldedAlly`) and not of
+who you are fighting. ⚠️ **That is INHERITED from the contribution side, not introduced here**, and it means
+an authored `downedEffect` still cannot fire. `node scripts/folded_casualties_report.mjs`.
+
 ⚠️ **Roster values are DEFAULTS, not ceilings.** A swarm that cannot fight can fight when a player spends
 eight bond bands building it a staff to inhabit.
 
@@ -328,11 +346,12 @@ ancestry.
 
 | | |
 |---|---|
-| ⛔ **`persuade` and `bolster` are unmechanised verbs** | crafts describe what the engine cannot do |
 | ⛔ **12 rules files are registered and never loaded** | ~140 KB dark, including `damage_types` |
 | ⛔ **`rankDeltas[].axis` (495) has no reader; `mechanic.axis` (0) has one** | a reader with no writer, and a writer with no reader |
 | ⚠️ **the map layer** | 18 of 135 locations have authored layouts and the renderer draws circles instead |
 | ⚠️ **method is not recorded anywhere** | *psionics*, *song*, *blade* — a real layer with no field |
+| ⛔ **no general TARGET AFFORDANCE** | a craft whose resolution needs a choice has no way to ask for one. **Three cases now**: `bringForward` needs a pick, `provoke` needs a target, a named-ally intercept needs one. ⚠️ Aevi's shape: a craft declares `needsTarget: "ally"\|"foe"\|"place"` and the declaration surface asks once. **Wants Erik and wants measuring across every craft that needs a pick** |
+| ⚠️ **the folded-casualty pool does not scale with the foe** | so a `downedEffect` authored on all nine companions cannot fire. Inherited from the contribution side |
 
 **Each gap above is asserted OPEN by `how_it_works.mjs`.** ⛔ **Closing one turns its check RED, which is
 the signal to edit this table.** A gap that quietly closes is a doc that quietly rots.

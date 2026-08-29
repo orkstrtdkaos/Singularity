@@ -8,9 +8,10 @@
 import { resolveAction } from "./resolve.js";
 import { chooseTarget, foeKnowledge } from "./targeting.js";
 import { damageMixOf, wardAnswer, resolveComposite } from "./damagetypes.js";   // CCODE-281: composite damage, and the reader `wardTypes` never had
-import { predictAggregate } from "./melee.js";   // CCODE-274: the folded party contributes as a measured aggregate, not as N more rolls   // CCODE-250: a foe chooses who to hit
+import { predictAggregate, distributeCasualties } from "./melee.js";   // CCODE-298: the folded line takes losses too   // CCODE-274: the folded party contributes as a measured aggregate, not as N more rolls   // CCODE-250: a foe chooses who to hit
 import { redirectImposition, interceptorFor, catchesCondition, catchesDamage } from "./intercept.js";
-import { persistsUntilHealed, persistedConditionName } from "./conditions.js";   // CCODE-296: the readers that accept BOTH authored shapes   // CCODE-250: …and someone may step in front of it
+import { persistsUntilHealed, persistedConditionName } from "./conditions.js";   // CCODE-296: the readers that accept BOTH authored shapes
+import { downEntity } from "./combatants.js";   // CCODE-298: the first path that can fire an authored downedEffect   // CCODE-296: the readers that accept BOTH authored shapes   // CCODE-250: …and someone may step in front of it
 import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, ongoingHarmOf, authoredBlock, resolveProvoke, resolveSoothe, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -1179,6 +1180,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       const wrongType = layers ? layers.filter(l => !answers(l)).reduce((a, l) => a + (Number(l.value) || 0), 0) : 0;
       // ⚠️ DECLARED BEFORE ITS USE. My first placement put this after the branch that sets it — `let` is
       // hoisted into a temporal dead zone, so it would have thrown on the first blow a big guard stopped.
+      let foldedLosses = null;
       let soakFloored = false;
       let landed = aff === "absorb"
         ? -Math.max(1, Math.round(hit * (acfg.absorbMult ?? 1)))          // it FEEDS — a negative hit is healing
@@ -1284,6 +1286,52 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
               // are people you chose not to narrate, not people who stopped existing.
               melee: { added: add, by: able.map(f => f.name || f.id), count: able.length,
                 why: `${able.map(f => String(f.name || f.id).split(" ")[0]).join(", ")} are in it too` } };
+          }
+        }
+      }
+
+      // ⛔ CCODE-298 — AND THE OTHER HALF, WHICH WAS NEVER BUILT. The branch above adds the folded party's
+      // contribution when the PLAYER wins. There was no branch for when the opponent does, so a folded
+      // party was PURE UPSIDE: it hurt the foe and could not be hurt.
+      //
+      // ⚠️ AEVI: "that is not a design, it is a missing branch" — and `distributeCasualties` quotes Erik's
+      // own words in its comment, *"the pc playing into and being a casualty of that melee"*. It was built
+      // for exactly this and called by nothing.
+      //
+      // ⛔ AND ERIK'S "STILL FEEL LIKE PEOPLE" RULING ARGUES *FOR* IT: a companion who can be hurt is more
+      // of a person than one who cannot. The asymmetry is what made a folded ally read as a damage stat.
+      //
+      // ⚠️ NON-COMBATANTS ARE EXPOSED, DELIBERATELY. `distributeCasualties` filters on `downed` alone, so
+      // Aevi cannot swing and can still be hurt — being unable to fight is not being safe, and the reverse
+      // would make non-combatants the optimal thing to fold.
+      if (damage && roundWinner === "opponent" && folded && folded.length) {
+        const standing = folded.filter(f => f && f.present !== false && !f.downed);
+        if (standing.length) {
+          const per = Math.max(0, Number(sb?.melee?.perFoldedAlly ?? 2));
+          // ⚠️ THE SAME √K COMPRESSION THE CONTRIBUTION USES, so the two sides of the fold are measured the
+          // same way. A pool sized like the line, not a copy of the blow that landed on the front.
+          const pool = Math.max(0, Math.round(predictAggregate({ mean: per, sd: per / 2 }, standing.length).mean));
+          if (pool > 0) {
+            const cas = distributeCasualties(standing, pool, { rng });
+            for (const d of (cas.downed || [])) {
+              const who = standing.find(x => x.id === d.id);
+              // ⛔ AND THIS IS THE FIRST PATH THAT COULD EVER FIRE A `downedEffect`. All nine companions
+              // author one; `downEntity` existed to set the state and was called by NOTHING.
+              if (who) downEntity(who, { why: "the melee", day: state?.day ?? null });
+            }
+            // ⛔ ATTACHED HERE, NOT IN THE RECEIPT LITERAL. My first version spread `foldedLosses` into the
+            // `damage` object at its construction — 82 LINES BEFORE THIS BRANCH SETS IT — so the value was
+            // computed and thrown away every round. ⚠️ COMPUTED AND NEVER SPENT: the exact shape I have
+            // spent the week finding in other people's code, committed thirty minutes after fixing the
+            // identical thing for soak. The player-wins branch above re-spreads `damage`; so does this one.
+            if (cas.hits.length) foldedLosses = {
+              pool, hits: cas.hits, downed: cas.downed,
+              // ⚠️ BY NAME, like the contribution above. A folded ally that goes down silently is the
+              // damage stat we are trying to stop them being.
+              why: `${cas.hits.map(h => h.name || h.id).join(", ")} took the weight of it`,
+              ...(cas.downed.length ? { downedEffects: cas.downed.map(d =>
+                (folded.find(f => f.id === d.id) || {}).downedEffect || null).filter(Boolean) } : {}) };
+            if (foldedLosses) damage = { ...damage, foldedLosses };
           }
         }
       }

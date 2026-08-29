@@ -614,16 +614,20 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
   // probe that tests nothing and reports green: the vacuous gate, inside the gap-tracking section.
   const { mechanicFor } = await import("../engine/craftmechanics.js");
   const VERB_FAMILIES = cm.verbFamilies || cm.functionFamilies || {};
-  // ⚠️ NAMED `verbFamilyMembers`, NOT `knownVerbs`: `craftmechanics.js` EXPORTS a `knownVerbs`, and a local
-  // of the same name in a test file moved that export from orphan to TEST-ONLY, inflating the ratchet by
-  // one. A name collision faking a reader - the thing FIELD_REFERENCE §1 documents, committed here.
-  const verbFamilyMembers = new Set(Object.keys(VERB_FAMILIES).length
-    ? Object.values(VERB_FAMILIES).flat() : []);
+  // ⛔ CCODE-299 — THIS PROBE COULD NEVER CLOSE. It filtered against `cm.verbFamilies`, a key that does not
+  // exist, so `!verbFamilyMembers.has(v)` was ALWAYS true and the gap reported "still open" forever — even
+  // after `persuade` was mechanised and `bolster` was removed from content. ⚠️ A GAP PROBE THAT CANNOT SEE
+  // ITS OWN FIX IS A VACUOUS GATE, in the section whose job is tracking what is unfinished.
+  // ✅ Behavioural now, and the same question `content_ci` SNG-263 §1 asks: does the verb RESOLVE to a shape?
+  const { shapeOfVerb } = await import("../engine/craftmechanics.js");
   const usedVerbs = new Set();
-  for (const a of abilities) for (const v of (a.functions || [])) usedVerbs.add(v);
-  const unmechanised = ["persuade", "bolster"].filter(v => usedVerbs.has(v) && !verbFamilyMembers.has(v));
-  gap("§10: `persuade` and `bolster` are still unmechanised",
-    unmechanised.length > 0, `unmechanised: ${unmechanised.join(", ") || "(none)"}`);
+  for (const a2 of abilities) {
+    for (const v of (a2.functions || [])) usedVerbs.add(v);
+    for (const t of (a2.tree || [])) for (const v of (t.functions || [])) usedVerbs.add(v);
+  }
+  const unmechanised = [...usedVerbs].filter(v => !shapeOfVerb(v, cm));
+  check("§10: every verb the corpus uses resolves to a shape (the SNG-263 §1 question)",
+    unmechanised.length === 0, `unmechanised: ${unmechanised.join(", ") || "(none)"}`);
 
   // ⛔ THE REAL TEST: does the authored NUMBER change the outcome? soak 2 and soak 20 must differ.
   // ⛔ MEASURE THE REAL CRAFT, NOT AN INVENTED ONE. My first probe built a fixture with `shape:"guard"`

@@ -20,7 +20,7 @@ node scripts/safe_delete.mjs <field>  # triage one candidate before deleting it
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **84** | a play-path file names it outside a comment |
+| ✅ **READ** | **85** | a play-path file names it outside a comment |
 | ⛔ **DARK** | **19** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **4** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
@@ -516,6 +516,7 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `requiresPoles` | 3 | `mechanic`×3 | ⛔ DARK | — |
 | `backlashRungNone` | 3 | `root`×3 | ⛔ DARK | — |
 | `interceptCondition` | 3 | `tree`×3 | ✅ READ | `intercept.js` |
+| `interceptDamage` | 3 | `tree`×3 | ✅ READ | `intercept.js` |
 | `opensAccess` | 2 | `tree`×2 | ✅ READ | `progression.js` |
 | `downtime` | 2 | `root`×2 | ⚠️ CI-ONLY | _1 test/script only_ |
 | `summon` | 2 | `root`×2 | ✅ READ | `gm.js`, `npcsheet.js`, `roundreceipt.js` |

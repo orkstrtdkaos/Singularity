@@ -1988,21 +1988,26 @@
     {
      "rank": 1,
      "name": "Step Between",
-     "grants": "Place yourself between two parties at the moment before harm. Your presence and position shield the threatened; the attacker must now choose to go through a non-combatant making a deliberate stand.",
-     "cannot": "You are not armored. Some people go through anyway.",
+     "grants": "⛔ PLACE YOURSELF BETWEEN TWO PARTIES AT THE MOMENT BEFORE HARM, AND TAKE THE NEXT BLOW MEANT FOR THE ONE YOU ARE COVERING — it resolves against YOUR body, your soak, your resist. ⚠️ ONE BLOW, AND IT COSTS YOU YOUR ACTION: you are standing somewhere, not doing something.",
+     "cannot": "⛔ ONE ALLY, ONE BLOW, AND YOUR WHOLE ACTION FOR IT. ⚠️ You must be able to REACH the space between them — this is placement, not a working, and a wall or a distance ends it. ⛔ AND IT TAKES WHAT WAS AIMED, not what it becomes: you cannot catch a thing already landed.",
      "functions": [
       "move",
       "shield"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "interceptDamage": {
+      "allies": 1,
+      "charges": 1,
+      "costsAction": true
+     }
     },
     {
      "rank": 2,
      "name": "Living Line",
-     "grants": "Draw a line with your body between two sides — not just one person but a confrontation. Bring a companion into the interposition. The two of you become the cost the violence has to accept.",
-     "cannot": "Two people are not a wall. This is still presence and choice, not force.",
+     "grants": "⛔ DRAW A LINE WITH YOUR BODY — cover TWO people for three rounds rather than one blow, and bring a companion into the interposition so the two of you become a wall rather than a person. ⚠️ STILL YOUR ACTION, EVERY ROUND YOU HOLD IT.",
+     "cannot": "⛔ HOLDING THE LINE IS ALL YOU DO. Two people, three rounds, and each round costs the action. ⚠️ A companion drawn in is choosing the same cost.",
      "functions": [
       "move",
       "shield"
@@ -2012,13 +2017,18 @@
      "_nameWas": "The Living Line",
      "gainAxes": [
       "targets"
-     ]
+     ],
+     "interceptDamage": {
+      "allies": 2,
+      "rounds": 3,
+      "costsAction": true
+     }
     },
     {
      "rank": 3,
      "name": "Already There",
-     "grants": "Read where the harm is going and be there before it arrives. You sense the moment forming and place yourself at the right position before anyone else has moved. The fight that never started because you were already in the way.",
-     "cannot": "Being in the way is not the same as stopping something. The Stillhold who steps between takes the consequences of being between.",
+     "grants": "⛔ READ WHERE THE HARM IS GOING AND BE THERE BEFORE IT ARRIVES — and at this rank the placing IS the act: ⚠️ YOU NO LONGER SPEND YOUR ACTION TO COVER. You sense the moment forming, you are already standing in it, and you still have your hands free.",
+     "cannot": "⛔ IT IS STILL YOUR BODY THAT TAKES IT, and two is still the limit — you cannot stand in front of a line. ⚠️ And you cannot do it for yourself, at any rank.",
      "functions": [
       "move",
       "shield"
@@ -2030,7 +2040,12 @@
       "shield",
       "foresee"
      ],
-     "gainAxes": []
+     "gainAxes": [],
+     "interceptDamage": {
+      "allies": 2,
+      "rounds": 3,
+      "costsAction": false
+     }
     }
    ],
    "functions": [
@@ -2060,7 +2075,8 @@
     "wardTypes": [
      "physical",
      "feeling"
-    ]
+    ],
+    "_interceptNote": "⛔ THE FIRST CRAFT IN THE GAME TO AUTHOR `interceptDamage` — the reader has been in `intercept.js` since CCODE-260 with a note saying 'build the reader, default the dial to a no-op, LET CONTENT TURN IT ON'. ⚠️ THIS TURNS IT ON. `interceptCondition` (shared_weight) catches BINDINGS; this catches BLOWS, and they are different verbs on the same machinery. ⛔ `costsAction: true` AT r1 AND r2 IS THE DESIGN, NOT A LIMIT: without it a tank is a wall and casualties go to zero. r3 is what you buy — the placing becomes free, which is exactly the craft's own r3 fiction of being there before the harm arrives."
    },
    "rankDeltas": [
     {
@@ -2096,7 +2112,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/fight/survive action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 2 harm per hit (rank 1 armour) It affects 1 target, and lasts for about 2 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: you Are Not Armored — Some People GO Through Anyway.",
+   "plainly": "A defend action. ⛔ TAKE A BLOW MEANT FOR SOMEONE ELSE — it resolves against your body, your soak 2, your resist. r1 one ally, one blow, AND IT COSTS YOUR ACTION. r2 covers two for three rounds, still costing the action each round. ⛔ r3 IS FREE — you are already standing there. ⚠️ Never for yourself, and never more than two.",
    "_functionsWas": [
     "foresee",
     "move",
@@ -2105,7 +2121,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_wardTypes": "⛔ SNG-512. Interposition answers the strike and the heat behind it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_violence_peace",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_authored_20260829": "⛔ CCODE'S DESIGN §6.3, AUTHORED HERE: 'a guard craft that catches blows, and SPENDS AN ACTION to do it — the action cost IS the design; without it the tank is a wall and casualties go to zero.' ⚠️ CHOSE THIS CRAFT RATHER THAN A NEW ONE: its description already reads 'THE ACT OF PLACEMENT IS THE ACT OF PROTECTION', its hard bound already refuses self-protection, and `stillhold` is the peace pole — a tradition whose tank works by standing somewhere rather than by hitting back. ⛔ AND IT KEEPS ERIK'S `allies` RULING: 1 at r1, 2 above, never a line."
   },
   {
    "id": "safe_ground",

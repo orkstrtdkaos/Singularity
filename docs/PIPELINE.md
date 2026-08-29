@@ -56,7 +56,7 @@ measuring across every craft that needs a pick.**
 
 ---
 
-## ⛔ THE FOUR RULES THAT MAKE IT WORK
+## ⛔ THE SIX RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
 
@@ -96,6 +96,61 @@ closes turns red and forces the table to be edited.
 `HOW_IT_WORKS §0` with its **INTENT**, how it is **EXECUTED AND TESTED**, and what it **IMPACTS and is
 IMPACTED BY**. `§0b` asserts the five columns are present.
 
+### 5. ⛔ BEFORE AUTHORING A CONCEPT, GREP THE WORD ACROSS THE WHOLE CORPUS
+
+**Added 2026-08-29 after Aevi authored a `mythical` tier that had existed since SNG-280.**
+
+**Erik: *"we've talked about mythical before, so I'm surprised you had to add it. Can you find the last time
+we talked about that so we don't lose anything?"*** ⛔ **One grep found 126 uses** — an attention budget of
+3, its own challenge mechanism, and a ruling from two weeks earlier tying Mythicals to a Precursor–Veil
+braid that was then presented as a fresh discovery.
+
+⚠️ **THE FAILURE WAS NOT LAZINESS. I DID READ A FILE.** I opened `legends.json`, found a three-tier ladder,
+and concluded about the corpus — **and that file's tiers were simply out of date.** ⛔ **READING ONE FILE AND
+CONCLUDING ABOUT THE WHOLE IS THE SHAPE**, and it has now produced four incidents in one month:
+
+| I read | I concluded | the truth |
+|---|---|---|
+| `legends.json` tiers | *"there is no mythical rung"* | ⛔ **126 uses; the ladder lives in `arc_response`** |
+| one `timeReach` hit | *"a leftover of mine"* | ⛔ **another craft's r1 defining number** |
+| `traditionV2` unread | *"cruft, delete it"* | ⛔ **live migration state for a parked merger** |
+| `mix` is derived | *"the mix TABLE is derived"* | ⛔ **the ROW is authored; one field inside it is derived** |
+
+**THE RULE, IN THREE PARTS:**
+
+1. ⛔ **GREP THE WORD, NOT THE FILE.** `grep -ril <concept> content/ docs/ po/` before authoring it. **A
+   concept that exists will say so somewhere, and rarely where you expect.**
+2. ⛔ **THEN SEARCH THE CONVERSATIONS.** Rulings are made in chat and land in files days later, or never.
+   ⚠️ **The Precursor–Veil connection existed as an Erik ruling in `foothills._ruling` and nowhere I would
+   have looked.**
+3. ⚠️ **AND WHEN THE TWO SOURCES DISAGREE, THE ONE WITH MORE CARRIERS WINS.** A three-tier list in one file
+   loses to a seven-rung ladder with an engine reader.
+
+✅ **AND FIX THE CAUSE, NOT THE INSTANCE:** `legends.json` now **references** the ladder from
+`arc_response.attentionByTier` instead of restating it. ⛔ **A restated list is a stored copy of a derived
+value — the failure this project finds most often, wearing prose.**
+
+---
+
+### 6. ⚠️ A GATE REPORTS A DISAGREEMENT. IT DOES NOT SAY WHICH SIDE IS WRONG.
+
+**Added 2026-08-29 after Aevi "fixed" three harm-gloss inversions, two of them wrongly, then over-corrected
+one of those back.**
+
+**The lint reports: *ability declares `none`, a rank reaches `damaging`.*** ⛔ **That is a DISAGREEMENT.
+Aevi assumed the ability was wrong three times in one batch** — and for `second_wind` and `perfect_motion`
+the RANK was wrong, so a rank's error got propagated upward. ⚠️ **Then Erik asked *"are you sure perfect
+motion doesn't deal damage? I thought that one was a flurry of blows"* — and it WAS, so the correction
+needed correcting.**
+
+⛔ **THE DISCRIMINATOR IS THE CRAFT, NOT THE FIELD:** `functions` (does it declare `strike`?), `mechanic.dice`
+(does it roll?), and what the rank's `grants` actually says. ⚠️ **`second_wind` says *"your blows land
+harder"* — a modifier on a swing you were making. `perfect_motion` grants A SECOND ACTION and declares
+`strike`. Two similar phrases, two different claims, and reading one as the other is what went wrong.**
+
+✅ **NEVER BATCH A GATE'S FINDINGS WITH ONE-LINE JUSTIFICATIONS.** ⛔ **A batch of three with three
+one-liners is how both errors shipped in a single commit.**
+
 ---
 
 ## WHERE THE DOCUMENTS SIT, AND WHAT EACH IS FOR
@@ -127,6 +182,13 @@ reply is not delivered until it is COMMITTED** (gate `CCODE-206`, which exists b
   `persistUntilHealed`. **Every one looked like success from the door before it.**
 - ⛔ **STAGE 6 WITHOUT STAGE 7** — an intent documented and never built. ⚠️ **`Sunk Assay L4 is built on all
   four` sat in `craft_mechanics.json` while all four project verbs were unreachable.**
+- ⛔ **AND A THIRD, FOUND 2026-08-29: A READER WITH NO SCHEMA ENTRY — THE FOUR DOORS FAILING AT THE
+  *AUTHORED* DOOR.** ⚠️ **Twice in one week.** `mechanic.damageMix` and `tree[].interceptDamage` both had
+  working engine readers and were **absent from the closed `ability.schema.json`** — so the FIRST CRAFT TO
+  USE EITHER WAS REJECTED. **Both readers even carried a note saying *"let content turn it on."***
+  ⛔ **A feature nobody can author is dark by construction, and it does not look dark from the engine side —
+  the code is there, tested, and reachable.** ✅ **THE CHECK: every engine reader that names an authored
+  field must have a matching schema declaration.** ⚠️ **`intercept.js` sat dark for months this way.**
 
 ✅ **The gates exist to catch both directions**, and the ratchet (`node scripts/run_tests.mjs --ratchet`)
 blocks a push that makes either worse.

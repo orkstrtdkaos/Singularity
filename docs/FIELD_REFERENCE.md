@@ -568,3 +568,24 @@ will not find that rule, because it does not exist yet.
 
 ⛔ **BOTH ARE THE SAME LESSON: a name that looks like a consumer is not a consumer.** The sixth way
 "unread" lies, and the reason a finding is not a finding until the reader has actually been read.
+
+## ⛔ A SEVENTH WAY "UNREAD" LIES — AND ITS MIRROR
+
+**Added 2026-08-29 (Aevi).**
+
+⚠️ **The six ways above all describe a field that is AUTHORED and not read. There is a mirror failure and it
+is worse, because no audit of the content can see it:**
+
+⛔ **A READER THAT EXISTS FOR A FIELD NOTHING CAN AUTHOR.**
+
+| field | reader shipped | schema told | result |
+|---|---|---|---|
+| `mechanic.damageMix` | CCODE-281 | ⛔ **never** | the first craft to use it was REJECTED |
+| `tree[].interceptDamage` | CCODE-260 | ⛔ **never** | `intercept.js` sat dark for months |
+
+**Both readers carried a note saying *"build the reader, default the dial to a no-op, LET CONTENT TURN IT
+ON."*** ⚠️ **Content could not.** ⛔ **A closed schema turns an undeclared field into a validation error, so
+the author gets a rejection rather than a feature.**
+
+✅ **THE TEST: for every engine reader that names an authored field, does `ability.schema.json` declare it?**
+⚠️ **This is checkable and nothing checks it.**

@@ -40,6 +40,13 @@ const SUITES = [
   // ⛔ CCODE-288 — THE REAL SAVES. 1,788 turns of played history that cannot be regenerated, reconciled on
   // every run so a vocabulary rename cannot quietly drop an ability out of somebody's character.
   ["save_fixtures", "node", ["tests/save_fixtures.mjs"]],
+  // ⛔ CCODE-301 — FOUR GATE SUITES WERE SITTING ON THE SHELF. `scripts/apparatus.mjs` classifies every
+  // harness and found these: assertions that existed, passed, and were run by nobody. ⚠️ A GATE THAT DOES
+  // NOT RUN IS WORSE THAN NO GATE — it reads as coverage. All four verified green before wiring.
+  ["changeset_check", "node", ["tests/changeset_check.mjs"]],
+  ["dev_world", "node", ["tests/dev_world.mjs"]],
+  ["playthrough_sim", "node", ["tests/playthrough_sim.mjs"]],
+  ["verification_ledger", "node", ["tests/verification_ledger.mjs"]],
   ["engine_map --check", "node", ["scripts/engine_map.mjs", "--check"]],
 ];
 

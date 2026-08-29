@@ -10,7 +10,7 @@ place, person and belief in X–XII is drawn from authored content — , ,
 , the nine companion files and  — and where the world has not decided
 something, the guide says so rather than filling it in.
 
-**Last verified: 2026-08-29 · v1.9.255 · 387 crafts · 135 places · 111 people · 9 companions.**
+**Last verified: 2026-08-29 · v1.9.256 · 387 crafts · 135 places · 111 people · 9 companions.**
 
 ---
 
@@ -28,6 +28,63 @@ roll shows you its terms, and every blow shows you what stopped it.
   advance. Work continues. Someone else takes the thing you were slow about.
 - ⚠️ **Nothing is free and nothing is impossible.** A craft you cannot afford is a craft you cannot use
   today. A foe too strong is a foe you should not meet head-on — not one you cannot ever beat.
+
+---
+
+# PART I½ · WHERE EVERYTHING IS
+
+**Read this once and you will never hunt for a button again.** ⚠️ **Singularity does not have menus in
+the usual sense.** It has **places you go**, and each one answers a different question.
+
+## The one you are in most
+
+⛔ **THE PLAY SCREEN.** You type what you do; the world answers. Everything else is somewhere you step out
+to and come back from. **When in doubt, you are meant to be here.**
+
+## When it turns into a fight — or a contest
+
+**A fight is not a different game, it is a different rhythm.** You get **three phases every turn, in this
+order:**
+
+| phase | what it is for | ⚠️ the catch |
+|---|---|---|
+| **◎ SENSE** | read them before you commit | ⚠️ **it costs the craft's energy** — skipping it is a real choice |
+| **⚔ ACTION** | your actual move | this is the one you always get |
+| **✦ BONUS** | ⛔ **a FULL extra action** | ⛔ **earned by a good read — this is what sensing buys** |
+
+✅ **THAT IS THE WHOLE COMBAT ECONOMY.** Spend energy to look, and a good look pays for a second move.
+⚠️ **Most players never sense, and most players never see the bonus.** They are the same sentence.
+
+## The places you step out to
+
+| when you want to know | go to |
+|---|---|
+| **who am I, and why is that number that number** | your **character sheet** — ✅ **tap any trait and it tells you the lore AND the mechanics, in place** |
+| **what can I do** | your **crafts** — as a wheel, or as a graph if you want to see how they connect |
+| **what am I carrying** | your **inventory** |
+| **who is with me** | your **roster** — ⚠️ **everyone here participates, and everyone here can fall** |
+| **where am I, and what is out there** | the **map** — the valley, then a place inside it |
+| **what have I actually done** | the **chronicle**, and your **quest log** |
+| **what does the world know** | the **codex** — what has been established as true |
+| **what have I seen** | the **gallery** and the **library** |
+
+## Things that interrupt you, and mean something
+
+- **You have found something** — an acquisition. Take it or leave it.
+- **Something has changed about you** — a promotion, a level. ⚠️ **This is a choice, not a notification.**
+- **A fork** — the story could go two ways and it is asking which.
+
+## ⚠️ WHAT THE GAME CANNOT YET ASK YOU
+
+**Three things the engine knows how to do and has no way to ask you about.** They are listed here rather
+than hidden, because finding out by being surprised is worse:
+
+- **You cannot yet choose who steps up** when the order of your companions would matter.
+- **You cannot yet pick who to provoke** when more than one target would take the bait.
+- **You cannot yet name which ally** a protecting craft is protecting — it chooses.
+
+⛔ **THESE ARE MISSING QUESTIONS, NOT MISSING FEATURES.** The mechanics behind them work; nothing on the
+screen asks you. They are tracked as open gaps, and when the game learns to ask, this section shrinks.
 
 ---
 

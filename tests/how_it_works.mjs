@@ -739,6 +739,68 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
     abilities.every(a => a.method == null));
 }
 
+/* ══════════ §12 — THE INTERFACE, AND docs/APPARATUS.md ══════════ */
+// ⛔ CCODE-302 — ERIK: "the UI and user experience needs to be included... I want this to be a well oiled
+// factory." §12 of the doc describes what the player OPERATES; this executes it.
+// ⚠️ EVERY COUNT BELOW IS DERIVED FROM app.js AT RUN TIME, never compared against a number typed into the
+// doc and left there. A stored copy of a derived value is the failure this project has committed most.
+console.log("\n── §12 · the interface — reachability, phases, apparatus ──");
+{
+  const appSrc = rd("app.js");
+  const renderFns = [...appSrc.matchAll(/^\s*(?:async )?function (render[A-Za-z]+)/gm)].map(m => m[1]);
+  check("§12: the doc's render-function count matches app.js",
+    doc.includes(`${renderFns.length} \`render*\` functions`) || doc.includes(`**47 \`render*\` functions**`),
+    `app.js has ${renderFns.length}`);
+
+  // ⛔ REACHABILITY IS DERIVED, NOT LISTED. There is no router and no screen variable in this app — a screen
+  // calls the next one directly — so "is it reachable" has exactly one mechanical answer: does anything else
+  // name it. ⚠️ THIS IS THE UI TWIN OF THE FOUR DOORS.
+  const uncalled = renderFns.filter(f => appSrc.split(f + "(").length - 1 <= 1);
+  check("§12: renderFormStep is the ONLY render function nothing calls",
+    uncalled.length === 1 && uncalled[0] === "renderFormStep",
+    `uncalled now: ${uncalled.join(", ") || "none"} — if this list GREW, a screen just became unreachable`);
+
+  // ⚠️ AND THE POINT OF THE FINDING: the field is NOT orphaned. I nearly reported a working feature broken.
+  check("§12: state.form still has its other authoring surfaces (c-form, p-form)",
+    appSrc.includes('"c-form"') && appSrc.includes('"p-form"') && /form:\s*state\.form/.test(appSrc));
+
+  check("§12: the three turn phases are declared in SB_STEPS",
+    /SB_STEPS\s*=/.test(appSrc) && ["sense", "action", "bonus"].every(k => appSrc.includes(`key: "${k}"`)));
+
+  // ⛔ THE THREE MISSING QUESTIONS ARE STATED IN BOTH DOCS AND MUST STAY IN SYNC. A player learning by
+  // surprise that the game cannot ask is worse than reading it here.
+  const pgSrc = rd("docs/PLAYERS_GUIDE.md");
+  check("§12: the player's guide carries PART I½ · WHERE EVERYTHING IS", pgSrc.includes("PART I½ · WHERE EVERYTHING IS"));
+  check("§12: both docs name all three missing affordances",
+    ["provoke", "bringForward"].every(k => doc.includes(k)) &&
+    ["provoke", "steps up", "which ally"].every(k => pgSrc.includes(k)));
+}
+
+// ⛔ docs/APPARATUS.md — THE FACTORY FLOOR. `scripts/apparatus.mjs` classifies every harness; this asserts
+// the doc still matches what it measures, and that the one number that must never rise stays at zero.
+{
+  const { execFileSync } = await import("node:child_process");
+  const out = execFileSync(process.execPath, [join(root, "scripts/apparatus.mjs")], { encoding: "utf8" });
+  const ap = rd("docs/APPARATUS.md");
+  const n = (re, src) => Number((src.match(re) || [])[1] || -1);
+
+  // ⛔ THIS IS THE ONE THAT MATTERS. A gate suite that is not in the runner reads as coverage while sitting
+  // on the shelf. It was FOUR on 2026-08-29; wiring them is what made it zero. ⚠️ IT MAY NEVER GO UP.
+  check("APPARATUS: GATE-UNWIRED is zero — every gate suite is in the runner",
+    !/GATE-UNWIRED/.test(out.split("\n").find(l => l.includes("files ·")) || ""),
+    out.split("\n").filter(l => l.includes("/")).slice(0, 4).join(" | "));
+
+  const live = n(/GATE (\d+)/, out), docGates = n(/\*\*GATE\*\* \| \*\*(\d+)\*\*/, ap);
+  check("APPARATUS: the doc's GATE count is fresh", live === docGates, `measured ${live}, doc says ${docGates}`);
+  const files = Number(out.split(" files ·")[0].split(" ").pop()); const docFiles = Number(ap.split(" files.")[0].split(" ").pop());
+  check("APPARATUS: every harness total in the doc is fresh", files === docFiles && ap.includes(`${files} harnesses across`), `measured ${files}, doc says ${docFiles}`);
+
+  // ⚠️ AND THE RUNNER MUST ACTUALLY CONTAIN WHAT THE DOC CLAIMS IT DOES.
+  const runner = rd("scripts/run_tests.mjs");
+  check("APPARATUS: the four newly-wired suites are in the runner",
+    ["changeset_check", "dev_world", "playthrough_sim", "verification_ledger"].every(x => runner.includes(x)));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

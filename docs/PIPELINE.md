@@ -23,6 +23,35 @@ technical implementation.** Nothing below overrides that; it says how the three 
 
 ---
 
+## ⛔ EVERY STAGE HAS FOUR SCOPES, AND ONE OF THEM KEPT GETTING FORGOTTEN
+
+⚠️ **ERIK, 2026-08-29: *"the UI and user experience needs to be included."*** **He is right that it was
+missing, and the evidence is on the record three times.**
+
+| scope | the question | who |
+|---|---|---|
+| **FICTION** | what does this MEAN in the world | Aevi |
+| **MECHANIC** | what does the engine do about it | CCode |
+| ⛔ **INTERFACE** | ⛔ **how does a player SAY it and SEE it** | ⛔ **both, and it has been neither** |
+| **APPARATUS** | how do we know it works, and keep knowing | CCode |
+
+⛔ **THE INTERFACE SCOPE HAS FAILED THREE TIMES IN ONE MONTH, THE SAME WAY EACH TIME:** a mechanic was
+built correctly and had **no way for a player to invoke it.**
+
+- `bringForward` — you choose who acts blow by blow, and **there is no pick.**
+- `provoke` — it needs a target, and **there is no way to name one.**
+- a named-ally intercept — `shared_weight` guards ONE ally, and **there is no way to say which.**
+
+⚠️ **EACH WAS FOUND AT STAGE 7, NOT STAGE 4.** By then the mechanic is built and the gap looks like a
+UI ticket rather than an unfinished feature. ✅ **A SPEC IS NOT DONE UNTIL IT SAYS HOW THE PLAYER REACHES
+IT** — and if the answer is "they cannot yet", that is a known gap in `HOW_IT_WORKS §10`, not a silence.
+
+⚠️ **AND THE SHAPE IS PROBABLY GENERAL, NOT PER-CRAFT.** Aevi's proposal: a craft whose resolution needs a
+choice declares what KIND of choice, and the declaration surface asks once. **That wants Erik and it wants
+measuring across every craft that needs a pick.**
+
+---
+
 ## ⛔ THE FOUR RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
@@ -73,6 +102,7 @@ IMPACTED BY**. `§0b` asserts the five columns are present.
 | `docs/HOW_IT_WORKS.md` | **what does the game do**, present tense, BUILT vs PROPOSED | us |
 | `docs/FIELD_REFERENCE.md` | **what is each field**, who reads it, what breaks without it | us |
 | ⛔ `docs/PLAYERS_GUIDE.md` | **what is it like to play** — nouns and verbs, not fields | ⛔ **the player** |
+| `docs/APPARATUS.md` | ⛔ **every harness, what it is for, and whether it RUNS** | us |
 | `docs/PIPELINE.md` | how work moves | us |
 | `po/*.md` | working papers — proposals, reviews, replies | us, in flight |
 

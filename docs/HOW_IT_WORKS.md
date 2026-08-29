@@ -76,8 +76,17 @@ working papers; **this is the answer.**
 | 08-28 | ⚠️ I built the casualty receipt in the wrong ORDER | the spread read `foldedLosses` 82 lines before the branch set it — computed and thrown away every round | caught by the probe, not by a gate | ⛔ "computed and never spent", 30 minutes after fixing the identical thing for soak |
 | 08-29 | ✅ **`docs/PIPELINE.md`** | Erik: bring the development pipeline together intentionally — eight stages, owners, and what each produces | it names the two places the pipeline actually breaks, both measured | ⛔ the four rules: a script per number · a review MEASURES · a before/after where play moves · docs gate done |
 | 08-29 | ✅ **`docs/PLAYERS_GUIDE.md` Parts I–IX** | Erik: a guide walking a player start to finish — *"the nouns and verbs transformed into game mechanics kind"* | `how_it_works.mjs` PG × 18 — counts, cost ladder, families, death ladder, the minHit dial | ⚠️ Parts X–XII are Aevi's and are gated to stay MARKED rather than go quietly thin |
+| 08-29 | ✅ **four gate suites WIRED** | `scripts/apparatus.mjs` classified every harness and found assertions that ran nowhere | all four verified `exit 0` BEFORE wiring; runner 20 → 24 suites | ⛔ `changeset_check` (11 checks), `dev_world` (4), `playthrough_sim` (1), `verification_ledger` (1) — **a gate that does not run reads as coverage** |
+| 08-29 | ✅ **`docs/APPARATUS.md` — the factory floor** | Erik: *"those dev docs likely will have descriptions of all our test harnesses and routines as well. I want this to be a well oiled factory"* | `how_it_works.mjs` — GATE-UNWIRED must stay 0, and every restated total must match the generator | 78 harnesses classified DERIVED, not declared; ⚠️ a hand-kept list would be wrong within a week |
+| 08-29 | ⚠️ **the classifier stopped matching itself** | its `NEEDS_API` pattern is CODE, so stripping comments did not hide it and `apparatus.mjs` reported ITSELF as needing an API key | LIVE-API 4 → 2, which is the true count | ⛔ **a scanner reading its own prose — the fourth instance**; same fix as `field_atlas`’s NOT_CONSUMERS |
+| 08-29 | ⛔ **§12 THE INTERFACE added** | Erik: *"the UI and user experience needs to be included"* — every section above described the ENGINE and none said how a person reaches it | `how_it_works.mjs` §12, 6 assertions, all three proven able to go RED | ⛔ names the defect it exists to catch: **a mechanic built, tested, green, and impossible for a player to invoke** — `bringForward`, `provoke`, named-ally intercept |
+| 08-29 | ✅ **reachability sweep of the UI** | there is no router and no screen variable, so “is this screen reachable” has exactly one mechanical answer: does anything call it | derived at run time, never a stored count — the list may not GROW | ⚠️ 45 of 46 render functions have a caller; **`renderFormStep` does not** |
+| 08-29 | ⚠️ **`renderFormStep` is DARK CODE, not a dead feature** | I nearly reported a working feature broken — `state.form` has **two other live surfaces** (`c-form`, `p-form`), is persisted, and is read three times | gated: those surfaces must stay | ⛔ the distinction `safe_delete.mjs` exists to make, and why its verdict is never the word “delete” |
+| 08-29 | ✅ **`PLAYERS_GUIDE` PART I½ · WHERE EVERYTHING IS** | a player should not learn by surprise that the game cannot ask a question | 2 assertions; both docs must name all three missing affordances | ⚠️ states the three plainly as **missing questions, not missing features** |
+| 08-29 | ✅ **`PIPELINE` gains a fourth scope: INTERFACE** | all three affordance gaps were found at stage 7, not stage 4 | — | ⛔ **a spec is not done until it says how the player reaches it**; if the answer is “they cannot yet”, that is a §10 gap, not a silence |
+| 08-29 | ⚠️ **a version regex that matched too much** | `"."` in a plain JS string is just `"."`, so the guide’s version check would have accepted `1x9x256` | fixed to a real escape; §0 and PG now use the same form | ⛔ the near-twin of the template-literal `s` bug logged yesterday — **escapes die quietly in strings** |
 
-**Last verified: 2026-08-28 · v1.9.255 · 378 crafts.**
+**Last verified: 2026-08-28 · v1.9.256 · 378 crafts.**
 
 ---
 
@@ -394,3 +403,73 @@ receiver, not the name.**
 `damage_families.json` measured as unread and was **a correct file with a reader pointed at the wrong
 copy.** ⛔ **The signal is identical to cruft; only the diagnosis differs, and only a person can make it.**
 `scripts/safe_delete.mjs` sorts candidates and **refuses to output "delete"** for that reason.
+---
+
+## 12 · THE INTERFACE — what the player actually operates
+
+⛔ **ERIK, 2026-08-29: *"the UI and user experience needs to be included."*** ⚠️ **He is right that it
+was missing. Every section above this one describes what the ENGINE does; none of them said how a person
+reaches it** — and that gap has produced a specific, repeated defect described in §12.4.
+
+### 12.1 · THE SHAPE — one document, one shell, 47 screens
+
+**Singularity is a single-page app with no build step and no framework.** `index.html` is 75 lines; the
+whole interface is **`app.js`, 14,289 lines**, and there are **47 `render*` functions** that paint into one
+shell function, `chrome()`, called from **49 sites**. ⚠️ **THERE IS NO ROUTER AND NO SCREEN VARIABLE.**
+A screen does not "navigate" — it **calls the next render function directly**. `renderCompanionStep`'s
+done-button *is* the edge into `renderBioStep`.
+
+⛔ **THIS IS WHY THE UI HAS NO EQUIVALENT OF THE FOUR DOORS.** Reachability is not declared anywhere, so
+it cannot be checked by reading a table — **the only way to know a screen is reachable is to find a caller.**
+✅ That is now a mechanical question, and §12.3 records what the answer was.
+
+### 12.2 · THE SCREENS, BY WHAT THE PLAYER IS DOING
+
+| doing | screens |
+|---|---|
+| **becoming someone** | `renderCreate` · `renderCreateDoor` · `renderDescribeDoor` · `renderDescribeReveal` · `renderDomainStep` · `renderAbilityStep` · `renderCompanionStep` · `renderBioStep` · `renderPlayerPick` |
+| **the opening** | `renderPrologueIntro` · `renderPrologueOpening` · `renderPrologueProblem` · `renderPrologueCompanion` · `renderPrologueReveal` |
+| ⛔ **playing** | ⛔ **`renderPlay` · `renderFeed` · `renderSkillBattle` · `renderGambitBuilder`** — the loop |
+| **being someone** | `renderCharacterScreen` · `renderInventoryScreen` · `renderSkillWheel` · `renderSkillGraph` · `renderLevelUp` · `renderRoster` |
+| **the world** | `renderMap` · `renderMapWorld` · `renderMapLocation` · `renderWorldTab` · `renderDiscover` · `renderDiscoverCharacters` |
+| **what happened** | `renderCodexScreen` · `renderChronicle` · `renderQuestLog` · `renderQuestDetail` · `renderStructuredQuestDetail` · `renderLibrary` · `renderGallery` · `renderSessionSynopsisReview` |
+| **interruptions** | `renderAcquisitionModal` · `renderPromotionModal` · `renderForkModal` · `renderSettings` |
+| ⚠️ **not for players** | `renderMachine` · `renderAuthorPanel` · `renderPreviewLegs` · `renderRepairScreen` |
+
+### 12.3 · ⚠️ THE TURN IS THREE PHASES, AND THE UI IS THE ONLY PLACE THAT SAYS SO
+
+`SB_STEPS` in `app.js` declares the loop — **`sense` → `action` → `bonus`** — with the hint text a player
+actually reads. ⛔ **THE BONUS IS EARNED, NOT GRANTED: a good read buys a FULL extra action.** ⚠️ **And
+sensing costs the craft's energy**, which is why it is the most under-used verb in the game.
+
+✅ **`trait-tap` (5 sites) is the pattern that makes the machine legible without a manual**: a trait on the
+character sheet is tappable and answers *lore + mechanics* in place. **Where a number comes from should be
+one tap away from the number.**
+
+### 12.4 · ⛔ THE DEFECT THIS SECTION EXISTS TO CATCH
+
+⛔ **A MECHANIC CAN BE BUILT, TESTED, GREEN, AND HAVE NO WAY FOR A PLAYER TO INVOKE IT.** This is the
+interface twin of the four doors, and it has happened three times:
+
+| built | ⛔ missing |
+|---|---|
+| `bringForward` — choose who acts blow by blow | **there is no pick** |
+| `provoke` — needs a target | **there is no way to name one** |
+| a named-ally intercept (`shared_weight` guards ONE ally) | **there is no way to say which** |
+
+⚠️ **ALL THREE ARE THE SAME SHAPE:** the engine accepts a choice the interface never asks for. ✅ The
+likely fix is general rather than per-craft — **a craft declares what KIND of choice its resolution needs,
+and one declaration surface asks once.** ⬜ **That wants Erik's ruling and Aevi's shape; it is a §10 gap.**
+
+### 12.5 · ✅ A REACHABILITY SWEEP, RUN
+
+**Measured 2026-08-29: of 46 named render functions, 45 have a caller.** ⛔ **One does not:
+`renderFormStep`** — a complete, working screen asking *"What do they look like?"*, writing `state.form`,
+which leads the portrait so a non-human renders true from the start.
+
+⚠️ **AND IT IS NOT A BROKEN FEATURE — I NEARLY REPORTED IT AS ONE.** `state.form` has **two other live
+authoring surfaces** (`c-form` in creation, `p-form` in the prologue), is persisted onto the character, and
+is read in three places including the portrait prompt. ✅ **The field is fine; the screen is superseded.**
+**`renderFormStep` is DARK CODE, not a dead feature** — the distinction `scripts/safe_delete.mjs` exists to
+make, and the reason its verdict is never the word "delete".
+

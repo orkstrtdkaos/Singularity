@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 82 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 83 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-08-29 · v1.9.259 · 82 files.**
+**Last measured: 2026-08-29 · v1.9.259 · 83 files.**
 
 ---
 
@@ -173,6 +173,7 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | `scripts/repair_minted_transit` | 🔧 TOOL | — | CCODE-10 data repair |
 | `scripts/repair_self_variants` | 🔧 TOOL | — | CCODE-04 data repair |
 | `scripts/silas_battle` | 🔧 TOOL | — | CCODE-259 |
+| `scripts/targeting_ruling_sim` | 🔧 TOOL | — | CCODE-308 |
 | `scripts/turn_flow` | 🔧 TOOL | — | CCODE-254 |
 | `scripts/vocab_sweep` | 🔧 TOOL | — | NEAR-DUPLICATE TERMS |
 | `scripts/world_projection` | 🔧 TOOL | — | project the authored 12D disposition space onto the plane |

@@ -2102,7 +2102,14 @@ for (const pack of PACKS) {
 // (b) REACHABILITY - a record carrying an innate-access key must be reachable by a seeder call for that
 // record type; (b) would have caught precursor the day it was authored."
 {
-  const ACCESS_KEYS = { innatePrecursor: "precursor", innateLivingCurrent: "living_current", wildCurrent: "wild_current" };
+  // ⛔ CORRECTED 2026-08-28 (Aevi). MY ORIGINAL MAP INVENTED TWO POWER SYSTEMS THAT DO NOT EXIST.
+  // `power_sources.sources` is precursor · metaphysical · veil · combination · ordered_nanite · wild_nanite —
+  // there is no `living_current` and no `wild_current`, and no craft has ever carried either. So this gate
+  // failed three CORRECT crafts for four months against a vocabulary of my own invention.
+  // ⚠️ THE INTENT WAS RIGHT AND IS KEPT: an innate-access key must grant a craft whose source matches the
+  // KIND of access. The living and wild currents are woven substrate — `combination` is what that is, and
+  // all three crafts already say so.
+  const ACCESS_KEYS = { innatePrecursor: "precursor", innateLivingCurrent: "combination", wildCurrent: "combination" };
   // Which resolver the app must pass for each rules file that can carry an innate-access key. A NEW record
   // type carrying one must be added here AND passed to the seeder - that pairing IS the guard.
   const SEEDED_FROM = { "origins.json": "originRecord", "backgrounds.json": "backgroundById" };

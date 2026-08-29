@@ -1,388 +1,403 @@
 {
-  "schemaVersion": 1,
-  "note": "SNG-263 — THE CRAFT MECHANICAL BODY. Erik: 'every function described needs a matching game mechanic that can be verified.' Audit confirmed exactly: 285 crafts, 24 verbs, and NO field for damage, healing, duration, range, area, targets or rank anywhere on any craft — of 24 verbs only strike and break did anything, so heal on 31 crafts healed nothing and ward on 23 warded nothing. This file is the SHAPE: what each verb-family DOES, and the default magnitudes a craft inherits until it authors its own. The engine reads craft.mechanic first and falls back here, so an unauthored craft still works and an authored one is genuinely its own.",
-  "resolutionOrder": "craft.mechanic.<field>  ->  familyDefaults[family].<field>  ->  nothing (the verb does not use that dimension)",
-  "families": {
-    "HARM": {
-      "verbs": [
-        "strike",
-        "break",
-        "hinder"
-      ],
-      "shape": "damage",
-      "operative": "damage",
-      "note": "A won exchange with a harming verb wounds. hinder sits in HARM by vocabulary but does not damage — it hobbles; its shape is overridden below."
-    },
-    "RESTORE": {
-      "verbs": [
-        "heal",
-        "mend",
-        "restore",
-        "empower"
-      ],
-      "shape": "healing",
-      "operative": "healing",
-      "note": "31 crafts said heal and healed nothing. Restores health to a target; empower instead grants a standing bonus (see overrides)."
-    },
-    "PROTECT": {
-      "verbs": [
-        "shield",
-        "ward",
-        "resist"
-      ],
-      "shape": "guard",
-      "operative": "duration",
-      "note": "A standing DEFENSIVE effect on the caster or an ally — reduces incoming harm for a duration. 23 crafts said ward and warded nothing."
-    },
-    "INFLUENCE": {
-      "verbs": [
-        "bind",
-        "command",
-        "deceive",
-        "conceal"
-      ],
-      "shape": "hobble",
-      "operative": "duration",
-      "note": "A standing PENALTY on a target — 55 crafts said bind and bound nothing."
-    },
-    "KNOW": {
-      "verbs": [
-        "reveal",
-        "foresee",
-        "track"
-      ],
-      "shape": "setup",
-      "operative": "magnitude",
-      "operativeNote": "CCODE-77: this said `setup` — a dimension the setup SHAPE does not carry — so the tier ladder scaled nothing and a T-V reveal resolved identically to a T-I, across the catalog's largest family. `magnitude` is the field the shape actually has and what this note already calls the setup BONUS. If the intent was that a higher-tier read should last LONGER rather than read DEEPER, change this one word to `duration`.",
-      "note": "The largest family (114 reveal crafts). Grants a setup bonus / reads the field — the sense-phase mechanic the engine already has, now something a craft can actually carry."
-    },
-    "SHAPE": {
-      "verbs": [
-        "make",
-        "transform",
-        "summon"
-      ],
-      "shape": "construct",
-      "operative": "duration",
-      "note": "Creates or alters a thing that persists for a duration."
-    },
-    "MOVE": {
-      "verbs": [
-        "move",
-        "travel",
-        "open"
-      ],
-      "shape": "reposition",
-      "operative": "range",
-      "note": "Changes position or opens a way — range is the operative dimension."
-    },
-    "SUSTAIN": {
-      "verbs": [
-        "sustain"
-      ],
-      "shape": "bolster",
-      "operative": "duration",
-      "note": "Extends what is already standing / resists depletion."
-    }
+ "schemaVersion": 1,
+ "note": "SNG-263 — THE CRAFT MECHANICAL BODY. Erik: 'every function described needs a matching game mechanic that can be verified.' Audit confirmed exactly: 285 crafts, 24 verbs, and NO field for damage, healing, duration, range, area, targets or rank anywhere on any craft — of 24 verbs only strike and break did anything, so heal on 31 crafts healed nothing and ward on 23 warded nothing. This file is the SHAPE: what each verb-family DOES, and the default magnitudes a craft inherits until it authors its own. The engine reads craft.mechanic first and falls back here, so an unauthored craft still works and an authored one is genuinely its own.",
+ "resolutionOrder": "craft.mechanic.<field>  ->  familyDefaults[family].<field>  ->  nothing (the verb does not use that dimension)",
+ "families": {
+  "HARM": {
+   "verbs": [
+    "strike",
+    "break",
+    "hinder"
+   ],
+   "shape": "damage",
+   "operative": "damage",
+   "note": "A won exchange with a harming verb wounds. hinder sits in HARM by vocabulary but does not damage — it hobbles; its shape is overridden below."
   },
-  "verbOverrides": {
-    "hinder": {
-      "shape": "hobble",
-      "operative": "duration",
-      "why": "in the HARM vocabulary but it impedes rather than wounds — engine harmFunctions is strike+break only, and this keeps the mechanic honest to that"
-    },
-    "empower": {
-      "shape": "bolster",
-      "operative": "duration",
-      "why": "in RESTORE by vocabulary; mechanically it grants a standing bonus rather than restoring health"
-    },
-    "bargain": {
-      "shape": "price",
-      "operative": "scope",
-      "why": "⛔ CCODE-236. In INFLUENCE by vocabulary; mechanically it moves a SETTLED PRICE and nothing else. `operative` is `scope` and that is the load-bearing part (Aevi §5): RANK SCALES THE STAKE, NOT THE DISCOUNT — an L1 bargain works on a sack of grain, an L5 on a caravan contract, and neither gets a deeper cut on a loaf. Consumed by `engine/economy.js::bargainOutcome`, which refuses a deal beyond the rank's reach outright rather than applying a smaller effect to it. ⚠️ §31.5: both sides give something — a won bargain returns `concessionOwed`, given at the moment of the deal and never tracked after it (Erik's no-escrow ruling)."
-    },
-    "provoke": {
-      "shape": "unsettle",
-      "operative": "targets",
-      "why": "⛔ CCODE-236 §6. In INFLUENCE by vocabulary; mechanically it COSTS THE OPPONENT THEIR CHOSEN LINE. Erik: 'cost the opponent a chosen action, making them revert to basic default' — `state.tactic` IS that chosen line, so clearing it is the effect exactly and needs no new field. Consumed by `engine/craftmechanics.js::resolveProvoke`. ⚠️ It does NOTHING against a foe who has committed to no line: there is nothing to break, and that is a refusal rather than a hollow win."
-    },
-    "soothe": {
-      "shape": "cool",
-      "operative": "magnitude",
-      "why": "⛔ CCODE-236 §6. §31.5: 'you take the heat out.' It REMOVES HEAT, NOT REASONS — it pulls MOMENTUM toward zero or lifts an imposed condition, and it never touches a damage track, because a soothe that healed would be a second RESTORE verb wearing a social name. ⚠️ Momentum is pulled TOWARD zero and never past it: cooling a fight the other side is winning does not hand you the advantage. Consumed by `engine/craftmechanics.js::resolveSoothe`."
-    }
+  "RESTORE": {
+   "verbs": [
+    "heal",
+    "mend",
+    "restore",
+    "empower"
+   ],
+   "shape": "healing",
+   "operative": "healing",
+   "note": "31 crafts said heal and healed nothing. Restores health to a target; empower instead grants a standing bonus (see overrides)."
   },
-  "familyDefaults": {
-    "damage": {
-      "dice": {
-        "n": 1,
-        "d": 6
-      },
-      "plus": 0,
-      "marginFloorPer": 0.02,
-      "note": "SNG-263 r4 §7/§11: damage is DICE, not a flat band. The die is what the craft IS; the wielder term and soak are applied by the engine around it. T-I default 1d6 — mean 3.5, max 6, so the MAX takes a peer riffraff (6hp) in one blow and the average needs two, which is Erik's anchor. `marginFloorPer` lets a decisive exchange raise the floor of the roll without ever exceeding what the dice can give."
-    },
-    "healing": {
-      "dice": {
-        "n": 1,
-        "d": 4
-      },
-      "plus": 0
-    },
-    "guard": {
-      "soak": 2,
-      "soakRank": 1,
-      "duration": 2,
-      "magnitude": 2,
-      "note": "SNG-263: a ward raises a RANKED guard layer — it soaks `soak` for `duration` rounds at rank `soakRank`, and a craft must out-PENETRATE that rank to go through it. Field names follow the catalog: Aevi's resonant_shield authors `soak` + `soakRank` (and `magnitude` alongside), and her note ties soakRank 1 to radiant_lance r3 'beating a Harmonic shield's FIRST RANK' — the two traditions authored the counter-pair from both sides before the engine had it. `magnitude` is kept as an accepted alias so guard crafts authored either way resolve."
-    },
-    "hobble": {
-      "magnitude": 2,
-      "duration": 2,
-      "note": "a named penalty on the target's rolls, for duration rounds"
-    },
-    "setup": {
-      "magnitude": 3,
-      "duration": 1,
-      "note": "the setup bonus a read buys for the next exchange"
-    },
-    "construct": {
-      "magnitude": 2,
-      "duration": 3
-    },
-    "reposition": {
-      "range": 1,
-      "push": 1
-    },
-    "bolster": {
-      "magnitude": 2,
-      "duration": 2
-    },
-    "retrieval": {
-      "targets": 1,
-      "duration": 0,
-      "note": "⛔ CCODE-269 / AEVI's SPEC_retrieval_shape §3a. THE NINTH SHAPE, AND IT EXISTS BECAUSE `calling_back` WAS WEARING `healing` AND INHERITING ITS 1d4 — damage-shaped dice for a job that deals none. Its own `notFor` said so: \"AND IT DOES NOT HEAL: what comes back comes back exactly as hurt as it went down.\"\n⚠️ NO DICE BY DEFAULT, DELIBERATELY. A retrieval roll is a CONTEST AGAINST A DEPTH, not a magnitude — `engine/deathdepth.js` compares the margin to a threshold that scales with the rung and the rank. A shape that handed it a die would put a magnitude back in front of a question that has no magnitude.\n⛔ ONE PERSON, INSTANTANEOUS. You reach for someone, once."
-    }
+  "PROTECT": {
+   "verbs": [
+    "shield",
+    "ward",
+    "resist"
+   ],
+   "shape": "guard",
+   "operative": "duration",
+   "note": "A standing DEFENSIVE effect on the caster or an ally — reduces incoming harm for a duration. 23 crafts said ward and warded nothing."
   },
-  "tierLadder": {
-    "note": "SNG-263 §8, Erik's ruler. For MAGNITUDE shapes (guard/hobble/setup/construct/reposition/bolster) `mult` scales the operative dimension. For DICE shapes (damage/healing) the `dice` row is authoritative: the die COUNT climbs linearly and `plus` supplies the non-linearity, because Erik's T-III is 'not linear — it should exceed a straight doubling-again' and integer dice alone cannot express that. T-I 1d6 (mean 3.5) -> T-II 2d6 (7.0, a clean double) -> T-III 3d6+3 (13.5, well past linear 10.5 and close to a re-doubling of 14) -> T-IV/V flagged SPECIAL because at the capstone rung a craft should buy a KIND of ability, not a bigger number. capstoneStanding.capstoneTier is already 4, so the engine's existing rung agrees.",
-    "1": {
-      "mult": 1,
-      "dice": {
-        "nMult": 1,
-        "plus": 0
-      },
-      "special": false
-    },
-    "2": {
-      "mult": 2,
-      "dice": {
-        "nMult": 2,
-        "plus": 0
-      },
-      "special": false
-    },
-    "3": {
-      "mult": 3.5,
-      "dice": {
-        "nMult": 3,
-        "plus": 3
-      },
-      "special": false
-    },
-    "4": {
-      "mult": 4.5,
-      "dice": {
-        "nMult": 4,
-        "plus": 5
-      },
-      "special": true
-    },
-    "5": {
-      "mult": 5.5,
-      "dice": {
-        "nMult": 5,
-        "plus": 8
-      },
-      "special": true
-    }
+  "INFLUENCE": {
+   "verbs": [
+    "bind",
+    "command",
+    "deceive",
+    "conceal"
+   ],
+   "shape": "hobble",
+   "operative": "duration",
+   "note": "A standing PENALTY on a target — 55 crafts said bind and bound nothing."
   },
-  "intensity": {
-    "note": "SNG-263 §6 — Erik: conserve ~= HALF, surge ~= DOUBLE the operative dimension. But his constraint is the important half: 'each skill has its own descriptions, so you would need to audit each to verify they get applied logically.' A blanket x0.5/x2 is wrong for a concealment or a read, so these are the BASELINE only; a craft may state its own conserve/surge in its own terms via craft.mechanic.intensity, and the authored text is what the player is shown before committing.",
-    "conserve": {
-      "mult": 0.5
-    },
-    "standard": {
-      "mult": 1
-    },
-    "surge": {
-      "mult": 2
-    }
+  "KNOW": {
+   "verbs": [
+    "reveal",
+    "foresee",
+    "track"
+   ],
+   "shape": "setup",
+   "operative": "magnitude",
+   "operativeNote": "CCODE-77: this said `setup` — a dimension the setup SHAPE does not carry — so the tier ladder scaled nothing and a T-V reveal resolved identically to a T-I, across the catalog's largest family. `magnitude` is the field the shape actually has and what this note already calls the setup BONUS. If the intent was that a higher-tier read should last LONGER rather than read DEEPER, change this one word to `duration`.",
+   "note": "The largest family (114 reveal crafts). Grants a setup bonus / reads the field — the sense-phase mechanic the engine already has, now something a craft can actually carry."
   },
-  "rankDeltas": {
-    "note": "SNG-263 §3 — Erik: 'I can't tell how ranks differ.' A rank must change something nameable. Three legal kinds, per Erik's own framing: ADD a function, DEEPEN the existing one (more magnitude), or EXTEND a dimension (area/range/duration). A craft declares its own per-rank delta; until it does, this default DEEPENS, so ranking up is never invisible. TIER is the craft's level-band; RANK is depth within an owned craft — different axes, never conflated.",
-    "kinds": [
-      "add",
-      "deepen",
-      "extend"
-    ],
-    "default": {
-      "kind": "deepen",
-      "mult": 1.35,
-      "why": "an unauthored rank still does something measurable — but a craft that names its own delta reads better and should"
-    }
+  "SHAPE": {
+   "verbs": [
+    "make",
+    "transform",
+    "summon"
+   ],
+   "shape": "construct",
+   "operative": "duration",
+   "note": "Creates or alters a thing that persists for a duration."
   },
-  "operativeAxis": {
-    "note": "SNG-263 r4, corrected by Aevi's blazeborn pilot. My first cut made this a CLOSED legal list and the pilot broke it immediately: 12 crafts declared 18 DISTINCT axes, ten of which (perceptionDepth, upkeepRelief, purge, materials, persistence, speed, bindStrength, witnesses, debuff, uses) I had never imagined — and only 4 of 12 crafts carried damage at all. Her finding stands: a damage-only, closed-vocabulary schema would fail two thirds of a single tradition. So the axis vocabulary is OPEN. A craft names the dimension its own prose names.",
-    "mechanical": [
-      "damage",
-      "healing",
-      "duration",
-      "range",
-      "area",
-      "targets",
-      "soak",
-      "soakRank",
-      "penetration",
-      "magnitude",
-      "setup",
-      "push",
-      "variance",
-      "evasion",
-      "evasionRank",
-      "requiresAttention",
-      "autonomous",
-      "damageType",
-      "unmakeRank"
-    ],
-    "mechanicalNote": "The subset the ENGINE can compute. An axis in this list must carry a NUMBER (or dice) — that is what the CI checks. Any other axis is a NAMED axis: real, authored, shown to the player, and scaled in the craft's own prose at each rank and intensity, but not arithmetic the engine performs. That split is the honest one: 'perceptionDepth' is a true operative axis and there is no number the engine could apply to it.",
-    "refusedIntensity": "A craft may author REFUSED for conserve or surge. Aevi's the_last_light refuses both on its own cannot-text ('it cannot be half-given') — a blanket x0.5/x2 would invent a conserved capstone the fiction forbids. REFUSED is a value, never an omission, and the engine must not silently substitute the baseline.",
-    "penetrationNote": "SNG-263 r4 Gap-2, RANKED — from Aevi's radiant pass. radiant_lance r2 cuts 'LIGHT ARMOR' and r3 beats 'a Harmonic shield's FIRST RANK': the catalog already assumed guard is a stack of RANKED layers that penetration beats BY DEGREE, not one flat number. A craft's `penetration` is the highest guard RANK it cuts through; layers above that rank still soak. This is also what finally gives ward/shield something real to do — they raise a ranked layer, and a stronger craft can go through it."
+  "MOVE": {
+   "verbs": [
+    "move",
+    "travel",
+    "open"
+   ],
+   "shape": "reposition",
+   "operative": "range",
+   "note": "Changes position or opens a way — range is the operative dimension."
   },
-  "variance": {
-    "note": "CCODE-77 / Aevi (churnfolk): variance is a WIDER BAND, not a bigger number. One authored point stretches the outcome away from its own mean by perPoint, so the max rises, the min drops, and the AVERAGE does not move. A chaotic craft must be a gamble, not a buff.",
-    "perPoint": 0.09
+  "SUSTAIN": {
+   "verbs": [
+    "sustain"
+   ],
+   "shape": "bolster",
+   "operative": "duration",
+   "note": "Extends what is already standing / resists depletion."
+  }
+ },
+ "verbOverrides": {
+  "hinder": {
+   "shape": "hobble",
+   "operative": "duration",
+   "why": "in the HARM vocabulary but it impedes rather than wounds — engine harmFunctions is strike+break only, and this keeps the mechanic honest to that"
   },
-  "damageTypeByTradition": {
-    "note": "CCODE-83 / Aevi's damage_type_map: the KIND a tradition's harm is, when the craft does not say for itself. Resolution order is the same as every other dimension - the craft's own mechanic.damageType wins, then damageTypeByCraft, then this. A tradition absent here is deliberately UNTYPED and is answered by no affinity at all.",
-    "radiant": "light",
-    "blazeborn": "light",
-    "umbral": "shadow",
-    "harmonic": "sound",
-    "rootkin": "living",
-    "ashwarden": "decay",
-    "churnfolk": "wild",
-    "lattice": "order",
-    "enginewright": "mechanical",
-    "numinous": "numinous",
-    "veilwright": "deception",
-    "verist": "truth"
+  "empower": {
+   "shape": "bolster",
+   "operative": "duration",
+   "why": "in RESTORE by vocabulary; mechanically it grants a standing bonus rather than restoring health"
   },
-  "damageTypeByCraft": {
-    "note": "CCODE-83 / Aevi's perCraftOverrides: crafts whose kind is not their tradition's default, or whose tradition is untyped. A SECOND source for one fact is drift waiting to happen, so it is a lookup the resolver consults in a fixed order rather than a rival to the craft's own mechanic block - authoring damageType on the craft still wins over anything here.",
-    "radiant_lance": "light",
-    "kindle": "light",
-    "radiance": "light",
-    "revealing_burn": "light",
-    "last_light": "light",
-    "wither": "decay",
-    "palework": "decay",
-    "draw_down": "decay",
-    "the_cut_thread": "decay",
-    "sonic_resonance": "sound",
-    "green_claim": "living",
-    "wild_flowering": "wild",
-    "scatter": "wild",
-    "dim": "shadow",
-    "shadow_work": "shadow"
+  "bargain": {
+   "shape": "price",
+   "operative": "scope",
+   "why": "⛔ CCODE-236. In INFLUENCE by vocabulary; mechanically it moves a SETTLED PRICE and nothing else. `operative` is `scope` and that is the load-bearing part (Aevi §5): RANK SCALES THE STAKE, NOT THE DISCOUNT — an L1 bargain works on a sack of grain, an L5 on a caravan contract, and neither gets a deeper cut on a loaf. Consumed by `engine/economy.js::bargainOutcome`, which refuses a deal beyond the rank's reach outright rather than applying a smaller effect to it. ⚠️ §31.5: both sides give something — a won bargain returns `concessionOwed`, given at the moment of the deal and never tracked after it (Erik's no-escrow ruling)."
+  },
+  "provoke": {
+   "shape": "unsettle",
+   "operative": "targets",
+   "why": "⛔ CCODE-236 §6. In INFLUENCE by vocabulary; mechanically it COSTS THE OPPONENT THEIR CHOSEN LINE. Erik: 'cost the opponent a chosen action, making them revert to basic default' — `state.tactic` IS that chosen line, so clearing it is the effect exactly and needs no new field. Consumed by `engine/craftmechanics.js::resolveProvoke`. ⚠️ It does NOTHING against a foe who has committed to no line: there is nothing to break, and that is a refusal rather than a hollow win."
+  },
+  "soothe": {
+   "shape": "cool",
+   "operative": "magnitude",
+   "why": "⛔ CCODE-236 §6. §31.5: 'you take the heat out.' It REMOVES HEAT, NOT REASONS — it pulls MOMENTUM toward zero or lifts an imposed condition, and it never touches a damage track, because a soothe that healed would be a second RESTORE verb wearing a social name. ⚠️ Momentum is pulled TOWARD zero and never past it: cooling a fight the other side is winning does not hand you the advantage. Consumed by `engine/craftmechanics.js::resolveSoothe`."
+  }
+ },
+ "familyDefaults": {
+  "damage": {
+   "dice": {
+    "n": 1,
+    "d": 6
+   },
+   "plus": 0,
+   "marginFloorPer": 0.02,
+   "note": "SNG-263 r4 §7/§11: damage is DICE, not a flat band. The die is what the craft IS; the wielder term and soak are applied by the engine around it. T-I default 1d6 — mean 3.5, max 6, so the MAX takes a peer riffraff (6hp) in one blow and the average needs two, which is Erik's anchor. `marginFloorPer` lets a decisive exchange raise the floor of the roll without ever exceeding what the dice can give."
   },
   "healing": {
-    "_note": "⛔ SNG-500 §1 / CCODE-207 — ERIK'S DIALS FOR THE HEAL TAPER. Aevi's bound: \"healing the same subject repeatedly in one contest should return less each time, or a party with one healer never loses.\" The SHAPE is the engine's; these NUMBERS are Erik's, and they live here so they can be turned without editing engine source — the failure that left 21 arc-response numbers unreachable for weeks.",
-    "taperPer": 0.25,
-    "_taperPer": "how much of the heal each PRIOR heal on the same subject this contest takes off. 0.25 = a second heal returns 75%, a third 50%. Set to 0 to switch the taper off entirely.",
-    "taperFloor": 0.25,
-    "_taperFloor": "⚠️ the floor it can never fall below, as a fraction of the roll. A healer who has already worked twice is worth less, never worthless — without this, a long contest turns the healer off.",
-    "_whatDoesNotApply": "⛔ A HEAL CANNOT CRIT (no overhealing) AND CANNOT BE EVADED — those are not dials, they are the reason `resolveHeal` is its own path rather than a sign flip on the damage one. It CAN be soaked, but only by ACTIVE ONGOING HARM (bleeding, hastened decay, rot, venom, a sustained hold) and never by armour.",
-    "_ongoingHarmShape": "⚠️ AEVI — THE READER IS LIVE AND UNFED. `resolveHeal` reads ongoing harm off the SUBJECT as [{ id, magnitude }]. `Hastened Grey` (\"a wound already open goes grey and stops closing\") and `Sustained Regard` r2 (\"cannot stop bleeding for as long as you hold it\") both claim it in prose and neither carries a field. Author `mechanic.ongoingHarm: { id, magnitude }` on the crafts that IMPOSE it."
+   "dice": {
+    "n": 1,
+    "d": 4
+   },
+   "plus": 0
   },
-  "imposition": {
-    "_note": "⛔ SNG-500 §2 / CCODE-208 — HOW HARD A CRAFT-IMPOSED CONDITION IS TO SHRUG OFF. A craft declares `mechanic.imposes: { condition, resist, degradesTo, targets }`; these decide the bar its margin must clear. ⚠️ The resist changes WHAT lands, never WHETHER anything does — a working that wins the exchange and then evaporates is the same dead feeling as a heal that heals nothing.",
-    "base": 10,
-    "_base": "the bar before anything else. A decisive exchange clears it; a scraped win does not.",
-    "perResist": 1,
-    "_perResist": "how much each point the subject brings raises the bar.",
-    "perRank": 5,
-    "_perRank": "⚠️ how much each rank past the first LOWERS it. Rank here is not a bigger number, it is a harder thing to shrug off — which is what rank means everywhere else.",
-    "_neverDeath": "⛔ A CRAFT CAN NEVER IMPOSE DEATH, and that is structural rather than a dial. `IMPOSABLE` is action_loss | staggered | unconscious | incapacitated. `slain` and `left_for_dead` are OUTCOMES of the incapacitation table, reached after someone is already down and weighed against the aggressor's kind. Erik's §40 ruling lets the ENGINE impose death when the situation calls for it; a craft is not a situation.",
-    "_unauthored": "⚠️ AEVI — NOTHING AUTHORS `mechanic.imposes` YET. `Keening` is the craft SNG-500 §2 was written about and does nothing at any rank. Her own scope: r1 area, action-loss · r2 up to three, unconscious-or-action-loss · r3 everyone you choose."
+  "guard": {
+   "soak": 2,
+   "soakRank": 1,
+   "duration": 2,
+   "magnitude": 2,
+   "note": "SNG-263: a ward raises a RANKED guard layer — it soaks `soak` for `duration` rounds at rank `soakRank`, and a craft must out-PENETRATE that rank to go through it. Field names follow the catalog: Aevi's resonant_shield authors `soak` + `soakRank` (and `magnitude` alongside), and her note ties soakRank 1 to radiant_lance r3 'beating a Harmonic shield's FIRST RANK' — the two traditions authored the counter-pair from both sides before the engine had it. `magnitude` is kept as an accepted alias so guard crafts authored either way resolve."
   },
-  "projects": {
-   "sabotageMax": 4,
-   "_sabotageMax": "⛔ CCODE-295 — THE MOST ONE ACT OF SABOTAGE MAY TAKE. `sabotageProject` already clamps to what is banked, so it can never go negative; this stops a single hallucinated number wiping a long work in one op. ⚠️ SABOTAGE IS A SETBACK, NOT A DELETE KEY — a threshold that can be erased at a stroke is a date wearing a threshold's name, which is what SNG-522 §1 exists to avoid. Raise it if setbacks should bite harder.",
-    "_note": "⛔ SNG-522 §1 / CCODE-215 — PROJECT WORK. A project completes on a THRESHOLD, never on a date: a date can only be waited out, and a threshold can be interrupted, hurried by more hands, set back by sabotage, and inherited. Sunk Assay L4 is built on all four.",
-    "ticksPerMagnitude": 2,
-    "_ticksPerMagnitude": "days of work per point of the craft's `magnitude`, when no `projectThreshold` is authored. Built System (mag 6) -> 12 days; Sound Read (mag 5) -> 10.",
-    "perExtraHand": 0.5,
-    "_perExtraHand": "⚠️ DELIBERATELY SUBLINEAR (divided by sqrt of the hands). A second pair of hands helps; a tenth mostly gets in the way. A party that recruits a village must not finish a year's assay in an afternoon.",
-    "_thresholdSource": "⚠️ AEVI — `built_system` carries `duration: 8760`, a year in hours, which reads like an intended scale and is NOT what the threshold uses. If a project's real length is meant to come from `duration` rather than `magnitude`, author `projectThreshold` on the craft and this derivation steps aside. Reported rather than guessed."
+  "hobble": {
+   "magnitude": 2,
+   "duration": 2,
+   "note": "a named penalty on the target's rolls, for duration rounds"
   },
-  "damageFamilies": {
-    "_note": "⛔ CCODE-281 / ERIK: \"boil things down a bit, BACK TO THE POLE AXES as a guide for what types there are… ELEMENTAL is heat, cold, lightning, etc.\" And Aevi's correction of her own axis table: NOT EVERY TYPE IS ON AN AXIS.\n⚠️ THREE FAMILIES, AND THE FAMILY DECIDES WHAT A WARD CAN ANSWER. CCode's objection was that cold and fire are both TAKINGS rather than two ends of one thing — which is exactly why neither is polar. They are SIBLINGS. A ward against fire is not a ward against ice, and under a family model it never can be.\n⛔ POLAR PAIRS ONLY WHERE AN AXIS WARRANTS ONE. A pair means the two ends genuinely oppose: one gives what the other takes. Anything else is siblings in a family, and pairing them would let a ward against one answer the other for free.",
-    "physical": {
-      "types": [
-        "physical"
-      ],
-      "owner": null,
-      "_owner": "⛔ NOBODY OWNS IT. It is the default and it is answered by armour. A tradition does not reach `physical` — it simply hits you, and that is why plain steel works on everything."
-    },
-    "elemental": {
-      "types": [
-        "heat",
-        "cold",
-        "lightning",
-        "corrosive",
-        "force"
-      ],
-      "owner": null,
-      "_owner": "⛔ NOBODY OWNS THESE EITHER — they are how the WORLD hurts you, and any tradition REACHES one through its own idiom. ⚠️ THIS IS WHAT UNBLOCKS BLAZEBORN: seven untyped harm crafts, six of which use burn/flame language in their own text, and `heat` was not available to them because every type had been minted as one tradition's signature.\n⚠️ AND IT RECLASSIFIES `cold`, which was authored as Death's own the day before this. Death REACHES it — your body goes cold when you die — and so does anyone else."
-    },
-    "polar": {
-      "pairs": [
-        {
-          "axis": "life",
-          "minus": "decay",
-          "plus": "living",
-          "why": "one ends what the other grows — the death_life axis the world is built on"
-        },
-        {
-          "axis": "truth",
-          "minus": "deception",
-          "plus": "truth",
-          "why": "what is hidden against what is shown; veilwright and verist hold the two ends"
-        }
-      ],
-      "unpaired": [
-        "appetite",
-        "feeling",
-        "shadow",
-        "light",
-        "judgement",
-        "precursor",
-        "abstraction",
-        "vitality"
-      ],
-      "_unpaired": "⚠️ A TYPE WITHOUT AN OPPOSITE IS STILL POLAR — it belongs to a pole, it simply has no partner yet. ⛔ LISTING THEM HERE RATHER THAN INVENTING PARTNERS IS THE POINT: `appetite` has no natural opposite, and minting one so the table looks tidy is exactly the piecemeal Erik called a halt to.\n⚠️ `vitality` IS THE INTERESTING ONE and Aevi already found it: an Ashwarden TAKES life to mend himself, an Abyssal is OFFERED a wound and takes it away — same type, opposite consent. That may be a pair whose axis is CONSENT rather than direction, and it is not mine to rule."
-    }
+  "setup": {
+   "magnitude": 3,
+   "duration": 1,
+   "note": "the setup bonus a read buys for the next exchange"
   },
-  "wardLadder": {
-    "r1": "resist",
-    "r2": "soak",
-    "r3": "immunity",
-    "_r1": "⛔ ERIK: \"initial ranks will add resist then soak then immunity.\" THREE DIFFERENT KINDS OF ANSWER, not three sizes of the same one:\n  · RESIST  — you are harder to land on. It moves the ROLL.\n  · SOAK    — it lands and takes less off you. It moves the DAMAGE.\n  · IMMUNITY— that type does not touch you at all.\n⚠️ AND IMMUNITY IS PER TYPE, NEVER PER BLOW, which is what makes composite damage matter: a ward immune to `heat` meets a blow that is half heat and half physical, and the physical half lands in full. ⛔ NOTHING IS EVER FULLY BLOCKED — the same principle as `minHit`, which already says no foe is immune to everything."
+  "construct": {
+   "magnitude": 2,
+   "duration": 3
   },
-  "wardBreadth": {
-    "oneTypeAtRank": 1,
-    "familyAtRank": 3,
-    "_oneTypeAtRank": "⛔ ERIK: \"wards can start with just one type, like Cold... but some higher level wards will protect against multiple types - elemental ward for example.\"\n⚠️ SO BREADTH IS EARNED SEPARATELY FROM DEPTH. A rank-1 ward answers ONE type; a high-rank ward may answer a whole FAMILY — and `elemental ward` is exactly that, which is why the families have to exist before the wards can.\n⛔ A WARD THAT ANSWERS EVERYTHING STILL HAS NO CHARACTER. The which-check already enforces this and it forced `death_ward` from five types to three; a FAMILY is the widest a ward should reach, because the family is a real idea and 'everything' is not."
+  "reposition": {
+   "range": 1,
+   "push": 1
+  },
+  "bolster": {
+   "magnitude": 2,
+   "duration": 2
+  },
+  "retrieval": {
+   "targets": 1,
+   "duration": 0,
+   "note": "⛔ CCODE-269 / AEVI's SPEC_retrieval_shape §3a. THE NINTH SHAPE, AND IT EXISTS BECAUSE `calling_back` WAS WEARING `healing` AND INHERITING ITS 1d4 — damage-shaped dice for a job that deals none. Its own `notFor` said so: \"AND IT DOES NOT HEAL: what comes back comes back exactly as hurt as it went down.\"\n⚠️ NO DICE BY DEFAULT, DELIBERATELY. A retrieval roll is a CONTEST AGAINST A DEPTH, not a magnitude — `engine/deathdepth.js` compares the margin to a threshold that scales with the rung and the rank. A shape that handed it a die would put a magnitude back in front of a question that has no magnitude.\n⛔ ONE PERSON, INSTANTANEOUS. You reach for someone, once."
+  },
+  "price": {
+   "scope": 2,
+   "duration": 1,
+   "note": "⛔ AUTHORED 2026-08-28 (Aevi) — the shape existed with no defaults, so an unauthored `bargain` craft resolved to nothing. ⚠️ `operative` IS `scope` AND THAT IS THE LOAD-BEARING PART: rank scales THE STAKE, not the discount — an L1 bargain works on a sack of grain, an L5 on a caravan contract, and neither gets a deeper cut on a loaf. `scope: 2` is the smallest real deal; `duration: 1` because a bargain is settled at the moment it is struck and never tracked after (Erik's no-escrow ruling). ⛔ NO `magnitude` ON PURPOSE — a magnitude here would become a discount ladder, which is exactly what the operative axis exists to prevent."
+  },
+  "unsettle": {
+   "targets": 1,
+   "duration": 1,
+   "note": "⛔ AUTHORED 2026-08-28 (Aevi). `operative` is `targets` — a provoke costs the opponent their CHOSEN LINE by clearing `state.tactic`, so what scales is HOW MANY lines you break, never how hard. ⚠️ `duration: 1` because the effect is the loss of one action; it does not persist, and a foe re-commits next round. ⛔ NO `magnitude` — there is no 'more broken'. It also does NOTHING to a foe committed to nothing, which `resolveProvoke` reports honestly rather than faking a hold."
+  },
+  "cool": {
+   "magnitude": 3,
+   "duration": 2,
+   "note": "⛔ AUTHORED 2026-08-28 (Aevi). `operative` is `magnitude` — a soothe pulls MOMENTUM toward zero, so what scales is HOW MUCH heat comes out. ⚠️ `magnitude: 3` matches `setup`, the nearest social shape, and `duration: 2` matches `hobble` and `bolster`, the nearest lasting ones. ⛔ IT NEVER TOUCHES A DAMAGE TRACK — a soothe that healed would be a second RESTORE verb wearing a social name — and momentum is pulled TOWARD zero, never past it, so cooling a fight the other side is winning does not hand you the advantage."
   }
+ },
+ "tierLadder": {
+  "note": "SNG-263 §8, Erik's ruler. For MAGNITUDE shapes (guard/hobble/setup/construct/reposition/bolster) `mult` scales the operative dimension. For DICE shapes (damage/healing) the `dice` row is authoritative: the die COUNT climbs linearly and `plus` supplies the non-linearity, because Erik's T-III is 'not linear — it should exceed a straight doubling-again' and integer dice alone cannot express that. T-I 1d6 (mean 3.5) -> T-II 2d6 (7.0, a clean double) -> T-III 3d6+3 (13.5, well past linear 10.5 and close to a re-doubling of 14) -> T-IV/V flagged SPECIAL because at the capstone rung a craft should buy a KIND of ability, not a bigger number. capstoneStanding.capstoneTier is already 4, so the engine's existing rung agrees.",
+  "1": {
+   "mult": 1,
+   "dice": {
+    "nMult": 1,
+    "plus": 0
+   },
+   "special": false
+  },
+  "2": {
+   "mult": 2,
+   "dice": {
+    "nMult": 2,
+    "plus": 0
+   },
+   "special": false
+  },
+  "3": {
+   "mult": 3.5,
+   "dice": {
+    "nMult": 3,
+    "plus": 3
+   },
+   "special": false
+  },
+  "4": {
+   "mult": 4.5,
+   "dice": {
+    "nMult": 4,
+    "plus": 5
+   },
+   "special": true
+  },
+  "5": {
+   "mult": 5.5,
+   "dice": {
+    "nMult": 5,
+    "plus": 8
+   },
+   "special": true
+  }
+ },
+ "intensity": {
+  "note": "SNG-263 §6 — Erik: conserve ~= HALF, surge ~= DOUBLE the operative dimension. But his constraint is the important half: 'each skill has its own descriptions, so you would need to audit each to verify they get applied logically.' A blanket x0.5/x2 is wrong for a concealment or a read, so these are the BASELINE only; a craft may state its own conserve/surge in its own terms via craft.mechanic.intensity, and the authored text is what the player is shown before committing.",
+  "conserve": {
+   "mult": 0.5
+  },
+  "standard": {
+   "mult": 1
+  },
+  "surge": {
+   "mult": 2
+  }
+ },
+ "rankDeltas": {
+  "note": "SNG-263 §3 — Erik: 'I can't tell how ranks differ.' A rank must change something nameable. Three legal kinds, per Erik's own framing: ADD a function, DEEPEN the existing one (more magnitude), or EXTEND a dimension (area/range/duration). A craft declares its own per-rank delta; until it does, this default DEEPENS, so ranking up is never invisible. TIER is the craft's level-band; RANK is depth within an owned craft — different axes, never conflated.",
+  "kinds": [
+   "add",
+   "deepen",
+   "extend"
+  ],
+  "default": {
+   "kind": "deepen",
+   "mult": 1.35,
+   "why": "an unauthored rank still does something measurable — but a craft that names its own delta reads better and should"
+  }
+ },
+ "operativeAxis": {
+  "note": "SNG-263 r4, corrected by Aevi's blazeborn pilot. My first cut made this a CLOSED legal list and the pilot broke it immediately: 12 crafts declared 18 DISTINCT axes, ten of which (perceptionDepth, upkeepRelief, purge, materials, persistence, speed, bindStrength, witnesses, debuff, uses) I had never imagined — and only 4 of 12 crafts carried damage at all. Her finding stands: a damage-only, closed-vocabulary schema would fail two thirds of a single tradition. So the axis vocabulary is OPEN. A craft names the dimension its own prose names.",
+  "mechanical": [
+   "damage",
+   "healing",
+   "duration",
+   "range",
+   "area",
+   "targets",
+   "soak",
+   "soakRank",
+   "penetration",
+   "magnitude",
+   "setup",
+   "push",
+   "variance",
+   "evasion",
+   "evasionRank",
+   "requiresAttention",
+   "autonomous",
+   "damageType",
+   "unmakeRank"
+  ],
+  "mechanicalNote": "The subset the ENGINE can compute. An axis in this list must carry a NUMBER (or dice) — that is what the CI checks. Any other axis is a NAMED axis: real, authored, shown to the player, and scaled in the craft's own prose at each rank and intensity, but not arithmetic the engine performs. That split is the honest one: 'perceptionDepth' is a true operative axis and there is no number the engine could apply to it.",
+  "refusedIntensity": "A craft may author REFUSED for conserve or surge. Aevi's the_last_light refuses both on its own cannot-text ('it cannot be half-given') — a blanket x0.5/x2 would invent a conserved capstone the fiction forbids. REFUSED is a value, never an omission, and the engine must not silently substitute the baseline.",
+  "penetrationNote": "SNG-263 r4 Gap-2, RANKED — from Aevi's radiant pass. radiant_lance r2 cuts 'LIGHT ARMOR' and r3 beats 'a Harmonic shield's FIRST RANK': the catalog already assumed guard is a stack of RANKED layers that penetration beats BY DEGREE, not one flat number. A craft's `penetration` is the highest guard RANK it cuts through; layers above that rank still soak. This is also what finally gives ward/shield something real to do — they raise a ranked layer, and a stronger craft can go through it."
+ },
+ "variance": {
+  "note": "CCODE-77 / Aevi (churnfolk): variance is a WIDER BAND, not a bigger number. One authored point stretches the outcome away from its own mean by perPoint, so the max rises, the min drops, and the AVERAGE does not move. A chaotic craft must be a gamble, not a buff.",
+  "perPoint": 0.09
+ },
+ "damageTypeByTradition": {
+  "note": "CCODE-83 / Aevi's damage_type_map: the KIND a tradition's harm is, when the craft does not say for itself. Resolution order is the same as every other dimension - the craft's own mechanic.damageType wins, then damageTypeByCraft, then this. A tradition absent here is deliberately UNTYPED and is answered by no affinity at all.",
+  "radiant": "light",
+  "blazeborn": "light",
+  "umbral": "shadow",
+  "harmonic": "sound",
+  "rootkin": "living",
+  "ashwarden": "decay",
+  "churnfolk": "wild",
+  "lattice": "order",
+  "enginewright": "mechanical",
+  "numinous": "numinous",
+  "veilwright": "deception",
+  "verist": "truth"
+ },
+ "damageTypeByCraft": {
+  "note": "CCODE-83 / Aevi's perCraftOverrides: crafts whose kind is not their tradition's default, or whose tradition is untyped. A SECOND source for one fact is drift waiting to happen, so it is a lookup the resolver consults in a fixed order rather than a rival to the craft's own mechanic block - authoring damageType on the craft still wins over anything here.",
+  "radiant_lance": "light",
+  "kindle": "light",
+  "radiance": "light",
+  "revealing_burn": "light",
+  "last_light": "light",
+  "wither": "decay",
+  "palework": "decay",
+  "draw_down": "decay",
+  "the_cut_thread": "decay",
+  "sonic_resonance": "sound",
+  "green_claim": "living",
+  "wild_flowering": "wild",
+  "scatter": "wild",
+  "dim": "shadow",
+  "shadow_work": "shadow"
+ },
+ "healing": {
+  "_note": "⛔ SNG-500 §1 / CCODE-207 — ERIK'S DIALS FOR THE HEAL TAPER. Aevi's bound: \"healing the same subject repeatedly in one contest should return less each time, or a party with one healer never loses.\" The SHAPE is the engine's; these NUMBERS are Erik's, and they live here so they can be turned without editing engine source — the failure that left 21 arc-response numbers unreachable for weeks.",
+  "taperPer": 0.25,
+  "_taperPer": "how much of the heal each PRIOR heal on the same subject this contest takes off. 0.25 = a second heal returns 75%, a third 50%. Set to 0 to switch the taper off entirely.",
+  "taperFloor": 0.25,
+  "_taperFloor": "⚠️ the floor it can never fall below, as a fraction of the roll. A healer who has already worked twice is worth less, never worthless — without this, a long contest turns the healer off.",
+  "_whatDoesNotApply": "⛔ A HEAL CANNOT CRIT (no overhealing) AND CANNOT BE EVADED — those are not dials, they are the reason `resolveHeal` is its own path rather than a sign flip on the damage one. It CAN be soaked, but only by ACTIVE ONGOING HARM (bleeding, hastened decay, rot, venom, a sustained hold) and never by armour.",
+  "_ongoingHarmShape": "⚠️ AEVI — THE READER IS LIVE AND UNFED. `resolveHeal` reads ongoing harm off the SUBJECT as [{ id, magnitude }]. `Hastened Grey` (\"a wound already open goes grey and stops closing\") and `Sustained Regard` r2 (\"cannot stop bleeding for as long as you hold it\") both claim it in prose and neither carries a field. Author `mechanic.ongoingHarm: { id, magnitude }` on the crafts that IMPOSE it."
+ },
+ "imposition": {
+  "_note": "⛔ SNG-500 §2 / CCODE-208 — HOW HARD A CRAFT-IMPOSED CONDITION IS TO SHRUG OFF. A craft declares `mechanic.imposes: { condition, resist, degradesTo, targets }`; these decide the bar its margin must clear. ⚠️ The resist changes WHAT lands, never WHETHER anything does — a working that wins the exchange and then evaporates is the same dead feeling as a heal that heals nothing.",
+  "base": 10,
+  "_base": "the bar before anything else. A decisive exchange clears it; a scraped win does not.",
+  "perResist": 1,
+  "_perResist": "how much each point the subject brings raises the bar.",
+  "perRank": 5,
+  "_perRank": "⚠️ how much each rank past the first LOWERS it. Rank here is not a bigger number, it is a harder thing to shrug off — which is what rank means everywhere else.",
+  "_neverDeath": "⛔ A CRAFT CAN NEVER IMPOSE DEATH, and that is structural rather than a dial. `IMPOSABLE` is action_loss | staggered | unconscious | incapacitated. `slain` and `left_for_dead` are OUTCOMES of the incapacitation table, reached after someone is already down and weighed against the aggressor's kind. Erik's §40 ruling lets the ENGINE impose death when the situation calls for it; a craft is not a situation.",
+  "_unauthored": "⚠️ AEVI — NOTHING AUTHORS `mechanic.imposes` YET. `Keening` is the craft SNG-500 §2 was written about and does nothing at any rank. Her own scope: r1 area, action-loss · r2 up to three, unconscious-or-action-loss · r3 everyone you choose."
+ },
+ "projects": {
+  "sabotageMax": 4,
+  "_sabotageMax": "⛔ CCODE-295 — THE MOST ONE ACT OF SABOTAGE MAY TAKE. `sabotageProject` already clamps to what is banked, so it can never go negative; this stops a single hallucinated number wiping a long work in one op. ⚠️ SABOTAGE IS A SETBACK, NOT A DELETE KEY — a threshold that can be erased at a stroke is a date wearing a threshold's name, which is what SNG-522 §1 exists to avoid. Raise it if setbacks should bite harder.",
+  "_note": "⛔ SNG-522 §1 / CCODE-215 — PROJECT WORK. A project completes on a THRESHOLD, never on a date: a date can only be waited out, and a threshold can be interrupted, hurried by more hands, set back by sabotage, and inherited. Sunk Assay L4 is built on all four.",
+  "ticksPerMagnitude": 2,
+  "_ticksPerMagnitude": "days of work per point of the craft's `magnitude`, when no `projectThreshold` is authored. Built System (mag 6) -> 12 days; Sound Read (mag 5) -> 10.",
+  "perExtraHand": 0.5,
+  "_perExtraHand": "⚠️ DELIBERATELY SUBLINEAR (divided by sqrt of the hands). A second pair of hands helps; a tenth mostly gets in the way. A party that recruits a village must not finish a year's assay in an afternoon.",
+  "_thresholdSource": "⚠️ AEVI — `built_system` carries `duration: 8760`, a year in hours, which reads like an intended scale and is NOT what the threshold uses. If a project's real length is meant to come from `duration` rather than `magnitude`, author `projectThreshold` on the craft and this derivation steps aside. Reported rather than guessed."
+ },
+ "damageFamilies": {
+  "_note": "⛔ CCODE-281 / ERIK: \"boil things down a bit, BACK TO THE POLE AXES as a guide for what types there are… ELEMENTAL is heat, cold, lightning, etc.\" And Aevi's correction of her own axis table: NOT EVERY TYPE IS ON AN AXIS.\n⚠️ THREE FAMILIES, AND THE FAMILY DECIDES WHAT A WARD CAN ANSWER. CCode's objection was that cold and fire are both TAKINGS rather than two ends of one thing — which is exactly why neither is polar. They are SIBLINGS. A ward against fire is not a ward against ice, and under a family model it never can be.\n⛔ POLAR PAIRS ONLY WHERE AN AXIS WARRANTS ONE. A pair means the two ends genuinely oppose: one gives what the other takes. Anything else is siblings in a family, and pairing them would let a ward against one answer the other for free.",
+  "physical": {
+   "types": [
+    "physical"
+   ],
+   "owner": null,
+   "_owner": "⛔ NOBODY OWNS IT. It is the default and it is answered by armour. A tradition does not reach `physical` — it simply hits you, and that is why plain steel works on everything."
+  },
+  "elemental": {
+   "types": [
+    "heat",
+    "cold",
+    "lightning",
+    "corrosive",
+    "force"
+   ],
+   "owner": null,
+   "_owner": "⛔ NOBODY OWNS THESE EITHER — they are how the WORLD hurts you, and any tradition REACHES one through its own idiom. ⚠️ THIS IS WHAT UNBLOCKS BLAZEBORN: seven untyped harm crafts, six of which use burn/flame language in their own text, and `heat` was not available to them because every type had been minted as one tradition's signature.\n⚠️ AND IT RECLASSIFIES `cold`, which was authored as Death's own the day before this. Death REACHES it — your body goes cold when you die — and so does anyone else."
+  },
+  "polar": {
+   "pairs": [
+    {
+     "axis": "life",
+     "minus": "decay",
+     "plus": "living",
+     "why": "one ends what the other grows — the death_life axis the world is built on"
+    },
+    {
+     "axis": "truth",
+     "minus": "deception",
+     "plus": "truth",
+     "why": "what is hidden against what is shown; veilwright and verist hold the two ends"
+    }
+   ],
+   "unpaired": [
+    "appetite",
+    "feeling",
+    "shadow",
+    "light",
+    "judgement",
+    "precursor",
+    "abstraction",
+    "vitality"
+   ],
+   "_unpaired": "⚠️ A TYPE WITHOUT AN OPPOSITE IS STILL POLAR — it belongs to a pole, it simply has no partner yet. ⛔ LISTING THEM HERE RATHER THAN INVENTING PARTNERS IS THE POINT: `appetite` has no natural opposite, and minting one so the table looks tidy is exactly the piecemeal Erik called a halt to.\n⚠️ `vitality` IS THE INTERESTING ONE and Aevi already found it: an Ashwarden TAKES life to mend himself, an Abyssal is OFFERED a wound and takes it away — same type, opposite consent. That may be a pair whose axis is CONSENT rather than direction, and it is not mine to rule."
+  }
+ },
+ "wardLadder": {
+  "r1": "resist",
+  "r2": "soak",
+  "r3": "immunity",
+  "_r1": "⛔ ERIK: \"initial ranks will add resist then soak then immunity.\" THREE DIFFERENT KINDS OF ANSWER, not three sizes of the same one:\n  · RESIST  — you are harder to land on. It moves the ROLL.\n  · SOAK    — it lands and takes less off you. It moves the DAMAGE.\n  · IMMUNITY— that type does not touch you at all.\n⚠️ AND IMMUNITY IS PER TYPE, NEVER PER BLOW, which is what makes composite damage matter: a ward immune to `heat` meets a blow that is half heat and half physical, and the physical half lands in full. ⛔ NOTHING IS EVER FULLY BLOCKED — the same principle as `minHit`, which already says no foe is immune to everything."
+ },
+ "wardBreadth": {
+  "oneTypeAtRank": 1,
+  "familyAtRank": 3,
+  "_oneTypeAtRank": "⛔ ERIK: \"wards can start with just one type, like Cold... but some higher level wards will protect against multiple types - elemental ward for example.\"\n⚠️ SO BREADTH IS EARNED SEPARATELY FROM DEPTH. A rank-1 ward answers ONE type; a high-rank ward may answer a whole FAMILY — and `elemental ward` is exactly that, which is why the families have to exist before the wards can.\n⛔ A WARD THAT ANSWERS EVERYTHING STILL HAS NO CHARACTER. The which-check already enforces this and it forced `death_ward` from five types to three; a FAMILY is the widest a ward should reach, because the family is a real idea and 'everything' is not."
+ }
 }

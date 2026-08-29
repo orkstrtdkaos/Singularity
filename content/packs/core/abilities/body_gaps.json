@@ -33,7 +33,10 @@
      "failure": "You have shown them the fight you are actually going to have."
     }
    },
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "one tell, held lightly — they may still read the rest of you",
+    "surge": "a whole false body; YOU WILL FIGHT AS THE MAN YOU ARE PRETENDING TO BE"
+   },
    "bounds": [
     {
      "text": "⛔ THEY MUST BE READING YOU. A foe who is not looking cannot be misled",
@@ -113,7 +116,8 @@
     }
    ],
    "_authored": "⛔ SNG-482. Body had NO OBSCURE — the sense slot belonged to Dark and Mind. Erik's own example: 'a stance that reads as three attacks and resolves as a fourth.'",
-   "obscure": true
+   "obscure": true,
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
   },
   {
    "id": "worth_the_work",
@@ -256,7 +260,10 @@
      "failure": "They feel your hand shaking."
     }
    },
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "steady for one act, then it goes",
+    "surge": "nothing shakes you at all — INCLUDING THINGS THAT SHOULD"
+   },
    "bounds": [
     {
      "text": "⛔ CONTACT RANGE. This is done with hands",
@@ -334,7 +341,8 @@
     }
    ],
    "_authored": "⛔ SNG-482. Body had no `soothe`. ⚠️ DISTINCT FROM MIND'S QUIET THE ROOM: that works at range on a room, this works by CONTACT on people you can reach, and it does not touch grief.",
-   "_wardTypes": "⛔ SNG-512. By contact, and feeling only.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. By contact, and feeling only.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
   }
  ],
  "_scopeRebalance": "⛔ SNG-488: scope was 18 of 81 Body gains, drifting back to the lazy default corrected in Mind (§32.4). ⚠️ In most cases scope was doing TARGETS' job — 'a group', 'a party', 'everyone in reach' are counts, not areas.",

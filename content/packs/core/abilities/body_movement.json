@@ -24,7 +24,10 @@
    "powerSystem": "metaphysical",
    "shape": "reposition",
    "operativeAxis": "space_time",
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "one joint, briefly",
+    "surge": "the whole body loose; ⚠️ YOU WILL NOT BE ABLE TO BRACE AGAINST ANYTHING"
+   },
    "mechanic": {
     "magnitude": 5,
     "duration": 3,
@@ -119,7 +122,8 @@
      "_grantsWas_SNG510": "⛔ ADDS PERSISTENCE AND A PASSENGER. You cannot be physically held or cornered — every grip fails as it closes, and you can take one other person out with you."
     }
    ],
-   "_authored": "⛔ SNG-483. Erik: 'if you find a place to fit CONTORTIONIST ability — ANTI-BIND, FAST RUNNING and BIG JUMPING — move/travel, let me know.'\n⚠️ TWO REAL GAPS AND THEY ARE THE SAME SKILL: (1) NOTHING IN 342 ABILITIES ESCAPES A BIND — fifteen text matches and every one is a door, a seal or a piece of luck, never a person getting out of a hold. (2) SOMATIC HAD NO L1 MOVEMENT CRAFT: Near Way is mason and built-spaces only, then nothing until Skydancer at L4.\n⛔ AND IT ANSWERS THE LARGEST COLUMN IN THE GAME. CONTROL is 251 rank-rows corpus-wide and `bind` is most of it. Until now there was no physical counter to being held."
+   "_authored": "⛔ SNG-483. Erik: 'if you find a place to fit CONTORTIONIST ability — ANTI-BIND, FAST RUNNING and BIG JUMPING — move/travel, let me know.'\n⚠️ TWO REAL GAPS AND THEY ARE THE SAME SKILL: (1) NOTHING IN 342 ABILITIES ESCAPES A BIND — fifteen text matches and every one is a door, a seal or a piece of luck, never a person getting out of a hold. (2) SOMATIC HAD NO L1 MOVEMENT CRAFT: Near Way is mason and built-spaces only, then nothing until Skydancer at L4.\n⛔ AND IT ANSWERS THE LARGEST COLUMN IN THE GAME. CONTROL is 251 rank-rows corpus-wide and `bind` is most of it. Until now there was no physical counter to being held.",
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
   }
  ],
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",

@@ -8,7 +8,7 @@
    "id": "solved_route",
    "name": "Solved Route",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 3,
    "attribute": "mental",
    "tradition": "cogitant",
    "nativeOrCombination": "native",
@@ -93,7 +93,10 @@
    ],
    "_merged": "⛔ SNG-450: MERGES The Clear Path (cogitant), The Derived Route (syllogist) and The Patterned Way (figurist) — three skills at the same level, same magnitude, same energy, same three-rank arc, differing only in the noun. Erik: 'yes on the nav skills.' Flavour is now internal.",
    "harmRung": "none",
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "the next few steps only",
+    "surge": "the whole route at once, and you will take it whatever is on it"
+   },
    "_authored": "SNG-450",
    "plainly": "A movement action that finds and walks the best line. Its strength is rated 4 out of 10.",
    "challengeTypes": [
@@ -126,7 +129,9 @@
    "_nameWas": "The Solved Route",
    "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do.",
    "schoolAffinity": "cog_instrumented",
-   "_schoolAffinity": "⚠️ SNG-508. Inherited from `the_clear_path`, the cogitant parent of the three-way navigation merge. ⛔ THE OTHER TWO PARENTS WERE SYLLOGIST AND FIGURIST AND CARRIED NONE — a merged craft takes the affinity of the sect whose school actually named it."
+   "_schoolAffinity": "⚠️ SNG-508. Inherited from `the_clear_path`, the cogitant parent of the three-way navigation merge. ⛔ THE OTHER TWO PARENTS WERE SYLLOGIST AND FIGURIST AND CARRIED NONE — a merged craft takes the affinity of the sect whose school actually named it.",
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder.",
+   "_repriced_20260829": "⚠️ e1 -> e3. L2 band is 2-6; e1 was below the floor. Modest craft, so the band floor plus one."
   },
   {
    "id": "physicians_tome",

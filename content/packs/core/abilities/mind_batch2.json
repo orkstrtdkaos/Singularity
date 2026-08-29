@@ -23,7 +23,10 @@
    "powerSystem": "metaphysical",
    "shape": "hobble",
    "operativeAxis": "body_mind",
-   "intensity": "severe",
+   "intensity": {
+    "conserve": "one word, one moment of obedience",
+    "surge": "the full name; ⛔ WHAT ANSWERS A TRUE NAME MAY NOT BE ONLY THEM"
+   },
    "mechanic": {
     "magnitude": 7,
     "duration": 4,
@@ -140,7 +143,8 @@
     "marginFloorPer": 0.02
    },
    "_diceStrip": "⛔ SNG-471, CCODE Q1: `mechanic.dice` IS consumed — craftmechanics.mechanicFor → rollMagnitude → skill_battle.js:798 — ⚠️ BUT THE GUARD IS `shape === 'damage'`, and only `damage` and `strike` resolve to it. `hobble` and `hinder` DO NOT.\n⛔ SO THIS CRAFT AUTHORED 4d6 THAT NOTHING WOULD EVER ROLL. Erik's shape is right — a hold is not damage — so the DICE GO, not the shape. ⚠️ CCode: 'I would not widen the guard silently — \"this craft does 4d6 of hold\" is a different claim about the world.' AGREED.",
-   "_persuadeRemoved_20260829": "⛔ `persuade` REMOVED — the third verb-in-the-wrong-slot after `bolster` on `wellspring` and this craft's own shape mismatch. ⚠️ THE LADDER SETTLES IT: r1 'they MUST stop, turn, or answer' · r2 'SUSTAINED CONTROL' · r3 'the hold no longer needs your attention'. THAT IS COMPULSION — `bind` and `command`, both already declared. ⛔ AND THE VOCABULARY IS EXPLICIT: persuade means 'bring someone to AGREE — they act because they now think it right', and is 'NOT `command`, which does not need agreement'. NOBODY AGREES TO ANYTHING IN THIS CRAFT. ⚠️ r3 ALREADY DROPPED `persuade` ON ITS OWN, which is the craft saying so. ⛔ ALSO: ability rung was `damaging` while r3 reaches `incapacitating` — a craft that binds and never wounds was glossed to the GM as one that hurts."
+   "_persuadeRemoved_20260829": "⛔ `persuade` REMOVED — the third verb-in-the-wrong-slot after `bolster` on `wellspring` and this craft's own shape mismatch. ⚠️ THE LADDER SETTLES IT: r1 'they MUST stop, turn, or answer' · r2 'SUSTAINED CONTROL' · r3 'the hold no longer needs your attention'. THAT IS COMPULSION — `bind` and `command`, both already declared. ⛔ AND THE VOCABULARY IS EXPLICIT: persuade means 'bring someone to AGREE — they act because they now think it right', and is 'NOT `command`, which does not need agreement'. NOBODY AGREES TO ANYTHING IN THIS CRAFT. ⚠️ r3 ALREADY DROPPED `persuade` ON ITS OWN, which is the craft saying so. ⛔ ALSO: ability rung was `damaging` while r3 reaches `incapacitating` — a craft that binds and never wounds was glossed to the GM as one that hurts.",
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'severe' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
   },
   {
    "id": "mind_meld",
@@ -161,7 +165,10 @@
    "powerSystem": "metaphysical",
    "shape": "bolster",
    "operativeAxis": "body_mind",
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "a shallow join — thoughts, not selves",
+    "surge": "go all the way in; ⚠️ SOME OF WHAT YOU BRING BACK WILL NOT BE YOURS"
+   },
    "mechanic": {
     "magnitude": 7,
     "duration": 5,
@@ -271,7 +278,8 @@
    "_nameWas": "The Shared Room",
    "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do.",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⚠️ reads through an ALLY — the shared sense\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⚠️ reads through an ALLY — the shared sense\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
   },
   {
    "id": "named_exclusion",

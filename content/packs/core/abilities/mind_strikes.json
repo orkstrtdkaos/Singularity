@@ -24,7 +24,10 @@
    "powerSystem": "metaphysical",
    "shape": "strike",
    "operativeAxis": "body_mind",
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "a partial read — half the aim, and an ordinary blow",
+    "surge": "strike everything you read; THE READING COSTS YOU THE ROUND"
+   },
    "mechanic": {
     "dice": {
      "n": 2,
@@ -139,7 +142,8 @@
    "_r3": "⛔ SNG-467. Erik: 'I really like the r3 ability to EXECUTE THE ATTACK IN THE READ STEP — that is super powerful.' ⚠️ It is, and that is correct for a level-2 tradition capstone rank: the blow resolves before the round's actions are declared, and the action slot stays free. TWO ATTACKS, THE FIRST ONE PRE-EMPTIVE.",
    "sense": true,
    "_senseNote": "⛔ SNG-469: usable in the sense slot as a SENSE. Reads the opponent, banks tempo, takes the craft's edge.",
-   "_typed_20260829": "⛔ COMPOSITE — 'THOUGHT AIMED THROUGH A BODY'. The blow is ORDINARY (`physical` .7); what makes it land where it does is the read (`psychic` .3). ⚠️ ITS `notFor` FORCES THE MIX: 'an enemy you have not read' AND 'anything you cannot physically reach' — it needs BOTH, so it deals both. ⛔ Armour answers most of it; a mind that cannot be read answers the rest, and neither alone stops it."
+   "_typed_20260829": "⛔ COMPOSITE — 'THOUGHT AIMED THROUGH A BODY'. The blow is ORDINARY (`physical` .7); what makes it land where it does is the read (`psychic` .3). ⚠️ ITS `notFor` FORCES THE MIX: 'an enemy you have not read' AND 'anything you cannot physically reach' — it needs BOTH, so it deals both. ⛔ Armour answers most of it; a mind that cannot be read answers the rest, and neither alone stops it.",
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
   },
   {
    "id": "psychic_lance",
@@ -161,7 +165,10 @@
    "powerSystem": "metaphysical",
    "shape": "strike",
    "operativeAxis": "body_mind",
-   "intensity": "severe",
+   "intensity": {
+    "conserve": "a touch of it — they feel wrong and do not know why",
+    "surge": "all of it at once; ⛔ YOU WILL FEEL WHAT YOU DID TO THEM"
+   },
    "mechanic": {
     "dice": {
      "n": 3,
@@ -261,7 +268,8 @@
    ],
    "_authored": "⛔ SNG-464. Erik: 'a Mind character should have some GREAT PSYCHIC STRIKES.' ⚠️ Mind's existing damage was Cutting Figure (1d6, figurist geometry) and Sustained Regard (1d6, attention). ⛔ NEITHER WAS A DIRECT PSYCHIC ATTACK — this is the tradition's straight ranged hit, and its defining property is that NOTHING CAN BE INTERPOSED.",
    "_rangeNote": "⚠️ SNG-465: measured `range` removed per Erik — reach stays in the prose ('any mind in sight').",
-   "_typed_20260829": "⛔ PURE `psychic` — INTRINSIC family, mental end. The craft's own words: 'no vector, no contact, NOTHING TO BLOCK'. ⚠️ THAT IS THE FAMILY'S DEFINING PROPERTY MADE LITERAL — intrinsic harm requires a WILL to make it and a self to receive it, and its `notFor` says both halves: 'anything without a mind' and 'hurting a body directly'. ⛔ ARMOUR IS NO ANSWER AND THAT IS CORRECT; what answers it is a mind-ward or being unreachable."
+   "_typed_20260829": "⛔ PURE `psychic` — INTRINSIC family, mental end. The craft's own words: 'no vector, no contact, NOTHING TO BLOCK'. ⚠️ THAT IS THE FAMILY'S DEFINING PROPERTY MADE LITERAL — intrinsic harm requires a WILL to make it and a self to receive it, and its `notFor` says both halves: 'anything without a mind' and 'hurting a body directly'. ⛔ ARMOUR IS NO ANSWER AND THAT IS CORRECT; what answers it is a mind-ward or being unreachable.",
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'severe' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
   }
  ],
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",

@@ -28,7 +28,10 @@
     "range",
     "conditions"
    ],
-   "intensity": "severe",
+   "intensity": {
+    "conserve": "a thin edge of it — half the dice, and no bolt",
+    "surge": "empty yourself into the stroke; ⛔ YOU WILL BE ABLE TO DO NOTHING AFTERWARDS"
+   },
    "mechanic": {
     "dice": {
      "n": 4,
@@ -150,7 +153,8 @@
    ],
    "_authored": "⛔ SNG-486. Erik: 'I'm not feeling Pathless Way — cut. A BODY CAPSTONE SHOULD BE KI WIELD or something — ARM AND ARMOR YOURSELF IN KI. It PIERCES RESISTANCES, can be FIRED LIKE MAGIC BOLTS and can SHIELD you.'\n⚠️ IT ALSO ANSWERS SOMETHING THE AUDIT FOUND: metaphysical is Body's power source — 'Veil/Psychic/KI type innate power' (SNG-445) — and NOT ONE BODY CRAFT NAMED KI. The tradition's own source was invisible in its own skill list.\n⛔ AND IT IS THE COUNTER TO SHAPED BODY r3, which grants resistance to crafts. Ki Wield pierces resistance. The tradition now contains its own answer.",
    "_r3cost": "⚠️ SNG-487, Erik: 'No additional cost for r3.' The tripled drain is removed; the standing per-round breath cost from r1 still applies.",
-   "_reviewed_20260829": "⛔ BODY AUDIT. (1) `damageMix` authored — see mechanic note. (2) ⚠️ `harmRung` was `damaging` on a craft whose r3 delivers 4d6 as edge, bolt AND armour at once; the rung must not understate what a rank delivers (§45.1), so `lethal`. (3) ⛔ `operativeAxis` WAS THE BARE STRING `body_mind` — that is an AXIS OF THE WORLD, not an operative axis of the craft, and it is one of the 29 string-valued cases. Now a list naming what the ranks actually buy."
+   "_reviewed_20260829": "⛔ BODY AUDIT. (1) `damageMix` authored — see mechanic note. (2) ⚠️ `harmRung` was `damaging` on a craft whose r3 delivers 4d6 as edge, bolt AND armour at once; the rung must not understate what a rank delivers (§45.1), so `lethal`. (3) ⛔ `operativeAxis` WAS THE BARE STRING `body_mind` — that is an AXIS OF THE WORLD, not an operative axis of the craft, and it is one of the 29 string-valued cases. Now a list naming what the ranks actually buy.",
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'severe' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
   }
  ],
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",

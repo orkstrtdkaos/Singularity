@@ -560,7 +560,10 @@
     "marginFloorPer": 0.02,
     "damageType": "physical"
    },
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "something you can lift easily, at half the distance",
+    "surge": "anything you can get your arms around; THE THROW MAY TAKE YOU WITH IT"
+   },
    "bounds": [
     {
      "text": "⛔ YOU MUST HAVE SOMETHING TO THROW and be able to lift it",
@@ -593,7 +596,8 @@
    "_idWas": "the_hurled_weight",
    "_powerSystemWas": "body",
    "_powerSystemFix": "⛔ SNG-487 CORRECTED. I assigned this to `body` — AND `body` WAS ELIMINATED AS A SOURCE ON 2026-08-15, in a ruling I wrote up myself: 'THE STRUCTURAL CHANGE: body IS GONE AS A SOURCE, absorbed into metaphysical as Veil/Psychic/Ki type INNATE power.' Four sources only: precursor, ordered_nanite, wild_nanite, metaphysical.\n⚠️ Erik caught it: 'verify against our latest power source work — we eliminated the body source.'\n⛔ REASSIGNED TO METAPHYSICAL per the somatic primary. A craft of pure skill is not sourceless — it draws the same innate current as the rest of its tradition, more thinly.",
-   "_typed_20260829": "⛔ `physical` — a stone, a keg, a bench, a man, at fifteen paces. ⚠️ THE MOST ORDINARY HARM IN THE GAME and it should be: cover answers it, armour answers it, and its own `notFor` refuses precision and delicacy."
+   "_typed_20260829": "⛔ `physical` — a stone, a keg, a bench, a man, at fifteen paces. ⚠️ THE MOST ORDINARY HARM IN THE GAME and it should be: cover answers it, armour answers it, and its own `notFor` refuses precision and delicacy.",
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
   },
   {
    "id": "quick_hands",
@@ -683,7 +687,7 @@
    ],
    "tradition": "somatic",
    "nativeOrCombination": "native",
-   "harmRung": "none",
+   "harmRung": "damaging",
    "powerSystem": "metaphysical",
    "shape": "setup",
    "operativeAxis": "concrete_abstract",
@@ -692,7 +696,10 @@
     "duration": 2,
     "scope": 1
    },
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "one object, and you must have seen it thrown",
+    "surge": "catch everything coming at you this round; YOU WILL DO NOTHING ELSE"
+   },
    "bounds": [
     {
      "text": "you must SEE it coming — nothing from behind",
@@ -726,7 +733,9 @@
    "_nameWas": "The Quick Hands",
    "_idWas": "the_quick_hands",
    "_powerSystemWas": "body",
-   "_powerSystemFix": "⛔ SNG-487 CORRECTED. I assigned this to `body` — AND `body` WAS ELIMINATED AS A SOURCE ON 2026-08-15, in a ruling I wrote up myself: 'THE STRUCTURAL CHANGE: body IS GONE AS A SOURCE, absorbed into metaphysical as Veil/Psychic/Ki type INNATE power.' Four sources only: precursor, ordered_nanite, wild_nanite, metaphysical.\n⚠️ Erik caught it: 'verify against our latest power source work — we eliminated the body source.'\n⛔ REASSIGNED TO METAPHYSICAL per the somatic primary. A craft of pure skill is not sourceless — it draws the same innate current as the rest of its tradition, more thinly."
+   "_powerSystemFix": "⛔ SNG-487 CORRECTED. I assigned this to `body` — AND `body` WAS ELIMINATED AS A SOURCE ON 2026-08-15, in a ruling I wrote up myself: 'THE STRUCTURAL CHANGE: body IS GONE AS A SOURCE, absorbed into metaphysical as Veil/Psychic/Ki type INNATE power.' Four sources only: precursor, ordered_nanite, wild_nanite, metaphysical.\n⚠️ Erik caught it: 'verify against our latest power source work — we eliminated the body source.'\n⛔ REASSIGNED TO METAPHYSICAL per the somatic primary. A craft of pure skill is not sourceless — it draws the same innate current as the rest of its tradition, more thinly.",
+   "_rungFix_20260829": "⛔ ability rung `none` -> `damaging`: r2 sends a caught object back for 1d6 and r3 catches two — the ability gloss said the craft harms nothing (§45.1 — a rung must never understate what a rank delivers).",
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",

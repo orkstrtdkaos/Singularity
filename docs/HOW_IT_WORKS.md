@@ -92,7 +92,7 @@ working papers; **this is the answer.**
 | 08-29 | ✅ **the nine companions checked against the pack** | prose about authored people should be verifiable against the people | derived from `content/packs/valley/companions`, never a typed list | ⚠️ all nine are named and all nine carry a `downedEffect`; **a tenth companion goes red until the guide mentions them** |
 | 08-29 | ✅ **`docs/ARCS.md` placed, and a gate so the next one is too** | Erik: *"it is NOT OK to leave it at 'we don't know what's underneath' in an authored arc"* — Aevi wrote the GM copy and nothing pointed at it | `how_it_works.mjs` — every `.md` in `docs/` must appear in PIPELINE's table | ⛔ **a document nobody links is the same unread failure**, one layer up from a field |
 
-**Last verified: 2026-08-28 · v1.9.256 · 378 crafts.**
+**Last verified: 2026-08-28 · v1.9.257 · 378 crafts.**
 
 ---
 

@@ -557,10 +557,8 @@
         "birthWeight": 2,
         "overtook": "cevaine-of-the-seventh-measure"
       }
-    }
-  },
-  "variants": [
-    {
+    },
+    "the-low-lamp-inn": {
       "schemaVersion": 1,
       "id": "the-low-lamp-inn",
       "name": "The Low Lamp Inn",
@@ -621,7 +619,7 @@
         "type": "location",
         "weight": 15,
         "rating": "R+",
-        "tier": "variant",
+        "tier": "canonical",
         "provenance": {
           "playerKey": "player-s9z9u1",
           "characterId": "char-mrhs8286",
@@ -636,11 +634,10 @@
           "characterId": "char-mrhs8286"
         },
         "promotedWorldDay": 18,
-        "birthWeight": 11,
-        "rivalId": "the-low-lamp-inn"
+        "birthWeight": 11
       }
     },
-    {
+    "siol-elven-traveler-at-the-hub-plaza-tal": {
       "schemaVersion": 1,
       "id": "siol-elven-traveler-at-the-hub-plaza-tal",
       "name": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir",
@@ -660,7 +657,7 @@
         "type": "npc",
         "weight": 27,
         "rating": "R+",
-        "tier": "variant",
+        "tier": "canonical",
         "provenance": {
           "playerKey": "player-s9z9u1",
           "characterId": "char-mrhs8286",
@@ -675,11 +672,10 @@
           "characterId": "char-mrhs8286"
         },
         "promotedWorldDay": 18,
-        "birthWeight": 23,
-        "rivalId": "siol-elven-traveler-at-the-hub-plaza-tal"
+        "birthWeight": 23
       }
     },
-    {
+    "tessvel-cairn": {
       "schemaVersion": 1,
       "id": "tessvel-cairn",
       "name": "Tessvel Cairn",
@@ -741,7 +737,7 @@
         "type": "npc",
         "weight": 10,
         "rating": "R+",
-        "tier": "variant",
+        "tier": "canonical",
         "provenance": {
           "playerKey": "player-s9z9u1",
           "characterId": "char-mrum8y4d",
@@ -756,11 +752,10 @@
           "characterId": "char-mrum8y4d"
         },
         "promotedWorldDay": 21,
-        "birthWeight": 2,
-        "rivalId": "tessvel-cairn"
+        "birthWeight": 2
       }
     },
-    {
+    "warden-coll": {
       "schemaVersion": 1,
       "id": "warden-coll",
       "name": "Warden Coll",
@@ -819,7 +814,7 @@
         "type": "npc",
         "weight": 37,
         "rating": "R+",
-        "tier": "variant",
+        "tier": "canonical",
         "provenance": {
           "playerKey": "player-s9z9u1",
           "characterId": "char-mrhs8286",
@@ -834,11 +829,10 @@
           "characterId": "char-mrhs8286"
         },
         "promotedWorldDay": 24,
-        "birthWeight": 32,
-        "rivalId": "warden-coll"
+        "birthWeight": 32
       }
     },
-    {
+    "deni-cors": {
       "schemaVersion": 1,
       "id": "deni-cors",
       "name": "Deni Cors",
@@ -909,7 +903,7 @@
         "type": "npc",
         "weight": 47,
         "rating": "R+",
-        "tier": "variant",
+        "tier": "canonical",
         "provenance": {
           "playerKey": "player-s9z9u1",
           "characterId": "char-mrhs8286",
@@ -924,11 +918,10 @@
           "characterId": "char-mrhs8286"
         },
         "promotedWorldDay": 27,
-        "birthWeight": 42,
-        "rivalId": "deni-cors"
+        "birthWeight": 42
       }
     },
-    {
+    "gen-stillwater-s-trouble": {
       "id": "gen-stillwater-s-trouble",
       "name": "Stillwater'S Trouble",
       "regionId": "valley",
@@ -953,7 +946,7 @@
         "type": "location",
         "weight": 6,
         "rating": null,
-        "tier": "variant",
+        "tier": "canonical",
         "provenance": {
           "healed": "sng-216-backfill"
         },
@@ -962,11 +955,10 @@
           "characterId": null
         },
         "promotedWorldDay": 27,
-        "birthWeight": 1,
-        "rivalId": "gen-stillwater-s-trouble"
+        "birthWeight": 1
       }
     },
-    {
+    "ossivyn-tallow": {
       "schemaVersion": 1,
       "id": "ossivyn-tallow",
       "name": "Ossivyn Tallow",
@@ -1025,7 +1017,7 @@
         "type": "npc",
         "weight": 15,
         "rating": "R+",
-        "tier": "variant",
+        "tier": "canonical",
         "provenance": {
           "playerKey": "player-s9z9u1",
           "characterId": "char-mrum8y4d",
@@ -1040,9 +1032,9 @@
           "characterId": "char-mrum8y4d"
         },
         "promotedWorldDay": 31,
-        "birthWeight": 6,
-        "rivalId": "ossivyn-tallow"
+        "birthWeight": 6
       }
     }
-  ]
+  },
+  "variants": []
 }

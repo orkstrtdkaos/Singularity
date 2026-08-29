@@ -37,6 +37,9 @@ const SUITES = [
   // against the live engine AND asserts the PROPOSED ones are still unbuilt — a two-way ratchet, because a
   // feature shipping without the doc moving is the same silent drift as a field authored and never read.
   ["how_it_works", "node", ["tests/how_it_works.mjs"]],
+  // ⛔ CCODE-288 — THE REAL SAVES. 1,788 turns of played history that cannot be regenerated, reconciled on
+  // every run so a vocabulary rename cannot quietly drop an ability out of somebody's character.
+  ["save_fixtures", "node", ["tests/save_fixtures.mjs"]],
   ["engine_map --check", "node", ["scripts/engine_map.mjs", "--check"]],
 ];
 

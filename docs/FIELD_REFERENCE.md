@@ -12,7 +12,7 @@ node scripts/field_atlas.mjs --md     # …as markdown, to paste back in
 node scripts/safe_delete.mjs <field>  # triage one candidate before deleting it
 ```
 
-**Last measured: 2026-08-28 · v1.9.248 · 378 crafts · 107 distinct authored fields.**
+**Last measured: 2026-08-28 · v1.9.249 · 378 crafts · 107 distinct authored fields.**
 
 ---
 

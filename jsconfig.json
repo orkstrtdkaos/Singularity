@@ -1,0 +1,19 @@
+{
+  "_note": "⛔ CCODE-288 — EDITOR TYPE-CHECKING, ZERO DEPENDENCIES. VS Code ships TypeScript and honours this file with nothing installed, so the game stays a no-build-step, zero-dependency ES-module project and we still get contract errors as red squiggles while editing. ⚠️ `checkJs` is FALSE on purpose: checking is OPT-IN per file via a `// @ts-check` comment at the top. Turning it on globally across 98 modules and a 14,257-line app.js would produce a wall of noise nobody reads, which is how a check gets switched off permanently. Opt a module in when you touch it.",
+  "_whyThisEarnsItsKeep": "⚠️ Five of eight false findings on 2026-08-28 were contract mistakes a checker catches at EDIT TIME: deathDepth called with an options object when it is positional; chooseTarget's return read as if it were the ally; TARGET_POLICIES treated as an array; an import of `mechanicsOf`, which does not exist; and craft_mechanics passed where the energy block was wanted — that last one nearly became a false headline about a working system Erik had personally ruled on.",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "checkJs": false,
+    "allowJs": true,
+    "noEmit": true,
+    "strict": false,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "lib": ["ES2022", "DOM"]
+  },
+  "include": ["engine/**/*.js", "tests/**/*.mjs", "scripts/**/*.mjs", "app.js"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,568 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "$id": "singularity/ability.schema.json",
+ "title": "Craft (ability)",
+ "description": "A craft. THE CLOSED SCHEMA — additionalProperties:false, so a field must be DECLARED HERE before it can be authored.",
+ "_doNotRegenerate": "⛔ THIS FILE IS AUTHORED, NOT GENERATED. It was bootstrapped once from the corpus on 2026-08-28 and is hand-maintained from here. ⚠️ REGENERATING IT WOULD RUBBER-STAMP WHATEVER FIELDS HAPPEN TO EXIST, which defeats its entire purpose: the point is that adding a field is a DELIBERATE ACT SOMEBODY REVIEWS. To add one, edit this file first, then author the content.",
+ "_notesAreLegal": "⚠️ Any key beginning with `_` is accepted anywhere, unvalidated. Authors carry their reasoning inline (98 at the craft root alone) and a schema that forbade that would make people delete their own thinking.",
+ "_darkFields": "⛔ Properties described as DARK are authored and have NO LITERAL READER. They are legal because they exist, not because they work. See docs/FIELD_REFERENCE.md §6 for a diagnosis of each before deleting any of them.",
+ "_gatedBy": "tests/content_ci.mjs — CCODE-288, which also proves the closed-set check can go RED.",
+ "type": "object",
+ "required": [
+  "id",
+  "name",
+  "tradition",
+  "tree"
+ ],
+ "additionalProperties": false,
+ "patternProperties": {
+  "^_": {}
+ },
+ "properties": {
+  "id": {
+   "type": "string"
+  },
+  "name": {
+   "type": "string"
+  },
+  "levelReq": {
+   "type": "number"
+  },
+  "energyCost": {
+   "type": "number"
+  },
+  "axes": {
+   "type": "object"
+  },
+  "attribute": {
+   "type": "string"
+  },
+  "narrationHints": {
+   "type": "string"
+  },
+  "description": {
+   "type": "string"
+  },
+  "notFor": {
+   "type": [
+    "string",
+    "array"
+   ]
+  },
+  "tradition": {
+   "type": "string"
+  },
+  "traditionV2": {
+   "type": "string",
+   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+  },
+  "nativeOrCombination": {
+   "type": "string"
+  },
+  "harmRung": {
+   "type": "string"
+  },
+  "powerSystem": {
+   "type": "string"
+  },
+  "shape": {
+   "type": "string"
+  },
+  "operativeAxis": {
+   "type": [
+    "string",
+    "array"
+   ]
+  },
+  "intensity": {
+   "type": [
+    "string",
+    "object"
+   ]
+  },
+  "mechanic": {
+   "type": "object",
+   "additionalProperties": false,
+   "patternProperties": {
+    "^_": {}
+   },
+   "properties": {
+    "dice": {
+     "type": "object"
+    },
+    "plus": {
+     "type": "number"
+    },
+    "targets": {
+     "type": "number"
+    },
+    "marginFloorPer": {
+     "type": "number"
+    },
+    "crit": {
+     "type": "object"
+    },
+    "magnitude": {
+     "type": "number"
+    },
+    "duration": {
+     "type": "number"
+    },
+    "scope": {
+     "type": [
+      "number",
+      "string"
+     ]
+    },
+    "wardTypes": {
+     "type": "array"
+    },
+    "resistDrop": {
+     "type": "array",
+     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "note": {
+     "type": "string"
+    },
+    "range": {
+     "type": [
+      "number",
+      "string"
+     ]
+    },
+    "soak": {
+     "type": "number"
+    },
+    "soakRank": {
+     "type": "number"
+    },
+    "area": {
+     "type": "number"
+    },
+    "push": {
+     "type": "number"
+    },
+    "damageType": {
+     "type": "string"
+    },
+    "variance": {
+     "type": "number"
+    },
+    "penetration": {
+     "type": "number"
+    },
+    "penetrationNote": {
+     "type": "string",
+     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "uses": {
+     "type": "number"
+    },
+    "evasion": {
+     "type": "number"
+    },
+    "evasionRank": {
+     "type": "number"
+    },
+    "type": {
+     "type": "string"
+    },
+    "requiresPoles": {
+     "type": "array",
+     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "trails": {
+     "type": "number"
+    },
+    "awaitingEngine": {
+     "type": "string",
+     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "wornBenefits": {
+     "type": "object",
+     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "questions": {
+     "type": "number"
+    },
+    "reachesDepth": {
+     "type": "array",
+     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "antisoakImposed": {
+     "type": "number"
+    },
+    "pierce": {
+     "type": "number"
+    },
+    "emotions": {
+     "type": "object",
+     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "carriesEmotion": {
+     "type": "boolean",
+     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "clearsConditions": {
+     "type": "string",
+     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "timeReach": {
+     "type": "number",
+     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    }
+   }
+  },
+  "challengeTypes": {
+   "type": "array",
+   "description": "CI-ONLY — the only consumer is a test."
+  },
+  "bounds": {
+   "type": "array"
+  },
+  "plainly": {
+   "type": "string"
+  },
+  "functions": {
+   "type": "array"
+  },
+  "sectFlavour": {
+   "type": "object",
+   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+  },
+  "tree": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "patternProperties": {
+     "^_": {}
+    },
+    "required": [
+     "rank"
+    ],
+    "properties": {
+     "rank": {
+      "type": "number"
+     },
+     "name": {
+      "type": "string"
+     },
+     "grants": {
+      "type": "string"
+     },
+     "cannot": {
+      "type": "string"
+     },
+     "functions": {
+      "type": "array"
+     },
+     "gains": {
+      "type": "string"
+     },
+     "harmRung": {
+      "type": "string"
+     },
+     "gainAxes": {
+      "type": "array"
+     },
+     "imposes": {
+      "type": "object"
+     },
+     "stage": {
+      "type": "number"
+     },
+     "companionStageName": {
+      "type": "string",
+      "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+     },
+     "opensAccess": {
+      "type": "object"
+     },
+     "read": {
+      "type": "boolean"
+     },
+     "ongoingHarm": {
+      "type": "object"
+     },
+     "persistUntilHealed": {
+      "type": "object"
+     },
+     "antisoakImposed": {
+      "type": "number"
+     },
+     "pierce": {
+      "type": "number"
+     },
+     "interceptCondition": {
+      "type": "object"
+     },
+     "reflectCondition": {
+      "type": "boolean"
+     },
+     "mechanic": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+       "^_": {}
+      },
+      "properties": {
+       "dice": {
+        "type": "object"
+       },
+       "plus": {
+        "type": "number"
+       },
+       "targets": {
+        "type": "number"
+       },
+       "marginFloorPer": {
+        "type": "number"
+       },
+       "crit": {
+        "type": "object"
+       },
+       "magnitude": {
+        "type": "number"
+       },
+       "duration": {
+        "type": "number"
+       },
+       "scope": {
+        "type": [
+         "number",
+         "string"
+        ]
+       },
+       "wardTypes": {
+        "type": "array"
+       },
+       "resistDrop": {
+        "type": "array",
+        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+       },
+       "note": {
+        "type": "string"
+       },
+       "range": {
+        "type": [
+         "number",
+         "string"
+        ]
+       },
+       "soak": {
+        "type": "number"
+       },
+       "soakRank": {
+        "type": "number"
+       },
+       "area": {
+        "type": "number"
+       },
+       "push": {
+        "type": "number"
+       },
+       "damageType": {
+        "type": "string"
+       },
+       "variance": {
+        "type": "number"
+       },
+       "penetration": {
+        "type": "number"
+       },
+       "penetrationNote": {
+        "type": "string",
+        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+       },
+       "uses": {
+        "type": "number"
+       },
+       "evasion": {
+        "type": "number"
+       },
+       "evasionRank": {
+        "type": "number"
+       },
+       "type": {
+        "type": "string"
+       },
+       "requiresPoles": {
+        "type": "array",
+        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+       },
+       "trails": {
+        "type": "number"
+       },
+       "awaitingEngine": {
+        "type": "string",
+        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+       },
+       "wornBenefits": {
+        "type": "object",
+        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+       },
+       "questions": {
+        "type": "number"
+       },
+       "reachesDepth": {
+        "type": "array",
+        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+       },
+       "antisoakImposed": {
+        "type": "number"
+       },
+       "pierce": {
+        "type": "number"
+       },
+       "emotions": {
+        "type": "object",
+        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+       },
+       "carriesEmotion": {
+        "type": "boolean",
+        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+       },
+       "clearsConditions": {
+        "type": "string",
+        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+       },
+       "timeReach": {
+        "type": "number",
+        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+       }
+      }
+     }
+    }
+   }
+  },
+  "obscure": {
+   "type": "boolean"
+  },
+  "taughtBy": {
+   "type": "string"
+  },
+  "companionTaught": {
+   "type": "boolean",
+   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+  },
+  "sense": {
+   "type": "boolean"
+  },
+  "progression": {
+   "type": "string"
+  },
+  "companionId": {
+   "type": "string"
+  },
+  "effectTags": {
+   "type": "array"
+  },
+  "rankDeltas": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "patternProperties": {
+     "^_": {}
+    },
+    "required": [
+     "rank"
+    ],
+    "properties": {
+     "rank": {
+      "type": "number"
+     },
+     "kind": {
+      "type": "string"
+     },
+     "axis": {
+      "type": "string"
+     },
+     "delta": {
+      "type": "string"
+     },
+     "from": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "schemaVersion": {
+   "type": "number"
+  },
+  "gated": {
+   "type": "string"
+  },
+  "upkeep": {
+   "type": "object",
+   "description": "CI-ONLY — the only consumer is a test."
+  },
+  "powerMix": {
+   "type": "object",
+   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+  },
+  "namedCurrent": {
+   "type": "string",
+   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+  },
+  "theNames": {
+   "type": "string",
+   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+  },
+  "schoolAffinity": {
+   "type": "string"
+  },
+  "read": {
+   "type": "boolean"
+  },
+  "learnedAt": {
+   "type": "string",
+   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+  },
+  "peril": {
+   "type": "string"
+  },
+  "projectThreshold": {
+   "type": "number"
+  },
+  "projectTicks": {
+   "type": [
+    "string",
+    "boolean"
+   ]
+  },
+  "backlash": {
+   "type": "string"
+  },
+  "conserveSuppresses": {
+   "type": "string"
+  },
+  "backlashRung": {
+   "type": "string",
+   "description": "CI-ONLY — the only consumer is a test."
+  },
+  "status": {
+   "type": "string"
+  },
+  "downtime": {
+   "type": "boolean"
+  },
+  "summon": {
+   "type": "object"
+  },
+  "innatePrecursor": {
+   "type": "boolean"
+  },
+  "backlashRungNone": {
+   "type": "string",
+   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+  },
+  "accord": {
+   "type": "boolean"
+  },
+  "wildVariance": {
+   "type": "boolean"
+  }
+ }
+}

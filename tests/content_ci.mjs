@@ -1759,6 +1759,32 @@ for (const pack of PACKS) {
 // (5) authored content validates against its derived schema (would have caught the poleIntensity bug)
 {
   const locSchema = rj("schemas/location.schema.json");
+  // ══ CCODE-288 — THE CRAFT SCHEMA. Eleven schemas existed and NONE covered abilities: the 378-item,
+  // 107-field type at the heart of the game, and the one where all 19 dark fields live.
+  // ⛔ `additionalProperties: false` MAKES "reader before field" MECHANICAL — a new field must be DECLARED
+  // before it can be authored, which is a deliberate act somebody reviews. `_`-prefixed notes stay legal.
+  {
+    const abilitySchema = rj("schemas/ability.schema.json");
+    // ⛔ PROVE THE GATE CAN GO RED BEFORE TRUSTING IT GREEN. `genschema` IGNORED `additionalProperties:false`
+    // until CCODE-288 extended it — a closed schema that silently accepted anything is the authored-and-
+    // unread failure committed inside the validator, where everything downstream trusts it.
+    const probe = validate({ id: "p", name: "p", tradition: "t", tree: [{ rank: 1 }], zzz_undeclared: 1 }, abilitySchema);
+    check("CCODE-288: the craft schema is CLOSED — an undeclared field is rejected",
+      probe.valid === false && /not a declared field/.test((probe.errors || []).join(" ")),
+      "the schema accepts anything — it is decorative, not a gate");
+    check("CCODE-288: …and an underscore-prefixed NOTE is still legal",
+      validate({ id: "p", name: "p", tradition: "t", tree: [{ rank: 1 }], _why: "reasoning" }, abilitySchema).valid);
+    let n = 0, bad = 0;
+    for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json"))) {
+      for (const a of (rj(`content/packs/core/abilities/${f}`).abilities || [])) {
+        n++;
+        const r = validate(a, abilitySchema);
+        if (!r.valid) { bad++; if (bad <= 5) fail(`ability schema: ${a.id} — ${(r.errors || []).slice(0, 3).join("; ")}`); }
+      }
+    }
+    check(`CCODE-288: all ${n} crafts validate against schemas/ability.schema.json`, bad === 0 && n > 300, `${bad} invalid of ${n}`);
+  }
+
   const npcSchema = rj("schemas/npc.schema.json");
   const arcSchema = rj("schemas/arc.schema.json");
   const runDir = (dir, schema, label, skip = () => false) => {

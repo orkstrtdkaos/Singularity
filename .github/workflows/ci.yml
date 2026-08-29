@@ -1,0 +1,25 @@
+# ⛔ CCODE-288 — CI. 873 commits in 14 days across two agents and NOTHING ran the suite on push.
+# ⚠️ This week alone that let through: a commit made with smoke at 3 failures, an engine change shipped
+# without a version bump, and a po/ reply that was never committed at all. Each is something a machine
+# notices for free and a person notices sometimes.
+name: suite
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # ⚠️ NO INSTALL STEP ON PURPOSE — this project vendors nothing and has no build step.
+      # `package.json` has zero dependencies and zero devDependencies. If that ever changes,
+      # this is the line that has to change with it.
+      - name: the whole suite
+        run: node scripts/run_tests.mjs

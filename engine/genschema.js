@@ -37,8 +37,23 @@ export function validate(obj, schema, path = "") {
         if (!(req in node)) errors.push(`${p ? p + "." : ""}${req}: required field missing`);
       }
       const props = sch.properties || {};
+      // ⛔ CCODE-288 — patternProperties, so `_note`-style annotations are legal WITHOUT opening the object.
+      // A closed schema that forbade every underscore key would make authors delete their own reasoning,
+      // and this corpus carries 98 of them at the craft root alone.
+      const patterns = Object.entries(sch.patternProperties || {})
+        .map(([re, s]) => [new RegExp(re), s]);
       for (const [k, v] of Object.entries(node)) {
+        const pat = patterns.find(([re]) => re.test(k));
         if (props[k]) walk(v, props[k], `${p ? p + "." : ""}${k}`);
+        else if (pat) walk(v, pat[1], `${p ? p + "." : ""}${k}`);
+        // ⛔ CCODE-288 — THE CLOSED SET. `additionalProperties: false` was previously IGNORED: the branch
+        // below only ever handled the OBJECT form (the number-map pattern), so a schema declaring itself
+        // closed silently accepted anything. ⚠️ THAT IS THE AUTHORED-AND-UNREAD FAILURE COMMITTED IN A
+        // VALIDATOR — the one place it does the most damage, because everything downstream trusts it.
+        // This is what makes `ability.schema.json` able to stop a nineteenth dark field being minted.
+        else if (sch.additionalProperties === false) {
+          errors.push(`${p ? p + "." : ""}${k}: not a declared field (schema is closed) — declare it in the schema first, or prefix it with _ if it is a note`);
+        }
         else if (sch.additionalProperties && typeof sch.additionalProperties === "object") {
           walk(v, sch.additionalProperties, `${p ? p + "." : ""}${k}`);
         }

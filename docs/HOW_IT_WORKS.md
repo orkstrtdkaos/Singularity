@@ -38,8 +38,14 @@ working papers; **this is the answer.**
 | 08-28 | ⛔ `blind` policy → **`mindless`** | Erik: *"blind is CAN’T SEE"*; the word named this policy AND the can’t-see receipt, in one function | `how_it_works.mjs` §8 × 5, plus smoke CCODE-255 | `targeting.js`, `sunk_assay_intake.json` migrated, `POLICY_ALIASES` keeps old saves working |
 | 08-28 | ⛔ **`FIELD_REFERENCE.md` created** | Erik: *"we are DONE with forgetting what things are meant to do and how they actually work or not"* | `how_it_works.mjs` FR × 14 — atlas freshness, bucket counts, axis counts, ladder count | ⛔ every authored field; `field_atlas.mjs` generates its table |
 | 08-28 | `field_atlas.mjs` + `atlas_inject.mjs` | a hand-maintained "which fields are read" list is wrong within a week | its table is re-derived and diffed by the FR gate | ⚠️ `NOT_CONSUMERS` — a question file is not a consumer |
+| 08-28 | ⛔ **`schemas/ability.schema.json`** | eleven schemas existed and NONE covered crafts — the type where all 19 dark fields live | `content_ci` CCODE-288 × 3, incl. a proof the closed set can go RED | ⛔ every craft; a new field must be DECLARED before it can be authored |
+| 08-28 | `genschema.js` learns `additionalProperties:false` + `patternProperties` | it IGNORED the closed-set flag, so the schema above would have been decorative | the RED-proof probe in CCODE-288 | ⚠️ purely additive — no existing schema used the boolean form |
+| 08-28 | CI on push (`.github/workflows/ci.yml`) | 873 commits in 14 days and nothing ran the suite | it IS the runner | ⛔ every push; catches the three things I forgot this week |
+| 08-28 | advisory typecheck workflow + `jsconfig.json` | 5 of 8 false findings this week were contract errors a checker catches at edit time | ⚠️ **non-blocking until seen green** — no `tsc` on the authoring machine | `targeting.js` is the first module opted in |
+| 08-28 | pre-push hook + `scripts/hooks/install.sh` | CI catches a bad push in a minute; the hook catches it in seconds | it runs `run_tests.mjs` | ⚠️ git does not version hooks — hence the installer |
+| 08-28 | ⛔ **`tests/save_fixtures.mjs`** | 16 real saves, 1,788 turns, and NOTHING tested that a rename does not drop an ability | reconciles a COPY of every save; asserts nothing shrank | ⛔ every vocabulary change; guards the one artefact that cannot be regenerated |
 
-**Last verified: 2026-08-28 · v1.9.248 · 378 crafts.**
+**Last verified: 2026-08-28 · v1.9.249 · 378 crafts.**
 
 ---
 

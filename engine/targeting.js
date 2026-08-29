@@ -1,4 +1,44 @@
+// @ts-check
 // engine/targeting.js — CCODE-250. WHO A BLOW IS AIMED AT, AND WHO GETS TO KNOW.
+//
+// ⛔ CCODE-288 — THE FIRST MODULE OPTED IN TO `@ts-check` (see `jsconfig.json`), and it is this one because
+// its contract cost two false findings on 2026-08-28: I read `chooseTarget(...)` as if it returned the ALLY
+// (it returns `{target, policy, why}`), and I called `TARGET_POLICIES.includes(...)` on an object.
+// ⚠️ NO DEPENDENCY AND NO BUILD STEP — VS Code ships the checker and honours the typedefs below with
+// nothing installed. The CI job for it is deliberately advisory until it has been seen green once.
+//
+/**
+ * @typedef {Object} Ally                     an entry in the party roster a foe may aim at
+ * @property {string}   id
+ * @property {string}  [name]
+ * @property {boolean} [downed]               ⛔ the downed are never targets, and a taunt cannot revive one
+ * @property {boolean} [present]              `false` removes them from the round entirely
+ * @property {number}  [threatDealt]          what they have actually done to it — the `threat` policy's input
+ * @property {string[]}[contributions]        MARTIAL · HARM · RESTORE … — ⚠️ `healer` looks for RESTORE HERE,
+ *                                            not at a `roles` array, which is what my fixture guessed
+ * @property {number}  [hiddenAtTier]         concealment: a foe below this tier cannot see them
+ * @property {{level?:number, attributes?:Record<string,number>}} [sheet]
+ *                                            ⚠️ `weakest` sorts on the BEST of the four attributes
+ *                                            (`resistOf`), never on a `health` field — there isn't one
+ */
+/**
+ * @typedef {Object} FoeKnowledge             how well the foe reads your side — build with `foeKnowledge()`
+ * @property {number}  tier
+ * @property {boolean} canJudgeBodies         earns `weakest`
+ * @property {boolean} canReadRoles           earns `healer`
+ * @property {string}  fallback               what a policy degrades TO — "threat", never randomness
+ */
+/**
+ * @typedef {Object} TargetChoice             ⛔ THE RETURN SHAPE. The ally is under `.target`, not the root.
+ * @property {Ally}    target
+ * @property {string}  policy                 the policy ACTUALLY used — "taunted"/"only"/"blind" are outcomes
+ * @property {string}  why                    a receipt line, always present
+ * @property {boolean} [taunted]
+ * @property {boolean} [blindly]              ⚠️ `blind` here means CANNOT SEE — the no-preference policy is
+ *                                            `mindless`, renamed on Erik's 2026-08-28 ruling
+ * @property {string}  [blinded]              the policy it WANTED but could not support
+ * @property {number}  [hiddenFrom]
+ */
 //
 // ⛔ ERIK, ANSWERING THE BLOCKING QUESTION: "Yes a foe chooses who to hit... this makes the sense round
 // even more interesting — you need to sense who's getting attacked so you can intervene if you want....

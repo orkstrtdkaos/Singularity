@@ -1,0 +1,30 @@
+# ⛔ CCODE-288 — ADVISORY TYPE CHECK, DELIBERATELY NON-BLOCKING FOR NOW.
+#
+# ⚠️ `continue-on-error: true` IS NOT LAZINESS, IT IS HONESTY: this job has never been observed to pass,
+# because there is no `tsc` on the machine it was written on. Adding a gate I could not run and letting it
+# block the suite would be shipping an unverified check — the same class of mistake as a gate that cannot
+# go red, in the other direction.
+#
+# ✅ WHEN IT HAS BEEN SEEN GREEN ONCE, DELETE THE `continue-on-error` LINE AND IT BECOMES A REAL GATE.
+#
+# ⚠️ typescript is downloaded by npx in CI ONLY. It is not a dependency, not vendored, and not in
+# package.json — the game still ships as raw ES modules with no build step.
+name: typecheck (advisory)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tsc:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: check the files that opted in via // @ts-check
+        run: npx -y typescript@5 --project jsconfig.json

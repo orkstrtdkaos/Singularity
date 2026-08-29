@@ -543,3 +543,26 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `reflectCondition` | 1 | `tree`×1 | ✅ READ | `intercept.js` |
 | `timeReach` | 1 | `mechanic`×1 | ⛔ DARK | — |
 <!-- ATLAS:END -->
+
+---
+
+## ⚠️ `arc.scale` — A LADDER WITH NO ENGINE CONSUMER, ON PURPOSE
+
+**Authored 2026-08-29. The schema's ladder is `local · regional · continental · world · cosmic`.**
+⛔ **NO ENGINE CODE BRANCHES ON IT.** Grepped: not one comparison against `"cosmic"` or `"continental"`
+anywhere in `engine/` or `app.js`. It reaches the model as prose in the arc payload and nowhere else.
+
+⚠️ **THIS IS RECORDED SO NOBODY LATER ASSUMES IT RANKS ANYTHING.** It is authoring discipline and prompt
+context — which is a real job — but a reader looking for *"the cosmic arc outweighs the regional one"*
+will not find that rule, because it does not exist yet.
+
+✅ **AND TWO THINGS THAT LOOK LIKE ITS CONSUMERS ARE NOT.** Both were checked before this was written:
+
+- **`wake.js` `WAKE_GEN_SCALES` (`world` · `tradition` · `regional`) does NOT drop cosmic arcs.** A wake's
+  scale comes from `quest.tier`, falling back to `"world"` whenever an arc effect applied — **never from
+  `arc.scale`**. ⚠️ I was one step from reporting that a cosmic arc's wake could never fire.
+- **`pickExamples()`'s `.slice(0, 2)` is not a delivery cap.** It selects two *few-shot examples* of what
+  an arc looks like. `arceffects.js` iterates all twelve, unsliced.
+
+⛔ **BOTH ARE THE SAME LESSON: a name that looks like a consumer is not a consumer.** The sixth way
+"unread" lies, and the reason a finding is not a finding until the reader has actually been read.

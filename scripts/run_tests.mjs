@@ -50,6 +50,10 @@ const SUITES = [
   // ⛔ CCODE-306 — THE TAUNT REACHES THE PICK. A wiring gate, not a module gate: both halves were green
   // and the live path connected neither. It asserts where the blow ACTUALLY LANDS across two real rounds.
   ["taunt_wiring", "node", ["tests/taunt_wiring.mjs"]],
+  // ⛔ CCODE-307 — A GROUP IS A CAPABILITY SET, NOT A POOL. §5 is the load-bearing one: it invents a
+  // family the module has never heard of and asserts it flows through UNTOUCHED — Erik's "easily updated
+  // as we evolve the game" made mechanical, so a sixth capability cannot require an engine edit.
+  ["group_capability", "node", ["tests/group_capability.mjs"]],
   ["engine_map --check", "node", ["scripts/engine_map.mjs", "--check"]],
 ];
 

@@ -20,7 +20,7 @@ node scripts/safe_delete.mjs <field>  # triage one candidate before deleting it
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **83** | a play-path file names it outside a comment |
+| ✅ **READ** | **84** | a play-path file names it outside a comment |
 | ⛔ **DARK** | **19** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **4** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |

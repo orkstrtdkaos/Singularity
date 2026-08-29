@@ -1,30 +1,125 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Arc",
-  "description": "One arc / quest-thread. DERIVED from greater_arcs.json arcs[] (SNG-BATCH-9 build-step-1). Arcs are STRUCTURAL, not prose few-shot: a tension between two dispositions or factions + hinge NPCs + a fork (ifIgnored vs ifEngaged). `required` is the shape all 5 authored greater-arcs share. generate('arc', ctx) authors a LOCAL thread from an active tension in the scene — smaller scale, local hinge NPCs — validating against this same shape; the world-tick (SNG-021, Phase 2) advances it offscreen. `scale` gains 'local' for generated threads. connectsTo/convergenceNote/claimedNodes are optional (a fresh local feud may connect to nothing; repair defaults connectsTo to []).",
-  "type": "object",
-  "required": ["id", "name", "scale", "pressure", "tendency", "crossesRegions", "hingeNpcs", "ifIgnored", "ifEngaged"],
-  "properties": {
-    "schemaVersion": { "type": "integer", "description": "present on standalone generated arc records; authored arcs inherit greater_arcs.json's file-level version as array elements" },
-    "id": { "type": "string", "description": "stable slug; generated arcs mint via the SNG-019 resolver" },
-    "name": { "type": "string" },
-    "scale": { "type": "string", "enum": ["world", "regional", "local"], "description": "'local' = a generated quest-thread; 'regional'/'world' = authored greater arcs" },
-    "pressure": { "type": "string", "description": "the burn rate / weight of the arc (e.g. 'slow-building', 'medium', 'the deep clock')" },
-    "tendency": { "type": "string", "description": "the tension: which direction it pulls untended — the two dispositions/factions in conflict" },
-    "crossesRegions": { "type": "array", "items": { "type": "string" }, "description": "where it plays; a local thread may name a single place" },
-    "hingeNpcs": { "type": "array", "items": { "type": "string" }, "description": "the people the arc turns on; generated arcs name local NPCs (authored or generated)" },
-    "ifIgnored": { "type": "string", "description": "what happens if the player never engages — the untended drift" },
-    "ifEngaged": { "type": "string", "description": "what a player who leans in can change — the fork's other branch" },
-    "connectsTo": { "type": "array", "items": { "type": "string" }, "description": "other arc ids this feeds; a generated local face may connect up to a greater arc where apt" },
-    "convergenceNote": { "type": "string" },
-    "claimedNodes": { "type": "array", "items": { "type": "object" } },
-    "stages": { "type": "array", "description": "optional ordered beats the arc moves through as it advances. Authored greater-arcs use the OBJECT form (SNG-204): each stage names what its advance makes MORE LIKELY (pressureOnAdvance) — the lore-bounded input the wake generator reasons from. A bare string is still accepted for a simple generated thread.", "items": { "type": ["string", "object"], "properties": {
-      "stage": { "type": "integer", "description": "1-based ordinal of the beat" },
-      "name": { "type": "string" },
-      "publicFace": { "type": "string", "description": "what the world visibly shows at this stage" },
-      "pressureOnAdvance": { "type": "string", "description": "SNG-204: what advancing through this stage makes MORE LIKELY — the wake generator's lore-bounded input" }
-    } } },
-    "factions": { "type": "array", "items": { "type": "string" } },
-    "rating": { "type": "string", "description": "content-rating tag stamped at generation (SNG-BATCH-9 §3)" }
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "Arc",
+ "description": "One arc / quest-thread. DERIVED from greater_arcs.json arcs[] (SNG-BATCH-9 build-step-1). Arcs are STRUCTURAL, not prose few-shot: a tension between two dispositions or factions + hinge NPCs + a fork (ifIgnored vs ifEngaged). `required` is the shape all 5 authored greater-arcs share. generate('arc', ctx) authors a LOCAL thread from an active tension in the scene — smaller scale, local hinge NPCs — validating against this same shape; the world-tick (SNG-021, Phase 2) advances it offscreen. `scale` gains 'local' for generated threads. connectsTo/convergenceNote/claimedNodes are optional (a fresh local feud may connect to nothing; repair defaults connectsTo to []).",
+ "type": "object",
+ "required": [
+  "id",
+  "name",
+  "scale",
+  "pressure",
+  "tendency",
+  "crossesRegions",
+  "hingeNpcs",
+  "ifIgnored",
+  "ifEngaged"
+ ],
+ "properties": {
+  "schemaVersion": {
+   "type": "integer",
+   "description": "present on standalone generated arc records; authored arcs inherit greater_arcs.json's file-level version as array elements"
+  },
+  "id": {
+   "type": "string",
+   "description": "stable slug; generated arcs mint via the SNG-019 resolver"
+  },
+  "name": {
+   "type": "string"
+  },
+  "scale": {
+   "type": "string",
+   "enum": [
+    "local",
+    "regional",
+    "continental",
+    "world",
+    "cosmic"
+   ],
+   "description": "'local' = a generated quest-thread; 'regional'/'world' = authored greater arcs",
+   "_scaleLadder": "⛔ ERIK 2026-08-29: 'we should give arcs INTENTIONAL SCALING — some are local quest arcs, regional, then continental or global', plus 'we need to add the COSMIC Arc(s). Precursors and Veil Entities... they started all this and things are coming back to conflict again.' ⚠️ FIVE RUNGS, ordered smallest to largest. `cosmic` sits ABOVE world because the Precursor disagreement is not a world event — the world is the ground it is being had on."
+  },
+  "pressure": {
+   "type": "string",
+   "description": "the burn rate / weight of the arc (e.g. 'slow-building', 'medium', 'the deep clock')"
+  },
+  "tendency": {
+   "type": "string",
+   "description": "the tension: which direction it pulls untended — the two dispositions/factions in conflict"
+  },
+  "crossesRegions": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "where it plays; a local thread may name a single place"
+  },
+  "hingeNpcs": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "the people the arc turns on; generated arcs name local NPCs (authored or generated)"
+  },
+  "ifIgnored": {
+   "type": "string",
+   "description": "what happens if the player never engages — the untended drift"
+  },
+  "ifEngaged": {
+   "type": "string",
+   "description": "what a player who leans in can change — the fork's other branch"
+  },
+  "connectsTo": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "other arc ids this feeds; a generated local face may connect up to a greater arc where apt"
+  },
+  "convergenceNote": {
+   "type": "string"
+  },
+  "claimedNodes": {
+   "type": "array",
+   "items": {
+    "type": "object"
+   }
+  },
+  "stages": {
+   "type": "array",
+   "description": "optional ordered beats the arc moves through as it advances. Authored greater-arcs use the OBJECT form (SNG-204): each stage names what its advance makes MORE LIKELY (pressureOnAdvance) — the lore-bounded input the wake generator reasons from. A bare string is still accepted for a simple generated thread.",
+   "items": {
+    "type": [
+     "string",
+     "object"
+    ],
+    "properties": {
+     "stage": {
+      "type": "integer",
+      "description": "1-based ordinal of the beat"
+     },
+     "name": {
+      "type": "string"
+     },
+     "publicFace": {
+      "type": "string",
+      "description": "what the world visibly shows at this stage"
+     },
+     "pressureOnAdvance": {
+      "type": "string",
+      "description": "SNG-204: what advancing through this stage makes MORE LIKELY — the wake generator's lore-bounded input"
+     }
+    }
+   }
+  },
+  "factions": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "rating": {
+   "type": "string",
+   "description": "content-rating tag stamped at generation (SNG-BATCH-9 §3)"
   }
+ }
 }

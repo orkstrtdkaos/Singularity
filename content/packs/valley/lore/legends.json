@@ -7,7 +7,8 @@
  "tiers": {
   "legendary": "arc-scale; hand-authored anchors (this file) + rare generation at high birth-weight; recur as the measure others are held against",
   "regional": "notable local powers (a warlord, a corrupt overseer); generatable, seeded by these anchors; mid-arc antagonists/allies",
-  "riffraff": "petty — bandits, enforcers, the altered; NOT anchored here; generate at low tier in-grain per locale"
+  "riffraff": "petty — bandits, enforcers, the altered; NOT anchored here; generate at low tier in-grain per locale",
+  "mythical": "⛔ NEAR-LEVEL-100 AND STILL HERE. Erik 2026-08-29: 'THE WORLD'S MYTHICALS ARE THOSE HIGH NEAR-LEVEL-100 NPCs.' ⚠️ A Mythical is not a bigger legend — it is someone who has climbed the whole ladder and has NOT YET CROSSED. ⛔ THEY ARE THE PEOPLE THE WORLD ARCS ACTUALLY MOVE THROUGH (see `_theMythicalRung`), they can be killed and injured like anyone, and the thing waiting at the end of their road is not retirement."
  },
  "deploymentBeats": {
   "witness_power": "a set-piece battle where the character SEES what the best can do (scale-setting)",
@@ -607,5 +608,17 @@
    "deathImagePrompt": "A a rootkin who walks the quickwood's edge and refuses to say whether the wood should open or seal fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
   }
  ],
- "_traditionFixNote": "⛔ SNG-432. THREE FIGURES CARRIED TRADITION IDS THAT DO NOT EXIST — `harmonic_radiant`, `precursor_nanite_cold_noesis`, `valley_craft_administration`. CCode flagged them as traditions needing name pools and abilities. ⚠️ THEY ARE NOT TRADITIONS AND NEVER WERE.\nThis file is MINE, dated 2026-07-11, and predates the canonical 26-tradition list in `traditions.json`. I wrote descriptors: a DISPOSITION PAIR (harmonic+radiant), a POWER-SOURCE STACK (precursor + nanite + cold noesis), and a JOB (valley craft administration). ⛔ NONE OF THE THREE IS A PEOPLE.\n⚠️ THE FIX IS MAPPING, NOT AUTHORING. Every one maps cleanly onto a real tradition once you read the signature instead of the label — and `noesis` was sitting inside one of the bad ids the whole time, which is the Cogitant craft-word.\n⛔ A GATE IS WORTH MORE THAN THIS FIX: every `tradition` in content must exist in traditions.json. These three would have failed it on the day I wrote them."
+ "_traditionFixNote": "⛔ SNG-432. THREE FIGURES CARRIED TRADITION IDS THAT DO NOT EXIST — `harmonic_radiant`, `precursor_nanite_cold_noesis`, `valley_craft_administration`. CCode flagged them as traditions needing name pools and abilities. ⚠️ THEY ARE NOT TRADITIONS AND NEVER WERE.\nThis file is MINE, dated 2026-07-11, and predates the canonical 26-tradition list in `traditions.json`. I wrote descriptors: a DISPOSITION PAIR (harmonic+radiant), a POWER-SOURCE STACK (precursor + nanite + cold noesis), and a JOB (valley craft administration). ⛔ NONE OF THE THREE IS A PEOPLE.\n⚠️ THE FIX IS MAPPING, NOT AUTHORING. Every one maps cleanly onto a real tradition once you read the signature instead of the label — and `noesis` was sitting inside one of the bad ids the whole time, which is the Cogitant craft-word.\n⛔ A GATE IS WORTH MORE THAN THIS FIX: every `tradition` in content must exist in traditions.json. These three would have failed it on the day I wrote them.",
+ "_theMythicalRung": {
+  "principle": "⛔ AT OR AROUND LEVEL 100, A CHARACTER OR AN NPC WILL ASCEND OR FALL ACROSS THE VEIL — AND EITHER WAY THEY GO TO JOIN THE PRIMARY CONFLICT. Erik 2026-08-29, new canon. ⚠️ ASCEND and FALL are two directions across the SAME boundary, not success and failure: `the_three.md` records Kenosis EMPTYING ITSELF DOWNWARD into a mortal shape, and that was the gift. ⛔ WHAT IS BEYOND THE VEIL IS NOT ELSEWHERE — it is `arc_the_disagreement`, the cosmic arc, and crossing means taking a side in an argument between world-makers.",
+  "whatThisFixes": "⛔ IT MAKES THE COSMIC ARC REACHABLE. Before this, `arc_the_disagreement` was the weather behind everything and nothing connected a person to it. ⚠️ NOW THE TOP OF A CHARACTER'S ROAD IS ITS DOOR — the endgame is not defeating the Precursors, it is BECOMING ONE OF THE PARTIES.",
+  "theMythicalsAreTheWorldsHINGES": "⛔ Erik: 'the world arcs move MAINLY FROM NPCs WHO HAVE CLIMBED THE LADDER.' ⚠️ EVERY `hingeNpcs` ENTRY ON ALL ELEVEN ARCS IS A CANDIDATE. An arc that moves because a stage advanced is weather; an arc that moves because a Mythical acted is a story, and the acting one can be found, fought, helped or buried.",
+  "theyAreNotSAFE": "⛔ Erik: 'THEY GET KILLED AND INJURED AND THEY NEED TO GROW TOO (which they do in tier).' ⚠️ A Mythical is mortal on the same terms as a player: the group model's coverage cliffs, the death ladder's depths, the casualty pool. ⛔ AND KILLING ONE MOVES ITS ARC — which is the mechanism the NPC/arc backlog entry is asking for.",
+  "ascendVsFall": {
+   "ascend": "toward Akinetos' side — the lattice, the pause held, order kept by not moving",
+   "fall": "toward what Kenosis did — emptying downward, taking a shape, arguing that the seeded have standing",
+   "_note": "⚠️ NEITHER IS GOOD. ⛔ The Three's disagreement was never good-versus-evil — it was 'an ancient disagreement between two entities of ONE PEOPLE', and a Mythical crossing chooses which of them was right."
+  },
+  "_openForErik": "⬜ NOT RULED: whether a crossing is VOLUNTARY, whether anyone has crossed within living memory, and whether a crossed Mythical can be reached, answered, or called back. ⚠️ `open_threshold` and `calling_back` are crafts about exactly that verb at a smaller scale, which is suggestive and not a ruling."
+ }
 }

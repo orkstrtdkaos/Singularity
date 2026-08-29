@@ -481,7 +481,7 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `crit` | 57 | `mechanic`×57 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
 | `wardTypes` | 48 | `mechanic`×48 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `marginFloorPer` | 45 | `mechanic`×45 | ✅ READ | `craftmechanics.js` |
-| `damageType` | 35 | `mechanic`×35 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
+| `damageType` | 39 | `mechanic`×39 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `soak` | 30 | `mechanic`×30 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `melee.js` |
 | `soakRank` | 29 | `mechanic`×29 | ✅ READ | `skill_battle.js`, `app.js` |
 | `sense` | 27 | `root`×27 | ✅ READ | `combatants.js`, `encounters.js`, `gambit.js` |
@@ -507,6 +507,7 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `peril` | 6 | `root`×6 | ✅ READ | `art.js`, `gm.js` |
 | `persistUntilHealed` | 6 | `tree`×6 | ✅ READ | `capabilities.js`, `conditions.js`, `craftmechanics.js` |
 | `wildVariance` | 5 | `root`×5 | ✅ READ | `resolve.js`, `app.js` |
+| `damageMix` | 3 | `mechanic`×3 | ✅ READ | `damagetypes.js` |
 | `stage` | 3 | `tree`×3 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
 | `companionStageName` | 3 | `tree`×3 | ⛔ DARK | — |
 | `read` | 3 | `root`×1 `tree`×2 | ✅ READ | `art.js`, `borncontract.js`, `generate.js` |
@@ -520,7 +521,6 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `summon` | 2 | `root`×2 | ✅ READ | `gm.js`, `npcsheet.js`, `roundreceipt.js` |
 | `pierce` | 2 | `tree`×1 `mechanic`×1 | ✅ READ | `capabilities.js`, `skill_battle.js` |
 | `innatePrecursor` | 2 | `root`×2 | ✅ READ | `progression.js`, `app.js` |
-| `damageMix` | 1 | `mechanic`×1 | ✅ READ | `damagetypes.js` |
 | `taughtBy` | 1 | `root`×1 | ✅ READ | `companions.js`, `gm.js`, `progression.js` |
 | `companionTaught` | 1 | `root`×1 | ⛔ DARK | — |
 | `progression` | 1 | `root`×1 | ✅ READ | `authormode.js`, `backfill.js`, `braids.js` |

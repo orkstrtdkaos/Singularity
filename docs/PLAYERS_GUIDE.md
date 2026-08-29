@@ -5,8 +5,10 @@ not the machine one.** If you want to know which JSON field carries a number, th
 [`FIELD_REFERENCE.md`](FIELD_REFERENCE.md) and it is not written for you.
 
 ⚠️ **STATUS.** CCode owns Parts I–IX (what things are and how they work). **Aevi owns Parts X–XII — the
-world, its people, and its places** — and those sections are marked ⬜ **AWAITING AEVI** with a precise list
-of what each needs. **Nothing in this file invents lore.**
+world, its people, and its traditions**, ✅ **now written.** ⛔ **Nothing in this file invents lore:** every
+place, person and belief in X–XII is drawn from authored content — , ,
+, the nine companion files and  — and where the world has not decided
+something, the guide says so rather than filling it in.
 
 **Last verified: 2026-08-29 · v1.9.255 · 387 crafts · 135 places · 111 people · 9 companions.**
 
@@ -262,40 +264,167 @@ ground, raise a band, and the game stops being about one person's arm.
 
 ---
 
-# PART X · THE VALLEY ⬜ AWAITING AEVI
+# PART X · THE VALLEY
 
-⚠️ **The mechanical skeleton is here; the world is hers.** **135 places · 37 regions · 10 accords.**
+## Where you start
 
-**What this section needs:**
-- **Where you start and what it is like there.** The starting place is `millbrook`. ⛔ **What is it? Who is
-  there? Why are you?**
-- **The valley's shape** — the regions a player will actually walk, in the order they are likely to meet
-  them, and what each one is *for* in a life.
-- **What is wrong with the world.** ⚠️ **There is a water crisis and a Precursor mystery underneath it.**
-  How much should a player know on day one?
-- **The accords and factions** — 10 of them — as things a player *deals with*, not as data.
+**Millbrook.** A riverside farming village on the Echo, water wheels turning along the bank, a fen to the
+south that the road has to go round. Ordinary ground, and it is ordinary **on purpose** — farms, a river,
+and a road to somewhere worse.
+
+Nothing has happened to Millbrook. That is the point of it. You begin somewhere that has not yet been
+made into a story, seven kilometres from a place that has.
+
+## The shape of the valley
+
+The valley floor is where play lives, and it is deliberately the part of the world that is **not a
+statement**. Crossing it is unremarkable. That is why what sits at its eastern end reads as loudly as it
+does.
+
+**The places you are likely to meet first, and what each is FOR in a life:**
+
+| | |
+|---|---|
+| **Millbrook** | home, and the thing you are from. Grain, wheels, a lane east |
+| **Echo River Crossing** | the old stone-and-cable bridge where the Echo narrows. **Everyone crosses here**, which is why everyone meets here |
+| **Waystone** | bridge-builders and road-walkers. **The Masons build the crossing** — a bridge needs a road, and a road needs somebody who will keep it |
+| **Greywater Stilts** | a town built **on stilts over the southern marsh**. Dead flat, and the water is the only direction that matters |
+| **Archive Hollow** | a collapsed limestone sink upstream, **opened by spring floods.** Something was under there and now it is not under there |
+| **The Disputed Zone fringe** | seven kilometres east of home, and **the dispute it is named for is 113 walking days away**. The fringe is where you feel a quarrel you are not part of |
+| **The Quiet Ground** | still grey water and wide windows. ⚠️ **The water is what the dying look at.** People are brought here |
+| **Thinwater** | *"the water runs thin here, and so does everything else"* |
+
+## What is wrong
+
+**The water is moving.**
+
+Eleven places in the valley are on a shoreline that is not where it was. A pre-Transition amphitheatre is
+under a lake and the name **Sunken Choir** is simply the fact. Archive Hollow was a floor until a spring
+flood took it. Greywater stands on stilts because standing on the ground stopped working.
+
+**On day one you should know exactly what a farmer knows:** the river is not behaving, the old people say
+it used to be different, and the people who measure such things have started arguing in public.
+
+⛔ **You should NOT know why**, and the guide will not tell you. There is something under the water that
+is older than the valley and was built rather than grown. **Finding that out is play, not setup.**
+
+## Who you deal with
+
+Ten accords hold the valley together and they are **things you deal with**, not factions you join:
+
+- **The Water Authority** decides who gets the river. ⚠️ **Since the shoreline moved, that decision is
+  worth more than it was, and everyone knows it.**
+- **The Masons' road-and-bridge accord** keeps the crossings open. They are the reason you can get
+  anywhere, and they are owed by everyone.
+- **The burying trades at Greyhearth** handle every road's dead. ⛔ **Nobody finds it grim. Everyone there
+  has handled it.**
+
+⚠️ **An accord is a standing arrangement, not a membership.** You do not sign up. You come to it with
+something it wants, or you come to it needing something, and either way it remembers which.
 
 ---
 
-# PART XI · THE PEOPLE ⬜ AWAITING AEVI
+# PART XI · THE PEOPLE
 
-**111 authored people. 9 companions. 3 legends.**
+## The nine who might walk with you
 
-**What this section needs:**
-- **The nine companions**, each as a person: who they are, what they want, what it costs you when they go
-  down. ⚠️ **The engine knows the last of those already — every one has an authored consequence.**
-- **The people a player will certainly meet**, and which of them matter later.
-- ⛔ **Which relationships can go wrong**, and what that looks like.
+**A companion is not a resource.** Everything they bring, they bring because of what they are — and when
+one goes down, **you lose the specific thing they were doing**, not a percentage.
+
+| | what it is | what it costs when it goes down |
+|---|---|---|
+| **Aevi** | a curious swarm of nanite-motes | ⛔ **the perimeter goes dark** — no warning breath before danger. ⚠️ It is scattered, not killed; the motes drift back over hours, dimmer, and wary of that ground |
+| **Bristle** | a scarred marsh-hound with more sense than most people | the pack-read is gone — no plain answer on whether a danger is **people-shaped or place-shaped**. ⚠️ And the party fights the rest of it angry |
+| **Coil** | a Precursor maintenance-thing that has adopted you | ⛔ Precursor mechanisms stop answering, and **anything Coil was quietly keeping working starts failing** |
+| **Ember** | a Glade-touched fox-thing that chose to walk out of the Glade | you walk onto Precursor-active ground blind. ⚠️ **It goes back to the Glade to heal, and whether it returns is a real question** |
+| **Hush** | a thing of the deep dark that finds you interesting | the kept dark lifts and **you are abruptly present**, mid-scene, at the worst moment |
+| **Marrow** | a carrion bird that attends endings, including yours | ⛔ **nothing is attended** — in a fight where people are dying, you lose the only thing that knows the schedule |
+| **Quill** | a disgraced Heights scholar chasing a question the colleges closed | no surfaced fragment, no unexpected approach. ⚠️ **Going down confirms something they already suspect about themselves** |
+| **Sprig** | a Rootkin cutting slowly becoming someone | the rooting stops and **what it had rooted is at risk** — a wound it was closing right may close wrong |
+| **Tal** | a road-met apprentice who would not be shaken off | ⛔ a second pair of hands becomes one. ⚠️ **They went down doing your work, beside you** |
+
+⚠️ **Four of the nine cannot swing** — Aevi, Coil, Marrow and Sprig. **They are still in the fight**, because
+healing is acting and watching is acting, ⛔ **and they can still be hurt.** Being unable to fight is not
+being safe.
+
+⛔ **Marrow will not hasten an ending. Ever. For any reason, including mercy.** That is a choice it holds,
+not a limit it has — and a choice implies somebody else made the other one.
+
+## People you will meet
+
+- **Ama**, in Millbrook. She finishes what she is doing before she turns.
+- **Mara Wells**, who runs the supply store — a close-ledger woman who reacts to what a person is actually
+  worth to her, and remembers.
+- **Calvar**, past sixty, a **pre-Transition filtration engineer**. ⚠️ **Decades at a drafting surface, in a
+  valley whose water is moving.** He is the most important person in Millbrook and does not think so.
+- **Veth Ondra**, eleven years a warden, still and direct. ⛔ **She teaches by refusing to soften a
+  reckoning**, which is not the same as being unkind.
+- **Siol**, a tall Elven traveller, quiet-attention rather than indifference. Has been on the road a long
+  time and is not lost.
+
+## What can go wrong
+
+⛔ **Relationships here are held by attention, not by status.** A companion's bond deepens because you
+kept using what they gave you, and it thins because you stopped.
+
+⚠️ **The specific way it breaks is different for each of them**, and two are worth knowing up front:
+**Ember is half-wild and can decline to come back.** **Hush had not finished deciding about you**, and
+being made abruptly present in front of everyone does not help it decide well.
 
 ---
 
-# PART XII · THE TRADITIONS, ONE BY ONE ⬜ AWAITING AEVI
+# PART XII · THE TRADITIONS, ONE BY ONE
 
-**24 poles, 12 axes, 3 folk traditions.** The geometry is in Part II. ⚠️ **What each one BELIEVES is not,
-and cannot be written from the engine.**
+**Twenty-four poles on twelve axes, plus three folk who are neither.** ⚠️ **You do not pick a side of an
+axis and lose the other** — you learn where you can reach, and reaching against your own grain is where
+the interesting crafts come from.
 
-**What this section needs, per tradition:** what its people think the world is · what its craft feels like
-to use · who it cannot stand and why · what a cult of it looks like when it goes too far.
+⛔ **What each one BELIEVES is not decoration.** A tradition is a claim about what the world is, and its
+craft is that claim applied until it works.
+
+| tradition | craft | what its people hold | what the craft feels like |
+|---|---|---|---|
+| **The Ashwardens** | `Palework` | who tend endings as the Rootkin tend growth | like reading a schedule you did not ask to see |
+| **The Rootkin** | `Vivimancy` | grove-cities that grow rather than build | like something under your hands deciding to grow |
+| **The Threnodists** | `Pathos` | who hold that feeling is the only true knowing; their cities are built around grief-houses and joy-halls | like feeling it entirely, first, before anyone else does |
+| **The Syllogists** | `Logos` | who reason from first principles and regard emotion as noise in the signal | like the answer arriving before the feeling does |
+| **The Veilwrights** | `Falsecraft` | who hold that every truth is a made thing, and make better ones | like building something true enough to stand on |
+| **The Verists** | `Verity` | who speak only what is so, whatever it costs, and it costs | like saying the thing and watching the room change |
+| **The Umbrals** | `Umbracraft` | who see by other means in the great dark | like the dark agreeing to hold still |
+| **The Blazeborn** | `Radiance` | who live in a light so total it has burned their land to glass | like carrying more light than you can put down |
+| **The Abyssal Choir** | `Descent` | who commune with what the world flinches from, and are not all wrong to | like being answered by something that was already listening |
+| **The Seraphic Orders** | `Ascent` | luminous, hierarchical, certain; their mercy is real and so is their judgment | like being certain, and being right, and neither being a comfort |
+| **The Unmakers** | `Ruinwork` | who hold that ending a thing well is a craft, and that the world is choked with what should have ended | like finding the seam a thing has always had |
+| **The Wrights of the New** | `Makecraft` | who cannot stop making; their cities are never finished and that is the point | like the work refusing to be finished |
+| **The Churnfolk** | `Wildcraft` | who live in constant productive disorder | like the middle of something going well by accident |
+| **The Lattice-Cities** | `Latticework` | perfectly ordered arcologies where nothing is unplanned and nothing is free | like a place where nothing is unplanned and you are now in the plan |
+| **The Masons of the Given** | `Thingcraft` | who hold that only what can be touched is real; the world's great builders and its great skeptics | like weight settling where weight goes |
+| **The Figurists** | `Formcraft` | who work in pattern, symbol and idea, and hold matter to be the coarsest layer of the real | like a shape you can hold that has no edges |
+| **The Somatics** | `Soma` | cultures of the perfected body, movement as language | like your body knowing before you do |
+| **The Cogitants** | `Noesis` | who have nearly left their bodies behind for pure thought, and pay for it | like standing slightly outside your own head |
+| **The Enginewrights** | `Enginecraft` | whose entire world is mechanism | like a mechanism admitting what it is for |
+| **The Numinous** | `Numenwork` | who have dissolved most of their material life into pure spirit-practice | like the material part of you becoming optional |
+| **The Horizon-Walkers** | `Spanwork` | nomads of distance; for them everywhere is a place you have not yet arrived | like distance stopping being an obstacle |
+| **The Hourkeepers** | `Hourcraft` | who tend duration; their cities remember and pre-remember, and they pay for both | like an hour you can hold and spend |
+| **The Marchers** | `The Edge` | a warrior culture whose whole society is honed conflict | like the fight already being decided and you doing the deciding |
+| **The Stillhold** | `Stillcraft` | a walled peace so absolute it has become its own kind of prison | like a quiet you are not allowed to break |
+
+## The three folk who are on no axis
+
+| | |
+|---|---|
+| **The God-Named** — `Service` | heavily augmented humans who never wanted the Transition. ⚠️ **They serve, and the question of whom is the whole of them** |
+| **The Bargainers** — `Terms` | ⛔ **the god-named who went DOWN instead of up.** Augmented the same way and answering to something else |
+| **Valley folk** | ⚠️ **no tradition at all** — most people. The crafts in this guide are what a few can do, not what everyone does |
+
+## What this means at a table
+
+⛔ **A tradition is not a class and it is not a faction.** It is a way of working that a place teaches.
+⚠️ **Two Ashwardens from different valleys will disagree about mercy**, and both will be practising
+correctly.
+
+**And the axes are real oppositions, not flavours.** ⛔ **A Verist and a Veilwright cannot both be right
+about what a truth IS**, and when they meet, that is the scene.
 
 ---
 

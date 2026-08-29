@@ -27,7 +27,12 @@ be dragged into that one."*** ⚠️ **PROXIMITY DECIDES WHAT A PLAYER MEETS.**
 
 ---
 
-## THE SIX VALLEY ARCS
+## THE SIX LOCAL AND REGIONAL ARCS
+
+⚠️ **NAMING FLAGGED — Erik 2026-08-29: *"calling the world the valley makes it sound tiny."*** ⛔ **These six
+carry NO `scale` field at all** and have been referred to as "the valley's arcs"; they are the **local and
+regional** arcs of a world whose greater arcs cross *"all Reaches"* and *"every deep site."* **Backlogged:
+a four-rung ladder — local · regional · continental · world — and a name for the world itself.**
 
 ⚠️ **`arc_the_water` IS SUBSTANTIALLY RESOLVED IN ERIK'S OWN PLAY.** It is listed because it is authored,
 **not because it is waiting for a new player.**

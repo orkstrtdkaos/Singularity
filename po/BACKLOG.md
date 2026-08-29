@@ -656,3 +656,67 @@ BRINGS and what their loss COSTS, and could not describe **what it looks like wh
 
 ⛔ **ADJACENT AND PROBABLY THE SAME WORK: §48's Afterlings.** A driven shade that becomes someone, and a
 companion who stops being yours, are the same question about a bond that has changed state.
+
+## ⛔ ARC SCALE AND THE "VALLEY" NAMING (Erik, 2026-08-29)
+
+**Erik: *"the arcs should be WORLD scale, not just valley scale (although we should give arcs INTENTIONAL
+SCALING I guess — some are local quest arcs, regional, then continental or global). CALLING THE WORLD THE
+VALLEY MAKES IT SOUND TINY."***
+
+### ⛔ 1. THE SCALE VOCABULARY IS HALF-AUTHORED
+
+| | |
+|---|---|
+| arcs carrying `scale: world` | 3 |
+| arcs carrying `scale: regional` | 2 |
+| ⛔ **arcs carrying NO scale at all** | ⛔ **6 — every arc in `world_superstructure.json`** |
+
+⚠️ **AND THE FILE NAMES CONTRADICT THE CONTENT:** `world_superstructure.json` holds the six **UNSCALED,
+valley-local** arcs, and `greater_arcs.json` holds the **world- and regional-scale** ones. ⛔ **The
+world-named file is the local one.**
+
+**Proposed ladder, four rungs — Erik's own list:**
+`local` (a quest arc: one place, one question) · `regional` · `continental` · `world`
+
+⚠️ **`docs/ARCS.md` currently calls the six "THE SIX VALLEY ARCS" and that is the naming Erik is objecting
+to.** ⛔ **They should read as `local` and `regional` arcs OF a world, not as "the valley's arcs" in a
+setting whose scope is a valley.**
+
+### ⛔ 2. "THE VALLEY" IS DOING TOO MUCH WORK — 374 OCCURRENCES
+
+**Across `content/packs`, `docs/` and `SYSTEM_SPEC.md`.** ⚠️ **It names a REGION and it has been standing in
+for the WORLD**, which is why the setting reads smaller than it is — the greater arcs already cross *"all
+Reaches"*, the Gearlands, the Blocklands, the manifest domains and *"every deep site."*
+
+⛔ **THIS IS NOT A FIND-AND-REPLACE.** Most of the 374 correctly name the region a player starts in.
+✅ **The work is separating the two senses and naming the world**, which as far as I can measure **has no
+name at all** — the greater arcs say *"world-wide"* and *"the whole world"* and never a proper noun.
+
+⚠️ **AND THE WORLD NEEDS A NAME BEFORE THE RENAME CAN HAPPEN. THAT IS ERIK'S.**
+
+---
+
+## ⛔ NPCs PUSHING AND PULLING ON ARCS — vs the new battle and arc systems (Erik, 2026-08-29)
+
+**Erik: *"backlog an update to how our NPCs pushing and pulling on arcs interact with the new battle
+systems and this arc update."***
+
+**What exists:** `arc_response.json` (52 entries) · `tradition_motivations.prominentArcHolders` (6) ·
+`hingeNpcs` on all 11 arcs · the seeking clock (`engine/seeking.js`) · `drivenNpcDirective`.
+
+⛔ **WHAT HAS CHANGED UNDER IT SINCE ANY OF THAT WAS WRITTEN:**
+
+| new system | why the arc layer has not caught up |
+|---|---|
+| **folded allies are mortal** (CCODE-298) | ⚠️ **an NPC pushing an arc can now LOSE PEOPLE doing it** — and nothing models that as arc pressure |
+| **`downedEffect` can fire** | a hinge NPC going down should move the arc it hinges. ⛔ **Nothing connects the two** |
+| **projects: interrupt · resume · sabotage · inherit** | ⛔ **`sabotageProject` is EXACTLY an NPC pushing against an arc** and it is not wired to arcs at all |
+| **the death ladder** | ⚠️ **a hinge NPC at depth 2 is an arc that can still be saved.** `hingeNpcs` does not know the ladder exists |
+| **arcs resolve permanently** | ⛔ **what happens to an NPC whose arc CLOSED?** The Patient Buyer with the crossroads bought is a different person, and nothing says so |
+
+⚠️ **THE SHAPE OF THE QUESTION: an arc currently moves because a STAGE advances. ⛔ It should also move
+because someone WORKED at it — and now that NPCs can be hurt, hindered, sabotaged and killed by the same
+systems a player uses, the pushing should cost them what it costs a player.**
+
+⛔ **AND THE REVERSE, WHICH IS THE GENERATIVE HALF ERIK ASKED FOR: a closed arc leaves a wake, and its
+hinge NPCs are the most likely seeds of what rises next.**

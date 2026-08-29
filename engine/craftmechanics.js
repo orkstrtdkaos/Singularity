@@ -93,6 +93,73 @@ export function refusalOf(authoredIntensity, rank = 1) {
  *  doubling-again, T-IV/V are flagged `special` because at the capstone rung a craft is meant to gain a
  *  KIND of ability rather than a bigger number. Scaling only the operative dimension is deliberate: a craft
  *  doubles on its own axis, not on all of them, or a tier-V ward would also somehow reach further. */
+/** ⛔ CCODE-289 — THE RANK-DELTA ADAPTER. Erik: *"Each craft says how a rank grows it, but it's ok to have
+ *  a default, AS LONG AS AUTHORING OVERRULES IT."*
+ *
+ *  ⚠️ THE DEFAULT IS A FLOOR, NEVER A CEILING — the fourth time this project has made that ruling
+ *  (`canStrike`, the summon sheet, roster values, now this). It is the first line of this comment because
+ *  it is the thing to remember.
+ *
+ *  ⛔ THREE MISMATCHES SAT BETWEEN 495 AUTHORED DELTAS AND THE ENGINE, AND FIXING ONLY THE FIRST WOULD
+ *  HAVE LOOKED LIKE SUCCESS:
+ *
+ *  1. SHAPE — the engine read `mechanic.rankDeltas` KEYED BY RANK; content authors `rankDeltas` at the
+ *     ROOT as a LIST. Zero of 274 crafts matched. This is the one that was obvious.
+ *  2. FIELD NAME (Aevi) — `extend` requires `rDelta.dimension`. ⚠️ ALL 163 extend deltas carry `axis` and
+ *     NOT ONE carries `dimension`, so reshaping alone would land `deepen` and leave a third of the work
+ *     silently inert with the gate green. That is the `damage_families` failure again: correct content,
+ *     correct reader, a field name between them that does not match.
+ *  3. ⛔ MAGNITUDE — and this one makes things WORSE, not merely incomplete. An authored delta carries NO
+ *     `mult`: 0 of 495. The old line let an authored delta REPLACE the default outright, so connecting
+ *     them naively would give `deepen` a mult of `num(undefined, 1)` = 1.0 — 129 crafts scaling by
+ *     NOTHING where today they get 1.35^steps. ⚠️ AUTHORING OVERRULES THE *KIND*, NOT THE *AMOUNT*: the
+ *     author says what a rank does, the dial says how much, and an author who wants both may still write
+ *     `mult` and win.
+ *
+ *  ⚠️ `add` HAS NO ENGINE BRANCH AND THAT IS CORRECT, NOT AN OVERSIGHT. Per the cfg's own note `add` means
+ *  ADD A FUNCTION — a grants-level change the tree already carries — so it must not touch magnitudes. It
+ *  is returned with its kind intact so a receipt can name it, and it deliberately scales nothing.
+ *
+ *  @returns {{kind:string, dimensions?:string[], mult:number, source:string, unmapped?:string}|null} */
+export function rankDeltaFor(ability, rank = 1, { cfg = {}, authored = null } = {}) {
+  const steps = Math.max(0, num(rank, 1) - 1);
+  const dflt = cfg.rankDeltas?.default || null;
+  const fallback = () => (steps > 0 && dflt
+    ? { ...dflt, mult: Math.pow(num(dflt.mult, 1.35), steps), source: "default" } : null);
+  if (steps <= 0) return null;                         // rank 1 is the base; nothing grew into it
+
+  // ⚠️ THE RANK-KEYED SHAPE STILL WINS WHERE IT EXISTS. Nothing authors it today, but it is the shape the
+  // engine was built for and a pack may use it; the adapter is a second door, never a replacement.
+  const keyed = (authored || ability?.mechanic)?.rankDeltas?.[String(rank)];
+  const list = Array.isArray(ability?.rankDeltas) ? ability.rankDeltas : null;
+  const found = keyed || (list ? list.find(d => num(d?.rank, 0) === num(rank, 0)) : null);
+  if (!found) return fallback();
+
+  const kind = String(found.kind || dflt?.kind || "deepen");
+  // ⛔ THE AMOUNT COMES FROM THE DIAL UNLESS THE AUTHOR NAMED ONE — trap 3 above.
+  const mult = found.mult != null ? num(found.mult, 1) : Math.pow(num(dflt?.mult, 1.35), steps);
+  const out = { kind, mult, source: keyed ? "authored:keyed" : "authored:list" };
+
+  if (kind === "extend") {
+    // ⛔ `axis` READ AS `dimension`, BUT ONLY WHERE IT NAMES A REAL FIELD. A compound axis extends BOTH.
+    // ⚠️ AND A NARRATIVE AXIS EXTENDS NOTHING AND SAYS SO — `reach`, `persistence`, `timeReach` are prose,
+    // and guessing a field for them would invent mechanics no author wrote. Recording `unmapped` is what
+    // lets the gate catch the next one instead of it going quiet.
+    const raw = found.dimension || found.axis || "";
+    const parts = String(raw).split("+").map(x => x.trim()).filter(Boolean);
+    const dims = parts.filter(p => EXTENDABLE.has(p));
+    if (dims.length) out.dimensions = dims;
+    const missed = parts.filter(p => !EXTENDABLE.has(p));
+    if (missed.length) out.unmapped = missed.join("+");
+  }
+  return out;
+}
+
+/** ⚠️ THE FIELDS AN `extend` MAY GROW — the engine's own numeric dimensions, not the narrative axis
+ *  vocabulary. A name outside this set is prose and is reported as `unmapped` rather than guessed at. */
+export const EXTENDABLE = new Set(["duration", "range", "area", "targets", "scope", "magnitude",
+  "soak", "push", "evasion", "penetration", "variance", "uses"]);
+
 export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standard", cfg = {} } = {}) {
   const v = verb || (ability?.functions || [])[0];
   if (!v) return null;
@@ -129,12 +196,11 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
   // An authored per-rank delta wins. Otherwise the default DEEPENS, and it must COMPOUND with rank or
   // rank 2 and rank 3 resolve identically — which is the exact complaint (§3, Erik: "I can't tell how ranks
   // differ") reappearing inside the fix for it.
-  const authoredDelta = authored?.rankDeltas?.[String(rank)];
+  // ⛔ CCODE-289 — AND UNTIL NOW THE AUTHORED HALF WAS UNREACHABLE. This read `authored.rankDeltas` (i.e.
+  // `ability.mechanic.rankDeltas`, rank-KEYED) and 274 crafts author `rankDeltas` at the ROOT as a LIST.
+  // Zero match, 495 deltas, every craft on one default. `rankDeltaFor` is the adapter. See its comment.
   const steps = Math.max(0, num(rank, 1) - 1);
-  const rDelta = authoredDelta
-    || (steps > 0 && cfg.rankDeltas?.default
-      ? { ...cfg.rankDeltas.default, mult: Math.pow(num(cfg.rankDeltas.default.mult, 1.35), steps) }
-      : null);
+  const rDelta = rankDeltaFor(ability, rank, { cfg, authored });
 
   // The operative dimension carries tier, intensity and a DEEPEN rank-delta. Everything else stays put.
   // SNG-263 r4: a craft declares its own OPERATIVE AXES, redirecting tier scaling off its family's default —
@@ -187,8 +253,15 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
   } else scaleField(op);
 
   // EXTEND rank-deltas grow a named non-operative dimension instead — Erik's third legal kind.
-  if (rDelta && rDelta.kind === "extend" && rDelta.dimension && Number.isFinite(fields[rDelta.dimension])) {
-    fields[rDelta.dimension] = Math.max(1, Math.round(fields[rDelta.dimension] * num(rDelta.mult, 1.35)));
+  // ⛔ CCODE-289 — `dimensions` (PLURAL). A compound axis like `targets+duration` extends BOTH, which is
+  // what the author wrote; the single-`dimension` form is still honoured for a pack that uses it.
+  if (rDelta && rDelta.kind === "extend") {
+    const dims = rDelta.dimensions || (rDelta.dimension ? [rDelta.dimension] : []);
+    for (const dim of dims) {
+      if (Number.isFinite(fields[dim])) {
+        fields[dim] = Math.max(1, Math.round(fields[dim] * num(rDelta.mult, 1.35)));
+      }
+    }
   }
 
   return {

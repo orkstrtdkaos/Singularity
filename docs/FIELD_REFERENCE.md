@@ -12,7 +12,7 @@ node scripts/field_atlas.mjs --md     # …as markdown, to paste back in
 node scripts/safe_delete.mjs <field>  # triage one candidate before deleting it
 ```
 
-**Last measured: 2026-08-28 · v1.9.249 · 378 crafts · 107 distinct authored fields.**
+**Last measured: 2026-08-28 · v1.9.250 · 378 crafts · 107 distinct authored fields.**
 
 ---
 
@@ -82,35 +82,73 @@ vocabularies, and only two are read.**
 the mechanic in another; the two have never met.** ⚠️ **Neither side is broken. They are two ships
 passing, and the 73%-miss-rate I first reported was an artefact of comparing one to the other's list.**
 
-### ⛔ AND IT IS ONE LEVEL UP: THE WHOLE `rankDeltas` BLOCK IS DISCONNECTED, NOT JUST ITS `axis`
+### ✅ THE `rankDeltas` BLOCK — DISCONNECTED UNTIL 2026-08-28, NOW WIRED (CCODE-289)
 
-**Aevi found this and it is the larger half.** ⚠️ **The engine and the corpus disagree about `rankDeltas`'
-LOCATION *and* its SHAPE:**
+**Aevi found this and it was the largest disconnected system in the project.** ⚠️ **The engine and the
+corpus disagreed about `rankDeltas`' LOCATION, its SHAPE, and — twice over — its FIELD NAMES.**
 
 ```
-ENGINE WANTS    craftmechanics.js:132 — authored?.rankDeltas?.[String(rank)]
-                where `authored = ability.mechanic`
-                i.e.  mechanic: { rankDeltas: { "2": {kind, mult}, "3": {...} } }   <- rank-KEYED, NUMERIC
-
-CONTENT WRITES  rankDeltas: [ {rank:2, kind:"extend", axis:"timeReach+travelSpeed",
-                               delta:"trails DAYS old...", from:"r2 grants"} ]      <- ROOT, a LIST, PROSE
+ENGINE READ    craftmechanics.js — authored?.rankDeltas?.[String(rank)]  where authored = ability.mechanic
+               i.e.  mechanic: { rankDeltas: { "2": {kind, mult}, ... } }      <- rank-KEYED, NUMERIC
+CONTENT WROTE  rankDeltas: [ {rank:2, kind:"extend", axis:"targets+duration",
+                              delta:"prose", from:"r2 grants"} ]               <- ROOT, a LIST, PROSE
 ```
 
 | | |
 |---|---|
-| crafts authoring `rankDeltas` at the **root, as a list** | **284** |
+| crafts authoring `rankDeltas` at the **root, as a list** | **274** *(plus 10 with an empty array)* |
 | crafts authoring **`mechanic.rankDeltas`** | ⛔ **0** |
-| authored rank deltas in total | **495** |
-| ⛔ **read by the engine** | ⛔ **ZERO** |
+| authored rank deltas | **495** — `add` 181 · `extend` 163 · `deepen` 129 · unkinded 22 |
+| ⛔ read by the engine **before** | ⛔ **ZERO** — every ranked craft on one default, `deepen ×1.35^steps` |
 
-⛔ **SO EVERY CRAFT FALLS THROUGH TO `cfg.rankDeltas.default` AND SCALES BY THE SAME `mult^steps`.**
-⚠️ **Which is precisely the complaint quoted in that function's own comment — Erik: *"I can't tell how
-ranks differ."*** **The fix written for that complaint is itself unreachable.**
+⛔ **WHICH WAS PRECISELY THE COMPLAINT QUOTED INSIDE THAT FUNCTION'S OWN COMMENT** — Erik: *"I can't tell
+how ranks differ."* **The fix written for that complaint was itself unreachable.**
 
-⚠️ **THIS IS THE LARGEST DISCONNECTED SYSTEM FOUND SO FAR** — larger than the 12 dark rules files, because
-it is not merely unread content, it is **the mechanism by which ranks were supposed to differ at all.**
-✅ **The fix is well-defined: one adapter reading the authored list and keying it by rank.** ⛔ **But it
-changes how every ranked craft resolves, so it is a RULING before it is a build.**
+#### ⛔ THREE MISMATCHES, AND FIXING ONLY THE FIRST WOULD HAVE LOOKED LIKE SUCCESS
+
+1. **SHAPE** — root list vs rank-keyed map. The obvious one.
+2. **FIELD NAME** *(Aevi)* — `extend` requires `rDelta.dimension`. ⚠️ **All 163 `extend` deltas carry
+   `axis`; NOT ONE carries `dimension`.** Reshaping alone would have landed `deepen` and left a third of
+   the corpus silently inert **with the gate green** — the `damage_families` failure again: correct
+   content, correct reader, a field name between them that does not match.
+3. ⛔ **MAGNITUDE** — and this one made things *worse*, not merely incomplete. **An authored delta carries
+   no `mult`: 0 of 495.** The old line let an authored delta REPLACE the default outright, so connecting
+   naively gave `deepen` a mult of `num(undefined, 1)` = **1.0** — **129 crafts scaling by NOTHING where
+   they previously got 1.35^steps.** ✅ **AUTHORING OVERRULES THE *KIND*, NOT THE *AMOUNT*:** the author
+   says what a rank does, the dial says how much, and an author who writes `mult` still wins.
+
+#### ✅ AFTER — measured by `scripts/rankdelta_report.mjs`
+
+```
+BEFORE:  deepen 548          (everything, one default)
+AFTER :  deepen 224 · extend 163 · add 161
+         323 rank-resolutions changed kind · 223 unchanged
+```
+
+**`extend` now grows:** `targets` 62 · `duration` 35 · `scope` 35 · `range` 14 · `area` 5 · `uses` 2 ·
+`soak`/`penetration`/`evasion` 1 each. **A compound axis (`targets+duration`) extends BOTH.**
+
+⚠️ **AND 23 NARRATIVE AXES EXTEND NOTHING, BY DESIGN** — `reach`, `timeReach`, `persistence`, `foresight`,
+`access`, `control`. ⛔ **They are prose and must stay prose: guessing a field for `persistence` would
+invent a mechanic nobody authored** — the exact failure this adapter exists to undo. They are recorded as
+`unmapped` so the next one is caught rather than going quiet.
+
+#### ⛔ THE CONSEQUENCE THAT NEEDS ITS OWN RULING: `add` RANKS LOSE THEIR MAGNITUDE BUMP
+
+**`add` has no engine branch — and per the cfg's own note that is correct: it means ADD A FUNCTION, a
+grants-level change the tree already carries.** ⚠️ **But before the adapter those 161 resolutions were
+taking the default `deepen`, so connecting them is a real nerf: 124 rank-resolutions keep a number that
+was previously multiplied.**
+
+```
+harmonic_voice r3: duration stays 8  (was becoming 15)
+sustained_chord r2: duration stays 54 (was becoming 73)
+wake_the_line   r3: duration stays 27 (was becoming 49)
+```
+
+✅ **This follows from Erik's ruling** — a rank whose author said it grants a NEW THING should not also
+silently grow the old one by 35%. ⛔ **But it is the single largest effect of the change, and if `add`
+should keep the bump it needs an engine branch, which is a second ruling.**
 
 ---
 
@@ -391,15 +429,15 @@ The damage families did not, which is why they were dark.**
 | `nativeOrCombination` | 353 | `root`×353 | ✅ READ | `braids.js`, `functions.js`, `practice.js` |
 | `shape` | 353 | `root`×353 | ✅ READ | `battleprompt.js`, `company.js`, `craftmechanics.js` |
 | `rankDeltas` | 284 | `root`×284 | ✅ READ | `craftmechanics.js` |
-| `duration` | 279 | `mechanic`×279 | ✅ READ | `capabilities.js`, `npcsheet.js`, `skill_battle.js` |
+| `duration` | 279 | `mechanic`×279 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `npcsheet.js` |
 | `magnitude` | 278 | `mechanic`×278 | ✅ READ | `capabilities.js`, `conditions.js`, `craftmechanics.js` |
 | `note` | 197 | `mechanic`×197 | ✅ READ | `art.js`, `authormode.js`, `borncontract.js` |
 | `effectTags` | 154 | `root`×154 | ✅ READ | `battleprompt.js`, `braids.js`, `martial.js` |
-| `scope` | 135 | `mechanic`×135 | ✅ READ | `capabilities.js`, `app.js` |
+| `scope` | 135 | `mechanic`×135 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `app.js` |
 | `targets` | 110 | `mechanic`×110 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `gated` | 108 | `root`×108 | ✅ READ | `borncontract.js`, `generate.js`, `gm_registry.js` |
 | `dice` | 76 | `mechanic`×76 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
-| `range` | 76 | `mechanic`×76 | ✅ READ | `capabilities.js` |
+| `range` | 76 | `mechanic`×76 | ✅ READ | `capabilities.js`, `craftmechanics.js` |
 | `plus` | 72 | `mechanic`×72 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
 | `schemaVersion` | 63 | `root`×63 | ✅ READ | `canon.js`, `codex.js`, `encounterFrame.js` |
 | `crit` | 57 | `mechanic`×57 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
@@ -419,13 +457,13 @@ The damage families did not, which is why they were dark.**
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |
 | `obscure` | 16 | `root`×16 | ✅ READ | `skill_battle.js` |
 | `variance` | 15 | `mechanic`×15 | ✅ READ | `craftmechanics.js`, `app.js` |
-| `area` | 14 | `mechanic`×14 | ✅ READ | `capabilities.js`, `gm.js`, `worldglobe.js` |
+| `area` | 14 | `mechanic`×14 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
 | `sectFlavour` | 12 | `root`×12 | ⛔ DARK | — |
 | `ongoingHarm` | 11 | `tree`×11 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `powerMix` | 8 | `root`×8 | ⛔ DARK | — |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |
 | `namedCurrent` | 7 | `root`×7 | ⛔ DARK | — |
-| `evasion` | 7 | `mechanic`×7 | ✅ READ | `skill_battle.js`, `app.js` |
+| `evasion` | 7 | `mechanic`×7 | ✅ READ | `craftmechanics.js`, `skill_battle.js`, `app.js` |
 | `evasionRank` | 7 | `mechanic`×7 | ✅ READ | `skill_battle.js` |
 | `learnedAt` | 6 | `root`×6 | ⛔ DARK | — |
 | `peril` | 6 | `root`×6 | ✅ READ | `art.js`, `gm.js` |
@@ -450,9 +488,9 @@ The damage families did not, which is why they were dark.**
 | `companionId` | 1 | `root`×1 | ✅ READ | `companions.js`, `evolution.js`, `app.js` |
 | `resistDrop` | 1 | `mechanic`×1 | ⛔ DARK | — |
 | `theNames` | 1 | `root`×1 | ⛔ DARK | — |
-| `penetration` | 1 | `mechanic`×1 | ✅ READ | `capabilities.js`, `skill_battle.js` |
+| `penetration` | 1 | `mechanic`×1 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `penetrationNote` | 1 | `mechanic`×1 | ⛔ DARK | — |
-| `uses` | 1 | `mechanic`×1 | ✅ READ | `backfill.js`, `corrections.js`, `encounters.js` |
+| `uses` | 1 | `mechanic`×1 | ✅ READ | `backfill.js`, `corrections.js`, `craftmechanics.js` |
 | `type` | 1 | `mechanic`×1 | ✅ READ | `borncontract.js`, `canon.js`, `chronicle.js` |
 | `status` | 1 | `root`×1 | ✅ READ | `assignments.js`, `authormode.js`, `backfill.js` |
 | `trails` | 1 | `mechanic`×1 | ✅ READ | `gm.js` |

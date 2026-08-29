@@ -501,11 +501,42 @@ console.log("\n── FR · the field reference — measured claims stay measure
     if (Array.isArray(a2.rankDeltas)) { rdRoot++; rdTotal += a2.rankDeltas.length; }
     if (a2.mechanic?.rankDeltas != null) rdMech++;
   }
-  check("FR: ⛔ `rankDeltas` is still authored at the ROOT and read at `mechanic` - still ZERO match",
-    rdRoot > 200 && rdMech === 0,
-    `root ${rdRoot} - mechanic ${rdMech} - if mechanic is now non-zero the adapter shipped, UPDATE §2`);
-  check("FR: the reference records the rankDeltas disconnection with its counts",
-    new RegExp(`${rdRoot}`).test(fr) && new RegExp(`${rdTotal}`).test(fr), `${rdRoot} crafts, ${rdTotal} deltas`);
+  // ✅ CCODE-289 — THE ADAPTER SHIPPED, so these assert the FIX rather than the defect. The content shape
+  // is unchanged (root list, 274 crafts) and must stay readable; what changed is that the engine now reads it.
+  check("FR: the corpus still authors `rankDeltas` at the ROOT as a list",
+    rdRoot > 200 && rdMech === 0, `root ${rdRoot} · mechanic ${rdMech}`);
+  {
+    const CM = await import("../engine/craftmechanics.js");
+    const cmCfg = rj("content/packs/core/rules/craft_mechanics.json");
+    check("FR: ✅ the root-list rankDeltas are now READ — the adapter exists and is wired",
+      typeof CM.rankDeltaFor === "function"
+      && /rankDeltaFor\(/.test(rd("engine/craftmechanics.js")));
+    // ⛔ A REAL CRAFT, NOT A FIXTURE. `resonant_shield` authors extend at r2 and r3.
+    const rs = abilities.find(x => x.id === "resonant_shield");
+    const d2 = rs && CM.rankDeltaFor(rs, 2, { cfg: cmCfg });
+    check("FR: ✅ an authored `extend` resolves to real DIMENSIONS, not a default deepen",
+      d2?.kind === "extend" && (d2.dimensions || []).length >= 1 && d2.source === "authored:list",
+      JSON.stringify(d2));
+    // ⛔ TRAP 3: authoring overrules the KIND, never the AMOUNT. 0 of 495 deltas carry a mult, so if the
+    // authored delta replaced the default outright, 129 deepen crafts would scale by 1.0 — WORSE than before.
+    const deep = abilities.find(x => (x.rankDeltas || []).some(r => r.kind === "deepen" && r.rank === 3));
+    const d3 = deep && CM.rankDeltaFor(deep, 3, { cfg: cmCfg });
+    check("FR: ⛔ an authored delta takes its MAGNITUDE from the dial, compounded — never 1.0",
+      d3 && Math.abs(d3.mult - Math.pow(Number(cmCfg.rankDeltas.default.mult), 2)) < 1e-9,
+      `mult=${d3?.mult} — if this is 1 the amount is being taken from an authored delta that has none`);
+    // ⚠️ AEVI'S REQUESTED GATE: an extend resolves to a field, or is EXPLICITLY logged as prose. Never silent.
+    let silent = 0;
+    for (const a2 of abilities) for (const r of (a2.rankDeltas || [])) {
+      if (r.kind !== "extend") continue;
+      const got = CM.rankDeltaFor(a2, r.rank, { cfg: cmCfg });
+      if (!got) continue;
+      if (!(got.dimensions || []).length && !got.unmapped) silent++;
+    }
+    check("FR: ⛔ every `extend` either names a real field or is reported as prose — none goes silent",
+      silent === 0, `${silent} extend deltas resolved to nothing and said nothing`);
+    check("FR: the reference records the rankDeltas fix and its counts",
+      /323 rank-resolutions changed kind/.test(fr) && new RegExp(`${rdRoot}`).test(fr));
+  }
 
   // ⚠️ THE FIVE RANK LADDERS ARE THE ENTIRE EMPIRICAL BASIS FOR THE PROPOSED CURVE. If a sixth appears,
   // the curve should be re-fitted before it ships, and §3 must say so.

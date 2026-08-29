@@ -45,8 +45,11 @@ working papers; **this is the answer.**
 | 08-28 | advisory typecheck workflow + `jsconfig.json` | 5 of 8 false findings this week were contract errors a checker catches at edit time | ⚠️ **non-blocking until seen green** — no `tsc` on the authoring machine | `targeting.js` is the first module opted in |
 | 08-28 | pre-push hook + `scripts/hooks/install.sh` | CI catches a bad push in a minute; the hook catches it in seconds | it runs `run_tests.mjs` | ⚠️ git does not version hooks — hence the installer |
 | 08-28 | ⛔ **`tests/save_fixtures.mjs`** | 16 real saves, 1,788 turns, and NOTHING tested that a rename does not drop an ability | reconciles a COPY of every save; asserts nothing shrank | ⛔ every vocabulary change; guards the one artefact that cannot be regenerated |
+| 08-28 | ✅ **RULING: each craft says how its rank grows** | Erik: *"a default is ok AS LONG AS AUTHORING OVERRULES IT"* — the default is a floor, 4th time | `how_it_works.mjs` FR × 5 + `scripts/rankdelta_report.mjs` | ⛔ 323 of 546 rank-resolutions changed kind |
+| 08-28 | ⛔ **the rankDeltas adapter (CCODE-289)** | 495 authored deltas, 0 read — the largest disconnected system in the project | before/after report across all 274 crafts | ⚠️ THREE mismatches: shape, field name (`axis` vs `dimension`), and MAGNITUDE |
+| 08-28 | ⚠️ **`add` ranks lose their magnitude bump** | follows from the ruling: a rank that grants a NEW thing should not also grow the old one 35% | 124 rank-resolutions measured and listed in the report | ⛔ **the largest single effect; needs its own ruling if `add` should keep the bump** |
 
-**Last verified: 2026-08-28 · v1.9.249 · 378 crafts.**
+**Last verified: 2026-08-28 · v1.9.250 · 378 crafts.**
 
 ---
 
@@ -80,6 +83,7 @@ until a full night's rest, and they say so.
 
 ```
 1. the rank's own authored number          ← always wins
+1b. the craft's own authored rankDelta      ← kind + dimension; the AMOUNT comes from the dial
 2. a value DERIVED from the rank's gainAxes    ← PROPOSED
 3. the craft's mechanic block
 4. the shape's family defaults
@@ -88,6 +92,24 @@ until a full night's rest, and they say so.
 
 **`gainAxes` names what a rank buys, from nine: `range` · `duration` · `damage` · `scope` · `targets` ·
 `quality` · `autonomy` · `conditions` · `tempo`.**
+
+✅ **BUILT (CCODE-289): EACH CRAFT SAYS HOW ITS RANK GROWS.** Erik: *"Each craft says how a rank grows it,
+but it's ok to have a default, AS LONG AS AUTHORING OVERRULES IT."* ⛔ **THE DEFAULT IS A FLOOR, NEVER A
+CEILING** — the fourth time this project has made that ruling.
+
+**274 crafts author `rankDeltas` at the root, 495 of them, in three kinds:**
+
+| kind | n | what it does |
+|---|---|---|
+| `add` | 181 | ⚠️ **ADDS A FUNCTION** — a grants-level change the tree carries. **It scales no number, deliberately.** |
+| `extend` | 163 | grows a NAMED non-operative dimension — `targets`, `duration`, `scope`, `range`, `area`. A compound axis extends **both**. |
+| `deepen` | 129 | grows the craft's OPERATIVE dimension |
+| *(unkinded)* | 22 | takes the default |
+
+⛔ **THE AUTHOR SAYS WHAT A RANK DOES; THE DIAL SAYS HOW MUCH.** No authored delta carries a `mult` (0 of
+495), so the amount comes from `rankDeltas.default` compounded by rank — an author who writes one still
+wins. ⚠️ **23 narrative axes (`reach`, `persistence`, `timeReach`) extend NOTHING and are reported as
+prose rather than guessed at.**
 
 ⚠️ **BUILT TODAY: `gainAxes` decides which ranks appear in the player's capability menu** — a rank that
 declares one is a distinct choice; a rank that declares nothing collapses out of the list. **It is read for

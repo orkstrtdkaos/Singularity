@@ -54,6 +54,10 @@ const SUITES = [
   // family the module has never heard of and asserts it flows through UNTOUCHED — Erik's "easily updated
   // as we evolve the game" made mechanical, so a sixth capability cannot require an engine edit.
   ["group_capability", "node", ["tests/group_capability.mjs"]],
+  // ⛔ CCODE-311 — THE TANK ACTUALLY TAKES THE BLOW. A WIRING gate: `interceptorFor` and
+  // `protectionFromCraft` both passed their own tests the whole time the chain was unreachable, so §4 runs a
+  // real round and asks who is holding the wound afterwards.
+  ["interpose_wiring", "node", ["tests/interpose_wiring.mjs"]],
   ["engine_map --check", "node", ["scripts/engine_map.mjs", "--check"]],
 ];
 

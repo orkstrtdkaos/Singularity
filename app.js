@@ -23,6 +23,8 @@ import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAtten
 import { checkBorn, describeBorn, contractedTypes } from "./engine/borncontract.js";
 import { drawAxis, resolvePick, readOfPick, championPick, drawBackgroundAxis } from "./engine/coliseum.js"; // SNG-149: the Coliseum blind grid
 import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own critical, in its own words
+import { authoredBlock } from "./engine/craftmechanics.js";                 // CCODE-311: the rank-walking reader a guard block needs
+import { protectionFromCraft, tickProtections } from "./engine/intercept.js"; // CCODE-311: the writer state.protections never had
 import { receiptLine, roundVerdict } from "./engine/roundreceipt.js"; // the round receipt, extracted so it can be simulated (it shipped a permanent "it's even" because nothing could test it)   // SNG-250 §4: the born-whole gate + which types it covers
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
@@ -115,7 +117,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.261";
+const APP_VERSION = "1.9.262";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12603,6 +12605,28 @@ function skillBattlePanel() {
         <div class="sb-fwd-row">${canPick.map(pip).join("")}</div>
         ${split.folded.length ? `<div class="hint">${esc(split.folded.map(a => String(a.name).split(" ")[0]).join(", "))} ${split.folded.length === 1 ? "is" : "are"} in the melee — fighting, not narrated.</div>` : ""}
         ${split.withdrawn.length ? `<div class="hint">${split.withdrawn.map(a => `${esc(String(a.name).split(" ")[0])} ${esc(a.withdrawal?.manner || "is clear of it")}`).join(" · ")}</div>` : ""}
+        ${(() => {
+          // ⛔ CCODE-311 — THE MISSING QUESTION, ASKED. A craft that catches a blow for someone has to
+          // know WHO, and until now nothing on the screen asked. ⚠️ THE ROW ONLY EXISTS WHEN THE SELECTED
+          // ACTION ACTUALLY AUTHORS AN INTERCEPT — it is not a permanent control, because a permanent
+          // control for a craft you have not chosen is clutter that teaches players to ignore the panel.
+          const lead = (turn.sel.action || []).map(k => skills[k]).filter(Boolean)[0];
+          if (!lead) return "";
+          const g = sbGuardBlockFor({ id: lead.id, rank: lead.tier || 1 });
+          if (!g) return "";
+          const room = Math.max(1, Number(g.spec?.allies) || 1);
+          const chosen = new Set(st.guardPick || []);
+          // ⚠️ YOU CANNOT STAND IN FRONT OF YOURSELF, and the downed are already down.
+          const shieldable = canPick.filter(a => !a.isPlayer);
+          if (!shieldable.length) return "";
+          const gpip = (a) => `<button class="opt sb-guard${chosen.has(a.id) ? " on" : ""}" data-sbguard="${esc(a.id)}" title="${chosen.has(a.id) ? "you are stepping in front of them — click to stop" : "step in front of them"}">${esc(String(a.name).split(" ")[0])}</button>`;
+          return `<div class="sb-guard-row">
+            <div class="sys-label">${esc(lead.name)} — step in front of ${room === 1 ? "someone" : `up to ${room}`}
+              <span class="hint" style="text-transform:none">${g.spec?.rounds ? `for ${g.spec.rounds} rounds` : "for one blow"}</span></div>
+            <div class="sb-fwd-row">${shieldable.map(gpip).join("")}</div>
+            ${chosen.size > room ? `<div class="hint">you can only cover ${room} — the first ${room} count</div>` : ""}
+          </div>`;
+        })()}
       </div>`;
     } catch { return ""; }
   })();
@@ -12819,6 +12843,17 @@ function wireSkillBattlePanel() {
     saveCharacter(character);
     renderPlay(character.activeScene?.lastTurn || null, {});
   };
+  // ⛔ CCODE-311 — WHO YOU ARE STEPPING IN FRONT OF. Same shape as the bring-forward pips above: the
+  // pick lives on the ENCOUNTER STATE so it survives a redraw, and it is SPENT when the guard opens.
+  for (const b of document.querySelectorAll("[data-sbguard]")) b.onclick = () => {
+    const e2 = activeEnc(); if (!e2) return;
+    const id = b.dataset.sbguard;
+    const cur = new Set(e2.state.guardPick || []);
+    if (cur.has(id)) cur.delete(id); else cur.add(id);
+    e2.state.guardPick = [...cur];
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, {});
+  };
   const fl = document.getElementById("sb-flee"); if (fl) fl.onclick = () => beginChaseFromFight(activeEnc()?.def); // SNG-230 §6a: FLEE a fight → a real CHASE
   const yl = document.getElementById("sb-yield"); if (yl) yl.onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, yield: true }));
 }
@@ -12868,6 +12903,51 @@ async function sbResolveSense() {
 }
 
 /** CCODE-45 · GM CALL #2 — resolve the ACTION (and the BONUS if earned), then narrate the WHOLE turn. */
+/** ⛔ CCODE-311 — THE WRITER `state.protections` NEVER HAD.
+ *
+ *  ⚠️ `intercept.js` shipped its reader in CCODE-260 with a note saying "build the reader, default the
+ *  dial to a no-op, LET CONTENT TURN IT ON". Aevi turned it on with `step_between` on 2026-08-29 — the
+ *  first craft in the game to author `interceptDamage`. ⛔ AND THE CHAIN STILL DID NOT RUN: nothing ever
+ *  called `protectionFromCraft`, and `state.protections` was READ at `encounters.js:189` and ASSIGNED
+ *  NOWHERE. Authored, registered, loaded — and dead at the fourth door.
+ *
+ *  ✅ DISPATCHED ON THE AUTHORED BLOCK, NEVER ON A CRAFT NAME. `step_between` has no single `function`
+ *  (it is `["move","shield"]`), and any future craft that authors an intercept should open one too. A
+ *  name-based branch would have worked for exactly one craft and silently ignored the next. */
+function sbGuardBlockFor(decl) {
+  const ab = decl && decl.id ? CONTENT.abilities?.[decl.id] : null;
+  if (!ab) return null;
+  const rank = Math.max(1, Number(decl.rank) || 1);
+  // ⚠️ BOTH DOORS. `interceptCondition` catches bindings, `interceptDamage` catches blows — different
+  // verbs on the same machinery, and a reader that checked one would miss whichever is authored next.
+  const dmg = authoredBlock(ab, "interceptDamage", rank);
+  const cond = authoredBlock(ab, "interceptCondition", rank);
+  return (dmg || cond) ? { ability: ab, rank, spec: dmg || cond } : null;
+}
+
+/** Open the guards a declaration buys, and persist them on the ENCOUNTER so they outlive the round. */
+function sbOpenGuards(enc, decl) {
+  const g = sbGuardBlockFor(decl);
+  if (!g || !enc || !enc.state) return 0;
+  const me = character?.id || "player";
+  const room = Math.max(1, Number(g.spec?.allies) || 1);
+  const picked = (enc.state.guardPick || []).slice(0, room);
+  if (!picked.length) return 0;
+  const list = Array.isArray(enc.state.protections) ? enc.state.protections : [];
+  let opened = 0;
+  for (const allyId of picked) {
+    // ⚠️ ONE STANDING GUARD PER (PROTECTOR, ALLY). Re-declaring REFRESHES rather than stacking, or three
+    // turns would make you three walls in front of the same person.
+    const prot = protectionFromCraft(g.ability, g.rank, { protectorId: me, allyId, authoredBlock });
+    if (!prot) continue;
+    const at = list.findIndex(x => x && x.protectorId === me && x.allyId === allyId);
+    if (at >= 0) list[at] = prot; else list.push(prot);
+    opened++;
+  }
+  enc.state.protections = list;
+  return opened;
+}
+
 async function sbExecuteTurn() {
   const enc = activeEnc(); if (!enc || sbBusy) return;
   const turn = sbTurn(), sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
@@ -12879,9 +12959,22 @@ async function sbExecuteTurn() {
   const beats = [];
   if (turn.senseLine) beats.push(turn.senseLine);
   // ACTION — ticks the turn's effects only if there is no bonus step after it.
+  // ⛔ CCODE-311 — OPEN THE GUARD BEFORE THE EXCHANGE, because declaring the craft IS the action (Erik,
+  // 2026-08-29: "you're using your action to use the skill") and the blow it is meant to catch lands in
+  // THIS round. Opening it afterwards would make Step Between protect against next round's attack, which
+  // is not what stepping in front of someone means.
+  const guardsOpened = sbOpenGuards(enc, aDecl);
+  // ⚠️ AND THE PICK IS SPENT. A guard is placed on the people you named THIS turn; leaving it set would
+  // silently re-place it every round for free, which is the wall the action cost is supposed to prevent.
+  if (guardsOpened) enc.state.guardPick = [];
   let rr = skillBattleRound(character.activeEncounter.state, enc.def, aDecl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps,
     seenTendency: sbLastPlayerFn, rng: Math.random, phase: "action", tickEffects: !bDecl, setupBonus: turn.setupBonus || 0 });
   sbLastPlayerFn = aDecl.function;
+  // ⛔ AND THE DECAY. `tickProtections` has existed since CCODE-260 and was CALLED BY NOTHING, so a
+  // rank-2 guard with `rounds: 3` would have stood forever — exactly the wall the r2 rung must not be.
+  if (Array.isArray(enc.state.protections) && enc.state.protections.length) {
+    enc.state.protections = tickProtections(enc.state.protections);
+  }
   const applyRR = (r, d, label) => {
     // ERIK (2026-08-01, from the Machine log): EVERY round reported "neither gains — it's even", including a
     // roll of 1/95 (margin 102) against a margin of 25. The receipt was being handed the round's AFTER momentum

@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 83 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 84 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-08-29 · v1.9.261 · 83 files.**
+**Last measured: 2026-08-29 · v1.9.262 · 84 files.**
 
 ---
 
@@ -18,7 +18,7 @@ node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 
 | kind | n | what it is | belongs |
 |---|---|---|---|
-| ✅ **GATE** | **24** | asserts something and fails the build | ⛔ **in the runner** |
+| ✅ **GATE** | **25** | asserts something and fails the build | ⛔ **in the runner** |
 | ⛔ **GATE-UNWIRED** | **0** | assertions nobody runs | ⛔ **nowhere — this must stay zero** |
 | ⚠️ **LIVE-API** | 2 | needs a real API key; costs money; cannot run in CI | run by hand, deliberately |
 | ○ **REPORT** | 19 | answers *how often / how hard / at what tier* | in a person's hand |
@@ -99,11 +99,12 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | `tests/smoke` | ✅ GATE | 3521 | — |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 183 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
-| `tests/how_it_works` | ✅ GATE | 134 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 144 | CCODE-285 |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
 | `tests/wiring_audit` | ✅ GATE | 39 | BATCH-11 §23 |
 | `tests/group_capability` | ✅ GATE | 26 | CCODE-307 |
 | `tests/damage_sensitivity` | ✅ GATE | 22 | — |
+| `tests/interpose_wiring` | ✅ GATE | 17 | CCODE-311 |
 | `tests/growth_sim` | ✅ GATE | 15 | behave sensibly when // run for a whole playthrough rather than one beat |
 | `tests/contest_sim` | ✅ GATE | 13 | THE CONTEST AUDITOR: distributional truth about the round engine |
 | `tests/changeset_check` | ✅ GATE | 11 | CCODE-204 · SNG-505 Layer 2: a change set is CHECKED, not trusted |

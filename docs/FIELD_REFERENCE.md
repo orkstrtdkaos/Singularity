@@ -515,8 +515,8 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `projectTicks` | 3 | `root`×3 | ✅ READ | `projects.js` |
 | `requiresPoles` | 3 | `mechanic`×3 | ⛔ DARK | — |
 | `backlashRungNone` | 3 | `root`×3 | ⛔ DARK | — |
-| `interceptCondition` | 3 | `tree`×3 | ✅ READ | `intercept.js` |
-| `interceptDamage` | 3 | `tree`×3 | ✅ READ | `intercept.js` |
+| `interceptCondition` | 3 | `tree`×3 | ✅ READ | `intercept.js`, `app.js` |
+| `interceptDamage` | 3 | `tree`×3 | ✅ READ | `intercept.js`, `app.js` |
 | `opensAccess` | 2 | `tree`×2 | ✅ READ | `progression.js` |
 | `downtime` | 2 | `root`×2 | ⚠️ CI-ONLY | _1 test/script only_ |
 | `summon` | 2 | `root`×2 | ✅ READ | `gm.js`, `npcsheet.js`, `roundreceipt.js` |

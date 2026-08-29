@@ -130,8 +130,12 @@ working papers; **this is the answer.**
 | 08-29 | ✅ **CCODE-310 — the NPC bound moved from CODE to CONTENT** | Aevi: *"do not replace it with 100 — a Mythical is NEAR 100 and the number is a CONSEQUENCE of the ladder, not a cap on it"* | `§13`, and `unreadRuleConstants` 26 → **24**, below baseline | ⛔ **my first fix clamped to 100 in code** — the same shape Erik has ruled against four times, a default acting as a ceiling |
 | 08-29 | ✅ **tier is a FLOOR that growth moves, and `tierOf` reads the rung back** | Erik: *"they grow in tier"* | derived from the SAME content floors — never a second ladder | ⚠️ **no code default for `tierFloor` on purpose**: a built-in map would MASK a broken thread instead of exposing it |
 | 08-29 | ⚠️ **the dial gate caught me twice in one turn** | first `unreadRuleConstants` 26→29 (a dial with nothing on the other end), then 4 doc-keys breaking the `_foo` exemption | `wiring_audit` line 684: *"the doc-key exemption must not become a hiding place"* | ⛔ **I deleted `crossingNear` rather than rename until the gate went quiet** — the crossing is CANON, not a dial, and nothing reads it |
+| 08-29 | ✅ **CCODE-311 — THE TANK CAN NOW TAKE THE BLOW** | Aevi authored `step_between`, the first craft to author `interceptDamage`; the reader had waited since CCODE-260 | `tests/interpose_wiring.mjs`, **16 assertions**, and §4 runs a REAL ROUND — without a guard the blow lands on Sprig, with one **Brann is holding the wound** | ⛔ **all four doors were needed**: `protectionFromCraft` had NO CALLER, `state.protections` was READ at `encounters.js:189` and **assigned nowhere**, and `tickProtections` was called by nothing |
+| 08-29 | ✅ **the missing question is finally asked** | a craft that catches a blow for someone must know WHO, and nothing on the screen asked | `§3: data-sbguard` | ⚠️ **the row only exists when the selected action authors an intercept** — a permanent control for a craft you have not chosen is clutter that teaches players to ignore the panel |
+| 08-29 | ✅ **dispatched on the AUTHORED BLOCK, never a craft name** | `step_between` has no single `function` — it is `["move","shield"]` | gated: `app.js` must not contain the string `step_between` | ⛔ **a name-based branch would have worked for exactly one craft and silently ignored the next one Aevi writes** |
+| 08-29 | ⚠️ **and the decay, which nothing had ever run** | `tickProtections` existed since CCODE-260 with no caller | `§5`: a rank-2 guard lapses after its authored rounds | ⛔ **without it a 3-round guard stands forever** — exactly the wall Erik's action ruling relies on it not being |
 
-**Last verified: 2026-08-28 · v1.9.261 · 378 crafts.**
+**Last verified: 2026-08-28 · v1.9.262 · 378 crafts.**
 
 ---
 

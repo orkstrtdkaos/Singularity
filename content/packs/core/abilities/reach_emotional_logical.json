@@ -1151,9 +1151,18 @@
     {
      "rank": 3,
      "kind": "extend",
-     "axis": "scope+duration",
+     "axis": "scope",
      "delta": "hold a lament ACROSS DAYS and ACROSS A SETTLEMENT — a whole community mourning as one",
-     "from": "r3 grants"
+     "from": "r3 grants",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `scope+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "hold a lament ACROSS DAYS and ACROSS A SETTLEMENT — a whole community mourning as one",
+     "from": "r3 grants",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `scope+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     }
    ],
    "intensity": {
@@ -2208,7 +2217,8 @@
      "kind": "extend",
      "axis": "timeReach",
      "delta": "TRACK A FEELING OVER TIME — follow grief, find WHERE FEAR DEVELOPED, trace the emotional mark a person left in a place",
-     "from": "r2 grants"
+     "from": "r2 grants",
+     "_prose": "⚠️ `timeReach` IS A NAMED AXIS, NOT AN ENGINE FIELD — RULED PROSE 2026-08-28. Per Erik 2026-08-24: a named axis is 'real, authored, SHOWN TO THE PLAYER, and scaled in the craft's own prose at each rank and intensity, but NOT arithmetic the engine performs'. ⛔ IT EXTENDS NOTHING AND THAT IS CORRECT. Do not invent a field for it, and do not 'fix' it to a nearby one — `timeReach` says something no engine field says."
     },
     {
      "rank": 3,

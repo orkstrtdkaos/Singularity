@@ -56,7 +56,7 @@ vocabularies, and only two are read.**
 | field | where | n | vocabulary | read by |
 |---|---|---|---|---|
 | `tree[].gainAxes` | rank node | **970 nodes / 777 values** | ⛔ **the NINE** | ✅ `capabilities.js` — **for PRESENCE only** |
-| `rankDeltas[].axis` | rank delta | ⛔ **495** | ⛔ **67 free-form names** | ⛔ **NOTHING** |
+| `rankDeltas[].axis` | rank delta | **512** | ⚠️ **86 names — the engine-field ones now LAND via the adapter** | ⚠️ **`extend` reads it as `dimension`; the rest is prose** |
 | `mechanic.axis` | craft mechanic | ⛔ **0** | the 19-name allow-list | ⚠️ `craftmechanics.js` — **a reader with no writer** |
 | `operativeAxis` | craft root | **378** | 67 free-form names | ⛔ nothing — `cfg.operativeAxis` is a **different field** |
 
@@ -67,7 +67,7 @@ vocabularies, and only two are read.**
   and `capabilityMenu` then filters on that flag. ⚠️ **It is read for PRESENCE, never CONTENT** — nothing
   switches on *which* of the nine it is. **So the field is load-bearing and the 777 individual values are
   decorative.** ⛔ **Deleting the field silently collapses ranks out of the menu.**
-- ⛔ **`rankDeltas[].axis` has 495 authored values and no reader at all.** It is a rich narrative
+- ⚠️ **`rankDeltas[].axis` has 512 authored values and IS NOW READ for `extend`** (CCODE-289 adapter). ⛔ **21 of 25 compound axes were split 2026-08-28 so each delta names ONE dimension — the engine extends one per delta, so a compound extended NOTHING.** The remainder is a rich narrative
   vocabulary — `scope` ×33, `perceptionDepth` ×22, `foresight`/`persistence`/`precision`/`autonomy` ×10
   each, plus a 42-name singleton tail. **`special` ×155 is a catch-all meaning "no axis".** 30 more are
   compound (`timeReach+travelSpeed`) and could never match a table anyway.
@@ -98,7 +98,7 @@ CONTENT WROTE  rankDeltas: [ {rank:2, kind:"extend", axis:"targets+duration",
 |---|---|
 | crafts authoring `rankDeltas` at the **root, as a list** | **274** *(plus 10 with an empty array)* |
 | crafts authoring **`mechanic.rankDeltas`** | ⛔ **0** |
-| authored rank deltas | **495** — `add` 181 · `extend` 163 · `deepen` 129 · unkinded 22 |
+| authored rank deltas | **512** — `add` 181 · `extend` 180 · `deepen` 129 · unkinded 22 |
 | ⛔ read by the engine **before** | ⛔ **ZERO** — every ranked craft on one default, `deepen ×1.35^steps` |
 
 ⛔ **WHICH WAS PRECISELY THE COMPLAINT QUOTED INSIDE THAT FUNCTION'S OWN COMMENT** — Erik: *"I can't tell
@@ -404,7 +404,7 @@ The damage families did not, which is why they were dark.**
 <!-- ATLAS:BEGIN -->
 | field | n | authored at | bucket | read by |
 |---|---|---|---|---|
-| `rank` | 1554 | `tree`×1059 `rankDeltas`×495 | ✅ READ | `braids.js`, `capabilities.js`, `coliseum.js` |
+| `rank` | 1571 | `tree`×1059 `rankDeltas`×512 | ✅ READ | `braids.js`, `capabilities.js`, `coliseum.js` |
 | `name` | 1437 | `root`×378 `tree`×1059 | ✅ READ | `affiliation.js`, `arceffects.js`, `art.js` |
 | `functions` | 1437 | `root`×378 `tree`×1059 | ✅ READ | `braids.js`, `coliseum.js`, `craftmechanics.js` |
 | `harmRung` | 1339 | `root`×353 `tree`×986 | ✅ READ | `braids.js`, `gm_registry.js`, `intent.js` |
@@ -412,10 +412,10 @@ The damage families did not, which is why they were dark.**
 | `cannot` | 1059 | `tree`×1059 | ✅ READ | `authormode.js`, `braids.js`, `capabilities.js` |
 | `gains` | 1029 | `tree`×1029 | ✅ READ | `encounters.js`, `gm.js`, `roundreceipt.js` |
 | `gainAxes` | 970 | `tree`×970 | ✅ READ | `capabilities.js` |
-| `axis` | 495 | `rankDeltas`×495 | ✅ READ | `coliseum.js`, `craftmechanics.js`, `gm.js` |
-| `delta` | 495 | `rankDeltas`×495 | ✅ READ | `arceffects.js`, `companions.js`, `economy.js` |
-| `from` | 495 | `rankDeltas`×495 | ✅ READ | `affiliation.js`, `art.js`, `assignments.js` |
-| `kind` | 473 | `rankDeltas`×473 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
+| `axis` | 512 | `rankDeltas`×512 | ✅ READ | `coliseum.js`, `craftmechanics.js`, `gm.js` |
+| `delta` | 512 | `rankDeltas`×512 | ✅ READ | `arceffects.js`, `companions.js`, `economy.js` |
+| `from` | 512 | `rankDeltas`×512 | ✅ READ | `affiliation.js`, `art.js`, `assignments.js` |
+| `kind` | 490 | `rankDeltas`×490 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
 | `id` | 378 | `root`×378 | ✅ READ | `affinities.js`, `arceffects.js`, `art.js` |
 | `axes` | 378 | `root`×378 | ✅ READ | `affinities.js`, `craftmechanics.js`, `encounters.js` |
 | `attribute` | 378 | `root`×378 | ✅ READ | `affinities.js`, `braids.js`, `corrections.js` |

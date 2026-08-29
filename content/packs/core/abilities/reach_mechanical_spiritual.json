@@ -1027,9 +1027,18 @@
     {
      "rank": 2,
      "kind": "extend",
-     "axis": "range+targets",
+     "axis": "range",
      "delta": "fold a VALLEY rather than a courtyard, and BRING OTHERS through with you",
-     "from": "r2 grants"
+     "from": "r2 grants",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `range+targets` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "fold a VALLEY rather than a courtyard, and BRING OTHERS through with you",
+     "from": "r2 grants",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `range+targets` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     },
     {
      "rank": 3,

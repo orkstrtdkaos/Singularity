@@ -110,9 +110,18 @@
     {
      "rank": 2,
      "kind": "extend",
-     "axis": "targets+duration",
+     "axis": "targets",
      "delta": "SUSTAINED pressure — hold a door shut or force it, pin a light object, shatter dense material; TWO TARGETS MAX (its own bound)",
-     "from": "r2 grants + its own explicit two-target cap"
+     "from": "r2 grants + its own explicit two-target cap",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `targets+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "SUSTAINED pressure — hold a door shut or force it, pin a light object, shatter dense material; TWO TARGETS MAX (its own bound)",
+     "from": "r2 grants + its own explicit two-target cap",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `targets+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     },
     {
      "rank": 3,
@@ -265,16 +274,34 @@
     {
      "rank": 2,
      "kind": "extend",
-     "axis": "duration+targets",
+     "axis": "duration",
      "delta": "sustain SEVERAL BREATHS; cover yourself PLUS ONE adjacent ally; shrug off thrown stones, arrows, tool-swings (soakRank 2)",
-     "from": "r2 grants"
+     "from": "r2 grants",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `duration+targets` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "sustain SEVERAL BREATHS; cover yourself PLUS ONE adjacent ally; shrug off thrown stones, arrows, tool-swings (soakRank 2)",
+     "from": "r2 grants",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `duration+targets` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     },
     {
      "rank": 3,
      "kind": "extend",
-     "axis": "soak+targets",
+     "axis": "soak",
      "delta": "a room-corner DOME for up to FOUR people, held a full scene if unmolested; TURNS CROSSBOW BOLTS AND A RADIANT LANCE'S FIRST STRIKE (soak 6, soakRank 3)",
-     "from": "r3 grants — and note it names the lance's FIRST strike, i.e. it beats lance r1 but not lance r3: the two crafts out-rank each other at different ranks, which is a genuine authored rock-paper-scissors"
+     "from": "r3 grants — and note it names the lance's FIRST strike, i.e. it beats lance r1 but not lance r3: the two crafts out-rank each other at different ranks, which is a genuine authored rock-paper-scissors",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `soak+targets` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "a room-corner DOME for up to FOUR people, held a full scene if unmolested; TURNS CROSSBOW BOLTS AND A RADIANT LANCE'S FIRST STRIKE (soak 6, soakRank 3)",
+     "from": "r3 grants — and note it names the lance's FIRST strike, i.e. it beats lance r1 but not lance r3: the two crafts out-rank each other at different ranks, which is a genuine authored rock-paper-scissors",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `soak+targets` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     }
    ],
    "intensity": {
@@ -554,9 +581,18 @@
     {
      "rank": 2,
      "kind": "extend",
-     "axis": "area+duration",
+     "axis": "area",
      "delta": "ROOM-SIZED, held near an HOUR; carry it at a slow walk; what arrives as sound arrives BLUNTED",
-     "from": "r2 grants — its own numbers"
+     "from": "r2 grants — its own numbers",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `area+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "ROOM-SIZED, held near an HOUR; carry it at a slow walk; what arrives as sound arrives BLUNTED",
+     "from": "r2 grants — its own numbers",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `area+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     },
     {
      "rank": 3,
@@ -1095,9 +1131,18 @@
     {
      "rank": 2,
      "kind": "extend",
-     "axis": "range+targets",
+     "axis": "range",
      "delta": "hold the stride A MILE; carry a burden at speed; PASS THE BEAT to one runner beside you",
-     "from": "r2 grants — distance plus a second target"
+     "from": "r2 grants — distance plus a second target",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `range+targets` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "hold the stride A MILE; carry a burden at speed; PASS THE BEAT to one runner beside you",
+     "from": "r2 grants — distance plus a second target",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `range+targets` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     },
     {
      "rank": 3,
@@ -1239,7 +1284,8 @@
      "kind": "extend",
      "axis": "foresight",
      "delta": "see where a bridge, scaffold, or dam WILL FAIL and WHEN; sabotage that looks like age; certify a structure safe with real authority",
-     "from": "r2 grants — from present weakness to future failure"
+     "from": "r2 grants — from present weakness to future failure",
+     "_prose": "⚠️ `foresight` IS A NAMED AXIS, NOT AN ENGINE FIELD — RULED PROSE 2026-08-28. Per Erik 2026-08-24: a named axis is 'real, authored, SHOWN TO THE PLAYER, and scaled in the craft's own prose at each rank and intensity, but NOT arithmetic the engine performs'. ⛔ IT EXTENDS NOTHING AND THAT IS CORRECT. Do not invent a field for it, and do not 'fix' it to a nearby one — `foresight` says something no engine field says."
     },
     {
      "rank": 3,
@@ -1737,7 +1783,8 @@
      "kind": "extend",
      "axis": "timeReach",
      "delta": "in DEEP STONE reach back WEEKS; recover a conversation's spine; HEAR WHAT A PRECURSOR MECHANISM LAST SAID, if it spoke",
-     "from": "r3 grants — and this is a second in-catalog PRECURSOR hook (SNG-261 §B)"
+     "from": "r3 grants — and this is a second in-catalog PRECURSOR hook (SNG-261 §B)",
+     "_prose": "⚠️ `timeReach` IS A NAMED AXIS, NOT AN ENGINE FIELD — RULED PROSE 2026-08-28. Per Erik 2026-08-24: a named axis is 'real, authored, SHOWN TO THE PLAYER, and scaled in the craft's own prose at each rank and intensity, but NOT arithmetic the engine performs'. ⛔ IT EXTENDS NOTHING AND THAT IS CORRECT. Do not invent a field for it, and do not 'fix' it to a nearby one — `timeReach` says something no engine field says."
     }
    ],
    "intensity": {

@@ -106,7 +106,8 @@
      "kind": "extend",
      "axis": "timeReach+travelSpeed",
      "delta": "trails DAYS old; read a campsite's story (numbers, mood, hurry); TRAVEL TIME -1H on familiar routes",
-     "from": "r2 grants — its own stated number"
+     "from": "r2 grants — its own stated number",
+     "_prose": "⚠️ `timeReach+travelSpeed` — NEITHER half is an engine field. Per Erik's 2026-08-24 ruling, a named axis is 'real, authored, shown to the player, and scaled in the craft's own prose', NOT arithmetic. It extends nothing and that is correct. ⛔ Do not guess a field for it."
     },
     {
      "rank": 3,
@@ -557,7 +558,8 @@
      "kind": "extend",
      "axis": "access",
      "delta": "OPEN common locks and mechanisms; repairs now HOLD PERMANENTLY; build compound devices from scrap",
-     "from": "r2 grants"
+     "from": "r2 grants",
+     "_prose": "⚠️ `access` IS A NAMED AXIS, NOT AN ENGINE FIELD — RULED PROSE 2026-08-28. Per Erik 2026-08-24: a named axis is 'real, authored, SHOWN TO THE PLAYER, and scaled in the craft's own prose at each rank and intensity, but NOT arithmetic the engine performs'. ⛔ IT EXTENDS NOTHING AND THAT IS CORRECT. Do not invent a field for it, and do not 'fix' it to a nearby one — `access` says something no engine field says."
     },
     {
      "rank": 3,
@@ -851,7 +853,8 @@
      "kind": "extend",
      "axis": "foresight",
      "delta": "read GEOLOGY like architecture — predict collapse, slide, or sinkhole; navigate caves by stone-sense; PRECURSOR CONSTRUCTION reads partially",
-     "from": "r3 grants — an EIGHTH precursor hook"
+     "from": "r3 grants — an EIGHTH precursor hook",
+     "_prose": "⚠️ `foresight` IS A NAMED AXIS, NOT AN ENGINE FIELD — RULED PROSE 2026-08-28. Per Erik 2026-08-24: a named axis is 'real, authored, SHOWN TO THE PLAYER, and scaled in the craft's own prose at each rank and intensity, but NOT arithmetic the engine performs'. ⛔ IT EXTENDS NOTHING AND THAT IS CORRECT. Do not invent a field for it, and do not 'fix' it to a nearby one — `foresight` says something no engine field says."
     }
    ],
    "intensity": {

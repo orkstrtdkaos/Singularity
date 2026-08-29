@@ -550,9 +550,18 @@
     {
      "rank": 3,
      "kind": "extend",
-     "axis": "area+duration",
+     "axis": "area",
      "delta": "dim a WHOLE PLACE — a hall, a street, a courtyard — down to working shadow, and HOLD IT THERE",
-     "from": "r3 grants"
+     "from": "r3 grants",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `area+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "dim a WHOLE PLACE — a hall, a street, a courtyard — down to working shadow, and HOLD IT THERE",
+     "from": "r3 grants",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `area+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     }
    ],
    "intensity": {
@@ -1314,7 +1323,8 @@
      "kind": "extend",
      "axis": "trails",
      "delta": "lay SEVERAL trails at once, each equally convincing, and let a pursuer CHOOSE WRONG",
-     "from": "r2 grants — count is the increment"
+     "from": "r2 grants — count is the increment",
+     "_prose": "⚠️ `trails` IS A NAMED AXIS, NOT AN ENGINE FIELD — RULED PROSE 2026-08-28. Per Erik 2026-08-24: a named axis is 'real, authored, SHOWN TO THE PLAYER, and scaled in the craft's own prose at each rank and intensity, but NOT arithmetic the engine performs'. ⛔ IT EXTENDS NOTHING AND THAT IS CORRECT. Do not invent a field for it, and do not 'fix' it to a nearby one — `trails` says something no engine field says."
     },
     {
      "rank": 3,

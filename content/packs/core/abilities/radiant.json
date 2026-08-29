@@ -103,9 +103,18 @@
     {
      "rank": 2,
      "kind": "extend",
-     "axis": "targets+duration",
+     "axis": "targets",
      "delta": "move at walking pace veiled; cloak ONE companion; hold a simple still image for MINUTES",
-     "from": "r2 grants — targets 1→2, duration to minutes"
+     "from": "r2 grants — targets 1→2, duration to minutes",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `targets+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "move at walking pace veiled; cloak ONE companion; hold a simple still image for MINUTES",
+     "from": "r2 grants — targets 1→2, duration to minutes",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `targets+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     },
     {
      "rank": 3,
@@ -261,7 +270,8 @@
      "kind": "extend",
      "axis": "penetration+special",
      "delta": "SUSTAINED cut — through a door bar, a cart axle, LIGHT ARMOR at close range; and deflect off a carried mirror to strike AROUND A CORNER (wits check)",
-     "from": "r2 grants — the first craft in the catalog to name ARMOR penetration, which is exactly the §11 Gap-2 soak layer"
+     "from": "r2 grants — the first craft in the catalog to name ARMOR penetration, which is exactly the §11 Gap-2 soak layer",
+     "_prose": "⚠️ `penetration+special` — NEITHER half is an engine field. Per Erik's 2026-08-24 ruling, a named axis is 'real, authored, shown to the player, and scaled in the craft's own prose', NOT arithmetic. It extends nothing and that is correct. ⛔ Do not guess a field for it."
     },
     {
      "rank": 3,
@@ -545,9 +555,10 @@
     {
      "rank": 2,
      "kind": "extend",
-     "axis": "vessels+duration",
+     "axis": "duration",
      "delta": "THREE vessels, THREE nights' keeping; tune release warm/cold, wide/narrow; a sudden release startles a beast off its line or slows a pursuer",
-     "from": "r2 grants — explicit counts"
+     "from": "r2 grants — explicit counts",
+     "_partialSplit": "⚠️ WAS `vessels+duration` — `vessels` is a NAMED axis with no engine field, so it extends nothing and stays in the prose. `duration` is real and now lands. ⛔ The compound extended NEITHER before this."
     },
     {
      "rank": 3,
@@ -893,16 +904,26 @@
     {
      "rank": 2,
      "kind": "extend",
-     "axis": "evasion+duration",
+     "axis": "evasion",
      "delta": "your image walks THREE PACES on; watchers disagree later about where you went; in a scuffle THE FIRST STRIKE AIMED AT YOU HITS THE GHOST",
-     "from": "r2 grants — an explicit first-attack negation"
+     "from": "r2 grants — an explicit first-attack negation",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `evasion+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "your image walks THREE PACES on; watchers disagree later about where you went; in a scuffle THE FIRST STRIKE AIMED AT YOU HITS THE GHOST",
+     "from": "r2 grants — an explicit first-attack negation",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `evasion+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     },
     {
      "rank": 3,
      "kind": "extend",
-     "axis": "uses+targets",
+     "axis": "targets",
      "delta": "THREE afterimages peel off at a junction; a pursuit SPLITS OR STALLS; walk out of an encirclement inside your own dissolving echo",
-     "from": "r3 grants — count 1→3, and it scales to escaping a surround"
+     "from": "r3 grants — count 1→3, and it scales to escaping a surround",
+     "_partialSplit": "⚠️ WAS `uses+targets` — `uses` is a NAMED axis with no engine field, so it extends nothing and stays in the prose. `targets` is real and now lands. ⛔ The compound extended NEITHER before this."
     }
    ],
    "intensity": {
@@ -1164,14 +1185,16 @@
      "kind": "extend",
      "axis": "persistence+keying",
      "delta": "keyed to a SPECIFIC person's light or a time of day; a WEEK's persistence; a door-sign that flares warning only to your circle",
-     "from": "r2 grants"
+     "from": "r2 grants",
+     "_prose": "⚠️ `persistence+keying` — NEITHER half is an engine field. Per Erik's 2026-08-24 ruling, a named axis is 'real, authored, shown to the player, and scaled in the craft's own prose', NOT arithmetic. It extends nothing and that is correct. ⛔ Do not guess a field for it."
     },
     {
      "rank": 3,
      "kind": "extend",
      "axis": "persistence",
      "delta": "a MONTH's persistence; script that changes with the light's ANGLE (two messages in one mark); leave word in the Archive's dark",
-     "from": "r3 grants"
+     "from": "r3 grants",
+     "_prose": "⚠️ `persistence` IS A NAMED AXIS, NOT AN ENGINE FIELD — RULED PROSE 2026-08-28. Per Erik 2026-08-24: a named axis is 'real, authored, SHOWN TO THE PLAYER, and scaled in the craft's own prose at each rank and intensity, but NOT arithmetic the engine performs'. ⛔ IT EXTENDS NOTHING AND THAT IS CORRECT. Do not invent a field for it, and do not 'fix' it to a nearby one — `persistence` says something no engine field says."
     }
    ],
    "intensity": {
@@ -1306,9 +1329,18 @@
     {
      "rank": 2,
      "kind": "extend",
-     "axis": "targets+duration",
+     "axis": "targets",
      "delta": "THREE companions threaded at once; threads persist THROUGH A NIGHT; A SNAPPED THREAD (member fallen or taken) IS FELT BY ALL INSTANTLY",
-     "from": "r2 grants — count 1→3 plus an alarm mechanic"
+     "from": "r2 grants — count 1→3 plus an alarm mechanic",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `targets+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "THREE companions threaded at once; threads persist THROUGH A NIGHT; A SNAPPED THREAD (member fallen or taken) IS FELT BY ALL INSTANTLY",
+     "from": "r2 grants — count 1→3 plus an alarm mechanic",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `targets+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     },
     {
      "rank": 3,
@@ -1609,7 +1641,8 @@
      "kind": "extend",
      "axis": "wards+reportFidelity",
      "delta": "THREE wards held; crossings report as a felt colour INSTANTLY AT ANY DISTANCE in the valley; the ward reads DIRECTION AND COUNT",
-     "from": "r2 grants — count 1→3 and latency removed"
+     "from": "r2 grants — count 1→3 and latency removed",
+     "_prose": "⚠️ `wards+reportFidelity` — NEITHER half is an engine field. Per Erik's 2026-08-24 ruling, a named axis is 'real, authored, shown to the player, and scaled in the craft's own prose', NOT arithmetic. It extends nothing and that is correct. ⛔ Do not guess a field for it."
     },
     {
      "rank": 3,

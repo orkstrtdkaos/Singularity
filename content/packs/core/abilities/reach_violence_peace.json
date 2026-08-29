@@ -881,9 +881,18 @@
     {
      "rank": 2,
      "kind": "extend",
-     "axis": "duration+targets",
+     "axis": "duration",
      "delta": "hold the edge ACROSS MANY rather than a few, and LONG ENOUGH FOR SOMETHING TO ACTUALLY CHANGE INSIDE IT — words exchanged, a mind altered",
-     "from": "r2 grants"
+     "from": "r2 grants",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `duration+targets` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "hold the edge ACROSS MANY rather than a few, and LONG ENOUGH FOR SOMETHING TO ACTUALLY CHANGE INSIDE IT — words exchanged, a mind altered",
+     "from": "r2 grants",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `duration+targets` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     }
    ],
    "intensity": {
@@ -1252,7 +1261,8 @@
      "kind": "extend",
      "axis": "improvisation",
      "delta": "improvise MULTIPLE tools at once; make something that will LAST THE WHOLE ENGAGEMENT, not just the opening blow",
-     "from": "r2 grants"
+     "from": "r2 grants",
+     "_prose": "⚠️ `improvisation` IS A NAMED AXIS, NOT AN ENGINE FIELD — RULED PROSE 2026-08-28. Per Erik 2026-08-24: a named axis is 'real, authored, SHOWN TO THE PLAYER, and scaled in the craft's own prose at each rank and intensity, but NOT arithmetic the engine performs'. ⛔ IT EXTENDS NOTHING AND THAT IS CORRECT. Do not invent a field for it, and do not 'fix' it to a nearby one — `improvisation` says something no engine field says."
     },
     {
      "rank": 3,
@@ -2189,9 +2199,18 @@
     {
      "rank": 2,
      "kind": "extend",
-     "axis": "duration+targets",
+     "axis": "duration",
      "delta": "create LASTING sanctuary — a place that holds its quality WITHOUT CONSTANT TENDING; a larger group can shelter",
-     "from": "r2 grants"
+     "from": "r2 grants",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `duration+targets` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "create LASTING sanctuary — a place that holds its quality WITHOUT CONSTANT TENDING; a larger group can shelter",
+     "from": "r2 grants",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `duration+targets` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     },
     {
      "rank": 3,

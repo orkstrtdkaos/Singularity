@@ -1754,9 +1754,18 @@
     {
      "rank": 2,
      "kind": "extend",
-     "axis": "targets+duration",
+     "axis": "targets",
      "delta": "a FALSE TRAIL credible enough that pursuit follows it seriously, or misdirect a GROUP's full attention at exactly the moment it matters",
-     "from": "r2 grants — one move → a pursuit or a group"
+     "from": "r2 grants — one move → a pursuit or a group",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `targets+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
+    },
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "a FALSE TRAIL credible enough that pursuit follows it seriously, or misdirect a GROUP's full attention at exactly the moment it matters",
+     "from": "r2 grants — one move → a pursuit or a group",
+     "_splitFrom": "⛔ SPLIT 2026-08-28 from `targets+duration` — the engine extends ONE named dimension per delta (`craftmechanics.js:189`), so a compound axis extended NOTHING. Both halves are real fields, so both now land."
     },
     {
      "rank": 3,

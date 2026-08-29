@@ -53,8 +53,11 @@ working papers; **this is the answer.**
 | 08-28 | ✅ **RULING: a guard ABSORBS damage** | Erik: *"A"* — the blow gets smaller, not likelier to miss. `soak` is the right word; it needed a CONSUMER, not a rename | `content_ci` CCODE-240 × 3, rewritten to measure absorption | ✅ **content_ci 17 → 16 · damage_sensitivity 1 → 0** |
 | 08-28 | ⛔ a guard may not stack into IMMUNITY | Aevi's condition; the first run reduced a connected blow to ZERO at soak 20 | `damage_sensitivity` — its standing red was exactly this | ⚠️ smoke CCODE-250 expected 0 and now expects the floor |
 | 08-28 | ⛔ **`num` was undefined in `skill_battle.js`** | CCODE-281 called it in the composite path and it existed nowhere — a ReferenceError waiting behind `wardTypes` on a target sheet, which nothing ever set | found by walking into it; now covered by the soak path | ⚠️ a crash that waits is not a crash that hides |
+| 08-28 | ⛔ **RULING: minimum damage is 0** | Erik: *"I don't like the 1 minimum"* — armour and typed immunity can now MEAN what they say | `how_it_works.mjs` §4 (reads the DIAL, not a literal) · `damage_sensitivity` EDGE × 2 | ⛔ the ward ladder's `immunity` rung · every guard · smoke CCODE-250 |
+| 08-28 | ⚠️ the §4 gate read a LITERAL `minHit: 1` | so the dial moved to 0, the doc's claim went false, and the gate stayed GREEN | now reads `skill_battle_system.engine.damage.minHit` | ⛔ a harness that builds its own config tests its own config — FIELD_REFERENCE §4, broken in the file asserting it |
+| 08-28 | ✅ **RULING C: `add` splits on whether the rank grants a VERB** | 92 with a new verb take no bump; the 89 without add a QUALITATIVE capability and keep the default | `rankdelta_report.mjs` §4: **124 → 60** kept-numbers | ⚠️ **scaling now depends on the `functions` array** — a tidying lint could silently remove a 35% bump |
 
-**Last verified: 2026-08-28 · v1.9.251 · 378 crafts.**
+**Last verified: 2026-08-28 · v1.9.252 · 378 crafts.**
 
 ---
 
@@ -169,16 +172,21 @@ lightning; *a cold ward* stops only cold and is cheaper and sharper.
 not three sizes of one — resist moves the roll, soak moves the damage, immunity means that type does not
 touch you.
 
-⛔ **PARTIAL WARDING IS THE POINT.** A shield answers the physical half of a psionic blast and **the psychic
-half goes through untouched.** ⚠️ **Nothing is ever fully immune and nothing is ever fully blocked** — a blow whose every component is
-warded still lands its floor (`minHit`).
+⛔ **PARTIAL WARDING IS THE POINT.** A shield answers the physical half of a psionic blast and **the
+psychic half goes through untouched.**
 
-⛔ **FLAGGED, NOT SETTLED — Erik 2026-08-28: *"I'm not certain about the minHit concept. We'll keep it for
-now, but flag it."*** ⚠️ **The tension runs both ways: without the floor, a fully-soaked blow returns 0 and
-reads as a miss rather than a graze — which is how `antisoakLanded` got reported as broken. ⛔ WITH it,
-armour can never fully answer anything and the ward ladder's top rung, IMMUNITY, cannot actually mean
-immune.** ⚠️ **And Erik's ruling that a guard ABSORBS puts the same floor on the player's side, where
-*"you always take at least 1"* feels different from *"the boss always takes at least 1."***
+✅ **AND A BLOW WHOSE EVERY PART IS ANSWERED LANDS NOTHING.** ⛔ **ERIK RULED 2026-08-28: minimum damage is
+0** — *"I don't like the 1 minimum."* ⚠️ **This REVERSES the old floor.** Until then a fully-warded blow
+still took 1 off, so armour could never fully answer anything and the ward ladder's top rung, **IMMUNITY,
+could not actually mean immune.** **It does now.**
+
+⚠️ **WHAT THE FLOOR EXISTED TO PREVENT, NAMED SO IT IS NOT REDISCOVERED:** a craft reduced to nothing can
+read as *broken* rather than as *answered* — which is how `antisoakLanded` returning 0 got reported as a
+defect. ✅ **The RECEIPT carries the reason instead**: `soaked`, `guardedBy`, and the ward's `stopped` list.
+
+⚠️ **AND IN PRACTICE THIS LANDS ON THE PLAYER'S SIDE.** Measured: `soakBase` is 0 and `threatToSoak` 0.02,
+so a threat-120 foe synthesises to **soak 2**, and no authored foe carries a soak field at all. **A
+player's guard authors 4–5**, so this is felt when you raise a ward, not when you hit a boss.
 
 ⚠️ **A ward that answers everything has no character.** The interesting thing about a ward is the list of
 what it does *not* stop.

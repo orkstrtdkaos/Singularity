@@ -193,13 +193,26 @@ console.log("\n── §4 · what a ward answers, and what gets through ──")
   // ⛔ PARTIAL WARDING IS THE POINT.
   const mix = DT.damageMixOf({ damageMix: [{ type: "physical", share: 1 }, { type: "psychic", share: 1 }] });
   const shield = ward(["physical"], 3);
-  const rc = DT.resolveComposite(20, mix, shield, { minHit: 1, families: F });
+  // ⛔ CCODE-292 — READ THE DIAL, DO NOT INVENT ONE. This passed a literal `minHit: 1`, so when Erik set
+  // the dial to 0 the doc's claim ("nothing is ever fully blocked") became FALSE and this gate stayed GREEN.
+  // ⚠️ A HARNESS THAT BUILDS ITS OWN CONFIG TESTS ITS OWN CONFIG — the rule I wrote into FIELD_REFERENCE
+  // §4 after the rankReachSurcharge near-miss, broken in the file that asserts it. Take the caller's object.
+  const minHit = rj("content/packs/core/rules/skill_battle_system.json").engine?.damage?.minHit ?? 1;
+  const rc = DT.resolveComposite(20, mix, shield, { minHit, families: F });
   check("§4: a shield stops the physical half and the psychic half GOES THROUGH",
     rc.through.length === 1 && rc.through[0].type === "psychic" && rc.landed === 10, JSON.stringify(rc.through));
   // ⚠️ "Nothing is ever fully immune and nothing is ever fully blocked."
-  const pure = DT.resolveComposite(20, DT.damageMixOf({ damageType: "physical" }), shield, { minHit: 1, families: F });
-  check("§4: a blow whose every part is warded still lands its floor",
-    pure.landed === 1 && pure.flooredBy === "minHit", JSON.stringify(pure));
+  const pure = DT.resolveComposite(20, DT.damageMixOf({ damageType: "physical" }), shield, { minHit, families: F });
+  // ⛔ ERIK RULED 2026-08-28: minimum damage is 0. So a blow whose every part is warded now lands NOTHING,
+  // and the ward ladder's `immunity` rung finally means immunity. ⚠️ THE ASSERTION FOLLOWS THE DIAL rather
+  // than a number, so moving the dial back moves the expectation with it instead of silently disagreeing.
+  check(`§4: a blow whose every part is warded lands exactly the floor (minHit ${minHit})`,
+    pure.landed === minHit, JSON.stringify(pure));
+  check("§4: …and the doc states the SAME floor the dial holds",
+    minHit === 0
+      ? /lands NOTHING|answers? it completely|fully blocked/i.test(doc) && !/nothing is ever fully blocked/i.test(doc)
+      : /still lands its floor/i.test(doc),
+    `dial is ${minHit} — §4 must say what that means`);
 
   // "antisoak makes a wound worse but CANNOT create one… pierce guarantees the antisoak fires."
   const { pierceLanded } = await import("../engine/skill_battle.js");
@@ -534,6 +547,28 @@ console.log("\n── FR · the field reference — measured claims stay measure
     }
     check("FR: ⛔ every `extend` either names a real field or is reported as prose — none goes silent",
       silent === 0, `${silent} extend deltas resolved to nothing and said nothing`);
+
+    // ⛔ CCODE-291 / AEVI'S REQUESTED GATE. Erik ruled C: an `add` rank that grants a NEW VERB takes no
+    // magnitude bump; one that grants none keeps the default. ⚠️ THAT MAKES A CRAFT'S SCALING DEPEND ON ITS
+    // `functions` ARRAY — so an author tidying a rank's verbs, or a lint normalising them (which has happened
+    // twice), would SILENTLY REMOVE A 35% BUMP. This pins the split so such an edit announces itself.
+    let addVerb = 0, addNoVerb = 0, addR1 = 0;
+    for (const a2 of abilities) {
+      const tree = Array.isArray(a2.tree) ? a2.tree : [];
+      const fnAt = (r) => new Set((tree.find(t => Number(t?.rank) === r) || {}).functions || []);
+      for (const r of (a2.rankDeltas || [])) {
+        if (r.kind !== "add") continue;
+        const rk = Number(r.rank) || 0;
+        if (rk <= 1) { addR1++; continue; }
+        const below = fnAt(rk - 1);
+        ([...fnAt(rk)].some(v => !below.has(v)) ? () => addVerb++ : () => addNoVerb++)();
+      }
+    }
+    check("FR: ⛔ the add-rank split holds near 92 / 89 — a verb-tidying edit must not move balance silently",
+      Math.abs((addVerb + addR1) - 92) <= 4 && Math.abs(addNoVerb - 89) <= 4,
+      `with-verb ${addVerb} + r1 ${addR1} = ${addVerb + addR1} (was 92) · without ${addNoVerb} (was 89)`);
+    check("FR: …and the engine branches on it — an add with no new verb keeps the default deepen",
+      /addKept|add:noVerb/.test(rd("engine/craftmechanics.js")));
     check("FR: the reference records the rankDeltas fix and its counts",
       /323 rank-resolutions changed kind/.test(fr) && new RegExp(`${rdRoot}`).test(fr));
   }

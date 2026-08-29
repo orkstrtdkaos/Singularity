@@ -113,11 +113,29 @@ for (const sw of SWEEPS) {
 console.log("      EDGE CASES — degenerate and adversarial inputs. Every one of these is GATED.\n");
 const SB = SBRAW.engine;
 
-{ // a foe whose armour exceeds the biggest die must still be killable
+{ // ⛔ CCODE-292 — ERIK RULED 2026-08-28: minimum damage is 0. "I don't like the 1 minimum."
+  // ⚠️ THIS TEST ASSERTED THE OPPOSITE RULE and had to invert. It read "soak far above the biggest die
+  // STILL lets a blow land (minHit floors it — no immune foe)". Under the ruling, armour that exceeds the
+  // dice now answers COMPLETELY, which is the point: the content's own note says "an armored epic foe needs
+  // more than a scaled-up cantrip", and the ward ladder's `immunity` rung can finally mean immunity.
+  // ⛔ SO THE GATE NOW ASSERTS BOTH HALVES, because either alone would be a worse design:
+  //   ① a cantrip against epic armour does NOTHING — armour means something
+  //   ② and a craft with real weight STILL GETS THROUGH — armour is not an off switch
   const sb = clone(SBRAW); sb.engine.opponentSheetSynthesis.soakBase = 40;
-  const r = fight({ tier: 1, threat: 78, sb: sb.engine, cm: CM, res: RES, trials: 60 });
-  check("EDGE: soak far above the biggest die still lets a blow land (minHit floors it — no immune foe)",
-    r.killRate > 0.9 && r.minHit >= (SB.damage.minHit ?? 1), `killRate ${(r.killRate * 100).toFixed(0)}%, min hit ${r.minHit}`);
+  const weakling = fight({ tier: 1, threat: 78, sb: sb.engine, cm: CM, res: RES, trials: 60 });
+  check("EDGE: with minHit 0, armour far above the dice ANSWERS a cantrip completely (Erik 2026-08-28)",
+    weakling.minHit === 0,
+    `min hit ${weakling.minHit} — expected 0 now that minimum damage is 0`);
+  // ⚠️ AND THE SECOND HALF MUST BE MEASURED AT A REALISTIC SOAK, NOT THE SYNTHETIC 40 ABOVE. Measured:
+  // `soakBase` is 0 and `threatToSoak` 0.02, so a threat-120 foe synthesises to soak 2, and NO authored foe
+  // carries a soak field at all. ⛔ 40 IS AN ADVERSARIAL PROBE, NOT A FOE — asserting that something must
+  // punch through it would be asserting against a creature the game cannot produce, and would have read as
+  // a balance alarm about a number nothing generates.
+  const sbReal = clone(SBRAW); sbReal.engine.opponentSheetSynthesis.soakBase = 5;   // the heaviest AUTHORED guard
+  const real = fight({ tier: 3, threat: 78, sb: sbReal.engine, cm: CM, res: RES, trials: 60 });
+  check("EDGE: …and at a soak the game actually produces, blows still land — armour is not an off switch",
+    real.killRate > 0.5,
+    `tier-3 vs soak 5 (heaviest authored guard): killRate ${(real.killRate * 100).toFixed(0)}%, min hit ${real.minHit}`);
 }
 { // malformed content must never reach the dice as NaN — the codebase's standing rule
   const cm = clone(CM); cm.familyDefaults.damage.dice = { n: 0, d: 0 }; cm.familyDefaults.damage.plus = null;

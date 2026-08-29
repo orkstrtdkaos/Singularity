@@ -12,7 +12,7 @@ node scripts/field_atlas.mjs --md     # …as markdown, to paste back in
 node scripts/safe_delete.mjs <field>  # triage one candidate before deleting it
 ```
 
-**Last measured: 2026-08-28 · v1.9.251 · 378 crafts · 107 distinct authored fields.**
+**Last measured: 2026-08-28 · v1.9.252 · 378 crafts · 107 distinct authored fields.**
 
 ---
 
@@ -333,9 +333,16 @@ The damage families did not, which is why they were dark.**
 
 ## 10 · MECHANICS THAT ARE AUTHORED AND INERT
 
-- ⛔ **`mechanic.soak` — 30 crafts author it and it changes nothing.** Measured: `soak 2 → guard 2` and
-  `soak 20 → guard 2`, identical. ⚠️ **And the naming is the first problem: a guard modifies the ROLL, it
-  does not absorb damage, so `TEMP_SOAK` is a misnomer.** Rule the word before wiring the number.
+- ✅ **`mechanic.soak` — FIXED 2026-08-28 (CCODE-290).** Erik ruled that a guard **absorbs**, so `soak` was
+  the right word and needed a CONSUMER, not a rename. A landed guard now stands as a typed soak LAYER on
+  its raiser — `death_ward`'s 5 answers decay/vitality/cold and nothing else. ⚠️ **Kept here as a worked
+  example**: the consumer (`soakLayers`) had existed since CCODE-83 and what was missing was a WRITER, which
+  is a different diagnosis from "unread" and needed a person to make it.
+- ⛔ **`minHit` — SET TO 0 (Erik, 2026-08-28).** *"I don't like the 1 minimum."* A blow whose every part is
+  answered now lands NOTHING, so the ward ladder's `immunity` rung finally means immunity. ⚠️ **The dial
+  does TWO jobs** — it also floors the ROLLED magnitude at `skill_battle.js:1052/1058`. At 0 that second
+  floor is inert rather than wrong (dice minimums exceed it), but it is one name over two meanings and
+  belongs on the collision list, not forgotten.
 - ⛔ **`persuade` and `bolster` are unmechanised verbs** — crafts describe what the engine cannot do.
   ⚠️ **`bolster` is ALSO a shape in `familyDefaults`**, which is why a regex for the word reported the gap
   closed. **The word appearing proves nothing.**

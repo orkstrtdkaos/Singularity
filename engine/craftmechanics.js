@@ -135,7 +135,38 @@ export function rankDeltaFor(ability, rank = 1, { cfg = {}, authored = null } = 
   const found = keyed || (list ? list.find(d => num(d?.rank, 0) === num(rank, 0)) : null);
   if (!found) return fallback();
 
-  const kind = String(found.kind || dflt?.kind || "deepen");
+  let kind = String(found.kind || dflt?.kind || "deepen");
+
+  // ⛔ CCODE-291 — ERIK RULES **C**: an `add` rank SPLITS on whether it actually grants a new verb.
+  //   ✅ gains a verb the rank below lacked (92) → NO magnitude bump. The capability IS the growth.
+  //   ⛔ gains no verb (89)                     → KEEP the default deepen, compounded.
+  //
+  // ⚠️ THE 89 ARE NOT SLOPPY AUTHORING — Aevi checked them expecting to find some and did not. Their axis is
+  // `special` ×75: ranks that add a QUALITATIVE capability which is neither a verb nor a number
+  // (`true_ground` r3: "no working that depends on false belief can function around you"). The effect is
+  // real, it lives in the tree's `grants`, and the GM reads it — but the ENGINE sees nothing, so without
+  // this branch those 89 ranks would resolve IDENTICALLY to the rank below. ⛔ THAT IS "I can't tell how
+  // ranks differ" reappearing inside the fix for it, which is the sentence this file already warns about.
+  //
+  // ⛔⛔ SECOND-ORDER RISK, NAMED HERE BECAUSE IT IS INVISIBLE FROM THE CONTENT SIDE (Aevi):
+  // THIS MAKES A CRAFT'S MECHANICAL SCALING DEPEND ON ITS `functions` ARRAY. An author who adds a verb to a
+  // rank for tidiness — or a lint that normalises them, which has happened twice — SILENTLY REMOVES A 35%
+  // BUMP FROM THAT RANK. There is a gate on the 92/89 split so that a content edit which shifts it
+  // announces itself rather than moving balance in silence.
+  if (kind === "add") {
+    const tree = Array.isArray(ability?.tree) ? ability.tree : [];
+    const fnAt = (r) => new Set((tree.find(t => num(t?.rank, 0) === r)?.functions) || []);
+    const below = fnAt(num(rank, 0) - 1);
+    const gainsVerb = [...fnAt(num(rank, 0))].some(v => !below.has(v));
+    // ⚠️ r1 takes no bump whatever it declares — it is the base, there is nothing below it to differ from.
+    // (`steps <= 0` already returned above; this is the explicit statement of the same rule.)
+    if (!gainsVerb) {
+      kind = String(dflt?.kind || "deepen");
+      return { kind, mult: Math.pow(num(dflt?.mult, 1.35), steps),
+        source: "add:noVerb→default", addKept: true };
+    }
+    return { kind: "add", mult: 1, source: keyed ? "authored:keyed" : "authored:list", addGrantsVerb: true };
+  }
   // ⛔ THE AMOUNT COMES FROM THE DIAL UNLESS THE AUTHOR NAMED ONE — trap 3 above.
   const mult = found.mult != null ? num(found.mult, 1) : Math.pow(num(dflt?.mult, 1.35), steps);
   const out = { kind, mult, source: keyed ? "authored:keyed" : "authored:list" };

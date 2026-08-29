@@ -25,7 +25,7 @@
    "operativeAxis": "body_mind",
    "intensity": {
     "conserve": "one word, one moment of obedience",
-    "surge": "the full name; ⛔ WHAT ANSWERS A TRUE NAME MAY NOT BE ONLY THEM"
+    "surge": "the full name, and hold it; ⛔ WHAT YOU COMPEL THIS WAY REMEMBERS BEING COMPELLED — you have not made an obedient thing, you have made an enemy who will take the first chance it gets"
    },
    "mechanic": {
     "magnitude": 7,
@@ -144,7 +144,8 @@
    },
    "_diceStrip": "⛔ SNG-471, CCODE Q1: `mechanic.dice` IS consumed — craftmechanics.mechanicFor → rollMagnitude → skill_battle.js:798 — ⚠️ BUT THE GUARD IS `shape === 'damage'`, and only `damage` and `strike` resolve to it. `hobble` and `hinder` DO NOT.\n⛔ SO THIS CRAFT AUTHORED 4d6 THAT NOTHING WOULD EVER ROLL. Erik's shape is right — a hold is not damage — so the DICE GO, not the shape. ⚠️ CCode: 'I would not widen the guard silently — \"this craft does 4d6 of hold\" is a different claim about the world.' AGREED.",
    "_persuadeRemoved_20260829": "⛔ `persuade` REMOVED — the third verb-in-the-wrong-slot after `bolster` on `wellspring` and this craft's own shape mismatch. ⚠️ THE LADDER SETTLES IT: r1 'they MUST stop, turn, or answer' · r2 'SUSTAINED CONTROL' · r3 'the hold no longer needs your attention'. THAT IS COMPULSION — `bind` and `command`, both already declared. ⛔ AND THE VOCABULARY IS EXPLICIT: persuade means 'bring someone to AGREE — they act because they now think it right', and is 'NOT `command`, which does not need agreement'. NOBODY AGREES TO ANYTHING IN THIS CRAFT. ⚠️ r3 ALREADY DROPPED `persuade` ON ITS OWN, which is the craft saying so. ⛔ ALSO: ability rung was `damaging` while r3 reaches `incapacitating` — a craft that binds and never wounds was glossed to the GM as one that hurts.",
-   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'severe' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'severe' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder.",
+   "_surgeFix_20260829": "⛔ ERIK 2026-08-29: my surge said 'what answers a true name may not be only them', which is WRONG — IT IS ONLY THEM. ⚠️ The real cost is relational: 'when you control something like that you kindle it against you, and it would likely look to have its revenge if it gets the chance.' ⛔ That is better because it is a CONSEQUENCE THE CRAFT EARNS rather than a spooky ambiguity I invented — compulsion makes enemies, and this craft compels absolutely."
   },
   {
    "id": "mind_meld",

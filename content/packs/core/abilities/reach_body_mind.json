@@ -49,7 +49,7 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "damaging",
+     "harmRung": "none",
      "gainAxes": [
       "duration",
       "damage",
@@ -88,7 +88,7 @@
    ],
    "tradition": "somatic",
    "nativeOrCombination": "native",
-   "harmRung": "damaging",
+   "harmRung": "none",
    "shape": "bolster",
    "operativeAxis": [
     "burst",
@@ -149,7 +149,7 @@
    "_merged": "⛔ SNG-479: ABSORBS Long Haul (mason) and Soma r1-r2. Erik: 'r1 subname could be EMBRACE THE SUCK. Plus it should HEAL SOME and ADD SOME DMG SOAK on top of the resist boost. r2 EMPOWERED ATTACKS, no twice-a-day limit, DURATION APPLIES IN FIGHTS. r3 DREAM BREATH — grants soak worth X% of HP and heals half that amount.'",
    "_powerSystemWas": "reach_body_mind",
    "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki.",
-   "_rungFix_20260829": "⛔ ability rung `none` -> `damaging`: r2 'your blows land harder for it' — a bolster that raises damage is still a rank that damages (§45.1 — a rung must never understate what a rank delivers)."
+   "_rungFix_20260829": "⛔ REVERSED — I HAD THIS BACKWARDS. The craft deals NO damage: no dice, and its functions are sustain/resist/empower/move. ⚠️ `harmRung` asks WHAT HAPPENS WHEN THIS CRAFT PUTS SOMEONE DOWN, and this craft puts nobody down — 'your blows land harder' and 'a second physical action' make the CHARACTER'S OWN WEAPON better, which is `empower`, not harm. ⛔ THE RANK WAS WRONG AND I MATCHED THE ABILITY TO IT. The lint reports a DISAGREEMENT and cannot say which side is wrong; I assumed the ability was, and propagated a rank's error upward instead of reading what the rank does. Erik caught it. ⚠️ `quick_hands` was the only true inversion of the three — its r2 declares `strike` and deals 1d6."
   },
   {
    "id": "perfect_motion",
@@ -213,7 +213,7 @@
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "damaging",
+     "harmRung": "none",
      "gainAxes": [
       "tempo",
       "damage"
@@ -236,7 +236,7 @@
    ],
    "tradition": "somatic",
    "nativeOrCombination": "native",
-   "harmRung": "damaging",
+   "harmRung": "none",
    "shape": "guard",
    "operativeAxis": [
     "efficiency",
@@ -301,7 +301,7 @@
    "_powerSystemWas": "reach_body_mind",
    "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki.",
    "_wardTypes": "⛔ SNG-512. ⚠️ Economy of motion answers blows. It answers NOTHING typed, which is the honest limit of a body's skill.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
-   "_rungFix_20260829": "⛔ ability rung `none` -> `damaging`: r3 grants a SECOND PHYSICAL ACTION and a strike thrown with it — the gloss told the GM never to invent a wound from it (§45.1 — a rung must never understate what a rank delivers)."
+   "_rungFix_20260829": "⛔ REVERSED — I HAD THIS BACKWARDS. The craft deals NO damage: no dice, and its functions are sustain/resist/empower/move. ⚠️ `harmRung` asks WHAT HAPPENS WHEN THIS CRAFT PUTS SOMEONE DOWN, and this craft puts nobody down — 'your blows land harder' and 'a second physical action' make the CHARACTER'S OWN WEAPON better, which is `empower`, not harm. ⛔ THE RANK WAS WRONG AND I MATCHED THE ABILITY TO IT. The lint reports a DISAGREEMENT and cannot say which side is wrong; I assumed the ability was, and propagated a rank's error upward instead of reading what the rank does. Erik caught it. ⚠️ `quick_hands` was the only true inversion of the three — its r2 declares `strike` and deals 1d6."
   },
   {
    "id": "memory_palace",

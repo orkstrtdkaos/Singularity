@@ -273,7 +273,21 @@
     "plus": 0,
     "marginFloorPer": 0.02,
     "area": 2,
-    "note": "T-II: the clean double of T-I per §8"
+    "note": "T-II: the clean double of T-I per §8",
+    "damageMix": [
+     {
+      "type": "radiance",
+      "share": 0.5
+     },
+     {
+      "type": "heat",
+      "share": 0.3
+     },
+     {
+      "type": "truth",
+      "share": 0.2
+     }
+    ]
    },
    "rankDeltas": [
     {
@@ -322,7 +336,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ THE TRADITION'S SIGNATURE AND IT DOES ALL THREE THINGS AT ONCE: 'light that SHOWS THINGS AS THEY ARE — no illusion, no disguise, no shadow holds — OR focus it to a beam that BURNS AND BLINDS'. ⚠️ `radiance` .5 the beam, `heat` .3 the burn, `truth` .2 because r2 'MAKES A LIE VISIBLY A LIE' — that is intrinsic harm and armour does nothing about it."
   },
   {
    "id": "darksight",
@@ -694,7 +709,17 @@
     "marginFloorPer": 0.02,
     "range": 15,
     "duration": 1,
-    "note": "the T-I baseline strike — max can drop a peer beast, average takes 2"
+    "note": "the T-I baseline strike — max can drop a peer beast, average takes 2",
+    "damageMix": [
+     {
+      "type": "heat",
+      "share": 0.6
+     },
+     {
+      "type": "radiance",
+      "share": 0.4
+     }
+    ]
    },
    "rankDeltas": [
     {
@@ -739,7 +764,8 @@
    "obscure": true,
    "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. ⛔ GLARE — Blazeborn deny sight with too much rather than too little\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY.",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ THE ONLY PURELY ELEMENTAL ONE. 'Illuminate, signal, blind or burn' — r2 is 'a struck brightness that BURNS what it lands on and leaves an AFTERIMAGE'. ⚠️ `heat` .6 (elemental — it scorches) + `radiance` .4 (physics, light-matter — it dazzles). Two different harms from one act, which is why it is a mix."
   },
   {
    "id": "harbor",
@@ -967,7 +993,8 @@
     "plus": 3,
     "marginFloorPer": 0.02,
     "area": 3,
-    "note": "T-III per §10 — more than a third doubling"
+    "note": "T-III per §10 — more than a third doubling",
+    "damageType": "truth"
    },
    "rankDeltas": [
     {
@@ -1010,7 +1037,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ NOT FIRE AT ALL. 'Strip a place or person of ALL CONCEALMENT AND ILLUSION' — nothing burns, nothing is warmed. ⚠️ THE HARM IS THAT A LIE STOPS WORKING, which is `truth`, INTRINSIC family, and it is why `unshadow` hobbles rather than damages: what it takes is a person's cover, not their health. ⛔ A shield is no answer."
   },
   {
    "id": "harbored_flame",
@@ -1934,7 +1962,7 @@
    "id": "cleansing_light",
    "name": "Cleansing Light",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -1948,7 +1976,7 @@
    "harmRung": "none",
    "narrationHints": "Light doesn't heal the way a poultice does. It burns the wrong thing out and leaves.",
    "description": "Heal by exposing wound, corruption, or poison to radiance — light doesn't soothe, it purifies.",
-   "notFor": [],
+   "notFor": "⛔ IT PURIFIES; IT DOES NOT SOOTHE. There is no comfort in it — a wound cleaned this way hurts more, not less, and a patient who cannot bear that is a patient you cannot treat. ⚠️ AND IT CANNOT REPLACE WHAT IS GONE: it burns away infection, corruption and poison, and a severed thing stays severed. ⛔ Nor will it work on what is not FALSE OR FOULED — clean flesh has nothing for the light to take, and grief and exhaustion are not corruption.",
    "tradition": "blazeborn",
    "functions": [
     "break",
@@ -1956,9 +1984,9 @@
     "restore"
    ],
    "challengeTypes": [
-    "medical",
-    "magical",
-    "craft"
+    "SURVIVE",
+    "INVESTIGATE",
+    "DEFEND"
    ],
    "tree": [
     {
@@ -2057,13 +2085,14 @@
    "_nameWas": "The Cleansing Light",
    "_idWas": "the_cleansing_light",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['medical', 'magical', 'craft'], and e2 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy."
   },
   {
    "id": "blaze_wall",
    "name": "Blaze Wall",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 5,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -2077,16 +2106,16 @@
    "harmRung": "none",
    "narrationHints": "You could not look at it. You certainly could not walk through it.",
    "description": "A wall of light so total it cannot be passed — not merely dazzling, genuinely impassable.",
-   "notFor": [],
+   "notFor": "⛔ IT STOPS APPROACH, NOT HARM — an arrow, a thrown thing, a working or a shout crosses it freely; what it refuses is a BODY trying to walk through. ⚠️ AND IT IS NOT A ROOF OR A FLOOR: it is a wall, it has edges, and anyone patient goes around. ⛔ Nor does it discriminate — your own people are stopped exactly as well, and a wall thrown in a doorway you may need is a wall you must drop.",
    "tradition": "blazeborn",
    "functions": [
     "shield",
     "ward"
    ],
    "challengeTypes": [
-    "combat",
-    "defense",
-    "magical"
+    "DEFEND",
+    "FIGHT",
+    "SURVIVE"
    ],
    "tree": [
     {
@@ -2188,13 +2217,14 @@
    "_idWas": "the_blaze_wall",
    "_wardTypes": "⛔ SNG-512. ⛔ A wall of light stops what light stops — a thing carrying dark, a grown thing. It does not stop a fact or a want.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['combat', 'defense', 'magical'], and e2 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy."
   },
   {
    "id": "glass_work",
    "name": "Glass Work",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 5,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -2209,16 +2239,16 @@
    "harmRung": "none",
    "narrationHints": "Everything they make starts as sand or stone and ends as glass. The land is the evidence.",
    "description": "Shape glass and other heat-worked material with the blazeborn's mastery — light and heat as tools.",
-   "notFor": [],
+   "notFor": "⛔ HEAT-WORKED MATERIAL ONLY — glass, metal, crystal, sand. ⚠️ Wood chars, flesh burns, and neither becomes a shape you chose. ⛔ AND IT IS SLOW WORK MADE FAST, NOT WORK MADE FREE: you must know what you are making. A blazeborn who cannot picture the joint cannot form it, and the light does not know smithing on your behalf.",
    "tradition": "blazeborn",
    "functions": [
     "make",
     "transform"
    ],
    "challengeTypes": [
-    "craft",
-    "technical",
-    "art"
+    "CREATE",
+    "PUZZLE",
+    "EXPLORE"
    ],
    "tree": [
     {
@@ -2305,13 +2335,14 @@
    ],
    "plainly": "A craft/technical/art action that makes or animates something. Its strength is rated 2 out of 10, and lasts for about 6 hours Ranks: rank 2 adds to materials; rank 3 adds to persistence. Limit: requires material that Answers to light and heat.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['craft', 'technical', 'art'], and e2 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy."
   },
   {
    "id": "blazing_word",
    "name": "Blazing Word",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -2326,16 +2357,16 @@
    "harmRung": "none",
    "narrationHints": "In full light, there is nothing to take back and nowhere to hide the taking back.",
    "description": "Speak with the authority of the blaze — what is said openly, in full light, cannot be quietly undone.",
-   "notFor": [],
+   "notFor": "⛔ IT MUST BE SAID IN THE OPEN, IN FULL LIGHT, IN FRONT OF WITNESSES — that is the whole mechanism, and a word spoken privately carries nothing at all. ⚠️ IT BINDS WHAT WAS SAID, NOT WHAT WAS MEANT: a promise made carefully in the blaze holds to its exact wording, and so does a promise made carelessly. ⛔ AND IT BINDS YOU TOO. It does not make anyone AGREE — a person can hear it, be held to it, and hate you.",
    "tradition": "blazeborn",
    "functions": [
     "bind",
     "command"
    ],
    "challengeTypes": [
-    "social",
-    "negotiation",
-    "leadership"
+    "SOCIAL",
+    "DUEL",
+    "DEFEND"
    ],
    "tree": [
     {
@@ -2426,13 +2457,14 @@
    "_nameWas": "The Blazing Word",
    "_idWas": "the_blazing_word",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['social', 'negotiation', 'leadership'], and e1 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy."
   },
   {
    "id": "line_of_light",
    "name": "Line of Light",
    "levelReq": 3,
-   "energyCost": 2,
+   "energyCost": 5,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -2447,16 +2479,16 @@
    "harmRung": "none",
    "narrationHints": "Where the light goes, she can follow. She is faster than the light is useful.",
    "description": "Move along the line of light — arrive at any point the light touches in a committed crossing.",
-   "notFor": [],
+   "notFor": "⛔ YOU MUST BE ABLE TO LIGHT THE DESTINATION AND SEE IT — no line, no crossing, and a corner is a wall. ⚠️ IT IS A COMMITTED CROSSING: you arrive where you aimed, at speed, and you cannot stop partway or turn aside. ⛔ AND ARRIVING SOMEWHERE IS NOT ARRIVING SAFELY — the light shows you the point, not what is standing on it.",
    "tradition": "blazeborn",
    "functions": [
     "move",
     "travel"
    ],
    "challengeTypes": [
-    "tactical",
-    "exploration",
-    "stealth"
+    "CHASE",
+    "EXPLORE",
+    "TRAVEL"
    ],
    "tree": [
     {
@@ -2551,13 +2583,14 @@
    "_nameWas": "The Line of Light",
    "_idWas": "the_line_of_light",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['tactical', 'exploration', 'stealth'], and e2 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy."
   },
   {
    "id": "radiant_ground",
    "name": "Radiant Ground",
    "levelReq": 1,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -2571,16 +2604,16 @@
    "harmRung": "none",
    "narrationHints": "The wastes are glass and the sun is always up and she was home.",
    "description": "Draw sustenance from intense radiance — light is fuel for the blazeborn, not drain.",
-   "notFor": [],
+   "notFor": "⛔ IT NEEDS INTENSE LIGHT AND THERE IS NONE UNDERGROUND, AT NIGHT, OR IN CLOUD — the craft that makes a blazeborn tireless in the desert does nothing in a cellar. ⚠️ IT REDUCES NEED; IT DOES NOT REMOVE IT. You still eat, still sleep, still die of thirst — later than others, and you still do. ⛔ And it feeds ONLY YOU: a party sheltering in the same glare gets the heat and none of the sustenance.",
    "tradition": "blazeborn",
    "functions": [
     "resist",
     "sustain"
    ],
    "challengeTypes": [
-    "endurance",
-    "survival",
-    "hardship"
+    "SURVIVE",
+    "TRAVEL",
+    "EXPLORE"
    ],
    "tree": [
     {
@@ -2673,7 +2706,8 @@
    "_idWas": "the_radiant_ground",
    "_wardTypes": "⛔ SNG-512. Light is fuel, not damage, for a Blazeborn.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['endurance', 'survival', 'hardship'], and e1 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy."
   },
   {
    "schemaVersion": 1,
@@ -2748,7 +2782,17 @@
     "plus": 2,
     "marginFloorPer": 0.02,
     "area": 4,
-    "note": "T-IV — dice PLUS a special per §8"
+    "note": "T-IV — dice PLUS a special per §8",
+    "damageMix": [
+     {
+      "type": "truth",
+      "share": 0.7
+     },
+     {
+      "type": "radiance",
+      "share": 0.3
+     }
+    ]
    },
    "rankDeltas": [
     {
@@ -2781,7 +2825,8 @@
    "_nameWas": "The Revealing Burn",
    "_idWas": "the_revealing_burn",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ 'BURN' IS A METAPHOR IN THIS CRAFT AND THE TYPING MUST NOT FOLLOW THE WORD. 'Burn away everything FALSE in a place — disguise, illusion, concealment', and r2 'reaches what is false IN A PERSON — an assumed shape'. ⚠️ `truth` .7 is the craft; `radiance` .3 is the light it happens in. ⛔ NOTHING ABOUT IT IS HOT."
   },
   {
    "schemaVersion": 1,
@@ -2836,7 +2881,17 @@
     "plus": 4,
     "marginFloorPer": 0.02,
     "area": 5,
-    "note": "T-V capstone — dice plus a special"
+    "note": "T-V capstone — dice plus a special",
+    "damageMix": [
+     {
+      "type": "radiance",
+      "share": 0.6
+     },
+     {
+      "type": "heat",
+      "share": 0.4
+     }
+    ]
    },
    "rankDeltas": [
     {
@@ -2868,7 +2923,8 @@
    "_nameWas": "The Last Light",
    "_idWas": "the_last_light",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ THE CAPSTONE — 'the whole of your inner fire spent at once, a light so absolute it UNMAKES ANY DARKNESS IN REACH'. ⚠️ `radiance` .6 because the subject is light against dark, `heat` .4 because it is fire spent. ⛔ NO `truth` COMPONENT: it unmakes darkness, not falsehood — that is Revealing Burn's job and the two should not collapse."
   },
   {
    "schemaVersion": 1,
@@ -3389,7 +3445,7 @@
    ],
    "tradition": "blazeborn",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "sustain",
    "operativeAxis": [
     "duration",
@@ -3422,7 +3478,8 @@
    "_nameWas": "The Kept Fire",
    "_idWas": "the_kept_fire",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260829": "⚠️ ability rung `incapacitating` -> `none`. ⛔ NO RANK REACHES IT: this is a fire-TENDING craft — 'anyone can start a fire; KEEPING one is the trade', and it puts nobody down at any rank. ⚠️ Overstatement is cosmetic where understatement is harmful, but a GM reading `incapacitating` on a craft that cannot stop anyone is still being told something false."
   },
   {
    "id": "read_burn",
@@ -3510,7 +3567,7 @@
    ],
    "tradition": "blazeborn",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "reveal",
    "operativeAxis": [
     "precision",
@@ -3550,7 +3607,8 @@
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ LIGHT'S SENSE — what a fire will do next\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260829": "⚠️ ability rung `incapacitating` -> `none`. ⛔ NO RANK REACHES IT: this is a SEEING craft — 'half of fire-work is knowing what a fire is about to do', and it puts nobody down at any rank. ⚠️ Overstatement is cosmetic where understatement is harmful, but a GM reading `incapacitating` on a craft that cannot stop anyone is still being told something false."
   },
   {
    "id": "lightsense",

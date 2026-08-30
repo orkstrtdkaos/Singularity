@@ -108,6 +108,14 @@ const CLAIMS = [
   { file: "docs/PLAYERS_GUIDE.md", name: "player's guide · crafts (LOADED) · places · companions",
     re: /\*\*Last verified: [\d-]+ · v[\d.]+ · \d+ crafts · \d+ places · (\d+) people · \d+ companions\.\*\*/,
     to: (_m, people) => `**Last verified: ${today} · v${version} · ${counts.loaded} crafts · ${counts.places} places · ${people} people · ${counts.companions} companions.**` },
+
+  // ⛔ MY OWN GATE CAUGHT MY OWN HAND-KEPT STAMP. §29 requires `BALANCE.md` to carry the live version, and
+  // one `bump_version` later it did not — a stored copy of a derived value, in the document whose §5 is
+  // about exactly this class of mistake. ⚠️ THE DOC CARRIES NO CORPUS COUNTS, so the version is the whole
+  // claim; it is stamped here for the same reason the other five are.
+  { file: "docs/BALANCE.md", name: "balance · version",
+    re: /\*\*CCode · started [\d-]+ · v[\d.]+\*\*/,
+    to: () => `**CCode · started 2026-08-30 · v${version}**` },
 ];
 
 /* ── stamp, or report ───────────────────────────────────────────────────────────────────────── */

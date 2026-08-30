@@ -185,6 +185,8 @@
   }
  },
  "tierLadder": {
+  "_authoredKeepsPlus": "⛔ CCODE-329 / ERIK: \"I DO STILL WANT LEVEL TO HELP WITH DAMAGE, but I want to do it SMARTLY and NOT RECREATE THE SYSTEM.\" A rung's two halves are different kinds of thing and this splits them: `nMult` MULTIPLIES and stays exempt for authored dice — it is the 2d6->4d6 double-scaling bug the exemption exists to stop — while `plus` is ADDITIVE, cannot compound, and therefore always applies. That is level reaching an authored craft without rebuilding the old magnitude system. ⚠️ IT NARROWS RATHER THAN WIDENS: a flat bonus is worth proportionally more to a 1d6 craft than a 5d6 one, so the small-to-large spread compresses from 5.0x to 2.2x. Set false to restore the pre-2026-08-30 behaviour exactly — `how_it_works` §28 asserts that it does.",
+  "authoredKeepsPlus": true,
   "note": "SNG-263 §8, Erik's ruler. For MAGNITUDE shapes (guard/hobble/setup/construct/reposition/bolster) `mult` scales the operative dimension. For DICE shapes (damage/healing) the `dice` row is authoritative: the die COUNT climbs linearly and `plus` supplies the non-linearity, because Erik's T-III is 'not linear — it should exceed a straight doubling-again' and integer dice alone cannot express that. T-I 1d6 (mean 3.5) -> T-II 2d6 (7.0, a clean double) -> T-III 3d6+3 (13.5, well past linear 10.5 and close to a re-doubling of 14) -> T-IV/V flagged SPECIAL because at the capstone rung a craft should buy a KIND of ability, not a bigger number. capstoneStanding.capstoneTier is already 4, so the engine's existing rung agrees.",
   "1": {
    "mult": 1,

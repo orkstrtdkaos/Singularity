@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-08-30 · v1.9.276 · 87 files.**
+**Last measured: 2026-08-30 · v1.9.278 · 87 files.**
 
 ---
 
@@ -97,8 +97,8 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | harness | kind | assertions | purpose |
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3521 | — |
+| `tests/how_it_works` | ✅ GATE | 228 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
-| `tests/how_it_works` | ✅ GATE | 211 | CCODE-285 |
 | `tests/content_ci` | ✅ GATE | 184 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
 | `tests/wiring_audit` | ✅ GATE | 39 | BATCH-11 §23 |
@@ -153,6 +153,7 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | `scripts/prompt_grid` | 🔧 TOOL+SELFTEST | 1 | SNG-435 §B3: the ordering grid |
 | `scripts/run_warden` | 🔧 TOOL+SELFTEST | 1 | CCODE-258 |
 | `scripts/scale_fidelity` | 🔧 TOOL+SELFTEST | 1 | CCODE-251 |
+| `scripts/tradition_melee` | 🔧 TOOL+SELFTEST | 1 | CCODE-326 |
 | `scripts/apparatus_inject` | 🔧 TOOL | — | write the generated inventory into docs/APPARATUS |
 | `scripts/apply_promotion_SNG-396` | 🔧 TOOL | — | applies Aevi's two ratifications, and ONLY what they say |
 | `scripts/atlas_inject` | 🔧 TOOL | — | regenerate the §13 table inside docs/FIELD_REFERENCE |
@@ -177,7 +178,6 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | `scripts/repair_self_variants` | 🔧 TOOL | — | CCODE-04 data repair |
 | `scripts/silas_battle` | 🔧 TOOL | — | CCODE-259 |
 | `scripts/targeting_ruling_sim` | 🔧 TOOL | — | CCODE-308 |
-| `scripts/tradition_melee` | 🔧 TOOL | — | CCODE-326 |
 | `scripts/turn_flow` | 🔧 TOOL | — | CCODE-254 |
 | `scripts/vocab_sweep` | 🔧 TOOL | — | NEAR-DUPLICATE TERMS |
 | `scripts/world_projection` | 🔧 TOOL | — | project the authored 12D disposition space onto the plane |

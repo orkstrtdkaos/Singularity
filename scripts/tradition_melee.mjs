@@ -280,7 +280,16 @@ line("═");
 say();
 say("    input a unit carries in                       r vs win%");
 line("·");
+// ⛔ A CONSTANT IS NOT A WEAK DRIVER, AND REPORTING r ON ONE IS A LIE OF PRESENTATION. `targets` scored a
+// clean 0.00 and read as "measured, contributes nothing" — when all 25 crafts carry the same value, so
+// there was never anything to correlate. ⚠️ THE TWO CASES LOOK IDENTICAL IN A NUMBER AND MEAN OPPOSITE
+// THINGS: one says the dial does not matter, the other says the dial was never turned.
 for (const [label, f] of DRIVERS) {
+  const vals = table.map(r => Number(f(r)) || 0);
+  if (new Set(vals).size <= 1) {
+    say("    " + label.padEnd(45) + "    —  " + "".padEnd(20) + " ⬜ CONSTANT (" + vals[0] + ") — no variance to measure");
+    continue;
+  }
   const rr = r_of(f), mag = Math.abs(rr);
   const mark = mag > 0.7 ? "⛔ dominates" : mag > 0.4 ? "⚠️ real" : mag > 0.2 ? "·  slight" : "   ~none";
   say("    " + label.padEnd(45) + (rr >= 0 ? "+" : "") + rr.toFixed(2).padStart(5) + "  " + "█".repeat(Math.round(mag * 20)).padEnd(20) + " " + mark);

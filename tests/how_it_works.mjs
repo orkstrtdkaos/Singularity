@@ -1522,6 +1522,88 @@ console.log("\n── §28 · level reaches authored damage, the multiplier stil
     ev(at(mk({ n: 1, d: 6 }), 5, off).fields) === lo1, `${ev(at(mk({ n: 1, d: 6 }), 5, off).fields)} vs ${lo1}`);
 }
 
+/* ══════════ §29 — docs/BALANCE.md IS EXECUTED, NOT TRUSTED ══════════ */
+// ⛔ ERIK: "we need to build toward balance and use the dials." ⚠️ A DIAL LIST IS THE EASIEST DOCUMENT IN
+// THIS PROJECT TO GET WRONG, because it is a list of names that look like code and are not checked by
+// anything. A phantom dial reads exactly like a real one, and someone turns it and nothing happens.
+//
+// ⛔ SO BOTH HALVES ARE ASSERTED AGAINST THE CORPUS, AND THEY ASSERT OPPOSITE THINGS:
+//   · §2a says "content-tunable" — every path it names must RESOLVE in the loaded rules.
+//   · §2b says "code-only, not yet a dial" — every constant it names must be ABSENT from content.
+// ⚠️ THE SECOND IS THE ONE THAT ROTS. The moment I wire `perOfficer` to content, §2b becomes a lie that
+// tells Aevi she cannot turn something she can — and nothing but this would catch it.
+console.log("\n── §29 · the balance doc's dial list is checked against the corpus ──");
+{
+  const bal = rd("docs/BALANCE.md");
+  check("§29: docs/BALANCE.md exists and is substantial", bal.length > 6000, `${bal.length} chars`);
+  check("§29: it carries the live version",
+    bal.includes(rd("app.js").match(/APP_VERSION = "([\d.]+)"/)[1]));
+
+  // the three rule files the doc's §2a names as homes for dials
+  const bag = {
+    skill_battle_system: rj("content/packs/core/rules/skill_battle_system.json").engine,
+    craft_mechanics: rj("content/packs/core/rules/craft_mechanics.json"),
+    resolution: rj("content/packs/core/rules/resolution.json"),
+  };
+  const resolves = (path) => {
+    const parts = path.replace(/\.\*$/, "").split(".");
+    for (const root of Object.values(bag)) {
+      let cur = root, ok = true;
+      for (const k of parts) {
+        if (cur && typeof cur === "object" && k in cur) cur = cur[k];
+        else if (cur && typeof cur === "object") {
+          // a row like `tierLadder[n].dice.nMult` names a rung generically — accept any numeric rung
+          const rung = Object.keys(cur).find(x => /^\d+$/.test(x));
+          if (rung && cur[rung] && typeof cur[rung] === "object" && k in cur[rung]) cur = cur[rung][k];
+          else { ok = false; break; }
+        } else { ok = false; break; }
+      }
+      if (ok) return true;
+    }
+    return false;
+  };
+  // ⚠️ THE ROWS ARE READ OUT OF THE DOC, so adding a dial to the table adds it to the gate automatically.
+  const rowsIn = (heading) => {
+    const seg = bal.split(heading)[1]?.split("###")[0] || "";
+    return seg.split("\n").filter(l => l.startsWith("| `")).map(l => l.slice(1).trim());
+  };
+  // ⚠️ THE DIAL CELL ONLY, and a dial name may carry `*` (a whole block) or `/` (alternatives). Matching
+  // across the WHOLE ROW let a miss fall through to the next backtick — which is the FILE name — so the
+  // gate reported "`resolution` does not resolve" and read as a content bug when it was a parser one.
+  // ⚠️ THE DIAL CELL ONLY, AND ANY TEXT BETWEEN BACKTICKS. Matching a narrow character class across the
+  // WHOLE ROW let a miss fall through to the next backtick — which is the FILE name — so the gate reported
+  // "`resolution` does not resolve" and read as a content bug when it was a parser one. A dial name can
+  // carry `*` (a whole block) or `/` (alternatives), so the match is deliberately permissive and the
+  // NORMALISING is what narrows it.
+  const firstPath = (row) => {
+    const cell = String(row).split("|")[0] || "";
+    const m = cell.match(/`([^`]+)`/);
+    if (!m) return "";
+    let t = m[1];
+    t = t.split("[n]").join("");                       // `tierLadder[n].dice.nMult` names a rung generically
+    t = t.replace(new RegExp("/[A-Za-z]+", "g"), "");  // `intensity.conserve/standard/surge.mult`
+    while (t.endsWith("*") || t.endsWith(".")) t = t.slice(0, -1);
+    return /^[A-Za-z][A-Za-z0-9_.]*$/.test(t) ? t : "";
+  };
+
+  const tunable = rowsIn("### 2a").map(firstPath).filter(Boolean);
+  const unresolved = tunable.filter(p => !resolves(p));
+  check("§29: every dial §2a calls CONTENT-TUNABLE actually resolves in the rules",
+    unresolved.length === 0, unresolved.join(", ") || `${tunable.length} checked`);
+  // ⛔ NON-VACUITY: the list must not be empty, or the check above passes by finding nothing.
+  check("§29: …and it found dials to check", tunable.length >= 8, `${tunable.length}`);
+
+  // ⛔ THE HALF THAT ROTS. §2b's whole claim is that these are NOT reachable from content.
+  const codeOnly = rowsIn("### 2b").map(firstPath).filter(Boolean);
+  const rulesText = ["skill_battle_system", "craft_mechanics", "resolution"]
+    .map(f => rd(`content/packs/core/rules/${f}.json`)).join("");
+  const nowAuthored = codeOnly.filter(k => rulesText.includes(`"${k}"`));
+  check("§29: every constant §2b calls CODE-ONLY is still absent from content",
+    nowAuthored.length === 0,
+    nowAuthored.length ? `${nowAuthored.join(", ")} — now authored; move to §2a` : `${codeOnly.length} checked`);
+  check("§29: …and it found constants to check", codeOnly.length >= 3, `${codeOnly.length}`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -1274,7 +1274,7 @@
    "plainly": "A fight/defend action. ⛔ NAME THE MEMBER OF A GROUP WHOSE LOSS COSTS THEM MOST — and take a named advantage on acting against them, OR on protecting that person if they are yours. Rated 5, one group. r2 names the order — first, second, third; r3 reads a group you have only heard described. ⚠️ It tells you WHO, never how to get there.",
    "intensity": {
     "conserve": "one group, one name",
-    "surge": "read every group on the field; ⚠️ YOU WILL SEE WHO YOUR OWN SIDE CANNOT AFFORD TO LOSE, AND YOU WILL NOT BE ABLE TO UNSEE IT"
+    "surge": "read every group on the field at once; ⛔ YOU WILL KNOW THE ORDER FOR ALL OF THEM AND HAVE ONE ROUND TO USE IT"
    },
    "bounds": [
     {
@@ -1349,7 +1349,128 @@
      "cannot": "⛔ THE READING IS ONLY AS GOOD AS THE TELLING. ⚠️ And a deliberately false account produces a confident, specific, wrong answer."
     }
    ],
-   "_authored": "⛔ ERIK 2026-08-29: 'and WHO TO PROTECT AND WHO TO TARGET.' ⚠️ It is the coverage-cliff distinction from the group aggregation spec, made into a craft — and the veteran's fiction earns it rather than decorating it."
+   "_authored": "⛔ ERIK 2026-08-29: 'and WHO TO PROTECT AND WHO TO TARGET.' ⚠️ It is the coverage-cliff distinction from the group aggregation spec, made into a craft — and the veteran's fiction earns it rather than decorating it.",
+   "_surgeFix_20260829": "⛔ ERIK 2026-08-29: 'WHY WOULD YOU CARE ABOUT UNSEEING IT?' ⚠️ My surge was 'you will see who your own side cannot afford to lose, and you will not be able to unsee it' — I gave a veteran a CONSCIENCE where they would have a CALCULATION. ⛔ A Marcher who has been in the unit that lost its mender does not find the knowledge troubling; they find it USEFUL. The surge now buys REACH and is limited by TIME, which is what a surge should cost."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "marcher",
+   "nativeOrCombination": "native",
+   "axes": {
+    "violence_peace": -0.8
+   },
+   "id": "in_the_way",
+   "name": "In the Way",
+   "levelReq": 3,
+   "energyCost": 6,
+   "attribute": "physical",
+   "shape": "hobble",
+   "harmRung": "lethal",
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL",
+    "DEFEND"
+   ],
+   "operativeAxis": [
+    "targets",
+    "quality"
+   ],
+   "effectTags": [
+    "veteran",
+    "interpose",
+    "cold"
+   ],
+   "functions": [
+    "move",
+    "hinder",
+    "strike"
+   ],
+   "description": "⛔ PUT SOMETHING ELSE WHERE THE BLOW IS GOING. A shove at the right instant, a grip on a strap, a table kicked into the lane — the harm meant for you arrives somewhere else and you are still standing. ⚠️ A MARCHER LEARNS THIS THE SAME WAY THEY LEARN EVERYTHING: by watching it work. ⛔ IT IS THE EXACT INVERSE OF THE STILLHOLD'S `step_between`, AND BOTH TRADITIONS KNOW IT. One steps in front of someone; the other puts someone in front.",
+   "narrationHints": "The bolt takes the man he was arguing with a moment earlier. ⚠️ Nobody saw him move and he did not move much — half a step and a hand on a shoulder, at the right instant.",
+   "notFor": "⛔ IT NEEDS SOMETHING TO PUT THERE — a person, an animal, a heavy object, within reach and not braced against you. An empty lane offers nothing. ⚠️ AND IT ANSWERS ONE INCOMING THING, AIMED: a blow, a bolt, a thrown weapon. Not an area, not a working laid on the ground, not something that was never coming at you. ⛔ WHOEVER YOU PUT THERE TAKES IT IN FULL, and if they live they know exactly what you did.",
+   "plainly": "A fight/duel action. ⛔ REDIRECT ONE AIMED ATTACK MEANT FOR YOU INTO SOMETHING ELSE WITHIN REACH — a person, an animal, a heavy object. Rated 5, once per exchange, about four rounds. r2 redirects onto a chosen target rather than the nearest; r3 redirects an attack meant for an ALLY as well as one meant for you. ⚠️ Whoever ends up there takes it in full.",
+   "intensity": {
+    "conserve": "a partial deflection — they take some of it and so do you",
+    "surge": "⛔ REDIRECT EVERY AIMED THING THIS ROUND; whatever is nearest takes all of it"
+   },
+   "bounds": [
+    {
+     "text": "⛔ YOU NEED SOMETHING WITHIN REACH TO PUT THERE. An empty lane offers nothing",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ AIMED ATTACKS ONLY — not areas, not ground-workings, not what was never coming at you",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ WHOEVER TAKES IT, TAKES IT IN FULL — including your own people, including someone who trusted you",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT IS SEEN BY ANYONE WATCHING FOR IT, and the Marchers are watching for it",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "targets": 1,
+    "crit": {
+     "success": "It lands on the one person the other side could least afford to lose, and you did not have to choose.",
+     "failure": "You commit to the pull and the attack was never aimed at you."
+    },
+    "note": "hobble/redirect. ⛔ ERIK 2026-08-29: 'a veteran can also PULL SOMEONE OR SOMETHING ELSE INTO HARM'S PATH TO TAKE A HIT THAT IS MEANT FOR THEM.' ⚠️ THE EXACT INVERSE OF `step_between` (stillhold), which is the violence/peace axis working as designed: the peace pole interposes ITSELF, the violence pole interposes SOMEBODY ELSE, and they are the same insight about where a blow is going. ⛔ IT IS DELIBERATELY NOT PUNISHED — no reputation cost, no standing hit, no narrative debt. It is a cold craft in a warrior culture and the cost is that PEOPLE SEE YOU DO IT."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "In the Way",
+     "functions": [
+      "move",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [],
+     "grants": "⛔ REDIRECT ONE AIMED ATTACK MEANT FOR YOU INTO WHATEVER IS NEAREST — a body, a beast, a laden cart. ⚠️ You do not choose what; you choose the instant.",
+     "cannot": "Once per exchange. ⛔ Something must be within reach. ⚠️ Whatever takes it, takes all of it."
+    },
+    {
+     "rank": 2,
+     "name": "That One",
+     "functions": [
+      "move",
+      "hinder",
+      "strike"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "quality",
+      "targets"
+     ],
+     "grants": "⛔ YOU CHOOSE WHO — not the nearest, the one you want it to hit. ⚠️ Combined with knowing who a group cannot afford to lose, this is a way to kill someone with their own side's arrow.",
+     "cannot": "⚠️ They must be within reach and not braced. ⛔ And everyone sees where it went."
+    },
+    {
+     "rank": 3,
+     "name": "Not Him Either",
+     "functions": [
+      "move",
+      "hinder",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "targets",
+      "range"
+     ],
+     "grants": "⛔ REDIRECT WHAT WAS AIMED AT AN ALLY, NOT ONLY AT YOU — a Marcher at this rank decides who in the room takes the incoming, and it need not be either of the two people it concerned.",
+     "cannot": "⛔ STILL ONE AIMED THING AT A TIME, still needs a body within reach. ⚠️ And an ally you save this way watches you put it into someone else."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29. ⚠️ AND HE CORRECTED THE INSTINCT THAT WOULD HAVE RUINED IT: asked why a veteran would care about 'unseeing' who is vulnerable, i.e. STOP GIVING THESE PEOPLE A CONSCIENCE THEY DO NOT HAVE. This craft carries no penalty, no standing loss and no narrative debt — per the standing rule that a cost is ENERGY. What it costs is that people watch you do it."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",

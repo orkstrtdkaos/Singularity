@@ -43,7 +43,7 @@
      "name": "Marcher's Calm",
      "grants": "Fight many, fight cornered, fight wounded and keep the discipline; disarm and disable without killing when you choose; make your reputation do half the work.",
      "cannot": "The calm can slip; every use of the Edge writes on you; a foe past reason isn't disabled by skill alone.",
-     "harmRung": "lethal",
+     "harmRung": "damaging",
      "functions": [
       "strike"
      ],
@@ -58,7 +58,7 @@
      "name": "Ender",
      "grants": "Meet even the great and the many; end a threat at the scale of a warband; the Edge at full mastery, where a single figure turns a field. The Redline's power in miniature.",
      "cannot": "The wielder drifts violence-hot — the Ender who forgets peace becomes the thing the Marches are fleeing from; force at this scale foreclosing on everything it touches.",
-     "harmRung": "lethal",
+     "harmRung": "damaging",
      "functions": [
       "strike"
      ],
@@ -78,7 +78,7 @@
     "DUEL"
    ],
    "tradition": "marcher",
-   "harmRung": "lethal",
+   "harmRung": "damaging",
    "nativeOrCombination": "native",
    "shape": "damage",
    "operativeAxis": [
@@ -139,7 +139,8 @@
    "_idWas": "the_edge",
    "_powerSystemWas": "reach_violence_peace",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_typed_20260829": "⛔ `physical` — PHYSICS family. trained decisiveness with a blade — the tradition's signature and the most ordinary harm in the game. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately."
+   "_typed_20260829": "⛔ `physical` — PHYSICS family. trained decisiveness with a blade — the tradition's signature and the most ordinary harm in the game. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately.",
+   "_rungRuling_20260829": "⛔ ERIK 2026-08-29: 'EDGE IS DAMAGING.' ⚠️ It was `lethal` at ability level with r2 and r3 also lethal. ⛔ AND THE RANKS CAME DOWN WITH IT, because the craft's own r2 says 'DISARM AND DISABLE WITHOUT KILLING' — `edge` is the DISCIPLINE, not the killing blow, and the tradition already has `disarm` for mercy and `last_form` for ending. ⚠️ THE PAIR IS THE POINT: the everyday craft is damaging and the capstone is lethal, which is the right way round and was inverted."
   },
   {
    "id": "stillcraft",
@@ -948,7 +949,7 @@
      "functions": [
       "strike"
      ],
-     "harmRung": "damaging",
+     "harmRung": "lethal",
      "gains": "broaden",
      "_functionsWas": [
       "strike",
@@ -961,7 +962,7 @@
    "powerSystem": "metaphysical",
    "gated": "learned",
    "tradition": "marcher",
-   "harmRung": "damaging",
+   "harmRung": "lethal",
    "nativeOrCombination": "native",
    "schoolAffinity": "mar_plain",
    "_schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
@@ -1013,7 +1014,8 @@
    "_nameWas": "The Last Form",
    "_powerSystemWas": "reach_violence_peace",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_typed_20260829": "⛔ `physical` — PHYSICS family. the duel capstone at 5d6 — one stroke, read completely, delivered exactly. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately."
+   "_typed_20260829": "⛔ `physical` — PHYSICS family. the duel capstone at 5d6 — one stroke, read completely, delivered exactly. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately.",
+   "_rungRuling_20260829": "⛔ ERIK 2026-08-29: 'LAST FORM IS LETHAL.' ⚠️ It was `damaging` — the duel capstone, 5d6, hitting harder than anything else in the tradition and glossed as less harmful than `edge`. ⛔ A stroke that ends a formal fight in one exchange ends it."
   },
   {
    "id": "soldiers_hand",

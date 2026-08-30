@@ -938,3 +938,23 @@ lattice is one answer, Kenosis's emptying is another.**
 ⚠️ **The measurement from the entry above still comes first:** how many existing crafts are already
 spirit-touched and mislabelled. ⛔ **If the answer is "most of them", this is not new content — it is the
 name of something already there.**
+
+## ⚠️ NAMING SWEEP — 76 pre-existing "The" names, and 6 duplicate rank names
+
+**Erik has corrected the leading-article habit twice** (`The Given Name` → `Uttered Name`;
+`The Quiet That Stays` → `Void Space`). ⛔ **Both times I self-checked CRAFT names only and reported clean —
+while FOURTEEN RANK NAMES I had authored were still carrying it.** ✅ **Mine are fixed. The self-check was
+measuring the wrong field, which is why the habit survived being caught twice.**
+
+⬜ **NOT ACTED ON, per Erik's scope rule (*"don't act on anything we've already audited"*):**
+
+- ⛔ **76 craft and rank names across the corpus still open with "The"** — pre-existing, and a sweep would
+  touch audited traditions.
+- ⚠️ **6 DUPLICATE RANK NAMES**, which is the more interesting find: `Word That Holds` · `Harbor` ·
+  `Nothing Hidden` · `Full Restoration` · `Break the Line` · `Standing Account`. ⛔ **`Harbor` is both a
+  craft and a rank of another craft**, and **`Break the Line` is a rank name AND a craft I authored** —
+  which is a real collision rather than a style question.
+
+✅ **WORTH A GATE RATHER THAN A SWEEP:** a check that no two ranks share a name, and none shares a name with
+a craft. ⚠️ **A duplicate rank name is a thing a GM or a player can actually be confused by**, unlike a
+leading article.

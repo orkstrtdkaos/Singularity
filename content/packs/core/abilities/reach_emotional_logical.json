@@ -2163,7 +2163,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Actual State",
+     "name": "Actual State",
      "grants": "Feel the true emotional state of a person or room — not what is displayed, what is actually present underneath it.",
      "cannot": "⛔ IT READS WHAT IS FELT, NOT WHAT IS TRUE. A person sincerely feeling a wrong thing reads as sincere — this cannot catch a liar who believes himself, and Veilwrights train for exactly that.",
      "functions": [
@@ -2175,7 +2175,7 @@
     },
     {
      "rank": 2,
-     "name": "The Feeling Trail",
+     "name": "Feeling Trail",
      "grants": "Track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched.",
      "cannot": "⛔ FRESH TRAILS GIVE YOU THE PERSON AND THE FEELING. Past a day, or once the trail leaves the place it was laid, you get a DIRECTION AND NOTHING ELSE — and two feelings crossing the same ground read as one.",
      "functions": [
@@ -2191,7 +2191,7 @@
     },
     {
      "rank": 3,
-     "name": "The Emotional History",
+     "name": "Emotional History",
      "grants": "⛔ READ A PLACE'S EMOTIONAL HISTORY, IN ORDER, WITH NOBODY LEFT TO ASK. What happened in this room, what was felt here and in what sequence, across years — who was afraid first, when it turned to resignation, the night everything changed. ⚠️ NO WITNESS, NO SURVIVOR, NO RECORD AND NO BODY IS REQUIRED. The room kept it.",
      "cannot": "⛔ FEELINGS IN SEQUENCE, NEVER EVENTS. You get fear, then grief, then a long flat nothing — you do not get who, what, or why, and two things felt the same way are indistinguishable. ⚠️ A history nobody felt strongly leaves nothing: the quiet crimes are quiet here too. ⛔ AND THE OLDER IT IS THE COARSER IT READS — a century gives you a shape, not a sequence.",
      "functions": [
@@ -2263,7 +2263,8 @@
    "_challengeTypesNormalised_20260824": "⛔ I INTRODUCED NON-CANONICAL TYPES DURING THE DEATH WALKTHROUGH AND THE LINT CAUGHT ME. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND. ⚠️ I authored INVESTIGATION, ENDURANCE, INTELLECTUAL, HARDSHIP and COMBAT — plausible English, not the vocabulary. Seven of the eight crafts carrying them were mine, from this session. Normalised ['SOCIAL', 'INVESTIGATION', 'INTELLECTUAL'] -> ['SOCIAL', 'INVESTIGATE', 'PUZZLE'].",
    "_absorbedFeelingRoad_20260824": "⛔ ERIK 2026-08-24 RULED THE FOLD: `feeling_road` (L2) DUPLICATED THIS CRAFT'S r2 — 'The Feeling Trail' already tracked feelings across ground, at L1, as the tradition's first gift, and Feeling Road's r1 was strictly weaker. ⚠️ I FLAGGED THIS OVERLAP WHEN I AUDITED THIS CRAFT DAYS AGO AND MOVED ON WITHOUT RESOLVING IT. ⛔ `travel` FOLDED INTO r3, which now reads a history AND walks it to its source; `range: 50` carried across. ⚠️ ERIK EXPLICITLY EXCLUDED Feeling Road's 'THE STRONGEST FEELING, NOT THE ONE YOU WANTED' — it is not carried over. The surge line 'arriving at the source of a great feeling means ARRIVING AT ITS SOURCE' is kept as r3's ceiling. ⚠️ ERIK 2026-08-24: 'arriving at the source of a great feeling means arriving at its source' IS MEANINGLESS — a tautology that SOUNDS like a limit and gives a GM nothing to rule on. ⛔ I inherited it from Feeling Road's surge line and KEPT IT BECAUSE IT SOUNDED LIKE A CEILING. Replaced with what it was reaching for: the thing making the feeling IS STILL MAKING IT when you get there, and the craft chooses neither your timing nor your approach.",
    "_r3IsABoostNow_20260824": "⛔ ERIK 2026-08-24: 'the r3 isn't a boost — YOU CAN ALREADY WALK A TRAIL. It should give you some benefit.' ⚠️ HE IS RIGHT: r2 tracks across ground, so folding `travel` in gave r3 nothing a rank below did not already do. ⛔ r3 NOW GIVES LEVERAGE: reading what a person or a place has carried for years tells you WHAT WOULD MOVE THEM, entering as a named `contestMod` the way `true_account`'s reckoning does. ⚠️ AND ITS CEILING KEEPS IT OUT OF COMBAT — the edge is only ever for MOVING someone, never for fighting them, which keeps Feeling-Sense a social craft and stops it becoming a damage setup like `soul_stare`. ⛔ `travel` dropped from the function list: it was the fold from `feeling_road` and r2 already covers following a trail.",
-   "_r3IsTimeNotLeverage_20260824": "⛔ ERIK 2026-08-24, TWICE: first 'the r3 isn't a boost — you can already walk a trail', then 'BUT TRUE ACCOUNT GIVES THAT EDGE. This needs to do its own thing. Step back and look again.' ⚠️ MY SECOND ATTEMPT GAVE IT `true_account`'s NAMED CONTEST EDGE VERBATIM — the THIRD craft I have duplicated onto an existing one this session (pathos r1 onto under_song, made_elegy r2 blurred, this). ⛔ STEPPING BACK: THIS CRAFT OWNS TIME. r1 reads NOW, r2 reads a trail OVER TIME, so r3 is YEARS — a place's emotional history read in sequence with no witness, no survivor, no record and no body. ⚠️ NOTHING ELSE IN THE GAME DOES THAT: `ask_the_dead` needs someone to ask, `true_account` reads a thing's WORTH, `under_song` reads what is beneath NOW. ⛔ AND ITS CEILING IS ITS OWN LIMIT MADE SHARPER — feelings in sequence, never events: you get fear, then grief, then a long flat nothing, and never who or why. `travel` and `empower` both dropped; r2 already follows a trail and the edge was not ours."
+   "_r3IsTimeNotLeverage_20260824": "⛔ ERIK 2026-08-24, TWICE: first 'the r3 isn't a boost — you can already walk a trail', then 'BUT TRUE ACCOUNT GIVES THAT EDGE. This needs to do its own thing. Step back and look again.' ⚠️ MY SECOND ATTEMPT GAVE IT `true_account`'s NAMED CONTEST EDGE VERBATIM — the THIRD craft I have duplicated onto an existing one this session (pathos r1 onto under_song, made_elegy r2 blurred, this). ⛔ STEPPING BACK: THIS CRAFT OWNS TIME. r1 reads NOW, r2 reads a trail OVER TIME, so r3 is YEARS — a place's emotional history read in sequence with no witness, no survivor, no record and no body. ⚠️ NOTHING ELSE IN THE GAME DOES THAT: `ask_the_dead` needs someone to ask, `true_account` reads a thing's WORTH, `under_song` reads what is beneath NOW. ⛔ AND ITS CEILING IS ITS OWN LIMIT MADE SHARPER — feelings in sequence, never events: you get fear, then grief, then a long flat nothing, and never who or why. `travel` and `empower` both dropped; r2 already follows a trail and the edge was not ours.",
+   "_theHabit_20260830": "⚠️ RANK NAMES STRIPPED OF THE LEADING ARTICLE. ⛔ ERIK HAS CORRECTED MY 'The' HABIT TWICE, and both times I checked CRAFT NAMES ONLY — fourteen RANK names were still carrying it. ✅ The self-check was measuring the wrong field, which is why the habit survived being caught. ⚠️ `reaping_sickle` r3 also collided with `the_known_name` r2 — both were 'The Whole Field'."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

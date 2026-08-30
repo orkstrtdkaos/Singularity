@@ -270,7 +270,7 @@ working papers; **this is the answer.**
 | 08-30 | ✅ **CCODE-322 — `loadBearing()`: sole coverage turned into a PERSON** | Aevi: *“`who_falls_first` asks for sole”* | gated, and **it is not “the weakest” or “the healer”** — a lone fighter among scholars is load-bearing, which is the craft's own failure line | ✅ the panel names them **one row above the guard pick that acts on it** |
 | 08-30 | ⛔ **and one thing that CANNOT be built yet** | `who_falls_first` says *“name the member of a GROUP”* — meaning the enemy's | measured: **`battleRound` has no enemy group at all**, the opponent is one sheet | ⚠️ so it reads YOUR line, which is the reachable half and pairs with `step_between`. **The enemy-group half needs a model that does not exist** |
 
-**Last verified: 2026-08-28 · v1.9.273 · 400 crafts.**
+**Last verified: 2026-08-28 · v1.9.273 · 401 crafts.**
 
 ---
 

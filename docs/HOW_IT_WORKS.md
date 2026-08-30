@@ -155,7 +155,7 @@ working papers; **this is the answer.**
 | 08-29 | ✅ **dispatched on the AUTHORED BLOCK, never a craft name** | `step_between` has no single `function` — it is `["move","shield"]` | gated: `app.js` must not contain the string `step_between` | ⛔ **a name-based branch would have worked for exactly one craft and silently ignored the next one Aevi writes** |
 | 08-29 | ⚠️ **and the decay, which nothing had ever run** | `tickProtections` existed since CCODE-260 with no caller | `§5`: a rank-2 guard lapses after its authored rounds | ⛔ **without it a 3-round guard stands forever** — exactly the wall Erik's action ruling relies on it not being |
 
-**Last verified: 2026-08-28 · v1.9.262 · 385 crafts.**
+**Last verified: 2026-08-28 · v1.9.262 · 389 crafts.**
 
 ---
 

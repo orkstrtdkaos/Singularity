@@ -230,6 +230,10 @@
       }
      },
      "description": "⛔ A COMPOSITE BLOW — the craft deals several damage types at once, and a ward answers only the parts it answers. Read by `damageMixOf` in engine/damagetypes.js, which normalises the shares to 1. ⚠️ DECLARED 2026-08-29: the READER shipped with CCODE-281 and the SCHEMA never learned the field, so the first craft to author one (`ki_wield`) was rejected by the closed schema. A reader with no schema entry — the four-doors failure at the AUTHORED door. ⛔ USE THIS INSTEAD OF `damageType` when the fiction names more than one kind of harm: a ki bolt is `force` and `physical`, and armour answers only the second."
+    },
+    "ongoingHarm": {
+     "type": "string",
+     "description": "⛔ THE HARM CONTINUES AFTER THE BLOW — a damage type that keeps applying until treated or ended. Read by `capabilities.js` as a TIER MARKER (alongside `imposes`, `antisoakImposed`, `pierce`, `penetration`). ⚠️ DECLARED 2026-08-29: the reader has existed since the tier-marker work and the schema was never told, so the first craft to author one (`the_slow_cup`) was rejected. ⛔ THIRD INSTANCE OF THE AUTHORED-DOOR FAILURE after `mechanic.damageMix` and `tree[].interceptDamage` — see FIELD_REFERENCE 'A SEVENTH WAY UNREAD LIES'."
     }
    }
   },

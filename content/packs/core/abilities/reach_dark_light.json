@@ -4312,6 +4312,489 @@
    "_authored": "⛔ ERIK 2026-08-29: 'how do these people HUNT… FIGHT?' ⚠️ MEASURED: 15 crafts, `conceal` on eleven, and NOTHING FOR WAITING — while the culture says the kill is unremarkable and the sitting is the craft, and that an Umbral war is attrition rather than a line. ⛔ IT IS DELIBERATELY NOT A CONCEALMENT CRAFT: the tradition has six of those. This is ENDURANCE AND POSITION, which is what an ambush actually costs.",
    "_renamed_20260829": "⛔ ERIK 2026-08-29: 'change Set To Wait to PREMEDITATE.' ⚠️ Better because it names the ACT OF MIND rather than the posture — the craft was never about sitting still, it was about having CHOSEN the place and been there first. ⛔ And it carries the legal weight the craft has earned: this is the assassin's opening, and premeditation is what separates a killing from a fight.",
    "_idRenamed_20260829": "⚠️ id was `the_long_patience` after Erik renamed the craft to `Set To Wait`. ⛔ I renamed the DISPLAY NAME and left the ID, which is how a craft ends up unfindable by its own name — caught during the school gap assessment when the id did not resolve."
+  },
+  {
+   "powerSystem": "veil",
+   "tradition": "umbral",
+   "nativeOrCombination": "native",
+   "axes": {
+    "dark_light": -0.8
+   },
+   "id": "the_given_name",
+   "name": "The Given Name",
+   "levelReq": 4,
+   "energyCost": 10,
+   "attribute": "mental",
+   "shape": "hobble",
+   "harmRung": "incapacitating",
+   "challengeTypes": [
+    "SOCIAL",
+    "DUEL",
+    "INVESTIGATE"
+   ],
+   "operativeAxis": [
+    "conditions",
+    "duration"
+   ],
+   "effectTags": [
+    "unlit",
+    "veil",
+    "truename"
+   ],
+   "functions": [
+    "bind",
+    "command",
+    "reveal"
+   ],
+   "description": "⛔ A NAME YOU DID NOT LEARN. The Unlit do not discover true names — THEY ARE GIVEN THEM, from the other side of the Veil, by something that knows what a thing is called because it was there when the calling started. ⚠️ Speak the given name and the thing it names must stop, turn, and attend. ⛔ THIS IS THE UNLIT'S CENTRAL CRAFT AND THE REASON THEY ARE FEARED: they are the only people in the world who can ask the other side a question and be answered.",
+   "narrationHints": "She says two syllables that are not in any language and the man's face empties. ⚠️ He has never heard them before. He knows immediately that they are his.",
+   "notFor": "⛔ YOU DO NOT CHOOSE WHAT YOU ARE GIVEN — the name arrives, or it does not, and asking for a specific one is not how the exchange works. ⚠️ ONE NAME, ONE HOLDER: a given name works on the thing it names and nothing else, and once spoken aloud in front of others it begins to spread. ⛔ AND IT IS RECEIVED, WHICH MEANS SOMETHING GAVE IT TO YOU. The Unlit consider that a fair trade. Nobody else does.",
+   "plainly": "A social/duel action. ⛔ SPEAK A TRUE NAME RECEIVED FROM BEYOND THE VEIL: the named thing must stop, turn and attend to you, and cannot act against you while held. Rated 6 of 10, one target, about three rounds. r2 holds without your attention; r3 the name compels rather than merely holds. ⚠️ You must HAVE the name, and names are given, not found.",
+   "intensity": {
+    "conserve": "a fragment of the name — they falter rather than stop",
+    "surge": "the whole name, aloud, in front of everyone; ⛔ EVERYONE WHO HEARS IT NOW KNOWS IT TOO"
+   },
+   "bounds": [
+    {
+     "text": "⛔ NAMES ARE GIVEN, NOT LEARNED. You cannot research one, buy one, or work one out",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ ONE NAME NAMES ONE THING. There is no general application",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ SPOKEN ALOUD IT SPREADS — a name used in front of witnesses is a name others can now use",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ SOMETHING GAVE IT TO YOU, AND THE GIVING IS NOT FREE",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 3,
+    "targets": 1,
+    "damageType": "truth",
+    "crit": {
+     "success": "The name lands and something on the other side notices that it landed.",
+     "failure": "You speak it wrong, and what answers is not the one you named."
+    },
+    "note": "hobble. ⛔ THE UNLIT'S CENTRAL CRAFT — Erik 2026-08-29: 'the Unlit deal in TRUE NAMES THEY RECEIVE FROM THE OTHER SIDE OF THE VEIL.' ⚠️ `powerSystem: veil` — the FIRST umbral craft not on the precursor substrate, which is the mechanical expression of the Unlit's Veil-leaning that had none. ⛔ `truth` type, INTRINSIC family: a true name is not force, it is accuracy, and armour has never answered accuracy."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Given Name",
+     "functions": [
+      "bind",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating",
+     "gainAxes": [],
+     "grants": "⛔ SPEAK IT AND THEY STOP. The named thing must turn and attend, and cannot act against you while the name holds. ⚠️ You will not know, at first, whether they recognise it or merely obey it.",
+     "cannot": "One name, one holder, three rounds. ⛔ And you must already have been given it."
+    },
+    {
+     "rank": 2,
+     "name": "Held Without Speaking",
+     "functions": [
+      "bind",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating",
+     "gainAxes": [
+      "duration",
+      "quality"
+     ],
+     "grants": "⛔ THE NAME HOLDS WITHOUT YOUR ATTENTION — say it once and go. ⚠️ And you learn something true about them in the saying: a name carries what it names.",
+     "cannot": "⚠️ It still ends. ⛔ And what you learn, you did not ask for and cannot unlearn."
+    },
+    {
+     "rank": 3,
+     "name": "Called and Answered",
+     "functions": [
+      "bind",
+      "command",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating",
+     "gainAxes": [
+      "conditions",
+      "quality"
+     ],
+     "grants": "⛔ THE NAME NO LONGER MERELY HOLDS — IT COMMANDS. Called by what they truly are, they do the thing, and they know while doing it that they are obeying. ⚠️ There is no version of this they experience as their own idea.",
+     "cannot": "⛔ IT COMPELS ACTS, NEVER BELIEF — they will do it and hate you. ⚠️ And a name used this way is spent differently: the other side notices when its gifts are used at the top of their range."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29. ⚠️ Grepped first: `truename_order` exists but is a LATTICE craft meaning 'set in order' — the Veil-received true name was unclaimed. ⛔ THIS IS THE FIRST `powerSystem: veil` CRAFT IN THE TRADITION and it gives the Unlit's Veil-leaning a mechanic instead of a sentence."
+  },
+  {
+   "powerSystem": "veil",
+   "tradition": "umbral",
+   "nativeOrCombination": "native",
+   "axes": {
+    "dark_light": -0.8
+   },
+   "id": "the_swallowed_word",
+   "name": "The Swallowed Word",
+   "levelReq": 3,
+   "energyCost": 7,
+   "attribute": "mental",
+   "shape": "hobble",
+   "harmRung": "incapacitating",
+   "challengeTypes": [
+    "SOCIAL",
+    "STEALTH",
+    "DUEL"
+   ],
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "effectTags": [
+    "unlit",
+    "silence",
+    "void"
+   ],
+   "functions": [
+    "bind",
+    "hinder",
+    "conceal"
+   ],
+   "description": "⛔ TAKE THE SOUND OUT OF A PLACE. Not muffled — ABSENT, the way the void was before anything was said in it. ⚠️ A shout arrives as nothing. A warning does not happen. An oath sworn inside it was never sworn, because nobody heard it and the words did not exist for long enough to count.",
+   "narrationHints": "The alarm bell swings, visibly, and the yard stays quiet. ⚠️ Two men are screaming at each other a pace apart and neither has any idea what the other is saying.",
+   "notFor": "⛔ IT TAKES SOUND, NOT MEANING — signed words, written notes, a hand on a shoulder all cross it freely, and a practised pair will get their message through. ⚠️ AND IT DOES NOT SORT: you are inside it too, and you will not hear the thing coming either. ⛔ Nor does it stop a working that needs no voice.",
+   "plainly": "A social/stealth action. ⛔ REMOVE SOUND FROM AN AREA — nobody in it can be heard by anyone, including you. Rated 5, a room's worth, about four rounds. r2 takes one PERSON'S voice specifically and leaves everyone else audible; r3 holds a place silent without you present. ⚠️ Writing, signing and touch all still work.",
+   "intensity": {
+    "conserve": "one voice, briefly",
+    "surge": "take the sound from everything you can see; ⛔ NOBODY WILL BE ABLE TO WARN ANYONE, INCLUDING YOUR OWN"
+   },
+   "bounds": [
+    {
+     "text": "⛔ SOUND ONLY — writing, signs and touch cross it",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT DOES NOT SORT. You are inside it and deaf in it like everyone else",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ A place held silent is CONSPICUOUS — silence where there should be noise is its own alarm",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "scope": 2,
+    "damageType": "abstraction",
+    "crit": {
+     "success": "The silence outlasts the working by a moment, and the first sound back is louder than it should be.",
+     "failure": "You take the sound from yourself alone and stand deaf in a room that can hear perfectly."
+    },
+    "note": "hobble. ⛔ SILENCE AS A WEAPON — Erik 2026-08-29: 'silence is another option.' ⚠️ `abstraction`, INTRINSIC: what it removes is not air-pressure but the CATEGORY of hearing-and-being-heard. ⛔ AND IT IS VOID-CRAFT RATHER THAN SHADOW-CRAFT: it restores an absence rather than working a relative dark, which is the Unlit's whole position applied to sound."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Swallowed Word",
+     "functions": [
+      "hinder",
+      "conceal"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating",
+     "gainAxes": [],
+     "grants": "⛔ SOUND LEAVES AN AREA. Shouts, bells, warnings, orders — none of them arrive. ⚠️ Including yours.",
+     "cannot": "⚠️ A room's worth, four rounds. ⛔ Writing and signing cross it, and the silence itself is noticeable."
+    },
+    {
+     "rank": 2,
+     "name": "One Voice Taken",
+     "functions": [
+      "hinder",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating",
+     "gainAxes": [
+      "targets",
+      "quality"
+     ],
+     "grants": "⛔ TAKE ONE PERSON'S VOICE AND LEAVE THE ROOM AUDIBLE — they speak and nothing comes out, in front of everyone, while everyone else is heard normally. ⚠️ Far crueller than silencing the room, and far more useful.",
+     "cannot": "⛔ They can still write, and someone will hand them a pen."
+    },
+    {
+     "rank": 3,
+     "name": "The Quiet That Stays",
+     "functions": [
+      "hinder",
+      "bind",
+      "conceal"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ],
+     "grants": "⛔ A PLACE HELD SILENT WITHOUT YOU IN IT — set it and leave; the quiet keeps. ⚠️ The Unlit use this on rooms where things are decided.",
+     "cannot": "⚠️ It cannot be aimed at a person's mind, only their air. ⛔ And a permanently silent room gets a reputation."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29: 'silence is another option.' ⚠️ Void-craft: it RESTORES an absence rather than working a relative dark."
+  },
+  {
+   "powerSystem": "precursor",
+   "tradition": "umbral",
+   "nativeOrCombination": "native",
+   "axes": {
+    "dark_light": -0.6
+   },
+   "id": "the_slow_cup",
+   "name": "The Slow Cup",
+   "levelReq": 2,
+   "energyCost": 5,
+   "attribute": "practical",
+   "shape": "damage",
+   "harmRung": "lethal",
+   "challengeTypes": [
+    "STEALTH",
+    "SOCIAL",
+    "SURVIVE"
+   ],
+   "operativeAxis": [
+    "damage",
+    "duration"
+   ],
+   "effectTags": [
+    "poison",
+    "unlit",
+    "corrosive"
+   ],
+   "functions": [
+    "strike",
+    "hinder",
+    "make"
+   ],
+   "description": "⛔ THE DEEP GROWS THINGS THAT SHOULD NOT BE EATEN, and the Unlit have been cataloguing them for a very long time. Prepare a working poison — in a cup, on an edge, in the air of a closed room. ⚠️ IT IS NOT FAST. That is the point: a poison that kills in the room is a murder, and a poison that kills three days later is a natural death in another town.",
+   "narrationHints": "He finishes the cup, compliments it, and leaves. ⚠️ Nothing happens that night, or the next. ⛔ On the third morning he cannot hold a pen and does not connect the two things.",
+   "notFor": "⛔ IT MUST GET INSIDE THEM — swallowed, breathed, or into a wound. A poison on the outside of a person is a stain. ⚠️ AND IT IS SLOW BY DESIGN: nothing here drops a man mid-sentence, and if you need that, this is the wrong craft. ⛔ It can be tasted by someone careful, answered by a decay-ward or a good physician, and it does not distinguish between the target and whoever else drinks.",
+   "plainly": "A stealth/social action. ⛔ PREPARE A POISON — 2d6 CORROSIVE on delivery, then it keeps working: it comes back each day until treated. Rated for one cup, one blade, or one closed room. r2 makes it tasteless and slows the onset to days; r3 makes it a WASTING that a physician cannot simply purge. ⚠️ It must be ingested, inhaled or enter a wound, and it does not sort who drinks.",
+   "intensity": {
+    "conserve": "a thin dose — they will be ill and will recover",
+    "surge": "the whole preparation; ⛔ IT WILL BE OBVIOUS THAT SOMEONE DID THIS TO THEM"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT MUST GET INSIDE — swallowed, breathed, or into an open wound",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ SLOW BY DESIGN. Nothing here kills in the room, and speed cannot be bought",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT DOES NOT SORT. Whoever drinks, drinks",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ A DECAY-WARD OR A GOOD PHYSICIAN ANSWERS IT — this is a craft for people who are not expecting it",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "duration": 6,
+    "targets": 1,
+    "damageType": "corrosive",
+    "ongoingHarm": "corrosive",
+    "crit": {
+     "success": "It is mistaken for an illness that is going around, and someone else is blamed for the water.",
+     "failure": "They taste it, say nothing, and finish the cup while watching you."
+    },
+    "note": "damage/ongoing. ⛔ ERIK 2026-08-29: 'also you'd find POISONS here… maybe a CORROSIVE.' ⚠️ `corrosive`, ELEMENTAL family — and it gives the type a second carrier: it was in `shaped_body`'s ward list and almost nothing dealt it. ⛔ THE SLOWNESS IS THE MECHANIC, NOT A LIMITATION: a poison that kills in the room is a murder with witnesses; this is what a people who cannot walk in daylight use instead."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Slow Cup",
+     "functions": [
+      "make",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [],
+     "grants": "⛔ PREPARE A WORKING POISON — 2d6 CORROSIVE when it lands, and it returns each day until treated. ⚠️ In a cup, on an edge, or in the air of a closed room.",
+     "cannot": "It must get inside them. ⚠️ A careful drinker tastes it. ⛔ And it takes real time to prepare."
+    },
+    {
+     "rank": 2,
+     "name": "No Taste At All",
+     "functions": [
+      "make",
+      "strike",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "quality",
+      "duration"
+     ],
+     "grants": "⛔ TASTELESS, AND THE ONSET MOVES TO DAYS — they will be somewhere else, doing something else, when it starts. ⚠️ Nobody connects the cup to the collapse.",
+     "cannot": "⚠️ Days of delay is days of them being elsewhere, including out of your reach. ⛔ A physician still helps."
+    },
+    {
+     "rank": 3,
+     "name": "The Wasting",
+     "functions": [
+      "make",
+      "strike",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "damage",
+      "duration"
+     ],
+     "grants": "⛔ IT STOPS BEING A POISON AND BECOMES A CONDITION — it does not purge, it must be TREATED over weeks, and it takes something with it. ⚠️ People will say he was never well after that winter.",
+     "cannot": "⛔ It is unmistakably deliberate at this rank — nobody thinks a wasting like this is bad luck. ⚠️ And it is slow enough that the target has time to work out who did it."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29: 'also you'd find POISONS here… maybe a corrosive.' ⚠️ It fits the Unlit precisely: a people who cannot operate in daylight need harm that ARRIVES LATER AND ELSEWHERE."
+  },
+  {
+   "powerSystem": "precursor",
+   "tradition": "umbral",
+   "nativeOrCombination": "native",
+   "axes": {
+    "dark_light": -0.7
+   },
+   "id": "the_standing_deep",
+   "name": "The Standing Deep",
+   "levelReq": 3,
+   "energyCost": 7,
+   "attribute": "physical",
+   "shape": "guard",
+   "harmRung": "none",
+   "challengeTypes": [
+    "DEFEND",
+    "FIGHT",
+    "SURVIVE"
+   ],
+   "operativeAxis": [
+    "quality",
+    "targets"
+   ],
+   "effectTags": [
+    "fathomless",
+    "bodyguard",
+    "depth"
+   ],
+   "functions": [
+    "shield",
+    "ward",
+    "resist"
+   ],
+   "description": "⛔ BE THE THING THAT DOES NOT MOVE. A Fathomless takes the stillness of deep water and stands in it — and the pressure that would push anyone else does not reach the one behind them. ⚠️ THIS IS WHY THEY ARE HIRED. The killing is what the school is known for; the STANDING is what it is paid for, and a Fathomless bodyguard is the most expensive protection in the world because the same training does both.",
+   "narrationHints": "The crowd surges and she is simply where she was. ⚠️ People rebound off her without quite understanding what they hit. ⛔ Her charge has not noticed the crowd at all.",
+   "notFor": "⛔ ONE PERSON, AND YOU MUST BE ABLE TO REACH THEM — this is standing in front of someone, not a working laid on them from across a room. ⚠️ IT DOES NOT MAKE YOU HARDER TO KILL: you take everything you catch, in full. ⛔ And you cannot advance while doing it. A Fathomless holding this is a wall, and a wall does not chase.",
+   "plainly": "A defend/fight action. ⛔ NOTHING MOVES YOU — you cannot be pushed, dragged, swept, grabbed or repositioned, and neither can the one you are covering. Rated 5, one charge, about six rounds. r2 covers two and answers grapples outright; r3 you cannot be moved by ANY means including workings and the ground giving way. ⚠️ You still take every blow you catch.",
+   "intensity": {
+    "conserve": "a moment of it — one push refused",
+    "surge": "root entirely; ⛔ YOU WILL NOT BE ABLE TO MOVE EITHER, AND NEITHER WILL THEY"
+   },
+   "bounds": [
+    {
+     "text": "⛔ ONE CHARGE, WITHIN REACH — you stand in front of them or it does nothing",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT REFUSES MOVEMENT, NOT HARM. Everything you catch, you take in full",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ YOU CANNOT ADVANCE WHILE HOLDING IT — a wall does not chase",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "targets": 1,
+    "soak": 3,
+    "soakRank": 2,
+    "wardTypes": [
+     "force",
+     "physical"
+    ],
+    "crit": {
+     "success": "Something large hits you and stops, and everyone watching revises what they were about to try.",
+     "failure": "You root at the wrong moment and your charge walks out from behind you."
+    },
+    "note": "guard. ⛔ ERIK 2026-08-29: 'Fathomless also make great BODYGUARDS.' ⚠️ THIS IS THE ANSWER TO THE GAP ASSESSMENT'S §3.2 — the school was 'a killer and a healer with nothing between', and had no reason to go down that was not assassination. ⛔ DEPTH AS INTERPOSITION: the stillness of deep water, standing. `wardTypes: [force, physical]` — it answers being MOVED, which is what a crowd, a charge and a grapple all are."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Standing Deep",
+     "functions": [
+      "shield",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ YOU CANNOT BE PUSHED, DRAGGED, SWEPT OR REPOSITIONED, AND NEITHER CAN THE ONE BEHIND YOU. ⚠️ Crowds part around you without meaning to.",
+     "cannot": "One charge, within reach, six rounds. ⛔ You take everything you catch, in full."
+    },
+    {
+     "rank": 2,
+     "name": "Two Behind",
+     "functions": [
+      "shield",
+      "ward",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "quality"
+     ],
+     "grants": "⛔ COVER TWO, AND A GRAPPLE ON YOU SIMPLY FAILS — hands find no purchase, as though you were deeper in the water than they are.",
+     "cannot": "⚠️ Two is the limit and they must stay behind you. ⛔ Still no advancing."
+    },
+    {
+     "rank": 3,
+     "name": "Nothing Moves You",
+     "functions": [
+      "shield",
+      "ward",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "duration"
+     ],
+     "grants": "⛔ NOT BY ANY MEANS — not force, not a working, not the floor giving way beneath you. ⚠️ A Fathomless at this rank has been known to remain standing in a collapsing room with their charge untouched.",
+     "cannot": "⛔ AND YOU STILL TAKE IT ALL. Immovable is not invulnerable, and a Fathomless who holds a collapse usually does not walk away from it."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29: 'Fathomless also make great bodyguards.' ⚠️ Closes the assessment's §3.2 — the school had no reason to go down that was not assassination. ⛔ AND IT EXPLAINS THE HIRING: the killing is what they are KNOWN for; the standing is what they are PAID for, and the same training does both."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -56,7 +56,7 @@ measuring across every craft that needs a pick.**
 
 ---
 
-## ⛔ THE SEVENTEEN RULES THAT MAKE IT WORK
+## ⛔ THE EIGHTEEN RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
 
@@ -402,6 +402,28 @@ defect.
 
 ✅ **AND A RULE I HAVE BROKEN TWICE BELONGS IN SOMETHING THAT RUNS.** `craft_lint` checks 10 and 11 found
 the naming habit in **23 traditions in seconds**; three corrections and a paragraph had found none.
+
+### 18. ⚠️ NOT EVERY NAMED GROUP IS A SCHOOL — CHECK IT AGAINST `withMastery`
+
+**Added 2026-08-30. Erik: *"Seraphic is not done if it has empty schools… BUT CONTINUITY MIGHT JUST BE A
+THING THEY NEED TO DO, NOT A SCHOOL."***
+
+⛔ **I FOUND `THE VESSEL-KEEPERS` IN `distribution.modes` WITH 0 OF 14 CRAFTS AND CALLED IT AN EMPTY
+SCHOOL.** ⚠️ **It is a JOB INSIDE the tradition** — *"continuity work; the long-lived, and how they stay
+that way"* — **like a quartermaster.** Someone maintains the long-lived; that is a ROLE, not a branch of
+practice.
+
+✅ **THE TEST, AND IT IS CHEAP: does the tradition's own `withMastery` mention it?** Seraphic's names
+**absolution, judgment, and a lasting ward** — three things, all Mercy or Judgment. ⛔ **A school whose work
+does not appear in the tradition's own mastery statement is not a school.**
+
+⚠️ **THE CONSEQUENCE MATTERS: an empty SCHOOL demands a ladder of crafts. An unstaffed ROLE needs at most
+ONE craft, belonging to no school** — the same shape as a first gift. **I was about to author a branch to
+fill a hole that was not one.**
+
+⛔ **AND THE INVERSE IS THE COMMON CASE:** `distribution.modes` and `tail` are usually already authored and
+usually ARE the schools (rule 15). **This is the exception, so check rather than assume in either
+direction.**
 
 ---
 

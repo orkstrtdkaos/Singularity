@@ -1187,7 +1187,9 @@
      "success": "It goes at the joint and takes the neighbouring section with it.",
      "failure": "You pull the wrong man and the line closes tighter than it was."
     },
-    "note": "hobble. ⛔ ERIK 2026-08-29: 'the higher level soldier skills should also BREAK AND DISRUPT UNITS AND FORMATIONS — they've BEEN THERE and know what it takes to hold and to break.' ⚠️ IT IS `held_line` INVERTED, and the fiction is the veteran's: the knowledge is the same knowledge, used from the other side. ⛔ AND IT IS THE PLAYER-FACING EDGE OF THE GROUP MODEL — a formation's benefit is exactly what `standingContributions` aggregates, and this removes it without killing anyone."
+    "note": "hobble. ⛔ ERIK 2026-08-29: 'the higher level soldier skills should also BREAK AND DISRUPT UNITS AND FORMATIONS — they've BEEN THERE and know what it takes to hold and to break.' ⚠️ IT IS `held_line` INVERTED, and the fiction is the veteran's: the knowledge is the same knowledge, used from the other side. ⛔ AND IT IS THE PLAYER-FACING EDGE OF THE GROUP MODEL — a formation's benefit is exactly what `standingContributions` aggregates, and this removes it without killing anyone.",
+    "_requiresSelf_PROPOSED": true,
+    "_requiresSelfNote": "⛔ `requiresSelf` — PROPOSED, underscore-prefixed: CCode builds the reader and the agreement gate, and I am not declaring a field in the schema unilaterally again. ⚠️ THE CRAFT ALREADY SAYS THIS IN PROSE. Measured 2026-08-30: SIX CRAFTS STATE THE SAME RULE IN FOUR DIFFERENT PHRASINGS — 'without a self', 'has no self', 'anything without a mind', 'anything that does not rely on the man beside it' — and `the_narrowed` states the other half as `feeling: immune` IN DATA. ⛔ NOTHING CHECKS THE TWO AGREE AND NOTHING EVER WILL WHILE ONE SIDE IS PROSE. ✅ With `hasSelf` on the bestiary classes, a gate can assert it: every craft requiring a self must be answered by every creature that has none. ⚠️ ERIK'S TEST, WHICH THIS PASSES: does it let content say ONCE what it currently says many times in prose?"
    },
    "tree": [
     {
@@ -1303,7 +1305,9 @@
      "success": "You name someone the enemy commander had not realised was load-bearing either.",
      "failure": "You name the decoy, who is standing exactly where a mender would stand."
     },
-    "note": "setup/reveal. ⛔ ERIK 2026-08-29: 'AND WHO TO PROTECT AND WHO TO TARGET.' ⚠️ THIS IS THE GROUP CAPABILITY MODEL MADE PLAYER-FACING: `standingContributions` returns `{families, lost}` and the spec's central distinction is COVERAGE versus DEPTH — losing the only mender is a CLIFF, losing one of six spears is a slope. ⛔ THIS CRAFT READS THE CLIFF. And the veteran's fiction earns it exactly: a Marcher knows which loss is a cliff because they have been in the unit that took one."
+    "note": "setup/reveal. ⛔ ERIK 2026-08-29: 'AND WHO TO PROTECT AND WHO TO TARGET.' ⚠️ THIS IS THE GROUP CAPABILITY MODEL MADE PLAYER-FACING: `standingContributions` returns `{families, lost}` and the spec's central distinction is COVERAGE versus DEPTH — losing the only mender is a CLIFF, losing one of six spears is a slope. ⛔ THIS CRAFT READS THE CLIFF. And the veteran's fiction earns it exactly: a Marcher knows which loss is a cliff because they have been in the unit that took one.",
+    "_requiresSelf_PROPOSED": true,
+    "_requiresSelfNote": "⛔ `requiresSelf` — PROPOSED, underscore-prefixed: CCode builds the reader and the agreement gate, and I am not declaring a field in the schema unilaterally again. ⚠️ THE CRAFT ALREADY SAYS THIS IN PROSE. Measured 2026-08-30: SIX CRAFTS STATE THE SAME RULE IN FOUR DIFFERENT PHRASINGS — 'without a self', 'has no self', 'anything without a mind', 'anything that does not rely on the man beside it' — and `the_narrowed` states the other half as `feeling: immune` IN DATA. ⛔ NOTHING CHECKS THE TWO AGREE AND NOTHING EVER WILL WHILE ONE SIDE IS PROSE. ✅ With `hasSelf` on the bestiary classes, a gate can assert it: every craft requiring a self must be answered by every creature that has none. ⚠️ ERIK'S TEST, WHICH THIS PASSES: does it let content say ONCE what it currently says many times in prose?"
    },
    "tree": [
     {
@@ -1839,7 +1843,9 @@
      "success": "An entire section decides at once, without conferring, that this is somebody else's fight.",
      "failure": "One of them has heard the story where you lost, and says so out loud."
     },
-    "note": "hobble. ⛔ ERIK 2026-08-29: 'higher level skills should add some INTRINSIC damage types.' ⚠️ `feeling`, INTRINSIC FAMILY — the first non-physics harm the tradition has ever dealt, and no armour answers it. ⛔ AND IT BRAIDS THE TRADITION'S OWN CRAFTS: `told_of` moves standing, and THIS turns standing into damage — a Marcher who has been telling it true for years arrives already dangerous. ⚠️ Its blind spot is deliberately the same as `break_the_line`'s: neither touches a thing without a self, which is a real reason to send the raised against Marchers."
+    "note": "hobble. ⛔ ERIK 2026-08-29: 'higher level skills should add some INTRINSIC damage types.' ⚠️ `feeling`, INTRINSIC FAMILY — the first non-physics harm the tradition has ever dealt, and no armour answers it. ⛔ AND IT BRAIDS THE TRADITION'S OWN CRAFTS: `told_of` moves standing, and THIS turns standing into damage — a Marcher who has been telling it true for years arrives already dangerous. ⚠️ Its blind spot is deliberately the same as `break_the_line`'s: neither touches a thing without a self, which is a real reason to send the raised against Marchers.",
+    "_requiresSelf_PROPOSED": true,
+    "_requiresSelfNote": "⛔ `requiresSelf` — PROPOSED, underscore-prefixed: CCode builds the reader and the agreement gate, and I am not declaring a field in the schema unilaterally again. ⚠️ THE CRAFT ALREADY SAYS THIS IN PROSE. Measured 2026-08-30: SIX CRAFTS STATE THE SAME RULE IN FOUR DIFFERENT PHRASINGS — 'without a self', 'has no self', 'anything without a mind', 'anything that does not rely on the man beside it' — and `the_narrowed` states the other half as `feeling: immune` IN DATA. ⛔ NOTHING CHECKS THE TWO AGREE AND NOTHING EVER WILL WHILE ONE SIDE IS PROSE. ✅ With `hasSelf` on the bestiary classes, a gate can assert it: every craft requiring a self must be answered by every creature that has none. ⚠️ ERIK'S TEST, WHICH THIS PASSES: does it let content say ONCE what it currently says many times in prose?"
    },
    "tree": [
     {

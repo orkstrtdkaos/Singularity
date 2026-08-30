@@ -4148,7 +4148,9 @@
      "success": "You read something about how someone is that they have told nobody, and they know you read it.",
      "failure": "You track the room perfectly and miss the one thing in it that is not breathing."
     },
-    "note": "guard. ⛔ NOT A SOCIAL READ — AN AWARENESS. It answers the question a stealth tradition actually faces: you are in the dark, so is everyone else, and who moves first? ⚠️ THE HARD BOUND IS THE INTERESTING HALF: it reads BODIES, so the Ashwarden's raised crew and the enginewright's mechanisms are exactly what an Umbral cannot see coming. ⛔ REBUILT 2026-08-29 — Erik: 'they don't seem amazing to me.' The first version was a recognition-read with no mechanical teeth."
+    "note": "guard. ⛔ NOT A SOCIAL READ — AN AWARENESS. It answers the question a stealth tradition actually faces: you are in the dark, so is everyone else, and who moves first? ⚠️ THE HARD BOUND IS THE INTERESTING HALF: it reads BODIES, so the Ashwarden's raised crew and the enginewright's mechanisms are exactly what an Umbral cannot see coming. ⛔ REBUILT 2026-08-29 — Erik: 'they don't seem amazing to me.' The first version was a recognition-read with no mechanical teeth.",
+    "_requiresSelf_PROPOSED": true,
+    "_requiresSelfNote": "⛔ `requiresSelf` — PROPOSED, underscore-prefixed: CCode builds the reader and the agreement gate, and I am not declaring a field in the schema unilaterally again. ⚠️ THE CRAFT ALREADY SAYS THIS IN PROSE. Measured 2026-08-30: SIX CRAFTS STATE THE SAME RULE IN FOUR DIFFERENT PHRASINGS — 'without a self', 'has no self', 'anything without a mind', 'anything that does not rely on the man beside it' — and `the_narrowed` states the other half as `feeling: immune` IN DATA. ⛔ NOTHING CHECKS THE TWO AGREE AND NOTHING EVER WILL WHILE ONE SIDE IS PROSE. ✅ With `hasSelf` on the bestiary classes, a gate can assert it: every craft requiring a self must be answered by every creature that has none. ⚠️ ERIK'S TEST, WHICH THIS PASSES: does it let content say ONCE what it currently says many times in prose?"
    },
    "tree": [
     {

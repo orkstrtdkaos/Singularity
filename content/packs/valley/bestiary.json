@@ -13,26 +13,38 @@
   "manifested_creature": {
    "concept": "A creature bled out of native fiction by the Manifestation Storm — a thing from a domain that manifested wrong, 'wrong for here,' flagged by how badly it fits the place it's in. Not evil; misplaced, and dangerous the way a wild animal in a kitchen is dangerous.",
    "readsFromArc": "arc_manifestation_storm",
-   "morallyClean": "It was dreamed into being by the substrate, not born. Ending it returns borrowed fiction; there is no one to mourn."
+   "morallyClean": "It was dreamed into being by the substrate, not born. Ending it returns borrowed fiction; there is no one to mourn.",
+   "hasSelf": true
   },
   "feral_construct": {
    "concept": "A mechanism whose maker is gone and whose directive rots — a pre-Transition device or Enginewright construct still running an order it no longer understands, turned dangerous by a purpose with no one to serve.",
    "readsFromArc": "arc_what_wakes_beneath",
-   "morallyClean": "It is a broken tool, not a mind. Stopping it is repair by other means; the only tragedy is the maker who left it, and they are long gone."
+   "morallyClean": "It is a broken tool, not a mind. Stopping it is repair by other means; the only tragedy is the maker who left it, and they are long gone.",
+   "hasSelf": false
   },
   "substrate_warped_beast": {
    "concept": "A real animal the stirring substrate touched — a wolf, a river-thing, a bird-flock — warped past its own nature into something that hunts wrong and cannot be calmed. The saddest of the three, but past saving: the animal it was is already gone.",
    "readsFromArc": "arc_what_wakes_beneath",
-   "morallyClean": "The creature it was is already lost to the warp. A clean end is the last mercy its original nature can be given — closer to putting down than to killing."
+   "morallyClean": "The creature it was is already lost to the warp. A clean end is the last mercy its original nature can be given — closer to putting down than to killing.",
+   "hasSelf": true
   },
   "made_weapon": {
    "concept": "A person who has unmade themselves into a weapon — an assassin bound to a contract they can no longer refuse, a cultist hollowed by the cult-of-purity of their own tradition, a warden turned by the thing they warded. Clean to kill NOT because they were never a person, but because the person is already gone: what's left is the function. The design law holds by a hair — there is no story left to end, only a hand that will not stop.",
-   "designNote": "The one class where the adversary wears a face. It stays clean ONLY when the person is genuinely foreclosed — a made instrument, not a soul mid-choice. If it would be a tragedy, it's an NPC, not this. Use sparingly; the horror is that a person CAN become this."
+   "designNote": "The one class where the adversary wears a face. It stays clean ONLY when the person is genuinely foreclosed — a made instrument, not a soul mid-choice. If it would be a tragedy, it's an NPC, not this. Use sparingly; the horror is that a person CAN become this.",
+   "hasSelf": false
   },
   "great_manifestation": {
-   "concept": "The largest things the Storm bled through or the substrate raised — dragon-scale manifestations of a whole domain's logic given hunger and wing. Not an animal grown big: a piece of the world's grammar walking, the size of a hill, that resolved wrong and will not resolve back. A dragon is a domain that learned to fly and forgot everything but appetite."
+   "concept": "The largest things the Storm bled through or the substrate raised — dragon-scale manifestations of a whole domain's logic given hunger and wing. Not an animal grown big: a piece of the world's grammar walking, the size of a hill, that resolved wrong and will not resolve back. A dragon is a domain that learned to fly and forgot everything but appetite.",
+   "hasSelf": true
   },
-  "narrowed_dead": "⛔ A RAISING THAT WENT THE OTHER WAY. SPEC §48 gives two end states: STABLE (Afterlings, full personality) and NARROWING (unminded purpose). ⚠️ AN AFTERLING BELONGS IN NPCs — it is a person and killing it is a tragedy, which the design laws exclude from here. THE NARROWED DO NOT: what is left is an errand wearing a body, and that is a hazard. ✅ This is the class that lets the undeath model be MET rather than merely specified."
+  "narrowed_dead": {
+   "concept": "⛔ A RAISING THAT WENT THE OTHER WAY. SPEC §48 gives two end states: STABLE (Afterlings, full personality) and NARROWING (unminded purpose). ⚠️ AN AFTERLING BELONGS IN NPCs — it is a person and killing it is a tragedy, which the design laws exclude from here. THE NARROWED DO NOT: what is left is an errand wearing a body, and that is a hazard.",
+   "readsFromArc": "arc_what_wakes_beneath · §48 undeath",
+   "morallyClean": "✅ CLEAN. There is no person left to wrong — which is the whole difference between this class and an Afterling, and the reason one is a creature and the other is an NPC.",
+   "hasSelf": false,
+   "_shapeFix_20260830": "⚠️ I AUTHORED THIS CLASS AS A BARE STRING while the other five are objects with `concept` / `readsFromArc` / `morallyClean`. ⛔ ANYTHING READING `classes[x].concept` GOT `undefined` FOR THE NEWEST CLASS — and it is the one class whose concept a rule would most want to read. CCode found it: 'exactly the shape that makes a property unreadable later, so fix it BEFORE anything reads classes rather than after.' ✅ The original string is preserved verbatim as `concept`."
+  },
+  "_hasSelf_20260830": "⛔ `hasSelf` — ONE PROPERTY, NOT A TAXONOMY. CCode measured 2026-08-30 that a creature-type system predicting resistances would COMPLICATE: affinities do not cluster by class ('the_ashen_wyrm RESISTS light, the_bright_devourer ABSORBS it — SAME CLASS, opposite relationships'), so a class default would be wrong more often than right and every exception would need an override. ✅ THIS IS THE OTHER CHANGE: seven crafts already say 'nothing without a self can be frightened' IN FOUR DIFFERENT PHRASINGS, and `the_narrowed` says the other half as `feeling: immune` in data. NOTHING CHECKS THE TWO AGREE AND NOTHING EVER WILL WHILE ONE SIDE IS PROSE. ⚠️ THE TEST ERIK SET, AND IT IS THE RIGHT ONE: does it let content say ONCE what it currently says many times in prose? ⛔ If it only lets us predict a number, it is a layer. ✅ `hasSelf: false` — narrowed_dead, feral_construct, made_weapon. A thing driven by an errand or a mechanism has nobody home to frighten. ✅ `hasSelf: true` — manifested_creature, substrate_warped_beast, great_manifestation: manifested things WANT, and a warped beast is still a beast."
  },
  "roster": [
   {

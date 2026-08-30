@@ -575,7 +575,7 @@
    "id": "appetite_strike",
    "name": "Appetite Strike",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
@@ -589,15 +589,15 @@
    "harmRung": "incapacitating",
    "narrationHints": "She didn't hit the person. She hit what the person was protecting.",
    "description": "Strike at a person's hunger — not the body, but what they've been keeping safe by not admitting it.",
-   "notFor": [],
+   "notFor": "⛔ IT NEEDS THEM TO HAVE SOMETHING THEY ARE KEEPING SAFE BY NOT ADMITTING IT — a person with no hidden want, or one who has already said it out loud, is armoured against this by honesty. ⚠️ AND IT HARMS THE WANT, NOT THE BODY: it will not open a door, break a bone, or stop someone who has decided to die doing this. ⛔ Nothing without appetite is touched — a mechanism, a raised body, a thing driven by an errand rather than a hunger.",
    "tradition": "abyssal",
    "functions": [
     "strike"
    ],
    "challengeTypes": [
-    "combat",
-    "social",
-    "psychological"
+    "FIGHT",
+    "SOCIAL",
+    "DUEL"
    ],
    "tree": [
     {
@@ -713,13 +713,14 @@
    "_nameWas": "The Appetite Strike",
    "_idWas": "the_appetite_strike",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['combat', 'social', 'psychological'], energy e2 below band — all three on the same six crafts. ⛔ SIXTH TRADITION with this exact batch."
   },
   {
    "id": "consumed_wound",
    "name": "Consumed Wound",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
@@ -733,7 +734,7 @@
    "harmRung": "none",
    "narrationHints": "The price is paid. So is the wound.",
    "description": "Offer a wound or pain to the deep — it will be taken. What the abyss eats doesn't come back, but neither does the hurt.",
-   "notFor": [],
+   "notFor": "⛔ WHAT THE ABYSS EATS DOES NOT COME BACK — the hurt goes and so does whatever the hurt was attached to. A grief given up takes the memory that made it. ⚠️ AND IT MUST BE OFFERED, NOT TAKEN: you cannot use this on someone who has not agreed, and agreement given under pressure is the Maw's habit, not the Choir's. ⛔ It eats WOUNDS AND WEIGHT, not disease, not poison, and not a working that is still running.",
    "tradition": "abyssal",
    "functions": [
     "bargain",
@@ -742,9 +743,9 @@
     "restore"
    ],
    "challengeTypes": [
-    "medical",
-    "magical",
-    "hardship"
+    "SURVIVE",
+    "DEFEND",
+    "SOCIAL"
    ],
    "tree": [
     {
@@ -856,13 +857,14 @@
    ],
    "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⚠️ 'Offer a wound or pain to the deep — it will be taken.' An exchange with a price.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['medical', 'magical', 'hardship'], energy e2 below band — all three on the same six crafts. ⛔ SIXTH TRADITION with this exact batch."
   },
   {
    "id": "dread_mantle",
    "name": "Dread Mantle",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
@@ -876,7 +878,7 @@
    "harmRung": "none",
    "narrationHints": "What she'd seen was still on her. Things that hadn't seen it backed away.",
    "description": "Carry what you've been through as armor — the weight of where you've been deters what would prey on the ordinary.",
-   "notFor": [],
+   "notFor": "⛔ IT DETERS WHAT PREYS ON THE VULNERABLE AND NOTHING ELSE — a professional, a soldier under orders, or anything that was coming for you specifically is unaffected. ⚠️ AND IT IS TRUE OR IT IS NOTHING: the weight has to be real, and a Choir-member who has been nowhere carries nothing. ⛔ It also cannot be put down in company where you would rather seem harmless.",
    "tradition": "abyssal",
    "functions": [
     "hinder",
@@ -884,9 +886,9 @@
     "ward"
    ],
    "challengeTypes": [
-    "combat",
-    "social",
-    "defense"
+    "DEFEND",
+    "SOCIAL",
+    "SURVIVE"
    ],
    "tree": [
     {
@@ -998,13 +1000,14 @@
    "_idWas": "the_dread_mantle",
    "_wardTypes": "⛔ SNG-512. ⛔ What you have been through as armour. It deters WANT and FEELING; it stops nothing with an edge.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['combat', 'social', 'defense'], energy e1 below band — all three on the same six crafts. ⛔ SIXTH TRADITION with this exact batch."
   },
   {
    "id": "called_form",
    "name": "Called Form",
    "levelReq": 3,
-   "energyCost": 2,
+   "energyCost": 5,
    "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
@@ -1018,7 +1021,7 @@
    "harmRung": "none",
    "narrationHints": "She reached down and pulled something up. It stood there, not quite a thing.",
    "description": "Call something from the deep — the fear beneath the anger, the hunger beneath the pride — and give it form.",
-   "notFor": [],
+   "notFor": "⛔ IT GIVES FORM TO SOMETHING THAT WAS ALREADY THERE — the fear under the anger, the hunger under the pride. It cannot call what a person does not have. ⚠️ AND THE FORM IS NOT YOURS: it wants what it was made of, and it will pursue that rather than your instructions. ⛔ Once called it is in the room with everyone, including you.",
    "tradition": "abyssal",
    "functions": [
     "command",
@@ -1026,9 +1029,9 @@
     "transform"
    ],
    "challengeTypes": [
-    "magical",
-    "social",
-    "tactical"
+    "FIGHT",
+    "SOCIAL",
+    "INVESTIGATE"
    ],
    "tree": [
     {
@@ -1144,13 +1147,14 @@
    "_nameWas": "The Called Form",
    "_idWas": "the_called_form",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['magical', 'social', 'tactical'], energy e2 below band — all three on the same six crafts. ⛔ SIXTH TRADITION with this exact batch."
   },
   {
    "id": "descent_path",
    "name": "Descent Path",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
@@ -1165,16 +1169,16 @@
    "harmRung": "none",
    "narrationHints": "The way down is always there. You just have to be willing to look for it.",
    "description": "Find or make the passage to the below — the literal underground, the hidden layer, the place others don't know to reach.",
-   "notFor": [],
+   "notFor": "⛔ THERE MUST BE A BELOW — solid rock, open water and a building with no undercroft offer nothing, and the craft will tell you so rather than inventing one. ⚠️ IT FINDS THE WAY DOWN, NOT THE WAY BACK: many Abyssal deaths are people who took a passage this found and could not retrace it. ⛔ And what uses a passage is not always what made it.",
    "tradition": "abyssal",
    "functions": [
     "open",
     "travel"
    ],
    "challengeTypes": [
-    "exploration",
-    "stealth",
-    "navigation"
+    "EXPLORE",
+    "STEALTH",
+    "TRAVEL"
    ],
    "tree": [
     {
@@ -1293,13 +1297,14 @@
    "_nameWas": "The Descent Path",
    "_idWas": "the_descent_path",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['exploration', 'stealth', 'navigation'], energy e1 below band — all three on the same six crafts. ⛔ SIXTH TRADITION with this exact batch."
   },
   {
    "id": "choir_sustains",
    "name": "Choir Sustains",
    "levelReq": 1,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "precursor",
    "attribute": "social",
    "axes": {
@@ -1313,16 +1318,16 @@
    "harmRung": "none",
    "narrationHints": "She was running out. Then she wasn't. Something below was still going.",
    "description": "Sustain through communion with the choir — when you begin to fail, the deep holds what the above has exhausted.",
-   "notFor": [],
+   "notFor": "⛔ IT SUSTAINS; IT DOES NOT MEND. You keep going on nothing — and everything you were going to feel is still waiting when it stops. ⚠️ IT IS COMMUNION, WHICH MEANS SOMETHING IS ON THE OTHER END OF IT and it knows you called. ⛔ It cannot carry someone else, and it does nothing for a wound that needs closing rather than enduring.",
    "tradition": "abyssal",
    "functions": [
     "empower",
     "sustain"
    ],
    "challengeTypes": [
-    "endurance",
-    "hardship",
-    "survival"
+    "SURVIVE",
+    "TRAVEL",
+    "DEFEND"
    ],
    "tree": [
     {
@@ -1416,7 +1421,8 @@
    "_nameWas": "The Choir Sustains",
    "_idWas": "the_choir_sustains",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['endurance', 'hardship', 'survival'], energy e1 below band — all three on the same six crafts. ⛔ SIXTH TRADITION with this exact batch."
   },
   {
    "id": "judged_strike",
@@ -2559,7 +2565,8 @@
    ],
    "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⚠️ finds what a person cannot give up, then trades on it\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_offBandDeliberate_20260829": "⛔ e10 AT L3 IS ABOVE THE 4–8 BAND AND THAT IS DELIBERATE — documented rather than corrected. ⚠️ IT IS THE MAW'S CENTRAL CRAFT AND IT IS COMPULSION: \"they are not persuaded and they are not willing. THEY ARE LEVERED, and they will do it, and THEY WILL REMEMBER WHO MADE THEM.\" ⛔ A craft that takes a person's will should cost more than the band, and pricing it on-band would make the tradition's darkest act its cheapest. ⚠️ DO NOT \"FIX\" TO e6."
   },
   {
    "schemaVersion": 1,
@@ -3100,7 +3107,7 @@
    ],
    "tradition": "abyssal",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "lethal",
    "shape": "strike",
    "operativeAxis": [
     "magnitude",
@@ -3146,7 +3153,8 @@
    "_nameWas": "The Offered Mouth",
    "_idWas": "the_offered_mouth",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260829": "⛔ ability rung -> `lethal`: r2 and r3 reach lethal — you show a hunger a target and the hunger eats; a craft whose whole subject is being eaten is not merely incapacitating."
   },
   {
    "id": "measured_sentence",
@@ -3941,7 +3949,7 @@
    ],
    "tradition": "abyssal",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "ward",
    "operativeAxis": [
     "magnitude",
@@ -3982,7 +3990,8 @@
    "_idWas": "the_offered_lesser",
    "_wardTypes": "⛔ SNG-512. ⛔ Everything down there wants something. Answers WANT, exactly and only.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260829": "⛔ ability rung -> `none`: it OFFERS A SUBSTITUTE and turns a hunger aside — no rank harms anyone; the point is that nobody is eaten."
   },
   {
    "id": "appetite_sense",
@@ -4143,7 +4152,7 @@
    ],
    "tradition": "abyssal",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "reveal",
    "operativeAxis": [
     "precision",
@@ -4174,7 +4183,8 @@
    ],
    "plainly": "A puzzle/social action that names what a thing hungers for and what it will risk. Rated 5 of 10 across a scope of 2 for about three hours.",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260829": "⛔ ability rung -> `none`: it READS an appetite and names it. It puts nobody down at any rank."
   },
   {
    "id": "the_read_want",

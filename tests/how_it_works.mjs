@@ -1437,6 +1437,55 @@ console.log("\n── §26 · silence inherits the rung, and a live field is nev
     !/REFUSING TO STAMP/.test(certOut), certOut.slice(0, 200));
 }
 
+/* ══════════ §27 — THE LADDER REACHES THE LIVE PATH, NOT JUST THE MODULE ══════════ */
+// ⛔ THIS IS THE GATE §25 SHOULD HAVE BEEN. §25 proves the capability ladder is authored, strictly
+// increasing, and that `groupCapability` reads it — by calling the module with the ladder handed to it.
+// The app called `legionClash` with `cfg: CONTENT.rules?.melee || {}`, and THERE IS NO `melee.json`: rules
+// are keyed by filename stem, so that expression was `{}` at all seven call sites.
+//
+// ⚠️ `legionClash` computes `heroSwingCap × ladder[tier]` and an empty cfg makes the ladder `{}`, so the
+// weight was ALWAYS 1. ⛔ A MYTHICAL BENT A BATTLE EXACTLY AS MUCH AS A HEROIC IN THE LIVE GAME — authored,
+// implemented, gated, and unreachable. A MODULE GATE AND A WIRING GATE ARE DIFFERENT CLAIMS.
+//
+// ⚠️ SO THIS ONE BUILDS THE CONFIG THE WAY `app.js` BUILDS IT and asserts the BEHAVIOUR changes, rather
+// than asserting that a function would work if someone passed it the right thing.
+console.log("\n── §27 · the capability ladder reaches the live legion path ──");
+{
+  const ME = await import("../engine/melee.js");
+  const rules27 = rj("content/packs/core/rules/resolution.json");
+  const sb27 = rj("content/packs/core/rules/skill_battle_system.json").engine;
+  const app27 = rd("app.js");
+
+  // ⛔ NO CALL SITE MAY GO BACK TO THE PHANTOM KEY. This is the regression that would silently un-wire it.
+  check("§27: no call site passes the phantom `rules.melee` any more",
+    !/CONTENT\.rules\?\.melee/.test(app27));
+  check("§27: there is ONE definition of the melee config, and the call sites use it",
+    /function meleeCfg\(\)/.test(app27) && (app27.match(/meleeCfg\(\)/g) || []).length >= 8,
+    `${(app27.match(/meleeCfg\(\)/g) || []).length} references`);
+  // ⚠️ AND IT MUST STILL BE KEYED TO A FILE THAT EXISTS. If `resolution.json` ever stops carrying the
+  // ladder, the helper goes quiet again in exactly the same way.
+  check("§27: the ladder the helper reaches for is actually authored",
+    !!rules27.capabilityByTier && typeof rules27.capabilityByTier.mythic === "number");
+
+  // ⛔ THE BEHAVIOURAL CLAIM. Same config the app now builds, and the rung must change the swing.
+  const cfg27 = { ...(sb27.melee || {}), capabilityByTier: rules27.capabilityByTier };
+  // ⚠️ A UNIT IS `{count, quality}` AND THE RETURN KEY IS `heroSwing`. My first version of this gate used
+  // `{strength}` and read `.swing`, so both sides came back `undefined` — the behavioural check FAILED loudly
+  // but the non-vacuity check beneath it PASSED on `undefined === undefined`. ⛔ A VACUOUS PASS UNDER A REAL
+  // FAILURE is the worst pairing there is: had the first check been the lenient one, this gate would have
+  // shipped green and proved nothing.
+  const clash = (tier, cfg) => ME.legionClash([{ count: 40, quality: 1 }], [{ count: 40, quality: 1 }],
+    { rng: () => 0.5, heroSwing: 1, heroTier: tier, cfg });
+  const heroic = clash("heroic", cfg27), mythic = clash("mythic", cfg27);
+  check("§27: with the wired config a MYTHIC outswings a HEROIC",
+    Math.abs(mythic.heroSwing) > Math.abs(heroic.heroSwing), `heroic ${heroic.heroSwing} vs mythic ${mythic.heroSwing}`);
+  // ⚠️ NON-VACUITY, AND IT IS THE WHOLE POINT: with the OLD empty config the two must be IDENTICAL. If this
+  // ever fails, the bug being gated cannot happen and the gate above proves nothing.
+  const heroicOld = clash("heroic", {}), mythicOld = clash("mythic", {});
+  check("§27: …and with the EMPTY config they were identical — which is the defect this gates",
+    heroicOld.heroSwing === mythicOld.heroSwing && Number.isFinite(heroicOld.heroSwing), `${heroicOld.heroSwing} vs ${mythicOld.heroSwing}`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

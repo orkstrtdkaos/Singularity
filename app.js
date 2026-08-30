@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.276";
+const APP_VERSION = "1.9.277";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -493,6 +493,35 @@ function showVitalDetail(el) {
 }
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
+
+// ⛔ CCODE-328 — `CONTENT.rules.melee` HAS NEVER EXISTED, AND SEVEN CALL SITES PASSED IT ANYWAY.
+//
+// Rules are keyed by FILENAME STEM (`state.js` §SNG-092/SNG-331) and there is no `melee.json`. So every one
+// of these call sites has been handing `{}` to the band and legion layer, and all 21 dials `melee.js` reads
+// from `cfg` have been pinned at their code defaults since the day they were written.
+//
+// ⚠️ THE ONE THAT MATTERS IS `capabilityByTier`. `legionClash` computes its hero cap as
+// `heroSwingCap × ladder[tier]`, and with an empty cfg the ladder is `{}` so the weight is ALWAYS 1 —
+// ⛔ A MYTHICAL BENT A BATTLE EXACTLY AS MUCH AS A HEROIC IN THE LIVE GAME. Erik ruled the split, I built
+// it, `how_it_works` §25 gates it — and the gate tested the MODULE while the app called it with no config.
+// A module gate and a wiring gate are different claims, and I shipped the wrong one.
+//
+// ⚠️ ONE DEFINITION, NOT SEVEN. The previous shape let each call site decide what "the melee config" meant,
+// which is how five of them can be wrong in the same way and nobody notices. `sb.engine.melee` is where
+// `foldedPoolPerHealth` already lives, so this JOINS that block rather than inventing a second one — two
+// hand-synced melee configs is the SNG-344 crosswalk drift before it happens.
+function meleeCfg() {
+  const r = CONTENT?.rules || {};
+  return {
+    ...(CONTENT?.skillBattle?.engine?.melee || {}),
+    // ⛔ THE LADDERS COME FROM `resolution.json`, WHICH IS WHERE ERIK RULED THEM. `melee.js` prefers
+    // `capabilityByTier` and falls back to `attentionByTier`; both are handed over so that preference is a
+    // real choice here rather than an accident of which one happened to be reachable.
+    ...(r.capabilityByTier ? { capabilityByTier: r.capabilityByTier } : {}),
+    ...(r.attentionByTier || r.arcResponse?.attentionByTier
+      ? { attentionByTier: r.attentionByTier || r.arcResponse.attentionByTier } : {}),
+  };
+}
 let FN_INDEX = { families: [], verbToFamily: {}, byFamily: {} }; // SNG-124: function-family index (built at load)
 let wheelFnFilter = new Set(); // SNG-124 Phase B: active function-family filter on the skill wheel
 let learnBuyableOnly = false;  // SNG-348 (Erik): show only crafts the current skill points actually reach
@@ -4265,7 +4294,7 @@ async function maybeTick() {
       // ⚠️ RIDES THE PROJECT TICK DELIBERATELY: `_lastProjectDay` already guarantees a day is paid exactly
       // once, and a second day-counter would drift from it the first time one of them was reset.
       for (const b of (character.bands || [])) {
-        const r = recoverBand(b, { days, cfg: CONTENT.rules?.melee || {} });
+        const r = recoverBand(b, { days, cfg: meleeCfg() });
         if (r.back > 0) {
           character.bands = character.bands.map(x => x.id === b.id ? r.band : x);
           character._bandNotes = [...(character._bandNotes || []).slice(-2), `${b.name}: ${r.why}`];
@@ -6298,7 +6327,7 @@ function applyTurn(turn, resolution, playerWords = null) {
       if (kind === "raise") {
         // ⛔ EARNED, AND THE ENGINE DECIDES. A narrator that could hand out a warband would make the whole
         // command ladder decorative.
-        const gate = canRaiseBand(character, { cfg: CONTENT.rules?.melee || {}, renownBand: character.renownBand || null });
+        const gate = canRaiseBand(character, { cfg: meleeCfg(), renownBand: character.renownBand || null });
         if (!gate.ready) { character._bandNotes = [...(character._bandNotes || []).slice(-2), gate.why]; continue; }
         const r = raiseBand(character, { id: String(op.id || "").slice(0, 40), name: op.name ? String(op.name).slice(0, 60) : null,
           count: Math.max(1, Math.min(500, op.count | 0 || 20)), quality: Math.max(1, Math.min(3, op.quality | 0 || 1)),
@@ -6310,7 +6339,7 @@ function applyTurn(turn, resolution, playerWords = null) {
         // narrator can say "these forty are above you" and mean the same thing it means anywhere else.
         const band = (character.bands || []).find(b => b.id === String(op.id || ""));
         if (!band) continue;
-        const t = bandThreat(band, { cfg: CONTENT.rules?.melee || {} });
+        const t = bandThreat(band, { cfg: meleeCfg() });
         const mine = characterPower(character, CONTENT.rules || {});
         // ⚠️ `null` RATHER THAN A READ OFF THE RULES BAG. Reading a key no pack provides is a phantom control
         // — my third this session — and `threatBand` already falls back to DEFAULT_BANDS by design. When
@@ -6326,11 +6355,11 @@ function applyTurn(turn, resolution, playerWords = null) {
         const band = (character.bands || []).find(b => b.id === String(op.id || ""));
         if (!band || band.condition === "broken") continue;
         const theirs = [{ count: Math.max(1, Math.min(2000, op.against | 0 || 20)), quality: Math.max(1, Math.min(3, op.quality | 0 || 1)) }];
-        const c = legionClash([bandStrength(band, { cfg: CONTENT.rules?.melee || {} })], theirs,
-          { heroSwing: Math.max(-1, Math.min(1, Number(op.heroSwing) || 0)), cfg: CONTENT.rules?.melee || {} });
+        const c = legionClash([bandStrength(band, { cfg: meleeCfg() })], theirs,
+          { heroSwing: Math.max(-1, Math.min(1, Number(op.heroSwing) || 0)), cfg: meleeCfg() });
         // ⚠️ THE CLASH DECIDES THE BATTLE; `bloodBand` decides what it did to the people who fought it. Two
         // results, because a won battle that costs nobody anything is a number going up.
-        const b = bloodBand(band, c.tide, { cfg: CONTENT.rules?.melee || {} });
+        const b = bloodBand(band, c.tide, { cfg: meleeCfg() });
         character.bands = (character.bands || []).map(x => x.id === band.id ? b.band : x);
         character._bandNotes = [...(character._bandNotes || []).slice(-2), `${c.outcome} — ${b.why}`];
       }
@@ -12596,7 +12625,7 @@ function skillBattlePanel() {
       const all = alliesOf(character, { companions: CONTENT.companions || {},
         npcs: { ...(CONTENT.npcs || {}), ...(character.npcRegistry || {}) }, company: character.company || null });
       if (all.length < 2) return "";
-      const lead = commandSlots(character, { cfg: CONTENT.rules?.melee || {} });
+      const lead = commandSlots(character, { cfg: meleeCfg() });
       const split = bringForward(all, { chosen: st.broughtForward || null, slots: lead.slots });
       const fwd = new Set(split.forward.map(a => a.id));
       const pip = (a) => `<button class="opt sb-fwd${fwd.has(a.id) ? " on" : ""}" data-sbfwd="${esc(a.id)}"${a.isPlayer ? " disabled" : ""} title="${a.isPlayer ? "you are always forward" : fwd.has(a.id) ? "acting this round — click to fold back" : "bring forward"}">${esc(String(a.name).split(" ")[0])}</button>`;

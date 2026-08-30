@@ -1471,6 +1471,137 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-29. ⚠️ AND HE CORRECTED THE INSTINCT THAT WOULD HAVE RUINED IT: asked why a veteran would care about 'unseeing' who is vulnerable, i.e. STOP GIVING THESE PEOPLE A CONSCIENCE THEY DO NOT HAVE. This craft carries no penalty, no standing loss and no narrative debt — per the standing rule that a cost is ENERGY. What it costs is that people watch you do it."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "marcher",
+   "nativeOrCombination": "native",
+   "axes": {
+    "violence_peace": -0.6
+   },
+   "id": "shieldwork",
+   "name": "Shieldwork",
+   "levelReq": 3,
+   "energyCost": 6,
+   "attribute": "physical",
+   "shape": "guard",
+   "harmRung": "damaging",
+   "challengeTypes": [
+    "FIGHT",
+    "DEFEND",
+    "DUEL"
+   ],
+   "operativeAxis": [
+    "damage",
+    "quality",
+    "targets"
+   ],
+   "effectTags": [
+    "shield",
+    "formation",
+    "weapon"
+   ],
+   "functions": [
+    "shield",
+    "strike",
+    "empower"
+   ],
+   "description": "⛔ A SHIELD IS A WEAPON THAT ALSO STOPS THINGS. The rim breaks a nose, the boss breaks a stance, and the face of it puts a man on his back with his own momentum. ⚠️ THE REDLINE TEACHES IT AS ONE SKILL — there is no drill for holding it that is not also a drill for hitting with it. ⛔ AND IT IS WORTH MORE BESIDE SOMEONE ELSE CARRYING ONE: two shields overlap, and the overlap is the oldest advantage in the trade.",
+   "narrationHints": "She takes the axe on the boss, turns it, and the rim is already moving. ⚠️ The man beside her does not have to look — he knows what her left side is doing because it is what his left side is doing.",
+   "notFor": "⛔ YOU MUST HAVE A SHIELD, AND A REAL ONE — a board, a buckler, a door if it comes to it, but not a cloak and not a notion. ⚠️ IT WANTS A FRONT: a shield answers what is in front of it, and a Marcher surrounded is a Marcher with a shield facing the wrong way. ⛔ AND THE OVERLAP NEEDS SOMEONE WHO KNOWS IT — an ally with a shield and no training gets you a bonus and gets themselves nothing.",
+   "plainly": "A fight/defend action. ⛔ STRIKE WITH THE SHIELD FOR 2d6 AND SOAK WITH IT IN THE SAME ACTION — attack and defence are one craft. Rated 5, about six rounds. ⚠️ BESIDE ANOTHER SHIELD-CARRIER YOU BOTH GAIN: soak and the strike improve for each of you. r2 the strike staggers and the soak covers your neighbour's open side; r3 three or more overlapping shields are worth more than the sum — the line the Redline is famous for.",
+   "intensity": {
+    "conserve": "guard only — no strike this exchange, and the soak holds",
+    "surge": "⛔ STRIKE WITH EVERYTHING AND DROP THE GUARD; the shield is a weapon this round and nothing else"
+   },
+   "bounds": [
+    {
+     "text": "⛔ YOU MUST HAVE A REAL SHIELD. A board, a buckler, a door — not a cloak, not a notion",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT ANSWERS WHAT IS IN FRONT OF IT. Surrounded, you are holding it the wrong way",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ THE OVERLAP NEEDS A TRAINED NEIGHBOUR — an untrained ally with a shield helps you and not themselves",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ STRIKING WITH IT MEANS MOVING IT, and a shield in motion is not covering anything",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "damageType": "physical",
+    "soak": 4,
+    "soakRank": 2,
+    "duration": 6,
+    "targets": 1,
+    "wardTypes": [
+     "physical",
+     "force"
+    ],
+    "crit": {
+     "success": "The rim takes him under the jaw and the man behind him steps back into someone.",
+     "failure": "You commit the shield to the strike and the second one comes in where it was."
+    },
+    "note": "guard/strike. ⛔ ERIK 2026-08-29: 'Make a SHIELD WIELDING SKILL. ATTACK AND DEFENSE and a BONUS NEXT TO OTHERS WIELDING SHIELDS for both.' ⚠️ THE MARCHERS HAD NO MELEE WEAPON CRAFT AT ALL: `edge` is the DISCIPLINE, and the ranged side had three distinct crafts while spear, axe, sword and shield shared none. ⛔ AND IT SITS AT L3, WHERE THE TRADITION HAD A HOLE — the level-distribution defect, not the damage curve, which is on-curve throughout (see BACKLOG). ⚠️ THE OVERLAP IS THE DESIGN: it is the only craft in the tradition that pays BOTH parties for standing together, which is what a shield wall actually is."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Shieldwork",
+     "functions": [
+      "shield",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [],
+     "grants": "⛔ STRIKE FOR 2d6 AND SOAK IN THE SAME ACTION — rim, boss and face are all of them weapons. ⚠️ BESIDE ANOTHER TRAINED SHIELD-CARRIER, YOU BOTH GAIN: soak and strike improve for each of you.",
+     "cannot": "You need a real shield and a front. ⛔ Striking moves it, and a moving shield covers nothing."
+    },
+    {
+     "rank": 2,
+     "name": "Overlap",
+     "functions": [
+      "shield",
+      "strike",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging",
+     "gainAxes": [
+      "quality",
+      "targets"
+     ],
+     "grants": "⛔ THE STRIKE STAGGERS — they lose the initiative, not just the hit — AND YOUR SOAK COVERS YOUR NEIGHBOUR'S OPEN SIDE. ⚠️ This is where two Marchers become worth four.",
+     "cannot": "⚠️ The neighbour must hold position; the moment they step away it is two people with shields."
+    },
+    {
+     "rank": 3,
+     "name": "The Wall",
+     "functions": [
+      "shield",
+      "strike",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [
+      "targets",
+      "scope"
+     ],
+     "grants": "⛔ THREE OR MORE OVERLAPPING ARE WORTH MORE THAN THE SUM — the line the Redline is famous for, and each of them strikes from behind it. ⚠️ A wall of these does not need to advance; it needs you to come to it.",
+     "cannot": "⛔ IT IS STILL A FRONT, AND `break_the_line` IS EXACTLY WHAT ANSWERS IT — the Marchers know both halves and teach them together."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29. ⚠️ Fills the melee gap AND the L3 hole. And it closes a loop: the tradition now has `shieldwork` (make a wall), `held_line` (hold one) and `break_the_line` (break one) — the same knowledge in three directions, which is what a warrior culture whose whole society is honed conflict should look like."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",

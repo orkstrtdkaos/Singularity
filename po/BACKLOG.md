@@ -787,3 +787,37 @@ craft already declared `shape: hobble`, so the shape said it impairs and no rank
 6. **Energy bands, harm rungs and intensity pairs across all thirteen at once** — ⛔ **the unmigrated-batch
    fingerprint (empty `notFor` + lowercase challengeTypes + below-band energy TOGETHER) has now appeared in
    Death, Mind, Body and Light. Expect it in the remaining nine.**
+
+## ⚠️ GLOBAL DAMAGE-CURVE AND LEVEL-DISTRIBUTION CHECK (Erik, 2026-08-29)
+
+**Erik: *"Fix the curve — make a note to check this GLOBALLY."***
+
+### ✅ THE CURVE ITSELF IS HEALTHY — measured across all 397 crafts
+
+| level | crafts | avg damage | spread |
+|---|---|---|---|
+| L1 | 17 | 3.6 | 2.5–7.0 |
+| L2 | 34 | 6.1 | 3.5–7.0 |
+| L3 | 13 | 8.5 | 3.5–10.5 |
+| L4 | 8 | 12.2 | 7.0–14.0 |
+| L5 | 8 | 17.1 | 14.0–17.5 |
+
+⛔ **A CLEAN PROGRESSION, and the Marcher weapons all sit ON it.** ⚠️ **MY "FLAT CURVE" READING WAS WRONG
+and this is the correction: what looked flat was that EVERY MARCHER WEAPON IS L2.** The curve is fine; **the
+LEVEL DISTRIBUTION is the defect.**
+
+### ⛔ WHAT TO CHECK GLOBALLY
+
+1. ⛔ **L2 HOLDS 34 OF 80 DAMAGE CRAFTS — nearly half the game's harm sits on one rung.** ⚠️ L3 has 13, L4
+   has 8, L5 has 8. **Check whether that is deliberate (most fighting happens at low level) or whether
+   traditions default to L2 when nobody chose.**
+2. ⚠️ **SPREAD AT L3 IS 3.5–10.5 — a threefold range on one rung.** ⛔ Something at L3 doing 3.5 is doing
+   L1 damage for L3 access; either it buys something else, or it is mispriced.
+3. ⛔ **L4 SPREAD REACHES DOWN TO 7.0**, which is L2 damage at L4 access.
+4. **Per-tradition level distribution**, not just damage: ⚠️ **the Marcher finding was that a tradition can
+   be entirely on-curve and still have a hole, because all its weapons landed on one rung.**
+5. ⚠️ **Non-damage crafts have no curve at all** and nothing checks whether an L4 ward is meaningfully
+   better than an L2 one.
+
+⛔ **DO NOT RUN THIS UNTIL THE FIRST AUDIT PASS IS DONE** — same reason as the balance-and-gap check: at
+seven of thirteen traditions it would measure the audit order.

@@ -1634,7 +1634,8 @@
      "failure": "It comes out as grief and nothing else. Everyone hears exactly how much you have lost."
     },
     "note": "⛔ TARGETS ARE CHOSEN, NEVER CAUGHT. Erik 2026-08-23: 'the player can choose the targets — unchosen targets are not affected.' ⚠️ r1 IS ABOUT SIX NEAR YOU so the GM can make the call rather than count heads; r2 is three of those for the unconscious. ⛔ r3 IS AN AREA, NOT A COUNT — `area 5` with no target cap, per the corpus convention that an authored `area` with `targets: null` means EVERYONE IN THE ZONE. Erik: 'it was always meant to be everyone near you that you want affected that are exposed to the pulse.' ⚠️ AND IT IS NOT EARSHOT: the carrier is the grief, not the sound, so walls and stopped ears are no defence — EXPOSURE is the limit.",
-    "area": 5
+    "area": 5,
+    "damageType": "feeling"
    },
    "intensity": "severe",
    "bounds": [
@@ -1734,7 +1735,8 @@
     "veil": 0.4
    },
    "_veil": "⛔ SNG-498. Erik: 'it sure seems like Keening could be PARTIALLY VEIL POWERED.' ⚠️ AGREED AND IT FITS THE COSMOLOGY: the Veil is what remains where something enormous stopped being present (SNG-442), and a wail with a death inside it that passes through stone is not a sound the air is carrying. ⛔ `combination`: wild_nanite 0.6 (tidal, ungoverned, threnodist) + veil 0.4 (it reaches through, and there is no cover from it).\n⚠️ r2 SIMPLIFIED per Erik — 'too complicated to combine that with a broad cry'. Now: up to three named targets, each falls unconscious or loses their action on a resist.",
-   "_targetsAndAllies_20260823": "⛔ ERIK 2026-08-23, AND I HAD IT BACKWARDS. r3 read 'you name who is SPARED, and they lose their next action instead' — I read that as allies taking a lesser effect AND PRAISED IT as an elegant solution to the ally problem. ⚠️ IT IS THE PROBLEM: a craft that knocks out enemies and costs your own party their actions is the exact thing Erik cut from Necrotic Strike an hour earlier. ⛔ THE MODEL IS CHOOSING: the player names targets, the unnamed are untouched, and 'lose their action instead' is what happens to a CHOSEN target WHO RESISTS. ⚠️ ALSO FIXED: r1 declared `deepen` while being the base, and r2 declared `broaden` on `targets` while what it added was a CONDITION — now `deepen`/`conditions`, which is what the reader will key on."
+   "_targetsAndAllies_20260823": "⛔ ERIK 2026-08-23, AND I HAD IT BACKWARDS. r3 read 'you name who is SPARED, and they lose their next action instead' — I read that as allies taking a lesser effect AND PRAISED IT as an elegant solution to the ally problem. ⚠️ IT IS THE PROBLEM: a craft that knocks out enemies and costs your own party their actions is the exact thing Erik cut from Necrotic Strike an hour earlier. ⛔ THE MODEL IS CHOOSING: the player names targets, the unnamed are untouched, and 'lose their action instead' is what happens to a CHOSEN target WHO RESISTS. ⚠️ ALSO FIXED: r1 declared `deepen` while being the base, and r2 declared `broaden` on `targets` while what it added was a CONDITION — now `deepen`/`conditions`, which is what the reader will key on.",
+   "_typed_20260829": "⛔ `feeling` — ⛔ 'THE GRIEF ITSELF ARRIVES' — the craft says outright that what travels is not the sound. INTRINSIC. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "id": "contradiction",

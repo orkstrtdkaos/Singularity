@@ -362,7 +362,8 @@
     },
     "plus": 0,
     "marginFloorPer": 0.02,
-    "range": 20
+    "range": 20,
+    "damageType": "physical"
    },
    "rankDeltas": [
     {
@@ -398,7 +399,8 @@
    "_nameWas": "The Long Reach",
    "_idWas": "the_long_reach",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `physical` — 'the far brought suddenly close' — a horizon fighter's blow is still a blow. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "id": "fresh_horizon",
@@ -632,8 +634,10 @@
     "note": "A TWELFTH DEFENSIVE LOGIC — SPACED: soak 0 because it does not take the blow; it keeps you where the blow cannot reach. Distinct from EVADE (they swing and miss) — here they never get to swing.",
     "wardTypes": [
      "physical",
-     "living"
-    ]
+     "living",
+     "spatial"
+    ],
+    "_spatialWard_20260829": "⛔ `spatial` ADDED with its first carrier (`cutting_figure`). ⚠️ W6 caught it within seconds of the typing, as it did for grief, vitality, cold, psychic, force and heat. ✅ AND THIS IS THE RIGHT ANSWER RATHER THAN A CONVENIENT ONE: the craft is 'PROTECTION THROUGH RANGE — keep the threat far and its power collapses', and a figurist's imposed line is a GEOMETRIC attack. ⛔ Distance is what answers geometry."
    },
    "rankDeltas": [
     {
@@ -1173,7 +1177,8 @@
     },
     "plus": 0,
     "marginFloorPer": 0.03,
-    "note": "lethal rung — timing as a weapon"
+    "note": "lethal rung — timing as a weapon",
+    "damageType": "temporal"
    },
    "rankDeltas": [
     {
@@ -1210,7 +1215,8 @@
    "_nameWas": "The Wrong Moment",
    "_idWas": "the_wrong_moment",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `temporal` — striking at the moment the other cannot respond — the harm IS the timing, and `temporal` had one carrier. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "id": "given_time",

@@ -1781,7 +1781,8 @@
     },
     "plus": 0,
     "marginFloorPer": 0.02,
-    "note": "⚠️ THE T-I DAMAGE BASELINE. lethal rung, PHYSICAL, one target, honest force. This is the craft Erik's original benchmark was about: 'a T-I strike at max should be able to kill a T-I beast.'"
+    "note": "⚠️ THE T-I DAMAGE BASELINE. lethal rung, PHYSICAL, one target, honest force. This is the craft Erik's original benchmark was about: 'a T-I strike at max should be able to kill a T-I beast.'",
+    "damageType": "physical"
    },
    "rankDeltas": [
     {
@@ -1819,7 +1820,8 @@
    ],
    "plainly": "A fight action that deals damage. It rolls 1d6 Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: nO Warrior'S Forms — one target, honest force.",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `physical` — spear, sling, axe, bow — the most ordinary harm in the game. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "id": "carrying_call",

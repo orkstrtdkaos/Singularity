@@ -104,7 +104,8 @@
     "marginFloorPer": 0.02,
     "range": 10,
     "targets": 1,
-    "note": "r1's own numbers: objects up to a person's weight within ~10 paces"
+    "note": "r1's own numbers: objects up to a person's weight within ~10 paces",
+    "damageType": "force"
    },
    "rankDeltas": [
     {
@@ -174,7 +175,8 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_powerSystemWas": "harmonic",
-   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `force` — 'focused resonant waves to move, shake or SHATTER matter' — delivered energy with no edge. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "id": "resonant_shield",

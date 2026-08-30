@@ -619,7 +619,8 @@
     },
     "plus": 0,
     "marginFloorPer": 0.02,
-    "note": "damaging. The craft MAKES the weapon; the striking is what the weapon then does."
+    "note": "damaging. The craft MAKES the weapon; the striking is what the weapon then does.",
+    "damageType": "physical"
    },
    "rankDeltas": [
     {
@@ -655,7 +656,8 @@
    "_nameWas": "The Weapon at Hand",
    "_idWas": "the_weapon_at_hand",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `physical` — a built weapon is a weapon. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "id": "work_speaks",
@@ -1788,7 +1790,8 @@
     "plus": 2,
     "marginFloorPer": 0.03,
     "scope": 3,
-    "note": "T-IV, damaging"
+    "note": "T-IV, damaging",
+    "damageType": "abstraction"
    },
    "rankDeltas": [
     {
@@ -1822,7 +1825,8 @@
    "_nameWas": "The Undoing Word",
    "_idWas": "the_undoing_word",
    "_powerSystemWas": "reach_destruction_creation",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `abstraction` — 'it does not fall or burn, IT SIMPLY STOPS BEING ASSEMBLED' — the assembly is unmade, not the matter. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "schemaVersion": 1,
@@ -1875,7 +1879,8 @@
     },
     "plus": 6,
     "marginFloorPer": 0.03,
-    "scope": 4
+    "scope": 4,
+    "damageType": "abstraction"
    },
    "rankDeltas": [
     {
@@ -1904,7 +1909,8 @@
    "_nameWas": "The Last Unmaking",
    "_idWas": "the_last_unmaking",
    "_powerSystemWas": "reach_destruction_creation",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `abstraction` — the capstone of the same act, against a working or bond — what is undone is the BINDING. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "schemaVersion": 1,
@@ -2278,7 +2284,8 @@
     "plus": 0,
     "variance": 8,
     "targets": 1,
-    "note": "⚠️ HIGHEST variance in the catalog — the fault decides, not the wielder."
+    "note": "⚠️ HIGHEST variance in the catalog — the fault decides, not the wielder.",
+    "damageType": "abstraction"
    },
    "rankDeltas": [
     {
@@ -2311,7 +2318,8 @@
    "_nameWas": "The Last Fault",
    "_idWas": "the_last_fault",
    "_powerSystemWas": "reach_destruction_creation",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `abstraction` — unmaking finds the fault in a thing's structure; the structure is the target. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "id": "found_fault",

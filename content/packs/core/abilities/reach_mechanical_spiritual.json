@@ -1252,7 +1252,8 @@
     },
     "plus": 0,
     "marginFloorPer": 0.03,
-    "note": "incapacitating. The higher marginFloorPer is deliberate: enginewright damage is PRECISE — it rewards a decisive margin more than raw force."
+    "note": "incapacitating. The higher marginFloorPer is deliberate: enginewright damage is PRECISE — it rewards a decisive margin more than raw force.",
+    "damageType": "physical"
    },
    "rankDeltas": [
     {
@@ -1295,7 +1296,8 @@
    "_nameWas": "The Fault Strike",
    "_idWas": "the_fault_strike",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `physical` — a strike at a joint or critical piece — ordinary harm, precisely placed. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "id": "mechanical_defense",

@@ -65,5 +65,25 @@ for (const a of abilities) {
   if (wt && wt.length > 4) F('W6', a.id, `wards ${wt.length} types — a ward that answers everything has no character`);
 }
 
+// ⛔ W7 — DAMAGE MUST BE TYPED. Erik 2026-08-29: "damage should be typed. RESOLVING TO DEFAULT NEEDS A
+// FLAG AND FIX." An untyped blow falls back to `physical`, which means it is INVISIBLE to every affinity
+// the engine consults and cannot be answered deliberately by any ward. `damage_types.json` calls physical
+// "the default when no type is named" — that is a FALLBACK, not a design, and the fallback is what this
+// gate exists to make impossible to leave in place.
+// ⚠️ RATCHET, NOT A GATE: 42 of 82 damage crafts were untyped when this was written and a hard gate that
+// can never pass trains the --no-verify habit. The number may only go DOWN.
+const UNTYPED_BASELINE = Number(process.env.UNTYPED_BASELINE ?? 0);
+// ⚠️ HEALING CRAFTS CARRY DICE FOR THE AMOUNT THEY MEND, NOT HARM — "HEALING IS NOT A TYPE" (how_it_works
+// §3), so a healing shape with no damageType is CORRECT and must not be counted. Same for any craft whose
+// rung is `none`: it deals no harm, so there is no harm to type.
+const HEAL_SHAPES = new Set(['healing', 'bolster', 'sustain', 'guard', 'setup', 'reveal', 'conceal']);
+const untyped = abilities.filter(a =>
+  a.mechanic?.dice && !a.mechanic?.damageType && !a.mechanic?.damageMix &&
+  a.harmRung && a.harmRung !== 'none' && !HEAL_SHAPES.has(a.shape));
+if (untyped.length > UNTYPED_BASELINE)
+  F('W7', 'corpus', `${untyped.length} damage crafts are UNTYPED (baseline ${UNTYPED_BASELINE}) — a new one was added; damage must be typed`);
+else if (untyped.length < UNTYPED_BASELINE)
+  console.log(`   ⬇️  W7 untyped damage crafts: ${untyped.length} (was ${UNTYPED_BASELINE}) — lower the baseline in tests/content_which.mjs`);
+
 console.log(fails.length ? `⛔ WHICH-CHECK FAILURES: ${fails.length}\n` + fails.join('\n') : `✅ content_which: all assertions hold (${abilities.length} abilities)`);
 process.exit(fails.length ? 1 : 0);

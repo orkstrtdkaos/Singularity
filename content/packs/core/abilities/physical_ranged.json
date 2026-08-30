@@ -209,7 +209,8 @@
     "plus": 0,
     "range": 40,
     "targets": 1,
-    "marginFloorPer": 0.02
+    "marginFloorPer": 0.02,
+    "damageType": "physical"
    },
    "intensity": "moderate",
    "bounds": [
@@ -244,7 +245,8 @@
    "_idWas": "the_sling_and_stone",
    "_powerSystemWas": "body",
    "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current.",
-   "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS."
+   "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS.",
+   "_typed_20260829": "⛔ `physical` — a stone at forty paces. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "id": "drawn_bow",

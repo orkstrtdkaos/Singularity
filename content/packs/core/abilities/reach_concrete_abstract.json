@@ -1089,7 +1089,8 @@
     "crit": {
      "success": "You find the one stone and the whole structure remembers it was only ever leaning.",
      "failure": "You strike a member that was carrying nothing, loudly."
-    }
+    },
+    "damageType": "physical"
    },
    "rankDeltas": [
     {
@@ -1119,7 +1120,8 @@
    "_nameWas": "The Keystone Blow",
    "_idWas": "the_keystone_blow",
    "_powerSystemWas": "reach_concrete_abstract",
-   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it.",
+   "_typed_20260829": "⛔ `physical` — strike the one stone a structure rests on — edge, weight and impact against masonry. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "schemaVersion": 1,
@@ -1188,7 +1190,8 @@
       "chance": 3
      },
      "failure": "You unmake the wrong wall."
-    }
+    },
+    "damageType": "abstraction"
    },
    "rankDeltas": [
     {
@@ -1218,7 +1221,8 @@
    "_idWas": "the_unmaking_of_walls",
    "_differentiated": "⛔ SNG-485: differentiated from Keystone Blow. That brings a building DOWN with one blow at the load-bearing point; this takes a building APART and nothing falls on anyone.",
    "_powerSystemWas": "reach_concrete_abstract",
-   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it.",
+   "_typed_20260829": "⛔ `abstraction` — ⚠️ NOT PHYSICAL: 'the join FORGETS IT WAS A JOIN'. What is destroyed is the RELATION, not the stone — INTRINSIC, and armour is no answer to a thing forgetting what it was. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "schemaVersion": 1,
@@ -1678,7 +1682,8 @@
     "crit": {
      "success": "The line resolves through the thing rather than across it, and the two halves stand a moment before parting.",
      "failure": "The figure closes on itself. You have drawn a very good circle."
-    }
+    },
+    "damageType": "spatial"
    },
    "intensity": {
     "conserve": "a short line — a cut, not a parting",
@@ -1722,7 +1727,8 @@
    "_nameWas": "The Cutting Figure",
    "_idWas": "the_cutting_figure",
    "_powerSystemWas": "reach_concrete_abstract",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `spatial` — ⛔ GIVES `spatial` ITS FIRST CARRIER — a figurist imposes a LINE across a target and what it crosses is cut BY THE GEOMETRY. PHYSICS family, and the type existed in the families table with nothing dealing it. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "id": "plain_weight",
@@ -1841,7 +1847,8 @@
     "crit": {
      "success": "More comes down than you meant, and it comes down where you said.",
      "failure": "It comes down. You are under some of it."
-    }
+    },
+    "damageType": "force"
    },
    "intensity": {
     "conserve": "one stone, honestly thrown",
@@ -1885,7 +1892,8 @@
    },
    "_diceFix": "⛔ SNG-481: shape `strike` rolls dice per CCode's shape→reader map, and this craft carried magnitude only.",
    "_powerSystemWas": "reach_concrete_abstract",
-   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it.",
+   "_typed_20260829": "⛔ `force` — 'its full and honest WEIGHT, and send it' — momentum delivered, which is `force`, not edge. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "id": "sound_read",

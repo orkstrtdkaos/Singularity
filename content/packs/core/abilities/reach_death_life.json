@@ -1745,7 +1745,8 @@
       "text": "You reach for a thread that is not there.",
       "chance": -3
      }
-    }
+    },
+    "damageType": "vitality"
    },
    "rankDeltas": [
     {
@@ -1779,7 +1780,8 @@
    "_lethal": "⛔ SNG-514. ERIK: 'The Cut Thread DOES SLAY.' ⚠️ I ADDED AN `imposes` BLOCK SAYING `incapacitated` TO AN ABILITY WHOSE OWN TEXT READS 'END ONE LIVING THING — IT SIMPLY STOPS' AND WHOSE `harmRung` HAS ALWAYS BEEN `lethal`. The craft was never confused; I overwrote it.\n⛔ HOW IT KILLS: `shape: damage`, 5d6+6, `harmRung: lethal`. It kills the way lethal damage kills — through the damage path, not by imposing a condition. ⚠️ `mechanic.imposes` IS FOR CONDITIONS SHORT OF DEATH, which is why the engine refuses `slain` THERE. THAT REFUSAL IS NOT A RULE THAT CRAFTS CANNOT KILL. I read a constraint on one field as a constraint on the game.",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_reviewed_20260824": "⛔ SINGLE-RANK BY DESIGN (Erik confirmed 2026-08-24) — no r2/r3, and the capability menu correctly shows one tier. ⚠️ `operativeAxis` carried 'special', which is a PLACEHOLDER and not an axis in either register (3 crafts use it: this, Revealing Burn, Last Light) — dropped rather than invented into. ⛔ `challengeTypes` was FIGHT only, on THE MOST SOCIALLY CONSEQUENTIAL ACT IN THE GAME — its own notFor says 'it is done, it is WITNESSED, and it is yours'. SOCIAL added. ⚠️ `plainly` was machine-garbage ('It rolls 5d6+6 It affects 1 target Limit: iT Costs Almost Everything You Have'). ✅ EVERYTHING ELSE LEFT ALONE: the energy-to-zero bound is the ONE legitimate extreme-capstone cost in Death and it is still ENERGY — it is the model for the five narrative debts I wrongly wrote elsewhere. Refusing BOTH intensities is rare and correct."
+   "_reviewed_20260824": "⛔ SINGLE-RANK BY DESIGN (Erik confirmed 2026-08-24) — no r2/r3, and the capability menu correctly shows one tier. ⚠️ `operativeAxis` carried 'special', which is a PLACEHOLDER and not an axis in either register (3 crafts use it: this, Revealing Burn, Last Light) — dropped rather than invented into. ⛔ `challengeTypes` was FIGHT only, on THE MOST SOCIALLY CONSEQUENTIAL ACT IN THE GAME — its own notFor says 'it is done, it is WITNESSED, and it is yours'. SOCIAL added. ⚠️ `plainly` was machine-garbage ('It rolls 5d6+6 It affects 1 target Limit: iT Costs Almost Everything You Have'). ✅ EVERYTHING ELSE LEFT ALONE: the energy-to-zero bound is the ONE legitimate extreme-capstone cost in Death and it is still ENERGY — it is the model for the five narrative debts I wrongly wrote elsewhere. Refusing BOTH intensities is rare and correct.",
+   "_typed_20260829": "⛔ `vitality` — 'No wound, no struggle. IT SIMPLY STOPS.' ⛔ The clearest `vitality` case in the corpus — the life ends and the body is untouched. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "id": "grey_road",
@@ -2250,7 +2252,8 @@
     "marginFloorPer": 0.02,
     "area": 2,
     "variance": 3,
-    "note": "lethal rung. variance 3 because its own bound says 'the growth is APPROXIMATE — it holds and hinders as much as it harms.'"
+    "note": "lethal rung. variance 3 because its own bound says 'the growth is APPROXIMATE — it holds and hinders as much as it harms.'",
+    "damageType": "living"
    },
    "rankDeltas": [
     {
@@ -2296,7 +2299,8 @@
    "_nameWas": "The Green Claim",
    "_idWas": "the_green_claim",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `living` — growth turned against you — the rootkin signature, and it shares the type with `bark_and_briar`. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
   },
   {
    "id": "bark_and_briar",

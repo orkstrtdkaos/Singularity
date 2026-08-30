@@ -96,6 +96,8 @@ export function groupCapability(members = [], opts = {}) {
     }
   }
 
+  const cmd = commandOf(members, { tierWeights: opts.tierWeights, perOfficer: opts.perOfficer });
+
   const coverage = Object.keys(depth).filter(f => depth[f] > 0);
   // ⛔ THE CLIFF EDGE, NAMED BEFORE IT IS FALLEN OFF. A family held by exactly ONE standing member is one
   // casualty away from leaving the group entirely. ⚠️ This is the number a player should be able to SEE:
@@ -108,7 +110,9 @@ export function groupCapability(members = [], opts = {}) {
     standing, down, members: standing + down,
     cohesion: cohesionOf({ structure, standing, down, leadersDown, lostCoverage, floor: cohesionFloor,
       // ⛔ THE OFFICERS IN THIS GROUP, weighted by the rung they stand on.
-      command: commandOf(members, { tierWeights: opts.tierWeights, perOfficer: opts.perOfficer }),
+      // ⚠️ ONE CALL, BOTH FACTS — the boost and the officers who are no longer giving it.
+      command: cmd.boost, officersDown: cmd.fallen,
+      commanderLossCeiling: opts.commanderLossCeiling, commanderLossMult: opts.commanderLossMult,
       ceiling: opts.cohesionCeiling }),
   };
 }
@@ -137,19 +141,24 @@ export function groupCapability(members = [], opts = {}) {
  */
 function commandOf(members = [], { tierWeights = null, perOfficer = 0.15 } = {}) {
   const W = tierWeights || null;
-  let boost = 0;
+  let boost = 0, fallen = 0;
   for (const m of (members || [])) {
-    if (!m || m.present === false || isDowned(m)) continue;
+    if (!m || m.present === false) continue;
+    const tierOf_ = String(m.tier || m.record?.tier || "").toLowerCase();
+    const isOfficer = !!(tierOf_ && W && W[tierOf_] != null) || m.officer === true || m.record?.officer === true;
+    // ⛔ A FALLEN OFFICER IS COUNTED, NOT SKIPPED. Skipping them made losing a commander look like
+    // merely losing a body — and Erik's whole point is that it is worse than that.
+    if (isDowned(m)) { if (isOfficer) fallen++; continue; }
     const tier = String(m.tier || m.record?.tier || "").toLowerCase();
     // ⛔ A TIER IS AN OFFICER'S WEIGHT; an explicit flag is a flat one. Both are content saying the same
     // thing at different resolutions, and a record with neither contributes nothing.
     if (tier && W && W[tier] != null) boost += num(W[tier], 0) * num(perOfficer, 0.15);
     else if (m.officer === true || m.record?.officer === true) boost += num(perOfficer, 0.15);
   }
-  return boost;
+  return { boost, fallen };
 }
 
-function cohesionOf({ structure = null, standing = 0, down = 0, leadersDown = 0, lostCoverage = [], floor = 0.15, command = 0, ceiling = 3 } = {}) {
+function cohesionOf({ structure = null, standing = 0, down = 0, leadersDown = 0, lostCoverage = [], floor = 0.15, command = 0, ceiling = 3, officersDown = 0, commanderLossCeiling = 0.8, commanderLossMult = 0.5 } = {}) {
   const total = standing + down;
   // ⚠️ AN EMPTY GROUP HAS NO COHESION RATHER THAN PERFECT COHESION. 0/0 = NaN, and a NaN multiplier
   // silently zeroes whatever it touches — the shape that makes a mechanic look "off" instead of broken.
@@ -167,8 +176,19 @@ function cohesionOf({ structure = null, standing = 0, down = 0, leadersDown = 0,
   // ⚠️ AND THERE IS NO CLAMP AT 1. Erik: "cohesion CAN GO ABOVE 1.0." A well-officered line brings MORE
   // than the sum of the people in it, which is the whole point of a formation.
   const withCommand = raw + num(command, 0);
+  // ⛔ CCODE-325 / ERIK 2026-08-30: "make sure that killing a losing unit's commander doesn't give it a
+  // cohesion BOOST to 0.8. Probably want to set a CEILING of 0.8 with a 50% MORALE LOSS to cohesion
+  // otherwise."
+  //
+  // ⚠️ SO 0.8 IS A CEILING, NEVER A FLOOR — it is applied to the HALVED value, so a line already below it
+  // falls further rather than being lifted up to it. ⛔ THAT WAS THE TRAP HE SPOTTED: a naive `= 0.8`
+  // would have made killing the commander of a routed unit STEADY IT.
+  const officerLoss = num(officersDown, 0) > 0 || num(leadersDown, 0) > 0;
+  const afterMorale = officerLoss
+    ? Math.min(num(commanderLossCeiling, 0.8), withCommand * num(commanderLossMult, 0.5))
+    : withCommand;
   // ⚠️ A CEILING ONLY AS ARITHMETIC SAFETY, set far above anything a real company reaches.
-  return standing > 0 ? Math.max(floor, Math.min(num(ceiling, 3), round3(withCommand))) : 0;
+  return standing > 0 ? Math.max(floor, Math.min(num(ceiling, 3), round3(afterMorale))) : 0;
 }
 
 /**

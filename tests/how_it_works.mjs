@@ -1315,6 +1315,57 @@ console.log("\n── §24 · command lifts a line above itself ──");
     rd("engine/skill_battle.js").includes("Math.max(0, Number(foldCap?.cohesion ?? 1))"));
 }
 
+/* ══════════ §25 — SEVEN RUNGS, AND KILLING A COMMANDER NEVER STEADIES A LINE ══════════ */
+// ⛔ ERIK 2026-08-30, two rulings:
+//   "notable · regional · heroic need to be split out — they are INCREASING CAPABILITIES."
+//   "make sure that killing a LOSING unit's commander doesn't give it a cohesion BOOST to 0.8. Probably
+//    want to set a CEILING of 0.8 with a 50% MORALE LOSS to cohesion otherwise."
+//
+// ⚠️ AND THE SPLIT NEEDED A SECOND TABLE, WHICH IS NORMALLY WHAT THIS PROJECT FORBIDS. attentionByTier is
+// read by worldtick as an ARC-ATTENTION BUDGET, and its three-way tie at 0.5 is CORRECT there — a notable,
+// a regional and a heroic figure can draw equal notice while differing in what they can DO. ⛔ MOVING THE
+// ARC BUDGET TO FIX A COMBAT LADDER WOULD HAVE CHANGED HOW ARCS SPEND ATTENTION, SILENTLY. Two facts, two
+// tables — and the rung names are asserted identical below so they cannot drift apart.
+console.log("\n── §25 · seven rungs, and a dead commander never steadies a line ──");
+{
+  const GRe = await import("../engine/group.js");
+  const rulesE = rj("content/packs/core/rules/resolution.json");
+  const cap = rulesE.capabilityByTier || {};
+  const arcE = rj("content/packs/core/rules/arc_response.json");
+  const att = (function find(o) { if (!o || typeof o !== "object") return null; if (o.attentionByTier) return o.attentionByTier; for (const v of Object.values(o)) { const r = find(v); if (r) return r; } return null; })(arcE);
+  const LADDER = ["riffraff", "notable", "regional", "heroic", "epic", "legendary", "mythic"];
+
+  check("§25: the capability ladder carries all SEVEN rungs",
+    LADDER.every(t => typeof cap[t] === "number"), LADDER.filter(t => typeof cap[t] !== "number").join(", "));
+  // ⛔ ERIK'S FIRST RULING, ASSERTED: strictly increasing, no ties.
+  const vals = LADDER.map(t => cap[t]);
+  check("§25: it is STRICTLY increasing — no two rungs are worth the same",
+    vals.every((v, i) => i === 0 || v > vals[i - 1]), vals.join(" · "));
+  // ⚠️ THE ANCHOR. epic 1.0 is the shipped 0.15 hero swing; moving it silently rebalances every fight.
+  check("§25: epic is still the 1.0 anchor", cap.epic === 1);
+  // ⛔ AND THE TWO TABLES MUST NAME THE SAME RUNGS, or one will grow a rung the other never hears about.
+  check("§25: capability and attention carry identical rung names",
+    Object.keys(att || {}).every(k => k in cap) && LADDER.every(k => k in (att || {})),
+    `attention: ${Object.keys(att || {}).join(",")}`);
+
+  // ⛔ ERIK'S SECOND RULING — THE TRAP. 0.8 is a CEILING applied to a HALVED value, never a floor.
+  const sold = (id, tier, down) => ({ id, name: id, present: true, downed: down ? { why: "x" } : null, assistTags: [], ...(tier ? { tier } : {}) });
+  const many = (n, down = 0) => [...Array(n)].map((_, i) => sold("s" + i, null, i < down));
+  const coh = (ms) => GRe.groupCapability(ms, { tierWeights: cap }).cohesion;
+
+  const healthy = coh([...many(10), sold("cmd", "legendary")]);
+  const headless = coh([...many(10), sold("cmd", "legendary", true)]);
+  const routed = coh([...many(10, 7), sold("cmd", "legendary")]);
+  const routedHeadless = coh([...many(10, 7), sold("cmd", "legendary", true)]);
+
+  check("§25: a well-led line is above 1", healthy > 1, String(healthy));
+  check("§25: losing the commander roughly halves it", headless < healthy * 0.6, `${headless} vs ${healthy}`);
+  // ⛔ THE TRAP ITSELF: a unit ALREADY BELOW 0.8 must fall further, never rise to it.
+  check("§25: killing a LOSING unit's commander drives it DOWN, never up to 0.8",
+    routedHeadless < routed, `routed ${routed} → headless ${routedHeadless}`);
+  check("§25: …and it is never lifted to the ceiling", routedHeadless < 0.8, String(routedHeadless));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

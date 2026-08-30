@@ -1400,7 +1400,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
           // and the game had no way to express one.
           // ⚠️ THE LADDER MUST REACH IT. Without `tierWeights` an officer's rung is invisible and the
           // boost is silently zero — the reader-with-no-writer shape, one layer down.
-          const foldCap = groupCapability(folded, { tierWeights: sb?.attentionByTier || rules?.arcResponse?.attentionByTier || null });
+          const foldCap = groupCapability(folded, { tierWeights: rules?.capabilityByTier || sb?.attentionByTier || rules?.arcResponse?.attentionByTier || null });
           // ⛔ CCODE-324 / ERIK: "cohesion CAN GO ABOVE 1.0." My clamp at 1 would have silently thrown away
           // every officer's contribution — a legendary commander steadies a line to 1.3, and a ceiling of 1
           // makes that identical to no commander at all. ⚠️ THE FLOOR STAYS: a line still standing brings

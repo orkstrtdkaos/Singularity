@@ -281,8 +281,12 @@ working papers; **this is the answer.**
 | 08-30 | ✅ **and killing the commander is worse than never having one** | Erik's *“another reason to target them”*, **with no separate rule** | gated: a fallen commander leaves cohesion at **0.8, BELOW the unofficered 1.0** | ⛔ you lose the boost AND take the attrition — live, the fold's contribution drops **13 → 6** |
 | 08-30 | ⚠️ **my clamp would have thrown the whole ruling away** | I wrote `Math.min(1, cohesion)` an hour earlier | caught by testing an officer | ⛔ **a ceiling of 1 makes a legendary commander identical to no commander at all** |
 | 08-30 | ⚠️ **the ladder has SEVEN names and FIVE distinct weights** | `heroic`, `regional` and `notable` all sit at **0.5** | measured across all seven | ⚠️ fine for ATTENTION (how much the world notices you); **questionable for COMMAND and SWING** — a Hero steadies a line exactly as much as a Notable. **Erik's call, not mine to invent** |
+| 08-30 | ✅ **CCODE-325 — seven rungs, STRICTLY increasing** | Erik: *“notable · regional · heroic need to be split out — they are INCREASING CAPABILITIES”* | `§25`, and the ladder is asserted strictly increasing with **epic pinned at 1.0** | ✅ swing now **0.038 · 0.06 · 0.09 · 0.12 · 0.15 · 0.30 · 0.45** — seven distinct values where three used to tie |
+| 08-30 | ⚠️ **and it needed a SECOND table, which this project normally forbids** | `attentionByTier` is read by `worldtick` as an **arc-attention BUDGET**, and the 0.5 tie is CORRECT there | gated: **both tables must carry identical rung names** | ⛔ **moving the arc budget to fix a combat ladder would have changed how arcs spend attention, silently.** Two facts, two tables |
+| 08-30 | ✅ **CCODE-325b — killing a commander never STEADIES a line** | Erik spotted the trap: *“make sure killing a LOSING unit's commander doesn't give it a cohesion boost to 0.8”* | gated on a routed unit specifically | ✅ **0.8 is a CEILING applied to a HALVED value, never a floor** — a routed unit whose commander dies goes to **0.15**, not up to 0.8 |
+| 08-30 | ⚠️ **I made the same doc-key mistake TWICE** | `_why` has no sibling `why`, so `wiring_audit` counted three unread constants — exactly as it did for `npcStanding` | folded into `note`, an annotation key the audit exempts | ⛔ the audit's own header says the `_foo` exemption **must not become a hiding place**, and I walked into it again |
 
-**Last verified: 2026-08-28 · v1.9.274 · 401 crafts.**
+**Last verified: 2026-08-28 · v1.9.275 · 401 crafts.**
 
 ---
 

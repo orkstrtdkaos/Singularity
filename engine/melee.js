@@ -288,7 +288,12 @@ export function legionClash(ours, theirs, { rng = Math.random, heroSwing = 0, he
   // ⚠️ ABSENT IS TODAY. No tier means weight 1, which is exactly the 0.15 that shipped — every existing
   // caller and every existing gate is untouched.
   const base = num(cfg.heroSwingCap, 0.15);
-  const weight = heroTier ? num((cfg.attentionByTier || {})[String(heroTier)], 1) : 1;
+  // ⛔ CCODE-325 — THE CAPABILITY LADDER, NOT THE ATTENTION ONE. Erik: notable/regional/heroic “are
+  // INCREASING CAPABILITIES” and they sat at an identical 0.5 in `attentionByTier`, which is read by
+  // `worldtick` as an ARC BUDGET and is correct there. ⚠️ Two facts, two tables; `attentionByTier` remains
+  // the fallback so a caller that has not adopted the split behaves exactly as it did.
+  const ladder = cfg.capabilityByTier || cfg.attentionByTier || {};
+  const weight = heroTier ? num(ladder[String(heroTier)], 1) : 1;
   // ⚠️ ROUNDED — 0.15 × 3 is 0.44999999999999996 in binary floating point, and a receipt that says that
   // about a Mythical reads as a bug rather than a ruling.
   const cap = Math.max(0, Math.round(base * weight * 1000) / 1000);

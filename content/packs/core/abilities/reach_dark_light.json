@@ -1549,7 +1549,8 @@
     "range": 15,
     "push": 0,
     "magnitude": 5,
-    "targets": 1
+    "targets": 1,
+    "_contrastNotDarkness": "⛔ ERIK 2026-08-29: 'just because they are Umbral doesn't mean they HATE ALL LIGHT — after all, A LIGHT CREATES SHADOWS. They do have some lights down there too, biolume etc.' ⚠️ THIS CRAFT ALREADY IMPLIED IT: 'a lit gap is a WALL' means it needs SHADOW AT BOTH ENDS, and shadow requires something to cast it. ⛔ A PITCH-BLACK ROOM HAS NO SHADOWS AT ALL — it is uniform, and there is nothing to step between. WHAT AN UMBRAL WANTS IS CONTRAST, and a lamp in the corner is better ground than a sealed cellar."
    },
    "rankDeltas": [
     {
@@ -1733,7 +1734,7 @@
    "harmRung": "none",
    "narrationHints": "She had her hands in the dark the way a potter has hands in clay.",
    "description": "Shape shadow into functional form — darkness as a material that can be worked.",
-   "notFor": "⛔ SHADOW IS A MATERIAL AND IT IS NOT A STRONG ONE — a worked shadow holds a shape, holds a weight for a while, and will not hold an edge. ⚠️ NOTHING MADE THIS WAY SURVIVES FULL LIGHT: it is not destroyed, it is simply not there while the light is. ⛔ And it must be worked from shadow that already exists — you cannot make the dark you need out of nothing.",
+   "notFor": "⛔ SHADOW IS A MATERIAL AND IT IS NOT A STRONG ONE — a worked shadow holds a shape and a weight for a while, and will not hold an edge. ⚠️ AND IT MUST BE CAST BY SOMETHING: you shape shadow, you do not conjure it. ⛔ A PITCH-BLACK ROOM GIVES YOU NOTHING TO WORK WITH — no light, no shadow — WHICH IS WHY THE DEEP IS LIT BY LIVING GLOW AND WHY AN UMBRAL BRINGS A LAMP TO A WORKSHOP.",
    "tradition": "umbral",
    "functions": [
     "conceal",
@@ -1803,7 +1804,8 @@
    "mechanic": {
     "magnitude": 6,
     "duration": 6,
-    "scope": 2
+    "scope": 2,
+    "_needsContrast": "⛔ CORRECTED 2026-08-29: the notFor said 'nothing made this way survives FULL LIGHT' and implied darkness was the requirement. ⚠️ THE REQUIREMENT IS CONTRAST. The Umbral Depths are 'sunless underworlds LIT BY LIVING GLOW' — biolume — and that glow is what makes the shadow this craft is made of."
    },
    "rankDeltas": [
     {
@@ -1858,7 +1860,7 @@
     "sustain"
    ],
    "harmRung": "none",
-   "narrationHints": "She had no lamp and felt no need of one. The dark was enough.",
+   "narrationHints": "She had no lamp and felt no need of one. ⚠️ The glow off the wall-growth was plenty, and she had been reading by it since she was small.",
    "description": "Endure in total lightlessness — the deep dark sustains the umbral where it breaks others.",
    "notFor": "⛔ IT SUSTAINS YOU IN LIGHTLESSNESS AND NOWHERE ELSE — the craft that makes an umbral untroubled a mile down does nothing on an open road at noon. ⚠️ IT REDUCES NEED; IT DOES NOT REMOVE IT. You eat less, sleep less and feel the cold less, and you still eat, sleep and freeze eventually. ⛔ Nor does it grant sight: that is Darksight, and an umbral without it is as blind as anyone.",
    "tradition": "umbral",
@@ -4081,11 +4083,11 @@
    "levelReq": 1,
    "energyCost": 3,
    "attribute": "social",
-   "shape": "setup",
+   "shape": "guard",
    "harmRung": "none",
    "challengeTypes": [
+    "FIGHT",
     "SOCIAL",
-    "INVESTIGATE",
     "STEALTH"
    ],
    "operativeAxis": [
@@ -4099,86 +4101,88 @@
    ],
    "functions": [
     "reveal",
-    "track",
+    "resist",
     "empower"
    ],
-   "description": "⛔ RECOGNISE A PERSON WITH NOTHING TO SEE THEM BY — by step, by breath, by the shape they make in a room. ⚠️ In a city built of dark, being unseen is the default and therefore worthless; WHAT IS INTIMATE IS BEING KNOWN. ⛔ THE UMBRAL ENDEARMENT IS 'I WOULD KNOW YOU IN THE DARK', AND IT IS LITERAL — this is the craft it refers to, and every Umbral child learns it before they learn to hide.",
-   "narrationHints": "She does not turn round. 'You are limping.' ⚠️ He had not spoken, and the corridor is unlit, and he has been limping since the stair two levels up.",
-   "notFor": "⛔ IT IS RECOGNITION, NOT SIGHT — you learn WHO, not what they are carrying, what they look like, or what they are about to do. ⚠️ AND YOU MUST HAVE KNOWN THEM BEFORE: a stranger is a stranger in the dark exactly as in the light. ⛔ A person who deliberately changes their gait, their breathing and their weight can defeat it, and doing all three at once is very hard and very obvious to anyone watching in daylight.",
-   "plainly": "A social/investigate action. Recognise anyone you have met before, in darkness, without seeing them — and know how they are: hurt, frightened, lying still on purpose. r2 recognises a whole group and who is missing from it; r3 knows a person by the shape of their absence. ⛔ Recognition only, and only of people you already know.",
+   "description": "⛔ KNOW WHERE EVERYONE IS WITHOUT LOOKING. Step, breath, the shape a body makes in the air — an Umbral tracks a room the way other people track a conversation. ⚠️ YOU CANNOT BE FLANKED, SURPRISED OR LOST TRACK OF, and you fight in a pitch-dark room exactly as well as a lit one. ⛔ THE ENDEARMENT 'I WOULD KNOW YOU IN THE DARK' IS THIS CRAFT, and it is why an Umbral stands close enough to touch when they talk to you.",
+   "narrationHints": "She does not turn round. 'You are limping.' ⚠️ The corridor is unlit and he has not spoken. ⛔ In a fight she never looks behind her, and nothing has come at her from behind in years.",
+   "notFor": "⛔ POSITION AND CONDITION, NEVER DETAIL — who, where, and how they are; not what they carry, what they look like, or what they intend. ⚠️ AND IT WORKS ON BODIES: a construct, a raised crew or a mechanism makes no breath and no shape you can read, and those CAN flank you. ⛔ A stranger reads as a presence and not a person.",
+   "plainly": "A fight/social action. ⛔ YOU CANNOT BE FLANKED OR SURPRISED BY ANYTHING THAT BREATHES, and darkness costs you nothing in a fight. r1 tracks everyone in a room and how they are; r2 knows who is MISSING and where they went; r3 fights at full effect in total darkness and lets those beside you do the same. ⚠️ Bodies only — constructs and raised crews are invisible to it.",
    "intensity": {
-    "conserve": "one person, and only that it is them",
-    "surge": "read the whole dark at once; ⛔ YOU WILL KNOW EVERY PERSON IN THE DEEP YOU HAVE EVER MET, AND WHERE THEY ARE"
+    "conserve": "one room, briefly",
+    "surge": "read the whole deep; ⛔ YOU WILL KNOW WHERE EVERY LIVING THING WITHIN A QUARTER-MILE IS STANDING"
    },
    "bounds": [
     {
-     "text": "⛔ YOU MUST ALREADY KNOW THEM — it recognises, it does not identify",
+     "text": "⛔ IT READS BODIES — breath, weight, movement. A construct, a mechanism or a raised crew is invisible to it and CAN flank you",
      "class": "hard"
     },
     {
-     "text": "⚠️ IT NEEDS DARK OR NEAR-DARK. In full light you are using your eyes like anyone else",
+     "text": "⛔ POSITION AND CONDITION ONLY — never carried things, never intent",
      "class": "hard"
     },
     {
-     "text": "⛔ WHO AND HOW, NEVER WHAT — no possessions, no intent, no words",
-     "class": "hard"
+     "text": "⚠️ AND IT IS BETTER IN THE DARK BUT NOT DEPENDENT ON IT: in a lit room you are reading the same things everyone else could, if they knew how",
+     "class": "soft"
     }
    ],
    "mechanic": {
-    "magnitude": 3,
-    "duration": 1,
-    "targets": 1,
+    "magnitude": 4,
+    "duration": 4,
+    "targets": 6,
     "crit": {
-     "success": "You know something about how they are that they have told nobody, and they know you know.",
-     "failure": "You greet the wrong person with a name, warmly, in the dark."
+     "success": "You read something about how someone is that they have told nobody, and they know you read it.",
+     "failure": "You track the room perfectly and miss the one thing in it that is not breathing."
     },
-    "note": "setup/reveal. ⛔ THE UMBRAL FIRST GIFT THAT WAS MISSING — the tradition had `darksight` (see in the dark) and `felt_room` (know a SPACE) and nothing for knowing a PERSON. ⚠️ Erik 2026-08-29: the traditions were one-dimensional, and a people is defined by how it loves and greets as much as by how it hides."
+    "note": "guard. ⛔ NOT A SOCIAL READ — AN AWARENESS. It answers the question a stealth tradition actually faces: you are in the dark, so is everyone else, and who moves first? ⚠️ THE HARD BOUND IS THE INTERESTING HALF: it reads BODIES, so the Ashwarden's raised crew and the enginewright's mechanisms are exactly what an Umbral cannot see coming. ⛔ REBUILT 2026-08-29 — Erik: 'they don't seem amazing to me.' The first version was a recognition-read with no mechanical teeth."
    },
    "tree": [
     {
      "rank": 1,
      "name": "Known In The Dark",
      "functions": [
-      "reveal"
+      "reveal",
+      "resist"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [],
-     "grants": "⛔ KNOW WHO IS THERE, WITHOUT SEEING THEM — and how they are: hurt, tired, frightened, holding still on purpose. ⚠️ Anyone you have met before, at conversational distance.",
-     "cannot": "One person, and you must have met. ⚠️ In light this is just looking at someone."
+     "grants": "⛔ TRACK EVERY BREATHING THING IN A ROOM WITHOUT LOOKING — where they are, how they are, whether they are hurt or holding still on purpose. ⚠️ YOU CANNOT BE FLANKED OR SURPRISED BY ANY OF THEM, and the dark costs you nothing.",
+     "cannot": "Bodies only, and about six of them. ⛔ Anything that does not breathe is not there as far as this craft is concerned. ⚠️ You get position, never possessions."
     },
     {
      "rank": 2,
      "name": "The Whole Room",
      "functions": [
       "reveal",
+      "resist",
       "track"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [
       "targets",
-      "scope"
+      "range"
      ],
-     "grants": "⛔ KNOW EVERYONE IN A DARK SPACE AT ONCE — and, more usefully, WHO IS NOT THERE WHO SHOULD BE. ⚠️ An Umbral host counts the room by breathing and knows before anyone else that someone has gone.",
-     "cannot": "⚠️ Still only people you know. ⛔ A stranger among them registers as a stranger and nothing more."
+     "grants": "⛔ KNOW WHO IS NOT THERE WHO SHOULD BE, AND WHICH WAY THEY WENT — an Umbral host counts a room by breathing and knows before anyone else that someone has slipped out. ⚠️ And the reading follows them for a while.",
+     "cannot": "⚠️ It follows a person, not a plan — you learn the direction, not the errand. ⛔ Still bodies only."
     },
     {
      "rank": 3,
      "name": "By Their Absence",
      "functions": [
       "reveal",
-      "track",
+      "resist",
       "empower"
      ],
      "gains": "deepen",
      "harmRung": "none",
      "gainAxes": [
       "quality",
-      "range"
+      "targets"
      ],
-     "grants": "⛔ KNOW A PERSON BY THE SHAPE OF WHERE THEY ARE NOT — a room they left an hour ago, a route they did not take, a chair nobody is sitting in. ⚠️ AND WHOEVER YOU KNOW THIS WELL IS EASIER TO FIND, HELP AND REACH: acting on that knowledge enters as a named term in your favour.",
-     "cannot": "⛔ IT IS NOT SCRYING and does not cross a region. ⚠️ And it works on the KNOWN — the better you know someone, the further it reaches, which means it is useless for hunting a stranger."
+     "grants": "⛔ FIGHT AT FULL EFFECT IN TOTAL DARKNESS — no penalty, no fumbling, no advantage given to anyone who can see. ⚠️ AND THOSE BESIDE YOU DO THE SAME: you call the room to them as it happens, and a handful of Umbrals in an unlit corridor are not fighting blind, they are fighting AT HOME.",
+     "cannot": "⛔ They must be able to hear you. ⚠️ And a construct in the room is a hole in everything you are telling them."
     }
    ],
    "_authored": "⛔ ERIK 2026-08-29: 'HOW DO THESE PEOPLE CELEBRATE, HUNT, FUCK, TRAVEL, FIGHT?' ⚠️ THE TRADITION COULD SEE IN THE DARK AND KNOW A ROOM AND HAD NO WAY TO KNOW A PERSON — in a culture where 'everything is felt, not seen', that is the craft everything social runs on. ⛔ AND IT IS AUTHORED FROM THE CULTURE, NOT THE CRISIS: the endearment 'I would know you in the dark' is the tradition's whole intimacy, and it needed a craft under it."
@@ -4216,17 +4220,17 @@
     "empower",
     "conceal"
    ],
-   "description": "⛔ WAIT WHERE A THING MUST PASS, FOR AS LONG AS IT TAKES. The Umbral hunt is not a chase — it is knowing the space, choosing the place, and SITTING. ⚠️ THE KILL IS UNREMARKABLE; THE SITTING IS THE CRAFT. ⛔ And it is how an Umbral war is fought: the same six people at the fourth watch for nine nights, until a supply line stops being a supply line.",
+   "description": "⛔ WAIT WHERE A THING MUST PASS, FOR AS LONG AS IT TAKES — then open with everything the waiting bought. The Umbral hunt is not a chase: know the space, choose the place, and SIT. ⚠️ THE KILL IS UNREMARKABLE; THE SITTING IS THE CRAFT. ⛔ AND YOU WANT THEM CARRYING A LAMP: a light makes the shadow you are standing in, and a man with a torch has ruined his own eyes for you.",
    "narrationHints": "They have been there since before the guard changed, and the guard has changed twice. ⚠️ Nothing about them is hidden by a working — they simply have not moved, and people do not look at what has not moved.",
-   "notFor": "⛔ IT IS NOT CONCEALMENT AND DOES NOT STACK AS ONE — a searcher who looks directly at you sees you. What the craft does is make you EASY NOT TO NOTICE and let you hold the position past what a body should. ⚠️ AND IT ENDS THE MOMENT YOU ACT: one strike, one grab, one word, and you are a person crouching in a doorway. ⛔ Nor does it help you find the place — knowing where to wait is `felt_room` and your own judgement.",
-   "plainly": "A stealth/fight action. Hold a waiting position for hours without fatigue, hunger or stiffness, and be very hard to notice while you do — then act from it with a named advantage on the first exchange. r2 waits a whole night and brings companions into the wait; r3 holds for days and the advantage carries to everyone waiting with you. ⛔ It ends when you move.",
+   "notFor": "⛔ IT IS NOT CONCEALMENT AND DOES NOT STACK AS ONE — the craft makes you easy not to notice and lets you hold a position past what a body should. ⚠️ IT ENDS THE MOMENT YOU ACT, and the opening is all you get. ⛔ Nor does it choose the place for you: knowing where to wait is `felt_room` and your own judgement, and a badly chosen spot is a night wasted.",
+   "plainly": "A stealth/fight action. Hold a position for hours without fatigue and be hard to notice — then ⛔ YOUR OPENING STRIKE FROM THE WAIT AUTOMATICALLY CRITS, and the target does not act that round. r2 waits a night and brings companions who all get the opening; r3 waits days and the crit carries PIERCE. ⚠️ It ends when you move, and you only get it once per wait.",
    "intensity": {
     "conserve": "an hour, alone",
     "surge": "wait as long as it takes; ⛔ YOU WILL STILL BE THERE WHEN THEY HAVE STOPPED EXPECTING ANYONE"
    },
    "bounds": [
     {
-     "text": "⛔ IT ENDS WHEN YOU ACT — the whole craft is the not-acting",
+     "text": "⛔ IT ENDS WHEN YOU ACT — the whole craft is the not-acting, and the opening is once",
      "class": "hard"
     },
     {
@@ -4234,8 +4238,12 @@
      "class": "hard"
     },
     {
-     "text": "⛔ YOU MUST CHOOSE THE PLACE YOURSELF — it does not tell you where the thing will pass",
+     "text": "⛔ YOU CHOOSE THE PLACE. It does not tell you where the thing will pass, and a wrong guess is a wasted night",
      "class": "hard"
+    },
+    {
+     "text": "⚠️ A LIGHT IN THE ROOM HELPS YOU — it makes the shadow you are in and costs THEM their night-eyes",
+     "class": "soft"
     }
    ],
    "mechanic": {
@@ -4246,8 +4254,7 @@
      "success": "They pass close enough to touch and you let them, because the second one is the one that matters.",
      "failure": "You hold it perfectly and nothing comes, all night, and the thing you were waiting for went another way."
     },
-    "note": "setup. ⛔ THE HUNT AND THE WAR IN ONE CRAFT. The tradition had `conceal` eleven times and NOTHING FOR WAITING — and the culture is explicit that the sitting is the skill and that an Umbral war is attrition from the dark rather than a held line. ⚠️ `setup: 3` — it buys the first exchange, which is what an ambush IS.",
-    "_setupIsMagnitude": "⚠️ I authored `setup: 3` and REMOVED IT rather than declaring it. ⛔ `familyDefaults.setup` is `{magnitude: 3, duration: 1}` — 'the setup bonus a read buys for the next exchange' — SO THE BONUS *IS* THE MAGNITUDE, and a separate `setup` field would have been a duplicate of `magnitude: 4`. ⚠️ `setup` appears in the ENGINE FIELDS list as a scalable DIMENSION NAME, which is not the same as being a field on the mechanic block. **Checked before declaring, having invented `soakBonus` earlier today.**"
+    "note": "setup. ⛔ THE OPENING IS THE WHOLE PAYOFF AND IT IS AUTOMATIC: a strike out of a completed wait CRITS and costs the target their action. ⚠️ REBUILT 2026-08-29 — Erik: 'they don't seem amazing.' The first version bought a +3 setup bonus, which is not worth a night of game time. ⛔ AND THE LIGHT FRAMING IS CORRECTED: an Umbral WANTS a lamp in the room — it casts the shadow they are standing in and ruins the carrier's night-vision."
    },
    "tree": [
     {
@@ -4260,7 +4267,7 @@
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [],
-     "grants": "⛔ HOLD A POSITION FOR HOURS WITHOUT STIFFNESS, HUNGER OR THE NEED TO SHIFT — and be genuinely hard to notice, because nothing about you is moving. ⚠️ When you finally act, the first exchange is yours.",
+     "grants": "⛔ HOLD A POSITION FOR HOURS WITHOUT STIFFNESS OR FATIGUE, hard to notice because nothing about you is moving — AND YOUR FIRST STRIKE OUT OF THE WAIT CRITS AUTOMATICALLY, and they do not act that round.",
      "cannot": "⛔ It ends when you move. ⚠️ And someone looking directly at you sees you."
     },
     {
@@ -4277,7 +4284,7 @@
       "duration",
       "targets"
      ],
-     "grants": "⛔ A WHOLE NIGHT, AND YOU CAN BRING PEOPLE INTO THE WAIT — a handful of Umbrals in a corridor, all of them still, none of them tired. ⚠️ This is the shape of an Umbral raid and of an Umbral siege.",
+     "grants": "⛔ A WHOLE NIGHT, AND YOU CAN BRING PEOPLE INTO THE WAIT — a handful of Umbrals in a corridor, all still, none tired, ⚠️ AND EVERY ONE OF THEM OPENS WITH THE SAME AUTOMATIC CRIT. This is the shape of an Umbral raid.",
      "cannot": "⚠️ Everyone in the wait shares the ending: when one acts, the waiting is over for all of them."
     },
     {
@@ -4294,7 +4301,7 @@
       "duration",
       "quality"
      ],
-     "grants": "⛔ DAYS RATHER THAN HOURS, and the advantage of the opening carries to everyone who waited. ⚠️ A road watched this way stops being a road: the fourth night nothing happens, the ninth night the supply column simply does not arrive anywhere, and nobody can say where it stopped.",
+     "grants": "⛔ DAYS RATHER THAN HOURS, AND THE OPENING CARRIES PIERCE — armour does not answer the first blow out of a nine-night wait. ⚠️ A road watched this way stops being a road: the ninth night the supply column simply does not arrive anywhere, and nobody can say where it stopped.",
      "cannot": "⛔ YOU STILL HAVE TO EAT EVENTUALLY and the craft only spares you the discomfort, not the need. ⚠️ And a wait this long is a commitment: whatever else was happening, happened without you."
     }
    ],

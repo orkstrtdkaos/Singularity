@@ -1663,10 +1663,10 @@
     "empower",
     "strike"
    ],
-   "description": "⛔ A MARCHER CANNOT CHANGE WHAT A BLADE IS. THEY CAN CHANGE WHAT IS ON IT. Pitch and oil for burning, vitriol from a dyer's shop, grave-filth from the ditch behind a field hospital — dress the edge before the fight and it stops being only steel. ⚠️ THIS IS NOT MAGIC AND THE MARCHERS ARE PARTICULAR ABOUT THAT: it is quartermastery, and it is taught beside cooking and boot-repair. ⛔ IT IS ALSO THE ONLY ANSWER THIS TRADITION HAS TO A THING THAT DOES NOT CARE ABOUT STEEL.",
+   "description": "⛔ A MARCHER CANNOT CHANGE WHAT A BLADE IS. THEY CAN CHANGE WHAT IS ON IT. Pitch and oil for burning, vitriol from a dyer's shop, grave-filth from the ditch behind a field hospital — dress the edge before the fight and it stops being ONLY steel. ⚠️ THE WEAPON LOSES NOTHING: it keeps its own damage and adds half again in whatever you put on it. ⛔ THIS IS NOT MAGIC AND THE MARCHERS ARE PARTICULAR ABOUT THAT: it is quartermastery, taught beside cooking and boot-repair — and it is the only answer this tradition has to a thing that does not care about steel.",
    "narrationHints": "She spends the evening before with a pot and a rag and does not explain. ⚠️ In the morning the thing that shrugs off spears comes apart where she touches it.",
    "notFor": "⛔ YOU MUST HAVE THE MATERIAL AND THE TIME — pitch, oil, vitriol, filth: real substances, carried or found, and an evening to prepare. Nothing here is conjured. ⚠️ IT WEARS OFF: a coating lasts a fight, not a campaign, and a blade wiped down or driven through three bodies is bare steel again. ⛔ AND IT DOES NOT STACK — one dressing at a time, and putting acid over pitch gets you a ruined weapon and a lesson.",
-   "plainly": "A fight/create action. ⛔ DRESS A WEAPON SO IT DEALS A CHOSEN TYPE — `heat` (pitch and oil), `corrosive` (vitriol, venom) or `decay` (grave-filth) — IN A MIX WITH ITS OWN `physical`, for +1d6. Rated 5, one weapon, lasts a fight. r2 dresses the whole party's weapons; r3 the coating persists and you may carry prepared materials for all three. ⚠️ Needs real substances and preparation time. It wears off and does not stack.",
+   "plainly": "A fight/create action, used WITH a weapon craft. ⛔ THE WEAPON KEEPS ALL ITS OWN DAMAGE AND TYPE, AND THE DRESSING ADDS HALF AGAIN in `heat`, `corrosive` or `decay` — a 2d6 blade becomes 2d6 physical plus 1d6 of the dressing. Rated 5, one weapon, lasts a fight. r2 dresses the whole party's weapons; r3 the dressing holds for days and you carry materials for all three. ⚠️ It deals nothing on its own.",
    "intensity": {
     "conserve": "a thin dressing — it holds for the opening exchanges only",
     "surge": "⛔ LAY IT ON HEAVY; the weapon is ruined afterwards and you knew that when you did it"
@@ -1687,30 +1687,31 @@
     {
      "text": "⚠️ IT IS NOT MAGIC AND CANNOT BE MADE TO BE. There is no dressing for `truth`, `psychic` or `abstraction`",
      "class": "hard"
+    },
+    {
+     "text": "⛔ IT DEALS NOTHING ON ITS OWN — no weapon, no dressing. It is an addition to another craft's blow and never a blow itself",
+     "class": "hard"
     }
    ],
    "mechanic": {
-    "dice": {
-     "n": 1,
-     "d": 6
-    },
     "duration": 6,
     "targets": 1,
-    "damageMix": [
-     {
-      "type": "physical",
-      "share": 0.5
-     },
-     {
-      "type": "heat",
-      "share": 0.5
-     }
-    ],
     "crit": {
      "success": "The dressing does exactly what you hoped to something that has never been hurt before, and it notices.",
      "failure": "It takes on your own hands before it takes on anything else."
     },
-    "note": "setup/empower. ⛔ ERIK 2026-08-29: 'Marchers need some TYPED OPTIONS. COAT WEAPON with fire, acid, poison etc. That's CONCRETE AND EFFECTIVE.' ⚠️ EVERY MARCHER WEAPON IS `physical` AND THAT IS A REAL VULNERABILITY, recorded in the corpus by play: 'a weapon with no kind resolves as PHYSICAL, and SOME THINGS IN THE WORLD ARE IMMUNE TO PHYSICAL — Silas Weir's Memory spear did 0.00 against the unmoored choir for exactly this reason.' ⛔ THIS IS THE SOLDIER'S ANSWER TO THAT: not magic, MATERIALS. ⚠️ `damageMix` is the authored default (physical .5 / heat .5); the chosen type replaces the second half at use. **It opens ELEMENTAL and VITAL to a tradition that had only PHYSICS.**"
+    "note": "setup/empower. ⛔ ERIK 2026-08-29: 'Marchers need some TYPED OPTIONS. COAT WEAPON with fire, acid, poison etc. That's CONCRETE AND EFFECTIVE.' ⚠️ EVERY MARCHER WEAPON IS `physical` AND THAT IS A REAL VULNERABILITY, recorded in the corpus by play: 'a weapon with no kind resolves as PHYSICAL, and SOME THINGS IN THE WORLD ARE IMMUNE TO PHYSICAL — Silas Weir's Memory spear did 0.00 against the unmoored choir for exactly this reason.' ⛔ THIS IS THE SOLDIER'S ANSWER TO THAT: not magic, MATERIALS. ⚠️ `damageMix` is the authored default (physical .5 / heat .5); the chosen type replaces the second half at use. **It opens ELEMENTAL and VITAL to a tradition that had only PHYSICS.**",
+    "_additiveNotMix_20260829": "⛔ ERIK 2026-08-29: 'Dressed Edge is a skill that EMPOWERS A WEAPON — which is USED WITH OTHER SKILLS — with various damage types. THE INTENT WAS THAT THIS EMPOWERED TYPE DAMAGE IS ADDITIVE. Maybe adding HALF OF THE BASE WEAPON'S DAMAGE DICE.' ⚠️ I HAD AUTHORED IT AS A 50/50 MIX AND THAT WAS WRONG IN BOTH DIRECTIONS: it halved the weapon's own damage (a pitched blade is not a worse blade) and it made the craft a SUBSTITUTE for the weapon rather than an ADDITION to it. ⛔ CORRECT SHAPE: the weapon keeps ALL its own dice and type; the dressing ADDS half again in the chosen type. A 2d6 physical blade dressed with pitch is 2d6 `physical` + 1d6 `heat`. ⚠️ AND THAT IS WHY IT ANSWERS IMMUNITY HONESTLY: against `the_unmoored_choir` (physical: immune) the 2d6 dies and THE 1d6 HEAT LANDS — not because the craft is invisible to the affinity, but because half of what it delivers is a type the creature does not resist. ⛔ `dice: null` ON PURPOSE — THE CRAFT HAS NO DAMAGE OF ITS OWN. It has no weapon to dress without one.",
+    "_addsTypedDamage_PROPOSED": {
+     "share": 0.5,
+     "of": "weapon",
+     "types": [
+      "heat",
+      "corrosive",
+      "decay"
+     ]
+    },
+    "_notYetReadable": "⛔ `addsTypedDamage` IS PROPOSED AND UNDERSCORE-PREFIXED ON PURPOSE — no engine reads it and I did not declare it in the schema unilaterally. ⚠️ I have invented four fields this week that the engine could not read (`soakBonus`, `mechanic.setup`, `mechanic.ongoingHarm` in the wrong scope, and this), and the pattern is mine: WHEN I WANT A CRAFT TO DO SOMETHING, MY FIRST INSTINCT IS TO AUTHOR A FIELD RATHER THAN ASK WHICH MECHANISM ALREADY DOES IT. ✅ So this one goes to CCode as a spec. ⛔ UNTIL IT IS BUILT: the craft is PROSE that a GM applies — the weapon keeps its damage and adds half again in the dressing's type. Erik's ruling is recorded here; the machinery is not built yet."
    },
    "tree": [
     {
@@ -1723,7 +1724,7 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "gainAxes": [],
-     "grants": "⛔ DRESS ONE WEAPON: `heat`, `corrosive` OR `decay`, mixed half-and-half with its own `physical`, for +1d6. ⚠️ Half the blow now answers to a different ward, which is the entire point.",
+     "grants": "⛔ DRESS ONE WEAPON: it keeps all its own dice and type, AND ADDS HALF AGAIN in `heat`, `corrosive` or `decay`. ⚠️ Against something that shrugs off steel, the steel still fails and the dressing does not.",
      "cannot": "One weapon, one dressing, one fight. ⛔ You must have the material and the evening."
     },
     {

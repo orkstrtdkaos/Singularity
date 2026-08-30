@@ -224,8 +224,12 @@ working papers; **this is the answer.**
 | 08-30 | ✅ **it blocks the BINDING as well as the bruise** | *“nothing without a self can be FRIGHTENED”* is about the condition, not the wound | verified: a beast takes `staggered`, the narrowed dead takes nothing and the receipt says **“there is no self in it to take hold of”** | ⚠️ blocking only damage would have left the fear landing |
 | 08-30 | ⚠️ **ABSENT IS NOT FALSE** | 20 of 26 creatures are unclassed | gated: an unclassed creature is NOT blocked | ⛔ the alternative would make every unclassed thing quietly immune to half the catalogue |
 | 08-30 | ⚠️ **and I assigned `unreachable` without declaring it** | `node --check` passes on that — it needed a RUN | caught before commit; declared beside `imposed` | ⛔ **the exact shape of the `num` bug that sat undetected for two days** behind a condition nothing met |
+| 08-30 | ✅ **SNG-268 — the braid generator can see the ring** | `braidBaseCost` asked how EXPENSIVE the parents are and never how FAR APART, so **an adjacent braid and an antipodal one cost and read identically** | `§17` — the spec's own TEST OF DONE, both halves | ✅ antipodal **14**, adjacent **9**; the antipodal carries a tension bound and **the adjacent carries none** — which is what makes it a distinction |
+| 08-30 | ⚠️ **one correction to the spec, measured before building on it** | it says the scale is *“0 same → 4 antipodal”* | the ring is **24 wide and its maximum distance is 12** | ✅ the three authored braids it cites are all **distance 12** — which **confirms its evidence while correcting its scale**; antipodal is now the ring's own maximum, never a hardcoded number |
+| 08-30 | ✅ **`requiresPoles` free from `minted.from`** | SNG-268 §4: dual-pole gating was a three-instance category only hand-authored braids ever entered | gated | ⚠️ and **absent is today**: with no tradition index a braid mints byte-identically to yesterday |
+| 08-30 | ⛔ **P3 (heal → decay on an undead) is BLOCKED, and I did not build it** | the backlog calls it *“the smallest real build here”* | measured: `resolveHeal` has ONE caller and its subject is **always the winner's own sheet** | ⛔ **you cannot heal an enemy or an ally**, so the rule has no path to fire — it is the target-affordance gap again, and building it would be a reader with no writer |
 
-**Last verified: 2026-08-28 · v1.9.266 · 400 crafts.**
+**Last verified: 2026-08-28 · v1.9.267 · 400 crafts.**
 
 ---
 

@@ -13,6 +13,7 @@
 // Pure, no I/O, fully testable. app.js owns the async generation + the mint op; generate.js authors the
 // rich tree; this owns the mechanics: what is mintable, at what tier, and the minted shape.
 
+import { ringDistance } from "./traditions.js";   // SNG-268: how FAR APART the parents are, not just how expensive
 import { discoveryKey } from "./progression.js"; // the SAME co-activation key the ledger is written with
 import { smartClamp } from "./namematch.js";
 import { deriveMechanic } from "./craftmechanics.js";  // SNG-263 §9: a braid inherits its parents' specificity
@@ -101,15 +102,47 @@ export function braidTier(character, components, catalog = {}) { // registry:int
  *  — a braid's base shouldn't drift as the parents level); the braid's own base then runs through
  *  effectiveEnergyCost (§3a/b/c) like any craft, so a freshly-discovered braid is EXPENSIVE and earns down.
  *  8+10 → 14 · 10+10 → 15 · 6+8 → 11. `fraction` is tunable (rules.leveling.braidCheaperParentFraction). */
-export function braidBaseCost(sources = [], fraction = 0.5) {
+/** ⛔ SNG-268 — HOW FAR APART THE PARENTS ARE. `braidBaseCost` asked how EXPENSIVE they are and never
+ *  how DISTANT, so an adjacent braid and an antipodal one cost and read identically.
+ *
+ *  ⚠️ THE EVIDENCE IS IN THE THREE AUTHORED BRAIDS, and I re-measured it before building on it:
+ *  `meaning_engine` (enginewright×numinous), `harbored_flame` (umbral×blazeborn) and `the_turning_word`
+ *  (threnodist×syllogist) are ALL ring-distance 12 — exact antipodes — and each carries a bound about the
+ *  joining itself. ⛔ A MINTED BRAID GOT NONE OF IT.
+ *
+ *  ⚠️ ONE CORRECTION TO THE SPEC: it says “0 same → 4 antipodal”. THIS RING IS 24 WIDE AND ITS MAXIMUM
+ *  DISTANCE IS 12, not 4 — measured, not assumed. The bands below are on the real scale.
+ *
+ *  ⚠️ WITHOUT A TRADITION INDEX THIS RETURNS null AND NOTHING CHANGES. Absent is not zero: a caller that
+ *  has not adopted the read mints exactly the braid it minted yesterday. */
+export function braidTension(sources = [], { traditionIndex = null, bands = null } = {}) {
+  if (!traditionIndex || (sources || []).length !== 2) return null;
+  const a = sources[0]?.tradition || sources[0]?.powerSystem;
+  const b = sources[1]?.tradition || sources[1]?.powerSystem;
+  const steps = ringDistance(a, b, traditionIndex);
+  if (steps == null) return null;
+  const max = Math.floor((traditionIndex.size || 24) / 2);
+  const B = bands || { adjacentAt: 2, adjacent: 1.0, far: 1.4, antipodal: 1.8 };
+  // ⛔ ANTIPODAL IS THE RING'S OWN MAXIMUM, never a hardcoded number — a ring resized in content must not
+  // silently stop having antipodes.
+  const band = steps >= max ? "antipodal" : steps <= B.adjacentAt ? "adjacent" : "far";
+  return { steps, max, band, factor: band === "antipodal" ? B.antipodal : band === "far" ? B.far : B.adjacent };
+}
+
+export function braidBaseCost(sources = [], fraction = 0.5, tension = null) {
   const costs = (sources || []).map(s => s?.energyCost || 0).sort((a, b) => b - a);
   const priciest = costs[0] || 4, cheaper = costs[1] || 0;
-  return Math.max(priciest + 1, priciest + Math.ceil(cheaper * (Number.isFinite(fraction) ? fraction : 0.5)));
+  const base = Math.max(priciest + 1, priciest + Math.ceil(cheaper * (Number.isFinite(fraction) ? fraction : 0.5)));
+  // ⚠️ THE TENSION IS A MULTIPLIER ON THE WHOLE COST, not an addend — an antipodal braid of two cheap
+  // crafts should still read as expensive RELATIVE TO ITS PARTS, which an addend would not do.
+  return tension ? Math.max(base + 1, Math.round(base * tension.factor)) : base;
 }
 
 export function buildBraidDef(character, components, catalog = {}, opts = {}) {
   const sources = components.map(id => catalog[id]).filter(Boolean);
   if (sources.length !== 2) return null;
+  // ⛔ SNG-268 — HOW FAR APART, computed once and used three ways: the cost, the bound, and the receipt.
+  const tension = braidTension(sources, { traditionIndex: opts.traditionIndex, bands: opts.tensionBands });
   const { tier, maxRank, levelReq } = braidTier(character, components, catalog);
   const authored = opts.authored || {};
   const srcNames = sources.map(s => s.name || s.id);
@@ -142,7 +175,7 @@ export function buildBraidDef(character, components, catalog = {}, opts = {}) {
   }
   return {
     id, name, tradition, powerSystem: tradition,
-    levelReq, energyCost: braidBaseCost(sources, opts.braidFraction), // SNG-227 §3d: priciest parent + a share of the cheaper — a premium over either part, still < running both sequentially
+    levelReq, energyCost: braidBaseCost(sources, opts.braidFraction, tension), // SNG-227 §3d: priciest parent + a share of the cheaper — a premium over either part, still < running both sequentially
     attribute: sources[0]?.attribute || "practical",
     functions, harmRung, effectTags: [], nativeOrCombination: "combination",
     // SNG-263 §9: DERIVED, never invented. Measured before writing this: a minted braid was not
@@ -156,10 +189,22 @@ export function buildBraidDef(character, components, catalog = {}, opts = {}) {
     description: smartClamp(String(authored.description || `A braid earned in play: ${srcNames.join(" and ")}, channelled together until they became one craft.`), 400),
     // SNG-197 §1: the boundary is drawn around the BRAID's own reach, not around its parents — it is not
     // either parent entire; it is the one new craft their joining makes, and no wider. (Never delete this.)
+    // ⛔ SNG-268 §3 — THE TENSION BOUND: one bound the parents never had, about the COST OF THE JOINING.
+    // ⚠️ ADDITIVE ON THE BRAID'S OWN REACH, never a widening of it — SNG-197's never-delete comment below
+    // forbids drawing the boundary around the parents, and this does not: it NARROWS, by naming a strain
+    // that only this pairing has. ✅ Adjacent braids get none, which is the point: the ring must be visible
+    // in what a braid SAYS, not only in what it costs.
+    ...(tension && tension.band !== "adjacent" ? { tensionBound: tension.band === "antipodal"
+      ? "The two poles fight. Holding them together is the whole of the effort, and it costs more than either alone."
+      : "These two do not sit easily together; the joining takes something the parts do not." } : {}),
     notFor: smartClamp(String(authored.notFor || "What lies outside this braid's own reach — it is not either parent whole, only the single new craft their braiding makes."), 240),
     narrationHints: smartClamp(String(authored.description || `${srcNames.join(" braided with ")}.`), 200),
     tree,
-    minted: { kind: "braid", from: [...components], mintedAt: null, namedBy: namedByPlayer ? "player" : (authored.name ? "gm" : "auto"), tier, emergent, enriched: !!(authored.name || authored.description || (authored.tree || []).length || emergent), sourceNames: srcNames }
+    minted: { kind: "braid", from: [...components],
+      // ⛔ SNG-268 §4 — FREE FROM `from`, and it makes dual-pole gating a real category instead of a
+      // three-instance one that only hand-authored braids ever entered.
+      requiresPoles: [...new Set(sources.map(s => s?.tradition || s?.powerSystem).filter(Boolean))],
+      ...(tension ? { tension: { steps: tension.steps, band: tension.band, factor: tension.factor } } : {}), mintedAt: null, namedBy: namedByPlayer ? "player" : (authored.name ? "gm" : "auto"), tier, emergent, enriched: !!(authored.name || authored.description || (authored.tree || []).length || emergent), sourceNames: srcNames }
   };
 }
 
@@ -188,7 +233,7 @@ export function mintBraid(character, def, { at = null } = {}) {
  *  fallback from the discovery's own name + description. Parents are DEDUPED (a 3-parent discovery with a
  *  repeated craft collapses to 2) and id-drift-tolerant (hyphen/underscore). Idempotent: skips a discovery
  *  already in `abilities[]`, OR whose parent-pairing was already braided (it's usable via that braid). Pure. */
-export function registerDiscoveryAbility(character, discovery, catalog = {}, { at = null, braidFraction, craftMechanics = null } = {}) {
+export function registerDiscoveryAbility(character, discovery, catalog = {}, { at = null, braidFraction, craftMechanics = null, traditionIndex = null } = {}) {
   if (!character || !discovery?.id || !discovery?.name) return null;
   character.abilities = character.abilities || [];
   if (character.abilities.some(a => a.abilityId === discovery.id)) return null; // already usable under its own id
@@ -196,7 +241,7 @@ export function registerDiscoveryAbility(character, discovery, catalog = {}, { a
   const parents = [...new Set((discovery.abilities || []).map(resolve).filter(Boolean))];
   // already usable via a braid of the SAME pairing (e.g. a discovery that was also braided) → nothing to do.
   if (parents.length === 2 && (character.braids || []).some(b => braidKey(b.from) === braidKey(parents))) return null;
-  let def = parents.length === 2 ? buildBraidDef(character, parents, catalog, { name: discovery.name, authored: { description: discovery.description }, braidFraction, craftMechanics }) : null;
+  let def = parents.length === 2 ? buildBraidDef(character, parents, catalog, { name: discovery.name, authored: { description: discovery.description }, braidFraction, craftMechanics, traditionIndex }) : null;
   if (!def) {
     // fallback: a minimal braid-shaped def from whatever resolved + the discovery's own words (rank 1, deepens).
     const sources = parents.map(id => catalog[id]).filter(Boolean);

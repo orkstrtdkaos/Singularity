@@ -1006,6 +1006,52 @@ console.log("\n── §16 · craft and creature agree about having a self ─�
     needSelf.length ? !SBs.selfBlocked({ ...needSelf[0], function: (needSelf[0].functions || [])[0] }, {}, { classes }) : false);
 }
 
+/* ══════════ §17 — SNG-268: THE BRAID GENERATOR CAN SEE THE RING ══════════ */
+// ⛔ THE SPEC'S OWN TEST OF DONE, run as a gate: "mint one adjacent and one antipodal braid. The antipodal
+// must cost visibly more AND carry a tension bound; the adjacent must carry neither. Identical output =
+// the generator still cannot see the ring."
+//
+// ⚠️ AND ONE CORRECTION TO THE SPEC, MEASURED BEFORE BUILDING ON IT: it says the scale is "0 same → 4
+// antipodal". THIS RING IS 24 WIDE AND ITS MAXIMUM DISTANCE IS 12. The three authored braids it cites as
+// evidence — meaning_engine, harbored_flame, the_turning_word — are all distance 12, which confirms the
+// EVIDENCE while correcting the SCALE.
+console.log("\n── §17 · a braid knows how far apart its parents are ──");
+{
+  const BR = await import("../engine/braids.js");
+  const TR = await import("../engine/traditions.js");
+  const idx = TR.buildTraditionIndex(rj("content/packs/core/rules/traditions.json"));
+  const cat = {
+    A: { id: "A", name: "Ash", tradition: "umbral", energyCost: 6, functions: ["strike"], levelReq: 3 },
+    B: { id: "B", name: "Flame", tradition: "blazeborn", energyCost: 4, functions: ["strike"], levelReq: 3 },
+    V: { id: "V", name: "Veil", tradition: "veilwright", energyCost: 4, functions: ["strike"], levelReq: 3 },
+  };
+  const ch = { level: 9, abilities: [{ abilityId: "A", rank: 3 }, { abilityId: "B", rank: 3 }, { abilityId: "V", rank: 3 }] };
+  const near = BR.buildBraidDef(ch, ["A", "V"], cat, { traditionIndex: idx });   // umbral × veilwright — d1
+  const far = BR.buildBraidDef(ch, ["A", "B"], cat, { traditionIndex: idx });    // umbral × blazeborn — d12
+
+  // ⛔ THE THREE AUTHORED BRAIDS ARE ANTIPODES — the spec's evidence, re-measured rather than trusted.
+  for (const [a, b] of [["enginewright", "numinous"], ["umbral", "blazeborn"], ["threnodist", "syllogist"]]) {
+    check(`§17: the authored braid ${a}×${b} is antipodal`, TR.ringDistance(a, b, idx) === 12);
+  }
+  check("§17: an ANTIPODAL braid costs visibly more than an adjacent one",
+    far.energyCost > near.energyCost, `${far.energyCost} vs ${near.energyCost}`);
+  check("§17: …and carries the tension bound", !!far.tensionBound);
+  // ⛔ THE OTHER HALF, WHICH IS WHAT MAKES IT A DISTINCTION: adjacent gets neither.
+  check("§17: an ADJACENT braid carries NO tension bound", !near.tensionBound);
+  check("§17: the band is recorded on the mint receipt",
+    far.minted?.tension?.band === "antipodal" && near.minted?.tension?.band === "adjacent");
+  // ✅ SNG-268 §4 — dual-pole gating stops being a three-instance category.
+  check("§17: a minted braid declares requiresPoles from its own parents",
+    (far.minted?.requiresPoles || []).length === 2 && far.minted.requiresPoles.includes("umbral"));
+  // ⚠️ ABSENT IS TODAY: with no index, byte-identical to what shipped.
+  const blind = BR.buildBraidDef(ch, ["A", "B"], cat, {});
+  check("§17: without a tradition index nothing changes (absent is not zero)",
+    !blind.tensionBound && blind.energyCost < far.energyCost, `${blind.energyCost}`);
+  // ⛔ AND THE LIVE PATH SUPPLIES IT, or the whole thing is inert.
+  check("§17: app.js threads the tradition index into the braid builder",
+    rd("app.js").includes("traditionIndex: CONTENT.traditionIndex"));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -20,8 +20,8 @@ node scripts/safe_delete.mjs <field>  # triage one candidate before deleting it
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **86** | a play-path file names it outside a comment |
-| ⛔ **DARK** | **19** | **no literal reader anywhere** — see the four lies below |
+| ✅ **READ** | **87** | a play-path file names it outside a comment |
+| ⛔ **DARK** | **18** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **4** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
 
@@ -637,7 +637,7 @@ thing measured against on the same day: affinities do not cluster, and a default
 | `read` | 3 | `root`×1 `tree`×2 | ✅ READ | `art.js`, `borncontract.js`, `generate.js` |
 | `projectThreshold` | 3 | `root`×3 | ✅ READ | `projects.js` |
 | `projectTicks` | 3 | `root`×3 | ✅ READ | `projects.js` |
-| `requiresPoles` | 3 | `mechanic`×3 | ⛔ DARK | — |
+| `requiresPoles` | 3 | `mechanic`×3 | ✅ READ | `braids.js` |
 | `summon` | 3 | `root`×3 | ✅ READ | `gm.js`, `npcsheet.js`, `roundreceipt.js` |
 | `backlashRungNone` | 3 | `root`×3 | ⛔ DARK | — |
 | `interceptCondition` | 3 | `tree`×3 | ✅ READ | `intercept.js`, `app.js` |

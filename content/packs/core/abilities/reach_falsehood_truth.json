@@ -398,7 +398,7 @@
    "id": "wrong_reality",
    "name": "Wrong Reality",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
@@ -412,7 +412,7 @@
    "harmRung": "incapacitating",
    "narrationHints": "She didn't hit them. She showed them the room they were in, and the room was wrong.",
    "description": "Give a person a false read of what's happening — wrong enough that they act on it in ways that cost them.",
-   "notFor": [],
+   "notFor": "⛔ THEY MUST BE ABLE TO ACT ON IT — a false read is worthless against someone already committed, already fleeing, or with no decision left to make. ⚠️ AND IT GIVES A WRONG PICTURE, NOT A WRONG BODY: they see the fight incorrectly and their sword is still real. ⛔ It fails on anyone who checks: a second look, a companion's shout, or one contradicting fact ends it, which is why Veilwrights work fast and leave.",
    "tradition": "veilwright",
    "functions": [
     "deceive",
@@ -420,9 +420,9 @@
     "strike"
    ],
    "challengeTypes": [
-    "combat",
-    "social",
-    "tactical"
+    "FIGHT",
+    "SOCIAL",
+    "DUEL"
    ],
    "tree": [
     {
@@ -531,13 +531,14 @@
    "_nameWas": "The Wrong Reality",
    "_idWas": "the_wrong_reality",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['combat', 'social', 'tactical'], energy e2 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
   },
   {
    "id": "better_story",
    "name": "Better Story",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
@@ -551,16 +552,16 @@
    "harmRung": "none",
    "narrationHints": "She didn't fix it. She showed them it was already fixed, a different way.",
    "description": "Heal through reframing — give someone a version of events they can live with, that is also true.",
-   "notFor": [],
+   "notFor": "⛔ IT MUST BE TRUE. Not the whole truth and not the obvious reading — but a version they could verify and still accept, or it is `wrong_reality` wearing kindness. ⚠️ AND IT MENDS WHAT A STORY CAN REACH: grief, shame, a thing they cannot put down. It closes no wound and cures nothing. ⛔ A person who does not want the better story keeps the one they have.",
    "tradition": "veilwright",
    "functions": [
     "heal",
     "restore"
    ],
    "challengeTypes": [
-    "medical",
-    "social",
-    "psychological"
+    "SOCIAL",
+    "SURVIVE",
+    "INVESTIGATE"
    ],
    "tree": [
     {
@@ -658,13 +659,14 @@
    "_idWas": "the_better_story",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['medical', 'social', 'psychological'], energy e2 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
   },
   {
    "id": "false_target",
    "name": "False Target",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
@@ -678,7 +680,7 @@
    "harmRung": "none",
    "narrationHints": "They were very sure they had her. She was very sure they didn't.",
    "description": "Make a false version of the thing to be targeted — they strike what isn't there.",
-   "notFor": [],
+   "notFor": "⛔ IT ANSWERS AIM, NOT AREA — a swing at a false you misses; a collapsing roof does not care which of you is real. ⚠️ AND IT IS SEEN THROUGH BY TOUCH: the first hand that reaches you ends it. ⛔ Nor does it move you — you are exactly where you were, and someone who works that out is now looking at the right place.",
    "tradition": "veilwright",
    "functions": [
     "conceal",
@@ -686,9 +688,9 @@
     "shield"
    ],
    "challengeTypes": [
-    "combat",
-    "stealth",
-    "defense"
+    "FIGHT",
+    "STEALTH",
+    "DEFEND"
    ],
    "tree": [
     {
@@ -798,13 +800,14 @@
    "_wardTypes": "⛔ SNG-512. They strike what is not there. Answers anything AIMED; useless against an area or a fact.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_wardMigrated_20260829": "⛔ WARD `precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — so a ward against it warded nothing. ⚠️ SEVEN CRAFTS carried it after the ruling, and my morning migration only cleaned `damageType`. **A ward naming a dead type is worse than an authored-and-unread field: it looks like protection.**"
+   "_wardMigrated_20260829": "⛔ WARD `precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — so a ward against it warded nothing. ⚠️ SEVEN CRAFTS carried it after the ruling, and my morning migration only cleaned `damageType`. **A ward naming a dead type is worse than an authored-and-unread field: it looks like protection.**",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['combat', 'stealth', 'defense'], energy e2 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
   },
   {
    "id": "made_truth",
    "name": "Made Truth",
    "levelReq": 3,
-   "energyCost": 2,
+   "energyCost": 6,
    "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
@@ -818,7 +821,7 @@
    "harmRung": "none",
    "narrationHints": "Everything is a made thing. She just made better ones.",
    "description": "Make a reality so complete it functions as real — not illusion, a working alternative.",
-   "notFor": [],
+   "notFor": "⛔ IT MAKES A WORKING ALTERNATIVE, NOT A WISH — it must be coherent, and a made truth that contradicts something present collapses on contact with it. ⚠️ IT COSTS ATTENTION TO HOLD and ends when you stop — that is `maintained_veil`'s job, not this one. ⛔ AND IT CANNOT UNMAKE WHAT IS ALREADY SO: you build beside the world, never over it.",
    "tradition": "veilwright",
    "functions": [
     "deceive",
@@ -826,9 +829,9 @@
     "transform"
    ],
    "challengeTypes": [
-    "magical",
-    "craft",
-    "tactical"
+    "CREATE",
+    "PUZZLE",
+    "DEFEND"
    ],
    "tree": [
     {
@@ -929,13 +932,14 @@
    "_nameWas": "The Made Truth",
    "_idWas": "the_made_truth",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['magical', 'craft', 'tactical'], energy e2 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
   },
   {
    "id": "false_door",
    "name": "False Door",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
@@ -949,7 +953,7 @@
    "harmRung": "none",
    "narrationHints": "The door was on the wrong wall. She'd put it there.",
    "description": "Make a passage appear where one isn't — move through what appears to be solid.",
-   "notFor": [],
+   "notFor": "⛔ THE PASSAGE IS FALSE AND THE WALL IS REAL — what you make is a way THROUGH what appears solid, and if there is genuinely no space it is a very convincing place to stand. ⚠️ One person at a time, and anyone watching sees where you went. ⛔ It does not open what is locked, warded or witnessed by something that reads made things.",
    "tradition": "veilwright",
    "functions": [
     "deceive",
@@ -957,9 +961,9 @@
     "travel"
    ],
    "challengeTypes": [
-    "stealth",
-    "infiltration",
-    "tactical"
+    "STEALTH",
+    "EXPLORE",
+    "CHASE"
    ],
    "tree": [
     {
@@ -1052,13 +1056,14 @@
    "_nameWas": "The False Door",
    "_idWas": "the_false_door",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['stealth', 'infiltration', 'tactical'], energy e2 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
   },
   {
    "id": "maintained_veil",
    "name": "Maintained Veil",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
@@ -1072,16 +1077,16 @@
    "harmRung": "none",
    "narrationHints": "She wasn't there anymore. The veil was still going.",
    "description": "Sustain a falsecraft across time without constant attention — set it, and it keeps.",
-   "notFor": [],
+   "notFor": "⛔ IT SUSTAINS A FALSECRAFT; IT MAKES NONE — without a working to hold it does nothing at all. ⚠️ AND IT CANNOT ADAPT: what you set is what keeps, and a veil that made sense yesterday is still saying yesterday's thing. ⛔ One at a time, and it ends the moment the underlying craft is broken rather than merely doubted.",
    "tradition": "veilwright",
    "functions": [
     "bind",
     "sustain"
    ],
    "challengeTypes": [
-    "stealth",
-    "logistics",
-    "magical"
+    "STEALTH",
+    "TRAVEL",
+    "DEFEND"
    ],
    "tree": [
     {
@@ -1173,13 +1178,14 @@
    "_nameWas": "The Maintained Veil",
    "_idWas": "the_maintained_veil",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['stealth', 'logistics', 'magical'], energy e1 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
   },
   {
    "id": "true_ground",
    "name": "True Ground",
    "levelReq": 1,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
@@ -1193,16 +1199,16 @@
    "harmRung": "none",
    "narrationHints": "She knew exactly what was there. That was enough.",
    "description": "Protect through knowing what is actually the case — deception has no purchase on someone who already sees truly.",
-   "notFor": [],
+   "notFor": "⛔ IT ANSWERS DECEPTION AND NOTHING ELSE — a blade, a fire and a fall are all entirely true and reach you normally. ⚠️ AND IT PROTECTS ONLY WHERE YOU ACTUALLY KNOW: a Verist certain of a thing that is false has built their ground on it. ⛔ It does not tell you WHEN you are being deceived, only that deception finds no purchase — you may never learn someone tried.",
    "tradition": "verist",
    "functions": [
     "resist",
     "shield"
    ],
    "challengeTypes": [
-    "defense",
-    "magical",
-    "social"
+    "DEFEND",
+    "SURVIVE",
+    "SOCIAL"
    ],
    "tree": [
     {
@@ -1308,13 +1314,14 @@
    "_idWas": "the_true_ground",
    "_wardTypes": "⛔ SNG-512. ⛔ Deception has no purchase on someone standing on what is so. Answers the false; answers no blade.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['defense', 'magical', 'social'], energy e1 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
   },
   {
    "id": "established_fact",
    "name": "Established Fact",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
@@ -1328,16 +1335,16 @@
    "harmRung": "none",
    "narrationHints": "She said it until it was a fact. It was already a fact. That was the distinction.",
    "description": "Make something true by stating it fully and accurately until it cannot be denied.",
-   "notFor": [],
+   "notFor": "⛔ IT MUST BE SO. This states a thing until it cannot be denied — it does not MAKE it so, and a Verist who tries it on a falsehood establishes nothing and spends their standing doing it. ⚠️ AND IT NEEDS WITNESSES WHO CAN FOLLOW: a room that will not hear you is not persuaded by accuracy. ⛔ An established fact cannot be un-established by you either.",
    "tradition": "verist",
    "functions": [
     "bind",
     "make"
    ],
    "challengeTypes": [
-    "social",
-    "legal",
-    "intellectual"
+    "SOCIAL",
+    "INVESTIGATE",
+    "DUEL"
    ],
    "tree": [
     {
@@ -1429,13 +1436,14 @@
    "_nameWas": "The Established Fact",
    "_idWas": "the_established_fact",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['social', 'legal', 'intellectual'], energy e2 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
   },
   {
    "id": "weight_of_truth",
    "name": "Weight of Truth",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
@@ -1449,16 +1457,16 @@
    "harmRung": "none",
    "narrationHints": "She had never once been wrong about a fact. They knew it. The knowledge was the authority.",
    "description": "Command through the weight of a person who says only true things — the word lands differently when the speaker never lies.",
-   "notFor": [],
+   "notFor": "⛔ IT IS EARNED, NOT WORN — the weight is the record of never having lied, and a single known lie ends it for years. ⚠️ IT COMMANDS ATTENTION, NEVER OBEDIENCE: they will hear you, weigh it, and may still refuse. ⛔ AND IT WORKS ONLY ON THOSE WHO KNOW YOUR RECORD — a stranger hears a stranger.",
    "tradition": "verist",
    "functions": [
     "break",
     "command"
    ],
    "challengeTypes": [
-    "social",
-    "leadership",
-    "negotiation"
+    "SOCIAL",
+    "DEFEND",
+    "DUEL"
    ],
    "tree": [
     {
@@ -1564,13 +1572,14 @@
    "_nameWas": "The Weight of Truth",
    "_idWas": "the_weight_of_truth",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['social', 'leadership', 'negotiation'], energy e1 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
   },
   {
    "id": "direct_path",
    "name": "Direct Path",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
@@ -1584,7 +1593,7 @@
    "harmRung": "none",
    "narrationHints": "She went the way that was actually there, not the way it looked.",
    "description": "Navigate through accurate knowledge — the route that exists, not the route that appears to.",
-   "notFor": [],
+   "notFor": "⛔ THE TRUE ROUTE IS OFTEN THE WORSE ONE — it finds what exists, not what is safe, passable or short. ⚠️ AND IT NEEDS THE GROUND TO BE KNOWABLE: shifting ground, a made passage or a place that is lying about itself defeat it. ⛔ It will not tell you what is ON the route.",
    "tradition": "verist",
    "functions": [
     "move",
@@ -1592,9 +1601,9 @@
     "travel"
    ],
    "challengeTypes": [
-    "navigation",
-    "investigation",
-    "tactical"
+    "TRAVEL",
+    "EXPLORE",
+    "CHASE"
    ],
    "tree": [
     {
@@ -1701,13 +1710,14 @@
    "_nameWas": "The Direct Path",
    "_idWas": "the_direct_path",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['navigation', 'investigation', 'tactical'], energy e1 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
   },
   {
    "id": "held_truth",
    "name": "Held Truth",
    "levelReq": 1,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
@@ -1721,16 +1731,16 @@
    "harmRung": "none",
    "narrationHints": "Everything else was a version. She had the real. The real held.",
    "description": "Sustain through knowing what is real — the accurate account of what is so is enough to stand on.",
-   "notFor": [],
+   "notFor": "⛔ IT SUSTAINS; IT DOES NOT COMFORT — an accurate account of what is so is enough to stand on and is not enough to feel better about. ⚠️ AND IT NEEDS AN ACCURATE ACCOUNT: a Verist who does not actually know what is happening has nothing to hold. ⛔ It carries you through hardship and mends nothing.",
    "tradition": "verist",
    "functions": [
     "resist",
     "sustain"
    ],
    "challengeTypes": [
-    "endurance",
-    "hardship",
-    "psychological"
+    "SURVIVE",
+    "DEFEND",
+    "TRAVEL"
    ],
    "tree": [
     {
@@ -1822,7 +1832,8 @@
    "_nameWas": "The Held Truth",
    "_idWas": "the_held_truth",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['endurance', 'hardship', 'psychological'], energy e1 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
   },
   {
    "schemaVersion": 1,
@@ -2590,7 +2601,7 @@
    ],
    "tradition": "veilwright",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "conceal",
    "operativeAxis": [
     "duration",
@@ -2624,7 +2635,8 @@
    "_nameWas": "The Ordinary Face",
    "_idWas": "the_ordinary_face",
    "_powerSystemWas": "reach_falsehood_truth",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⚠️ ability rung `incapacitating` -> `none`: this is a DISGUISE — you look like a porter; nobody is stopped, at any rank."
   },
   {
    "id": "useful_absence",
@@ -2699,7 +2711,7 @@
    ],
    "tradition": "veilwright",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "conceal",
    "operativeAxis": [
     "scope",
@@ -2733,7 +2745,8 @@
    "_nameWas": "The Useful Absence",
    "_idWas": "the_useful_absence",
    "_powerSystemWas": "reach_falsehood_truth",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⚠️ ability rung `incapacitating` -> `none`: this is it makes one object UNNOTICED; a key on a hook harms no one, at any rank."
   },
   {
    "id": "standing_word",
@@ -2816,7 +2829,7 @@
    ],
    "tradition": "verist",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "bind",
    "operativeAxis": [
     "duration",
@@ -2855,12 +2868,13 @@
    "_nameWas": "The Standing Word",
    "_idWas": "the_standing_word",
    "_powerSystemWas": "reach_falsehood_truth",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⚠️ ability rung `incapacitating` -> `none`: this is TESTIMONY before witnesses — an account that cannot be quietly revised puts nobody down, at any rank."
   },
   {
    "id": "see_the_made_thing",
    "name": "See the Made Thing",
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "metaphysical",
    "attribute": "mental",
    "axes": {
@@ -2873,16 +2887,16 @@
    ],
    "narrationHints": "She saw the seams in everything. That was the price of the craft.",
    "description": "Read what is constructed versus what is found — see the falsecrafts in any situation.",
-   "notFor": [],
+   "notFor": "⛔ IT SEES THAT A THING WAS MADE, NEVER WHAT IT HIDES — you learn the wall is false and not what is behind it. ⚠️ AND EVERYTHING IS MADE: a house, a law, a reputation. The craft reads CONSTRUCTION, and telling a falsecraft from ordinary artifice is your judgement, not the craft's. ⛔ A veil good enough to be believed by its maker reads as found.",
    "tradition": "veilwright",
    "functions": [
     "foresee",
     "reveal"
    ],
    "challengeTypes": [
-    "investigation",
-    "intellectual",
-    "magical"
+    "INVESTIGATE",
+    "PUZZLE",
+    "EXPLORE"
    ],
    "tree": [
     {
@@ -2956,7 +2970,8 @@
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_sng525b": "⛔ SNG-525b. POINTER BOUNDS THAT SURVIVED THE SWEEP. ⚠️ These two are FIRST-GIFT SENSES RESTORED BY SNG-506 — their bounds came back verbatim from the revert log, carrying the original 'Anything rank 2 adds' fault that SNG-484 had already flagged everywhere else.\n⛔ A RESTORE BRINGS BACK WHAT WAS THERE, INCLUDING WHAT WAS WRONG WITH IT. The sweep ran before the restore, so these were never flagged and never fixed."
+   "_sng525b": "⛔ SNG-525b. POINTER BOUNDS THAT SURVIVED THE SWEEP. ⚠️ These two are FIRST-GIFT SENSES RESTORED BY SNG-506 — their bounds came back verbatim from the revert log, carrying the original 'Anything rank 2 adds' fault that SNG-484 had already flagged everywhere else.\n⛔ A RESTORE BRINGS BACK WHAT WAS THERE, INCLUDING WHAT WAS WRONG WITH IT. The sweep ran before the restore, so these were never flagged and never fixed.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['investigation', 'intellectual', 'magical'], energy e1 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
   },
   {
    "id": "the_plain_seeing",
@@ -3017,7 +3032,7 @@
    ],
    "tradition": "verist",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "reveal",
    "operativeAxis": [
     "precision",
@@ -3049,7 +3064,8 @@
    "plainly": "A puzzle/social action that strips distortion off what you are looking at. Rated 6 of 10 across a scope of 2 for about two hours.",
    "_descriptionWas": "The Verists' first craft and the one every other Verist craft rests on. You cannot say the true thing until you can see it.",
    "_powerSystemWas": "reach_falsehood_truth",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⚠️ ability rung `incapacitating` -> `none`: this is a SEEING craft — illusion and staging come off a scene, and everyone in it is untouched, at any rank."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

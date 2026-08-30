@@ -1112,6 +1112,244 @@
    ],
    "_authored": "⛔ ERIK 2026-08-29: 'soldiers move on to be HEROES, EPICS, LEGENDARIES… questing. What skills would help them do that?' ⚠️ READ THE MECHANISM FIRST (rule 11): tier rises on deeds, time and STANDING, and standing propagates by community. ⛔ SO THE ANSWER WAS NOT ANOTHER WEAPON.",
    "_gainAxesFix_20260829": "⛔ r3 declared , which is NOT one of the nine KINDS OF IMPROVEMENT. ⚠️ THIRD TIME I HAVE MADE THIS EXACT ERROR — and this one came AFTER I renamed the two vocabularies and wrote PIPELINE rule 7 about naming them properly. ⛔ The nine are range · duration · damage · scope · targets · quality · autonomy · conditions · tempo.  is narrative vocabulary from the  side and was RULED PROSE. The rank means ."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "marcher",
+   "nativeOrCombination": "native",
+   "axes": {
+    "violence_peace": -0.75
+   },
+   "id": "break_the_line",
+   "name": "Break the Line",
+   "levelReq": 4,
+   "energyCost": 9,
+   "attribute": "mental",
+   "shape": "hobble",
+   "harmRung": "incapacitating",
+   "challengeTypes": [
+    "FIGHT",
+    "DEFEND",
+    "DUEL"
+   ],
+   "operativeAxis": [
+    "scope",
+    "targets",
+    "conditions"
+   ],
+   "effectTags": [
+    "formation",
+    "veteran",
+    "disrupt"
+   ],
+   "functions": [
+    "break",
+    "hinder",
+    "provoke"
+   ],
+   "description": "⛔ YOU HAVE HELD A LINE, SO YOU KNOW WHAT HOLDS ONE. A formation is not strong because of the men in it — it is strong because each of them believes the two beside him will still be there. ⚠️ TAKE THAT AWAY AND THE REST FOLLOWS: a shove at the joint, a shout in the wrong voice, one man pulled out of the rank at the moment the press comes. ⛔ THIS IS `held_line` READ FROM THE OTHER SIDE, AND ONLY SOMEONE WHO HAS DONE THE HOLDING CAN DO IT.",
+   "narrationHints": "She does not attack the shield wall. ⚠️ She hits the third man from the end twice, steps back, and waits. ⛔ Eleven seconds later the whole right flank is a crowd.",
+   "notFor": "⛔ IT BREAKS FORMATIONS, NOT PEOPLE — every one of them is still armed, still angry, and now unformed and much harder to predict. ⚠️ A BROKEN LINE IS NOT A ROUTED ONE: they can re-form, and a good serjeant will. ⛔ AND IT NEEDS A FORMATION TO BREAK: a mob is already a crowd, and three people in a corridor are not a line. Nor does it touch anything that does not believe in the man beside it — the raised, the driven, a mechanism.",
+   "plainly": "A fight/defend action. ⛔ BREAK AN ENEMY FORMATION — they lose the benefits of holding together and fight as individuals. Rated 6, a line's worth, about four rounds. r2 stops them re-forming while you hold it; r3 breaks a formation you are NOT engaged with, from across the field. ⚠️ They are still armed. It does nothing to the raised, the driven, or anything that does not rely on the man beside it.",
+   "intensity": {
+    "conserve": "break one section — a flank, a gate-rank, the end of a wall",
+    "surge": "break everything holding on the field; ⛔ INCLUDING ANY LINE YOUR OWN PEOPLE ARE STANDING IN"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT BREAKS THE FORMATION, NOT THE FIGHTERS — they are all still armed and now unpredictable",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT NEEDS A REAL FORMATION. A mob is already a crowd",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ NOTHING THAT DOES NOT RELY ON THE MAN BESIDE IT — the raised, the driven and mechanisms are untouched",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ A BROKEN LINE CAN RE-FORM, and a good serjeant will",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 4,
+    "targets": 8,
+    "scope": 2,
+    "crit": {
+     "success": "It goes at the joint and takes the neighbouring section with it.",
+     "failure": "You pull the wrong man and the line closes tighter than it was."
+    },
+    "note": "hobble. ⛔ ERIK 2026-08-29: 'the higher level soldier skills should also BREAK AND DISRUPT UNITS AND FORMATIONS — they've BEEN THERE and know what it takes to hold and to break.' ⚠️ IT IS `held_line` INVERTED, and the fiction is the veteran's: the knowledge is the same knowledge, used from the other side. ⛔ AND IT IS THE PLAYER-FACING EDGE OF THE GROUP MODEL — a formation's benefit is exactly what `standingContributions` aggregates, and this removes it without killing anyone."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Break the Line",
+     "functions": [
+      "break",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating",
+     "gainAxes": [],
+     "grants": "⛔ AN ENEMY FORMATION COMES APART — they lose everything they were getting from holding together and fight as individuals. ⚠️ Nobody is hurt. Everybody is worse.",
+     "cannot": "A real formation, four rounds. ⛔ They can re-form. ⚠️ And they are all still armed."
+    },
+    {
+     "rank": 2,
+     "name": "Not Again",
+     "functions": [
+      "break",
+      "hinder",
+      "provoke"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating",
+     "gainAxes": [
+      "duration",
+      "quality"
+     ],
+     "grants": "⛔ THEY CANNOT RE-FORM WHILE YOU HOLD IT — every attempt to dress the line goes wrong in a way that looks like bad luck to them and looks like arithmetic to you.",
+     "cannot": "⚠️ It takes your attention. ⛔ And a commander who orders them to fight as individuals has adapted."
+    },
+    {
+     "rank": 3,
+     "name": "From Across the Field",
+     "functions": [
+      "break",
+      "hinder",
+      "provoke"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating",
+     "gainAxes": [
+      "range",
+      "targets"
+     ],
+     "grants": "⛔ BREAK A FORMATION YOU ARE NOT ENGAGED WITH — read it from a ridge, name the joint, and send one person to do the thing that opens it. ⚠️ This is where a Marcher stops being a fighter on the field and becomes a reason the field went that way.",
+     "cannot": "⛔ You must be able to SEE it. ⚠️ And someone has to go and do the thing."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29 — the veteran's knowledge inverted. `held_line` read from the other side."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "marcher",
+   "nativeOrCombination": "native",
+   "axes": {
+    "violence_peace": -0.75
+   },
+   "id": "who_falls_first",
+   "name": "Who Falls First",
+   "levelReq": 4,
+   "energyCost": 8,
+   "attribute": "mental",
+   "shape": "setup",
+   "harmRung": "none",
+   "challengeTypes": [
+    "FIGHT",
+    "DEFEND",
+    "INVESTIGATE"
+   ],
+   "operativeAxis": [
+    "quality",
+    "targets"
+   ],
+   "effectTags": [
+    "veteran",
+    "triage",
+    "targeting"
+   ],
+   "functions": [
+    "reveal",
+    "empower",
+    "foresee"
+   ],
+   "description": "⛔ LOOK AT A GROUP AND KNOW WHO IT CANNOT AFFORD TO LOSE. Not the biggest, not the loudest — the one whose absence takes something the rest cannot replace: the mender, the one carrying the signal, the only person there who can open the gate. ⚠️ A MARCHER KNOWS THIS BECAUSE THEY HAVE BEEN IN THE UNIT THAT LOST THAT PERSON, and remembers what the next hour was like. ⛔ IT CUTS BOTH WAYS AND THE TRADITION TEACHES IT AS ONE SKILL: the same read tells you who to put behind you.",
+   "narrationHints": "He looks at nine armed men for about two seconds. ⚠️ 'The thin one at the back with the satchel,' he says. ⛔ Nobody else had noticed the satchel.",
+   "notFor": "⛔ IT NAMES WHO MATTERS, IT DOES NOT HELP YOU REACH THEM — the answer is usually the person standing furthest back behind the most people, which is the whole reason they are placed there. ⚠️ AND IT READS CAPABILITY, NOT VALUE: it will name a stranger's mender and say nothing about the man's children. ⛔ It is blind to anything it has no reference for — a craft nobody in the unit has seen used reads as nothing at all.",
+   "plainly": "A fight/defend action. ⛔ NAME THE MEMBER OF A GROUP WHOSE LOSS COSTS THEM MOST — and take a named advantage on acting against them, OR on protecting that person if they are yours. Rated 5, one group. r2 names the order — first, second, third; r3 reads a group you have only heard described. ⚠️ It tells you WHO, never how to get there.",
+   "intensity": {
+    "conserve": "one group, one name",
+    "surge": "read every group on the field; ⚠️ YOU WILL SEE WHO YOUR OWN SIDE CANNOT AFFORD TO LOSE, AND YOU WILL NOT BE ABLE TO UNSEE IT"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT NAMES WHO, NEVER HOW TO REACH THEM — and the answer is usually the best-protected person there",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ CAPABILITY, NOT VALUE. It reads what a group would lose, not what a person is worth",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ BLIND TO WHAT IT HAS NO REFERENCE FOR — an unfamiliar craft reads as nothing",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "targets": 1,
+    "crit": {
+     "success": "You name someone the enemy commander had not realised was load-bearing either.",
+     "failure": "You name the decoy, who is standing exactly where a mender would stand."
+    },
+    "note": "setup/reveal. ⛔ ERIK 2026-08-29: 'AND WHO TO PROTECT AND WHO TO TARGET.' ⚠️ THIS IS THE GROUP CAPABILITY MODEL MADE PLAYER-FACING: `standingContributions` returns `{families, lost}` and the spec's central distinction is COVERAGE versus DEPTH — losing the only mender is a CLIFF, losing one of six spears is a slope. ⛔ THIS CRAFT READS THE CLIFF. And the veteran's fiction earns it exactly: a Marcher knows which loss is a cliff because they have been in the unit that took one."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Who Falls First",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ NAME THE ONE WHOSE LOSS COSTS A GROUP MOST, and take a named advantage acting against them — or protecting them, if they are yours.",
+     "cannot": "⚠️ It does not help you reach them. ⛔ Capability only; it says nothing about who anyone is."
+    },
+    {
+     "rank": 2,
+     "name": "And Then",
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "targets"
+     ],
+     "grants": "⛔ THE ORDER, NOT JUST THE NAME — first, second, third, and what each loss opens. ⚠️ A Marcher at this rank can tell you what a fight will look like four losses from now.",
+     "cannot": "⛔ The order changes when the fight does. ⚠️ And it assumes they do not adapt, which good ones do."
+    },
+    {
+     "rank": 3,
+     "name": "From the Telling",
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "range",
+      "scope"
+     ],
+     "grants": "⛔ READ A GROUP YOU HAVE ONLY HEARD DESCRIBED — from a scout's report, a prisoner's account, a rumour with enough detail in it. ⚠️ You will know who matters in a company you have never seen.",
+     "cannot": "⛔ THE READING IS ONLY AS GOOD AS THE TELLING. ⚠️ And a deliberately false account produces a confident, specific, wrong answer."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29: 'and WHO TO PROTECT AND WHO TO TARGET.' ⚠️ It is the coverage-cliff distinction from the group aggregation spec, made into a craft — and the veteran's fiction earns it rather than decorating it."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",

@@ -876,13 +876,14 @@ feature."***
 blocks, and the punishment-surge. **I keep pricing power in harm to the player's own side**, and it reads
 as depth while being the thing he most dislikes.
 
-### ⬜ THE 12 PRE-EXISTING CRAFTS — NOT REWRITTEN, LOGGED
+### ⬜ THE 13 PRE-EXISTING CRAFTS — NOT REWRITTEN, LOGGED
 
 **These were authored before this session and I have left them alone deliberately** — a dozen silent
 rewrites would lose the design question Erik is opening. **They are the feature's natural first content:**
 
 | craft | what it currently says |
 |---|---|
+| ⛔ `edge` r3 | *"does not sort: whoever is inside the arc is inside it"* — ⚠️ **I removed this and Erik reverted it: *"don't act on anything we've already audited until we evaluate it"*** |
 | `blaze_wall` | *"your own people are stopped exactly as well"* |
 | `felt_wall` | *"everything in it, all at once, including your own party's fear"* |
 | `last_lament` | *"your enemies hear it too, and they are FREED"* |
@@ -899,9 +900,15 @@ rewrites would lose the design question Erik is opening. **They are the feature'
    interesting version: *"unless they were told beforehand"* — **coordination as the counterplay.**
 3. ⛔ **Does the AI GM narrate it, or does the engine resolve it?** A craft that "does not sort" is
    currently prose either way — **nothing in the engine sorts targets by side.**
-4. ⚠️ **And it interacts with `in_the_way`**, which deliberately puts a blow into a third party: ⛔ **that
-   craft is friendly fire as a DELIBERATE ACT, which may be the cleanest expression of the feature and the
-   argument for building it.**
+4. ⛔ **`in_the_way` IS THE EXCEPTION AND ERIK RULED IT SO: *"keep in the way able to target allies."*** ⚠️ **I
+   had removed that under the no-harm rule and it was over-application.** ✅ **THE DISTINCTION THAT MATTERS:
+   the rule is about crafts that hit your side WITHOUT YOU CHOOSING IT — an area that "does not sort". It is
+   not about a craft whose SUBJECT is deciding who takes the blow.** ⛔ **That craft is friendly fire as a
+   DELIBERATE ACT, and it is the cleanest argument for building the feature.**
+
+5. ⚠️ **SCOPE OF ACTION, RULED: *"only the ones you just added."*** ⛔ **Crafts already audited are not to be
+   edited for this until the feature is evaluated** — five crafts I authored this session were corrected;
+   `edge` was reverted because it is pre-existing.
 
 ### ⛔ SPIRIT, DEEPER: THE PRECURSOR WAR MAY BE **ABOUT** AND **POWERED BY** SPIRIT
 

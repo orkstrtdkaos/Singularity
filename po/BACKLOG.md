@@ -980,3 +980,40 @@ against rank names that already existed.
 
 ✅ **WORTH A GATE, NOT A SWEEP:** assert that no rank is named after a DIFFERENT craft. ⛔ **It must exempt
 r1-matching-its-own-craft**, or it reports 140 false positives and gets switched off.
+
+## ⛔ THE "IS THIS WORTH IT" PASS — primary effects that are flavour wearing a number
+
+**Erik, 2026-08-30: *"We need a good pass of 'IS THIS WORTH IT' for the PRIMARY EFFECT of a skill. As a
+side effect, giving someone a painless interval is nice — but NOT WHAT MAKES IT A MECHANIC."***
+
+### ⛔ THE WORKED EXAMPLE, AND IT IS DAMNING
+
+**`last_gift` was L4, e9, `shape: bolster`, `magnitude: 6`.** ⚠️ **It STRENGTHENED a person who is about to
+stop existing.** ⛔ **A rating of 6 out of 10 on someone with no next round is a number that does nothing** —
+and it passed every gate in the project, because the gates check that a field is present and read, never
+that it MATTERS.
+
+✅ **FIXED: the primary effect is now an ACTION the dying would not have had** — a testimony, a name, a
+thing put in the right hand, a working completed by someone who will not see it work. ⛔ **That is worth L4:
+it is the only craft in the game that buys a turn from someone who has run out.**
+
+### ⬜ THE PASS ITSELF — NOT YET RUN
+
+**The check is not "does it have a mechanic", it is "would a player spend the slot".** ⚠️ **A gate cannot
+ask that**, which is why this is a reading pass and not a script. **Candidate signals to sort by:**
+
+1. ⛔ **`bolster`/`setup` crafts whose magnitude applies to something that cannot use it** — the `last_gift`
+   shape exactly.
+2. ⚠️ **High level, high energy, and only `duration` or `magnitude` in the mechanic block** — nothing that
+   changes what a player can DO.
+3. ⛔ **Crafts whose `plainly` is mostly narration.** If the plain-text version reads as a scene rather than
+   an effect, the effect may not be there.
+4. ⚠️ **Anything where the ranks add scope but never capability** — three ranks of "more of the same" is
+   one rank charged three times.
+
+### ⚠️ AND IT SURFACED A SIXTH INVENTED FIELD
+
+**`_grantsAction_PROPOSED`.** ⛔ **Checked first: nothing in `engine/` grants an extra action to a TARGET.**
+`perfect_motion` r3 grants one to the WIELDER and does it in prose. ⚠️ **So it is a real gap — and it is the
+same target-affordance hole CCode found in `resolveHeal`: YOU CANNOT DO A THING TO AN ALLY.** ⛔ **That one
+hole now blocks three separate features.**

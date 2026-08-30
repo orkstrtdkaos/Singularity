@@ -572,48 +572,48 @@ thing measured against on the same day: affinities do not cluster, and a default
 <!-- ATLAS:BEGIN -->
 | field | n | authored at | bucket | read by |
 |---|---|---|---|---|
-| `rank` | 1637 | `tree`×1125 `rankDeltas`×512 | ✅ READ | `braids.js`, `capabilities.js`, `coliseum.js` |
-| `name` | 1525 | `root`×400 `tree`×1125 | ✅ READ | `affiliation.js`, `arceffects.js`, `art.js` |
-| `functions` | 1525 | `root`×400 `tree`×1125 | ✅ READ | `braids.js`, `coliseum.js`, `craftmechanics.js` |
-| `harmRung` | 1427 | `root`×375 `tree`×1052 | ✅ READ | `braids.js`, `gm_registry.js`, `intent.js` |
-| `grants` | 1125 | `tree`×1125 | ✅ READ | `braids.js`, `capabilities.js`, `earnedpower.js` |
-| `cannot` | 1125 | `tree`×1125 | ✅ READ | `authormode.js`, `braids.js`, `capabilities.js` |
-| `gains` | 1095 | `tree`×1095 | ✅ READ | `encounters.js`, `gm.js`, `roundreceipt.js` |
-| `gainAxes` | 1036 | `tree`×1036 | ✅ READ | `capabilities.js` |
+| `rank` | 1640 | `tree`×1128 `rankDeltas`×512 | ✅ READ | `braids.js`, `capabilities.js`, `coliseum.js` |
+| `name` | 1529 | `root`×401 `tree`×1128 | ✅ READ | `affiliation.js`, `arceffects.js`, `art.js` |
+| `functions` | 1529 | `root`×401 `tree`×1128 | ✅ READ | `braids.js`, `coliseum.js`, `craftmechanics.js` |
+| `harmRung` | 1431 | `root`×376 `tree`×1055 | ✅ READ | `braids.js`, `gm_registry.js`, `intent.js` |
+| `grants` | 1128 | `tree`×1128 | ✅ READ | `braids.js`, `capabilities.js`, `earnedpower.js` |
+| `cannot` | 1128 | `tree`×1128 | ✅ READ | `authormode.js`, `braids.js`, `capabilities.js` |
+| `gains` | 1098 | `tree`×1098 | ✅ READ | `encounters.js`, `gm.js`, `roundreceipt.js` |
+| `gainAxes` | 1039 | `tree`×1039 | ✅ READ | `capabilities.js` |
 | `axis` | 512 | `rankDeltas`×512 | ✅ READ | `coliseum.js`, `craftmechanics.js`, `gm.js` |
 | `delta` | 512 | `rankDeltas`×512 | ✅ READ | `arceffects.js`, `companions.js`, `economy.js` |
 | `from` | 512 | `rankDeltas`×512 | ✅ READ | `affiliation.js`, `art.js`, `assignments.js` |
 | `kind` | 490 | `rankDeltas`×490 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
-| `id` | 400 | `root`×400 | ✅ READ | `affinities.js`, `arceffects.js`, `art.js` |
-| `axes` | 400 | `root`×400 | ✅ READ | `affinities.js`, `craftmechanics.js`, `encounters.js` |
-| `attribute` | 400 | `root`×400 | ✅ READ | `affinities.js`, `braids.js`, `corrections.js` |
-| `narrationHints` | 400 | `root`×400 | ✅ READ | `battleprompt.js`, `braids.js`, `companions.js` |
-| `description` | 400 | `root`×400 | ✅ READ | `affiliation.js`, `art.js`, `authormode.js` |
-| `notFor` | 400 | `root`×400 | ✅ READ | `braids.js`, `entityDetail.js`, `generate.js` |
-| `tradition` | 400 | `root`×400 | ✅ READ | `arceffects.js`, `art.js`, `braids.js` |
-| `powerSystem` | 400 | `root`×400 | ✅ READ | `art.js`, `backfill.js`, `braids.js` |
-| `operativeAxis` | 400 | `root`×400 | ⚠️ COLLISION | only as `cfg.operativeAxis` |
-| `intensity` | 400 | `root`×400 | ✅ READ | `canon.js`, `craftmechanics.js`, `death.js` |
-| `bounds` | 400 | `root`×400 | ✅ READ | `gm.js` |
-| `plainly` | 400 | `root`×400 | ✅ READ | `gm.js`, `narration_voice.js`, `app.js` |
-| `tree` | 400 | `root`×400 | ✅ READ | `backfill.js`, `braids.js`, `capabilities.js` |
-| `mechanic` | 393 | `root`×393 | ✅ READ | `braids.js`, `capabilities.js`, `conditions.js` |
-| `challengeTypes` | 385 | `root`×385 | ⚠️ CI-ONLY | _4 test/script only_ |
-| `energyCost` | 382 | `root`×382 | ✅ READ | `braids.js`, `capabilities.js`, `functions.js` |
-| `levelReq` | 375 | `root`×375 | ✅ READ | `backfill.js`, `braids.js`, `company.js` |
-| `nativeOrCombination` | 375 | `root`×375 | ✅ READ | `braids.js`, `functions.js`, `practice.js` |
-| `shape` | 375 | `root`×375 | ✅ READ | `battleprompt.js`, `company.js`, `craftmechanics.js` |
-| `duration` | 301 | `mechanic`×301 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `npcsheet.js` |
-| `magnitude` | 293 | `mechanic`×293 | ✅ READ | `capabilities.js`, `conditions.js`, `craftmechanics.js` |
+| `id` | 401 | `root`×401 | ✅ READ | `affinities.js`, `arceffects.js`, `art.js` |
+| `axes` | 401 | `root`×401 | ✅ READ | `affinities.js`, `craftmechanics.js`, `encounters.js` |
+| `attribute` | 401 | `root`×401 | ✅ READ | `affinities.js`, `braids.js`, `corrections.js` |
+| `narrationHints` | 401 | `root`×401 | ✅ READ | `battleprompt.js`, `braids.js`, `companions.js` |
+| `description` | 401 | `root`×401 | ✅ READ | `affiliation.js`, `art.js`, `authormode.js` |
+| `notFor` | 401 | `root`×401 | ✅ READ | `braids.js`, `entityDetail.js`, `generate.js` |
+| `tradition` | 401 | `root`×401 | ✅ READ | `arceffects.js`, `art.js`, `braids.js` |
+| `powerSystem` | 401 | `root`×401 | ✅ READ | `art.js`, `backfill.js`, `braids.js` |
+| `operativeAxis` | 401 | `root`×401 | ⚠️ COLLISION | only as `cfg.operativeAxis` |
+| `intensity` | 401 | `root`×401 | ✅ READ | `canon.js`, `craftmechanics.js`, `death.js` |
+| `bounds` | 401 | `root`×401 | ✅ READ | `gm.js` |
+| `plainly` | 401 | `root`×401 | ✅ READ | `gm.js`, `narration_voice.js`, `app.js` |
+| `tree` | 401 | `root`×401 | ✅ READ | `backfill.js`, `braids.js`, `capabilities.js` |
+| `mechanic` | 394 | `root`×394 | ✅ READ | `braids.js`, `capabilities.js`, `conditions.js` |
+| `challengeTypes` | 386 | `root`×386 | ⚠️ CI-ONLY | _4 test/script only_ |
+| `energyCost` | 383 | `root`×383 | ✅ READ | `braids.js`, `capabilities.js`, `functions.js` |
+| `levelReq` | 376 | `root`×376 | ✅ READ | `backfill.js`, `braids.js`, `company.js` |
+| `nativeOrCombination` | 376 | `root`×376 | ✅ READ | `braids.js`, `functions.js`, `practice.js` |
+| `shape` | 376 | `root`×376 | ✅ READ | `battleprompt.js`, `company.js`, `craftmechanics.js` |
+| `duration` | 302 | `mechanic`×302 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `npcsheet.js` |
+| `magnitude` | 294 | `mechanic`×294 | ✅ READ | `capabilities.js`, `conditions.js`, `craftmechanics.js` |
 | `rankDeltas` | 284 | `root`×284 | ✅ READ | `craftmechanics.js` |
-| `note` | 220 | `mechanic`×220 | ✅ READ | `art.js`, `authormode.js`, `borncontract.js` |
-| `effectTags` | 176 | `root`×176 | ✅ READ | `battleprompt.js`, `braids.js`, `martial.js` |
-| `scope` | 141 | `mechanic`×141 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `app.js` |
+| `note` | 221 | `mechanic`×221 | ✅ READ | `art.js`, `authormode.js`, `borncontract.js` |
+| `effectTags` | 177 | `root`×177 | ✅ READ | `battleprompt.js`, `braids.js`, `martial.js` |
+| `scope` | 142 | `mechanic`×142 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `app.js` |
 | `targets` | 130 | `mechanic`×130 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `gated` | 108 | `root`×108 | ✅ READ | `borncontract.js`, `generate.js`, `gm_registry.js` |
 | `damageType` | 89 | `mechanic`×89 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `dice` | 86 | `mechanic`×86 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
-| `crit` | 79 | `mechanic`×79 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
+| `crit` | 80 | `mechanic`×80 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
 | `range` | 79 | `mechanic`×79 | ✅ READ | `capabilities.js`, `craftmechanics.js` |
 | `plus` | 72 | `mechanic`×72 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
 | `schemaVersion` | 63 | `root`×63 | ✅ READ | `canon.js`, `codex.js`, `encounterFrame.js` |

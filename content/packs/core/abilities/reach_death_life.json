@@ -911,7 +911,7 @@
     {
      "rank": 1,
      "name": "Last Gift",
-     "grants": "Give the dying a clear, painless final interval — words said, peace made, the end met whole.",
+     "grants": "⛔ THE DYING GET ONE ACTION THEY HAD RUN OUT OF — clear, painless, and theirs. A name, a testimony, a thing put into the right hand, a working completed by someone who will not see it work. ⚠️ They know what is happening and they are not afraid of it.",
      "cannot": "Does not postpone death; the gift is the hour, not more hours.",
      "harmRung": "none",
      "functions": [
@@ -925,7 +925,7 @@
     {
      "rank": 2,
      "name": "Gathered Hour",
-     "grants": "Give the gift to several at once — a room, a field after a fight — so none of them ends alone or unheard. Those attending share the interval: what is said inside it reaches them. And the judgement is yours: you decide who is dying, and giving the gift to one who might have been pulled back is a death you chose for them.",
+     "grants": "⛔ GIVE IT TO EVERY DYING PERSON IN A ROOM OR A FIELD AT ONCE — each of them gets their action, and none of them ends alone or unheard. ⚠️ Those attending hear all of it, which is the part that costs the attendant something.",
      "cannot": "There is no version of this that is not a decision about someone else's end. The Ashwardens teach it late, to people who have already sat with enough dying to tell the difference — and they teach that being wrong about it once is a thing you carry for good.",
      "functions": [
       "heal",
@@ -961,7 +961,10 @@
     "magnitude": 6,
     "duration": 1,
     "targets": 1,
-    "note": "T-IV, lethal rung, SOCIAL attribute — the only social craft in rootkin"
+    "note": "T-IV, lethal rung, SOCIAL attribute — the only social craft in rootkin",
+    "_worthIt_20260830": "⛔ ERIK 2026-08-30: 'WE NEED A GOOD PASS OF “IS THIS WORTH IT” FOR THE PRIMARY EFFECT OF A SKILL — as a side effect, giving someone a painless interval is nice, BUT NOT WHAT MAKES IT A MECHANIC.' ⚠️ HE IS RIGHT AND THE NUMBERS SHOWED IT: this was a `bolster` with `magnitude: 6` — it STRENGTHENED a person who is about to stop existing, which is a number that does nothing. ✅ THE PRIMARY EFFECT IS NOW MECHANICAL: THE DYING GET AN ACTION THEY WOULD NOT HAVE HAD. A last testimony, a name spoken, a thing handed over, a working completed, a door unbarred — and at r2 a whole field of them at once. ⛔ THAT IS WORTH L4 AND e9: it is the only craft in the game that buys a turn from someone who has run out. ⚠️ The painless interval remains and is now the FLAVOUR of the mechanic rather than the whole of it.",
+    "_grantsAction_PROPOSED": true,
+    "_notYetReadable": "⛔ `grantsAction` PROPOSED, underscore-prefixed — SIXTH FIELD I HAVE INVENTED THIS WEEK and I am not declaring it in the schema myself. ⚠️ CCode names the shape; I strip the underscore. ✅ CHECKED FIRST: nothing in `engine/` grants an extra action to a TARGET — `perfect_motion` r3 grants one to the WIELDER and does it in prose too. ⛔ SO THIS IS A REAL GAP RATHER THAN ME MISSING A MECHANISM, and it is the same target-affordance hole CCode found in `resolveHeal`: **you cannot do a thing TO an ally.**"
    },
    "rankDeltas": [
     {
@@ -986,7 +989,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/investigate action that strengthens someone. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about an hour Ranks: rank 2 extends targets. Limit: iT Does Not Postpone Death — the gift is The Hour, not more hours.",
+   "plainly": "A social/investigate action. ⛔ A DYING BEING GETS ONE CLEAR ACTION THEY WOULD NOT HAVE HAD — lucid, unhurried, and free of pain: a testimony, a name, a thing handed over, a working finished, a door unbarred. Rated 6 of 10, about an hour. r2 gives it to everyone dying in a room or a field at once, so none of them ends alone or unheard. ⚠️ IT DOES NOT POSTPONE DEATH — the gift is the hour, not more hours.",
    "upkeep": {
     "prepHours": 0,
     "note": "⚠️ COOLDOWN REMOVED (Erik), same reason. A rootkin T4 capstone that ends a life is limited by who can reach it and by what using it does to them — not by a calendar."
@@ -4949,6 +4952,127 @@
    ],
    "_authored": "⛔ SPLIT FROM `dread` ON ERIK'S RULING. The wearer-effects were bolted onto the ends of Dread Mantle's r2 and r3 with 'AND the mantle is on you'. ⚠️ TWO FURTHER CORRECTIONS FROM ERIK: the name (no more grey) and THE REMOVAL OF EVERY DOWNSIDE. What is left is what an Ashwarden gets for wearing her own trade inward: cold cannot reach her, rot mends her, and her hands do not tire.",
    "_theHabit_20260830": "⚠️ RANK NAMES STRIPPED OF THE LEADING ARTICLE. ⛔ ERIK HAS CORRECTED MY 'The' HABIT TWICE, and both times I checked CRAFT NAMES ONLY — fourteen RANK names were still carrying it. ✅ The self-check was measuring the wrong field, which is why the habit survived being caught. ⚠️ `reaping_sickle` r3 also collided with `the_known_name` r2 — both were 'The Whole Field'."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "rootkin",
+   "nativeOrCombination": "native",
+   "axes": {
+    "death_life": 0.7
+   },
+   "id": "planted_years",
+   "name": "Planted Years",
+   "levelReq": 3,
+   "energyCost": 7,
+   "attribute": "mental",
+   "shape": "reveal",
+   "harmRung": "none",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE",
+    "SURVIVE"
+   ],
+   "operativeAxis": [
+    "quality",
+    "persistence",
+    "scope"
+   ],
+   "effectTags": [
+    "orchard",
+    "foresee",
+    "naturopathy"
+   ],
+   "functions": [
+    "foresee",
+    "reveal",
+    "track"
+   ],
+   "description": "⛔ A TREE YOU PLANTED IS A VECTOR INTO ITS OWN FUTURE. The Rootkin do not predict — they PLANT, and then they ask what the planting has come to. ⚠️ A tree knows its seasons before they arrive: the drought two summers out, the year the river moves, the winter that takes the orchard's east side. ⛔ THE SLOW ORCHARD IS A LIBRARY, AND EVERY TREE IN IT IS A READER LEFT RUNNING.",
+   "narrationHints": "She puts her hand flat on the bark and stands there for a while. ⚠️ 'Not this year,' she says. 'The year after. And it comes from the east.'",
+   "notFor": "⛔ YOU MUST HAVE PLANTED IT, OR SOMEONE WHO TAUGHT YOU DID — a wild tree is a stranger and says nothing. ⚠️ AND IT FORESEES WHAT REACHES THE TREE: weather, water, blight, fire, the slow shifts a root feels. IT KNOWS NOTHING OF PEOPLE unless people are about to become weather. ⛔ IT IS SLOW EVEN WHEN IT IS URGENT: the answer arrives at a tree's pace, and asking faster gets you less.",
+   "plainly": "An investigate/explore action. ⛔ ASK A TREE YOU PLANTED WHAT IS COMING TO IT — drought, flood, blight, fire, the year the ground changes — out to about a season at r1 and years at r3. Rated 5. r2 asks the whole orchard at once and gets the SHAPE of a region's future; r3 leaves the question standing so the tree answers when it knows. ⚠️ Planted trees only, and it foresees what reaches the TREE, not what people intend.",
+   "intensity": {
+    "conserve": "one tree, one season, one question",
+    "surge": "⛔ ASK EVERY TREE YOU HAVE EVER PLANTED; you will get an answer from all of them and it will take you the rest of the day to hear it"
+   },
+   "bounds": [
+    {
+     "text": "⛔ PLANTED TREES ONLY — by you, or by the one who taught you. A wild tree is a stranger",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT FORESEES WHAT REACHES THE TREE — weather, water, blight, fire. NOT INTENT, NOT PEOPLE",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT ANSWERS AT A TREE'S PACE. Asking urgently gets a shallower answer, never a faster one",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AND IT REQUIRES SOMEONE TO HAVE PLANTED, DECADES AGO — a Rootkin far from any orchard of theirs has nothing to read",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 24,
+    "scope": 2,
+    "crit": {
+     "success": "The tree answers something you did not ask, about a year further out than you can use yet.",
+     "failure": "You get the answer for a season that has already passed and do not notice for a while."
+    },
+    "note": "reveal/foresee. ⛔ ERIK 2026-08-30: 'THE SLOW ORCHARD IS A FORESEEING LIBRARY — every one they plant gives them A VECTOR INTO THE FUTURE OF THAT TREE, a way to commune and foresee.' ⚠️ AND IT CLOSES A GAP I HAD FLAGGED THE SAME DAY AS UNFILLED: 'a people who plant trees they will not taste have NO CRAFT THAT LOOKS AHEAD, which is surprising given the Slow Orchard. It should read as PATIENCE rather than prophecy.' ✅ The place was already the answer and I had written the question next to it. ⛔ IT IS THE NATUROPATHY SCHOOL'S CENTRAL CRAFT: not driving life, WORKING WITH IT and being answered."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Planted Years",
+     "functions": [
+      "foresee",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ ASK ONE TREE YOU PLANTED WHAT IS COMING TO IT — out to about a season. Drought, flood, blight, the frost that will take the blossom. ⚠️ It answers plainly and it is not often wrong.",
+     "cannot": "One tree, one season. ⛔ Planted, not wild. ⚠️ And it knows weather, not people."
+    },
+    {
+     "rank": 2,
+     "name": "Orchard Read",
+     "functions": [
+      "foresee",
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "range"
+     ],
+     "grants": "⛔ ASK THE WHOLE ORCHARD AND GET THE SHAPE OF A REGION'S FUTURE — where the water is going, which ground is failing, what the land will be doing in three years. ⚠️ This is how the Rootkin know things surveyors do not.",
+     "cannot": "⚠️ It gives you the LAND's future, not anyone's plans for it. ⛔ And you must be in the orchard."
+    },
+    {
+     "rank": 3,
+     "name": "Left Standing",
+     "functions": [
+      "foresee",
+      "reveal",
+      "track"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "quality"
+     ],
+     "grants": "⛔ LEAVE THE QUESTION IN THE TREE AND WALK AWAY — it answers when it knows, years out if that is when. ⚠️ A Rootkin returns to an orchard they planted as a child and finds the answer waiting. ⛔ THIS IS WHY THEY PLANT TREES THEY WILL NOT TASTE.",
+     "cannot": "⚠️ You must come back to hear it, and the tree must still be standing. ⛔ An orchard burned is a library burned, and the Rootkin treat it exactly that seriously."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-30. ✅ CLOSES THE `foresee` GAP I FLAGGED THE SAME DAY — and the answer was in the geography before I asked the question. ⚠️ ERIK ALSO FLAGGED IT AS A POSSIBLE TIME BRAID (hourkeeper), which is not built here: this reads a tree's own future, not time itself. **A braid would be reading a future the tree has no part in**, and that is a different craft."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

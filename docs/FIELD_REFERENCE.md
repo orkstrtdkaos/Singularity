@@ -480,8 +480,8 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `crit` | 70 | `mechanic`×70 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
 | `schemaVersion` | 63 | `root`×63 | ✅ READ | `canon.js`, `codex.js`, `encounterFrame.js` |
 | `wardTypes` | 50 | `mechanic`×50 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
-| `damageType` | 46 | `mechanic`×46 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `marginFloorPer` | 45 | `mechanic`×45 | ✅ READ | `craftmechanics.js` |
+| `damageType` | 39 | `mechanic`×39 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `soak` | 31 | `mechanic`×31 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `melee.js` |
 | `soakRank` | 30 | `mechanic`×30 | ✅ READ | `skill_battle.js`, `app.js` |
 | `sense` | 27 | `root`×27 | ✅ READ | `combatants.js`, `encounters.js`, `gambit.js` |

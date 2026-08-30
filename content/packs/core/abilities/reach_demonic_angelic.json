@@ -2308,7 +2308,7 @@
    "mechanic": {
     "magnitude": 9,
     "duration": 8,
-    "damageType": "light",
+    "damageType": "radiance",
     "note": "T-V. ⚠️ 'A PRECURSOR-TIER WORKING INNATE TO YOUR KIN' — the second of exactly two in the catalog."
    },
    "rankDeltas": [
@@ -2334,7 +2334,8 @@
    "_nameWas": "The Kept Flame",
    "_idWas": "the_kept_flame",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_lightMigrated_20260829": "⚠️ `light` -> `radiance`. ⛔ The rename was RULED 2026-08-28 and never executed — burning is elemental `heat`, shining is physics `radiance`. Found when `light` was removed from `damage_types.json` and two crafts were still authoring it."
   },
   {
    "schemaVersion": 1,

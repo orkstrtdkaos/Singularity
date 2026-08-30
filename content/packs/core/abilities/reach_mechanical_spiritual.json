@@ -904,8 +904,7 @@
     "requiresPoles": [
      "enginewright",
      "numinous"
-    ],
-    "damageType": "precursor"
+    ]
    },
    "rankDeltas": [
     {
@@ -940,7 +939,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Meaning-Engine",
    "_powerSystemWas": "reach_mechanical_spiritual",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A BRAID IS BY DEFINITION MORE THAN ONE SOURCE.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A BRAID IS BY DEFINITION MORE THAN ONE SOURCE.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_precursorRemoved_20260829": "⛔ `damageType: precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — and this craft confirms it: it has NO DICE and deals no damage at all. ⚠️ Seven crafts carried the field after the ruling; the ruling was made and never executed, which is how a dead vocabulary keeps looking alive."
   },
   {
    "id": "shortfold",

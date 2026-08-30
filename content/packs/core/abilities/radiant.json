@@ -261,7 +261,7 @@
     "marginFloorPer": 0.02,
     "note": "T-II = 2d6 per the locked tierLadder (nMult 2). r1's own number: a precise burn at 20 PACES",
     "penetration": 2,
-    "damageType": "light",
+    "damageType": "radiance",
     "penetrationNote": "penetration 2 is derived from the craft's OWN rank text, not chosen: r2 cuts 'LIGHT ARMOR at close range' and r3 goes through 'a HARMONIC SHIELD'S FIRST RANK'. Harmonic's resonant_shield is authored at soakRank 1/2/3 by rank, so a lance that beats its FIRST rank and light armour is penetration 2 — it cuts rank-1 and rank-2 layers and is stopped by resonant_shield r3 (soakRank 3). That is exactly the ranked counter-pair both traditions describe, and it means neither craft is a flat hard-counter: who wins depends on which rank each has reached."
    },
    "rankDeltas": [
@@ -319,7 +319,8 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_powerSystemWas": "radiant",
-   "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_lightMigrated_20260829": "⚠️ `light` -> `radiance`. ⛔ The rename was RULED 2026-08-28 and never executed — burning is elemental `heat`, shining is physics `radiance`. Found when `light` was removed from `damage_types.json` and two crafts were still authoring it."
   },
   {
    "id": "daybreak_mantle",

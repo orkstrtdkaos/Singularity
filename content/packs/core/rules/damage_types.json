@@ -10,22 +10,11 @@
    "wardedBy": "armour, a held shield, a braced stance, worked stone",
    "_note": "⛔ THE IMPLICIT TYPE. Most crafts carry none and resolve as this."
   },
-  "precursor": {
-   "what": "The lattice worked directly — address, aperture, seal.",
-   "n": 7,
-   "wardedBy": "lattice-work, a countersign, an ordered field",
-   "_note": "⚠️ LARGEST TYPED GROUP and the only one that is nearly a tradition's whole output."
-  },
   "appetite": {
    "what": "Want turned into a weapon — the Abyssal's own kind.",
    "n": 5,
    "wardedBy": "a vow held, a satisfied want, an honest ledger",
    "_note": "⛔ A WARD AGAINST APPETITE IS NOT ARMOUR — it is having nothing they can reach for."
-  },
-  "light": {
-   "what": "Radiance at intensity.",
-   "n": 2,
-   "wardedBy": "shadow, shutters, smoked glass, an answering brightness"
   },
   "shadow": {
    "what": "Dark as a medium, not an absence.",
@@ -95,5 +84,6 @@
   "2": "⛔ MOST WARDS ANSWER `physical` PLUS ONE OR TWO OTHERS. Three is a lot; four is a capstone.",
   "3": "⚠️ NAME THE GAP IN THE `cannot`. 'It will not stop a working that reaches for what you want' is a bound AND a type declaration.",
   "4": "A craft that answers nothing typed is `wardTypes: [\"physical\"]` — say so rather than leaving it null."
- }
+ },
+ "_deadTypesRemoved_20260829": "⛔ `light` and `precursor` removed. ⚠️ `light` migrated to `radiance`; `precursor` was ruled a METHOD not a type and carried by 7 crafts that dealt no damage. **Both had been listed here after their rulings, which is how a dead vocabulary keeps looking alive.**"
 }

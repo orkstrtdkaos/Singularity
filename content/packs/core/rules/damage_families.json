@@ -3,54 +3,112 @@
  "id": "damage_families",
  "kind": "rules",
  "note": "⛔ FOUR FAMILIES. A WARD ANSWERS A FAMILY; A NARROW WARD ANSWERS ONE TYPE INSIDE IT. Erik 2026-08-24: 'cold, heat, lightning etc are all EXAMPLES of elemental damage. This is what we want — DAMAGE FAMILIES.' ⚠️ AND NAMED EFFECTS ARE COMBINATIONS: 'Seraphs use JUDGEMENT to smite their foes — this is a combination of light and other things like force or heat or one of the intrinsics. THE COMBINATIONS SHOULD GENERALLY DESCRIBE THE WORD BEING USED. Necrotic blast is probably combo decay and force.' ⛔ SO THE TYPES BELOW ARE A BASE VOCABULARY, NOT A LIST OF SPELLS — a craft names a MIX, and the mix is what the word means.",
-
  "families": {
   "physics": {
    "what": "⛔ THE FABRIC OF THE WORLD — matter, space, time, and the two kinds of matter you can see by.",
-   "types": ["physical", "force", "spatial", "temporal", "radiance", "shadow"],
+   "types": [
+    "physical",
+    "force",
+    "spatial",
+    "temporal",
+    "radiance",
+    "shadow"
+   ],
    "_why": "⛔ ERIK 2026-08-24: 'temporal and SPATIAL move into the PHYSICS family, of which physical is one. LIGHT AND DARK COULD BE PHYSICS — light matter and dark matter manipulation as the basic real-world tie.' ⚠️ THAT IS THE MOVE THAT MAKES THE FAMILY COHERE: it stops `radiance` being 'holy' and `shadow` being 'spooky' and makes them MEDIA YOU CAN PUSH ON, like mass and momentum. A physics ward answers the world's fabric being bent at you — a thrown rock, a folded space, a stolen hour, a lance of light."
   },
   "elemental": {
    "what": "The energies moving through the fabric. Siblings, never opposites.",
-   "types": ["heat", "cold", "lightning", "corrosive"],
+   "types": [
+    "heat",
+    "cold",
+    "lightning",
+    "corrosive"
+   ],
    "_why": "⛔ SIBLINGS, NOT OPPOSITES — CCode's objection turned into the structure: cold and fire are both TAKINGS, which is exactly why neither is the other's plus. ⚠️ A ward against fire is not a ward against ice, and under a family model it never can be. Owned by NOBODY: any tradition reaches one through its own method."
   },
   "vital": {
    "what": "Life ended, grown, or moved.",
-   "types": ["decay", "living", "vitality"],
+   "types": [
+    "decay",
+    "living",
+    "vitality"
+   ],
    "_why": "⚠️ HEALING NEEDS NO TYPE. Erik: healing is an EFFECT, and the SOURCE type decides who it mends — `decay` mends the undead, `living` and `vitality` mend the living, and `absorb` already implements exactly that. ⛔ `vitality` is the only CONSERVED type: minus here and plus there in the same act."
   },
   "intrinsic": {
    "what": "⛔ HARM THAT REQUIRES A WILL TO MAKE IT. A rockfall cannot do this.",
-   "types": ["feeling", "appetite", "judgement", "psychic", "abstraction", "truth", "deception"],
-   "axis": {"spiritual": ["feeling", "appetite", "judgement"], "mental": ["psychic", "abstraction", "truth", "deception"]},
+   "types": [
+    "feeling",
+    "appetite",
+    "judgement",
+    "psychic",
+    "abstraction",
+    "truth",
+    "deception"
+   ],
+   "axis": {
+    "spiritual": [
+     "feeling",
+     "appetite",
+     "judgement"
+    ],
+    "mental": [
+     "psychic",
+     "abstraction",
+     "truth",
+     "deception"
+    ]
+   },
    "_why": "⛔ ERIK 2026-08-24: 'what means WILL, DRIVE, EMOTION — it's not Mental. Mental is the METHOD for one end of the spectrum. It's ENTITY-SOURCED damage, from a person, or creature, or something with a WILL OR SPIRIT.' ⚠️ THE SPIRITUAL/MENTAL SPLIT IS THE AXIS INSIDE THE FAMILY, not two families — which is Erik's earlier ruling that 'appetite and feelings are the opposite pole from Mind, logic, thinking, psionic.' ⛔ An intrinsic ward answers both ends; a narrow one answers a single type."
   }
  },
-
  "combinations": {
   "_what": "⛔ NAMED EFFECTS ARE MIXES, AND THE MIX IS WHAT THE WORD MEANS. These are worked examples, not a catalogue — a craft authors its own `damageMix` and the resolver does the rest.",
   "examples": [
-   {"name": "a Seraphic smite", "mix": {"radiance": 0.4, "judgement": 0.4, "force": 0.2},
-    "_why": "⛔ ERIK'S OWN EXAMPLE. Light to see it by, moral weight to make it land, and force to knock him down. ⚠️ A physics ward blunts the radiance and the force and LEAVES THE JUDGEMENT ENTIRELY — which is the point: you cannot armour against being found guilty."},
-   {"name": "a necrotic blast", "mix": {"decay": 0.6, "force": 0.4},
-    "_why": "⛔ ERIK: 'necrotic blast is probably combo decay and force.' The rot is what it does; the force is why it arrives across a room."},
-   {"name": "a psionic blast", "mix": {"psychic": 0.5, "physical": 0.5},
-    "_why": "⚠️ Erik: 'psionics are a METHOD of causing types of damage — a psionic blast can be PARTIALLY PHYSICAL.' A shield stops half of it and the other half walks in."},
-   {"name": "a keening", "mix": {"feeling": 0.7, "force": 0.3},
-    "_why": "The grief is the harm; the force is why it goes through a wall."}
+   {
+    "name": "a Seraphic smite",
+    "mix": {
+     "radiance": 0.4,
+     "judgement": 0.4,
+     "force": 0.2
+    },
+    "_why": "⛔ ERIK'S OWN EXAMPLE. Light to see it by, moral weight to make it land, and force to knock him down. ⚠️ A physics ward blunts the radiance and the force and LEAVES THE JUDGEMENT ENTIRELY — which is the point: you cannot armour against being found guilty."
+   },
+   {
+    "name": "a necrotic blast",
+    "mix": {
+     "decay": 0.6,
+     "force": 0.4
+    },
+    "_why": "⛔ ERIK: 'necrotic blast is probably combo decay and force.' The rot is what it does; the force is why it arrives across a room."
+   },
+   {
+    "name": "a psionic blast",
+    "mix": {
+     "psychic": 0.5,
+     "physical": 0.5
+    },
+    "_why": "⚠️ Erik: 'psionics are a METHOD of causing types of damage — a psionic blast can be PARTIALLY PHYSICAL.' A shield stops half of it and the other half walks in."
+   },
+   {
+    "name": "a keening",
+    "mix": {
+     "feeling": 0.7,
+     "force": 0.3
+    },
+    "_why": "The grief is the harm; the force is why it goes through a wall."
+   }
   ]
  },
-
  "_notTypesAtAll": {
   "methods": "⛔ PSIONICS, VEIL, AND PRECURSOR/LATTICE-CRYSTAL WORK ARE METHODS, NOT TYPES. Erik 2026-08-24: 'Veil and Precursor Lattice Crystal are METHODS — they clean up into the other actual types.' ⚠️ MEASURED: six crafts carried `damageType: precursor` and NONE OF THEM DEAL DAMAGE — they interface, seal, open, perceive, foreclose. The field was set because it existed. ⛔ THREE THINGS KEPT APART: POWER SOURCE (what you draw on) · METHOD (how you deliver it) · DAMAGE TYPE (what lands, and what the ward answers).",
   "healing": "An EFFECT, not a type — see families.vital.",
   "incapacitating": "⛔ A CRAFT THAT STOPS WITHOUT WOUNDING HAS NO DAMAGE TYPE — it has a RESIST type. `progression.js` glosses `incapacitating` as 'STOPS a threat; it does not wound it… NEVER a cut or a break', and `impositionOf` already resolves `resist: mental|physical`. ⚠️ That takes 57 crafts out of the typing job entirely."
  },
-
  "_migrations": {
   "light -> radiance": "⚠️ 2 crafts. `light` was 'radiance at intensity' and is superseded — burning is elemental `heat`, shining is physics `radiance`. CCode measured the split: 6 of 7 blazeborn harm crafts use burn language while radiant_folk's light is about ILLUMINATION AND BEING SEEN.",
   "precursor -> (drop)": "⛔ 6 crafts + 1 braid. None deal damage; the field should be REMOVED, not remapped.",
   "unmaking / shaping -> (never minted)": "⚠️ I authored these into the v1 families for the destruction_creation axis and NO CRAFT EVER USED THEM. Dropped rather than carried — the 26 unmaker/wright crafts should be typed from the four families when that tradition is audited, and `unmaking a wall` is PHYSICS, not a type of its own."
- }
+ },
+ "_thereIsNoVoidType_20260829": "⛔ ERIK 2026-08-29, ASKED WHETHER THE VOID SHOULD HAVE A DAMAGE TYPE: 'borrowing from everyone else seems to fit… THE VOID IS NOTHING… so they seek the Veil, and what everyone else has.' ⚠️ SO THE ABSENCE IS DELIBERATE AND IT IS THE CHARACTERISATION. `shadow` exists and sits in PHYSICS opposite `radiance`, because shadow is an OPTICAL phenomenon — the child of light's arrival. ⛔ THE VOID IS NOT A PHENOMENON. It is what preceded phenomena, and NOTHING DOES NOT HARM. ⚠️ THEREFORE THE UNLIT HAVE NO DAMAGE TYPE OF THEIR OWN AND NEVER WILL: `uttered_name` is `truth`, `swallowed_word` is `abstraction`, `slow_cup` is `corrosive` — INTRINSIC and ELEMENTAL, borrowed from traditions they are not part of. ⛔ THAT IS WHY THEY REACH ACROSS THE VEIL: a people whose principle is absence must take their means from somewhere, and everything they use is somebody else's. ⚠️ DO NOT ADD A `void` OR `dark` TYPE. The gap is the point, and filling it would give the Unlit exactly what their cosmology says they do not have."
 }

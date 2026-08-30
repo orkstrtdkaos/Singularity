@@ -1486,6 +1486,42 @@ console.log("\n── §27 · the capability ladder reaches the live legion path
     heroicOld.heroSwing === mythicOld.heroSwing && Number.isFinite(heroicOld.heroSwing), `${heroicOld.heroSwing} vs ${mythicOld.heroSwing}`);
 }
 
+/* ══════════ §28 — LEVEL CONTRIBUTES TO AUTHORED DAMAGE, AND THE MULTIPLIER STILL DOES NOT ══════════ */
+// ⛔ ERIK: "I DO STILL WANT LEVEL TO HELP WITH DAMAGE, but I want to do it SMARTLY and NOT RECREATE THE
+// SYSTEM." ⚠️ AEVI'S FINDING: the mechanism already existed and was pointed BACKWARDS — `rung.dice` is the
+// level→damage relationship and it fired only when an author wrote NOTHING. Doing the work bought level
+// contributing exactly zero; silence bought the whole tier multiplier.
+//
+// ⚠️ THE SPLIT IS THE FIX. `nMult` multiplies and is the double-scaling bug (`3d4+3` → `9d4+6`) that
+// `diceAuthored` exists to stop — authored dice keep exempting it. `plus` is additive, cannot compound, and
+// therefore is safe to always apply. ⛔ BOTH HALVES ARE ASSERTED HERE, because keeping only the first would
+// look identical to the old behaviour and keeping only the second is the bug coming back.
+console.log("\n── §28 · level reaches authored damage, the multiplier still does not ──");
+{
+  const CM28 = await import("../engine/craftmechanics.js");
+  const cm28 = rj("content/packs/core/rules/craft_mechanics.json");
+  const mk = (d) => ({ functions: ["strike"], shape: "damage", levelReq: 1,
+    mechanic: { ...(d ? { dice: d } : {}), damageType: "physical" } });
+  const at = (a, tier, cfg = cm28) => CM28.mechanicFor(a, { verb: "strike", tier, rank: 1, intensity: "standard", cfg });
+  const ev = (f) => (f?.dice ? f.dice.n * (f.dice.d + 1) / 2 : 0) + (Number(f?.plus) || 0);
+
+  const lo1 = ev(at(mk({ n: 1, d: 6 }), 1).fields), lo5 = ev(at(mk({ n: 1, d: 6 }), 5).fields);
+  check("§28: an AUTHORED craft gains damage with tier — level helps", lo5 > lo1, `${lo1} → ${lo5}`);
+  // ⛔ THE HALF THAT MUST NOT COME BACK. The die COUNT is untouched; only the flat bonus moves.
+  check("§28: …but its DICE COUNT is never multiplied — the double-scaling bug stays fixed",
+    at(mk({ n: 3, d: 4 }), 5).fields.dice.n === 3, JSON.stringify(at(mk({ n: 3, d: 4 }), 5).fields.dice));
+  // ⚠️ AND IT COMPRESSES RATHER THAN WIDENS: a flat bonus is worth proportionally more to a small craft.
+  const big1 = ev(at(mk({ n: 5, d: 6 }), 1).fields), big5 = ev(at(mk({ n: 5, d: 6 }), 5).fields);
+  check("§28: the small-to-large spread NARROWS with tier, it does not widen",
+    (big5 / lo5) < (big1 / lo1), `t1 ${(big1 / lo1).toFixed(2)}× → t5 ${(big5 / lo5).toFixed(2)}×`);
+  // ⛔ IT IS A DIAL. Erik must be able to turn this back without an engine change, and `false` must restore
+  // the OLD behaviour exactly — which is also this gate's non-vacuity floor: if the dial does nothing, the
+  // checks above are measuring something that was already true.
+  const off = { ...cm28, tierLadder: { ...cm28.tierLadder, authoredKeepsPlus: false } };
+  check("§28: `authoredKeepsPlus: false` restores the old behaviour exactly",
+    ev(at(mk({ n: 1, d: 6 }), 5, off).fields) === lo1, `${ev(at(mk({ n: 1, d: 6 }), 5, off).fields)} vs ${lo1}`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

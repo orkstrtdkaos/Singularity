@@ -31,6 +31,21 @@ const sb = rj("content/packs/core/rules/skill_battle_system.json").engine;
 const steps = rj("content/packs/core/rules/intensity_scaling.json").steps;
 const cm = rj("content/packs/core/rules/craft_mechanics.json");
 
+// ⛔ THE FOURTH CONFOUND, AND THE ONE THAT INVALIDATED THE DRIVER TABLE. `battleRound` gates its entire
+// craft-damage path on `if (cmCfg?.families)` where `cmCfg = rules.craftMechanics` — and this harness read
+// `craft_mechanics.json` at the top of the file and NEVER PASSED IT. Authored, loaded, and unread, in my
+// own tool, which is the exact defect this project was built to catch.
+//
+// ⚠️ SO EVERY UNIT FOUGHT ON THE GENERIC FALLBACK: `base + tier*0.5 + marginGap*0.06`. Measured, 1d6 and
+// 30d6 both dealt a mean of 5.00. ⛔ DAMAGE WAS CONSTANT ACROSS ALL 25 TRADITIONS — which is why "soak
+// dominates" fell out at r = 0.75: soak was the only thing that varied. The conclusion was an artefact of
+// the measurement, not a fact about the game.
+//
+// ⚠️ THE LIVE APP HAS ALWAYS PASSED IT (`state.js`: `rules.craftMechanics = craftMechanics`). The engine
+// was right; the harness was lying. `--nocraft` keeps the old fallback reachable so the difference stays
+// measurable rather than becoming a thing I merely assert.
+const RULES_WITH_MECHANICS = process.argv.includes("--nocraft") ? rules : { ...rules, craftMechanics: cm };
+
 const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? Number(process.argv[i + 1]) : d; };
 const ROUNDS = arg("--rounds", 12);      // rounds per bout
 const BOUTS = arg("--bouts", 8);         // bouts per pairing, different seeds
@@ -116,7 +131,7 @@ function bout(A, B, seed) {
     const res = battleRound({
       playerDecl: declOf(A), oppDecl: declOf(B),
       playerSheet: A.sheet, oppSheet: B.sheet,
-      state: { ...state, round: r + 1 }, rules, sb, steps, rng,
+      state: { ...state, round: r + 1 }, rules: RULES_WITH_MECHANICS, sb, steps, rng,
       folded: aFold, targetPolicy: "threat",
     });
     const d = res?.damage;
@@ -125,7 +140,7 @@ function bout(A, B, seed) {
     const res2 = battleRound({
       playerDecl: declOf(B), oppDecl: declOf(A),
       playerSheet: B.sheet, oppSheet: A.sheet,
-      state: { ...state, round: r + 1 }, rules, sb, steps, rng,
+      state: { ...state, round: r + 1 }, rules: RULES_WITH_MECHANICS, sb, steps, rng,
       folded: bFold, targetPolicy: "threat",
     });
     const d2 = res2?.damage;
@@ -144,6 +159,49 @@ say(`CCODE-326 — ${units.length} TRADITIONS, ONE UNIT EACH, ROUND ROBIN (${SIZ
 line("═");
 say();
 say("⚠️ Every unit fights with its OWN authored crafts. A tradition with no ward craft carries no ward.");
+/* ── the harness proves the fight can hear a craft, before it measures anything ──────────────── */
+// ⛔ THIS IS THE CHECK WHOSE ABSENCE COST TWO PUBLISHED CONCLUSIONS. `battleRound` gates its whole craft
+// path on `if (cmCfg?.families)`, and for three revisions this file never passed `craftMechanics` — so every
+// unit fought on `base + tier*0.5 + marginGap*0.06`, DAMAGE WAS A CONSTANT ACROSS ALL 25 TRADITIONS, and
+// "soak dominates at r = 0.75" fell out because soak was the only input that varied.
+//
+// ⚠️ IT LOOKED EXACTLY LIKE A FINDING. The correlation was strong, stable, and survived a control — because
+// the control flattened soak and left the constant alone. ⛔ A CONTROL CANNOT SAVE YOU FROM AN INPUT THAT
+// IS NOT CONNECTED; only asking whether the instrument responds at all can.
+//
+// ⚠️ SO THE TOURNAMENT NOW PROVES ITS OWN INSTRUMENT FIRST: two declarations identical but for their dice
+// must produce different damage. If they do not, this refuses to print a table.
+{
+  const probeDecl = (n) => ({ functions: ["strike"], shape: "damage", levelReq: 1, function: "strike",
+    tier: FIGHT_TIER, rank: 2, attribute: "physical", intensity: "standard", name: "probe", abilityId: "probe",
+    mechanic: { dice: { n, d: 6 }, damageType: "physical" } });
+  const probeSheet = { attributes: { physical: 6, mental: 6, social: 6, practical: 6 },
+    energy: 400, health: 999, maxHealth: 999, level: LEVEL, skills: [], soak: 0 };
+  const probeMean = (n) => {
+    let tot = 0;
+    for (let s = 0; s < 300; s++) {
+      let z = s * 7919 + 13;
+      const rng = () => { z |= 0; z = (z + 0x6D2B79F5) | 0; let t = Math.imul(z ^ (z >>> 15), 1 | z); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+      const r = battleRound({ playerDecl: probeDecl(n), oppDecl: probeDecl(2),
+        playerSheet: probeSheet, oppSheet: probeSheet, state: { momentum: 0, round: 1 },
+        rules: RULES_WITH_MECHANICS, sb, steps, rng });
+      if (r?.damage?.amount > 0) tot += r.damage.amount;
+    }
+    return tot / 300;
+  };
+  const small = probeMean(1), large = probeMean(12);
+  if (!(large > small * 1.5)) {
+    console.log("");
+    console.log("  ⛔ THE FIGHT CANNOT HEAR THE CRAFT — refusing to print a table.");
+    console.log(`     1d6 delivers ${small.toFixed(2)} and 12d6 delivers ${large.toFixed(2)}: the craft's dice are not`);
+    console.log("     reaching the damage, so every tradition is fighting with the same numbers and any spread");
+    console.log("     below would be about soak and wards alone. Check that `craftMechanics` reaches `battleRound`.");
+    console.log("");
+    process.exit(1);
+  }
+  console.log(`  ✅ instrument check: 1d6 → ${small.toFixed(1)} · 12d6 → ${large.toFixed(1)} — the fight hears the craft`);
+}
+
 say();
 
 const score = Object.fromEntries(units.map(u => [u.trad, { w: 0, l: 0, d: 0 }]));

@@ -273,7 +273,27 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
     // at T-III ("exceed a straight doubling-again"), which integer dice alone cannot express. Intensity and a
     // deepen-rank scale the ROLLED TOTAL via `mult` rather than minting fractional dice — 1.5d6 is not a
     // thing a player can be shown, and the popup has to be able to say the craft's dice out loud.
-    const dl = diceAuthored ? { nMult: 1, plus: 0 } : (rung.dice || { nMult: 1, plus: 0 });
+    // ⛔ CCODE-329 / ERIK: "I DO STILL WANT LEVEL TO HELP WITH DAMAGE, but I want to do it SMARTLY and NOT
+    // RECREATE THE SYSTEM." ⚠️ AEVI FOUND THAT THE MECHANISM ALREADY EXISTED AND WAS POINTED BACKWARDS:
+    // `rung.dice` IS the level→damage relationship, and it fired ONLY when an author wrote nothing. Doing
+    // the work bought `nMult: 1, plus: 0` — level contributing exactly zero — while silence bought the whole
+    // tier multiplier.
+    //
+    // ⚠️ THE TWO HALVES OF A RUNG ARE DIFFERENT KINDS OF THING, and separating them is the whole fix:
+    //   · `nMult` MULTIPLIES. It is the double-scaling bug (`2d6 → 4d6`, `3d4+3 → 9d4+6`) that `diceAuthored`
+    //     was added to stop, so authored dice keep exempting it. UNCHANGED.
+    //   · `plus` is ADDITIVE and CANNOT COMPOUND. A flat `+n` on authored dice can never produce `9d4+6` from
+    //     `3d4+3`, so it is safe to always apply — and that is level helping with damage without rebuilding
+    //     anything.
+    //
+    // ⚠️ AND IT NARROWS RATHER THAN WIDENS. A flat bonus is worth proportionally more to a 1d6 craft than a
+    // 5d6 one, so it compresses the low-to-high spread — the opposite of what the silent fallback does.
+    //
+    // ⛔ IT IS A DIAL, NOT A DECISION BAKED INTO CODE. `authoredKeepsPlus: false` restores the old behaviour
+    // exactly, because Erik must be able to turn this back without an engine change.
+    const keepsPlus = cfg.tierLadder?.authoredKeepsPlus !== false;
+    const dl = { nMult: diceAuthored ? 1 : num(rung.dice?.nMult, 1),
+                 plus: (diceAuthored && !keepsPlus) ? 0 : num(rung.dice?.plus, 0) };
     fields.dice = { n: Math.max(1, Math.round(num(fields.dice.n, 1) * num(dl.nMult, 1))), d: num(fields.dice.d, 6) };
     fields.plus = Math.round(num(fields.plus, 0) + num(dl.plus, 0));
     const soft = num(iCfg.mult, 1) * (rDelta && rDelta.kind === "deepen" ? num(rDelta.mult, 1) : 1);

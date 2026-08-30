@@ -56,7 +56,7 @@ measuring across every craft that needs a pick.**
 
 ---
 
-## ⛔ THE NINE RULES THAT MAKE IT WORK
+## ⛔ THE TEN RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
 
@@ -220,6 +220,21 @@ punishment.**
 
 **And it is the same error one level up from the cost rule** — ⛔ **`[cost]` bounds were narrative debts;
 these are narrative debts wearing a surge.** ✅ **Both answer to the same ruling: THE COST IS ENERGY.**
+
+### 10. ⚠️ NAME DRIFT HAPPENS WITHIN A SITTING, NOT ACROSS THE CORPUS
+
+**Added 2026-08-29. Erik: *"You're starting to use 'the' in every title again. WE TALKED ABOUT THIS."***
+
+⛔ **MEASURED WHEN HE SAID IT: 42 crafts authored, 5 starting with "The" — AND ALL FIVE FROM THE SAME
+SESSION.** ⚠️ **That is the finding. The drift is not a slow corpus-wide slide I could catch by auditing
+totals; it is a groove I fall into inside one sitting and cannot hear from within.**
+
+✅ **So the check is per-session, not per-corpus: before shipping a batch of authored names, list them
+together and look at the shape.** ⛔ **Five names in a row sharing an article is invisible one craft at a
+time and obvious in a column.**
+
+⚠️ **The same applies to any repeated construction** — every craft opening with a verb, every description
+starting the same way, every surge phrased as a warning. **Batch-author, then read the batch as a batch.**
 
 ---
 

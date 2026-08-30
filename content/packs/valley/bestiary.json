@@ -44,7 +44,8 @@
    "hasSelf": false,
    "_shapeFix_20260830": "⚠️ I AUTHORED THIS CLASS AS A BARE STRING while the other five are objects with `concept` / `readsFromArc` / `morallyClean`. ⛔ ANYTHING READING `classes[x].concept` GOT `undefined` FOR THE NEWEST CLASS — and it is the one class whose concept a rule would most want to read. CCode found it: 'exactly the shape that makes a property unreadable later, so fix it BEFORE anything reads classes rather than after.' ✅ The original string is preserved verbatim as `concept`."
   },
-  "_hasSelf_20260830": "⛔ `hasSelf` — ONE PROPERTY, NOT A TAXONOMY. CCode measured 2026-08-30 that a creature-type system predicting resistances would COMPLICATE: affinities do not cluster by class ('the_ashen_wyrm RESISTS light, the_bright_devourer ABSORBS it — SAME CLASS, opposite relationships'), so a class default would be wrong more often than right and every exception would need an override. ✅ THIS IS THE OTHER CHANGE: seven crafts already say 'nothing without a self can be frightened' IN FOUR DIFFERENT PHRASINGS, and `the_narrowed` says the other half as `feeling: immune` in data. NOTHING CHECKS THE TWO AGREE AND NOTHING EVER WILL WHILE ONE SIDE IS PROSE. ⚠️ THE TEST ERIK SET, AND IT IS THE RIGHT ONE: does it let content say ONCE what it currently says many times in prose? ⛔ If it only lets us predict a number, it is a layer. ✅ `hasSelf: false` — narrowed_dead, feral_construct, made_weapon. A thing driven by an errand or a mechanism has nobody home to frighten. ✅ `hasSelf: true` — manifested_creature, substrate_warped_beast, great_manifestation: manifested things WANT, and a warped beast is still a beast."
+  "_hasSelf_20260830": "⛔ `hasSelf` — ONE PROPERTY, NOT A TAXONOMY. CCode measured 2026-08-30 that a creature-type system predicting resistances would COMPLICATE: affinities do not cluster by class ('the_ashen_wyrm RESISTS light, the_bright_devourer ABSORBS it — SAME CLASS, opposite relationships'), so a class default would be wrong more often than right and every exception would need an override. ✅ THIS IS THE OTHER CHANGE: seven crafts already say 'nothing without a self can be frightened' IN FOUR DIFFERENT PHRASINGS, and `the_narrowed` says the other half as `feeling: immune` in data. NOTHING CHECKS THE TWO AGREE AND NOTHING EVER WILL WHILE ONE SIDE IS PROSE. ⚠️ THE TEST ERIK SET, AND IT IS THE RIGHT ONE: does it let content say ONCE what it currently says many times in prose? ⛔ If it only lets us predict a number, it is a layer. ✅ `hasSelf: false` — narrowed_dead, feral_construct, made_weapon. A thing driven by an errand or a mechanism has nobody home to frighten. ✅ `hasSelf: true` — manifested_creature, substrate_warped_beast, great_manifestation: manifested things WANT, and a warped beast is still a beast.",
+  "_psychicResist_20260830": "⛔ EVERY `hasSelf: false` CREATURE CARRIES `psychic: resist`. Erik 2026-08-30, on psychic_lance: 'it seems like that one MIGHT STILL HAVE SOME IMPACT even if the thing doesn't have a mind.' ⚠️ SOME IMPACT, NOT NONE AND NOT FULL — and `resist` is the only verdict that says that. A craft-level `requiresSelf` is BINARY and could not express it. ✅ THE THOUGHT IS REAL AND ARRIVES; THERE IS SIMPLY LESS FOR IT TO FIND. ⚠️ AUTHORED PER-CREATURE RATHER THAN DERIVED FROM THE CLASS, because a class-level affinity DEFAULT is the thing CCode measured against on 08-30: affinities do not cluster, and a default would need overrides. ⛔ THIS IS A DELIBERATE EXCEPTION AND WORTH REVISITING IF A SELFLESS CREATURE SHOULD EVER BE FULLY OPEN TO PSYCHIC HARM — the per-creature field is what makes that possible."
  },
  "roster": [
   {
@@ -78,7 +79,10 @@
     "KNOW (read the old logic)"
    ],
    "clean": "You are switching off a machine that forgot how to stop. Its maker mourned it long ago.",
-   "aggressorKind": "assassin"
+   "aggressorKind": "assassin",
+   "affinity": {
+    "psychic": "resist"
+   }
   },
   {
    "id": "warpling_hare",
@@ -179,7 +183,10 @@
     "MEND (undo their bad mending)"
    ],
    "clean": "A directive with no maker. Ending it frees nothing that can feel freed.",
-   "aggressorKind": "raider"
+   "aggressorKind": "raider",
+   "affinity": {
+    "psychic": "resist"
+   }
   },
   {
    "id": "mire_gulper",
@@ -255,7 +262,10 @@
     "MOVE (break the ambush)"
    ],
    "clean": "A trap that outlived its war. It baits; it doesn't grieve.",
-   "aggressorKind": "beast"
+   "aggressorKind": "beast",
+   "affinity": {
+    "psychic": "resist"
+   }
   },
   {
    "id": "weeping_stone",
@@ -301,7 +311,10 @@
     "HARM (end the vessel)"
    ],
    "clean": "A jar that learned to hunt. What's inside was ended long ago; this only echoes it.",
-   "aggressorKind": "beast"
+   "aggressorKind": "beast",
+   "affinity": {
+    "psychic": "resist"
+   }
   },
   {
    "id": "glass_stalker",
@@ -351,7 +364,10 @@
     "SWAY (there is nothing left to sway — and learning that IS the fight)"
    ],
    "clean": "The person who took the contract is gone; the contract wears their hands. You are not killing them. You are ending what took their place.",
-   "aggressorKind": "beast"
+   "aggressorKind": "beast",
+   "affinity": {
+    "psychic": "resist"
+   }
   },
   {
    "id": "the_pure_of_ash",
@@ -367,7 +383,10 @@
     "SWAY (test whether any person remains — the answer is no)"
    ],
    "clean": "The cult-of-purity ate the warden. What's left administers death as doctrine. Ending it is the mercy they forgot how to withhold.",
-   "aggressorKind": "beast"
+   "aggressorKind": "beast",
+   "affinity": {
+    "psychic": "resist"
+   }
   },
   {
    "id": "the_severed_choir",
@@ -383,13 +402,17 @@
     "KNOW (find the seam doubt left)"
    ],
    "clean": "They severed the part that could be wrong. What judges you now is a verdict, not a person. There is no one left to appeal to — only the sentence to end.",
-   "aggressorKind": "beast"
+   "aggressorKind": "beast",
+   "affinity": {
+    "psychic": "resist"
+   }
   },
   {
    "id": "the_gearfather",
    "affinity": {
     "physical": "resist",
-    "mechanical": "vulnerable"
+    "mechanical": "vulnerable",
+    "psychic": "resist"
    },
    "class": "feral_construct",
    "tier": "regional",
@@ -496,7 +519,8 @@
     "vitality": "vulnerable",
     "living": "vulnerable",
     "decay": "absorb",
-    "cold": "immune"
+    "cold": "immune",
+    "psychic": "resist"
    },
    "class": "narrowed_dead",
    "tier": "regional",

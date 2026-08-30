@@ -194,7 +194,7 @@ export function buildBraidDef(character, components, catalog = {}, opts = {}) {
     // forbids drawing the boundary around the parents, and this does not: it NARROWS, by naming a strain
     // that only this pairing has. ✅ Adjacent braids get none, which is the point: the ring must be visible
     // in what a braid SAYS, not only in what it costs.
-    ...(tension && tension.band !== "adjacent" ? { tensionBound: tension.band === "antipodal"
+    ...(tension && tension.band !== "adjacent" ? { tensionNote: tension.band === "antipodal"
       ? "The two poles fight. Holding them together is the whole of the effort, and it costs more than either alone."
       : "These two do not sit easily together; the joining takes something the parts do not." } : {}),
     notFor: smartClamp(String(authored.notFor || "What lies outside this braid's own reach — it is not either parent whole, only the single new craft their braiding makes."), 240),

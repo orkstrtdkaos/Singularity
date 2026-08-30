@@ -117,7 +117,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.267";
+const APP_VERSION = "1.9.268";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12627,6 +12627,27 @@ function skillBattlePanel() {
             ${chosen.size > room ? `<div class="hint">you can only cover ${room} — the first ${room} count</div>` : ""}
           </div>`;
         })()}
+        ${(() => {
+          // ⛔ CCODE-316 — WHO ARE YOU MENDING? Erik: "the intent is to be able to heal anyone you want, or
+          // use healing on any target." ⚠️ A HEAL WAS SPENT ON ITS OWN SIDE AND NOTHING COULD ASK.
+          // ⛔ THE FOE IS ON THE LIST ON PURPOSE. Healing a thing that runs on decay HARMS it — that is
+          // backlog P3, and it works only because you can aim at something that is not your friend.
+          const lead = (turn.sel.action || []).map(k => skills[k]).filter(Boolean)[0];
+          if (!lead) return "";
+          const HEALV = new Set(CONTENT.skillBattle?.engine?.damage?.healFunctions || ["heal", "mend", "restore"]);
+          if (!HEALV.has(lead.function)) return "";
+          const cur = st.healTarget || "self";
+          const pip = (id, label, title) => `<button class="opt sb-heal${cur === id ? " on" : ""}" data-sbheal="${esc(id)}" title="${esc(title)}">${esc(label)}</button>`;
+          const mendable = canPick.filter(a => !a.isPlayer);
+          return `<div class="sb-heal-row">
+            <div class="sys-label">${esc(lead.name)} — who are you mending?</div>
+            <div class="sb-fwd-row">
+              ${pip("self", "Yourself", "mend your own hurts")}
+              ${mendable.map(a => pip(a.id, String(a.name).split(" ")[0], "mend them")).join("")}
+              ${pip("opponent", "⛔ It", "mend the thing you are fighting — and some things are burned by mending")}
+            </div>
+          </div>`;
+        })()}
       </div>`;
     } catch { return ""; }
   })();
@@ -12851,6 +12872,13 @@ function wireSkillBattlePanel() {
     const cur = new Set(e2.state.guardPick || []);
     if (cur.has(id)) cur.delete(id); else cur.add(id);
     e2.state.guardPick = [...cur];
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, {});
+  };
+  // ⛔ CCODE-316 — the mending's target. One choice, not a toggle: you mend ONE thing.
+  for (const b of document.querySelectorAll("[data-sbheal]")) b.onclick = () => {
+    const e3 = activeEnc(); if (!e3) return;
+    e3.state.healTarget = b.dataset.sbheal === "self" ? null : b.dataset.sbheal;
     saveCharacter(character);
     renderPlay(character.activeScene?.lastTurn || null, {});
   };

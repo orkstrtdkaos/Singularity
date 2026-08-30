@@ -191,6 +191,8 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // ⚠️ Passed rather than looked up inside the round: `battleRound` has no content handle, and giving it
     // one for this would be a bigger seam than the rule is worth.
     creatureClasses: content?.bestiary?.classes || null,
+    // ⛔ CCODE-316 — WHO THE MENDING IS FOR. Erik: "the intent is to be able to heal anyone you want."
+    healTarget: state.healTarget || null,
     playerSheet: { attributes: character.attributes || {}, subAttributes: character.subAttributes || {}, alignment: character.alignment || {}, skills: character.skills || {}, energy: before },
     // CCODE-35: `effects` must ride BOTH ways — into the round (they modify this roll) and back out onto the
     // encounter state (they persist). This hand-built state object is the seam where they would silently drop.

@@ -231,8 +231,12 @@ working papers; **this is the answer.**
 | 08-30 | ⚠️ **one correction to the spec, measured before building on it** | it says the scale is *“0 same → 4 antipodal”* | the ring is **24 wide and its maximum distance is 12** | ✅ the three authored braids it cites are all **distance 12** — which **confirms its evidence while correcting its scale**; antipodal is now the ring's own maximum, never a hardcoded number |
 | 08-30 | ✅ **`requiresPoles` free from `minted.from`** | SNG-268 §4: dual-pole gating was a three-instance category only hand-authored braids ever entered | gated | ⚠️ and **absent is today**: with no tradition index a braid mints byte-identically to yesterday |
 | 08-30 | ⛔ **P3 (heal → decay on an undead) is BLOCKED, and I did not build it** | the backlog calls it *“the smallest real build here”* | measured: `resolveHeal` has ONE caller and its subject is **always the winner's own sheet** | ⛔ **you cannot heal an enemy or an ally**, so the rule has no path to fire — it is the target-affordance gap again, and building it would be a reader with no writer |
+| 08-30 | ✅ **CCODE-316 — a mending can be AIMED** | Erik: *"the intent is to be able to heal anyone you want, or use healing on any target"* | `§18`, six assertions, with the unaimed case as the non-vacuity floor | ⛔ one line decided it — `roundWinner === "player" ? playerSheet : oppSheet` — and **nothing could ask**. Now: yourself, an ally, or the thing you are fighting |
+| 08-30 | ✅ **and backlog P3 fell out for free** | *heal → decay on an undead* was **blocked, not hard**: nothing could aim a heal at the undead thing | gated: mending `the_narrowed` deals **−21, `inverted`** | ✅ **NO UNDEAD FLAG.** 25 healing crafts are typed `vitality` and the creature is authored `vitality: vulnerable` — **the inversion falls out of what it already says about itself** |
+| 08-30 | ⚠️ **`tensionBound` renamed `tensionNote`** | Erik: *"I don't want to add too much to a braid… what is tension bound?"* | — | ⛔ **I named it wrong**: in this codebase a *bound* is a LIMIT (`notFor`, `cannot`). **It is one sentence of prose**, not a restriction — the real mechanic is the cost |
+| 08-30 | ✅ **and the ring survives CONSOLIDATION** | Erik: *"we intend to absorb some into fewer traditions"* | tested on a simulated 8-tradition ring: opposite still reads **antipodal** | ✅ antipodal is **the ring's own maximum**, derived from `size`, never a hardcoded 12 |
 
-**Last verified: 2026-08-28 · v1.9.267 · 400 crafts.**
+**Last verified: 2026-08-28 · v1.9.268 · 400 crafts.**
 
 ---
 

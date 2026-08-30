@@ -828,6 +828,10 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // ⛔ CCODE-315 — the bestiary's CLASS table, so `requiresSelf` has something to be answered by.
   // ⚠️ ABSENT MEANS TODAY: with no table nothing is ever blocked and every existing caller is unchanged.
   creatureClasses = null,
+  // ⛔ CCODE-316 / ERIK 2026-08-30: "the intent is to be able to heal anyone you want, or use healing on
+  // any target." ⚠️ A HEAL WAS SPENT ON ITS OWN SIDE, ALWAYS — one line decided it and nothing could ask.
+  // Absent means today: no pick, the caster heals themselves, byte-identical to what shipped.
+  healTarget = null,
   // ⛔ CCODE-274 / ERIK'S [C] — THE ONES YOU DID NOT BRING FORWARD ARE STILL IN THE FIGHT.
   // "Named companions folded into the aggregate still feel like people... it's just that you only have so
   // much focus." `folded` is that: allies who are fighting and are not narrated blow by blow this round.
@@ -1055,7 +1059,18 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       const marginGap = Math.max(0, (winRoll.margin || 0) - (loseRoll.margin || 0));
       const cmCfgH = rules?.craftMechanics;
       const side = roundWinner === "player" ? "player" : "opponent";
-      const subject = roundWinner === "player" ? playerSheet : oppSheet;
+      // ⛔ CCODE-316 — WHO IS BEING MENDED. The old line was `roundWinner === "player" ? playerSheet :
+      // oppSheet` and that was the whole of it: a heal could not reach an ally, and could not reach a foe.
+      // ⚠️ THAT IS WHY `heal → decay on an undead` (backlog P3) HAD NO PATH TO FIRE — not because the rule
+      // was hard, but because nothing could aim a heal at the undead thing in the first place.
+      const ownSheet = roundWinner === "player" ? playerSheet : oppSheet;
+      const pickedAlly = healTarget && healTarget !== "self" && healTarget !== "opponent"
+        ? (allies || []).find(a => a && a.id === healTarget && a.present !== false) : null;
+      const aimedAtFoe = healTarget === "opponent";
+      const subject = pickedAlly?.sheet || (aimedAtFoe ? (roundWinner === "player" ? oppSheet : playerSheet) : ownSheet);
+      // ⚠️ THE SIDE FOLLOWS THE SUBJECT, not the caster — otherwise the caller applies an ally's mending to
+      // the player's own health, which is the CCODE-250 seat error in the other direction.
+      const healSide = pickedAlly ? "ally" : aimedAtFoe ? (roundWinner === "player" ? "opponent" : "player") : side;
       const r = resolveHeal(winDecl, {
         rank: winDecl.rank || 1, tier: winDecl.tier, intensity: winDecl.intensity || "standard",
         cfg: cmCfgH || {}, rng, marginGap,
@@ -1064,16 +1079,28 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         priorHeals: Number(state.healsBySide?.[side]) || 0
       });
       if (r.ok) {
-        healing = { side, amount: r.healed, verb: winDecl.function, by: winDecl.name || winDecl.function,
+        // ⛔ CCODE-316 / BACKLOG P3 — AND THE MENDING ANSWERS THE SAME AFFINITIES A BLOW DOES. Aevi typed
+        // 25 healing crafts `vitality` on Erik's ruling, and `the_narrowed` is authored `vitality:
+        // vulnerable`. ⚠️ SO THIS IS NOT A NEW RULE — it is the rule the corpus already states, finally
+        // asked. A thing that is vulnerable to vitality is BURNED by being mended, and the inversion
+        // needs no undead flag: it falls out of what the creature already says about itself.
+        const healType = winDecl.damageType || resolvedDamageType(winDecl, cmCfgH) || null;
+        const healAff = affinityOf(subject, healType, sb);
+        const inverted = healAff === "vulnerable";
+        const amount = healAff === "immune" ? 0
+          : inverted ? -r.healed
+          : healAff === "absorb" ? Math.round(r.healed * (sb?.damageTypes?.absorbMult ?? 1.5))
+          : r.healed;
+        healing = { side: healSide, amount, ...(pickedAlly ? { onId: pickedAlly.id, onName: pickedAlly.name } : {}), ...(healType ? { healType } : {}), ...(healAff ? { affinity: healAff } : {}), ...(inverted ? { inverted: true, why: "mending burns a thing that runs on decay" } : {}), verb: winDecl.function, by: winDecl.name || winDecl.function,
           rolled: r.rolled,
           ...(r.tapered !== r.rolled ? { tapered: r.tapered } : {}),
           ...(r.soaked ? { soaked: r.soaked } : {}),
           ...(r.staunched ? { staunched: r.staunched, ended: r.ended } : {}) };
         // the opponent's health is the one this engine owns; the player's is applied by the caller from
         // `healing.side`, exactly as it already applies `damage.side`.
-        if (side === "opponent" && opponentHealth != null) {
+        if (healSide === "opponent" && opponentHealth != null) {
           const ceiling = Number(oppSheet?.maxHealth ?? oppSheet?.health);
-          opponentHealth = Number.isFinite(ceiling) ? Math.min(ceiling, opponentHealth + r.healed) : opponentHealth + r.healed;
+          opponentHealth = Number.isFinite(ceiling) ? Math.min(ceiling, opponentHealth + amount) : opponentHealth + amount;
         }
       }
     } else if (harmFns.has(winDecl.function)) {

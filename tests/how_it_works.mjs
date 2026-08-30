@@ -1035,9 +1035,9 @@ console.log("\n── §17 · a braid knows how far apart its parents are ──
   }
   check("§17: an ANTIPODAL braid costs visibly more than an adjacent one",
     far.energyCost > near.energyCost, `${far.energyCost} vs ${near.energyCost}`);
-  check("§17: …and carries the tension bound", !!far.tensionBound);
+  check("§17: …and carries the tension bound", !!far.tensionNote);
   // ⛔ THE OTHER HALF, WHICH IS WHAT MAKES IT A DISTINCTION: adjacent gets neither.
-  check("§17: an ADJACENT braid carries NO tension bound", !near.tensionBound);
+  check("§17: an ADJACENT braid carries NO tension bound", !near.tensionNote);
   check("§17: the band is recorded on the mint receipt",
     far.minted?.tension?.band === "antipodal" && near.minted?.tension?.band === "adjacent");
   // ✅ SNG-268 §4 — dual-pole gating stops being a three-instance category.
@@ -1046,10 +1046,50 @@ console.log("\n── §17 · a braid knows how far apart its parents are ──
   // ⚠️ ABSENT IS TODAY: with no index, byte-identical to what shipped.
   const blind = BR.buildBraidDef(ch, ["A", "B"], cat, {});
   check("§17: without a tradition index nothing changes (absent is not zero)",
-    !blind.tensionBound && blind.energyCost < far.energyCost, `${blind.energyCost}`);
+    !blind.tensionNote && blind.energyCost < far.energyCost, `${blind.energyCost}`);
   // ⛔ AND THE LIVE PATH SUPPLIES IT, or the whole thing is inert.
   check("§17: app.js threads the tradition index into the braid builder",
     rd("app.js").includes("traditionIndex: CONTENT.traditionIndex"));
+}
+
+/* ══════════ §18 — A MENDING CAN BE AIMED, AND SOME THINGS ARE BURNED BY IT ══════════ */
+// ⛔ ERIK 2026-08-30: "the intent is to be able to heal anyone you want, or use healing on any target."
+// ⚠️ A HEAL WAS SPENT ON ITS OWN SIDE, ALWAYS — one line decided it and nothing could ask, which is why
+// backlog P3 (heal → decay on an undead) had NO PATH TO FIRE. The rule was never the hard part.
+//
+// ✅ AND P3 NEEDS NO UNDEAD FLAG. Aevi typed 25 healing crafts `vitality`; `the_narrowed` is authored
+// `vitality: vulnerable`. The inversion falls out of what the creature ALREADY SAYS ABOUT ITSELF.
+console.log("\n── §18 · a mending can be aimed, and some things are burned by it ──");
+{
+  const SBh = await import("../engine/skill_battle.js");
+  const rulesH = { ...rj("content/packs/core/rules/resolution.json"), craftMechanics: rj("content/packs/core/rules/craft_mechanics.json") };
+  const sbH = rj("content/packs/core/rules/skill_battle_system.json").engine;
+  const stepsH = rj("content/packs/core/rules/intensity_scaling.json").steps;
+  const narrowed = (rj("content/packs/valley/bestiary.json").roster || []).find(c => c.id === "the_narrowed");
+  const rngH = () => { let z = 20260830; return () => { z |= 0; z = (z + 0x6D2B79F5) | 0; let t = Math.imul(z ^ (z >>> 15), 1 | z); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; };
+  const shH = (o = {}) => ({ attributes: { physical: 7, mental: 7, social: 7, practical: 7 }, energy: 300, health: 60, maxHealth: 100, skills: [], ...o });
+  const mend = { function: "mend", tier: 6, attribute: "mental", intensity: "standard", name: "a mending", functions: ["mend"], mechanic: { damageType: "vitality" } };
+  const alliesH = [{ id: "char-me", name: "You", isPlayer: true, present: true, sheet: shH() },
+    { id: "sprig", name: "Sprig", present: true, sheet: shH({ health: 20 }) }];
+  const go = (target, opp) => SBh.battleRound({ playerDecl: mend, oppDecl: { function: "strike", tier: 1, name: "swing" },
+    playerSheet: shH(), oppSheet: opp || shH(), state: { momentum: 0, round: 1 },
+    rules: rulesH, sb: sbH, steps: stepsH, rng: rngH(), allies: alliesH, healTarget: target })?.healing || {};
+
+  const own = go(null), ally = go("sprig"), foe = go("opponent");
+  const undead = go("opponent", shH({ affinity: narrowed?.affinity || {} }));
+
+  // ⛔ NON-VACUITY FIRST: the unaimed case must still heal, or every row below is a broken heal.
+  check("§18: unaimed, a mending still heals the caster (unchanged)", own.amount > 0 && own.side === "player", JSON.stringify(own.amount));
+  check("§18: it can be aimed at an ALLY, and the side follows the subject",
+    ally.amount > 0 && ally.side === "ally" && ally.onId === "sprig", `${ally.amount} on ${ally.onId}`);
+  check("§18: it can be aimed at the FOE", foe.amount > 0 && foe.side === "opponent");
+  // ⛔ BACKLOG P3, AND IT NEEDED NO NEW RULE — only a heal that could be aimed at something hostile.
+  check("§18: mending a thing VULNERABLE to vitality HARMS it",
+    undead.amount < 0 && undead.inverted === true && undead.affinity === "vulnerable",
+    JSON.stringify({ amount: undead.amount, aff: undead.affinity }));
+  // ⚠️ AND THE PLAYER CAN ACTUALLY ASK — the affordance, without which this is a rule nobody reaches.
+  check("§18: the interface asks who the mending is for", rd("app.js").includes("data-sbheal"));
+  check("§18: …and the encounter forwards the pick", rd("engine/encounters.js").includes("healTarget: state.healTarget"));
 }
 
 /* ══════════ REPORT ══════════ */

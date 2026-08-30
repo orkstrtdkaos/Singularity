@@ -462,7 +462,8 @@
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. sees in lightlessness, which is a read others cannot make\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_portableDark_20260829": "⛔ ERIK 2026-08-29, CORRECTING MY OVER-READING: 'although they work in true absence they DON'T REQUIRE IT in general. CLOSE YOUR EYES AND YOU HAVE DARKNESS — in fact you'll see many umbrals on the surface WEARING BLINDFOLDS for that purpose.' ⚠️ I had filed these as VOID crafts and concluded that every Umbral begins as an Unlit. ⛔ WRONG: DARKNESS IS PORTABLE. An umbral does not need the world dark, only their own sight closed — which is why these are the FIRST GIFTS and belong to no school. **A blindfolded umbral on a lit street is not deprived; they are working.**"
   },
   {
    "id": "dim",
@@ -1966,7 +1967,8 @@
    "_wardTypes": "⛔ SNG-512. The deep dark sustains rather than harms.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT AGAIN — empty `notFor`, off-vocabulary challengeTypes ['endurance', 'survival', 'hardship'], energy e1 below band, ALL THREE TOGETHER. ⛔ Fifth tradition where the same three appear on the same crafts; it identifies a BATCH, not a sloppy author."
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT AGAIN — empty `notFor`, off-vocabulary challengeTypes ['endurance', 'survival', 'hardship'], energy e1 below band, ALL THREE TOGETHER. ⛔ Fifth tradition where the same three appear on the same crafts; it identifies a BATCH, not a sloppy author.",
+   "_portableDark_20260829": "⛔ ERIK 2026-08-29, CORRECTING MY OVER-READING: 'although they work in true absence they DON'T REQUIRE IT in general. CLOSE YOUR EYES AND YOU HAVE DARKNESS — in fact you'll see many umbrals on the surface WEARING BLINDFOLDS for that purpose.' ⚠️ I had filed these as VOID crafts and concluded that every Umbral begins as an Unlit. ⛔ WRONG: DARKNESS IS PORTABLE. An umbral does not need the world dark, only their own sight closed — which is why these are the FIRST GIFTS and belong to no school. **A blindfolded umbral on a lit street is not deprived; they are working.**"
   },
   {
    "id": "cleansing_light",
@@ -3382,7 +3384,8 @@
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ DARK'S SENSE — knows a lightless space and what lives in it\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_dark_light",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rungFix_20260829": "⚠️ ability rung `incapacitating` -> `none`: a craft that knows a lightless space entire — it is a READING and puts nobody down, at any rank."
+   "_rungFix_20260829": "⚠️ ability rung `incapacitating` -> `none`: a craft that knows a lightless space entire — it is a READING and puts nobody down, at any rank.",
+   "_portableDark_20260829": "⛔ ERIK 2026-08-29, CORRECTING MY OVER-READING: 'although they work in true absence they DON'T REQUIRE IT in general. CLOSE YOUR EYES AND YOU HAVE DARKNESS — in fact you'll see many umbrals on the surface WEARING BLINDFOLDS for that purpose.' ⚠️ I had filed these as VOID crafts and concluded that every Umbral begins as an Unlit. ⛔ WRONG: DARKNESS IS PORTABLE. An umbral does not need the world dark, only their own sight closed — which is why these are the FIRST GIFTS and belong to no school. **A blindfolded umbral on a lit street is not deprived; they are working.**"
   },
   {
    "id": "kept_fire",
@@ -4185,7 +4188,8 @@
      "cannot": "⛔ They must be able to hear you. ⚠️ And a construct in the room is a hole in everything you are telling them."
     }
    ],
-   "_authored": "⛔ ERIK 2026-08-29: 'HOW DO THESE PEOPLE CELEBRATE, HUNT, FUCK, TRAVEL, FIGHT?' ⚠️ THE TRADITION COULD SEE IN THE DARK AND KNOW A ROOM AND HAD NO WAY TO KNOW A PERSON — in a culture where 'everything is felt, not seen', that is the craft everything social runs on. ⛔ AND IT IS AUTHORED FROM THE CULTURE, NOT THE CRISIS: the endearment 'I would know you in the dark' is the tradition's whole intimacy, and it needed a craft under it."
+   "_authored": "⛔ ERIK 2026-08-29: 'HOW DO THESE PEOPLE CELEBRATE, HUNT, FUCK, TRAVEL, FIGHT?' ⚠️ THE TRADITION COULD SEE IN THE DARK AND KNOW A ROOM AND HAD NO WAY TO KNOW A PERSON — in a culture where 'everything is felt, not seen', that is the craft everything social runs on. ⛔ AND IT IS AUTHORED FROM THE CULTURE, NOT THE CRISIS: the endearment 'I would know you in the dark' is the tradition's whole intimacy, and it needed a craft under it.",
+   "_portableDark_20260829": "⛔ ERIK 2026-08-29, CORRECTING MY OVER-READING: 'although they work in true absence they DON'T REQUIRE IT in general. CLOSE YOUR EYES AND YOU HAVE DARKNESS — in fact you'll see many umbrals on the surface WEARING BLINDFOLDS for that purpose.' ⚠️ I had filed these as VOID crafts and concluded that every Umbral begins as an Unlit. ⛔ WRONG: DARKNESS IS PORTABLE. An umbral does not need the world dark, only their own sight closed — which is why these are the FIRST GIFTS and belong to no school. **A blindfolded umbral on a lit street is not deprived; they are working.**"
   },
   {
    "powerSystem": "precursor",
@@ -4194,8 +4198,8 @@
    "axes": {
     "dark_light": -0.6
    },
-   "id": "set_to_wait",
-   "name": "Set To Wait",
+   "id": "premeditate",
+   "name": "Premeditate",
    "levelReq": 2,
    "energyCost": 5,
    "attribute": "practical",
@@ -4259,7 +4263,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "Set To Wait",
+     "name": "Premeditate",
      "functions": [
       "conceal",
       "foresee"
@@ -4306,7 +4310,7 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-29: 'how do these people HUNT… FIGHT?' ⚠️ MEASURED: 15 crafts, `conceal` on eleven, and NOTHING FOR WAITING — while the culture says the kill is unremarkable and the sitting is the craft, and that an Umbral war is attrition rather than a line. ⛔ IT IS DELIBERATELY NOT A CONCEALMENT CRAFT: the tradition has six of those. This is ENDURANCE AND POSITION, which is what an ambush actually costs.",
-   "_renamed_20260829": "⛔ ERIK 2026-08-29: 'I like the long wait now — good assassin skill. IT'S NOT 9 NIGHTS THOUGH. It's ANY TIME YOU SET UP TO WAIT FOR SOMETHING.' ⚠️ Renamed from `The Long Patience` and reframed: the ranks now buy COMPANIONS and PIERCE, not duration-as-spectacle. **It works the same at twenty minutes as at two days** — what it needs is that you CHOSE the place and were there first.",
+   "_renamed_20260829": "⛔ ERIK 2026-08-29: 'change Set To Wait to PREMEDITATE.' ⚠️ Better because it names the ACT OF MIND rather than the posture — the craft was never about sitting still, it was about having CHOSEN the place and been there first. ⛔ And it carries the legal weight the craft has earned: this is the assassin's opening, and premeditation is what separates a killing from a fight.",
    "_idRenamed_20260829": "⚠️ id was `the_long_patience` after Erik renamed the craft to `Set To Wait`. ⛔ I renamed the DISPLAY NAME and left the ID, which is how a craft ends up unfindable by its own name — caught during the school gap assessment when the id did not resolve."
   }
  ],

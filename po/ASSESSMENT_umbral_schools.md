@@ -30,10 +30,9 @@ local cult; they are a front of `arc_the_disagreement`.**
 |---|---|---|---|---|
 | **SHADOW-WALKERS** | 9 | L1–L5 | ⚠️ **1** | 9/28 |
 | ⛔ **THE FATHOMLESS** | ⛔ **4** | L1–L4 | 2 | ⛔ **7/28** |
-| **THE UNLIT** | 5 | ⚠️ **L1–L3 only** | 1 | 11/28 |
+| **THE UNLIT** | ⛔ **2** (was counted as 5) | ⚠️ **L1–L3 only** | 1 | — |
 
-⛔ **`the_long_patience` DID NOT RESOLVE and that is how I found a real defect: I renamed the craft to
-`Set To Wait` and LEFT THE ID.** ✅ Fixed — **a craft unfindable by its own name.**
+⛔ **`set_to_wait` DID NOT RESOLVE and that is how I found a real defect: I renamed the craft and LEFT THE ID. ⚠️ **Now `premeditate`, per Erik** — it names the ACT OF MIND rather than the posture, and carries the weight the craft earned: **premeditation is what separates a killing from a fight.**** ✅ Fixed — **a craft unfindable by its own name.**
 
 ---
 
@@ -69,13 +68,21 @@ shadows and shapes darkness as a material should be able to CUT with it.**
 
 ---
 
-## §4 — ⚠️ AND ONE THING THE COSMOLOGY BREAKS
+## §4 — ⛔ CORRECTED: DARKNESS IS PORTABLE, AND THE UNLIT ARE **TWO CRAFTS**
 
-⛔ **`darksight`, `felt_room`, `long_dark` and `known_in_the_dark` all work in TRUE ABSENCE — no light, no
-shadow.** ⚠️ **By the new order those are VOID crafts, and I have filed three of them under the Unlit and
-one under the Fathomless.** ⛔ **BUT EVERY UMBRAL LEARNS THEM — `darksight` is 'the first gift of the
-Umbral road'.**
+**I filed `darksight`, `felt_room`, `long_dark` and `known_in_the_dark` as VOID crafts and concluded that
+every Umbral begins as an Unlit.** ⛔ **WRONG.**
 
-✅ **Which is the interesting implication: EVERY UMBRAL BEGINS AS AN UNLIT AND MOST GROW OUT OF IT.**
-⚠️ **The first thing you learn is to see with no light at all. The Unlit are the ones who never went on to
-the shadow.** **Erik's ruling wanted before I author from it.**
+> **Erik: *"although they work in true absence they DON'T REQUIRE IT. CLOSE YOUR EYES AND YOU HAVE
+> DARKNESS — in fact you'll see many umbrals on the surface WEARING BLINDFOLDS for that purpose."***
+
+⛔ **DARKNESS IS PORTABLE.** You do not need the world dark, only your own sight closed. ✅ **So the first
+gifts belong to NO SCHOOL — the schools begin above them.**
+
+⚠️ **AND THE IMAGE IS THE BEST DETAIL IN THE TRADITION: a blindfolded figure walking a lit street with
+complete confidence, reading the room by breath and weight.** ⛔ **Not disabled, not hiding — WORKING, and
+everyone can see them doing it. A stealth tradition whose working garment makes you CONSPICUOUS.**
+
+⛔ **THE CONSEQUENCE FOR §3.1: THE UNLIT ARE NOW TWO CRAFTS** — `dim` and `the_kept_dark`, one of them L1.
+⚠️ **The tradition's own named villainy, a front of the cosmic arc, has two crafts. The gap is worse than
+this assessment first said.**

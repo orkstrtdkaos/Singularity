@@ -246,8 +246,13 @@ working papers; **this is the answer.**
 | 08-30 | ⛔ **`heroSwingCap` IS LEVEL-BLIND — Aevi was right to ask** | she flagged that my *“do not raise it”* was measured against a **level-20 ceiling** Erik removed the same week | measured: 400v400, a level-20 hero and a **level-95 Mythical bend the tide by the SAME 0.12** | ⛔ `heroSwing` is clamped before the hero's power is consulted, so **at the top of the ladder being a Mythical buys nothing at legion scale**. Needs a ruling, not a fix |
 | 08-30 | ✅ **and one thing I checked that was FINE** | `personalRisk = max(floor, 0.5 − tide)` looked backwards — a hero who bends the battle more is SAFER | read the formula | ✅ **correct**: a winning side is a safer place to stand, and Erik's `legionFloorRisk` 0.12 means never *safe*. Checked before reporting it |
 | 08-30 | ⚠️ **`braidTension` un-exported** | `wiring_audit` flagged it the moment I shipped it — only `buildBraidDef` needs it | narrowing the surface | ⛔ the `registry:internal` marker would have HIDDEN it; narrowing REMOVES it |
+| 08-30 | ✅ **CCODE-319 — the folded pool is PROPORTIONAL TO HEALTH** | it was `per × K` and named no level, while health is `level × 2` | `§19` — a folded ally can now actually fall (**0.16/round, was 0.00**) | ⛔ **the whole band is [2×, 4×] health** and the dial sits at **2.0**, the gentle end, in content — Erik's to turn with the measured bands beside it |
+| 08-30 | ✅ **CCODE-318 — the fold hears the enemy's INTENT** | softest-first was the only rule, so the aggregate played **every foe as if hunting your healer** | gated: a threat-seeking foe takes the mender **0%**, a hunter still takes her | ⚠️ **the ordering changes WHO, never how many** — 0.16 losses/round either way, the claim CCODE-308 made, now asserted |
+| 08-30 | ⛔ **and the two only work together** | I could not observe CCODE-318 AT ALL until CCODE-319 landed — the pool was out of range, so no ordering could show | both gated in one section | ⚠️ a fix you cannot observe is a fix you cannot claim |
+| 08-30 | ✅ **CCODE-317 — the group model is on the screen** | `groupCapability` computed coverage · depth · sole · cohesion since CCODE-307 and **nothing in the game read it** | `§20` | ✅ the party panel now shows what your line covers and **what only one person holds** — the field `who_falls_first` and `break_the_line` are both waiting on |
+| 08-30 | ⚠️ **`combatWeight` used without importing it** | `node --check` passes on that — a RUN caught it | fixed before commit | ⛔ **the third time this class of bug appeared this week** (`num`, `unreachable`, now this). A parse is not a run |
 
-**Last verified: 2026-08-28 · v1.9.269 · 400 crafts.**
+**Last verified: 2026-08-28 · v1.9.270 · 400 crafts.**
 
 ---
 

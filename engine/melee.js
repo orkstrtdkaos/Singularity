@@ -195,14 +195,23 @@ export function meleeExchange(sideA, sideB, { rng = Math.random, attr = "physica
  *  toward whoever is least able to take it, so the crowd behaves like people rather than like a health bar.
  *  ⚠️ SPREADS RATHER THAN CONCENTRATES: one aggregate blow should not vaporise the softest ally in a round
  *  that, resolved fully, would have been eight separate ordinary hits. */
-export function distributeCasualties(side, pool, { rng = Math.random, maxSharePer = 0.5 } = {}) {
+export function distributeCasualties(side, pool, { rng = Math.random, maxSharePer = 0.5, order = null } = {}) {
   const live = side.filter(c => !c.downed);
   if (!live.length || pool <= 0) return { hits: [], downed: [], unspent: pool };
-  const order = live.slice().sort((x, y) => combatWeight(x).soak - combatWeight(y).soak);
+  // ⛔ CCODE-318 — WHO THE POOL REACHES, AND IT IS NO LONGER ALWAYS THE SOFTEST. Softest-first is a
+  // sensible melee rule and it was the ONLY rule, so the aggregate played EVERY foe as if it were hunting
+  // your healer. Measured in CCODE-308: against a brute that fights whoever fights it, the shortcut still
+  // killed the mender 92% of the time while the fight it replaces killed her 0%.
+  //
+  // ⚠️ THE HOOK, NOT THE POLICY. `melee.js` stays a leaf module and knows nothing about targeting; the
+  // caller supplies the ordering it is already using for the blow. ⚠️ ABSENT IS TODAY — with no `order`
+  // the soak sort runs exactly as it always has.
+  const ordered = typeof order === "function" ? (order(live) || live) : null;
+  const queue = ordered && ordered.length ? ordered : live.slice().sort((x, y) => combatWeight(x).soak - combatWeight(y).soak);
   const cap = Math.max(1, Math.round(pool * maxSharePer));
   const hits = [], downed = [];
   let left = pool;
-  for (const c of order) {
+  for (const c of queue) {
     if (left <= 0) break;
     const w = combatWeight(c);
     const share = Math.min(left, Math.max(1, Math.round(cap * (0.5 + rng() * 0.5))));

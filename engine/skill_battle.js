@@ -8,7 +8,7 @@
 import { resolveAction } from "./resolve.js";
 import { chooseTarget, foeKnowledge } from "./targeting.js";
 import { damageMixOf, wardAnswer, resolveComposite } from "./damagetypes.js";   // CCODE-281: composite damage, and the reader `wardTypes` never had
-import { predictAggregate, distributeCasualties } from "./melee.js";   // CCODE-298: the folded line takes losses too   // CCODE-274: the folded party contributes as a measured aggregate, not as N more rolls   // CCODE-250: a foe chooses who to hit
+import { predictAggregate, distributeCasualties, combatWeight } from "./melee.js";   // CCODE-298: the folded line takes losses too   // CCODE-274: the folded party contributes as a measured aggregate, not as N more rolls   // CCODE-250: a foe chooses who to hit
 import { redirectImposition, interceptorFor, catchesCondition, catchesDamage } from "./intercept.js";
 import { persistsUntilHealed, persistedConditionName } from "./conditions.js";   // CCODE-296: the readers that accept BOTH authored shapes
 import { downEntity } from "./combatants.js";   // CCODE-298: the first path that can fire an authored downedEffect   // CCODE-296: the readers that accept BOTH authored shapes   // CCODE-250: …and someone may step in front of it
@@ -1421,9 +1421,38 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
           const per = Math.max(0, Number(sb?.melee?.perFoldedAlly ?? 2));
           // ⚠️ THE SAME √K COMPRESSION THE CONTRIBUTION USES, so the two sides of the fold are measured the
           // same way. A pool sized like the line, not a copy of the blow that landed on the front.
-          const pool = Math.max(0, Math.round(predictAggregate({ mean: per, sd: per / 2 }, standing.length).mean));
+          // ⛔ CCODE-319 — PROPORTIONAL TO HEALTH, WHICH IS THE WHOLE FIX. The old pool was `per × K` and
+          // named no level; health is `level × 2`. The two curves diverged immediately, so the mechanic was
+          // in range at level 1–2 and DEAD from level 3 to 100. ⚠️ NOT UNDER-TUNED — OUT OF RANGE: no value
+          // of `perFoldedAlly` repairs it, because a constant cannot track a curve.
+          //
+          // ⚠️ THE FOLD'S OWN HEALTH, not the player's — these are the people at risk, and a typical health
+          // is the right scale for a pool that has to reach one of them.
+          const foldHealths = standing.map(x => combatWeight(x).health).filter(h => h > 0).sort((a, b) => a - b);
+          const typicalHealth = foldHealths.length ? foldHealths[Math.floor(foldHealths.length / 2)] : 0;
+          const perHealth = Math.max(0, Number(sb?.melee?.foldedPoolPerHealth ?? 0));
+          // ⚠️ ABSENT IS TODAY. With no dial the old arithmetic runs untouched, so a caller that has not
+          // adopted the content change sees exactly the fight it saw yesterday.
+          const pool = perHealth > 0 && typicalHealth > 0
+            ? Math.max(0, Math.round(typicalHealth * perHealth))
+            : Math.max(0, Math.round(predictAggregate({ mean: per, sd: per / 2 }, standing.length).mean));
           if (pool > 0) {
-            const cas = distributeCasualties(standing, pool, { rng });
+            // ⛔ CCODE-318 — THE FOLD HEARS THE ENEMY'S INTENT. The same `chooseTarget` that decided who
+            // the blow was aimed at now decides who the fold's losses fall on, so a brute cuts into the
+            // people fighting it and a hunter still goes for the mender. ⚠️ SAME CASUALTY COUNT — the
+            // ordering changes WHO, never how many, which is what CCODE-308 measured.
+            const foePolicy = targetPolicy || oppSheet?.targetPolicy || "threat";
+            const byIntent = (live) => {
+              const out = [], left = live.slice();
+              while (left.length) {
+                const pick = chooseTarget(left, { policy: foePolicy, rng })?.target || left[0];
+                out.push(pick);
+                const at = left.indexOf(pick);
+                left.splice(at < 0 ? 0 : at, 1);
+              }
+              return out;
+            };
+            const cas = distributeCasualties(standing, pool, { rng, order: byIntent });
             for (const d of (cas.downed || [])) {
               const who = standing.find(x => x.id === d.id);
               // ⛔ AND THIS IS THE FIRST PATH THAT COULD EVER FIRE A `downedEffect`. All nine companions

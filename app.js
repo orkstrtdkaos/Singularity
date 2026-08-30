@@ -111,13 +111,14 @@ import { tickAllProjects, openProject, projectProgress, interruptProject, resume
 import { holdOpen, slowSink, canReach, resolveRetrieval } from "./engine/death.js"; // CCODE-270: the player's road back — the seven retrieval crafts had no door
 import { alliesOf } from "./engine/combatants.js"; // CCODE-276: the roster the party block renders
 import { commandSlots, bringForward, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+import { groupCapability } from "./engine/group.js";   // CCODE-317: what your line COVERS, and what only one person holds
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.269";
+const APP_VERSION = "1.9.270";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12603,6 +12604,29 @@ function skillBattlePanel() {
       return `<div class="sb-party">
         <div class="sys-label">Your line — you lead ${lead.slots}${lead.capped ? " <span class=\"hint\">(the most, for now)</span>" : ""}</div>
         <div class="sb-fwd-row">${canPick.map(pip).join("")}</div>
+        ${(() => {
+          // ⛔ CCODE-317 — WHAT YOUR LINE COVERS, AND WHAT ONLY ONE PERSON HOLDS. `groupCapability` has
+          // computed coverage · depth · sole · cohesion since CCODE-307 and NOTHING IN THE GAME READ IT.
+          // ⚠️ AEVI NAMED THE NEED: "this is the number a player should be able to SEE" — and the nine
+          // authored `downedEffect`s are all written as coverage cliffs without anyone calling them that.
+          // ⛔ SOLE IS THE INTERESTING HALF: a capability held by exactly one standing person is one
+          // casualty from leaving the group entirely, and that is a decision, not a statistic.
+          try {
+            const cap = groupCapability(canPick);
+            if (!cap.coverage.length) return "";
+            const soleOf = (fam) => {
+              const who = canPick.find(a => (a.contributions || []).includes(fam));
+              return who ? String(who.name).split(" ")[0] : null;
+            };
+            const bits = cap.coverage.sort().map(fam => cap.sole.includes(fam)
+              ? `<span class="sb-sole" title="only ${esc(soleOf(fam) || "one of you")} brings this — losing them loses it">${esc(fam)} <em>only ${esc(soleOf(fam) || "one")}</em></span>`
+              : `<span class="hint">${esc(fam)}&nbsp;×${cap.depth[fam]}</span>`);
+            return `<div class="sb-cover-row"><div class="sys-label">Your line covers</div>
+              <div class="sb-cover">${bits.join(" · ")}</div>
+              ${cap.lostCoverage.length ? `<div class="hint">⛔ gone with the fallen: ${esc(cap.lostCoverage.join(", "))}</div>` : ""}
+            </div>`;
+          } catch { return ""; }
+        })()}
         ${split.folded.length ? `<div class="hint">${esc(split.folded.map(a => String(a.name).split(" ")[0]).join(", "))} ${split.folded.length === 1 ? "is" : "are"} in the melee — fighting, not narrated.</div>` : ""}
         ${split.withdrawn.length ? `<div class="hint">${split.withdrawn.map(a => `${esc(String(a.name).split(" ")[0])} ${esc(a.withdrawal?.manner || "is clear of it")}`).join(" · ")}</div>` : ""}
         ${(() => {

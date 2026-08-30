@@ -1092,6 +1092,64 @@ console.log("\n── §18 · a mending can be aimed, and some things are burned
   check("§18: …and the encounter forwards the pick", rd("engine/encounters.js").includes("healTarget: state.healTarget"));
 }
 
+/* ══════════ §19 — THE FOLD CAN FALL, AND IT FALLS BY THE ENEMY'S INTENT ══════════ */
+// ⛔ TWO FIXES THAT ONLY WORK TOGETHER, AND EACH PROVES THE OTHER.
+//   CCODE-319  the pool is PROPORTIONAL TO HEALTH. It was `per × K` and named no level while health is
+//              `level × 2`, so it was in range at level 1–2 and DEAD from level 3 to 100.
+//   CCODE-318  the fold hears the ENEMY'S INTENT. Softest-first was the only rule, so the aggregate played
+//              every foe as if it were hunting your healer.
+// ⚠️ THE ORDERING FIX WAS UNOBSERVABLE UNTIL THE POOL FIRED — I could not verify CCODE-318 at all until
+// CCODE-319 landed, which is why they ship together.
+console.log("\n── §19 · the fold can fall, and it falls by the enemy's intent ──");
+{
+  const SBf = await import("../engine/skill_battle.js");
+  const rulesF = rj("content/packs/core/rules/resolution.json");
+  const sbF = rj("content/packs/core/rules/skill_battle_system.json").engine;
+  const stepsF = rj("content/packs/core/rules/intensity_scaling.json").steps;
+  const shF = (o = {}) => ({ attributes: { physical: 6, mental: 6, social: 6, practical: 6 }, energy: 200, health: 14, skills: [], ...o });
+  const fold = () => [
+    { id: "sprig", name: "Sprig", present: true, contributions: ["RESTORE"], sheet: shF({ soak: 0, attributes: { physical: 1 } }) },
+    ...[1, 2, 3, 4].map(i => ({ id: "sp" + i, name: "Spear" + i, present: true, contributions: ["HARM", "MARTIAL"], sheet: shF({ soak: 5 }) })),
+  ];
+  const run = (policy, T = 300) => {
+    let fell = 0, mender = 0;
+    for (let t = 0; t < T; t++) {
+      let z = t * 7919 + 11;
+      const rngF = () => { z |= 0; z = (z + 0x6D2B79F5) | 0; let q = Math.imul(z ^ (z >>> 15), 1 | z); q = (q + Math.imul(q ^ (q >>> 7), 61 | q)) ^ q; return ((q ^ (q >>> 14)) >>> 0) / 4294967296; };
+      const r = SBf.battleRound({ playerDecl: { function: "reveal", tier: 1, name: "look" },
+        oppDecl: { function: "strike", tier: 9, attribute: "physical", intensity: "surge", name: "swing" },
+        playerSheet: shF({ health: 80 }), oppSheet: shF({ attributes: { physical: 9, mental: 9, social: 9, practical: 9 } }),
+        state: { momentum: 0, round: 1 }, rules: rulesF, sb: sbF, steps: stepsF, rng: rngF, folded: fold(), targetPolicy: policy });
+      for (const l of (r.damage?.foldedLosses?.downed || [])) { fell++; if (l.id === "sprig") mender++; }
+    }
+    return { fell: fell / T, mender: mender / T };
+  };
+  const threat = run("threat"), hunter = run("healer");
+
+  // ⛔ CCODE-319 FIRST: without this the mechanic cannot fire at all and every row below is vacuous.
+  check("§19: a folded ally can actually fall", threat.fell > 0, `${threat.fell.toFixed(2)} losses/round`);
+  // ⛔ CCODE-318: a brute that fights whoever fights it does NOT hunt the mender.
+  check("§19: a THREAT-seeking foe does not take the mender", threat.mender === 0, `${(threat.mender * 100).toFixed(0)}%`);
+  // ✅ AND A HUNTER STILL DOES — or the fix has simply disarmed the enemy rather than given it intent.
+  check("§19: a HEALER-hunting foe still takes her", hunter.mender > 0, `${(hunter.mender * 100).toFixed(0)}%`);
+  // ⚠️ THE ORDERING CHANGES WHO, NEVER HOW MANY — the claim CCODE-308 made, asserted rather than trusted.
+  check("§19: the casualty COUNT is the same either way", Math.abs(threat.fell - hunter.fell) < 0.05,
+    `${threat.fell.toFixed(2)} vs ${hunter.fell.toFixed(2)}`);
+  // ⛔ AND THE DIAL IS CONTENT, not a constant in the engine.
+  check("§19: the pool's scale is a content dial", Number(sbF?.melee?.foldedPoolPerHealth) >= 2,
+    String(sbF?.melee?.foldedPoolPerHealth));
+}
+
+/* ══════════ §20 — WHAT YOUR LINE COVERS IS ON THE SCREEN ══════════ */
+// ⛔ `groupCapability` computed coverage · depth · sole · cohesion since CCODE-307 and NOTHING IN THE GAME
+// READ IT. ⚠️ Aevi named the need — "this is the number a player should be able to SEE" — and two of her
+// authored crafts (`who_falls_first`, `break_the_line`) ask for exactly what it returns.
+console.log("\n── §20 · the group model is on the screen ──");
+{
+  check("§20: app.js reads groupCapability", rd("app.js").includes("groupCapability("));
+  check("§20: …and shows what only ONE person holds", rd("app.js").includes("sb-sole"));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

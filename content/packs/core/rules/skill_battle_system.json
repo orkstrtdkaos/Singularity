@@ -1091,6 +1091,11 @@
    "namedAtTier": 2,
    "reasonAtTier": 3,
    "note": "tier 1 tells you only whether it is looking at you; tier 2 names the mark; tier 3 says why, which is what makes baiting possible."
+  },
+  "melee": {
+   "note": "⛔ CCODE-319 — THE FOLDED PARTY'S POOL IS PROPORTIONAL TO HEALTH. It was `perFoldedAlly × K` and mentioned LEVEL nowhere, while health is `level × 2` — so the two curves diverged immediately and a folded ally could not fall at all above level 2. Measured in CCODE-304: a fall needs pool ≥ 2 × health, and the ENTIRE dynamic range is [2×, 4×]. Below it nothing can happen; above it everyone the pool reaches falls.",
+   "_foldedPoolPerHealth": "⚠️ WHERE IN THE BAND AN EVEN FIGHT SITS, and it is the dial Erik should turn. Measured, fold of 4: 2.0 ≈ occasional and usually a single loss · 2.2 ≈ expect to lose someone · 2.6+ ≈ the line breaks. ⛔ BELOW 2.0 THE MECHANIC CANNOT FIRE AT ALL. Set to the gentle end deliberately — a folded ally should be a risk, not a toll.",
+   "foldedPoolPerHealth": 2
   }
  },
  "buildImplication": "Engine: a skill-battle mode alongside single-check resolution — triggered when two wills contest with skills. Per round: both declare skill+intensity; roll d100+attr+tierBonus+matchupBonus; winner shifts momentum by margin; track energy (attrition); resolve at meter-end or exhaustion. Reads challengeProfile (matchup relevance), functions (the edge table), intensity_scaling (energy), tier (weight). SNG-027 social contest is the SOCIAL-flavored instance of this same engine — unify them: a skill-battle is the general case, social-contest and combat and the duel are flavors. Matchup table authored here; expand per-function. Flag SNG-045. Smoke: a conceal-vs-reveal contest runs multiple rounds; energy attrition can decide it independent of rolls; tier gives both power and stamina; a Surge-botch backlashes; matchup edge beats raw rolls; social-contest resolves through the same engine."

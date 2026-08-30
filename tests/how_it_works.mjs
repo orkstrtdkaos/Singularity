@@ -1413,6 +1413,30 @@ console.log("\n── §26 · silence inherits the rung, and a live field is nev
     !/`wardTypes`\s*\|\s*⛔\s*\*\*NOTHING/.test(spec26));
 }
 
+// ⛔ CCODE-327 — THE CERTIFIED COUNTS, GATED BY THEIR OWN GENERATOR. Every number the docs certify about the
+// corpus is checked here by running `certify_counts.mjs --check`, which exits non-zero on drift.
+//
+// ⚠️ THE GATE RUNS THE GENERATOR RATHER THAN RE-DERIVING THE COUNTS, deliberately. A gate that counted the
+// corpus itself would be a SECOND implementation of the same derivation, free to disagree with the first —
+// and then whichever one an author happened to run would decide what was true. One source, checked.
+//
+// ⛔ AND IT COVERS THE TWO THAT NOTHING WATCHED. `HOW_IT_WORKS` and `PLAYERS_GUIDE` carried craft counts with
+// no gate at all — only their VERSION string was checked — so they could drift silently and forever, which
+// is strictly worse than the spec header that at least failed loudly.
+{
+  const { execFileSync } = await import("node:child_process");
+  let certOut = "", certOk = true;
+  try { certOut = execFileSync(process.execPath, [join(root, "scripts/certify_counts.mjs"), "--check"], { encoding: "utf8" }); }
+  catch (e) { certOk = false; certOut = String(e.stdout || "") + String(e.stderr || ""); }
+  check("CERTIFY: every count the docs certify about the corpus is fresh",
+    certOk, certOut.split("\n").filter(l => /STALE|REFUSING/.test(l)).join(" · ") || "run `node scripts/certify_counts.mjs`");
+  // ⚠️ NON-VACUITY: the generator must still be finding all six claims. If a doc is restructured and a row
+  // goes missing, `--check` exits non-zero with REFUSING — this asserts the run was a real comparison and
+  // not a no-op that found nothing to compare.
+  check("CERTIFY: …and it is still finding its claims, not silently matching none",
+    !/REFUSING TO STAMP/.test(certOut), certOut.slice(0, 200));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

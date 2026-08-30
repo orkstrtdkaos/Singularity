@@ -56,7 +56,7 @@ measuring across every craft that needs a pick.**
 
 ---
 
-## ⛔ THE TEN RULES THAT MAKE IT WORK
+## ⛔ THE ELEVEN RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
 
@@ -235,6 +235,30 @@ time and obvious in a column.**
 
 ⚠️ **The same applies to any repeated construction** — every craft opening with a verb, every description
 starting the same way, every surge phrased as a warning. **Batch-author, then read the batch as a batch.**
+
+### 11. ⛔ READ THE PLAY. THE CHARACTER SHEET HOLDS CAPABILITIES THE CRAFT LIST DOES NOT.
+
+**Added 2026-08-29. Erik, after I delivered a gap assessment: *"First LEARN FROM THE RUNIC SPEAR Silas
+crafted. He has used dark skills for a long time now."***
+
+⛔ **I HAD BEEN AUDITING THE CRAFT LIST AS THOUGH IT WERE THE GAME.** ⚠️ **One character sheet corrected
+three of my conclusions:**
+
+| I concluded | the play said |
+|---|---|
+| *"shadow-walkers are toothless — one harm craft"* | ⛔ **a `shadow-harm` focus bound at the spear's quillon, hitting 21.27 cast alone** |
+| *"`summon` is REFUSED — Umbrals don't call"* | ⛔ **`shadow_twin_manifestation` — Silas has summoned a shadow duplicate of his own weapon at will for weeks** |
+| *"the tradition has no communication"* | ⛔ **a paired SHADOW TABLET: what one hand writes, the other's face carries, however far apart** |
+
+⚠️ **NONE OF THOSE WERE CRAFTS.** They were an item grant on a rune-bound L29 spear, a bound thread, and a
+`focus`-kind item. ⛔ **PLAY HAD BEEN ANSWERING MY GAP QUESTIONS FOR WEEKS AND I WAS NOT READING IT.**
+
+✅ **SO THE ORDER FOR ANY TRADITION AUDIT IS:** authored places and origin text (rule from the Blazeborn
+session) → **THEN THE CHARACTER SHEETS AND ITEMS OF ANYONE WHO PLAYS THE TRADITION** → then the craft list.
+
+⚠️ **AND THE FINDINGS ARE THE BEST KIND, because they are already balanced by having been used:** a
+combination discovered at the table (`the made thing` + `shadow work` = a shadow twin) is a craft that has
+been playtested before it was written.
 
 ---
 

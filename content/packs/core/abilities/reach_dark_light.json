@@ -4918,6 +4918,143 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-29. ⚠️ Closes the Fathomless properly: the school now has DESCENT (this), PROTECTION (`standing_deep`), MENDING (`shadowed_mending`) and KILLING (`stopped_breath`) — a working profession rather than an assassin's list. ⛔ AND THE ROPE IS THE THROUGH-LINE: it is how they reach the deep and how they hold what they find there."
+  },
+  {
+   "powerSystem": "precursor",
+   "tradition": "umbral",
+   "nativeOrCombination": "native",
+   "axes": {
+    "dark_light": -0.7
+   },
+   "id": "cast_twin",
+   "name": "Cast Twin",
+   "levelReq": 3,
+   "energyCost": 7,
+   "attribute": "mental",
+   "shape": "summon",
+   "harmRung": "damaging",
+   "challengeTypes": [
+    "FIGHT",
+    "CREATE",
+    "STEALTH"
+   ],
+   "operativeAxis": [
+    "quality",
+    "duration",
+    "targets"
+   ],
+   "effectTags": [
+    "shadow",
+    "summon",
+    "made-thing"
+   ],
+   "functions": [
+    "summon",
+    "make",
+    "strike"
+   ],
+   "description": "⛔ A MADE THING CASTS A SHADOW, AND A SHADOW-WORKER CAN PICK IT UP. Take something already made — a blade, a key, a lantern-frame, a spear — and call its shadow into your hand as a second of itself. ⚠️ IT IS NOT AN ILLUSION AND IT IS NOT A COPY: it is the thing's own shadow, given enough substance to be held and used. ⛔ THIS IS SHADOW WORK APPLIED TO SOMETHING THAT ALREADY EXISTS — you are not shaping darkness into a shape, you are picking up a shape darkness was already making.",
+   "narrationHints": "He is holding the spear. ⚠️ Then he is holding two, and one of them is the colour of the gap under a door. ⛔ Both move when he moves. Only one of them has any weight.",
+   "notFor": "⛔ THE ORIGINAL MUST EXIST, BE MADE, AND BE PRESENT — you cannot twin a thought, a living thing, or an object you merely remember. A tree casts a shadow and is not MADE; it will not answer. ⚠️ AND IT NEEDS LIGHT TO HAVE CAST A SHADOW IN THE FIRST PLACE: in a lightless room there is nothing to pick up. ⛔ THE TWIN IS SHADOW ALL THE WAY THROUGH — it weighs nothing, it cannot be handed to someone who does not work shadow, and full light from every side ends it wherever it is.",
+   "plainly": "A fight/create action. ⛔ SUMMON THE SHADOW-TWIN OF A MADE OBJECT YOU HOLD — a second of the same thing, wieldable, dealing SHADOW rather than the original's damage. Rated 5, one twin, about six rounds. r2 keeps it without your attention and lets you hand it to another shadow-worker; r3 twins something you can SEE rather than hold, and the twin persists until light takes it. ⚠️ The original must be a MADE thing, present, and have a shadow to pick up.",
+   "intensity": {
+    "conserve": "a thin twin — half the duration, and it will not take a hard blow",
+    "surge": "twin everything made within reach at once; ⛔ THEY ALL END THE MOMENT ANY REAL LIGHT REACHES THE ROOM"
+   },
+   "bounds": [
+    {
+     "text": "⛔ MADE THINGS ONLY, PRESENT AND CASTING — not living things, not remembered ones, not a tree",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT NEEDS A SHADOW TO EXIST. A lightless room offers nothing to pick up",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ THE TWIN IS SHADOW THROUGH AND THROUGH — weightless, and it deals `shadow`, never the original's harm",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ FULL LIGHT FROM EVERY SIDE ENDS IT, wherever it is and whoever is holding it",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "duration": 6,
+    "targets": 1,
+    "damageType": "shadow",
+    "crit": {
+     "success": "The twin comes up sharper than the original and holds an edge the original lost years ago.",
+     "failure": "It comes up backwards — everything reversed — and you find that out mid-swing."
+    },
+    "note": "summon. ⛔ AUTHORED FROM PLAY, NOT FROM THE CRAFT LIST. Erik 2026-08-29: the shadow-twin on Silas's Memory spear was 'born of THE MADE THING AND SHADOW WORK… we should have a shadow summon skill.' ⚠️ SO THE COMBINATION WAS DISCOVERED AT THE TABLE AND HAD NO CRAFT UNDER IT — `shadow_twin_manifestation` exists as an ITEM GRANT on a rune-bound L29 spear and nowhere else. ⛔ AND IT CORRECTS MY OWN GAP REPORT: I argued `summon` was REFUSED by this tradition — 'Umbrals don't call' — while Silas had been summoning a shadow duplicate of his own weapon at will for weeks. ⚠️ `shadow` type, PHYSICS family — and it gives the type its SECOND carrier: Erik notes the spear's shadow-harm focus was him TRYING to make shadow a damage type, which is exactly the gap this fills.",
+    "_summonIsTopLevel": "⚠️ I authored the summon block inside  and the closed schema refused it. ⛔ IT IS A TOP-LEVEL FIELD —  and  both author it there. Checked the existing carriers rather than declaring a second home for it, which would have split one field across two shapes."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Cast Twin",
+     "functions": [
+      "summon",
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [],
+     "grants": "⛔ CALL THE SHADOW-TWIN OF A MADE THING YOU ARE HOLDING — a second of it, wieldable, dealing 2d6 SHADOW. ⚠️ It moves as the original moves and weighs nothing at all.",
+     "cannot": "It must be MADE, held, and casting. ⛔ Six rounds, and your attention. ⚠️ It deals shadow, not what the original deals."
+    },
+    {
+     "rank": 2,
+     "name": "Left in Another Hand",
+     "functions": [
+      "summon",
+      "make",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [
+      "duration",
+      "targets"
+     ],
+     "grants": "⛔ THE TWIN HOLDS WITHOUT YOUR ATTENTION, AND YOU MAY PUT IT IN SOMEONE ELSE'S HAND — provided they work shadow. ⚠️ Two umbrals and one good blade is two good blades.",
+     "cannot": "⛔ ONLY A SHADOW-WORKER CAN HOLD IT. Anyone else closes their hand on nothing and feels cold."
+    },
+    {
+     "rank": 3,
+     "name": "Twinned at Distance",
+     "functions": [
+      "summon",
+      "make",
+      "strike"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging",
+     "gainAxes": [
+      "range",
+      "duration"
+     ],
+     "grants": "⛔ TWIN SOMETHING YOU CAN SEE RATHER THAN HOLD — the gate's bar, the blade in his hand, the key on the far side of the table — and it persists until light takes it. ⚠️ Twinning a thing does not move the original, and its owner will notice the shadow standing up.",
+     "cannot": "⛔ STILL MADE, STILL CASTING, STILL SHADOW. ⚠️ And a twin at distance is visible as what it is to anyone who looks at the original and then at you."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29 — AND THE METHOD MATTERS MORE THAN THE CRAFT: 'first LEARN FROM THE RUNIC SPEAR Silas crafted. He has used dark skills for a long time now.' ⚠️ I HAD BEEN AUDITING THE CRAFT LIST AS THOUGH IT WERE THE GAME. The character sheet held capabilities the tradition did not: a shadow-twin summon, a shadow-harm focus, and a paired SHADOW TABLET for messages at distance — none of them crafts. ⛔ PLAY HAD BEEN ANSWERING MY GAP QUESTIONS FOR WEEKS AND I WAS NOT READING IT.",
+   "summon": {
+    "count": 1,
+    "tierGap": [
+     -2,
+     -1,
+     -1
+    ],
+    "contributions": [
+     "MARTIAL"
+    ]
+   }
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

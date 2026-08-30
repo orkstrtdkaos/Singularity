@@ -1605,6 +1605,140 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-29. ⚠️ Fills the melee gap AND the L3 hole. And it closes a loop: the tradition now has `shieldwork` (make a wall), `held_line` (hold one) and `break_the_line` (break one) — the same knowledge in three directions, which is what a warrior culture whose whole society is honed conflict should look like."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "marcher",
+   "nativeOrCombination": "native",
+   "axes": {
+    "violence_peace": -0.5
+   },
+   "id": "dressed_edge",
+   "name": "Dressed Edge",
+   "levelReq": 2,
+   "energyCost": 5,
+   "attribute": "practical",
+   "shape": "setup",
+   "harmRung": "damaging",
+   "challengeTypes": [
+    "FIGHT",
+    "CREATE",
+    "SURVIVE"
+   ],
+   "operativeAxis": [
+    "damage",
+    "damageType",
+    "duration"
+   ],
+   "effectTags": [
+    "coating",
+    "materials",
+    "quartermaster"
+   ],
+   "functions": [
+    "make",
+    "empower",
+    "strike"
+   ],
+   "description": "⛔ A MARCHER CANNOT CHANGE WHAT A BLADE IS. THEY CAN CHANGE WHAT IS ON IT. Pitch and oil for burning, vitriol from a dyer's shop, grave-filth from the ditch behind a field hospital — dress the edge before the fight and it stops being only steel. ⚠️ THIS IS NOT MAGIC AND THE MARCHERS ARE PARTICULAR ABOUT THAT: it is quartermastery, and it is taught beside cooking and boot-repair. ⛔ IT IS ALSO THE ONLY ANSWER THIS TRADITION HAS TO A THING THAT DOES NOT CARE ABOUT STEEL.",
+   "narrationHints": "She spends the evening before with a pot and a rag and does not explain. ⚠️ In the morning the thing that shrugs off spears comes apart where she touches it.",
+   "notFor": "⛔ YOU MUST HAVE THE MATERIAL AND THE TIME — pitch, oil, vitriol, filth: real substances, carried or found, and an evening to prepare. Nothing here is conjured. ⚠️ IT WEARS OFF: a coating lasts a fight, not a campaign, and a blade wiped down or driven through three bodies is bare steel again. ⛔ AND IT DOES NOT STACK — one dressing at a time, and putting acid over pitch gets you a ruined weapon and a lesson.",
+   "plainly": "A fight/create action. ⛔ DRESS A WEAPON SO IT DEALS A CHOSEN TYPE — `heat` (pitch and oil), `corrosive` (vitriol, venom) or `decay` (grave-filth) — IN A MIX WITH ITS OWN `physical`, for +1d6. Rated 5, one weapon, lasts a fight. r2 dresses the whole party's weapons; r3 the coating persists and you may carry prepared materials for all three. ⚠️ Needs real substances and preparation time. It wears off and does not stack.",
+   "intensity": {
+    "conserve": "a thin dressing — it holds for the opening exchanges only",
+    "surge": "⛔ LAY IT ON HEAVY; the weapon is ruined afterwards and you knew that when you did it"
+   },
+   "bounds": [
+    {
+     "text": "⛔ REAL MATERIALS AND REAL TIME. Pitch, oil, vitriol, filth — carried or found, and an evening",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT WEARS OFF. A fight, not a campaign, and a wiped blade is bare steel",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ ONE DRESSING AT A TIME — acid over pitch ruins the weapon",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT IS NOT MAGIC AND CANNOT BE MADE TO BE. There is no dressing for `truth`, `psychic` or `abstraction`",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "duration": 6,
+    "targets": 1,
+    "damageMix": [
+     {
+      "type": "physical",
+      "share": 0.5
+     },
+     {
+      "type": "heat",
+      "share": 0.5
+     }
+    ],
+    "crit": {
+     "success": "The dressing does exactly what you hoped to something that has never been hurt before, and it notices.",
+     "failure": "It takes on your own hands before it takes on anything else."
+    },
+    "note": "setup/empower. ⛔ ERIK 2026-08-29: 'Marchers need some TYPED OPTIONS. COAT WEAPON with fire, acid, poison etc. That's CONCRETE AND EFFECTIVE.' ⚠️ EVERY MARCHER WEAPON IS `physical` AND THAT IS A REAL VULNERABILITY, recorded in the corpus by play: 'a weapon with no kind resolves as PHYSICAL, and SOME THINGS IN THE WORLD ARE IMMUNE TO PHYSICAL — Silas Weir's Memory spear did 0.00 against the unmoored choir for exactly this reason.' ⛔ THIS IS THE SOLDIER'S ANSWER TO THAT: not magic, MATERIALS. ⚠️ `damageMix` is the authored default (physical .5 / heat .5); the chosen type replaces the second half at use. **It opens ELEMENTAL and VITAL to a tradition that had only PHYSICS.**"
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Dressed Edge",
+     "functions": [
+      "make",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [],
+     "grants": "⛔ DRESS ONE WEAPON: `heat`, `corrosive` OR `decay`, mixed half-and-half with its own `physical`, for +1d6. ⚠️ Half the blow now answers to a different ward, which is the entire point.",
+     "cannot": "One weapon, one dressing, one fight. ⛔ You must have the material and the evening."
+    },
+    {
+     "rank": 2,
+     "name": "The Whole Party",
+     "functions": [
+      "make",
+      "empower",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "gainAxes": [
+      "targets",
+      "scope"
+     ],
+     "grants": "⛔ DRESS EVERY WEAPON IN THE COMPANY BEFORE A FIGHT — and they need not all be the same. ⚠️ A Marcher who knows what is coming sends five people in carrying five answers.",
+     "cannot": "⚠️ Material for each. ⛔ And you must know what is coming, or you are guessing five times."
+    },
+    {
+     "rank": 3,
+     "name": "Kept Ready",
+     "functions": [
+      "make",
+      "empower",
+      "strike"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging",
+     "gainAxes": [
+      "duration",
+      "quality"
+     ],
+     "grants": "⛔ THE DRESSING HOLDS FOR DAYS RATHER THAN A FIGHT, and you carry prepared materials for all three — changed in the field, between engagements, without a workshop. ⚠️ This is what a quartermaster is worth, and the Marchers rank it accordingly.",
+     "cannot": "⛔ STILL ONE DRESSING PER WEAPON AT A TIME. ⚠️ And carrying vitriol and grave-filth on your person for days has its own consequences."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29. ⚠️ It answers a vulnerability the corpus had already RECORDED FROM PLAY — the Memory spear doing 0.00 against the unmoored choir — and it answers it in the tradition's own idiom: **a Marcher cannot change what a blade is, so they change what is on it.** ⛔ Deliberately L2, both because it is quartermastery rather than mastery and because moving `drawn_bow` and `whats_at_hand` to L3 left the rung thin."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",

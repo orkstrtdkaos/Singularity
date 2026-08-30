@@ -255,8 +255,10 @@ working papers; **this is the answer.**
 | 08-30 | ⛔ **and the two only work together** | I could not observe CCODE-318 AT ALL until CCODE-319 landed — the pool was out of range, so no ordering could show | both gated in one section | ⚠️ a fix you cannot observe is a fix you cannot claim |
 | 08-30 | ✅ **CCODE-317 — the group model is on the screen** | `groupCapability` computed coverage · depth · sole · cohesion since CCODE-307 and **nothing in the game read it** | `§20` | ✅ the party panel now shows what your line covers and **what only one person holds** — the field `who_falls_first` and `break_the_line` are both waiting on |
 | 08-30 | ⚠️ **`combatWeight` used without importing it** | `node --check` passes on that — a RUN caught it | fixed before commit | ⛔ **the third time this class of bug appeared this week** (`num`, `unreachable`, now this). A parse is not a run |
+| 08-30 | ✅ **CCODE-320 — the braid consolidation gate** | Aevi: *“yes — cheap now, and it makes the consolidation report its own casualties instead of us finding them months later”* | `§21`, and **proven red by re-poling a braid onto neighbours** — it names the braid and the distance | ⚠️ the authored braids **name their own poles** (`crossPoleBraids.abilities[].poles`), so this measures the named pair on the LIVE ring rather than inferring it |
+| 08-30 | ⚠️ **all three braids are exact antipodes TODAY** | each carries prose about *“the two poles fighting”* | distances 12, 12, 12 on a 24-ring | ⛔ **after an absorption they may not be**, and the prose would then describe a joining that is no longer opposed — in a craft nobody re-read |
 
-**Last verified: 2026-08-28 · v1.9.270 · 400 crafts.**
+**Last verified: 2026-08-28 · v1.9.271 · 400 crafts.**
 
 ---
 

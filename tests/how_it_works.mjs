@@ -1150,6 +1150,42 @@ console.log("\n── §20 · the group model is on the screen ──");
   check("§20: …and shows what only ONE person holds", rd("app.js").includes("sb-sole"));
 }
 
+/* ══════════ §21 — A BRAID THAT CLAIMS TENSION MUST STILL BE OPPOSED ══════════ */
+// ⛔ ERIK: "we intend to absorb some into fewer traditions… I expect it to be very impactful."
+// ✅ AEVI: "yes to his braid gate — every authored braid whose prose claims tension must still measure as
+// far or antipodal. Cheap now, and it makes the consolidation report its own casualties instead of us
+// finding them months later."
+//
+// ⚠️ THE AUTHORED BRAIDS NAME THEIR OWN POLES — `crossPoleBraids.abilities[].poles` is two tradition ids,
+// not an inference. ⛔ SO THIS MEASURES THE NAMED PAIR ON THE LIVE RING. Today all three are distance 12,
+// exact antipodes; after an absorption they may not be, and each carries prose about "the two poles
+// fighting" that would then describe a joining no longer opposed.
+console.log("\n── §21 · a braid that claims tension is still opposed ──");
+{
+  const TRb = await import("../engine/traditions.js");
+  const doc = rj("content/packs/core/rules/traditions.json");
+  const idxB = TRb.buildTraditionIndex(doc);
+  const braids = doc.crossPoleBraids?.abilities || [];
+  check("§21: the authored cross-pole braids are declared with their poles (non-vacuity)",
+    braids.length >= 3 && braids.every(b => (b.poles || []).length === 2), `${braids.length} braids`);
+
+  // ⛔ ADJACENT IS NOT OPPOSED. A braid whose prose says the poles fight must measure further than
+  // neighbouring — otherwise the sentence is describing something that stopped being true.
+  const tooClose = [];
+  for (const b of braids) {
+    const d = TRb.ringDistance(b.poles[0], b.poles[1], idxB);
+    if (d == null || d <= 2) tooClose.push(`${b.id}: ${b.poles.join("×")} is ${d} step(s) apart`);
+  }
+  check("§21: every authored braid's poles are still genuinely opposed",
+    tooClose.length === 0, tooClose.join(" · "));
+
+  // ⚠️ THE CANARY. This line moves the day the ring is consolidated, and says by how much.
+  const size = idxB.size || 24, half = Math.floor(size / 2);
+  const dists = braids.map(b => TRb.ringDistance(b.poles[0], b.poles[1], idxB));
+  check("§21: …and all of them are still EXACT antipodes — a consolidation will change this line",
+    dists.every(d => d >= half), `distances ${dists.join(", ")} on a ${size}-ring (antipodal = ${half})`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

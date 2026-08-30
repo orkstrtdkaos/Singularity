@@ -3243,7 +3243,7 @@
    ],
    "tradition": "seraphic",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "lethal",
    "shape": "strike",
    "operativeAxis": [
     "magnitude",
@@ -3252,7 +3252,21 @@
    "mechanic": {
     "magnitude": 8,
     "duration": 1,
-    "scope": 2
+    "scope": 2,
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "damageMix": [
+     {
+      "type": "judgement",
+      "share": 0.7
+     },
+     {
+      "type": "radiance",
+      "share": 0.3
+     }
+    ]
    },
    "intensity": {
     "conserve": "weigh lightly — a warning, a mark",
@@ -3288,7 +3302,8 @@
    "_nameWas": "The Measured Sentence",
    "_idWas": "the_measured_sentence",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260830": "⛔ `shape: strike`, ranks reaching LETHAL, AND NO DICE — 'what is found wanting BURNS, IN PROPORTION TO THE FINDING' and it could not burn anything. ⚠️ `judgement` .7 + `radiance` .3, and the mix IS the craft: the harm is the WEIGHING (INTRINSIC — it needs a self that has done things), delivered as light. ⛔ AND THE PROPORTIONALITY IS THE INTERESTING HALF: r2 'each is measured separately and each takes their own weight — WHICH IS THE ORDERS' ENTIRE POINT.' A guilty man and an innocent one stand in the same light and take different amounts. ✅ ability rung `incapacitating` → `lethal`: r3 is 'those with much to answer for DO NOT SURVIVE being measured'."
   },
   {
    "id": "sheltering_name",
@@ -3722,7 +3737,7 @@
    ],
    "tradition": "seraphic",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "reveal",
    "operativeAxis": [
     "precision",
@@ -3761,7 +3776,8 @@
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads what a person will and will not stand behind\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⚠️ ability rung `incapacitating` → `none` — no rank reaches it. `weighed_word` ASKS A QUESTION UNDER THE LIGHT and everyone sees whether the answer is true; it puts nobody down. ⛔ A GM reading `incapacitating` on the Orders' TESTIMONY craft could have run their courtroom as an assault."
   },
   {
    "id": "shielding_light",
@@ -3838,7 +3854,7 @@
    ],
    "tradition": "seraphic",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "shield",
    "operativeAxis": [
     "scope",
@@ -3881,7 +3897,8 @@
    "_idWas": "the_shielding_light",
    "_wardTypes": "⛔ SNG-512. The Order-bearer interposes. Answers what light answers.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⚠️ ability rung `incapacitating` → `none` — no rank reaches it. `shielding_light` INTERPOSES — 'the Order-bearer IS the shield'. It harms no one at any rank, and r3's 'sieges have broken on one of these' is endurance, not damage."
   },
   {
    "id": "offered_lesser",
@@ -4288,7 +4305,7 @@
   },
   {
    "id": "the_measuring_eye",
-   "name": "The Weighing Look",
+   "name": "Weighing Look",
    "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
@@ -4303,7 +4320,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Weighing Look",
+     "name": "Weighing Look",
      "grants": "See roughly what a person carries — the harm done, the harm borne.",
      "cannot": "It sees weight, not story. A heavy person may be heavy for good reasons.",
      "functions": [
@@ -4313,7 +4330,7 @@
     },
     {
      "rank": 2,
-     "name": "The Clear Ledger",
+     "name": "Clear Ledger",
      "grants": "See the specifics: what was done, to whom, and whether it was ever answered for.",
      "cannot": "Seeing the ledger tempts you to collect on it. That is the Orders' besetting sin.",
      "functions": [
@@ -4322,7 +4339,7 @@
     },
     {
      "rank": 3,
-     "name": "The Unblinking Measure",
+     "name": "Unblinking Measure",
      "grants": "Weigh anyone, at any distance, without their consent or knowledge.",
      "cannot": "Nobody survives being weighed forever. Including you, and the Orders do it to their own.",
      "functions": [
@@ -4382,7 +4399,131 @@
    "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 extends range. Limit: iT Sees Weight, Not Story — a heavy person may be heavy for good reasons.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10, the gate built today."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "axes": {
+    "demonic_angelic": 0.8
+   },
+   "id": "carried_weight",
+   "name": "Carried Weight",
+   "levelReq": 3,
+   "energyCost": 7,
+   "attribute": "social",
+   "shape": "healing",
+   "harmRung": "none",
+   "challengeTypes": [
+    "SOCIAL",
+    "SURVIVE",
+    "DEFEND"
+   ],
+   "operativeAxis": [
+    "quality",
+    "targets",
+    "persistence"
+   ],
+   "effectTags": [
+    "mercy",
+    "absolution",
+    "cost"
+   ],
+   "functions": [
+    "heal",
+    "restore",
+    "soothe"
+   ],
+   "description": "⛔ TAKE A THING OFF SOMEONE AND CARRY IT YOURSELF. Guilt, grief, a debt of conscience, the specific weight of a specific act — lifted, genuinely and permanently. ⚠️ AND IT DOES NOT GO ANYWHERE: A SERAPH WHO GRANTS MERCY CARRIES WHAT THEY LIFTED. ⛔ The Mercy-House is full of people who have taken on other people's worst things and are still standing, which is the Order's whole argument about itself.",
+   "narrationHints": "He stops mid-sentence, and whatever he was about to confess is no longer in him to confess. ⚠️ She does not say anything. ⛔ She looks, for a moment, like a person who has just picked something up.",
+   "notFor": "⛔ IT LIFTS WHAT A PERSON CARRIES, NOT WHAT THEY DID — the act stands, the consequences stand, and anyone owed is still owed. ⚠️ AND IT MUST BE ACCEPTED: mercy taken from someone who did not ask for it is `the sentence` wearing a kinder face, and the Orders know the difference exactly. ⛔ IT CLOSES NO WOUND AND CURES NOTHING — this is weight, not injury.",
+   "plainly": "A social/survive action. ⛔ LIFT A THING SOMEONE IS CARRYING — guilt, grief, a conscience-debt — permanently, and CARRY IT YOURSELF from then on. Rated 5, one person. r2 lifts several or something very old; r3 lifts what a person could not have survived carrying, and the Seraph carries that too. ⚠️ It must be accepted. ⛔ The act stands and the debts stand — only the weight moves.",
+   "intensity": {
+    "conserve": "a corner of it — they are lighter and they still know what they did",
+    "surge": "⛔ TAKE ALL OF IT AT ONCE; you will be carrying it before they have finished thanking you"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT MUST BE ACCEPTED. Mercy imposed is a SENTENCE, and the Orders know the difference",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ THE WEIGHT MOVES; IT DOES NOT VANISH. You carry it, and you keep carrying it",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ THE ACT STANDS. Nothing is undone, nobody is repaid, and the law is unmoved",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT MENDS NO BODY — this is weight, not injury",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 0,
+    "targets": 1,
+    "damageType": "vitality",
+    "crit": {
+     "success": "They are lighter than they have been in years and do not immediately understand why.",
+     "failure": "You take it and they keep it — now there are two people carrying the same thing."
+    },
+    "note": "healing. ⛔ THE TRADITION HAD A BUILDING FOR A CRAFT IT DID NOT HAVE. `the_mercy_house` is authored: 'where the Orders take weight off people — genuinely, permanently, AT REAL COST TO THE ONE WHO LIFTS IT. A SERAPH WHO GRANTS MERCY CARRIES WHAT THEY LIFTED.' ⚠️ AND `heal` AND `soothe` WERE BOTH ABSENT FROM THE ONLY TRADITION WHOSE LOCUS IS MERCY. ✅ `vitality` type — VITAL, the giving direction, the same type `last_gift` and the Rootkin healers carry. ⛔ THE COST IS NOT A PENALTY I INVENTED: it is the authored place's own sentence, and it is a cost that lands on the WIELDER by their own choice, which is the one shape Erik has not ruled against."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Carried Weight",
+     "functions": [
+      "heal",
+      "soothe"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ LIFT ONE THING A PERSON IS CARRYING AND CARRY IT INSTEAD — permanently, for both of you. ⚠️ They are lighter. You are not.",
+     "cannot": "It must be accepted. ⛔ The act stands and the debts stand. ⚠️ And it closes no wound."
+    },
+    {
+     "rank": 2,
+     "name": "Long Weight",
+     "functions": [
+      "heal",
+      "soothe",
+      "restore"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "quality"
+     ],
+     "grants": "⛔ SEVERAL AT ONCE, OR ONE THING SO OLD THEY HAVE STOPPED NOTICING IT — a thirty-year weight lifted in an afternoon. ⚠️ This is what the Mercy-House does on an ordinary day.",
+     "cannot": "⚠️ You carry all of it. ⛔ And several at once is several at once, for the rest of your life."
+    },
+    {
+     "rank": 3,
+     "name": "Not Survivable Alone",
+     "functions": [
+      "heal",
+      "soothe",
+      "restore"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "duration"
+     ],
+     "grants": "⛔ LIFT WHAT A PERSON COULD NOT HAVE SURVIVED CARRYING — the thing that was going to kill them, taken off entirely. ⚠️ AND THE SERAPH CARRIES THAT TOO. The Orders are loved for this rank and it is why their old are the way they are.",
+     "cannot": "⛔ IT STILL MUST BE ACCEPTED, AND SOME REFUSE — a person who believes they should carry it is not wrong, and the Orders do not argue. ⚠️ And nothing about it is undone."
+    }
+   ],
+   "_authored": "⛔ THE PLACE WAS AUTHORED AND THE CRAFT WAS NOT — the same shape as `the_lensward` (blazeborn) and `the slow orchard` (rootkin). ⚠️ THIRD TIME THE GEOGRAPHY HAS HELD A CRAFT THE TRADITION LACKED, which is now a reliable place to look.",
+   "_gainAxesFix_20260830": "⚠️ `persistence` is NOT one of the nine KINDS OF IMPROVEMENT — FOURTH TIME I have made this exact error. ✅ THIS TIME `craft_lint` CHECK 5 CAUGHT IT IMMEDIATELY rather than the doc harness catching it after a ship. ⛔ The nine are range · duration · damage · scope · targets · quality · autonomy · conditions · tempo. `persistence` is ENGINE-FIELD vocabulary and was ruled prose."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

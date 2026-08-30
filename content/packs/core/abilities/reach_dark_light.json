@@ -4068,6 +4068,237 @@
     }
    ],
    "_authored": "⛔ AUTHORED 2026-08-29 from the coverage gap and the canon. ⚠️ MEASURED: 15 umbral crafts, `conceal` on ELEVEN of them — the most concentrated tradition audited — and NOTHING that keeps a person once found. ⛔ AND THE REACH'S OWN CRISIS LINE NAMES THE PEOPLE: 'the Underlight HARBORS WHAT THE LIGHT WOULD DESTROY, including things that should perhaps be destroyed. NEITHER POLE IS INNOCENT.' ⚠️ Harbouring is not hiding. Under rule 8 the absent `ward` and `bind` were gaps until argued, and the argument went the other way: this is the tradition's whole purpose and it had no craft for it."
+  },
+  {
+   "powerSystem": "precursor",
+   "tradition": "umbral",
+   "nativeOrCombination": "native",
+   "axes": {
+    "dark_light": -0.6
+   },
+   "id": "known_in_the_dark",
+   "name": "Known In The Dark",
+   "levelReq": 1,
+   "energyCost": 3,
+   "attribute": "social",
+   "shape": "setup",
+   "harmRung": "none",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE",
+    "STEALTH"
+   ],
+   "operativeAxis": [
+    "quality",
+    "targets"
+   ],
+   "effectTags": [
+    "recognition",
+    "umbral",
+    "intimacy"
+   ],
+   "functions": [
+    "reveal",
+    "track",
+    "empower"
+   ],
+   "description": "⛔ RECOGNISE A PERSON WITH NOTHING TO SEE THEM BY — by step, by breath, by the shape they make in a room. ⚠️ In a city built of dark, being unseen is the default and therefore worthless; WHAT IS INTIMATE IS BEING KNOWN. ⛔ THE UMBRAL ENDEARMENT IS 'I WOULD KNOW YOU IN THE DARK', AND IT IS LITERAL — this is the craft it refers to, and every Umbral child learns it before they learn to hide.",
+   "narrationHints": "She does not turn round. 'You are limping.' ⚠️ He had not spoken, and the corridor is unlit, and he has been limping since the stair two levels up.",
+   "notFor": "⛔ IT IS RECOGNITION, NOT SIGHT — you learn WHO, not what they are carrying, what they look like, or what they are about to do. ⚠️ AND YOU MUST HAVE KNOWN THEM BEFORE: a stranger is a stranger in the dark exactly as in the light. ⛔ A person who deliberately changes their gait, their breathing and their weight can defeat it, and doing all three at once is very hard and very obvious to anyone watching in daylight.",
+   "plainly": "A social/investigate action. Recognise anyone you have met before, in darkness, without seeing them — and know how they are: hurt, frightened, lying still on purpose. r2 recognises a whole group and who is missing from it; r3 knows a person by the shape of their absence. ⛔ Recognition only, and only of people you already know.",
+   "intensity": {
+    "conserve": "one person, and only that it is them",
+    "surge": "read the whole dark at once; ⛔ YOU WILL KNOW EVERY PERSON IN THE DEEP YOU HAVE EVER MET, AND WHERE THEY ARE"
+   },
+   "bounds": [
+    {
+     "text": "⛔ YOU MUST ALREADY KNOW THEM — it recognises, it does not identify",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT NEEDS DARK OR NEAR-DARK. In full light you are using your eyes like anyone else",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ WHO AND HOW, NEVER WHAT — no possessions, no intent, no words",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "targets": 1,
+    "crit": {
+     "success": "You know something about how they are that they have told nobody, and they know you know.",
+     "failure": "You greet the wrong person with a name, warmly, in the dark."
+    },
+    "note": "setup/reveal. ⛔ THE UMBRAL FIRST GIFT THAT WAS MISSING — the tradition had `darksight` (see in the dark) and `felt_room` (know a SPACE) and nothing for knowing a PERSON. ⚠️ Erik 2026-08-29: the traditions were one-dimensional, and a people is defined by how it loves and greets as much as by how it hides."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Known In The Dark",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ KNOW WHO IS THERE, WITHOUT SEEING THEM — and how they are: hurt, tired, frightened, holding still on purpose. ⚠️ Anyone you have met before, at conversational distance.",
+     "cannot": "One person, and you must have met. ⚠️ In light this is just looking at someone."
+    },
+    {
+     "rank": 2,
+     "name": "The Whole Room",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "scope"
+     ],
+     "grants": "⛔ KNOW EVERYONE IN A DARK SPACE AT ONCE — and, more usefully, WHO IS NOT THERE WHO SHOULD BE. ⚠️ An Umbral host counts the room by breathing and knows before anyone else that someone has gone.",
+     "cannot": "⚠️ Still only people you know. ⛔ A stranger among them registers as a stranger and nothing more."
+    },
+    {
+     "rank": 3,
+     "name": "By Their Absence",
+     "functions": [
+      "reveal",
+      "track",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "range"
+     ],
+     "grants": "⛔ KNOW A PERSON BY THE SHAPE OF WHERE THEY ARE NOT — a room they left an hour ago, a route they did not take, a chair nobody is sitting in. ⚠️ AND WHOEVER YOU KNOW THIS WELL IS EASIER TO FIND, HELP AND REACH: acting on that knowledge enters as a named term in your favour.",
+     "cannot": "⛔ IT IS NOT SCRYING and does not cross a region. ⚠️ And it works on the KNOWN — the better you know someone, the further it reaches, which means it is useless for hunting a stranger."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29: 'HOW DO THESE PEOPLE CELEBRATE, HUNT, FUCK, TRAVEL, FIGHT?' ⚠️ THE TRADITION COULD SEE IN THE DARK AND KNOW A ROOM AND HAD NO WAY TO KNOW A PERSON — in a culture where 'everything is felt, not seen', that is the craft everything social runs on. ⛔ AND IT IS AUTHORED FROM THE CULTURE, NOT THE CRISIS: the endearment 'I would know you in the dark' is the tradition's whole intimacy, and it needed a craft under it."
+  },
+  {
+   "powerSystem": "precursor",
+   "tradition": "umbral",
+   "nativeOrCombination": "native",
+   "axes": {
+    "dark_light": -0.6
+   },
+   "id": "the_long_patience",
+   "name": "The Long Patience",
+   "levelReq": 2,
+   "energyCost": 5,
+   "attribute": "practical",
+   "shape": "setup",
+   "harmRung": "none",
+   "challengeTypes": [
+    "STEALTH",
+    "FIGHT",
+    "SURVIVE"
+   ],
+   "operativeAxis": [
+    "duration",
+    "quality"
+   ],
+   "effectTags": [
+    "ambush",
+    "attrition",
+    "waiting"
+   ],
+   "functions": [
+    "foresee",
+    "empower",
+    "conceal"
+   ],
+   "description": "⛔ WAIT WHERE A THING MUST PASS, FOR AS LONG AS IT TAKES. The Umbral hunt is not a chase — it is knowing the space, choosing the place, and SITTING. ⚠️ THE KILL IS UNREMARKABLE; THE SITTING IS THE CRAFT. ⛔ And it is how an Umbral war is fought: the same six people at the fourth watch for nine nights, until a supply line stops being a supply line.",
+   "narrationHints": "They have been there since before the guard changed, and the guard has changed twice. ⚠️ Nothing about them is hidden by a working — they simply have not moved, and people do not look at what has not moved.",
+   "notFor": "⛔ IT IS NOT CONCEALMENT AND DOES NOT STACK AS ONE — a searcher who looks directly at you sees you. What the craft does is make you EASY NOT TO NOTICE and let you hold the position past what a body should. ⚠️ AND IT ENDS THE MOMENT YOU ACT: one strike, one grab, one word, and you are a person crouching in a doorway. ⛔ Nor does it help you find the place — knowing where to wait is `felt_room` and your own judgement.",
+   "plainly": "A stealth/fight action. Hold a waiting position for hours without fatigue, hunger or stiffness, and be very hard to notice while you do — then act from it with a named advantage on the first exchange. r2 waits a whole night and brings companions into the wait; r3 holds for days and the advantage carries to everyone waiting with you. ⛔ It ends when you move.",
+   "intensity": {
+    "conserve": "an hour, alone",
+    "surge": "wait as long as it takes; ⛔ YOU WILL STILL BE THERE WHEN THEY HAVE STOPPED EXPECTING ANYONE"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT ENDS WHEN YOU ACT — the whole craft is the not-acting",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT IS NOT CONCEALMENT. Someone who looks straight at you sees a person who has not moved",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ YOU MUST CHOOSE THE PLACE YOURSELF — it does not tell you where the thing will pass",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 8,
+    "targets": 1,
+    "crit": {
+     "success": "They pass close enough to touch and you let them, because the second one is the one that matters.",
+     "failure": "You hold it perfectly and nothing comes, all night, and the thing you were waiting for went another way."
+    },
+    "note": "setup. ⛔ THE HUNT AND THE WAR IN ONE CRAFT. The tradition had `conceal` eleven times and NOTHING FOR WAITING — and the culture is explicit that the sitting is the skill and that an Umbral war is attrition from the dark rather than a held line. ⚠️ `setup: 3` — it buys the first exchange, which is what an ambush IS.",
+    "_setupIsMagnitude": "⚠️ I authored `setup: 3` and REMOVED IT rather than declaring it. ⛔ `familyDefaults.setup` is `{magnitude: 3, duration: 1}` — 'the setup bonus a read buys for the next exchange' — SO THE BONUS *IS* THE MAGNITUDE, and a separate `setup` field would have been a duplicate of `magnitude: 4`. ⚠️ `setup` appears in the ENGINE FIELDS list as a scalable DIMENSION NAME, which is not the same as being a field on the mechanic block. **Checked before declaring, having invented `soakBonus` earlier today.**"
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Sit Still",
+     "functions": [
+      "conceal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ HOLD A POSITION FOR HOURS WITHOUT STIFFNESS, HUNGER OR THE NEED TO SHIFT — and be genuinely hard to notice, because nothing about you is moving. ⚠️ When you finally act, the first exchange is yours.",
+     "cannot": "⛔ It ends when you move. ⚠️ And someone looking directly at you sees you."
+    },
+    {
+     "rank": 2,
+     "name": "The Fourth Watch",
+     "functions": [
+      "conceal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "targets"
+     ],
+     "grants": "⛔ A WHOLE NIGHT, AND YOU CAN BRING PEOPLE INTO THE WAIT — a handful of Umbrals in a corridor, all of them still, none of them tired. ⚠️ This is the shape of an Umbral raid and of an Umbral siege.",
+     "cannot": "⚠️ Everyone in the wait shares the ending: when one acts, the waiting is over for all of them."
+    },
+    {
+     "rank": 3,
+     "name": "Nine Nights",
+     "functions": [
+      "conceal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "quality"
+     ],
+     "grants": "⛔ DAYS RATHER THAN HOURS, and the advantage of the opening carries to everyone who waited. ⚠️ A road watched this way stops being a road: the fourth night nothing happens, the ninth night the supply column simply does not arrive anywhere, and nobody can say where it stopped.",
+     "cannot": "⛔ YOU STILL HAVE TO EAT EVENTUALLY and the craft only spares you the discomfort, not the need. ⚠️ And a wait this long is a commitment: whatever else was happening, happened without you."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29: 'how do these people HUNT… FIGHT?' ⚠️ MEASURED: 15 crafts, `conceal` on eleven, and NOTHING FOR WAITING — while the culture says the kill is unremarkable and the sitting is the craft, and that an Umbral war is attrition rather than a line. ⛔ IT IS DELIBERATELY NOT A CONCEALMENT CRAFT: the tradition has six of those. This is ENDURANCE AND POSITION, which is what an ambush actually costs."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

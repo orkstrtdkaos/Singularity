@@ -1,1311 +1,1324 @@
 {
-  "schemaVersion": 1,
-  "id": "tradition_profiles",
-  "kind": "tradition_guide",
-  "note": "Player-facing profile for every tradition: what the craft IS, what it can do at first rank, what mastery looks like, and what it costs. Written for two surfaces — the character-creation guide (pick a tradition knowing what you are choosing) and the Library. Function coverage is derived from the shipped ability content, not authored separately, so it cannot drift. Authored by Aevi (PO) during the SNG-147c per-rank pass, 2026-07-18.",
-  "traditions": [
-    {
-      "name": "The Harmonic",
-      "axis": "civilization craft",
-      "pole": "—",
-      "home": "Choirheight and the resonant halls",
-      "oneLine": "Sound as structure. You hear what a thing is made of, and you can sing it steadier, quieter, or apart.",
-      "theCraft": "Harmonics treat vibration as the honest layer of the world. Everything has a note — a wall, a crowd, a wound, a lie — and a practitioner who finds it can reinforce it, mask it, or break it at the point where it was always going to fail.",
-      "atCreation": "You perceive through sound where others need light: bodies through a wall, a digger at work below, the gait of someone you know. You can push objects at a distance, blanket a corner in quiet, or run on a rhythm that carries you further than your legs should.",
-      "withMastery": "A chord set once and left ringing that holds a company through a night's march. A room brought to genuine willingness by a voice. A shatterpoint called on a Radiant lattice, a fortress wall, or a body — and struck where it was already going to fail.",
-      "theTrade": "Nothing a Harmonic does is quiet. The craft is audible by definition; there is no stealth in it. It works on structure, so it is superb against the made and the massed and awkward against the singular and the strange.",
-      "whoPractices": "Choir-trained, mostly. Harmonic and Radiant are closed to each other — a life spent learning to hear is not a life spent learning to see.",
-      "acrossTheAxis": "Radiant reveals by exposure; Harmonic reveals by resonance. The Radiant makes a thing visible. The Harmonic makes it audible, and then makes it fall.",
-      "id": "harmonic",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "conceal",
-        "empower",
-        "foresee",
-        "heal",
-        "mend",
-        "move",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "track",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE CHOIR — resonance as craft: steady a company, quiet a room, find the note a wall was always going to fail at.",
-          "THE TUNERS — instrument-makers and menders; the trade half, and most of the people."
-        ],
-        "tail": {
-          "name": "THE SILENCERS",
-          "what": "They find the note of a heart and hold it until it stops. Sonic resonance does not care whether the structure is stone or a chest, and a Silencer has never pretended otherwise."
-        }
-      }
-    },
-    {
-      "name": "The Radiant",
-      "axis": "civilization craft",
-      "pole": "—",
-      "home": "Glasshome and the lit terraces",
-      "oneLine": "Light as tool, weapon, and witness. Nothing you shine on gets to stay hidden, and at full focus the beam does more than show.",
-      "theCraft": "Radiants work light the way a smith works metal: stored, shaped, thrown, and sharpened. The tradition's premise is that exposure is a good in itself — that what survives being seen clearly is what deserved to.",
-      "atCreation": "You read the hidden spectra — heat on a handle, tampering under paint, the flush of a lie in good light. You bend light to hide in, bank daylight in a jar against the night, and coax a season's warmth into a struggling seedbed.",
-      "withMastery": "A lattice fence warding a compound for a season. Surgery done by your own operating glow, deep enough to rebuild a crushed hand. And the Sunlance — a single coherent strike through a stone wall, an engine block, or a person.",
-      "theTrade": "You glow. There is no Radiant stealth, no Radiant ambush, no Radiant anonymity — the craft announces its user in the act of using it. It fails on mirror-finish, on running water, and in true dark where there is nothing to work with.",
-      "whoPractices": "Glasshome-trained, and the blaze-adjacent settlements. Closed to Harmonic, and the two traditions have opinions about each other.",
-      "acrossTheAxis": "Where the Harmonic finds a thing's note, the Radiant simply shows it. Both end arguments; only one of them does it politely.",
-      "id": "radiant",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "conceal",
-        "deceive",
-        "empower",
-        "heal",
-        "hinder",
-        "make",
-        "mend",
-        "move",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "track",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE LANTERN-KEEPERS — worked light, warmth, the folk half; most radiants never do anything else.",
-          "THE LANCE — light as a cutting instrument, taught openly and used in war."
-        ],
-        "tail": {
-          "name": "THE SCOURERS",
-          "what": "Light burned into an eye until nothing behind it works. The Scourers hold that a thing which cannot bear looking at should be unmade by looking at it, and they do it slowly."
-        }
-      }
-    },
-    {
-      "name": "Precursor Work",
-      "axis": "deep-power family (gated)",
-      "pole": "fabricated substrate",
-      "home": "the Old Roads and the lattice under everything",
-      "oneLine": "The machinery the world was built on still answers, if you learn its grammar. Never offered at creation — earned in fiction.",
-      "theCraft": "Precursor work is not a tradition so much as a conversation with what the builders left running. It is queried, not commanded; it answers on its own terms; and every exchange pulls the practitioner's own coordinate further toward the pole they are drawing from.",
-      "atCreation": "Not available. Access opens per-ability through play — a remnant found, a road mastered, a teacher who owes you. Substrate-born origins are seeded a single innate base and grow it like any skill.",
-      "withMastery": "Reading a thing's unrepeatable cosmic address and navigating to it across any distance. Foreclosing a possibility outright — and Hold the Aperture, the standing refusal that keeps open what the lattice is closing.",
-      "theTrade": "Drift. Every use moves your vector, and Foreclose moves it toward the contraction the framework names as the enemy. The engine tracks it. The GM will eventually name where it has taken you.",
-      "whoPractices": "Nobody by right except the substrate-born, and even they only hold the doorway. Everyone else earns each ability separately.",
-      "acrossTheAxis": "Its living counterpart is the green current; its tangled counterpart is the wild. Same depth, different substrate, and they do not mix.",
-      "id": "precursor",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "open",
-        "reveal",
-        "summon",
-        "track",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE READERS — address-sense, latticespeak, the old roads walked carefully.",
-          "THE WAKERS — rousing what sleeps, opening what was sealed."
-        ],
-        "tail": {
-          "name": "THE SHUTTERS",
-          "what": "Foreclosure as governance. The Shutters close possibilities off people — a future denied, a way barred, a thing that can no longer happen to anyone. It is the framework's own definition of evil, practised deliberately."
-        }
-      }
-    },
-    {
-      "name": "The Green Current",
-      "axis": "deep-power family (gated)",
-      "pole": "living substrate",
-      "home": "the Quickwood and every rooted place",
-      "oneLine": "The life-layer the Rootkin never surrendered. The ground is awake, and it will answer a true touch.",
-      "theCraft": "Where the Precursors built a substrate, the Rootkin kept the one that grew. The green current runs through everything living and connects every rooted place to every other. It answers sincerity and refuses force.",
-      "atCreation": "Not available. Innate to rootkin origins, seeded per-ability; earned by everyone else through the Reach.",
-      "withMastery": "Waking a whole district's current so that ground you have quickened carries a party rested. Travelling the green road between rooted places, carrying others, toward places you have never walked because something living there knows your touch.",
-      "theTrade": "It reaches only where life runs unbroken. A dead zone, a machine-city, a burned waste has no green road through it and no current to wake. And what you wake, you tend.",
-      "whoPractices": "Rootkin by birth; Ashwardens and travellers of the Reach by long apprenticeship.",
-      "acrossTheAxis": "The precursor lattice is fabricated and obeys grammar. The green current is grown and obeys relationship. Neither can do the other's work.",
-      "id": "living_current",
-      "functionCoverage": [
-        "open",
-        "reveal",
-        "sustain",
-        "travel"
-      ],
-      "distribution": {
-        "modes": [
-          "THE GREEN-TOUCHED — the living current as inheritance, used gently.",
-          "THE DEEP-ROOTED — Heartroot work; the current at depth."
-        ],
-        "tail": {
-          "name": "THE FLOODBEARERS",
-          "what": "The current forced through a body that cannot hold it. The Floodbearers use a person as a conduit and do not always get them back."
-        }
-      }
-    },
-    {
-      "name": "The Churn",
-      "axis": "deep-power family (gated)",
-      "pole": "tangled substrate",
-      "home": "the Wild Half",
-      "oneLine": "Both substrates at once, tangled and generous and never twice the same. It gives — just never exactly what you asked for.",
-      "theCraft": "The fae art of productive disorder at the substrate layer. The Churn accretes and improvises. Its gifts are real, potent, and shaped by the current rather than the asker.",
-      "atCreation": "Not available. Innate to churnfolk and abyssal origins; opened per-ability.",
-      "withMastery": "Naming the shape of what you want and letting the Churn invent every detail. A district-wide flowering of growth-and-ruin that lasts days before the tangle takes it back. Bargains struck with places rather than persons, set to outlive both parties.",
-      "theTrade": "No precision, ever, at any rank. You cannot aim it at pure growth or pure ruin. And the Honest Bargain is scrupulously fair, which is the horror rather than the safety.",
-      "whoPractices": "The Wild Half — churnfolk, fae, and the Abyssals who kept their hollow.",
-      "acrossTheAxis": "It is the third substrate. Precursor work is grammar and green current is relationship; the Churn is neither, and both.",
-      "id": "wild_current",
-      "functionCoverage": [
-        "bind",
-        "command",
-        "make",
-        "open",
-        "summon",
-        "transform"
-      ],
-      "distribution": {
-        "modes": [
-          "THE FAE-TOUCHED — bargains with the wild half; gifts that arrive sideways.",
-          "THE CURRENT-RIDERS — the tangled substrate, ridden rather than steered."
-        ],
-        "tail": {
-          "name": "THE HOLLOW BARGAINERS",
-          "what": "Bargains made with things that are not people, on behalf of people who did not agree. The Hollow Bargainers trade someone else's future for their own present."
-        }
-      }
-    },
-    {
-      "name": "The Somatic",
-      "axis": "body ↔ mind",
-      "pole": "body",
-      "home": "the Flesh-Temples and the Somatic Reaches",
-      "oneLine": "The body as a mastered instrument. Not strength — control, past where control should end.",
-      "theCraft": "Somatics train the physical self until it answers the will completely: breath, heartbeat, pain, fear, and the precise economy of motion.",
-      "atCreation": "Endurance and poise past the ordinary. Control of breath and heartbeat to steady fear, pain, or cold. Motion precise enough to read as grace.",
-      "withMastery": "Surviving what kills others. Crossing terrain that stops everyone else. And the whole mastered frame behind a single strike — stance, breath, and timing arriving together.",
-      "theTrade": "It is control, not raw force, and it is not thought-work. A Somatic who leans on Second Wind too long is borrowing at a rate the Flesh-Temples consider usurious.",
-      "whoPractices": "Flesh-Temple trained. The Middle Way braids it with Noesis; the pure poles cannot.",
-      "acrossTheAxis": "Noesis is the same discipline pointed at the mind. The Whole Act is what happens when someone refuses to choose.",
-      "id": "somatic",
-      "functionCoverage": [
-        "bind",
-        "command",
-        "empower",
-        "foresee",
-        "heal",
-        "make",
-        "mend",
-        "move",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "transform",
-        "travel"
-      ],
-      "distribution": {
-        "modes": [
-          "THE TEMPLE — the body mastered; forms, breath, endurance.",
-          "THE FRAME — the gathered strike; mastery as force."
-        ],
-        "tail": {
-          "name": "THE BREAKERS",
-          "what": "The body as an instrument on OTHERS. The Breakers read a body well enough to take it apart precisely — a joint, a rhythm, a nerve — and they do it slowly because they can."
-        }
-      }
-    },
-    {
-      "name": "The Cogitant",
-      "axis": "body ↔ mind",
-      "pole": "mind",
-      "home": "the Cogitarium",
-      "oneLine": "Thought sharpened until it acts on the world. Sharp, not wise — the Cogitarium is clear about the difference.",
-      "theCraft": "Memory, focus, and reason trained to instrument-grade. A Cogitant models systems and people completely enough to predict them, and holds structure under conditions that break other minds.",
-      "atCreation": "Perfect recall of what you attend to. Focus that ignores pain and distraction. Reasoning faster and further than the unpracticed.",
-      "withMastery": "A life you can walk back through. Function under cold, injury, grief, and weeks of pressure until the work is done. And thought turned on a person: a conclusion delivered exactly where their reasoning rests, which staggers a mind the way a blow staggers a body.",
-      "theTrade": "Sharpness is not wisdom, and this craft least of all. It needs a mind that reasons — the disciplined, the genuinely mad, and the simply uninterested all shrug it off. What you take apart in someone this way, you are responsible for putting back.",
-      "whoPractices": "Cogitarium-trained, and the self-taught who found the discipline alone and usually paid more for it.",
-      "acrossTheAxis": "Soma answers the will through the body; Noesis through the mind. Both are the same refusal to accept an ordinary ceiling.",
-      "id": "cogitant",
-      "functionCoverage": [
-        "bind",
-        "command",
-        "empower",
-        "foresee",
-        "heal",
-        "make",
-        "mend",
-        "move",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "transform",
-        "travel"
-      ],
-      "distribution": {
-        "modes": [
-          "THE UNAIDED — mind alone, joined to nothing.",
-          "THE INSTRUMENTED — thought extended through mechanism and model."
-        ],
-        "tail": {
-          "name": "THE OPENERS",
-          "what": "Reading a mind that did not open. The Openers take what they want from a head and leave the person confused about why they are tired. The tradition calls unbidden reading a violence; the Openers agree and do it anyway."
-        }
-      }
-    },
-    {
-      "name": "Wildcraft",
-      "axis": "chaos ↔ order",
-      "pole": "chaos",
-      "home": "the Churn and the unspooling places",
-      "oneLine": "Improvisation as power. You are best exactly where the plan has stopped working.",
-      "theCraft": "The Churnfolk discipline of productive disorder — riding luck, reading the grain of a collapsing situation, and denying an opponent the predictability they were counting on.",
-      "atCreation": "Turn a chaotic moment to advantage. Improvise a working solution from whatever is to hand. Make one plan — yours or theirs — come apart usefully.",
-      "withMastery": "Unmaking order at scale: a fortress's discipline, a system's certainty, a plan a season in the making, all coming apart at once — and out of the loosed chaos, the one opening that could not otherwise have existed.",
-      "theTrade": "Nothing repeatable. It will not work the same way twice, it offers no fine control, and it cannot give you a result you specified in advance.",
-      "whoPractices": "Churnfolk, and anyone whose life has taught them that plans are a kind of superstition.",
-      "acrossTheAxis": "Latticework is its exact opposite and its best opponent. Each is strongest where the other is blind.",
-      "id": "wildcraft",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "deceive",
-        "empower",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "mend",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "sustain",
-        "transform",
-        "travel"
-      ],
-      "distribution": {
-        "modes": [
-          "THE IMPROVISERS — thriving where others founder.",
-          "THE RIDERS — surfing collapse, making use of what breaks."
-        ],
-        "tail": {
-          "name": "THE UNSPOOLERS",
-          "what": "Unmaking for its own sake. The Unspoolers break structures they have no plan for, because a thing that cannot adapt deserves to come apart, and they enjoy it."
-        }
-      }
-    },
-    {
-      "name": "Latticework",
-      "axis": "chaos ↔ order",
-      "pole": "order",
-      "home": "the Lattice-Cities",
-      "oneLine": "Structure as power. What you bind stays bound; what you predict, you have already half-defeated.",
-      "theCraft": "Order-craft: plans that hold under pressure, systems read to their load-bearing point, possibilities bound down until they are reliably true.",
-      "atCreation": "Build a plan that holds. Predict a system's next move. Impose enough order on a mess to act cleanly inside it.",
-      "withMastery": "Structure imposed at scale — a lawless place made orderly, a chaotic force predicted and countered, a possibility foreclosed by sheer structure.",
-      "theTrade": "It cannot improvise and it cannot handle the genuinely novel. Anything that must breathe or grow resists it, and Wildcraft is built specifically to make it brittle.",
-      "whoPractices": "The Lattice-Cities, their courts, and their engineers.",
-      "acrossTheAxis": "Wildcraft rides collapse; Latticework prevents it. Riding Order is the braid — unmake a structure and re-bind the falling pieces in the same motion.",
-      "id": "latticework",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "deceive",
-        "empower",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "mend",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "sustain",
-        "transform",
-        "travel"
-      ],
-      "distribution": {
-        "modes": [
-          "THE ORDERERS — plans, structures, things set to rights.",
-          "THE REGISTRARS — ledgers, charters, the recorded claim."
-        ],
-        "tail": {
-          "name": "THE FIXERS",
-          "what": "Order imposed on people. The Fixers bind a person's possibilities down until only the approved ones remain — a life made reliable, from outside, without asking."
-        }
-      }
-    },
-    {
-      "name": "The Mason",
-      "axis": "concrete ↔ abstract",
-      "pole": "concrete",
-      "home": "the Given Land",
-      "oneLine": "The real is what you can touch, weigh, and set. Everything else is a claim awaiting proof.",
-      "theCraft": "Thingcraft: material read by hand, structures set so they stay, and a flat refusal to grant abstraction any purchase on the real.",
-      "atCreation": "Know a thing's true weight, material, soundness, and worth by touch — no lie of appearance survives your hand. Find the gap that is in every wall.",
-      "withMastery": "The keystone blow, and where there is no keystone, one manufactured. Whole structures unmade back to raw material. And in your presence, illusion and symbol-working simply fail: the thing is what it is.",
-      "theTrade": "The Masons' great blindness is that some things genuinely are not reducible to a touchable fact. The tradition is not good at admitting this.",
-      "whoPractices": "The Given Land's builders, and skeptics everywhere.",
-      "acrossTheAxis": "Formcraft holds that matter is the coarse residue of pattern. The Mason's Denial defeats it outright, which is exactly why Figurists find Masons so tiresome.",
-      "id": "mason",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "deceive",
-        "foresee",
-        "heal",
-        "make",
-        "mend",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "summon",
-        "sustain",
-        "track",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE BUILDERS — stone, structure, the sound repair.",
-          "THE PLAIN-SPEAKERS — reduction of the abstract to what can be touched."
-        ],
-        "tail": {
-          "name": "THE LEVELLERS",
-          "what": "Reduction as cruelty. The Levellers take a person's meaning apart to its physical basis in front of them — a faith, a grief, a vow — and leave them standing in a world where nothing means anything."
-        }
-      }
-    },
-    {
-      "name": "The Figurist",
-      "axis": "concrete ↔ abstract",
-      "pole": "abstract",
-      "home": "the Pattern Reach",
-      "oneLine": "Pattern is the finer layer of the real. Draw the figure truly and the world briefly consents to match it.",
-      "theCraft": "Formcraft: seeing what a thing is an instance OF, then making symbols that act — marks that do in the world what they mean.",
-      "atCreation": "See the pattern behind the fact. Read a set of particulars and name the form they instance.",
-      "withMastery": "A standing figure that holds a room to its pattern as long as the mark is undefaced. A figure sent walking with an errand and enough form to run it. And the true name — a handle on a thing's very being, which is also a handle it has on you.",
-      "theTrade": "It needs the touchable to be secondary, so a Mason present ruins everything. A false or sloppy figure binds nothing and warns the thing you tried.",
-      "whoPractices": "{{region:the_pattern_reach}}, the Lattice courts, and the Cathedral's more dangerous scholars.",
-      "acrossTheAxis": "Mason and Figurist are the same argument conducted for centuries. Neither has won and both are correct.",
-      "id": "figurist",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "deceive",
-        "foresee",
-        "heal",
-        "make",
-        "mend",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "summon",
-        "sustain",
-        "track",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE PATTERN-READERS — form seen, named, restored.",
-          "THE MARK-MAKERS — figures that act; wards and bindings drawn."
-        ],
-        "tail": {
-          "name": "THE SHAPERS",
-          "what": "Binding a person to a figure. The Shapers set a form onto someone and hold them to it — a role they cannot step out of, drawn on a wall somewhere they will never find."
-        }
-      }
-    },
-    {
-      "name": "Umbracraft",
-      "axis": "dark ↔ light",
-      "pole": "dark",
-      "home": "the Umbral Depths",
-      "oneLine": "Sight without light, and sanctuary for what the light would destroy. Not evil — hidden, which is a different thing.",
-      "theCraft": "The dark-pole mastery: concealment past a knowing searcher, true sight in lightlessness, shadow worked as a material, and the harboring of what should not be exposed.",
-      "atCreation": "See clearly where there is nothing to see by. Wrap yourself and a small space in concealment. Put out a lamp at distance.",
-      "withMastery": "Shadow commanded at scale — a caravan, a rite, a rebellion hidden. Sanctuary the Blaze cannot breach. And the shadow road: league upon league between distant darks, arriving where no light has been.",
-      "theTrade": "Unshadow undoes it, and a Blazeborn at full radiance undoes it everywhere at once. The craft protects and hides; it does not win a direct exchange with someone who can simply make the room bright.",
-      "whoPractices": "The Umbral Depths, the sheltered, and everyone who has needed to not be found.",
-      "acrossTheAxis": "The umbral and the blazeborn are exact mirrors — each has an ability that makes their extreme into food, a healing that works only in their medium, and a road that runs on their element. They are the same person raised in opposite places.",
-      "id": "umbral",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "conceal",
-        "deceive",
-        "heal",
-        "hinder",
-        "make",
-        "mend",
-        "move",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "track",
-        "transform",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE HARBOR — concealment as shelter; hiding people who need hiding.",
-          "THE QUIET HANDS — smuggling, movement, the unseen trade."
-        ],
-        "tail": {
-          "name": "THE SMOTHERERS",
-          "what": "Shadow poured into a mouth. The Smotherers use concealment ON a person rather than around them — hide their breath, their sight, their name — and what is left is a body nobody can find, walking."
-        }
-      }
-    },
-    {
-      "name": "Radiance",
-      "axis": "dark ↔ light",
-      "pole": "light",
-      "home": "the Radiant Wastes",
-      "oneLine": "Revelation as a moral position, and a beam that ends what should not continue.",
-      "theCraft": "The light-pole mastery: exposure that strips every concealment at once, light worked as material, and the full blaze — which is where the tradition stops being about seeing.",
-      "atCreation": "Throw light that shows things as they are — no illusion, no disguise, no shadow holds. A focused beam that can burn or blind.",
-      "withMastery": "A whole deception undone at once, a hidden thing dragged into the light before a people, and a beam that ends the unendurable. Declarations made in full blaze that those who witnessed cannot pretend they did not see.",
-      "theTrade": "You are always visible, and revelation does not discriminate — it exposes allies, and it exposes you. A truth burned free cannot be put back.",
-      "whoPractices": "The Radiant Wastes, where intense light is home rather than hazard.",
-      "acrossTheAxis": "Umbracraft harbors; Radiance exposes. The Blazeborn believe what survives being seen is what deserved to. The Umbral know exactly who that argument has historically been used against.",
-      "id": "blazeborn",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "conceal",
-        "deceive",
-        "heal",
-        "hinder",
-        "make",
-        "mend",
-        "move",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "track",
-        "transform",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE KINDLERS — fire tended, carried, given. Hearth and forge and signal.",
-          "THE BURNING — revelation by flame: what is false in a thing burns off first."
-        ],
-        "tail": {
-          "name": "THE ASSAYERS",
-          "what": "They burn people to find out what they are. It works. The Assayers argue that anyone with nothing false in them survives it, and they are not entirely wrong, which is the horror."
-        }
-      }
-    },
-    {
-      "id": "descent",
-      "name": "The Descent",
-      "axis": "demonic ↔ angelic",
-      "pole": "demonic",
-      "home": "The Descent, and the Abyssal Choir",
-      "oneLine": "Appetite named out loud. The Abyssals bargain fairly — that is the horror, not the safety.",
-      "theCraft": "The demonic-pole mastery refuses to pretend that want is not the engine. A practitioner of the Descent names what a person actually wants, states the true price of it, and strikes bargains where both sides get what they wanted and both sides pay what it cost.",
-      "atCreation": "Feel what someone actually wants beneath what they are asking for. Name a thing's true cost to the person who wants it — they may still take it.",
-      "withMastery": "Descending into a person, a place, or an institution and surfacing with its true engine, however it dresses. A price that BINDS once named and accepted. And calling a form up from the deep that holds, acts, and is yours to direct — not docile, but yours.",
-      "theTrade": "It catches only what already wanted the bargain; a body with nothing owed offers nothing to hook. Every covenant runs both directions. And The Consumed Wound does not heal — the abyss eats what you give it, and what it ate does not come back either.",
-      "whoPractices": "The Abyssal Choir, and everyone who has decided that honesty about hunger beats piety about it.",
-      "acrossTheAxis": "The Ascent weighs what a person has done; the Descent names what they want. Both see through you completely. Only one of them offers you a deal.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "empower",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "summon",
-        "sustain",
-        "transform",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE MARKET — bargains struck honestly, priced exactly, collected without exception.",
-          "THE HOLLOW — appetite-work as diagnosis: name what a person actually wants."
-        ],
-        "tail": {
-          "name": "THE MAW",
-          "what": "⚠️ COMPULSION. A bargain a person did not agree to, priced against something they cannot refuse — a child, a name, a breath. The Maw does not need consent; it needs LEVERAGE, and it is very good at finding some. Anyone who says the abyss cannot compel has met only its traders."
-        },
-        "note": "ERIK'S EXAMPLE. The polite abyssal is real and common — most are traders. But a demonic tradition that CANNOT compel is a contradiction a player would rightly reject."
-      }
-    },
-    {
-      "id": "ascent",
-      "name": "The Ascent",
-      "axis": "demonic ↔ angelic",
-      "pole": "angelic",
-      "home": "The Ascent, and the Seraphic Orders",
-      "oneLine": "Mercy and judgment from the same mouth. The Orders are loved and feared for exactly the same reason.",
-      "theCraft": "The angelic-pole mastery sees moral weight directly — what a person has done, what it cost others, what they are still carrying — and can either lift it or pronounce on it. Both are real. Neither is gentle.",
-      "atCreation": "See roughly what someone carries: the harm done, the harm borne. Ward one person from one harm with a spoken certainty.",
-      "withMastery": "A genuine absolution — a weight lifted, and they feel it leave. A judgment that binds because everyone present knows it is true. And a ward that keeps standing after you have gone.",
-      "theTrade": "Weighing anyone at any distance without their knowledge is a power the Orders have never satisfactorily justified. Judgment that binds cannot be taken back, and absolution given wrongly is still given.",
-      "whoPractices": "The Seraphic Orders, continuous with the pre-Transition world in a way almost nothing else is.",
-      "acrossTheAxis": "The Descent's Appetite Strike hits what a person has been protecting by not naming it. The Ascent's Measuring Eye simply reads what they did. Neither pole allows anyone to remain unexamined.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "empower",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "summon",
-        "sustain",
-        "transform",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE ORDERS — adjudication, charter, standing. The visible face and the bulk of them.",
-          "THE VESSEL-KEEPERS — continuity work; the long-lived, and how they stay that way."
-        ],
-        "tail": {
-          "name": "THE SENTENCE",
-          "what": "Judgement pronounced on someone who did not consent to be weighed, binding regardless of truth. The Sentence does not care to be right — ascent's own bound says the judgment binds anyway, and they treat that as a feature."
-        }
-      }
-    },
-    {
-      "id": "unmaker",
-      "name": "Ruinwork",
-      "axis": "destruction ↔ creation",
-      "pole": "destruction",
-      "home": "The Unmade",
-      "oneLine": "Ending things well is a craft. Not violence — demolition, with an ethic.",
-      "theCraft": "The Unmakers hold that things end whether or not anyone is skilled about it, and that the skill matters. Ruinwork finds where a thing WANTS to break, takes it apart exactly there, and leaves what comes after unpoisoned by how it went.",
-      "atCreation": "See where a structure, plan, or relationship is under stress and where it will give. Find the one piece whose failure brings the rest down.",
-      "withMastery": "Ending a building, an institution, a life's work, or a war so that what it was is honored. Unmaking a thing meant to be permanent. And returning something complex to the state before it became that specific thing, so the way is clear.",
-      "theTrade": "It cannot touch the living or the truly singular, and it does not un-break. Some things were sealed for reasons you learn only after. And un-done is still gone — cleanness is not the same as no loss.",
-      "whoPractices": "The Unmade, and every demolitionist, liquidator, and person who has had to end something properly.",
-      "acrossTheAxis": "The Wright raises; the Unmaker ends. They are the same eye for structure pointed opposite ways, and each is the other's best consultant.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "empower",
-        "foresee",
-        "hinder",
-        "make",
-        "mend",
-        "open",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "transform",
-        "travel"
-      ],
-      "distribution": {
-        "modes": [
-          "THE ENDERS-WELL — clean endings, honoured; ruin that respects what it ruins.",
-          "THE CLEARERS — removal work, demolition, rot halted."
-        ],
-        "tail": {
-          "name": "THE LAST ONES",
-          "what": "Ending as appetite. The Last Ones no longer require that a thing SHOULD end — the fault is enough, and everything has a fault."
-        }
-      }
-    },
-    {
-      "id": "wright",
-      "name": "Makecraft",
-      "axis": "destruction ↔ creation",
-      "pole": "creation",
-      "home": "The Making",
-      "oneLine": "Raise things faster and better than anyone should be able to — and sometimes leave them deliberately unfinished, so they keep going.",
-      "theCraft": "The creation-pole mastery: making at speed and at scale, out of whatever is to hand, improved in the making rather than merely replicated.",
-      "atCreation": "Make something real and functional, quickly — a bridge, a shelter, a tool, a wall — from what is here, and it will hold long enough to matter.",
-      "withMastery": "Work that outlasts you and gets used by people who never learn your name. A masterwork that gathers a lifetime into one teaching thing. And the strange gift at the top of Makecraft: a thing left deliberately incomplete, which KEEPS MAKING ITSELF.",
-      "theTrade": "Making truly costs time and care, and cannot be hurried without ceasing to be true. A masterwork can be made once. And a thing built to outlast you will — with everything that carries.",
-      "whoPractices": "The Making, the Wrights, and the Enginewrights who took it to world-scale.",
-      "acrossTheAxis": "Both poles read structure to its load-bearing truth. The Wright uses that to raise; the Unmaker to end. Riding the line between them is its own discipline.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "empower",
-        "foresee",
-        "hinder",
-        "make",
-        "mend",
-        "open",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "transform",
-        "travel"
-      ],
-      "distribution": {
-        "modes": [
-          "THE MAKERS — building, mending, the raised thing.",
-          "THE IMPROVERS — making a thing better than it was."
-        ],
-        "tail": {
-          "name": "THE FORGE-ETERNAL",
-          "what": "Making that does not stop. The Forge-Eternal improve what nobody asked them to improve, including people, and cannot be argued out of it."
-        }
-      }
-    },
-    {
-      "id": "pathos",
-      "name": "Pathos",
-      "axis": "emotional ↔ logical",
-      "pole": "emotional",
-      "home": "The Feeling Coast",
-      "oneLine": "Feeling as force. Not manipulation — you make what is actually there undeniable, including when it is yours.",
-      "theCraft": "The emotional-pole tradition works with what a room genuinely feels rather than what it performs. A Pathos adept halves a grief by sharing it, carries someone through what they cannot bear alone, and can move a crowd by the simple truth of what everyone in it already feels.",
-      "atCreation": "Feel the true emotional state of a person or a room beneath the display. Share a feeling so it eases — a grief halved, a fear steadied.",
-      "withMastery": "Feeling at the scale of peoples: a mob turned, a mourning-crowd held, a heart reached that no reason could get to. Laments that let a whole settlement finish a grief together, and names kept so the lost are attended rather than absent.",
-      "theTrade": "You carry what you move, for as long as it stays moved. The Threnodists' work lands the whole of a grief on the singer to give it. And the Grief-Strike is the same gift pointed at someone: it opens what they were keeping shut in order to stay functional.",
-      "whoPractices": "The Feeling Coast, the Threnodists, and the mourning-singers who go where a loss is too large to carry alone.",
-      "acrossTheAxis": "Logos proves; Pathos reaches. Each pole can do something to a person the other cannot, and both of them can take someone apart.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "empower",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "mend",
-        "move",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "track",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE CARRIERS — grief shared, feeling held for others.",
-          "THE LAMENT — public mourning-work; a people's feeling given shape."
-        ],
-        "tail": {
-          "name": "THE HEART-TUNERS",
-          "what": "Feeling installed. The Tuners of the heart do not read and share — they SET. Grief where there was none, love where there was none, and the person will defend it as their own because it is now."
-        }
-      }
-    },
-    {
-      "id": "logos",
-      "name": "Logos",
-      "axis": "emotional ↔ logical",
-      "pole": "logical",
-      "home": "The Reasoned Hold",
-      "oneLine": "Argument as an instrument. What follows, follows — and at the top of the craft that is a thing you can do to someone.",
-      "theCraft": "The logical-pole tradition builds arguments that compel the reasonable, exposes contradictions that cannot be unseen, and constructs systems that run on the soundness of their own reasoning without anyone enforcing them.",
-      "atCreation": "Build an argument that holds. Expose a contradiction so it cannot be unseen. Deduce a hidden fact from what is present.",
-      "withMastery": "A proof no honest mind can deny. A conclusion a whole body is walked into together, binding against later private doubt. Institutions that run at scale without you because the reasoning inside them is correct.",
-      "theTrade": "It proves only what is true — there is no proof of a falsehood, only a forgery the next sound mind unpicks. It fails entirely against anyone who will simply refuse a true conclusion. And to be irrefutably right is a lonely country.",
-      "whoPractices": "The Reasoned Hold, the Syllogists, and the courts and schools that grew up around them.",
-      "acrossTheAxis": "A Syllogist and a Threnodist looking at the same grieving person see two true things and disagree about which one to act on.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "empower",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "mend",
-        "move",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "track",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE ARGUERS — proof, adjudication, the settled case.",
-          "THE BUILDERS — systems that run on their own logic."
-        ],
-        "tail": {
-          "name": "THE CORNERS",
-          "what": "Argument as a weapon against a mind. The Corners walk someone to a conclusion that destroys them and call it honest, because every step was."
-        }
-      }
-    },
-    {
-      "id": "veilwright",
-      "name": "Falsecraft",
-      "axis": "falsehood ↔ truth",
-      "pole": "falsehood",
-      "home": "{{region:the_veiled_reach}}",
-      "oneLine": "A fiction built well enough to function. The Veilwrights' first skill is spotting one, because they know the joinery.",
-      "theCraft": "Falsecraft builds untruths that hold under scrutiny — disguises, false histories, illusions that persist unwatched — and unbuilds other people's. A practitioner sees construction, which is why the tradition's best liars are also its best detectors.",
-      "atCreation": "Craft a convincing illusion or disguise. Tell a lie built well enough to hold. And spot a constructed untruth, because you know how one is made.",
-      "withMastery": "A deception a whole people believes. A veil set and abandoned that is now a feature of the place. A false reality someone OPERATES inside, making correct decisions against a picture you supplied. And the Useful Lie — a fiction so complete it is functionally true while it goes unexamined.",
-      "theTrade": "It holds only while unexamined; a necessary fiction meets a determined truth and loses, always, eventually. Verity undoes it directly. And the gravest risk is to the maker: tell a lie well enough and you may forget it was one.",
-      "whoPractices": "{{region:the_veiled_reach}}, and everyone who has needed a story that lets people keep going.",
-      "acrossTheAxis": "The Better Story sits exactly on the line — a reframing that heals and is ALSO true. Both poles claim it, and neither is wrong.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "conceal",
-        "deceive",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "transform",
-        "travel"
-      ],
-      "distribution": {
-        "modes": [
-          "THE STORYTELLERS — reframing, the better story, the useful cover.",
-          "THE FALSEWRIGHTS — constructed realities, covers that hold under scrutiny."
-        ],
-        "tail": {
-          "name": "THE NAME-TAKERS",
-          "what": "Identity theft as erasure. The Name-Takers do not borrow a life, they REPLACE one, and hold the false version until the original cannot get it back."
-        }
-      }
-    },
-    {
-      "id": "verist",
-      "name": "Verity",
-      "axis": "falsehood ↔ truth",
-      "pole": "truth",
-      "home": "The Reach of the plain word",
-      "oneLine": "See what is so, say it plainly, and let it land. The lonely craft — being right is not the same as being welcome.",
-      "theCraft": "Verity sees through illusion and the ordinary lie, strips deception bare in front of others, and speaks truths that cannot be quietly taken back. At its height it establishes facts in the record of the real.",
-      "atCreation": "See through illusion, disguise, and the ordinary lie. Know when a spoken thing is false. Speak a plain truth others cannot easily deny.",
-      "withMastery": "A deception undone before a whole people. A buried thing dragged into day. A word spoken so truly it cannot be unsaid — and the Whole Truth, which cracks even a lie built entirely from true pieces.",
-      "theTrade": "It cannot spare what it reveals, and it does not choose whose secret surfaces. You learn things you cannot unlearn, and the powerful will kill to keep some truths buried. Revealing is not compelling — you can be completely right and change nothing.",
-      "whoPractices": "Verists, investigators, and the Cathedral of Convincing's opponents — who need them precisely because the Cathedral lies with true pieces.",
-      "acrossTheAxis": "Falsecraft asks what a person can carry; Verity asks what is so. The Veilwrights think that is cruelty and the Verists think the alternative is contempt.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "conceal",
-        "deceive",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "transform",
-        "travel"
-      ],
-      "distribution": {
-        "modes": [
-          "THE WITNESSES — attestation, the established fact.",
-          "THE PLAIN — austere truth-telling as a way of living."
-        ],
-        "tail": {
-          "name": "THE STRIPPERS",
-          "what": "Truth as a weapon. The Strippers unmask people for what it costs them, selecting targets by what the revelation will break. Verity cannot tell whether an unmasking does more harm than the lie — they can, and choose the ones that do."
-        }
-      }
-    },
-    {
-      "id": "enginewright",
-      "name": "Enginecraft",
-      "axis": "mechanical ↔ spiritual",
-      "pole": "mechanical",
-      "home": "The Gearlands",
-      "oneLine": "Mechanism as a language you speak. The Precursor doors that still half-listen, listen to you.",
-      "theCraft": "Enginecraft reads a mechanism's design and purpose on sight, builds reliable machines, and commands machine-systems to reconfigure toward an intent. Alone among the traditions it can run Precursor systems that Latticespeak could only knock on.",
-      "atCreation": "Understand a device or machine-system's function and flaws at a glance. Fix a broken tool or machine reliably. Make a device do something within its mechanism it was never set to do.",
-      "withMastery": "Machine-country commanded — a whole Precursor installation bent toward a purpose, a mechanical site woken or stilled at scale. And the Deep Works: a mechanism or edifice at the scale the dwarven-mechanical peoples are named for, which changes the maker in the building of it.",
-      "theTrade": "It needs a mechanism to talk to; the grown, the wild, and the genuinely novel offer it no purchase. A Deep Work demands a season of yourself and is permanent — the world now has this thing, whatever it turns out to mean.",
-      "whoPractices": "The Gearlands, the Enginewrights, and the Deep Works' dwarven-mechanical peoples.",
-      "acrossTheAxis": "Enginecraft asks what a thing DOES; Numenwork asks what it MEANS. What Sleeps Under is the deep peak of this axis, and neither pole is comfortable about it.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "empower",
-        "heal",
-        "hinder",
-        "make",
-        "mend",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "summon",
-        "sustain",
-        "track",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE MECHANISTS — machines read, mended, commanded.",
-          "THE DEEP-WORKERS — precursor mechanism, great works."
-        ],
-        "tail": {
-          "name": "THE COIL",
-          "what": "Mechanism turned on the living. The Halvex line treats a body as a device with a directive, and edits it. Halvex Coil began exactly here and did not stop."
-        }
-      }
-    },
-    {
-      "id": "numen",
-      "name": "Numenwork",
-      "axis": "mechanical ↔ spiritual",
-      "pole": "spiritual",
-      "home": "The Numinous Reach",
-      "oneLine": "Attention as a force. Attend to something completely enough and the material softens around what it means.",
-      "theCraft": "Numenwork perceives the meaning-layer directly — where the world is thin, where something is pressing back — and where significance is dense enough, makes it briefly literal. Its highest form is attention that HOLDS: keeping open, by significance alone, something that was closing.",
-      "atCreation": "Feel the significance-density of a place or moment and know where the world is thin. Steady a person in crisis through presence alone.",
-      "withMastery": "A thin place opened in a room that had no reason to be sacred. A symbol made briefly real, a threshold held open long enough for others to pass. And a foreclosing thing kept open by nothing but sustained attention.",
-      "theTrade": "Nearly all of it needs meaning already present — Numenwork concentrates significance, it rarely manufactures it from nothing. And the Dimmed Meaning is the same craft inverted: drain what made a thing matter and those who relied on it lose their orientation entirely.",
-      "whoPractices": "The Numinous Reach, and those who have attended to one thing long enough that it started attending back.",
-      "acrossTheAxis": "The Enginewright repairs what is broken; the Numen holds open what is closing. Both are refusals to let a thing end badly.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "empower",
-        "heal",
-        "hinder",
-        "make",
-        "mend",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "summon",
-        "sustain",
-        "track",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE ATTENDERS — attention as steadying; meaning held open.",
-          "THE THRESHOLD-KEEPERS — thin places, the sacred and the charged."
-        ],
-        "tail": {
-          "name": "THE DIMMERS",
-          "what": "Meaning withdrawn. The Dimmers take significance out of a person's life — their work, their people, their reasons — and leave them functional and empty. It is the quietest atrocity in the Valley."
-        }
-      }
-    },
-    {
-      "id": "horizon",
-      "name": "Spanwork",
-      "axis": "space ↔ time",
-      "pole": "space",
-      "home": "The Horizon Reach",
-      "oneLine": "Distance is a claim, not a fact. Argue with it long enough and it gives.",
-      "theCraft": "The space-pole tradition treats ground as negotiable — covering it far past what a body should, closing a distance you can see without crossing the between, and finding the crossing the land insists is not there.",
-      "atCreation": "Never be lost: your bearing, your distance, and the shape of the way ahead. Cover ground far past what a body should — a day's march in an hour, tirelessly.",
-      "withMastery": "Distance stops being an obstacle for you and those you carry. A crossing made where the land calls itself uncrossable. And the Edge of the Map — the step past the known world entirely, where arriving is what calls the new place into being.",
-      "theTrade": "Beyond the map the destination is unfixed until you make it, so you cannot know what you are stepping into, and there is no quick way back. Horizon-walkers are famously bad at staying.",
-      "whoPractices": "The Horizon Reach, its scouts, its couriers, and everyone who left.",
-      "acrossTheAxis": "Both poles refuse a limit everyone else accepts. The Horizon-walker refuses distance; the Hourkeeper refuses duration.",
-      "functionCoverage": [
-        "bind",
-        "command",
-        "empower",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "track",
-        "transform",
-        "travel"
-      ],
-      "distribution": {
-        "modes": [
-          "THE WALKERS — routes, distance, the road known.",
-          "THE SPANNERS — folding distance; arrival without crossing."
-        ],
-        "tail": {
-          "name": "THE LEAVERS",
-          "what": "Abandonment as method. The Leavers strand people — take a party into the far country and fold out, or close a route behind a village. Distance is a weapon if you own it."
-        }
-      }
-    },
-    {
-      "id": "hourkeeper",
-      "name": "Hourcraft",
-      "axis": "space ↔ time",
-      "pole": "time",
-      "home": "The Kept Hours",
-      "oneLine": "Duration is workable. Hold a moment open, stretch it, spend it — or bend how long something takes.",
-      "theCraft": "The time-pole tradition perceives a moment whole while it is still happening, slows duration to make room inside it, and at its height remembers forward — an hour that has not happened arriving with a memory's specificity and a memory's unreliability.",
-      "atCreation": "Know exactly how long since a thing happened and how long until a thing due will come. Hold a moment exactly — perceive it whole, at length, while it is still occurring.",
-      "withMastery": "An hour held open past its passing for what must be finished inside it. One possible future traced to its very end. And the Shaped Duration, which bends how long any running process takes — including the ones running inside a person.",
-      "theTrade": "Foreseeing binds: what you have seen changes how you act, and acting changes the future you saw. And the Hourkeepers are honest that the Shaped Duration is the ugliest thing they teach, precisely because it never has to touch anyone.",
-      "whoPractices": "The Kept Hours, its archivists, and the ones who sit with the dying because they can tell how long.",
-      "acrossTheAxis": "Space says the far place is a place you may be. Time says the moment is longer than it looks. Both are arguments with a limit, and both eventually win.",
-      "functionCoverage": [
-        "bind",
-        "command",
-        "empower",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "track",
-        "transform",
-        "travel"
-      ],
-      "distribution": {
-        "modes": [
-          "THE KEEPERS — duration read, patience held, time given.",
-          "THE WATCHERS — vigil-work, the long hold."
-        ],
-        "tail": {
-          "name": "THE HOUR-THIEVES",
-          "what": "Time taken. The Hour-Thieves stretch a person's worst moment until it breaks them, or spend someone's remaining hours on their own work. An hour is a thing, and things can be stolen."
-        }
-      }
-    },
-    {
-      "id": "marcher",
-      "name": "The Marcher",
-      "axis": "violence ↔ peace",
-      "pole": "violence",
-      "home": "The Riven Marches and the Redline",
-      "oneLine": "Force done correctly, under forms, with the whole cost visible. Not brutality — competence about the worst thing.",
-      "theCraft": "The violence-pole tradition holds that force will be used whether or not anyone is skilled about it, and that skill is what separates a fight that ends from a fight that spreads. Marchers read a fight before it takes shape, control ground, disarm rather than kill where the forms allow, and keep people alive inside it.",
-      "atCreation": "See a fight's shape and a foe's tell a beat early. Disarm or disable a single opponent without killing them. Improvise a usable weapon from whatever is at hand.",
-      "withMastery": "A whole field controlled, opponents standing where they did not choose to stand. A group kept fighting past what they should survive. And Last Form — a formal duel ended in one undeniable exchange, because you read them completely and answered perfectly.",
-      "theTrade": "The forms are real constraints: Last Form fails against a foe who refuses the duel or has no form to read, and killing where the forms forbid costs a Marcher their standing. Competence at violence does not make you right about when to use it.",
-      "whoPractices": "The Riven Marches, the Redline's dueling culture, and soldiers who lived long enough to get good.",
-      "acrossTheAxis": "Stillcraft ends fights by making them unnecessary; the Marcher ends them by being better at them. Both are trying to make the violence stop.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "empower",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "move",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE LINE — disciplined force; take the weapon rather than the life.",
-          "THE ROADWARDENS — protection work, escort, the toll roads."
-        ],
-        "tail": {
-          "name": "THE ENDERS",
-          "what": "Force without the discipline. The Enders kept the craft and dropped the restraint; a Marcher who has stopped asking why is the most dangerous ordinary thing in the Valley."
-        }
-      }
-    },
-    {
-      "id": "stillhold",
-      "name": "Stillcraft",
-      "axis": "violence ↔ peace",
-      "pole": "peace",
-      "home": "The Stillhold",
-      "oneLine": "Peace as an active craft, not an absence. Truces that hold, ground that stays neutral, and a hard edge of its own.",
-      "theCraft": "The peace-pole tradition halts conflicts before they break, reads what each side actually needs underneath what they demand, and binds truces to something both sides genuinely value so the peace outlasts the mood that made it.",
-      "atCreation": "De-escalate a tense moment before it turns. Read the true feeling in a gathering and find who is about to break the peace. Stand between two parties at the moment before harm.",
-      "withMastery": "Peace at the scale of peoples — a generational feud ended, a war stood down. Sanctuary woven into a place deeply enough to survive sustained pressure. And a peace bound so well that breaking it costs more than the war would, with both sides able to see that.",
-      "theTrade": "Stillcraft is slow and it needs both sides to have something they actually want. And it is not gentle: The Price Shown puts a reckoning in a person that they carry afterward and cannot unthink — an act of force performed by people who have chosen not to use any other kind.",
-      "whoPractices": "The Stillhold, its brokers, and the ones who walk into rooms nobody else will enter.",
-      "acrossTheAxis": "Both poles are honest that violence is coming. They disagree about whether the answer is to be excellent at it or to make it unnecessary — and the Marches and the Stillhold need each other more than either admits.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "empower",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "move",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "sustain",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE MEDIATORS — truce-broking, sanctuary, the held peace.",
-          "THE INTERPOSERS — standing between, with their own bodies."
-        ],
-        "tail": {
-          "name": "THE QUIETERS",
-          "what": "Peace enforced. The Quieters end a conflict by ending whoever will not stop — and they have a whole doctrine about how that is still peace-work. It is the calmest violence in the world."
-        }
-      }
-    },
-    {
-      "id": "vivimancer",
-      "name": "Vivimancy",
-      "axis": "death ↔ life",
-      "pole": "life",
-      "home": "The Quickwood and the Heartroot",
-      "oneLine": "Life at flood. Not gentle — growth is a force, and a Rootkin can point it.",
-      "theCraft": "The life-pole tradition speeds healing, coaxes growth, calls the living world to act, and at its height remakes a body toward health. Learned by travelling the Reach or training under Rootkin — not available at Valley creation.",
-      "atCreation": "Not offered at creation. Rootkin origins carry a seeded base; everyone else earns it in the Reach.",
-      "withMastery": "Mass healing and land quickened for a season. Life grafted into what was not alive — bone to wood, a heart to a stopped chest. And the Green Claim, which can turn a whole region hostile to someone you have named.",
-      "theTrade": "Higher tiers pull the wielder's own pole-intensity toward life, and that drift is tracked. The Green Claim is a condition rather than an attack — it cannot be called off quickly and does not distinguish finely between your target and whoever is walking beside them.",
-      "whoPractices": "The Quickwood, the Rootkin, the Heartroot's tenders.",
-      "acrossTheAxis": "Vivimancy and Palework are the same knowledge of the threshold approached from opposite sides. Both know exactly where it is.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "summon",
-        "sustain",
-        "track",
-        "transform",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE QUICKENERS — growth, healing, land brought back.",
-          "THE GRAFTERS — restoration past the ordinary; regrowing what was lost."
-        ],
-        "tail": {
-          "name": "THE BLOOM-WRIGHTS",
-          "what": "Life IMPOSED. The Bloom-Wrights force growth into a body that did not ask — tumours of healthy tissue, a limb that will not stop, a field that grows until it strangles itself. Life at flood does not know when to stop, and they use that on purpose."
-        }
-      }
-    },
-    {
-      "id": "palework",
-      "name": "Palework",
-      "axis": "death ↔ life",
-      "pole": "death",
-      "home": "The Palelands",
-      "oneLine": "The threshold understood, attended, and — at its worst — crossed on purpose for someone else.",
-      "theCraft": "The death-pole tradition moves where death has been, asks the dead what they knew, eases an ending that has already begun, and draws vitality out of the living. The Ashwardens hold that someone has to be competent at the end of things.",
-      "atCreation": "Not offered at creation. Ashwarden origins carry a seeded base; everyone else earns it in the Reach.",
-      "withMastery": "Passage through plague grounds and sealed necropolises unharmed. The dead giving up what they knew entire, what they wanted, and what they feared. The Last Gift, which eases a death already arriving. And Draw-Down, which takes a life into yourself.",
-      "theTrade": "Drift toward the death pole, tracked and eventually named. And Draw-Down at full rank has no partial version: what is drawn entirely down does not recover and leaves nothing anyone can grieve properly. The Ashwardens do not forbid it — they forbid teaching its highest rank to anyone who asked for it.",
-      "whoPractices": "The Palelands, the Ashwardens, and those who sit with the dying because someone must.",
-      "acrossTheAxis": "A Vivimancer refuses a death; a Palework attends one. The Reach's hardest teaching is that both are sometimes the merciful act, and the practitioner does not always get to know which.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "move",
-        "open",
-        "resist",
-        "restore",
-        "reveal",
-        "shield",
-        "strike",
-        "summon",
-        "sustain",
-        "track",
-        "transform",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE PALE READERS — diagnosis, plague-work, reading what killed a thing.",
-          "THE EASERS — granting endings to those already ending, at their asking."
-        ],
-        "tail": {
-          "name": "THE GRAVE-CALLERS",
-          "what": "⚠️ RAISING. The Grave-Callers hold a body past its ending and set it working — and they do not ask first. The tradition's polite half calls it obscene; the tradition's other half has been doing it for four hundred years in the Palelands where labour is short and the dead are many."
-        },
-        "note": "ERIK'S EXAMPLE. 'Death people don't raise' was my bias. They raise. Some of them do little else."
-      }
-    },
-    {
-      "id": "valley_craft",
-      "name": "Valley Craft",
-      "axis": "folk crafts — no pole",
-      "pole": "—",
-      "home": "The Valley itself",
-      "oneLine": "What Valley people actually know. Available to everyone at creation, and quietly the most useful list in the game.",
-      "theCraft": "Not a tradition and not a pole — the practical competences a life in the Valley produces. Tracking, herbs, repair, appraisal, riverwork, keeping a fire that people gather at. Each runs three ranks like anything else, and a rank-three Valley craft outperforms a rank-one anything.",
-      "atCreation": "All of it. This is the list every character can draw from regardless of origin, tradition, or gating — and for most Valley-born characters it is the whole starting kit.",
-      "withMastery": "A room's full inventory including the concealed. Any mechanism diagnosed by touch and sound, Precursor included. The valley's whole Precursor lattice perceived from any node. A camp kept three nights that becomes a named place on the map.",
-      "theTrade": "No craft here reaches past the Valley's own scale — these are competences, not powers, and they do not braid into combinations the way tradition abilities do. What they give instead is that they always work, cost nothing to hold, and never drift your coordinate.",
-      "whoPractices": "Everyone. Foresters, tinkers, midwives, ferrymen, hearth-keepers, and every character who ever needed to find water.",
-      "acrossTheAxis": "The traditions argue about the shape of the world. Valley Craft is what gets the party fed, dry, and pointed the right way while they do it.",
-      "functionCoverage": [
-        "bind",
-        "break",
-        "command",
-        "conceal",
-        "deceive",
-        "foresee",
-        "heal",
-        "hinder",
-        "make",
-        "mend",
-        "move",
-        "open",
-        "reveal",
-        "strike",
-        "summon",
-        "sustain",
-        "track",
-        "travel",
-        "ward"
-      ],
-      "distribution": {
-        "modes": [
-          "THE VALLEYFOLK — the broad ordinary competence; hearth, trail, tinker, hunt.",
-          "THE OLD-ROADERS — precursor-adjacent folk craft; salvage and lattice-sense."
-        ],
-        "tail": {
-          "name": "THE PLAIN DANGEROUS",
-          "what": "Ordinary craft with nothing behind it. The ones who use hunters_strike on people and greenlore to poison, and who are much harder to see coming than any pole because they look like everyone."
-        }
-      }
+ "schemaVersion": 1,
+ "id": "tradition_profiles",
+ "kind": "tradition_guide",
+ "note": "Player-facing profile for every tradition: what the craft IS, what it can do at first rank, what mastery looks like, and what it costs. Written for two surfaces — the character-creation guide (pick a tradition knowing what you are choosing) and the Library. Function coverage is derived from the shipped ability content, not authored separately, so it cannot drift. Authored by Aevi (PO) during the SNG-147c per-rank pass, 2026-07-18.",
+ "traditions": [
+  {
+   "name": "The Harmonic",
+   "axis": "civilization craft",
+   "pole": "—",
+   "home": "Choirheight and the resonant halls",
+   "oneLine": "Sound as structure. You hear what a thing is made of, and you can sing it steadier, quieter, or apart.",
+   "theCraft": "Harmonics treat vibration as the honest layer of the world. Everything has a note — a wall, a crowd, a wound, a lie — and a practitioner who finds it can reinforce it, mask it, or break it at the point where it was always going to fail.",
+   "atCreation": "You perceive through sound where others need light: bodies through a wall, a digger at work below, the gait of someone you know. You can push objects at a distance, blanket a corner in quiet, or run on a rhythm that carries you further than your legs should.",
+   "withMastery": "A chord set once and left ringing that holds a company through a night's march. A room brought to genuine willingness by a voice. A shatterpoint called on a Radiant lattice, a fortress wall, or a body — and struck where it was already going to fail.",
+   "theTrade": "Nothing a Harmonic does is quiet. The craft is audible by definition; there is no stealth in it. It works on structure, so it is superb against the made and the massed and awkward against the singular and the strange.",
+   "whoPractices": "Choir-trained, mostly. Harmonic and Radiant are closed to each other — a life spent learning to hear is not a life spent learning to see.",
+   "acrossTheAxis": "Radiant reveals by exposure; Harmonic reveals by resonance. The Radiant makes a thing visible. The Harmonic makes it audible, and then makes it fall.",
+   "id": "harmonic",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "conceal",
+    "empower",
+    "foresee",
+    "heal",
+    "mend",
+    "move",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "track",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE CHOIR — resonance as craft: steady a company, quiet a room, find the note a wall was always going to fail at.",
+     "THE TUNERS — instrument-makers and menders; the trade half, and most of the people."
+    ],
+    "tail": {
+     "name": "THE SILENCERS",
+     "what": "They find the note of a heart and hold it until it stops. Sonic resonance does not care whether the structure is stone or a chest, and a Silencer has never pretended otherwise."
     }
-  ],
-  "distributionPrinciple": "⚠️ SNG-276 NORTH STAR (Erik 2026-08-03): 'ANYTHING IS ON THE TABLE. ANYTHING IS POSSIBLE.' A tradition is a DISTRIBUTION, not a center. Every profile's oneLine/theCraft/withMastery describe the MODE — how most practitioners use it, and the polite public face. That is real and it is most of them. But a people is not its median. `modes` names the shapes the bulk of the tradition takes; `tail` names what it looks like at the far end, where the same craft is turned to the thing the center will not do. THE TAIL IS NOT A VILLAIN CLASS — it is the same craft, same training, different answer to what it is FOR. One practitioner uses shatterpoint on walls; another uses it on chests. Both are Harmonics. AND THIS TIES TO SCHOOLS: a school is what you reach WITH; a mode/tail is what you reach FOR. CONSEQUENCE FOR BOUNDS: a craft's bounds state what it CANNOT REACH, never what a practitioner should not want. A bound that reads as manners is describing the mode and calling it the world."
+   }
+  },
+  {
+   "name": "The Radiant",
+   "axis": "civilization craft",
+   "pole": "—",
+   "home": "Glasshome and the lit terraces",
+   "oneLine": "Light as tool, weapon, and witness. Nothing you shine on gets to stay hidden, and at full focus the beam does more than show.",
+   "theCraft": "Radiants work light the way a smith works metal: stored, shaped, thrown, and sharpened. The tradition's premise is that exposure is a good in itself — that what survives being seen clearly is what deserved to.",
+   "atCreation": "You read the hidden spectra — heat on a handle, tampering under paint, the flush of a lie in good light. You bend light to hide in, bank daylight in a jar against the night, and coax a season's warmth into a struggling seedbed.",
+   "withMastery": "A lattice fence warding a compound for a season. Surgery done by your own operating glow, deep enough to rebuild a crushed hand. And the Sunlance — a single coherent strike through a stone wall, an engine block, or a person.",
+   "theTrade": "You glow. There is no Radiant stealth, no Radiant ambush, no Radiant anonymity — the craft announces its user in the act of using it. It fails on mirror-finish, on running water, and in true dark where there is nothing to work with.",
+   "whoPractices": "Glasshome-trained, and the blaze-adjacent settlements. Closed to Harmonic, and the two traditions have opinions about each other.",
+   "acrossTheAxis": "Where the Harmonic finds a thing's note, the Radiant simply shows it. Both end arguments; only one of them does it politely.",
+   "id": "radiant",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "conceal",
+    "deceive",
+    "empower",
+    "heal",
+    "hinder",
+    "make",
+    "mend",
+    "move",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "track",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE LANTERN-KEEPERS — worked light, warmth, the folk half; most radiants never do anything else.",
+     "THE LANCE — light as a cutting instrument, taught openly and used in war."
+    ],
+    "tail": {
+     "name": "THE SCOURERS",
+     "what": "Light burned into an eye until nothing behind it works. The Scourers hold that a thing which cannot bear looking at should be unmade by looking at it, and they do it slowly."
+    }
+   }
+  },
+  {
+   "name": "Precursor Work",
+   "axis": "deep-power family (gated)",
+   "pole": "fabricated substrate",
+   "home": "the Old Roads and the lattice under everything",
+   "oneLine": "The machinery the world was built on still answers, if you learn its grammar. Never offered at creation — earned in fiction.",
+   "theCraft": "Precursor work is not a tradition so much as a conversation with what the builders left running. It is queried, not commanded; it answers on its own terms; and every exchange pulls the practitioner's own coordinate further toward the pole they are drawing from.",
+   "atCreation": "Not available. Access opens per-ability through play — a remnant found, a road mastered, a teacher who owes you. Substrate-born origins are seeded a single innate base and grow it like any skill.",
+   "withMastery": "Reading a thing's unrepeatable cosmic address and navigating to it across any distance. Foreclosing a possibility outright — and Hold the Aperture, the standing refusal that keeps open what the lattice is closing.",
+   "theTrade": "Drift. Every use moves your vector, and Foreclose moves it toward the contraction the framework names as the enemy. The engine tracks it. The GM will eventually name where it has taken you.",
+   "whoPractices": "Nobody by right except the substrate-born, and even they only hold the doorway. Everyone else earns each ability separately.",
+   "acrossTheAxis": "Its living counterpart is the green current; its tangled counterpart is the wild. Same depth, different substrate, and they do not mix.",
+   "id": "precursor",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "open",
+    "reveal",
+    "summon",
+    "track",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE READERS — address-sense, latticespeak, the old roads walked carefully.",
+     "THE WAKERS — rousing what sleeps, opening what was sealed."
+    ],
+    "tail": {
+     "name": "THE SHUTTERS",
+     "what": "Foreclosure as governance. The Shutters close possibilities off people — a future denied, a way barred, a thing that can no longer happen to anyone. It is the framework's own definition of evil, practised deliberately."
+    }
+   }
+  },
+  {
+   "name": "The Green Current",
+   "axis": "deep-power family (gated)",
+   "pole": "living substrate",
+   "home": "the Quickwood and every rooted place",
+   "oneLine": "The life-layer the Rootkin never surrendered. The ground is awake, and it will answer a true touch.",
+   "theCraft": "Where the Precursors built a substrate, the Rootkin kept the one that grew. The green current runs through everything living and connects every rooted place to every other. It answers sincerity and refuses force.",
+   "atCreation": "Not available. Innate to rootkin origins, seeded per-ability; earned by everyone else through the Reach.",
+   "withMastery": "Waking a whole district's current so that ground you have quickened carries a party rested. Travelling the green road between rooted places, carrying others, toward places you have never walked because something living there knows your touch.",
+   "theTrade": "It reaches only where life runs unbroken. A dead zone, a machine-city, a burned waste has no green road through it and no current to wake. And what you wake, you tend.",
+   "whoPractices": "Rootkin by birth; Ashwardens and travellers of the Reach by long apprenticeship.",
+   "acrossTheAxis": "The precursor lattice is fabricated and obeys grammar. The green current is grown and obeys relationship. Neither can do the other's work.",
+   "id": "living_current",
+   "functionCoverage": [
+    "open",
+    "reveal",
+    "sustain",
+    "travel"
+   ],
+   "distribution": {
+    "modes": [
+     "THE GREEN-TOUCHED — the living current as inheritance, used gently.",
+     "THE DEEP-ROOTED — Heartroot work; the current at depth."
+    ],
+    "tail": {
+     "name": "THE FLOODBEARERS",
+     "what": "The current forced through a body that cannot hold it. The Floodbearers use a person as a conduit and do not always get them back."
+    }
+   }
+  },
+  {
+   "name": "The Churn",
+   "axis": "deep-power family (gated)",
+   "pole": "tangled substrate",
+   "home": "the Wild Half",
+   "oneLine": "Both substrates at once, tangled and generous and never twice the same. It gives — just never exactly what you asked for.",
+   "theCraft": "The fae art of productive disorder at the substrate layer. The Churn accretes and improvises. Its gifts are real, potent, and shaped by the current rather than the asker.",
+   "atCreation": "Not available. Innate to churnfolk and abyssal origins; opened per-ability.",
+   "withMastery": "Naming the shape of what you want and letting the Churn invent every detail. A district-wide flowering of growth-and-ruin that lasts days before the tangle takes it back. Bargains struck with places rather than persons, set to outlive both parties.",
+   "theTrade": "No precision, ever, at any rank. You cannot aim it at pure growth or pure ruin. And the Honest Bargain is scrupulously fair, which is the horror rather than the safety.",
+   "whoPractices": "The Wild Half — churnfolk, fae, and the Abyssals who kept their hollow.",
+   "acrossTheAxis": "It is the third substrate. Precursor work is grammar and green current is relationship; the Churn is neither, and both.",
+   "id": "wild_current",
+   "functionCoverage": [
+    "bind",
+    "command",
+    "make",
+    "open",
+    "summon",
+    "transform"
+   ],
+   "distribution": {
+    "modes": [
+     "THE FAE-TOUCHED — bargains with the wild half; gifts that arrive sideways.",
+     "THE CURRENT-RIDERS — the tangled substrate, ridden rather than steered."
+    ],
+    "tail": {
+     "name": "THE HOLLOW BARGAINERS",
+     "what": "Bargains made with things that are not people, on behalf of people who did not agree. The Hollow Bargainers trade someone else's future for their own present."
+    }
+   }
+  },
+  {
+   "name": "The Somatic",
+   "axis": "body ↔ mind",
+   "pole": "body",
+   "home": "the Flesh-Temples and the Somatic Reaches",
+   "oneLine": "The body as a mastered instrument. Not strength — control, past where control should end.",
+   "theCraft": "Somatics train the physical self until it answers the will completely: breath, heartbeat, pain, fear, and the precise economy of motion.",
+   "atCreation": "Endurance and poise past the ordinary. Control of breath and heartbeat to steady fear, pain, or cold. Motion precise enough to read as grace.",
+   "withMastery": "Surviving what kills others. Crossing terrain that stops everyone else. And the whole mastered frame behind a single strike — stance, breath, and timing arriving together.",
+   "theTrade": "It is control, not raw force, and it is not thought-work. A Somatic who leans on Second Wind too long is borrowing at a rate the Flesh-Temples consider usurious.",
+   "whoPractices": "Flesh-Temple trained. The Middle Way braids it with Noesis; the pure poles cannot.",
+   "acrossTheAxis": "Noesis is the same discipline pointed at the mind. The Whole Act is what happens when someone refuses to choose.",
+   "id": "somatic",
+   "functionCoverage": [
+    "bind",
+    "command",
+    "empower",
+    "foresee",
+    "heal",
+    "make",
+    "mend",
+    "move",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "transform",
+    "travel"
+   ],
+   "distribution": {
+    "modes": [
+     "THE TEMPLE — the body mastered; forms, breath, endurance.",
+     "THE FRAME — the gathered strike; mastery as force."
+    ],
+    "tail": {
+     "name": "THE BREAKERS",
+     "what": "The body as an instrument on OTHERS. The Breakers read a body well enough to take it apart precisely — a joint, a rhythm, a nerve — and they do it slowly because they can."
+    }
+   }
+  },
+  {
+   "name": "The Cogitant",
+   "axis": "body ↔ mind",
+   "pole": "mind",
+   "home": "the Cogitarium",
+   "oneLine": "Thought sharpened until it acts on the world. Sharp, not wise — the Cogitarium is clear about the difference.",
+   "theCraft": "Memory, focus, and reason trained to instrument-grade. A Cogitant models systems and people completely enough to predict them, and holds structure under conditions that break other minds.",
+   "atCreation": "Perfect recall of what you attend to. Focus that ignores pain and distraction. Reasoning faster and further than the unpracticed.",
+   "withMastery": "A life you can walk back through. Function under cold, injury, grief, and weeks of pressure until the work is done. And thought turned on a person: a conclusion delivered exactly where their reasoning rests, which staggers a mind the way a blow staggers a body.",
+   "theTrade": "Sharpness is not wisdom, and this craft least of all. It needs a mind that reasons — the disciplined, the genuinely mad, and the simply uninterested all shrug it off. What you take apart in someone this way, you are responsible for putting back.",
+   "whoPractices": "Cogitarium-trained, and the self-taught who found the discipline alone and usually paid more for it.",
+   "acrossTheAxis": "Soma answers the will through the body; Noesis through the mind. Both are the same refusal to accept an ordinary ceiling.",
+   "id": "cogitant",
+   "functionCoverage": [
+    "bind",
+    "command",
+    "empower",
+    "foresee",
+    "heal",
+    "make",
+    "mend",
+    "move",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "transform",
+    "travel"
+   ],
+   "distribution": {
+    "modes": [
+     "THE UNAIDED — mind alone, joined to nothing.",
+     "THE INSTRUMENTED — thought extended through mechanism and model."
+    ],
+    "tail": {
+     "name": "THE OPENERS",
+     "what": "Reading a mind that did not open. The Openers take what they want from a head and leave the person confused about why they are tired. The tradition calls unbidden reading a violence; the Openers agree and do it anyway."
+    }
+   }
+  },
+  {
+   "name": "Wildcraft",
+   "axis": "chaos ↔ order",
+   "pole": "chaos",
+   "home": "the Churn and the unspooling places",
+   "oneLine": "Improvisation as power. You are best exactly where the plan has stopped working.",
+   "theCraft": "The Churnfolk discipline of productive disorder — riding luck, reading the grain of a collapsing situation, and denying an opponent the predictability they were counting on.",
+   "atCreation": "Turn a chaotic moment to advantage. Improvise a working solution from whatever is to hand. Make one plan — yours or theirs — come apart usefully.",
+   "withMastery": "Unmaking order at scale: a fortress's discipline, a system's certainty, a plan a season in the making, all coming apart at once — and out of the loosed chaos, the one opening that could not otherwise have existed.",
+   "theTrade": "Nothing repeatable. It will not work the same way twice, it offers no fine control, and it cannot give you a result you specified in advance.",
+   "whoPractices": "Churnfolk, and anyone whose life has taught them that plans are a kind of superstition.",
+   "acrossTheAxis": "Latticework is its exact opposite and its best opponent. Each is strongest where the other is blind.",
+   "id": "wildcraft",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "deceive",
+    "empower",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "mend",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "sustain",
+    "transform",
+    "travel"
+   ],
+   "distribution": {
+    "modes": [
+     "THE IMPROVISERS — thriving where others founder.",
+     "THE RIDERS — surfing collapse, making use of what breaks."
+    ],
+    "tail": {
+     "name": "THE UNSPOOLERS",
+     "what": "Unmaking for its own sake. The Unspoolers break structures they have no plan for, because a thing that cannot adapt deserves to come apart, and they enjoy it."
+    }
+   }
+  },
+  {
+   "name": "Latticework",
+   "axis": "chaos ↔ order",
+   "pole": "order",
+   "home": "the Lattice-Cities",
+   "oneLine": "Structure as power. What you bind stays bound; what you predict, you have already half-defeated.",
+   "theCraft": "Order-craft: plans that hold under pressure, systems read to their load-bearing point, possibilities bound down until they are reliably true.",
+   "atCreation": "Build a plan that holds. Predict a system's next move. Impose enough order on a mess to act cleanly inside it.",
+   "withMastery": "Structure imposed at scale — a lawless place made orderly, a chaotic force predicted and countered, a possibility foreclosed by sheer structure.",
+   "theTrade": "It cannot improvise and it cannot handle the genuinely novel. Anything that must breathe or grow resists it, and Wildcraft is built specifically to make it brittle.",
+   "whoPractices": "The Lattice-Cities, their courts, and their engineers.",
+   "acrossTheAxis": "Wildcraft rides collapse; Latticework prevents it. Riding Order is the braid — unmake a structure and re-bind the falling pieces in the same motion.",
+   "id": "latticework",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "deceive",
+    "empower",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "mend",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "sustain",
+    "transform",
+    "travel"
+   ],
+   "distribution": {
+    "modes": [
+     "THE ORDERERS — plans, structures, things set to rights.",
+     "THE REGISTRARS — ledgers, charters, the recorded claim."
+    ],
+    "tail": {
+     "name": "THE FIXERS",
+     "what": "Order imposed on people. The Fixers bind a person's possibilities down until only the approved ones remain — a life made reliable, from outside, without asking."
+    }
+   }
+  },
+  {
+   "name": "The Mason",
+   "axis": "concrete ↔ abstract",
+   "pole": "concrete",
+   "home": "the Given Land",
+   "oneLine": "The real is what you can touch, weigh, and set. Everything else is a claim awaiting proof.",
+   "theCraft": "Thingcraft: material read by hand, structures set so they stay, and a flat refusal to grant abstraction any purchase on the real.",
+   "atCreation": "Know a thing's true weight, material, soundness, and worth by touch — no lie of appearance survives your hand. Find the gap that is in every wall.",
+   "withMastery": "The keystone blow, and where there is no keystone, one manufactured. Whole structures unmade back to raw material. And in your presence, illusion and symbol-working simply fail: the thing is what it is.",
+   "theTrade": "The Masons' great blindness is that some things genuinely are not reducible to a touchable fact. The tradition is not good at admitting this.",
+   "whoPractices": "The Given Land's builders, and skeptics everywhere.",
+   "acrossTheAxis": "Formcraft holds that matter is the coarse residue of pattern. The Mason's Denial defeats it outright, which is exactly why Figurists find Masons so tiresome.",
+   "id": "mason",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "deceive",
+    "foresee",
+    "heal",
+    "make",
+    "mend",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "summon",
+    "sustain",
+    "track",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE BUILDERS — stone, structure, the sound repair.",
+     "THE PLAIN-SPEAKERS — reduction of the abstract to what can be touched."
+    ],
+    "tail": {
+     "name": "THE LEVELLERS",
+     "what": "Reduction as cruelty. The Levellers take a person's meaning apart to its physical basis in front of them — a faith, a grief, a vow — and leave them standing in a world where nothing means anything."
+    }
+   }
+  },
+  {
+   "name": "The Figurist",
+   "axis": "concrete ↔ abstract",
+   "pole": "abstract",
+   "home": "the Pattern Reach",
+   "oneLine": "Pattern is the finer layer of the real. Draw the figure truly and the world briefly consents to match it.",
+   "theCraft": "Formcraft: seeing what a thing is an instance OF, then making symbols that act — marks that do in the world what they mean.",
+   "atCreation": "See the pattern behind the fact. Read a set of particulars and name the form they instance.",
+   "withMastery": "A standing figure that holds a room to its pattern as long as the mark is undefaced. A figure sent walking with an errand and enough form to run it. And the true name — a handle on a thing's very being, which is also a handle it has on you.",
+   "theTrade": "It needs the touchable to be secondary, so a Mason present ruins everything. A false or sloppy figure binds nothing and warns the thing you tried.",
+   "whoPractices": "{{region:the_pattern_reach}}, the Lattice courts, and the Cathedral's more dangerous scholars.",
+   "acrossTheAxis": "Mason and Figurist are the same argument conducted for centuries. Neither has won and both are correct.",
+   "id": "figurist",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "deceive",
+    "foresee",
+    "heal",
+    "make",
+    "mend",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "summon",
+    "sustain",
+    "track",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE PATTERN-READERS — form seen, named, restored.",
+     "THE MARK-MAKERS — figures that act; wards and bindings drawn."
+    ],
+    "tail": {
+     "name": "THE SHAPERS",
+     "what": "Binding a person to a figure. The Shapers set a form onto someone and hold them to it — a role they cannot step out of, drawn on a wall somewhere they will never find."
+    }
+   }
+  },
+  {
+   "name": "Umbracraft",
+   "axis": "dark ↔ light",
+   "pole": "dark",
+   "home": "the Umbral Depths",
+   "oneLine": "Sight without light, and sanctuary for what the light would destroy. Not evil — hidden, which is a different thing.",
+   "theCraft": "The dark-pole mastery: concealment past a knowing searcher, true sight in lightlessness, shadow worked as a material, and the harboring of what should not be exposed.",
+   "atCreation": "See clearly where there is nothing to see by. Wrap yourself and a small space in concealment. Put out a lamp at distance.",
+   "withMastery": "Shadow commanded at scale — a caravan, a rite, a rebellion hidden. Sanctuary the Blaze cannot breach. And the shadow road: league upon league between distant darks, arriving where no light has been.",
+   "theTrade": "Unshadow undoes it, and a Blazeborn at full radiance undoes it everywhere at once. The craft protects and hides; it does not win a direct exchange with someone who can simply make the room bright.",
+   "whoPractices": "The Umbral Depths, the sheltered, and everyone who has needed to not be found.",
+   "acrossTheAxis": "The umbral and the blazeborn are exact mirrors — each has an ability that makes their extreme into food, a healing that works only in their medium, and a road that runs on their element. They are the same person raised in opposite places.",
+   "id": "umbral",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "conceal",
+    "deceive",
+    "heal",
+    "hinder",
+    "make",
+    "mend",
+    "move",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "track",
+    "transform",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE HARBOR — concealment as shelter; hiding people who need hiding.",
+     "THE QUIET HANDS — smuggling, movement, the unseen trade."
+    ],
+    "tail": {
+     "name": "THE SMOTHERERS",
+     "what": "Shadow poured into a mouth. The Smotherers use concealment ON a person rather than around them — hide their breath, their sight, their name — and what is left is a body nobody can find, walking."
+    }
+   },
+   "_thePeople_20260829": {
+    "_why": "⛔ ERIK 2026-08-29: 'these traditions are somewhat ONE DIMENSIONAL. Harboring what the light would destroy does not define a people of the dark — that's ONE THING. Just like death is not just grey. HOW DO THESE PEOPLE CELEBRATE, HUNT, FUCK, TRAVEL, FIGHT?' ⚠️ I had been auditing crafts against a CRISIS LINE and calling it a culture. Written from what the corpus already holds, not invented over it.",
+    "theCity": "⛔ THE UMBRAL DEPTHS ARE A CITY, and `region_maps` is exact about it: 'a city in the dark, AND THE DARK IS NOT THE ABSENCE OF THE CITY — IT IS THE MATERIAL IT IS BUILT IN.' ⚠️ Sunless underworlds lit by LIVING GLOW. They are not cave-dwellers hiding; they are urban, and the deep is downtown.",
+    "howTheySee": "⚠️ EVERYTHING FELT, NOT SEEN — the authored aesthetic. ⛔ THE SOCIAL CONSEQUENCE NOBODY HAS WRITTEN DOWN: a people who navigate by touch, echo and air-movement stand CLOSE. Conversation happens within arm's reach. An Umbral in a lit city reads as forward, and a lit-city person reads to them as standing rudely far away and shouting.",
+    "howTheyCelebrate": "⛔ BY THE MOON, AND IT IS THE ONLY CALENDAR THAT MATTERS. `nexuses` proposes a 28-day cycle where NEW moon gives Umbral crafts +2 and FULL gives them −2. ⚠️ SO A NEW MOON IS A FESTIVAL AND A FULL MOON IS A FAST — the deep is loud at new and shuttered at full. ⛔ ERIK'S OWN LINE: 'AN UMBRAL PLANS RAIDS BY THE CALENDAR AND A BLAZEBORN DOES NOT HAVE TO, which tells you something true about both.' A people whose power has a tide organise their whole year around it, and the Blazeborn find that superstitious.",
+    "howTheyHunt": "⚠️ THE DEEP HAS LIVING GLOW, SO IT HAS LIVING THINGS. ⛔ They hunt by `felt_room` and patience — know the space entire, know where the thing is, and wait in a place it must pass. **The kill is unremarkable; the SITTING is the craft.** ⚠️ An Umbral hunter finds surface-hunting absurdly wasteful: all that running.",
+    "howTheyLove": "⛔ CLOSE, QUIET, AND WITHOUT DISPLAY — in a culture where everything is felt rather than seen, a public gesture communicates nothing and is not made. ⚠️ Courtship is conducted at conversational distance in the dark and reads to outsiders as either intimacy or conspiracy, with no way to tell. ⛔ AND PRIVACY IS NOT THE POINT: in a city built of dark, being unseen is the default, so what is intimate is being KNOWN — recognised by step, by breath, by the shape you make in a room. **The Umbral endearment is 'I would know you in the dark', and it is literal.**",
+    "howTheyTravel": "⛔ THE SHADOW ROAD — already authored in `withMastery`: 'league upon league between darks.' ⚠️ AND `Dusklow` IS KEPT DELIBERATELY LOW as a lattice SINK (`precursor_lines`), which means THE UMBRALS MAINTAIN INFRASTRUCTURE — they are not scavengers in someone else's ruin. ⛔ Surface travel is done at night, in stages, between known darks, and a party that insists on daylight marching is humoured the way you humour a guest.",
+    "howTheyFight": "⛔ THEY DO NOT HOLD LINES. Nothing in the tradition wards a formation or steadies a rank — the crafts are `conceal` eleven times over. ⚠️ AN UMBRAL WAR IS ATTRITION FROM THE DARK: supply cut, sentries gone, the same six people appearing at the fourth watch for nine nights. ⛔ AND `stopped_breath` — THE SMOTHERERS' CRAFT — is what that becomes at the top: concealment turned inward until a person's breath is hidden from them. ⚠️ **It is the tradition's only lethal craft and it kills without a mark, which is the whole argument about them.**",
+    "theftAndMurderAsTRADES": "⛔ ERIK: 'of all the peoples it seems like a GREAT ONE TO BE A THIEF OR ASSASSIN IN.' ⚠️ AND THE ECONOMY FILE ALREADY IMPLIES THE FIRST: worked light is a DEAD LIST ENTRY in the Depths and trying to sell it 'reads as an insult or a threat' — **the only socially dangerous trade good in the world.** ⛔ SO THEFT HERE IS NOT PETTY: in a city where nothing is displayed, VALUE IS KNOWN RATHER THAN SEEN, and a thief must be told what exists before they can take it. **That makes the Umbral thief an INFORMATION trade before it is a hands trade**, and it makes receiving stolen goods the more prestigious half. ⚠️ AND THE ASSASSIN IS THE SMOTHERER: `stopped_breath` is L4 and named for a profession, which is the tradition admitting what it is for.",
+    "whatTheyAreNOT": "⛔ NOT EVIL AND NOT SNEAKS — `tradition_profiles` says it first: 'not evil — HIDDEN, which is a different thing.' ⚠️ AND NOT INNOCENT EITHER: the Reach's crisis line is 'the Underlight harbors what the light would destroy, INCLUDING THINGS THAT SHOULD PERHAPS BE DESTROYED. Neither pole is innocent.' ⛔ A people who will not give someone up are admirable exactly as often as they are dangerous, and they do not distinguish.",
+    "theOneTableWithABLAZEBORN": "⚠️ `local_layouts`: 'AN UMBRAL AND A BLAZEBORN DRINK AT THE SAME TABLE BECAUSE NEITHER HAS THE STANDING TO MAKE THE OTHER LEAVE. The most important furniture in the world.' ⛔ Worth remembering when authoring either: the antipodes MEET, constantly, and the meeting is ordinary."
+   }
+  },
+  {
+   "name": "Radiance",
+   "axis": "dark ↔ light",
+   "pole": "light",
+   "home": "the Radiant Wastes",
+   "oneLine": "Revelation as a moral position, and a beam that ends what should not continue.",
+   "theCraft": "The light-pole mastery: exposure that strips every concealment at once, light worked as material, and the full blaze — which is where the tradition stops being about seeing.",
+   "atCreation": "Throw light that shows things as they are — no illusion, no disguise, no shadow holds. A focused beam that can burn or blind.",
+   "withMastery": "A whole deception undone at once, a hidden thing dragged into the light before a people, and a beam that ends the unendurable. Declarations made in full blaze that those who witnessed cannot pretend they did not see.",
+   "theTrade": "You are always visible, and revelation does not discriminate — it exposes allies, and it exposes you. A truth burned free cannot be put back.",
+   "whoPractices": "The Radiant Wastes, where intense light is home rather than hazard.",
+   "acrossTheAxis": "Umbracraft harbors; Radiance exposes. The Blazeborn believe what survives being seen is what deserved to. The Umbral know exactly who that argument has historically been used against.",
+   "id": "blazeborn",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "conceal",
+    "deceive",
+    "heal",
+    "hinder",
+    "make",
+    "mend",
+    "move",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "track",
+    "transform",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE KINDLERS — fire tended, carried, given. Hearth and forge and signal.",
+     "THE BURNING — revelation by flame: what is false in a thing burns off first."
+    ],
+    "tail": {
+     "name": "THE ASSAYERS",
+     "what": "They burn people to find out what they are. It works. The Assayers argue that anyone with nothing false in them survives it, and they are not entirely wrong, which is the horror."
+    }
+   }
+  },
+  {
+   "id": "descent",
+   "name": "The Descent",
+   "axis": "demonic ↔ angelic",
+   "pole": "demonic",
+   "home": "The Descent, and the Abyssal Choir",
+   "oneLine": "Appetite named out loud. The Abyssals bargain fairly — that is the horror, not the safety.",
+   "theCraft": "The demonic-pole mastery refuses to pretend that want is not the engine. A practitioner of the Descent names what a person actually wants, states the true price of it, and strikes bargains where both sides get what they wanted and both sides pay what it cost.",
+   "atCreation": "Feel what someone actually wants beneath what they are asking for. Name a thing's true cost to the person who wants it — they may still take it.",
+   "withMastery": "Descending into a person, a place, or an institution and surfacing with its true engine, however it dresses. A price that BINDS once named and accepted. And calling a form up from the deep that holds, acts, and is yours to direct — not docile, but yours.",
+   "theTrade": "It catches only what already wanted the bargain; a body with nothing owed offers nothing to hook. Every covenant runs both directions. And The Consumed Wound does not heal — the abyss eats what you give it, and what it ate does not come back either.",
+   "whoPractices": "The Abyssal Choir, and everyone who has decided that honesty about hunger beats piety about it.",
+   "acrossTheAxis": "The Ascent weighs what a person has done; the Descent names what they want. Both see through you completely. Only one of them offers you a deal.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "empower",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "summon",
+    "sustain",
+    "transform",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE MARKET — bargains struck honestly, priced exactly, collected without exception.",
+     "THE HOLLOW — appetite-work as diagnosis: name what a person actually wants."
+    ],
+    "tail": {
+     "name": "THE MAW",
+     "what": "⚠️ COMPULSION. A bargain a person did not agree to, priced against something they cannot refuse — a child, a name, a breath. The Maw does not need consent; it needs LEVERAGE, and it is very good at finding some. Anyone who says the abyss cannot compel has met only its traders."
+    },
+    "note": "ERIK'S EXAMPLE. The polite abyssal is real and common — most are traders. But a demonic tradition that CANNOT compel is a contradiction a player would rightly reject."
+   }
+  },
+  {
+   "id": "ascent",
+   "name": "The Ascent",
+   "axis": "demonic ↔ angelic",
+   "pole": "angelic",
+   "home": "The Ascent, and the Seraphic Orders",
+   "oneLine": "Mercy and judgment from the same mouth. The Orders are loved and feared for exactly the same reason.",
+   "theCraft": "The angelic-pole mastery sees moral weight directly — what a person has done, what it cost others, what they are still carrying — and can either lift it or pronounce on it. Both are real. Neither is gentle.",
+   "atCreation": "See roughly what someone carries: the harm done, the harm borne. Ward one person from one harm with a spoken certainty.",
+   "withMastery": "A genuine absolution — a weight lifted, and they feel it leave. A judgment that binds because everyone present knows it is true. And a ward that keeps standing after you have gone.",
+   "theTrade": "Weighing anyone at any distance without their knowledge is a power the Orders have never satisfactorily justified. Judgment that binds cannot be taken back, and absolution given wrongly is still given.",
+   "whoPractices": "The Seraphic Orders, continuous with the pre-Transition world in a way almost nothing else is.",
+   "acrossTheAxis": "The Descent's Appetite Strike hits what a person has been protecting by not naming it. The Ascent's Measuring Eye simply reads what they did. Neither pole allows anyone to remain unexamined.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "empower",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "summon",
+    "sustain",
+    "transform",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE ORDERS — adjudication, charter, standing. The visible face and the bulk of them.",
+     "THE VESSEL-KEEPERS — continuity work; the long-lived, and how they stay that way."
+    ],
+    "tail": {
+     "name": "THE SENTENCE",
+     "what": "Judgement pronounced on someone who did not consent to be weighed, binding regardless of truth. The Sentence does not care to be right — ascent's own bound says the judgment binds anyway, and they treat that as a feature."
+    }
+   }
+  },
+  {
+   "id": "unmaker",
+   "name": "Ruinwork",
+   "axis": "destruction ↔ creation",
+   "pole": "destruction",
+   "home": "The Unmade",
+   "oneLine": "Ending things well is a craft. Not violence — demolition, with an ethic.",
+   "theCraft": "The Unmakers hold that things end whether or not anyone is skilled about it, and that the skill matters. Ruinwork finds where a thing WANTS to break, takes it apart exactly there, and leaves what comes after unpoisoned by how it went.",
+   "atCreation": "See where a structure, plan, or relationship is under stress and where it will give. Find the one piece whose failure brings the rest down.",
+   "withMastery": "Ending a building, an institution, a life's work, or a war so that what it was is honored. Unmaking a thing meant to be permanent. And returning something complex to the state before it became that specific thing, so the way is clear.",
+   "theTrade": "It cannot touch the living or the truly singular, and it does not un-break. Some things were sealed for reasons you learn only after. And un-done is still gone — cleanness is not the same as no loss.",
+   "whoPractices": "The Unmade, and every demolitionist, liquidator, and person who has had to end something properly.",
+   "acrossTheAxis": "The Wright raises; the Unmaker ends. They are the same eye for structure pointed opposite ways, and each is the other's best consultant.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "empower",
+    "foresee",
+    "hinder",
+    "make",
+    "mend",
+    "open",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "transform",
+    "travel"
+   ],
+   "distribution": {
+    "modes": [
+     "THE ENDERS-WELL — clean endings, honoured; ruin that respects what it ruins.",
+     "THE CLEARERS — removal work, demolition, rot halted."
+    ],
+    "tail": {
+     "name": "THE LAST ONES",
+     "what": "Ending as appetite. The Last Ones no longer require that a thing SHOULD end — the fault is enough, and everything has a fault."
+    }
+   }
+  },
+  {
+   "id": "wright",
+   "name": "Makecraft",
+   "axis": "destruction ↔ creation",
+   "pole": "creation",
+   "home": "The Making",
+   "oneLine": "Raise things faster and better than anyone should be able to — and sometimes leave them deliberately unfinished, so they keep going.",
+   "theCraft": "The creation-pole mastery: making at speed and at scale, out of whatever is to hand, improved in the making rather than merely replicated.",
+   "atCreation": "Make something real and functional, quickly — a bridge, a shelter, a tool, a wall — from what is here, and it will hold long enough to matter.",
+   "withMastery": "Work that outlasts you and gets used by people who never learn your name. A masterwork that gathers a lifetime into one teaching thing. And the strange gift at the top of Makecraft: a thing left deliberately incomplete, which KEEPS MAKING ITSELF.",
+   "theTrade": "Making truly costs time and care, and cannot be hurried without ceasing to be true. A masterwork can be made once. And a thing built to outlast you will — with everything that carries.",
+   "whoPractices": "The Making, the Wrights, and the Enginewrights who took it to world-scale.",
+   "acrossTheAxis": "Both poles read structure to its load-bearing truth. The Wright uses that to raise; the Unmaker to end. Riding the line between them is its own discipline.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "empower",
+    "foresee",
+    "hinder",
+    "make",
+    "mend",
+    "open",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "transform",
+    "travel"
+   ],
+   "distribution": {
+    "modes": [
+     "THE MAKERS — building, mending, the raised thing.",
+     "THE IMPROVERS — making a thing better than it was."
+    ],
+    "tail": {
+     "name": "THE FORGE-ETERNAL",
+     "what": "Making that does not stop. The Forge-Eternal improve what nobody asked them to improve, including people, and cannot be argued out of it."
+    }
+   }
+  },
+  {
+   "id": "pathos",
+   "name": "Pathos",
+   "axis": "emotional ↔ logical",
+   "pole": "emotional",
+   "home": "The Feeling Coast",
+   "oneLine": "Feeling as force. Not manipulation — you make what is actually there undeniable, including when it is yours.",
+   "theCraft": "The emotional-pole tradition works with what a room genuinely feels rather than what it performs. A Pathos adept halves a grief by sharing it, carries someone through what they cannot bear alone, and can move a crowd by the simple truth of what everyone in it already feels.",
+   "atCreation": "Feel the true emotional state of a person or a room beneath the display. Share a feeling so it eases — a grief halved, a fear steadied.",
+   "withMastery": "Feeling at the scale of peoples: a mob turned, a mourning-crowd held, a heart reached that no reason could get to. Laments that let a whole settlement finish a grief together, and names kept so the lost are attended rather than absent.",
+   "theTrade": "You carry what you move, for as long as it stays moved. The Threnodists' work lands the whole of a grief on the singer to give it. And the Grief-Strike is the same gift pointed at someone: it opens what they were keeping shut in order to stay functional.",
+   "whoPractices": "The Feeling Coast, the Threnodists, and the mourning-singers who go where a loss is too large to carry alone.",
+   "acrossTheAxis": "Logos proves; Pathos reaches. Each pole can do something to a person the other cannot, and both of them can take someone apart.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "empower",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "mend",
+    "move",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "track",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE CARRIERS — grief shared, feeling held for others.",
+     "THE LAMENT — public mourning-work; a people's feeling given shape."
+    ],
+    "tail": {
+     "name": "THE HEART-TUNERS",
+     "what": "Feeling installed. The Tuners of the heart do not read and share — they SET. Grief where there was none, love where there was none, and the person will defend it as their own because it is now."
+    }
+   }
+  },
+  {
+   "id": "logos",
+   "name": "Logos",
+   "axis": "emotional ↔ logical",
+   "pole": "logical",
+   "home": "The Reasoned Hold",
+   "oneLine": "Argument as an instrument. What follows, follows — and at the top of the craft that is a thing you can do to someone.",
+   "theCraft": "The logical-pole tradition builds arguments that compel the reasonable, exposes contradictions that cannot be unseen, and constructs systems that run on the soundness of their own reasoning without anyone enforcing them.",
+   "atCreation": "Build an argument that holds. Expose a contradiction so it cannot be unseen. Deduce a hidden fact from what is present.",
+   "withMastery": "A proof no honest mind can deny. A conclusion a whole body is walked into together, binding against later private doubt. Institutions that run at scale without you because the reasoning inside them is correct.",
+   "theTrade": "It proves only what is true — there is no proof of a falsehood, only a forgery the next sound mind unpicks. It fails entirely against anyone who will simply refuse a true conclusion. And to be irrefutably right is a lonely country.",
+   "whoPractices": "The Reasoned Hold, the Syllogists, and the courts and schools that grew up around them.",
+   "acrossTheAxis": "A Syllogist and a Threnodist looking at the same grieving person see two true things and disagree about which one to act on.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "empower",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "mend",
+    "move",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "track",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE ARGUERS — proof, adjudication, the settled case.",
+     "THE BUILDERS — systems that run on their own logic."
+    ],
+    "tail": {
+     "name": "THE CORNERS",
+     "what": "Argument as a weapon against a mind. The Corners walk someone to a conclusion that destroys them and call it honest, because every step was."
+    }
+   }
+  },
+  {
+   "id": "veilwright",
+   "name": "Falsecraft",
+   "axis": "falsehood ↔ truth",
+   "pole": "falsehood",
+   "home": "{{region:the_veiled_reach}}",
+   "oneLine": "A fiction built well enough to function. The Veilwrights' first skill is spotting one, because they know the joinery.",
+   "theCraft": "Falsecraft builds untruths that hold under scrutiny — disguises, false histories, illusions that persist unwatched — and unbuilds other people's. A practitioner sees construction, which is why the tradition's best liars are also its best detectors.",
+   "atCreation": "Craft a convincing illusion or disguise. Tell a lie built well enough to hold. And spot a constructed untruth, because you know how one is made.",
+   "withMastery": "A deception a whole people believes. A veil set and abandoned that is now a feature of the place. A false reality someone OPERATES inside, making correct decisions against a picture you supplied. And the Useful Lie — a fiction so complete it is functionally true while it goes unexamined.",
+   "theTrade": "It holds only while unexamined; a necessary fiction meets a determined truth and loses, always, eventually. Verity undoes it directly. And the gravest risk is to the maker: tell a lie well enough and you may forget it was one.",
+   "whoPractices": "{{region:the_veiled_reach}}, and everyone who has needed a story that lets people keep going.",
+   "acrossTheAxis": "The Better Story sits exactly on the line — a reframing that heals and is ALSO true. Both poles claim it, and neither is wrong.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "conceal",
+    "deceive",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "transform",
+    "travel"
+   ],
+   "distribution": {
+    "modes": [
+     "THE STORYTELLERS — reframing, the better story, the useful cover.",
+     "THE FALSEWRIGHTS — constructed realities, covers that hold under scrutiny."
+    ],
+    "tail": {
+     "name": "THE NAME-TAKERS",
+     "what": "Identity theft as erasure. The Name-Takers do not borrow a life, they REPLACE one, and hold the false version until the original cannot get it back."
+    }
+   }
+  },
+  {
+   "id": "verist",
+   "name": "Verity",
+   "axis": "falsehood ↔ truth",
+   "pole": "truth",
+   "home": "The Reach of the plain word",
+   "oneLine": "See what is so, say it plainly, and let it land. The lonely craft — being right is not the same as being welcome.",
+   "theCraft": "Verity sees through illusion and the ordinary lie, strips deception bare in front of others, and speaks truths that cannot be quietly taken back. At its height it establishes facts in the record of the real.",
+   "atCreation": "See through illusion, disguise, and the ordinary lie. Know when a spoken thing is false. Speak a plain truth others cannot easily deny.",
+   "withMastery": "A deception undone before a whole people. A buried thing dragged into day. A word spoken so truly it cannot be unsaid — and the Whole Truth, which cracks even a lie built entirely from true pieces.",
+   "theTrade": "It cannot spare what it reveals, and it does not choose whose secret surfaces. You learn things you cannot unlearn, and the powerful will kill to keep some truths buried. Revealing is not compelling — you can be completely right and change nothing.",
+   "whoPractices": "Verists, investigators, and the Cathedral of Convincing's opponents — who need them precisely because the Cathedral lies with true pieces.",
+   "acrossTheAxis": "Falsecraft asks what a person can carry; Verity asks what is so. The Veilwrights think that is cruelty and the Verists think the alternative is contempt.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "conceal",
+    "deceive",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "transform",
+    "travel"
+   ],
+   "distribution": {
+    "modes": [
+     "THE WITNESSES — attestation, the established fact.",
+     "THE PLAIN — austere truth-telling as a way of living."
+    ],
+    "tail": {
+     "name": "THE STRIPPERS",
+     "what": "Truth as a weapon. The Strippers unmask people for what it costs them, selecting targets by what the revelation will break. Verity cannot tell whether an unmasking does more harm than the lie — they can, and choose the ones that do."
+    }
+   }
+  },
+  {
+   "id": "enginewright",
+   "name": "Enginecraft",
+   "axis": "mechanical ↔ spiritual",
+   "pole": "mechanical",
+   "home": "The Gearlands",
+   "oneLine": "Mechanism as a language you speak. The Precursor doors that still half-listen, listen to you.",
+   "theCraft": "Enginecraft reads a mechanism's design and purpose on sight, builds reliable machines, and commands machine-systems to reconfigure toward an intent. Alone among the traditions it can run Precursor systems that Latticespeak could only knock on.",
+   "atCreation": "Understand a device or machine-system's function and flaws at a glance. Fix a broken tool or machine reliably. Make a device do something within its mechanism it was never set to do.",
+   "withMastery": "Machine-country commanded — a whole Precursor installation bent toward a purpose, a mechanical site woken or stilled at scale. And the Deep Works: a mechanism or edifice at the scale the dwarven-mechanical peoples are named for, which changes the maker in the building of it.",
+   "theTrade": "It needs a mechanism to talk to; the grown, the wild, and the genuinely novel offer it no purchase. A Deep Work demands a season of yourself and is permanent — the world now has this thing, whatever it turns out to mean.",
+   "whoPractices": "The Gearlands, the Enginewrights, and the Deep Works' dwarven-mechanical peoples.",
+   "acrossTheAxis": "Enginecraft asks what a thing DOES; Numenwork asks what it MEANS. What Sleeps Under is the deep peak of this axis, and neither pole is comfortable about it.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "empower",
+    "heal",
+    "hinder",
+    "make",
+    "mend",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "summon",
+    "sustain",
+    "track",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE MECHANISTS — machines read, mended, commanded.",
+     "THE DEEP-WORKERS — precursor mechanism, great works."
+    ],
+    "tail": {
+     "name": "THE COIL",
+     "what": "Mechanism turned on the living. The Halvex line treats a body as a device with a directive, and edits it. Halvex Coil began exactly here and did not stop."
+    }
+   }
+  },
+  {
+   "id": "numen",
+   "name": "Numenwork",
+   "axis": "mechanical ↔ spiritual",
+   "pole": "spiritual",
+   "home": "The Numinous Reach",
+   "oneLine": "Attention as a force. Attend to something completely enough and the material softens around what it means.",
+   "theCraft": "Numenwork perceives the meaning-layer directly — where the world is thin, where something is pressing back — and where significance is dense enough, makes it briefly literal. Its highest form is attention that HOLDS: keeping open, by significance alone, something that was closing.",
+   "atCreation": "Feel the significance-density of a place or moment and know where the world is thin. Steady a person in crisis through presence alone.",
+   "withMastery": "A thin place opened in a room that had no reason to be sacred. A symbol made briefly real, a threshold held open long enough for others to pass. And a foreclosing thing kept open by nothing but sustained attention.",
+   "theTrade": "Nearly all of it needs meaning already present — Numenwork concentrates significance, it rarely manufactures it from nothing. And the Dimmed Meaning is the same craft inverted: drain what made a thing matter and those who relied on it lose their orientation entirely.",
+   "whoPractices": "The Numinous Reach, and those who have attended to one thing long enough that it started attending back.",
+   "acrossTheAxis": "The Enginewright repairs what is broken; the Numen holds open what is closing. Both are refusals to let a thing end badly.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "empower",
+    "heal",
+    "hinder",
+    "make",
+    "mend",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "summon",
+    "sustain",
+    "track",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE ATTENDERS — attention as steadying; meaning held open.",
+     "THE THRESHOLD-KEEPERS — thin places, the sacred and the charged."
+    ],
+    "tail": {
+     "name": "THE DIMMERS",
+     "what": "Meaning withdrawn. The Dimmers take significance out of a person's life — their work, their people, their reasons — and leave them functional and empty. It is the quietest atrocity in the Valley."
+    }
+   }
+  },
+  {
+   "id": "horizon",
+   "name": "Spanwork",
+   "axis": "space ↔ time",
+   "pole": "space",
+   "home": "The Horizon Reach",
+   "oneLine": "Distance is a claim, not a fact. Argue with it long enough and it gives.",
+   "theCraft": "The space-pole tradition treats ground as negotiable — covering it far past what a body should, closing a distance you can see without crossing the between, and finding the crossing the land insists is not there.",
+   "atCreation": "Never be lost: your bearing, your distance, and the shape of the way ahead. Cover ground far past what a body should — a day's march in an hour, tirelessly.",
+   "withMastery": "Distance stops being an obstacle for you and those you carry. A crossing made where the land calls itself uncrossable. And the Edge of the Map — the step past the known world entirely, where arriving is what calls the new place into being.",
+   "theTrade": "Beyond the map the destination is unfixed until you make it, so you cannot know what you are stepping into, and there is no quick way back. Horizon-walkers are famously bad at staying.",
+   "whoPractices": "The Horizon Reach, its scouts, its couriers, and everyone who left.",
+   "acrossTheAxis": "Both poles refuse a limit everyone else accepts. The Horizon-walker refuses distance; the Hourkeeper refuses duration.",
+   "functionCoverage": [
+    "bind",
+    "command",
+    "empower",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "track",
+    "transform",
+    "travel"
+   ],
+   "distribution": {
+    "modes": [
+     "THE WALKERS — routes, distance, the road known.",
+     "THE SPANNERS — folding distance; arrival without crossing."
+    ],
+    "tail": {
+     "name": "THE LEAVERS",
+     "what": "Abandonment as method. The Leavers strand people — take a party into the far country and fold out, or close a route behind a village. Distance is a weapon if you own it."
+    }
+   }
+  },
+  {
+   "id": "hourkeeper",
+   "name": "Hourcraft",
+   "axis": "space ↔ time",
+   "pole": "time",
+   "home": "The Kept Hours",
+   "oneLine": "Duration is workable. Hold a moment open, stretch it, spend it — or bend how long something takes.",
+   "theCraft": "The time-pole tradition perceives a moment whole while it is still happening, slows duration to make room inside it, and at its height remembers forward — an hour that has not happened arriving with a memory's specificity and a memory's unreliability.",
+   "atCreation": "Know exactly how long since a thing happened and how long until a thing due will come. Hold a moment exactly — perceive it whole, at length, while it is still occurring.",
+   "withMastery": "An hour held open past its passing for what must be finished inside it. One possible future traced to its very end. And the Shaped Duration, which bends how long any running process takes — including the ones running inside a person.",
+   "theTrade": "Foreseeing binds: what you have seen changes how you act, and acting changes the future you saw. And the Hourkeepers are honest that the Shaped Duration is the ugliest thing they teach, precisely because it never has to touch anyone.",
+   "whoPractices": "The Kept Hours, its archivists, and the ones who sit with the dying because they can tell how long.",
+   "acrossTheAxis": "Space says the far place is a place you may be. Time says the moment is longer than it looks. Both are arguments with a limit, and both eventually win.",
+   "functionCoverage": [
+    "bind",
+    "command",
+    "empower",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "track",
+    "transform",
+    "travel"
+   ],
+   "distribution": {
+    "modes": [
+     "THE KEEPERS — duration read, patience held, time given.",
+     "THE WATCHERS — vigil-work, the long hold."
+    ],
+    "tail": {
+     "name": "THE HOUR-THIEVES",
+     "what": "Time taken. The Hour-Thieves stretch a person's worst moment until it breaks them, or spend someone's remaining hours on their own work. An hour is a thing, and things can be stolen."
+    }
+   }
+  },
+  {
+   "id": "marcher",
+   "name": "The Marcher",
+   "axis": "violence ↔ peace",
+   "pole": "violence",
+   "home": "The Riven Marches and the Redline",
+   "oneLine": "Force done correctly, under forms, with the whole cost visible. Not brutality — competence about the worst thing.",
+   "theCraft": "The violence-pole tradition holds that force will be used whether or not anyone is skilled about it, and that skill is what separates a fight that ends from a fight that spreads. Marchers read a fight before it takes shape, control ground, disarm rather than kill where the forms allow, and keep people alive inside it.",
+   "atCreation": "See a fight's shape and a foe's tell a beat early. Disarm or disable a single opponent without killing them. Improvise a usable weapon from whatever is at hand.",
+   "withMastery": "A whole field controlled, opponents standing where they did not choose to stand. A group kept fighting past what they should survive. And Last Form — a formal duel ended in one undeniable exchange, because you read them completely and answered perfectly.",
+   "theTrade": "The forms are real constraints: Last Form fails against a foe who refuses the duel or has no form to read, and killing where the forms forbid costs a Marcher their standing. Competence at violence does not make you right about when to use it.",
+   "whoPractices": "The Riven Marches, the Redline's dueling culture, and soldiers who lived long enough to get good.",
+   "acrossTheAxis": "Stillcraft ends fights by making them unnecessary; the Marcher ends them by being better at them. Both are trying to make the violence stop.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "empower",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "move",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE LINE — disciplined force; take the weapon rather than the life.",
+     "THE ROADWARDENS — protection work, escort, the toll roads."
+    ],
+    "tail": {
+     "name": "THE ENDERS",
+     "what": "Force without the discipline. The Enders kept the craft and dropped the restraint; a Marcher who has stopped asking why is the most dangerous ordinary thing in the Valley."
+    }
+   }
+  },
+  {
+   "id": "stillhold",
+   "name": "Stillcraft",
+   "axis": "violence ↔ peace",
+   "pole": "peace",
+   "home": "The Stillhold",
+   "oneLine": "Peace as an active craft, not an absence. Truces that hold, ground that stays neutral, and a hard edge of its own.",
+   "theCraft": "The peace-pole tradition halts conflicts before they break, reads what each side actually needs underneath what they demand, and binds truces to something both sides genuinely value so the peace outlasts the mood that made it.",
+   "atCreation": "De-escalate a tense moment before it turns. Read the true feeling in a gathering and find who is about to break the peace. Stand between two parties at the moment before harm.",
+   "withMastery": "Peace at the scale of peoples — a generational feud ended, a war stood down. Sanctuary woven into a place deeply enough to survive sustained pressure. And a peace bound so well that breaking it costs more than the war would, with both sides able to see that.",
+   "theTrade": "Stillcraft is slow and it needs both sides to have something they actually want. And it is not gentle: The Price Shown puts a reckoning in a person that they carry afterward and cannot unthink — an act of force performed by people who have chosen not to use any other kind.",
+   "whoPractices": "The Stillhold, its brokers, and the ones who walk into rooms nobody else will enter.",
+   "acrossTheAxis": "Both poles are honest that violence is coming. They disagree about whether the answer is to be excellent at it or to make it unnecessary — and the Marches and the Stillhold need each other more than either admits.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "empower",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "move",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE MEDIATORS — truce-broking, sanctuary, the held peace.",
+     "THE INTERPOSERS — standing between, with their own bodies."
+    ],
+    "tail": {
+     "name": "THE QUIETERS",
+     "what": "Peace enforced. The Quieters end a conflict by ending whoever will not stop — and they have a whole doctrine about how that is still peace-work. It is the calmest violence in the world."
+    }
+   }
+  },
+  {
+   "id": "vivimancer",
+   "name": "Vivimancy",
+   "axis": "death ↔ life",
+   "pole": "life",
+   "home": "The Quickwood and the Heartroot",
+   "oneLine": "Life at flood. Not gentle — growth is a force, and a Rootkin can point it.",
+   "theCraft": "The life-pole tradition speeds healing, coaxes growth, calls the living world to act, and at its height remakes a body toward health. Learned by travelling the Reach or training under Rootkin — not available at Valley creation.",
+   "atCreation": "Not offered at creation. Rootkin origins carry a seeded base; everyone else earns it in the Reach.",
+   "withMastery": "Mass healing and land quickened for a season. Life grafted into what was not alive — bone to wood, a heart to a stopped chest. And the Green Claim, which can turn a whole region hostile to someone you have named.",
+   "theTrade": "Higher tiers pull the wielder's own pole-intensity toward life, and that drift is tracked. The Green Claim is a condition rather than an attack — it cannot be called off quickly and does not distinguish finely between your target and whoever is walking beside them.",
+   "whoPractices": "The Quickwood, the Rootkin, the Heartroot's tenders.",
+   "acrossTheAxis": "Vivimancy and Palework are the same knowledge of the threshold approached from opposite sides. Both know exactly where it is.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "summon",
+    "sustain",
+    "track",
+    "transform",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE QUICKENERS — growth, healing, land brought back.",
+     "THE GRAFTERS — restoration past the ordinary; regrowing what was lost."
+    ],
+    "tail": {
+     "name": "THE BLOOM-WRIGHTS",
+     "what": "Life IMPOSED. The Bloom-Wrights force growth into a body that did not ask — tumours of healthy tissue, a limb that will not stop, a field that grows until it strangles itself. Life at flood does not know when to stop, and they use that on purpose."
+    }
+   }
+  },
+  {
+   "id": "palework",
+   "name": "Palework",
+   "axis": "death ↔ life",
+   "pole": "death",
+   "home": "The Palelands",
+   "oneLine": "The threshold understood, attended, and — at its worst — crossed on purpose for someone else.",
+   "theCraft": "The death-pole tradition moves where death has been, asks the dead what they knew, eases an ending that has already begun, and draws vitality out of the living. The Ashwardens hold that someone has to be competent at the end of things.",
+   "atCreation": "Not offered at creation. Ashwarden origins carry a seeded base; everyone else earns it in the Reach.",
+   "withMastery": "Passage through plague grounds and sealed necropolises unharmed. The dead giving up what they knew entire, what they wanted, and what they feared. The Last Gift, which eases a death already arriving. And Draw-Down, which takes a life into yourself.",
+   "theTrade": "Drift toward the death pole, tracked and eventually named. And Draw-Down at full rank has no partial version: what is drawn entirely down does not recover and leaves nothing anyone can grieve properly. The Ashwardens do not forbid it — they forbid teaching its highest rank to anyone who asked for it.",
+   "whoPractices": "The Palelands, the Ashwardens, and those who sit with the dying because someone must.",
+   "acrossTheAxis": "A Vivimancer refuses a death; a Palework attends one. The Reach's hardest teaching is that both are sometimes the merciful act, and the practitioner does not always get to know which.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "move",
+    "open",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "summon",
+    "sustain",
+    "track",
+    "transform",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE PALE READERS — diagnosis, plague-work, reading what killed a thing.",
+     "THE EASERS — granting endings to those already ending, at their asking."
+    ],
+    "tail": {
+     "name": "THE GRAVE-CALLERS",
+     "what": "⚠️ RAISING. The Grave-Callers hold a body past its ending and set it working — and they do not ask first. The tradition's polite half calls it obscene; the tradition's other half has been doing it for four hundred years in the Palelands where labour is short and the dead are many."
+    },
+    "note": "ERIK'S EXAMPLE. 'Death people don't raise' was my bias. They raise. Some of them do little else."
+   }
+  },
+  {
+   "id": "valley_craft",
+   "name": "Valley Craft",
+   "axis": "folk crafts — no pole",
+   "pole": "—",
+   "home": "The Valley itself",
+   "oneLine": "What Valley people actually know. Available to everyone at creation, and quietly the most useful list in the game.",
+   "theCraft": "Not a tradition and not a pole — the practical competences a life in the Valley produces. Tracking, herbs, repair, appraisal, riverwork, keeping a fire that people gather at. Each runs three ranks like anything else, and a rank-three Valley craft outperforms a rank-one anything.",
+   "atCreation": "All of it. This is the list every character can draw from regardless of origin, tradition, or gating — and for most Valley-born characters it is the whole starting kit.",
+   "withMastery": "A room's full inventory including the concealed. Any mechanism diagnosed by touch and sound, Precursor included. The valley's whole Precursor lattice perceived from any node. A camp kept three nights that becomes a named place on the map.",
+   "theTrade": "No craft here reaches past the Valley's own scale — these are competences, not powers, and they do not braid into combinations the way tradition abilities do. What they give instead is that they always work, cost nothing to hold, and never drift your coordinate.",
+   "whoPractices": "Everyone. Foresters, tinkers, midwives, ferrymen, hearth-keepers, and every character who ever needed to find water.",
+   "acrossTheAxis": "The traditions argue about the shape of the world. Valley Craft is what gets the party fed, dry, and pointed the right way while they do it.",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "conceal",
+    "deceive",
+    "foresee",
+    "heal",
+    "hinder",
+    "make",
+    "mend",
+    "move",
+    "open",
+    "reveal",
+    "strike",
+    "summon",
+    "sustain",
+    "track",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE VALLEYFOLK — the broad ordinary competence; hearth, trail, tinker, hunt.",
+     "THE OLD-ROADERS — precursor-adjacent folk craft; salvage and lattice-sense."
+    ],
+    "tail": {
+     "name": "THE PLAIN DANGEROUS",
+     "what": "Ordinary craft with nothing behind it. The ones who use hunters_strike on people and greenlore to poison, and who are much harder to see coming than any pole because they look like everyone."
+    }
+   }
+  }
+ ],
+ "distributionPrinciple": "⚠️ SNG-276 NORTH STAR (Erik 2026-08-03): 'ANYTHING IS ON THE TABLE. ANYTHING IS POSSIBLE.' A tradition is a DISTRIBUTION, not a center. Every profile's oneLine/theCraft/withMastery describe the MODE — how most practitioners use it, and the polite public face. That is real and it is most of them. But a people is not its median. `modes` names the shapes the bulk of the tradition takes; `tail` names what it looks like at the far end, where the same craft is turned to the thing the center will not do. THE TAIL IS NOT A VILLAIN CLASS — it is the same craft, same training, different answer to what it is FOR. One practitioner uses shatterpoint on walls; another uses it on chests. Both are Harmonics. AND THIS TIES TO SCHOOLS: a school is what you reach WITH; a mode/tail is what you reach FOR. CONSEQUENCE FOR BOUNDS: a craft's bounds state what it CANNOT REACH, never what a practitioner should not want. A bound that reads as manners is describing the mode and calling it the world."
 }

@@ -981,7 +981,16 @@
     "marginFloorPer": 0.04,
     "targets": 1,
     "note": "T-V capstone, damaging. Like cogitant's the_single_stroke, the highest marginFloorPer band: this craft IS the decisive read.",
-    "damageType": "physical"
+    "damageMix": [
+     {
+      "type": "physical",
+      "share": 0.7
+     },
+     {
+      "type": "feeling",
+      "share": 0.3
+     }
+    ]
    },
    "rankDeltas": [
     {
@@ -1016,7 +1025,8 @@
    "_powerSystemWas": "reach_violence_peace",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_typed_20260829": "⛔ `physical` — PHYSICS family. the duel capstone at 5d6 — one stroke, read completely, delivered exactly. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately.",
-   "_rungRuling_20260829": "⛔ ERIK 2026-08-29: 'LAST FORM IS LETHAL.' ⚠️ It was `damaging` — the duel capstone, 5d6, hitting harder than anything else in the tradition and glossed as less harmful than `edge`. ⛔ A stroke that ends a formal fight in one exchange ends it."
+   "_rungRuling_20260829": "⛔ ERIK 2026-08-29: 'LAST FORM IS LETHAL.' ⚠️ It was `damaging` — the duel capstone, 5d6, hitting harder than anything else in the tradition and glossed as less harmful than `edge`. ⛔ A stroke that ends a formal fight in one exchange ends it.",
+   "_intrinsicAdded_20260829": "⛔ ERIK 2026-08-29: 'higher level skills should ADD SOME INTRINSIC DAMAGE TYPES.' ⚠️ `physical` .7 + `feeling` .3. THE CRAFT ALREADY DESCRIBED IT: 'read a single opponent so completely and strike so precisely that a formal fight ends in one exchange — you have read them fully and answer perfectly, AND THE ANSWER STANDS.' ⛔ WHAT ENDS THE DUEL IS NOT ONLY THE STROKE — it is the arrival of certainty in someone who until that moment believed they had a chance, and that is `feeling`, INTRINSIC, which no armour answers. ⚠️ IT ALSO EXPLAINS WHY THE DUEL ENDS 'IN ONE EXCHANGE' RATHER THAN IN A DEATH: 30% of a Last Form lands where a shield cannot be put. ⛔ AUTHORING NOTE: my first attempt edited a DIFFERENT FILE'S copy — `last_form` lives in `reach_violence_peace.json`, and I loaded the file that merely contains other marcher crafts. Caught by verifying the mix live instead of trusting the write."
   },
   {
    "id": "soldiers_hand",

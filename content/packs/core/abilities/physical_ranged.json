@@ -1739,6 +1739,132 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-29. ⚠️ It answers a vulnerability the corpus had already RECORDED FROM PLAY — the Memory spear doing 0.00 against the unmoored choir — and it answers it in the tradition's own idiom: **a Marcher cannot change what a blade is, so they change what is on it.** ⛔ Deliberately L2, both because it is quartermastery rather than mastery and because moving `drawn_bow` and `whats_at_hand` to L3 left the rung thin."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "marcher",
+   "nativeOrCombination": "native",
+   "axes": {
+    "violence_peace": -0.85
+   },
+   "id": "the_known_name",
+   "name": "Known Name",
+   "levelReq": 4,
+   "energyCost": 8,
+   "attribute": "social",
+   "shape": "hobble",
+   "harmRung": "incapacitating",
+   "challengeTypes": [
+    "FIGHT",
+    "SOCIAL",
+    "DUEL"
+   ],
+   "operativeAxis": [
+    "damage",
+    "targets",
+    "conditions"
+   ],
+   "effectTags": [
+    "fear",
+    "standing",
+    "veteran"
+   ],
+   "functions": [
+    "hinder",
+    "provoke",
+    "strike"
+   ],
+   "description": "⛔ THEY HAVE HEARD OF YOU, AND IT COSTS THEM. Not a working and not a shout — the plain arithmetic a person does when they recognise the shape walking toward them and remember what was said about it. ⚠️ HANDS GO WRONG. Orders arrive late. The line is a half-step further back than the serjeant told it to be. ⛔ IT WORKS ONLY ON PEOPLE WHO KNOW WHAT YOU HAVE DONE, WHICH IS WHY THE MARCHERS TELL IT (`told_of`) AND WHY THEY ARE PARTICULAR ABOUT TELLING IT TRUE.",
+   "narrationHints": "Nobody says the name out loud. ⚠️ The front rank simply stops being a front rank, and the men in it could not tell you when they decided that.",
+   "notFor": "⛔ IT NEEDS THEM TO KNOW WHO YOU ARE — a stranger feels nothing at all, and this is the craft that makes standing into a weapon rather than a courtesy. ⚠️ AND IT REACHES ONLY WHAT CAN BE AFRAID: the raised, the driven, a mechanism and anything without a self are untouched, exactly as with `break_the_line`. ⛔ Nor does it compel — a frightened person who decides to come anyway comes, and some of the best ones do.",
+   "plainly": "A fight/social action. ⛔ ANYONE WHO KNOWS YOUR DEEDS TAKES 2d6 `feeling` AND FIGHTS WORSE while you are in front of them — no armour answers it. Rated 5, a group's worth, about four rounds. r2 reaches everyone who can see you and lasts the engagement; r3 a commander who knows you makes worse decisions, and the effect arrives with the report rather than with you. ⚠️ Only on those who know your name. Nothing that cannot fear.",
+   "intensity": {
+    "conserve": "one rank of them, briefly",
+    "surge": "⛔ LET THEM ALL SEE WHO IT IS; every one of them who knows the name takes it, and so does anyone of yours who has heard the worse stories"
+   },
+   "bounds": [
+    {
+     "text": "⛔ THEY MUST KNOW WHO YOU ARE. A stranger feels nothing — this is standing made into a weapon",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ ONLY WHAT CAN BE AFRAID. The raised, the driven and mechanisms are untouched",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT DOES NOT COMPEL — a frightened person who comes anyway comes, and the good ones do",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT WORKS ON WHAT WAS TOLD, NOT WHAT HAPPENED — a false story reaching them makes them afraid of the wrong thing",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "damageType": "feeling",
+    "duration": 4,
+    "targets": 6,
+    "scope": 2,
+    "crit": {
+     "success": "An entire section decides at once, without conferring, that this is somebody else's fight.",
+     "failure": "One of them has heard the story where you lost, and says so out loud."
+    },
+    "note": "hobble. ⛔ ERIK 2026-08-29: 'higher level skills should add some INTRINSIC damage types.' ⚠️ `feeling`, INTRINSIC FAMILY — the first non-physics harm the tradition has ever dealt, and no armour answers it. ⛔ AND IT BRAIDS THE TRADITION'S OWN CRAFTS: `told_of` moves standing, and THIS turns standing into damage — a Marcher who has been telling it true for years arrives already dangerous. ⚠️ Its blind spot is deliberately the same as `break_the_line`'s: neither touches a thing without a self, which is a real reason to send the raised against Marchers."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Known Name",
+     "functions": [
+      "hinder",
+      "provoke"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating",
+     "gainAxes": [],
+     "grants": "⛔ ANYONE FACING YOU WHO KNOWS YOUR DEEDS TAKES 2d6 `feeling` AND FIGHTS WORSE. ⚠️ No armour answers it, and nobody has to say anything.",
+     "cannot": "They must know you. ⛔ Nothing without a self. ⚠️ And it does not stop anyone who decides to come."
+    },
+    {
+     "rank": 2,
+     "name": "The Whole Field",
+     "functions": [
+      "hinder",
+      "provoke",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating",
+     "gainAxes": [
+      "targets",
+      "duration"
+     ],
+     "grants": "⛔ EVERYONE WHO CAN SEE YOU AND KNOWS THE NAME, FOR THE WHOLE ENGAGEMENT. ⚠️ This is why a known Marcher is placed where they can be SEEN rather than where they fight best.",
+     "cannot": "⚠️ Line of sight, and they must still know you. ⛔ Strangers keep coming normally."
+    },
+    {
+     "rank": 3,
+     "name": "Before You Arrive",
+     "functions": [
+      "hinder",
+      "provoke",
+      "strike"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating",
+     "gainAxes": [
+      "range",
+      "conditions"
+     ],
+     "grants": "⛔ A COMMANDER WHO KNOWS YOU MAKES WORSE DECISIONS — and it arrives with the REPORT rather than with you. ⚠️ Garrisons abandon posts you were never going to reach.",
+     "cannot": "⛔ IT IS STILL ONLY WHAT THEY BELIEVE. ⚠️ A commander who has met you and was unimpressed is immune, and will say so to everyone."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29. ⚠️ The tradition's first INTRINSIC harm, and it braids two crafts I authored earlier today: `told_of` moves standing, `who_falls_first` reads a group, and THIS makes the standing itself the weapon. ⛔ A high-level Marcher's most dangerous attribute is that people have heard of them."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",

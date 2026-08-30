@@ -612,7 +612,7 @@ thing measured against on the same day: affinities do not cluster, and a default
 | `targets` | 130 | `mechanic`×130 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `gated` | 108 | `root`×108 | ✅ READ | `borncontract.js`, `generate.js`, `gm_registry.js` |
 | `damageType` | 89 | `mechanic`×89 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
-| `dice` | 85 | `mechanic`×85 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
+| `dice` | 86 | `mechanic`×86 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
 | `crit` | 79 | `mechanic`×79 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
 | `range` | 79 | `mechanic`×79 | ✅ READ | `capabilities.js`, `craftmechanics.js` |
 | `plus` | 72 | `mechanic`×72 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
@@ -632,10 +632,10 @@ thing measured against on the same day: affinities do not cluster, and a default
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |
 | `obscure` | 16 | `root`×16 | ✅ READ | `skill_battle.js` |
 | `variance` | 15 | `mechanic`×15 | ✅ READ | `craftmechanics.js`, `app.js` |
+| `ongoingHarm` | 15 | `tree`×15 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `area` | 14 | `mechanic`×14 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
-| `ongoingHarm` | 14 | `tree`×14 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `sectFlavour` | 12 | `root`×12 | ⛔ DARK | — |
-| `damageMix` | 9 | `mechanic`×9 | ✅ READ | `damagetypes.js` |
+| `damageMix` | 10 | `mechanic`×10 | ✅ READ | `damagetypes.js` |
 | `powerMix` | 8 | `root`×8 | ⛔ DARK | — |
 | `interceptDamage` | 8 | `tree`×8 | ✅ READ | `intercept.js`, `app.js` |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |

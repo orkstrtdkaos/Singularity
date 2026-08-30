@@ -63,19 +63,70 @@ damage-adding path, use that.
 
 ---
 
-## §3 — ✅ RULED: UNTYPED MEANS `physical`, AND THE RULE IS ALREADY WRITTEN
+## §3 — ⛔ SUPERSEDED, SAME DAY: **DAMAGE MUST BE TYPED. THE DEFAULT IS A DEFECT.**
 
-**Your §6: *"worth a ruling on whether untyped should mean physical by default or answers nothing."***
+⚠️ **THIS SECTION ORIGINALLY SAID "untyped means `physical`, and the rule is already written."** That was
+me quoting `damage_types.json` — *"the default when no type is named… the implicit type"* — and treating
+it as a settled design.
 
-⛔ **IT IS ALREADY RULED, IN `damage_types.json`, ON THE `physical` ENTRY ITSELF:**
+⛔ **ERIK RULED OTHERWISE, AND MORE STRICTLY: *"damage should be typed. RESOLVING TO DEFAULT NEEDS A FLAG
+AND FIX."*** ✅ **The fallback is a DEFECT, not a design.** An untyped blow is invisible to every affinity
+and cannot be answered deliberately by any ward.
 
-> *"Edge, weight, impact. **THE DEFAULT WHEN NO TYPE IS NAMED.**"*
-> *"⛔ **THE IMPLICIT TYPE. Most crafts carry none and resolve as this.**"*
+**What I did about it, in content:**
 
-✅ **So an untyped blow should meet a physical immunity and stop.** ⚠️ **The engine is not honouring a rule
-the content already states** — which makes this a bug rather than a design question, and it is the same
-class as the two `light`/`precursor` migrations: **the ruling existed and was never executed.**
+| | |
+|---|---|
+| untyped damage crafts found | 42 |
+| ⚠️ **of those, the FLAG miscounting healing crafts** | 24 |
+| ⛔ **genuinely untyped harm, all now typed** | **18** |
+| new ratchet | **W7** in `tests/content_which.mjs`, baseline **0** |
 
-⛔ **THAT ALSO CLOSES THE HOLE WITHOUT A SECOND MECHANISM.** Once untyped resolves as `physical`, a craft
-with no type is no longer invisible to affinities — and `dressed_edge` stops needing to be invisible,
-because it is additive and its dressing carries its own type.
+⚠️ **`physical`-as-fallback should still exist in the ENGINE** — a blow must resolve as something — ⛔ **but
+it must never be reached by an authored craft, and W7 is what keeps that true.**
+
+---
+
+## §4 — ✅ ALSO RULED, AFTER THIS DOC WAS FIRST WRITTEN: **HEALING IS TYPED**
+
+**Erik: *"healing will need to be typed. WE'VE MOVED PAST THAT ORIGINAL IDEA. IT CAN HURT UNDEAD NOW."***
+
+⛔ **THIS SUPERSEDES `how_it_works §3`'s "HEALING IS NOT A TYPE", which is now rewritten.**
+
+| type | mends | ⛔ harms |
+|---|---|---|
+| `vitality` · `living` | the living | ⛔ **the undead** |
+| `decay` | ⛔ **the undead** | the living |
+
+✅ **AND IT NEEDS NO NEW MACHINERY, WHICH IS THE POINT.** `absorb` already returns negative damage, so
+`decay: absorb` has always worked. **The other half is now just an affinity — because the mending finally
+has a TYPE TO BE VULNERABLE TO.** ⚠️ **What was missing was never an implementation. It was a type on the
+heal.**
+
+**Done:** 22 healing crafts typed `vitality`.
+
+---
+
+## §5 — ⬜ AND THE UNDEATH MODEL NOW HAS A CREATURE
+
+⛔ **The bestiary had 26 entries and NOT ONE UNDEAD**, so §48 had nothing to run on and the inversion could
+not be met in play.
+
+✅ **`the_narrowed`** — `decay: absorb` + `vitality: vulnerable` + `feeling: immune`, class `narrowed_dead`.
+⚠️ **NARROWED, not an Afterling: the bestiary design laws exclude persons, and an Afterling is one.**
+
+⛔ **IT CURRENTLY FAILS `CCODE-83b`, AND I LEFT IT RED DELIBERATELY** — see
+`po/HANDOFF_ccode_83b_reads_a_stored_copy.md`. The gate reads two lookup tables and never reads the crafts,
+so the 40 crafts typed today are invisible to it. ⚠️ **I did not patch the tables to make it pass: that
+would put the same fact in a third place and hide a real defect behind a green gate.**
+
+---
+
+## §6 — ⚠️ READ THIS SECTION ORDER AS A WARNING
+
+**This document was written across three rulings in one session, and §3 originally said the OPPOSITE of
+what it now says.** ⛔ **A ruling doc that is appended to is a ruling doc that can be read wrong** — anyone
+reading §3 before I rewrote it would have built `untyped → physical` as a permanent default, which is the
+thing Erik ruled against.
+
+✅ **Superseded text is replaced and marked, not left standing with a correction below it.**

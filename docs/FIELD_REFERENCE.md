@@ -16,6 +16,21 @@ node scripts/safe_delete.mjs <field>  # triage one candidate before deleting it
 
 ---
 
+
+## 0 · ⛔ READ FIRST: THE TRADITION STRUCTURE IS CHANGING
+
+**Every tradition claim in this file describes the CURRENT 24-pole wheel.** ⚠️ **The game is moving to 14
+primary traditions on 7 axes, with the 24 poles absorbed as SECTS** — see `HOW_IT_WORKS §0c` and
+`po/SPEC_SNG-536_merger_audited.md`.
+
+⛔ **A SECT INHERITS ITS PRIMARY'S COVERAGE**, so a gap measured per-pole may not be a gap at all. Notable:
+`veilwright` becomes a sect of **Dark**, `verist` a sect of **Light**, and `figurist` a sect of **Mind**.
+
+⚠️ **`traditionV2` is on 21 of 400 crafts.** ⛔ **When the migration completes, the per-pole language in this
+file is replaced.**
+
+---
+
 ## 1 · HOW TO READ THIS, AND WHY A BUCKET IS NOT A VERDICT
 
 | bucket | n | means |

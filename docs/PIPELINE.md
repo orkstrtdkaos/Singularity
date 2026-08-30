@@ -56,7 +56,7 @@ measuring across every craft that needs a pick.**
 
 ---
 
-## ⛔ THE TWELVE RULES THAT MAKE IT WORK
+## ⛔ THE THIRTEEN RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
 
@@ -281,6 +281,26 @@ idiom, and a refusal must be argued. **It adds a third answer between "gap" and 
 the Marchward and they wear *"scars as record"*. ⛔ **Erik: Sun Tzu is revered; military strategy has a home
 here.** ⚠️ **I had conflated two different honesties — PLAIN-SPOKEN PERSONALLY and DECEPTIVE
 PROFESSIONALLY is not a contradiction, it is the entire strategic tradition.**
+
+### 13. ⛔ AUDIT AGAINST THE FOURTEEN, NOT THE TWENTY-FOUR
+
+**Added 2026-08-30. Erik: *"keep in mind we're merging many axes/poles… that's the end result to keep in
+mind AND the thing all the documentation should be written for, so that we don't keep getting confused."***
+
+⛔ **I AUDITED EIGHT TRADITIONS AGAINST A STRUCTURE THAT IS BEING REPLACED**, and never once checked which
+V2 bucket they would land in. ⚠️ **The craft-level work stands — types, rungs, harm, `notFor` are per-craft
+and survive any regrouping. EVERY "tradition X LACKS Y" CONCLUSION DOES NOT.**
+
+**The concrete example, and it reverses a finding I made the same day:** *"Verist has no healing craft"* was
+correct per-pole and **meaningless per-tradition** — ⛔ **`verist` becomes a sect of LIGHT, and `blazeborn`
+has `cleansing_light` and `sun_coax`.**
+
+✅ **AND IT IS WHERE ERIK'S ADJACENCY RULE ACTUALLY LIVES:** *"if a tradition doesn't have healing, its
+adjacent ones must."* ⛔ **Under the fourteen, A SECT'S PRIMARY IS THE ADJACENCY.**
+
+**So a coverage assessment must state which structure it is measured in**, and a gap claim under the
+24-pole wheel is provisional until checked against the primary. ⚠️ **The docs are written for the target
+state and marked; the target replaces the current one when migration completes.**
 
 ---
 

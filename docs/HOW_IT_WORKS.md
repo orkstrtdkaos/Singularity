@@ -233,6 +233,80 @@ working papers; **this is the answer.**
 
 ---
 
+## 0c · ⛔ THE FUTURE STATE — 14 TRADITIONS, AND EVERYTHING BELOW DESCRIBES THE OLD ONE
+
+**Erik, 2026-08-30: *"That's the end result to keep in mind AND the thing all the documentation should be
+written for, so that we don't keep getting confused. The current state of how it works is ok to leave, but
+MAKE SURE THE FUTURE STATE IS LISTED, THEN REPLACES THE OLD ONE WHEN WE'RE DONE."***
+
+⚠️ **READ THIS SECTION BEFORE ANY TRADITION CLAIM IN THIS DOCUMENT.** Everything after it — every audit,
+every gap, every *"tradition X lacks Y"* — was measured against **24 wheel poles**, and the game is moving
+to **14 primary traditions on 7 axes, with the 24 poles absorbed as SECTS.**
+
+⛔ **A GAP FOUND UNDER THE OLD STRUCTURE MAY NOT BE A GAP UNDER THE NEW ONE**, because a sect inherits its
+primary's coverage. `figurist` has no healing; it becomes a sect of **Mind**, where `cogitant` heals.
+
+### The fourteen, with their sects and live sizes
+
+| primary | n | sects |
+|---|---|---|
+| **Death** | 32 | ashwarden · threnodist |
+| ⛔ **Dark** | 29 | umbral · **veilwright** |
+| **Mind** | 28 | cogitant · figurist · syllogist |
+| **Breaking** | 28 | marcher · unmaker |
+| **Span** | 28 | horizon · hourkeeper |
+| ⛔ **Light** | 25 | blazeborn · **verist** |
+| **Body** | 24 | somatic |
+| **Building** | 24 | mason · wright |
+| **Order** | 22 | enginewright · lattice |
+| **Demonic** | 19 | abyssal |
+| **Life** | 15 | rootkin |
+| **Chaos** | 14 | churnfolk |
+| **Angelic** | 13 | seraphic |
+| ⚠️ **Spirit** | **10** | numinous |
+
+⚠️ **SPIRIT AT 10 AGAINST DEATH AT 32 IS THE IMBALANCE THAT MATTERS** — Spirit carries Parakletos, the
+Thinnings and the Veil contact point. **The most cosmologically loaded tradition has the fewest crafts.**
+
+### ⛔ AND FALSEHOOD/TRUTH IS THE ONE THAT CHANGES MOST
+
+**`veilwright` becomes a sect of DARK. `verist` becomes a sect of LIGHT.** ⚠️ **So the falsehood/truth axis
+stops being an axis and becomes two sects on opposite sides of dark/light** — which is why the
+*"Verist has no healing craft"* finding needs re-reading: **under the merge a Verist inherits Light, and
+`blazeborn` has `cleansing_light` and `sun_coax`.**
+
+⛔ **THAT IS ERIK'S ADJACENCY RULE SATISFIED BY THE MERGE ITSELF**, not by a neighbour: *"if a tradition
+doesn't have healing, its adjacent ones must."* **Under the fourteen, a sect's primary IS the adjacency.**
+
+### What is NOT one of the fourteen, and stays out
+
+⛔ **Foothills — `harmonic` · `radiant_folk` · `god_named` · `bargainers` (35 crafts).** ⚠️ **A foothill is
+where a pole becomes PURCHASABLE — it is not a fifteenth tradition**, and folding it in would destroy the
+distinction.
+
+⛔ **`valley_craft` (18 crafts) — the FOLK COLLECTION.** What ordinary people do without a tradition's
+apparatus.
+
+⬜ **Both need `traditionKind: "pole" | "foothill" | "folk"`**, because today a foothill and a tradition
+**look identical in an ability record**, which is why they read as orphans.
+
+### ⬜ MIGRATION STATE — and this is why nothing below has been rewritten yet
+
+| | |
+|---|---|
+| crafts carrying `traditionV2` | ⛔ **21 of 400** |
+| buckets populated | Mind 14 · Body 5 · Death 2 |
+| ⛔ **traditions audited against the OLD structure** | **8** |
+
+⚠️ **THIS SECTION IS THE TARGET, NOT THE STATE.** ⛔ **When the migration completes, this section replaces
+§0–§10's tradition language and the 24-pole framing comes out.** ✅ **Until then: read this first, and treat
+every gap claim below as provisional.**
+
+**Spec:** `po/SPEC_SNG-536_merger_audited.md` · **Proposal:** `content/packs/core/rules/traditions_v2.json`
+
+
+---
+
 ## 1 · WHAT A CRAFT IS
 
 **A craft is a thing a character can do, with three RANKS.** You learn it at rank 1 and grow into 2 and 3.

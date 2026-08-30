@@ -1398,8 +1398,14 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
           // actually BRING" (SPEC_group_aggregation §3b), and the folded contribution IS what they bring.
           // ⛔ A GROUP AT LOW COHESION STILL HAS ITS COVERAGE AND CANNOT USE IT — which is what a rout is,
           // and the game had no way to express one.
-          const foldCap = groupCapability(folded, {});
-          const cohesion = Math.max(0, Math.min(1, Number(foldCap?.cohesion ?? 1)));
+          // ⚠️ THE LADDER MUST REACH IT. Without `tierWeights` an officer's rung is invisible and the
+          // boost is silently zero — the reader-with-no-writer shape, one layer down.
+          const foldCap = groupCapability(folded, { tierWeights: sb?.attentionByTier || rules?.arcResponse?.attentionByTier || null });
+          // ⛔ CCODE-324 / ERIK: "cohesion CAN GO ABOVE 1.0." My clamp at 1 would have silently thrown away
+          // every officer's contribution — a legendary commander steadies a line to 1.3, and a ceiling of 1
+          // makes that identical to no commander at all. ⚠️ THE FLOOR STAYS: a line still standing brings
+          // something, and `cohesionOf` already holds it above zero.
+          const cohesion = Math.max(0, Number(foldCap?.cohesion ?? 1));
           const add = Math.max(0, Math.round(agg.mean * cohesion));
           if (add > 0) {
             damage = { ...damage, amount: (Number(damage.amount) || 0) + add,
@@ -1407,8 +1413,8 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
               // party invisible at exactly the moment it mattered — and Erik's whole ruling is that these
               // are people you chose not to narrate, not people who stopped existing.
               melee: { added: add, by: able.map(f => f.name || f.id), count: able.length,
-                why: `${able.map(f => String(f.name || f.id).split(" ")[0]).join(", ")} are in it too` + (cohesion < 0.999 ? ` — but the line is coming apart` : ""),
-                ...(cohesion < 0.999 ? { cohesion } : {}) } };
+                why: `${able.map(f => String(f.name || f.id).split(" ")[0]).join(", ")} are in it too` + (cohesion < 0.999 ? ` — but the line is coming apart` : cohesion > 1.001 ? ` — and they are well led` : ""),
+                ...(Math.abs(cohesion - 1) > 0.001 ? { cohesion } : {}) } };
           }
         }
       }

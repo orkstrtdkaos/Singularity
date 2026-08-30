@@ -106,7 +106,10 @@ export function groupCapability(members = [], opts = {}) {
   return {
     coverage, depth, everDepth, sole, lostCoverage, lost,
     standing, down, members: standing + down,
-    cohesion: cohesionOf({ structure, standing, down, leadersDown, lostCoverage, floor: cohesionFloor }),
+    cohesion: cohesionOf({ structure, standing, down, leadersDown, lostCoverage, floor: cohesionFloor,
+      // ⛔ THE OFFICERS IN THIS GROUP, weighted by the rung they stand on.
+      command: commandOf(members, { tierWeights: opts.tierWeights, perOfficer: opts.perOfficer }),
+      ceiling: opts.cohesionCeiling }),
   };
 }
 
@@ -120,7 +123,33 @@ export function groupCapability(members = [], opts = {}) {
  *   a leader down    — sharp. The line wavers.
  *   coverage lost    — sharp. Something the group relied on stopped answering.
  */
-function cohesionOf({ structure = null, standing = 0, down = 0, leadersDown = 0, lostCoverage = [], floor = 0.15 } = {}) {
+/** ⛔ CCODE-324 / ERIK 2026-08-30: "cohesion should be able to be BOOSTED by command and commanders or
+ *  officers (just NPCs who have skills or tiers). Another reason to target them. Point being, COHESION CAN
+ *  GO ABOVE 1.0."
+ *
+ *  ⚠️ AND THE LADDER IS THE ONE HE JUST RULED ON. `attentionByTier` — mythic 3 · legendary 2 · epic 1 ·
+ *  heroic 0.5 · riffraff 0.25 — is "how much influence and impact they can make", which is exactly what an
+ *  officer contributes to a line holding together. ⛔ SO THIS INVENTS NO SECOND LADDER: a legendary captain
+ *  steadies a line twice as hard as an epic one, for the same reason they bend a battle twice as hard.
+ *
+ *  ⚠️ A FALLEN OFFICER STEADIES NOBODY. Only the standing are counted, which is what makes them worth
+ *  targeting — Erik's "another reason to target them", and it needs no separate rule to be true.
+ */
+function commandOf(members = [], { tierWeights = null, perOfficer = 0.15 } = {}) {
+  const W = tierWeights || null;
+  let boost = 0;
+  for (const m of (members || [])) {
+    if (!m || m.present === false || isDowned(m)) continue;
+    const tier = String(m.tier || m.record?.tier || "").toLowerCase();
+    // ⛔ A TIER IS AN OFFICER'S WEIGHT; an explicit flag is a flat one. Both are content saying the same
+    // thing at different resolutions, and a record with neither contributes nothing.
+    if (tier && W && W[tier] != null) boost += num(W[tier], 0) * num(perOfficer, 0.15);
+    else if (m.officer === true || m.record?.officer === true) boost += num(perOfficer, 0.15);
+  }
+  return boost;
+}
+
+function cohesionOf({ structure = null, standing = 0, down = 0, leadersDown = 0, lostCoverage = [], floor = 0.15, command = 0, ceiling = 3 } = {}) {
   const total = standing + down;
   // ⚠️ AN EMPTY GROUP HAS NO COHESION RATHER THAN PERFECT COHESION. 0/0 = NaN, and a NaN multiplier
   // silently zeroes whatever it touches — the shape that makes a mechanic look "off" instead of broken.
@@ -132,7 +161,14 @@ function cohesionOf({ structure = null, standing = 0, down = 0, leadersDown = 0,
   const raw = base * (1 - attrition) * (1 - leaderHit) * (1 - coverageHit);
   // ⛔ A FLOOR, NOT A ZERO. A group that has not been wiped can still do SOMETHING, and a cohesion of 0
   // would make every downstream multiplier erase the group entirely — which is not a rout, it is deletion.
-  return standing > 0 ? Math.max(floor, round3(raw)) : 0;
+  // ⛔ CCODE-324 — COMMAND IS ADDED AFTER THE PENALTIES, NOT BEFORE. An officer steadies a line that is
+  // coming apart; they do not stop it coming apart. Multiplying instead would make a captain immune to
+  // attrition, which is the opposite of why they are worth targeting.
+  // ⚠️ AND THERE IS NO CLAMP AT 1. Erik: "cohesion CAN GO ABOVE 1.0." A well-officered line brings MORE
+  // than the sum of the people in it, which is the whole point of a formation.
+  const withCommand = raw + num(command, 0);
+  // ⚠️ A CEILING ONLY AS ARITHMETIC SAFETY, set far above anything a real company reaches.
+  return standing > 0 ? Math.max(floor, Math.min(num(ceiling, 3), round3(withCommand))) : 0;
 }
 
 /**

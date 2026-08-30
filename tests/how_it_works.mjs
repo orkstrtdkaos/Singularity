@@ -1275,6 +1275,46 @@ console.log("\n── §23 · cohesion bites, and the load-bearing member has a 
   check("§23: the panel names them beside the guard pick", rd("app.js").includes("is load-bearing"));
 }
 
+/* ══════════ §24 — COMMAND LIFTS A LINE ABOVE ITSELF ══════════ */
+// ⛔ ERIK 2026-08-30: "cohesion should be able to be BOOSTED by command and commanders or officers (just
+// NPCs who have skills or tiers). Another reason to target them. Point being, COHESION CAN GO ABOVE 1.0."
+//
+// ⚠️ AND THE LADDER IS THE ONE HE RULED ON AN HOUR EARLIER. attentionByTier is "how much influence and
+// impact they can make" — which is exactly what an officer contributes to a line holding together, so a
+// legendary captain steadies twice as hard as an epic one for the same reason they bend a battle twice as
+// hard. ⛔ NO SECOND LADDER WAS INVENTED.
+console.log("\n── §24 · command lifts a line above itself ──");
+{
+  const GRd = await import("../engine/group.js");
+  const arcD = rj("content/packs/core/rules/arc_response.json");
+  const W = (function find(o) { if (!o || typeof o !== "object") return null; if (o.attentionByTier) return o.attentionByTier; for (const v of Object.values(o)) { const r = find(v); if (r) return r; } return null; })(arcD);
+  const sold = (id, tier, down) => ({ id, name: id, present: true, downed: down ? { why: "x" } : null, assistTags: [], ...(tier ? { tier } : {}) });
+  const four = () => [1, 2, 3, 4].map(i => sold("s" + i));
+  const coh = (ms) => GRd.groupCapability(ms, { tierWeights: W }).cohesion;
+
+  const plain = coh([...four(), sold("s5")]);
+  const epic = coh([...four(), sold("cap", "epic")]);
+  const legend = coh([...four(), sold("cmd", "legendary")]);
+  const fallen = coh([...four(), sold("cmd", "legendary", true)]);
+
+  check("§24: an unofficered line sits at 1", plain === 1, String(plain));
+  // ⛔ ERIK'S POINT, ASSERTED: it goes ABOVE 1.
+  check("§24: an officer lifts it ABOVE 1.0", epic > 1, String(epic));
+  // ⚠️ AND THE RUNG MATTERS — the same ladder, the same ordering.
+  check("§24: a legendary commander steadies harder than an epic captain", legend > epic, `${legend} > ${epic}`);
+  // ⛔ THE PAYOFF, AND IT NEEDS NO SEPARATE RULE: killing them costs the boost AND the body, so the line
+  // ends up WORSE than if it had never been officered. That is "another reason to target them".
+  check("§24: a fallen commander leaves the line below an unofficered one",
+    fallen < plain, `${fallen} < ${plain}`);
+  // ⚠️ NON-VACUITY ON THE LADDER ITSELF: without weights an officer is invisible and the boost is silently
+  // zero — the reader-with-no-writer shape, one layer down.
+  check("§24: without the ladder an officer contributes nothing (absent is not invented)",
+    GRd.groupCapability([...four(), sold("cmd", "legendary")], {}).cohesion === 1);
+  // ✅ AND THE LIVE PATH READS IT.
+  check("§24: the fold's contribution is scaled by cohesion, unclamped",
+    rd("engine/skill_battle.js").includes("Math.max(0, Number(foldCap?.cohesion ?? 1))"));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

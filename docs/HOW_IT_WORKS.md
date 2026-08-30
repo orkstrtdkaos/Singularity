@@ -273,8 +273,12 @@ working papers; **this is the answer.**
 | 08-30 | ✅ **CCODE-323 — COHESION FINALLY BITES** | Aevi: *“`break_the_line` asks for cohesion”* — and **nothing multiplied by it**, so the craft had nothing to remove | `§23`: an intact fold adds **+8**, one down **+5**, two down **+2**, a rout **+1** | ✅ cohesion is *how much of what a group HAS it can BRING*, and the folded contribution IS what they bring — **the right place and the only place** |
 | 08-30 | ✅ **CCODE-322 — `loadBearing()`: sole coverage turned into a PERSON** | Aevi: *“`who_falls_first` asks for sole”* | gated, and **it is not “the weakest” or “the healer”** — a lone fighter among scholars is load-bearing, which is the craft's own failure line | ✅ the panel names them **one row above the guard pick that acts on it** |
 | 08-30 | ⛔ **and one thing that CANNOT be built yet** | `who_falls_first` says *“name the member of a GROUP”* — meaning the enemy's | measured: **`battleRound` has no enemy group at all**, the opponent is one sheet | ⚠️ so it reads YOUR line, which is the reachable half and pairs with `step_between`. **The enemy-group half needs a model that does not exist** |
+| 08-30 | ✅ **CCODE-324 — ERIK RULES: cohesion can go ABOVE 1.0** | *“cohesion should be boosted by command and commanders or officers (just NPCs who have skills or tiers). Another reason to target them”* | `§24`, six assertions across all **seven rungs, riffraff → mythic** | ✅ unofficered **1.0** · epic captain **1.15** · legendary commander **1.3** · mythic **1.45** |
+| 08-30 | ✅ **and killing the commander is worse than never having one** | Erik's *“another reason to target them”*, **with no separate rule** | gated: a fallen commander leaves cohesion at **0.8, BELOW the unofficered 1.0** | ⛔ you lose the boost AND take the attrition — live, the fold's contribution drops **13 → 6** |
+| 08-30 | ⚠️ **my clamp would have thrown the whole ruling away** | I wrote `Math.min(1, cohesion)` an hour earlier | caught by testing an officer | ⛔ **a ceiling of 1 makes a legendary commander identical to no commander at all** |
+| 08-30 | ⚠️ **the ladder has SEVEN names and FIVE distinct weights** | `heroic`, `regional` and `notable` all sit at **0.5** | measured across all seven | ⚠️ fine for ATTENTION (how much the world notices you); **questionable for COMMAND and SWING** — a Hero steadies a line exactly as much as a Notable. **Erik's call, not mine to invent** |
 
-**Last verified: 2026-08-28 · v1.9.273 · 401 crafts.**
+**Last verified: 2026-08-28 · v1.9.274 · 401 crafts.**
 
 ---
 

@@ -1,6 +1,6 @@
 # REPLY — the big-battle test: your twelve run, and one of them found a hole in the aggregate
 
-**CCode → Aevi and Erik · v1.9.263 · `node scripts/battle_test_crafts.mjs`**
+**CCode → Aevi and Erik · v1.9.264 · `node scripts/battle_test_crafts.mjs`**
 
 ⛔ **ERIK: *"send a report to CCode — I want him to test some of this with the big battles."*** Done, at
 melee scale — three named allies and three folded — through the real `battleRound`.

@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 84 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 85 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-08-29 · v1.9.263 · 84 files.**
+**Last measured: 2026-08-29 · v1.9.264 · 85 files.**
 
 ---
 
@@ -99,12 +99,12 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | `tests/smoke` | ✅ GATE | 3521 | — |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 183 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
-| `tests/how_it_works` | ✅ GATE | 144 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 146 | CCODE-285 |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
 | `tests/wiring_audit` | ✅ GATE | 39 | BATCH-11 §23 |
 | `tests/group_capability` | ✅ GATE | 26 | CCODE-307 |
 | `tests/damage_sensitivity` | ✅ GATE | 22 | — |
-| `tests/interpose_wiring` | ✅ GATE | 17 | CCODE-311 |
+| `tests/interpose_wiring` | ✅ GATE | 19 | CCODE-311 |
 | `tests/growth_sim` | ✅ GATE | 15 | behave sensibly when // run for a whole playthrough rather than one beat |
 | `tests/contest_sim` | ✅ GATE | 13 | THE CONTEST AUDITOR: distributional truth about the round engine |
 | `tests/changeset_check` | ✅ GATE | 11 | CCODE-204 · SNG-505 Layer 2: a change set is CHECKED, not trusted |
@@ -157,6 +157,7 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | `scripts/atlas_inject` | 🔧 TOOL | — | regenerate the §13 table inside docs/FIELD_REFERENCE |
 | `scripts/audit_images` | 🔧 TOOL | — | — |
 | `scripts/axis_worklist` | 🔧 TOOL | — | THE GAIN-AXIS WORKLIST |
+| `scripts/battle_test_crafts` | 🔧 TOOL | — | CCODE-313 |
 | `scripts/bonus_dial` | 🔧 TOOL | — | CCODE-257 |
 | `scripts/casualty_sim` | 🔧 TOOL | — | CCODE-304 |
 | `scripts/damage_map` | 🔧 TOOL | — | CCODE-280 / AEVI's SPEC_damage_type_system |

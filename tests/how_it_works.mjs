@@ -891,6 +891,31 @@ console.log("\n── §13 · an NPC's level is what they ARE, plus what you hav
     lvl({ met: 1, level: 77 }) === 77, String(lvl({ met: 1, level: 77 })));
 }
 
+/* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
+// ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
+// reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and
+// SIX from the folded party's contribution to that same blow — while the receipt still said affinity
+// "immune". ⚠️ AN IMMUNITY THAT REPORTS ITSELF AND DOES NOTHING IS WORSE THAN NO IMMUNITY.
+console.log("\n── §14 · the folded party answers the blow's affinity ──");
+{
+  const SBx = await import("../engine/skill_battle.js");
+  const rulesX = rj("content/packs/core/rules/resolution.json");
+  const sbX = rj("content/packs/core/rules/skill_battle_system.json").engine;
+  const stepsX = rj("content/packs/core/rules/intensity_scaling.json").steps;
+  const mkRng = () => { let s2 = 20260829; return () => { s2 |= 0; s2 = (s2 + 0x6D2B79F5) | 0; let t = Math.imul(s2 ^ (s2 >>> 15), 1 | s2); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; };
+  const shX = (o = {}) => ({ attributes: { physical: 5, mental: 5, social: 5, practical: 5 }, energy: 200, health: 60, skills: [], ...o });
+  const blow = { function: "strike", tier: 4, attribute: "physical", intensity: "standard", name: "x", mechanic: { damageType: "physical" }, functions: ["strike"] };
+  const foldX = [1, 2, 3].map(i => ({ id: "f" + i, name: "S" + i, present: true, contributions: ["HARM", "MARTIAL"], sheet: shX() }));
+  const go = (aff) => SBx.battleRound({ playerDecl: blow, oppDecl: { function: "shield", tier: 1, name: "g" },
+    playerSheet: shX(), oppSheet: shX({ affinities: aff }), state: { momentum: 0, round: 1 },
+    rules: rulesX, sb: sbX, steps: stepsX, rng: mkRng(), folded: foldX });
+  const imm = go({ physical: "immune" }), open = go({});
+  // ⛔ NON-VACUITY: the fold must still add when nothing blocks it, or this "fix" is just a deletion.
+  check("§14: a folded party still adds to a blow nothing resists", (open?.damage?.melee?.added || 0) > 0, String(open?.damage?.melee?.added));
+  check("§14: …and adds NOTHING to a blow the target is immune to", !imm?.damage?.melee && imm?.damage?.amount === 0,
+    `amount=${imm?.damage?.amount} melee=${JSON.stringify(imm?.damage?.melee || null)}`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

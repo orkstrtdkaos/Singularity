@@ -1293,8 +1293,20 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // which is invisible to anyone checking averages and is how a party that recruits a fourth member
       // starts seeing wipes. `scripts/scale_fidelity.mjs` re-measures it against the real engine.
       if (damage && roundWinner === "player" && folded && folded.length) {
+        // ⛔ CCODE-313 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW ITSELF COULD NOT BEAT. Found by running
+        // Aevi's twelve crafts through a melee-scale fight: a physical-immune foe took 0 from the player's
+        // typed blow and SIX from the folded party's contribution to that same blow — while the receipt
+        // still said `affinity: "immune"`. ⚠️ AN IMMUNITY THAT REPORTS ITSELF AND DOES NOTHING IS WORSE
+        // THAN NO IMMUNITY: the number says it worked.
+        //
+        // ⚠️ THIS IS ONE BLOW, NOT MANY. The receipt reads "they are in it too — +6": the fold ADDS to the
+        // strike the player declared rather than swinging separately, so it carries that blow's damage type
+        // and must answer that blow's affinity. ⛔ IF ERIK RULES THAT A FOLDED PARTY SWINGS ITS OWN WEAPONS
+        // OF ITS OWN TYPES, this becomes wrong — but then the fold needs its own damage type, and today it
+        // has none. Recorded in the handoff rather than assumed.
+        const foldBlocked = damage.affinity === "immune" || damage.affinity === "absorb";
         const able = folded.filter(f => f && f.present !== false && !f.downed && (f.contributions || []).includes("HARM"));
-        if (able.length) {
+        if (able.length && !foldBlocked) {
           const per = Math.max(0, Number(sb?.melee?.perFoldedAlly ?? 2));
           const agg = predictAggregate({ mean: per, sd: per / 2 }, able.length);
           const add = Math.max(0, Math.round(agg.mean));

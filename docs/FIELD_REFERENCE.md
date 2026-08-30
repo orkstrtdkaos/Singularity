@@ -563,6 +563,34 @@ and **`resist` is exactly "some impact, not full".** Nine selfless creatures now
 thing measured against on the same day: affinities do not cluster, and a default needs overrides.
 ⛔ **The per-creature field is what lets a selfless creature ever be FULLY open to psychic harm.**
 
+
+### ⛔ `magnitude` vs `dice` — THE OLD SYSTEM AND THE CURRENT ONE
+
+**Erik, 2026-08-30: *"At some point we used MAGNITUDE AND LEVEL to determine damage, but I think we have
+since moved to AUTHORED DICE."***
+
+| field | status |
+|---|---|
+| ✅ **`mechanic.dice`** | **THE CURRENT SYSTEM.** Authored per craft, priced on the level curve |
+| ⚠️ **`mechanic.magnitude`** | **A RATING OUT OF 10.** Legitimate on non-damage shapes; ⛔ **on a `damage`/`strike` craft it is the OLD system and does NOT feed damage** |
+
+⛔ **THE TRAP, MEASURED 2026-08-30:** eleven L1 "first offense" crafts carried `magnitude` 5–8 and **no
+dice** — and `craftmechanics` resolves `diceAuthored ? {nMult:1} : rung.dice`, so **a craft that authors
+nothing INHERITS THE TIER RUNG: 5d6+8 at a level-8 standing, against an honestly authored 1d6.**
+
+⚠️ **AN AUTHOR WHO DOES THE WORK WAS PUNISHED SEVENFOLD**, and nothing in the JSON said so.
+
+✅ **`W7b` in `content_which` now gates it** — `damage`/`strike` shape, harm rung above `none`, no dice.
+Baseline **0**.
+
+⛔ **SCOPED TO THOSE TWO SHAPES DELIBERATELY, AND VERIFIED IN THE ENGINE RATHER THAN ASSUMED:** a diceless
+`hobble` resolves to `null`, not to the rung — **it IMPOSES rather than wounds, and that is legitimate.**
+59 diceless crafts remain and are correct.
+
+⬜ **AND THE LEVEL QUESTION IS OPEN WITH CCode** (`po/SPEC_level_contribution_to_damage.md`): `rung.dice`
+carries `nMult` **and** `plus`, and **`plus` is additive and cannot compound** — which is how level could
+contribute to authored dice without recreating the double-scaling bug.
+
 ---
 
 ## 13 · THE FULL ATLAS

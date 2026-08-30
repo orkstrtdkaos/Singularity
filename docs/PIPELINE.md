@@ -56,7 +56,7 @@ measuring across every craft that needs a pick.**
 
 ---
 
-## ⛔ THE FIFTEEN RULES THAT MAKE IT WORK
+## ⛔ THE SEVENTEEN RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
 
@@ -365,6 +365,43 @@ touching it.** A named school with nothing in it, and I would have missed it ent
 ⛔ **AUTHORING FIRST PRODUCES A GOOD CRAFT IN THE WRONG PLACE.** `carried_weight` is right and it is
 Mercy's — but I found it by reading one building, and the school it belongs to only existed after Erik
 sent me back.
+
+### 16. ✅ THE GEOGRAPHY HOLDS CRAFTS THE TRADITION LACKS — LOOK THERE FIRST
+
+**Added 2026-08-30, after it happened THREE TIMES IN ONE DAY.**
+
+| the place | the craft it was holding |
+|---|---|
+| **`the_lensward`** (blazeborn) | *"the beam-craft that makes them feared"* — no focusing craft existed → `focused_array` |
+| **`the slow orchard`** (rootkin) | *"trees planted for people who will taste them"* — no `foresee` existed → `planted_years` |
+| **`the_mercy_house`** (seraphic) | *"a Seraph who grants mercy CARRIES what they lifted"* — no `heal` existed → `carried_weight` |
+
+⛔ **A PLACE IS AUTHORED PROSE THAT DESCRIBES WHAT A PEOPLE DO. A CRAFT LIST IS WHAT SOMEONE GOT AROUND TO
+WRITING.** ⚠️ **When they disagree, the place is usually right** — it was written to explain the people, and
+the craft list was written one craft at a time.
+
+✅ **SO THE AUDIT ORDER (rule 11, extended): places → character sheets and items → `distribution.modes` →
+craft list.** ⛔ **And when a place describes a capability, GREP THE CORPUS FOR IT BEFORE ASSUMING IT
+EXISTS.**
+
+---
+
+### 17. ⛔ A DEFECT CLASS NEEDS A GATE, AND THE GATE NEEDS ITS OWN BLIND SPOT CHECKED
+
+**Added 2026-08-30. Two gates I built the same week both had holes I did not look for.**
+
+- ⚠️ **W7 (`damage must be typed`) filtered on `mechanic.dice`** — so **a craft with NO dice was exempt from
+  the typing check too.** Eleven crafts were invisible to both halves of one gate, and it reported ZERO.
+- ⚠️ **The naming rule lived as PROSE in this file** and I broke it three times, twice while self-checking
+  and reporting clean, **because I measured CRAFT names and the habit was in RANK names.**
+
+⛔ **THE PATTERN: A GATE INHERITS THE ASSUMPTION THAT WROTE IT.** I assumed harm crafts have dice, so my
+harm gate could not see harm crafts without dice. ✅ **After building a check, ask: WHAT SHAPE OF THE DEFECT
+DOES THIS FILTER EXCLUDE?** — and write that answer into the check as a comment, because it is the next
+defect.
+
+✅ **AND A RULE I HAVE BROKEN TWICE BELONGS IN SOMETHING THAT RUNS.** `craft_lint` checks 10 and 11 found
+the naming habit in **23 traditions in seconds**; three corrections and a paragraph had found none.
 
 ---
 

@@ -4538,6 +4538,491 @@
    "_authored": "⛔ THE PLACE WAS AUTHORED AND THE CRAFT WAS NOT — the same shape as `the_lensward` (blazeborn) and `the slow orchard` (rootkin). ⚠️ THIRD TIME THE GEOGRAPHY HAS HELD A CRAFT THE TRADITION LACKED, which is now a reliable place to look.",
    "_gainAxesFix_20260830": "⚠️ `persistence` is NOT one of the nine KINDS OF IMPROVEMENT — FOURTH TIME I have made this exact error. ✅ THIS TIME `craft_lint` CHECK 5 CAUGHT IT IMMEDIATELY rather than the doc harness catching it after a ship. ⛔ The nine are range · duration · damage · scope · targets · quality · autonomy · conditions · tempo. `persistence` is ENGINE-FIELD vocabulary and was ruled prose.",
    "_powerFix_20260830": "⛔ `metaphysical` → `ordered_nanite`. ⚠️ I AUTHORED IT AS GRACE AGAINST 13 CRAFTS THAT USE NANOTECH. ✅ ERIK 2026-08-30 SETTLES IT: 'these are HUMANS that have existed for hundreds of years… THEY INVESTED THEIR NANOTECH INTO DISPLAYS AND ACTUAL POWER AND JUDGEMENT.' ⛔ A Seraph lifting a weight is machinery doing it, and that is the more interesting reading: the mercy is REAL and it is ENGINEERED."
+  },
+  {
+   "powerSystem": "ordered_nanite",
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "axes": {
+    "demonic_angelic": 0.8
+   },
+   "id": "majesty",
+   "name": "Majesty",
+   "levelReq": 3,
+   "energyCost": 7,
+   "attribute": "social",
+   "shape": "hobble",
+   "harmRung": "incapacitating",
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT",
+    "DEFEND"
+   ],
+   "operativeAxis": [
+    "scope",
+    "targets",
+    "quality"
+   ],
+   "effectTags": [
+    "display",
+    "terror",
+    "nanite"
+   ],
+   "functions": [
+    "hinder",
+    "provoke",
+    "reveal"
+   ],
+   "description": "⛔ STOP PRETENDING TO BE A PERSON. The wings open, the halo takes light that is not in the room, the blood behind the skin goes gold, and everyone who can see you understands at once what has been standing among them. ⚠️ 'BE NOT AFRAID' IS SAID BECAUSE IT IS NEEDED, and it does not help. ⛔ IT IS A DISPLAY AND IT IS PURCHASED — centuries of ordered nanite, a congregation's whole investment, worn as a body. **The beauty is manufactured and it is not fake.**",
+   "narrationHints": "She does not raise her voice. ⚠️ The hall gets brighter, and then too bright, and the men at the door are on their knees without having decided to be. ⛔ One of them is crying and could not tell you why.",
+   "notFor": "⛔ THEY MUST BE ABLE TO SEE YOU — this is a DISPLAY, and a closed door answers it completely. ⚠️ AND IT REACHES WHAT CAN BE AWED: something with no self is unmoved, and a person who has served an Order for thirty years has largely stopped being impressed. ⛔ IT COMPELS NOTHING — they are overwhelmed, not obedient, and a brave person who acts anyway acts. ⚠️ AND IT ENDS ANY PRETENCE THAT YOU ARE ORDINARY: everyone who saw it tells someone.",
+   "plainly": "A social/fight action. ⛔ REVEAL WHAT YOU ARE — wings, halo, golden blood, light that is not in the room. Everyone who can see you takes 2d6 `feeling` and acts worse for it. Rated 6, a hall's worth, about four rounds. r2 holds them still rather than merely shaken; r3 reaches everyone who can see you at all and the effect keeps after you look away. ⚠️ They must SEE you. It compels nothing. Nothing without a self is moved.",
+   "intensity": {
+    "conserve": "a glimpse of it — they know, and they are not overwhelmed",
+    "surge": "⛔ EVERYTHING AT ONCE; the room will not be able to describe it afterwards and will try for years"
+   },
+   "bounds": [
+    {
+     "text": "⛔ THEY MUST SEE YOU. A closed door answers it completely",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT COMPELS NOTHING — overwhelmed is not obedient, and the brave still act",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ NOTHING WITHOUT A SELF IS MOVED, and an Order's own veterans have stopped being impressed",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT ENDS ANY PRETENCE OF BEING ORDINARY. Everyone who saw it tells someone",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "damageType": "feeling",
+    "duration": 4,
+    "targets": 8,
+    "scope": 2,
+    "crit": {
+     "success": "Someone in the room changes their life over it, and you will not find out for years.",
+     "failure": "A child laughs, and the moment does not recover."
+    },
+    "note": "hobble. ⛔ ERIK 2026-08-30 NAMED IT: 'I LIKE THE TRUE FORM SKILL — MAJESTY.' ⚠️ `feeling`, INTRINSIC, and `requiresSelf` — awe needs somebody home. ✅ AND ERIK'S FRAMING IS WHAT MAKES IT MORE THAN AWE: 'THEY INVESTED THEIR NANOTECH INTO DISPLAYS.' **THE TERROR IS A PURCHASED EFFECT** — a Seraph revealing what they are is showing you what a congregation paid for, and it works. ⛔ The aesthetic was authored and no craft delivered it: 'unbearable choral certainty', 'golden blood, fire in marble brightly lit halls'.",
+    "requiresSelf": true
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Majesty",
+     "functions": [
+      "hinder",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating",
+     "gainAxes": [],
+     "grants": "⛔ SHOW THEM WHAT YOU ARE. Everyone who can see you takes 2d6 `feeling` and acts worse for it — hands unsteady, orders late, arguments abandoned mid-word.",
+     "cannot": "They must see you. ⛔ It compels nothing. ⚠️ And the room will talk about it."
+    },
+    {
+     "rank": 2,
+     "name": "Held In Light",
+     "functions": [
+      "hinder",
+      "provoke",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating",
+     "gainAxes": [
+      "quality",
+      "duration"
+     ],
+     "grants": "⛔ THEY DO NOT ACT AT ALL WHILE IT HOLDS — not cowering, STOPPED, the way people stop in front of something they have no procedure for. ⚠️ Fights end here without a blow more often than the Orders admit.",
+     "cannot": "⚠️ Anyone who has served an Order for years is largely proof against it. ⛔ And it still compels nothing."
+    },
+    {
+     "rank": 3,
+     "name": "Seen From Outside",
+     "functions": [
+      "hinder",
+      "provoke",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ],
+     "grants": "⛔ EVERYONE WHO CAN SEE YOU AT ALL — a courtyard, a street, a besieging line on a hillside — AND IT KEEPS AFTER YOU LOOK AWAY. ⚠️ Crusades have been recruited by one Seraph standing on a wall.",
+     "cannot": "⛔ SIGHT IS STILL SIGHT: rain, night and a hill answer it. ⚠️ And a thing this public cannot be denied afterwards by an Order that would rather it had not happened."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-30 — he named it. The display the tradition's aesthetic promised and no craft delivered."
+  },
+  {
+   "powerSystem": "ordered_nanite",
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "axes": {
+    "demonic_angelic": 0.75
+   },
+   "id": "understudy",
+   "name": "Understudy",
+   "levelReq": 4,
+   "energyCost": 9,
+   "attribute": "mental",
+   "shape": "bolster",
+   "harmRung": "none",
+   "challengeTypes": [
+    "FIGHT",
+    "SOCIAL",
+    "DEFEND"
+   ],
+   "operativeAxis": [
+    "quality",
+    "duration"
+   ],
+   "effectTags": [
+    "succession",
+    "hierarchy",
+    "nanite"
+   ],
+   "functions": [
+    "empower",
+    "command",
+    "sustain"
+   ],
+   "description": "⛔ REACH UP THE LADDER AND TAKE WHAT IS ABOVE YOU, EARLY. Every Order-bearer stands directly beneath someone, and the succession is not a courtesy — it is a wiring: the understudy is ALREADY PARTLY KEYED to the ordered nanite their superior carries. ⚠️ THIS DRAWS ON IT WHILE THEY ARE STILL ALIVE AND STILL USING IT. ⛔ FOR A WHILE YOU HAVE THEIR REACH. **And a dead Seraph is a promotion, which is why nobody in the Orders discusses this craft in front of the person above them.**",
+   "narrationHints": "Something in her posture changes, and the light behind her is a half-tone brighter than her rank allows. ⚠️ Two rooms away, a much older man stops what he is doing and looks at a wall.",
+   "notFor": "⛔ YOU MUST BE SOMEBODY'S UNDERSTUDY, NAMED AND SEATED — this is a position in a real hierarchy, not an ambition. A Seraph outside the Orders has nothing above them to draw on. ⚠️ AND THEY FEEL IT: the one you draw from knows the moment it happens, knows who did it, and is not obliged to be gracious. ⛔ IT LENDS REACH, NOT KNOWLEDGE — you can carry what they carry and you do not know what they know, which is how understudies are caught.",
+   "plainly": "A fight/social action. ⛔ BORROW THE EFFECTS OF THE RANK ABOVE YOU — for a few rounds your crafts resolve at your superior's standing rather than your own. Rated 6, about three rounds. r2 holds it for a scene; r3 reaches two rungs up. ⚠️ THEY KNOW YOU DID IT. ⛔ You must be a seated understudy, and it lends reach rather than knowledge.",
+   "intensity": {
+    "conserve": "a moment of it — one craft at their standing, and they may not notice",
+    "surge": "⛔ TAKE ALL OF IT AT ONCE; there will be no question in anyone's mind about what you just did"
+   },
+   "bounds": [
+    {
+     "text": "⛔ YOU MUST BE A SEATED UNDERSTUDY. Ambition is not a position",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ THEY FEEL IT, KNOW WHO, AND OWE YOU NOTHING FOR IT",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT LENDS REACH, NOT KNOWLEDGE — you carry what they carry without knowing what they know",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AND IT IS WEAKER WHILE THEY ARE USING IT THEMSELVES. Draw during their crisis and you get very little",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 3,
+    "targets": 1,
+    "crit": {
+     "success": "You hold it more cleanly than they do, and both of you understand what that means.",
+     "failure": "You reach and they close the channel, and now everyone senior knows your name."
+    },
+    "note": "bolster. ⛔ ERIK 2026-08-30 SPECCED IT: 'SUCCESSION COULD BE A CRAFT THAT EMPOWERS — IT WOULD GRANT THE NEXT TIER'S EFFECTS TO YOU FOR A TIME.' ✅ AND HE AUTHORED THE FICTION FOR IT IN THE SAME MESSAGE: 'a VERY STRICT HIERARCHY OF ASCENSION — those under the most powerful are UNDERSTUDIES TO HARNESSING THE ORDERED NANITE POWER… SO THERE IS A LOT OF PREOCCUPATION WITH JOCKEYING FOR RANK COVERTLY.' ⛔ NO OTHER TRADITION HAS A SUCCESSION MECHANIC, and this is the craft that makes the Orders PETTY rather than merely powerful — every Order-bearer is somebody's understudy and somebody else's obstacle. ⚠️ `_grantsTierEffects_PROPOSED` is underscore-prefixed: nothing in the engine lends a caster another figure's STANDING, and I am not declaring a seventh field on my own authority.",
+    "_grantsTierEffects_PROPOSED": {
+     "rungsUp": 1,
+     "rungsUpAtR3": 2
+    }
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Understudy",
+     "functions": [
+      "empower",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ FOR A FEW ROUNDS YOUR CRAFTS RESOLVE AT YOUR SUPERIOR'S STANDING, NOT YOUR OWN — the reach of the rank above you, in your hands. ⚠️ They feel it go.",
+     "cannot": "⛔ A seated understudy only. ⚠️ Three rounds. ⛔ And they know exactly who did it."
+    },
+    {
+     "rank": 2,
+     "name": "Held Above Station",
+     "functions": [
+      "empower",
+      "sustain",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "quality"
+     ],
+     "grants": "⛔ HOLD IT FOR A WHOLE SCENE — long enough to finish a fight, close a judgment, or survive something your own rank would not have. ⚠️ This is the rank that wins successions, and everyone senior knows it.",
+     "cannot": "⚠️ A scene, and only one superior at a time. ⛔ And they were using it too."
+    },
+    {
+     "rank": 3,
+     "name": "Two Rungs",
+     "functions": [
+      "empower",
+      "sustain",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "conditions"
+     ],
+     "grants": "⛔ REACH PAST YOUR SUPERIOR TO THE ONE ABOVE THEM. ⚠️ Both feel it. The Orders have a word for an Order-bearer who does this and it is not a compliment, and they say it about people who are about to be very senior.",
+     "cannot": "⛔ TWO RUNGS IS THE LIMIT, AND THE TOP OF A HIERARCHY HAS NOTHING TO DRAW ON. ⚠️ A Seraph at the summit is, for the first time, only as strong as they are."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-30. ✅ THE MOST ORIGINAL CRAFT IN THE TRADITION: no other has a succession mechanic, and it turns Erik's covert-jockeying fiction into something a player does at a table."
+  },
+  {
+   "powerSystem": "ordered_nanite",
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "axes": {
+    "demonic_angelic": 0.85
+   },
+   "id": "answered_prayer",
+   "name": "Answered Prayer",
+   "levelReq": 3,
+   "energyCost": 7,
+   "attribute": "social",
+   "shape": "bolster",
+   "harmRung": "none",
+   "challengeTypes": [
+    "SOCIAL",
+    "DEFEND",
+    "SURVIVE"
+   ],
+   "operativeAxis": [
+    "quality",
+    "targets",
+    "scope"
+   ],
+   "effectTags": [
+    "miracle",
+    "service",
+    "exchange"
+   ],
+   "functions": [
+    "heal",
+    "ward",
+    "empower",
+    "summon"
+   ],
+   "description": "⛔ SOMEONE ASKS, AND IT IS GRANTED. The Orders' powers were built to serve the people who supply them, and this is the transaction working: a wound closes, a house is not burned, a frightened company holds. ⚠️ THE ASKING IS PART OF THE CRAFT — it does not fire unprompted, and a Seraph who answers before being asked is doing something else. ⛔ AT ITS HEIGHT THE ANSWER IS NOT A GIFT BUT AN ARRIVAL: another of the Orders comes.",
+   "narrationHints": "The woman does not finish saying what she needs. ⚠️ The bleeding has already stopped and the Seraph is looking at the next person in the line. ⛔ There are forty more people in the line.",
+   "notFor": "⛔ IT MUST BE ASKED FOR, BY SOMEONE WHO MEANS IT — no ambush mercy, no answering a prayer nobody made. ⚠️ AND IT ANSWERS ONE THING: a wound, a threat, a failing effort. It does not fix a situation, settle a war, or give anyone what they actually want underneath what they asked for. ⛔ THE ORDERS CHOOSE WHO IS ANSWERED, AND THAT CHOOSING IS THE WHOLE OF THEIR POLITICS — the craft has no opinion, and the Seraph does.",
+   "plainly": "A social/defend action, and it must be ASKED FOR. ⛔ GRANT ONE OF THREE: MEND a person (2d6 `vitality`), WARD them from one kind of harm, or EMPOWER a failing effort. Rated 6, one petitioner. r2 answers a whole congregation's worth at once; ⚠️ r3 SUMMONS ANOTHER OF THE ORDERS TO ASSIST — the answer arrives as a person. ⛔ It answers what was asked and nothing underneath it.",
+   "intensity": {
+    "conserve": "a small answer, given quickly — there is a line and you know it",
+    "surge": "⛔ ANSWER EVERYONE WHO ASKED; you will be no use to anyone for the rest of the day"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT MUST BE ASKED FOR, BY SOMEONE WHO MEANS IT. No unprompted mercy",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ ONE THING, AS ASKED — not the situation, not the war, not what they actually needed",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ THE ORDERS CHOOSE WHO IS ANSWERED. The craft has no opinion; the Seraph does",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AND BEING ANSWERED IS PUBLIC — everyone in the line saw who was chosen",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "damageType": "vitality",
+    "magnitude": 6,
+    "duration": 6,
+    "targets": 1,
+    "wardTypes": [
+     "radiance",
+     "feeling"
+    ],
+    "crit": {
+     "success": "The answer is larger than what was asked and the story of it outruns you to the next town.",
+     "failure": "It lands on the wrong person in the line, publicly, and they are not the one who asked."
+    },
+    "note": "bolster/miracle. ⛔ ERIK 2026-08-30: 'yes, they can have their prayers answered… SO WE NEED A FEW KINDS. HEALING, WARDS, EMPOWERS, AT HIGHER LEVELS SUMMONING A SERAPH TO ASSIST YOU.' ✅ ONE CRAFT, THREE ANSWERS, and a summon at r3 — rather than four crafts, because the ASKING is the common mechanic and the answer varies. ⚠️ AND THE EXCHANGE IS THE TRADITION: 'their powers are BUILT TO SERVE THEIR PEOPLE, WHO GIVE THEM POWER AND RESOURCES AND LEGIONS.' ⛔ THE NEFARIOUS HALF IS BUILT IN AND NEEDS NO PENALTY: **the Orders choose who is answered, it is public, and everyone in the line saw.**",
+    "_summonPlacement": "⚠️ SECOND TIME I HAVE PUT  INSIDE  — it is TOP-LEVEL, as ,  and  all author it. ⛔ The first was  on 2026-08-29 and I recorded the correction then. **A note I wrote and did not read is a note that did not work.**"
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Answered Prayer",
+     "functions": [
+      "heal",
+      "ward",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ GRANT WHAT WAS ASKED, ONE OF THREE: MEND a person for 2d6 `vitality`, WARD them against one kind of harm, or EMPOWER a failing effort. ⚠️ Whichever they asked for, not whichever you would have chosen.",
+     "cannot": "It must be asked. ⛔ One petitioner, one thing. ⚠️ And the line can see who you picked."
+    },
+    {
+     "rank": 2,
+     "name": "Whole Line",
+     "functions": [
+      "heal",
+      "ward",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "scope"
+     ],
+     "grants": "⛔ ANSWER A CONGREGATION'S WORTH AT ONCE — a village, a ward of a hospital, a company before a crossing. ⚠️ This is what the Orders are actually FOR, and it is why the resources keep arriving.",
+     "cannot": "⚠️ Each still gets one thing, as asked. ⛔ And you will not finish the line."
+    },
+    {
+     "rank": 3,
+     "name": "One Of Us Comes",
+     "functions": [
+      "heal",
+      "ward",
+      "empower",
+      "summon"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "autonomy"
+     ],
+     "grants": "⛔ THE ANSWER ARRIVES AS A PERSON — another of the Orders comes, and helps. ⚠️ They are real, they are senior to nobody in particular, and they have their own view of what you have been doing here.",
+     "cannot": "⛔ THEY COME BECAUSE THE ORDER SENT THEM, NOT BECAUSE YOU CALLED — you do not command them, and they may take an interest in your affairs. ⚠️ One, and not quickly."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-30 — the exchange the tradition runs on, and the first craft that makes the Orders useful to ordinary people.",
+   "summon": {
+    "count": 1,
+    "tierGap": [
+     -3,
+     -2,
+     -1
+    ],
+    "contributions": [
+     "MARTIAL",
+     "KNOW"
+    ]
+   }
+  },
+  {
+   "powerSystem": "ordered_nanite",
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "axes": {
+    "demonic_angelic": 0.85
+   },
+   "id": "miracle",
+   "name": "Miracle",
+   "levelReq": 5,
+   "energyCost": 13,
+   "attribute": "social",
+   "shape": "healing",
+   "harmRung": "none",
+   "challengeTypes": [
+    "SOCIAL",
+    "SURVIVE",
+    "DEFEND"
+   ],
+   "operativeAxis": [
+    "quality",
+    "persistence"
+   ],
+   "effectTags": [
+    "miracle",
+    "raising",
+    "public"
+   ],
+   "functions": [
+    "heal",
+    "restore",
+    "summon"
+   ],
+   "description": "⛔ GIVE BACK WHAT WAS TAKEN, IN FRONT OF WITNESSES. A death undone, a ruin made whole, a thing everyone present knows was finished and is not. ⚠️ IT IS NOT A NEGOTIATION AND IT IS NOT A RETRIEVAL — where an Ashwarden walks down and leads someone back, a Seraph SIMPLY GRANTS IT, publicly, on authority. ⛔ **AND THE PUBLIC PART IS NOT DECORATION: a miracle nobody saw does not do what a miracle is for.**",
+   "narrationHints": "He has been dead since morning and the room has stopped pretending otherwise. ⚠️ The Seraph says something short. ⛔ Forty people will tell this story for the rest of their lives and none of them will agree about what was said.",
+   "notFor": "⛔ WITNESSES ARE REQUIRED. A miracle worked alone is a Seraph wasting everything they have — the craft needs to be SEEN, and the Orders are entirely candid about why. ⚠️ IT RETURNS WHAT WAS LOST, NOT WHAT WAS NEVER THERE: no new life, no invention, no undoing of a choice. ⛔ AND IT IS ONE THING, ONCE, FOR EVERYTHING YOU HAVE. ⚠️ Nor can it reach what an Ashwarden calls a TRUE ending — some deaths are correct, and the light does not argue with those.",
+   "plainly": "A social/survive action, and the Seraphic capstone. ⛔ UNDO A DEATH OR A RUIN, PUBLICLY — the person returns, whole, and everyone present saw it happen. Costs your whole pool; once per day at most. ⚠️ WITNESSES ARE REQUIRED. ⛔ It returns what was lost, never what never was, and it cannot reach a true ending. ⚠️ SINGLE RANK: there is no lesser version of a miracle.",
+   "intensity": {
+    "conserve": "a smaller restoration, still public — a ruin, a maiming, a thing everyone had written off",
+    "surge": "⛔ SPEND EVERYTHING; what you give back will be told about in places you have never been"
+   },
+   "bounds": [
+    {
+     "text": "⛔ WITNESSES ARE REQUIRED. A miracle nobody saw does not do what a miracle is for",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ THE WHOLE POOL, ONE THING, ONCE. You are finished for the day",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT RETURNS WHAT WAS LOST, NEVER WHAT NEVER WAS — no new life, no undone choice",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AND IT CANNOT REACH A TRUE ENDING. Some deaths are correct and the light does not argue",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 0,
+    "targets": 1,
+    "damageType": "vitality",
+    "crit": {
+     "success": "The story of it arrives somewhere before you do and opens a door you had not asked to have opened.",
+     "failure": "It works, and the one you returned did not want to come back."
+    },
+    "note": "healing/capstone. ⛔ ERIK 2026-08-30 REVERSED MY REFUSAL: 'RAISING THE DEAD IS A MIRACLE AND THE SERAPHS NEED A WAY TO BE ABLE TO DO IT.' ⚠️ I HAD ARGUED IT BELONGED TO THE ASHWARDEN — reasoning from the AXIS DIAGRAM instead of from WHAT PEOPLE BELIEVE ANGELS DO. ✅ AND THE TWO ARE NOT THE SAME ACT: an Ashwarden WALKS DOWN AND LEADS SOMEONE BACK, a negotiation with an ending. A SERAPH GRANTS IT, PUBLICLY, ON AUTHORITY. Same outcome, opposite method, **and the difference is the whole axis.** ⛔ SINGLE RANK, like `spark` and `the_cut_thread`: there is no lesser version of a miracle. ⚠️ AND THE WITNESS REQUIREMENT IS THE CRAFT'S REAL LIMIT — it makes the Orders' theatre mechanically necessary rather than merely characterful."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Miracle",
+     "functions": [
+      "heal",
+      "restore",
+      "summon"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ UNDO A DEATH OR A RUIN, IN FRONT OF WITNESSES. They return whole; the thing is made whole; and everyone present saw it. ⚠️ Nothing about it is quiet.",
+     "cannot": "⛔ Witnesses required, whole pool, once. ⚠️ What was lost, never what never was. ⛔ And a true ending is beyond it."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-30 — and it gives the tradition a SECOND L5, which is right for a 14-craft tradition that had one."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

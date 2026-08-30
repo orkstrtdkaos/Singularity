@@ -1366,6 +1366,53 @@ console.log("\n── §25 · seven rungs, and a dead commander never steadies a
   check("§25: …and it is never lifted to the ceiling", routedHeadless < 0.8, String(routedHeadless));
 }
 
+/* ══════════ §26 — SILENCE INHERITS THE TIER RUNG, AND A LIVE FIELD IS NEVER DOCUMENTED DEAD ══════════ */
+// ⛔ BOTH OF THESE CAME OUT OF CCODE-326, the tradition tournament Erik asked for — and neither was a
+// balance question. They are the two ways a number can be true in the engine and false everywhere a person
+// would look for it.
+//
+// ⚠️ ONE — `craftmechanics` resolves `diceAuthored ? {nMult:1} : rung.dice`. AUTHORED WINS, deliberately:
+// Aevi tiers her own dice and multiplying again doubled whole traditions. The half nobody had measured is
+// the other one — a craft that authors NO dice INHERITS THE TIER RUNG, which at a mid standing is 5d6+8
+// (mean 25.5) against valley_craft's authored 1d6 (mean 3.5). ⛔ NOT AUTHORING IS CURRENTLY THE STRONGEST
+// DAMAGE CHOICE IN THE CATALOGUE, seven-fold, and nothing in the JSON says so.
+//
+// ⚠️ TWO — SYSTEM_SPEC §39 listed `wardTypes` as "NOTHING — the string does not appear in skill_battle.js".
+// It appears ten times and is read into `soakTypes` at the guard. ⛔ A SPEC THAT DECLARES A LOAD-BEARING
+// FIELD DEAD IS WORSE THAN SILENCE: it tells an author not to write the field that decides whether a blow
+// lands. This asserts the READER exists, which is the only claim that could have caught it.
+console.log("\n── §26 · silence inherits the rung, and a live field is never documented dead ──");
+{
+  const CM = await import("../engine/craftmechanics.js");
+  const cmCfg = rj("content/packs/core/rules/craft_mechanics.json");
+  const mk = (dice) => ({ functions: ["strike"], shape: "damage", levelReq: 1,
+    mechanic: { ...(dice ? { dice } : {}), damageType: "physical" } });
+  const at = (a, tier) => CM.mechanicFor(a, { verb: "strike", tier, rank: 1, intensity: "standard", cfg: cmCfg });
+
+  const authored = at(mk({ n: 1, d: 6 }), 5), silent = at(mk(null), 5);
+  // ⚠️ THE ANCHOR: an authored 1d6 stays 1d6 at any tier. This is the rule that stops double-tiering.
+  check("§26: AUTHORED dice are never re-multiplied by the tier ladder",
+    authored?.fields?.dice?.n === 1, JSON.stringify(authored?.fields?.dice));
+  // ⛔ AND THE COST OF THAT RULE, asserted so it cannot be forgotten again.
+  check("§26: an UNAUTHORED craft inherits the tier rung instead",
+    (silent?.fields?.dice?.n || 0) > (authored?.fields?.dice?.n || 0),
+    `silent ${JSON.stringify(silent?.fields?.dice)} vs authored ${JSON.stringify(authored?.fields?.dice)}`);
+  // ⚠️ NON-VACUITY: at tier 1 the rung multiplier is 1, so the two must AGREE. If this ever passes at every
+  // tier, the check above is measuring nothing.
+  const a1 = at(mk({ n: 1, d: 6 }), 1), s1 = at(mk(null), 1);
+  check("§26: …and at tier 1 they agree — the gap is the RUNG, not a constant bias",
+    a1?.fields?.dice?.n === s1?.fields?.dice?.n, `${a1?.fields?.dice?.n} vs ${s1?.fields?.dice?.n}`);
+
+  // ⛔ THE FOUR DOORS, applied to a field the spec had buried. Not "is it authored" — IS IT READ.
+  const sb26 = rd("engine/skill_battle.js");
+  check("§26: `wardTypes` is READ by the live battle path, whatever the spec says about it",
+    (sb26.match(/wardTypes/g) || []).length >= 2 && /soakTypes/.test(sb26),
+    `${(sb26.match(/wardTypes/g) || []).length} occurrences`);
+  const spec26 = rd("SYSTEM_SPEC.md");
+  check("§26: …and the spec no longer calls it dead",
+    !/`wardTypes`\s*\|\s*⛔\s*\*\*NOTHING/.test(spec26));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

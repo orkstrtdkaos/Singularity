@@ -879,6 +879,238 @@
    ],
    "_authored": "⛔ ERIK 2026-08-29. ⚠️ CORRECTS MY OWN ARGUMENT: I said the Marchers REFUSE `conceal`/`deceive` and should get a duel-challenge craft. Erik: don't narrow to duels, and Sun Tzu is revered — military strategy has a home here. ⛔ AND HE ADDED THE THING I HAD NOT CONSIDERED: 'they can ENLIST OTHER TRADITIONS' SKILLS AND BRAID.' A tradition does not need to own every verb; a strategist's answer to a missing capability is to RECRUIT SOMEONE WHO HAS IT. See `_strategistsBraid`.",
    "_strategistsBraid": "⛔ ERIK: 'BESIDES, THEY CAN ENLIST OTHER TRADITIONS' SKILLS AND BRAID.' ⚠️ THIS IS A GENERAL CORRECTION TO HOW I RUN GAP ASSESSMENTS: I have been treating an absent verb as a hole in a tradition. **For the Marchers specifically it is a doctrine** — a people whose art is the disposition of force do not need to own `conceal` when they can put an Umbral on the flank, and `powerSystem: combination` braids already exist (`harbored_flame`, `turning_word`, `meaning_engine`) as the mechanism. ⚠️ SO A MARCHER GAP LIST SHOULD READ AS 'WHO WOULD THEY RECRUIT FOR THIS', NOT 'WHAT ARE THEY MISSING'."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "marcher",
+   "nativeOrCombination": "native",
+   "axes": {
+    "violence_peace": -0.5
+   },
+   "id": "small_company",
+   "name": "Small Company",
+   "levelReq": 3,
+   "energyCost": 6,
+   "attribute": "mental",
+   "shape": "bolster",
+   "harmRung": "none",
+   "challengeTypes": [
+    "FIGHT",
+    "TRAVEL",
+    "SURVIVE"
+   ],
+   "operativeAxis": [
+    "targets",
+    "quality"
+   ],
+   "effectTags": [
+    "party",
+    "questing",
+    "command"
+   ],
+   "functions": [
+    "empower",
+    "command",
+    "foresee"
+   ],
+   "description": "⛔ A LINE IS NOT A PARTY, AND THE DRILL DOES NOT TRANSFER. A soldier trained to hold shoulder-to-shoulder with forty others has to learn to fight beside four people who each do something entirely different — a shadow-worker, a mender, someone who talks to the dead. ⚠️ THIS IS THAT TRAINING. Read what the people beside you actually do, and place yourself so their work lands. ⛔ IT IS THE CRAFT THAT TURNS A SOLDIER INTO SOMEONE WORTH TAKING ON A QUEST.",
+   "narrationHints": "He does not tell them what to do — they are better at their own work than he is. ⚠️ He simply keeps ending up in the place where their work becomes possible, and none of them notice him doing it.",
+   "notFor": "⛔ IT IS NOT COMMAND AND THEY ARE NOT YOURS — nobody in a party takes orders, and a Marcher who tries discovers that immediately. ⚠️ IT WORKS ON A HANDFUL: five, six, the size of a party. Give it a company and it does nothing, which is the exact inverse of `held_line`. ⛔ AND YOU MUST HAVE SEEN THEM WORK — it reads people you know, and a stranger who joined this morning is a stranger.",
+   "plainly": "A fight/travel action. ⛔ POSITION YOURSELF SO YOUR COMPANIONS' OWN CRAFTS LAND BETTER — a named advantage for each ally acting this round, chosen for what they actually do. Rated 4, up to five companions, holds through a fight. r2 works while travelling and out of combat; r3 the party keeps the advantage when you are DOWN. ⚠️ Not orders, not command, and useless on a formation.",
+   "intensity": {
+    "conserve": "one companion, one exchange",
+    "surge": "read the whole party at once; ⛔ YOU WILL DO NOTHING ELSE THIS ROUND BUT PUT PEOPLE WHERE THEY SHOULD BE"
+   },
+   "bounds": [
+    {
+     "text": "⛔ NOT COMMAND — nobody in a party takes orders, and it does not make them",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ A HANDFUL ONLY. Give it a company and it does nothing — the exact inverse of `held_line`",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ YOU MUST HAVE SEEN THEM WORK. It reads people you know",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 6,
+    "targets": 5,
+    "crit": {
+     "success": "The whole party moves like it has done this for years, and two of them will privately wonder why.",
+     "failure": "You place yourself perfectly for the fight you expected and are nowhere useful in this one."
+    },
+    "note": "bolster. ⛔ ERIK 2026-08-29, ANSWERING THE STRUCTURAL GAP: 'SOLDIERS MOVE ON TO BE HEROES, EPICS, LEGENDARIES — QUESTING. What skills would help them do that?' ⚠️ SO ADVANCEMENT IS NOT LEAVING THE TRADE, IT IS THE TRADE GOING OUT. ⛔ THIS IS THE TRANSITION CRAFT: the drill that works in a line does not work in a party of five specialists, and nothing in the tradition bridged it. `held_line` steadies people doing THE SAME THING; this reads people doing DIFFERENT things."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Small Company",
+     "functions": [
+      "empower",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ PLACE YOURSELF SO THEIR CRAFTS LAND — a named advantage for each companion acting this round, chosen for what they actually do rather than what you would do.",
+     "cannot": "Five at most, people you have seen work. ⛔ It gives no orders and grants no obedience."
+    },
+    {
+     "rank": 2,
+     "name": "On the Road",
+     "functions": [
+      "empower",
+      "foresee",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ],
+     "grants": "⛔ IT WORKS OUTSIDE A FIGHT — watches set right, loads distributed, the argument headed off before the third day. ⚠️ A party that travels with a Marcher arrives in better condition and rarely knows why.",
+     "cannot": "⚠️ It smooths a party; it does not make them like each other."
+    },
+    {
+     "rank": 3,
+     "name": "They Keep the Shape",
+     "functions": [
+      "empower",
+      "foresee",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "duration"
+     ],
+     "grants": "⛔ THE PARTY HOLDS THE ADVANTAGE WHILE YOU ARE DOWN — you have taught it to them without either side calling it teaching. ⚠️ This is the rank where a soldier stops being a companion and starts being the reason the company survives.",
+     "cannot": "⛔ It lasts the fight, not the campaign. ⚠️ And it cannot help a party that has stopped trusting each other."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29 — the questing-soldier's transition craft. Answers the structural gap that soldiering topped out at L2."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "marcher",
+   "nativeOrCombination": "native",
+   "axes": {
+    "violence_peace": -0.5
+   },
+   "id": "told_of",
+   "name": "Told Of",
+   "levelReq": 4,
+   "energyCost": 8,
+   "attribute": "social",
+   "shape": "setup",
+   "harmRung": "none",
+   "challengeTypes": [
+    "SOCIAL",
+    "TRAVEL",
+    "DEFEND"
+   ],
+   "operativeAxis": [
+    "scope",
+    "persistence"
+   ],
+   "effectTags": [
+    "standing",
+    "renown",
+    "questing"
+   ],
+   "functions": [
+    "empower",
+    "reveal",
+    "persuade"
+   ],
+   "description": "⛔ A DEED ONLY COUNTS WHERE IT IS TOLD. The Marchers keep scars as record and know exactly what that is worth: nothing, in a village that has never heard of you. ⚠️ THIS IS THE CRAFT OF BEING KNOWN CORRECTLY — naming what you did plainly to the people who should hear it, in the form that travels, without embellishment that a witness could contradict. ⛔ AND IT IS HOW A SOLDIER BECOMES A NAME: standing spreads by being carried, and a deed nobody carried is a deed that never happened.",
+   "narrationHints": "He tells it in about four sentences, names the two people who died, and does not mention what he did. ⚠️ By spring it is being told back to him in three villages, and in all three he comes out better than he said.",
+   "notFor": "⛔ IT CARRIES WHAT IS TRUE. A deed you did not do will not spread — it will be checked, because the people who carry stories are the people who compare them. ⚠️ AND IT SPREADS WHERE THERE ARE PEOPLE TO CARRY IT: a thing done alone in the Zone with no witness and no survivor stays where it happened. ⛔ Nor does it choose the shape it takes. Once it is moving it belongs to whoever is telling it, and they will improve it.",
+   "plainly": "A social/travel action. ⛔ A DEED YOU ACTUALLY DID SPREADS TO THE COMMUNITIES THAT SHOULD HEAR IT, and your standing rises with them. Rated 5, and it keeps moving after you leave. r2 reaches communities you have never visited; r3 the telling arrives BEFORE you do. ⚠️ It carries only what is true, needs someone to carry it, and you do not control the version that arrives.",
+   "intensity": {
+    "conserve": "tell it once, to the people it concerns",
+    "surge": "tell it everywhere you can reach; ⛔ YOUR ENEMIES WILL HEAR IT TOO, AND THEY WILL KNOW WHERE YOU HAVE BEEN"
+   },
+   "bounds": [
+    {
+     "text": "⛔ ONLY WHAT IS TRUE TRAVELS. An invented deed gets checked and costs you the standing you had",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT NEEDS CARRIERS. A deed with no witness and no survivor does not spread",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ YOU DO NOT OWN THE VERSION THAT ARRIVES — it belongs to whoever tells it next",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 24,
+    "scope": 3,
+    "crit": {
+     "success": "It is carried further than you have ever been, and someone you will never meet acts on it.",
+     "failure": "It arrives ahead of you in the mouth of someone who was there and disliked you."
+    },
+    "note": "setup. ⛔ AUTHORED AGAINST THE ACTUAL TIER MECHANISM, not an idea of one: `derivedLevel` in `npcsheet.js` raises a figure by DEEDS, TIME KNOWN, and **`standing`** — and standing propagates by `communityId`, which is visibly how Silas's grove-ward spread to forty communities in play. ⚠️ SO THE CRAFT THAT MAKES A SOLDIER INTO A LEGEND IS NOT A WEAPON — IT IS THE ONE THAT MOVES STANDING. ⛔ And its hard bound is the tradition's own honesty: only what is true travels, because 'the people who carry stories are the people who compare them.'"
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Told Of",
+     "functions": [
+      "reveal",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ NAME WHAT YOU DID, PLAINLY, TO THE PEOPLE WHO SHOULD HEAR IT — and it spreads to the communities it concerns, raising your standing with them. ⚠️ Understatement carries further than boast; the Marchers know this and teach it.",
+     "cannot": "⛔ It must be true and it must have been witnessed. ⚠️ You do not control the retelling."
+    },
+    {
+     "rank": 2,
+     "name": "Carried Further",
+     "functions": [
+      "reveal",
+      "empower",
+      "persuade"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "range"
+     ],
+     "grants": "⛔ IT REACHES PLACES YOU HAVE NEVER BEEN — traders carry it, a road carries it, and you arrive somewhere for the first time already owed a hearing.",
+     "cannot": "⚠️ And already owed a grudge, in the places that side against you."
+    },
+    {
+     "rank": 3,
+     "name": "Arrives Before You",
+     "functions": [
+      "reveal",
+      "empower",
+      "persuade"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "persistence"
+     ],
+     "grants": "⛔ THE TELLING GETS THERE FIRST. Doors are open, terms are better, and some fights do not start because of what the other side has already heard. ⚠️ THIS IS THE MECHANISM OF THE LEGEND TIERS MADE INTO A CRAFT.",
+     "cannot": "⛔ AND YOU CANNOT BE ANONYMOUS AFTERWARDS. A Marcher at this rank has given up ever walking into a room unknown, which is a real cost to anyone who ever needs to."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29: 'soldiers move on to be HEROES, EPICS, LEGENDARIES… questing. What skills would help them do that?' ⚠️ READ THE MECHANISM FIRST (rule 11): tier rises on deeds, time and STANDING, and standing propagates by community. ⛔ SO THE ANSWER WAS NOT ANOTHER WEAPON."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",

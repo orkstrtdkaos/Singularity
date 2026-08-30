@@ -85,7 +85,7 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
       energy: opponent.energy ?? energy, maxEnergy: opponent.energy ?? energy, tacticTags: tags, skills: opponent.skills,
       health: opponent.health ?? health, soak: opponent.soak ?? soak, soakLayers: opponent.soakLayers ?? soakLayers,
     // CCODE-83: the creature's authored AFFINITY must reach the sheet, or a typed bestiary is prose again.
-    ...(opponent.affinity ? { affinity: opponent.affinity } : {}), authored: true };
+    ...(opponent.affinity ? { affinity: opponent.affinity } : {}), ...(opponent.class ? { creatureClass: opponent.class } : {}), authored: true };
   }
   // SNG-253 (scoped from the post-252 re-look): the opponent's move VOCABULARY was kind-blind. Verified against
   // this engine rather than predicted — a STANDOFF opponent declared "a hard strike" and held "a raised guard",
@@ -108,7 +108,7 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
     energy, maxEnergy: energy, tacticTags: tags, skills,
     health: opponent.health ?? health, soak: opponent.soak ?? soak, soakLayers: opponent.soakLayers ?? soakLayers,
     // CCODE-83: the creature's authored AFFINITY must reach the sheet, or a typed bestiary is prose again.
-    ...(opponent.affinity ? { affinity: opponent.affinity } : {}), synthesized: true };
+    ...(opponent.affinity ? { affinity: opponent.affinity } : {}), ...(opponent.class ? { creatureClass: opponent.class } : {}), synthesized: true };
 }
 
 /** The opponent's move for this round — DETERMINISTIC engine policy (not GM invention). Behind on momentum
@@ -391,6 +391,29 @@ export function resolvedDamageType(decl, cm) {
 /** CCODE-83 — how does this sheet answer that KIND? immune | resist | vulnerable | absorb | null.
  *  A thing that EATS light is not heavily armoured against it; it is in a different relationship to it, which
  *  is why this is separate from soak and applied before it. Unknown values are ignored, never guessed at. */
+/** ⛔ CCODE-315 — CAN THIS CRAFT REACH A THING WITH NO SELF? Erik: "only if it simplifies and provides
+ *  clarity." ⚠️ SIX CRAFTS STATED THIS RULE IN FOUR DIFFERENT PHRASINGS — "without a self", "has no
+ *  self", "anything without a mind", "anything that does not rely on the man beside it" — and one creature
+ *  stated the other half as `feeling: immune`, in data. ⛔ NOTHING COULD CHECK THE TWO AGREED WHILE ONE
+ *  SIDE WAS PROSE.
+ *
+ *  ✅ NOW THE CRAFT DECLARES `requiresSelf` AND THE CREATURE'S CLASS DECLARES `hasSelf`, AND THIS IS THE
+ *  ONE PLACE THEY MEET. ⚠️ THE CLASS IS RESOLVED, NEVER STORED ON THE SHEET: a copied `hasSelf` would be
+ *  a stored copy of a derived value, which is the failure this project has committed most.
+ *
+ *  ⚠️ ABSENT IS NOT FALSE. A creature with no class, or a class that says nothing, is treated as HAVING a
+ *  self — so nothing changes for the 20 creatures Aevi has not classed and every existing fight is
+ *  byte-identical. Only an explicit `hasSelf: false` blocks anything. */
+export function selfBlocked(decl, targetSheet, { classes = null, rank = 1 } = {}) {
+  if (!decl || !targetSheet || !classes) return false;
+  const needs = authoredBlock(decl, "requiresSelf", num(decl.rank, rank)) === true
+    || decl.requiresSelf === true || decl.mechanic?.requiresSelf === true;
+  if (!needs) return false;
+  const cls = classes[String(targetSheet.creatureClass || "")];
+  // ⛔ EXPLICIT FALSE ONLY. `undefined` is undecided, and undecided must not silently disarm a craft.
+  return cls && typeof cls === "object" && cls.hasSelf === false;
+}
+
 export function affinityOf(sheet, type, sb) {
   if (!type || !sheet) return null;
   const legal = new Set((sb?.damageTypes?.affinities) || ["immune", "resist", "vulnerable", "absorb"]);
@@ -802,6 +825,9 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // CCODE-250 (Erik: "Yes a foe chooses who to hit"): the party seat. `allies` is the live roster a foe may aim
   // at — ABSENT OR EMPTY MEANS TODAY, and a 1v1 round then resolves byte-identically, which is the gate.
   allies = null, targetPolicy = null, protections = null,
+  // ⛔ CCODE-315 — the bestiary's CLASS table, so `requiresSelf` has something to be answered by.
+  // ⚠️ ABSENT MEANS TODAY: with no table nothing is ever blocked and every existing caller is unchanged.
+  creatureClasses = null,
   // ⛔ CCODE-274 / ERIK'S [C] — THE ONES YOU DID NOT BRING FORWARD ARE STILL IN THE FIGHT.
   // "Named companions folded into the aggregate still feel like people... it's just that you only have so
   // much focus." `folded` is that: allies who are fighting and are not narrated blow by blow this round.
@@ -1176,6 +1202,13 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       //                      WITHOUT a corpus sweep, in the receipt, at the moment it happens.
       const typedByDefault = !declaredType && !!defaultedType;
       const untyped = !dmgType;
+
+      // ⛔ CCODE-315 — A CRAFT THAT NEEDS A SELF FINDS NOTHING TO HOLD. Computed here, beside the affinity,
+      // because it answers the same question: can this reach that at all. ⚠️ IT BLOCKS BOTH HALVES — the
+      // wound AND the condition — since "nothing without a self can be FRIGHTENED" is about the binding,
+      // not the bruise, and blocking only damage would have left the fear landing.
+      const noSelf = selfBlocked(winDecl, targetSheet, { classes: creatureClasses, rank: winDecl?.rank || 1 });
+      if (noSelf) hit = 0;
       const aff = affinityOf(targetSheet, dmgType, sb);
       const acfg = sb.damageTypes || {};
       if (aff === "immune") hit = 0;
@@ -1431,6 +1464,10 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // need a new state, it needs a way to put someone into the one that already exists. Resolved AFTER the
   // exchange because only a winner imposes, and read off the SUBJECT's resistance so it is contested.
   let imposed = null, inflicted = null, opened = null;
+  // ⛔ CCODE-315 — DECLARED BESIDE THE THING IT BELONGS TO. My splice assigned this and never declared it,
+  // which is a ReferenceError waiting behind the first craft that requires a self — the exact shape of the
+  // `num` bug that sat undetected for two days. `node --check` passes on it, which is why it needed a run.
+  let unreachable = null;
   // ⛔ CCODE-214 — AND A WINNING CRAFT LEAVES ITS ONGOING HARM ON THEM. Eight crafts have claimed this in
   // prose since the day they were written; `resolveHeal` has read the condition off the subject since
   // v1.9.168 and NOTHING PUT IT THERE. The reader had a writer in the catalogue and no hand in between.
@@ -1476,13 +1513,18 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     const spec = authoredBlock(impDecl, "imposes", impDecl?.rank || 1);
     if (spec) {
       const resistKey = String(spec.resist || "physical");
+      // ⛔ CCODE-315 — AND THE BINDING, WHICH IS THE HALF AEVI'S CRAFTS ACTUALLY MEAN. A terror laid on a
+      // thing with no self is not resisted, it is UNREACHABLE — so this refuses before the roll rather
+      // than after it, and the receipt says which.
+      const impNoSelf = selfBlocked(impDecl, loserSheet, { classes: creatureClasses, rank: impDecl?.rank || 1 });
       const r = resolveImposition(impDecl, {
         rank: impDecl.rank || 1, cfg: rules?.craftMechanics || {},
         margin: Math.max(0, (winRoll.margin || 0) - (loseRoll.margin || 0)),
         targetResist: Number(loserSheet?.attributes?.[resistKey]) || 0,
         degree: winRoll.degree
       });
-      if (r.ok) imposed = { side: roundWinner === "player" ? "opponent" : "player",
+      if (impNoSelf) unreachable = { by: impDecl?.name || "it", why: "there is no self in it to take hold of" };
+      if (r.ok && !impNoSelf) imposed = { side: roundWinner === "player" ? "opponent" : "player",
         // ⛔ CCODE-250 — THE SIDE IS NOT THE SUFFERER. The seat swapped the ARITHMETIC (soak, resist,
         // conditions all read the target's sheet) but this receipt still said "player", so a caller
         // would have applied an ally's wound to the player's health. Naming the bearer is the other
@@ -1563,7 +1605,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // character who obscured themselves simply never sees the field. Absent with no allies — so a 1v1 receipt
   // is byte-identical to the one this engine produced yesterday.
   if (aimedAt) o.targetChoice = aimedAt;
-  const out = { state: newState, unsettled, cooled, player: p, opponent: o, roundWinner, ...(aimedAt ? { aimedAt } : {}), ...(blindStrike ? { blindStrike } : {}), delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
+  const out = { state: newState, unsettled, cooled, player: p, opponent: o, roundWinner, ...(aimedAt ? { aimedAt } : {}), ...(blindStrike ? { blindStrike } : {}), delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, ...(unreachable ? { unreachable } : {}), deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback },
     // CCODE-80: an evaded blow must SAY it was evaded. An attack that quietly does less is indistinguishable
     // from a bad roll, and the whole point of the three defensive logics is that they read differently.

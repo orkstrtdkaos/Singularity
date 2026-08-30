@@ -949,6 +949,63 @@ console.log("\n── §15 · untyped damage is findable ──");
     JSON.stringify({ type: undecided.damageType, untyped: undecided.untyped }));
 }
 
+/* ══════════ §16 — CRAFT AND CREATURE AGREE ABOUT HAVING A SELF ══════════ */
+// ⛔ AEVI: "every craft that says 'nothing without a self' should agree with every creature that has none.
+// Right now that agreement is prose on both sides." ⚠️ SIX CRAFTS STATED THE RULE IN FOUR PHRASINGS.
+// ⛔ ERIK'S TEST FOR THE FIELD, WHICH IT HAD TO PASS: does it let content say ONCE what it currently says
+// many times in prose? This gate is what makes the once BINDING.
+console.log("\n── §16 · craft and creature agree about having a self ──");
+{
+  const SBs = await import("../engine/skill_battle.js");
+  const best = rj("content/packs/valley/bestiary.json");
+  const classes = best.classes || {};
+  const selfless = Object.entries(classes).filter(([, v]) => v && typeof v === "object" && v.hasSelf === false).map(([k]) => k);
+  const selfed = Object.entries(classes).filter(([, v]) => v && typeof v === "object" && v.hasSelf === true).map(([k]) => k);
+
+  // ⛔ EVERY CLASS DECLARES, OR THE PROPERTY IS DECORATION. A bare string class (which is what
+  // `narrowed_dead` was before 2026-08-30) reads as undefined to every consumer.
+  const undeclared = Object.entries(classes)
+    .filter(([k]) => !k.startsWith("_"))
+    .filter(([, v]) => !(v && typeof v === "object" && typeof v.hasSelf === "boolean")).map(([k]) => k);
+  check("§16: every creature class declares hasSelf as a boolean", undeclared.length === 0, undeclared.join(", "));
+  // ⚠️ NON-VACUITY, BOTH SIDES: without one of each the agreement below is trivially true.
+  check("§16: the corpus has classes WITH and WITHOUT a self",
+    selfless.length > 0 && selfed.length > 0, `with: ${selfed.length}, without: ${selfless.length}`);
+
+  // ⛔ AND THE CRAFTS THAT NEED ONE.
+  const needSelf = [];
+  for (const dir of ["content/packs/core/abilities"]) {
+    for (const f of readdirSync(join(root, dir)).filter(x => x.endsWith(".json"))) {
+      const doc = rj(`${dir}/${f}`);
+      for (const a of (doc.abilities || [])) {
+        if (a && JSON.stringify(a).includes('"requiresSelf"')) needSelf.push(a);
+      }
+    }
+  }
+  check("§16: some craft actually requires a self (non-vacuity)", needSelf.length >= 3, `${needSelf.length} crafts`);
+
+  // ⛔ THE AGREEMENT ITSELF, ASSERTED THROUGH THE ENGINE RATHER THAN BY READING BOTH FILES. A gate that
+  // compared two JSON files would pass while the rule did nothing in play — which is the whole failure
+  // this field exists to end.
+  const bad = [];
+  for (const a of needSelf) {
+    const decl = { ...a, function: (a.functions || [])[0], rank: 1 };
+    for (const cls of selfless) {
+      if (!SBs.selfBlocked(decl, { creatureClass: cls }, { classes })) bad.push(`${a.id} vs ${cls}`);
+    }
+    // ✅ AND IT MUST STILL REACH A THING THAT HAS ONE, or the craft is simply broken.
+    for (const cls of selfed) {
+      if (SBs.selfBlocked(decl, { creatureClass: cls }, { classes })) bad.push(`${a.id} wrongly blocked vs ${cls}`);
+    }
+  }
+  check("§16: every craft requiring a self is blocked by every selfless class, and by no other",
+    bad.length === 0, bad.slice(0, 6).join(" · "));
+
+  // ⚠️ ABSENT IS NOT FALSE — an unclassed creature is not quietly immune to half the catalogue.
+  check("§16: an unclassed creature is NOT blocked (absent is not false)",
+    needSelf.length ? !SBs.selfBlocked({ ...needSelf[0], function: (needSelf[0].functions || [])[0] }, {}, { classes }) : false);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

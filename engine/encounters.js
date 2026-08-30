@@ -187,6 +187,10 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // one ally means "just you", and `chooseTarget` returns the lone-target case — byte-identical to before.
     allies: partyPresent.length > 1 ? partyPresent : null,
     protections: state.protections || null,
+    // ⛔ CCODE-315 — THE CLASS TABLE, so a craft that requires a SELF has something to be answered by.
+    // ⚠️ Passed rather than looked up inside the round: `battleRound` has no content handle, and giving it
+    // one for this would be a bigger seam than the rule is worth.
+    creatureClasses: content?.bestiary?.classes || null,
     playerSheet: { attributes: character.attributes || {}, subAttributes: character.subAttributes || {}, alignment: character.alignment || {}, skills: character.skills || {}, energy: before },
     // CCODE-35: `effects` must ride BOTH ways — into the round (they modify this roll) and back out onto the
     // encounter state (they persist). This hand-built state object is the seam where they would silently drop.

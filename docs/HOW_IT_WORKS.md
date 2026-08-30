@@ -207,8 +207,12 @@ working papers; **this is the answer.**
 | 08-30 | ✅ **CCODE-314 — an untyped blow announces itself** | Erik: *"untyped can default to physical for now… but it still needs a FLAG so we can find and type the damage"* | `§15`, three cases, with a typed craft as the non-vacuity floor | ⛔ **a default that leaves no trace is a defect that looks like a design.** `typedByDefault` marks Erik's mundane rule working; **`untyped` marks a blow no affinity in the game can answer** |
 | 08-30 | ✅ **CCODE-83b fixed — my gate judged against a STORED COPY** | Aevi handed it back: it built its “produced” set from two lookup tables and **never read the crafts** | now derives from the corpus first, tables as fallback — **the resolver's own order** | ⚠️ **`damageTypeByCraft`'s own note predicted it, in my words**: *“a second source for one fact is drift waiting to happen”*. The resolver honoured that order; **the gate did not** |
 | 08-30 | ✅ **and Aevi refused to patch the tables to make her creature pass** | that would have put the same fact in a THIRD place | the gate still goes RED for a genuinely unreachable kind — reproduced | ⛔ **her refusal is why the fix is the right one**: patching would have hidden a real defect behind a green gate |
+| 08-30 | ✅ **CCODE-315 — `requiresSelf` × `hasSelf`, the reader and the agreement gate** | Erik: *"only if it simplifies"* — **six crafts stated one rule in FOUR phrasings** and one creature stated the other half in data | `§16`, five assertions, **asserted THROUGH THE ENGINE** rather than by comparing two JSON files | ⛔ **a gate that compared the files would pass while the rule did nothing in play** — which is the failure the field exists to end |
+| 08-30 | ✅ **it blocks the BINDING as well as the bruise** | *“nothing without a self can be FRIGHTENED”* is about the condition, not the wound | verified: a beast takes `staggered`, the narrowed dead takes nothing and the receipt says **“there is no self in it to take hold of”** | ⚠️ blocking only damage would have left the fear landing |
+| 08-30 | ⚠️ **ABSENT IS NOT FALSE** | 20 of 26 creatures are unclassed | gated: an unclassed creature is NOT blocked | ⛔ the alternative would make every unclassed thing quietly immune to half the catalogue |
+| 08-30 | ⚠️ **and I assigned `unreachable` without declaring it** | `node --check` passes on that — it needed a RUN | caught before commit; declared beside `imposed` | ⛔ **the exact shape of the `num` bug that sat undetected for two days** behind a condition nothing met |
 
-**Last verified: 2026-08-28 · v1.9.265 · 400 crafts.**
+**Last verified: 2026-08-28 · v1.9.266 · 400 crafts.**
 
 ---
 

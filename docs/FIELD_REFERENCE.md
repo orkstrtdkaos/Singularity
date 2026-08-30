@@ -20,7 +20,7 @@ node scripts/safe_delete.mjs <field>  # triage one candidate before deleting it
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **85** | a play-path file names it outside a comment |
+| ✅ **READ** | **86** | a play-path file names it outside a comment |
 | ⛔ **DARK** | **19** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **4** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
@@ -576,6 +576,7 @@ content, which is the right order.
 | `interceptDamage` | 8 | `tree`×8 | ✅ READ | `intercept.js`, `app.js` |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |
 | `namedCurrent` | 7 | `root`×7 | ⛔ DARK | — |
+| `requiresSelf` | 7 | `mechanic`×7 | ✅ READ | `skill_battle.js` |
 | `evasion` | 7 | `mechanic`×7 | ✅ READ | `craftmechanics.js`, `skill_battle.js`, `app.js` |
 | `evasionRank` | 7 | `mechanic`×7 | ✅ READ | `skill_battle.js` |
 | `learnedAt` | 6 | `root`×6 | ⛔ DARK | — |

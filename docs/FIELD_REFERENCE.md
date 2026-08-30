@@ -428,6 +428,79 @@ the next field of this shape gets the right name at authoring time**, which is t
 
 ---
 
+## 12b · ⛔ BESTIARY FIELDS — THE ATLAS DOES NOT SEE THESE
+
+⚠️ **`scripts/field_atlas.mjs` scans `content/packs/core/abilities/*.json`. Bestiary creatures and their
+CLASSES are authored elsewhere and appear in no atlas table** — so a field added here is invisible to the
+one tool built to stop fields going dark. **Documented by hand for exactly that reason.**
+
+| field | on | read by | status |
+|---|---|---|---|
+| `class` | every roster creature (27) | ⚠️ `random_encounters.js:84`, **as metadata only** | ⛔ **no rule, resist or targeting decision consults it** |
+| `affinity` | 9 of 27 creatures | `affinityOf` → the damage path | ✅ **the only defensive typing any foe has** |
+| `wardTypes` | ⛔ **NO creature** | `resolveComposite` | ⛔ **the partial-ward path Erik ruled has never run in a fight** |
+| `hasSelf` | all 6 classes | ⬜ **nothing yet — CCode to build** | added 2026-08-30 |
+| `_requiresSelf_PROPOSED` | 7 crafts | ⬜ **nothing yet** | underscore-prefixed on purpose |
+| `_addsTypedDamage_PROPOSED` | `dressed_edge` | ⬜ **nothing yet — CCode to name the shape** | ⛔ carries Erik's ADDITIVE ruling |
+
+### ⛔ `hasSelf` — WHY A PROPERTY AND NOT A TAXONOMY
+
+**Erik asked whether a creature type would help; the condition he set was *"only if it SIMPLIFIES and
+provides clarity."*** ⚠️ **CCode measured that a type predicting resistances would COMPLICATE: affinities do
+not cluster by class** — `the_ashen_wyrm` **resists** light and `the_bright_devourer` **absorbs** it, and
+they are the same class. ⛔ **A class default would be wrong more often than right and every exception would
+be an override: the same per-creature authoring, plus a layer.**
+
+✅ **`hasSelf` passes the test instead, because it lets content say ONCE what it currently says four ways:**
+*"without a self"* · *"has no self"* · *"anything without a mind"* · *"anything that does not rely on the
+man beside it"* — **seven crafts, three files** — against **one creature** stating the other half as
+`feeling: immune` in data, ⛔ **with nothing checking the two agree.**
+
+| `hasSelf: false` | `hasSelf: true` |
+|---|---|
+| `narrowed_dead` · `feral_construct` · `made_weapon` | `manifested_creature` · `substrate_warped_beast` · `great_manifestation` |
+| ⚠️ an errand or a directive; nobody home to frighten | ⚠️ **manifested things WANT — that is what manifests them** |
+
+⬜ **OWED WHEN THE GATE EXISTS:** only ONE creature declares `feeling: immune`. **Several `hasSelf: false`
+creatures should and do not.** ⚠️ **Let the gate find them — guessing is how one rule ended up with four
+phrasings.**
+
+
+### ⛔ `_addsTypedDamage_PROPOSED` — ERIK'S ADDITIVE RULING, WITH NO FIELD TO LIVE IN YET
+
+**Erik, 2026-08-29: *"Dressed Edge EMPOWERS A WEAPON — used WITH other skills. The empowered type damage is
+ADDITIVE. Maybe adding HALF OF THE BASE WEAPON'S DAMAGE DICE."***
+
+```json
+{ "share": 0.5, "of": "weapon", "types": ["heat","corrosive","decay"] }
+```
+
+⚠️ **The weapon keeps ALL its own dice and type; the dressing ADDS half again.** A 2d6 `physical` blade
+dressed with pitch is **2d6 physical + 1d6 heat** — ⛔ **not a 50/50 mix, which is what I first authored and
+which halved the weapon's own damage.** A pitched blade is not a worse blade.
+
+⛔ **`mechanic.dice` IS ABSENT ON THIS CRAFT ON PURPOSE — it has no damage of its own** and must never
+resolve as a blow.
+
+⚠️ **UNDERSCORE-PREFIXED BECAUSE I HAVE INVENTED FIVE UNREADABLE FIELDS THIS WEEK** — `soakBonus`,
+`mechanic.setup`, `ongoingHarm` in the wrong scope, `addsTypedDamage`, and `requiresSelf`. ⛔ **The pattern
+is mine: when I want a craft to do something, my first instinct is to author a field rather than ask which
+mechanism already does it.** ✅ **So CCode names the shape; I strip the underscore.**
+
+### ✅ W7 — THE UNTYPED-DAMAGE RATCHET
+
+**Erik: *"damage should be typed. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX."*** ⛔ **An untyped blow falls
+back to `physical`, which makes it invisible to every affinity and unanswerable by any ward on purpose.**
+
+`tests/content_which.mjs`, baseline **0**. ⚠️ **A RATCHET, NOT A GATE** — 42 were found when it was written
+and a gate that can never pass trains the `--no-verify` habit.
+
+⚠️ **24 of those 42 were the CHECK being wrong, not the content:** healing crafts carry dice for the amount
+they MEND. ✅ **W7 excludes healing shapes and `harmRung: none`** — and the check was fixed before the
+content, which is the right order.
+
+---
+
 ## 13 · THE FULL ATLAS
 
 ⛔ **Generated. Re-run `node scripts/field_atlas.mjs --md` and paste; do not hand-edit.**

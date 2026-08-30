@@ -4131,7 +4131,7 @@
     },
     {
      "rank": 2,
-     "name": "The Green Read",
+     "name": "Green Read",
      "grants": "Read the whole living field of a place — what is thriving, what is failing, what is merely holding on.",
      "cannot": "It reports vitality, not virtue. A thriving thing may be thriving on something you love.",
      "functions": [
@@ -4140,7 +4140,7 @@
     },
     {
      "rank": 3,
-     "name": "The Whole Living Field",
+     "name": "Whole Living Field",
      "grants": "Feel every living thing for a great distance as one continuous fabric, and feel where it is torn.",
      "cannot": "You cannot stop feeling it. Rootkin at this depth grieve forests the way others grieve people.",
      "functions": [
@@ -4198,7 +4198,8 @@
    "plainly": "A investigate/stealth action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 extends range. Limit: vigor, Not Identity — the barely-alive read faint.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit_20260830": "⚠️ Articles stripped — caught by `craft_lint` check 10, the gate Erik had me build the same day."
   },
   {
    "id": "given_errand",
@@ -5074,6 +5075,93 @@
    ],
    "_authored": "⛔ ERIK 2026-08-30. ✅ CLOSES THE `foresee` GAP I FLAGGED THE SAME DAY — and the answer was in the geography before I asked the question. ⚠️ ERIK ALSO FLAGGED IT AS A POSSIBLE TIME BRAID (hourkeeper), which is not built here: this reads a tree's own future, not time itself. **A braid would be reading a future the tree has no part in**, and that is a different craft.",
    "_corrected_20260830": "⛔ ERIK 2026-08-30: 'it should let you get a read on AN AREA OR A FUTURE PERSON WHO INTERACTS WITH IT — that's why trees are planted with questions FOR CERTAIN PEOPLE IN THE FUTURE. You could plant one at an intended BATTLEFIELD. YOU DON'T NEED TO WAIT — lower rank is less capable and less clear, highest ranks are very informative.' ⚠️ MY VERSION WAS WRONG IN THE SHAPE THAT MATTERS: I had r3 as 'leave the question and walk away; it answers YEARS OUT', which makes the craft unusable in play — a divination you cannot hear until later is not a divination, it is a note to your successor. ✅ THE ANSWER IS NOW IMMEDIATE AND THE RANK IS THE CLARITY: SHAPE → EVENTS → PEOPLE. ⛔ And the planted-for-someone-unborn fiction survives INSIDE that — the tree holds the question, and whoever asks it later gets the answer at their own rank."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "rootkin",
+   "nativeOrCombination": "native",
+   "axes": {
+    "death_life": 1.0
+   },
+   "id": "spark",
+   "name": "Spark",
+   "levelReq": 5,
+   "energyCost": 13,
+   "attribute": "mental",
+   "shape": "construct",
+   "harmRung": "none",
+   "challengeTypes": [
+    "CREATE",
+    "SURVIVE",
+    "EXPLORE"
+   ],
+   "operativeAxis": [
+    "quality",
+    "persistence"
+   ],
+   "effectTags": [
+    "generation",
+    "capstone",
+    "spark"
+   ],
+   "functions": [
+    "make",
+    "summon",
+    "sustain"
+   ],
+   "description": "⛔ MAKE LIFE WHERE THERE WAS NONE. Not sped, not healed, not regrown — BEGUN. A seed in your palm that had no parent plant. A creature with no lineage behind it. A bloom in water that has been dead for a century. ⚠️ YOU CHOOSE WHAT IT IS, BECAUSE THE CHOOSING IS THE CRAFT. ⛔ AND WHAT YOU MAKE IS ITS OWN THING FROM THE FIRST MOMENT: it does not obey you, does not know you, and owes you nothing. You can make a wolf. You cannot make YOUR wolf.",
+   "narrationHints": "She opens her hand and there is a seed in it that nobody has ever grown. ⚠️ She looks like someone who has just put down something very heavy. ⛔ The seed is already doing something.",
+   "notFor": "⛔ IT MAKES LIFE, NOT A SERVANT — what you spark is its own from the first moment, and a Rootkin who expects loyalty from it has misunderstood their own tradition. ⚠️ AND IT MAKES ONE THING, ONCE, FOR EVERYTHING YOU HAVE: this is the whole pool, and you are finished for the day. ⛔ It cannot un-make, cannot copy a specific living person, and cannot put a mind into something that would not have had one.",
+   "plainly": "A create action, and the tradition's capstone. ⛔ MAKE A LIVING THING THAT DID NOT EXIST — you choose what, and it is genuinely new and genuinely its own. Costs your whole pool; once per day at most. ⚠️ Conserve makes something small and short-lived; surge makes something that will outlast you. ⛔ SINGLE RANK: there is no lesser version of beginning a life.",
+   "intensity": {
+    "conserve": "a small making — a spore, a seedling, something that will live a season and be gone",
+    "surge": "⛔ SPEND EVERYTHING INTO IT: what you make will still be here long after you are not, and it will have gone on making itself the whole time"
+   },
+   "bounds": [
+    {
+     "text": "⛔ THE WHOLE POOL, ONE THING, ONCE. You are finished for the day",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT IS ITS OWN FROM THE FIRST MOMENT — no obedience, no bond, no debt. You make a wolf, not YOUR wolf",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT CANNOT COPY A SPECIFIC PERSON, and it cannot put a mind where one would not have been",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AND IT CANNOT UN-MAKE. What you spark is in the world now, and the world keeps it",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 0,
+    "targets": 1,
+    "crit": {
+     "success": "It comes out further along than you meant — already grown, already doing what it is for.",
+     "failure": "It lives. It is not what you asked for, and it is not going to stop."
+    },
+    "note": "construct/make. ⛔ THE TRADITION'S CAPSTONE AND THE ONLY MISSING L5 IN THE GAME — Life topped out at L4 and its highest craft was `root_that_holds`, which is RETRIEVAL: borrowed structure from Death's ladder. **The life pole's summit was a thing Death also does.** ⛔ SINGLE RANK BY DESIGN, and Erik asked the question directly. ⚠️ A RANKED CRAFT SAYS 'you can do a lesser version of this now' AND SPARK HAS NO LESSER VERSION — you either put life where there was none or you did not. ✅ Precedent: `worldsong` and `light_borne` are single-rank capstones ('the special IS the craft'), and Erik ruled `the_cut_thread` single-rank because ending one life is one act. **Beginning one is the same shape.** ⛔ AND THE VARIATION LIVES WHERE IT BELONGS: `intensity` for scale, energy at use-time for what a thing costs, and THE GENERATIVE SUBSTRATE for what can be made at all — `generative_substrate` already holds that 'every type of thing we authored by hand is a TEMPLATE the engine can generate more of, with persistence, SO THE WORLD GROWS AS PEOPLE PLAY IT', creatures included. ✅ ERIK 2026-08-30: 'it circles us back to a PRIMARY FEATURE of this game — GENERATIVE CONTENT. A player or NPC using SPARK MAKES SOMETHING THAT DIDN'T EXIST BEFORE.' ⚠️ SO THE LADDER IS THE WORLD, NOT A PURCHASE: what a Rootkin can spark grows with what they have seen."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Spark",
+     "functions": [
+      "make",
+      "summon",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ MAKE A LIVING THING THAT DID NOT EXIST. You choose what it is. It is new, it is real, and it is already its own. ⚠️ A seed with no parent, a creature with no lineage, a bloom in dead water.",
+     "cannot": "⛔ The whole pool, one thing, once. ⚠️ It owes you nothing and will not obey you. ⛔ And it cannot be un-made — the world keeps what you put in it."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-30. ⚠️ AND HE REJECTED MY FIRST BOUNDS OUTRIGHT: I had written 'you cannot spark what has never lived' and 'you do not choose what it becomes'. ⛔ 'THE BOUND IS RIDICULOUS ON SPARK — YOU CAN'T SPARK NEW LIFE? IT IS THE SPARK! You can't choose what it becomes??? STUPID.' ✅ HE IS RIGHT: I had flinched from the craft and written bounds that cancelled its subject. **A capstone whose limits delete the thing it is for is not a capstone.** ⚠️ The real limits are COST (the whole pool), AUTONOMY (it is not yours), and IRREVERSIBILITY (you cannot un-make it) — all of which make the craft bigger rather than smaller."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

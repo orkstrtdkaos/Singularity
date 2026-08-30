@@ -19387,14 +19387,27 @@ await (async () => {
       const txt = Array.isArray(out) ? out.join(String.fromCharCode(10)) : String(out);
       return (txt.match(new RegExp("HARM: ([^"+String.fromCharCode(92)+"n]+)")) || [])[1] || "";
     };
-    // `unmake_seal` authors [none, damaging, lethal] with `lethal` on the ability — the clearest case there is.
-    const us = abil264.unmake_seal;
-    check("CCODE-264: unmake_seal is the worked case — none → damaging → lethal, ability says lethal (floor)",
-      !!us && us.harmRung === "lethal" && (us.tree || []).map(t => t.harmRung).join(",") === "none,damaging,lethal");
+    // ⛔ THE WORKED CASE IS DERIVED, NOT NAMED. This gate hardcoded `unmake_seal`, and on 2026-08-30 Aevi
+    // re-ruled it from `lethal` to `none` — correctly: it opens seals, it does not kill people, and it was
+    // distorting the tradition tournament by being counted as harm. ⚠️ HER CONTENT WAS RIGHT AND MY GATE WAS
+    // BRITTLE: the CLAIM (a rung climbs with rank, and the ability value is the ceiling) was never about that
+    // one craft, but the gate could not survive the corpus moving underneath its example.
+    //
+    // ⚠️ SO IT ASKS THE CORPUS FOR AN EXAMPLE and sorts for determinism — the same run picks the same craft.
+    // ⛔ AND THE SUPPLY IS ITS OWN FLOOR: if the shape ever stops existing, that is a real finding about the
+    // catalogue and it fails here rather than being papered over with a second hardcoded id.
+    const worked264 = Object.values(abil264)
+      .filter(a => a.harmRung === "lethal" && (a.tree || []).map(t => t.harmRung).join(",") === "none,damaging,lethal")
+      .sort((x, y) => String(x.id).localeCompare(String(y.id)))[0];
+    check("CCODE-264: the corpus still carries a none → damaging → lethal craft to work through",
+      !!worked264, worked264 ? `using ${worked264.id}` : "no craft authors the climbing shape any more");
+    const wid = worked264?.id;
+    check(`CCODE-264: ${wid || "the worked case"} climbs none → damaging → lethal with the ability at the ceiling`,
+      !!worked264);
     check("CCODE-264: at RANK 1 the GM is told it harms nothing — not that it can end a life",
-      /HARMS NOTHING/.test(gm("unmake_seal", 1)) && !/end a life/.test(gm("unmake_seal", 1)));
+      !!wid && /HARMS NOTHING/.test(gm(wid, 1)) && !/end a life/.test(gm(wid, 1)));
     check("CCODE-264: at rank 2 it wounds, and only at rank 3 can it end a life — the gloss climbs with the rank",
-      /WOUNDS but does not slay/.test(gm("unmake_seal", 2)) && /CAN end a life/.test(gm("unmake_seal", 3)));
+      !!wid && /WOUNDS but does not slay/.test(gm(wid, 2)) && /CAN end a life/.test(gm(wid, 3)));
 
     // ⚠️ AND THE ABILITY VALUE IS STILL THE FALLBACK. A craft that authors a rung only on the ability must
     // not lose its HARM line entirely — that would trade one wrong instruction for a missing one.

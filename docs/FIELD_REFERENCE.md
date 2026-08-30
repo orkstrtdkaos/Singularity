@@ -500,6 +500,7 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `sectFlavour` | 12 | `root`×12 | ⛔ DARK | — |
 | `damageMix` | 10 | `mechanic`×10 | ✅ READ | `damagetypes.js` |
 | `powerMix` | 8 | `root`×8 | ⛔ DARK | — |
+| `interceptDamage` | 8 | `tree`×8 | ✅ READ | `intercept.js`, `app.js` |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |
 | `namedCurrent` | 7 | `root`×7 | ⛔ DARK | — |
 | `evasion` | 7 | `mechanic`×7 | ✅ READ | `craftmechanics.js`, `skill_battle.js`, `app.js` |
@@ -517,7 +518,6 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `summon` | 3 | `root`×3 | ✅ READ | `gm.js`, `npcsheet.js`, `roundreceipt.js` |
 | `backlashRungNone` | 3 | `root`×3 | ⛔ DARK | — |
 | `interceptCondition` | 3 | `tree`×3 | ✅ READ | `intercept.js`, `app.js` |
-| `interceptDamage` | 3 | `tree`×3 | ✅ READ | `intercept.js`, `app.js` |
 | `opensAccess` | 2 | `tree`×2 | ✅ READ | `progression.js` |
 | `downtime` | 2 | `root`×2 | ⚠️ CI-ONLY | _1 test/script only_ |
 | `pierce` | 2 | `tree`×1 `mechanic`×1 | ✅ READ | `capabilities.js`, `skill_battle.js` |

@@ -1422,7 +1422,8 @@
      "success": "It lands on the one person the other side could least afford to lose, and you did not have to choose.",
      "failure": "You commit to the pull and the attack was never aimed at you."
     },
-    "note": "hobble/redirect. ⛔ ERIK 2026-08-29: 'a veteran can also PULL SOMEONE OR SOMETHING ELSE INTO HARM'S PATH TO TAKE A HIT THAT IS MEANT FOR THEM.' ⚠️ THE EXACT INVERSE OF `step_between` (stillhold), which is the violence/peace axis working as designed: the peace pole interposes ITSELF, the violence pole interposes SOMEBODY ELSE, and they are the same insight about where a blow is going. ⛔ IT IS DELIBERATELY NOT PUNISHED — no reputation cost, no standing hit, no narrative debt. It is a cold craft in a warrior culture and the cost is that PEOPLE SEE YOU DO IT."
+    "note": "hobble/redirect. ⛔ ERIK 2026-08-29: 'a veteran can also PULL SOMEONE OR SOMETHING ELSE INTO HARM'S PATH TO TAKE A HIT THAT IS MEANT FOR THEM.' ⚠️ THE EXACT INVERSE OF `step_between` (stillhold), which is the violence/peace axis working as designed: the peace pole interposes ITSELF, the violence pole interposes SOMEBODY ELSE, and they are the same insight about where a blow is going. ⛔ IT IS DELIBERATELY NOT PUNISHED — no reputation cost, no standing hit, no narrative debt. It is a cold craft in a warrior culture and the cost is that PEOPLE SEE YOU DO IT.",
+    "_interceptInverted_20260829": "⛔ AUTHORS `interceptDamage` — THE SAME MACHINERY AS `step_between`, WITH THE ROLES REVERSED. CCode's battle test, 2026-08-29: 'in_the_way describes the SAME machinery pointed the other way and AUTHORS NOTHING, so it resolves as a generic hinder. The fix is one authored block, not engine work.' ⚠️ THE INVERSION IS THE WHOLE CRAFT: `openProtection({protectorId, allyId})` normally has the caster as PROTECTOR and the person they cover as ALLY. Here the caster is the ALLY and the person shoved into the path is the PROTECTOR — **made a protector without consenting to be one.** ⛔ THAT IS THE VIOLENCE/PEACE AXIS IN ONE FIELD: stillhold volunteers to be the protector; the marcher NOMINATES SOMEONE."
    },
    "tree": [
     {
@@ -1436,7 +1437,11 @@
      "harmRung": "lethal",
      "gainAxes": [],
      "grants": "⛔ REDIRECT ONE AIMED ATTACK MEANT FOR YOU INTO WHATEVER IS NEAREST — a body, a beast, a laden cart. ⚠️ You do not choose what; you choose the instant.",
-     "cannot": "Once per exchange. ⛔ Something must be within reach. ⚠️ Whatever takes it, takes all of it."
+     "cannot": "Once per exchange. ⛔ Something must be within reach. ⚠️ Whatever takes it, takes all of it.",
+     "interceptDamage": {
+      "allies": 1,
+      "charges": 1
+     }
     },
     {
      "rank": 2,
@@ -1453,7 +1458,11 @@
       "targets"
      ],
      "grants": "⛔ YOU CHOOSE WHO — not the nearest, the one you want it to hit. ⚠️ Combined with knowing who a group cannot afford to lose, this is a way to kill someone with their own side's arrow.",
-     "cannot": "⚠️ They must be within reach and not braced. ⛔ And everyone sees where it went."
+     "cannot": "⚠️ They must be within reach and not braced. ⛔ And everyone sees where it went.",
+     "interceptDamage": {
+      "allies": 1,
+      "rounds": 4
+     }
     },
     {
      "rank": 3,
@@ -1470,10 +1479,15 @@
       "range"
      ],
      "grants": "⛔ REDIRECT WHAT WAS AIMED AT AN ALLY, NOT ONLY AT YOU — a Marcher at this rank decides who in the room takes the incoming, and it need not be either of the two people it concerned.",
-     "cannot": "⛔ STILL ONE AIMED THING AT A TIME, still needs a body within reach. ⚠️ And an ally you save this way watches you put it into someone else."
+     "cannot": "⛔ STILL ONE AIMED THING AT A TIME, still needs a body within reach. ⚠️ And an ally you save this way watches you put it into someone else.",
+     "interceptDamage": {
+      "allies": 2,
+      "rounds": 4
+     }
     }
    ],
-   "_authored": "⛔ ERIK 2026-08-29. ⚠️ AND HE CORRECTED THE INSTINCT THAT WOULD HAVE RUINED IT: asked why a veteran would care about 'unseeing' who is vulnerable, i.e. STOP GIVING THESE PEOPLE A CONSCIENCE THEY DO NOT HAVE. This craft carries no penalty, no standing loss and no narrative debt — per the standing rule that a cost is ENERGY. What it costs is that people watch you do it."
+   "_authored": "⛔ ERIK 2026-08-29. ⚠️ AND HE CORRECTED THE INSTINCT THAT WOULD HAVE RUINED IT: asked why a veteran would care about 'unseeing' who is vulnerable, i.e. STOP GIVING THESE PEOPLE A CONSCIENCE THEY DO NOT HAVE. This craft carries no penalty, no standing loss and no narrative debt — per the standing rule that a cost is ENERGY. What it costs is that people watch you do it.",
+   "_wiredFromBattleTest_20260829": "⚠️ I HAD THIS AS 'NO ENGINE HOOK' AND WAS WRONG IN THE WORSE DIRECTION. CCode: 'none of them is inert — THE DIVISION IS GENERIC vs SPECIFIC, and a GENERIC RESOLUTION IS WORSE THAN AN INERT ONE BECAUSE IT LOOKS LIKE IT WORKED.' ⛔ This craft rolled, dealt its magnitude and printed a receipt, and nothing redirected anything."
   },
   {
    "powerSystem": "metaphysical",
@@ -1512,7 +1526,7 @@
    "description": "⛔ A SHIELD IS A WEAPON THAT ALSO STOPS THINGS. The rim breaks a nose, the boss breaks a stance, and the face of it puts a man on his back with his own momentum. ⚠️ THE REDLINE TEACHES IT AS ONE SKILL — there is no drill for holding it that is not also a drill for hitting with it. ⛔ AND IT IS WORTH MORE BESIDE SOMEONE ELSE CARRYING ONE: two shields overlap, and the overlap is the oldest advantage in the trade.",
    "narrationHints": "She takes the axe on the boss, turns it, and the rim is already moving. ⚠️ The man beside her does not have to look — he knows what her left side is doing because it is what his left side is doing.",
    "notFor": "⛔ YOU MUST HAVE A SHIELD, AND A REAL ONE — a board, a buckler, a door if it comes to it, but not a cloak and not a notion. ⚠️ IT WANTS A FRONT: a shield answers what is in front of it, and a Marcher surrounded is a Marcher with a shield facing the wrong way. ⛔ AND THE OVERLAP NEEDS SOMEONE WHO KNOWS IT — an ally with a shield and no training gets you a bonus and gets themselves nothing.",
-   "plainly": "A fight/defend action. ⛔ STRIKE WITH THE SHIELD FOR 2d6 AND SOAK WITH IT IN THE SAME ACTION — attack and defence are one craft. Rated 5, about six rounds. ⚠️ BESIDE ANOTHER SHIELD-CARRIER YOU BOTH GAIN: soak and the strike improve for each of you. r2 the strike staggers and the soak covers your neighbour's open side; r3 three or more overlapping shields are worth more than the sum — the line the Redline is famous for.",
+   "plainly": "A fight/defend action. ⛔ STRIKE WITH THE SHIELD FOR 2d6 AND SOAK WITH IT IN THE SAME ACTION — attack and defence are one craft. Rated 5, about six rounds. r2 staggers, and lets you TAKE A BLOW MEANT FOR A COMPANION on your soak; r3 covers TWO companions at once while you strike from behind it. ⚠️ You take what you catch, in full.",
    "intensity": {
     "conserve": "guard only — no strike this exchange, and the soak holds",
     "surge": "⛔ STRIKE WITH EVERYTHING AND DROP THE GUARD; the shield is a weapon this round and nothing else"
@@ -1527,7 +1541,7 @@
      "class": "hard"
     },
     {
-     "text": "⚠️ THE OVERLAP NEEDS A TRAINED NEIGHBOUR — an untrained ally with a shield helps you and not themselves",
+     "text": "⚠️ COVERING SOMEONE IS TAKING THE BLOW YOURSELF — on your shield, on your soak, in full. It is not a bonus they receive",
      "class": "hard"
     },
     {
@@ -1553,7 +1567,8 @@
      "success": "The rim takes him under the jaw and the man behind him steps back into someone.",
      "failure": "You commit the shield to the strike and the second one comes in where it was."
     },
-    "note": "guard/strike. ⛔ ERIK 2026-08-29: 'Make a SHIELD WIELDING SKILL. ATTACK AND DEFENSE and a BONUS NEXT TO OTHERS WIELDING SHIELDS for both.' ⚠️ THE MARCHERS HAD NO MELEE WEAPON CRAFT AT ALL: `edge` is the DISCIPLINE, and the ranged side had three distinct crafts while spear, axe, sword and shield shared none. ⛔ AND IT SITS AT L3, WHERE THE TRADITION HAD A HOLE — the level-distribution defect, not the damage curve, which is on-curve throughout (see BACKLOG). ⚠️ THE OVERLAP IS THE DESIGN: it is the only craft in the tradition that pays BOTH parties for standing together, which is what a shield wall actually is."
+    "note": "guard/strike. ⛔ ERIK 2026-08-29: 'Make a SHIELD WIELDING SKILL. ATTACK AND DEFENSE and a BONUS NEXT TO OTHERS WIELDING SHIELDS for both.' ⚠️ THE MARCHERS HAD NO MELEE WEAPON CRAFT AT ALL: `edge` is the DISCIPLINE, and the ranged side had three distinct crafts while spear, axe, sword and shield shared none. ⛔ AND IT SITS AT L3, WHERE THE TRADITION HAD A HOLE — the level-distribution defect, not the damage curve, which is on-curve throughout (see BACKLOG). ⚠️ THE OVERLAP IS THE DESIGN: it is the only craft in the tradition that pays BOTH parties for standing together, which is what a shield wall actually is.",
+    "_overlapReauthored_20260829": "⛔ THE OVERLAP WAS RE-AUTHORED. CCode's battle test 2026-08-29: 'You are right. NOTHING READS ADJACENCY. `melee.js` has NO POSITIONAL CONCEPT WHATSOEVER — no facing, no line, no neighbours. Re-author it. There is nothing to hook and nothing planned that would give it one.' ⚠️ I HAD AUTHORED 'beside another shield-carrier you BOTH gain', which is a bonus keyed to a spatial relationship the engine cannot express — it resolved as a generic guard and read as if it worked. ✅ NOW IT USES `interceptDamage`, WHICH IS BUILT: r2 takes a blow meant for ONE companion, r3 for TWO. ⛔ THE FICTION SURVIVES AND IMPROVES — a shield wall is not a proximity aura, it is PEOPLE HOLDING BLOWS OFF EACH OTHER, and that is now literally what it does."
    },
    "tree": [
     {
@@ -1571,7 +1586,7 @@
     },
     {
      "rank": 2,
-     "name": "Overlap",
+     "name": "Cover the Open Side",
      "functions": [
       "shield",
       "strike",
@@ -1583,8 +1598,12 @@
       "quality",
       "targets"
      ],
-     "grants": "⛔ THE STRIKE STAGGERS — they lose the initiative, not just the hit — AND YOUR SOAK COVERS YOUR NEIGHBOUR'S OPEN SIDE. ⚠️ This is where two Marchers become worth four.",
-     "cannot": "⚠️ The neighbour must hold position; the moment they step away it is two people with shields."
+     "grants": "⛔ THE STRIKE STAGGERS — they lose the initiative, not just the hit — AND YOU MAY TAKE A BLOW MEANT FOR ONE COMPANION, on your shield, resolved against your soak. ⚠️ This is what a shield is FOR beyond your own skin, and it is why two of them are worth more than two people.",
+     "cannot": "⚠️ One companion, and you must be able to reach the blow. ⛔ You take it in full, on your soak, and striking moves the shield.",
+     "interceptDamage": {
+      "allies": 1,
+      "rounds": 6
+     }
     },
     {
      "rank": 3,
@@ -1600,8 +1619,12 @@
       "targets",
       "scope"
      ],
-     "grants": "⛔ THREE OR MORE OVERLAPPING ARE WORTH MORE THAN THE SUM — the line the Redline is famous for, and each of them strikes from behind it. ⚠️ A wall of these does not need to advance; it needs you to come to it.",
-     "cannot": "⛔ IT IS STILL A FRONT, AND `break_the_line` IS EXACTLY WHAT ANSWERS IT — the Marchers know both halves and teach them together."
+     "grants": "⛔ COVER TWO COMPANIONS AT ONCE AND STRIKE FROM BEHIND IT — the line the Redline is famous for is a set of people each holding a blow off the next. ⚠️ A wall of these does not need to advance; it needs you to come to it.",
+     "cannot": "⛔ IT IS STILL A FRONT, AND `break_the_line` IS EXACTLY WHAT ANSWERS IT — the Marchers know both halves and teach them together.",
+     "interceptDamage": {
+      "allies": 2,
+      "rounds": 6
+     }
     }
    ],
    "_authored": "⛔ ERIK 2026-08-29. ⚠️ Fills the melee gap AND the L3 hole. And it closes a loop: the tradition now has `shieldwork` (make a wall), `held_line` (hold one) and `break_the_line` (break one) — the same knowledge in three directions, which is what a warrior culture whose whole society is honed conflict should look like."

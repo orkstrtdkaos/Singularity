@@ -104,6 +104,42 @@ const CHECKS = [
     },
   },
   {
+    n: 10, id: "leading-article", authority: "Erik, 2026-08-30", floor: 0,
+    severity: "⛔ HARMFUL",
+    what: "a craft or rank name that opens with \"The\" — Erik has corrected this THREE times and a written rule did not hold",
+    // ⛔ THIS IS A GATE BECAUSE THE RULE FAILED AS PROSE. It lived in PIPELINE rule 10 and I kept breaking it,
+    // twice while self-checking and reporting clean — because I was measuring CRAFT names and the habit was in
+    // RANK names. Erik: "you continue to fail on the 'The' titles. MOVE THAT RULE TO SOMEWHERE YOU WILL FOLLOW IT."
+    // ⚠️ A check that runs on every lint is somewhere I will follow it. A paragraph is not.
+    applies: c => true,
+    run(c) {
+      const bad = [];
+      if (String(c.name || "").startsWith("The ")) bad.push(`craft "${c.name}"`);
+      for (const t of (c.tree || [])) {
+        if (String(t.name || "").startsWith("The ")) bad.push(`r${t.rank} "${t.name}"`);
+      }
+      return bad.length ? bad.join(" · ") : null;
+    },
+  },
+  {
+    n: 11, id: "name-collision", authority: "Erik, 2026-08-30", floor: 0,
+    severity: "⛔ HARMFUL",
+    what: "a rank named after a DIFFERENT craft that exists — ambiguous to a GM (\"take Held Line\" meant two things)",
+    // ⚠️ EXEMPTS r1 SHARING ITS OWN CRAFT'S NAME, which is the convention and ~140 crafts do it.
+    applies: c => true,
+    run(c, all) {
+      if (!all) return null;
+      const byName = new Map();
+      for (const x of all) byName.set(x.name, x.id);
+      const bad = [];
+      for (const t of (c.tree || [])) {
+        const owner = byName.get(t.name);
+        if (owner && owner !== c.id) bad.push(`r${t.rank} "${t.name}" is the craft ${owner}`);
+      }
+      return bad.length ? bad.join(" · ") : null;
+    },
+  },
+  {
     n: 4, id: "r1-deepens", authority: AUTH.gains, floor: 200,
     severity: "⚠️ INFORMATIONAL — DO NOT FIX",
     // ⛔ DEMOTED FROM AUTO-FIXABLE, 2026-08-24, BEFORE ANY WRITE. Two authorities say leave it alone:

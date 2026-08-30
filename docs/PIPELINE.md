@@ -221,7 +221,25 @@ punishment.**
 **And it is the same error one level up from the cost rule** — ⛔ **`[cost]` bounds were narrative debts;
 these are narrative debts wearing a surge.** ✅ **Both answer to the same ruling: THE COST IS ENERGY.**
 
-### 10. ⚠️ NAME DRIFT HAPPENS WITHIN A SITTING, NOT ACROSS THE CORPUS
+### 10. ⛔ MOVED TO A GATE — a rule I broke three times is not a rule, it is a wish
+
+**Erik, 2026-08-30: *"You continue to fail on the 'The' titles. MOVE THAT RULE TO SOMEWHERE YOU WILL FOLLOW
+IT."***
+
+⚠️ **This rule lived here as prose and I broke it three times — twice WHILE SELF-CHECKING AND REPORTING
+CLEAN**, because I measured craft names and the habit was in rank names.
+
+✅ **IT IS NOW `po/craft_lint.mjs` CHECK 10 (`leading-article`) AND CHECK 11 (`name-collision`)**, both
+`⛔ HARMFUL`, both running on every lint. ⛔ **The gate found the habit in 23 TRADITIONS within seconds of
+existing.** ⚠️ **Three corrections and a written paragraph found none of them.**
+
+**THE GENERAL LESSON, WHICH IS WHY THIS ENTRY STAYS:** ⛔ **if I have broken a rule twice, the rule is in
+the wrong place.** ✅ **Move it to something that runs.** A paragraph asks me to remember; a check does not
+have to.
+
+---
+
+### 10b. ⚠️ NAME DRIFT HAPPENS WITHIN A SITTING, NOT ACROSS THE CORPUS
 
 **Added 2026-08-29. Erik: *"You're starting to use 'the' in every title again. WE TALKED ABOUT THIS."***
 

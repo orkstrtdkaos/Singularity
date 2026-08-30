@@ -1224,6 +1224,57 @@ console.log("\n── §22 · a Mythical is not a bigger hero ──");
   check("§22: the swing is a clean number", String(myth.heroSwing) === "0.45", String(myth.heroSwing));
 }
 
+/* ══════════ §23 — COHESION DOES SOMETHING, AND SOLE COVERAGE HAS A NAME ══════════ */
+// ⛔ AEVI: "who_falls_first asks for sole; break_the_line asks for cohesion." Both computed since
+// CCODE-307 and NEITHER READ BY ANYTHING — so one craft had nobody to name and the other had nothing to
+// remove.
+//
+// ⚠️ COHESION IS how much of what a group HAS it can actually BRING (SPEC_group_aggregation §3b), so the
+// folded contribution IS what they bring — the right place and the only place. ⛔ A GROUP AT LOW COHESION
+// STILL HAS ITS COVERAGE AND CANNOT USE IT, which is what a rout is and the game could not express.
+console.log("\n── §23 · cohesion bites, and the load-bearing member has a name ──");
+{
+  const SBc = await import("../engine/skill_battle.js");
+  const GRc = await import("../engine/group.js");
+  const rulesC = rj("content/packs/core/rules/resolution.json");
+  const sbC = rj("content/packs/core/rules/skill_battle_system.json").engine;
+  const stepsC = rj("content/packs/core/rules/intensity_scaling.json").steps;
+  const shC = (o = {}) => ({ attributes: { physical: 6, mental: 6, social: 6, practical: 6 }, energy: 200, health: 40, skills: [], ...o });
+  const fighter = (id, down) => ({ id, name: id, present: true, downed: down ? { why: "x" } : null, contributions: ["HARM", "MARTIAL"], sheet: shC() });
+  const add = (fold) => {
+    let z = 5; const rngC = () => { z |= 0; z = (z + 0x6D2B79F5) | 0; let q = Math.imul(z ^ (z >>> 15), 1 | z); q = (q + Math.imul(q ^ (q >>> 7), 61 | q)) ^ q; return ((q ^ (q >>> 14)) >>> 0) / 4294967296; };
+    const r = SBc.battleRound({ playerDecl: { function: "strike", tier: 8, attribute: "physical", intensity: "surge", name: "cut" },
+      oppDecl: { function: "shield", tier: 1, name: "g" },
+      playerSheet: shC({ attributes: { physical: 12, mental: 12, social: 12, practical: 12 } }),
+      oppSheet: shC({ attributes: { physical: 1, mental: 1, social: 1, practical: 1 }, health: 300 }),
+      state: { momentum: 0, round: 1 }, rules: rulesC, sb: sbC, steps: stepsC, rng: rngC, folded: fold });
+    return r?.damage?.melee?.added ?? 0;
+  };
+  const intact = add([fighter("a"), fighter("b"), fighter("c"), fighter("d")]);
+  const half = add([fighter("a"), fighter("b"), fighter("c", true), fighter("d", true)]);
+  const rout = add([fighter("a"), fighter("b", true), fighter("c", true), fighter("d", true)]);
+
+  // ⛔ NON-VACUITY: an intact fold must contribute, or every comparison below is between two zeroes.
+  check("§23: an intact fold contributes", intact > 0, String(intact));
+  check("§23: a fold coming apart brings LESS", half < intact, `${half} < ${intact}`);
+  check("§23: …and a routed one brings less still", rout < half, `${rout} < ${half}`);
+
+  // ⛔ AND THE PERSON. sole turned into a name is what who_falls_first asks for.
+  const mk = (id, tags, extra = {}) => ({ id, name: id, present: true, downed: null, assistTags: tags, ...extra });
+  const soft = (id, tags) => mk(id, tags, { canStrike: false });
+  const band = [soft("Sprig", ["mend"]), soft("Quill", ["study"]), mk("spear1", []), mk("spear2", [])];
+  const lb = GRc.loadBearing(band);
+  check("§23: the load-bearing member is named", lb && lb.name === "Sprig", JSON.stringify(lb));
+  // ⚠️ AND IT IS NOT "the weakest" OR "the healer" — the craft's own failure line says so.
+  const scholars = [mk("Pell", []), soft("A", ["study"]), soft("B", ["study"])];
+  check("§23: …it is whoever holds a capability ALONE — a lone fighter among scholars",
+    GRc.loadBearing(scholars)?.name === "Pell", JSON.stringify(GRc.loadBearing(scholars)));
+  check("§23: with nobody sole, nobody is load-bearing",
+    GRc.loadBearing([soft("A", ["mend"]), soft("B", ["mend"])]) === null);
+  // ✅ AND THE PLAYER IS TOLD, one row above the control that acts on it.
+  check("§23: the panel names them beside the guard pick", rd("app.js").includes("is load-bearing"));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

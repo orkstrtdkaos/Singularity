@@ -263,8 +263,11 @@ working papers; **this is the answer.**
 | 08-30 | ✅ **CCODE-321 — ERIK RULES: a Mythical is BOTH** | *“a different kind of thing — status that reflects how much influence and impact they can make — AND a very high level individual… units and bands that draw the personal attention of a Mythical are at GREAT RISK… they are not the same as a Hero tier”* | `§22`, seven assertions | ✅ **riffraff grinds · epic gains (the shipped 0.15, unchanged) · legendary breaks through · mythic breaks through at 0.45 with personal risk at the FLOOR** |
 | 08-30 | ✅ **and the ladder was already written down** | `arc_response.attentionByTier` — mythic 3 · legendary 2 · epic 1 · heroic 0.5 · riffraff 0.25 | the cap is the epic baseline × the rung's own weight | ⛔ **it invents no vocabulary**: “how much attention a rung commands” IS Erik's “how much influence and impact they can make”, canon since SNG-280 |
 | 08-30 | ⚠️ **and one thing Erik named that is NOT built** | *“if you get the attention of one, they have left their attention off bigger affairs — that opens opportunities and it is why it's rare”* | — | ⛔ **a Mythical engaging you means their ARC is unattended.** That is a real mechanic and it is Aevi's to shape — recorded so it is not lost |
+| 08-30 | ✅ **CCODE-323 — COHESION FINALLY BITES** | Aevi: *“`break_the_line` asks for cohesion”* — and **nothing multiplied by it**, so the craft had nothing to remove | `§23`: an intact fold adds **+8**, one down **+5**, two down **+2**, a rout **+1** | ✅ cohesion is *how much of what a group HAS it can BRING*, and the folded contribution IS what they bring — **the right place and the only place** |
+| 08-30 | ✅ **CCODE-322 — `loadBearing()`: sole coverage turned into a PERSON** | Aevi: *“`who_falls_first` asks for sole”* | gated, and **it is not “the weakest” or “the healer”** — a lone fighter among scholars is load-bearing, which is the craft's own failure line | ✅ the panel names them **one row above the guard pick that acts on it** |
+| 08-30 | ⛔ **and one thing that CANNOT be built yet** | `who_falls_first` says *“name the member of a GROUP”* — meaning the enemy's | measured: **`battleRound` has no enemy group at all**, the opponent is one sheet | ⚠️ so it reads YOUR line, which is the reachable half and pairs with `step_between`. **The enemy-group half needs a model that does not exist** |
 
-**Last verified: 2026-08-28 · v1.9.272 · 400 crafts.**
+**Last verified: 2026-08-28 · v1.9.273 · 400 crafts.**
 
 ---
 

@@ -111,14 +111,14 @@ import { tickAllProjects, openProject, projectProgress, interruptProject, resume
 import { holdOpen, slowSink, canReach, resolveRetrieval } from "./engine/death.js"; // CCODE-270: the player's road back — the seven retrieval crafts had no door
 import { alliesOf } from "./engine/combatants.js"; // CCODE-276: the roster the party block renders
 import { commandSlots, bringForward, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
-import { groupCapability } from "./engine/group.js";   // CCODE-317: what your line COVERS, and what only one person holds
+import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.272";
+const APP_VERSION = "1.9.273";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12624,6 +12624,14 @@ function skillBattlePanel() {
             return `<div class="sb-cover-row"><div class="sys-label">Your line covers</div>
               <div class="sb-cover">${bits.join(" · ")}</div>
               ${cap.lostCoverage.length ? `<div class="hint">⛔ gone with the fallen: ${esc(cap.lostCoverage.join(", "))}</div>` : ""}
+              ${(() => {
+                // ⛔ CCODE-322 — SOLE COVERAGE, TURNED INTO A PERSON. Aevi's `who_falls_first` names “the
+                // member of a group whose loss costs them most”, and that is this. ⚠️ IT PAIRS WITH THE
+                // GUARD PICK DIRECTLY: the panel now tells you who to stand in front of, one row above the
+                // control that lets you do it.
+                const lb = loadBearing(canPick);
+                return lb ? `<div class="hint">⚠️ <strong>${esc(String(lb.name).split(" ")[0])}</strong> is load-bearing — ${esc(lb.why)}</div>` : "";
+              })()}
             </div>`;
           } catch { return ""; }
         })()}

@@ -136,6 +136,42 @@ function cohesionOf({ structure = null, standing = 0, down = 0, leadersDown = 0,
 }
 
 /**
+ * ⛔ CCODE-322 — WHO IS LOAD-BEARING. Aevi's `who_falls_first`: "NAME THE MEMBER OF A GROUP WHOSE LOSS
+ * COSTS THEM MOST — and take a named advantage on acting against them."
+ *
+ * ⚠️ THAT IS `sole`, ALREADY COMPUTED, TURNED INTO A PERSON. A capability held by exactly one standing
+ * member is one casualty from leaving the group entirely; the member holding the most of those is the one
+ * whose loss costs most. ⛔ IT IS NOT "the weakest" AND IT IS NOT "the healer" — a spear who is the only
+ * MARTIAL in a room of scholars is load-bearing, and the craft's own failure line knows it: "you name the
+ * decoy, who is standing exactly where a mender would stand."
+ *
+ * ⚠️ TIES GO TO THE ONE WITH FEWER FAMILIES OVERALL, because a specialist holding one sole capability is
+ * more fragile than a generalist holding the same one alongside three others.
+ *
+ * @returns {null | {id, name, holds: string[], why: string}}
+ */
+export function loadBearing(members = [], opts = {}) {
+  const cap = groupCapability(members, opts);
+  if (!cap.sole.length) return null;
+  const standing = (members || []).filter(m => m && m.present !== false && !isDowned(m));
+  let best = null;
+  for (const m of standing) {
+    const fams = contributionsOf(m.record || m, opts);
+    const holds = fams.filter(f => cap.sole.includes(f));
+    if (!holds.length) continue;
+    if (!best || holds.length > best.holds.length
+      || (holds.length === best.holds.length && fams.length < best.breadth)) {
+      best = { id: m.id, name: m.name, holds, breadth: fams.length };
+    }
+  }
+  if (!best) return null;
+  return { id: best.id, name: best.name, holds: best.holds,
+    why: best.holds.length === 1
+      ? `nobody else here brings ${best.holds[0]}`
+      : `nobody else here brings ${best.holds.slice(0, -1).join(", ")} or ${best.holds[best.holds.length - 1]}` };
+}
+
+/**
  * ⛔ GROUP AGAINST GROUP, READ AS COVERAGE RATHER THAN HEADCOUNT. Aevi's §5.4.
  *
  * ⚠️ THIS IS WHY A LEGION AND A BAND OF FIVE HEROES ARE NOT COMPARABLE BY SIZE. A unit is narrow and very

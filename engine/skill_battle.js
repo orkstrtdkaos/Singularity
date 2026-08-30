@@ -9,6 +9,7 @@ import { resolveAction } from "./resolve.js";
 import { chooseTarget, foeKnowledge } from "./targeting.js";
 import { damageMixOf, wardAnswer, resolveComposite } from "./damagetypes.js";   // CCODE-281: composite damage, and the reader `wardTypes` never had
 import { predictAggregate, distributeCasualties, combatWeight } from "./melee.js";   // CCODE-298: the folded line takes losses too   // CCODE-274: the folded party contributes as a measured aggregate, not as N more rolls   // CCODE-250: a foe chooses who to hit
+import { groupCapability, loadBearing } from "./group.js";   // CCODE-322/323: what the line covers, who holds it alone, and how much of it they can bring
 import { redirectImposition, interceptorFor, catchesCondition, catchesDamage } from "./intercept.js";
 import { persistsUntilHealed, persistedConditionName } from "./conditions.js";   // CCODE-296: the readers that accept BOTH authored shapes
 import { downEntity } from "./combatants.js";   // CCODE-298: the first path that can fire an authored downedEffect   // CCODE-296: the readers that accept BOTH authored shapes   // CCODE-250: …and someone may step in front of it
@@ -1389,14 +1390,25 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         if (able.length && !foldBlocked) {
           const per = Math.max(0, Number(sb?.melee?.perFoldedAlly ?? 2));
           const agg = predictAggregate({ mean: per, sd: per / 2 }, able.length);
-          const add = Math.max(0, Math.round(agg.mean));
+          // ⛔ CCODE-323 — COHESION FINALLY DOES SOMETHING. `groupCapability` has computed it since
+          // CCODE-307 and NOTHING MULTIPLIED BY IT, so Aevi's `break_the_line` — which removes a
+          // formation's benefit without killing anyone — had nothing to remove.
+          //
+          // ⚠️ THIS IS THE RIGHT PLACE AND THE ONLY PLACE. Cohesion is "how much of what a group HAS it can
+          // actually BRING" (SPEC_group_aggregation §3b), and the folded contribution IS what they bring.
+          // ⛔ A GROUP AT LOW COHESION STILL HAS ITS COVERAGE AND CANNOT USE IT — which is what a rout is,
+          // and the game had no way to express one.
+          const foldCap = groupCapability(folded, {});
+          const cohesion = Math.max(0, Math.min(1, Number(foldCap?.cohesion ?? 1)));
+          const add = Math.max(0, Math.round(agg.mean * cohesion));
           if (add > 0) {
             damage = { ...damage, amount: (Number(damage.amount) || 0) + add,
               // ⚠️ REPORTED SEPARATELY AND BY NAME. A number folded silently into the total would make the
               // party invisible at exactly the moment it mattered — and Erik's whole ruling is that these
               // are people you chose not to narrate, not people who stopped existing.
               melee: { added: add, by: able.map(f => f.name || f.id), count: able.length,
-                why: `${able.map(f => String(f.name || f.id).split(" ")[0]).join(", ")} are in it too` } };
+                why: `${able.map(f => String(f.name || f.id).split(" ")[0]).join(", ")} are in it too` + (cohesion < 0.999 ? ` — but the line is coming apart` : ""),
+                ...(cohesion < 0.999 ? { cohesion } : {}) } };
           }
         }
       }

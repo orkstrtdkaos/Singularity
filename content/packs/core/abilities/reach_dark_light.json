@@ -1734,7 +1734,7 @@
    "harmRung": "none",
    "narrationHints": "She had her hands in the dark the way a potter has hands in clay.",
    "description": "Shape shadow into functional form — darkness as a material that can be worked.",
-   "notFor": "⛔ SHADOW IS A MATERIAL AND IT IS NOT A STRONG ONE — a worked shadow holds a shape and a weight for a while, and will not hold an edge. ⚠️ AND IT MUST BE CAST BY SOMETHING: you shape shadow, you do not conjure it. ⛔ A PITCH-BLACK ROOM GIVES YOU NOTHING TO WORK WITH — no light, no shadow — WHICH IS WHY THE DEEP IS LIT BY LIVING GLOW AND WHY AN UMBRAL BRINGS A LAMP TO A WORKSHOP.",
+   "notFor": "⛔ SHADOW IS A MATERIAL AND IT IS NOT A STRONG ONE — a worked shadow holds a shape and a weight for a while, and will not hold an edge. ⚠️ AND IT MUST BE CAST BY SOMETHING: you SHAPE shadow, you do not conjure it, so you need a light somewhere and an object for it to fall on. ⛔ Nothing made this way survives being brightly lit from every side at once.",
    "tradition": "umbral",
    "functions": [
     "conceal",
@@ -1805,7 +1805,7 @@
     "magnitude": 6,
     "duration": 6,
     "scope": 2,
-    "_needsContrast": "⛔ CORRECTED 2026-08-29: the notFor said 'nothing made this way survives FULL LIGHT' and implied darkness was the requirement. ⚠️ THE REQUIREMENT IS CONTRAST. The Umbral Depths are 'sunless underworlds LIT BY LIVING GLOW' — biolume — and that glow is what makes the shadow this craft is made of."
+    "_needsContrast": "⚠️ The craft SHAPES shadow rather than conjuring it, so it needs something casting one. ⛔ THAT IS A MATERIALS NOTE, NOT A CLAIM THAT DARKNESS IS BAD FOR UMBRALS — the Depths are lit by living glow and an umbral is perfectly at home in a lightless room; they simply cannot WORK shadow in one, the same way a mason cannot cut stone that is not there."
    },
    "rankDeltas": [
     {
@@ -4195,7 +4195,7 @@
     "dark_light": -0.6
    },
    "id": "the_long_patience",
-   "name": "The Long Patience",
+   "name": "Set To Wait",
    "levelReq": 2,
    "energyCost": 5,
    "attribute": "practical",
@@ -4220,13 +4220,13 @@
     "empower",
     "conceal"
    ],
-   "description": "⛔ WAIT WHERE A THING MUST PASS, FOR AS LONG AS IT TAKES — then open with everything the waiting bought. The Umbral hunt is not a chase: know the space, choose the place, and SIT. ⚠️ THE KILL IS UNREMARKABLE; THE SITTING IS THE CRAFT. ⛔ AND YOU WANT THEM CARRYING A LAMP: a light makes the shadow you are standing in, and a man with a torch has ruined his own eyes for you.",
-   "narrationHints": "They have been there since before the guard changed, and the guard has changed twice. ⚠️ Nothing about them is hidden by a working — they simply have not moved, and people do not look at what has not moved.",
+   "description": "⛔ SET UP TO WAIT FOR SOMETHING, AND OPEN WITH EVERYTHING THE WAITING BOUGHT. A doorway for ten minutes, a road for an evening, a room until they come back — the length does not matter and the SETTING does. ⚠️ THE KILL IS UNREMARKABLE; THE SITTING IS THE CRAFT. ⛔ And you would rather they carried a lamp: it casts the shadow you are in and ruins their night-eyes.",
+   "narrationHints": "She picked the spot, sat down in it, and stopped being a thing the room contained. ⚠️ It was about twenty minutes. ⛔ It works the same at twenty minutes as at two days — what it needs is that you CHOSE the place and were there first.",
    "notFor": "⛔ IT IS NOT CONCEALMENT AND DOES NOT STACK AS ONE — the craft makes you easy not to notice and lets you hold a position past what a body should. ⚠️ IT ENDS THE MOMENT YOU ACT, and the opening is all you get. ⛔ Nor does it choose the place for you: knowing where to wait is `felt_room` and your own judgement, and a badly chosen spot is a night wasted.",
-   "plainly": "A stealth/fight action. Hold a position for hours without fatigue and be hard to notice — then ⛔ YOUR OPENING STRIKE FROM THE WAIT AUTOMATICALLY CRITS, and the target does not act that round. r2 waits a night and brings companions who all get the opening; r3 waits days and the crit carries PIERCE. ⚠️ It ends when you move, and you only get it once per wait.",
+   "plainly": "A stealth/fight action. Set up to wait somewhere you have chosen — for minutes, hours, or longer — without fatigue and hard to notice. ⛔ YOUR OPENING STRIKE OUT OF THE WAIT AUTO-CRITS AND THEY DO NOT ACT THAT ROUND. r2 brings companions into the wait and holds far longer; r3 carries PIERCE on the opening. ⚠️ It ends when you act, and the opening is once per wait.",
    "intensity": {
-    "conserve": "an hour, alone",
-    "surge": "wait as long as it takes; ⛔ YOU WILL STILL BE THERE WHEN THEY HAVE STOPPED EXPECTING ANYONE"
+    "conserve": "a short set — a few minutes, alone, and you must be nearly in place already",
+    "surge": "set for as long as it takes; ⛔ YOU WILL STILL BE THERE WHEN THEY HAVE STOPPED EXPECTING ANYONE"
    },
    "bounds": [
     {
@@ -4259,7 +4259,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "Sit Still",
+     "name": "Set To Wait",
      "functions": [
       "conceal",
       "foresee"
@@ -4267,12 +4267,12 @@
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [],
-     "grants": "⛔ HOLD A POSITION FOR HOURS WITHOUT STIFFNESS OR FATIGUE, hard to notice because nothing about you is moving — AND YOUR FIRST STRIKE OUT OF THE WAIT CRITS AUTOMATICALLY, and they do not act that round.",
+     "grants": "⛔ CHOOSE A PLACE AND SET YOURSELF IN IT — no stiffness, no fatigue, hard to notice because nothing about you is moving. ⚠️ YOUR FIRST STRIKE OUT OF THE WAIT CRITS AUTOMATICALLY AND THEY DO NOT ACT THAT ROUND. Minutes or hours; the craft does not care which.",
      "cannot": "⛔ It ends when you move. ⚠️ And someone looking directly at you sees you."
     },
     {
      "rank": 2,
-     "name": "The Fourth Watch",
+     "name": "Set For Others",
      "functions": [
       "conceal",
       "foresee",
@@ -4284,12 +4284,12 @@
       "duration",
       "targets"
      ],
-     "grants": "⛔ A WHOLE NIGHT, AND YOU CAN BRING PEOPLE INTO THE WAIT — a handful of Umbrals in a corridor, all still, none tired, ⚠️ AND EVERY ONE OF THEM OPENS WITH THE SAME AUTOMATIC CRIT. This is the shape of an Umbral raid.",
+     "grants": "⛔ BRING PEOPLE INTO THE WAIT — a handful set in one corridor, all of them still, none of them tired, ⚠️ AND EVERY ONE OF THEM OPENS WITH THE SAME AUTOMATIC CRIT. And the setting holds far longer: a night, a shift-change, however long the thing takes to come.",
      "cannot": "⚠️ Everyone in the wait shares the ending: when one acts, the waiting is over for all of them."
     },
     {
      "rank": 3,
-     "name": "Nine Nights",
+     "name": "Set For Anything",
      "functions": [
       "conceal",
       "foresee",
@@ -4301,11 +4301,12 @@
       "duration",
       "quality"
      ],
-     "grants": "⛔ DAYS RATHER THAN HOURS, AND THE OPENING CARRIES PIERCE — armour does not answer the first blow out of a nine-night wait. ⚠️ A road watched this way stops being a road: the ninth night the supply column simply does not arrive anywhere, and nobody can say where it stopped.",
-     "cannot": "⛔ YOU STILL HAVE TO EAT EVENTUALLY and the craft only spares you the discomfort, not the need. ⚠️ And a wait this long is a commitment: whatever else was happening, happened without you."
+     "grants": "⛔ THE OPENING CARRIES PIERCE — armour does not answer the first blow out of a set wait. ⚠️ AND THE SETTING NO LONGER NEEDS AN END: hold a place until the thing arrives, whenever that is. ⛔ A road watched this way stops being a road, and nobody can say where the column stopped.",
+     "cannot": "⛔ YOU STILL HAVE TO EAT EVENTUALLY — the craft spares you the discomfort, not the need. ⚠️ And a long set is a commitment: whatever else was happening, happened without you."
     }
    ],
-   "_authored": "⛔ ERIK 2026-08-29: 'how do these people HUNT… FIGHT?' ⚠️ MEASURED: 15 crafts, `conceal` on eleven, and NOTHING FOR WAITING — while the culture says the kill is unremarkable and the sitting is the craft, and that an Umbral war is attrition rather than a line. ⛔ IT IS DELIBERATELY NOT A CONCEALMENT CRAFT: the tradition has six of those. This is ENDURANCE AND POSITION, which is what an ambush actually costs."
+   "_authored": "⛔ ERIK 2026-08-29: 'how do these people HUNT… FIGHT?' ⚠️ MEASURED: 15 crafts, `conceal` on eleven, and NOTHING FOR WAITING — while the culture says the kill is unremarkable and the sitting is the craft, and that an Umbral war is attrition rather than a line. ⛔ IT IS DELIBERATELY NOT A CONCEALMENT CRAFT: the tradition has six of those. This is ENDURANCE AND POSITION, which is what an ambush actually costs.",
+   "_renamed_20260829": "⛔ ERIK 2026-08-29: 'I like the long wait now — good assassin skill. IT'S NOT 9 NIGHTS THOUGH. It's ANY TIME YOU SET UP TO WAIT FOR SOMETHING.' ⚠️ Renamed from `The Long Patience` and reframed: the ranks now buy COMPANIONS and PIERCE, not duration-as-spectacle. **It works the same at twenty minutes as at two days** — what it needs is that you CHOSE the place and were there first."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

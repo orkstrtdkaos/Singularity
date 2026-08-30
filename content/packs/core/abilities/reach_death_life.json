@@ -5289,6 +5289,127 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-30. ✅ CLOSES THE WIDEST GAP IN THE TRADITION: Flora is ruled 'micro to macro organisms' and the micro end had NOTHING. ⚠️ AND IT FIXES THE TONE: the profile says 'LIFE AT FLOOD. NOT GENTLE' and the crafts were healers and gardeners with one thorn. A Rootkin who can end a siege by making the besiegers' water alive is frightening in the way the profile claims."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "rootkin",
+   "nativeOrCombination": "native",
+   "axes": {
+    "death_life": 0.7
+   },
+   "id": "grown_guardian",
+   "name": "Grown Guardian",
+   "levelReq": 3,
+   "energyCost": 7,
+   "attribute": "mental",
+   "shape": "bolster",
+   "harmRung": "none",
+   "challengeTypes": [
+    "FIGHT",
+    "DEFEND",
+    "TRAVEL"
+   ],
+   "operativeAxis": [
+    "quality",
+    "duration",
+    "targets"
+   ],
+   "effectTags": [
+    "fauna",
+    "companion",
+    "augment"
+   ],
+   "functions": [
+    "empower",
+    "summon",
+    "sustain"
+   ],
+   "description": "⛔ PUT LIFE AT FLOOD INTO A BEAST AND IT BECOMES SOMETHING ELSE. Bigger, faster, harder to put down, and standing between you and what is coming. ⚠️ IT IS NOT A SUMMON — the animal was already there, and it chooses to stay. ⛔ AT FIRST IT LASTS AN HOUR. HELD LONG ENOUGH IT DOES NOT STOP: the beast is simply what you made it, permanently, and it has its own opinion about that. ⚠️ AND IT WORKS ON A HUMANOID EXACTLY AS WELL, WHICH IS THE PART THE ROOTKIN DO NOT ADVERTISE.",
+   "narrationHints": "The dog that has followed her since the Eaves stands up and keeps standing up — taller, heavier, wrong at the shoulders. ⚠️ It puts itself between her and the road without being asked. ⛔ It is not her dog any more. It is still with her.",
+   "notFor": "⛔ IT AUGMENTS SOMETHING ALIVE AND PRESENT — no summoning, no calling, no making. The beast must already be here and must already tolerate you. ⚠️ AND IT GRANTS NO OBEDIENCE: what you augment is more capable of doing what IT wants, and a Rootkin who augments something that dislikes them has made a better problem. ⛔ It cannot be undone by the one who did it — growth does not run backwards — and past r2 it does not wear off.",
+   "plainly": "A fight/defend action. ⛔ AUGMENT A LIVING CREATURE THAT IS ALREADY WITH YOU — bigger, faster, tougher — and it guards you while it lasts. r1 about an hour; ⚠️ r2 IS PERMANENT; r3 makes it big and sound enough to carry you. ⛔ It grants no obedience and cannot be undone. ⚠️ IT WORKS ON A PERSON TOO.",
+   "intensity": {
+    "conserve": "a lighter augment — noticeably better, and it fades sooner",
+    "surge": "⛔ POUR EVERYTHING IN; what stands up will not be the animal you started with and will not go back"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT AUGMENTS WHAT IS ALREADY THERE — no summoning, no calling, no making",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ NO OBEDIENCE. You make it more capable of what IT wants, not more willing to do what you want",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ GROWTH DOES NOT RUN BACKWARDS — you cannot undo it, and past r2 it does not wear off",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT WORKS ON A HUMANOID. The Rootkin know this and do not discuss it",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 1,
+    "targets": 1,
+    "crit": {
+     "success": "It takes further than you meant and the thing that stands up is genuinely new.",
+     "failure": "It takes, and what you augmented remembers being small."
+    },
+    "note": "bolster/empower. ⛔ ERIK 2026-08-30: 'the beast skill. AUGMENTS AND HAS A BEAST GUARDIAN TEMPORARILY. r2 PERMANENTLY, r3 TURNS IT INTO A MOUNT.' ✅ AND HE FLAGGED THE SHAPE HIMSELF: 'this might be a combination of two skills' — augmentation and companionship. **It is, and they are one craft because in this tradition they are one act: you do not befriend it, you MAKE IT MORE, and it stays because of what it now is.** ⚠️ AND IT CLOSES THE `empower` GAP TOO — Erik: 'why would quickening not be able to make you stronger? ROIDS!' `empower` was absent from a tradition whose one-line is 'growth is a force, and a Rootkin CAN POINT IT'. ⛔ ERIK ON THE HUMANOID CASE: 'if a player uses this on a humanoid — interesting. COOL.' So it is authored to work, with no penalty and no special rule: the same craft, the same result, and the tradition's silence about it is characterisation rather than a bound. ✅ IT ALSO PAIRS WITH `spark`, WHICH IS THE ARGUMENT FOR BOTH: Spark MAKES a creature that owes you nothing; this one TENDS one that already exists, and it still owes you nothing."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Grown Guardian",
+     "functions": [
+      "empower",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ AUGMENT A LIVING CREATURE WITH YOU — bigger, faster, harder to put down — for about an hour, and while it lasts it stands between you and what is coming. ⚠️ It does this because it chooses to.",
+     "cannot": "An hour, one creature, already present and already tolerant of you. ⛔ No obedience. ⚠️ And it works on a person, if you do that."
+    },
+    {
+     "rank": 2,
+     "name": "It Does Not Stop",
+     "functions": [
+      "empower",
+      "sustain",
+      "summon"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "quality"
+     ],
+     "grants": "⛔ THE AUGMENT DOES NOT WEAR OFF. What you made is simply what it is now — permanently, visibly, and for the rest of its life. ⚠️ A Rootkin's companions are recognisable at a distance for this reason.",
+     "cannot": "⛔ AND IT CANNOT BE UNDONE, BY YOU OR ANYONE. ⚠️ What you made permanent is permanent, including on a day you wish it were not."
+    },
+    {
+     "rank": 3,
+     "name": "Bear You",
+     "functions": [
+      "empower",
+      "sustain",
+      "summon"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "targets"
+     ],
+     "grants": "⛔ BIG ENOUGH AND SOUND ENOUGH TO CARRY YOU — a mount, and one that was a wolf or a stag or a dog and is now something the roads do not have a word for. ⚠️ It carries you because it will, and a Rootkin who forgets that is walking.",
+     "cannot": "⛔ IT IS STILL ITS OWN. It can refuse, wander, or decide the road is wrong. ⚠️ And a creature this size is a thing every town notices arriving."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-30, AND IT FOLLOWS A CORRECTION I HAVE HAD MULTIPLE TIMES: 'VALLEYCRAFT JUST MEANS IT'S AVAILABLE TO ANYONE — BEASTFRIEND IS A LIFE CRAFT.' ⚠️ `valley_craft` is a FOOTHILL with parents stillhold 0.4 / wright 0.3 / ROOTKIN 0.3, authored in `foothills.json`, and I had called it 'the folk collection, not a tradition' hours earlier. ✅ SO `beastfriend` WAS ALREADY LIFE'S — and this craft is what a Rootkin does that a farmhand cannot."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

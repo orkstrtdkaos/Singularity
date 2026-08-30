@@ -45,7 +45,13 @@
      "name": "THE SILENCERS",
      "what": "They find the note of a heart and hold it until it stops. Sonic resonance does not care whether the structure is stone or a chest, and a Silencer has never pretended otherwise."
     }
-   }
+   },
+   "parents": {
+    "threnodist": 0.5,
+    "lattice": 0.3,
+    "mason": 0.2
+   },
+   "_parentsMirrored_20260830": "⛔ PARENTS MIRRORED FROM `foothills.json`, WHERE THEY HAVE ALWAYS BEEN, BECAUSE I KEPT RE-DERIVING THEM WRONG FROM THIS FILE. ⚠️ ERIK 2026-08-30: 'VALLEYCRAFT JUST MEANS IT'S AVAILABLE TO ANYONE — BEASTFRIEND IS A LIFE CRAFT. In fact you should find how many times I've corrected this.' ✅ I SEARCHED: the 2026-08-23 session record says outright — '`valley_craft` HAS PARENTS (stillhold 0.4 / wright 0.3 / rootkin 0.3) — **ERIK CORRECTED AEVI ON THIS MULTIPLE TIMES**' — and I did it again today by calling valley_craft 'the folk collection, not a tradition'. ⛔ THE CAUSE: the ruling lives in `foothills.json` and the PROFILE said nothing, so every time I read a tradition profile I re-derived a foothill as parentless. **A ruling stored in one file and needed in another is a ruling that gets re-made wrongly.** ✅ Now it is in both."
   },
   {
    "name": "The Radiant",
@@ -92,7 +98,13 @@
      "what": "Light burned into an eye until nothing behind it works. The Scourers hold that a thing which cannot bear looking at should be unmade by looking at it, and they do it slowly."
     }
    },
-   "_idFixed_20260830": "⚠️ id `radiant` -> `radiant_folk`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty."
+   "_idFixed_20260830": "⚠️ id `radiant` -> `radiant_folk`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty.",
+   "parents": {
+    "blazeborn": 0.5,
+    "wright": 0.3,
+    "lattice": 0.2
+   },
+   "_parentsMirrored_20260830": "⛔ PARENTS MIRRORED FROM `foothills.json`, WHERE THEY HAVE ALWAYS BEEN, BECAUSE I KEPT RE-DERIVING THEM WRONG FROM THIS FILE. ⚠️ ERIK 2026-08-30: 'VALLEYCRAFT JUST MEANS IT'S AVAILABLE TO ANYONE — BEASTFRIEND IS A LIFE CRAFT. In fact you should find how many times I've corrected this.' ✅ I SEARCHED: the 2026-08-23 session record says outright — '`valley_craft` HAS PARENTS (stillhold 0.4 / wright 0.3 / rootkin 0.3) — **ERIK CORRECTED AEVI ON THIS MULTIPLE TIMES**' — and I did it again today by calling valley_craft 'the folk collection, not a tradition'. ⛔ THE CAUSE: the ruling lives in `foothills.json` and the PROFILE said nothing, so every time I read a tradition profile I re-derived a foothill as parentless. **A ruling stored in one file and needed in another is a ruling that gets re-made wrongly.** ✅ Now it is in both."
   },
   {
    "name": "Precursor Work",
@@ -1428,9 +1440,10 @@
       "root_road",
       "carried_green",
       "green_road",
-      "quicken_the_ground"
+      "quicken_the_ground",
+      "grown_guardian"
      ],
-     "_gap": "⬜ NEARLY EMPTY OF ACTUAL ANIMALS — the four listed are substrate-movement crafts that read as fungal networks. ⛔ A LIFE TRADITION THAT CANNOT WORK WITH A BEAST IS NOT ONE, and `speaking_grove` already SAYS 'plants, ANIMALS, the slow intelligence of old wood' while every craft under it is botanical.",
+     "_gap": "✅ `grown_guardian` (L3) is the first Fauna craft that touches a CREATURE rather than a network. ⚠️ AND `beastfriend` WAS ALREADY LIFE'S ALL ALONG — `valley_craft` is a FOOTHILL with rootkin among its parents (0.3), not a rival collection. ⛔ ERIK HAS CORRECTED ME ON THIS MULTIPLE TIMES, per the 2026-08-23 record.",
      "_mycelialFinding": "✅ AND THE MECHANIC IS ALREADY THERE UNDER THE WRONG NAME: `green_road` is 'the connected life-substrate itself, the green road that LINKS EVERY ROOTED PLACE.' ⛔ THAT IS MYCELIUM. The tradition has been authoring fungal networks and calling them plants."
     },
     "_dropped": "⚠️ `adaptation` DROPPED at Erik's instruction. `naturopathy` and `green claim` folded into FLORA — both were about plants specifically."
@@ -1527,7 +1540,13 @@
      "name": "THE PLAIN DANGEROUS",
      "what": "Ordinary craft with nothing behind it. The ones who use hunters_strike on people and greenlore to poison, and who are much harder to see coming than any pole because they look like everyone."
     }
-   }
+   },
+   "parents": {
+    "stillhold": 0.4,
+    "wright": 0.3,
+    "rootkin": 0.3
+   },
+   "_parentsMirrored_20260830": "⛔ PARENTS MIRRORED FROM `foothills.json`, WHERE THEY HAVE ALWAYS BEEN, BECAUSE I KEPT RE-DERIVING THEM WRONG FROM THIS FILE. ⚠️ ERIK 2026-08-30: 'VALLEYCRAFT JUST MEANS IT'S AVAILABLE TO ANYONE — BEASTFRIEND IS A LIFE CRAFT. In fact you should find how many times I've corrected this.' ✅ I SEARCHED: the 2026-08-23 session record says outright — '`valley_craft` HAS PARENTS (stillhold 0.4 / wright 0.3 / rootkin 0.3) — **ERIK CORRECTED AEVI ON THIS MULTIPLE TIMES**' — and I did it again today by calling valley_craft 'the folk collection, not a tradition'. ⛔ THE CAUSE: the ruling lives in `foothills.json` and the PROFILE said nothing, so every time I read a tradition profile I re-derived a foothill as parentless. **A ruling stored in one file and needed in another is a ruling that gets re-made wrongly.** ✅ Now it is in both."
   }
  ],
  "distributionPrinciple": "⚠️ SNG-276 NORTH STAR (Erik 2026-08-03): 'ANYTHING IS ON THE TABLE. ANYTHING IS POSSIBLE.' A tradition is a DISTRIBUTION, not a center. Every profile's oneLine/theCraft/withMastery describe the MODE — how most practitioners use it, and the polite public face. That is real and it is most of them. But a people is not its median. `modes` names the shapes the bulk of the tradition takes; `tail` names what it looks like at the far end, where the same craft is turned to the thing the center will not do. THE TAIL IS NOT A VILLAIN CLASS — it is the same craft, same training, different answer to what it is FOR. One practitioner uses shatterpoint on walls; another uses it on chests. Both are Harmonics. AND THIS TIES TO SCHOOLS: a school is what you reach WITH; a mode/tail is what you reach FOR. CONSEQUENCE FOR BOUNDS: a craft's bounds state what it CANNOT REACH, never what a practitioner should not want. A bound that reads as manners is describing the mode and calling it the world."

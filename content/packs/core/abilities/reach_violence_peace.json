@@ -140,7 +140,8 @@
    "_powerSystemWas": "reach_violence_peace",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_typed_20260829": "⛔ `physical` — PHYSICS family. trained decisiveness with a blade — the tradition's signature and the most ordinary harm in the game. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately.",
-   "_rungRuling_20260829": "⛔ ERIK 2026-08-29: 'EDGE IS DAMAGING.' ⚠️ It was `lethal` at ability level with r2 and r3 also lethal. ⛔ AND THE RANKS CAME DOWN WITH IT, because the craft's own r2 says 'DISARM AND DISABLE WITHOUT KILLING' — `edge` is the DISCIPLINE, not the killing blow, and the tradition already has `disarm` for mercy and `last_form` for ending. ⚠️ THE PAIR IS THE POINT: the everyday craft is damaging and the capstone is lethal, which is the right way round and was inverted."
+   "_rungRuling_20260829": "⛔ ERIK 2026-08-29: 'EDGE IS DAMAGING.' ⚠️ It was `lethal` at ability level with r2 and r3 also lethal. ⛔ AND THE RANKS CAME DOWN WITH IT, because the craft's own r2 says 'DISARM AND DISABLE WITHOUT KILLING' — `edge` is the DISCIPLINE, not the killing blow, and the tradition already has `disarm` for mercy and `last_form` for ending. ⚠️ THE PAIR IS THE POINT: the everyday craft is damaging and the capstone is lethal, which is the right way round and was inverted.",
+   "_levelHeld_20260829": "⚠️ CONSIDERED FOR L3 AND REFUSED. ⛔ THE CULTURE FORBIDS IT: the Redline 'teaches the Edge to children as LITERACY', and a literacy that starts at L3 is not one. ⚠️ It stays the L2 baseline while `drawn_bow` and `whats_at_hand` move up around it. ⛔ BUT ITS r3 IS OVERSIZED FOR AN L2 CRAFT — 'end a threat at the scale of a WARBAND' is L5 language, and that is a RANK problem rather than a level one. Flagged, not fixed: `last_form` is the L5 capstone and these two should not be saying the same thing."
   },
   {
    "id": "stillcraft",
@@ -1168,7 +1169,7 @@
   {
    "id": "whats_at_hand",
    "name": "What's At Hand",
-   "levelReq": 2,
+   "levelReq": 3,
    "energyCost": 4,
    "powerSystem": "metaphysical",
    "attribute": "practical",
@@ -1253,7 +1254,7 @@
    ],
    "mechanic": {
     "dice": {
-     "n": 2,
+     "n": 3,
      "d": 6
     },
     "plus": 0,
@@ -1300,7 +1301,8 @@
    "plainly": "A fight/survive/explore action that deals damage. It rolls 2d6 Ranks: rank 2 extends improvisation; rank 3 adds to special. Limit: the Marcher Makes Weapons, Not Wonders.",
    "_powerSystemWas": "reach_violence_peace",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_typed_20260829": "⛔ `physical` — PHYSICS family. improvised weapons from the environment. ⚠️ A chair leg is `physical` whatever else it is. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately."
+   "_typed_20260829": "⛔ `physical` — PHYSICS family. improvised weapons from the environment. ⚠️ A chair leg is `physical` whatever else it is. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately.",
+   "_levelRuling_20260829": "⛔ L2 -> L3, 2d6 -> 3d6. ⚠️ AND THE JUSTIFICATION IS THE OPPOSITE OF WHAT IT LOOKS LIKE: the 3d6 is NOT 'a chair leg beats a sword'. It is that IMPROVISING SOMETHING THAT WORKS AS WELL AS A REAL WEAPON IS EXPERT WORK — r3 is 'turn a whole environment into an armory', which is not a beginner reaching for a rock. ⛔ THE DAMAGE IS THE FIGHTER, NOT THE OBJECT."
   },
   {
    "id": "weight",

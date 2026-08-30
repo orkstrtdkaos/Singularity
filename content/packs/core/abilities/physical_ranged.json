@@ -249,7 +249,7 @@
   {
    "id": "drawn_bow",
    "name": "Drawn Bow",
-   "levelReq": 2,
+   "levelReq": 3,
    "energyCost": 4,
    "axes": {
     "violence_peace": -0.5
@@ -321,7 +321,7 @@
    "operativeAxis": "violence_peace",
    "mechanic": {
     "dice": {
-     "n": 2,
+     "n": 3,
      "d": 6
     },
     "plus": 0,
@@ -365,12 +365,13 @@
    "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS.",
    "_rungFix_20260829": "⛔ ability rung -> `lethal`: r3 BODKIN HEADS ignore mail and plate at 2d6 — a rank that goes through armour is lethal, and the ability said damaging (§45.1 — a rung must never mis-state what a rank delivers).",
    "_typed_20260829": "⛔ `physical` — PHYSICS family. an arrow at 120 paces — and r3's bodkin heads are the game's clearest case of `pierce` against armour. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately.",
-   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a harm word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ⛔ Authored as a real pair: conserve gives up scope, surge SPENDS AMMUNITION — which for a weapon craft is the honest cost."
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a harm word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ⛔ Authored as a real pair: conserve gives up scope, surge SPENDS AMMUNITION — which for a weapon craft is the honest cost.",
+   "_levelRuling_20260829": "⛔ L2 -> L3, 2d6 -> 3d6. ⚠️ THE BOW IS THE MASTERY RANGED WEAPON AND THE CROSSBOW IS ITS FOIL — one takes years, one takes an afternoon, and they were the same level doing the same damage. ⛔ THE CRAFT'S OWN RANKS ARE MASTERY WORK: hold at full draw and wait, an arrow EVERY ACTION without losing accuracy, bodkin heads through mail AND plate. ⚠️ 3d6 puts it on the L3 curve (8.5 expected, 10.5 actual — at the top of the band, which a weapon that pierces plate should be)."
   },
   {
    "id": "levelled_crossbow",
    "name": "Levelled Crossbow",
-   "levelReq": 2,
+   "levelReq": 1,
    "energyCost": 5,
    "axes": {
     "violence_peace": -0.5
@@ -483,7 +484,9 @@
    "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS.",
    "_rungFix_20260829": "⛔ ability rung -> `lethal`: r3 goes through plate, a shield, AND THE ARM BEHIND IT (§45.1 — a rung must never mis-state what a rank delivers).",
    "_typed_20260829": "⛔ `physical` — PHYSICS family. a bolt through mail at 90 paces. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately.",
-   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a harm word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ⛔ Authored as a real pair: conserve gives up scope, surge SPENDS AMMUNITION — which for a weapon craft is the honest cost."
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a harm word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ⛔ Authored as a real pair: conserve gives up scope, surge SPENDS AMMUNITION — which for a weapon craft is the honest cost.",
+   "_levelRuling_20260829": "⛔ L2 -> L1. ⚠️ THE CRAFT SAID IT ITSELF AND THE LEVEL IGNORED IT: 'you can hand one to a farmer and they can do it too, WHICH IS THE WHOLE POLITICAL PROBLEM WITH THE THING', and r1 is 'aim is trivial; anyone can be taught in an afternoon'. ⛔ IT SAT AT THE SAME LEVEL AS `drawn_bow`, WHICH TAKES YEARS. ⚠️ NOW THE POLITICS ARE MECHANICAL: the weapon a farmer can use is the weapon a farmer can ACCESS, which is exactly why the Marchers find it a problem.",
+   "_offCurveDeliberate_20260829": "⛔ IT IS OFF-CURVE ON PURPOSE AND THIS IS THE NOTE THAT SAYS SO. ⚠️ At L1 the damage curve expects ~3.6; this does 7.0 — L2 damage at L1 access, the only weapon in the game that breaks the curve upward. ⛔ THAT IS THE CRAFT'S ENTIRE SUBJECT: 'you can hand one to a farmer and they can do it too, WHICH IS THE WHOLE POLITICAL PROBLEM WITH THE THING.' A weapon that gives an untrained person a trained person's damage IS the political problem, and pricing it on-curve would delete the thing it is about. ⚠️ DO NOT 'FIX' THIS TO 1d6. It is answered by its own limits instead — spanning time, and `drawn_bow` firing every action at r2 while this does not."
   },
   {
    "id": "hurled_weight",

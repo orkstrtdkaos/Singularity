@@ -270,10 +270,28 @@ export function recoverBand(band, { days = 1, cfg = {} } = {}) {
  *
  *  ⛔ AND THE TIDE CAN TAKE THEM REGARDLESS. Erik: "being a casualty of that melee." A won battle that
  *  cannot cost you anything personally is a number going up. */
-export function legionClash(ours, theirs, { rng = Math.random, heroSwing = 0, cfg = {} } = {}) {
+export function legionClash(ours, theirs, { rng = Math.random, heroSwing = 0, heroTier = null, cfg = {} } = {}) {
   const strength = (units) => units.reduce((s, u) => s + num(u.count, 1) * num(u.quality, 1), 0);
   const us = strength(ours), them = strength(theirs);
-  const cap = num(cfg.heroSwingCap, 0.15);            // a hero moves a battle by at most this fraction
+  // ⛔ CCODE-321 / ERIK 2026-08-30 — A MYTHICAL IS BOTH, AND THE RULING IS THAT BOTH IS THE ANSWER:
+  // "a Mythical, like the other tiers, is both a DIFFERENT KIND OF THING (status that reflects how much
+  // influence and impact they can make) as well as a very high level, fully skilled and powered
+  // individual… units and bands and parties that draw the personal attention of a Mythical are at GREAT
+  // RISK… they are not the same as a Hero tier."
+  //
+  // ⚠️ AND THE LADDER ALREADY EXISTS. `arc_response.attentionByTier` is literally a table of how much
+  // ATTENTION each rung commands — mythic 3 · legendary 2 · epic 1 · heroic 0.5 · riffraff 0.25 — which is
+  // Erik's "how much influence and impact they can make", already written down and already canon since
+  // SNG-280. ⛔ SO THIS INVENTS NO VOCABULARY: the cap is the epic baseline scaled by the rung's own
+  // weight. A Mythical bends a battle SIX TIMES what a Heroic does, which is the distinction he drew.
+  //
+  // ⚠️ ABSENT IS TODAY. No tier means weight 1, which is exactly the 0.15 that shipped — every existing
+  // caller and every existing gate is untouched.
+  const base = num(cfg.heroSwingCap, 0.15);
+  const weight = heroTier ? num((cfg.attentionByTier || {})[String(heroTier)], 1) : 1;
+  // ⚠️ ROUNDED — 0.15 × 3 is 0.44999999999999996 in binary floating point, and a receipt that says that
+  // about a Mythical reads as a bug rather than a ruling.
+  const cap = Math.max(0, Math.round(base * weight * 1000) / 1000);
   const swing = Math.max(-cap, Math.min(cap, num(heroSwing, 0)));
   const ratio = us / Math.max(1, them);
   const luck = (rng() + rng() + rng()) / 3;            // massed engagements are LESS swingy, not more

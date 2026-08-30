@@ -260,8 +260,11 @@ working papers; **this is the answer.**
 | 08-30 | ⚠️ **`combatWeight` used without importing it** | `node --check` passes on that — a RUN caught it | fixed before commit | ⛔ **the third time this class of bug appeared this week** (`num`, `unreachable`, now this). A parse is not a run |
 | 08-30 | ✅ **CCODE-320 — the braid consolidation gate** | Aevi: *“yes — cheap now, and it makes the consolidation report its own casualties instead of us finding them months later”* | `§21`, and **proven red by re-poling a braid onto neighbours** — it names the braid and the distance | ⚠️ the authored braids **name their own poles** (`crossPoleBraids.abilities[].poles`), so this measures the named pair on the LIVE ring rather than inferring it |
 | 08-30 | ⚠️ **all three braids are exact antipodes TODAY** | each carries prose about *“the two poles fighting”* | distances 12, 12, 12 on a 24-ring | ⛔ **after an absorption they may not be**, and the prose would then describe a joining that is no longer opposed — in a craft nobody re-read |
+| 08-30 | ✅ **CCODE-321 — ERIK RULES: a Mythical is BOTH** | *“a different kind of thing — status that reflects how much influence and impact they can make — AND a very high level individual… units and bands that draw the personal attention of a Mythical are at GREAT RISK… they are not the same as a Hero tier”* | `§22`, seven assertions | ✅ **riffraff grinds · epic gains (the shipped 0.15, unchanged) · legendary breaks through · mythic breaks through at 0.45 with personal risk at the FLOOR** |
+| 08-30 | ✅ **and the ladder was already written down** | `arc_response.attentionByTier` — mythic 3 · legendary 2 · epic 1 · heroic 0.5 · riffraff 0.25 | the cap is the epic baseline × the rung's own weight | ⛔ **it invents no vocabulary**: “how much attention a rung commands” IS Erik's “how much influence and impact they can make”, canon since SNG-280 |
+| 08-30 | ⚠️ **and one thing Erik named that is NOT built** | *“if you get the attention of one, they have left their attention off bigger affairs — that opens opportunities and it is why it's rare”* | — | ⛔ **a Mythical engaging you means their ARC is unattended.** That is a real mechanic and it is Aevi's to shape — recorded so it is not lost |
 
-**Last verified: 2026-08-28 · v1.9.271 · 400 crafts.**
+**Last verified: 2026-08-28 · v1.9.272 · 400 crafts.**
 
 ---
 

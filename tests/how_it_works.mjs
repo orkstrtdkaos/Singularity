@@ -1186,6 +1186,44 @@ console.log("\n── §21 · a braid that claims tension is still opposed ─�
     dists.every(d => d >= half), `distances ${dists.join(", ")} on a ${size}-ring (antipodal = ${half})`);
 }
 
+/* ══════════ §22 — A MYTHICAL IS NOT A BIGGER HERO ══════════ */
+// ⛔ ERIK'S RULING, 2026-08-30: "a Mythical, like the other tiers, is BOTH a different kind of thing —
+// status that reflects how much influence and impact they can make — AND a very high level, fully skilled
+// and powered individual… units and bands and parties that draw the personal attention of a Mythical are
+// at GREAT RISK… they are not the same as a Hero tier."
+//
+// ⚠️ AND THE LADDER WAS ALREADY WRITTEN DOWN. `arc_response.attentionByTier` is a table of how much
+// ATTENTION each rung commands — which is Erik's "how much influence and impact they can make", canon
+// since SNG-280. ⛔ SO THIS INVENTS NO VOCABULARY: the cap is the epic baseline scaled by the rung's weight.
+console.log("\n── §22 · a Mythical is not a bigger hero ──");
+{
+  const ML = await import("../engine/melee.js");
+  const arc = rj("content/packs/core/rules/arc_response.json");
+  const att = (function find(o) { if (!o || typeof o !== "object") return null; if (o.attentionByTier) return o.attentionByTier; for (const v of Object.values(o)) { const r = find(v); if (r) return r; } return null; })(arc);
+  const cfgM = { heroSwingCap: 0.15, attentionByTier: att };
+  const clash = (tier) => {
+    let z = 1; const rngM = () => { z |= 0; z = (z + 0x6D2B79F5) | 0; let t = Math.imul(z ^ (z >>> 15), 1 | z); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    return ML.legionClash([{ count: 400, quality: 3 }], [{ count: 400, quality: 3 }], { rng: rngM, heroSwing: 1, heroTier: tier, cfgM: null, cfg: cfgM });
+  };
+  check("§22: the attention ladder exists and is content, not a table in the engine", !!att && att.mythic > att.epic);
+
+  const riff = clash("riffraff"), heroic = clash("heroic"), epic = clash("epic"), myth = clash("mythic");
+  // ⛔ THE BASELINE IS PRESERVED. An epic hero bends a battle by exactly the 0.15 that shipped.
+  check("§22: an EPIC hero is unchanged — the shipped 0.15", epic.heroSwing === 0.15);
+  // ⛔ ERIK'S DISTINCTION, ASSERTED: not the same as a Hero tier.
+  check("§22: a MYTHICAL bends a battle far harder than a heroic one",
+    myth.heroSwing >= heroic.heroSwing * 4, `${myth.heroSwing} vs ${heroic.heroSwing}`);
+  check("§22: …and it is a BREAKTHROUGH where a hero only gains",
+    myth.outcome === "breakthrough" && epic.outcome !== "breakthrough", `${myth.outcome} / ${epic.outcome}`);
+  // ⚠️ AND A NOBODY CHANGES NOTHING — the bottom of the ladder has to mean something too.
+  check("§22: a riffraff figure does not move a battle", riff.tide === 0 || riff.outcome === "grinding");
+  // ⚠️ ABSENT IS TODAY: no tier means the shipped cap, so every existing caller is untouched.
+  check("§22: with no tier the cap is exactly what shipped",
+    clash(null).heroSwing === 0.15, String(clash(null).heroSwing));
+  // ⛔ AND THE RECEIPT MUST READ AS A RULING, NOT A FLOAT ARTIFACT.
+  check("§22: the swing is a clean number", String(myth.heroSwing) === "0.45", String(myth.heroSwing));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

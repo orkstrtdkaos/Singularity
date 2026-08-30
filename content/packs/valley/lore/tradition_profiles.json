@@ -59,7 +59,7 @@
    "theTrade": "You glow. There is no Radiant stealth, no Radiant ambush, no Radiant anonymity — the craft announces its user in the act of using it. It fails on mirror-finish, on running water, and in true dark where there is nothing to work with.",
    "whoPractices": "Glasshome-trained, and the blaze-adjacent settlements. Closed to Harmonic, and the two traditions have opinions about each other.",
    "acrossTheAxis": "Where the Harmonic finds a thing's note, the Radiant simply shows it. Both end arguments; only one of them does it politely.",
-   "id": "radiant",
+   "id": "radiant_folk",
    "functionCoverage": [
     "bind",
     "break",
@@ -91,7 +91,8 @@
      "name": "THE SCOURERS",
      "what": "Light burned into an eye until nothing behind it works. The Scourers hold that a thing which cannot bear looking at should be unmade by looking at it, and they do it slowly."
     }
-   }
+   },
+   "_idFixed_20260830": "⚠️ id `radiant` -> `radiant_folk`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty."
   },
   {
    "name": "Precursor Work",
@@ -125,7 +126,8 @@
      "name": "THE SHUTTERS",
      "what": "Foreclosure as governance. The Shutters close possibilities off people — a future denied, a way barred, a thing that can no longer happen to anyone. It is the framework's own definition of evil, practised deliberately."
     }
-   }
+   },
+   "_notATradition_20260830": "⚠️ NOT A TRADITION — a DEEP-POWER FAMILY (`axis: deep-power family (gated)`). No craft carries this as `tradition` and none should; these are POWER SOURCES. ⛔ Its `functionCoverage` will never join and that is correct."
   },
   {
    "name": "The Green Current",
@@ -155,7 +157,8 @@
      "name": "THE FLOODBEARERS",
      "what": "The current forced through a body that cannot hold it. The Floodbearers use a person as a conduit and do not always get them back."
     }
-   }
+   },
+   "_notATradition_20260830": "⚠️ NOT A TRADITION — a DEEP-POWER FAMILY (`axis: deep-power family (gated)`). No craft carries this as `tradition` and none should; these are POWER SOURCES. ⛔ Its `functionCoverage` will never join and that is correct."
   },
   {
    "name": "The Churn",
@@ -187,7 +190,8 @@
      "name": "THE HOLLOW BARGAINERS",
      "what": "Bargains made with things that are not people, on behalf of people who did not agree. The Hollow Bargainers trade someone else's future for their own present."
     }
-   }
+   },
+   "_notATradition_20260830": "⚠️ NOT A TRADITION — a DEEP-POWER FAMILY (`axis: deep-power family (gated)`). No craft carries this as `tradition` and none should; these are POWER SOURCES. ⛔ Its `functionCoverage` will never join and that is correct."
   },
   {
    "name": "The Somatic",
@@ -285,7 +289,7 @@
    "theTrade": "Nothing repeatable. It will not work the same way twice, it offers no fine control, and it cannot give you a result you specified in advance.",
    "whoPractices": "Churnfolk, and anyone whose life has taught them that plans are a kind of superstition.",
    "acrossTheAxis": "Latticework is its exact opposite and its best opponent. Each is strongest where the other is blind.",
-   "id": "wildcraft",
+   "id": "churnfolk",
    "functionCoverage": [
     "bind",
     "break",
@@ -316,7 +320,8 @@
      "name": "THE UNSPOOLERS",
      "what": "Unmaking for its own sake. The Unspoolers break structures they have no plan for, because a thing that cannot adapt deserves to come apart, and they enjoy it."
     }
-   }
+   },
+   "_idFixed_20260830": "⚠️ id `wildcraft` -> `churnfolk`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty."
   },
   {
    "name": "Latticework",
@@ -330,7 +335,7 @@
    "theTrade": "It cannot improvise and it cannot handle the genuinely novel. Anything that must breathe or grow resists it, and Wildcraft is built specifically to make it brittle.",
    "whoPractices": "The Lattice-Cities, their courts, and their engineers.",
    "acrossTheAxis": "Wildcraft rides collapse; Latticework prevents it. Riding Order is the braid — unmake a structure and re-bind the falling pieces in the same motion.",
-   "id": "latticework",
+   "id": "lattice",
    "functionCoverage": [
     "bind",
     "break",
@@ -361,7 +366,8 @@
      "name": "THE FIXERS",
      "what": "Order imposed on people. The Fixers bind a person's possibilities down until only the approved ones remain — a life made reliable, from outside, without asking."
     }
-   }
+   },
+   "_idFixed_20260830": "⚠️ id `latticework` -> `lattice`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty."
   },
   {
    "name": "The Mason",
@@ -607,7 +613,7 @@
    }
   },
   {
-   "id": "descent",
+   "id": "abyssal",
    "name": "The Descent",
    "axis": "demonic ↔ angelic",
    "pole": "demonic",
@@ -659,10 +665,11 @@
     "conceal_deceive": "⛔ REFUSED — the whole trade is naming what people will not say ALOUD, IN PUBLIC. A deceiving Choir-member is not practising the tradition.",
     "mend_resist": "⚠️ GAPS, not refusals — `consumed_wound` eats hurt rather than mending it, and nothing in the tradition endures. Candidates if the Choir is revisited.",
     "make_track": "⚠️ DELEGATED per rule 12 — a Choir that can bind a covenant can hire a maker."
-   }
+   },
+   "_idFixed_20260830": "⚠️ id `descent` -> `abyssal`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty."
   },
   {
-   "id": "ascent",
+   "id": "seraphic",
    "name": "The Ascent",
    "axis": "demonic ↔ angelic",
    "pole": "angelic",
@@ -705,7 +712,8 @@
      "name": "THE SENTENCE",
      "what": "Judgement pronounced on someone who did not consent to be weighed, binding regardless of truth. The Sentence does not care to be right — ascent's own bound says the judgment binds anyway, and they treat that as a feature."
     }
-   }
+   },
+   "_idFixed_20260830": "⚠️ id `ascent` -> `seraphic`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty."
   },
   {
    "id": "unmaker",
@@ -792,7 +800,7 @@
    }
   },
   {
-   "id": "pathos",
+   "id": "threnodist",
    "name": "Pathos",
    "axis": "emotional ↔ logical",
    "pole": "emotional",
@@ -834,10 +842,11 @@
      "name": "THE HEART-TUNERS",
      "what": "Feeling installed. The Tuners of the heart do not read and share — they SET. Grief where there was none, love where there was none, and the person will defend it as their own because it is now."
     }
-   }
+   },
+   "_idFixed_20260830": "⚠️ id `pathos` -> `threnodist`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty."
   },
   {
-   "id": "logos",
+   "id": "syllogist",
    "name": "Logos",
    "axis": "emotional ↔ logical",
    "pole": "logical",
@@ -879,7 +888,8 @@
      "name": "THE CORNERS",
      "what": "Argument as a weapon against a mind. The Corners walk someone to a conclusion that destroys them and call it honest, because every step was."
     }
-   }
+   },
+   "_idFixed_20260830": "⚠️ id `logos` -> `syllogist`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty."
   },
   {
    "id": "veilwright",
@@ -940,7 +950,8 @@
     "theTerminus": "⚠️ THE LAST MASK — 'falsehood so total it erases the possibility of truth. The ones here have UNMADE THEMSELVES: no original remains under the masks, and they will tell you that cheerfully, AND YOU CANNOT CHECK.' ⛔ The cult of purity is not lying more; it is having nothing left to lie about.",
     "whyYouLeft": "⛔ ORIGIN TEXT: 'SOMEBODY MADE A TRUTH ABOUT YOU, and you...' — the craft used against its own.",
     "_functionsAndTypes": "⛔ MEASURED: `deceive` on TEN of 14 crafts — the most concentrated single verb in any audited tradition except umbral's `conceal`. ⚠️ AND THE TWO TYPED CRAFTS ARE THE POLES OF THE PEOPLE: `perfect_erasure` deals `deception` (INTRINSIC) and `better_story` heals with `vitality` (VITAL). **The tradition's only two typed acts are its cruellest and its kindest, and both are true to the Court/Mask split.**"
-   }
+   },
+   "_healingAdjacency_20260830": "✅ VEILWRIGHT HOLDS THE AXIS'S ONLY BODY-HEALING CRAFT: `better_story`, and its bound is that the reframing must be TRUE. ⚠️ Per Erik's adjacency rule this is what covers a Verist party-mate — and the Kindly Court is where it is practised: 'building people a truth they can survive TODAY, until they can bear the real one', which the Verists call the greatest lie of all. ⛔ THE PEOPLE WHO CALL IT A LIE ARE THE PEOPLE IT MENDS."
   },
   {
    "id": "verist",
@@ -1000,7 +1011,8 @@
     "theBestPlaceInTheGame": "⛔ THE TOLD GROUND — 'a field of plain stones, each carrying ONE TRUE SENTENCE SOMEBODY COULD NOT SAY IN LIFE. Anyone may add one. NOBODY MAY REMOVE ONE. It is the most devastating place in the world AND THE VERISTS PICNIC THERE, because to them the alternative — a world where those sentences go unsaid — is worse.' ✅ That single line justifies the entire tradition better than any craft does.",
     "whyYouLeft": "⛔ ORIGIN: 'You told the truth to the wrong person and IT WENT EXACTLY AS YOUR PEOPLE SAID IT WOULD.'",
     "_functionsAndTypes": "⛔ MEASURED: 11 crafts, and `reveal`/`restore`/`bind` dominate — SEEING, RESTORING AN ACCOUNT, AND MAKING A THING HOLD. ⚠️ `the_unsurvivable_fact` deals `truth` and `unbearable_word` now does too. ✅ THE TYPE IS THE TRADITION: `truth` is INTRINSIC, it needs a self to receive it, and NO ARMOUR ANSWERS IT — which is exactly what the Flensing does to people."
-   }
+   },
+   "_healingAdjacency_20260830": "⛔ ERIK'S RULE, 2026-08-30: 'IF A TRADITION DOESN'T HAVE HEALING, ITS ADJACENT ONES MUST. EVERYONE NEEDS A WAY TO HEAL.' ⚠️ VERIST HAS NO BODY-HEALING CRAFT. Its two `restore` verbs — `verity`, `whole_truth` — RESTORE AN ACCOUNT, NOT A BODY: 'lay bare the ENTIRE truth of a person, place or mystery.' ⛔ SO THE VERB TABLE SAID 'falsehood ↔ truth: BOTH POLES CAN HEAL' AND THAT WAS FALSE — `restore` is counted as a healing verb and this is not healing. ⚠️ A COVERAGE TABLE CAN ONLY SEE THE VERB, NEVER WHAT THE CRAFT DOES WITH IT, which is exactly why Erik said the fast pass was too fast. ✅ THE ADJACENCY THAT ACTUALLY COVERS A VERIST: `better_story` (veilwright, their OPPOSITE pole) — and the axis makes that the sharpest possible answer. A Verist who needs mending must accept a reframing from the people whose whole trade they call a lie, and `better_story`'s bound is that THE REFRAMING MUST BE TRUE, which is the one form a Verist could accept. ⛔ THE AXIS HEALS ACROSS ITSELF, AND THAT IS BETTER THAN EITHER POLE HEALING ALONE."
   },
   {
    "id": "enginewright",
@@ -1049,7 +1061,7 @@
    }
   },
   {
-   "id": "numen",
+   "id": "numinous",
    "name": "Numenwork",
    "axis": "mechanical ↔ spiritual",
    "pole": "spiritual",
@@ -1092,7 +1104,8 @@
      "name": "THE DIMMERS",
      "what": "Meaning withdrawn. The Dimmers take significance out of a person's life — their work, their people, their reasons — and leave them functional and empty. It is the quietest atrocity in the Valley."
     }
-   }
+   },
+   "_idFixed_20260830": "⚠️ id `numen` -> `numinous`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty."
   },
   {
    "id": "horizon",
@@ -1318,7 +1331,7 @@
    }
   },
   {
-   "id": "vivimancer",
+   "id": "rootkin",
    "name": "Vivimancy",
    "axis": "death ↔ life",
    "pole": "life",
@@ -1361,10 +1374,11 @@
      "name": "THE BLOOM-WRIGHTS",
      "what": "Life IMPOSED. The Bloom-Wrights force growth into a body that did not ask — tumours of healthy tissue, a limb that will not stop, a field that grows until it strangles itself. Life at flood does not know when to stop, and they use that on purpose."
     }
-   }
+   },
+   "_idFixed_20260830": "⚠️ id `vivimancer` -> `rootkin`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty."
   },
   {
-   "id": "palework",
+   "id": "ashwarden",
    "name": "Palework",
    "axis": "death ↔ life",
    "pole": "death",
@@ -1408,7 +1422,8 @@
      "what": "⚠️ RAISING. The Grave-Callers hold a body past its ending and set it working — and they do not ask first. The tradition's polite half calls it obscene; the tradition's other half has been doing it for four hundred years in the Palelands where labour is short and the dead are many."
     },
     "note": "ERIK'S EXAMPLE. 'Death people don't raise' was my bias. They raise. Some of them do little else."
-   }
+   },
+   "_idFixed_20260830": "⚠️ id `palework` -> `ashwarden`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty."
   },
   {
    "id": "valley_craft",

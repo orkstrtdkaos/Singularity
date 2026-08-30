@@ -601,12 +601,12 @@ field, not this one.**
 | `interceptDamage` | 8 | `tree`×8 | ✅ READ | `intercept.js`, `app.js` |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |
 | `namedCurrent` | 7 | `root`×7 | ⛔ DARK | — |
-| `requiresSelf` | 7 | `mechanic`×7 | ✅ READ | `skill_battle.js` |
 | `evasion` | 7 | `mechanic`×7 | ✅ READ | `craftmechanics.js`, `skill_battle.js`, `app.js` |
 | `evasionRank` | 7 | `mechanic`×7 | ✅ READ | `skill_battle.js` |
 | `learnedAt` | 6 | `root`×6 | ⛔ DARK | — |
 | `peril` | 6 | `root`×6 | ✅ READ | `art.js`, `gm.js` |
 | `persistUntilHealed` | 6 | `tree`×6 | ✅ READ | `capabilities.js`, `conditions.js`, `craftmechanics.js` |
+| `requiresSelf` | 5 | `mechanic`×5 | ✅ READ | `skill_battle.js` |
 | `wildVariance` | 5 | `root`×5 | ✅ READ | `resolve.js`, `app.js` |
 | `stage` | 3 | `tree`×3 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
 | `companionStageName` | 3 | `tree`×3 | ⛔ DARK | — |

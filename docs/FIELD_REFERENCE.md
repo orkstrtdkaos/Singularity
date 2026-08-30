@@ -596,8 +596,8 @@ thing measured against on the same day: affinities do not cluster, and a default
 | `scope` | 141 | `mechanic`×141 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `app.js` |
 | `targets` | 129 | `mechanic`×129 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `gated` | 108 | `root`×108 | ✅ READ | `borncontract.js`, `generate.js`, `gm_registry.js` |
-| `damageType` | 86 | `mechanic`×86 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
-| `dice` | 82 | `mechanic`×82 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
+| `damageType` | 89 | `mechanic`×89 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
+| `dice` | 85 | `mechanic`×85 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
 | `crit` | 79 | `mechanic`×79 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
 | `range` | 79 | `mechanic`×79 | ✅ READ | `capabilities.js`, `craftmechanics.js` |
 | `plus` | 72 | `mechanic`×72 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |

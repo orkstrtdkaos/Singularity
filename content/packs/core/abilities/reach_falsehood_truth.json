@@ -489,7 +489,12 @@
    "mechanic": {
     "magnitude": 4,
     "duration": 4,
-    "note": "incapacitating — it makes a person act CORRECTLY on a wrong picture"
+    "note": "incapacitating — it makes a person act CORRECTLY on a wrong picture",
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "damageType": "deception"
    },
    "rankDeltas": [
     {
@@ -532,7 +537,8 @@
    "_idWas": "the_wrong_reality",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['combat', 'social', 'tactical'], energy e2 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['combat', 'social', 'tactical'], energy e2 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy.",
+   "_harmAuthored_20260830": "⛔ `harmRung: incapacitating` with no dice — it made someone act against their own interest and could not express the cost. ⚠️ `deception`, INTRINSIC, and modest (1d6): the harm is 'they act on it IN WAYS THAT COST THEM', so the damage is the consequence of a wrong decision rather than a wound. ✅ Gives `deception` a second dealer. ⚠️ FOUND ONLY BY READING THE CRAFTS — W7 checks crafts that HAVE dice and these had none, so a craft claiming to incapacitate while dealing nothing is invisible to it. ⛔ Erik: 'that pass was too fast — did you read the people, read the skills, look at the functions and types?' This is what the fast pass missed."
   },
   {
    "id": "better_story",
@@ -2355,7 +2361,12 @@
    "mechanic": {
     "magnitude": 6,
     "duration": 1,
-    "scope": 1
+    "scope": 1,
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "damageType": "physical"
    },
    "intensity": {
     "conserve": "a small feint — a half-opening, not a clean one",
@@ -2393,7 +2404,8 @@
    "_nameWas": "The Wrong Wound",
    "_idWas": "the_wrong_wound",
    "_powerSystemWas": "reach_falsehood_truth",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_harmAuthored_20260830": "⛔ `shape: strike`, `harmRung: incapacitating`, AND NO DICE — it could not hurt anyone. ⚠️ A FEINT THAT LANDS IS A BLOW: 'their defence goes where you sold it and your actual strike arrives somewhere else.' The STRIKE is the craft; the deception is how it gets there. ⛔ `physical` — the harm is an ordinary weapon arriving unopposed, which is why armour still answers it and a false read does not make it magic. ⚠️ FOUND ONLY BY READING THE CRAFTS — W7 checks crafts that HAVE dice and these had none, so a craft claiming to incapacitate while dealing nothing is invisible to it. ⛔ Erik: 'that pass was too fast — did you read the people, read the skills, look at the functions and types?' This is what the fast pass missed."
   },
   {
    "id": "unbearable_word",
@@ -2488,7 +2500,12 @@
     "duration": 4,
     "scope": 1,
     "requiresSelf": true,
-    "_requiresSelfNote": "⛔ `requiresSelf` — PROPOSED, underscore-prefixed: CCode builds the reader and the agreement gate, and I am not declaring a field in the schema unilaterally again. ⚠️ THE CRAFT ALREADY SAYS THIS IN PROSE. Measured 2026-08-30: SIX CRAFTS STATE THE SAME RULE IN FOUR DIFFERENT PHRASINGS — 'without a self', 'has no self', 'anything without a mind', 'anything that does not rely on the man beside it' — and `the_narrowed` states the other half as `feeling: immune` IN DATA. ⛔ NOTHING CHECKS THE TWO AGREE AND NOTHING EVER WILL WHILE ONE SIDE IS PROSE. ✅ With `hasSelf` on the bestiary classes, a gate can assert it: every craft requiring a self must be answered by every creature that has none. ⚠️ ERIK'S TEST, WHICH THIS PASSES: does it let content say ONCE what it currently says many times in prose?"
+    "_requiresSelfNote": "⛔ `requiresSelf` — PROPOSED, underscore-prefixed: CCode builds the reader and the agreement gate, and I am not declaring a field in the schema unilaterally again. ⚠️ THE CRAFT ALREADY SAYS THIS IN PROSE. Measured 2026-08-30: SIX CRAFTS STATE THE SAME RULE IN FOUR DIFFERENT PHRASINGS — 'without a self', 'has no self', 'anything without a mind', 'anything that does not rely on the man beside it' — and `the_narrowed` states the other half as `feeling: immune` IN DATA. ⛔ NOTHING CHECKS THE TWO AGREE AND NOTHING EVER WILL WHILE ONE SIDE IS PROSE. ✅ With `hasSelf` on the bestiary classes, a gate can assert it: every craft requiring a self must be answered by every creature that has none. ⚠️ ERIK'S TEST, WHICH THIS PASSES: does it let content say ONCE what it currently says many times in prose?",
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "damageType": "truth"
    },
    "intensity": {
     "conserve": "say the smaller true thing — it lands lighter and keeps",
@@ -2528,7 +2545,8 @@
    "_nameWas": "The Unbearable Word",
    "_idWas": "the_unbearable_word",
    "_powerSystemWas": "reach_falsehood_truth",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_harmAuthored_20260830": "⛔ `shape: strike`, `harmRung: incapacitating`, AND NO DICE. ⚠️ `truth`, INTRINSIC — and it is the cleanest case of that family in the game: 'speak ONE TRUE THING the target cannot bear, to their face, and they lose the thread.' Nothing crosses the space and no armour is relevant. ✅ It pairs exactly against the Veilwright `deception` on `perfect_erasure` — the axis dealing its own two types at each other. ⚠️ FOUND ONLY BY READING THE CRAFTS — W7 checks crafts that HAVE dice and these had none, so a craft claiming to incapacitate while dealing nothing is invisible to it. ⛔ Erik: 'that pass was too fast — did you read the people, read the skills, look at the functions and types?' This is what the fast pass missed."
   },
   {
    "id": "ordinary_face",

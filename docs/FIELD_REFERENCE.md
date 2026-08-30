@@ -439,8 +439,8 @@ one tool built to stop fields going dark. **Documented by hand for exactly that 
 | `class` | every roster creature (27) | ⚠️ `random_encounters.js:84`, **as metadata only** | ⛔ **no rule, resist or targeting decision consults it** |
 | `affinity` | 9 of 27 creatures | `affinityOf` → the damage path | ✅ **the only defensive typing any foe has** |
 | `wardTypes` | ⛔ **NO creature** | `resolveComposite` | ⛔ **the partial-ward path Erik ruled has never run in a fight** |
-| `hasSelf` | all 6 classes | ⬜ **nothing yet — CCode to build** | added 2026-08-30 |
-| `_requiresSelf_PROPOSED` | 7 crafts | ⬜ **nothing yet** | underscore-prefixed on purpose |
+| `hasSelf` | all 6 classes | ✅ **`selfBlocked` (skill_battle.js), CCODE-315** | ⛔ **resolved from the class, NEVER stored on the sheet** |
+| `requiresSelf` | 7 crafts | ✅ **`selfBlocked`; §16 asserts the agreement THROUGH THE ENGINE** | promoted from `_PROPOSED` by CCode |
 | `_addsTypedDamage_PROPOSED` | `dressed_edge` | ⬜ **nothing yet — CCode to name the shape** | ⛔ carries Erik's ADDITIVE ruling |
 
 ### ⛔ `hasSelf` — WHY A PROPERTY AND NOT A TAXONOMY
@@ -461,9 +461,10 @@ man beside it"* — **seven crafts, three files** — against **one creature** s
 | `narrowed_dead` · `feral_construct` · `made_weapon` | `manifested_creature` · `substrate_warped_beast` · `great_manifestation` |
 | ⚠️ an errand or a directive; nobody home to frighten | ⚠️ **manifested things WANT — that is what manifests them** |
 
-⬜ **OWED WHEN THE GATE EXISTS:** only ONE creature declares `feeling: immune`. **Several `hasSelf: false`
-creatures should and do not.** ⚠️ **Let the gate find them — guessing is how one rule ended up with four
-phrasings.**
+✅ **RESOLVED 2026-08-30, AND THE OPPOSITE WAY ROUND.** I expected to owe `feeling: immune` on seven more
+selfless creatures. ⛔ **The right fix was REMOVING IT FROM MINE** — `hasSelf` on the CLASS does the job for
+all eight at once, and my per-creature flag was a stored copy of a derived value written before the
+property existed. **Adding seven more would have put one fact in nine places.**
 
 
 ### ⛔ `_addsTypedDamage_PROPOSED` — ERIK'S ADDITIVE RULING, WITH NO FIELD TO LIVE IN YET

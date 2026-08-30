@@ -496,8 +496,7 @@
     "vitality": "vulnerable",
     "living": "vulnerable",
     "decay": "absorb",
-    "cold": "immune",
-    "feeling": "immune"
+    "cold": "immune"
    },
    "class": "narrowed_dead",
    "tier": "regional",
@@ -512,7 +511,8 @@
    ],
    "clean": "It finishes the motion it was in, and then it is a body.",
    "aggressorKind": "driven",
-   "_authored_20260829": "⛔ ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED — we've moved past that original idea, IT CAN HURT UNDEAD NOW.' ⚠️ THE RULING NEEDED A CREATURE OR IT WAS THEORETICAL: the bestiary had 26 entries and NOT ONE UNDEAD, so §48's whole undeath model had nothing to run on. ✅ THIS ENTRY CARRIES BOTH HALVES OF THE INVERSION AND NEEDS NO NEW MACHINERY: `decay: absorb` (already works — absorb returns negative damage, so rot mends it) and `vitality: vulnerable` (works NOW, because healing crafts carry a type as of today). ⛔ A `heal` lands on it through the ordinary damage path and hurts. ⚠️ `feeling: immune` IS THE SAME BLIND SPOT `break_the_line` AND `the_known_name` DECLARE — nothing without a self can be frightened, which is why a Marcher's terror and an Ashwarden's driven dead are natural counters to each other. ⛔ NARROWED, NOT AN AFTERLING: the design laws exclude persons from the bestiary, and an Afterling is a person. This is the end state that ISN'T."
+   "_authored_20260829": "⛔ ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED — we've moved past that original idea, IT CAN HURT UNDEAD NOW.' ⚠️ THE RULING NEEDED A CREATURE OR IT WAS THEORETICAL: the bestiary had 26 entries and NOT ONE UNDEAD, so §48's whole undeath model had nothing to run on. ✅ THIS ENTRY CARRIES BOTH HALVES OF THE INVERSION AND NEEDS NO NEW MACHINERY: `decay: absorb` (already works — absorb returns negative damage, so rot mends it) and `vitality: vulnerable` (works NOW, because healing crafts carry a type as of today). ⛔ A `heal` lands on it through the ordinary damage path and hurts. ⚠️ `feeling: immune` IS THE SAME BLIND SPOT `break_the_line` AND `the_known_name` DECLARE — nothing without a self can be frightened, which is why a Marcher's terror and an Ashwarden's driven dead are natural counters to each other. ⛔ NARROWED, NOT AN AFTERLING: the design laws exclude persons from the bestiary, and an Afterling is a person. This is the end state that ISN'T.",
+   "_feelingRemoved_20260830": "⛔ `feeling: immune` REMOVED, AND THAT IS THE FIX — NOT ADDING IT TO THE OTHER SEVEN SELFLESS CREATURES. ⚠️ I OWED 'creatures that should declare it and do not' and the answer turned out to be the opposite of what I expected: `hasSelf: false` on the CLASS now does this job for every selfless creature at once, through `selfBlocked`. ✅ CCode's own note is the argument: 'THE CLASS IS RESOLVED, NEVER STORED ON THE SHEET — a copied `hasSelf` would be a stored copy of a derived value, WHICH IS THE FAILURE THIS PROJECT HAS COMMITTED MOST.' ⛔ MY `feeling: immune` WAS EXACTLY THAT COPY, written before the property existed. Adding seven more would have put one fact in nine places. ⚠️ WHAT IS LOST AND WHY IT IS ACCEPTABLE: `feeling: immune` also blocked feeling DAMAGE from a craft that does not declare `requiresSelf` — e.g. `grief_strike`. That is a real question (should grief wound a thing with no self?) and it belongs to `requiresSelf` on those crafts, not to a per-creature flag on one of eight."
   }
  ]
 }

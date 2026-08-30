@@ -4987,29 +4987,29 @@
     "reveal",
     "track"
    ],
-   "description": "⛔ A TREE YOU PLANTED IS A VECTOR INTO ITS OWN FUTURE. The Rootkin do not predict — they PLANT, and then they ask what the planting has come to. ⚠️ A tree knows its seasons before they arrive: the drought two summers out, the year the river moves, the winter that takes the orchard's east side. ⛔ THE SLOW ORCHARD IS A LIBRARY, AND EVERY TREE IN IT IS A READER LEFT RUNNING.",
-   "narrationHints": "She puts her hand flat on the bark and stands there for a while. ⚠️ 'Not this year,' she says. 'The year after. And it comes from the east.'",
-   "notFor": "⛔ YOU MUST HAVE PLANTED IT, OR SOMEONE WHO TAUGHT YOU DID — a wild tree is a stranger and says nothing. ⚠️ AND IT FORESEES WHAT REACHES THE TREE: weather, water, blight, fire, the slow shifts a root feels. IT KNOWS NOTHING OF PEOPLE unless people are about to become weather. ⛔ IT IS SLOW EVEN WHEN IT IS URGENT: the answer arrives at a tree's pace, and asking faster gets you less.",
-   "plainly": "An investigate/explore action. ⛔ ASK A TREE YOU PLANTED WHAT IS COMING TO IT — drought, flood, blight, fire, the year the ground changes — out to about a season at r1 and years at r3. Rated 5. r2 asks the whole orchard at once and gets the SHAPE of a region's future; r3 leaves the question standing so the tree answers when it knows. ⚠️ Planted trees only, and it foresees what reaches the TREE, not what people intend.",
+   "description": "⛔ PLANT A TREE WITH A QUESTION IN IT. A Rootkin does not predict — they put something living in the ground and it becomes a vector into that place's future: what will happen there, and WHO WILL COME. ⚠️ THIS IS WHY THEIR ORCHARDS ARE FULL OF TREES PLANTED FOR PEOPLE WHO HAVE NOT ARRIVED YET — the question was set down decades ago and the tree has been holding it since. ⛔ AND IT WORKS ON GROUND YOU CHOOSE: plant one at a field you expect to fight over, and ask it what the fighting will be.",
+   "narrationHints": "She puts the sapling in and kneels there a while longer than planting takes. ⚠️ 'Two companies,' she says. 'From the east, and one of them does not leave.'",
+   "notFor": "⛔ IT NEEDS A PLANTING — a tree of yours, in the ground you are asking about. A wild tree says nothing and a pot does not count. ⚠️ AND THE READING IS ONLY AS CLEAR AS THE RANK: r1 is a shape and a feeling, and a Rootkin who acts on r1 as though it were r3 will act on their own guess. ⛔ IT READS WHAT COMES TO THE PLACE — events and the people in them. It does not read INTENT, and it cannot tell you why anyone does anything.",
+   "plainly": "An investigate/explore action. ⛔ PLANT A TREE AND ASK THE GROUND WHAT IS COMING TO IT — events and the people who will be in them. Rated 5. ⚠️ THE ANSWER IS IMMEDIATE; THE RANK IS THE CLARITY: r1 is a shape and a feeling, r2 names events and numbers, r3 names PEOPLE — who comes, when, and what they do when they get there. ⛔ A planting of yours, in the ground you are asking about.",
    "intensity": {
-    "conserve": "one tree, one season, one question",
-    "surge": "⛔ ASK EVERY TREE YOU HAVE EVER PLANTED; you will get an answer from all of them and it will take you the rest of the day to hear it"
+    "conserve": "a shallow ask — the feel of the place a season out, and no detail",
+    "surge": "⛔ ASK EVERYTHING AT ONCE; you will get years of it and spend the day sorting what matters from what merely happens"
    },
    "bounds": [
     {
-     "text": "⛔ PLANTED TREES ONLY — by you, or by the one who taught you. A wild tree is a stranger",
+     "text": "⛔ A PLANTING OF YOURS, IN THE GROUND YOU ARE ASKING ABOUT. A wild tree says nothing",
      "class": "hard"
     },
     {
-     "text": "⛔ IT FORESEES WHAT REACHES THE TREE — weather, water, blight, fire. NOT INTENT, NOT PEOPLE",
+     "text": "⛔ EVENTS AND PEOPLE, NEVER INTENT — it can tell you a man comes and not why",
      "class": "hard"
     },
     {
-     "text": "⚠️ IT ANSWERS AT A TREE'S PACE. Asking urgently gets a shallower answer, never a faster one",
+     "text": "⚠️ THE RANK IS THE CLARITY. r1 is a shape and a feeling, and acting on it as though it were r3 is acting on your own guess",
      "class": "hard"
     },
     {
-     "text": "⚠️ AND IT REQUIRES SOMEONE TO HAVE PLANTED, DECADES AGO — a Rootkin far from any orchard of theirs has nothing to read",
+     "text": "⚠️ AND THE TREE MUST STAND. Cut it, burn it, or build over it and the question goes with it",
      "class": "hard"
     }
    ],
@@ -5034,12 +5034,12 @@
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [],
-     "grants": "⛔ ASK ONE TREE YOU PLANTED WHAT IS COMING TO IT — out to about a season. Drought, flood, blight, the frost that will take the blossom. ⚠️ It answers plainly and it is not often wrong.",
-     "cannot": "One tree, one season. ⛔ Planted, not wild. ⚠️ And it knows weather, not people."
+     "grants": "⛔ PLANT AND ASK: THE SHAPE OF WHAT COMES TO THIS GROUND — a season or so out, felt rather than known. Trouble or quiet, many or few, from which direction. ⚠️ Enough to choose a road by and not enough to plan on.",
+     "cannot": "⚠️ A shape and a feeling only. ⛔ One planting, one ground, and the tree must stand."
     },
     {
      "rank": 2,
-     "name": "Orchard Read",
+     "name": "Named Events",
      "functions": [
       "foresee",
       "reveal",
@@ -5048,15 +5048,15 @@
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [
-      "scope",
-      "range"
+      "quality",
+      "scope"
      ],
-     "grants": "⛔ ASK THE WHOLE ORCHARD AND GET THE SHAPE OF A REGION'S FUTURE — where the water is going, which ground is failing, what the land will be doing in three years. ⚠️ This is how the Rootkin know things surveyors do not.",
-     "cannot": "⚠️ It gives you the LAND's future, not anyone's plans for it. ⛔ And you must be in the orchard."
+     "grants": "⛔ THE EVENTS THEMSELVES — what happens here, roughly when, and how many are in it. A flood in the third spring; two companies in autumn; the year the road is cut. ⚠️ Numbers and timing, which is what makes it worth planting before a war rather than after.",
+     "cannot": "⚠️ Events, not reasons. ⛔ And it will not tell you which side anyone is on."
     },
     {
      "rank": 3,
-     "name": "Left Standing",
+     "name": "Who Comes",
      "functions": [
       "foresee",
       "reveal",
@@ -5065,14 +5065,15 @@
      "gains": "deepen",
      "harmRung": "none",
      "gainAxes": [
-      "duration",
-      "quality"
+      "quality",
+      "targets"
      ],
-     "grants": "⛔ LEAVE THE QUESTION IN THE TREE AND WALK AWAY — it answers when it knows, years out if that is when. ⚠️ A Rootkin returns to an orchard they planted as a child and finds the answer waiting. ⛔ THIS IS WHY THEY PLANT TREES THEY WILL NOT TASTE.",
-     "cannot": "⚠️ You must come back to hear it, and the tree must still be standing. ⛔ An orchard burned is a library burned, and the Rootkin treat it exactly that seriously."
+     "grants": "⛔ THE PEOPLE. Who arrives at this ground, when, and what they do when they get there — clearly enough to recognise them on the day. ⚠️ THIS IS WHY A ROOTKIN PLANTS A TREE FOR SOMEONE WHO HAS NOT BEEN BORN: the question was set down for them, and the tree has been holding it.",
+     "cannot": "⛔ IT NAMES WHO AND WHAT, NEVER WHY — you will know a man comes and not what he wants. ⚠️ And knowing is not preventing: the Rootkin have a long history of watching a foreseen thing arrive exactly as read."
     }
    ],
-   "_authored": "⛔ ERIK 2026-08-30. ✅ CLOSES THE `foresee` GAP I FLAGGED THE SAME DAY — and the answer was in the geography before I asked the question. ⚠️ ERIK ALSO FLAGGED IT AS A POSSIBLE TIME BRAID (hourkeeper), which is not built here: this reads a tree's own future, not time itself. **A braid would be reading a future the tree has no part in**, and that is a different craft."
+   "_authored": "⛔ ERIK 2026-08-30. ✅ CLOSES THE `foresee` GAP I FLAGGED THE SAME DAY — and the answer was in the geography before I asked the question. ⚠️ ERIK ALSO FLAGGED IT AS A POSSIBLE TIME BRAID (hourkeeper), which is not built here: this reads a tree's own future, not time itself. **A braid would be reading a future the tree has no part in**, and that is a different craft.",
+   "_corrected_20260830": "⛔ ERIK 2026-08-30: 'it should let you get a read on AN AREA OR A FUTURE PERSON WHO INTERACTS WITH IT — that's why trees are planted with questions FOR CERTAIN PEOPLE IN THE FUTURE. You could plant one at an intended BATTLEFIELD. YOU DON'T NEED TO WAIT — lower rank is less capable and less clear, highest ranks are very informative.' ⚠️ MY VERSION WAS WRONG IN THE SHAPE THAT MATTERS: I had r3 as 'leave the question and walk away; it answers YEARS OUT', which makes the craft unusable in play — a divination you cannot hear until later is not a divination, it is a note to your successor. ✅ THE ANSWER IS NOW IMMEDIATE AND THE RANK IS THE CLARITY: SHAPE → EVENTS → PEOPLE. ⛔ And the planted-for-someone-unborn fiction survives INSIDE that — the tree holds the question, and whoever asks it later gets the answer at their own rank."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -1395,7 +1395,7 @@
    ],
    "description": "⛔ PUT SOMETHING ELSE WHERE THE BLOW IS GOING. A shove at the right instant, a grip on a strap, a table kicked into the lane — the harm meant for you arrives somewhere else and you are still standing. ⚠️ A MARCHER LEARNS THIS THE SAME WAY THEY LEARN EVERYTHING: by watching it work. ⛔ IT IS THE EXACT INVERSE OF THE STILLHOLD'S `step_between`, AND BOTH TRADITIONS KNOW IT. One steps in front of someone; the other puts someone in front.",
    "narrationHints": "The bolt takes the man he was arguing with a moment earlier. ⚠️ Nobody saw him move and he did not move much — half a step and a hand on a shoulder, at the right instant.",
-   "notFor": "⛔ IT NEEDS SOMETHING TO PUT THERE — a person, an animal, a heavy object, within reach and not braced against you. An empty lane offers nothing. ⚠️ AND IT ANSWERS ONE INCOMING THING, AIMED: a blow, a bolt, a thrown weapon. Not an area, not a working laid on the ground, not something that was never coming at you. ⛔ WHOEVER YOU PUT THERE TAKES IT IN FULL, and if they live they know exactly what you did.",
+   "notFor": "⛔ IT NEEDS SOMETHING TO PUT THERE — a person, an animal, a heavy object, within reach and not braced against you. An empty lane offers nothing. ⚠️ AND IT ANSWERS ONE INCOMING THING, AIMED: a blow, a bolt, a thrown weapon. Not an area, not a working laid on the ground, not something that was never coming at you. ⛔ WHOEVER YOU PUT THERE TAKES IT IN FULL, and if they live they know exactly what you did. ⚠️ IT WILL NOT TARGET YOUR OWN — see the friendly-fire backlog entry.",
    "plainly": "A fight/duel action. ⛔ REDIRECT ONE AIMED ATTACK MEANT FOR YOU INTO SOMETHING ELSE WITHIN REACH — a person, an animal, a heavy object. Rated 5, once per exchange, about four rounds. r2 redirects onto a chosen target rather than the nearest; r3 redirects an attack meant for an ALLY as well as one meant for you. ⚠️ Whoever ends up there takes it in full.",
    "intensity": {
     "conserve": "a partial deflection — they take some of it and so do you",
@@ -1411,7 +1411,7 @@
      "class": "hard"
     },
     {
-     "text": "⚠️ WHOEVER TAKES IT, TAKES IT IN FULL — including your own people, including someone who trusted you",
+     "text": "⚠️ WHOEVER YOU PUT THERE TAKES IT IN FULL — and you must choose someone standing against you; the craft will not put it into an ally",
      "class": "hard"
     },
     {
@@ -1492,7 +1492,8 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-29. ⚠️ AND HE CORRECTED THE INSTINCT THAT WOULD HAVE RUINED IT: asked why a veteran would care about 'unseeing' who is vulnerable, i.e. STOP GIVING THESE PEOPLE A CONSCIENCE THEY DO NOT HAVE. This craft carries no penalty, no standing loss and no narrative debt — per the standing rule that a cost is ENERGY. What it costs is that people watch you do it.",
-   "_wiredFromBattleTest_20260829": "⚠️ I HAD THIS AS 'NO ENGINE HOOK' AND WAS WRONG IN THE WORSE DIRECTION. CCode: 'none of them is inert — THE DIVISION IS GENERIC vs SPECIFIC, and a GENERIC RESOLUTION IS WORSE THAN AN INERT ONE BECAUSE IT LOOKS LIKE IT WORKED.' ⛔ This craft rolled, dealt its magnitude and printed a receipt, and nothing redirected anything."
+   "_wiredFromBattleTest_20260829": "⚠️ I HAD THIS AS 'NO ENGINE HOOK' AND WAS WRONG IN THE WORSE DIRECTION. CCode: 'none of them is inert — THE DIVISION IS GENERIC vs SPECIFIC, and a GENERIC RESOLUTION IS WORSE THAN AN INERT ONE BECAUSE IT LOOKS LIKE IT WORKED.' ⛔ This craft rolled, dealt its magnitude and printed a receipt, and nothing redirected anything.",
+   "_friendlyFire_20260830": "⛔ ERIK 2026-08-30: 'YOU WILL NOT HARM YOUR OWN. I HATE GAMES THAT DO THAT.' ⚠️ I WROTE ALLY-HARM INTO SIX CRAFTS THIS SESSION AND IT IS A STANDING DESIGN RULE I KEPT VIOLATING — the same instinct as the narrative-cost and the punishment-surge habits: I keep pricing power in harm to the player's own side. ✅ REMOVED HERE. ⛔ Erik: 'in this case I can see the POTENTIAL for friendly fire — we can log this and others like it under a POTENTIAL FUTURE FRIENDLY FIRE FEATURE.' See `po/BACKLOG.md`."
   },
   {
    "powerSystem": "metaphysical",

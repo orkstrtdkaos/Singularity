@@ -56,7 +56,7 @@ measuring across every craft that needs a pick.**
 
 ---
 
-## ⛔ THE THIRTEEN RULES THAT MAKE IT WORK
+## ⛔ THE FOURTEEN RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
 
@@ -301,6 +301,30 @@ adjacent ones must."* ⛔ **Under the fourteen, A SECT'S PRIMARY IS THE ADJACENC
 **So a coverage assessment must state which structure it is measured in**, and a gap claim under the
 24-pole wheel is provisional until checked against the primary. ⚠️ **The docs are written for the target
 state and marked; the target replaces the current one when migration completes.**
+
+### 14. ⛔ A CRAFT DOES NOT HARM THE PLAYER'S OWN SIDE
+
+**Added 2026-08-30. Erik: *"You will not harm your own. I HATE GAMES THAT DO THAT."***
+
+⚠️ **I WROTE ALLY-HARM INTO SIX CRAFTS IN ONE SESSION** — `edge`, `in_the_way`, `slow_cup`,
+`swallowed_word`, `grey_ground`, `reaping_sickle` — **after being corrected on the same craft once
+already.**
+
+⛔ **AND IT IS THE THIRD FACE OF ONE HABIT, which is why the rule is here and not just a note:**
+
+| the habit | the correction |
+|---|---|
+| narrative debts in `cannot` blocks | ⛔ *"COST IS ENERGY"* — six times |
+| surges that punish the wielder | ⛔ *"stop the negative aspects of heroic skills"* |
+| **crafts that hit your own party** | ⛔ **"you will not harm your own"** |
+
+⚠️ **ALL THREE ARE ME PRICING POWER IN HARM TO THE PLAYER'S SIDE.** ⛔ **It reads as depth and it is the
+thing Erik most dislikes.** ✅ **The test: if a craft's cost lands on anyone the player cares about, it is
+the wrong cost. The cost is energy, scope, or control.**
+
+⬜ **AND "DOES NOT SORT" IS THE TELL** — that phrase, in any form, is this habit. **12 pre-existing crafts
+carry it and are logged for a possible friendly-fire FEATURE** (`po/BACKLOG.md`) rather than silently
+rewritten, because Erik sees the potential and an imposed version is the thing he objects to.
 
 ---
 

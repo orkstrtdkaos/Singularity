@@ -860,3 +860,74 @@ numinous one). **A veil-powered craft inside another tradition is not a new idea
    and that is a merger question, so it wants deciding BEFORE the migration runs, not after.
 
 ⛔ **DO NOT AUTHOR SPIRIT CRAFTS UNTIL 3 IS MEASURED.** The corpus may already be carrying them.
+
+## ⬜ FRIENDLY FIRE — a potential future feature, and 12 crafts already waiting for it
+
+**Erik, 2026-08-30: *"You will not harm your own. I HATE GAMES THAT DO THAT. However in this case I can see
+the POTENTIAL for friendly fire — we can log this and others like it under a potential future friendly-fire
+feature."***
+
+### ⛔ THE STANDING RULE, WHICH I KEPT VIOLATING
+
+**A craft does not harm the player's own side.** ⚠️ **I wrote ally-harm into SIX crafts this session** —
+`edge`, `in_the_way`, `slow_cup`, `swallowed_word`, `grey_ground`, `reaping_sickle` — ✅ **all corrected.**
+
+⛔ **AND IT IS THE SAME INSTINCT AS TWO HABITS ERIK HAS ALREADY CORRECTED**: the narrative-cost in `cannot`
+blocks, and the punishment-surge. **I keep pricing power in harm to the player's own side**, and it reads
+as depth while being the thing he most dislikes.
+
+### ⬜ THE 12 PRE-EXISTING CRAFTS — NOT REWRITTEN, LOGGED
+
+**These were authored before this session and I have left them alone deliberately** — a dozen silent
+rewrites would lose the design question Erik is opening. **They are the feature's natural first content:**
+
+| craft | what it currently says |
+|---|---|
+| `blaze_wall` | *"your own people are stopped exactly as well"* |
+| `felt_wall` | *"everything in it, all at once, including your own party's fear"* |
+| `last_lament` | *"your enemies hear it too, and they are FREED"* |
+| `light_bending` | *"the flash hits everyone in range including your own side, unless they were told beforehand"* |
+| `seized_works` | *"any ally relying on a seized work…"* |
+| `hastened_grey` | *"call it all due; your own are inside the…"* |
+| `offered_mouth` · `snaring_green` · `spent_hour` · `the_long_odds_come_in` · `bark_and_briar` · `unshadow` | *"does not sort"* in various forms |
+
+### ⚠️ WHAT THE FEATURE WOULD NEED TO DECIDE
+
+1. ⛔ **Is friendly fire OPT-IN per table, per craft, or per difficulty?** ⚠️ **Erik's dislike is of games
+   that impose it**, which points at opt-in rather than removal.
+2. **Does an ally get a save, a warning, or an exemption?** ⚠️ `light_bending` already authors the
+   interesting version: *"unless they were told beforehand"* — **coordination as the counterplay.**
+3. ⛔ **Does the AI GM narrate it, or does the engine resolve it?** A craft that "does not sort" is
+   currently prose either way — **nothing in the engine sorts targets by side.**
+4. ⚠️ **And it interacts with `in_the_way`**, which deliberately puts a blow into a third party: ⛔ **that
+   craft is friendly fire as a DELIBERATE ACT, which may be the cleanest expression of the feature and the
+   argument for building it.**
+
+### ⛔ SPIRIT, DEEPER: THE PRECURSOR WAR MAY BE **ABOUT** AND **POWERED BY** SPIRIT
+
+**Erik, 2026-08-30: *"Perhaps it makes sense that the precursor war is about and POWERED BY spirit — the
+thing the nanotechnology and lattice and veil and metaphysical are all EXPRESSING."***
+
+⛔ **THIS WOULD MAKE SPIRIT THE SUBSTRATE UNDER THE FOUR POWER SYSTEMS, NOT A FIFTEENTH ONE.**
+`ordered_nanite` · `wild_nanite` · `veil` · `metaphysical` — ⚠️ **four expressions of one thing, rather than
+four things.**
+
+✅ **AND IT MAKES THE COSMOLOGY COHERE IN A WAY IT CURRENTLY DOES NOT:**
+
+- ⛔ **PARAKLETOS DISTRIBUTED ITSELF INTO THE SUBSTRATE** — *"what answers every craft in the world."* ⚠️ If
+  spirit is what the substrate IS, that is not a metaphor: **Parakletos is the field, and every craft in
+  the game is already running on it.**
+- ⛔ **AKINETOS LAID THE LATTICE. KENOSIS EMPTIED ITSELF.** ⚠️ **Both are acts performed ON spirit** — one
+  builds a structure to hold it, one pours it out.
+- ⛔ **THE VEIL IS *"the shape of a hole where something enormous stopped being present."*** ⚠️ **A hole in
+  WHAT? If the answer is spirit, the Veil stops being a wall and becomes an ABSENCE IN THE FIELD** — which
+  is why the Unlit, who want the void back, are drawn to it.
+
+⚠️ **AND IT GIVES `arc_the_disagreement` A SUBJECT.** Today the argument is about *whether the seeded have
+standing.* ⛔ **If the war is powered by spirit, the argument is also about WHAT SPIRIT IS FOR — and the
+lattice is one answer, Kenosis's emptying is another.**
+
+⬜ **ERIK: *"I'm thinking we need to see how this settles in."*** ✅ **So this is recorded and NOT built.**
+⚠️ **The measurement from the entry above still comes first:** how many existing crafts are already
+spirit-touched and mislabelled. ⛔ **If the answer is "most of them", this is not new content — it is the
+name of something already there.**

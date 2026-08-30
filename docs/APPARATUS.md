@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 86 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 87 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-08-30 · v1.9.276 · 86 files.**
+**Last measured: 2026-08-30 · v1.9.276 · 87 files.**
 
 ---
 
@@ -98,7 +98,7 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3521 | — |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
-| `tests/how_it_works` | ✅ GATE | 206 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 211 | CCODE-285 |
 | `tests/content_ci` | ✅ GATE | 184 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
 | `tests/wiring_audit` | ✅ GATE | 39 | BATCH-11 §23 |
@@ -147,6 +147,7 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | `scripts/bump_version` | 🔧 TOOL+SELFTEST | 3 | SNG-274: the version moves, and it moves in ONE step |
 | `scripts/run_tests` | 🔧 TOOL+SELFTEST | 3 | EVERY SUITE RUNS, EVEN AFTER ONE GOES RED |
 | `scripts/apparatus` | 🔧 TOOL+SELFTEST | 1 | CCODE-301 |
+| `scripts/certify_counts` | 🔧 TOOL+SELFTEST | 1 | CCODE-327 |
 | `scripts/encounter_types` | 🔧 TOOL+SELFTEST | 1 | CCODE-262 |
 | `scripts/engine_map` | 🔧 TOOL+SELFTEST | 1 | BATCH-12 §5 |
 | `scripts/prompt_grid` | 🔧 TOOL+SELFTEST | 1 | SNG-435 §B3: the ordering grid |

@@ -5109,13 +5109,13 @@
     "summon",
     "sustain"
    ],
-   "description": "⛔ MAKE LIFE WHERE THERE WAS NONE. Not sped, not healed, not regrown — BEGUN. A seed in your palm that had no parent plant. A creature with no lineage behind it. A bloom in water that has been dead for a century. ⚠️ YOU CHOOSE WHAT IT IS, BECAUSE THE CHOOSING IS THE CRAFT. ⛔ AND WHAT YOU MAKE IS ITS OWN THING FROM THE FIRST MOMENT: it does not obey you, does not know you, and owes you nothing. You can make a wolf. You cannot make YOUR wolf.",
-   "narrationHints": "She opens her hand and there is a seed in it that nobody has ever grown. ⚠️ She looks like someone who has just put down something very heavy. ⛔ The seed is already doing something.",
+   "description": "⛔ MAKE LIFE WHERE THERE WAS NONE, AND MAKE IT FINISHED. Not a seed to tend — THE TREE. Not an egg — the creature, grown, whole, and already what it is. ⚠️ YOU CHOOSE WHAT IT IS, BECAUSE THE CHOOSING IS THE CRAFT. ⛔ AND IT IS ITS OWN FROM THE FIRST MOMENT: it does not obey you, does not know you, and owes you nothing. You can make a wolf. You cannot make YOUR wolf.",
+   "narrationHints": "She opens her hands and there is a full-grown thing standing where there was nothing. ⚠️ It looks at her the way anything looks at a stranger. ⛔ She looks like someone who has just put down something very heavy.",
    "notFor": "⛔ IT MAKES LIFE, NOT A SERVANT — what you spark is its own from the first moment, and a Rootkin who expects loyalty from it has misunderstood their own tradition. ⚠️ AND IT MAKES ONE THING, ONCE, FOR EVERYTHING YOU HAVE: this is the whole pool, and you are finished for the day. ⛔ It cannot un-make, cannot copy a specific living person, and cannot put a mind into something that would not have had one.",
-   "plainly": "A create action, and the tradition's capstone. ⛔ MAKE A LIVING THING THAT DID NOT EXIST — you choose what, and it is genuinely new and genuinely its own. Costs your whole pool; once per day at most. ⚠️ Conserve makes something small and short-lived; surge makes something that will outlast you. ⛔ SINGLE RANK: there is no lesser version of beginning a life.",
+   "plainly": "A create action, and the tradition's capstone. ⛔ MAKE A LIVING THING THAT DID NOT EXIST, FINISHED — grown, whole, and doing what it does. You choose what. Costs your whole pool; once per day at most. ⚠️ Conserve makes something small; surge makes something that will outlast you. ⛔ SINGLE RANK: there is no lesser version of beginning a life.",
    "intensity": {
-    "conserve": "a small making — a spore, a seedling, something that will live a season and be gone",
-    "surge": "⛔ SPEND EVERYTHING INTO IT: what you make will still be here long after you are not, and it will have gone on making itself the whole time"
+    "conserve": "something small, finished — a bird, a bush in fruit, a colony already working",
+    "surge": "⛔ SPEND EVERYTHING INTO IT: something large and complete, that will still be here long after you are not"
    },
    "bounds": [
     {
@@ -5131,7 +5131,7 @@
      "class": "hard"
     },
     {
-     "text": "⚠️ AND IT CANNOT UN-MAKE. What you spark is in the world now, and the world keeps it",
+     "text": "⚠️ AND IT CANNOT BE UN-MADE. What you spark is in the world now, grown and going, and the world keeps it",
      "class": "hard"
     }
    ],
@@ -5143,7 +5143,8 @@
      "success": "It comes out further along than you meant — already grown, already doing what it is for.",
      "failure": "It lives. It is not what you asked for, and it is not going to stop."
     },
-    "note": "construct/make. ⛔ THE TRADITION'S CAPSTONE AND THE ONLY MISSING L5 IN THE GAME — Life topped out at L4 and its highest craft was `root_that_holds`, which is RETRIEVAL: borrowed structure from Death's ladder. **The life pole's summit was a thing Death also does.** ⛔ SINGLE RANK BY DESIGN, and Erik asked the question directly. ⚠️ A RANKED CRAFT SAYS 'you can do a lesser version of this now' AND SPARK HAS NO LESSER VERSION — you either put life where there was none or you did not. ✅ Precedent: `worldsong` and `light_borne` are single-rank capstones ('the special IS the craft'), and Erik ruled `the_cut_thread` single-rank because ending one life is one act. **Beginning one is the same shape.** ⛔ AND THE VARIATION LIVES WHERE IT BELONGS: `intensity` for scale, energy at use-time for what a thing costs, and THE GENERATIVE SUBSTRATE for what can be made at all — `generative_substrate` already holds that 'every type of thing we authored by hand is a TEMPLATE the engine can generate more of, with persistence, SO THE WORLD GROWS AS PEOPLE PLAY IT', creatures included. ✅ ERIK 2026-08-30: 'it circles us back to a PRIMARY FEATURE of this game — GENERATIVE CONTENT. A player or NPC using SPARK MAKES SOMETHING THAT DIDN'T EXIST BEFORE.' ⚠️ SO THE LADDER IS THE WORLD, NOT A PURCHASE: what a Rootkin can spark grows with what they have seen."
+    "note": "construct/make. ⛔ THE TRADITION'S CAPSTONE AND THE ONLY MISSING L5 IN THE GAME — Life topped out at L4 and its highest craft was `root_that_holds`, which is RETRIEVAL: borrowed structure from Death's ladder. **The life pole's summit was a thing Death also does.** ⛔ SINGLE RANK BY DESIGN, and Erik asked the question directly. ⚠️ A RANKED CRAFT SAYS 'you can do a lesser version of this now' AND SPARK HAS NO LESSER VERSION — you either put life where there was none or you did not. ✅ Precedent: `worldsong` and `light_borne` are single-rank capstones ('the special IS the craft'), and Erik ruled `the_cut_thread` single-rank because ending one life is one act. **Beginning one is the same shape.** ⛔ AND THE VARIATION LIVES WHERE IT BELONGS: `intensity` for scale, energy at use-time for what a thing costs, and THE GENERATIVE SUBSTRATE for what can be made at all — `generative_substrate` already holds that 'every type of thing we authored by hand is a TEMPLATE the engine can generate more of, with persistence, SO THE WORLD GROWS AS PEOPLE PLAY IT', creatures included. ✅ ERIK 2026-08-30: 'it circles us back to a PRIMARY FEATURE of this game — GENERATIVE CONTENT. A player or NPC using SPARK MAKES SOMETHING THAT DIDN'T EXIST BEFORE.' ⚠️ SO THE LADDER IS THE WORLD, NOT A PURCHASE: what a Rootkin can spark grows with what they have seen.",
+    "_finishedNotSeed_20260830": "⛔ ERIK 2026-08-30: 'SPARK SHOULD LET YOU HAVE THE FINISHED THING NOT JUST THE SEED.' ⚠️ I HAD IT MAKING SEEDS AND SEEDLINGS — which quietly made the capstone into `quickening` with extra steps: spark a seed, then grow it. ⛔ THAT IS TWO CRAFTS DOING ONE JOB AND THE L5 DOING THE SMALLER HALF. ✅ IT MAKES THE FINISHED THING. Not a seed — THE TREE. Not an egg — the creature, grown and whole. ⚠️ AND IT MAKES THE AUTONOMY BOUND LAND HARDER: a seedling that owes you nothing is a gardening problem; A FULL-GROWN WOLF THAT OWES YOU NOTHING IS STANDING RIGHT THERE."
    },
    "tree": [
     {
@@ -5157,11 +5158,137 @@
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [],
-     "grants": "⛔ MAKE A LIVING THING THAT DID NOT EXIST. You choose what it is. It is new, it is real, and it is already its own. ⚠️ A seed with no parent, a creature with no lineage, a bloom in dead water.",
+     "grants": "⛔ MAKE A LIVING THING THAT DID NOT EXIST — FINISHED. Not a seed, the tree. Not an egg, the creature: grown, whole, and already doing what it does. ⚠️ You choose what it is, and it is new, real, and its own.",
      "cannot": "⛔ The whole pool, one thing, once. ⚠️ It owes you nothing and will not obey you. ⛔ And it cannot be un-made — the world keeps what you put in it."
     }
    ],
    "_authored": "⛔ ERIK 2026-08-30. ⚠️ AND HE REJECTED MY FIRST BOUNDS OUTRIGHT: I had written 'you cannot spark what has never lived' and 'you do not choose what it becomes'. ⛔ 'THE BOUND IS RIDICULOUS ON SPARK — YOU CAN'T SPARK NEW LIFE? IT IS THE SPARK! You can't choose what it becomes??? STUPID.' ✅ HE IS RIGHT: I had flinched from the craft and written bounds that cancelled its subject. **A capstone whose limits delete the thing it is for is not a capstone.** ⚠️ The real limits are COST (the whole pool), AUTONOMY (it is not yours), and IRREVERSIBILITY (you cannot un-make it) — all of which make the craft bigger rather than smaller."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "rootkin",
+   "nativeOrCombination": "native",
+   "axes": {
+    "death_life": 0.6
+   },
+   "id": "the_small_kingdom",
+   "name": "Small Kingdom",
+   "levelReq": 3,
+   "energyCost": 7,
+   "attribute": "practical",
+   "shape": "damage",
+   "harmRung": "lethal",
+   "challengeTypes": [
+    "SURVIVE",
+    "FIGHT",
+    "INVESTIGATE"
+   ],
+   "operativeAxis": [
+    "damage",
+    "scope",
+    "persistence"
+   ],
+   "effectTags": [
+    "infection",
+    "flora",
+    "micro"
+   ],
+   "functions": [
+    "strike",
+    "heal",
+    "command"
+   ],
+   "description": "⛔ THE SMALLEST LIVING THINGS ARE STILL LIVING THINGS, AND A ROOTKIN CAN POINT THEM. What lives in a wound, in standing water, in a granary, in a gut — tell it to work harder, or tell it to stop. ⚠️ THE SAME CRAFT DOES BOTH: a Rootkin walks into a plague house and ends it from the inside, not by warding but by KILLING WHAT IS DOING IT. ⛔ And a Rootkin who turns it the other way does not win a fight — they make one unnecessary a week later.",
+   "narrationHints": "Nobody sees anything happen. ⚠️ On the third day the camp's water tastes wrong, and on the fifth the camp is not a camp any more. ⛔ Used the other way: she kneels by a man three days into a fever and he is sitting up by evening, and she does not explain how.",
+   "notFor": "⛔ IT COMMANDS THE SMALL, NOT THE BODY — it will not close a cut, set a bone or mend an organ. It only ever tells the living things IN a thing what to do. ⚠️ AND AT SCALE IT IS SLOW BY ITS NATURE: a camp takes days, a company takes days, and nothing about it can be hurried. ⛔ IT IS ALSO VISIBLE TO ANYONE WHO KNOWS: a physician, a decay-ward, another Rootkin, or a Lifesense will all read it — this is not a hidden weapon, it is a slow one.",
+   "plainly": "A survive/fight action. ⛔ r1: ONE PERSON, NOW — drive an infection in a wound for 2d6 that keeps working, or end one outright. ⚠️ r2 REACHES A CAMP OR A COMPANY AND TAKES DAYS: you cannot use it to win a fight, only to make one unnecessary later. r3 reaches a settlement and can be ENDED as easily as started. ⛔ It never mends a body — only the small things living in one. Readable by any physician or Lifesense.",
+   "intensity": {
+    "conserve": "a single wound, a single cup — quick and small",
+    "surge": "⛔ SET IT AS WIDE AS YOU CAN REACH; you will not be able to call it back before it has done what it does"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT COMMANDS THE SMALL, NEVER THE BODY — it closes no wound and sets no bone",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ PAST ONE PERSON IT IS SLOW. A camp takes DAYS and cannot be hurried — this decides sieges, not rounds",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT IS READABLE — a physician, a decay-ward, a Lifesense or another Rootkin sees it for what it is",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AND STARTING IS EASIER THAN STOPPING AT SCALE: r3 ends what r2 starts, and below r3 you may not be able to call it back",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "damageType": "living",
+    "duration": 6,
+    "targets": 1,
+    "scope": 1,
+    "crit": {
+     "success": "It takes in exactly the one you meant and nowhere else — which is the hardest thing this craft does.",
+     "failure": "It takes, and it does not stay where you put it."
+    },
+    "note": "damage/heal. ⛔ ERIK 2026-08-30 RULED THE SHAPE: 'B, BUT WITH A AS WELL AT r1' — personal and immediate at r1, scoped-and-slow above it. ✅ THAT IS THE BALANCE AND IT IS TIME, NOT NUMBERS: nothing in the corpus does ongoing harm past scope 3, so a fast unit-scale craft at L3 would be the strongest in the game by a distance. ⚠️ SLOW MAKES IT STRATEGIC RATHER THAN TACTICAL, which is a role NOTHING in Life currently fills — and it gives the craft a real counter, which a fast version would not have. ⛔ `living` TYPE, AND THAT IS WHAT MAKES IT LIFE'S AND NOT DEATH'S: decay is the Ashwarden's — THE THINGS THAT DO THE DECAYING ARE ALIVE. ✅ ZERO of 402 crafts touched bacteria, ferment, spores or infection before this."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Small Kingdom",
+     "functions": [
+      "strike",
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [],
+     "grants": "⛔ ONE PERSON, NOW. Drive what is living in a wound — 2d6 `living`, and it keeps working until it is treated. ⚠️ OR TELL IT TO STOP: end an infection outright, in the room, in a moment.",
+     "cannot": "One subject, and it commands the small rather than the body. ⛔ It closes no wound. ⚠️ And anyone who knows what to look for can see what you did."
+    },
+    {
+     "rank": 2,
+     "name": "Given Days",
+     "functions": [
+      "strike",
+      "heal",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "scope",
+      "duration"
+     ],
+     "grants": "⛔ A CAMP, A COMPANY, A GRANARY, A WELL — AND IT TAKES DAYS. Water goes wrong on the third day; on the fifth the camp is not a camp. ⚠️ YOU CANNOT WIN A FIGHT WITH THIS. You make a fight unnecessary a week later, which is a different and larger thing.",
+     "cannot": "⛔ DAYS, AND IT CANNOT BE HURRIED. ⚠️ And once set at this scale you may not be able to call it back — that is r3's work."
+    },
+    {
+     "rank": 3,
+     "name": "Ended Or Begun",
+     "functions": [
+      "strike",
+      "heal",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "scope",
+      "quality"
+     ],
+     "grants": "⛔ A SETTLEMENT, AND ENDING IS AS EASY AS STARTING — walk into a plague town and stop it, or into a healthy one and do not. ⚠️ THIS IS THE RANK THE ROOTKIN ARE FEARED FOR AND THE RANK THEY ARE SENT FOR, and it is the same rank.",
+     "cannot": "⛔ STILL DAYS, STILL READABLE, STILL ONLY THE SMALL. ⚠️ And a settlement that learns a Rootkin ended its plague also learns a Rootkin could have started one."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-30. ✅ CLOSES THE WIDEST GAP IN THE TRADITION: Flora is ruled 'micro to macro organisms' and the micro end had NOTHING. ⚠️ AND IT FIXES THE TONE: the profile says 'LIFE AT FLOOD. NOT GENTLE' and the crafts were healers and gardeners with one thorn. A Rootkin who can end a siege by making the besiegers' water alive is frightening in the way the profile claims."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

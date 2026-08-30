@@ -1391,7 +1391,6 @@
     "targets": 1,
     "wardTypes": [
      "physical",
-     "precursor",
      "force"
     ],
     "_forceWard_20260829": "⛔ `force` ADDED with its first carrier (`ki_thorns`). ⚠️ THIS CRAFT IS THE EXACT ANSWER AND ALREADY SAID SO: 'protection through engineered response — interlocking parts and REDIRECTED FORCE, not brute resistance.' ⛔ A ward that redirects force should answer force, and until today no craft in the game carried the type for it to answer."
@@ -1431,7 +1430,8 @@
    "_idWas": "the_mechanical_defense",
    "_wardTypes": "⛔ SNG-512. Interlocking parts and redirected force — answers the made and the mechanical.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_wardMigrated_20260829": "⛔ WARD `precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — so a ward against it warded nothing. ⚠️ SEVEN CRAFTS carried it after the ruling, and my morning migration only cleaned `damageType`. **A ward naming a dead type is worse than an authored-and-unread field: it looks like protection.**"
   },
   {
    "id": "running_engine",

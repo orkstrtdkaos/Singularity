@@ -757,8 +757,7 @@
     "targets": 1,
     "note": "A SECOND ZERO-SOAK GUARD, and it uses Erik's EVASION model: 'the attack lands on the APPEARANCE, and the person is somewhere else.' This is not concealment (the_harbor) — it is misdirection: they DO attack, at the wrong place.",
     "wardTypes": [
-     "physical",
-     "precursor"
+     "physical"
     ]
    },
    "rankDeltas": [
@@ -796,7 +795,8 @@
    "_idWas": "the_false_target",
    "_wardTypes": "⛔ SNG-512. They strike what is not there. Answers anything AIMED; useless against an area or a fact.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_wardMigrated_20260829": "⛔ WARD `precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — so a ward against it warded nothing. ⚠️ SEVEN CRAFTS carried it after the ruling, and my morning migration only cleaned `damageType`. **A ward naming a dead type is worse than an authored-and-unread field: it looks like protection.**"
   },
   {
    "id": "made_truth",
@@ -1896,7 +1896,6 @@
     "note": "T-IV, and a THIRD zero-soak guard. 'Not merely unseen but UN-LOOKED-FOR.'",
     "wardTypes": [
      "physical",
-     "precursor",
      "abstraction"
     ]
    },
@@ -1929,7 +1928,8 @@
    "_idWas": "the_perfect_veil",
    "_wardTypes": "⛔ SNG-512. ⛔ Un-looked-for rather than unseen — answers anything that must FIND you first.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_falsehood_truth",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_wardMigrated_20260829": "⛔ WARD `precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — so a ward against it warded nothing. ⚠️ SEVEN CRAFTS carried it after the ruling, and my morning migration only cleaned `damageType`. **A ward naming a dead type is worse than an authored-and-unread field: it looks like protection.**"
   },
   {
    "schemaVersion": 1,

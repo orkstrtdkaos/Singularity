@@ -114,7 +114,7 @@
     "scope": 2,
     "wardTypes": [
      "shadow",
-     "light"
+     "radiance"
     ]
    },
    "rankDeltas": [
@@ -167,7 +167,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_wardTypes": "⛔ SNG-512. Wrapping a space in concealment answers what needs to see.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_wardMigrated_20260829": "⚠️ WARD `light` -> `radiance`. ⛔ MY MORNING MIGRATION WAS HALF A MIGRATION: I migrated `damageType` and `damageMix` and NEVER CHECKED `wardTypes`. Five crafts were warding a type that no longer existed — a ward against nothing, which reads as protection and is not. ⚠️ Found by the question-check flagging `heat` as UNWARDED and my going to look for the natural heat ward."
   },
   {
    "id": "radiance",
@@ -854,7 +855,6 @@
     "targets": 1,
     "note": "A GUARD SHAPE WITH ZERO SOAK — deliberate. Its own bound: 'concealment hides, it does not defend.' The Harbor protects by never being found, not by absorbing a blow. If it IS found, it offers nothing.",
     "wardTypes": [
-     "precursor",
      "abstraction"
     ]
    },
@@ -903,7 +903,8 @@
    "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. hides a person or truth so completely a knowing search misses\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY.",
    "_wardTypes": "⛔ SNG-512. Hides from a KNOWING searcher — answers address-work and pattern-work, not a blade.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_wardMigrated_20260829": "⛔ WARD `precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — so a ward against it warded nothing. ⚠️ SEVEN CRAFTS carried it after the ruling, and my morning migration only cleaned `damageType`. **A ward naming a dead type is worse than an authored-and-unread field: it looks like protection.**"
   },
   {
    "id": "unshadow",
@@ -2686,8 +2687,10 @@
     "magnitude": 2,
     "duration": 8,
     "wardTypes": [
-     "light"
-    ]
+     "radiance",
+     "heat"
+    ],
+    "_heatWard_20260829": "⛔ `heat` ADDED with its first carrier (`dressed_edge`, marcher weapon-coatings). ⚠️ THE WHICH-CHECK CAUGHT IT: heat had crafts dealing it and NOTHING WARDING IT, same as grief, vitality, cold, psychic and force before it. ✅ AND THIS IS THE RIGHT CARRIER RATHER THAN A CONVENIENT ONE: the Blazeborn live in 'a light so total it has burned their land to glass', and this craft is 'light is FUEL for the blazeborn, not drain' — a people who are sustained by intense radiance are the people fire does not answer."
    },
    "rankDeltas": [
     {
@@ -2719,7 +2722,8 @@
    "_wardTypes": "⛔ SNG-512. Light is fuel, not damage, for a Blazeborn.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['endurance', 'survival', 'hardship'], and e1 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy."
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['endurance', 'survival', 'hardship'], and e1 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy.",
+   "_wardMigrated_20260829": "⚠️ WARD `light` -> `radiance`. ⛔ MY MORNING MIGRATION WAS HALF A MIGRATION: I migrated `damageType` and `damageMix` and NEVER CHECKED `wardTypes`. Five crafts were warding a type that no longer existed — a ward against nothing, which reads as protection and is not. ⚠️ Found by the question-check flagging `heat` as UNWARDED and my going to look for the natural heat ward."
   },
   {
    "schemaVersion": 1,

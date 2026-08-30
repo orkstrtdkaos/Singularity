@@ -658,10 +658,7 @@
     "soakRank": 0,
     "duration": 2,
     "targets": 1,
-    "note": "A TWENTIETH DEFENSIVE LOGIC — HELD-OPEN: soak 0, because it does not stop harm; it stops a thing from CLOSING. The only guard in the catalog whose subject is a possibility rather than a person.",
-    "wardTypes": [
-     "precursor"
-    ]
+    "note": "A TWENTIETH DEFENSIVE LOGIC — HELD-OPEN: soak 0, because it does not stop harm; it stops a thing from CLOSING. The only guard in the catalog whose subject is a possibility rather than a person."
    },
    "rankDeltas": [
     {
@@ -702,7 +699,8 @@
    "_wardTypes": "⛔ SNG-512. ⛔ The counter-move to the Precursor tendency. Answers precursor work and nothing else — deliberately narrow.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_traditionWas": "precursor",
    "_traditionFix": "⛔ SNG-537, ERIK: 'The precursor crafts are LATTICE (Precursor's power source, yes.)' ⚠️ `precursor` WAS SITTING IN A `tradition` FIELD — a power source in a people field, the same category error as a reach id in a powerSystem field, running the other direction.\n⛔ THE LATTICE ARE THE PEOPLE; PRECURSOR IS WHAT THEY DRAW ON. These six — Latticespeak, Wake the Line, Foreclose, Unmake Seal, Hold the Aperture, Address-Sense — are Latticework, and they join Order.",
-   "_precursorRemoved_20260829": "⛔ `damageType: precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — and this craft confirms it: it has NO DICE and deals no damage at all. ⚠️ Seven crafts carried the field after the ruling; the ruling was made and never executed, which is how a dead vocabulary keeps looking alive."
+   "_precursorRemoved_20260829": "⛔ `damageType: precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — and this craft confirms it: it has NO DICE and deals no damage at all. ⚠️ Seven crafts carried the field after the ruling; the ruling was made and never executed, which is how a dead vocabulary keeps looking alive.",
+   "_wardMigrated_20260829": "⛔ WARD `precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — so a ward against it warded nothing. ⚠️ SEVEN CRAFTS carried it after the ruling, and my morning migration only cleaned `damageType`. **A ward naming a dead type is worse than an authored-and-unread field: it looks like protection.**"
   },
   {
    "id": "address_sense",

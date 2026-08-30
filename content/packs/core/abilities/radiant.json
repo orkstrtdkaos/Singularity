@@ -1632,7 +1632,7 @@
     "duration": 12,
     "note": "PROTECT→guard at T-III (magnitude scaled from the family default 2 by the ladder). r1: ONE doorway warded TILL DAWN; you know THAT something crossed and how big",
     "wardTypes": [
-     "light",
+     "radiance",
      "shadow"
     ]
    },
@@ -1705,7 +1705,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_wardTypes": "⛔ SNG-512. A standing lattice that reports what crosses. Answers what moves through light.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "radiant",
-   "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_wardMigrated_20260829": "⚠️ WARD `light` -> `radiance`. ⛔ MY MORNING MIGRATION WAS HALF A MIGRATION: I migrated `damageType` and `damageMix` and NEVER CHECKED `wardTypes`. Five crafts were warding a type that no longer existed — a ward against nothing, which reads as protection and is not. ⚠️ Found by the question-check flagging `heat` as UNWARDED and my going to look for the natural heat ward."
   },
   {
    "id": "sun_seal",
@@ -1806,7 +1807,7 @@
     "wardTypes": [
      "shadow",
      "decay",
-     "light"
+     "radiance"
     ]
    },
    "rankDeltas": [
@@ -1857,7 +1858,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_wardTypes": "⛔ SNG-512. ⛔ Holds back shadow-things. A light-ward answers dark and rot; it does not answer a sword.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "radiant",
-   "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_wardMigrated_20260829": "⚠️ WARD `light` -> `radiance`. ⛔ MY MORNING MIGRATION WAS HALF A MIGRATION: I migrated `damageType` and `damageMix` and NEVER CHECKED `wardTypes`. Five crafts were warding a type that no longer existed — a ward against nothing, which reads as protection and is not. ⚠️ Found by the question-check flagging `heat` as UNWARDED and my going to look for the natural heat ward."
   },
   {
    "id": "light_borne",

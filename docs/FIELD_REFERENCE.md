@@ -479,7 +479,7 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `range` | 79 | `mechanic`×79 | ✅ READ | `capabilities.js`, `craftmechanics.js` |
 | `plus` | 72 | `mechanic`×72 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
 | `schemaVersion` | 63 | `root`×63 | ✅ READ | `canon.js`, `codex.js`, `encounterFrame.js` |
-| `wardTypes` | 51 | `mechanic`×51 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
+| `wardTypes` | 50 | `mechanic`×50 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `damageType` | 46 | `mechanic`×46 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `marginFloorPer` | 45 | `mechanic`×45 | ✅ READ | `craftmechanics.js` |
 | `soak` | 32 | `mechanic`×32 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `melee.js` |

@@ -4479,13 +4479,13 @@
     "hinder",
     "conceal"
    ],
-   "description": "⛔ TAKE THE SOUND OUT OF A PLACE. Not muffled — ABSENT, the way the void was before anything was said in it. ⚠️ A shout arrives as nothing. A warning does not happen. An oath sworn inside it was never sworn, because nobody heard it and the words did not exist for long enough to count.",
-   "narrationHints": "The alarm bell swings, visibly, and the yard stays quiet. ⚠️ Two men are screaming at each other a pace apart and neither has any idea what the other is saying.",
-   "notFor": "⛔ IT TAKES SOUND, NOT MEANING — signed words, written notes and a hand on a shoulder all cross it freely, and a practised pair will get their message through. ⚠️ AND YOU ARE INSIDE IT: you will not hear the thing coming either, which is the craft's real cost and not a trap for your companions. ⛔ Nor does it stop a working that needs no voice.",
-   "plainly": "A social/stealth action. ⛔ REMOVE SOUND FROM AN AREA — nobody in it can be heard by anyone, including you. Rated 5, a room's worth, about four rounds. r2 takes one PERSON'S voice specifically and leaves everyone else audible; r3 holds a place silent without you present. ⚠️ Writing, signing and touch all still work.",
+   "description": "⛔ TAKE THE SOUND OUT OF SOMEONE. Not muffled — ABSENT, the way the void was before anything was said in it. ⚠️ They speak and nothing arrives. A shout is not quiet, it DOES NOT HAPPEN. An oath sworn this way was never sworn, because nobody heard it and the words did not exist for long enough to count.",
+   "narrationHints": "He gives the order twice before he understands. ⚠️ The second time he is shouting, and the men in front of him are watching his face and waiting for a sound that is not coming.",
+   "notFor": "⛔ IT TAKES SOUND, NOT MEANING — signed words, written notes and a hand on a shoulder all cross it freely, and a practised pair will get their message through. ⚠️ AND IT TAKES A VOICE, NOT A THOUGHT: they know exactly what they meant to say and can act on it. ⛔ Nor does it stop a working that needs no voice — and a silenced person is very obviously silenced, which is its own kind of announcement.",
+   "plainly": "A social/stealth action. ⛔ TAKE ONE PERSON'S VOICE — they speak and nothing comes out, in front of everyone, while the room hears normally. Rated 5, about four rounds. r2 takes several at once, so a group cannot call to each other; r3 holds a place silent without you present. ⚠️ Writing, signing and touch all still work.",
    "intensity": {
-    "conserve": "one voice, briefly",
-    "surge": "take the sound from everything you can see; ⛔ NOBODY WILL BE ABLE TO WARN ANYONE, INCLUDING YOUR OWN"
+    "conserve": "one voice, and only for a moment of it",
+    "surge": "⛔ TAKE EVERY VOICE ON THE OTHER SIDE AT ONCE; they will fight without a word between them"
    },
    "bounds": [
     {
@@ -4493,11 +4493,11 @@
      "class": "hard"
     },
     {
-     "text": "⚠️ YOU ARE INSIDE IT — deaf in it yourself, which is what it costs you",
+     "text": "⛔ IT IS AIMED. You choose whose voice goes, and it never takes your own or your companions'",
      "class": "hard"
     },
     {
-     "text": "⚠️ A place held silent is CONSPICUOUS — silence where there should be noise is its own alarm",
+     "text": "⚠️ A SILENCED PERSON IS VISIBLY SILENCED — everyone watching knows something was done to them",
      "class": "hard"
     }
    ],
@@ -4523,12 +4523,12 @@
      "gains": "broaden",
      "harmRung": "incapacitating",
      "gainAxes": [],
-     "grants": "⛔ SOUND LEAVES AN AREA. Shouts, bells, warnings, orders — none of them arrive. ⚠️ Including yours.",
-     "cannot": "⚠️ A room's worth, four rounds. ⛔ Writing and signing cross it, and the silence itself is noticeable."
+     "grants": "⛔ TAKE ONE PERSON'S VOICE. They speak and nothing comes out, in front of everyone, while the room hears normally. ⚠️ Orders, warnings, a shouted name — none of them arrive.",
+     "cannot": "One voice, four rounds. ⛔ They can still write, and someone will hand them a pen."
     },
     {
      "rank": 2,
-     "name": "One Voice Taken",
+     "name": "No Word Between Them",
      "functions": [
       "hinder",
       "bind"
@@ -4537,10 +4537,10 @@
      "harmRung": "incapacitating",
      "gainAxes": [
       "targets",
-      "quality"
+      "scope"
      ],
-     "grants": "⛔ TAKE ONE PERSON'S VOICE AND LEAVE THE ROOM AUDIBLE — they speak and nothing comes out, in front of everyone, while everyone else is heard normally. ⚠️ Far crueller than silencing the room, and far more useful.",
-     "cannot": "⛔ They can still write, and someone will hand them a pen."
+     "grants": "⛔ TAKE SEVERAL VOICES AT ONCE — a rank, a watch, a command group. ⚠️ They can each still act, and they cannot call to one another, which is how a formation stops being one.",
+     "cannot": "⚠️ Those you name, and no more. ⛔ A group that has drilled hand-signals is barely inconvenienced, and good ones have."
     },
     {
      "rank": 3,
@@ -4562,7 +4562,8 @@
    ],
    "_authored": "⛔ ERIK 2026-08-29: 'silence is another option.' ⚠️ Void-craft: it RESTORES an absence rather than working a relative dark.",
    "_renamed_20260829": "⚠️ `The Swallowed Word` -> `Swallowed Word`. ⛔ ERIK: 'Instead of THE Given have it be UTTERED NAME. You're starting to use \"the\" in every title again. WE TALKED ABOUT THIS.' ⚠️ MEASURED: 42 crafts authored, 5 starting with 'The' — AND ALL FIVE FROM THIS ONE UMBRAL SESSION. The drift is not gradual across the corpus; it happens WITHIN a sitting, which is why Erik catches it and I do not.",
-   "_friendlyFire_20260830": "⛔ ERIK 2026-08-30: 'YOU WILL NOT HARM YOUR OWN. I HATE GAMES THAT DO THAT.' ⚠️ I WROTE ALLY-HARM INTO SIX CRAFTS THIS SESSION AND IT IS A STANDING DESIGN RULE I KEPT VIOLATING — the same instinct as the narrative-cost and the punishment-surge habits: I keep pricing power in harm to the player's own side. ✅ REMOVED HERE. ⛔ Erik: 'in this case I can see the POTENTIAL for friendly fire — we can log this and others like it under a POTENTIAL FUTURE FRIENDLY FIRE FEATURE.' See `po/BACKLOG.md`."
+   "_friendlyFire_20260830": "⛔ ERIK 2026-08-30: 'YOU WILL NOT HARM YOUR OWN. I HATE GAMES THAT DO THAT.' ⚠️ I WROTE ALLY-HARM INTO SIX CRAFTS THIS SESSION AND IT IS A STANDING DESIGN RULE I KEPT VIOLATING — the same instinct as the narrative-cost and the punishment-surge habits: I keep pricing power in harm to the player's own side. ✅ REMOVED HERE. ⛔ Erik: 'in this case I can see the POTENTIAL for friendly fire — we can log this and others like it under a POTENTIAL FUTURE FRIENDLY FIRE FEATURE.' See `po/BACKLOG.md`.",
+   "_r1Retargeted_20260830": "⛔ ERIK 2026-08-30, ON READING IT: 'SO SWALLOWED WORD IS INTENDED TO SILENCE A FOE BUT SILENCES YOU TOO?' ⚠️ YES, AND THAT WAS WRONG. r1 was an AREA that silenced everyone including the wielder and their party — an entry rank nobody would take, since a foe can still write while your own side cannot coordinate. ⛔ AND THE CRAFT'S OWN LADDER SAID SO: r2 and r3 both ESCAPED it, one by targeting and one by leaving the room. A ladder whose r1 is the worst version is a ladder built around a defect. ✅ RETARGETED: r1 takes ONE voice · r2 takes SEVERAL so a group cannot call to each other · r3 holds a place without you. WHO → HOW MANY → HOW LONG. ⚠️ The void fiction survives intact — silence is still ABSENCE rather than muffling, which is what makes it Unlit work rather than a shadow trick."
   },
   {
    "powerSystem": "precursor",

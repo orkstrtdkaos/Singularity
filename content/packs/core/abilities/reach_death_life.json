@@ -932,7 +932,7 @@
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "lethal",
+     "harmRung": "none",
      "_functionsWas": [
       "heal",
       "restore",
@@ -950,7 +950,7 @@
     "INVESTIGATE"
    ],
    "tradition": "rootkin",
-   "harmRung": "lethal",
+   "harmRung": "none",
    "nativeOrCombination": "native",
    "shape": "bolster",
    "operativeAxis": [
@@ -1000,7 +1000,8 @@
    "_nameWas": "The Last Gift",
    "_idWas": "the_last_gift",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability AND r2 rung `lethal` → `none`, AND THIS ONE MATTERS MORE THAN A GLOSS. ⚠️ THE CRAFT GIVES A DYING BEING A LUCID PAINLESS INTERVAL TO SAY WHAT REMAINS — 'life and death held together in MERCY'. ⛔ IT KILLS NOBODY. It attends people who are ALREADY DYING, and a GM reading `lethal` on it could reasonably have run it as a mercy-killing, which is the opposite craft. ✅ `Marrow will not hasten an ending. Ever.' is the companion rule beside it; this is the craft that stays with someone instead."
   },
   {
    "schemaVersion": 1,
@@ -3058,7 +3059,8 @@
    "_nameWas": "The Forced Bloom",
    "_idWas": "the_forced_bloom",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_offBandDeliberate_20260830": "⛔ e10 AT L3 IS ABOVE THE 4–8 BAND AND IT IS DELIBERATE — documented, not corrected. ⚠️ THIS IS THE BLOOM-WRIGHTS' CRAFT, the tradition's own tail: 'LIFE IMPOSED — growth driven into a body that did not ask for it.' Its r3 is 'bone that keeps going, green that fills a chest.' ✅ A craft that forces growth into an unwilling body should cost more than the band, exactly as `lever` does for the Maw. ⛔ DO NOT 'FIX' TO e6."
   },
   {
    "schemaVersion": 1,
@@ -3509,7 +3511,10 @@
       "make"
      ],
      "_nameWas": "The Long Green Death",
-     "gainAxes": []
+     "gainAxes": [],
+     "ongoingHarm": {
+      "type": "living"
+     }
     }
    ],
    "challengeTypes": [
@@ -3527,7 +3532,21 @@
    "mechanic": {
     "magnitude": 6,
     "duration": 6,
-    "scope": 3
+    "scope": 3,
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "damageMix": [
+     {
+      "type": "living",
+      "share": 0.6
+     },
+     {
+      "type": "physical",
+      "share": 0.4
+     }
+    ]
    },
    "intensity": {
     "conserve": "a snare at the ankles — grip only, no bite",
@@ -3573,7 +3592,8 @@
    "_nameWas": "The Snaring Green",
    "_idWas": "the_snaring_green",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260830": "⛔ `harmRung: incapacitating` reaching `lethal` at r3 AND NO DICE — the craft says 'IT BEGINS AS A HOLD AND BECOMES A KILLING' and could not kill anything. ⚠️ `living` .6 + `physical` .4 — the same mix as `bark_and_briar`, correctly: growth turned against you, DELIVERED AS THORN. ✅ r3 gains `ongoingHarm: living` because its own text is 'the harm CONTINUES for as long as they are held', which is exactly what that field is for."
   },
   {
    "id": "hastened_grey",

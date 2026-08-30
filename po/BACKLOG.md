@@ -950,11 +950,33 @@ measuring the wrong field, which is why the habit survived being caught twice.**
 
 - ⛔ **76 craft and rank names across the corpus still open with "The"** — pre-existing, and a sweep would
   touch audited traditions.
-- ⚠️ **6 DUPLICATE RANK NAMES**, which is the more interesting find: `Word That Holds` · `Harbor` ·
-  `Nothing Hidden` · `Full Restoration` · `Break the Line` · `Standing Account`. ⛔ **`Harbor` is both a
-  craft and a rank of another craft**, and **`Break the Line` is a rank name AND a craft I authored** —
-  which is a real collision rather than a style question.
+### ⛔ MEASURED PROPERLY — TWO KINDS, AND ONE OF THEM IS A FALSE POSITIVE
 
-✅ **WORTH A GATE RATHER THAN A SWEEP:** a check that no two ranks share a name, and none shares a name with
-a craft. ⚠️ **A duplicate rank name is a thing a GM or a player can actually be confused by**, unlike a
-leading article.
+⚠️ **My first count said "6 duplicates" and was wrong in both directions.** Measured:
+
+**✅ NOT A DEFECT — an r1 sharing its own craft's name.** ⛔ **That is the CONVENTION**, and ~140 crafts do
+it. A gate must exclude it or it will report the whole corpus.
+
+**⚠️ 23 RANK NAMES USED BY TWO DIFFERENT CRAFTS** — `Word That Holds` is on three (`verity` r3,
+`set_word` r2, `turning_word` r2). Also `Clean Break` · `Deep Road` · `Nothing Hidden` · `Open Door` ·
+`Reckoning` · `Scattering` · `Set Stance` · `Hour Given` and others. **Mostly harmless; a GM says the craft
+name, not the rank name.**
+
+**⛔ 14 REAL COLLISIONS — a rank named after a DIFFERENT craft that exists:**
+
+| the name | is a craft | and also a rank of |
+|---|---|---|
+| **Break the Line** | `break_the_line` | `force_the_move` r2 |
+| **Chosen Ground** | `chosen_ground` | `read_field` r2 |
+| **Harbor** | `harbor` | `umbracraft` r2 |
+| **Held Line** | `held_line` | `stand` r2 |
+| **Long Dark** | `long_dark` | `darksight` r2 |
+| **Read the Fight** | `read_the_fight` | `deduced_strike` r1 |
+| Established Fact · Fixed Point · Held Breath · Long Road · Long Watch · Raised Thing · Sound Repair · Standing Word | | |
+
+⛔ **THESE ARE THE ONES THAT CAN MISLEAD:** *"take Held Line"* is ambiguous between a Marcher craft and a
+rank of `stand`. ⚠️ **AND TWO ARE MINE** — `break_the_line` and `chosen_ground`, authored this session
+against rank names that already existed.
+
+✅ **WORTH A GATE, NOT A SWEEP:** assert that no rank is named after a DIFFERENT craft. ⛔ **It must exempt
+r1-matching-its-own-craft**, or it reports 140 false positives and gets switched off.

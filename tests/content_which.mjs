@@ -87,7 +87,7 @@ const untyped = abilities.filter(a =>
 // authored 1d6 (mean 3.5). ⚠️ AN AUTHOR WHO DOES THE WORK IS PUNISHED SEVENFOLD.
 // ⛔ AND W7 ABOVE COULD NOT SEE THEM: it filters on `a.mechanic?.dice`, so a craft with none was exempt
 // from the untyped check as well — the same six crafts were invisible to BOTH halves of the gate.
-const DICELESS_BASELINE = Number(process.env.DICELESS_BASELINE ?? 11);
+const DICELESS_BASELINE = Number(process.env.DICELESS_BASELINE ?? 0);
 // ⚠️ SCOPED TO `damage`/`strike`. A `hobble` or `bind` that harms without rolling is legitimate — it
 // imposes rather than wounds. A craft whose SHAPE IS THE BLOW and authors no dice is not.
 const diceless = abilities.filter(a =>

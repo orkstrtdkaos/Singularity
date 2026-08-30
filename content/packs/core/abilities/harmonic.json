@@ -1250,7 +1250,7 @@
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging",
+     "harmRung": "none",
      "_functionsWas": [
       "reveal",
       "foresee",
@@ -1274,7 +1274,7 @@
    ],
    "tradition": "harmonic",
    "nativeOrCombination": "native",
-   "harmRung": "damaging",
+   "harmRung": "none",
    "powerSystem": "combination",
    "shape": "setup",
    "operativeAxis": [
@@ -1336,7 +1336,8 @@
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. finds the point where a thing will break\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "harmonic",
-   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ rung `damaging` → `none`. ⚠️ IT IS A `setup`: 'a minute's study names the weakest point — YOUR NEXT STRIKE or lever does more.' **The craft does no harm; it improves the harm someone else does.** ✅ AND THIS IS WHY IT PLACED 3rd IN CCODE'S TOURNAMENT AT 70%: a harm rung with no dice inherited the top tier rung, so a study-craft was fighting at 5d6+8. The ranking was measuring a mis-declaration."
   },
   {
    "schemaVersion": 1,

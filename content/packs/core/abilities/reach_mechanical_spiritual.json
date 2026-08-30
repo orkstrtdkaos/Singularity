@@ -2366,7 +2366,12 @@
    "mechanic": {
     "magnitude": 8,
     "duration": 1,
-    "scope": 2
+    "scope": 2,
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "damageType": "shadow"
    },
    "intensity": {
     "conserve": "a hand's breadth — one reach, one wound",
@@ -2406,7 +2411,8 @@
    "_nameWas": "The Thinned Veil",
    "_idWas": "the_thinned_veil",
    "_powerSystemWas": "reach_mechanical_spiritual",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_dicedAndTyped_20260830": "⛔ `shadow` — 'thin the veil to a membrane until SOMETHING REACHES THROUGH — a claw opens them shoulder to hip'. ⚠️ The harm comes from the OTHER SIDE; magnitude 8, top of band. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 8` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
   },
   {
    "id": "seized_works",
@@ -2499,7 +2505,12 @@
    "mechanic": {
     "magnitude": 7,
     "duration": 1,
-    "scope": 2
+    "scope": 2,
+    "dice": {
+     "n": 1,
+     "d": 8
+    },
+    "damageType": "force"
    },
    "intensity": {
     "conserve": "seize a small piece — it fails, it does not maim",
@@ -2538,7 +2549,8 @@
    "_nameWas": "The Seized Works",
    "_idWas": "the_seized_works",
    "_powerSystemWas": "reach_mechanical_spiritual",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_dicedAndTyped_20260830": "⛔ `force` — 'the crossbow's limbs COME APART INTO THE SHOOTER'S FACE' — stored energy released, which is `force` and not edge. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
   },
   {
    "id": "numen_sense",

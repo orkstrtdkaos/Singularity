@@ -2495,7 +2495,12 @@
    "mechanic": {
     "magnitude": 7,
     "duration": 2,
-    "scope": 1
+    "scope": 1,
+    "dice": {
+     "n": 1,
+     "d": 8
+    },
+    "damageType": "physical"
    },
    "intensity": {
     "conserve": "lift a corner — a shove, a stumble, a silence",
@@ -2529,7 +2534,8 @@
    "_nameWas": "The Broken Quiet",
    "_idWas": "the_broken_quiet",
    "_powerSystemWas": "reach_violence_peace",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_dicedAndTyped_20260830": "⛔ `physical` — 'a peace this absolute is A GREAT DEAL OF VIOLENCE WITH A LID ON IT' — and when the lid comes off it is a body doing it. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
   },
   {
    "id": "held_line",

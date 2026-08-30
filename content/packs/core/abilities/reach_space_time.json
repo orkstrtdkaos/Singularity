@@ -2444,7 +2444,12 @@
    "mechanic": {
     "magnitude": 7,
     "duration": 1,
-    "scope": 2
+    "scope": 2,
+    "dice": {
+     "n": 1,
+     "d": 8
+    },
+    "damageType": "spatial"
    },
    "intensity": {
     "conserve": "a hand's fold — a wrenched joint",
@@ -2478,7 +2483,8 @@
    "_nameWas": "The Folded Pace",
    "_idWas": "the_folded_pace",
    "_powerSystemWas": "reach_space_time",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_dicedAndTyped_20260830": "⛔ `spatial` — 'span applied INWARD — a road-craft turned on a person'. ⛔ GIVES `spatial` ITS SECOND CARRIER, and it is the clearest case: distance itself is the injury. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
   },
   {
    "id": "spent_hour",
@@ -2573,7 +2579,12 @@
    "mechanic": {
     "magnitude": 7,
     "duration": 2,
-    "scope": 2
+    "scope": 2,
+    "dice": {
+     "n": 1,
+     "d": 8
+    },
+    "damageType": "temporal"
    },
    "intensity": {
     "conserve": "a small levy — a strap perishes, a wound sours",
@@ -2607,7 +2618,8 @@
    "_nameWas": "The Spent Hour",
    "_idWas": "the_spent_hour",
    "_powerSystemWas": "reach_space_time",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_dicedAndTyped_20260830": "⛔ `temporal` — 'gear AGES THROUGH at the moment of use, a wound presents days later' — time as the harm, and `temporal` had one carrier. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
   },
   {
    "id": "kept_count",

@@ -451,7 +451,7 @@
       "open",
       "break"
      ],
-     "harmRung": "damaging",
+     "harmRung": "none",
      "gains": "deepen",
      "_functionsWas": [
       "reveal",
@@ -472,7 +472,7 @@
       "summon",
       "strike"
      ],
-     "harmRung": "lethal",
+     "harmRung": "none",
      "gains": "broaden",
      "_functionsWas": [
       "reveal",
@@ -497,7 +497,7 @@
    ],
    "tradition": "lattice",
    "nativeOrCombination": "native",
-   "harmRung": "lethal",
+   "harmRung": "none",
    "shape": "construct",
    "operativeAxis": [
     "penetration",
@@ -561,7 +561,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_traditionWas": "precursor",
    "_traditionFix": "⛔ SNG-537, ERIK: 'The precursor crafts are LATTICE (Precursor's power source, yes.)' ⚠️ `precursor` WAS SITTING IN A `tradition` FIELD — a power source in a people field, the same category error as a reach id in a powerSystem field, running the other direction.\n⛔ THE LATTICE ARE THE PEOPLE; PRECURSOR IS WHAT THEY DRAW ON. These six — Latticespeak, Wake the Line, Foreclose, Unmake Seal, Hold the Aperture, Address-Sense — are Latticework, and they join Order.",
-   "_precursorRemoved_20260829": "⛔ `damageType: precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — and this craft confirms it: it has NO DICE and deals no damage at all. ⚠️ Seven crafts carried the field after the ruling; the ruling was made and never executed, which is how a dead vocabulary keeps looking alive."
+   "_precursorRemoved_20260829": "⛔ `damageType: precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — and this craft confirms it: it has NO DICE and deals no damage at all. ⚠️ Seven crafts carried the field after the ruling; the ruling was made and never executed, which is how a dead vocabulary keeps looking alive.",
+   "_rungFix_20260830": "⛔ rung `lethal` → `none`. ⚠️ IT OPENS THINGS — 'doors, vaults, bindings, containments'. **Its danger is WHAT COMES OUT, which is the world's problem and not the craft's damage.** ✅ A `construct` shape with a lethal rung and no dice was fighting at the top tier rung in the tournament."
   },
   {
    "id": "hold_the_aperture",

@@ -2017,7 +2017,12 @@
    "mechanic": {
     "magnitude": 7,
     "duration": 1,
-    "scope": 2
+    "scope": 2,
+    "dice": {
+     "n": 1,
+     "d": 8
+    },
+    "damageType": "physical"
    },
    "intensity": {
     "conserve": "a small turn of luck — a slip, a snapped strap",
@@ -2049,7 +2054,8 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_powerSystemWas": "reach_chaos_order",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_dicedAndTyped_20260830": "⛔ `physical` — 'you do not attack, you SPEND THE WORLD'S UNLIKELINESS' — what actually arrives is an accident: a strap parting, a footing going. Ordinary harm, arriving impossibly. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
   },
   {
    "id": "predicted_man",
@@ -2136,7 +2142,12 @@
    "mechanic": {
     "magnitude": 7,
     "duration": 2,
-    "scope": 1
+    "scope": 1,
+    "dice": {
+     "n": 1,
+     "d": 8
+    },
+    "damageType": "physical"
    },
    "intensity": {
     "conserve": "close one line",
@@ -2170,7 +2181,8 @@
    "_nameWas": "The Predicted Man",
    "_idWas": "the_predicted_man",
    "_powerSystemWas": "reach_chaos_order",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_dicedAndTyped_20260830": "⛔ `physical` — 'prediction closed into a trap — HARM DELIVERED BY ARRIVING FIRST'. The blow is ordinary; the arithmetic is what puts it there. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
   },
   {
    "id": "loose_thread",

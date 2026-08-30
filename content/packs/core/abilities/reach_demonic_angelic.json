@@ -2988,7 +2988,12 @@
    "mechanic": {
     "magnitude": 5,
     "duration": 8,
-    "scope": 1
+    "scope": 1,
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "damageType": "judgement"
    },
    "intensity": {
     "conserve": "small terms, small price — barely a hook",
@@ -3026,7 +3031,8 @@
    "_idWas": "the_struck_term",
    "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⛔ THE SHARPEST CASE — 'name a real exchange to someone who wants something, with a real cost attached' was tagged `strike`. A NEGOTIATION FILED AS AN ATTACK.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: abyssal 0.5 = precursor 0.5, over metaphysical 0.3.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: abyssal 0.5 = precursor 0.5, over metaphysical 0.3.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_dicedAndTyped_20260830": "⛔ `judgement` — a named exchange refused — the harm is the TERM landing, not a blow. INTRINSIC: it needs someone who can weigh what they were offered. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 5` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
   },
   {
    "id": "offered_mouth",
@@ -3120,7 +3126,12 @@
    "mechanic": {
     "magnitude": 8,
     "duration": 1,
-    "scope": 2
+    "scope": 2,
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "damageType": "appetite"
    },
    "intensity": {
     "conserve": "show it a small hunger",
@@ -3158,7 +3169,8 @@
    "_idWas": "the_offered_mouth",
    "_powerSystemWas": "reach_demonic_angelic",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rungFix_20260829": "⛔ ability rung -> `lethal`: r2 and r3 reach lethal — you show a hunger a target and the hunger eats; a craft whose whole subject is being eaten is not merely incapacitating."
+   "_rungFix_20260829": "⛔ ability rung -> `lethal`: r2 and r3 reach lethal — you show a hunger a target and the hunger eats; a craft whose whole subject is being eaten is not merely incapacitating.",
+   "_dicedAndTyped_20260830": "⛔ `appetite` — 'what eats was always going to eat; YOU TOLD IT WHERE' — `appetite` is the Choir's own type and nobody else deals it. Top of the L1 band at magnitude 8. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 8` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
   },
   {
    "id": "measured_sentence",

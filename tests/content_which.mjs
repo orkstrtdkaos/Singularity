@@ -80,6 +80,23 @@ const HEAL_SHAPES = new Set(['healing', 'bolster', 'sustain', 'guard', 'setup', 
 const untyped = abilities.filter(a =>
   a.mechanic?.dice && !a.mechanic?.damageType && !a.mechanic?.damageMix &&
   a.harmRung && a.harmRung !== 'none' && !HEAL_SHAPES.has(a.shape));
+
+// ⛔ W7b — A HARM CRAFT THAT AUTHORS NO DICE AT ALL. Found by CCode's tradition tournament (CCODE-326),
+// which measured that `craftmechanics` resolves `diceAuthored ? {nMult:1} : rung.dice` — so a craft with
+// no dice INHERITS THE TIER RUNG. At a level-8 standing that is 5d6+8 (mean 25.5) against an honestly
+// authored 1d6 (mean 3.5). ⚠️ AN AUTHOR WHO DOES THE WORK IS PUNISHED SEVENFOLD.
+// ⛔ AND W7 ABOVE COULD NOT SEE THEM: it filters on `a.mechanic?.dice`, so a craft with none was exempt
+// from the untyped check as well — the same six crafts were invisible to BOTH halves of the gate.
+const DICELESS_BASELINE = Number(process.env.DICELESS_BASELINE ?? 11);
+// ⚠️ SCOPED TO `damage`/`strike`. A `hobble` or `bind` that harms without rolling is legitimate — it
+// imposes rather than wounds. A craft whose SHAPE IS THE BLOW and authors no dice is not.
+const diceless = abilities.filter(a =>
+  !a.mechanic?.dice && a.harmRung && a.harmRung !== 'none' &&
+  (a.shape === 'damage' || a.shape === 'strike'));
+if (diceless.length > DICELESS_BASELINE)
+  F('W7b', 'corpus', `${diceless.length} harm crafts author NO dice (baseline ${DICELESS_BASELINE}) and inherit the tier rung — ${diceless.map(a => a.id).join(', ')}`);
+else if (diceless.length < DICELESS_BASELINE)
+  console.log(`   ⬇️  W7b diceless harm crafts: ${diceless.length} (was ${DICELESS_BASELINE}) — lower the baseline`);
 if (untyped.length > UNTYPED_BASELINE)
   F('W7', 'corpus', `${untyped.length} damage crafts are UNTYPED (baseline ${UNTYPED_BASELINE}) — a new one was added; damage must be typed`);
 else if (untyped.length < UNTYPED_BASELINE)

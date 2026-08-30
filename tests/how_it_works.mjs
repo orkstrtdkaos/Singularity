@@ -916,6 +916,39 @@ console.log("\n── §14 · the folded party answers the blow's affinity ─�
     `amount=${imm?.damage?.amount} melee=${JSON.stringify(imm?.damage?.melee || null)}`);
 }
 
+/* ══════════ §15 — AN UNTYPED BLOW ANNOUNCES ITSELF ══════════ */
+// ⛔ ERIK 2026-08-30: "untyped can default to physical for now if that's the way we have it set up... BUT IT
+// STILL NEEDS A FLAG SO WE CAN FIND AND TYPE THE DAMAGE."
+//
+// ⚠️ A DEFAULT THAT LEAVES NO TRACE IS A DEFECT THAT LOOKS LIKE A DESIGN. Two different things happen and
+// both used to be silent: a MUNDANE blow taking the `untypedIs` fallback (Erik's rule, working), and a
+// craft resolving to NO KIND AT ALL — which is invisible to every affinity in the game.
+console.log("\n── §15 · untyped damage is findable ──");
+{
+  const SBz = await import("../engine/skill_battle.js");
+  const rulesZ = rj("content/packs/core/rules/resolution.json");
+  const sbZ = rj("content/packs/core/rules/skill_battle_system.json").engine;
+  const stepsZ = rj("content/packs/core/rules/intensity_scaling.json").steps;
+  const rngZ = () => { let s3 = 20260830; return () => { s3 |= 0; s3 = (s3 + 0x6D2B79F5) | 0; let t = Math.imul(s3 ^ (s3 >>> 15), 1 | s3); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; };
+  const shZ = (o = {}) => ({ attributes: { physical: 6, mental: 6, social: 6, practical: 6 }, energy: 200, health: 80, skills: [], ...o });
+  const go = (d) => SBz.battleRound({ playerDecl: d, oppDecl: { function: "shield", tier: 1, name: "g" },
+    playerSheet: shZ(), oppSheet: shZ(), state: { momentum: 0, round: 1 },
+    rules: rulesZ, sb: sbZ, steps: stepsZ, rng: rngZ() })?.damage || {};
+
+  const typed = go({ function: "strike", tier: 5, attribute: "physical", intensity: "standard", name: "t", mechanic: { damageType: "heat" }, functions: ["strike"] });
+  const mundane = go({ function: "strike", tier: 5, attribute: "physical", intensity: "standard", name: "m", functions: ["strike"] });
+  const undecided = go({ function: "strike", tier: 5, attribute: "physical", intensity: "standard", name: "u", tradition: "cogitant", functions: ["strike"] });
+
+  // ⛔ NON-VACUITY FIRST: a craft that names its kind must carry NEITHER flag, or they mean nothing.
+  check("§15: a typed craft carries no flag", typed.damageType === "heat" && !typed.typedByDefault && !typed.untyped);
+  // ✅ ERIK'S RULE, WORKING AND VISIBLE — a sword is physical, and the receipt says it was defaulted.
+  check("§15: a MUNDANE blow defaults to physical AND says so", mundane.damageType === "physical" && mundane.typedByDefault === true);
+  // ⛔ THE ONE THE FLAG IS FOR. A craft with a tradition and no kind is UNDECIDED, not mundane — and it is
+  // invisible to every affinity, so it must be findable at the moment it happens.
+  check("§15: a craft with a tradition and no kind is flagged UNTYPED", undecided.untyped === true && !undecided.damageType,
+    JSON.stringify({ type: undecided.damageType, untyped: undecided.untyped }));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

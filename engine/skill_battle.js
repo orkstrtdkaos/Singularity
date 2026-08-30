@@ -1158,8 +1158,24 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // A craft whose tradition simply has not been typed yet is UNDECIDED, not mundane, and stays untyped
       // until someone decides: the same absent-is-not-zero rule the rest of this engine runs on.
       const mundane = !(winDecl.tradition || winDecl.powerSystem);
-      const dmgType = winDecl.damageType || resolvedDamageType(winDecl, cmCfg)
-        || (mundane ? ((sb.damageTypes || {}).untypedIs || null) : null);
+      const declaredType = winDecl.damageType || resolvedDamageType(winDecl, cmCfg);
+      const defaultedType = declaredType ? null
+        : (mundane ? ((sb.damageTypes || {}).untypedIs || null) : null);
+      const dmgType = declaredType || defaultedType;
+
+      // ⛔ CCODE-314 / ERIK 2026-08-30: "untyped can default to physical for now if that's the way we have
+      // it set up... BUT IT STILL NEEDS A FLAG SO WE CAN FIND AND TYPE THE DAMAGE."
+      //
+      // ⚠️ A DEFAULT THAT LEAVES NO TRACE IS A DEFECT THAT LOOKS LIKE A DESIGN. Two different things
+      // happen above and both used to be silent:
+      //   `typedByDefault` — a MUNDANE blow (sword, rock, bare hands) took the `untypedIs` fallback.
+      //                      That is Erik's ruling working, and it should still be findable.
+      //   `untyped`       — ⛔ A CRAFT RESOLVED TO NO KIND AT ALL. It is INVISIBLE TO EVERY AFFINITY IN
+      //                      THE GAME: no immunity, no resistance, no vulnerability can answer it.
+      //                      Aevi typed 40 crafts on Erik's ruling; this is how the next one is found
+      //                      WITHOUT a corpus sweep, in the receipt, at the moment it happens.
+      const typedByDefault = !declaredType && !!defaultedType;
+      const untyped = !dmgType;
       const aff = affinityOf(targetSheet, dmgType, sb);
       const acfg = sb.damageTypes || {};
       if (aff === "immune") hit = 0;
@@ -1246,6 +1262,10 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         if (rc.blocked > 0) { composite = { ...rc, ward: wardAns.depth, answers: wardAns.answers }; landed = rc.landed; }
       }
       damage = { side: roundWinner === "player" ? "opponent" : "player",
+        // ⛔ CCODE-314 — CARRIED ON THE RECEIPT, not merely computed. A flag the caller cannot see is the
+        // same silence it replaces. `untyped: true` means NO affinity could have applied to this blow.
+        ...(typedByDefault ? { typedByDefault: true } : {}),
+        ...(untyped ? { untyped: true } : {}),
         ...(composite ? { composite } : {}),
         // ⛔ CCODE-290 — THE FLOOR ANNOUNCES ITSELF. A guard big enough to stop everything reduces the blow
         // to the minimum instead of to nothing, and a player who sees "1" needs to know WHY it was not 0.

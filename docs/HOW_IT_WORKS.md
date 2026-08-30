@@ -202,8 +202,11 @@ working papers; **this is the answer.**
 | 08-29 | ⚠️ **and the decay, which nothing had ever run** | `tickProtections` existed since CCODE-260 with no caller | `§5`: a rank-2 guard lapses after its authored rounds | ⛔ **without it a 3-round guard stands forever** — exactly the wall Erik's action ruling relies on it not being |
 | 08-29 | ✅ **Aevi reshaped the `step_between` ladder and the r3 gap is closed** | striking `costsAction` had left r2 and r3 identical, so the third rank bought nothing | `interpose_wiring §1/§2`, and **the collapse was reproduced to prove the gate catches it** | ✅ the ladder is now **one blow → duration → REACH**: r1 `{allies:1, charges:1}` · r2 `{allies:1, rounds:3}` · r3 `{allies:3, rounds:3}` |
 | 08-29 | ✅ **the rung check is now GENERAL, not a named pair** | I first asserted only “r1 differs from r2” — which would have stayed green through the exact collapse it was written for | every rung must differ from the one below | ⚠️ **a non-vacuity floor that only covers one pair is a floor with a hole in it** |
+| 08-30 | ✅ **CCODE-314 — an untyped blow announces itself** | Erik: *"untyped can default to physical for now… but it still needs a FLAG so we can find and type the damage"* | `§15`, three cases, with a typed craft as the non-vacuity floor | ⛔ **a default that leaves no trace is a defect that looks like a design.** `typedByDefault` marks Erik's mundane rule working; **`untyped` marks a blow no affinity in the game can answer** |
+| 08-30 | ✅ **CCODE-83b fixed — my gate judged against a STORED COPY** | Aevi handed it back: it built its “produced” set from two lookup tables and **never read the crafts** | now derives from the corpus first, tables as fallback — **the resolver's own order** | ⚠️ **`damageTypeByCraft`'s own note predicted it, in my words**: *“a second source for one fact is drift waiting to happen”*. The resolver honoured that order; **the gate did not** |
+| 08-30 | ✅ **and Aevi refused to patch the tables to make her creature pass** | that would have put the same fact in a THIRD place | the gate still goes RED for a genuinely unreachable kind — reproduced | ⛔ **her refusal is why the fix is the right one**: patching would have hidden a real defect behind a green gate |
 
-**Last verified: 2026-08-28 · v1.9.264 · 400 crafts.**
+**Last verified: 2026-08-28 · v1.9.265 · 400 crafts.**
 
 ---
 

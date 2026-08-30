@@ -2433,11 +2433,59 @@ for (const pack of PACKS) {
 {
   const CMx = rj("content/packs/core/rules/craft_mechanics.json");
   const SBE = rj("content/packs/core/rules/skill_battle_system.json").engine;
+  // ⛔ AEVI HANDED THIS BACK AND SHE IS RIGHT: THE GATE JUDGED AGAINST A STORED COPY.
+  // It built `produced` from two LOOKUP TABLES and never read the crafts — so a craft that types itself
+  // on its own `mechanic` block was invisible to it. She typed FORTY crafts on Erik's ruling (18 harm,
+  // 22 healing), every one on the authoritative object, and this gate called her first undead creature
+  // unreachable for three kinds the catalogue plainly deals.
+  //
+  // ⚠️ AND `damageTypeByCraft`'s OWN NOTE PREDICTED IT, in my words: "a SECOND SOURCE FOR ONE FACT IS
+  // DRIFT WAITING TO HAPPEN, so it is a lookup the resolver consults IN A FIXED ORDER rather than a rival
+  // to the craft's own mechanic block." ⛔ THE RESOLVER HONOURS THAT ORDER. THE GATE DID NOT.
+  //
+  // ✅ SO IT NOW DERIVES FROM THE CRAFTS FIRST, tables as fallback — the resolver's own order. And Aevi
+  // declined to patch the tables to make her creature pass, which would have put the same fact in a THIRD
+  // place and hidden a real defect behind a green gate. That refusal is why this fix is the right one.
+  const producedByCrafts = new Set();
+  {
+    const seen = new Set();
+    const walkDir = (dir) => {
+      const abs = join(root, dir);
+      if (!existsSync(abs)) return;
+      for (const f of readdirSync(abs)) {
+        if (!f.endsWith(".json")) continue;
+        let doc; try { doc = rj(`${dir}/${f}`); } catch { continue; }
+        const arr = Array.isArray(doc) ? doc : Array.isArray(doc.abilities) ? doc.abilities : [doc];
+        for (const a of arr) {
+          if (!a || seen.has(a)) continue;
+          seen.add(a);
+          // ⚠️ EVERY PLACE A CRAFT CAN NAME A KIND: the mechanic block, a PER-VERB block inside it, a mix,
+          // and the same shapes down the rank tree. Reading only the top level is the same half-look that
+          // put this gate here.
+          const eat = (m) => {
+            if (!m || typeof m !== "object") return;
+            if (typeof m.damageType === "string") producedByCrafts.add(m.damageType);
+            for (const c of (Array.isArray(m.damageMix) ? m.damageMix : [])) {
+              if (c && typeof c.type === "string") producedByCrafts.add(c.type);
+            }
+            for (const v of Object.values(m)) if (v && typeof v === "object") eat(v);
+          };
+          eat(a.mechanic);
+          for (const r of (Array.isArray(a.tree) ? a.tree : [])) eat(r?.mechanic || r);
+        }
+      }
+    };
+    for (const d of ["content/packs/core/abilities", "content/packs/valley/abilities"]) walkDir(d);
+  }
   const produced = new Set([
+    ...producedByCrafts,                                            // ✅ THE LIVE CORPUS, read first
     ...Object.entries(CMx.damageTypeByTradition || {}).filter(([k]) => k !== "note").map(([, v]) => v),
     ...Object.entries(CMx.damageTypeByCraft || {}).filter(([k]) => k !== "note").map(([, v]) => v),
     ...(SBE.damageTypes?.untypedIs ? [SBE.damageTypes.untypedIs] : []),
   ].filter(v => typeof v === "string"));
+  // ⛔ NON-VACUITY: if the craft walk finds nothing the gate has gone blind and would pass anything.
+  check("CCODE-83b: the craft walk actually reads kinds off the corpus (non-vacuity)",
+    producedByCrafts.size >= 5, `${producedByCrafts.size} kinds found on crafts`);
   const legal = new Set(SBE.damageTypes?.affinities || []);
   const unreachable = [], illegal = [];
   for (const c of (rj("content/packs/valley/bestiary.json").roster || [])) {

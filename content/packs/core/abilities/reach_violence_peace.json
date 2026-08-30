@@ -92,7 +92,8 @@
     },
     "plus": 0,
     "marginFloorPer": 0.02,
-    "note": "lethal. The tradition's pure strike-craft — and the only pure single-function craft in either tradition."
+    "note": "lethal. The tradition's pure strike-craft — and the only pure single-function craft in either tradition.",
+    "damageType": "physical"
    },
    "rankDeltas": [
     {
@@ -137,7 +138,8 @@
    "_nameWas": "The Edge",
    "_idWas": "the_edge",
    "_powerSystemWas": "reach_violence_peace",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `physical` — PHYSICS family. trained decisiveness with a blade — the tradition's signature and the most ordinary harm in the game. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately."
   },
   {
    "id": "stillcraft",
@@ -976,7 +978,8 @@
     "plus": 6,
     "marginFloorPer": 0.04,
     "targets": 1,
-    "note": "T-V capstone, damaging. Like cogitant's the_single_stroke, the highest marginFloorPer band: this craft IS the decisive read."
+    "note": "T-V capstone, damaging. Like cogitant's the_single_stroke, the highest marginFloorPer band: this craft IS the decisive read.",
+    "damageType": "physical"
    },
    "rankDeltas": [
     {
@@ -1009,7 +1012,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Last Form",
    "_powerSystemWas": "reach_violence_peace",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `physical` — PHYSICS family. the duel capstone at 5d6 — one stroke, read completely, delivered exactly. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately."
   },
   {
    "id": "soldiers_hand",
@@ -1253,7 +1257,8 @@
     "plus": 0,
     "marginFloorPer": 0.02,
     "variance": 3,
-    "note": "damaging. variance 3 because improvised tools are crude — 'what you make is crude and temporary.'"
+    "note": "damaging. variance 3 because improvised tools are crude — 'what you make is crude and temporary.'",
+    "damageType": "physical"
    },
    "rankDeltas": [
     {
@@ -1292,7 +1297,8 @@
    ],
    "plainly": "A fight/survive/explore action that deals damage. It rolls 2d6 Ranks: rank 2 extends improvisation; rank 3 adds to special. Limit: the Marcher Makes Weapons, Not Wonders.",
    "_powerSystemWas": "reach_violence_peace",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260829": "⛔ `physical` — PHYSICS family. improvised weapons from the environment. ⚠️ A chair leg is `physical` whatever else it is. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately."
   },
   {
    "id": "weight",
@@ -2575,7 +2581,7 @@
    ],
    "tradition": "marcher",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "ward",
    "operativeAxis": [
     "duration",
@@ -2614,7 +2620,8 @@
    "_idWas": "the_held_line",
    "_wardTypes": "⛔ SNG-512. The line steadies against blows and against the fear that breaks lines.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_violence_peace",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260829": "⛔ ability rung -> `none`: it holds a position and steadies those beside you — no rank harms anyone; a wall is not a wound (§45.1 — a rung must never mis-state what a rank delivers)."
   },
   {
    "id": "read_field",
@@ -2700,7 +2707,7 @@
    ],
    "tradition": "marcher",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "foresee",
    "operativeAxis": [
     "scope",
@@ -2741,7 +2748,8 @@
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ BREAKING'S SENSE — terrain, chokepoints, where the line fails first\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_violence_peace",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260829": "⛔ ability rung -> `none`: it READS terrain. It puts nobody down at any rank, and the gloss told a GM it could incapacitate (§45.1 — a rung must never mis-state what a rank delivers)."
   },
   {
    "id": "read_the_fight",

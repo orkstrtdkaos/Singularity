@@ -56,7 +56,7 @@ measuring across every craft that needs a pick.**
 
 ---
 
-## ⛔ THE ELEVEN RULES THAT MAKE IT WORK
+## ⛔ THE TWELVE RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
 
@@ -259,6 +259,28 @@ session) → **THEN THE CHARACTER SHEETS AND ITEMS OF ANYONE WHO PLAYS THE TRADI
 ⚠️ **AND THE FINDINGS ARE THE BEST KIND, because they are already balanced by having been used:** a
 combination discovered at the table (`the made thing` + `shadow work` = a shadow twin) is a craft that has
 been playtested before it was written.
+
+### 12. ⚠️ AN ABSENT VERB MAY BE A RECRUITMENT, NOT A HOLE
+
+**Added 2026-08-29. Erik, on the Marchers: *"Besides, they can ENLIST OTHER TRADITIONS' SKILLS AND
+BRAID."***
+
+⛔ **I HAVE BEEN TREATING EVERY ABSENT VERB AS A GAP TO FILL.** ⚠️ **For some traditions that is the wrong
+frame entirely: a people whose art is the DISPOSITION OF FORCE do not need to own `conceal` — they put
+someone who has it on the flank.**
+
+✅ **AND THE MECHANISM ALREADY EXISTS:** `powerSystem: combination` braid-crafts — `harbored_flame`,
+`turning_word`, `meaning_engine` — tradition `cross_pole_braid`, L4. **Two poles making something neither
+could make alone.**
+
+⚠️ **SO A GAP LIST SHOULD ASK "WHO WOULD THEY RECRUIT FOR THIS?" BEFORE IT ASKS "WHAT ARE THEY MISSING?"**
+⛔ **This does not cancel rule 8** — the default is still that a tradition can do everything in its own
+idiom, and a refusal must be argued. **It adds a third answer between "gap" and "refusal": DELEGATED.**
+
+**Same session, the related error:** I argued the Marchers refuse `deceive` because *"truth runs high"* at
+the Marchward and they wear *"scars as record"*. ⛔ **Erik: Sun Tzu is revered; military strategy has a home
+here.** ⚠️ **I had conflated two different honesties — PLAIN-SPOKEN PERSONALLY and DECEPTIVE
+PROFESSIONALLY is not a contradiction, it is the entire strategic tradition.**
 
 ---
 

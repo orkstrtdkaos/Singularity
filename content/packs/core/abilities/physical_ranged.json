@@ -87,9 +87,13 @@
     "plus": 0,
     "range": 8,
     "targets": 1,
-    "marginFloorPer": 0.02
+    "marginFloorPer": 0.02,
+    "damageType": "physical"
    },
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "one blade, close, and you keep hold of the rest",
+    "surge": "throw everything you are carrying; ⛔ YOU WILL BE UNARMED AND THEY WILL KNOW IT"
+   },
    "bounds": [
     {
      "text": "needs a blade or a point — improvised counts, empty hands do not",
@@ -118,7 +122,9 @@
    "_idWas": "the_thrown_edge",
    "_powerSystemWas": "body",
    "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current.",
-   "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS."
+   "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS.",
+   "_typed_20260829": "⛔ `physical` — PHYSICS family. a knife, a star or a spike, underhand at eight paces. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately.",
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a harm word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ⛔ Authored as a real pair: conserve gives up scope, surge SPENDS AMMUNITION — which for a weapon craft is the honest cost."
   },
   {
    "id": "sling_and_stone",
@@ -309,7 +315,7 @@
    ],
    "tradition": "marcher",
    "nativeOrCombination": "native",
-   "harmRung": "damaging",
+   "harmRung": "lethal",
    "powerSystem": "metaphysical",
    "shape": "damage",
    "operativeAxis": "violence_peace",
@@ -321,9 +327,13 @@
     "plus": 0,
     "range": 120,
     "targets": 1,
-    "marginFloorPer": 0.02
+    "marginFloorPer": 0.02,
+    "damageType": "physical"
    },
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "a single measured shot — you keep the quiver and the ground",
+    "surge": "empty the quiver into the approach; ⚠️ NOBODY CROSSES IT, AND YOU HAVE NO ARROWS LEFT"
+   },
    "bounds": [
     {
      "text": "⛔ BOTH HANDS AND CLEAR SIGHT — no bow works in a grapple",
@@ -352,7 +362,10 @@
    "_idWas": "the_drawn_bow",
    "_powerSystemWas": "body",
    "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current.",
-   "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS."
+   "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS.",
+   "_rungFix_20260829": "⛔ ability rung -> `lethal`: r3 BODKIN HEADS ignore mail and plate at 2d6 — a rank that goes through armour is lethal, and the ability said damaging (§45.1 — a rung must never mis-state what a rank delivers).",
+   "_typed_20260829": "⛔ `physical` — PHYSICS family. an arrow at 120 paces — and r3's bodkin heads are the game's clearest case of `pierce` against armour. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately.",
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a harm word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ⛔ Authored as a real pair: conserve gives up scope, surge SPENDS AMMUNITION — which for a weapon craft is the honest cost."
   },
   {
    "id": "levelled_crossbow",
@@ -420,7 +433,7 @@
    ],
    "tradition": "marcher",
    "nativeOrCombination": "native",
-   "harmRung": "damaging",
+   "harmRung": "lethal",
    "powerSystem": "metaphysical",
    "shape": "damage",
    "operativeAxis": "violence_peace",
@@ -432,9 +445,13 @@
     "plus": 0,
     "range": 90,
     "targets": 1,
-    "marginFloorPer": 0.02
+    "marginFloorPer": 0.02,
+    "damageType": "physical"
    },
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "one bolt, spanned and levelled at leisure",
+    "surge": "span and shoot until the rack is empty; ⛔ EVERY SHOT IS COMMITTED BEFORE YOU KNOW WHO IS COMING"
+   },
    "bounds": [
     {
      "text": "⛔ RESPANNING COSTS AN ACTION at r1",
@@ -463,7 +480,10 @@
    "_idWas": "the_levelled_crossbow",
    "_powerSystemWas": "body",
    "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current.",
-   "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS."
+   "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS.",
+   "_rungFix_20260829": "⛔ ability rung -> `lethal`: r3 goes through plate, a shield, AND THE ARM BEHIND IT (§45.1 — a rung must never mis-state what a rank delivers).",
+   "_typed_20260829": "⛔ `physical` — PHYSICS family. a bolt through mail at 90 paces. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately.",
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a harm word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ⛔ Authored as a real pair: conserve gives up scope, surge SPENDS AMMUNITION — which for a weapon craft is the honest cost."
   },
   {
    "id": "hurled_weight",
@@ -736,6 +756,129 @@
    "_powerSystemFix": "⛔ SNG-487 CORRECTED. I assigned this to `body` — AND `body` WAS ELIMINATED AS A SOURCE ON 2026-08-15, in a ruling I wrote up myself: 'THE STRUCTURAL CHANGE: body IS GONE AS A SOURCE, absorbed into metaphysical as Veil/Psychic/Ki type INNATE power.' Four sources only: precursor, ordered_nanite, wild_nanite, metaphysical.\n⚠️ Erik caught it: 'verify against our latest power source work — we eliminated the body source.'\n⛔ REASSIGNED TO METAPHYSICAL per the somatic primary. A craft of pure skill is not sourceless — it draws the same innate current as the rest of its tradition, more thinly.",
    "_rungFix_20260829": "⛔ ability rung `none` -> `damaging`: r2 sends a caught object back for 1d6 and r3 catches two — the ability gloss said the craft harms nothing (§45.1 — a rung must never understate what a rank delivers).",
    "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "marcher",
+   "nativeOrCombination": "native",
+   "axes": {
+    "violence_peace": -0.7
+   },
+   "id": "chosen_ground",
+   "name": "Chosen Ground",
+   "levelReq": 3,
+   "energyCost": 7,
+   "attribute": "mental",
+   "shape": "setup",
+   "harmRung": "none",
+   "challengeTypes": [
+    "FIGHT",
+    "SOCIAL",
+    "EXPLORE"
+   ],
+   "operativeAxis": [
+    "quality",
+    "scope",
+    "targets"
+   ],
+   "effectTags": [
+    "strategy",
+    "provoke",
+    "feint"
+   ],
+   "functions": [
+    "provoke",
+    "deceive",
+    "foresee"
+   ],
+   "description": "⛔ MAKE THEM COME TO YOU, WHERE YOU WANT THEM, WHEN YOU ARE READY. Show a weakness that is not there, leave a road open that should be closed, be visibly somewhere you can afford to be found. ⚠️ THE MARCHERS DO NOT TREAT THIS AS TRICKERY — it is the discipline's highest form, and the strategists they revere are quoted more often than the duellists. ⛔ A fight you chose the ground for is a fight you have mostly already had.",
+   "narrationHints": "The gate is unbarred and one man is visibly asleep at it. ⚠️ It takes them until the third rank is through to notice how narrow the yard is behind it.",
+   "notFor": "⛔ IT OFFERS A REASON; IT DOES NOT COMPEL. A commander who does not want the fight, or who is not looking your way, does not come — and one who is patient enough to wait you out has beaten it. ⚠️ AND IT IS SPENT WHEN READ: the moment they understand the ground was chosen, the same feint will never work on them again. ⛔ Nor does it move anyone already committed — this pulls people toward a fight, it does not pull them out of one.",
+   "plainly": "A fight/social action. ⛔ DRAW AN ENEMY INTO ENGAGING WHERE AND WHEN YOU CHOOSE, and take a named advantage on the opening of the fight that follows. Rated 5, works on a party or a force, holds until they commit or refuse. r2 shapes WHICH of several approaches they take; r3 works on a whole force and its commander, and you may prepare the ground in advance. ⚠️ It offers; it does not compel, and it is spent once seen through.",
+   "intensity": {
+    "conserve": "a small opening — one squad, one lane, and you keep the deception in hand",
+    "surge": "commit to the feint entirely; ⛔ IF THEY DO NOT TAKE IT YOU ARE STANDING SOMEWHERE YOU CHOSE FOR THEM, NOT FOR YOU"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT OFFERS A REASON, NEVER A COMPULSION — a commander who does not want the fight does not come",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ SPENT WHEN READ. Once they know the ground was chosen, that feint is finished forever",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT PULLS PEOPLE INTO A FIGHT AND NEVER OUT OF ONE — anyone already committed is beyond it",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ YOU MUST ACTUALLY KNOW THE GROUND. This is `read_field` made into a plan, not a substitute for it",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "targets": 4,
+    "scope": 2,
+    "crit": {
+     "success": "They commit harder than they meant to, and their second rank is still crossing open ground.",
+     "failure": "They take the bait and bring twice what you measured for."
+    },
+    "note": "setup/provoke. ⛔ ERIK 2026-08-29: 'DON'T NARROW THEM TO DUELS AND NO CONCEAL. **SUN TZU IS REVERED BY THEM — MILITARY STRATEGY HAS A HOME HERE.**' ⚠️ I HAD ARGUED THE MARCHERS REFUSE `deceive` because 'truth runs high' at the Marchward and they wear 'scars as record'. ⛔ THAT CONFLATED TWO DIFFERENT HONESTIES: they are PLAIN-SPOKEN PERSONALLY AND DECEPTIVE PROFESSIONALLY, which is not a contradiction — it is the whole of the strategic tradition. ⚠️ THE CRAFT GIVES THEM `provoke` AND `deceive` IN ONE ACT, and it is deliberately not a duel-challenge: Erik ruled against narrowing it, and forcing an ARMY onto ground you chose is the same skill as forcing a man to swing."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Chosen Ground",
+     "functions": [
+      "provoke",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ SHOW THEM A REASON TO COME AT YOU HERE — an opening, an apparent weakness, a target too good to leave — and take a named advantage on the opening exchange if they take it.",
+     "cannot": "⚠️ They must be willing to fight at all. ⛔ Spent the moment it is read, and it does nothing to anyone already engaged."
+    },
+    {
+     "rank": 2,
+     "name": "Which Road",
+     "functions": [
+      "provoke",
+      "deceive",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "scope"
+     ],
+     "grants": "⛔ SHAPE WHICH OF SEVERAL APPROACHES THEY TAKE — close a road with a rumour, open one with a carelessly placed cart, and meet them at the one you prepared. ⚠️ This is where the Marchers stop being warriors and start being a military.",
+     "cannot": "⛔ You must know all the approaches. ⚠️ A commander who splits his force takes several of them."
+    },
+    {
+     "rank": 3,
+     "name": "Prepared Beforehand",
+     "functions": [
+      "provoke",
+      "deceive",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "scope"
+     ],
+     "grants": "⛔ A WHOLE FORCE AND ITS COMMANDER, AND THE GROUND MADE READY DAYS AHEAD — stakes cut, fords fouled, the line of retreat already decided by you. ⚠️ The fight is largely over when it starts, which is the point.",
+     "cannot": "⛔ IT IS STILL AN OFFER. A commander who refuses battle entirely has beaten this, and the Marchers consider that a legitimate answer — it is the one Stillhold gives."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-29. ⚠️ CORRECTS MY OWN ARGUMENT: I said the Marchers REFUSE `conceal`/`deceive` and should get a duel-challenge craft. Erik: don't narrow to duels, and Sun Tzu is revered — military strategy has a home here. ⛔ AND HE ADDED THE THING I HAD NOT CONSIDERED: 'they can ENLIST OTHER TRADITIONS' SKILLS AND BRAID.' A tradition does not need to own every verb; a strategist's answer to a missing capability is to RECRUIT SOMEONE WHO HAS IT. See `_strategistsBraid`.",
+   "_strategistsBraid": "⛔ ERIK: 'BESIDES, THEY CAN ENLIST OTHER TRADITIONS' SKILLS AND BRAID.' ⚠️ THIS IS A GENERAL CORRECTION TO HOW I RUN GAP ASSESSMENTS: I have been treating an absent verb as a hole in a tradition. **For the Marchers specifically it is a doctrine** — a people whose art is the disposition of force do not need to own `conceal` when they can put an Umbral on the flank, and `powerSystem: combination` braids already exist (`harbored_flame`, `turning_word`, `meaning_engine`) as the mechanism. ⚠️ SO A MARCHER GAP LIST SHOULD READ AS 'WHO WOULD THEY RECRUIT FOR THIS', NOT 'WHAT ARE THEY MISSING'."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",

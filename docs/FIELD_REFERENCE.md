@@ -609,7 +609,7 @@ thing measured against on the same day: affinities do not cluster, and a default
 | `note` | 220 | `mechanic`×220 | ✅ READ | `art.js`, `authormode.js`, `borncontract.js` |
 | `effectTags` | 176 | `root`×176 | ✅ READ | `battleprompt.js`, `braids.js`, `martial.js` |
 | `scope` | 141 | `mechanic`×141 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `app.js` |
-| `targets` | 129 | `mechanic`×129 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
+| `targets` | 130 | `mechanic`×130 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `gated` | 108 | `root`×108 | ✅ READ | `borncontract.js`, `generate.js`, `gm_registry.js` |
 | `damageType` | 89 | `mechanic`×89 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `dice` | 85 | `mechanic`×85 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |

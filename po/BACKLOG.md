@@ -821,3 +821,42 @@ LEVEL DISTRIBUTION is the defect.**
 
 ⛔ **DO NOT RUN THIS UNTIL THE FIRST AUDIT PASS IS DONE** — same reason as the balance-and-gap check: at
 seven of thirteen traditions it would measure the audit order.
+
+## ⛔ SPIRIT AS A PERMEATING FIELD, NOT A FOURTEENTH BOX (Erik, 2026-08-30)
+
+**Erik, on Spirit having 10 crafts against Death's 32: *"Spirit is interesting — I could see some spirit
+skills in Death, Light, Dark, etc. It's kind of a PERMEATING FIELD, and that could make sense if we tie it
+to the PRECURSOR/VEIL ENTITY POWERS."***
+
+### ⚠️ WHY THIS IS BETTER THAN GIVING SPIRIT MORE CRAFTS
+
+⛔ **The imbalance is real** — under the fourteen, Spirit has **10** and Death has **32**, and Spirit
+carries **Parakletos, the Thinnings and the Veil contact point**: the most cosmologically loaded tradition
+with the fewest crafts.
+
+⚠️ **THE OBVIOUS FIX IS TO AUTHOR 20 MORE NUMINOUS CRAFTS. ERIK'S IS BETTER AND STRUCTURALLY DIFFERENT:
+spirit is not a box, it is a FIELD that runs through the others.** ✅ **A Death craft can be spirit-touched.
+So can a Light one.**
+
+### ⛔ AND THE COSMOLOGY ALREADY SUPPORTS IT
+
+**`the_three.md`: PARAKLETOS took neither side and DISTRIBUTED ITSELF INTO THE SUBSTRATE** — *"what answers
+every craft in the world."* ⚠️ **A distributed entity is by definition not a tradition. It is a field.**
+
+⛔ **AND THE MECHANISM IS ALREADY BUILT AND ALREADY CARRIED:** `powerSystem` is per-craft, not
+per-tradition, and `veil` is a legal value with two carriers (`uttered_name` — an UMBRAL craft, not a
+numinous one). **A veil-powered craft inside another tradition is not a new idea; it shipped this week.**
+
+### ⬜ WHAT TO WORK OUT
+
+1. ⛔ **Is spirit a `powerSystem`, a craft PROPERTY, or a sect that spans traditions?** ⚠️ The third is new
+   shape and the first two exist.
+2. **What does spirit-touched MEAN mechanically** — does it reach where the substrate reaches? Does it
+   answer to `arc_the_disagreement`?
+3. ⚠️ **Which existing crafts are ALREADY spirit-touched and mislabelled?** `uttered_name` (veil, umbral),
+   `deathless`, the retrieval ladder, the Thinnings crafts. ⛔ **Measure before authoring — this may be a
+   RECLASSIFICATION rather than new content**, which would fix the imbalance without a single new craft.
+4. **Does it change the 14?** ⚠️ If spirit permeates, Spirit-as-a-primary may be the wrong shape entirely —
+   and that is a merger question, so it wants deciding BEFORE the migration runs, not after.
+
+⛔ **DO NOT AUTHOR SPIRIT CRAFTS UNTIL 3 IS MEASURED.** The corpus may already be carrying them.

@@ -271,7 +271,7 @@
    "id": "long_reach",
    "name": "Long Reach",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
@@ -285,7 +285,7 @@
    ],
    "narrationHints": "The distance was their advantage. He closed it in the throwing.",
    "description": "Attack at range or in motion — the horizon fighter's harm is always the far brought suddenly close.",
-   "notFor": [],
+   "notFor": "⛔ IT NEEDS DISTANCE OR MOTION — a horizon fighter cornered in a room has nothing to bring from far away. ⚠️ AND IT ARRIVES ONE THING AT A TIME: what is far is brought close, not everything that is far. ⛔ It does not cross what cannot be crossed — a wall, a closed door, a warded threshold all end the reach.",
    "tradition": "horizon",
    "harmRung": "damaging",
    "functions": [
@@ -293,9 +293,9 @@
     "strike"
    ],
    "challengeTypes": [
-    "combat",
-    "ranged",
-    "tactical"
+    "FIGHT",
+    "CHASE",
+    "DEFEND"
    ],
    "tree": [
     {
@@ -400,13 +400,14 @@
    "_idWas": "the_long_reach",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_typed_20260829": "⛔ `physical` — 'the far brought suddenly close' — a horizon fighter's blow is still a blow. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
+   "_typed_20260829": "⛔ `physical` — 'the far brought suddenly close' — a horizon fighter's blow is still a blow. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['combat', 'ranged', 'tactical'], e1 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
   },
   {
    "id": "fresh_horizon",
    "name": "Fresh Horizon",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
@@ -419,7 +420,7 @@
    ],
    "narrationHints": "The next ridge. The next valley. The sight of more ahead is what keeps them going.",
    "description": "Distance restores — a journey that heals, the sight of the next horizon renewing the will to go on.",
-   "notFor": [],
+   "notFor": "⛔ IT NEEDS SOMEWHERE TO GO. A journey that heals is still a journey, and a party besieged, imprisoned or holding a position gets nothing. ⚠️ IT MENDS WILL AND WEARINESS, NOT WOUNDS: an exhausted company arrives able; a bleeding one arrives bleeding. ⛔ And it cannot be taken twice on the same road.",
    "tradition": "horizon",
    "harmRung": "none",
    "functions": [
@@ -429,9 +430,9 @@
     "sustain"
    ],
    "challengeTypes": [
-    "healing",
-    "morale",
-    "endurance"
+    "SURVIVE",
+    "TRAVEL",
+    "DEFEND"
    ],
    "tree": [
     {
@@ -536,13 +537,14 @@
    "_idWas": "the_fresh_horizon",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['healing', 'morale', 'endurance'], e2 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
   },
   {
    "id": "kept_distance",
    "name": "Kept Distance",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
@@ -555,7 +557,7 @@
    ],
    "narrationHints": "The threat was real. She simply stayed where it wasn't.",
    "description": "Protection through range — keep the threat far and its power collapses.",
-   "notFor": [],
+   "notFor": "⛔ IT ANSWERS WHAT MUST CROSS SPACE — a blade, a charge, a thrown thing, a geometry imposed at range. ⚠️ IT DOES NOTHING TO WHAT IS ALREADY ON YOU, and nothing to a working that arrives without travelling. ⛔ AND KEEPING DISTANCE IS A CHOICE ABOUT THE WHOLE FIGHT: you cannot hold a doorway and keep your distance in the same breath.",
    "tradition": "horizon",
    "harmRung": "none",
    "functions": [
@@ -564,9 +566,9 @@
     "shield"
    ],
    "challengeTypes": [
-    "combat",
-    "evasion",
-    "tactical"
+    "DEFEND",
+    "CHASE",
+    "SURVIVE"
    ],
    "tree": [
     {
@@ -676,13 +678,14 @@
    "_idWas": "the_kept_distance",
    "_wardTypes": "⛔ SNG-512. Range collapses what needs to reach you. Useless against anything that does not.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['combat', 'evasion', 'tactical'], e1 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
   },
   {
    "id": "made_crossing",
    "name": "Made Crossing",
    "levelReq": 3,
-   "energyCost": 2,
+   "energyCost": 6,
    "powerSystem": "precursor",
    "attribute": "practical",
    "axes": {
@@ -695,7 +698,7 @@
    ],
    "narrationHints": "A gap is a statement about what the land thinks is possible. He disagreed.",
    "description": "Create a crossing where there was none — not by building but by knowing where the distance can be made to yield.",
-   "notFor": [],
+   "notFor": "⛔ THE DISTANCE MUST BE ABLE TO YIELD — a chasm, a river, a broken road. A sealed vault and a warded threshold are not distances and will not open. ⚠️ IT MAKES A CROSSING, NOT A BRIDGE: it lasts the crossing, and what comes behind you finds nothing. ⛔ You must know where the far side IS.",
    "tradition": "horizon",
    "harmRung": "none",
    "functions": [
@@ -705,9 +708,9 @@
     "travel"
    ],
    "challengeTypes": [
-    "exploration",
-    "navigation",
-    "tactical"
+    "EXPLORE",
+    "TRAVEL",
+    "PUZZLE"
    ],
    "tree": [
     {
@@ -813,13 +816,14 @@
    "_nameWas": "The Made Crossing",
    "_idWas": "the_made_crossing",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['exploration', 'navigation', 'tactical'], e2 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
   },
   {
    "id": "land_knowledge",
    "name": "Land Knowledge",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -832,16 +836,16 @@
    ],
    "narrationHints": "She knew where the pass was before anyone asked. That was enough.",
    "description": "Command through knowing what others don't — the terrain, the route, the distances that change everything about what's possible.",
-   "notFor": [],
+   "notFor": "⛔ IT COMMANDS THROUGH KNOWING, WHICH MEANS YOU MUST ACTUALLY KNOW — a horizon-walker in country they have not walked has nothing to lead with. ⚠️ AND IT BUYS FOLLOWING, NOT OBEDIENCE: they go where you say because you are right, and they stop when you are wrong. ⛔ It carries no weight indoors, in a city, or anywhere the terrain has stopped mattering.",
    "tradition": "horizon",
    "harmRung": "none",
    "functions": [
     "command"
    ],
    "challengeTypes": [
-    "leadership",
-    "navigation",
-    "social"
+    "SOCIAL",
+    "EXPLORE",
+    "TRAVEL"
    ],
    "tree": [
     {
@@ -951,13 +955,14 @@
    "_nameWas": "The Land Knowledge",
    "_idWas": "the_land_knowledge",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['leadership', 'navigation', 'social'], e1 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
   },
   {
    "id": "road_ahead",
    "name": "Road Ahead",
    "levelReq": 1,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "precursor",
    "attribute": "physical",
    "axes": {
@@ -970,7 +975,7 @@
    ],
    "narrationHints": "As long as there is further to go, they go.",
    "description": "Sustain through forward motion — the horizon-walker who keeps moving doesn't run out.",
-   "notFor": [],
+   "notFor": "⛔ IT SUSTAINS ONLY WHILE YOU ARE MOVING FORWARD — stop, turn back, or hold a position and it ends at once. ⚠️ IT KEEPS YOU GOING; IT DOES NOT KEEP YOU WELL: hunger, cold and injury are all still accruing and arrive together when you stop. ⛔ And it will not carry someone else.",
    "tradition": "horizon",
    "harmRung": "none",
    "functions": [
@@ -978,9 +983,9 @@
     "sustain"
    ],
    "challengeTypes": [
-    "endurance",
-    "survival",
-    "travel"
+    "TRAVEL",
+    "SURVIVE",
+    "CHASE"
    ],
    "tree": [
     {
@@ -1078,13 +1083,14 @@
    "_nameWas": "The Road Ahead",
    "_idWas": "the_road_ahead",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['endurance', 'survival', 'travel'], e1 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
   },
   {
    "id": "wrong_moment",
    "name": "Wrong Moment",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -1098,16 +1104,16 @@
    ],
    "narrationHints": "She waited for the moment they couldn't answer. Then she acted.",
    "description": "Strike or act at the precise moment when the other person cannot respond — the hourkeeper's harm is perfect timing, not force.",
-   "notFor": [],
+   "notFor": "⛔ YOU MUST BE ABLE TO SEE THE MOMENT COMING — a foe you cannot read, or one acting without deciding, offers no moment to take. ⚠️ AND IT IS ONE MOMENT: perfect timing against a single act, not a rhythm you can hold. ⛔ It does not make the blow bigger, only unanswerable.",
    "tradition": "hourkeeper",
    "harmRung": "lethal",
    "functions": [
     "strike"
    ],
    "challengeTypes": [
-    "combat",
-    "social",
-    "tactical"
+    "FIGHT",
+    "DUEL",
+    "STEALTH"
    ],
    "tree": [
     {
@@ -1218,13 +1224,14 @@
    "_idWas": "the_wrong_moment",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_typed_20260829": "⛔ `temporal` — striking at the moment the other cannot respond — the harm IS the timing, and `temporal` had one carrier. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
+   "_typed_20260829": "⛔ `temporal` — striking at the moment the other cannot respond — the harm IS the timing, and `temporal` had one carrier. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['combat', 'social', 'tactical'], e1 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
   },
   {
    "id": "given_time",
    "name": "Given Time",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -1237,7 +1244,7 @@
    ],
    "narrationHints": "She gave them the hour they needed that wasn't there.",
    "description": "Stretch a moment or buy time that wasn't available — so that what needed longer to heal or resolve has it.",
-   "notFor": [],
+   "notFor": "⛔ IT GIVES TIME, NOT OUTCOME — what needed longer gets longer, and if it was going to fail slowly it now fails slowly with more room. ⚠️ AND THE TIME IS BORROWED FROM THE MOMENT AROUND IT: everything else in that stretch is correspondingly hurried. ⛔ It cannot be given to a thing that is already over.",
    "tradition": "hourkeeper",
    "harmRung": "none",
    "functions": [
@@ -1246,9 +1253,9 @@
     "sustain"
    ],
    "challengeTypes": [
-    "healing",
-    "logistics",
-    "endurance"
+    "SURVIVE",
+    "DEFEND",
+    "CREATE"
    ],
    "tree": [
     {
@@ -1349,13 +1356,14 @@
    "_idWas": "the_given_time",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['healing', 'logistics', 'endurance'], e2 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
   },
   {
    "id": "wasted_moment",
    "name": "Wasted Moment",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -1368,7 +1376,7 @@
    ],
    "narrationHints": "She knew the blow was coming. She was elsewhere in it.",
    "description": "Protect through perfect foreknowledge of timing — make their moment of action count for nothing by not being in it.",
-   "notFor": [],
+   "notFor": "⛔ IT ANSWERS A TIMED ACT — a swing, a shot, a spoken working at its moment. ⚠️ NOT A STANDING HAZARD, NOT AN AREA, and nothing that is simply always happening. ⛔ AND IT COSTS YOU THE POSITION: not being there means being somewhere else, and you do not choose where as precisely as you would like.",
    "tradition": "hourkeeper",
    "harmRung": "none",
    "functions": [
@@ -1376,9 +1384,9 @@
     "shield"
    ],
    "challengeTypes": [
-    "combat",
-    "defense",
-    "tactical"
+    "DEFEND",
+    "DUEL",
+    "FIGHT"
    ],
    "tree": [
     {
@@ -1483,13 +1491,14 @@
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. foreknowledge of timing — reads the attack forming\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_wardTypes": "⛔ SNG-512. Foreknowledge of timing answers what arrives at a time.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['combat', 'defense', 'tactical'], e1 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
   },
   {
    "id": "shaped_duration",
    "name": "Shaped Duration",
    "levelReq": 3,
-   "energyCost": 2,
+   "energyCost": 6,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -1502,7 +1511,7 @@
    ],
    "narrationHints": "The hour was not the same hour as before. She had worked on it.",
    "description": "Shape how long something takes — stretch a moment, compress an hour, make duration do what you need rather than what it would naturally do.",
-   "notFor": [],
+   "notFor": "⛔ IT SHAPES HOW LONG, NEVER WHAT — a compressed hour of work is the same work, and stretching a moment does not improve what happens in it. ⚠️ AND IT WORKS ON PROCESSES, NOT PEOPLE: a fermenting vat, a burning fuse, a setting mortar. A person's decision takes as long as it takes. ⛔ Nothing already finished can be lengthened.",
    "tradition": "hourkeeper",
    "harmRung": "incapacitating",
    "functions": [
@@ -1511,9 +1520,9 @@
     "transform"
    ],
    "challengeTypes": [
-    "tactical",
-    "craft",
-    "intellectual"
+    "CREATE",
+    "PUZZLE",
+    "SURVIVE"
    ],
    "tree": [
     {
@@ -1611,13 +1620,14 @@
    "_nameWas": "The Shaped Duration",
    "_idWas": "the_shaped_duration",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['tactical', 'craft', 'intellectual'], e2 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
   },
   {
    "id": "opened_moment",
    "name": "Opened Moment",
    "levelReq": 3,
-   "energyCost": 2,
+   "energyCost": 6,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -1630,7 +1640,7 @@
    ],
    "narrationHints": "She stepped between the moments and was already through.",
    "description": "Open a gap in the flow of events to move through — the hourkeeper's passage happens between moments others don't see.",
-   "notFor": [],
+   "notFor": "⛔ THE GAP IS BETWEEN MOMENTS AND IT IS SMALL — you pass through what others do not see, and you arrive where you could have walked. ⚠️ IT IS NOT DISTANCE: this is `made_crossing`'s work, not this one's. ⛔ AND WHAT IS WATCHING THE FLOW OF EVENTS RATHER THAN THE ROOM SEES YOU DO IT.",
    "tradition": "hourkeeper",
    "harmRung": "none",
    "functions": [
@@ -1639,9 +1649,9 @@
     "open"
    ],
    "challengeTypes": [
-    "stealth",
-    "navigation",
-    "tactical"
+    "STEALTH",
+    "EXPLORE",
+    "CHASE"
    ],
    "tree": [
     {
@@ -1734,13 +1744,14 @@
    "_nameWas": "The Opened Moment",
    "_idWas": "the_opened_moment",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['stealth', 'navigation', 'tactical'], e2 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
   },
   {
    "id": "long_watch",
    "name": "Long Watch",
    "levelReq": 1,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "precursor",
    "attribute": "mental",
    "axes": {
@@ -1753,7 +1764,7 @@
    ],
    "narrationHints": "She felt time differently. Waiting was not the hardship it was for others.",
    "description": "Endure through understanding duration — the hourkeeper who feels time differently can wait, hold, or persist longer than anyone else.",
-   "notFor": [],
+   "notFor": "⛔ IT ENDURES DURATION, NOT HARDSHIP — you can hold a watch for days and still freeze, starve or bleed on schedule. ⚠️ AND THE TIME STILL PASSES FOR EVERYONE ELSE: what you outwait, you outwait alone. ⛔ It cannot be shared and does not speed anything up.",
    "tradition": "hourkeeper",
    "harmRung": "none",
    "functions": [
@@ -1761,9 +1772,9 @@
     "sustain"
    ],
    "challengeTypes": [
-    "endurance",
-    "stealth",
-    "hardship"
+    "SURVIVE",
+    "STEALTH",
+    "DEFEND"
    ],
    "tree": [
     {
@@ -1858,7 +1869,8 @@
    "_nameWas": "The Long Watch",
    "_idWas": "the_long_watch",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['endurance', 'stealth', 'hardship'], e1 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
   },
   {
    "schemaVersion": 1,

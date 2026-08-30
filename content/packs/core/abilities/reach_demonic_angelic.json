@@ -1428,7 +1428,7 @@
    "id": "judged_strike",
    "name": "Judged Strike",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
@@ -1443,16 +1443,16 @@
    "harmRung": "lethal",
    "narrationHints": "The blow wasn't just a blow. It said something.",
    "description": "Strike with the weight of judgment — the blow carries condemnation; the target knows what it means.",
-   "notFor": [],
+   "notFor": "⛔ THE JUDGEMENT MUST BE TRUE. A seraph who strikes in error strikes with an ordinary arm and the target knows THAT too. ⚠️ AND IT REQUIRES A TARGET WHO CAN UNDERSTAND CONDEMNATION — a beast, a mechanism, a driven body takes the blow and none of the weight. ⛔ It does not judge FOR you: you must already know what they did.",
    "tradition": "seraphic",
    "functions": [
     "reveal",
     "strike"
    ],
    "challengeTypes": [
-    "combat",
-    "social",
-    "tactical"
+    "FIGHT",
+    "DUEL",
+    "SOCIAL"
    ],
    "tree": [
     {
@@ -1561,13 +1561,14 @@
    "_nameWas": "The Judged Strike",
    "_idWas": "the_judged_strike",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['combat', 'social', 'tactical'], e1 below band. ⛔ Erik 2026-08-30: 'run the unmigrated batch' — corpus-wide sweep."
   },
   {
    "id": "raised_form",
    "name": "Raised Form",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
@@ -1582,7 +1583,7 @@
    "harmRung": "none",
    "narrationHints": "She didn't just build it. She raised it. There's a difference.",
    "description": "Make through seraphic authority — what is raised embodies proper order and organizes what surrounds it.",
-   "notFor": [],
+   "notFor": "⛔ WHAT IS RAISED EMBODIES ORDER, WHICH MEANS IT ORGANISES WHETHER YOU WANT IT TO OR NOT — set one in a place with its own arrangement and you have started an argument. ⚠️ AND IT MUST BE MAINTAINED BY SOMEONE WHO HOLDS TO THE SAME ORDER; abandoned, it becomes a ruin that still insists. ⛔ It builds nothing physical — the form is authority, not masonry.",
    "tradition": "seraphic",
    "functions": [
     "command",
@@ -1590,9 +1591,9 @@
     "summon"
    ],
    "challengeTypes": [
-    "craft",
-    "leadership",
-    "magical"
+    "CREATE",
+    "DEFEND",
+    "SOCIAL"
    ],
    "tree": [
     {
@@ -1685,13 +1686,14 @@
    "_nameWas": "The Raised Form",
    "_idWas": "the_raised_form",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['craft', 'leadership', 'magical'], e2 below band. ⛔ Erik 2026-08-30: 'run the unmigrated batch' — corpus-wide sweep."
   },
   {
    "id": "ascent_path",
    "name": "Ascent Path",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
@@ -1706,7 +1708,7 @@
    "harmRung": "none",
    "narrationHints": "The way up is always there for those who are meant to go.",
    "description": "Ascend past what should be a physical limit — and open the ascent path for others.",
-   "notFor": [],
+   "notFor": "⛔ UP AND NOT DOWN, AND NEVER ACROSS. The ascent is past a physical limit, not a substitute for a road. ⚠️ THOSE WHO FOLLOW MUST BE WILLING TO: someone dragged onto the path does not rise. ⛔ And it ends where you stop attending it, which for anyone still climbing is a long way down.",
    "tradition": "seraphic",
    "functions": [
     "move",
@@ -1714,9 +1716,9 @@
     "travel"
    ],
    "challengeTypes": [
-    "exploration",
-    "tactical",
-    "navigation"
+    "EXPLORE",
+    "TRAVEL",
+    "DEFEND"
    ],
    "tree": [
     {
@@ -1817,13 +1819,14 @@
    "_nameWas": "The Ascent Path",
    "_idWas": "the_ascent_path",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['exploration', 'tactical', 'navigation'], e1 below band. ⛔ Erik 2026-08-30: 'run the unmigrated batch' — corpus-wide sweep."
   },
   {
    "id": "sustained_order",
    "name": "Sustained Order",
    "levelReq": 1,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
@@ -1837,16 +1840,16 @@
    "harmRung": "none",
    "narrationHints": "She wasn't doing it alone. She hadn't been for a while.",
    "description": "Sustain through participation in the hierarchy — the order holds those who hold to it.",
-   "notFor": [],
+   "notFor": "⛔ IT HOLDS THOSE WHO HOLD TO IT — a seraph in doubt, in dissent, or acting against the hierarchy gets nothing from it, at the moment they need it most. ⚠️ AND IT SUSTAINS THE WILL, NOT THE BODY. ⛔ It cannot be extended to someone outside the order, however much they need it.",
    "tradition": "seraphic",
    "functions": [
     "empower",
     "sustain"
    ],
    "challengeTypes": [
-    "endurance",
-    "hardship",
-    "leadership"
+    "SURVIVE",
+    "DEFEND",
+    "SOCIAL"
    ],
    "tree": [
     {
@@ -1941,7 +1944,8 @@
    "_nameWas": "The Sustained Order",
    "_idWas": "the_sustained_order",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['endurance', 'hardship', 'leadership'], e1 below band. ⛔ Erik 2026-08-30: 'run the unmigrated batch' — corpus-wide sweep."
   },
   {
    "schemaVersion": 1,

@@ -558,7 +558,7 @@
    "id": "sound_repair",
    "name": "Sound Repair",
    "levelReq": 2,
-   "energyCost": 2,
+   "energyCost": 4,
    "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
@@ -571,7 +571,7 @@
    ],
    "narrationHints": "Not better. Sound. The thing as it was, correctly made, correctly set.",
    "description": "Fix what is broken by understanding its material nature — what it is, what it was, and what it takes to make it sound again.",
-   "notFor": [],
+   "notFor": "⛔ IT FIXES THINGS, NEVER PEOPLE — a wall, a wheel, a cracked beam. A body is not a material to a Mason. ⚠️ AND IT NEEDS THE PIECES: what is gone is gone, and repair is not replacement. ⛔ It restores the thing to sound, not to new, and a badly-made thing comes back badly made.",
    "tradition": "mason",
    "harmRung": "none",
    "functions": [
@@ -579,9 +579,9 @@
     "restore"
    ],
    "challengeTypes": [
-    "repair",
-    "medical",
-    "craft"
+    "CREATE",
+    "PUZZLE",
+    "SURVIVE"
    ],
    "tree": [
     {
@@ -710,13 +710,14 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it.",
-   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['repair', 'medical', 'craft'], e2 below band. ⛔ Erik 2026-08-30: 'run the unmigrated batch' — corpus-wide sweep."
   },
   {
    "id": "set_word",
    "name": "Set Word",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "ordered_nanite",
    "attribute": "social",
    "axes": {
@@ -730,7 +731,7 @@
    ],
    "narrationHints": "A mason's word is set the way a stone is set. It does not shift.",
    "description": "Say the plain thing and have it hold — the authority of someone whose word is as solid as their work, and whose presence is the fixed point in the room.",
-   "notFor": [],
+   "notFor": "⛔ IT IS EARNED BY WORK. A Mason whose builds have failed has a word that holds exactly as well as they do. ⚠️ IT MAKES THE PLAIN THING HOLD; IT DOES NOT MAKE A CLEVER THING PERSUASIVE, and a Mason who tries to be subtle with it gets nothing. ⛔ And it binds you first — a set word you break is a wall you pulled down yourself.",
    "tradition": "mason",
    "harmRung": "none",
    "functions": [
@@ -738,9 +739,9 @@
     "command"
    ],
    "challengeTypes": [
-    "social",
-    "negotiation",
-    "leadership"
+    "SOCIAL",
+    "DEFEND",
+    "DUEL"
    ],
    "tree": [
     {
@@ -845,13 +846,14 @@
    },
    "_merged": "⛔ SNG-485: absorbs Weight of Presence (L2 somatic). Both were L2, social, `command`, 'authority without persuasion', and their r3s were the same claim.",
    "_powerSystemWas": "body",
-   "_powerSystemFix": "⛔ SNG-487 CORRECTED. I assigned this to `body` — AND `body` WAS ELIMINATED AS A SOURCE ON 2026-08-15, in a ruling I wrote up myself: 'THE STRUCTURAL CHANGE: body IS GONE AS A SOURCE, absorbed into metaphysical as Veil/Psychic/Ki type INNATE power.' Four sources only: precursor, ordered_nanite, wild_nanite, metaphysical.\n⚠️ Erik caught it: 'verify against our latest power source work — we eliminated the body source.'\n⛔ REASSIGNED TO ORDERED_NANITE per the mason primary. A craft of pure skill is not sourceless — it draws the same innate current as the rest of its tradition, more thinly."
+   "_powerSystemFix": "⛔ SNG-487 CORRECTED. I assigned this to `body` — AND `body` WAS ELIMINATED AS A SOURCE ON 2026-08-15, in a ruling I wrote up myself: 'THE STRUCTURAL CHANGE: body IS GONE AS A SOURCE, absorbed into metaphysical as Veil/Psychic/Ki type INNATE power.' Four sources only: precursor, ordered_nanite, wild_nanite, metaphysical.\n⚠️ Erik caught it: 'verify against our latest power source work — we eliminated the body source.'\n⛔ REASSIGNED TO ORDERED_NANITE per the mason primary. A craft of pure skill is not sourceless — it draws the same innate current as the rest of its tradition, more thinly.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['social', 'negotiation', 'leadership'], e1 below band. ⛔ Erik 2026-08-30: 'run the unmigrated batch' — corpus-wide sweep."
   },
   {
    "id": "near_way",
    "name": "Near Way",
    "levelReq": 1,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
@@ -864,7 +866,7 @@
    ],
    "narrationHints": "The seam is already there. He just finds it.",
    "description": "Navigate through built or material spaces by understanding how they're made — the door that's in every wall, the gap that's in every structure.",
-   "notFor": [],
+   "notFor": "⛔ BUILT SPACES ONLY — it reads how a thing was MADE, and a cave, a forest and open country tell it nothing. ⚠️ THE DOOR IN EVERY WALL IS A DOOR SOMEONE PUT THERE: this finds what exists, and a solid wall stays solid. ⛔ It will not tell you what is on the other side.",
    "tradition": "mason",
    "harmRung": "none",
    "functions": [
@@ -873,9 +875,9 @@
     "open"
    ],
    "challengeTypes": [
-    "navigation",
-    "infiltration",
-    "craft"
+    "EXPLORE",
+    "STEALTH",
+    "CHASE"
    ],
    "tree": [
     {
@@ -1007,7 +1009,8 @@
    "_nameWas": "The Near Way",
    "_idWas": "the_near_way",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it."
+   "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['navigation', 'infiltration', 'craft'], e1 below band. ⛔ Erik 2026-08-30: 'run the unmigrated batch' — corpus-wide sweep."
   },
   {
    "schemaVersion": 1,

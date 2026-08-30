@@ -1383,7 +1383,7 @@
    "id": "maintained_order",
    "name": "Maintained Order",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
@@ -1396,11 +1396,7 @@
    ],
    "narrationHints": "The entropy is always working. You are working harder.",
    "description": "Hold a structure in function across time — not by force but by constant, precise correction of everything that drifts.",
-   "notFor": [
-    "Holding a structure through raw force instead of correction",
-    "Sustaining what is fundamentally trying to end",
-    "Maintaining more than you can attend to at once"
-   ],
+   "notFor": "⛔ CONSTANT PRECISE CORRECTION MEANS CONSTANT ATTENTION — a lattice-worker holding a structure is doing that and not much else. ⚠️ IT HOLDS WHAT IS ALREADY FUNCTIONING: a thing already failed is a repair, not a maintenance. ⛔ And what it holds becomes dependent on being held; drop it after long enough and it fails worse than if you never had.",
    "tradition": "lattice",
    "harmRung": "none",
    "functions": [
@@ -1408,9 +1404,9 @@
     "sustain"
    ],
    "challengeTypes": [
-    "logistics",
-    "leadership",
-    "endurance"
+    "DEFEND",
+    "CREATE",
+    "SURVIVE"
    ],
    "tree": [
     {
@@ -1512,13 +1508,14 @@
    "_nameWas": "The Maintained Order",
    "_idWas": "the_maintained_order",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['logistics', 'leadership', 'endurance'], e1 below band. ⛔ Erik 2026-08-30: corpus-wide sweep rather than tradition-by-tradition."
   },
   {
    "id": "wrong_target",
    "name": "Wrong Target",
    "levelReq": 2,
-   "energyCost": 1,
+   "energyCost": 4,
    "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
@@ -1531,11 +1528,7 @@
    ],
    "narrationHints": "Can't hit what isn't where it was.",
    "description": "Move so unpredictably that aimed force misses — not by blocking but by not being there.",
-   "notFor": [
-    "Evading a force that isn't aimed (an area, a spread, a collapse)",
-    "Protecting anyone but yourself by this means",
-    "Moving unpredictably while also holding a fixed position"
-   ],
+   "notFor": "⛔ AIMED FORCE ONLY — a swing, a shot, a thrown thing. ⚠️ AN AREA, A COLLAPSE OR A SPREADING FIRE DOES NOT AIM AND FINDS YOU EXACTLY WHERE YOU ARE. ⛔ AND UNPREDICTABLE IS UNPREDICTABLE TO EVERYONE: your own people cannot coordinate with you while you are doing it, and a formation with you in it is not a formation.",
    "tradition": "churnfolk",
    "harmRung": "none",
    "functions": [
@@ -1544,9 +1537,9 @@
     "shield"
    ],
    "challengeTypes": [
-    "combat",
-    "evasion",
-    "tactical"
+    "DEFEND",
+    "CHASE",
+    "DUEL"
    ],
    "tree": [
     {
@@ -1651,7 +1644,8 @@
    "_wardTypes": "⛔ SNG-512. ⛔ Aimed force misses. Answers anything AIMED and nothing that fills a space.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_wardMigrated_20260829": "⛔ WARD `precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — so a ward against it warded nothing. ⚠️ SEVEN CRAFTS carried it after the ruling, and my morning migration only cleaned `damageType`. **A ward naming a dead type is worse than an authored-and-unread field: it looks like protection.**"
+   "_wardMigrated_20260829": "⛔ WARD `precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — so a ward against it warded nothing. ⚠️ SEVEN CRAFTS carried it after the ruling, and my morning migration only cleaned `damageType`. **A ward naming a dead type is worse than an authored-and-unread field: it looks like protection.**",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['combat', 'evasion', 'tactical'], e1 below band. ⛔ Erik 2026-08-30: corpus-wide sweep rather than tradition-by-tradition."
   },
   {
    "id": "misdirect",

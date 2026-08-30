@@ -918,7 +918,7 @@
    "id": "built_system",
    "name": "Built System",
    "levelReq": 3,
-   "energyCost": 2,
+   "energyCost": 6,
    "powerSystem": "ordered_nanite",
    "attribute": "mental",
    "axes": {
@@ -933,7 +933,7 @@
    "harmRung": "none",
    "narrationHints": "He didn't build a thing. He built a rule, and the rule built things.",
    "description": "Build a logical structure that operates in the world — a system whose internal logic sustains it without constant maintenance.",
-   "notFor": [],
+   "notFor": "⛔ THE LOGIC MUST BE SOUND OR THE SYSTEM RUNS ANYWAY, WRONGLY — a flaw does not stop it, it propagates. ⚠️ IT NEEDS A WORLD THAT WILL HOLD STILL: a system built on shifting facts is obsolete before it is finished. ⛔ AND IT RUNS WITHOUT YOU, WHICH INCLUDES WHEN YOU WANT IT TO STOP.",
    "tradition": "syllogist",
    "functions": [
     "bind",
@@ -941,9 +941,9 @@
     "sustain"
    ],
    "challengeTypes": [
-    "intellectual",
-    "leadership",
-    "craft"
+    "CREATE",
+    "PUZZLE",
+    "SOCIAL"
    ],
    "tree": [
     {
@@ -1049,7 +1049,8 @@
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `syllogist` — Argument as architecture; a proof is an ordered process and runs like one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "projectThreshold": 60,
-   "_projectThreshold": "⛔ SNG-527, CCODE'S QUESTION: 'built_system carries duration 8760 — a year in hours — and that is not what I used. If a project's real length is meant to come from `duration` rather than `magnitude`, then a Built System is a YEAR'S work and not twelve days.'\n⛔ NEITHER. `duration` IS HOW LONG THE RESULT LASTS; `projectThreshold` IS HOW LONG THE WORK TAKES. ⚠️ SOUND READ PROVES IT: `duration: 4` is four rounds of reading, and its threshold is ten days. The same field cannot mean both.\n⚠️ AUTHORED RATHER THAN DERIVED, WHICH IS WHY CCODE ASKED. ⛔ SIXTY DAYS. A season's work — the correct scale for founding a law, an institution or a procedure that runs without you. ⚠️ NOT A YEAR: `duration: 8760` IS HOW LONG THE SYSTEM LASTS ONCE BUILT, not how long the building takes. Two clocks, one field."
+   "_projectThreshold": "⛔ SNG-527, CCODE'S QUESTION: 'built_system carries duration 8760 — a year in hours — and that is not what I used. If a project's real length is meant to come from `duration` rather than `magnitude`, then a Built System is a YEAR'S work and not twelve days.'\n⛔ NEITHER. `duration` IS HOW LONG THE RESULT LASTS; `projectThreshold` IS HOW LONG THE WORK TAKES. ⚠️ SOUND READ PROVES IT: `duration: 4` is four rounds of reading, and its threshold is ten days. The same field cannot mean both.\n⚠️ AUTHORED RATHER THAN DERIVED, WHICH IS WHY CCODE ASKED. ⛔ SIXTY DAYS. A season's work — the correct scale for founding a law, an institution or a procedure that runs without you. ⚠️ NOT A YEAR: `duration: 8760` IS HOW LONG THE SYSTEM LASTS ONCE BUILT, not how long the building takes. Two clocks, one field.",
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['intellectual', 'leadership', 'craft'], e2 below band. ⛔ Erik 2026-08-30: corpus-wide sweep rather than tradition-by-tradition."
   },
   {
    "schemaVersion": 1,

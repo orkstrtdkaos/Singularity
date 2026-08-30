@@ -44,7 +44,7 @@
     },
     {
      "rank": 2,
-     "name": "Harbor",
+     "name": "Past Finding",
      "grants": "Hide a person, a truth, or a thing so well even a searcher who knows it's there can't find it; move unseen through watched places; shelter what the light hunts.",
      "cannot": "Harboring something makes you responsible for it; some things should not be harbored, and the Harbor doesn't judge — you must.",
      "functions": [
@@ -168,7 +168,8 @@
    "_wardTypes": "⛔ SNG-512. Wrapping a space in concealment answers what needs to see.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_dark_light",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_wardMigrated_20260829": "⚠️ WARD `light` -> `radiance`. ⛔ MY MORNING MIGRATION WAS HALF A MIGRATION: I migrated `damageType` and `damageMix` and NEVER CHECKED `wardTypes`. Five crafts were warding a type that no longer existed — a ward against nothing, which reads as protection and is not. ⚠️ Found by the question-check flagging `heat` as UNWARDED and my going to look for the natural heat ward."
+   "_wardMigrated_20260829": "⚠️ WARD `light` -> `radiance`. ⛔ MY MORNING MIGRATION WAS HALF A MIGRATION: I migrated `damageType` and `damageMix` and NEVER CHECKED `wardTypes`. Five crafts were warding a type that no longer existed — a ward against nothing, which reads as protection and is not. ⚠️ Found by the question-check flagging `heat` as UNWARDED and my going to look for the natural heat ward.",
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
   },
   {
    "id": "radiance",
@@ -372,7 +373,7 @@
     },
     {
      "rank": 2,
-     "name": "Long Dark",
+     "name": "Deep Sight",
      "grants": "See far and fine without light — read a face across a black room, follow a trail by the shape of the air in it.",
      "cannot": "Sudden light still blinds you; you see the dark, not the intent moving through it.",
      "functions": [
@@ -464,7 +465,8 @@
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. sees in lightlessness, which is a read others cannot make\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_dark_light",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_portableDark_20260829": "⛔ ERIK 2026-08-29, CORRECTING MY OVER-READING: 'although they work in true absence they DON'T REQUIRE IT in general. CLOSE YOUR EYES AND YOU HAVE DARKNESS — in fact you'll see many umbrals on the surface WEARING BLINDFOLDS for that purpose.' ⚠️ I had filed these as VOID crafts and concluded that every Umbral begins as an Unlit. ⛔ WRONG: DARKNESS IS PORTABLE. An umbral does not need the world dark, only their own sight closed — which is why these are the FIRST GIFTS and belong to no school. **A blindfolded umbral on a lit street is not deprived; they are working.**"
+   "_portableDark_20260829": "⛔ ERIK 2026-08-29, CORRECTING MY OVER-READING: 'although they work in true absence they DON'T REQUIRE IT in general. CLOSE YOUR EYES AND YOU HAVE DARKNESS — in fact you'll see many umbrals on the surface WEARING BLINDFOLDS for that purpose.' ⚠️ I had filed these as VOID crafts and concluded that every Umbral begins as an Unlit. ⛔ WRONG: DARKNESS IS PORTABLE. An umbral does not need the world dark, only their own sight closed — which is why these are the FIRST GIFTS and belong to no school. **A blindfolded umbral on a lit street is not deprived; they are working.**",
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
   },
   {
    "id": "dim",
@@ -2419,7 +2421,7 @@
     },
     {
      "rank": 3,
-     "name": "Established Fact",
+     "name": "Spoken In Blaze",
      "grants": "Declare something in the blaze and it is real — not a promise, an established fact that those who witnessed the light cannot pretend they didn't see.",
      "cannot": "⚠️ Those who did not witness it are not bound, and will not believe those who were.",
      "functions": [
@@ -2477,7 +2479,8 @@
    "_idWas": "the_blazing_word",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['social', 'negotiation', 'leadership'], and e1 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy."
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['social', 'negotiation', 'leadership'], and e1 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy.",
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
   },
   {
    "id": "line_of_light",

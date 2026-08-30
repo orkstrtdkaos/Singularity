@@ -173,7 +173,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "Raised Thing",
+     "name": "Quickmake",
      "grants": "Make something real, quickly — a bridge, a shelter, a tool, a wall — out of what is to hand.",
      "cannot": "Quick is not sound. Raised things want tending, and the Wrights are already elsewhere.",
      "functions": [
@@ -273,7 +273,8 @@
    "plainly": "A explore/fight/social action that makes or animates something. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 deepens quality; rank 3 adds to special. Limit: quick IS Not Sound.",
    "_descriptionWas": "The creation-pole mastery: making, at speed and at scale. The Wrights raise things faster than anyone should be able to and never quite complete them.",
    "_powerSystemWas": "reach_destruction_creation",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
   },
   {
    "id": "makers_eye",
@@ -529,7 +530,8 @@
    "_nameWas": "The Raised Thing",
    "_idWas": "the_raised_thing",
    "_powerSystemWas": "reach_destruction_creation",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_playRecord_20260830": "✅ NAME KEPT, AND I WITHDREW MY OWN CONCERN AFTER READING THE PLAY. ⛔ ERIK 2026-08-30: 'Raised Thing is something Silas has used a lot — I like to use it in THING ways. Read Silas's game to see the uses and judge for yourself.' ⚠️ I HAD FLAGGED IT AS POSSIBLE DRIFT — 'raising the dead is Ashwarden work.' ⛔ 33 USES IN THE RECORD AND NOT ONE OF THEM RAISES A BODY. What it raises is STRUCTURE: 'built the skeleton of the Threshold Post — manifesting blueprint into standing structure'; 'raised a WORKING MINE from living iron at novel depth, imperfect but functional'; the death-warden temple; and as a HOLDING THREAD in compound rune-work — 'Wither into the timber's eleven-year history, The Raised Thing over it.' ✅ SO THE CRAFT HAS NOT DRIFTED. It is Wright making, pushed to novel depth, and where it touches Ashwarden work it is BRAIDED WITH IT rather than doing it — the record's own tag is `ashwarden-collaboration`. ⛔ AND THE 'THING' LANGUAGE IS LOAD-BEARING IN A WAY I MISREAD AS VAGUE: the same record says 'the thing inside the post is held. WHAT IT IS REMAINS UNREAD.' `Thing` is the word this game uses for something real and not yet named, and renaming it `Quickmake` would have flattened that. ⚠️ `makecraft` r1 took the rename instead."
   },
   {
    "id": "weapon_at_hand",
@@ -1958,7 +1960,7 @@
     },
     {
      "rank": 2,
-     "name": "Sound Repair",
+     "name": "Set Sound",
      "grants": "Bring a made thing back to true rather than merely patching it — find where the making was cut short or has failed, and remake that part as it should have been. A true repair is not a seam; the thing is sound again to its core.",
      "cannot": "It repairs the made, never the living; it needs enough of the original left to read the maker's intent; and a true repair takes the same care the true making did — you cannot hurry it either.",
      "functions": [
@@ -2043,7 +2045,8 @@
    "_nameWas": "The True Making",
    "_idWas": "the_true_making",
    "_powerSystemWas": "reach_destruction_creation",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
   },
   {
    "schemaVersion": 1,

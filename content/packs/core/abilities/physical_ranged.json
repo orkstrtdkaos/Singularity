@@ -1126,7 +1126,7 @@
     "violence_peace": -0.75
    },
    "id": "break_the_line",
-   "name": "Break the Line",
+   "name": "Breach",
    "levelReq": 4,
    "energyCost": 9,
    "attribute": "mental",
@@ -1194,7 +1194,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "Break the Line",
+     "name": "Breach",
      "functions": [
       "break",
       "hinder"
@@ -1240,7 +1240,8 @@
      "cannot": "⛔ You must be able to SEE it. ⚠️ And someone has to go and do the thing."
     }
    ],
-   "_authored": "⛔ ERIK 2026-08-29 — the veteran's knowledge inverted. `held_line` read from the other side."
+   "_authored": "⛔ ERIK 2026-08-29 — the veteran's knowledge inverted. `held_line` read from the other side.",
+   "_renamed_20260830": "⚠️ `Break the Line` → `Breach`. ⛔ ERIK 2026-08-30: 'make the skill names better and MORE FANTASTIC — like BREACH instead of break the line. But otherwise if the skill name is good we should update the RANK NAME in the dup craft.' ✅ This craft was the weaker side of a name collision, so the CRAFT was renamed rather than the rank."
   },
   {
    "powerSystem": "metaphysical",

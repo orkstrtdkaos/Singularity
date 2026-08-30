@@ -1749,7 +1749,7 @@
   },
   {
    "id": "long_watch",
-   "name": "Long Watch",
+   "name": "Kept Vigil",
    "levelReq": 1,
    "energyCost": 3,
    "powerSystem": "precursor",
@@ -1870,7 +1870,8 @@
    "_idWas": "the_long_watch",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['endurance', 'stealth', 'hardship'], e1 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['endurance', 'stealth', 'hardship'], e1 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition.",
+   "_renamed_20260830": "⚠️ `Long Watch` → `Kept Vigil`. ⛔ ERIK 2026-08-30: 'make the skill names better and MORE FANTASTIC — like BREACH instead of break the line. But otherwise if the skill name is good we should update the RANK NAME in the dup craft.' ✅ This craft was the weaker side of a name collision, so the CRAFT was renamed rather than the rank."
   },
   {
    "schemaVersion": 1,

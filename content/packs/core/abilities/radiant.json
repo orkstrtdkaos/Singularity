@@ -1146,7 +1146,7 @@
     },
     {
      "rank": 3,
-     "name": "Standing Word",
+     "name": "Written In Light",
      "grants": "A month's persistence; script that changes with the light's angle (two messages in one mark); leave word in the Archive's dark that only your companion's glow will ever raise.",
      "cannot": "Each standing word is a thread of your own light budget until it fades; the Guardian considers unsanctioned Archive-script a personal insult.",
      "functions": [
@@ -1228,7 +1228,8 @@
     "note": "a month's persistence at rank"
    },
    "_powerSystemWas": "radiant",
-   "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
   },
   {
    "id": "beacon_thread",

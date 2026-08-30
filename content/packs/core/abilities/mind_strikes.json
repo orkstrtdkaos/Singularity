@@ -87,7 +87,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "Read the Fight",
+     "name": "Aimed Thought",
      "grants": "⛔ RESOLVES IN THE SENSE SLOT — IT DOES NOT COST YOU YOUR ACTION. Read a foe mid-fight and mark where they are weakest: an old injury, a badly-set strap, the foot carrying the weight. ⚠️ THEN STRIKE WITH IT IN THE SAME ROUND — the mark is worth a large edge on your next blow, and it banks tempo.",
      "cannot": "One foe at a time, and the mark is spent when you use it. A foe who changes what they are doing clears it.",
      "functions": [
@@ -143,7 +143,8 @@
    "sense": true,
    "_senseNote": "⛔ SNG-469: usable in the sense slot as a SENSE. Reads the opponent, banks tempo, takes the craft's edge.",
    "_typed_20260829": "⛔ COMPOSITE — 'THOUGHT AIMED THROUGH A BODY'. The blow is ORDINARY (`physical` .7); what makes it land where it does is the read (`psychic` .3). ⚠️ ITS `notFor` FORCES THE MIX: 'an enemy you have not read' AND 'anything you cannot physically reach' — it needs BOTH, so it deals both. ⛔ Armour answers most of it; a mind that cannot be read answers the rest, and neither alone stops it.",
-   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder."
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a HARM WORD in the intensity field, from an older schema where `intensity` meant severity. ⛔ The engine reads a conserve/surge PAIR (`engine/intensity.js`), so a string meant this craft had NO conserve and NO surge and silently resolved at standard only. Authored as a real pair: conserve gives up scope for cost, surge takes something from the wielder.",
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
   },
   {
    "id": "psychic_lance",

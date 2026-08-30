@@ -586,7 +586,7 @@
     },
     {
      "rank": 2,
-     "name": "Held Line",
+     "name": "Rooted",
      "grants": "Hold a doorway, a bridge, a breach — and hold it against numbers, for longer than a body should.",
      "cannot": "Holding is not winning. The line you hold is still a line you are standing on when it fails.",
      "functions": [
@@ -684,7 +684,8 @@
    "_idWas": "the_stand",
    "_wardTypes": "⛔ SNG-512. ⚠️ The guardian's discipline answers blows. Only blows, and it is the best in the game at it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_violence_peace",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
   },
   {
    "id": "broker_truce",
@@ -1573,7 +1574,7 @@
   },
   {
    "id": "long_road",
-   "name": "Long Road",
+   "name": "Hard Mile",
    "levelReq": 2,
    "energyCost": 3,
    "powerSystem": "metaphysical",
@@ -1699,7 +1700,8 @@
    ],
    "plainly": "A survive/explore action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about 3 days Ranks: rank 2 extends targets; rank 3 extends targets. Limit: not For Acute Crisis — this is days, not moments.",
    "_powerSystemWas": "reach_violence_peace",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_renamed_20260830": "⚠️ `Long Road` → `Hard Mile`. ⛔ ERIK 2026-08-30: 'make the skill names better and MORE FANTASTIC — like BREACH instead of break the line. But otherwise if the skill name is good we should update the RANK NAME in the dup craft.' ✅ This craft was the weaker side of a name collision, so the CRAFT was renamed rather than the rank."
   },
   {
    "id": "price_shown",
@@ -2682,7 +2684,7 @@
     },
     {
      "rank": 2,
-     "name": "Chosen Ground",
+     "name": "Ground Read",
      "grants": "Read several approaches and pick — where to meet them, where to be found, where to make them come to you.",
      "cannot": "Choosing ground means committing to it, and an enemy who declines the ground you chose has taken the first exchange without a blow.",
      "functions": [
@@ -2770,7 +2772,8 @@
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ BREAKING'S SENSE — terrain, chokepoints, where the line fails first\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_violence_peace",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rungFix_20260829": "⛔ ability rung -> `none`: it READS terrain. It puts nobody down at any rank, and the gloss told a GM it could incapacitate (§45.1 — a rung must never mis-state what a rank delivers)."
+   "_rungFix_20260829": "⛔ ability rung -> `none`: it READS terrain. It puts nobody down at any rank, and the gloss told a GM it could incapacitate (§45.1 — a rung must never mis-state what a rank delivers).",
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
   },
   {
    "id": "read_the_fight",

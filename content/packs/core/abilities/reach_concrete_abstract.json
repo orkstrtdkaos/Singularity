@@ -556,7 +556,7 @@
   },
   {
    "id": "sound_repair",
-   "name": "Sound Repair",
+   "name": "Made Whole",
    "levelReq": 2,
    "energyCost": 4,
    "powerSystem": "ordered_nanite",
@@ -711,7 +711,8 @@
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it.",
    "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
-   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['repair', 'medical', 'craft'], e2 below band. ⛔ Erik 2026-08-30: 'run the unmigrated batch' — corpus-wide sweep."
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['repair', 'medical', 'craft'], e2 below band. ⛔ Erik 2026-08-30: 'run the unmigrated batch' — corpus-wide sweep.",
+   "_renamed_20260830": "⚠️ `Sound Repair` → `Made Whole`. ⛔ ERIK 2026-08-30: 'make the skill names better and MORE FANTASTIC — like BREACH instead of break the line. But otherwise if the skill name is good we should update the RANK NAME in the dup craft.' ✅ This craft was the weaker side of a name collision, so the CRAFT was renamed rather than the rank."
   },
   {
    "id": "set_word",
@@ -775,7 +776,7 @@
     },
     {
      "rank": 3,
-     "name": "Fixed Point",
+     "name": "Word As Stone",
      "grants": "⛔ NAME THE PRACTICAL TRUTH OF A SITUATION SO PLAINLY THAT A CAMP, A CREW OR A TOWN ORGANISES AROUND IT — and anyone acting against you must first account for what you have already said and already are.",
      "cannot": "One situation. It is solidity, not eloquence — it cannot make people want something.",
      "functions": [
@@ -847,7 +848,8 @@
    "_merged": "⛔ SNG-485: absorbs Weight of Presence (L2 somatic). Both were L2, social, `command`, 'authority without persuasion', and their r3s were the same claim.",
    "_powerSystemWas": "body",
    "_powerSystemFix": "⛔ SNG-487 CORRECTED. I assigned this to `body` — AND `body` WAS ELIMINATED AS A SOURCE ON 2026-08-15, in a ruling I wrote up myself: 'THE STRUCTURAL CHANGE: body IS GONE AS A SOURCE, absorbed into metaphysical as Veil/Psychic/Ki type INNATE power.' Four sources only: precursor, ordered_nanite, wild_nanite, metaphysical.\n⚠️ Erik caught it: 'verify against our latest power source work — we eliminated the body source.'\n⛔ REASSIGNED TO ORDERED_NANITE per the mason primary. A craft of pure skill is not sourceless — it draws the same innate current as the rest of its tradition, more thinly.",
-   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['social', 'negotiation', 'leadership'], e1 below band. ⛔ Erik 2026-08-30: 'run the unmigrated batch' — corpus-wide sweep."
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['social', 'negotiation', 'leadership'], e1 below band. ⛔ Erik 2026-08-30: 'run the unmigrated batch' — corpus-wide sweep.",
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
   },
   {
    "id": "near_way",

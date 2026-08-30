@@ -2273,7 +2273,7 @@
    "name": "Kept Flame",
    "levelReq": 5,
    "energyCost": 13,
-   "powerSystem": "ordered_nanite",
+   "powerSystem": "combination",
    "tradition": "seraphic",
    "attribute": "mental",
    "axes": {
@@ -2345,7 +2345,12 @@
    "_idWas": "the_kept_flame",
    "_powerSystemWas": "reach_demonic_angelic",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_lightMigrated_20260829": "⚠️ `light` -> `radiance`. ⛔ The rename was RULED 2026-08-28 and never executed — burning is elemental `heat`, shining is physics `radiance`. Found when `light` was removed from `damage_types.json` and two crafts were still authoring it."
+   "_lightMigrated_20260829": "⚠️ `light` -> `radiance`. ⛔ The rename was RULED 2026-08-28 and never executed — burning is elemental `heat`, shining is physics `radiance`. Found when `light` was removed from `damage_types.json` and two crafts were still authoring it.",
+   "powerMix": {
+    "precursor": 0.5,
+    "ordered_nanite": 0.5
+   },
+   "_powerFix_20260830": "⛔ `ordered_nanite` → `combination` (precursor .5 / ordered_nanite .5). ⚠️ THE CRAFT SAID IT OUTRIGHT AND THE FIELD DISAGREED: 'the Seraphic capstone that IS A PRECURSOR ACT — the radiance drawn straight from THE FABRICATED SUBSTRATE your people never surrendered.' ✅ ERIK 2026-08-30: 'remember they have some use of CRYSTAL LATTICE.' ⛔ AND IT EXPLAINS WHY THIS IS THE CAPSTONE: everything else a Seraph does runs on FINITE STORES they carry; this one reaches past their own supply into the lattice. **The top of the tradition is the rank that stops needing the refinery.**"
   },
   {
    "schemaVersion": 1,
@@ -5023,6 +5028,131 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-30 — and it gives the tradition a SECOND L5, which is right for a 14-craft tradition that had one."
+  },
+  {
+   "powerSystem": "combination",
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "powerMix": {
+    "ordered_nanite": 0.6,
+    "wild_nanite": 0.4
+   },
+   "axes": {
+    "demonic_angelic": 0.6
+   },
+   "id": "set_in_order",
+   "name": "Proper Order",
+   "levelReq": 2,
+   "energyCost": 5,
+   "attribute": "practical",
+   "shape": "construct",
+   "harmRung": "none",
+   "challengeTypes": [
+    "CREATE",
+    "SURVIVE",
+    "TRAVEL"
+   ],
+   "operativeAxis": [
+    "quality",
+    "duration"
+   ],
+   "effectTags": [
+    "refinery",
+    "supply",
+    "nanite"
+   ],
+   "functions": [
+    "make",
+    "restore",
+    "sustain"
+   ],
+   "description": "⛔ TAKE WHAT IS UNGOVERNED AND PUT IT IN ORDER. Wild nanite is everywhere and answers to nobody; ordered nanite is finite, human-made, and does not replenish itself. ⚠️ THE ORDERS BRIDGE THAT GAP BY HAND — the citadels are refineries, and an Order-bearer in the field is doing on a small scale what the Choir-Height does at industrial one. ⛔ **IT IS THE TRADITION'S THESIS PERFORMED ON MATTER: they take what is wild and impose proper order on it, and they do it to nanites exactly as they do it to people.**",
+   "narrationHints": "She spends the evening with a sealed jar and a light nobody else can quite look at. ⚠️ In the morning the jar is a quarter fuller and she is tired in a way that sleep did not fix.",
+   "notFor": "⛔ IT NEEDS WILD NANITE TO WORK ON, AND IT IS NOT EVERYWHERE IN USEFUL DENSITY — it 'thrives in THE UNREACHED GAPS', which is a long way from anywhere an Order keeps a citadel. ⚠️ AND IT IS SLOW: this is refining, not conjuring, and nothing about it works inside a fight. ⛔ THE YIELD IS POOR IN THE FIELD — a citadel does this properly; a Seraph with a jar does it badly and knows it.",
+   "plainly": "A create action, out of combat. ⛔ REFINE WILD NANITE INTO ORDERED — restoring the STORES a Seraph's crafts run on. Rated 5, and it takes hours. r2 refines enough to supply a small company; r3 you can work from poor sources and carry more than you should be able to. ⚠️ It needs wild nanite present, it never works in a fight, and the field yield is bad.",
+   "intensity": {
+    "conserve": "a careful small batch — clean, and barely worth the evening",
+    "surge": "⛔ RUN EVERYTHING YOU HAVE THROUGH AT ONCE; what comes out is impure and it will show in your next working"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT NEEDS WILD NANITE PRESENT, AND THAT IS THE UNREACHED GAPS — not where citadels are",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ SLOW, AND NEVER IN A FIGHT. This is refining",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ FIELD YIELD IS POOR. A citadel does this properly; a Seraph with a jar does it badly",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AND IMPURE STOCK SHOWS — what you refine badly, you cast badly",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 0,
+    "targets": 1,
+    "crit": {
+     "success": "The batch runs cleaner than a citadel's, and you will never be able to explain why.",
+     "failure": "It orders wrongly, and what you have made is worse than the wild stock you started with."
+    },
+    "note": "construct. ⛔ ERIK 2026-08-30: 'ORDERED NANITE IS A LIMITED QUANTITY. THEY ACTIVELY REFINE WILD NANITE INTO ORDERED TO KEEP THEIR POWER UP. They have to BRING STORES OF IT WITH THEM when they leave their citadels.' ✅ `combination` — ordered .6 / wild .4, the only craft in the tradition that touches `wild_nanite`, and it touches it BY CONSUMING IT. ⚠️ **THIS IS THE ANSWER TO SERAPHIC BEING FIRST AT 82% IN CCODE'S TOURNAMENT, AND IT IS NOT A NERF:** it is a constraint on their CONTEXT. Powerful at home, supplied in the field, measurably diminished a long way from a refinery. ⛔ **NO OTHER TRADITION HAS A REASON TO RUN OUT**, and it explains everything the Orders do — why they are territorial, why a crusade is a supply operation before it is a demonstration of valour, and why rank is ACCESS TO THE REFINERY."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Proper Order",
+     "functions": [
+      "make",
+      "restore"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ REFINE WILD NANITE INTO ORDERED, RESTORING YOUR STORES — hours of work, a poor yield, and the difference between a working Seraph and a decorative one at the far end of a march.",
+     "cannot": "⛔ Wild nanite must be present. ⚠️ Hours, never in a fight. ⛔ And the yield is bad."
+    },
+    {
+     "rank": 2,
+     "name": "Company Stores",
+     "functions": [
+      "make",
+      "restore",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ],
+     "grants": "⛔ REFINE ENOUGH TO SUPPLY OTHERS — a small company of Order-bearers keeps working because you sat up. ⚠️ This is the rank that makes a crusade possible, and the Orders promote for it.",
+     "cannot": "⚠️ Still hours, still out of combat. ⛔ And you are now the reason the expedition can continue."
+    },
+    {
+     "rank": 3,
+     "name": "Poor Sources",
+     "functions": [
+      "make",
+      "restore",
+      "sustain"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "duration"
+     ],
+     "grants": "⛔ WORK FROM THIN AND FOULED STOCK, AND CARRY MORE THAN YOU SHOULD BE ABLE TO — the deep-field refiner, who can keep an Order operating somewhere it has no business being. ⚠️ The Unfallen have several.",
+     "cannot": "⛔ THERE MUST STILL BE SOMETHING TO REFINE. ⚠️ And a Seraph who can supply themselves anywhere is a Seraph the citadel cannot recall."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-30. ✅ THE FIRST LOGISTICS CONSTRAINT ON ANY TRADITION, and the right answer to Seraphic leading the tournament: **constrain the context, not the numbers.**",
+   "_gainAxesFix": "⚠️  again — FIFTH TIME. ✅ Caught by  check 5 BEFORE the ship, for the second craft running. ⛔ The habit has not gone; the gate has made it harmless."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

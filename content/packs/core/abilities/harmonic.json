@@ -726,7 +726,8 @@
     },
     "plus": 0,
     "duration": 2,
-    "note": "RESTORE→healing, but this craft mends THINGS, not bodies — the dice read as repair magnitude"
+    "note": "RESTORE→healing, but this craft mends THINGS, not bodies — the dice read as repair magnitude",
+    "damageType": "vitality"
    },
    "rankDeltas": [
     {
@@ -776,7 +777,8 @@
    ],
    "plainly": "A survive/puzzle/explore action that restores health. It rolls 2d4, and lasts for about 2 hours Ranks: rank 2 deepens repair; rank 3 adds to special. Limit: cannot Restore Missing Material.",
    "_powerSystemWas": "harmonic",
-   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
   },
   {
    "id": "voice_of_the_flock",

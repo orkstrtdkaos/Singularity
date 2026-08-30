@@ -43,6 +43,9 @@ working papers; **this is the answer.**
 | 08-29 | ⛔ **I WROTE A NARRATIVE COST AGAIN — SIXTH TIME** | Erik: *"NO on the r3 cost… geezus. COST IS ENERGY!"* ⚠️ I wrote *"people stop touching you, and that is a cost the craft does not measure"* into a `cannot` | ⛔ replaced with a plain scope limit: it answers every hand, including a friend's | ⚠️ **a `cannot` is what the craft WILL NOT DO. Colour goes in narrationHints or nowhere** |
 | 08-29 | ✅ **MARCHER AUDIT: 10 → 3** | ⛔ **eight harm crafts, ALL UNTYPED — the most of any tradition**, and they are the game's most ORDINARY damage | `craft_lint marcher` · `content_which` | ⚠️ three weapon crafts had **harm words in `intensity`** again; their surges now spend **AMMUNITION**, which is the honest cost for a weapon. `read_field` was glossed `incapacitating` while it only LOOKS AT TERRAIN |
 | 08-29 | ⛔ **`chosen_ground` — and I had the Marchers wrong** | Erik: *"don't narrow them to duels and no conceal. **SUN TZU IS REVERED BY THEM — military strategy has a home here**"* | — | ⚠️ **I conflated two honesties: PLAIN-SPOKEN PERSONALLY and DECEPTIVE PROFESSIONALLY is not a contradiction, it is the whole strategic tradition** |
+| 08-29 | ✅ **ERIK RULED: HEALING IS TYPED — doctrine superseded** | *"healing will need to be typed. **We've moved past that original idea. It can hurt undead now.**"* | ⛔ 22 healing crafts typed `vitality` · §3 rewritten | ⚠️ **and the inversion needs NO new machinery: `decay: absorb` already returns negative damage, and the other half is now just an affinity — because THE MENDING HAS A TYPE TO BE VULNERABLE TO** |
+| 08-29 | ✅ **`the_narrowed` — the game's FIRST UNDEAD CREATURE** | ⛔ **the bestiary had 26 entries and not one undead, so §48's whole undeath model had nothing to run on** | carries both halves: `decay: absorb` + `vitality: vulnerable` | ⚠️ **NARROWED, not an Afterling: the design laws exclude persons from the bestiary, and an Afterling IS a person. This is the end state that isn't** |
+| 08-29 | ⛔ **CCODE-83b judges against a STORED COPY — handed back, not patched** | it reads two lookup tables and **never reads the crafts**, so the 40 crafts I typed today are invisible to it | ⚠️ **`damageTypeByCraft`'s own note predicted it: *"a second source for one fact is drift waiting to happen"*** | ✅ **I did not patch the tables to make my creature pass — that would put the fact in a THIRD place and hide a real defect behind a green gate** |
 | 08-29 | ✅ **ERIK RULED: DAMAGE MUST BE TYPED — 42 untyped crafts found, 18 real, all fixed** | *"damage should be typed. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX"* | ⛔ **new W7 ratchet in `content_which`** · baseline 0 | ⚠️ **an untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose** |
 | 08-29 | ⚠️ **24 of the 42 were the FLAG being wrong, not the content** | healing crafts carry dice for the amount they MEND — and *"healing is not a type"* | ✅ W7 now excludes healing shapes and `harmRung: none` | ⛔ **I fixed the check before the content, which is the right order and is not what I did with the harm rungs** |
 | 08-29 | ✅ **`spatial` and `temporal` finally have carriers** | typing the 18 gave `spatial` its first ever dealer (`cutting_figure` — *"a line imposed across a target, and what it crosses is cut BY THE GEOMETRY"*) | ⛔ W6 caught the unwarded type in seconds; `kept_distance` answers it — **distance is what answers geometry** | ⚠️ **`lightning` is now the ONLY type in the corpus with no carrier at all** |
@@ -309,13 +312,28 @@ and **all seven have no dice at all** — they confirmed it by dealing no damage
 **`light` migrated to `radiance` the same day, one day after that rename was ruled.** ⛔ **Both rulings had
 been MADE AND NEVER EXECUTED, and a vocabulary entry keeps a dead ruling looking alive.**
 
-**HEALING IS NOT A TYPE.** It is an effect, and the source type decides who it mends.
+⛔ **HEALING IS TYPED.** *(Erik, 2026-08-29: "healing will need to be typed. **We've moved past that
+original idea. It can hurt undead now.**")* ⚠️ **This SUPERSEDES the previous doctrine, which said healing
+was an untyped effect and the source type decided who it mended.**
 
-⛔ **PROPOSED — the inversion is NOT BUILT.** The intent is that `decay` mends the undead, `living` and
-`vitality` mend the living, and **healing an undead harms it.** ⚠️ **The machinery for half of it exists** —
-`absorb` returns negative damage, so a sheet authored `decay: absorb` would already be mended by rot. ⛔ **But
-NO SHEET AUTHORS IT**, and the other half — a `heal` that lands as `decay` on an undead — has no
-implementation at all.
+**A mending carries a type like any other delivery, and it is a VITAL one:**
+
+| type | mends | ⛔ harms |
+|---|---|---|
+| `vitality` · `living` | the living | ⛔ **the undead** |
+| `decay` | ⛔ **the undead** | the living |
+
+⚠️ **AND THE INVERSION NEEDS NO NEW MACHINERY, WHICH IS WHY THIS RULING IS CHEAP.** `absorb` already returns
+NEGATIVE damage, so a sheet carrying `decay: absorb` is already mended by rot — that half has worked all
+along. ✅ **The other half is now just an affinity: an undead sheet carrying `vitality: vulnerable` takes
+harm from a mending, through the ordinary damage path, because THE MENDING NOW HAS A TYPE TO BE VULNERABLE
+TO.**
+
+⛔ **WHAT WAS MISSING WAS NEVER AN IMPLEMENTATION. IT WAS A TYPE ON THE HEAL.** A `heal` with no type is
+invisible to affinities exactly as an untyped blow is — the same hole, at the other end of the arithmetic.
+
+⬜ **STILL OWED (content, mine):** an undead sheet that carries both halves. `deathless` authors
+`decay: absorb` on a living wearer; no bestiary creature carries the pair yet.
 
 ---
 

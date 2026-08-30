@@ -31,7 +31,8 @@
   },
   "great_manifestation": {
    "concept": "The largest things the Storm bled through or the substrate raised — dragon-scale manifestations of a whole domain's logic given hunger and wing. Not an animal grown big: a piece of the world's grammar walking, the size of a hill, that resolved wrong and will not resolve back. A dragon is a domain that learned to fly and forgot everything but appetite."
-  }
+  },
+  "narrowed_dead": "⛔ A RAISING THAT WENT THE OTHER WAY. SPEC §48 gives two end states: STABLE (Afterlings, full personality) and NARROWING (unminded purpose). ⚠️ AN AFTERLING BELONGS IN NPCs — it is a person and killing it is a tragedy, which the design laws exclude from here. THE NARROWED DO NOT: what is left is an errand wearing a body, and that is a hazard. ✅ This is the class that lets the undeath model be MET rather than merely specified."
  },
  "roster": [
   {
@@ -476,6 +477,30 @@
    ],
    "clean": "Clearing with nothing left to clear FOR. It unmakes because unmaking is all that remains of what it was. Ending it lets the made things stay made.",
    "aggressorKind": "beast"
+  },
+  {
+   "id": "the_narrowed",
+   "affinity": {
+    "vitality": "vulnerable",
+    "living": "vulnerable",
+    "decay": "absorb",
+    "cold": "immune",
+    "feeling": "immune"
+   },
+   "class": "narrowed_dead",
+   "tier": "regional",
+   "name": "the narrowed",
+   "look": "A body still doing the last thing it was told, long after the telling stopped mattering. It is not rotting — the rot is being used. The face is the part that went first.",
+   "danger": "It does not tire, does not fear, and does not stop. ⛔ A MENDING LAID ON IT BURNS IT: the same vitality that closes a living wound is the thing it has been emptied of. ⚠️ And it is untouched by anything aimed at a self — terror, grief, a true name, a named reckoning all pass through the space where the person was.",
+   "pressures": [
+    "RESTORE (a mending is a weapon here)",
+    "UNMAKE (end the errand, not the body)",
+    "KNOW (read which raising it came from)",
+    "HARM (heat and edge still work, slowly)"
+   ],
+   "clean": "It finishes the motion it was in, and then it is a body.",
+   "aggressorKind": "driven",
+   "_authored_20260829": "⛔ ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED — we've moved past that original idea, IT CAN HURT UNDEAD NOW.' ⚠️ THE RULING NEEDED A CREATURE OR IT WAS THEORETICAL: the bestiary had 26 entries and NOT ONE UNDEAD, so §48's whole undeath model had nothing to run on. ✅ THIS ENTRY CARRIES BOTH HALVES OF THE INVERSION AND NEEDS NO NEW MACHINERY: `decay: absorb` (already works — absorb returns negative damage, so rot mends it) and `vitality: vulnerable` (works NOW, because healing crafts carry a type as of today). ⛔ A `heal` lands on it through the ordinary damage path and hurts. ⚠️ `feeling: immune` IS THE SAME BLIND SPOT `break_the_line` AND `the_known_name` DECLARE — nothing without a self can be frightened, which is why a Marcher's terror and an Ashwarden's driven dead are natural counters to each other. ⛔ NARROWED, NOT AN AFTERLING: the design laws exclude persons from the bestiary, and an Afterling is a person. This is the end state that ISN'T."
   }
  ]
 }

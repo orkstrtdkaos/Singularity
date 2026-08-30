@@ -764,7 +764,8 @@
     "plus": 0,
     "note": "RESTORE→healing at T-I default. But radiant's healing is SLOW COMFORT, not battlefield mending — see bounds",
     "area": 1,
-    "duration": 4
+    "duration": 4,
+    "damageType": "vitality"
    },
    "rankDeltas": [
     {
@@ -806,7 +807,8 @@
    ],
    "plainly": "A survive action that restores health. It rolls 1d4, and lasts for about 4 hours Ranks: rank 2 extends area; rank 3 deepens healing. Limit: the plants' Debt IS Real — an early crop is a smaller one.",
    "_powerSystemWas": "radiant",
-   "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
   },
   {
    "id": "afterimage",
@@ -1472,7 +1474,8 @@
      "d": 4
     },
     "plus": 3,
-    "note": "T-III on the healing shape: tierLadder nMult 3, plus 3. r1: close a bleeding wound clean with light-cautery, purge infection with far less scarring"
+    "note": "T-III on the healing shape: tierLadder nMult 3, plus 3. r1: close a bleeding wound clean with light-cautery, purge infection with far less scarring",
+    "damageType": "vitality"
    },
    "rankDeltas": [
     {
@@ -1530,7 +1533,8 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "radiant",
-   "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
   },
   {
    "id": "prism_ward",

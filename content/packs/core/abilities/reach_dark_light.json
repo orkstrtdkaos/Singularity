@@ -1123,7 +1123,8 @@
     "requiresPoles": [
      "umbral",
      "blazeborn"
-    ]
+    ],
+    "damageType": "vitality"
    },
    "rankDeltas": [
     {
@@ -1152,7 +1153,8 @@
    "_descriptionWas": "The braid-craft: a concealed place filled with restoring radiance — shelter and healing woven from opposite poles.",
    "_nameWas": "The Harbored Flame",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A BRAID IS BY DEFINITION MORE THAN ONE SOURCE.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A BRAID IS BY DEFINITION MORE THAN ONE SOURCE.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
   },
   {
    "id": "shroud",
@@ -1679,7 +1681,8 @@
      "d": 4
     },
     "plus": 1,
-    "note": "CONDITIONAL healing — it works BETTER in true darkness. The +1 assumes the condition is met; in light it is worse than an ordinary mend."
+    "note": "CONDITIONAL healing — it works BETTER in true darkness. The +1 assumes the condition is met; in light it is worse than an ordinary mend.",
+    "damageType": "vitality"
    },
    "rankDeltas": [
     {
@@ -1716,7 +1719,8 @@
    "_idWas": "the_shadowed_mending",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT AGAIN — empty `notFor`, off-vocabulary challengeTypes ['medical', 'survival', 'hardship'], energy e2 below band, ALL THREE TOGETHER. ⛔ Fifth tradition where the same three appear on the same crafts; it identifies a BATCH, not a sloppy author."
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT AGAIN — empty `notFor`, off-vocabulary challengeTypes ['medical', 'survival', 'hardship'], energy e2 below band, ALL THREE TOGETHER. ⛔ Fifth tradition where the same three appear on the same crafts; it identifies a BATCH, not a sloppy author.",
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
   },
   {
    "id": "shadow_work",
@@ -2064,7 +2068,8 @@
     },
     "plus": 0,
     "magnitude": 2,
-    "note": "heals on the T-II ladder; the purge is the craft's second axis"
+    "note": "heals on the T-II ladder; the purge is the craft's second axis",
+    "damageType": "vitality"
    },
    "rankDeltas": [
     {
@@ -2099,7 +2104,8 @@
    "_idWas": "the_cleansing_light",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['medical', 'magical', 'craft'], and e2 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy."
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['medical', 'magical', 'craft'], and e2 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy.",
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
   },
   {
    "id": "blaze_wall",

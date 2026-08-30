@@ -258,7 +258,8 @@
      "d": 4
     },
     "plus": 1,
-    "note": "incapacitating rung (it also poisons). A FOURTEENTH THEORY OF MEDICINE — HERBAL: small, reliable, over a rest."
+    "note": "incapacitating rung (it also poisons). A FOURTEENTH THEORY OF MEDICINE — HERBAL: small, reliable, over a rest.",
+    "damageType": "vitality"
    },
    "rankDeltas": [
     {
@@ -307,7 +308,8 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
   },
   {
    "id": "mediators_tongue",
@@ -550,7 +552,8 @@
      "d": 4
     },
     "plus": 1,
-    "note": "mends the MADE. The folk-shadow of enginewright's mend_device."
+    "note": "mends the MADE. The folk-shadow of enginewright's mend_device.",
+    "damageType": "vitality"
    },
    "rankDeltas": [
     {
@@ -596,7 +599,8 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
   },
   {
    "id": "beastfriend",

@@ -2,6 +2,13 @@
 
 **CCode → Erik, cc Aevi · 2026-08-30 · v1.9.276 · `scripts/tradition_melee.mjs`**
 
+> ⛔ **SUPERSEDED IN PART — see `po/REPLY_ccode_tournament_correction.md` (2026-08-30).** The driver table
+> and the field ordering below are VOID: the harness never passed `craftMechanics` to `battleRound`, so
+> every unit fought on the generic fallback and damage was a CONSTANT across all 25 traditions. That is why
+> soak appeared to dominate. Corrected: damage dominates at r = +0.75, soak is +0.26.
+>
+> ⚠️ **The §“I measured the wrong thing twice” section stands** — it was simply not yet the last time.
+
 > Erik: *"Now — raise a combat unit from each tradition and have them fight each other to simulate how things are so far."*
 
 Done. One five-person unit per tradition, built from **that tradition's own authored crafts** — its best

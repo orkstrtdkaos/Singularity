@@ -41,6 +41,7 @@ working papers; **this is the answer.**
 | 08-28 | ✅ **27 narrative `extend` axes RULED PROSE** | `reach` `persistence` `foresight` `timeReach` have no engine field and say something no field says | ⚠️ marked in-file so nobody "fixes" them to a nearby field | ⛔ `craft_mechanics.operativeAxis` SNG-263 r4 — CCode's own note, NOT an Erik ruling |
 | 08-29 | ✅ **MIND AND BODY AUDIT COMPLETE** | ⛔ somatic **24 → 13**, cogitant **21 → 9**; everything remaining is `r1-deepens` (the first-gift template's own convention, marked DO-NOT-FIX) and one energy judgement | `craft_lint` per tradition · `content_which` · `content_ci` 13 | ⛔ **14 crafts carried a HARM WORD in `intensity`** — `"moderate"`, `"severe"` — from an older schema, so they had **no conserve and no surge** and silently resolved at standard only |
 | 08-29 | ⛔ **I WROTE A NARRATIVE COST AGAIN — SIXTH TIME** | Erik: *"NO on the r3 cost… geezus. COST IS ENERGY!"* ⚠️ I wrote *"people stop touching you, and that is a cost the craft does not measure"* into a `cannot` | ⛔ replaced with a plain scope limit: it answers every hand, including a friend's | ⚠️ **a `cannot` is what the craft WILL NOT DO. Colour goes in narrationHints or nowhere** |
+| 08-29 | ⛔ **I AUTHORED A SECOND SHAPE FOR ONE FIELD — caught checking my own work** |  (a string) when the established shape is ** on the rank node**, used by six crafts | ⚠️ moved to the rank nodes; the erroneous -level declaration removed from the schema | ⛔ **the exact object-vs-scalar split I flagged to CCode a week ago, authored by me.** Found only because the field showed TWO schema entries and I checked whether that was a duplicate |
 | 08-29 | ⛔ **THERE IS NO VOID DAMAGE TYPE, AND THAT IS THE CHARACTERISATION** | Erik, asked whether the void needs one: *"borrowing from everyone else seems to fit… THE VOID IS NOTHING… so they seek the Veil, and what everyone else has"* | — recorded in `damage_families` as a DO-NOT-ADD | ⛔ **`shadow` is PHYSICS opposite `radiance` because shadow is OPTICAL. The void preceded optics, and NOTHING DOES NOT HARM.** ⚠️ So every Unlit craft is typed with somebody else's damage — `truth`, `abstraction`, `corrosive` — and **a people whose principle is absence must take their means from somewhere** |
 | 08-29 | ✅ **two dead types cleared — 9 crafts migrated** | ⛔ **both rulings had been MADE AND NEVER EXECUTED**: `light`→`radiance` (ruled 08-28) and `precursor` is a METHOD not a type | `content_which` · `content_ci` 13 | ⚠️ **the 7 `precursor` crafts have NO DICE — they confirm the ruling by dealing no damage at all.** Found only because removing the types from `damage_types.json` exposed the carriers |
 | 08-29 | ⛔ **`cast_twin` — AUTHORED FROM PLAY, AND IT CORRECTED MY GAP REPORT** | Erik: *"the shadow twin was born of THE MADE THING AND SHADOW WORK… we should have a shadow summon skill"* | ⚠️ the combination was discovered at the table and had **no craft under it** — it existed only as an item grant on an L29 rune-bound spear | ⛔ **I had argued `summon` was REFUSED by this tradition. Silas has been summoning a shadow duplicate of his own weapon for weeks** |
@@ -256,6 +257,19 @@ the mix.**
 | **intrinsic** | ⛔ harm that requires a WILL to make it — *a rockfall cannot do this* | `feeling` `appetite` `judgement` · `psychic` `abstraction` `truth` `deception` |
 
 ⚠️ **Elemental types are SIBLINGS, not opposites.** A ward against fire is not a ward against ice.
+
+⛔ **THERE IS NO `void` OR `dark` TYPE, AND THERE WILL NOT BE ONE — DO NOT ADD IT.** *(Erik, 2026-08-29.)*
+**`shadow` is in PHYSICS opposite `radiance` because shadow is OPTICAL — the child of light's arrival.**
+⚠️ **The void preceded phenomena, and NOTHING DOES NOT HARM.** ⛔ **So the Unlit, whose whole principle is
+absence, have no damage of their own and type every craft with somebody else's** — `truth`, `abstraction`,
+`corrosive`. **A people whose principle is absence must take their means from somewhere, and that is why
+they reach across the Veil.** ✅ **The gap is the characterisation. Filling it would give them exactly what
+their cosmology says they do not have.**
+
+⛔ **`precursor` IS A METHOD, NOT A TYPE.** Seven crafts carried `damageType: precursor` after the ruling
+and **all seven have no dice at all** — they confirmed it by dealing no damage. ⚠️ Field removed 2026-08-29;
+**`light` migrated to `radiance` the same day, one day after that rename was ruled.** ⛔ **Both rulings had
+been MADE AND NEVER EXECUTED, and a vocabulary entry keeps a dead ruling looking alive.**
 
 **HEALING IS NOT A TYPE.** It is an effect, and the source type decides who it mends.
 

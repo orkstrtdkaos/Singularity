@@ -4619,12 +4619,12 @@
     "duration": 6,
     "targets": 1,
     "damageType": "corrosive",
-    "ongoingHarm": "corrosive",
     "crit": {
      "success": "It is mistaken for an illness that is going around, and someone else is blamed for the water.",
      "failure": "They taste it, say nothing, and finish the cup while watching you."
     },
-    "note": "damage/ongoing. ⛔ ERIK 2026-08-29: 'also you'd find POISONS here… maybe a CORROSIVE.' ⚠️ `corrosive`, ELEMENTAL family — and it gives the type a second carrier: it was in `shaped_body`'s ward list and almost nothing dealt it. ⛔ THE SLOWNESS IS THE MECHANIC, NOT A LIMITATION: a poison that kills in the room is a murder with witnesses; this is what a people who cannot walk in daylight use instead."
+    "note": "damage/ongoing. ⛔ ERIK 2026-08-29: 'also you'd find POISONS here… maybe a CORROSIVE.' ⚠️ `corrosive`, ELEMENTAL family — and it gives the type a second carrier: it was in `shaped_body`'s ward list and almost nothing dealt it. ⛔ THE SLOWNESS IS THE MECHANIC, NOT A LIMITATION: a poison that kills in the room is a murder with witnesses; this is what a people who cannot walk in daylight use instead.",
+    "_ongoingHarmShape": "⛔ CORRECTED 2026-08-29 while checking my own work against the schema. I authored `mechanic.ongoingHarm: \"corrosive\"` — A STRING, IN THE WRONG SCOPE. ⚠️ THE ESTABLISHED SHAPE IS `tree[].ongoingHarm: {type}` ON THE RANK NODE, used by six crafts (`stopped_breath`, `drowning_deep`, `answered_motion`, `sustained_regard`, `grief_strike`). ⛔ MY VERSION WOULD HAVE BEEN A SECOND SHAPE FOR ONE IDEA — the exact split I flagged to CCode a week ago, authored by me. ⚠️ Found only because the field showed TWO schema entries and I checked whether that was a duplicate."
    },
    "tree": [
     {
@@ -4638,7 +4638,10 @@
      "harmRung": "lethal",
      "gainAxes": [],
      "grants": "⛔ PREPARE A WORKING POISON — 2d6 CORROSIVE when it lands, and it returns each day until treated. ⚠️ In a cup, on an edge, or in the air of a closed room.",
-     "cannot": "It must get inside them. ⚠️ A careful drinker tastes it. ⛔ And it takes real time to prepare."
+     "cannot": "It must get inside them. ⚠️ A careful drinker tastes it. ⛔ And it takes real time to prepare.",
+     "ongoingHarm": {
+      "type": "corrosive"
+     }
     },
     {
      "rank": 2,
@@ -4655,7 +4658,10 @@
       "duration"
      ],
      "grants": "⛔ TASTELESS, AND THE ONSET MOVES TO DAYS — they will be somewhere else, doing something else, when it starts. ⚠️ Nobody connects the cup to the collapse.",
-     "cannot": "⚠️ Days of delay is days of them being elsewhere, including out of your reach. ⛔ A physician still helps."
+     "cannot": "⚠️ Days of delay is days of them being elsewhere, including out of your reach. ⛔ A physician still helps.",
+     "ongoingHarm": {
+      "type": "corrosive"
+     }
     },
     {
      "rank": 3,
@@ -4672,7 +4678,10 @@
       "duration"
      ],
      "grants": "⛔ IT STOPS BEING A POISON AND BECOMES A CONDITION — it does not purge, it must be TREATED over weeks, and it takes something with it. ⚠️ People will say he was never well after that winter.",
-     "cannot": "⛔ It is unmistakably deliberate at this rank — nobody thinks a wasting like this is bad luck. ⚠️ And it is slow enough that the target has time to work out who did it."
+     "cannot": "⛔ It is unmistakably deliberate at this rank — nobody thinks a wasting like this is bad luck. ⚠️ And it is slow enough that the target has time to work out who did it.",
+     "ongoingHarm": {
+      "type": "corrosive"
+     }
     }
    ],
    "_authored": "⛔ ERIK 2026-08-29: 'also you'd find POISONS here… maybe a corrosive.' ⚠️ It fits the Unlit precisely: a people who cannot operate in daylight need harm that ARRIVES LATER AND ELSEWHERE.",

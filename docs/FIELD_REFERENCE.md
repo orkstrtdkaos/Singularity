@@ -496,8 +496,8 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `obscure` | 16 | `root`×16 | ✅ READ | `skill_battle.js` |
 | `variance` | 15 | `mechanic`×15 | ✅ READ | `craftmechanics.js`, `app.js` |
 | `area` | 14 | `mechanic`×14 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
+| `ongoingHarm` | 14 | `tree`×14 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `sectFlavour` | 12 | `root`×12 | ⛔ DARK | — |
-| `ongoingHarm` | 12 | `tree`×11 `mechanic`×1 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `damageMix` | 8 | `mechanic`×8 | ✅ READ | `damagetypes.js` |
 | `powerMix` | 8 | `root`×8 | ⛔ DARK | — |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |

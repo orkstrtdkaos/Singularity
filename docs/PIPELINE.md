@@ -56,7 +56,7 @@ measuring across every craft that needs a pick.**
 
 ---
 
-## ⛔ THE FOURTEEN RULES THAT MAKE IT WORK
+## ⛔ THE FIFTEEN RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
 
@@ -343,6 +343,28 @@ the wrong cost. The cost is energy, scope, or control.**
 ⬜ **AND "DOES NOT SORT" IS THE TELL** — that phrase, in any form, is this habit. **12 pre-existing crafts
 carry it and are logged for a possible friendly-fire FEATURE** (`po/BACKLOG.md`) rather than silently
 rewritten, because Erik sees the potential and an imposed version is the thing he objects to.
+
+### 15. ⛔ BROADEN AND SCHOOL THE TRADITION **BEFORE** AUTHORING ANY CRAFT FOR IT
+
+**Added 2026-08-30. Erik: *"You forgot to do the broadening and schools first."***
+
+⚠️ **On Seraphic I read one place, found a gap, and authored a craft — skipping the step that made the Life
+audit work.** ⛔ **And the step would have found more than the craft did:** `THE VESSEL-KEEPERS` is an
+authored MODE — *"continuity work; the long-lived, and how they stay that way"* — with **0 of 14 crafts
+touching it.** A named school with nothing in it, and I would have missed it entirely.
+
+**THE ORDER, and it is not negotiable:**
+
+1. ⛔ **BROADEN** — what does this domain actually cover? Life was authored as PLANTS and means animals,
+   fungi and bacteria too. **Measure subject coverage before assuming the crafts describe the domain.**
+2. ⛔ **SCHOOLS** — and check `distribution.modes` and `tail` FIRST; they are usually already authored and
+   I have twice invented schools that were sitting in the file.
+3. ⚠️ **THEN the gaps**, which are now gaps *in a school* rather than gaps in a verb list.
+4. ✅ **THEN author.**
+
+⛔ **AUTHORING FIRST PRODUCES A GOOD CRAFT IN THE WRONG PLACE.** `carried_weight` is right and it is
+Mercy's — but I found it by reading one building, and the school it belongs to only existed after Erik
+sent me back.
 
 ---
 

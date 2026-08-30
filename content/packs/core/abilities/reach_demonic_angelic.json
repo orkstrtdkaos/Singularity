@@ -4437,9 +4437,9 @@
     "soothe"
    ],
    "description": "⛔ TAKE A THING OFF SOMEONE AND CARRY IT YOURSELF. Guilt, grief, a debt of conscience, the specific weight of a specific act — lifted, genuinely and permanently. ⚠️ AND IT DOES NOT GO ANYWHERE: A SERAPH WHO GRANTS MERCY CARRIES WHAT THEY LIFTED. ⛔ The Mercy-House is full of people who have taken on other people's worst things and are still standing, which is the Order's whole argument about itself.",
-   "narrationHints": "He stops mid-sentence, and whatever he was about to confess is no longer in him to confess. ⚠️ She does not say anything. ⛔ She looks, for a moment, like a person who has just picked something up.",
+   "narrationHints": "He stops mid-sentence, and whatever he was about to confess is no longer in him to confess. ⚠️ She does not say anything. ⛔ The Mercy-House is full of Order-bearers who have done this often, and you can tell which ones by looking at them — WHICH IS NARRATION, NOT A COST.",
    "notFor": "⛔ IT LIFTS WHAT A PERSON CARRIES, NOT WHAT THEY DID — the act stands, the consequences stand, and anyone owed is still owed. ⚠️ AND IT MUST BE ACCEPTED: mercy taken from someone who did not ask for it is `the sentence` wearing a kinder face, and the Orders know the difference exactly. ⛔ IT CLOSES NO WOUND AND CURES NOTHING — this is weight, not injury.",
-   "plainly": "A social/survive action. ⛔ LIFT A THING SOMEONE IS CARRYING — guilt, grief, a conscience-debt — permanently, and CARRY IT YOURSELF from then on. Rated 5, one person. r2 lifts several or something very old; r3 lifts what a person could not have survived carrying, and the Seraph carries that too. ⚠️ It must be accepted. ⛔ The act stands and the debts stand — only the weight moves.",
+   "plainly": "A social/survive action. ⛔ LIFT A THING SOMEONE IS CARRYING — guilt, grief, a conscience-debt — permanently. Rated 5, one person. r2 lifts several or something very old; r3 lifts what a person could not have survived carrying. ⚠️ It must be accepted. ⛔ The act stands and the debts stand — only the weight moves.",
    "intensity": {
     "conserve": "a corner of it — they are lighter and they still know what they did",
     "surge": "⛔ TAKE ALL OF IT AT ONCE; you will be carrying it before they have finished thanking you"
@@ -4450,15 +4450,15 @@
      "class": "hard"
     },
     {
-     "text": "⛔ THE WEIGHT MOVES; IT DOES NOT VANISH. You carry it, and you keep carrying it",
-     "class": "hard"
-    },
-    {
-     "text": "⚠️ THE ACT STANDS. Nothing is undone, nobody is repaid, and the law is unmoved",
+     "text": "⛔ IT LIFTS WHAT A PERSON CARRIES, NOT WHAT THEY DID — the act stands, the debts stand, the law is unmoved",
      "class": "hard"
     },
     {
      "text": "⚠️ IT MENDS NO BODY — this is weight, not injury",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ ONE PERSON AT A TIME AT r1, and it takes the whole of your attention while it lands",
      "class": "hard"
     }
    ],
@@ -4471,7 +4471,8 @@
      "success": "They are lighter than they have been in years and do not immediately understand why.",
      "failure": "You take it and they keep it — now there are two people carrying the same thing."
     },
-    "note": "healing. ⛔ THE TRADITION HAD A BUILDING FOR A CRAFT IT DID NOT HAVE. `the_mercy_house` is authored: 'where the Orders take weight off people — genuinely, permanently, AT REAL COST TO THE ONE WHO LIFTS IT. A SERAPH WHO GRANTS MERCY CARRIES WHAT THEY LIFTED.' ⚠️ AND `heal` AND `soothe` WERE BOTH ABSENT FROM THE ONLY TRADITION WHOSE LOCUS IS MERCY. ✅ `vitality` type — VITAL, the giving direction, the same type `last_gift` and the Rootkin healers carry. ⛔ THE COST IS NOT A PENALTY I INVENTED: it is the authored place's own sentence, and it is a cost that lands on the WIELDER by their own choice, which is the one shape Erik has not ruled against."
+    "note": "healing. ⛔ THE TRADITION HAD A BUILDING FOR A CRAFT IT DID NOT HAVE. `the_mercy_house` is authored: 'where the Orders take weight off people — genuinely, permanently, AT REAL COST TO THE ONE WHO LIFTS IT. A SERAPH WHO GRANTS MERCY CARRIES WHAT THEY LIFTED.' ⚠️ AND `heal` AND `soothe` WERE BOTH ABSENT FROM THE ONLY TRADITION WHOSE LOCUS IS MERCY. ✅ `vitality` type — VITAL, the giving direction, the same type `last_gift` and the Rootkin healers carry. ⛔ THE COST IS NOT A PENALTY I INVENTED: it is the authored place's own sentence, and it is a cost that lands on the WIELDER by their own choice, which is the one shape Erik has not ruled against.",
+    "_burdenIsNarration_20260830": "⛔ ERIK 2026-08-30: 'LEAVE THE BURDEN TO THE NARRATION.' ⚠️ I HAD AUTHORED 'the weight moves; it does not vanish. YOU CARRY IT, AND YOU KEEP CARRYING IT' AS A HARD BOUND — a narrative debt in a bounds block, which is the SEVENTH time I have done this and the rule is 'COST IS ENERGY'. ⛔ AND I DEFENDED IT IN CHAT as 'the one cost-shape Erik has not ruled against', which was me arguing for my own writing rather than checking it against the standing rule. ✅ THE CARRYING IS REAL AND IT LIVES IN narrationHints AND IN THE AUTHORED PLACE — the Mercy-House is full of people who have taken on other people's worst things. ⚠️ THAT IS WHAT A GM NARRATES. It is not a mechanic and it must not price the craft."
    },
    "tree": [
     {
@@ -4484,7 +4485,7 @@
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [],
-     "grants": "⛔ LIFT ONE THING A PERSON IS CARRYING AND CARRY IT INSTEAD — permanently, for both of you. ⚠️ They are lighter. You are not.",
+     "grants": "⛔ LIFT ONE THING A PERSON IS CARRYING — guilt, grief, a debt of conscience — genuinely and permanently. ⚠️ They are lighter, and they still know exactly what they did.",
      "cannot": "It must be accepted. ⛔ The act stands and the debts stand. ⚠️ And it closes no wound."
     },
     {
@@ -4502,7 +4503,7 @@
       "quality"
      ],
      "grants": "⛔ SEVERAL AT ONCE, OR ONE THING SO OLD THEY HAVE STOPPED NOTICING IT — a thirty-year weight lifted in an afternoon. ⚠️ This is what the Mercy-House does on an ordinary day.",
-     "cannot": "⚠️ You carry all of it. ⛔ And several at once is several at once, for the rest of your life."
+     "cannot": "⚠️ Several at once takes correspondingly longer. ⛔ And an old weight is often welded to something the person still needs."
     },
     {
      "rank": 3,
@@ -4518,7 +4519,7 @@
       "quality",
       "duration"
      ],
-     "grants": "⛔ LIFT WHAT A PERSON COULD NOT HAVE SURVIVED CARRYING — the thing that was going to kill them, taken off entirely. ⚠️ AND THE SERAPH CARRIES THAT TOO. The Orders are loved for this rank and it is why their old are the way they are.",
+     "grants": "⛔ LIFT WHAT A PERSON COULD NOT HAVE SURVIVED CARRYING — the thing that was going to kill them, taken off entirely. ⚠️ The Orders are loved for this rank, and it is why the Mercy-House exists.",
      "cannot": "⛔ IT STILL MUST BE ACCEPTED, AND SOME REFUSE — a person who believes they should carry it is not wrong, and the Orders do not argue. ⚠️ And nothing about it is undone."
     }
    ],

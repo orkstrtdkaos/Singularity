@@ -243,8 +243,11 @@ working papers; **this is the answer.**
 | 08-30 | ✅ **and backlog P3 fell out for free** | *heal → decay on an undead* was **blocked, not hard**: nothing could aim a heal at the undead thing | gated: mending `the_narrowed` deals **−21, `inverted`** | ✅ **NO UNDEAD FLAG.** 25 healing crafts are typed `vitality` and the creature is authored `vitality: vulnerable` — **the inversion falls out of what it already says about itself** |
 | 08-30 | ⚠️ **`tensionBound` renamed `tensionNote`** | Erik: *"I don't want to add too much to a braid… what is tension bound?"* | — | ⛔ **I named it wrong**: in this codebase a *bound* is a LIMIT (`notFor`, `cannot`). **It is one sentence of prose**, not a restriction — the real mechanic is the cost |
 | 08-30 | ✅ **and the ring survives CONSOLIDATION** | Erik: *"we intend to absorb some into fewer traditions"* | tested on a simulated 8-tradition ring: opposite still reads **antipodal** | ✅ antipodal is **the ring's own maximum**, derived from `size`, never a hardcoded 12 |
+| 08-30 | ⛔ **`heroSwingCap` IS LEVEL-BLIND — Aevi was right to ask** | she flagged that my *“do not raise it”* was measured against a **level-20 ceiling** Erik removed the same week | measured: 400v400, a level-20 hero and a **level-95 Mythical bend the tide by the SAME 0.12** | ⛔ `heroSwing` is clamped before the hero's power is consulted, so **at the top of the ladder being a Mythical buys nothing at legion scale**. Needs a ruling, not a fix |
+| 08-30 | ✅ **and one thing I checked that was FINE** | `personalRisk = max(floor, 0.5 − tide)` looked backwards — a hero who bends the battle more is SAFER | read the formula | ✅ **correct**: a winning side is a safer place to stand, and Erik's `legionFloorRisk` 0.12 means never *safe*. Checked before reporting it |
+| 08-30 | ⚠️ **`braidTension` un-exported** | `wiring_audit` flagged it the moment I shipped it — only `buildBraidDef` needs it | narrowing the surface | ⛔ the `registry:internal` marker would have HIDDEN it; narrowing REMOVES it |
 
-**Last verified: 2026-08-28 · v1.9.268 · 400 crafts.**
+**Last verified: 2026-08-28 · v1.9.269 · 400 crafts.**
 
 ---
 

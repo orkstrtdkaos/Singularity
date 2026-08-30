@@ -115,7 +115,11 @@ export function braidTier(character, components, catalog = {}) { // registry:int
  *
  *  ⚠️ WITHOUT A TRADITION INDEX THIS RETURNS null AND NOTHING CHANGES. Absent is not zero: a caller that
  *  has not adopted the read mints exactly the braid it minted yesterday. */
-export function braidTension(sources = [], { traditionIndex = null, bands = null } = {}) {
+// ⚠️ NOT EXPORTED. Only `buildBraidDef` needs it, and `wiring_audit` correctly flagged it as reachable
+// from nothing else. Narrowing the surface REMOVES an unreachable export; the `registry:internal` marker
+// would only have HIDDEN it, and the audit's own header says that marker must never be used to make a
+// number go down.
+function braidTension(sources = [], { traditionIndex = null, bands = null } = {}) {
   if (!traditionIndex || (sources || []).length !== 2) return null;
   const a = sources[0]?.tradition || sources[0]?.powerSystem;
   const b = sources[1]?.tradition || sources[1]?.powerSystem;

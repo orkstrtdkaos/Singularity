@@ -474,7 +474,7 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `scope` | 141 | `mechanic`×141 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `app.js` |
 | `targets` | 129 | `mechanic`×129 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `gated` | 108 | `root`×108 | ✅ READ | `borncontract.js`, `generate.js`, `gm_registry.js` |
-| `dice` | 83 | `mechanic`×83 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
+| `dice` | 82 | `mechanic`×82 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
 | `crit` | 79 | `mechanic`×79 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
 | `range` | 79 | `mechanic`×79 | ✅ READ | `capabilities.js`, `craftmechanics.js` |
 | `plus` | 72 | `mechanic`×72 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
@@ -498,7 +498,7 @@ the next field of this shape gets the right name at authoring time**, which is t
 | `area` | 14 | `mechanic`×14 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
 | `ongoingHarm` | 14 | `tree`×14 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `sectFlavour` | 12 | `root`×12 | ⛔ DARK | — |
-| `damageMix` | 10 | `mechanic`×10 | ✅ READ | `damagetypes.js` |
+| `damageMix` | 9 | `mechanic`×9 | ✅ READ | `damagetypes.js` |
 | `powerMix` | 8 | `root`×8 | ⛔ DARK | — |
 | `interceptDamage` | 8 | `tree`×8 | ✅ READ | `intercept.js`, `app.js` |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |

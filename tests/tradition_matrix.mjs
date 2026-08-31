@@ -49,7 +49,15 @@ for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x
 }
 // `valley_craft` is the universal folk kit everyone can reach, not a people — it is the CONTROL row, not a
 // tradition under test. `precursor`/`cross_pole_braid` are late/cross-tradition sets, not a starting path.
-const CONTROL = "valley_craft";
+// ⛔ THE CONTROL IS DERIVED, NOT NAMED. This read `valley_craft`, and on 2026-08-31 Aevi RETIRED that
+// tradition into its parents — 18 crafts reassigned, zero left carrying it. The control row's kit went to
+// zero and this gate failed for a reason that had nothing to do with what it tests.
+//
+// ⚠️ THE CLAIM WAS NEVER ABOUT VALLEY_CRAFT. It is "the universal folk kit everyone can reach is not a
+// people, so it is the control row rather than a tradition under test". Any folk kit serves. The merger
+// will retire more of these, so the fixture asks the corpus which folk kit still HAS crafts.
+const FOLK_KINDS = new Set(["valley_craft", "harmonic", "radiant_folk"]);
+const CONTROL = [...FOLK_KINDS].filter(t => (byTradition[t] || []).length).sort()[0] || null;
 const UNDER_TEST = Object.keys(byTradition).filter(t => !["valley_craft", "precursor", "cross_pole_braid"].includes(t)).sort();
 
 const LEVELS = [5, 12, 20];
@@ -272,9 +280,14 @@ console.log(`      INERT PAIRS (cancel in the margin ⇒ no effect): ${inert.len
 
 // ---------- THE GATES (structural truths no design intent excuses) ----------
 console.log("");
+// ⚠️ THE DETAIL MUST COVER EVERYTHING THE ASSERTION COVERS. This asserted over UNDER_TEST **and**
+// CONTROL while listing only UNDER_TEST — so when the CONTROL was the offender the failure printed an
+// EMPTY NAME and could not say what was wrong. ⛔ A GATE THAT FAILS WITHOUT NAMING ITS CAUSE costs more
+// than it saves; it sends whoever reads it hunting.
+const KIT_ROWS = [...UNDER_TEST, ...(CONTROL ? [CONTROL] : [])];
 check("every tradition has a USABLE KIT at every level — nobody picks a people and has nothing to do",
-  [...UNDER_TEST, CONTROL].every(t => LEVELS.every(l => results[t].bands[l].kitSize > 0)),
-  [...UNDER_TEST].filter(t => LEVELS.some(l => results[t].bands[l].kitSize === 0)).join(", ") + " have an empty kit at some level");
+  KIT_ROWS.every(t => LEVELS.every(l => results[t].bands[l].kitSize > 0)),
+  KIT_ROWS.filter(t => LEVELS.some(l => results[t].bands[l].kitSize === 0)).join(", ") + " have an empty kit at some level");
 
 check("every tradition's kit resolves to at least one FUNCTION FAMILY — a kit that engages nothing is the SNG-250 §3 hollow-skill failure at scale",
   [...UNDER_TEST].every(t => LEVELS.every(l => results[t].bands[l].families.length > 0)),

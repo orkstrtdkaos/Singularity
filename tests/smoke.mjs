@@ -17364,7 +17364,13 @@ await (async () => {
     const ps221 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/power_sources.json"), "utf8"));
     const fh221 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/foothills.json"), "utf8"));
     const noSchool = { name: "a practitioner who has chosen nothing", domains: {} };
+    // ⚠️ A FIXTURE THAT THE CORPUS CAN RETIRE. `valley_craft` was retired into its parents on
+    // 2026-08-31, so `find(a => a.tradition === "valley_craft")` returns undefined and every check below
+    // graded `craftSource(undefined)`. The claim — a FOOTHILL computes its source from its parents
+    // instead of storing one — is unchanged and still worth proving; it just needs a foothill that has
+    // crafts. ⛔ THE MERGER WILL RETIRE MORE OF THESE, so the gate asks rather than assumes.
     const craftIn = (t) => Object.values(C199.abilities || {}).find(a => a.tradition === t);
+    const liveFoothill = ["valley_craft", "harmonic", "radiant_folk"].find(t => craftIn(t));
     const srcOf = (t) => SU.craftSource(craftIn(t), noSchool, C199.schools, ps221, fh221);
 
     // ⛔ A PURE SCHOOL KEEPS ITS TRADITION'S SOURCE — the comment in substrate.js said so and the code
@@ -17380,8 +17386,23 @@ await (async () => {
     check("CCODE-221: a foothill computes its source from its parents (harmonic's tie → combination)",
       srcOf("harmonic")?.source === "combination" && srcOf("harmonic")?.via === "foothill",
       JSON.stringify(srcOf("harmonic")));
-    check("CCODE-221: valley_craft — the first crafts a player holds — resolves a ground card",
-      srcOf("valley_craft")?.source === "metaphysical", JSON.stringify(srcOf("valley_craft")));
+    // ⚠️ THE CLAIM IS `via: "foothill"` WITH A COMPUTED SOURCE — not any particular source. My first
+    // repair asserted `=== "metaphysical"`, which was valley_craft's OWN answer (its parents are stillhold
+    // 0.4 metaphysical, wright 0.3 precursor, rootkin 0.3 wild_nanite, so metaphysical carried the weight).
+    // ⛔ HARMONIC COMPUTES `combination` AND RADIANT_FOLK COMPUTES `precursor`, and both are CORRECT.
+    // Hardcoding one foothill's result is the same fixture-coupling the derivation above was meant to end —
+    // I fixed the fixture and left the expected VALUE pinned to the fixture I removed.
+    const fhSrc = liveFoothill ? srcOf(liveFoothill) : null;
+    check(`CCODE-221: a FOOTHILL (${liveFoothill || "none live"}) resolves its ground from PARENTS rather than a stored row`,
+      !!fhSrc && fhSrc.via === "foothill" && !!fhSrc.source,
+      JSON.stringify(fhSrc));
+    // ⛔ AND IT IS A REAL COMPUTATION, not a constant: two foothills must not be forced to agree.
+    const fhAll = ["valley_craft", "harmonic", "radiant_folk"].map(t => craftIn(t) && srcOf(t)).filter(Boolean);
+    check("CCODE-221: …and different foothills reach different grounds — parents actually decide it",
+      new Set(fhAll.map(r => r.source)).size >= 2 || fhAll.length < 2,
+      fhAll.map(r => r.source).join(", "));
+    // ⛔ NON-VACUITY: if every foothill is retired this must fail rather than pass by finding nothing.
+    check("CCODE-221: …and at least one foothill still HAS crafts to resolve", !!liveFoothill);
 
     // ⛔ DEFERRED IS NOT STALE. Erik deferred abyssal to its own audit; the row carries `primary: null` and
     // the card must DECLINE rather than answer from parents that are not its parents.
@@ -20996,23 +21017,29 @@ await (async () => {
       Object.keys(doc.traditions || {}).length > 20 && Object.keys(doc.powerSystems || {}).length >= 1,
       `traditions ${Object.keys(doc.traditions || {}).length}, powerSystems ${Object.keys(doc.powerSystems || {}).length}`);
     const rl = abilities.find(a => /radiant lance/i.test(a.name || ""));
-    const vc = abilities.find(a => a.tradition === "valley_craft");
     const br = abilities.find(a => a.tradition === "cross_pole_braid");
-    const rk = abilities.find(a => a.tradition === "rootkin");
+    // ⛔ THE SAMPLE IS DERIVED. This named rootkin, radiant_folk and valley_craft, and on 2026-08-31
+    // valley_craft was RETIRED into its parents — `find(a => a.tradition === "valley_craft")` returned
+    // undefined and the gate failed on a fixture rather than on its claim. Third time in one commit that a
+    // retired tradition broke a gate that was not about it.
+    //
+    // ⚠️ THE CLAIM IS GENERAL: every craft whose PEOPLE has an authored palette must reach THAT palette.
+    // Asking the corpus means the merger can retire anything and this still tests the same thing.
+    const peoples = Object.keys(doc.traditions || {});
+    const sample = peoples.map(t => ({ t, ab: abilities.find(a => a.tradition === t) })).filter(x => x.ab);
+    const wrongPalette = sample.filter(x => AR.aestheticFor(x.ab, doc) !== doc.traditions[x.t]);
     check("435 §C3: a people wins where there is one, and the physics answers where there is not",
-      // ⛔ THE ROUTES MOVED AND THE CLAIM DID NOT. CCODE-217 let the ability's own powerSystem win, and
-      // SNG-530 moved radiant/harmonic/valley_craft to `traditions` - so a radiant craft now reaches its
-      // palette as the PEOPLE it belongs to rather than through its file's header. That is the claim this
-      // gate was always making; it had simply been true by a different road.
-      AR.aestheticFor(rk, doc) === doc.traditions.rootkin
-      && AR.aestheticFor(rl, doc) === doc.traditions.radiant_folk
-      && AR.aestheticFor(vc, doc) === doc.traditions.valley_craft
+      wrongPalette.length === 0
       // ⚠️ BY WHAT IT IS, NOT BY WHICH OBJECT. SNG-530 authored the braid palette a SECOND time under
       // `combination` (with an `_alias` note saying why), and that copy is reached first - so an identity
-      // check failed while the picture was correct. The claim is that a braid gets THE braid look, and
-      // that is what this asks.
+      // check failed while the picture was correct. The claim is that a braid gets THE braid look.
       && AR.aestheticFor(br, doc)?.name === doc.powerSystems.braid?.name,
-      "a people wins where there is one; a braid reaches the ONE braid entry rather than being authored per braid");
+      wrongPalette.length ? `${wrongPalette.length} people(s) reach the wrong palette: ${wrongPalette.map(x => x.t).join(", ")}`
+        : "a braid did not reach the ONE braid entry");
+    // ⛔ NON-VACUITY: an empty sample would pass the check above by testing nothing, which is exactly how a
+    // retirement could silently hollow this gate out instead of failing it.
+    check("435 §C3: …and the sample is not empty — peoples with authored palettes still have crafts",
+      sample.length >= 10, `${sample.length} of ${peoples.length} peoples have a live craft`);
     // ⛔ AND TWO COPIES OF ONE PALETTE CAN DRIFT. `braid` and `combination` are the same look under two
     // names - the palette's name and the power source's - and nothing but this stops one of them being
     // edited alone. ⚠️ `_alias` is excluded because it is the note explaining the duplication, and a

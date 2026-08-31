@@ -1714,19 +1714,54 @@ console.log("\n── §31 · domains read, ring derived, braids still cross the
   check("§31E: an off-wheel record returns null rather than a wrong number",
     TR31.ringDistance("harmonic", "umbral", idx) === null);
 
-  /* F — the braids Aevi asked me to gate anyway */
-  // ⚠️ "Build your gate anyway — because it is cheap and it is the thing that would have caught this."
-  // ⛔ EVERY AUTHORED BRAID CLAIMS TENSION IN ITS PROSE. This asserts the geometry still agrees: its two
-  // poles must be genuine antipodes, and they must sit in DIFFERENT domains.
+  /* F — braids: ANY pair, and DISTANCE IS THE PRICE */
+  // ⛔ ERIK 2026-08-31: "for braids… I want to be able to BRAID ANYTHING — not only antipode and different
+  // domains." ⚠️ MY FIRST VERSION OF THIS GATE ASSERTED THE OPPOSITE — that a braid must join true antipodes
+  // in different domains — and it was green, which made it look like a fact about the engine.
+  //
+  // ⛔ IT WAS A RULE I INVENTED FROM THE THREE AUTHORED EXAMPLES. `mintableBraidsFor` restricts on exactly
+  // three things — pairwise, you own both, not already braided — and has NEVER had a tradition, antipode or
+  // domain restriction. The wall lived in the design prose and in my gate, not in the code.
+  //
+  // ⚠️ A GATE THAT ASSERTS A RULE NOBODY IMPLEMENTED IS WORSE THAN NO GATE: it passes, it reads as
+  // confirmation, and it would have blocked the very ruling Erik just made.
+  //
+  // ✅ SO IT NOW ASSERTS WHAT REPLACES THE WALL: any pair may braid, and DISTANCE IS THE COST.
+  const BR31 = await import("../engine/braids.js");
+  const mkc = (trad) => ({ id: trad + "_c", tradition: trad, energyCost: 6, functions: ["strike"], levelReq: 3, name: trad });
+  const costOf = (a, b) => {
+    const cat = { [a + "_c"]: mkc(a), [b + "_c"]: mkc(b) };
+    const def = BR31.buildBraidDef({ abilities: [], practice: {} }, [a + "_c", b + "_c"], cat, { traditionIndex: idx });
+    return def?.energyCost ?? null;
+  };
+  const near = costOf("umbral", "veilwright");     // 1 step
+  const mid = costOf("umbral", "marcher");         // 6 steps
+  const anti = costOf("umbral", "blazeborn");      // 12 steps — antipodal
+  const sameDomainAnti = costOf("horizon", "hourkeeper"); // antipodal AND same domain (Span)
+
+  check("§31F: ANY pair can braid — a same-domain pair mints just like a cross-domain one",
+    sameDomainAnti != null && near != null, `same-domain ${sameDomainAnti}, adjacent ${near}`);
+  // ⛔ THE MECHANIC THAT REPLACES THE RESTRICTION. If this ever flattens, "braid anything" becomes
+  // "braid anything for the same price" and the wheel stops meaning anything.
+  check("§31F: DISTANCE IS THE PRICE — adjacent < far < antipodal, strictly",
+    near < mid && mid < anti, `${near} < ${mid} < ${anti}`);
+  // ⚠️ AND SPAN IS NO LONGER A SPECIAL CASE: its two sects are antipodal, in one domain, and braidable at
+  // the full antipodal price. That is Erik's ruling made mechanical rather than argued.
+  check("§31F: Span’s two sects braid at the full antipodal price — no special case left",
+    sameDomainAnti === anti, `Span ${sameDomainAnti} vs antipodal ${anti}`);
+
+  // ⚠️ THE AUTHORED BRAIDS ARE ANTIPODAL — REPORTED AS A FACT ABOUT THE CATALOGUE, NOT REQUIRED OF IT.
+  // Three braids against twelve axes was the strongest argument in Erik’s ruling: nine axes had a wall and
+  // no door. Counting them is useful; demanding they stay that shape is not.
   const braids = tf31.crossPoleBraids?.abilities || [];
-  const bad = braids.filter(b => {
-    const [x, y] = b.poles || [];
-    return !x || !y || TR31.ringDistance(x, y, idx) !== 12 || TR31.domainOfTradition(x, idx) === TR31.domainOfTradition(y, idx);
-  });
-  check("§31F: every authored braid joins true ANTIPODES in DIFFERENT domains",
-    bad.length === 0, bad.map(b => `${b.id}: ${(b.poles || []).join("+")}`).join(" · "));
+  const antipodal = braids.filter(b => { const [x, y] = b.poles || []; return x && y && TR31.ringDistance(x, y, idx) === 12; });
+  console.log(`note  §31F: ${antipodal.length} of ${braids.length} authored braids join true antipodes; ${braids.length} braids against 12 axes`);
+  check("§31F: every authored braid names two REAL, DISTINCT traditions",
+    braids.every(b => { const [x, y] = b.poles || []; return x && y && x !== y && idx.byId[x] && idx.byId[y]; }),
+    braids.filter(b => { const [x, y] = b.poles || []; return !(x && y && x !== y && idx.byId[x] && idx.byId[y]); }).map(b => b.id).join(", "));
   check("§31F: …and there are braids to check", braids.length >= 3, `${braids.length} braids`);
 }
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

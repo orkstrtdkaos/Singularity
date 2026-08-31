@@ -1186,3 +1186,57 @@ above is the first evidence that a whole verb went that way without anyone notic
 
 ⬜ **`sent_meaning` is flagged by Erik as *"interesting but we'll need to update it"*** — first candidate
 for the narrative look.
+
+---
+
+## ⬜ CHARACTER CREATION REVAMP (Erik + Aevi, 2026-08-31)
+
+**Full spec:** `po/SPEC_starting_grants_and_creation_revamp.md`
+**Status:** `round_2_requested` — CCode measuring current state
+
+### Core goals
+- Fewer starting skills: sense + danger-response + 2 chosen = 4 total (down from 9)
+- Retire baseline kit (`brace`, `strike_basic`, `break_away`, `raise_alarm`) once zero-energy floor built
+- Stat sensitivity: starting pool responds to sub-attribute investment
+- Sub-attribute allocation at creation (not 4 areas — 8 subs directly), with full ladder transparency
+- Background effects fully transparent (affinity in plain language, aptitude with one-line description)
+- Forms expanded beyond Ent; all non-human forms get a kit with explicit pros/cons
+
+### Zero-energy floor (prerequisite — build before retiring baseline kit)
+**Ruled 2026-08-23:** at zero energy, r1 Tier-1 skills fire at conserve intensity with the floor waived.
+Not free for everyone — only when drained, only r1/Tier-1, only conserve. Must be built first.
+⚠️ **29 crafts have `intensity` as bare string** — need conserve entry (small content sweep, Aevi).
+
+### Skill economy changes
+- Level 1: 2 skill points (up from 1), freely spent
+- Cross-class cost: **additive** (Tier + flat penalty), not multiplicative (Tier × 2)
+  ⚠️ Amends Erik's 2026-07-06 ruling — needs explicit sign-off after CCode models curves
+- Mental sub-attribute (insight or reason) → bonus skill points at milestones
+  ⚠️ Which sub and which shape (milestone vs curve) — Erik ruling needed after CCode models
+
+### `folkAccessible` flag
+Ruled 2026-08-31: wire `folkAccessible` to derive Valleyfolk starting pool.
+Retires the buried `_folkNativeGrant_20260830` underscore doc key.
+
+### Open items (full table in spec §4)
+| OI | item | held on |
+|---|---|---|
+| OI-1 | Background id-mismatch bug SNG-272 ship status | CCode confirm |
+| OI-2 | Aptitudes descriptions table | Aevi author |
+| OI-3 | Wits `novelPenalty` milestone (penalty doesn't exist) | Erik ruling |
+| OI-4 | `presence`/`rapport` milestones 14–20 | Holdings model SNG-358 |
+| OI-5 | Minted NPC baseline kit repurpose | Erik ruling |
+| OI-6 | 29 crafts bare-string `intensity` | Aevi sweep |
+| OI-7 | 6 missing sense crafts (syllogist, verist, umbral, veilwright, threnodist, wright) | Domain review first |
+| OI-8 | Non-human form kits | CCode confirm what exists |
+| OI-9 | `folkAccessible` flag wiring | CCode build — ruled |
+| OI-10 | Additive cross-class cost | Erik sign-off after curves |
+| OI-11 | Mental sub → bonus skill points | Erik ruling after curves |
+| OI-12 | Prologue `tags` → permanent attributes — unconfirmed | CCode measure |
+| OI-13 | Describe/Play path attribute timing | CCode measure |
+| OI-14 | Total creation attribute point pool | CCode surface |
+| OI-15 | `backlashRung` wiring — crit failure impact | CCode build |
+
+### Not in this spec
+- Prologue revamp — separate session (Erik directed)
+- Holdings model (SNG-358 dependency)

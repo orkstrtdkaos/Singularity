@@ -2486,7 +2486,7 @@
    ],
    "tradition": "stillhold",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "lethal",
    "shape": "strike",
    "operativeAxis": [
     "magnitude",
@@ -2535,7 +2535,8 @@
    "_idWas": "the_broken_quiet",
    "_powerSystemWas": "reach_violence_peace",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_dicedAndTyped_20260830": "⛔ `physical` — 'a peace this absolute is A GREAT DEAL OF VIOLENCE WITH A LID ON IT' — and when the lid comes off it is a body doing it. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
+   "_dicedAndTyped_20260830": "⛔ `physical` — 'a peace this absolute is A GREAT DEAL OF VIOLENCE WITH A LID ON IT' — and when the lid comes off it is a body doing it. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver.",
+   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 is 'everything the place was keeping down COMES UP AT ONCE, INTO WHOEVER YOU NAME'."
   },
   {
    "id": "held_line",
@@ -2912,7 +2913,7 @@
     },
     {
      "rank": 2,
-     "name": "The Room's True Weather",
+     "name": "Room's True Weather",
      "grants": "Read what a room is actually doing under what it is saying — the alliance forming, the grudge about to speak.",
      "cannot": "It reads the room, not the world. What is decided elsewhere arrives regardless of how well you read this table.",
      "functions": [
@@ -2921,7 +2922,7 @@
     },
     {
      "rank": 3,
-     "name": "The Thing Nobody Said",
+     "name": "Thing Nobody Said",
      "grants": "Name the thing everyone in the room is carefully not saying — and know what will happen if it is said.",
      "cannot": "Knowing it and saying it are different acts, and the second one is rarely free.",
      "functions": [
@@ -2981,7 +2982,8 @@
    "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: reads, Not Calms — the disciplined mask well.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_violence_peace",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

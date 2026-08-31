@@ -1949,7 +1949,7 @@
    ],
    "tradition": "harmonic",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "reveal",
    "operativeAxis": [
     "scope",
@@ -1990,7 +1990,8 @@
    "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_folkReassigned_20260830": "⛔ `valley_craft` → `harmonic`. ✅ THE CRAFT NAMES ITS OWN SOURCE: 'the valley's BORROWED SOUND-WORK. Generations beside the Choir'. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**",
    "folkAccessible": true,
-   "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition."
+   "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it CARRIES a call — sound sent, nobody harmed at any rank."
   },
   {
    "id": "glasswork",
@@ -2074,7 +2075,7 @@
    ],
    "tradition": "radiant_folk",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "make",
    "operativeAxis": [
     "precision",
@@ -2114,7 +2115,8 @@
    "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_folkReassigned_20260830": "⛔ `valley_craft` → `radiant_folk`. ✅ THE CRAFT NAMES ITS OWN SOURCE: 'what a people learn from LIVING UNDER THE PLATEAU EDGE'. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**",
    "folkAccessible": true,
-   "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition."
+   "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it makes glass and works light through it. No rank harms anyone."
   },
   {
    "id": "keen_appraisal",
@@ -2249,7 +2251,7 @@
     },
     {
      "rank": 2,
-     "name": "The Threads Between",
+     "name": "Threads Between",
      "grants": "Cross-reference stories to surface what they jointly imply (codex synergy: +insight when a known topic is in play); notice when a live account contradicts the record; a told story can steady a shaken group.",
      "cannot": "Implication isn't proof; steadying works once per group per trouble.",
      "functions": [
@@ -2325,7 +2327,8 @@
    "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_folkReassigned_20260830": "⛔ `valley_craft` → `threnodist`. hold and recall the valley's stories — living memory is the Threnodists' subject. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**",
    "folkAccessible": true,
-   "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition."
+   "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition.",
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ EVERY ONE OF THESE TRADITIONS WAS AUDITED BEFORE THE GATE EXISTED AND REPORTED CLEAN. **The gate found in seconds what four corrections and a written rule did not.**"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

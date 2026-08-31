@@ -2036,7 +2036,7 @@
   {
    "schemaVersion": 1,
    "id": "the_unsurvivable_fact",
-   "name": "The Unsurvivable Fact",
+   "name": "Unsurvivable Fact",
    "levelReq": 5,
    "energyCost": 13,
    "powerSystem": "metaphysical",
@@ -2055,7 +2055,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Unsurvivable Fact",
+     "name": "Unsurvivable Fact",
      "grants": "Say the true thing they have built their standing on not knowing. They are UNDONE — cannot act on what they were, and everyone present knows why.",
      "cannot": "Anyone whose life is not built on a lie. Inventing the fact.",
      "functions": [
@@ -2143,7 +2143,8 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "reach_falsehood_truth",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ EVERY ONE OF THESE TRADITIONS WAS AUDITED BEFORE THE GATE EXISTED AND REPORTED CLEAN. **The gate found in seconds what four corrections and a written rule did not.**"
   },
   {
    "schemaVersion": 1,
@@ -2919,7 +2920,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Construction",
+     "name": "Construction",
      "grants": "Read any falsehood or illusion's construction — see how it was made, what it is made of, where it will fail.",
      "cannot": "⛔ IT READS CONSTRUCTION, NOT TRUTH. A true account you happen to dislike shows no seams, because there are none.",
      "functions": [
@@ -2940,7 +2941,7 @@
     },
     {
      "rank": 3,
-     "name": "The Unfinished Lie",
+     "name": "Unfinished Lie",
      "grants": "Read what is being constructed before it completes — see the lie before it is fully told, the illusion before it has fully taken shape.",
      "cannot": "⛔ Before it completes — which means before anyone else can be shown it. You are the only witness to a lie that has not been told yet.",
      "functions": [
@@ -2989,11 +2990,12 @@
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_sng525b": "⛔ SNG-525b. POINTER BOUNDS THAT SURVIVED THE SWEEP. ⚠️ These two are FIRST-GIFT SENSES RESTORED BY SNG-506 — their bounds came back verbatim from the revert log, carrying the original 'Anything rank 2 adds' fault that SNG-484 had already flagged everywhere else.\n⛔ A RESTORE BRINGS BACK WHAT WAS THERE, INCLUDING WHAT WAS WRONG WITH IT. The sweep ran before the restore, so these were never flagged and never fixed.",
-   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['investigation', 'intellectual', 'magical'], energy e1 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['investigation', 'intellectual', 'magical'], energy e1 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy.",
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ EVERY ONE OF THESE TRADITIONS WAS AUDITED BEFORE THE GATE EXISTED AND REPORTED CLEAN. **The gate found in seconds what four corrections and a written rule did not.**"
   },
   {
    "id": "the_plain_seeing",
-   "name": "The Plain Seeing",
+   "name": "Plain Seeing",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "metaphysical",
@@ -3010,7 +3012,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Cleared Look",
+     "name": "Cleared Look",
      "grants": "Look at a scene, an object, a document, a wound, a room. Illusion, disguise and staging come off it — you are told plainly WHAT WAS ADDED and what was moved: this blood was poured, that seal is recent, this man is not who he is dressed as. ⚠ It also strips what YOU were hoping to find, which in practice means it will contradict you.",
      "cannot": "It removes DISTORTION, not concealment — a genuinely hidden thing stays hidden. And it strips YOUR preferences too, which is the part Verists warn apprentices about.",
      "functions": [
@@ -3021,7 +3023,7 @@
     },
     {
      "rank": 2,
-     "name": "The Held Clarity",
+     "name": "Held Clarity",
      "grants": "Keep it up while you work through a place, or turn it on a person's account and see where the account and the world part company.",
      "cannot": "Sustained plain seeing is exhausting in a way that is not only energy. A Falsecraft worker can feel it running and will adjust.",
      "functions": [
@@ -3033,7 +3035,7 @@
     },
     {
      "rank": 3,
-     "name": "The Unobstructed",
+     "name": "Unobstructed",
      "grants": "Nothing between you and what is so — a whole site, a whole affair, a whole person's situation, entire.",
      "cannot": "⚠ YOU DO NOT GET TO CHOOSE WHAT YOU SEE. Verists at this rank learn things about people they love, and about themselves, that they cannot un-see and cannot honestly pretend away.",
      "functions": [
@@ -3083,7 +3085,8 @@
    "_descriptionWas": "The Verists' first craft and the one every other Verist craft rests on. You cannot say the true thing until you can see it.",
    "_powerSystemWas": "reach_falsehood_truth",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rungFix_20260830": "⚠️ ability rung `incapacitating` -> `none`: this is a SEEING craft — illusion and staging come off a scene, and everyone in it is untouched, at any rank."
+   "_rungFix_20260830": "⚠️ ability rung `incapacitating` -> `none`: this is a SEEING craft — illusion and staging come off a scene, and everyone in it is untouched, at any rank.",
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ EVERY ONE OF THESE TRADITIONS WAS AUDITED BEFORE THE GATE EXISTED AND REPORTED CLEAN. **The gate found in seconds what four corrections and a written rule did not.**"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -3674,7 +3674,7 @@
     },
     {
      "rank": 3,
-     "name": "The Unbroken Beam",
+     "name": "Unbroken Beam",
      "grants": "Follow any beam back to its source across a valley, and know every surface it touched on the way.",
      "cannot": "Darkness stays genuinely opaque — the gap the Umbrals built an entire art inside.",
      "functions": [
@@ -3732,7 +3732,8 @@
    "plainly": "A stealth/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 30. Ranks: rank 2 adds to perceptionDepth; rank 3 adds to range. Limit: reads, does not make; the deep-hidden stay hidden.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ EVERY ONE OF THESE TRADITIONS WAS AUDITED BEFORE THE GATE EXISTED AND REPORTED CLEAN. **The gate found in seconds what four corrections and a written rule did not.**"
   },
   {
    "powerSystem": "precursor",

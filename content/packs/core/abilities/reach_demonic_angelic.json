@@ -2984,7 +2984,7 @@
    ],
    "tradition": "bargainers",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "lethal",
    "shape": "strike",
    "operativeAxis": [
     "precision",
@@ -3037,7 +3037,8 @@
    "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⛔ THE SHARPEST CASE — 'name a real exchange to someone who wants something, with a real cost attached' was tagged `strike`. A NEGOTIATION FILED AS AN ATTACK.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
    "_powerSystemWas": "reach_demonic_angelic",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: abyssal 0.5 = precursor 0.5, over metaphysical 0.3.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_dicedAndTyped_20260830": "⛔ `judgement` — a named exchange refused — the harm is the TERM landing, not a blow. INTRINSIC: it needs someone who can weigh what they were offered. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 5` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
+   "_dicedAndTyped_20260830": "⛔ `judgement` — a named exchange refused — the harm is the TERM landing, not a blow. INTRINSIC: it needs someone who can weigh what they were offered. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 5` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver.",
+   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 reaches lethal — a term struck and broken has an ending in it."
   },
   {
    "id": "offered_mouth",
@@ -3398,7 +3399,7 @@
    ],
    "tradition": "god_named",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "ward",
    "operativeAxis": [
     "scope",
@@ -3437,7 +3438,8 @@
    "_idWas": "the_sheltering_name",
    "_wardTypes": "⛔ SNG-512. ⛔ A name's protection answers those who CREDIT IT. It answers want and moral weight; it does not answer weather.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: seraphic 0.6 + lattice 0.2 = ordered_nanite 0.8. ⚠️ The apparatus, run for a different reason.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: seraphic 0.6 + lattice 0.2 = ordered_nanite 0.8. ⚠️ The apparatus, run for a different reason.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: 'the God-Named's KEEPING-craft' — a name that shelters. It wounds nobody."
   },
   {
    "id": "borrowed_certainty",
@@ -3512,7 +3514,7 @@
    ],
    "tradition": "god_named",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "empower",
    "operativeAxis": [
     "scope",
@@ -3545,7 +3547,8 @@
    "_nameWas": "The Borrowed Certainty",
    "_idWas": "the_borrowed_certainty",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: seraphic 0.6 + lattice 0.2 = ordered_nanite 0.8. ⚠️ The apparatus, run for a different reason.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: seraphic 0.6 + lattice 0.2 = ordered_nanite 0.8. ⚠️ The apparatus, run for a different reason.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: 'the LIFTING-craft — borrowed authority pointed at a frightened room'. It steadies; it does not harm."
   },
   {
    "id": "honest_price",
@@ -3627,7 +3630,7 @@
    ],
    "tradition": "bargainers",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "make",
    "operativeAxis": [
     "duration",
@@ -3667,7 +3670,8 @@
    ],
    "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⛔ 'State the full cost of a thing aloud, including the parts everyone was politely not mentioning — and deliver it exactly.' The Bargainers' making-craft.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: abyssal 0.5 = precursor 0.5, over metaphysical 0.3.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: abyssal 0.5 = precursor 0.5, over metaphysical 0.3.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it NAMES a price honestly. Nobody is hurt."
   },
   {
    "id": "weighed_word",
@@ -4058,7 +4062,7 @@
     },
     {
      "rank": 2,
-     "name": "The Hollow Read",
+     "name": "Hollow Read",
      "grants": "Feel the want a person is refusing to admit to themselves — the one doing the most work.",
      "cannot": "Knowing the want they deny is a weapon, and it is very hard not to use it.",
      "functions": [
@@ -4067,7 +4071,7 @@
     },
     {
      "rank": 3,
-     "name": "The Whole Hunger",
+     "name": "Whole Hunger",
      "grants": "Read the appetite of a crowd, a faction, a city — what the whole thing is actually reaching for.",
      "cannot": "A crowd's hunger is not the sum of its people's. It is stupider and much stronger.",
      "functions": [
@@ -4127,11 +4131,12 @@
    "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens perceptionDepth; rank 3 extends scope. Limit: iT Reads Want, Not Intent — what they will DO about it is their own.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ EVERY ONE OF THESE TRADITIONS WAS AUDITED BEFORE THE GATE EXISTED AND REPORTED CLEAN. **The gate found in seconds what four corrections and a written rule did not.**"
   },
   {
    "id": "the_read_hunger",
-   "name": "The Read Hunger",
+   "name": "Read Hunger",
    "levelReq": 1,
    "energyCost": 3,
    "powerSystem": "precursor",
@@ -4149,7 +4154,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Shape of Its Eating",
+     "name": "Shape of Its Eating",
      "grants": "Read one creature, person, or thing-that-wants and the craft NAMES it: what it hungers for, how strongly, what it will risk, and the one thing it will not do even hungry.",
      "cannot": "APPETITE ONLY — it tells you nothing about plans, loyalties or what it knows. The truly sated read as empty and are the most dangerous thing in the room for exactly that reason.",
      "functions": [
@@ -4161,7 +4166,7 @@
     },
     {
      "rank": 2,
-     "name": "The Fed and the Starving",
+     "name": "Fed and Starving",
      "grants": "Read a group or a place — which of them is hungriest, which is nearly full, and where in a warren the eating happens.",
      "cannot": "Reading a room of appetites is nauseating and it lingers. And knowing what a thing wants is not knowing you can supply it.",
      "functions": [
@@ -4173,7 +4178,7 @@
     },
     {
      "rank": 3,
-     "name": "The Great Appetite",
+     "name": "Great Appetite",
      "grants": "Something large — a deep thing, a host, a place's whole hunger — read entire, including the want under the want.",
      "cannot": "⚠ IT NOTICES BEING READ AT THIS DEPTH. You have introduced yourself, and the Devouring find being understood almost as satisfying as being fed.",
      "functions": [
@@ -4222,11 +4227,12 @@
    "plainly": "A puzzle/social action that names what a thing hungers for and what it will risk. Rated 5 of 10 across a scope of 2 for about three hours.",
    "_powerSystemWas": "reach_demonic_angelic",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rungFix_20260829": "⛔ ability rung -> `none`: it READS an appetite and names it. It puts nobody down at any rank."
+   "_rungFix_20260829": "⛔ ability rung -> `none`: it READS an appetite and names it. It puts nobody down at any rank.",
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ EVERY ONE OF THESE TRADITIONS WAS AUDITED BEFORE THE GATE EXISTED AND REPORTED CLEAN. **The gate found in seconds what four corrections and a written rule did not.**"
   },
   {
    "id": "the_read_want",
-   "name": "The Read Want",
+   "name": "Read Want",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "precursor",
@@ -4245,7 +4251,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Want Under It",
+     "name": "Want Under It",
      "grants": "Look at a person in conversation and see the want beneath the request — the man asking for money who wants to be taken seriously, the one asking for justice who wants an apology.",
      "cannot": "It reads WANT and nothing else. The self-deceived read as they believe themselves, which is often the useful thing anyway. Someone who wants nothing gives you nothing.",
      "functions": [
@@ -4257,7 +4263,7 @@
     },
     {
      "rank": 2,
-     "name": "The Table Read",
+     "name": "Table Read",
      "grants": "Read a room of them, or read one deeply enough to see which want they would trade the others for.",
      "cannot": "Knowing the want does not tell you what it is WORTH to them, and the two are different numbers. A wrong guess at price after a right read of want is the classic Bargainer failure.",
      "functions": [
@@ -4269,7 +4275,7 @@
     },
     {
      "rank": 3,
-     "name": "The Whole Appetite",
+     "name": "Whole Appetite",
      "grants": "A person's wants entire and in order, including the ones they have never said out loud and the one they would be ruined by getting.",
      "cannot": "⚠ YOU NOW KNOW SOMETHING ABOUT THEM THEY DO NOT KNOW, and the Bargainers' own rule is that you name what you read before you trade on it. Trading on an unannounced read is the thing that gets a Bargainer refused at every table in the foothills.",
      "functions": [
@@ -4286,7 +4292,7 @@
    ],
    "tradition": "bargainers",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "reveal",
    "operativeAxis": [
     "precision",
@@ -4318,7 +4324,9 @@
    "plainly": "A social/puzzle action that reads what someone actually wants. Rated 6 of 10 on one target for about three hours.",
    "_descriptionWas": "The Bargainers' first craft: read the want before naming the price, because a price against the wrong want is an insult.",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: abyssal 0.5 = precursor 0.5, over metaphysical 0.3.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: abyssal 0.5 = precursor 0.5, over metaphysical 0.3.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it READS a want. It puts nobody down at any rank.",
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
   },
   {
    "id": "the_measuring_eye",

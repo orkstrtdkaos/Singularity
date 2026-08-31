@@ -1695,7 +1695,7 @@
   {
    "schemaVersion": 1,
    "id": "the_cut_thread",
-   "name": "The Cut Thread",
+   "name": "Cut Thread",
    "levelReq": 5,
    "energyCost": 14,
    "powerSystem": "metaphysical",
@@ -1714,7 +1714,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Cut Thread",
+     "name": "Cut Thread",
      "grants": "End one living thing. No wound, no struggle, no argument. It simply stops.",
      "cannot": "It costs almost everything you have, it is unmistakable to anyone watching, and it CANNOT BE UNDONE — not by you, not by the Rootkin, not by a braid. This is the one door with no handle on the other side.",
      "harmRung": "lethal",
@@ -1791,7 +1791,8 @@
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_reviewed_20260824": "⛔ SINGLE-RANK BY DESIGN (Erik confirmed 2026-08-24) — no r2/r3, and the capability menu correctly shows one tier. ⚠️ `operativeAxis` carried 'special', which is a PLACEHOLDER and not an axis in either register (3 crafts use it: this, Revealing Burn, Last Light) — dropped rather than invented into. ⛔ `challengeTypes` was FIGHT only, on THE MOST SOCIALLY CONSEQUENTIAL ACT IN THE GAME — its own notFor says 'it is done, it is WITNESSED, and it is yours'. SOCIAL added. ⚠️ `plainly` was machine-garbage ('It rolls 5d6+6 It affects 1 target Limit: iT Costs Almost Everything You Have'). ✅ EVERYTHING ELSE LEFT ALONE: the energy-to-zero bound is the ONE legitimate extreme-capstone cost in Death and it is still ENERGY — it is the model for the five narrative debts I wrongly wrote elsewhere. Refusing BOTH intensities is rare and correct.",
-   "_typed_20260829": "⛔ `vitality` — 'No wound, no struggle. IT SIMPLY STOPS.' ⛔ The clearest `vitality` case in the corpus — the life ends and the body is untouched. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
+   "_typed_20260829": "⛔ `vitality` — 'No wound, no struggle. IT SIMPLY STOPS.' ⛔ The clearest `vitality` case in the corpus — the life ends and the body is untouched. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`.",
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ THIS TRADITION WAS AUDITED BEFORE THE GATE EXISTED, which is why the first pass reported clean."
   },
   {
    "id": "grey_road",
@@ -3526,7 +3527,7 @@
    ],
    "tradition": "rootkin",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "lethal",
    "shape": "bind",
    "operativeAxis": [
     "duration",
@@ -3596,7 +3597,8 @@
    "_idWas": "the_snaring_green",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_typed_20260830": "⛔ `harmRung: incapacitating` reaching `lethal` at r3 AND NO DICE — the craft says 'IT BEGINS AS A HOLD AND BECOMES A KILLING' and could not kill anything. ⚠️ `living` .6 + `physical` .4 — the same mix as `bark_and_briar`, correctly: growth turned against you, DELIVERED AS THORN. ✅ r3 gains `ongoingHarm: living` because its own text is 'the harm CONTINUES for as long as they are held', which is exactly what that field is for."
+   "_typed_20260830": "⛔ `harmRung: incapacitating` reaching `lethal` at r3 AND NO DICE — the craft says 'IT BEGINS AS A HOLD AND BECOMES A KILLING' and could not kill anything. ⚠️ `living` .6 + `physical` .4 — the same mix as `bark_and_briar`, correctly: growth turned against you, DELIVERED AS THORN. ✅ r3 gains `ongoingHarm: living` because its own text is 'the harm CONTINUES for as long as they are held', which is exactly what that field is for.",
+   "_rungFix_20260830": "⛔ ability rung  → . ⚠️ I GAVE THIS CRAFT ITS DICE EARLIER TODAY and did not raise the ability rung with them — the craft says 'it begins as a hold and BECOMES A KILLING' and r3 was already lethal. ✅ Caught by the final corpus sweep."
   },
   {
    "id": "hastened_grey",
@@ -4025,7 +4027,7 @@
     },
     {
      "rank": 2,
-     "name": "The Long Count",
+     "name": "Long Count",
      "grants": "Sense not only that something living is dying but HOW — the cause, the shape, roughly how long. A body tells its ending to the Ashwarden before it tells anyone else.",
      "cannot": "Knowing the hour does not give you the power to move it, and it will not let you unknow it.",
      "functions": [
@@ -4039,7 +4041,7 @@
     },
     {
      "rank": 3,
-     "name": "The Hour Known",
+     "name": "Hour Known",
      "grants": "The dying stands plain: you perceive its cause, its trajectory, and what would turn it aside — if anything would. The Ashwarden reads a living thing's end as clearly as its beginning, and can say aloud what is present in them right now.",
      "cannot": "⛔ YOU KNOW EXACTLY WHAT IS HAPPENING AND NOTHING ABOUT WHAT TO DO. Reading a body tells you the shape of its ending, never the remedy — a remedy is not in the body. ⚠️ And it will not let you unknow it.",
      "functions": [
@@ -4106,7 +4108,8 @@
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_tidied_20260823": "⚠️ r2/r3 carried no `gains` and no `harmRung`, and r3 had no `cannot` at all — the first-gift cohort's thin tail, where the template supplies ability-level fields and nothing per-rank. ⛔ r3's ceiling is the Ashwarden's own weight and the reason they need the bird: perception reaches the ending, testimony reaches the way out."
+   "_tidied_20260823": "⚠️ r2/r3 carried no `gains` and no `harmRung`, and r3 had no `cannot` at all — the first-gift cohort's thin tail, where the template supplies ability-level fields and nothing per-rank. ⛔ r3's ceiling is the Ashwarden's own weight and the reason they need the bird: perception reaches the ending, testimony reaches the way out.",
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ THIS TRADITION WAS AUDITED BEFORE THE GATE EXISTED, which is why the first pass reported clean."
   },
   {
    "id": "lifesense",

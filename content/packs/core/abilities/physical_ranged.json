@@ -197,7 +197,7 @@
    ],
    "tradition": "marcher",
    "nativeOrCombination": "native",
-   "harmRung": "damaging",
+   "harmRung": "lethal",
    "powerSystem": "metaphysical",
    "shape": "damage",
    "operativeAxis": "violence_peace",
@@ -212,7 +212,10 @@
     "marginFloorPer": 0.02,
     "damageType": "physical"
    },
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "one stone, thrown honestly — it will hurt and not much more",
+    "surge": "⛔ EVERYTHING YOU CAN PUT BEHIND IT; the stone is gone and so is your next throw"
+   },
    "bounds": [
     {
      "text": "⛔ NEEDS ROOM TO SWING",
@@ -249,7 +252,8 @@
    "_typed_20260829": "⛔ `physical` — a stone at forty paces. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`.",
    "_folkReassigned_20260830": "⛔ `valley_craft` → `marcher`. a trained ranged strike — the Marcher weapon-set at folk scale, beside `thrown_edge` and `levelled_crossbow`. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**",
    "folkAccessible": true,
-   "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition."
+   "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition.",
+   "_fix_20260830": "⛔ ability rung `damaging` → `lethal`: the ranks reach it, and the craft is 'whip a stone out to forty paces HARD ENOUGH TO DROP A MAN'. ⚠️ Intensity was the bare string 'moderate' — no conserve, no surge. ✅ Both fixed. **This is a folk-accessible craft and it can kill, which is worth a GM knowing.**"
   },
   {
    "id": "drawn_bow",

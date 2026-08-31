@@ -1550,7 +1550,7 @@
     },
     {
      "rank": 2,
-     "name": "The Whole Tell",
+     "name": "Whole Tell",
      "grants": "Read the whole body at once — weight, breath, the held shoulder, what the hands are doing when the face is busy lying.",
      "cannot": "It reads the body's report. A trained body reports what its owner chooses.",
      "functions": [
@@ -1559,7 +1559,7 @@
     },
     {
      "rank": 3,
-     "name": "The Body Cannot Lie",
+     "name": "Body Cannot Lie",
      "grants": "Nothing a body does escapes you. Pain, intent, love, the decision made a half-second before it is acted on.",
      "cannot": "You cannot stop reading. The Somatics say knowing every body in a room is its own kind of loneliness.",
      "functions": [
@@ -1619,7 +1619,8 @@
    "plainly": "A investigate/fight action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: body, Not Mind — the trained conceal tells.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_body_mind",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `somatic` — Ki, definitional — 'the body as the only instrument.'\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `somatic` — Ki, definitional — 'the body as the only instrument.'\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ THIS TRADITION WAS AUDITED BEFORE THE GATE EXISTED, which is why the first pass reported clean."
   },
   {
    "id": "mind_read_folk",

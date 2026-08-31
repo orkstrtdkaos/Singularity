@@ -2810,7 +2810,7 @@
     },
     {
      "rank": 2,
-     "name": "The Whole Field",
+     "name": "Whole Field",
      "grants": "Read every fighter at once — who is committed, who is looking for the door, where the line will fail first.",
      "cannot": "Reading the fight is not surviving it. The field tells you where it breaks, not how to be elsewhere.",
      "functions": [
@@ -2884,7 +2884,8 @@
    "plainly": "A fight/duel/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: reads, Not Wins — the truly wild are harder to call.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_violence_peace",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `marcher` — ⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ THIS TRADITION WAS AUDITED BEFORE THE GATE EXISTED, which is why the first pass reported clean."
   },
   {
    "id": "read_the_room",

@@ -399,7 +399,7 @@ working papers; **this is the answer.**
 | 08-31 | ⚠️ **I quoted a stale number back at Aevi after she had already fixed it** | I wrote that *"`foothills.json` still carries a record for valley_craft claiming 18"*. ⛔ **She had removed the stored `abilities` count from EVERY foothill row when I flagged them** — the file's own note forbade them and every row carried one anyway. ⚠️ **Her words: "you read a file you had seen before, and it had changed under you. Neither of us re-derived."** | verified before answering this time (all 7 rows now carry none), and §31C gates it so neither of us has to remember | ⛔ **THE FILE THAT SAYS "a stored copy of a derived value is the failure that produced this ticket" HAD ONE IN EVERY ROW.** A rule written in the file it governs is not a gate |
 | 08-31 | ⚠️ **the domain heading had to be built so it VANISHES when the layer is absent** | grouping the learn screen by domain risks the reader-before-field trap in reverse: with no `traditions_v2.json` loaded every people resolves to no domain, and a naive grouping would render one meaningless heading over everything | when there is exactly one bucket and it is the empty one, the markup is **byte-identical to what it rendered before** — the heading appears only when there is something true to say | ⚠️ **a UI that degrades to its old self is how you ship a layer before the content that fills it**, which is the same discipline as defaulting a dial to a no-op |
 
-**Last verified: 2026-08-31 · v1.9.284 · 412 crafts.**
+**Last verified: 2026-08-31 · v1.9.284 · 414 crafts.**
 
 ---
 

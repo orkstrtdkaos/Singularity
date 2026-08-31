@@ -5153,6 +5153,143 @@
    ],
    "_authored": "⛔ ERIK 2026-08-30. ✅ THE FIRST LOGISTICS CONSTRAINT ON ANY TRADITION, and the right answer to Seraphic leading the tournament: **constrain the context, not the numbers.**",
    "_gainAxesFix": "⚠️  again — FIFTH TIME. ✅ Caught by  check 5 BEFORE the ship, for the second craft running. ⛔ The habit has not gone; the gate has made it harmless."
+  },
+  {
+   "powerSystem": "ordered_nanite",
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "axes": {
+    "demonic_angelic": 0.8
+   },
+   "id": "burning_ones",
+   "name": "Burning Ones",
+   "levelReq": 4,
+   "energyCost": 9,
+   "attribute": "social",
+   "shape": "damage",
+   "harmRung": "lethal",
+   "challengeTypes": [
+    "FIGHT",
+    "DEFEND",
+    "DUEL"
+   ],
+   "operativeAxis": [
+    "damage",
+    "scope",
+    "duration"
+   ],
+   "effectTags": [
+    "aura",
+    "judgement",
+    "seraphim"
+   ],
+   "functions": [
+    "strike",
+    "reveal",
+    "ward"
+   ],
+   "description": "⛔ SERAPHIM MEANS THE BURNING ONES, AND THIS IS WHY. Stand, and the ground around you is not survivable by anyone the light has weighed and found wanting. ⚠️ IT IS NOT AIMED AND IT DOES NOT STOP — it burns while you stand there, every round, and it burns in proportion to what each of them has done. ⛔ **A GUILTY MAN AND AN INNOCENT ONE STAND IN THE SAME FIRE AND ONE OF THEM IS FINE.**",
+   "narrationHints": "The heat arrives before she does and the courtyard empties in the direction people were already facing. ⚠️ Two of them do not move, and nothing happens to them. ⛔ Everyone notices which two.",
+   "notFor": "⛔ IT WEIGHS, WHICH MEANS IT REACHES WHAT CAN BE WEIGHED — a beast, a mechanism, a raised body and anything without a self stand in it untouched. ⚠️ AND IT DOES NOT CHOOSE: it burns your own people by exactly the same measure, and an Order-bearer with a bad conscience feels their own aura. ⛔ IT IS ALSO A DECLARATION — nobody within sight is in any doubt about what you are, or that you have decided.",
+   "plainly": "A fight/defend action. ⛔ A BURNING AURA AROUND YOU: everyone in reach takes 2d6 `judgement`+`radiance` EVERY ROUND while you hold it, scaled to what they have done. Rated 6, about four rounds. r2 widens it and lets you keep acting normally; r3 it stays on the ground after you leave. ⚠️ IT BURNS BY MEASURE — the guiltless take almost nothing and your own people are not exempt. ⛔ Nothing without a self is touched.",
+   "intensity": {
+    "conserve": "close and low — arm's reach, and it will not kill anyone",
+    "surge": "⛔ EVERYTHING AT ONCE AND AS WIDE AS YOU CAN HOLD; you will find out what your own people have done"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT BURNS BY MEASURE. The guiltless take almost nothing, and that is visible to everyone watching",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT DOES NOT CHOOSE SIDES — your own stand in it on the same terms",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ NOTHING WITHOUT A SELF IS TOUCHED — a beast, a mechanism, a raised body walk through it",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AND IT RUNS ON STORES. Held long, it is the most expensive thing a Seraph does in the field",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "duration": 4,
+    "scope": 2,
+    "targets": 6,
+    "damageMix": [
+     {
+      "type": "judgement",
+      "share": 0.6
+     },
+     {
+      "type": "radiance",
+      "share": 0.4
+     }
+    ],
+    "requiresSelf": true,
+    "crit": {
+     "success": "It finds someone nobody suspected, publicly, and the fight stops while everyone works out what that means.",
+     "failure": "It finds YOU, and everyone sees the Order-bearer flinch inside their own light."
+    },
+    "note": "damage/aura. ⛔ ERIK 2026-08-30: 'DO WE HAVE A FLAME AURA OR JUDGEMENT? BURNING ENEMIES IN A RADIUS PER TIC?' ⚠️ NO — AND THE TRADITION IS NAMED FOR IT: **SERAPHIM LITERALLY MEANS 'THE BURNING ONES'.** The corpus had ONE marked-ground craft (`killing_field`, ashwarden) and the burning pole had no equivalent. ✅ `judgement` .6 + `radiance` .4 — the same mix as `measured_sentence`, because it is the same act performed continuously instead of once. ⛔ AND `requiresSelf`: it WEIGHS, so it reaches only what can be weighed. ⚠️ IT HITS THE WIELDER'S OWN SIDE AND THAT IS NOT THE HABIT ERIK HAS CORRECTED SEVEN TIMES — the craft does not FAIL to sort, it REFUSES to: proportionality is its entire subject, and an exemption for allies would delete what it is about. **Erik's rule is about crafts that hit your side WITHOUT YOU CHOOSING; this is a craft whose point is that nobody chooses.**"
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Burning Ones",
+     "functions": [
+      "strike",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [],
+     "grants": "⛔ EVERYONE IN REACH TAKES 2d6 EVERY ROUND WHILE YOU HOLD IT, SCALED TO WHAT THEY HAVE DONE. ⚠️ And everyone watching learns something about everyone standing in it.",
+     "cannot": "Arm's reach and a little more, four rounds, your attention. ⛔ It does not sort. ⚠️ Nothing without a self is touched."
+    },
+    {
+     "rank": 2,
+     "name": "Wider Measure",
+     "functions": [
+      "strike",
+      "reveal",
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ],
+     "grants": "⛔ A ROOM'S WORTH, AND YOU MAY ACT NORMALLY WHILE IT BURNS — fight, speak, judge, walk. ⚠️ This is the rank a Seraph is sent to a siege for.",
+     "cannot": "⚠️ Still by measure, still your own people too. ⛔ And it is expensive to hold."
+    },
+    {
+     "rank": 3,
+     "name": "Left Burning",
+     "functions": [
+      "strike",
+      "reveal",
+      "ward"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "gainAxes": [
+      "duration",
+      "conditions"
+     ],
+     "grants": "⛔ IT STAYS ON THE GROUND AFTER YOU LEAVE — a courtyard, a bridge, a gate that the guilty cannot cross and the innocent can. ⚠️ The Orders use this on approaches and consider it merciful.",
+     "cannot": "⛔ IT KEEPS MEASURING WITHOUT YOU THERE TO SEE IT, which is how the wrong person gets burned and nobody senior finds out for a season. ⚠️ And it does not end when you would like it to."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-30. ✅ THE TRADITION WAS NAMED FOR A THING IT COULD NOT DO — seraphim, THE BURNING ONES — and the game had exactly one marked-ground craft, on the opposite pole.",
+   "_gainAxesFix": "⚠️  — SIXTH TIME, THIRD CRAFT RUNNING. ⛔ The word is in my head as a game concept because  and  both use it; the NINE do not. ✅  check 5 has now caught it three times in a row before a ship. **The habit is not going away and no longer matters.**"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

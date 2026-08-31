@@ -215,3 +215,209 @@ These are the measurements Aevi needs before any content is authored or any stru
     Aevi needs this to author the curated folk pool.
 11. **Anything that is already true at HEAD that this spec assumes is broken or missing.** The
     domain gate lesson applies.
+
+---
+
+# ROUND 2 — CCode substrate verification
+
+**Answered 2026-08-31 at `b5f12f9a` · v1.9.286.** All eleven measured at HEAD.
+
+⛔ **READ R1 AND R2 BEFORE ANYTHING ELSE. §2a's central premise is not built, and acting on it would do
+the opposite of what Erik asked for.**
+
+---
+
+## R1 — ⛔ THE ZERO-ENERGY CONSERVE LAYER DOES NOT EXIST
+
+Erik: *"the zero energy use skills that are the conserve version."*
+
+**Measured in `intensity_scaling.json`:**
+
+| step | energyMult |
+|---|---|
+| conserve | ⛔ **0.6** |
+| standard | 1 |
+| surge | 1.6 |
+
+⛔ **Conserve is a 60% discount, not free.** And the file's own `floors` line says: *"Conserve cannot drop
+energy below 2"* — so it has an **explicit minimum cost of 2**.
+
+**What actually happens to a drained character today:**
+
+| | |
+|---|---|
+| `resolve.js:195` | at `energy <= 0`, a flat **−10** penalty (`exhaustedPenalty`) on every roll |
+| `app.js:7158` | if `energy < energyCost` the action is **refused** — *"Not enough energy — rest first."* |
+
+⛔ **So a drained character does not fall back to a cheap version. They are blocked outright, and penalised
+on whatever they can still do.** The mechanism §2a treats as already load-bearing has not been built.
+
+⬜ **This is a spec, not a bug report.** Erik described the behaviour he wants; it is a real and buildable
+change (conserve gets a zero-cost floor when drained, or a `freeWhenDrained` flag). ⚠️ **But it must be
+built BEFORE anything is retired**, and R2 says why.
+
+---
+
+## R2 — ⛔ THE BASELINE KIT *IS* THE ZERO-COST LAYER. RETIRING IT INVERTS ERIK'S INTENT.
+
+**All nine baseline records carry `energyCost: 0`** — `brace`, `strike_basic`, `break_away`, `raise_alarm`,
+plus the five form-kit grants.
+
+**And they are nearly the only free things in the game:**
+
+| | |
+|---|---|
+| authored crafts with `energyCost: 0` | ⚠️ **18 of 414** |
+| what those 18 are | ⛔ **all sense crafts** — `body_read`, `lightsense`, `deathsense`, `hour_sense`… |
+| free ways to **strike, guard, disengage or call for help** | ⛔ **only the baseline kit** |
+
+⛔ **So retiring `brace` / `strike_basic` / `break_away` / `raise_alarm` today removes the exact capability
+Erik wants to guarantee.** A drained character would have no zero-cost action at all — worse than now, not
+better.
+
+✅ **The dependency is one-directional and clean:** build the zero-energy conserve layer first, measure that
+it covers the four actions, *then* retire the kit. ⚠️ **The order in §2a is reversed.**
+
+### ✅ And Q3's answer, per action
+
+| baseline action | covered by conserve today? |
+|---|---|
+| plain strike | ⛔ no — conserve still costs ≥2, and at 0 energy the action is refused |
+| guard / block | ⛔ no — same |
+| disengage | ⛔ no — same |
+| call for help | ⛔ no — same |
+
+⛔ **None of the four.** There is no conserve path that fires at zero.
+
+---
+
+## R3 — ✅ ERIK'S "SENSE SKILL BY TRADITION" IS 83% ALREADY BUILT
+
+**18 of 24 poles already have exactly what he describes: an L1, zero-cost, sense craft.** The naming is
+already consistent (`*_sense`, `*_read`):
+
+`body_read` · `mind_read_folk` · `chaos_sense` · `order_sense` · `pattern_sense` · `stone_read` ·
+`lightsense` · `deathsense` · `lifesense` · `appetite_sense` · `the_measuring_eye` · `fault_sense` ·
+`numen_sense` · `mech_sense` · `hour_sense` · `way_sense` · `read_the_fight` · `read_the_room`
+
+⛔ **Six poles have none:** `syllogist` · `verist` · `umbral` · `veilwright` · `threnodist` · `wright`.
+
+✅ **So the "sense" slot is a six-craft authoring task, not a design problem** — and the pattern to match is
+already established eighteen times over.
+
+---
+
+## R4 — ⛔ A VALLEYFOLK CHARACTER GETS **ZERO** NATIVE GRANTS
+
+**Measured by running `nativeGrantIdsFor` directly:**
+
+```
+Valleyfolk (no domain chosen)   →  []          ⛔ nothing
+Valleyfolk (with a domain)      →  5 grants    ⚠️ but they are that POLE's, never the folk anchors
+```
+
+**Why:** the 13 folk anchors live at **`native_grants.json → _folkNativeGrant_20260830 → folkNativeGrant`**
+— nested inside an **underscore doc key**. ⛔ **There is no real sibling `folkNativeGrant`**, and
+`nativeGrantIdsFor` reads `rules.traditionNativeGrants[primary]`, which never sees it.
+
+⚠️ **This project's own rule is that a `_foo` doc key requires a real sibling `foo`** (`wiring_audit`:
+*"must not become a hiding place"*). This is the hiding place — with thirteen crafts in it.
+
+**The 13, for your §2 authoring (Q10):**
+
+| bucket | crafts |
+|---|---|
+| **sense-type** | `wayfinding` `greenlore` `stonewise` `storykeeper` `keen_appraisal` |
+| **danger-response** | `hunters_strike` `quiet_step` `blend_in` |
+| **other** | `mediators_tongue` `tinkers_hand` `beastfriend` `rivercraft` `hearthbinding` |
+
+⬜ **`byLean` on the buried entry has `mental` and `practical` only** — no physical or social pool.
+
+---
+
+## R5 — Q9 · WHAT A CHARACTER STARTS WITH TODAY: **NINE**, AND THE LEAN BARELY MATTERS
+
+| tradition | native grants | + baseline | **total before the player picks** |
+|---|---|---|---|
+| harmonic | 5 | 4 | ⛔ **9** |
+| marcher | 5 (physical) / **2** (mental) | 4 | ⛔ **9** / 6 |
+| cogitant | 5 | 4 | ⛔ **9** |
+
+⚠️ **Against the proposed 4 (sense + danger-response + 2 chosen), that is a cut from 9 to 4** — bigger than
+the spec's *"down from current 5–8"*, because the spec counts native grants and omits the baseline four.
+
+### ⛔ And the attribute lean is inert for 18 of 26 traditions
+
+Erik's goal 3 is *partly built and mostly not firing*. `nativeGrantIdsFor` takes the **argmax** of the four
+attributes, then `anchors` (always) + `byLean[leanKey]`, capped at 5.
+
+⛔ **Two things defeat it:**
+1. **Anchors already fill the cap** for the richer traditions (harmonic has 5 anchors — `byLean` can never
+   fire).
+2. ⛔ **The fallback fills from `byLean.mental` regardless of lean** (`progression.js:121`). So a
+   physical-lean cogitant and a mental-lean cogitant get **identical** kits.
+
+⚠️ **And "lean" is an argmax, not a distribution** — Erik's *"a player who moved points OUT of Body
+shouldn't start with a Body-primary skill"* is not expressible today: moving points out of Body changes
+nothing until Body stops being the single highest.
+
+✅ **Marcher is the one that behaves as intended** — physical lean 5 grants, mental lean 2.
+
+---
+
+## R6 — ⛔ THREE OF YOUR PWSV ROWS ARE ALREADY TRUE (Q5, Q7, Q8) — the domain-gate lesson
+
+### ✅ Q5 · The wasted-pick bug is FIXED
+
+`app.js:4627`, and the comment states it: *"SNG-192 §1: the by-right starter kit is computed HERE, not
+silently at commit, so a pick can never be wasted on a craft the character already gets free. Grants are
+shown as a non-spendable group and EXCLUDED from the choosable pool. (Recomputed on every entry, so a late
+attribute change is honoured.)"*
+
+### ✅ Q7 · `class_archetypes.json` is WIRED, not orphaned
+
+`app.js:4635` reads `CONTENT.classArchetypes?.archetypes`; `archetypeFamilies(selectedArch.coreFunctions,
+FN_INDEX)` feeds the suggestion call. It is implemented as **SNG-192 §4's "archetype LENS (optional front
+door)"** — *"a lens, never a class: it biases, the player changes any of it."*
+
+### ✅ Q8 · The suggestion engine is WIRED, with all four inputs
+
+`suggestForCreation({ learnable, character, prologueTags, bio, fnIndex, traditionIndex, catalog, primary,
+archetypeFams, archetypeName, max: 5 })` at `app.js:4638`.
+
+⛔ **Your row says these are *"all gathered, none used at the ability pick step."* All four are used, at
+exactly that step.** SNG-192 was built, not merely written.
+
+---
+
+## R7 — Q4 · THE THREE PATHS, NAMED
+
+From `renderCreateDoor` (`app.js:4954`) — *"Three ways to make a character."*
+
+| door | function | what the player does |
+|---|---|---|
+| **✎ Describe yourself** | `renderDescribeDoor` | free prose — *"a girl who talks to animals and cannot lie"* — and the game shows where that lands on the circle, and why |
+| **▶ Play the opening** | `renderPrologueIntro` | name + look, then a short played scene; **domains, skills and companion come from what you actually did** |
+| **⚡ Quick start** | the form | name → form → origin → background → attributes → domains → abilities → companion; the express lane |
+
+✅ **All three converge on the same later steps** — `renderDomainStep` → `renderAbilityStep` →
+`renderCompanionStep` → `renderFormStep` → `renderBioStep` → commit. ⛔ **So the grant logic runs in ONE
+place for all three** (`renderAbilityStep`), which is why the §1 fix covered every path at once.
+
+⚠️ **Describe and Play both produce `prologue.tags`; Quick start does not** — so the suggestion engine has
+less to work with on the express lane, by design.
+
+---
+
+## R8 — ⬜ WHAT I DID NOT ANSWER
+
+⬜ **Q6's second half.** I can say attributes are collected at quick-start step 1 (*"NAME → FORM → ORIGIN →
+BACKGROUND → attributes"*, `app.js:4574`) and that the engine reads them as an argmax. ⚠️ **What I have not
+traced is where the Describe and Play doors set attributes** — they may inherit defaults, which would make
+the lean even less expressive on those two paths. **Say the word and I will measure it.**
+
+⬜ **And one thing I am deliberately not deciding:** whether `folkAccessible` (18 crafts, no reader — R7 of
+the narrative spec) should become the reader for the folk pool. ⚠️ **It would be elegant** — the Valleyfolk
+origin offers exactly the crafts carrying the flag, and the 13 anchors become derived instead of hand-kept
+in a doc key. ⛔ **But it is two unread things pointed at each other, and that wants a ruling rather than my
+initiative.**

@@ -102,5 +102,28 @@ if (untyped.length > UNTYPED_BASELINE)
 else if (untyped.length < UNTYPED_BASELINE)
   console.log(`   ⬇️  W7 untyped damage crafts: ${untyped.length} (was ${UNTYPED_BASELINE}) — lower the baseline in tests/content_which.mjs`);
 
+// ⛔ W8 — EVERY CRAFT IN A SCHOOLED DOMAIN MUST BE PLACED IN A SCHOOL. Erik 2026-08-30: "I thought we had
+// already gone through all of these and completed the audit — did we lose that history switching devices?"
+// ⚠️ YES. Mind and Body were audited 2026-08-23 with schools authored into `mind_schools.json` and
+// `body_schools.json`, and I re-audited Mind today WITHOUT OPENING EITHER FILE — then authored two crafts
+// that landed in no school, and wrote a second, worse set of schools keyed to the SECTS.
+// ⛔ THIS GATE IS THE FIX: a craft authored into a schooled domain and left unplaced is now a failure, so
+// the next author is told the schools exist rather than having to remember.
+const SCHOOL_FILES = { mind_schools: ['cogitant','figurist','syllogist'], body_schools: ['somatic','mason'] };
+for (const [file, sects] of Object.entries(SCHOOL_FILES)) {
+  let doc; try { doc = J(`rules/${file}.json`); } catch { continue; }
+  const placed = new Set();
+  for (const [k, v] of Object.entries(doc?.schools || {})) {
+    if (k.startsWith('_')) continue;
+    for (const id of (v.skills || [])) placed.add(id);
+  }
+  if (!placed.size) continue;
+  const live = abilities.filter(a => sects.includes(a.tradition)).map(a => a.id);
+  const unplaced = live.filter(id => !placed.has(id));
+  if (unplaced.length) F('W8', file, `${unplaced.length} live craft(s) in no school — ${unplaced.join(', ')}`);
+  const ghosts = [...placed].filter(id => !live.includes(id));
+  if (ghosts.length) F('W8', file, `${ghosts.length} school entr(ies) name a craft that no longer exists — ${ghosts.join(', ')}`);
+}
+
 console.log(fails.length ? `⛔ WHICH-CHECK FAILURES: ${fails.length}\n` + fails.join('\n') : `✅ content_which: all assertions hold (${abilities.length} abilities)`);
 process.exit(fails.length ? 1 : 0);

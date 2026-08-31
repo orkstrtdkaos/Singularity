@@ -1017,3 +1017,32 @@ ask that**, which is why this is a reading pass and not a script. **Candidate si
 `perfect_motion` r3 grants one to the WIELDER and does it in prose. ⚠️ **So it is a real gap — and it is the
 same target-affordance hole CCode found in `resolveHeal`: YOU CANNOT DO A THING TO AN ALLY.** ⛔ **That one
 hole now blocks three separate features.**
+
+## ⛔ FOLK ACCESS IS UNEVENLY IMPLEMENTED — 12 of 24 POLES HAVE NONE
+
+**Erik, 2026-08-30: *"There is no folk tradition. Only the poles are traditions. The 'folk' idea was just
+that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN."***
+
+✅ **The mechanism now exists** — `folkAccessible: true`, an ACCESS flag on the craft rather than a category
+of tradition. ⛔ **But it is only on the 18 crafts that came out of `valley_craft`, so it reflects what the
+old label happened to contain rather than the rule Erik describes.**
+
+| poles WITH folk access | mason 3 · horizon 2 · marcher 2 · rootkin 2 · stillhold 2 · lattice 1 · threnodist 1 · umbral 1 · veilwright 1 · wright 1 |
+|---|---|
+| ⛔ **poles with NONE** | **abyssal · ashwarden · blazeborn · churnfolk · cogitant · enginewright · figurist · hourkeeper · numinous · seraphic · somatic · syllogist · unmaker · verist** |
+
+⚠️ **THAT IS 12 OF 24 WITH NOTHING OPEN**, and the twelve that have some only have them by inheritance.
+
+### ⬜ WHAT NEEDS DECIDING BEFORE THIS IS FILLED
+
+1. ⛔ **HOW MANY PER POLE?** Erik says *"a small number."* The current spread is 1–3 and was accidental.
+   **Two or three looks right and it should be the same everywhere**, or the rule is not a rule.
+2. ⚠️ **WHICH ONES?** The natural candidates are each pole's **first gift and its L1 crafts** — the things a
+   valley farmer could plausibly have picked up. ⛔ **But some L1 crafts are a tradition's FIRST OFFENSE
+   (`offered_mouth`, `broken_quiet`, `hastened_grey`), and those should almost certainly NOT be open.**
+3. ⛔ **DOES OPEN MEAN FREE?** `traditions.json` already carries an open-learning rule for the Valley's folk
+   crafts. **Folk-accessible probably means learnable WITHOUT a teacher or tome**, which is the gate every
+   other craft passes through — but that is a rules statement and it is Erik's.
+
+⚠️ **I HAVE NOT ASSIGNED ANY**, because picking two or three open crafts for twenty-four traditions is a
+design pass and not a cleanup — and doing it by guess would bake the same accident in deeper.

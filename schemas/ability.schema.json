@@ -613,15 +613,9 @@
   "wildVariance": {
    "type": "boolean"
   },
-  "traditionKind": {
-   "type": "string",
-   "enum": [
-    "pole",
-    "foothill",
-    "folk",
-    "braid"
-   ],
-   "description": "⛔ WHAT KIND OF THING THE `tradition` FIELD NAMES. Specced in `po/SPEC_SNG-536_merger_audited.md` §2a: 'TODAY A FOOTHILL AND A TRADITION LOOK IDENTICAL IN AN ABILITY RECORD, which is why they read as orphans.' ✅ DECLARED 2026-08-30 when Erik ruled `valley_craft` emptied into its parents: 'they will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ⚠️ `pole` — one of the 24 wheel poles, absent by default. `folk` — the folk-scale expression of its parent, learnable by anyone. `foothill` — where a domain and its adjacents live and work. `braid` — cross-pole, stays outside the fourteen. ⛔ THE FIELD EXISTS SO A CRAFT CAN SIT UNDER A TRADITION WITHOUT CLAIMING TO BE THAT TRADITION'S OWN."
+  "folkAccessible": {
+   "type": "boolean",
+   "description": "⛔ THIS CRAFT IS OPENLY LEARNABLE BY ANYONE, not only by the tradition that owns it. ⚠️ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The folk idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ✅ SO THIS IS AN ACCESS FLAG, NOT A CATEGORY. The craft's `tradition` is its real owner and always a POLE; this field says the pole shares it. ⛔ I FIRST DECLARED `traditionKind: \"pole\"|\"foothill\"|\"folk\"` from SNG-536 §2a and it was wrong in the same way the spec was: **it made folk a kind of tradition, which is the thing being retired.**"
   }
  }
 }

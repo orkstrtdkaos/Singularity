@@ -356,22 +356,31 @@ working papers; **this is the answer.**
 
 ---
 
-## 0c · ⛔ THE FUTURE STATE — 14 TRADITIONS, AND EVERYTHING BELOW DESCRIBES THE OLD ONE
+## 0c · ✅ THE FUTURE STATE — 14 DOMAINS **ABOVE** THE 24 POLES (Erik ruled 2026-08-30)
 
 **Erik, 2026-08-30: *"That's the end result to keep in mind AND the thing all the documentation should be
 written for, so that we don't keep getting confused. The current state of how it works is ok to leave, but
 MAKE SURE THE FUTURE STATE IS LISTED, THEN REPLACES THE OLD ONE WHEN WE'RE DONE."***
 
-⚠️ **READ THIS SECTION BEFORE ANY TRADITION CLAIM IN THIS DOCUMENT.** Everything after it — every audit,
-every gap, every *"tradition X lacks Y"* — was measured against **24 wheel poles**, and the game is moving
-to **14 primary traditions on 7 axes, with the 24 poles absorbed as SECTS.**
+✅ **ERIK RULED READING B, 2026-08-30: THE POLES REMAIN THE TRADITIONS. THE FOURTEEN ARE DOMAINS ABOVE
+THEM.** ⛔ **The poles are NOT absorbed and do NOT become sects** — `traditions_v2.json`'s own note says
+"absorbing all 24 wheel poles as sects" and that wording is superseded.
 
-⛔ **A GAP FOUND UNDER THE OLD STRUCTURE MAY NOT BE A GAP UNDER THE NEW ONE**, because a sect inherits its
-primary's coverage. `figurist` has no healing; it becomes a sect of **Mind**, where `cogitant` heals.
+⚠️ **WHAT THIS COSTS AND SAVES.** ✅ **The 24-position ring survives intact:** `distances`, `antipodeOf`,
+`ringDistance` and `domainAccessModel` all keep their meaning, **every antipode stays SINGLE**, and
+cross-pole braids stay cross-pole. ⛔ **CCode's cross-axis geometry problem largely dissolves** — under
+Reading A, `Mind` would have had THREE antipodes landing in three different merged traditions.
 
-### The fourteen, with their sects and live sizes
+✅ **AND THE MERGE IS ADDITIVE:** 47 content files and every authored NPC keep working, **because nothing
+they name stops existing.**
 
-| primary | n | sects |
+⚠️ **A GAP FOUND PER-POLE IS STILL A REAL GAP** — the pole is still a tradition and still a people. ⛔ **But
+a DOMAIN-level question ("can a Mind character heal?") is answered by the domain**, and `figurist`'s missing
+healing is covered at that level by `cogitant`.
+
+### The fourteen domains, and the poles they group
+
+| domain | n | poles it groups |
 |---|---|---|
 | **Death** | 32 | ashwarden · threnodist |
 | ⛔ **Dark** | 29 | umbral · **veilwright** |
@@ -391,15 +400,15 @@ primary's coverage. `figurist` has no healing; it becomes a sect of **Mind**, wh
 ⚠️ **SPIRIT AT 10 AGAINST DEATH AT 32 IS THE IMBALANCE THAT MATTERS** — Spirit carries Parakletos, the
 Thinnings and the Veil contact point. **The most cosmologically loaded tradition has the fewest crafts.**
 
-### ⛔ AND FALSEHOOD/TRUTH IS THE ONE THAT CHANGES MOST
+### ✅ AND UNDER READING B, FALSEHOOD/TRUTH KEEPS ITS AXIS
 
-**`veilwright` becomes a sect of DARK. `verist` becomes a sect of LIGHT.** ⚠️ **So the falsehood/truth axis
-stops being an axis and becomes two sects on opposite sides of dark/light** — which is why the
-*"Verist has no healing craft"* finding needs re-reading: **under the merge a Verist inherits Light, and
-`blazeborn` has `cleansing_light` and `sun_coax`.**
+**`veilwright` and `verist` are STILL TRADITIONS and still each other's antipode.** ⚠️ They are *grouped*
+under DARK and LIGHT respectively — **the grouping does not dissolve the tension between them**, which is
+what Reading A would have done.
 
-⛔ **THAT IS ERIK'S ADJACENCY RULE SATISFIED BY THE MERGE ITSELF**, not by a neighbour: *"if a tradition
-doesn't have healing, its adjacent ones must."* **Under the fourteen, a sect's primary IS the adjacency.**
+✅ **AND ERIK'S HEALING-ADJACENCY RULE NOW HAS TWO ROUTES:** `better_story` from the opposite pole (the
+axis healing across itself), **and** the domain grouping, where a Verist sits with `blazeborn`'s
+`cleansing_light`. ⛔ **Both are real, and neither requires the Verist to stop being a Verist.**
 
 ### What is NOT one of the fourteen, and stays out
 

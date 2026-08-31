@@ -300,7 +300,28 @@ the Marchward and they wear *"scars as record"*. ⛔ **Erik: Sun Tzu is revered;
 here.** ⚠️ **I had conflated two different honesties — PLAIN-SPOKEN PERSONALLY and DECEPTIVE
 PROFESSIONALLY is not a contradiction, it is the entire strategic tradition.**
 
-### 13. ⛔ AUDIT AGAINST THE FOURTEEN, NOT THE TWENTY-FOUR
+### 13. ⚠️ AUDIT THE POLE; ANSWER COVERAGE AT THE DOMAIN
+
+**⛔ REVISED 2026-08-30 — I HAD THIS BACKWARDS.** This rule originally said *"audit against the fourteen,
+not the twenty-four."* ✅ **Erik ruled Reading B: THE POLES REMAIN THE TRADITIONS and the fourteen are
+DOMAINS ABOVE THEM.**
+
+⛔ **SO THE POLE IS THE RIGHT AUDIT UNIT AFTER ALL** — it is still a tradition, still a people, still has a
+region and a locus and a cult of purity. **Auditing `verist` as a tradition was correct; it does not become
+a sect of Light.**
+
+⚠️ **WHAT CHANGES IS ONLY THE COVERAGE QUESTION.** A gap is still a gap at the pole. ⛔ **But
+*"can a character in this domain do X?"* is answered at the DOMAIN**, and that is where Erik's
+healing-adjacency rule gets its second route: `figurist` has no healing and sits in **Mind** with
+`cogitant`, who does.
+
+✅ **STATE WHICH LEVEL A COVERAGE CLAIM IS MADE AT.** *"Verist has no healing craft"* is true at the pole and
+**answered at the domain** — and both statements are worth making, because a Verist player still cannot heal
+and a Mind party still can.
+
+---
+
+### 13b. ⛔ WHAT THE OLD RULE GOT RIGHT AND KEEP
 
 **Added 2026-08-30. Erik: *"keep in mind we're merging many axes/poles… that's the end result to keep in
 mind AND the thing all the documentation should be written for, so that we don't keep getting confused."***

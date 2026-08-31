@@ -1,11 +1,9 @@
 # SPEC — Tradition Narrative Pass, Second Look, and NPC Thickening
 
 **Author:** Aevi (PO) · **Date:** 2026-08-31
-**Status:** `spec_ready` — CCode ROUND 2 requested before authoring begins
-**Parallel work:** CCode is building the v2 tradition merger (`SPEC_SNG-536`). This pass is
-content-authoring, not migration — it does not touch `tradition`/`traditionV2` fields, does not
-move abilities between files, and does not require the merger to land first. Safe to run in
-parallel.
+**Status:** `promoted` — CCode ROUND 2 incorporated, ready to author
+**Parallel work:** CCode's v2 tradition merger (`SPEC_SNG-536`) is complete (A–F + antipode
+rework landed). No in-flight engine work to collide with. ✅ Safe to proceed.
 
 ---
 
@@ -13,164 +11,215 @@ parallel.
 
 Erik asked for three things in the same breath:
 
-1. **A narrative skills pass** — the whole corpus optimised for mechanics; now evaluate for
-   narrative quality. *"Not everything is about mechanics."*
-2. **A second look at the traditions** — we updated what we looked for as we moved along, and
-   the earlier-audited traditions have not yet received the thickening and broadening we learned
-   to apply. Erik directed that this applies to **all 14 traditions**, not only the three
-   earliest-closed.
-3. **Bring the authored and minted NPCs into this** — the 111 authored NPCs and 7 with
-   interiority should connect to the tradition and people work.
+1. **A narrative skills pass** — the corpus optimised for mechanics; now evaluate for narrative
+   quality. *"Not everything is about mechanics."*
+2. **A second look at the traditions** — applies to **all 14 traditions**, not only the
+   earliest-closed. Earlier traditions get the items that postdate their close; untouched
+   traditions get the full current checklist once, not twice.
+3. **Bring the authored and minted NPCs into this** — 111 authored NPCs, 7 with interiority,
+   should connect to the tradition and people work.
 
-⚠️ **These are one pass, not three.** The traditions ARE the people. The NPC layer is where a
+⚠️ **These are one pass, not three.** The traditions are the people. The NPC layer is where a
 tradition becomes a face. Narrative quality in a craft is only testable against the people who
 cast it.
 
-**Scope:** all 14 traditions (24 sects), across all 12 axis files.
-
-**For the two ✅-closed traditions (Mind, Body)** and in-progress Death: the pass applies the
-items that postdate their original close. For the 11 untouched traditions: the narrative and
-thickening lens runs as part of their first full pass — not a separate second look, but the same
-work done once with the full current checklist.
+**What this pass does NOT touch:** `tradition`/`traditionV2` field values · mechanical fields
+(`energyCost`, `levelReq`, `functions`, `mechanic`) · engine code · `powerSystem` defect cleanup
+(that runs inside each tradition's full audit separately).
 
 ---
 
-## §1 — PWSV (measured at HEAD v1.9.285)
+## §1 — PWSV (corrected from ROUND 2)
 
-| claim | probe | result |
-|---|---|---|
-| Traditions fully audited (✅ in tracker) | `TRACKER_traditions.md` | **Mind, Body** only |
-| Traditions in-progress | tracker | **Death** |
-| Traditions untouched | tracker | **Dark, Breaking, Span, Light, Building, Order, Demonic, Life, Chaos, Angelic, Spirit** — 11 of 14 |
-| All axis files present | `content/packs/core/abilities/reach_*.json` | ✅ all 12 exist |
-| NPCs authored | `content/packs/valley/npcs/` | 41 solo files + `legends.json` |
-| NPCs with interiority | `npc_interiority.json` | ⛔ **7 of ~111** |
-| Narrative skills (`foresee` fallback gloss) | backlog measurement | ⛔ **15 of 35 `foresee` crafts** print boilerplate |
-| `sent_meaning` flagged by Erik | backlog | ✅ recorded as first narrative candidate |
-
-**What this pass touches:** craft `plainly` / `narrationHints` / `description` · tradition
-`civilization` / `aesthetic` prose · NPC files and `npc_interiority.json` · schools (where
-missing) · obscure crafts (where missing) · `backlash` / `conserveSuppresses` · `folkAccessible`.
-
-**What this pass does NOT touch:** `tradition`/`traditionV2` field values (merger's lane) ·
-mechanical fields (`energyCost`, `levelReq`, `functions`, `mechanic`) · engine code · the
-`powerSystem` defect cleanup (that runs inside each tradition's full audit separately).
+| claim | measured at HEAD v1.9.286 |
+|---|---|
+| Traditions ✅ closed | Mind, Body only |
+| Traditions in-progress | Death |
+| Traditions untouched | Dark, Breaking, Span, Light, Building, Order, Demonic, Life, Chaos, Angelic, Spirit — 11 of 14 |
+| All axis files present | ✅ all 12 `reach_*.json` exist |
+| NPCs authored | 41 solo files + `legends.json` |
+| NPCs with interiority | 7 of ~111 |
+| Mind craft count | **30** (spec draft said 25 — stale) |
+| Body craft count | **28** (spec draft said 22 — stale) |
+| Death craft count | **39** (spec draft said 30 — stale) |
+| `bargain` in Death | ✅ **exists** — `true_account` (ashwarden L1, `bargain`+`reveal`+`empower`+`persuade`) — retire the gap claim |
+| `folkAccessible` gap | **14 of 24 poles have none** (spec draft said 12 — stale) |
+| `folkAccessible` readers | ⛔ **ZERO** — authored on 18 crafts, read by nothing |
+| `backlash` readers | ✅ 3 engine, 10 app — real field, author it |
+| `conserveSuppresses` readers | ✅ 1 — `app.js:7351` resolution note — real field, author it |
+| `backlashRung` readers | ⛔ **ZERO** — 20 crafts author it, nothing reads it |
+| `civilization` reader | `app.js:11582` — player-facing lore screen (not GM-prompt) |
+| `aesthetic` readers | 3 engine modules + 15 app sites — load-bearing, drives images |
+| `cultOfPurity` readers | ⛔ **ZERO** |
+| `npc_interiority.json` read path | `state.js:603` → `worldtick.js:435` + `app.js:7727` — live |
+| `foresee` boilerplate | authored content, not engine-generated — 15 of **34** (not 35) |
+| Gloss fossil scope | ⛔ **251 of 414 crafts** carry one of 8 stock glosses; **48 carry a wrong one** |
 
 ---
 
 ## §2 — THE FOUR WORK STREAMS
 
-### §2a — Narrative skills pass (all 14 traditions)
+### §2a — Narrative skills pass (all 14 traditions, full corpus)
 
-The audit optimised for mechanical correctness. A craft can be mechanically perfect and
-narratively inert. The `foresee` finding is the proof: a whole verb went that way without anyone
-noticing.
+**The problem is larger than the spec draft scoped.** CCode measured it:
 
-**T7 applied as a narrative lens across the full corpus.** The second-turn test already asks
-"what does the GM narrate CHANGING?" — the narrative pass does not accept a dice roll as the
-answer.
+| | crafts |
+|---|---|
+| Carrying one of 8 stock glosses (thin — says *that*, never *which*) | **251 of 414** |
+| ⛔ Carrying a gloss naming a verb family the craft does not have (wrong) | **~48** |
+| Carrying the *"A investigate action…"* grammar bug (fossil generation tell) | **59** |
 
-**Three signals to sort by, in order:**
+⚠️ **The 15 `foresee` crafts are a subset.** `foresee` was where the audit happened to look, not
+where the problem lives. Every verb family has entries in the 251.
 
-1. ⛔ **`foresee` with boilerplate plainly** — 15 of 35 crafts resolve to *"reveals information
-   or sets up a later action."* Each needs a rewrite: what the GM must now say out loud, what
-   the player can act on. Not which file it is in — every axis file is in scope.
-2. ⚠️ **`sent_meaning` — Erik's named candidate.** Apply T7; rewrite if it fails.
-3. ⚠️ **Any craft whose `plainly` describes what the wielder FEELS rather than what the GM must
-   SAY.** Perception and reveal crafts are the highest-risk zone — the same failure pattern
-   found in `the_true_figure`, `the_standing_figure`, `the_plain_seeing` during the Body pass.
+**Two tiers of work, in order:**
 
-**Scope:** targeted rewrites only. Gate: after each rewrite, T7 must produce a concrete answer
-in one sentence.
+**Tier 1 — Wrong glosses (~48 crafts).** A concealment craft described as *"makes or animates
+something"* is actively misleading. These are correctness bugs, not narrative polish. Fix these
+first regardless of the narrative pass scope. CCode can land `scripts/gloss_audit.mjs` as a
+standing ratchet — request it.
 
-### §2b — Second look: what postdates the original audits (Mind, Body, Death)
+**Tier 2 — Thin glosses (remainder of the 251).** The narrative pass proper. Each craft needs a
+`plainly` that names a concrete GM output, not a category. T7 applied: what does the GM narrate
+CHANGING? A dice roll is not an answer.
 
-Five items were established after Mind and Body closed, and after Death's partial audit began:
+**Signals to sort by within Tier 2:**
+
+1. `foresee` crafts — 34 in scope, 15 carrying the stock gloss. The verb most exposed because it
+   has no mechanical result to hide behind.
+2. `sent_meaning` — Erik's named candidate.
+3. Any `reveal`, `perceive`, or `foresee` craft whose `plainly` describes what the wielder
+   FEELS rather than what the GM must SAY. Same failure pattern as `the_true_figure` /
+   `the_standing_figure` / `the_plain_seeing`.
+
+**Gate:** after each rewrite, T7 must produce a concrete answer in one sentence.
+
+**Note on `plainly` readers:** `plainly` is read by 7 engine modules and 11 app sites. These are
+not decorative rewrites.
+
+### §2b — Second look: items postdating original audits (Mind, Body, Death)
+
+**Corrected craft counts (ROUND 2):** Mind 30 · Body 28 · Death 39.
+
+**Items postdating the original closes:**
 
 | item | established |
 |---|---|
 | T5 — rank = mastery, costs at earned ranks are a tax | 2026-08-07 |
-| T6 — cannot is the backlash (`backlash` / `conserveSuppresses`) | 2026-08-07 |
+| T6 — `backlash` / `conserveSuppresses` (both real and wired) | 2026-08-07 |
 | T7 — second-turn test | 2026-08-07 |
 | Emotional/thematic palette pass | 2026-08-23 |
-| Every tradition reaches all verbs in its own idiom (Erik's correction) | 2026-08-29 |
-| `folkAccessible` — 12 of 24 poles have none | 2026-08-30 |
+| Every tradition reaches all verbs in its own idiom | 2026-08-29 |
 
-**Mind** (25 skills, 3 schools):
-- T5/T6/T7 across all 25. `backlash` and `conserveSuppresses` will be absent — add them.
-- Thematic palette: cogitant/syllogist/figurist. Which modes dominate? What is missing?
-- `folkAccessible`: 2 crafts present. Is the selection deliberate (2–3 per pole is the rule)?
-- 4 social verbs confirmed present — verify each reaches all four in the tradition's idiom.
+**`folkAccessible` is HELD** pending a decision on whether the flag gets a reader or is retired.
+Do not audit or extend it in this pass. See §2e.
 
-**Body** (22 skills, 2 schools):
-- T5/T6/T7 across all 22. `backlash` and `conserveSuppresses` absent — add them.
+**`backlashRung` is HELD.** It has zero readers — same shape as `folkAccessible`. Do not author
+more `backlashRung` entries. Existing entries are noted as unread in `bounds` or left alone.
+
+**Mind** (30 crafts, 3 schools):
+- T5/T6/T7 across all 30. `backlash` and `conserveSuppresses` absent — add them.
+- Thematic palette: cogitant/syllogist/figurist. Which modes dominate? What is absent?
+- ⛔ `folkAccessible`: **zero** on all three Mind poles. If the selection is deliberate, say so.
+  If not, this is a content gap — but do not assign until §2e resolves the reader question.
+- 4 social verbs present — verify each reaches all four in the tradition's own idiom.
+
+**Body** (28 crafts, 2 schools):
+- T5/T6/T7 across all 28. `backlash` and `conserveSuppresses` absent — add them.
 - ⛔ Erik named Body gaps: stunning strike (`hinder`), joint lock (`bind`), iron-body ward, shout
-  that carries command. Check whether these exist; author any that do not.
-- `folkAccessible`: 2 crafts. Same question.
-- Thematic palette: does the tradition carry the full range of what a body can do, or is it
-  weighted toward one register?
+  that carries command. Check whether these exist at current count; author any missing.
+- `folkAccessible`: held (§2e).
+- Thematic palette: does the tradition carry the full range of what a body can do?
 
-**Death (ashwarden + threnodist)** (30 skills, 3 schools, in-progress):
+**Death — ashwarden + threnodist** (39 crafts, 3 schools, in-progress):
 - T5/T6/T7 across what has been re-authored.
-- ⛔ Deathsense `cannot` currently forbids reading undead; it should read inverted life. Correct.
-- ⛔ `bargain` still missing. One bargaining craft for ashwarden or threnodist.
-- ⛔ Threnody emotional palette — 12/15 grief, joy 2 (never the subject), love/hope/longing/awe
-  = 0. Do not author new crafts until Erik rules on how those emotions enter. Flag the existing
-  grief-only crafts that could carry a second register.
-- `folkAccessible`: 1 craft on threnodist — review.
+- ⛔ `bargain` — RETIRE. `true_account` already covers it.
+- ⛔ Deathsense `cannot` — current text: *"Reads the living and the dying, not the already-dead.
+  A corpse has nothing left to sense."* The correction: a corpse has nothing, but an undead has
+  inverted life that should be loud to a craft built to read life. The sentence forbids a corpse,
+  not an undead — rewrite to address what the correction actually targets.
+- ⛔ Threnody emotional palette — 12/15 grief, love/hope/longing/awe = 0. Do not author new
+  crafts until Erik rules. Flag existing grief-only crafts that could carry a second register.
+- `folkAccessible`: held (§2e).
 
 ### §2c — Tradition promises audit and thickening (all 14 traditions)
 
-**The lens:** read `civilization`, `aesthetic`, `cultOfPurity`, and `people` in `traditions.json`
-as promises the craft list must fulfill. Every named capability, every described act, every
-characterisation of what a people does — check whether a craft exists that fulfills it. If not,
-it is a gap. Author or flag per T7.
+**The lens:** `civilization` and `aesthetic` are the **player-facing lore screen** (both fields
+read at `app.js:11582`). Every characterisation of what a people does is visible to the player.
+A promise the craft list does not keep is one a player can see unkept.
 
-**This applies to all 14.** The Blazeborn lesson (the text said "beam-craft that makes them
-feared" and no such craft existed) was found in the middle of the audit. It has not been run
-against the untouched 11 at all, and it was not run systematically against Mind, Body, or Death.
+**`cultOfPurity` is unread** — world material with no surface. Do not thicken it. Do not update
+it as if it will be read.
 
-**Per tradition, before any authoring:** write the promise list from the prose. Then diff it
-against the craft list. Author against the gaps.
+**Per tradition, before any authoring:**
+1. Read `civilization` and `aesthetic` as a promise list.
+2. Diff against the craft list.
+3. Author against confirmed gaps, per T7 and the full authoring gate.
 
-**Specific threads from the backlog that feed this stream:**
+**Specific threads from the backlog:**
 
-- ⛔ **Ashwarden schism** — Marrow's choice vs. those who chose otherwise. Faction is real before
-  the bird is confirmed. People-material, not craft-material. Reflected in `npc_interiority.json`
-  and in the `civilization` prose, not in new crafts.
-- ⛔ **Threnody scope** — the `civilization` prose should reflect the intended full-emotion scope,
-  not the grief monoculture the current craft list demonstrates.
-- ⛔ **Greyhearth** — ratified foothill, `abilities: 0`. The Grave-Callers exist as foes. The
-  people need their prose even if the crafts are not yet built.
-- ⚠️ **Spirit as a field, not a box** — the `civilization` prose for the numinous should reflect
-  that Spirit permeates (142 of 412 crafts are metaphysical, 134 of them outside the numinous).
-  The prose should name what the numinous ARE without implying they are the only ones running on
-  this source.
-- ⛔ **`folkAccessible` across all 24 poles** — 12 of 24 have none. The full-corpus pass is here.
-  2–3 per pole, L1 crafts first, avoid first offenses. Do not assign by guess — write the
-  selection reasoning per pole before committing.
+- ⛔ **Ashwarden schism** — people-material, not craft-material. Reflected in `npc_interiority.json`
+  and `civilization` prose. Do not add crafts.
+- ⛔ **Threnody scope** — `civilization` prose should name the intended full-emotion scope, not
+  reflect the grief monoculture the craft list demonstrates. Do not author new crafts — update
+  the prose framing.
+- ⛔ **Greyhearth** — ratified foothill, `abilities: 0`. People need their prose. Note: a foothill
+  is a place — do not give it a ring position or domain (that gate fires in `how_it_works` §31C).
+- ⚠️ **Spirit as a field** — `civilization` prose for the numinous should name what the numinous
+  ARE without implying they are the only ones running on metaphysical. 134 of 142 metaphysical
+  crafts are outside Spirit. The prose should carry this without claiming exclusivity.
 
 ### §2d — NPC thickening (tradition-adjacent priority)
 
-**The gap:** 111 authored NPCs, 7 with interiority. The GM prompt uses interiority for the 7 —
-this is live content, not future-proofing.
+**Complete interiority schema (all six fields — ROUND 2 correction):**
 
-**Selection criteria — not all 111, tradition-adjacent first:**
+| field | engine readers | note |
+|---|---|---|
+| `driveSummary` | 1 | ✅ include |
+| `wants` | 33 engine + 16 app | ✅ include — most-read field |
+| `fears` | 4 engine + 4 app | ✅ include |
+| `pushesBackWhen` | 2 | ✅ include — omitted from draft, include it |
+| `emotionalRange` | 2 | ✅ include — omitted from draft, include it |
+| `acknowledgeTone` | 1 | ✅ include — omitted from draft, include it |
+| `traditionRelation` (proposed) | **0** | ⚠️ prose-only — no reader. Include if useful as world material; label it as unread so it is not mistaken for a wired field |
 
-1. ⛔ **NPCs who are a tradition's only named face.** If a tradition's `civilization` describes a
-   people and their only authored NPC has no interiority, the tradition is thin at its human layer.
-2. ⚠️ **NPCs referenced inside craft `description` or `narrationHints`.** A named person inside a
-   craft is a dead link without interiority.
-3. ⛔ **NPCs in the open world-material threads** — the Ashwarden schism, Threnody's emotional
-   range, the Grave-Callers. These are the faces of the backlog material that is about to be
-   written.
+All seven existing interiority entries carry all six schema fields. New entries must match.
 
-**Format:** `npc_interiority.json` entries matching the Pell/Veth-Ondra schema:
-`driveSummary` · `wants[]` · `fears[]` · and optionally `traditionRelation` (how this person
-stands relative to their tradition's defining question).
+**Selection criteria:**
 
-**Minted NPCs:** correctly outside this scope. They get character from `npcPromptSeed` and
-`appearance`. Authored interiority is for the 41 solo-filed NPCs and the legends pool.
+1. ⛔ NPCs who are a tradition's only named face — if the lore screen describes a people and
+   their only authored NPC has no interiority, the tradition is thin at its human layer.
+2. ⚠️ NPCs referenced inside craft `description` or `narrationHints` — a named person in a craft
+   is a dead link without interiority.
+3. ⛔ NPCs in the open world threads — ashwarden schism, Threnody's emotional range, the
+   Grave-Callers.
+
+**Minted NPCs:** outside this scope. Their character comes from `npcPromptSeed` and `appearance`.
+
+### §2e — Two unread fields: `folkAccessible` and `backlashRung` (held — ruling needed)
+
+These are not authoring tasks. They are decisions.
+
+**`folkAccessible`** (18 crafts, 0 readers):
+
+The intended job — Valleyfolk starting kit — is already done by `native_grants.json` as
+`folkNativeGrant` (13 anchors). The flag is a second, unread expression of the same fact.
+
+Two paths:
+- **Wire it** — the Valleyfolk origin derives its starting kit from crafts carrying this flag,
+  retiring the hand-kept grant list as a derived artifact. Engine work, half a day.
+- **Retire it** — the 13 anchors stay as the single source; the flag is removed from existing
+  crafts and the schema.
+
+⛔ **Do not author more `folkAccessible` entries until this is decided.** Reviewing existing
+selections (§2b) is also premature until there is a reader to review against.
+
+**`backlashRung`** (20 crafts, 0 readers):
+
+Either it wants a consumer (controlling how hard a backlash lands) or it moves into `bounds` as
+prose. It should not accrue more entries while nothing reads it.
+
+⬜ **Both are Erik's calls.** Surface them; do not resolve them in this pass.
 
 ---
 
@@ -178,296 +227,31 @@ stands relative to their tradition's defining question).
 
 | order | work | dependency |
 |---|---|---|
-| 1 | Narrative skills pass — `foresee` and T7 failures (§2a) | none |
-| 2 | Tradition promises audit, all 14 — read and list only, no authoring yet (§2c) | none |
-| 3 | Second look: Mind + Body + Death (§2b) | §2c promise list for those three |
-| 4 | Full current checklist on untouched 11 traditions (§2c authoring) | §2c promise list per tradition |
-| 5 | NPC selection and interiority (§2d) | §2b + §2c — NPC selection driven by tradition work |
-| 6 | Thickening prose: ashwarden schism, Threnody scope, Greyhearth people, Spirit framing | §2b + Erik ruling on Threnody emotional range |
-| 7 | `folkAccessible` full-corpus assignment (§2c) | All tradition passes complete |
+| 1 | Surface §2e decisions to Erik — `folkAccessible` and `backlashRung` | none — do this first |
+| 2 | Request `gloss_audit.mjs` ratchet from CCode | none |
+| 3 | Tier 1 narrative pass — ~48 wrong glosses (§2a) | gloss_audit.mjs standing |
+| 4 | Tradition promises audit, all 14 — read and list only (§2c) | none |
+| 5 | Second look: Mind + Body + Death (§2b, excluding folkAccessible) | §2c promise list for those three |
+| 6 | Full current checklist on untouched 11 traditions (§2c authoring) | §2c promise list per tradition |
+| 7 | Tier 2 narrative pass — thin glosses (§2a) | runs in parallel with 5 and 6 |
+| 8 | NPC interiority (§2d) | §2b + §2c — NPC selection driven by tradition work |
+| 9 | Thickening prose: schism, Threnody scope, Greyhearth, Spirit framing | §2b + Erik ruling on Threnody |
+| 10 | `folkAccessible` and `backlashRung` — only after §2e ruling | §2e |
 
-**Held item:** Threnody new crafts (joy, rage, love) — do not author until Erik rules.
-**Held item:** Spirit new crafts — do not author to fix the imbalance; the imbalance is a
-category error, not a content gap (`SPIRIT ALREADY PERMEATES` finding, backlog 2026-08-30).
-
----
-
-## §4 — WHAT EACH FILE I TOUCH LOOKS LIKE
-
-| file | what changes |
-|---|---|
-| All 12 `content/packs/core/abilities/reach_*.json` | `plainly` rewrites (§2a), `backlash`/`conserveSuppresses` additions (§2b), new crafts where promise audit finds gaps |
-| `content/packs/valley/npc_interiority.json` | new entries for tradition-adjacent NPCs |
-| `content/packs/core/rules/traditions.json` | `civilization`/`aesthetic` prose corrections (§2c); `folkAccessible` selection (§2c) |
-| Possibly new NPC files | if a tradition-facing named person does not have a solo file |
-
-**Nothing touched:** `tradition` / `traditionV2` field values · `energyCost` · `levelReq` ·
-`functions` · `mechanic` · engine code.
+**Held:** Threnody new crafts — pending Erik ruling on emotional range.
+**Held:** Spirit new crafts — the imbalance is a category error, not a content gap.
 
 ---
 
-## §5 — AUTHORING GATE
+## §4 — AUTHORING GATE
 
-Every new or rewritten craft runs the full gate:
+Every new or rewritten craft:
 
 ```
-python3 po/authoring_gate.py <authored.json>            # before the write
-python3 po/authoring_gate.py <pulled-from-origin.json>  # after
+python3 po/authoring_gate.py <authored.json>
+python3 po/authoring_gate.py <pulled-from-origin.json>
 ```
 
-T7 written in prose per ability before committing. `node scripts/certify_counts.mjs --check`
-after any craft file is touched. No ratchet regressions.
-
----
-
-## §6 — ROUND 2 REQUEST — CCode substrate-verify before Aevi begins
-
-1. **§2a:** Does the boilerplate `foresee` gloss originate from the engine (a fallback the engine
-   inserts when `plainly` is absent or generic) rather than from the authored field? If yes, which
-   crafts should be fixed in the craft vs. in the fallback?
-2. **§2b:** Do `backlash` and `conserveSuppresses` have consumers in the engine today? If not,
-   authoring them is decoration — flag it so the spec can hold those fields until CCode wires
-   them, or note they belong in `bounds` (prose-only) until they do.
-3. **§2d:** Does the GM prompt use `npc_interiority.json` entries today for the 7 NPCs who have
-   them? Confirm the read path so new entries land where the engine reads.
-4. **§2c:** Is there any engine reader of the `civilization` or `aesthetic` fields in
-   `traditions.json`? If yes, naming the field and line matters. If no, it is GM-prompt territory.
-5. **`folkAccessible`:** what does the engine do with the flag today — does it appear in the
-   skill wheel, the learn screen, the GM prompt, or nowhere yet?
-6. **Anything in this spec that is already true at HEAD** — the domain gate lesson applies.
-
----
-
-# ROUND 2 — CCode substrate verification
-
-**Answered 2026-08-31 at `408963b3` · v1.9.286.** Every number below measured at HEAD, none carried from
-memory. ⚠️ **Three of your PWSV rows are stale and one gap is already closed** — §R5.
-
----
-
-## R1 — §2a · The `foresee` boilerplate is CONTENT, not an engine fallback
-
-✅ **Rewrite by hand; nothing will overwrite you.**
-
-The string *"reveals information or sets up a later action"* appears **nowhere in `engine/`, `app.js` or
-`scripts/`**. It is sitting in the authored `plainly` field of the crafts themselves. **No generator writes
-ability `plainly`** — the only script that writes a `plainly` at all is `rederive_site_tier.mjs`, and that
-writes a *site's*, not a craft's.
-
-⚠️ **The count is 15 of 34, not 15 of 35.** Zero `foresee` crafts have no `plainly` at all, so this is
-entirely a rewrite problem and not a fill-in-the-blank one.
-
-✅ **And it is worth doing:** `plainly` is read by **7 engine modules** (`capabilities.js`, `generate.js`,
-`gm.js` …) and **11 sites in `app.js`**. This is not decoration.
-
-⚠️ **One shape worth noticing before you start.** The offending text reads
-*"A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3
-out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 extends range…"* — **that is a template
-someone once ran, then committed.** It has the grammar bug ("A investigate") that a human would not write
-twice. ⛔ **So the real finding may be larger than `foresee`:** if a generator produced these once and was
-retired, other verbs will carry the same fossil. Worth one grep before you scope the pass to 15 crafts.
-
----
-
-### ⛔ R1b — AND I MEASURED THE FOSSIL. §2a IS SCOPED TO 4% OF IT.
-
-I said above that other verbs might carry the same fossil. **They do, and it is most of the corpus.**
-
-**Eight stock glosses cover 251 of 414 crafts (61%):**
-
-| crafts | the gloss |
-|---|---|
-| 43 | *"reveals information or sets up a later action"* |
-| 40 | *"strengthens someone"* |
-| 37 | *"makes or animates something"* |
-| 33 | *"deals damage"* |
-| 27 | *"reduces incoming harm"* |
-| 24 | *"restores health"* |
-| 19 | *"moves you or someone else"* |
-| 13 | *"weakens or restricts a target"* |
-
-⚠️ **Every one has the property you objected to in the first:** it says *that* something happens and never
-*which*. *"Deals damage"* is as empty as *"reveals information"*.
-
-⛔ **Your 15 is correct and it is a subset.** 43 crafts carry the reveal gloss; **15 are `foresee` crafts and
-28 are not** — they are `strike`, `break`, `bind`, `track`, `empower`, `move`, `command`, `make`, `restore`,
-`summon`, `travel`. ✅ **So `foresee` was not a verb that went inert. It was where you happened to look.**
-
-**325 of 414 match the template shape overall, and 59 carry the *"A investigate action…"* grammar bug** —
-which is the tell that this was generated once and committed, not written.
-
-### ⚠️ AND SOME OF IT IS NOT THIN, IT IS WRONG
-
-**48 crafts carry a gloss naming a verb family the craft does not have.** Unambiguous cases:
-
-| craft | its verbs | its gloss |
-|---|---|---|
-| `shroud` | conceal + deceive | *"makes or animates something"* |
-| `false_trail` | conceal + deceive | *"weakens or restricts a target"* |
-| `never_there` | conceal + deceive | *"makes or animates something"* |
-| `umbracraft` | command + conceal + move + ward | *"makes or animates something"* |
-| `beacon_thread` | bind | *"reveals information or sets up a later action"* |
-| `dim` | break + conceal | *"weakens or restricts a target"* |
-
-⚠️ **THE 48 IS AN UPPER BOUND AND THE MAPPING IS MINE.** I paired each gloss to the verbs it plainly
-describes; some pairs are arguable — `catch_as_catch_can` (restore + sustain) glossed *"strengthens
-someone"* is defensible. ⛔ **The six above are not**, and a concealment craft described as *"makes or
-animates something"* is a sentence a player reads and is misled by.
-
-⬜ **What this does to §2a, and it is your call how:** the pass as scoped is 15 crafts. The measured problem
-is **251 with an empty gloss and ~48 with a wrong one**. ⚠️ **I am not proposing a 251-craft rewrite** — but
-"targeted, only crafts that fail the narrative lens" needs a bigger net than one verb, and the **48 wrong
-ones are a correctness bug that does not need the narrative lens at all.**
-
-**Reproduce:** the three probes are in my scratchpad and I can land them as a script if you want them
-standing — say the word and it becomes `scripts/gloss_audit.mjs` with a ratchet.
-
-
----
-
-## R2 — §2b · `backlash` and `conserveSuppresses` are REAL. `backlashRung` is not.
-
-| field | crafts authoring it | engine readers | app readers | verdict |
-|---|---|---|---|---|
-| `backlash` | 23 | **3** (`gm.js`, `intensity.js`, `progression.js`) | 10 | ✅ **real — author it** |
-| `conserveSuppresses` | 23 | 0 | **1** — `app.js:7351` → `resolution.conserveNote` | ✅ **real, one reader** |
-| ⛔ **`backlashRung`** | **20** | ⛔ **0** | ⛔ **0** | ⛔ **DECORATION** |
-
-⛔ **`backlashRung` is authored on twenty crafts and read by nothing.** It is the exact shape this project
-keeps paying for — authored ✓, registered ✓, loaded ✓, **read ✗**.
-
-⬜ **Your call, and I have not made it:** either it wants a consumer (say, choosing how hard a backlash
-lands) or it should move into `bounds` as prose. ⚠️ **What it should not do is accrue more entries** while
-nothing reads it — that makes the eventual wiring a migration instead of a feature.
-
-✅ **`conserveSuppresses` answers your specific worry directly:** it surfaces as `conserveNote` on the
-resolution, so authoring it makes conserve a real, visible decision. It is one reader, but it is a live one.
-
----
-
-## R3 — §2d · The GM path is real, but ⛔ YOUR FORMAT SPEC IS MISSING HALF THE SCHEMA
-
-✅ **The path:** `npc_interiority.json` → `state.js:603` → `content.npcInteriority`. **Two live consumers:**
-`worldtick.js:435` (`advanceSeeking` — the seeking mechanic reads it) and `app.js:7727`, which reads
-`CONTENT.npcInteriority?.npcs?.[id]?.wants`. ✅ **New entries under `npcs.<id>` land where the engine reads.**
-
-⛔ **But the live schema has SIX fields and your format names three.**
-
-| field | engine readers | app | in your §2d format? |
-|---|---|---|---|
-| `driveSummary` | 1 | 0 | ✅ yes |
-| `wants` | **33** | 16 | ✅ yes |
-| `fears` | 4 | 4 | ✅ yes |
-| ⛔ `pushesBackWhen` | **2** (`npcs.js`, `state.js`) | 0 | ⛔ **omitted** |
-| ⛔ `emotionalRange` | **2** (`npcs.js`, `state.js`) | 0 | ⛔ **omitted** |
-| ⛔ `acknowledgeTone` | **1** (`npcs.js`) | 0 | ⛔ **omitted** |
-| ⚠️ `traditionRelation` *(your proposed addition)* | **0** | **0** | ✅ marked optional |
-
-⛔ **All seven existing entries carry all six fields.** Pell, veth-ondra, mara-wells, calvar, siol, huginn,
-ama — **6/6 each.** Authoring to your three-field format would produce entries **measurably thinner than
-every NPC who already has one**, and thin in exactly the three places the engine reads.
-
-⚠️ **And `traditionRelation` has no reader.** It is a good idea — *"how this person stands relative to their
-people's defining question"* is precisely the §2c material — but it will be prose until something consumes
-it. ⛔ **Say so in the spec, or the next audit will find twenty entries of an unread field.**
-
----
-
-## R4 — §2c · `aesthetic` is heavily read. `civilization` is a lore-screen field. `cultOfPurity` is unread.
-
-| field | reality |
-|---|---|
-| `aesthetic` | ✅ **3 engine modules** (`art.js`, `capabilities.js`, `worldmap.js`) + **15 app sites** — this is load-bearing, it drives the pictures |
-| `civilization` | ⚠️ its only `engine/` hit is a **comment**. The real reader is **`app.js:11582`**, which renders it as a lore paragraph beside `aesthetic` |
-| ⛔ `cultOfPurity` | ⛔ **zero readers, engine or app** |
-
-✅ **So your instinct in §2c is right, with one correction:** it is not "GM-prompt territory", it is **the
-lore screen** — `app.js:11582` prints `civilization` and `aesthetic` as the two paragraphs a player reads
-about a people. ⚠️ **That makes the promise-audit MORE valuable, not less:** those lines are shown verbatim
-to a player, so a promise the craft list does not keep is one the player can see unkept.
-
-⚠️ **`cultOfPurity` being unread is worth knowing before you thicken it** — it is world material with no
-surface today.
-
----
-
-## R5 — ⛔ WHAT IS ALREADY TRUE AT HEAD — the domain-gate lesson, and it bites three rows
-
-### ⛔ `bargain` in Death is DONE
-
-Your §2b says: *"`bargain` still missing from Death. One bargaining craft for ashwarden or threnodist."*
-
-⛔ **It exists.** `true_account` — **ashwarden**, levelReq 1, `functions: ["reveal","empower","bargain","persuade"]`,
-and its `plainly` reads *"…reads a thing's or an offer's true worth, cost and condition, and enters the
-haggling as a named term."* ✅ **Retire that line from the spec.**
-
-### ⚠️ Every craft count in §2b is low
-
-| tradition | spec says | measured at HEAD |
-|---|---|---|
-| Mind | 25 | **30** |
-| Body | 22 | **28** |
-| Death | 30 | **39** |
-
-⚠️ Partly your own two crafts from this morning, partly the week's authoring. ⛔ **A "re-run T5/T6/T7 against
-all 25" scope is 5 crafts short on Mind and 9 on Death.**
-
-### ⚠️ `folkAccessible` is worse than the spec says
-
-Spec: *"12 of 24 poles have none."* **Measured: 14 of 24** — cogitant, syllogist, figurist, somatic,
-blazeborn, verist, ashwarden, seraphic, abyssal, unmaker, churnfolk, enginewright, hourkeeper, numinous.
-18 crafts carry the flag in total.
-
-⚠️ **Note that three of your three second-look traditions are in that list** (cogitant, syllogist, figurist
-= all of Mind; somatic = half of Body; ashwarden = half of Death). Your §2b asks *"is the selection
-deliberate?"* for Mind and Body — ⛔ **for Mind the answer is that there is no selection: zero of its three
-poles carry one.**
-
-### ⚠️ The Deathsense `cannot` says something narrower than you describe
-
-Spec: *"Deathsense cannot currently reads wrong (forbids reading undead; should read inverted)."*
-
-**The live text is:** *"Reads the living and the dying, not the already-dead. A corpse has nothing left to
-sense."* ⚠️ **It forbids reading a CORPSE, and never mentions undead.** Whether that is wrong is your call —
-but the correction you have scoped is to a sentence that does not say what the spec says it says.
-
-### ✅ Two rows verified as stated
-
-`civilization` authored on **all 24** sects ✅ · interiority at **7** entries ✅.
-
----
-
-## R6 — ⚠️ One scope note on parallelism
-
-Your §0 says this pass is safe to run in parallel with the merger because it does not touch
-`tradition`/`traditionV2`. ✅ **Confirmed — and stronger than you claimed:** the merger work is complete
-(A–F plus the antipode rework all landed), so there is no in-flight engine change for this to collide with.
-
-⚠️ **The one overlap:** `how_it_works` §31C asserts **no foothill resolves to a domain or sits on the ring**.
-If §2c's Greyhearth thickening ever gives a foothill a ring position or a domain, that gate fires. ⛔ **It is
-a place, not a pole** — prose is safe, structure is not.
-
----
-
-## R7 — ⛔ YOUR NEW Q5: `folkAccessible` IS READ BY NOTHING
-
-**18 crafts author it. It is in `ability.schema.json`. It has ZERO readers in `engine/` or `app.js`.**
-
-⚠️ **Door two of four** — authored ✓, schema ✓, loaded ✓, **read ✗**. It does not appear in the skill
-wheel, the learn screen, the GM prompt, or anywhere else.
-
-⛔ **AND ITS INTENDED JOB IS ALREADY BEING DONE BY SOMETHING ELSE.** `origins.json` says the Valleyfolk
-*"begin with FOLK-ACCESSIBLE crafts, each of which now belongs to a real pole and carries
-`folkAccessible: true`"* — but the same note records that their **13 anchors are preserved verbatim in
-`native_grants.json` as `folkNativeGrant`**. ✅ **The starting kit works through the grant list.** The flag
-is a second, unread expression of the same fact.
-
-⬜ **What this does to §2b, and it is your call:** you ask for Mind and Body *"is the `folkAccessible`
-selection deliberate?"* ⚠️ **Reviewing a selection that nothing consumes is premature.** Either it wants a
-reader — the honest one would be *the Valleyfolk origin offers exactly the crafts carrying this flag*,
-which would let the grant list be **derived** instead of hand-kept — or the flag should be retired and the
-13 anchors left as the single source.
-
-⛔ **I have not chosen.** Wiring it is engine work and half a day; retiring it is a content decision. But
-authoring more of it before either happens adds entries to a field with no consumer, which is the same
-shape as `backlashRung` in R2.
+T7 written in prose per ability before committing.
+`node scripts/certify_counts.mjs --check` after any craft file is touched.
+No ratchet regressions (`abilitiesMissingHarmRung`, `abilitiesCombatClaimedNotTaught`).

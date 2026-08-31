@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.283";
+const APP_VERSION = "1.9.284";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13562,7 +13562,7 @@ function renderPlay(turn, opts = {}) {
         // SNG-059: group the learn list by TRADITION (the people)
         const byClass = {};
         for (const ab of learnable) { const key = abilityGroupKey(ab, "learned"); (byClass[key] = byClass[key] || []).push(ab); }
-        const groups = Object.keys(byClass).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(cls => `<details class="learn-group"><summary>Learn ${esc(traditionLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
+        const groupHtml = Object.keys(byClass).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(cls => [cls, `<details class="learn-group"><summary>Learn ${esc(traditionLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
           byClass[cls].sort((a,b)=>(a.levelReq||1)-(b.levelReq||1)).map(ab => {
             const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);
             const capBlock = cap && ab.powerSystem !== "learned";
@@ -13575,7 +13575,33 @@ function renderPlay(turn, opts = {}) {
             const blocked = !gate.ok || capBlock || tooExpensive;
             const bandTag = dv.band === "far" ? ", far" : dv.band === "adjacent" ? ", kin" : "";
             return `<button class="opt ${ripe ? "practiced" : ""} ${blocked ? "locked" : ""}" ${blocked ? "disabled" : `data-learn="${esc(ab.id)}"`} title="${esc(ab.description + " — " + dv.reason + (gate.ok ? "" : " · " + gate.why))}" style="margin:2px 0; display:block; width:100%"><span class="tier-badge">${tierOf(ab.levelReq)}</span> ${esc(ab.name)} <span class="cost">L${ab.levelReq || 1}${bandTag}${learnCost > 1 ? ` · ${learnCost} pts` : ""}${ripe ? " — FREE" : ""}${!gate.ok ? " 🔒 " + esc(gate.why) : capBlock ? " 🔒 at capacity" : tooExpensive ? " 🔒 need " + learnCost + " pts" : ""}</span></button>`;
-          }).join("")}</details>`).join("");
+          }).join("")}</details>`]);
+        // ⛔ CCODE-338 (D) — POLES GROUPED UNDER A DOMAIN HEADING, AND THE THING YOU PICK IS STILL THE POLE.
+        // Aevi’s ruling, and the reasoning is Reading B’s: the learn screen is where ACCESS IS DECIDED, and
+        // access is the only place the domain does real work — a player choosing a secondary needs to see
+        // that `figurist` sits with `cogitant`, or the choice is arbitrary.
+        //
+        // ⚠️ A GROUPING, NOT A LABEL. The domain is a heading over the peoples; every clickable thing below
+        // it is still a people. ⛔ SHE REFUSED THE CHARACTER SHEET for exactly this reason: putting "Mind" where
+        // a player reads who they ARE makes Mind the identity, which is Reading A wearing a label.
+        //
+        // ⚠️ AND A PEOPLE WITH NO DOMAIN IS NOT AN ERROR — the foothills are PLACES where poles meet, so they
+        // gather under their own heading rather than being forced into one (§31C).
+        const byDomain = new Map();
+        for (const [cls, html] of groupHtml) {
+          const dom = domainOfTradition(cls, CONTENT.traditionIndex);
+          const key = dom || "";
+          if (!byDomain.has(key)) byDomain.set(key, []);
+          byDomain.get(key).push(html);
+        }
+        const domOrder = [...byDomain.keys()].sort((a, b) => (a === "" ? 1 : b === "" ? -1 : a.localeCompare(b)));
+        const groups = domOrder.map(dom => {
+          const inner = byDomain.get(dom).join("");
+          // ⚠️ WITH NO DOMAIN LAYER LOADED every people lands under "" and this renders exactly what it
+          // rendered before — the heading appears only when there is something true to say.
+          if (!dom) return domOrder.length === 1 ? inner : `<div class="learn-domain learn-domain-none"><div class="learn-domain-head">elsewhere</div>${inner}</div>`;
+          return `<div class="learn-domain"><div class="learn-domain-head">${esc(String(dom).toUpperCase())}</div>${inner}</div>`;
+        }).join("");
         return capLine + groups;
       })()}
       ${(character.discoveries || []).length ? `<details class="skill-group discoveries" open><summary>Discoveries &amp; Combinations <span class="cost">(${character.discoveries.length})</span></summary>${character.discoveries.map(d => {

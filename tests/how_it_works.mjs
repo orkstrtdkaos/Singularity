@@ -1826,6 +1826,102 @@ console.log("\n── §31B · every craft is asked its people, not its physics 
   check("§31B: the powerSystem SYSTEM checks are untouched — they ask a different question",
     sysChecks.length >= 8, `${sysChecks.length} system checks`);
 }
+/* ══════════ §31C — A FOOTHILL IS A PLACE, AND A PLACE HAS NO DOMAIN ══════════ */
+// ⛔ RULING (Aevi, ratified): "no domain" for the off-wheel records is a STATED answer, not an omission.
+// Her argument, and it is one-sided: ⚠️ **A FOOTHILL IS A PLACE WHERE POLES MEET. A POLE IS A POSITION ON
+// THE RING.** Those are different kinds of thing, and a place has no ring position BY DEFINITION.
+//
+// ⚠️ AND IT IS A BOUNDARY ERIK HAS HAD TO CORRECT THREE TIMES ("valley_craft has parents" ×2, "there is no
+// folk tradition" ×1). ⛔ THAT IS EXACTLY THE KIND OF DISTINCTION THAT NEEDS A GATE RATHER THAN A MEMORY.
+//
+// ⚠️ `valley_craft` HAVING ZERO ABILITIES IS THE RECORD DOING ITS JOB, not an unfinished retirement: the
+// crafts moved to their real owners and the ACCESS POINT stayed, because a place cannot move. `hardline`
+// and `greyhearth` have always had zero and were never in doubt.
+console.log("\n── §31C · a foothill is a place, and a place has no domain ──");
+{
+  const TRc = await import("../engine/traditions.js");
+  const tfc = rj("content/packs/core/rules/traditions.json");
+  const v2c = rj("content/packs/core/rules/traditions_v2.json");
+  const idxc = TRc.buildTraditionIndex(tfc, v2c);
+  const fhc = rj("content/packs/core/rules/foothills.json");
+
+  // ⛔ THE STATED ANSWER: every record that is a PLACE resolves to no domain.
+  const places = Object.keys(fhc.foothills || {});
+  const inDomain = places.filter(t => TRc.domainOfTradition(t, idxc));
+  check("§31C: no foothill resolves to a domain — a place is not a pole",
+    inDomain.length === 0, inDomain.map(t => `${t} → ${TRc.domainOfTradition(t, idxc)}`).join(", "));
+  check("§31C: …and there are places to check", places.length >= 5, `${places.length} foothills`);
+
+  // ⚠️ THE SAME DISTINCTION FROM THE OTHER SIDE: a place has no RING POSITION either. If a foothill ever
+  // gains one, it has stopped being a place and this should be a deliberate act, not a drift.
+  const onRing = places.filter(t => idxc.ringPos[t] != null);
+  check("§31C: no foothill sits on the ring — a place has no position",
+    onRing.length === 0, onRing.join(", "));
+
+  // ⛔ AND THE CONVERSE, which is what makes the two above non-vacuous: every POLE does have both.
+  const poles = Object.keys(idxc.domainOfTrad || {});
+  const poleMissing = poles.filter(t => idxc.ringPos[t] == null);
+  check("§31C: every POLE has a ring position AND a domain — the distinction runs both ways",
+    poles.length === 24 && poleMissing.length === 0,
+    `${poles.length} poles, ${poleMissing.length} off-ring`);
+
+  // ⚠️ A STORED ABILITY COUNT IS FORBIDDEN BY THE FILE’S OWN NOTE and every row carried one until it was
+  // flagged. ⛔ I THEN QUOTED THE STALE NUMBER BACK AFTER AEVI HAD REMOVED THEM — neither of us re-derived.
+  // This is cheaper than remembering.
+  const stored = Object.entries(fhc.foothills || {}).filter(([, v]) => v && typeof v === "object" && v.abilities !== undefined);
+  check("§31C: no foothill stores an ability count — the file’s own rule, now enforced",
+    stored.length === 0, stored.map(([k, v]) => `${k}: ${v.abilities}`).join(", "));
+}
+/* ══════════ §31D — THE DOMAIN IS A HEADING, AND THE SHEET NEVER SAYS IT ══════════ */
+// ⛔ RULING (Aevi): the domain shows on the LEARN SCREEN as a grouping and NOWHERE a player identifies
+// themselves. Her refusal is the load-bearing half: ⚠️ "The sheet says who you are. You are a Cogitant.
+// Putting Mind on the sheet is exactly the move that makes players think their tradition is Mind — and
+// Erik’s ruling was that it is not."
+//
+// ⚠️ SO THIS GATES BOTH DIRECTIONS. A grouping that never appears is a merger nobody can see; a domain on
+// the sheet is Reading A wearing a label. ⛔ EITHER FAILURE IS SILENT WITHOUT A CHECK.
+console.log("\n── §31D · the domain is a heading, and the sheet never says it ──");
+{
+  const app31d = rd("app.js");
+  const css31d = rd("style.css");
+
+  check("§31D: the learn screen groups peoples under a domain heading",
+    /learn-domain-head/.test(app31d) && /domainOfTradition\(cls, CONTENT\.traditionIndex\)/.test(app31d));
+  check("§31D: …and the heading is styled as quiet type, not an affordance",
+    /\.learn-domain-head\s*\{/.test(css31d));
+
+  // ⛔ THE REFUSAL, ENFORCED. `sheetCraftLabel` is what the character sheet renders; it must reach for the
+  // PEOPLE and must never reach for the domain.
+  const sheetFn = (app31d.split("function sheetCraftLabel")[1] || "").split("}")[0];
+  check("§31D: the sheet label asks for the PEOPLE",
+    /abilityTradition\(/.test(sheetFn), sheetFn.trim().slice(0, 80));
+  check("§31D: …and never for the domain — the sheet says who you are",
+    !/domainOf|abilityDomain/.test(sheetFn), sheetFn.trim().slice(0, 80));
+
+  // ⚠️ AND THE GROUPING MUST ACTUALLY PARTITION SOMETHING. Rebuilt here from the same inputs the screen
+  // uses, so a heading that groups every people into one bucket — or into 24 — fails rather than renders.
+  const TRd = await import("../engine/traditions.js");
+  const idxd = TRd.buildTraditionIndex(rj("content/packs/core/rules/traditions.json"),
+    rj("content/packs/core/rules/traditions_v2.json"));
+  const cat31d = [];
+  {
+    const { readdirSync } = await import("node:fs");
+    for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json")))
+      for (const a of (rj(`content/packs/core/abilities/${f}`).abilities || [])) cat31d.push(a);
+  }
+  const peoples = [...new Set(cat31d.map(a => TRd.traditionOf(a, idxd)).filter(Boolean))];
+  const heads = new Set(peoples.map(t => TRd.domainOfTradition(t, idxd) || ""));
+  check("§31D: the headings partition the peoples — more than one, fewer than all",
+    heads.size > 1 && heads.size < peoples.length,
+    `${heads.size} headings over ${peoples.length} peoples`);
+  // ⛔ AND A DOMAIN MUST GATHER MORE THAN ONE PEOPLE SOMEWHERE, or the heading is decoration: the whole
+  // point is that a player SEES figurist sitting with cogitant.
+  const sizes = {};
+  for (const t of peoples) { const d = TRd.domainOfTradition(t, idxd); if (d) sizes[d] = (sizes[d] || 0) + 1; }
+  check("§31D: at least one domain gathers several peoples — that is what makes the choice legible",
+    Object.values(sizes).some(n => n >= 2),
+    Object.entries(sizes).filter(([, n]) => n >= 2).map(([d, n]) => `${d}:${n}`).join(" "));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

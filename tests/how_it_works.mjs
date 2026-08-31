@@ -1604,6 +1604,48 @@ console.log("\n── §29 · the balance doc's dial list is checked against the
   check("§29: …and it found constants to check", codeOnly.length >= 3, `${codeOnly.length}`);
 }
 
+/* ══════════ §30 — A CHOSEN CRAFT SURVIVES THE CHOOSING ══════════ */
+// ⛔ ERIK: "you need to use character sheets for these npcs and have them choose skills. THE SKILL USE IS
+// WHAT WILL PROVIDE THE DIFFERENCES." ⚠️ IT COULD NOT. `opponentPolicy` scores a sheet's skills carefully —
+// matchup, press-when-behind, anti-repetition — and then built its declaration from FOUR FIELDS, dropping
+// `abilityId` and `mechanic`. `mechanicFor` found no authored block and fell to the family default.
+//
+// ⚠️ MEASURED: one authored sheet carrying a 1d6 skill and a 12d6 skill dealt the SAME mean either way.
+// The policy was choosing between weapons that were all the same weapon.
+console.log("\n── §30 · a chosen craft survives the choosing ──");
+{
+  const SBp = await import("../engine/skill_battle.js");
+  const sb30 = rj("content/packs/core/rules/skill_battle_system.json").engine;
+  const mkSkill = (n) => ({ function: "strike", name: "s" + n, tier: 5, attribute: "physical",
+    abilityId: "probe" + n, mechanic: { dice: { n, d: 6 }, damageType: "physical" } });
+
+  // ⚠️ AN AUTHORED SHEET — the hand-built kind, which is the only case where a craft identity exists to lose.
+  const authored = SBp.synthesizeOpponentSheet(
+    { name: "probe", threat: 40, skills: [mkSkill(1)] }, sb30);
+  check("§30: an authored sheet's skills reach the sheet intact",
+    authored.authored === true && !!authored.skills[0].mechanic);
+  const decl = SBp.opponentPolicy(authored, { momentum: 0, round: 1 }, null, sb30);
+  check("§30: …and the policy hands the CRAFT to the fight, not just its verb",
+    !!decl.mechanic && decl.abilityId === "probe1",
+    `keys: ${Object.keys(decl).join(",")}`);
+  // ⛔ THE BEHAVIOURAL CLAIM: two skills that differ only in their dice must resolve differently.
+  const dTiny = SBp.opponentPolicy({ ...authored, skills: [mkSkill(1)] }, { momentum: 0, round: 1 }, null, sb30);
+  const dHuge = SBp.opponentPolicy({ ...authored, skills: [mkSkill(12)] }, { momentum: 0, round: 1 }, null, sb30);
+  check("§30: choosing a bigger craft means a bigger craft",
+    dHuge.mechanic.dice.n > dTiny.mechanic.dice.n,
+    `${dTiny.mechanic?.dice?.n} vs ${dHuge.mechanic?.dice?.n}`);
+
+  // ⚠️ NON-VACUITY IN THE OTHER DIRECTION, AND IT IS THE SAFETY ARGUMENT: a SYNTHESIZED sheet's skills
+  // carry no mechanic at all, so spreading one changes nothing and every generated foe in the game behaves
+  // exactly as it did. ⛔ IF THIS EVER FAILS, the fix has started altering foes it was never meant to touch.
+  const synth = SBp.synthesizeOpponentSheet({ name: "raider", threat: 30 }, sb30);
+  const sDecl = SBp.opponentPolicy(synth, { momentum: 0, round: 1 }, null, sb30);
+  check("§30: a SYNTHESIZED foe is untouched — it never had a craft to carry",
+    synth.synthesized === true && sDecl.mechanic === undefined,
+    `mechanic: ${JSON.stringify(sDecl.mechanic)}`);
+  check("§30: …and it still declares a real move",
+    !!sDecl.function && !!sDecl.intensity, JSON.stringify(sDecl));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

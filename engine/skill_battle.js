@@ -153,7 +153,23 @@ export function opponentPolicy(oppSheet, state = {}, seenPlayerTendency = null, 
   }
   // attrition: can't afford a Surge on a near-empty pool → drop to Standard/Conserve
   if (intensity === "surge" && (state.opponentEnergy ?? oppSheet.energy ?? 0) < 12) intensity = "standard";
-  return { function: pick.function, name: pick.name, tier: pick.tier || 1, attribute: pick.attribute || "practical", intensity };
+  // ⛔ CCODE-331 — THE CHOSEN CRAFT SURVIVES THE CHOICE. This built a fresh object from four fields and
+  // dropped everything else on `pick`, so a skill's `abilityId` and `mechanic` never reached `battleRound`.
+  // `mechanicFor` then found no authored block and fell to the family default for EVERY policy-driven
+  // combatant in the game.
+  //
+  // ⚠️ MEASURED, NOT REASONED: one authored sheet carrying a 1d6 skill and a 12d6 skill dealt the SAME
+  // 8.64 mean either way. ⛔ WHICH CRAFT A FOE CHOSE COULD NOT CHANGE WHAT IT DID — the scoring loop above
+  // picked carefully between weapons that were all the same weapon.
+  //
+  // ⚠️ ERIK: "the skill use is what will provide the differences." It could not, until this line.
+  //
+  // ⚠️ SAFE BY CONSTRUCTION: a SYNTHESIZED sheet's skills carry exactly {function,name,tier,attribute},
+  // so spreading one is a no-op and every generated foe behaves precisely as before. Only an AUTHORED sheet
+  // — the hand-built kind that already passes `opponent.skills` through verbatim — gains anything, which is
+  // the one case where a craft identity existed to lose.
+  return { ...pick, function: pick.function, name: pick.name, tier: pick.tier || 1,
+    attribute: pick.attribute || "practical", intensity };
 }
 
 // ---------- CCODE-35: persistent effects (Erik: "each action should produce something that could persist") ----------

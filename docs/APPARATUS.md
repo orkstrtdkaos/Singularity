@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 87 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 88 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-08-30 · v1.9.278 · 87 files.**
+**Last measured: 2026-08-30 · v1.9.279 · 88 files.**
 
 ---
 
@@ -97,7 +97,7 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | harness | kind | assertions | purpose |
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3521 | — |
-| `tests/how_it_works` | ✅ GATE | 228 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 233 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 184 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
@@ -154,6 +154,7 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | `scripts/run_warden` | 🔧 TOOL+SELFTEST | 1 | CCODE-258 |
 | `scripts/scale_fidelity` | 🔧 TOOL+SELFTEST | 1 | CCODE-251 |
 | `scripts/tradition_melee` | 🔧 TOOL+SELFTEST | 1 | CCODE-326 |
+| `scripts/tradition_war` | 🔧 TOOL+SELFTEST | 1 | CCODE-331 |
 | `scripts/apparatus_inject` | 🔧 TOOL | — | write the generated inventory into docs/APPARATUS |
 | `scripts/apply_promotion_SNG-396` | 🔧 TOOL | — | applies Aevi's two ratifications, and ONLY what they say |
 | `scripts/atlas_inject` | 🔧 TOOL | — | regenerate the §13 table inside docs/FIELD_REFERENCE |

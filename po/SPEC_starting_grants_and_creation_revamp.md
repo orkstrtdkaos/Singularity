@@ -344,3 +344,241 @@ These surfaced this session and need to be tracked:
 
 **As always:**
 14. Anything in this spec already true at HEAD — the domain gate lesson.
+
+---
+
+# ROUND 2 (second pass) — CCode
+
+**Answered 2026-08-31 at `e08ed221` · v1.9.286.** All 14 measured at HEAD.
+
+⚠️ **Handoff note:** your row says *"CCode did not deliver ROUND 2 on [the narrative spec] this session"* —
+it landed at **`b5f12f9a`**, appended to that spec, and the answers you quote two lines later are from it.
+No action needed; flagging so the record is straight.
+
+---
+
+## R1 — Q1 · ✅ ONE LINE, ONE CALL SITE
+
+**`app.js:7158`** — and it is the only refusal site in the codebase:
+
+```
+if (energyCost && character.energy < energyCost) { alert("Not enough energy — rest first."); return; }
+```
+
+✅ **Your hoped-for shape is the real one.** A `freeWhenDrained` gate is a single-branch edit here — no new
+flag in the intensity path, no change to `resolve.js`. ⚠️ **The condition you proposed (`energy <= 0 &&
+rank === 1 && levelReq === 1`) is expressible at this line**, which already has `character` and the craft in
+scope.
+
+## R2 — Q2 · ✅ CONFIRMED, AND THEY STACK CLEANLY
+
+`resolve.js:195` — `if ((character.energy ?? 1) <= 0) add("exhausted", -(rules.energy?.exhaustedPenalty ?? 10))`.
+Authored value **10**.
+
+✅ **It is a ROLL modifier; the refusal is a SPEND check.** Different mechanisms at different points, so a
+drained character who is allowed to act still eats the −10. **Exactly the stacking you described.**
+
+## R3 — Q3 / OI-12 · ✅ YOUR SKEPTICISM WAS RIGHT: NO ATTRIBUTE WRITES
+
+**Measured:** zero writes to attributes, sub-attributes, skill-point pools or creation bonuses keyed off
+`prologue.tags`. The only consumers are `crystallizeDomains(state.prologue.tags, idx)` (→ domains) and
+`suggestForCreation({ prologueTags })` (→ suggestions).
+
+✅ **The prologue grants abilities and domains, never attributes.** Retire the assumption.
+
+## R4 — Q4 / OI-13 · ⛔ TWO OF THE THREE DOORS NEVER SET ATTRIBUTES AT ALL
+
+`state.attrs` is mutated in exactly two places — `app.js:4615` and `4616` — both inside `draw()`, which is
+**quick-start step 1**.
+
+⛔ **Neither other door reaches it.** `renderDescribeReveal` exits to `renderAbilityStep` / `renderDomainStep`;
+`renderPrologueReveal` exits to `renderDomainStep`. **Neither calls `draw()`.**
+
+**So on Describe and Play, a character keeps the default `{physical:3, mental:3, social:3, practical:3}`.**
+
+⛔ **AND THAT DEFAULT IS NOT NEUTRAL.** `nativeGrantIdsFor` takes the argmax over
+`["mental","physical","practical","social"]` using `v > best` — with a four-way tie, **the first key wins**:
+
+> **every character on the Describe and Play doors gets the MENTAL lean.**
+
+⚠️ **Compounding it:** `progression.js:121` fills any remaining cap slots from `byLean.mental` *regardless of
+lean*. **So the mental bias is applied twice on two of three paths.**
+
+✅ **This is the real reason Erik's goal 3 does not bite** — not a weak mechanism, but attributes that are
+never collected on 2 of 3 doors.
+
+## R5 — Q5 / OI-14 · THE POOL IS **12**
+
+`app.js:4568` — `const POOL = 12`. Defaults are `3/3/3/3` (= 12 spent, so the player redistributes rather
+than spends up). **Per-attribute cap 4** (`4615`), **floor 1** (`4616`).
+
+⚠️ **A cap of 4 with a pool of 12 means the widest legal spread is 4/4/3/1** — the lean is a shallow signal
+by construction, even on quick-start.
+
+## R6 — Q6 / OI-1 · ✅ SNG-272 IS SHIPPED
+
+`app.js:4516–4538`. The resolver repairs a legacy id and **says so** (*"legacy id X resolved to Y —
+repairing"*), and a genuinely unknown id logs an error rather than silently defaulting. ✅ **Live, and
+existing saves are repaired on read.**
+
+## R7 — Q7 · APTITUDES ARE NAME-ONLY
+
+No descriptions table. `character.aptitudes` is a **string list**, consumed by `gambit.js:71`
+(`aptitudes?.includes("strategist")`) and passed to the GM in `suggestNextCrafts`. `helper_text.json` has a
+`growth.aptitudes` surface line, but there is no per-aptitude authored record.
+
+## R8 — Q8 · BEFORE / AFTER
+
+| | today | proposed |
+|---|---|---|
+| **Harmonic** | 5 native + 4 baseline = ⛔ **9** | sense `—` + danger-response + 2 chosen = **4** |
+| **Marcher** | 5 native + 4 baseline = ⛔ **9** | sense `read_the_fight` + danger + 2 = **4** |
+| **Cogitant** | 5 native + 4 baseline = ⛔ **9** | sense `mind_read_folk` + danger + 2 = **4** |
+
+⚠️ **The spec's "down from current 5–8" undercounts** — it omits the baseline four. **The real cut is 9 → 4.**
+
+⛔ **And harmonic has no free sense craft** — it is a folk/foothill kit, not a pole, so it falls outside the
+18. Worth deciding whether foothill origins get a sense slot at all.
+
+## R9 — Q9 / OI-8 · ⛔ ENT IS EFFECTIVELY THE ONLY FORM KIT
+
+| form kit | grants |
+|---|---|
+| `ent` | `branch_club`, `barkskin`, `root_hold`, `root_reach` |
+| `blocklands_native` | `quick_wall` |
+| `human_and_default` | ⛔ **nothing** |
+
+⛔ **No Enginewright part-machine, no Abyssal horned, no Churnfolk fae, no Numinous dissolving, no
+Seraphic.** Three kits total, one of which is empty.
+
+⚠️ **And the alias matcher carries a scar worth reading before you author more:** *"an alias must never be a
+substring of a common English word — this is the bug that gave a treefolk kit to anyone described as
+'pa[rt]…'"*.
+
+## R10 — Q10 · ⛔ THE MULTIPLIER YOU ARE COMPARING AGAINST IS ALREADY SUPERSEDED
+
+`skill_capacity.crossClass.costMultiplier: 2` **is not the live mechanism.** `learnPointCost`
+(`skilltree.js:215`) uses **`verdict.penalty`** — the access BAND — whenever the character has a primary
+domain. The multiplier only applies to a domain-less legacy save.
+
+**So "current" is `tierPrice × band`, where band is 1 (primary/kin) · 2 (near) · 3 (far/antipode):**
+
+| tier | home | current far (×3) | additive X=1 | additive X=2 |
+|---|---|---|---|---|
+| T1 | 1 | 3 | 2 | 3 |
+| T2 | 2 | 6 | 3 | 4 |
+| T3 | 3 | 9 | 4 | 5 |
+| T4 | 4 | 12 | 5 | 6 |
+| T5 | 5 | ⛔ **15** | ✅ **6** | ✅ **7** |
+
+⛔ **Additive is a 60% cut at the capstone and a slight RISE at T1** (far T1: 3 → 2 at X=1, unchanged at
+X=2). ⚠️ **It flattens specialisation pressure exactly where the spec's tension lives** — the expensive
+thing stops being expensive.
+
+**Break-even for a far-band T5, banking every point from level 1:**
+
+| model | cost | affordable from |
+|---|---|---|
+| current ×3 | 15 | level **8** |
+| additive X=1 | 6 | level **3** |
+| additive X=2 | 7 | level **4** |
+
+## R11 — Q11 · ⛔ POINTS BIND. THE BREADTH CAP IS NEVER REACHED.
+
+**`skillPointPerLevel` is already 2** — the spec's *"current proposed (2pt/level baseline)"* **is today's
+value**, not a proposal.
+
+**Crafts you could HOLD vs crafts you could AFFORD** (every point banked, nothing ranked up, average
+authored craft = tier 2.29):
+
+| band | L10 | L50 | L100 |
+|---|---|---|---|
+| **cap** | 11 | 51 | 101 |
+| home | 8 | 43 | **87** |
+| far ×3 (today) | 2 | 14 | **29** |
+| additive X=1 | 6 | 30 | **60** |
+| additive X=2 | 4 | 23 | **46** |
+
+⛔ **POINTS BIND IN EVERY BAND AT EVERY LEVEL — INCLUDING AT HOME.** At level 100 a specialist who banked
+every point still cannot fill 14 of their 101 slots.
+
+⛔ **So the answer to "when does the constraint shift from points to capacity" is: NEVER, under any model
+measured.** The breadth cap has never been the binding constraint. ⚠️ **That is a design finding, not an
+arithmetic one** — and it means the insight-milestone bonuses (+10 / +23 points at L50) buy *real* crafts
+rather than pushing against a ceiling.
+
+⚠️ **These figures are generous.** They assume nothing is ranked up; ranking costs again, so the real
+numbers are lower and points bind harder.
+
+## R12 — Q12 / OI-15 · ✅ THE HOOK POINT, AND WHY `backlashRung` CANNOT FIRE TODAY
+
+**Crit failure → backlash is wired at two sites:** `app.js:12087` (`if (r.degree === "crit_failure")
+resolution.backlash = applyBacklash(character, CONTENT.rules)`) and `app.js:7328` (the turn path).
+
+⛔ **`applyBacklash(character, rules)` takes NO ability:**
+
+```
+const hp = rules.novel?.backlashHealth ?? 4;
+const en = rules.novel?.backlashEnergy ?? 10;
+```
+
+**A flat −4 health / −10 energy for every craft in the game.** ⛔ **That is precisely why `backlashRung` is
+unread — the function it would inform never receives the craft.**
+
+✅ **The hook is one signature change:** `applyBacklash(character, rules, ability)`, reading
+`ability.backlashRung` to scale `hp`/`en` or to raise the landed harm tier. Two call sites to update.
+
+⚠️ **Note the craft's own `backlash` PROSE is already surfaced separately** via `backlashLineFor(abilityIds)`
+→ `resolution.backlashText`. **So today the player is told a craft-specific backlash story while taking a
+generic craft-blind penalty.**
+
+## R13 — Q13 · ⛔ ONLY **ONE DOMAIN** IS MISSING A SENSE CRAFT, NOT SIX
+
+Your "6 poles" is correct — but the domain-level view changes the job substantially:
+
+| domain | poles | free sense craft |
+|---|---|---|
+| Mind | cogitant / syllogist / figurist | ✅ 2 of 3 |
+| Light | blazeborn / verist | ✅ 1 of 2 |
+| ⛔ **Dark** | **umbral / veilwright** | ⛔ **NEITHER** |
+| Death | ashwarden / threnodist | ✅ 1 of 2 |
+| Building | wright / stillhold | ✅ 1 of 2 |
+| *(the other 9)* | | ✅ all covered |
+
+⛔ **Dark is the only domain with no free sense craft on either pole.**
+
+✅ **AND 5 OF THE 6 MISSING POLES ALREADY HAVE AN L1 PERCEPTION CRAFT — just not free:**
+
+| pole | existing L1 perception craft | cost |
+|---|---|---|
+| verist | `the_plain_seeing` | 4 |
+| umbral | `darksight` | 3 |
+| veilwright | `see_the_made_thing` | 3 |
+| threnodist | `the_true_feeling` | 3 |
+| wright | `makers_eye` | 3 |
+| ⛔ **syllogist** | ⛔ **none at all** | — |
+
+⚠️ **So the job is not "author 6 crafts".** It is: **zero the cost on 5 existing crafts** (a one-field
+change each, if that is the ruling) **and author 1 new one for syllogist.** ⬜ **Or, if the sense slot is
+per-DOMAIN rather than per-pole, it is one craft for Dark.**
+
+## R14 — Q14 · ALREADY TRUE AT HEAD
+
+| spec assumes | reality |
+|---|---|
+| *"2pt/level"* is a proposal | ⛔ **it is the current value** |
+| cross-class is multiplicative ×2 | ⛔ **superseded by the band penalty (1/2/3)** |
+| the prologue may grant attribute modifiers | ✅ **it does not** — your own skepticism confirmed |
+| 6 sense crafts need authoring | ⚠️ **1 needs authoring; 5 need a cost change** |
+| SNG-272 status unknown | ✅ **shipped and live** |
+| starting total is 5–8 | ⛔ **9** |
+
+## R15 — ✅ OI-9 IS RULED AND I HAVE BUILT IT
+
+⚠️ **I first wrote that I could not find the ruling.** It is in **`BACKLOG.md:1218`** — *"Ruled 2026-08-31:
+wire `folkAccessible` to derive Valleyfolk starting pool"* — recorded in the backlog rather than as a
+`RULING_*.md`, which is where I looked. ⛔ **My search was for a filename, not for the fact.**
+
+✅ **Built — see the commit alongside this append.** It closes the R4 bug from my previous round at the same
+time: the 13 folk anchors buried in `_folkNativeGrant_20260830` are no longer the source, so a Valleyfolk
+character stops getting zero grants.

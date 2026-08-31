@@ -109,7 +109,21 @@ export function retroLevelGrants(character, rules) {
 export function nativeGrantIdsFor(character, rules) {
   const primary = character?.domains?.primary || character?.nativeTradition || character?.origin;
   const table = rules?.traditionNativeGrants?.[primary];
-  if (!table) return [];
+  // ⛔ OI-9 — A FOLK ORIGIN HAS NO POLE TABLE, AND USED TO GET NOTHING. The Valleyfolk are `nativeKind:
+  // folk` with `nativeTradition: null`, so `primary` resolved to the origin id and no table matched — an
+  // early `return []`. Erik ruled the pool is derived from the `folkAccessible` flag; `state.js` supplies
+  // it at load.
+  //
+  // ⚠️ GATED ON THE ORIGIN BEING FOLK, not merely on a missing table — otherwise a typo’d tradition id
+  // would silently hand out the folk kit instead of failing visibly.
+  if (!table) {
+    const folkOrigins = rules?.folkOriginIds || [];
+    const pool = rules?.folkAccessibleIds || [];
+    if (pool.length && folkOrigins.includes(character?.origin)) {
+      return pool.slice(0, rules?.grantCap ?? 5);
+    }
+    return [];
+  }
   const cap = rules?.grantCap ?? 5;
   const attrs = character?.attributes || {};
   let leanKey = "mental", best = -Infinity;

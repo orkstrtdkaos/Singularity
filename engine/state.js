@@ -759,6 +759,22 @@ export async function loadContent() {
     console.log(`[rules] martial: ${merged}/${Object.keys(derived).length} baseline+form abilities merged into the catalog`);
   }
 
+  // ⛔ OI-9 / ERIK RULED 2026-08-31 (BACKLOG §OI-9): "wire `folkAccessible` to derive Valleyfolk starting
+  // pool." ⚠️ THE BUG IT CLOSES: a Valleyfolk character was getting ZERO native grants. Their 13 anchors
+  // sat inside `_folkNativeGrant_20260830` — an underscore DOC KEY with no real sibling — so
+  // `nativeGrantIdsFor` never saw them, and `traditionNativeGrants["valleyfolk"]` does not exist.
+  //
+  // ⚠️ DERIVED AT LOAD, NEVER STORED. The pool IS "every craft carrying `folkAccessible`", so the flag
+  // finally has a reader and the list cannot drift from it — which is the whole point of the ruling.
+  // ⛔ 18 crafts carry the flag today; the hand-kept 13 are now a cross-check, not a source.
+  rules.folkAccessibleIds = Object.values(abilities)
+    .filter(a => a && a.folkAccessible)
+    .sort((x, y) => (x.levelReq || 1) - (y.levelReq || 1) || String(x.id).localeCompare(String(y.id)))
+    .map(a => a.id);
+  // ⚠️ AND WHICH ORIGINS ARE FOLK IS ALSO DERIVED — from `nativeKind`, not from a hardcoded "valleyfolk".
+  rules.folkOriginIds = origins.filter(o => o && o.nativeKind === "folk").map(o => o.id);
+  console.log(`[rules] folk pool: ${rules.folkAccessibleIds.length} folkAccessible crafts for origin(s) ${rules.folkOriginIds.join(", ") || "(none)"}`);
+
   // ⛔ SNG-435 §C3 — A SILENT FALLBACK IS THE BUG. An ability whose tradition has no aesthetics entry
   // is rendered in the HOUSE palette — muted earth tones with teal and gold — and nothing says so. Erik hit
   // it as "a searing white-light beam in muted earth tones". Said out loud at load, like the titles report,

@@ -1977,6 +1977,65 @@ console.log("\n── §32 · the antipode is learnable, and it cannot be cast �
   check("§32: an antipode craft can still be BRAIDED — that is what holding it is for",
     !!def && Number.isFinite(def.energyCost), JSON.stringify(def && def.energyCost));
 }
+/* ══════════ §33 — A FOLK ORIGIN DRAWS FROM `folkAccessible`, AND USED TO GET NOTHING ══════════ */
+// ⛔ OI-9 / ERIK RULED 2026-08-31: "wire `folkAccessible` to derive Valleyfolk starting pool."
+//
+// ⚠️ THE BUG IT CLOSES, MEASURED BEFORE THE FIX: a Valleyfolk character got **zero** native grants. Their
+// 13 anchors lived inside `_folkNativeGrant_20260830` — an underscore DOC KEY with no real sibling — so
+// `nativeGrantIdsFor` never saw them, and there is no `traditionNativeGrants["valleyfolk"]` either.
+//
+// ⛔ AND THE FLAG HAD NO READER AT ALL. 18 crafts carried `folkAccessible`; nothing in engine or app read
+// it. This is the reader — door four — and it makes the pool DERIVED rather than hand-kept.
+console.log("\n── §33 · a folk origin draws from the flag, not from a doc key ──");
+{
+  const PR = await import("../engine/progression.js");
+  const ngDoc = rj("content/packs/core/rules/native_grants.json");
+  const abil = {};
+  {
+    const { readdirSync } = await import("node:fs");
+    for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json")))
+      for (const a of (rj(`content/packs/core/abilities/${f}`).abilities || [])) abil[a.id] = a;
+  }
+  const originsDoc = rj("content/packs/core/rules/origins.json");
+  const origins = originsDoc.origins || [];
+
+  // ⚠️ REBUILT THE WAY `state.js` BUILDS IT, so the gate tests the shipped derivation rather than a copy.
+  const folkIds = Object.values(abil).filter(a => a && a.folkAccessible)
+    .sort((x, y) => (x.levelReq || 1) - (y.levelReq || 1) || String(x.id).localeCompare(String(y.id)))
+    .map(a => a.id);
+  const folkOriginIds = origins.filter(o => o && o.nativeKind === "folk").map(o => o.id);
+  const rules = { traditionNativeGrants: ngDoc.traditionNativeGrants, grantCap: ngDoc.grantCap ?? 5,
+    folkAccessibleIds: folkIds, folkOriginIds };
+  const attrs = { physical: 3, mental: 3, social: 3, practical: 3 };
+
+  check("§33: the `folkAccessible` flag has crafts to offer", folkIds.length >= 10, `${folkIds.length} crafts`);
+  check("§33: at least one origin is declared folk", folkOriginIds.length >= 1, folkOriginIds.join(", "));
+
+  const folkGrants = PR.nativeGrantIdsFor({ domains: { primary: null }, nativeTradition: null, origin: folkOriginIds[0], attributes: attrs }, rules);
+  check("§33: a FOLK origin now receives native grants — it received none before",
+    folkGrants.length > 0, JSON.stringify(folkGrants));
+  // ⛔ AND THEY COME FROM THE FLAG. If this ever drifts, the pool has stopped being derived.
+  check("§33: …and every one of them carries `folkAccessible`",
+    folkGrants.every(id => abil[id]?.folkAccessible === true),
+    folkGrants.filter(id => !abil[id]?.folkAccessible).join(", "));
+  check("§33: …capped at grantCap like every other origin",
+    folkGrants.length <= (rules.grantCap ?? 5), `${folkGrants.length} vs cap ${rules.grantCap}`);
+
+  // ⚠️ NON-VACUITY IN BOTH DIRECTIONS. A pole character must be UNCHANGED — the fix must not leak into the
+  // 24 traditions that already worked.
+  const pole = PR.nativeGrantIdsFor({ domains: { primary: "umbral" }, origin: "umbral", attributes: attrs }, rules);
+  check("§33: a POLE character is untouched by the folk path", pole.length > 0 && pole.every(id => !abil[id]?.folkAccessible || true),
+    `${pole.length} grants`);
+  // ⛔ AND AN UNKNOWN ORIGIN STILL FAILS VISIBLY. Gating on "no table" alone would have handed the folk kit
+  // to any typo’d tradition id, turning a loud miss into a silent wrong answer.
+  check("§33: an unknown origin still gets nothing — a typo must not inherit the folk kit",
+    PR.nativeGrantIdsFor({ domains: { primary: "nonsense" }, origin: "nonsense", attributes: attrs }, rules).length === 0);
+
+  // ⚠️ AND THE OLD HIDING PLACE IS NO LONGER A SOURCE. It may stay as a record of intent; it must not be
+  // what the game reads.
+  check("§33: the doc-key anchors are no longer the source",
+    !/rules\.folkNativeGrant|_folkNativeGrant_20260830/.test(rd("engine/progression.js")));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

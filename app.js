@@ -45,7 +45,7 @@ import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW,
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
-import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
+import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
 import { companyPlaces } from "./engine/ladder.js";   // SNG-390: how many places rapport has earned
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds, shareAtOrAbove, syncStageTaughtRanks, stageTaughtBy } from "./engine/companions.js";
 // SNG-309: what happens when the player goes down — and the SAME death ladder every figure is on.
@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.282";
+const APP_VERSION = "1.9.283";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -207,7 +207,7 @@ function entityHover(spec) {
       const owned = (character.abilities || []).find(a => a.abilityId === id);
       const rp = owned ? rankProgress(character, id) : null;
       return skillDetail(ab, {
-        tradition: traditionLabel(abilityTradition(ab) || ab.powerSystem || ""), tier: tierOf(ab.levelReq),
+        tradition: traditionLabel(abilityGroupKey(ab, "")), tier: tierOf(ab.levelReq),
         owned: !!owned, level: owned?.level, maxRank: CONTENT.rules?.leveling?.maxAbilityRank ?? 3,
         effCost: (() => { try { return effectiveEnergyCost(ab, character, CONTENT.rules); } catch { return ab.energyCost ?? null; } })(),
         baseCost: ab.energyCost ?? null, families: familiesOfAbility(ab, FN_INDEX),
@@ -1129,7 +1129,7 @@ const REGEN_KINDS = {
     // Radiant based skill!" The FIRST mint passes the craft's tradition; this entry had no promptOpts at
     // all, so a RE-ROLL dropped it — losing both the "rendered in the aesthetic of…" clause and the style
     // wrapper, and falling back to the house palette. A Radiant craft was being drawn in muted earth tones.
-    promptOpts: rec => ({ aesthetic: rec ? aestheticFor({ tradition: abilityTradition(rec) || rec.tradition, powerSystem: rec.powerSystem }, CONTENT.visualAesthetics) : null }),   // SNG-435 §C3
+    promptOpts: rec => ({ aesthetic: rec ? aestheticFor({ tradition: abilityTradition(rec), powerSystem: rec.powerSystem }, CONTENT.visualAesthetics) : null }),   // SNG-435 §C3
     keep: (id, url) => { character.abilityImages = character.abilityImages || {}; character.abilityImages[id] = url; return true; }
   },
   // No record behind these — the gallery tile IS the record, so keeping one is keeping the tile.
@@ -3246,7 +3246,37 @@ function traditionLabel(traditionId) {
 }
 
 /** The tradition an ability belongs to (its `tradition` field or the reverse map). */
+// ⚠️ THE PURE RESOLVER. It answers ONE question — what PEOPLE is this craft of — and it may answer null,
+// which is a real answer for a braid, a precursor craft, or anything outside the wheel.
 function abilityTradition(ability) { return traditionOf(ability, CONTENT.traditionIndex); }
+
+// ⛔ CCODE-337 — THE DISPLAY FALLBACK HAD EIGHT COPIES. `abilityTradition(ab) || ab.powerSystem || "folk"`
+// was written out at eight call sites, each free to pick its own default ("folk", "learned", ""), so the
+// same craft could land in differently-named buckets on two screens.
+//
+// ⚠️ AND IT IS DELIBERATELY NOT FOLDED INTO `abilityTradition`. A GROUPING KEY AND A TRADITION ARE
+// DIFFERENT QUESTIONS: `abilityTradition(ab) === tradId` is an identity test, and quietly giving it a
+// powerSystem fallback would make a precursor craft match the tradition "precursor" — which SNG-381
+// settled is NOT a tradition. One helper per question.
+function abilityGroupKey(ability, fallback = "folk") {
+  return abilityTradition(ability) || ability?.powerSystem || fallback;
+}
+
+// ⚠️ CCODE-333: the DOMAIN above the pole. Null when the craft is outside the wheel, which is the honest
+// answer — and the reason nothing here defaults it to a bucket name.
+function abilityDomain(ability) { return domainOf(ability, CONTENT.traditionIndex); }
+
+// ⛔ CCODE-337b — THE CHARACTER SHEET WAS SHOWING THE PHYSICS INSTEAD OF THE PEOPLE. It rendered
+// `ab.powerSystem` directly, so 142 crafts read "metaphysical" and 132 read "precursor" where they should
+// have read "The Somatics" and "The Lattice-Cities". ⚠️ IT NEVER ASKED THE RESOLVER AT ALL.
+//
+// ⚠️ THIS IS §C3's OWN RULE — "a people wins where there is one, and the physics answers where there is
+// not" — which was gated for the AESTHETICS path and simply not applied here. A principle held in one
+// place and not the other is how a bug survives a green suite.
+function sheetCraftLabel(ability) {
+  const t = abilityTradition(ability);
+  return t ? traditionLabel(t) : (ability?.powerSystem || "learned");
+}
 
 /** SNG-055/062: the great-circle SVG — 24 traditions on a ring, chosen ones lit, the antipode axis
  *  drawn, closed poles marked. Shared by the quick-start domain step and the prologue reveal.
@@ -3568,7 +3598,7 @@ function ensureAbilityImage(ab) {
   // SNG-223 Q4: key the craft's tradition to its canonical id (traditionOf resolves it from the index — many
   // abilities carry no bare .tradition), then pass that tradition's authored visual block so the image reads
   // as its people. Absent the aesthetics doc, ensureImage falls back to the bare tradition name.
-  const tradId = abilityTradition(ab) || ab.tradition || null;
+  const tradId = abilityTradition(ab);   // ⚠️ `|| ab.tradition` removed — `traditionOf` reads it first, so it could never fire
   const aesthetic = tradId ? (CONTENT.traditionVisualAesthetics?.[tradId] || null) : null;
   const url = ensureImage({ id: `ability-${ab.id}`, name: ab.name, description: ab.description || ab.effect || "", tradition: tradId },
     "ability", { ratingLevel: viewerRatingLevel(), field: "image", promptOpts: { aesthetic } });
@@ -4608,7 +4638,7 @@ function renderCreate() {
       archetypeFams, archetypeName: selectedArch?.archetype || null, max: 5
     });
     const byTrad = {};
-    for (const a of choosable) { const t = traditionOf(a, CONTENT.traditionIndex) || a.powerSystem || "folk"; (byTrad[t] = byTrad[t] || []).push(a); }
+    for (const a of choosable) { const t = abilityGroupKey(a); (byTrad[t] = byTrad[t] || []).push(a); }
     const abById = Object.fromEntries(choosable.map(a => [a.id, a]));
     // SNG-192 Phase B — the robustness readout: what this build can and cannot DO (§5 coverage), where the
     // WHOLE kit works (§6b common ground), and the honest coherence↔divergence framing (§6c). Never blocks.
@@ -6952,7 +6982,7 @@ function substrateForAction(choice, location) {
   const abId = choice.abilityId || (choice.comboAbilities || [])[0];
   if (!abId) return null;
   const ab = fullCatalog()[abId];
-  const tradition = ab ? (abilityTradition(ab) || ab.powerSystem) : null;
+  const tradition = ab ? abilityGroupKey(ab, null) : null;
   if (!tradition) return null;
   const density = locationDensity(location, CONTENT.substrateModel);
   if (density == null) return null;
@@ -7111,7 +7141,9 @@ async function onChoice(choice) {
     if (energyCost != null) {
       const abilityDef = choice.abilityId ? fullCatalog()[choice.abilityId] : null;
       const note = craftCostNote(energyCost, arcEffectsNow(), {
-        tradition: abilityDef?.powerSystem || null,
+        // ⛔ CCODE-337: this handed a power SYSTEM over as a TRADITION. `craftCostNote` keys arc effects
+        // by PEOPLE, and precursor/learned/harmonic are not peoples (SNG-381). Ask the resolver.
+        tradition: abilityDef ? abilityTradition(abilityDef) : null,
         crossDomain: abilityDef ? isCrossClass(abilityDef, character) : false,
       });
       if (note) { energyCost = note.adjusted; pendingArcCostNote = note; }
@@ -9289,7 +9321,7 @@ function buildWheelModel(sheet = character) {
     // WHY a blocked craft is blocked; `aspirational` = not owned, blocked ONLY by standing (earnable "later",
     // §3 renders it dimmed rather than hard-barred).
     const g = isOwned ? { ok: false, gate: "owned" } : canLearnAbility(sheet, ab.id, cat, CONTENT.rules, { attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: idx });
-    nodes.push({ id: ab.id, name: ab.name, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1, cls: trad || ab.powerSystem || "learned",
+    nodes.push({ id: ab.id, name: ab.name, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1, cls: abilityGroupKey(ab, "learned"),
       x, y, ang, owned: isOwned, band: v.band, allowed: v.allowed, penalty: v.penalty, closed: v.band === "closed",
       barred: !v.allowed && v.band !== "closed", dim: v.penalty > 1, isFolk: trad && isFolkTradition(trad, idx), isPrecursor: ab.powerSystem === "precursor",
       // SNG-124: function overlay + cost-at-a-glance.
@@ -10086,7 +10118,7 @@ function renderLevelUp(status = "") {
   const buyableAll = learnable.filter(ab => !learnState(ab).blocked);
   const shown = learnBuyableOnly ? buyableAll : learnable;
   const byTrad = {};
-  for (const ab of shown) { const k = abilityTradition(ab) || ab.powerSystem || "folk"; (byTrad[k] = byTrad[k] || []).push(ab); }
+  for (const ab of shown) { const k = abilityGroupKey(ab); (byTrad[k] = byTrad[k] || []).push(ab); }
   // SNG-218 §1/§2: the REACHABLE-NOW set — `learnable` filtered through the ONE gate (adds standing, capacity,
   // affordability). BOTH the suggestion (heuristic fallback + the LLM pick) and the render read this, never the
   // raw level+domain `learnable` — so no suggestion (heuristic or model) can ever offer a standing-locked craft.
@@ -10439,7 +10471,7 @@ function renderCharacterScreen() {
       ${character.pendingMasteryFork ? (() => { const fb = fullCatalog()[character.pendingMasteryFork]; return `<div class="cs-ability" style="border-left:3px solid var(--accent)"><strong>⑂ A defining moment for ${esc(fb?.name || character.pendingMasteryFork)}</strong> — choose its path to master it. <button class="grow-btn practiced" data-masteryfork="${esc(character.pendingMasteryFork)}">Choose path</button></div>`; })() : ""}
       ${character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; if (!ab) return ""; const cost = effectiveEnergyCost(ab, character, rules);
         const p = rankProgress(character, a.abilityId);
-        return `<div class="cs-ability"><span class="tier-badge">${tierOf(ab.levelReq)}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${ab.powerSystem === "learned" ? "learned" : ab.powerSystem}) · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
+        return `<div class="cs-ability"><span class="tier-badge">${tierOf(ab.levelReq)}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${esc(sheetCraftLabel(ab))}) · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
           <span class="cs-ranks">${[1, 2, 3].map(r => `<span class="${r <= a.level ? "cs-rank-on" : "cs-rank-off"}" title="${esc(ab.tree?.[r - 1]?.name || "")}">${r <= a.level ? "●" : "○"}</span>`).join("")}</span>
           ${ab.tree?.[a.level - 1] ? `<div class="hint">${esc(ab.tree[a.level - 1].name)}: ${esc(ab.tree[a.level - 1].grants)}</div>` : ""}
           <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div></div>`; }).join("")}
@@ -10455,7 +10487,7 @@ function renderCharacterScreen() {
       ${(character.practice?.aspirations || []).length < (rules.practice?.maxAspirations ?? 2) ? `
         <select id="asp-pick" style="margin-top:6px; max-width:280px">
           <option value="">Aspire toward…</option>
-          ${Object.values(fullCatalog()).filter(ab => !character.abilities.some(a => a.abilityId === ab.id) && learnLevelReq(ab) !== null && domainVerdict(ab).allowed && !(character.practice?.aspirations || []).some(a => a.abilityId === ab.id)).map(ab => `<option value="${esc(ab.id)}">${esc(ab.name)} (${esc(traditionLabel(abilityTradition(ab) || ab.powerSystem))}, lv ${learnLevelReq(ab)})</option>`).join("")}
+          ${Object.values(fullCatalog()).filter(ab => !character.abilities.some(a => a.abilityId === ab.id) && learnLevelReq(ab) !== null && domainVerdict(ab).allowed && !(character.practice?.aspirations || []).some(a => a.abilityId === ab.id)).map(ab => `<option value="${esc(ab.id)}">${esc(ab.name)} (${esc(traditionLabel(abilityGroupKey(ab, null)))}, lv ${learnLevelReq(ab)})</option>`).join("")}
         </select>` : ""}
     </div>
     ${(() => {
@@ -10797,7 +10829,7 @@ function renderRepairScreen(note = "") {
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Strip an ability you never chose <span class="cap-line" style="text-transform:none">${used} of ${cap} breadth used</span></h3>
       <p class="hint" style="margin-bottom:8px">Tick any ability the game gave you that belongs to the wrong pole. Stripping it frees breadth so you can pick your own — you do <em>not</em> lose earned power, and your skill points are untouched.</p>
       ${character.abilities.length ? character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; return `
-        <label class="rating-check"><input type="checkbox" data-strip="${esc(a.abilityId)}"> Strip <strong>${esc(ab?.name || a.abilityId)}</strong> <span class="hint">${ab ? `(${esc(abilityTradition(ab) ? traditionLabel(abilityTradition(ab)) : ab.powerSystem)}, rank ${a.level})` : ""}</span></label>`; }).join("") : "<div class='insight'>no abilities to strip</div>"}
+        <label class="rating-check"><input type="checkbox" data-strip="${esc(a.abilityId)}"> Strip <strong>${esc(ab?.name || a.abilityId)}</strong> <span class="hint">${ab ? `(${esc(sheetCraftLabel(ab))}, rank ${a.level})` : ""}</span></label>`; }).join("") : "<div class='insight'>no abilities to strip</div>"}
     </div>
 
     ${activeCompanions(character, CONTENT.companions).length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Remove a companion you never met</h3>
@@ -13529,7 +13561,7 @@ function renderPlay(turn, opts = {}) {
         if (!learnable.length) return capLine;
         // SNG-059: group the learn list by TRADITION (the people)
         const byClass = {};
-        for (const ab of learnable) { const key = abilityTradition(ab) || ab.powerSystem || "learned"; (byClass[key] = byClass[key] || []).push(ab); }
+        for (const ab of learnable) { const key = abilityGroupKey(ab, "learned"); (byClass[key] = byClass[key] || []).push(ab); }
         const groups = Object.keys(byClass).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(cls => `<details class="learn-group"><summary>Learn ${esc(traditionLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
           byClass[cls].sort((a,b)=>(a.levelReq||1)-(b.levelReq||1)).map(ab => {
             const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);

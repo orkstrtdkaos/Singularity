@@ -15417,7 +15417,24 @@ await (async () => {
   // not. The claim is that a re-roll of a craft still comes back in that craft's own colours, and it is
   // stronger now: it keeps its people where there is one, and its PHYSICS where there is not.
   check("CCODE-182: a CRAFT keeps its people on a re-roll (its own colours drive prompt and style alike)", (() => {
-    const wired = /promptOpts: rec => \(\{ aesthetic: rec \? aestheticFor\(\{ tradition: abilityTradition\(rec\) \|\| rec\.tradition, powerSystem: rec\.powerSystem \}/.test(srcA181);
+    // ⛔ PINNED TO SPELLING TWICE NOW. The comment above records this gate going red when six hand-rolled
+    // lookups became one resolver — "the spelling moved, the claim did not" — and it was then re-pinned to
+    // the NEW spelling, including a `|| rec.tradition` fallback that is PROVABLY DEAD: `traditionOf` reads
+    // `ability.tradition` FIRST, so the right-hand side can never be reached.
+    //
+    // ⚠️ CCODE-337 removed that dead fallback and this went red again — for the second time, on a change
+    // that made the code more correct. ⛔ A SOURCE GATE MUST ASSERT THE CLAIM, NOT THE CHARACTERS.
+    //
+    // The claim: a re-roll of a craft passes an aesthetic derived through the RESOLVER, and hands the
+    // PHYSICS along too so §C3 can answer where there is no people. Both halves, neither spelling.
+    // ⚠️ `.find` TOOK THE FIRST OF THREE. There are three `promptOpts: rec =>` lines — two for NPCs and one
+    // for crafts — so the first match was the NPC one and none of the craft conditions could ever hold, which
+    // read as "the wiring is gone" when the wiring was three lines further down.
+    // ⛔ THE SAME SHAPE AS `rules[0]` AND `loadRule("ties")`: a lookup that finds A match, not THE match.
+    const promptLines = srcA181.split("\n").filter(l => /promptOpts:\s*rec\s*=>/.test(l));
+    const wired = promptLines.some(l => /aestheticFor\(/.test(l)
+      && /abilityTradition\(rec\)/.test(l)
+      && /powerSystem:\s*rec\.powerSystem/.test(l));
     const house = A176.houseStyleFor(null);
     const rootkin = A176.houseStyleFor({ palette: "deep green, bark-brown, sap-amber" });
     return wired && rootkin !== house && /deep green/.test(rootkin);

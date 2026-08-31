@@ -1762,6 +1762,70 @@ console.log("\n── §31 · domains read, ring derived, braids still cross the
   check("§31F: …and there are braids to check", braids.length >= 3, `${braids.length} braids`);
 }
 
+/* ══════════ §31B — NOTHING ASKS AN ABILITY ITS OWN TRADITION ══════════ */
+// ⛔ CCODE-337 — `app.js` read a craft’s tradition around the resolver in three shapes, and one of them was
+// user-visible: the CHARACTER SHEET rendered `ab.powerSystem` directly, so 142 crafts read "metaphysical"
+// and 132 read "precursor" where they should have read "The Somatics" and "The Lattice-Cities".
+//
+// ⚠️ THAT IS §C3’s OWN RULE — "a people wins where there is one, and the physics answers where there is
+// not" — gated for the AESTHETICS path and simply not applied on the sheet. A principle held in one place
+// and not the other is how a bug survives a green suite.
+console.log("\n── §31B · every craft is asked its people, not its physics ──");
+{
+  const app31 = rd("app.js");
+
+  // ⛔ ONE DEFINITION OF THE DISPLAY FALLBACK. It had EIGHT copies, each free to pick its own default
+  // ("folk", "learned", ""), so one craft could land in differently-named buckets on two screens.
+  check("§31B: the grouping fallback has ONE definition",
+    /function abilityGroupKey\(/.test(app31));
+  // ⛔ THE SCANNER MUST NOT READ ITS OWN PROSE — FIFTH INSTANCE. My first version matched the COMMENT that
+  // describes the old pattern and the HELPER THAT REPLACED IT, then reported both as surviving copies. A
+  // check that cannot tell a use from a definition, or from a note about the defect, is measuring text.
+  //
+  // ⚠️ SO IT SCANS LINE BY LINE and drops comments and the one definition. `apparatus.mjs` matched itself
+  // the same way; so did the naming lint. It is always the same shape: the fix names the thing it fixed.
+  const codeLines = app31.split("\n").filter(l => !/^\s*(\/\/|\*)/.test(l) && !/function abilityGroupKey/.test(l) && !/return abilityTradition\(ability\)/.test(l));
+  const copies = codeLines.filter(l => /abilityTradition\([a-zA-Z.?]+\)\s*\|\|\s*[a-zA-Z.?]+\.powerSystem/.test(l));
+  check("§31B: …and no call site spells it out again",
+    copies.length === 0, copies.map(l => l.trim().slice(0, 60)).join(" · "));
+
+  // ⛔ THE SHEET ASKS THE RESOLVER. A bare `ab.powerSystem` rendered into markup is the defect itself.
+  check("§31B: the sheet label prefers the PEOPLE over the physics",
+    /function sheetCraftLabel\(/.test(app31));
+  // ⚠️ LINE-SCOPED, because `[^}]*` crosses NEWLINES and swallowed an entire multi-line template literal —
+  // it "found" a bare powerSystem three lines away from one. A greedy regex over source is a claim about
+  // a whole file, not about a line.
+  const bare = codeLines.filter(l => /\$\{[^}\n]*\bab\.powerSystem\b/.test(l));
+  check("§31B: …and no bare powerSystem is rendered into markup",
+    bare.length === 0, bare.map(l => l.trim().slice(0, 70)).join(" · "));
+
+  // ⚠️ AND THE DEAD FALLBACKS ARE GONE. `traditionOf` reads `ability.tradition` FIRST, so
+  // `abilityTradition(x) || x.tradition` could never fire — it read as a safety net and was one.
+  const dead = (app31.match(/abilityTradition\([a-zA-Z.?]+\)\s*\|\|\s*[a-zA-Z.?]+\.tradition\b/g) || []);
+  check("§31B: no dead `|| .tradition` fallback survives", dead.length === 0, dead.join(" · "));
+
+  // ⛔ THE MEASUREMENT THAT MAKES THE FIX WORTH HAVING. If every craft already resolved to a people, the
+  // sheet bug would have been cosmetic; it was not — and if this ever drops, the fallback starts showing.
+  const cat31b = [];
+  {
+    const { readdirSync } = await import("node:fs");
+    for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json")))
+      for (const a of (rj(`content/packs/core/abilities/${f}`).abilities || [])) cat31b.push(a);
+  }
+  const TRb = await import("../engine/traditions.js");
+  const idxb = TRb.buildTraditionIndex(rj("content/packs/core/rules/traditions.json"));
+  const resolved = cat31b.filter(a => TRb.traditionOf(a, idxb));
+  check("§31B: the overwhelming majority of crafts DO resolve to a people — the physics is the exception",
+    resolved.length / cat31b.length > 0.95,
+    `${resolved.length}/${cat31b.length} resolve`);
+
+  // ⚠️ SYSTEM CHECKS ARE NOT BYPASSES AND MUST SURVIVE. `powerSystem === "precursor"` asks a real question
+  // about physics; SNG-381 settled that precursor/learned/combination are NOT traditions. ⛔ A sweep that
+  // removed these would have traded a display bug for a logic one.
+  const sysChecks = (app31.match(/powerSystem\s*[=!]==\s*"/g) || []);
+  check("§31B: the powerSystem SYSTEM checks are untouched — they ask a different question",
+    sysChecks.length >= 8, `${sysChecks.length} system checks`);
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

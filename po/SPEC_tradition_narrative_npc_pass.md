@@ -235,3 +235,239 @@ after any craft file is touched. No ratchet regressions.
 5. **`folkAccessible`:** what does the engine do with the flag today — does it appear in the
    skill wheel, the learn screen, the GM prompt, or nowhere yet?
 6. **Anything in this spec that is already true at HEAD** — the domain gate lesson applies.
+
+---
+
+# ROUND 2 — CCode substrate verification
+
+**Answered 2026-08-31 at `408963b3` · v1.9.286.** Every number below measured at HEAD, none carried from
+memory. ⚠️ **Three of your PWSV rows are stale and one gap is already closed** — §R5.
+
+---
+
+## R1 — §2a · The `foresee` boilerplate is CONTENT, not an engine fallback
+
+✅ **Rewrite by hand; nothing will overwrite you.**
+
+The string *"reveals information or sets up a later action"* appears **nowhere in `engine/`, `app.js` or
+`scripts/`**. It is sitting in the authored `plainly` field of the crafts themselves. **No generator writes
+ability `plainly`** — the only script that writes a `plainly` at all is `rederive_site_tier.mjs`, and that
+writes a *site's*, not a craft's.
+
+⚠️ **The count is 15 of 34, not 15 of 35.** Zero `foresee` crafts have no `plainly` at all, so this is
+entirely a rewrite problem and not a fill-in-the-blank one.
+
+✅ **And it is worth doing:** `plainly` is read by **7 engine modules** (`capabilities.js`, `generate.js`,
+`gm.js` …) and **11 sites in `app.js`**. This is not decoration.
+
+⚠️ **One shape worth noticing before you start.** The offending text reads
+*"A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3
+out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 extends range…"* — **that is a template
+someone once ran, then committed.** It has the grammar bug ("A investigate") that a human would not write
+twice. ⛔ **So the real finding may be larger than `foresee`:** if a generator produced these once and was
+retired, other verbs will carry the same fossil. Worth one grep before you scope the pass to 15 crafts.
+
+---
+
+### ⛔ R1b — AND I MEASURED THE FOSSIL. §2a IS SCOPED TO 4% OF IT.
+
+I said above that other verbs might carry the same fossil. **They do, and it is most of the corpus.**
+
+**Eight stock glosses cover 251 of 414 crafts (61%):**
+
+| crafts | the gloss |
+|---|---|
+| 43 | *"reveals information or sets up a later action"* |
+| 40 | *"strengthens someone"* |
+| 37 | *"makes or animates something"* |
+| 33 | *"deals damage"* |
+| 27 | *"reduces incoming harm"* |
+| 24 | *"restores health"* |
+| 19 | *"moves you or someone else"* |
+| 13 | *"weakens or restricts a target"* |
+
+⚠️ **Every one has the property you objected to in the first:** it says *that* something happens and never
+*which*. *"Deals damage"* is as empty as *"reveals information"*.
+
+⛔ **Your 15 is correct and it is a subset.** 43 crafts carry the reveal gloss; **15 are `foresee` crafts and
+28 are not** — they are `strike`, `break`, `bind`, `track`, `empower`, `move`, `command`, `make`, `restore`,
+`summon`, `travel`. ✅ **So `foresee` was not a verb that went inert. It was where you happened to look.**
+
+**325 of 414 match the template shape overall, and 59 carry the *"A investigate action…"* grammar bug** —
+which is the tell that this was generated once and committed, not written.
+
+### ⚠️ AND SOME OF IT IS NOT THIN, IT IS WRONG
+
+**48 crafts carry a gloss naming a verb family the craft does not have.** Unambiguous cases:
+
+| craft | its verbs | its gloss |
+|---|---|---|
+| `shroud` | conceal + deceive | *"makes or animates something"* |
+| `false_trail` | conceal + deceive | *"weakens or restricts a target"* |
+| `never_there` | conceal + deceive | *"makes or animates something"* |
+| `umbracraft` | command + conceal + move + ward | *"makes or animates something"* |
+| `beacon_thread` | bind | *"reveals information or sets up a later action"* |
+| `dim` | break + conceal | *"weakens or restricts a target"* |
+
+⚠️ **THE 48 IS AN UPPER BOUND AND THE MAPPING IS MINE.** I paired each gloss to the verbs it plainly
+describes; some pairs are arguable — `catch_as_catch_can` (restore + sustain) glossed *"strengthens
+someone"* is defensible. ⛔ **The six above are not**, and a concealment craft described as *"makes or
+animates something"* is a sentence a player reads and is misled by.
+
+⬜ **What this does to §2a, and it is your call how:** the pass as scoped is 15 crafts. The measured problem
+is **251 with an empty gloss and ~48 with a wrong one**. ⚠️ **I am not proposing a 251-craft rewrite** — but
+"targeted, only crafts that fail the narrative lens" needs a bigger net than one verb, and the **48 wrong
+ones are a correctness bug that does not need the narrative lens at all.**
+
+**Reproduce:** the three probes are in my scratchpad and I can land them as a script if you want them
+standing — say the word and it becomes `scripts/gloss_audit.mjs` with a ratchet.
+
+
+---
+
+## R2 — §2b · `backlash` and `conserveSuppresses` are REAL. `backlashRung` is not.
+
+| field | crafts authoring it | engine readers | app readers | verdict |
+|---|---|---|---|---|
+| `backlash` | 23 | **3** (`gm.js`, `intensity.js`, `progression.js`) | 10 | ✅ **real — author it** |
+| `conserveSuppresses` | 23 | 0 | **1** — `app.js:7351` → `resolution.conserveNote` | ✅ **real, one reader** |
+| ⛔ **`backlashRung`** | **20** | ⛔ **0** | ⛔ **0** | ⛔ **DECORATION** |
+
+⛔ **`backlashRung` is authored on twenty crafts and read by nothing.** It is the exact shape this project
+keeps paying for — authored ✓, registered ✓, loaded ✓, **read ✗**.
+
+⬜ **Your call, and I have not made it:** either it wants a consumer (say, choosing how hard a backlash
+lands) or it should move into `bounds` as prose. ⚠️ **What it should not do is accrue more entries** while
+nothing reads it — that makes the eventual wiring a migration instead of a feature.
+
+✅ **`conserveSuppresses` answers your specific worry directly:** it surfaces as `conserveNote` on the
+resolution, so authoring it makes conserve a real, visible decision. It is one reader, but it is a live one.
+
+---
+
+## R3 — §2d · The GM path is real, but ⛔ YOUR FORMAT SPEC IS MISSING HALF THE SCHEMA
+
+✅ **The path:** `npc_interiority.json` → `state.js:603` → `content.npcInteriority`. **Two live consumers:**
+`worldtick.js:435` (`advanceSeeking` — the seeking mechanic reads it) and `app.js:7727`, which reads
+`CONTENT.npcInteriority?.npcs?.[id]?.wants`. ✅ **New entries under `npcs.<id>` land where the engine reads.**
+
+⛔ **But the live schema has SIX fields and your format names three.**
+
+| field | engine readers | app | in your §2d format? |
+|---|---|---|---|
+| `driveSummary` | 1 | 0 | ✅ yes |
+| `wants` | **33** | 16 | ✅ yes |
+| `fears` | 4 | 4 | ✅ yes |
+| ⛔ `pushesBackWhen` | **2** (`npcs.js`, `state.js`) | 0 | ⛔ **omitted** |
+| ⛔ `emotionalRange` | **2** (`npcs.js`, `state.js`) | 0 | ⛔ **omitted** |
+| ⛔ `acknowledgeTone` | **1** (`npcs.js`) | 0 | ⛔ **omitted** |
+| ⚠️ `traditionRelation` *(your proposed addition)* | **0** | **0** | ✅ marked optional |
+
+⛔ **All seven existing entries carry all six fields.** Pell, veth-ondra, mara-wells, calvar, siol, huginn,
+ama — **6/6 each.** Authoring to your three-field format would produce entries **measurably thinner than
+every NPC who already has one**, and thin in exactly the three places the engine reads.
+
+⚠️ **And `traditionRelation` has no reader.** It is a good idea — *"how this person stands relative to their
+people's defining question"* is precisely the §2c material — but it will be prose until something consumes
+it. ⛔ **Say so in the spec, or the next audit will find twenty entries of an unread field.**
+
+---
+
+## R4 — §2c · `aesthetic` is heavily read. `civilization` is a lore-screen field. `cultOfPurity` is unread.
+
+| field | reality |
+|---|---|
+| `aesthetic` | ✅ **3 engine modules** (`art.js`, `capabilities.js`, `worldmap.js`) + **15 app sites** — this is load-bearing, it drives the pictures |
+| `civilization` | ⚠️ its only `engine/` hit is a **comment**. The real reader is **`app.js:11582`**, which renders it as a lore paragraph beside `aesthetic` |
+| ⛔ `cultOfPurity` | ⛔ **zero readers, engine or app** |
+
+✅ **So your instinct in §2c is right, with one correction:** it is not "GM-prompt territory", it is **the
+lore screen** — `app.js:11582` prints `civilization` and `aesthetic` as the two paragraphs a player reads
+about a people. ⚠️ **That makes the promise-audit MORE valuable, not less:** those lines are shown verbatim
+to a player, so a promise the craft list does not keep is one the player can see unkept.
+
+⚠️ **`cultOfPurity` being unread is worth knowing before you thicken it** — it is world material with no
+surface today.
+
+---
+
+## R5 — ⛔ WHAT IS ALREADY TRUE AT HEAD — the domain-gate lesson, and it bites three rows
+
+### ⛔ `bargain` in Death is DONE
+
+Your §2b says: *"`bargain` still missing from Death. One bargaining craft for ashwarden or threnodist."*
+
+⛔ **It exists.** `true_account` — **ashwarden**, levelReq 1, `functions: ["reveal","empower","bargain","persuade"]`,
+and its `plainly` reads *"…reads a thing's or an offer's true worth, cost and condition, and enters the
+haggling as a named term."* ✅ **Retire that line from the spec.**
+
+### ⚠️ Every craft count in §2b is low
+
+| tradition | spec says | measured at HEAD |
+|---|---|---|
+| Mind | 25 | **30** |
+| Body | 22 | **28** |
+| Death | 30 | **39** |
+
+⚠️ Partly your own two crafts from this morning, partly the week's authoring. ⛔ **A "re-run T5/T6/T7 against
+all 25" scope is 5 crafts short on Mind and 9 on Death.**
+
+### ⚠️ `folkAccessible` is worse than the spec says
+
+Spec: *"12 of 24 poles have none."* **Measured: 14 of 24** — cogitant, syllogist, figurist, somatic,
+blazeborn, verist, ashwarden, seraphic, abyssal, unmaker, churnfolk, enginewright, hourkeeper, numinous.
+18 crafts carry the flag in total.
+
+⚠️ **Note that three of your three second-look traditions are in that list** (cogitant, syllogist, figurist
+= all of Mind; somatic = half of Body; ashwarden = half of Death). Your §2b asks *"is the selection
+deliberate?"* for Mind and Body — ⛔ **for Mind the answer is that there is no selection: zero of its three
+poles carry one.**
+
+### ⚠️ The Deathsense `cannot` says something narrower than you describe
+
+Spec: *"Deathsense cannot currently reads wrong (forbids reading undead; should read inverted)."*
+
+**The live text is:** *"Reads the living and the dying, not the already-dead. A corpse has nothing left to
+sense."* ⚠️ **It forbids reading a CORPSE, and never mentions undead.** Whether that is wrong is your call —
+but the correction you have scoped is to a sentence that does not say what the spec says it says.
+
+### ✅ Two rows verified as stated
+
+`civilization` authored on **all 24** sects ✅ · interiority at **7** entries ✅.
+
+---
+
+## R6 — ⚠️ One scope note on parallelism
+
+Your §0 says this pass is safe to run in parallel with the merger because it does not touch
+`tradition`/`traditionV2`. ✅ **Confirmed — and stronger than you claimed:** the merger work is complete
+(A–F plus the antipode rework all landed), so there is no in-flight engine change for this to collide with.
+
+⚠️ **The one overlap:** `how_it_works` §31C asserts **no foothill resolves to a domain or sits on the ring**.
+If §2c's Greyhearth thickening ever gives a foothill a ring position or a domain, that gate fires. ⛔ **It is
+a place, not a pole** — prose is safe, structure is not.
+
+---
+
+## R7 — ⛔ YOUR NEW Q5: `folkAccessible` IS READ BY NOTHING
+
+**18 crafts author it. It is in `ability.schema.json`. It has ZERO readers in `engine/` or `app.js`.**
+
+⚠️ **Door two of four** — authored ✓, schema ✓, loaded ✓, **read ✗**. It does not appear in the skill
+wheel, the learn screen, the GM prompt, or anywhere else.
+
+⛔ **AND ITS INTENDED JOB IS ALREADY BEING DONE BY SOMETHING ELSE.** `origins.json` says the Valleyfolk
+*"begin with FOLK-ACCESSIBLE crafts, each of which now belongs to a real pole and carries
+`folkAccessible: true`"* — but the same note records that their **13 anchors are preserved verbatim in
+`native_grants.json` as `folkNativeGrant`**. ✅ **The starting kit works through the grant list.** The flag
+is a second, unread expression of the same fact.
+
+⬜ **What this does to §2b, and it is your call:** you ask for Mind and Body *"is the `folkAccessible`
+selection deliberate?"* ⚠️ **Reviewing a selection that nothing consumes is premature.** Either it wants a
+reader — the honest one would be *the Valleyfolk origin offers exactly the crafts carrying this flag*,
+which would let the grant list be **derived** instead of hand-kept — or the flag should be retired and the
+13 anchors left as the single source.
+
+⛔ **I have not chosen.** Wiring it is engine work and half a day; retiring it is a content decision. But
+authoring more of it before either happens adds entries to a field with no consumer, which is the same
+shape as `backlashRung` in R2.

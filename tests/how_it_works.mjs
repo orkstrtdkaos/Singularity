@@ -1646,6 +1646,87 @@ console.log("\n── §30 · a chosen craft survives the choosing ──");
   check("§30: …and it still declares a real move",
     !!sDecl.function && !!sDecl.intensity, JSON.stringify(sDecl));
 }
+/* ══════════ §31 — THE DOMAIN LAYER, THE DERIVED RING, AND THE BRAIDS ══════════ */
+// ⛔ ERIK ruled READING B: the POLES REMAIN THE TRADITIONS and the 14 domains sit ABOVE them, so the merge
+// is ADDITIVE. This gates the three pieces that landed on that ruling — the reader (A), the derived ring
+// distance (E), and the braid check Aevi asked for even though nothing is broken (F).
+console.log("\n── §31 · domains read, ring derived, braids still cross the wheel ──");
+{
+  const TR31 = await import("../engine/traditions.js");
+  const tf31 = rj("content/packs/core/rules/traditions.json");
+  const v231 = rj("content/packs/core/rules/traditions_v2.json");
+  const idx = TR31.buildTraditionIndex(tf31, v231);
+
+  /* A — the reader */
+  check("§31A: the index carries the 14 domains", idx.domainCount === 14, String(idx.domainCount));
+  check("§31A: a pole resolves to its domain and its sect name",
+    TR31.domainOfTradition("cogitant", idx) === "Mind" && TR31.sectOf("cogitant", idx) === "Noesis");
+  // ⛔ THE MERGE IS ADDITIVE — `traditionOf` MUST NOT MOVE. A Cogitant is still a Cogitant.
+  check("§31A: `traditionOf` still answers the POLE, not the domain",
+    TR31.traditionOf({ tradition: "cogitant" }, idx) === "cogitant");
+  // ⚠️ READER BEFORE FIELD: with no v2 doc the layer is simply absent, which is what every consumer
+  // written before today already handles. If this ever fails, the reader has started REQUIRING content.
+  const bare = TR31.buildTraditionIndex(tf31);
+  check("§31A: with no v2 doc the domain layer is absent, not broken",
+    bare.domainCount === 0 && TR31.domainOf({ tradition: "cogitant" }, bare) === null);
+
+  // ⛔ THE MAPPING ITSELF: 24 poles, each in exactly one domain, every id real.
+  const sects = Object.values(v231.traditions).flatMap(r => r.sects || []);
+  const poles31 = sects.map(x => Array.isArray(x) ? x[1] : x?.tradition);
+  check("§31A: 24 sects cover 24 DISTINCT poles — none doubled, none missing",
+    poles31.length === 24 && new Set(poles31).size === 24, `${poles31.length} sects, ${new Set(poles31).size} distinct`);
+  check("§31A: every sect names a real tradition",
+    poles31.every(t => !!idx.byId[t]), poles31.filter(t => !idx.byId[t]).join(", "));
+
+  // ⛔ THE CROSS-CHECK. 21 abilities carry a hand-authored `traditionV2`; the table is derived from the
+  // sects. ⚠️ A DISAGREEMENT MEANS ONE OF THEM IS WRONG, and finding out later means finding out from a
+  // player. It passes today at 21/21 and must keep passing as Aevi tags more.
+  const cat31 = [];
+  {
+    const dir = join(root, "content/packs/core/abilities");
+    const { readdirSync } = await import("node:fs");
+    for (const f of readdirSync(dir).filter(x => x.endsWith(".json")))
+      for (const a of (rj(`content/packs/core/abilities/${f}`).abilities || [])) cat31.push(a);
+  }
+  const tagged = cat31.filter(a => a.traditionV2);
+  const disagree = tagged.filter(a => TR31.domainOf(a, idx) !== a.traditionV2);
+  check("§31A: every hand-authored `traditionV2` AGREES with the derived sect table",
+    disagree.length === 0,
+    disagree.map(a => `${a.id}: tag ${a.traditionV2} vs derived ${TR31.domainOf(a, idx)}`).join(" · "));
+  // ⚠️ NON-VACUITY: if nobody tags any more, the check above passes by comparing nothing.
+  check("§31A: …and there are tags to check", tagged.length >= 20, `${tagged.length} tagged`);
+
+  /* E — the ring is the source */
+  // ⛔ THE PROOF THAT MADE THE FLIP SAFE, KEPT STANDING. Every authored `distances` entry must equal what
+  // the ring derives. It was 552/552 on the day of the change; if content ever disagrees, the stored table
+  // is stale and would have been silently authoritative under the old order.
+  let stored = 0, mismatch = [];
+  for (const t of (tf31.traditions || [])) for (const [other, d] of Object.entries(t.distances || {})) {
+    stored++;
+    const derived = TR31.ringDistance(t.traditionId, other, idx);
+    if (derived !== d) mismatch.push(`${t.traditionId}->${other} stored ${d} ring ${derived}`);
+  }
+  check("§31E: every stored distance equals the RING — the table is a copy, not a source",
+    mismatch.length === 0, mismatch.slice(0, 4).join(" · "));
+  check("§31E: …and there are stored distances to check", stored >= 500, `${stored} entries`);
+  // ⚠️ AND THE FALLBACK STILL EXISTS for the five records with no ring position, which is the one case the
+  // ring genuinely cannot answer.
+  check("§31E: an off-wheel record returns null rather than a wrong number",
+    TR31.ringDistance("harmonic", "umbral", idx) === null);
+
+  /* F — the braids Aevi asked me to gate anyway */
+  // ⚠️ "Build your gate anyway — because it is cheap and it is the thing that would have caught this."
+  // ⛔ EVERY AUTHORED BRAID CLAIMS TENSION IN ITS PROSE. This asserts the geometry still agrees: its two
+  // poles must be genuine antipodes, and they must sit in DIFFERENT domains.
+  const braids = tf31.crossPoleBraids?.abilities || [];
+  const bad = braids.filter(b => {
+    const [x, y] = b.poles || [];
+    return !x || !y || TR31.ringDistance(x, y, idx) !== 12 || TR31.domainOfTradition(x, idx) === TR31.domainOfTradition(y, idx);
+  });
+  check("§31F: every authored braid joins true ANTIPODES in DIFFERENT domains",
+    bad.length === 0, bad.map(b => `${b.id}: ${(b.poles || []).join("+")}`).join(" · "));
+  check("§31F: …and there are braids to check", braids.length >= 3, `${braids.length} braids`);
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

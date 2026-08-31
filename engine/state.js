@@ -419,7 +419,11 @@ export async function loadContent() {
   rules.coliseumGrid = coliseumGrid || null;
   // SNG-055/059: traditions optional — absence leaves the domain gates ungoverned (open), never breaks load.
   let traditions = traditionsRaw, traditionIndex = null;
-  if (traditions) { try { traditionIndex = buildTraditionIndex(traditions); } catch { traditions = null; } }
+  // ⛔ CCODE-333 — DOOR THREE. `traditions_v2.json` was authored and registered in the manifest and NOTHING
+  // LOADED IT, so the 14 domains could not be seen by the game. Loaded here and handed to the index; a miss
+  // is tolerated the same way every optional rule is, and leaves the domain layer simply absent.
+  const traditionsV2Raw = await loadRule("traditions_v2", null);
+  if (traditions) { try { traditionIndex = buildTraditionIndex(traditions, traditionsV2Raw); } catch { traditions = null; } }
 
   // SNG-187: the manifest groups below are 252 files that were fetched STRICTLY SEQUENTIALLY — each
   // await waiting on the one before it — which was the entire 15.3s cold load (10–20s of pure

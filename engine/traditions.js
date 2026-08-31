@@ -15,7 +15,14 @@
 /** Build the query index from the loaded traditions.json. Reads the ring from `theGreatCircle`
  *  + per-tradition `ring`/`distances`/`opposite`, and the ability→tradition reverse map from each
  *  tradition's `abilities` list. Folk traditions are marked OPEN. */
-export function buildTraditionIndex(file = {}) {
+// ⛔ CCODE-333 — THE DOMAIN LAYER, AND `traditionOf` DOES NOT MOVE. Erik ruled READING B: the POLES REMAIN
+// THE TRADITIONS and the 14 domains sit ABOVE them. So this is ADDITIVE — a Cogitant is still a Cogitant,
+// and Cogitant is in the Mind domain. Nothing a content file names stops existing.
+//
+// ⚠️ `v2` DEFAULTS TO NULL AND EVERY EXISTING CALLER IS UNCHANGED. The reader ships before the field is
+// depended on: with no v2 doc the index carries an empty domain map and `domainOf` returns null, which is
+// exactly what every consumer written before today already handles.
+export function buildTraditionIndex(file = {}, v2 = null) {
   const traditions = file.traditions || [];
   const folk = file.folkTraditions || [];
   const stations = file.theGreatCircle?.stations || [];
@@ -44,7 +51,22 @@ export function buildTraditionIndex(file = {}) {
     }
   }
   for (const f of folk) { byId[f.traditionId] = f; for (const ab of f.abilities || []) abilityToTradition[ab] = f.traditionId; }
-  return { byId, ringPos, distances, abilityToTradition, folkIds, axisPoles, size: stations.length || 24, model: file.domainAccessModel || {}, stations };
+  // ⚠️ THE SECT TABLE IS THE ONE SOURCE. `traditions_v2.json` names each domain's sects as
+  // [sectName, poleTraditionId, powerSource], so tradition→domain is DERIVED from it and never stored
+  // per-ability. ⛔ 412 copies of a lookup is the defect this project pays for most; the 21 abilities that
+  // carry `traditionV2` are a CROSS-CHECK against this table, not a second source of truth.
+  const domainOfTrad = {}, domainById = {}, sectName = {};
+  for (const [dom, rec] of Object.entries(v2?.traditions || {})) {
+    domainById[dom] = rec;
+    for (const s of (rec.sects || [])) {
+      const [name, pole] = Array.isArray(s) ? s : [s?.name, s?.tradition];
+      if (!pole) continue;
+      domainOfTrad[pole] = dom;
+      sectName[pole] = name || null;
+    }
+  }
+  return { byId, ringPos, distances, abilityToTradition, folkIds, axisPoles, size: stations.length || 24, model: file.domainAccessModel || {}, stations,
+    domainOfTrad, domainById, sectName, domainCount: Object.keys(domainById).length };
 }
 
 /** The tradition an ability belongs to: its own `tradition` field wins; else the reverse map. */
@@ -52,19 +74,47 @@ export function traditionOf(ability, index) {
   return ability?.tradition || index?.abilityToTradition?.[ability?.id] || null;
 }
 
+/** CCODE-333: the DOMAIN a tradition belongs to — the layer above the pole. Null when unmapped, which is
+ *  the honest answer for the five records outside the wheel (god_named, bargainers, and the folk kits). */
+export function domainOfTradition(traditionId, index) { return index?.domainOfTrad?.[traditionId] || null; }
+
+/** The domain an ABILITY belongs to, via its tradition. ⚠️ DERIVED THROUGH `traditionOf` ON PURPOSE, so a
+ *  craft can never disagree with its own people about which domain it is in. */
+export function domainOf(ability, index) { return domainOfTradition(traditionOf(ability, index), index); }
+
+/** The sect NAME a pole carries inside its domain — `cogitant` is "Noesis" of Mind. */
+export function sectOf(traditionId, index) { return index?.sectName?.[traditionId] || null; }
+
+/** Every pole in a domain. */
+export function polesInDomain(domain, index) {
+  return Object.keys(index?.domainOfTrad || {}).filter(t => index.domainOfTrad[t] === domain);
+}
+
 export function isFolkTradition(traditionId, index) { return !!index?.folkIds?.has(traditionId); }
 
 /** Ring distance in steps: `min(|i-j|, size-|i-j|)`. Prefers the authored per-tradition `distances`
  *  table, falls back to the ring positions. Unknown → null. */
+// ⛔ CCODE-334 — THE RING IS THE SOURCE. This preferred the AUTHORED `distances` table and fell back to the
+// ring, which made 552 stored entries the primary answer to a question the ring already answers.
+//
+// ⚠️ MEASURED BEFORE CHANGING IT: the derivation `min(|i−j|, size−|i−j|)` reproduces ALL 552 stored entries
+// EXACTLY — zero mismatches. So this cannot alter behaviour: the derived value already IS the stored value
+// everywhere. ⛔ THAT PROOF IS WHAT MAKES THIS SAFE, and `how_it_works` keeps it standing.
+//
+// ⚠️ THE TABLE IS STILL READ — as a FALLBACK for a tradition with no ring position, which is the one case
+// the ring genuinely cannot answer. It is no longer the authority, so a stale entry can no longer quietly
+// close a door that should be open.
 export function ringDistance(a, b, index) {
   if (!a || !b) return null;
   if (a === b) return 0;
+  const pa = index?.ringPos?.[a], pb = index?.ringPos?.[b];
+  if (pa != null && pb != null) {
+    const d = Math.abs(pa - pb), size = index.size || 24;
+    return Math.min(d, size - d);
+  }
   const tbl = index?.distances?.[a];
   if (tbl && tbl[b] != null) return tbl[b];
-  const pa = index?.ringPos?.[a], pb = index?.ringPos?.[b];
-  if (pa == null || pb == null) return null;
-  const d = Math.abs(pa - pb), size = index.size || 24;
-  return Math.min(d, size - d);
+  return null;
 }
 
 /** The antipode (axis-opposite) of a tradition. */

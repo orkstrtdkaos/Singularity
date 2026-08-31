@@ -3,421 +3,344 @@
 **Author:** Aevi (PO) · **Date:** 2026-08-31
 **Status:** `round_2_requested` — CCode to survey current state before Aevi authors anything
 **Related:** SNG-192 (creation flow), SNG-101b (native grants wiring), `martial_paths.json`
-(baseline defense kit), `native_grants.json`, `origins.json`, `class_archetypes.json`
+(baseline defense kit), `native_grants.json`, `origins.json`, `class_archetypes.json`,
+`sub_attribute_ladder.json`, `skill_capacity.json`, `intensity_scaling.json`
 
 ---
 
-## §0 — WHAT ERIK ASKED FOR
+## §0 — WHAT ERIK ASKED FOR (accumulated across session 2026-08-31)
 
-> *"I want to eliminate the basic strike, guard, etc. skills in favor of the ability for people
-> to use certain skills even when they run out of energy (the zero energy use skills that are the
-> conserve version). AND I want to reduce the number of skills you get at lvl 1. I agree with
-> the basic sense skill by tradition (pick one) and another skill — recommend a strike — being
-> initial grants (these could be informed by their ability points invested). Then they get to
-> choose 2 more from their available list."*
+**Starting grants:**
+1. Fewer starting skills — sense + danger-response + 2 chosen = 4 total
+2. Retire redundant basic skills — replaced by zero-energy floor (build first, retire second)
+3. Stat sensitivity — starting kit reflects attribute investment; player who deprioritized Body
+   doesn't get a Body danger-response
+4. Smooth and fun — creation needs a revamp
 
-Four goals, explicitly named:
+**Attribute system:**
+5. Allocate by sub-attribute directly (not the 4 area groupings) — same total points, but the
+   player sees and invests in the 8 sub-attributes from the start
+6. Make sub-attribute ladder effects fully transparent at creation — concrete per-rank grants
+   visible at the moment of investment
 
-1. **Fewer starting skills.** Sense + danger-response (informed, possibly required by type) + 2
-   chosen = 4 total. Down from current 5–8 depending on tradition.
-2. **Eliminate redundant basic skills.** `strike_basic`, `brace`, `break_away`, `raise_alarm`
-   — the baseline defense kit in `martial_paths.json` — are made redundant by the zero-energy
-   ruling. If the conserve version of a craft fires at zero cost when drained, generic combat
-   actions don't need to be discrete grants. The body already does them.
-3. **Stat sensitivity.** The starting kit should reflect what the character invested in. A player
-   who moved points OUT of Body shouldn't start with a Body-primary skill. The recommendation
-   and the available pool should both respond to the attribute distribution the player chose.
-4. **Smooth and fun.** Creation needs a revamp anyway. The flow is currently broken in ways
-   SNG-192 measured (wall of 45 buttons, grants land at commit so the player can silently waste
-   a pick, `class_archetypes.json` is authored and orphaned). That work is connected to this.
+**Prologue:**
+7. Separate session to revamp the prologue — held, not in this spec
+
+**Backgrounds:**
+8. Make background effects fully transparent — affinity in plain language, aptitude by name
+   with a one-line description
+
+**Forms:**
+9. More forms beyond Ent — seed from known forms of the world (human, part-machine, horned/
+   Abyssal, fae/Churnfolk, dissolving/Numinous, Seraphic-continuous, living-wood/Rootkin)
+10. Make form effects transparent — pros, cons, starting kit differences
+
+**Skill economy:**
+11. Level 1 players get 2 skill points (up from 1), freely spent — in-class Tier-1 (1pt),
+    in-class Tier-2 (2pt), cross-class Tier-1 (cross-class cost, see §12)
+12. Cross-class cost: additive, not multiplicative — Tier + flat_penalty, not Tier × 2.
+    Rationale: cross-training `+1 levelReq` is already a barrier; multiplicative stacking
+    makes late-game cross-class mastery unreachable. Additive keeps the cost meaningful
+    without crushing.
+13. Mental sub-attribute investment → bonus skill points. A more perceptive/reasoning
+    character notices more options. Specific sub-attribute TBD (insight vs. reason — question
+    for design discussion after CCode models the curve).
+
+**Zero-energy floor (prerequisite for baseline kit retirement):**
+14. At zero energy, a character may use rank-1 Tier-1 skills at conserve intensity, with the
+    conserve floor (currently: minimum cost 2) waived. Ruled 2026-08-23 skills audit session:
+    option 3 — keep the floor, waive it only when the character cannot pay. NOT free for
+    everyone always; only when drained, only r1, only Tier-1, only conserve. This must be
+    BUILT BEFORE the baseline kit is retired — the kit is currently the only zero-cost
+    action layer in the game.
+
+**Baseline kit disposition:**
+15. Retire `brace`, `strike_basic`, `break_away`, `raise_alarm` from player creation once
+    §14 is built. Possible repurpose: seed basic NPC sheets (unnamed minted NPCs with no
+    authored crafts need something — these four zero-cost actions are a reasonable NPC floor).
+    Form kits (Ent branch-club, etc.) are NOT retired — they are form-specific, not generic.
+
+**`folkAccessible` flag:**
+16. Wire `folkAccessible` to derive the Valleyfolk starting pool (retiring the hand-kept
+    13-anchor buried doc key). The flag gets a reader; the Valleyfolk origin becomes derived
+    rather than hand-maintained. Ruled 2026-08-31.
 
 ---
 
-## §1 — PWSV (measured before speccing)
+## §1 — PWSV (corrected from ROUND 2 at v1.9.286)
 
-This spec does NOT measure these numbers — that is CCode's ROUND 2 job. What follows is what
-Aevi can read from the existing files; the live engine state may differ.
-
-**What exists today (from content files):**
-
-| thing | state |
+| claim | measured |
 |---|---|
-| Baseline defense kit | `martial_paths.json` — `brace`, `strike_basic`, `break_away`, `raise_alarm`. `powerSystem: baseline`, zero-cost, granted to everyone at creation. |
-| Native grants | `native_grants.json` — 24 traditions, `grantCap: 5`, `anchors` + `byLean` pools per tradition. Totals range from 3 (Somatic: 2 anchor + 1 byLean) to 8+ (Harmonic: 5 anchor + 3 byLean). |
-| Folk native grant | `native_grants.json` — 13 anchors + 2 byLean, keyed as `folkNativeGrant`, `folkAccessible: true` on each craft. Valleyfolk origin uses `nativeKind: folk`. |
-| Three creation paths | Per SNG-192: prologue → domains → abilities → companion → form → bio → commit. Three paths referenced but their specific shape needs CCode to describe. |
-| `class_archetypes.json` | 6 archetypes with `byReach` field. Authored. Zero readers. |
-| Suggestion engine | `state.prologue.tags` (revealed preference) + `state.bio` (free text) + attribute lean — all gathered, none used at the ability pick step. |
-| Wasted-pick bug | SNG-192 §1: `applyNativeGrants` runs at COMMIT, not at ability step. Player can silently pick a skill they're getting for free. Status of fix: unknown to Aevi. |
-| `folkAccessible` flag | 18 crafts carry it. Zero engine readers (per earlier ROUND 2). |
-
-**What Aevi does NOT know and needs CCode to measure:**
-
-- Whether the wasted-pick bug (SNG-192 §1) has been fixed since the spec was written.
-- What the three creation paths actually are — their names, their steps, their differences.
-- Which of those paths the starting grant logic runs in, and at what step.
-- Whether the baseline defense kit (`martial_paths.json`) is actually granted today, or whether
-  it is authored and not yet wired (the pattern is common enough to ask explicitly).
-- How ability scores are collected at creation — the specific UI step, the values available,
-  and how the engine currently reads "attribute lean."
-- Whether `class_archetypes.json` is still orphaned or has been wired since SNG-192.
-- What zero-energy conserve looks like in the engine today — is there a `conserveVersion` of
-  every craft, or is it a flag, or something else? This determines whether the baseline defense
-  kit is truly redundant or whether it still covers actions the conserve layer doesn't.
+| Baseline defense kit wired and live | ✅ all 4 zero-cost (`energyCost: 0`), nearly the only free things in the game |
+| Zero-energy conserve floor waived | ⛔ **NOT BUILT** — conserve min cost = 2; drained characters are refused outright |
+| Conserve coverage of 4 baseline actions | ⛔ **ZERO** — none of the 4 are covered by conserve at zero energy |
+| Total crafts before player picks (current) | ⛔ **9** — 5 native grants + 4 baseline kit |
+| Under new model (sense + danger-response + 2 chosen) | **4** — after zero-energy floor built and baseline retired |
+| Attribute allocation today | Point-buy into 4 areas → sub-attributes derived; exact point pool unknown to Aevi |
+| Sub-attribute ladder | ✅ authored to rank 20 for 6 of 8 subs; presence/rapport ranks 14–20 blocked pending holdings |
+| Prologue `grantsAbility` | ✅ each path grants an ability directly — 4 problems × 4 paths = 16 possible grants across 3 scenarios |
+| Prologue tags → permanent attributes | ⚠️ **UNCONFIRMED** — tags appear to drive domain assignment and archetype suggestion; whether they generate permanent attribute modifiers is unmeasured |
+| Wasted-pick bug (SNG-192 §1) | ✅ FIXED — grants shown before choosable pool; wasted pick blocked |
+| `class_archetypes.json` | ✅ WIRED — archetype lens live at `app.js:4635` |
+| Suggestion engine | ✅ WIRED — all 4 inputs live at `app.js:4638` |
+| Three creation paths | ✅ Describe yourself · Play the opening · Quick start |
+| Quick start attributes step | ✅ collected before ability pick |
+| Describe/Play attributes step | ⚠️ **UNMEASURED** — may inherit defaults; attribute lean may be inert on these paths |
+| `folkAccessible` flag | 18 crafts, **0 readers** |
+| Folk anchor pool (13 anchors) | ⛔ buried in `_folkNativeGrant_20260830` underscore doc key — `nativeGrantIdsFor` never sees it |
+| Sense crafts by domain | ⚠️ 18 of 24 poles have a sense craft; 6 missing: syllogist, verist, umbral, veilwright, threnodist, wright. Domain-level count unmeasured — this is the corrected ask. |
+| Form kits beyond Ent | ⚠️ `martial_paths.json` has Ent authored; all other forms in `peoples_of_kind.json` have no kit |
+| Backgrounds — aptitude descriptions | ⚠️ aptitudes granted by name; whether a descriptions table exists is unmeasured |
+| Attribute point total at creation | ⛔ **UNKNOWN TO AEVI** — not in any content file read this session |
+| `backlash` / `conserveSuppresses` | ✅ both have engine readers — real fields, author them |
+| `backlashRung` | ⛔ 20 crafts, 0 readers — held pending ruling |
+| NPC interiority read path | ✅ live at `state.js:603` → `worldtick.js:435` + `app.js:7727` |
 
 ---
 
-## §2 — THE DESIGN INTENT (what Aevi is proposing, to react to)
+## §2 — DESIGN INTENT (for CCode to react to)
 
-### §2a — Retire the baseline defense kit
+### §2a — Zero-energy floor (prerequisite — build first)
 
-`brace`, `strike_basic`, `break_away`, `raise_alarm` exist to ensure no character is helpless.
-The zero-energy ruling does the same job structurally — a drained character fires the conserve
-version of whatever they have, and can always do a basic physical act at zero cost.
+**The ruling (2026-08-23 skills audit session):**
+At zero energy, a character may use their rank-1 Tier-1 skills at conserve intensity, with
+the conserve floor waived for that use only. This is not free for everyone always — only when
+the character cannot pay at all, only r1, only Tier-1, only conserve intensity.
 
-**IF the zero-energy conserve layer covers: plain strike, basic guard/block, disengage, and
-alerting others — then the baseline kit is redundant and should be retired.**
+**Implementation shape (option 3 from the audit session):** keep the conserve floor at 2 for
+all normal use. Add a `freeWhenDrained` path: when `energy <= 0`, allow r1 Tier-1 craft use
+at conserve, waiving the minimum cost. The character takes the `exhaustedPenalty` (−10) on
+the roll. Nothing new appears to the player — it is the same craft they have used a hundred
+times; it just doesn't charge them when they're empty.
 
-The condition is the key. If conserve doesn't cover all four, the ones it doesn't cover need to
-stay somewhere. CCode should answer this in ROUND 2 before anything is retired.
+**29 crafts have `intensity` as a bare string** — they need a conserve entry before the zero-
+energy path can render their conserve text. Small content sweep, not a blocker but should
+precede the zero-energy feature.
 
-**Note on form kits:** `martial_paths.json` also carries form kits (Ent branch-club, etc.) These
-are NOT baseline — they're form-specific. They are out of scope for this spec.
+**Retire baseline kit only after this is confirmed live and covering all 4 actions.**
 
-### §2b — Starting grant structure: sense + danger-response + 2 chosen
+**NPC repurpose:** the 4 baseline crafts (`brace`, `strike_basic`, `break_away`,
+`raise_alarm`) have a natural second life as the floor kit for minted NPCs with no authored
+crafts. This is a design suggestion, not a spec item — Erik's call.
 
-**At level 1, a character starts with:**
+### §2b — Sub-attribute allocation at creation
 
-| slot | what | how determined |
+Replace the current 4-area point-buy with direct sub-attribute allocation. Same total point
+pool; the player sees and invests in all 8 sub-attributes from the start.
+
+**Transparency requirement:** at the moment of each point investment, show:
+- What this sub-attribute governs (one line — "max energy", "defense on guard actions", etc.)
+- What the next rank grants concretely (the per-rank value from `sub_attribute_ladder.json`)
+- The milestone at the next milestone rank (e.g. "at rank 4: sense tier unlocks")
+- The cumulative value at their current rank
+
+This is the sub-attribute ladder made legible at the point of decision, not discovered later.
+
+**Starting floor:** all sub-attributes begin at 2 (free, not invested). The ladder pays from
+rank 3. So a player allocating 0 additional points to a sub-attribute still has rank 2.
+
+**Blocked content note:** `presence` and `rapport` ranks 14–20 are authored as placeholders
+pending holdings model (SNG-358). This should be disclosed at creation for those subs —
+"this milestone is coming" rather than a blank.
+
+### §2c — Starting grant structure: sense + danger-response + 2 chosen
+
+| slot | what | how |
 |---|---|---|
-| 1 | **Sense** | Comes with the tradition. If the tradition has two senses (Harmonic has `sonic_resonance` and `tremor_sense` as distinct sense anchors), player picks one. Not optional — every tradition member has their people's way of perceiving the world. |
-| 2 | **Danger-response** | Informed by attribute investment. The tradition's available craft that most directly addresses physical danger, filtered to the player's highest attribute. Not a free pick — the system recommends one and the player confirms or swaps within the tradition's danger-response pool. Required TYPE (must address danger), not required ID. |
-| 3–4 | **2 chosen** | Player selects 2 from a curated pool. Pool is drawn from the tradition's available crafts, filtered to exclude slot 1 and 2, ordered by attribute match. Pool is SHORT — 4 to 5 options, not the full tradition list. A player who wants to go deeper sees "more options" and gets the rest. |
+| 1 | **Sense** | Tradition's perceptual access craft. If tradition has two senses, player picks one. Required — every tradition member has their people's way of perceiving. |
+| 2 | **Danger-response** | Tradition's r1 craft that most directly addresses physical danger, filtered to player's highest sub-attribute. Required TYPE (must address danger), not required ID. System recommends; player confirms or swaps within the danger-response pool. |
+| 3–4 | **2 chosen (skill points)** | Player spends 2 skill points freely. Default pool shown: 4–5 curated options, attribute-ordered. "Show all" reveals full Tier-1 pool. |
 
-**Attribute sensitivity for slot 2 and the pool:**
+**Stat sensitivity rule for slot 2:** drawn from crafts whose primary sub-attribute matches
+the player's highest invested sub-attribute. Not a hard lock on slots 3–4 but the default
+shown pool is attribute-ordered, highest match first.
 
-The player who moved points OUT of Body should not be offered Body-primary crafts as slot 2
-or as the top of the pool. The filtering rule: slot 2 is drawn from crafts whose primary
-attribute matches the player's highest invested attribute. The pool (slots 3–4) is ordered by
-attribute match, highest first.
+**Skill point freedom (slots 3–4):** the 2 starting skill points can be spent:
+- 1 pt each: two in-class Tier-1 crafts (the default recommended path)
+- 2 pts: one in-class Tier-2 craft (invested specialist)
+- 1 pt cross-class: one cross-class Tier-1 (at cross-class cost, see §2f)
+The player is not locked to "two in-class Tier-1." The skill points are the chooser.
 
-This is not a hard lock — a player can go off-recommendation in slot 3–4 by browsing further.
-The lock applies only to slot 2 TYPE: the danger-response must be a craft that addresses danger
-(a strike, a ward, a binding, a defense), not a perception or making craft. A Cogitant with
-high mental gets their mental danger-response, not a Body one. A Cogitant with Body investment
-gets a Body option surfaced first even though the tradition rarely goes there.
+**Show base chance at this step** (Erik's direction): display the roll% for each craft in
+the pool, computed from the player's current sub-attribute allocation. Formula from
+`resolution.json`: `subAttributeCumulative × [attributeMultiplier] + skillBonus (10) +
+abilityLevelBonus (5)`. This makes attribute investment immediately legible — the player
+sees the consequence of their sub-attribute choices in the pool they're picking from.
+⚠️ This requires attribute allocation to be COMPLETE before the skill pick step — confirmed
+correct for Quick Start; status on Describe/Play paths needs CCode measurement.
 
-**The folk origin (Valleyfolk):**
+**Folk origin:** slot 1 = one folk-accessible perception craft (from the `folkAccessible`
+pool); slot 2 = one folk-accessible danger-response craft, attribute-informed; slots 3–4 =
+2 chosen from the folk-accessible pool (attribute-ordered, 4–5 shown). Derives from the
+`folkAccessible` flag once §16 is wired.
 
-Under this model, the folk starting kit (currently 13 anchors + 2 byLean) becomes:
-- Slot 1: one folk-accessible perception/sense craft (e.g., `keen_appraisal`, `read_the_room`)
-- Slot 2: one folk-accessible danger-response craft (e.g., `hunters_strike`), informed by attributes
-- Slots 3–4: 2 chosen from the folk-accessible pool, attribute-ordered, pool of 4–5
+### §2d — Sense crafts: evaluate by domain (corrected from pole-only)
 
-This makes Valleyfolk feel like generalists — broader pool, no tradition depth — rather than
-players who start with 13 crafts before making any choices.
+6 poles missing a sense craft: syllogist, verist, umbral, veilwright, threnodist, wright.
 
-### §2c — The available pool: curated, not the full tradition list
+**The corrected ask:** evaluate at the domain level, not just the pole. A domain has 2 poles;
+if both poles share a single sense between them, the domain may be covered even if one pole
+lacks its own. If the domain itself has no sense craft for any pole, both poles need one
+(or one shared sense is authored at the domain level).
 
-The current wall-of-45 (SNG-192 §2) is not fixed by reducing the grant count — a player
-choosing 2 from 45 is still choosing 2 from 45. The pool must be curated:
+Aevi to author the 6 missing crafts (or fewer if domain-level review finds shared coverage).
+Pattern is established 18 times — the naming convention (`*_sense`, `*_read`) and the zero-
+cost L1 `energyCost: 0` shape are the template.
 
-- **Default shown:** 4–5 crafts, attribute-ordered, sense and danger-response excluded
-- **"Show all":** the full tradition Tier I pool, clearly ordered, with attribute match marked
-- **Grants shown first, before picks:** the SNG-192 §1 fix — show slot 1 and 2 as already-yours,
-  non-selectable, before the choosable pool. A player cannot accidentally pick something they
-  already have.
+### §2e — Background transparency
 
-### §2d — Creation flow: a question, not a decision
+40 backgrounds, each grants `affinity` (challenge type) + `grantsAptitudes`. The `affinity`
+should read as plain language ("helps with SOCIAL challenges"), not just the enum value.
+The aptitude should show by name with a one-line description of what it does in play.
 
-Erik said: *"We need to revamp the entire character build process anyway, so let's make this
-smooth and fun"* and *"I want to potentially reorder the creation flow."*
+This requires an aptitudes descriptions table if one doesn't exist — authoring task.
+The id-mismatch bug (SNG-272 — hyphenated ids not matching snake_case catalog) status
+needs confirmation from CCode (fix was described in `AUDIT_backgrounds_and_character_sheet.md`
+but ship status unknown to Aevi).
 
-**The current flow (from SNG-192):** prologue → domains → abilities → companion → form → bio →
-commit.
+### §2f — Cross-class cost: additive not multiplicative
 
-**The question for CCode:** what are the three creation paths, what do they differ in, and what
-does the flow look like from a player's perspective in each one today — not from the code, but
-as a player would experience it step by step?
+**Current:** `tierPrice[tier] × crossClass.costMultiplier (2)` — a Tier-3 cross-class costs 6.
+**Proposed:** `tierPrice[tier] + flat_crossClass_penalty` — a Tier-3 cross-class costs 3 + X.
 
-Aevi is not proposing a new flow in this spec. The flow question is held until CCode describes
-what exists, Erik reacts to it, and then Aevi specs what changes. Shipping a new flow before
-understanding the three current paths would be the generate-before-verify failure mode.
+Rationale: cross-training `+1 levelReq` is already a barrier. The multiplicative stacking
+makes Tier-4/5 cross-class mastery unreachable in practice even at level 100. Additive keeps
+the cost meaningful without closing the path entirely for a dedicated generalist.
 
-### §2e — `class_archetypes.json` and the suggestion engine
+X (the flat penalty) is a tuning dial — CCode to model at X=1 and X=2 and show the curve.
 
-SNG-192 §4 found `class_archetypes.json` (6 archetypes, `byReach` field per tradition) authored
-and orphaned. SNG-192 §3 found three rich signals gathered at creation and unused at the ability
-step: `state.prologue.tags` (revealed preference from path choices), `state.bio`, attribute lean.
+The `crossClass.ratified` note says "secondary-class abilities cost double, no hard rank
+ceiling" — Erik's 2026-07-06 ruling. Moving to additive changes the multiplier interpretation
+but preserves the intent (cross-class costs more; no hard wall). This is a ruling amendment
+and needs Erik's explicit sign-off after seeing the modeled curves.
 
-Under the new grant structure, the archetype is a natural companion to slot 2 — *"you took the
-warrior path twice in the prologue; here's your tradition's danger-response for that kind of
-person, and here's why."* The reason is the feature (SNG-192 §3's language, and it's right).
+### §2g — Mental sub-attribute → bonus skill points
 
-**This is not specced for build in this pass.** The question for CCode: is `class_archetypes.json`
-still orphaned, or has it been wired since SNG-192? If wired, describe the current integration
-so Aevi can build on it rather than re-spec it.
+A character with high mental sub-attribute investment gets additional skill points per level,
+reflecting that a more capable mind notices and integrates more options.
 
----
+**The design question:** which sub-attribute — `insight` (read on the world, sense tier) or
+`reason` (energy pool, craft capacity)? Erik to decide after seeing modeled curves.
 
-## §3 — WHAT THIS SPEC IS NOT DECIDING YET
+**Implementation shape:** a milestone on the chosen sub-attribute — e.g., at rank 5 gain
++1 skill point per level; at rank 10 gain +1 more (total +2). Or a continuous curve
+(+0.5 per rank above 4, rounded, banked). The milestone approach is simpler to author and
+explain; the continuous curve is smoother but harder to communicate.
 
-These are held pending CCode's answers and Erik's reaction to the flow description:
+CCode to model: what does the level-100 skill point total look like at `insight` rank 5 vs.
+rank 10 vs. no investment, compared to the baseline 100 points?
 
-- The specific curated pool of 4–5 crafts per tradition (Aevi authors this as content once the
-  grant structure is confirmed)
-- Whether `folkAccessible` gets a reader or retires (separate §2e decision from the narrative
-  spec — same held status)
-- The creation flow reorder (held until CCode describes the three paths)
-- The specific folk-origin sense and danger-response craft (Aevi authors after structure confirmed)
-- Whether `class_archetypes.json` is retired, extended, or wired as-is
+### §2h — Form kit expansion
 
----
+Known forms from `peoples_of_kind.json` and `origins.json` that have no authored form kit:
+- Human (majority of origins — no kit, which is the correct baseline)
+- Part-machine (Enginewrights — "something slower"; the body has integrated tooling)
+- Horned (Abyssal Choir — named explicitly)
+- Fae/nothing-twice (Churnfolk — fae-shaped, generative)
+- Dissolving/barely-material (Numinous — "no longer entirely present")
+- Seraphic-continuous (Seraphic Orders — continuous with the old world; luminous, hierarchical)
+- Living-wood (Rootkin — Ent is the authored case; are there other living-wood expressions?)
 
-## §4 — ROUND 2 QUESTIONS FOR CCODE
+**Authoring task:** a form kit per non-human form (human has no kit — that IS the kit).
+Each kit: 2–4 zero-cost abilities that express what this body brings. Pros and cons stated
+explicitly (a dissolving Numinous has extraordinary perceptual reach and genuine difficulty
+with physical tasks; a part-machine Enginewright has built-in diagnostic capability and
+maintenance needs).
 
-These are the measurements Aevi needs before any content is authored or any structure is changed.
-
-**On the baseline defense kit:**
-1. Is `martial_paths.json`'s baseline kit (`brace`, `strike_basic`, `break_away`,
-   `raise_alarm`) actually granted to characters today — wired and live — or authored and unread?
-2. What does the zero-energy conserve layer cover concretely? For each of the four baseline
-   actions (plain strike, guard/block, disengage, call for help) — does a drained character
-   have a structural way to do it via conserve, or does one or more of them require the baseline
-   grant to be available?
-3. If any baseline action is NOT covered by conserve, flag it explicitly — that action stays
-   somewhere, just not as a discrete grant.
-
-**On the current creation paths:**
-4. What are the three creation paths? Name them, describe what distinguishes them (do they
-   differ in steps, in available options, in what they grant, in who they're designed for?),
-   and walk through what a player experiences in each one step by step.
-5. Has the wasted-pick bug (SNG-192 §1 — `applyNativeGrants` running at commit, after the
-   ability pick step) been fixed? If yes, how does it work now? If no, it is still in scope.
-6. Where exactly in the creation flow does the ability/stat allocation step happen, and what
-   does "attribute lean" mean in the engine today — is it computed from a point-buy, a preset
-   distribution, or something else?
-
-**On the suggestion and archetype layers:**
-7. Is `class_archetypes.json` still orphaned (zero readers), or has it been wired since
-   SNG-192 was written? If wired, describe the integration.
-8. Is `state.prologue.tags` still unused at the ability pick step, or has the suggestion
-   engine been wired since SNG-192?
-
-**On the grant structure itself:**
-9. Under the proposed 4-slot model (sense + danger-response + 2 chosen), what does a
-   Harmonic character start with today vs. what they'd start with under the new model? Run
-   the same comparison for Marcher and Cogitant — the three most different starting profiles.
-   Show the before/after so Erik can react to the actual delta.
-10. The folk origin currently has 13 anchors + 2 byLean. Under the new model it would have
-    4 slots from the folk-accessible pool. What is actually in the folk-accessible pool today
-    (the 13 anchors by id), and which of them are sense-type vs. danger-response-type vs. other?
-    Aevi needs this to author the curated folk pool.
-11. **Anything that is already true at HEAD that this spec assumes is broken or missing.** The
-    domain gate lesson applies.
+**Transparency at creation:** show each form's kit abilities, their effects, and the tradeoffs
+before the player commits. Same legibility standard as sub-attributes and backgrounds.
 
 ---
 
-# ROUND 2 — CCode substrate verification
+## §3 — WHAT IS NOT IN THIS SPEC
 
-**Answered 2026-08-31 at `b5f12f9a` · v1.9.286.** All eleven measured at HEAD.
-
-⛔ **READ R1 AND R2 BEFORE ANYTHING ELSE. §2a's central premise is not built, and acting on it would do
-the opposite of what Erik asked for.**
-
----
-
-## R1 — ⛔ THE ZERO-ENERGY CONSERVE LAYER DOES NOT EXIST
-
-Erik: *"the zero energy use skills that are the conserve version."*
-
-**Measured in `intensity_scaling.json`:**
-
-| step | energyMult |
-|---|---|
-| conserve | ⛔ **0.6** |
-| standard | 1 |
-| surge | 1.6 |
-
-⛔ **Conserve is a 60% discount, not free.** And the file's own `floors` line says: *"Conserve cannot drop
-energy below 2"* — so it has an **explicit minimum cost of 2**.
-
-**What actually happens to a drained character today:**
-
-| | |
-|---|---|
-| `resolve.js:195` | at `energy <= 0`, a flat **−10** penalty (`exhaustedPenalty`) on every roll |
-| `app.js:7158` | if `energy < energyCost` the action is **refused** — *"Not enough energy — rest first."* |
-
-⛔ **So a drained character does not fall back to a cheap version. They are blocked outright, and penalised
-on whatever they can still do.** The mechanism §2a treats as already load-bearing has not been built.
-
-⬜ **This is a spec, not a bug report.** Erik described the behaviour he wants; it is a real and buildable
-change (conserve gets a zero-cost floor when drained, or a `freeWhenDrained` flag). ⚠️ **But it must be
-built BEFORE anything is retired**, and R2 says why.
+- Prologue revamp — separate session (Erik directed)
+- `backlashRung` wiring — held pending ruling (wire it or move to prose)
+- Holdings model (blocks `presence`/`rapport` milestones 14–20) — separate spec (SNG-358
+  dependency)
+- Wits `novelPenalty` — the penalty doesn't exist; building it so the milestone can remove
+  it would make the game worse. Held until Erik decides if experimentation should cost
+  anything.
+- `folkAccessible` authoring for new crafts — held until flag has a reader (§16 wired)
 
 ---
 
-## R2 — ⛔ THE BASELINE KIT *IS* THE ZERO-COST LAYER. RETIRING IT INVERTS ERIK'S INTENT.
+## §4 — OPEN ITEMS LOGGED (not yet specced, need future action)
 
-**All nine baseline records carry `energyCost: 0`** — `brace`, `strike_basic`, `break_away`, `raise_alarm`,
-plus the five form-kit grants.
+These surfaced this session and need to be tracked:
 
-**And they are nearly the only free things in the game:**
-
-| | |
-|---|---|
-| authored crafts with `energyCost: 0` | ⚠️ **18 of 414** |
-| what those 18 are | ⛔ **all sense crafts** — `body_read`, `lightsense`, `deathsense`, `hour_sense`… |
-| free ways to **strike, guard, disengage or call for help** | ⛔ **only the baseline kit** |
-
-⛔ **So retiring `brace` / `strike_basic` / `break_away` / `raise_alarm` today removes the exact capability
-Erik wants to guarantee.** A drained character would have no zero-cost action at all — worse than now, not
-better.
-
-✅ **The dependency is one-directional and clean:** build the zero-energy conserve layer first, measure that
-it covers the four actions, *then* retire the kit. ⚠️ **The order in §2a is reversed.**
-
-### ✅ And Q3's answer, per action
-
-| baseline action | covered by conserve today? |
-|---|---|
-| plain strike | ⛔ no — conserve still costs ≥2, and at 0 energy the action is refused |
-| guard / block | ⛔ no — same |
-| disengage | ⛔ no — same |
-| call for help | ⛔ no — same |
-
-⛔ **None of the four.** There is no conserve path that fires at zero.
-
----
-
-## R3 — ✅ ERIK'S "SENSE SKILL BY TRADITION" IS 83% ALREADY BUILT
-
-**18 of 24 poles already have exactly what he describes: an L1, zero-cost, sense craft.** The naming is
-already consistent (`*_sense`, `*_read`):
-
-`body_read` · `mind_read_folk` · `chaos_sense` · `order_sense` · `pattern_sense` · `stone_read` ·
-`lightsense` · `deathsense` · `lifesense` · `appetite_sense` · `the_measuring_eye` · `fault_sense` ·
-`numen_sense` · `mech_sense` · `hour_sense` · `way_sense` · `read_the_fight` · `read_the_room`
-
-⛔ **Six poles have none:** `syllogist` · `verist` · `umbral` · `veilwright` · `threnodist` · `wright`.
-
-✅ **So the "sense" slot is a six-craft authoring task, not a design problem** — and the pattern to match is
-already established eighteen times over.
-
----
-
-## R4 — ⛔ A VALLEYFOLK CHARACTER GETS **ZERO** NATIVE GRANTS
-
-**Measured by running `nativeGrantIdsFor` directly:**
-
-```
-Valleyfolk (no domain chosen)   →  []          ⛔ nothing
-Valleyfolk (with a domain)      →  5 grants    ⚠️ but they are that POLE's, never the folk anchors
-```
-
-**Why:** the 13 folk anchors live at **`native_grants.json → _folkNativeGrant_20260830 → folkNativeGrant`**
-— nested inside an **underscore doc key**. ⛔ **There is no real sibling `folkNativeGrant`**, and
-`nativeGrantIdsFor` reads `rules.traditionNativeGrants[primary]`, which never sees it.
-
-⚠️ **This project's own rule is that a `_foo` doc key requires a real sibling `foo`** (`wiring_audit`:
-*"must not become a hiding place"*). This is the hiding place — with thirteen crafts in it.
-
-**The 13, for your §2 authoring (Q10):**
-
-| bucket | crafts |
-|---|---|
-| **sense-type** | `wayfinding` `greenlore` `stonewise` `storykeeper` `keen_appraisal` |
-| **danger-response** | `hunters_strike` `quiet_step` `blend_in` |
-| **other** | `mediators_tongue` `tinkers_hand` `beastfriend` `rivercraft` `hearthbinding` |
-
-⬜ **`byLean` on the buried entry has `mental` and `practical` only** — no physical or social pool.
-
----
-
-## R5 — Q9 · WHAT A CHARACTER STARTS WITH TODAY: **NINE**, AND THE LEAN BARELY MATTERS
-
-| tradition | native grants | + baseline | **total before the player picks** |
+| # | item | lane | status |
 |---|---|---|---|
-| harmonic | 5 | 4 | ⛔ **9** |
-| marcher | 5 (physical) / **2** (mental) | 4 | ⛔ **9** / 6 |
-| cogitant | 5 | 4 | ⛔ **9** |
-
-⚠️ **Against the proposed 4 (sense + danger-response + 2 chosen), that is a cut from 9 to 4** — bigger than
-the spec's *"down from current 5–8"*, because the spec counts native grants and omits the baseline four.
-
-### ⛔ And the attribute lean is inert for 18 of 26 traditions
-
-Erik's goal 3 is *partly built and mostly not firing*. `nativeGrantIdsFor` takes the **argmax** of the four
-attributes, then `anchors` (always) + `byLean[leanKey]`, capped at 5.
-
-⛔ **Two things defeat it:**
-1. **Anchors already fill the cap** for the richer traditions (harmonic has 5 anchors — `byLean` can never
-   fire).
-2. ⛔ **The fallback fills from `byLean.mental` regardless of lean** (`progression.js:121`). So a
-   physical-lean cogitant and a mental-lean cogitant get **identical** kits.
-
-⚠️ **And "lean" is an argmax, not a distribution** — Erik's *"a player who moved points OUT of Body
-shouldn't start with a Body-primary skill"* is not expressible today: moving points out of Body changes
-nothing until Body stops being the single highest.
-
-✅ **Marcher is the one that behaves as intended** — physical lean 5 grants, mental lean 2.
+| OI-1 | Background id-mismatch bug (SNG-272) — hyphenated ids vs snake_case catalog | CCode | ship status unknown |
+| OI-2 | Aptitudes descriptions table — needed for background transparency (§2e) | Aevi author | not started |
+| OI-3 | Wits `novelPenalty` milestone — milestone promises relief from a penalty that doesn't exist | Erik ruling | held |
+| OI-4 | `presence` / `rapport` milestones 14–20 — blocked pending holdings model | CCode | blocked on SNG-358 |
+| OI-5 | NPC baseline kit repurpose — use retired 4 crafts as minted NPC floor | Erik ruling | suggestion only |
+| OI-6 | 29 crafts with `intensity` as bare string — need conserve entry before zero-energy path | Aevi author | small sweep |
+| OI-7 | 6 missing sense crafts (syllogist, verist, umbral, veilwright, threnodist, wright) | Aevi author | blocked on domain-level review first |
+| OI-8 | Non-human form kits (part-machine, horned, fae, dissolving, Seraphic-continuous, living-wood variants) | Aevi author | blocked on CCode confirming what exists |
+| OI-9 | `folkAccessible` flag wiring — derive Valleyfolk pool from flag, retire buried doc key | CCode | ruled 2026-08-31 |
+| OI-10 | Additive cross-class cost — amends Erik's 2026-07-06 ruling; needs explicit sign-off | Erik ruling | held pending modeled curves |
+| OI-11 | Mental sub-attribute → bonus skill points — which sub (insight vs reason), milestone vs curve | Erik ruling | held pending modeled curves |
+| OI-12 | Prologue permanent attribute grants — confirm whether `prologue.tags` generates anything permanent beyond domain assignment | CCode measurement | unconfirmed |
+| OI-13 | Describe/Play path attribute timing — confirm whether attribute allocation is complete before ability pick on non-quick-start paths | CCode measurement | unconfirmed |
+| OI-14 | Total creation attribute point pool — not in any content file; CCode to surface | CCode measurement | unknown |
+| OI-15 | `backlashRung` — wire it (crit failure impact reader in crit resolution path) or move to prose | CCode build | intent confirmed; wiring unbuilt |
 
 ---
 
-## R6 — ⛔ THREE OF YOUR PWSV ROWS ARE ALREADY TRUE (Q5, Q7, Q8) — the domain-gate lesson
+## §5 — ROUND 2 QUESTIONS FOR CCODE
 
-### ✅ Q5 · The wasted-pick bug is FIXED
+**On the zero-energy floor (§2a):**
+1. What is the implementation shape of `freeWhenDrained`? In `resolve.js`, is the energy
+   check a single branch that can be conditioned on `energy <= 0 && rank === 1 &&
+   levelReq === 1`? Or does the intensity path need a new flag?
+2. Confirm: is `exhaustedPenalty` (−10) already applied to all rolls when `energy <= 0`?
+   The zero-energy floor should stack with this — drained characters still pay the penalty,
+   they just aren't refused outright on r1 Tier-1.
+3. **OI-12:** Does `prologue.tags` generate any permanent attribute modifiers? Measure at
+   `state.js` where prologue results are applied. Specifically: are there any writes to
+   sub-attribute values, skill point pools, or creation-time bonuses keyed off prologue tags?
+4. **OI-13:** On the Describe and Play paths, is attribute allocation completed before the
+   ability pick step? Or do these paths set attributes to defaults and only Quick Start
+   collects allocation before picks?
+5. **OI-14:** What is the total attribute point pool at creation? Where is it defined?
 
-`app.js:4627`, and the comment states it: *"SNG-192 §1: the by-right starter kit is computed HERE, not
-silently at commit, so a pick can never be wasted on a craft the character already gets free. Grants are
-shown as a non-spendable group and EXCLUDED from the choosable pool. (Recomputed on every entry, so a late
-attribute change is honoured.)"*
+**On creation flow and grant structure:**
+6. **OI-1:** Is the SNG-272 background id-mismatch fix shipped? If yes, confirm the
+   normalisation is live and existing saves with hyphenated ids are repaired.
+7. Does an aptitudes descriptions table exist, or is aptitude data name-only?
+8. Under the proposed 2-skill-point model (slots 3–4 freely spent), what does a Marcher,
+   Cogitant, and Harmonic character start with — show the before/after delta including
+   baseline kit removal, sense + danger-response grants, and 2 free points.
+9. **OI-8:** What non-human forms are authored in the engine today beyond Ent? Are there
+   form-specific data entries for Enginewright part-machine, Abyssal horned, Churnfolk fae,
+   Numinous dissolving, or Seraphic? Or is Ent the only authored non-human form kit?
 
-### ✅ Q7 · `class_archetypes.json` is WIRED, not orphaned
+**On skill economy curves:**
+10. Model the additive cross-class cost at flat penalty X=1 and X=2. Show:
+    - Cost of Tier-1 through Tier-5 cross-class at each X
+    - At level 20, 50, 100: how many cross-class crafts can a dedicated cross-class investor
+      afford vs. current multiplicative?
+    - The break-even level where a generalist can reach Tier-5 cross-class mastery
+11. Model `insight` rank 5 and rank 10 as the mental sub-attribute milestone for bonus skill
+    points. Show total skill points at level 10, 50, 100 for:
+    - Baseline (no mental investment, 1pt/level)
+    - Current proposed (2pt/level baseline)
+    - 2pt/level + insight rank 5 bonus
+    - 2pt/level + insight rank 10 bonus
+    Compare to breadth cap at each level and average craft cost to show when the constraint
+    shifts from points to capacity.
+12. **OI-15:** `backlashRung` — in the crit resolution path (`resolve.js`), where would a
+    reader for `backlashRung` hook in? Specifically: on a crit failure, does the engine
+    currently compute harm rung reduction, and where would `backlashRung` increase the landed
+    harm tier?
 
-`app.js:4635` reads `CONTENT.classArchetypes?.archetypes`; `archetypeFamilies(selectedArch.coreFunctions,
-FN_INDEX)` feeds the suggestion call. It is implemented as **SNG-192 §4's "archetype LENS (optional front
-door)"** — *"a lens, never a class: it biases, the player changes any of it."*
+**On the domain-level sense audit:**
+13. For the 6 missing-sense poles (syllogist, verist, umbral, veilwright, threnodist, wright):
+    what is the paired pole in each domain? Does the paired pole have a sense craft? Show
+    the full domain → pole → sense craft mapping so Aevi can determine whether 6 crafts need
+    authoring or fewer.
 
-### ✅ Q8 · The suggestion engine is WIRED, with all four inputs
-
-`suggestForCreation({ learnable, character, prologueTags, bio, fnIndex, traditionIndex, catalog, primary,
-archetypeFams, archetypeName, max: 5 })` at `app.js:4638`.
-
-⛔ **Your row says these are *"all gathered, none used at the ability pick step."* All four are used, at
-exactly that step.** SNG-192 was built, not merely written.
-
----
-
-## R7 — Q4 · THE THREE PATHS, NAMED
-
-From `renderCreateDoor` (`app.js:4954`) — *"Three ways to make a character."*
-
-| door | function | what the player does |
-|---|---|---|
-| **✎ Describe yourself** | `renderDescribeDoor` | free prose — *"a girl who talks to animals and cannot lie"* — and the game shows where that lands on the circle, and why |
-| **▶ Play the opening** | `renderPrologueIntro` | name + look, then a short played scene; **domains, skills and companion come from what you actually did** |
-| **⚡ Quick start** | the form | name → form → origin → background → attributes → domains → abilities → companion; the express lane |
-
-✅ **All three converge on the same later steps** — `renderDomainStep` → `renderAbilityStep` →
-`renderCompanionStep` → `renderFormStep` → `renderBioStep` → commit. ⛔ **So the grant logic runs in ONE
-place for all three** (`renderAbilityStep`), which is why the §1 fix covered every path at once.
-
-⚠️ **Describe and Play both produce `prologue.tags`; Quick start does not** — so the suggestion engine has
-less to work with on the express lane, by design.
-
----
-
-## R8 — ⬜ WHAT I DID NOT ANSWER
-
-⬜ **Q6's second half.** I can say attributes are collected at quick-start step 1 (*"NAME → FORM → ORIGIN →
-BACKGROUND → attributes"*, `app.js:4574`) and that the engine reads them as an argmax. ⚠️ **What I have not
-traced is where the Describe and Play doors set attributes** — they may inherit defaults, which would make
-the lean even less expressive on those two paths. **Say the word and I will measure it.**
-
-⬜ **And one thing I am deliberately not deciding:** whether `folkAccessible` (18 crafts, no reader — R7 of
-the narrative spec) should become the reader for the folk pool. ⚠️ **It would be elegant** — the Valleyfolk
-origin offers exactly the crafts carrying the flag, and the 13 anchors become derived instead of hand-kept
-in a doc key. ⛔ **But it is two unread things pointed at each other, and that wants a ruling rather than my
-initiative.**
+**As always:**
+14. Anything in this spec already true at HEAD — the domain gate lesson.

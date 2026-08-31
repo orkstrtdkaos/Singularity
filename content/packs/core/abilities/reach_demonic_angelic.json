@@ -5290,6 +5290,149 @@
    ],
    "_authored": "⛔ ERIK 2026-08-30. ✅ THE TRADITION WAS NAMED FOR A THING IT COULD NOT DO — seraphim, THE BURNING ONES — and the game had exactly one marked-ground craft, on the opposite pole.",
    "_gainAxesFix": "⚠️  — SIXTH TIME, THIRD CRAFT RUNNING. ⛔ The word is in my head as a game concept because  and  both use it; the NINE do not. ✅  check 5 has now caught it three times in a row before a ship. **The habit is not going away and no longer matters.**"
+  },
+  {
+   "powerSystem": "ordered_nanite",
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "axes": {
+    "demonic_angelic": 0.7
+   },
+   "id": "guardian_angel",
+   "name": "Guardian Angel",
+   "levelReq": 4,
+   "energyCost": 9,
+   "attribute": "social",
+   "shape": "guard",
+   "harmRung": "none",
+   "challengeTypes": [
+    "DEFEND",
+    "FIGHT",
+    "SOCIAL"
+   ],
+   "operativeAxis": [
+    "quality",
+    "duration",
+    "range"
+   ],
+   "effectTags": [
+    "intercept",
+    "obligation",
+    "hierarchy"
+   ],
+   "functions": [
+    "shield",
+    "travel",
+    "ward"
+   ],
+   "description": "⛔ SET YOURSELF OVER SOMEONE, AND WHEN THEY ARE STRUCK YOU ARE ALREADY THERE. Not standing beside them — elsewhere, across a city, and then between the blow and them, having crossed the distance in the moment the blow was decided. ⚠️ **AND THIS IS THE MOST POLITICAL CRAFT IN THE ORDERS.** Every superior wants their subordinates keeping it on them. Every subordinate wants it on someone they need something from. ⛔ **A GUARDIAN IS A GIFT AND A CLAIM AT THE SAME TIME, AND EVERYONE INVOLVED KNOWS IT.**",
+   "narrationHints": "The knife does not arrive. ⚠️ She is standing in front of him with it in her shoulder and she was four streets away a heartbeat ago. ⛔ He thanks her. Both of them understand that something has just been entered into.",
+   "notFor": "⛔ YOU MUST KNOW THEM AND THEY MUST HAVE ACCEPTED IT — no unasked guardianship; a Seraph who sets this on someone unwilling has done something the Orders have a hearing for. ⚠️ AND YOU TAKE THE BLOW IN FULL, wherever you were and whatever you were doing — arriving mid-sentence, mid-fight, mid-anything. ⛔ IT ANSWERS AIMED HARM: a blade, a bolt, a working aimed at them. Not poison already drunk, not a building already falling, not a thing that was never coming AT them. ⚠️ AND IT RUNS ON STORES — held over several people, across days, it is the fastest way a Seraph empties themselves in the field.",
+   "plainly": "A defend/social action, set in advance. ⛔ PLACE YOURSELF OVER A PERSON WHO ACCEPTS IT. When they are struck you ARRIVE — from anywhere — and take the blow instead, on your soak. Rated 6, one charge, holds about a day. r2 holds two people and several charges; r3 you arrive even against a blow that would have killed them outright, and it does not lapse. ⚠️ They must accept it. ⛔ You take it in full.",
+   "intensity": {
+    "conserve": "one charge, one day, one person — and you may not be near enough to matter afterwards",
+    "surge": "⛔ SET IT OVER EVERYONE YOU CAN REACH; you will spend the day arriving places and be no use at any of them"
+   },
+   "bounds": [
+    {
+     "text": "⛔ THEY MUST ACCEPT IT. Unasked guardianship is a matter the Orders hold hearings about",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ YOU TAKE THE BLOW IN FULL, wherever you were and whatever you were doing when it landed",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AIMED HARM ONLY — not poison already drunk, not a roof already falling",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AND YOU ARE NOW WHERE THEY ARE. Arriving is not leaving; you came out of whatever you were in the middle of",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 24,
+    "targets": 1,
+    "soak": 5,
+    "soakRank": 2,
+    "wardTypes": [
+     "physical",
+     "radiance",
+     "force"
+    ],
+    "crit": {
+     "success": "You arrive early enough that the blow is never thrown, and the one who meant it sees who came.",
+     "failure": "You arrive and it was a feint — you are now standing somewhere you were not supposed to be, in front of witnesses."
+    },
+    "note": "guard/intercept. ⛔ ERIK 2026-08-30: 'GUARDIAN ANGEL — teleport to your target when they are attacked and TAKE THE BLOW FOR THEM. Every superior wants their subordinates to use this on them, every subordinate wants to use it on someone they want something from.' ✅ IT IS THE FIRST INTERCEPT IN THE GAME THAT WORKS AT RANGE: `step_between`, `shieldwork` and `in_the_way` all require you to already be there. **This one crosses the distance in the moment the blow is decided**, which is the angelic image exactly and is new machinery pointed at existing fields. ⚠️ AND THE POLITICS ARE THE CRAFT, NOT FLAVOUR: **a guardian is a GIFT AND A CLAIM at the same time.** It needs no penalty and no narrative debt — the obligation IS the mechanic, because someone has to accept it and both parties know what accepting means. ⛔ It also ties to `understudy`: the person you guard is very often the person whose rank you would inherit."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Guardian Angel",
+     "functions": [
+      "shield",
+      "travel"
+     ],
+     "interceptDamage": {
+      "allies": 1,
+      "charges": 1,
+      "rounds": 24
+     },
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ SET YOURSELF OVER ONE PERSON WHO ACCEPTS IT. When they are struck you ARRIVE FROM ANYWHERE and take it instead, on your soak. ⚠️ Once, and then you are wherever they are.",
+     "cannot": "They must accept it. ⛔ One charge, about a day. ⚠️ You take it in full, and you have left whatever you were doing."
+    },
+    {
+     "rank": 2,
+     "name": "Two Kept",
+     "functions": [
+      "shield",
+      "travel",
+      "ward"
+     ],
+     "interceptDamage": {
+      "allies": 2,
+      "charges": 3,
+      "rounds": 24
+     },
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "conditions"
+     ],
+     "grants": "⛔ TWO PEOPLE, SEVERAL TIMES EACH. ⚠️ **This is the rank at which a Seraph becomes worth cultivating, and the Orders' politics run on who is holding whose guardianship.**",
+     "cannot": "⚠️ Two at once, and you cannot be in both places. ⛔ The second call finds you already bleeding."
+    },
+    {
+     "rank": 3,
+     "name": "Not While I Stand",
+     "functions": [
+      "shield",
+      "travel",
+      "ward"
+     ],
+     "interceptDamage": {
+      "allies": 2,
+      "charges": 5,
+      "rounds": 72
+     },
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "duration"
+     ],
+     "grants": "⛔ YOU ARRIVE EVEN AGAINST A BLOW THAT WOULD HAVE ENDED THEM OUTRIGHT, AND IT DOES NOT LAPSE — days at a time, without renewal. ⚠️ A senior Order-bearer with three of these over them is very difficult to assassinate, and every one of the three is owed something.",
+     "cannot": "⛔ YOU STILL TAKE IT, AND A BLOW THAT WOULD HAVE KILLED THEM MAY KILL YOU. ⚠️ The Orders lose guardians this way and regard it as the craft working correctly."
+    }
+   ],
+   "_authored": "⛔ ERIK 2026-08-30. ✅ THE FIRST RANGED INTERCEPT IN THE GAME, and the Orders' political economy made mechanical — **a gift and a claim in one act, with no penalty required to make it cost something.**"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

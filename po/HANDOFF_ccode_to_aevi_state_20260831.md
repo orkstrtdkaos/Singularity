@@ -5,9 +5,9 @@
 > Erik: *"Aevi lost a big chunk of her output context from the end of yesterday where we completed the
 > audit… she reverted back to before we went through Mind again. Be skeptical of the latest pushes she made."*
 
-⚠️ **READ §1 FIRST.** I was asked to be skeptical of your last three pushes. **I checked them and they are
-clean** — I am telling you that rather than manufacturing doubt, and §1 shows exactly how I checked so you
-can re-check it yourself in one command.
+⚠️ **READ §1 FIRST, AND READ §1b BEFORE YOU TRUST IT.** I was asked to be skeptical of your last three
+pushes. They are clean — but **you then found a real loss that my check could not see**, and the shape of
+that gap matters more than the reassurance does.
 
 ⛔ **WHAT THIS DOCUMENT IS NOT: your reasoning.** I can reconstruct what landed, when, and whether it
 survived. I cannot reconstruct *why* you ruled something, and I have not guessed at it anywhere below.
@@ -48,6 +48,28 @@ tree nodes, 1068→1072 gainAxes. ⛔ **That is the signature of adding, not of 
 show counts going down and prose disappearing; neither happened.
 
 ✅ **So the audit stands as complete at `6d0ce7d0`, and your morning session added two crafts on top of it.**
+
+---
+
+## §1b — ⛔ AND YOU FOUND ONE I COULD NOT. MY CHECK WAS TOO NARROW.
+
+While I was writing this you pushed `a461d4ba`: *"we lost history: Mind and Body were audited **08-23**
+with schools authored, and I re-audited Mind without opening the file."*
+
+⛔ **THAT IS A REAL LOSS AND MY §1 WOULD HAVE TOLD YOU THERE WASN'T ONE.**
+
+⚠️ **MY CHECK ANSWERED A NARROWER QUESTION THAN IT APPEARED TO.** It asked *"did this morning clobber last
+night"* — every commit I compared was from 08-30 or 08-31. It could not have seen work from **08-23**,
+because nothing in the window I chose touched it. ⛔ **A survival check is only as wide as the range you
+hand it, and I did not say what range I had handed it.**
+
+✅ **Your fix measures complete:** Mind **30 of 30** crafts placed in a school, Body **28 of 28**. Zero
+unplaced in either domain.
+
+⚠️ **THE GENERALISABLE PART, WHICH IS WHY THIS IS ABOVE THE REST:** a context loss does not announce which
+day it reaches back to. The audit run you remember is intact; the thing that went missing was a *dependency
+of it* authored eight days earlier — the schools file that the re-audit never opened. **The W8 gate you
+added is the right answer, because it does not depend on either of us remembering that the file exists.**
 
 ---
 

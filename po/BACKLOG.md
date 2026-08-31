@@ -1126,3 +1126,63 @@ people who do it deliberately.**
 
 ⛔ **DO NOT AUTHOR SPIRIT CRAFTS TO FIX THE IMBALANCE.** The imbalance is not a content gap — **it is a
 category error about what spirit is**, and adding ten crafts to `numinous` would bury it.
+
+## ⛔ `foresee` HAS NO MECHANICAL MEANING — 15 OF 35 CRAFTS PRINT THE ENGINE'S FALLBACK
+
+**Erik, 2026-08-30: *"Mechanically what does foreseeing do for you? It's very important to the narration —
+and NARRATION BECOMES FACTS, so that's good. But it could also give situational bonuses."***
+
+### THE MEASUREMENT
+
+| | |
+|---|---|
+| crafts carrying `foresee` | **35** |
+| ⛔ **resolving to** *"reveals information or sets up a later action"* | ⛔ **15** |
+| ✅ carrying a **named advantage** | **3** — and all three are recent |
+
+⚠️ **That sentence is the engine's FALLBACK GLOSS.** It has no meaning for the verb, so it prints
+boilerplate. ⛔ **`foresee` is the largest purely-narrative verb in the game and it got there BY DEFAULT
+rather than by design.**
+
+### THREE SHAPES, AND ERIK NAMED THE BEST ONE
+
+⛔ **1 · NARRATION BECOMES FACT — and in this game that IS a mechanic.** The AI GM treats narration as canon,
+so a foreseeing that establishes something **makes it true**. *"The bridge fails in spring"* is not a hint;
+it is now a fact about the world. ✅ **No other system gets this cheaply and we get it for free.**
+⚠️ **NEEDS A RULE ABOUT WHO MAY CONTRADICT IT**, or foresight is unbounded authorship.
+
+✅ **2 · A NAMED ADVANTAGE, BANKED.** Already working on `chosen_ground`, `who_falls_first` and
+`planted_years`: the foreseeing **names a specific thing, and acting on that thing carries a bonus.**
+⚠️ **It is a vocabulary that does not exist yet** — this wants the treatment `gainAxes` got: a closed list
+and a gate.
+
+⚠️ **3 · RULING OUT.** The inverse and cheaper: foresight says what **will not** happen — a road that is
+safe, a plan that cannot work. ✅ **Mechanically that is FEWER ROLLS**, which is a real benefit and hard to
+abuse.
+
+⛔ **MY READ: 1 AND 2 TOGETHER.** The narration is the point; the named advantage is what stops it being
+pure flavour.
+
+### ⬜ AND `proof_halls` IS BLOCKED ON THIS
+
+**Erik: *"you don't need a skill to do what the Proof-Halls is saying right now… but perhaps the skill is to
+USE THE HALLS TO GAIN INSIGHT INTO THE FUTURE — a foresee skill."*** ⛔ **He is right: consulting your own
+people's library is an afternoon, not a craft.** ⚠️ **The reframe is good** — two thousand years of
+annotated failure IS a prediction engine, and *"nine of eleven failed the same way"* is foresight built from
+record rather than vision. ⬜ **NOT re-authored, deliberately: it would be the third version of the same
+craft, and it should wait for the ruling above.**
+
+---
+
+## ⬜ NARRATIVE SKILLS PASS (Erik, 2026-08-30)
+
+**Erik: *"I want to evaluate the skills corpus for a good NARRATIVE SKILLS look. NOT EVERYTHING IS ABOUT
+MECHANICS."***
+
+⚠️ **Not started. Recording the frame so it is not lost:** the whole audit optimised for mechanical
+correctness — typed damage, honest rungs, real dice, no ally-harm. ⛔ **That was the right pass and it is
+not the only pass.** A craft can be mechanically perfect and narratively inert, and **the `foresee` finding
+above is the first evidence that a whole verb went that way without anyone noticing.**
+
+⬜ **`sent_meaning` is flagged by Erik as *"interesting but we'll need to update it"*** — first candidate
+for the narrative look.

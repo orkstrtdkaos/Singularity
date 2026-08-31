@@ -663,8 +663,8 @@ contribute to authored dice without recreating the double-scaling bug.
 | `variance` | 15 | `mechanic`×15 | ✅ READ | `craftmechanics.js`, `app.js` |
 | `ongoingHarm` | 15 | `tree`×15 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `area` | 14 | `mechanic`×14 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
+| `damageMix` | 13 | `mechanic`×13 | ✅ READ | `damagetypes.js` |
 | `sectFlavour` | 12 | `root`×12 | ⛔ DARK | — |
-| `damageMix` | 12 | `mechanic`×12 | ✅ READ | `damagetypes.js` |
 | `interceptDamage` | 11 | `tree`×11 | ✅ READ | `intercept.js`, `app.js` |
 | `powerMix` | 10 | `root`×10 | ⛔ DARK | — |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |

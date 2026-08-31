@@ -101,7 +101,17 @@
     },
     "plus": 0,
     "marginFloorPer": 0.03,
-    "note": "The higher marginFloorPer matches enginewright's the_fault_strike: precision traditions reward a decisive margin over raw force."
+    "note": "The higher marginFloorPer matches enginewright's the_fault_strike: precision traditions reward a decisive margin over raw force.",
+    "damageMix": [
+     {
+      "type": "physical",
+      "share": 0.5
+     },
+     {
+      "type": "abstraction",
+      "share": 0.5
+     }
+    ]
    },
    "rankDeltas": [
     {
@@ -148,7 +158,8 @@
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads where a thing wants to break\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_destruction_creation",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_typed_20260831": "⛔ THE LAST UNTYPED DAMAGE CRAFT IN THE CORPUS — CCode's handoff §2. ⚠️ `physical` .5 + `abstraction` .5, AND THE MIX IS THE CRAFT'S OWN SENTENCE: 'see exactly where a thing wants to break — A WALL, A PLAN, AN ALLIANCE, AN ARGUMENT — and take it there.' ⛔ HALF OF ITS TARGETS ARE NOT MATERIAL, so half the harm is not either. Breaking an alliance at its fault is `abstraction` — INTRINSIC, and no armour answers it. ✅ AND IT MATTERS MORE THAN IT DID: CCode measured untyped harm at **r = +0.34 against winning** through the real battle loop — **nothing wards what nothing can name.** An untyped craft was quietly the strongest thing a tradition could carry."
   },
   {
    "id": "makecraft",

@@ -462,6 +462,38 @@ rather than sloppiness — and wrong for CLEARING it.
 catch one symptom alone, and running them per-tradition is what found these two. **Never report a class of
 defect closed on the strength of the pattern query that found it.**
 
+### 19. ⛔ A CONTEXT LOSS DOES NOT ANNOUNCE HOW FAR BACK IT REACHES
+
+**Added 2026-08-31, after it cost a day. Erik: *"I thought we had already gone through all of these and
+completed the audit… did we lose that history switching devices?"***
+
+⚠️ **WHAT HAPPENED:** the 29-of-29 skill audit was COMPLETE. I lost the output context that knew it, and
+re-audited Mind from scratch — **without opening `mind_schools.json`, which had existed since 08-23 with
+three authored schools (Psionics · Deduction · Figurework).** I then wrote a SECOND, worse set of schools
+keyed to the sects, and authored two crafts that landed in no school at all.
+
+⛔ **AND CCode's SURVIVAL CHECK SAID NOTHING WAS LOST — CORRECTLY, AND MISLEADINGLY.** He compared every
+audit commit against HEAD and found zero missing lines. ⚠️ **But every commit in his window was 08-30 or
+08-31. The thing that went missing was authored on 08-23** — a *dependency* of the audit rather than the
+audit itself. **A survival check is only as wide as the range handed to it, and neither of us stated the
+range.**
+
+**THE THREE RULES THAT FALL OUT:**
+
+1. ⛔ **BEFORE AUDITING ANYTHING, GREP THE RULES DIRECTORY FOR IT.** `ls content/packs/core/rules/ | grep
+   -i <domain>` would have cost five seconds and saved the day. **The schools file was named after the
+   thing I was auditing.**
+2. ⛔ **A RECONSTRUCTION THAT SAYS "NOTHING WAS LOST" MUST STATE ITS RANGE.** *"Nothing was lost since
+   Thursday"* and *"nothing was lost"* are different claims and only one is checkable.
+3. ✅ **THE REAL FIX IS A GATE, NOT A HABIT** — `W8` in `content_which` now fails when a craft in a schooled
+   domain sits in no school. **It found ELEVEN immediately**, including two of mine from that morning and
+   three moved by the `valley_craft` retirement. ⚠️ **It does not depend on either of us remembering the
+   file exists.**
+
+⛔ **AND THE SECOND-ORDER LESSON: REASSIGNING A CRAFT'S TRADITION MOVES IT INTO A SCHOOLED DOMAIN AND DOES
+NOT PLACE IT.** Retiring `valley_craft` silently created three unplaced Body crafts. **A migration's
+blast radius includes every structure keyed to the thing being migrated.**
+
 ---
 
 ## WHERE THE DOCUMENTS SIT, AND WHAT EACH IS FOR

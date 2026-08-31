@@ -9,7 +9,7 @@
    "id": "latticespeak",
    "name": "Latticespeak",
    "levelReq": 3,
-   "energyCost": 9,
+   "energyCost": 8,
    "axes": {
     "mechanical_spiritual": -0.4,
     "concrete_abstract": 0.3
@@ -140,7 +140,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_traditionWas": "precursor",
    "_traditionFix": "⛔ SNG-537, ERIK: 'The precursor crafts are LATTICE (Precursor's power source, yes.)' ⚠️ `precursor` WAS SITTING IN A `tradition` FIELD — a power source in a people field, the same category error as a reach id in a powerSystem field, running the other direction.\n⛔ THE LATTICE ARE THE PEOPLE; PRECURSOR IS WHAT THEY DRAW ON. These six — Latticespeak, Wake the Line, Foreclose, Unmake Seal, Hold the Aperture, Address-Sense — are Latticework, and they join Order.",
-   "_precursorRemoved_20260829": "⛔ `damageType: precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — and this craft confirms it: it has NO DICE and deals no damage at all. ⚠️ Seven crafts carried the field after the ruling; the ruling was made and never executed, which is how a dead vocabulary keeps looking alive."
+   "_precursorRemoved_20260829": "⛔ `damageType: precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — and this craft confirms it: it has NO DICE and deals no damage at all. ⚠️ Seven crafts carried the field after the ruling; the ruling was made and never executed, which is how a dead vocabulary keeps looking alive.",
+   "_energyFix_20260830": "⚠️ e9 → e8, into the level band."
   },
   {
    "id": "wake_the_line",
@@ -726,7 +727,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Standing Vector",
+     "name": "Standing Vector",
      "grants": "Read a location's or object's strong spectrum axes on sight — which way it leans and how hard. Reveals location vectors fully without approximation.",
      "cannot": "One target at a time; the read fades when you look away; people resist unless still and willing.",
      "functions": [
@@ -748,7 +749,7 @@
     },
     {
      "rank": 3,
-     "name": "The Address Itself",
+     "name": "Address Itself",
      "grants": "Perceive the unrepeatable coordinate of a thing — its cosmic address, the point it alone occupies; find your way to a place or person by their vector alone across any distance.",
      "cannot": "The address is felt, not spoken — you can navigate to it but not name it; the drift-cost compounds; the Precursors' own addresses read as holes in the field.",
      "functions": [
@@ -817,7 +818,8 @@
    "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about 2 hours Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: one Target AT A Time; the read fades when you look away.",
    "_traditionWas": "precursor",
    "_traditionFix": "⛔ SNG-537, ERIK: 'The precursor crafts are LATTICE (Precursor's power source, yes.)' ⚠️ `precursor` WAS SITTING IN A `tradition` FIELD — a power source in a people field, the same category error as a reach id in a powerSystem field, running the other direction.\n⛔ THE LATTICE ARE THE PEOPLE; PRECURSOR IS WHAT THEY DRAW ON. These six — Latticespeak, Wake the Line, Foreclose, Unmake Seal, Hold the Aperture, Address-Sense — are Latticework, and they join Order.",
-   "_precursorRemoved_20260829": "⛔ `damageType: precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — and this craft confirms it: it has NO DICE and deals no damage at all. ⚠️ Seven crafts carried the field after the ruling; the ruling was made and never executed, which is how a dead vocabulary keeps looking alive."
+   "_precursorRemoved_20260829": "⛔ `damageType: precursor` REMOVED. Erik ruled precursor is a METHOD, NOT A DAMAGE TYPE — and this craft confirms it: it has NO DICE and deals no damage at all. ⚠️ Seven crafts carried the field after the ruling; the ruling was made and never executed, which is how a dead vocabulary keeps looking alive.",
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

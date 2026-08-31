@@ -1046,3 +1046,34 @@ old label happened to contain rather than the rule Erik describes.**
 
 ⚠️ **I HAVE NOT ASSIGNED ANY**, because picking two or three open crafts for twenty-four traditions is a
 design pass and not a cleanup — and doing it by guess would bake the same accident in deeper.
+
+## ⬜ BUILDING NEEDS HIDDEN PASSAGES AND DECEPTIVE ARCHITECTURE (Erik, 2026-08-30)
+
+**Erik, on my claim that Building refuses `conceal`/`deceive`: *"Hidden passages and deceptive
+architecture… seems like maybe something there. But we can take that in the later pass."***
+
+⛔ **HE IS RIGHT AND MY REFUSAL WAS TOO ABSOLUTE.** I argued *"a domain that makes things people stand on
+cannot lie about them"* — **but a priest hole is masonry, a false wall is built, and a maze is architecture
+that deceives on purpose.**
+
+✅ **THE DISTINCTION THAT SURVIVES, AND IT IS SHARPER THAN THE REFUSAL WAS:**
+
+⛔ **They do not lie about a thing's SOUNDNESS.** `worth_the_work` is *"name what a job actually costs and be
+believed"*, and r3 is a word taken in advance across a whole region. ⚠️ **A Mason will not tell you a wall
+will hold when it will not.**
+
+✅ **A Mason will absolutely build you a wall nobody knows is a door.** **Those are different acts and I
+collapsed them.**
+
+### ⬜ CANDIDATES WHEN THIS IS PICKED UP
+
+- **MASON** — the built concealment: a passage in the fabric, a room that is not on the plan, a stone that
+  is a hinge. ⚠️ **Reads against `sound_read`, which NAMES a load path — so a Mason's hidden work is hidden
+  from everyone except another Mason.** That is a good tension.
+- **WRIGHT** — the made thing that is not what it appears: a mechanism with a second purpose, a lock that
+  reports who opened it.
+- ⛔ **NOT STILLHOLD.** Their trade is brokered truce and it fails the moment it is dishonest. **The refusal
+  survives for one of the three, which is why the domain-level claim was wrong and a per-pole one is right.**
+
+⚠️ **AND IT IS A LESSON ABOUT MY ARGUING:** a refusal that sounds good at domain level can be false for two
+of three poles. **Argue refusals AT THE POLE**, then check whether they hold for all of them.

@@ -56,7 +56,7 @@ measuring across every craft that needs a pick.**
 
 ---
 
-## ⛔ THE EIGHTEEN RULES THAT MAKE IT WORK
+## ⛔ THE NINETEEN RULES THAT MAKE IT WORK
 
 **Each was learned the expensive way. They are the difference between a pipeline and a queue.**
 
@@ -445,6 +445,22 @@ fill a hole that was not one.**
 ⛔ **AND THE INVERSE IS THE COMMON CASE:** `distribution.modes` and `tail` are usually already authored and
 usually ARE the schools (rule 15). **This is the exception, so check rather than assume in either
 direction.**
+
+### 19. ⚠️ A SWEEP KEYED TO A CO-OCCURRING PATTERN MISSES THE SINGLE-SYMPTOM CASE
+
+**Added 2026-08-30.** My corpus-wide unmigrated-batch sweep required **2 of 3 fingerprints** (empty
+`notFor` + off-vocabulary `challengeTypes` + below-band energy) and reported **zero remaining.**
+
+⛔ **THE ORDER AUDIT THEN FOUND TWO MORE** — `set_to_rights` and `established_route` — **because they
+already had a `notFor` and so carried only ONE symptom.**
+
+⚠️ **THE THRESHOLD THAT MAKES A PATTERN LEGIBLE IS THE SAME THRESHOLD THAT HIDES ITS PARTIAL CASES.** The
+2-of-3 rule was right for IDENTIFYING the batch — it is what proved the defect was one authoring pass
+rather than sloppiness — and wrong for CLEARING it.
+
+✅ **SO: IDENTIFY WITH THE PATTERN, CLEAR WITH THE INDIVIDUAL CHECKS.** `craft_lint` checks 6, 7 and 8 each
+catch one symptom alone, and running them per-tradition is what found these two. **Never report a class of
+defect closed on the strength of the pattern query that found it.**
 
 ---
 

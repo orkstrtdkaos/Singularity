@@ -1094,9 +1094,9 @@
     "restore"
    ],
    "challengeTypes": [
-    "repair",
-    "medical",
-    "logistical"
+    "CREATE",
+    "SURVIVE",
+    "PUZZLE"
    ],
    "tree": [
     {
@@ -1223,13 +1223,14 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
+   "_ctFix_20260830": "⚠️ off-vocabulary challengeTypes ['repair', 'medical', 'logistical'] — the unmigrated-batch fingerprint. ⛔ MY CORPUS SWEEP MISSED THESE TWO BECAUSE THEY ALREADY HAD A `notFor`: I required 2 of 3 fingerprints and these carried only one. **A sweep keyed to a co-occurring pattern misses the single-symptom case.**"
   },
   {
    "id": "established_route",
    "name": "Established Route",
    "levelReq": 1,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "ordered_nanite",
    "attribute": "practical",
    "axes": {
@@ -1256,9 +1257,9 @@
     "travel"
    ],
    "challengeTypes": [
-    "infiltration",
-    "navigation",
-    "social"
+    "STEALTH",
+    "EXPLORE",
+    "SOCIAL"
    ],
    "tree": [
     {
@@ -1377,7 +1378,9 @@
    "_nameWas": "The Established Route",
    "_idWas": "the_established_route",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_ctFix_20260830": "⚠️ off-vocabulary challengeTypes ['infiltration', 'navigation', 'social'] — the unmigrated-batch fingerprint. ⛔ MY CORPUS SWEEP MISSED THESE TWO BECAUSE THEY ALREADY HAD A `notFor`: I required 2 of 3 fingerprints and these carried only one. **A sweep keyed to a co-occurring pattern misses the single-symptom case.**",
+   "_energyFix_20260830": "⚠️ e1 → e3, into the level band."
   },
   {
    "id": "maintained_order",
@@ -2133,7 +2136,7 @@
    ],
    "tradition": "lattice",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "lethal",
    "shape": "strike",
    "operativeAxis": [
     "precision",
@@ -2182,7 +2185,8 @@
    "_idWas": "the_predicted_man",
    "_powerSystemWas": "reach_chaos_order",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_dicedAndTyped_20260830": "⛔ `physical` — 'prediction closed into a trap — HARM DELIVERED BY ARRIVING FIRST'. The blow is ordinary; the arithmetic is what puts it there. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
+   "_dicedAndTyped_20260830": "⛔ `physical` — 'prediction closed into a trap — HARM DELIVERED BY ARRIVING FIRST'. The blow is ordinary; the arithmetic is what puts it there. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver.",
+   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 reaches lethal — 'prediction closed into a trap, harm delivered by ARRIVING FIRST'."
   },
   {
    "id": "loose_thread",
@@ -2518,7 +2522,7 @@
    ],
    "tradition": "lattice",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "reveal",
    "operativeAxis": [
     "precision",
@@ -2558,7 +2562,8 @@
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ ORDER'S SENSE — a system's rules and load-bearing points\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_chaos_order",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it keeps and reads a RECORD. No rank harms anyone."
   },
   {
    "id": "working_order",
@@ -2635,7 +2640,7 @@
    ],
    "tradition": "lattice",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "make",
    "operativeAxis": [
     "scope",
@@ -2668,7 +2673,8 @@
    "_nameWas": "The Working Order",
    "_idWas": "the_working_order",
    "_powerSystemWas": "reach_chaos_order",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it puts a system into working order — nobody is hurt at any rank."
   },
   {
    "id": "chaos_sense",
@@ -2797,7 +2803,7 @@
     },
     {
      "rank": 2,
-     "name": "The Pattern Beneath",
+     "name": "Pattern Beneath",
      "grants": "Read the structure under a mess — the schedule behind a crowd, the rule behind a ritual.",
      "cannot": "Some messes have no pattern. Reading one into them is how the Lattice makes its worst mistakes.",
      "functions": [
@@ -2806,7 +2812,7 @@
     },
     {
      "rank": 3,
-     "name": "The Whole Design",
+     "name": "Whole Design",
      "grants": "See the entire design a thing is part of — including the parts of it that are not present.",
      "cannot": "Seeing the design does not give you standing to change it.",
      "functions": [
@@ -2871,7 +2877,8 @@
    "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10 across a scope of 1, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: reads Structure, not Intent.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_chaos_order",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

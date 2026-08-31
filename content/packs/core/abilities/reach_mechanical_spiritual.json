@@ -2496,7 +2496,7 @@
    ],
    "tradition": "enginewright",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "lethal",
    "shape": "strike",
    "operativeAxis": [
     "magnitude",
@@ -2550,7 +2550,8 @@
    "_idWas": "the_seized_works",
    "_powerSystemWas": "reach_mechanical_spiritual",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_dicedAndTyped_20260830": "⛔ `force` — 'the crossbow's limbs COME APART INTO THE SHOOTER'S FACE' — stored energy released, which is `force` and not edge. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
+   "_dicedAndTyped_20260830": "⛔ `force` — 'the crossbow's limbs COME APART INTO THE SHOOTER'S FACE' — stored energy released, which is `force` and not edge. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver.",
+   "_rungFix_20260830": "⛔ ability rung -> `lethal`: 'the crossbow's limbs COME APART INTO THE SHOOTER'S FACE' at its top rank."
   },
   {
    "id": "numen_sense",
@@ -2677,7 +2678,7 @@
     },
     {
      "rank": 2,
-     "name": "The Whole Mechanism",
+     "name": "Whole Mechanism",
      "grants": "Read a machine entire — what it does, what it was FOR, where it will fail, and what someone changed.",
      "cannot": "It reads mechanism. What a machine MEANS is the Numinous's country, not yours.",
      "functions": [
@@ -2686,7 +2687,7 @@
     },
     {
      "rank": 3,
-     "name": "The Engine's Confession",
+     "name": "Engine's Confession",
      "grants": "A mechanism tells you its whole history — every hand that touched it, every misuse, every repair made in a hurry.",
      "cannot": "The Precursor works do not confess. They only answer, and only sometimes.",
      "functions": [
@@ -2743,7 +2744,8 @@
    "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to history. Limit: function, Not Purpose — the numinous stays dark.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_mechanical_spiritual",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

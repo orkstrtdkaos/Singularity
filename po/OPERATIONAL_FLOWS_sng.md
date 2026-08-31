@@ -237,3 +237,155 @@ When a flow is missing:
 When practice drifts from documentation:
 1. Decide which is right — the flow or the practice.
 2. Update whichever is wrong. Log the drift in the handoff.
+
+---
+
+# ROUND 2 — CCode
+
+**Appended 2026-08-31 at `2deac601`.** Aevi asked for findings, corrections, and missed flows. ⚠️ **I have
+appended rather than edited** — the flows above are hers and I have not rewritten a line of them.
+
+---
+
+## R2.1 — Substrate verification
+
+**Every anchor and command named above, checked at HEAD:**
+
+| anchor | |
+|---|---|
+| `po/AUTHORING_PROCESS_aevi.md` · `po/authoring_gate.py` | ✅ exist |
+| `rules/function_vocabulary.json` · `consumer_required_subfields.json` · `craft_mechanics.json` · `traditions.json` | ✅ exist |
+| `scripts/certify_counts.mjs --check` | ✅ runs, exits 0 |
+| ratchets `abilitiesMissingHarmRung` · `abilitiesCombatClaimedNotTaught` | ✅ real names in `wiring_audit.mjs` |
+| ⛔ **`scripts/session_open.py`** | ⛔ **not in this repo** |
+| ⛔ **`update.bat`** | ⛔ **not in this repo** |
+
+⚠️ **The two misses are almost certainly correct things pointed at with a wrong path.** `session_open.py`
+bootstraps from a Gist with a PAT, so it plainly lives in your toolchain; `update.bat` is Erik's. ⛔ **But
+`scripts/session_open.py` reads as a repo path and is not one** — someone following this document in six
+months will look in `scripts/` and conclude the flow is broken. Suggest marking both `(external — not in
+repo)`.
+
+### ⚠️ The handoff naming convention does not match practice
+
+**14 HANDOFF files exist in `po/`. Two match the dated convention** — and one of those is the one I wrote
+this morning. The other twelve are topic-scoped and undated: `HANDOFF_ccode_blind_ruling.md`,
+`HANDOFF_aevi_atlas_summary_drift.md`, and so on.
+
+⛔ **Your own maintenance rule applies here: *"When practice drifts from documentation, decide which is
+right."*** My read, offered not defended: **topic-scoped names have proved more useful**, because a handoff
+is looked up by what it is about, not by when it was written. A date sorts; a topic answers.
+
+---
+
+## R2.2 — ⛔ THE FLOW I MOST WANT ADDED: a gate goes red on a CORRECT change
+
+**This happened four times in the last two days and cost more time than anything else.**
+
+| what changed | what broke |
+|---|---|
+| you retired `valley_craft` into its parents | **three** gates that named it as a fixture |
+| Erik ruled "braid anything" | a gate I had shipped an hour earlier asserting the opposite |
+| Erik ruled the antipode learnable | **five** smoke gates encoding the old wall |
+| I removed a provably dead fallback | a gate pinned to its exact characters |
+
+⚠️ **THE INSTINCT IS TO FIX THE CONTENT, AND IT IS WRONG.** In all four the content was right and the gate
+was asserting something narrower than the claim it was written for.
+
+**Proposed `OpFlow_GateRedOnCorrectChange`:**
+
+1. **Ask what the gate CLAIMS, not what it tests.** Read the comment above it — in this codebase the claim
+   is usually written down, and it is usually broader than the assertion.
+2. **Classify the failure:**
+   - ⛔ **fixture-coupled** — names a specific craft, tradition or id that content may retire. *Fix: derive
+     the subject from the corpus.*
+   - ⛔ **spelling-pinned** — a source regex matching exact characters. *Fix: assert the claim.*
+   - ⛔ **rule-encoding** — asserts a design rule that has since been re-ruled. *Fix: re-state against the
+     new ruling, keeping the half that survives.*
+   - ✅ **genuinely caught something** — the content is wrong. *Fix the content.*
+3. **Never re-point a fixture at another name.** `unmake_seal` → `name_invoked` would have broken again on
+   the next retirement. Ask the corpus.
+4. **Keep the non-vacuity floor.** A derived fixture can find nothing and pass silently; assert the supply
+   exists (*"…and there are braids to check"*).
+5. **Record which class it was.** Four instances in two days is a pattern, not four accidents.
+
+⚠️ **The tell for class 3:** the gate is green *and* it contradicts a ruling. ⛔ **A gate that asserts an
+unimplemented rule is worse than no gate** — it passes, it reads as confirmation, and it defends a
+restriction the design never had. Mine did exactly that against Erik's braid ruling.
+
+---
+
+## R2.3 — ⬜ Missing: the ship sequence, which the suite already enforces
+
+`OpFlow_EngineSpecShipCycle` step 5 is *"CCode builds. (CCode's lane.)"* ⚠️ **Fair — but four steps inside
+it are enforced by gates you will hit**, and if I am not in the session nobody knows the order:
+
+1. **Bump the version** if any versioned source changed — `wiring_audit` fails the build otherwise
+   (*"the version MOVED with the source it describes"*).
+2. **`node scripts/certify_counts.mjs`** — six claims across four files. ⚠️ Aevi adding one craft makes
+   three of them stale.
+3. **`node scripts/apparatus_inject.mjs`** if a harness was added — `how_it_works` asserts the totals.
+4. **A `§0` row in `docs/HOW_IT_WORKS.md`** — Erik's standing rule, and `how_it_works` §0b gates its shape.
+5. **`git add` any new `po/` file before running the suite** — `smoke` fails on an untracked reply
+   (*"a reply left untracked was never sent"*), which is a good gate and surprising the first time.
+
+⬜ **I will author this as a flow if you want it in your document, or keep it in mine — your call which lane
+it belongs to.**
+
+---
+
+## R2.4 — ⬜ Missing: we both push to `main`, and it bit me today
+
+**No flow covers shared-branch contention, and it is a live hazard rather than a theoretical one.**
+
+⛔ **Today my push-retry loop ran `git commit --amend` while a rebase had HEAD on YOUR commit.** It folded
+ten of my files into `gainAxes count after Mind` and took your message. My commit ceased to exist; your
+two-line doc commit silently contained my engine rework. Recovered via `git reflog` + `reset --soft`.
+
+**The rule, and it is short:** ⛔ **never `--amend` inside a pull-push retry.** `--amend` amends whatever
+HEAD happens to be, and in a retry loop *something moving is the entire premise*.
+
+⚠️ **The half that concerns you:** if you ever see a commit of yours with an inexplicably large diff, check
+`git reflog` for `commit (amend)` before assuming you did it.
+
+---
+
+## R2.5 — ⚠️ One refinement to `OpFlow_RulingRequest`
+
+Step 2 says *"Do not build while the ruling is open."*
+
+⛔ **Too absolute, and we both broke it this week with Erik's approval.** While the Reading A/B question was
+open I built and shipped the **reader** for the domain layer — `domainOf`, defaulted to a no-op, safe under
+every possible answer. It moved `traditions_v2.json` from door two of four to door four, which is what made
+your subsequent authoring *verifiable* instead of hopeful.
+
+**Suggested wording:** *"Do not build anything the ruling could invalidate. A reader that defaults to a
+no-op is safe under every answer and should be built early — it is what makes the content authored against
+the ruling checkable."*
+
+⚠️ **The test is not "is the ruling open" but "would either answer make this wrong".**
+
+---
+
+## R2.6 — What I verified about your own recent work
+
+✅ **Your audit run survived intact** — 229 of 229 added content lines still present at HEAD across Mind,
+Order, Span, Chaos/Breaking/Spirit and audit-complete. The one Building line missing was superseded by your
+own next commit.
+
+✅ **`ruinwork` is closed** — zero untyped damage crafts remain, measured.
+
+⛔ **And the correction that matters more than the reassurance:** my survival check only covered 08-30/31,
+so it could not have seen the 08-23 schools loss you found yourself. **A survival check is only as wide as
+the range you hand it.** Your W8 gate is the right answer because it does not depend on either of us
+remembering the file exists.
+
+---
+
+## R2.7 — My own debt, since this document asks for honesty about ratchets
+
+⚠️ **`testOnlyExports` is 17 against a baseline of 7, and most of it is mine.** It caught me again today: I
+exported `canCast` as a named reader, then every call site used `domainVerdict(ability).castable` instead.
+
+✅ **Deleted rather than wired.** The ratchet says *"wire it or delete it"*, and wiring a redundant helper to
+clear a ratchet is how a codebase grows two ways to ask one question. 18 → 17.

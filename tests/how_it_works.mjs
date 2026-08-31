@@ -1946,7 +1946,7 @@ console.log("\n── §32 · the antipode is learnable, and it cannot be cast �
 
   check("§32: the antipode is REACHABLE — the wall is gone",
     vAnti.allowed === true, JSON.stringify(vAnti));
-  check("§32: …and it CANNOT be cast", vAnti.castable === false && TRa.canCast({ tradition: anti }, D, idxa) === false);
+  check("§32: …and it CANNOT be cast", vAnti.castable === false);
   // ⛔ AND NOTHING ELSE BECAME UNCASTABLE. `allowed` answers "may I hold this"; `castable` answers "may I
   // use it", and conflating them would quietly disarm every other craft in the game.
   check("§32: an ordinary far craft is still castable", vFar.castable === true && vFar.allowed === true);

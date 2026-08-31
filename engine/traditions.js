@@ -76,12 +76,14 @@ export function traditionOf(ability, index) {
 
 /** CCODE-333: the DOMAIN a tradition belongs to — the layer above the pole. Null when unmapped, which is
  *  the honest answer for the five records outside the wheel (god_named, bargainers, and the folk kits). */
-/** CCODE-339: may this craft be CAST by someone with these domains? ⛔ Distinct from `allowed`, which asks
- *  whether it may be HELD. An antipode craft is held and not cast — it is braid material. */
-export function canCast(ability, domains, index, opts = {}) {
-  return domainAccess(ability, 1, domains, index, opts).castable !== false;
-}
-
+// ⛔ CCODE-339b — `canCast` WAS DELETED, NOT WIRED. I exported it as a named reader and then every call
+// site used `domainVerdict(ability).castable` instead, because the app already holds the character and
+// the extra helper only re-asked what the verdict had answered. The `testOnlyExports` ratchet caught it
+// at 18 and it was MINE.
+//
+// ⚠️ THE RATCHET SAYS "wire it or delete it" AND DELETE WAS THE HONEST ANSWER. Wiring a redundant helper
+// to clear a ratchet is how a codebase grows two ways to ask one question. `castable` is read straight
+// off the verdict — see `domainAccess`.
 export function domainOfTradition(traditionId, index) { return index?.domainOfTrad?.[traditionId] || null; }
 
 /** The domain an ABILITY belongs to, via its tradition. ⚠️ DERIVED THROUGH `traditionOf` ON PURPOSE, so a

@@ -195,7 +195,7 @@
     "break",
     "strike"
    ],
-   "tradition": "valley_craft",
+   "tradition": "marcher",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
    "powerSystem": "metaphysical",
@@ -246,7 +246,9 @@
    "_powerSystemWas": "body",
    "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current.",
    "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS.",
-   "_typed_20260829": "⛔ `physical` — a stone at forty paces. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
+   "_typed_20260829": "⛔ `physical` — a stone at forty paces. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `marcher`. a trained ranged strike — the Marcher weapon-set at folk scale, beside `thrown_edge` and `levelled_crossbow`. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "drawn_bow",

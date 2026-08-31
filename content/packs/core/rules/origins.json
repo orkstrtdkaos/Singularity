@@ -14,7 +14,7 @@
   {
    "id": "valleyfolk",
    "name": "Valleyfolk",
-   "nativeTradition": "valley_craft",
+   "nativeTradition": null,
    "homeRegion": "valley",
    "description": "Born to the Valley floor — the near-center crossing where order, light, practical craft and making all cross faintly. Your people are generalists because the center holds a little of everything.",
    "whyYouAreHere": "You never left. This is home, and the world is arriving at your door whether you asked it to or not.",
@@ -27,7 +27,9 @@
    "braidAffinity": {
     "discount": 2,
     "note": "The center gave up neither pole and mastered neither; its gift is holding both. Cross-pole braid abilities (the diameter-lines) cost 2 less for valleyfolk — the one people who can braid the poles."
-   }
+   },
+   "nativeKind": "folk",
+   "_folkOrigin_20260830": "⛔ `nativeTradition` WAS `valley_craft`, WHICH IS NO LONGER A DOMAIN. Erik 2026-08-30: 'let's EMPTY THE VALLEYCRAFT INTO THE PARENTS — they will still be ACCESSIBLE, just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ THE ORIGIN SURVIVES AND IS BETTER FOR IT: the Valleyfolk description ALREADY SAID THIS — 'born to the Valley floor, the near-center crossing where order, light, practical craft and making ALL CROSS FAINTLY. YOUR PEOPLE ARE GENERALISTS.' ⚠️ **A generalist origin should not have a native TRADITION; that was the muddle.** ⛔ `nativeKind: folk` — Valleyfolk begin with FOLK crafts, which now sit under their real parents (marcher, rootkin, mason, horizon, stillhold and seven more) and remain learnable by anyone. **They start with the crossing, not with a domain.**"
   },
   {
    "id": "harmonic",

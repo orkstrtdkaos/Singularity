@@ -612,6 +612,16 @@
   },
   "wildVariance": {
    "type": "boolean"
+  },
+  "traditionKind": {
+   "type": "string",
+   "enum": [
+    "pole",
+    "foothill",
+    "folk",
+    "braid"
+   ],
+   "description": "⛔ WHAT KIND OF THING THE `tradition` FIELD NAMES. Specced in `po/SPEC_SNG-536_merger_audited.md` §2a: 'TODAY A FOOTHILL AND A TRADITION LOOK IDENTICAL IN AN ABILITY RECORD, which is why they read as orphans.' ✅ DECLARED 2026-08-30 when Erik ruled `valley_craft` emptied into its parents: 'they will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ⚠️ `pole` — one of the 24 wheel poles, absent by default. `folk` — the folk-scale expression of its parent, learnable by anyone. `foothill` — where a domain and its adjacents live and work. `braid` — cross-pole, stays outside the fourteen. ⛔ THE FIELD EXISTS SO A CRAFT CAN SIT UNDER A TRADITION WITHOUT CLAIMING TO BE THAT TRADITION'S OWN."
   }
  }
 }

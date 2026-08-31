@@ -424,8 +424,14 @@
      "step_between"
     ]
    }
-  },
-  "valley_craft": {
+  }
+ },
+ "_notes_SNG507": "⛔ SNG-507. 91 GRANT SLOTS WERE LOST IN THE SNG-501 RE-POINT AND 87 ARE BACK.\n⚠️ CAUSE: my rename map was built from the REVERT LOGS, which only covered abilities I explicitly cut. The de-article pass renamed 342 ids the logs never saw — so a slot reading `the_long_dark` had no map entry, was not live, and I DROPPED IT rather than deriving `long_dark`. ⛔ I FIXED THE MAP AFTERWARDS AND NEVER RE-RAN THE PASS AGAINST THE ORIGINAL.\n⛔ FOUR ARE GENUINELY GONE AND STAY GONE — `noesis`, `logos` (pole-mastery skills, cut SNG-463), `the_held_form` (cut SNG-457), `the_long_haul` (merged into Second Wind, SNG-479). Their traditions are under cap and need a replacement grant chosen deliberately, not backfilled.\n⛔ FOUR REPLACEMENTS CHOSEN, NOT BACKFILLED. Every one of the four dead grants was a POLE-MASTERY SKILL or a merge casualty, and in three of four cases the tradition was left WITH NO BY-RIGHT OFFENSE AT ALL — four perception crafts and nothing to act with. ⚠️ THE REPLACEMENTS ARE EACH TRADITION'S FIRST OFFENSE: Sustained Regard · Contradiction · Plain Weight · Cutting Figure. ⛔ WHICH IS A BETTER STARTING SET THAN THE ORIGINAL — a by-right craft should let a new character DO something on turn one.",
+ "_folkNativeGrant_20260830": {
+  "_erik": "⛔ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. THEY WILL STILL BE ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.'",
+  "whatMoved": "✅ THE GRANT IS PRESERVED VERBATIM AS `folkNativeGrant` BELOW — the Valleyfolk still start with exactly these crafts. ⚠️ WHAT CHANGED IS THE KEY: it is no longer keyed to a TRADITION, because there is no longer a `valley_craft` tradition to key it to. ⛔ The 13 anchors now live under marcher, rootkin, mason, horizon, stillhold, wright, umbral, lattice, veilwright and threnodist, each carrying `traditionKind: folk`.",
+  "whyNotKeyedToAParent": "⛔ BECAUSE THE PARENTS ARE THREE AND THE GRANT IS ONE. `valley_craft`'s authored blend was stillhold .4 / wright .3 / rootkin .3, and the 13 anchors reach FURTHER than those three. ⚠️ **A generalist origin cannot be keyed to a domain — that was the muddle Erik named.** ✅ `origins.json` now carries `nativeKind: folk` on `valleyfolk` instead of `nativeTradition`.",
+  "folkNativeGrant": {
    "anchors": [
     "wayfinding",
     "greenlore",
@@ -450,6 +456,5 @@
     ]
    }
   }
- },
- "_notes_SNG507": "⛔ SNG-507. 91 GRANT SLOTS WERE LOST IN THE SNG-501 RE-POINT AND 87 ARE BACK.\n⚠️ CAUSE: my rename map was built from the REVERT LOGS, which only covered abilities I explicitly cut. The de-article pass renamed 342 ids the logs never saw — so a slot reading `the_long_dark` had no map entry, was not live, and I DROPPED IT rather than deriving `long_dark`. ⛔ I FIXED THE MAP AFTERWARDS AND NEVER RE-RAN THE PASS AGAINST THE ORIGINAL.\n⛔ FOUR ARE GENUINELY GONE AND STAY GONE — `noesis`, `logos` (pole-mastery skills, cut SNG-463), `the_held_form` (cut SNG-457), `the_long_haul` (merged into Second Wind, SNG-479). Their traditions are under cap and need a replacement grant chosen deliberately, not backfilled.\n⛔ FOUR REPLACEMENTS CHOSEN, NOT BACKFILLED. Every one of the four dead grants was a POLE-MASTERY SKILL or a merge casualty, and in three of four cases the tradition was left WITH NO BY-RIGHT OFFENSE AT ALL — four perception crafts and nothing to act with. ⚠️ THE REPLACEMENTS ARE EACH TRADITION'S FIRST OFFENSE: Sustained Regard · Contradiction · Plain Weight · Cutting Figure. ⛔ WHICH IS A BETTER STARTING SET THAN THE ORIGINAL — a by-right craft should let a new character DO something on turn one."
+ }
 }

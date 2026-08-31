@@ -84,7 +84,7 @@
     "EXPLORE",
     "INVESTIGATE"
    ],
-   "tradition": "valley_craft",
+   "tradition": "horizon",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "metaphysical",
@@ -152,7 +152,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `horizon`. reading trails, country and distance — the Horizon-Walkers' whole subject, sold cheap. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "greenlore",
@@ -243,7 +245,7 @@
    "challengeTypes": [
     "SURVIVE"
    ],
-   "tradition": "valley_craft",
+   "tradition": "rootkin",
    "nativeOrCombination": "native",
    "harmRung": "incapacitating",
    "powerSystem": "metaphysical",
@@ -309,7 +311,9 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "valley_craft",
    "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `rootkin`. field medicine and plant knowledge — rootkin is an authored parent (.3) and this is its plainest expression. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "mediators_tongue",
@@ -397,7 +401,7 @@
    "challengeTypes": [
     "SOCIAL"
    ],
-   "tradition": "valley_craft",
+   "tradition": "stillhold",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "metaphysical",
@@ -457,7 +461,9 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_bargainTag": "⛔ SNG-471: `bargain` ADDED. 'De-escalate, arbitrate, and find the shape of a deal both sides can live with.'\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `stillhold`. de-escalate and arbitrate — stillhold is the largest authored parent (.4) and this IS stillhold. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "tinkers_hand",
@@ -537,7 +543,7 @@
     "PUZZLE",
     "SURVIVE"
    ],
-   "tradition": "valley_craft",
+   "tradition": "wright",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "metaphysical",
@@ -600,7 +606,9 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "valley_craft",
    "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `wright`. repair and jury-rig — wright, authored parent (.3). ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "beastfriend",
@@ -687,7 +695,7 @@
     "EXPLORE",
     "STEALTH"
    ],
-   "tradition": "valley_craft",
+   "tradition": "rootkin",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
    "powerSystem": "metaphysical",
@@ -747,7 +755,9 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `rootkin`. ⛔ ERIK HAS CORRECTED ME ON THIS MULTIPLE TIMES: 'BEASTFRIEND IS A LIFE CRAFT'. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "stonewise",
@@ -830,7 +840,7 @@
     "EXPLORE",
     "PUZZLE"
    ],
-   "tradition": "valley_craft",
+   "tradition": "mason",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
    "powerSystem": "metaphysical",
@@ -892,7 +902,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `mason`. read stone, structure and ground — that is Masonry, and mason sits beside wright in Building. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "rivercraft",
@@ -979,7 +991,7 @@
     "CHASE",
     "SURVIVE"
    ],
-   "tradition": "valley_craft",
+   "tradition": "horizon",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "metaphysical",
@@ -1038,7 +1050,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `horizon`. boats, currents, crossings — water-roads are roads. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "quiet_step",
@@ -1111,7 +1125,7 @@
     "STEALTH",
     "CHASE"
    ],
-   "tradition": "valley_craft",
+   "tradition": "umbral",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "metaphysical",
@@ -1170,7 +1184,9 @@
    "obscure": true,
    "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. ⚠️ denies an auditory read specifically\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY.",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `umbral`. move unseen and unheard — the Umbral first gift at folk scale. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "hearthbinding",
@@ -1247,7 +1263,7 @@
    "challengeTypes": [
     "SURVIVE"
    ],
-   "tradition": "valley_craft",
+   "tradition": "stillhold",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "metaphysical",
@@ -1312,7 +1328,9 @@
     "note": "GATE: you kept the camp that night or you did not. And it is the one where interruption RESTARTS rather than pauses, because a named place is made by continuity."
    },
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `stillhold`. turn a stop into a hearth — restoring a party by making a place safe is stillhold's work. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "old_roads",
@@ -1399,7 +1417,7 @@
     "EXPLORE",
     "INVESTIGATE"
    ],
-   "tradition": "valley_craft",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "metaphysical",
@@ -1456,7 +1474,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `lattice`. sense and approach PRECURSOR TRACES — the lattice tradition's own subject. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "blend_in",
@@ -1525,7 +1545,7 @@
     "STEALTH",
     "SOCIAL"
    ],
-   "tradition": "valley_craft",
+   "tradition": "veilwright",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "guard",
@@ -1580,7 +1600,9 @@
    "plainly": "A stealth/social action that reduces incoming harm. Its strength is rated 3 out of 10 and absorbs 0 harm per hit (rank 0 armour), and lasts for about 8 hours Ranks: rank 2 deepens concealment; rank 3 adds to special. Limit: a Searcher Who Knows Your Face And IS Looking defeats it.",
    "_wardTypes": "⛔ SNG-512. Not being noticed answers being targeted at all.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `veilwright`. pass unnoticed, be forgotten — falsecraft at its most ordinary. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "boundary_stone",
@@ -1646,7 +1668,7 @@
     "SURVIVE",
     "EXPLORE"
    ],
-   "tradition": "valley_craft",
+   "tradition": "mason",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "guard",
@@ -1703,7 +1725,9 @@
    "plainly": "A survive/explore action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 3 harm per hit (rank 1 armour), and lasts for about 7 days Ranks: rank 2 deepens ward; rank 3 adds to autonomy. Limit: a Determined Person Walks Through IT — it Deters, not stops.",
    "_wardTypes": "⛔ SNG-512. Small beasts, weather, casual trespass. A plain threshold ward.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `mason`. set a lasting ward at a THRESHOLD — a built thing that holds. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "hunters_strike",
@@ -1770,7 +1794,7 @@
    "challengeTypes": [
     "FIGHT"
    ],
-   "tradition": "valley_craft",
+   "tradition": "marcher",
    "nativeOrCombination": "native",
    "harmRung": "lethal",
    "shape": "damage",
@@ -1825,7 +1849,9 @@
    "plainly": "A fight action that deals damage. It rolls 1d6 Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: nO Warrior'S Forms — one target, honest force.",
    "_powerSystemWas": "valley_craft",
    "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_typed_20260829": "⛔ `physical` — spear, sling, axe, bow — the most ordinary harm in the game. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
+   "_typed_20260829": "⛔ `physical` — spear, sling, axe, bow — the most ordinary harm in the game. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `marcher`. 'a trained practical strike — honest damage from a working hunter'. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "carrying_call",
@@ -1907,7 +1933,7 @@
     "PUZZLE",
     "SOCIAL"
    ],
-   "tradition": "valley_craft",
+   "tradition": "harmonic",
    "nativeOrCombination": "native",
    "harmRung": "incapacitating",
    "shape": "reveal",
@@ -1947,7 +1973,9 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Carrying Call",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `harmonic`. ✅ THE CRAFT NAMES ITS OWN SOURCE: 'the valley's BORROWED SOUND-WORK. Generations beside the Choir'. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "glasswork",
@@ -2029,7 +2057,7 @@
     "PUZZLE",
     "SOCIAL"
    ],
-   "tradition": "valley_craft",
+   "tradition": "radiant_folk",
    "nativeOrCombination": "native",
    "harmRung": "incapacitating",
    "shape": "make",
@@ -2068,7 +2096,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `radiant_folk`. ✅ THE CRAFT NAMES ITS OWN SOURCE: 'what a people learn from LIVING UNDER THE PLATEAU EDGE'. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "keen_appraisal",
@@ -2125,7 +2155,7 @@
     "INVESTIGATE",
     "SOCIAL"
    ],
-   "tradition": "valley_craft",
+   "tradition": "mason",
    "powerSystem": "metaphysical",
    "operativeAxis": [
     "appraisal",
@@ -2168,7 +2198,9 @@
    "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: exotic And Precursor Items Read AS 'Beyond Scale'.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `mason`. see value, provenance and condition — the appraiser's eye, and `thingcraft` is mason's version. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   },
   {
    "id": "storykeeper",
@@ -2230,7 +2262,7 @@
     "INVESTIGATE",
     "SOCIAL"
    ],
-   "tradition": "valley_craft",
+   "tradition": "threnodist",
    "powerSystem": "metaphysical",
    "operativeAxis": [
     "recall",
@@ -2273,7 +2305,9 @@
    "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens implication; rank 3 adds to special. Limit: recall is of What You Have Heard — gaps are gaps.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "valley_craft",
-   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "traditionKind": "folk",
+   "_folkReassigned_20260830": "⛔ `valley_craft` → `threnodist`. hold and recall the valley's stories — living memory is the Threnodists' subject. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

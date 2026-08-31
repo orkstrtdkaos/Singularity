@@ -36,7 +36,7 @@ file is replaced.**
 | bucket | n | means |
 |---|---|---|
 | ✅ **READ** | **87** | a play-path file names it outside a comment |
-| ⛔ **DARK** | **18** | **no literal reader anywhere** — see the four lies below |
+| ⛔ **DARK** | **19** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **4** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
 
@@ -658,6 +658,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `backlashRung` | 20 | `root`×20 | ⚠️ CI-ONLY | _1 test/script only_ |
 | `upkeep` | 18 | `root`×18 | ⚠️ CI-ONLY | _1 test/script only_ |
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |
+| `traditionKind` | 18 | `root`×18 | ⛔ DARK | — |
 | `obscure` | 16 | `root`×16 | ✅ READ | `skill_battle.js` |
 | `variance` | 15 | `mechanic`×15 | ✅ READ | `craftmechanics.js`, `app.js` |
 | `ongoingHarm` | 15 | `tree`×15 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |

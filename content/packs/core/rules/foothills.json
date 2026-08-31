@@ -37,7 +37,6 @@
    "axis": "emotional_logical",
    "craft": "Resonance",
    "place": "harmonic_heights_terrace",
-   "abilities": 15,
    "ratified": "⛔ ERIK 2026-08-15: 'I agree with you about the Threnodists with the lattice aesthetic for the resonant/harmonic foothill.'",
    "why": "⚠️ THRENODIST FOR CRAFT, LATTICE FOR AESTHETIC — the Threnodists sing what they FEEL; the Heights sing what they can BUILD WITH. Sound made structural: standing waves, phononic crystal, interference held as architecture. ⛔ AND LATTICE IS NOT A THRENODIST RING-NEIGHBOUR (pos 15 vs 23), which is fine — the two existing foothills also blend across the ring.",
    "note": "⚠️ Sound is not one of the twelve axes. The foothill is where it enters the world.",
@@ -52,7 +51,6 @@
    "axis": "dark_light",
    "craft": "Glasswork",
    "place": "radiant_plateau_edge",
-   "abilities": 14,
    "ratified": "⛔ ERIK 2026-08-15: 'Radiant plateau can be light, wright, and order.'",
    "why": "⛔ LIGHT + MAKING + ORDER, and the crafts show all three. BLAZEBORN gives the medium — Radiance is theirs. WRIGHT gives the turn that makes it usable: Light Well STORES light, Clarity Lens SHAPES it, Beacon Thread STRINGS it between people. LATTICE gives the discipline — light-guides paved into streets and towers that braid sunlight into working beams are an infrastructure, laid out and maintained.\n⚠️ THE DIFFERENCE FROM THE PARENT, PLAINLY: A BLAZEBORN SPENDS LIGHT TO EXPOSE SOMETHING AND THE LIGHT IS GONE. THE PLATEAU STORES IT AND SELLS IT. ⛔ That is what makes a foothill an economic centre — the pole performs its position, the foothill runs a utility."
   },
@@ -66,7 +64,6 @@
    "craft": "Drill",
    "place": "hardline",
    "region": "foothill_hardline",
-   "abilities": 0,
    "ratified": "⛔ ERIK 2026-08-15: 'The Marchers foothill likely produces fantastic martial training, as well as mercenary units.'",
    "why": "⛔ THE BLEND IS ALREADY IN HARDLINE'S OWN SEED, which I authored without seeing what it was: 'drill-yards, body-halls and mediators in one town, DELIBERATELY. The only place where a marcher and a stillholder train in the same yard, and it works because everyone here has needed both.'\n   MARCHER gives the Edge — force made exact, the line that holds.\n   SOMATIC gives the teaching. ⚠️ A ring-neighbour (pos 6 and 7), and the reason this foothill can TRAIN rather than merely fight: the Marchers have discipline, the Somatics have a method for putting a body through it. Body-halls beside drill-yards.\n   STILLHOLD gives the contract. ⛔ MARCHER'S OWN ANTIPODE, and that is not a contradiction — it is what makes the violence SELLABLE. A company that will stop when the terms say stop can be hired by someone who has to live in the town afterwards.",
    "theFunctionalTurn": "⛔ THE POLE HOLDS A LINE OUT OF CONVICTION. THE FOOTHILL HOLDS ONE UNDER CONTRACT. ⚠️ That is the whole difference and it is not a diminishment — a conviction cannot be hired, budgeted for, or relieved at the end of a season. The March exists because someone visibly will not move; Hardline exists because someone will move, on the date agreed, for the agreed fee, and both parties know it in advance.",
@@ -100,7 +97,6 @@
    "craft": "The Burying Trades",
    "place": "greyhearth",
    "region": "foothill_greyhearth",
-   "abilities": 0,
    "ratified": "⛔ ERIK 2026-08-16: 'If we don't have a Foothill for the GRAVE-CALLERS, ASHWARDENS, NECROMANCERS and their adjacents, then yes there needs to be a Foothill.'",
    "why": "⚠️ IT ALREADY EXISTED AND WAS ALREADY THE RIGHT PLACE. `greyhearth` is authored as 'the burying trades, the mourning trades AND THE QUIET ONES — a town that buries for every road that meets here, the Crossing's dead and the Palelands' both, and does not find it grim: everyone here has handled it.' ⛔ IT ALREADY BLENDS BOTH SECTS IN ITS OWN SEED.\n   ASHWARDEN gives the craft — ending, tending, and what remains addressable.\n   THRENODIST gives the mourning trades. ⚠️ A burial town that could not hold a funeral would be a disposal site.\n   WRIGHT gives the third domain: ⛔ COFFINS, CAIRNS, MARKERS, BARROWS AND THE MACHINERY OF A CEMETERY. Someone makes those, and at scale.",
    "theFunctionalTurn": "⛔ THE POLE TENDS AN ENDING BECAUSE IT IS OWED. THE FOOTHILL TENDS IT BECAUSE IT WAS PAID FOR — and that is what makes it available to people who are not Ashwardens. ⚠️ Cairnhold will come when your dead are its business. Greyhearth comes when you hire it.",
@@ -172,7 +168,6 @@
    "craft": "Valley Craft",
    "place": "the_crossing",
    "region": "the_given_land",
-   "abilities": 18,
    "ratified": "⛔ ERIK 2026-08-23: 'valley_craft DO have parents — we've established this multiple times.'",
    "why": "⚠️ I RECORDED IT TWICE AS 'THE FOLK COLLECTION, NO PARENTS' AND WAS CORRECTED BOTH TIMES. ⛔ THE DEFINITION IS THE THING I KEPT MISSING: A FOOTHILL IS WHERE MULTIPLE TRADITIONS COME TOGETHER — A PLACE WHERE A DOMAIN AND ITS ADJACENTS LIVE AND WORK. That is a description of the CROSSING, which is the most foothill-shaped place in the world.\n   STILLHOLD 0.4 — the mediator's share. The Crossing holds because someone stops things.\n   WRIGHT 0.3 — it is a working valley: made goods, repair, the trades.\n   ROOTKIN 0.3 — it is a GROWING valley, and the green is half of what the folk crafts handle.",
    "theFunctionalTurn": "⛔ THE POLES ARE CLOSED AND VALLEY CRAFT IS OPEN. traditions.json: 'the Valley's folk traditions (harmonic/radiant/valley_craft) are OPEN — they are the near-center crossing; anyone in the Valley may learn them.' ⚠️ THAT IS THE FOOTHILL PROPERTY STATED IN THE ACCESS RULES and I read it as evidence it was NOT a foothill.",
@@ -205,5 +200,6 @@
   "precursor": "⛔ A POWER SOURCE MISFILED AS A TRADITION. 6 abilities — Address-Sense, Latticespeak, Wake the Line, Unmake Seal, Hold the Aperture, Foreclose. No people owns them; anyone who learns to speak to the lattice has them. ⚠️ Should carry `tradition: null` with `powerSystem: precursor`."
  },
  "_twoAxes": "⛔ SNG-443, ERIK'S RULING: 'Skills may be learned at PLACES — or in the wilds as a hunter — but they would be TIED BACK TO THEIR TRADITION ROOTS otherwise.'\n⚠️ TWO SEPARATE AXES, AND I HAD COLLAPSED THEM:\n   `tradition` — THE LINEAGE. Which people's craft this descends from. Permanent, and it is what the power source, the aesthetic and the wheel position all key off.\n   `learnedAt` — THE ACCESS. Where a person can actually be taught it: a foothill, a school, a place, or the wilds.\n⛔ A FOOTHILL IS A PLACE OF ACCESS, NOT A NEW ANCESTRY. Hardline teaches the Edge; it does not own it. That is exactly what makes a foothill an economic centre — it SELLS ACCESS to something it did not invent, which is also true of the Radiant Plateau selling stored light and the Bargainers selling honest terms.\n⚠️ MY ERROR, NAMED: I filed six crafts as `valley_craft` because they were open to anyone, which CONFUSED ACCESS WITH ANCESTRY. Open-to-anyone is a property of the learning, not of the lineage.",
- "_theDefinition_20260823": "⛔ ERIK, 2026-08-23, THE DEFINITION I KEPT MISSING: 'FOOTHILLS ARE WHERE MULTIPLE TRADITIONS COME TOGETHER — PLACES WHERE A DOMAIN AND ITS ADJACENTS LIVE AND WORK.'\n⚠️ I HAD BEEN READING A FOOTHILL AS 'A WEAKER VERSION OF A POLE, SOLD.' That is a consequence, not the definition. ⛔ THE DEFINITION IS GEOGRAPHIC AND SOCIAL: it is a PLACE, and the blend is who lives there. Greyhearth/Amaranth is the clearest case — two towns, one river, three parents."
+ "_theDefinition_20260823": "⛔ ERIK, 2026-08-23, THE DEFINITION I KEPT MISSING: 'FOOTHILLS ARE WHERE MULTIPLE TRADITIONS COME TOGETHER — PLACES WHERE A DOMAIN AND ITS ADJACENTS LIVE AND WORK.'\n⚠️ I HAD BEEN READING A FOOTHILL AS 'A WEAKER VERSION OF A POLE, SOLD.' That is a consequence, not the definition. ⛔ THE DEFINITION IS GEOGRAPHIC AND SOCIAL: it is a PLACE, and the blend is who lives there. Greyhearth/Amaranth is the clearest case — two towns, one river, three parents.",
+ "_countsRemoved_20260830": "⛔ STORED `abilities` COUNTS REMOVED FROM EVERY FOOTHILL ROW. CCode found them stale after Erik retired `valley_craft`: harmonic: stored 15 / live 16 · radiant_folk: stored 14 / live 15 · hardline: stored 0 / live 0 · greyhearth: stored 0 / live 0 · valley_craft: stored 18 / live 0. ⚠️ **AND THIS FILE'S OWN NOTE ALREADY FORBADE THEM:** 'A STORED COPY OF A DERIVED VALUE IS THE FAILURE THAT PRODUCED THIS TICKET. DO NOT RE-ADD THEM' — and then every row stored one. ⛔ A RULE WRITTEN IN A FILE THAT THE SAME FILE BREAKS IS NOT A RULE. ✅ THE COUNT IS DERIVABLE IN ONE LINE FROM THE ABILITY CORPUS AND SHOULD BE DERIVED WHEREVER IT IS WANTED. ⚠️ SAME CLASS AS `hasSelf` (resolved from the class, never stored on the sheet) and CCODE-83b (which judged against a stored table instead of the crafts). **This project's most common defect, in the file that names it.**"
 }

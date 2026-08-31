@@ -2375,6 +2375,139 @@
    "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_rungFix_20260830": "⛔ ability rung -> `none`: it NAMES the element that does not fit. It puts nobody down at any rank.",
    "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "axes": {
+    "concrete_abstract": 0.85
+   },
+   "id": "sent_meaning",
+   "name": "Sent Meaning",
+   "levelReq": 4,
+   "energyCost": 9,
+   "attribute": "mental",
+   "shape": "construct",
+   "harmRung": "none",
+   "challengeTypes": [
+    "CREATE",
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "operativeAxis": [
+    "autonomy",
+    "persistence",
+    "scope"
+   ],
+   "effectTags": [
+    "symbol",
+    "autonomous",
+    "disaster"
+   ],
+   "functions": [
+    "make",
+    "summon",
+    "command"
+   ],
+   "description": "⛔ BUILD A MEANING AND SEND IT TO WORK. Not a figure that acts for a while and lapses — a made symbol with a purpose in it, released into the world to go on meaning what it means. ⚠️ AND IT WILL. **THE MEANINGS DO EXACTLY WHAT THEY MEAN, WHICH IS NOT ALWAYS WHAT WAS WANTED, AND THAT IS THE ENTIRE HISTORY OF THIS PEOPLE'S DISASTERS.** ⛔ A Figurist who sends 'let this road be safe' finds out over the following months what the road was willing to do about that.",
+   "narrationHints": "She sets the figure down at the crossroads and it is just a mark cut into a post. ⚠️ Nobody is robbed on that road again. ⛔ By autumn nobody travels it either, and it takes a while for anyone to work out that those two facts are the same fact.",
+   "notFor": "⛔ IT MEANS WHAT YOU SAID, NOT WHAT YOU MEANT — the craft has no interest in your intention and a Figurist who is imprecise has not made a mistake, they have made a THING. ⚠️ AND YOU DO NOT COMMAND IT AFTERWARDS: it runs on its meaning, not on your instructions, and it does not check back. ⛔ IT CAN BE UNMADE BY SOMEONE WHO READS IT — an Unmaker, another Figurist, anyone who can see the figure and work out what it says. **This is the only reliable way to stop one, and it is why Figurists keep records of what they have sent.**",
+   "plainly": "A create/puzzle action. ⛔ MAKE A SYMBOL WITH A PURPOSE IN IT AND RELEASE IT — it acts on its own, indefinitely, doing exactly what it means. Rated 6, one figure, and it PERSISTS. r2 sends something that adapts its method while keeping its meaning; r3 it can make further figures to serve its purpose. ⚠️ YOU CANNOT COMMAND IT AFTERWARDS. ⛔ It can be read and unmade by someone who understands it.",
+   "intensity": {
+    "conserve": "a narrow meaning, tightly worded — it will do little and it will do only that",
+    "surge": "⛔ SEND SOMETHING BROAD; it will find readings of your words that you did not"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT MEANS WHAT YOU SAID, NOT WHAT YOU MEANT. Imprecision does not fail, it MAKES",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ YOU DO NOT COMMAND IT AFTERWARDS — it runs on its meaning and does not check back",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT CAN BE READ AND UNMADE by anyone who works out what it says — the only reliable stop",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AND IT PERSISTS. A figure sent in your youth is still working when you are old",
+     "class": "hard"
+    }
+   ],
+   "summon": {
+    "count": 1,
+    "tierGap": [
+     -2,
+     -2,
+     -1
+    ],
+    "contributions": [
+     "KNOW",
+     "WARD"
+    ]
+   },
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 0,
+    "targets": 1,
+    "crit": {
+     "success": "It reads your wording more generously than you did and does something better than you asked.",
+     "failure": "It reads your wording exactly, and you hear about it in the spring."
+    },
+    "note": "construct/summon. ⛔ `the_figure_works` IS AUTHORED AND SAYS THIS OUTRIGHT: 'WHERE SYMBOLS ARE MADE THAT ACT. The Figurists build meanings and SEND THEM TO WORK, and the meanings do exactly what they mean, WHICH IS NOT ALWAYS WHAT WAS WANTED, WHICH IS THE ENTIRE HISTORY OF THIS PEOPLE'S DISASTERS.' ⚠️ `walking_figure` sends a figure to do A NAMED THING and returns; **nothing sent a meaning that STAYS.** ✅ AND THE DISASTER IS THE CRAFT, NOT A PENALTY: it needs no cost clause because MEANING WHAT YOU SAID RATHER THAN WHAT YOU MEANT is the whole hazard, and a careful player is genuinely safer. ⛔ FIFTH TIME THE GEOGRAPHY HELD A CRAFT THE TRADITION LACKED."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Sent Meaning",
+     "functions": [
+      "make",
+      "summon"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ RELEASE A MADE MEANING INTO THE WORLD. It acts on its own, indefinitely, doing exactly what it means. ⚠️ It does not lapse and it does not report.",
+     "cannot": "⛔ It means what you SAID. ⚠️ You cannot command it after. ⛔ Anyone who reads it can unmake it."
+    },
+    {
+     "rank": 2,
+     "name": "Finds Its Way",
+     "functions": [
+      "make",
+      "summon",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "autonomy",
+      "quality"
+     ],
+     "grants": "⛔ IT ADAPTS ITS METHOD WHILE KEEPING ITS MEANING — blocked one way, it finds another, and the second way is rarely one you would have chosen. ⚠️ This is the rank the Figure-Works' disasters come from.",
+     "cannot": "⚠️ The meaning is fixed even as the method moves. ⛔ And it is still readable."
+    },
+    {
+     "rank": 3,
+     "name": "It Makes More",
+     "functions": [
+      "make",
+      "summon",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ],
+     "grants": "⛔ IT CAN MAKE FURTHER FIGURES TO SERVE ITS PURPOSE — smaller, narrower, and each of them meaning what the first one meant. ⚠️ A Figurist at this rank has started something rather than done something.",
+     "cannot": "⛔ EVERY CHILD FIGURE IS ALSO READABLE AND UNMAKEABLE, one at a time. ⚠️ Which is how a Figurist spends a decade undoing a season's work."
+    }
+   ],
+   "_authored": "⛔ The Figure-Works described a craft the tradition did not have, and named its own failure mode while doing it."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

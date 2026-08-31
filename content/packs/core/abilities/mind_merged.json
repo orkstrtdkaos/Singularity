@@ -457,6 +457,93 @@
    "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 WALKS SOMEONE TO A CONCLUSION WHERE THE CONSISTENT ACT IS A FINAL ONE, and the ability declared `none` — which glosses as 'this craft HARMS NOTHING, NEVER invent a wound from it'. ⛔ A GM WOULD HAVE BEEN TOLD THE SYLLOGISTS' DARKEST CRAFT IS HARMLESS.",
    "_intensityAuthored_20260830": "⚠️ WAS THE BARE STRING 'moderate' — a magnitude word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ✅ Authored as a pair.",
    "_typed_20260830": "⛔ `judgement` — ⛔ IT WALKS SOMEONE TO A CONCLUSION BY THEIR OWN REASONING — the harm is arriving somewhere true and unbearable, which is INTRINSIC and needs a self that can follow an argument. ⚠️ A `damage`-reaching craft with NO DICE inherits the tier rung (5d6+8 at a level-8 standing) — the same defect as the eleven first-offenses."
+  },
+  {
+   "powerSystem": "metaphysical",
+   "tradition": "syllogist",
+   "nativeOrCombination": "native",
+   "axes": {
+    "emotional_logical": -0.9
+   },
+   "id": "proof_halls",
+   "name": "Proof-Halls",
+   "levelReq": 5,
+   "energyCost": 12,
+   "attribute": "mental",
+   "shape": "reveal",
+   "harmRung": "none",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "operativeAxis": [
+    "quality",
+    "scope",
+    "persistence"
+   ],
+   "effectTags": [
+    "record",
+    "humility",
+    "capstone"
+   ],
+   "functions": [
+    "reveal",
+    "foresee",
+    "restore"
+   ],
+   "description": "⛔ TWO THOUSAND YEARS OF ARGUMENTS, KEPT IN ORDER, WITH THEIR ERRORS ANNOTATED BY THE PEOPLE WHO MADE THEM. A Syllogist at this reach does not reason alone — they consult a corpus that has been wrong in every recorded way and wrote down each one. ⚠️ **THE POWER IS NOT THE PROOFS. IT IS THE ANNOTATED FAILURES.** ⛔ Ask the Halls what is wrong with a thing and they will tell you which of the four hundred previously-catalogued ways of being wrong you are currently using.",
+   "narrationHints": "He is quiet for a long moment, and it is not thinking — it is looking something up. ⚠️ 'This has been tried,' he says. 'Eleven times. Nine of them failed the same way, and I can tell you which way you are about to.'",
+   "notFor": "⛔ IT ANSWERS FROM THE RECORD, SO A GENUINELY NEW PROBLEM GETS YOU LESS — the Halls are magnificent on the eleventh instance and nearly useless on the first. ⚠️ AND IT REASONS; IT DOES NOT PERCEIVE: it will not tell you what is in the room, only what follows from what you already know. ⛔ IT ALSO ANSWERS HONESTLY ABOUT YOUR OWN ARGUMENT, which practitioners describe as the hardest part of the craft and the reason the Halls are trusted.",
+   "plainly": "An investigate/puzzle action, and the Syllogist capstone. ⛔ CONSULT TWO THOUSAND YEARS OF ANNOTATED ARGUMENT: learn whether a thing has been tried, how it failed, and which failure you are walking into. Rated 7. ⚠️ IT ANSWERS FROM PRECEDENT — magnificent on a known problem, weak on a new one — and it will tell you the error in YOUR reasoning as readily as anyone else's.",
+   "intensity": {
+    "conserve": "a quick consultation — has this been tried, and did it work",
+    "surge": "⛔ THE WHOLE CORPUS ON ONE QUESTION; you will get the answer and four hundred years of qualifications with it"
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT ANSWERS FROM THE RECORD. A genuinely new problem gets you very little",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT REASONS, IT DOES NOT PERCEIVE — nothing about what is in the room",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT ANSWERS HONESTLY ABOUT YOUR OWN ARGUMENT, and Syllogists consider that the point",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AND CONSULTATION TAKES TIME — this is a library, not an instinct",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 6,
+    "scope": 2,
+    "crit": {
+     "success": "The Halls hold a case so close to yours that the annotation reads as if written for you.",
+     "failure": "You find your own argument in the record, filed under an error you had not noticed making."
+    },
+    "note": "reveal/capstone. ⛔ THE SYLLOGISTS HAD SIX CRAFTS AND NO CAPSTONE — L1–L3, the shortest ladder in the game — and `the_proof_halls` was sitting authored as a place: 'every argument the Syllogists have ever made, kept, in order, WITH ITS ERRORS ANNOTATED BY THE PEOPLE WHO MADE THEM. A two-thousand-year exercise in PUBLIC HUMILITY.' ✅ FOURTH TIME THE GEOGRAPHY HELD A CRAFT THE TRADITION LACKED (PIPELINE rule 16). ⚠️ AND THE CRAFT'S SUBJECT IS THE ANNOTATED FAILURES RATHER THAN THE PROOFS, which is what makes it Syllogist and not merely a research craft: their profile is 'GENUINELY HUMBLE in the specific sense that they will abandon any position the moment it is shown false.' ⛔ Its own bound enforces that — it answers honestly about YOUR argument."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Proof-Halls",
+     "functions": [
+      "reveal",
+      "restore"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "grants": "⛔ ASK THE RECORD: has this been tried, by whom, and how did it fail? ⚠️ You get the precedent and the annotation — including which of the catalogued errors you are currently making.",
+     "cannot": "⛔ From the record only. ⚠️ A new problem gets you little, and it takes time."
+    }
+   ],
+   "_authored": "⛔ THE PLACE WAS AUTHORED AND THE CRAFT WAS NOT — after `the_lensward`, `the slow orchard` and `the_mercy_house`. ✅ SINGLE RANK: a corpus either holds your case or it does not, and 'more consultation' is not a ladder — same shape as `worldsong` and `light_borne`."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",

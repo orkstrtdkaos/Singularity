@@ -439,7 +439,7 @@
    ],
    "tradition": "figurist",
    "nativeOrCombination": "native",
-   "harmRung": "damaging",
+   "harmRung": "none",
    "shape": "ward",
    "operativeAxis": [
     "autonomy",
@@ -552,7 +552,8 @@
    "_idWas": "the_walking_figure",
    "_wardTypes": "⛔ SNG-512. A figure that holds a threshold answers what tries to pass it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_concrete_abstract",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: no rank harms anyone — a sent figure bars a door, warns, watches and judges; it does not wound."
   },
   {
    "id": "sound_repair",
@@ -1671,7 +1672,7 @@
    ],
    "tradition": "figurist",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "lethal",
    "shape": "strike",
    "operativeAxis": [
     "precision",
@@ -1735,7 +1736,8 @@
    "_idWas": "the_cutting_figure",
    "_powerSystemWas": "reach_concrete_abstract",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_typed_20260829": "⛔ `spatial` — ⛔ GIVES `spatial` ITS FIRST CARRIER — a figurist imposes a LINE across a target and what it crosses is cut BY THE GEOMETRY. PHYSICS family, and the type existed in the families table with nothing dealing it. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
+   "_typed_20260829": "⛔ `spatial` — ⛔ GIVES `spatial` ITS FIRST CARRIER — a figurist imposes a LINE across a target and what it crosses is cut BY THE GEOMETRY. PHYSICS family, and the type existed in the families table with nothing dealing it. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`.",
+   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 CUTS A THOUGHT — the figure imposed across what someone is HOLDING."
   },
   {
    "id": "plain_weight",
@@ -2052,7 +2054,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Instance",
+     "name": "One Instance",
      "functions": [
       "reveal"
      ],
@@ -2061,7 +2063,7 @@
     },
     {
      "rank": 2,
-     "name": "The Named Form",
+     "name": "Named Form",
      "functions": [
       "reveal"
      ],
@@ -2168,7 +2170,8 @@
    "_revised": "⚠️ SNG-450. Erik: 'DON'T REMOVE r3 FROM PATTERN-SENSE — ADD SOMETHING TO IT.' ⛔ He is right that the fix for a weak rank is to make it do something, not to delete it. r3 was 'read the form of an event, a life, or a history — the shape it is completing', which is an observation. IT NOW ACTS ON THE FORM: name where the pattern must break, and act there.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_concrete_abstract",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
   },
   {
    "id": "stone_read",
@@ -2271,7 +2274,7 @@
   },
   {
    "id": "the_true_figure",
-   "name": "The True Figure",
+   "name": "True Figure",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "wild_nanite",
@@ -2289,7 +2292,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Shape Under It",
+     "name": "Shape Under It",
      "grants": "Look at a scene, a set of records, a route, a crowd, a wound-pattern — and the craft NAMES ONE THING for you: the element that does not fit, or the place where a piece is missing and what shape it must be. One concrete answer, pointed at: this ledger entry, that stone, the fourth man, the room nobody uses.",
      "cannot": "It shows the SHAPE, never the reason. And a genuinely chaotic thing has no figure — it returns nothing, which Figurists insist is a real answer.",
      "functions": [
@@ -2301,7 +2304,7 @@
     },
     {
      "rank": 2,
-     "name": "The Continued Line",
+     "name": "Continued Line",
      "grants": "Extend the figure — where the pattern goes next, what the missing piece must be, where the sixth one will be found.",
      "cannot": "The extension is only as sound as the figure, and a partial pattern extends confidently and wrongly. Say which you have.",
      "functions": [
@@ -2313,7 +2316,7 @@
     },
     {
      "rank": 3,
-     "name": "The Whole Figure",
+     "name": "Whole Figure",
      "grants": "The complete shape of a large thing — a campaign, a season of disappearances, a city's flow, a tradition's drift.",
      "cannot": "⚠ A LARGE FIGURE IS HARD TO STOP SEEING. Figurists at this rank read pattern into things that have none, and the craft cannot tell them apart from inside.",
      "functions": [
@@ -2331,7 +2334,7 @@
    ],
    "tradition": "figurist",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "reveal",
    "operativeAxis": [
     "precision",
@@ -2363,7 +2366,9 @@
    "plainly": "A puzzle/social action that reads the pattern a thing is making. Rated 5 of 10 across a scope of 2 for about six hours.",
    "_descriptionWas": "The Figurists' first craft: pattern read rather than imposed.",
    "_powerSystemWas": "reach_concrete_abstract",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it NAMES the element that does not fit. It puts nobody down at any rank.",
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

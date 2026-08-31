@@ -143,11 +143,14 @@
    "tradition": "figurist",
    "traditionV2": "Mind",
    "nativeOrCombination": "native",
-   "harmRung": "none",
+   "harmRung": "damaging",
    "powerSystem": "wild_nanite",
    "shape": "conceal",
    "operativeAxis": "falsehood_truth",
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "one feature, briefly — a door, a pit, a single wrong thing made ordinary",
+    "surge": "⛔ LAY THE WHOLE PICTURE AT ONCE; anyone who breaks it breaks all of it at the same moment"
+   },
    "mechanic": {
     "magnitude": 6,
     "duration": 6,
@@ -158,7 +161,12 @@
       "text": "You forget where you left the stairs.",
       "chance": -2
      }
-    }
+    },
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "damageType": "deception"
    },
    "challengeTypes": [
     "STEALTH",
@@ -255,7 +263,10 @@
    "obscure": true,
    "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. ⚠️ only where the ground is already prepared; not an in-the-moment obscure\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY.",
    "_powerSystemWas": "metaphysical",
-   "_powerSystemFix": "⛔ SNG-533. I AUTHORED THIS `metaphysical` ON INSTINCT because the craft 'felt' psychic. ⛔ FIGURIST IS `wild_nanite` — ERIK, 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.'\n⚠️ COGITANT IS metaphysical AND I APPLIED IT TO ALL THREE MIND SECTS — the tradition merge made them one people in my head and canon keeps them three. ⛔ FOUND BY WRITING A CHECK THAT ASSERTS WHICH SOURCE rather than whether one, which is the thing CCode's §C3 does and none of mine did."
+   "_powerSystemFix": "⛔ SNG-533. I AUTHORED THIS `metaphysical` ON INSTINCT because the craft 'felt' psychic. ⛔ FIGURIST IS `wild_nanite` — ERIK, 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.'\n⚠️ COGITANT IS metaphysical AND I APPLIED IT TO ALL THREE MIND SECTS — the tradition merge made them one people in my head and canon keeps them three. ⛔ FOUND BY WRITING A CHECK THAT ASSERTS WHICH SOURCE rather than whether one, which is the thing CCode's §C3 does and none of mine did.",
+   "_rungFix_20260830": "⛔ ability rung -> `damaging`: r3 gives the picture ONE REAL EFFECT working the full six rounds; the ability declared `none`.",
+   "_intensityAuthored_20260830": "⚠️ WAS THE BARE STRING 'moderate' — a magnitude word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ✅ Authored as a pair.",
+   "_typed_20260830": "⛔ `deception` — a picture laid over a place, given one real effect — falsehood made to bite. ⚠️ A `damage`-reaching craft with NO DICE inherits the tier rung (5d6+8 at a level-8 standing) — the same defect as the eleven first-offenses."
   }
  ],
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",

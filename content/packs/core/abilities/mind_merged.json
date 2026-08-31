@@ -232,7 +232,10 @@
    ],
    "_merged": "⛔ SNG-450: MERGES The Correct Protocol (syllogist) and The Restored Form (figurist) — identical level, dice, energy and rank arc. Erik: 'yes on the restore skills, but LEVEL ONE SHOULD HEAL A BIT ON TOP OF THE DIAGNOSIS.' ⚠️ ERIK: 'HEALED IS HEALED — permanence isn't a good r3. Perhaps r2 should be a BIG HEAL and r3 a FULL HEAL.' The ladder is now small → big → full, which is a quantity a player can read.",
    "harmRung": "none",
-   "intensity": "moderate",
+   "intensity": {
+    "conserve": "treat the presenting complaint properly and no further",
+    "surge": "⛔ WORK THE WHOLE CASE THROUGH; you will find what else is wrong and they may not want to know"
+   },
    "_authored": "SNG-450",
    "plainly": "A social/investigate action that restores health. It rolls 2d4.",
    "challengeTypes": [
@@ -275,7 +278,8 @@
    "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do.",
    "_powerSystemWas": "metaphysical",
    "_powerSystemFix": "⛔ SNG-533. I AUTHORED THIS `metaphysical` ON INSTINCT because the craft 'felt' psychic. ⛔ SYLLOGIST IS `ordered_nanite` — 'argument as architecture; a proof is an ordered process and runs like one.'\n⚠️ COGITANT IS metaphysical AND I APPLIED IT TO ALL THREE MIND SECTS — the tradition merge made them one people in my head and canon keeps them three. ⛔ FOUND BY WRITING A CHECK THAT ASSERTS WHICH SOURCE rather than whether one, which is the thing CCode's §C3 does and none of mine did.",
-   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
+   "_intensityAuthored_20260830": "⚠️ WAS THE BARE STRING 'moderate' — a magnitude word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ✅ Authored as a pair."
   },
   {
    "id": "case_closed",
@@ -294,7 +298,12 @@
     "crit": {
      "success": "The room arrives at it before you finish, and someone else says the last line for you.",
      "failure": "They find the loose premise. The case comes apart in front of everyone and takes your standing with it."
-    }
+    },
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "damageType": "judgement"
    },
    "description": "Lay a matter out so completely that the argument ends — and at its height, walk one person to the conclusion that ends them.",
    "narrationHints": "Nobody is humiliated and nobody is shouted down. The room simply arrives somewhere and stays there, and afterwards no one can quite remember what the disagreement was.",
@@ -361,8 +370,11 @@
     }
    ],
    "_merged": "⛔ SNG-450: MERGES The Stated Case (syllogist) and The Necessary Case (cogitant), which did the same job at different energy costs. Erik: 'could be Case Closed, and the flavour goes internal like the move skills did.' ⚠️ RETAGGED SOCIAL — this was `reveal/command/bind` and it is persuasion. ⚠️ ERIK: 'NO to the r3 cost — the case doesn't have to be true.' Removed.",
-   "harmRung": "none",
-   "intensity": "moderate",
+   "harmRung": "lethal",
+   "intensity": {
+    "conserve": "settle the narrow question and leave the rest standing",
+    "surge": "⛔ TAKE IT ALL THE WAY TO THE CONCLUSION; nobody in the room will be able to unsee where it went"
+   },
    "_authored": "SNG-450",
    "plainly": "A social action that settles a matter. Its strength is rated 5 out of 10.",
    "challengeTypes": [
@@ -441,7 +453,10 @@
    "_schoolAffinity": "⛔ SNG-509 CORRECTION. I gave this `cog_reaching`. ⚠️ `syl_binding` (The Binding Proof — 'those who make a proof BIND, reason as contact with what is actually so') is the right one and it is not a near-miss: r2 COMPELS and r3 is final, which is what binding means here.",
    "_schoolAffinityWas": "cog_reaching",
    "_powerSystemWas": "metaphysical",
-   "_powerSystemFix": "⛔ SNG-533. I AUTHORED THIS `metaphysical` ON INSTINCT because the craft 'felt' psychic. ⛔ SYLLOGIST IS `ordered_nanite` — 'argument as architecture; a proof is an ordered process and runs like one.'\n⚠️ COGITANT IS metaphysical AND I APPLIED IT TO ALL THREE MIND SECTS — the tradition merge made them one people in my head and canon keeps them three. ⛔ FOUND BY WRITING A CHECK THAT ASSERTS WHICH SOURCE rather than whether one, which is the thing CCode's §C3 does and none of mine did."
+   "_powerSystemFix": "⛔ SNG-533. I AUTHORED THIS `metaphysical` ON INSTINCT because the craft 'felt' psychic. ⛔ SYLLOGIST IS `ordered_nanite` — 'argument as architecture; a proof is an ordered process and runs like one.'\n⚠️ COGITANT IS metaphysical AND I APPLIED IT TO ALL THREE MIND SECTS — the tradition merge made them one people in my head and canon keeps them three. ⛔ FOUND BY WRITING A CHECK THAT ASSERTS WHICH SOURCE rather than whether one, which is the thing CCode's §C3 does and none of mine did.",
+   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 WALKS SOMEONE TO A CONCLUSION WHERE THE CONSISTENT ACT IS A FINAL ONE, and the ability declared `none` — which glosses as 'this craft HARMS NOTHING, NEVER invent a wound from it'. ⛔ A GM WOULD HAVE BEEN TOLD THE SYLLOGISTS' DARKEST CRAFT IS HARMLESS.",
+   "_intensityAuthored_20260830": "⚠️ WAS THE BARE STRING 'moderate' — a magnitude word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ✅ Authored as a pair.",
+   "_typed_20260830": "⛔ `judgement` — ⛔ IT WALKS SOMEONE TO A CONCLUSION BY THEIR OWN REASONING — the harm is arriving somewhere true and unbearable, which is INTRINSIC and needs a self that can follow an argument. ⚠️ A `damage`-reaching craft with NO DICE inherits the tier rung (5d6+8 at a level-8 standing) — the same defect as the eleven first-offenses."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",

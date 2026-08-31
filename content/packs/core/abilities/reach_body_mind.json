@@ -339,7 +339,7 @@
     },
     {
      "rank": 2,
-     "name": "The Whole House",
+     "name": "Whole House",
      "grants": "⛔ SEARCH YOUR OWN ATTENDED MEMORY AND THE SEARCH NO LONGER FAILS. It always finds something usable, and the bonus to your next attempt lands at its maximum rather than being rolled for.",
      "cannot": "Still your own memory. It takes a quiet moment you may not have in a fight.",
      "functions": [
@@ -354,7 +354,7 @@
     },
     {
      "rank": 3,
-     "name": "The Borrowed Room",
+     "name": "Borrowed Room",
      "grants": "⛔ SEARCH SOMEONE ELSE'S MEMORY. Enter a willing — or unresisting — mind and read their route, their language, their trade. ⚠️ FOR ONE ATTEMPT YOU MAY USE A SKILL THEY HAVE AND YOU DO NOT, at their rank.",
      "cannot": "⚠️ A resisting mind can refuse and a hostile one costs you. You get what THEY attended to, including what they were wrong about.",
      "functions": [
@@ -470,7 +470,8 @@
    "sense": true,
    "_senseNote": "⛔ SNG-469: usable in the sense slot as a SENSE. Reads the opponent, banks tempo, takes the craft's edge.",
    "_powerSystemWas": "reach_body_mind",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10, which found these AFTER cogitant was audited on 08-29. **The first pass could not see them because the gate did not exist.**"
   },
   {
    "id": "skydancer",
@@ -1648,7 +1649,7 @@
     },
     {
      "rank": 2,
-     "name": "The Cold Line",
+     "name": "Cold Line",
      "grants": "Follow a mind's reasoning as it happens — where it is going, what it has already ruled out.",
      "cannot": "You follow the reasoning, not the reasons. A mind moving on feeling is opaque to a cold line.",
      "functions": [
@@ -1658,7 +1659,7 @@
     },
     {
      "rank": 3,
-     "name": "The Open Book",
+     "name": "Open Book",
      "grants": "A mind at rest is legible to you — its shape, its habits, the thing it keeps returning to.",
      "cannot": "The Cogitants consider unbidden reading a violence, and they are right, and they do it anyway.",
      "functions": [
@@ -1719,7 +1720,8 @@
    "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens inference; rank 3 adds to special. Limit: inference, Not Certainty — masters and non-humans resist.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_body_mind",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10, which found these AFTER cogitant was audited on 08-29. **The first pass could not see them because the gate did not exist.**"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

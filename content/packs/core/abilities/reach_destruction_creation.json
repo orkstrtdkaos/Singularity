@@ -2417,7 +2417,7 @@
    ],
    "tradition": "unmaker",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "lethal",
    "shape": "break",
    "operativeAxis": [
     "precision",
@@ -2464,7 +2464,8 @@
    "_nameWas": "The Found Fault",
    "_idWas": "the_found_fault",
    "_powerSystemWas": "reach_destruction_creation",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 reaches lethal — the Unmakers strike a found fault and the thing comes down."
   },
   {
    "id": "sudden_work",
@@ -2685,7 +2686,7 @@
    ],
    "tradition": "unmaker",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "make",
    "operativeAxis": [
     "scope",
@@ -2724,7 +2725,8 @@
    "_nameWas": "The Clean Taking",
    "_idWas": "the_clean_taking",
    "_powerSystemWas": "reach_destruction_creation",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it takes a thing cleanly — removal, not injury."
   },
   {
    "id": "given_way",
@@ -2800,7 +2802,7 @@
    ],
    "tradition": "unmaker",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "open",
    "operativeAxis": [
     "precision",
@@ -2839,7 +2841,8 @@
    "_nameWas": "The Given Way",
    "_idWas": "the_given_way",
    "_powerSystemWas": "reach_destruction_creation",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it gives way — an opening made, nobody harmed."
   },
   {
    "id": "quick_work",
@@ -3088,7 +3091,7 @@
     },
     {
      "rank": 2,
-     "name": "The Rotten Beam",
+     "name": "Rotten Beam",
      "grants": "Find the ONE piece whose failure brings the rest — the keystone of the collapse.",
      "cannot": "Finding it makes you responsible for knowing it. You cannot un-know where the keystone is.",
      "functions": [
@@ -3098,7 +3101,7 @@
     },
     {
      "rank": 3,
-     "name": "The Whole Failing",
+     "name": "Whole Failing",
      "grants": "Read the entire arc of a thing's decline — how it will end, in what order, and how long it has.",
      "cannot": "You will be right, and nobody will want to hear it, and it will end exactly as you said.",
      "functions": [
@@ -3158,7 +3161,8 @@
    "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: seeing The Fault Does Not Tell You Whether TO Press IT.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_destruction_creation",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `unmaker` — Controlled ruin — and what they unmake is largely Precursor work.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

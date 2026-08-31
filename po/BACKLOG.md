@@ -1077,3 +1077,52 @@ collapsed them.**
 
 ⚠️ **AND IT IS A LESSON ABOUT MY ARGUING:** a refusal that sounds good at domain level can be false for two
 of three poles. **Argue refusals AT THE POLE**, then check whether they hold for all of them.
+
+## ⛔ SPIRIT ALREADY PERMEATES — MEASURED, AND IT ANSWERS ERIK'S QUESTION
+
+**Erik, 2026-08-30: *"Spirit is interesting — I could see some spirit skills in Death, Light, Dark, etc.
+It's kind of a PERMEATING FIELD… perhaps the precursor war is ABOUT and POWERED BY spirit — the thing the
+nanotechnology and lattice and veil and metaphysical are all EXPRESSING."***
+
+⬜ **I said the measurement had to come first: how many crafts are ALREADY spirit-touched and mislabelled.**
+✅ **Measured 2026-08-30, after 20 of 24 poles were audited. Here it is.**
+
+| powerSystem | crafts |
+|---|---|
+| ⛔ **`metaphysical`** | ⛔ **142 of 412 — THE LARGEST SOURCE IN THE GAME** |
+| `precursor` | 132 |
+| `ordered_nanite` | 63 |
+| `wild_nanite` | 45 |
+| `combination` | 28 |
+| `veil` | 2 |
+
+⛔ **AND ONLY 8 OF THE 142 ARE NUMINOUS.** **134 metaphysical-or-veil crafts sit OUTSIDE Spirit** — marcher
+26 · ashwarden 23 · veilwright 15 · cogitant 14 · somatic 13 · stillhold 13 · verist 11 · rootkin 6.
+
+### ✅ SO SPIRIT ALREADY PERMEATES. IT HAS FOR A LONG TIME. NOBODY CALLED IT THAT.
+
+⚠️ **AND `power_sources` DESCRIBES IT IN EXACTLY ERIK'S TERMS WITHOUT USING THE WORD:** *"`metaphysical` —
+**mind reaching past matter**, opened by the Transition… **THE OLDEST WAY, AND THE ONE THE LATTICE WAS BUILT
+TO REPLACE.**"*
+
+⛔ **THAT IS THE PRECURSOR WAR IN ONE LINE.** The lattice was built to replace the oldest way — and Akinetos
+laid the lattice. **If spirit is what the lattice was built to replace, the war is about spirit and the
+corpus has been saying so in a field name.**
+
+### ⬜ WHAT THIS MEANS FOR THE MERGE, AND IT IS A REAL QUESTION FOR ERIK
+
+⚠️ **`Spirit` as a fourteenth domain holding 10 crafts is not the shape of this.** ⛔ **Spirit is not a
+domain with too few crafts; it is a SOURCE that 142 crafts already run on, and `numinous` is simply the
+people who do it deliberately.**
+
+⬜ **THREE READINGS, AND ERIK'S CALL:**
+1. **Leave it.** Spirit is a domain, `numinous` is its pole, and the 142 are just crafts that happen to use
+   a source. ⚠️ Then Spirit stays the smallest of the fourteen and the imbalance is real.
+2. ⛔ **Spirit is not a domain at all — it is the FIELD**, and `numinous` belongs somewhere else. **Then the
+   fourteen become thirteen** and the merger table changes.
+3. ✅ **Spirit stays a domain AND is named as the field.** `numinous` are the people who practise it
+   directly; everyone else uses it without a name for it. ⚠️ **This is the only reading where both facts
+   stay true**, and it costs nothing structurally.
+
+⛔ **DO NOT AUTHOR SPIRIT CRAFTS TO FIX THE IMBALANCE.** The imbalance is not a content gap — **it is a
+category error about what spirit is**, and adding ten crafts to `numinous` would bury it.

@@ -1654,7 +1654,7 @@
    "id": "misdirect",
    "name": "Misdirect",
    "levelReq": 1,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
@@ -1680,9 +1680,9 @@
     "move"
    ],
    "challengeTypes": [
-    "stealth",
-    "social",
-    "combat"
+    "STEALTH",
+    "SOCIAL",
+    "FIGHT"
    ],
    "tree": [
     {
@@ -1798,13 +1798,14 @@
    "obscure": true,
    "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. ⛔ a false signal convincing enough to buy a move — Chaos's obscure\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ off-vocabulary challengeTypes ['stealth', 'social', 'combat'] and below-band energy — two more single-symptom batch crafts, found per-tradition per PIPELINE rule 19."
   },
   {
    "id": "catch_as_catch_can",
    "name": "Catch as Catch Can",
    "levelReq": 1,
-   "energyCost": 1,
+   "energyCost": 3,
    "powerSystem": "wild_nanite",
    "attribute": "practical",
    "axes": {
@@ -1829,9 +1830,9 @@
     "sustain"
    ],
    "challengeTypes": [
-    "survival",
-    "endurance",
-    "logistics"
+    "SURVIVE",
+    "TRAVEL",
+    "CREATE"
    ],
    "tree": [
     {
@@ -1927,11 +1928,12 @@
    ],
    "plainly": "A survival/endurance/logistics action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it finds Enough, never Plenty.",
    "_powerSystemWas": "attribute",
-   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_migrated_20260830": "⚠️ off-vocabulary challengeTypes ['survival', 'endurance', 'logistics'] and below-band energy — two more single-symptom batch crafts, found per-tradition per PIPELINE rule 19."
   },
   {
    "id": "the_long_odds_come_in",
-   "name": "The Long Odds Come In",
+   "name": "Long Odds Come In",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "wild_nanite",
@@ -1950,7 +1952,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Turn of It",
+     "name": "Turn of It",
      "grants": "Spend the Churn against one target in a place with things in it. Something fails against them — gear, footing, an animal, a bystander's elbow, the weather. Real harm, entirely deniable.",
      "cannot": "YOU DO NOT CHOOSE WHAT. The GM picks the misfortune from what is actually present. A target in a bare, empty place is nearly immune. It works ONCE cleanly; the second use in a scene is weaker and stranger.",
      "functions": [
@@ -1968,7 +1970,7 @@
     },
     {
      "rank": 2,
-     "name": "The Run of Bad",
+     "name": "Run of Bad",
      "grants": "Spend it wider — a squad, a caravan, a line. Several small catastrophes at once, none of them traceable to you.",
      "cannot": "⚠ THE CHURN DOES NOT SORT: anyone else in the same area is struck ONE RUNG LOWER by the same run of luck. And nobody believes it was luck twice.",
      "functions": [
@@ -1988,7 +1990,7 @@
     },
     {
      "rank": 3,
-     "name": "The Long Odds",
+     "name": "Long Odds",
      "grants": "The genuinely unlikely thing. The keystone, the powder, the flood-gate, the one animal that could have ended this. It comes in. AND YOU CAN STAND OUTSIDE THE RUN NOW — you and anyone you name are exempt from the misfortune you spend.",
      "cannot": "You still do not choose WHAT. The Churn takes what it takes, and the unlikely thing may cost a bridge, a building, or someone you needed alive — it is exempt from harming you, not from ruining your plans.",
      "functions": [
@@ -2011,7 +2013,7 @@
    ],
    "tradition": "churnfolk",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "lethal",
    "shape": "strike",
    "operativeAxis": [
     "magnitude",
@@ -2058,7 +2060,9 @@
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_powerSystemWas": "reach_chaos_order",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_dicedAndTyped_20260830": "⛔ `physical` — 'you do not attack, you SPEND THE WORLD'S UNLIKELINESS' — what actually arrives is an accident: a strap parting, a footing going. Ordinary harm, arriving impossibly. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver."
+   "_dicedAndTyped_20260830": "⛔ `physical` — 'you do not attack, you SPEND THE WORLD'S UNLIKELINESS' — what actually arrives is an accident: a strap parting, a footing going. Ordinary harm, arriving impossibly. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver.",
+   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 reaches lethal — 'you do not attack, YOU SPEND THE WORLD'S UNLIKELINESS'.",
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
   },
   {
    "id": "predicted_man",
@@ -2272,7 +2276,7 @@
    ],
    "tradition": "churnfolk",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "reveal",
    "operativeAxis": [
     "precision",
@@ -2312,11 +2316,12 @@
    "sense": true,
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ CHAOS'S SENSE — where and roughly when a thing comes apart\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_chaos_order",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it finds a loose thread and pulls. No rank harms a person."
   },
   {
    "id": "the_way_out",
-   "name": "The Way Out",
+   "name": "Way Out",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "wild_nanite",
@@ -2336,7 +2341,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Out Found",
+     "name": "Out Found",
      "grants": "In any situation with people, movement or clutter in it, the craft NAMES A SPECIFIC EXIT available in the next minute or two — and it is undignified, costs you something, and works.",
      "cannot": "It needs a place with SOMETHING GOING ON. A sealed empty stone room gives you nothing. ⚠ It gets YOU out; anyone else is your problem and usually your cost. It works ONCE per place — the second time they are watching for it.",
      "functions": [
@@ -2349,7 +2354,7 @@
     },
     {
      "rank": 2,
-     "name": "The Out For Us",
+     "name": "Out For Us",
      "grants": "Find one that a small group can take together, or one that leaves no trail worth following.",
      "cannot": "The more people, the worse and slower the out. And someone always has to be last.",
      "functions": [
@@ -2369,7 +2374,7 @@
     },
     {
      "rank": 3,
-     "name": "The Impossible Out",
+     "name": "Impossible Out",
      "grants": "The one nobody believed existed — off a besieged wall, out of a sealed hold, away from a thing that does not lose people.",
      "cannot": "⚠ THE PRICE IS NAMED BY THE SITUATION, NOT BY YOU, and at this rank it is real: something is left behind, and the craft does not let you choose what.",
      "functions": [
@@ -2392,7 +2397,7 @@
    ],
    "tradition": "churnfolk",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "none",
    "shape": "move",
    "operativeAxis": [
     "precision",
@@ -2433,7 +2438,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "reach_chaos_order",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it FINDS AN EXIT. Nobody is hurt at any rank.",
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
   },
   {
    "id": "ordered_record",
@@ -2704,7 +2711,7 @@
     },
     {
      "rank": 2,
-     "name": "The Coming Turbulence",
+     "name": "Coming Turbulence",
      "grants": "Feel where a situation is about to come apart, and roughly how.",
      "cannot": "You feel the break coming; you do not get to choose where you are standing when it does.",
      "functions": [
@@ -2714,7 +2721,7 @@
     },
     {
      "rank": 3,
-     "name": "The Break Before It Breaks",
+     "name": "Break Before It Breaks",
      "grants": "The failure announces itself to you before it happens — the bridge, the alliance, the plan.",
      "cannot": "Knowing is not preventing, and the Churnfolk have made peace with that in a way others find infuriating.",
      "functions": [
@@ -2775,7 +2782,8 @@
    "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens foresight; rank 3 adds to special. Limit: feel, Not Detail — the truly stable reads quiet.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "reach_chaos_order",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
   },
   {
    "id": "order_sense",

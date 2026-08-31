@@ -90,6 +90,9 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .learn-domain-none .learn-domain-head { font-style: italic; letter-spacing: 1px; }
 .opt.locked { opacity: .55; cursor: default; }
 .cap-line { font-size: 11px; color: var(--ink-dim); margin: 4px 0; font-style: italic; }
+/* CCODE-339: a craft you hold and cannot cast. Aevi: this card MUST say so loudly — it is the one place
+   the antipode relationship is the whole point, so it reads as a warning, not a footnote. */
+.not-castable { color: var(--warn, #e0b25a); font-weight: 600; }
 .skill-graph { min-width: 640px; }
 .graph-class-label { font-family: var(--font-ui); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
 .graph-edge { stroke: var(--border); stroke-width: 1; }

@@ -3217,7 +3217,14 @@ await (async () => {
   check("SNG-055: tertiary — allowed to II, blocked at III", domainAccess(terAb, 2, domains, idx).allowed && !domainAccess(terAb, 3, domains, idx).allowed);
   // the antipode of primary is CLOSED
   const antiAb = { id: "z", tradition: "blazeborn", levelReq: 1 };
-  check("SNG-055: the antipode of your primary is CLOSED (not offered)", domainAccess(antiAb, 1, domains, idx).allowed === false && domainAccess(antiAb, 1, domains, idx).band === "closed");
+  // ⛔ RE-RULED (CCODE-339). This asserted the antipode was CLOSED. Erik: "rework the domain access model
+  // SO WE NO LONGER LOSE ACCESS TO THE ANTIPOLES… you can’t use the skill itself, ONLY THE BRAIDABLE PART."
+  // ⚠️ LEARNABLE, NOT CASTABLE (CCODE-339) — so the claim inverts on `allowed` and survives on `castable`.
+  {
+    const va = domainAccess(antiAb, 1, domains, idx);
+    check("SNG-055: the antipode of your primary is REACHABLE — the wall is gone", va.allowed === true, JSON.stringify(va));
+    check("SNG-055: …and it cannot be CAST — it is braid material", va.castable === false && va.band === "antipode");
+  }
   // a kin (adjacent to primary) is free except capstones
   const kin = neighborsOf("umbral", idx).find(n => n !== "veilwright") || neighborsOf("umbral", idx)[0];
   const kinAb = { id: "k", tradition: kin, levelReq: 1 };
@@ -3277,10 +3284,17 @@ await (async () => {
   // SNG-063: the ability list is FILTERED by domains — the antipode is never offered, the primary is
   const domainsUV = { primary: "umbral", secondary: "veilwright", tertiary: "abyssal" };
   const l1 = Object.values(tf).flat ? [] : []; // (abilities live in ability files; assert the gate directly)
-  const antipodeOffered = domainAccess({ id: "x", tradition: "blazeborn", levelReq: 1 }, 1, domainsUV, idx).allowed;
+  // ⛔ ERIK RULED IT OPEN (CCODE-339b): "I'm ok with having the antipodes L1 skills open during character
+  // creation." ⚠️ So the claim inverts — and the half that MUST survive is that it is still uncastable,
+  // or "open at creation" quietly becomes "the axis means nothing".
+  const antiVerdict = domainAccess({ id: "x", tradition: "blazeborn", levelReq: 1 }, 1, domainsUV, idx);
   const primaryOffered = domainAccess({ id: "y", tradition: "umbral", levelReq: 1 }, 1, domainsUV, idx).allowed;
   const folkOffered = domainAccess({ id: "z", tradition: "radiant_folk", levelReq: 1 }, 1, domainsUV, idx).allowed;
-  check("SNG-063: a domain-filtered starting list excludes the antipode, keeps primary + folk", antipodeOffered === false && primaryOffered === true && folkOffered === true);
+  check("SNG-063: the antipode’s L1 craft IS offered at creation, alongside primary and folk",
+    antiVerdict.allowed === true && primaryOffered === true && folkOffered === true,
+    JSON.stringify({ anti: antiVerdict.allowed, primary: primaryOffered, folk: folkOffered }));
+  check("SNG-063: …and what you begin holding still cannot be CAST — it is braid material from day one",
+    antiVerdict.castable === false);
 
   // SNG-068A: the Silas fix — starting abilities reconcile against the CONFIRMED domains.
   // Silas earned his ANTIPODE's craft during play but CONFIRMED primary = umbral (knows nothing umbral).
@@ -3288,7 +3302,18 @@ await (async () => {
     umbral_lo: { id: "umbral_lo", tradition: "umbral", levelReq: 1 }, umbral_hi: { id: "umbral_hi", tradition: "umbral", levelReq: 3 } };
   const rec = reconcileStartingAbilities(["blaze_a", "veil_a"], { primary: "umbral", secondary: "veilwright", tertiary: null }, cat068, idx);
   check("SNG-068A: a character with no CONFIRMED-primary ability is granted the lowest-tier one (an umbral knows something umbral)", rec.grantedFromPrimary === "umbral_lo" && rec.abilities.includes("umbral_lo"));
-  check("SNG-068A: earned abilities are KEPT (nothing stripped) — the antipode one is grandfathered + flagged", rec.abilities.includes("blaze_a") && rec.grandfathered.includes("blaze_a"));
+  // ⛔ SILAS IS NO LONGER AN OUTLAW. He earned his antipode’s craft in play; under the old rule that was
+  // ILLEGALLY HELD, so it was kept and FLAGGED. CCODE-339 made it legal to hold — so `grandfathered`
+  // correctly SHRINKS, which is what happens when a rule becomes more permissive.
+  //
+  // ⚠️ THE LOAD-BEARING HALF IS UNCHANGED AND STILL ASSERTED: nothing is stripped. What marks the craft
+  // now is not illegality but uncastability, and that is a better description of what it actually is.
+  check("SNG-068A: earned abilities are KEPT (nothing stripped)", rec.abilities.includes("blaze_a") && rec.abilities.includes("veil_a"),
+    JSON.stringify(rec.abilities));
+  check("SNG-068A: …and the antipode craft is no longer FLAGGED as illegally held — it is legal now",
+    !rec.grandfathered.includes("blaze_a"), JSON.stringify(rec.grandfathered));
+  check("SNG-068A: …what marks it instead is that it cannot be CAST",
+    domainAccess(cat068.blaze_a, 1, { primary: "umbral", secondary: "veilwright", tertiary: null }, idx).castable === false);
   // a character who already holds a primary ability gets no extra grant
   const rec2 = reconcileStartingAbilities(["umbral_lo"], { primary: "umbral" }, cat068, idx);
   check("SNG-068A: a character who already knows their primary craft gets no extra grant", rec2.grantedFromPrimary === null && rec2.abilities.length === 1);
@@ -3309,7 +3334,13 @@ await (async () => {
   const b10a = b10char(); const b10ar = learnAbility(b10a, "dark_touch", b10cat, rules, { traditionIndex: idx });
   check("SNG-BATCH-10: a primary-domain ability learns and spends 1 point", b10ar.ok && b10a.skillPoints === 8 && b10ar.band === "primary");
   const b10b = b10char(); const b10br = learnAbility(b10b, "bright_burn", b10cat, rules, { traditionIndex: idx });
-  check("SNG-BATCH-10: the antipode is ENGINE-blocked in learnAbility (the capstone hole is closed)", !b10br.ok && b10b.abilities.length === 0);
+  // ⛔ RE-RULED (CCODE-339). It used to be ENGINE-BLOCKED; it now LEARNS, and the thing that stops it being
+  // used is `castable`, not `allowed`. ⚠️ THE CAPSTONE HOLE THIS GATE WAS BUILT FOR IS STILL CLOSED — that
+  // is the tier check two lines below, which is a different rule and still fires.
+  check("SNG-BATCH-10: the antipode now LEARNS — the engine block is lifted", b10br.ok && b10b.abilities.length === 1,
+    JSON.stringify({ ok: b10br.ok, band: b10br.band, held: b10b.abilities.length }));
+  check("SNG-BATCH-10: …and what it bought cannot be cast",
+    domainAccess(b10cat.bright_burn, 1, b10dom, idx).castable === false);
   const b10c = b10char(); const b10cr = learnAbility(b10c, "veil_deep", b10cat, rules, { traditionIndex: idx });
   check("SNG-BATCH-10: a secondary ability above tier III is engine-blocked", !b10cr.ok && b10c.abilities.length === 0);
   const b10d = b10char(); const b10before = b10d.skillPoints; const b10dr = learnAbility(b10d, "far_reach", b10cat, rules, { traditionIndex: idx });
@@ -17575,16 +17606,31 @@ await (async () => {
     // ⛔ THE POOL IS THE DOMAIN'S, NOT A CONSTANT. Different people, different wheel.
     const other = (idx224?.stations || []).map(s => s.traditionId).find(t => t !== dom224.primary);
     const poolB = WG.creationPool(cat224, { ...opts224, domains: { primary: other } });
-    check(`CCODE-224: a different primary opens a different pool (${dom224.primary} ${pool.length} vs ${other} ${poolB.length})`,
-      JSON.stringify(pool.map(a => a.id)) !== JSON.stringify(poolB.map(a => a.id)));
+    // ⛔ CCODE-339b CHANGED WHAT THIS CAN CLAIM. Erik opened the antipode’s L1 crafts at creation, so the
+    // rank-1 POOL is now identical whoever you are — nothing is refused. ⚠️ THAT IS A REAL CONSEQUENCE AND
+    // IT IS REPORTED RATHER THAN HIDDEN: your people no longer decides WHICH first crafts you may take.
+    //
+    // ✅ WHAT IT STILL DECIDES IS THE BAND — cost, and whether you can cast the thing at all. So the claim
+    // moves from "a different pool" to "a different READING of the same pool", which is what the wheel paints.
+    const bandsA = pool.map(a => TR.domainAccess(a, 1, dom224, idx224).band).join(",");
+    const bandsB = poolB.map(a => TR.domainAccess(a, 1, { primary: other }, idx224).band).join(",");
+    check(`CCODE-224: a different primary reads the same pool DIFFERENTLY (${dom224.primary} vs ${other})`,
+      bandsA !== bandsB, "bands identical — the domain choice would mean nothing at creation");
 
     // ⚠️ EVERY CRAFT OFFERED IS ACTUALLY ALLOWED BY THE BAND RULE — the rule must not have drifted into
     // "level 1 and not granted", which would offer the whole rank-1 corpus regardless of who you are.
     check("CCODE-224: every craft offered passes domainAccess for those domains — the band rule is really applied",
       pool.every(a => TR.domainAccess(a, 1, dom224, idx224).allowed === true));
     const rank1All = Object.values(cat224).filter(a => (a.levelReq || 1) === 1).length;
-    check(`CCODE-224: …and it is a real filter, not a pass-through (${pool.length} of ${rank1All} rank-1 crafts)`,
-      pool.length < rank1All, `${pool.length}/${rank1All}`);
+    // ⛔ THE POOL STOPPED BEING A FILTER, DELIBERATELY. This asserted `pool.length < rank1All` — that
+    // creation refuses something. Under CCODE-339b it refuses NOTHING at rank 1, and asserting otherwise
+    // would re-impose the wall Erik just removed.
+    // ⚠️ THE GUARD THAT REPLACES IT: the pool must still be BOUNDED BY RANK, or "offer everything" would
+    // quietly start offering capstones at creation.
+    check(`CCODE-224: every rank-1 craft is offered (${pool.length} of ${rank1All}) — the antipode included`,
+      pool.length === rank1All, `${pool.length}/${rank1All}`);
+    check("CCODE-224: …and NOTHING above rank 1 is, whatever the domains say",
+      pool.every(a => (a.levelReq || 1) === 1));
 
     // ⛔ AND THE TWO SURFACES ARE HELD TO IT BY SOURCE: app.js must not grow a second copy of the rule.
     const appSrc224 = readFileSync(join(root, "app.js"), "utf8");
@@ -17603,10 +17649,15 @@ await (async () => {
     // crafts were being offered outside that list.
     {
       const closed224 = Object.values(cat224).filter(a => (a.levelReq || 1) === 1
-        && TR.domainAccess(a, 1, dom224, idx224).band === "closed");
-      check(`CCODE-224: the ONLY rank-1 crafts creation refuses are the antipode's (${closed224.length})`,
-        closed224.length > 0 && closed224.every(a => !pool.some(x => x.id === a.id))
-        && (rank1All - pool.length) === closed224.length, `${rank1All - pool.length} refused / ${closed224.length} closed`);
+        && TR.domainAccess(a, 1, dom224, idx224).band === "antipode");   // ⚠️ CCODE-339 renamed the band: it is no longer CLOSED, it is uncastable
+      // ⛔ THEY ARE OFFERED NOW — and the thing that makes that safe is that they cannot be CAST. If this
+      // ever passes with `castable !== false`, a character can begin able to use both ends of their axis
+      // and the wheel stops meaning anything.
+      check(`CCODE-224: the antipode’s rank-1 crafts ARE offered (${closed224.length}) — and every one is uncastable`,
+        closed224.length > 0
+        && closed224.every(a => pool.some(x => x.id === a.id))
+        && closed224.every(a => TR.domainAccess(a, 1, dom224, idx224).castable === false),
+        `${closed224.length} antipode crafts`);
       const far224 = pool.filter(a => TR.domainAccess(a, 1, dom224, idx224).band === "far").length;
       check(`CCODE-224: …and ${far224} FAR-band crafts ARE offered, so the wheel must paint the band or say nothing`,
         far224 > 0 && far224 > pool.length / 3, `${far224} far of ${pool.length}`);

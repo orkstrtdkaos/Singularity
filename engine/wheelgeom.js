@@ -166,6 +166,17 @@ export function creationPickable(ability, { domains, grantIds = [], traditionInd
   if ((ability.levelReq || 1) > 1) return false;                 // depth is earned in play, never bought at creation
   if ((grantIds instanceof Set ? grantIds.has(ability.id) : (grantIds || []).includes(ability.id))) return false; // already yours — a pick spent here is wasted
   if (typeof domainAccess !== "function") return false;
+  // ⛔ CCODE-339b / ERIK: "I'm ok with having the antipodes L1 skills open during character creation."
+  //
+  // ⚠️ I STUBBED THIS THE OTHER WAY AND FLAGGED IT AS HIS TO OVERRULE. My reading was that "teachers and
+  // standing" implied you could not BEGIN having crossed your own axis. He ruled the opposite, and his is
+  // the better story: you may start having already touched the other side — you simply cannot use it.
+  //
+  // ✅ AND THE DEPTH LIMIT WAS ALREADY HERE: the `levelReq > 1` line above caps creation at rank 1, so
+  // "antipode L1 open" is exactly what asking `allowed` gives. No new rule was needed to bound it.
+  //
+  // ⛔ IT IS STILL NOT CASTABLE. A character can begin holding their antipode's first craft as BRAID
+  // MATERIAL, and the sheet says so (`braid material only — you cannot cast this`).
   return domainAccess(ability, ability.levelReq || 1, domains, traditionIndex).allowed === true;
 }
 

@@ -1922,6 +1922,61 @@ console.log("\n── §31D · the domain is a heading, and the sheet never says
     Object.values(sizes).some(n => n >= 2),
     Object.entries(sizes).filter(([, n]) => n >= 2).map(([d, n]) => `${d}:${n}`).join(" "));
 }
+/* ══════════ §32 — THE ANTIPODE IS LEARNABLE AND NOT CASTABLE ══════════ */
+// ⛔ ERIK: "rework the domain access model SO WE NO LONGER LOSE ACCESS TO THE ANTIPOLES… you can’t use the
+// skill itself, ONLY THE BRAIDABLE PART."
+//
+// ⚠️ TWO HALVES THAT FAIL SILENTLY IN OPPOSITE DIRECTIONS. If "learnable" breaks, the wall is back and
+// nobody notices because the old behaviour looked correct for months. If "not castable" breaks, the
+// antipode becomes an ordinary craft and the axis stops meaning anything. ⛔ BOTH ARE ASSERTED.
+//
+// ⚠️ THE STAIRS ARE NOT GATED, ON PURPOSE. Erik: "we can figure out the stairs later." What tier it counts
+// as and what a braid needs from it are open, and a gate written against stub text is how a stub becomes
+// load-bearing.
+console.log("\n── §32 · the antipode is learnable, and it cannot be cast ──");
+{
+  const TRa = await import("../engine/traditions.js");
+  const tfa = rj("content/packs/core/rules/traditions.json");
+  const idxa = TRa.buildTraditionIndex(tfa);
+  const D = { primary: "umbral", secondary: null, tertiary: null };
+  const anti = TRa.antipodeOf("umbral", idxa);
+  const vAnti = TRa.domainAccess({ tradition: anti }, 2, D, idxa);
+  const vFar = TRa.domainAccess({ tradition: "marcher" }, 2, D, idxa);
+  const vOwn = TRa.domainAccess({ tradition: "umbral" }, 2, D, idxa);
+
+  check("§32: the antipode is REACHABLE — the wall is gone",
+    vAnti.allowed === true, JSON.stringify(vAnti));
+  check("§32: …and it CANNOT be cast", vAnti.castable === false && TRa.canCast({ tradition: anti }, D, idxa) === false);
+  // ⛔ AND NOTHING ELSE BECAME UNCASTABLE. `allowed` answers "may I hold this"; `castable` answers "may I
+  // use it", and conflating them would quietly disarm every other craft in the game.
+  check("§32: an ordinary far craft is still castable", vFar.castable === true && vFar.allowed === true);
+  check("§32: your own people’s craft is still castable", vOwn.castable === true);
+  // ⚠️ EVERY VERDICT CARRIES THE FLAG, so a caller reading it never gets `undefined` and treats it as false.
+  check("§32: every verdict answers the castable question explicitly",
+    [vAnti, vFar, vOwn].every(v => typeof v.castable === "boolean"));
+
+  // ⚠️ IT IS PRICED THE ORDINARY WAY. Erik: "we already have TEACHERS AND STANDING for poles, we will use
+  // them for antipole skill teaching" — so it must cost what a distant craft costs, not carry a new tax.
+  check("§32: it is priced as a distant craft, not with a special penalty",
+    vAnti.penalty === vFar.penalty, `antipode ${vAnti.penalty} vs far ${vFar.penalty}`);
+
+  // ⛔ THE UI HONOURS IT. An uncastable craft must not reach the action menu, and the card must SAY WHY —
+  // Aevi: "that card MUST say so loudly." A filter with no explanation is a craft that silently vanished.
+  const appA = rd("app.js");
+  check("§32: the action menu filters what cannot be cast",
+    /castable !== false\)/.test(appA));
+  check("§32: …and the sheet says WHY, rather than the craft just disappearing",
+    /braid material only/.test(appA) && /castable === false/.test(appA));
+
+  // ⚠️ AND THE BRAID ROAD IS STILL OPEN — the whole point of holding it. If braiding ever consulted
+  // castability, the ruling would collapse into the wall it replaced.
+  const BRa = await import("../engine/braids.js");
+  const mk = (t) => ({ id: t + "_c", tradition: t, energyCost: 6, functions: ["strike"], levelReq: 3, name: t });
+  const def = BRa.buildBraidDef({ abilities: [], practice: {} }, ["umbral_c", anti + "_c"],
+    { umbral_c: mk("umbral"), [anti + "_c"]: mk(anti) }, { traditionIndex: idxa });
+  check("§32: an antipode craft can still be BRAIDED — that is what holding it is for",
+    !!def && Number.isFinite(def.energyCost), JSON.stringify(def && def.energyCost));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

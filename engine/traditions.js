@@ -76,6 +76,12 @@ export function traditionOf(ability, index) {
 
 /** CCODE-333: the DOMAIN a tradition belongs to — the layer above the pole. Null when unmapped, which is
  *  the honest answer for the five records outside the wheel (god_named, bargainers, and the folk kits). */
+/** CCODE-339: may this craft be CAST by someone with these domains? ⛔ Distinct from `allowed`, which asks
+ *  whether it may be HELD. An antipode craft is held and not cast — it is braid material. */
+export function canCast(ability, domains, index, opts = {}) {
+  return domainAccess(ability, 1, domains, index, opts).castable !== false;
+}
+
 export function domainOfTradition(traditionId, index) { return index?.domainOfTrad?.[traditionId] || null; }
 
 /** The domain an ABILITY belongs to, via its tradition. ⚠️ DERIVED THROUGH `traditionOf` ON PURPOSE, so a
@@ -174,7 +180,18 @@ const CAPSTONE_TIER = 4; // tier IV–V are the single-mastery capstones
  *   foreclosed: [traditionId]      — antipodes closed by promotion/acquisition (NATIVES only; braids cross)
  *   domainCeilings: {[trad]: tier} — per-domain ceiling override (promotion raises it); else station default
  *   domainsAcquired: [traditionId] — SNG-102 domains beyond the built three, entering at Tier I */
+// ⚠️ THE PUBLIC ENTRY MARKS THE VERDICT. `domainAccess` has a dozen return points and the antipode rule cuts
+// across all of them, so the mark is applied ONCE here rather than at each `return` — which is how one of
+// them would eventually be added without it.
 export function domainAccess(ability, tier, domains, index, opts = {}) {
+  const v = domainAccessInner(ability, tier, domains, index, opts);
+  // ⛔ `castable` is TRUE unless the verdict says otherwise, so every existing caller that ignores it reads
+  // exactly as it did. A craft you cannot reach at all is not "uncastable" — it is unreachable, and the two
+  // must not be confused: `allowed` answers "may I hold this", `castable` answers "may I use it".
+  return { castable: v.castable !== false, ...v, castable: v.castable !== false };
+}
+
+function domainAccessInner(ability, tier, domains, index, opts = {}) {
   const trad = traditionOf(ability, index);
   const T = Math.max(1, Math.min(5, Number(tier) || 1));
   if (!trad || !index) return { allowed: true, penalty: 1, band: "open", reason: "ungoverned" };
@@ -189,9 +206,28 @@ export function domainAccess(ability, tier, domains, index, opts = {}) {
   if ((opts.foreclosed || []).includes(trad) && ability?.nativeOrCombination !== "combination")
     return { allowed: false, penalty: 1, band: "foreclosed", reason: "foreclosed — you chose the other end of this axis; only a braid crosses it now" };
 
-  // CLOSED — the antipode of a pole you've chosen an end of (build-time; overlaps foreclosed for primary/secondary)
-  if (trad === antipodeOf(primary, index)) return { allowed: false, penalty: 1, band: "closed", reason: "closed — the far pole of your primary axis" };
-  if (secondary && trad === antipodeOf(secondary, index)) return { allowed: false, penalty: 1, band: "closed", reason: "closed — the far pole of your secondary axis" };
+  // ⛔ CCODE-339 / ERIK’S RULING: "we need to rework the domain access model SO WE NO LONGER LOSE ACCESS TO
+  // THE ANTIPOLES… you can't use the skill itself, ONLY THE BRAIDABLE PART."
+  //
+  // ⛔ LEARNABLE, NOT CASTABLE. The antipode used to return `allowed: false` — a WALL, and the only gate in
+  // the model that was not a price. Measured before removing it (CCODE-332): it accounted for **67% of all
+  // access denials in the game**, and it was not even-handed — stillhold lost 50 crafts to it and threnodist
+  // 17, because a pole’s antipode may be richly authored or thin. An ACCESS rule was doing BALANCE work.
+  //
+  // ⚠️ IT IS NOW A MARK, NOT A RETURN. The craft falls through to the ordinary bands — `far` at the
+  // cross-class penalty — so it is reached by the gates that already exist (a teacher, or standing in their
+  // region). What it CANNOT do is be cast, and that is carried on the verdict for the caller to honour.
+  //
+  // ⚠️ AND THE DESIGN NOTE SURVIVES WORD FOR WORD: "holding an axis WHOLE is forbidden to you by ordinary
+  // means and reachable only by braiding." You may learn it; you still cannot use it. ✅ THE BRAID IS STILL
+  // THE ONLY WAY TO SPEND WHAT YOU LEARNED — and it is now the thing that turns dead knowledge into a craft,
+  // which is a better reason to carry one than "it is the only road".
+  //
+  // ⛔ THE STAIRS ARE DELIBERATELY NOT BUILT. Erik: "we can figure out the stairs later." What tier it counts
+  // as, whether ranks can be bought in it, and what exactly a braid needs from it are OPEN — and building a
+  // ladder against stub text is how a stub becomes load-bearing.
+  const antipodal = trad === antipodeOf(primary, index)
+    || (secondary && trad === antipodeOf(secondary, index));
 
   if (trad === primary) return T <= cap(5)
     ? { allowed: true, penalty: 1, band: "primary", reason: "your primary domain — all tiers" }
@@ -216,6 +252,10 @@ export function domainAccess(ability, tier, domains, index, opts = {}) {
   const chosen = [primary, secondary, tertiary, ...acquired].filter(Boolean);
   const steps = Math.min(...chosen.map(d => { const s = ringDistance(trad, d, index); return s == null ? 99 : s; }));
   const penalty = steps <= 1 ? 2 : steps <= 4 ? 2 : 3;
+  // ⚠️ THE ANTIPODE IS A `far` CRAFT THAT CANNOT BE CAST. It is reached the ordinary way and priced the
+  // ordinary way; the only thing that differs is what you may do with it once held.
+  if (antipodal) return { allowed: true, castable: false, penalty, band: "antipode",
+    reason: "the far pole of your own axis — you may learn it, but you cannot cast it; it is braid material" };
   return { allowed: true, penalty, band: "far", reason: `${Number.isFinite(steps) ? steps : "many"} steps from your nearest domain — costs more` };
 }
 

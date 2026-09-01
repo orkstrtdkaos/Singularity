@@ -72,7 +72,14 @@ taking rung + rank + intensity, with the two triggers differing only in when the
 
 ---
 
-## R19 — Rank-up purchasing is gated by tier access ✅ RULED
+## R19 — Rank-up purchasing gated by tier access ⛔ RETRACTED 2026-09-01
+
+⛔ **SUPERSEDED BY R20** (`po/RULING_training_gate_saves_and_pipeline.md`). The tier gate composed
+with R12's band placement to put T1 training at **L21** — and measured against Silas at L30 it
+reached **3%** of his 31 stuck rank-1 crafts. A played sheet is not tier-sorted. **Training now
+unlocks globally at level 10, no tier gate.** The original text is kept below for the record.
+
+### (retracted) original ruling
 
 Erik: *"we make purchasing a rank up only eligible at a certain point… opening Tier 3 access lets
 you rank up your r1 tier1 skills."*

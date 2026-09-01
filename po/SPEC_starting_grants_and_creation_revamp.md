@@ -615,3 +615,181 @@ wire `folkAccessible` to derive Valleyfolk starting pool"* — recorded in the b
 ✅ **Built — see the commit alongside this append.** It closes the R4 bug from my previous round at the same
 time: the 13 folk anchors buried in `_folkNativeGrant_20260830` are no longer the source, so a Valleyfolk
 character stops getting zero grants.
+
+---
+
+# ROUND 2 (third pass) — CCode, against the R1–R7 rulings
+
+**Answered 2026-09-01 at `4f73f10f` · v1.9.287.**
+
+⛔ **ONE RULING CANNOT BE BUILT AS WRITTEN (R5) AND ONE OF MY OWN PREVIOUS ANSWERS WAS WRONG (the depth
+sink).** Both are below, first.
+
+---
+
+## C1 — ⛔ ERIK CORRECTED ME: POINTS BUY BREADTH ONLY. MY "DEPTH ABSORBS THE SURPLUS" WAS WRONG.
+
+**Erik, mid-session: *"You don't spend points on ranks anymore."*** ✅ **He is right and I had it backwards.**
+
+**Measured:** `rankUpAbility` is **imported into `app.js` and never called there**. `character.skillPoints`
+is decremented at exactly **one** place — `progression.js:264`, and only when `!opts.viaPractice`. And
+`gm.js:52` states the rule outright:
+
+> *"MASTERY (the defining moment). Depth is earned through use — rank 2 lands on its own. Rank 3, mastery,
+> is NOT accumulated…"*
+
+⛔ **So there is no depth sink.** A point that cannot buy a craft buys **nothing**. My previous round said
+depth absorbed the surplus; that was built on a code path the game does not use.
+
+⚠️ **This inverts the conclusion of the whole economy model**, and everything below is re-derived from it.
+
+---
+
+## C2 — R1 · THE NEW PRICES, MEASURED
+
+| | |
+|---|---|
+| tier distribution | T1 **148** · T2 **116** · T3 **67** · T4 **48** · T5 **35** (414 crafts) |
+| average craft, OLD prices | 2.290 |
+| average craft, **R1 prices** | ⚠️ **1.843** |
+
+✅ **Erik predicted "well below 2.511" — measured 1.843.** With additive bands: **1.84 home · 2.84 near ·
+3.84 far.**
+
+⛔ **`crossClass.costMultiplier: 2` in `skill_capacity.json` is superseded and should be removed** — it was
+already dead before R1 (`learnPointCost` prefers the band whenever a domain is set), and R1 makes it
+doubly so. ⬜ **I have not removed it** — it is a content file and deleting a key nothing reads is still a
+content edit.
+
+---
+
+## C3 — ⛔ R6 · THE INSIGHT BONUS STRANDS MORE THAN HALF A SPECIALIST'S POOL
+
+**Erik's specific question: *"does a high-Insight late-game character ever hit the breadth cap?"***
+
+✅ **YES — and far earlier than expected. Under R1 prices the cap becomes the binding constraint, reversing
+my previous finding.**
+
+**When the cap first binds (points exceed what you can hold):**
+
+| band | Insight <7 | Insight 7 | Insight 14 |
+|---|---|---|---|
+| **home** | **L12** | **L2** | **L1** |
+| near | never | L19 | L3 |
+| far | never | never | L25 |
+
+**And the points that then have nowhere to go:**
+
+| band | Insight | L100 points | cost to fill cap | ⛔ STRANDED |
+|---|---|---|---|---|
+| home | <7 | 200 | 186 | 14 (7%) |
+| home | 7 | 300 | 186 | ⛔ **114 (38%)** |
+| home | **14** | 400 | 186 | ⛔ **214 (54%)** |
+| near | 14 | 400 | 287 | 113 (28%) |
+| far | 14 | 400 | 388 | 12 (3%) |
+
+⛔ **A home-band specialist with Insight 14 cannot spend 54% of their skill points.** ⚠️ **And the home band
+is the common case** — most crafts a player wants are in their own domain.
+
+⬜ **THREE WAYS OUT, and this is Erik's to pick:**
+1. **Raise the breadth cap** — it was decorative before R1 and is now the wall. `level + 1` was tuned
+   against the old prices.
+2. **Give points a second sink** — R1 already halved craft cost; ranks are earned, not bought, so the only
+   other thing to buy is *more crafts*.
+3. **Accept it as intentional** — the Insight bonus rewards the generalist who reaches across domains, and
+   does nothing for the specialist who does not. ⚠️ **Defensible, but it should be a choice rather than a
+   side effect**, because at far band the same bonus strands only 3%.
+
+---
+
+## C4 — ⛔ R5 CANNOT BE BUILT AS WRITTEN. `backlashRung` IS NOT A NUMBER.
+
+**The ruling says:** *"`backlashRung: N` means a crit failure lands harm N rungs above the craft's own
+tier. Most crafts are `backlashRung: 1`."*
+
+**The authored data says otherwise, on all three counts:**
+
+| ruling assumes | measured across the 20 crafts that carry it |
+|---|---|
+| a number | ⛔ **none are numeric** — values are `"damaging"` (15) and `"incapacitating"` (5) |
+| an OFFSET from the craft's tier | ⛔ **an absolute rung** on the same 4-value ladder as `harmRung` (`none / damaging / incapacitating / lethal`) |
+| harm **above** the craft's own | ⛔ **all 20 are BELOW their own `harmRung`.** Zero are equal, zero above |
+
+**Example:** `sustained_regard` — `harmRung: lethal`, `backlashRung: damaging`. A lethal craft that
+backlashes at *damaging*.
+
+**And the authored note states the intent explicitly:**
+
+> *"The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? … 9 of the 12 I had
+> left unset do harm the wielder and now carry a rung."*
+
+⚠️ **THE RULING'S INTENT SURVIVES; ITS ARITHMETIC DOES NOT.** Erik wants *"the craft's own nature turned
+against the wielder in a craft-specific way, not generic pain"* — ✅ **and that is exactly what the field
+already expresses.** It says *at what rung the wielder is hurt*, not *how many rungs worse than the craft*.
+
+⬜ **SO I HAVE NOT BUILT IT.** Two paths, and the difference is not cosmetic:
+
+- **(a) Keep the authored semantics** — `applyBacklash(character, rules, ability)` reads `backlashRung` as
+  the **absolute rung of harm to the wielder**. ✅ 20 crafts already carry correct values; nothing migrates.
+  ⚠️ Erik's worked examples in R5 ("a T3 craft lands T4 harm") do not describe this and would need restating.
+- **(b) Adopt the ruling's arithmetic** — re-type all 20 from names to numbers and **invert their meaning**,
+  since every one currently says *less than my harm* and R5 says *more*.
+
+⛔ **I would not guess between these.** (a) is one signature change and two call sites; (b) is a content
+migration plus a re-rule of what 20 authored values mean.
+
+---
+
+## C5 — ✅ R7 · NOVEL USE IS ALREADY DECLARED, NOT COMPUTED — AND `notFor` IS ALREADY IN FRONT OF THE GM
+
+**Aevi's read was right.** `action.novel` comes from **`intent.novelUse`** (`app.js:7509`) — declared, not
+inferred. ⚠️ **With one engine-computed case already:** `|| (intent.comboAbilities || []).length > 1` —
+combining two crafts is novel by definition, and the engine knows that without being told.
+
+**And it is already consumed in three places**, so the surcharge has somewhere to land:
+
+| site | what it does today |
+|---|---|
+| `resolve.js:184` | `-15` to the success chance (`novel.difficultySurcharge`) |
+| `resolve.js:298` | widens the crit-fail band by 3 (`novel.critFailWiden`) |
+| `resolve.js:172–173` | aptitude `improvisationPenalty` / `crossPolePenalty` if present |
+
+⛔ **NOTE R7 CHANGES ONE OF THESE.** The ruling is *"in energy and in crit-failure risk, **never in success
+chance**"* — so `resolve.js:184`'s −15 to the roll is **the thing R7 removes**, and the crit-band widen at
+298 is the thing it keeps and scales. ✅ **Both already exist; this is a re-aim, not a build.**
+
+**`notFor`:** read in 4 engine modules — but as **prose shown to the GM** (`entityDetail.js:21` renders
+`Cannot: …`), never evaluated. ✅ **Which is exactly what R7's third tier needs** — the GM reads it and
+judges. **No new plumbing required for stretch tiers 1–3.**
+
+⬜ **The cleaner hook you asked about:** the engine could pre-classify **adjacent** stretch for free —
+`functions` is a closed vocabulary, so "verb outside the craft's declared `functions`" is computable. ⚠️
+Tiers 2 and 3 stay GM-judged, because "reading a wall with `body_read`" is a semantic call no field encodes.
+
+---
+
+## C6 — ⚠️ ON THE ATTRACTION SPEC (`SPEC_SNG-NPC-ATTRACTION`, `4f73f10f`)
+
+**Not a ROUND 2 request — it is draft-for-Erik — but the eligibility gate has no data, and that is worth
+knowing before promotion.**
+
+**The gate is: *"any `romanceEligible: true` NPC of opposite sex."*** Measured:
+
+| field | authored on |
+|---|---|
+| `romanceEligible` | ⛔ **0 of 41 solo NPCs · 0 of 9 companions.** It appears in exactly one content file — `locations/the_low_lamp_inn.json` |
+| `sex` / `gender` | ⛔ **0 of 41 NPCs · 0 of 9 companions** |
+
+⛔ **Neither half of the gate can fire today.**
+
+⚠️ **And `gender` is not an authored field at all — it is a RUNTIME, PLAYER-CORRECTED one.**
+`corrections.js:277` exists to *"correct a known person's sex/gender + pronouns"*, and its own comment names
+the case that prompted it: **the Pell-rendered-male fix.** So gender today is what the GM rendered and the
+player repaired, not what an author declared.
+
+⬜ **That is a real prerequisite, not a blocker:** the spec says *"no backfill required; attraction draws
+happen at runtime"* — ✅ **true of the draws, but not of the gate.** Either the 41 NPCs get `romanceEligible`
+and a sex, or the gate needs to key off something that exists.
+
+⚠️ **Worth deciding deliberately given SNG-143:** if gender stays player-corrected, an attraction system
+keyed to it inherits whatever the GM guessed first.

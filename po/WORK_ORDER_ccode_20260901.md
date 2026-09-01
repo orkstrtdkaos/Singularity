@@ -107,11 +107,43 @@ the rank term activates when the trees land.
 
 ---
 
+## 6 · R24 — sex is set at generation · ✅ RULED, added 2026-09-01
+
+**Ruling:** `po/RULING_sex_set_at_generation.md`
+
+> Erik: *"You can't romance until you know the sex, so rather than leave sex runtime determined it
+> needs to be SET upon PC/NPC generation. If there is no sex it's not romanceable."*
+
+⛔ **Verified independently by Aevi:** `sex`/`gender` and `romanceEligible` are authored on
+**0 of 43 NPCs and 0 of 9 companions.** Neither half of the attraction gate can fire.
+
+⚠️ **Today `gender` exists only as a runtime, player-corrected value** — `corrections.js:277`,
+built for the Pell-rendered-male fix. **That stops being the source of truth.**
+
+| # | your part |
+|---|---|
+| 1 | ⚠️ **PC creation gets a sex-selection step.** This is a NEW element in the creation flow — it lands alongside the sub-attribute allocation step (R2) and the starting-location choice (R4). |
+| 2 | **NPC minting assigns sex at mint**, not on first render. |
+| 3 | **Retire `gender` as source of truth.** `corrections.js:277` may keep correcting the *rendering*; the generation-set value is canonical. ⬜ Report how you want the two to relate — Aevi has no wiring opinion. |
+| 4 | **The attraction gate reads generation-set `sex`; absence is a hard exclusion.** |
+
+✅ **The safety property falls out for free** — a companion like Aevi (a constellation of motes)
+has no sex and is therefore non-romanceable with nothing authored to exclude it.
+
+⬜ **Aevi's half:** backfill `sex` on the 43 NPCs and 9 companions where the character has one
+(leaving it unset where they genuinely have none is the CORRECT value, not an omission), author
+`romanceEligible` opt-in, and extend `boundaries` from companions to NPCs.
+
+⚠️ **Sequencing:** R24 must land before R23 (Threnody emotional crafts). Those crafts reach into
+the attraction system and cannot be authored against a gate that does not hold.
+
+---
+
 ## Not in this order — Aevi's lane, listed so you know what is coming
 
 | item | note |
 |---|---|
-| **C6** — attraction spec eligibility gate has no data | in progress now; blocks R23 |
+| ~~C6~~ — ✅ **CLOSED by R24**, now item 6 above | Aevi's backfill half remains |
 | **OI-19** — thin domains (Life 3, Spirit 4, Angelic 5, Demonic 5 tier-1 crafts) | blocks creation for 4 domains |
 | **OI-20** — per-rank `backlashRung`, ~88 crafts | activates R18's rank term |
 | **OI-25** — generative-to-corpus pipeline | Aevi reads `SPEC_SNG-369` and `SPEC_SNG-370` first. ⬜ **If either already solves part of it, say so before she specs over you.** |

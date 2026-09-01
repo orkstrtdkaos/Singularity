@@ -352,10 +352,60 @@ export function openAccessFor(character, abilityId, rank, catalog = {}) {
  *  natively (their flexibility); harmonic/radiant may cross-train into
  *  valley_craft at +crossTraditionLevelPenalty levelReq; the OTHER civilization's
  *  tradition stays closed. Returns effective levelReq, or null if forbidden. */
-export function effectiveLevelReq(ab, character, rules) {
+/** ⛔ R12 (ERIK 2026-09-01) — OPTION 2: WHEN A CRAFT BECOMES AVAILABLE IS DERIVED, NOT AUTHORED.
+ *
+ *  **Tier sets the band; `energyCost` places the craft inside it.** Both fields already sit on all 414
+ *  crafts, so the corpus arrives as a CURVE rather than the staircase `levelReq` produced — under the old
+ *  field 148 crafts opened at level 1 and then nothing moved until level 21.
+ *
+ *  ⚠️ TIER 1 IS FLAT AT LEVEL 1 by design (R15): a level-1 character sees every tier-1 craft they could
+ *  pick. Spreading them inside a band would contradict the ruling that governs creation.
+ *  ⚠️ Within tiers II–V a craft's position is its energyCost's PERCENTILE among its own tier — not a raw
+ *  ratio — so a tier whose costs cluster still spreads across its whole band instead of bunching.
+ *  ⚠️ `levelReq` REMAINS THE FALLBACK for a craft with no tier and no energyCost, so nothing regresses. */
+export function unlockLevelFor(ability, rules, catalog = null) {
+  // ⛔ R12'S CURVE IS THE ACQUISITION SHELF — AND SOME CRAFTS ARE NEVER ON IT.
+  //
+  // ⚠️ A BRAID IS MADE, NOT BOUGHT. `braids.js` already derives a combination's `levelReq` from its
+  // PARENTS' ranks; re-deriving it from a tier band would overrule the braid model with a shelf rule and
+  // push `chord_of_mending` (tier II but energyCost 10) from level 2 out to level 20.
+  //
+  // ⚠️ PRECURSOR / LIVING-CURRENT / WILD-CURRENT ARE GRANTED PER ABILITY, IN FICTION — a remnant, a quest,
+  // a teacher, or being born to the substrate. `effectiveLevelReq` already gates them on their access
+  // list; the ordinary shelf curve must not gate them a second time. Same for `learned`, which is
+  // GM-granted and, as the existing comment says, "already personal".
+  const sys = ability?.powerSystem;
+  if (sys === "combination" || sys === "learned" || sys === "precursor"
+      || sys === "living_current" || sys === "wild_current") return ability?.levelReq || 1;
+
+  const bands = rules?.leveling?.tierUnlockBands;
+  const t = abilityTier(ability);
+  const band = bands?.[String(t)];
+  if (!band) return ability?.levelReq || 1;
+  const start = Math.max(1, Number(band.start) || 1);
+  const end = Math.max(start, Number(band.end) || start);
+  if (end === start) return start;
+  const cost = Number(ability?.energyCost);
+  if (!Number.isFinite(cost)) return start;
+  // percentile of this craft's cost among its OWN tier, so a clustered tier still uses its whole band
+  let below = 0, total = 0;
+  for (const other of Object.values(catalog || {})) {
+    if (abilityTier(other) !== t) continue;
+    const c = Number(other?.energyCost);
+    if (!Number.isFinite(c)) continue;
+    total++; if (c < cost) below++;
+  }
+  const pct = total > 1 ? below / (total - 1) : 0;
+  return start + Math.round(pct * (end - start));
+}
+
+export function effectiveLevelReq(ab, character, rules, catalog = null) {
   if (!ab) return null;
   const sys = ab.powerSystem, origin = character.origin;
-  const base = ab.levelReq || 1;
+  // ⛔ R12 — WHEN A CRAFT BECOMES AVAILABLE IS DERIVED FROM (tier, energyCost), NOT AUTHORED. Under the old
+  // `levelReq` field the WHOLE CORPUS was learnable by level 5. ⚠️ Without a catalog the percentile cannot
+  // be computed and every craft in a tier lands on its band START — coarser, but never wrong.
+  const base = unlockLevelFor(ab, rules, catalog);
   if (sys === "learned") return base; // GM-granted, already personal
   if (sys === "precursor") {
     // SNG-011: the Precursor tier is never offered at creation or ordinary
@@ -571,9 +621,9 @@ export function canLearnAbility(character, abilityId, catalog, rules, opts = {})
   // character could learn the living current, defeating "innate to the people").
   const innateAccess = ab.powerSystem === "precursor" || ab.powerSystem === "living_current" || ab.powerSystem === "wild_current";
   const req = ab.accord ? (ab.levelReq || 1)
-    : innateAccess ? effectiveLevelReq(ab, character, rules)
+    : innateAccess ? effectiveLevelReq(ab, character, rules, opts.catalog || catalog || null)
     : (character?.domains?.primary && idx) ? (domainGateFor(ab, character, idx).allowed ? (ab.levelReq || 1) : null)
-    : effectiveLevelReq(ab, character, rules);
+    : effectiveLevelReq(ab, character, rules, opts.catalog || catalog || null);
   if (req === null) return { ok: false, why: character?.domains?.primary ? "outside your domains" : "wrong tradition", gate: "domain" };
   if (character.level < req) return { ok: false, why: `requires level ${req}${req !== (ab.levelReq || 1) ? " (cross-training)" : ""}`, gate: "level" };
   // SNG-BATCH-10: the great-circle domain gate — antipode closed, tier caps, capstone rule.

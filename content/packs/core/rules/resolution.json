@@ -241,6 +241,16 @@
   "levelCostCap": 40,
   "_levelCostCap": "SNG-266/1b (Erik approved): cost rises with level up to this rung, then holds flat. L1-40 unchanged; L41-100 cost 4,000 each instead of climbing to 9,900. Remove the field and the curve is bit-identical to the old one.",
   "subPointPerLevel": 1,
+  "unlockTopLevel": 60,
+  "tierUnlockBands": {
+    "1": {"start": 1,  "end": 1},
+    "2": {"start": 8,  "end": 20},
+    "3": {"start": 21, "end": 34},
+    "4": {"start": 35, "end": 47},
+    "5": {"start": 48, "end": 60}
+  },
+  "_tierUnlockBands": "⛔ R12/R13 (Erik 2026-09-01) — OPTION 2. TIER SETS THE BAND; `energyCost` PLACES THE CRAFT INSIDE IT. Both fields exist on all 414 crafts, so the corpus arrives as a curve rather than a staircase and no authoring is needed. R13 sets the top at 60: the whole corpus is open by then, and past it progression is depth, not acquisition. ⚠️ TIER 1 IS DELIBERATELY FLAT AT LEVEL 1 (start === end) — R15 rules that a level-1 character sees every tier-1 craft they could pick; spreading them would contradict it.",
+  "_unlockTopLevel": "R13 — L60, not L100. Erik, from play: 1–10 personal · 10–30 party building · 30–60 Band/outpost/army · 60–85 Epic→Legendary · 85–100 Mythic. Acquisition should stop being the progression at 60 and depth take over.",
   "skillPointPerLevel": 2,
   "subAttributeCap": 20,
   "maxAbilityRank": 3,

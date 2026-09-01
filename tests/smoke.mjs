@@ -1183,7 +1183,7 @@ check('branch ripens on uses + rank', rb.length === 1 && rb[0].id === 'prism_sig
 const br = acceptBranch(learner2, rb[0]);
 check('branch attaches free, once', br && learner2.abilities[0].branches.length === 1 && acceptBranch(learner2, rb[0]) === null);
 // aspirations
-const aspirant = { origin: 'harmonic', level: 2, abilities: [{ abilityId: 'sonic_resonance', level: 1 }], skillPoints: 0 };
+const aspirant = { origin: 'harmonic', level: 20, abilities: [{ abilityId: 'sonic_resonance', level: 1 }], skillPoints: 0 };  // R12: chord_of_mending is tier II at energyCost 10 — the top of its band, so L20. This test is about ASPIRATION, not the level gate.
 ensurePractice(aspirant);
 check('aspire caps at 2', declareAspiration(aspirant, 'chord_of_mending', rules).ok && declareAspiration(aspirant, 'stillness_field', rules).ok && declareAspiration(aspirant, 'voice_of_the_flock', rules).ok === false);
 for (let i = 0; i < 10; i++) recordAspirationProgress(aspirant, { abilityId: 'sonic_resonance', tags: [] }, fullCat);
@@ -1391,7 +1391,7 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   // SNG-260 §D: this pair tests the ATTRIBUTE GATE, not affordability — but shatterpoint is a cross-class
   // Tier-III for a valley character, so tier pricing now makes it cost 3 x 2 = 6. Funded so the gate stays
   // the thing under test; the price itself is asserted separately in the tier-pricing block.
-  const lowReason = { origin: "valley", level: 5, skillPoints: 8, abilities: [], subAttributes: { reason: 3 }, customAbilities: {} };
+  const lowReason = { origin: "valley", level: 35, skillPoints: 8, abilities: [], subAttributes: { reason: 3 }, customAbilities: {} };  // R12: shatterpoint is tier III at energyCost 8 -> L31. This test is about the ATTRIBUTE gate, not the level gate.
   check("gated learn blocked below sub-attribute", learnAbility(lowReason, "shatterpoint", cat3, rules, { attributeGates: gates3 }).why.includes("reason"));
   lowReason.subAttributes.reason = 5;
   check("gated learn clears at threshold", learnAbility(lowReason, "shatterpoint", cat3, rules, { attributeGates: gates3, skillCapacity: cap3 }).ok);

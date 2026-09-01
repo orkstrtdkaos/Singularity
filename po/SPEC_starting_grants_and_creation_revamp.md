@@ -665,6 +665,11 @@ content edit.
 
 ## C3 — ⛔ R6 · THE INSIGHT BONUS STRANDS MORE THAN HALF A SPECIALIST'S POOL
 
+> ⛔ **SUPERSEDED — see the CORRECTION TO C3 at the end of this file.** These figures assume Insight 14 is
+> held from level 1. It is not: a sub starts at its parent attribute and grows 1 point per level across
+> EIGHT subs, so a Silas-like character reaches Insight 14 around **L66**, not L1. The corrected numbers are
+> smaller and the conclusion changes — the cap strands points even with NO Insight bonus at all.
+
 **Erik's specific question: *"does a high-Insight late-game character ever hit the breadth cap?"***
 
 ✅ **YES — and far earlier than expected. Under R1 prices the cap becomes the binding constraint, reversing
@@ -793,3 +798,83 @@ and a sex, or the gate needs to key off something that exists.
 
 ⚠️ **Worth deciding deliberately given SNG-143:** if gender stays player-corrected, an attraction system
 keyed to it inherits whatever the GM guessed first.
+
+---
+
+# ⛔ CORRECTION TO C3 — I MODELLED INSIGHT 14 FROM LEVEL 1. IT GROWS.
+
+**Erik: *"make sure you're modelling something realistic. I believe Silas is lvl 30 and he has maybe 8–9
+insight. Don't take insight being 14 from level 1 and calculate extra points that way."***
+
+✅ **He is right and the error is basic.** I computed `4 points × 100 levels = 400`, which hands the
+character the top milestone at birth and pays it for every level since. **Insight is not held; it is
+accrued.**
+
+## The real growth mechanics
+
+| | |
+|---|---|
+| a sub starts at | its **parent attribute** — Insight starts at `mental`, so **3–4** at creation |
+| gain rate | **1 sub point per level** — across **8 subs** (`strength, agility, reason, insight, presence, rapport, craft, wits`) |
+| cap | 20 |
+
+⚠️ **So an even spread is 1/8 of a point per level into Insight.** Reaching 14 means putting a large share
+of every level's sub point into one sub for decades.
+
+## ✅ THE MODEL VALIDATES AGAINST SILAS
+
+**Erik: L30, insight 8–9.** Modelled at a 17% share from base `mental` 4: **L30 → insight 8.** ✅ **Exact.**
+
+## When the milestones are actually reached
+
+| profile | insight @L30 | insight @L100 | hits 7 | hits 14 |
+|---|---|---|---|---|
+| never invests | 3 | 3 | never | never |
+| even spread (1/8) | 6 | 15 | **L33** | **L89** |
+| ⚠️ **Silas (~17%)** | **8** | 19 | **L25** | **L66** |
+| focused (50%) | 17 | 20 | L9 | L23 |
+| all-in (100%) | 20 | 20 | L5 | L12 |
+
+⛔ **Insight 14 arrives at L66 for a Silas-like character and L89 for an even spread — not L1.** Only an
+all-in specialist sees it before L20.
+
+## Skill points, accrued at the rate in force each level
+
+| profile | L30 | L50 | L100 |
+|---|---|---|---|
+| flat 2/level (no bonus) | 60 | 100 | 200 |
+| even spread | 60 | 118 | 280 |
+| ⚠️ **Silas (~17%)** | **66** | 126 | **311** |
+| all-in | 105 | 185 | 385 |
+
+⚠️ **My previous figure was 400 at L100. The realistic figure for a Silas-like character is 311** — a **55%**
+uplift over flat, not the 100% I modelled.
+
+## ⛔ AND THE CONCLUSION CHANGES
+
+**Stranded points, home band:**
+
+| profile | L30 (Silas's actual level) | L100 |
+|---|---|---|
+| ⛔ **never invests** | 3 (5%) | ⛔ **14 (7%)** |
+| even spread | 3 (5%) | 94 (34%) |
+| ⚠️ **Silas (~17%)** | ⚠️ **9 (14%)** | 125 (40%) |
+| all-in | 48 (46%) | 199 (52%) |
+
+**Two things I had wrong:**
+
+1. ⚠️ **At Silas's actual level the problem is 9 points.** Not 54% — **14%**, and in absolute terms nine
+   points he cannot spend. ✅ **This is a late-game problem, not a mid-game one.**
+2. ⛔ **THE CAP STRANDS POINTS EVEN WITH NO INSIGHT BONUS AT ALL.** A character who never invests a single
+   sub point in Insight still strands 14 points at L100. **So the binding constraint is R1's price cut
+   against a `level + 1` cap — the Insight bonus makes it worse, it does not cause it.**
+
+⬜ **Which re-points the decision.** My previous framing asked *"is the Insight bonus worth having?"* ⚠️ **The
+better question is: was `level + 1` ever tuned against a corpus that averages 1.84 points per craft?** Fix
+the cap and the Insight bonus lands cleanly at every profile; leave the cap and even a non-investor
+overflows eventually.
+
+⚠️ **AND THE MILESTONES LOOK BETTER UNDER THE REAL CURVE, NOT WORSE.** Insight 7 at L25 and 14 at L66 for a
+Silas-like character are **genuine long-arc rewards**, reached by choosing Insight over seven other subs for
+decades. That is a much healthier shape than my flat model implied — the error made Erik's own design look
+more generous than it is.

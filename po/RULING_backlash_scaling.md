@@ -136,3 +136,35 @@ answer and the existing `surgeBacklashByTier` table were already in the repo.
 | OI-21 | T4/T5 pass — should any be trainable? | Erik ruling, deferred |
 | OI-22 | Backlash percentage table — propose against R18's pitch | Aevi propose |
 | OI-23 | Reconcile `surgeBacklashByTier` with `backlashByRung` | CCode propose |
+
+---
+
+## R18b — NO TIER FLOOR on backlash ✅ RULED 2026-09-01
+
+**Backlash scales by RUNG only. Tier drops out entirely — surge backlash included.**
+⛔ Do not implement `max(rungPct, tierPct)`.
+
+**Ratified percentages (CCode's §3, accepted by Aevi as authored):**
+
+| rung | health | energy | L1 (30hp) | Silas L30 (191hp) |
+|---|---|---|---|---|
+| damaging | 7% | 11% | 2 / 11 | 13 / 31 |
+| incapacitating | 13% | 22% | 4 / 22 | 25 / 62 |
+| lethal | 20% | 33% | 6 / 33 | 38 / 93 |
+
+✅ **Both ends move the right way at once.** A `damaging` backlash stops being irrelevant for Silas
+(2% → 7%) and stops landing hardest on a level-1 (13% → 7%) — R7's principle, and the correction
+Erik has made repeatedly.
+
+**Why tier drops out:** `harmRung` already scales per rank (all 18 tier-1 `lethal` crafts reach
+lethal only at rank 3), so tier would double-count depth. And R5's principle is that the craft's
+own nature turns inward — a statement about the craft, not its price band. `sustained_regard` is
+tier I carrying `harmRung: lethal`; under tier-scaling it would backlash like a beginner's craft
+while doing lethal work.
+
+⚠️ **What is knowingly lost:** an expensive tier-V craft with a mild authored backlash bites less
+on a surge than it does today. Accepted.
+
+➡️ **OI-22 CLOSED.** ➡️ **OI-23 CLOSED** — merge shape ruled, one magnitude function, two triggers.
+⬜ **OI-20 still open** (~88 crafts need per-rank `backlashRung`); per CCode the merge builds ahead
+of it and the rank term activates when the trees land.

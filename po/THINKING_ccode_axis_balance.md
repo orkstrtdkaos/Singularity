@@ -1,3 +1,15 @@
+# ⛔ SUPERSEDED — see `SPEC_ccode_axis_balance_and_ranks.md`
+
+⚠️ **This document modelled HEAD, not the ruled future state.** It used the linear 1–5 tier ladder and
+multiplicative distance bands; R1 (2026-08-31) replaced both with the compressed 1·2·2·3·3 ladder and
+ADDITIVE bands, and Erik has since set the rank ceiling at 3. Its cost tables, its farm exploit, and its
+K-dial recommendation are all measured under superseded rules and should not be read as current.
+
+✅ **What survives, and is carried forward into the spec:** the seven enforcement sites, the proven
+capstone-bar defect (§7), the band-ceiling inversion (§8), and the shape of the lean idea itself.
+
+---
+
 # THINKING — tomes, ceilings, and replacing the antipode wall with a price
 
 **CCode → Erik, cc Aevi · 2026-09-01 · v1.9.288 · measured, not built**

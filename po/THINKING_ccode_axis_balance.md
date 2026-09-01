@@ -191,3 +191,24 @@ content. So the tome road is currently unreachable in both senses.
    covers both.
 
 ⛔ **Nothing above is built.** You said think it through with you, so I measured and stopped.
+
+---
+
+## §7 — ⛔ §5 PROVEN, NOT ASSERTED (added after the grep, because a grep is not a finding)
+
+I built three probe crafts and put each through the real `canLearnAbility` with the real tradition index:
+
+| probe | result | |
+|---|---|---|
+| tier 5 / levelReq 5 — **aligned, as all 414 crafts are today** | `ok=false`, gate `standing` | ✅ correct |
+| **tier 5 / levelReq 2** | ⛔ **`ok=true` — walks straight past the capstone bar** | ⛔ **wrong** |
+| **tier 1 / levelReq 5** | `ok=false`, gate `standing` | ⛔ **wrong — a tier-I craft gated as a capstone** |
+
+⛔ **Wrong in BOTH directions**, which is the signature of a gate reading the wrong field rather than a
+threshold that needs tuning. `progression.js:572` asks `ab.levelReq >= capstoneTier`; it must ask
+`ab.tier ?? ab.levelReq`, exactly as `tierPrice` and `mechanicFor` already do.
+
+⚠️ **Why this is the first thing to fix, ahead of everything in §1–§4:** §3 argued the ceiling bump is safe
+*because* tier IV–V sit behind the standing bar. **That argument is only true if the bar can see the
+tier.** Right now it cannot. Fix the seven readers, and the bump is safe as described; ship the bump
+first, and secondary domains get a door into tier V that no standing check ever sees.

@@ -2096,6 +2096,63 @@ console.log("\n── §34 · tier is what a craft IS, levelReq is when you may 
   const same = cat34.filter(a => a.tier === Math.max(1, Math.min(5, a.levelReq || 1))).length;
   console.log(`note  §34: ${same}/${cat34.length} crafts still have tier === levelReq (they diverge as unlock levels are authored)`);
 }
+/* ═════ §35 — EVERY TIER QUESTION GOES THROUGH `abilityTier` ═════ */
+// ⛔ CCODE-341. §34 decoupled `tier` from `levelReq` for PRICE and DICE and stopped there. TEN readers still
+// treated `levelReq` as the tier — five of them gates. ⚠️ MEASURED BEFORE THE FIX, through the real
+// `canLearnAbility`: a craft authored tier 5 / levelReq 2 walked STRAIGHT PAST the capstone standing bar,
+// and a craft authored tier 1 / levelReq 5 was gated AS a capstone it is not.
+//
+// ⛔ WRONG IN BOTH DIRECTIONS — the signature of a gate reading the wrong FIELD, not a threshold needing
+// a tune. ⚠️ AND LATENT: all 414 crafts still have tier === levelReq, so nothing was visibly broken. This
+// gate is the tripwire for the first craft Aevi re-levels.
+console.log("\n── §35 · every tier question goes through abilityTier ──");
+{
+  const SK35 = await import("../engine/skilltree.js");
+  const PR35 = await import("../engine/progression.js");
+  const TR35 = await import("../engine/traditions.js");
+
+  check("§35: `abilityTier` is exported — the one answer to what tier a craft is",
+    typeof SK35.abilityTier === "function");
+  check("§35: it prefers `tier`", SK35.abilityTier({ tier: 5, levelReq: 2 }) === 5);
+  check("§35: …falls back to `levelReq` so today’s 414 crafts are unmoved",
+    SK35.abilityTier({ levelReq: 3 }) === 3);
+  check("§35: …and clamps to the 1–5 ladder",
+    SK35.abilityTier({ tier: 40 }) === 5 && SK35.abilityTier({}) === 1);
+
+  // ⛔ THE GATE ITSELF, through the REAL learn path — not a unit test of the helper.
+  const v2_35 = (() => { try { return rj("content/packs/core/rules/traditions_v2.json"); } catch { return null; } })();
+  const idx35 = TR35.buildTraditionIndex(rj("content/packs/core/rules/traditions.json"), v2_35);
+  const trad35 = Object.keys(idx35.byId || {}).find(t => !TR35.isFolkTradition(t, idx35));
+  const mk35 = (tier, levelReq) => ({ id: "probe35", name: "Probe", tradition: trad35, functions: ["strike"],
+    shape: "damage", tier, levelReq, mechanic: { damageType: "physical" }, nativeOrCombination: "native" });
+  const char35 = { level: 30, abilities: [], domains: { primary: trad35 }, peopleDisposition: {}, attributes: {}, skillPoints: 99 };
+  const gate35 = (tier, levelReq) => {
+    const ab = mk35(tier, levelReq);
+    return PR35.canLearnAbility(char35, "probe35", { probe35: ab }, { capstoneStanding: null },
+      { traditionIndex: idx35, catalog: { probe35: ab } });
+  };
+  check("§35: a TIER-V craft is held by the capstone standing bar even when its levelReq is 2",
+    gate35(5, 2).ok === false && gate35(5, 2).gate === "standing",
+    JSON.stringify(gate35(5, 2)));
+  check("§35: …and a TIER-I craft is NOT gated as a capstone even when its levelReq is 5",
+    gate35(1, 5).ok === true, JSON.stringify(gate35(1, 5)));
+  check("§35: the aligned case is unchanged (tier 5 / levelReq 5 still held)",
+    gate35(5, 5).ok === false && gate35(5, 5).gate === "standing");
+
+  // ⚠️ NO READER MAY GO BACK. Line-scoped and comment-stripped — §31B was written five times before it
+  // stopped matching its OWN prose, and this scanner will not repeat that.
+  const files35 = ["app.js", "engine/skilltree.js", "engine/progression.js", "engine/wheelgeom.js", "engine/npcsheet.js"];
+  const offenders35 = [];
+  for (const f of files35) {
+    const src = readFileSync(join(root, f), "utf8").split(/\r?\n/);
+    src.forEach((line, i) => {
+      const code = line.replace(/\/\/.*$/, "").replace(/\/\*.*?\*\//g, "");
+      if (/tierOf\s*\(\s*(?:ab|ability)\??\.levelReq/.test(code)) offenders35.push(`${f}:${i + 1}`);
+    });
+  }
+  check("§35: no reader treats `levelReq` as the tier any more",
+    offenders35.length === 0, offenders35.join(", "));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

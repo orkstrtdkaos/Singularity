@@ -9,7 +9,7 @@
 
 import { applyLadderGrants } from "./ladder.js";
 import { slugify } from "./quests.js";
-import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, learnPointCost, rankExpression, forkPending } from "./skilltree.js";
+import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, learnPointCost, rankExpression, forkPending, abilityTier } from "./skilltree.js";
 import { domainAccess, traditionOf, isFolkTradition, antipodeOf } from "./traditions.js";
 import { standingWithPeople } from "./reputation.js";
 import { trainerFor } from "./company.js";
@@ -569,10 +569,10 @@ export function canLearnAbility(character, abilityId, catalog, rules, opts = {})
   // standing with that people (willing teacher + earned reputation). This finally ENFORCES the
   // accessGates capstone rule (SNG-049/050) that shipped as fiction only. Folk/learned/precursor and
   // sub-capstone tiers pass untouched; the domain gate above still owns antipode/tier/closed-opposite.
-  if (idx && (ab.levelReq || 1) >= (rules?.capstoneStanding?.capstoneTier ?? 4)) {
+  if (idx && abilityTier(ab) >= (rules?.capstoneStanding?.capstoneTier ?? 4)) {
     const trad = traditionOf(ab, idx);
     if (trad && !isFolkTradition(trad, idx)) {
-      const bar = meetsStandingBar(character, trad, ab.levelReq || 1, rules);
+      const bar = meetsStandingBar(character, trad, abilityTier(ab), rules);
       if (!bar.ok) return { ok: false, why: bar.why, gate: "standing" }; // aspirational — deepen standing to open it
     }
   }

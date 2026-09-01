@@ -21,6 +21,7 @@
 // ⚠️ AND AN AUTHORED SHEET ALWAYS WINS. Aevi's 111 named people should get real sheets over time; where one
 // exists it is the truth and this file fills nothing in. Derivation is for the ones nobody wrote down.
 
+import { abilityTier } from "./skilltree.js";
 const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) ? d : Number(v));
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
@@ -279,10 +280,10 @@ export function kitFor(entry, { catalog = {}, traditionIndex = null, domainAcces
   if (domains && typeof domainAccess === "function") {
     for (const ab of Object.values(catalog || {})) {
       if (kit.length >= cap) break;
-      if ((ab?.levelReq || 1) > Math.max(1, Math.ceil(level / 5))) continue;
+      if (abilityTier(ab) > Math.max(1, Math.ceil(level / 5))) continue;
       if (kit.some(k => k.id === ab.id)) continue;
       let v = null;
-      try { v = domainAccess(ab, ab.levelReq || 1, domains, traditionIndex); } catch { v = null; }
+      try { v = domainAccess(ab, abilityTier(ab), domains, traditionIndex); } catch { v = null; }
       // ⚠️ NEAR GROUND ONLY. An NPC reaches across the circle only where the story has SHOWN them doing it
       // — that is what `skillsObserved` is for. Filling a kit from the far side would invent a biography.
       if (v?.allowed && (v.band === "primary" || v.band === "adjacent" || v.band === "open")) kit.push(ab);

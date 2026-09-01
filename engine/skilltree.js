@@ -8,6 +8,20 @@
 
 const ROMAN = ["", "I", "II", "III", "IV", "V"];
 
+/** ⛔ CCODE-341 — THE ONE ANSWER TO "WHAT TIER IS THIS CRAFT?".
+ *
+ *  CCODE-340 gave crafts a dedicated `tier` and freed `levelReq` to mean WHEN you may learn it. It fixed
+ *  the price and the dice; it left TEN readers still treating `levelReq` as the tier — five of them gates.
+ *  ⚠️ PROVEN before the fix: a craft authored tier 5 / levelReq 2 walked straight past the capstone
+ *  standing bar, and a craft authored tier 1 / levelReq 5 was gated as a capstone it is not. Wrong in BOTH
+ *  directions — the signature of a gate reading the wrong field rather than a threshold needing tuning.
+ *
+ *  ⛔ EVERY tier question goes through here. `?? levelReq` keeps all 414 current crafts exactly as they
+ *  are, so this change is inert until content actually diverges — which is the point. */
+export function abilityTier(ability) {
+  return Math.max(1, Math.min(5, Number(ability?.tier ?? ability?.levelReq) || 1));
+}
+
 /** Tier I–V derived from levelReq (1→I … 5→V, clamped). */
 export function tierOf(levelReq) {
   return ROMAN[Math.max(1, Math.min(5, levelReq || 1))];
@@ -106,7 +120,7 @@ export function skillGraphModel(catalog, emergence, character, { attributeGates,
     const cost = isOwned ? 0 : learnPointCost(ab, character, skillCapacity, preds.verdictFor ? preds.verdictFor(ab) : null);
     const affordable = isOwned || (character.skillPoints || 0) >= cost;
     return {
-      id: ab.id, name: ab.name, cls: ab.tradition || ab.powerSystem, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1,
+      id: ab.id, name: ab.name, cls: ab.tradition || ab.powerSystem, tier: tierOf(abilityTier(ab)), levelReq: ab.levelReq || 1,
       cost, affordable,
       // BUYABLE = open AND affordable. Erik: "add a filter for buyable so I can see what I can get."
       buyable: !isOwned && !locked && !foreclosed && affordable,

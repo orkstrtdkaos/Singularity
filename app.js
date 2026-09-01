@@ -83,7 +83,7 @@ import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAsp
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
 import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
-import { isCrossClass, tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel, skillPointCost, learnPointCost, forkPending, forkPaths, chosenFork, setFork, rankExpression } from "./engine/skilltree.js";
+import { isCrossClass, tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel, skillPointCost, learnPointCost, forkPending, forkPaths, chosenFork, setFork, rankExpression, abilityTier } from "./engine/skilltree.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError } from "./engine/party.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
@@ -207,7 +207,7 @@ function entityHover(spec) {
       const owned = (character.abilities || []).find(a => a.abilityId === id);
       const rp = owned ? rankProgress(character, id) : null;
       return skillDetail(ab, {
-        tradition: traditionLabel(abilityGroupKey(ab, "")), tier: tierOf(ab.levelReq),
+        tradition: traditionLabel(abilityGroupKey(ab, "")), tier: tierOf(abilityTier(ab)),
         owned: !!owned, level: owned?.level, maxRank: CONTENT.rules?.leveling?.maxAbilityRank ?? 3,
         effCost: (() => { try { return effectiveEnergyCost(ab, character, CONTENT.rules); } catch { return ab.energyCost ?? null; } })(),
         baseCost: ab.energyCost ?? null, families: familiesOfAbility(ab, FN_INDEX),
@@ -9326,7 +9326,7 @@ function buildWheelModel(sheet = character) {
     // WHY a blocked craft is blocked; `aspirational` = not owned, blocked ONLY by standing (earnable "later",
     // §3 renders it dimmed rather than hard-barred).
     const g = isOwned ? { ok: false, gate: "owned" } : canLearnAbility(sheet, ab.id, cat, CONTENT.rules, { attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: idx });
-    nodes.push({ id: ab.id, name: ab.name, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1, cls: abilityGroupKey(ab, "learned"),
+    nodes.push({ id: ab.id, name: ab.name, tier: tierOf(abilityTier(ab)), levelReq: ab.levelReq || 1, cls: abilityGroupKey(ab, "learned"),
       x, y, ang, owned: isOwned, band: v.band, allowed: v.allowed, penalty: v.penalty, closed: v.band === "closed",
       barred: !v.allowed && v.band !== "closed", dim: v.penalty > 1, isFolk: trad && isFolkTradition(trad, idx), isPrecursor: ab.powerSystem === "precursor",
       // SNG-124: function overlay + cost-at-a-glance.
@@ -10134,7 +10134,7 @@ function renderLevelUp(status = "") {
     const r1 = ab.tree?.find(t => t.rank === 1);
     const band = dv.band === "far" ? " · far" : dv.band === "adjacent" ? " · kin" : dv.band === "accord" ? " · open" : "";
     return `<div class="cs-ability ${blocked ? "locked" : ""}">
-      <div><span class="tier-badge">${tierOf(ab.levelReq)}</span> <strong>${esc(ab.name)}</strong> <span class="hint">L${ab.levelReq || 1}${band}${cost > 1 ? ` · ${cost} pts` : ""}${ripe ? " · practiced (free)" : ""}</span></div>
+      <div><span class="tier-badge">${tierOf(abilityTier(ab))}</span> <strong>${esc(ab.name)}</strong> <span class="hint">L${ab.levelReq || 1}${band}${cost > 1 ? ` · ${cost} pts` : ""}${ripe ? " · practiced (free)" : ""}</span></div>
       <div class="hint">${esc((r1 ? r1.grants : ab.description) || "").slice(0, 130)}</div>
       ${blocked
         ? `<span class="hint">🔒 ${!gate.ok ? esc(gate.why) : capBlock ? "at capacity — this waits until your next level widens it" : "need " + cost + " point" + (cost > 1 ? "s" : "")}</span>`
@@ -10476,7 +10476,7 @@ function renderCharacterScreen() {
       ${character.pendingMasteryFork ? (() => { const fb = fullCatalog()[character.pendingMasteryFork]; return `<div class="cs-ability" style="border-left:3px solid var(--accent)"><strong>⑂ A defining moment for ${esc(fb?.name || character.pendingMasteryFork)}</strong> — choose its path to master it. <button class="grow-btn practiced" data-masteryfork="${esc(character.pendingMasteryFork)}">Choose path</button></div>`; })() : ""}
       ${character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; if (!ab) return ""; const cost = effectiveEnergyCost(ab, character, rules);
         const p = rankProgress(character, a.abilityId);
-        return `<div class="cs-ability"><span class="tier-badge">${tierOf(ab.levelReq)}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${esc(sheetCraftLabel(ab))})${domainVerdict(ab).castable === false ? ` · <strong class="not-castable">braid material only — you cannot cast this</strong>` : ""} · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
+        return `<div class="cs-ability"><span class="tier-badge">${tierOf(abilityTier(ab))}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${esc(sheetCraftLabel(ab))})${domainVerdict(ab).castable === false ? ` · <strong class="not-castable">braid material only — you cannot cast this</strong>` : ""} · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
           <span class="cs-ranks">${[1, 2, 3].map(r => `<span class="${r <= a.level ? "cs-rank-on" : "cs-rank-off"}" title="${esc(ab.tree?.[r - 1]?.name || "")}">${r <= a.level ? "●" : "○"}</span>`).join("")}</span>
           ${ab.tree?.[a.level - 1] ? `<div class="hint">${esc(ab.tree[a.level - 1].name)}: ${esc(ab.tree[a.level - 1].grants)}</div>` : ""}
           <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div></div>`; }).join("")}
@@ -13538,7 +13538,7 @@ function renderPlay(turn, opts = {}) {
             ? `<div class="hint braid-parents">⧉ braid of ${esc((ab.minted.sourceNames || []).join(" × ") || "two crafts")}${ab.minted.namedBy === "player" ? " · your name for it" : ab.minted.adoptedFrom?.characterName ? ` · first found by ${esc(ab.minted.adoptedFrom.characterName)}` : ab.minted.firstFinder ? " · you found it first" : ""}</div>` : "";
           return `<div class="ability${on ? " boosted" : ""}" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
             <button class="craft-boost${on ? " on" : ""}" data-boost="${esc(a.abilityId)}" title="${on ? "Boosted — the GM leans toward suggesting this when it fits (tap to clear). A nudge, never a force." : "Boost — nudge the GM to surface this craft in your options when it fits. Never forces it, never changes a roll."}">✦</button>
-            <span class="name entity-hover" data-entity="skill:${esc(a.abilityId)}">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${tierOf(ab.levelReq)}">${tierOf(ab.levelReq)}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
+            <span class="name entity-hover" data-entity="skill:${esc(a.abilityId)}">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${tierOf(abilityTier(ab))}">${tierOf(abilityTier(ab))}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
             <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>
             ${functionChips(ab)}${braidLine}
             <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div></div>`;
@@ -13579,7 +13579,7 @@ function renderPlay(turn, opts = {}) {
             const tooExpensive = !ripe && character.skillPoints < learnCost;
             const blocked = !gate.ok || capBlock || tooExpensive;
             const bandTag = dv.band === "far" ? ", far" : dv.band === "adjacent" ? ", kin" : "";
-            return `<button class="opt ${ripe ? "practiced" : ""} ${blocked ? "locked" : ""}" ${blocked ? "disabled" : `data-learn="${esc(ab.id)}"`} title="${esc(ab.description + " — " + dv.reason + (gate.ok ? "" : " · " + gate.why))}" style="margin:2px 0; display:block; width:100%"><span class="tier-badge">${tierOf(ab.levelReq)}</span> ${esc(ab.name)} <span class="cost">L${ab.levelReq || 1}${bandTag}${learnCost > 1 ? ` · ${learnCost} pts` : ""}${ripe ? " — FREE" : ""}${!gate.ok ? " 🔒 " + esc(gate.why) : capBlock ? " 🔒 at capacity" : tooExpensive ? " 🔒 need " + learnCost + " pts" : ""}</span></button>`;
+            return `<button class="opt ${ripe ? "practiced" : ""} ${blocked ? "locked" : ""}" ${blocked ? "disabled" : `data-learn="${esc(ab.id)}"`} title="${esc(ab.description + " — " + dv.reason + (gate.ok ? "" : " · " + gate.why))}" style="margin:2px 0; display:block; width:100%"><span class="tier-badge">${tierOf(abilityTier(ab))}</span> ${esc(ab.name)} <span class="cost">L${ab.levelReq || 1}${bandTag}${learnCost > 1 ? ` · ${learnCost} pts` : ""}${ripe ? " — FREE" : ""}${!gate.ok ? " 🔒 " + esc(gate.why) : capBlock ? " 🔒 at capacity" : tooExpensive ? " 🔒 need " + learnCost + " pts" : ""}</span></button>`;
           }).join("")}</details>`]);
         // ⛔ CCODE-338 (D) — POLES GROUPED UNDER A DOMAIN HEADING, AND THE THING YOU PICK IS STILL THE POLE.
         // Aevi’s ruling, and the reasoning is Reading B’s: the learn screen is where ACCESS IS DECIDED, and

@@ -9,6 +9,7 @@
 // mean (schools, arbitrary composition) is the same math family, added when the placement widens past
 // braids. Pure; headless-testable.
 
+import { abilityTier } from "./skilltree.js";
 /** Circular (shorter-arc) midpoint of two ring POSITIONS on a wheel of `n`. The antipodal case (exactly
  *  n/2 apart) has two equal midpoints — resolved deterministically CLOCKWISE FROM THE LOWER position, never
  *  an arbitrary tiebreak that looks meaningful (§1 ⚠️). Returns a fractional position in [0, n). */
@@ -163,7 +164,7 @@ export function matchesFunction(node, chosen) {
 // question. What it must not do here is decide AFFORDABLE.
 export function creationPickable(ability, { domains, grantIds = [], traditionIndex = null, domainAccess } = {}) {
   if (!ability) return false;
-  if ((ability.levelReq || 1) > 1) return false;                 // depth is earned in play, never bought at creation
+  if (abilityTier(ability) > 1) return false;                    // depth is earned in play, never bought at creation
   if ((grantIds instanceof Set ? grantIds.has(ability.id) : (grantIds || []).includes(ability.id))) return false; // already yours — a pick spent here is wasted
   if (typeof domainAccess !== "function") return false;
   // ⛔ CCODE-339b / ERIK: "I'm ok with having the antipodes L1 skills open during character creation."

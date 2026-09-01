@@ -1,10 +1,40 @@
 # SPEC — Starting Grants and Character Creation Revamp
 
-**Author:** Aevi (PO) · **Date:** 2026-08-31
-**Status:** `round_2_requested` — CCode to survey current state before Aevi authors anything
-**Related:** SNG-192 (creation flow), SNG-101b (native grants wiring), `martial_paths.json`
-(baseline defense kit), `native_grants.json`, `origins.json`, `class_archetypes.json`,
-`sub_attribute_ladder.json`, `skill_capacity.json`, `intensity_scaling.json`
+⛔ **STATUS: `rulings_landed` — 2026-08-31. CCode: read `po/RULING_creation_session_20260831.md`
+FIRST, then this file. Seven rulings (R1–R7) supersede design proposals below. Append ROUND 2
+findings to the end of this file as before.**
+
+---
+
+## §RULED — what Erik decided 2026-08-31 (authoritative: RULING_creation_session_20260831.md)
+
+| # | ruling | closes | build status |
+|---|---|---|---|
+| **R1** | Tier prices T1=1 T2=2 T3=2 T4=3 T5=3. Distance **additive**: `tierPrice + band` (0/1/2). Far T5: 15 → 5. | OI-10 | ready |
+| **R2** | Dedicated attribute allocation step on **all three** creation paths. May be suggestion-seeded; player adjusts and locks. Must complete before ability pick. | OI-13 | ready |
+| **R3** | Sense slot = forced pick of one Tier-1 sense craft from **any sect in the primary domain**. "Free" = free to OBTAIN, not free to use — no energy costs change. **All 14 domains verified covered; nothing to author.** | OI-7 | ready |
+| **R4** | Starting location chosen at creation; must be within one of the character's domains, or a folk/crossing location. | — | ready |
+| **R5** | `backlashRung` raises the **landed harm tier** on crit fail (not a flat penalty). `applyBacklash` needs the ability passed — one signature change, two call sites. | OI-15 | ready |
+| **R6** | Bonus skill points come from **Insight**. Milestone shape (7 → +1, 14 → +1 more) is **provisional** pending CCode curve modeling. | OI-11 partial | model first |
+| **R7** | Novel use costs **energy + wider crit band, never success chance**. Scaled to stretch tier, not to character level. Wits reduces surcharge and narrows band. | OI-3 | ready |
+
+### R7 detail — stretch tiers
+
+| stretch | definition | energy | crit band |
+|---|---|---|---|
+| Adjacent | outside declared `functions`, within the spirit | +10% | unchanged |
+| Real | outside what the craft does | +25% | slightly wider |
+| Against `notFor` | explicitly what the craft is not for | +50% | notably wider |
+
+Wits: rank 4 halves surcharge and narrows band · rank 10 no surcharge · rank 14 −25%.
+Milestone prose at Wits 4 and 10 must be rewritten; `milestoneEffects.blocked` cleared on both.
+Stretch lives in the gear-shaped configure button alongside conserve/surge, and is
+**orthogonal** to intensity — conserve-stretch and surge-stretch must both be expressible.
+GM may offer novel uses as options.
+
+⚠️ **New authoring item from R7:** `notFor` becomes a load-bearing mechanical field for the
+first time. Consistency audit needed — some `notFor` lines are hard limits, others are flavor.
+Not a blocker; tiers work on GM judgment in the interim.
 
 ---
 
@@ -273,19 +303,22 @@ These surfaced this session and need to be tracked:
 |---|---|---|---|
 | OI-1 | Background id-mismatch bug (SNG-272) — hyphenated ids vs snake_case catalog | CCode | ship status unknown |
 | OI-2 | Aptitudes descriptions table — needed for background transparency (§2e) | Aevi author | not started |
-| OI-3 | Wits `novelPenalty` milestone — milestone promises relief from a penalty that doesn't exist | Erik ruling | held |
+| OI-3 | ✅ **CLOSED R7** — novel use costs energy + crit band, scaled to stretch | — | ruled |
 | OI-4 | `presence` / `rapport` milestones 14–20 — blocked pending holdings model | CCode | blocked on SNG-358 |
 | OI-5 | NPC baseline kit repurpose — use retired 4 crafts as minted NPC floor | Erik ruling | suggestion only |
 | OI-6 | 29 crafts with `intensity` as bare string — need conserve entry before zero-energy path | Aevi author | small sweep |
-| OI-7 | 6 missing sense crafts (syllogist, verist, umbral, veilwright, threnodist, wright) | Aevi author | blocked on domain-level review first |
+| OI-7 | ✅ **CLOSED R3** — domain-level check: all 14 domains have a Tier-1 sense craft. **Nothing to author.** | — | verified |
 | OI-8 | Non-human form kits (part-machine, horned, fae, dissolving, Seraphic-continuous, living-wood variants) | Aevi author | blocked on CCode confirming what exists |
 | OI-9 | `folkAccessible` flag wiring — derive Valleyfolk pool from flag, retire buried doc key | CCode | ruled 2026-08-31 |
-| OI-10 | Additive cross-class cost — amends Erik's 2026-07-06 ruling; needs explicit sign-off | Erik ruling | held pending modeled curves |
+| OI-10 | ✅ **CLOSED R1** — additive + compressed tier prices | CCode | ready to build |
 | OI-11 | Mental sub-attribute → bonus skill points — which sub (insight vs reason), milestone vs curve | Erik ruling | held pending modeled curves |
 | OI-12 | Prologue permanent attribute grants — confirm whether `prologue.tags` generates anything permanent beyond domain assignment | CCode measurement | unconfirmed |
 | OI-13 | Describe/Play path attribute timing — confirm whether attribute allocation is complete before ability pick on non-quick-start paths | CCode measurement | unconfirmed |
 | OI-14 | Total creation attribute point pool — not in any content file; CCode to surface | CCode measurement | unknown |
-| OI-15 | `backlashRung` — wire it (crit failure impact reader in crit resolution path) or move to prose | CCode build | intent confirmed; wiring unbuilt |
+| OI-15 | ✅ **CLOSED R5** — raises landed harm tier on crit fail | CCode | ready to build |
+| OI-16 | `notFor` consistency audit — field became mechanical under R7 | Aevi author | new |
+| OI-17 | Wits milestone prose rewrite (ranks 4, 10) + clear `milestoneEffects.blocked` | Aevi author | new |
+| OI-18 | NPC character sheets — see BACKLOG | blocked on build overhaul | logged |
 
 ---
 

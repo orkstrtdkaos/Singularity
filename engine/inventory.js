@@ -142,6 +142,39 @@ export function reclaimEstablishedItems(character, catalog = {}) {
  *  is TRUE, so deriving the shadow-twin merged it INTO its own parent — one stack of qty 2, wearing the
  *  child's custom name. The player would have lost the spear the whole ticket is about. A caller that
  *  KNOWS it is minting a new thing says so, and the resolver is not consulted. */
+/** ⛔ R22 — WHAT AN OBJECT MAY GRANT. Deliberately narrow: a craft, or a people. A tome, a precursor
+ *  artifact, a quest item and a miracle grant are the SAME MECHANISM wearing different prose, so the
+ *  field is keyed on what is granted rather than on the word `tome`. */
+export function normalizeGrants(g) {
+  if (!g || typeof g !== "object") return undefined;
+  const craft = typeof g.craft === "string" ? g.craft.slice(0, 80) : null;
+  const people = typeof g.people === "string" ? g.people.slice(0, 80) : null;
+  if (!craft && !people) return undefined;
+  return { ...(craft ? { craft } : {}), ...(people ? { people } : {}) };
+}
+
+/** ⛔ R22 — THE WRITER `character.tomes` NEVER HAD. The field had a reader in `acquirable` and nothing
+ *  anywhere wrote it, so "a willing teacher of this people, OR THEIR TOME" was teacher-only in practice.
+ *
+ *  ⚠️ ACCESS, NOT ACQUISITION. Holding the object opens the door; the character still pays the skill
+ *  points, still meets the level, still has the breadth. R22: "the object removes the ACCESS barrier,
+ *  never the COST." Idempotent — carrying two copies of a tome grants nothing twice. Returns what it
+ *  opened, so the caller can say so out loud rather than the player noticing later. */
+export function applyObjectGrants(character, item) {
+  const g = item?.grants;
+  if (!g || !character) return { craft: null, people: null };
+  const out = { craft: null, people: null };
+  if (g.craft) {
+    character.grantedAccess = character.grantedAccess || [];
+    if (!character.grantedAccess.includes(g.craft)) { character.grantedAccess.push(g.craft); out.craft = g.craft; }
+  }
+  if (g.people) {
+    character.tomes = character.tomes || [];
+    if (!character.tomes.includes(g.people)) { character.tomes.push(g.people); out.people = g.people; }
+  }
+  return out;
+}
+
 export function addItem(character, incoming, catalog = {}, opts = {}) {
   let item;
   if (typeof incoming === "string") {
@@ -157,6 +190,13 @@ export function addItem(character, incoming, catalog = {}, opts = {}) {
       effects: clampEffects(incoming.effects),
       bonusTags: Array.isArray(incoming.bonusTags) ? incoming.bonusTags.slice(0, 4).map(String) : undefined,
       consumable: !!incoming.consumable,
+      // ⛔ R22 (ERIK 2026-09-01) — ONE MECHANISM. "Tomes are just a flavor way of describing an object
+      // that grants a skill when you have the skill points to use for it. We can dress them up as
+      // precursor artifacts — quest items — miracle grants… So one mechanism."
+      // ⚠️ THE OBJECT REMOVES THE ACCESS BARRIER, NEVER THE COST. `addItem` builds from a whitelist, so
+      // an ungated field would be silently dropped — which is how a grant becomes an item that promises
+      // a craft and confers nothing.
+      grants: normalizeGrants(incoming.grants),
       image: incoming.image
     };
   }
@@ -166,9 +206,15 @@ export function addItem(character, incoming, catalog = {}, opts = {}) {
     existing.qty += item.qty;
     recordItemAlias(existing, item.name); // remember the drifted phrasing
     if (!existing.id && item.id) Object.assign(existing, fromCatalog(catalog[item.id] || item, existing.qty)); // late catalog re-link
+    if (item.grants && !existing.grants) existing.grants = item.grants;   // R22: a merged stack keeps the grant
+    applyObjectGrants(character, existing);
     return existing;
   }
   if (character.inventory.length < 30) character.inventory.push(item);
+  // ⛔ R22 — THE OBJECT OPENS THE DOOR THE MOMENT IT IS HELD. Applied on BOTH exits of addItem: an item
+  // that merges into an existing stack still carries its grant, and wiring only this path would mean a
+  // second copy of a tome silently granted nothing. `applyObjectGrants` is idempotent, so both are safe.
+  applyObjectGrants(character, item);
   return item;
 }
 

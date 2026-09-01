@@ -491,6 +491,19 @@ export function domainGateFor(ab, character, traditionIndex, catalog = null, ski
   // SNG-089: an Accord craft is FREELY ACCESSED — ungated by origin/domain/ring-distance. It still
   // costs a point (base 1); the tuition is the journey to the waygate, not a domain gate.
   if (ab?.accord) return { allowed: true, penalty: 1, band: "accord" };
+  // ⛔ R22 — AN OBJECT THAT GRANTS A CRAFT REMOVES THE ACCESS BARRIER, AND ONLY THAT. A tome, a precursor
+  // artifact, a quest item and a miracle grant are one mechanism; holding it opens the door, and the
+  // character still pays the points, still meets the level, still has the breadth to hold it.
+  // ⚠️ THE BAND IS REPORTED AS `granted` RATHER THAN FAKED AS `primary` — the price must not silently
+  // become a home price. `bandCostFor` maps an unknown band from the verdict's own penalty, so a granted
+  // craft keeps whatever distance it truly sits at.
+  if (ab?.id && (character?.grantedAccess || []).includes(ab.id)) {
+    const real = (traditionIndex && character?.domains?.primary)
+      ? domainAccess(ab, null, character.domains, traditionIndex, domainOpts(character, catalog, traditionIndex, skillCapacity))
+      : null;
+    return { allowed: true, penalty: real?.penalty ?? 1, band: "granted", lean: real?.lean,
+      leanSurcharge: real?.leanSurcharge, reason: "an object you carry opens this craft to you" };
+  }
   if (!traditionIndex || !character?.domains?.primary) return { allowed: true, penalty: 1, band: "open" };
   return domainAccess(ab, null, character.domains, traditionIndex, domainOpts(character, catalog, traditionIndex, skillCapacity));
 }

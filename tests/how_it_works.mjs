@@ -2468,6 +2468,68 @@ console.log("\n── §39 · training is reachable in play ──");
   const broke = PR39.rankUpAbility(mk39(10, 0), "t39", rules39, { catalog: { t39: ab39 }, skillCapacity: sc39 });
   check("§39: …and an empty purse is refused rather than silently free", broke.ok === false);
 }
+/* ═════ §40 — R22: AN OBJECT GRANTS ACCESS, NEVER COST ═════ */
+// ⛔ ERIK: "Tomes are just a flavor way of describing an object that grants a skill when you have the skill
+// points to use for it. We can dress them up as precursor artifacts — quest items — miracle grants… So one
+// mechanism." ⚠️ So the field is keyed on WHAT IS GRANTED, not on the word `tome`.
+//
+// ⚠️ `character.tomes` HAD A READER AND NO WRITER — `acquirable` offered "a willing teacher of this people,
+// or their tome" and nothing in the engine, the app or content could ever fill the array. Teacher-only in
+// practice, for as long as the field has existed.
+console.log("\n── §40 · R22 · one mechanism, four flavours ──");
+{
+  const INV40 = await import("../engine/inventory.js");
+  const PR40 = await import("../engine/progression.js");
+  const TR40 = await import("../engine/traditions.js");
+  const SK40 = await import("../engine/skilltree.js");
+  const sc40 = rj("content/packs/core/rules/skill_capacity.json");
+  const v2_40 = (() => { try { return rj("content/packs/core/rules/traditions_v2.json"); } catch { return null; } })();
+  const idx40 = TR40.buildTraditionIndex(rj("content/packs/core/rules/traditions.json"), v2_40);
+
+  const anti40 = TR40.antipodeOf("umbral", idx40);
+  const gated = { id: "g40", tier: 5, tradition: anti40, nativeOrCombination: "native" };
+  const mk40 = () => ({ level: 50, domains: { primary: "umbral" }, inventory: [], skillPoints: 9 });
+
+  // ⛔ SHUT BEFORE, OPEN AFTER — and the gate must genuinely have been shut, or the test proves nothing.
+  const before40 = mk40();
+  check("§40: the craft is genuinely out of reach without the object",
+    PR40.domainGateFor(gated, before40, idx40).allowed === false,
+    JSON.stringify(PR40.domainGateFor(gated, before40, idx40)));
+
+  const holder = mk40();
+  INV40.addItem(holder, { name: "A Codex", kind: "relic", grants: { craft: "g40" } }, {});
+  check("§40: holding the object writes the access", (holder.grantedAccess || []).includes("g40"));
+  const v40 = PR40.domainGateFor(gated, holder, idx40);
+  check("§40: …and the door opens", v40.allowed === true, JSON.stringify(v40));
+
+  // ⛔ THE HALF THAT MATTERS: ACCESS ONLY. The band is reported as `granted` rather than faked as `primary`,
+  // so the craft keeps whatever distance it really sits at — here an ANTIPODE craft keeps its lean surcharge.
+  check("§40: the verdict does NOT pretend the craft is close to home", v40.band === "granted", v40.band);
+  check("§40: …it keeps the distance it truly sits at",
+    v40.penalty === PR40.domainGateFor(gated, before40, idx40).penalty,
+    `${v40.penalty} vs ${PR40.domainGateFor(gated, before40, idx40).penalty}`);
+  check("§40: …and the antipode surcharge survives the grant",
+    (v40.leanSurcharge || 0) > 0, JSON.stringify(v40.leanSurcharge));
+  check("§40: ⛔ the object removes ACCESS, never COST — the price is still a far price",
+    SK40.learnPointCost(gated, holder, sc40, v40) > SK40.tierPrice(gated, sc40),
+    `${SK40.learnPointCost(gated, holder, sc40, v40)} vs home ${SK40.tierPrice(gated, sc40)}`);
+
+  // ⚠️ IDEMPOTENT — two copies of a tome are not two grants.
+  INV40.addItem(holder, { name: "A Codex", kind: "relic", grants: { craft: "g40" } }, {});
+  check("§40: a second copy grants nothing twice",
+    holder.grantedAccess.filter(x => x === "g40").length === 1, JSON.stringify(holder.grantedAccess));
+
+  // ⛔ THE PEOPLE FLAVOUR FILLS THE FIELD THAT HAD NO WRITER.
+  const joiner = { level: 5, inventory: [], peopleDisposition: {}, teachers: {} };
+  INV40.addItem(joiner, { name: "Tome of a People", kind: "quest", grants: { people: "rootkin" } }, {});
+  check("§40: the people flavour writes `character.tomes`", (joiner.tomes || []).includes("rootkin"));
+
+  // ⚠️ AND A PLAIN OBJECT GRANTS NOTHING — the field is opt-in, not a default.
+  const plain = mk40();
+  INV40.addItem(plain, { name: "A Rock", kind: "misc" }, {});
+  check("§40: an ordinary object grants nothing",
+    !(plain.grantedAccess || []).length && !(plain.tomes || []).length);
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

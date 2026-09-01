@@ -5,7 +5,7 @@
 
 ---
 
-## R8 — Rank-2 training price ✅ RULED
+## R8 — Rank-2 training price ⛔ RETRACTED — superseded by R17 below
 
 **Price: `tierPrice + band` — the same as learning the craft.** One price idiom for both
 acquisition and depth. Not doubled.
@@ -130,6 +130,68 @@ Report the shape chosen and the tier reached at lean 0.0 / 0.5 / 1.0 so Erik can
 
 ---
 
+## R17 — Rank-2 training price ✅ RULED: `tierPrice`, no band (supersedes R8)
+
+⛔ **R8 is retracted.** It priced training at `tierPrice + band` on Aevi's argument that the
+Insight-dumper would be self-limiting through energy. **CCode's measurement killed that premise:**
+Reason is 33% of the energy pool at L20 but only **14% at L100** — the limiter fades exactly where
+the overflow appears. Aevi's reasoning held for early game and failed for the band that mattered.
+
+### ✅ THE RULING
+
+**Train a craft to rank 2 for `tierPrice` — no band component.**
+
+| tier | train-to-r2 cost |
+|---|---|
+| T1 | 1 |
+| T2 · T3 | 2 |
+| T4 · T5 | 3 |
+
+⚠️ **Cheaper than learning the craft** (which adds band). This reads correctly: **deepening
+something you already hold should cost less than acquiring something new.**
+
+⛔ **CCode's doubling fix is rejected** — it taxes the mechanism at its own purpose. See below.
+
+### Why — the Silas evidence (L30, measured 2026-09-01)
+
+**40 abilities: 5 at rank 3, 4 at rank 2, and 31 stuck at rank 1.**
+
+| rank 3 | uses | | rank 1 | uses |
+|---|---|---|---|---|
+| `order_sense` | 98 | | `dawn_surgery` | 0 |
+| `deathsense` | 49 | | `death_ward` | 0 |
+| `the-attended-end` | 46 | | `prism_ward` | 0 |
+| `palework` | 31 | | `radiant_lance` | 0 |
+| `the_raised_thing` | 21 | | `echo_memory` | 0 |
+
+⚠️ **The rank-1 crafts are not bad crafts.** Silas is a Death/Order character whose campaign runs on
+travel, study, plan, prepare. His `radiant_lance` has never come up — **not once.**
+
+➡️ **Practice ranks what the scenarios call for. Training is the ONLY path for the other 31.**
+Raising the price punishes the exact case the mechanism exists to serve: a player whose craft is
+viable but whose campaign never asks for it.
+
+**And the surplus is a projection, not a live condition** — Silas banks **2 skill points at L30.**
+
+### ✅ Erik's ruling on the design question underneath
+
+> *"I think it's pretty universal — a high level character you'd expect to not have many r1 skills left."*
+
+**Rank 2 is the natural resting state of a craft you have carried a long time, not a selective
+investment.** A high-level character should have few rank-1 crafts remaining.
+
+➡️ **No cap on how many crafts may be held at rank 2.** `tierPrice` is correct as written.
+➡️ The Insight-dumper's surplus is **not a leak** — it funds a broad shelf trained to rank 2.
+   That is a legitimate build sitting opposite the specialist: **breadth-at-rank-2 vs
+   depth-at-rank-3.** Rank 3 stays GM-only and remains the thing breadth cannot buy.
+
+### ✅ Incidental validation
+
+`brace`, `strike_basic`, `break_away`, `raise_alarm` all sit on Silas's L30 sheet at rank 1 with
+0–1 uses. **The baseline-kit retirement is well-aimed.**
+
+---
+
 ## Build order (CCode — nothing blocked on Erik after this)
 
 | # | step | status |
@@ -137,7 +199,7 @@ Report the shape chosen and the tier reached at lean 0.0 / 0.5 / 1.0 so Erik can
 | 1 | ⛔ fix the seven `levelReq`-as-tier readers | build now — blocks step 3 |
 | 2 | R1 prices + additive bands; retire `crossClass.costMultiplier` | build now |
 | 3 | tier ceilings — R10 ladder (5/4/3/2) + **R16 lean-derived antipode ceiling** | ✅ unblocked; after step 1 |
-| 4 | rank ceiling 3 + train-to-rank-2 at `tierPrice + band` (R8) | build now |
+| 4 | rank ceiling 3 + train-to-rank-2 at **`tierPrice`, no band (R17 — supersedes R8)** | ✅ build now |
 | 5 | drop `castable:false` + the seven foreclosure sites | build now |
 | 6 | `lean` + antipode surcharge, S = 2, dial A (R9) | build now |
 | 7 | `applyBacklash` takes the ability; read `backlashRung` as authored (R5 corrected) | build now |
@@ -152,6 +214,6 @@ never get.
 
 | # | item |
 |---|---|
-| OI-11b | Whether the dumper build needs correction — revisit after CCode's Reason-2 energy check (R8) |
+| OI-11b | ✅ **CLOSED R17** — energy check failed; dumper surplus ruled legitimate (breadth-at-r2) |
 | — | `PROPOSAL_ccode_unlock_levels.md` option 2 — needs top-level and L1-visibility numbers |
 | — | Tome vs artifact — one mechanism or two? |

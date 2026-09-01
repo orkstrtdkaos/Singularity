@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.289";
+const APP_VERSION = "1.9.290";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9752,7 +9752,7 @@ function renderSkillWheel(selectedId = null, status = "") {
     : sel.band === "secondary" ? (sel.allowed ? "your secondary — up to Tier III" : "🔒 your secondary tops out at Tier III")
     : sel.band === "tertiary" ? (sel.allowed ? "your tertiary — up to Tier II" : "🔒 your tertiary tops out at Tier II")
     : sel.band === "folk" ? "open — a folk craft of the Valley"
-    : sel.band === "far" ? `costs more — ${sel.penalty}× skill points, ${Math.max(2, sel.penalty)} steps out`
+    : sel.band === "far" ? `costs more — +${CONTENT.skillCapacity?.bandCost?.far ?? 2} skill points, ${Math.max(2, sel.penalty)} steps out`
     : "learnable") : "";
   const sealedSel = sel && sel.isPrecursor && !sel.precursorUnlocked; // SNG-129: narrative-locked precursor
   const details = sel ? `<div class="map-details">

@@ -2153,6 +2153,55 @@ console.log("\n── §35 · every tier question goes through abilityTier ─�
   check("§35: no reader treats `levelReq` as the tier any more",
     offenders35.length === 0, offenders35.join(", "));
 }
+/* ═════ §36 — R1: DISTANCE IS ADDITIVE, AND THE PRICE TABLE IS THE RULING ═════ */
+// ⛔ ERIK 2026-08-31 R1. Tier prices compressed to 1·2·2·3·3 and distance made ADDITIVE:
+//     learnPointCost = tierPrice + band,  band 0 home / 1 near / 2 far·antipode
+// ⚠️ IT WAS `tierPrice × penalty`, which priced a far Tier-V at 15 — prohibitive rather than expensive.
+// R1: "a dedicated generalist should reach far-ring capstone mastery in late game." It is now 5.
+//
+// ⛔ THIS GATE IS R1’S OWN PUBLISHED TABLE, CELL BY CELL. If a later tune moves a number, this goes red
+// and someone must change the ruling on purpose rather than discover the drift in play.
+console.log("\n── §36 · R1 · distance is additive, and the table is the ruling ──");
+{
+  const SK36 = await import("../engine/skilltree.js");
+  const sc36 = rj("content/packs/core/rules/skill_capacity.json");
+  const ch36 = { domains: { primary: "umbral" } };
+  const ab36 = (tier) => ({ id: "probe36", tier, tradition: "umbral" });
+  const price = (tier, band) => SK36.learnPointCost(ab36(tier), ch36, sc36, { band, allowed: true });
+
+  // R1’s table, transcribed: [tier, home, near, far]
+  const R1_TABLE = [[1,1,2,3],[2,2,3,4],[3,2,3,4],[4,3,4,5],[5,3,4,5]];
+  for (const [t, home, near, far] of R1_TABLE) {
+    check(`§36: R1 · tier ${t} costs ${home}/${near}/${far} at home/near/far`,
+      price(t, "primary") === home && price(t, "adjacent") === near && price(t, "far") === far,
+      `got ${price(t, "primary")}/${price(t, "adjacent")}/${price(t, "far")}`);
+  }
+
+  // ⛔ ADDITIVE, NOT MULTIPLICATIVE — the property, not just the numbers. Under the old × rule the gap
+  // between home and far GREW with tier; under R1 it is CONSTANT, which is what "additive" means.
+  const gaps = R1_TABLE.map(([t]) => price(t, "far") - price(t, "primary"));
+  check("§36: the far surcharge is the SAME at every tier (that is what additive means)",
+    gaps.every(g => g === gaps[0]), `gaps: ${gaps.join(", ")}`);
+  check("§36: …and it equals the authored far band", gaps[0] === (sc36.bandCost?.far ?? 2), `${gaps[0]}`);
+
+  // ⚠️ THE ANTIPODE IS PRICED AS ORDINARY FAR GROUND. R9 will later add a lean surcharge on top; until
+  // then it must cost exactly what any far people costs, or the surcharge is measured from the wrong base.
+  check("§36: the antipode is priced as far ground, no more",
+    price(5, "antipode") === price(5, "far"), `${price(5, "antipode")} vs ${price(5, "far")}`);
+
+  // ⛔ FAR TIER-V IS 5, NOT 15. The single number R1 called out by name.
+  check("§36: R1’s headline — a far Tier-V costs 5 (it was 15)", price(5, "far") === 5, `${price(5, "far")}`);
+
+  // the band table is DATA, so a ruling can move it without a code change
+  check("§36: the band costs are authored, not hardcoded",
+    sc36.bandCost && sc36.bandOf && Object.keys(sc36.bandOf).length >= 8,
+    JSON.stringify(sc36.bandCost));
+  check("§36: every band domainAccess can return has a cost",
+    ["open","folk","primary","secondary","tertiary","acquired","adjacent","far","antipode"]
+      .every(b => sc36.bandOf[b] !== undefined),
+    ["open","folk","primary","secondary","tertiary","acquired","adjacent","far","antipode"]
+      .filter(b => sc36.bandOf[b] === undefined).join(", "));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

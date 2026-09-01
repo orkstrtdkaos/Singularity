@@ -15,18 +15,18 @@
   "11": 12,
   "12": 13
  },
- "tierPrice": {
-  "1": 1,
-  "2": 2,
-  "3": 3,
-  "4": 4,
-  "5": 5
- },
+ "tierPrice": {"1": 1, "2": 2, "3": 2, "4": 3, "5": 3},
+  "_tierPrice_R1": "⛔ ERIK 2026-08-31 R1 — compressed from the linear 1/2/3/4/5. Two natural investment steps (T1→T2 and T3→T4) instead of five flat ones, so a capstone is dear but not prohibitive.",
+  "bandCost": {"home": 0, "near": 1, "far": 2},
+  "_bandCost_R1": "⛔ R1 — DISTANCE IS ADDITIVE, NOT MULTIPLICATIVE. learnPointCost = tierPrice + band. Far T5 drops from 15 to 5. Intent: distance should make cross-domain learning meaningfully more expensive, not prohibitive — a dedicated generalist reaches far-ring capstone mastery in late game.",
+  "bandOf": {"home": "home", "near": "near", "open": "home", "folk": "home", "primary": "home", "secondary": "home", "tertiary": "home", "acquired": "home", "adjacent": "near", "far": "far", "antipode": "far"},
+  "_bandOf": "⚠️ domainAccess returns NINE band names; R1 names THREE costs. This is the mapping, and it is DATA so a ruling can move it without touching code. ⛔ NOTE `adjacent` → near (+1): kin to your primary was FREE before R1, and R1 only reaches its own far-T5=5 figure if the bands are 0/1/2. Flagged to Erik as the one reading R1 did not state outright.",
  "tierPriceNote": "SNG-260 §D / SNG-261 §A — what a craft is WORTH, by its levelReq tier. Erik: 'a Tier-II costs 2, a Tier-III costs 3. Power costs more.' Composes MULTIPLICATIVELY with the distance term (domain ring penalty, or the cross-class multiplier when domains are unset), so a far Tier-III is genuinely dear and a near Tier-I stays 1. The catalog holds 28 abilities at levelReq 4 and 26 at levelReq 5, so the ladder must reach T-V (SNG-261 §A); this default is LINEAR — whether T-IV/V accelerate (4/6 rather than 4/5) is Erik's dial. Earned growth (practice, braids, discoveries) never comes through this table.",
  "beyondTable": "level + 1",
  "rule": "LEARN a new ability only while distinct-ability count < skillsKnownByLevel[level]. At the cap, points BANK until the next level widens it — they cannot be converted to depth. Emergence combos/branches (SNG-010), crit-discoveries, and ripe aspirations do NOT count against skill points — earned techniques are free growth — but they DO consume breadth, which is why capacity still binds the practising character even though points bind the paying one.",
  "crossClass": {
   "ratified": "Erik 2026-07-06 — soft class cap: secondary-class abilities cost double, no hard rank ceiling",
+    "supersededBy": "R1 (Erik 2026-08-31) — distance is additive and priced by BAND, not by a class multiplier. `costMultiplier` is no longer read by learnPointCost; it survives only as the legacy fallback for a character with no domains set.",
   "homeClass": "the character's origin power system (harmonic|radiant|valley_craft); precursor is learned-only",
   "costMultiplier": 2,
   "note": "Learning OR ranking an ability whose powerSystem is NOT the character's home class costs 2x skill points. No hard rank-2 ceiling — you CAN master a secondary class, it just costs. Preserves specialist-vs-generalist tension via price, not a wall. Stacks with the existing cross-training +1 levelReq. Precursor point-spend (after unlock) also pays the multiplier if precursor isn't home."

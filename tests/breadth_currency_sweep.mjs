@@ -107,10 +107,20 @@ console.log("");
 check("§D: tier is PRICED — a Tier-III costs strictly more than a Tier-I (it was flat before)",
   tierPrice({ levelReq: 3 }, CAP) > tierPrice({ levelReq: 1 }, CAP),
   `T-I ${tierPrice({ levelReq: 1 }, CAP)} vs T-III ${tierPrice({ levelReq: 3 }, CAP)}`);
-check("§261 §A: the price ladder reaches T-V — the catalog has abilities at levelReq 4 and 5",
-  tierPrice({ levelReq: 5 }, CAP) > tierPrice({ levelReq: 4 }, CAP)
-  && tierPrice({ levelReq: 4 }, CAP) > tierPrice({ levelReq: 3 }, CAP),
-  `T-III ${tierPrice({ levelReq: 3 }, CAP)} · T-IV ${tierPrice({ levelReq: 4 }, CAP)} · T-V ${tierPrice({ levelReq: 5 }, CAP)}`);
+// ⛔ R1 (ERIK 2026-08-31) REPLACED THE LADDER THIS GATE WAS WRITTEN FOR. It asserted STRICTLY increasing
+// (1<2<3<4<5). R1 compressed it to 1·2·2·3·3 deliberately: "two natural investment steps (T1→T2 and
+// T3→T4) instead of five flat ones". ⚠️ THE OLD ASSERTION WOULD NOW BLOCK THE RULING — a gate defending
+// a rule its author had already retired. Rewritten to assert R1's SHAPE, which is a stronger claim than
+// "goes up": non-decreasing, topping out at T-IV/T-V, with exactly two rises.
+const LADDER = [1, 2, 3, 4, 5].map(t => tierPrice({ tier: t }, CAP));
+check("§261 §A / R1: the price ladder never goes DOWN as tier rises",
+  LADDER.every((v, i) => i === 0 || v >= LADDER[i - 1]), `ladder: ${LADDER.join(" · ")}`);
+check("§261 §A / R1: it reaches its top at T-IV/T-V, so a capstone is the dearest thing you can buy",
+  LADDER[4] === Math.max(...LADDER) && LADDER[3] === Math.max(...LADDER), `ladder: ${LADDER.join(" · ")}`);
+check("§261 §A / R1: EXACTLY TWO investment steps — T1→T2 and T3→T4, as ruled",
+  LADDER.filter((v, i) => i > 0 && v > LADDER[i - 1]).length === 2
+  && LADDER[1] > LADDER[0] && LADDER[3] > LADDER[2],
+  `ladder: ${LADDER.join(" · ")} — rises at ${LADDER.map((v, i) => i > 0 && v > LADDER[i-1] ? `T${i}→T${i+1}` : null).filter(Boolean).join(", ") || "nowhere"}`);
 check("§D: tier COMPOSES with distance — a cross-class Tier-III costs more than an in-class Tier-III",
   learnPointCost({ levelReq: 3, powerSystem: "harmonic" }, buyerFor(20), CAP, null)
   > learnPointCost({ levelReq: 3, powerSystem: "valley_craft" }, buyerFor(20), CAP, null));

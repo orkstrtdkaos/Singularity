@@ -230,11 +230,34 @@ export function tierPrice(ability, skillCapacity) {
  *  already discount that upstream) and the cross-class multiplier otherwise. A far Tier-III is genuinely
  *  dear; a near Tier-I stays 1. Never below 1 — and nothing EARNED comes through here at all: practice,
  *  braids and discoveries route around this function by design, and must keep doing so (SNG-260 §D item 5). */
+/** ⛔ R1 (Erik 2026-08-31) — DISTANCE IS ADDITIVE. `learnPointCost = tierPrice + band`, band 0 home /
+ *  1 near / 2 far·antipode. It was `tierPrice × penalty`, which made a far Tier-V cost 15 — prohibitive
+ *  rather than expensive. It is now 5. ⚠️ The BAND TABLE IS DATA (`skill_capacity.bandCost` / `bandOf`),
+ *  so a later ruling moves the numbers without touching this function. */
+export function bandCostFor(verdict, character, ability, skillCapacity) {
+  const table = skillCapacity?.bandCost || { home: 0, near: 1, far: 2 };
+  const far = Number(table.far) || 2;
+  const key = verdict?.band ? skillCapacity?.bandOf?.[verdict.band] : null;
+  if (key !== undefined && key !== null) return Number(table[key]) || 0;
+
+  // ⛔ AN UNMAPPED BAND MUST NOT BE GUESSED. `band` has TWO OWNERS in this codebase: the domain bands
+  // above, and the PEOPLE-STANDING bands (kin/trusted/known/neutral/estranged/…). Defaulting an
+  // unrecognised name to `far` silently overcharges; defaulting it to `home` silently undercharges.
+  // ⚠️ SO DERIVE IT FROM THE VERDICT'S OWN `penalty`, which every verdict carries: the pre-R1 scale was
+  // ×1 / ×2 / ×3 and R1's is +0 / +1 / +2, so `penalty - 1` IS the additive band. An old-style verdict,
+  // a synthetic one from a test, and a hand-built `{penalty: 1}` all price correctly with no lookup.
+  if (verdict && verdict.penalty != null) {
+    return Math.max(0, Math.min(far, (Number(verdict.penalty) || 1) - 1));
+  }
+
+  // ⚠️ LEGACY ONLY — no verdict at all (a character with no domains set). R1 superseded the cross-class
+  // multiplier, so the old ×2 becomes the nearest additive equivalent rather than silently vanishing.
+  return isCrossClass(ability, character) ? (Number(table.near) || 1) : 0;
+}
+
 export function learnPointCost(ability, character, skillCapacity, verdict = null) {
-  const distance = (character?.domains?.primary && verdict)
-    ? (Number(verdict.penalty) || 1)
-    : skillPointCost(ability, character, skillCapacity);
-  return Math.max(1, Math.round(tierPrice(ability, skillCapacity) * distance));
+  const v = (character?.domains?.primary && verdict) ? verdict : null;
+  return Math.max(1, tierPrice(ability, skillCapacity) + bandCostFor(v, character, ability, skillCapacity));
 }
 
 // ---------- SNG-BATCH-5 Phase 2: branch forks ----------

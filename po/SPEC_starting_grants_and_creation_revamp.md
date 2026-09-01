@@ -878,3 +878,111 @@ overflows eventually.
 Silas-like character are **genuine long-arc rewards**, reached by choosing Insight over seven other subs for
 decades. That is a much healthier shape than my flat model implied — the error made Erik's own design look
 more generous than it is.
+
+---
+
+# C7 — THE AVAILABLE POOL, AND WHETHER THE BALANCE ERIK WANTS EXISTS
+
+**Erik: *"look at all the skills available to the player at each level — they will be taking skills outside
+their home band. If I have extra skill points that means I can afford to splurge on an expensive cross
+class skill. If I do this all the time I should be point starved — if I only buy in my home band I'll be
+cap limited. That is the balance we're shooting for."***
+
+✅ **The balance exists. Measured, it holds from level 30 onward.** But two things about the pool change
+what "splurge" can mean.
+
+---
+
+## C7.1 — ⛔ THE ENTIRE CORPUS IS LEARNABLE FROM CHARACTER LEVEL 5
+
+| levelReq | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| crafts | 148 | 116 | 67 | 48 | **35** |
+
+⛔ **The highest `levelReq` in all 414 crafts is 5.** Cross-band adds one (`crossTraditionLevelPenalty: 1`),
+so **every craft in the game is reachable by character level 6.**
+
+⚠️ **The game runs to level 100. Levels 6–100 unlock NOTHING new** — they add only capacity (the cap) and
+points. **95% of the level range is economy, not content.**
+
+✅ **So "all the skills available at each level" has a short answer: all of them, from level 5.** The
+availability question I was implicitly modelling does not bind.
+
+---
+
+## C7.2 — ⛔ AND THERE IS NOTHING TO SPLURGE ON
+
+Under R1 prices the **dearest craft in the game** costs:
+
+| | home | far |
+|---|---|---|
+| most expensive single craft | **3** | **5** |
+
+⚠️ **A level-100 character earning 3–4 points per level affords the most expensive thing in the game in
+under two levels.** ⛔ **"Splurging on an expensive cross-class skill" is not a decision at high level — it
+is a rounding error.**
+
+⬜ **This is the gap between the intent and the numbers, and it is not fixed by tuning the cap.** For a
+splurge to feel like one, something must cost enough to hurt. Today the whole ladder spans **1 to 5 points**
+against a pool of hundreds. ⚠️ **R1 compressed T3–T5 to 2/3/3 deliberately** — that was the right call for
+*accessibility*, and its cost is that the top of the ladder stopped being a target.
+
+---
+
+## C7.3 — ✅ BUT THE HOME/FAR BALANCE ITSELF IS EXACTLY WHAT ERIK DESCRIBED
+
+**Silas-like accrual (17% into Insight), R1 prices, band 0 home / band 2 far:**
+
+| level | cap | ALL-HOME affords | ALL-FAR affords | |
+|---|---|---|---|---|
+| 10 | 11 | 10 | 5 | ⚠️ point-starved **either way** |
+| 30 | 31 | **39** | 18 | ✅ home **cap-limited** · far **point-starved** |
+| 50 | 51 | **71** | 34 | ✅ home cap-limited · far point-starved |
+| 100 | 101 | **175** | 84 | ✅ home cap-limited · far point-starved |
+
+⛔ **THAT IS THE TARGET, MET.** A home specialist runs out of slots; a dedicated cross-class buyer runs out
+of points. The player chooses where to sit.
+
+**The crossover — what share of picks may be far-band before points bind:**
+
+| level | f\* |
+|---|---|
+| 10 | ⚠️ **—** (point-starved even at all-home) |
+| 30 | **24%** |
+| 50 | **37%** |
+| 100 | **68%** |
+
+⚠️ **THE LINE DRIFTS, AND THAT IS THE ONE THING WORTH A DECISION.** At L30 a quarter of your picks may be
+cross-class; at L100, two thirds. **The game gets steadily more permissive of reaching outside your domain
+as it goes on.**
+
+⬜ **Whether that is right is Erik's call.** A defensible reading: a late-game character *should* be able to
+range widely, and the drift is the reward for surviving. **The other reading:** the specialist/generalist
+tension is the point, and it should not dissolve at high level.
+
+⚠️ **Note it is the CAP that drives the drift, not the prices.** `level + 1` grows linearly while points
+grow at 2–4 per level, so the ratio between them moves regardless of what a craft costs.
+
+---
+
+## C7.4 — ⚠️ AND THE EARLY GAME IS POINT-STARVED IN BOTH BANDS
+
+At L10 a Silas-like character affords **10 crafts against a cap of 11** at home, and **5** at far.
+
+✅ **Arguably correct** — early choices should hurt. ⚠️ **But it means the cap does nothing before ~L12**,
+so the "cap-limited home specialist" experience Erik describes is a mid-game-onward phenomenon, not the
+shape of the whole game.
+
+---
+
+## C7.5 — ⬜ WHAT I WOULD PUT TO ERIK
+
+1. ✅ **The home/far balance is achieved.** No change needed for the thing he named.
+2. ⬜ **The splurge is not.** Nothing costs enough to be a decision past ~L10. If a splurge should exist,
+   something needs a price well above 5 — a capstone tier, a braid, or a cross-domain craft priced by
+   *distance* rather than by band. ⚠️ **`ringDistance` is already computed and already 0–12** — a cost that
+   used the real distance rather than a 3-band bucket would give the top of the range room without touching
+   the bottom.
+3. ⬜ **The drift from 24% to 68%.** Deliberate or not.
+4. ⛔ **And the corpus is fully unlocked at level 5** — worth knowing before any further economy tuning,
+   because it means every lever past L5 is a *quantity* lever and none is a *content* lever.

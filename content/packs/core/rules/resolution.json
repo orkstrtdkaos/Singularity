@@ -242,6 +242,8 @@
   "_levelCostCap": "SNG-266/1b (Erik approved): cost rises with level up to this rung, then holds flat. L1-40 unchanged; L41-100 cost 4,000 each instead of climbing to 9,900. Remove the field and the curve is bit-identical to the old one.",
   "subPointPerLevel": 1,
   "unlockTopLevel": 60,
+  "trainingUnlockLevel": 10,
+  "_trainingUnlockLevel": "⛔ R20 (Erik 2026-09-01) — R19's TIER GATE IS RETRACTED. It gated training on tier N+2 opening, which under R12's bands meant T1 at L21, T2 at L35, T3 at L48. Measured against Silas at L30 it reached 3% of his 31 stuck rank-1 crafts; the N+1 variant reached 16%. ⚠️ NEITHER TIER GATE WORKS, BECAUSE A PLAYED SHEET IS NOT TIER-SORTED — his stuck crafts span T1–T5 plus 13 custom records carrying no tier at all. R17's whole case was those 31 crafts. What R20 keeps from R19's intent: you cannot deepen at level 1, so acquisition still leads (R14: 1–10 personal). What it drops: the pretence that a shelf sorts by tier.",
   "tierUnlockBands": {
     "1": {"start": 1,  "end": 1},
     "2": {"start": 8,  "end": 20},

@@ -2392,12 +2392,21 @@ console.log("\n── §38 · the unlock curve, the training price, and the tier
 
   // ⛔ R19 — TIER N OPENS FOR TRAINING WHEN TIER N+2 OPENS.
   const at = (tier, level) => PR38.trainableTier({ tier }, { level }, rules38);
-  check("§38: R19 · a tier-1 craft is not trainable before tier 3 opens",
-    at(1, 5).ok === false && at(1, 99).ok === true, JSON.stringify(at(1, 5)));
-  check("§38: R19 · …and each tier opens with the one two above it",
-    at(1, 99).opensAt === rules38.leveling.tierUnlockBands["3"].start
-    && at(2, 99).opensAt === rules38.leveling.tierUnlockBands["4"].start
-    && at(3, 99).opensAt === rules38.leveling.tierUnlockBands["5"].start);
+  // ⛔ R20 RETRACTED R19. The tier N+2 gate put T1 at L21, T2 at L35, T3 at L48 — and measured against
+  // Silas (L30, 31 crafts stuck at rank 1) it reached 3% of them; the N+1 variant reached 16%.
+  // ⚠️ NEITHER TIER GATE WORKS, BECAUSE A PLAYED SHEET IS NOT TIER-SORTED: his stuck crafts run T1–T5 plus
+  // 13 custom records with no tier at all. R17’s entire case was those 31 crafts.
+  // ✅ R20: one global threshold. Acquisition still leads — you cannot deepen at level 1 — but the shelf is
+  // no longer pretended to sort by tier.
+  const openAt38 = rules38.leveling.trainingUnlockLevel;
+  check("§38: R20 · training is shut before the global threshold",
+    at(1, openAt38 - 1).ok === false && at(3, openAt38 - 1).ok === false);
+  check("§38: R20 · …and open at it, for every buyable tier at once",
+    at(1, openAt38).ok === true && at(2, openAt38).ok === true && at(3, openAt38).ok === true,
+    `T1 ${at(1, openAt38).ok} T2 ${at(2, openAt38).ok} T3 ${at(3, openAt38).ok} at L${openAt38}`);
+  check("§38: R20 · …so the gate no longer varies by tier at all",
+    at(1, 99).opensAt === at(3, 99).opensAt,
+    `${at(1, 99).opensAt} vs ${at(3, 99).opensAt}`);
   // ⚠️ OI-21 — there is no tier 6 or 7, so T4/T5 have no gate to open. Erik deferred the pass; until then
   // they are practice-and-GM only, which fits "the deepest things cannot be bought."
   check("§38: R19 · tier 4 and 5 cannot be trained at all (OI-21 default)",
@@ -2411,6 +2420,53 @@ console.log("\n── §38 · the unlock curve, the training price, and the tier
   const r2 = PR38.rankUpAbility(r2char, "x", rules38, { catalog: { x: { id: "x", tier: 1 } }, skillCapacity: sc38 });
   check("§38: …but rank 2 can, at tierPrice", r2.ok === true && r2.cost === SK38.tierPrice({ tier: 1 }, sc38),
     JSON.stringify(r2));
+}
+/* ═════ §39 — TRAINING IS REACHABLE IN PLAY, NOT ONLY IN THE ENGINE ═════ */
+// ⛔ THE FOURTH DOOR, CAUGHT IN THE ACT. `rankUpAbility` was BUILT, EXPORTED, GATED and IMPORTED BY app.js
+// — and never called. R17 priced training and R20 opened it at level 10, and BOTH WERE INERT: a mechanism
+// with a price, a gate, a test suite, and no way for a player to touch it.
+//
+// ⚠️ AUTHORED → REGISTERED → LOADED → READ. Three of four passed and it looked finished.
+// This gate asserts the fourth: the button exists, it carries the id, and a handler calls the engine.
+console.log("\n── §39 · training is reachable in play ──");
+{
+  const app39 = readFileSync(join(root, "app.js"), "utf8");
+  const code39 = app39.split(/\r?\n/).map(l => l.replace(/\/\/.*$/, "")).join("\n");
+
+  check("§39: app.js CALLS rankUpAbility, not merely imports it",
+    /rankUpAbility\s*\(\s*character/.test(code39),
+    "imported and never called is exactly the defect this gate exists for");
+  check("§39: …a training control is rendered against an owned craft",
+    /data-train=/.test(code39));
+  check("§39: …and a handler is bound to it",
+    /querySelectorAll\(\s*"\[data-train\]"\s*\)/.test(code39));
+  check("§39: the control is built from the ENGINE’s gate, not a second opinion",
+    /trainableTier\s*\(/.test(code39) && /tierPrice\s*\(/.test(code39),
+    "the price and the gate must come from the same functions the purchase charges");
+
+  // ⛔ AND IT MUST ACTUALLY WORK. Not a source scan — run the engine the button runs.
+  const PR39 = await import("../engine/progression.js");
+  const SK39 = await import("../engine/skilltree.js");
+  const rules39 = rj("content/packs/core/rules/resolution.json");
+  const sc39 = rj("content/packs/core/rules/skill_capacity.json");
+  const ab39 = { id: "t39", name: "Probe", tier: 2 };
+  const mk39 = (level, points) => ({ level, skillPoints: points, abilities: [{ abilityId: "t39", level: 1 }] });
+
+  const tooYoung = PR39.rankUpAbility(mk39(5, 9), "t39", rules39, { catalog: { t39: ab39 }, skillCapacity: sc39 });
+  check("§39: R20 · a level-5 character cannot train — and is told WHEN, not just no",
+    tooYoung.ok === false && /level \d+/.test(tooYoung.why), JSON.stringify(tooYoung));
+
+  const ready = mk39(10, 9);
+  const bought = PR39.rankUpAbility(ready, "t39", rules39, { catalog: { t39: ab39 }, skillCapacity: sc39 });
+  const price = SK39.tierPrice(ab39, sc39);
+  check("§39: R20 · at level 10 it trains, at R17’s tier price",
+    bought.ok === true && bought.cost === price, JSON.stringify(bought));
+  check("§39: …and the rank and the points both actually moved",
+    ready.abilities[0].level === 2 && ready.skillPoints === 9 - price,
+    `rank ${ready.abilities[0].level}, points ${ready.skillPoints}`);
+
+  const broke = PR39.rankUpAbility(mk39(10, 0), "t39", rules39, { catalog: { t39: ab39 }, skillCapacity: sc39 });
+  check("§39: …and an empty purse is refused rather than silently free", broke.ok === false);
 }
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));

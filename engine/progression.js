@@ -239,30 +239,34 @@ export function spendSubPoint(character, sub, rules) {
   return true;
 }
 
-/** Rank up an owned ability (1 skill point, or FREE via practice). Level-gated. */
-/** ⛔ R19 (ERIK 2026-09-01) — RANK-UP PURCHASING IS GATED BY TIER ACCESS.
+/** ⛔ R20 (ERIK 2026-09-01) — NO TIER GATE ON TRAINING. IT UNLOCKS GLOBALLY AT LEVEL 10.
  *
- *  Erik: "we make purchasing a rank up only eligible at a certain point… opening Tier 3 access lets you
- *  rank up your r1 tier1 skills." **Tier N becomes trainable when tier N+2 opens.**
+ *  ⚠️ R19 IS RETRACTED. It gated rank-up on tier N+2 opening; under R12's bands that put T1 at L21, T2 at
+ *  L35, T3 at L48. Measured against Silas (L30, 31 crafts stuck at rank 1) the gate reached **3%** of
+ *  them, and the N+1 variant I proposed reached 16%.
  *
- *  ✅ WHY A GATE AND NOT A PRICE: under R17 training is cheap (`tierPrice`). Available from level 1 a
- *  player could deepen instead of broaden, inverting R14's bands — acquisition first, depth second,
- *  matching 1–10 personal / 10–30 party building. It also gives a tier unlock a SECOND payload: opening
- *  T3 no longer only means "T3 crafts are buyable", it means "your whole T1 shelf just became improvable."
+ *  ⛔ NEITHER TIER GATE WORKS, BECAUSE A PLAYED SHEET IS NOT TIER-SORTED. His stuck crafts run T1–T5 plus
+ *  13 custom records with no tier at all. R17's entire case for cheap training was those 31 crafts, and a
+ *  tier gate reached almost none of them. ✅ Corroborated across all 16 saves: 12 of 16 characters hold
+ *  ZERO rank-2 crafts, and the most anyone banks is 3 skill points. Rank-up barely happens; the gate was
+ *  throttling something already rare.
  *
- *  ⚠️ T4 AND T5 HAVE NO GATE, because there is no T6 or T7. Erik: "T5s are mostly one rank, but we should
- *  take a pass at T4s and T5s eventually." OI-21. Until ruled they are practice-and-GM only, which fits
- *  "the deepest things cannot be bought". Returns {ok, why, opensAt}. Pure. */
+ *  ✅ WHAT SURVIVES OF R19'S INTENT: you still cannot deepen at level 1 — acquisition leads (R14: 1–10
+ *  personal), deepening follows. ⛔ WHAT IT DROPS: the pretence that a character's shelf sorts by tier.
+ *
+ *  ⚠️ OI-21 IS UNCHANGED — tier IV/V stay practice-and-GM only until Erik's pass. That is not a tier
+ *  GATE on training; it is a statement that the deepest crafts are not bought at all.
+ *  Returns {ok, why, opensAt}. Pure. */
+function num(v, d) { const n = Number(v); return Number.isFinite(n) ? n : d; }
+
 export function trainableTier(ability, character, rules) {
   const t = abilityTier(ability);
-  const bands = rules?.leveling?.tierUnlockBands;
-  const gateTier = t + 2;
-  if (gateTier > 5) return { ok: false, why: `tier ${t} crafts deepen through use, not training`, opensAt: null };
-  const opensAt = Number(bands?.[String(gateTier)]?.start);
-  if (!Number.isFinite(opensAt)) return { ok: true, why: null, opensAt: null };   // no bands authored — do not invent a wall
+  const topBought = num(rules?.leveling?.maxTrainableTier, 3);
+  if (t > topBought) return { ok: false, why: `tier ${t} crafts deepen through use, not training`, opensAt: null };
+  const opensAt = num(rules?.leveling?.trainingUnlockLevel, 10);
   return (character?.level || 1) >= opensAt
     ? { ok: true, why: null, opensAt }
-    : { ok: false, why: `training a tier-${t} craft opens with tier ${gateTier}, at level ${opensAt}`, opensAt };
+    : { ok: false, why: `training opens at level ${opensAt}`, opensAt };
 }
 
 export function rankUpAbility(character, abilityId, rules, opts = {}) {

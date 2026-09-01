@@ -13321,9 +13321,15 @@ await (async () => {
     const treeSrc349 = readFileSync(join(root, "engine/skilltree.js"), "utf8");
     const progSrc349 = readFileSync(join(root, "engine/progression.js"), "utf8");
 
-    // ⚠️ GATED ON THE CLAIM, NOT ON THE WORDING. "deepen" is a fine word — the crafts DO deepen. What must
-    // never return is the claim that POINTS do it. So the pattern is points-near-deepen, not "deepen".
-    const claimsPointsDeepen = /points?\s+(?:now\s+)?deepen|deepen\s+(?:owned\s+)?(?:skills?|crafts?)\s*(?:with|using|by\s+spending)|spend.{0,20}(?:to\s+)?deepen/i;
+    // ⛔ R17 RETIRED THE RULE THIS GATE WAS WRITTEN FOR, AND IT WAS STILL PASSING. It forbade any claim that
+    // POINTS DEEPEN A CRAFT — true when depth was earned by use alone. R17 makes points buy rank 2.
+    // ⚠️ IT SURVIVED ONLY BECAUSE THE NEW BUTTON'S WORDING DODGES THE REGEX. Clearer copy — "spend points to
+    // deepen" — would have turned it red FOR TELLING THE TRUTH. A gate that punishes accurate copy is worse
+    // than no gate, so it is re-aimed at the invariant that still holds.
+    //
+    // ✅ WHAT IS STILL TRUE, AND WORTH GUARDING: RANK 3 IS NEVER BOUGHT. Rank 2 has two roads (points or
+    // use); rank 3 has one, and no player-facing string may promise otherwise.
+    const claimsPointsDeepen = /(?:points?|spend\w*)[^.\n]{0,40}(?:rank\s*(?:3|III|iii)|master\w*)|(?:rank\s*(?:3|III)|master\w*)[^.\n]{0,30}(?:for|costs?)\s*\d*\s*points?/i;
     const offenders = [];
     for (const [file, src] of [["app.js", appSrc349], ["engine/skilltree.js", treeSrc349]]) {
       for (const line of src.split(/\r?\n/)) {
@@ -13331,8 +13337,8 @@ await (async () => {
         if (claimsPointsDeepen.test(line)) offenders.push(`${file}: ${line.trim().slice(0, 90)}`);
       }
     }
-    for (const o of offenders) console.log(`      claims points deepen a craft: ${o}`);
-    check("349: no player-facing string claims skill points DEEPEN a craft — depth is earned by use",
+    for (const o of offenders) console.log(`      promises rank 3 for points: ${o}`);
+    check("349: no player-facing string promises RANK 3 for points — that one is only ever earned",
       offenders.length === 0, offenders.join(" · "));
 
     // The true statement has to actually be present, or "no lie" is satisfied by saying nothing at all.
@@ -13357,8 +13363,16 @@ await (async () => {
     const sinks = (progSrc349.match(/character\.skillPoints = \(character\.skillPoints \|\| 0\) - |character\.skillPoints -= /g) || []).length;
     check("349: skill points still have exactly the sinks we think they have (learn, and the untriggered rank path)",
       sinks === 2, `${sinks} decrement sites in progression.js`);
-    check("349: …and LEARNING is the only one the app can reach — nothing in app.js calls rankUpAbility",
-      !/\brankUpAbility\s*\(/.test(appSrc349));
+    // ✅ THIS GATE RECORDED A DEFECT AS A KNOWN STATE, AND R17/R20 CLOSED IT. It read "LEARNING is the only
+    // one the app can reach — nothing in app.js calls rankUpAbility", which was TRUE and was the whole
+    // problem: the rank path was built, priced, gated and imported, and no player could touch it.
+    // ⚠️ The claim it was really making is that SKILL POINTS HAVE NO UNREACHABLE SINK. That claim survives;
+    // what changed is the answer. Both sinks are now reachable, so assert THAT rather than the old count.
+    check("349: BOTH point sinks are now reachable — the rank path has a caller (R17/R20)",
+      /\brankUpAbility\s*\(/.test(appSrc349),
+      "app.js imported it for a long time without ever calling it — the fourth door");
+    check("349: …and the control that spends the points is bound to a handler",
+      /data-train=/.test(appSrc349) && /querySelectorAll\(\s*"\[data-train\]"\s*\)/.test(appSrc349));
   }
 
   // SNG-348 — Erik: "it seems like the costs have risen… even my tertiary or primary seem to have most

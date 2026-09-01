@@ -76,14 +76,14 @@ import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open w
 import { addAssignment } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
-import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
+import { trainableTier, SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame, buildMergeAdjudicationPrompt, applyMergeVerdicts, mergeDigest, undoLastMerge } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
 import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
-import { isCrossClass, tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel, skillPointCost, learnPointCost, forkPending, forkPaths, chosenFork, setFork, rankExpression, abilityTier } from "./engine/skilltree.js";
+import { tierPrice, isCrossClass, tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel, skillPointCost, learnPointCost, forkPending, forkPaths, chosenFork, setFork, rankExpression, abilityTier } from "./engine/skilltree.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError } from "./engine/party.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.298";
+const APP_VERSION = "1.9.300";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13535,6 +13535,24 @@ function renderPlay(turn, opts = {}) {
         const order = [...FUNCTION_FAMILIES.filter(f => byFam[f]?.length), ...(byFam.OTHER ? ["OTHER"] : [])];
         const famLabel = f => f === "OTHER" ? "Other" : f.charAt(0) + f.slice(1).toLowerCase();
         const boostSet = new Set(character.boostedCrafts || []); // SNG-215 §A1
+        // ⛔ R17/R20 — THE TRAINING AFFORDANCE. `rankUpAbility` has existed and been gated for a while and
+        // `app.js` IMPORTED IT WITHOUT EVER CALLING IT — so R17's price and R20's threshold were both inert:
+        // a mechanism nobody could reach. This is the door.
+        //
+        // ⚠️ SHOWN, NOT HIDDEN, WHEN IT CANNOT BE AFFORDED. A craft you could train but cannot pay for is a
+        // decision the player should see coming; one they are simply too low-level for says WHEN, not just
+        // 'no'. The only silent case is a craft already past rank 1 — there is nothing to offer.
+        const trainLine = (a, ab) => {
+          if ((a.level || 1) !== 1) return "";                       // rank 2+ already, or GM-granted rank 3
+          if (ab?.progression === "stage") return "";                // CCODE-199: rides the bond, never bought
+          const gate = trainableTier(ab, character, CONTENT.rules);
+          const cost = tierPrice(ab, CONTENT.skillCapacity);
+          if (!gate.ok) return `<div class="hint train-locked">${esc(gate.why)}</div>`;
+          const afford = (character.skillPoints || 0) >= cost;
+          return `<button class="opt train ${afford ? "" : "locked"}" ${afford ? `data-train="${esc(a.abilityId)}"` : "disabled"}`
+            + ` title="${esc(afford ? `Deepen ${ab?.name || a.abilityId} to rank 2. Practice would get there too — this is the road for a craft the scenarios never call for.` : `You need ${cost} skill point${cost === 1 ? "" : "s"}; you have ${character.skillPoints || 0}.`)}">`
+            + `train to rank 2 — ${cost} point${cost === 1 ? "" : "s"}</button>`;
+        };
         const row = ({ a, ab }) => {
           const rank = rankExpression(character, ab, a.level, CONTENT.branchForks) || ab?.tree?.find(t => t.rank === a.level);
           const p = rankProgress(character, a.abilityId); // ability-arch v2: earned, not bought
@@ -13547,7 +13565,7 @@ function renderPlay(turn, opts = {}) {
             <span class="name entity-hover" data-entity="skill:${esc(a.abilityId)}">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${tierOf(abilityTier(ab))}">${tierOf(abilityTier(ab))}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
             <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>
             ${functionChips(ab)}${braidLine}
-            <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div></div>`;
+            <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div>${trainLine(a, ab)}</div>`;
         };
         const braidGroup = braids.length
           ? `<details class="skill-group braids-group" open><summary>✦ Braids <span class="cost">(${braids.length})</span></summary>${braids.sort((x, y) => (x.ab.levelReq || 1) - (y.ab.levelReq || 1)).map(row).join("")}</details>`
@@ -14390,6 +14408,18 @@ function renderPlay(turn, opts = {}) {
       if (free) dropAspiration(character, b.dataset.learn);
       saveCharacter(character);
       renderPlay(turn || character.activeScene?.lastTurn || null, { aside: `You ${free ? "have practiced your way into" : "begin learning"} ${fullCatalog()[b.dataset.learn]?.name}${free ? " — no point spent" : ""}.` });
+    } else alert(r.why);
+  };
+  // ⛔ R17/R20 — THE CALL SITE THAT DID NOT EXIST. Mirrors the [data-learn] handler above.
+  for (const b of app.querySelectorAll("[data-train]")) b.onclick = () => {
+    const id = b.dataset.train;
+    const r = rankUpAbility(character, id, CONTENT.rules, {
+      catalog: fullCatalog(), skillCapacity: CONTENT.skillCapacity, attributeGates: CONTENT.attributeGates
+    });
+    if (r.ok) {
+      saveCharacter(character);
+      renderPlay(turn || character.activeScene?.lastTurn || null,
+        { aside: `You drill ${fullCatalog()[id]?.name || id} until it answers — rank ${r.newRank}, for ${r.cost} point${r.cost === 1 ? "" : "s"}.` });
     } else alert(r.why);
   };
   const findBtn = document.getElementById("party-find");

@@ -68,7 +68,7 @@ export function runBackfill(character, { rules = {}, abilityCatalog = {}, emerge
     if (estBond >= grantAt && cdef?.bondGrants && !(character.abilities || []).some(a => a.abilityId === cdef.bondGrants.id)) {
       const g = cdef.bondGrants;
       character.customAbilities = character.customAbilities || {};
-      character.customAbilities[g.id] = { ...g, powerSystem: "learned", levelReq: 1, tree: g.tree || [] };
+      character.customAbilities[g.id] = { ...g, powerSystem: "learned", levelReq: 1, tier: 1, tree: g.tree || [] };
       character.abilities.push({ abilityId: g.id, level: 1 });
       granted = true;
     }

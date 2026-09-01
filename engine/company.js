@@ -10,6 +10,7 @@
 
 import { relationshipBand, isPartnerAdjacent } from "./npcs.js";
 import { companyPlaces } from "./ladder.js";
+import { abilityTier } from "./skilltree.js";
 
 export const COMPANY_ROLES = ["companion", "trainer", "liaison", "partner", "ally"];
 const RECRUIT_BANDS = ["devoted", "ally"]; // a bond this strong is willing to travel with you (relationshipBand)
@@ -196,12 +197,12 @@ export function curriculumFor(character, traditionId, { catalog = {}, traditionI
   const rank = (id) => {
     const i = order.indexOf(id);
     if (i >= 0) return i;                                   // the teacher's declared judgement wins
-    return order.length + (catalog[id]?.levelReq || 1);
+    return order.length + abilityTier(catalog[id]);
   };
   const sorted = [...ids].sort((a, b) => rank(a) - rank(b));
 
   const shape = (id) => ({
-    id, name: catalog[id]?.name || id, tier: catalog[id]?.levelReq || 1,
+    id, name: catalog[id]?.name || id, tier: abilityTier(catalog[id]),
     held: held.has(id),
     reachable: !held.has(id) && (catalog[id]?.levelReq || 1) <= level + 1   // within reach, not merely listed
   });

@@ -2141,17 +2141,32 @@ console.log("\n── §35 · every tier question goes through abilityTier ─�
 
   // ⚠️ NO READER MAY GO BACK. Line-scoped and comment-stripped — §31B was written five times before it
   // stopped matching its OWN prose, and this scanner will not repeat that.
-  const files35 = ["app.js", "engine/skilltree.js", "engine/progression.js", "engine/wheelgeom.js", "engine/npcsheet.js"];
+  //
+  // ⛔ THE FIRST VERSION OF THIS SCANNER WENT GREEN ON A PARTIAL SWEEP. It listed FIVE files by hand and
+  // matched only `tierOf(ab.levelReq)`. ⚠️ It missed `engine/intensity.js`, where `tierNum(ability?.levelReq
+  // || 1)` CHOSE THE SURGE BACKLASH HARM — a gate, not a badge — and `company.js`, whose own comment says
+  // "by tier". A survival check is only as wide as the range you hand it, so the range is now DERIVED:
+  // every engine module plus app.js, and the pattern covers optional chaining and all three tier helpers.
+  const files35 = ["app.js", ...readdirSync(join(root, "engine")).filter(f => f.endsWith(".js")).map(f => `engine/${f}`)];
   const offenders35 = [];
   for (const f of files35) {
     const src = readFileSync(join(root, f), "utf8").split(/\r?\n/);
     src.forEach((line, i) => {
       const code = line.replace(/\/\/.*$/, "").replace(/\/\*.*?\*\//g, "");
-      if (/tierOf\s*\(\s*(?:ab|ability)\??\.levelReq/.test(code)) offenders35.push(`${f}:${i + 1}`);
+      if (/tier(?:Of|Num|Price)\s*\(\s*[A-Za-z_$][\w$]*\??\.\w*[Ll]evelReq/.test(code)) offenders35.push(`${f}:${i + 1}`);
     });
   }
-  check("§35: no reader treats `levelReq` as the tier any more",
+  check("§35: no reader in ANY engine module treats `levelReq` as the tier",
     offenders35.length === 0, offenders35.join(", "));
+  check(`§35: …and the scan actually covered the engine (${files35.length} files)`,
+    files35.length >= 20, `only ${files35.length} files scanned — the range shrank`);
+
+  // ⛔ THE GATE THAT WOULD HAVE CAUGHT intensity.js: surge backlash harm must follow TIER, not levelReq.
+  const IN35 = await import("../engine/intensity.js");
+  const surgeRules35 = { surgeBacklashByTier: { "1": { health: 1, energy: 1 }, "5": { health: 9, energy: 9 } } };
+  check("§35: surge backlash reads the craft’s TIER, so tier 5 / levelReq 1 bites like a tier 5",
+    IN35.surgeBacklash({ tier: 5, levelReq: 1 }, surgeRules35).health === 9,
+    JSON.stringify(IN35.surgeBacklash({ tier: 5, levelReq: 1 }, surgeRules35)));
 }
 /* ═════ §36 — R1: DISTANCE IS ADDITIVE, AND THE PRICE TABLE IS THE RULING ═════ */
 // ⛔ ERIK 2026-08-31 R1. Tier prices compressed to 1·2·2·3·3 and distance made ADDITIVE:

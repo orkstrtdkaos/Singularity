@@ -254,7 +254,7 @@ export function registerDiscoveryAbility(character, discovery, catalog = {}, { a
     const nm = smartClamp(String(discovery.name), 60);
     const desc = smartClamp(String(discovery.description || `A craft discovered in play: ${discovery.name}.`), 400);
     def = {
-      id: discovery.id, name: nm, powerSystem: "learned", tradition: "learned", levelReq: 1, energyCost,
+      id: discovery.id, name: nm, powerSystem: "learned", tradition: "learned", levelReq: 1, tier: 1, energyCost,
       attribute: sources[0]?.attribute || "practical", functions, harmRung: "none", effectTags: [], nativeOrCombination: "combination",
       // SNG-263 §9: a discovery derives from the craft it came out of, for the same reason a braid does.
       ...(deriveMechanic(sources, { verbs: functions, cfg: craftMechanics }) ? { mechanic: deriveMechanic(sources, { verbs: functions, cfg: craftMechanics }) } : {}),

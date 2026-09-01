@@ -7,7 +7,7 @@
 // it never bypasses attribute gates or levelReq (those are enforced at learn/rank time;
 // a use only ever involves an already-owned ability).
 
-import { tierOf } from "./skilltree.js";
+import { tierOf, abilityTier } from "./skilltree.js";
 
 export const INTENSITIES = ["conserve", "standard", "surge"];
 
@@ -49,7 +49,7 @@ export function tierNum(levelReq) { // registry:internal
 /** Tier-scaled backlash cost for a surged ability (from surgeBacklashByTier). */
 export function surgeBacklash(ability, rules = {}) {
   const map = rules.surgeBacklashByTier || {};
-  return map[String(tierNum(ability?.levelReq || 1))] || map["1"] || { health: 3, energy: 4 };
+  return map[String(abilityTier(ability))] || map["1"] || { health: 3, energy: 4 };
 }
 
 /** Does a surge backlash fire? Base chance rises on a marginal/failed roll, near-nil on a
@@ -66,7 +66,7 @@ export function applySurgeBacklash(character, ability, rules = {}) {
   const b = surgeBacklash(ability, rules);
   character.health = Math.max(0, (character.health ?? 0) - (b.health || 0));
   character.energy = Math.max(0, (character.energy ?? 0) - (b.energy || 0));
-  return { health: -(b.health || 0), energy: -(b.energy || 0), tier: tierOf(ability?.levelReq || 1), tierNum: tierNum(ability?.levelReq || 1) };
+  return { health: -(b.health || 0), energy: -(b.energy || 0), tier: tierOf(abilityTier(ability)), tierNum: abilityTier(ability) };
 }
 
 /** A dial descriptor for the UI: each step's label, scaled energy, and surge warning. */

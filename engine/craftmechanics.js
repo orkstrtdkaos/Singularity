@@ -640,7 +640,7 @@ export function resolveHeal(ability, {
   ongoingHarm = [], staunch = false, priorHeals = 0
 } = {}) {
   const v = verb || (ability?.functions || []).find(f => shapeOfVerb(f, cfg)?.shape === "healing") || (ability?.functions || [])[0];
-  const m = mechanicFor(ability, { verb: v, tier: tier ?? ability?.levelReq, rank, intensity, cfg });
+  const m = mechanicFor(ability, { verb: v, tier: tier ?? ability?.tier ?? ability?.levelReq, rank, intensity, cfg });
   if (!m || m.shape !== "healing") {
     return { ok: false, why: "not a healing craft", rolled: 0, tapered: 0, soaked: 0, staunched: 0, ended: [], healed: 0, shape: m?.shape ?? null };
   }

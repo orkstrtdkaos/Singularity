@@ -12,6 +12,7 @@
 //   folk traditions — OPEN to anyone in the Valley (the near-centre holds a little of everything)
 // Braids/artifacts are the only sanctioned crossings (handled as combinations elsewhere).
 
+import { abilityTier } from "./skilltree.js";
 /** Build the query index from the loaded traditions.json. Reads the ring from `theGreatCircle`
  *  + per-tradition `ring`/`distances`/`opposite`, and the ability→tradition reverse map from each
  *  tradition's `abilities` list. Folk traditions are marked OPEN. */
@@ -297,13 +298,13 @@ export function crystallizeDomains(tags = {}, index) {
 export function reconcileStartingAbilities(earnedIds = [], domains = {}, catalog = {}, index) {
   const earned = earnedIds.filter(id => catalog[id]);
   if (!index || !domains?.primary) return { abilities: [...earned], grantedFromPrimary: null, grandfathered: [] };
-  const grandfathered = earned.filter(id => !domainAccess(catalog[id], catalog[id].levelReq || 1, domains, index).allowed);
+  const grandfathered = earned.filter(id => !domainAccess(catalog[id], abilityTier(catalog[id]), domains, index).allowed);
   const hasPrimary = earned.some(id => traditionOf(catalog[id], index) === domains.primary);
   let grantedFromPrimary = null;
   if (!hasPrimary) {
     const cand = Object.values(catalog)
       .filter(ab => traditionOf(ab, index) === domains.primary && !earned.includes(ab.id))
-      .sort((a, b) => (a.levelReq || 1) - (b.levelReq || 1))[0];
+      .sort((a, b) => abilityTier(a) - abilityTier(b))[0];
     if (cand) grantedFromPrimary = cand.id;
   }
   return { abilities: [...earned, ...(grantedFromPrimary ? [grantedFromPrimary] : [])], grantedFromPrimary, grandfathered };

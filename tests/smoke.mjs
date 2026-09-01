@@ -36,7 +36,7 @@ import { combinationThresholdMet, ripeAxisTouchCombinations } from "../engine/pr
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, familyClass, FUNCTION_FAMILIES, FAMILY_COLOR, FAMILY_GLYPH, FAMILY_SHAPE, shapeOfFamily } from "../engine/functions.js";
 import { arcSeed, fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "../engine/personalArc.js";
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "../engine/entityDetail.js";
-import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
+import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, intensityOptions } from "../engine/intensity.js";
 import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
@@ -1631,10 +1631,33 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
 
   // surge backlash pays by the ability's Tier (higher tier hurts more)
   const t1 = { levelReq: 1 }, t4 = { levelReq: 4 };
-  check("surge backlash scales by tier", surgeBacklash(t4, iRules).health > surgeBacklash(t1, iRules).health);
-  const victim = { health: 30, energy: 30 };
-  const paid = applySurgeBacklash(victim, t4, iRules);
-  check("applied surge backlash deducts health + energy", victim.health < 30 && victim.energy < 30 && paid.health < 0);
+  // ⛔ R18b (ERIK 2026-09-01) RETIRED THIS CLAIM. "Surge backlash scales by tier" was true and is now
+  // forbidden: backlash scales by the craft's own RUNG, and TIER DROPS OUT ENTIRELY, surge included.
+  // `harmRung` already scales per rank, so tier double-counted depth — and `sustained_regard` is tier I
+  // carrying `harmRung: lethal`, which under tier-scaling would backlash like a beginner's craft while
+  // doing lethal work. ⚠️ The functions this tested were REMOVED, not deprecated; both doors now call
+  // `progression.applyBacklash`.
+  {
+    const PRb = await import("../engine/progression.js");
+    const resB = JSON.parse(readFileSync(join(root, "content/packs/core/rules/resolution.json"), "utf8"));
+    const bite = (rung, opts) => { const c = { maxHealth: 200, health: 200, maxEnergy: 200, energy: 200 };
+      return -PRb.applyBacklash(c, resB, { backlashRung: rung }, opts || {}).health; };
+    check("R18b: backlash scales by RUNG, not tier", bite("lethal") > bite("damaging"),
+      `damaging ${bite("damaging")} vs lethal ${bite("lethal")}`);
+    check("R18b: …and a craft's TIER changes nothing about it",
+      (() => { const c1 = { maxHealth: 200, health: 200, maxEnergy: 200, energy: 200 };
+               const c2 = { maxHealth: 200, health: 200, maxEnergy: 200, energy: 200 };
+               const a = PRb.applyBacklash(c1, resB, { tier: 1, backlashRung: "damaging" }, {});
+               const b = PRb.applyBacklash(c2, resB, { tier: 5, backlashRung: "damaging" }, {});
+               return a.health === b.health && a.energy === b.energy; })());
+    check("R18b: a surged slip bites less than an outright crit failure",
+      bite("damaging", { trigger: "surgedSlip" }) < bite("damaging", { trigger: "critFailure" }));
+    check("R18b: the harm is a FRACTION OF THE POOL, so a bigger pool takes a bigger bite",
+      (() => { const small = { maxHealth: 30, health: 30, maxEnergy: 100, energy: 100 };
+               const big = { maxHealth: 200, health: 200, maxEnergy: 200, energy: 200 };
+               return -PRb.applyBacklash(big, resB, { backlashRung: "damaging" }, {}).health
+                    > -PRb.applyBacklash(small, resB, { backlashRung: "damaging" }, {}).health; })());
+  }
 
   // backlash only ever fires on a surge, and rises on a slipped roll
   check("no backlash off-surge", shouldBacklash("standard", "crit_failure", iRules, () => 0) === false);

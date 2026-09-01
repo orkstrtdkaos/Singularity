@@ -7,6 +7,7 @@
     "surge":    {"energyMult": 1.6, "effectMod": 10,  "backlashChance": 0.25, "note": "Amplified reach/scope/bonus; backlash risk. Never auto-selected."}
   },
   "autoRule": "Engine picks the minimum intensity that clears the task difficulty via the sense filter: trivial/easy -> conserve, standard -> standard, hard-but-doable -> standard. NEVER auto-surge. Player may override to any step at the action point.",
+  "_surgeBacklashByTier_SUPERSEDED": "⛔ SUPERSEDED BY R18/R18b (Erik 2026-09-01). This table scaled a surged slip's harm by TIER while the crit-failure door scaled by RUNG — two tables for one fiction. Backlash is now ONE function (`progression.applyBacklash`): a fraction of the wielder's max pool, keyed on the craft's own rung, scaled by rank, intensity and which kind of failure it was. ⚠️ TIER DROPS OUT ENTIRELY, surge included: `harmRung` already scales per rank, so tier double-counted depth. KEPT AS A RECORD of what the numbers were — nothing reads it.",
   "surgeBacklashByTier": {
     "1": {"health": 3,  "energy": 4},
     "2": {"health": 4,  "energy": 5},

@@ -40,17 +40,12 @@ export function autoIntensity(standardChance, rules = {}) {
   return "standard";
 }
 
-/** Numeric tier 1..5 from an ability's levelReq (surgeBacklashByTier is keyed 1..5,
- *  while tierOf() returns Roman for display). */
-export function tierNum(levelReq) { // registry:internal
-  return Math.max(1, Math.min(5, levelReq || 1));
-}
+// ⛔ `tierNum` WENT WITH THE FUNCTIONS THAT USED IT. R18 merged surge backlash into
+// `progression.applyBacklash`, which removed `surgeBacklash`/`applySurgeBacklash` — and `tierNum` was
+// their private helper. ⚠️ The wiring audit caught it immediately: a `registry:internal` marker with no
+// same-module caller is the marker LOWERING THE RATCHET rather than describing the code.
 
-/** Tier-scaled backlash cost for a surged ability (from surgeBacklashByTier). */
-export function surgeBacklash(ability, rules = {}) {
-  const map = rules.surgeBacklashByTier || {};
-  return map[String(abilityTier(ability))] || map["1"] || { health: 3, energy: 4 };
-}
+
 
 /** Does a surge backlash fire? Base chance rises on a marginal/failed roll, near-nil on a
  *  clean success — a surge that lands clean is mostly safe; one that slips bites. */
@@ -61,15 +56,15 @@ export function shouldBacklash(intensity, degree, rules = {}, rng = Math.random)
   return rng() < Math.min(1, base * mult);
 }
 
-/** Apply a surged ability's backlash to the character (health + energy). Returns the cost. */
-export function applySurgeBacklash(character, ability, rules = {}) {
-  const b = surgeBacklash(ability, rules);
-  character.health = Math.max(0, (character.health ?? 0) - (b.health || 0));
-  character.energy = Math.max(0, (character.energy ?? 0) - (b.energy || 0));
-  return { health: -(b.health || 0), energy: -(b.energy || 0), tier: tierOf(abilityTier(ability)), tierNum: abilityTier(ability) };
-}
 
 /** A dial descriptor for the UI: each step's label, scaled energy, and surge warning. */
+// ⛔ R18 (ERIK 2026-09-01) — `surgeBacklash` AND `applySurgeBacklash` WERE REMOVED, NOT DEPRECATED.
+// They scaled a surged slip's harm by TIER off `intensity_scaling.surgeBacklashByTier`, while the
+// crit-failure door beside them scaled by RUNG off `resolution.novel.backlashByRung` — two tables for
+// one fiction. ⚠️ R18b: tier drops out ENTIRELY, surge included. Both doors now call
+// `progression.applyBacklash`, which takes rung × rank × intensity × pool and a `trigger` that keeps a
+// surged slip milder than an outright critical failure. `intensity.backlashChance` still decides IF.
+
 export function intensityOptions(baseCost, rules = {}) {
   return INTENSITIES.map(key => {
     const step = intensityStep(rules, key);

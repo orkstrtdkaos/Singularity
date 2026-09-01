@@ -276,11 +276,16 @@
   "harmRungOrder": ["none", "damaging", "incapacitating", "lethal"],
   "_harmRungOrder": "⛔ THE LADDER, lightest → harshest, as DATA. `engine/braids.js` holds a private copy of the same order (HARM_ORDER) used to pick the harsher parent rung; that duplicate should read this instead — it cannot today because braids.js imports progression.js and the reverse would cycle. Flagged, not silently left.",
   "backlashByRung": {
-    "none":           {"health": 0,  "energy": 0},
-    "damaging":       {"health": 4,  "energy": 10},
-    "incapacitating": {"health": 7,  "energy": 14},
-    "lethal":         {"health": 11, "energy": 20}
+    "none":           {"health": 0.00, "energy": 0.00},
+    "damaging":       {"health": 0.07, "energy": 0.11},
+    "incapacitating": {"health": 0.13, "energy": 0.22},
+    "lethal":         {"health": 0.20, "energy": 0.33}
   },
+  "_backlashByRung": "⛔ R18/R18b (Erik 2026-09-01) — FRACTIONS OF THE WIELDER'S MAX POOL, not flat numbers. The flat table had the inversion Erik has caught repeatedly: `damaging` was 2% of Silas's health at L30 (irrelevant) and 13% at level 1 (landing hardest on the weakest). ✅ Pool-relative moves BOTH ends the right way at once — Silas 2%→7%, level 1 13%→7%. ⚠️ Values are FRACTIONS: 0.07 = 7%.",
+  "intensityBacklashMult": {"conserve":0.6,"standard":1,"surge":1.6},
+  "_intensityBacklashMult": "⛔ R18 — INTENSITY MOVES THE MAGNITUDE, not only the chance. Mirrors `intensity_scaling.energyMult` (0.6 / 1.0 / 1.6): you pushed, so it bites harder; you held back, so it bites less.",
+  "backlashTriggers": {"critFailure":{"chance":1,"multiplier":1},"surgedSlip":{"chance":0.25,"multiplier":0.6}},
+  "_backlashTriggers": "⛔ R18 — ONE MAGNITUDE FUNCTION, TWO TRIGGERS. `surgeBacklashByTier` (a surged slip, by TIER) and `backlashByRung` (a crit failure, by RUNG) were two tables for one fiction. They are now one function keyed on rung × rank × intensity × pool; the events differ only in when they fire and how hard. ⛔ R18b: TIER DROPS OUT ENTIRELY, surge included — `harmRung` already scales per rank, so tier would double-count depth, and R5's principle is that the CRAFT'S OWN nature turns inward. `sustained_regard` is tier I carrying `harmRung: lethal`; under tier-scaling it would backlash like a beginner's craft while doing lethal work. ⚠️ Knowingly lost: a dear tier-V craft with a mild authored backlash now bites less on a surge than it used to. Accepted.",
   "_backlashByRung": "⛔ R5 CORRECTED (Erik 2026-09-01) — `backlashRung` is an ABSOLUTE rung NAME, authored one rung MILDER than the craft's own harmRung: the craft's nature turns inward, muted. ⚠️ R5 said 'land that rung on the wielder' but NO MACHINERY EXISTED to turn a rung into an amount — harmRung only ever fed finisher ODDS and GM prose. This table is that machinery, shaped after `intensity_scaling.surgeBacklashByTier`, the game's existing 'backlash scaled by a key' idiom. ⬜ `damaging` deliberately equals the old flat 4/10, so 15 of the 20 authored crafts are UNCHANGED and only the 5 `incapacitating` ones move. ⬜ THE MAGNITUDES ARE ERIK'S TO SET — at level 1 (30 health) these are 13% / 23% / 37%. `lethal` is defined but unused: no craft authors it, because backlash is always milder than harm."
 },
  "wild": {

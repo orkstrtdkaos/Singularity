@@ -85,7 +85,7 @@ import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
 import { tierPrice, isCrossClass, tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel, skillPointCost, learnPointCost, forkPending, forkPaths, chosenFork, setFork, rankExpression, abilityTier } from "./engine/skilltree.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError } from "./engine/party.js";
-import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, intensityOptions } from "./engine/intensity.js";
+import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel, eligibleEncountersFor, generatedCreatureEncounters, synthesizeDuelDef, synthesizeChallengeDef, synthesizeStandoffDef, synthesizePuzzleDef } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved; SNG-231: eligibleEncountersFor = the offerable pool the GM can invite
@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.301";
+const APP_VERSION = "1.9.303";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7330,7 +7330,11 @@ async function onChoice(choice) {
       resolution.discoveryAbilities = abilityIds;
     } else if (resolution.degree === "crit_failure") {
       resolution.backlash = applyBacklash(character, CONTENT.rules,
-        (abilityIds || []).map(id => fullCatalog()[id]).filter(Boolean));
+        (abilityIds || []).map(id => fullCatalog()[id]).filter(Boolean),
+        // ⚠️ RANK AND INTENSITY BOTH SCALE IT (R18). The rank is the actor's OWN rank in the craft that
+        // slipped — a craft doing lethal work in your hands turns on you harder than the same craft at novice.
+        { trigger: "critFailure", intensity,
+          rank: Math.max(1, ...(abilityIds || []).map(id => (character.abilities || []).find(o => o.abilityId === id)?.level || 1)) });
       // ⛔ SNG-359 §2a — THE AUTHORED LINE, NOT A NUMBER AND A SHRUG. The GM was handed
       // "BACKLASH (engine-applied): -4 health, -10 energy — narrate the cost" and a generic list of
       // suggestions (resonance-burn, light-scald, a nosebleed), while Aevi's 23 authored backlash
@@ -7342,7 +7346,14 @@ async function onChoice(choice) {
   // SNG-015: a Surge that slips can bite — pay by the ability's Tier
   if (usesAbility && intensity === "surge" && shouldBacklash("surge", resolution.degree, CONTENT.intensity, Math.random)) {
     const surgedAb = fullCatalog()[choice.abilityId] || fullCatalog()[(choice.comboAbilities || [])[0]];
-    resolution.backlash = applySurgeBacklash(character, surgedAb, CONTENT.intensity);
+    // ⛔ R18 — THE MERGE. This called `applySurgeBacklash`, which scaled by TIER off its own table while
+    // the crit-failure door beside it scaled by RUNG off another. Two tables, one fiction. Both doors now
+    // call ONE function; they differ only in `trigger`, which carries the multiplier that keeps a surged
+    // slip milder than an outright critical failure.
+    resolution.backlash = applyBacklash(character, CONTENT.rules, surgedAb, {
+      trigger: "surgedSlip", intensity: "surge",
+      rank: (character.abilities || []).find(o => o.abilityId === surgedAb?.id)?.level || 1
+    });
     resolution.surgeBacklash = true;
     // ⚠️ BOTH BACKLASH DOORS CARRY THE AUTHORED LINE. There are two — a crit-failure and a SURGE that
     // slips — and wiring only the one I found first would have left half the backlashes in the game still
@@ -12090,7 +12101,9 @@ async function finishGambit(run) {
     const a = g.actions[r.index];
     if (!a?.novel) continue;
     if (r.degree === "crit_failure") resolution.backlash = applyBacklash(character, CONTENT.rules,
-      [a.abilityId, ...(a.comboAbilities || [])].filter(Boolean).map(id => fullCatalog()[id]).filter(Boolean));
+      [a.abilityId, ...(a.comboAbilities || [])].filter(Boolean).map(id => fullCatalog()[id]).filter(Boolean),
+      { trigger: "critFailure", intensity: a.intensity,
+        rank: (character.abilities || []).find(o => o.abilityId === a.abilityId)?.level || 1 });
     if (r.degree === "crit_success") {
       resolution.discoveryEligible = true;
       resolution.discoveryAbilities = [a.abilityId, ...(a.comboAbilities || [])].filter(Boolean);

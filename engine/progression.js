@@ -827,42 +827,71 @@ export function recordDiscovery(character, { name, description, abilityIds, nove
   return d;
 }
 
-/** Engine-applied backlash for a crit-failed novel/combo attempt. Returns what happened. */
-/** ⛔ R5 CORRECTED (Erik 2026-09-01) — THE CRAFT'S OWN NATURE TURNS INWARD. `backlashRung` is an
- *  absolute rung NAME authored one rung milder than the craft's `harmRung`; a craft that kills people
- *  merely damages you when it misfires.
+/** ⛔ R18/R18b (ERIK 2026-09-01) — ONE MAGNITUDE FUNCTION, TWO TRIGGERS.
  *
- *  ⚠️ IT TOOK NO ABILITY, WHICH IS EXACTLY WHY THE FIELD COULD NEVER FIRE — 20 crafts carried
- *  `backlashRung` and every crit-failure applied the same flat 4/10 regardless. The fourth door.
+ *  Two backlash systems existed for one fiction: `surgeBacklashByTier` fired on a surged slip and scaled
+ *  by TIER; `backlashByRung` fired on a crit failure and scaled by RUNG. Same story, different arithmetic.
  *
- *  ⛔ `ability` may be one def, an array of defs, or null. WITH A COMBO THE HARSHEST RUNG WINS — the
- *  same rule `braids.js` uses when a braid inherits its parents' harm. Null, or a craft with no
- *  authored rung, falls back to the flat `novel.backlashHealth/Energy` — so nothing regresses.
- *  Returns { health, energy, rung } so the narrator can NAME what bit, not just how much. */
-export function applyBacklash(character, rules, ability = null) {
+ *  ⛔ THE MAGNITUDE IS NOW A FRACTION OF THE WIELDER'S MAX POOL. Flat numbers had the inversion Erik has
+ *  caught repeatedly: `damaging` was 2% of Silas's health at L30 — irrelevant — and 13% at level 1, landing
+ *  hardest on the weakest. ✅ Pool-relative moves BOTH ends the right way at once.
+ *
+ *  ⛔ TIER DROPS OUT ENTIRELY (R18b), surge included. `harmRung` already scales per rank, so tier would
+ *  double-count depth — and R5's principle is that the CRAFT'S OWN nature turns inward, which is a
+ *  statement about the craft, not its price band. `sustained_regard` is tier I carrying `harmRung: lethal`;
+ *  under tier-scaling it would backlash like a beginner's craft while doing lethal work.
+ *
+ *  ⚠️ THE RANK TERM READS `tree[]` WHEN IT IS THERE AND THE FLAT TOP-LEVEL VALUE WHEN IT IS NOT. OI-20
+ *  (~88 crafts) has not landed; this ships ahead of it and deepens by itself when the trees do.
+ *
+ *  `ability` may be one def, an array, or null. With a combo the HARSHEST rung wins — the rule braids use.
+ *  `opts.intensity` (conserve|standard|surge) and `opts.trigger` (critFailure|surgedSlip) both scale it.
+ *  Returns { health, energy, rung, notPhysical? }. */
+export function applyBacklash(character, rules, ability = null, opts = {}) {
   const novel = rules.novel || {};
   const order = novel.harmRungOrder || ["none", "damaging", "incapacitating", "lethal"];
   const defs = (Array.isArray(ability) ? ability : [ability]).filter(Boolean);
   let rung = null, notPhysical = null;
   for (const d of defs) {
     // ⛔ AEVI AUTHORED `backlashRungNone` FOR CRAFTS WHOSE FAILURE IS NOT A WOUND — a broken name, a debt
-    // owed by the Bargainers' own rule, a public discrediting. All three say so outright: "A future
-    // consequence, not a present wound" · "No body is touched". ⚠️ NOTHING READ THE FIELD, so those crafts
-    // fell through to the flat 4/10 and took physical damage their own authoring forbids.
-    if (!d?.backlashRung && d?.backlashRungNone) { notPhysical = notPhysical || String(d.backlashRungNone); continue; }
-    const r = d?.backlashRung;
+    // owed by the Bargainers' own rule, a public discrediting. "A future consequence, not a present
+    // wound" · "No body is touched".
+    if (!rungOf(d, opts.rank) && d?.backlashRungNone) { notPhysical = notPhysical || String(d.backlashRungNone); continue; }
+    const r = rungOf(d, opts.rank);
     if (!r) continue;
     if (rung === null || order.indexOf(r) > order.indexOf(rung)) rung = r;
   }
   // ⚠️ A PHYSICAL RUNG IN A COMBO STILL WINS — one craft being social does not shield the others.
   if (rung === null && notPhysical) return { health: 0, energy: 0, rung: "none", notPhysical };
-  const table = novel.backlashByRung || {};
-  const hit = (rung && table[rung]) || null;
-  const hp = hit ? (Number(hit.health) || 0) : (novel.backlashHealth ?? 4);
-  const en = hit ? (Number(hit.energy) || 0) : (novel.backlashEnergy ?? 10);
+
+  const pct = (novel.backlashByRung || {})[rung || ""] || null;
+  const iMult = num(novel.intensityBacklashMult?.[opts.intensity], 1);
+  const tMult = num(novel.backlashTriggers?.[opts.trigger]?.multiplier, 1);
+  let hp, en;
+  if (pct) {
+    // ⚠️ FRACTIONS OF THE POOL. `maxHealth`/`maxEnergy` fall back to the live value, then to the old flat
+    // constants — a character record without a max must not silently take zero harm.
+    const maxH = num(character?.maxHealth, num(character?.health, 30));
+    const maxE = num(character?.maxEnergy, num(character?.energy, 100));
+    hp = Math.round(num(pct.health, 0) * maxH * iMult * tMult);
+    en = Math.round(num(pct.energy, 0) * maxE * iMult * tMult);
+  } else {
+    hp = Math.round(num(novel.backlashHealth, 4) * iMult * tMult);
+    en = Math.round(num(novel.backlashEnergy, 10) * iMult * tMult);
+  }
   character.health = Math.max(0, character.health - hp);
   character.energy = Math.max(0, character.energy - en);
   return { health: -hp, energy: -en, rung: rung || null };
+}
+
+/** ⛔ R18 — THE RANK TERM. `harmRung` is authored per rank in `tree[]` with the top-level value as the
+ *  CEILING (SNG-147c, `engine/intent.js`); `backlashRung` is not yet, so this reads the tree when a craft
+ *  has one and falls back to the flat value. ⚠️ OI-20 (~88 crafts) turns the fallback into the exception. */
+function rungOf(def, rank) {
+  if (!def) return null;
+  const r = Math.max(1, Number(rank) || 1);
+  const entry = (def.tree || []).find(t => Number(t?.rank) === r);
+  return entry?.backlashRung || def.backlashRung || null;
 }
 
 /** Ability detail block for the GM: exactly what each rank grants, what it cannot

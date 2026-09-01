@@ -2208,12 +2208,16 @@ console.log("\n── §35 · every tier question goes through abilityTier ─�
   check(`§35: …and the scan actually covered the engine (${files35.length} files)`,
     files35.length >= 20, `only ${files35.length} files scanned — the range shrank`);
 
-  // ⛔ THE GATE THAT WOULD HAVE CAUGHT intensity.js: surge backlash harm must follow TIER, not levelReq.
-  const IN35 = await import("../engine/intensity.js");
-  const surgeRules35 = { surgeBacklashByTier: { "1": { health: 1, energy: 1 }, "5": { health: 9, energy: 9 } } };
-  check("§35: surge backlash reads the craft’s TIER, so tier 5 / levelReq 1 bites like a tier 5",
-    IN35.surgeBacklash({ tier: 5, levelReq: 1 }, surgeRules35).health === 9,
-    JSON.stringify(IN35.surgeBacklash({ tier: 5, levelReq: 1 }, surgeRules35)));
+  // ⚠️ THIS PROBE USED TO ASSERT THAT SURGE BACKLASH READS TIER — written to catch the levelReq-as-tier
+  // defect in `intensity.js`. ⛔ R18b RETIRED THE TIER TERM ALTOGETHER (surge included) and the function it
+  // probed no longer exists. The CLAIM it was really making — a live gate must read `tier`, not `levelReq`
+  // — still matters, so it is re-aimed at a path that is still live: the craft price.
+  const SKp = await import("../engine/skilltree.js");
+  const scp = rj("content/packs/core/rules/skill_capacity.json");
+  check("§35: a live gate reads `tier`, not `levelReq` — tier 5 / levelReq 1 is priced as a tier 5",
+    SKp.tierPrice({ tier: 5, levelReq: 1 }, scp) === SKp.tierPrice({ tier: 5, levelReq: 5 }, scp)
+    && SKp.tierPrice({ tier: 5, levelReq: 1 }, scp) !== SKp.tierPrice({ tier: 1, levelReq: 1 }, scp),
+    `${SKp.tierPrice({ tier: 5, levelReq: 1 }, scp)} vs ${SKp.tierPrice({ tier: 1, levelReq: 1 }, scp)}`);
 }
 /* ═════ §36 — R1: DISTANCE IS ADDITIVE, AND THE PRICE TABLE IS THE RULING ═════ */
 // ⛔ ERIK 2026-08-31 R1. Tier prices compressed to 1·2·2·3·3 and distance made ADDITIVE:
@@ -2301,8 +2305,21 @@ console.log("\n── §37 · R5 · the craft’s own nature turns inward ──
   check("§37: a craft with NO authored rung still pays the old flat cost",
     none37.health === -(rules37.novel.backlashHealth) && none37.energy === -(rules37.novel.backlashEnergy),
     `${none37.health}/${none37.energy}`);
-  check("§37: …and `damaging` equals it, so only the harsher crafts move",
-    dmg37.health === none37.health && dmg37.energy === none37.energy);
+  // ⛔ R18b RETIRED THIS ONE, AND IT WAS MINE. When I built R5 the table was FLAT and `damaging` was
+  // deliberately set to the old 4/10 so 15 of the 20 authored crafts would not move. ⚠️ R18b makes the
+  // magnitude A FRACTION OF THE POOL, so every craft moves — that is the point, not a regression: flat
+  // numbers were 2% of Silas's health and 13% of a level-1's. What is worth asserting now is the SHAPE.
+  const big37 = { maxHealth: 200, health: 200, maxEnergy: 200, energy: 200 };
+  const small37 = { maxHealth: 30, health: 30, maxEnergy: 100, energy: 100 };
+  const biteAt = (who, rung) => { const c = { ...who };
+    return -PR37.applyBacklash(c, rules37, { backlashRung: rung }, {}).health; };
+  check("§37: R18b · the harm is a FRACTION OF THE POOL, not a flat number",
+    biteAt(big37, "damaging") > biteAt(small37, "damaging"),
+    `${biteAt(small37, "damaging")} at 30hp vs ${biteAt(big37, "damaging")} at 200hp`);
+  check("§37: R18b · …so it stops being irrelevant at high level AND stops landing hardest on a level-1",
+    biteAt(big37, "damaging") / 200 === biteAt(small37, "damaging") / 30 ||
+    Math.abs(biteAt(big37, "damaging") / 200 - biteAt(small37, "damaging") / 30) < 0.02,
+    `${(100 * biteAt(small37, "damaging") / 30).toFixed(0)}% vs ${(100 * biteAt(big37, "damaging") / 200).toFixed(0)}% of pool`);
 
   // ⛔ A COMBO CARRIES THE HARSHEST OF ITS PARTS — the same rule braids use for inherited harm.
   const combo37 = hit([{ backlashRung: "damaging" }, { backlashRung: "incapacitating" }]);

@@ -627,6 +627,37 @@ sink).** Both are below, first.
 
 ---
 
+
+---
+
+# ⛔⛔ STALE-NUMBERS WARNING — READ BEFORE THE APPENDED SECTIONS BELOW ⛔⛔
+
+**Added 2026-09-01 by Aevi at CCode's flag (`INDEX_ccode_open_for_aevi.md` §3).**
+
+⚠️ **Everything appended below this line is CCode working notes, some of it superseded.** It reads
+like current findings because it sits at the end of a live spec. **It is not.** Do not act on any
+number below without checking this table first.
+
+| appended section | status | superseded by |
+|---|---|---|
+| **C3 — "the Insight bonus strands half a specialist's pool"** | ⛔ **STALE** | `SPEC_ccode_axis_balance_and_ranks.md` §1 |
+| **"CORRECTION TO C3"** | ⛔ **STALE TWICE** — it fitted Insight growth to a curve (Silas, +1 per 7.5 levels). The real rule is `subPointPerLevel: 1`, **player-allocated**, so the milestone lands anywhere from **L11 (dumper) to L88 (even spread)**. | `SPEC_ccode_axis_balance_and_ranks.md` §1 |
+| C1 — points buy breadth only | folded forward | new spec §0/§1 |
+| C2 — R1 prices measured | folded forward | new spec §0 |
+| C7.2 — "nothing to splurge on" | ⚠️ still true, but the binding constraint moved to the **cap** under R1, which changes what a splurge is for | new spec §1 |
+| **C4 — `backlashRung`** | ✅ **RESOLVED** — R5 corrected 2026-09-01, option (a), authored semantics kept | `RULING_creation_session_20260831.md` R5 |
+| C5 — R7 novel use | ✅ live, confirms the ruling | — |
+| **C6 — attraction spec feedback** | ⚠️ **LIVE AND UNADDRESSED** — the eligibility gate has no data behind it. Aevi must resolve before promoting `SPEC_SNG-NPC-ATTRACTION`. | — |
+| C7.1 — whole corpus learnable from L5 | ✅ live — this is the motivating measurement for the unlock proposals | `PROPOSAL_ccode_unlock_levels.md` |
+
+⛔ **The authoritative current numbers live in `po/SPEC_ccode_axis_balance_and_ranks.md` §0–§1**, not
+in this file's appendix.
+
+**Rulings that supersede design proposals in the body of this spec:**
+`po/RULING_creation_session_20260831.md` (R1–R7) and `po/RULING_axis_balance_20260901.md` (R8–R11).
+
+---
+
 ## C1 — ⛔ ERIK CORRECTED ME: POINTS BUY BREADTH ONLY. MY "DEPTH ABSORBS THE SURPLUS" WAS WRONG.
 
 **Erik, mid-session: *"You don't spend points on ranks anymore."*** ✅ **He is right and I had it backwards.**

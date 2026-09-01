@@ -260,8 +260,17 @@
   "critFailWiden": 3,
   "backlashHealth": 4,
   "backlashEnergy": 10,
-  "discoveryBonus": 20
- },
+  "discoveryBonus": 20,
+  "harmRungOrder": ["none", "damaging", "incapacitating", "lethal"],
+  "_harmRungOrder": "⛔ THE LADDER, lightest → harshest, as DATA. `engine/braids.js` holds a private copy of the same order (HARM_ORDER) used to pick the harsher parent rung; that duplicate should read this instead — it cannot today because braids.js imports progression.js and the reverse would cycle. Flagged, not silently left.",
+  "backlashByRung": {
+    "none":           {"health": 0,  "energy": 0},
+    "damaging":       {"health": 4,  "energy": 10},
+    "incapacitating": {"health": 7,  "energy": 14},
+    "lethal":         {"health": 11, "energy": 20}
+  },
+  "_backlashByRung": "⛔ R5 CORRECTED (Erik 2026-09-01) — `backlashRung` is an ABSOLUTE rung NAME, authored one rung MILDER than the craft's own harmRung: the craft's nature turns inward, muted. ⚠️ R5 said 'land that rung on the wielder' but NO MACHINERY EXISTED to turn a rung into an amount — harmRung only ever fed finisher ODDS and GM prose. This table is that machinery, shaped after `intensity_scaling.surgeBacklashByTier`, the game's existing 'backlash scaled by a key' idiom. ⬜ `damaging` deliberately equals the old flat 4/10, so 15 of the 20 authored crafts are UNCHANGED and only the 5 `incapacitating` ones move. ⬜ THE MAGNITUDES ARE ERIK'S TO SET — at level 1 (30 health) these are 13% / 23% / 37%. `lethal` is defined but unused: no craft authors it, because backlash is always milder than harm."
+},
  "wild": {
   "critSuccessWiden": 6,
   "critFailWiden": 3,

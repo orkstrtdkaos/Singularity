@@ -699,12 +699,41 @@ export function recordDiscovery(character, { name, description, abilityIds, nove
 }
 
 /** Engine-applied backlash for a crit-failed novel/combo attempt. Returns what happened. */
-export function applyBacklash(character, rules) {
-  const hp = rules.novel?.backlashHealth ?? 4;
-  const en = rules.novel?.backlashEnergy ?? 10;
+/** ⛔ R5 CORRECTED (Erik 2026-09-01) — THE CRAFT'S OWN NATURE TURNS INWARD. `backlashRung` is an
+ *  absolute rung NAME authored one rung milder than the craft's `harmRung`; a craft that kills people
+ *  merely damages you when it misfires.
+ *
+ *  ⚠️ IT TOOK NO ABILITY, WHICH IS EXACTLY WHY THE FIELD COULD NEVER FIRE — 20 crafts carried
+ *  `backlashRung` and every crit-failure applied the same flat 4/10 regardless. The fourth door.
+ *
+ *  ⛔ `ability` may be one def, an array of defs, or null. WITH A COMBO THE HARSHEST RUNG WINS — the
+ *  same rule `braids.js` uses when a braid inherits its parents' harm. Null, or a craft with no
+ *  authored rung, falls back to the flat `novel.backlashHealth/Energy` — so nothing regresses.
+ *  Returns { health, energy, rung } so the narrator can NAME what bit, not just how much. */
+export function applyBacklash(character, rules, ability = null) {
+  const novel = rules.novel || {};
+  const order = novel.harmRungOrder || ["none", "damaging", "incapacitating", "lethal"];
+  const defs = (Array.isArray(ability) ? ability : [ability]).filter(Boolean);
+  let rung = null, notPhysical = null;
+  for (const d of defs) {
+    // ⛔ AEVI AUTHORED `backlashRungNone` FOR CRAFTS WHOSE FAILURE IS NOT A WOUND — a broken name, a debt
+    // owed by the Bargainers' own rule, a public discrediting. All three say so outright: "A future
+    // consequence, not a present wound" · "No body is touched". ⚠️ NOTHING READ THE FIELD, so those crafts
+    // fell through to the flat 4/10 and took physical damage their own authoring forbids.
+    if (!d?.backlashRung && d?.backlashRungNone) { notPhysical = notPhysical || String(d.backlashRungNone); continue; }
+    const r = d?.backlashRung;
+    if (!r) continue;
+    if (rung === null || order.indexOf(r) > order.indexOf(rung)) rung = r;
+  }
+  // ⚠️ A PHYSICAL RUNG IN A COMBO STILL WINS — one craft being social does not shield the others.
+  if (rung === null && notPhysical) return { health: 0, energy: 0, rung: "none", notPhysical };
+  const table = novel.backlashByRung || {};
+  const hit = (rung && table[rung]) || null;
+  const hp = hit ? (Number(hit.health) || 0) : (novel.backlashHealth ?? 4);
+  const en = hit ? (Number(hit.energy) || 0) : (novel.backlashEnergy ?? 10);
   character.health = Math.max(0, character.health - hp);
   character.energy = Math.max(0, character.energy - en);
-  return { health: -hp, energy: -en };
+  return { health: -hp, energy: -en, rung: rung || null };
 }
 
 /** Ability detail block for the GM: exactly what each rank grants, what it cannot

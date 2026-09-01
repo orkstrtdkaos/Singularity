@@ -2217,6 +2217,84 @@ console.log("\n── §36 · R1 · distance is additive, and the table is the r
     ["open","folk","primary","secondary","tertiary","acquired","adjacent","far","antipode"]
       .filter(b => sc36.bandOf[b] === undefined).join(", "));
 }
+/* ═════ §37 — R5: THE CRAFT’S OWN NATURE TURNS INWARD ═════ */
+// ⛔ R5 CORRECTED (Erik 2026-09-01). `backlashRung` is an ABSOLUTE rung NAME, authored one rung MILDER
+// than the craft’s own `harmRung`. A craft that kills people merely damages you when it misfires.
+//
+// ⚠️ THE FOURTH DOOR: 20 crafts carried the field, the schema allowed it, content authored it — and
+// `applyBacklash` TOOK NO ABILITY, so every crit failure applied the same flat 4/10 and not one of the 20
+// authored values could ever reach the player.
+//
+// ⚠️ AND R5 SAID "land that rung on the wielder" WITH NO MACHINERY TO DO IT — `harmRung` only ever fed
+// finisher ODDS and GM prose; nothing mapped a rung to an amount. `novel.backlashByRung` is that mapping.
+console.log("\n── §37 · R5 · the craft’s own nature turns inward ──");
+{
+  const PR37 = await import("../engine/progression.js");
+  const rules37 = rj("content/packs/core/rules/resolution.json");
+  const hit = (ab) => { const c = { health: 30, energy: 100 };
+    return { ...PR37.applyBacklash(c, rules37, ab), left: c.health }; };
+
+  check("§37: the rung ladder is authored, not a private constant",
+    Array.isArray(rules37.novel?.harmRungOrder) && rules37.novel.harmRungOrder.length === 4,
+    JSON.stringify(rules37.novel?.harmRungOrder));
+  check("§37: every rung on the ladder has an authored cost",
+    (rules37.novel?.harmRungOrder || []).every(r => rules37.novel?.backlashByRung?.[r]),
+    JSON.stringify(rules37.novel?.backlashByRung));
+
+  // ⛔ THE FIELD FIRES. Before R5 all three of these were identical.
+  const none37 = hit(null), dmg37 = hit({ backlashRung: "damaging" }), inc37 = hit({ backlashRung: "incapacitating" });
+  check("§37: a craft’s authored rung REACHES the wielder", dmg37.rung === "damaging" && inc37.rung === "incapacitating",
+    `${dmg37.rung} / ${inc37.rung}`);
+  check("§37: a harsher rung bites harder — the field CHANGES something",
+    inc37.health < dmg37.health && inc37.energy < dmg37.energy,
+    `damaging ${dmg37.health}/${dmg37.energy} vs incapacitating ${inc37.health}/${inc37.energy}`);
+
+  // ⚠️ NOTHING REGRESSES. `damaging` is deliberately today’s flat cost, so 15 of the 20 authored crafts
+  // and every craft with no rung at all land exactly where they always did.
+  check("§37: a craft with NO authored rung still pays the old flat cost",
+    none37.health === -(rules37.novel.backlashHealth) && none37.energy === -(rules37.novel.backlashEnergy),
+    `${none37.health}/${none37.energy}`);
+  check("§37: …and `damaging` equals it, so only the harsher crafts move",
+    dmg37.health === none37.health && dmg37.energy === none37.energy);
+
+  // ⛔ A COMBO CARRIES THE HARSHEST OF ITS PARTS — the same rule braids use for inherited harm.
+  const combo37 = hit([{ backlashRung: "damaging" }, { backlashRung: "incapacitating" }]);
+  check("§37: with a combo the HARSHEST rung wins", combo37.rung === "incapacitating", combo37.rung);
+
+  // ⛔ THE AUTHORED CORPUS OBEYS R5: backlash is ALWAYS milder than the craft’s own harm. If Aevi ever
+  // authors one that is not, this catches it — that craft would turn a starting craft into a death sentence,
+  // which is exactly what the retracted version of R5 would have done.
+  const order37 = rules37.novel.harmRungOrder;
+  const carriers = [];
+  for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json")))
+    for (const a of (rj(`content/packs/core/abilities/${f}`).abilities || [])) if (a.backlashRung) carriers.push(a);
+  check(`§37: all ${carriers.length} authored backlash crafts are MILDER than their own harm`,
+    carriers.every(a => order37.indexOf(a.backlashRung) < order37.indexOf(a.harmRung || "lethal")),
+    carriers.filter(a => order37.indexOf(a.backlashRung) >= order37.indexOf(a.harmRung || "lethal"))
+      .map(a => `${a.id}: ${a.backlashRung} vs harm ${a.harmRung}`).join(", "));
+  check("§37: …and the corpus is not empty (the check would pass vacuously)",
+    carriers.length >= 20, `${carriers.length} carriers`);
+
+  // ⚠️ AT LEVEL 1 A CHARACTER HAS 30 HEALTH. R7’s principle: a penalty must not land hardest on the
+  // weakest. The harshest AUTHORED backlash must leave a starting character standing.
+  const worst = carriers.reduce((w, a) => order37.indexOf(a.backlashRung) > order37.indexOf(w.backlashRung) ? a : w, carriers[0]);
+  // ⛔ AND THE CRAFTS WHOSE FAILURE IS NOT A WOUND. Aevi authored `backlashRungNone` on three crafts —
+  // "A future consequence, not a present wound" · "No body is touched" — and NOTHING READ IT, so they took
+  // the flat physical 4/10 their own authoring forbids.
+  const social37 = [];
+  for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json")))
+    for (const a of (rj(`content/packs/core/abilities/${f}`).abilities || [])) if (a.backlashRungNone && !a.backlashRung) social37.push(a);
+  check(`§37: all ${social37.length} non-physical-backlash crafts take NO wound`,
+    social37.length > 0 && social37.every(a => { const h = hit(a); return h.health === 0 && h.energy === 0; }),
+    social37.filter(a => hit(a).health !== 0).map(a => a.id).join(", ") || `${social37.length} carriers`);
+  check("§37: …and their authored reason is handed to the narrator",
+    social37.every(a => typeof hit(a).notPhysical === "string" && hit(a).notPhysical.length > 10));
+  check("§37: ⛔ but a PHYSICAL craft in the same combo still wounds — social does not shield",
+    hit([social37[0], { backlashRung: "incapacitating" }]).health < 0,
+    JSON.stringify(hit([social37[0], { backlashRung: "incapacitating" }])));
+  check("§37: the harshest authored backlash leaves a level-1 character alive",
+    hit(worst).left > 0, `${worst?.id} leaves ${hit(worst).left}/30`);
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

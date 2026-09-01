@@ -35,9 +35,9 @@ file is replaced.**
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **89** | a play-path file names it outside a comment |
-| ⛔ **DARK** | **18** | **no literal reader anywhere** — see the four lies below |
-| ⚠️ **CI-ONLY** | **4** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
+| ✅ **READ** | **91** | a play-path file names it outside a comment |
+| ⛔ **DARK** | **17** | **no literal reader anywhere** — see the four lies below |
+| ⚠️ **CI-ONLY** | **3** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
 
 ### ⛔ THE FOUR WAYS "UNREAD" LIES — all four produced a false finding here inside one day
@@ -656,7 +656,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `conserveSuppresses` | 23 | `root`×23 | ✅ READ | `app.js` |
 | `traditionV2` | 21 | `root`×21 | ⛔ DARK | — |
 | `imposes` | 21 | `tree`×21 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
-| `backlashRung` | 20 | `root`×20 | ⚠️ CI-ONLY | _1 test/script only_ |
+| `backlashRung` | 20 | `root`×20 | ✅ READ | `progression.js` |
 | `upkeep` | 18 | `root`×18 | ⚠️ CI-ONLY | _1 test/script only_ |
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |
 | `folkAccessible` | 18 | `root`×18 | ✅ READ | `state.js` |
@@ -684,7 +684,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `projectThreshold` | 3 | `root`×3 | ✅ READ | `projects.js` |
 | `projectTicks` | 3 | `root`×3 | ✅ READ | `projects.js` |
 | `requiresPoles` | 3 | `mechanic`×3 | ✅ READ | `braids.js` |
-| `backlashRungNone` | 3 | `root`×3 | ⛔ DARK | — |
+| `backlashRungNone` | 3 | `root`×3 | ✅ READ | `progression.js`, `app.js` |
 | `interceptCondition` | 3 | `tree`×3 | ✅ READ | `intercept.js`, `app.js` |
 | `opensAccess` | 2 | `tree`×2 | ✅ READ | `progression.js` |
 | `downtime` | 2 | `root`×2 | ⚠️ CI-ONLY | _1 test/script only_ |

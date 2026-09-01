@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.291";
+const APP_VERSION = "1.9.292";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1948,7 +1948,11 @@ function ensureTestCharacter() {
 function backlashLineFor(abilityIds = []) {
   for (const id of abilityIds || []) {
     const ab = fullCatalog()[id];
-    if (ab?.backlash) return { id, name: ab.name, text: smartClamp(String(ab.backlash), 300) };
+    // ⚠️ TWO AUTHORED FIELDS, ONE DOOR. `backlash` is the wound's description; `backlashRungNone` is the
+    // authored reason a craft has NO wound ("the failure is REPUTATIONAL — no body is touched"). The
+    // second had no reader at all, so those crafts were narrated from the generic list.
+    const line = ab?.backlash || ab?.backlashRungNone;
+    if (line) return { id, name: ab.name, text: smartClamp(String(line), 300) };
   }
   return null;
 }
@@ -7325,7 +7329,8 @@ async function onChoice(choice) {
       resolution.discoveryEligible = true;
       resolution.discoveryAbilities = abilityIds;
     } else if (resolution.degree === "crit_failure") {
-      resolution.backlash = applyBacklash(character, CONTENT.rules);
+      resolution.backlash = applyBacklash(character, CONTENT.rules,
+        (abilityIds || []).map(id => fullCatalog()[id]).filter(Boolean));
       // ⛔ SNG-359 §2a — THE AUTHORED LINE, NOT A NUMBER AND A SHRUG. The GM was handed
       // "BACKLASH (engine-applied): -4 health, -10 energy — narrate the cost" and a generic list of
       // suggestions (resonance-burn, light-scald, a nosebleed), while Aevi's 23 authored backlash
@@ -12084,7 +12089,8 @@ async function finishGambit(run) {
   for (const r of run.receipts) {
     const a = g.actions[r.index];
     if (!a?.novel) continue;
-    if (r.degree === "crit_failure") resolution.backlash = applyBacklash(character, CONTENT.rules);
+    if (r.degree === "crit_failure") resolution.backlash = applyBacklash(character, CONTENT.rules,
+      [a.abilityId, ...(a.comboAbilities || [])].filter(Boolean).map(id => fullCatalog()[id]).filter(Boolean));
     if (r.degree === "crit_success") {
       resolution.discoveryEligible = true;
       resolution.discoveryAbilities = [a.abilityId, ...(a.comboAbilities || [])].filter(Boolean);

@@ -160,3 +160,36 @@ The attraction behavior table in Part A covers: Ashwarden, Rootkin, Stillhold, B
 
 The guidance doc already has Lattice in its tradition voice section. The attraction behavior table in this spec should mirror the guidance doc's list exactly. Current guidance traditions: Umbral, Blazeborn, Ashwarden, Rootkin, Marcher, Stillhold, Cogitant, Churnfolk, Lattice. The catch-all rule ("for traditions not listed — draw on the tradition's core character") handles all others including domain-traditions and any peoples tradition not yet authored into the guidance.
 
+
+---
+
+### Compatibility axis: similarity vs. contrast
+
+Not all NPCs are drawn to what they know. Some are drawn to what they are; others to what they are not. This is an authored property of the NPC, derived from their existing record — not a rolled value.
+
+**Derive from the NPC's `wants` line and tradition:**
+
+- An NPC whose wants express completion, stability, belonging → tends toward **similarity**. They want someone who fits the shape of their life, who shares their values, who feels like home.
+- An NPC whose wants express curiosity, escape, expansion, proving something → tends toward **contrast**. The unfamiliar is the draw. Someone from a different tradition, a different world, a different register entirely.
+- Most NPCs are mixed — drawn to one or two shared qualities and one or two contrasting ones.
+
+**Effect on the draw:**
+
+When calculating the NPC's draw toward the player character, the GM reads the compatibility axis first, then weights the attribute overlap accordingly:
+
+- **Similarity-oriented NPC**: draw rises with shared tradition, shared domain, overlapping spectrum values. A Rootkin NPC drawn to similarity responds strongly to another grounded, seasonal, physical character.
+- **Contrast-oriented NPC**: draw rises with difference — a different tradition, a spectrum that cuts against theirs, an approach to the world they don't have. The Wright who has never left the valley is drawn to the Marcher. The Cogitant is drawn to the Churnfolk who acts before thinking.
+- **Mixed NPC**: the GM identifies which qualities the NPC wants familiar and which they want different, and weights accordingly.
+
+**This is not a mechanical formula.** It is a reading discipline — the GM derives the axis from who the NPC already is, then uses it to weight the draw. Two NPCs with identical stats can have opposite draws toward the same player character because one wants what they have and one wants what they don't.
+
+**Instant attraction and the contrast axis:**
+
+Contrast-oriented NPCs are more likely to roll 9–10 instant attraction toward unusual or surprising player characters — the Ashwarden death-touched who walks into a Blazeborn town, the Wright who does something no local craftsperson would think to do. The difference itself is the spark.
+
+**Examples from the existing NPC record:**
+
+- Pell (Ashwarden, wants partnership and proof): mixed — wants shared competence (similarity) but drawn to Silas's death-adjacent register (contrast). The craft overlap grounds it; the difference makes it vivid.
+- Maren Voss (liminal fighter, wants a true bout): contrast-oriented — drawn to someone who comes at the threshold differently than she does, not another patience-reader.
+- Vash (lens-grinder, wants to understand what she half-knows): similarity in curiosity, contrast in method — drawn to someone who reaches conclusions differently than she does.
+

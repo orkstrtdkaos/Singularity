@@ -195,7 +195,11 @@ export function skillPointCost(ability, character, skillCapacity) {
  *  tiers short. Default here is LINEAR (a tier-N craft costs N); whether T-IV/V accelerate is Erik's dial. */
 export function tierPrice(ability, skillCapacity) {
   const table = skillCapacity?.tierPrice;
-  const tier = Math.max(1, Number(ability?.levelReq) || 1);
+  // ⛔ CCODE-340 — TIER IS WHAT THE CRAFT IS; `levelReq` IS WHEN YOU MAY LEARN IT. They were the same
+  // field until now, so an unlock level could not be moved without re-pricing the craft. Erik: "we need a
+  // dedicated Tier for the skills — that was intended all along."
+  // ⚠️ `?? levelReq` KEEPS EVERY CRAFT AT ITS CURRENT PRICE until content says otherwise.
+  const tier = Math.max(1, Number(ability?.tier ?? ability?.levelReq) || 1);
   if (Array.isArray(table)) return Number(table[tier - 1]) || tier;
   if (table && typeof table === "object") return Number(table[String(tier)]) || tier;
   return tier;

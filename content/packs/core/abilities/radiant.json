@@ -7,6 +7,7 @@
    "id": "light_bending",
    "name": "Light Bending",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 8,
    "axes": {
     "dark_light": 0.3,
@@ -169,6 +170,7 @@
    "id": "radiant_lance",
    "name": "Radiant Lance",
    "levelReq": 2,
+   "tier": 2,
    "energyCost": 12,
    "axes": {
     "violence_peace": -0.5,
@@ -328,6 +330,7 @@
    "id": "daybreak_mantle",
    "name": "Daybreak Mantle",
    "levelReq": 2,
+   "tier": 2,
    "energyCost": 6,
    "axes": {
     "dark_light": 0.5,
@@ -455,6 +458,7 @@
    "id": "light_well",
    "name": "Light Well",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 5,
    "axes": {
     "dark_light": 0.4,
@@ -678,6 +682,7 @@
    "id": "sun_coax",
    "name": "Sun Coax",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 6,
    "axes": {
     "death_life": 0.4,
@@ -816,6 +821,7 @@
    "id": "afterimage",
    "name": "Afterimage",
    "levelReq": 2,
+   "tier": 2,
    "energyCost": 8,
    "axes": {
     "falsehood_truth": -0.4,
@@ -968,6 +974,7 @@
    "id": "clarity_lens",
    "name": "Clarity Lens",
    "levelReq": 2,
+   "tier": 2,
    "energyCost": 5,
    "axes": {
     "concrete_abstract": 0.3,
@@ -1102,6 +1109,7 @@
    "id": "glimmer_script",
    "name": "Glimmer Script",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 4,
    "axes": {
     "concrete_abstract": 0.4,
@@ -1238,6 +1246,7 @@
    "id": "beacon_thread",
    "name": "Beacon Thread",
    "levelReq": 2,
+   "tier": 2,
    "energyCost": 7,
    "axes": {
     "dark_light": 0.4,
@@ -1394,6 +1403,7 @@
    "id": "dawn_surgery",
    "name": "Dawn Surgery",
    "levelReq": 3,
+   "tier": 3,
    "energyCost": 12,
    "axes": {
     "death_life": 0.5,
@@ -1546,6 +1556,7 @@
    "id": "prism_ward",
    "name": "Prism Ward",
    "levelReq": 3,
+   "tier": 3,
    "energyCost": 10,
    "axes": {
     "chaos_order": 0.4,
@@ -1723,6 +1734,7 @@
    "id": "sun_seal",
    "name": "Sun-Seal",
    "levelReq": 3,
+   "tier": 3,
    "energyCost": 6,
    "attribute": "practical",
    "axes": {
@@ -1876,6 +1888,7 @@
    "id": "light_borne",
    "name": "Light-Borne",
    "levelReq": 5,
+   "tier": 5,
    "energyCost": 12,
    "attribute": "practical",
    "axes": {
@@ -2080,7 +2093,8 @@
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "radiant",
    "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10.",
+   "tier": 1
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

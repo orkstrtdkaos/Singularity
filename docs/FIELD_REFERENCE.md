@@ -35,7 +35,7 @@ file is replaced.**
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **88** | a play-path file names it outside a comment |
+| ✅ **READ** | **89** | a play-path file names it outside a comment |
 | ⛔ **DARK** | **18** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **4** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
@@ -613,6 +613,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `from` | 512 | `rankDeltas`×512 | ✅ READ | `affiliation.js`, `art.js`, `assignments.js` |
 | `kind` | 490 | `rankDeltas`×490 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
 | `id` | 414 | `root`×414 | ✅ READ | `affinities.js`, `arceffects.js`, `art.js` |
+| `tier` | 414 | `root`×414 | ✅ READ | `backfill.js`, `borncontract.js`, `braids.js` |
 | `axes` | 414 | `root`×414 | ✅ READ | `affinities.js`, `craftmechanics.js`, `encounters.js` |
 | `attribute` | 414 | `root`×414 | ✅ READ | `affinities.js`, `braids.js`, `corrections.js` |
 | `narrationHints` | 414 | `root`×414 | ✅ READ | `battleprompt.js`, `braids.js`, `companions.js` |

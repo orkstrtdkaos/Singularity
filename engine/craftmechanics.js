@@ -212,7 +212,10 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
   // beyond the current ladder can mint — resolved to 1d6 and was WEAKER THAN A TIER-I. Found by the edge-case
   // battery on its first run, which is the argument for having one.
   const rungs = Object.keys(cfg.tierLadder || {}).filter(k => /^\d+$/.test(k)).map(Number).sort((a, b) => a - b);
-  const want = num(tier ?? ability?.levelReq, 1);
+  // ⛔ CCODE-340 — the DICE follow the craft’s TIER, never the level at which it unlocks. An explicit
+  // `tier` argument still wins (a braid or a declaration may resolve at a tier of its own); otherwise the
+  // craft’s own `tier`, and only then the legacy `levelReq`.
+  const want = num(tier ?? ability?.tier ?? ability?.levelReq, 1);
   const t = String(rungs.length ? Math.min(Math.max(want, rungs[0]), rungs[rungs.length - 1]) : want);
   const rung = cfg.tierLadder?.[t] || { mult: 1, special: false };
   // REFUSED is a VALUE, not an omission (Aevi's the_last_light "cannot be half-given"). A blanket x0.5/x2

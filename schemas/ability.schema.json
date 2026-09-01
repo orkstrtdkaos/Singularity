@@ -25,6 +25,12 @@
   "name": {
    "type": "string"
   },
+  "tier": {
+   "type": "number",
+   "minimum": 1,
+   "maximum": 5,
+   "description": "⛔ WHAT THE CRAFT IS, on the 1-5 ladder — its price (`tierPrice`) and its dice (`mechanicFor`). ⚠️ SEPARATE FROM `levelReq`, WHICH IS WHEN YOU MAY LEARN IT. They were the same field until 2026-09-01, which meant an unlock level could not be moved without silently re-pricing the craft and re-rolling its damage. Erik: 'we need a dedicated Tier for the skills — that was intended all along.'"
+  },
   "levelReq": {
    "type": "number"
   },

@@ -2036,6 +2036,66 @@ console.log("\n── §33 · a folk origin draws from the flag, not from a doc 
   check("§33: the doc-key anchors are no longer the source",
     !/rules\.folkNativeGrant|_folkNativeGrant_20260830/.test(rd("engine/progression.js")));
 }
+/* ══════════ §34 — TIER IS WHAT A CRAFT IS; levelReq IS WHEN YOU MAY LEARN IT ══════════ */
+// ⛔ ERIK 2026-09-01: "we need a dedicated Tier for the skills — that was intended all along, and I am
+// surprised we do not have it. That lets you decouple levelReq."
+//
+// ⚠️ THEY WERE ONE FIELD. `tierPrice` read `ability.levelReq` and so did `mechanicFor`, which is the DAMAGE
+// ladder — so moving a craft’s unlock level to 40 would have made it TIER 40, off the end of `tierPrice`
+// (max key 5) and `tierLadder` (max rung 5): wrong price AND wrong dice, silently.
+//
+// ⛔ THIS GATE IS THE DECOUPLING ITSELF. It does not assert that tier and levelReq are equal — that is
+// exactly what must be free to change. It asserts that moving ONE does not move the OTHER.
+console.log("\n── §34 · tier is what a craft IS, levelReq is when you may learn it ──");
+{
+  const SK = await import("../engine/skilltree.js");
+  const CM34 = await import("../engine/craftmechanics.js");
+  const sc34 = rj("content/packs/core/rules/skill_capacity.json");
+  const cm34 = rj("content/packs/core/rules/craft_mechanics.json");
+
+  // ⚠️ EVERY CRAFT CARRIES ONE. A gate that tolerates two exceptions tolerates the next twenty.
+  const cat34 = [];
+  {
+    const { readdirSync } = await import("node:fs");
+    for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json")))
+      for (const a of (rj(`content/packs/core/abilities/${f}`).abilities || [])) cat34.push(a);
+  }
+  const noTier = cat34.filter(a => a.tier === undefined);
+  check("§34: every craft carries an explicit `tier`",
+    noTier.length === 0, `${noTier.length} without: ${noTier.slice(0, 5).map(a => a.id).join(", ")}`);
+  check("§34: …and every tier sits on the 1–5 ladder",
+    cat34.every(a => a.tier >= 1 && a.tier <= 5),
+    cat34.filter(a => !(a.tier >= 1 && a.tier <= 5)).map(a => `${a.id}:${a.tier}`).join(", "));
+  check("§34: the schema knows the field", rj("schemas/ability.schema.json").properties?.tier !== undefined);
+
+  // ⛔ THE DECOUPLING, PROVED IN BOTH DIRECTIONS.
+  const craft = (tier, levelReq) => ({ id: "probe", functions: ["strike"], shape: "damage", tier, levelReq,
+    mechanic: { damageType: "physical" } });
+  const dice = (a) => JSON.stringify(CM34.mechanicFor(a, { verb: "strike", cfg: cm34 })?.fields?.dice ?? null);
+
+  // 1 · moving levelReq must move NOTHING about price or dice
+  const lo = craft(2, 2), hi = craft(2, 40);
+  check("§34: moving `levelReq` does NOT change the price",
+    SK.tierPrice(lo, sc34) === SK.tierPrice(hi, sc34), `${SK.tierPrice(lo, sc34)} vs ${SK.tierPrice(hi, sc34)}`);
+  check("§34: …and does NOT change the dice", dice(lo) === dice(hi), `${dice(lo)} vs ${dice(hi)}`);
+
+  // 2 · moving tier MUST move them — otherwise the field is decoration
+  const t1 = craft(1, 5), t5 = craft(5, 5);
+  check("§34: moving `tier` DOES change the price",
+    SK.tierPrice(t1, sc34) !== SK.tierPrice(t5, sc34), `${SK.tierPrice(t1, sc34)} vs ${SK.tierPrice(t5, sc34)}`);
+  check("§34: …and DOES change the dice", dice(t1) !== dice(t5), `${dice(t1)} vs ${dice(t5)}`);
+
+  // ⚠️ AND THE LEGACY FALLBACK SURVIVES, so a craft authored without a tier is priced as it always was.
+  const legacy = { id: "legacy", functions: ["strike"], shape: "damage", levelReq: 3, mechanic: {} };
+  check("§34: a craft with no `tier` still falls back to `levelReq`",
+    SK.tierPrice(legacy, sc34) === SK.tierPrice({ ...legacy, tier: 3 }, sc34));
+
+  // ⛔ THE MIGRATION WAS LOSSLESS AND THIS RECORDS IT: on the day of the change every tier equalled the
+  // craft’s own levelReq. ⚠️ THIS IS A NOTE, NOT AN ASSERTION — the whole point is that they may diverge,
+  // and the first craft Aevi re-levels will make this line false.
+  const same = cat34.filter(a => a.tier === Math.max(1, Math.min(5, a.levelReq || 1))).length;
+  console.log(`note  §34: ${same}/${cat34.length} crafts still have tier === levelReq (they diverge as unlock levels are authored)`);
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

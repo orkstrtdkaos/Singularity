@@ -7,6 +7,7 @@
    "id": "sonic_resonance",
    "name": "Sonic Resonance",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 8,
    "axes": {
     "mechanical_spiritual": 0.4,
@@ -183,6 +184,7 @@
    "id": "resonant_shield",
    "name": "Resonant Shield",
    "levelReq": 2,
+   "tier": 2,
    "energyCost": 12,
    "axes": {
     "violence_peace": 0.3,
@@ -350,6 +352,7 @@
    "id": "harmonic_voice",
    "name": "Harmonic Voice",
    "levelReq": 2,
+   "tier": 2,
    "energyCost": 6,
    "axes": {
     "emotional_logical": -0.4,
@@ -488,6 +491,7 @@
    "id": "stillness_field",
    "name": "Stillness Field",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 6,
    "axes": {
     "chaos_order": 0.4,
@@ -643,6 +647,7 @@
    "id": "chord_of_mending",
    "name": "Chord of Mending",
    "levelReq": 2,
+   "tier": 2,
    "energyCost": 10,
    "axes": {
     "destruction_creation": 0.5,
@@ -788,6 +793,7 @@
    "id": "voice_of_the_flock",
    "name": "Voice of the Flock",
    "levelReq": 2,
+   "tier": 2,
    "energyCost": 6,
    "axes": {
     "chaos_order": 0.4,
@@ -920,6 +926,7 @@
    "id": "resonant_anchor",
    "name": "Resonant Anchor",
    "levelReq": 2,
+   "tier": 2,
    "energyCost": 9,
    "axes": {
     "chaos_order": 0.3,
@@ -1059,6 +1066,7 @@
    "id": "drumline_stride",
    "name": "Drumline Stride",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 7,
    "axes": {
     "body_mind": -0.4,
@@ -1199,6 +1207,7 @@
    "id": "shatterpoint",
    "name": "Shatterpoint",
    "levelReq": 3,
+   "tier": 3,
    "energyCost": 8,
    "axes": {
     "concrete_abstract": 0.4,
@@ -1349,6 +1358,7 @@
    "id": "sustained_chord",
    "name": "Sustained Chord",
    "levelReq": 4,
+   "tier": 4,
    "energyCost": 12,
    "powerSystem": "combination",
    "tradition": "harmonic",
@@ -1517,6 +1527,7 @@
    "id": "worldsong",
    "name": "Worldsong",
    "levelReq": 5,
+   "tier": 5,
    "energyCost": 13,
    "powerSystem": "combination",
    "tradition": "harmonic",
@@ -1617,6 +1628,7 @@
    "id": "carrying_note",
    "name": "Carrying Note",
    "levelReq": 4,
+   "tier": 4,
    "energyCost": 12,
    "powerSystem": "combination",
    "tradition": "harmonic",
@@ -1705,6 +1717,7 @@
    "id": "echo_memory",
    "name": "Echo Memory",
    "levelReq": 3,
+   "tier": 3,
    "energyCost": 11,
    "axes": {
     "space_time": 0.5,
@@ -1962,7 +1975,8 @@
    "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 extends range; rank 3 deepens perceptionDepth. Limit: no fine detail — a face, a small tool.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "harmonic",
-   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "tier": 1
   },
   {
    "id": "tremor_sense",
@@ -2079,7 +2093,8 @@
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "harmonic",
    "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10.",
+   "tier": 1
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

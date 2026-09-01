@@ -7,6 +7,7 @@
    "id": "wayfinding",
    "name": "Wayfinding",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 4,
    "axes": {
     "concrete_abstract": -0.4,
@@ -161,6 +162,7 @@
    "id": "greenlore",
    "name": "Greenlore",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 5,
    "axes": {
     "mechanical_spiritual": 0.1,
@@ -321,6 +323,7 @@
    "id": "mediators_tongue",
    "name": "Mediator's Tongue",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 5,
    "axes": {
     "individual_collective": 0.4,
@@ -472,6 +475,7 @@
    "id": "tinkers_hand",
    "name": "Tinker's Hand",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 5,
    "axes": {
     "mechanical_spiritual": -0.5,
@@ -618,6 +622,7 @@
    "id": "beastfriend",
    "name": "Beastfriend",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 6,
    "axes": {
     "instinct_analysis": -0.5,
@@ -768,6 +773,7 @@
    "id": "stonewise",
    "name": "Stonewise",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 5,
    "axes": {
     "concrete_abstract": -0.5,
@@ -916,6 +922,7 @@
    "id": "rivercraft",
    "name": "Rivercraft",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 5,
    "axes": {
     "instinct_analysis": -0.2,
@@ -1065,6 +1072,7 @@
    "id": "quiet_step",
    "name": "Quiet Step",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 6,
    "axes": {
     "individual_collective": -0.4,
@@ -1200,6 +1208,7 @@
    "id": "hearthbinding",
    "name": "Hearthbinding",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 5,
    "axes": {
     "individual_collective": 0.5,
@@ -1345,6 +1354,7 @@
    "id": "old_roads",
    "name": "Old Roads",
    "levelReq": 2,
+   "tier": 2,
    "energyCost": 4,
    "axes": {
     "tradition_innovation": -0.3,
@@ -1493,6 +1503,7 @@
    "id": "blend_in",
    "name": "Blend In",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 3,
    "attribute": "social",
    "axes": {
@@ -1620,6 +1631,7 @@
    "id": "boundary_stone",
    "name": "Boundary-Stone",
    "levelReq": 2,
+   "tier": 2,
    "energyCost": 4,
    "attribute": "practical",
    "axes": {
@@ -1746,6 +1758,7 @@
    "id": "hunters_strike",
    "name": "Hunter's Strike",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 4,
    "attribute": "physical",
    "axes": {
@@ -1871,6 +1884,7 @@
    "id": "carrying_call",
    "name": "Carrying Call",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 3,
    "powerSystem": "metaphysical",
    "attribute": "practical",
@@ -1997,6 +2011,7 @@
    "id": "glasswork",
    "name": "Glasswork",
    "levelReq": 1,
+   "tier": 1,
    "energyCost": 3,
    "powerSystem": "metaphysical",
    "attribute": "practical",
@@ -2219,7 +2234,8 @@
    "_powerSystemFix": "⛔ SNG-524. Was `valley_craft` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⚠️ THE FOLK COLLECTION, NOT A POLE. Valley crafts are what ordinary people do without a tradition's apparatus — which canon defines as innate metaphysical current, more thinly. ⛔ ERIK'S CALL IF HE WANTS THEM SOURCELESS INSTEAD, but `body` was eliminated and there is no fifth source.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_folkReassigned_20260830": "⛔ `valley_craft` → `mason`. see value, provenance and condition — the appraiser's eye, and `thingcraft` is mason's version. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**",
    "folkAccessible": true,
-   "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition."
+   "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition.",
+   "tier": 1
   },
   {
    "id": "storykeeper",
@@ -2328,7 +2344,8 @@
    "_folkReassigned_20260830": "⛔ `valley_craft` → `threnodist`. hold and recall the valley's stories — living memory is the Threnodists' subject. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**",
    "folkAccessible": true,
    "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition.",
-   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ EVERY ONE OF THESE TRADITIONS WAS AUDITED BEFORE THE GATE EXISTED AND REPORTED CLEAN. **The gate found in seconds what four corrections and a written rule did not.**"
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ EVERY ONE OF THESE TRADITIONS WAS AUDITED BEFORE THE GATE EXISTED AND REPORTED CLEAN. **The gate found in seconds what four corrections and a written rule did not.**",
+   "tier": 1
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -3,7 +3,7 @@
 **Ruled by:** Erik · **Date:** 2026-08-31
 **Recorded by:** Aevi
 **Spec:** `po/SPEC_starting_grants_and_creation_revamp.md`
-**Closes:** OI-10, OI-13, OI-15, OI-7 · **Partial:** OI-11
+**Closes:** OI-3, OI-7, OI-10, OI-13, OI-15 · **Partial:** OI-11
 
 ---
 
@@ -162,10 +162,81 @@ the shape of a thing before it has finished becoming it."* Ranks 18 and 20 stay 
 
 ---
 
+## R7 — Novel use: energy cost and crit band, not success penalty (OI-3) ✅ RULED
+
+**The problem with the existing milestones:** Wits 4 and Wits 10 promise relief from an
+untried-action penalty that does not exist in the engine. Building the penalty so the milestone
+can remove it would make the game worse. But the underlying design question was real: should
+using a craft against its grain cost anything?
+
+**The ruling: yes — in energy and in crit-failure risk, never in success chance.**
+
+Your odds are your odds. Working against the grain shows up as effort and as risk, which is
+what actually happens when a tool is used for something it was not shaped for. A player can
+always try the clever thing; it burns them down faster and fails worse when it fails.
+
+### Stretch tiers — the penalty scales to the STRETCH, not to the character
+
+| stretch | definition | example | energy | crit band |
+|---|---|---|---|---|
+| **Adjacent** | outside declared `functions`, within the spirit | `body_read` to judge a bluff | +10% | unchanged |
+| **Real** | outside what the craft does | `body_read` to check if a wall is load-bearing | +25% | slightly wider |
+| **Against `notFor`** | explicitly what the craft is not for | `body_read` to read thoughts | +50% | notably wider |
+
+⚠️ **This scaling is the fix for the low-level weighting problem.** A flat novel-use penalty
+lands hardest on characters with four crafts and no energy pool — exactly the players who must
+improvise. Scaling to stretch means a level-1 character doing something small and clever pays
+almost nothing, while anyone reaching past an explicit `notFor` pays regardless of level. The
+tax is on the stretch, not on being new. Most level-1 improvisation is adjacent-stretch, so
+early play gets the encouraging version by default.
+
+### Wits reduces the surcharge and narrows the band
+
+| Wits rank | effect on novel use |
+|---|---|
+| 1–3 | full surcharge, full crit band |
+| 4 | surcharge halved, band narrowed |
+| 10 | no surcharge — novel use costs the same as intended use |
+| 14 | −25% — the unplanned answer comes cheaper than the planned one |
+
+Ranks 18 and 20 stay narrative (same pattern as Insight).
+
+**Milestone prose at Wits 4 and 10 must be rewritten** — from "relief from the untried-action
+penalty" to the surcharge/band language above. `milestoneEffects.blocked` on both can be cleared.
+
+### Interaction with the zero-energy floor (R-prior, 2026-08-23)
+
+A drained character cannot afford novel use — they are down to rank-1 crafts doing what those
+crafts do. Too tired to be clever. This falls out of the mechanics rather than being authored.
+
+### `notFor` becomes load-bearing
+
+`notFor` is authored on every craft but is currently prose. Making it the top stretch tier makes
+it a mechanical field for the first time. ⚠️ **Authoring pass needed:** audit `notFor` lines for
+consistency — some are hard limits, others are flavor. Not a blocker; the tiers work on GM
+judgment in the interim.
+
+### GM offers, and the gear panel
+
+- **The GM may offer novel uses as options occasionally.** This is what turns the mechanic from
+  a tax into an invitation — a player who never thought to use `body_read` on a wall will try it
+  after the GM offers once. The system teaches itself through play.
+- **Stretch belongs in the gear-shaped configure button**, same surface as conserve and surge.
+- ⚠️ **Stretch and intensity are ORTHOGONAL, not a third mutually-exclusive option.** Conserve-
+  stretch (a cautious attempt at something odd) and surge-stretch (throwing everything at a thing
+  the craft was never for) are genuinely different moments. The panel must let both exist.
+
+### Open implementation question for CCode
+
+Does the engine flag novel use, or does the GM declare it? Aevi's read: GM-declared, with
+`notFor` and `functions` as the reference — the engine cannot know that reading a wall with
+`body_read` is a stretch, but a GM reading `notFor` can. Ask whether a cleaner hook exists.
+
+---
+
 ## Still open
 
 | OI | item | held on |
 |---|---|---|
 | OI-11 | Bonus skill points — sub RULED (Insight). Milestone shape provisional pending CCode curves | CCode model, then Erik confirm |
-| OI-3 | Wits `novelPenalty` — should experimentation cost anything? | Erik |
 | OI-5 | Minted NPC baseline kit repurpose | Erik |

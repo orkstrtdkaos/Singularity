@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.303";
+const APP_VERSION = "1.9.304";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4565,7 +4565,10 @@ function startingLocationChoices(originId) {
 function defaultStart(originId) { const c = startingLocationChoices(originId); return (c.find(x => x.id === homelandFor(originId)) || c[0])?.id || CONTENT.startingLocation; }
 
 function renderCreate() {
-  const state = { name: "", origin: "valleyfolk", background: "craftsman", attrs: { physical: 3, mental: 3, social: 3, practical: 3 }, abilities: [],
+  // ⛔ R24 — `sex` IS SET AT GENERATION. It starts UNSET rather than defaulted: an unchosen sex is a real
+  // answer (this character has none, and is not romanceable) and defaulting it would put a body on every
+  // character the player never asked for.
+  const state = { name: "", sex: "", origin: "valleyfolk", background: "craftsman", attrs: { physical: 3, mental: 3, social: 3, practical: 3 }, abilities: [],
     domains: { primary: null, secondary: null, tertiary: null }, companionId: null, companionName: "", form: "",
     // SNG-062 prologue accrual
     prologue: { openingId: null, step: 0, tags: {}, granted: [], reasons: [] } };
@@ -4590,6 +4593,13 @@ function renderCreate() {
     chrome(`<div class="screen">
       <h2>New Character</h2>
       <div class="field"><label>Name</label><input id="c-name" value="${esc(state.name)}"></div>
+      <div class="field"><label>Sex <span class="hint" style="text-transform:none">(set now, not later — romance needs it, and "none" is a real answer)</span></label>
+        <select id="c-sex">
+          <option value="" ${state.sex === "" ? "selected" : ""}>— unset (cannot be romanced) —</option>
+          <option value="female" ${state.sex === "female" ? "selected" : ""}>female</option>
+          <option value="male" ${state.sex === "male" ? "selected" : ""}>male</option>
+          <option value="none" ${state.sex === "none" ? "selected" : ""}>none — this character has no sex</option>
+        </select></div>
       <div class="field"><label>Form / appearance <span class="hint" style="text-transform:none">(leads the portrait — blank = an ordinary person)</span></label>
         <textarea id="c-form" rows="2" style="width:100%" placeholder="e.g. a towering treefolk of bark and heartwood">${esc(state.form)}</textarea></div>
       <div class="field"><label>Origin — which people are you from?</label>
@@ -4613,6 +4623,7 @@ function renderCreate() {
 
     document.getElementById("c-name").oninput = e => { state.name = e.target.value; document.getElementById("c-done").disabled = !(state.name.trim() && left === 0); };
     document.getElementById("c-form").oninput = e => { state.form = e.target.value; };
+    document.getElementById("c-sex").onchange = e => { state.sex = e.target.value; };
     document.getElementById("c-origin").onchange = e => { state.origin = e.target.value; state.domains = { primary: null, secondary: null, tertiary: null }; state.startingLocation = defaultStart(state.origin); draw(); };
     const slSel = document.getElementById("c-startloc"); if (slSel) slSel.onchange = e => { state.startingLocation = e.target.value; draw(); };
     document.getElementById("c-bg").onchange = e => { state.background = e.target.value; draw(); };
@@ -4895,6 +4906,10 @@ function renderCreate() {
       schools: defaultSchoolsForDomains(state.domains, CONTENT.schools),
       // SNG-053: the physical form leads the portrait
       form: state.form || undefined,
+      // ⛔ R24 — CANONICAL, AND SEPARATE FROM `gender`. The romance gate reads this and nothing else;
+      // `gender`/`pronouns` remain presentation, GM-written and player-correctable, and gate nothing.
+      // ⚠️ `undefined` when unset, never "" — an absent sex must read as ABSENT to `romanceable()`.
+      sex: state.sex || undefined,
       bio: bio && Object.values(bio).some(v => v) ? bio : null
     };
     // SNG-063: nobody is in the Valley by accident — fold the origin's whyYouAreHere into the bio

@@ -153,6 +153,32 @@ export function prettifyNpcName(name, dropTokens = []) {
   return smartClamp(words.map(w => w[0].toUpperCase() + w.slice(1)).join(" "), 60);
 }
 
+/** ⛔ R24 (ERIK 2026-09-01) — THE ROMANCE GATE. "You can't romance until you know the sex… If there is no
+ *  sex it's not romanceable."
+ *
+ *  ⚠️ ABSENCE IS A HARD EXCLUSION, NOT A MISSING VALUE TO BE FILLED IN LATER. That is the whole safety
+ *  property: a companion who is a constellation of motes has no sex, and is therefore non-romanceable
+ *  with nothing authored to exclude them. ⛔ The gate NEVER infers one (SNG-143) and never falls back to
+ *  `gender` — gender is how a person presents, it is player-correctable, and correcting a RENDERING must
+ *  not quietly change who may be romanced.
+ *
+ *  Three things must all hold, and each answers a different question:
+ *    `sex`             — is there one at all? (R24)
+ *    `romanceEligible` — has the person been opted IN? (Aevi's authoring; absent ⇒ no)
+ *    not a minor       — the existing `_gen.romanceEligible === false` marker (generate.js:450)
+ *
+ *  Returns { ok, why } so a refusal can be shown rather than a person silently vanishing from a list. */
+export function romanceable(person) {
+  if (!person) return { ok: false, why: "no one" };
+  const sex = person.sex == null ? null : String(person.sex).trim().toLowerCase();
+  if (!sex) return { ok: false, why: "their sex was never set — R24 excludes rather than guesses" };
+  if (sex === "none") return { ok: false, why: "they have no sex; this is an answer, not a blank" };
+  // ⚠️ THE MINOR MARKER IS ALREADY WRITTEN AT GENERATION and is a REFUSAL, never a permission —
+  // `_gen.romanceEligible === false` means minor. Its absence says nothing either way.
+  if (person._gen && person._gen.romanceEligible === false) return { ok: false, why: "not an adult" };
+  if (person.romanceEligible !== true) return { ok: false, why: "not open to romance" };
+  return { ok: true, why: null };
+}
 export function applyNpcUpdates(character, updates = [], ctx = {}) {
   character.npcRegistry = character.npcRegistry || {};
   const reg = character.npcRegistry;
@@ -200,6 +226,20 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         knownFacts: [],
         skillsObserved: [],
         status: "active",
+        // ⛔ R24 (ERIK 2026-09-01) — SEX IS SET AT GENERATION, AND IT IS NOT `gender`.
+        //   "You can't romance until you know the sex, so rather than leave sex runtime determined it
+        //   needs to be SET upon PC/NPC generation. If there is no sex it's not romanceable."
+        //
+        // ⚠️ TWO FIELDS, TWO JOBS, AND THEY MUST NOT COLLAPSE INTO ONE:
+        //   `sex`     — set once, here, at mint. CANONICAL. The romance gate reads this and nothing else.
+        //   `gender`/`pronouns` — how a person presents and is addressed. The GM writes them, the player
+        //   corrects them (correctNpcGender), and they gate NOTHING.
+        //
+        // ✅ Keeping them apart is what lets a person present differently from how they were generated,
+        // and it means correcting a RENDERING never silently changes who may be romanced.
+        // ⛔ NEVER INFERRED (SNG-143). Absent stays absent — and absent is a HARD EXCLUSION, which is the
+        // right value for a being that HAS no sex, not an omission waiting to be filled in.
+        sex: u.sex ? String(u.sex).slice(0, 40) : null,
         gender: u.gender ? String(u.gender).slice(0, 40) : null,       // SNG-143: sex/gender is explicit DATA, captured the first time they appear (never inferred at render)
         pronouns: u.pronouns ? String(u.pronouns).slice(0, 40) : null
       };

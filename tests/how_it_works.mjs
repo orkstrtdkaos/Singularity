@@ -2547,6 +2547,45 @@ console.log("\n── §40 · R22 · one mechanism, four flavours ──");
   check("§40: an ordinary object grants nothing",
     !(plain.grantedAccess || []).length && !(plain.tomes || []).length);
 }
+/* ===== §41 — R24: SEX IS SET AT GENERATION, AND ABSENCE EXCLUDES ===== */
+// ⛔ ERIK: "You can't romance until you know the sex, so rather than leave sex runtime determined it needs
+// to be SET upon PC/NPC generation. If there is no sex it's not romanceable."
+//
+// ⚠️ TWO FIELDS, TWO JOBS. `sex` is set once at generation and is what the gate reads. `gender`/`pronouns`
+// are how a person presents — GM-written, player-correctable (correctNpcGender), and they gate NOTHING.
+// ⛔ COLLAPSING THEM WOULD MEAN CORRECTING A PORTRAIT SILENTLY CHANGES WHO MAY BE ROMANCED.
+console.log("\n── §41 · R24 · sex is set at generation ──");
+{
+  const N41 = await import("../engine/npcs.js");
+  const R = (p) => N41.romanceable(p);
+
+  check("§41: a person with no sex set is excluded — absence is the answer, not a blank",
+    R({ romanceEligible: true }).ok === false, JSON.stringify(R({ romanceEligible: true })));
+  check("§41: ⛔ `gender` does NOT stand in for sex — a rendering must not open the gate",
+    R({ gender: "woman", pronouns: "she/her", romanceEligible: true }).ok === false);
+  check("§41: sex `none` is a real answer — a being that has none is excluded, nothing authored to do it",
+    R({ sex: "none", romanceEligible: true }).ok === false,
+    JSON.stringify(R({ sex: "none", romanceEligible: true })));
+  check("§41: a minor is excluded even with sex set and opted in",
+    R({ sex: "male", romanceEligible: true, _gen: { romanceEligible: false } }).ok === false);
+  check("§41: opting in is REQUIRED — a sex alone does not make someone romanceable",
+    R({ sex: "female" }).ok === false);
+  check("§41: ✅ …and all three together do", R({ sex: "female", romanceEligible: true }).ok === true);
+  check("§41: every refusal says WHY, so a person never silently vanishes from a list",
+    [{}, { sex: "none" }, { sex: "f" }].every(p => typeof R(p).why === "string" && R(p).why.length > 4));
+
+  // ⛔ THE MINT SETS IT. Not on first render — at generation, which is the whole ruling.
+  const src41 = readFileSync(join(root, "engine/npcs.js"), "utf8");
+  check("§41: the NPC mint writes `sex` as its own field", /\bsex:\s*u\.sex\s*\?/.test(src41));
+  check("§41: …and still writes gender separately, so the two never collapse",
+    /\bgender:\s*u\.gender\s*\?/.test(src41));
+
+  // ⛔ AND PC CREATION ASKS FOR IT — the fourth door, again.
+  const app41 = readFileSync(join(root, "app.js"), "utf8");
+  check("§41: character creation offers a sex control", /id="c-sex"/.test(app41));
+  check("§41: …it is bound", /getElementById\(\"c-sex\"\)\.onchange/.test(app41));
+  check("§41: …and it reaches the character record", /sex:\s*state\.sex\s*\|\|\s*undefined/.test(app41));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

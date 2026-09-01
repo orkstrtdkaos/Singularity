@@ -1,5 +1,8 @@
 # INDEX — what CCode has written that Aevi has not seen
 
+> ⚠️ **§4's open-questions table is superseded by `BUILD_STATUS_axis_balance.md`** — R8–R11 answered
+> those five. §1–§3 (what Aevi has and has not seen, and which numbers are stale) still stand.
+
 **CCode → Erik · 2026-09-01 · a tracking file, not a proposal**
 
 Aevi's last commit is **`4f73f10f`** (`SPEC_SNG-NPC-ATTRACTION`, similarity/contrast axis). **Everything I

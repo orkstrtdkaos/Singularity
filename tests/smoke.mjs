@@ -31,7 +31,7 @@ import { frameModel, encounterKind, frameExits, frameSize, frameTransition, chas
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
-import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths, skillGraphModel, nativeGrantsFor, combinationsAvailableFor } from "../engine/skilltree.js";
+import { tierPrice, homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths, skillGraphModel, nativeGrantsFor, combinationsAvailableFor } from "../engine/skilltree.js";
 import { combinationThresholdMet, ripeAxisTouchCombinations } from "../engine/practice.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, familyClass, FUNCTION_FAMILIES, FAMILY_COLOR, FAMILY_GLYPH, FAMILY_SHAPE, shapeOfFamily } from "../engine/functions.js";
 import { arcSeed, fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "../engine/personalArc.js";
@@ -477,6 +477,8 @@ for (const f of ["harmonic", "radiant"]) {
   const pack = JSON.parse(readFileSync(join(root, `content/packs/core/abilities/${f}.json`), "utf8"));
   for (const a of pack.abilities) abilityCatalog[a.id] = { ...a, powerSystem: pack.powerSystem };
 }
+// ⛔ R19 — training a tier-1 craft opens when TIER 3 does (level 21 under R12's bands). hero2 was level 3.
+hero2.level = 21;
 const ru = rankUpAbility(hero2, "sonic_resonance", rules);
 check("rank up at level 3", ru.ok && ru.newRank === 2);
 check("rank 3 gated to level 5", rankUpAbility(hero2, "sonic_resonance", rules).ok === false);
@@ -1397,13 +1399,20 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   check("gated learn clears at threshold", learnAbility(lowReason, "shatterpoint", cat3, rules, { attributeGates: gates3, skillCapacity: cap3 }).ok);
   // rank-3 gate
   const r3 = { origin: "valley", level: 5, skillPoints: 3, abilities: [{ abilityId: "shatterpoint", level: 2 }], subAttributes: { reason: 5 }, customAbilities: {} };
-  check("rank-3 blocked below rank3Min", rankUpAbility(r3, "shatterpoint", rules, { attributeGates: gates3 }).why.includes("rank 3"));
+  // ⚠️ THIS PASSED FOR THE WRONG REASON after R19: it matched "rank 3" in my new refusal string rather
+  // than in the attribute-gate message. A coincidental pass is as dangerous as a failure — assert the
+  // ATTRIBUTE gate on the road that still reaches it (practice), and the purchase refusal separately.
+  check("R19: rank 3 is refused as a PURCHASE, whatever the attribute",
+    rankUpAbility(r3, "shatterpoint", rules, { attributeGates: gates3 }).why.includes("earned in use"));
+  check("rank-3 blocked below rank3Min on the practice road",
+    rankUpAbility(r3, "shatterpoint", rules, { attributeGates: gates3, viaPractice: true }).why.includes("rank 3"));
   r3.subAttributes.reason = 7;
-  check("rank-3 clears at rank3Min", rankUpAbility(r3, "shatterpoint", rules, { attributeGates: gates3 }).ok);
+  check("rank-3 clears at rank3Min — through practice, the only road left",
+    rankUpAbility(r3, "shatterpoint", rules, { attributeGates: gates3, viaPractice: true }).ok);
   // capacity blocks a fresh learn at cap; rank-up still allowed
   const capped = { origin: "valley", level: 1, skillPoints: 3, abilities: [{ abilityId: "wayfinding", level: 1 }, { abilityId: "greenlore", level: 1 }], subAttributes: {}, customAbilities: {} };
   check("learn blocked at breadth capacity", learnAbility(capped, "stonewise", cat3, rules, { skillCapacity: cap3 }).why.includes("capacity"));
-  check("rank-up still allowed at capacity", rankUpAbility({ ...capped, level: 3 }, "wayfinding", rules, {}).ok);
+  check("rank-up still allowed at capacity", rankUpAbility({ ...capped, level: 21 }, "wayfinding", rules, {}).ok);
   // ungated + under cap learns fine
   const room = { origin: "valley", level: 3, skillPoints: 3, abilities: [{ abilityId: "wayfinding", level: 1 }], subAttributes: {}, customAbilities: {} };
   check("ungated learn under cap succeeds", learnAbility(room, "greenlore", cat3, rules, { attributeGates: gates3, skillCapacity: cap3 }).ok);
@@ -1678,10 +1687,18 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   // cross-class RANK also costs 2
   if (crossT1) {
     const h3 = { origin: "harmonic", level: 5, skillPoints: 1, abilities: [{ abilityId: crossT1.id, level: 1 }], subAttributes: {}, customAbilities: {} };
-    check("cross-class rank blocked with 1 point", rankUpAbility(h3, crossT1.id, rules, { catalog: cat5, skillCapacity: cap5 }).why.includes("cross-class"));
+    // ⛔ R17 — TRAINING COSTS `tierPrice`, WITH NO BAND OR CLASS COMPONENT. Deepening what you already hold
+    // is not a crossing; you crossed when you learned it. The cross-class surcharge belongs to ACQUISITION.
+    h3.level = 21;   // R19: tier-1 training opens with tier 3
+    // ⚠️ ITS OWN FIXTURE. `rankUpAbility` MUTATES, and the check this replaced asserted a FAILURE so it
+    // never did. Reusing h3 ranks it to 2 and leaves the NEXT call asking for rank 3 — which R19 refuses.
+    const h3p = { ...h3, abilities: [{ abilityId: crossT1.id, level: 1 }], skillPoints: 9 };
+    check("R17: training is priced by tier alone — no cross-class surcharge",
+      rankUpAbility(h3p, crossT1.id, rules, { catalog: cat5, skillCapacity: cap5 }).cost === tierPrice(cat5[crossT1.id], cap5));
     h3.skillPoints = 2;
     const rr = rankUpAbility(h3, crossT1.id, rules, { catalog: cat5, skillCapacity: cap5 });
-    check("cross-class rank spends 2 points", rr.ok && rr.cost === 2 && h3.skillPoints === 0);
+    check("R17: …and it spends exactly the tier price, not double",
+      rr.ok && rr.cost === tierPrice(cat5[crossT1.id], cap5) && h3.skillPoints === 2 - rr.cost);
   }
 }
 

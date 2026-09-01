@@ -9,7 +9,7 @@
 
 import { applyLadderGrants } from "./ladder.js";
 import { slugify } from "./quests.js";
-import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, learnPointCost, rankExpression, forkPending, abilityTier } from "./skilltree.js";
+import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, learnPointCost, rankExpression, forkPending, abilityTier, tierPrice } from "./skilltree.js";
 import { domainAccess, traditionOf, isFolkTradition, antipodeOf } from "./traditions.js";
 import { standingWithPeople } from "./reputation.js";
 import { trainerFor } from "./company.js";
@@ -240,6 +240,31 @@ export function spendSubPoint(character, sub, rules) {
 }
 
 /** Rank up an owned ability (1 skill point, or FREE via practice). Level-gated. */
+/** ⛔ R19 (ERIK 2026-09-01) — RANK-UP PURCHASING IS GATED BY TIER ACCESS.
+ *
+ *  Erik: "we make purchasing a rank up only eligible at a certain point… opening Tier 3 access lets you
+ *  rank up your r1 tier1 skills." **Tier N becomes trainable when tier N+2 opens.**
+ *
+ *  ✅ WHY A GATE AND NOT A PRICE: under R17 training is cheap (`tierPrice`). Available from level 1 a
+ *  player could deepen instead of broaden, inverting R14's bands — acquisition first, depth second,
+ *  matching 1–10 personal / 10–30 party building. It also gives a tier unlock a SECOND payload: opening
+ *  T3 no longer only means "T3 crafts are buyable", it means "your whole T1 shelf just became improvable."
+ *
+ *  ⚠️ T4 AND T5 HAVE NO GATE, because there is no T6 or T7. Erik: "T5s are mostly one rank, but we should
+ *  take a pass at T4s and T5s eventually." OI-21. Until ruled they are practice-and-GM only, which fits
+ *  "the deepest things cannot be bought". Returns {ok, why, opensAt}. Pure. */
+export function trainableTier(ability, character, rules) {
+  const t = abilityTier(ability);
+  const bands = rules?.leveling?.tierUnlockBands;
+  const gateTier = t + 2;
+  if (gateTier > 5) return { ok: false, why: `tier ${t} crafts deepen through use, not training`, opensAt: null };
+  const opensAt = Number(bands?.[String(gateTier)]?.start);
+  if (!Number.isFinite(opensAt)) return { ok: true, why: null, opensAt: null };   // no bands authored — do not invent a wall
+  return (character?.level || 1) >= opensAt
+    ? { ok: true, why: null, opensAt }
+    : { ok: false, why: `training a tier-${t} craft opens with tier ${gateTier}, at level ${opensAt}`, opensAt };
+}
+
 export function rankUpAbility(character, abilityId, rules, opts = {}) {
   const owned = character.abilities.find(a => a.abilityId === abilityId);
   if (!owned) return { ok: false, why: "not known" };
@@ -250,6 +275,12 @@ export function rankUpAbility(character, abilityId, rules, opts = {}) {
     return { ok: false, why: "this one deepens with the bond, not with points" };
   const max = rules.leveling?.maxAbilityRank ?? 3;
   if (owned.level >= max) return { ok: false, why: "already mastered" };
+  // ⛔ R19 — RANK 3 IS NOT FOR SALE AT ANY PRICE. It is earned in use or granted; breadth cannot buy the
+  // thing depth earns. ⚠️ THIS MUST COME BEFORE THE ATTRIBUTE GATE: a rank-3 purchase is refused because
+  // it is a PURCHASE, not because the character is short an attribute. Placed after the gate, the reason
+  // string blamed the attribute — and a smoke test then passed by matching "rank 3" in the wrong message.
+  if (!opts.viaPractice && owned.level + 1 >= 3)
+    return { ok: false, why: "rank 3 is earned in use, never bought" };
   const req = rules.leveling?.rankLevelReq?.[String(owned.level + 1)] ?? 1;
   if (character.level < req) return { ok: false, why: `requires level ${req}` };
   if (owned.level + 1 >= 3 && opts.attributeGates) {
@@ -258,8 +289,21 @@ export function rankUpAbility(character, abilityId, rules, opts = {}) {
   }
   // SNG-BATCH-5: affordability last — cross-class abilities cost 2x (opts.catalog resolves the class)
   const ab = (opts.catalog || {})[abilityId];
-  const cost = opts.viaPractice ? 0 : learnPointCost(ab, character, opts.skillCapacity, opts.domainVerdict || null);
-  if (!opts.viaPractice && (character.skillPoints || 0) < cost) return { ok: false, why: cost > 1 ? `costs ${cost} points (cross-class)` : "no points" };
+  // ⛔ R17 — TRAINING TO RANK 2 COSTS `tierPrice`, WITH NO BAND COMPONENT. Deepening something you already
+  // hold should cost LESS than acquiring something new, and it does: a far tier-III costs 4 to learn and 2
+  // to deepen. ⚠️ R8's `tierPrice + band` is RETRACTED — it priced the mechanism at its own purpose.
+  //
+  // ⛔ THE EVIDENCE (Silas, L30, measured): 40 abilities — 5 at rank 3, 4 at rank 2, and 31 STUCK AT RANK 1.
+  // His `radiant_lance` has never come up, not once. Practice ranks what the scenarios call for; training
+  // is the only road for the other 31. Raising its price punishes exactly the case it exists to serve.
+  //
+  // ⛔ AND RANK 3 IS NOT FOR SALE AT ANY PRICE. It is earned in play or granted — breadth cannot buy it.
+  if (!opts.viaPractice) {
+    const gate = trainableTier(ab, character, rules);
+    if (!gate.ok) return { ok: false, why: gate.why, opensAt: gate.opensAt };
+  }
+  const cost = opts.viaPractice ? 0 : tierPrice(ab, opts.skillCapacity);
+  if (!opts.viaPractice && (character.skillPoints || 0) < cost) return { ok: false, why: cost > 1 ? `training costs ${cost} points` : "no points" };
   owned.level++;
   if (!opts.viaPractice) character.skillPoints -= cost;
   return { ok: true, newRank: owned.level, viaPractice: !!opts.viaPractice, cost };

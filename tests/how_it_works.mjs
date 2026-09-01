@@ -2342,6 +2342,76 @@ console.log("\n── §37 · R5 · the craft’s own nature turns inward ──
   check("§37: the harshest authored backlash leaves a level-1 character alive",
     hit(worst).left > 0, `${worst?.id} leaves ${hit(worst).left}/30`);
 }
+/* ═════ §38 — R12/R17/R19: WHEN A CRAFT ARRIVES, AND WHEN YOU MAY DEEPEN IT ═════ */
+// ⛔ R12 — tier sets the band, energyCost places the craft inside it. Under the old `levelReq` the WHOLE
+// CORPUS was learnable by level 5. ⛔ R17 — training to rank 2 costs `tierPrice`, no band. ⛔ R19 — tier N
+// becomes trainable when tier N+2 opens, so acquisition leads and depth follows.
+console.log("\n── §38 · the unlock curve, the training price, and the tier gate ──");
+{
+  const PR38 = await import("../engine/progression.js");
+  const SK38 = await import("../engine/skilltree.js");
+  const rules38 = rj("content/packs/core/rules/resolution.json");
+  const sc38 = rj("content/packs/core/rules/skill_capacity.json");
+  const cat38 = {};
+  for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json")))
+    for (const a of (rj(`content/packs/core/abilities/${f}`).abilities || [])) cat38[a.id] = a;
+  const all38 = Object.values(cat38);
+  const U = (a) => PR38.unlockLevelFor(a, rules38, cat38);
+
+  // ⛔ R12 — THE CORPUS IS A CURVE, NOT A STAIRCASE.
+  check("§38: R12 · the corpus is NOT all open by level 5 any more",
+    all38.filter(a => U(a) <= 5).length < all38.length,
+    `${all38.filter(a => U(a) <= 5).length}/${all38.length} open at L5`);
+  check("§38: R13 · …and it IS all open by the authored top level",
+    all38.every(a => U(a) <= (rules38.leveling?.unlockTopLevel ?? 60)),
+    `deepest ${Math.max(...all38.map(U))} vs top ${rules38.leveling?.unlockTopLevel}`);
+
+  // ⛔ R15 — A LEVEL-1 CHARACTER SEES EVERY TIER-1 CRAFT THEY COULD PICK.
+  const pick38 = all38.filter(a => a.powerSystem !== "precursor" && a.powerSystem !== "combination");
+  const t1_38 = pick38.filter(a => SK38.abilityTier(a) === 1);
+  check(`§38: R15 · all ${t1_38.length} pickable tier-1 crafts are visible at level 1`,
+    t1_38.length > 50 && t1_38.every(a => U(a) <= 1),
+    t1_38.filter(a => U(a) > 1).map(a => a.id).slice(0, 5).join(", "));
+  check("§38: …and nothing ABOVE tier 1 sneaks into level 1",
+    pick38.filter(a => U(a) <= 1).every(a => SK38.abilityTier(a) === 1));
+
+  // ⚠️ THE SHELF CURVE IS NOT THE WHOLE GAME. A braid is MADE, not bought — braids.js derives its levelReq
+  // from its PARENTS’ ranks — and precursor/living/wild crafts are granted per ability in fiction.
+  check("§38: a braid keeps its own derived levelReq, not a shelf band",
+    PR38.unlockLevelFor({ powerSystem: "combination", tier: 3, energyCost: 12, levelReq: 2 }, rules38, cat38) === 2);
+  check("§38: …and so does a precursor craft, which is granted in fiction",
+    PR38.unlockLevelFor({ powerSystem: "precursor", tier: 3, energyCost: 8, levelReq: 3 }, rules38, cat38) === 3);
+
+  // ⛔ R17 — DEEPENING WHAT YOU HOLD COSTS LESS THAN ACQUIRING SOMETHING NEW. Always, at every tier.
+  for (const t of [1, 3, 5]) {
+    const ab = { tier: t };
+    const train = SK38.tierPrice(ab, sc38);
+    const far = SK38.learnPointCost(ab, { domains: { primary: "x" } }, sc38, { band: "far", penalty: 3 });
+    check(`§38: R17 · training a tier-${t} craft (${train}) costs less than learning one far (${far})`, train < far);
+  }
+
+  // ⛔ R19 — TIER N OPENS FOR TRAINING WHEN TIER N+2 OPENS.
+  const at = (tier, level) => PR38.trainableTier({ tier }, { level }, rules38);
+  check("§38: R19 · a tier-1 craft is not trainable before tier 3 opens",
+    at(1, 5).ok === false && at(1, 99).ok === true, JSON.stringify(at(1, 5)));
+  check("§38: R19 · …and each tier opens with the one two above it",
+    at(1, 99).opensAt === rules38.leveling.tierUnlockBands["3"].start
+    && at(2, 99).opensAt === rules38.leveling.tierUnlockBands["4"].start
+    && at(3, 99).opensAt === rules38.leveling.tierUnlockBands["5"].start);
+  // ⚠️ OI-21 — there is no tier 6 or 7, so T4/T5 have no gate to open. Erik deferred the pass; until then
+  // they are practice-and-GM only, which fits "the deepest things cannot be bought."
+  check("§38: R19 · tier 4 and 5 cannot be trained at all (OI-21 default)",
+    at(4, 99).ok === false && at(5, 99).ok === false);
+
+  // ⛔ RANK 3 IS NEVER FOR SALE — breadth cannot buy the thing depth earns.
+  const r3char = { level: 99, skillPoints: 99, abilities: [{ abilityId: "x", level: 2 }] };
+  const r3 = PR38.rankUpAbility(r3char, "x", rules38, { catalog: { x: { id: "x", tier: 1 } }, skillCapacity: sc38 });
+  check("§38: rank 3 cannot be bought at any price", r3.ok === false, JSON.stringify(r3));
+  const r2char = { level: 99, skillPoints: 99, abilities: [{ abilityId: "x", level: 1 }] };
+  const r2 = PR38.rankUpAbility(r2char, "x", rules38, { catalog: { x: { id: "x", tier: 1 } }, skillCapacity: sc38 });
+  check("§38: …but rank 2 can, at tierPrice", r2.ok === true && r2.cost === SK38.tierPrice({ tier: 1 }, sc38),
+    JSON.stringify(r2));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

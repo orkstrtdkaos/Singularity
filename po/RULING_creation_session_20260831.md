@@ -108,26 +108,41 @@ or a folk/crossing location.** Independent of the sense choice and of domain sel
 
 ---
 
-## R5 — `backlashRung` semantics (OI-15) ✅ RULED
+## R5 — `backlashRung` semantics (OI-15) ✅ RULED — **CORRECTED 2026-09-01**
 
-**`backlashRung` raises the landed harm tier on a critical failure.** It is not a flat
-penalty multiplier — `exhaustedPenalty` already covers generic "it hurts more."
+⛔ **The 2026-08-31 version of this ruling was wrong and is retracted.** It specified `backlashRung`
+as a NUMBER meaning "N rungs ABOVE the craft's own tier." Three things were wrong against the data:
+the field is a rung NAME not a number, it is ABSOLUTE not an offset, and the authored direction is
+MILDER than the craft's harm, not worse. Aevi recorded it as ruled without Erik confirming the
+arithmetic; CCode caught it at `INDEX_ccode_open_for_aevi.md` C4 before anything was built.
 
-`backlashRung: N` means a crit failure lands harm N rungs above the craft's own tier.
-Most crafts are `backlashRung: 1`; a volatile craft may be 2.
+⚠️ **What the retracted version would have done:** all 20 authored `backlashRung` crafts are **tier 1**,
+and most carry `harmRung: lethal`. "N rungs above" would mean a level-1 character crit-failing
+`sustained_regard` takes worse-than-lethal harm — instant death from a starting craft. That
+contradicts Erik's own R7 principle that penalties must not land hardest on low-level players.
 
-**Worked examples:**
-- A Marcher's Tier-3 violence craft with `backlashRung: 1` — crit fail lands a Tier-4 harm
-  on the wielder. The blade meant to open someone opens them instead, deeper than the tier
-  should produce.
-- A Threnodist's Tier-2 grief craft with `backlashRung: 1` — crit fail floods the channeled
-  grief back at Tier-3 intensity, one rung past what a Tier-2 misfire normally costs.
+### ✅ THE RULING — option (a), keep the authored semantics
 
-**Intent:** the craft's own nature turns against the wielder in a craft-specific way, not as
-generic pain. This is why the field is per-craft rather than global.
+**`backlashRung` is an absolute rung NAME naming what the wielder takes on a critical failure.
+It is authored one rung MILDER than the craft's own `harmRung`.** The craft's nature turns inward,
+muted — you are hurt by your own craft, not killed by it.
 
-**CCode build:** `applyBacklash` takes no ability — that is exactly why the field cannot fire.
-One signature change plus two call sites. Now ruled; ready to build.
+| craft | tier | `harmRung` (to target) | `backlashRung` (to wielder) |
+|---|---|---|---|
+| `sustained_regard` | 1 | lethal | damaging |
+| `answered_motion` | 1 | incapacitating | damaging |
+| `plain_weight` | 1 | lethal | incapacitating |
+| `found_fault` | 1 | lethal | incapacitating |
+
+All 20 authored values follow this pattern. **No re-authoring needed.**
+
+**Build:** one signature change — `applyBacklash` currently takes no ability, which is exactly why
+the field cannot fire. Pass the ability; read `backlashRung`; land that rung on the wielder.
+Two call sites. ✅ Ready to build.
+
+**Intent preserved from the original discussion:** the backlash is craft-specific rather than a
+generic penalty. A craft that kills people damages you when it misfires. `exhaustedPenalty` still
+covers generic "it hurts more"; `backlashRung` covers "this particular craft turned on you."
 
 ---
 

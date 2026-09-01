@@ -1,0 +1,140 @@
+# RULING — Character Creation Session
+
+**Ruled by:** Erik · **Date:** 2026-08-31
+**Recorded by:** Aevi
+**Spec:** `po/SPEC_starting_grants_and_creation_revamp.md`
+**Closes:** OI-10, OI-11 (partial), OI-13, OI-15, OI-7
+
+---
+
+## R1 — Cross-class and tier cost structure (OI-10) ✅ RULED
+
+**Tier prices** (replaces 1/2/3/4/5):
+
+| tier | price |
+|---|---|
+| T1 | 1 |
+| T2 | 2 |
+| T3 | 2 |
+| T4 | 3 |
+| T5 | 3 |
+
+**Distance cost: additive, not multiplicative.**
+`learnPointCost = tierPrice + band` — band 0 (home) · 1 (near) · 2 (far/antipode)
+
+| tier | home | near | far |
+|---|---|---|---|
+| T1 | 1 | 2 | 3 |
+| T2 | 2 | 3 | 4 |
+| T3 | 2 | 3 | 4 |
+| T4 | 3 | 4 | 5 |
+| T5 | 3 | 4 | 5 |
+
+Far T5 drops from 15 → 5.
+
+**Intent:** distance should make cross-domain learning meaningfully more expensive, not
+prohibitive. A dedicated generalist should reach far-ring capstone mastery in late game. Two
+natural investment steps (T1→T2, T3→T4). The `+1 levelReq` cross-training gate remains the
+primary difficulty signal.
+
+**CCode follow-up:** re-run the affordability table at L10/50/100 against the new prices —
+average craft cost drops well below 2.511, which changes the points-bind curve and must be
+re-measured before OI-11 insight-bonus curves are finalized. `crossClass.costMultiplier: 2`
+in `skill_capacity.json` is superseded; note or remove it.
+
+---
+
+## R2 — Attribute allocation on all three creation paths (OI-13) ✅ RULED
+
+**Finding:** `state.attrs` is mutated only inside quick-start's `draw()`. Describe and Play
+never call it, so those characters keep `3/3/3/3` — and the argmax resolves a four-way tie to
+mental, compounded by `byLean.mental` fallback. The mental bias lands twice on two of three
+paths. That, not a weak mechanism, is why stat sensitivity does not bite.
+
+**The ruling:** there is a **dedicated point allocation step** on every path. It may follow a
+suggested allocation derived from the path's signals (prologue tags, domain choice, revealed
+preference). The player can always change it before locking in.
+
+- Suggested allocation is a starting position, never the final word
+- The player explicitly confirms before the allocation locks
+- Quick Start's current `draw()` becomes the suggestion seed rather than the final assignment
+- Allocation must complete before the ability pick step on all three paths
+
+---
+
+## R3 — Sense slot at creation (OI-7) ✅ RULED
+
+**At creation, the player makes a forced choice: one Tier-1 sense skill from the pool
+available to their primary domain (any sect within that domain).**
+
+Clarifications that corrected earlier framing:
+
+- ⛔ **"Free" means free to OBTAIN at creation.** The sense craft costs energy to use like any
+  other craft the character owns. Nothing is being zeroed. No energy costs change.
+- ⛔ **Domain, not pole.** Under v2, a domain is the grouping above the poles. 14 domains,
+  7 axes, 24 sects. A player draws from any sect in their primary domain.
+- ⛔ **Not from origin location.** Starting location and sense choice are independent.
+- ⛔ **There is no "Harmonic player."** Harmonic Heights is a location (a foothill of
+  Enginecraft/Latticework in the medium of sound). A player with **Order** as primary domain
+  can select `echo_sense` or `tremor_sense` regardless of where they start.
+
+**Sense coverage — VERIFIED, no gap:** all 14 domains have at least one Tier-1 sense craft.
+The earlier "6 missing poles" count was a pole-level view of a domain-level requirement.
+Nothing needs authoring.
+
+| domain | Tier-1 sense crafts available |
+|---|---|
+| Mind | `mind_read_folk` (cogitant) · `pattern_sense`, `the_true_figure` (figurist) |
+| Body | `body_read` (somatic) · `sound_read`, `stone_read` (mason) |
+| Light | `read_burn`, `lightsense` (blazeborn) · `the_plain_seeing` (verist) |
+| Dark | `darksight`, `felt_room`, `known_in_the_dark` (umbral) · `see_the_made_thing` (veilwright) |
+| Life | `lifesense` (rootkin) |
+| Death | `deathsense` (ashwarden) |
+| Angelic | `the_measuring_eye` (seraphic) |
+| Demonic | `appetite_sense`, `the_read_hunger` (abyssal) |
+| Breaking | `fault_sense` (unmaker) · `read_field`, `read_the_fight` (marcher) |
+| Building | `makers_eye` (wright) · `read_the_room` (stillhold) |
+| Chaos | `loose_thread`, `chaos_sense` (churnfolk) |
+| Order | `ordered_record`, `order_sense` (lattice) · `mech_sense` (enginewright) |
+| Span | `long_watch`, `kept_count`, `hour_sense` (hourkeeper) · `known_way`, `way_sense` (horizon) |
+| Spirit | `numen_sense` (numinous) |
+
+---
+
+## R4 — Starting location (new creation element) ✅ RULED
+
+The player chooses a starting location at creation. It must be **within one of their domains,
+or a folk/crossing location.** Independent of the sense choice and of domain selection.
+
+---
+
+## R5 — `backlashRung` semantics (OI-15) ✅ RULED
+
+**`backlashRung` raises the landed harm tier on a critical failure.** It is not a flat
+penalty multiplier — `exhaustedPenalty` already covers generic "it hurts more."
+
+`backlashRung: N` means a crit failure lands harm N rungs above the craft's own tier.
+Most crafts are `backlashRung: 1`; a volatile craft may be 2.
+
+**Worked examples:**
+- A Marcher's Tier-3 violence craft with `backlashRung: 1` — crit fail lands a Tier-4 harm
+  on the wielder. The blade meant to open someone opens them instead, deeper than the tier
+  should produce.
+- A Threnodist's Tier-2 grief craft with `backlashRung: 1` — crit fail floods the channeled
+  grief back at Tier-3 intensity, one rung past what a Tier-2 misfire normally costs.
+
+**Intent:** the craft's own nature turns against the wielder in a craft-specific way, not as
+generic pain. This is why the field is per-craft rather than global.
+
+**CCode build:** `applyBacklash` takes no ability — that is exactly why the field cannot fire.
+One signature change plus two call sites. Now ruled; ready to build.
+
+---
+
+## Still open
+
+| OI | item | held on |
+|---|---|---|
+| OI-11 | Mental sub → bonus skill points — which sub (insight vs reason), milestone vs curve | Erik, after CCode re-runs curves against R1 prices |
+| OI-3 | Wits `novelPenalty` — should experimentation cost anything? | Erik |
+| OI-5 | Minted NPC baseline kit repurpose | Erik |

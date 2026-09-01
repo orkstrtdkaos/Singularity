@@ -126,3 +126,37 @@ Small surface area:
 2. Add NPC-initiated physical description instruction to `romance_guidance.json` text block
 3. Add tradition-voiced attraction behaviors to the existing tradition section of the guidance doc
 4. No bond system changes until SNG-361 closes
+
+---
+
+## Additions to this spec (2026-09-01)
+
+### Eligibility gate
+
+The attraction draw runs only when ALL of the following are true for the NPC:
+
+- `romanceEligible: true` on the NPC record
+- NPC is adult (not a child character — Pip Cotter, any NPC whose record or appearance description indicates youth below adulthood)
+- NPC is not the player character's blood relative or established family member (Hesta Vorn as Silas's mother: no draw fires regardless of flag)
+- NPC is not already in an established committed relationship to another member of the player's active company
+
+The current `romanceEligible` field is a generation artifact set to `true` by default. This gate closes the cases it misses. CCode should implement as a pre-draw check before rolling either value, not a post-draw filter.
+
+---
+
+### Tradition voice — completed table
+
+The attraction behavior table in Part A covers: Ashwarden, Rootkin, Stillhold, Blazeborn, Wright, Cogitant, Marcher, Umbral, Churnfolk.
+
+**Missing from Part A — add:**
+
+- **Lattice**: orderly in approach, completely committed once past the threshold; attraction surfaces as unusual attention to the player's consistency — whether they do what they said, whether they are the same person twice. Drawn to what doesn't fit their categories and drawn slowly; when they move, they move deliberately and without ambiguity.
+
+**Domain-traditions (Somatic, Syllogist, Figurist, Verist, Hourkeeper, Numinous, Mason, Wayfarer, Cairn-warden, Horizon, Umbral-as-domain):** These are derived positions, not peoples with cultures. They do not require authored attraction behavior entries. Apply the catch-all from the romance guidance: draw on what the tradition values, fears, protects — that's the shape of its desire. A Figurist notices precision and form; a Verist notices honesty under pressure; a Somatic notices physical competence and presence; a Wayfarer notices readiness and the particular way someone carries themselves on the road.
+
+---
+
+### Note on `romance_guidance.json` tradition coverage
+
+The guidance doc already has Lattice in its tradition voice section. The attraction behavior table in this spec should mirror the guidance doc's list exactly. Current guidance traditions: Umbral, Blazeborn, Ashwarden, Rootkin, Marcher, Stillhold, Cogitant, Churnfolk, Lattice. The catch-all rule ("for traditions not listed — draw on the tradition's core character") handles all others including domain-traditions and any peoples tradition not yet authored into the guidance.
+

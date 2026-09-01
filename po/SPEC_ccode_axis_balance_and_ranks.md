@@ -21,52 +21,67 @@ multiplicative bands. Everything below assumes the ruled state instead.
 | `crossClass.costMultiplier: 2` | ⛔ **superseded** | R1 |
 | points per level | **2**, → 3 at Insight 7, → 4 at Insight 14 | R6 (provisional) |
 | breadth cap | level + 1 | `skillsKnownByLevel` |
-| **rank ceiling** | **3** | Erik 2026-09-01 |
+| **rank ceiling** | **3** | ✅ already live — `leveling.maxAbilityRank: 3` |
+| rank level gates | rank 2 at L3, rank 3 at L5 | ✅ live — `leveling.rankLevelReq` |
+| sub-attribute points | **1 per level, player-allocated**, 8 subs, cap 20 | ✅ live — `leveling.subPointPerLevel` |
 
 **Measured against the 414-craft corpus:** mean craft cost **1.84 home · 2.84 near · 3.84 far**
 (was 2.511 under the old ladder — this is the re-measure R1 and R6 both asked for).
 
 ---
 
-## §1 — ✅ R6 ANSWERED: THE CAP BINDS, AND IT PRODUCES THE BALANCE YOU ASKED FOR
+## §1 — ✅ R6 ANSWERED: THE CAP BINDS — AND THE MILESTONE TIMING IS A BUILD CHOICE
 
-> R6: *"does a high-Insight late-game character ever hit the breadth cap? CCode's ROUND 2 found points
-> bind in every band at every level and called the cap decorative."*
+> R6: *"does a high-Insight late-game character ever hit the breadth cap?"*
+> Erik: *"did you remember to model WHEN you would reach Insight 7 and 14? You don't get those bonus
+> skill points from level 1."*
 
-Insight accrues ~+1 per 7.5 levels (fitted to Silas: L30, Insight 8 from base 4). So Insight 7 lands
-around L22 and Insight 14 around L75.
+✅ **The accrual is level-by-level, not retroactive** — each level is awarded the rate its Insight earns at
+that level. A retroactive 4/level would give 400 points at L100; the accrued figure is far lower.
 
-| lvl | Insight | pts/lvl | total pts | cap | affordable @home | affordable @far | binds |
-|---|---|---|---|---|---|---|---|
-| 1 | 4 | 2 | 2 | 2 | 1.1 | 0.5 | points |
-| 10 | 5 | 2 | 20 | 11 | 10.9 | 5.2 | points |
-| **22** | 6 | 2 | 44 | 23 | **23.9** | 11.4 | ⛔ **CAP** |
-| 50 | 10 | 3 | 128 | 51 | 69.5 | 33.3 | ⛔ **CAP** |
-| 75 | 14 | 4 | 204 | 76 | 110.7 | 53.1 | ⛔ **CAP** |
-| 100 | 17 | 4 | 304 | 101 | 164.9 | 79.1 | ⛔ **CAP** |
+⛔ **But my first pass fitted Insight growth to a curve (+1 per 7.5 levels, from Silas), and that is not
+the rule.** `resolution.json.leveling` says **`subPointPerLevel: 1`** — one sub-attribute point per level,
+**allocated by the player**, across **8 subs**, to a cap of **20**. ⛔ **So the milestones do not land at a
+level. They land wherever the player decides to put their points**, and the range is enormous:
 
-⛔ **Yes — the cap binds from about level 22 onward, and my ROUND 2 "the cap is decorative" is reversed by
-R1.** It was true under the old prices and is false under the new ones.
+| allocation policy | Insight 7 at | Insight 14 at | total pts @ L100 |
+|---|---|---|---|
+| ⛔ **DUMPER** — every sub-point into Insight | **L4** | **L11** | **387** |
+| SILAS — ~17% into Insight (the fit I used) | L24 | L65 | 313 |
+| SPREAD — even across all 8 subs | L32 | L88 | 282 |
 
-✅ **AND THIS IS EXACTLY THE BALANCE YOU SPECIFIED**, in your words from the unlock-levels thread:
-*"If I have extra skill points that means I can afford to splurge on an expensive cross class skill. If I
-do this all the time I should be point starved — if I only buy in my home band I'll be cap limited."*
+⛔ **A dumper is at the top bonus rate from level 11 and finishes 105 points (37%) richer than a spread
+build.** ⚠️ **That breaks R6's "milestone" framing** — at 7 and 14 these are not late-game rewards a
+character grows into, they are an opening build decision. ⬜ **Erik should see this before OI-11 locks.**
 
-**Buy only at home → cap-limited (164.9 affordable vs 101 slots). Buy far → point-starved (79.1 vs 101).**
-✅ **R1 hits the target you named. No tuning needed.**
+### ✅ The headline survives every policy
 
-### ⛔ But it opens a hole: the surplus
+| policy | lvl | pts | cap | afford @home | afford @far | binds |
+|---|---|---|---|---|---|---|
+| DUMPER | 22 | 75 | 23 | 40.7 | 19.5 | ⛔ CAP |
+| DUMPER | 100 | 387 | 101 | 210.0 | 100.7 | ⛔ CAP |
+| SILAS | 22 | 44 | 23 | 23.9 | 11.4 | ⛔ CAP |
+| SILAS | 100 | 313 | 101 | 169.8 | 81.4 | ⛔ CAP |
+| SPREAD | 100 | 282 | 101 | 153.0 | 73.4 | ⛔ CAP |
 
-| lvl | total pts | a full home shelf costs | **surplus** | % of career banked |
-|---|---|---|---|---|
-| 22 | 44 | 42 | 2 | 4% |
-| 50 | 128 | 94 | 34 | 27% |
-| 75 | 204 | 140 | 64 | 31% |
-| 100 | 304 | 186 | **118** | **39%** |
+⛔ **Yes — the cap binds at home from about level 22 under EVERY allocation policy**, which reverses my
+ROUND 2 "the cap is decorative." That was true under the old ladder and is false under R1.
 
-⛔ **A high-Insight late character banks nearly two fifths of everything it earns**, because points can only
-buy breadth and breadth is capped. ✅ **That is the hole your rank-2-by-training fills — the model says it
-is not a nice-to-have, it is load-bearing.**
+✅ **AND IT LANDS EXACTLY THE BALANCE YOU SPECIFIED:** *"if I only buy in my home band I'll be cap limited"*
+— 210 affordable against 101 slots — *"if I do this all the time I should be point starved"* — 100.7
+affordable at far against 101 slots. ✅ **R1 hits your stated target without tuning.**
+
+### ⛔ The surplus is real, and it too is a build choice
+
+| policy | L100 surplus | share of career banked |
+|---|---|---|
+| ⛔ DUMPER | **201 pts** | **52%** |
+| SILAS | 127 pts | 41% |
+| SPREAD | 96 pts | 34% |
+
+⛔ **An Insight-dumper banks more than half of everything it earns.** ✅ **That is the hole your
+rank-2-by-training fills — and the dumper is precisely the build that needs it most, which is the right
+shape: the player who invested in acquisition gets somewhere to put it.**
 
 ---
 
@@ -86,15 +101,28 @@ banked points somewhere to go; rank 3 stays a thing the world grants, so mastery
 **Proposed price for training to rank 2: what the craft cost to learn — `tierPrice + band`.** Consistent
 with R1's idiom, and it keeps cross-domain depth genuinely dearer than home depth.
 
-| lvl | surplus | cost to train the whole shelf to r2 | share of shelf the surplus covers |
-|---|---|---|---|
-| 50 | 34 | 94 | 36% |
-| 75 | 64 | 140 | 46% |
-| 100 | 118 | 186 | **63%** |
+A full L100 shelf is 101 crafts; training all of them to rank 2 costs **186 points** at home prices.
 
-✅ **At L100 the surplus trains about 63% of your shelf.** ⛔ **It deliberately does NOT absorb everything** —
-if training were cheap enough to soak the whole surplus, the breadth cap would stop meaning anything and
-we would be back to points-bind-always. **A real choice every level is the right amount of pressure.**
+| policy | L100 surplus | share of the shelf it can train to r2 |
+|---|---|---|
+| ⛔ DUMPER | 201 | ⛔ **108% — the sink OVERFLOWS** |
+| SILAS | 127 | 68% |
+| SPREAD | 96 | 52% |
+
+⚠️ **For the spread and Silas builds this is exactly right** — a real choice every level, and deliberately
+not enough to train everything, so banking still stings and the cap keeps meaning something.
+
+⛔ **But the DUMPER overflows the sink.** Training every craft to rank 2 costs 186 and they bank 201, so
+even after spending everything on depth they still have points idle. ⬜ **Two ways to close it, Erik's
+call:**
+
+| | fix | effect |
+|---|---|---|
+| **i** | **train-to-r2 costs `tierPrice + band` × 2** | doubles the sink to 372; nobody overflows |
+| **ii** | ⛔ **soften R6's milestones** (e.g. +1 at Insight 10 only, no second step) | fewer points exist to bank |
+
+⬜ **I lean (i)** — it keeps R6 intact, and "depth costs more than breadth did" is defensible on its own
+terms. ⚠️ **(ii) is the honest alternative if you decide a 387-point career was never intended.**
 
 ---
 

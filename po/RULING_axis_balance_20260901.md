@@ -93,13 +93,50 @@ Accepted as-is. Revisit if play shows the dumper build dominating.
 
 ---
 
+## R16 — Antipode tier ceiling: rises with `lean` ✅ RULED (2026-09-01)
+
+⛔ **The conflict CCode found:** R10 caps `far` at tier II. R9 says sustained balance earns price
+parity. **If the antipode is far, both are true and they cancel** — a balanced cross-pole character
+pays parity for crafts they can never take past novice depth. R9 buys nothing.
+
+### ✅ THE RULING — CCode's option (c)
+
+**The antipode's tier ceiling RISES with the same `lean` R9 already computes.** Not a fixed cap,
+not `far`'s 2 — a ceiling that lifts as the character commits.
+
+```
+antipode ceiling = f( lean )        ← same lean as the R9 surcharge
+```
+
+⚠️ **This makes R9 and R10 one mechanism instead of two rules fighting.** The lean a character earns
+buys **both** price parity **and** depth. Dabble and you are capped shallow and pay the surcharge;
+commit and both barriers recede together. The barrier is to dabbling, not to crossing — which was
+R9's stated intent all along, now actually true of depth as well as price.
+
+**The descending ladder from R10 stands for the non-antipode standings:**
+
+| standing | ceiling |
+|---|---|
+| primary | 5 |
+| secondary | 4 |
+| tertiary | 3 |
+| far (non-antipode) | 2 |
+| **antipode** | ⚠️ **derived from `lean`** — not a fixed number |
+
+⬜ **CCode picks the curve** — how fast the ceiling climbs against lean is an implementation dial.
+Report the shape chosen and the tier reached at lean 0.0 / 0.5 / 1.0 so Erik can see it.
+
+✅ **Unblocks build steps 3, 5 and 6 together.**
+
+---
+
 ## Build order (CCode — nothing blocked on Erik after this)
 
 | # | step | status |
 |---|---|---|
 | 1 | ⛔ fix the seven `levelReq`-as-tier readers | build now — blocks step 3 |
 | 2 | R1 prices + additive bands; retire `crossClass.costMultiplier` | build now |
-| 3 | tier ceilings per R10 (5 / 4 / 3 / 2) | after step 1 |
+| 3 | tier ceilings — R10 ladder (5/4/3/2) + **R16 lean-derived antipode ceiling** | ✅ unblocked; after step 1 |
 | 4 | rank ceiling 3 + train-to-rank-2 at `tierPrice + band` (R8) | build now |
 | 5 | drop `castable:false` + the seven foreclosure sites | build now |
 | 6 | `lean` + antipode surcharge, S = 2, dial A (R9) | build now |

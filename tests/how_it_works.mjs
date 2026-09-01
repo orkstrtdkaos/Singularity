@@ -2153,7 +2153,11 @@ console.log("\n── §35 · every tier question goes through abilityTier ─�
     const src = readFileSync(join(root, f), "utf8").split(/\r?\n/);
     src.forEach((line, i) => {
       const code = line.replace(/\/\/.*$/, "").replace(/\/\*.*?\*\//g, "");
+      // ⛔ TWO SHAPES, NOT ONE. The first sweep looked only for tierOf(x.levelReq) — a SYNTACTIC shape —
+      // and missed four callers handing `levelReq` to domainAccess’s TIER PARAMETER, one of them the main
+      // learn gate. ⚠️ SCAN FOR THE ROLE, NOT THE SPELLING: any tier helper, and any tier argument.
       if (/tier(?:Of|Num|Price)\s*\(\s*[A-Za-z_$][\w$]*\??\.\w*[Ll]evelReq/.test(code)) offenders35.push(`${f}:${i + 1}`);
+      if (/domainAccess\([^,]+,\s*[A-Za-z_$][\w$]*\??\.\w*[Ll]evelReq/.test(code)) offenders35.push(`${f}:${i + 1} (tier arg)`);
     });
   }
   check("§35: no reader in ANY engine module treats `levelReq` as the tier",

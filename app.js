@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.292";
+const APP_VERSION = "1.9.293";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3309,7 +3309,7 @@ function domainCircleSVG(idx, { primary = null, secondary = null, tertiary = nul
 function domainVerdict(ability) {
   // SNG-089: Accord crafts are ungated by origin/domain — offered (and learnable) to anyone at base cost.
   if (ability?.accord) return { allowed: true, penalty: 1, band: "accord" };
-  return domainAccess(ability, ability?.levelReq || 1, character?.domains, CONTENT.traditionIndex);
+  return domainAccess(ability, null, character?.domains, CONTENT.traditionIndex);
 }
 
 /** SNG-094: the effective LEVEL requirement to learn an ability, mirroring learnAbility. For a character
@@ -9323,7 +9323,7 @@ function buildWheelModel(sheet = character) {
   }
   const mk = (ab, x, y, ang, extra = {}) => {
     const trad = traditionOf(ab, idx);
-    const v = domainAccess(ab, ab.levelReq || 1, domains, idx);
+    const v = domainAccess(ab, null, domains, idx);
     const isOwned = owned.has(ab.id);
     // SNG-218 §1: ONE gate. canLearnAbility runs every learn-gate term (level + domain + attribute + the
     // capstone STANDING bar + capacity + affordability), so `reachable` can never again disagree with the

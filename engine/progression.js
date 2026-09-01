@@ -396,7 +396,7 @@ export function domainGateFor(ab, character, traditionIndex) {
   // costs a point (base 1); the tuition is the journey to the waygate, not a domain gate.
   if (ab?.accord) return { allowed: true, penalty: 1, band: "accord" };
   if (!traditionIndex || !character?.domains?.primary) return { allowed: true, penalty: 1, band: "open" };
-  return domainAccess(ab, ab?.levelReq || 1, character.domains, traditionIndex, domainOpts(character));
+  return domainAccess(ab, null, character.domains, traditionIndex, domainOpts(character));
 }
 
 // ---------- SNG-101: domain promotion (raise a domain's ceiling; foreclose its antipode) ----------

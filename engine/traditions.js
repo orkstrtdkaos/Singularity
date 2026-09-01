@@ -196,7 +196,12 @@ export function domainAccess(ability, tier, domains, index, opts = {}) {
 
 function domainAccessInner(ability, tier, domains, index, opts = {}) {
   const trad = traditionOf(ability, index);
-  const T = Math.max(1, Math.min(5, Number(tier) || 1));
+  // ⛔ CCODE-341c — THE TIER ARGUMENT WAS A TRAP. Four callers passed `ability.levelReq` here, because
+  // the parameter is called `tier` and the two fields were the same thing until CCODE-340. A caller
+  // that must restate a fact the ability already carries WILL eventually restate it wrongly.
+  // ⚠️ NOW OPTIONAL: pass null/undefined and the craft's own tier is used. An explicit tier still wins,
+  // which the probes and §36 rely on.
+  const T = tier == null ? abilityTier(ability) : Math.max(1, Math.min(5, Number(tier) || 1));
   if (!trad || !index) return { allowed: true, penalty: 1, band: "open", reason: "ungoverned" };
   if (isFolkTradition(trad, index)) return { allowed: true, penalty: 1, band: "folk", reason: "folk tradition — open in the Valley" };
   const primary = domains?.primary, secondary = domains?.secondary, tertiary = domains?.tertiary;

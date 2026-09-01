@@ -178,7 +178,7 @@ export function creationPickable(ability, { domains, grantIds = [], traditionInd
   //
   // ⛔ IT IS STILL NOT CASTABLE. A character can begin holding their antipode's first craft as BRAID
   // MATERIAL, and the sheet says so (`braid material only — you cannot cast this`).
-  return domainAccess(ability, ability.levelReq || 1, domains, traditionIndex).allowed === true;
+  return domainAccess(ability, null, domains, traditionIndex).allowed === true;
 }
 
 /** The whole creation pool, in ring-independent order. `catalog` is any {id: ability} map or array. */

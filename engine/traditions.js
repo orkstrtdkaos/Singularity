@@ -186,6 +186,34 @@ const CAPSTONE_TIER = 4; // tier IV–V are the single-mastery capstones
 // ⚠️ THE PUBLIC ENTRY MARKS THE VERDICT. `domainAccess` has a dozen return points and the antipode rule cuts
 // across all of them, so the mark is applied ONCE here rather than at each `return` — which is how one of
 // them would eventually be added without it.
+function num(v, d) { const n = Number(v); return Number.isFinite(n) ? n : d; }
+
+/** ⛔ R9/R16 — HOW FAR THIS CHARACTER HAS LEANED ALONG ONE AXIS, from the weights domainOpts supplies.
+ *  weight = Σ (tier × rank) per tradition — breadth as the number of terms, depth as tier and rank.
+ *  ⚠️ ABSENT WEIGHTS READ AS 1.0, which is not a guess: it is the true value for a character who has
+ *  never touched the far pole, and the conservative reading if the catalog was not supplied. */
+export function antipodeLean(homeTrad, antiTrad, opts = {}) {
+  const w = opts.axisWeights;
+  if (!w) return 1;
+  const h = num(w[homeTrad], 0), a = num(w[antiTrad], 0);
+  // ⛔ BALANCE MUST BE EARNED. `lean` is a RATIO, so at low weight it is noise: one home craft and one
+  // antipode craft reads as PERFECT balance and would hand a level-1 character the primary's own
+  // ceiling in their far pole. ⚠️ The CCODE-224 gate warned of this before R16 existed. Below the
+  // authored floor the character is a novice on this axis and the far pole stays far.
+  const floor = num(opts.skillCapacity?.minAxisWeight, 20);
+  if (h + a < floor) return 1;
+  return Math.max(0, Math.min(1, (h - a) / (h + a)));
+}
+
+/** ⛔ R16 — the ceiling the lean has earned. The table is AUTHORED (`skill_capacity.antipodeCeilingByLean`)
+ *  so the curve is Erik's to move without a code change. Defaults mirror the authored table. */
+export function antipodeCeiling(lean, skillCapacity) {
+  const table = skillCapacity?.antipodeCeilingByLean
+    || [{ maxLean: 0.15, ceiling: 5 }, { maxLean: 0.45, ceiling: 4 }, { maxLean: 0.75, ceiling: 3 }, { maxLean: 1, ceiling: 2 }];
+  for (const row of table) if (lean <= num(row.maxLean, 1)) return num(row.ceiling, 2);
+  return num(table[table.length - 1]?.ceiling, 2);
+}
+
 export function domainAccess(ability, tier, domains, index, opts = {}) {
   const v = domainAccessInner(ability, tier, domains, index, opts);
   // ⛔ `castable` is TRUE unless the verdict says otherwise, so every existing caller that ignores it reads
@@ -211,8 +239,11 @@ function domainAccessInner(ability, tier, domains, index, opts = {}) {
 
   // SNG-101 FORECLOSED — a pole you committed against by promoting its opposite. NATIVES only; a braid
   // (nativeOrCombination === "combination") is the sanctioned road across the axis and is NEVER foreclosed.
-  if ((opts.foreclosed || []).includes(trad) && ability?.nativeOrCombination !== "combination")
-    return { allowed: false, penalty: 1, band: "foreclosed", reason: "foreclosed — you chose the other end of this axis; only a braid crosses it now" };
+  // ⛔ R9/R16 REMOVED THE FORECLOSURE. Promotion used to CLOSE the antipode of the domain you raised, and
+  // this branch enforced it. The axis is now governed by a price and a ceiling that both move with `lean`,
+  // so nothing needs to be shut. ⚠️ `opts.foreclosed` IS STILL READ NOWHERE ELSE — old saves may carry the
+  // array and it is simply ignored, which is deliberate: they must not keep a restriction new characters
+  // never get.
 
   // ⛔ CCODE-339 / ERIK’S RULING: "we need to rework the domain access model SO WE NO LONGER LOSE ACCESS TO
   // THE ANTIPOLES… you can't use the skill itself, ONLY THE BRAIDABLE PART."
@@ -262,8 +293,29 @@ function domainAccessInner(ability, tier, domains, index, opts = {}) {
   const penalty = steps <= 1 ? 2 : steps <= 4 ? 2 : 3;
   // ⚠️ THE ANTIPODE IS A `far` CRAFT THAT CANNOT BE CAST. It is reached the ordinary way and priced the
   // ordinary way; the only thing that differs is what you may do with it once held.
-  if (antipodal) return { allowed: true, castable: false, penalty, band: "antipode",
-    reason: "the far pole of your own axis — you may learn it, but you cannot cast it; it is braid material" };
+  // ⛔ R16 (ERIK 2026-09-01) — THE ANTIPODE'S CEILING RISES WITH LEAN, and R9 prices it by the same lean.
+  //
+  // ⚠️ R9 AND R10 CANCELLED EACH OTHER. R10 capped `far` at tier II; R9 said sustained balance earns
+  // price parity. If the antipode were merely `far`, a balanced cross-pole character would pay parity for
+  // crafts they could never take past novice depth — R9 would buy nothing. Erik: make them ONE mechanism.
+  //
+  // ✅ So the lean a character earns buys BOTH: the price relief AND the depth. Dabble and you are capped
+  // shallow and pay the surcharge; commit and both barriers recede together. The barrier is to DABBLING.
+  //
+  // ⚠️ `castable: false` IS GONE. CCODE-339 made the antipode learnable-but-not-castable as a halfway
+  // step; R9/R16 replace that with a price and a ceiling, which is what Erik asked for: "I'd like to allow
+  // the use of the learned skills in the antipole."
+  if (antipodal) {
+    const home = trad === antipodeOf(primary, index) ? primary : secondary;
+    const lean = antipodeLean(home, trad, opts);
+    const ceiling = opts.domainCeilings?.[trad] ?? antipodeCeiling(lean, opts.skillCapacity);
+    const surcharge = Math.round((num(opts.skillCapacity?.antipodeLeanSurcharge, 2)) * lean);
+    return T <= ceiling
+      ? { allowed: true, penalty, band: "antipode", lean, leanSurcharge: surcharge,
+          reason: `the far pole of your own axis — to tier ${ceiling} at your present balance` }
+      : { allowed: false, penalty, band: "antipode", lean, leanSurcharge: surcharge,
+          reason: `the far pole of your own axis — you have leaned too far from it to reach tier ${T} (yours tops out at ${ceiling}; carry more of that pole and it rises)` };
+  }
   return { allowed: true, penalty, band: "far", reason: `${Number.isFinite(steps) ? steps : "many"} steps from your nearest domain — costs more` };
 }
 

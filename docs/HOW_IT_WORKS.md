@@ -442,7 +442,7 @@ working papers; **this is the answer.**
 | 09-01 | ⚠️ **`acquirable` still enforces the antipode rule CCODE-339 replaced** | it refuses your antipode with *"closed-opposite holds; **the braid is the only road**"* (`progression.js:466`) — but CCODE-339 made the antipode **learnable, not castable**, and updated `domainAccess` only | flagged, not changed. ⬜ **Probably still right in substance** — learning a craft and JOINING A PEOPLE are different commitments — **but it should be a decision rather than a leftover**, and the reason string should stop citing a rule that no longer exists | ⛔ **A RULING THAT UPDATES ONE READER LEAVES THE OTHERS SPEAKING THE OLD LAW.** I changed `domainAccess` and never asked who else enforced the same rule |
 
 <<<<<<< HEAD
-**Last verified: 2026-09-01 · v1.9.293 · 414 crafts.**
+**Last verified: 2026-09-01 · v1.9.295 · 414 crafts.**
 =======
 **Last verified: 2026-08-31 · v1.9.285 · 412 crafts.**
 >>>>>>> 17b21fbc (CCODE-339: the antipode is learnable and not castable - the one gate that was a wall becomes a mark)

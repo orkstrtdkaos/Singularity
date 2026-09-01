@@ -1946,7 +1946,50 @@ console.log("\n── §32 · the antipode is learnable, and it cannot be cast �
 
   check("§32: the antipode is REACHABLE — the wall is gone",
     vAnti.allowed === true, JSON.stringify(vAnti));
-  check("§32: …and it CANNOT be cast", vAnti.castable === false);
+  // ⛔ R16 (2026-09-01) RETIRED THE RULE THIS LINE ASSERTED. CCODE-339 made the antipode
+  // learnable-but-not-castable as a halfway step; R9/R16 replaced that with a PRICE and a CEILING that
+  // both move with `lean`. Erik: "I'd like to allow the use of the learned skills in the antipole."
+  // ⚠️ A GATE DEFENDING A RETIRED RULING IS WORSE THAN NO GATE — it reads as confirmation. Rewritten to
+  // assert what R16 actually says.
+  check("§32: …and it IS castable now — R16 replaced the wall with a price and a ceiling",
+    vAnti.castable !== false, JSON.stringify(vAnti));
+
+  // ⛔ THE CEILING RISES WITH LEAN — the whole of R16 in three probes.
+  const scA = rj("content/packs/core/rules/skill_capacity.json");
+  const atLean = (lean, tier) => TRa.domainAccess({ tradition: anti }, tier, D, idxa,
+    { axisWeights: { umbral: 100, [anti]: lean >= 1 ? 0 : Math.round(100 * (1 - lean) / (1 + lean)) }, skillCapacity: scA });
+  check("§32: a specialist who never touched the far pole is capped shallow there",
+    atLean(1, 2).allowed === true && atLean(1, 3).allowed === false,
+    `T2 ${atLean(1,2).allowed} / T3 ${atLean(1,3).allowed}`);
+  check("§32: …and a character who carries both ends evenly reaches the top",
+    atLean(0, 5).allowed === true, JSON.stringify(atLean(0, 5)));
+  check("§32: the surcharge falls to zero at balance and is paid in full at full lean",
+    atLean(0, 3).leanSurcharge === 0 && atLean(1, 3).leanSurcharge === (scA.antipodeLeanSurcharge ?? 2),
+    `${atLean(0,3).leanSurcharge} / ${atLean(1,3).leanSurcharge}`);
+
+  // ⛔ NOTHING FORECLOSES. Promotion used to shut the antipode; R16 removed both writers and every reader.
+  const PRa = await import("../engine/progression.js");
+  check("§32: an old save carrying `foreclosed` is no longer restricted by it",
+    TRa.domainAccess({ tradition: anti, nativeOrCombination: "native" }, 1, D, idxa,
+      { foreclosed: [anti], axisWeights: { umbral: 10, [anti]: 10 }, skillCapacity: scA }).allowed === true);
+  // ⛔ BALANCE MUST BE EARNED. `lean` is a RATIO, so at low weight it is noise — one home craft and one
+  // antipode craft measures as PERFECT balance. ⚠️ Before the floor, a LEVEL-1 character could take one
+  // craft each side at creation and hold the primary's own ceiling in their far pole. The CCODE-224 gate
+  // warned of exactly this shape before R16 existed — 'a character can begin able to use both ends of
+  // their axis and the wheel stops meaning anything'. `minAxisWeight` is what keeps that honest now.
+  const leanAt = (h, a) => TRa.antipodeLean("umbral", anti, { axisWeights: { umbral: h, [anti]: a }, skillCapacity: scA });
+  check("§32: a level-1 character with one craft each side is NOT balanced — the floor holds",
+    leanAt(1, 1) === 1, `lean ${leanAt(1, 1)}`);
+  check("§32: …nor is a character still short of the authored floor",
+    leanAt(6, 6) === 1, `lean ${leanAt(6, 6)} at total 12, floor ${scA.minAxisWeight}`);
+  check("§32: …but real weight on both poles DOES read as balance",
+    leanAt(30, 30) === 0, `lean ${leanAt(30, 30)}`);
+  check("§32: and a deep specialist still reads as fully leaned",
+    leanAt(60, 0) === 1, `lean ${leanAt(60, 0)}`);
+  check("§32: the floor is authored, not hardcoded",
+    Number.isFinite(scA.minAxisWeight) && scA.minAxisWeight > 0, JSON.stringify(scA.minAxisWeight));
+  check("§32: …and nothing writes that array any more",
+    !/character\.foreclosed\s*=|foreclosed\.push\(/.test(readFileSync(join(root, "engine/progression.js"), "utf8")));
   // ⛔ AND NOTHING ELSE BECAME UNCASTABLE. `allowed` answers "may I hold this"; `castable` answers "may I
   // use it", and conflating them would quietly disarm every other craft in the game.
   check("§32: an ordinary far craft is still castable", vFar.castable === true && vFar.allowed === true);

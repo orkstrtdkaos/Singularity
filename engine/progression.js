@@ -279,7 +279,6 @@ export function autoAdvancePracticedRanks(character, rules, opts = {}) {
     if (!practicedForRank(character, owned.abilityId, 2, rules)) continue;
     const req = rules.leveling?.rankLevelReq?.["2"] ?? 1;
     if ((character.level || 1) < req) continue;            // the level bar still holds
-    if (isForeclosedNative(character, owned.abilityId, opts.catalog, opts.traditionIndex)) continue; // SNG-101: a foreclosed native does not deepen by ordinary means
     if (opts.branchForks && forkPending(character, owned.abilityId, 2, opts.branchForks)) continue;
     owned.level = 2;
     advanced.push(owned.abilityId);
@@ -297,7 +296,6 @@ export function markDefiningMoment(character, abilityId, rules, opts = {}) {
   const max = rules.leveling?.maxAbilityRank ?? 3;
   if (owned.level >= max) return { ok: false, why: "already mastered" };
   if (owned.level < 2) return { ok: false, why: "not yet practiced — rank 2 comes first" };
-  if (isForeclosedNative(character, abilityId, opts.catalog, opts.traditionIndex)) return { ok: false, why: "foreclosed — you chose the other end of this axis; only a braid crosses it now" }; // SNG-101
   if (!practicedForRank(character, abilityId, owned.level + 1, rules)) return { ok: false, why: "not practiced enough for mastery yet" };
   const req = rules.leveling?.rankLevelReq?.[String(owned.level + 1)] ?? 1;
   if ((character.level || 1) < req) return { ok: false, why: `requires level ${req}` };
@@ -390,13 +388,13 @@ export function effectiveLevelReq(ab, character, rules) {
  *  Reads the great-circle geometry via domainAccess (traditions.json). Only applies once a
  *  character has crystallized/picked domains; legacy (no domains) stays open. Braid combinations
  *  and artifact grants never route through learnAbility, so those crossings are unaffected. */
-export function domainGateFor(ab, character, traditionIndex) {
+export function domainGateFor(ab, character, traditionIndex, catalog = null, skillCapacity = null) {
  // registry:internal
   // SNG-089: an Accord craft is FREELY ACCESSED — ungated by origin/domain/ring-distance. It still
   // costs a point (base 1); the tuition is the journey to the waygate, not a domain gate.
   if (ab?.accord) return { allowed: true, penalty: 1, band: "accord" };
   if (!traditionIndex || !character?.domains?.primary) return { allowed: true, penalty: 1, band: "open" };
-  return domainAccess(ab, null, character.domains, traditionIndex, domainOpts(character));
+  return domainAccess(ab, null, character.domains, traditionIndex, domainOpts(character, catalog, traditionIndex, skillCapacity));
 }
 
 // ---------- SNG-101: domain promotion (raise a domain's ceiling; foreclose its antipode) ----------
@@ -406,6 +404,29 @@ function inDomainRanks(character, traditionId, catalog, index) {
   let n = 0;
   for (const o of character.abilities || []) { const ab = catalog?.[o.abilityId]; if (ab && traditionOf(ab, index) === traditionId) n += o.level || 0; }
   return n;
+}
+
+/** ⛔ R9/R16 — HOW FAR A CHARACTER HAS LEANED, measured in BREADTH **and** DEPTH.
+ *
+ *  Erik: "lean can measure a combination — breadth (count of skills) and depth (tier and ranks)."
+ *  weight(tradition) = Σ over its crafts of (tier × rank). Breadth enters as the NUMBER of terms,
+ *  craft depth as `tier`, practice depth as `rank`. One expression, nothing bolted on.
+ *
+ *  ⚠️ MULTIPLICATIVE ON PURPOSE. Under `tier × rank` a Tier-V is three times more lean-efficient per
+ *  point than a Tier-I, so buying the cheapest craft you can and grinding it — the obvious exploit — is
+ *  the WORST opening move rather than the best. Additive weight gives the T5 only a 1.4× edge.
+ *  ⚠️ And rank 3 is GM-only, so the top of the range cannot be self-served at all. */
+export function axisWeights(character, catalog, index) {
+  const out = {};
+  if (!catalog || !index) return out;
+  for (const o of character?.abilities || []) {
+    const ab = catalog[o.abilityId];
+    if (!ab) continue;
+    const trad = traditionOf(ab, index);
+    if (!trad) continue;
+    out[trad] = (out[trad] || 0) + abilityTier(ab) * Math.max(0, Number(o.level) || 0);
+  }
+  return out;
 }
 
 /** SNG-101: is a chosen domain eligible for promotion up one station? domainKey ∈ {tertiary, secondary}.
@@ -447,7 +468,8 @@ export function promote(character, domainKey, rules, opts = {}) {
   // foreclose the antipode (directional — closes new native learning/ranking; owned ground & braids stay)
   const anti = opts.traditionIndex ? antipodeOf(trad, opts.traditionIndex) : null;
   let foreclosedAntipode = null;
-  if (anti) { character.foreclosed = character.foreclosed || []; if (!character.foreclosed.includes(anti)) { character.foreclosed.push(anti); foreclosedAntipode = anti; } }
+  // ⛔ R9/R16 — NOTHING FORECLOSES ANY MORE. Raising a domain used to shut its antipode; the axis is
+  // now held by a price and a ceiling that both move with `lean`, so there is nothing to close.
   return { ok: true, trad, to, newCeiling, foreclosedAntipode };
 }
 
@@ -461,9 +483,10 @@ export function acquirable(character, traditionId, rules, opts = {}) {
   if (!traditionId || !idx?.byId?.[traditionId]) return { ok: false, reason: "not a real people of the circle" };
   const d = character?.domains || {};
   if ([d.primary, d.secondary, d.tertiary, ...(character?.domainsAcquired || [])].includes(traditionId)) return { ok: false, reason: "already a domain you hold" };
-  if ((character?.foreclosed || []).includes(traditionId)) return { ok: false, reason: "foreclosed — the far pole of an axis you've chosen; only a braid crosses it" };
-  if (traditionId === antipodeOf(d.primary, idx) || (d.secondary && traditionId === antipodeOf(d.secondary, idx)))
-    return { ok: false, reason: "the far pole of your own axis — closed-opposite holds; the braid is the only road" };
+  // ⛔ R9/R16 RETIRED THE CLOSED-OPPOSITE RULE THIS REFUSED ON. It read "the braid is the only road" — a
+  // rule CCODE-339 had already replaced and R16 has now finished replacing. ⚠️ Joining the far pole of your
+  // own axis is now governed by the SAME standing bar as joining anyone else: their teacher or their tome,
+  // and reputation earned. It is not free, it is simply no longer forbidden.
   const a = rules?.acquisition || {};
   const { score } = standingWithPeople(character, traditionId, rules);
   if (score < (a.minReputation ?? 8)) return { ok: false, reason: `deeper standing with this people (${score}/${a.minReputation ?? 8})` };
@@ -486,26 +509,21 @@ export function acquireDomain(character, traditionId, rules, opts = {}) {
   if (character.domainCeilings[traditionId] == null) character.domainCeilings[traditionId] = rules?.acquisition?.startingCeiling ?? 1;
   const anti = opts.traditionIndex ? antipodeOf(traditionId, opts.traditionIndex) : null;
   let foreclosedAntipode = null;
-  if (anti) { character.foreclosed = character.foreclosed || []; if (!character.foreclosed.includes(anti)) { character.foreclosed.push(anti); foreclosedAntipode = anti; } }
+  // ⛔ R9/R16 — NOTHING FORECLOSES ANY MORE. Raising a domain used to shut its antipode; the axis is
+  // now held by a price and a ceiling that both move with `lean`, so there is nothing to close.
   return { ok: true, traditionId, foreclosedAntipode };
 }
 
 /** SNG-101: the additive per-character access state domainAccess consults (all absent-tolerant). */
-export function domainOpts(character) {
+export function domainOpts(character, catalog = null, index = null, skillCapacity = null) {
  // registry:internal
-  return { foreclosed: character?.foreclosed, domainCeilings: character?.domainCeilings, domainsAcquired: character?.domainsAcquired };
+  return { foreclosed: character?.foreclosed, domainCeilings: character?.domainCeilings, domainsAcquired: character?.domainsAcquired,
+    // ⚠️ R16: absent weights read as lean 1.0 — which is the TRUE value for a character who has never
+    // touched the far pole, and the conservative reading when the catalog was not supplied.
+    axisWeights: (catalog && index) ? axisWeights(character, catalog, index) : null,
+    skillCapacity: skillCapacity || null };
 }
 
-/** SNG-101: is this OWNED ability a NATIVE of a foreclosed antipode (so it must not rank up by ordinary
- *  means)? Braids (nativeOrCombination === "combination") are exempt — the road across the axis. */
-function isForeclosedNative(character, abilityId, catalog, index) {
-  const set = character?.foreclosed;
-  if (!set || !set.length || !catalog || !index) return false;
-  const ab = catalog[abilityId];
-  if (!ab || ab.nativeOrCombination === "combination") return false;
-  const trad = traditionOf(ab, index);
-  return !!(trad && set.includes(trad));
-}
 
 /** SNG-100b: the capstone standing bar the accessGates fiction (SNG-049/050) always described but no
  *  code enforced — "rank IV–V of a pole-tradition requires deep standing: a willing teacher + earned
@@ -559,7 +577,7 @@ export function canLearnAbility(character, abilityId, catalog, rules, opts = {})
   if (req === null) return { ok: false, why: character?.domains?.primary ? "outside your domains" : "wrong tradition", gate: "domain" };
   if (character.level < req) return { ok: false, why: `requires level ${req}${req !== (ab.levelReq || 1) ? " (cross-training)" : ""}`, gate: "level" };
   // SNG-BATCH-10: the great-circle domain gate — antipode closed, tier caps, capstone rule.
-  const verdict = domainGateFor(ab, character, opts.traditionIndex);
+  const verdict = domainGateFor(ab, character, opts.traditionIndex, catalog, opts.skillCapacity);
   if (!verdict.allowed) return { ok: false, why: verdict.reason || "outside your domains", gate: "domain" };
   if (opts.attributeGates) {
     const g = meetsLearnGate(character, abilityId, opts.attributeGates);

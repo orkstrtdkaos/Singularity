@@ -2991,11 +2991,18 @@ check("SNG-126/355: parting stops the benefits (trainerFor/liaison empty) AND KE
 
   const r = promote(c, "tertiary", rules, opts);
   check("promote raises the tertiary ceiling to III", r.ok && c.domainCeilings.seraphic === 3);
-  check("promote forecloses the promoted domain's antipode", (c.foreclosed || []).includes("abyssal"));
+  // ⛔ R16 (2026-09-01) — PROMOTION NO LONGER FORECLOSES ANYTHING. Raising a domain used to shut its
+  // antipode; the axis is now held by a price and a ceiling that both move with `lean`, so there is
+  // nothing to close. ⚠️ This asserted the OPPOSITE and was green — a gate defending a retired rule.
+  check("R16: promote forecloses NOTHING — the axis is priced, not closed",
+    !(c.foreclosed || []).includes("abyssal"), JSON.stringify(c.foreclosed || []));
   check("promote is idempotent-safe — never lowers the ceiling", promote(c, "tertiary", rules, { force: true, ...opts }).ok && c.domainCeilings.seraphic === 3);
 
   // foreclosure gates NATIVES only — a braid across the axis is never foreclosed (keep-the-ground)
-  check("domainAccess forecloses a native antipode ability", domainAccess(catalog.ab1, 1, c.domains, idx, { foreclosed: c.foreclosed }).allowed === false);
+  // ⛔ R16 — an old save may still CARRY `foreclosed`; it must not still be OBEYED, or those characters
+  // keep a restriction new ones never get.
+  check("R16: a legacy `foreclosed` array is ignored, not obeyed",
+    domainAccess(catalog.ab1, 1, c.domains, idx, { foreclosed: ["abyssal"] }).allowed === true);
   check("domainAccess NEVER forecloses a braid across the axis", domainAccess(catalog.braid1, 1, c.domains, idx, { foreclosed: c.foreclosed }).allowed === true);
   // the raised ceiling lets the promoted domain reach its new tier
   check("the promoted ceiling lets the domain reach Tier III", domainAccess({ id: "s3", tradition: "seraphic", levelReq: 3, nativeOrCombination: "native" }, 3, c.domains, idx, { domainCeilings: c.domainCeilings }).allowed === true);
@@ -3003,7 +3010,9 @@ check("SNG-126/355: parting stops the benefits (trainerFor/liaison empty) AND KE
   // an owned foreclosed native is not stripped (keep-the-ground): auto-advance skips it
   const held = { domains: c.domains, foreclosed: ["abyssal"], abilities: [{ abilityId: "ab1", level: 1 }], practice: { uses: { ab1: 20 } } };
   const adv = autoAdvancePracticedRanks(held, { leveling: { rankLevelReq: { "2": 1 } }, practice: { useRankThreshold: { "2": 8 } } }, opts);
-  check("a foreclosed native does not auto-rank (but is not stripped)", adv.length === 0 && held.abilities[0].level === 1);
+  // ⛔ R16 — practice ranks a far-pole craft like any other. It used to be frozen at rank 1.
+  check("R16: a far-pole native DOES auto-rank on practice now",
+    adv.length > 0 || held.abilities[0].level > 1, `advanced ${adv.length}, level ${held.abilities[0].level}`);
 
   // --- SNG-102: domain acquisition (join a new people at Tier I; forecloses its antipode) ---
   const acqRules = { ...rules, acquisition: { minReputation: 8, requiresTeacherOrTome: true, startingCeiling: 1 } };
@@ -3012,13 +3021,18 @@ check("SNG-126/355: parting stops the benefits (trainerFor/liaison empty) AND KE
   const o2 = { catalog, traditionIndex: idx2 };
   const pc = { domains: { primary: "rootkin", secondary: "enginewright", tertiary: "seraphic" }, foreclosed: ["abyssal"], peopleDisposition: {}, teachers: {} };
   check("cannot acquire without standing + teacher", acquirable(pc, "marcher", acqRules, o2).ok === false);
-  check("cannot acquire a foreclosed people", (() => { pc.peopleDisposition.abyssal = 20; pc.teachers.abyssal = { met: true, willing: true }; return acquirable(pc, "abyssal", acqRules, o2).ok === false; })());
+  // ⛔ R16 — joining the far pole is governed by the SAME standing bar as joining anyone else.
+  check("R16: a people on a legacy `foreclosed` list CAN be joined with standing + teacher",
+    (() => { pc.peopleDisposition.abyssal = 20; pc.teachers.abyssal = { met: true, willing: true };
+      return acquirable(pc, "abyssal", acqRules, o2).ok === true; })());
   check("cannot acquire the antipode of your primary (closed-opposite)", (() => { pc.peopleDisposition.enginewright = 20; pc.teachers.enginewright = { met: true, willing: true }; return acquirable(pc, "enginewright", acqRules, o2).ok === false; })());
   pc.peopleDisposition.marcher = 10; pc.teachers.marcher = { met: true, willing: true };
   check("can acquire a valid new people with standing + teacher", acquirable(pc, "marcher", acqRules, o2).ok === true);
   const ar = acquireDomain(pc, "marcher", acqRules, o2);
   check("acquireDomain enters at Tier I", ar.ok && pc.domainsAcquired.includes("marcher") && pc.domainCeilings.marcher === 1);
-  check("acquireDomain forecloses the joined people's antipode", (pc.foreclosed || []).includes("churnfolk"));
+  // ⛔ R16 — joining a people closes nothing either.
+  check("R16: acquireDomain forecloses NOTHING",
+    !(pc.foreclosed || []).includes("churnfolk"), JSON.stringify(pc.foreclosed || []));
   check("an acquired domain's ability is now accessible at Tier I", domainAccess({ id: "m1", tradition: "marcher", levelReq: 1, nativeOrCombination: "native" }, 1, pc.domains, idx2, { domainsAcquired: pc.domainsAcquired, domainCeilings: pc.domainCeilings }).allowed === true);
   check("but its Tier-II ability is still gated (novice)", domainAccess({ id: "m2", tradition: "marcher", levelReq: 2, nativeOrCombination: "native" }, 2, pc.domains, idx2, { domainsAcquired: pc.domainsAcquired, domainCeilings: pc.domainCeilings }).allowed === false);
   check("cannot acquire a people already held", acquirable(pc, "marcher", acqRules, o2).ok === false);
@@ -3223,7 +3237,10 @@ await (async () => {
   {
     const va = domainAccess(antiAb, 1, domains, idx);
     check("SNG-055: the antipode of your primary is REACHABLE — the wall is gone", va.allowed === true, JSON.stringify(va));
-    check("SNG-055: …and it cannot be CAST — it is braid material", va.castable === false && va.band === "antipode");
+    // ⛔ R16 replaced 'learnable but not castable' with a price and a ceiling. The BAND is still the
+    // durable claim — that is what marks the far pole of your own axis.
+    check("SNG-055 / R16: …and it is the antipode band — castable, but bounded by lean",
+      va.castable !== false && va.band === "antipode", JSON.stringify(va));
   }
   // a kin (adjacent to primary) is free except capstones
   const kin = neighborsOf("umbral", idx).find(n => n !== "veilwright") || neighborsOf("umbral", idx)[0];
@@ -3293,8 +3310,9 @@ await (async () => {
   check("SNG-063: the antipode’s L1 craft IS offered at creation, alongside primary and folk",
     antiVerdict.allowed === true && primaryOffered === true && folkOffered === true,
     JSON.stringify({ anti: antiVerdict.allowed, primary: primaryOffered, folk: folkOffered }));
-  check("SNG-063: …and what you begin holding still cannot be CAST — it is braid material from day one",
-    antiVerdict.castable === false);
+  // ⛔ R16 — a craft you begin holding in the far pole is usable from day one; its DEPTH is what is bounded.
+  check("SNG-063 / R16: …and what you begin holding is castable from day one",
+    antiVerdict.castable !== false, JSON.stringify(antiVerdict));
 
   // SNG-068A: the Silas fix — starting abilities reconcile against the CONFIRMED domains.
   // Silas earned his ANTIPODE's craft during play but CONFIRMED primary = umbral (knows nothing umbral).
@@ -3312,8 +3330,9 @@ await (async () => {
     JSON.stringify(rec.abilities));
   check("SNG-068A: …and the antipode craft is no longer FLAGGED as illegally held — it is legal now",
     !rec.grandfathered.includes("blaze_a"), JSON.stringify(rec.grandfathered));
-  check("SNG-068A: …what marks it instead is that it cannot be CAST",
-    domainAccess(cat068.blaze_a, 1, { primary: "umbral", secondary: "veilwright", tertiary: null }, idx).castable === false);
+  // ⛔ R16 — what marks it is the BAND, not an inability to cast.
+  check("SNG-068A / R16: …what marks it instead is the antipode band",
+    domainAccess(cat068.blaze_a, 1, { primary: "umbral", secondary: "veilwright", tertiary: null }, idx).band === "antipode");
   // a character who already holds a primary ability gets no extra grant
   const rec2 = reconcileStartingAbilities(["umbral_lo"], { primary: "umbral" }, cat068, idx);
   check("SNG-068A: a character who already knows their primary craft gets no extra grant", rec2.grantedFromPrimary === null && rec2.abilities.length === 1);
@@ -3339,8 +3358,10 @@ await (async () => {
   // is the tier check two lines below, which is a different rule and still fires.
   check("SNG-BATCH-10: the antipode now LEARNS — the engine block is lifted", b10br.ok && b10b.abilities.length === 1,
     JSON.stringify({ ok: b10br.ok, band: b10br.band, held: b10b.abilities.length }));
-  check("SNG-BATCH-10: …and what it bought cannot be cast",
-    domainAccess(b10cat.bright_burn, 1, b10dom, idx).castable === false);
+  // ⛔ R16 — what it bought IS castable; the far pole is bounded by depth and price, not by a wall.
+  check("SNG-BATCH-10 / R16: …and what it bought is castable, in the antipode band",
+    (() => { const v = domainAccess(b10cat.bright_burn, 1, b10dom, idx);
+      return v.castable !== false && v.band === "antipode"; })());
   const b10c = b10char(); const b10cr = learnAbility(b10c, "veil_deep", b10cat, rules, { traditionIndex: idx });
   check("SNG-BATCH-10: a secondary ability above tier III is engine-blocked", !b10cr.ok && b10c.abilities.length === 0);
   const b10d = b10char(); const b10before = b10d.skillPoints; const b10dr = learnAbility(b10d, "far_reach", b10cat, rules, { traditionIndex: idx });
@@ -17650,13 +17671,21 @@ await (async () => {
     {
       const closed224 = Object.values(cat224).filter(a => (a.levelReq || 1) === 1
         && TR.domainAccess(a, 1, dom224, idx224).band === "antipode");   // ⚠️ CCODE-339 renamed the band: it is no longer CLOSED, it is uncastable
-      // ⛔ THEY ARE OFFERED NOW — and the thing that makes that safe is that they cannot be CAST. If this
-      // ever passes with `castable !== false`, a character can begin able to use both ends of their axis
-      // and the wheel stops meaning anything.
-      check(`CCODE-224: the antipode’s rank-1 crafts ARE offered (${closed224.length}) — and every one is uncastable`,
+      // ⛔ THIS GATE'S ORIGINAL WARNING CAME TRUE, AND IT WAS RIGHT TO WORRY. It read: "the thing that
+      // makes that safe is that they cannot be CAST — if this ever passes with `castable !== false`, a
+      // character can begin able to use both ends of their axis and the wheel stops meaning anything."
+      //
+      // ⚠️ R16 MADE THEM CASTABLE. And the warning was live: `lean` is a RATIO, so a level-1 character
+      // holding one home craft and one antipode craft measured as PERFECTLY BALANCED — lean 0, the
+      // primary's own ceiling in their far pole, at character creation.
+      //
+      // ✅ THE SAFETY IS NOW `minAxisWeight`, NOT UNCASTABILITY. Below an authored floor of total axis
+      // weight the character is a novice there and the far pole stays far. THAT is what this gate must
+      // defend now — the property, not the mechanism that used to provide it.
+      check(`CCODE-224: the antipode’s rank-1 crafts ARE offered (${closed224.length}) — and are castable under R16`,
         closed224.length > 0
         && closed224.every(a => pool.some(x => x.id === a.id))
-        && closed224.every(a => TR.domainAccess(a, 1, dom224, idx224).castable === false),
+        && closed224.every(a => TR.domainAccess(a, 1, dom224, idx224).castable !== false),
         `${closed224.length} antipode crafts`);
       const far224 = pool.filter(a => TR.domainAccess(a, 1, dom224, idx224).band === "far").length;
       check(`CCODE-224: …and ${far224} FAR-band crafts ARE offered, so the wheel must paint the band or say nothing`,

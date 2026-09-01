@@ -257,7 +257,10 @@ export function bandCostFor(verdict, character, ability, skillCapacity) {
 
 export function learnPointCost(ability, character, skillCapacity, verdict = null) {
   const v = (character?.domains?.primary && verdict) ? verdict : null;
-  return Math.max(1, tierPrice(ability, skillCapacity) + bandCostFor(v, character, ability, skillCapacity));
+  // ⛔ R9 — THE ANTIPODE SURCHARGE RIDES ON THE VERDICT. domainAccess computes the lean once and stamps
+  // `leanSurcharge` on the antipode verdict; adding it here keeps ONE site answering "what does this cost".
+  return Math.max(1, tierPrice(ability, skillCapacity) + bandCostFor(v, character, ability, skillCapacity)
+    + (Number(v?.leanSurcharge) || 0));
 }
 
 // ---------- SNG-BATCH-5 Phase 2: branch forks ----------

@@ -18,6 +18,18 @@
  "tierPrice": {"1": 1, "2": 2, "3": 2, "4": 3, "5": 3},
   "_tierPrice_R1": "⛔ ERIK 2026-08-31 R1 — compressed from the linear 1/2/3/4/5. Two natural investment steps (T1→T2 and T3→T4) instead of five flat ones, so a capstone is dear but not prohibitive.",
   "bandCost": {"home": 0, "near": 1, "far": 2},
+  "antipodeCeilingByLean": [
+    {"maxLean": 0.15, "ceiling": 5},
+    {"maxLean": 0.45, "ceiling": 4},
+    {"maxLean": 0.75, "ceiling": 3},
+    {"maxLean": 1.00, "ceiling": 2}
+  ],
+  "_antipodeCeilingByLean": "⛔ R16 (Erik 2026-09-01) — THE ANTIPODE'S CEILING RISES WITH LEAN, so R9 and R10 are one mechanism instead of two rules that cancel. lean 1.00 (never touched the far pole) → ceiling 2, exactly R10's `far`. lean 0.00 (both ends carried evenly) → ceiling 5, the primary's own. ⚠️ The barrier is to DABBLING, not to crossing — commit and both the price and the depth barrier recede together.",
+  "antipodeLeanSurcharge": 2,
+  "minAxisWeight": 20,
+  "_minAxisWeight": "⛔ BALANCE MUST BE EARNED, NOT FREE. `lean` is a RATIO, so it is meaningless at low weight: a level-1 character holding ONE home craft and ONE antipode craft reads as perfectly balanced and would get the primary's own ceiling. ⚠️ The CCODE-224 gate warned of exactly this before R16 existed — 'a character can begin able to use both ends of their axis and the wheel stops meaning anything'. Below this total axis weight the character is a novice on that axis and the far pole stays far. 20 ≈ three or four tier-III crafts carried to rank 2.",
+  "_antipodeLeanSurcharge": "⛔ R9 — S = 2, dial A (surcharge only; band migration deferred). Added to the price as `round(S × lean)`, so a fully-leaned specialist pays +2 over ordinary far ground and a balanced character pays exactly what any far people costs. Balance earns PARITY, not a discount.",
+  "_leanFormula": "weight(pole) = Σ over crafts of (tier × rank) — breadth enters as the NUMBER of terms, craft depth as tier, practice depth as rank. lean = clamp0((weightHome − weightAnti) / (weightHome + weightAnti)). ⚠️ MULTIPLICATIVE ON PURPOSE: it makes a T5 three times more lean-efficient per point than a T1, so the cheap-decoy grind is the WORST opening move rather than the best.",
   "_bandCost_R1": "⛔ R1 — DISTANCE IS ADDITIVE, NOT MULTIPLICATIVE. learnPointCost = tierPrice + band. Far T5 drops from 15 to 5. Intent: distance should make cross-domain learning meaningfully more expensive, not prohibitive — a dedicated generalist reaches far-ring capstone mastery in late game.",
   "bandOf": {"home": "home", "near": "near", "open": "home", "folk": "home", "primary": "home", "secondary": "home", "tertiary": "home", "acquired": "home", "adjacent": "near", "far": "far", "antipode": "far"},
   "_bandOf": "⚠️ domainAccess returns NINE band names; R1 names THREE costs. This is the mapping, and it is DATA so a ruling can move it without touching code. ⛔ NOTE `adjacent` → near (+1): kin to your primary was FREE before R1, and R1 only reaches its own far-T5=5 figure if the bands are 0/1/2. Flagged to Erik as the one reading R1 did not state outright.",

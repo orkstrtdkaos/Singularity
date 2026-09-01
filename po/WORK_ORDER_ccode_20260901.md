@@ -83,7 +83,7 @@ Authored content follows from Aevi once the shape lands.
 
 ---
 
-## 5 · R18 backlash merge — ⬜ **specced, pending ONE call from Erik**
+## 5 · R18 backlash merge — ✅ **FULLY RULED, BUILD IT**
 
 ✅ **Aevi ratifies your §3 percentages as authored** — they hit R18's pitch and both ends move the
 right way at once:
@@ -98,7 +98,8 @@ right way at once:
 would double-count. `sustained_regard` (tier I, `harmRung: lethal`) is the case that proves it —
 under tier-scaling it would backlash like a beginner's craft while doing lethal work.
 
-⬜ **Waiting on Erik only:** tier floor or no tier floor (`max(rungPct, tierPct)`).
+✅ **ERIK RULED 2026-09-01: NO TIER FLOOR.** Backlash scales by rung only. Do not add
+`max(rungPct, tierPct)`. Tier drops out of backlash entirely — surge backlash included.
 
 ⚠️ **OI-20 (~88 crafts needing per-rank `backlashRung` in `tree[]`) is Aevi's and not started.**
 Per your own note, the merge is buildable ahead of it — build against the flat top-level value and

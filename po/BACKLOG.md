@@ -1295,3 +1295,43 @@ NPC evolves through attention and deeds. A promotion arc, not a terminal conditi
 - Author `npcs/pell.json` and `npcs/veth_ondra.json` — both currently have interiority with no
   characterization file
 - Derive sheets for the 43 from `domains`/`spectrum`
+
+---
+
+## ⬜ AXIS BALANCE / TRAINING / SAVES — session 2026-09-01
+
+**Rulings:** `po/RULING_axis_balance_20260901.md` (R8–R11, R16–R17) ·
+`po/RULING_unlock_levels_and_bands.md` (R12–R15) · `po/RULING_backlash_scaling.md` (R18–R19) ·
+`po/RULING_training_gate_saves_and_pipeline.md` (R20–R23)
+**Build state:** `po/BUILD_STATUS_axis_balance.md` — R1–R19 built at v1.9.299, baseline green.
+
+### Ruled this session
+- **R20** — tier gate on training REMOVED; training unlocks at **L10**. R19 retracted (reached 3% of Silas's stuck crafts).
+- **R21** — adjacent 3 / acquired 2 confirmed. Ladder complete.
+- **R22** — tomes, artifacts, quest items, miracle grants are **one mechanism**: an object grants craft ACCESS; the character still pays skill points. Unblocks build step 8.
+- **R23** — Threnody: author emotional abilities beyond grief; cross-connect with the romance/attraction spec. ⛔ Blocked on C6.
+
+### ⛔ Two findings from tracing live saves
+- **OI-24 — saves were never migrated.** 22 of 142 ability rows across 16 saves carry pre-audit ids. `ability_rename_map.json` (SNG-501, 377 entries) resolves all of them. **Zero genuinely orphaned.** Must precede any audit reading sheets as ground truth.
+- **OI-25 — generative pipeline has no path to the corpus.** 13 `customAbilities` from braiding and bond-teaching (`marrow-s-wings`, Ashen Meridian) are full craft records living on one sheet each. Prior art: `SPEC_SNG-369`, `SPEC_SNG-370`.
+
+### Play data (16 saves, L1–30)
+| | |
+|---|---|
+| characters with zero rank-2 crafts | **12 of 16** |
+| most skill points banked by anyone | **3** |
+
+➡️ Rank-up barely happens; the Insight-dumper overflow is **theoretical**.
+
+### Open
+| OI | item | owner |
+|---|---|---|
+| OI-19 | Thin domains (Life 3, Spirit 4, Angelic 5, Demonic 5 tier-1 crafts) | Aevi |
+| OI-20 | Per-rank `backlashRung` — ~88 crafts | Aevi |
+| OI-21 | T4/T5 trainable? | Erik, deferred |
+| OI-22 | R18 percentage table | Aevi |
+| OI-23 | Reconcile the two backlash systems | CCode |
+| OI-24 | Save migration | CCode |
+| OI-25 | Generative-to-corpus pipeline | Aevi → CCode |
+| C6 | Attraction eligibility gate — blocks R23 | Aevi |
+| — | `rankUpAbility` has no UI caller | CCode |

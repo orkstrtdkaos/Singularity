@@ -1240,3 +1240,58 @@ Retires the buried `_folkNativeGrant_20260830` underscore doc key.
 ### Not in this spec
 - Prologue revamp — separate session (Erik directed)
 - Holdings model (SNG-358 dependency)
+
+---
+
+## ⬜ NPC CHARACTER SHEETS (blocked on character build overhaul)
+
+**Blocked by:** `po/SPEC_starting_grants_and_creation_revamp.md` — the NPC sheet is a REDUCTION
+of the PC sheet. We cannot know what to reduce until the PC starting number is built and played.
+**Ruled 2026-08-31:** proceed only after the build overhaul lands.
+
+### Measured state (2026-08-31)
+
+Two NPC layers exist. **Neither has a mechanical sheet — no skills, no attributes, no crafts.**
+
+| layer | count | carries | missing |
+|---|---|---|---|
+| `content/packs/valley/npcs/*.json` | 43 files | `role`, `personality` (warmth/trust/candor/patience), `spectrum`, `voiceHints`, `knowledge`, `wants`, `fears`, `reactsToReputation`, `appearance`, `people`, `domains` | all mechanics |
+| `npc_interiority.json` | 7 entries | `driveSummary`, `wants`, `fears`, `pushesBackWhen`, `emotionalRange`, `acknowledgeTone` | all mechanics |
+
+⛔ **Pell and Veth-Ondra are in `npc_interiority.json` only** — no file in `npcs/` at all. They
+have inner life and no characterization sheet AND no mechanical sheet. Erik named both as
+needing skills.
+
+Interiority roster: `pell`, `veth-ondra`, `mara-wells`, `calvar`, `siol`, `huginn`, `ama`.
+
+### Proposed three-tier shape (to be confirmed after build overhaul)
+
+| tier | who | sheet |
+|---|---|---|
+| **Unevolved / minted** | runtime-minted NPCs, no authored crafts | baseline kit floor only (`brace`, `strike_basic`, `break_away`, `raise_alarm`); default attributes |
+| **Named but static** | the 43 in `npcs/` | reduced PC shape — likely sense + 1–2 crafts drawn from their authored `domains` |
+| **Driven / evolving** | the interiority 7 | full PC-equivalent sheet; gains crafts through attention and deeds |
+
+**The hook already exists:** `domains` and `spectrum` are authored on the 43. Those determine
+which craft pool an NPC draws from with no new authoring required.
+
+### Baseline kit as NPC floor (OI-5) ✅ RULED 2026-08-31
+
+The retired baseline kit becomes the floor for minted NPCs with no authored crafts.
+⚠️ **It is a floor, not a permanent state** — baseline crafts are REPLACED by real crafts as an
+NPC evolves through attention and deeds. A promotion arc, not a terminal condition.
+
+### Open design questions (do not answer until build overhaul lands)
+
+1. Do NPCs use the same sub-attribute ladder as PCs, or a compressed one?
+2. What triggers promotion from baseline kit to real crafts — GM-declared, or does
+   attention/deeds tracking already exist in the engine? (CCode measurement needed.)
+3. Does the driven-NPC tier get skill points and a progression arc, or are their crafts
+   authored directly?
+4. Do the 43 static NPCs need individual authoring, or can their sheet derive from
+   `domains` + `spectrum` + `role`?
+
+### Immediate follow-on when unblocked
+- Author `npcs/pell.json` and `npcs/veth_ondra.json` — both currently have interiority with no
+  characterization file
+- Derive sheets for the 43 from `domains`/`spectrum`

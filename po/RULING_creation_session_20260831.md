@@ -3,7 +3,7 @@
 **Ruled by:** Erik · **Date:** 2026-08-31
 **Recorded by:** Aevi
 **Spec:** `po/SPEC_starting_grants_and_creation_revamp.md`
-**Closes:** OI-10, OI-11 (partial), OI-13, OI-15, OI-7
+**Closes:** OI-10, OI-13, OI-15, OI-7 · **Partial:** OI-11
 
 ---
 
@@ -131,10 +131,41 @@ One signature change plus two call sites. Now ruled; ready to build.
 
 ---
 
+## R6 — Mental sub-attribute for bonus skill points (OI-11) ⚠️ PARTIAL — sub ruled, shape provisional
+
+**Ruled:** the sub-attribute is **Insight.**
+
+**Provisional shape (Erik: "for now — let's see what CCode says"):** milestone-based, not a
+continuous curve. Milestones are explainable at creation and avoid banking fractional points.
+
+| Insight rank | bonus | skill points / level |
+|---|---|---|
+| 1–6 | — | 2 |
+| 7 | +1 | 3 |
+| 14 | +1 more | 4 |
+
+**Why 7 and 14:** Insight already wires `senseTier` at ranks 4 and 10. Ranks 7, 14, 18, and 20
+are narrative-only with no mechanical effect. 7 and 14 are the two whose existing milestone text
+is already about integrating more — rank 7 *"You read WHY, not only how much"*; rank 14 *"You see
+the shape of a thing before it has finished becoming it."* Ranks 18 and 20 stay narrative
+(certainty, not acquisition).
+
+**CCode to model before this locks:**
+1. Re-run the affordability table at L10/50/100 against the **R1 tier prices** (average craft
+   cost drops well below the previously-measured 2.511, which shifts the whole points-bind curve).
+2. Then layer Insight 7 and Insight 14 on top. Show total skill points and affordable crafts vs.
+   the breadth cap at each level.
+3. **The specific question:** does a high-Insight late-game character ever hit the breadth cap?
+   CCode's ROUND 2 found points bind in every band at every level and called the cap decorative.
+   If R1 prices plus Insight bonuses make the cap bind for the first time, that is a real change
+   in what the cap means and Erik should see it before the numbers lock.
+
+---
+
 ## Still open
 
 | OI | item | held on |
 |---|---|---|
-| OI-11 | Mental sub → bonus skill points — which sub (insight vs reason), milestone vs curve | Erik, after CCode re-runs curves against R1 prices |
+| OI-11 | Bonus skill points — sub RULED (Insight). Milestone shape provisional pending CCode curves | CCode model, then Erik confirm |
 | OI-3 | Wits `novelPenalty` — should experimentation cost anything? | Erik |
 | OI-5 | Minted NPC baseline kit repurpose | Erik |

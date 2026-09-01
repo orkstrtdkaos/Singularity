@@ -212,3 +212,49 @@ threshold that needs tuning. `progression.js:572` asks `ab.levelReq >= capstoneT
 *because* tier IV–V sit behind the standing bar. **That argument is only true if the bar can see the
 tier.** Right now it cannot. Fix the seven readers, and the bump is safe as described; ship the bump
 first, and secondary domains get a door into tier V that no standing check ever sees.
+
+---
+
+## §8 — ⛔ THE CEILING ASK IS BETTER THAN I ARGUED IN §3, AND FOR A DIFFERENT REASON
+
+⚠️ My §3 probe was mis-wired — I passed a tradition id where `domainAccess` wants an ability object, so
+every band came back `"open"` and I nearly reported "far has no ceiling" off an instrument that was not
+connected. Re-run with the real signature `(ability, tier, domains, index, opts)`:
+
+| band | T1 | T2 | T3 | T4 | T5 | penalty |
+|---|---|---|---|---|---|---|
+| primary | OK | OK | OK | OK | OK | 1 |
+| secondary | OK | OK | OK | ⛔ no | ⛔ no | 1 |
+| tertiary | OK | OK | ⛔ no | ⛔ no | ⛔ no | 1 |
+| **antipode** | HOLD | HOLD | HOLD | HOLD | HOLD | 3 |
+| **far (a people you never chose)** | OK | OK | OK | **OK** | **OK** | 3 |
+
+⛔ **A FAR PEOPLE YOU NEVER CHOSE IS UNCAPPED. YOUR SECONDARY — A PEOPLE YOU DELIBERATELY CHOSE — STOPS AT
+TIER III.**
+
+⚠️ **Choosing a people as your secondary makes their deep crafts HARDER to reach than leaving them
+alone.** That is backwards, and it is a far better argument for your bump than the +11% shelf widening
+I led with in §3. **The slots are not grants of access — they are restrictions**, and they are the only
+thing left in the model that is a wall rather than a price.
+
+✅ **Your bump narrows a gap that should not point this way at all.** ⬜ **And it raises a question worth
+answering while we are here: should the three domains be the only capped bands, or should `far` carry a
+ceiling too?** Right now the answer is "the slots cap you and the wilderness does not," which no fiction
+supports.
+
+⚠️ **Note the antipode's `penalty` is already 3, not 2** — it is 5+ ring steps from everything you chose,
+so §1's `1 + K × lean` at K=1 (max ×2) would be a **price CUT** at full lean. ⬜ **Either K=2 (max ×3,
+matching today) or accept that crossing gets cheaper as it gets legal.** I lean K=2 for that reason —
+it keeps today's worst case as the new worst case and lets balance earn the discount.
+
+### ⛔ AND A SEVENTH ENFORCEMENT SITE, missed in §4
+
+`domainAccessInner` **itself** refuses a foreclosed tradition (`traditions.js`, the `opts.foreclosed`
+branch) — so my §4 line *"CCODE-339 updated `domainAccess` and nothing else"* was wrong. Proven:
+
+```
+foreclosed=[blazeborn], native  → allowed=false  band="foreclosed"
+foreclosed=[blazeborn], braid   → allowed=true   band="antipode"    ← the braid road, working as designed
+```
+
+⬜ **Revised count: SEVEN sites, two writers and five enforcers.** Still small, but it is seven.

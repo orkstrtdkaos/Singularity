@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.307";
+const APP_VERSION = "1.9.308";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4629,11 +4629,63 @@ function renderCreate() {
     document.getElementById("c-bg").onchange = e => { state.background = e.target.value; draw(); };
     for (const b of app.querySelectorAll("[data-inc]")) b.onclick = () => { const k = b.dataset.inc; if (state.attrs[k] < 4 && left > 0) state.attrs[k]++; draw(); };
     for (const b of app.querySelectorAll("[data-dec]")) b.onclick = () => { const k = b.dataset.dec; if (state.attrs[k] > 1) state.attrs[k]--; draw(); };
-    document.getElementById("c-done").onclick = () => { state.form = document.getElementById("c-form").value.trim(); renderDomainStep(); };
+    document.getElementById("c-done").onclick = () => { state.form = document.getElementById("c-form").value.trim();
+      // ⛔ R2 — QUICK START'S ALLOCATION IS NOW A SEED, NOT THE FINAL WORD. The player still passes through
+      // the dedicated step and confirms; arriving with points already placed is the whole difference between
+      // this path and the other two.
+      state.attrsSeeded = true;
+      renderDomainStep(); };
   }
 
   /** SNG-063 quick-start step 3 (AFTER domains): abilities FILTERED to what the domains permit. */
+  /** ⛔ R2 (ERIK 2026-08-31) — A DEDICATED ALLOCATION STEP ON EVERY PATH.
+   *
+   *  ⚠️ THE FINDING: `state.attrs` was mutated ONLY inside quick-start's `draw()`. Describe and Play never
+   *  touched it, so those characters reached play at a flat 3/3/3/3 — and the build-lean argmax resolves a
+   *  four-way tie to `mental`, compounded by `byLean.mental` as the fallback. **The mental bias landed
+   *  twice, on two of the three paths.** That, not a weak mechanism, is why stat sensitivity did not bite.
+   *
+   *  ⛔ GATED AT THE DOOR, NOT AT FOUR CALL SITES. Every path reaches abilities through
+   *  `renderAbilityStep`, so the check lives there — a path I have not found cannot slip past it, and a
+   *  path added later inherits the rule for free.
+   *
+   *  ⚠️ THE POOL IS ALREADY SPENT AT 3/3/3/3 (12 of 12), so this is REDISTRIBUTION, not spending — which is
+   *  exactly why the flat default is invisible: it is a legal allocation, just an undeliberate one. Erik's
+   *  ruling is that the player CONFIRMS; the suggestion is a starting position, never the final word. */
+  function renderAttributeStep() {
+    const spent = () => Object.values(state.attrs).reduce((a, b) => a + b, 0);
+    const left = () => POOL - spent();
+    const flat = () => new Set(Object.values(state.attrs)).size === 1;
+    const drawAttrs = () => {
+      chrome(`<div class="screen" style="max-width:560px">
+        <h2>What are you made of?</h2>
+        <p class="hint" style="margin-bottom:14px">${state.attrsSeeded
+          ? "A starting position, drawn from what you have told us. Change anything you like — this is yours."
+          : "Spread the points the way the person in your head is built."}</p>
+        <div class="field"><label>Points left: <strong>${left()}</strong> (each 1–4)</label>
+          ${Object.entries(state.attrs).map(([k, v]) => `
+            <div class="point-row">
+              <button data-ainc="${k}">−</button><span class="pips">${"●".repeat(v)}${"○".repeat(4 - v)}</span><button data-adec="${k}">+</button>
+              <span style="text-transform:capitalize">${k}</span>
+            </div>`).join("")}</div>
+        ${flat() ? `<p class="hint">⚠️ Even across the board is a choice, not a default — and it leaves you leaning nowhere in particular. You can confirm it if that is who you are.</p>` : ""}
+        <button class="btn" id="attr-done" ${left() !== 0 ? "disabled" : ""}>${left() === 0 ? "This is how I am built" : `Place ${left()} more`}</button>
+      </div>`);
+      // ⚠️ THE ARROWS ARE CROSSED ON PURPOSE — `data-ainc` decrements, matching the existing quick-start
+      // row where the − button carries `data-dec`. Same widget, same muscle memory, one implementation.
+      for (const b of app.querySelectorAll("[data-adec]")) b.onclick = () => {
+        const k = b.dataset.adec; if (state.attrs[k] < 4 && left() > 0) { state.attrs[k]++; drawAttrs(); } };
+      for (const b of app.querySelectorAll("[data-ainc]")) b.onclick = () => {
+        const k = b.dataset.ainc; if (state.attrs[k] > 1) { state.attrs[k]--; drawAttrs(); } };
+      document.getElementById("attr-done").onclick = () => { state.attrsConfirmed = true; renderAbilityStep(); };
+    };
+    drawAttrs();
+  }
+
   function renderAbilityStep() {
+    // ⛔ R2 — NOBODY REACHES ABILITIES WITHOUT HAVING PLACED THEIR POINTS. Quick-start's `draw()` seeds them
+    // and they arrive here already spent; Describe and Play arrive flat, and this is where that stops.
+    if (!state.attrsConfirmed) { renderAttributeStep(); return; }
     // ⛔ CCODE-224: the pool is computed by `creationChoosable` now - ONE rule, shared with the wheel,
     // so the two surfaces cannot offer different crafts. The gate holds them to it.
     // SNG-192 §1: the by-right starter kit is computed HERE, not silently at commit, so a pick can never be
@@ -4759,7 +4811,7 @@ function renderCreate() {
     const slot = (label, t) => `<div class="dom-slot"><span class="dom-slot-label">${label}</span> ${t ? `<strong>${esc(traditionLabel(t))}</strong>` : "<em>—</em>"}</div>`;
     chrome(`<div class="screen" style="max-width:640px">
       <h2>Your place on the Great Circle</h2>
-      <p class="hint" style="margin-bottom:8px">Twelve axes, twenty-four peoples — a ring where every craft sits opposite its antithesis. Your <strong>primary</strong> is who you are (all you can master); your <strong>secondary</strong> (<em>kin to your primary</em>) reaches tier III — a concentrated core; your <strong>tertiary</strong> is a <em>free wildcard</em>, reaching anywhere on the ring to tier II. The <strong>opposite pole</strong> of your primary and secondary is closed to you forever — only the great braids cross it.</p>
+      <p class="hint" style="margin-bottom:8px">Twelve axes, twenty-four peoples — a ring where every craft sits opposite its antithesis. Your <strong>primary</strong> is who you are (all you can master); your <strong>secondary</strong> (<em>kin to your primary</em>) reaches tier III — a concentrated core; your <strong>tertiary</strong> is a <em>free wildcard</em>, reaching anywhere on the ring to tier II. The <strong>opposite pole</strong> of your primary and secondary is the hardest ground you can walk — you may learn and use it, but it costs more the further you have leaned away from it, and it opens as you carry it.</p>
       ${svg}
       <div class="dom-slots">${slot("Primary", d.primary)}${slot("Secondary", d.secondary)}${slot("Tertiary", d.tertiary)}</div>
       ${closed.size ? `<div class="hint">Closed to you: ${[...closed].map(t => esc(traditionLabel(t))).join(", ")}</div>` : ""}
@@ -5099,7 +5151,7 @@ function renderCreate() {
       ${d.primary ? slotCard("Primary", d.primary, sug.primary) : `<div class="cs-block"><div class="hint">The reading couldn't place a primary from that — try more detail, or pick on the circle.</div></div>`}
       ${slotCard("Secondary", d.secondary, sug.secondary)}
       ${slotCard("Tertiary", d.tertiary, sug.tertiary)}
-      ${antiP ? `<div class="hint" style="margin:8px 0"><strong>⛔ ${esc(traditionLabel(antiP))} is closed to you forever</strong> — the far pole of what you are. Only a cross-pole braid, taught by no one, ever crosses it.</div>` : ""}
+      ${antiP ? `<div class="hint" style="margin:8px 0"><strong>⚠️ ${esc(traditionLabel(antiP))} is the far pole of your axis</strong> — the hardest ground you can walk. You may learn it and use it, but it costs more the further you have leaned away from it — and it opens as you carry it.</div>` : ""}
       <div class="cs-block" style="margin:6px 0">
         ${sug.origin?.why ? `<div><span class="dom-slot-label">Born</span> — <strong>${esc((origins.find(o => o.id === state.origin) || {}).name || state.origin)}</strong> <span class="hint">${esc(sug.origin.why)}</span></div>` : ""}
         ${sug.background?.why ? `<div style="margin-top:4px"><span class="dom-slot-label">Background</span> — <strong>${esc(backgroundById(state.background)?.name || state.background)}</strong> <span class="hint">${esc(sug.background.why)}</span></div>` : ""}
@@ -5245,7 +5297,7 @@ function renderCreate() {
         <div class="dom-slot"><span class="dom-slot-label">Tertiary</span> <strong>${esc(nm(d.tertiary))}</strong></div></div>
       <div class="prologue-reasons"><p class="hint">Because, in the scene:</p>
         ${reasons.map(r => `<div class="prologue-reason">— ${esc(r.label)}</div>`).join("")}</div>
-      <p class="hint" style="margin-top:8px">The far pole of what you are is closed to you — only the great braids cross it. Is that who you are? You may adjust.</p>
+      <p class="hint" style="margin-top:8px">The far pole of what you are is the hardest ground you can walk — you may learn and use it, but it costs more the further you have leaned away from it, and it opens up as you carry it. Is that who you are? You may adjust.</p>
       <div class="field" style="margin-top:12px"><label>And what did you DO before this? <span class="hint" style="text-transform:none">(your background — you choose; the scene doesn't decide it for you)</span></label>
         <select id="reveal-bg">${backgroundOptionsHTML(state.background)}</select>
         <div class="hint" id="reveal-bg-hint">${esc(backgroundById(state.background)?.description || "")}</div></div>
@@ -11613,7 +11665,7 @@ function libGreatCircle() {
       ${tr.civilization ? `<p class="lore-p">${esc(tr.civilization)}</p>` : ""}${tr.aesthetic ? `<p class="lore-p"><em>${esc(tr.aesthetic)}</em></p>` : ""}</div>` : ""; }).join("");
   const folk = (CONTENT.traditions?.folkTraditions || []).map(f => `<div class="lore-field"><span class="lore-key">${esc(f.name || f.traditionId)}:</span> ${esc(f.aesthetic || "a Valley folk-craft, open to all")}</div>`).join("");
   return `${circle}
-    <p class="lore-p">Twelve axes of the world, each a tension between two peoples — and every craft sits directly across the ring from its antithesis. Kin stand beside kin; the far pole of what you are is closed to you, reachable only by the great braids.</p>
+    <p class="lore-p">Twelve axes of the world, each a tension between two peoples — and every craft sits directly across the ring from its antithesis. Kin stand beside kin; the far pole of what you are is the hardest ground you can walk. You may learn it and use it, but the deeper you lean one way the dearer the other becomes — and carry both ends evenly and they cost the same.</p>
     <h3 class="lore-h">The Twenty-Four Peoples</h3>${rows}
     ${folk ? `<h3 class="lore-h">The Valley's Folk Crafts (open to all)</h3>${folk}` : ""}`;
 }

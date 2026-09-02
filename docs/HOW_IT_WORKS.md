@@ -449,7 +449,7 @@ working papers; **this is the answer.**
 | 09-01 | ⛔ **TWO DOC FILES CARRIED UNRESOLVED MERGE-CONFLICT MARKERS ON MAIN** | `docs/HOW_IT_WORKS.md` and `docs/PLAYERS_GUIDE.md` both ended with literal `<<<<<<< HEAD` / `=======` / `>>>>>>> 17b21fbc` blocks around their *Last verified* footers — **committed, on origin, readable by anyone** | resolved both to the measured truth; scanned all **1562** tracked files and confirmed these were the only two | ⚠️ **NEITHER SUITE CAUGHT IT.** The docs are gated on their COUNTS, not on being well-formed — so a file can carry raw conflict syntax and still pass every assertion about what it claims |
 | 09-01 | ✅ **content documentation refreshed to the verified corpus: 419** | `HOW_IT_WORKS` said 414, `PLAYERS_GUIDE` said 423 (CCode's pre-drop number), `FIELD_REFERENCE` said 414 across six field rows. ⚠️ **All three were wrong in different directions at the same moment** | all set to **419**, verified at authenticated `api.github.com` rather than raw CDN | ⛔ **I HAD WRITTEN ZERO §0 ROWS TODAY** — nine crafts, four drops, two reworks, a 50-file sex/gender backfill, Marrow's romance authoring and a standing content policy, none of it logged. Erik asked whether I had been keeping the docs up and the answer was no |
 
-**Last verified: 2026-09-02 · v1.9.307 · 419 crafts.**
+**Last verified: 2026-09-02 · v1.9.308 · 419 crafts.**
 
 ---
 

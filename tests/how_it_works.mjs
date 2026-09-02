@@ -2590,6 +2590,41 @@ console.log("\n── §41 · R24 · sex is set at generation ──");
   check("§41: …it is bound", /getElementById\(\"c-sex\"\)\.onchange/.test(app41));
   check("§41: …and it reaches the character record", /sex:\s*state\.sex\s*\|\|\s*undefined/.test(app41));
 }
+/* ═════ §42 — R2/R9: WHAT CREATION SAYS, AND WHAT IT MAKES YOU DECIDE ═════ */
+// ⛔ R2 (ERIK 2026-08-31) — `state.attrs` was mutated ONLY inside quick-start's `draw()`. Describe and Play
+// never touched it, so those characters reached play at a flat 3/3/3/3 — and the build-lean argmax resolves
+// a four-way tie to `mental`, compounded by `byLean.mental` as the fallback. ⚠️ THE MENTAL BIAS LANDED
+// TWICE, ON TWO OF THREE PATHS. That, not a weak mechanism, is why stat sensitivity did not bite.
+//
+// ⛔ AND R9/R16 RETIRED THE ANTIPODE WALL WHILE THE CREATION COPY STILL PROMISED IT. Two strings shown
+// while a player decides who they are told them a pole was "closed to you forever".
+console.log("\n── §42 · creation: points are placed, and the copy tells the truth ──");
+{
+  const app42 = readFileSync(join(root, "app.js"), "utf8");
+  const code42 = app42.split(/\r?\n/).map(l => l.replace(/\/\/.*$/, "")).join("\n");
+
+  // ⛔ THE GATE IS AT THE DOOR, NOT AT THE CALL SITES — a path nobody found cannot slip past it.
+  check("§42: R2 · nobody reaches abilities with unplaced points",
+    /function renderAbilityStep\(\)\s*{[^}]*attrsConfirmed/.test(code42),
+    "the check must live INSIDE renderAbilityStep, or a new path inherits nothing");
+  check("§42: R2 · a dedicated allocation step exists", /function renderAttributeStep/.test(code42));
+  check("§42: R2 · …and confirming is what unlocks the rest",
+    /attrsConfirmed = true/.test(code42) && /renderAttributeStep\(\)/.test(code42));
+  check("§42: R2 · quick start SEEDS rather than deciding", /attrsSeeded = true/.test(code42));
+
+  // ⛔ THE COPY. R9/R16 made the antipode learnable, castable, and priced by lean — creation must not
+  // still be telling a player it is shut. ⚠️ Scanned on CODE lines only; commentary may describe the old
+  // rule, and this file's own history is full of prose that does.
+  const deadClaims = ["closed to you forever", "is closed to you", "only the great braids cross it"];
+  const found42 = deadClaims.filter(c => code42.includes(c));
+  check("§42: creation no longer tells a player their far pole is shut",
+    found42.length === 0, found42.join(" · "));
+
+  // ⚠️ AND IT MUST STILL SAY SOMETHING — silence is not the fix. A player choosing a pole should be told
+  // the axis costs, or the whole lean mechanic is invisible at the moment it starts mattering.
+  check("§42: …it says what IS true — the far pole costs more and opens as you carry it",
+    /leaned away from it/.test(code42) && /opens as you carry it/.test(code42));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

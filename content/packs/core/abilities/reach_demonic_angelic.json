@@ -5534,8 +5534,8 @@
     {
      "rank": 3,
      "name": "The Full Form",
-     "grants": "What was taken comes back — not scar-closed but restored, the way the form specifies.",
-     "cannot": "⚠ THE FORM SPECIFIES A PERSON AS THEY SHOULD BE, which is not always as they were. People have come back from this correct and not quite themselves.",
+     "grants": "The order runs at speed — what took an Order-house an hour takes a breath, and what was taken comes back rather than merely closing. ⛔ THE TIME COST IS GONE: rank 1 could not be hurried, and people died on the wrong side of that.",
+     "cannot": "The form still runs in full. You have made it fast; you have not made it skip anything.",
      "functions": [
       "heal"
      ],
@@ -5569,7 +5569,7 @@
    },
    "intensity": {
     "conserve": "close it cleanly, no more",
-    "surge": "the full form; CORRECT IS NOT THE SAME AS AS-THEY-WERE"
+    "surge": "restore to the full form; ⚠ THE FORM SPECIFIES A PERSON AS THEY SHOULD BE, WHICH IS NOT ALWAYS AS THEY WERE"
    },
    "bounds": [
     {
@@ -5590,7 +5590,8 @@
     }
    ],
    "plainly": "A social/survive action that restores health. It rolls 1d6+1 It affects 1 target.",
-   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific.",
+   "_t5Fix_20260901": "⛔ T5 — RANK IS MASTERY. The first authoring put a NEW COST at rank 3 on every craft (Erik: 'that was quite the cavalier authoring'). ⚠️ The gate missed it — its SELFTAX regex targets self-harm phrasings and these were world-consequence costs. ✅ Rank 3 now LIFTS the rank-1 limitation; the consequence moved to `intensity.surge`, which the player CHOOSES."
   },
   {
    "id": "hungry_step",
@@ -5643,8 +5644,8 @@
     {
      "rank": 3,
      "name": "Deep Current",
-     "grants": "Cross the valley on the pull of something very large, arriving where it was going.",
-     "cannot": "⚠ YOU ARRIVE WHERE IT WAS GOING. The Choir's oldest joke is that the deep current is very reliable and the destination is not your choice.",
+     "grants": "Ride the pull of something very large, and go UNREMARKED — the appetites read you as one of the things already moving. ⛔ THE NOTICE IS GONE: rank 1 put you on their road as visible as they were.",
+     "cannot": "Unremarked is not unknown. What you rode alongside has still met you, and the deep keeps accounts.",
      "functions": [
       "move",
       "reveal"
@@ -5675,7 +5676,7 @@
    },
    "intensity": {
     "conserve": "one short stretch, alone, quietly",
-    "surge": "the deep current; THE DESTINATION IS NOT YOUR CHOICE"
+    "surge": "take the deep current the whole way; ⚠ YOU ARRIVE WHERE IT WAS GOING — THE DESTINATION IS NOT YOUR CHOICE"
    },
    "bounds": [
     {
@@ -5696,7 +5697,8 @@
     }
    ],
    "plainly": "A survive/travel action that moves you along an appetite's pull and reveals what shares it. Rated 4 of 10 on 1 target for about two hours.",
-   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific.",
+   "_t5Fix_20260901": "⛔ T5 — RANK IS MASTERY. The first authoring put a NEW COST at rank 3 on every craft (Erik: 'that was quite the cavalier authoring'). ⚠️ The gate missed it — its SELFTAX regex targets self-harm phrasings and these were world-consequence costs. ✅ Rank 3 now LIFTS the rank-1 limitation; the consequence moved to `intensity.surge`, which the player CHOOSES."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

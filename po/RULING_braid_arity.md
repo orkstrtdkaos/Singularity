@@ -71,3 +71,83 @@ dependency.**
 
 ⚠️ **CCode is right to keep 3 off the sect mechanism.** It is a different question wearing the same
 shape, and letting it ride along would hide it.
+
+---
+
+## ⚠️ R26 CORRECTION — the rounding mode was ambiguous and CCode resolved it correctly
+
+⛔ **R26 said "rounded" and then gave a table, and those two disagreed.** `Math.round` is **half-up** and
+produces 5 where the table says 4.
+
+✅ **Verified independently — half-up misses THREE of twelve cells; half-to-even reproduces all twelve:**
+
+| parents | comps | raw | half-up | half-to-even | ruled |
+|---|---|---|---|---|---|
+| rank 1 | 3 | 2.5 | ⛔ 3 | ✅ 2 | **2** |
+| rank 2 | 5 | 4.5 | ⛔ 5 | ✅ 4 | **4** |
+| rank 3 | 3 | 4.5 | ⛔ 5 | ✅ 4 | **4** |
+
+➡️ **`.5` rounds to even. The rule is half-to-even, not half-up.**
+
+⚠️ **CCode settled it from the ruling's own rationale rather than asking** — *"arity alone does not
+promote you"* is precisely what breaks at rank-3 × 3-components, and half-to-even is the mode that keeps
+it true. ✅ **That is reading the intent behind the number instead of implementing the number.**
+
+✅ **And he gated the TABLE cell by cell rather than the formula** — so if the rounding ever drifts, the
+table is what fails. ⚠️ **That is the right instrument: the table is the ruling, the formula is an
+implementation of it.**
+
+---
+
+## R27 — `soma` migrates BY RANK, not by sect or by generosity ✅ RULED
+
+⛔ **`soma` was a real craft** — *"the body-pole mastery, the Flesh-Temples' art."* Level 2, 5 energy,
+three ranks. ⚠️ **It is ALSO the name of the Body domain's sect** (`["Soma","somatic","metaphysical"]`),
+which is why it read like a category error at first glance. It was not.
+
+**What it did (SNG-479 capture):**
+
+| rank | grants |
+|---|---|
+| 1 — Trained Body | endurance and poise past the ordinary; breath and heartbeat controlled to steady fear, pain, cold; movement that reads as grace |
+| 2 — Instrument | hold a bridge-pose an hour, run past collapse, slow your own bleeding, take a blow and keep the form |
+| 3 — Perfected Vessel | survive what kills others — **and** a strike thrown with the whole mastered frame, stance and breath and timing arriving together |
+
+### ⚠️ THE SPLIT WAS BY RANK, AND THE REVERT LOG SAYS SO OUTRIGHT
+
+> *"TWO AXES HIDING IN FIVE SKILLS: **OUTLAST** (Second Wind, Long Haul, **Soma r1–r2**) and
+> **EXECUTE** (Perfect Motion, Whole Act, **Soma r3**)."*
+
+➡️ **Ranks 1–2 → `second_wind`. Rank 3's strike → `perfect_motion`.**
+
+### ✅ THE RULING
+
+**A `soma` holder receives what they ACTUALLY HAD, read from their recorded rank:**
+
+| held at | receives |
+|---|---|
+| **rank 1 or 2** | ⚑ `second_wind` **only** — they never had the strike; granting `perfect_motion` hands them something unearned |
+| **rank 3** | ⚑ **both** — they had both halves, and taking one is a loss they did not choose |
+
+⚠️ **This is neither "both" nor "nearest match."** ✅ **It is the migration reading the same seam the merge
+cut along** — and it is checkable, because the save records the rank.
+
+⛔ **CCode was right to keep `soma` off the `bySect` mechanism.** It is a different question wearing the
+same shape; riding it along would have hidden that the split axis was RANK.
+
+⬜ **`to` needs a third form:** `{byRank: {"1": [...], "2": [...], "3": [...]}}` alongside the proposed
+`{bySect: …, default: …}`. **Both are conditioned migrations; they condition on different things.**
+
+---
+
+## ⛔ A LARGER QUESTION THIS OPENED — flag, do not act
+
+The revert note: *"Soma is the tradition-mastery pattern again — cut as **Noesis** and **Logos** were."*
+
+⚠️ **`Soma`, `Noesis` and `Logos` are ALSO the v2 sect names** — Body/Soma, Mind/Noesis, Mind/Logos.
+➡️ **There was a whole CLASS of crafts named after their own sect, representing pole-mastery, and they were
+cut together.**
+
+⛔ **Directly relevant to `SPEC_undo_sect_merge.md`.** If per-sect crafts are being restored, whether the
+**tradition-mastery** crafts come back is a separate and larger question. ⬜ **Raised before authoring
+rather than discovered halfway through it.**

@@ -14870,12 +14870,19 @@ await (async () => {
     /braid-moment-kicker/.test(appSrc401) && /braid-moment-parents/.test(appSrc401) &&
     /id="braid-rename-in"/.test(appSrc401) && /function momentCard\(/.test(appSrc401));
   check("401 §1: …and the holding acceptance uses that same card, not a second copy of it",
-    /function showPlaceMoment\(/.test(appSrc401) && /kicker: "A PLACE IS YOURS"/.test(appSrc401) &&
+    /function showPlaceMoment\(/.test(appSrc401) &&
+    /IS YOURS/.test(appSrc401) && /placeName\.length <= 28/.test(appSrc401) &&
     (appSrc401.match(/class="help-card braid-moment"/g) || []).length === 1);
   check("401 §1: the delegated handler reads the provenance off the img (no eight signatures changed)", /img\.dataset\.regenKind/.test(appSrc401) && /img\.dataset\.regenSubject/.test(appSrc401));
   check("401 §1: the FEED image is deliberately NOT regenerable — it is someone else's moment", /data-lightbox="feed"(?![^>]*data-regen-kind)/.test(appSrc401));
 
   // §2 THE SECOND BUTTON. Aevi: a re-roll on a wrong COMPOSITION returns the same wrong composition.
+  // ⛔ ERIK: the celebration "names the place in its kicker", and carries a GENERATED image so the whole
+  // re-roll / rebuild / ★ keep apparatus works on it. ⚠️ An img with provenance into an UNREGISTERED kind
+  // is the fourth door on the very surface built to show the image work off — so the registry is asserted.
+  check("401 §1: the holding celebration mints a regenerable image through a REGISTERED kind",
+    /function ensureHoldingImage\(/.test(appSrc401) && /regenKind: "holding"/.test(appSrc401) &&
+    /^\s*holding: \{/m.test(appSrc401));
   check("401 §2: there is a REBUILD as well as a re-roll, and it takes new words", /data-lbrebuild/.test(appSrc401) && /Describe .* differently/.test(appSrc401) && /regenLightboxItem\(it, \+\+attempts, said\.trim\(\)\)/.test(appSrc401));
   check("401 §2: rebuild is hidden on an AUTHORED image (re-describing would discard the authoring)", /const canRebuild = canRegen && isGeneratedImage\(it\.url\)/.test(appSrc401));
   check("401 §2: an authored path is told from a generated one by where it came from", isGeneratedImage("https://image.pollinations.ai/prompt/x") && !isGeneratedImage("content/packs/valley/assets/thornmother.png") && !isGeneratedImage(""));

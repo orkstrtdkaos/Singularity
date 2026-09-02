@@ -603,6 +603,21 @@ export function npcPromptSeed(npc = {}, character = {}, ctx = {}) {
 export function assembleImagePrompt(kind, subject = {}, ctx = {}) {
   if (kind === "character") return characterPromptSeed(subject, ctx);
   if (kind === "npc") return npcPromptSeed(subject, ctx.character || {}, ctx); // SNG-136 richer seed; SNG-367 carries ctx.aesthetic through, the way the ability path already does
+  // ⛔ ERIK — A HOLDING GETS A REAL IMAGE, not a borrowed one: "make sure when the Celebration fires it
+  // has a generated image with it… that will let someone regen and do all the image stuff we've worked
+  // on to get the best one to use for it."
+  //
+  // ⚠️ IT IS NOT `location`, AND THAT IS THE POINT. A location is a place on the map; a HOLDING is a
+  // place that answers to someone — so the seed carries what makes it yours: what kind of seat it is,
+  // how it is faring, and who keeps it. ⛔ A post at `failing` and the same post `thriving` must not
+  // draw the same picture, or the image says nothing the player could not already see.
+  if (kind === "holding") {
+    const h = subject || {};
+    const cond = { failing: "visibly failing — neglected, its work stalled", strained: "under strain, holding on",
+      holding: "steady, kept up", thriving: "thriving, busy and well-found" }[h.condition] || "newly taken up";
+    const seat = h.kind === "enterprise" ? "a working enterprise" : "a standing post";
+    return `${h.name || "a place held"}: ${seat}, ${cond}${h.charge ? `. ${smartClamp(String(h.charge), 160)}` : ""}${h.stewardName ? `. Kept by ${h.stewardName}` : ""}`;
+  }
   if (kind === "location") return `${subject.name || "a place"}: ${(subject.descriptionSeed || subject.encounterFlavor || "").slice(0, 300)}`;
   // SNG-251 §2b: an evolved item may carry an authored `imagePrompt` naming what the story put ON it (the
   // seated rune-threads, the maker's mark); it wins over the plain description so the re-mint SHOWS the

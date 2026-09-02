@@ -3106,8 +3106,8 @@ console.log("\n── §48 · holdings: offered, never imposed ──");
   // ⛔ THE CELEBRATION IS ON THE ACCEPTANCE, NOT THE OFFER (§5) — and it shares ONE card with the braid
   // moment rather than copying it. §1: the format "already runs FOUR variants off one implementation".
   const app48 = rd("app.js");
-  check("§48: ✦ A PLACE IS YOURS ✦ exists and fires on the player’s DECISION",
-    /kicker: "A PLACE IS YOURS"/.test(app48) && /function showPlaceMoment\(/.test(app48));
+  check("§48: the acceptance moment fires on the player’s DECISION, not the engine’s detection",
+    /function showPlaceMoment\(/.test(app48) && /showPlaceMoment\(h, o\)/.test(app48));
   check("§48: ⛔ …on the SHARED card — there is exactly one `.help-card braid-moment` in the source",
     (app48.match(/class="help-card braid-moment"/g) || []).length === 1,
     String((app48.match(/class="help-card braid-moment"/g) || []).length));
@@ -3127,9 +3127,67 @@ console.log("\n── §48 · holdings: offered, never imposed ──");
     check("§48: …and every condition it does count is one the holdings vocabulary actually has",
       ["failing", "strained", "holding", "thriving"].join(",") === HD48.CONDITIONS.join(","));
   }
+  // ⛔ ERIK (2026-09-02): "have it be the actual place name, not just ✦ A PLACE IS YOURS ✦", and "make sure
+  // when the Celebration fires it has a generated image with it… that will let someone regen".
+  //
+  // ⚠️ THE DEFAULT NAME WAS WORSE THAN GENERIC — IT WAS A SENTENCE FRAGMENT. Splitting the charge on its
+  // first dash would have celebrated Silas’s post as "full reconstruction of the Raven’s Home post": a work
+  // order standing in a place’s slot. ⛔ ASSERTED AGAINST HIS REAL CHARGES, not invented ones.
+  {
+    const src48 = /function placeNameFrom[\s\S]*?\n}/.exec(app48);
+    const nameFrom = src48
+      ? eval("(" + src48[0].replace(/^function placeNameFrom/, "function") + ")")
+      : () => null;
+    check("§48: ⛔ the celebration names the PLACE, not the work order",
+      nameFrom("full reconstruction of the Raven's Home post — laboratory, workshop, Watch") === "Raven's Home",
+      String(nameFrom("full reconstruction of the Raven's Home post — laboratory, workshop, Watch")));
+    check("§48: …and a curly apostrophe reads the same as a straight one — names are written by people",
+      nameFrom("reconstruction of the Raven’s Home post") === "Raven’s Home",
+      String(nameFrom("reconstruction of the Raven’s Home post")));
+    check("§48: …and reads a post out of a warden’s charge",
+      nameFrom("warden of the Threshold Post at the ridge node—hold the network") === "Threshold Post",
+      String(nameFrom("warden of the Threshold Post at the ridge node—hold the network")));
+    check("§48: …while an AUTHORED place match still wins outright",
+      nameFrom("anything at all", "Millbrook") === "Millbrook");
+    check("§48: …and no charge ever yields an empty name",
+      ["", "a b c", "the thing — and more"].every(c => (nameFrom(c) || "").length > 0));
+  }
+  check("§48: ⛔ the kicker carries the place’s own name — a generic kicker spends the first line on a category",
+    /IS YOURS/.test(app48) && /placeName\.length <= 28/.test(app48));
+
+  // ⛔ AND THE IMAGE IS REGENERABLE, WHICH MEANS THE LIGHTBOX MUST RESOLVE A RECORD FOR IT. An img carrying
+  // provenance into a kind the registry does not know is the fourth door, on the very surface built to
+  // show the image work off.
+  check("§48: the celebration mints a generated image and caches it on the holding",
+    /function ensureHoldingImage\(/.test(app48) && /regenKind: "holding", regenSubject: holding\.id/.test(app48));
+  check("§48: ⛔ …and `holding` is a REGISTERED regen kind, so re-roll / rebuild / keep all resolve",
+    /^\s*holding: \{/m.test(app48) && /find: id => holdingOf\(id\)/.test(app48));
+  check("§48: …and the art layer draws a HOLDING — its seat and condition, not a borrowed location seed",
+    /kind === "holding"/.test(rd("engine/art.js")));
   // ⛔ THE FIRST PLAYER-FACING SURFACE HOLDINGS HAVE EVER HAD, and the handlers that answer it.
-  check("§48: the character sheet has a Holdings section",
-    /cs-holdings/.test(app48) && />Holdings<\/h3>/.test(app48));
+  // ⛔ ERIK: "The holdings should have a spot in your UI somewhere… detailed in a character sheet tab."
+  //
+  // ⚠️ THE TAB-BAR’S OWN COMMENT NAMES THE FAILURE THIS GUARDS: "that is how a third tab gets added to the
+  // markup and stays dead on two of the three screens." ⛔ SO ALL FOUR DOORS ARE ASSERTED — the button
+  // exists, the wiring binds it, the renderer exists, and the offer handlers are reachable from it.
+  check("§48: there is a Holdings TAB, and every door to it is open",
+    /id="tab-holdings"/.test(app48) && /go\("tab-holdings"/.test(app48) &&
+    /function renderHoldingsTab\(/.test(app48) && /characterTabBar\("holdings"\)/.test(app48));
+  check("§48: …and its offer buttons are wired by the SAME function the Traits screen uses",
+    /function wireHoldingOffers\(/.test(app48) &&
+    (app48.match(/wireHoldingOffers\(\)/g) || []).length >= 2,
+    String((app48.match(/wireHoldingOffers\(\)/g) || []).length));
+  // ⚠️ ONE ANSWERABLE OFFER, IN ONE PLACE. The same offer with the same two buttons twice on one screen is
+  // not two surfaces — it is one surface repeating itself. Traits keeps a summary and a door.
+  check("§48: the Traits screen keeps a SUMMARY and a door, not a second copy of the buttons",
+    /cs-holdings-summary/.test(app48) && /id="cs-goto-holdings"/.test(app48) &&
+    (app48.match(/data-hold-accept="/g) || []).length === 1,
+    String((app48.match(/data-hold-accept="/g) || []).length));
+  // ⛔ AND THE TAB SHOWS WHAT IS REAL. A holding record has no income, defence, resource or power on it,
+  // and a panel displaying a number the engine never computes teaches the player something false.
+  check("§48: the tab reports the CAPACITY ladder — R25’s first player-facing surface",
+    /companyPlaces\(ladder, character\)/.test(app48) && /delegationCapacity\(ladder, character\)/.test(app48) &&
+    /canRaiseBand\(character/.test(app48));
   check("§48: ⛔ …with BOTH answers wired — a button with no handler is the fourth door",
     /data-hold-accept/.test(app48) && /data-hold-dismiss/.test(app48) &&
     /querySelectorAll\("\[data-hold-accept\]"\)/.test(app48) && /querySelectorAll\("\[data-hold-dismiss\]"\)/.test(app48));

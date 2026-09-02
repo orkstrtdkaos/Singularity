@@ -46,7 +46,7 @@ import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
-import { companyPlaces } from "./engine/ladder.js";   // SNG-390: how many places rapport has earned
+import { companyPlaces, delegationCapacity } from "./engine/ladder.js";   // SNG-390: how many places rapport has earned · R25b: how many can run things in your name
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds, shareAtOrAbove, syncStageTaughtRanks, stageTaughtBy } from "./engine/companions.js";
 // SNG-309: what happens when the player goes down — and the SAME death ladder every figure is on.
 import { incapacitationOutcome, playerDeathState, deathStopsPlay, deathLine, wireDeathModel } from "./engine/incapacitation.js";
@@ -73,7 +73,7 @@ import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
 import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS } from "./engine/worldtick.js";
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
-import { addAssignment, delegationRefusal } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
+import { addAssignment, delegationRefusal, activeDelegates } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { trainableTier, SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.317";
+const APP_VERSION = "1.9.318";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1105,6 +1105,18 @@ const REGEN_KINDS = {
     current: id => character?.figureImages?.[id] || null,
     keep: (id, url) => { character.figureImages = character.figureImages || {}; character.figureImages[id] = url; return true; },
     promptOpts: rec => ({ aesthetic: npcAesthetic(rec) })
+  },
+  // ⛔ ERIK — the celebration image must be REGENERABLE, which means the lightbox has to find the record
+  // behind it. ⚠️ WITHOUT THIS ENTRY the img carries provenance and the controls resolve nothing: the
+  // fourth door, on the surface built to show off the image work.
+  // ⚠️ AND THE IMAGE LIVES ON THE HOLDING ITSELF, not in a side map — a holding is a record the player
+  // owns and keeps, like an item, so `acceptImage` can pin a chosen one the same way.
+  holding: {
+    needsId: true,
+    label: id => holdingOf(id)?.name || "this place",
+    find: id => holdingOf(id),
+    current: id => holdingOf(id)?.image || null,
+    keep: (id, url, seedKey) => { const h = holdingOf(id); return h ? acceptImage(h, { url, seedKey }) : false; }
   },
   location: {
     needsId: true,
@@ -5934,6 +5946,50 @@ function showCompanionPanel(companionId) {
 
 /** The mint MOMENT modal — reuses the .help-overlay surface (phone tap-away identical) with its own
  *  celebratory .braid-moment styling. Carries the optional rename control inline. */
+const holdingOf = (id) => (character?.holdings || []).find(h => h && h.id === id) || null;
+
+/** ⛔ ERIK: "have it be the actual place name, not just ✦ A PLACE IS YOURS ✦."
+ *
+ *  ⚠️ AND THE DEFAULT I SHIPPED WAS WORSE THAN GENERIC — IT WAS A SENTENCE FRAGMENT. The name fell back to
+ *  the charge split on the first dash, so Silas's post would have been celebrated as "full reconstruction
+ *  of the Raven's Home post". ⛔ That is a work order, not a place.
+ *
+ *  ⚠️ AN AUTHORED PLACE WINS OUTRIGHT. Failing that, the longest run of Capitalised words is the name a
+ *  human would pick out of the same sentence — "Raven's Home", "Threshold Post", "Millbrook" — and
+ *  lowercase joiners ride along so "Hall of the Second Measure" survives intact.
+ *  ⛔ IT STILL ONLY PROPOSES. The card opens with the naming box, because a place the player has cared
+ *  about for thirty levels should be named by them and not by a regex.
+ */
+function placeNameFrom(charge, suggested = null) {
+  if (suggested) return String(suggested).slice(0, 60);
+  const text = String(charge || "");
+  // ⚠️ A leading capital is not evidence — it is just how a sentence starts. Skip the first word.
+  const body = text.replace(/^\s*\S+\s*/, " " ) + " ";
+  const runs = body.match(/\b[A-Z][\w'’-]*(?:\s+(?:of|the|and|at|in)\s+[A-Z][\w'’-]*|\s+[A-Z][\w'’-]*)*/g) || [];
+  const best = runs.map(r => r.trim()).filter(Boolean).sort((a, b) => b.length - a.length)[0];
+  if (best) return best.slice(0, 60);
+  // ⛔ LAST RESORT, AND IT IS STILL NOT A FRAGMENT: the first clause, trimmed of its verb-y opening.
+  const clause = text.split(/[—:,]/)[0].trim();
+  return (clause.replace(/^(full|complete|ongoing|the)\s+/i, "").slice(0, 60) || "A place held");
+}
+
+/** ⛔ ERIK — the celebration carries a GENERATED image, minted once and cached on the holding, so the
+ *  lightbox's re-roll / rebuild / ★ keep all work on it exactly as they do everywhere else.
+ *  ⚠️ Mirrors `ensureAbilityImage` / `ensureLocationImage`: authored wins, cached never regenerates,
+ *  no-op when art is off — a celebration must still fire without an image rather than not fire at all. */
+function ensureHoldingImage(holding, charge = null) {
+  if (!imagesEnabled() || !holding?.id) return null;
+  if (holding.image) return holding.image;
+  const stewardName = holding.steward ? (character?.npcRegistry?.[holding.steward]?.name || CONTENT.npcs?.[holding.steward]?.name || null) : null;
+  const url = ensureImage({ id: holding.id, name: holding.name, kind: holding.kind, condition: holding.condition, charge, stewardName },
+    "holding", { ratingLevel: viewerRatingLevel(), field: "image" });
+  if (url) {
+    holding.image = url;
+    try { addGalleryImage(character, { kind: "holding", prompt: holding.name, url, caption: holding.name, worldDay: absoluteWorldDay(), subjectKind: "holding", subjectId: holding.id }); } catch { /* gallery is a nicety */ }
+    try { saveCharacter(character); } catch { /* cache best-effort */ }
+  }
+  return url;
+}
 /** ⛔ THE CELEBRATION CARD — one implementation, every variant. DESIGN_celebrations §2 names the parts that
  *  are load-bearing and they are all here: the KICKER (what kind of moment this is, before you read
  *  anything), the PROVENANCE (what this came from — "a celebration with no history is an award; with
@@ -5978,12 +6034,21 @@ function showPlaceMoment(holding, offer) {
   const keeper = offer?.npcName || (holding.steward ? (character.npcRegistry?.[holding.steward]?.name || holding.steward) : null);
   const pop = document.createElement("div");
   pop.id = "help-pop"; pop.className = "help-overlay";
+  // ⛔ ERIK: "have it be the actual place name." The kicker NAMES the place — ✦ RAVEN'S HOME IS YOURS ✦ —
+  // because the kicker is the line the player reads before anything else, and a generic one spends that
+  // position on a category. ⚠️ The generic form survives only where a name would be too long to read as a
+  // kicker, which is a legibility floor rather than a fallback for missing data.
+  const placeName = holding.name || holding.id;
+  const kicker = placeName.length <= 28 ? `${String(placeName).toUpperCase()} IS YOURS` : "A PLACE IS YOURS";
+  const art = ensureHoldingImage(holding, offer?.charge || null);
   pop.innerHTML = momentCard({
-    kicker: "A PLACE IS YOURS", ariaLabel: "A place is yours",
+    kicker, ariaLabel: `${placeName} is yours`,
+    image: art, imageAlt: placeName, regenKind: "holding", regenSubject: holding.id,
     provenance: `<strong>${esc(offer?.charge || holding.name || "")}</strong>`,
     arrow: keeper ? `kept in your name by ${esc(keeper)} — and now it is written down` : "held in your name — and now it is written down",
-    name: holding.name || holding.id,
+    name: placeName,
     desc: "It stands whether or not you are standing in it. The world will tell you how it fares.",
+    renameValue: holding.namedBy === "player" ? placeName : "",
     renamePlaceholder: "…or name it yourself", renameLabel: "Make it mine", closeLabel: "It is mine",
   });
   document.body.appendChild(pop);
@@ -10538,16 +10603,132 @@ function wireCharacterTabs() {
   const go = (id, fn) => { const b = document.getElementById(id); if (b) b.onclick = fn; };
   go("tab-traits", () => renderCharacterScreen());
   go("tab-chronicle", () => renderChronicle());
+  go("tab-holdings", () => renderHoldingsTab());
   go("tab-world", () => renderWorldTab());
 }
 function characterTabBar(active) {
   return `<div class="char-tabs">
     <button class="char-tab${active === "traits" ? " on" : ""}" id="tab-traits">Traits</button>
     <button class="char-tab${active === "chronicle" ? " on" : ""}" id="tab-chronicle">📜 Chronicle</button>
+    <button class="char-tab${active === "holdings" ? " on" : ""}" id="tab-holdings">⌂ Holdings</button>
     <button class="char-tab${active === "world" ? " on" : ""}" id="tab-world">🌍 The World</button>
   </div>`;
 }
 
+/** ⛔ ONE WIRING FOR BOTH SURFACES. The offer appears in the Traits summary and in the Holdings tab, and
+ *  the tab-bar comment three screens up records exactly how this goes wrong: "a third tab gets added to
+ *  the markup and stays dead on two of the three screens." ⚠️ A button is only as real as its handler.
+ *
+ *  ⚠️ IT RE-RENDERS WHICHEVER SURFACE IS SHOWING, so answering from either place lands in the same state
+ *  rather than bouncing the player to the other screen. */
+function wireHoldingOffers() {
+  const again = () => (document.getElementById("tab-holdings")?.classList.contains("on") ? renderHoldingsTab() : renderCharacterScreen());
+  // ⛔ SNG-358 — ANSWERING THE MIGRATION QUESTION. Both answers are final for that assignment: accepting
+  // mints the holding, dismissing records that it is NOT a place. ⚠️ EITHER WAY THE OFFER GOES AWAY — a
+  // question that keeps being asked after it has been answered is nagging.
+  for (const btn of app.querySelectorAll("[data-hold-accept]")) btn.onclick = () => {
+    const o = (character.holdingOffers || [])[Number(btn.dataset.holdAccept)];
+    if (!o) return;
+    const h = addHolding(character, {
+      id: `hold-${o.assignmentId}`, kind: "post",
+      // ⚠️ THE SUGGESTED PLACE NAME IS A STARTING POINT, NOT A VERDICT — measured, it resolves for one
+      // charge in four, and one of those matches is a trap. The player renames it in the moment that follows.
+      // ⛔ AND WHEN IT DOES NOT RESOLVE, THE NAME IS STILL A NAME. Splitting the charge on its first dash
+      // produced "full reconstruction of the Raven's Home post" — a work order wearing a place's slot.
+      name: placeNameFrom(o.charge, o.suggestedLocationName),
+      locationId: o.suggestedLocationId || null, steward: o.npcId || null,
+      day: absoluteWorldDay(), fromAssignment: o.assignmentId,
+    });
+    character.holdingOffers = (character.holdingOffers || []).filter(x => x.assignmentId !== o.assignmentId);
+    saveCharacter(character); again();
+    // ⚠️ AFTER the re-render, so the card is not wiped by the screen it sits on.
+    showPlaceMoment(h, o);
+  };
+  for (const btn of app.querySelectorAll("[data-hold-dismiss]")) btn.onclick = () => {
+    const o = (character.holdingOffers || [])[Number(btn.dataset.holdDismiss)];
+    if (!o) return;
+    // ⛔ REMEMBERED, NOT JUST REMOVED. The reconcile step is versioned and will not re-offer, but a future
+    // pass over the same assignments must not ask again about one the player has already answered.
+    character.holdingsNotPlaces = [...new Set([...(character.holdingsNotPlaces || []), o.assignmentId])];
+    character.holdingOffers = (character.holdingOffers || []).filter(x => x.assignmentId !== o.assignmentId);
+    saveCharacter(character); again();
+  };
+}
+/** ⛔ ERIK (2026-09-02): "The holdings should have a spot in your UI somewhere… detailed in a character
+ *  sheet tab with income, defenses, power, resources, capabilities, personnel, capacity, etc."
+ *
+ *  ⚠️ TWO OF THOSE SEVEN EXIST TODAY AND I HAVE BUILT THOSE TWO. A holding record is exactly
+ *  `{id, kind, name, locationId, steward, obligation, condition, claimedDay, history}` — there is no
+ *  income, no defence, no resource and no power on it, and inventing numbers to fill a panel would be
+ *  the worst thing this tab could do: a screen that displays a value the engine never computes teaches
+ *  the player something false and reads, to the next author, as a built system.
+ *
+ *  ✅ SO IT SHOWS WHAT IS REAL: the places themselves, the CAPACITY ladder (R25 — three scales, and this
+ *  is the first surface any of them have had), the PERSONNEL actually recorded, and what holdings already
+ *  DO — `canRaiseBand` has tied a following to holding two places since it was written, and no screen
+ *  ever said so. ⬜ The other five are specced in po/SPEC_holdings_estate.md rather than mocked here. */
+function renderHoldingsTab() {
+  const rules = CONTENT.rules;
+  const ladder = rules.subAttributeLadder;
+  const hs = character.holdings || [];
+  const offers = character.holdingOffers || [];
+  const nameOf = (id) => character?.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || id;
+  const company = activeCompany(character);
+  const delegates = activeDelegates(character.worldState || {});
+  const places = companyPlaces(ladder, character);
+  const delegCap = delegationCapacity(ladder, character);
+  const band = canRaiseBand(character, { cfg: rules.martial || {} });
+
+  // ⚠️ A BAR THAT READS AS A BAR. Used against earned, so "3 of 3" is legible as full without arithmetic.
+  const meter = (label, used, total, why) => `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+    <strong style="min-width:150px">${esc(label)}</strong>
+    <span style="font-variant-numeric:tabular-nums">${used} of ${total}</span>
+    ${used >= total && total > 0 ? `<span class="hint" style="color:var(--warn,#e0b25a)">full</span>` : ""}
+    <span class="hint" style="width:100%">${esc(why)}</span></div>`;
+
+  const holdingRows = hs.map(h => {
+    const loc = h.locationId ? (CONTENT.locations?.[h.locationId]?.name || h.locationId) : null;
+    return `<div class="cs-ability" style="display:flex;gap:10px;align-items:flex-start">
+      ${h.image ? `<img src="${esc(h.image)}" alt="${esc(h.name || h.id)}" style="width:64px;height:64px;object-fit:cover;border-radius:4px;flex:0 0 auto;cursor:zoom-in" data-lightbox="${esc(h.image)}" data-regen-kind="holding" data-regen-subject="${esc(h.id)}">` : ""}
+      <div style="flex:1 1 auto;min-width:0">
+        <strong>${esc(h.name || h.id)}</strong>
+        <div class="hint">${esc(h.kind || "post")} · ${esc(h.condition || "holding")}${loc ? " · " + esc(loc) : ""}${h.steward ? " · kept by " + esc(nameOf(h.steward)) : " · <em>unkept</em>"}</div>
+        ${h.obligation ? `<div class="hint">owes: ${esc(h.obligation)}</div>` : ""}
+        ${h.fromAssignment ? `<div class="hint">from work you delegated</div>` : ""}
+      </div></div>`;
+  }).join("");
+
+  const offerRows = offers.map((o, i) => `<div class="codex-f" style="border-left:2px solid var(--line,#3a3a3a);padding-left:8px;margin-top:6px">
+    <div>${esc(o.charge)}</div>
+    <div class="hint" style="margin-top:2px">${esc(o.why)}${o.npcName ? " · " + esc(o.npcName) : ""}${o.suggestedLocationName ? " · looks like " + esc(o.suggestedLocationName) : ""}</div>
+    <div class="opt-row" style="margin-top:4px">
+      <button class="opt" data-hold-accept="${i}">Yes — this is a place I hold</button>
+      <button class="opt" data-hold-dismiss="${i}">Not a place</button>
+    </div></div>`).join("");
+
+  chrome(`<div class="screen" style="max-width:760px">
+    ${characterTabBar("holdings")}
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">What stands in your name</h3>
+      ${holdingRows || `<p class="hint">Nothing yet. A post or an enterprise becomes yours through play — or through work you have already delegated, below.</p>`}</div>
+    ${offers.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">To review</h3>
+      <p class="hint">${offers.length} thing${offers.length === 1 ? "" : "s"} you have people working on may be ${offers.length === 1 ? "a place" : "places"} you hold. Only you can say.</p>
+      ${offerRows}</div>` : ""}
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Capacity</h3>
+      ${meter("At your side", company.length, places, "Rapport carries the first four places; presence carries the fifth and sixth. Rapport is who will follow you — presence is who will follow a name.")}
+      ${meter("Running things for you", delegates.length, delegCap, delegCap === 0 ? "Nobody yet runs work in your name — that comes with level, and with rapport at 14." : "People who hold a charge while you are elsewhere. A second errand for someone you already trust costs nothing more.")}
+      <div class="codex-f"><strong style="min-width:150px">A following</strong>
+        <span>${band.ready ? "within reach" : "not yet"}</span>
+        <span class="hint" style="width:100%">${esc(band.why)}</span></div></div>
+    ${company.length || delegates.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Personnel</h3>
+      ${company.length ? `<div class="codex-f"><strong>At your side</strong> <span class="hint">${company.map(m => esc(nameOf(m.npcId))).join(" · ")}</span></div>` : ""}
+      ${delegates.length ? `<div class="codex-f"><strong>In your service</strong> <span class="hint">${delegates.map(id => esc(nameOf(id))).join(" · ")}</span></div>` : ""}
+      ${hs.some(h => !h.steward) ? `<p class="hint" style="margin-top:6px;color:var(--warn,#e0b25a)">${hs.filter(h => !h.steward).length} of your holdings has nobody keeping it.</p>` : ""}</div>` : ""}
+    <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
+  </div>`);
+  wireCharacterTabs();
+  wireHoldingOffers();
+  const back = document.getElementById("cs-back"); if (back) back.onclick = () => renderPlay(character.activeScene?.lastTurn || null);
+}
 function renderCharacterScreen() {
   const rules = CONTENT.rules;
   const cap = rules.leveling?.subAttributeCap ?? 20;
@@ -10604,25 +10785,17 @@ function renderCharacterScreen() {
       // ⚠️ ERIK RULED THE PLACEMENT: "Character sheet, in the holdings section. The persistent, returnable
       // home. This is where the player goes LOOKING." The offer belongs here; the world-tick news is where
       // they are TOLD.
+      // ⛔ ERIK: holdings are "detailed in a character sheet tab" now, so Traits keeps only the SUMMARY —
+      // one line, and the door to it. ⚠️ THE SAME OFFER WITH THE SAME TWO BUTTONS IN TWO PLACES ON ONE
+      // SCREEN is not two surfaces, it is one surface repeating itself; the second real surface is the
+      // world-tick news, which is where the player is TOLD rather than where they go LOOKING.
       const hs = character.holdings || [], offers = character.holdingOffers || [];
       if (!hs.length && !offers.length) return "";
-      const condLabel = { failing: "failing", strained: "strained", holding: "holding", thriving: "thriving" };
-      const rows = hs.map(h => `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
-        <strong>${esc(h.name || h.id)}</strong>
-        <span class="hint">${esc(h.kind || "post")} · ${esc(condLabel[h.condition] || h.condition || "holding")}${h.steward ? " · kept by " + esc(character.npcRegistry?.[h.steward]?.name || CONTENT.npcs?.[h.steward]?.name || h.steward) : " · unkept"}</span>
-        ${h.obligation ? `<span class="hint" style="width:100%">owes: ${esc(h.obligation)}</span>` : ""}</div>`).join("");
-      // ⛔ THE OFFER IS A QUESTION, NOT A CELEBRATION (§5). It never mints on its own — the evidence for
-      // why is in Silas's own save, where a charge that must NEVER become a holding names a real place.
-      const offerRows = offers.map((o, i) => `<div class="codex-f" style="border-left:2px solid var(--line,#3a3a3a);padding-left:8px;margin-top:6px">
-        <div>${esc(o.charge)}</div>
-        <div class="hint" style="margin-top:2px">${esc(o.why)}${o.npcName ? " · " + esc(o.npcName) : ""}${o.suggestedLocationName ? " · looks like " + esc(o.suggestedLocationName) : ""}</div>
-        <div class="opt-row" style="margin-top:4px">
-          <button class="opt" data-hold-accept="${i}">Yes — this is a place I hold</button>
-          <button class="opt" data-hold-dismiss="${i}">Not a place</button>
-        </div></div>`).join("");
-      return `<div class="cs-block cs-holdings"><h3 class="codex-title" style="font-size:15px">Holdings</h3>
-        ${rows || `<p class="hint">Nothing yet stands in your name.</p>`}
-        ${offers.length ? `<p class="hint" style="margin-top:8px">${offers.length} assignment${offers.length === 1 ? "" : "s"} may describe a place you hold — review ${offers.length === 1 ? "it" : "them"}.</p>${offerRows}` : ""}</div>`;
+      const kept = hs.filter(h => h.steward).length;
+      return `<div class="cs-block cs-holdings-summary"><h3 class="codex-title" style="font-size:15px">Holdings</h3>
+        <div class="hint">${hs.length ? `${hs.length} place${hs.length === 1 ? "" : "s"} stand${hs.length === 1 ? "s" : ""} in your name${kept < hs.length ? ` — ${hs.length - kept} unkept` : ""}.` : "Nothing yet stands in your name."}</div>
+        ${offers.length ? `<p class="hint" style="margin-top:4px;color:var(--warn,#e0b25a)">${offers.length} assignment${offers.length === 1 ? "" : "s"} may describe a place you hold — review ${offers.length === 1 ? "it" : "them"}.</p>` : ""}
+        <button class="opt" id="cs-goto-holdings" style="margin-top:6px">⌂ Holdings</button></div>`;
     })()}
     ${Object.values(b).some(v => v) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Story</h3>
       ${["hometown", "residence", "livelihood", "hobbies", "motivation"].filter(k => b[k]).map(k => `<div class="codex-fact"><strong style="text-transform:capitalize">${k}:</strong> ${esc(b[k])}</div>`).join("")}
@@ -10707,34 +10880,8 @@ function renderCharacterScreen() {
     <button class="btn secondary" id="cs-repair" style="margin-top:10px; margin-right:8px" title="Fix what the game got wrong at creation — domains, background, form, or an ability you never chose. No arguing with the GM.">🔧 Repair character</button>
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
-  // ⛔ SNG-358 — ANSWERING THE MIGRATION QUESTION. Both answers are final for that assignment: accepting
-  // mints the holding, dismissing records that it is NOT a place. ⚠️ EITHER WAY THE OFFER GOES AWAY — a
-  // question that keeps being asked after it has been answered is nagging.
-  for (const btn of app.querySelectorAll("[data-hold-accept]")) btn.onclick = () => {
-    const o = (character.holdingOffers || [])[Number(btn.dataset.holdAccept)];
-    if (!o) return;
-    const h = addHolding(character, {
-      id: `hold-${o.assignmentId}`, kind: "post",
-      // ⚠️ THE SUGGESTED PLACE NAME IS A STARTING POINT, NOT A VERDICT — measured, it resolves for one
-      // charge in four, and one of those matches is a trap. The player renames it in the moment that follows.
-      name: o.suggestedLocationName || String(o.charge || "").split(/[—:,]/)[0].trim().slice(0, 60) || o.assignmentId,
-      locationId: o.suggestedLocationId || null, steward: o.npcId || null,
-      day: absoluteWorldDay(), fromAssignment: o.assignmentId,
-    });
-    character.holdingOffers = (character.holdingOffers || []).filter(x => x.assignmentId !== o.assignmentId);
-    saveCharacter(character); renderCharacterScreen();
-    // ⚠️ AFTER the re-render, so the card is not wiped by the screen it sits on.
-    showPlaceMoment(h, o);
-  };
-  for (const btn of app.querySelectorAll("[data-hold-dismiss]")) btn.onclick = () => {
-    const o = (character.holdingOffers || [])[Number(btn.dataset.holdDismiss)];
-    if (!o) return;
-    // ⛔ REMEMBERED, NOT JUST REMOVED. The reconcile step is versioned and will not re-offer, but a future
-    // pass over the same assignments must not ask again about one the player has already answered.
-    character.holdingsNotPlaces = [...new Set([...(character.holdingsNotPlaces || []), o.assignmentId])];
-    character.holdingOffers = (character.holdingOffers || []).filter(x => x.assignmentId !== o.assignmentId);
-    saveCharacter(character); renderCharacterScreen();
-  };
+  { const g = document.getElementById("cs-goto-holdings"); if (g) g.onclick = () => renderHoldingsTab(); }
+  wireHoldingOffers();
   for (const btn of app.querySelectorAll("[data-grow2]")) btn.onclick = () => { if (spendSubPoint(character, btn.dataset.grow2, rules)) { saveCharacter(character); renderCharacterScreen(); } };
   // ability-arch v2: mastery of a craft that forks at rank 3 — the GM marked the defining moment; the
   // player chooses the permanent path (Law 9), then the engine lands rank 3.

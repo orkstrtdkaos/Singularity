@@ -449,7 +449,7 @@ working papers; **this is the answer.**
 | 09-01 | ⛔ **TWO DOC FILES CARRIED UNRESOLVED MERGE-CONFLICT MARKERS ON MAIN** | `docs/HOW_IT_WORKS.md` and `docs/PLAYERS_GUIDE.md` both ended with literal `<<<<<<< HEAD` / `=======` / `>>>>>>> 17b21fbc` blocks around their *Last verified* footers — **committed, on origin, readable by anyone** | resolved both to the measured truth; scanned all **1562** tracked files and confirmed these were the only two | ⚠️ **NEITHER SUITE CAUGHT IT.** The docs are gated on their COUNTS, not on being well-formed — so a file can carry raw conflict syntax and still pass every assertion about what it claims |
 | 09-01 | ✅ **content documentation refreshed to the verified corpus: 419** | `HOW_IT_WORKS` said 414, `PLAYERS_GUIDE` said 423 (CCode's pre-drop number), `FIELD_REFERENCE` said 414 across six field rows. ⚠️ **All three were wrong in different directions at the same moment** | all set to **419**, verified at authenticated `api.github.com` rather than raw CDN | ⛔ **I HAD WRITTEN ZERO §0 ROWS TODAY** — nine crafts, four drops, two reworks, a 50-file sex/gender backfill, Marrow's romance authoring and a standing content policy, none of it logged. Erik asked whether I had been keeping the docs up and the answer was no |
 
-**Last verified: 2026-09-02 · v1.9.323 · 419 crafts.**
+**Last verified: 2026-09-02 · v1.9.325 · 419 crafts.**
 
 ---
 
@@ -898,6 +898,26 @@ world-tick news, beside the delegated work, is where they are **told** — once,
 
 ---
 
+## 7g · AUTHORED GROUND IS CANON (Erik, R28)
+
+**Where a place is hand-authored, the authored ground is the truth; the generator fills the rest.**
+`local_layouts.json` places **84 sites across 18 of 135 locations** — a well at a centre, a river 2.2 miles
+south-west, a smithy 150 m south.
+
+⛔ **IT WAS AUTHORED IN AUGUST AND READ ONLY BY THE TEST THAT REPORTED IT DISAGREEING WITH THE GENERATOR.**
+⚠️ Deferring to it by switching that test off would have **dropped** 18 hand-authored layouts rather than
+promoting them — so the ground got a reader instead.
+
+✅ **The narrator is the surface.** A bearing and a distance are a sentence; the GM is told what stands where,
+and `_measured` — the generator’s record of the same terrain — is deliberately not read, so a river distance
+the generator computes differently stops mattering.
+
+⚠️ **The other 117 places send nothing, and that is the dominant case** — it must read as deliberate rather
+than broken, exactly as the region tier already does for the 34 of 38 regions with no authored layer.
+
+⛔ **NOTHING DRAWS IT.** There is a world globe and a region map and no place tier. §10.
+
+---
 ## 7e · BRAIDS TAKE ANY NUMBER OF PARENTS, AND ARITY IS HALF A RUNG (Erik, R26)
 
 `tier = min(5, round(maxRank + 1 + 0.5 × (components − 2)))`, **rounding half to even.**
@@ -1018,7 +1038,7 @@ ancestry.
 |---|---|
 | ⛔ **12 rules files are registered and never loaded** | ~140 KB dark, including `damage_types` |
 | ⛔ **`rankDeltas[].axis` (495) has no reader; `mechanic.axis` (0) has one** | a reader with no writer, and a writer with no reader |
-| ⚠️ **the map layer** | 18 of 135 locations have authored layouts and the renderer draws circles instead |
+| ⚠️ **the authored ground is read but never drawn** | R28 gave it a reader — the narrator now hears it. ⛔ Nothing DRAWS it: the app has a world globe and a region map and no place tier |
 | ⚠️ **method is not recorded anywhere** | *psionics*, *song*, *blade* — a real layer with no field |
 | ⛔ **no general TARGET AFFORDANCE** | a craft whose resolution needs a choice has no way to ask for one. **Three cases now**: `bringForward` needs a pick, `provoke` needs a target, a named-ally intercept needs one. ⚠️ Aevi's shape: a craft declares `needsTarget: "ally"\|"foe"\|"place"` and the declaration surface asks once. **Wants Erik and wants measuring across every craft that needs a pick** |
 | ⚠️ **the folded-casualty pool does not scale with the foe** | so a `downedEffect` authored on all nine companions cannot fire. Inherited from the contribution side |

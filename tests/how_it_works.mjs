@@ -753,7 +753,9 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
 
   const layouts = Object.keys(rj("content/packs/core/world/local_layouts.json")).filter(k => !k.startsWith("_"));
   const wmSrc = rd("engine/worldmap.js");
-  gap("§10: the map layer still draws rings instead of the authored layouts",
+  // ⚠️ NARROWER SINCE R28. The authored ground is now READ — `places.groundForGM` puts it in front of the
+  // narrator — but nothing DRAWS it: the app has a world globe and a region map and no place tier.
+  gap("§10: the authored ground is read but never drawn — there is no place-level map",
     !/local_layouts/.test(wmSrc) && !/local_layouts/.test(rd("app.js")), `${layouts.length} authored`);
 
   // ⛔ THE FOUR GAPS THIS SESSION OPENED. Each is a claim §10 makes about being unfinished, so each goes
@@ -3289,6 +3291,50 @@ console.log("\n── §49 · the authored sheet actually arrives ──");
     check("§49: ⛔ …and HARM is STILL on her, because the default fires regardless of tags",
       fams.includes("HARM") && pell.canStrike === undefined, JSON.stringify(fams));
   }
+}
+/* ═════ §50 — R28: AUTHORED GROUND IS CANON, AND SOMETHING FINALLY READS IT ═════ */
+// ⛔ `local_layouts.json` was authored 2026-08-14 — 18 of 135 places, 84 placed sites — and its ONLY
+// consumer was the test that reported it disagreeing with the generator.
+//
+// ⚠️ ERIK RULED: "Where a place is hand-authored, the authored ground is the truth. The generator fills in
+// the rest." ⛔ DEFERRING BY SWITCHING THE TEST OFF WOULD HAVE DROPPED 18 HAND-AUTHORED LAYOUTS rather than
+// promoting them — so the ground got a reader instead.
+//
+// ⚠️ AND IT IS NOT A MAP. A bearing and a distance are a sentence, and the narrator is a surface that
+// already exists — a well at the centre and a river two miles south-west is something the GM can say.
+console.log("\n── §50 · R28 · the authored ground ──");
+{
+  const PL50 = await import("../engine/places.js");
+  const L50 = rj("content/packs/core/world/local_layouts.json");
+  const ids50 = Object.keys(L50).filter(k => !k.startsWith("_"));
+
+  check("§50: every authored layout renders — none is silently dropped",
+    ids50.every(id => PL50.authoredGroundFor(id, L50)),
+    ids50.filter(id => !PL50.authoredGroundFor(id, L50)).join(" · "));
+  check("§50: ⚠️ …and a place with NO authored layout says nothing at all — 117 of 135 is the dominant case",
+    PL50.groundForGM("archive_hollow", L50) === "" && PL50.groundForGM("nowhere-at-all", L50) === "");
+
+  // ⛔ THE GROUND READS AS GROUND, not as a table of numbers.
+  const mb = PL50.groundForGM("millbrook", L50);
+  check("§50: the well Erik put IN the village is at its centre",  /The Village Well — at the centre/.test(mb), mb.split("\n")[1]);
+  check("§50: …and the river he moved OUT of it is miles away, in a direction",
+    /The Echo \(water\) — 2\.0 mi south-west/.test(mb), mb.split("\n").find(l => /Echo/.test(l)));
+  check("§50: ⚠️ a feature AT the centre is not reported as \"0 m north\" — that is not a sentence",
+    !/(^|[^0-9])0 m /.test(mb));
+
+  // ⚠️ BEARINGS ARE WRITTEN BOTH WAYS IN THE FILE — 0..360 in some entries, -180..180 in others. The same
+  // convention split content_ci had to handle, normalised once here rather than at every call site.
+  check("§50: a bearing reads the same whichever convention it was written in",
+    PL50.compassOf(-134) === PL50.compassOf(226) && PL50.compassOf(0) === "north" && PL50.compassOf(90) === "east");
+
+  // ⛔ ALL FOUR DOORS. Fetched, destructured, ATTACHED, and read — SNG-342's census is files that got as
+  // far as being loaded. A fetch with no attach is a download the engine throws away.
+  const st50 = rd("engine/state.js"), gr50 = rd("engine/gm_registry.js");
+  check("§50: ⛔ the file is fetched, destructured, ATTACHED and READ — all four",
+    /local_layouts\.json/.test(st50) && /localLayoutsDoc\] = await/.test(st50) &&
+    /rules\.localLayouts = localLayoutsDoc/.test(st50) &&
+    /groundForGM\(env\.location\?\.id, env\.rules\?\.localLayouts\)/.test(gr50));
+  check("§50: …and it is a registered GM block, so it reaches the narrator",  /key: "groundDetail"/.test(gr50));
 }
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));

@@ -214,3 +214,81 @@ export function recallForGM(character, text, opts = {}) {
   }
   return lines.join("\n");
 }
+
+/* ═══ R28 (ERIK 2026-09-02) — AUTHORED GROUND IS CANON; THE GENERATOR FILLS THE REST.
+ *
+ * ⛔ `local_layouts.json` HAS BEEN AUTHORED, VALIDATED AND UNREAD SINCE 2026-08-14. 18 of 135 places,
+ * 84 placed sites, 6 extent features — and its only consumer was the test that reported it disagreeing
+ * with the generator. ⚠️ Deferring to it by switching that test off would have DROPPED 18 hand-authored
+ * layouts rather than promoting them.
+ *
+ * ⚠️ THIS IS THE SAME SHAPE THE REGION TIER ALREADY USES. `region_maps.json` gives 4 of 38 regions an
+ * authored layer over generated ground, and app.js overlays it with `fromCentre(bearing, km)`. Its own
+ * comment says the frame is "the same frame localMap uses one tier down" — this is that tier.
+ *
+ * ⛔ AND IT IS NOT A MAP. There is no place-level canvas — the app has a world globe and a region map and
+ * nothing below. ⚠️ THE AUTHORED GROUND DOES NOT NEED ONE TO BE LOAD-BEARING: a bearing and a distance
+ * are a sentence, and the narrator is the surface that has always been there. A well at the centre and a
+ * river 2.2 miles southwest is something the GM can say; it does not have to be something a player
+ * clicks.
+ *
+ * ⚠️ THE OTHER 117 PLACES GET NOTHING, AND THAT IS THE DOMINANT CASE. It must read as deliberate rather
+ * than broken — so this returns null rather than inventing a layout, exactly as the region tier does. */
+const COMPASS = ["north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"];
+
+/** ⚠️ A BEARING IS A NUMBER AND A DIRECTION IS A WORD. The authored file writes 0..360 in some entries and
+ *  -180..180 in others — the same convention split content_ci had to handle — so it is normalised here
+ *  rather than at every call site. */
+export function compassOf(bearing) {
+  const b = ((Number(bearing) || 0) % 360 + 360) % 360;
+  return COMPASS[Math.round(b / 45) % 8];
+}
+
+/** ⚠️ METRES BELOW A MILE, MILES ABOVE IT — nobody says "3540 metres" about a river they walk to. */
+function span(metres) {
+  const m = Number(metres) || 0;
+  if (m < 1000) return `${Math.round(m / 10) * 10} m`;
+  const mi = m / 1609.34;
+  return `${mi < 10 ? mi.toFixed(1) : Math.round(mi)} mi`;
+}
+
+/** ⛔ R28 — THE AUTHORED GROUND OF ONE PLACE, as the GM should hear it, or null where none is authored.
+ *  ⚠️ `_measured` IS DELIBERATELY NOT READ. It is the generator's record of the same terrain, kept for
+ *  the drift handshake; the ruling is that the AUTHORED figures are the ones in play, so a river
+ *  distance the generator computes differently stops mattering here. */
+export function authoredGroundFor(locationId, layouts) {
+  const L = layouts && layouts[locationId];
+  if (!L || (!(L.sites || []).length && !(L.extent || []).length)) return null;
+  const lines = [];
+  for (const f of L.extent || []) {
+    if (!f?.name) continue;
+    // ⚠️ THE SAME RULE THE SITES USE. "The Village (built) — 0 m north" is not a sentence; a feature
+    // that IS the centre is at the centre.
+    const fm = Number(f.fromMetres);
+    const where = !Number.isFinite(fm) ? ""
+      : fm < 25 ? " — at the centre"
+      : ` — ${span(fm)} ${compassOf(f.bearing)}`;
+    lines.push(`${f.name}${f.kind ? ` (${f.kind})` : ""}${where}`);
+  }
+  for (const s of L.sites || []) {
+    if (!s?.name) continue;
+    const lm = s.localMap || {};
+    // ⚠️ THE CENTRE IS A PLACE, NOT A DISTANCE OF ZERO. "0 m north" is not a sentence.
+    const at = (Number(lm.metres) || 0) < 25
+      ? "at the centre"
+      : `${span(lm.metres)} ${compassOf(lm.bearing)} of centre`;
+    lines.push(`${s.name} — ${at}`);
+  }
+  if (!lines.length) return null;
+  return { radiusMetres: L.radiusMetres ?? null, lines,
+    text: `${lines.map(l => "- " + l).join("\n")}` };
+}
+
+/** ⛔ THE GM BLOCK. Authored where authored exists; SILENT everywhere else — 117 of 135 places have no
+ *  layout and a narrator told "no ground is recorded" would start apologising for the world. */
+export function groundForGM(locationId, layouts) {
+  const g = authoredGroundFor(locationId, layouts);
+  if (!g) return "";
+  const head = g.radiusMetres ? `Within about ${span(g.radiusMetres)} of the centre:` : "The ground here:";
+  return `${head}\n${g.text}`;
+}

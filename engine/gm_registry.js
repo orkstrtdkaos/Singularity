@@ -45,6 +45,7 @@ import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NO
 import { threatToPlayer, guardiansFor, worldRoster } from "./worldtick.js"; // SNG-310: the mark the world engine leaves for the GM to narrate
 import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
+import { groundForGM } from "./places.js";       // R28: authored ground is canon
 import { assignmentsForGM } from "./assignments.js"; // SNG-191 §4: delegated commitments the world is honouring
 import { arcsForGM, seasonalDetailForGM } from "./latentarcs.js"; // SNG-191 §7: surfaced arcs + §7.4 seasonal pressure
 import { schoolsDetailForGM } from "./substrate.js"; // SNG-193b §3.6: the GM knows a character's school, not just their tradition
@@ -82,6 +83,13 @@ export const GM_CONTEXT = [
   { key: "region", builder: "worldtick.buildRegionView + state.eventsForGM", carries: ["region facts", "active events"],
     reachedBy: "always", spec: "§9", views: ALL,
     build: (env) => ({ ...env.CONTENT.region, activeEvents: eventsForGM(buildRegionView(env.CONTENT, env.character), env.CONTENT.events) }) },
+  // ⛔ R28 (ERIK 2026-09-02) — "Where a place is hand-authored, the authored ground is the truth."
+  // ⚠️ 18 of 135 places have a layout; the other 117 send nothing, which is the dominant case and must
+  // read as deliberate rather than broken. ⛔ THE FILE WAS AUTHORED IN AUGUST AND READ ONLY BY A TEST —
+  // this is the reader that makes the ground load-bearing in play.
+  { key: "groundDetail", builder: "places.groundForGM (R28)", carries: ["the authored ground of this place — what stands where"],
+    reachedBy: "standing in one of the 18 places with an authored local layout", spec: "§9 / R28", views: ALL,
+    build: (env) => groundForGM(env.location?.id, env.rules?.localLayouts) },
   { key: "lore", builder: "state.loreForLocation", carries: ["local lore"],
     reachedBy: "always", spec: "§9", views: ALL,
     build: (env) => loreForLocation(env.location, env.CONTENT.lore) },

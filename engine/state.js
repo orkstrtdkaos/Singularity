@@ -649,7 +649,7 @@ export async function loadContent() {
   // fold the two that mutate already-loaded maps (accords tag abilities, legends hydrate into npcs).
   // Failure semantics preserved exactly: `region` stays fatal; every optional one keeps its fallback.
   const [region, substrate, greaterArcs, genNpc, genLoc, genArc, genCreature, originsDoc, backgroundsDoc, regionsDoc,
-         accords, helpDoc, substrateModel, powerSourcesDoc, foothillsDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc] = await Promise.all([
+         accords, helpDoc, substrateModel, powerSourcesDoc, foothillsDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc, localLayoutsDoc] = await Promise.all([
     fetchJSON("world/regions/valley.json"),
     fetchJSON("content/packs/valley/lore/generative_substrate.json").catch(() => null),           // generation off on a miss
     fetchJSON("content/packs/valley/lore/greater_arcs.json").then(x => x.arcs || []).catch(() => []), // no arc few-shot
@@ -704,8 +704,15 @@ export async function loadContent() {
     // the GM what a reasonable grant READS like in each level/craft band, so grants are authored to FIT the
     // ceiling rather than authored big and then refused. Registered in the manifest but loaded by nothing until
     // now, which would have made it dead content (SNG-064): the numbers would clamp and the voice never arrive.
-    loadRule("earned_power_guidance", { bands: {} })
+    loadRule("earned_power_guidance", { bands: {} }),
+    // ⛔ R28 — THE AUTHORED GROUND. 18 of 135 places, authored since 2026-08-14 and read by nothing but
+    // a test. A miss leaves the other 117 exactly as they are, which is the dominant case.
+    fetchJSON("content/packs/core/world/local_layouts.json").catch(() => null)
   ]);
+  // ⛔ R28 — ATTACHED, not merely fetched, and attached IN THIS WAVE. My first pass put this beside the
+  // ladder rule 250 lines up, where `localLayoutsDoc` does not exist yet — the exact temporal-dead-zone
+  // shape the comment above the wave warns about. ⚠️ A fetch with no attach is a download thrown away.
+  if (localLayoutsDoc) rules.localLayouts = localLayoutsDoc;
   const genSchemas = {}; // SNG-BATCH-9 validation schemas that generate(type, context) authors against
   if (genNpc) genSchemas.npc = genNpc;
   if (genLoc) genSchemas.location = genLoc;

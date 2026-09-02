@@ -52,9 +52,52 @@ export function buildRecipeRecord(def, { worldDay = null, contributedBy = null }
 }
 
 /** The recipe for a pairing, or null. */
-export function recipeFor(store, components) {
+/** ⛔ SNG-369 — THE STORE IS WHAT THIS WORLD HAS FOUND; THE CATALOGUE IS WHAT THE WORLD CONTAINS.
+ *
+ *  63 recipes sat in `combination_recipes.json`, registered in the manifest and read by nothing. The file
+ *  said so about itself: *"Until a consumer exists, anything authored here is documentation."* This is the
+ *  consumer. Erik: *"wire it… and totally agree with seed."*
+ *
+ *  ⛔ THE STORE WINS, ALWAYS. A player who first-found a pairing and named it keeps their name and their
+ *  attribution; the catalogue fills the void BEHIND them. Authority runs catalogue → store, never back —
+ *  reversing it would let a player's discovery overwrite canon, or canon overwrite a player's history.
+ *
+ *  ⚠️ A CATALOGUE HIT IS A RECOGNITION WITH NO FIRST FINDER, and that is correct: nobody discovered it,
+ *  it is simply true of the world. `firstFinderName` returns null and the moment reads as canon rather
+ *  than as someone else's find. */
+export function recipeFor(store, components, catalogue = null) {
   const s = ensureRecipeStore(store);
-  return s.recipes[braidKey(components || [])] || null;
+  const key = braidKey(components || []);
+  const found = s.recipes[key] || null;
+  if (found) return found;                       // ⛔ the store wins — never look past a real discovery
+  return catalogueRecipe(key, catalogue);
+}
+
+/** ⛔ SNG-369 — a catalogue entry, in the STORE'S shape so every consumer downstream is unchanged.
+ *  ⚠️ The two files were authored to different vocabularies: `effect`→`description`, `cannot`→`notFor`.
+ *  Mapping them here rather than at the call site keeps the translation in ONE place — the alternative is
+ *  every reader learning both shapes, which is how a codebase grows two ways to ask one question. */
+export function catalogueRecipe(key, catalogue) {
+  if (!key || !Array.isArray(catalogue)) return null;
+  for (const r of catalogue) {
+    if (braidKey(r?.parts || []) !== key) continue;
+    return {
+      braidKey: key,
+      name: r.name,
+      description: r.effect || r.description || "",
+      notFor: r.cannot || r.notFor || "",
+      emergentFunction: null,
+      tree: [],
+      // ⚠️ NOT `gm`, NOT `player` — a third provenance, so the adopt path can tell canon from a find and
+      // `syncBraidRecipes` never republishes it as though this world had discovered it.
+      namedBy: "authored",
+      sourceNames: r.parts || [],
+      contributedBy: null,
+      foundWorldDay: null,
+      fromCatalogue: true
+    };
+  }
+  return null;
 }
 
 /** Convert a world recipe into the `authored` bag buildBraidDef consumes — so ADOPTION runs the SAME mint

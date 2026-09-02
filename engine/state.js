@@ -251,7 +251,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, firstGiftTemplate, damageFamilies, abilityRenameMap] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, firstGiftTemplate, damageFamilies, abilityRenameMap, combinationRecipes] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -311,7 +311,11 @@ export async function loadContent() {
     // unwardable — registered is only half; CCODE-55 asks whether it is ever READ.
     loadRule("first_gift_template", null),
     loadRule("damage_families", { families: {} }),
-    loadRule("ability_rename_map", { map: {} })
+    loadRule("ability_rename_map", { map: {} }),
+    // ⛔ SNG-369 §2a — SIXTY-THREE AUTHORED BRAIDS, REGISTERED IN THE MANIFEST AND READ BY NOTHING. The
+    // file said so itself: "Until a consumer exists, anything authored here is documentation."
+    // ⚠️ REGISTRATION IS NOT ARRIVAL (SNG-342) — being in the manifest only means it COULD be fetched.
+    loadRule("combination_recipes", { recipes: [] })
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -407,6 +411,13 @@ export async function loadContent() {
   // catalogue no longer answered to. ⚠️ Merged rather than merely fetched, for the reason the XP table
   // above gives: a loaded-but-unread value is the same bug one layer up.
   if (abilityRenameMap?.map) rules.abilityRenames = abilityRenameMap.map;
+  // ⛔ SNG-369 — CANON, NOT STORE. The live `world/braid_recipes.json` is what a WORLD has discovered;
+  // this is what the world CONTAINS. `recipeFor` reads the store first and falls through to here, so a
+  // player who first-found and named a braid keeps their name — the catalogue fills the void behind them.
+  // ⚠⚠ THE KEY HOLDS THE WHOLE FILE, NOT THE ARRAY INSIDE IT. Gate 331 asserts that a merged rules key
+  // named for a file carries THAT FILE'S CONTENT — it caught me assigning `.recipes` and reporting array
+  // indices where the file's own keys belonged. Consumers ask for `.recipes` themselves.
+  if (combinationRecipes) rules.combinationRecipes = combinationRecipes;
   rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
   rules.grantCap = nativeGrants.grantCap ?? 5;
   // SNG-263: the craft-mechanics config rides the rules bag so battleRound reads it off a value it already

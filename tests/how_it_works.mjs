@@ -2625,6 +2625,58 @@ console.log("\n── §42 · creation: points are placed, and the copy tells th
   check("§42: …it says what IS true — the far pole costs more and opens as you carry it",
     /leaned away from it/.test(code42) && /opens as you carry it/.test(code42));
 }
+/* ═════ §43 — SNG-369: THE 63 AUTHORED BRAIDS HAVE A READER ═════ */
+// ⛔ `combination_recipes.json` held 63 recipes, was REGISTERED IN THE MANIFEST, and was read by nothing.
+// The file said so about itself: "Until a consumer exists, anything authored here is documentation."
+// ⚠️ REGISTRATION IS NOT ARRIVAL (SNG-342). Three doors of four — authored, registered, and never loaded.
+//
+// ⛔ THE STORE WINS. `world/braid_recipes.json` is what THIS world has found; the catalogue is what the
+// world CONTAINS. Authority runs catalogue → store, never back: a player who first-found a pairing and
+// named it keeps the name, and the catalogue fills the void behind them.
+console.log("\n── §43 · SNG-369 · the 63 authored braids have a reader ──");
+{
+  const RC43 = await import("../engine/recipes.js");
+  const BR43 = await import("../engine/braids.js");
+  const cat43 = rj("content/packs/core/rules/combination_recipes.json").recipes || [];
+  const empty43 = { recipes: {} };
+
+  check("§43: the catalogue is non-empty (or this whole gate is vacuous)", cat43.length > 50, `${cat43.length}`);
+  const reachable = cat43.filter(r => RC43.recipeFor(empty43, r.parts, cat43)).length;
+  check(`§43: every one of the ${cat43.length} authored braids is reachable`,
+    reachable === cat43.length, `${reachable}/${cat43.length}`);
+
+  // ⛔ THE STORE WINS — the single most important property. A player's find must never be overwritten.
+  const one43 = cat43[0];
+  const store43 = { recipes: {} };
+  store43.recipes[BR43.braidKey(one43.parts)] = { braidKey: BR43.braidKey(one43.parts), name: "A Player Name", namedBy: "player" };
+  check("§43: ⛔ a discovery in the store BEATS the catalogue",
+    RC43.recipeFor(store43, one43.parts, cat43).name === "A Player Name");
+
+  // ⚠️ BACKWARD COMPATIBLE — a caller that passes no catalogue behaves exactly as before.
+  check("§43: with no catalogue supplied, nothing changes",
+    RC43.recipeFor(empty43, one43.parts) === null);
+
+  // ⚠️ THE TWO FILES WERE AUTHORED TO DIFFERENT VOCABULARIES — effect→description, cannot→notFor. The
+  // translation lives in ONE place; if it drifts, a braid arrives with no prose and nobody notices.
+  const got43 = RC43.recipeFor(empty43, one43.parts, cat43);
+  check("§43: the catalogue’s `effect` arrives as the braid’s description",
+    got43.description === one43.effect && got43.description.length > 10);
+  check("§43: …and `cannot` as notFor", got43.notFor === (one43.cannot || ""));
+
+  // ⛔ CANON IS NOT A DISCOVERY. A third provenance, so the adopt path can tell them apart and the sync
+  // path never republishes canon as though this world had found it.
+  check("§43: a catalogue braid is marked `authored`, not gm and not player",
+    got43.namedBy === "authored" && got43.fromCatalogue === true);
+  check("§43: …and has no first finder, because nobody found it",
+    RC43.firstFinderName(got43) === null);
+
+  // ⛔ AND IT IS ACTUALLY LOADED — the door that was shut.
+  const st43 = readFileSync(join(root, "engine/state.js"), "utf8");
+  check("§43: state.js loads the catalogue", /loadRule\(\s*"combination_recipes"/.test(st43));
+  check("§43: …and puts it on the rules bag", /rules\.combinationRecipes/.test(st43));
+  const app43 = readFileSync(join(root, "app.js"), "utf8");
+  check("§43: …and the mint path passes it", /recipeFor\([^)]*combinationRecipes/.test(app43));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

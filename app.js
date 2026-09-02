@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.308";
+const APP_VERSION = "1.9.310";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6066,7 +6066,10 @@ async function maybeMintBraids(turn) {
 async function authorAndMintBraid(m, catalog) {
   const vocab = Object.keys(FN_INDEX?.verbToFamily || {}); // the real 24 verbs
   // SNG-201 §2: the world already found this pairing → adopt it, no LLM call, a recognition beat.
-  const known = recipeFor(braidRecipeStore, m.components);
+  // ⛔ SNG-369 — the store first, then the 63 authored braids behind it. Before this, a pairing the world
+  // contained but this world had not found went to the model to be re-invented — and came back with a
+  // different name each time.
+  const known = recipeFor(braidRecipeStore, m.components, CONTENT.rules?.combinationRecipes?.recipes);
   if (known) {
     const def = buildBraidDef(character, m.components, catalog, { authored: recipeToAuthored(known), functionVocab: vocab, braidFraction: CONTENT.rules?.leveling?.braidCheaperParentFraction, craftMechanics: CONTENT.craftMechanics, traditionIndex: CONTENT.traditionIndex });
     if (!def) return null;

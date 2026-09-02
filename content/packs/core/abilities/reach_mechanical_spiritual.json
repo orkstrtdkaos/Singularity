@@ -3047,7 +3047,8 @@
      "gains": "deepen",
      "harmRung": "none",
      "gainAxes": [
-      "magnitude"
+      "range",
+      "conditions"
      ]
     }
    ],
@@ -3093,7 +3094,8 @@
    "plainly": "A survive/travel action that steps you through to somewhere in sight. Rated 4 of 10 on 1 target.",
    "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific.",
    "_t5Fix_20260901": "⛔ T5 — RANK IS MASTERY. The first authoring put a NEW COST at rank 3 on every craft (Erik: 'that was quite the cavalier authoring'). ⚠️ The gate missed it — its SELFTAX regex targets self-harm phrasings and these were world-consequence costs. ✅ Rank 3 now LIFTS the rank-1 limitation; the consequence moved to `intensity.surge`, which the player CHOOSES.",
-   "_t7Fix_20260901": "⛔ T7 — SECOND-TURN TEST, applied after Erik: 'make sure the way you wrote these is clearly something a player would WANT to do.' ⚠️ FAILURES FOUND: `hallowed_ground` was passive (stand still) and narrowly conditional (shadow+appetite only) — now it names a CONCRETE effect (one rung lower), widens to four ward types, and the wielder ACTS NORMALLY while it holds. `thin_step`'s precondition was GM-owned and unknowable — the player can now always tell whether the step is there BEFORE spending. `administered_mercy`'s 'it takes the time it takes' was atmosphere, not adjudicable — now it costs a full turn, stated."
+   "_t7Fix_20260901": "⛔ T7 — SECOND-TURN TEST, applied after Erik: 'make sure the way you wrote these is clearly something a player would WANT to do.' ⚠️ FAILURES FOUND: `hallowed_ground` was passive (stand still) and narrowly conditional (shadow+appetite only) — now it names a CONCRETE effect (one rung lower), widens to four ward types, and the wielder ACTS NORMALLY while it holds. `thin_step`'s precondition was GM-owned and unknowable — the player can now always tell whether the step is there BEFORE spending. `administered_mercy`'s 'it takes the time it takes' was atmosphere, not adjudicable — now it costs a full turn, stated.",
+   "_gainAxesFix_20260901": "⛔ CCode's ratchet caught `gainAxes: ['magnitude']` at rank 3 — `magnitude` is NOT one of the nine (range · duration · damage · scope · targets · quality · autonomy · conditions · tempo). ⚠️ CCode correctly REFUSED to guess the replacement — deriving it is authoring, not wiring. ✅ Derived per SNG-468 from the rank's own text: r3 text: 'Cross to a thin place you KNOW rather than one you can see. THE SIGHT REQUIREMENT IS GONE.' → `range` (reach extends past line of sight) + `conditions` (the must-see precondition lifts). NOT magnitude — nothing about the step gets bigger, it gets FARTHER and less conditional."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

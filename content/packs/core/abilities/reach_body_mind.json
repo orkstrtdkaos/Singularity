@@ -1271,7 +1271,8 @@
      "ongoingHarm": {
       "type": "physical"
      },
-     "_ongoingHarm": "⛔ SNG-534, FOUND BY W4. 'A wrist that will not close on a weapon again today' is heal-denial in prose and denied nothing. ⚠️ A joint finished wrong stays finished wrong until it is set."
+     "_ongoingHarm": "⛔ SNG-534, FOUND BY W4. 'A wrist that will not close on a weapon again today' is heal-denial in prose and denied nothing. ⚠️ A joint finished wrong stays finished wrong until it is set.",
+     "backlashRung": "none"
     },
     {
      "rank": 2,
@@ -1297,7 +1298,8 @@
       "resist": "physical",
       "targets": 1
      },
-     "_imposes": "⛔ SNG-513. A body put into the ground, a wall or a stairwell."
+     "_imposes": "⛔ SNG-513. A body put into the ground, a wall or a stairwell.",
+     "backlashRung": "none"
     },
     {
      "rank": 3,
@@ -1315,7 +1317,8 @@
       "scope",
       "conditions"
      ],
-     "_harmRungWas": "⛔ 'severe' is not a rung. -> incapacitating: they stop being able to fight LONG BEFORE THEY STOP (Aevi 2026-08-23)"
+     "_harmRungWas": "⛔ 'severe' is not a rung. -> incapacitating: they stop being able to fight LONG BEFORE THEY STOP (Aevi 2026-08-23)",
+     "backlashRung": "damaging"
     }
    ],
    "challengeTypes": [
@@ -1388,7 +1391,8 @@
    "_diceFix": "⛔ SNG-481: shape `strike` rolls dice per CCode's shape→reader map, and this craft carried magnitude only.",
    "_powerSystemWas": "reach_body_mind",
    "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ KI. Canon SNG-445: somatic is metaphysical-primary — 'Veil/Psychic/Ki type INNATE power'. A craft that draws force out of the practitioner's own trained body is ki.",
-   "_typed_20260829": "⛔ `physical` — 'an elbow past its travel, a knee folded inward'. Edge, weight and impact delivered by a body, and armour answers it exactly as armour. ⚠️ NOT `force` (nothing travels past the skin) and NOT `vital` (nothing is drained or rotted). ⛔ Rung stays `incapacitating` and is correct: the craft's whole subject is a joint that stops working, and its `notFor` says a spear is a real answer to it."
+   "_typed_20260829": "⛔ `physical` — 'an elbow past its travel, a knee folded inward'. Edge, weight and impact delivered by a body, and armour answers it exactly as armour. ⚠️ NOT `force` (nothing travels past the skin) and NOT `vital` (nothing is drained or rotted). ⛔ Rung stays `incapacitating` and is correct: the craft's whole subject is a joint that stops working, and its `notFor` says a spear is a real answer to it.",
+   "_backlashTree_20260902": "⛔ OI-20 / R18 — BACKLASH SCALES WITH RANK, THE WAY HARM ALREADY DOES. `backlashRung` was a single flat top-level value: a craft turned on you identically at rank 1 and rank 3, even though at rank 3 it is doing lethal work. ✅ RULE: the top-level value is the CEILING (identical in meaning to `harmRung`, per R5-corrected and `intent.js:34`), and each craft's OWN authored offset is applied per rank — `backlash[r] = max(none, harm[r] − (ceilingHarm − ceilingBacklash))`. ⚠️ THE OFFSET IS PER-CRAFT AND WAS NOT FLATTENED: most lethal crafts backlash at `damaging` (offset 2), but `found_fault`, `offered_mouth`, `plain_weight`, `sudden_work` and `thinned_veil` backlash at `incapacitating` (offset 1) — an authored judgement that some crafts turn on the wielder harder. ✅ The rule REPRODUCES each craft's authored top-level exactly at its top rank and scales down below it. ⛔ CONSEQUENCE WORTH NAMING: at rank 1 most of these now have NO backlash at all — a novice's craft does not turn on them — which is Erik's standing correction that penalties must not land hardest on low-level players."
   },
   {
    "id": "sustained_regard",
@@ -1427,7 +1431,8 @@
      "ongoingHarm": {
       "type": "decay"
      },
-     "_ongoingHarm": "⛔ SNG-534, FOUND BY W4. r1's own text — 'the small automatic things stop' — is ongoing harm, and I only typed r2. ⚠️ THE CHECK CAUGHT THE RANK I SKIPPED."
+     "_ongoingHarm": "⛔ SNG-534, FOUND BY W4. r1's own text — 'the small automatic things stop' — is ongoing harm, and I only typed r2. ⚠️ THE CHECK CAUGHT THE RANK I SKIPPED.",
+     "backlashRung": "none"
     },
     {
      "rank": 2,
@@ -1453,7 +1458,8 @@
      "persistUntilHealed": {
       "condition": "bleeding"
      },
-     "_persistUntilHealed": "⛔ SNG-532. ⛔ 'They cannot rally, cannot steady, CANNOT STOP BLEEDING.' Stops when the regard stops — ⚠️ BUT THE BLEEDING IT OPENED DOES NOT.\n⚠️ CCODE: 'persistUntilHealed is still authored on NOTHING — Grey Hand's design has been one field short of true for two rounds now.' ⛔ HE SHIPPED THE READER AND I NEVER FED IT — the same shape as the 27 blocks one level below their reader, arriving from the other side."
+     "_persistUntilHealed": "⛔ SNG-532. ⛔ 'They cannot rally, cannot steady, CANNOT STOP BLEEDING.' Stops when the regard stops — ⚠️ BUT THE BLEEDING IT OPENED DOES NOT.\n⚠️ CCODE: 'persistUntilHealed is still authored on NOTHING — Grey Hand's design has been one field short of true for two rounds now.' ⛔ HE SHIPPED THE READER AND I NEVER FED IT — the same shape as the 27 blocks one level below their reader, arriving from the other side.",
+     "backlashRung": "none"
     },
     {
      "rank": 3,
@@ -1471,7 +1477,8 @@
      "gainAxes": [
       "duration",
       "conditions"
-     ]
+     ],
+     "backlashRung": "damaging"
     }
    ],
    "challengeTypes": [
@@ -1532,7 +1539,8 @@
    "_powerSystemWas": "reach_body_mind",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_typed_20260829": "⛔ `psychic`, INTRINSIC — attention itself as harm. ⚠️ 'Balance, breath, grip AND THE CLOTTING OF A WOUND all get worse' — the body fails because the mind is being held, which is intrinsic harm with physical symptoms, NOT physical harm. ⛔ The distinction matters at the ward: armour does nothing here.",
-   "_rungFix_20260829": "⛔ ability rung was `incapacitating` while r3 reaches `lethal` — and this is the craft whose own text says 'the CLOTTING OF A WOUND' gets worse. ⚠️ It can kill by attention and the gloss said it could not."
+   "_rungFix_20260829": "⛔ ability rung was `incapacitating` while r3 reaches `lethal` — and this is the craft whose own text says 'the CLOTTING OF A WOUND' gets worse. ⚠️ It can kill by attention and the gloss said it could not.",
+   "_backlashTree_20260902": "⛔ OI-20 / R18 — BACKLASH SCALES WITH RANK, THE WAY HARM ALREADY DOES. `backlashRung` was a single flat top-level value: a craft turned on you identically at rank 1 and rank 3, even though at rank 3 it is doing lethal work. ✅ RULE: the top-level value is the CEILING (identical in meaning to `harmRung`, per R5-corrected and `intent.js:34`), and each craft's OWN authored offset is applied per rank — `backlash[r] = max(none, harm[r] − (ceilingHarm − ceilingBacklash))`. ⚠️ THE OFFSET IS PER-CRAFT AND WAS NOT FLATTENED: most lethal crafts backlash at `damaging` (offset 2), but `found_fault`, `offered_mouth`, `plain_weight`, `sudden_work` and `thinned_veil` backlash at `incapacitating` (offset 1) — an authored judgement that some crafts turn on the wielder harder. ✅ The rule REPRODUCES each craft's authored top-level exactly at its top rank and scales down below it. ⛔ CONSEQUENCE WORTH NAMING: at rank 1 most of these now have NO backlash at all — a novice's craft does not turn on them — which is Erik's standing correction that penalties must not land hardest on low-level players."
   },
   {
    "id": "body_read",

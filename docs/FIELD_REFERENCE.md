@@ -602,7 +602,7 @@ contribute to authored dice without recreating the double-scaling bug.
 |---|---|---|---|---|
 | `rank` | 1673 | `tree`×1161 `rankDeltas`×512 | ✅ READ | `braids.js`, `capabilities.js`, `coliseum.js` |
 | `name` | 1575 | `root`×414 `tree`×1161 | ✅ READ | `affiliation.js`, `arceffects.js`, `art.js` |
-| `functions` | 1575 | `root`×414 `tree`×1161 | ✅ READ | `braids.js`, `coliseum.js`, `craftmechanics.js` |
+| `functions` | 1580 | `root`×419 `tree`×1161 | ✅ READ | `braids.js`, `coliseum.js`, `craftmechanics.js` |
 | `harmRung` | 1477 | `root`×389 `tree`×1088 | ✅ READ | `braids.js`, `gm_registry.js`, `intent.js` |
 | `grants` | 1161 | `tree`×1161 | ✅ READ | `braids.js`, `capabilities.js`, `earnedpower.js` |
 | `cannot` | 1161 | `tree`×1161 | ✅ READ | `authormode.js`, `braids.js`, `capabilities.js` |
@@ -614,7 +614,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `kind` | 490 | `rankDeltas`×490 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
 | `id` | 414 | `root`×414 | ✅ READ | `affinities.js`, `arceffects.js`, `art.js` |
 | `tier` | 414 | `root`×414 | ✅ READ | `backfill.js`, `borncontract.js`, `braids.js` |
-| `axes` | 414 | `root`×414 | ✅ READ | `affinities.js`, `craftmechanics.js`, `encounters.js` |
+| `axes` | 419 | `root`×419 | ✅ READ | `affinities.js`, `craftmechanics.js`, `encounters.js` |
 | `attribute` | 414 | `root`×414 | ✅ READ | `affinities.js`, `braids.js`, `corrections.js` |
 | `narrationHints` | 414 | `root`×414 | ✅ READ | `battleprompt.js`, `braids.js`, `companions.js` |
 | `description` | 414 | `root`×414 | ✅ READ | `affiliation.js`, `art.js`, `authormode.js` |
@@ -622,10 +622,10 @@ contribute to authored dice without recreating the double-scaling bug.
 | `tradition` | 414 | `root`×414 | ✅ READ | `arceffects.js`, `art.js`, `braids.js` |
 | `powerSystem` | 414 | `root`×414 | ✅ READ | `art.js`, `backfill.js`, `braids.js` |
 | `operativeAxis` | 414 | `root`×414 | ⚠️ COLLISION | only as `cfg.operativeAxis` |
-| `intensity` | 414 | `root`×414 | ✅ READ | `canon.js`, `craftmechanics.js`, `death.js` |
+| `intensity` | 419 | `root`×419 | ✅ READ | `canon.js`, `craftmechanics.js`, `death.js` |
 | `bounds` | 414 | `root`×414 | ✅ READ | `gm.js` |
 | `plainly` | 414 | `root`×414 | ✅ READ | `gm.js`, `narration_voice.js`, `app.js` |
-| `tree` | 414 | `root`×414 | ✅ READ | `backfill.js`, `braids.js`, `capabilities.js` |
+| `tree` | 419 | `root`×419 | ✅ READ | `backfill.js`, `braids.js`, `capabilities.js` |
 | `mechanic` | 407 | `root`×407 | ✅ READ | `braids.js`, `capabilities.js`, `conditions.js` |
 | `challengeTypes` | 399 | `root`×399 | ⚠️ CI-ONLY | _4 test/script only_ |
 | `energyCost` | 396 | `root`×396 | ✅ READ | `braids.js`, `capabilities.js`, `functions.js` |

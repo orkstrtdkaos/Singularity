@@ -5485,6 +5485,427 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-30. ✅ THE FIRST RANGED INTERCEPT IN THE GAME, and the Orders' political economy made mechanical — **a gift and a claim in one act, with no penalty required to make it cost something.**"
+  },
+  {
+   "id": "administered_mercy",
+   "name": "Administered Mercy",
+   "levelReq": 1,
+   "tier": 1,
+   "energyCost": 4,
+   "powerSystem": "ordered_nanite",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": 0.5,
+    "violence_peace": 0.3
+   },
+   "functions": [
+    "heal"
+   ],
+   "narrationHints": "The wound closes correctly, in order, the way a form is completed. It does not feel like grace. It feels like being processed, and it works.",
+   "description": "Seraphic mending-craft. The Orders run an apparatus and the apparatus is genuinely good at this.",
+   "notFor": "Mending what you have not assessed; mending the unwilling; mending faster than the order allows — ⛔ it will not skip a step to save someone, and the Orders consider that the point.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Administered Mercy",
+     "grants": "Close a wound properly — clean, ordered, and it stays closed. Slower than a battlefield wants and better than a battlefield gets.",
+     "cannot": "IT TAKES THE TIME IT TAKES. You cannot hurry the order, and someone bleeding out on the wrong side of that is a thing the Orders have made peace with.",
+     "functions": [
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Ordered Restoration",
+     "grants": "Several, in sequence, without the quality dropping — the triage of an Order-house.",
+     "cannot": "⚠ SEQUENCE MEANS SOMEONE IS LAST, and you decide who. The Orders make you say the order out loud.",
+     "functions": [
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Full Form",
+     "grants": "What was taken comes back — not scar-closed but restored, the way the form specifies.",
+     "cannot": "⚠ THE FORM SPECIFIES A PERSON AS THEY SHOULD BE, which is not always as they were. People have come back from this correct and not quite themselves.",
+     "functions": [
+      "heal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "magnitude"
+     ]
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "SURVIVE"
+   ],
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "healing",
+   "operativeAxis": [
+    "magnitude",
+    "targets"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "plus": 1,
+    "targets": 1,
+    "damageType": "vitality"
+   },
+   "intensity": {
+    "conserve": "close it cleanly, no more",
+    "surge": "the full form; CORRECT IS NOT THE SAME AS AS-THEY-WERE"
+   },
+   "bounds": [
+    {
+     "text": "⛔ it will not skip a step to save someone",
+     "class": "hard"
+    },
+    {
+     "text": "it takes the time it takes",
+     "class": "cost"
+    },
+    {
+     "text": "⚠ sequence means someone is last, and you name them",
+     "class": "cost"
+    },
+    {
+     "text": "⚠ the form restores a person as they SHOULD be",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/survive action that restores health. It rolls 1d6+1 It affects 1 target.",
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
+  },
+  {
+   "id": "ordered_advance",
+   "name": "Ordered Advance",
+   "levelReq": 1,
+   "tier": 1,
+   "energyCost": 3,
+   "powerSystem": "ordered_nanite",
+   "attribute": "practical",
+   "axes": {
+    "demonic_angelic": 0.4,
+    "chaos_order": 0.4
+   },
+   "functions": [
+    "move",
+    "empower"
+   ],
+   "narrationHints": "Everyone moves at once and arrives correctly, and none of them decided to. The formation knows where it is going.",
+   "description": "Seraphic formation-craft. The Orders move as an apparatus moves — and it is unnervingly effective.",
+   "notFor": "Moving anyone outside the formation; individual repositioning; moving somewhere the formation cannot hold; changing the destination once called.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Ordered Advance",
+     "grants": "Call a move and your side takes it together — same moment, correct spacing, nobody strung out.",
+     "cannot": "THE MOVE IS CALLED BEFORE IT IS TAKEN. You cannot change it partway, and everyone committed on your word.",
+     "functions": [
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Formation Held",
+     "grants": "The spacing holds under pressure — the line does not fray while it moves.",
+     "cannot": "⚠ A LINE THAT WILL NOT FRAY ALSO WILL NOT SCATTER. Something that catches a formation catches all of it.",
+     "functions": [
+      "move",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Advance",
+     "grants": "Ground taken and held in the same motion, by people who never had to be told twice.",
+     "cannot": "⚠ THEY STOPPED DECIDING. A formation this good is a company that has handed you their judgement, and the Orders' honours are mostly posthumous.",
+     "functions": [
+      "move",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets"
+     ]
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "TRAVEL"
+   ],
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "movement",
+   "operativeAxis": [
+    "scope",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 1,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a short move, tight formation",
+    "surge": "the advance; THEY STOPPED DECIDING"
+   },
+   "bounds": [
+    {
+     "text": "⛔ the move is called before it is taken — no changing partway",
+     "class": "hard"
+    },
+    {
+     "text": "only your own formation",
+     "class": "hard"
+    },
+    {
+     "text": "⚠ what catches a formation catches all of it",
+     "class": "cost"
+    },
+    {
+     "text": "⚠ they handed you their judgement",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/travel action that moves your side together in formation. Rated 4 of 10 across a scope of 2.",
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
+  },
+  {
+   "id": "fed_wound",
+   "name": "Fed Wound",
+   "levelReq": 1,
+   "tier": 1,
+   "energyCost": 4,
+   "powerSystem": "precursor",
+   "attribute": "practical",
+   "axes": {
+    "demonic_angelic": -0.5
+   },
+   "functions": [
+    "heal"
+   ],
+   "narrationHints": "You give the hurt to something that wants it. The wound goes; the wanting does not, and now it knows your name.",
+   "description": "Abyssal mending-craft. Nothing down there heals anyone — but plenty of it will EAT a wound, which from the outside looks the same.",
+   "notFor": "Mending without an offering (something eats, always); feeding a wound to something that wants the person instead; mending yourself repeatedly — ⛔ the Choir counts.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Fed Wound",
+     "grants": "Offer a wound to a small hunger and it takes it — the injury is gone, eaten, and the person is whole.",
+     "cannot": "SOMETHING ATE. It is nearer now than it was, and it remembers being fed here.",
+     "functions": [
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Given Hurt",
+     "grants": "Grave injury, or several small ones at once. What eats it is correspondingly larger.",
+     "cannot": "⚠ THE APPETITE SCALES WITH THE WOUND. You are choosing what to introduce as much as what to mend.",
+     "functions": [
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Emptied",
+     "grants": "Take a wound that should have killed them and hand the whole of it away.",
+     "cannot": "⚠ WHAT ATE THAT IS INTERESTED NOW — in you, in them, in the place it happened. The Choir requires you to say what you fed and where.",
+     "functions": [
+      "heal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "magnitude"
+     ]
+    }
+   ],
+   "challengeTypes": [
+    "SURVIVE",
+    "SOCIAL"
+   ],
+   "tradition": "abyssal",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "healing",
+   "operativeAxis": [
+    "magnitude",
+    "targets"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 8
+    },
+    "targets": 1,
+    "damageType": "vitality"
+   },
+   "intensity": {
+    "conserve": "a small hurt, a small hunger",
+    "surge": "emptied; WHAT ATE THAT IS INTERESTED NOW"
+   },
+   "bounds": [
+    {
+     "text": "⛔ something eats, always — there is no free mending",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ never fed to something that wants the person",
+     "class": "hard"
+    },
+    {
+     "text": "⚠ the appetite scales with the wound",
+     "class": "cost"
+    },
+    {
+     "text": "⚠ what ate it remembers being fed here",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A survive/social action that restores health by feeding the wound to a hunger. It rolls 1d8 It affects 1 target.",
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
+  },
+  {
+   "id": "hungry_step",
+   "name": "Hungry Step",
+   "levelReq": 1,
+   "tier": 1,
+   "energyCost": 3,
+   "powerSystem": "precursor",
+   "attribute": "practical",
+   "axes": {
+    "demonic_angelic": -0.4,
+    "space_time": 0.3
+   },
+   "functions": [
+    "move",
+    "reveal"
+   ],
+   "narrationHints": "You go the way the hunger goes. It is not a road and it is faster than a road, and you arrive knowing what else uses it.",
+   "description": "Abyssal travelling-craft. Everything down there is going toward something it wants; the Choir learned to walk alongside.",
+   "notFor": "Travelling anywhere nothing wants anything; carrying someone the appetites want; arriving unnoticed — ⛔ you are noticed, that is the cost; outrunning what shares the way.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Hungry Step",
+     "grants": "Move along the pull of a nearby appetite — fast, direct, and you perceive what else is moving on it.",
+     "cannot": "YOU ARE ON THEIR ROAD. Everything using it perceives you as clearly as you perceive it.",
+     "functions": [
+      "move",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Shared Way",
+     "grants": "Longer stretches, and you can bring one other person if they can bear it.",
+     "cannot": "⚠ THEY ARE ON THE ROAD TOO NOW, and the appetites do not forget a face they have shared a way with.",
+     "functions": [
+      "move",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Deep Current",
+     "grants": "Cross the valley on the pull of something very large, arriving where it was going.",
+     "cannot": "⚠ YOU ARRIVE WHERE IT WAS GOING. The Choir's oldest joke is that the deep current is very reliable and the destination is not your choice.",
+     "functions": [
+      "move",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration"
+     ]
+    }
+   ],
+   "challengeTypes": [
+    "SURVIVE",
+    "TRAVEL"
+   ],
+   "tradition": "abyssal",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "movement",
+   "operativeAxis": [
+    "magnitude",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 2,
+    "targets": 1
+   },
+   "intensity": {
+    "conserve": "one short stretch, alone, quietly",
+    "surge": "the deep current; THE DESTINATION IS NOT YOUR CHOICE"
+   },
+   "bounds": [
+    {
+     "text": "⛔ you are noticed — everything on the road perceives you",
+     "class": "hard"
+    },
+    {
+     "text": "needs a nearby appetite going your way",
+     "class": "hard"
+    },
+    {
+     "text": "⚠ a passenger is on the road too, afterward",
+     "class": "cost"
+    },
+    {
+     "text": "⚠ the deep current chooses the destination",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A survive/travel action that moves you along an appetite's pull and reveals what shares it. Rated 4 of 10 on 1 target for about two hours.",
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

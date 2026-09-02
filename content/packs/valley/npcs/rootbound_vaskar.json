@@ -1,50 +1,52 @@
 {
-  "schemaVersion": 1,
-  "id": "rootbound_vaskar",
-  "name": "Vaskar the Rootbound",
-  "role": "Ancient Ent hardliner who would seal the wood from humankind",
-  "homeLocation": "dw_the_moot",
-  "communityId": "domain.deepwood",
-  "personality": {
-    "warmth": 0.1,
-    "trust": -0.4,
-    "candor": 0.9,
-    "patience": 1.0
-  },
-  "spectrum": {
-    "death_life": 0.5,
-    "mechanical_spiritual": 0.6,
-    "space_time": 0.6,
-    "violence_peace": 0.2
-  },
-  "voiceHints": "Immensely old, immensely slow, every word a verdict weighed against a thousand years. Not cruel — certain. Remembers the Burnscar as this morning's grief. To him humankind is a fire that has not yet finished burning. Will hear you out, at length, and be unmoved by anything but the deepest truth.",
-  "knowledge": [
-    "The Burnscar as lived memory — he was there when it burned",
-    "Every human betrayal of the wood across a thousand years, catalogued",
-    "What sealing the Deepwood would cost the world, and judging it worth paying"
+ "schemaVersion": 1,
+ "id": "rootbound_vaskar",
+ "name": "Vaskar the Rootbound",
+ "role": "Ancient Ent hardliner who would seal the wood from humankind",
+ "homeLocation": "dw_the_moot",
+ "communityId": "domain.deepwood",
+ "personality": {
+  "warmth": 0.1,
+  "trust": -0.4,
+  "candor": 0.9,
+  "patience": 1.0
+ },
+ "spectrum": {
+  "death_life": 0.5,
+  "mechanical_spiritual": 0.6,
+  "space_time": 0.6,
+  "violence_peace": 0.2
+ },
+ "voiceHints": "Immensely old, immensely slow, every word a verdict weighed against a thousand years. Not cruel — certain. Remembers the Burnscar as this morning's grief. To him humankind is a fire that has not yet finished burning. Will hear you out, at length, and be unmoved by anything but the deepest truth.",
+ "knowledge": [
+  "The Burnscar as lived memory — he was there when it burned",
+  "Every human betrayal of the wood across a thousand years, catalogued",
+  "What sealing the Deepwood would cost the world, and judging it worth paying"
+ ],
+ "wants": "To seal the wood and let the hasty world rot without the Green it never deserved.",
+ "fears": "Nothing a human could threaten. Underneath: that he is wrong, and has spent centuries teaching the young to hate.",
+ "reactsToReputation": {
+  "proven-over-time": "the ONLY thing that moves him — a trust demonstrated across real duration",
+  "hasty": "confirmed in his judgment",
+  "ent-kin-walker": "an old family grief, argued for a century"
+ },
+ "appearance": "An ancient Ent, three times the height of a man, bark blackened and split with age and hung with grey lichen. Two of the great upper limbs are dead and unshed. The eyes are two knots of slow amber deep in the trunk-face.",
+ "people": "ent",
+ "domains": {
+  "primary": [
+   "numinous",
+   "hourkeeper"
   ],
-  "wants": "To seal the wood and let the hasty world rot without the Green it never deserved.",
-  "fears": "Nothing a human could threaten. Underneath: that he is wrong, and has spent centuries teaching the young to hate.",
-  "reactsToReputation": {
-    "proven-over-time": "the ONLY thing that moves him — a trust demonstrated across real duration",
-    "hasty": "confirmed in his judgment",
-    "ent-kin-walker": "an old family grief, argued for a century"
-  },
-  "appearance": "An ancient Ent, three times the height of a man, bark blackened and split with age and hung with grey lichen. Two of the great upper limbs are dead and unshed. The eyes are two knots of slow amber deep in the trunk-face.",
-  "people": "ent",
-  "domains": {
-    "primary": [
-      "numinous",
-      "hourkeeper"
-    ],
-    "secondary": "rootkin",
-    "tertiary": "stillhold"
-  },
-  "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
-  "teaches": "numinous",
-  "curriculum": {
-    "refuses": "anything a human can learn inside a year. Not from spite — he does not believe short lessons are lessons.",
-    "demands": "you come back. Repeatedly. For longer than is convenient."
-  },
-  "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here."
+  "secondary": "rootkin",
+  "tertiary": "stillhold"
+ },
+ "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+ "teaches": "numinous",
+ "curriculum": {
+  "refuses": "anything a human can learn inside a year. Not from spite — he does not believe short lessons are lessons.",
+  "demands": "you come back. Repeatedly. For longer than is convenient."
+ },
+ "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here.",
+ "sex": "male",
+ "gender": "male"
 }

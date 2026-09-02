@@ -2822,8 +2822,8 @@
     {
      "rank": 3,
      "name": "Named Ground",
-     "grants": "The place keeps itself. It is known, and things route around it without being told.",
-     "cannot": "⚠ NAMED GROUND IS ON A MAP NOW — yours and everyone else's. What you made safe you also made findable.",
+     "grants": "The ground keeps itself — it holds with you nowhere near it, for as long as it is known. ⛔ THE STANDING LIMIT IS GONE: rank 1 required you to remain and thinned with distance. A named place does not need you.",
+     "cannot": "It is ground still, never a person — the one bound that does not lift.",
      "functions": [
       "ward",
       "resist"
@@ -2858,7 +2858,7 @@
    },
    "intensity": {
     "conserve": "a small circle, while you stand in it",
-    "surge": "named ground; WHAT YOU MADE SAFE YOU ALSO MADE FINDABLE"
+    "surge": "name the ground so it holds without you; ⚠ NAMED GROUND IS ON A MAP — yours and everyone else's"
    },
    "bounds": [
     {
@@ -2879,7 +2879,8 @@
     }
    ],
    "plainly": "A social/survive action that makes a place hostile to hungry and shadow workings. Rated 5 of 10 across a scope of 2 for about eight hours.",
-   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific.",
+   "_t5Fix_20260901": "⛔ T5 — RANK IS MASTERY. The first authoring put a NEW COST at rank 3 on every craft (Erik: 'that was quite the cavalier authoring'). ⚠️ The gate missed it — its SELFTAX regex targets self-harm phrasings and these were world-consequence costs. ✅ Rank 3 now LIFTS the rank-1 limitation; the consequence moved to `intensity.surge`, which the player CHOOSES."
   },
   {
    "id": "bound_witness",
@@ -2931,8 +2932,8 @@
     {
      "rank": 3,
      "name": "Standing Witness",
-     "grants": "Several at once, or one thing held while you deal with the rest.",
-     "cannot": "⚠ YOU ARE NOW A WITNESS. Things that were named by you remember it, and the Numinous do not have many quiet years.",
+     "grants": "Hold several at once, and a PARTIAL naming now holds — you no longer have to be entirely right, only right about the part that matters. ⛔ THE ACCURACY BAR DROPS: rank 1 failed outright on a confident wrong naming.",
+     "cannot": "A partial naming holds partially — it slows a thing rather than stopping it, and the thing knows the difference.",
      "functions": [
       "bind",
       "reveal"
@@ -2963,7 +2964,7 @@
    },
    "intensity": {
     "conserve": "a short naming, one thing, quietly",
-    "surge": "standing witness; THINGS NAMED BY YOU REMEMBER IT"
+    "surge": "name it fully and publicly; ⚠ WHAT YOU NAME IS PUBLIC, INCLUDING THE PARTS YOU WOULD HAVE KEPT"
    },
    "bounds": [
     {
@@ -2984,7 +2985,8 @@
     }
    ],
    "plainly": "A social/fight action that holds a thing by naming it truly. Rated 5 of 10 on 1 target for about two hours.",
-   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific.",
+   "_t5Fix_20260901": "⛔ T5 — RANK IS MASTERY. The first authoring put a NEW COST at rank 3 on every craft (Erik: 'that was quite the cavalier authoring'). ⚠️ The gate missed it — its SELFTAX regex targets self-harm phrasings and these were world-consequence costs. ✅ Rank 3 now LIFTS the rank-1 limitation; the consequence moved to `intensity.surge`, which the player CHOOSES."
   },
   {
    "id": "thin_step",
@@ -3034,8 +3036,8 @@
     {
      "rank": 3,
      "name": "Long Thin",
-     "grants": "Cross to a thin place you know rather than one you can see.",
-     "cannot": "⚠ THE THIN PLACES ARE A NETWORK AND YOU ARE ON IT NOW. Things that use them can find where you enter.",
+     "grants": "Cross to a thin place you KNOW rather than one you can see. ⛔ THE SIGHT REQUIREMENT IS GONE: rank 1 could only reach what was in view.",
+     "cannot": "Known means known — a place you have stood in and can hold clearly. Description is not knowledge.",
      "functions": [
       "move"
      ],
@@ -3065,7 +3067,7 @@
    },
    "intensity": {
     "conserve": "a single short step, yourself",
-    "surge": "the long thin; YOU ARE ON THE NETWORK NOW"
+    "surge": "cross the long thin, far and fast; ⚠ THE THIN PLACES ARE A NETWORK AND IT RUNS BOTH WAYS"
    },
    "bounds": [
     {
@@ -3086,7 +3088,8 @@
     }
    ],
    "plainly": "A survive/travel action that steps through a thin place to somewhere in sight. Rated 4 of 10 on 1 target.",
-   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific.",
+   "_t5Fix_20260901": "⛔ T5 — RANK IS MASTERY. The first authoring put a NEW COST at rank 3 on every craft (Erik: 'that was quite the cavalier authoring'). ⚠️ The gate missed it — its SELFTAX regex targets self-harm phrasings and these were world-consequence costs. ✅ Rank 3 now LIFTS the rank-1 limitation; the consequence moved to `intensity.surge`, which the player CHOOSES."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

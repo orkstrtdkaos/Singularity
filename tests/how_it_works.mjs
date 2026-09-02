@@ -2823,6 +2823,63 @@ console.log("\n── §45 · standing keeps a place you are not standing in ─
   check("§45: …they surface as an off-idiom caution instead, so the judgement is not lost",
     denials.every(([id, sect]) => typeof PR45.sectFlavourFor(cat45[id], sect).offIdiom === "string"));
 }
+/* ═════ §46 — R26: BRAIDS ARE N-ARY, AND ARITY IS HALF A RUNG ═════ */
+// ⛔ R26 (ERIK 2026-09-02): tier = min(5, round(maxRank + 1 + 0.5 × (components − 2))).
+//
+// ⚠️ "ROUNDED" IS UNDERSPECIFIED AND THE TABLE IS NOT. `Math.round` is half-UP and cannot produce R26's
+// published cells — it gives 3 where the table says 2, and 5 where it says 4. ⛔ THE RATIONALE SETTLES IT:
+// "a three-braid of rank-3 parents lands at the SAME tier 4 as a pair — arity alone does not promote you."
+// Half-up promotes it and breaks the rule R26 exists to state. Every cell reproduces under half-to-even.
+//
+// ⚠️ THIS GATE IS THE PUBLISHED TABLE, CELL BY CELL — so a rounding change cannot pass unnoticed.
+console.log("\n── §46 · R26 · arity alone does not promote you ──");
+{
+  const BR46 = await import("../engine/braids.js");
+  const mk = (ranks) => ({ abilities: ranks.map((r, i) => ({ abilityId: `c${i}`, level: r })) });
+  const comps = (n) => Array.from({ length: n }, (_, i) => `c${i}`);
+  const tierAt = (rank, n) => BR46.braidTier(mk(Array(n).fill(rank)), comps(n)).tier;
+
+  // R26's table, transcribed: [rank, at2, at3, at4, at5]
+  const R26 = [[1, 2, 2, 3, 4], [2, 3, 4, 4, 4], [3, 4, 4, 5, 5]];
+  for (const [rank, ...want] of R26) {
+    const got = [2, 3, 4, 5].map(n => tierAt(rank, n));
+    check(`§46: R26 · rank-${rank} parents give ${want.join('/')} at 2/3/4/5 components`,
+      JSON.stringify(got) === JSON.stringify(want), `got ${got.join('/')}`);
+  }
+
+  // ⛔ THE TWO PROPERTIES THE TABLE EXISTS TO GUARANTEE.
+  check("§46: ⛔ arity ALONE does not promote — a 3-braid of rank-3 ties the rank-3 PAIR",
+    tierAt(3, 3) === tierAt(3, 2), `${tierAt(3, 3)} vs ${tierAt(3, 2)}`);
+  check("§46: …but four of them does — depth needs two components, breadth needs four",
+    tierAt(3, 4) > tierAt(3, 2));
+  check("§46: ⛔ a triple of TRIVIAL crafts never out-tiers a hard pair",
+    tierAt(1, 3) <= tierAt(3, 2), `trivial triple ${tierAt(1, 3)} vs hard pair ${tierAt(3, 2)}`);
+  check("§46: …and five trivial crafts still do not reach the top",
+    tierAt(1, 5) < 5, `${tierAt(1, 5)}`);
+
+  // ⚠️ A 2-BRAID IS UNCHANGED, so all 57 authored recipes keep their tiers.
+  check("§46: the two-component case is exactly maxRank + 1, as before R26",
+    [1, 2, 3].every(r => tierAt(r, 2) === Math.min(5, r + 1)));
+
+  // ⛔ AND THE GATES ARE OPEN — a three-part braid actually BUILDS. Before SNG-370 this returned null and
+  // the caller fell to a stub: Erik holds `the-declared-threshold` at `tier: null` for exactly that reason.
+  const cat46 = { a: { id: "a", name: "A", functions: ["strike"] }, b: { id: "b", name: "B", functions: ["ward"] },
+    c: { id: "c", name: "C", functions: ["reveal"] } };
+  const who46 = { abilities: [{ abilityId: "a", level: 2 }, { abilityId: "b", level: 2 }, { abilityId: "c", level: 1 }], braids: [] };
+  const three = BR46.braidTier(who46, ["a", "b", "c"], cat46);
+  check("§46: a THREE-part braid is tiered rather than refused", three.tier === 4, JSON.stringify(three));
+  check("§46: …and it reports all three source ranks", (three.sourceRanks || []).length === 3);
+
+  // ⛔ THE LEDGER CAN NOW EXPRESS A TRIPLE — the constraint SNG-370 §2a identified.
+  const PC46 = await import("../engine/practice.js");
+  const ch46 = { practice: { schemaVersion: 1, uses: {}, coActivations: {}, aspirations: [] } };
+  PC46.recordUse(ch46, ["x", "y", "z"]);
+  const keys46 = Object.keys(ch46.practice.coActivations);
+  check("§46: three crafts used together record the TRIPLE, not only the pairs",
+    keys46.includes("x+y+z"), keys46.join(" · "));
+  check("§46: ⛔ …and the pairs are still recorded, so 2-braids keep ripening",
+    ["x+y", "x+z", "y+z"].every(k => keys46.includes(k)), keys46.join(" · "));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

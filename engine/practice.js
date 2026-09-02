@@ -27,6 +27,15 @@ export function recordUse(character, abilityIds = [], { day = null } = {}) {
   }
   for (const id of ids) character.practice.uses[id] = (character.practice.uses[id] || 0) + 1;
   if (ids.length >= 2) {
+    // ⛔ SNG-370 — THE N-WAY KEY, ALONGSIDE THE PAIRS. The loop below records every PAIR, so three crafts
+    // used together logged three pairs and never the triple: the ledger could not express what happened.
+    // ⚠️ `discoveryKey` was ALREADY n-ary (`[...ids].sort().join("+")`) — the storage shape was never the
+    // limit, only this writer. ⛔ THE PAIRS STAY: an existing 2-braid candidate must not stop ripening
+    // because the player also used a third craft in the same beat.
+    if (ids.length >= 3) {
+      const nKey = discoveryKey(ids);
+      character.practice.coActivations[nKey] = (character.practice.coActivations[nKey] || 0) + 1;
+    }
     for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) {
       const key = discoveryKey([ids[i], ids[j]]);
       character.practice.coActivations[key] = (character.practice.coActivations[key] || 0) + 1;

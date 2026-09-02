@@ -34,7 +34,8 @@ export function ensureRecipeStore(store) {
 export function buildRecipeRecord(def, { worldDay = null, contributedBy = null } = {}) {
   if (!def?.minted || def.minted.enriched !== true) return null;   // stub never promotes
   const comps = def.minted.from || [];
-  if (comps.length !== 2) return null;
+  // ⛔ SNG-370 — a recipe record may describe a braid of any arity. Two is the floor; one is not a braid.
+  if (comps.length < 2) return null;
   const key = braidKey(comps);
   if (!key) return null;
   return {

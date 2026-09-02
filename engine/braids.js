@@ -49,11 +49,13 @@ export function mintableBraidsFor(character, { catalog = {}, threshold = BRAID_R
   for (const [key, n] of Object.entries(co)) {
     if ((n || 0) < threshold) continue;
     const comps = key.split("+").filter(Boolean);
-    if (comps.length !== 2) continue;                       // pairwise braids only (the ledger is pairwise)
+    // ⛔ SNG-370 — THE LEDGER IS NO LONGER PAIRWISE-ONLY (practice.js records the n-way key too), so a
+    // candidate may name three or more. ⚠️ TWO IS STILL THE FLOOR: one craft is not a braid.
+    if (comps.length < 2) continue;
     if (!comps.every(id => owned.has(id))) continue;        // you must still hold both crafts
     if (braided.has(braidKey(comps))) continue;             // not already braided
     const sources = comps.map(id => catalog[id]).filter(Boolean);
-    if (sources.length !== 2) continue;                     // both defs resolvable
+    if (sources.length !== comps.length) continue;          // EVERY def resolvable, however many there are
     out.push({ components: comps, coActivations: n, sources, ...braidTier(character, comps, catalog) });
   }
   return out.sort((a, b) => b.coActivations - a.coActivations);
@@ -86,7 +88,28 @@ export function braidTier(character, components, catalog = {}) { // registry:int
   const rankOf = id => (character?.abilities || []).find(a => a.abilityId === id)?.level || 1;
   const sourceRanks = components.map(rankOf);
   const maxRank = Math.min(3, Math.max(1, ...(sourceRanks.length ? sourceRanks : [1]))); // the deeper parent sets the ceiling
-  const tier = Math.min(5, maxRank + 1);   // a braid is one tier BEYOND its parents (§1: something neither had)
+  // ⛔ R26 (ERIK 2026-09-02) — EACH COMPONENT PAST THE SECOND CONTRIBUTES HALF A RUNG.
+  //     tier = min(5, round(maxRank + 1 + 0.5 × (componentCount − 2)))
+  //
+  // ⚠️ A 2-BRAID IS UNCHANGED, so all 57 authored recipes keep their tiers — the term is zero at two.
+  //
+  // ⛔ +1 FLAT PER COMPONENT WAS REJECTED: five rank-1 crafts braided together would reach tier 5, which
+  // is counting your way to power in slow motion. +⅓ was rejected as too conservative — arity would
+  // almost never move the tier, against Erik's ratification that "the tier tends higher for a three-braid".
+  //
+  // ✅ WHAT HALF A RUNG BUYS: a THREE-braid of rank-3 parents lands at the same tier 4 as a pair — arity
+  // alone does not promote you — but a FOUR-braid of them reaches 5. Depth gets you there in two
+  // components; breadth needs four. A triple of trivial crafts never out-tiers a hard pair.
+  const arity = Math.max(2, sourceRanks.length);
+  // ⛔ ROUND HALF TO EVEN, NOT Math.round. R26 says "rounded" and then gives a TABLE, and the table is
+  // the more specific claim: it reads 2/2/3/4 at rank 1 and 4/4/5/5 at rank 3, which Math.round (half UP)
+  // cannot produce — it gives 3 where the table says 2, and 5 where the table says 4.
+  // ⚠️ THE RATIONALE SETTLES WHICH IS INTENDED: "a three-braid of rank-3 parents lands at the SAME tier 4
+  // as a pair — arity alone does not promote you." Half-up promotes it to 5 and breaks the rule R26 was
+  // written to state. Every cell of the published table reproduces under half-to-even.
+  const raw = maxRank + 1 + 0.5 * (arity - 2);
+  const halfToEven = (Math.abs(raw % 1) === 0.5 && Math.floor(raw) % 2 === 0) ? Math.floor(raw) : Math.round(raw);
+  const tier = Math.min(5, halfToEven);
   const levelReq = tier;                   // the card reads tierOf(levelReq) — keep them the same so the badge is sourceable
   return { tier, maxRank, levelReq, sourceRanks };
 }
@@ -120,7 +143,7 @@ export function braidTier(character, components, catalog = {}) { // registry:int
 // would only have HIDDEN it, and the audit's own header says that marker must never be used to make a
 // number go down.
 function braidTension(sources = [], { traditionIndex = null, bands = null } = {}) {
-  if (!traditionIndex || (sources || []).length !== 2) return null;
+  if (!traditionIndex || (sources || []).length < 2) return null;
   const a = sources[0]?.tradition || sources[0]?.powerSystem;
   const b = sources[1]?.tradition || sources[1]?.powerSystem;
   const steps = ringDistance(a, b, traditionIndex);
@@ -144,7 +167,7 @@ export function braidBaseCost(sources = [], fraction = 0.5, tension = null) {
 
 export function buildBraidDef(character, components, catalog = {}, opts = {}) {
   const sources = components.map(id => catalog[id]).filter(Boolean);
-  if (sources.length !== 2) return null;
+  if (sources.length < 2) return null;
   // ⛔ SNG-268 — HOW FAR APART, computed once and used three ways: the cost, the bound, and the receipt.
   const tension = braidTension(sources, { traditionIndex: opts.traditionIndex, bands: opts.tensionBands });
   const { tier, maxRank, levelReq } = braidTier(character, components, catalog);
@@ -244,8 +267,8 @@ export function registerDiscoveryAbility(character, discovery, catalog = {}, { a
   const resolve = id => catalog[id] ? id : catalog[String(id).replace(/-/g, "_")] ? String(id).replace(/-/g, "_") : catalog[String(id).replace(/_/g, "-")] ? String(id).replace(/_/g, "-") : null;
   const parents = [...new Set((discovery.abilities || []).map(resolve).filter(Boolean))];
   // already usable via a braid of the SAME pairing (e.g. a discovery that was also braided) → nothing to do.
-  if (parents.length === 2 && (character.braids || []).some(b => braidKey(b.from) === braidKey(parents))) return null;
-  let def = parents.length === 2 ? buildBraidDef(character, parents, catalog, { name: discovery.name, authored: { description: discovery.description }, braidFraction, craftMechanics, traditionIndex }) : null;
+  if (parents.length >= 2 && (character.braids || []).some(b => braidKey(b.from) === braidKey(parents))) return null;
+  let def = parents.length >= 2 ? buildBraidDef(character, parents, catalog, { name: discovery.name, authored: { description: discovery.description }, braidFraction, craftMechanics, traditionIndex }) : null;
   if (!def) {
     // fallback: a minimal braid-shaped def from whatever resolved + the discovery's own words (rank 1, deepens).
     const sources = parents.map(id => catalog[id]).filter(Boolean);

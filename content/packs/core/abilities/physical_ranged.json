@@ -27,7 +27,7 @@
     {
      "rank": 1,
      "name": "Underhand",
-     "grants": "⛔ DEALS 1d6 DAMAGE at 8 paces. Put a knife, a star or a spike into someone underhand, from concealment or mid-stride — no windup a watcher could call.",
+     "grants": "⛔ STRIKE FROM CONCEALMENT AT 8 PACES FOR 1d6. A knife, a star or a spike goes in underhand, mid-stride — no windup a watcher could call.",
      "cannot": "Cannot punch through mail or a shield; one blade per action.",
      "functions": [
       "strike"
@@ -40,7 +40,7 @@
     {
      "rank": 2,
      "name": "Second Knife",
-     "grants": "⚠️ TWO BLADES IN THE TIME OF ONE, each dealing 1d6 — the same target twice, or two targets standing close.",
+     "grants": "⚠️ TWO BLADES IN THE TIME OF ONE, each striking for 1d6 — the same target twice, or two targets standing close.",
      "functions": [
       "strike"
      ],
@@ -56,7 +56,7 @@
     {
      "rank": 3,
      "name": "Full Belt",
-     "grants": "⛔ THROW ANYTHING WITH A POINT AND AN EDGE for 1d6 — a chisel, a shard, a fork — and it flies true.",
+     "grants": "⛔ THROW ANYTHING WITH A POINT AND AN EDGE and it strikes true for 1d6 — a chisel, a shard, a fork.",
      "functions": [
       "strike",
       "break"
@@ -125,7 +125,8 @@
    "_powerSystemFix": "⛔ SNG-487: `body` was removed as a source on 2026-08-15. Reassigned to the tradition's innate current.",
    "_ratchetFix": "⛔ SNG-502. CCode: `abilitiesCombatClaimedNotTaught` RED AT HEAD — this craft claims FIGHT and no rank `grants` teaches combat.\n⚠️ CAUSE: the SNG-461 de-article pass stripped my '⛔ DEALS 1d6 DAMAGE' openers along with the articles, leaving grants that describe a SHOT without saying it wounds. ⛔ SECOND CONSEQUENCE OF TREATING A RENAME AS A TEXT PASS.",
    "_typed_20260829": "⛔ `physical` — PHYSICS family. a knife, a star or a spike, underhand at eight paces. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately.",
-   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a harm word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ⛔ Authored as a real pair: conserve gives up scope, surge SPENDS AMMUNITION — which for a weapon craft is the honest cost."
+   "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a harm word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ⛔ Authored as a real pair: conserve gives up scope, surge SPENDS AMMUNITION — which for a weapon craft is the honest cost.",
+   "_combatTaughtFix_20260902": "⛔ `abilitiesCombatClaimedNotTaught` — this craft DECLARED a HARM function and no rank said HOW IT FIGHTS. ⚠️ THE PROSE WAS NOT BAD, IT WAS STATISTICAL: 'DEALS 1d6 DAMAGE at 8 paces' names the RESULT and never the ACT. A GM reading it had a number and no verb. ✅ EDITS ARE SURGICAL — the authored voice is kept and the doing is made explicit. ⚠️ Per the ratchet's own header: a gate that costs an author their better phrasing is levying a tax, so nothing here was weakened to satisfy a regex."
   },
   {
    "id": "sling_and_stone",
@@ -149,7 +150,7 @@
     {
      "rank": 1,
      "name": "Loosed Stone",
-     "grants": "⛔ DEALS 1d6 DAMAGE at 40 paces. Whip a stone out hard enough to drop a man. Ammunition is whatever is underfoot; you are never out.",
+     "grants": "⛔ A STONE WHIPPED OUT AT 40 PACES STRIKES FOR 1d6 — hard enough to fell a man. Ammunition is whatever is underfoot; you are never out.",
      "cannot": "Needs room to swing; useless in a press or a low tunnel.",
      "functions": [
       "strike"
@@ -163,7 +164,7 @@
     {
      "rank": 2,
      "name": "Aimed Stone",
-     "grants": "⚠️ CALL THE HIT AND IT LANDS THERE for 1d6 — a hand, a knee, the lamp, the horse — and what you called stops working.",
+     "grants": "⚠️ CALL THE HIT AND IT STRIKES THERE for 1d6 — a hand, a knee, the lamp, the horse — and what you called stops working.",
      "functions": [
       "strike"
      ],
@@ -181,7 +182,7 @@
     {
      "rank": 3,
      "name": "Skull-Weight",
-     "grants": "⛔ LEAD OR CAST SHOT FOR 1d6, and it goes through a helm and keeps going.",
+     "grants": "⛔ LEAD OR CAST SHOT FOR 1d6: it breaks through a helm and keeps going.",
      "functions": [
       "strike",
       "break"
@@ -255,7 +256,8 @@
    "_folkReassigned_20260830": "⛔ `valley_craft` → `marcher`. a trained ranged strike — the Marcher weapon-set at folk scale, beside `thrown_edge` and `levelled_crossbow`. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**",
    "folkAccessible": true,
    "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition.",
-   "_fix_20260830": "⛔ ability rung `damaging` → `lethal`: the ranks reach it, and the craft is 'whip a stone out to forty paces HARD ENOUGH TO DROP A MAN'. ⚠️ Intensity was the bare string 'moderate' — no conserve, no surge. ✅ Both fixed. **This is a folk-accessible craft and it can kill, which is worth a GM knowing.**"
+   "_fix_20260830": "⛔ ability rung `damaging` → `lethal`: the ranks reach it, and the craft is 'whip a stone out to forty paces HARD ENOUGH TO DROP A MAN'. ⚠️ Intensity was the bare string 'moderate' — no conserve, no surge. ✅ Both fixed. **This is a folk-accessible craft and it can kill, which is worth a GM knowing.**",
+   "_combatTaughtFix_20260902": "⛔ `abilitiesCombatClaimedNotTaught` — this craft DECLARED a HARM function and no rank said HOW IT FIGHTS. ⚠️ THE PROSE WAS NOT BAD, IT WAS STATISTICAL: 'DEALS 1d6 DAMAGE at 8 paces' names the RESULT and never the ACT. A GM reading it had a number and no verb. ✅ EDITS ARE SURGICAL — the authored voice is kept and the doing is made explicit. ⚠️ Per the ratchet's own header: a gate that costs an author their better phrasing is levying a tax, so nothing here was weakened to satisfy a regex."
   },
   {
    "id": "drawn_bow",
@@ -402,7 +404,7 @@
     {
      "rank": 1,
      "name": "Spanned and Levelled",
-     "grants": "⛔ DEALS 2d6 DAMAGE at 90 paces, through mail. Aim is trivial; anyone can be taught in an afternoon.",
+     "grants": "⛔ A BOLT STRIKES THROUGH MAIL AT 90 PACES for 2d6. Aim is trivial; anyone can be taught in an afternoon.",
      "cannot": "⛔ SPANNING TAKES A FULL ACTION — one shot, then you are a man holding a stick.",
      "functions": [
       "strike"
@@ -415,7 +417,7 @@
     {
      "rank": 2,
      "name": "Belt Claw",
-     "grants": "⚠️ SPAN AND SHOOT IN THE SAME ACTION for 2d6, if you have both feet under you.",
+     "grants": "⚠️ SPAN AND SHOOT IN THE SAME ACTION, striking for 2d6, if you have both feet under you.",
      "functions": [
       "strike"
      ],
@@ -429,7 +431,7 @@
     {
      "rank": 3,
      "name": "Windlass",
-     "grants": "⛔ A HEAVY BOW AT 2d6 that goes through plate, a shield, and the arm behind it.",
+     "grants": "⛔ A HEAVY BOW AT 2d6 that breaks through plate, a shield, and the arm behind it.",
      "functions": [
       "strike",
       "break"
@@ -499,7 +501,8 @@
    "_typed_20260829": "⛔ `physical` — PHYSICS family. a bolt through mail at 90 paces. ⚠️ EIGHT MARCHER HARM CRAFTS WERE UNTYPED, the most of any tradition, and they are the game's most ORDINARY damage — which is exactly why typing them matters: `damage_types` calls `physical` 'the default when no type is named', and a default left implicit is a default no ward can answer deliberately.",
    "_intensityAuthored_20260829": "⚠️ WAS THE BARE STRING 'moderate' — a harm word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ⛔ Authored as a real pair: conserve gives up scope, surge SPENDS AMMUNITION — which for a weapon craft is the honest cost.",
    "_levelRuling_20260829": "⛔ L2 -> L1. ⚠️ THE CRAFT SAID IT ITSELF AND THE LEVEL IGNORED IT: 'you can hand one to a farmer and they can do it too, WHICH IS THE WHOLE POLITICAL PROBLEM WITH THE THING', and r1 is 'aim is trivial; anyone can be taught in an afternoon'. ⛔ IT SAT AT THE SAME LEVEL AS `drawn_bow`, WHICH TAKES YEARS. ⚠️ NOW THE POLITICS ARE MECHANICAL: the weapon a farmer can use is the weapon a farmer can ACCESS, which is exactly why the Marchers find it a problem.",
-   "_offCurveDeliberate_20260829": "⛔ IT IS OFF-CURVE ON PURPOSE AND THIS IS THE NOTE THAT SAYS SO. ⚠️ At L1 the damage curve expects ~3.6; this does 7.0 — L2 damage at L1 access, the only weapon in the game that breaks the curve upward. ⛔ THAT IS THE CRAFT'S ENTIRE SUBJECT: 'you can hand one to a farmer and they can do it too, WHICH IS THE WHOLE POLITICAL PROBLEM WITH THE THING.' A weapon that gives an untrained person a trained person's damage IS the political problem, and pricing it on-curve would delete the thing it is about. ⚠️ DO NOT 'FIX' THIS TO 1d6. It is answered by its own limits instead — spanning time, and `drawn_bow` firing every action at r2 while this does not."
+   "_offCurveDeliberate_20260829": "⛔ IT IS OFF-CURVE ON PURPOSE AND THIS IS THE NOTE THAT SAYS SO. ⚠️ At L1 the damage curve expects ~3.6; this does 7.0 — L2 damage at L1 access, the only weapon in the game that breaks the curve upward. ⛔ THAT IS THE CRAFT'S ENTIRE SUBJECT: 'you can hand one to a farmer and they can do it too, WHICH IS THE WHOLE POLITICAL PROBLEM WITH THE THING.' A weapon that gives an untrained person a trained person's damage IS the political problem, and pricing it on-curve would delete the thing it is about. ⚠️ DO NOT 'FIX' THIS TO 1d6. It is answered by its own limits instead — spanning time, and `drawn_bow` firing every action at r2 while this does not.",
+   "_combatTaughtFix_20260902": "⛔ `abilitiesCombatClaimedNotTaught` — this craft DECLARED a HARM function and no rank said HOW IT FIGHTS. ⚠️ THE PROSE WAS NOT BAD, IT WAS STATISTICAL: 'DEALS 1d6 DAMAGE at 8 paces' names the RESULT and never the ACT. A GM reading it had a number and no verb. ✅ EDITS ARE SURGICAL — the authored voice is kept and the doing is made explicit. ⚠️ Per the ratchet's own header: a gate that costs an author their better phrasing is levying a tax, so nothing here was weakened to satisfy a regex."
   },
   {
    "id": "hurled_weight",

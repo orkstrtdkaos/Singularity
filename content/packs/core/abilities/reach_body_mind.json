@@ -1155,7 +1155,7 @@
     {
      "rank": 1,
      "name": "Convergent Strike",
-     "grants": "⛔ EVERY THREAD OF THREAT CONVERGES ON ONE POINT — weak spot, unarmoured seam, maximum leverage, the sharpest part of the blade or the finest edge of a figure, all at the same instant. ⚠️ THE LARGEST SINGLE HIT IN THE TRADITION.",
+     "grants": "⛔ EVERY THREAD OF THREAT CONVERGES ON ONE POINT AND STRIKES IT — weak spot, unarmoured seam, maximum leverage, the sharpest part of the blade or the finest edge of a figure, all at the same instant.",
      "cannot": "It costs nearly all your focus, it requires a real decisive instant to exist, and it is the blade's truth and the pen's alike — some contests have no single stroke, and mistaking that is how the sure-handed fall.",
      "harmRung": "lethal",
      "functions": [
@@ -1233,7 +1233,8 @@
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. reads every thread of threat in a contest at once\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "reach_body_mind",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_body_mind` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `cogitant` — ⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_typed_20260829": "⛔ THE CAPSTONE OF THE SAME IDEA, at 5d6 — 'read every thread of threat at once… the unarmoured seam, the worst possible instant'. ⚠️ MORE `psychic` THAN `deduced_strike` because the reading is doing more of the work at r3, and the craft is one stroke at enormous cost of focus."
+   "_typed_20260829": "⛔ THE CAPSTONE OF THE SAME IDEA, at 5d6 — 'read every thread of threat at once… the unarmoured seam, the worst possible instant'. ⚠️ MORE `psychic` THAN `deduced_strike` because the reading is doing more of the work at r3, and the craft is one stroke at enormous cost of focus.",
+   "_combatTaughtFix_20260902": "⛔ `abilitiesCombatClaimedNotTaught` — this craft DECLARED a HARM function and no rank said HOW IT FIGHTS. ⚠️ THE PROSE WAS NOT BAD, IT WAS STATISTICAL: 'DEALS 1d6 DAMAGE at 8 paces' names the RESULT and never the ACT. A GM reading it had a number and no verb. ✅ EDITS ARE SURGICAL — the authored voice is kept and the doing is made explicit. ⚠️ Per the ratchet's own header: a gate that costs an author their better phrasing is levying a tax, so nothing here was weakened to satisfy a regex."
   },
   {
    "id": "answered_motion",

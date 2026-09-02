@@ -1,45 +1,47 @@
 {
-  "schemaVersion": 1,
-  "id": "keeper_ilma",
-  "name": "Ilma, Keeper of the Board",
-  "role": "Thirty-year keeper of the Edge District accountability board — the woman who has never seen this before",
-  "homeLocation": "radiant_plateau_edge",
-  "communityId": "valley.edge_district",
-  "personality": {
-    "warmth": 0.5,
-    "trust": 0.4,
-    "candor": 0.9,
-    "patience": 0.8
-  },
-  "spectrum": {
-    "falsehood_truth": 0.6,
-    "chaos_order": 0.4
-  },
-  "voiceHints": "Dry, precise, uninterested in being liked. Says exactly what the record says and stops. When she volunteers something beyond the record, it costs her, and you should listen.",
-  "knowledge": [
-    "Every marking on the Edge District board for thirty years, in order",
-    "Which ones had records and which did not — and there is a pattern",
-    "That Overseer Grael has never once put his name to anything"
-  ],
-  "wants": "For the board to mean what it says it means.",
-  "fears": "That she is the only one who remembers, and that when she stops, it stops.",
-  "reactsToReputation": {
-    "truthful": "immediate, guarded respect",
-    "evasive": "she stops talking and does not start again",
-    "any": "she will not lie to you, and she will not protect you from what she knows"
-  },
-  "appearance": "Short and square, sixties, iron-grey hair pinned up and escaping, reading-lenses on a cord. Ink on the left hand — she writes left-handed and smudges. A ledger-callus on the middle finger you could feel through a glove.",
-  "people": "human",
-  "domains": {
-    "primary": "verist",
-    "secondary": "lattice"
-  },
-  "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
-  "teaches": "verist",
-  "curriculum": {
-    "opens": "a true and unflattering inventory of the student, spoken once, in full",
-    "demands": "you agree in advance not to argue with it",
-    "method": "Thirty years on an accountability board. She teaches Verity by using it on you first."
-  },
-  "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here."
+ "schemaVersion": 1,
+ "id": "keeper_ilma",
+ "name": "Ilma, Keeper of the Board",
+ "role": "Thirty-year keeper of the Edge District accountability board — the woman who has never seen this before",
+ "homeLocation": "radiant_plateau_edge",
+ "communityId": "valley.edge_district",
+ "personality": {
+  "warmth": 0.5,
+  "trust": 0.4,
+  "candor": 0.9,
+  "patience": 0.8
+ },
+ "spectrum": {
+  "falsehood_truth": 0.6,
+  "chaos_order": 0.4
+ },
+ "voiceHints": "Dry, precise, uninterested in being liked. Says exactly what the record says and stops. When she volunteers something beyond the record, it costs her, and you should listen.",
+ "knowledge": [
+  "Every marking on the Edge District board for thirty years, in order",
+  "Which ones had records and which did not — and there is a pattern",
+  "That Overseer Grael has never once put his name to anything"
+ ],
+ "wants": "For the board to mean what it says it means.",
+ "fears": "That she is the only one who remembers, and that when she stops, it stops.",
+ "reactsToReputation": {
+  "truthful": "immediate, guarded respect",
+  "evasive": "she stops talking and does not start again",
+  "any": "she will not lie to you, and she will not protect you from what she knows"
+ },
+ "appearance": "Short and square, sixties, iron-grey hair pinned up and escaping, reading-lenses on a cord. Ink on the left hand — she writes left-handed and smudges. A ledger-callus on the middle finger you could feel through a glove.",
+ "people": "human",
+ "domains": {
+  "primary": "verist",
+  "secondary": "lattice"
+ },
+ "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+ "teaches": "verist",
+ "curriculum": {
+  "opens": "a true and unflattering inventory of the student, spoken once, in full",
+  "demands": "you agree in advance not to argue with it",
+  "method": "Thirty years on an accountability board. She teaches Verity by using it on you first."
+ },
+ "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here.",
+ "sex": "female",
+ "gender": "female"
 }

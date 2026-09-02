@@ -30,6 +30,48 @@ import { bondOf, companionCodexUpdate, companionStageCount } from "./companions.
 import { isCoercedObjectArtefact, isDescriptiveNotName } from "./state.js"; // SNG-329: the artefact detector, shared with the mint that now refuses it
 import { startingSkills } from "./inventory.js"; // SNG-339b: the training an existing character came with
 
+/* ═══ R27 (ERIK 2026-09-02) — A RENAME TARGET MAY BE CONDITIONED, AND ON TWO DIFFERENT THINGS.
+ *
+ * ⛔ `to` WAS A STRING AND ONE ENTRY NEEDED IT NOT TO BE. `soma` carried `"second_wind + perfect_motion"`
+ * — a plain string naming two crafts, which `known[to]` could never resolve, so the entry parsed, was
+ * silently skipped, and read as a migration. ⚠️ THE `+` WAS DOCUMENTATION WEARING A MECHANISM'S CLOTHES.
+ *
+ * ⚠️ TWO CONDITIONED FORMS, AND THEY CONDITION ON DIFFERENT THINGS — this is R27's whole point:
+ *   · `{ byRank: { "1": [...], "2": [...], "3": [...] } }`  — what the holder ACTUALLY HAD
+ *   · `{ bySect: { "syllogist": "...", ... }, default: "..." }` — which variant of a split craft is theirs
+ *
+ * ⛔ `soma` SPLIT BY RANK, NOT BY SECT, AND THE REVERT LOG SAYS SO: "OUTLAST (… Soma r1–r2) and EXECUTE
+ * (… Soma r3)". A rank-2 holder never had the strike; granting `perfect_motion` hands them something
+ * unearned. A rank-3 holder had both halves, and taking one is a loss they did not choose.
+ *
+ * ⚠️ THE RESULTING RANKS LIVE IN THE CONTENT, NOT HERE. A target may be a bare id (keep the rank you
+ * held) or `{ id, rank }`. ⛔ THE SPLIT RANKS ARE AN INFERENCE — that a soma-3 holder finished
+ * second_wind's two ranks and is beginning perfect_motion — SO THEY ARE WRITTEN WHERE A HUMAN CAN SEE
+ * AND CHANGE THEM, not buried in engine arithmetic where the inference would be invisible.
+ *
+ * ⛔ ALL-OR-NOTHING. If any named target is missing from the catalogue the whole entry is skipped:
+ * a HALF-migrated split is worse than an unmigrated one, because it looks finished. */
+function renameTargets(spec, entry, character, known) {
+  const to = spec?.to;
+  if (!to) return null;
+  const held = Number(entry?.level) || 1;
+  let raw = null;
+  if (typeof to === "string") raw = [to];
+  else if (to.byRank) raw = to.byRank[String(held)] || null;
+  else if (to.bySect) {
+    // ⚠️ PRIMARY, THEN SECONDARY, THEN TERTIARY, THEN `default`. A character holds three sects and the
+    // craft came from one of them; nearest-to-the-player wins, and `default` is what keeps a craft that
+    // no variant claims. ⬜ AEVI: this order is mine, not ruled — no content uses `bySect` yet.
+    const d = character?.domains || {};
+    raw = [d.primary, d.secondary, d.tertiary].map(x => to.bySect[x]).find(Boolean) || to.default || null;
+    if (raw && !Array.isArray(raw)) raw = [raw];
+  }
+  if (!raw) return null;
+  const out = (Array.isArray(raw) ? raw : [raw]).map(t =>
+    typeof t === "string" ? { id: t, rank: null } : { id: t?.id, rank: Number(t?.rank) || null });
+  if (!out.length || out.some(t => !t.id || !known[t.id])) return null;   // ⛔ no target, no rewrite
+  return out;
+}
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
 // Steps self-check preconditions and are order-independent; version numbers only gate
@@ -61,10 +103,20 @@ export const CHARACTER_STEPS = [
         const id = typeof entry === "string" ? null : entry?.abilityId;
         if (!id) continue;
         if (known[id]) continue;                       // already resolves — never touch it
-        const to = map[id]?.to;
-        if (!to || !known[to]) continue;               // ⚠️ no target, no rewrite. A guess here loses a craft.
-        entry.abilityId = to;
-        renamed.push(`${id} → ${to}`);
+        // ⛔ R27 — A TARGET MAY BE CONDITIONED, AND MAY BE MORE THAN ONE CRAFT.
+        const targets = renameTargets(map[id], entry, c, known);
+        if (!targets) continue;                        // ⚠️ no target, no rewrite. A guess here loses a craft.
+        // ⚠️ THE FIRST TARGET TAKES THE EXISTING ENTRY, so provenance, uses and any other field a craft has
+        // accumulated ride along. ⛔ A fresh object would have silently discarded them.
+        entry.abilityId = targets[0].id;
+        if (targets[0].rank) entry.level = targets[0].rank;
+        if (targets.length > 1) entry.migratedFrom = id;
+        // ⛔ AND THE REST ARE MINTED. This is the half a split holder EARNED and the merge took.
+        for (const t of targets.slice(1)) {
+          if (c.abilities.some(a => a?.abilityId === t.id)) continue;   // already theirs — never double
+          c.abilities.push({ abilityId: t.id, level: t.rank || Number(entry.level) || 1, migratedFrom: id });
+        }
+        renamed.push(`${id} → ${targets.map(t => t.id).join(" + ")}`);
       }
       if (!renamed.length) return {};
       return { notes: [`${renamed.length} of your craft${renamed.length === 1 ? "" : "s"} answered to an older name and ${renamed.length === 1 ? "has" : "have"} been reconnected.`],

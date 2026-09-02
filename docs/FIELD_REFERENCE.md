@@ -635,10 +635,10 @@ contribute to authored dice without recreating the double-scaling bug.
 | `duration` | 319 | `mechanic`×319 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `npcsheet.js` |
 | `magnitude` | 308 | `mechanic`×308 | ✅ READ | `capabilities.js`, `conditions.js`, `craftmechanics.js` |
 | `rankDeltas` | 284 | `root`×284 | ✅ READ | `craftmechanics.js` |
-| `note` | 234 | `mechanic`×234 | ✅ READ | `art.js`, `authormode.js`, `borncontract.js` |
+| `note` | 234 | `mechanic`×234 | ✅ READ | `art.js`, `assignments.js`, `authormode.js` |
 | `effectTags` | 190 | `root`×190 | ✅ READ | `battleprompt.js`, `braids.js`, `martial.js` |
 | `scope` | 147 | `mechanic`×147 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `app.js` |
-| `targets` | 146 | `mechanic`×146 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
+| `targets` | 146 | `mechanic`×146 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `reconcile.js` |
 | `gated` | 108 | `root`×108 | ✅ READ | `borncontract.js`, `generate.js`, `gm_registry.js` |
 | `damageType` | 107 | `mechanic`×107 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `dice` | 105 | `mechanic`×105 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |

@@ -2880,6 +2880,145 @@ console.log("\n── §46 · R26 · arity alone does not promote you ──");
   check("§46: ⛔ …and the pairs are still recorded, so 2-braids keep ripening",
     ["x+y", "x+z", "y+z"].every(k => keys46.includes(k)), keys46.join(" · "));
 }
+/* ═════ §47 — R25 CAPACITY SCALES · R27 CONDITIONED MIGRATION ═════ */
+// ⛔ R25 (ERIK 2026-09-02): THREE capacity scales, not one ladder. Party (rapport then presence, cap 6),
+// delegation (a FORMULA on level and rapport), and band/unit (a separate system entirely).
+// ⛔ R27: a rename target may be CONDITIONED — `byRank` (what the holder actually had) or `bySect`.
+console.log("\n── §47 · R25 capacity · R27 conditioned migration ──");
+{
+  const LAD = await import("../engine/ladder.js");
+  const ASG = await import("../engine/assignments.js");
+  const REC = await import("../engine/reconcile.js");
+  const LADDER_47 = rj("content/packs/core/rules/sub_attribute_ladder.json");
+  const RENAMES_47 = rj("content/packs/core/rules/ability_rename_map.json").map;
+  const ladder = LADDER_47;
+  const who = (r, p, lv = 30) => ({ level: lv, subAttributes: { rapport: r, presence: p } });
+
+  // ── R25a · the party ladder changes hands at 4 ──
+  check("§47: R25a · rapport carries the first four places (1·4·7·10 → 1·2·3·4)",
+    [[1,1],[4,2],[7,3],[10,4]].every(([r, want]) => LAD.companyPlaces(ladder, who(r, 0)) === want),
+    [1,4,7,10].map(r => LAD.companyPlaces(ladder, who(r, 0))).join('/'));
+  check("§47: R25a · ⚑ presence 10 gives the FIFTH place — the ladder changes hands",
+    LAD.companyPlaces(ladder, who(10, 10)) === 5, String(LAD.companyPlaces(ladder, who(10, 10))));
+  check("§47: R25a · ⚑ presence 14 gives the SIXTH, and six is the cap",
+    LAD.companyPlaces(ladder, who(20, 20)) === 6, String(LAD.companyPlaces(ladder, who(20, 20))));
+
+  // ⛔ THE COMPOUND RANK. presence 14 already carried `unstewardedFloor` and R25a gave it a second effect.
+  // ⚠️ THE OLD SHAPE HELD ONE OBJECT PER RANK, so the second would have silently REPLACED the first and a
+  // milestone the player already had would stop working. The ruling names compounding as deliberate.
+  {
+    const live = LAD.milestoneEffects(ladder, who(0, 14)).live;
+    check("§47: R25a · ⛔ presence 14 is COMPOUND — the sixth place did not evict `unstewardedFloor`",
+      !!live.unstewardedFloor && live.companyCapacity?.places === 6,
+      Object.keys(live).join(' · '));
+  }
+
+  // ⛔ THE DEFECT R25a EXPOSED, AND IT IS THE ONE WORTH GATING. Two subs now write `companyCapacity`, so
+  // rapport 10 and presence 10 TIE on rank — and the old tiebreak was `Number(at) > prev.at`, which cannot
+  // separate them. ⚠️ MEASURED: reversing the order of `subs` in the ladder file turned 5 places into 4.
+  // ✅ Ranks from different subs are not comparable magnitudes; the effect's own magnitude is.
+  {
+    const reversed = { ...ladder, subs: Object.fromEntries(Object.entries(ladder.subs).reverse()) };
+    const pairs = [[10,10],[10,9],[7,14],[4,10],[0,10],[10,14]];
+    const same = pairs.every(([r, p]) => LAD.companyPlaces(ladder, who(r, p)) === LAD.companyPlaces(reversed, who(r, p)));
+    check("§47: ⛔ company places do NOT depend on the ladder file’s key order", same,
+      pairs.map(([r, p]) => `${r}/${p}:${LAD.companyPlaces(ladder, who(r,p))}vs${LAD.companyPlaces(reversed, who(r,p))}`).join(' '));
+  }
+  check("§47: …and the magnitude tiebreak left `harmRung` exactly where it was (1 at 7, 2 at 14)",
+    LAD.harmRungDrop(ladder, { level: 30, subAttributes: { agility: 7 } }) === 1 &&
+    LAD.harmRungDrop(ladder, { level: 30, subAttributes: { agility: 14 } }) === 2);
+
+  // ── R25b · delegation is a FORMULA, and a different scale from company ──
+  check("§47: R25b · delegation capacity is floor(level/10) — it starts at ZERO and grows",
+    [[1,0],[9,0],[10,1],[30,3],[100,10]].every(([lv, want]) => LAD.delegationCapacity(ladder, who(0, 0, lv)) === want),
+    [1,9,10,30,100].map(lv => LAD.delegationCapacity(ladder, who(0,0,lv))).join('/'));
+  check("§47: R25c · ⚑ rapport 14 raises it by one — the only rank that adds a NUMBER",
+    LAD.delegationCapacity(ladder, who(14, 0, 30)) === 4 && LAD.delegationCapacity(ladder, who(13, 0, 30)) === 3);
+
+  // ⛔ HOUSEHOLD NEVER BECOMES A NUMBER. R25c: 18 and 20 are STATES. The module comment this upholds:
+  // "the moment a pregnant wife grants a combat bonus the game has said something false."
+  check("§47: R25c · ⛔ rapport 18 and 20 add NOTHING to either count",
+    LAD.delegationCapacity(ladder, who(20, 0, 30)) === LAD.delegationCapacity(ladder, who(14, 0, 30)) &&
+    LAD.companyPlaces(ladder, who(20, 0)) === LAD.companyPlaces(ladder, who(10, 0)),
+    `deleg ${LAD.delegationCapacity(ladder, who(20,0,30))} vs ${LAD.delegationCapacity(ladder, who(14,0,30))}`);
+  check("§47: …they are reported as STATES instead, so the judgement is not lost",
+    LAD.serviceStates(ladder, who(20, 0)).householdEndures === true &&
+    LAD.serviceStates(ladder, who(20, 0)).loyaltyUnbought === true &&
+    LAD.serviceStates(ladder, who(17, 0)).householdEndures === false);
+
+  // ⛔ AND NO MILESTONE IS STILL BLOCKED ON HOLDINGS. rapport 14/18/20 shipped as `blocked` placeholders;
+  // R25c answered all three. ⚠️ A promise left written down is a decision waiting — this proves it landed.
+  check("§47: rapport 14/18/20 are no longer BLOCKED promises",
+    LAD.milestoneEffects(ladder, who(20, 20)).blocked.length === 0,
+    LAD.milestoneEffects(ladder, who(20, 20)).blocked.map(b => b.sub + ' ' + b.at).join(' · '));
+
+  // ── R25b · enforcement follows the COMPANY precedent: refuse a new one, never drop an existing one ──
+  {
+    const ws = { assignments: { a1: { npcId: "ann", status: "working" }, a2: { npcId: "ann", status: "working" },
+      a3: { npcId: "bo", status: "working" }, a4: { npcId: "cy", status: "done" } } };
+    check("§47: R25b · capacity counts PEOPLE, not charges — two charges on one person is one delegate",
+      ASG.activeDelegates(ws).length === 2, ASG.activeDelegates(ws).join(' · '));
+    check("§47: …and a FINISHED charge frees the person",  !ASG.activeDelegates(ws).includes("cy"));
+    const at2 = { level: 20, subAttributes: {} };   // capacity 2, and two are running
+    check("§47: R25b · ⛔ a NEW person is refused at capacity",
+      !!ASG.delegationRefusal(ws, "dee", { ladder, character: at2 }));
+    check("§47: …but someone ALREADY carrying work can take another charge",
+      ASG.delegationRefusal(ws, "ann", { ladder, character: at2 }) === null);
+    check("§47: …the refusal SAYS WHY — an unexplained refusal is indistinguishable from a bug",
+      /\S/.test(ASG.delegationRefusal(ws, "dee", { ladder, character: at2 })?.note || ""));
+    check("§47: ⚠️ absent means today — no ladder, no cap, byte-identical behaviour",
+      ASG.delegationRefusal(ws, "dee", {}) === null);
+    // ⛔ NEVER RETROACTIVE. A save already over capacity keeps every delegate it has.
+    const at0 = { level: 5, subAttributes: {} };
+    check("§47: ⛔ an over-capacity save loses NOBODY — the cap only ever refuses a new one",
+      ASG.activeDelegates(ws).length === 2 && LAD.delegationCapacity(ladder, at0) === 0);
+  }
+
+  // ── R27 · a rename target may be conditioned, and may be more than one craft ──
+  {
+    const step = REC.CHARACTER_STEPS.find(x => x.id === "ability-rename-map");
+    const known = { second_wind: { id: "second_wind" }, perfect_motion: { id: "perfect_motion" } };
+    const ctx = { content: { abilities: known, rules: { abilityRenames: RENAMES_47 } } };
+    const run = (level) => {
+      const c = { level: 20, abilities: [{ abilityId: "soma", level, uses: 7 }] };
+      step.apply(c, ctx); return c.abilities;
+    };
+    // ⛔ THE SPLIT AXIS IS RANK, AND THE REVERT LOG SAYS SO: OUTLAST (Soma r1–r2) / EXECUTE (Soma r3).
+    check("§47: R27 · a soma held at rank 1 or 2 receives `second_wind` ONLY — never the unearned strike",
+      [1, 2].every(r => run(r).length === 1 && run(r)[0].abilityId === "second_wind"),
+      JSON.stringify(run(2)));
+    check("§47: R27 · ⚑ a soma held at rank 3 receives BOTH halves — taking one is a loss they did not choose",
+      run(3).length === 2 && run(3).map(a => a.abilityId).sort().join('+') === 'perfect_motion+second_wind',
+      JSON.stringify(run(3)));
+    check("§47: R27 · …and the rank it carried is honoured, not reset to 1",  run(2)[0].level === 2, String(run(2)[0].level));
+    check("§47: R27 · ⚠️ the ORIGINAL entry survives, so uses and provenance ride along",  run(3)[0].uses === 7);
+    check("§47: R27 · …stamped `migratedFrom`, so nobody has to guess later whether they chose it",
+      run(3).every(a => a.migratedFrom === "soma"));
+
+    // ⛔ ALL-OR-NOTHING. A HALF-migrated split is worse than an unmigrated one: it looks finished.
+    const thin = { content: { abilities: { second_wind: { id: "second_wind" } }, rules: { abilityRenames: RENAMES_47 } } };
+    const c3 = { level: 20, abilities: [{ abilityId: "soma", level: 3 }] };
+    step.apply(c3, thin);
+    check("§47: R27 · ⛔ a missing target skips the WHOLE entry — no half-migrated split",
+      c3.abilities.length === 1 && c3.abilities[0].abilityId === "soma", JSON.stringify(c3.abilities));
+
+    // ⚠️ AND THE 371 PLAIN-STRING ENTRIES ARE UNTOUCHED — the whole map is regression surface.
+    const strs = Object.entries(RENAMES_47).filter(([, v]) => typeof v.to === 'string' && v.to !== 'CUT');
+    let okN = 0;
+    for (const [from, v] of strs) {
+      const c = { level: 5, abilities: [{ abilityId: from, level: 2 }] };
+      step.apply(c, { content: { abilities: { [v.to]: { id: v.to } }, rules: { abilityRenames: RENAMES_47 } } });
+      if (c.abilities.length === 1 && c.abilities[0].abilityId === v.to && c.abilities[0].level === 2) okN++;
+    }
+    check(`§47: R27 · all ${strs.length} plain-string renames still migrate, rank preserved`, okN === strs.length,
+      `${okN}/${strs.length}`);
+
+    // ⛔ AND THE `+` FORM IS GONE. It parsed, resolved to nothing, and was silently skipped — documentation
+    // wearing a mechanism's clothes. Nothing may reintroduce it.
+    check("§47: R27 · ⛔ no rename target is a `+` expression any more",
+      !Object.values(RENAMES_47).some(v => typeof v.to === 'string' && v.to.includes('+')));
+  }
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

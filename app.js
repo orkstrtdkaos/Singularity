@@ -73,7 +73,7 @@ import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
 import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS } from "./engine/worldtick.js";
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
-import { addAssignment } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
+import { addAssignment, delegationRefusal } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { trainableTier, SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.314";
+const APP_VERSION = "1.9.315";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6814,15 +6814,23 @@ function applyTurn(turn, resolution, playerWords = null) {
   // what can push that crisis back — delegation is how a crisis gets solved offscreen.
   if (turn.delegateOps?.length) {
     if (!character.worldState) character.worldState = initWorldState(readClock(character.clock).day);
-    let n = 0;
+    let n = 0; const refusals = [];
     for (const d of turn.delegateOps.slice(0, 6)) {
       if (!d?.npcId || !d?.charge) { logOpOutcome("delegateOps", "rejected-shape"); continue; }
       const npcName = character.npcRegistry?.[d.npcId]?.name || CONTENT.npcs?.[d.npcId]?.name || d.npcId;
       const targetEventId = d.targetEventId && CONTENT.events?.[d.targetEventId] ? d.targetEventId : null;
+      // ⛔ R25b (ERIK 2026-09-02) — HOW MANY PEOPLE CAN RUN SOMETHING IN YOUR NAME IS `floor(level/10)`
+      // plus rapport 14. ⚠️ REFUSED, NOT SILENTLY DROPPED: the narration says so, because a charge the
+      // player watched themselves give that then does not exist is the worst of both.
+      const refusal = delegationRefusal(character.worldState, d.npcId, { ladder: CONTENT.rules?.subAttributeLadder || null, character });
+      if (refusal) { refusals.push(refusal.note); logOpOutcome("delegateOps", "refused-capacity"); continue; }
       const a = addAssignment(character.worldState, { npcId: d.npcId, npcName, charge: d.charge, targetEventId }, worldCount());
       if (a) { n++; logOpOutcome("delegateOps", "applied"); }
     }
     if (n) turn.narration = (turn.narration || "") + `\n\n*✦ The charge is set — the work goes on while you are away, and you'll hear how it fared when you return.*`;
+    // ⚠️ ONE LINE, AND ONLY THE FIRST REASON — they are all the same reason, and repeating it would read
+    // like the game arguing with the player.
+    if (refusals.length) turn.narration = (turn.narration || "") + `\n\n*${refusals[0]}*`;
   }
   // SNG-191 §7: the player closed a SURFACED latent arc — the third fate (handled), or it concluded
   // (resolved). Only a surfaced arc can be closed this way. The world stops carrying it as unfinished.

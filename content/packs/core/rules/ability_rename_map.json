@@ -1,1525 +1,1550 @@
 {
- "schemaVersion": 1,
- "id": "ability_rename_map",
- "kind": "migration",
- "note": "⛔ SNG-501. THE RENAME MAP CCODE ASKED FOR. Every ability id that existed before the 2026-08-14→16 audit and does not exist now, with what it became.\n⚠️ CCode: 'the smoke suite dies at line ~1370 of 16,000' and '116 native grants point at abilities that no longer exist'. ⛔ BOTH ARE MINE. The single largest cause was not the cuts — it was the NAMING SOP (§31) stripping `the_` from IDS as well as names: 120 of 181.\n⚠️ LESSON FOR THE SOP: A RENAME IS A MIGRATION. I changed 829 names in one pass and did not check who referenced them.",
- "_counts": {
-  "de-article": 342,
-  "sense-cull": 32,
-  "merge/rename": 28,
-  "CUT": 5
- },
- "_howToRead": "`to` is the live id, or `CUT`, or a `+` expression where one ability split into two.",
- "map": {
-  "the_answered_motion": {
-   "to": "answered_motion",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_appetite_strike": {
-   "to": "appetite_strike",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_blazing_word": {
-   "to": "blazing_word",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_borne_bargain": {
-   "to": "borne_bargain",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_borrowed_certainty": {
-   "to": "borrowed_certainty",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_broken_quiet": {
-   "to": "broken_quiet",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_built_system": {
-   "to": "built_system",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_called_form": {
-   "to": "called_form",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_calling_back": {
-   "to": "calling_back",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_carried_name": {
-   "to": "carried_name",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_clean_removal": {
-   "to": "clean_removal",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_clean_taking": {
-   "to": "clean_taking",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_collection": {
-   "to": "collection",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_contradiction": {
-   "to": "contradiction",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_cutting_figure": {
-   "to": "cutting_figure",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_deep_covenant": {
-   "to": "deep_covenant",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_demonstrated_end": {
-   "to": "demonstrated_end",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_descent_path": {
-   "to": "descent_path",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_dimmed_meaning": {
-   "to": "dimmed_meaning",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_direct_path": {
-   "to": "direct_path",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_dread": {
-   "to": "dread",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_dread_mantle": {
-   "to": "dread_mantle",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_drowning_deep": {
-   "to": "drowning_deep",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_ended_burden": {
-   "to": "ended_burden",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_ended_threat": {
-   "to": "ended_threat",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_established_fact": {
-   "to": "established_fact",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_established_route": {
-   "to": "established_route",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_fault_strike": {
-   "to": "fault_strike",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_feeling_road": {
-   "to": "the_true_feeling",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_felt_room": {
-   "to": "felt_room",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_felt_wall": {
-   "to": "felt_wall",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_fixed_point": {
-   "to": "fixed_point",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_folded_pace": {
-   "to": "folded_pace",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_forced_bloom": {
-   "to": "forced_bloom",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_found_fault": {
-   "to": "found_fault",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_given_way": {
-   "to": "given_way",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_green_claim": {
-   "to": "green_claim",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_grey_hand": {
-   "to": "grey_hand",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_grief_strike": {
-   "to": "grief_strike",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_grief_that_stops": {
-   "to": "grief_that_stops",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_hastened_grey": {
-   "to": "hastened_grey",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_held_breath": {
-   "to": "held_breath",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_held_hour": {
-   "to": "held_hour",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_honest_bargain": {
-   "to": "honest_bargain",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_honest_price": {
-   "to": "honest_price",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_hurled_weight": {
-   "to": "hurled_weight",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_judged_strike": {
-   "to": "judged_strike",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_keening": {
-   "to": "keening",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_kept_count": {
-   "to": "kept_count",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_keystone_blow": {
-   "to": "keystone_blow",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_known_way": {
-   "to": "known_way",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_land_knowledge": {
-   "to": "land_knowledge",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_last_gift": {
-   "to": "last_gift",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_lever": {
-   "to": "lever",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_lifted_word": {
-   "to": "lifted_word",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_long_odds": {
-   "to": "long_odds",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_loose_thread": {
-   "to": "loose_thread",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_made_crossing": {
-   "to": "made_crossing",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_made_elegy": {
-   "to": "made_elegy",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_maintained_order": {
-   "to": "maintained_order",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_maintained_veil": {
-   "to": "maintained_veil",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_measured_sentence": {
-   "to": "measured_sentence",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_misdirect": {
-   "to": "misdirect",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_name_invoked": {
-   "to": "name_invoked",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_named_exclusion": {
-   "to": "named_exclusion",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_names_of_the_lost": {
-   "to": "names_of_the_lost",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_near_way": {
-   "to": "near_way",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_offered_lesser": {
-   "to": "offered_lesser",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_offered_mouth": {
-   "to": "offered_mouth",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_offered_price": {
-   "to": "offered_price",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_open_threshold": {
-   "to": "open_threshold",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_ordered_record": {
-   "to": "ordered_record",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_ordinary_face": {
-   "to": "ordinary_face",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_perfect_erasure": {
-   "to": "perfect_erasure",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_plain_weight": {
-   "to": "plain_weight",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_predicted_man": {
-   "to": "predicted_man",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_price_shown": {
-   "to": "price_shown",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_quick_hands": {
-   "to": "quick_hands",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_raised_form": {
-   "to": "raised_form",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_read_burn": {
-   "to": "read_burn",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_read_field": {
-   "to": "read_field",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_reduction": {
-   "to": "reduction",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_revealing_burn": {
-   "to": "revealing_burn",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_root_road": {
-   "to": "root_road",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_seized_works": {
-   "to": "seized_works",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_set_hand": {
-   "to": "set_hand",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_set_word": {
-   "to": "set_word",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_shaped_duration": {
-   "to": "shaped_duration",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_shared_grief": {
-   "to": "shared_grief",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_sheltering_name": {
-   "to": "sheltering_name",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_sling_and_stone": {
-   "to": "sling_and_stone",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_snaring_green": {
-   "to": "snaring_green",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_solved_route": {
-   "to": "solved_route",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_sound_read": {
-   "to": "sound_read",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_speaking_grove": {
-   "to": "speaking_grove",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_spent_hour": {
-   "to": "spent_hour",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_standing_word": {
-   "to": "standing_word",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_struck_term": {
-   "to": "struck_term",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_sudden_work": {
-   "to": "sudden_work",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_sustained_regard": {
-   "to": "sustained_regard",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_thinned_veil": {
-   "to": "thinned_veil",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_true_account": {
-   "to": "true_account",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_turning_word": {
-   "to": "turning_word",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_unbearable_word": {
-   "to": "unbearable_word",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_unmoving_mind": {
-   "to": "unmoving_mind",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_useful_absence": {
-   "to": "useful_absence",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_walking_figure": {
-   "to": "walking_figure",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_wasted_moment": {
-   "to": "wasted_moment",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_weighed_word": {
-   "to": "weighed_word",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_weight": {
-   "to": "weight",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_weight_of_practice": {
-   "to": "weight_of_practice",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_weight_of_truth": {
-   "to": "weight_of_truth",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_whole_truth": {
-   "to": "whole_truth",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_work_speaks": {
-   "to": "work_speaks",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_working_model": {
-   "to": "working_model",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_working_order": {
-   "to": "working_order",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_worldsong": {
-   "to": "worldsong",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_wrong_moment": {
-   "to": "wrong_moment",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_wrong_reality": {
-   "to": "wrong_reality",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_wrong_wound": {
-   "to": "wrong_wound",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "soma": {
-   "to": "second_wind + perfect_motion",
-   "why": "⛔ SNG-479 — the pole-mastery skill. Split: its endurance half into `second_wind`, its precision/strike half into `perfect_motion`."
-  },
-  "long_haul": {
-   "to": "second_wind",
-   "why": "SNG-479 merge — 'folk-Soma', absorbed."
-  },
-  "whole_act": {
-   "to": "perfect_motion",
-   "why": "SNG-479 merge."
-  },
-  "the_whole_act": {
-   "to": "perfect_motion",
-   "why": "SNG-479 merge."
-  },
-  "total_focus": {
-   "to": "unmoving_mind",
-   "why": "SNG-457 merge — three ranks that were one sentence with intensifiers."
-  },
-  "noesis": {
-   "to": "CUT",
-   "why": "⛔ SNG-463 — pole-mastery skill describing a capacity, duplicating its own sect. Mystery never authored."
-  },
-  "logos": {
-   "to": "CUT",
-   "why": "⛔ SNG-463 — same. Tagged `damage` 2d6 while its text damaged nothing."
-  },
-  "the_clear_path": {
-   "to": "solved_route",
-   "why": "SNG-450 merge — three navigation skills at identical stats."
-  },
-  "the_derived_route": {
-   "to": "solved_route",
-   "why": "SNG-450 merge."
-  },
-  "the_patterned_way": {
-   "to": "solved_route",
-   "why": "SNG-450 merge."
-  },
-  "the_correct_protocol": {
-   "to": "physicians_tome",
-   "why": "SNG-450 merge — two restore skills at identical stats."
-  },
-  "the_restored_form": {
-   "to": "physicians_tome",
-   "why": "SNG-450 merge."
-  },
-  "the_correct_restoration": {
-   "to": "physicians_tome",
-   "why": "SNG-461 rename."
-  },
-  "the_stated_case": {
-   "to": "case_closed",
-   "why": "SNG-450 merge."
-  },
-  "the_necessary_case": {
-   "to": "case_closed",
-   "why": "SNG-450 merge — did the same job at a third the energy."
-  },
-  "the_inescapable_conclusion": {
-   "to": "case_closed",
-   "why": "⛔ SNG-464 — absorbed as rank 2. Three skills, one idea."
-  },
-  "the_closing_argument": {
-   "to": "case_closed",
-   "why": "⛔ SNG-464 — absorbed as rank 3."
-  },
-  "the_standing_figure": {
-   "to": "named_exclusion",
-   "why": "SNG-453 merge — both 'set a persistent figure that excludes a named category'."
-  },
-  "the_warding_mark": {
-   "to": "named_exclusion",
-   "why": "SNG-453 merge."
-  },
-  "the_binding_figure": {
-   "to": "named_exclusion",
-   "why": "SNG-457 — collapsed into r3."
-  },
-  "the_axiom_holds": {
-   "to": "unbroken_thread",
-   "why": "SNG-453 merge — both 'keep functioning under pressure'."
-  },
-  "the_long_form": {
-   "to": "unbroken_thread",
-   "why": "SNG-453 merge."
-  },
-  "the_shared_room": {
-   "to": "mind_meld",
-   "why": "SNG-461 rename."
-  },
-  "the_names_they_answer_to": {
-   "to": "names_of_power",
-   "why": "SNG-461 rename."
-  },
-  "the_single_stroke": {
-   "to": "convergent_strike",
-   "why": "SNG-463 rename."
-  },
-  "the_true_name": {
-   "to": "names_of_power",
-   "why": "⛔ SNG-453 — replaced. Was L5, one rank, no roll, 'a hold on its very being'."
-  },
-  "the_proof": {
-   "to": "CUT",
-   "why": "⛔ SNG-450 — L5 capstone, one rank, 13 energy, produced an argument."
-  },
-  "the_followed_thread": {
-   "to": "CUT",
-   "why": "⛔ SNG-450 — pure foresee/reveal; the GM would have supplied it."
-  },
-  "the_held_form": {
-   "to": "CUT",
-   "why": "⛔ SNG-457 — 'the thing it represents persists longer'. Unbounded, no roll."
-  },
-  "the_proved_position": {
-   "to": "case_closed",
-   "why": "⛔ SNG-457 — indefensible against Case Closed once its impossible half was removed."
-  },
-  "the_set_stone": {
-   "to": "thingcraft",
-   "why": "SNG-481 merge — duplicated Thingcraft's own r2 by name and effect."
-  },
-  "the_plain_fact": {
-   "to": "reduction",
-   "why": "SNG-481 merge."
-  },
-  "the_weight_of_presence": {
-   "to": "set_word",
-   "why": "SNG-485 merge — both L2, social, `command`, same r3 claim."
-  },
-  "the_rivercraft": {
-   "to": "rivercraft",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_glimmer_script": {
-   "to": "glimmer_script",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_formcraft": {
-   "to": "formcraft",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_running_engine": {
-   "to": "running_engine",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_radiant_ground": {
-   "to": "radiant_ground",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_spanwork": {
-   "to": "spanwork",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_death_ward": {
-   "to": "death_ward",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_ignore_me": {
-   "to": "ignore_me",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_psychic_lance": {
-   "to": "psychic_lance",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_quiet_the_room": {
-   "to": "quiet_the_room",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_scatter": {
-   "to": "scatter",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_borrowed_hour": {
-   "to": "borrowed_hour",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_wither": {
-   "to": "wither",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_harmonic_voice": {
-   "to": "harmonic_voice",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_bark_and_briar": {
-   "to": "bark_and_briar",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_unbroken_practice": {
-   "to": "unbroken_practice",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_quickening": {
-   "to": "quickening",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_stillcraft": {
-   "to": "stillcraft",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_advance": {
-   "to": "advance",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_edge_of_the_map": {
-   "to": "edge_of_the_map",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_open_material": {
-   "to": "open_material",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_umbracraft": {
-   "to": "umbracraft",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_road_ahead": {
-   "to": "road_ahead",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_thingcraft": {
-   "to": "thingcraft",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_descent": {
-   "to": "descent",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_probability_tilt": {
-   "to": "probability_tilt",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_foreclose": {
-   "to": "foreclose",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_shadowed_mending": {
-   "to": "shadowed_mending",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_calm_word": {
-   "to": "calm_word",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_attunement": {
-   "to": "attunement",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_drawn_ascent": {
-   "to": "drawn_ascent",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_dawn_surgery": {
-   "to": "dawn_surgery",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_enginecraft": {
-   "to": "enginecraft",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_the_cut_thread": {
-   "to": "the_cut_thread",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_convergent_strike": {
-   "to": "convergent_strike",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_shatterpoint": {
-   "to": "shatterpoint",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_afterimage": {
-   "to": "afterimage",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_raised_road": {
-   "to": "raised_road",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_last_lament": {
-   "to": "last_lament",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_safe_ground": {
-   "to": "safe_ground",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_disarm": {
-   "to": "disarm",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_blaze_wall": {
-   "to": "blaze_wall",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_the_long_odds_come_in": {
-   "to": "the_long_odds_come_in",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_sonic_resonance": {
-   "to": "sonic_resonance",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_kept_fire": {
-   "to": "kept_fire",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_true_ground": {
-   "to": "true_ground",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_hourcraft": {
-   "to": "hourcraft",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_shadow_work": {
-   "to": "shadow_work",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_wake_the_line": {
-   "to": "wake_the_line",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_long_road": {
-   "to": "long_road",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_shaped_body": {
-   "to": "shaped_body",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_unlit_step": {
-   "to": "unlit_step",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_churns_gift": {
-   "to": "churns_gift",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_shroud": {
-   "to": "shroud",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_greenlore": {
-   "to": "greenlore",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_resonant_shield": {
-   "to": "resonant_shield",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_carrying_call": {
-   "to": "carrying_call",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_the_unsurvivable_fact": {
-   "to": "the_unsurvivable_fact",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_sustained_chord": {
-   "to": "sustained_chord",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_stretched_hour": {
-   "to": "stretched_hour",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_dim": {
-   "to": "dim",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_harbored_flame": {
-   "to": "harbored_flame",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_mind_meld": {
-   "to": "mind_meld",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_unshadow": {
-   "to": "unshadow",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_sustained_order": {
-   "to": "sustained_order",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_my_reality": {
-   "to": "my_reality",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_soul_stare": {
-   "to": "soul_stare",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_last_fault": {
-   "to": "last_fault",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_carried_green": {
-   "to": "carried_green",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_never_there": {
-   "to": "never_there",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_quieting": {
-   "to": "quieting",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_fresh_horizon": {
-   "to": "fresh_horizon",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_shortfold": {
-   "to": "shortfold",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_worth_the_work": {
-   "to": "worth_the_work",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_laid_ground": {
-   "to": "laid_ground",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_masterwork": {
-   "to": "masterwork",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_edge": {
-   "to": "edge",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_boundary_stone": {
-   "to": "boundary_stone",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_better_story": {
-   "to": "better_story",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_kept_distance": {
-   "to": "kept_distance",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_stand": {
-   "to": "stand",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_command_engine": {
-   "to": "command_engine",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_falsecraft": {
-   "to": "falsecraft",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_waygate": {
-   "to": "waygate",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_old_roads": {
-   "to": "old_roads",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_choir_sustains": {
-   "to": "choir_sustains",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_last_unmaking": {
-   "to": "last_unmaking",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_broker_truce": {
-   "to": "broker_truce",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_line_of_light": {
-   "to": "line_of_light",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_kept_flame": {
-   "to": "kept_flame",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_darksight": {
-   "to": "darksight",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_truename_order": {
-   "to": "truename_order",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_graftlife": {
-   "to": "graftlife",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_force_the_move": {
-   "to": "force_the_move",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_self_mending_work": {
-   "to": "self_mending_work",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_wayfinding": {
-   "to": "wayfinding",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_unmake_seal": {
-   "to": "unmake_seal",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_wrong_target": {
-   "to": "wrong_target",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_daybreak_mantle": {
-   "to": "daybreak_mantle",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_voice_of_the_flock": {
-   "to": "voice_of_the_flock",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_meaning_engine": {
-   "to": "meaning_engine",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_drumline_stride": {
-   "to": "drumline_stride",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_carrying_note": {
-   "to": "carrying_note",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_held_repair": {
-   "to": "held_repair",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_beacon_thread": {
-   "to": "beacon_thread",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_ruinwork": {
-   "to": "ruinwork",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_prism_ward": {
-   "to": "prism_ward",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_last_form": {
-   "to": "last_form",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_root_that_holds": {
-   "to": "root_that_holds",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_consumed_wound": {
-   "to": "consumed_wound",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_clarity_lens": {
-   "to": "clarity_lens",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_soldiers_hand": {
-   "to": "soldiers_hand",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_riding_order": {
-   "to": "riding_order",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_wildcraft": {
-   "to": "wildcraft",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_true_making": {
-   "to": "true_making",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_light_borne": {
-   "to": "light_borne",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_pathos": {
-   "to": "pathos",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_verity": {
-   "to": "verity",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_unfaltering_light": {
-   "to": "unfaltering_light",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_held_truth": {
-   "to": "held_truth",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_kept_breath": {
-   "to": "kept_breath",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_steady_soul": {
-   "to": "steady_soul",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_shortened_road": {
-   "to": "shortened_road",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_perfect_motion": {
-   "to": "perfect_motion",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_sun_seal": {
-   "to": "sun_seal",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_the_lucky_fall": {
-   "to": "the_lucky_fall",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_wellspring": {
-   "to": "wellspring",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_made_truth": {
-   "to": "made_truth",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_radiant_lance": {
-   "to": "radiant_lance",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_built_way": {
-   "to": "built_way",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_tinkers_hand": {
-   "to": "tinkers_hand",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_whats_at_hand": {
-   "to": "whats_at_hand",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_ask_the_dead": {
-   "to": "ask_the_dead",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_false_door": {
-   "to": "false_door",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_stepped_span": {
-   "to": "stepped_span",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_latticework": {
-   "to": "latticework",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_set_to_rights": {
-   "to": "set_to_rights",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_mediators_tongue": {
-   "to": "mediators_tongue",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_radiance": {
-   "to": "radiance",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_ascent_path": {
-   "to": "ascent_path",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_hollow_that_holds": {
-   "to": "hollow_that_holds",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_shadowstep": {
-   "to": "shadowstep",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_quick_work": {
-   "to": "quick_work",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_false_stance": {
-   "to": "false_stance",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_palework": {
-   "to": "palework",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_blend_in": {
-   "to": "blend_in",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_names_of_power": {
-   "to": "names_of_power",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_thrown_edge": {
-   "to": "thrown_edge",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_the_way_out": {
-   "to": "the_way_out",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_quicken_the_ground": {
-   "to": "quicken_the_ground",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_stopped_breath": {
-   "to": "stopped_breath",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_false_trail": {
-   "to": "false_trail",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_mend_device": {
-   "to": "mend_device",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_second_wind": {
-   "to": "second_wind",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_ongoing_work": {
-   "to": "ongoing_work",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_deduced_strike": {
-   "to": "deduced_strike",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_steady_hands": {
-   "to": "steady_hands",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_undoing_word": {
-   "to": "undoing_word",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_light_bending": {
-   "to": "light_bending",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_drawn_bow": {
-   "to": "drawn_bow",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_harbor": {
-   "to": "harbor",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_false_target": {
-   "to": "false_target",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_latticespeak": {
-   "to": "latticespeak",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_hunters_strike": {
-   "to": "hunters_strike",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_carried_dark": {
-   "to": "carried_dark",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_long_dark": {
-   "to": "long_dark",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_the_attended_end": {
-   "to": "the_attended_end",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_long_reach": {
-   "to": "long_reach",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_makecraft": {
-   "to": "makecraft",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_known_price": {
-   "to": "known_price",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_mechanical_defense": {
-   "to": "mechanical_defense",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_unbroken_thread": {
-   "to": "unbroken_thread",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_kept_vigil": {
-   "to": "kept_vigil",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_loose_limbed": {
-   "to": "loose_limbed",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_staunch": {
-   "to": "staunch",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_given_time": {
-   "to": "given_time",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_deep_works": {
-   "to": "deep_works",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_hearthbinding": {
-   "to": "hearthbinding",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_glasswork": {
-   "to": "glasswork",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_ascent": {
-   "to": "ascent",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_quiet_step": {
-   "to": "quiet_step",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_perfect_veil": {
-   "to": "perfect_veil",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_step_between": {
-   "to": "step_between",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_makers_eye": {
-   "to": "makers_eye",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_beastfriend": {
-   "to": "beastfriend",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_wild_flowering": {
-   "to": "wild_flowering",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_hold_the_aperture": {
-   "to": "hold_the_aperture",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_memory_palace": {
-   "to": "memory_palace",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_held_line": {
-   "to": "held_line",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_reforging": {
-   "to": "reforging",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_shielding_light": {
-   "to": "shielding_light",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_green_road": {
-   "to": "green_road",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_case_closed": {
-   "to": "case_closed",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_weapon_at_hand": {
-   "to": "weapon_at_hand",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_kindle": {
-   "to": "kindle",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_raised_thing": {
-   "to": "raised_thing",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_long_watch": {
-   "to": "long_watch",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_catch_as_catch_can": {
-   "to": "catch_as_catch_can",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_levelled_crossbow": {
-   "to": "levelled_crossbow",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_useful_lie": {
-   "to": "useful_lie",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_unmaking_of_walls": {
-   "to": "unmaking_of_walls",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_sound_repair": {
-   "to": "sound_repair",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_last_light": {
-   "to": "last_light",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_physicians_tome": {
-   "to": "physicians_tome",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_chord_of_mending": {
-   "to": "chord_of_mending",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_skydancer": {
-   "to": "skydancer",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_grey_road": {
-   "to": "grey_road",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_light_well": {
-   "to": "light_well",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_cleansing_light": {
-   "to": "cleansing_light",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_shielding_word": {
-   "to": "shielding_word",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_opened_moment": {
-   "to": "opened_moment",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_stillness_field": {
-   "to": "stillness_field",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_glass_work": {
-   "to": "glass_work",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_sun_coax": {
-   "to": "sun_coax",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_far_step": {
-   "to": "far_step",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_resonant_anchor": {
-   "to": "resonant_anchor",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_shared_weight": {
-   "to": "shared_weight",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_ki_wield": {
-   "to": "ki_wield",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_thin_place": {
-   "to": "thin_place",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_numenwork": {
-   "to": "numenwork",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_draw_down": {
-   "to": "draw_down",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_stonewise": {
-   "to": "stonewise",
-   "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
-  },
-  "the_lucky_fall": {
-   "to": "lucky_fall",
-   "why": "renamed — naming SOP §31; ⛔ MISSED BY THE ORIGINAL PASS, caught by CCode 2026-08-16"
-  },
-  "feeling_road": {
-   "to": "the_true_feeling",
-   "why": "⛔ FOLDED 2026-08-24 (Erik). `feeling_road` duplicated `the_true_feeling` r2 'The Feeling Trail', which already tracked feelings across ground at L1. Its `travel` capability was folded into Feeling-Sense r3, which now reads a history and walks it to its source. ⚠️ A character holding feeling_road maps to the_true_feeling."
-  }
- },
- "_note2": "⚠️ EXPANDED. My first map was built from the REVERT LOGS, which only cover abilities I explicitly cut or merged. ⛔ THE DE-ARTICLE PASS TOUCHED 829 NAMES ACROSS THE WHOLE CORPUS and most of those ids were never in a revert log — so the map is now derived from LIVE IDS instead: for every live `X`, `the_X` maps to it.",
- "_prunedSenseCull_20260823": "⛔ 32 rows REMOVED (Aevi). SNG-454's sense cull was REVERSED by Erik; the rows outlived the decision. Every one mapped a LIVE craft onto `attunement`, which does not exist — wiring this map as a save migration would have emptied working kits (deathsense, body_read, echo_memory + 29). ⚠️ A rename map is a record of a decision, so when the decision is reversed the rows are not stale, they are ARMED. Removed: address_sense, appetite_sense, body_read, chaos_sense, deathsense, echo_memory, echo_sense, fault_sense, hour_sense, keen_appraisal, lifesense, lightsense, mech_sense, mind_read_folk, numen_sense, order_sense, pattern_sense, prism_sight, read_the_fight, read_the_room, see_the_made_thing, stone_read, storykeeper, the_kept_hour, the_measuring_eye, the_plain_seeing, the_read_hunger, the_read_want, the_true_feeling, the_true_figure, tremor_sense, way_sense"
+  "schemaVersion": 1,
+  "id": "ability_rename_map",
+  "kind": "migration",
+  "note": "⛔ SNG-501. THE RENAME MAP CCODE ASKED FOR. Every ability id that existed before the 2026-08-14→16 audit and does not exist now, with what it became.\n⚠️ CCode: 'the smoke suite dies at line ~1370 of 16,000' and '116 native grants point at abilities that no longer exist'. ⛔ BOTH ARE MINE. The single largest cause was not the cuts — it was the NAMING SOP (§31) stripping `the_` from IDS as well as names: 120 of 181.\n⚠️ LESSON FOR THE SOP: A RENAME IS A MIGRATION. I changed 829 names in one pass and did not check who referenced them.",
+  "_counts": {
+    "de-article": 342,
+    "sense-cull": 32,
+    "merge/rename": 28,
+    "CUT": 5
+  },
+  "_howToRead": "`to` is the live id, or `CUT`, or a CONDITIONED form: `{byRank: {\"1\": [...], …}}` when a craft split along its ranks, or `{bySect: {…}, default: \"…\"}` when it split into per-sect variants. A conditioned target is a list of ids, or of `{id, rank}`. ⛔ THE OLD `+` EXPRESSION WAS NOT A MECHANISM — it was a plain string no lookup could resolve, so the one entry using it (`soma`) parsed and was silently skipped. R27 replaced it.",
+  "map": {
+    "the_answered_motion": {
+      "to": "answered_motion",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_appetite_strike": {
+      "to": "appetite_strike",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_blazing_word": {
+      "to": "blazing_word",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_borne_bargain": {
+      "to": "borne_bargain",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_borrowed_certainty": {
+      "to": "borrowed_certainty",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_broken_quiet": {
+      "to": "broken_quiet",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_built_system": {
+      "to": "built_system",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_called_form": {
+      "to": "called_form",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_calling_back": {
+      "to": "calling_back",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_carried_name": {
+      "to": "carried_name",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_clean_removal": {
+      "to": "clean_removal",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_clean_taking": {
+      "to": "clean_taking",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_collection": {
+      "to": "collection",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_contradiction": {
+      "to": "contradiction",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_cutting_figure": {
+      "to": "cutting_figure",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_deep_covenant": {
+      "to": "deep_covenant",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_demonstrated_end": {
+      "to": "demonstrated_end",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_descent_path": {
+      "to": "descent_path",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_dimmed_meaning": {
+      "to": "dimmed_meaning",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_direct_path": {
+      "to": "direct_path",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_dread": {
+      "to": "dread",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_dread_mantle": {
+      "to": "dread_mantle",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_drowning_deep": {
+      "to": "drowning_deep",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_ended_burden": {
+      "to": "ended_burden",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_ended_threat": {
+      "to": "ended_threat",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_established_fact": {
+      "to": "established_fact",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_established_route": {
+      "to": "established_route",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_fault_strike": {
+      "to": "fault_strike",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_feeling_road": {
+      "to": "the_true_feeling",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_felt_room": {
+      "to": "felt_room",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_felt_wall": {
+      "to": "felt_wall",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_fixed_point": {
+      "to": "fixed_point",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_folded_pace": {
+      "to": "folded_pace",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_forced_bloom": {
+      "to": "forced_bloom",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_found_fault": {
+      "to": "found_fault",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_given_way": {
+      "to": "given_way",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_green_claim": {
+      "to": "green_claim",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_grey_hand": {
+      "to": "grey_hand",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_grief_strike": {
+      "to": "grief_strike",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_grief_that_stops": {
+      "to": "grief_that_stops",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_hastened_grey": {
+      "to": "hastened_grey",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_held_breath": {
+      "to": "held_breath",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_held_hour": {
+      "to": "held_hour",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_honest_bargain": {
+      "to": "honest_bargain",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_honest_price": {
+      "to": "honest_price",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_hurled_weight": {
+      "to": "hurled_weight",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_judged_strike": {
+      "to": "judged_strike",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_keening": {
+      "to": "keening",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_kept_count": {
+      "to": "kept_count",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_keystone_blow": {
+      "to": "keystone_blow",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_known_way": {
+      "to": "known_way",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_land_knowledge": {
+      "to": "land_knowledge",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_last_gift": {
+      "to": "last_gift",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_lever": {
+      "to": "lever",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_lifted_word": {
+      "to": "lifted_word",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_long_odds": {
+      "to": "long_odds",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_loose_thread": {
+      "to": "loose_thread",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_made_crossing": {
+      "to": "made_crossing",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_made_elegy": {
+      "to": "made_elegy",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_maintained_order": {
+      "to": "maintained_order",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_maintained_veil": {
+      "to": "maintained_veil",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_measured_sentence": {
+      "to": "measured_sentence",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_misdirect": {
+      "to": "misdirect",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_name_invoked": {
+      "to": "name_invoked",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_named_exclusion": {
+      "to": "named_exclusion",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_names_of_the_lost": {
+      "to": "names_of_the_lost",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_near_way": {
+      "to": "near_way",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_offered_lesser": {
+      "to": "offered_lesser",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_offered_mouth": {
+      "to": "offered_mouth",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_offered_price": {
+      "to": "offered_price",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_open_threshold": {
+      "to": "open_threshold",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_ordered_record": {
+      "to": "ordered_record",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_ordinary_face": {
+      "to": "ordinary_face",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_perfect_erasure": {
+      "to": "perfect_erasure",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_plain_weight": {
+      "to": "plain_weight",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_predicted_man": {
+      "to": "predicted_man",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_price_shown": {
+      "to": "price_shown",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_quick_hands": {
+      "to": "quick_hands",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_raised_form": {
+      "to": "raised_form",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_read_burn": {
+      "to": "read_burn",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_read_field": {
+      "to": "read_field",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_reduction": {
+      "to": "reduction",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_revealing_burn": {
+      "to": "revealing_burn",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_root_road": {
+      "to": "root_road",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_seized_works": {
+      "to": "seized_works",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_set_hand": {
+      "to": "set_hand",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_set_word": {
+      "to": "set_word",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_shaped_duration": {
+      "to": "shaped_duration",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_shared_grief": {
+      "to": "shared_grief",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_sheltering_name": {
+      "to": "sheltering_name",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_sling_and_stone": {
+      "to": "sling_and_stone",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_snaring_green": {
+      "to": "snaring_green",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_solved_route": {
+      "to": "solved_route",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_sound_read": {
+      "to": "sound_read",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_speaking_grove": {
+      "to": "speaking_grove",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_spent_hour": {
+      "to": "spent_hour",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_standing_word": {
+      "to": "standing_word",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_struck_term": {
+      "to": "struck_term",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_sudden_work": {
+      "to": "sudden_work",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_sustained_regard": {
+      "to": "sustained_regard",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_thinned_veil": {
+      "to": "thinned_veil",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_true_account": {
+      "to": "true_account",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_turning_word": {
+      "to": "turning_word",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_unbearable_word": {
+      "to": "unbearable_word",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_unmoving_mind": {
+      "to": "unmoving_mind",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_useful_absence": {
+      "to": "useful_absence",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_walking_figure": {
+      "to": "walking_figure",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_wasted_moment": {
+      "to": "wasted_moment",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_weighed_word": {
+      "to": "weighed_word",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_weight": {
+      "to": "weight",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_weight_of_practice": {
+      "to": "weight_of_practice",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_weight_of_truth": {
+      "to": "weight_of_truth",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_whole_truth": {
+      "to": "whole_truth",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_work_speaks": {
+      "to": "work_speaks",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_working_model": {
+      "to": "working_model",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_working_order": {
+      "to": "working_order",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_worldsong": {
+      "to": "worldsong",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_wrong_moment": {
+      "to": "wrong_moment",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_wrong_reality": {
+      "to": "wrong_reality",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_wrong_wound": {
+      "to": "wrong_wound",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "soma": {
+      "to": {
+        "byRank": {
+          "1": [
+            {
+              "id": "second_wind",
+              "rank": 1
+            }
+          ],
+          "2": [
+            {
+              "id": "second_wind",
+              "rank": 2
+            }
+          ],
+          "3": [
+            {
+              "id": "second_wind",
+              "rank": 2
+            },
+            {
+              "id": "perfect_motion",
+              "rank": 1
+            }
+          ]
+        }
+      },
+      "why": "⛔ SNG-479 / R27 (ERIK 2026-09-02) — the pole-mastery craft, split along RANK, not sect. The revert log names the seam: \"OUTLAST (Second Wind, Long Haul, Soma r1–r2) and EXECUTE (Perfect Motion, Whole Act, Soma r3).\" A holder receives what they ACTUALLY HAD — r1–2 never had the strike, and granting it hands them something unearned; r3 had both halves, and taking one is a loss they did not choose. ⚠️ THE RESULTING RANKS ARE AN INFERENCE AND THEY ARE WRITTEN HERE SO YOU CAN SEE THEM: a soma-3 holder finished second_wind's two ranks and is beginning perfect_motion. Change them here — the engine reads this, it does not decide it."
+    },
+    "long_haul": {
+      "to": "second_wind",
+      "why": "SNG-479 merge — 'folk-Soma', absorbed."
+    },
+    "whole_act": {
+      "to": "perfect_motion",
+      "why": "SNG-479 merge."
+    },
+    "the_whole_act": {
+      "to": "perfect_motion",
+      "why": "SNG-479 merge."
+    },
+    "total_focus": {
+      "to": "unmoving_mind",
+      "why": "SNG-457 merge — three ranks that were one sentence with intensifiers."
+    },
+    "noesis": {
+      "to": "CUT",
+      "why": "⛔ SNG-463 — pole-mastery skill describing a capacity, duplicating its own sect. Mystery never authored."
+    },
+    "logos": {
+      "to": "CUT",
+      "why": "⛔ SNG-463 — same. Tagged `damage` 2d6 while its text damaged nothing."
+    },
+    "the_clear_path": {
+      "to": "solved_route",
+      "why": "SNG-450 merge — three navigation skills at identical stats."
+    },
+    "the_derived_route": {
+      "to": "solved_route",
+      "why": "SNG-450 merge."
+    },
+    "the_patterned_way": {
+      "to": "solved_route",
+      "why": "SNG-450 merge."
+    },
+    "the_correct_protocol": {
+      "to": "physicians_tome",
+      "why": "SNG-450 merge — two restore skills at identical stats."
+    },
+    "the_restored_form": {
+      "to": "physicians_tome",
+      "why": "SNG-450 merge."
+    },
+    "the_correct_restoration": {
+      "to": "physicians_tome",
+      "why": "SNG-461 rename."
+    },
+    "the_stated_case": {
+      "to": "case_closed",
+      "why": "SNG-450 merge."
+    },
+    "the_necessary_case": {
+      "to": "case_closed",
+      "why": "SNG-450 merge — did the same job at a third the energy."
+    },
+    "the_inescapable_conclusion": {
+      "to": "case_closed",
+      "why": "⛔ SNG-464 — absorbed as rank 2. Three skills, one idea."
+    },
+    "the_closing_argument": {
+      "to": "case_closed",
+      "why": "⛔ SNG-464 — absorbed as rank 3."
+    },
+    "the_standing_figure": {
+      "to": "named_exclusion",
+      "why": "SNG-453 merge — both 'set a persistent figure that excludes a named category'."
+    },
+    "the_warding_mark": {
+      "to": "named_exclusion",
+      "why": "SNG-453 merge."
+    },
+    "the_binding_figure": {
+      "to": "named_exclusion",
+      "why": "SNG-457 — collapsed into r3."
+    },
+    "the_axiom_holds": {
+      "to": "unbroken_thread",
+      "why": "SNG-453 merge — both 'keep functioning under pressure'."
+    },
+    "the_long_form": {
+      "to": "unbroken_thread",
+      "why": "SNG-453 merge."
+    },
+    "the_shared_room": {
+      "to": "mind_meld",
+      "why": "SNG-461 rename."
+    },
+    "the_names_they_answer_to": {
+      "to": "names_of_power",
+      "why": "SNG-461 rename."
+    },
+    "the_single_stroke": {
+      "to": "convergent_strike",
+      "why": "SNG-463 rename."
+    },
+    "the_true_name": {
+      "to": "names_of_power",
+      "why": "⛔ SNG-453 — replaced. Was L5, one rank, no roll, 'a hold on its very being'."
+    },
+    "the_proof": {
+      "to": "CUT",
+      "why": "⛔ SNG-450 — L5 capstone, one rank, 13 energy, produced an argument."
+    },
+    "the_followed_thread": {
+      "to": "CUT",
+      "why": "⛔ SNG-450 — pure foresee/reveal; the GM would have supplied it."
+    },
+    "the_held_form": {
+      "to": "CUT",
+      "why": "⛔ SNG-457 — 'the thing it represents persists longer'. Unbounded, no roll."
+    },
+    "the_proved_position": {
+      "to": "case_closed",
+      "why": "⛔ SNG-457 — indefensible against Case Closed once its impossible half was removed."
+    },
+    "the_set_stone": {
+      "to": "thingcraft",
+      "why": "SNG-481 merge — duplicated Thingcraft's own r2 by name and effect."
+    },
+    "the_plain_fact": {
+      "to": "reduction",
+      "why": "SNG-481 merge."
+    },
+    "the_weight_of_presence": {
+      "to": "set_word",
+      "why": "SNG-485 merge — both L2, social, `command`, same r3 claim."
+    },
+    "the_rivercraft": {
+      "to": "rivercraft",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_glimmer_script": {
+      "to": "glimmer_script",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_formcraft": {
+      "to": "formcraft",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_running_engine": {
+      "to": "running_engine",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_radiant_ground": {
+      "to": "radiant_ground",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_spanwork": {
+      "to": "spanwork",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_death_ward": {
+      "to": "death_ward",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_ignore_me": {
+      "to": "ignore_me",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_psychic_lance": {
+      "to": "psychic_lance",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_quiet_the_room": {
+      "to": "quiet_the_room",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_scatter": {
+      "to": "scatter",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_borrowed_hour": {
+      "to": "borrowed_hour",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_wither": {
+      "to": "wither",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_harmonic_voice": {
+      "to": "harmonic_voice",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_bark_and_briar": {
+      "to": "bark_and_briar",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_unbroken_practice": {
+      "to": "unbroken_practice",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_quickening": {
+      "to": "quickening",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_stillcraft": {
+      "to": "stillcraft",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_advance": {
+      "to": "advance",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_edge_of_the_map": {
+      "to": "edge_of_the_map",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_open_material": {
+      "to": "open_material",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_umbracraft": {
+      "to": "umbracraft",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_road_ahead": {
+      "to": "road_ahead",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_thingcraft": {
+      "to": "thingcraft",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_descent": {
+      "to": "descent",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_probability_tilt": {
+      "to": "probability_tilt",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_foreclose": {
+      "to": "foreclose",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_shadowed_mending": {
+      "to": "shadowed_mending",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_calm_word": {
+      "to": "calm_word",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_attunement": {
+      "to": "attunement",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_drawn_ascent": {
+      "to": "drawn_ascent",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_dawn_surgery": {
+      "to": "dawn_surgery",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_enginecraft": {
+      "to": "enginecraft",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_the_cut_thread": {
+      "to": "the_cut_thread",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_convergent_strike": {
+      "to": "convergent_strike",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_shatterpoint": {
+      "to": "shatterpoint",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_afterimage": {
+      "to": "afterimage",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_raised_road": {
+      "to": "raised_road",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_last_lament": {
+      "to": "last_lament",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_safe_ground": {
+      "to": "safe_ground",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_disarm": {
+      "to": "disarm",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_blaze_wall": {
+      "to": "blaze_wall",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_the_long_odds_come_in": {
+      "to": "the_long_odds_come_in",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_sonic_resonance": {
+      "to": "sonic_resonance",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_kept_fire": {
+      "to": "kept_fire",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_true_ground": {
+      "to": "true_ground",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_hourcraft": {
+      "to": "hourcraft",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_shadow_work": {
+      "to": "shadow_work",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_wake_the_line": {
+      "to": "wake_the_line",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_long_road": {
+      "to": "long_road",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_shaped_body": {
+      "to": "shaped_body",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_unlit_step": {
+      "to": "unlit_step",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_churns_gift": {
+      "to": "churns_gift",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_shroud": {
+      "to": "shroud",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_greenlore": {
+      "to": "greenlore",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_resonant_shield": {
+      "to": "resonant_shield",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_carrying_call": {
+      "to": "carrying_call",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_the_unsurvivable_fact": {
+      "to": "the_unsurvivable_fact",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_sustained_chord": {
+      "to": "sustained_chord",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_stretched_hour": {
+      "to": "stretched_hour",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_dim": {
+      "to": "dim",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_harbored_flame": {
+      "to": "harbored_flame",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_mind_meld": {
+      "to": "mind_meld",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_unshadow": {
+      "to": "unshadow",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_sustained_order": {
+      "to": "sustained_order",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_my_reality": {
+      "to": "my_reality",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_soul_stare": {
+      "to": "soul_stare",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_last_fault": {
+      "to": "last_fault",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_carried_green": {
+      "to": "carried_green",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_never_there": {
+      "to": "never_there",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_quieting": {
+      "to": "quieting",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_fresh_horizon": {
+      "to": "fresh_horizon",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_shortfold": {
+      "to": "shortfold",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_worth_the_work": {
+      "to": "worth_the_work",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_laid_ground": {
+      "to": "laid_ground",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_masterwork": {
+      "to": "masterwork",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_edge": {
+      "to": "edge",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_boundary_stone": {
+      "to": "boundary_stone",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_better_story": {
+      "to": "better_story",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_kept_distance": {
+      "to": "kept_distance",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_stand": {
+      "to": "stand",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_command_engine": {
+      "to": "command_engine",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_falsecraft": {
+      "to": "falsecraft",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_waygate": {
+      "to": "waygate",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_old_roads": {
+      "to": "old_roads",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_choir_sustains": {
+      "to": "choir_sustains",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_last_unmaking": {
+      "to": "last_unmaking",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_broker_truce": {
+      "to": "broker_truce",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_line_of_light": {
+      "to": "line_of_light",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_kept_flame": {
+      "to": "kept_flame",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_darksight": {
+      "to": "darksight",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_truename_order": {
+      "to": "truename_order",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_graftlife": {
+      "to": "graftlife",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_force_the_move": {
+      "to": "force_the_move",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_self_mending_work": {
+      "to": "self_mending_work",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_wayfinding": {
+      "to": "wayfinding",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_unmake_seal": {
+      "to": "unmake_seal",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_wrong_target": {
+      "to": "wrong_target",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_daybreak_mantle": {
+      "to": "daybreak_mantle",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_voice_of_the_flock": {
+      "to": "voice_of_the_flock",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_meaning_engine": {
+      "to": "meaning_engine",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_drumline_stride": {
+      "to": "drumline_stride",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_carrying_note": {
+      "to": "carrying_note",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_held_repair": {
+      "to": "held_repair",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_beacon_thread": {
+      "to": "beacon_thread",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_ruinwork": {
+      "to": "ruinwork",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_prism_ward": {
+      "to": "prism_ward",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_last_form": {
+      "to": "last_form",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_root_that_holds": {
+      "to": "root_that_holds",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_consumed_wound": {
+      "to": "consumed_wound",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_clarity_lens": {
+      "to": "clarity_lens",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_soldiers_hand": {
+      "to": "soldiers_hand",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_riding_order": {
+      "to": "riding_order",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_wildcraft": {
+      "to": "wildcraft",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_true_making": {
+      "to": "true_making",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_light_borne": {
+      "to": "light_borne",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_pathos": {
+      "to": "pathos",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_verity": {
+      "to": "verity",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_unfaltering_light": {
+      "to": "unfaltering_light",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_held_truth": {
+      "to": "held_truth",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_kept_breath": {
+      "to": "kept_breath",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_steady_soul": {
+      "to": "steady_soul",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_shortened_road": {
+      "to": "shortened_road",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_perfect_motion": {
+      "to": "perfect_motion",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_sun_seal": {
+      "to": "sun_seal",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_the_lucky_fall": {
+      "to": "the_lucky_fall",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_wellspring": {
+      "to": "wellspring",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_made_truth": {
+      "to": "made_truth",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_radiant_lance": {
+      "to": "radiant_lance",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_built_way": {
+      "to": "built_way",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_tinkers_hand": {
+      "to": "tinkers_hand",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_whats_at_hand": {
+      "to": "whats_at_hand",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_ask_the_dead": {
+      "to": "ask_the_dead",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_false_door": {
+      "to": "false_door",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_stepped_span": {
+      "to": "stepped_span",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_latticework": {
+      "to": "latticework",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_set_to_rights": {
+      "to": "set_to_rights",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_mediators_tongue": {
+      "to": "mediators_tongue",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_radiance": {
+      "to": "radiance",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_ascent_path": {
+      "to": "ascent_path",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_hollow_that_holds": {
+      "to": "hollow_that_holds",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_shadowstep": {
+      "to": "shadowstep",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_quick_work": {
+      "to": "quick_work",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_false_stance": {
+      "to": "false_stance",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_palework": {
+      "to": "palework",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_blend_in": {
+      "to": "blend_in",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_names_of_power": {
+      "to": "names_of_power",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_thrown_edge": {
+      "to": "thrown_edge",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_the_way_out": {
+      "to": "the_way_out",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_quicken_the_ground": {
+      "to": "quicken_the_ground",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_stopped_breath": {
+      "to": "stopped_breath",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_false_trail": {
+      "to": "false_trail",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_mend_device": {
+      "to": "mend_device",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_second_wind": {
+      "to": "second_wind",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_ongoing_work": {
+      "to": "ongoing_work",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_deduced_strike": {
+      "to": "deduced_strike",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_steady_hands": {
+      "to": "steady_hands",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_undoing_word": {
+      "to": "undoing_word",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_light_bending": {
+      "to": "light_bending",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_drawn_bow": {
+      "to": "drawn_bow",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_harbor": {
+      "to": "harbor",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_false_target": {
+      "to": "false_target",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_latticespeak": {
+      "to": "latticespeak",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_hunters_strike": {
+      "to": "hunters_strike",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_carried_dark": {
+      "to": "carried_dark",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_long_dark": {
+      "to": "long_dark",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_the_attended_end": {
+      "to": "the_attended_end",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_long_reach": {
+      "to": "long_reach",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_makecraft": {
+      "to": "makecraft",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_known_price": {
+      "to": "known_price",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_mechanical_defense": {
+      "to": "mechanical_defense",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_unbroken_thread": {
+      "to": "unbroken_thread",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_kept_vigil": {
+      "to": "kept_vigil",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_loose_limbed": {
+      "to": "loose_limbed",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_staunch": {
+      "to": "staunch",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_given_time": {
+      "to": "given_time",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_deep_works": {
+      "to": "deep_works",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_hearthbinding": {
+      "to": "hearthbinding",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_glasswork": {
+      "to": "glasswork",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_ascent": {
+      "to": "ascent",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_quiet_step": {
+      "to": "quiet_step",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_perfect_veil": {
+      "to": "perfect_veil",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_step_between": {
+      "to": "step_between",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_makers_eye": {
+      "to": "makers_eye",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_beastfriend": {
+      "to": "beastfriend",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_wild_flowering": {
+      "to": "wild_flowering",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_hold_the_aperture": {
+      "to": "hold_the_aperture",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_memory_palace": {
+      "to": "memory_palace",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_held_line": {
+      "to": "held_line",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_reforging": {
+      "to": "reforging",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_shielding_light": {
+      "to": "shielding_light",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_green_road": {
+      "to": "green_road",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_case_closed": {
+      "to": "case_closed",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_weapon_at_hand": {
+      "to": "weapon_at_hand",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_kindle": {
+      "to": "kindle",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_raised_thing": {
+      "to": "raised_thing",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_long_watch": {
+      "to": "long_watch",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_catch_as_catch_can": {
+      "to": "catch_as_catch_can",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_levelled_crossbow": {
+      "to": "levelled_crossbow",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_useful_lie": {
+      "to": "useful_lie",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_unmaking_of_walls": {
+      "to": "unmaking_of_walls",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_sound_repair": {
+      "to": "sound_repair",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_last_light": {
+      "to": "last_light",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_physicians_tome": {
+      "to": "physicians_tome",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_chord_of_mending": {
+      "to": "chord_of_mending",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_skydancer": {
+      "to": "skydancer",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_grey_road": {
+      "to": "grey_road",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_light_well": {
+      "to": "light_well",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_cleansing_light": {
+      "to": "cleansing_light",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_shielding_word": {
+      "to": "shielding_word",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_opened_moment": {
+      "to": "opened_moment",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_stillness_field": {
+      "to": "stillness_field",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_glass_work": {
+      "to": "glass_work",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_sun_coax": {
+      "to": "sun_coax",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_far_step": {
+      "to": "far_step",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_resonant_anchor": {
+      "to": "resonant_anchor",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_shared_weight": {
+      "to": "shared_weight",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_ki_wield": {
+      "to": "ki_wield",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_thin_place": {
+      "to": "thin_place",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_numenwork": {
+      "to": "numenwork",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_draw_down": {
+      "to": "draw_down",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_stonewise": {
+      "to": "stonewise",
+      "why": "renamed — naming SOP §31 stripped the article from the id as well as the name"
+    },
+    "the_lucky_fall": {
+      "to": "lucky_fall",
+      "why": "renamed — naming SOP §31; ⛔ MISSED BY THE ORIGINAL PASS, caught by CCode 2026-08-16"
+    },
+    "feeling_road": {
+      "to": "the_true_feeling",
+      "why": "⛔ FOLDED 2026-08-24 (Erik). `feeling_road` duplicated `the_true_feeling` r2 'The Feeling Trail', which already tracked feelings across ground at L1. Its `travel` capability was folded into Feeling-Sense r3, which now reads a history and walks it to its source. ⚠️ A character holding feeling_road maps to the_true_feeling."
+    }
+  },
+  "_note2": "⚠️ EXPANDED. My first map was built from the REVERT LOGS, which only cover abilities I explicitly cut or merged. ⛔ THE DE-ARTICLE PASS TOUCHED 829 NAMES ACROSS THE WHOLE CORPUS and most of those ids were never in a revert log — so the map is now derived from LIVE IDS instead: for every live `X`, `the_X` maps to it.",
+  "_prunedSenseCull_20260823": "⛔ 32 rows REMOVED (Aevi). SNG-454's sense cull was REVERSED by Erik; the rows outlived the decision. Every one mapped a LIVE craft onto `attunement`, which does not exist — wiring this map as a save migration would have emptied working kits (deathsense, body_read, echo_memory + 29). ⚠️ A rename map is a record of a decision, so when the decision is reversed the rows are not stale, they are ARMED. Removed: address_sense, appetite_sense, body_read, chaos_sense, deathsense, echo_memory, echo_sense, fault_sense, hour_sense, keen_appraisal, lifesense, lightsense, mech_sense, mind_read_folk, numen_sense, order_sense, pattern_sense, prism_sight, read_the_fight, read_the_room, see_the_made_thing, stone_read, storykeeper, the_kept_hour, the_measuring_eye, the_plain_seeing, the_read_hunger, the_read_want, the_true_feeling, the_true_figure, tremor_sense, way_sense"
 }

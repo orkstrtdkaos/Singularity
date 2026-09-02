@@ -384,7 +384,7 @@ export const GM_CONTEXT = [
     build: (env) => livingWorldForGM(env.character, { locationId: env.character.currentLocationId, day: env.time.day }) },
   { key: "assignmentsDetail", builder: "assignments.assignmentsForGM (SNG-191 §4)", carries: ["delegated commitments the world is honouring while away"],
     reachedBy: "the player putting a known person in charge of ongoing work (delegateOps)", spec: "§4", views: ["turn"],
-    build: (env) => assignmentsForGM(env.character.worldState) },
+    build: (env) => assignmentsForGM(env.character.worldState, { ladder: env.rules?.subAttributeLadder || null, character: env.character }) },
   { key: "latentArcsDetail", builder: "latentarcs.arcsForGM (SNG-191 §7)", carries: ["latent arcs that have SURFACED — the world's own agenda, now in front of the player"],
     reachedBy: "the generation turn surfacing an arc that fomented on the world count", spec: "§7", views: ["turn"],
     build: (env) => arcsForGM(env.character.worldState) },

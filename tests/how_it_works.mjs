@@ -2677,6 +2677,49 @@ console.log("\n── §43 · SNG-369 · the 63 authored braids have a reader �
   const app43 = readFileSync(join(root, "app.js"), "utf8");
   check("§43: …and the mint path passes it", /recipeFor\([^)]*combinationRecipes/.test(app43));
 }
+/* ═════ §44 — `traditionV2` IS A STORED COPY OF A DERIVED VALUE ═════ */
+// ⛔ 21 crafts carry `traditionV2`, and the field atlas reports it DARK — no reader anywhere.
+// ⚠️ THE FIX IS NOT TO GIVE IT ONE. It holds the DOMAIN NAME ("Body"), which `domainOfTradition` already
+// derives from the craft's `tradition` ("somatic" → "Body"). Measured: all 21 agree with the derivation.
+//
+// ⛔ SO IT IS THIS PROJECT'S MOST-REPEATED DEFECT — a stored copy of a derived value — and wiring a reader
+// would make the copy AUTHORITATIVE, which is worse than leaving it dark. The danger is DRIFT: move a
+// tradition between domains and 21 stored strings go stale in silence, and the next person to find the
+// dark field wires it to the stale value.
+//
+// ✅ THIS GATE IS THE ALTERNATIVE TO BOTH. Leave the field, read nothing from it, and assert it still
+// agrees. A latent defect becomes a monitored one.
+console.log("\n── §44 · traditionV2 is a stored copy, and it still agrees ──");
+{
+  const TR44 = await import("../engine/traditions.js");
+  const v2_44 = (() => { try { return rj("content/packs/core/rules/traditions_v2.json"); } catch { return null; } })();
+  const idx44 = TR44.buildTraditionIndex(rj("content/packs/core/rules/traditions.json"), v2_44);
+  const carriers = [];
+  for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json")))
+    for (const a of (rj(`content/packs/core/abilities/${f}`).abilities || []))
+      if (a.traditionV2 !== undefined) carriers.push(a);
+
+  check("§44: the field still has carriers (or this gate is vacuous)", carriers.length >= 20, `${carriers.length}`);
+  const drifted = carriers.filter(a => TR44.domainOfTradition(TR44.traditionOf(a, idx44), idx44) !== a.traditionV2);
+  check(`§44: all ${carriers.length} are a stored copy that still agrees with the derivation`,
+    drifted.length === 0,
+    drifted.slice(0, 5).map(a => `${a.id}: stored ${a.traditionV2} vs derived ${TR44.domainOfTradition(TR44.traditionOf(a, idx44), idx44)}`).join(" · "));
+
+  // ⚠️ AND NOBODY MAY QUIETLY MAKE THE COPY AUTHORITATIVE. If a reader appears, this goes red and someone
+  // has to argue for it out loud — because at that point the derivation and the copy are two answers to
+  // one question, and the codebase has been down that road.
+  const eng44 = ["app.js", ...readdirSync(join(root, "engine")).filter(f => f.endsWith(".js")).map(f => `engine/${f}`)];
+  const readers = [];
+  for (const f of eng44) {
+    const src = readFileSync(join(root, f), "utf8").split(/\r?\n/);
+    src.forEach((line, i) => {
+      const code = line.replace(/\/\/.*$/, "");
+      if (/\btraditionV2\b/.test(code)) readers.push(`${f}:${i + 1}`);
+    });
+  }
+  check("§44: …and nothing reads it, which is correct — the derivation is the answer",
+    readers.length === 0, readers.join(", "));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

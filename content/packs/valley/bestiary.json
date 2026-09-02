@@ -537,6 +537,31 @@
    "aggressorKind": "driven",
    "_authored_20260829": "⛔ ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED — we've moved past that original idea, IT CAN HURT UNDEAD NOW.' ⚠️ THE RULING NEEDED A CREATURE OR IT WAS THEORETICAL: the bestiary had 26 entries and NOT ONE UNDEAD, so §48's whole undeath model had nothing to run on. ✅ THIS ENTRY CARRIES BOTH HALVES OF THE INVERSION AND NEEDS NO NEW MACHINERY: `decay: absorb` (already works — absorb returns negative damage, so rot mends it) and `vitality: vulnerable` (works NOW, because healing crafts carry a type as of today). ⛔ A `heal` lands on it through the ordinary damage path and hurts. ⚠️ `feeling: immune` IS THE SAME BLIND SPOT `break_the_line` AND `the_known_name` DECLARE — nothing without a self can be frightened, which is why a Marcher's terror and an Ashwarden's driven dead are natural counters to each other. ⛔ NARROWED, NOT AN AFTERLING: the design laws exclude persons from the bestiary, and an Afterling is a person. This is the end state that ISN'T.",
    "_feelingRemoved_20260830": "⛔ `feeling: immune` REMOVED, AND THAT IS THE FIX — NOT ADDING IT TO THE OTHER SEVEN SELFLESS CREATURES. ⚠️ I OWED 'creatures that should declare it and do not' and the answer turned out to be the opposite of what I expected: `hasSelf: false` on the CLASS now does this job for every selfless creature at once, through `selfBlocked`. ✅ CCode's own note is the argument: 'THE CLASS IS RESOLVED, NEVER STORED ON THE SHEET — a copied `hasSelf` would be a stored copy of a derived value, WHICH IS THE FAILURE THIS PROJECT HAS COMMITTED MOST.' ⛔ MY `feeling: immune` WAS EXACTLY THAT COPY, written before the property existed. Adding seven more would have put one fact in nine places. ⚠️ WHAT IS LOST AND WHY IT IS ACCEPTABLE: `feeling: immune` also blocked feeling DAMAGE from a craft that does not declare `requiresSelf` — e.g. `grief_strike`. That is a real question (should grief wound a thing with no self?) and it belongs to `requiresSelf` on those crafts, not to a per-creature flag on one of eight."
+  },
+  {
+   "id": "the_gathering",
+   "class": "narrowed_dead",
+   "tier": "regional",
+   "name": "the gathering",
+   "affinity": {
+    "decay": "absorb",
+    "cold": "immune",
+    "vitality": "vulnerable",
+    "living": "vulnerable",
+    "psychic": "resist"
+   },
+   "look": "⛔ NOTHING IS THERE AND THE SPACE IS OCCUPIED. A cold that pools where a floor is level. Breath that hangs a half-second too long. ⚠️ IT IS SEEN BY WHAT IT HAS TAKEN — the animals gone from a valley, the well that stopped, a room where nobody will sit. Where it has fed long enough there is a shape to it, thin and unfinished, wearing pieces of the endings it ate: a posture, a favoured hand, the way somebody used to stand. ⛔ NONE OF THOSE ARE ITS OWN.",
+   "danger": "⛔ IT GETS STRONGER AND IT NEVER STOPS. Every ending that goes unattended within its reach is taken up — not the person, who is already gone, but WHAT WAS LEFT UNFINISHED IN THE CROSSING. ⚠️ A well-attended country starves it. A battlefield nobody walked, a plague nobody sat with, a road where people die alone — it thickens on those. ⛔ A MENDING LAID ON IT BURNS IT, the same inversion as the narrowed. ⚠️ AND IT IS UNTOUCHED BY ANYTHING AIMED AT A SELF: terror, a true name, a named reckoning all pass through, because the postures it wears were borrowed and there is nobody behind them.",
+   "pressures": [
+    "KNOW (⛔ THE HARD PART IS FINDING IT — it is a place that is wrong before it is a thing that is there)",
+    "RESTORE (a mending is a weapon here)",
+    "UNMAKE (⚠️ scatter what it has gathered; the pieces do not reassemble into anyone)",
+    "WARD (⛔ THE REAL COUNTER — attend the endings in its reach and it starves. Slow, and it is the only cure)"
+   ],
+   "clean": "⚠️ IT DOES NOT DIE, IT DISPERSES. What it had gathered lets go at once — a room's worth of unfinished endings arriving all together, which is not violent and is very hard to be present for.",
+   "aggressorKind": "driven",
+   "_authored_20260902": "⛔ ERIK 2026-09-02: 'I DO want a creature that gets stronger and feeds off of unattended deaths.' ⚠️ IT IS THE DIRECT CONSEQUENCE OF R29 — if attending preserves personhood across the crossing, then an unattended ending LEAVES SOMETHING BEHIND, and this is what eats it. ✅ NO NEW MACHINERY: `decay: absorb` and `vitality: vulnerable` carry §48's inversion exactly as `the_narrowed` does. ⛔ AND IT IS NOT AN AFTERLING AND NEVER BECOMES ONE — the design laws exclude persons, and this has no self, no want, and no grievance. It wears postures it took and there is nobody behind them. ⚠️ THE WARD PRESSURE IS THE POINT: the counter is not a fight, it is a TRADITION DOING ITS JOB. An Ashwarden who attends the endings in a valley starves it out over months. ➡️ That makes `the_attended_end` matter at world scale and gives 22 non-striking traditions a way in, per design law 3.",
+   "_notTheStillwaterThing": "⬜ THIS IS NOT THE THING UNDER STILLWATER'S TROUBLE. Erik left that unruled ('I'm not sure about the thing under the post'). ⚠️ This is a CLASS that exists in the world; that is a specific, and it is still open."
   }
  ]
 }

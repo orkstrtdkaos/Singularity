@@ -5457,6 +5457,210 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-30, AND IT FOLLOWS A CORRECTION I HAVE HAD MULTIPLE TIMES: 'VALLEYCRAFT JUST MEANS IT'S AVAILABLE TO ANYONE — BEASTFRIEND IS A LIFE CRAFT.' ⚠️ `valley_craft` is a FOOTHILL with parents stillhold 0.4 / wright 0.3 / ROOTKIN 0.3, authored in `foothills.json`, and I had called it 'the folk collection, not a tradition' hours earlier. ✅ SO `beastfriend` WAS ALREADY LIFE'S — and this craft is what a Rootkin does that a farmhand cannot."
+  },
+  {
+   "id": "rootward",
+   "name": "Rootward",
+   "levelReq": 1,
+   "tier": 1,
+   "energyCost": 4,
+   "powerSystem": "metaphysical",
+   "attribute": "practical",
+   "axes": {
+    "death_life": 0.5
+   },
+   "functions": [
+    "ward",
+    "shield"
+   ],
+   "narrationHints": "Green comes up between the thing and the harm. Not a wall — a thicket that grew there on purpose and will not be reasoned with.",
+   "description": "Rootkin interposing-craft. What is rooted does not move, and the Rootkin ask it to be somewhere.",
+   "notFor": "Shielding across open stone or water; stopping what has already landed; hurrying growth in a place with nothing living in it.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Rootward",
+     "grants": "Call growth up between a person and one source of harm — thorn, root, bark. It turns blows and turns fire once.",
+     "cannot": "Needs something living in the ground already. It grows where it can, not where you point.",
+     "functions": [
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Thicketed",
+     "grants": "A doorway, a path, a wounded line — several people, or one held through a long assault.",
+     "cannot": "What you grow STAYS. The road is closed after, and someone has to live with that.",
+     "functions": [
+      "ward",
+      "shield"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Standing Grove",
+     "grants": "A place harm does not enter. It keeps growing after you stop attending it.",
+     "cannot": "⚠ IT DOES NOT KNOW WHO YOUR FRIENDS ARE. A grove set to keep something out keeps it out afterward, and it has no way to be told the war ended.",
+     "functions": [
+      "ward",
+      "shield"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "conditions"
+     ]
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "SURVIVE"
+   ],
+   "tradition": "rootkin",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "ward",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "scope": 2,
+    "wardTypes": [
+     "physical",
+     "decay"
+    ]
+   },
+   "intensity": {
+    "conserve": "a thornbreak, briefly, for one",
+    "surge": "the standing grove; IT KEEPS GROWING AFTER YOU STOP"
+   },
+   "bounds": [
+    {
+     "text": "needs something living already in the ground",
+     "class": "hard"
+    },
+    {
+     "text": "what you grow STAYS — the road is closed after",
+     "class": "cost"
+    },
+    {
+     "text": "⚠ a grove cannot be told the war ended",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/survive action that grows cover between someone and harm. Rated 5 of 10 across a scope of 2 for about four hours.",
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
+  },
+  {
+   "id": "green_passage",
+   "name": "Green Passage",
+   "levelReq": 1,
+   "tier": 1,
+   "energyCost": 4,
+   "powerSystem": "metaphysical",
+   "attribute": "practical",
+   "axes": {
+    "death_life": 0.4
+   },
+   "functions": [
+    "move",
+    "sustain"
+   ],
+   "narrationHints": "The undergrowth opens ahead of you and closes behind. You are not faster; the ground simply stops arguing.",
+   "description": "Rootkin travelling-craft. The green lets its own through, and feeds them on the way.",
+   "notFor": "Open ground; built roads; carrying someone who has not been given passage; moving anything the green would not have let pass on its own.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Green Passage",
+     "grants": "Move through dense living country as though it were open — and eat from it as you go, without foraging time.",
+     "cannot": "Only where the green is thick. It opens for YOU; anyone with you keeps up on their own legs.",
+     "functions": [
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Given Way",
+     "grants": "Bring the party through, and the green closes behind you.",
+     "cannot": "⚠ CLOSING BEHIND YOU IS NOT A DECISION YOU GET TO REVISIT — anyone following, friend included, finds thicket.",
+     "functions": [
+      "move",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Long Green",
+     "grants": "Days of travel through country that should have taken weeks, fed the whole way.",
+     "cannot": "⚠ THE GREEN REMEMBERS BEING USED. Take the long passage often enough and the country begins expecting something back.",
+     "functions": [
+      "move",
+      "sustain"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration"
+     ]
+    }
+   ],
+   "challengeTypes": [
+    "SURVIVE",
+    "TRAVEL"
+   ],
+   "tradition": "rootkin",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "movement",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 8,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "a short passage, yourself only",
+    "surge": "the long green; THE COUNTRY BEGINS EXPECTING SOMETHING BACK"
+   },
+   "bounds": [
+    {
+     "text": "only where living country is thick",
+     "class": "hard"
+    },
+    {
+     "text": "⚠ the way closes behind you — friends following find thicket",
+     "class": "cost"
+    },
+    {
+     "text": "the green remembers being used",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A survive/travel action that opens a way through living country and feeds you on it. Rated 4 of 10 for about eight hours.",
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

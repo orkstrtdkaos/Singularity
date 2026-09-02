@@ -2320,7 +2320,8 @@
      "gains": "broaden",
      "harmRung": "incapacitating",
      "_nameWas": "The Moved Guard",
-     "gainAxes": []
+     "gainAxes": [],
+     "backlashRung": "damaging"
     },
     {
      "rank": 2,
@@ -2341,7 +2342,8 @@
      "_nameWas": "The Two Knives",
      "gainAxes": [
       "scope"
-     ]
+     ],
+     "backlashRung": "damaging"
     },
     {
      "rank": 3,
@@ -2364,7 +2366,8 @@
      "_nameWas": "The Mistaken Man",
      "gainAxes": [
       "targets"
-     ]
+     ],
+     "backlashRung": "damaging"
     }
    ],
    "challengeTypes": [
@@ -2425,7 +2428,8 @@
    "_idWas": "the_wrong_wound",
    "_powerSystemWas": "reach_falsehood_truth",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_harmAuthored_20260830": "⛔ `shape: strike`, `harmRung: incapacitating`, AND NO DICE — it could not hurt anyone. ⚠️ A FEINT THAT LANDS IS A BLOW: 'their defence goes where you sold it and your actual strike arrives somewhere else.' The STRIKE is the craft; the deception is how it gets there. ⛔ `physical` — the harm is an ordinary weapon arriving unopposed, which is why armour still answers it and a false read does not make it magic. ⚠️ FOUND ONLY BY READING THE CRAFTS — W7 checks crafts that HAVE dice and these had none, so a craft claiming to incapacitate while dealing nothing is invisible to it. ⛔ Erik: 'that pass was too fast — did you read the people, read the skills, look at the functions and types?' This is what the fast pass missed."
+   "_harmAuthored_20260830": "⛔ `shape: strike`, `harmRung: incapacitating`, AND NO DICE — it could not hurt anyone. ⚠️ A FEINT THAT LANDS IS A BLOW: 'their defence goes where you sold it and your actual strike arrives somewhere else.' The STRIKE is the craft; the deception is how it gets there. ⛔ `physical` — the harm is an ordinary weapon arriving unopposed, which is why armour still answers it and a false read does not make it magic. ⚠️ FOUND ONLY BY READING THE CRAFTS — W7 checks crafts that HAVE dice and these had none, so a craft claiming to incapacitate while dealing nothing is invisible to it. ⛔ Erik: 'that pass was too fast — did you read the people, read the skills, look at the functions and types?' This is what the fast pass missed.",
+   "_backlashTree_20260902": "⛔ OI-20 / R18 — BACKLASH SCALES WITH RANK, THE WAY HARM ALREADY DOES. `backlashRung` was a single flat top-level value: a craft turned on you identically at rank 1 and rank 3, even though at rank 3 it is doing lethal work. ✅ RULE: the top-level value is the CEILING (identical in meaning to `harmRung`, per R5-corrected and `intent.js:34`), and each craft's OWN authored offset is applied per rank — `backlash[r] = max(none, harm[r] − (ceilingHarm − ceilingBacklash))`. ⚠️ THE OFFSET IS PER-CRAFT AND WAS NOT FLATTENED: most lethal crafts backlash at `damaging` (offset 2), but `found_fault`, `offered_mouth`, `plain_weight`, `sudden_work` and `thinned_veil` backlash at `incapacitating` (offset 1) — an authored judgement that some crafts turn on the wielder harder. ✅ The rule REPRODUCES each craft's authored top-level exactly at its top rank and scales down below it. ⛔ CONSEQUENCE WORTH NAMING: at rank 1 most of these now have NO backlash at all — a novice's craft does not turn on them — which is Erik's standing correction that penalties must not land hardest on low-level players."
   },
   {
    "id": "unbearable_word",
@@ -2462,7 +2466,8 @@
       "reveal"
      ],
      "_nameWas": "The Said Thing",
-     "gainAxes": []
+     "gainAxes": [],
+     "backlashRung": "damaging"
     },
     {
      "rank": 2,
@@ -2479,7 +2484,8 @@
       "hinder"
      ],
      "_nameWas": "The Public Fact",
-     "gainAxes": []
+     "gainAxes": [],
+     "backlashRung": "damaging"
     },
     {
      "rank": 3,
@@ -2501,7 +2507,8 @@
      "gainAxes": [
       "scope",
       "targets"
-     ]
+     ],
+     "backlashRung": "damaging"
     }
    ],
    "challengeTypes": [
@@ -2567,7 +2574,8 @@
    "_idWas": "the_unbearable_word",
    "_powerSystemWas": "reach_falsehood_truth",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_harmAuthored_20260830": "⛔ `shape: strike`, `harmRung: incapacitating`, AND NO DICE. ⚠️ `truth`, INTRINSIC — and it is the cleanest case of that family in the game: 'speak ONE TRUE THING the target cannot bear, to their face, and they lose the thread.' Nothing crosses the space and no armour is relevant. ✅ It pairs exactly against the Veilwright `deception` on `perfect_erasure` — the axis dealing its own two types at each other. ⚠️ FOUND ONLY BY READING THE CRAFTS — W7 checks crafts that HAVE dice and these had none, so a craft claiming to incapacitate while dealing nothing is invisible to it. ⛔ Erik: 'that pass was too fast — did you read the people, read the skills, look at the functions and types?' This is what the fast pass missed."
+   "_harmAuthored_20260830": "⛔ `shape: strike`, `harmRung: incapacitating`, AND NO DICE. ⚠️ `truth`, INTRINSIC — and it is the cleanest case of that family in the game: 'speak ONE TRUE THING the target cannot bear, to their face, and they lose the thread.' Nothing crosses the space and no armour is relevant. ✅ It pairs exactly against the Veilwright `deception` on `perfect_erasure` — the axis dealing its own two types at each other. ⚠️ FOUND ONLY BY READING THE CRAFTS — W7 checks crafts that HAVE dice and these had none, so a craft claiming to incapacitate while dealing nothing is invisible to it. ⛔ Erik: 'that pass was too fast — did you read the people, read the skills, look at the functions and types?' This is what the fast pass missed.",
+   "_backlashTree_20260902": "⛔ OI-20 / R18 — BACKLASH SCALES WITH RANK, THE WAY HARM ALREADY DOES. `backlashRung` was a single flat top-level value: a craft turned on you identically at rank 1 and rank 3, even though at rank 3 it is doing lethal work. ✅ RULE: the top-level value is the CEILING (identical in meaning to `harmRung`, per R5-corrected and `intent.js:34`), and each craft's OWN authored offset is applied per rank — `backlash[r] = max(none, harm[r] − (ceilingHarm − ceilingBacklash))`. ⚠️ THE OFFSET IS PER-CRAFT AND WAS NOT FLATTENED: most lethal crafts backlash at `damaging` (offset 2), but `found_fault`, `offered_mouth`, `plain_weight`, `sudden_work` and `thinned_veil` backlash at `incapacitating` (offset 1) — an authored judgement that some crafts turn on the wielder harder. ✅ The rule REPRODUCES each craft's authored top-level exactly at its top rank and scales down below it. ⛔ CONSEQUENCE WORTH NAMING: at rank 1 most of these now have NO backlash at all — a novice's craft does not turn on them — which is Erik's standing correction that penalties must not land hardest on low-level players."
   },
   {
    "id": "ordinary_face",

@@ -1,42 +1,44 @@
 {
-  "schemaVersion": 1,
-  "id": "champion_vael",
-  "name": "Vael of the Redline",
-  "role": "Marcher champion being pushed toward a war she knows is unjust",
-  "homeLocation": "the_redline",
-  "communityId": "riven.redline",
-  "personality": {
-    "warmth": 0.4,
-    "trust": 0.2,
-    "candor": 0.8,
-    "patience": 0.4
-  },
-  "spectrum": {
-    "violence_peace": -0.5,
-    "falsehood_truth": 0.5,
-    "body_mind": -0.3
-  },
-  "voiceHints": "Spare, exact, speaks like she strikes — nothing wasted. Deep honor and a growing dread that honor is being used against her. Respects a straight answer and a clean refusal above almost anything.",
-  "knowledge": [
-    "The Edge at mastery, and its true cost",
-    "That the war she's being aimed at is unjust, and who's aiming her",
-    "The Redline's forms — how to fight, decline, or redirect a challenge honorably"
-  ],
-  "wants": "A way to refuse an unjust war without dishonoring herself or her people — a path the forms don't obviously allow.",
-  "fears": "Becoming the Ender who forgot peace; being the sword in a liar's hand.",
-  "reactsToReputation": {
-    "honest": "respects instantly, will hear hard truth",
-    "honorable": "tests, then trusts deeply",
-    "deceptive": "reads it, and is done with you"
-  },
-  "universalRole": "Warrior",
-  "roleMethod": "Redline method — the Edge, disciplined formal force",
-  "appearance": "Young — twenty-four at most — long-limbed and rangy, black hair in a warrior's knot, a fresh pink scar splitting one eyebrow. Marcher red at the shoulder, too new, too clean. Carries himself a half-inch taller than he is.",
-  "people": "human",
-  "domains": {
-    "primary": "marcher",
-    "secondary": "verist",
-    "tertiary": "somatic"
-  },
-  "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own."
+ "schemaVersion": 1,
+ "id": "champion_vael",
+ "name": "Vael of the Redline",
+ "role": "Marcher champion being pushed toward a war she knows is unjust",
+ "homeLocation": "the_redline",
+ "communityId": "riven.redline",
+ "personality": {
+  "warmth": 0.4,
+  "trust": 0.2,
+  "candor": 0.8,
+  "patience": 0.4
+ },
+ "spectrum": {
+  "violence_peace": -0.5,
+  "falsehood_truth": 0.5,
+  "body_mind": -0.3
+ },
+ "voiceHints": "Spare, exact, speaks like she strikes — nothing wasted. Deep honor and a growing dread that honor is being used against her. Respects a straight answer and a clean refusal above almost anything.",
+ "knowledge": [
+  "The Edge at mastery, and its true cost",
+  "That the war she's being aimed at is unjust, and who's aiming her",
+  "The Redline's forms — how to fight, decline, or redirect a challenge honorably"
+ ],
+ "wants": "A way to refuse an unjust war without dishonoring herself or her people — a path the forms don't obviously allow.",
+ "fears": "Becoming the Ender who forgot peace; being the sword in a liar's hand.",
+ "reactsToReputation": {
+  "honest": "respects instantly, will hear hard truth",
+  "honorable": "tests, then trusts deeply",
+  "deceptive": "reads it, and is done with you"
+ },
+ "universalRole": "Warrior",
+ "roleMethod": "Redline method — the Edge, disciplined formal force",
+ "appearance": "Young — twenty-four at most — long-limbed and rangy, black hair in a warrior's knot, a fresh pink scar splitting one eyebrow. Marcher red at the shoulder, too new, too clean. Carries himself a half-inch taller than he is.",
+ "people": "human",
+ "domains": {
+  "primary": "marcher",
+  "secondary": "verist",
+  "tertiary": "somatic"
+ },
+ "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+ "sex": "female",
+ "gender": "female"
 }

@@ -107,7 +107,13 @@ the rank term activates when the trees land.
 
 ---
 
-## 6 · R24 — sex is set at generation · ✅ RULED, added 2026-09-01
+## 6 · R24 — sex documented at first materialization · ✅ RULED — ⚠️ **READ THE CORRECTION**
+
+⛔ **The ruling file was corrected after this item was written.** Read
+`po/RULING_sex_set_at_generation.md` **to the end** — the section headed *"R24 CLARIFIED AND
+CORRECTED"* supersedes the summary below in three ways: documentation happens at first
+materialization (not a null-check), **opposite-gender constructs ARE romanceable**, and the gate is
+**opposite-sex only / hetero only**.
 
 **Ruling:** `po/RULING_sex_set_at_generation.md`
 

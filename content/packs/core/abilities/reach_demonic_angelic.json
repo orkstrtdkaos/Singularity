@@ -5503,13 +5503,13 @@
    ],
    "narrationHints": "The wound closes correctly, in order, the way a form is completed. It does not feel like grace. It feels like being processed, and it works.",
    "description": "Seraphic mending-craft. The Orders run an apparatus and the apparatus is genuinely good at this.",
-   "notFor": "Mending what you have not assessed; mending the unwilling; mending faster than the order allows — ⛔ it will not skip a step to save someone, and the Orders consider that the point.",
+   "notFor": "Mending mid-exchange — ⛔ it takes a full turn in which you do nothing else; mending the unwilling; mending what you have not examined.",
    "tree": [
     {
      "rank": 1,
      "name": "Administered Mercy",
      "grants": "Close a wound properly — clean, ordered, and it stays closed. Slower than a battlefield wants and better than a battlefield gets.",
-     "cannot": "IT TAKES THE TIME IT TAKES. You cannot hurry the order, and someone bleeding out on the wrong side of that is a thing the Orders have made peace with.",
+     "cannot": "⛔ IT TAKES YOUR WHOLE TURN AND YOU DO NOTHING ELSE. The order does not compress, and someone bleeding out on the wrong side of that is a thing the Orders have made peace with.",
      "functions": [
       "heal"
      ],
@@ -5589,9 +5589,10 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/survive action that restores health. It rolls 1d6+1 It affects 1 target.",
+   "plainly": "A social/survive action that restores health. It rolls 1d6+1 It affects 1 target. Takes your full turn.",
    "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific.",
-   "_t5Fix_20260901": "⛔ T5 — RANK IS MASTERY. The first authoring put a NEW COST at rank 3 on every craft (Erik: 'that was quite the cavalier authoring'). ⚠️ The gate missed it — its SELFTAX regex targets self-harm phrasings and these were world-consequence costs. ✅ Rank 3 now LIFTS the rank-1 limitation; the consequence moved to `intensity.surge`, which the player CHOOSES."
+   "_t5Fix_20260901": "⛔ T5 — RANK IS MASTERY. The first authoring put a NEW COST at rank 3 on every craft (Erik: 'that was quite the cavalier authoring'). ⚠️ The gate missed it — its SELFTAX regex targets self-harm phrasings and these were world-consequence costs. ✅ Rank 3 now LIFTS the rank-1 limitation; the consequence moved to `intensity.surge`, which the player CHOOSES.",
+   "_t7Fix_20260901": "⛔ T7 — SECOND-TURN TEST, applied after Erik: 'make sure the way you wrote these is clearly something a player would WANT to do.' ⚠️ FAILURES FOUND: `hallowed_ground` was passive (stand still) and narrowly conditional (shadow+appetite only) — now it names a CONCRETE effect (one rung lower), widens to four ward types, and the wielder ACTS NORMALLY while it holds. `thin_step`'s precondition was GM-owned and unknowable — the player can now always tell whether the step is there BEFORE spending. `administered_mercy`'s 'it takes the time it takes' was atmosphere, not adjudicable — now it costs a full turn, stated."
   },
   {
    "id": "hungry_step",

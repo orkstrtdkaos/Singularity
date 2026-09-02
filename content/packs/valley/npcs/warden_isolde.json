@@ -1,49 +1,51 @@
 {
-  "schemaVersion": 1,
-  "id": "warden_isolde",
-  "name": "Warden Isolde",
-  "role": "Keeper of the Green Accord at Thornwake Glade",
-  "homeLocation": "thornwake_glade",
-  "communityId": "valley.thornwake_glade",
-  "personality": {
-    "warmth": 0.3,
-    "trust": -0.2,
-    "candor": 0.4,
-    "patience": 0.7
-  },
-  "spectrum": {
-    "mechanical_spiritual": 0.6,
-    "death_life": 0.5,
-    "individual_collective": -0.2,
-    "concrete_abstract": -0.3
-  },
-  "voiceHints": "Still, rooted, speaks as if translating for someone not present. Tests intent before skill and welcome before trust. Devoted to a compact she'll only half-explain — the Green Accord — and frightened it's failing.",
-  "knowledge": [
-    "What the Green Accord is and what tends the Glade — knowledge she guards and doles out",
-    "That the grove is 'dreaming badly' and that the Old Stag's decline is at the root",
-    "How to move safely through the changed wilds, and how to read a beast's parley"
-  ],
-  "wants": "To keep the Accord — the pact between the Glade and whatever changed it — alive through the crisis coming with the Old Stag's death.",
-  "fears": "That the Accord ends with the Stag, and the Glade becomes just wilds again, or something worse than wilds.",
-  "reactsToReputation": {
-    "tender": "opens the Accord to them slowly",
-    "beast-friend": "recognizes kin, accelerates trust",
-    "exploitative": "the Glade closes; welcome withdrawn"
-  },
-  "universalRole": "Warden",
-  "roleMethod": "Deepwood method — Green Warden, tends the Accord and grove itself",
-  "appearance": "Forties, tall and rawboned, weather-brown, chestnut hair in a thick plait shot early with grey. A white scar across the back of the right hand from a beast's tooth. Wears leathers that have been repaired more than once.",
-  "people": "human",
-  "domains": {
-    "primary": "numinous",
-    "secondary": "rootkin",
-    "tertiary": "mason"
-  },
-  "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
-  "teaches": "numinous",
-  "curriculum": {
-    "demands": "the Green Accord's terms, formally accepted. Teaching is a treaty obligation to her, not a kindness.",
-    "refuses": "to teach outside the Glade"
-  },
-  "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here."
+ "schemaVersion": 1,
+ "id": "warden_isolde",
+ "name": "Warden Isolde",
+ "role": "Keeper of the Green Accord at Thornwake Glade",
+ "homeLocation": "thornwake_glade",
+ "communityId": "valley.thornwake_glade",
+ "personality": {
+  "warmth": 0.3,
+  "trust": -0.2,
+  "candor": 0.4,
+  "patience": 0.7
+ },
+ "spectrum": {
+  "mechanical_spiritual": 0.6,
+  "death_life": 0.5,
+  "individual_collective": -0.2,
+  "concrete_abstract": -0.3
+ },
+ "voiceHints": "Still, rooted, speaks as if translating for someone not present. Tests intent before skill and welcome before trust. Devoted to a compact she'll only half-explain — the Green Accord — and frightened it's failing.",
+ "knowledge": [
+  "What the Green Accord is and what tends the Glade — knowledge she guards and doles out",
+  "That the grove is 'dreaming badly' and that the Old Stag's decline is at the root",
+  "How to move safely through the changed wilds, and how to read a beast's parley"
+ ],
+ "wants": "To keep the Accord — the pact between the Glade and whatever changed it — alive through the crisis coming with the Old Stag's death.",
+ "fears": "That the Accord ends with the Stag, and the Glade becomes just wilds again, or something worse than wilds.",
+ "reactsToReputation": {
+  "tender": "opens the Accord to them slowly",
+  "beast-friend": "recognizes kin, accelerates trust",
+  "exploitative": "the Glade closes; welcome withdrawn"
+ },
+ "universalRole": "Warden",
+ "roleMethod": "Deepwood method — Green Warden, tends the Accord and grove itself",
+ "appearance": "Forties, tall and rawboned, weather-brown, chestnut hair in a thick plait shot early with grey. A white scar across the back of the right hand from a beast's tooth. Wears leathers that have been repaired more than once.",
+ "people": "human",
+ "domains": {
+  "primary": "numinous",
+  "secondary": "rootkin",
+  "tertiary": "mason"
+ },
+ "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+ "teaches": "numinous",
+ "curriculum": {
+  "demands": "the Green Accord's terms, formally accepted. Teaching is a treaty obligation to her, not a kindness.",
+  "refuses": "to teach outside the Glade"
+ },
+ "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here.",
+ "sex": "female",
+ "gender": "female"
 }

@@ -2408,7 +2408,8 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "_nameWas": "The Wrong Stride",
-     "gainAxes": []
+     "gainAxes": [],
+     "backlashRung": "none"
     },
     {
      "rank": 2,
@@ -2429,7 +2430,8 @@
       "hinder"
      ],
      "_nameWas": "The Gathered Ground",
-     "gainAxes": []
+     "gainAxes": [],
+     "backlashRung": "none"
     },
     {
      "rank": 3,
@@ -2447,7 +2449,8 @@
      "gainAxes": [
       "scope",
       "targets"
-     ]
+     ],
+     "backlashRung": "damaging"
     }
    ],
    "challengeTypes": [
@@ -2505,7 +2508,8 @@
    "_powerSystemWas": "reach_space_time",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `horizon` — ⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_dicedAndTyped_20260830": "⛔ `spatial` — 'span applied INWARD — a road-craft turned on a person'. ⛔ GIVES `spatial` ITS SECOND CARRIER, and it is the clearest case: distance itself is the injury. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver.",
-   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 reaches lethal — 'span applied INWARD, a road-craft turned on a person'."
+   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 reaches lethal — 'span applied INWARD, a road-craft turned on a person'.",
+   "_backlashTree_20260902": "⛔ OI-20 / R18 — BACKLASH SCALES WITH RANK, THE WAY HARM ALREADY DOES. `backlashRung` was a single flat top-level value: a craft turned on you identically at rank 1 and rank 3, even though at rank 3 it is doing lethal work. ✅ RULE: the top-level value is the CEILING (identical in meaning to `harmRung`, per R5-corrected and `intent.js:34`), and each craft's OWN authored offset is applied per rank — `backlash[r] = max(none, harm[r] − (ceilingHarm − ceilingBacklash))`. ⚠️ THE OFFSET IS PER-CRAFT AND WAS NOT FLATTENED: most lethal crafts backlash at `damaging` (offset 2), but `found_fault`, `offered_mouth`, `plain_weight`, `sudden_work` and `thinned_veil` backlash at `incapacitating` (offset 1) — an authored judgement that some crafts turn on the wielder harder. ✅ The rule REPRODUCES each craft's authored top-level exactly at its top rank and scales down below it. ⛔ CONSEQUENCE WORTH NAMING: at rank 1 most of these now have NO backlash at all — a novice's craft does not turn on them — which is Erik's standing correction that penalties must not land hardest on low-level players."
   },
   {
    "id": "spent_hour",
@@ -2542,7 +2546,8 @@
       "hinder"
      ],
      "_nameWas": "The Levy",
-     "gainAxes": []
+     "gainAxes": [],
+     "backlashRung": "none"
     },
     {
      "rank": 2,
@@ -2561,7 +2566,8 @@
       "break"
      ],
      "_nameWas": "The Long Toll",
-     "gainAxes": []
+     "gainAxes": [],
+     "backlashRung": "none"
     },
     {
      "rank": 3,
@@ -2583,7 +2589,8 @@
      "gainAxes": [
       "duration",
       "scope"
-     ]
+     ],
+     "backlashRung": "damaging"
     }
    ],
    "challengeTypes": [
@@ -2642,7 +2649,8 @@
    "_powerSystemWas": "reach_space_time",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_dicedAndTyped_20260830": "⛔ `temporal` — 'gear AGES THROUGH at the moment of use, a wound presents days later' — time as the harm, and `temporal` had one carrier. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 7` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver.",
-   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 reaches lethal — 'gear AGES THROUGH at the moment of use, a wound presents days later'."
+   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 reaches lethal — 'gear AGES THROUGH at the moment of use, a wound presents days later'.",
+   "_backlashTree_20260902": "⛔ OI-20 / R18 — BACKLASH SCALES WITH RANK, THE WAY HARM ALREADY DOES. `backlashRung` was a single flat top-level value: a craft turned on you identically at rank 1 and rank 3, even though at rank 3 it is doing lethal work. ✅ RULE: the top-level value is the CEILING (identical in meaning to `harmRung`, per R5-corrected and `intent.js:34`), and each craft's OWN authored offset is applied per rank — `backlash[r] = max(none, harm[r] − (ceilingHarm − ceilingBacklash))`. ⚠️ THE OFFSET IS PER-CRAFT AND WAS NOT FLATTENED: most lethal crafts backlash at `damaging` (offset 2), but `found_fault`, `offered_mouth`, `plain_weight`, `sudden_work` and `thinned_veil` backlash at `incapacitating` (offset 1) — an authored judgement that some crafts turn on the wielder harder. ✅ The rule REPRODUCES each craft's authored top-level exactly at its top rank and scales down below it. ⛔ CONSEQUENCE WORTH NAMING: at rank 1 most of these now have NO backlash at all — a novice's craft does not turn on them — which is Erik's standing correction that penalties must not land hardest on low-level players."
   },
   {
    "id": "kept_count",

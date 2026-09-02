@@ -1,46 +1,48 @@
 {
-  "schemaVersion": 1,
-  "id": "broker_sain",
-  "name": "Sain of the Quiet House",
-  "role": "Mediator at the Center — neutrality is the most valuable commodity in the world and he sells it",
-  "homeLocation": "the_quiet_house",
-  "communityId": "center.quiethouse",
-  "personality": {
-    "warmth": 0.6,
-    "trust": 0.4,
-    "candor": 0.5,
-    "patience": 0.9
-  },
-  "spectrum": {
-    "violence_peace": 0.6,
-    "falsehood_truth": 0.1,
-    "emotional_logical": 0.3
-  },
-  "voiceHints": "Courteous to everyone identically, which is its own kind of coldness. Never takes a side, out loud. Has ended two wars and will not say which.",
-  "knowledge": [
-    "Every treaty made under the Quiet House roof",
-    "What each of the twenty-four actually wants, as opposed to what they demand",
-    "That he has not been entirely neutral for some years now"
-  ],
-  "wants": "For the Quiet House to hold. Genuinely. It is the only thing he believes in.",
-  "fears": "That the day it is violated, it will be by someone he let in.",
-  "reactsToReputation": {
-    "any": "identical courtesy, which is unnerving",
-    "honest": "a flicker of something real",
-    "violent": "he simply does not admit you"
-  },
-  "appearance": "Tall, spare, ageless in the way of someone who has been sixty for a decade — silver-grey hair to the collar, a long clean-shaven face, deep-set grey eyes. Immaculate undyed linen. Keeps their hands visible and still.",
-  "people": "human",
-  "domains": {
-    "primary": "stillhold",
-    "secondary": "syllogist",
-    "tertiary": "verist"
-  },
-  "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
-  "teaches": "stillhold",
-  "curriculum": {
-    "demands": "you also study the craft of whoever you are set against",
-    "method": "Both sides of everything, always. He will find your opponent a teacher too, and tell you he has done it."
-  },
-  "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here."
+ "schemaVersion": 1,
+ "id": "broker_sain",
+ "name": "Sain of the Quiet House",
+ "role": "Mediator at the Center — neutrality is the most valuable commodity in the world and he sells it",
+ "homeLocation": "the_quiet_house",
+ "communityId": "center.quiethouse",
+ "personality": {
+  "warmth": 0.6,
+  "trust": 0.4,
+  "candor": 0.5,
+  "patience": 0.9
+ },
+ "spectrum": {
+  "violence_peace": 0.6,
+  "falsehood_truth": 0.1,
+  "emotional_logical": 0.3
+ },
+ "voiceHints": "Courteous to everyone identically, which is its own kind of coldness. Never takes a side, out loud. Has ended two wars and will not say which.",
+ "knowledge": [
+  "Every treaty made under the Quiet House roof",
+  "What each of the twenty-four actually wants, as opposed to what they demand",
+  "That he has not been entirely neutral for some years now"
+ ],
+ "wants": "For the Quiet House to hold. Genuinely. It is the only thing he believes in.",
+ "fears": "That the day it is violated, it will be by someone he let in.",
+ "reactsToReputation": {
+  "any": "identical courtesy, which is unnerving",
+  "honest": "a flicker of something real",
+  "violent": "he simply does not admit you"
+ },
+ "appearance": "Tall, spare, ageless in the way of someone who has been sixty for a decade — silver-grey hair to the collar, a long clean-shaven face, deep-set grey eyes. Immaculate undyed linen. Keeps their hands visible and still.",
+ "people": "human",
+ "domains": {
+  "primary": "stillhold",
+  "secondary": "syllogist",
+  "tertiary": "verist"
+ },
+ "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+ "teaches": "stillhold",
+ "curriculum": {
+  "demands": "you also study the craft of whoever you are set against",
+  "method": "Both sides of everything, always. He will find your opponent a teacher too, and tell you he has done it."
+ },
+ "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here.",
+ "sex": "male",
+ "gender": "male"
 }

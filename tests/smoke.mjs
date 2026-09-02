@@ -19067,8 +19067,26 @@ await (async () => {
       CB.isDowned(sprig) === false
       && (CB.downEntity(sprig, { why: "dropped by keening", day: 7 }), CB.isDowned(sprig) === true));
     const standing = CB.standingContributions(allies);
-    check("CCODE-247: …and the side SEES what went out of the fight with them — a downed healer is a lost capability",
-      !standing.families.includes("RESTORE") && standing.lost.some(l => l.id === "sprig" && l.contributions.includes("RESTORE")));
+    // ⛔ THE FIXTURE STOPPED ISOLATING RESTORE, AND THE CLAIM WAS WRITTEN AGAINST THE FIXTURE. This asserted
+    // `!families.includes("RESTORE")` — true only while sprig was the ONLY restorer in the ally set. Aevi’s
+    // assistTags sweep gave `adept_sona` the tag `tend`, so the side keeps RESTORE when sprig goes down and
+    // the check went red on correct content.
+    //
+    // ⚠️ THE INTENT WAS NEVER ABOUT RESTORE. It is: what the downed entity took with it is REPORTED, and a
+    // family only leaves the side when nobody standing still provides it. Both are asserted directly now, so
+    // no amount of tagging can move them.
+    {
+      const gone = standing.lost.find(l => l.id === "sprig");
+      const stillUp = allies.filter(a => !CB.isDowned(a)).flatMap(a => a.contributions || []);
+      const onlyHis = (gone?.contributions || []).filter(f => !stillUp.includes(f));
+      check("CCODE-247: …and the side SEES what went out of the fight with them — by name, with what they brought",
+        !!gone && (gone.contributions || []).length > 0,
+        JSON.stringify(gone || null));
+      check("CCODE-247: …a family only leaves the side when NOBODY standing still provides it",
+        onlyHis.every(f => !standing.families.includes(f))
+        && standing.families.every(f => stillUp.includes(f)),
+        `lost-alone ${JSON.stringify(onlyHis)} · standing ${JSON.stringify(standing.families)}`);
+    }
 
     // ⚠️ TARGETABLE IS STILL WIDER THAN ACTING — the entity that cannot answer is the one interception is for.
     check("CCODE-247: everyone present is targetable, including anyone who is down",

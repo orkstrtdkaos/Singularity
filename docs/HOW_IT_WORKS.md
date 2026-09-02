@@ -449,7 +449,7 @@ working papers; **this is the answer.**
 | 09-01 | ⛔ **TWO DOC FILES CARRIED UNRESOLVED MERGE-CONFLICT MARKERS ON MAIN** | `docs/HOW_IT_WORKS.md` and `docs/PLAYERS_GUIDE.md` both ended with literal `<<<<<<< HEAD` / `=======` / `>>>>>>> 17b21fbc` blocks around their *Last verified* footers — **committed, on origin, readable by anyone** | resolved both to the measured truth; scanned all **1562** tracked files and confirmed these were the only two | ⚠️ **NEITHER SUITE CAUGHT IT.** The docs are gated on their COUNTS, not on being well-formed — so a file can carry raw conflict syntax and still pass every assertion about what it claims |
 | 09-01 | ✅ **content documentation refreshed to the verified corpus: 419** | `HOW_IT_WORKS` said 414, `PLAYERS_GUIDE` said 423 (CCode's pre-drop number), `FIELD_REFERENCE` said 414 across six field rows. ⚠️ **All three were wrong in different directions at the same moment** | all set to **419**, verified at authenticated `api.github.com` rather than raw CDN | ⛔ **I HAD WRITTEN ZERO §0 ROWS TODAY** — nine crafts, four drops, two reworks, a 50-file sex/gender backfill, Marrow's romance authoring and a standing content policy, none of it logged. Erik asked whether I had been keeping the docs up and the answer was no |
 
-**Last verified: 2026-09-02 · v1.9.322 · 419 crafts.**
+**Last verified: 2026-09-02 · v1.9.323 · 419 crafts.**
 
 ---
 
@@ -776,6 +776,171 @@ eight bond bands building it a staff to inhabit.
 
 ---
 
+## 7b · WHAT A PARTY MEMBER CONTRIBUTES — and the one word that is read
+
+`contributionsOf` (`engine/combatants.js`) yields five families: **HARM · MARTIAL · PROTECT · RESTORE · KNOW.**
+
+⚠️ **THE TAXONOMY IS FULLY USED AT BAND SCALE AND BARELY USED AT PARTY SCALE.** `bandGaps` gives a unit a
+real consequence for lacking a warder (`PROTECT` missing → `lossMultiplier`); at party scale:
+
+| family | party-scale reader | what it does |
+|---|---|---|
+| **HARM** | `skill_battle.js` | the folded party's contribution to your blow |
+| **MARTIAL** | `targeting.js` | +3 to how badly a foe wants to hit you |
+| ⚠️ **RESTORE** | `targeting.js` | ⛔ **the foe's PRIORITY-TARGET selector — and nothing else** |
+| ⛔ **PROTECT** | **none** | nothing |
+| **KNOW** | `encounterFrame.js` | puzzle framing, not combat |
+
+⛔ **SO BEING THE PARTY'S RESTORER IS CURRENTLY WORSE THAN BEING A BYSTANDER.** The enemy comes for you
+first and you get nothing for it. ⚠️ **The loop is half-built and wired the punishing way round.**
+
+### ⛔ AND THE ONE FAMILY THAT IS READ IS A DEFAULT
+
+`contributionsOf` adds `HARM` to **every record that is not explicitly forbidden to strike**
+(`canStrike: false`, `incorporeal`, `noStrike`). So the folded-contribution filter —
+`folded.filter(f => f.contributions.includes("HARM"))` — **passes everyone**, and the fold counts a scholar
+exactly as it counts a swordmaster.
+
+✅ **`assistTags` IS THE FIELD THAT MAKES THIS MEAN SOMETHING**, and the first two authored sheets now carry
+them: Pell reads `RESTORE · KNOW · SHAPE · MOVE`, Veth reads `RESTORE · PROTECT · KNOW · MARTIAL`.
+
+⛔ **BUT BOTH STILL CARRY `HARM`, AND TAGS CANNOT FIX THAT.** The default fires for anyone not explicitly
+`canStrike: false`, so the fold's filter still passes a master smith as a striker. ⚠️ **Tagging someone a
+restorer does not stop them counting as one** — that needs a second statement, and whether a smith can
+swing is a content judgement rather than a wiring one.
+
+---
+
+## 7c · CAPACITY — THREE SCALES, NOT ONE LADDER (Erik, R25, 2026-09-02)
+
+⛔ **PARTY, DELEGATION AND BAND ARE GOVERNED DIFFERENTLY**, and collapsing them into one rapport ladder was
+the first thing this ruling rejected.
+
+| scale | what it is | governed by |
+|---|---|---|
+| **Party** | at your side. ⚠️ three act turn-by-turn, the rest are folded | `rapport`, **then** `presence` |
+| **Delegation** | in your service, absent, running what you would otherwise run | ⚠️ **a formula on level and rapport** |
+| **Band / unit** | what you move with when the party is not the frame | a separate system |
+
+### ✅ PARTY — rapport carries four places, presence carries the last two
+
+`rapport` 1 · 4 · 7 · 10 → the 1st through 4th place. **`presence` 10 → the 5th. `presence` 14 → the 6th.
+The cap is 6.**
+
+⚠️ **RAPPORT IS WHO WILL FOLLOW YOU; PRESENCE IS WHO WILL FOLLOW A NAME.** That split is the reason the
+ladder changes hands at four.
+
+⛔ **ENFORCED ON JOIN, NEVER RETROACTIVELY.** A save whose rapport no longer covers its company keeps every
+companion — Silas holds four against a rapport-7 ceiling of three and loses nobody.
+
+### ✅ DELEGATION — `floor(level / 10)`, plus one at rapport 14
+
+⚠️ **IT STARTS AT ZERO AND THAT IS THE POINT.** A level-5 character has nobody running holdings in their
+absence; the first delegate at level 10 is a threshold worth feeling.
+
+⛔ **IT COUNTS PEOPLE, NOT CHARGES.** A second errand for someone you already trust costs no new capacity —
+capacity is attention. **Refused on a new delegation, never taken away, and the refusal says why.**
+
+### ⛔ RAPPORT 18 AND 20 ARE STATES AND NEVER BECOME NUMBERS
+
+*"A household, and it holds without you"* (18) and *"they would not be talked out of it"* (20) change what
+your people **do** in your absence. ⛔ **They never count them and they never add to a roll** — the module
+comment this upholds: *"the moment a pregnant wife grants a combat bonus the game has said something false."*
+They reach the GM as prose, beside the work they govern.
+
+### ⚠️ A MILESTONE RANK MAY CARRY MORE THAN ONE EFFECT, AND ONE DOES
+
+`presence` 14 holds **both** the sixth party place and `unstewardedFloor`. ⛔ **The old shape stored one
+effect per rank**, so a second would have silently replaced the first.
+
+⛔ **AND THE TIEBREAK USED TO BE THE RANK NUMBER.** Once `presence` became a second writer of
+`companyCapacity`, `rapport` 10 tied `presence` 10 — and the winner fell out of **JSON key order**.
+⚠️ **Measured: reversing the order of `subs` in the ladder file turned 5 places into 4.** It now compares the
+effect's own magnitude, which is what *"the highest reached wins"* always meant.
+
+---
+
+## 7d · HOLDINGS — a place that answers to you
+
+A holding is `{ id, kind: "post"|"enterprise", name, locationId, steward, obligation, condition, claimedDay,
+history[] }`. **`condition` moves both ways** — `failing · strained · holding · thriving` — on the same four
+outcomes delegated work answers in.
+
+⚠️ **`presence` GOVERNS A PLACE YOU ARE NOT STANDING IN:** at 14 an unstewarded holding cannot fall below
+`holding`; at 18 the ceiling lifts and it can climb to `thriving` on your standing alone; at 20 the
+obligation inverts — the authority that granted the post draws standing from your holding of it.
+
+✅ **AND HOLDING TWO PLACES RAISES A FOLLOWING** even when your command slots are too few (`canRaiseBand`).
+That has been true since it was written and no screen said so until the Holdings tab.
+
+### ⛔ ASSIGNMENTS THAT DESCRIBE A PLACE ARE OFFERED, NEVER MINTED
+
+An old save can hold a post the holdings system never heard of — Silas's Raven's Home reconstruction existed
+only as an assignment string, so there was nothing for completion to delete because nothing was created.
+
+⚠️ **RECONCILE PROPOSES AND THE PLAYER DECIDES.** The step returns `offers`; it classifies nothing.
+⛔ **THE EVIDENCE FOR WHY IS IN THE SAVE ITSELF:** the charge *"Silas's named delegate to Mara Wells… holds
+the Millbrook crisis thread"* — a relationship that must never become a holding — **contains a real authored
+place name.** A location resolver finds Millbrook in the one assignment that must not have one.
+
+✅ **An offer is a standing question until answered.** A reconcile step runs exactly once, so offers persist
+on the character rather than living in a return value; answered is remembered, and a charge called *not a
+place* is never asked about again.
+
+### ✅ THE ACCEPTANCE IS A CELEBRATION; THE OFFER IS NOT
+
+⛔ **The offer is a question. The acceptance is the beat** — ✦ *RAVEN'S HOME IS YOURS* ✦, naming the place
+rather than the category, with a generated image the player can re-roll, rebuild and keep like any other.
+⚠️ **That ordering marks the player's DECISION, not the engine's detection.**
+
+**Both surfaces, doing different jobs:** the Holdings tab is where the player goes **looking**; the
+world-tick news, beside the delegated work, is where they are **told** — once, ever.
+
+---
+
+## 7e · BRAIDS TAKE ANY NUMBER OF PARENTS, AND ARITY IS HALF A RUNG (Erik, R26)
+
+`tier = min(5, round(maxRank + 1 + 0.5 × (components − 2)))`, **rounding half to even.**
+
+⚠️ **A TWO-BRAID IS UNCHANGED**, so every authored recipe keeps its tier — the term is zero at two.
+
+⛔ **ARITY ALONE DOES NOT PROMOTE YOU.** A three-braid of rank-3 parents lands at the same tier 4 as a pair;
+a four-braid reaches 5. **Depth gets you there in two components, breadth needs four**, and a triple of
+trivial crafts never out-tiers a hard pair.
+
+⚠️ **THE RULING SAID "ROUNDED" AND ITS TABLE DISAGREED WITH IT.** `Math.round` is half-**up** and produces 5
+where the table says 4. The ruling's own rationale settles it — half-to-even is the only mode under which
+*"arity alone does not promote you"* stays true. **The gate is the published table, cell by cell.**
+
+---
+
+## 7f · HOW AN OLD SAVE CATCHES UP
+
+`reconcile` runs versioned steps: a step whose version is at or below the save's `reconcileVersion` is
+skipped, so **each runs exactly once.** ⚠️ **Anything a step wants the player to see later must be written
+to the character, not returned.**
+
+**A craft that was renamed is reconnected**, never guessed at: 377 mapped ids, and a rewrite happens only
+when the map names the id **and** the target exists.
+
+### ⚠️ A RENAME TARGET MAY BE CONDITIONED (R27)
+
+- a **string** — 371 entries, the ordinary case
+- `{ byRank: { "1": […], "2": […] } }` — **what the holder actually had**
+- `{ bySect: {…}, default: "…" }` — which variant of a split craft is theirs
+
+⛔ **`soma` SPLIT ALONG ITS RANKS, NOT ITS SECT.** Ranks 1–2 were endurance and rank 3 was the strike, so a
+rank-2 holder receives `second_wind` only — granting the strike would hand them something unearned — and a
+rank-3 holder receives both halves, because taking one is a loss they did not choose.
+
+⛔ **ALL-OR-NOTHING:** if any named target is missing, the whole entry is skipped. **A half-migrated split is
+worse than an unmigrated one, because it looks finished.**
+
+⚠️ **THE OLD `+` FORM WAS NOT A MECHANISM.** `soma → "second_wind + perfect_motion"` was a plain string no
+lookup could resolve: it parsed, was silently skipped, and read as a migration.
+
+---
+
 ## 8 · HOW A FOE CHOOSES A TARGET
 
 **Default is `threat` — whoever is hurting it most.** ⛔ **Deliberately, because a foe that goes for what is
@@ -815,6 +980,22 @@ CONTENT, and two were.** Both halves are now stated, and both are asserted by `h
 - **summoned creature sheets** — from the caster's level plus the craft's `tierGap`, **and the roll: a crit
   raises something stronger than the craft promises**
 
+### ⚠️ AN AUTHORED SHEET BEATS A DERIVED ONE — and for a long time it could not
+
+`npcsheet.js` DERIVES a sheet for people nobody wrote down, from role, standing and what has been seen.
+⛔ **An authored sheet wins outright** — but until 2026-09-02 *"authored"* was a **caller-supplied option that
+nothing passed**, so the record itself was never consulted.
+
+⚠️ **A RECORD CARRYING ITS OWN `subAttributes` IS AN AUTHORED SHEET.** That is the signal, because it is
+the one thing derivation cannot produce; everything else is computed from a level.
+
+⛔ **AND AN AUTHORED NPC LISTS CRAFTS THE WAY A PLAYER DOES** — `abilities: [{ abilityId, level }]`, by id
+and with a rank. ⚠️ The old field, `skillsObserved`, took observed NAMES; **measured across every authored
+NPC, nobody has ever written one.** Both are read — dropping the old shape would be a migration disguised
+as a fix — but the authored one is read first.
+
+⚠️ **A FILE THAT IS NOT IN ITS PACK MANIFEST DOES NOT LOAD**, and is not schema-checked either. Two
+authored sheets in a row arrived unregistered, so the validator had never seen them.
 ### ⛔ AUTHORED ON PURPOSE — DO NOT SWEEP THESE
 
 - **tradition power-source mixes** — ⚠️ **24 authored rows in `power_sources.byTradition`, with Erik's
@@ -842,6 +1023,10 @@ ancestry.
 | ⛔ **no general TARGET AFFORDANCE** | a craft whose resolution needs a choice has no way to ask for one. **Three cases now**: `bringForward` needs a pick, `provoke` needs a target, a named-ally intercept needs one. ⚠️ Aevi's shape: a craft declares `needsTarget: "ally"\|"foe"\|"place"` and the declaration surface asks once. **Wants Erik and wants measuring across every craft that needs a pick** |
 | ⚠️ **the folded-casualty pool does not scale with the foe** | so a `downedEffect` authored on all nine companions cannot fire. Inherited from the contribution side |
 
+| ⛔ **party scale reads one contribution family, and it is a default** | `PROTECT` has no party-scale reader at all; `RESTORE` only makes you a target. §7b |
+| ⛔ **`HARM` is a DEFAULT, so the fold's filter passes everyone** | `contributionsOf` adds it to every record not explicitly `canStrike: false`. ⚠️ Tagging someone a restorer does not stop them counting as a striker — Pell is now tagged `RESTORE·KNOW` **and still carries HARM** |
+| ⚠️ **a holding has no income, defence, resource or capability** | the record carries none of them; `po/SPEC_holdings_estate.md` |
+| ⚠️ **`releaseHolding` is a bare filter** | it drops the record and says nothing — no obligation, no standing, no news. `po/SPEC_holding_release_transfer.md` |
 **Each gap above is asserted OPEN by `how_it_works.mjs`.** ⛔ **Closing one turns its check RED, which is
 the signal to edit this table.** A gap that quietly closes is a doc that quietly rots.
 
@@ -888,7 +1073,7 @@ reaches it** — and that gap has produced a specific, repeated defect described
 ### 12.1 · THE SHAPE — one document, one shell, 47 screens
 
 **Singularity is a single-page app with no build step and no framework.** `index.html` is 75 lines; the
-whole interface is **`app.js`, 14,289 lines**, and there are **47 `render*` functions** that paint into one
+whole interface is **`app.js`, 14,928 lines**, and there are **49 `render*` functions** that paint into one
 shell function, `chrome()`, called from **49 sites**. ⚠️ **THERE IS NO ROUTER AND NO SCREEN VARIABLE.**
 A screen does not "navigate" — it **calls the next render function directly**. `renderCompanionStep`'s
 done-button *is* the edge into `renderBioStep`.

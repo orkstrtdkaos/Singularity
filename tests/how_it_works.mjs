@@ -756,6 +756,21 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
   gap("§10: the map layer still draws rings instead of the authored layouts",
     !/local_layouts/.test(wmSrc) && !/local_layouts/.test(rd("app.js")), `${layouts.length} authored`);
 
+  // ⛔ THE FOUR GAPS THIS SESSION OPENED. Each is a claim §10 makes about being unfinished, so each goes
+  // RED when it is fixed — which is the signal to edit the table rather than let it quietly rot.
+  {
+    const sb = rd("engine/skill_battle.js").replace(/\/\*[\s\S]*?\*\//g, m => m.replace(/[^\n]/g, " ")).replace(/([^:])\/\/[^\n]*/g, "$1");
+    gap("§10: party scale still reads only HARM — PROTECT has no party-scale reader",
+      !/"PROTECT"/.test(sb) && (sb.match(/contributions/g) || []).length <= 1,
+      `PROTECT in skill_battle: ${/"PROTECT"/.test(sb)}, contributions reads: ${(sb.match(/contributions/g) || []).length}`);
+
+
+    const hold = rd("engine/holdings.js");
+    gap("§10: a holding still has no income, defence, resource or capability",
+      !/income|defence|defense|resources|capabilit/i.test(hold));
+    gap("§10: releaseHolding is still a bare filter with no cost, news or record",
+      !/export function releaseHolding/.test(hold) && /kind === "release"/.test(rd("app.js")));
+  }
   gap("§10: method (psionics / song / blade) is still recorded nowhere",
     abilities.every(a => a.method == null));
 }
@@ -770,7 +785,10 @@ console.log("\n── §12 · the interface — reachability, phases, apparatus 
   const appSrc = rd("app.js");
   const renderFns = [...appSrc.matchAll(/^\s*(?:async )?function (render[A-Za-z]+)/gm)].map(m => m[1]);
   check("§12: the doc's render-function count matches app.js",
-    doc.includes(`${renderFns.length} \`render*\` functions`) || doc.includes(`**47 \`render*\` functions**`),
+    // ⛔ THE `|| doc.includes("**47 …**")` FALLBACK IS GONE. It meant this gate passed for any real count
+    // as long as the doc still said 47 — so the doc drifted to 47-vs-49 render functions and 14,289-vs-14,928
+    // lines with the check green the whole way. ⚠️ A GATE WITH AN ESCAPE HATCH IS A GATE THAT CANNOT FAIL.
+    doc.includes(`${renderFns.length} \`render*\` functions`),
     `app.js has ${renderFns.length}`);
 
   // ⛔ REACHABILITY IS DERIVED, NOT LISTED. There is no router and no screen variable in this app — a screen
@@ -3260,8 +3278,16 @@ console.log("\n── §49 · the authored sheet actually arrives ──");
   {
     const CB49 = await import("../engine/combatants.js");
     const fams = CB49.contributionsOf(pell);
-    check("§49: ⚠️ GAP — Pell still has no assistTags, so she reads as HARM by default",
-      fams.length === 1 && fams[0] === "HARM", JSON.stringify(fams));
+    // ✅ CLOSED THE SAME DAY IT WAS RECORDED. Aevi tagged her, so the families are real now.
+    check("§49: her assistTags produce real families — she is a restorer and a knower, not a striker",
+      fams.includes("RESTORE") && fams.includes("KNOW"), JSON.stringify(fams));
+    // ⛔ BUT THE HARM DEFAULT STILL FIRES, AND THIS IS THE PART TAGS CANNOT FIX. `contributionsOf` adds
+    // HARM to every record not explicitly forbidden to strike, so the fold filter still passes a master
+    // smith as a striker. ⚠️ TAGGING SOMEONE A RESTORER DOES NOT STOP THEM COUNTING AS ONE — only
+    // `canStrike: false` does. Recorded as a gap in §10 rather than fixed here: whether a smith can swing
+    // is a content judgement, not a wiring one.
+    check("§49: ⛔ …and HARM is STILL on her, because the default fires regardless of tags",
+      fams.includes("HARM") && pell.canStrike === undefined, JSON.stringify(fams));
   }
 }
 /* ══════════ REPORT ══════════ */

@@ -1008,7 +1008,82 @@ export const CHARACTER_STEPS = [
     }
   },
   {
-    version: 30, id: "restore-generated-teacher-roles", playerFacing: true,
+    version: 32, id: "holdings-from-assignments", playerFacing: true,
+    // ⛔ SNG-358 — A PLACE THE PLAYER HAS HELD FOR THIRTY LEVELS THAT THE HOLDINGS SYSTEM HAS NEVER
+    // HEARD OF. Aevi reported that the Raven's Home post "will leave state when the reconstruction
+    // completes". ⚠️ IT IS WORSE THAN THAT: it is not in the holdings system at all. It exists only as an
+    // assignment string. There is nothing for completion to delete because nothing was ever created.
+    //
+    // ⛔ AND THIS STEP MINTS NOTHING. It returns `offers` — the channel the reconcile contract has
+    // carried since it was written ("GRANTS: surfaced, never auto-imposed") and that no step had ever
+    // produced. ⚠️ THE EVIDENCE FOR WHY IS IN SILAS'S OWN SAVE: the charge "Silas's named delegate to
+    // Mara Wells and the Hub committee water meeting" — which is a RELATIONSHIP and must never become a
+    // holding — contains the words "holds the Millbrook crisis thread". A location resolver finds a real
+    // authored place in the ONE assignment that must not have one. ⛔ AUTO-MINTING WOULD CREATE A POST AT
+    // MILLBROOK OUT OF A DELEGATION TO A PERSON.
+    //
+    // ⚠️ SO THIS CLASSIFIES NOTHING. Every assignment without a holding is offered for REVIEW, with a
+    // hint about what it looks like; the player decides. ⛔ A HINT IS NOT A FILTER — the trap charge is
+    // offered too, marked as reading like a person rather than a place, because a charge silently
+    // withheld is a decision made on the player's behalf by a heuristic that has already been wrong once.
+    //
+    // ⚠️ A `done` ASSIGNMENT IS OFFERED TOO, AND IS THE MOST IMPORTANT CASE — a finished reconstruction
+    // is exactly when the post should outlive the work that built it.
+    apply: (c, ctx) => {
+      const list = Object.values(c.worldState?.assignments || {});
+      if (!list.length) return {};
+      const already = new Set((c.holdings || []).map(h => h?.fromAssignment).filter(Boolean));
+      // ⛔ AND ONE THE PLAYER HAS ALREADY SAID IS NOT A PLACE IS NEVER ASKED ABOUT AGAIN. A question that
+      // keeps being asked after it has been answered is nagging, and DESIGN_celebrations §3 is explicit that
+      // anything firing more than once for the same subject is a bug that feels like one.
+      for (const id of c.holdingsNotPlaces || []) already.add(id);
+      const locations = ctx.content?.locations || {};
+      // ⚠️ LONGEST NAME FIRST, so "Raven's Home" is not shadowed by a shorter place whose name is a
+      // substring of it. Measured: 1 of Silas's 4 charges resolves to a real place, and a second
+      // resolves to one it must never be given.
+      const places = Object.values(locations)
+        .filter(l => l && l.name && String(l.name).length > 3)
+        .sort((a, b) => String(b.name).length - String(a.name).length);
+      // ⛔ THE ROLE AND STRUCTURE WORDS A POST IS DESCRIBED WITH. "warden of", "post", "keeper" describe a
+      // STANDING somewhere; "delegate to", "committee", "meeting" describe a person you answer to.
+      const placeWord = /\b(post|hall|forge|keep|watch|station|steading|holding|workshop|laboratory|warden|keeper|steward|garrison|outpost)\b/i;
+      const personWord = /\b(delegate to|committee|meeting|liaison|envoy|emissary)\b/i;
+      const offers = [];
+      for (const a of list) {
+        if (!a?.id || already.has(a.id)) continue;
+        const charge = String(a.charge || "");
+        if (!charge) continue;
+        const hit = places.find(l => charge.toLowerCase().includes(String(l.name).toLowerCase()));
+        const looksLikePlace = placeWord.test(charge);
+        const looksLikePerson = personWord.test(charge);
+        offers.push({
+          kind: "holding", assignmentId: a.id, npcId: a.npcId || null, npcName: a.npcName || null,
+          charge, status: a.status || "working",
+          // ⚠️ A SUGGESTION, NEVER A DECISION. The player names it — that is the part of the format that
+          // makes it land, and a place they have cared about for thirty levels should not arrive
+          // pre-named by a substring match.
+          suggestedLocationId: hit?.id || null, suggestedLocationName: hit?.name || null,
+          looksLikePlace, looksLikePerson,
+          why: looksLikePerson && !looksLikePlace
+            ? "This reads like a person you delegated to rather than a place you hold — probably not a holding."
+            : looksLikePlace
+              ? "This reads like a standing post — a place that would outlast the work."
+              : "Only you can say whether this is a place."
+        });
+      }
+      if (!offers.length) return {};
+      // ⛔ AND THEY ARE PERSISTED, BECAUSE A RECONCILE STEP RUNS EXACTLY ONCE. `reconcile()` skips any
+      // step whose version is at or below the save's `reconcileVersion`, so an offer returned and not
+      // acted on that same session would be gone FOREVER — the question would be asked once, silently,
+      // to a player who may not have been looking at the right screen.
+      // ⚠️ AN OFFER IS A STANDING QUESTION UNTIL IT IS ANSWERED. It lives on the character, not in the
+      // return value, and only accepting or dismissing it removes it.
+      c.holdingOffers = [...(c.holdingOffers || []).filter(o => !offers.some(n => n.assignmentId === o.assignmentId)), ...offers];
+      const n = offers.length;
+      return { offers, notes: [`${n} assignment${n === 1 ? "" : "s"} may describe a place you hold — review ${n === 1 ? "it" : "them"} in your holdings.`] };
+    }
+  },
+  {    version: 30, id: "restore-generated-teacher-roles", playerFacing: true,
     // SNG-355 §1c — ERIK'S SAVE NEEDS THIS AND CANNOT HEAL ITSELF. `recruit()` read `teaches` from the
     // AUTHORED catalog only, so a GENERATED NPC returned {} and the teacher role was dropped at the moment
     // of joining. He calls Veth-Ondra his teacher; his save says `teaches: null`.

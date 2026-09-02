@@ -394,6 +394,24 @@ export function clashNewsItem(line, { worldDay = null, arcId = null, regionId = 
 export function advanceHoldings({ character, now = Date.now(), ladder = null }) {
   const holdEffects = ladder ? milestoneEffects(ladder, character).live : null;
   const news = [];
+  // ⛔ DESIGN_celebrations §5.2 — WHERE THE PLAYER IS TOLD. Erik ruled BOTH surfaces and gave them
+  // different jobs: the character sheet is where the player goes LOOKING, and the world-tick news —
+  // beside "Cassiel Ord made progress on the Raven's Home" — is where they are TOLD.
+  //
+  // ⚠️ ONCE, EVER, AND THAT IS THE WHOLE REASON `announced` EXISTS. §3: anything that fires more than
+  // once for the same subject is a bug that feels like nagging, and a tick runs on world time — an offer
+  // re-announced every tick would become the loudest thing in the game.
+  //
+  // ⛔ AND IT IS NOT A CELEBRATION. §5: "The OFFER is not a celebration. It is a question." The beat that
+  // marks the player's decision is ✦ A PLACE IS YOURS ✦, and it fires on the ACCEPTANCE, not here.
+  const unannounced = (character?.holdingOffers || []).filter(o => o && !o.announced);
+  if (unannounced.length) {
+    const n = unannounced.length;
+    news.push(n === 1
+      ? `Work goes on in your name at a place that is not written down as yours. Your holdings can settle it.`
+      : `Work goes on in your name at ${n} places that are not written down as yours. Your holdings can settle it.`);
+    for (const o of unannounced) o.announced = true;
+  }
   // ⛔ A DEPARTED STEWARD LEAVES THE POST UNKEPT, and this is the line that makes SNG-355 cost something.
   // Departure stopped being a deletion there precisely so it could be OBSERVED here: a castellan who turns
   // back toward the March does not silently keep running your station from the road.

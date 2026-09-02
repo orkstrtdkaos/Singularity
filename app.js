@@ -118,7 +118,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.315";
+const APP_VERSION = "1.9.317";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5934,6 +5934,71 @@ function showCompanionPanel(companionId) {
 
 /** The mint MOMENT modal — reuses the .help-overlay surface (phone tap-away identical) with its own
  *  celebratory .braid-moment styling. Carries the optional rename control inline. */
+/** ⛔ THE CELEBRATION CARD — one implementation, every variant. DESIGN_celebrations §2 names the parts that
+ *  are load-bearing and they are all here: the KICKER (what kind of moment this is, before you read
+ *  anything), the PROVENANCE (what this came from — "a celebration with no history is an award; with
+ *  history it is an ACHIEVEMENT"), and the NAMING INVITATION, which is the part that makes it land: the
+ *  player is not shown a thing they received, they are invited to OWN it.
+ *
+ *  ⚠️ THE IDS STAY `braid-*` DELIBERATELY. They are what the existing close/rename wiring binds to, and
+ *  renaming them here would be a cosmetic change that breaks a working ceremony. The CLASS names carry the
+ *  styling; the ids are wiring. */
+function momentCard({ kicker, ariaLabel, image = null, imageAlt = "", regenKind = null, regenSubject = null,
+  provenance = "", arrow = "", name = "", finder = "", desc = "", extra = "",
+  renameValue = "", renamePlaceholder = "…or name it yourself", renameLabel = "Make it mine",
+  closeLabel = "Hold it close" } = {}) {
+  return `<div class="help-card braid-moment" role="dialog" aria-label="${esc(ariaLabel || kicker)}">
+    <div class="braid-moment-kicker">✦ ${kicker} ✦</div>
+    ${image ? `<img class="braid-moment-art" src="${esc(image)}" alt="${esc(imageAlt)}" data-lightbox="${esc(image)}"${regenKind ? ` data-regen-kind="${esc(regenKind)}"` : ""}${regenSubject ? ` data-regen-subject="${esc(regenSubject)}"` : ""}>` : ""}
+    <div class="braid-moment-parents">${provenance}</div>
+    <div class="braid-moment-arrow">${arrow}</div>
+    <h2 class="braid-moment-name" id="braid-name">${esc(name)}</h2>
+    ${finder ? `<div class="braid-moment-finder">${finder}</div>` : ""}
+    <p class="braid-moment-desc">${esc(desc)}</p>
+    ${extra}
+    <div class="braid-moment-rename">
+      <input id="braid-rename-in" maxlength="60" placeholder="${esc(renamePlaceholder)}" value="${esc(renameValue)}">
+      <button class="link-btn" id="braid-rename-go">${esc(renameLabel)}</button>
+    </div>
+    <div class="help-foot"><button class="btn" id="braid-moment-close">${esc(closeLabel)}</button></div>
+  </div>`;
+}
+
+/** ⛔ DESIGN_celebrations §4 — ✦ A PLACE IS YOURS ✦. The player has just answered the migration question,
+ *  and §5 is exact about which half is the celebration: "The OFFER is not a celebration. It is a question.
+ *  The ACCEPTANCE is." ⚠️ THAT ORDERING MATTERS — the beat marks the player's DECISION, not the engine's
+ *  detection.
+ *
+ *  ⚠️ PROVENANCE IS THE CHARGE AND THE STEWARD, per §4: "the assignment that earned it, the steward who
+ *  kept it." ⛔ A place that arrives with no history is a prize; one that arrives with thirty levels of
+ *  someone else's work behind it is an achievement. */
+function showPlaceMoment(holding, offer) {
+  if (!holding) return;
+  document.getElementById("help-pop")?.remove();
+  const keeper = offer?.npcName || (holding.steward ? (character.npcRegistry?.[holding.steward]?.name || holding.steward) : null);
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  pop.innerHTML = momentCard({
+    kicker: "A PLACE IS YOURS", ariaLabel: "A place is yours",
+    provenance: `<strong>${esc(offer?.charge || holding.name || "")}</strong>`,
+    arrow: keeper ? `kept in your name by ${esc(keeper)} — and now it is written down` : "held in your name — and now it is written down",
+    name: holding.name || holding.id,
+    desc: "It stands whether or not you are standing in it. The world will tell you how it fares.",
+    renamePlaceholder: "…or name it yourself", renameLabel: "Make it mine", closeLabel: "It is mine",
+  });
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("braid-moment-close").onclick = close;
+  document.getElementById("braid-rename-go").onclick = () => {
+    const v = String(document.getElementById("braid-rename-in").value || "").trim();
+    if (!v) return;
+    holding.name = v.slice(0, 60);
+    holding.namedBy = "player";   // ⚠️ so nobody later has to guess whether they chose this name
+    try { saveCharacter(character); } catch (e) { console.warn("[holding] rename save skipped:", e?.message); }
+    close(); renderCharacterScreen();
+  };
+}
 function showBraidMoment(def) {
   if (!def) return;
   _braidMomentOpen = true;
@@ -5966,21 +6031,18 @@ function showBraidMoment(def) {
     }
     pop.remove(); _braidMomentOpen = false; flushBraidMoments();
   };
-  pop.innerHTML = `<div class="help-card braid-moment" role="dialog" aria-label="${isDiscovery ? "A technique discovered" : isRecognition ? "A braid recognised" : "A braid forms"}">
-    <div class="braid-moment-kicker">✦ ${kicker} ✦</div>
-    ${def.image ? `<img class="braid-moment-art" src="${esc(def.image)}" alt="${esc(def.name)}" data-lightbox="${esc(def.image)}" data-regen-kind="ability" data-regen-subject="${esc(def.id)}">` : ""}
-    <div class="braid-moment-parents"><strong>${parents}</strong></div>
-    <div class="braid-moment-arrow">${arrow}</div>
-    <h2 class="braid-moment-name" id="braid-name">${esc(def.name)}</h2>
-    ${isRecognition && finder ? `<div class="braid-moment-finder">first found by ${esc(finder)} — and now yours too</div>` : ""}
-    <p class="braid-moment-desc">${esc(def.description || "")}</p>
-    ${isDiscovery ? "" : braidEmergentLine(def)}
-    <div class="braid-moment-rename">
-      <input id="braid-rename-in" maxlength="60" placeholder="…or name it yourself" value="${def.minted?.namedBy === "player" ? esc(def.name) : ""}">
-      <button class="link-btn" id="braid-rename-go">Make it mine</button>
-    </div>
-    <div class="help-foot"><button class="btn" id="braid-moment-close">Hold it close</button></div>
-  </div>`;
+  // ⛔ DESIGN_celebrations §1 (ERIK) — THIS IS THE HOUSE FORMAT NOW: "those are fantastic and should be the
+  // format for things like the news of milestones for holdings or other big deals in the game."
+  // ⚠️ IT HAD ALREADY GENERALISED ITSELF TWICE (discovery, recognition, bond gift) off one implementation, so
+  // the markup is extracted rather than copied. ⛔ A SECOND COPY OF THIS CARD WOULD DRIFT WITHIN A WEEK.
+  pop.innerHTML = momentCard({
+    kicker, ariaLabel: isDiscovery ? "A technique discovered" : isRecognition ? "A braid recognised" : "A braid forms",
+    image: def.image, imageAlt: def.name, regenKind: "ability", regenSubject: def.id,
+    provenance: `<strong>${parents}</strong>`, arrow, name: def.name,
+    finder: isRecognition && finder ? `first found by ${esc(finder)} — and now yours too` : "",
+    desc: def.description || "", extra: isDiscovery ? "" : braidEmergentLine(def),
+    renameValue: def.minted?.namedBy === "player" ? def.name : "",
+  });
   document.body.appendChild(pop);
   pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
   document.getElementById("braid-moment-close").onclick = close;
@@ -10533,6 +10595,35 @@ function renderCharacterScreen() {
         <div class="opt-row">${all.map(c => `<span class="opt" style="cursor:default${mend.has(c.id) ? ";border-color:var(--danger)" : ""}" title="${mend.has(c.id) ? "A night will not lift this — it has to be healed." : "A full night's rest will lift this."}">${esc(c.name || c.id)}${mend.has(c.id) ? " — needs mending" : ""}</span>`).join("")}</div>
         ${needMending.length ? `<p class="hint" style="margin-top:6px">${needMending.length} of these will not lift with rest. Find a mend.</p>` : ""}</div>`;
     })()}
+    ${(() => {
+      // ⛔ SNG-358 / DESIGN_celebrations §5 — THE FIRST PLAYER-FACING SURFACE HOLDINGS HAVE EVER HAD.
+      // `holdings` shipped with a tick that advances it, a GM block that reads it and a battle rule that
+      // counts it — and NOTHING that shows it to the player. A place you hold was, until now, something
+      // only the narrator could see.
+      //
+      // ⚠️ ERIK RULED THE PLACEMENT: "Character sheet, in the holdings section. The persistent, returnable
+      // home. This is where the player goes LOOKING." The offer belongs here; the world-tick news is where
+      // they are TOLD.
+      const hs = character.holdings || [], offers = character.holdingOffers || [];
+      if (!hs.length && !offers.length) return "";
+      const condLabel = { failing: "failing", strained: "strained", holding: "holding", thriving: "thriving" };
+      const rows = hs.map(h => `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+        <strong>${esc(h.name || h.id)}</strong>
+        <span class="hint">${esc(h.kind || "post")} · ${esc(condLabel[h.condition] || h.condition || "holding")}${h.steward ? " · kept by " + esc(character.npcRegistry?.[h.steward]?.name || CONTENT.npcs?.[h.steward]?.name || h.steward) : " · unkept"}</span>
+        ${h.obligation ? `<span class="hint" style="width:100%">owes: ${esc(h.obligation)}</span>` : ""}</div>`).join("");
+      // ⛔ THE OFFER IS A QUESTION, NOT A CELEBRATION (§5). It never mints on its own — the evidence for
+      // why is in Silas's own save, where a charge that must NEVER become a holding names a real place.
+      const offerRows = offers.map((o, i) => `<div class="codex-f" style="border-left:2px solid var(--line,#3a3a3a);padding-left:8px;margin-top:6px">
+        <div>${esc(o.charge)}</div>
+        <div class="hint" style="margin-top:2px">${esc(o.why)}${o.npcName ? " · " + esc(o.npcName) : ""}${o.suggestedLocationName ? " · looks like " + esc(o.suggestedLocationName) : ""}</div>
+        <div class="opt-row" style="margin-top:4px">
+          <button class="opt" data-hold-accept="${i}">Yes — this is a place I hold</button>
+          <button class="opt" data-hold-dismiss="${i}">Not a place</button>
+        </div></div>`).join("");
+      return `<div class="cs-block cs-holdings"><h3 class="codex-title" style="font-size:15px">Holdings</h3>
+        ${rows || `<p class="hint">Nothing yet stands in your name.</p>`}
+        ${offers.length ? `<p class="hint" style="margin-top:8px">${offers.length} assignment${offers.length === 1 ? "" : "s"} may describe a place you hold — review ${offers.length === 1 ? "it" : "them"}.</p>${offerRows}` : ""}</div>`;
+    })()}
     ${Object.values(b).some(v => v) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Story</h3>
       ${["hometown", "residence", "livelihood", "hobbies", "motivation"].filter(k => b[k]).map(k => `<div class="codex-fact"><strong style="text-transform:capitalize">${k}:</strong> ${esc(b[k])}</div>`).join("")}
       ${(() => { // SNG-215 §C-2 dedup: the lived "story so far" paragraph is the Chronicle tab's job now; the
@@ -10616,6 +10707,34 @@ function renderCharacterScreen() {
     <button class="btn secondary" id="cs-repair" style="margin-top:10px; margin-right:8px" title="Fix what the game got wrong at creation — domains, background, form, or an ability you never chose. No arguing with the GM.">🔧 Repair character</button>
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
+  // ⛔ SNG-358 — ANSWERING THE MIGRATION QUESTION. Both answers are final for that assignment: accepting
+  // mints the holding, dismissing records that it is NOT a place. ⚠️ EITHER WAY THE OFFER GOES AWAY — a
+  // question that keeps being asked after it has been answered is nagging.
+  for (const btn of app.querySelectorAll("[data-hold-accept]")) btn.onclick = () => {
+    const o = (character.holdingOffers || [])[Number(btn.dataset.holdAccept)];
+    if (!o) return;
+    const h = addHolding(character, {
+      id: `hold-${o.assignmentId}`, kind: "post",
+      // ⚠️ THE SUGGESTED PLACE NAME IS A STARTING POINT, NOT A VERDICT — measured, it resolves for one
+      // charge in four, and one of those matches is a trap. The player renames it in the moment that follows.
+      name: o.suggestedLocationName || String(o.charge || "").split(/[—:,]/)[0].trim().slice(0, 60) || o.assignmentId,
+      locationId: o.suggestedLocationId || null, steward: o.npcId || null,
+      day: absoluteWorldDay(), fromAssignment: o.assignmentId,
+    });
+    character.holdingOffers = (character.holdingOffers || []).filter(x => x.assignmentId !== o.assignmentId);
+    saveCharacter(character); renderCharacterScreen();
+    // ⚠️ AFTER the re-render, so the card is not wiped by the screen it sits on.
+    showPlaceMoment(h, o);
+  };
+  for (const btn of app.querySelectorAll("[data-hold-dismiss]")) btn.onclick = () => {
+    const o = (character.holdingOffers || [])[Number(btn.dataset.holdDismiss)];
+    if (!o) return;
+    // ⛔ REMEMBERED, NOT JUST REMOVED. The reconcile step is versioned and will not re-offer, but a future
+    // pass over the same assignments must not ask again about one the player has already answered.
+    character.holdingsNotPlaces = [...new Set([...(character.holdingsNotPlaces || []), o.assignmentId])];
+    character.holdingOffers = (character.holdingOffers || []).filter(x => x.assignmentId !== o.assignmentId);
+    saveCharacter(character); renderCharacterScreen();
+  };
   for (const btn of app.querySelectorAll("[data-grow2]")) btn.onclick = () => { if (spendSubPoint(character, btn.dataset.grow2, rules)) { saveCharacter(character); renderCharacterScreen(); } };
   // ability-arch v2: mastery of a craft that forks at rank 3 — the GM marked the defining moment; the
   // player chooses the permanent path (Law 9), then the engine lands rank 3.

@@ -39,18 +39,24 @@ export function ensureHoldings(character) {
 
 /** Take a holding into your keeping. Idempotent on id — re-claiming a place you already hold updates it
  *  rather than minting a second one. */
-export function addHolding(character, { id, kind = "post", name = null, locationId = null, steward = null, obligation = null, day = null } = {}) {
+export function addHolding(character, { id, kind = "post", name = null, locationId = null, steward = null, obligation = null, day = null, fromAssignment = null } = {}) {
   ensureHoldings(character);
   if (!id || !HOLDING_KINDS.includes(kind)) return null;
   let h = character.holdings.find(x => x.id === id);
   if (!h) {
-    h = { id, kind, name: name || id, locationId, steward, obligation, condition: "holding", claimedDay: day, lastMovedWorldCount: null, history: [] };
+    // ⛔ THE LINK LIVES ON THE HOLDING, NOT THE ASSIGNMENT. The assignment is FINITE — it has a `done` —
+    // and the holding is not. ⚠️ A field on the terminal record is lost exactly when the relationship
+    // becomes interesting: the moment the work completes is the moment you want to know what it built.
+    // ⛔ AND NOT A DERIVED JOIN on npcId + charge — that works today and breaks the first time a steward
+    // is replaced, which is precisely the event SNG-355 exists to model.
+    h = { id, kind, name: name || id, locationId, steward, obligation, condition: "holding", claimedDay: day, lastMovedWorldCount: null, history: [], ...(fromAssignment ? { fromAssignment } : {}) };
     character.holdings.push(h);
   } else {
     if (name) h.name = name;
     if (locationId) h.locationId = locationId;
     if (steward !== null) h.steward = steward;
     if (obligation) h.obligation = obligation;
+    if (fromAssignment && !h.fromAssignment) h.fromAssignment = fromAssignment;
   }
   return h;
 }

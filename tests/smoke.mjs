@@ -14846,11 +14846,32 @@ await (async () => {
   for (const [site, re] of [
     ["location banner", /data-lightbox="location" data-regen-kind="location" data-regen-subject=/],
     ["craft art", /data-lightbox="\$\{esc\(selImg\)\}" data-regen-kind="ability" data-regen-subject=/],
-    ["braid moment", /class="braid-moment-art"[^`]*data-regen-kind="ability"/],
     ["item examine", /data-lightbox="item" data-regen-kind="item" data-regen-subject=/],
     ["moment art", /data-lightbox="moment" data-regen-kind="moment"/],
     ["character portrait", /data-lightbox="portrait" data-regen-kind="character"/]
   ]) check(`401 §1: the ${site} carries its provenance`, re.test(appSrc401));
+  // ⛔ THE BRAID MOMENT IS CHECKED SEPARATELY NOW, BECAUSE IT SHARES ONE CARD BUILDER WITH EVERY OTHER
+  // CELEBRATION. DESIGN_celebrations §1 (Erik): the `.braid-moment` surface "should be the format for things
+  // like the news of milestones for holdings", and it had already generalised itself twice off one
+  // implementation — so `momentCard` was extracted rather than copied, and ✦ A PLACE IS YOURS ✦ uses it.
+  //
+  // ⚠️ THE LITERAL `data-regen-kind="ability"` NO LONGER SITS BESIDE `braid-moment-art`: the attribute is
+  // emitted from a variable in the shared card, and the VALUE is supplied at the braid call site.
+  // ⛔ SO THIS IS AIMED AT THE PROPERTY RATHER THAN AT ONE IMPLEMENTATION OF IT — the same move the caption
+  // gate above made, and for the same reason. It now proves BOTH halves of the wiring, which the single
+  // adjacency regex never did: a card that emits the pair, and a braid path that fills it in.
+  check("401 §1: the braid moment carries its provenance",
+    /class="braid-moment-art"/.test(appSrc401) &&
+    /data-regen-kind="\$\{esc\(regenKind\)\}" *. *: *""/.test(appSrc401) &&
+    /regenKind: "ability", regenSubject: def\.id/.test(appSrc401));
+  // ⚠️ AND THE SHARED CARD KEEPS THE PARTS §2 CALLS LOAD-BEARING — the kicker, the provenance line, and the
+  // naming invitation. ⛔ A celebration that cannot be named is an award, not an achievement.
+  check("401 §1: …and the shared celebration card keeps the kicker, provenance and naming invitation",
+    /braid-moment-kicker/.test(appSrc401) && /braid-moment-parents/.test(appSrc401) &&
+    /id="braid-rename-in"/.test(appSrc401) && /function momentCard\(/.test(appSrc401));
+  check("401 §1: …and the holding acceptance uses that same card, not a second copy of it",
+    /function showPlaceMoment\(/.test(appSrc401) && /kicker: "A PLACE IS YOURS"/.test(appSrc401) &&
+    (appSrc401.match(/class="help-card braid-moment"/g) || []).length === 1);
   check("401 §1: the delegated handler reads the provenance off the img (no eight signatures changed)", /img\.dataset\.regenKind/.test(appSrc401) && /img\.dataset\.regenSubject/.test(appSrc401));
   check("401 §1: the FEED image is deliberately NOT regenerable — it is someone else's moment", /data-lightbox="feed"(?![^>]*data-regen-kind)/.test(appSrc401));
 

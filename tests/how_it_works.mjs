@@ -3019,6 +3019,121 @@ console.log("\n── §47 · R25 capacity · R27 conditioned migration ──")
       !Object.values(RENAMES_47).some(v => typeof v.to === 'string' && v.to.includes('+')));
   }
 }
+/* ═════ §48 — SNG-358: A PLACE YOU HOLD, PROPOSED AND NEVER IMPOSED ═════ */
+// ⛔ Aevi reported the Raven's Home post would "leave state when the reconstruction completes". It is WORSE:
+// it is not in the holdings system at all — an assignment string only. There is nothing for completion to
+// delete because nothing was ever created.
+//
+// ⛔ AND THE MIGRATION MUST NOT CLASSIFY. Silas's charge "Silas's named delegate to Mara Wells…" — which is
+// a RELATIONSHIP and must never become a holding — contains the words "holds the Millbrook crisis thread".
+// A location resolver finds a real authored place in the ONE assignment that must not have one.
+console.log("\n── §48 · holdings: offered, never imposed ──");
+{
+  const RC48 = await import("../engine/reconcile.js");
+  const WT48 = await import("../engine/worldtick.js");
+  const HD48 = await import("../engine/holdings.js");
+  const step48 = RC48.CHARACTER_STEPS.find(x => x.id === "holdings-from-assignments");
+  check("§48: the migration step EXISTS and is player-facing", !!step48 && step48.playerFacing === true);
+
+  // ⛔ THE TRAP CHARGE, VERBATIM FROM SILAS'S SAVE.
+  const TRAP = "Silas's named delegate to Mara Wells and the Hub committee water meeting — holds the Millbrook crisis thread if Silas";
+  const POST = "full reconstruction of the Raven's Home post — laboratory, workshop, Watch, forge, keeper's hut";
+  const ws48 = { assignments: {
+    t: { id: "t", npcId: "edvar-crane", npcName: "Edvar Crane", charge: TRAP, status: "working" },
+    p: { id: "p", npcId: "cassiel-ord", npcName: "Cassiel Ord", charge: POST, status: "working" } } };
+  const locs48 = { millbrook: { id: "millbrook", name: "Millbrook" } };
+  const mk48 = () => ({ level: 30, holdings: [], worldState: JSON.parse(JSON.stringify(ws48)) });
+  const c48 = mk48();
+  const r48 = step48.apply(c48, { content: { locations: locs48 } });
+
+  check("§48: ⛔ it MINTS NOTHING — every holding is still unclaimed after the step",
+    (c48.holdings || []).length === 0, JSON.stringify(c48.holdings));
+  check("§48: …it returns `offers` instead — the contract channel that had no producer until now",
+    (r48.offers || []).length === 2, String((r48.offers || []).length));
+
+  // ⛔ THE TRAP IS OFFERED, AND MARKED. Withholding it would be a heuristic deciding for the player —
+  // and this heuristic has already been wrong once, on this exact charge.
+  const trap48 = r48.offers.find(o => o.assignmentId === "t");
+  const post48 = r48.offers.find(o => o.assignmentId === "p");
+  check("§48: ⛔ a location resolver DOES find Millbrook in the charge that must never be a holding",
+    trap48.suggestedLocationName === "Millbrook", String(trap48.suggestedLocationName));
+  check("§48: …and it is marked as reading like a PERSON, not a place",
+    trap48.looksLikePerson === true && trap48.looksLikePlace === false);
+  check("§48: …the hint says so in words the player can act on", /person/i.test(trap48.why), trap48.why);
+  check("§48: ⚠️ but it is still OFFERED — a charge silently withheld is a decision made for the player",
+    !!trap48);
+  check("§48: …while the genuine post reads as a standing place", post48.looksLikePlace === true);
+
+  // ⛔ AN OFFER IS A STANDING QUESTION. A reconcile step runs ONCE — `reconcile()` skips any step at or
+  // below the save's version — so an offer that lived only in the return value would be asked once,
+  // silently, to a player who may not have been looking at the right screen.
+  check("§48: ⛔ offers are PERSISTED on the character, not just returned",
+    (c48.holdingOffers || []).length === 2, String((c48.holdingOffers || []).length));
+
+  // ⛔ AND ANSWERED IS ANSWERED. §3: anything that fires more than once for the same subject is a bug.
+  const c48b = mk48(); c48b.holdingsNotPlaces = ["t"];
+  const r48b = step48.apply(c48b, { content: { locations: locs48 } });
+  check("§48: a charge the player has already called NOT a place is never offered again",
+    r48b.offers.length === 1 && r48b.offers[0].assignmentId === "p");
+  const c48c = mk48();
+  c48c.holdings = [{ id: "h", fromAssignment: "p" }];
+  check("§48: …and one already minted is not re-offered either",
+    step48.apply(c48c, { content: { locations: locs48 } }).offers.length === 1);
+
+  // ⛔ THE LINK LIVES ON THE HOLDING, because the assignment is FINITE and the holding is not.
+  {
+    const c = { holdings: [] };
+    const h = HD48.addHolding(c, { id: "h1", name: "The Threshold Post", fromAssignment: "a::b", day: 3 });
+    check("§48: a migrated holding remembers the assignment that earned it", h.fromAssignment === "a::b");
+    check("§48: ⚠️ …and enters at `holding`, unstewarded — never at a rank the place has not earned",
+      h.condition === "holding", h.condition);
+    const plain = HD48.addHolding(c, { id: "h2", name: "Bare" });
+    check("§48: …a holding claimed in play carries no such field at all", !("fromAssignment" in plain));
+  }
+
+  // ⛔ §5.2 — THE SECOND SURFACE. Erik ruled BOTH, with different jobs: the sheet is where the player goes
+  // LOOKING, the tick news is where they are TOLD. ⚠️ ONCE, EVER.
+  {
+    const c = { holdings: [], company: [], holdingOffers: [{ assignmentId: "a1" }, { assignmentId: "a2" }] };
+    const first = WT48.advanceHoldings({ character: c }).news.map(n => n.text);
+    const second = WT48.advanceHoldings({ character: c }).news.map(n => n.text);
+    check("§48: the tick TELLS the player, beside the delegated work", first.length === 1 && /not written down as yours/.test(first[0]), first.join(" | "));
+    check("§48: ⛔ …and never again — a re-announced offer is nagging, not news", second.length === 0, second.join(" | "));
+    check("§48: …a character with no offers hears nothing",
+      WT48.advanceHoldings({ character: { holdings: [], company: [] } }).news.length === 0);
+  }
+
+  // ⛔ THE CELEBRATION IS ON THE ACCEPTANCE, NOT THE OFFER (§5) — and it shares ONE card with the braid
+  // moment rather than copying it. §1: the format "already runs FOUR variants off one implementation".
+  const app48 = rd("app.js");
+  check("§48: ✦ A PLACE IS YOURS ✦ exists and fires on the player’s DECISION",
+    /kicker: "A PLACE IS YOURS"/.test(app48) && /function showPlaceMoment\(/.test(app48));
+  check("§48: ⛔ …on the SHARED card — there is exactly one `.help-card braid-moment` in the source",
+    (app48.match(/class="help-card braid-moment"/g) || []).length === 1,
+    String((app48.match(/class="help-card braid-moment"/g) || []).length));
+  check("§48: …and the naming invitation rides along, which is the part §2 calls load-bearing",
+    /id="braid-rename-in"/.test(app48) && /function momentCard\(/.test(app48));
+
+  // ⛔ AND A GUARD THAT NAMED A CONDITION THIS VOCABULARY DOES NOT HAVE. `canRaiseBand` filtered on
+  // `!== "failed"` — borrowed from the QUEST vocabulary — so it excluded nothing and a collapsing post
+  // counted as fully as a thriving one toward raising a band.
+  {
+    const ME48 = await import("../engine/melee.js");
+    const mk = cs => ({ level: 20, subAttributes: {}, holdings: cs.map((c, i) => ({ id: "h" + i, condition: c })) });
+    const n = cs => ME48.canRaiseBand(mk(cs), { cfg: {} }).holdings;
+    check("§48: ⛔ a FAILING holding no longer counts toward raising a band",
+      n(["failing", "failing"]) === 0 && n(["failing", "thriving"]) === 1 && n(["holding", "thriving"]) === 2,
+      [n(["failing","failing"]), n(["failing","thriving"]), n(["holding","thriving"])].join("/"));
+    check("§48: …and every condition it does count is one the holdings vocabulary actually has",
+      ["failing", "strained", "holding", "thriving"].join(",") === HD48.CONDITIONS.join(","));
+  }
+  // ⛔ THE FIRST PLAYER-FACING SURFACE HOLDINGS HAVE EVER HAD, and the handlers that answer it.
+  check("§48: the character sheet has a Holdings section",
+    /cs-holdings/.test(app48) && />Holdings<\/h3>/.test(app48));
+  check("§48: ⛔ …with BOTH answers wired — a button with no handler is the fourth door",
+    /data-hold-accept/.test(app48) && /data-hold-dismiss/.test(app48) &&
+    /querySelectorAll\("\[data-hold-accept\]"\)/.test(app48) && /querySelectorAll\("\[data-hold-dismiss\]"\)/.test(app48));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

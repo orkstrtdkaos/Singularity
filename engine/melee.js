@@ -459,7 +459,12 @@ export const BAND_CONDITIONS = ["fresh", "blooded", "worn", "broken"];
  *  ⚠️ AND A HOLDING COUNTS. "you'll own or build more holds" — a post is where a following comes from. */
 export function canRaiseBand(character, { cfg = {}, renownBand = null } = {}) {
   const lead = commandSlots(character, { cfg, renownBand });
-  const holds = (character?.holdings || []).filter(h => h && h.condition !== "failed").length;
+  // ⛔ THE GUARD USED TO READ `!== "failed"`, WHICH IS NOT IN THIS VOCABULARY. Holdings run on
+  // `CONDITIONS = ["failing", "strained", "holding", "thriving"]`; "failed" is the QUEST vocabulary,
+  // borrowed across. ⚠️ SO THE FILTER MATCHED NOTHING AND A COLLAPSING POST COUNTED AS FULLY AS A THRIVING
+  // one — a string that looks like a guard and excludes nothing, which is how a vacuous check hides.
+  // ⚠️ Inert today (no save holds anything yet) and wrong the moment one does.
+  const holds = (character?.holdings || []).filter(h => h && h.condition !== "failing").length;
   const need = Math.max(1, num(cfg.bandAtSlots, 3));
   const ready = lead.slots >= need || holds >= Math.max(1, num(cfg.bandAtHoldings, 2));
   return { ready, slots: lead.slots, holdings: holds,

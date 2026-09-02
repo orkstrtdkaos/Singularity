@@ -1335,3 +1335,29 @@ NPC evolves through attention and deeds. A promotion arc, not a terminal conditi
 | OI-25 | Generative-to-corpus pipeline | Aevi → CCode |
 | C6 | Attraction eligibility gate — blocks R23 | Aevi |
 | — | `rankUpAbility` has no UI caller | CCode |
+
+---
+
+## ✅ OI-19 CLOSED — tier-1 pools, all 14 domains creation-viable (2026-09-01)
+
+**Result:** `po/RESULT_oi19_tier1_pools.md` · verified at authenticated `api.github.com`
+
+⛔ **The gap was real but not where the first count said.** Life appeared to have 5 tier-1 crafts;
+two (`greenlore`, `beastfriend`) are `folkAccessible` and available to every origin, leaving only
+**3 domain-specific**. R3 creation needs a forced sense pick + a danger-response + a curated pool
+of 4–5, so ~6 minimum.
+
+| domain | before | after | authored |
+|---|---|---|---|
+| Life | 5 (3 own) | **7** | `rootward` (ward), `green_passage` (move/sustain) |
+| Spirit | 4 | **7** | `hallowed_ground` (ward), `bound_witness` (bind), `thin_step` (move) |
+| Angelic | 5 | **7** | `administered_mercy` (heal), `ordered_advance` (move/empower) |
+| Demonic | 5 | **7** | `fed_wound` (heal), `hungry_step` (move/reveal) |
+
+✅ **All 14 domains now ≥6.** Authoring gate passed: every verb from the closed vocabulary, no id
+collisions, T7 answered per craft, three-rank trees with a real cost at rank 3.
+
+**Commits:** `a01fa122` (death_life) · `d71af3f7` (mechanical_spiritual) · `ee2a24f3` (demonic_angelic)
+
+⬜ **Not done:** `folkAccessible` was NOT set on any new craft — held pending the flag's reader
+landing (OI-9 built by CCode; confirm before authoring more).

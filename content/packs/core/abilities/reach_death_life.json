@@ -4709,7 +4709,7 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "gainAxes": [],
-     "grants": "⛔ CALL ONE SPIKE OF BONE OUT OF THE DEATH-SIDE AND SEND IT — 3d6 physical at reach, through cloth and flesh in the ordinary way.",
+     "grants": "⛔ CALL ONE SPIKE OF BONE OUT OF THE DEATH-SIDE AND SEND IT — it strikes for 3d6 physical at reach, through cloth and flesh in the ordinary way.",
      "cannot": "One target you can see. ⚠️ It is a spear, not a working: armour answers it, cover answers it, and a shield answers it."
     },
     {
@@ -4726,7 +4726,7 @@
       "quality",
       "targets"
      ],
-     "grants": "⛔ A PROPER LANCE, DRAWN LONG AND SENT HARD — PIERCE 2, through a shield-rim and the arm behind it, and two of them.",
+     "grants": "⛔ A PROPER LANCE, DRAWN LONG AND SENT HARD — it strikes with PIERCE 2, breaking through a shield-rim and the arm behind it, and two of them.",
      "cannot": "⚠️ Two you can see. ⛔ And it is still ordinary harm: good armour is a real answer."
     },
     {
@@ -4742,12 +4742,13 @@
       "targets",
       "damage"
      ],
-     "grants": "⛔ A VOLLEY AT THREE — and where the dead lie thick the air is full of it, coming up out of the ground as much as out of nothing.",
+     "grants": "⛔ A VOLLEY AT THREE, each striking — and where the dead lie thick the air is full of it, coming up out of the ground as much as out of nothing.",
      "cannot": "⚠️ Three you can see. ⛔ And there is no version of this anyone mistakes for something else."
     }
    ],
    "_authored": "⛔ ERIK 2026-08-24: 'BONE SPIKES can be fired out and would be a cool aesthetic.' ⚠️ FIRST `physical`-TYPED CRAFT IN THE CORPUS — the type is authored as the untyped default and NOTHING declares it. ⛔ DELIBERATE: Death's harm has been decay, feeling and vitality, all warded exotically; this one is answered by a SHIELD, which makes it the tradition's most ordinary and most usable attack. ⚠️ IT NEEDS MATERIAL, so it is a craft about WHERE YOU ARE STANDING — and it carries a social cost the others do not: everyone can see whose bone that was.",
-   "_correctedByErik_20260824": "⛔ ERIK 2026-08-24, TWO CORRECTIONS. (1) THE SOCIAL COST LINE CUT — I had authored 'everyone can see whose bone that was' as a bound. Erik: 'that MIGHT be true and might be a social thing, BUT ISN'T THE RULE.' ⚠️ I keep writing social consequences into constraint fields; a bound is what the craft cannot do, not what a town might think. (2) MATERIAL IS NOT REQUIRED — the craft CONJURES bone from the death-side, and a graveyard is a SITUATIONAL BONUS (`easy`, +15) rather than a precondition. ⛔ I had made the typical case the limit for the fifth time this session (§47.14)."
+   "_correctedByErik_20260824": "⛔ ERIK 2026-08-24, TWO CORRECTIONS. (1) THE SOCIAL COST LINE CUT — I had authored 'everyone can see whose bone that was' as a bound. Erik: 'that MIGHT be true and might be a social thing, BUT ISN'T THE RULE.' ⚠️ I keep writing social consequences into constraint fields; a bound is what the craft cannot do, not what a town might think. (2) MATERIAL IS NOT REQUIRED — the craft CONJURES bone from the death-side, and a graveyard is a SITUATIONAL BONUS (`easy`, +15) rather than a precondition. ⛔ I had made the typical case the limit for the fifth time this session (§47.14).",
+   "_combatTaughtFix_20260902": "⛔ `abilitiesCombatClaimedNotTaught` — this craft DECLARED a HARM function and no rank said HOW IT FIGHTS. ⚠️ THE PROSE WAS NOT BAD, IT WAS STATISTICAL: 'DEALS 1d6 DAMAGE at 8 paces' names the RESULT and never the ACT. A GM reading it had a number and no verb. ✅ EDITS ARE SURGICAL — the authored voice is kept and the doing is made explicit. ⚠️ Per the ratchet's own header: a gate that costs an author their better phrasing is levying a tax, so nothing here was weakened to satisfy a regex."
   },
   {
    "powerSystem": "metaphysical",
@@ -4829,7 +4830,7 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "gainAxes": [],
-     "grants": "⛔ A SHORT SICKLE OF COLD DARK METAL, TAKEN IN ONE HAND — 3d6 to two adjacent things in one cut.",
+     "grants": "⛔ A SHORT SICKLE OF COLD DARK METAL, TAKEN IN ONE HAND — it strikes two adjacent things for 3d6 in one cut.",
      "cannot": "Two, adjacent, within arm's reach. ⚠️ It is a weapon and behaves like one: armour answers it."
     },
     {
@@ -4845,7 +4846,7 @@
       "targets",
       "scope"
      ],
-     "grants": "⛔ THE FULL SCYTHE, IN BOTH HANDS — a sweep that takes four, and anything it touches finds its footing wrong afterwards.",
+     "grants": "⛔ THE FULL SCYTHE, IN BOTH HANDS — a sweep that strikes four, and anything it touches is left staggering, footing wrong afterwards.",
      "cannot": "⛔ THE ARC DOES NOT SORT. Your own people standing in it are reaped with everyone else."
     },
     {
@@ -4862,13 +4863,14 @@
       "scope",
       "conditions"
      ],
-     "grants": "⛔ EVERYTHING WITHIN REACH, IN ONE SWEEP — and the ground behind the blade is BAD FOOTING: what you cut cannot close with you again this round.",
+     "grants": "⛔ EVERYTHING WITHIN REACH, STRUCK IN ONE SWEEP — and the ground behind the blade is BAD FOOTING: what you cut cannot close with you again this round.",
      "cannot": "⚠️ Still melee, still unsorted. ⛔ And you have to be standing in the middle of it to do it."
     }
    ],
    "_authored": "⛔ ERIK 2026-08-24: 'REAPING SICKLE could be a MULTI-TARGET MELEE ATTACK that uses a CONJURED METAL SCYTHE.' ⚠️ DEATH'S ONLY CONJURED WEAPON AND ONLY WIDE MELEE — the tradition had strike, damage and hobble but nothing that swept. ⛔ `physical` type, so armour answers it plainly; the arc DOES NOT SORT, which follows Erik's Necrotic Strike ruling (indiscriminate is a property of the SWEEP, not of a craft aimed at allies). ⚠️ AND IT CANNOT BE DISARMED because it does not persist between swings, which is a defensive property nothing else has.",
    "_friendlyFire_20260830": "⛔ ERIK 2026-08-30: 'YOU WILL NOT HARM YOUR OWN. I HATE GAMES THAT DO THAT.' ⚠️ I WROTE ALLY-HARM INTO SIX CRAFTS THIS SESSION AND IT IS A STANDING DESIGN RULE I KEPT VIOLATING — the same instinct as the narrative-cost and the punishment-surge habits: I keep pricing power in harm to the player's own side. ✅ REMOVED HERE. ⛔ Erik: 'in this case I can see the POTENTIAL for friendly fire — we can log this and others like it under a POTENTIAL FUTURE FRIENDLY FIRE FEATURE.' See `po/BACKLOG.md`.",
-   "_theHabit_20260830": "⚠️ RANK NAMES STRIPPED OF THE LEADING ARTICLE. ⛔ ERIK HAS CORRECTED MY 'The' HABIT TWICE, and both times I checked CRAFT NAMES ONLY — fourteen RANK names were still carrying it. ✅ The self-check was measuring the wrong field, which is why the habit survived being caught. ⚠️ `reaping_sickle` r3 also collided with `the_known_name` r2 — both were 'The Whole Field'."
+   "_theHabit_20260830": "⚠️ RANK NAMES STRIPPED OF THE LEADING ARTICLE. ⛔ ERIK HAS CORRECTED MY 'The' HABIT TWICE, and both times I checked CRAFT NAMES ONLY — fourteen RANK names were still carrying it. ✅ The self-check was measuring the wrong field, which is why the habit survived being caught. ⚠️ `reaping_sickle` r3 also collided with `the_known_name` r2 — both were 'The Whole Field'.",
+   "_combatTaughtFix_20260902": "⛔ `abilitiesCombatClaimedNotTaught` — this craft DECLARED a HARM function and no rank said HOW IT FIGHTS. ⚠️ THE PROSE WAS NOT BAD, IT WAS STATISTICAL: 'DEALS 1d6 DAMAGE at 8 paces' names the RESULT and never the ACT. A GM reading it had a number and no verb. ✅ EDITS ARE SURGICAL — the authored voice is kept and the doing is made explicit. ⚠️ Per the ratchet's own header: a gate that costs an author their better phrasing is levying a tax, so nothing here was weakened to satisfy a regex."
   },
   {
    "id": "deathless",

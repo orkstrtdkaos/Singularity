@@ -1,4 +1,5 @@
 {
+ "schemaVersion": 1,
  "id": "veth-ondra",
  "name": "Veth (Stillwater) Ondra",
  "sex": "female",
@@ -24,10 +25,21 @@
   "concrete": 6
  },
  "voiceHints": "⚠️ SPARE. She asks rather than tells, and the questions are hard ones. 'It will serve.' 'This is rightly made.' Four words where another teacher would use forty, and the four carry weight BECAUSE she does not give them freely. ⛔ WHEN SHE IS ANGRY SHE GETS COLDER AND MORE PRECISE, never louder — she names exactly what was got wrong and why it matters to the craft.",
- "knowledge": "The Ashwarden discipline, whole. What a true warden post requires — water, sight-line, threshold, and the understanding that a warden's defence is standing witness rather than walls. Eleven years of the March's judgment. Structures: what is load-bearing and whether a place knows what it is built for. Why her post was dissolved.",
+ "knowledge": [
+  "The Ashwarden discipline, whole",
+  "What a true warden post requires — water, sight-line, threshold, and the understanding that a warden's defence is standing witness rather than walls",
+  "Eleven years of the March's judgment",
+  "Structures: what is load-bearing and whether a place knows what it is built for",
+  "Why her post was dissolved"
+ ],
  "wants": "To see Silas become a TRUE Ashwarden — not powerful, RIGHT. To be heeded as a teacher. To see the March's discipline carried forward in him: she lost her post, and he could be what it was for.",
  "fears": "That Silas gets the core judgment wrong — death given where he should have witnessed, or witness where he should have given room. ⚠️ To her that is not a mistake, it is a CORRUPTION OF THE CRAFT. And: being a stall-keeper and nothing more, the eleven years wasted.",
- "reactsToReputation": "⚠️ INDIFFERENT TO STANDING, ATTENTIVE TO CONDUCT. A reputation for power means nothing to her; a reputation for careless endings means a great deal. She has met Silas 15 times and her approval has been spare each time.",
+ "reactsToReputation": {
+  "callous": "means a great deal, and none of it good. Careless endings are the thing she watches for.",
+  "patient": "the only standing she credits — conduct over time, not power.",
+  "any": "indifferent to standing, attentive to conduct. Her approval is spare and has to be earned twice."
+ },
+ "_reactsWhy": "⚠️ INDIFFERENT TO STANDING, ATTENTIVE TO CONDUCT. A reputation for power means nothing to her; a reputation for careless endings means a great deal. She has met Silas 15 times and her approval has been spare each time.",
  "level": 33,
  "_levelWhy": "⚠️ HIGHER THAN HER STUDENT, AND THAT IS THE POINT. Silas is L30 and she is teaching him the Ashwarden craft; a teacher below her student is not a teacher. Eleven years holding a south-facing warden post on the March, plus whatever came before it. ⛔ BUT SHE IS NOT POWERFUL IN THE WORLD — her post was dissolved and her own fear is 'being a stall-keeper and nothing more.' ➡️ Skilled and DISPLACED. Level measures craft, not standing.",
  "subAttributes": {

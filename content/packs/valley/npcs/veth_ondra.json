@@ -1,0 +1,125 @@
+{
+ "id": "veth-ondra",
+ "name": "Veth (Stillwater) Ondra",
+ "sex": "female",
+ "gender": "female",
+ "romanceEligible": false,
+ "_romanceNote": "⛔ NOT ROMANCEABLE — not for want of a sex, but because she is Silas's TEACHER and the whole relationship is a standard she holds him to. `romanceEligible` is an author decision per R24 and this is one.",
+ "role": "Former Ashwarden warden of the March; teacher. Keeps a market stall at the crossroads.",
+ "homeLocation": "gen-waygate",
+ "people": "Valleyfolk",
+ "domains": [
+  "Death"
+ ],
+ "appearance": "A still, direct woman past forty. Grey coming in at the temples, kept short. Weathered from eleven years of standing outdoors at a threshold. She holds a market stall at the crossroads and does not work it — the goods are laid out plainly and she watches the road over them. ⚠️ WHAT YOU NOTICE IS THE STILLNESS: she does not shift, fidget, or fill a silence, and it reads as attention rather than coldness once you have been on the receiving end of it.",
+ "personality": {
+  "warmth": 3,
+  "trust": 6,
+  "candor": 10,
+  "patience": 8
+ },
+ "spectrum": {
+  "order": 8,
+  "peace": 6,
+  "concrete": 6
+ },
+ "voiceHints": "⚠️ SPARE. She asks rather than tells, and the questions are hard ones. 'It will serve.' 'This is rightly made.' Four words where another teacher would use forty, and the four carry weight BECAUSE she does not give them freely. ⛔ WHEN SHE IS ANGRY SHE GETS COLDER AND MORE PRECISE, never louder — she names exactly what was got wrong and why it matters to the craft.",
+ "knowledge": "The Ashwarden discipline, whole. What a true warden post requires — water, sight-line, threshold, and the understanding that a warden's defence is standing witness rather than walls. Eleven years of the March's judgment. Structures: what is load-bearing and whether a place knows what it is built for. Why her post was dissolved.",
+ "wants": "To see Silas become a TRUE Ashwarden — not powerful, RIGHT. To be heeded as a teacher. To see the March's discipline carried forward in him: she lost her post, and he could be what it was for.",
+ "fears": "That Silas gets the core judgment wrong — death given where he should have witnessed, or witness where he should have given room. ⚠️ To her that is not a mistake, it is a CORRUPTION OF THE CRAFT. And: being a stall-keeper and nothing more, the eleven years wasted.",
+ "reactsToReputation": "⚠️ INDIFFERENT TO STANDING, ATTENTIVE TO CONDUCT. A reputation for power means nothing to her; a reputation for careless endings means a great deal. She has met Silas 15 times and her approval has been spare each time.",
+ "level": 33,
+ "_levelWhy": "⚠️ HIGHER THAN HER STUDENT, AND THAT IS THE POINT. Silas is L30 and she is teaching him the Ashwarden craft; a teacher below her student is not a teacher. Eleven years holding a south-facing warden post on the March, plus whatever came before it. ⛔ BUT SHE IS NOT POWERFUL IN THE WORLD — her post was dissolved and her own fear is 'being a stall-keeper and nothing more.' ➡️ Skilled and DISPLACED. Level measures craft, not standing.",
+ "subAttributes": {
+  "insight": 15,
+  "presence": 12,
+  "reason": 11,
+  "wits": 9,
+  "craft": 8,
+  "strength": 7,
+  "agility": 6,
+  "rapport": 5
+ },
+ "_subsWhy": "⛔ `insight` HIGHEST BY A MARGIN — her entire recorded history is reading, assessing, judging. Every one of her `skillsObserved` is a judgment verb. `presence` next: 'her approval is spare and it carries weight.' `reason` for the discipline itself — her framework is a FRAMEWORK, not an instinct. ⚠️ `rapport` LOW ON PURPOSE: still, direct, warmth 3. She is not warm and the teaching does not run on warmth.",
+ "abilities": [
+  {
+   "abilityId": "deathsense",
+   "level": 3,
+   "why": "⚑ THE SENSE. Non-negotiable for a warden of eleven years."
+  },
+  {
+   "abilityId": "the_attended_end",
+   "level": 3,
+   "why": "⚑ HER CRAFT ENTIRE. Attending an ending rather than causing one — the discipline she is teaching Silas."
+  },
+  {
+   "abilityId": "kept_vigil",
+   "level": 3,
+   "why": "'Set a hold on one failing thing and it stays exactly where it is.' ⚠️ A WARDEN'S DEFENCE IS NOT WALLS BUT STANDING WITNESS AT THE THRESHOLD — her own words to Silas at the ridge relay node."
+  },
+  {
+   "abilityId": "true_account",
+   "level": 3,
+   "why": "'[d15] Entered the death-warden temple and read its structure and purpose in full silence. It will serve. This is rightly made.' ⚠️ Read what a thing is actually worth — her assessment, made craft."
+  },
+  {
+   "abilityId": "death_ward",
+   "level": 2,
+   "why": "T3. 'Ward against deaths that should NOT happen.' ⛔ THAT IS HER FRAMEWORK STATED AS A CRAFT — the whole judgment is which endings are right."
+  },
+  {
+   "abilityId": "palework",
+   "level": 3,
+   "why": "The burying trade, practised. Eleven years of it. ⚠️ She would carry it discreetly — see the absence of `dread` below."
+  },
+  {
+   "abilityId": "kept_breath",
+   "level": 2,
+   "why": "'Refuse an ending that has already begun.' The mercy half of her judgment — witnessing where room should be given."
+  },
+  {
+   "abilityId": "hastened_grey",
+   "level": 2,
+   "why": "⚠️ THE OTHER HALF, AND SHE WOULD SAY IT IS THE SAME HALF. Bring forward an end already failing — mercy CORRECTLY GIVEN, which is the judgment she holds Silas to."
+  },
+  {
+   "abilityId": "soul_stare",
+   "level": 2,
+   "why": "Meet a thing's gaze and show it its own ending — it stops. ⚠️ A warden ends a fight without striking, and her history contains no striking."
+  },
+  {
+   "abilityId": "grey_road",
+   "level": 2,
+   "why": "'The ashwarden walks through the part that kills people.' Eleven years of thresholds."
+  },
+  {
+   "abilityId": "grey_ground",
+   "level": 1,
+   "why": "T3. Mark ground and let it do the work. ⚠️ Post-work — she walked Silas through exactly what a post needs."
+  },
+  {
+   "abilityId": "ask_the_dead",
+   "level": 1,
+   "why": "T3. A warden of eleven years has asked."
+  },
+  {
+   "abilityId": "last_cold",
+   "level": 1,
+   "why": "Take the heat out of something at a distance. ⚠️ Her ONLY real reach — held low deliberately."
+  },
+  {
+   "abilityId": "wither",
+   "level": 1,
+   "why": "Hasten decay. Warden's maintenance work more than a weapon."
+  },
+  {
+   "abilityId": "read_the_room",
+   "level": 2,
+   "why": "⚠️ 'Reading the moment when presence matters more than words' — `skillsObserved`, verbatim. Stillhold, adjacent to Death; caps at tier 3 under R21 and she is nowhere near it."
+  }
+ ],
+ "_notHers": "⛔ WHAT SHE DELIBERATELY DOES NOT HAVE, AND THE ABSENCES ARE THE CHARACTERISATION. `bone_lance`, `reaping_sickle`, `the_cut_thread` — conjured weapons and clean killing; ⚠️ FIFTEEN RECORDED MEETINGS AND SHE HAS NEVER STRUCK ANYTHING. `set_hand` and `given_errand` — raising, the Grave-Callers' craft, which a March warden would regard as the corruption she fears in Silas. `calling_back` — retrieval; she teaches that an ending given room is not a failure. `dread` — 'stop carrying it discreetly'; she carries EVERYTHING discreetly. `draw_down`, `deathless` — taking life into yourself, the exact inversion of attending.",
+ "_teacherNote": "⚠️ SHE IS A TEACHER AND THE SHEET SHOULD BE READ THAT WAY. Her `curriculum` is the Ashwarden judgment: a witnessed ending versus one given room, and getting it wrong is A FAILURE OF CRAFT, not merely of feeling. ⛔ Her rank-3 crafts are the four she would TEACH — `deathsense`, `the_attended_end`, `kept_vigil`, `true_account`, `palework`. The rest she can do; those she can hand on.",
+ "_metNote": "⚠️ ERIK 2026-09-02: 'she's supposed to be a teacher and he met her at a market stall in the crossroads.' ✅ Save agrees — firstMet `gen-waygate` day 6, and the registry description says it outright: 'The stall is cover; the teaching kit is the door.' ⛔ THE STALL WAS NEVER A LIVING. It is how a dissolved warden waits at a crossroads for someone worth teaching.",
+ "_authored": "⚠️ AUTHORED SHEET — wins over `engine/npcsheet.js` derivation per that module's own rule. ⛔ Veth previously existed ONLY in `npc_interiority.json` and the save's `npcRegistry`, with no NPC file. Her drive layer stays in the interiority file and is NOT duplicated here."
+}

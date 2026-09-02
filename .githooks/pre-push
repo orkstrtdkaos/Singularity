@@ -1,0 +1,24 @@
+#!/bin/sh
+# ⛔ CCODE-342 — THE HOOK LIVES IN THE REPO NOW, BECAUSE ONLY ONE OF US HAD IT.
+#
+# ⚠️ THIS FILE WAS `.git/hooks/pre-push` ON CCODE'S MACHINE AND NOWHERE ELSE. `.git/hooks/` is not
+# version-controlled and `core.hooksPath` was unset, so the suite ran before CCode's pushes and not before
+# Aevi's. ⛔ THAT ASYMMETRY IS THE WHOLE OF THE 2026-09-01 COORDINATION FAILURE: content with three invalid
+# `gainAxes` values reached origin unchecked, and the next person to push — CCode — was blocked by it and
+# spent the time working out whose it was.
+#
+# ✅ A SHARED GATE BEATS AN AGREED PROTOCOL. Aevi proposed announcing content-count changes before CCode
+# certifies. That depends on both of us remembering, every time, forever. This depends on nobody doing
+# anything.
+#
+# ⚠️ CI ALREADY RUNS THIS SUITE (.github/workflows/ci.yml) — but AFTER the push, on GitHub. By then the
+# bad content is on main and whoever pulls next inherits it. This is the same check, one step earlier.
+#
+# ⚠️ --ratchet, NOT all-green. The suite carries ~23 known-red assertions that are the project's tracked
+# open gaps. A gate that can never pass is a gate everyone learns to bypass — it trains the --no-verify
+# habit, which is worse than having no hook. So: block on REGRESSION only.
+#
+# ⛔ ENABLE IT ONCE, PER CLONE:  git config core.hooksPath .githooks
+#    Skip deliberately with `git push --no-verify` — and say why in the commit.
+echo "pre-push: suite ratchet (skip with --no-verify)"
+node scripts/run_tests.mjs --ratchet --quiet

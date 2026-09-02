@@ -1,0 +1,134 @@
+{
+ "id": "pell",
+ "name": "Pell Ran Marsh",
+ "sex": "female",
+ "gender": "female",
+ "romanceEligible": true,
+ "role": "Master smith of Millbrook; Silas's partner and wife",
+ "homeLocation": "millbrook",
+ "communityId": "millbrook",
+ "people": "Valleyfolk",
+ "domains": [
+  "Body"
+ ],
+ "appearance": "Not tall — built low and strong and deliberate, with a smith's shoulders and forearms. Dark hair tied back and escaping by midday, damp at the temples from the heat of the shop. Warm-toned skin, forge-flushed at the throat. Old burn-flecks scattered up both forearms, small and white and permanent. She looks at your hands before your face.",
+ "personality": {
+  "warmth": 6,
+  "trust": 7,
+  "candor": 9,
+  "patience": 5
+ },
+ "spectrum": {
+  "order": 7,
+  "concrete": 9,
+  "peace": 4
+ },
+ "voiceHints": "Plain, unhurried, and short. She does not soften a finding and does not decorate one. Says the true thing in the fewest words it takes, then waits. Dry rather than warm in the shop; the warmth is real and it is not for customers. ⚠️ SHE NAMES THINGS PLAINLY — that is the whole character, in the forge and out of it.",
+ "knowledge": "Iron, stone, timber and the joins between them. What a structure is resting on. What a tool has been used for and by whom. Millbrook's trades, debts and who actually does the work. The specification method her father taught her. The Edge District, secondhand.",
+ "wants": "To be met with the same plainness she gives. To keep the shop hers while going where Silas goes. To know what her father actually was.",
+ "fears": "Being managed. Being handled gently instead of answered. That the plainness she trades in was something her father used on her.",
+ "reactsToReputation": "⚠️ COMPETENCE OVER CHARM, ALWAYS. A reputation for good work opens her; a reputation for talk closes her. She has no interest in standing and considerable interest in whether you finish what you start.",
+ "level": 27,
+ "_levelWhy": "⚠️ ERIK 2026-09-02: 'Silas met her very early and she's been with him ever since… wouldn't she be similar level to him?' ✅ CORRECT, and Aevi's first estimate of 18 was anchored wrong — it read her as an NPC the player ACCUMULATED rather than someone who has lived the same 45 days he has AND arrived with a mastery already built. firstMet millbrook day 1, relationship 10, still present. ⛔ 27 not 30: the gap is not competence, it is that Silas takes the risks that generate levels. In her own domain she is ahead of him.",
+ "subAttributes": {
+  "craft": 14,
+  "insight": 11,
+  "strength": 10,
+  "wits": 8,
+  "presence": 7,
+  "reason": 7,
+  "agility": 6,
+  "rapport": 5
+ },
+ "_subsWhy": "`craft` highest — master smith, two hundred heats. `insight` next: the sense runs on it and the save says she reads 'deeper than Silas's own'. `strength` from forge work, and she fights. `presence` mid — real authority, earned rather than projected. ⚠️ `rapport` LOW is deliberate: 'reacts to competence over charm'.",
+ "abilities": [
+  {
+   "abilityId": "stone_read",
+   "level": 3,
+   "why": "⚑ THE SIGNATURE. '[d15] confirmed the slow-dissolving seam through ironsense and marked it plainly. Craft-sense reading deeper than Silas's own.'"
+  },
+  {
+   "abilityId": "stonewise",
+   "level": 3,
+   "why": "'[d15] read the third structural fault through ironsense and marked it plainly for future wardens.' What holds, what is about to fail."
+  },
+  {
+   "abilityId": "thingcraft",
+   "level": 3,
+   "why": "'the specific grain of accumulated craft: grip-wear, heat-memory, the physical corrections of two hundred heats.'"
+  },
+  {
+   "abilityId": "worth_the_work",
+   "level": 3,
+   "why": "Years of a successful smithy. 'A tidy, unsentimental shop.' She prices labour by knowing what it costs."
+  },
+  {
+   "abilityId": "sound_repair",
+   "level": 2,
+   "why": "'[d15] co-cast reinforcement of the secondary fault complete. Her ironsense steadying the timber a second time.'"
+  },
+  {
+   "abilityId": "keen_appraisal",
+   "level": 2,
+   "why": "Value, provenance, condition. The shop half of the sense."
+  },
+  {
+   "abilityId": "sound_read",
+   "level": 2,
+   "why": "Structures, scaffold, timber — the mine-shaft work."
+  },
+  {
+   "abilityId": "set_word",
+   "level": 2,
+   "why": "'[d15] Named plainly that they face what comes next together, not apart.' ⚠️ Mason sect line: 'THE WORD — what you said, and your history of keeping it.'"
+  },
+  {
+   "abilityId": "plain_weight",
+   "level": 2,
+   "why": "⚠️ SHE FIGHTS — Erik: 'Pell fights too… spear, hammer, shortsword, brigandine.' The mason strike: full and honest weight, sent."
+  },
+  {
+   "abilityId": "near_way",
+   "level": 2,
+   "why": "'[d15] Chasing Silas deep into the mine-shaft at speed… her body reading the stone as well as his does.'"
+  },
+  {
+   "abilityId": "boundary_stone",
+   "level": 1,
+   "why": "A smith sets thresholds. Shop-work as much as craft."
+  },
+  {
+   "abilityId": "reduction",
+   "level": 1,
+   "why": "T3. Reduce a soaring abstraction to the plain touchable fact under it. ⚠️ That is her VOICE, not just a craft."
+  },
+  {
+   "abilityId": "keystone_blow",
+   "level": 1,
+   "why": "⛔ T4 — WHERE THE SMITH AND THE FIGHTER ARE THE SAME SKILL. She does not out-muscle a thing; she finds the one stone it is resting on and strikes THAT."
+  },
+  {
+   "abilityId": "quick_hands",
+   "level": 2,
+   "why": "Somatic — the other Body sect, open to her. Forge hands."
+  },
+  {
+   "abilityId": "steady_hands",
+   "level": 2,
+   "why": "Somatic. Steadying work, and steadying a person."
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 1,
+   "why": "Somatic. She runs hard and keeps up."
+  },
+  {
+   "abilityId": "read_the_fight",
+   "level": 1,
+   "why": "⚠️ THE FATHER. Breaking is ADJACENT to Body, so under R21 she caps at tier 3 there without ever having chosen it. She reads a fight the way she reads iron and did not learn it on purpose."
+  }
+ ],
+ "_fatherThread": "⚠️ ERIK 2026-09-02, pondering: 'Pell has a father in the story — I was pondering if he was a Marcher, so she might have some Violence hereditary tendencies.' ✅ Mechanically clean: Breaking is adjacent to Body, so `read_the_fight` sits at her ceiling without a choice ever being made. ⛔ AND IT PAYS OFF HER CODEX: '[d3] Pell's father told her he had been a clerk — made his departure from the Plateau sound small and personal.' A man who called himself a clerk and taught his daughter the specification method so she would have the language when she reached the Edge District. ⚠️ A MARCHER HIDING AS A CLERK IS A BETTER ANSWER TO THAT THAN AN ACTUAL CLERK. ⬜ Not ruled — held as the live reading.",
+ "_ironsenseNote": "⛔ WHY 'IRONSENSE' GOT OVERDONE, AND THE SAVE PROVES IT. Erik: 'she has ironsense, which gets overdone because she needs a more robust way to gain crafts.' ⚠️ IRONSENSE IS NOT ONE SKILL — it is Pell doing THREE things the registry recorded as one free-text string in `skillsObserved`: `stone_read` (a material's truth by touch), `stonewise` (what holds, what is about to fail), `thingcraft` (weight, soundness, worth, the grain of accumulated craft). ➡️ One remembered word, three crafts. She reached for it every time because it was the only thing on her sheet. ✅ THIS FILE IS THE FIX.",
+ "_authored": "⚠️ AUTHORED SHEET — `engine/npcsheet.js` derives sheets for people nobody wrote down and states 'AN AUTHORED SHEET ALWAYS WINS.' This is that. ⛔ Pell previously existed ONLY in `npc_interiority.json` and the save's `npcRegistry` — no NPC file at all. Her drive layer (driveSummary, wants, fears, pushesBackWhen, emotionalRange, acknowledgeTone) plus `physicality` and `intimacyNotes` stay in `npc_interiority.json`; they are NOT duplicated here."
+}

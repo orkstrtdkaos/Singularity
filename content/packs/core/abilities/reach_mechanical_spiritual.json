@@ -2788,15 +2788,15 @@
     "ward",
     "resist"
    ],
-   "narrationHints": "Nothing visible happens. The room simply becomes a place where certain things do not work, and everyone feels it before anyone can say why.",
+   "narrationHints": "You put weight on a place. Nothing visible happens and everyone feels it — and the things that were about to work here find their working comes out thin.",
    "description": "Numenwork holding-craft. Meaning laid over a place until the place holds it.",
-   "notFor": "Warding a person (it holds ground, not people); anywhere you cannot remain; stopping anything purely physical — a thrown stone does not care what a room means.",
+   "notFor": "Warding a person (it holds ground); stopping what is purely physical — a thrown stone does not care what a room means; ground you have not stood on.",
    "tree": [
     {
      "rank": 1,
      "name": "Hallowed Ground",
-     "grants": "Make a small place hostile to workings that run on hunger or the dark. They weaken inside it and their bearers know it.",
-     "cannot": "Ground only, never a person, and you must STAY. Step out and it thins with distance.",
+     "grants": "Stand somewhere and make it MEAN something, and hostile workings weaken inside it — one rung lower on anything that runs on hunger, the dark, rot, or borrowed significance. ⚠ YOU ACT NORMALLY WHILE IT HOLDS; it costs your attention, not your turn.",
+     "cannot": "Ground, never a person. It covers where you can see, and a purely physical blow is unaffected.",
      "functions": [
       "ward"
      ],
@@ -2853,7 +2853,9 @@
     "scope": 2,
     "wardTypes": [
      "shadow",
-     "appetite"
+     "appetite",
+     "decay",
+     "meaning"
     ]
    },
    "intensity": {
@@ -2878,9 +2880,10 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/survive action that makes a place hostile to hungry and shadow workings. Rated 5 of 10 across a scope of 2 for about eight hours.",
+   "plainly": "A social/survive action that weakens hostile shadow, appetite, decay and meaning workings by one rung inside a place. Rated 5 of 10 across a scope of 2 for about eight hours.",
    "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific.",
-   "_t5Fix_20260901": "⛔ T5 — RANK IS MASTERY. The first authoring put a NEW COST at rank 3 on every craft (Erik: 'that was quite the cavalier authoring'). ⚠️ The gate missed it — its SELFTAX regex targets self-harm phrasings and these were world-consequence costs. ✅ Rank 3 now LIFTS the rank-1 limitation; the consequence moved to `intensity.surge`, which the player CHOOSES."
+   "_t5Fix_20260901": "⛔ T5 — RANK IS MASTERY. The first authoring put a NEW COST at rank 3 on every craft (Erik: 'that was quite the cavalier authoring'). ⚠️ The gate missed it — its SELFTAX regex targets self-harm phrasings and these were world-consequence costs. ✅ Rank 3 now LIFTS the rank-1 limitation; the consequence moved to `intensity.surge`, which the player CHOOSES.",
+   "_t7Fix_20260901": "⛔ T7 — SECOND-TURN TEST, applied after Erik: 'make sure the way you wrote these is clearly something a player would WANT to do.' ⚠️ FAILURES FOUND: `hallowed_ground` was passive (stand still) and narrowly conditional (shadow+appetite only) — now it names a CONCRETE effect (one rung lower), widens to four ward types, and the wielder ACTS NORMALLY while it holds. `thin_step`'s precondition was GM-owned and unknowable — the player can now always tell whether the step is there BEFORE spending. `administered_mercy`'s 'it takes the time it takes' was atmosphere, not adjudicable — now it costs a full turn, stated."
   },
   {
    "id": "bound_witness",
@@ -3003,15 +3006,15 @@
    "functions": [
     "move"
    ],
-   "narrationHints": "You step where the world is worn through and arrive somewhere the geometry did not offer. It is a short walk on the other side and a long one back.",
+   "narrationHints": "You step where the world is worn through and come out somewhere the geometry did not offer. It is a short walk on that side.",
    "description": "Numenwork travelling-craft. Where meaning is thick the matter is thin, and the Numinous walk the difference.",
-   "notFor": "Crossing anywhere the veil is whole; carrying an unwilling passenger; escaping something that also walks thin; arriving anywhere you have not perceived.",
+   "notFor": "Carrying an unwilling passenger; arriving anywhere you cannot see; outrunning something that also walks thin.",
    "tree": [
     {
      "rank": 1,
      "name": "Thin Step",
-     "grants": "Step through a thin place to another within sight — past a door, across a gap, out of a closing circle.",
-     "cannot": "ONLY WHERE IT IS ALREADY THIN, and only where you can SEE. Thin places are where they are; you do not make them.",
+     "grants": "Step out of where you are and into somewhere you can see — past a door, across a gap, out of a closing ring. ⚠ YOU CAN ALWAYS TELL WHETHER THE STEP IS THERE before you spend anything, and near anything that matters it usually is.",
+     "cannot": "You must SEE the arrival. And the thinness is the world's, not yours — in a place that means nothing to anyone, there is no step and you will know it before you try.",
      "functions": [
       "move"
      ],
@@ -3087,9 +3090,10 @@
      "class": "cost"
     }
    ],
-   "plainly": "A survive/travel action that steps through a thin place to somewhere in sight. Rated 4 of 10 on 1 target.",
+   "plainly": "A survive/travel action that steps you through to somewhere in sight. Rated 4 of 10 on 1 target.",
    "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific.",
-   "_t5Fix_20260901": "⛔ T5 — RANK IS MASTERY. The first authoring put a NEW COST at rank 3 on every craft (Erik: 'that was quite the cavalier authoring'). ⚠️ The gate missed it — its SELFTAX regex targets self-harm phrasings and these were world-consequence costs. ✅ Rank 3 now LIFTS the rank-1 limitation; the consequence moved to `intensity.surge`, which the player CHOOSES."
+   "_t5Fix_20260901": "⛔ T5 — RANK IS MASTERY. The first authoring put a NEW COST at rank 3 on every craft (Erik: 'that was quite the cavalier authoring'). ⚠️ The gate missed it — its SELFTAX regex targets self-harm phrasings and these were world-consequence costs. ✅ Rank 3 now LIFTS the rank-1 limitation; the consequence moved to `intensity.surge`, which the player CHOOSES.",
+   "_t7Fix_20260901": "⛔ T7 — SECOND-TURN TEST, applied after Erik: 'make sure the way you wrote these is clearly something a player would WANT to do.' ⚠️ FAILURES FOUND: `hallowed_ground` was passive (stand still) and narrowly conditional (shadow+appetite only) — now it names a CONCRETE effect (one rung lower), widens to four ward types, and the wielder ACTS NORMALLY while it holds. `thin_step`'s precondition was GM-owned and unknowable — the player can now always tell whether the step is there BEFORE spending. `administered_mercy`'s 'it takes the time it takes' was atmosphere, not adjudicable — now it costs a full turn, stated."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

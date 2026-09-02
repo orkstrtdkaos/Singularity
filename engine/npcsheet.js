@@ -307,7 +307,7 @@ export function battleSkillsFor(entry, opts = {}) {
   const out = [];
   for (const ab of crafts) {
     for (const fn of (ab.functions || [])) {
-      out.push({ id: ab.id, function: fn, name: ab.name || ab.id, tier: ab.levelReq || 1,
+      out.push({ id: ab.id, function: fn, name: ab.name || ab.id, tier: abilityTier(ab),   // CCODE-341d: a THIRD shape of the levelReq-as-tier defect — assigning it to a field NAMED tier
         attribute: ab.attribute || "practical", energyCost: ab.energyCost ?? null });
     }
   }

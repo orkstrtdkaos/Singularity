@@ -2201,6 +2201,10 @@ console.log("\n── §35 · every tier question goes through abilityTier ─�
       // learn gate. ⚠️ SCAN FOR THE ROLE, NOT THE SPELLING: any tier helper, and any tier argument.
       if (/tier(?:Of|Num|Price)\s*\(\s*[A-Za-z_$][\w$]*\??\.\w*[Ll]evelReq/.test(code)) offenders35.push(`${f}:${i + 1}`);
       if (/domainAccess\([^,]+,\s*[A-Za-z_$][\w$]*\??\.\w*[Ll]evelReq/.test(code)) offenders35.push(`${f}:${i + 1} (tier arg)`);
+      // ⛔ A THIRD SHAPE, found in `npcsheet.js` while reviewing Aevi's NPC-sheet spec: assigning `levelReq`
+      // straight into a field NAMED `tier`. Not a helper call, not an argument — a property. ⚠️ Each sweep
+      // I have written matched the shapes I had already SEEN; this one matches the role by its own name.
+      if (/\btier\s*:\s*[A-Za-z_$][\w$]*\??\.\w*[Ll]evelReq/.test(code)) offenders35.push(`${f}:${i + 1} (tier field)`);
     });
   }
   check("§35: no reader in ANY engine module treats `levelReq` as the tier",

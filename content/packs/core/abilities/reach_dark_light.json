@@ -4702,7 +4702,7 @@
      "gains": "broaden",
      "harmRung": "lethal",
      "gainAxes": [],
-     "grants": "⛔ PREPARE A WORKING POISON — 2d6 CORROSIVE when it lands, and it returns each day until treated. ⚠️ In a cup, on an edge, or in the air of a closed room.",
+     "grants": "⛔ PREPARE A WORKING POISON — it wounds for 2d6 CORROSIVE when it lands, and returns each day until treated. ⚠️ In a cup, on an edge, or in the air of a closed room.",
      "cannot": "It must get inside them. ⚠️ A careful drinker tastes it. ⛔ And it takes real time to prepare.",
      "ongoingHarm": {
       "type": "corrosive"
@@ -4722,7 +4722,7 @@
       "quality",
       "duration"
      ],
-     "grants": "⛔ TASTELESS, AND THE ONSET MOVES TO DAYS — they will be somewhere else, doing something else, when it starts. ⚠️ Nobody connects the cup to the collapse.",
+     "grants": "⛔ TASTELESS, AND THE ONSET MOVES TO DAYS — it strikes when they are somewhere else, doing something else. ⚠️ Nobody connects the cup to the collapse.",
      "cannot": "⚠️ Days of delay is days of them being elsewhere, including out of your reach. ⛔ A physician still helps.",
      "ongoingHarm": {
       "type": "corrosive"
@@ -4742,7 +4742,7 @@
       "damage",
       "duration"
      ],
-     "grants": "⛔ IT STOPS BEING A POISON AND BECOMES A CONDITION — it does not purge, it must be TREATED over weeks, and it takes something with it. ⚠️ People will say he was never well after that winter.",
+     "grants": "⛔ IT STOPS BEING A POISON AND BECOMES A CONDITION — it does not purge, it must be TREATED over weeks, and it disables something permanently. ⚠️ People will say he was never well after that winter.",
      "cannot": "⛔ It is unmistakably deliberate at this rank — nobody thinks a wasting like this is bad luck. ⚠️ And it is slow enough that the target has time to work out who did it.",
      "ongoingHarm": {
       "type": "corrosive"
@@ -4752,7 +4752,8 @@
    "_authored": "⛔ ERIK 2026-08-29: 'also you'd find POISONS here… maybe a corrosive.' ⚠️ It fits the Unlit precisely: a people who cannot operate in daylight need harm that ARRIVES LATER AND ELSEWHERE.",
    "_renamed_20260829": "⚠️ `The Slow Cup` -> `Slow Cup`. ⛔ ERIK: 'Instead of THE Given have it be UTTERED NAME. You're starting to use \"the\" in every title again. WE TALKED ABOUT THIS.' ⚠️ MEASURED: 42 crafts authored, 5 starting with 'The' — AND ALL FIVE FROM THIS ONE UMBRAL SESSION. The drift is not gradual across the corpus; it happens WITHIN a sitting, which is why Erik catches it and I do not.",
    "_friendlyFire_20260830": "⛔ ERIK 2026-08-30: 'YOU WILL NOT HARM YOUR OWN. I HATE GAMES THAT DO THAT.' ⚠️ I WROTE ALLY-HARM INTO SIX CRAFTS THIS SESSION AND IT IS A STANDING DESIGN RULE I KEPT VIOLATING — the same instinct as the narrative-cost and the punishment-surge habits: I keep pricing power in harm to the player's own side. ✅ REMOVED HERE. ⛔ Erik: 'in this case I can see the POTENTIAL for friendly fire — we can log this and others like it under a POTENTIAL FUTURE FRIENDLY FIRE FEATURE.' See `po/BACKLOG.md`.",
-   "_theHabit_20260830": "⚠️ RANK NAMES STRIPPED OF THE LEADING ARTICLE. ⛔ ERIK HAS CORRECTED MY 'The' HABIT TWICE, and both times I checked CRAFT NAMES ONLY — fourteen RANK names were still carrying it. ✅ The self-check was measuring the wrong field, which is why the habit survived being caught. ⚠️ `reaping_sickle` r3 also collided with `the_known_name` r2 — both were 'The Whole Field'."
+   "_theHabit_20260830": "⚠️ RANK NAMES STRIPPED OF THE LEADING ARTICLE. ⛔ ERIK HAS CORRECTED MY 'The' HABIT TWICE, and both times I checked CRAFT NAMES ONLY — fourteen RANK names were still carrying it. ✅ The self-check was measuring the wrong field, which is why the habit survived being caught. ⚠️ `reaping_sickle` r3 also collided with `the_known_name` r2 — both were 'The Whole Field'.",
+   "_combatTaughtFix_20260902": "⛔ `abilitiesCombatClaimedNotTaught` — this craft DECLARED a HARM function and no rank said HOW IT FIGHTS. ⚠️ THE PROSE WAS NOT BAD, IT WAS STATISTICAL: 'DEALS 1d6 DAMAGE at 8 paces' names the RESULT and never the ACT. A GM reading it had a number and no verb. ✅ EDITS ARE SURGICAL — the authored voice is kept and the doing is made explicit. ⚠️ Per the ratchet's own header: a gate that costs an author their better phrasing is levying a tax, so nothing here was weakened to satisfy a regex."
   },
   {
    "powerSystem": "precursor",

@@ -148,13 +148,23 @@ export function leanOf(entry, opts = {}) {
  *  moment Aevi authors one the derivation stops applying to them. */
 export function sheetFor(entry, { day = null, cfg = {}, roleAttributes = null, authored = null, levelOverride = null } = {}) {
   if (authored) return { ...authored, id: entry?.id || authored.id, authored: true };
+  // ⛔ SNG-486 — see sheetFrom: a record carrying its own sub-attributes IS an authored sheet.
+  const own = entry?.subAttributes && Object.keys(entry.subAttributes).length;
+  const sheet = sheetFrom(entry, { day, cfg, roleAttributes, levelOverride });
+  return own ? { ...sheet, subAttributes: { ...entry.subAttributes }, authored: true, derived: false } : sheet;
+}
+/** ⛔ THE BODY OF THE SHEET, shared by the derived and the authored paths. ⚠️ SPLIT OUT RATHER THAN
+ *  COPIED: an authored sheet differs from a derived one in WHAT IT KNOWS, not in how health, soak or
+ *  energy are computed from a level — duplicating those would let the two drift. */
+function sheetFrom(entry, { day = null, cfg = {}, roleAttributes = null, levelOverride = null } = {}) {
+
   // ⛔ CCODE-273 — THE ONE SEAM A SUMMON NEEDS. Aevi: "A SUMMON IS THAT WITH THE LEVEL COMING FROM SOMEWHERE
   // ELSE... replaces `derivedLevel(entry)` with `casterLevel + tierGap` and the rest of the function is
   // already correct." She is right — everything below this line (the base, the leans, the bonus) wants a
   // level and does not care where it came from.
   // ⚠️ `?? derivedLevel` RATHER THAN `||`: a legitimate override of 0 must not fall through to the derived
   // value, and levels are clamped to 1 below anyway.
-  const level = levelOverride != null ? Math.max(1, num(levelOverride, 1)) : derivedLevel(entry, { day, cfg, authored });
+  const level = levelOverride != null ? Math.max(1, num(levelOverride, 1)) : derivedLevel(entry, { day, cfg });
   const leans = leansOf(entry, { roleAttributes });
   const base = Math.max(1, Math.round(level / 2) + 1);
   const attributes = { physical: base, mental: base, social: base, practical: base };
@@ -191,7 +201,16 @@ export function sheetFor(entry, { day = null, cfg = {}, roleAttributes = null, a
  *  which is precisely why Pell has one thing to reach for: the observation was recorded and never became
  *  a craft anyone could resolve. */
 export function craftsOf(entry, catalog = {}, { limit = 8 } = {}) {
-  const seen = (entry?.skillsObserved || []).map(s => String(s).toLowerCase().trim()).filter(Boolean);
+  // ⛔ SNG-486 — A READER WITH NO WRITER MET A WRITER WITH NO READER, AND THEY WERE THE SAME DEFECT.
+  // `skillsObserved` is what this function has always read: names the PLAYER has seen someone use.
+  // ⚠️ MEASURED ACROSS ALL 44 AUTHORED NPCs: nobody has ever authored it. Zero records carry the field.
+  //
+  // ⛔ AND AEVI'S FIRST AUTHORED SHEET (Pell, 17 crafts) USES `abilities` — the same shape a PLAYER
+  // character carries, `{ abilityId, level }`. That is the better shape: it names crafts by ID rather
+  // than by a string that has to be re-matched, and it carries the RANK. So both are read, and the
+  // authored one is read FIRST — "an authored sheet always wins" is this file's own stated contract.
+  const authoredIds = (entry?.abilities || []).map(a => String(a?.abilityId || a || "").toLowerCase().trim()).filter(Boolean);
+  const seen = [...authoredIds, ...(entry?.skillsObserved || []).map(s => String(s).toLowerCase().trim()).filter(Boolean)];
   const byId = {}, byName = {};
   for (const [id, ab] of Object.entries(catalog || {})) {
     byId[String(id).toLowerCase()] = ab;

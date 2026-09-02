@@ -1,4 +1,5 @@
 {
+ "schemaVersion": 1,
  "id": "pell",
  "name": "Pell Ran Marsh",
  "sex": "female",
@@ -24,10 +25,22 @@
   "peace": 4
  },
  "voiceHints": "Plain, unhurried, and short. She does not soften a finding and does not decorate one. Says the true thing in the fewest words it takes, then waits. Dry rather than warm in the shop; the warmth is real and it is not for customers. ⚠️ SHE NAMES THINGS PLAINLY — that is the whole character, in the forge and out of it.",
- "knowledge": "Iron, stone, timber and the joins between them. What a structure is resting on. What a tool has been used for and by whom. Millbrook's trades, debts and who actually does the work. The specification method her father taught her. The Edge District, secondhand.",
+ "knowledge": [
+  "Iron, stone, timber and the joins between them",
+  "What a structure is resting on",
+  "What a tool has been used for and by whom",
+  "Millbrook's trades, debts and who actually does the work",
+  "The specification method her father taught her",
+  "The Edge District, secondhand"
+ ],
  "wants": "To be met with the same plainness she gives. To keep the shop hers while going where Silas goes. To know what her father actually was.",
  "fears": "Being managed. Being handled gently instead of answered. That the plainness she trades in was something her father used on her.",
- "reactsToReputation": "⚠️ COMPETENCE OVER CHARM, ALWAYS. A reputation for good work opens her; a reputation for talk closes her. She has no interest in standing and considerable interest in whether you finish what you start.",
+ "reactsToReputation": {
+  "reliable": "opens. A reputation for good work is the only credential she recognises.",
+  "loose-lipped": "closes. A reputation for talk is a reputation for not finishing.",
+  "any": "no interest in standing, considerable interest in whether you finish what you start."
+ },
+ "_reactsWhy": "⚠️ COMPETENCE OVER CHARM, ALWAYS. A reputation for good work opens her; a reputation for talk closes her. She has no interest in standing and considerable interest in whether you finish what you start.",
  "level": 27,
  "_levelWhy": "⚠️ ERIK 2026-09-02: 'Silas met her very early and she's been with him ever since… wouldn't she be similar level to him?' ✅ CORRECT, and Aevi's first estimate of 18 was anchored wrong — it read her as an NPC the player ACCUMULATED rather than someone who has lived the same 45 days he has AND arrived with a mastery already built. firstMet millbrook day 1, relationship 10, still present. ⛔ 27 not 30: the gap is not competence, it is that Silas takes the risks that generate levels. In her own domain she is ahead of him.",
  "subAttributes": {

@@ -3192,6 +3192,78 @@ console.log("\n── §48 · holdings: offered, never imposed ──");
     /data-hold-accept/.test(app48) && /data-hold-dismiss/.test(app48) &&
     /querySelectorAll\("\[data-hold-accept\]"\)/.test(app48) && /querySelectorAll\("\[data-hold-dismiss\]"\)/.test(app48));
 }
+/* ═════ §49 — SNG-486: THE FIRST AUTHORED NPC SHEET, AND THE THREE DOORS IT WAS BEHIND ═════ */
+// ⛔ Aevi authored Pell Ran Marsh — L27, eight sub-attributes, 17 crafts. ⚠️ NONE OF IT REACHED THE ENGINE:
+//
+//   1. `pell.json` was not in the pack manifest — 43 listed, 44 on disk. The file never loaded.
+//   2. `sheetFor` says "AN AUTHORED SHEET ALWAYS WINS" — but `authored` is a CALLER-SUPPLIED OPTION and
+//      nothing passes one. The record itself was never consulted.
+//   3. `craftsOf` reads `skillsObserved`. ⛔ MEASURED: zero of 44 authored NPCs have ever carried that
+//      field. A reader with no writer met a writer with no reader — the same defect from both sides.
+//
+// ⚠️ THE LEVEL LANDED AND NOTHING ELSE DID, which is the worst version: enough got through that the sheet
+// looked plausible — L27, health 81 — while `subAttributes` was {} and `skills` was [].
+console.log("\n── §49 · the authored sheet actually arrives ──");
+{
+  const NS49 = await import("../engine/npcsheet.js");
+  const pell = rj("content/packs/valley/npcs/pell.json");
+
+  // ⛔ DOOR 2 — REGISTERED. Every npc file on disk is named by the manifest.
+  {
+    const man = rj("content/packs/valley/manifest.json");
+    const listed = new Set((man.provides?.npcs || []).map(x => String(x).split("/").pop()));
+    const onDisk = readdirSync(join(root, "content/packs/valley/npcs")).filter(f => f.endsWith(".json"));
+    const missing = onDisk.filter(f => !listed.has(f));
+    check("§49: ⛔ every authored NPC file is REGISTERED — registration is not arrival, but absence is never it",
+      missing.length === 0, missing.join(" · "));
+  }
+
+  // ⛔ DOOR 4 — READ. The record carries its own sheet, and that beats derivation.
+  const sheet = NS49.sheetFor(pell, {});
+  check("§49: an authored record produces an AUTHORED sheet, not a derived one",
+    sheet.authored === true && sheet.derived === false,
+    `authored=${sheet.authored} derived=${sheet.derived}`);
+  check("§49: ⛔ …and her eight sub-attributes survive — derivation cannot produce these",
+    Object.keys(sheet.subAttributes || {}).length === 8 && sheet.subAttributes.craft === 14,
+    JSON.stringify(sheet.subAttributes));
+  check("§49: …her authored LEVEL is honoured", sheet.level === 27, String(sheet.level));
+
+  // ⚠️ AND A PERSON NOBODY WROTE DOWN IS UNCHANGED — derivation is for exactly them.
+  const stranger = NS49.sheetFor({ id: "x49", name: "A Stranger", role: "a carter" }, {});
+  check("§49: ⚠️ a person nobody authored is still DERIVED, byte-for-byte as before",
+    stranger.derived === true && !stranger.authored && Object.keys(stranger.subAttributes || {}).length === 0);
+
+  // ⛔ DOOR 3 — HER CRAFTS REACH THE FIGHT. `abilities` is the shape a PLAYER carries; it names crafts by
+  // ID and carries the RANK, so it is the better shape and it is read FIRST.
+  {
+    const cat49 = {};
+    for (const a of abilities) if (a && a.id) cat49[a.id] = a;
+    const bs = NS49.battleSkillsFor(pell, { catalog: cat49 });
+    check("§49: ⛔ her 17 authored crafts reach the fight — not just a plain strike",
+      bs.skills.length > 1, `${bs.skills.length} skill(s)`);
+    check("§49: …and they are HER crafts, resolved by id",
+      bs.skills.some(x => x.id === "stone_read") && bs.skills.some(x => x.id === "thingcraft"),
+      bs.skills.slice(0, 5).map(x => x.id).join(" · "));
+    check("§49: ⚠️ …and the plain strike is still there — an NPC is not a different kind of thing",
+      bs.skills.some(x => x.id === "_strike"));
+    // ⚠️ THE OLD FIELD STILL WORKS. Nothing authored it, but a reader that drops a shape it used to
+    // accept is a migration disguised as a fix.
+    const obs = NS49.battleSkillsFor({ id: "o49", skillsObserved: ["stone_read"] }, { catalog: cat49 });
+    check("§49: `skillsObserved` is still read, so nothing that used it breaks",
+      obs.skills.some(x => x.id === "stone_read"));
+  }
+
+  // ⛔ AND THE ONE THING STILL MISSING, ASSERTED AS MISSING so it cannot be forgotten: with no
+  // `assistTags`, `contributionsOf` falls to its HARM default and a master smith counts as a striker.
+  // ⚠️ THIS IS AUTHORING, NOT WIRING — SPEC_party_contributions §R2.2. When Aevi tags her, this goes RED
+  // and the line below is what must be updated.
+  {
+    const CB49 = await import("../engine/combatants.js");
+    const fams = CB49.contributionsOf(pell);
+    check("§49: ⚠️ GAP — Pell still has no assistTags, so she reads as HARM by default",
+      fams.length === 1 && fams[0] === "HARM", JSON.stringify(fams));
+  }
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

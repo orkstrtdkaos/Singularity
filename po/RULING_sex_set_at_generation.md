@@ -84,3 +84,83 @@ its own field, is a separate call. **Flagged rather than assumed.**
 the attraction system; they cannot be authored against a gate that does not hold.
 
 ➡️ Order: **R24 gate built and backfilled → `SPEC_SNG-NPC-ATTRACTION` promoted → R23 crafts authored.**
+
+---
+
+# ⛔ R24 CLARIFIED AND CORRECTED — 2026-09-01
+
+⚠️ **Aevi misread the original ruling twice.** Recorded because the first version would have built
+the wrong gate, and CCode already had it in the work order.
+
+**Error 1 — presence vs. knowledge.** Erik said *"you can't romance until you **know** the sex."*
+Aevi implemented that as a data-presence check (`field exists ? eligible : excluded`). It is about
+the character being **established**, not about a field being non-null.
+
+**Error 2 — inventing an exclusion.** Aevi wrote that a gender-only construct is permanently
+non-romanceable. ⛔ **Erik: *"I never said you couldn't romance an opposite gender construct."***
+A construct with a known gender and no sex IS romanceable.
+
+**Error 3 — over-building.** Aevi then proposed per-playthrough discovery state, with NPC files
+carrying truth and saves carrying what each player had learned. ⛔ **Also wrong** — documentation
+happens **once**, at first materialization.
+
+---
+
+## ✅ THE RULING AS ACTUALLY GIVEN
+
+| subject | rule |
+|---|---|
+| **NPC** | ⚠️ **The first time an NPC becomes anything, their sex/gender is documented.** Set at first materialization — not a discovery arc, not deferred. |
+| **PC** | **Sex is chosen at creation. Gender matches sex.** No divergence for a player character. |
+| **Gate** | ⛔ **Opposite-sex only. Hetero romances only.** |
+| **`it`** | For anything not yet materialized as someone, **and** for things genuinely neither. **"It" is a default for the not-yet-established, not a permanent category.** |
+
+### Sex and gender do not diverge for a sexed being
+
+| case | sex | gender | pronoun | romanceable |
+|---|---|---|---|---|
+| sexed being | male | male | he | ✅ |
+| sexed being | female | female | she | ✅ |
+| **unsexed, gender known** | — | female | she | ✅ **yes — opposite-gender constructs are romanceable** |
+| not yet materialized | — | — | **it** | ⛔ not yet |
+| genuinely neither | — | — | it | ⛔ |
+
+### On in-game Aevi
+
+Erik: *"It is 'it' until we find out differently — which for Aevi is when we find out it is a she.
+Just like Marrow."*
+
+➡️ ⛔ **Do NOT backfill the companion file's pronouns.** "It" is correct for in-game Aevi **today**,
+because it has not yet been established as anything. When the story establishes her, it gets
+documented then — the same path Marrow took.
+
+⚠️ **This corrects Aevi's proposal to fix those pronouns as part of the backfill.** That would have
+spent a story beat as a data cleanup.
+
+### `corrections.js` is not the villain
+
+Aevi's first draft said `corrections.js:277` should "stop being the source of truth." ⚠️ **More
+accurate:** it is the **repair path for when the GM narrates ahead of documentation** — which is
+exactly the Pell-rendered-male case. Documentation at first materialization reduces how often it is
+needed; it does not make it wrong.
+
+---
+
+## What this changes for the work
+
+### CCode
+1. **PC creation: sex-selection step.** Gender is derived, not separately chosen. ⚠️ Still a NEW
+   creation-flow element, alongside sub-attribute allocation (R2) and starting location (R4).
+2. **NPC materialization documents sex/gender** — at the moment an NPC first becomes someone,
+   authored or minted.
+3. **The gate is opposite-sex/gender matching**, PC against NPC.
+4. ⬜ `corrections.js` keeps its repair role. Report how it should relate to documented values.
+
+### Aevi
+1. **Backfill `sex`/`gender` on NPCs who are already established characters.** ⛔ **Not** on
+   anything still legitimately "it."
+2. **Author `romanceEligible`** opt-in — being sexed does not by itself make a character romanceable.
+3. **Extend `boundaries`** from companions to NPCs. Folds into the thickening pass.
+
+⚠️ **OI-26 (age unauthored) still stands** — `romanceEligible` carries adult status implicitly as a
+per-character author decision. Whether that suffices is still Erik's call.

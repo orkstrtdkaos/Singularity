@@ -603,7 +603,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `rank` | 1688 | `tree`×1176 `rankDeltas`×512 | ✅ READ | `braids.js`, `capabilities.js`, `coliseum.js` |
 | `name` | 1595 | `root`×419 `tree`×1176 | ✅ READ | `affiliation.js`, `arceffects.js`, `art.js` |
 | `functions` | 1595 | `root`×419 `tree`×1176 | ✅ READ | `braids.js`, `coliseum.js`, `craftmechanics.js` |
-| `harmRung` | 1497 | `root`×394 `tree`×1103 | ✅ READ | `braids.js`, `gm_registry.js`, `intent.js` |
+| `harmRung` | 1522 | `root`×419 `tree`×1103 | ✅ READ | `braids.js`, `gm_registry.js`, `intent.js` |
 | `grants` | 1176 | `tree`×1176 | ✅ READ | `braids.js`, `capabilities.js`, `earnedpower.js` |
 | `cannot` | 1176 | `tree`×1176 | ✅ READ | `authormode.js`, `braids.js`, `capabilities.js` |
 | `gains` | 1146 | `tree`×1146 | ✅ READ | `encounters.js`, `gm.js`, `roundreceipt.js` |

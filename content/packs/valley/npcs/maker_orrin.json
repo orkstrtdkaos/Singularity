@@ -1,48 +1,50 @@
 {
-  "schemaVersion": 1,
-  "id": "maker_orrin",
-  "name": "Orrin Nine-Thumbs",
-  "role": "Churnfolk maker whose best inventions can never be rebuilt",
-  "homeLocation": "tumbledown_market",
-  "communityId": "unspooling.tumbledown",
-  "personality": {
-    "warmth": 0.6,
-    "trust": 0.3,
-    "candor": 0.7,
-    "patience": 0.1
-  },
-  "spectrum": {
-    "chaos_order": -0.5,
-    "destruction_creation": 0.5,
-    "emotional_logical": 0.2
-  },
-  "voiceHints": "Delighted, scattered, finishes three thoughts at once and none of them. Grieves every device the market ate. Names things by what number of thumbs the making cost him; he has ten fingers and a lot of stories.",
-  "knowledge": [
-    "How to make almost anything once",
-    "The market's rhythm — what will reassemble where, roughly, sometimes",
-    "That someone is trying to fix Tumbledown in place and what it would kill"
-  ],
-  "wants": "To rebuild the one device that mattered — the one that could have helped everyone — before he forgets how it felt to have made it.",
-  "fears": "That his gift is only luck wearing a craftsman's coat, and that the market will eventually eat him too.",
-  "reactsToReputation": {
-    "kind": "floods them with half-finished wonders",
-    "patient": "the rare person he'll actually teach",
-    "order-minded": "wary — smells the Lattice on them"
-  },
-  "universalRole": "Maker",
-  "roleMethod": "Churn method — improvises wonders that work once",
-  "appearance": "Fifties, barrel-bodied, wild grey-brown hair escaping a leather band, a full beard with one side singed shorter than the other. Nine fingers — the tenth ends at the first knuckle. Goggles pushed up on the forehead, always.",
-  "people": "human",
-  "domains": {
-    "primary": "churnfolk",
-    "secondary": "wright",
-    "tertiary": "syllogist"
-  },
-  "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
-  "teaches": "churnfolk",
-  "curriculum": {
-    "method": "Improvised every time, and he genuinely cannot repeat a lesson — his best work has never been rebuildable. Two students of his learn different crafts.",
-    "refuses": "to let you take notes. Calls it 'copying down the weather.'"
-  },
-  "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here."
+ "schemaVersion": 1,
+ "id": "maker_orrin",
+ "name": "Orrin Nine-Thumbs",
+ "role": "Churnfolk maker whose best inventions can never be rebuilt",
+ "homeLocation": "tumbledown_market",
+ "communityId": "unspooling.tumbledown",
+ "personality": {
+  "warmth": 0.6,
+  "trust": 0.3,
+  "candor": 0.7,
+  "patience": 0.1
+ },
+ "spectrum": {
+  "chaos_order": -0.5,
+  "destruction_creation": 0.5,
+  "emotional_logical": 0.2
+ },
+ "voiceHints": "Delighted, scattered, finishes three thoughts at once and none of them. Grieves every device the market ate. Names things by what number of thumbs the making cost him; he has ten fingers and a lot of stories.",
+ "knowledge": [
+  "How to make almost anything once",
+  "The market's rhythm — what will reassemble where, roughly, sometimes",
+  "That someone is trying to fix Tumbledown in place and what it would kill"
+ ],
+ "wants": "To rebuild the one device that mattered — the one that could have helped everyone — before he forgets how it felt to have made it.",
+ "fears": "That his gift is only luck wearing a craftsman's coat, and that the market will eventually eat him too.",
+ "reactsToReputation": {
+  "kind": "floods them with half-finished wonders",
+  "patient": "the rare person he'll actually teach",
+  "order-minded": "wary — smells the Lattice on them"
+ },
+ "universalRole": "Maker",
+ "roleMethod": "Churn method — improvises wonders that work once",
+ "appearance": "Fifties, barrel-bodied, wild grey-brown hair escaping a leather band, a full beard with one side singed shorter than the other. Nine fingers — the tenth ends at the first knuckle. Goggles pushed up on the forehead, always.",
+ "people": "human",
+ "domains": {
+  "primary": "churnfolk",
+  "secondary": "wright",
+  "tertiary": "syllogist"
+ },
+ "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+ "teaches": "churnfolk",
+ "curriculum": {
+  "method": "Improvised every time, and he genuinely cannot repeat a lesson — his best work has never been rebuildable. Two students of his learn different crafts.",
+  "refuses": "to let you take notes. Calls it 'copying down the weather.'"
+ },
+ "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here.",
+ "sex": "male",
+ "gender": "male"
 }

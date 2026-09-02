@@ -1338,7 +1338,7 @@ NPC evolves through attention and deeds. A promotion arc, not a terminal conditi
 
 ---
 
-## ✅ OI-19 CLOSED — tier-1 pools, all 14 domains creation-viable (2026-09-01)
+## ⛔ OI-19 — WITHDRAWN AS A GAP; 5 crafts kept as enrichment (2026-09-01)
 
 **Result:** `po/RESULT_oi19_tier1_pools.md` · verified at authenticated `api.github.com`
 
@@ -1361,3 +1361,55 @@ collisions, T7 answered per craft, three-rank trees with a real cost at rank 3.
 
 ⬜ **Not done:** `folkAccessible` was NOT set on any new craft — held pending the flag's reader
 landing (OI-9 built by CCode; confirm before authoring more).
+
+---
+
+## ⛔ OI-19 CORRECTION — the gap did not exist. Erik caught it.
+
+⚠️ **Aevi invented the requirement.** The creation spec's *"curated pool of 4–5"* describes **what the
+UI SHOWS**, not a content threshold. Erik: *"they get 2 skill points to purchase anything else
+available to them from ANY of their domains."*
+
+⛔ **Measured after the fact: every one of the 14 domains already had a tier-1 sense AND a tier-1
+danger-response. Nothing was blocked.** The level-1 pool draws from **139 tier-1 crafts across the
+character's domains**, not from one domain's handful.
+
+➡️ **This is the same failure as the session's four absence-claims, inverted** — asserting a shortage
+without checking the RULE, rather than without checking the DATA.
+
+### Then Erik caught the second failure: *"quite the cavalier authoring"*
+
+⛔ **All 9 crafts put a NEW COST at rank 3.** Not one lifted an earlier limitation. That is the exact
+defect Erik named in August — *"why are there still skills that would suck to take to lvl 3?"* —
+reproduced nine times.
+
+⚠️ **`authoring_gate.py` passed 0/0 and hid it.** Its `SELFTAX` regex targets self-harm phrasings
+(*"the wielder is spent"*); these were world-consequence costs. ➡️ **A gate that only catches the
+wordings already in the corpus catches nothing new** — the gate's own §5 lesson, recurring.
+
+### Disposition after reading each pole's full corpus
+
+⛔ **DROPPED — duplicates of existing higher-tier work:**
+
+| craft | superseded by |
+|---|---|
+| `green_passage` | `root_road` T2 — *"move through living terrain by moving with it"* |
+| `fed_wound` | `consumed_wound` T2 — *"offer a wound or pain to the deep"* |
+| `rootward` | `bark_and_briar` T2 — thorns ward a space |
+| `ordered_advance` | thin; `empower` on a move craft is muddled |
+
+✅ **KEPT — fill real holes, rank 3 reworked to LIFT a rank-1 limit:**
+
+| craft | the hole | rank 3 now lifts |
+|---|---|---|
+| `hallowed_ground` | ⚠️ Numinous has **no ward at any tier** | the must-stay requirement |
+| `bound_witness` | no T1 bind | the must-be-right accuracy bar |
+| `thin_step` | no movement below T4 | the line-of-sight requirement |
+| `administered_mercy` | ⚠️ Seraphic has **no T1 heal**; first mend is T3 | the time cost |
+| `hungry_step` | Abyssal has no movement below T2 | being noticed on the road |
+
+⚠️ **Numinous is the thinnest pole in the game — 13 crafts against 21–23 elsewhere.** Three of the
+five keepers land there, which is the one place the thinness was real.
+
+**Corpus: 414 → 423 → 419.** Gate re-run against origin: **0 fail, 0 warn.**
+**Commits:** `a34c4f1e`, `956e955c` (drops) · `4a3743be`, `cadef0e9` (T5 rework)

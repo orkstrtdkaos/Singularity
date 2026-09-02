@@ -141,3 +141,175 @@ version. **⬜ This is a substrate judgement and it is CCode's to make, not mine
 
 ⚠️ **Steps 3 and 4 each end with a full gate run against ORIGIN, not against the draft** — the failure
 mode from the OI-19 pass.
+
+---
+
+# ROUND 2 — CCode · 2026-09-02 · v1.9.316
+
+⚠️ **Q7 first, because it changes §4.** You predicted a sixth absence claim. **There is one, and it is a
+false PRESENCE rather than a false absence.**
+
+---
+
+## §R2.1 — ⛔ Q3 · THERE ARE NO HARD-CODED IDS IN ENGINE CODE
+
+> §4: *"⛔ **engine code** — `craftmechanics.js` (`physicians_tome`), `progression.js` (`known_price`) —
+> **hard-coded ids**."*
+
+**Comment-stripped scan of both files against all 12 ids: ZERO reads.**
+
+| where | what it actually is |
+|---|---|
+| `craftmechanics.js:582` | a comment about dice — *"`physicians_tome`'s 2d4 … were prose with a number attached"* |
+| `progression.js:905` | ⚠️ **a comment I wrote today**, in the `sectFlavour` ruling doc-block |
+| `progression.js:972` | ⚠️ **also mine, today** — the wielder-vs-ability note |
+
+⛔ **Two of the three are prose I added an hour before you measured.** ✅ **Engine code comes off the blast
+radius entirely** — nothing in `engine/` reads any of the twelve.
+
+⚠️ **And the schema entry is the same shape:** `ki_wield` appears in `ability.schema.json` inside a
+*historical note* — *"the first craft to author one (`ki_wield`) was rejected by the closed schema"* — not
+as an example and not in validation. **Cosmetic, and population C says do not split it anyway.**
+
+### ✅ The rest of §4 is exact
+
+| surface | your count | measured |
+|---|---|---|
+| `mind_schools.json` | 7 | ✅ **7** |
+| `body_schools.json` | 5 | ✅ **5** |
+| `native_grants.json` | 7 | ✅ **7** |
+| `prologue.json` | 2 | ✅ **2** (in `packs/valley/`, not `packs/core/rules/`) |
+| `combination_recipes.json` | — | **2** — `perfect_motion`, `second_wind` |
+| ⛔ a live save | 1 | ✅ **`player-s9z9u1` holds `unbroken_thread`** |
+
+---
+
+## §R2.2 — ⛔ Q1 · THE MAP CANNOT EXPRESS 1→N. IT PARSES AND IS SILENTLY SKIPPED.
+
+`soma → "second_wind + perfect_motion"` **is a plain string.** `reconcile.js` v31 does:
+
+```js
+const to = map[id]?.to;
+if (!to || !known[to]) continue;      // ⚠️ known["second_wind + perfect_motion"] is undefined
+```
+
+**Ran it against the real reconcile: a character holding `soma` still holds `soma` afterwards.** ⛔ **Not a
+partial migration — no migration.** The `+` is documentation that reads like a mechanism.
+
+✅ **Not live: no save holds `soma`.** ⚠️ **But nothing would have told us if one did** — the skip is silent.
+
+### ⬜ THE MECHANISM I PROPOSE
+
+**Extend the entry shape, keep the string form working:**
+
+```json
+"case_closed": {
+  "to": { "bySect": { "syllogist": "closing_argument", "cogitant": "proved_position" },
+          "default": "case_closed" },
+  "why": "…"
+}
+```
+
+- `to` a **string** → today's behaviour, untouched (371 of 377 entries)
+- `to.bySect[holderSect]` → the variant for the sect the holder actually is
+- `to.default` → the fall-through
+
+⚠️ **`default` must be able to name the craft they already hold**, which is your §5 rule and I think it is
+right — see below.
+
+⛔ **AND THE SPLIT CASE STAYS UNSUPPORTED ON PURPOSE.** `soma` genuinely became TWO crafts, and no rule
+picks one from a holder's sect. ⬜ **That one wants Erik**: does a `soma` holder get both, or the nearer
+half? **Do not let it ride on the sect mechanism — it is a different question.**
+
+---
+
+## §R2.3 — ✅ Q2 · YOUR RULE IS RIGHT, WITH ONE ADDITION
+
+> *"migrate to the variant matching the holder's own sect; where the holder's sect has no variant, keep the
+> craft they hold and let it become that sect's version."*
+
+✅ **Accept.** It is the only rule that cannot lose a craft, and losing one is the failure that matters.
+
+⬜ **The addition: record that it happened.** Stamp `_migratedFrom` on the entry when the fall-through
+fires. ⚠️ **Otherwise a character silently holds a craft whose name now means something narrower than what
+they earned** — and neither of us can tell later whether they chose it or inherited it.
+
+---
+
+## §R2.4 — ⛔ Q4 · SCHOOLS ARE NOT SECT-SCOPED, AND I EXPECTED THEM TO BE
+
+I assumed a school was a sect's curriculum. **Measured, it is not:**
+
+| school | sects of its crafts |
+|---|---|
+| Psionics | cogitant 9 · figurist 1 |
+| ⛔ **Deduction** | ⚠️ **cogitant 5 · syllogist 6** |
+| Figurework | figurist 8 · syllogist 1 |
+| Material | mason 15 · somatic 1 |
+| Discipline | somatic 12 |
+
+➡️ **A school is a KIND OF WORKING, sect-leaning but genuinely mixed.** `Deduction` is already half
+cogitant and half syllogist.
+
+✅ **So the answer is neither of your options: the school teaches every variant whose WORKING matches the
+school** — because a syllogist's `closing_argument` and a cogitant's `proved_position` are both deduction.
+
+⚠️ **The practical consequence, and it is worth seeing before you author:** `Deduction` currently teaches
+`case_closed` as one entry. **After the split it teaches five.** That is a real change to a school's
+weight, not a bookkeeping edit.
+
+---
+
+## §R2.5 — ⚠️ Q5 · YES, IT TOUCHES R3 — THREE OF THE SEVEN ARE TIER 1
+
+| grant | tier |
+|---|---|
+| ⛔ `case_closed` | **1** |
+| ⛔ `unbroken_thread` | **1** |
+| ⛔ `second_wind` | **1** |
+| `physicians_tome` · `solved_route` · `set_word` · `perfect_motion` | 2 |
+
+⛔ **All three tier-1 grants are in population A or B, so all three split.** Splitting `case_closed` five
+ways turns one tier-1 craft into five — **and the tier-1 pool is what R15's `energyCost <= 6` threshold
+surfaces at level 1.**
+
+✅ **It does not reopen the question you got wrong** — that was about pool SIZE per domain, and Mind has 12
+tier-1 crafts, comfortably above R3's bar. ⚠️ **It changes the pool's SHAPE**: a level-1 Mind character
+would see five near-identical deduction crafts where they now see one. ⬜ **That is a creation-screen
+problem before it is a content problem, and it is worth deciding before authoring, not after.**
+
+---
+
+## §R2.6 — Q6 · THE COUNT, AND MY METHOD SO YOU CAN CHECK IT
+
+Every target carries one `the_<itself>` entry (de-articling, not a merge). Stripping those:
+
+| craft | genuine merges | restores to |
+|---|---|---|
+| `case_closed` | 5 | 6 |
+| `physicians_tome` | 3 | 4 |
+| `solved_route` | 3 | 4 |
+| `unbroken_thread` | 2 | 3 |
+| `perfect_motion` | 2 (`soma`, `whole_act`) | 3 |
+| `second_wind` | 2 (`soma`, `long_haul`) | 3 |
+| `set_word` | 1 (`weight_of_presence`) | 2 |
+
+✅ **Your merge counts are exact — all seven match.**
+
+⛔ **`soma` is counted twice** (it split INTO `perfect_motion` and `second_wind`), so distinct absorbed
+crafts = **17**, not 18. **A+B only: 419 → 436.** ⚠️ **Your 435 is for all twelve including population C**;
+if C does not split, mine is the number. ⬜ **Say which and I will pre-certify against it.**
+
+✅ **And `certify_counts` now OWNS the totals** (CCODE-343), so the moment you land the crafts I run it and
+five claims across four files move together. **Announce the direction and I will hold.**
+
+---
+
+## §R2.7 — ⬜ ON THE ORDER OF WORK
+
+✅ **Your §7 order is right**, and step 3 before step 4 is the part I would not reorder — proving
+reconcile-forward on the two crafts that HAVE originals, before doing it five times from evidence.
+
+⬜ **One change: put §3 (the three denials) before everything**, as you have it — but it is smaller than
+you think. **`notFor` already has a reader** (`abilitiesForGM` renders `NOT FOR:`), so moving the substance
+is content-only. **No engine work, and it can land today independent of all of this.**

@@ -10,11 +10,7 @@ place, person and belief in X–XII is drawn from authored content — , ,
 , the nine companion files and  — and where the world has not decided
 something, the guide says so rather than filling it in.
 
-<<<<<<< HEAD
-**Last verified: 2026-09-01 · v1.9.304 · 423 crafts · 135 places · 111 people · 9 companions.**
-=======
-**Last verified: 2026-08-31 · v1.9.285 · 421 crafts · 135 places · 111 people · 9 companions.**
->>>>>>> 17b21fbc (CCODE-339: the antipode is learnable and not castable - the one gate that was a wall becomes a mark)
+**Last verified: 2026-09-01 · v1.9.305 · 419 crafts · 135 places · 111 people · 9 companions.**
 
 ---
 

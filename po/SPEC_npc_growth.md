@@ -127,3 +127,145 @@ thing the tradition is FOR.** ⬜ Worth considering whether attended endings cou
    season might reasonably start at r2. ⚠️ Ties to R17: training to r2 is cheap for a PC.
 6. ⛔ **Do the 111/113 people all get growth**, or only those with sheets? ⬜ **Ties directly to
    `RULING_REQUEST_people_count.md`** — another place the definition of "person" is load-bearing.
+
+---
+
+# ROUND 2 — CCode · 2026-09-02 · v1.9.323
+
+⛔ **§1's first row is a NAME COLLISION, and correcting it collapses most of the spec's premise — in a way
+that makes the work smaller, not larger.**
+
+---
+
+## §R2.1 — ⛔ `npcsheet.js` HAS NO LIVE IMPORTER AT ALL. NOT ONE.
+
+> §1: *"`sheetFor` — ✅ `worldtick.js` ×2 — **the live path**"*
+
+**`worldtick.js:986`:**
+
+```js
+const sheetFor = f => synthesizeOpponentSheet({ name: f.name || f.id, threat: 30 + …, tacticTags: … }, sb);
+```
+
+⛔ **That is a LOCAL CONST that wraps `synthesizeOpponentSheet` — the OTHER sheet system.** `worldtick.js`
+does not import `npcsheet.js` and never has.
+
+**Every reference to `engine/npcsheet.js` in the repository:**
+
+| file | |
+|---|---|
+| `tests/how_it_works.mjs` | ×4 |
+| `tests/smoke.mjs` | ×4 |
+| ⛔ **anything that runs in play** | ⛔ **zero** |
+
+➡️ ⛔ **SO §1's ROW (1) IS ALSO FALSE.** *"An unauthored NPC's LEVEL drifts upward"* — it does not, because
+nothing in play calls `derivedLevel` either. **No NPC has a sheet at all during a game.**
+
+⚠️ **THIS IS THE SAME DEFECT YOU FOUND, ONE LAYER DEEPER.** You reported `growthFor` as the function with no
+caller. **The module it lives in has no caller.**
+
+✅ **And it is a clean instance of a shape worth naming: a grep for `sheetFor(` matched a local variable of
+the same name.** ⚠️ Six modules import a `synthesize*` sheet; one module exports a `sheetFor` nobody imports;
+they read identically from outside.
+
+---
+
+## §R2.2 — ✅ §3a IS ALREADY BUILT. AUTHORED LEVEL IS ALREADY A FLOOR.
+
+> §3a: *"`level = authoredLevel + growth`"* · §1: *"Authoring a sheet currently FREEZES a person."*
+
+**`derivedLevel` already does exactly this** — `const base = num(authored?.level ?? entry?.level, 0)` and
+then `clamp(base + growth, …)`. **Measured:**
+
+| | |
+|---|---|
+| `derivedLevel(pell)` with no growth signals | **27** — her authored floor |
+| `derivedLevel(pell, met 40, 400 days known)` | ⚑ **41** |
+| an unauthored stranger, same signals | **15** |
+
+⛔ **SO AUTHORING DOES NOT FREEZE ANYONE.** The arithmetic you propose is the arithmetic that is there.
+⚠️ **What is missing is not the formula — it is any caller at all**, which is §R2.1.
+
+✅ **This is good news for the spec:** §3a needs no build, and §3d (an authored craft list is a floor) is the
+same shape and equally cheap once something reads the module.
+
+---
+
+## §R2.3 — ⛔ Q2 · THERE IS NO DEED WRITER FOR AN NPC. EVERY DEED IN THE ENGINE IS THE PLAYER'S.
+
+You asked me to measure rather than trust either direction. **Measured, comments stripped:**
+
+| candidate | what it actually does |
+|---|---|
+| `recordDeed(bearer, deed)` | ⛔ `bearer` is the **character**. It records what the PLAYER did |
+| `character.deeds` | ⛔ the player's — **35 on Silas** |
+| `noteCompanionWitnessed(character, companionId, deed)` | ⚠️ stores the **player's** deed in `character.companionMemory[id]` — what a companion REMEMBERS, not what they DID |
+| `figureCareer` · `arcStandings` | ⛔ no writer attaches a doer |
+
+➡️ ⛔ **Nothing anywhere records "this NPC did this."** **Deed-based growth needs a writer built from
+nothing**, and that is a much larger job than the other two sources.
+
+### ✅ BUT CHARGE-BASED GROWTH NEEDS NO NEW WRITER, AND THE DATA IS ALREADY SITTING THERE
+
+**Silas's save, today:**
+
+| delegate | progress | world-counts under charge |
+|---|---|---|
+| Cassiel Ord | 2 | ⚑ **505** |
+| Edvar Crane | 0 | 482 |
+| Edvar Crane | 2 | 478 |
+| Fendt | 1 | 77 |
+
+➡️ ✅ **Your §2 instinct is exactly right and cheaper than you thought.** Cassiel Ord has been at the Raven's
+Home for 505 world-counts and the record already says so. ⬜ **I would build charge growth first and leave
+deeds until something writes one.**
+
+---
+
+## §R2.4 — ⚠️ Q3 · THE TICK IS THE RIGHT PLACE, BUT IT IS NOT CALLING THIS MODULE TODAY
+
+The question presupposes a wire that does not exist. ✅ **The tick IS the right home** — it already walks
+assignments and holdings on world time, which is where both real growth signals live.
+
+⛔ **But the prior question is which of the TWO sheet systems is the one**, and that is not mine to rule:
+
+| system | keyed on | status |
+|---|---|---|
+| `synthesizeOpponentSheet` | a **threat number** | ✅ live in combat and in `contestArc` |
+| `npcsheet.sheetFor` | ⚑ **the person** — their crafts, their ranks | ⛔ dark |
+
+⚠️ **The authored sheets Aevi has now written feed the second one.** ⬜ **ERIK: does the person-keyed sheet
+replace the threat-keyed one for named people, or do they coexist?** ⛔ **Growth is not worth building until
+something reads the thing that grows.**
+
+---
+
+## §R2.5 — ⬜ Q5 · RANK 1, AND R17 SAYS SO
+
+A gained craft starts at **r1**. ⚠️ R17 makes training to r2 cheap *for a player who chooses to spend on it*
+— an NPC has not chosen. ⬜ **A season under charge is an argument for r2 on that one craft**, but I would
+not start there: r1 that can climb is a smaller claim than r2 that arrived free.
+
+---
+
+## §R2.6 — ⬜ Q4 · `wantsAuthoring` WANTS THE SAME SURFACE `offers` GOT
+
+Nothing collects it, and it is the same shape as the holdings migration: **a machine-made proposal that a
+human must accept.** ⬜ **The Holdings tab now has a working example of exactly that** — persisted on the
+record, answered once, remembered. **I would reuse it rather than invent a second queue.**
+
+---
+
+## §R2.7 — ⬜ WHAT I WOULD BUILD, AND WHAT BLOCKS IT
+
+| # | step | blocked on |
+|---|---|---|
+| 1 | ⛔ **Decide which sheet system is the one for named people** | ⬜ **ERIK** |
+| 2 | Wire `npcsheet` into the live path | 1 |
+| 3 | Charge growth from `assignments.progress` + world-counts under charge | 2 — ✅ data already exists |
+| 4 | A gained craft at r1, drawn by `kitFor`, surfaced as news | 3 |
+| 5 | `wantsAuthoring` onto the offers surface | 3 |
+| ⬜ | deeds | ⛔ needs a writer that does not exist |
+
+⚠️ **I have built none of it.** ⛔ **Step 1 is a design decision about two systems that both work**, and
+building growth onto a module nothing calls would be the fourth door again — this time with my eyes open.

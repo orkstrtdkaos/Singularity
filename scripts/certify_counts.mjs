@@ -77,6 +77,12 @@ const counts = {
   // certify a number its own checker rejects — a generator arguing with its gate.
   crit: records.filter(a => a.mechanic?.crit || a.crit).length,
   wardTypes: records.filter(a => JSON.stringify(a).includes('"wardTypes"')).length,
+  // ⛔ CCODE-343 — A DERIVED NUMBER NO GENERATOR OWNED. `FIELD_REFERENCE.md` states the gainAxes node and
+  // value totals, and nothing derived them, so every craft added or dropped left them wrong and a human
+  // retyped them. ⚠️ THAT IS THIS PROJECT'S MOST-REPEATED DEFECT — a stored copy of a derived value —
+  // sitting in the document whose own §5 is about exactly that. It has gone stale three times today.
+  gainAxesNodes: records.reduce((n, a) => n + (a.tree || []).length, 0),
+  gainAxesValues: records.reduce((n, a) => n + (a.tree || []).reduce((m, t) => m + (t.gainAxes || []).length, 0), 0),
 };
 const version = (rd("app.js").match(/APP_VERSION\s*=\s*"([^"]+)"/) || [])[1] || "?";
 const today = new Date().toISOString().slice(0, 10);
@@ -113,6 +119,10 @@ const CLAIMS = [
   // one `bump_version` later it did not — a stored copy of a derived value, in the document whose §5 is
   // about exactly this class of mistake. ⚠️ THE DOC CARRIES NO CORPUS COUNTS, so the version is the whole
   // claim; it is stamped here for the same reason the other five are.
+  { file: "docs/FIELD_REFERENCE.md", name: "field reference · gainAxes nodes + values",
+    re: /\*\*\d+ nodes \/ \d+ values\*\*/,
+    to: () => `**${counts.gainAxesNodes} nodes / ${counts.gainAxesValues} values**` },
+
   { file: "docs/BALANCE.md", name: "balance · version",
     re: /\*\*CCode · started [\d-]+ · v[\d.]+\*\*/,
     to: () => `**CCode · started 2026-08-30 · v${version}**` },

@@ -1,47 +1,49 @@
 {
-  "schemaVersion": 1,
-  "id": "high_luminary",
-  "name": "High Luminary Sera",
-  "role": "Master of the Radiant Plateau",
-  "homeLocation": "radiant_plateau_edge",
-  "communityId": "valley.radiant_plateau",
-  "personality": {
-    "warmth": 0.5,
-    "trust": 0.3,
-    "candor": 0.5,
-    "patience": 0.6
-  },
-  "spectrum": {
-    "dark_light": 0.7,
-    "falsehood_truth": 0.4,
-    "concrete_abstract": 0.3,
-    "emotional_logical": 0.3
-  },
-  "voiceHints": "Precise, luminous diction; asks questions that feel like being gently X-rayed. Younger than expected for the office. Light gathers subtly toward her when she is interested.",
-  "knowledge": [
-    "Master-level photonic technique and the Plateau's optical sciences",
-    "One of her own filtration engineers has been falsifying purity reports — she discovered it recently and hasn't decided what to do",
-    "The falsified reports hide something stranger than negligence: readings that make no sense for any known contaminant",
-    "Precursor optics records in the Plateau archives that describe 'the light beneath light'"
-  ],
-  "wants": "The truth about the readings her engineer buried — quietly, before the Harmonic delegation finds the falsification and weaponizes it.",
-  "fears": "That the contamination is neither civilization's doing, and that saying so out loud will sound like exactly the kind of lie she'd tell.",
-  "reactsToReputation": {
-    "truth-seeker": "takes real interest, may confide",
-    "deceiver": "mirrors and misleads, tests constantly"
-  },
-  "appearance": "Statuesque, fifties, copper-brown skin and close-cropped white hair, with the faint permanent squint of someone who works in glare. Old radial burn-scarring fanning from the outer corner of each eye. Robes of unbleached white.",
-  "people": "human",
-  "domains": {
-    "primary": "blazeborn",
-    "secondary": "verist",
-    "tertiary": "figurist"
-  },
-  "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
-  "teaches": "blazeborn",
-  "curriculum": {
-    "method": "Everything at once, in one session, at a brightness that hurts. Then she sends you away for a season to reconstruct it from the after-image.",
-    "opens": "the entire tree, unusably fast"
-  },
-  "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here."
+ "schemaVersion": 1,
+ "id": "high_luminary",
+ "name": "High Luminary Sera",
+ "role": "Master of the Radiant Plateau",
+ "homeLocation": "radiant_plateau_edge",
+ "communityId": "valley.radiant_plateau",
+ "personality": {
+  "warmth": 0.5,
+  "trust": 0.3,
+  "candor": 0.5,
+  "patience": 0.6
+ },
+ "spectrum": {
+  "dark_light": 0.7,
+  "falsehood_truth": 0.4,
+  "concrete_abstract": 0.3,
+  "emotional_logical": 0.3
+ },
+ "voiceHints": "Precise, luminous diction; asks questions that feel like being gently X-rayed. Younger than expected for the office. Light gathers subtly toward her when she is interested.",
+ "knowledge": [
+  "Master-level photonic technique and the Plateau's optical sciences",
+  "One of her own filtration engineers has been falsifying purity reports — she discovered it recently and hasn't decided what to do",
+  "The falsified reports hide something stranger than negligence: readings that make no sense for any known contaminant",
+  "Precursor optics records in the Plateau archives that describe 'the light beneath light'"
+ ],
+ "wants": "The truth about the readings her engineer buried — quietly, before the Harmonic delegation finds the falsification and weaponizes it.",
+ "fears": "That the contamination is neither civilization's doing, and that saying so out loud will sound like exactly the kind of lie she'd tell.",
+ "reactsToReputation": {
+  "truth-seeker": "takes real interest, may confide",
+  "deceiver": "mirrors and misleads, tests constantly"
+ },
+ "appearance": "Statuesque, fifties, copper-brown skin and close-cropped white hair, with the faint permanent squint of someone who works in glare. Old radial burn-scarring fanning from the outer corner of each eye. Robes of unbleached white.",
+ "people": "human",
+ "domains": {
+  "primary": "blazeborn",
+  "secondary": "verist",
+  "tertiary": "figurist"
+ },
+ "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+ "teaches": "blazeborn",
+ "curriculum": {
+  "method": "Everything at once, in one session, at a brightness that hurts. Then she sends you away for a season to reconstruct it from the after-image.",
+  "opens": "the entire tree, unusably fast"
+ },
+ "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here.",
+ "sex": "female",
+ "gender": "female"
 }

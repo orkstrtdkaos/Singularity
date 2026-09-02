@@ -1,47 +1,49 @@
 {
-  "schemaVersion": 1,
-  "id": "marshal_veyn",
-  "name": "Marshal Veyn",
-  "role": "Marcher of the Redline — she has held a line and she has lost one",
-  "homeLocation": "the_marchward",
-  "communityId": "marcher.marchward",
-  "personality": {
-    "warmth": 0.4,
-    "trust": 0.5,
-    "candor": 0.9,
-    "patience": 0.3
-  },
-  "spectrum": {
-    "violence_peace": -0.6,
-    "body_mind": -0.3,
-    "falsehood_truth": 0.4
-  },
-  "voiceHints": "Terse. Assesses you in one look and tells you how you would die, as a professional courtesy. Does not posture — posturing is for people who have not done it.",
-  "knowledge": [
-    "How a line holds and exactly when it breaks",
-    "The names of everyone who died where they should not have, and she will recite them if asked, and it takes a long time",
-    "That Kesh Ardent is real, and that she has stood beside them once, and she will not talk about it"
-  ],
-  "wants": "A line worth holding.",
-  "fears": "Arriving too late again.",
-  "reactsToReputation": {
-    "violent": "wary professional respect",
-    "seeking": "gruff exacting mentorship",
-    "cowardly": "nothing — she simply stops seeing you"
-  },
-  "appearance": "A hard-framed woman of about forty-five, weathered olive skin, black hair shot with grey and cut at the jaw. A long white seam of scar from left ear to collarbone. Marcher red faded nearly to rust from real wear.",
-  "people": "human",
-  "domains": {
-    "primary": "marcher",
-    "secondary": "verist",
-    "tertiary": "somatic"
-  },
-  "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
-  "teaches": "marcher",
-  "curriculum": {
-    "demands": "you have yielded at least once, and can say what it cost you",
-    "refuses": "anyone who has never lost. 'A line you have not been pushed off is a line you have not held.'",
-    "withholds": "the killing forms until you have refused to use them in front of her"
-  },
-  "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here."
+ "schemaVersion": 1,
+ "id": "marshal_veyn",
+ "name": "Marshal Veyn",
+ "role": "Marcher of the Redline — she has held a line and she has lost one",
+ "homeLocation": "the_marchward",
+ "communityId": "marcher.marchward",
+ "personality": {
+  "warmth": 0.4,
+  "trust": 0.5,
+  "candor": 0.9,
+  "patience": 0.3
+ },
+ "spectrum": {
+  "violence_peace": -0.6,
+  "body_mind": -0.3,
+  "falsehood_truth": 0.4
+ },
+ "voiceHints": "Terse. Assesses you in one look and tells you how you would die, as a professional courtesy. Does not posture — posturing is for people who have not done it.",
+ "knowledge": [
+  "How a line holds and exactly when it breaks",
+  "The names of everyone who died where they should not have, and she will recite them if asked, and it takes a long time",
+  "That Kesh Ardent is real, and that she has stood beside them once, and she will not talk about it"
+ ],
+ "wants": "A line worth holding.",
+ "fears": "Arriving too late again.",
+ "reactsToReputation": {
+  "violent": "wary professional respect",
+  "seeking": "gruff exacting mentorship",
+  "cowardly": "nothing — she simply stops seeing you"
+ },
+ "appearance": "A hard-framed woman of about forty-five, weathered olive skin, black hair shot with grey and cut at the jaw. A long white seam of scar from left ear to collarbone. Marcher red faded nearly to rust from real wear.",
+ "people": "human",
+ "domains": {
+  "primary": "marcher",
+  "secondary": "verist",
+  "tertiary": "somatic"
+ },
+ "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+ "teaches": "marcher",
+ "curriculum": {
+  "demands": "you have yielded at least once, and can say what it cost you",
+  "refuses": "anyone who has never lost. 'A line you have not been pushed off is a line you have not held.'",
+  "withholds": "the killing forms until you have refused to use them in front of her"
+ },
+ "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here.",
+ "sex": "female",
+ "gender": "female"
 }

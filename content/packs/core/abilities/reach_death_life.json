@@ -3504,7 +3504,8 @@
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Green Comes Up",
-     "gainAxes": []
+     "gainAxes": [],
+     "backlashRung": "none"
     },
     {
      "rank": 2,
@@ -3519,7 +3520,8 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "_nameWas": "The Thorn Turns In",
-     "gainAxes": []
+     "gainAxes": [],
+     "backlashRung": "none"
     },
     {
      "rank": 3,
@@ -3542,7 +3544,8 @@
      "gainAxes": [],
      "ongoingHarm": {
       "type": "living"
-     }
+     },
+     "backlashRung": "damaging"
     }
    ],
    "challengeTypes": [
@@ -3622,7 +3625,8 @@
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_typed_20260830": "⛔ `harmRung: incapacitating` reaching `lethal` at r3 AND NO DICE — the craft says 'IT BEGINS AS A HOLD AND BECOMES A KILLING' and could not kill anything. ⚠️ `living` .6 + `physical` .4 — the same mix as `bark_and_briar`, correctly: growth turned against you, DELIVERED AS THORN. ✅ r3 gains `ongoingHarm: living` because its own text is 'the harm CONTINUES for as long as they are held', which is exactly what that field is for.",
-   "_rungFix_20260830": "⛔ ability rung  → . ⚠️ I GAVE THIS CRAFT ITS DICE EARLIER TODAY and did not raise the ability rung with them — the craft says 'it begins as a hold and BECOMES A KILLING' and r3 was already lethal. ✅ Caught by the final corpus sweep."
+   "_rungFix_20260830": "⛔ ability rung  → . ⚠️ I GAVE THIS CRAFT ITS DICE EARLIER TODAY and did not raise the ability rung with them — the craft says 'it begins as a hold and BECOMES A KILLING' and r3 was already lethal. ✅ Caught by the final corpus sweep.",
+   "_backlashTree_20260902": "⛔ OI-20 / R18 — BACKLASH SCALES WITH RANK, THE WAY HARM ALREADY DOES. `backlashRung` was a single flat top-level value: a craft turned on you identically at rank 1 and rank 3, even though at rank 3 it is doing lethal work. ✅ RULE: the top-level value is the CEILING (identical in meaning to `harmRung`, per R5-corrected and `intent.js:34`), and each craft's OWN authored offset is applied per rank — `backlash[r] = max(none, harm[r] − (ceilingHarm − ceilingBacklash))`. ⚠️ THE OFFSET IS PER-CRAFT AND WAS NOT FLATTENED: most lethal crafts backlash at `damaging` (offset 2), but `found_fault`, `offered_mouth`, `plain_weight`, `sudden_work` and `thinned_veil` backlash at `incapacitating` (offset 1) — an authored judgement that some crafts turn on the wielder harder. ✅ The rule REPRODUCES each craft's authored top-level exactly at its top rank and scales down below it. ⛔ CONSEQUENCE WORTH NAMING: at rank 1 most of these now have NO backlash at all — a novice's craft does not turn on them — which is Erik's standing correction that penalties must not land hardest on low-level players."
   },
   {
    "id": "hastened_grey",
@@ -3662,7 +3666,8 @@
       "condition": "decay"
      },
      "grants": "⛔ A HAND ON WHAT IS ALREADY FAILING. Lay ANTISOAK 4 on it and strike the same instant — the wound that was open goes grey and stops closing, and everything that gets through soak from now on lands harder. ⚠️ ON A HURT PERSON THIS IS A KILLING PACE, laid on by hand.",
-     "cannot": "⛔ IT AMPLIFIES; IT DOES NOT OPEN. Against something unhurt, unarmoured and well kept there is almost nothing to take hold of, and a blow fully stopped by soak takes the antisoak with it. TOUCH ONLY at this rank."
+     "cannot": "⛔ IT AMPLIFIES; IT DOES NOT OPEN. Against something unhurt, unarmoured and well kept there is almost nothing to take hold of, and a blow fully stopped by soak takes the antisoak with it. TOUCH ONLY at this rank.",
+     "backlashRung": "none"
     },
     {
      "rank": 2,
@@ -3681,7 +3686,8 @@
       "type": "decay"
      },
      "grants": "⛔ THE ROT LEAVES YOUR HAND. Work at a pace's distance, ANTISOAK 6 — and it finds the old wounds: nearly everyone is scarred, and the rot goes to the scars FIRST, blowing them back open as though they were fresh. ⚠️ A body that has been hurt once before is a body this craft can take hold of.",
-     "cannot": "⛔ A DECAY-WARDED TARGET ANSWERS THIS SPECIFICALLY — a soak layer typed against decay stops the rot and lets everything else through. ⚠️ And it still reaches ONE thing: you can stand back now, you cannot spread it."
+     "cannot": "⛔ A DECAY-WARDED TARGET ANSWERS THIS SPECIFICALLY — a soak layer typed against decay stops the rot and lets everything else through. ⚠️ And it still reaches ONE thing: you can stand back now, you cannot spread it.",
+     "backlashRung": "none"
     },
     {
      "rank": 3,
@@ -3702,7 +3708,8 @@
      },
      "grants": "⛔ YOU CALL THE ENDINGS DUE — every enemy within reach at once, ANTISOAK 8, AND IT NOW PIERCES: PIERCE 4 lands whatever the armour, so the vulnerability ALWAYS takes hold and then amplifies everything that got through beside it. ⚠️ THE SCARS STILL OPEN FIRST.",
      "cannot": "⛔ A DECAY-TYPED WARD IS STILL THE ANSWER — it soaks the ordinary damage entire, so all that reaches them is the pierce and what the vulnerability makes of it. ⚠️ AND IMMUNE IS IMMUNE: a thing that does not decay takes nothing at all. It reaches enemies and standing works, never the people you came with.",
-     "pierce": 4
+     "pierce": 4,
+     "backlashRung": "damaging"
     }
    ],
    "challengeTypes": [
@@ -3775,7 +3782,8 @@
    "_rebuilt_20260823": "⛔ ERIK 2026-08-23. RENAMED Hastened Grey -> NECROTIC STRIKE, r1 Grey Hand -> NECROTIC TOUCH (r1 shared a name with the separate `grey_hand` craft — §37.3 pattern 5). ⚠️ THE MECHANISM IS NOW ANTISOAK, imposed AND invoked in the same stroke, 4/6/8 on the `grief_strike` pattern — Erik: 'this not only imposes it, it invokes it.' r1 touch + needs a wound (which IS what antisoak does), r2 adds RANGE, r3 adds TARGETS and is the one rank that can open a wound where there was none. ⛔ CUT: 'the cost of taking something whole is real and you pay it in yourself' — a narrative debt in a cost field, the third such this session; ENERGY IS THE COST. The Hollow line moved to narrationHints as a HOOK, which is what Erik said it was.",
    "_scars_20260823": "⛔ ERIK 2026-08-23: 'most people have scars — this acts in those scarred places first, blowing them back open as if they were fresh wounds.' ⚠️ THIS FIXED A HAND-WAVE OF MINE. I had written r3 as 'the one rank that does not need a wound', but `antisoakLanded(6, 8, 8)` still returns 0 — the arithmetic refused the exception and I had papered over it with prose. ⛔ SCARS MEAN THE CRAFT NEVER HAS TO BREAK ITS OWN LAW: there is nearly always an old wound to amplify, so r3 gets its reach without an arithmetic exception, and THE UNSCARRED stay genuinely hard — which is a better ceiling than the one I invented.",
    "_alliesAndPierce_20260823": "⛔ ERIK 2026-08-23, THREE RULINGS. (1) NO HITTING ALLIES BY DEFAULT — 'everyone else inside the reach is struck one rung lower' REMOVED. r3 takes enemies and standing works, not the party. Erik: 'maybe if you combined this with a chaos craft, but not as a default' -> backlogged as a braid. (2) THE SCAR BURST MOVES DOWN TO r2, so antisoak has something to amplify from range. (3) r3 GAINS PIERCE: `penetration 2` cuts every soak layer an epic carries, so the blow always lands and the antisoak therefore always applies. ⚠️ THIS IS WHAT THE ENGINE ALREADY SAYS — 'a piercing strike ignores the soak AND then adds the antisoak' — so the capstone now works BY the rule instead of around it. ⛔ THE COUNTER IS A DECAY-TYPED SOAK LAYER, which answers the kind rather than the amount and is untouched by penetration.",
-   "_dicedAndTyped_20260830": "⛔ DICE AUTHORED. It already had `decay` and `antisoakImposed: 4` — real machinery on a craft that could not roll. ⚠️ 1d8 at L1; the antisoak is what makes it dangerous, not the die."
+   "_dicedAndTyped_20260830": "⛔ DICE AUTHORED. It already had `decay` and `antisoakImposed: 4` — real machinery on a craft that could not roll. ⚠️ 1d8 at L1; the antisoak is what makes it dangerous, not the die.",
+   "_backlashTree_20260902": "⛔ OI-20 / R18 — BACKLASH SCALES WITH RANK, THE WAY HARM ALREADY DOES. `backlashRung` was a single flat top-level value: a craft turned on you identically at rank 1 and rank 3, even though at rank 3 it is doing lethal work. ✅ RULE: the top-level value is the CEILING (identical in meaning to `harmRung`, per R5-corrected and `intent.js:34`), and each craft's OWN authored offset is applied per rank — `backlash[r] = max(none, harm[r] − (ceilingHarm − ceilingBacklash))`. ⚠️ THE OFFSET IS PER-CRAFT AND WAS NOT FLATTENED: most lethal crafts backlash at `damaging` (offset 2), but `found_fault`, `offered_mouth`, `plain_weight`, `sudden_work` and `thinned_veil` backlash at `incapacitating` (offset 1) — an authored judgement that some crafts turn on the wielder harder. ✅ The rule REPRODUCES each craft's authored top-level exactly at its top rank and scales down below it. ⛔ CONSEQUENCE WORTH NAMING: at rank 1 most of these now have NO backlash at all — a novice's craft does not turn on them — which is Erik's standing correction that penalties must not land hardest on low-level players."
   },
   {
    "id": "kept_vigil",

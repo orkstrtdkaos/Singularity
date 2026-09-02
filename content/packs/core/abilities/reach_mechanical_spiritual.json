@@ -2772,6 +2772,321 @@
    "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10.",
    "tier": 1
+  },
+  {
+   "id": "hallowed_ground",
+   "name": "Hallowed Ground",
+   "levelReq": 1,
+   "tier": 1,
+   "energyCost": 4,
+   "powerSystem": "metaphysical",
+   "attribute": "social",
+   "axes": {
+    "mechanical_spiritual": 0.6
+   },
+   "functions": [
+    "ward",
+    "resist"
+   ],
+   "narrationHints": "Nothing visible happens. The room simply becomes a place where certain things do not work, and everyone feels it before anyone can say why.",
+   "description": "Numenwork holding-craft. Meaning laid over a place until the place holds it.",
+   "notFor": "Warding a person (it holds ground, not people); anywhere you cannot remain; stopping anything purely physical — a thrown stone does not care what a room means.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Hallowed Ground",
+     "grants": "Make a small place hostile to workings that run on hunger or the dark. They weaken inside it and their bearers know it.",
+     "cannot": "Ground only, never a person, and you must STAY. Step out and it thins with distance.",
+     "functions": [
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Kept Place",
+     "grants": "A house, a camp, a crossing — and it holds for a night without you standing in it.",
+     "cannot": "⚠ WHAT IT KEEPS OUT WAITS. A kept place is a siege from the inside as much as a refuge.",
+     "functions": [
+      "ward",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Named Ground",
+     "grants": "The place keeps itself. It is known, and things route around it without being told.",
+     "cannot": "⚠ NAMED GROUND IS ON A MAP NOW — yours and everyone else's. What you made safe you also made findable.",
+     "functions": [
+      "ward",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration"
+     ]
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "SURVIVE"
+   ],
+   "tradition": "numinous",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "ward",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 8,
+    "scope": 2,
+    "wardTypes": [
+     "shadow",
+     "appetite"
+    ]
+   },
+   "intensity": {
+    "conserve": "a small circle, while you stand in it",
+    "surge": "named ground; WHAT YOU MADE SAFE YOU ALSO MADE FINDABLE"
+   },
+   "bounds": [
+    {
+     "text": "ground only, never a person",
+     "class": "hard"
+    },
+    {
+     "text": "nothing purely physical cares what a room means",
+     "class": "hard"
+    },
+    {
+     "text": "⚠ what it keeps out waits",
+     "class": "cost"
+    },
+    {
+     "text": "named ground is findable",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/survive action that makes a place hostile to hungry and shadow workings. Rated 5 of 10 across a scope of 2 for about eight hours.",
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
+  },
+  {
+   "id": "bound_witness",
+   "name": "Bound Witness",
+   "levelReq": 1,
+   "tier": 1,
+   "energyCost": 4,
+   "powerSystem": "metaphysical",
+   "attribute": "social",
+   "axes": {
+    "mechanical_spiritual": 0.5,
+    "falsehood_truth": 0.4
+   },
+   "functions": [
+    "bind",
+    "reveal"
+   ],
+   "narrationHints": "You say what the thing actually is, out loud, and it stops. Not because you commanded it — because being named accurately is a kind of weight.",
+   "description": "Numenwork naming-craft. What is seen truly cannot proceed as though it were not.",
+   "notFor": "Naming what you have not perceived; binding anything that does not care what it is; compelling an action — this HOLDS, it does not order.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Bound Witness",
+     "grants": "Name a working, a lie, or a presence accurately and out loud, and it holds — it cannot proceed as though unseen.",
+     "cannot": "YOU MUST BE RIGHT. A confident wrong naming does nothing and tells the thing exactly how much you know.",
+     "functions": [
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Held to It",
+     "grants": "The naming lasts, and while it holds the thing cannot resume the shape you named it out of.",
+     "cannot": "⚠ EVERYONE PRESENT HEARD YOU. What you named is now public, including the parts you would rather have kept.",
+     "functions": [
+      "bind",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Standing Witness",
+     "grants": "Several at once, or one thing held while you deal with the rest.",
+     "cannot": "⚠ YOU ARE NOW A WITNESS. Things that were named by you remember it, and the Numinous do not have many quiet years.",
+     "functions": [
+      "bind",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets"
+     ]
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT"
+   ],
+   "tradition": "numinous",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "control",
+   "operativeAxis": [
+    "magnitude",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 2,
+    "targets": 1
+   },
+   "intensity": {
+    "conserve": "a short naming, one thing, quietly",
+    "surge": "standing witness; THINGS NAMED BY YOU REMEMBER IT"
+   },
+   "bounds": [
+    {
+     "text": "⛔ you must be RIGHT — a wrong naming does nothing and reveals you",
+     "class": "hard"
+    },
+    {
+     "text": "it HOLDS, it does not order",
+     "class": "hard"
+    },
+    {
+     "text": "⚠ everyone present heard you",
+     "class": "cost"
+    },
+    {
+     "text": "named things remember who named them",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/fight action that holds a thing by naming it truly. Rated 5 of 10 on 1 target for about two hours.",
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
+  },
+  {
+   "id": "thin_step",
+   "name": "Thin Step",
+   "levelReq": 1,
+   "tier": 1,
+   "energyCost": 3,
+   "powerSystem": "metaphysical",
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": 0.5,
+    "space_time": 0.3
+   },
+   "functions": [
+    "move"
+   ],
+   "narrationHints": "You step where the world is worn through and arrive somewhere the geometry did not offer. It is a short walk on the other side and a long one back.",
+   "description": "Numenwork travelling-craft. Where meaning is thick the matter is thin, and the Numinous walk the difference.",
+   "notFor": "Crossing anywhere the veil is whole; carrying an unwilling passenger; escaping something that also walks thin; arriving anywhere you have not perceived.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Thin Step",
+     "grants": "Step through a thin place to another within sight — past a door, across a gap, out of a closing circle.",
+     "cannot": "ONLY WHERE IT IS ALREADY THIN, and only where you can SEE. Thin places are where they are; you do not make them.",
+     "functions": [
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Taken Through",
+     "grants": "Bring someone with you, if they are willing and touching you.",
+     "cannot": "⚠ THEY FEEL IT, and not everyone comes back from the crossing entirely settled. Ask first.",
+     "functions": [
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Long Thin",
+     "grants": "Cross to a thin place you know rather than one you can see.",
+     "cannot": "⚠ THE THIN PLACES ARE A NETWORK AND YOU ARE ON IT NOW. Things that use them can find where you enter.",
+     "functions": [
+      "move"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "magnitude"
+     ]
+    }
+   ],
+   "challengeTypes": [
+    "SURVIVE",
+    "TRAVEL"
+   ],
+   "tradition": "numinous",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "movement",
+   "operativeAxis": [
+    "magnitude",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 0,
+    "targets": 1
+   },
+   "intensity": {
+    "conserve": "a single short step, yourself",
+    "surge": "the long thin; YOU ARE ON THE NETWORK NOW"
+   },
+   "bounds": [
+    {
+     "text": "⛔ only where the veil is ALREADY thin",
+     "class": "hard"
+    },
+    {
+     "text": "you do not make thin places",
+     "class": "hard"
+    },
+    {
+     "text": "⚠ a passenger must be willing and touching you",
+     "class": "hard"
+    },
+    {
+     "text": "the thin places are a network, and it runs both ways",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A survive/travel action that steps through a thin place to somewhere in sight. Rated 4 of 10 on 1 target.",
+   "_authored_20260901": "⛔ OI-19: authored to close the tier-1 pool gap. Life/Spirit/Angelic/Demonic each had too few T1 crafts to support R3 creation (1 forced sense + 1 danger-response + 2 chosen from a curated pool of 4-5). ⚠️ Life's apparent 5 included two `folkAccessible` crafts every origin can take, leaving only 3 domain-specific."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

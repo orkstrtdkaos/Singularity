@@ -1,47 +1,49 @@
 {
-  "schemaVersion": 1,
-  "id": "greta_waystation",
-  "name": "Greta",
-  "role": "Solitary keeper of the switchback's halfway waystation",
-  "homeLocation": "old_switchback",
-  "communityId": "valley.kestrels_roost",
-  "personality": {
-    "warmth": 0.4,
-    "trust": 0.2,
-    "candor": 0.6,
-    "patience": 0.9
-  },
-  "spectrum": {
-    "space_time": 0.3,
-    "individual_collective": -0.3,
-    "falsehood_truth": 0.4,
-    "concrete_abstract": -0.2
-  },
-  "voiceHints": "Weathered, spare with words, keeps a hearth and a kettle for anyone off the trail. Remembers every traveler and what they carried — a gift and, to the guilty, a threat. Chose this solitude for reasons she keeps.",
-  "knowledge": [
-    "Everyone who has crossed the switchback in years, and what they bore",
-    "What has been taking the strange objects from travelers' packs on the upper trail",
-    "The real reason she keeps this lonely post"
-  ],
-  "wants": "The quiet she came here for, and to keep the waystation a safe roof for those who need it.",
-  "fears": "That her memory makes her a target for someone who crossed carrying something they'd kill to un-remember.",
-  "reactsToReputation": {
-    "kind": "shelters, shares what she's seen",
-    "menacing": "goes silent, gives nothing",
-    "traveler": "hospitable, trades news"
-  },
-  "appearance": "A weather-cured woman of sixty-odd, small and hard, white hair chopped at the ear, skin gone to deep creases across the nose and cheeks. Missing the last two fingers of her left hand. Wears three coats regardless of season.",
-  "people": "human",
-  "domains": {
-    "primary": "verist",
-    "secondary": "hourkeeper",
-    "tertiary": "mason"
-  },
-  "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
-  "teaches": "verist",
-  "curriculum": {
-    "method": "Travellers only, overnight only, one lesson each. She has never taught the same person twice and will turn you away if you return.",
-    "refuses": "a second night"
-  },
-  "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here."
+ "schemaVersion": 1,
+ "id": "greta_waystation",
+ "name": "Greta",
+ "role": "Solitary keeper of the switchback's halfway waystation",
+ "homeLocation": "old_switchback",
+ "communityId": "valley.kestrels_roost",
+ "personality": {
+  "warmth": 0.4,
+  "trust": 0.2,
+  "candor": 0.6,
+  "patience": 0.9
+ },
+ "spectrum": {
+  "space_time": 0.3,
+  "individual_collective": -0.3,
+  "falsehood_truth": 0.4,
+  "concrete_abstract": -0.2
+ },
+ "voiceHints": "Weathered, spare with words, keeps a hearth and a kettle for anyone off the trail. Remembers every traveler and what they carried — a gift and, to the guilty, a threat. Chose this solitude for reasons she keeps.",
+ "knowledge": [
+  "Everyone who has crossed the switchback in years, and what they bore",
+  "What has been taking the strange objects from travelers' packs on the upper trail",
+  "The real reason she keeps this lonely post"
+ ],
+ "wants": "The quiet she came here for, and to keep the waystation a safe roof for those who need it.",
+ "fears": "That her memory makes her a target for someone who crossed carrying something they'd kill to un-remember.",
+ "reactsToReputation": {
+  "kind": "shelters, shares what she's seen",
+  "menacing": "goes silent, gives nothing",
+  "traveler": "hospitable, trades news"
+ },
+ "appearance": "A weather-cured woman of sixty-odd, small and hard, white hair chopped at the ear, skin gone to deep creases across the nose and cheeks. Missing the last two fingers of her left hand. Wears three coats regardless of season.",
+ "people": "human",
+ "domains": {
+  "primary": "verist",
+  "secondary": "hourkeeper",
+  "tertiary": "mason"
+ },
+ "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+ "teaches": "verist",
+ "curriculum": {
+  "method": "Travellers only, overnight only, one lesson each. She has never taught the same person twice and will turn you away if you return.",
+  "refuses": "a second night"
+ },
+ "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here.",
+ "sex": "female",
+ "gender": "female"
 }

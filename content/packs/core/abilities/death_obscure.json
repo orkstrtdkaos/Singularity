@@ -83,7 +83,7 @@
     {
      "rank": 1,
      "name": "Soul Stare",
-     "grants": "⛔ DECLARE IN THE SENSE SLOT TO DENY THEIR READ — a person who is being shown their own death is not reading you. ⚠️ AND IT DROPS THEIR RESISTANCE BY 2 for the duration: whatever they were holding themselves together with counts for less against the next thing that reaches them.",
+     "grants": "⛔ DECLARE IN THE SENSE SLOT TO DENY THEIR READ — a person being shown their own death is not reading you. ⚠️ AND IT HINDERS EVERYTHING THEY DO, dropping their resistance by 2 for the duration.",
      "cannot": "A person, and they must be able to see your eyes. One per sense action.",
      "functions": [
       "conceal",
@@ -103,7 +103,7 @@
     {
      "rank": 2,
      "name": "Every Living Thing",
-     "grants": "⛔ DECLARE IN THE SENSE SLOT. Show ANY LIVING THING its own ending — a warhorse, a hound, a beast, a thing grown rather than born. It stops reading you, and ⚠️ THE RESISTANCE DROP DEEPENS TO 3.",
+     "grants": "⛔ DECLARE IN THE SENSE SLOT. Show ANY LIVING THING its own ending — a warhorse, a hound, a beast, a thing grown rather than born. It stops reading you, and ⚠️ THE HINDERING DEEPENS: resistance drops by 3.",
      "cannot": "It must be alive and it must be able to see you.",
      "functions": [
       "conceal",
@@ -120,7 +120,7 @@
     {
      "rank": 3,
      "name": "Everything Has an Address",
-     "grants": "⛔ DECLARE IN THE SENSE SLOT. Show ANYTHING WITH AN ESSENCE its own end — a construct, A SET BODY, a warded door, a working someone is sustaining. What is not alive still finishes. ⚠️ RESISTANCE DROPS BY 4.",
+     "grants": "⛔ DECLARE IN THE SENSE SLOT. Show ANYTHING WITH AN ESSENCE its own end — a construct, A SET BODY, a warded door, a working someone is sustaining. What is not alive still finishes, and is hindered the same way.",
      "cannot": "It must have been made, grown, or bound by someone. Raw stone has no address to show.",
      "functions": [
       "conceal",
@@ -138,7 +138,8 @@
    ],
    "_authored": "⛔ SNG-490. Erik: 'SOUL STARE could be an obscure skill rank 1, plus it would DROP THEIR RESISTANCE. r2 would have a similar effect but on ANY LIVING ENTITY. r3 would work on ANYTHING — everything has an essence (ADDRESS).'\n⚠️ DEATH HAD NO OBSCURE. And the rank ladder is TARGET CLASS, not power: person → living → anything with an address, which is the Ashwarden thesis that everything finishes.\n⛔ THE RESISTANCE DROP IS THE SECOND HALF AND IT MAKES THIS A SETUP FOR THE WHOLE TRADITION — Hastened Grey, Draw Down and Cut Thread all land harder on something that has just been shown its ending.",
    "_reviewed_20260824": "⛔ `deceive` -> `conceal`. Per function_vocabulary, DECEIVE SHOWS WHAT IS FALSE and CONCEAL HIDES WHAT IS TRUE — and this craft shows a FACT and hides you behind it. It was tagged as lying while being the one obscure in the game that works by telling the truth. ⚠️ Second Death obscure to do that; `public_grief` opens a REAL grief for the same reason. ⛔ ERIK 2026-08-24: 'make sure you remember to include the RESIST DROPS and how they SCALE WITH RANK UP' — now −2 / −3 / −4, stated at every rank, in `plainly`, and in `mechanic.resistDrop`. It is the craft's actual combat value and was previously unnumbered at r1, vague at r2 and absent at r3. ⚠️ `operativeAxis` was the bare STRING 'death_life' — an axis of the WORLD, not of the craft. ⛔ r3 ALREADY REACHED UNDEAD ('a set body') before §48 existed; nothing added.",
-   "_lintFix_20260824": "⛔ ability rung `none` while r3 reaches `damaging` — and `none` GLOSSES to the GM as 'this craft HARMS NOTHING, NEVER invent a wound from it'. Corrected to the max rank."
+   "_lintFix_20260824": "⛔ ability rung `none` while r3 reaches `damaging` — and `none` GLOSSES to the GM as 'this craft HARMS NOTHING, NEVER invent a wound from it'. Corrected to the max rank.",
+   "_combatTaughtFix_20260902": "⛔ `abilitiesCombatClaimedNotTaught` — this craft DECLARED a HARM function and no rank said HOW IT FIGHTS. ⚠️ THE PROSE WAS NOT BAD, IT WAS STATISTICAL: 'DEALS 1d6 DAMAGE at 8 paces' names the RESULT and never the ACT. A GM reading it had a number and no verb. ✅ EDITS ARE SURGICAL — the authored voice is kept and the doing is made explicit. ⚠️ Per the ratchet's own header: a gate that costs an author their better phrasing is levying a tax, so nothing here was weakened to satisfy a regex."
   },
   {
    "id": "public_grief",

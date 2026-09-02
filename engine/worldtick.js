@@ -20,6 +20,7 @@ import { spreadDeeds } from "./reputation.js";
 import { titleFor } from "./titles.js";   // SNG-287: a name from the material, not from a menu   // SNG-281: news travels, and that is a promotion source
 import { applyCodexUpdates } from "./codex.js";
 import { tierRank, tierBirthWeight } from "./legends.js";
+import { milestoneEffects } from "./ladder.js";
 // SNG-431 §1 — ⛔ "worldtick.js does not import names.js at all" (Aevi). That sentence IS the ticket: the
 // file that creates people had no access to the file that names them. `personName` is the one namer;
 // `nameOf`/`asSpoken` are what stop an origin line saying "of the the_ceaseless" at a player.
@@ -386,7 +387,12 @@ export function clashNewsItem(line, { worldDay = null, arcId = null, regionId = 
   return { ...base, worldDay, tier: "event", ...(arcId ? { arcId } : {}), ...(regionId ? { regionId } : {}) };
 }
 
-export function advanceHoldings({ character, now = Date.now() }) {
+/** ⛔ SNG-356 — THE PRESENCE MILESTONES REACH THE DRIFT HERE, or they are three authored sentences with
+ *  nothing behind them. `ladder` is the sub-attribute ladder from the rules bag; absent, every holding
+ *  drifts exactly as it did before, which is the correct behaviour for a caller that has not been
+ *  updated rather than a silent loss of the milestone. */
+export function advanceHoldings({ character, now = Date.now(), ladder = null }) {
+  const holdEffects = ladder ? milestoneEffects(ladder, character).live : null;
   const news = [];
   // ⛔ A DEPARTED STEWARD LEAVES THE POST UNKEPT, and this is the line that makes SNG-355 cost something.
   // Departure stopped being a deletion there precisely so it could be OBSERVED here: a castellan who turns
@@ -402,8 +408,8 @@ export function advanceHoldings({ character, now = Date.now() }) {
     const before = h.condition;
     // ⚠️ AN UNKEPT HOLDING DRIFTS. That is what makes it a claim on your attention rather than scenery,
     // and what makes a steward's departure (SNG-355) cost something.
-    advanceHolding(h, h.steward ? "stall" : "problem", count);
-    const line = holdingNews(h, before);
+    advanceHolding(h, h.steward ? "stall" : "problem", count, null, holdEffects);
+    const line = holdingNews(h, before, holdEffects);
     if (line) news.push(line);
     moved++;
   }
@@ -417,7 +423,8 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // SNG-366: the delegated-work pass runs on WORLD time and must not sit behind the character-day gate —
   // that early return is what Silas has been parked on for 915 actions. Only THIS block is lifted.
   const delegated = await advanceDelegatedWork({ character, content, advanceAssignments, currentDay });
-  const holdings358 = advanceHoldings({ character });
+  // ⛔ SNG-356 — the ladder rides in, or presence 14/18/20 are three sentences with nothing behind them.
+  const holdings358 = advanceHoldings({ character, ladder: content?.rules?.subAttributeLadder });
 
   // ⚠️ SNG-368: the RETURN is stamped too, on BOTH paths. The early return handed back raw entries
   // while the normal path handed back stamped ones, so a caller reading `.news[0].section` got a section on

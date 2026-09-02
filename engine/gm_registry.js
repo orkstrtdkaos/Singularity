@@ -67,6 +67,7 @@ import { worldCount, worldCountLabel } from "./worldtime.js";
 import { encounterReceiptForGM } from "./encounters.js";
 import { waygateBlockForGM } from "./waygate.js";
 import { readAloudDirective } from "./narration_voice.js";
+import { milestoneEffects } from "./ladder.js";
 
 const ALL = ["turn", "ask", "quest", "gambit"];
 
@@ -178,7 +179,9 @@ export const GM_CONTEXT = [
   // messenger from it. The block is the reader that stops holdings.js being a writer with no reader.
   { key: "holdingsDetail", builder: "holdings.holdingsForGM", carries: ["holdings", "steward", "condition"],
     reachedBy: "always", spec: "SNG-358", views: ["turn", "ask"],
-    build: (env) => holdingsForGM(env.character) },
+    // ⛔ SNG-356 presence 20 — the obligation clause inverts, so the GM must be handed the live effects.
+    build: (env) => holdingsForGM(env.character,
+      env.CONTENT?.rules?.subAttributeLadder ? milestoneEffects(env.CONTENT.rules.subAttributeLadder, env.character).live : null) },
   { key: "abilityLawDetail", builder: "progression.abilitiesForGM", carries: ["abilities", "ranks", "energy", "harmRung"],
     reachedBy: "always", spec: "§7", views: ["turn", "ask", "gambit"],
     build: (env) => abilitiesForGM(env.character, env.app.fullCatalog(), env.CONTENT.branchForks, env.CONTENT.rules) },

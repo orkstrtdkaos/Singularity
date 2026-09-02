@@ -899,6 +899,34 @@ function rungOf(def, rank) {
 /** SNG-089: how a craft harms, in words the GM can narrate to. "Can fight" ≠ "can harm" — an
  *  incapacitating craft STOPS a threat without wounding it; a `none` craft (Stillhold peace-working)
  *  wounds nothing at all. Feeding this stops the GM inventing a wound a craft cannot cause. */
+/** ⛔ AEVI'S PLACEMENT RULING (2026-09-02) — `sectFlavour` GOES IN THE ABILITY BLOCK, RESOLVED TO THE
+ *  WIELDER'S OWN SECT. Twelve crafts carry ~30 sect entries and the field was DARK.
+ *
+ *  ⚠️ NOT LORE ABOUT A SECT — what is happening WHEN THIS CHARACTER USES THIS CRAFT. `known_price` in a
+ *  Syllogist's hands is "you reasoned it"; in a Cogitant's it is "you modelled them — their pressures,
+ *  their creditors, the thing they have not budgeted for." Same mechanic, different event, every use.
+ *
+ *  ⛔ THREE OF THE ~30 ENTRIES ARE NOT FLAVOUR AT ALL. They open "⚠️ Not this craft" and are AUTHORING
+ *  JUDGEMENTS — "a mason goes THROUGH the wall; a somatic goes over it" — wearing the same field as
+ *  narration. A GM handed that as descriptive text reads it as something to say out loud. They are
+ *  suppressed here and surfaced as an off-idiom caution instead.
+ *
+ *  ⚠️ NO FALLBACK. A wielder whose sect has no entry gets SILENCE, never another sect's line — borrowing
+ *  one would say the opposite of what the field is for.
+ *
+ *  ⚠️ AND IT MATTERS MORE NOW THAN WHEN IT WAS AUTHORED: R3 lets a player take their sense from any sect
+ *  in their primary domain, so cross-sect holding is the NORMAL case. This is what keeps a Figurist
+ *  holding a Syllogist's craft from playing identically to the Syllogist. Returns {flavour, offIdiom}. */
+export function sectFlavourFor(ability, traditionId) {
+  const dict = ability?.sectFlavour;
+  if (!dict || typeof dict !== "object" || !traditionId) return { flavour: null, offIdiom: null };
+  const entry = dict[traditionId];
+  if (typeof entry !== "string" || !entry.trim()) return { flavour: null, offIdiom: null };
+  // ⛔ MATCHED ON THE OPENING, as the ruling specifies — not on the presence of a warning glyph anywhere
+  // in the string, which would suppress a legitimate line that happens to contain one.
+  if (/^\s*(?:\u26a0\ufe0f?\s*)?Not this craft/i.test(entry)) return { flavour: null, offIdiom: entry.trim() };
+  return { flavour: entry.trim(), offIdiom: null };
+}
 export function harmRungGloss(rung) {
  // registry:internal
   switch (rung) {
@@ -938,7 +966,17 @@ export function abilitiesForGM(character, catalog, branchForks = null, rules = {
       // rank still needs something to say at r1, and `authoredBlock` walks down to the highest rank at or
       // below the one held — the additive-ranks rule this project already runs on everywhere else.
       ((authoredBlock(ab, "harmRung", owned.level) ?? ab.harmRung)
-        ? `\nHARM: ${harmRungGloss(authoredBlock(ab, "harmRung", owned.level) ?? ab.harmRung)}` : ""));
+        ? `\nHARM: ${harmRungGloss(authoredBlock(ab, "harmRung", owned.level) ?? ab.harmRung)}` : "") +
+      // ⛔ THE WIELDER'S OWN SECT, next to the mechanic, every use. Silence when their sect has no entry.
+      // ⚠️ THE WIELDER'S SECT, NOT THE CRAFT'S. My first pass resolved the ABILITY's tradition, which is
+      // backwards — the whole point is that `known_price` reads differently in a Syllogist's hands than a
+      // Cogitant's, and the hands are the character's. It also referenced an `opts` this function does
+      // not have, which smoke caught immediately.
+      (() => { const sf = sectFlavourFor(ab, character?.domains?.primary);
+        return (sf.flavour ? `\nIN YOUR HANDS: ${sf.flavour}` : "")
+          // ⚠️ A CAUTION, NOT A LINE TO SPEAK. Marked so the narrator cannot mistake an authoring
+          // judgement for description — it is guidance about reach, not prose about the moment.
+          + (sf.offIdiom ? `\nOFF-IDIOM (guidance, do not narrate): ${sf.offIdiom.replace(/^\s*(?:\u26a0\ufe0f?\s*)?Not this craft[.:]?\s*/i, "")}` : ""); })());
   }
   for (const d of character.discoveries || []) {
     lines.push(`### ✦ Discovered technique: ${d.name}\n${d.description} (combines: ${d.abilities.join(" + ")}; earned through play — no novelty penalty, +bonus)`);

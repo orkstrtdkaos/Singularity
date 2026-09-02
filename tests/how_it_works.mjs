@@ -2720,6 +2720,109 @@ console.log("\n── §44 · traditionV2 is a stored copy, and it still agrees 
   check("§44: …and nothing reads it, which is correct — the derivation is the answer",
     readers.length === 0, readers.join(", "));
 }
+/* ═════ §45 — PRESENCE 14/18/20, AND `sectFlavour` IN THE WIELDER'S HANDS ═════ */
+// ⛔ SNG-356 — six ladder milestones read "BLOCKED PENDING HOLDINGS" while `holdings.js` was already
+// built. Aevi authored presence 14/18/20 against mechanics that ALREADY EXIST — the unstewarded floor,
+// the unstewarded ceiling, and the `obligation` field. None invents an engine concept; none is numeric.
+//
+// ⚠️ THE GATE READS THE `kind`, NOT THE RANK. `milestoneEffects().live` is keyed by kind, so Aevi can move
+// a milestone to another rank or hang it off another sub-attribute and this still holds.
+console.log("\n── §45 · standing keeps a place you are not standing in ──");
+{
+  const H45 = await import("../engine/holdings.js");
+  const L45 = await import("../engine/ladder.js");
+  const PR45 = await import("../engine/progression.js");
+  const ladder45 = rj("content/packs/core/rules/sub_attribute_ladder.json");
+  const eff = (presence) => L45.milestoneEffects(ladder45, { subAttributes: { presence } }).live;
+  const run = (presence, outcome, ticks = 3) => {
+    const h = { id: "h", name: "The Post", kind: "post", condition: "holding", steward: null, history: [] };
+    const e = eff(presence);
+    for (let i = 0; i < ticks; i++) H45.advanceHolding(h, outcome, i, null, e);
+    return h.condition;
+  };
+
+  // ⛔ THE MILESTONES EXIST AND ARRIVE IN ORDER.
+  check("§45: presence 14 grants the unstewarded floor", !!eff(14).unstewardedFloor && !eff(13).unstewardedFloor);
+  check("§45: presence 18 grants the ceiling lift", !!eff(18).unstewardedCeiling && !eff(17).unstewardedCeiling);
+  check("§45: presence 20 discharges the obligation", !!eff(20).obligationDischarged && !eff(19).obligationDischarged);
+
+  // ⛔ 14 — IT STOPS DECAYING. Below it, an unkept post slides to failing.
+  check("§45: below 14 an unkept holding slides", run(10, "problem") === "failing", run(10, "problem"));
+  check("§45: at 14 the name holds it up", run(14, "problem") === "holding", run(14, "problem"));
+
+  // ⛔ 14 IS A FLOOR, NOT A LIFT — SNG-355's company work must stay load-bearing.
+  check("§45: …but 14 still cannot make it THRIVE — a steward is the only road up",
+    run(14, "progress") === "holding", run(14, "progress"));
+  check("§45: and 18 CAN, on the name alone", run(18, "progress") === "thriving", run(18, "progress"));
+
+  // ⚠️ THE NEWS MUST STOP CALLING IT ABANDONED once standing is doing the keeping.
+  const h45 = { id: "n", name: "The Smithy", kind: "enterprise", condition: "holding", steward: null, history: [] };
+  H45.advanceHolding(h45, "progress", 1, null, eff(18));
+  const news45 = H45.holdingNews(h45, "holding", eff(18));
+  check("§45: a thriving unkept holding is not reported as having no keeper",
+    !!news45 && !/no keeper|nobody is keeping/.test(news45), String(news45));
+
+  // ⛔ 20 — THE OBLIGATION INVERTS. Narrative, not numeric: nothing is discharged mechanically.
+  const c45 = { holdings: [{ id: "w", name: "Marchward Post", kind: "post", condition: "thriving", steward: null, obligation: "a tithe" }] };
+  check("§45: below 20 the player OWES", /owes:/.test(H45.holdingsForGM(c45, eff(14))));
+  check("§45: at 20 the authority draws standing from the player instead",
+    !/owes:/.test(H45.holdingsForGM(c45, eff(20))) && /draw standing/.test(H45.holdingsForGM(c45, eff(20))),
+    H45.holdingsForGM(c45, eff(20)));
+
+  // ⚠️ AND WITHOUT THE LADDER, NOTHING CHANGES — a caller that has not been updated must not silently
+  // lose the old behaviour.
+  check("§45: with no effects supplied the drift is exactly as before",
+    (() => { const h = { id: "o", condition: "holding", steward: null, history: [] };
+      H45.advanceHolding(h, "problem", 1); return h.condition === "strained"; })());
+
+  // ═══ sectFlavour ═══
+  // ⛔ AEVI'S PLACEMENT: the wielder's OWN sect, in the ability block. Not lore about a sect — what is
+  // happening when THIS character uses THIS craft. Cross-sect holding is the normal case under R3.
+  const cat45 = {};
+  for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json")))
+    for (const a of (rj(`content/packs/core/abilities/${f}`).abilities || [])) cat45[a.id] = a;
+  const carriers45 = Object.values(cat45).filter(a => a.sectFlavour);
+  check("§45: the field has carriers (or this gate is vacuous)", carriers45.length >= 10, `${carriers45.length}`);
+
+  const kp = cat45["known_price"];
+  check("§45: sectFlavour resolves to the WIELDER’s sect — same craft, different event",
+    PR45.sectFlavourFor(kp, "syllogist").flavour !== PR45.sectFlavourFor(kp, "cogitant").flavour
+    && !!PR45.sectFlavourFor(kp, "syllogist").flavour);
+  check("§45: ⛔ a sect with no entry gets SILENCE, never another sect’s line",
+    PR45.sectFlavourFor(kp, "no_such_sect").flavour === null);
+
+  // ⛔ THE THREE DENIALS MUST NEVER REACH THE NARRATOR AS FLAVOUR.
+  const denials = [];
+  for (const a of carriers45) for (const [sect, txt] of Object.entries(a.sectFlavour || {}))
+    if (/^\s*(?:\u26a0\ufe0f?\s*)?Not this craft/i.test(String(txt))) denials.push([a.id, sect]);
+  check(`§45: the ${denials.length} authoring denials are found`, denials.length >= 3, JSON.stringify(denials));
+  check("§45: ⛔ …and not one renders as flavour",
+    denials.every(([id, sect]) => PR45.sectFlavourFor(cat45[id], sect).flavour === null),
+    denials.filter(([id, sect]) => PR45.sectFlavourFor(cat45[id], sect).flavour !== null).map(x => x.join("/")).join(", "));
+  // ⛔ AND THE RENDER, NOT ONLY THE RESOLVER. My first version of this gate tested `sectFlavourFor` in
+  // isolation and passed — while the ability block it feeds threw `ReferenceError: opts is not defined`
+  // on every call. ⚠️ SMOKE CAUGHT IT; THIS GATE DID NOT. A unit that works inside a caller that does not
+  // is the same shape as the fourth door, one level down: the piece is right and nothing can reach it.
+  //
+  // ⚠️ IT ALSO HID A DESIGN ERROR. I resolved the ABILITY's tradition; the ruling says the WIELDER's —
+  // the point is that `known_price` reads differently in a Syllogist's hands than a Cogitant's, and the
+  // hands are the character's. Testing the resolver alone could never have surfaced that.
+  {
+    const wielder = (sect) => ({ level: 9, domains: { primary: sect }, subAttributes: {},
+      abilities: [{ abilityId: "known_price", level: 1 }] });
+    const blockFor = (sect) => PR45.abilitiesForGM(wielder(sect), { known_price: kp }, null, {}) || "";
+    check("§45: the ability block RENDERS without throwing", typeof blockFor("syllogist") === "string");
+    check("§45: …and carries the wielder’s own sect line",
+      /IN YOUR HANDS/.test(blockFor("syllogist")) && /reasoned it/i.test(blockFor("syllogist")),
+      blockFor("syllogist").slice(0, 120));
+    check("§45: …a different sect gets a different line from the SAME craft",
+      /modelled them/i.test(blockFor("cogitant")));
+    check("§45: …and a sect with no entry adds nothing at all",
+      !/IN YOUR HANDS/.test(blockFor("verist")), blockFor("verist").slice(0, 90));
+  }
+  check("§45: …they surface as an off-idiom caution instead, so the judgement is not lost",
+    denials.every(([id, sect]) => typeof PR45.sectFlavourFor(cat45[id], sect).offIdiom === "string"));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

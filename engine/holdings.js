@@ -58,7 +58,17 @@ export function addHolding(character, { id, kind = "post", name = null, location
 /** ⛔ AN UNSTEWARDED HOLDING CANNOT THRIVE. This is the failure state that makes a holding a claim on your
  *  attention rather than scenery: nobody is keeping it, so the best it can do is hold, and it drifts down.
  *  It is also what makes SNG-355's company work matter — a castellan who DEPARTS leaves a post behind. */
-export function advanceHolding(holding, outcome, worldCount = null, note = null) {
+/** ⛔ SNG-356 · PRESENCE 14 AND 18 — STANDING KEEPS A PLACE YOU ARE NOT STANDING IN.
+ *
+ *  ⚠️ `effects` IS THE LIVE MILESTONE MAP (`ladder.milestoneEffects(...).live`), keyed by `kind` — not a
+ *  rank and not a sub-attribute. The gate reads what the ladder AUTHORED, so Aevi can move the rank, or
+ *  hang the same effect off a different sub, without touching this file.
+ *
+ *  `unstewardedFloor` (presence 14) — an unkept holding stops decaying. It still cannot THRIVE: nobody is
+ *  there. ⚠️ SNG-355's company work stays load-bearing at 14 — a steward is still the only road up.
+ *  `unstewardedCeiling` (presence 18) — the clamp lifts, and a place with no keeper can climb on the
+ *  strength of the name alone. */
+export function advanceHolding(holding, outcome, worldCount = null, note = null, effects = null) {
   if (!holding) return null;
   const step = OUTCOME_STEP[outcome];
   if (step === undefined) return holding;                    // unknown outcome — leave it rather than corrupt it
@@ -67,10 +77,19 @@ export function advanceHolding(holding, outcome, worldCount = null, note = null)
   //   −2 — "holding" straight past "strained" to "failing" in one tick. A decline the player cannot see
   //   coming is not a consequence, it is a rug-pull; the whole point of four rungs is that it slides.
   const unstewarded = !holding.steward;
-  const applied = unstewarded ? Math.min(step, 0) : step;      // unkept never climbs; it only holds or slips
+  // ⛔ PRESENCE 18 — the name climbs it. With `unstewardedCeiling` live, an unkept holding advances like
+  // any other; the ceiling below lifts with it, or raising the floor would be the only visible effect.
+  const mayClimb = !!effects?.unstewardedCeiling;
+  const applied = (unstewarded && !mayClimb) ? Math.min(step, 0) : step;   // unkept never climbs; it only holds or slips
   let next = clampIdx(CONDITIONS.indexOf(holding.condition) + applied);
   // …and it can never sit above "holding" however well things go — nobody is there to make it thrive.
-  if (unstewarded) next = Math.min(next, CONDITIONS.indexOf("holding"));
+  // ⛔ PRESENCE 14 — THE FLOOR. An unkept holding cannot fall below `holding`; the name keeps it standing.
+  // ⚠️ FLOOR FIRST, THEN CEILING, and the order matters: at 18 the ceiling is gone and the floor is all
+  // that remains, so applying the ceiling afterwards would clamp a thriving place straight back down.
+  if (unstewarded && effects?.unstewardedFloor) {
+    next = Math.max(next, CONDITIONS.indexOf(effects.unstewardedFloor.condition || "holding"));
+  }
+  if (unstewarded && !mayClimb) next = Math.min(next, CONDITIONS.indexOf("holding"));
   const before = holding.condition;
   holding.condition = CONDITIONS[next];
   holding.lastMovedWorldCount = worldCount;
@@ -82,21 +101,36 @@ export function advanceHolding(holding, outcome, worldCount = null, note = null)
 
 /** Did this change deserve telling? ⚠️ Only a CHANGE of condition is news — a holding that goes on holding
  *  is not an event, and reporting every quiet pass is how a player learns to skip the news (SNG-366). */
-export function holdingNews(holding, before) {
+export function holdingNews(holding, before, effects = null) {
   if (!holding || holding.condition === before) return null;
   const worse = CONDITIONS.indexOf(holding.condition) < CONDITIONS.indexOf(before);
   const where = holding.name || holding.id;
-  if (holding.condition === "failing") return `${where} is failing${holding.steward ? "" : " — nobody is keeping it"}.`;
-  if (worse) return `${where} has slipped to ${holding.condition}${holding.steward ? "" : " — it has no keeper"}.`;
+  // ⚠️ AEVI: "— it has no keeper" and "nobody is keeping it" READ WRONG for a place prospering in the
+  // player's name. At presence 18 an unkept holding can thrive, and the news would still be calling it
+  // abandoned. ⛔ The absence of a steward stops being the story once standing is doing the keeping.
+  const namedKeeps = !!effects?.unstewardedCeiling;
+  const unkept = !holding.steward && !namedKeeps;
+  if (holding.condition === "failing") return `${where} is failing${unkept ? " — nobody is keeping it" : ""}.`;
+  if (worse) return `${where} has slipped to ${holding.condition}${unkept ? " — it has no keeper" : ""}.`;
+  // ✅ AND THE THING THAT IS NEW: a place with no keeper CLIMBING, on the name alone.
+  if (!holding.steward && namedKeeps) return `${where} is ${holding.condition} — kept by your name, not your presence.`;
   return `${where} is ${holding.condition} again.`;
 }
 
 /** The GM's view: what you hold, who keeps it, and how it fares. */
-export function holdingsForGM(character) {
+/** ⛔ SNG-356 · PRESENCE 20 — THE OBLIGATION INVERTS. `— owes: X` becomes `— X draws standing from your
+ *  holding of it`. ⚠️ NARRATIVE, NOT NUMERIC: nothing is discharged mechanically and no cost is removed.
+ *  What changes is who is beholden, which is the whole of "the name is a power in the world". */
+export function holdingsForGM(character, effects = null) {
   ensureHoldings(character);
   if (!character.holdings.length) return null;
   return character.holdings.map(h =>
-    `- ${h.name} (${h.kind}, ${h.condition}${h.steward ? `, kept by ${h.steward}` : ", UNKEPT"})${h.obligation ? ` — owes: ${h.obligation}` : ""}`
+    `- ${h.name} (${h.kind}, ${h.condition}${h.steward ? `, kept by ${h.steward}` : (effects?.unstewardedCeiling ? ", kept by your name" : ", UNKEPT")})`
+    + (h.obligation
+      ? (effects?.obligationDischarged
+        ? ` — ${h.obligation}: they draw standing from your holding of it, not the reverse`
+        : ` — owes: ${h.obligation}`)
+      : "")
   ).join("\n");
 }
 

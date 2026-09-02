@@ -35,8 +35,8 @@ file is replaced.**
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **91** | a play-path file names it outside a comment |
-| ⛔ **DARK** | **17** | **no literal reader anywhere** — see the four lies below |
+| ✅ **READ** | **92** | a play-path file names it outside a comment |
+| ⛔ **DARK** | **16** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **3** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
 
@@ -665,7 +665,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `ongoingHarm` | 15 | `tree`×15 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `area` | 14 | `mechanic`×14 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
 | `damageMix` | 13 | `mechanic`×13 | ✅ READ | `damagetypes.js` |
-| `sectFlavour` | 12 | `root`×12 | ⛔ DARK | — |
+| `sectFlavour` | 12 | `root`×12 | ✅ READ | `progression.js` |
 | `interceptDamage` | 11 | `tree`×11 | ✅ READ | `intercept.js`, `app.js` |
 | `powerMix` | 10 | `root`×10 | ⛔ DARK | — |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |

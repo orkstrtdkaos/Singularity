@@ -59,3 +59,34 @@ simply owned. **The rule is stated, enforced on one road, and silently bypassed 
 
 ⬜ **Erik's call.** ⚠️ I have not changed either side — a guess here either strands a domain at creation or
 quietly widens a gate a ruling closed.
+
+---
+
+## §4 — ⛔ AND THREE OF THE NEW CRAFTS CARRY AN INVALID `gainAxes` VALUE
+
+Found because the push ratchet blocked on it — `how_it_works: 0 → 6` — not because I went looking.
+
+| craft | file | rank |
+|---|---|---|
+| `administered_mercy` | `reach_demonic_angelic.json` | r3 |
+| `fed_wound` | `reach_demonic_angelic.json` | r3 |
+| `thin_step` | `reach_mechanical_spiritual.json` | r3 |
+
+All three declare **`gainAxes: ["magnitude"]`**. ⛔ **`magnitude` is not one of the nine.** The valid set,
+asserted by §2 and documented in `HOW_IT_WORKS.md`:
+
+```
+range · duration · damage · scope · targets · quality · autonomy · conditions · tempo
+```
+
+⬜ **I have NOT guessed a replacement.** `fed_wound` reads like `damage`; `administered_mercy` could be
+`quality`; `thin_step` could be `range` or `scope` — **three crafts, three plausibly different right
+answers, and picking them is authoring by inference.** ⚠️ **This is the one thing in the batch I will not
+do for you.**
+
+✅ **The other four failures were mine and are fixed** — doc counts and the field atlas were stale because
+your nine crafts landed in my rebase after I had certified. Corpus is now 423 authored.
+
+⚠️ **My two commits are held behind this** (the ROUND 2 append and this reply). Neither touches code; both
+are blocked by the ratchet on a content value I should not choose. ⬜ **Fix the three and they go through,
+or Erik says which axis he wants and I will.**

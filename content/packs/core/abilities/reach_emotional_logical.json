@@ -1573,7 +1573,8 @@
       "resist": "mental",
       "targets": 6
      },
-     "_imposes": "⛔ SNG-513. ⛔ THE CRAFT SNG-500 §2 WAS WRITTEN ABOUT. Area action-loss; a crit staggers instead."
+     "_imposes": "⛔ SNG-513. ⛔ THE CRAFT SNG-500 §2 WAS WRITTEN ABOUT. Area action-loss; a crit staggers instead.",
+     "backlashRung": "none"
     },
     {
      "rank": 2,
@@ -1596,7 +1597,8 @@
       "resist": "mental",
       "targets": 3
      },
-     "_imposes": "⛔ SNG-513. ⛔ ESCALATE: up to three fall; a crit puts them all the way down. ⚠️ Erik's degradation rule is the design — a resist leaves them action-locked, it does not evaporate."
+     "_imposes": "⛔ SNG-513. ⛔ ESCALATE: up to three fall; a crit puts them all the way down. ⚠️ Erik's degradation rule is the design — a resist leaves them action-locked, it does not evaporate.",
+     "backlashRung": "damaging"
     },
     {
      "rank": 3,
@@ -1619,7 +1621,8 @@
       "degradesTo": "action_loss",
       "resist": "mental"
      },
-     "_imposes": "⛔ SNG-513. Everyone you choose. Those spared lose their next action."
+     "_imposes": "⛔ SNG-513. Everyone you choose. Those spared lose their next action.",
+     "backlashRung": "damaging"
     }
    ],
    "challengeTypes": [
@@ -1752,7 +1755,8 @@
    },
    "_veil": "⛔ SNG-498. Erik: 'it sure seems like Keening could be PARTIALLY VEIL POWERED.' ⚠️ AGREED AND IT FITS THE COSMOLOGY: the Veil is what remains where something enormous stopped being present (SNG-442), and a wail with a death inside it that passes through stone is not a sound the air is carrying. ⛔ `combination`: wild_nanite 0.6 (tidal, ungoverned, threnodist) + veil 0.4 (it reaches through, and there is no cover from it).\n⚠️ r2 SIMPLIFIED per Erik — 'too complicated to combine that with a broad cry'. Now: up to three named targets, each falls unconscious or loses their action on a resist.",
    "_targetsAndAllies_20260823": "⛔ ERIK 2026-08-23, AND I HAD IT BACKWARDS. r3 read 'you name who is SPARED, and they lose their next action instead' — I read that as allies taking a lesser effect AND PRAISED IT as an elegant solution to the ally problem. ⚠️ IT IS THE PROBLEM: a craft that knocks out enemies and costs your own party their actions is the exact thing Erik cut from Necrotic Strike an hour earlier. ⛔ THE MODEL IS CHOOSING: the player names targets, the unnamed are untouched, and 'lose their action instead' is what happens to a CHOSEN target WHO RESISTS. ⚠️ ALSO FIXED: r1 declared `deepen` while being the base, and r2 declared `broaden` on `targets` while what it added was a CONDITION — now `deepen`/`conditions`, which is what the reader will key on.",
-   "_typed_20260829": "⛔ `feeling` — ⛔ 'THE GRIEF ITSELF ARRIVES' — the craft says outright that what travels is not the sound. INTRINSIC. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`."
+   "_typed_20260829": "⛔ `feeling` — ⛔ 'THE GRIEF ITSELF ARRIVES' — the craft says outright that what travels is not the sound. INTRINSIC. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`.",
+   "_backlashTree_20260902": "⛔ OI-20 / R18 — BACKLASH SCALES WITH RANK, THE WAY HARM ALREADY DOES. `backlashRung` was a single flat top-level value: a craft turned on you identically at rank 1 and rank 3, even though at rank 3 it is doing lethal work. ✅ RULE: the top-level value is the CEILING (identical in meaning to `harmRung`, per R5-corrected and `intent.js:34`), and each craft's OWN authored offset is applied per rank — `backlash[r] = max(none, harm[r] − (ceilingHarm − ceilingBacklash))`. ⚠️ THE OFFSET IS PER-CRAFT AND WAS NOT FLATTENED: most lethal crafts backlash at `damaging` (offset 2), but `found_fault`, `offered_mouth`, `plain_weight`, `sudden_work` and `thinned_veil` backlash at `incapacitating` (offset 1) — an authored judgement that some crafts turn on the wielder harder. ✅ The rule REPRODUCES each craft's authored top-level exactly at its top rank and scales down below it. ⛔ CONSEQUENCE WORTH NAMING: at rank 1 most of these now have NO backlash at all — a novice's craft does not turn on them — which is Erik's standing correction that penalties must not land hardest on low-level players."
   },
   {
    "id": "contradiction",

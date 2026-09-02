@@ -1624,7 +1624,7 @@
     {
      "rank": 1,
      "name": "Drawn Line",
-     "grants": "Impose a simple figure — a line, an angle, an arc — across a target within sight. What it crosses is parted: mail, hide, timber, limb. Clean edges, no blade present.",
+     "grants": "Impose a simple figure — a line, an angle, an arc — across a target within sight, and it strikes as it lands. What it crosses is parted: mail, hide, timber, limb. ⛔ CLEAN EDGES, NO BLADE PRESENT, nothing to parry.",
      "cannot": "You must hold the figure CLEANLY. Distraction makes it cut short, cut wrong, or cut across your own line of sight. Masons resist it and know they are doing so.",
      "functions": [
       "strike",
@@ -1638,7 +1638,7 @@
     {
      "rank": 2,
      "name": "Compound Figure",
-     "grants": "Several lines at once, or one held open so it keeps parting what moves through — a doorway that divides what enters it.",
+     "grants": "Several lines at once, or one held open so it keeps striking what moves through — a doorway that parts what enters it.",
      "cannot": "Compound figures are harder to hold and a lapse leaves them half-drawn and unpredictable. A HELD FIGURE STRIKES ANYONE WHO CROSSES IT AT THE SAME RUNG.",
      "functions": [
       "strike",
@@ -1659,7 +1659,7 @@
     {
      "rank": 3,
      "name": "Cut Thought",
-     "grants": "⛔ CUT A THOUGHT. Impose the figure across what someone is HOLDING rather than what they are made of — the next action they had lined up is severed before it starts, or a craft they are sustaining parts from them and drops. ⚠️ Damage rises to 2d6 against a mind so occupied.",
+     "grants": "⛔ CUT A THOUGHT. Impose the figure across what someone is HOLDING rather than what they are made of — the next action they had lined up is shattered before it starts, or a craft they are sustaining is broken mid-hold.",
      "cannot": "One thought per action, and they must be doing something you can see them doing. A mind holding nothing loses nothing.",
      "functions": [
       "break",
@@ -1752,7 +1752,8 @@
    "_powerSystemWas": "reach_concrete_abstract",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_typed_20260829": "⛔ `spatial` — ⛔ GIVES `spatial` ITS FIRST CARRIER — a figurist imposes a LINE across a target and what it crosses is cut BY THE GEOMETRY. PHYSICS family, and the type existed in the families table with nothing dealing it. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`.",
-   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 CUTS A THOUGHT — the figure imposed across what someone is HOLDING."
+   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 CUTS A THOUGHT — the figure imposed across what someone is HOLDING.",
+   "_combatTaughtFix_20260902": "⛔ `abilitiesCombatClaimedNotTaught` — this craft DECLARED a HARM function and no rank said HOW IT FIGHTS. ⚠️ THE PROSE WAS NOT BAD, IT WAS STATISTICAL: 'DEALS 1d6 DAMAGE at 8 paces' names the RESULT and never the ACT. A GM reading it had a number and no verb. ✅ EDITS ARE SURGICAL — the authored voice is kept and the doing is made explicit. ⚠️ Per the ratchet's own header: a gate that costs an author their better phrasing is levying a tax, so nothing here was weakened to satisfy a regex."
   },
   {
    "id": "plain_weight",

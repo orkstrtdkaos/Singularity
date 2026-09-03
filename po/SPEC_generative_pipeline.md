@@ -292,3 +292,24 @@ the name away at the moment the craft is honoured.
 it passes the gate**, and that is the `foresee` boilerplate defect wearing new clothes. ⬜ **But "emit one
 rank and mark it `wantsAuthoring`" changes what a minted craft IS**, and six live saves hold crafts built
 under the old shape. **That wants your word before I touch it.**
+
+---
+
+## §R2.8 — ⛔ CORRECTION TO §R2.2, THE SAME DAY I WROTE IT
+
+⚠️ **My "5 of 11" was wrong and Aevi's original 7 of 11 was right.** I tested membership in
+`traditionIndex.byId` — a bag of 29 holding 24 poles, 3 folk and 2 others — when Erik's ruling is
+**"ONLY THE POLES ARE TRADITIONS"** and the test is ring membership.
+
+⛔ **`valley_craft` IS retired** (`HOW_IT_WORKS.md` line 88, with Erik's words attached) **and
+`radiant_folk` is folk, not a pole.** Both rows Aevi marked ⛔ were correct, and my §R2.2 table is wrong on
+both of them.
+
+✅ **`isPoleTradition(id, index)` now exists** so the question has one answer, and §53's gate uses it.
+⚠️ **The negative form `isFolkTradition` had existed in `traditions.js` the whole time and I built my own
+test instead** — see `POSTMORTEM_doc_contradiction.md` §A1.
+
+⚠️ **What survives unchanged:** the two root-cause fixes. A discovery still hardcoded `"learned"` where a
+real sect sat two lines above it, and the generator still emitted the union. **Both were real and both are
+fixed.** ⛔ **Only my recount of the damage was wrong — and it was wrong in the direction of making the
+problem look smaller than Aevi said it was.**

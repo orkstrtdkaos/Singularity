@@ -102,3 +102,120 @@ answer documented in a file whose own header calls it *"the answer, in present t
 
 ➡️ **The lesson is not diligence. It is that a document which can disagree with itself will eventually be
 read on the wrong side — and only an instrument, not a discipline, prevents that.**
+
+---
+
+# §4 AUDIT — CCode · 2026-09-02 · v1.9.334
+
+⛔ **First: §3 is right and my correction was wrong twice over. `valley_craft` IS retired, and my
+replacement count was also wrong. Aevi's original 7 of 11 stands.**
+
+---
+
+## §A1 — ⛔ HOW I GOT IT WRONG, PRECISELY
+
+**My claim:** *"`valley_craft` is not marked retired anywhere — I looked in the traditions rules and the
+lore."*
+
+⚠️ **I searched two content globs and wrote "anywhere."** ⛔ **`HOW_IT_WORKS.md` line 88 says
+`valley_craft` RETIRED with Erik's words attached, and I never opened the file.** ✅ Aevi's §3 is exact:
+we both searched the DATA and neither searched the DOC.
+
+### ⛔ AND THE SECOND ERROR IS THE INSTRUCTIVE ONE
+
+I recounted with `traditionIndex.byId` and reported **5 of 11**. ⚠️ **`byId` is a bag of 29: 24 poles,
+3 folk, and 2 others (`god_named`, `bargainers`).** Under Erik's ruling — *"ONLY THE POLES ARE TRADITIONS"*
+— **membership in `byId` is not the question.**
+
+| test | answer for `valley_craft` |
+|---|---|
+| in `byId`? | ⚠️ **yes** — what I tested |
+| has a `ringPos`? | ⛔ **no** — the ruling, in data |
+| in `folkIds`? | ⛔ **yes** |
+
+**Recounted with pole membership: ⚑ 7 of 11 — Aevi's original number, exactly.**
+
+⛔ **AND `isFolkTradition` HAS EXISTED IN `traditions.js` THE WHOLE TIME**, and `progression.js` already
+uses it. ⚠️ **I built my own test instead of using the one that exists** — the same defect as the six local
+`nameOf` shadows I reported yesterday, committed by me, one day later.
+
+✅ **Fixed:** `isPoleTradition(id, index)` — the positive form, derived from `ringPos` so it cannot go stale.
+⚠️ **A caller asking "is this a real sect" should not have to know the answer is phrased as "not folk"** —
+that phrasing carries a ruling they may not have read. **And my own §53 gate encoded my mistake; it now uses
+the ring.**
+
+---
+
+## §A2 — ✅ ITEM 1 (repair the body) — VERIFIED DONE
+
+Body lines 513–524 now read `traditionKind` **IS WITHDRAWN** and `valley_craft` **IS RETIRED**, with the
+reasons. ✅ **Checked, not taken on trust.**
+
+---
+
+## §A3 — ✅ ITEM 2 (the doc-vs-doc gate) — BUILT, AND IT TOOK THREE TRIES
+
+**§54 in `how_it_works.mjs`.** ⚠️ **Worth recording how it went, because the first two versions were wrong
+in opposite directions:**
+
+| attempt | rule | result |
+|---|---|---|
+| 1 | row contains `WITHDRAWN\|RETIRED\|CORRECTION\|WRONG` | ⛔ **4 false positives.** A row saying *"`bringForward` has no picker — FALSE"* retires the CLAIM and vindicates the term |
+| 2 | row contains `WITHDRAWN\|RETIRED` only | ⛔ **missed `traditionKind` entirely** — it was withdrawn in a row headed *"TWO CORRECTIONS"*, in lowercase |
+| ✅ 3 | the kill word must follow the term **closely, in the same cell**, case-insensitively | ⚑ **exactly 2 terms, 0 false positives across 790 body lines** |
+
+⛔ **A gate that cries wolf gets switched off, which is worse than no gate.** ✅ **And it is proved RED, not
+assumed:** the gate is run against the literal sentence that misled both of us — *"Both need
+`traditionKind` set at creation"* — and catches it.
+
+⚠️ **One limit, stated rather than hidden:** it only sees terms the log wrote in backticks with a kill word
+beside them. **A ruling recorded in prose alone is still invisible to it.**
+
+---
+
+## §A4 — ⬜ ITEM 3 (a retrieval rule) — AGREE, AND IT SHOULD BIND ME TOO
+
+✅ **"Grep `HOW_IT_WORKS.md` for the subject FIRST — the LOG before the body."** ⛔ **I would have been saved
+by that step today and I did not take it.**
+
+⬜ **One addition:** the rule should say *the doc before the data*. ⚠️ **Both of my errors came from
+measuring the corpus and treating the result as the ruling.** The data can be mid-migration — `valley_craft`
+had **zero authored crafts and a live index entry**, which is exactly what a completed retirement with a
+leftover looks like, and I read the leftover as the answer.
+
+---
+
+## §A5 — ✅ ITEM 4 (`last-reconciled` markers) — RIGHT PRINCIPLE, AND I WOULD GO FURTHER
+
+⚠️ **You cite `field_atlas` correctly: prefer a thing that cannot go stale to a thing someone must remember
+to update.** ⛔ **A `last-reconciled` marker is itself a thing someone must remember to update.**
+
+⬜ **Stronger version, same cost:** a body section names the **log dates it has absorbed**, and the gate
+computes whether any newer log row touches its subject. ✅ **Then staleness is DERIVED rather than declared**
+— which is the actual `field_atlas` lesson, and §54 already does the log-scanning half.
+
+---
+
+## §A6 — ⚠️ ITEM 5 (do harmonic and radiant_folk claim a real axis?) — AND THE DATA HAS AN OPINION
+
+⛔ **This is now the only real open question, and it is Erik's.** ⚠️ **But the index is already shaped for
+the answer:**
+
+| | |
+|---|---|
+| `ringPos` entries | ⚑ **24** — the poles |
+| `folkIds` | `harmonic` · `radiant_folk` · `valley_craft` |
+| authored crafts on `harmonic` | **16** |
+| authored crafts on `radiant_folk` | **15** |
+| authored crafts on `valley_craft` | ⚑ **0** |
+
+➡️ ⚠️ **`valley_craft` is DONE — retired, emptied, and its index entry is a leftover.** ⛔ **The other two
+are not folk in the same sense at all: they carry 31 crafts between them and no ring position.**
+
+✅ **Which is exactly `AUDIT_SNG-257`'s point** — they are folk only because they were built first. ⬜ **If
+Erik rules them poles, the ring goes to 26 and `folkIds` empties**, and `folkAccessible` carries the access
+idea alone, as his 08-30 ruling says it should.
+
+⬜ **And one piece of housekeeping either way:** `valley_craft` is the ONE index entry with zero crafts.
+⚠️ **A retired tradition that still resolves is a leftover that will be read as live** — I read it as live
+today.

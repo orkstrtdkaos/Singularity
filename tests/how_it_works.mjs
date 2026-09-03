@@ -3515,7 +3515,10 @@ console.log("\n── §53 · OI-25 · the generator distils, and lands in a sec
   const BR53 = await import("../engine/braids.js");
   const { loadContentHeadless: lch53 } = await import("./headless_content.mjs");
   const C53 = await lch53();
-  const sects53 = C53.traditionIndex?.byId || {};
+  // ⛔ NOT `byId` — that bag holds 24 poles, 3 folk and 2 others, and testing it answers a different
+  // question. Erik: "ONLY THE POLES ARE TRADITIONS." I used `byId` here and it made my own gate assert
+  // my own mistake.
+  const TR53 = await import("../engine/traditions.js");
 
   // ⛔ THE DISTILLATION HOLDS THE AUTHORED SHAPE across every authored recipe's own parents.
   {
@@ -3556,7 +3559,7 @@ console.log("\n── §53 · OI-25 · the generator distils, and lands in a sec
   check("§53: …and `powerSystem` still says \"learned\" — that vocabulary is separate and correct",
     /powerSystem: "learned"/.test(src53));
   check("§53: ⚠️ …so a braid of two ashwarden crafts is ashwarden, and CAN be taught",
-    !!sects53[C53.abilities["deathsense"]?.tradition], String(C53.abilities["deathsense"]?.tradition));
+    TR53.isPoleTradition(C53.abilities["deathsense"]?.tradition, C53.traditionIndex), String(C53.abilities["deathsense"]?.tradition));
 
   // ⚠️ AND THE GAP THIS DOES NOT CLOSE, ASSERTED AS OPEN. Bond-taught crafts carry no `functions` at all —
   // they work because the narrator reads prose, and they resolve to an empty capability set rather than
@@ -3566,6 +3569,105 @@ console.log("\n── §53 · OI-25 · the generator distils, and lands in a sec
     const inert = { id: "x53", name: "a taught thing", energyCost: 3, description: "prose only" };
     check("§53: ⚠️ a craft with no functions degrades to nothing — it does not throw",
       Array.isArray(CAP53.capabilitiesOf(inert, 1)) && CAP53.capabilitiesOf(inert, 1).length === 0);
+  }
+}
+/* ═════ §54 — A DOCUMENT THAT CAN DISAGREE WITH ITSELF ═════ */
+// ⛔ ERIK: "the intent of the pipeline discipline and the tests and all these ratchets and documentation
+// was so that this exact archeology exercise would never happen again. It failed to stop this."
+//
+// ⚠️ THE FAILURE WAS NOT DILIGENCE. `HOW_IT_WORKS.md` is 423 dated LOG rows followed by 20 BODY sections.
+// The log recorded `traditionKind` WITHDRAWN on 08-30; the body went on RECOMMENDING it. A reader landing
+// in the body got a withdrawn proposal presented as live guidance — and two of us did, in one day.
+//
+// ⛔ EVERY GATE IN THIS REPO TESTS DOC-vs-CODE OR CONTENT-vs-CONTENT. NOTHING TESTED DOC-vs-DOC. The
+// counts were right, the assertions held, and the file argued with itself in prose for three days.
+//
+// ⚠️ THE RULE, DELIBERATELY NARROW: a term the LOG retires must never appear in the BODY without the body
+// ALSO saying it is retired. A body sentence may discuss a dead idea; it may not present one as live.
+console.log("\n── §54 · the doc may not contradict itself ──");
+{
+  const raw54 = rd("docs/HOW_IT_WORKS.md").split("\n");
+  const isRow = (l) => /^\|\s*\d\d-\d\d\s*\|/.test(l);
+  let lastRow = -1; raw54.forEach((l, i) => { if (isRow(l)) lastRow = i; });
+  check("§54: the doc still has a LOG half and a BODY half", lastRow > 100 && raw54.length - lastRow > 100,
+    `log ends ${lastRow + 1}, body ${raw54.length - lastRow - 1} lines`);
+
+  const logRows = raw54.slice(0, lastRow + 1).filter(isRow);
+  const body54 = raw54.slice(lastRow + 1);
+
+  // ⚠️ A RETIREMENT MARKER IS A WORD THE LOG USES WHEN IT KILLS SOMETHING.
+  // ⛔ ADJACENCY, NOT ROW MEMBERSHIP — and it took three tries to get right, which is the point.
+  //
+  // ⚠️ ROW-LEVEL `CORRECTION|WRONG` CRIED WOLF FOUR TIMES: a row saying "`bringForward` has no picker —
+  // FALSE" retires the CLAIM and vindicates the term, so flagging later mentions is noise. A gate that
+  // cries wolf gets switched off, which is worse than no gate.
+  //
+  // ⛔ BUT NARROWING TO `WITHDRAWN|RETIRED` AT ROW LEVEL LOST THE CASE THIS EXISTS FOR: `traditionKind`
+  // was withdrawn in a row headed "TWO CORRECTIONS", and written in lowercase — "`traditionKind`
+  // withdrawn → `folkAccessible: true`". Both of my first two rules missed or over-matched it.
+  //
+  // ✅ THE RULE THAT WORKS: the kill word must follow the term CLOSELY and within the same cell — no
+  // backtick between them — case-insensitively. Measured: exactly two terms, `traditionKind` and
+  // `valley_craft`, and zero false positives across 790 body lines.
+  const KILL = /^[^`]{0,40}(withdrawn|retired|superseded)/i;
+  const SAYS_DEAD = /(withdrawn|retired|superseded|no longer)/i;
+  // the SUBJECT is the backticked identifier in that row
+  const TERM = /`([a-zA-Z_][a-zA-Z0-9_]{4,})[`:]/g;
+  const retired = new Set();
+  for (const row of logRows) {
+    for (const m of row.matchAll(TERM)) {
+      if (KILL.test(row.slice(m.index + m[0].length))) retired.add(m[1]);
+    }
+  }
+  check("§54: the log names things it has retired — the scan is not vacuous", retired.size >= 2,
+    `${retired.size} retired term(s)`);
+
+  // ⛔ AND THE BODY MAY NOT PRESENT ONE AS LIVE.
+  const offenders = [];
+  for (const term of retired) {
+    const needle = "`" + term + "`";
+    for (const line of body54) {
+      if (!line.includes(needle)) continue;
+      if (SAYS_DEAD.test(line)) continue;                   // the body says so too — fine
+      // ⚠️ a line that merely NAMES the successor is not a recommendation of the dead thing
+      if (/\bwas\b|\binstead\b|\bnot\b|\bnever\b/i.test(line)) continue;
+      offenders.push(term + " @ " + line.trim().slice(0, 70));
+    }
+  }
+  check("§54: ⛔ the BODY never presents a term the LOG retired as live guidance",
+    offenders.length === 0, offenders.slice(0, 4).join("  ·  "));
+
+  // ⛔ AND THE GATE CAN GO RED — proved here rather than asserted. A gate nobody has seen fail is a gate
+  // nobody knows the shape of.
+  {
+    const fakeBody = ["Both need `traditionKind` set at creation."];   // the exact sentence that misled two readers
+    let caught = 0;
+    for (const term of retired) {
+      const needle = "`" + term + "`";
+      for (const line of fakeBody) {
+        if (!line.includes(needle)) continue;
+        if (SAYS_DEAD.test(line)) continue;
+        if (/\bwas\b|\binstead\b|\bnot\b|\bnever\b/i.test(line)) continue;
+        caught++;
+      }
+    }
+    check("§54: ⛔ …and it CATCHES the sentence that caused this — proved, not assumed",
+      caught === 1, `caught ${caught}`);
+  }
+
+  // ⛔ AND THE SPECIFIC THING THAT BIT US, ASSERTED BY NAME. Erik 08-30: "ONLY THE POLES ARE TRADITIONS."
+  {
+    const TR54 = await import("../engine/traditions.js");
+    const { loadContentHeadless: lch54 } = await import("./headless_content.mjs");
+    const C54 = await lch54();
+    check("§54: `isPoleTradition` exists, so nobody has to test `byId` and get a different question",
+      typeof TR54.isPoleTradition === "function");
+    check("§54: ⛔ …and it says folk is NOT a tradition — the ruling, in code",
+      !TR54.isPoleTradition("valley_craft", C54.traditionIndex)
+      && !TR54.isPoleTradition("radiant_folk", C54.traditionIndex)
+      && TR54.isPoleTradition("ashwarden", C54.traditionIndex));
+    check("§54: ⚠️ …and `byId` really would have answered differently — which is how I got it wrong",
+      !!C54.traditionIndex.byId["valley_craft"]);
   }
 }
 /* ══════════ REPORT ══════════ */

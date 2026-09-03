@@ -99,6 +99,23 @@ export function polesInDomain(domain, index) {
   return Object.keys(index?.domainOfTrad || {}).filter(t => index.domainOfTrad[t] === domain);
 }
 
+/** ⛔ ERIK 2026-08-30, VERBATIM: "There is no folk tradition. ONLY THE POLES ARE TRADITIONS."
+ *
+ * ⚠️ SO "IS THIS A TRADITION" IS RING MEMBERSHIP, AND NOTHING ELSE. `byId` is a bag of 29: 24 poles,
+ * 3 folk (`harmonic`, `radiant_folk`, `valley_craft`) and 2 others (`god_named`, `bargainers`).
+ * ⛔ TESTING `byId` ANSWERS A DIFFERENT QUESTION and answers it wrong — I did exactly that while
+ * "correcting" Aevi about `valley_craft`, and her original claim was right.
+ *
+ * ⚠️ THE NEGATIVE FORM ALREADY EXISTED (`isFolkTradition`) AND I DID NOT USE IT. This is the positive
+ * one, because a caller asking "is this a real sect" should not have to know that the answer is phrased
+ * as "not folk" — that phrasing carries a ruling the caller may not have read.
+ *
+ * ✅ DERIVED FROM `ringPos`, so it cannot go stale: a tradition that gains or loses its place on the
+ * ring changes this answer without anyone remembering to. */
+export function isPoleTradition(traditionId, index) {
+  return !!traditionId && index?.ringPos?.[traditionId] !== undefined;
+}
+
 export function isFolkTradition(traditionId, index) { return !!index?.folkIds?.has(traditionId); }
 
 /** Ring distance in steps: `min(|i-j|, size-|i-j|)`. Prefers the authored per-tradition `distances`

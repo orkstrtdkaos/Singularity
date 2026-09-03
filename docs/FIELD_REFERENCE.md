@@ -643,6 +643,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `damageType` | 107 | `mechanic`×107 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `dice` | 105 | `mechanic`×105 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
 | `crit` | 93 | `mechanic`×93 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
+| `backlashRung` | 80 | `root`×20 `tree`×60 | ✅ READ | `progression.js` |
 | `range` | 79 | `mechanic`×79 | ✅ READ | `capabilities.js`, `craftmechanics.js` |
 | `plus` | 73 | `mechanic`×73 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
 | `schemaVersion` | 63 | `root`×63 | ✅ READ | `canon.js`, `codex.js`, `encounterFrame.js` |
@@ -656,7 +657,6 @@ contribute to authored dice without recreating the double-scaling bug.
 | `conserveSuppresses` | 23 | `root`×23 | ✅ READ | `app.js` |
 | `traditionV2` | 21 | `root`×21 | ⛔ DARK | — |
 | `imposes` | 21 | `tree`×21 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
-| `backlashRung` | 20 | `root`×20 | ✅ READ | `progression.js` |
 | `upkeep` | 18 | `root`×18 | ⚠️ CI-ONLY | _1 test/script only_ |
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |
 | `folkAccessible` | 18 | `root`×18 | ✅ READ | `state.js` |

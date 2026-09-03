@@ -3147,6 +3147,34 @@ console.log("\n── §48 · holdings: offered, never imposed ──");
     check("§48: …and every condition it does count is one the holdings vocabulary actually has",
       ["failing", "strained", "holding", "thriving"].join(",") === HD48.CONDITIONS.join(","));
   }
+  // ⛔ A RANK MAY FAIL MORE GENTLY THAN ITS CRAFT. `progression.rungOf()` reads `tree[].backlashRung`
+  // BEFORE the ability-level value — so r1/r2 `none` against an ability-level `damaging` means the early
+  // ranks are safe and only mastery bites back. ⚠️ THE SCHEMA DID NOT DECLARE THE FIELD, so 20 crafts
+  // authored this way failed validation while the engine was already reading them.
+  {
+    const PRG = await import("../engine/progression.js");
+    const sch = rj("schemas/ability.schema.json");
+    check("§48: a rank may fail more gently than its craft — tree[].backlashRung is a declared field",
+      !!sch.properties?.tree?.items?.properties?.backlashRung);
+    const perRank = abilities.filter(x => (x.tree || []).some(t => t?.backlashRung));
+    check("§48: …and crafts actually author it", perRank.length > 0, `${perRank.length} craft(s)`);
+    check("§48: ⛔ …and the per-rank value WINS over the ability-level one",
+      /entry\?\.backlashRung \|\| def\.backlashRung/.test(rd("engine/progression.js")));
+  }
+  // ⛔ ERIK 2026-09-02 — "count the people in the game, robustly." The number drifted three times in one
+  // session because nothing owned it, and two systems read 63 and 113. ⚠️ ONE OF THE 113 WAS NOT A PERSON:
+  // `legends.json` is a collection file with no `id` of its own, so the loader stored its documentation
+  // HEADER under the key "undefined".
+  {
+    const { loadContentHeadless: lch99 } = await import("./headless_content.mjs");
+    const CT99 = await lch99();
+    const k99 = Object.keys(CT99.npcs || {});
+    check("§48: ⛔ a documentation note is not a person — no record is keyed `undefined`",
+      !k99.includes("undefined") && k99.every(k => CT99.npcs[k]?.id === k),
+      k99.filter(k => CT99.npcs[k]?.id !== k).join(" · "));
+    check("§48: …and every person is keyed by their own id — nothing is double-keyed",
+      new Set(k99.map(k => CT99.npcs[k]?.id)).size === k99.length);
+  }
   // ⛔ ERIK (2026-09-02): "have it be the actual place name, not just ✦ A PLACE IS YOURS ✦", and "make sure
   // when the Celebration fires it has a generated image with it… that will let someone regen".
   //

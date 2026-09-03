@@ -1,627 +1,631 @@
 {
- "$schema": "http://json-schema.org/draft-07/schema#",
- "$id": "singularity/ability.schema.json",
- "title": "Craft (ability)",
- "description": "A craft. THE CLOSED SCHEMA — additionalProperties:false, so a field must be DECLARED HERE before it can be authored.",
- "_doNotRegenerate": "⛔ THIS FILE IS AUTHORED, NOT GENERATED. It was bootstrapped once from the corpus on 2026-08-28 and is hand-maintained from here. ⚠️ REGENERATING IT WOULD RUBBER-STAMP WHATEVER FIELDS HAPPEN TO EXIST, which defeats its entire purpose: the point is that adding a field is a DELIBERATE ACT SOMEBODY REVIEWS. To add one, edit this file first, then author the content.",
- "_notesAreLegal": "⚠️ Any key beginning with `_` is accepted anywhere, unvalidated. Authors carry their reasoning inline (98 at the craft root alone) and a schema that forbade that would make people delete their own thinking.",
- "_darkFields": "⛔ Properties described as DARK are authored and have NO LITERAL READER. They are legal because they exist, not because they work. See docs/FIELD_REFERENCE.md §6 for a diagnosis of each before deleting any of them.",
- "_gatedBy": "tests/content_ci.mjs — CCODE-288, which also proves the closed-set check can go RED.",
- "type": "object",
- "required": [
-  "id",
-  "name",
-  "tradition",
-  "tree"
- ],
- "additionalProperties": false,
- "patternProperties": {
-  "^_": {}
- },
- "properties": {
-  "id": {
-   "type": "string"
-  },
-  "name": {
-   "type": "string"
-  },
-  "tier": {
-   "type": "number",
-   "minimum": 1,
-   "maximum": 5,
-   "description": "⛔ WHAT THE CRAFT IS, on the 1-5 ladder — its price (`tierPrice`) and its dice (`mechanicFor`). ⚠️ SEPARATE FROM `levelReq`, WHICH IS WHEN YOU MAY LEARN IT. They were the same field until 2026-09-01, which meant an unlock level could not be moved without silently re-pricing the craft and re-rolling its damage. Erik: 'we need a dedicated Tier for the skills — that was intended all along.'"
-  },
-  "levelReq": {
-   "type": "number"
-  },
-  "energyCost": {
-   "type": "number"
-  },
-  "axes": {
-   "type": "object"
-  },
-  "attribute": {
-   "type": "string"
-  },
-  "narrationHints": {
-   "type": "string"
-  },
-  "description": {
-   "type": "string"
-  },
-  "notFor": {
-   "type": [
-    "string",
-    "array"
-   ]
-  },
-  "tradition": {
-   "type": "string"
-  },
-  "traditionV2": {
-   "type": "string",
-   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-  },
-  "nativeOrCombination": {
-   "type": "string"
-  },
-  "harmRung": {
-   "type": "string"
-  },
-  "powerSystem": {
-   "type": "string"
-  },
-  "shape": {
-   "type": "string"
-  },
-  "operativeAxis": {
-   "type": [
-    "string",
-    "array"
-   ]
-  },
-  "intensity": {
-   "type": [
-    "string",
-    "object"
-   ]
-  },
-  "mechanic": {
-   "type": "object",
-   "additionalProperties": false,
-   "patternProperties": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "singularity/ability.schema.json",
+  "title": "Craft (ability)",
+  "description": "A craft. THE CLOSED SCHEMA — additionalProperties:false, so a field must be DECLARED HERE before it can be authored.",
+  "_doNotRegenerate": "⛔ THIS FILE IS AUTHORED, NOT GENERATED. It was bootstrapped once from the corpus on 2026-08-28 and is hand-maintained from here. ⚠️ REGENERATING IT WOULD RUBBER-STAMP WHATEVER FIELDS HAPPEN TO EXIST, which defeats its entire purpose: the point is that adding a field is a DELIBERATE ACT SOMEBODY REVIEWS. To add one, edit this file first, then author the content.",
+  "_notesAreLegal": "⚠️ Any key beginning with `_` is accepted anywhere, unvalidated. Authors carry their reasoning inline (98 at the craft root alone) and a schema that forbade that would make people delete their own thinking.",
+  "_darkFields": "⛔ Properties described as DARK are authored and have NO LITERAL READER. They are legal because they exist, not because they work. See docs/FIELD_REFERENCE.md §6 for a diagnosis of each before deleting any of them.",
+  "_gatedBy": "tests/content_ci.mjs — CCODE-288, which also proves the closed-set check can go RED.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "tradition",
+    "tree"
+  ],
+  "additionalProperties": false,
+  "patternProperties": {
     "^_": {}
-   },
-   "properties": {
-    "dice": {
-     "type": "object"
-    },
-    "plus": {
-     "type": "number"
-    },
-    "targets": {
-     "type": "number"
-    },
-    "marginFloorPer": {
-     "type": "number"
-    },
-    "crit": {
-     "type": "object"
-    },
-    "magnitude": {
-     "type": "number"
-    },
-    "duration": {
-     "type": "number"
-    },
-    "scope": {
-     "type": [
-      "number",
-      "string"
-     ]
-    },
-    "wardTypes": {
-     "type": "array"
-    },
-    "resistDrop": {
-     "type": "array",
-     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-    },
-    "note": {
-     "type": "string"
-    },
-    "range": {
-     "type": [
-      "number",
-      "string"
-     ]
-    },
-    "soak": {
-     "type": "number"
-    },
-    "soakRank": {
-     "type": "number"
-    },
-    "area": {
-     "type": "number"
-    },
-    "push": {
-     "type": "number"
-    },
-    "damageType": {
-     "type": "string"
-    },
-    "variance": {
-     "type": "number"
-    },
-    "penetration": {
-     "type": "number"
-    },
-    "penetrationNote": {
-     "type": "string",
-     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-    },
-    "uses": {
-     "type": "number"
-    },
-    "evasion": {
-     "type": "number"
-    },
-    "evasionRank": {
-     "type": "number"
-    },
-    "type": {
-     "type": "string"
-    },
-    "requiresPoles": {
-     "type": "array",
-     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-    },
-    "trails": {
-     "type": "number"
-    },
-    "awaitingEngine": {
-     "type": "string",
-     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-    },
-    "wornBenefits": {
-     "type": "object",
-     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-    },
-    "questions": {
-     "type": "number"
-    },
-    "reachesDepth": {
-     "type": "array",
-     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-    },
-    "antisoakImposed": {
-     "type": "number"
-    },
-    "pierce": {
-     "type": "number"
-    },
-    "emotions": {
-     "type": "object",
-     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-    },
-    "carriesEmotion": {
-     "type": "boolean",
-     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-    },
-    "clearsConditions": {
-     "type": "string",
-     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-    },
-    "timeReach": {
-     "type": "number",
-     "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-    },
-    "damageMix": {
-     "type": "array",
-     "items": {
-      "type": "object",
-      "required": [
-       "type",
-       "share"
-      ],
-      "properties": {
-       "type": {
-        "type": "string"
-       },
-       "share": {
-        "type": "number",
-        "minimum": 0
-       }
-      }
-     },
-     "description": "⛔ A COMPOSITE BLOW — the craft deals several damage types at once, and a ward answers only the parts it answers. Read by `damageMixOf` in engine/damagetypes.js, which normalises the shares to 1. ⚠️ DECLARED 2026-08-29: the READER shipped with CCODE-281 and the SCHEMA never learned the field, so the first craft to author one (`ki_wield`) was rejected by the closed schema. A reader with no schema entry — the four-doors failure at the AUTHORED door. ⛔ USE THIS INSTEAD OF `damageType` when the fiction names more than one kind of harm: a ki bolt is `force` and `physical`, and armour answers only the second."
-    },
-    "requiresSelf": {
-     "type": "boolean",
-     "description": "⛔ CCODE-315 — this craft needs a SELF to take hold of. Answered by the target creature class's `hasSelf`. ⚠️ Six crafts stated this in FOUR different phrasings in prose before it was a field; the engine now reads it once and a gate asserts craft and creature agree."
-    }
-   }
   },
-  "challengeTypes": {
-   "type": "array",
-   "description": "CI-ONLY — the only consumer is a test."
-  },
-  "bounds": {
-   "type": "array"
-  },
-  "plainly": {
-   "type": "string"
-  },
-  "functions": {
-   "type": "array"
-  },
-  "sectFlavour": {
-   "type": "object",
-   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-  },
-  "tree": {
-   "type": "array",
-   "items": {
-    "type": "object",
-    "additionalProperties": false,
-    "patternProperties": {
-     "^_": {}
+  "properties": {
+    "id": {
+      "type": "string"
     },
-    "required": [
-     "rank"
-    ],
-    "properties": {
-     "rank": {
+    "name": {
+      "type": "string"
+    },
+    "tier": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "⛔ WHAT THE CRAFT IS, on the 1-5 ladder — its price (`tierPrice`) and its dice (`mechanicFor`). ⚠️ SEPARATE FROM `levelReq`, WHICH IS WHEN YOU MAY LEARN IT. They were the same field until 2026-09-01, which meant an unlock level could not be moved without silently re-pricing the craft and re-rolling its damage. Erik: 'we need a dedicated Tier for the skills — that was intended all along.'"
+    },
+    "levelReq": {
       "type": "number"
-     },
-     "name": {
-      "type": "string"
-     },
-     "grants": {
-      "type": "string"
-     },
-     "cannot": {
-      "type": "string"
-     },
-     "functions": {
-      "type": "array"
-     },
-     "gains": {
-      "type": "string"
-     },
-     "harmRung": {
-      "type": "string"
-     },
-     "gainAxes": {
-      "type": "array"
-     },
-     "imposes": {
+    },
+    "energyCost": {
+      "type": "number"
+    },
+    "axes": {
       "type": "object"
-     },
-     "stage": {
-      "type": "number"
-     },
-     "companionStageName": {
+    },
+    "attribute": {
+      "type": "string"
+    },
+    "narrationHints": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "notFor": {
+      "type": [
+        "string",
+        "array"
+      ]
+    },
+    "tradition": {
+      "type": "string"
+    },
+    "traditionV2": {
       "type": "string",
       "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-     },
-     "opensAccess": {
-      "type": "object"
-     },
-     "read": {
-      "type": "boolean"
-     },
-     "ongoingHarm": {
-      "type": "object",
-      "description": "⛔ THE HARM CONTINUES AFTER THE BLOW — `{type}` naming the damage type that keeps applying until treated or ended. ⚠️ ON THE RANK NODE, not in `mechanic`: six crafts author it here and a `mechanic`-level string was briefly declared in error 2026-08-29 and removed. ⛔ Read by `capabilities.js` as a TIER MARKER alongside `imposes`, `antisoakImposed`, `pierce` and `penetration`."
-     },
-     "persistUntilHealed": {
-      "type": "object"
-     },
-     "antisoakImposed": {
-      "type": "number"
-     },
-     "pierce": {
-      "type": "number"
-     },
-     "interceptCondition": {
-      "type": "object"
-     },
-     "reflectCondition": {
-      "type": "boolean"
-     },
-     "mechanic": {
+    },
+    "nativeOrCombination": {
+      "type": "string"
+    },
+    "harmRung": {
+      "type": "string"
+    },
+    "powerSystem": {
+      "type": "string"
+    },
+    "shape": {
+      "type": "string"
+    },
+    "operativeAxis": {
+      "type": [
+        "string",
+        "array"
+      ]
+    },
+    "intensity": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "mechanic": {
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-       "^_": {}
+        "^_": {}
       },
       "properties": {
-       "dice": {
-        "type": "object"
-       },
-       "plus": {
-        "type": "number"
-       },
-       "targets": {
-        "type": "number"
-       },
-       "marginFloorPer": {
-        "type": "number"
-       },
-       "crit": {
-        "type": "object"
-       },
-       "magnitude": {
-        "type": "number"
-       },
-       "duration": {
-        "type": "number"
-       },
-       "scope": {
-        "type": [
-         "number",
-         "string"
-        ]
-       },
-       "wardTypes": {
-        "type": "array"
-       },
-       "resistDrop": {
-        "type": "array",
-        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-       },
-       "note": {
-        "type": "string"
-       },
-       "range": {
-        "type": [
-         "number",
-         "string"
-        ]
-       },
-       "soak": {
-        "type": "number"
-       },
-       "soakRank": {
-        "type": "number"
-       },
-       "area": {
-        "type": "number"
-       },
-       "push": {
-        "type": "number"
-       },
-       "damageType": {
-        "type": "string"
-       },
-       "variance": {
-        "type": "number"
-       },
-       "penetration": {
-        "type": "number"
-       },
-       "penetrationNote": {
-        "type": "string",
-        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-       },
-       "uses": {
-        "type": "number"
-       },
-       "evasion": {
-        "type": "number"
-       },
-       "evasionRank": {
-        "type": "number"
-       },
-       "type": {
-        "type": "string"
-       },
-       "requiresPoles": {
-        "type": "array",
-        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-       },
-       "trails": {
-        "type": "number"
-       },
-       "awaitingEngine": {
-        "type": "string",
-        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-       },
-       "wornBenefits": {
-        "type": "object",
-        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-       },
-       "questions": {
-        "type": "number"
-       },
-       "reachesDepth": {
-        "type": "array",
-        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-       },
-       "antisoakImposed": {
-        "type": "number"
-       },
-       "pierce": {
-        "type": "number"
-       },
-       "emotions": {
-        "type": "object",
-        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-       },
-       "carriesEmotion": {
-        "type": "boolean",
-        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-       },
-       "clearsConditions": {
-        "type": "string",
-        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-       },
-       "timeReach": {
-        "type": "number",
-        "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-       }
+        "dice": {
+          "type": "object"
+        },
+        "plus": {
+          "type": "number"
+        },
+        "targets": {
+          "type": "number"
+        },
+        "marginFloorPer": {
+          "type": "number"
+        },
+        "crit": {
+          "type": "object"
+        },
+        "magnitude": {
+          "type": "number"
+        },
+        "duration": {
+          "type": "number"
+        },
+        "scope": {
+          "type": [
+            "number",
+            "string"
+          ]
+        },
+        "wardTypes": {
+          "type": "array"
+        },
+        "resistDrop": {
+          "type": "array",
+          "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+        },
+        "note": {
+          "type": "string"
+        },
+        "range": {
+          "type": [
+            "number",
+            "string"
+          ]
+        },
+        "soak": {
+          "type": "number"
+        },
+        "soakRank": {
+          "type": "number"
+        },
+        "area": {
+          "type": "number"
+        },
+        "push": {
+          "type": "number"
+        },
+        "damageType": {
+          "type": "string"
+        },
+        "variance": {
+          "type": "number"
+        },
+        "penetration": {
+          "type": "number"
+        },
+        "penetrationNote": {
+          "type": "string",
+          "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+        },
+        "uses": {
+          "type": "number"
+        },
+        "evasion": {
+          "type": "number"
+        },
+        "evasionRank": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        },
+        "requiresPoles": {
+          "type": "array",
+          "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+        },
+        "trails": {
+          "type": "number"
+        },
+        "awaitingEngine": {
+          "type": "string",
+          "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+        },
+        "wornBenefits": {
+          "type": "object",
+          "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+        },
+        "questions": {
+          "type": "number"
+        },
+        "reachesDepth": {
+          "type": "array",
+          "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+        },
+        "antisoakImposed": {
+          "type": "number"
+        },
+        "pierce": {
+          "type": "number"
+        },
+        "emotions": {
+          "type": "object",
+          "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+        },
+        "carriesEmotion": {
+          "type": "boolean",
+          "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+        },
+        "clearsConditions": {
+          "type": "string",
+          "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+        },
+        "timeReach": {
+          "type": "number",
+          "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+        },
+        "damageMix": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "type",
+              "share"
+            ],
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "share": {
+                "type": "number",
+                "minimum": 0
+              }
+            }
+          },
+          "description": "⛔ A COMPOSITE BLOW — the craft deals several damage types at once, and a ward answers only the parts it answers. Read by `damageMixOf` in engine/damagetypes.js, which normalises the shares to 1. ⚠️ DECLARED 2026-08-29: the READER shipped with CCODE-281 and the SCHEMA never learned the field, so the first craft to author one (`ki_wield`) was rejected by the closed schema. A reader with no schema entry — the four-doors failure at the AUTHORED door. ⛔ USE THIS INSTEAD OF `damageType` when the fiction names more than one kind of harm: a ki bolt is `force` and `physical`, and armour answers only the second."
+        },
+        "requiresSelf": {
+          "type": "boolean",
+          "description": "⛔ CCODE-315 — this craft needs a SELF to take hold of. Answered by the target creature class's `hasSelf`. ⚠️ Six crafts stated this in FOUR different phrasings in prose before it was a field; the engine now reads it once and a gate asserts craft and creature agree."
+        }
       }
-     },
-     "interceptDamage": {
-      "type": "object",
-      "properties": {
-       "allies": {
-        "type": "integer",
-        "minimum": 1
-       },
-       "charges": {
-        "type": "integer",
-        "minimum": 0
-       },
-       "rounds": {
-        "type": "integer",
-        "minimum": 0
-       },
-       "resistBonus": {
-        "type": "integer"
-       },
-       "costsAction": {
-        "type": "boolean"
-       }
-      },
-      "description": "⛔ THIS RANK CATCHES BLOWS AIMED AT AN ALLY — the damage counterpart of `interceptCondition`, which catches bindings. Read by `protectionFromCraft` in engine/intercept.js. ⚠️ DECLARED 2026-08-29: the reader shipped with CCODE-260 carrying the note 'build the reader, default the dial to a no-op, LET CONTENT TURN IT ON' — and the schema was never told, so the first craft to turn it on (`step_between`) was rejected. ⛔ SECOND INSTANCE OF THE FOUR-DOORS FAILURE AT THE **AUTHORED** DOOR, after `mechanic.damageMix`. ⚠️ `costsAction` IS THE DESIGN, NOT A LIMIT: a guard that catches for free is a wall, and casualties go to zero."
-     }
-    }
-   }
-  },
-  "obscure": {
-   "type": "boolean"
-  },
-  "taughtBy": {
-   "type": "string"
-  },
-  "companionTaught": {
-   "type": "boolean",
-   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-  },
-  "sense": {
-   "type": "boolean"
-  },
-  "progression": {
-   "type": "string"
-  },
-  "companionId": {
-   "type": "string"
-  },
-  "effectTags": {
-   "type": "array"
-  },
-  "rankDeltas": {
-   "type": "array",
-   "items": {
-    "type": "object",
-    "additionalProperties": false,
-    "patternProperties": {
-     "^_": {}
     },
-    "required": [
-     "rank"
-    ],
-    "properties": {
-     "rank": {
+    "challengeTypes": {
+      "type": "array",
+      "description": "CI-ONLY — the only consumer is a test."
+    },
+    "bounds": {
+      "type": "array"
+    },
+    "plainly": {
+      "type": "string"
+    },
+    "functions": {
+      "type": "array"
+    },
+    "sectFlavour": {
+      "type": "object",
+      "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "tree": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "patternProperties": {
+          "^_": {}
+        },
+        "required": [
+          "rank"
+        ],
+        "properties": {
+          "rank": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "grants": {
+            "type": "string"
+          },
+          "cannot": {
+            "type": "string"
+          },
+          "functions": {
+            "type": "array"
+          },
+          "gains": {
+            "type": "string"
+          },
+          "harmRung": {
+            "type": "string"
+          },
+          "gainAxes": {
+            "type": "array"
+          },
+          "imposes": {
+            "type": "object"
+          },
+          "stage": {
+            "type": "number"
+          },
+          "companionStageName": {
+            "type": "string",
+            "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+          },
+          "opensAccess": {
+            "type": "object"
+          },
+          "read": {
+            "type": "boolean"
+          },
+          "ongoingHarm": {
+            "type": "object",
+            "description": "⛔ THE HARM CONTINUES AFTER THE BLOW — `{type}` naming the damage type that keeps applying until treated or ended. ⚠️ ON THE RANK NODE, not in `mechanic`: six crafts author it here and a `mechanic`-level string was briefly declared in error 2026-08-29 and removed. ⛔ Read by `capabilities.js` as a TIER MARKER alongside `imposes`, `antisoakImposed`, `pierce` and `penetration`."
+          },
+          "persistUntilHealed": {
+            "type": "object"
+          },
+          "antisoakImposed": {
+            "type": "number"
+          },
+          "pierce": {
+            "type": "number"
+          },
+          "interceptCondition": {
+            "type": "object"
+          },
+          "reflectCondition": {
+            "type": "boolean"
+          },
+          "mechanic": {
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {
+              "^_": {}
+            },
+            "properties": {
+              "dice": {
+                "type": "object"
+              },
+              "plus": {
+                "type": "number"
+              },
+              "targets": {
+                "type": "number"
+              },
+              "marginFloorPer": {
+                "type": "number"
+              },
+              "crit": {
+                "type": "object"
+              },
+              "magnitude": {
+                "type": "number"
+              },
+              "duration": {
+                "type": "number"
+              },
+              "scope": {
+                "type": [
+                  "number",
+                  "string"
+                ]
+              },
+              "wardTypes": {
+                "type": "array"
+              },
+              "resistDrop": {
+                "type": "array",
+                "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+              },
+              "note": {
+                "type": "string"
+              },
+              "range": {
+                "type": [
+                  "number",
+                  "string"
+                ]
+              },
+              "soak": {
+                "type": "number"
+              },
+              "soakRank": {
+                "type": "number"
+              },
+              "area": {
+                "type": "number"
+              },
+              "push": {
+                "type": "number"
+              },
+              "damageType": {
+                "type": "string"
+              },
+              "variance": {
+                "type": "number"
+              },
+              "penetration": {
+                "type": "number"
+              },
+              "penetrationNote": {
+                "type": "string",
+                "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+              },
+              "uses": {
+                "type": "number"
+              },
+              "evasion": {
+                "type": "number"
+              },
+              "evasionRank": {
+                "type": "number"
+              },
+              "type": {
+                "type": "string"
+              },
+              "requiresPoles": {
+                "type": "array",
+                "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+              },
+              "trails": {
+                "type": "number"
+              },
+              "awaitingEngine": {
+                "type": "string",
+                "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+              },
+              "wornBenefits": {
+                "type": "object",
+                "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+              },
+              "questions": {
+                "type": "number"
+              },
+              "reachesDepth": {
+                "type": "array",
+                "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+              },
+              "antisoakImposed": {
+                "type": "number"
+              },
+              "pierce": {
+                "type": "number"
+              },
+              "emotions": {
+                "type": "object",
+                "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+              },
+              "carriesEmotion": {
+                "type": "boolean",
+                "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+              },
+              "clearsConditions": {
+                "type": "string",
+                "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+              },
+              "timeReach": {
+                "type": "number",
+                "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+              }
+            }
+          },
+          "interceptDamage": {
+            "type": "object",
+            "properties": {
+              "allies": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "charges": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "rounds": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "resistBonus": {
+                "type": "integer"
+              },
+              "costsAction": {
+                "type": "boolean"
+              }
+            },
+            "description": "⛔ THIS RANK CATCHES BLOWS AIMED AT AN ALLY — the damage counterpart of `interceptCondition`, which catches bindings. Read by `protectionFromCraft` in engine/intercept.js. ⚠️ DECLARED 2026-08-29: the reader shipped with CCODE-260 carrying the note 'build the reader, default the dial to a no-op, LET CONTENT TURN IT ON' — and the schema was never told, so the first craft to turn it on (`step_between`) was rejected. ⛔ SECOND INSTANCE OF THE FOUR-DOORS FAILURE AT THE **AUTHORED** DOOR, after `mechanic.damageMix`. ⚠️ `costsAction` IS THE DESIGN, NOT A LIMIT: a guard that catches for free is a wall, and casualties go to zero."
+          },
+          "backlashRung": {
+            "type": "string",
+            "description": "What a failure of THIS RANK costs. `progression.rungOf()` reads this first and falls back to the ability-level value, so a rank that fails harder than its craft says so here."
+          }
+        }
+      }
+    },
+    "obscure": {
+      "type": "boolean"
+    },
+    "taughtBy": {
+      "type": "string"
+    },
+    "companionTaught": {
+      "type": "boolean",
+      "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "sense": {
+      "type": "boolean"
+    },
+    "progression": {
+      "type": "string"
+    },
+    "companionId": {
+      "type": "string"
+    },
+    "effectTags": {
+      "type": "array"
+    },
+    "rankDeltas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "patternProperties": {
+          "^_": {}
+        },
+        "required": [
+          "rank"
+        ],
+        "properties": {
+          "rank": {
+            "type": "number"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "axis": {
+            "type": "string"
+          },
+          "delta": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "schemaVersion": {
       "type": "number"
-     },
-     "kind": {
+    },
+    "gated": {
       "type": "string"
-     },
-     "axis": {
+    },
+    "upkeep": {
+      "type": "object",
+      "description": "CI-ONLY — the only consumer is a test."
+    },
+    "powerMix": {
+      "type": "object",
+      "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "namedCurrent": {
+      "type": "string",
+      "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "theNames": {
+      "type": "string",
+      "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "schoolAffinity": {
       "type": "string"
-     },
-     "delta": {
+    },
+    "read": {
+      "type": "boolean"
+    },
+    "learnedAt": {
+      "type": "string",
+      "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "peril": {
       "type": "string"
-     },
-     "from": {
+    },
+    "projectThreshold": {
+      "type": "number"
+    },
+    "projectTicks": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "backlash": {
       "type": "string"
-     }
+    },
+    "conserveSuppresses": {
+      "type": "string"
+    },
+    "backlashRung": {
+      "type": "string",
+      "description": "The default cost of a failure, when no rank overrides it. ⚠️ Was documented CI-ONLY; `progression.rungOf()` has read it since the R18/R19 backlash work."
+    },
+    "status": {
+      "type": "string"
+    },
+    "downtime": {
+      "type": "boolean"
+    },
+    "summon": {
+      "type": "object"
+    },
+    "innatePrecursor": {
+      "type": "boolean"
+    },
+    "backlashRungNone": {
+      "type": "string",
+      "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
+    },
+    "accord": {
+      "type": "boolean"
+    },
+    "wildVariance": {
+      "type": "boolean"
+    },
+    "folkAccessible": {
+      "type": "boolean",
+      "description": "⛔ THIS CRAFT IS OPENLY LEARNABLE BY ANYONE, not only by the tradition that owns it. ⚠️ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The folk idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ✅ SO THIS IS AN ACCESS FLAG, NOT A CATEGORY. The craft's `tradition` is its real owner and always a POLE; this field says the pole shares it. ⛔ I FIRST DECLARED `traditionKind: \"pole\"|\"foothill\"|\"folk\"` from SNG-536 §2a and it was wrong in the same way the spec was: **it made folk a kind of tradition, which is the thing being retired.**"
     }
-   }
-  },
-  "schemaVersion": {
-   "type": "number"
-  },
-  "gated": {
-   "type": "string"
-  },
-  "upkeep": {
-   "type": "object",
-   "description": "CI-ONLY — the only consumer is a test."
-  },
-  "powerMix": {
-   "type": "object",
-   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-  },
-  "namedCurrent": {
-   "type": "string",
-   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-  },
-  "theNames": {
-   "type": "string",
-   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-  },
-  "schoolAffinity": {
-   "type": "string"
-  },
-  "read": {
-   "type": "boolean"
-  },
-  "learnedAt": {
-   "type": "string",
-   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-  },
-  "peril": {
-   "type": "string"
-  },
-  "projectThreshold": {
-   "type": "number"
-  },
-  "projectTicks": {
-   "type": [
-    "string",
-    "boolean"
-   ]
-  },
-  "backlash": {
-   "type": "string"
-  },
-  "conserveSuppresses": {
-   "type": "string"
-  },
-  "backlashRung": {
-   "type": "string",
-   "description": "CI-ONLY — the only consumer is a test."
-  },
-  "status": {
-   "type": "string"
-  },
-  "downtime": {
-   "type": "boolean"
-  },
-  "summon": {
-   "type": "object"
-  },
-  "innatePrecursor": {
-   "type": "boolean"
-  },
-  "backlashRungNone": {
-   "type": "string",
-   "description": "DARK — authored, no literal reader. See docs/FIELD_REFERENCE.md §6 before deleting."
-  },
-  "accord": {
-   "type": "boolean"
-  },
-  "wildVariance": {
-   "type": "boolean"
-  },
-  "folkAccessible": {
-   "type": "boolean",
-   "description": "⛔ THIS CRAFT IS OPENLY LEARNABLE BY ANYONE, not only by the tradition that owns it. ⚠️ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The folk idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ✅ SO THIS IS AN ACCESS FLAG, NOT A CATEGORY. The craft's `tradition` is its real owner and always a POLE; this field says the pole shares it. ⛔ I FIRST DECLARED `traditionKind: \"pole\"|\"foothill\"|\"folk\"` from SNG-536 §2a and it was wrong in the same way the spec was: **it made folk a kind of tradition, which is the thing being retired.**"
   }
- }
 }

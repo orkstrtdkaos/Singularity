@@ -581,6 +581,12 @@ export async function loadContent() {
   const challengerPools = {}; // SNG-138: a challenger_pool is a COLLECTION (challengers[]), kept out of the
   for (const npc of await npcsP) {                                        // single-NPC registry so it never pollutes
     if (npc && (npc.kind === "challenger_pool" || Array.isArray(npc.challengers))) { if (npc.id) challengerPools[npc.id] = npc; continue; } // name-resolution / GM reuse
+    // ⛔ A RECORD WITH NO `id` IS NOT A PERSON. `legends.json` is a COLLECTION file listed under
+    // `provides.npcs` — it carries `schemaVersion`, a `note` and a `legends[]`, and no id of its own — so
+    // this line stored the file's own header under the key `"undefined"`. ⚠️ THE CENSUS COUNTED A
+    // DOCUMENTATION BLOCK AS A PERSON, which is one of the two reasons 113 and 63 disagreed.
+    // ⚠️ Its people arrive properly further down, hydrated from `legends.roster`.
+    if (!npc?.id) continue;
     npcs[npc.id] = npc;
   }
 

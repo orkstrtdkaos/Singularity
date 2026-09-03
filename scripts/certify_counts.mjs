@@ -73,6 +73,32 @@ const counts = {
   engine: readdirSync(join(root, "engine")).filter(f => f.endsWith(".js")).length,
   places: dirCount("content/packs/valley/locations"),
   companions: dirCount("content/packs/valley/companions"),
+  // ⛔ CCODE / ERIK 2026-09-02 — "count the people in the game, robustly." The number had drifted three
+  // times in one session because nothing owned it, and two systems disagreed 63 vs 113.
+  //
+  // ⚠️ THE DERIVATION IS THE LOADER'S OWN RULE, RESTATED AGAINST FILES so it needs no content load:
+  //   · a file with an `id` is ONE person
+  //   · a `challenger_pool` is a POOL, not a roster — its 6 members are drawn from, never met as a cast,
+  //     and the loader keeps them out of `npcs` for exactly that reason
+  //   · a COLLECTION file has no id of its own; its people are its roster entries. ⛔ `legends.json` is
+  //     one, and because this rule was missing the loader stored the file's own HEADER under the key
+  //     "undefined" — a documentation note counted as a person
+  //   · the tradition-epics roster hydrates into the same map, so it counts too
+  //
+  // ⚠️ COMPANIONS ARE NOT INCLUDED — they are stated separately in the same sentence, and the loader
+  // keeps them in their own map. Counting them here would double them.
+  people: (() => {
+    const ids = new Set();
+    for (const f of readdirSync(join(root, "content/packs/valley/npcs")).filter(x => x.endsWith(".json"))) {
+      const j = JSON.parse(readFileSync(join(root, "content/packs/valley/npcs", f), "utf8"));
+      if (j.kind === "challenger_pool" || Array.isArray(j.challengers)) continue;
+      if (j.id) { ids.add(j.id); continue; }
+      for (const fig of (j.legends || j.figures || [])) if (fig?.id) ids.add(fig.id);
+    }
+    const ep = JSON.parse(readFileSync(join(root, "content/packs/valley/tradition_epics.json"), "utf8"));
+    for (const e of (ep.epics || [])) if (e?.id) ids.add(e.id);
+    return ids.size;
+  })(),
   // ⚠️ THE SAME PREDICATES `smoke.mjs` USES, character for character. If these diverge, this script would
   // certify a number its own checker rejects — a generator arguing with its gate.
   crit: records.filter(a => a.mechanic?.crit || a.crit).length,
@@ -113,7 +139,7 @@ const CLAIMS = [
   // which includes the martial floor; the number I cannot derive is preserved rather than invented.
   { file: "docs/PLAYERS_GUIDE.md", name: "player's guide · crafts (LOADED) · places · companions",
     re: /\*\*Last verified: [\d-]+ · v[\d.]+ · \d+ crafts · \d+ places · (\d+) people · \d+ companions\.\*\*/,
-    to: (_m, people) => `**Last verified: ${today} · v${version} · ${counts.loaded} crafts · ${counts.places} places · ${people} people · ${counts.companions} companions.**` },
+    to: (_m) => `**Last verified: ${today} · v${version} · ${counts.loaded} crafts · ${counts.places} places · ${counts.people} people · ${counts.companions} companions.**` },
 
   // ⛔ MY OWN GATE CAUGHT MY OWN HAND-KEPT STAMP. §29 requires `BALANCE.md` to carry the live version, and
   // one `bump_version` later it did not — a stored copy of a derived value, in the document whose §5 is
@@ -146,7 +172,7 @@ for (const c of CLAIMS) {
   if (after !== before) { changed++; byFile.set(c.file, after); console.log(`  ${CHECK ? "STALE " : "stamped"}  ${c.file} :: ${c.name}`); }
 }
 
-console.log("  ⚠️ not owned: PLAYERS_GUIDE 'people' — no derivation names it (41 solo + 11 nested = 52 records vs 111 claimed). Preserved as authored.");
+console.log(`  owned now: PLAYERS_GUIDE 'people' = ${counts.people} — id-bearing person records + collection rosters + epics; pools and companions excluded`);
 
 if (CHECK) {
   console.log(changed ? `⚠️ ${changed} certified claim(s) are STALE — run without --check` : "✅ every certified count is fresh");

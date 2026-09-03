@@ -3655,6 +3655,36 @@ console.log("\n── §54 · the doc may not contradict itself ──");
       caught === 1, `caught ${caught}`);
   }
 
+  // ⛔ SPEC_one_source_of_truth §1 — A RULING IS NOT RULED UNTIL THE BODY SAYS SO.
+  //
+  // ⚠️ MEASURED RATHER THAN ASSUMED, because the spec’s own figure was wrong by a wide margin: it said
+  // 6 R-numbers reach the body and 23 live only in working papers. ⚑ 28 OF 32 REACH THE BODY, and the
+  // body already cites them in its own headings — "What it costs to LEARN (R1, R9, R10, R16, R17, R20)".
+  //
+  // ⛔ A RATCHET, NOT A CLIFF. A gate that goes red for every ruling not yet enacted starts red and gets
+  // switched off — §54’s own first version cried wolf four times and would have been disabled in a
+  // week. ⚠️ This may only go DOWN: a ruling filed and never enacted moves it the wrong way.
+  {
+    const nums = [];
+    for (const f of readdirSync(join(root, "po")).filter(x => x.endsWith(".md"))) {
+      for (const m of rd("po/" + f).matchAll(/\bR(\d{1,2})\b/g)) {
+        const n = Number(m[1]); if (n >= 1 && n <= 60 && !nums.includes(n)) nums.push(n);
+      }
+    }
+    const dl54 = doc.split(String.fromCharCode(10));
+    const isRow54 = (l) => /^\|\s*\d\d-\d\d\s*\|/.test(l);
+    let lastR54 = -1; dl54.forEach((l, i) => { if (isRow54(l)) lastR54 = i; });
+    const bodyTxt54 = dl54.slice(lastR54 + 1).join(String.fromCharCode(10));
+    const hasR = (t, n) => new RegExp("\\bR" + n + "\\b").test(t);
+    const unenacted = nums.filter(n => !hasR(doc, n));
+    const inBody = nums.filter(n => hasR(bodyTxt54, n)).length;
+    check("§54: ⛔ at most four minted rulings are absent from HOW_IT_WORKS — may only go DOWN",
+      unenacted.length <= 4,
+      nums.length + " minted · absent: " + (unenacted.map(n => "R" + n).join(" ") || "none"));
+    check("§54: …and most R-numbers reach the BODY, not merely the log — the enacted half",
+      inBody >= 25, inBody + " of " + nums.length + " in the body");
+  }
+
   // ⛔ AND THE SPECIFIC THING THAT BIT US, ASSERTED BY NAME. Erik 08-30: "ONLY THE POLES ARE TRADITIONS."
   {
     const TR54 = await import("../engine/traditions.js");

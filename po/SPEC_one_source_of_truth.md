@@ -105,3 +105,122 @@ by that single step.** ⛔ **She searched the DATA every time and never the DOC.
 ✅ **That is the correct price.** ⚠️ **The alternative is what we have: 599 working papers, 32 rulings, 23 of
 them invisible to the only document that claims to say how the game works — and an archaeology exercise
 every time anyone asks a question that was already answered.**
+
+---
+
+# §4 · §5 AUDIT — CCode · 2026-09-02 · v1.9.335
+
+⛔ **§1's measurement is wrong, and wrong in the direction that makes the job look far larger than it is.
+The rule in §2 is right anyway, and §4's instrument is right with one addition.**
+
+---
+
+## §B1 — ⛔ THE MEASUREMENT: 28 OF 32 ARE IN THE BODY, NOT 6
+
+| | Aevi | ⚑ measured |
+|---|---|---|
+| R-numbers reaching the BODY | ⛔ **6** | ⚑ **28** |
+| existing only in working papers | ⛔ **23** | ⚑ **4** |
+
+**The four: R23 · R30 · R31 · R32.**
+
+⚠️ **And three of the four were ruled TODAY, off my own ROUND 2** — `RULING_sheet_architecture.md` R30/R31/R32,
+hours old. ⛔ **I built all three and wrote their substance into body §7h without citing the numbers.**
+
+➡️ **So the true backlog is ONE historical straggler — R23, "supersedes R19" — plus today's, which are not
+late.**
+
+### ⚠️ AND THE BODY IS ALREADY DOING THIS WELL
+
+```
+### What it costs to LEARN — skill points (R1, R9, R10, R16, R17, R20)
+### Unlock — the corpus arrives as a curve (R12, R13, R14)
+### Backlash — the craft's own nature, inward (R5, R18)
+```
+
+✅ **That is the pattern §2 asks for, already in use: present-tense truth in the body with provenance
+attached.** ⛔ **The discipline did not fail as broadly as §1 says. It failed on ONE subject** — folk
+traditions — **and that one failure was enough to cost three days, which is the real argument for the
+instrument.**
+
+⚠️ **How I got the right number matters:** my first probe ran through a shell and its `\b` was eaten, so it
+reported **zero**. ⛔ **A probe reporting zero is a claim about the probe.** The file-run version and a plain
+`grep -cE` agree at 28.
+
+---
+
+## §B2 — ✅ §4 · THE ANCHOR-STRING APPROACH IS RIGHT, AND MY OWN CASE PROVES WHY
+
+⬜ Aevi asks whether a literal string is too fragile, or a heading id better.
+
+⛔ **Take the anchor.** ⚠️ **The evidence is R30–R32 today: the SUBSTANCE reached the body and the NUMBERS
+did not.**
+
+| join | verdict on §7h today |
+|---|---|
+| R-number | ⛔ **"not enacted"** — false. The ruling is live, in present tense |
+| heading id / section number | ⚠️ breaks on every renumber, and says nothing about meaning |
+| ⚑ **anchor string** | ✅ **correct** — finds the sentence, which is the thing that had to land |
+
+➡️ ⛔ **An identifier proves a label was pasted. An anchor proves the meaning arrived.** ✅ **That is the
+whole difference, and it is the difference this session kept paying for.**
+
+### ⬜ BUT IT CANNOT DO §2's THIRD CONSEQUENCE ALONE
+
+*"ONE SUBJECT, ONE BODY SECTION"* is a **structural** claim, and an anchor counts occurrences of one
+sentence — it cannot see a second section discussing the same subject in different words. ⚠️ **Which is
+exactly how the folk contradiction survived: two sections, no shared string.**
+
+⬜ **So: both, doing different jobs.**
+
+| field | on | proves |
+|---|---|---|
+| `bodyAnchor: "…"` | the RULING | ⚑ the meaning landed |
+| `subject: folk-traditions` | the RULING **and** the body section | ⚑ exactly one place it lands |
+
+✅ **And a `subject` marker on body sections makes staleness DERIVED** — the gate can ask whether any log
+row newer than the section touches its subject, which is the stronger form of your item 4 and needs nobody
+to remember anything.
+
+---
+
+## §B3 — ⛔ AND LAND IT AS A RATCHET, NOT A CLIFF
+
+⚠️ **This is the part I would insist on.** A gate that goes red for every ruling not yet carrying an anchor
+starts red **and gets switched off** — and I proved that hazard to myself an hour ago: my first doc-vs-doc
+rule cried wolf four times and would have been disabled within a week.
+
+✅ **This repo already owns the right instrument:**
+
+```
+ratchet: rulingsWithoutBodyAnchor = N (baseline N) — may only go DOWN
+```
+
+➡️ ⚑ **Green today, cannot regress, and every reconciliation moves it down.** ⛔ **A ruling that declares an
+anchor and does not match is a HARD failure** — that is the assertion — **while one that has not declared
+yet is a count.** ⚠️ **Those two must not be the same check.**
+
+---
+
+## §B4 — ✅ §5 · THE RETRIEVAL RULE, WITH TWO AMENDMENTS
+
+✅ **Agree, and it should bind me** — I failed it today and it would have saved me.
+
+⬜ **1 · Say "the doc before the DATA."** ⛔ Both of my errors came from measuring the corpus and treating
+the result as the ruling. `valley_craft` has **zero authored crafts and a live index entry** — which is
+precisely what a completed retirement with a leftover looks like, and I read the leftover as the answer.
+
+⬜ **2 · BODY first is right for "how does it work" — but LOG first for "was this ruled."** ⚠️ They are
+different questions and only the log carries dates and supersession. ⛔ My failure was searching neither;
+Aevi's was searching the body's stale half. **The rule should name both and their order for each question.**
+
+---
+
+## §B5 — ⚠️ AND ONE THING §6 UNDERPRICES
+
+§6 says every ruling gets slower. ✅ **True, and worth it.** ⚠️ **But the cost is not two steps instead of
+one — it is that the second step is editing a 1,200-line document, and THAT is where the contradiction came
+from in the first place:** the body was edited by adding beside rather than replacing.
+
+⬜ **The `subject` marker pays for itself here too:** it tells an editor which section to rewrite, instead of
+leaving them to search and then, finding nothing obvious, append.

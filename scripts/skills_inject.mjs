@@ -5,24 +5,39 @@
 // followed, and the first craft added made it quietly wrong while it still claimed to be the source of
 // truth.
 //
-// ⛔ IT DOES NOT WRITE UNLESS YOU PASS `--write`. Default is a diff. Aevi regenerates this file by hand
-// today, and a generator that clobbers a file someone is editing is worse than no generator.
+// ⛔ IT DOES NOT WRITE UNLESS YOU PASS `--write`. Default is a diff. Aevi may be regenerating this file by
+// hand at the same time, and a generator that clobbers a file someone is editing is worse than no generator.
 //
-// ═══ THE PLACEMENT RULE, WHICH IS THE WHOLE REASON THIS TOOK TWO ATTEMPTS ═══
+// ═══ R33 (SNG-443) — LINEAGE AND ACCESS ARE TWO AXES, AND THE GENERATOR MUST NOT CONFUSE THEM ═══
 //
-// ⚠️ ERIK, 2026-09-02 — SETTLED: "harmonic (16) and radiant_folk (15) ARE FOOTHILLS, THEY ARE NOT GOING ON
-// THE RING." A foothill craft is placed by its OWN `axes` vector, its access is the band `folk`, and
-// `domainOfTradition()` returning null is CORRECT, not a gap — a folk craft does not need a domain because
-// it is not domain-gated, and a ring position would GATE what is meant to be ungated.
+// ⚠️ `tradition` IS THE LINEAGE — permanent, keys the wheel position, the power source, the aesthetic.
+// `learnedAt` IS THE ACCESS — situational, names WHERE a person can be taught it: a foothill, a school, a
+// place, the wilds. ⛔ A FOOTHILL IS A PLACE OF ACCESS, NOT A NEW ANCESTRY — "Hardline teaches the Edge; it
+// does not own it." Grouping crafts by treating a foothill as if it were a lineage is the exact error R33
+// exists to correct, and this generator committed it once already: my first version filed `radiant_folk`'s
+// 15 crafts under Radiance as if the tradition field itself named a pole, producing blazeborn 16 + 15 = 31 —
+// which is what the doc said before the correction, and exactly what the correction undoes.
 //
-// ⛔ SO A FOOTHILL IS NOT FILED UNDER A POLE. My first attempt filed `radiant_folk`'s 15 crafts under
-// Radiance and would have produced blazeborn 16 + 15 = 31 — which is what the file said before the revert,
-// and what the revert is undoing. ⚠️ THE RESOLUTION IS CRAFT-LEVEL, NOT TRADITION-LEVEL: a craft's axes
-// place it on the wheel; its tradition is still its own.
+// ⛔ MY SECOND VERSION THEN MADE THE OPPOSITE ERROR, ALSO NAMED IN R33: it pulled every non-pole tradition
+// into a "Foothills — no ring position, no domain" section and asserted that absence was correct. R33 says
+// the reverse — "A foothill CRAFT has a lineage and therefore a domain. It is the PLACE that has no ring
+// position." Declaring a craft domain-less because its `tradition` field was momentarily a place-name was
+// asserting a fact about the CONTENT that only an author can settle, which is exactly the trap
+// SPEC_associativity.md names: "a hand-declared line will rot exactly like the stored counts this file
+// already forbade and then carried once."
 //
-// ⚠️ GROUPING IS THEREFORE BY TRADITION, and the ring decides which traditions are DOMAIN sections. The
-// foothills and the small non-ring lineages get their own sections after the domains, so nothing is
-// dropped and nothing is filed somewhere it does not belong.
+// ✅ SO THE GENERATOR DOES THE MINIMUM IT IS ENTITLED TO DO, AND NO MORE:
+//   1. Group strictly by `tradition`. A pole tradition gets its domain section, same as always.
+//   2. Surface `learnedAt` on the row as an access marker — the field R33 names, never invented.
+//   3. NEVER GUESS A LINEAGE. `foothills.json`'s blends (harmonic: threnodist 0.5 · lattice 0.3 · mason
+//      0.2, radiant_folk: blazeborn 0.5 · wright 0.3 · lattice 0.2, and so on) are WEIGHTS ACROSS A WHOLE
+//      FOOTHILL, not a per-craft assignment — deciding which of three parents ONE craft actually descends
+//      from is authoring, and it is Aevi's, not a formula this file can run.
+//   4. A `tradition` that is not (yet) a real pole is placed honestly, in a section that says what it is —
+//      pending R33 migration, or genuinely something else — never in a section that asserts the absence is
+//      correct. ⚠️ ONCE AEVI RE-AUTHORS `tradition` TO THE REAL LINEAGE POLE (with `learnedAt` carrying the
+//      foothill), those crafts fall out of that section and into their domain automatically, on the next
+//      run. NOTHING IN THIS FILE NEEDS TO CHANGE WHEN SHE DOES.
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
@@ -30,9 +45,7 @@ import { fileURLToPath } from "node:url";
 import { loadContentHeadless } from "../tests/headless_content.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-// ⚠️ `--out <path>` WRITES A PREVIEW ELSEWHERE. Aevi regenerates this file by hand today, so being able to
-// see what the generator WOULD produce, without touching hers, is the difference between a tool she can
-// check and one that fights her.
+// ⚠️ `--out <path>` WRITES A PREVIEW ELSEWHERE, so this can be checked without ever touching the real file.
 const outArg = process.argv.indexOf("--out");
 const DOC = outArg > -1 && process.argv[outArg + 1] ? process.argv[outArg + 1] : join(root, "docs/SKILLS.md");
 const BEGIN = "<!-- BEGIN skills-generated -->";
@@ -45,9 +58,17 @@ const idx = C.traditionIndex;
 const abilities = Object.values(C.abilities);
 
 const isPole = (t) => t && idx.ringPos?.[t] !== undefined;
-const isFolk = (t) => !!idx.folkIds?.has?.(t);
 
-// ── every craft under its OWN tradition. Nothing is re-filed. ──
+// ⚠️ `foothills.json` names which non-pole tradition VALUES are places Erik has already ruled on, so the
+// pending section can say "this is a known foothill awaiting its per-craft lineage" rather than leaving an
+// author to wonder whether it is tracked at all.
+let foothillPlaces = {};
+try {
+  const fj = JSON.parse(readFileSync(join(root, "content/packs/core/rules/foothills.json"), "utf8"));
+  foothillPlaces = fj.foothills || {};
+} catch { /* absent means unknown — the pending section still lists everything honestly */ }
+
+// ── every craft under its OWN tradition. Nothing is re-filed, nothing is guessed. ──
 const byTrad = {};
 for (const a of abilities) if (a.tradition) (byTrad[a.tradition] ||= []).push(a);
 
@@ -59,6 +80,10 @@ function rowFor(a) {
   const ranks = (a.tree || []).map(t => t?.name).filter(Boolean).join(" · ");
   const marks = [];
   if (a.folkAccessible) marks.push("folk");
+  // ⚠️ R33 — THE ACCESS FIELD, SURFACED, NEVER INVENTED. Six crafts carry it today (thrown_edge,
+  // drawn_bow, …), each already on a real pole; this is what lets a reader see "learned at: hardline" on
+  // a craft whose lineage is `marcher`, which is the whole point of separating the two axes.
+  if (a.learnedAt) marks.push("learnedAt:" + a.learnedAt);
   if (a.harmRung && a.harmRung !== "none") marks.push("harm:" + a.harmRung);
   if (a.backlashRung && a.backlashRung !== "none") marks.push("backlash:" + a.backlashRung);
   const tail = marks.length ? "  ⚑ " + marks.join(" · ") : "";
@@ -82,7 +107,7 @@ function tierTables(list) {
 const out = [];
 const domains = Object.entries(idx.domainById || {}).sort((a, b) => a[1].pos - b[1].pos);
 
-// ── the summary: domains only. A foothill has no domain, by ruling. ──
+// ── the summary: domains only. Poles are lineages; only a lineage has a domain. ──
 out.push("## Summary", "");
 out.push("| pos | domain | antipode | sects | crafts | T1 | T2 | T3 | T4 | T5 |");
 out.push("|---|---|---|---|---|---|---|---|---|---|");
@@ -106,32 +131,25 @@ for (const [name, d] of domains) {
   out.push("---", "");
 }
 
-// ── ⛔ THE FOOTHILLS, IN THEIR OWN SECTION AND NOT UNDER A POLE. ──
-const foothills = Object.keys(byTrad).filter(t => isFolk(t)).sort();
-if (foothills.length) {
-  const total = foothills.reduce((n, t) => n + byTrad[t].length, 0);
-  out.push(`## Foothills — no ring position, no domain · ${total} crafts`, "");
-  out.push("⛔ **Erik, 2026-09-02 — settled.** A foothill craft is placed by its own `axes` vector, its access");
-  out.push("is the band `folk`, and having no domain is CORRECT rather than missing: **a folk craft is not");
-  out.push("domain-gated, and a ring position would gate what is meant to be ungated.**", "");
-  for (const t of foothills) {
-    const label = idx.byId?.[t]?.name || t;
-    out.push(`### ${label} (\`${t}\`) — ${byTrad[t].length} crafts`, "");
-    out.push(...tierTables(byTrad[t]));
-  }
-  out.push("---", "");
-}
-
-// ── and anything else with a tradition that is neither pole nor foothill, so nothing is silently dropped ──
-const other = Object.keys(byTrad).filter(t => !isPole(t) && !isFolk(t)).sort();
-if (other.length) {
-  const total = other.reduce((n, t) => n + byTrad[t].length, 0);
-  out.push(`## Outside the ring · ${total} crafts`, "");
-  out.push("⚠️ **Lineages that are neither a pole nor a foothill.** Listed so nothing in the corpus is absent");
-  out.push("from the source of truth.", "");
-  for (const t of other) {
-    const label = idx.byId?.[t]?.name || t;
-    out.push(`### ${label} (\`${t}\`) — ${byTrad[t].length} crafts`, "");
+// ── ⛔ R33 — CRAFTS AWAITING THEIR PER-CRAFT LINEAGE. This is NOT "correctly absent"; it is a queue. ──
+const pending = Object.keys(byTrad).filter(t => !isPole(t)).sort();
+if (pending.length) {
+  const total = pending.reduce((n, t) => n + byTrad[t].length, 0);
+  out.push(`## Pending R33 lineage assignment · ${total} crafts`, "");
+  out.push("⛔ **R33 (SNG-443): `tradition` is LINEAGE, `learnedAt` is ACCESS.** Every craft below still");
+  out.push("carries a PLACE (or an unresolved value) in its `tradition` field where a real pole belongs.");
+  out.push("⚠️ **This is not a corrected state — it is the error R33 names, not yet re-authored.** A foothill");
+  out.push("craft has a lineage and therefore a domain; only the PLACE has no ring position. ⛔ **This");
+  out.push("generator does not assign the lineage** — `foothills.json`'s blends are weights across a whole");
+  out.push("foothill, and which parent one craft actually descends from is authoring, not arithmetic. Once");
+  out.push("`tradition` is corrected to the real pole (with `learnedAt` carrying the place), these crafts");
+  out.push("fall into their domain section automatically on the next run.", "");
+  for (const t of pending) {
+    const blend = foothillPlaces[t];
+    const known = blend?.parents
+      ? `known foothill — blend: ${Object.entries(blend.parents).map(([p, w]) => `${p} ${w}`).join(" · ")}`
+      : "not in foothills.json — genuinely unresolved, not a place-lineage confusion";
+    out.push(`### \`${t}\` — ${byTrad[t].length} crafts (${known})`, "");
     out.push(...tierTables(byTrad[t]));
   }
   out.push("---", "");
@@ -145,22 +163,25 @@ if (placed !== withTrad) {
   process.exit(1);
 }
 
-const generated = out.join("\n").trimEnd();
-const existing = readFileSync(DOC, "utf8");
+const existingRaw = readFileSync(DOC, "utf8");
+// ⚠️ MATCH THE FILE’S OWN LINE ENDING, or every line reads as changed on Windows and the diff is noise.
+const eol = existingRaw.includes("\r\n") ? "\r\n" : "\n";
+const generated = out.join(eol).trimEnd();
+const existing = existingRaw;
 const hasMarkers = existing.includes(BEGIN) && existing.includes(END);
 let next;
 if (hasMarkers) {
   const a = existing.indexOf(BEGIN) + BEGIN.length, b = existing.indexOf(END);
-  next = existing.slice(0, a) + "\n" + generated + "\n" + existing.slice(b);
+  next = existing.slice(0, a) + eol + generated + eol + existing.slice(b);
 } else {
   const at = existing.indexOf("## Summary");
   if (at < 0) { console.log("⛔ `## Summary` not found — REFUSING to guess where the authored header ends"); process.exit(1); }
-  next = existing.slice(0, at) + BEGIN + "\n" + generated + "\n" + END + "\n";
+  next = existing.slice(0, at) + BEGIN + eol + generated + eol + END + eol;
 }
 
 const noTrad = abilities.filter(a => !a.tradition).length;
 const summary = `${domains.length} domains · ${Object.keys(idx.ringPos || {}).length} poles · `
-  + `${foothills.length} foothill(s) · ${other.length} other lineage(s) · ${placed} crafts placed`
+  + `${pending.length} lineage(s) pending R33 (${pending.reduce((n, t) => n + byTrad[t].length, 0)} crafts) · ${placed} crafts placed`
   + (noTrad ? ` · ⚠️ ${noTrad} craft(s) carry no tradition and are not listed` : "");
 
 if (CHECK) {

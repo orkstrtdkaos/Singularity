@@ -40,8 +40,8 @@ file is replaced.**
 | bucket | n | means |
 |---|---|---|
 | ✅ **READ** | **92** | a play-path file names it outside a comment |
-| ⛔ **DARK** | **16** | **no literal reader anywhere** — see the four lies below |
-| ⚠️ **CI-ONLY** | **3** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
+| ⛔ **DARK** | **15** | **no literal reader anywhere** — see the four lies below |
+| ⚠️ **CI-ONLY** | **4** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
 
 ### ⛔ THE FOUR WAYS "UNREAD" LIES — all four produced a false finding here inside one day
@@ -676,7 +676,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `namedCurrent` | 7 | `root`×7 | ⛔ DARK | — |
 | `evasion` | 7 | `mechanic`×7 | ✅ READ | `craftmechanics.js`, `skill_battle.js`, `app.js` |
 | `evasionRank` | 7 | `mechanic`×7 | ✅ READ | `skill_battle.js` |
-| `learnedAt` | 6 | `root`×6 | ⛔ DARK | — |
+| `learnedAt` | 6 | `root`×6 | ⚠️ CI-ONLY | _1 test/script only_ |
 | `requiresSelf` | 6 | `mechanic`×6 | ✅ READ | `skill_battle.js` |
 | `peril` | 6 | `root`×6 | ✅ READ | `art.js`, `gm.js` |
 | `persistUntilHealed` | 6 | `tree`×6 | ✅ READ | `capabilities.js`, `conditions.js`, `craftmechanics.js` |

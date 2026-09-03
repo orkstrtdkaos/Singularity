@@ -3,22 +3,32 @@
 **GENERATED 2026-09-02 from the live corpus.** ⛔ **This file is DERIVED. Do not hand-edit —
 regenerate it.** ⚠️ Where this disagrees with any working paper in `po/`, **this is right.**
 
-**419 crafts = 379 pole · 31 foothill · 9 other lineage · 14 domains · 24 poles · 47 folk-accessible**
+**419 crafts = 379 pole · 40 pending R33 lineage assignment · 14 domains · 24 poles · 47 folk-accessible**
 
 ⚠️ **A craft's LINEAGE and its FOLK ACCESS are orthogonal.** `folkAccessible` is an ACCESS FLAG on
 top of a lineage, never a substitute for one. **Erik, 2026-09-02:** *"Those skills DO belong to a
 tradition and a domain… they are ALSO folk accessible."*
 
-⛔ **BUT A FOOTHILL IS NOT FILED UNDER A POLE.** There are **26 canonical traditions** — 24 ring poles
-plus the foothills — and `foothills.json` `_theRule` says why: *"A FOOTHILL IS NOT A LESSER TRADITION —
-IT IS A POLE MADE USABLE."* ⚠️ Each is a **three-domain blend** with its own axis: harmonic is
-`threnodist 0.5 · lattice 0.3 · mason 0.2` on `emotional_logical`; radiant_folk is
-`blazeborn 0.5 · wright 0.3 · lattice 0.2` on `dark_light`.
+⛔ **R33 (SNG-443, ruled and enacted) — LINEAGE AND ACCESS ARE TWO AXES.** `tradition` is the LINEAGE
+(permanent — keys the wheel position, the power source, the aesthetic); `learnedAt` is the ACCESS
+(situational — a foothill, a school, a place, the wilds). ⚠️ **A foothill is a PLACE, not an ancestry
+and NOT its own tradition with an axis** — `foothills.json`'s blends (harmonic: threnodist 0.5 · lattice
+0.3 · mason 0.2; radiant_folk: blazeborn 0.5 · wright 0.3 · lattice 0.2; and five more) are weights
+across a whole PLACE, not a lineage — and a foothill CRAFT still has a real lineage and therefore a real
+domain. Only the PLACE has no ring position.
 
-⚠️ **AEVI GOT THIS WRONG ON 2026-09-02 AND IT IS RECORDED HERE SO THE NEXT READER DOES NOT.** She
-allocated all 31 foothill crafts into parent poles using `traditions.json`'s `foothillOf` — **without
-opening `foothills.json`, which is authoritative and names different parents.** ⛔ enginewright is not
-a parent of harmonic at all. **Reverted; `folkAccessible: true` kept, because that half was correct.**
+⛔ **THREE WRONG READS OF THIS ONE SUBJECT IN ONE DAY, ALL NAMED IN R33 SO THE NEXT READER DOES NOT REPEAT
+THEM:** (1) Aevi allocated 31 foothill crafts into parent poles via `traditions.json`'s `foothillOf`
+without opening `foothills.json`, which names different parents — enginewright is not a parent of
+harmonic at all. (2) She reverted the allocation entirely, which put the confusion of access with
+ancestry back. (3) She then read each foothill as a three-domain blend carrying its own wheel position — which was
+this file's own claim, three paragraphs up, until this correction. ⚠️ **A foothill has no axis; it is
+a place.**
+
+⛔ **THE SECTION BELOW REFLECTS THIS.** 40 crafts still carry a place-name in `tradition` where a real
+lineage pole belongs — that is content not yet re-authored, listed honestly as pending rather than
+asserted as correct. `scripts/skills_inject.mjs` assigns no craft a lineage; deciding which of a
+foothill's parents ONE craft actually descends from is authoring, not arithmetic.
 
 ---
 
@@ -340,11 +350,11 @@ a parent of harmonic at all. **Reverted; `folkAccessible: true` kept, because th
 | `disarm` | **Disarming Strike** | 4 | physical | break,hinder | Disarming Strike · Emptied Hand · Ended Fight  ⚑ harm:incapacitating |
 | `held_line` | **Held Line** | 4 | physical | ward,shield,sustain | Set Stance · Long Hold · Line That Held |
 | `hunters_strike` | **Hunter's Strike** | 4 | physical | strike | Hunter's Strike · Clean Kill · Strike That Feeds  ⚑ folk · harm:lethal |
-| `levelled_crossbow` | **Levelled Crossbow** | 5 | physical | strike | Spanned and Levelled · Belt Claw · Windlass  ⚑ harm:lethal |
+| `levelled_crossbow` | **Levelled Crossbow** | 5 | physical | strike | Spanned and Levelled · Belt Claw · Windlass  ⚑ learnedAt:hardline / anywhere · harm:lethal |
 | `read_field` | **Read Field** | 4 | practical | empower,reveal | Ground Read · Ground Read · Whole Field |
 | `read_the_fight` | **Read the Fight** | 3 | physical | foresee,reveal | Read the Fight · Whole Field · Three Moves Ahead |
-| `sling_and_stone` | **Sling and Stone** | 2 | physical | break,strike | Loosed Stone · Aimed Stone · Skull-Weight  ⚑ folk · harm:lethal |
-| `thrown_edge` | **Thrown Edge** | 3 | physical | strike | Underhand · Second Knife · Full Belt  ⚑ harm:damaging |
+| `sling_and_stone` | **Sling and Stone** | 2 | physical | break,strike | Loosed Stone · Aimed Stone · Skull-Weight  ⚑ folk · learnedAt:the wilds · harm:lethal |
+| `thrown_edge` | **Thrown Edge** | 3 | physical | strike | Underhand · Second Knife · Full Belt  ⚑ learnedAt:hardline / the wilds · harm:damaging |
 
 **Tier 2**
 
@@ -363,7 +373,7 @@ a parent of harmonic at all. **Reverted; `folkAccessible: true` kept, because th
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
 | `chosen_ground` | **Chosen Ground** | 7 | mental | provoke,deceive,foresee | Chosen Ground · Which Road · Prepared Beforehand |
-| `drawn_bow` | **Drawn Bow** | 4 | physical | strike | Long Draw · Kept Rhythm · Heavy Head  ⚑ harm:lethal |
+| `drawn_bow` | **Drawn Bow** | 4 | physical | strike | Long Draw · Kept Rhythm · Heavy Head  ⚑ learnedAt:hardline · harm:lethal |
 | `in_the_way` | **In the Way** | 6 | physical | move,hinder,strike | In the Way · That One · Not Him Either  ⚑ harm:lethal |
 | `shieldwork` | **Shieldwork** | 6 | physical | shield,strike,empower | Shieldwork · Cover the Open Side · Wall  ⚑ harm:damaging |
 | `small_company` | **Small Company** | 6 | mental | empower,command,foresee | Small Company · On the Road · They Keep the Shape |
@@ -570,9 +580,9 @@ a parent of harmonic at all. **Reverted; `folkAccessible: true` kept, because th
 | `answered_motion` | **Answered Motion** | 5 | physical | break,strike | Turned Joint · Given Fall · Taken Apart  ⚑ harm:incapacitating · backlash:damaging |
 | `body_read` | **Body-Read** | 3 | mental | foresee,reveal | Body-Read · Whole Tell · Body Cannot Lie |
 | `false_stance` | **False Stance** | 3 | physical | deceive,conceal | False Stance · Wrong Fight · Nothing True |
-| `hurled_weight` | **Hurled Weight** | 4 | physical | break,strike | Get Under It · Committed Throw · Scattering  ⚑ harm:damaging |
+| `hurled_weight` | **Hurled Weight** | 4 | physical | break,strike | Get Under It · Committed Throw · Scattering  ⚑ learnedAt:hardline / the wilds · harm:damaging |
 | `loose_limbed` | **Loose-Limbed** | 3 | physical | move,travel,resist | Run and Vault · Slip Anything · Nothing Holds |
-| `quick_hands` | **Quick Hands** | 2 | physical | hinder,strike | Early Hands · Turned Catch · Both Hands  ⚑ harm:damaging |
+| `quick_hands` | **Quick Hands** | 2 | physical | hinder,strike | Early Hands · Turned Catch · Both Hands  ⚑ learnedAt:anywhere · harm:damaging |
 | `second_wind` | **Second Wind** | 4 | physical | sustain,resist,empower,heal | Embrace the Suck · Third Wind · Dream Breath |
 | `steady_hands` | **Steady Hands** | 2 | physical | soothe | Hand On Them · Held Together · Everyone Standing |
 
@@ -1097,13 +1107,48 @@ a parent of harmonic at all. **Reverted; `folkAccessible: true` kept, because th
 
 ---
 
-## Foothills — no ring position, no domain · 31 crafts
+## Pending R33 lineage assignment · 40 crafts
 
-⛔ **Erik, 2026-09-02 — settled.** A foothill craft is placed by its own `axes` vector, its access
-is the band `folk`, and having no domain is CORRECT rather than missing: **a folk craft is not
-domain-gated, and a ring position would gate what is meant to be ungated.**
+⛔ **R33 (SNG-443): `tradition` is LINEAGE, `learnedAt` is ACCESS.** Every craft below still
+carries a PLACE (or an unresolved value) in its `tradition` field where a real pole belongs.
+⚠️ **This is not a corrected state — it is the error R33 names, not yet re-authored.** A foothill
+craft has a lineage and therefore a domain; only the PLACE has no ring position. ⛔ **This
+generator does not assign the lineage** — `foothills.json`'s blends are weights across a whole
+foothill, and which parent one craft actually descends from is authoring, not arithmetic. Once
+`tradition` is corrected to the real pole (with `learnedAt` carrying the place), these crafts
+fall into their domain section automatically on the next run.
 
-### The Harmonic (`harmonic`) — 16 crafts
+### `bargainers` — 3 crafts (known foothill — blend: abyssal 0.5 · verist 0.3 · mason 0.2)
+
+**Tier 1**
+
+| id | name | energy | attr | functions | ranks |
+|---|---|---|---|---|---|
+| `honest_price` | **Honest Price** | 4 | social | bargain,bind,empower,make | Price Named · Kept Terms · Standing Table |
+| `struck_term` | **Struck Term** | 5 | social | bargain,strike | Terms Offered · Exact Price · Standing Term  ⚑ harm:lethal |
+| `the_read_want` | **Read Want** | 4 | social | reveal,foresee | Want Under It · Table Read · Whole Appetite |
+
+### `cross_pole_braid` — 3 crafts (not in foothills.json — genuinely unresolved, not a place-lineage confusion)
+
+**Tier 4**
+
+| id | name | energy | attr | functions | ranks |
+|---|---|---|---|---|---|
+| `harbored_flame` | **Harbored Flame** | 9 | mental | conceal,heal | Harbored Flame · Carried Harbor |
+| `meaning_engine` | **Meaning-Engine** | 9 | mental | command,mend | Meaning-Engine · Deeper Register |
+| `turning_word` | **Turning Word** | 9 | social | bind,heal | Turning Word · Word That Holds |
+
+### `god_named` — 3 crafts (known foothill — blend: seraphic 0.6 · veilwright 0.2 · lattice 0.2)
+
+**Tier 1**
+
+| id | name | energy | attr | functions | ranks |
+|---|---|---|---|---|---|
+| `borrowed_certainty` | **Borrowed Certainty** | 4 | social | empower,sustain | Word Given · Steady Company · Named Cause |
+| `name_invoked` | **Name Invoked** | 6 | social | command,empower,hinder,strike | Spoken Name · Weight of It · Name in Full  ⚑ harm:lethal |
+| `sheltering_name` | **Sheltering Name** | 4 | social | ward,shield | Name Laid Over · Kept Household · Sanctuary Declared |
+
+### `harmonic` — 16 crafts (known foothill — blend: threnodist 0.5 · lattice 0.3 · mason 0.2)
 
 **Tier 1**
 
@@ -1146,7 +1191,7 @@ domain-gated, and a ring position would gate what is meant to be ungated.**
 |---|---|---|---|---|---|
 | `worldsong` | **Worldsong** | 13 | practical | empower | Worldsong  ⚑ folk |
 
-### The Radiant (`radiant_folk`) — 15 crafts
+### `radiant_folk` — 15 crafts (known foothill — blend: blazeborn 0.5 · wright 0.3 · lattice 0.2)
 
 **Tier 1**
 
@@ -1182,43 +1227,6 @@ domain-gated, and a ring position would gate what is meant to be ungated.**
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
 | `light_borne` | **Light-Borne** | 12 | practical | move,travel | Light-Borne  ⚑ folk |
-
----
-
-## Outside the ring · 9 crafts
-
-⚠️ **Lineages that are neither a pole nor a foothill.** Listed so nothing in the corpus is absent
-from the source of truth.
-
-### The Bargainers (`bargainers`) — 3 crafts
-
-**Tier 1**
-
-| id | name | energy | attr | functions | ranks |
-|---|---|---|---|---|---|
-| `honest_price` | **Honest Price** | 4 | social | bargain,bind,empower,make | Price Named · Kept Terms · Standing Table |
-| `struck_term` | **Struck Term** | 5 | social | bargain,strike | Terms Offered · Exact Price · Standing Term  ⚑ harm:lethal |
-| `the_read_want` | **Read Want** | 4 | social | reveal,foresee | Want Under It · Table Read · Whole Appetite |
-
-### cross_pole_braid (`cross_pole_braid`) — 3 crafts
-
-**Tier 4**
-
-| id | name | energy | attr | functions | ranks |
-|---|---|---|---|---|---|
-| `harbored_flame` | **Harbored Flame** | 9 | mental | conceal,heal | Harbored Flame · Carried Harbor |
-| `meaning_engine` | **Meaning-Engine** | 9 | mental | command,mend | Meaning-Engine · Deeper Register |
-| `turning_word` | **Turning Word** | 9 | social | bind,heal | Turning Word · Word That Holds |
-
-### The God-Named (`god_named`) — 3 crafts
-
-**Tier 1**
-
-| id | name | energy | attr | functions | ranks |
-|---|---|---|---|---|---|
-| `borrowed_certainty` | **Borrowed Certainty** | 4 | social | empower,sustain | Word Given · Steady Company · Named Cause |
-| `name_invoked` | **Name Invoked** | 6 | social | command,empower,hinder,strike | Spoken Name · Weight of It · Name in Full  ⚑ harm:lethal |
-| `sheltering_name` | **Sheltering Name** | 4 | social | ward,shield | Name Laid Over · Kept Household · Sanctuary Declared |
 
 ---
 <!-- END skills-generated -->

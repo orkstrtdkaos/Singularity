@@ -3728,9 +3728,9 @@ console.log("\n── §55 · the skill source of truth ──");
   // ⛔ ITS FOUR HEADER CLAIMS, EACH MEASURED.
   {
     const claim = (re) => { const m = sk.match(re); return m ? Number(m[1]) : null; };
-    const crafts = claim(/\*\*(\d+) crafts ·/);
+    const crafts = claim(/\*\*(\d+) crafts \s*[·=]/);
     const domains = claim(/·\s*(\d+) domains/);
-    const sects = claim(/·\s*(\d+) sects/);
+    const sects = claim(/·\s*(\d+) (?:sects|poles)/);
     const folk = claim(/·\s*(\d+) folk-accessible/);
     check("§55: …its sect count matches the ring — 24 poles, per \"only the poles are traditions\"",
       sects === Object.keys(idx55.ringPos || {}).length, `doc ${sects}`);
@@ -3765,21 +3765,38 @@ console.log("\n── §55 · the skill source of truth ──");
       refs.length === 3, `pointed at by: ${refs.join(" · ") || "nothing"}`);
   }
 
-  // ✅ THE PROMISE IS KEPT NOW. It said "regenerate it" and nothing did; `scripts/skills_inject.mjs`
-  // does. ⛔ THE RULE IT IMPLEMENTS IS ERIK’S, 2026-09-02: a foothill craft is placed by its own `axes`
-  // vector, its access is the band `folk`, and having NO domain and NO ring position is CORRECT — a folk
-  // craft is not domain-gated, and a ring position would gate what is meant to be ungated.
-  //
-  // ⚠️ SO A FOOTHILL IS NOT FILED UNDER A POLE. My first attempt filed radiant_folk under Radiance and
-  // produced 31 — which is what the file said before Aevi’s revert, and what the revert is undoing.
+  // ⛔ R33 (SNG-443) — lineage and access are TWO axes, ruled OVER my own prior read of the same subject.
+  // My first version filed a foothill’s crafts under its parent pole (union-style) and produced 31 where
+  // the corpus said 16 — the exact error R33 names as "confusing access with ancestry". My SECOND version
+  // then swung the other way and declared a foothill craft correctly domain-less, which R33 ALSO names as
+  // wrong: "A foothill CRAFT has a lineage and therefore a domain. It is the PLACE that has no ring
+  // position." ⚠️ NEITHER OF MY OWN READS SURVIVED CONTACT WITH THE RULING — which is the argument for
+  // gating the CURRENT text rather than trusting memory of what was true an hour ago.
   {
     const gen = rd("scripts/skills_inject.mjs");
     check("§55: ✅ the generator exists and loses nothing — it refuses to write if a craft goes unplaced",
       /placed !== withTrad/.test(gen) && /REFUSING to write/.test(gen));
     check("§55: ⛔ …and it cannot clobber a file someone is editing — writing needs --write",
       /const WRITE = process\.argv\.includes\("--write"\)/.test(gen) && /if \(!WRITE\)/.test(gen));
-    check("§55: ⚠️ …and it files a foothill in its OWN section, never under a pole",
-      /no ring position, no domain/.test(gen) && /isFolk\(t\)/.test(gen));
+    check("§55: ⛔ it does NOT assert a foothill craft is correctly domain-less — R33 says the opposite",
+      !/no ring position, no domain · CORRECT/.test(gen) && !/is CORRECT rather than missing/.test(gen));
+    check("§55: ⚠️ …it never guesses which parent a foothill craft descends from — that is authoring",
+      /NEVER GUESS A LINEAGE/.test(gen) && /is authoring, and it is Aevi/.test(gen) && /not a formula this file can run/.test(gen));
+    check("§55: …it surfaces `learnedAt` on the row, the field R33 actually names",
+      /a\.learnedAt/.test(gen) && /learnedAt:.*a\.learnedAt/.test(gen));
+  }
+  // ⚠️ AND THE GENERATED FILE ITSELF: no live section may assert the pre-R33 claim, whichever way it fell.
+  {
+    const sk55 = rd("docs/SKILLS.md");
+    check("§55: ⛔ SKILLS.md carries neither of my two wrong reads of R33",
+      !/no ring position, no domain/.test(sk55) && !/### Radiance \(\`blazeborn\`\) — 31 crafts/.test(sk55));
+    // ⛔ THE THIRD CONTRADICTION WAS THE DOC’S OWN AUTHORED PROSE, ABOVE THIS FILE’S OWN GENERATED
+    // MARKERS — written before R33 was re-ruled, still asserting “each foothill is a three-domain blend
+    // WITH ITS OWN AXIS.” That is claim #3 R33 names as wrong, sitting live in the file that calls itself
+    // the skill source of truth. Fixed by hand — it is Aevi’s authored header, not derived text — and
+    // gated here so it cannot drift back.
+    check("§55: ⛔ its own AUTHORED HEADER no longer contradicts R33 (\"own axis\" is retracted, cited)",
+      !/with its own axis/i.test(sk55) && /R33/.test(sk55.split("<!-- BEGIN skills-generated -->")[0]));
   }
 }
 /* ═════ §56 — RULINGS.md: THE INDEX MUST AGREE WITH THE TRUTH IT INDEXES ═════ */

@@ -1961,7 +1961,7 @@
     "PUZZLE",
     "SOCIAL"
    ],
-   "tradition": "harmonic",
+   "tradition": "enginewright",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "reveal",
@@ -2005,7 +2005,9 @@
    "_folkReassigned_20260830": "⛔ `valley_craft` → `harmonic`. ✅ THE CRAFT NAMES ITS OWN SOURCE: 'the valley's BORROWED SOUND-WORK. Generations beside the Choir'. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**",
    "folkAccessible": true,
    "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition.",
-   "_rungFix_20260830": "⛔ ability rung -> `none`: it CARRIES a call — sound sent, nobody harmed at any rank."
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it CARRIES a call — sound sent, nobody harmed at any rank.",
+   "_foothill": "harmonic",
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "id": "glasswork",
@@ -2088,7 +2090,7 @@
     "PUZZLE",
     "SOCIAL"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "blazeborn",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "make",
@@ -2131,7 +2133,9 @@
    "_folkReassigned_20260830": "⛔ `valley_craft` → `radiant_folk`. ✅ THE CRAFT NAMES ITS OWN SOURCE: 'what a people learn from LIVING UNDER THE PLATEAU EDGE'. ⚠️ ERIK 2026-08-30: 'LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED. They will still be ACCESSIBLE — just eliminate the reference to valleycraft in terms of DOMAIN/TRADITION.' ✅ `traditionKind: folk` MARKS THE ACCESSIBILITY: this is the folk-scale expression of its parent tradition, learnable by anyone, and it is no longer a domain of its own. ⛔ THE AUTHORED PARENTS WERE stillhold .4 / wright .3 / rootkin .3 — a THREE-WAY BLEND, which is exactly why 18 crafts under one label read as muddled: **they were never one people's craft.**",
    "folkAccessible": true,
    "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition.",
-   "_rungFix_20260830": "⛔ ability rung -> `none`: it makes glass and works light through it. No rank harms anyone."
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it makes glass and works light through it. No rank harms anyone.",
+   "_foothill": "radiant_folk",
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "id": "keen_appraisal",

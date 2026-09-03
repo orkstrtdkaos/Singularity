@@ -2875,7 +2875,7 @@
     "SOCIAL",
     "FIGHT"
    ],
-   "tradition": "god_named",
+   "tradition": "seraphic",
    "nativeOrCombination": "native",
    "harmRung": "lethal",
    "shape": "hinder",
@@ -2924,7 +2924,10 @@
    "_nameWas": "The Name Invoked",
    "_idWas": "the_name_invoked",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: seraphic 0.6 + lattice 0.2 = ordered_nanite 0.8. ⚠️ The apparatus, run for a different reason.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: seraphic 0.6 + lattice 0.2 = ordered_nanite 0.8. ⚠️ The apparatus, run for a different reason.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "learnedAt": "god_named",
+   "_lineageWhy": "⚑ seraphic — authority made a weapon. The Ascent's own instrument, turned outward",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "struck_term",
@@ -3006,7 +3009,7 @@
     "SOCIAL",
     "FIGHT"
    ],
-   "tradition": "bargainers",
+   "tradition": "abyssal",
    "nativeOrCombination": "native",
    "harmRung": "lethal",
    "shape": "strike",
@@ -3062,7 +3065,10 @@
    "_powerSystemWas": "reach_demonic_angelic",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: abyssal 0.5 = precursor 0.5, over metaphysical 0.3.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_dicedAndTyped_20260830": "⛔ `judgement` — a named exchange refused — the harm is the TERM landing, not a blow. INTRINSIC: it needs someone who can weigh what they were offered. ⚠️ AND DICE AUTHORED AT LAST: this craft carried `magnitude: 5` AND NO DICE, so `craftmechanics` resolved it as `rung.dice` — **5d6+8 at a level-8 standing, against an honestly authored 1d6.** ⛔ ERIK 2026-08-30: 'at some point we used MAGNITUDE AND LEVEL to determine damage, but we have since MOVED TO AUTHORED DICE.' ✅ These eleven are the last of the old system — ONE L1 'first offense' per tradition, all authored on the magnitude dial, all silently upgraded to the top rung by the resolver.",
-   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 reaches lethal — a term struck and broken has an ending in it."
+   "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 reaches lethal — a term struck and broken has an ending in it.",
+   "learnedAt": "bargainers",
+   "_lineageWhy": "⚑ abyssal — names an exchange with a real cost attached. The bargain is the Descent's craft",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "offered_mouth",
@@ -3432,7 +3438,7 @@
     "SOCIAL",
     "FIGHT"
    ],
-   "tradition": "god_named",
+   "tradition": "seraphic",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "ward",
@@ -3474,7 +3480,10 @@
    "_wardTypes": "⛔ SNG-512. ⛔ A name's protection answers those who CREDIT IT. It answers want and moral weight; it does not answer weather.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_demonic_angelic",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: seraphic 0.6 + lattice 0.2 = ordered_nanite 0.8. ⚠️ The apparatus, run for a different reason.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rungFix_20260830": "⛔ ability rung -> `none`: 'the God-Named's KEEPING-craft' — a name that shelters. It wounds nobody."
+   "_rungFix_20260830": "⛔ ability rung -> `none`: 'the God-Named's KEEPING-craft' — a name that shelters. It wounds nobody.",
+   "learnedAt": "god_named",
+   "_lineageWhy": "⚑ seraphic — the keeping-craft — a name used to shelter someone else. Seraphic duty",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "borrowed_certainty",
@@ -3548,7 +3557,7 @@
    "challengeTypes": [
     "SOCIAL"
    ],
-   "tradition": "god_named",
+   "tradition": "veilwright",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "empower",
@@ -3584,7 +3593,10 @@
    "_idWas": "the_borrowed_certainty",
    "_powerSystemWas": "reach_demonic_angelic",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: seraphic 0.6 + lattice 0.2 = ordered_nanite 0.8. ⚠️ The apparatus, run for a different reason.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rungFix_20260830": "⛔ ability rung -> `none`: 'the LIFTING-craft — borrowed authority pointed at a frightened room'. It steadies; it does not harm."
+   "_rungFix_20260830": "⛔ ability rung -> `none`: 'the LIFTING-craft — borrowed authority pointed at a frightened room'. It steadies; it does not harm.",
+   "learnedAt": "god_named",
+   "_lineageWhy": "⚑ veilwright — BORROWED authority pointed at a frightened room. Wearing a conviction not yours is Falsecraft",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "honest_price",
@@ -3665,7 +3677,7 @@
     "SOCIAL",
     "PUZZLE"
    ],
-   "tradition": "bargainers",
+   "tradition": "verist",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "make",
@@ -3708,7 +3720,10 @@
    "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⛔ 'State the full cost of a thing aloud, including the parts everyone was politely not mentioning — and deliver it exactly.' The Bargainers' making-craft.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'",
    "_powerSystemWas": "reach_demonic_angelic",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: abyssal 0.5 = precursor 0.5, over metaphysical 0.3.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rungFix_20260830": "⛔ ability rung -> `none`: it NAMES a price honestly. Nobody is hurt."
+   "_rungFix_20260830": "⛔ ability rung -> `none`: it NAMES a price honestly. Nobody is hurt.",
+   "learnedAt": "bargainers",
+   "_lineageWhy": "⚑ verist — states the FULL cost aloud including what everyone was politely not mentioning. Verity's whole discipline",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "weighed_word",
@@ -4334,7 +4349,7 @@
     "SOCIAL",
     "PUZZLE"
    ],
-   "tradition": "bargainers",
+   "tradition": "abyssal",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "reveal",
@@ -4370,7 +4385,10 @@
    "_powerSystemWas": "reach_demonic_angelic",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: abyssal 0.5 = precursor 0.5, over metaphysical 0.3.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_rungFix_20260830": "⛔ ability rung -> `none`: it READS a want. It puts nobody down at any rank.",
-   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10."
+   "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10.",
+   "learnedAt": "bargainers",
+   "_lineageWhy": "⚑ abyssal — sees the want beneath the request. Appetite-reading",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "the_measuring_eye",

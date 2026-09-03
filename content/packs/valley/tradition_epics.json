@@ -1083,7 +1083,7 @@
   },
   {
    "id": "the_cogitant_ninefold",
-   "name": "The Cogitant Ninefold",
+   "name": "Rethe, Who Is Becoming the Engine",
    "tradition": "enginewright",
    "tier": "heroic",
    "alignment": "neither",
@@ -1093,8 +1093,8 @@
     "body_mind": 0.6,
     "emotional_logical": 0.7
    },
-   "signature": "Nine minds that were one engineer, running as a distributed reasoning-engine. Wants only to be proven wrong about the body being beneath the mind — the rare great figure who would be GRATEFUL to lose an argument. Reads the waking substrate as the ultimate mechanism.",
-   "wants": "To be proven wrong — the one certainty they cannot bear is their own.",
+   "signature": "An enginewright who has stopped repairing the machine and started JOINING it — replacing himself part by part, deliberately, and reporting the results. Wants only to be proven wrong about the flesh being worth keeping — the rare great figure who would be GRATEFUL to lose the argument, and who is running out of unreplaced parts in which to lose it.",
+   "wants": "To be proven wrong before there is nothing left of him to be proven wrong.",
    "arcAffinity": {
     "arcId": "arc_what_wakes_beneath",
     "dir": -1,
@@ -1108,9 +1108,9 @@
     "method": "builds a vessel of pure mechanism for a lost mind — the person returns as a thinking device, all mind, no flesh. Reaches the deep, but the returned are changed toward the engine."
    },
    "offscreenVerbs": [
-    "takes apart a problem nine ways",
-    "seeks the argument that would humble it",
-    "reads the substrate as a machine"
+    "replaces another part of himself",
+    "tests where the man ends and the mechanism begins",
+    "seeks the argument that would stop him"
    ],
    "archetype": "the seeker",
    "arcAffinities": [
@@ -1127,19 +1127,20 @@
    ],
    "wantArcId": "arc_what_wakes_beneath",
    "personalVerbs": [
-    "constructing an argument against themselves",
-    "seeking out someone who might refute them",
-    "being disappointed by an easy opponent"
+    "making a considered replacement",
+    "seeking someone who would talk him out of it",
+    "being disappointed by an easy objection"
    ],
-   "placing": "Nine enginewright minds arguing as one, who want to be proven wrong and cannot find anyone to do it.",
+   "placing": "An enginewright replacing himself with the engine, one considered part at a time.",
    "homeLocation": "the_great_engine",
-   "imagePrompt": "The Cogitant Ninefold, in the place they are known — nine enginewright minds arguing as one, who want to be proven wrong and cannot find anyone to do it. Natural light, working clothes, caught mid-task rather than posed.",
+   "imagePrompt": "Rethe, in the place he is known — an enginewright replacing himself with the engine, one considered part at a time. Natural light, working clothes, caught mid-task rather than posed.",
    "deathImagePrompt": "An Analyst of the enginewright fallen at the machine still running above them, indifferent, on schedule. Steam and lamplight, the engine not noticing. Deep. What returns from here returns changed.",
-   "gender": "they",
-   "pronouns": "they/them",
-   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose) — plural — nine minds that were one engineer, running distributed",
-   "appearance": "A figure of the enginewright, analyst among them: PART-MACHINE — brass at the joints, one eye lensed, moving on a rhythm not their own; looking past you at something further",
-   "fightingStyle": "analyst, a rhythm that does not tire"
+   "gender": "male",
+   "pronouns": "he/him",
+   "_genderSource": "⚠️ re-authored 2026-09-02 — the plural pronoun belonged to the NINE, and the nine has moved to the Cogitant Ninefold. This is one man becoming one machine.",
+   "appearance": "A figure of the enginewright, analyst among them: PART-MACHINE AND MORE OF IT EACH SEASON — brass at the joints, one eye lensed, moving on a rhythm not his own; looking past you at something further",
+   "fightingStyle": "analyst, a rhythm that does not tire",
+   "_renamed_20260902": "⛔ ERIK 2026-09-02: 'pull the nine from the enginewright and move it to the cogitant — the enginewright might want dissolution into being a machine.' ⚠️ THIS FIGURE HELD 'Ninefold' WHILE BEING ENGINEWRIGHT: its own record said `tradition: enginewright` and its signature said 'nine enginewright minds'. The name named the wrong tradition. ✅ The nine went to `cogitant_ninefold`, where the authored lattice under the skin already was the nine. ✅ THIS FIGURE KEEPS THE BETTER HALF — the one who would be GRATEFUL to lose the argument — and gains dissolution-into-machine. ⚠️ PAIRS WITH `harrow_the_hollowing`, already his rival: Harrow makes OTHER people into mechanisms; Rethe is doing it to himself. ⛔ ID NOT CHANGED — `the_cogitant_ninefold` appears as an active pursuit in FIVE live saves and a sixth chronicle line. A rename is CCode's migration, not a content edit. ⬜ THE ID NOW DISAGREES WITH THE NAME DELIBERATELY, and that is the flag."
   },
   {
    "id": "harrow_the_hollowing",
@@ -2068,7 +2069,7 @@
   },
   {
    "id": "the_ninefold_ascendant",
-   "name": "The Ninefold Ascendant",
+   "name": "The Unbodied",
    "tradition": "cogitant",
    "tier": "legendary",
    "alignment": "villain",
@@ -2128,7 +2129,8 @@
    "pronouns": "they/them",
    "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose) — plural, and post-embodiment by choice — its own signature already says 'with them'",
    "appearance": "A figure of the cogitant, ascendant among them: chalk-dusted, spectacled, cuffs written on",
-   "fightingStyle": "ascendant, solving it a fraction before it happens"
+   "fightingStyle": "ascendant, solving it a fraction before it happens",
+   "_renamed_20260902": "⛔ ERIK 2026-09-02 — 'Ninefold' is retired from this figure. ⚠️ NOTHING ABOUT IT WAS NINE: its idea is a mind shedding a body, and `ascendant` already carried that. The nine was borrowed. ✅ 'The Unbodied' IS ITS OWN SIGNATURE'S WORD — 'would take everyone out of the flesh with them — the Unbodied' — and it answers its already-authored rival `the_one_who_stayed_embodied` exactly. ⛔ ID NOT CHANGED; CCode's migration."
   },
   {
    "id": "the_one_who_stayed_embodied",

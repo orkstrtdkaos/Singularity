@@ -1961,7 +1961,7 @@
     "PUZZLE",
     "SOCIAL"
    ],
-   "tradition": "harmonic",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "reveal",
@@ -2006,7 +2006,9 @@
    "folkAccessible": true,
    "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition.",
    "_rungFix_20260830": "⛔ ability rung -> `none`: it CARRIES a call — sound sent, nobody harmed at any rank.",
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "harmonic",
+   "_lineageWhy": "⚑ lattice — getting a message reliably across distance — coordination, the Lattice's ordinary work",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "glasswork",
@@ -2089,7 +2091,7 @@
     "PUZZLE",
     "SOCIAL"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "wright",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "make",
@@ -2133,7 +2135,9 @@
    "folkAccessible": true,
    "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition.",
    "_rungFix_20260830": "⛔ ability rung -> `none`: it makes glass and works light through it. No rank harms anyone.",
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ wright — a lens, a signal, a lamp that gets light down a mineshaft. Objects, plainly",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "keen_appraisal",

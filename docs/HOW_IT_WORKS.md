@@ -526,8 +526,17 @@ muddled… eliminate the reference to valleycraft in terms of DOMAIN/TRADITION."
 were a three-way blend — stillhold .4 / wright .3 / rootkin .3 — so 18 crafts under one label were never
 one people's craft.**
 
-✅ **`harmonic` (16) and `radiant_folk` (15) ARE FOOTHILLS, THEY ARE NOT GOING ON THE RING, AND THEIR
-CRAFTS ARE ALREADY ALLOCATED.** ⛔ **This is settled — Erik, 2026-09-02.**
+✅ **`harmonic` and `radiant_folk` ARE FOOTHILLS, THEY ARE NOT GOING ON THE RING — AND THEIR CRAFTS BELONG
+TO A REAL POLE AND DOMAIN, *AND* ARE FOLK-ACCESSIBLE. BOTH ARE TRUE.** ⛔ Erik, 2026-09-02: *"Those skills
+DO belong to a tradition and a domain… they are ALSO folk accessible."*
+
+⚠️ **TRADITION AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE.** ✅ `valley_craft` was already done this way —
+its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ **`harmonic` and `radiant_folk` were left
+half-done until 2026-09-02 and are now allocated the same way:** harmonic → `lattice` (its record's own
+`disposition.primary: "order"`), with `enginewright` taking the four that work MATTER; radiant_folk →
+`blazeborn`. **All 31 gain `folkAccessible: true`, and `_foothill` preserves the folk-shadow lineage.**
+
+⚑ **THE FULL LIST IS `docs/SKILLS.md` — generated, every domain, sect and craft by tier with ranks.**
 
 **How a foothill craft is placed, all of it built:**
 

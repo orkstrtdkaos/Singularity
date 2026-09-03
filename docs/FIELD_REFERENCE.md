@@ -1,5 +1,9 @@
 # FIELD REFERENCE — what things ACTUALLY are, and who actually reads them
 
+⚑ **The crafts themselves are in [`SKILLS.md`](SKILLS.md)** — every domain, sect and craft, derived from
+the corpus. ⚠️ **This file says what a FIELD is; that one says what the CRAFTS are.** A question about a
+particular craft is answered there, not here.
+
 **The companion to `HOW_IT_WORKS.md`.** ⛔ **That file says what the game DOES. This one says what each
 field IS, where it lives, who reads it, and what happens when it is absent.**
 
@@ -648,6 +652,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `plus` | 73 | `mechanic`×73 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
 | `schemaVersion` | 63 | `root`×63 | ✅ READ | `canon.js`, `codex.js`, `encounterFrame.js` |
 | `wardTypes` | 53 | `mechanic`×53 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
+| `folkAccessible` | 47 | `root`×47 | ✅ READ | `state.js` |
 | `marginFloorPer` | 45 | `mechanic`×45 | ✅ READ | `craftmechanics.js` |
 | `soak` | 33 | `mechanic`×33 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `melee.js` |
 | `soakRank` | 32 | `mechanic`×32 | ✅ READ | `skill_battle.js`, `app.js` |
@@ -659,7 +664,6 @@ contribute to authored dice without recreating the double-scaling bug.
 | `imposes` | 21 | `tree`×21 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `upkeep` | 18 | `root`×18 | ⚠️ CI-ONLY | _1 test/script only_ |
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |
-| `folkAccessible` | 18 | `root`×18 | ✅ READ | `state.js` |
 | `obscure` | 16 | `root`×16 | ✅ READ | `skill_battle.js` |
 | `variance` | 15 | `mechanic`×15 | ✅ READ | `craftmechanics.js`, `app.js` |
 | `ongoingHarm` | 15 | `tree`×15 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |

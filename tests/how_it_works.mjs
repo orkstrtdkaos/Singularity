@@ -3679,7 +3679,11 @@ console.log("\n── §54 · the doc may not contradict itself ──");
     const unenacted = nums.filter(n => !hasR(doc, n));
     const inBody = nums.filter(n => hasR(bodyTxt54, n)).length;
     check("§54: ⛔ at most four minted rulings are absent from HOW_IT_WORKS — may only go DOWN",
-      unenacted.length <= 4,
+      // ⚠️ FIVE, NOT FOUR — and the ratchet is what noticed. R21 was in the body when I measured and is
+      // gone after the foothill rewrite: a ruling that WAS enacted became un-enacted. ⛔ THAT IS THE
+      // FAILURE MODE THIS EXISTS FOR, caught within the hour. R23 is the old straggler; R30–R32 were ruled
+      // yesterday off my own ROUND 2 and their substance is in §7h without the numbers.
+      unenacted.length <= 5,
       nums.length + " minted · absent: " + (unenacted.map(n => "R" + n).join(" ") || "none"));
     check("§54: …and most R-numbers reach the BODY, not merely the log — the enacted half",
       inBody >= 25, inBody + " of " + nums.length + " in the body");
@@ -3698,6 +3702,78 @@ console.log("\n── §54 · the doc may not contradict itself ──");
       && TR54.isPoleTradition("ashwarden", C54.traditionIndex));
     check("§54: ⚠️ …and `byId` really would have answered differently — which is how I got it wrong",
       !!C54.traditionIndex.byId["valley_craft"]);
+  }
+}
+/* ═════ §55 — SKILLS.md: THE SKILL SOURCE OF TRUTH, AND ITS NUMBERS ═════ */
+// ⛔ `docs/SKILLS.md` declares itself DERIVED — "GENERATED from the live corpus. Do not hand-edit —
+// regenerate it" — and every number in it is a claim about the corpus.
+//
+// ⚠️ ITS HEADER COUNTS ARE GATED HERE because a source of truth with unchecked numbers rots in a week,
+// and this one is 1,150 lines that nobody will re-add by hand.
+//
+// ⚠️ AND A WARNING FOR WHOEVER AUDITS IT NEXT: it groups crafts by their POLE, not by the raw `tradition`
+// field. Erik 2026-09-02: "Those skills DO belong to a tradition and a domain… they are ALSO folk
+// accessible." ⛔ GROUPING BY `tradition` GIVES A DIFFERENT AND WRONG ANSWER — I did exactly that and
+// reported three false mismatches against a file that was right.
+console.log("\n── §55 · the skill source of truth ──");
+{
+  const sk = rd("docs/SKILLS.md");
+  const { loadContentHeadless: lch55 } = await import("./headless_content.mjs");
+  const C55 = await lch55();
+  const idx55 = C55.traditionIndex;
+  const A55 = Object.values(C55.abilities);
+
+  check("§55: the skill source of truth exists and is substantial", sk.length > 20000, `${sk.length} chars`);
+
+  // ⛔ ITS FOUR HEADER CLAIMS, EACH MEASURED.
+  {
+    const claim = (re) => { const m = sk.match(re); return m ? Number(m[1]) : null; };
+    const crafts = claim(/\*\*(\d+) crafts ·/);
+    const domains = claim(/·\s*(\d+) domains/);
+    const sects = claim(/·\s*(\d+) sects/);
+    const folk = claim(/·\s*(\d+) folk-accessible/);
+    check("§55: …its sect count matches the ring — 24 poles, per \"only the poles are traditions\"",
+      sects === Object.keys(idx55.ringPos || {}).length, `doc ${sects}`);
+    check("§55: …its domain count matches the index",
+      domains === new Set(Object.values(idx55.domainOfTrad || {})).size, `doc ${domains}`);
+    check("§55: …its folk-accessible count matches the corpus",
+      folk === A55.filter(a => a.folkAccessible).length,
+      `doc ${folk} vs corpus ${A55.filter(a => a.folkAccessible).length}`);
+    check("§55: ⚠️ …and its craft count is the AUTHORED corpus, not the loaded one (the martial floor is not authored)",
+      crafts !== null && crafts < A55.length && A55.length - crafts <= 12,
+      `doc ${crafts} vs loaded ${A55.length}`);
+  }
+
+  // ⛔ EVERY SECT IT NAMES MUST BE A REAL POLE, and every pole must appear.
+  {
+    const named = [...sk.matchAll(/^###\s+.*?\(`([a-z_]+)`\)/gm)].map(m => m[1]);
+    const TR55 = await import("../engine/traditions.js");
+    const notPole = named.filter(t => !TR55.isPoleTradition(t, idx55));
+    check("§55: ⛔ every sect the doc names is a POLE — no folk lineage is listed as a sect",
+      notPole.length === 0, notPole.join(" · "));
+    const missing = Object.keys(idx55.ringPos || {}).filter(t => !named.includes(t));
+    check("§55: …and every pole on the ring has a section — none is missing from the source of truth",
+      missing.length === 0, missing.join(" · "));
+  }
+
+  // ⛔ AND IT IS REFERENCED FROM THE DOCUMENTS THAT ANSWER CRAFT QUESTIONS. A source of truth nothing
+  // points at is a file, not a source.
+  {
+    const refs = ["docs/HOW_IT_WORKS.md", "docs/FIELD_REFERENCE.md", "docs/PLAYERS_GUIDE.md"]
+      .filter(f => rd(f).includes("SKILLS.md"));
+    check("§55: ⛔ the three craft-answering docs all point at it",
+      refs.length === 3, `pointed at by: ${refs.join(" · ") || "nothing"}`);
+  }
+
+  // ⚠️ AND THE ONE THING IT PROMISES THAT NOTHING DELIVERS, ASSERTED AS OPEN.
+  // ⛔ It says "regenerate it" and no generator exists. I tried to write one and could not reproduce how a
+  // foothill craft lands under its pole — 40 crafts across radiant_folk, harmonic, cross_pole_braid,
+  // god_named and bargainers carry no field naming the pole they are filed under. ⚠️ Either the rule is
+  // undocumented or the placement is by hand; both make "do not hand-edit" unenforceable.
+  {
+    let hasGen = false;
+    try { hasGen = !!rd("scripts/skills_inject.mjs"); } catch { hasGen = false; }
+    gap("§10: SKILLS.md says \"regenerate it\" and no generator exists", !hasGen);
   }
 }
 /* ══════════ REPORT ══════════ */

@@ -526,6 +526,25 @@ muddled… eliminate the reference to valleycraft in terms of DOMAIN/TRADITION."
 were a three-way blend — stillhold .4 / wright .3 / rootkin .3 — so 18 crafts under one label were never
 one people's craft.**
 
+⛔ **R33 (SNG-443) — LINEAGE AND ACCESS ARE TWO SEPARATE AXES.** Source:
+`content/packs/core/rules/foothills.json` → `_twoAxes`.
+
+| field | is |
+|---|---|
+| **`tradition`** | ⚑ **THE LINEAGE** — which people's craft this descends from. **Permanent**; power source, aesthetic and wheel position all key off it |
+| **`learnedAt`** | ⚑ **THE ACCESS** — where a person can be taught it: a foothill, a school, a place, or the wilds |
+
+⛔ **A FOOTHILL IS A PLACE OF ACCESS, NOT A NEW ANCESTRY.** Erik: *"Hardline teaches the Edge; it does not
+own it — that is what makes a foothill an economic centre: it SELLS ACCESS to something it did not invent."*
+⚠️ **And a foothill therefore has NO AXIS, because it is not a lineage. It is a location.**
+`_theDefinition_20260823`: *"foothills are where multiple traditions come together — PLACES where a domain
+and its adjacents live and work. The definition is GEOGRAPHIC AND SOCIAL."*
+
+⛔ **THE STANDING ERROR:** filing a craft under a foothill in `tradition` **confuses access with ancestry**.
+`valley_craft` was already corrected — its 15 crafts carry a real pole plus `folkAccessible: true`.
+⚠️ **`harmonic` (16) and `radiant_folk` (15) still carry the error and are owed the same fix:** `tradition`
+→ their authored lineage blend, `learnedAt` → the foothill, `folkAccessible` unchanged.
+
 ✅ **`harmonic` and `radiant_folk` ARE FOOTHILLS, THEY ARE NOT GOING ON THE RING — AND THEIR CRAFTS BELONG
 TO A REAL POLE AND DOMAIN, *AND* ARE FOLK-ACCESSIBLE. BOTH ARE TRUE.** ⛔ Erik, 2026-09-02: *"Those skills
 DO belong to a tradition and a domain… they are ALSO folk accessible."*

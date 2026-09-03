@@ -45,7 +45,25 @@ exercise that produced three wrong reports on one subject on 2026-09-02. | colum
 | **R29** | death & attending | attending decides how much person survives | ✅ | `RULING_attending.md` |
 | **R30** | NPC sheets | R30 — the bridge is THE WHOLE SHEET, not its `skills[]` | ⛔ | `RULING_sheet_architecture.md` |
 | **R31** | NPC sheets | R31 — the first caller is the GM BLOCK, not a dark mint | ⛔ | `RULING_sheet_architecture.md` |
+| **R33** | lineage vs access | ⛔ **`tradition` is LINEAGE · `learnedAt` is ACCESS. A foothill is a PLACE, not an ancestry** (SNG-443) | ⬜ | `RULING_two_axes.md` → **source: `content/packs/core/rules/foothills.json` `_twoAxes`** |
 | **R32** | NPC sheets | R32 — accepted from measurement ✅ from measurement | ⛔ | `RULING_sheet_architecture.md` |
+
+---
+
+## ⛔ RULINGS THAT LIVE OUTSIDE `po/`
+
+⚠️ **A ruling can be authored into a CONTENT file and never indexed.** ⛔ **R33 sat in
+`foothills.json`'s `_twoAxes` key for seven days, indexed nowhere, and was re-discovered and re-broken
+three times in one day.**
+
+| ruling | source |
+|---|---|
+| **R33** — lineage vs access | `content/packs/core/rules/foothills.json` → `_twoAxes` (SNG-443) |
+| the foothill definition | `foothills.json` → `_theDefinition_20260823` |
+| `precursor` is not a tradition | `foothills.json` → `notATradition` |
+
+➡️ ⚠️ **When a content file carries a `_`-prefixed key that states a RULE rather than a fact, it belongs
+here.** ⛔ **The wikilink spec exists to find these automatically instead of by excavation.**
 
 ---
 

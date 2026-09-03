@@ -504,6 +504,7 @@ blast radius includes every structure keyed to the thing being migrated.**
 | `docs/HOW_IT_WORKS.md` | **what does the game do**, present tense, BUILT vs PROPOSED | us |
 | `docs/FIELD_REFERENCE.md` | **what is each field**, who reads it, what breaks without it | us |
 | ⛔ `docs/SKILLS.md` | **every domain, sect and craft** — the skill source of truth, derived from the corpus | us |
+| ⛔ `docs/RULINGS.md` | **which rulings exist and whether each is ENACTED** — an index, not an authority | us |
 | ⛔ `docs/PLAYERS_GUIDE.md` | **what is it like to play** — nouns and verbs, not fields | ⛔ **the player** |
 | ⛔ `docs/ARCS.md` | ⛔ **the same arcs WITH the answers** — Erik: *"it is NOT OK to leave it at 'we don't know what's underneath'"* | us, never the player |
 | `docs/APPARATUS.md` | ⛔ **every harness, what it is for, and whether it RUNS** | us |

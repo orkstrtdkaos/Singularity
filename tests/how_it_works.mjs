@@ -3765,15 +3765,65 @@ console.log("\n── §55 · the skill source of truth ──");
       refs.length === 3, `pointed at by: ${refs.join(" · ") || "nothing"}`);
   }
 
-  // ⚠️ AND THE ONE THING IT PROMISES THAT NOTHING DELIVERS, ASSERTED AS OPEN.
-  // ⛔ It says "regenerate it" and no generator exists. I tried to write one and could not reproduce how a
-  // foothill craft lands under its pole — 40 crafts across radiant_folk, harmonic, cross_pole_braid,
-  // god_named and bargainers carry no field naming the pole they are filed under. ⚠️ Either the rule is
-  // undocumented or the placement is by hand; both make "do not hand-edit" unenforceable.
+  // ✅ THE PROMISE IS KEPT NOW. It said "regenerate it" and nothing did; `scripts/skills_inject.mjs`
+  // does. ⛔ THE RULE IT IMPLEMENTS IS ERIK’S, 2026-09-02: a foothill craft is placed by its own `axes`
+  // vector, its access is the band `folk`, and having NO domain and NO ring position is CORRECT — a folk
+  // craft is not domain-gated, and a ring position would gate what is meant to be ungated.
+  //
+  // ⚠️ SO A FOOTHILL IS NOT FILED UNDER A POLE. My first attempt filed radiant_folk under Radiance and
+  // produced 31 — which is what the file said before Aevi’s revert, and what the revert is undoing.
   {
-    let hasGen = false;
-    try { hasGen = !!rd("scripts/skills_inject.mjs"); } catch { hasGen = false; }
-    gap("§10: SKILLS.md says \"regenerate it\" and no generator exists", !hasGen);
+    const gen = rd("scripts/skills_inject.mjs");
+    check("§55: ✅ the generator exists and loses nothing — it refuses to write if a craft goes unplaced",
+      /placed !== withTrad/.test(gen) && /REFUSING to write/.test(gen));
+    check("§55: ⛔ …and it cannot clobber a file someone is editing — writing needs --write",
+      /const WRITE = process\.argv\.includes\("--write"\)/.test(gen) && /if \(!WRITE\)/.test(gen));
+    check("§55: ⚠️ …and it files a foothill in its OWN section, never under a pole",
+      /no ring position, no domain/.test(gen) && /isFolk\(t\)/.test(gen));
+  }
+}
+/* ═════ §56 — RULINGS.md: THE INDEX MUST AGREE WITH THE TRUTH IT INDEXES ═════ */
+// ⛔ Erik asked for one ruling source of truth. `docs/RULINGS.md` is that index, and its own header is
+// careful about what it is: "THIS FILE IS AN INDEX, NOT AN AUTHORITY. A ruling is TRUE because
+// HOW_IT_WORKS's BODY says it, not because a file in po/ does."
+//
+// ⚠️ SO ITS `enacted` COLUMN IS A CLAIM ABOUT ANOTHER DOCUMENT, and that is exactly the kind of claim
+// that rots silently — the class §54 exists for. An index that says a ruling is live when the body has
+// never carried it is worse than no index, because it stops anyone checking.
+console.log("\n── §56 · the ruling index agrees with the body ──");
+{
+  const rul = rd("docs/RULINGS.md");
+  const dl56 = doc.split(String.fromCharCode(10));
+  const isRow56 = (l) => /^\|\s*\d\d-\d\d\s*\|/.test(l);
+  let last56 = -1; dl56.forEach((l, i) => { if (isRow56(l)) last56 = i; });
+  const body56 = dl56.slice(last56 + 1).join(String.fromCharCode(10));
+
+  const rows56 = [];
+  for (const line of rul.split(String.fromCharCode(10))) {
+    const m = line.match(/^\|\s*\*\*(R\d{1,2})\*\*\s*\|([^|]*)\|([^|]*)\|([^|]*)\|/);
+    if (m) rows56.push({ id: m[1], subject: m[2].trim(), enacted: /✅/.test(m[4]) });
+  }
+  check("§56: the index actually indexes the rulings — the scan is not vacuous",
+    rows56.length >= 30, `${rows56.length} rows`);
+
+  const inBody56 = (id) => new RegExp("\\b" + id + "\\b").test(body56);
+  const falseYes = rows56.filter(r => r.enacted && !inBody56(r.id));
+  const falseNo = rows56.filter(r => !r.enacted && inBody56(r.id));
+  check("§56: ⛔ nothing is marked ENACTED that the body never carries",
+    falseYes.length === 0, falseYes.map(r => r.id + " (" + r.subject + ")").join(" · "));
+  check("§56: ⚠️ …and nothing the body carries is marked un-enacted",
+    falseNo.length === 0, falseNo.map(r => r.id).join(" · "));
+
+  // ⚠️ AND THE THING THE INDEX EXISTS TO PREVENT, REPORTED RATHER THAN FAILED. Two rulings on one subject
+  // is sometimes a refinement (R5 then R18) or a retraction (R8 → R17) and sometimes the contradiction
+  // that cost three days. ⛔ A GATE CANNOT TELL THOSE APART — a person must — so this counts and names
+  // them instead of pretending to judge.
+  {
+    const bySub = {};
+    for (const r of rows56) (bySub[r.subject] ||= []).push(r.id);
+    const multi = Object.entries(bySub).filter(([, v]) => v.length > 1);
+    check("§56: every multi-ruling subject is one a person has looked at — 9 today, and named",
+      multi.length <= 12, multi.map(([k, v]) => k + ": " + v.join(",")).join(" · "));
   }
 }
 /* ══════════ REPORT ══════════ */

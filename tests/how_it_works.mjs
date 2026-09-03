@@ -3446,6 +3446,58 @@ console.log("\n── §51 · the person-keyed sheet, live ──");
       foe.health > 0 && foe.skills.length > 0, `health ${foe.health}, ${foe.skills.length} skill(s)`);
   }
 }
+/* ═════ §52 — THE COMPOSITION LADDER: person → unit, and back down ═════ */
+// ⛔ Erik: "the group or unit sheets can be derivative of the NPC sheets — how many NPCs with skills does a
+// unit have, what skills with wards and types, how many simple soldiers."
+//
+// ⚠️ THE DOWNWARD HALF WAS ALREADY BUILT — `bandThreat` is `sqrt(effective) × scale`. What was missing is
+// the way UP: a contingent was an anonymous count and nothing could build one from people who exist.
+//
+// ✅ AND THE UPWARD HALF NEEDED NO NEW AGGREGATION. `bandCan`, `bandStrength`, `bandGaps` and `bandThreat`
+// all work unchanged on composed contingents — which is the reconciliation the architecture claims.
+console.log("\n── §52 · person → unit → number ──");
+{
+  const ML = await import("../engine/melee.js");
+  const CB52 = await import("../engine/combatants.js");
+  const co = CB52.contributionsOf;
+  const levy = (i) => ({ id: `lv${i}`, name: "a levy" });
+  const levies = Array.from({ length: 20 }, (_, i) => levy(i));
+
+  // ⛔ A UNIT OF NOBODIES HAS THE GAPS THAT COST SOMETHING.
+  const plain = { id: "p52", contingents: ML.contingentsFromPeople(levies, { contributionsOf: co }) };
+  check("§52: twenty plain levies bring no mender, no warder and no eyes",
+    ["RESTORE", "PROTECT", "KNOW"].every(f => ML.bandGaps(plain).some(g => g.missing === f)),
+    ML.bandGaps(plain).map(g => g.missing).join(" · "));
+  check("§52: …and none of them counts as skilled", ML.unitComposition(plain).withSkills === 0);
+
+  // ✅ ONE PERSON CHANGES WHAT THE UNIT IS. This is the whole point of composing upward.
+  const warder = { id: "w52", name: "a warder", assistTags: ["guard", "tend"] };
+  const mixed = { id: "m52", contingents: ML.contingentsFromPeople([...levies.slice(0, 19), warder], { contributionsOf: co }) };
+  check("§52: ⚑ ONE warder closes two of the three gaps — a unit is who is in it",
+    !ML.bandGaps(mixed).some(g => g.missing === "PROTECT") && !ML.bandGaps(mixed).some(g => g.missing === "RESTORE"),
+    ML.bandGaps(mixed).map(g => g.missing).join(" · "));
+  check("§52: …and the composition reports him by name, and counts the rest",
+    ML.unitComposition(mixed).withSkills === 1 && ML.unitComposition(mixed).simpleSoldiers === 19
+    && ML.unitComposition(mixed).named.includes("a warder"));
+
+  // ⚠️ HARM ALONE IS THE DEFAULT EVERY RECORD CARRIES, so it cannot make someone notable. A person whose
+  // only family is the default belongs in the rank and file however well named.
+  check("§52: ⚠️ carrying only the HARM default does not make someone skilled",
+    ML.unitComposition({ id: "x", contingents: ML.contingentsFromPeople([{ id: "n", name: "Someone Grand" }], { contributionsOf: co }) }).withSkills === 0);
+
+  // ⛔ AND THE BOUNDARY, ASSERTED AS A BOUNDARY. `bandThreat` is a MASS function: a hundred bodies collapse
+  // to more threat than one powerful individual does, because a band of one is not what the band model is
+  // for. ⚠️ THAT IS NOT A BUG TO TUNE OUT — it is the reason the person-keyed path exists. A named figure
+  // is resolved by their SHEET; the collapse is for a mass nobody will inspect.
+  const hundred = { id: "h52", contingents: ML.contingentsFromPeople(Array.from({ length: 100 }, (_, i) => levy(i)), { contributionsOf: co }) };
+  const oneBig = { id: "e52", contingents: [{ n: 1, quality: 12, does: ["HARM", "MARTIAL", "PROTECT"], what: "an epic" }] };
+  check("§52: ⛔ a hundred bodies out-threaten a band-of-one — so a PERSON is never resolved as a band",
+    ML.bandThreat(hundred).power > ML.bandThreat(oneBig).power,
+    `100 → ${ML.bandThreat(hundred).power}, one → ${ML.bandThreat(oneBig).power}`);
+  check("§52: …and the collapse is still sub-linear — five times the bodies is not five times the threat",
+    ML.bandThreat(hundred).power < 5 * ML.bandThreat(plain).power,
+    `100 → ${ML.bandThreat(hundred).power} vs 20 → ${ML.bandThreat(plain).power}`);
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

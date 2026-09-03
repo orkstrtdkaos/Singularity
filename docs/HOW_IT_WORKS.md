@@ -449,7 +449,7 @@ working papers; **this is the answer.**
 | 09-01 | ⛔ **TWO DOC FILES CARRIED UNRESOLVED MERGE-CONFLICT MARKERS ON MAIN** | `docs/HOW_IT_WORKS.md` and `docs/PLAYERS_GUIDE.md` both ended with literal `<<<<<<< HEAD` / `=======` / `>>>>>>> 17b21fbc` blocks around their *Last verified* footers — **committed, on origin, readable by anyone** | resolved both to the measured truth; scanned all **1562** tracked files and confirmed these were the only two | ⚠️ **NEITHER SUITE CAUGHT IT.** The docs are gated on their COUNTS, not on being well-formed — so a file can carry raw conflict syntax and still pass every assertion about what it claims |
 | 09-01 | ✅ **content documentation refreshed to the verified corpus: 419** | `HOW_IT_WORKS` said 414, `PLAYERS_GUIDE` said 423 (CCode's pre-drop number), `FIELD_REFERENCE` said 414 across six field rows. ⚠️ **All three were wrong in different directions at the same moment** | all set to **419**, verified at authenticated `api.github.com` rather than raw CDN | ⛔ **I HAD WRITTEN ZERO §0 ROWS TODAY** — nine crafts, four drops, two reworks, a 50-file sex/gender backfill, Marrow's romance authoring and a standing content policy, none of it logged. Erik asked whether I had been keeping the docs up and the answer was no |
 
-**Last verified: 2026-09-03 · v1.9.331 · 419 crafts.**
+**Last verified: 2026-09-03 · v1.9.332 · 419 crafts.**
 
 ---
 
@@ -929,6 +929,21 @@ to **20**. ⛔ **A level-27 smith passed in as skills alone wore a middling raid
 
 ✅ **`sheetFor` returns every field that branch reads**, so the bridge is *pass the whole sheet*. **A sheet
 supplying skills with no body and no threat is now REFUSED** rather than quietly completed.
+
+---
+### ⚑ AND A UNIT IS COMPOSED OF ITS PEOPLE
+
+`contingentsFromPeople` builds a band from named people: each person with a REAL contribution family
+becomes a contingent of one carrying it, and everyone whose only family is the `HARM` default folds into
+**rank and file** — counted, never dropped.
+
+✅ **`bandCan`, `bandStrength`, `bandGaps` and `bandThreat` then work unchanged**, which is the whole
+reconciliation. ⚑ **One warder in twenty levies closes two of the unit’s three gaps** — a unit’s
+weaknesses are now a fact about who is in it.
+
+⛔ **AND A PERSON IS NEVER RESOLVED AS A BAND OF ONE.** `bandThreat` is a MASS function: a hundred bodies
+collapse to more threat than one powerful individual, because collapsing is for a mass nobody will inspect.
+⚠️ **That is not a number to tune — it is the reason the person-keyed path exists.**
 
 ---
 ## 7g · AUTHORED GROUND IS CANON (Erik, R28)

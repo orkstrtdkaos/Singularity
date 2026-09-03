@@ -513,6 +513,63 @@ export function contingentsOf(band) {
 
 /** ⛔ WHAT A BAND CAN DO — the union of its contingents. A band of all cavalry answers exactly one
  *  question, and that is a REAL WEAKNESS rather than a flavour note: see `bandGaps`. */
+/** ⛔ SPEC_npc_sheet_architecture §4 — A UNIT IS COMPOSED OF ITS PEOPLE. Erik: "how many NPCs with skills
+ *  does a unit have, what skills with wards and types, how many simple soldiers."
+ *
+ *  ⚠️ THE DOWNWARD HALF WAS ALREADY BUILT. `bandThreat` collapses a band to one number and is already
+ *  sub-linear — `sqrt(effective) × scale` — so a hundred peasants never out-threaten an epic. ⛔ WHAT WAS
+ *  MISSING IS THE WAY UP: a contingent was an anonymous count with declared families, and nothing could
+ *  build one from people who actually exist.
+ *
+ *  ✅ SO THIS IS THE UPWARD DIRECTION, AND IT NEEDS NO NEW AGGREGATION. Each named person becomes a
+ *  contingent of one carrying their REAL contribution families; everyone else folds into one anonymous
+ *  block. `bandCan`, `bandStrength`, `bandGaps` and `bandThreat` then work unchanged — which is the
+ *  reconciliation: the two sheet systems are the two directions of one ladder.
+ *
+ *  ⚠️ RESOLVERS ARE INJECTED because this file has no imports and should not gain any — `contributionsOf`
+ *  lives in combatants.js and `sheetFor` in npcsheet.js, and a band does not need to know either module.
+ *
+ *  ⛔ QUALITY IS `1 + floor(level/10)`, DELIBERATELY FLAT. A level-27 smith is worth three soldiers, not
+ *  twenty-seven: `bandStrength` multiplies quality by count, so anything steeper would let one named
+ *  person out-weigh a company and make the unit layer a way to smuggle a hero into a headcount. */
+export function contingentsFromPeople(people = [], { contributionsOf = null, levelOf = null } = {}) {
+  const named = [], plain = [];
+  for (const p of people) {
+    if (!p) continue;
+    const does = (contributionsOf ? contributionsOf(p) : (p.contributions || [])).filter(Boolean);
+    // ⚠️ HARM ALONE IS THE DEFAULT EVERY RECORD CARRIES — it says nothing about them. Someone whose only
+    // family is the default is a soldier, however named, and belongs in the anonymous block.
+    const distinctive = does.filter(d => d !== "HARM");
+    if (distinctive.length) named.push({ p, does });
+    else plain.push(p);
+  }
+  const out = named.map(({ p, does }) => {
+    const lvl = Math.max(1, Number(levelOf ? levelOf(p) : p.level) || 1);
+    return { n: 1, quality: 1 + Math.floor(lvl / 10), does, what: p.name || p.id || "one of yours" };
+  });
+  // ⛔ AND THE SIMPLE SOLDIERS ARE COUNTED, NOT DROPPED. Erik asked for the number explicitly, and a unit
+  // that reports only its notables is a unit whose losses land on nobody.
+  if (plain.length) out.push({ n: plain.length, quality: 1, does: ["HARM", "MARTIAL"], what: "rank and file" });
+  return out;
+}
+
+/** ⚠️ WHAT A UNIT IS MADE OF, in the words Erik asked the question in. Reads the contingents rather than
+ *  the people, so it describes a hand-authored band and a composed one identically. */
+export function unitComposition(band) {
+  const cs = contingentsOf(band);
+  const skilled = cs.filter(c => c.n > 0 && c.does.some(d => d !== "HARM" && d !== "MARTIAL"));
+  const bodies = cs.reduce((a, c) => a + c.n, 0);
+  const families = {};
+  for (const c of cs) if (c.n > 0) for (const d of c.does) families[d] = (families[d] || 0) + c.n;
+  return {
+    bodies,
+    withSkills: skilled.reduce((a, c) => a + c.n, 0),
+    simpleSoldiers: bodies - skilled.reduce((a, c) => a + c.n, 0),
+    families,
+    named: cs.filter(c => c.n === 1 && c.what).map(c => c.what),
+  };
+}
+
 export function bandCan(band) {
   const out = new Set();
   for (const c of contingentsOf(band)) if (c.n > 0) for (const d of c.does) out.add(d);

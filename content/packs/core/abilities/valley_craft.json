@@ -1961,7 +1961,7 @@
     "PUZZLE",
     "SOCIAL"
    ],
-   "tradition": "enginewright",
+   "tradition": "harmonic",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "reveal",
@@ -2006,8 +2006,7 @@
    "folkAccessible": true,
    "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition.",
    "_rungFix_20260830": "⛔ ability rung -> `none`: it CARRIES a call — sound sent, nobody harmed at any rank.",
-   "_foothill": "harmonic",
-   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
+   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
   },
   {
    "id": "glasswork",
@@ -2090,7 +2089,7 @@
     "PUZZLE",
     "SOCIAL"
    ],
-   "tradition": "blazeborn",
+   "tradition": "radiant_folk",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "make",
@@ -2134,8 +2133,7 @@
    "folkAccessible": true,
    "_folkIsAccess_20260830": "⛔ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The “folk” idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ⚠️ I HAD WRITTEN `traditionKind: folk`, WHICH MAKES FOLK A KIND OF TRADITION — the exact thing he was retiring. ✅ `folkAccessible: true` INSTEAD: the craft BELONGS to its pole and is OPENLY LEARNABLE. ⛔ Access is a property of the craft; it is not a category of tradition.",
    "_rungFix_20260830": "⛔ ability rung -> `none`: it makes glass and works light through it. No rank harms anyone.",
-   "_foothill": "radiant_folk",
-   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
+   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
   },
   {
    "id": "keen_appraisal",

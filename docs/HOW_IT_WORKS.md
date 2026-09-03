@@ -449,7 +449,7 @@ working papers; **this is the answer.**
 | 09-01 | ⛔ **TWO DOC FILES CARRIED UNRESOLVED MERGE-CONFLICT MARKERS ON MAIN** | `docs/HOW_IT_WORKS.md` and `docs/PLAYERS_GUIDE.md` both ended with literal `<<<<<<< HEAD` / `=======` / `>>>>>>> 17b21fbc` blocks around their *Last verified* footers — **committed, on origin, readable by anyone** | resolved both to the measured truth; scanned all **1562** tracked files and confirmed these were the only two | ⚠️ **NEITHER SUITE CAUGHT IT.** The docs are gated on their COUNTS, not on being well-formed — so a file can carry raw conflict syntax and still pass every assertion about what it claims |
 | 09-01 | ✅ **content documentation refreshed to the verified corpus: 419** | `HOW_IT_WORKS` said 414, `PLAYERS_GUIDE` said 423 (CCode's pre-drop number), `FIELD_REFERENCE` said 414 across six field rows. ⚠️ **All three were wrong in different directions at the same moment** | all set to **419**, verified at authenticated `api.github.com` rather than raw CDN | ⛔ **I HAD WRITTEN ZERO §0 ROWS TODAY** — nine crafts, four drops, two reworks, a 50-file sex/gender backfill, Marrow's romance authoring and a standing content policy, none of it logged. Erik asked whether I had been keeping the docs up and the answer was no |
 
-**Last verified: 2026-09-03 · v1.9.329 · 419 crafts.**
+**Last verified: 2026-09-03 · v1.9.330 · 419 crafts.**
 
 ---
 
@@ -898,6 +898,39 @@ world-tick news, beside the delegated work, is where they are **told** — once,
 
 ---
 
+## 7h · A PERSON HAS A SHEET, AND A MASS HAS A NUMBER
+
+**There are two sheet producers and they are the two directions of ONE ladder, not rivals.**
+
+| producer | keyed on | what it is for |
+|---|---|---|
+| `npcsheet.sheetFor` | ⚑ **the person** | their level, crafts and ranks — what a unit is COMPOSED of |
+| `skill_battle.synthesizeOpponentSheet` | a **threat number** | collapsing a mass nobody will inspect |
+
+⛔ **YOU CANNOT DECOMPOSE A THREAT NUMBER INTO WARDS AND TYPES.** The moment a unit derives from its members
+— *“how many NPCs with skills, what skills with wards and types, how many simple soldiers”* — a person-keyed
+sheet stops being a preference and becomes a requirement. ✅ **A roster can always be collapsed back into a
+number; a number can never be expanded into a roster.**
+
+### ✅ THE SHEET IS A VIEW, NOT A RECORD
+
+`sheetFor` writes nothing — it is computed on demand from the registry entry. ⚠️ **So eviction needs no
+lifecycle** (`REGISTRY_CAP` is 150, and a sheet goes when its person does), and there is nothing to migrate.
+
+**Authored beats derived, and the sheet says which.** A record carrying its own `subAttributes` IS an
+authored sheet — that is the one thing derivation cannot produce. ⚠️ **A stranger derives to level 1, and
+that is correct**: the level is a claim about what the story has shown, not a courtesy.
+
+### ⛔ THE BRIDGE WAS A FALLBACK PRETENDING TO BE A DEFERRAL
+
+`synthesizeOpponentSheet` documented an authored `skills[]` as overriding *“entirely”*. ⚠️ **It overrode the
+skills and nothing else** — every other field was `authored ?? derived-from-threat`, with threat defaulting
+to **20**. ⛔ **A level-27 smith passed in as skills alone wore a middling raider’s body.**
+
+✅ **`sheetFor` returns every field that branch reads**, so the bridge is *pass the whole sheet*. **A sheet
+supplying skills with no body and no threat is now REFUSED** rather than quietly completed.
+
+---
 ## 7g · AUTHORED GROUND IS CANON (Erik, R28)
 
 **Where a place is hand-authored, the authored ground is the truth; the generator fills the rest.**

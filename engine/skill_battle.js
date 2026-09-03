@@ -81,7 +81,29 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
     if (left > 0 && soakLayers.length) soakLayers[soakLayers.length - 1].value += left;
   }
   const tags = opponent.tacticTags || [];
+  // ⛔ AN AUTHORED SHEET OVERRIDES THE SYNTHESIS — AND UNTIL NOW IT ONLY OVERRODE THE SKILLS.
+  //
+  // ⚠️ EVERY OTHER FIELD WAS `authored ?? DERIVED-FROM-THREAT`, and `threat` defaults to 20. So a
+  // person-keyed sheet passed in as `skills[]` alone arrived wearing a middling raider's body: Pell at
+  // level 27 would have had the attributes, health, soak and energy of a threat-20 foe, carrying a master
+  // smith's crafts. ⛔ THAT IS A PARTIAL DEFERRAL, WHICH IS WORSE THAN EITHER SYSTEM ALONE — the sheet
+  // looks authored and half of it is invented.
+  //
+  // ✅ `npcsheet.sheetFor` ALREADY RETURNS EVERY FIELD THIS BRANCH READS — attributes, health, maxHealth,
+  // energy, maxEnergy, soak. The bridge was never "pass its skills"; it is "pass the whole sheet".
+  //
+  // ⛔ SO A HALF-PASSED SHEET IS NOW REFUSED RATHER THAN QUIETLY COMPLETED. A caller that hands over
+  // skills and no body is making a mistake this function used to hide, and hiding it is how a level-27
+  // smith becomes a raider without anyone seeing a wrong number.
   if (opponent.skills?.length) { // authored override — a real, hand-built sheet
+    // ⚠️ `threat` ABSENT IS THE TELL. A sheet built from a person carries its own body; one that carries
+    // none and names no threat is a caller passing half of something.
+    const body = ["attributes", "health", "energy", "soak"].filter(k => opponent[k] != null);
+    if (!body.length && opponent.threat == null) {
+      throw new Error("synthesizeOpponentSheet: an authored sheet supplied skills but no body and no threat — "
+        + "pass the whole sheet (attributes/health/energy/soak), or a threat to synthesise one from. "
+        + "Half-passing silently produced a threat-20 body under authored crafts.");
+    }
     return { name: opponent.name || "the opponent", attributes: opponent.attributes || { practical: attr, physical: attr, mental: attr, social: attr },
       energy: opponent.energy ?? energy, maxEnergy: opponent.energy ?? energy, tacticTags: tags, skills: opponent.skills,
       health: opponent.health ?? health, soak: opponent.soak ?? soak, soakLayers: opponent.soakLayers ?? soakLayers,

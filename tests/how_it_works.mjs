@@ -3364,6 +3364,76 @@ console.log("\n── §50 · R28 · the authored ground ──");
     /groundForGM\(env\.location\?\.id, env\.rules\?\.localLayouts\)/.test(gr50));
   check("§50: …and it is a registered GM block, so it reaches the narrator",  /key: "groundDetail"/.test(gr50));
 }
+/* ═════ §51 — THE PERSON-KEYED SHEET GOES LIVE, AND THE BRIDGE STOPS LYING ═════ */
+// ⛔ `npcsheet.js` had NO live importer — 395 lines, tests only. Aevi proposed minting sheets and not
+// wiring them to combat; that builds a writer with no reader ON PURPOSE, which is the shape that hid
+// folkAccessible, backlashRung, holdings, sectFlavour, local_layouts and this module itself for weeks.
+//
+// ✅ SO THE FIRST CALLER READS AND CANNOT HURT: the narrator. If a sheet is wrong the GM says something
+// odd about a person and no number moves.
+//
+// ⛔ AND THE BRIDGE SAID SOMETHING FALSE. `synthesizeOpponentSheet`'s comment claims an authored
+// `skills[]` "overrides the synthesis entirely"; every OTHER field was `authored ?? derived-from-threat`,
+// with threat defaulting to 20 — so a level-27 smith arrived wearing a middling raider's body.
+console.log("\n── §51 · the person-keyed sheet, live ──");
+{
+  const NS51 = await import("../engine/npcsheet.js");
+  const SB51 = await import("../engine/skill_battle.js");
+  const { loadContentHeadless: lch51 } = await import("./headless_content.mjs");
+  const C51 = await lch51();
+  const sb51 = C51.rules?.skillBattle || {};
+  const pell51 = C51.npcs["pell"];
+
+  // ⛔ THE FIRST LIVE CALLER, ALL FOUR DOORS.
+  const gr51 = rd("engine/gm_registry.js"), gm51 = rd("engine/gm.js");
+  check("§51: ⛔ npcsheet has a LIVE importer at last — not a test",
+    /from "\.\/npcsheet\.js"/.test(gr51), "gm_registry imports it");
+  check("§51: …registered as a GM block",  /key: "sheetsDetail"/.test(gr51));
+  check("§51: …destructured by gm.js — a row gm.js never names lands nowhere",
+    /groundDetail, sheetsDetail,/.test(gm51));
+  check("§51: …and pushed into the prompt",  /world\.push\(`## WHAT THESE PEOPLE CAN DO/.test(gm51));
+
+  // ⛔ THE BLOCK SAYS WHICH IS AUTHORED AND WHICH IS DERIVED. A narrator told a guess and a fact in the
+  // same voice will treat them the same.
+  const block51 = NS51.sheetsForGM([pell51, C51.npcs["adept_sona"]].filter(Boolean), { catalog: C51.abilities });
+  check("§51: an authored person is reported as authored, at her own level",
+    /Pell Ran Marsh — level 27 \(authored\)/.test(block51), block51.split("\n")[0]);
+  check("§51: ⚠️ …and a derived one says so — \"as the story has shown them\"",
+    /as the story has shown them/.test(block51));
+  check("§51: …her crafts are named, one row per craft rather than one per function",
+    /knows: Stone-Read/.test(block51) && !/knows:.*Stone-Read.*Stone-Read/.test(block51));
+
+  // ⛔ AND WHAT A BODY CANNOT DO REACHES THE NARRATOR. `canStrike: false` is the ONLY thing that
+  // suppresses the HARM default — a narrator that does not know it will have a scholar swinging.
+  // ⚠️ FROM `physicality`, NEVER FROM `_canStrikeWhy`: that is an author's note in working-paper voice.
+  const wren51 = C51.npcs["child_wren"];
+  if (wren51) {
+    const b = NS51.sheetsForGM([wren51], { catalog: C51.abilities });
+    check("§51: a person who cannot strike says so", /cannot strike/.test(b), b.split("\n").pop());
+    check("§51: ⛔ …and never quotes the author\u2019s own note into the prompt", !/⛔|⚠️/.test(b));
+  }
+
+  // ⛔ THE BRIDGE. A half-passed sheet is refused rather than silently completed at threat 20.
+  {
+    const skills = NS51.battleSkillsFor(pell51, { catalog: C51.abilities }).skills;
+    let refused = false;
+    try { SB51.synthesizeOpponentSheet({ name: "x", skills }, sb51); } catch { refused = true; }
+    check("§51: ⛔ skills with no body and no threat is REFUSED, not completed at threat 20", refused);
+
+    const sheet = NS51.sheetFor(pell51, {});
+    const full = SB51.synthesizeOpponentSheet({ name: sheet.name, attributes: sheet.attributes,
+      health: sheet.health, energy: sheet.energy, soak: sheet.soak, skills }, sb51);
+    check("§51: ✅ …and the WHOLE sheet passes through — her body, not a raider\u2019s",
+      full.health === sheet.health && full.attributes.practical === sheet.attributes.practical,
+      `health ${full.health} vs ${sheet.health}`);
+    check("§51: …carrying every craft she has", full.skills.length === skills.length, `${full.skills.length}`);
+
+    // ⚠️ AND THE THREAT PATH IS UNTOUCHED — it is the other direction of the same ladder, not a rival.
+    const foe = SB51.synthesizeOpponentSheet({ name: "a raider", threat: 60 }, sb51);
+    check("§51: ⚠️ a mass with only a threat number still resolves — the fast path is not retired",
+      foe.health > 0 && foe.skills.length > 0, `health ${foe.health}, ${foe.skills.length} skill(s)`);
+  }
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

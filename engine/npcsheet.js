@@ -393,3 +393,47 @@ export function summonSheetFor(ability, casterLevel, { rank = 1, degree = "succe
   };
 }
 
+/** ⛔ THE FIRST LIVE CALLER THIS MODULE HAS EVER HAD, and it is deliberately one that READS.
+ *
+ * ⚠️ AEVI PROPOSED MINTING A SHEET AND NOT WIRING IT TO COMBAT. That builds a writer with no reader on
+ * purpose — the shape that hid `folkAccessible`, `backlashRung`, `holdings`, `sectFlavour`,
+ * `local_layouts` and this very module for weeks. ⛔ A SHEET NOBODY READS IS NOT SAFE, IT IS INVISIBLE.
+ *
+ * ✅ SO THE FIRST CALLER IS THE NARRATOR. If a sheet is wrong here, the GM says something odd about a
+ * person and NOTHING RESOLVES DIFFERENTLY — no damage, no roll, no state. That is what makes it the
+ * cheapest possible place to be wrong in public, and 395 lines that have never run need exactly that
+ * before anything mechanical depends on them.
+ *
+ * ⚠️ AUTHORED FIRST, DERIVED OTHERWISE, and the line says which — a narrator told a derived guess and an
+ * authored fact in the same voice would treat them the same.
+ */
+export function sheetsForGM(people = [], { catalog = {}, day = null, cfg = {}, roleAttributes = null, maxCrafts = 4 } = {}) {
+  const lines = [];
+  for (const entry of people) {
+    if (!entry?.id && !entry?.name) continue;
+    const sheet = sheetFor(entry, { day, cfg, roleAttributes });
+    const { skills } = battleSkillsFor(entry, { catalog });
+    // ⚠️ ONE ROW PER CRAFT, NOT PER FUNCTION. `battleSkillsFor` emits an entry per function, so Pell's
+    // 17 crafts arrive as 32 rows — useful to a resolver, unreadable in a prompt.
+    const byCraft = new Map();
+    for (const sk of skills) {
+      if (sk.id === "_strike") continue;
+      if (!byCraft.has(sk.id)) byCraft.set(sk.id, { name: sk.name, fns: [] });
+      byCraft.get(sk.id).fns.push(sk.function);
+    }
+    const crafts = [...byCraft.values()].slice(0, maxCrafts)
+      .map(c => `${c.name} (${c.fns.slice(0, 3).join("/")})`);
+    const more = byCraft.size - crafts.length;
+    const how = sheet.authored ? "authored" : "as the story has shown them";
+    const lean = sheet.leans?.length ? `, ${sheet.leans.slice(0, 2).join(" then ")}` : "";
+    lines.push(`- ${sheet.name} — level ${sheet.level} (${how})${lean}`);
+    if (crafts.length) lines.push(`    knows: ${crafts.join(" · ")}${more > 0 ? ` and ${more} more` : ""}`);
+    // ⛔ WHAT THEY BRING, AND WHAT THEY CANNOT. `canStrike: false` is an authored fact about a body and
+    // the only thing that suppresses the HARM default — a narrator that does not know it will have a
+    // scholar swinging.
+    // ⚠️ `_canStrikeWhy` IS AN AUTHOR'S NOTE, NOT NARRATOR VOICE — it is working-paper prose full of
+    // markers and belongs to Aevi, not to a prompt. `physicality` is the sentence a narrator can use.
+    if (entry.canStrike === false) lines.push(`    cannot strike${entry.physicality ? ` — ${String(entry.physicality).split(/(?<=[.!?])s/)[0]}` : " — an authored fact about this person, not a rule about their kind"}`);
+  }
+  return lines.join("\n");
+}

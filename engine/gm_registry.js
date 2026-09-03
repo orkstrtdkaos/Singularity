@@ -45,6 +45,7 @@ import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NO
 import { threatToPlayer, guardiansFor, worldRoster } from "./worldtick.js"; // SNG-310: the mark the world engine leaves for the GM to narrate
 import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
+import { sheetsForGM } from "./npcsheet.js";     // the person-keyed sheet, first live caller
 import { groundForGM } from "./places.js";       // R28: authored ground is canon
 import { assignmentsForGM } from "./assignments.js"; // SNG-191 §4: delegated commitments the world is honouring
 import { arcsForGM, seasonalDetailForGM } from "./latentarcs.js"; // SNG-191 §7: surfaced arcs + §7.4 seasonal pressure
@@ -107,6 +108,22 @@ export const GM_CONTEXT = [
       }
       const by = env.CONTENT.traditionIndex?.byId || {};
       return traditionMotivationsForGM(doc, ids, { bestiary: env.CONTENT.bestiary, labelOf: id => by[id]?.name || by[id]?.label || null });
+    } },
+  // ⛔ SPEC_npc_sheet_architecture §2 — the person-keyed sheet is primary where a person exists, and this
+  // is its first caller in play. ⚠️ DELIBERATELY A READING ONE: if the sheet is wrong the narrator says
+  // something odd and no number moves.
+  { key: "sheetsDetail", builder: "npcsheet.sheetsForGM", carries: ["what the people in this scene can actually do"],
+    reachedBy: "a scene with named people in it", spec: "§13 / sheet-architecture §2", views: ALL,
+    build: (env) => {
+      const npcs = env.CONTENT.npcs || {};
+      const present = (env.sceneState?.npcsPresent || []).map(n =>
+        (n.id && npcs[n.id]) || (n.id && env.character?.npcRegistry?.[n.id])
+        || Object.values(npcs).find(x => x && x.name === n.name)
+        || Object.values(env.character?.npcRegistry || {}).find(x => x && x.name === n.name)
+      ).filter(Boolean);
+      // ⚠️ CONTENT FIRST, REGISTRY SECOND — the same precedence the NPC block already uses: what the
+      // player has learned about someone beats the authored stub only where content has nothing.
+      return present.length ? sheetsForGM(present, { catalog: env.CONTENT.abilities, day: env.time?.day }) : "";
     } },
   { key: "rules", builder: "CONTENT.rules", carries: ["world rules", "recovery", "precursor bands"],
     reachedBy: "always", spec: "§7", views: ALL,

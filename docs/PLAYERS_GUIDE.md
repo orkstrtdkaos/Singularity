@@ -10,7 +10,7 @@ place, person and belief in X–XII is drawn from authored content — , ,
 , the nine companion files and  — and where the world has not decided
 something, the guide says so rather than filling it in.
 
-**Last verified: 2026-09-03 · v1.9.329 · 428 crafts · 135 places · 112 people · 9 companions.**
+**Last verified: 2026-09-03 · v1.9.330 · 428 crafts · 135 places · 112 people · 9 companions.**
 
 ---
 

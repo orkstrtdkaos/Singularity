@@ -675,6 +675,10 @@ LEVEL 60 (R13)** — not 100. **After 60, progression stops being acquisition an
 dumper reaches them at L11 rather than late — an opening build decision rather than a late-game reward, and
 Erik has accepted that shape for now.
 
+⛔ **A TOME, A PRECURSOR ARTIFACT, A QUEST ITEM AND A MIRACLE GRANT ARE ONE MECHANISM (R22).** An object
+grants ACCESS to a craft; **the character still pays the skill points.** ⚠️ **The object removes the access
+barrier, never the cost.**
+
 ⛔ **Points bind in every band at every level. The breadth cap is decorative** — a L100 home-tradition
 specialist banking every point affords 87 crafts against a cap of 101.
 
@@ -786,6 +790,63 @@ invisible to affinities exactly as an untyped blow is — the same hole, at the 
 
 ---
 
+## 3b · WHEN IT TURNS ON YOU, AND WHEN YOU REACH PAST IT
+
+### Backlash — the craft's own nature, inward (R5, R18)
+
+⛔ **`backlashRung` is an absolute rung NAME, not a number and not an offset.** It is authored **one rung
+MILDER than the craft's own `harmRung`** — the craft turns inward, muted. **You are hurt by your own craft,
+not killed by it.**
+
+⚠️ **It scales PER RANK, the way `harmRung` already does.** Top-level is the CEILING; each craft's own
+authored offset applies at every rank:
+
+```
+backlash[rank] = max(none, harm[rank] − (ceilingHarm − ceilingBacklash))
+```
+
+✅ **The offset is PER-CRAFT and was not flattened** — most lethal crafts backlash at `damaging`, but
+`found_fault`, `offered_mouth`, `plain_weight`, `sudden_work` and `thinned_veil` backlash at
+`incapacitating`. ⚠️ **18 of 20 now have NO backlash at rank 1: a novice's craft does not turn on them.**
+
+**Magnitude is a PERCENTAGE OF THE WIELDER'S MAX POOL — never a flat number (R18):**
+
+| rung | health | energy |
+|---|---|---|
+| damaging | 7% | 11% |
+| incapacitating | 13% | 22% |
+| lethal | 20% | 33% |
+
+⛔ **TIER DOES NOT ENTER.** Rung already encodes rank, so tier would double-count — `sustained_regard` is
+tier I carrying `harmRung: lethal`, and under tier-scaling it would backlash like a beginner's craft while
+doing lethal work. ⚠️ **Flat numbers were 2% of a L30 pool and half an L1 pool: irrelevant to one, the end
+of the day for the other.**
+
+### Novel use — energy and risk, never success (R7)
+
+⛔ **Using a craft against its grain costs ENERGY and a WIDER CRIT BAND. It never reduces the success
+chance.** ⚠️ **Your odds are your odds.** Working against the grain shows up as effort and as risk, which is
+what happens when a tool is used for something it was not shaped for.
+
+⚠️ **The surcharge scales to the STRETCH, not to the character** — so a level-1 doing something small and
+clever pays almost nothing:
+
+| stretch | energy | crit band |
+|---|---|---|
+| adjacent — outside declared `functions`, within the spirit | +10% | unchanged |
+| real — outside what the craft does | +25% | slightly wider |
+| ⛔ against `notFor` | +50% | notably wider |
+
+**Wits reduces both:** rank 4 halves the surcharge · rank 10 removes it · **rank 14 makes novel use
+CHEAPER than intended use.**
+
+⚠️ **Stretch lives in the gear-shaped configure control beside conserve and surge, and is ORTHOGONAL to
+them** — conserve-stretch and surge-stretch are both expressible. ⛔ **A drained character cannot afford
+novel use: too tired to be clever.** ⬜ **`notFor` becomes a load-bearing mechanical field for the first
+time and wants a consistency pass.**
+
+---
+
 ## 4 · WHAT STOPS IT: WARDS
 
 **A ward answers a FAMILY, or one TYPE inside a family.** *An elemental ward* stops heat and cold and
@@ -846,6 +907,20 @@ fires.
 ---
 
 ## 6 · DYING
+
+⛔ **ATTENDING AN ENDING PRESERVES PERSONHOOD ACROSS THE CROSSING (R29).** ⚠️ **A GRADIENT, not a switch:**
+it decides **how much person survives**, not which of §48's two end states is reached. The other candidates —
+depth raised from, given-purpose-versus-merely-set, whether a name was kept — remain live.
+
+➡️ **This is what the Ashwarden discipline is FOR.** Attending is not ceremony or sentiment; it is the
+mechanism. ✅ **A tradition of people who sit with the dying because the alternative is that what comes back
+is less of someone.** ⚠️ **`the_attended_end` is the most load-bearing craft in the Death domain, and it was
+authored as though it already knew that.**
+
+⛔ **And something out there eats the leavings** — `the_gathering` (bestiary) thickens on unattended
+endings. ⚠️ **Its counter is not a fight: attend the endings in its reach and it starves.** ✅ **Reach is
+GEOGRAPHIC — a death is a death whoever dies, and the unattended dead are exactly the unnamed ones.**
+
 
 **Death is a ladder, not a switch.**
 

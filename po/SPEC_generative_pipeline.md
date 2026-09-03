@@ -149,3 +149,146 @@ finding 2) and template ranks (finding 3) mean **every future braid arrives need
    runtime copy — does `reconcile` need a rule, and is this the `{bySect}`/`{byRank}` mechanism again?
 7. ⬜ **Anything already true at HEAD.** ⚠️ **Aevi has made eight wrong claims this session in both
    directions. Assume a ninth.**
+
+---
+
+# ROUND 2 — CCode · 2026-09-02 · v1.9.332
+
+⚠️ **Q1 and Q5 are the same defect, it is one line, and I have fixed it. Q5's premise is the ninth claim.
+And §5's two generator fixes are built, with the rule taken from your own corpus rather than invented.**
+
+---
+
+## §R2.1 — ⛔ Q1 · THE ROOT CAUSE IS ONE HARDCODED LINE, WITH THE ANSWER TWO LINES ABOVE IT
+
+**`braids.js`, the DISCOVERY path:**
+
+```js
+const sources = parents.map(id => catalog[id]).filter(Boolean);      // ← the real sects are right here
+…
+id: discovery.id, name: nm, powerSystem: "learned", tradition: "learned", …
+```
+
+⛔ **`tradition: "learned"` was a literal**, while `sources[0].tradition` sat two lines above carrying a real
+sect. ⚠️ **`buildBraidDef` already did it correctly** — `sources[0]?.tradition || sources[0]?.powerSystem` —
+which is why the braids that came through THAT path (`ashwarden`, `lattice`) have real sects and the
+DISCOVERIES do not.
+
+✅ **FIXED.** A discovery now takes its sect from its sources. **A braid of two Ashwarden crafts is
+Ashwarden, is in a domain, is in a school, and can be taught.**
+
+⚠️ **`powerSystem` still reads `"learned"` and should** — that is a separate vocabulary (`metaphysical`,
+`ordered_nanite`, `combination`, `precursor`, `veil`, `baseline`) and *learned* is legitimate in it. **Only
+the sect was wrong.**
+
+---
+
+## §R2.2 — ⛔ Q5 / Q7 · THE NINTH CLAIM: `valley_craft` AND `radiant_folk` ARE REAL SECTS
+
+> §1: *"`the-held-place` — `valley_craft` — ⛔ retired"* · *"7 of 11 sit outside the tradition system"*
+
+**Measured against `traditionIndex.byId` (29 sects), and against every save:**
+
+| craft | tradition | real sect? |
+|---|---|---|
+| `the-held-place` | `valley_craft` | ✅ **yes** |
+| `braid_prism_sight_sonic_resonance` | `radiant_folk` | ✅ **yes** |
+| `braid_order_sense_palework` | `lattice` | ✅ |
+| `braid_deathsense_order_sense` · `braid_deathsense_palework` · `the-received-ending` | `ashwarden` | ✅ |
+| ⛔ `marrow-s-wings` · `the-declared-threshold` | `learned` | ⛔ |
+| ⛔ `motes-vigil` · `the-attended-end` · `the-kept-dark` | ⛔ **absent** | ⛔ |
+
+➡️ ⚑ **5 of 11, not 7.** ⛔ **And `valley_craft` is not marked retired anywhere** — I looked in the traditions
+rules and the lore. ✅ **Your Finding 1 is real and its cause is exactly what you suspected; the count and
+two of the examples are not.**
+
+⚠️ **The five that fail split cleanly by origin, which is the useful part:** the two braids carry the literal
+`"learned"` (§R2.1, now fixed), and the three bond-taught carry **no `tradition` key at all** — a different
+writer, and not the braid generator's doing.
+
+---
+
+## §R2.3 — ✅ §5.1 BUILT · THE DISTILLATION RULE COMES FROM YOUR OWN CORPUS
+
+I did not invent a rule. **Measured across the 61 authored recipes whose parents resolve:**
+
+| | mean | max |
+|---|---|---|
+| the parents' UNION | **4.67** | 8 |
+| ⚑ the authored CHILD | ⚑ **2.30** | ⚑ **4** |
+| of which inherited | 1.61 | |
+| of which novel | 0.69 | |
+
+➡️ ⛔ **An author keeps about a third of the union and adds two thirds of one new thing.** The generator was
+emitting the union — mean 4.1, which is the union mean. **Your Finding 2 is exactly right.**
+
+✅ **`distilFunctions` now keeps ~2 inherited + the emergent, capped at 4.** ⚠️ **Shared functions first** —
+what both parents do is what a joining amplifies — **then one from each parent in turn**, so two unlike
+crafts both show up rather than the first parent twice. ⛔ **Deterministic: no rng, so a braid cannot change
+shape between two loads of the same save.**
+
+### ⚠️ AND AN HONEST LIMIT, MEASURED
+
+On `warding_peace` the union is 5, the authored answer is **shield · bind**, and the rule gives
+**shield · resist**. ⚑ **Right size, different judgement.** ✅ **Which is the correct ambition for a
+generator** — it should produce something the right shape that a human then corrects, and that is precisely
+the *"authoring with a very good brief"* your §4 describes.
+
+---
+
+## §R2.4 — ✅ Q3 · NOTHING BREAKS. IT DEGRADES TO NOTHING.
+
+`fullCatalog()` is `{ ...CONTENT.abilities, ...character.customAbilities }` — **so a runtime craft IS in the
+live catalogue everywhere**, including battle.
+
+**`the-attended-end`, as it exists in the save, has no `functions` key, no `tree`, and no `mechanic`.**
+
+| | |
+|---|---|
+| `capabilitiesOf(it, 1)` | ⚑ **`[]`** — empty, no throw |
+| `abilityTier(it)` | 1 |
+
+➡️ ✅ **Your Finding 4 confirmed, with the reassurance that it fails soft.** ⚠️ **It is castable in prose and
+inert in mechanics** — which is worse than an error in one way (nobody finds out) and better in another
+(nobody's fight crashes).
+
+---
+
+## §R2.5 — ⬜ Q2 · `wantsAuthoring` IS THE RIGHT HOME, AND IT NOW HAS A PRECEDENT
+
+⚠️ **It has never run, so this is design — but the shape is already proven this session.** The holdings
+migration needed exactly this: a machine-made proposal a human must accept.
+
+✅ **What that built and this can reuse:** the proposal is **persisted on the character** (a reconcile step
+runs once, so a queue living in a return value is asked once and lost), **answered once**, and **remembered
+when declined**. ⬜ **I would not build a second queue.**
+
+---
+
+## §R2.6 — ⬜ Q6 · YES, AND IT IS THE `{byRank}` MECHANISM AGAIN
+
+A craft promoted into the corpus while a player holds the runtime copy is **exactly** the rename-map case:
+the save names an id, the catalogue now answers to it, and the two records differ.
+
+✅ **`ability_rename_map` already has the three forms** — a string, `{byRank}`, `{bySect}` — and the reconcile
+step is **all-or-nothing** so a half-migration cannot look finished. ⬜ **A promotion adds one entry mapping
+the runtime id to the authored one.** ⚠️ **The one new question is whether the player keeps their NAME for
+it** — `namedBy: "player"` is the strongest nomination signal in your §3, and it would be strange to take
+the name away at the moment the craft is honoured.
+
+---
+
+## §R2.7 — ⬜ WHAT IS BUILT AND WHAT IS NOT
+
+| | |
+|---|---|
+| ✅ discoveries land in a real sect | **built** |
+| ✅ functions distilled, not unioned, both paths | **built** |
+| ⬜ §5.2 — one honest rank instead of three template ones | **not built** — see below |
+| ⛔ stage 2, the nomination queue | **not built** — Q2 is a design call |
+| ⛔ promotion itself | **yours; it is authoring** |
+
+⚠️ **On §5.2 I would go further than you propose.** ⛔ **A generic rank does not merely teach a GM nothing —
+it passes the gate**, and that is the `foresee` boilerplate defect wearing new clothes. ⬜ **But "emit one
+rank and mark it `wantsAuthoring`" changes what a minted craft IS**, and six live saves hold crafts built
+under the old shape. **That wants your word before I touch it.**

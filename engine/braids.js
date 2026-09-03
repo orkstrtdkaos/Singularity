@@ -165,6 +165,42 @@ export function braidBaseCost(sources = [], fraction = 0.5, tension = null) {
   return tension ? Math.max(base + 1, Math.round(base * tension.factor)) : base;
 }
 
+/** ⛔ OI-25 §5.1 — A BRAID IS THE NEW MOVE THE JOINING MAKES, NOT THE SUM OF ITS PARENTS.
+ *
+ * ⚠️ THE GENERATOR EMITTED THE UNION, AND THE NUMBERS SAY SO. Measured across the 61 authored recipes
+ * whose parents resolve:
+ *
+ *   parent union   mean 4.67, max 8
+ *   authored child mean 2.30, max 4  — keeping 1.61 inherited and adding 0.69 novel
+ *
+ * ⛔ A RUNTIME BRAID CAME OUT AT MEAN 4.1 — the union, near enough. `the-declared-threshold` carries EIGHT
+ * functions: make · mend · reveal · conceal · transform · bind · shield · ward, which is both parents'
+ * whole vocabulary and says nothing about what the braid IS.
+ *
+ * ✅ SO THE RULE IS TAKEN FROM THE AUTHORS RATHER THAN INVENTED: keep about two inherited functions, add
+ * the emergent one if there is a legal one, cap at the authored maximum of four.
+ *
+ * ⚠️ SHARED FUNCTIONS FIRST — what BOTH parents do is what a joining amplifies. Then one from each parent
+ * in turn, so a braid of two unlike crafts still shows both sides rather than the first parent twice.
+ * ⛔ DETERMINISTIC BY CONSTRUCTION: no rng, so the same parents always distil the same way and a braid
+ * cannot change shape between two loads of the same save. */
+export function distilFunctions(sources = [], emergent = null, { keep = 2, cap = 4 } = {}) {
+  const lists = sources.map(s => (Array.isArray(s?.functions) ? s.functions : []));
+  const union = [...new Set(lists.flat())];
+  if (union.length <= keep) return emergent && !union.includes(emergent) ? [...union, emergent].slice(0, cap) : union.slice(0, cap);
+  const out = union.filter(f => lists.length > 1 && lists.every(l => l.includes(f)));   // what they share
+  for (let i = 0; out.length < keep; i++) {
+    let added = false;
+    for (const l of lists) {
+      const f = l[i];
+      if (f && !out.includes(f)) { out.push(f); added = true; if (out.length >= keep) break; }
+    }
+    if (!added) break;
+  }
+  if (emergent && !out.includes(emergent)) out.push(emergent);
+  return out.slice(0, cap);
+}
+
 export function buildBraidDef(character, components, catalog = {}, opts = {}) {
   const sources = components.map(id => catalog[id]).filter(Boolean);
   if (sources.length < 2) return null;
@@ -182,7 +218,8 @@ export function buildBraidDef(character, components, catalog = {}, opts = {}) {
   // level in the rank-1 grant; enrichment adds the validated verb.
   const parentFunctions = [...new Set(sources.flatMap(s => s.functions || []))];
   const emergent = isLegalEmergent(authored.emergentFunction, parentFunctions, opts.functionVocab) ? authored.emergentFunction : null;
-  const functions = emergent ? [...parentFunctions, emergent] : parentFunctions;
+  // ⛔ OI-25 §5.1 — DISTIL, DO NOT SUM. This was `[...parentFunctions, emergent]`: the union plus one.
+  const functions = distilFunctions(sources, emergent);
   const tradition = sources[0]?.tradition || sources[0]?.powerSystem || "learned";
   const namedByPlayer = !!opts.name;
   const name = smartClamp(String(opts.name || authored.name || `${srcNames[0]} × ${srcNames[1]}`), 60);
@@ -272,12 +309,19 @@ export function registerDiscoveryAbility(character, discovery, catalog = {}, { a
   if (!def) {
     // fallback: a minimal braid-shaped def from whatever resolved + the discovery's own words (rank 1, deepens).
     const sources = parents.map(id => catalog[id]).filter(Boolean);
-    const functions = [...new Set(sources.flatMap(s => Array.isArray(s.functions) ? s.functions : []))];
+    const functions = distilFunctions(sources);
     const energyCost = braidBaseCost(sources, braidFraction); // SNG-227 §3d: a discovered braid gets the premium cost too (priciest parent + a share of the cheaper)
     const nm = smartClamp(String(discovery.name), 60);
     const desc = smartClamp(String(discovery.description || `A craft discovered in play: ${discovery.name}.`), 400);
     def = {
-      id: discovery.id, name: nm, powerSystem: "learned", tradition: "learned", levelReq: 1, tier: 1, energyCost,
+      // ⛔ OI-25 §1 FINDING 1 — A CRAFT WITH NO SECT IS IN NO DOMAIN, NO SCHOOL AND NO CREATION POOL, AND
+      // CANNOT BE TAUGHT TO ANYONE. This line hardcoded `tradition: "learned"` — which is not one of the
+      // 29 sects — while `sources[0]` sat two lines above it carrying a real one. ⚠️ THAT is why Marrow's
+      // Wings is un-shareable: not a missing pipeline, but a craft outside the world's ontology.
+      // ⚠️ `powerSystem` STAYS "learned" — that vocabulary is separate and "learned" is a legitimate value
+      // in it. Only the SECT was wrong.
+      id: discovery.id, name: nm, powerSystem: "learned",
+      tradition: sources[0]?.tradition || sources[0]?.powerSystem || "learned", levelReq: 1, tier: 1, energyCost,
       attribute: sources[0]?.attribute || "practical", functions, harmRung: "none", effectTags: [], nativeOrCombination: "combination",
       // SNG-263 §9: a discovery derives from the craft it came out of, for the same reason a braid does.
       ...(deriveMechanic(sources, { verbs: functions, cfg: craftMechanics }) ? { mechanic: deriveMechanic(sources, { verbs: functions, cfg: craftMechanics }) } : {}),

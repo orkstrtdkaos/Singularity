@@ -8218,7 +8218,21 @@ await (async () => {
   // a minted braid is a FULL-schema ability.
   const def = br.buildBraidDef(char, ["a", "b"], catalog);
   check("196: a minted braid is a FULL-schema ability (id/name/tree/functions/harmRung/provenance)", !!def.id && !!def.name && Array.isArray(def.tree) && def.tree.length === t.maxRank && def.nativeOrCombination === "combination");
-  check("196: functions are the UNION of both parents", ["strike", "reveal", "conceal"].every(f => def.functions.includes(f)));
+  // ⛔ THIS GATE WAS DEFENDING THE DEFECT. It asserted the UNION — and OI-25 measured that the union is
+  // exactly what makes a runtime braid unusable: mean 4.1 functions against an authored corpus mean of
+  // 2.30, with `the-declared-threshold` carrying all eight of its parents' verbs and saying nothing about
+  // what the braid IS.
+  //
+  // ⚠️ THE REPLACEMENT RULE IS MEASURED, NOT PREFERRED: across the 61 authored recipes whose parents
+  // resolve, an author keeps 1.61 of a 4.67-function union and adds 0.69 novel — mean 2.30, max 4.
+  // ⛔ SO THE GATE NOW ASSERTS THE PROPERTY THE CORPUS SHOWS, and a return to the union fails it.
+  check("196: a braid distils rather than sums — it keeps fewer verbs than its parents had between them",
+    def.functions.length < new Set([...(catalog.a.functions || []), ...(catalog.b.functions || [])]).size
+    && def.functions.length <= 4,
+    `${def.functions.length}: ${def.functions.join(", ")}`);
+  check("196: …and every verb it keeps came from a parent or is the emergent move",
+    def.functions.every(f => [...(catalog.a.functions || []), ...(catalog.b.functions || []), def.minted?.emergentFunction].includes(f)),
+    def.functions.join(", "));
   // ⛔ CCODE-252 — THIS GATE WAS GREEN FOR AS LONG AS IT WAS WRONG. It asserted "wounding", the fixture
   // authored "wounding", and `braids.js` ranked "wounding" — and not one craft in the corpus has ever used
   // that word. The gate, the fixture and the code agreed with each other and disagreed with the game.

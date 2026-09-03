@@ -3498,6 +3498,76 @@ console.log("\n── §52 · person → unit → number ──");
     ML.bandThreat(hundred).power < 5 * ML.bandThreat(plain).power,
     `100 → ${ML.bandThreat(hundred).power} vs 20 → ${ML.bandThreat(plain).power}`);
 }
+/* ═════ §53 — OI-25: A CRAFT MADE IN PLAY IS A CANDIDATE, AND MUST BE IN THE ONTOLOGY ═════ */
+// ⛔ Erik: "that type of generative nature needs a clear pipeline to the skill base list — that's the heart
+// of the game engine." ⚠️ TWO DEFECTS UPSTREAM OF ANY PIPELINE, both in the generator:
+//
+//   1. A DISCOVERY GOT NO SECT. `tradition: "learned"` was hardcoded while `sources[0]` sat two lines
+//      above carrying a real one. ⛔ A craft with no sect is in no domain, no school and no creation pool,
+//      and cannot be taught — which is why Marrow's Wings is un-shareable.
+//   2. THE FUNCTIONS WERE THE UNION OF THE PARENTS, not the new move the joining makes.
+//
+// ⚠️ THE DISTILLATION RULE IS TAKEN FROM THE AUTHORS, NOT INVENTED. Measured across the 61 authored
+// recipes whose parents resolve: union mean 4.67 / max 8; authored child mean 2.30 / max 4, keeping 1.61
+// inherited and adding 0.69 novel.
+console.log("\n── §53 · OI-25 · the generator distils, and lands in a sect ──");
+{
+  const BR53 = await import("../engine/braids.js");
+  const { loadContentHeadless: lch53 } = await import("./headless_content.mjs");
+  const C53 = await lch53();
+  const sects53 = C53.traditionIndex?.byId || {};
+
+  // ⛔ THE DISTILLATION HOLDS THE AUTHORED SHAPE across every authored recipe's own parents.
+  {
+    const recipes = C53.rules.combinationRecipes.recipes || [];
+    let over = 0, measured = 0, unionOver = 0;
+    for (const r of recipes) {
+      const parents = (r.parts || []).map(p => C53.abilities[p]).filter(Boolean);
+      if (parents.length < 2) continue;
+      measured++;
+      const union = new Set(parents.flatMap(p => p.functions || []));
+      if (union.size > 4) unionOver++;
+      if (BR53.distilFunctions(parents).length > 4) over++;
+    }
+    check("§53: ⛔ no distilled braid exceeds the authored maximum of four functions",
+      over === 0 && measured > 20, `${over} over, across ${measured} parent sets`);
+    check("§53: ⚠️ …and the UNION would have — the rule is doing work, not agreeing by luck",
+      unionOver > 0, `${unionOver} parent unions exceed 4`);
+  }
+
+  // ⛔ THE REAL CASE. `the-declared-threshold` carries EIGHT functions in Silas's save — both parents' whole
+  // vocabulary. ⚠️ Its parents distil to something a person could describe.
+  {
+    const parents = ["working_model", "shadow_work"].map(i => C53.abilities[i]).filter(Boolean);
+    const union = [...new Set(parents.flatMap(p => p.functions || []))];
+    const dist = BR53.distilFunctions(parents);
+    check("§53: a braid keeps fewer functions than its parents had between them",
+      dist.length < union.length, `${dist.length} of ${union.length}`);
+    check("§53: …and every one it keeps came from a parent or is the emergent move",
+      dist.every(f => union.includes(f)));
+    check("§53: ⚠️ two unlike parents are BOTH represented — not the first one twice",
+      parents.length < 2 || dist.some(f => (parents[0].functions || []).includes(f)));
+  }
+
+  // ⛔ AND A DISCOVERY LANDS IN A REAL SECT. This is the one-line root cause of un-shareability.
+  const src53 = rd("engine/braids.js");
+  check("§53: ⛔ a discovery takes its sect from its sources, not the literal \"learned\"",
+    /tradition: sources\[0\]\?\.tradition \|\| sources\[0\]\?\.powerSystem/.test(src53));
+  check("§53: …and `powerSystem` still says \"learned\" — that vocabulary is separate and correct",
+    /powerSystem: "learned"/.test(src53));
+  check("§53: ⚠️ …so a braid of two ashwarden crafts is ashwarden, and CAN be taught",
+    !!sects53[C53.abilities["deathsense"]?.tradition], String(C53.abilities["deathsense"]?.tradition));
+
+  // ⚠️ AND THE GAP THIS DOES NOT CLOSE, ASSERTED AS OPEN. Bond-taught crafts carry no `functions` at all —
+  // they work because the narrator reads prose, and they resolve to an empty capability set rather than
+  // throwing. ⛔ Nomination and promotion (OI-25 §2 stage 2) are not built.
+  {
+    const CAP53 = await import("../engine/capabilities.js");
+    const inert = { id: "x53", name: "a taught thing", energyCost: 3, description: "prose only" };
+    check("§53: ⚠️ a craft with no functions degrades to nothing — it does not throw",
+      Array.isArray(CAP53.capabilitiesOf(inert, 1)) && CAP53.capabilitiesOf(inert, 1).length === 0);
+  }
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

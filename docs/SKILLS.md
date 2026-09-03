@@ -24,10 +24,16 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 ⬜ **Assigned by AUTHORING, not arithmetic:** `foothills.json`'s blends are weights across a whole *place*
 (who lives there), never a per-craft rule. Each craft's reason is recorded in its `_lineageWhy`.
 
-⚠️ **ONE DIVERGENCE WORTH ERIK'S EYE:** harmonic's authored blend is `threnodist .5 / lattice .3 / mason .2`,
-but by craft-nature its 16 crafts landed **mason 6 · lattice 5 · threnodist 5** — the smallest parent taking
-the most crafts. ⬜ **Defensible per craft** (`shatterpoint` finds where matter breaks; `chord_of_mending`
-sings a thing's *grain*) **and it inverts the blend. Flagged rather than forced.**
+✅ **AND THE BLENDS HAVE NOW BEEN RE-DERIVED FROM THE CRAFT DATA.** Erik, 2026-09-02: *"the harmonic breakdown was a guess prior to the allocation of skills — let's update the blend numbers now that we have better data."*
+
+| foothill | authored guess | re-derived from crafts |
+|---|---|---|
+| **harmonic** (16) | threnodist .5 / lattice .3 / mason .2 | ⚑ **mason .4 / lattice .3 / threnodist .3** — ⚠️ **the guess was inverted.** Sound-work at the Heights is more MATERIAL than mournful |
+| **radiant_folk** (15) | blazeborn .5 / wright .3 / lattice .2 | ⚑ **blazeborn .5 / wright .35 / lattice .15** — ✅ nearly right; the Plateau MAKES more and ORDERS less |
+| **valley_craft** (15) | stillhold .4 / wright .3 / rootkin .3 | ⛔ **TEN parents at low weight** — mason .2, then horizon/rootkin/stillhold .15 each, then six more |
+| god_named · bargainers · hardline · greyhearth | — | ⬜ **NOT re-derived** — fewer than 10 crafts, so the measurement would just BE the crafts. Authored intent stands |
+
+⛔ **THE VALLEY_CRAFT CORRECTION IS THE INTERESTING ONE.** A three-way blend was always the wrong SHAPE for the Valley — it is not a place where three peoples meet, it is the place where **everyone's craft has left a little behind.** ✅ **No dominant parent IS the character.** ⚠️ `_parentsAuthored` preserves every original guess.
 
 ---
 

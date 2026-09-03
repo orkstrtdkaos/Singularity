@@ -22,6 +22,7 @@ When a flow changes, update this document in the same commit.
 | CCode ships; Aevi reviews | `OpFlow_AeviShipReview` |
 | A gate goes red on a correct change | `OpFlow_GateRedOnCorrectChange` |
 | Ruling needed from Erik | `OpFlow_RulingRequest` |
+| ⛔ **A ruling has been made** | ⛔ **`OpFlow_RulingEnacted` — it reaches the HOW_IT_WORKS body, or it did not happen** |
 | Handoff needed (context boundary, compaction) | `OpFlow_Handoff` |
 
 ---
@@ -283,3 +284,51 @@ When a flow is missing:
 When practice drifts from documentation:
 1. Decide which is right — the flow or the practice.
 2. Update whichever is wrong. Log the drift in the handoff.
+
+---
+
+## ⛔ OpFlow_RulingEnacted — THE SINGLE SOURCE OF TRUTH
+
+**Added 2026-09-02 after three wrong reports on one subject in one day, with the answer already documented.**
+⚠️ **Distinct from `OpFlow_RulingRequest`, which is how a ruling is ASKED FOR. This is how one BECOMES TRUE.**
+
+### The rule
+
+> ⛔ **`docs/HOW_IT_WORKS.md` — the BODY — is the ONLY source of truth.**
+> **`po/` is working papers and is NEVER authoritative. Not even `po/RULING_*.md`.**
+
+⚠️ **MEASURED 2026-09-02: 23 of 32 rulings existed ONLY in `po/`.** ⛔ **A ruling that lives only in a
+working paper is a rumour with a commit hash.**
+
+### ⛔ A ruling is TWO steps, and Aevi kept stopping at one
+
+| # | step |
+|---|---|
+| 1 | File `po/RULING_*.md` — **the reasoning, the evidence, the alternatives** |
+| 2 | ⛔ **REWRITE the relevant `HOW_IT_WORKS` BODY section in present tense, and add a LOG row recording what it used to say** |
+
+⚠️ **STEP 2 IS THE RULING. Step 1 is only the argument for it.**
+
+### ⛔ Supersession
+
+- **A ruling REPLACES body text. It never adds a second section alongside.**
+- ⚠️ **One subject, ONE body section.** If two body sections discuss a subject, one is already wrong.
+- **The LOG carries what it used to say. The body carries only what is true now.**
+
+### ⬜ RETRIEVAL — before reporting ANY finding
+
+> ⛔ **Grep `HOW_IT_WORKS.md` for the subject — BODY FIRST, then LOG. Then the prior audit's owed list.
+> ONLY THEN the data.**
+
+⚠️ **On 2026-09-02 Aevi searched the DATA three times and never the DOC, and was wrong three times about
+one subject.** ⛔ **`valley_craft` was documented as RETIRED on line 88, with Erik's words attached, the
+whole time.**
+
+### ⚠️ The failure this exists to prevent
+
+⛔ **LOG line 85 withdrew `traditionKind`. BODY line 519 still recommended it.** ➡️ **A reader landing in
+the body got a withdrawn proposal presented as live — and did.**
+
+⛔ **NO EXISTING GATE CATCHES THIS.** Every ratchet tests doc-vs-code or content-vs-content. **Nothing tests
+DOC-VS-DOC.** ⬜ `SPEC_one_source_of_truth.md` §4 proposes the `ruling_anchor` gate; **until it exists this
+flow is discipline, and discipline already failed here once.**

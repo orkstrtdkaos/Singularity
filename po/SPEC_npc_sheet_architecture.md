@@ -124,3 +124,163 @@ accumulate at 150-cap scale, with real minted NPCs, before anything depends on i
    one, take it instead.
 7. ⬜ **Anything already true at HEAD.** ⚠️ **Aevi has made SEVEN wrong claims this session in both
    directions — including the one that voided the growth spec's premise. Assume an eighth is in here.**
+
+---
+
+# ROUND 2 — CCode · 2026-09-02 · v1.9.329
+
+⚠️ **Q1's fear is correct and measurable, Q5's fear is not, and there is an eighth claim in §3 that inverts
+your biggest stated risk.**
+
+✅ **First, a claim I went to dispute and could not:** *"52 authored people now carry `assistTags`."* I
+measured **43** in `npcs/` and was about to correct you — **43 NPCs + 9 companions = 52.** Your number is
+right.
+
+---
+
+## §R2.1 — ⛔ Q1 · IT IS NOT A DEFERRAL. IT IS A FIELD-BY-FIELD FALLBACK, AND THE DEFAULT IS THREAT 20.
+
+The doc-comment says *"an authored `opponent.skills[]` overrides the synthesis entirely."* ⛔ **The code does
+not.**
+
+```js
+const threat = Number(opponent.threat) || 20;
+…
+if (opponent.skills?.length) {
+  return { attributes: opponent.attributes || { practical: attr, … },
+    energy: opponent.energy ?? energy, health: opponent.health ?? health,
+    soak: opponent.soak ?? soak, soakLayers: opponent.soakLayers ?? soakLayers, skills: opponent.skills, … };
+}
+```
+
+⚠️ **`skills` defers completely. Everything else is `authored ?? DERIVED-FROM-THREAT`** — and with no
+`threat` supplied, **threat is 20.**
+
+➡️ ⛔ **PASS PELL'S SHEET AS `skills[]` ALONE AND SHE ARRIVES WITH A THREAT-20 BODY** — attributes, health,
+soak and energy synthesised for a middling raider, wearing a level-27 smith's crafts. ✅ **Exactly the
+partial deferral you named, and it is real today.**
+
+### ✅ AND THE FIX IS ALREADY SITTING THERE
+
+`sheetFor` returns **every field that branch reads**: `attributes`, `health`, `maxHealth`, `energy`,
+`maxEnergy`, `soak`, `skills`. ➡️ **The bridge is "pass the whole sheet", not "pass its skills".**
+
+⬜ **One line I would add while there:** make the branch refuse a sheet that supplies `skills` and nothing
+else, rather than silently filling the gap at threat 20. **A half-passed sheet should be an error, not a
+raider.**
+
+---
+
+## §R2.2 — ✅ Q5 · THE SHAPES MATCH. THE MISMATCH YOU FEARED IS NOT THERE.
+
+| | |
+|---|---|
+| synthesised | `{ function, name, tier, attribute }` |
+| ⚑ `battleSkillsFor` | `{ id, function, name, tier, attribute, energyCost }` — **a superset** |
+
+✅ **And `battleSkillsFor` is the converter**: it reads an authored `abilities: [{abilityId, level}]` and
+emits `skills[]`. **Pell's 17 crafts become 32 entries in exactly the right shape.**
+
+⚠️ **So `abilities` vs `skills` is not a shape mismatch — it is a MISSING CALL.** The conversion exists and
+is test-only, which is the same finding one layer down rather than a new one.
+
+---
+
+## §R2.3 — ⛔ Q7 · THE EIGHTH CLAIM, AND IT INVERTS YOUR BIGGEST RISK
+
+> §3: *"minted — derived from `role` + `firstMet` alone. `derivedLevel` already gives a stranger **15**."*
+> §5: *"a stranger derives to 15. Fine for one bandit, possibly wrong for a hundred."*
+
+**Measured:**
+
+| record | derives to |
+|---|---|
+| bare `{ id, role }` | ⚑ **1** |
+| just minted — `met: 1`, `firstMet` today | ⚑ **1** |
+| met 40 times across 400 days | **15** |
+
+⛔ **15 IS THE *KNOWN* STAGE, NOT THE MINTED ONE.** And `npcsheet.js` says so in its own comment: *"⚠️ A
+STRANGER IS LEVEL 1 AND THAT IS CORRECT — the level is a claim about what the story has shown, not a
+courtesy."*
+
+➡️ ⚠️ **YOUR §5 RISK ROW FLIPS.** The danger is not that a hundred bandits are too strong at 15 — it is that
+**a hundred freshly minted strangers are all level 1.** ✅ **Which is arguably correct** (the story has shown
+nothing about them) **and is a different tuning question entirely**: a mass of nobodies, not a mass of
+mid-tier fighters.
+
+⚠️ **Two small ones:** `npcsheet.js` is **395** lines, not 377 — it has grown. And `REGISTRY_CAP = 150` with
+the protection rule is ✅ **exactly as you describe it.**
+
+---
+
+## §R2.4 — ✅ Q2 · A VIEW. `sheetFor` WRITES NOTHING.
+
+**Measured: it is a pure function of the record** — no assignment to `entry`, no persistence, no cache.
+✅ **So your §3 holds: eviction needs no lifecycle because there is nothing to evict.**
+
+⚠️ **One coupling to know about:** `battleSkillsFor` needs a **catalogue handle** to resolve `abilityId` →
+craft. ➡️ **The caller must carry one.** That is the only thing standing between "a sheet is free" and "a
+sheet needs context".
+
+---
+
+## §R2.5 — ✅ Q3 · `synthesizeStaticSheet` IS CORRECTLY OUTSIDE
+
+`{ static: true, staticResist, tacticTags: ["unmoving"], skills: [ one "it holds" entry ] }`, called once at
+`app.js:13737` for a thing with a `resist` and a `holdTier`.
+
+➡️ ⛔ **It is a door, not a person, and it never acts.** ✅ **It wants nothing from this architecture and
+should not be placed in it** — a third producer that models a different KIND of thing is not a third
+competing sheet.
+
+---
+
+## §R2.6 — ⬜ Q4 · SUB-LINEAR, AND THE CURVE IS ALREADY IN THE ENGINE
+
+⛔ **Not a sum.** A hundred peasants would out-threat an epic, and the same mistake has a measured cost
+already recorded: the naive K× aggregate *"matches on the average and is 614% wrong on the spread."*
+
+✅ **`predictAggregate` is the existing answer — mean scales with K, spread with √K** — and it is what the
+folded party already uses.
+
+⬜ **My recommendation:** `threat(unit) = max(member threat) + a √K term over the remainder`. **The strongest
+member sets the floor; numbers add sub-linearly above it.** ✅ **Using the same compression the party layer
+uses means the two scales agree by construction rather than by tuning.**
+
+---
+
+## §R2.7 — ⛔ Q6 · I WOULD NOT TAKE YOUR FIRST CALLER. IT BUILDS THE DEFECT ON PURPOSE.
+
+> §5: *"mint a sheet on registry entry and do not wire it to combat yet."*
+
+⚠️ **That is a writer with no reader, chosen deliberately.** ⛔ **This session has spent most of its time on
+exactly that shape** — `folkAccessible`, `backlashRung`, `holdings`, `sectFlavour`, `local_layouts`,
+`npcsheet` itself. **A sheet nobody reads is not safe. It is invisible, and invisible is how all six of those
+survived for weeks.**
+
+✅ **THE SAFEST FIRST CALLER IS ONE THAT READS BUT CANNOT HURT: the GM block.**
+
+| | |
+|---|---|
+| exposure | ⚑ **immediate** — every scene with that person in it |
+| blast radius if wrong | ⚠️ **the narrator says something odd.** Nothing resolves differently, no number moves |
+| precedent | ✅ `groundDetail` (R28) is this exact shape, built and gated today |
+| what it proves | ⛔ **that 395 lines of never-run code survive contact with 112 real records** |
+
+➡️ **Then combat, once it has been wrong in public a few times and been fixed.**
+
+---
+
+## §R2.8 — ⬜ THE ORDER I WOULD BUILD IT IN
+
+| # | step | note |
+|---|---|---|
+| 1 | `sheetFor` → a GM block for the people in the scene | ✅ reads, cannot hurt |
+| 2 | Fix the bridge to pass the WHOLE sheet, and refuse a half-passed one | ⛔ or threat-20 bodies arrive silently |
+| 3 | Wire it as the opponent path for a NAMED person | after 1 has been live |
+| 4 | Unit aggregation upward; `predictAggregate` collapse downward | ⬜ Q4 |
+| 5 | Growth, on the now-live sheet | ⛔ was blocked on this whole question |
+
+✅ **§2's ruling is right and I would build it.** ⚠️ **The two systems really are two directions of one
+ladder** — and the thing that makes that true is that a threat number cannot be decomposed into wards and
+types, while a roster of people can always be collapsed into a number.

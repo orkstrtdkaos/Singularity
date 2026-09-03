@@ -577,6 +577,107 @@ until a full night's rest, and they say so.
 
 ⚠️ **A `cannot` is a SCOPE LIMIT, not a bill.** It says what the craft will not produce.
 
+### What it costs to LEARN — skill points (R1, R9, R10, R16, R17, R20)
+
+⚠️ **Distinct from energy above. Energy is what a USE costs; skill points are what OWNING it costs.**
+
+**Tier price, and distance is ADDITIVE — never multiplicative (R1):**
+
+```
+learnPointCost = tierPrice + band          band: 0 home · 1 near · 2 far
+tierPrice:  T1 = 1 · T2 = 2 · T3 = 2 · T4 = 3 · T5 = 3
+```
+
+| tier | home | near | far |
+|---|---|---|---|
+| T1 | 1 | 2 | 3 |
+| T2 · T3 | 2 | 3 | 4 |
+| T4 · T5 | 3 | 4 | 5 |
+
+⛔ **A far T5 costs 5, not 15.** Distance makes cross-domain learning *meaningfully* more expensive, never
+prohibitive — the `+1 levelReq` cross-training gate is the real difficulty signal. ⚠️ **`crossClass.costMultiplier`
+is superseded.**
+
+**Tier CEILING by standing (R10), and the antipode's rises with `lean` (R16):**
+
+| standing | ceiling |
+|---|---|
+| primary | 5 |
+| secondary | 4 |
+| adjacent · tertiary | 3 |
+| far | 2 |
+| ⚑ **antipode** | ⚠️ **derived from `lean`, not fixed** |
+
+⛔ **R10 and R16 are ONE mechanism.** The lean a character earns buys **both** price parity **and** depth —
+dabble and you are capped shallow *and* surcharged; commit and both recede together. ⚠️ **The barrier is to
+dabbling, not to crossing.**
+
+**Antipode surcharge (R9):** `+ round(2 × lean)` on antipole purchases only. ✅ Balance earns **parity**, not
+a discount. ⬜ Band-migration (dial B) is deferred, not rejected.
+
+**Training to rank 2 (R17, supersedes the retracted R8):** ⚑ **`tierPrice`, no band** — 1 / 2 / 2 / 3 / 3.
+⚠️ **Cheaper than learning, and that reads correctly: deepening something you already hold should cost less
+than acquiring something new.**
+
+⛔ **Training unlocks at LEVEL 10, with NO tier gate (R20, supersedes the retracted R19).** ⚠️ A tier gate
+measured **3%** of Silas's 31 stuck rank-1 crafts at L30 — **a played sheet is not tier-sorted.** ✅ After
+L10, any craft you own trains to rank 2.
+
+⚠️ **RANK 2 IS THE NATURAL RESTING STATE of a craft carried a long time, not a selective investment.** A
+high-level character should have few rank-1 crafts left. **No cap on how many may be held at rank 2.**
+➡️ **Breadth-at-rank-2 and depth-at-rank-3 are the two build shapes, and rank 3 stays GM-granted — the thing
+breadth cannot buy.**
+
+---
+
+## 1b · WHAT A CHARACTER STARTS WITH, AND WHEN CRAFTS BECOME AVAILABLE
+
+### Creation (R2, R3, R4, R15, R24)
+
+⛔ **Sex is SET at generation, for PCs and NPCs (R24).** For a player character it is chosen at creation and
+**gender matches sex**. For an NPC it is documented the first time they become anything — **not a discovery
+arc, not deferred.** ⚠️ **`gender`/`pronouns` are PRESENTATION and gate nothing; `sex` is canonical and gates
+romance.** ⛔ **Romance is opposite-sex only.** *"It"* is for anything not yet materialised as someone, and
+for things genuinely neither.
+
+⛔ **A dedicated attribute-allocation step exists on ALL THREE creation paths (R2).** It may be
+suggestion-seeded from prologue signals; **the player adjusts and locks, and it completes BEFORE the ability
+pick.** ⚠️ Two of three paths previously never set `state.attrs`, so the argmax resolved to mental for every
+character on those paths.
+
+**The starting kit is a forced SENSE pick from any sect in the primary domain (R3)** — *"free" means free to
+OBTAIN, not free to use; energy costs are unchanged. **All 14 domains carry a tier-1 sense craft; nothing
+needs authoring.**
+
+⛔ **A starting LOCATION is chosen at creation (R4)** — it must be within one of the character's domains, or
+a folk/crossing location.
+
+**At level 1 the offered pool is every tier-1 craft (R15)** — `energyCost <= 6`, which surfaces all 101 and
+gives every domain at least 3.
+
+### Unlock — the corpus arrives as a curve (R12, R13, R14)
+
+⛔ **Tier sets a band; `energyCost` places the craft inside it (R12).** ⚠️ **The whole corpus is open by
+LEVEL 60 (R13)** — not 100. **After 60, progression stops being acquisition and becomes depth.**
+
+**The bands, from play (R14):**
+
+| levels | what it is |
+|---|---|
+| 1–10 | personal capability |
+| 10–30 | ⚠️ **party building** |
+| 30–60 | Band, outpost, army, strongholds |
+| 60–85 | Epic → Legendary — the corpus is open; the choice is what you deepen |
+| 85–100 | ⛔ **Mythic — depth only** |
+
+⚠️ **Skill points are 2/level, and Insight is the sub-attribute that grants more (R6/R11)** — +1 at rank 7,
++1 more at rank 14. ⬜ **The milestone RANKS are provisional**: because sub-points are player-allocated, a
+dumper reaches them at L11 rather than late — an opening build decision rather than a late-game reward, and
+Erik has accepted that shape for now.
+
+⛔ **Points bind in every band at every level. The breadth cap is decorative** — a L100 home-tradition
+specialist banking every point affords 87 crafts against a cap of 101.
+
 ---
 
 ## 2 · HOW A RANK RESOLVES

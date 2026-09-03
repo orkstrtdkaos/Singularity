@@ -509,15 +509,34 @@ axis healing across itself), **and** the domain grouping, where a Verist sits wi
 
 ### What is NOT one of the fourteen, and stays out
 
-⛔ **Foothills — `harmonic` · `radiant_folk` · `god_named` · `bargainers` (35 crafts).** ⚠️ **A foothill is
-where a pole becomes PURCHASABLE — it is not a fifteenth tradition**, and folding it in would destroy the
-distinction.
+⛔ **SUPERSEDED 2026-08-30 — SEE THE LOG ROW OF THAT DATE. The text below replaces what stood here, which
+recommended `traditionKind` AFTER Erik had withdrawn it.** ⚠️ **A reader who landed in this section got a
+withdrawn proposal presented as live, and did — three wrong reports on 2026-09-02 traced to exactly that.**
 
-⛔ **`valley_craft` (18 crafts) — the FOLK COLLECTION.** What ordinary people do without a tradition's
-apparatus.
+✅ **ONLY THE POLES ARE TRADITIONS.** Erik, 2026-08-30: *"There is no folk tradition. Only the poles are
+traditions. The folk idea was just that everyone could access a small number of abilities from each
+domain."*
 
-⬜ **Both need `traditionKind: "pole" | "foothill" | "folk"`**, because today a foothill and a tradition
-**look identical in an ability record**, which is why they read as orphans.
+⛔ **`traditionKind: "pole" | "foothill" | "folk"` IS WITHDRAWN, and the reason matters:** it made folk a
+KIND OF TRADITION, which is the thing being retired. ✅ **Folk access is an ACCESS FLAG on a craft —
+`folkAccessible: true` — never a lineage.**
+
+✅ **`valley_craft` IS RETIRED.** Its 18 crafts were emptied into their real parents. Erik: *"it's too
+muddled… eliminate the reference to valleycraft in terms of DOMAIN/TRADITION."* ⚠️ **Its authored parents
+were a three-way blend — stillhold .4 / wright .3 / rootkin .3 — so 18 crafts under one label were never
+one people's craft.**
+
+⬜ **`harmonic` (16) and `radiant_folk` (15) still carry a non-pole `tradition` value, and this is the ONE
+OPEN ITEM.** ⚠️ `AUDIT_SNG-257`: *"Radiant and Harmonic are folk ONLY because they were the FIRST built —
+before the 'one pole, one attribute' discipline existed. **They should get their own PURE pole-trees.**"*
+
+✅ **Their attribute re-tags ARE DONE** — harmonic 43%→69% practical, radiant_folk 36%→80%, senses correctly
+left on mental. ⛔ **What was never ruled is `AUDIT_SNG-257` owed item 3: do they claim a real AXIS on the
+ring?** ⚠️ **Until that is answered `domainOfTradition()` returns null for both, and 31 coherent crafts sit
+outside creation pools, R3's sense slot, R21's standing ladder and the schools.**
+
+⚠️ **`god_named` (3) · `bargainers` (3) · `cross_pole_braid` (3) carry tradition ids that appear nowhere in
+`traditions.json`. Unresolved, and smaller.**
 
 ### ⬜ MIGRATION STATE — and this is why nothing below has been rewritten yet
 

@@ -82,7 +82,7 @@
     "STEALTH",
     "CHASE"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "blazeborn",
    "nativeOrCombination": "native",
    "harmRung": "incapacitating",
    "powerSystem": "precursor",
@@ -166,7 +166,9 @@
    "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend.",
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ blazeborn — bends light itself. Radiance's native act",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "radiant_lance",
@@ -246,7 +248,7 @@
     "FIGHT",
     "PUZZLE"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "blazeborn",
    "nativeOrCombination": "native",
    "harmRung": "lethal",
    "powerSystem": "precursor",
@@ -328,7 +330,9 @@
    "_lightMigrated_20260829": "⚠️ `light` -> `radiance`. ⛔ The rename was RULED 2026-08-28 and never executed — burning is elemental `heat`, shining is physics `radiance`. Found when `light` was removed from `damage_types.json` and two crafts were still authoring it.",
    "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend.",
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ blazeborn — light focused to a coherent beam",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "daybreak_mantle",
@@ -400,7 +404,7 @@
    "challengeTypes": [
     "SOCIAL"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "blazeborn",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "precursor",
@@ -458,7 +462,9 @@
    "_powerSystemWas": "radiant",
    "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ blazeborn — gathers radiance that inspires and commands",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "light_well",
@@ -549,7 +555,7 @@
     "SURVIVE",
     "EXPLORE"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "wright",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "precursor",
@@ -684,7 +690,9 @@
    "_powerSystemWas": "radiant",
    "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ wright — STORES light IN A VESSEL. A made thing that holds a charge",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "sun_coax",
@@ -761,7 +769,7 @@
    "challengeTypes": [
     "SURVIVE"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "blazeborn",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "precursor",
@@ -825,7 +833,9 @@
    "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ blazeborn — concentrates sunlight to warm, dry, ripen",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "afterimage",
@@ -903,7 +913,7 @@
     "CHASE",
     "STEALTH"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "blazeborn",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "precursor",
@@ -980,7 +990,9 @@
    "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend.",
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ blazeborn — a hanging visual echo — light made to lie about where you are",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "clarity_lens",
@@ -1055,7 +1067,7 @@
     "INVESTIGATE",
     "PUZZLE"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "wright",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "precursor",
@@ -1117,7 +1129,9 @@
    "_powerSystemWas": "radiant",
    "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ wright — SHAPES a floating lens. Makecraft, in light",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "glimmer_script",
@@ -1193,7 +1207,7 @@
     "EXPLORE",
     "STEALTH"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "wright",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "precursor",
@@ -1256,7 +1270,9 @@
    "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves.",
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ wright — writes persistent marks that only keyed light reveals",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "beacon_thread",
@@ -1340,7 +1356,7 @@
     "EXPLORE",
     "INVESTIGATE"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "precursor",
@@ -1415,7 +1431,9 @@
    "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend.",
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ lattice — spins a LINE between chosen people — a binding that holds them related",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "dawn_surgery",
@@ -1492,7 +1510,7 @@
    "challengeTypes": [
     "SURVIVE"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "blazeborn",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "precursor",
@@ -1570,7 +1588,9 @@
    "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
    "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend.",
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ blazeborn — operates BY light: clean cuts, sealed vessels, sight into the wound",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "prism_ward",
@@ -1658,7 +1678,7 @@
     "STEALTH",
     "INVESTIGATE"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "precursor",
@@ -1750,7 +1770,9 @@
    "_wardMigrated_20260829": "⚠️ WARD `light` -> `radiance`. ⛔ MY MORNING MIGRATION WAS HALF A MIGRATION: I migrated `damageType` and `damageMix` and NEVER CHECKED `wardTypes`. Five crafts were warding a type that no longer existed — a ward against nothing, which reads as protection and is not. ⚠️ Found by the question-check flagging `heat` as UNWARDED and my going to look for the natural heat ward.",
    "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend.",
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ lattice — a STANDING LATTICE that reports whatever crosses it. Named for what it is",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "sun_seal",
@@ -1837,7 +1859,7 @@
     "EXPLORE",
     "FIGHT"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "wright",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "guard",
@@ -1906,7 +1928,9 @@
    "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_wardMigrated_20260829": "⚠️ WARD `light` -> `radiance`. ⛔ MY MORNING MIGRATION WAS HALF A MIGRATION: I migrated `damageType` and `damageMix` and NEVER CHECKED `wardTypes`. Five crafts were warding a type that no longer existed — a ward against nothing, which reads as protection and is not. ⚠️ Found by the question-check flagging `heat` as UNWARDED and my going to look for the natural heat ward.",
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ wright — INSCRIBES a ward. Inscription is making",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "light_borne",
@@ -1948,7 +1972,7 @@
    ],
    "powerSystem": "precursor",
    "gated": "learned",
-   "tradition": "radiant_folk",
+   "tradition": "blazeborn",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "shape": "reposition",
@@ -1997,7 +2021,9 @@
    "_powerSystemWas": "radiant",
    "_powerSystemFix": "⛔ SNG-524. Was `radiant` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. Derived: blazeborn 0.5 + wright 0.3 = precursor 0.8.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ blazeborn — becomes light-buoyant. You ARE a lantern",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   },
   {
    "id": "prism_sight",
@@ -2064,7 +2090,7 @@
     "STEALTH",
     "FIGHT"
    ],
-   "tradition": "radiant_folk",
+   "tradition": "blazeborn",
    "powerSystem": "precursor",
    "operativeAxis": [
     "perceptionDepth",
@@ -2123,7 +2149,9 @@
    "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10.",
    "tier": 1,
    "folkAccessible": true,
-   "_foothillRevert_20260902": "⛔ REVERTED 2026-09-02. Aevi allocated this craft's `tradition` to a parent pole using `traditions.json`'s `foothillOf` — WITHOUT OPENING `content/packs/core/rules/foothills.json`, which is the authoritative file and says something different. ⚠️ TWO ERRORS: (1) a foothill is NOT absorbed into a parent — `_theRule`: 'A FOOTHILL IS NOT A LESSER TRADITION, IT IS A POLE MADE USABLE', and there are 26 canonical traditions, 24 poles PLUS the foothills; (2) the parents she used were wrong — harmonic's authored blend is threnodist 0.5 / lattice 0.3 / mason 0.2 on axis `emotional_logical`, and ENGINEWRIGHT IS NOT A PARENT AT ALL. ✅ `tradition` restored from `_foothill`. ⚠️ `folkAccessible: true` KEPT — that part was correct per Erik: tradition and folk access are orthogonal."
+   "learnedAt": "radiant_folk",
+   "_lineageWhy": "⚑ blazeborn — sees the hidden spectra",
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

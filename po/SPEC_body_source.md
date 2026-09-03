@@ -266,3 +266,11 @@ The 22 abyssal crafts **carry their own `powerSystem`** (precursor ×20, combina
 - **§3 marcher → body** and **§4 somatic split** — content. Gated as *not preempted* (`levelled_crossbow` stays metaphysical).
 - **Per-rank source** — feasible, shape above, no ruling to implement.
 - **The `power_sources.json → sources` prose** — three contradictions with the live table, all in a block nothing reads. Yours.
+
+## ⚠️ HEAD FALLOUT I CLEARED ON THE WAY — R33 landed in content before the fixtures caught up
+
+The pre-push ratchet refused this at first: `smoke 0 → 6`, `content_ci 13 → 15`. ⛔ **All eight were red at HEAD before my change** (measured in a detached worktree of `23d9bad5`). Every one was a fixture or a check that `find`s a craft by `tradition === "harmonic"` / `"god_named"` / `"radiant_folk"` — **which R33 made empty by ruling on 2026-09-02.** Re-aimed, not deleted: the tradition/foothill machinery is now driven by a declaration-less synthetic craft (the one shape that still reaches it), the harmonic check asserts *the value its authored weights imply* rather than the pinned `combination` (your re-derived blend no longer ties — ordered .7 / wild .3), and the old non-vacuity guard "a foothill still HAS crafts" became the R33 fact itself: no craft carries a place as its lineage, and the place's crafts carry it as `learnedAt`. `content_ci`'s SNG-101b "is a real tradition" now also accepts a `learnedAt` place, because `native_grants.json` is keyed by **origin**, and an origin can be a place.
+
+⬜ **Two of yours surfaced by that:**
+- `content/packs/core/rules/origins.json` → the `harmonic` origin still says **`"nativeTradition": "harmonic"`** — a place named as a lineage, the exact confusion R33 retracts. It still *works* (the native-grant reader falls through to the origin id) but it is authored wrong; the same is likely true of `radiant_folk`.
+- `tests/tradition_matrix.mjs` **crashes at HEAD** (`trad.length` on null, line 150) and the ratchet does not see it — a crash prints no `FAIL` line, so it counts as zero. That is a hole in the ratchet, separate from this spec; noting it so it is not mistaken for green.

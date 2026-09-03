@@ -7181,7 +7181,10 @@ await (async () => {
     // ⚠️ UNSCORED IS NOT UNAFFECTED. No band is authored for the nanite axis yet, so the card names
     // the country rather than claiming the field does not touch the craft — the second is a claim about
     // the world, the first is a statement about what we know.
-    const gnAb = Object.values(C385.abilities).find(a => a.tradition === "god_named");
+    // ⚠️ R33: no craft carries `god_named` as its tradition any more — it is a place, and its three crafts
+    // carry it as `learnedAt`. The claim here is about the SCHOOL branch (gn_vested → nanite) scoring on the
+    // nanite field, so a synthetic craft of that tradition is the honest fixture, not a real one.
+    const gnAb = { id: "syn_god_named", name: "a God-Named craft", tradition: "god_named" };
     const gnCard = gnAb && sb385.groundCardFor(gnAb, { domains: { primary: "god_named" }, schools: { god_named: "gn_vested" } },
       { schools: sch385, substrate: sd385, location: heart });
     // ⚠️ THIS GATE WENT RED ON THE RATIFICATION AND WAS RIGHT TO. It asserted the craft was UNSCORED
@@ -17539,12 +17542,16 @@ await (async () => {
     // instead of storing one — is unchanged and still worth proving; it just needs a foothill that has
     // crafts. ⛔ THE MERGER WILL RETIRE MORE OF THESE, so the gate asks rather than assumes.
     const craftIn = (t) => Object.values(C199.abilities || {}).find(a => a.tradition === t);
-    const liveFoothill = ["valley_craft", "harmonic", "radiant_folk"].find(t => craftIn(t));
+    // ⛔ R33 (SNG-443) RETIRED ALL OF THESE FIXTURES BY RULING, not by merger: a foothill is a place of access,
+    // and since the 2026-09-02 lineage assignment NO craft carries one as its `tradition`. The computation is
+    // still real — `foothills.json` authors the parents — so “live” now means AUTHORED, and the craft that
+    // reaches the branch is synthetic. The corpus-level fact R33 makes true is asserted below instead.
+    const liveFoothill = ["valley_craft", "harmonic", "radiant_folk"].find(t => fh221.foothills?.[t]?.parents);
     // ⛔ SPEC_body_source.md §0 — THE CRAFT'S OWN `powerSystem` NOW WINS, and every real craft has one, so a
     // real craft never reaches the tradition/foothill branches this block exists to prove. Strip the
     // declaration: the claim under test is what the TRADITION machinery answers, not what the craft declares.
     const undeclared = (a) => a && { ...a, powerSystem: undefined };
-    const srcOf = (t) => SU.craftSource(undeclared(craftIn(t)), noSchool, C199.schools, ps221, fh221);
+    const srcOf = (t) => SU.craftSource(undeclared(craftIn(t)) || { id: "syn_" + t, tradition: t }, noSchool, C199.schools, ps221, fh221);
 
     // ⛔ A PURE SCHOOL KEEPS ITS TRADITION'S SOURCE — the comment in substrate.js said so and the code
     // returned `source: school.extension` (null) and stopped. `schoolForTradition` DEFAULTS to the pure
@@ -17556,9 +17563,19 @@ await (async () => {
     // ⛔ A FOOTHILL IS COMPUTED FROM ITS PARENTS, NEVER STORED. And harmonic is the proof: its parents
     // resolve 50/50 between the two nanite states — a tie — which resolves to `combination`, exactly what
     // its 15 crafts already carry. A computation that reproduces a value nobody derived it from.
-    check("CCODE-221: a foothill computes its source from its parents (harmonic's tie → combination)",
-      srcOf("harmonic")?.source === "combination" && srcOf("harmonic")?.via === "foothill",
-      JSON.stringify(srcOf("harmonic")));
+    // ⚠️ THE TIE IS GONE AND THE GATE MUST NOT PIN IT. Aevi re-derived harmonic's blend from the craft data on
+    // 2026-09-02 (mason .4 / lattice .3 / threnodist .3 — ordered .7, wild .3), so it no longer ties. Asserting
+    // `combination` would assert the old numbers; asserting the value the AUTHORED WEIGHTS imply asserts the rule.
+    const implied = (t) => {
+      const w = {};
+      for (const [p, v] of Object.entries(fh221.foothills?.[t]?.parents || {})) { const pr = ps221.byTradition?.[p]?.primary; if (pr) w[pr] = (w[pr] || 0) + Number(v); }
+      const r = Object.entries(w).sort((a, b) => b[1] - a[1]);
+      const alias = { ordered_nanite: "nanite", wild_nanite: "wild" };
+      return r.length > 1 && r[0][1] === r[1][1] ? "combination" : (alias[r[0]?.[0]] || r[0]?.[0]);
+    };
+    check("CCODE-221: a foothill computes its source from its parents — the value its authored weights imply",
+      !!srcOf("harmonic") && srcOf("harmonic").source === implied("harmonic") && srcOf("harmonic").via === "foothill",
+      `${srcOf("harmonic")?.source} vs implied ${implied("harmonic")}`);
     // ⚠️ THE CLAIM IS `via: "foothill"` WITH A COMPUTED SOURCE — not any particular source. My first
     // repair asserted `=== "metaphysical"`, which was valley_craft's OWN answer (its parents are stillhold
     // 0.4 metaphysical, wright 0.3 precursor, rootkin 0.3 wild_nanite, so metaphysical carried the weight).
@@ -17575,7 +17592,12 @@ await (async () => {
       new Set(fhAll.map(r => r.source)).size >= 2 || fhAll.length < 2,
       fhAll.map(r => r.source).join(", "));
     // ⛔ NON-VACUITY: if every foothill is retired this must fail rather than pass by finding nothing.
-    check("CCODE-221: …and at least one foothill still HAS crafts to resolve", !!liveFoothill);
+    // ⛔ NON-VACUITY, RE-AIMED: the old guard demanded a craft CARRY a foothill, which R33 forbids. What must
+    // hold now is the ruling itself — no craft's lineage is a place, and the place's crafts still exist as ACCESS.
+    check("CCODE-221: …R33 — no craft carries a foothill as its lineage, and the foothill's crafts carry it as `learnedAt`",
+      !!liveFoothill && !Object.values(C199.abilities).some(a => fh221.foothills?.[a.tradition])
+      && Object.values(C199.abilities).some(a => fh221.foothills?.[a.learnedAt]),   // valley_craft was retired into parents; harmonic and radiant_folk crafts are learnedAt
+      `${Object.values(C199.abilities).filter(a => fh221.foothills?.[a.tradition]).length} carry a place as lineage`);
 
     // ⛔ DEFERRED IS NOT STALE. Erik deferred abyssal to its own audit; the row carries `primary: null` and
     // the card must DECLINE rather than answer from parents that are not its parents.
@@ -17998,15 +18020,19 @@ await (async () => {
 
     // what it is worth, measured both ways so the claim is a number and not an adjective
     const ch233 = { domains: { primary: "harmonic" }, abilities: [], attributes: {} };
-    const resolves = (foot) => Object.values(C199.abilities).filter(a =>
+    // ⚠️ R33 + SPEC_body_source §0: no real craft carries a foothill as its tradition, and every real craft
+    // answers via its own `powerSystem` before any tradition branch — so the gap is measured on one
+    // declaration-less craft per AUTHORED foothill, which is the only shape that can still reach the branch.
+    const footCrafts = Object.keys(C199.foothills?.foothills || {}).map(t => ({ id: "syn_" + t, tradition: t }));
+    const resolves = (foot) => footCrafts.filter(a =>
       SUB233.craftSource(a, ch233, C199.schools, C199.powerSources, foot)?.source).length;
     const without = resolves(null), withF = resolves(C199.foothills);
     check(`CCODE-233: passing the foothills answers ${withF - without} more crafts (${without} → ${withF}) — that gap was the bug`,
-      withF > without, `${without} → ${withF}`);
+      without === 0 && withF > without, `${without} → ${withF} of ${footCrafts.length} authored foothills`);
 
     // ⛔ AND THE HARMONIC TIE, which is the rule's whole reason for existing: two parents at 50/50 resolve
     // to `combination` rather than picking a winner. It has never once run in play until now.
-    const harmonicCraft = Object.values(C199.abilities).find(a =>
+    const harmonicCraft = footCrafts.find(a =>
       SUB233.craftSource(a, ch233, C199.schools, C199.powerSources, C199.foothills)?.via === "foothill");
     check("CCODE-233: a foothill craft now answers VIA the foothill rule in the same call the game makes",
       !!harmonicCraft, harmonicCraft ? harmonicCraft.id : "none resolved via foothill");

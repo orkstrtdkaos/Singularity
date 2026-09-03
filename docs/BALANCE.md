@@ -1,6 +1,6 @@
 # BALANCE — the dials, what they actually do, and how to turn one without lying to yourself
 
-**CCode · started 2026-08-30 · v1.9.341**
+**CCode · started 2026-08-30 · v1.9.342**
 
 > Erik: *"we need to build toward balance and use the dials."*
 

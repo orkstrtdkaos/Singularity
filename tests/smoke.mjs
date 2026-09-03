@@ -7912,7 +7912,11 @@ await (async () => {
     check("382/CCODE-221: no foothill or non-tradition has a STORED row — they are computed",
       FOOT.every(k => !ps382.byTradition[k]), FOOT.filter(k => ps382.byTradition[k]).join(", "));
     // The reader itself — proved by driving it, not by reading the source.
-    const abFolk = Object.values(C382.abilities).find(a => a.tradition && !sch382.traditionSchools[a.tradition]);
+    // ⛔ SPEC_body_source.md §0 — the craft's own `powerSystem` now wins, so a real craft answers via itself
+    // before the tradition mix is consulted. This block proves the MIX reader; drive it with the declaration
+    // stripped, which is the one shape that still reaches it.
+    const abFolkRaw = Object.values(C382.abilities).find(a => a.tradition && !sch382.traditionSchools[a.tradition]);
+    const abFolk = abFolkRaw && { ...abFolkRaw, powerSystem: undefined };   // stays undefined if none — non-vacuous
     check("382: a craft whose tradition has NO school yields nothing without a mix — honest, not defaulted",
       !!abFolk && subMod382.craftSource(abFolk, {}, sch382) === null);
     const synth = { byTradition: { [abFolk.tradition]: { primary: "precursor", mix: { precursor: 1 }, why: "driven, for the proof" } } };
@@ -17536,7 +17540,11 @@ await (async () => {
     // crafts. ⛔ THE MERGER WILL RETIRE MORE OF THESE, so the gate asks rather than assumes.
     const craftIn = (t) => Object.values(C199.abilities || {}).find(a => a.tradition === t);
     const liveFoothill = ["valley_craft", "harmonic", "radiant_folk"].find(t => craftIn(t));
-    const srcOf = (t) => SU.craftSource(craftIn(t), noSchool, C199.schools, ps221, fh221);
+    // ⛔ SPEC_body_source.md §0 — THE CRAFT'S OWN `powerSystem` NOW WINS, and every real craft has one, so a
+    // real craft never reaches the tradition/foothill branches this block exists to prove. Strip the
+    // declaration: the claim under test is what the TRADITION machinery answers, not what the craft declares.
+    const undeclared = (a) => a && { ...a, powerSystem: undefined };
+    const srcOf = (t) => SU.craftSource(undeclared(craftIn(t)), noSchool, C199.schools, ps221, fh221);
 
     // ⛔ A PURE SCHOOL KEEPS ITS TRADITION'S SOURCE — the comment in substrate.js said so and the code
     // returned `source: school.extension` (null) and stopped. `schoolForTradition` DEFAULTS to the pure

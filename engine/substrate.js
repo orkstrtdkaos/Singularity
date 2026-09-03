@@ -403,9 +403,37 @@ export function applySubstrateField(locations = {}, data = {}) {
  * on the classification pass — "derive first, hand me the residue" — applies here first.
  */
 
-/** The source a craft reaches with FOR THIS CHARACTER — derived from the school they practise in the
- *  craft's tradition, never a field on the ability. Null when the craft has no tradition (9 of 383) or the
- *  character does not practise it: an honest "we do not know" rather than a default that looks like one. */
+/** The source a craft reaches with FOR THIS CHARACTER. Precedence: the school they practise in the craft's
+ *  tradition (if it has an extension) → an explicit deferral → ⛔ THE CRAFT'S OWN `powerSystem` → the
+ *  tradition's authored primary → the foothill mix. ⚠️ This docstring used to say "never a field on the
+ *  ability" — that was the defect SPEC_body_source.md §0 names, not the design. Null when the craft has no
+ *  tradition or its source is deferred: an honest "we do not know" rather than a default that looks like one. */
+/** ⛔ FOUND WHILE VERIFYING SPEC_body_source.md, NOT DESCRIBED IN IT — a wider defect the same shape
+ *  as the one the spec names. `power_sources.json`’s `byTradition[t].primary` speaks the CRAFT vocabulary
+ *  (`ordered_nanite`, `wild_nanite` — the same values `ability.powerSystem` uses); `the_substrate.json`’s
+ *  `sourceBands.sources` speaks the BAND vocabulary (`nanite`, `wild`). ⚠️ `school.extension` already uses
+ *  the band vocabulary directly — only the tradition-primary and foothill paths carry the mismatch.
+ *
+ *  ⛔ MEASURED: 9 traditions (churnfolk, rootkin, threnodist, figurist — wild_nanite; seraphic,
+ *  enginewright, syllogist, mason, lattice — ordered_nanite) resolve a `source` that `sourceBands.sources`
+ *  has no entry for. Every ground-reading function keys off that dictionary by exact string
+ *  (`sourceEntry`, `sourceGround`, `sourceHasFloor`, `fieldOfSource`, and the inline band lookup in
+ *  `groundCardFor`) — so all of them silently return null/false/"substrate", and 152 of 428 crafts
+ *  (over a third of the corpus) report `verdict: "unaffected by the ground"` for every location, for
+ *  ANY character who has not chosen a school with its own extension — which is the common case this
+ *  whole resolver exists to handle correctly (CCODE-221’s own “zero regression” baseline).
+ *
+ *  ✅ THE CORRESPONDENCE IS UNAMBIGUOUS, NOT AUTHORED: the content’s own `_nanieStates` note says
+ *  “ordered and wild are one source in two states”, and `nanite`’s band {0.9, 0.2} matches precursor —
+ *  exactly what “ordered” nanite (war infrastructure, disciplined) should mirror — while `wild`’s
+ *  {0.32, 0.2} matches “thrives in the unreached gaps”. This is a rename, not a judgement call.
+ *
+ *  ⚠️ APPLIED ONLY AT THE RETURN BOUNDARY, after the foothill branch’s tie-detection has already run on
+ *  the RAW ordered/wild values — that logic (§30.2: a 50/50 split IS `combination`, not a coin flip) needs
+ *  the two states kept distinct to find a tie; only the BAND LOOKUP needs them merged. */
+const BAND_VOCAB_ALIAS = { ordered_nanite: "nanite", wild_nanite: "wild" };
+const toBandVocab = (source) => BAND_VOCAB_ALIAS[source] || source;
+
 export function craftSource(ability, character, schoolsData, powerSources = null, foothills = null) {
   const tid = ability?.tradition;
   if (!tid) return null;
@@ -434,10 +462,27 @@ export function craftSource(ability, character, schoolsData, powerSources = null
   // which is the honest answer. Falling through to the foothill computation would answer it from parents
   // that are not its parents.
   if (row && row.primary === null) return { traditionId: tid, school: null, source: null, mix: null, via: "deferred" };
+  // ⛔ SPEC_body_source.md §0 — ERIK: “the craft's powerSystem isn't read at all — it's what the craft
+  // itself is supposed to use.” MEASURED: `craftSource` read only `ability.tradition`, never
+  // `ability.powerSystem`, so 55 of 419 crafts were graded against a band their own declared source
+  // disagrees with (16 on a DISJOINT band — e.g. `uttered_name`, a veil craft graded as precursor,
+  // switched off standing on the ground it wants). ALL 419 tradition-bearing crafts already carry a
+  // `powerSystem` — this is not a guess filling a gap, it is a read the resolver always skipped.
+  //
+  // ⚠️ CHECKED AFTER THE DEFERRED-NULL RETURN ABOVE, ON PURPOSE: `abyssal`'s primary is explicitly
+  // UNKNOWN, not absent (Erik: “a card that cannot answer must decline rather than answer wrongly”) —
+  // 22 abyssal crafts already carry their own `powerSystem` (precursor ×20, combination ×2), and letting
+  // the craft's field win here would silently un-defer a tradition-wide ruling with a per-craft workaround.
+  // ✅ THIS IS A DEFAULT, NOT A DECIDED QUESTION — flagged in the SPEC_body_source.md reply as open:
+  // should a craft's own declaration override the Abyssal deferral now that it is read at all? Left
+  // deferring, the conservative side of that question, until Erik answers.
+  const declared = ability?.powerSystem;
+  if (declared) return { traditionId: tid, school: school || null, source: toBandVocab(declared), mix: null,
+    mixAuthored: false, via: "craft" };
   // ⚠️ `mixAuthored` IS RETURNED SEPARATELY, AND THAT IS §2b'S WHOLE POINT. `mix: null` must mean
   // UNAUTHORED and never "the mean is pure" — an absent value doing double duty is the trap, and a card
   // that cannot tell them apart will render a confident blend out of nothing.
-  if (row?.primary) return { traditionId: tid, school: school || null, source: row.primary, mix: row.mix || null,
+  if (row?.primary) return { traditionId: tid, school: school || null, source: toBandVocab(row.primary), mix: row.mix || null,
     mixAuthored: !!row.mix && !row._mixUnauthored, via: "tradition" };
 
   // ⛔ A FOOTHILL HAS NO SOURCE OF ITS OWN — IT INHERITS FROM WHOEVER LIVES THERE. §30.6: `tradition` is
@@ -460,7 +505,7 @@ export function craftSource(ability, character, schoolsData, powerSources = null
       // ⛔ A TIE IS `combination`, NOT A COIN FLIP. §30.2: ordered and wild are one source in two states,
       // and a people standing evenly between two sources IS a combination rather than an arbitrary pick.
       const tied = ranked.length > 1 && ranked[0][1] === ranked[1][1];
-      return { traditionId: tid, school: null, source: tied ? "combination" : ranked[0][0],
+      return { traditionId: tid, school: null, source: tied ? "combination" : toBandVocab(ranked[0][0]),
         mix: weight, mixAuthored: false, via: "foothill", parents: foot.parents };
     }
   }

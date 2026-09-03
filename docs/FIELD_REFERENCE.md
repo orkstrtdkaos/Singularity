@@ -654,6 +654,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `wardTypes` | 53 | `mechanic`×53 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `folkAccessible` | 47 | `root`×47 | ✅ READ | `state.js` |
 | `marginFloorPer` | 45 | `mechanic`×45 | ✅ READ | `craftmechanics.js` |
+| `learnedAt` | 43 | `root`×43 | ⚠️ CI-ONLY | _1 test/script only_ |
 | `soak` | 33 | `mechanic`×33 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `melee.js` |
 | `soakRank` | 32 | `mechanic`×32 | ✅ READ | `skill_battle.js`, `app.js` |
 | `sense` | 27 | `root`×27 | ✅ READ | `combatants.js`, `encounters.js`, `gambit.js` |
@@ -676,7 +677,6 @@ contribute to authored dice without recreating the double-scaling bug.
 | `namedCurrent` | 7 | `root`×7 | ⛔ DARK | — |
 | `evasion` | 7 | `mechanic`×7 | ✅ READ | `craftmechanics.js`, `skill_battle.js`, `app.js` |
 | `evasionRank` | 7 | `mechanic`×7 | ✅ READ | `skill_battle.js` |
-| `learnedAt` | 6 | `root`×6 | ⚠️ CI-ONLY | _1 test/script only_ |
 | `requiresSelf` | 6 | `mechanic`×6 | ✅ READ | `skill_battle.js` |
 | `peril` | 6 | `root`×6 | ✅ READ | `art.js`, `gm.js` |
 | `persistUntilHealed` | 6 | `tree`×6 | ✅ READ | `capabilities.js`, `conditions.js`, `craftmechanics.js` |

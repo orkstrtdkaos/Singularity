@@ -207,3 +207,62 @@ progression. **None of them wants a rank.** ✅ **Only the GROUND varies by rank
    metaphysical; quick_hands · steady_hands and the rest take body. ⚠️ **Erik's call, not measurement.**
 5. ⚠️ **Marcher r3 multistrike** — Erik named it. ⬜ Is that a real craft id, and are there others where the
    top rank leaves technique behind?
+
+---
+---
+
+# CCode ROUND 2 — 2026-09-03 · v1.9.342
+
+**Status:** ✅ **§0 built and gated** (`§58`) · ✅ **a second defect found and fixed on the way** (`§57`) · ⬜ **§3/§4 not built — content, Erik's** · ⚠️ **one new question the build surfaced (Abyssal)**
+
+## ✅ §0 — VERIFIED, EXACTLY
+
+- `grep powerSystem engine/substrate.js` → **0 hits** before this ship. The chain you drew is the chain.
+- **Your 55 and your 16 reproduce to the craft.** My sweep reports the same nine (declared → grounded-as) buckets summing to 55, and the same sixteen ids for the disjoint set, in the same order you listed them.
+- ⚠️ **My raw sweep says 77, not 55 — and you were right to leave the other 22 out.** They are the **abyssal** crafts: `byTradition.abyssal.primary` is an explicit `null` (Erik 08-23, deferred to the Abyssal audit), so the card already *declines* for them. A declaration disagreeing with "we do not know" is not a misgrade. Your table counts misgrades. Correct.
+
+## ✅ BUILT — the resolver reads the craft's own field
+
+`craftSource()` precedence is now **school extension → deferred-null → `ability.powerSystem` → `byTradition[t].primary` → foothill mix**. Measured on the corpus:
+
+| via | crafts |
+|---|---|
+| `craft` (its own `powerSystem`) | **397** |
+| `deferred` (abyssal, still declines) | **22** |
+| `tradition` | **0** |
+
+⚠️ **All 419 tradition-bearing crafts already carry a `powerSystem`** — so this is not a patch for a gap; it is a read the resolver had always skipped. The tradition fallback is now **dormant, not dead** — a synthetic craft with no declaration still reaches it, and `§58` asserts both halves.
+
+- `uttered_name` (umbral, `veil`) → grounds as **veil**, via craft. Your worked example, by name, in the gate.
+- All 16 disjoint crafts now ground on the band they declare.
+- `levelled_crossbow` / `drawn_bow` → still **`metaphysical`**, because that is what they declare. **§3 was not decided by code.**
+
+**`combination` — your "CCode's call":** ✅ **no special case needed.** `combination` was already a legitimate source value — the foothill tie produces it, and every band reader treats it as *unbanded* (`bandFactor(null) → 1`, same as `body`). The 23 crafts that declare it now resolve `combination` via craft and land in exactly the downstream state the tie already produced. Nothing to derive.
+
+## ✅ ALSO FIXED — a second defect, same family, not in the spec (`§57`)
+
+`byTradition[t].primary` speaks the **craft vocabulary** (`ordered_nanite`, `wild_nanite`); `the_substrate.json → sourceBands.sources` speaks the **band vocabulary** (`nanite`, `wild`). They never matched. ⛔ **9 traditions — churnfolk, rootkin, threnodist, figurist (wild); seraphic, enginewright, syllogist, mason, lattice (ordered) — resolved a source no band reader had a key for, and 152 of 428 crafts reported "unaffected by the ground" everywhere**, for any character without a school extension. Fixed by aliasing **at the return boundary only**, after the foothill tie-detection has run on the raw values (a 50/50 ordered/wild split must still be seen as a tie — `§57` asserts it still is).
+
+⚠️ **AND THE ALIAS RESTS ON A PROSE BLOCK THAT CONTRADICTS ITSELF — flagging, not fixing.** `power_sources.json → sources` is **read by nothing** (grep: zero engine consumers; only `byTradition` is live). Inside it: `_nanieStates` says *"ordered and wild are one source in two states"* (what I aliased on) — and three entries up, `ordered_nanite` says *"answers to CONDITION AND SUPPLY, not to ground: **no band, no floor**"*. Also: `wild_nanite` says band `{0.32, 0.34}`; the live `wild` row is `{0.32, 0.20}`. And `_bodyRemoved` says body was removed — the live table has it as a floor, which §1 already caught. ⬜ **If "no band, no floor" is the ruling and not stale, the alias is the wrong fix and `ordered_nanite` needs its own `band: null` row in `the_substrate.json`. Erik's call.** I left the prose untouched.
+
+## §5 — ANSWERS
+
+**Q1 · call sites.** ⛔ **Exactly one.** `craftSource` ← `groundCardFor` (`substrate.js:502`) ← `groundRow(ability)` (`app.js:3358`) ← the wheel's detail panel (`app.js:10019`, `groundRow(selAb)`). It has the **ability**. It does **not** have a **level** — the panel shows the craft, not a rank of it. So the per-rank cost is: thread `level` through two signatures, **plus the panel deciding which rank's ground to show** (the character's current rank in it, presumably). That last part is a UI call, not measurement.
+
+**Q2 · is the floor honoured.** ✅ **Yes — twice, and they are different floors.** (a) `bandFactor(band, …)` at `substrate.js:210` returns **1 unconditionally when `band` is null** — that IS "never at a loss anywhere," and `body` hits it with no special code. (b) Separately, around `:240`, `sourceHasFloor(root) || sourceHasFloor(school.extension)` clamps a **starved** factor up to `tuning.materialFloor` and marks the side `"floored"` — a floor *under* a banded source. `body` uses (a); `floor: true` feeds (b). Both live.
+
+**Q3 · what else keys off `byTradition[marcher].primary`.** ✅ **Nothing.** `power_sources.json`'s `byTradition[t].primary` is read at two lines, both inside `craftSource` (own row, and the foothill's parents). Every other `byTradition` in the codebase is a different object (`inventory.js` cfg, `skill_battle.js` `damageTypeByTradition`, `worldtick.js` strike/engage). Art keys off `ability.powerSystem` directly — your 51/16, which I did not recount. ⚠️ **But note what this ship changes about §3:** with the craft field winning, **editing `byTradition.marcher.primary` now moves nothing for ground.** The lever is the crafts' own `powerSystem`, which §1 had already conceded.
+
+**Q4 · which somatic crafts split which way.** ⬜ **Not measured — Erik's, as you said.** One fact for the table: **all 13 somatic and all 26 marcher crafts currently declare `powerSystem: "metaphysical"`, uniformly** — `quick_hands` and `steady_hands` included. The split you describe is not authored anywhere yet; when it is, it lands on the crafts.
+
+**Q5 · "the r3 multistrike."** ✅ **`edge` (marcher) — r1 First Cut · r2 Marcher's Calm · r3 *Every Reach*.** No craft has "multistrike" in its id. Whether other top ranks leave technique behind is reading, not measuring — the 39 top-rank names are one command away (`tree[2].name` across marcher+somatic) if you want the list in the spec. Per-rank source is feasible exactly as §4 says: `rankEntry.source ?? ability.powerSystem`, read **inside `craftSource` only**, so the 51 other `powerSystem` readers never see a rank. ⬜ **Not built** — there is no ruling yet on which rank of which craft changes.
+
+## ⚠️ ONE NEW QUESTION — the Abyssal deferral vs. the craft's own field
+
+The 22 abyssal crafts **carry their own `powerSystem`** (precursor ×20, combination ×2). Reading the craft first would have **silently un-deferred** Erik's tradition-wide "primary UNKNOWN, decline rather than guess" with a per-craft workaround. ✅ **I kept the deferral winning** — it is the existing explicit ruling and the conservative side — and `§58` asserts every abyssal craft still declines. ⬜ **Erik: now that the craft's declaration is read at all, should it override the deferral?** One line either way; the gate turns red if it drifts.
+
+## ⬜ NOT BUILT, ON PURPOSE
+
+- **§3 marcher → body** and **§4 somatic split** — content. Gated as *not preempted* (`levelled_crossbow` stays metaphysical).
+- **Per-rank source** — feasible, shape above, no ruling to implement.
+- **The `power_sources.json → sources` prose** — three contradictions with the live table, all in a block nothing reads. Yours.

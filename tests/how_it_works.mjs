@@ -3746,11 +3746,22 @@ console.log("\n── §55 · the skill source of truth ──");
 
   // ⛔ EVERY SECT IT NAMES MUST BE A REAL POLE, and every pole must appear.
   {
-    const named = [...sk.matchAll(/^###\s+.*?\(`([a-z_]+)`\)/gm)].map(m => m[1]);
+    // ⚠️ THE GENERATOR LISTS NON-POLE LINEAGES TOO, under a heading that SAYS so — “Outside the ring”.
+    // Asserting “every ### is a pole” across the whole file would fail on the honest section and pass on
+    // a dishonest one that hid its non-poles under a domain. Gate the property: poles above the line,
+    // non-poles below it, and the line itself present.
+    const outsideAt = sk.indexOf("## Outside the ring");
+    const ringPart = outsideAt >= 0 ? sk.slice(0, outsideAt) : sk;
+    const outsidePart = outsideAt >= 0 ? sk.slice(outsideAt) : "";
+    const hdr = /^###\s+.*?\(`([a-z_]+)`\)/gm;
+    const named = [...ringPart.matchAll(hdr)].map(m => m[1]);
+    const outsideNamed = [...outsidePart.matchAll(hdr)].map(m => m[1]);
     const TR55 = await import("../engine/traditions.js");
     const notPole = named.filter(t => !TR55.isPoleTradition(t, idx55));
     check("§55: ⛔ every sect the doc names is a POLE — no folk lineage is listed as a sect",
       notPole.length === 0, notPole.join(" · "));
+    check("§55: …and everything under \"Outside the ring\" really is outside it — the honest label is true",
+      outsideNamed.length > 0 && outsideNamed.every(t => !TR55.isPoleTradition(t, idx55)), outsideNamed.join(" · ") || "(section absent)");
     const missing = Object.keys(idx55.ringPos || {}).filter(t => !named.includes(t));
     check("§55: …and every pole on the ring has a section — none is missing from the source of truth",
       missing.length === 0, missing.join(" · "));
@@ -3841,6 +3852,126 @@ console.log("\n── §56 · the ruling index agrees with the body ──");
     const multi = Object.entries(bySub).filter(([, v]) => v.length > 1);
     check("§56: every multi-ruling subject is one a person has looked at — 9 today, and named",
       multi.length <= 12, multi.map(([k, v]) => k + ": " + v.join(",")).join(" · "));
+  }
+}
+/* ═════ §57 — THE ORDERED/WILD NANITE VOCABULARY MISMATCH, FOUND WHILE VERIFYING SOMETHING ELSE ═════ */
+// ⛔ SPEC_body_source.md §0 asks whether a craft's ground is scored right. Verifying it surfaced a WIDER
+// defect in the same family, not described in the spec: `power_sources.json`'s `byTradition[t].primary`
+// speaks the CRAFT vocabulary (`ordered_nanite`, `wild_nanite`) while `the_substrate.json`'s
+// `sourceBands.sources` speaks the BAND vocabulary (`nanite`, `wild`). `school.extension` already uses
+// the band vocabulary directly — only the tradition-primary and foothill paths carried the mismatch.
+//
+// ⚠️ MEASURED: 9 traditions (152 of 428 crafts — over a third of the corpus) resolved a `source` no
+// band-reading function had an entry for, so every one of them reported "unaffected by the ground" for
+// ANY character without a school of their own — the common, zero-regression baseline case.
+console.log("\n── §57 · the ordered/wild nanite vocabulary now matches the band table ──");
+{
+  const sub57 = await import("../engine/substrate.js");
+  const { loadContentHeadless: lch57 } = await import("./headless_content.mjs");
+  const C57 = await lch57();
+  const bandKeys57 = new Set(Object.keys(C57.substrateModel.sourceBands.sources));
+
+  // ⛔ THE NINE REAL TRADITIONS THAT WERE SILENTLY UNSCORED.
+  const affected57 = ["churnfolk", "rootkin", "threnodist", "figurist", "seraphic", "enginewright", "syllogist", "mason", "lattice"];
+  let fixed57 = 0;
+  // ⚠️ SYNTHETIC, NO `powerSystem`, ON PURPOSE. §58 makes the craft's own declaration win, so a REAL craft
+  // never reaches the tradition branch this gate exists to test. An ability with a tradition and no
+  // declaration is the one shape that still falls through to it.
+  for (const tid of affected57) {
+    const cs = sub57.craftSource({ id: "syn_" + tid, tradition: tid }, { domains: { primary: tid }, schools: {} }, C57.schools, C57.powerSources, C57.foothills);
+    if (cs?.via === "tradition" && bandKeys57.has(cs.source)) fixed57++;
+  }
+  check("§57: ⛔ every ordered/wild-nanite tradition now resolves a source the band table actually has",
+    fixed57 === affected57.length, `${fixed57} of ${affected57.length}`);
+
+  // ⛔ AND THE BAND ITSELF IS REAL, NOT JUST A MATCHING KEY — starvation and full output both fire.
+  {
+    const cs = sub57.craftSource({ id: "syn_seraphic", tradition: "seraphic" }, { domains: { primary: "seraphic" }, schools: {} }, C57.schools, C57.powerSources, C57.foothills);
+    const band = C57.substrateModel.sourceBands.sources[cs.source]?.band;
+    check("§57: …a real band with center and width, not a coincidental key match", !!band && band.center != null);
+    check("§57: …full output in thick country (its own band center)", sub57.bandFactor(band, band.center) === 1);
+    check("§57: …and real starvation in clear ground, not the old flat factor-1 \"unaffected\"",
+      sub57.bandFactor(band, 0.05) < 0.2, String(sub57.bandFactor(band, 0.05)));
+  }
+
+  // ⚠️ AND THE TIE-DETECTION THIS COULD HAVE BROKEN, STILL WORKS. A foothill whose parents split 50/50
+  // between an ordered-primary and a wild-primary parent must still resolve `combination`, not merge the
+  // two into one bucket before the tie can be seen — the alias is applied AFTER the tie check, not before.
+  {
+    const ps57 = { byTradition: { a: { primary: "ordered_nanite" }, b: { primary: "wild_nanite" } } };
+    const tied57 = { foothills: { tf: { parents: { a: 0.5, b: 0.5 } } } };
+    const untied57 = { foothills: { tf2: { parents: { a: 0.7, b: 0.3 } } } };
+    const csTied = sub57.craftSource({ id: "x", tradition: "tf" }, {}, {}, ps57, tied57);
+    const csUntied = sub57.craftSource({ id: "y", tradition: "tf2" }, {}, {}, ps57, untied57);
+    check("§57: ⛔ a 50/50 ordered/wild split is still `combination`, not merged into one bucket",
+      csTied.source === "combination", csTied.source);
+    check("§57: …and a real winner still normalizes to the band vocabulary",
+      csUntied.source === "nanite", csUntied.source);
+  }
+}
+/* ═════ §58 — THE CRAFT'S OWN `powerSystem` IS READ FOR GROUND, AND THE ABYSSAL DEFERRAL SURVIVES IT ═════ */
+// ⛔ SPEC_body_source.md §0 — Erik: “the craft's powerSystem isn't read at all — it's what the craft itself is
+// supposed to use.” `craftSource` read `ability.tradition` only; 55 of 419 crafts were graded against a band
+// their own declared source disagrees with, 16 on a DISJOINT band. The spec's own worked example is
+// `uttered_name`: a veil craft graded as precursor, switched off standing on the ground it wants.
+//
+// ⚠️ WHAT THIS DOES NOT DECIDE: marcher/somatic → body (§3/§4) is Erik's content call and stays
+// `metaphysical` here; whether a craft's declaration should override the Abyssal deferral is flagged
+// open and defaults to the deferral — both asserted below so a silent change to either shows up red.
+console.log("\n── §58 · the craft's own source is read; the deferral survives it ──");
+{
+  const sub58 = await import("../engine/substrate.js");
+  const { loadContentHeadless: lch58 } = await import("./headless_content.mjs");
+  const C58 = await lch58();
+  const alias58 = { ordered_nanite: "nanite", wild_nanite: "wild" };
+  const src58 = (a) => sub58.craftSource(a, { domains: { primary: a.tradition }, schools: {} }, C58.schools, C58.powerSources, C58.foothills);
+
+  // ⛔ THE SPEC'S WORKED EXAMPLE, BY NAME.
+  {
+    const a = C58.abilities.uttered_name;
+    const cs = a ? src58(a) : null;
+    check("§58: ⛔ `uttered_name` (veil craft, umbral lineage) is grounded as VEIL, via the craft",
+      a?.powerSystem === "veil" && cs?.source === "veil" && cs?.via === "craft", `${a?.powerSystem} → ${cs?.source} via ${cs?.via}`);
+  }
+
+  // ⛔ THE 16 FULLY-INVERTED CRAFTS THE SPEC NAMES — each now grounded on its own declared band.
+  {
+    const sixteen = ["proof_halls", "stonewise", "old_roads", "boundary_stone", "carrying_call", "keen_appraisal",
+      "wayfinding", "tinkers_hand", "rivercraft", "quiet_step", "glasswork", "uttered_name", "swallowed_word",
+      "kept_vigil", "borrowed_certainty", "honest_price"];
+    const wrong = sixteen.filter(id => { const a = C58.abilities[id]; const cs = a && src58(a); return !a || !cs || cs.source !== (alias58[a.powerSystem] || a.powerSystem); });
+    check("§58: ⛔ all 16 fully-inverted crafts now ground on the band they declare", wrong.length === 0, wrong.join(" · ") || "all 16");
+  }
+
+  // ⚠️ NOT PREEMPTED: the marcher → body change is content, and Erik's. The resolver reads what is authored.
+  {
+    const a = C58.abilities.levelled_crossbow;
+    const cs = a ? src58(a) : null;
+    check("§58: ⚠️ `levelled_crossbow` still grounds as its authored `metaphysical` — §3 was not decided by code",
+      cs?.source === "metaphysical" && cs?.via === "craft", `${cs?.source} via ${cs?.via}`);
+  }
+
+  // ⛔ THE DEFERRAL SURVIVES. Every abyssal craft carries a `powerSystem`; the card must still decline.
+  {
+    const aby = Object.values(C58.abilities).filter(a => a.tradition === "abyssal");
+    const leaked = aby.filter(a => src58(a)?.source !== null);
+    check("§58: ⛔ every abyssal craft still DECLINES (source null, via deferred) despite carrying its own `powerSystem`",
+      aby.length > 0 && leaked.length === 0 && aby.every(a => !!a.powerSystem), `${aby.length} abyssal, ${leaked.length} leaked`);
+  }
+
+  // ⚠️ THE CORPUS, WHOLE: every tradition-bearing craft resolves via `craft` or `deferred` — the tradition
+  // fallback is DORMANT for today's content (0 of 419 lack a declaration), not dead.
+  {
+    const all = Object.values(C58.abilities).filter(a => a.tradition);
+    const via = {};
+    for (const a of all) { const cs = src58(a); via[cs?.via ?? "null"] = (via[cs?.via ?? "null"] || 0) + 1; }
+    check("§58: every tradition-bearing craft carries a `powerSystem` — the read is total, not a partial patch",
+      all.every(a => !!a.powerSystem), `${all.filter(a => !a.powerSystem).length} without`);
+    check("§58: …so the whole corpus resolves via `craft` or `deferred`, nothing via `tradition`",
+      (via.craft || 0) + (via.deferred || 0) === all.length && !via.tradition, JSON.stringify(via));
+    const fb = sub58.craftSource({ id: "syn_fallback", tradition: "ashwarden" }, { domains: { primary: "ashwarden" }, schools: {} }, C58.schools, C58.powerSources, C58.foothills);
+    check("§58: …and the tradition fallback is dormant, not dead — a craft with no declaration still reaches it",
+      fb?.via === "tradition" && !!fb?.source, `via ${fb?.via} → ${fb?.source}`);
   }
 }
 /* ══════════ REPORT ══════════ */

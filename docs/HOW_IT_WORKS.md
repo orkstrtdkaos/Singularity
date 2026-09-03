@@ -625,9 +625,14 @@ is superseded.**
 |---|---|
 | primary | 5 |
 | secondary | 4 |
-| adjacent · tertiary | 3 |
+| **adjacent** (R21) | **3** |
+| tertiary | 3 |
 | far | 2 |
+| **acquired** (R21) | **2** |
 | ⚑ **antipode** | ⚠️ **derived from `lean`, not fixed** |
+
+⚠️ **`adjacent` 3 and `acquired` 2 are R21** — Erik confirmed CCode's assumption: *"that's ok since we have
+other ways to increase tier access and upgrade poles."* ⛔ **The ceiling is not the only path to depth.**
 
 ⛔ **R10 and R16 are ONE mechanism.** The lean a character earns buys **both** price parity **and** depth —
 dabble and you are capped shallow *and* surcharged; commit and both recede together. ⚠️ **The barrier is to

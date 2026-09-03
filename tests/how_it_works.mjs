@@ -3413,6 +3413,18 @@ console.log("\n── §51 · the person-keyed sheet, live ──");
     check("§51: ⛔ …and never quotes the author\u2019s own note into the prompt", !/⛔|⚠️/.test(b));
   }
 
+  // ⛔ STEP 3 — A NAMED PERSON FIGHTS AS THEMSELVES. Committing violence against Pell used to build
+  // `{ name, threat, tacticTags: [] }`: a difficulty rating, with her level and seventeen crafts nowhere.
+  {
+    const app51 = rd("app.js");
+    check("§51: ⛔ a named person fights as themselves, not as a difficulty rating",
+      /function personOpponent\(/.test(app51) &&
+      /opponent: personOpponent\(target\) \|\| \{ name: target\.name, threat/.test(app51));
+    check("§51: …and it hands over the WHOLE sheet, never skills alone",
+      /attributes: sheet\.attributes, health: sheet\.health, energy: sheet\.energy/.test(app51));
+    check("§51: ⚠️ …while a stranger still falls to the threat curve — 112 people is not everyone",
+      /if \(!rec\) return null;/.test(app51) && /if \(!skills\.length\) return null;/.test(app51));
+  }
   // ⛔ THE BRIDGE. A half-passed sheet is refused rather than silently completed at threat 20.
   {
     const skills = NS51.battleSkillsFor(pell51, { catalog: C51.abilities }).skills;

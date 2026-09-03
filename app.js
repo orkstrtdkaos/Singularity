@@ -46,6 +46,7 @@ import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
+import { sheetFor as personSheetFor, battleSkillsFor } from "./engine/npcsheet.js";  // the person-keyed sheet
 import { companyPlaces, delegationCapacity } from "./engine/ladder.js";   // SNG-390: how many places rapport has earned · R25b: how many can run things in your name
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds, shareAtOrAbove, syncStageTaughtRanks, stageTaughtBy } from "./engine/companions.js";
 // SNG-309: what happens when the player goes down — and the SAME death ladder every figure is on.
@@ -118,7 +119,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.330";
+const APP_VERSION = "1.9.331";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7746,12 +7747,45 @@ function isDev() { return isDevMode(); }
  *  engine MINTS the fight and ENTERS it structured, right now. No prose-only duel, no waiting on the GM to
  *  remember rule 18. Threat comes from the registry when it knows, else this place's danger, else a plain default —
  *  never from nothing, and never an invented PERSON (harmTargetFor already refused to guess at that). */
+/** ⛔ SPEC_npc_sheet_architecture §2 — A NAMED PERSON FIGHTS AS THEMSELVES, NOT AS A DIFFICULTY RATING.
+ *
+ *  ⚠️ UNTIL NOW, COMMITTING VIOLENCE AGAINST PELL BUILT `{ name, threat, tacticTags: [] }` — a threat
+ *  number and nothing else. Her level 27, her seventeen crafts, her sub-attributes: none of it reached the
+ *  fight. ⛔ THE PERSON-KEYED SHEET EXISTED THE WHOLE TIME AND NOTHING ASKED IT.
+ *
+ *  ⚠️ THE WHOLE SHEET, NOT ITS SKILLS. `synthesizeOpponentSheet` fills any field a caller omits from
+ *  THREAT, defaulting to 20 — so handing over crafts alone would put a master smith in a raider's body.
+ *  That path now throws rather than guessing, which is what makes this safe to add.
+ *
+ *  ⛔ RETURNS NULL FOR ANYONE UNKNOWN, and the threat path takes them — a bandit on a road is exactly what
+ *  a threat number is for, and 112 people is not everyone the player will ever swing at. */
+function personOpponent(target) {
+  const id = target?.id || target?.npcId || null;
+  const name = target?.name || null;
+  const rec = (id && (character?.npcRegistry?.[id] || CONTENT.npcs?.[id]))
+    || (name && (Object.values(character?.npcRegistry || {}).find(n => n?.name === name)
+      || Object.values(CONTENT.npcs || {}).find(n => n?.name === name)));
+  if (!rec) return null;
+  const sheet = personSheetFor(rec, { day: absoluteWorldDay() });
+  const { skills } = battleSkillsFor(rec, { catalog: fullCatalog() });
+  if (!skills.length) return null;                       // nothing to fight with — let the threat path have them
+  return {
+    name: sheet.name, attributes: sheet.attributes, health: sheet.health, energy: sheet.energy,
+    soak: sheet.soak, skills, tacticTags: rec.tacticTags || [],
+    // ⚠️ THREAT RIDES ALONG so anything that still reads it — the encounter frame, the warn offer — has a
+    // number, but every field above wins over it. A person is not a difficulty; they merely have one.
+    threat: Math.max(10, Math.round(sheet.level * 2)),
+    _person: rec.id || null,
+  };
+}
+
 function escalateToFight(target, choice) {
   const here = hereNow();
   const threat = Number(target.threat) || Math.max(20, Math.min(70, Math.round((Number(here?.dangerLevel) || 3) * 12)));
   const entry = { id: `harm-${slugify(target.name || "foe")}-${(character.activeEncounter?.state?.round || 0)}`,
     flavor: "fight", seed: `You have committed to violence against ${target.name}.`,
-    opponent: { name: target.name, threat, tacticTags: [] } };
+    // ⛔ A PERSON FIGHTS AS THEMSELVES WHERE WE KNOW ONE; a stranger falls to the threat curve.
+    opponent: personOpponent(target) || { name: target.name, threat, tacticTags: [] } };
   const def = synthesizeDuelDef(entry);
   def.opponent.name = target.name;              // synthesizeDuelDef keeps the entry's opponent; be explicit
   def.lethal = choice?.intentRung === "lethal"; // the rung the player just answered with

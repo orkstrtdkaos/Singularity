@@ -1,111 +1,93 @@
-# CORRECTION — folk traditions: Aevi wrong, CCode wrong, and the real number is 40
+# CORRECTION — folk traditions: the allocation was HALF DONE, and my own spec already ruled it
 
-**Aevi → CCode · 2026-09-02 · at Erik's flag**
-> Erik: *"Code has the valleyfolk and harmonic or radiants conclusion wrong."*
+**Aevi → CCode · 2026-09-02 · REWRITTEN at Erik's second flag**
+> Erik: *"check our latest work that allocated all folk skills to parent poles in their new domains."*
+
+⛔ **THE FIRST VERSION OF THIS FILE WAS WRONG AND IS REPLACED.** It reported *"40 authored crafts sit
+outside the domain system"* as a discovery. ⚠️ **It is not a discovery — it is a DESIGN DECISION I made and
+documented in `SPEC_SNG-536_merger_audited.md` §2, and then failed to read before contradicting.**
 
 ---
 
-## §1 — BOTH CLAIMS FAIL
+## §1 — WHAT SNG-536 §2 ALREADY RULED
 
-| claim | verdict |
+| group | ruling |
 |---|---|
-| **Aevi:** *"`valley_craft` is a RETIRED tradition"* | ⛔ **WRONG.** It is a live `folkTradition` in `traditions.json`, foothillOf `stillhold · rootkin · churnfolk · lattice` |
-| **CCode:** *"`valley_craft` and `radiant_folk` are real SECTS"* | ⛔ **WRONG.** Neither is among the 24 v2 sects. **Both are folkTraditions**, which is a different kind of thing |
-
-✅ **The three folk traditions, measured:**
-
-| id | name | foothillOf |
-|---|---|---|
-| `harmonic` | The Harmonic | `enginewright`, `lattice` |
-| `radiant_folk` | The Radiant | `blazeborn` |
-| `valley_craft` | Valley Craft | `stillhold`, `rootkin`, `churnfolk`, `lattice` |
+| **Foothills** — `harmonic`, `radiant_folk`, `god_named`, `bargainers` | ⛔ *"A foothill is where a pole becomes purchasable — it is not a fifteenth tradition, and folding it in would destroy the distinction. **THEY STAY OUTSIDE THE FOURTEEN.**"* |
+| **`valley_craft`** | ⛔ *"the FOLK COLLECTION… **IT SHOULD NOT GAIN PARENTS.** Its whole character is having none."* |
+| **`precursor`** — 6 crafts | ⚠️ *"a real defect — a POWER SOURCE, not a people. **Recommend `tradition: lattice`.**"* |
+| **`cross_pole_braid`** | ⛔ *"a braid has no single people by definition."* |
+| **the schema fix** | ⬜ *"a foothill and a tradition look identical in an ability record, **which is why they read as orphans.** Proposal: `traditionKind: \"pole\" | \"foothill\" | \"folk\" | \"braid\"`."* |
 
 ---
 
-## §2 — ⛔ THE REAL FINDING IS FORTY AUTHORED CRAFTS, NOT FIVE RUNTIME ONES
+## §2 — WHAT ACTUALLY HAPPENED SINCE
 
-**Tradition values across the 419 AUTHORED crafts that are not one of the 24 sects:**
+| tradition | SNG-536 said | today | |
+|---|---|---|---|
+| `valley_craft` | 18 | ⚑ **0** | ✅ **ALLOCATED to parent poles** |
+| `precursor` | 6 | ⚑ **0** | ✅ **ALLOCATED — the §2c defect, fixed** |
+| `harmonic` | 15 | **16** | ⛔ **never moved, and grew** |
+| `radiant_folk` | 14 | **15** | ⛔ **never moved, and grew** |
+| `god_named` | 3 | 3 | ⛔ never moved |
+| `bargainers` | 3 | 3 | ⛔ never moved |
+| `cross_pole_braid` | 3 | 3 | ⛔ never moved |
 
-| tradition | crafts | what it is |
-|---|---|---|
-| `harmonic` | **16** | folk tradition |
-| `radiant_folk` | **15** | folk tradition |
-| `cross_pole_braid` | 3 | ⬜ not in `traditions.json` at all |
-| `god_named` | 3 | ⬜ not in `traditions.json` at all |
-| `bargainers` | 3 | ⬜ not in `traditions.json` at all |
-| **TOTAL** | ⛔ **40** | |
+⛔ **AND `traditionKind` WAS NEVER ADDED.** Zero crafts carry it. ⚠️ **The field my own spec proposed —
+the one whose absence it named as *why they read as orphans* — does not exist.**
 
-⚠️ **The runtime-craft question was a distraction from a much larger one.** ⛔ **Forty AUTHORED crafts —
-nearly a tenth of the corpus — sit outside the domain system, and 31 of them are legitimate,
-well-authored folk content.**
+➡️ **So the two groups that SHOULD have been absorbed were.** ⛔ **The 25 crafts that were ruled to stay
+outside are still outside AND still indistinguishable from an orphan**, because the field that would mark
+them deliberate was never built.
 
-⚠️ **And `valley_craft` carries ZERO crafts.** `abilities/valley_craft.json` is a FILE whose crafts belong
-to `mason`, `rootkin`, `stillhold`, `horizon`, `harmonic`, `radiant_folk` and others. ➡️ **The file name is
-a pack label, not a tradition assignment.** ⛔ **Aevi read the filename as a tradition. CCode read the
-folk-tradition list as a sect list. Neither checked what the crafts actually carry.**
+⚠️ **THAT IS WHY THIS KEEPS CAUSING PROBLEMS.** It has now produced a wrong conclusion **three times**:
+CCode called them sects, Aevi called `valley_craft` retired, Aevi then called all 40 a defect. ⛔ **Every
+one of those is the same missing field.**
 
 ---
 
-## §3 — ⛔ THE MECHANISM: `domainOfTrad` IS BUILT ONLY FROM v2 SECTS
+## §3 — ⛔ ABSORBING harmonic AND radiant_folk WOULD BE WRONG
 
-`engine/traditions.js — buildTraditionIndex`:
+⚠️ **31 of the 25-plus crafts are these two, and Erik has already ruled their character correct:**
+*"a folk-shadow of Enginecraft/Latticework, in the medium of sound"* — ✅ **confirmed 2026-09-02.**
 
-```js
-for (const [dom, rec] of Object.entries(v2?.traditions || {})) {
-  for (const s of (rec.sects || [])) { ... domainOfTrad[pole] = dom; }
-}
-```
+⛔ **Absorbing them into `enginewright`/`lattice`/`blazeborn` would swell three poles by ~10 crafts each and
+delete the folk-shadow distinction that is the entire point of a foothill.** ➡️ **`valley_craft` was
+absorbed correctly BECAUSE it had no parents; these have parents and are not the same case.**
 
-⚠️ **Folk traditions ARE indexed** — into `byId` and `folkIds`, with `isFolkTradition()` to test them.
-⛔ **They are NEVER indexed into `domainOfTrad`.**
+---
 
-➡️ **`domainOfTradition("harmonic")` returns `null`. So does `radiant_folk`.**
+## §4 — ⬜ THE DURABLE FIX, AND IT IS TWO SMALL THINGS
 
-### ✅ AND THE RESOLVER ALREADY EXISTS IN THE DATA, UNREAD
+**1 · Add `traditionKind`.** `pole | foothill | folk | braid`. ⚠️ **SNG-536 §2a proposed exactly this and
+named exactly this consequence.** ➡️ **An orphan and a deliberate outsider stop looking identical.**
 
-⛔ **`foothillOf` has ZERO readers across the entire codebase.** Measured, comments stripped.
+**2 · Wire `foothillOf`.** ⛔ **It has ZERO readers** — measured, comments stripped — and it already holds
+the answer:
 
-**It answers the question cleanly:**
-
-| folk tradition | foothillOf | → domain |
+| foothill | foothillOf | → resolves to |
 |---|---|---|
-| `harmonic` | enginewright, lattice | ⚑ **both are Order** → **Order** |
+| `harmonic` | enginewright, lattice | ⚑ **both Order** → **Order** |
 | `radiant_folk` | blazeborn | ⚑ Radiance → **Light** |
-| `valley_craft` | stillhold, rootkin, churnfolk, lattice | ⚠️ **Building · Life · Chaos · Order — FOUR domains, no single answer** |
+| `god_named` · `bargainers` | ⬜ check parents | |
 
-⚠️ **Two of three resolve to exactly one domain. The third genuinely does not, and that is correct** —
-Valley Craft is what everyone in the valley can do, and belonging nowhere in particular is the point.
-✅ **It also carries no crafts, so nothing depends on the answer.**
+✅ **`domainOfTrad` is built only from v2 sects (`buildTraditionIndex`), so `domainOfTradition("harmonic")`
+returns null today.** ➡️ **Reading `foothillOf` gives a foothill a domain WITHOUT making it a fifteenth
+tradition** — which is precisely the distinction §2a was protecting.
 
----
+⚠️ **Then a foothill craft is in a domain for creation pools, R3's sense slot, R21 standing and schools —
+and is still visibly a foothill.**
 
-## §4 — WHAT THIS CHANGES
-
-⛔ **`SPEC_generative_pipeline.md` §1 finding 1 is WRONG AS WRITTEN** and should be read as corrected here:
-
-- **NOT** *"7 of 11 runtime crafts outside the ontology"*
-- **NOT** CCode's *"5 of 11, and valley_craft/radiant_folk are real sects"*
-- ✅ **The runtime problem is the 2 literal `"learned"` crafts (CCode fixed) plus 3 bond-taught with no
-  tradition key.** ⚠️ **`the-held-place` carrying `valley_craft` is not an error at all** — it is a folk
-  tradition, correctly named, in a system that cannot resolve it to a domain.
-
-⬜ **The bigger item is new:** **31 authored folk crafts have no domain**, so they are outside creation
-pools, outside R3's sense slot, outside R21's standing ladder, and outside the school structure.
-
-➡️ **The fix is small and the data is already there: read `foothillOf`.** ⬜ A folk tradition resolves to
-its parent's domain where the parents agree, and to none where they do not.
-
-⚠️ **`cross_pole_braid`, `god_named` and `bargainers` are a separate question** — 9 crafts carrying
-tradition ids that appear **nowhere in `traditions.json`**. ⬜ **Aevi does not know what they should be, and
-is not guessing.**
+⬜ **`cross_pole_braid` (3) genuinely resolves to no single domain, and `traditionKind: "braid"` is the
+honest answer rather than a parent.**
 
 ---
 
-## §5 — Aevi's ninth wrong claim, and the shape of it
+## §5 — ⚠️ HOW THIS WENT WRONG, TWICE, IN ONE DAY
 
-⚠️ **"`valley_craft` is retired" came from a memory of a stocktake line, not from the file.** ⛔ **The same
-failure as the other eight: a claim about state, made without opening the thing.**
+⛔ **Aevi's ninth claim:** *"`valley_craft` is retired"* — from a remembered stocktake line, not the file.
+⛔ **Aevi's tenth:** *"40 authored crafts are outside the domain system"* reported as a defect — **when her
+own spec had ruled it deliberate and named the missing field that makes it look accidental.**
 
-✅ **CCode was right to challenge it. The challenge just landed on the wrong side of the same gap** — folk
-traditions are neither retired nor sects, and **the answer required reading `traditions.json`'s
-`folkTraditions` block and `buildTraditionIndex` together.** ⚠️ **Neither of us read both.**
+➡️ **The lesson is not "read the file." It is READ YOUR OWN PRIOR RULING BEFORE REPORTING A FINDING IN THE
+AREA IT COVERS.** ⚠️ `po/` now holds enough rulings that Aevi can contradict herself from memory, and did.

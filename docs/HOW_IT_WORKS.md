@@ -526,14 +526,26 @@ muddled… eliminate the reference to valleycraft in terms of DOMAIN/TRADITION."
 were a three-way blend — stillhold .4 / wright .3 / rootkin .3 — so 18 crafts under one label were never
 one people's craft.**
 
-⬜ **`harmonic` (16) and `radiant_folk` (15) still carry a non-pole `tradition` value, and this is the ONE
-OPEN ITEM.** ⚠️ `AUDIT_SNG-257`: *"Radiant and Harmonic are folk ONLY because they were the FIRST built —
-before the 'one pole, one attribute' discipline existed. **They should get their own PURE pole-trees.**"*
+✅ **`harmonic` (16) and `radiant_folk` (15) ARE FOOTHILLS, THEY ARE NOT GOING ON THE RING, AND THEIR
+CRAFTS ARE ALREADY ALLOCATED.** ⛔ **This is settled — Erik, 2026-09-02.**
 
-✅ **Their attribute re-tags ARE DONE** — harmonic 43%→69% practical, radiant_folk 36%→80%, senses correctly
-left on mental. ⛔ **What was never ruled is `AUDIT_SNG-257` owed item 3: do they claim a real AXIS on the
-ring?** ⚠️ **Until that is answered `domainOfTradition()` returns null for both, and 31 coherent crafts sit
-outside creation pools, R3's sense slot, R21's standing ladder and the schools.**
+**How a foothill craft is placed, all of it built:**
+
+| | |
+|---|---|
+| **position** | ✅ by the craft's own `axes` vector — `radiant_folk` is 11 of 15 on `dark_light` |
+| **attribute** | ✅ re-tagged per `AUDIT_SNG-257` — harmonic 43%→**69%** practical, radiant_folk 36%→**80%**, senses correctly left mental |
+| **access** | ✅ band `"folk"` — *"open — a folk craft of the Valley"* |
+| **the ring** | ✅ **correctly absent.** `app.js:7157` routes folk crafts OUT of the ring layout on purpose: `if (isFolkTradition(trad)) { folk.push(ab); continue; }` |
+| `domainOfTradition()` → `null` | ✅ **CORRECT, not a gap** |
+
+⛔ **A FOLK CRAFT DOES NOT NEED A DOMAIN BECAUSE IT IS NOT DOMAIN-GATED.** ⚠️ Erik: *"the folk idea was just
+that everyone could access a small number of abilities from each domain."* ➡️ **Open access is the whole
+point; a ring position would GATE what is meant to be ungated.**
+
+⚠️ **AEVI REPEATEDLY REPORTED THIS AS AN OPEN QUESTION AND IT NEVER WAS.** She looked for a
+TRADITION-level placement when the resolution is CRAFT-level, and wrote the invented question into three
+documents. ⛔ **`AUDIT_SNG-257` owed item 3 is CLOSED: they do not claim an axis.**
 
 ⚠️ **`god_named` (3) · `bargainers` (3) · `cross_pole_braid` (3) carry tradition ids that appear nowhere in
 `traditions.json`. Unresolved, and smaller.**

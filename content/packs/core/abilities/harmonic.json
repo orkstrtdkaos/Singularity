@@ -86,7 +86,7 @@
     "FIGHT",
     "PUZZLE"
    ],
-   "tradition": "harmonic",
+   "tradition": "enginewright",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
    "powerSystem": "combination",
@@ -178,7 +178,10 @@
    "_powerSystemWas": "harmonic",
    "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_typed_20260829": "⛔ `force` — 'focused resonant waves to move, shake or SHATTER matter' — delivered energy with no edge. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`.",
-   "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend."
+   "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend.",
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "id": "resonant_shield",
@@ -252,7 +255,7 @@
     "FIGHT",
     "DUEL"
    ],
-   "tradition": "harmonic",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "combination",
@@ -346,7 +349,10 @@
    "_powerSystemWas": "harmonic",
    "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_wardMigrated_20260829": "⚠️ WARD `light` -> `radiance`. ⛔ MY MORNING MIGRATION WAS HALF A MIGRATION: I migrated `damageType` and `damageMix` and NEVER CHECKED `wardTypes`. Five crafts were warding a type that no longer existed — a ward against nothing, which reads as protection and is not. ⚠️ Found by the question-check flagging `heat` as UNWARDED and my going to look for the natural heat ward.",
-   "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend."
+   "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend.",
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "id": "harmonic_voice",
@@ -421,7 +427,7 @@
     "SOCIAL",
     "FIGHT"
    ],
-   "tradition": "harmonic",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "combination",
@@ -485,7 +491,10 @@
    ],
    "plainly": "A social/fight action that strengthens someone. Its strength is rated 3 out of 10 It affects 6 targets, and lasts for about 4 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: breaks if you or an ally acts against it.",
    "_powerSystemWas": "harmonic",
-   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "id": "stillness_field",
@@ -567,7 +576,7 @@
     "STEALTH",
     "SOCIAL"
    ],
-   "tradition": "harmonic",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "combination",
@@ -641,7 +650,10 @@
    "_wardTypes": "⛔ SNG-512. A pocket of quiet answers sound-borne force, emotion, and haste.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "harmonic",
    "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves.",
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "id": "chord_of_mending",
@@ -718,7 +730,7 @@
     "PUZZLE",
     "EXPLORE"
    ],
-   "tradition": "harmonic",
+   "tradition": "enginewright",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "combination",
@@ -787,7 +799,10 @@
    "_powerSystemWas": "harmonic",
    "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
-   "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend."
+   "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend.",
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "id": "voice_of_the_flock",
@@ -860,7 +875,7 @@
     "EXPLORE",
     "FIGHT"
    ],
-   "tradition": "harmonic",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "combination",
@@ -920,7 +935,10 @@
    ],
    "plainly": "A explore/fight action that strengthens someone. Its strength is rated 3 out of 10 It affects 4 targets, and lasts for about 4 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: a Panicked Member Floods The Chord With Their Fear.",
    "_powerSystemWas": "harmonic",
-   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "id": "resonant_anchor",
@@ -997,7 +1015,7 @@
     "SURVIVE",
     "FIGHT"
    ],
-   "tradition": "harmonic",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "combination",
@@ -1060,7 +1078,10 @@
    "_wardTypes": "⛔ SNG-512. Cannot be pushed, dragged or swept — and holds its own moment.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "harmonic",
    "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend."
+   "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend.",
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "id": "drumline_stride",
@@ -1129,7 +1150,7 @@
     "CHASE",
     "EXPLORE"
    ],
-   "tradition": "harmonic",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "combination",
@@ -1201,7 +1222,10 @@
    "plainly": "A chase/explore action that moves you or someone else. Its strength is rated 2 out of 10 It affects 1 target, and lasts for about 2 hours. Range is 3. Ranks: rank 2 extends range+targets; rank 3 adds to special. Limit: a Stumble AT Speed IS A Real Fall.",
    "_powerSystemWas": "harmonic",
    "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend."
+   "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend.",
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "id": "shatterpoint",
@@ -1286,7 +1310,7 @@
     "FIGHT",
     "PUZZLE"
    ],
-   "tradition": "harmonic",
+   "tradition": "enginewright",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "combination",
@@ -1351,7 +1375,10 @@
    "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. finds the point where a thing will break\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
    "_powerSystemWas": "harmonic",
    "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rungFix_20260830": "⛔ rung `damaging` → `none`. ⚠️ IT IS A `setup`: 'a minute's study names the weakest point — YOUR NEXT STRIKE or lever does more.' **The craft does no harm; it improves the harm someone else does.** ✅ AND THIS IS WHY IT PLACED 3rd IN CCODE'S TOURNAMENT AT 70%: a harm rung with no dice inherited the top tier rung, so a study-craft was fighting at 5d6+8. The ranking was measuring a mis-declaration."
+   "_rungFix_20260830": "⛔ rung `damaging` → `none`. ⚠️ IT IS A `setup`: 'a minute's study names the weakest point — YOUR NEXT STRIKE or lever does more.' **The craft does no harm; it improves the harm someone else does.** ✅ AND THIS IS WHY IT PLACED 3rd IN CCODE'S TOURNAMENT AT 70%: a harm rung with no dice inherited the top tier rung, so a study-craft was fighting at 5d6+8. The ranking was measuring a mis-declaration.",
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "schemaVersion": 1,
@@ -1361,7 +1388,7 @@
    "tier": 4,
    "energyCost": 12,
    "powerSystem": "combination",
-   "tradition": "harmonic",
+   "tradition": "lattice",
    "attribute": "practical",
    "axes": {
     "space_time": 0.7,
@@ -1520,7 +1547,10 @@
    "_nameWas": "The Sustained Chord",
    "_idWas": "the_sustained_chord",
    "_powerSystemWas": "harmonic",
-   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "schemaVersion": 1,
@@ -1530,7 +1560,7 @@
    "tier": 5,
    "energyCost": 13,
    "powerSystem": "combination",
-   "tradition": "harmonic",
+   "tradition": "lattice",
    "attribute": "practical",
    "axes": {
     "space_time": 0.9
@@ -1621,7 +1651,10 @@
    "_nameWas": "The Worldsong",
    "_idWas": "the_worldsong",
    "_powerSystemWas": "harmonic",
-   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "schemaVersion": 1,
@@ -1631,7 +1664,7 @@
    "tier": 4,
    "energyCost": 12,
    "powerSystem": "combination",
-   "tradition": "harmonic",
+   "tradition": "lattice",
    "attribute": "mental",
    "axes": {
     "harmonic": 0.6
@@ -1711,7 +1744,10 @@
    "_nameWas": "The Carrying Note",
    "_idWas": "the_carrying_note",
    "_powerSystemWas": "harmonic",
-   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "id": "echo_memory",
@@ -1783,7 +1819,7 @@
    "challengeTypes": [
     "INVESTIGATE"
    ],
-   "tradition": "harmonic",
+   "tradition": "lattice",
    "nativeOrCombination": "native",
    "harmRung": "none",
    "powerSystem": "combination",
@@ -1859,7 +1895,10 @@
    "_powerSystemWas": "harmonic",
    "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10.",
-   "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend."
+   "_offBandDeliberate_20260830": "⚠️ ABOVE THE LEVEL BAND, AND IT IS SYSTEMATIC RATHER THAN SLOPPY: **SIX crafts in harmonic and SIX in radiant_folk, evenly.** ⛔ AND `foothills.json` EXPLAINS IT: 'a foothill is not a pole plus a qualifier, IT IS A THREE-DOMAIN BLEND, the same shape a player character has' — harmonic is threnodist .5 / lattice .3 / mason .2; radiant_folk is blazeborn .5 / wright .3 / lattice .2. ✅ **BLENDING THREE SOURCES COSTS MORE THAN PRACTISING ONE**, and the band was calibrated on single-pole crafts. ⛔ DOCUMENTED, NOT CORRECTED — repricing twelve crafts to a band that does not describe them would make the foothills cheaper than the poles they blend.",
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "id": "echo_sense",
@@ -1917,7 +1956,7 @@
     "INVESTIGATE",
     "EXPLORE"
    ],
-   "tradition": "harmonic",
+   "tradition": "lattice",
    "powerSystem": "combination",
    "operativeAxis": [
     "perceptionDepth",
@@ -1977,7 +2016,10 @@
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "harmonic",
    "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "tier": 1
+   "tier": 1,
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   },
   {
    "id": "tremor_sense",
@@ -2035,7 +2077,7 @@
     "INVESTIGATE",
     "EXPLORE"
    ],
-   "tradition": "harmonic",
+   "tradition": "lattice",
    "powerSystem": "combination",
    "operativeAxis": [
     "perceptionDepth",
@@ -2096,7 +2138,10 @@
    "_powerSystemWas": "harmonic",
    "_powerSystemFix": "⛔ SNG-524. Was `harmonic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ DERIVED. ⛔ A GENUINE TIE — threnodist 0.5 (wild_nanite) + lattice 0.3 and mason 0.2 (ordered_nanite) = 0.5/0.5. ⚠️ NOT A WINNER, A BLEND. The Harmonic Heights run ordered pattern on ungoverned feeling and that IS the craft.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10.",
-   "tier": 1
+   "tier": 1,
+   "_foothill": "harmonic",
+   "folkAccessible": true,
+   "_foothillAlloc_20260902": "⛔ FOOTHILL ALLOCATION — Erik 2026-09-02: 'Those skills DO belong to a tradition and a domain… they are ALSO folk accessible.' ⚠️ TRADITION/DOMAIN AND FOLK ACCESS ARE ORTHOGONAL, NOT EXCLUSIVE. ✅ `valley_craft` was already done this way — its 15 crafts carry a real pole AND `folkAccessible: true`. ⛔ `harmonic` and `radiant_folk` were left half-done: real crafts, no real pole, no access flag. ➡️ PARENTS FROM THE FOOTHILL'S OWN RECORD: harmonic `foothillOf: [enginewright, lattice]` with `disposition.primary: \"order\"` — so LATTICE is the default and ENGINEWRIGHT takes the crafts that work MATTER (`sonic_resonance` shatters, `chord_of_mending` mends, `shatterpoint` finds the break, `carrying_call` is borrowed sound-work). radiant_folk `foothillOf: [blazeborn]` — all 15. ⚠️ `_foothill` PRESERVES THE FOLK-SHADOW IDENTITY: the craft is Order/Light by lineage and still recognisably of the Heights or the Plateau."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -551,8 +551,11 @@ const kindRound = (kind, sbUse, rngVals) => battleRound({
 // quads: [playerRoll, playerCrit, oppRoll, oppCrit]. Degrees preserved from the old bands exactly.
 const pLoses = [0.95, 0.00, 0.05, 0.99], pWins = [0.05, 0.99, 0.95, 0.00];   // lower roll = bigger margin (see the SNG-098 round above)
 const noKind = kindRound(null, sbCrush, pLoses), asFight = kindRound("fight", sbCrush, pLoses), unknown = kindRound("wombat", sbCrush, pLoses);
-check("SNG-247: the player-side tick fires and costs the fight's authored blood (health 3, no energy)",
-  noKind.pressureEvent?.side === "player" && noKind.pressureEvent.healthLoss === 3 && noKind.pressureEvent.energyLoss === 0);
+// ✅ R34a (Erik 2026-09-04): BEING DRIVEN BACK COSTS BOTH SIDES THE SAME KIND OF THING — the fight's tick now costs
+// the player blood AND wind, both authored (momentum.pressure.playerHealthLoss / playerEnergyLoss), neither zero.
+check("SNG-247/R34a: the player-side tick fires and costs the fight's authored blood AND wind (health 3, energy 8 — both content, neither zero)",
+  noKind.pressureEvent?.side === "player" && noKind.pressureEvent.healthLoss === sb.momentum.pressure.playerHealthLoss
+  && noKind.pressureEvent.energyLoss === sb.momentum.pressure.playerEnergyLoss && noKind.pressureEvent.healthLoss > 0 && noKind.pressureEvent.energyLoss > 0);
 check("SNG-247 (the one that matters): kind defaults to fight, and an UNKNOWN kind falls back to it — the numbers never move",
   JSON.stringify([noKind.pressureEvent.healthLoss, noKind.pressureEvent.energyLoss, noKind.state.momentum])
   === JSON.stringify([asFight.pressureEvent.healthLoss, asFight.pressureEvent.energyLoss, asFight.state.momentum])
@@ -570,8 +573,10 @@ const sbChase = { ...sbCrush, kinds: { ...(sb.kinds || {}), chase: { playerLoss:
 const chase = kindRound("chase", sbChase, pLoses);
 check("SNG-247: a per-kind playerLoss SHADOWS the fight's defaults — a chase takes wind, not blood",
   chase.pressureEvent.healthLoss === 0 && chase.pressureEvent.energyLoss === 12);
+// ⚠️ R34a: the fight's own tick drains energy too now, so the chase's 12 REPLACES the fight's playerEnergyLoss rather
+// than adding to a zero.
 check("SNG-247: a per-kind playerLoss actually drains the pool it names (reported AND applied)",
-  chase.state.playerEnergy === kindRound("fight", sbCrush, pLoses).state.playerEnergy - 12);
+  chase.state.playerEnergy === kindRound("fight", sbCrush, pLoses).state.playerEnergy - 12 + (sb.momentum.pressure.playerEnergyLoss ?? 0));
 check("SNG-247: a per-kind breakAtPressure ends it sooner — one decisive gain shakes a pursuer, two break a fighter",
   kindRound("chase", sbChase, pWins).resolved === "player" && kindRound("fight", sbCrush, pWins).resolved === null);
 

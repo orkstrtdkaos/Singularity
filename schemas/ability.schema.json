@@ -105,6 +105,15 @@
         "marginFloorPer": {
           "type": "number"
         },
+        "killCost": {
+          "description": "R35 (2026-09-04): what the caster pays when a lethal-rung hit KILLS through the death save — paid only on the kill; a held save costs energyCost. energy: \"all\" (the whole remaining pool) or a number; sealedUntilRest: no craft answers until a full night's rest (character.craftSealedUntilRest).",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "energy": { "oneOf": [ { "const": "all" }, { "type": "number", "minimum": 0 } ] },
+            "sealedUntilRest": { "type": "boolean" }
+          }
+        },
         "crit": {
           "type": "object"
         },

@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 90 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 91 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-03 · v1.9.337 · 90 files.**
+**Last measured: 2026-09-04 · v1.9.343 · 91 files.**
 
 ---
 
@@ -96,8 +96,8 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 <!-- APPARATUS:BEGIN -->
 | harness | kind | assertions | purpose |
 |---|---|---|---|
-| `tests/smoke` | ✅ GATE | 3522 | — |
-| `tests/how_it_works` | ✅ GATE | 233 | CCODE-285 |
+| `tests/smoke` | ✅ GATE | 3531 | — |
+| `tests/how_it_works` | ✅ GATE | 603 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 184 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
@@ -112,7 +112,7 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | `tests/taunt_wiring` | ✅ GATE | 11 | CCODE-306 |
 | `tests/roll_sensitivity` | ✅ GATE | 9 | SNG-258 §SENSITIVITY |
 | `tests/tradition_matrix` | ✅ GATE | 9 | WHICH KITS PERFORM, AND WHERE? A tradition × level × threat matrix |
-| `tests/breadth_currency_sweep` | ✅ GATE | 6 | SNG-260 §C+§D / SNG-261 §A |
+| `tests/breadth_currency_sweep` | ✅ GATE | 8 | SNG-260 §C+§D / SNG-261 §A |
 | `tests/endgame_scaling` | ✅ GATE | 5 | — |
 | `tests/dev_world` | ✅ GATE | 4 | CCODE-94: a DEV WORLD |
 | `tests/world_drive_audit` | ✅ GATE | 4 | — |
@@ -146,6 +146,7 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | `scripts/safe_delete` | 🔧 TOOL+SELFTEST | 5 | CCODE-283 |
 | `scripts/bump_version` | 🔧 TOOL+SELFTEST | 3 | SNG-274: the version moves, and it moves in ONE step |
 | `scripts/run_tests` | 🔧 TOOL+SELFTEST | 3 | EVERY SUITE RUNS, EVEN AFTER ONE GOES RED |
+| `scripts/skills_inject` | 🔧 TOOL+SELFTEST | 2 | regenerate the derived half of docs/SKILLS |
 | `scripts/apparatus` | 🔧 TOOL+SELFTEST | 1 | CCODE-301 |
 | `scripts/certify_counts` | 🔧 TOOL+SELFTEST | 1 | CCODE-327 |
 | `scripts/encounter_types` | 🔧 TOOL+SELFTEST | 1 | CCODE-262 |
@@ -166,6 +167,7 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | `scripts/casualty_sim` | 🔧 TOOL | — | CCODE-304 |
 | `scripts/damage_map` | 🔧 TOOL | — | CCODE-280 / AEVI's SPEC_damage_type_system |
 | `scripts/derive_location_tiers` | 🔧 TOOL | — | SNG-383 §2 |
+| `scripts/duel_pell_vs_veth` | 🔧 TOOL | — | po/DUEL_pell_vs_veth |
 | `scripts/effect_audit` | 🔧 TOOL | — | IS EACH EFFECT ACTUALLY WIRED? MEASURED BY BEHAVIOUR, NEVER BY GREP |
 | `scripts/extract_generated_places` | 🔧 TOOL | — | SNG-396 §3 |
 | `scripts/field_atlas` | 🔧 TOOL | — | CCODE-287 |

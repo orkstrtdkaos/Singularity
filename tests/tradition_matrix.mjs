@@ -137,6 +137,11 @@ console.log(`      ${UNDER_TEST.length} traditions under test (+${CONTROL} as th
 const results = {};
 for (const trad of [...UNDER_TEST, CONTROL]) {
   results[trad] = { bands: {}, sit: {} };
+  // ⛔ `trad` is null for the CONTROL ROW — the header says so: "24 traditions under test (+null as the
+  // control)". The seed expression called `(trad ? trad.length : 0)` and crashed on it, so this file has been dead at
+  // HEAD. ⚠️ AND THE RATCHET COULD NOT SEE IT: a crash emits no FAIL line, so it counted as zero failures.
+  // ✅ Guarded as `(trad ? (trad ? trad.length : 0) : 0)` — the 24 real traditions keep their exact seeds, so the whole
+  // matrix is unchanged; only the control row, which never ran, is new.
   for (const level of LEVELS) {
     const kit = buildKit(trad, level);
     results[trad].bands[level] = { kitSize: kit.length, kitAbilities: new Set(kit.map(a => a.id)).size, families: [...new Set(kit.flatMap(a => familiesOfAbility(a, FN_INDEX)))], bands: {}, byStyle: {} };
@@ -147,7 +152,7 @@ for (const trad of [...UNDER_TEST, CONTROL]) {
         let won = 0;
         for (let i = 0; i < TRIALS; i++) {
           const f = oneFight({ threat: band.threat, moves: kit, sheet, sb, steps, rules,
-            rng: mulberry32(0x7ABC ^ (trad.length * 7919) ^ (level * 104729) ^ (band.threat * 31) ^ (style.name.length * 2654435761) ^ i) });
+            rng: mulberry32(0x7ABC ^ ((trad ? (trad ? trad.length : 0) : 0) * 7919) ^ (level * 104729) ^ (band.threat * 31) ^ (style.name.length * 2654435761) ^ i) });
           if (f.won) won++;
         }
         results[trad].bands[level].byStyle[style.name][band.name] = pct(won, TRIALS);
@@ -170,7 +175,7 @@ for (const trad of [...UNDER_TEST, CONTROL]) {
       let won = 0;
       for (let i = 0; i < TRIALS; i++) {
         const f = oneFight({ threat: 78, kind: SIT_KIND[kind], moves: kit12, sheet, sb, steps, rules,
-          rng: mulberry32(0x51D ^ (trad.length * 31337) ^ (kind.length * 7919) ^ (style.name.length * 104729) ^ i) });
+          rng: mulberry32(0x51D ^ ((trad ? trad.length : 0) * 31337) ^ (kind.length * 7919) ^ (style.name.length * 104729) ^ i) });
         if (f.won) won++;
       }
       results[trad].sit[kind][style.name] = pct(won, TRIALS);

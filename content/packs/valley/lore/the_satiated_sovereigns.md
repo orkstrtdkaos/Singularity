@@ -159,6 +159,85 @@ nobody attended. **Feeding is not a metaphor down there. It is infrastructure.**
 
 ---
 
+## ⛔ WHO STARVES THEM — and it is not a rescue party
+
+⚠️ **ERIK 2026-09-02, and it corrects an earlier framing in this file:** *"They come because they were
+starved. And those who are starving them are the ones who can stop them — that's the whole point of world
+arcs and these powerful figures pushing in their ways in this game. And the player is one of them."*
+
+⛔ **THE COUNTERWEIGHT IS NOT SUMMONED BY A SOVEREIGN'S SUCCESS. IT IS ALREADY WORKING.**
+
+**Neth** was attending deaths nobody sent for long before anyone named Morvane. **The Deep Lantern** already
+walks the dark. **Halcyon** already made one perfect thing and stopped. ⚠️ **None of them ROSE in response
+to anything.** Each was pushing their axis against the foreclosure — ➡️ **and that pushing IS the
+starvation.**
+
+⚠️ **A Sovereign eventually notices who has been costing it.**
+
+➡️ ⛔ **WHICH IS WHY THE ARRIVAL TARGETS THEM SPECIFICALLY.** Not *"you produced an opponent"* — **"you are
+the reason I am hungry, and you are therefore the only thing that can finish me."** ⚑ **Starving it and
+being able to kill it are the same act at different depths.**
+
+### ⚑ AND THE PLAYER IS ONE OF THEM
+
+⛔ **NOT the conditions that let a great figure stand. ONE OF THE FIGURES.**
+
+`arc_the_poles_pull` already says it: *"a player who understands the coordinate model can become **an agent
+of the open** against the whole world's drift."* ⚠️ **An agent — alongside Neth, the Deep Lantern, Kesh
+Ardent, Rethe.** A player at the 30–60 band with a hold, a band and allies is one of them **by the same
+measure the others are.**
+
+### ⚠️ SO IT IS ONE SYSTEM, NOT THREE
+
+| | |
+|---|---|
+| **greater arcs** | powerful figures pushing in their directions |
+| **foreclosure** | what happens where nobody pushes |
+| **a Sovereign** | what gets fed by foreclosure |
+| ⛔ **the arrival** | what comes when you push hard enough — **because you are the one doing it** |
+
+---
+
+## ⛔ NINETEEN OF TWENTY VILLAINS ALREADY CARRY THEIR COUNTERWEIGHT
+
+`tradition_epics.json` → `rivals`. ⚠️ **These were authored before any of this and they are structural, not
+thematic:**
+
+| the foreclosure | who has been costing it |
+|---|---|
+| **Valen Sunwrack** — burned the dark out of a Reach | **The Deep Lantern**, who *"sees without light"* — ⚠️ **and who also opposes The Starless One.** She holds no side; she works in the MIDDLE, which is why either extreme starves against her |
+| **The Unbodied** — dissolved and would take everyone | **The One Who Stayed Embodied** — reached the edge of leaving and chose the flesh |
+| **Harrow** — makes people into mechanisms | **Rethe** — becoming a machine and *"still asking to be talked out of it."* ⚑ **He opposes Harrow because Harrow STOPPED ASKING, which is what a Sovereign is** |
+| **The Lidded Calm** — keeps calm by keeping the wound | **The Keeper of the Unsaid** — ⚠️ **the same act, and the difference is whether you know what it costs** |
+| **Morvane** — stopped attending and started dealing | **Neth**, who never once looked away |
+| **The Choirmaster Who Would Not Return** | **The Last Choirmistress** |
+| **The Ender Who Forgot Why** | **Kesh Ardent, the Edge That Holds** |
+| **The Scouring Hand** | **The Last Mercy** |
+| **The Raw Chord** | **The Weeping Archive** |
+| **The Still Lattice** | **The Glad Dissolution** · **The Open Figure** |
+| **The Appetite** | **The Hundred Hands** |
+| **The Final Argument** | **The Kind Liar** |
+
+⬜ **Three carry unresolved or absent rivals** — `the_hollow_king` names `maren_ossitide` and
+`seraphine_unbending`, **neither of which exists on the roster.**
+
+---
+
+## ⚠️ SOVEREIGNTY IS ACHIEVED, NOT INNATE — so they are not all the same size
+
+⛔ **These are things that BECAME.** A refusal carried far enough that it succeeded. ➡️ **Which means they
+differ in age, reach and how completely they hold their axis.**
+
+**Lucifer is ancient and holds Light entire.** ⚠️ **A RECENT one — something that reached satiation a
+generation ago — is THIN:** a small supply line, few agents, an incomplete hold. **Beatable in the 30–60
+band, if the pipeline is found before it sets.**
+
+⬜ **AND IT MAKES AN AUTHORED VILLAIN A TRAJECTORY RATHER THAN A TIER.** The Scouring Hand *"unmakes for the
+joy of it until nothing is left to end."* ⛔ **If it ever finishes, it does not die — IT ARRIVES.**
+⚠️ **A villain you fail to stop is not a defeat. It is a promotion.**
+
+---
+
 ## ⛔ HELD, NOT OPPOSED
 
 **The great figures are the counterweight, and mostly do not know it.** Not because they are stronger —

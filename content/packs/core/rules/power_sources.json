@@ -127,12 +127,25 @@
    "_group": "B · STATE CHOSEN — `nanite` needed one and no ruling was required: its 13 crafts already carry `ordered_nanite`, and 'administration is machinery' is the reason."
   },
   "abyssal": {
-   "primary": null,
-   "mix": null,
-   "density": 0.55,
+   "primary": "veil",
+   "mix": {
+    "veil": 0.45,
+    "metaphysical": 0.35,
+    "precursor": 0.15,
+    "wild": 0.05
+   },
+   "density": null,
    "why": "⛔ ERIK 2026-08-08: mostly nanite, like the Seraphs — the two are the same craft pointed at opposite devotions. The WILD share is the Deep Below's untended field. The VEIL share is what makes them Abyssal: they alone reach for what is on the far side, and it reaches back.",
    "_group": "B · DEFERRED — primary UNKNOWN, not stale",
-   "_ruledPendingAudit": "⛔ ERIK RULED 2026-08-23: Abyssal leans VEIL-primary, details settled at the Abyssal audit — a THIRD value, neither this row's old `nanite` (08-08) nor the superseded table's `precursor` (08-15).\n⚠️ AEVI SAID 'leave the row as it stands'; her own acceptance test says ZERO occurrences of `nanite`. Those conflict on this one row, and leaving `nanite` would keep exactly the silent misgrade this ticket exists to end — `fieldOfSource()` ends in `|| \"substrate\"`, so a dead name does not throw, it grades an Abyssal craft on the lattice axis. ⛔ SO THE PRIMARY IS NULL: not stale, UNKNOWN. A card that cannot answer must decline rather than answer wrongly, which is the same rule §2b sets for the mix.\n⚠️ `veil` is NOT written in, because 'leans veil-primary, details at the audit' is a direction and not yet a value — writing it would be me settling what Erik deferred."
+   "_ruledPendingAudit": "⛔ ERIK RULED 2026-08-23: Abyssal leans VEIL-primary, details settled at the Abyssal audit — a THIRD value, neither this row's old `nanite` (08-08) nor the superseded table's `precursor` (08-15).\n⚠️ AEVI SAID 'leave the row as it stands'; her own acceptance test says ZERO occurrences of `nanite`. Those conflict on this one row, and leaving `nanite` would keep exactly the silent misgrade this ticket exists to end — `fieldOfSource()` ends in `|| \"substrate\"`, so a dead name does not throw, it grades an Abyssal craft on the lattice axis. ⛔ SO THE PRIMARY IS NULL: not stale, UNKNOWN. A card that cannot answer must decline rather than answer wrongly, which is the same rule §2b sets for the mix.\n⚠️ `veil` is NOT written in, because 'leans veil-primary, details at the audit' is a direction and not yet a value — writing it would be me settling what Erik deferred.",
+   "_priorValue": {
+    "primary": null,
+    "mix": null,
+    "density": 0.55,
+    "why": "⛔ ERIK 2026-08-08: mostly nanite, like the Seraphs — the two are the same craft pointed at opposite devotions. The WILD share is the Deep Below's untended field. The VEIL share is what makes them Abyssal: they alone reach for what is on the far side, and it reaches back."
+   },
+   "_settled_20260902": "⛔ THE DEFERRAL IS CLOSED. Erik 2026-08-23 ruled 'Abyssal leans VEIL-primary, details settled at the Abyssal audit.' ⚠️ THE AUDIT RAN 2026-08-29 (HOW_IT_WORKS log: 'ABYSSAL AUDIT: 20 → 1') AND NOBODY CAME BACK TO SET THIS ROW — the note pointed forward and was never followed back. Erik 2026-09-02: 'we completed the abyssal audit and must not have done this step.' ✅ MIX DERIVED BY READING ALL 22 CRAFTS AND EVERY RANK, not by proportion: VEIL (10) — the far side does the work: `offered_mouth` shows a hunger a target and IT takes; `choir_sustains` says outright 'the energy isn't yours'; `borne_bargain` 'YOU DO NOT DO IT — SOMETHING CARRIES YOU'; plus `offered_lesser`, `consumed_wound`, `called_form`, `hungry_step`, `drowning_deep`, `collection`, `deep_covenant`. METAPHYSICAL (10) — a person reading, naming and pricing, with no far side involved: `lever` finds the one thing someone will not risk; `dread_mantle` is your own history showing; plus `appetite_sense`, `the_read_want`, `the_read_hunger`, `struck_term`, `offered_price`, `descent`, `appetite_strike`, `descent_path`. PRECURSOR (1 craft, weighted .15 not .05) — `hollow_that_holds`, the kept hollow. ⚠️ WEIGHTED ABOVE ITS COUNT BECAUSE IT IS ANCESTRY, NOT PRACTICE: 'their ancestors declined to give the nanites up.' Erik 2026-08-08: 'mostly nanite, like the Seraphs — the same craft pointed at opposite devotions.' That survives here. WILD (1) — `honest_bargain`, 'struck from the tangled substrate… wild in its keeping.' ⬜ Scanned every rank of all 22 for further wild markers; there are none. ⚑ THE SHAPE: the veil crafts are how they ACT, the metaphysical crafts are how they SEE. That is why the tradition reads as horrifying rather than merely dark — THE READING IS ENTIRELY HUMAN AND ONLY THE ANSWERING IS NOT.",
+   "_perRankSources_20260902": "⬜ THREE CRAFTS CHANGE SOURCE BETWEEN RANK 1 AND RANK 3, and a flat per-craft source cannot express it. Awaiting the per-rank `source` mechanism (`SPEC_body_source.md` §4 — feasible, `tree[]` already carries per-rank `harmRung`/`backlashRung`). `called_form` — r1 summons 'the underside of a thing, the fear beneath the anger' in MOMENTARY form (metaphysical); r3 'what you call up HOLDS, ACTS IN THE WORLD, and is yours to direct. IT IS NOT DOCILE' (veil). `the_read_hunger` — r1 reads one creature or person (metaphysical); r3 reads 'something large — A DEEP THING, a host, a place's whole hunger' (veil). `hungry_step` — r1 walks ALONGSIDE an appetite's pull (metaphysical); r3 'the appetites READ YOU AS ONE OF THE THINGS ALREADY MOVING' (veil). ⚠️ THE PATTERN IS THE TRADITION'S WHOLE SHAPE: you begin by understanding them and end by being counted among them. ⛔ `choir_sustains` is veil from r1 — 'the energy isn't yours' is in the rank-1 text."
   },
   "enginewright": {
    "primary": "ordered_nanite",

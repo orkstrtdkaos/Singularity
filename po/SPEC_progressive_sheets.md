@@ -129,7 +129,7 @@ Pell: **L27, 17 authored crafts, capacity 14** — your numbers, to the craft. A
 
 ## ✅ §5 / Q5 — `closed: [...]` exists, as a reader
 
-Veth, measured: the domain draw handed her **`ki_wield` and `false_stance`** (somatic, via her Death domain's neighbours) — not the three you named, but the *direction* of the risk is real and now gated as real. ✅ `closed: [...]` is read by `kitFor` (the draw skips it) and carried by `growthFor`. Nobody authors it yet — reader before field; the day you write one on Veth it is already honoured. (The "Cassiel Ord has learned something" line is not in `DESIGN_celebrations.md §3` as quoted, but §3's rule — recurring → digest — is the point and I agree with it.)
+Veth, measured against the record as it stood at 15 crafts: the domain draw handed her **`ki_wield` and `false_stance`** (somatic, via her Death domain's neighbours) — not the three you named, but the *direction* of the risk is real. ⚠️ **You rebuilt her to 24 crafts while I was pushing**, which puts her above capacity (17) — so the draw now adds her nothing and every one of the 24 is kept; the risk is gated on a fixture with room instead, and Veth stands as the second real §2 floor case. ✅ `closed: [...]` is read by `kitFor` (the draw skips it) and carried by `growthFor`. Nobody authors it yet — reader before field; the day you write one it is already honoured. (The "Cassiel Ord has learned something" line is not in `DESIGN_celebrations.md §3` as quoted, but §3's rule — recurring → digest — is the point and I agree with it.)
 
 ## §6 — ANSWERS
 

@@ -4038,14 +4038,24 @@ console.log("\n── §59 · sheets fill in through play; an authored sheet is 
   // record authors it yet, so the fixture supplies it; the day Aevi writes one it is already read.
   {
     const veth = npcs59.find(n => /veth/i.test(n.name || n.id));
-    const open = veth && NS59.kitFor(veth, { catalog: C59.abilities, traditionIndex: C59.traditionIndex, domainAccess: da59, day: 400, cfg: cfg59 });
-    const authored = new Set((veth?.abilities || []).map(a => a.abilityId || a));
+    // ⚠️ ON A FIXTURE WITH ROOM — a fixture, because Aevi rebuilt Veth to 24 crafts (capacity 17) an hour after this
+    // was first written against her record, and a person above capacity has room 0 by design. The PROPERTY is
+    // what is gated: a person below capacity with a domain gets crafts drawn they were not written with.
+    const roomy = veth && { ...veth, abilities: (veth.abilities || []).slice(0, 5) };
+    const open = roomy && NS59.kitFor(roomy, { catalog: C59.abilities, traditionIndex: C59.traditionIndex, domainAccess: da59, day: 400, cfg: cfg59 });
+    const authored = new Set((roomy?.abilities || []).map(a => a.abilityId || a));
     const drawn = (open?.crafts || []).filter(c => !authored.has(c.id)).map(c => c.id);
     check("§59: ⚠️ the domain draw DOES add unauthored crafts to an authored person — the §5 risk is real, measured", drawn.length > 0, drawn.join(" · "));
-    const shut = veth && NS59.kitFor({ ...veth, closed: drawn }, { catalog: C59.abilities, traditionIndex: C59.traditionIndex, domainAccess: da59, day: 400, cfg: cfg59 });
+    const shut = roomy && NS59.kitFor({ ...roomy, closed: drawn }, { catalog: C59.abilities, traditionIndex: C59.traditionIndex, domainAccess: da59, day: 400, cfg: cfg59 });
     check("§59: ⛔ …and closing exactly those keeps them out — an authored absence survives growth",
       !!shut && drawn.every(id => !shut.crafts.some(c => c.id === id)) && shut.closed.length === drawn.length, `closed ${shut?.closed.join(" · ")}`);
-    check("§59: …`growthFor` carries the same list so a caller can see what is closed", NS59.growthFor({ ...veth, closed: drawn }, C59.abilities, { day: 400, cfg: cfg59 }).closed.length === drawn.length);
+    check("§59: …`growthFor` carries the same list so a caller can see what is closed", NS59.growthFor({ ...roomy, closed: drawn }, C59.abilities, { day: 400, cfg: cfg59 }).closed.length === drawn.length);
+    // ✅ AND THE REAL VETH IS THE SECOND §2 CASE: 24 written, capacity 17 — all 24 kept, nothing drawn on top.
+    const vk = veth && NS59.kitFor(veth, { catalog: C59.abilities, traditionIndex: C59.traditionIndex, domainAccess: da59, day: 400, cfg: cfg59 });
+    const vIds = (veth?.abilities || []).map(a => a.abilityId || a);
+    check("§59: …and Veth as rebuilt (24 > capacity) keeps every authored craft and gains none on top — the floor, twice over",
+      !!vk && vIds.length > NS59.growthFor(veth, C59.abilities, { day: 400, cfg: cfg59 }).capacity && vIds.every(id => vk.crafts.some(c => c.id === id)) && vk.crafts.length === vIds.length,
+      `${vIds.length} authored, kit ${vk?.crafts.length}`);
   }
 
   // ⛔ GROWTH HAS A CALLER, AND IT READS. The narrator's block carries the queue and the thin flag.

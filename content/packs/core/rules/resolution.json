@@ -1127,7 +1127,10 @@
   "levelPerDaysKnown": 96,
   "levelPerStanding": 25,
   "_safetyBound": "⚠️ AN ARITHMETIC GUARD AND NOTHING ELSE, deliberately set ABOVE the crossing so it can never be mistaken for the cap this replaces. If a level ever reaches this, something has gone wrong upstream and the number should be read as a bug, not as a Mythical.",
-  "safetyBound": 200
+  "safetyBound": 200,
+  "_poolDials": "⛔ DUEL_pell_vs_veth §A.1 / DECISIONS_OWED Q1 (CCode 2026-09-04): these two are the code defaults `npcsheet.sheetFor` has always used, AUTHORED AT IDENTITY so they are real dials rather than constants hiding in a function. ⚠️ A person is level×3 health and a FLAT 40 energy; a pressure tick costs the opponent 22, so two authored people are spent by round four. ⬜ THE NUMBERS ARE ERIK’S — nothing here is a ruling, only the place a ruling lands.",
+  "healthPerLevel": 3,
+  "energyBase": 40
  },
  "capabilityByTier": {
   "note": "⛔ ERIK 2026-08-30: \"notable · regional · heroic need to be split out — they are INCREASING CAPABILITIES.\" They sat at an identical 0.5 in `arc_response.attentionByTier`, so a Hero steadied a line and bent a battle exactly as much as a Notable. ⚠️ AND THIS IS A SECOND TABLE ON PURPOSE, WHICH IS NORMALLY THE THING THIS PROJECT FORBIDS. `attentionByTier` is read by `worldtick.js` as an ARC-ATTENTION BUDGET — how much of the world's notice a rung commands — and its three-way tie at 0.5 is CORRECT for that: a notable, a regional and a heroic figure can draw equal notice while differing in what they can DO. ⛔ MOVING THE ARC BUDGET TO FIX A COMBAT LADDER WOULD HAVE CHANGED HOW ARCS SPEND ATTENTION, SILENTLY. Two facts, two tables — and `how_it_works` asserts they carry the SAME RUNGS so they cannot drift apart in name. ⚠️ epic 1.0 is the anchor and must not move: it is the 0.15 hero swing that shipped, and every existing gate is measured against it. riffraff · legendary · mythic keep the values Erik has already seen ruled on. ⚠️ AND I MADE THE SAME DOC-KEY MISTAKE TWICE: `wiring_audit` exempts a `_foo` ONLY where a real sibling `foo` exists, and its own header says that exemption must not become a hiding place. `_why` has no sibling `why`. Section prose belongs in `note`, which is an annotation key the audit already exempts.",

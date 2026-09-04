@@ -138,3 +138,39 @@ HARDER TO INTERFERE WITH."* ⬜ **It may want a `meaningCharge` rather than its 
    world tick have a hook, or is this a load-time computation only?
 6. **The 15 `density: null` entries** in `power_sources.json` are the sibling of this problem. ⬜ Should
    they be derived from region substrate the same way, rather than authored?
+
+---
+
+# ROUND 2 — CCode · 2026-09-04 · v1.9.345
+
+⚠️ **Nothing here is built, and that is correct: Q3 is a resolution change and it is yours (DECISIONS_OWED Q7). What
+I can answer is what exists, measured.**
+
+**Q1 · derived or stored.** ⛔ **Derived.** `scripts/subject.mjs meaning-density` reads it plainly: the term appears in
+six specs and **no engine file, no body section, no test** — a spec-only subject. Deriving it at load is cheap: 135
+locations, and every signal you list is already authored (`tags`, `tier`, `communityId`, `npcsPresent`). ⚠️ The cost
+you worried about is real only if it is recomputed per roll; compute it where `substrateDensity` is resolved (`[substrate]
+field resolved onto 135 locations` at load) and it is one pass.
+
+**Q2 · can `substrate.js` take a second density.** ⚠️ **Not cleanly today.** Every reader assumes one number:
+`substrateVerdict({density})`, `bandFactor(band, eff)`, `fieldValueAtSite(source, location, …)` — and there are already
+**three** readers of the one number that disagree (the card reads the craft's source, the roll reads
+`substrateBand[tradition]`, a schooled card's band comes from the tradition). ⛔ **A second axis added before those
+three agree would be a fourth reader.** That is DECISIONS_OWED Q3, and it comes first.
+
+**Q3 · what a metaphysical craft does with two grounds.** ⬜ Yours. One measured fact for it: no substrate term enters
+a skill-battle roll at all — the ground gates and penalises FREE actions only. So whatever the shape, it lands in
+`substrateForAction` and the free-action path unless a separate ruling puts ground into a round.
+
+**Q4 · a holder-check for provenance.** ✅ **Half exists.** `standing.js` → `standingFor(character, holderId, kind)`
+answers "do you have standing with these people" for `people` and `settlement`. ⛔ **"Is this yours / of your line"
+does not** — nothing models a family or a lineage as a holder of anything. An heirloom that is near-zero to a stranger
+needs a new test, and it is small once you say what "of that family" is recorded as.
+
+**Q5 · does it change over time.** ✅ **The hook exists.** `runWorldTick` already runs `advanceHoldings` and the
+delegated-work pass on world time; a per-place recompute belongs beside them. A place that empties would thin on the
+tick, as you want.
+
+**Q6 · the `density: null` rows.** ⚠️ **There are 3, not 15** — `churnfolk`, `stillhold`, `abyssal` (Aevi's Abyssal
+pass on 09-03 set the others). Deriving them from region substrate is the same derivation as this spec's; ⬜ do it in
+the same pass or not at all.

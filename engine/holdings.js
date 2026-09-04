@@ -148,3 +148,63 @@ export function unstewardedHoldings(character, activeIds = []) {
   const active = new Set(activeIds);
   return character.holdings.filter(h => h.steward && !active.has(h.steward));
 }
+
+/* ═══ SPEC_holding_release_transfer — THE ONE-WAY DOOR GETS TWO EXITS, AND THEY ARE NOT THE SAME EXIT ═══
+ *
+ * ⛔ RELEASE EXISTED AS A BARE FILTER IN app.js (`character.holdings = holdings.filter(x => x.id !== id)`), reachable
+ * by the GM through `holdingOps`, and it was the undo button §3 of the spec warns about: the obligation vanished, the
+ * steward was silently un-charged, nothing was said. ⚠️ The place always persists; what changes is who answers for it.
+ *
+ *   release  — you walk away. The obligation stays with you, UNPAID. The steward is released. Recorded, and said once.
+ *   transfer — someone else takes it up. The obligation goes WITH it. The steward may stay (assignments key on
+ *              npcId::charge and never name the holder, so nothing breaks if they do).
+ *
+ * ⛔ THE STANDING COST IS NOT DECIDED HERE. §R2.3 left “standing, or a payable debt?” as Erik's; the record carries
+ * `reason` and `obligationUnpaid` so whichever instrument he chooses has something to read. Neither exit is a
+ * celebration (DESIGN_celebrations §3): they queue ONE line for the world-tick news, announced once. */
+
+/** Queue a line the tick will say once. ⚠️ PERSISTED ON THE CHARACTER, not returned — a turn's apply-step has no
+ *  news channel of its own, and the tick already owns “once, ever” for holding offers. */
+function queueHoldingEvent(character, text) {
+  character.holdingEvents = [...(character.holdingEvents || []), { text, announced: false }];
+}
+
+/** The tick's read: every queued line not yet said, marked said. Returns the texts. */
+export function takeHoldingEvents(character) {
+  const ev = (character?.holdingEvents || []).filter(e => e && !e.announced);
+  for (const e of ev) e.announced = true;
+  return ev.map(e => e.text);
+}
+
+/** You walk away. Returns the moved record, or null when nothing by that id is held. */
+export function releaseHolding(character, id, { reason = null, day = null, worldCount = null } = {}) {
+  ensureHoldings(character);
+  const i = character.holdings.findIndex(h => h && h.id === id);
+  if (i < 0) return null;
+  const [h] = character.holdings.splice(i, 1);
+  const rec = { ...h, formerHolder: character.id || null, releasedDay: day, releasedAt: worldCount, reason: reason || null,
+    // ⛔ WHAT YOU OWED IS STILL OWED. Walking away does not pay it; the record says so until something does.
+    obligationUnpaid: !!h.obligation, stewardReleased: h.steward || null,
+    history: [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `released${reason ? ` — ${reason}` : ""}` }].slice(-12) };
+  character.formerHoldings = [...(character.formerHoldings || []), rec];
+  queueHoldingEvent(character, `You have given up ${h.name || h.id}${h.obligation ? " — what it owed is still owed" : ""}${h.steward ? `, and ${h.steward} is released from keeping it` : ""}.`);
+  return rec;
+}
+
+/** Someone else takes it up. `toEntity` is an npcId today (§R2.5: a community can be named in `toName` and is a
+ *  narrative record — nothing in the world model can hold property yet). Returns the moved record, or null. */
+export function transferHolding(character, id, { toEntity = null, toName = null, day = null, worldCount = null } = {}) {
+  ensureHoldings(character);
+  if (!toEntity) return null;
+  const i = character.holdings.findIndex(h => h && h.id === id);
+  if (i < 0) return null;
+  const [h] = character.holdings.splice(i, 1);
+  const rec = { ...h, formerHolder: character.id || null, transferredTo: toEntity, transferredToName: toName || null,
+    transferredDay: day, transferredAt: worldCount,
+    // ✅ THE OBLIGATION GOES WITH IT — that is the whole difference from release, and why a player would prefer it.
+    obligationUnpaid: false, stewardStays: !!h.steward,
+    history: [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `handed to ${toName || toEntity}` }].slice(-12) };
+  character.formerHoldings = [...(character.formerHoldings || []), rec];
+  queueHoldingEvent(character, `${h.name || h.id} is ${toName || toEntity}'s to keep now${h.obligation ? ", and what it owes goes with it" : ""}.`);
+  return rec;
+}

@@ -4166,6 +4166,104 @@ console.log("\n── §60 · the craft reaches the round — def under the decl
   check("§60: ⛔ the player seat passed to `battleRound` carries level, health and soak",
     /playerSheet: \{ attributes: character\.attributes[\s\S]{0,400}level: Number\(character\.level\) \|\| 1, health: character\.health, maxHealth: character\.maxHealth, soak:/.test(encSrc));
 }
+/* ═════ §61 — A HOLDING HAS TWO EXITS, AND THEY ARE NOT THE SAME EXIT ═════ */
+// ⛔ SPEC_holding_release_transfer — release lived in app.js as a bare filter reachable by the GM: the obligation vanished,
+// the steward was silently un-charged, nothing was said. Now: release keeps the debt with you and says so once;
+// transfer moves the debt with the place and the keeper may stay. Both are recorded; neither is a celebration.
+console.log("\n── §61 · a holding has two exits — release keeps the debt, transfer moves it, the tick says it once ──");
+{
+  const H61 = await import("../engine/holdings.js");
+  const W61 = await import("../engine/worldtick.js");
+  const appSrc = rd("app.js"), gmSrc = rd("engine/gm.js"), wtSrc = rd("engine/worldtick.js");
+  check("§61: ⛔ `releaseHolding`, `transferHolding` and `takeHoldingEvents` exist", ["releaseHolding", "transferHolding", "takeHoldingEvents"].every(k => typeof H61[k] === "function"));
+  check("§61: ⛔ the bare filter is gone from app.js — both exits go through the operations",
+    !/character\.holdings = \(character\.holdings \|\| \[\]\)\.filter\(x => x\.id !== id\)/.test(appSrc) && /releaseHolding\(character, id/.test(appSrc) && /transferHolding\(character, id/.test(appSrc));
+  check("§61: …the GM contract names both exits and the receiving entity", /claim\|steward\|release\|transfer/.test(gmSrc) && /toEntity/.test(gmSrc));
+  check("§61: …the Holdings tab offers both, per holding", /data-hold-release=/.test(appSrc) && /data-hold-transfer=/.test(appSrc) && /data-hold-to=/.test(appSrc));
+  check("§61: …and the tick reads the queue", /takeHoldingEvents\(character\)/.test(wtSrc));
+
+  const c = { id: "c61", holdings: [], worldState: { assignments: { "cass::keep": { id: "cass::keep", npcId: "cass", charge: "keep", status: "working", progress: 2 } } } };
+  H61.addHolding(c, { id: "p1", kind: "post", name: "The Post", steward: "cass", obligation: "a tithe", day: 10 });
+  H61.addHolding(c, { id: "p2", kind: "enterprise", name: "The Mill", steward: "edvar", day: 10 });
+  const rel = H61.releaseHolding(c, "p1", { reason: "given up", day: 12, worldCount: 500 });
+  const tr = H61.transferHolding(c, "p2", { toEntity: "pell", toName: "Pell", day: 12, worldCount: 500 });
+  check("§61: ⛔ release — the place leaves `holdings`, keeps its debt UNPAID, releases its keeper, and is remembered",
+    c.holdings.length === 0 && rel?.obligationUnpaid === true && rel?.stewardReleased === "cass" && (c.formerHoldings || []).some(h => h.id === "p1" && h.reason === "given up" && /^released/.test(h.history.at(-1)?.note || "")));
+  check("§61: ⛔ transfer — the debt goes WITH the place, and the keeper stays",
+    tr?.transferredTo === "pell" && tr?.obligationUnpaid === false && tr?.stewardStays === true && (c.formerHoldings || []).some(h => h.id === "p2" && h.transferredToName === "Pell"));
+  check("§61: …and the keeper's assignment is untouched by either — assignments never named the holder",
+    c.worldState.assignments["cass::keep"].status === "working" && c.worldState.assignments["cass::keep"].progress === 2);
+  check("§61: …a released place is not reported as unkept — it is not yours to keep", H61.unstewardedHoldings(c, []).length === 0);
+  check("§61: …an unknown id or a transfer with nobody named does nothing", H61.releaseHolding(c, "nope") === null && H61.transferHolding(c, "p1", {}) === null);
+  const n1 = W61.advanceHoldings({ character: c }).news.map(x => x.text), n2 = W61.advanceHoldings({ character: c }).news.map(x => x.text);
+  check("§61: ⛔ the tick says each exit ONCE — release names the unpaid debt, transfer names who keeps it now",
+    n1.some(t => /given up The Post/.test(t) && /still owed/.test(t)) && n1.some(t => /The Mill is Pell's to keep now/.test(t)) && !n2.some(t => /given up|to keep now/.test(t)), `tick1 ${n1.length} · tick2 ${n2.length}`);
+}
+/* ═════ §62 — A RULING NAMES THE SENTENCE THAT ENACTS IT, AND THE SENTENCE APPEARS ONCE ═════ */
+// ⛔ SPEC_one_source_of_truth §4 / §B2–B3 — an R-number in the body proves a label was pasted; an ANCHOR proves the
+// meaning arrived. A `po/RULING_*.md` may declare `bodyAnchor: "…"` and `subject: …`; a declared anchor must
+// appear in HOW_IT_WORKS's BODY exactly once (twice is the contradiction class — two sections, one subject).
+// ⚠️ A RATCHET, NOT A CLIFF (§B3): rulings that have not declared yet are a COUNT that may only go down; a
+// declared anchor that does not match is the hard failure. Those two must never be one check.
+console.log("\n── §62 · declared ruling anchors land in the body exactly once; the undeclared count only falls ──");
+{
+  const { readdirSync: rdir62 } = await import("node:fs");
+  const rulingFiles = rdir62(join(root, "po")).filter(f => /^RULING_.*\.md$/.test(f));
+  const dl62 = doc.split(String.fromCharCode(10));
+  let last62 = -1; dl62.forEach((l, i) => { if (/^\|\s*\d\d-\d\d\s*\|/.test(l)) last62 = i; });
+  const body62 = dl62.slice(last62 + 1).join(String.fromCharCode(10));
+  const declared = [], undeclared = [];
+  for (const f of rulingFiles) {
+    const txt = rd("po/" + f);
+    const m = txt.match(/^bodyAnchor:\s*"([^"\n]+)"/m);
+    if (m) declared.push({ f, anchor: m[1], subject: (txt.match(/^subject:\s*(\S+)/m) || [])[1] || null }); else undeclared.push(f);
+  }
+  check("§62: the scan sees the rulings — not vacuous", rulingFiles.length >= 20, `${rulingFiles.length} ruling papers`);
+  // ⛔ THE HARD HALF: every declared anchor is in the body, and exactly once.
+  const count = (needle) => body62.split(needle).length - 1;
+  const missing = declared.filter(d => count(d.anchor) === 0), doubled = declared.filter(d => count(d.anchor) > 1);
+  check("§62: ⛔ every DECLARED anchor is carried by the body — a ruling that names its sentence has landed",
+    declared.length >= 1 && missing.length === 0, missing.map(d => d.f + " → " + d.anchor).join(" · ") || `${declared.length} declared, all present`);
+  check("§62: ⛔ …and exactly ONCE — two sections carrying one subject is the contradiction class",
+    doubled.length === 0, doubled.map(d => d.f).join(" · "));
+  check("§62: …a declared anchor names its subject too, so the join has a key", declared.every(d => !!d.subject), declared.filter(d => !d.subject).map(d => d.f).join(" · "));
+  // ⚠️ THE RATCHET HALF: measured 25 undeclared on 2026-09-04 (26 papers, R33 declared first). May only go DOWN.
+  const BASELINE_UNDECLARED = 25;
+  check(`§62: ratchet — rulings without a declared anchor = ${undeclared.length} (baseline ${BASELINE_UNDECLARED}) — may only go DOWN`,
+    undeclared.length <= BASELINE_UNDECLARED, undeclared.length > BASELINE_UNDECLARED ? "a new ruling paper landed without declaring its sentence — add `bodyAnchor:`" : "");
+}
+
+/* ═════ §63 — ONE SUBJECT, EVERY LAYER: the instrument that stops the archaeology ═════ */
+// ⛔ SPEC_associativity §5 Q4 — “the smallest version that would have caught today.” `scripts/subject.mjs` joins a
+// subject across TRUTH / LOG / RULING / SPEC / CONTENT / ENGINE / UI / TESTS / DOCS, derived on every run, and
+// reports the ABSENCES: ruled-not-enacted, enacted-not-built, built-not-in-truth, content-file rulings, orphans.
+// ⚠️ The only hand-kept part is its SYNONYMS map, and this gate is what keeps that from rotting: every term must
+// still hit at least one layer, and the two subjects that cost the most must resolve the way the truth says.
+console.log("\n── §63 · the subject instrument runs, its synonyms resolve, and it sees the absences it was built for ──");
+{
+  const SJ = await import("../scripts/subject.mjs");
+  check("§63: the instrument exports `report` and a SYNONYMS map with the subjects that cost the most",
+    typeof SJ.report === "function" && ["foothills", "npc-sheets", "holdings", "battle-declaration"].every(k => Array.isArray(SJ.SYNONYMS[k])));
+  // ⛔ THE MAP CANNOT ROT SILENTLY: every synonym of every subject still lands somewhere.
+  const dead = [];
+  for (const [subj, terms] of Object.entries(SJ.SYNONYMS)) {
+    const r = SJ.report(subj);
+    const seen = new Set(Object.values(r.hits).flat().flatMap(h => h.terms));
+    for (const t of terms) if (!seen.has(t)) dead.push(subj + ":" + t);
+  }
+  check("§63: ⛔ every synonym in the map still resolves to at least one layer — a dead synonym is red, not quietly wrong", dead.length === 0, dead.join(" · "));
+  // ✅ THE CASE IT WAS BUILT FOR: foothills reach every layer and carry no absence today.
+  const fh = SJ.report("foothills");
+  check("§63: foothills — every layer carries the subject and the R33 row reads enacted",
+    ["TRUTH", "RULING", "CONTENT", "ENGINE", "TESTS"].every(l => fh.hits[l].length > 0) && fh.ruled.some(x => x.id === "R33" && x.enacted) && !fh.flags.some(f => /NOT ENACTED|NOT INDEXED/.test(f)),
+    fh.flags.join(" | ") || "no absences");
+  check("§63: …and it finds the ruling that lived in a content-file `_` key — the shape that hid R33 for seven days",
+    fh.contentRulings.some(c => /_twoAxes/.test(c.key)), fh.contentRulings.map(c => c.key).slice(0, 3).join(" · "));
+  // ⚠️ A SPEC-ONLY IDEA READS AS ONE. `meaningDensity` has no reader and no body section; the report must say so.
+  const md = SJ.report("meaning-density");
+  check("§63: a spec-only subject is reported as absent from TRUTH and ENGINE — the instrument does not flatter",
+    md.hits.TRUTH.length === 0 && md.hits.ENGINE.length === 0 && md.hits.SPEC.length > 0);
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

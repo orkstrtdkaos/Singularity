@@ -133,3 +133,41 @@ levels Cassiel.**
 6. ⛔ **What is the smallest version that is still a decision?** ⬜ Aevi's instinct: **one yield kind, one
    upkeep cost, and the ability to miss it.** ⚠️ **Everything else can follow once a hold can be afforded or
    not.**
+
+---
+
+# ROUND 2 — CCode · 2026-09-04 · v1.9.345
+
+⚠️ **Nothing built — the smallest version is DECISIONS_OWED Q8 and it is yours. But three of your six questions have
+answers already sitting in the engine, and one premise is stale.**
+
+**Q1 · are resource kinds already GOODS?** ✅ **Yes, and it is exactly the taxonomy you want.** `economy.js` →
+`regionDemand(economy, regionId, goods)` reads a region's `goods` block, and the authored keys are: `mech_parts`,
+`living_stock`, `raw_material`, `worked_light`, `cut_stone`, `precursor_salvage`, `medicines`, `instruments`,
+`documents`, `arms`, `nanite_tech`, `luxuries`. ➡️ **A mine yields `raw_material` or `cut_stone`; a mill yields
+`worked_light`; nothing new needs inventing** — and `priceOf(item, regionId)` already prices a good through local
+demand, which is §3's "goods priced through `priceOf`, never a sixth purse slot".
+
+**Q2 · where a yield lands.** ⬜ Yours. ⚠️ The cheap version is a purse credit at the tick; the interesting version (a
+store at the hold that must be moved) is real machinery — a stored quantity per holding, a transfer op, and a reason
+to carry it. **I would ship the purse credit first and let the store be a later decision**, the same order as transfer
+before community-transfer.
+
+**Q3 · tick or pass.** ✅ **Tick, and the hook exists:** `advanceHoldings` runs inside `runWorldTick` on world time,
+reads the ladder, and already drifts an unkept holding downward. Upkeep unpaid → `problem` → one step down is one
+line in that loop.
+
+**Q4 · what Silas's mine records.** ⛔ **Nothing, and the reason is not what the spec says.** The migration IS built
+(reconcile `offers` + the Holdings tab accept/dismiss, v1.9.3xx); Silas's `holdings` is empty because the four offers
+in his save have not been ANSWERED. ⚠️ And measured against the charges themselves: none of the four is a mine — the
+Raven's Home reconstruction, the Threshold post, the filtration thread, the Mara Wells delegation. **There is no mine
+in the save to record.** If Erik built one in play, it lives in the chronicle, not in state.
+
+**Q5 · `bargainOutcome` on a materials bill.** ✅ `bargainReach(rank, economy)` and `bargainOutcome({price, rank,
+margin})` exist and are pure; a steward's Bargainer rank could feed them the moment a bill exists. ⬜ Whether a
+STEWARD's rank applies (not the player's) is a small ruling on its own.
+
+**Q6 · the smallest version.** ✅ **Agree, and I would make it smaller still:** one yield kind per `kind` (post → none,
+enterprise → one good), one upkeep per holding in the same good or in crystal, paid on the tick, **missable** —
+unpaid drifts the condition exactly as unkept does today. ⛔ **Two numbers and one yes, and nothing to build until
+they arrive** (DECISIONS_OWED Q8).

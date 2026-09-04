@@ -156,3 +156,43 @@ nine contests while you were elsewhere HAS BECOME**, and the save already knows 
    companion who is also a steward is not double-paid — **stated as instinct.**
 6. ⛔ **Does tier promotion drive level, or level drive tier?** §3a assumes career → tier → level.
    ⬜ **If it is the other way the whole section inverts.**
+
+---
+
+# ROUND 2 — CCode · 2026-09-04 · v1.9.345
+
+⚠️ **Q6 first, because it does not invert: the chain you assumed is the one that exists, in two halves that were
+built on different days and never introduced.**
+
+**Q6 · career → tier → level.** ✅ **That is the live direction.** `worldtick.js` promotes by DEEDS, not years — the
+rungs are gated at 4 / 10 / 22 / 70 / 170 deeds (`RUNGS`, `tierLostFor` runs it down), and `figureTenure` carries the
+dated `deedLog` with `playerInvolved`. Separately, `npcsheet.derivedLevel` turns a **tier into a level** through
+`resolution.npcStanding.tierFloor` (riffraff 1 → mythic 85) — and since v1.9.343 that dial actually reaches both live
+callers. ➡️ **So a riffraff who won nine contests while you were elsewhere is promoted by the tick and levelled by the
+floor, today, with no new code.** The trickster-brat mechanism is not proposed; it is unwired only in the sense that
+nobody has watched it run. ⛔ What is NOT there: `figureCareer` feeding `derivedLevel` directly — level comes from tier,
+met, days-known and standing. **That is the right shape and I would not add a fifth term.**
+
+**Q1 · does `figureCareer` imply a level?** ✅ **Through tier, yes** (above). ⛔ **Directly, no**, and it should not —
+`deeds` is a count with `negWeight`/`totalWeight`/`spread`, and a defensible function from it to a level would be a
+second ladder beside `tierFloor`. Two ladders that can disagree is the stored-copy failure.
+
+**Q2 · a completion, a condition step.** ⬜ **Erik's.** The record is ready: `assignments[].status === "done"` and
+`holding.history[]` (`from → to`) are both written today. A rate lands in `npcStanding` beside `levelPerDaysKnown: 96`.
+
+**Q3 · the service band N.** ⬜ **Erik's.** ⚠️ One measured constraint: the band is a FLOOR read against
+`character.level`; with `derivedLevel` clamped at `safetyBound: 200` it composes cleanly — `max(derived, playerLevel − N)`
+is one line, and it must be a floor only, never a rate, or "in your service" becomes the fastest progression in the game.
+
+**Q4 · where a mission's danger resolves.** ⚠️ **There is an offscreen-risk path and it is the ARC contest**, not the
+assignment: `worldtick.js` resolves arcs with `battleRound` and `synthesizeOpponentSheet` (`playerSheet: sheetFor(pro),
+oppSheet: sheetFor(con)`), and `arcCasualties` / `outOfAction` / `woundedUntilDay` are written from it. ⛔ **An
+assignment has no hazard today** — `advanceAssignment` moves `progress` and `status` and nothing can hurt the delegate.
+➡️ A mission is *a charge with hazard attached*, exactly as you say; the hazard would borrow the arc contest, not a new
+resolver.
+
+**Q5 · stack or highest.** ⬜ **Erik's.** ⚠️ Measured shape: today `derivedLevel` STACKS its three terms (deeds + time +
+standing) on top of the tier/authored base. Taking the highest would be a change, not a default.
+
+**And §0 — a gained craft starts at rank 1.** ✅ Ruled; ⚠️ still not STORED anywhere — `growthFor` reports `room` and a
+menu can offer, but writing a gained craft onto an authored `abilities[]` waits on Q2's rate (DECISIONS_OWED Q6).

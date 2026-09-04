@@ -1,6 +1,8 @@
 # RULING — lineage and access are TWO AXES (SNG-443)
 
 **Ruled by:** Erik · **source: `content/packs/core/rules/foothills.json` → `_twoAxes`**
+subject: lineage-vs-access
+bodyAnchor: "A FOOTHILL IS A PLACE OF ACCESS, NOT A NEW ANCESTRY"
 **Confirmed again 2026-09-02** after Aevi got it wrong three times in one day.
 ⛔ **THIS RULING ALREADY EXISTED. It was never indexed and never enacted, which is why it kept being
 re-discovered and re-broken.**

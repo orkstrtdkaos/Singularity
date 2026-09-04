@@ -15,7 +15,7 @@ import { advanceSeeking } from "./seeking.js"; // CCODE-222: a reason for the en
 import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
-import { advanceHolding, holdingNews, unstewardedHoldings } from "./holdings.js";   // SNG-358: holdings ride the same world-gated pass
+import { advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents } from "./holdings.js";   // SNG-358: holdings ride the same world-gated pass
 import { spreadDeeds } from "./reputation.js";
 import { titleFor } from "./titles.js";   // SNG-287: a name from the material, not from a menu   // SNG-281: news travels, and that is a promotion source
 import { applyCodexUpdates } from "./codex.js";
@@ -412,6 +412,8 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null }) 
       : `Work goes on in your name at ${n} places that are not written down as yours. Your holdings can settle it.`);
     for (const o of unannounced) o.announced = true;
   }
+  // ⛔ SPEC_holding_release_transfer §4 — a release or a transfer is NEWS, said once, beside the delegated work.
+  for (const t of takeHoldingEvents(character)) news.push(t);
   // ⛔ A DEPARTED STEWARD LEAVES THE POST UNKEPT, and this is the line that makes SNG-355 cost something.
   // Departure stopped being a deletion there precisely so it could be OBSERVED here: a castellan who turns
   // back toward the March does not silently keep running your station from the road.

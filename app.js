@@ -57,7 +57,7 @@ import { enterDeathState } from "./engine/death.js";
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
-import { addHolding, holdingsForGM } from "./engine/holdings.js";   // SNG-358
+import { addHolding, holdingsForGM, releaseHolding, transferHolding } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
@@ -119,7 +119,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.344";
+const APP_VERSION = "1.9.345";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6516,7 +6516,10 @@ function applyTurn(turn, resolution, playerWords = null) {
       if (!id) continue;
       if (kind === "claim") addHolding(character, { id, kind: op.kind || "post", name: op.name, locationId: op.locationId || location.id, steward: op.steward || null, obligation: op.obligation || null, day: absoluteWorldDay() });
       else if (kind === "steward") { const h = (character.holdings || []).find(x => x.id === id); if (h) h.steward = op.steward || null; }
-      else if (kind === "release") character.holdings = (character.holdings || []).filter(x => x.id !== id);
+      // ⛔ SPEC_holding_release_transfer — this was a bare filter: the obligation vanished, the steward was silently
+      // un-charged, nothing was said. Both exits are operations now, recorded and announced once by the tick.
+      else if (kind === "release") releaseHolding(character, id, { reason: op.reason || op.why || null, day: absoluteWorldDay(), worldCount: worldCount() });
+      else if (kind === "transfer") transferHolding(character, id, { toEntity: op.toEntity || op.steward || null, toName: op.toName || null, day: absoluteWorldDay(), worldCount: worldCount() });
     }
   });
   const partyResult = applyStep("partyOps", () => applyPartyOps(character, turn.partyOps || [], { day: absoluteWorldDay(), ladder: CONTENT.rules.subAttributeLadder })) || { departed: [], proposed: [], notes: [] };
@@ -10682,6 +10685,25 @@ function wireHoldingOffers() {
     // ⚠️ AFTER the re-render, so the card is not wiped by the screen it sits on.
     showPlaceMoment(h, o);
   };
+  // ⛔ SPEC_holding_release_transfer — the player's own exits. Release asks once; a claim was a decision and so is
+  // leaving. Transfer names who takes it up; the steward stays (assignments never named the holder).
+  for (const btn of app.querySelectorAll("[data-hold-release]")) btn.onclick = () => {
+    const id = btn.dataset.holdRelease;
+    const h = (character.holdings || []).find(x => x.id === id);
+    if (!h) return;
+    if (!confirm(`Give up ${h.name || id}? The place stays in the world without you${h.obligation ? ", and what it owes is still owed" : ""}.`)) return;
+    releaseHolding(character, id, { reason: "given up", day: absoluteWorldDay(), worldCount: worldCount() });
+    saveCharacter(character); again();
+  };
+  for (const btn of app.querySelectorAll("[data-hold-transfer]")) btn.onclick = () => {
+    const id = btn.dataset.holdTransfer;
+    const sel = app.querySelector(`[data-hold-to="${id}"]`);
+    const to = sel?.value || null;
+    if (!to) return;
+    const nm = character?.npcRegistry?.[to]?.name || CONTENT.npcs?.[to]?.name || to;
+    transferHolding(character, id, { toEntity: to, toName: nm, day: absoluteWorldDay(), worldCount: worldCount() });
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-hold-dismiss]")) btn.onclick = () => {
     const o = (character.holdingOffers || [])[Number(btn.dataset.holdDismiss)];
     if (!o) return;
@@ -10716,6 +10738,10 @@ function renderHoldingsTab() {
   const places = companyPlaces(ladder, character);
   const delegCap = delegationCapacity(ladder, character);
   const band = canRaiseBand(character, { cfg: rules.martial || {} });
+  // SPEC_holding_release_transfer §R2.5 — a named person is the fully supported holder today; the company and the
+  // delegates are the people who could take a place up. A community transfer is a narrative record (news +
+  // history), and it is not offered as a button until something in the world model can hold property.
+  const handTo = [...new Set([...company.map(m => m.npcId), ...delegates])].filter(Boolean);
 
   // ⚠️ A BAR THAT READS AS A BAR. Used against earned, so "3 of 3" is legible as full without arithmetic.
   const meter = (label, used, total, why) => `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
@@ -10733,6 +10759,10 @@ function renderHoldingsTab() {
         <div class="hint">${esc(h.kind || "post")} · ${esc(h.condition || "holding")}${loc ? " · " + esc(loc) : ""}${h.steward ? " · kept by " + esc(nameOf(h.steward)) : " · <em>unkept</em>"}</div>
         ${h.obligation ? `<div class="hint">owes: ${esc(h.obligation)}</div>` : ""}
         ${h.fromAssignment ? `<div class="hint">from work you delegated</div>` : ""}
+        <div class="opt-row" style="margin-top:4px;gap:6px;flex-wrap:wrap">
+          ${handTo.length ? `<select data-hold-to="${esc(h.id)}">${handTo.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-transfer="${esc(h.id)}" title="Hand it to them — what it owes goes with it">Hand it over</button>` : ""}
+          <button class="opt" data-hold-release="${esc(h.id)}" title="Walk away — what it owes stays with you, unpaid">Give it up</button>
+        </div>
       </div></div>`;
   }).join("");
 

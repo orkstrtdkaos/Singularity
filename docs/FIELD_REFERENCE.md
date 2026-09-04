@@ -252,6 +252,9 @@ its own config. Take the object the caller takes.**
 | `deathDepth(entity, currentDay, rules)` | ⛔ **POSITIONAL.** An options object makes `currentDay` an object, `rawDays` NaN, and depth silently **2** | `{ currentDay }` |
 | `resolveImposition(craft, opts)` | returns `{ ok, condition, degradedTo, resisted, targets, threshold, why }` | — |
 | `reachOf(rank, intensity)` | r1→0 · r2→1 · r3→2 · r4+→2 · surge +1 capped at 2 | — |
+| a battle **declaration** | ⛔ `{ function, tier, rank, attribute, intensity, name, id, energyCost }` — **`tier` is the CRAFT's, `rank` is what is OWNED**; the chance stack reads `rank`, the dice read `tier`; `skillBattleRound` runs it through `enrichDecl(decl, abilities)` so the craft's `mechanic`/`imposes`/`pierce`/`tree` sit under it (decl fields win, `functions` dropped) | a bare `{function, tier, …}` with the owned rank in `tier` — which is what play sent for months |
+| `battleRound(...)`'s `playerSheet` | carries `level`, `health`, `maxHealth`, `soak` beside attributes/energy — the wielder term and the defender's soak read them | attributes and energy only |
+| `releaseHolding` / `transferHolding` | move the record to `character.formerHoldings[]` with `formerHolder`, `reason` / `transferredTo`, `obligationUnpaid`, and queue `character.holdingEvents[]` for the tick (`takeHoldingEvents`) | a filter |
 
 ---
 
@@ -417,6 +420,7 @@ the next field of this shape gets the right name at authoring time**, which is t
 | ⛔ **A formatter travelling with a content edit** | 2 lines become 8,000 | `json.dumps(indent=2)` on `reach_death_life.json` |
 | ⛔ **A name with two owners** | one word, two fields | `operativeAxis`; `blind` (policy vs receipt) |
 | ⛔ **A logged change never made** | the record says corrected, the text is unchanged | §8 blind/taunt |
+| ⛔ **The suite builds the input production omits** | every test spreads the def under a declaration; play sends a bare one — green gates, dark path | `sbDeclare` (DUEL §C.1); `npcStanding` handed in by the test only |
 
 ### ⛔ THE COUNTERMEASURES, WHICH ARE NOW RULES
 
@@ -429,6 +433,8 @@ the next field of this shape gets the right name at authoring time**, which is t
 6. **Grep for prior art before building** — `deathdepth.js` duplicated `death.js` for want of one grep.
 7. ⛔ **A defect-reporting tool has a self-test, and it runs first.** *(`HOW_IT_WORKS.md` §11)*
 8. ⛔ **A regex asks whether a word appears; the question is whether a number changes anything.**
+9. ⛔ **Ask who BUILDS THE INPUT.** When a gate proves a reader works, find the LIVE caller and diff what it passes
+   against what the fixture passes. If only the suite builds it, the feature is dark and green at the same time.
 
 ---
 
@@ -654,7 +660,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `wardTypes` | 53 | `mechanic`×53 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
 | `folkAccessible` | 47 | `root`×47 | ✅ READ | `state.js` |
 | `marginFloorPer` | 45 | `mechanic`×45 | ✅ READ | `craftmechanics.js` |
-| `learnedAt` | 43 | `root`×43 | ⚠️ CI-ONLY | _2 test/script only_ |
+| `learnedAt` | 43 | `root`×43 | ⚠️ CI-ONLY | _3 test/script only_ |
 | `soak` | 33 | `mechanic`×33 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `encounters.js` |
 | `soakRank` | 32 | `mechanic`×32 | ✅ READ | `skill_battle.js`, `app.js` |
 | `sense` | 27 | `root`×27 | ✅ READ | `combatants.js`, `encounters.js`, `gambit.js` |

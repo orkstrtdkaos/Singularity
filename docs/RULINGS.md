@@ -43,10 +43,10 @@ exercise that produced three wrong reports on one subject on 2026-09-02. | colum
 | **R27** | save migration | `soma` migrates BY RANK, not by sect or by generosity | ✅ | `RULING_braid_arity.md` |
 | **R28** | geography | | ✅ | `RULING_geography.md` |
 | **R29** | death & attending | attending decides how much person survives | ✅ | `RULING_attending.md` |
-| **R30** | NPC sheets | R30 — the bridge is THE WHOLE SHEET, not its `skills[]` | ⛔ | `RULING_sheet_architecture.md` |
-| **R31** | NPC sheets | R31 — the first caller is the GM BLOCK, not a dark mint | ⛔ | `RULING_sheet_architecture.md` |
+| **R30** | NPC sheets | R30 — the bridge is THE WHOLE SHEET, not its `skills[]` | ✅ | `RULING_sheet_architecture.md` |
+| **R31** | NPC sheets | R31 — the first caller is the GM BLOCK, not a dark mint | ✅ | `RULING_sheet_architecture.md` |
 | **R33** | lineage vs access | ⛔ **`tradition` is LINEAGE · `learnedAt` is ACCESS. A foothill is a PLACE, not an ancestry** (SNG-443) | ✅ | `RULING_two_axes.md` → **source: `content/packs/core/rules/foothills.json` `_twoAxes`** |
-| **R32** | NPC sheets | R32 — accepted from measurement ✅ from measurement | ⛔ | `RULING_sheet_architecture.md` |
+| **R32** | NPC sheets | R32 — accepted from measurement ✅ from measurement | ✅ | `RULING_sheet_architecture.md` |
 
 ---
 
@@ -60,6 +60,29 @@ three times in one day.**
 |---|---|
 | **R33** — lineage vs access | `content/packs/core/rules/foothills.json` → `_twoAxes` (SNG-443) |
 | the foothill definition | `foothills.json` → `_theDefinition_20260823` |
+
+---
+
+## ⬜ RULINGS OWED — decisions no build may make (indexed here so they cannot be lost; each blocks something)
+
+⚠️ **Not R-numbers.** A row here is a question Erik has not yet answered; `po/DECISIONS_OWED_20260904.md` carries the
+evidence and the measured options for each. When one is ruled it gets a paper, a number above, and a body sentence.
+
+| # | question | blocks | evidence |
+|---|---|---|---|
+| **Q1** | NPC pools — `npcStanding.healthPerLevel` / `energyBase` are unauthored (code: 3 / 40 flat); a pressure tick costs 22 | all NPC combat | `DUEL_pell_vs_veth.md` §A.1, §E |
+| **Q2** | damage vs HP curves — is `harmRung` the kill condition and dice the erosion, or do pools stop scaling? | all combat | `DUEL` §C.7: 102 dice crafts, mean EV 10.6, T5 EV 31.5 vs PC 191 HP |
+| **Q3** | which of three ground tables is the truth — the card reads the craft's `powerSystem`, the roll reads `substrateBand[tradition]`, a schooled card's band comes from the tradition | `SPEC_body_source` §2–§4, `SPEC_meaning_density` | `DUEL` §C.6 |
+| **Q4** | should a craft's own declaration override an explicit `primary: null` deferral? (no live case since Abyssal was settled) | — | §58 |
+| **Q5** | the standing cost of RELEASING a holding — a standing op against the granting authority, or a payable debt record? | `SPEC_holding_release_transfer` §3 | §R2.3 |
+| **Q6** | the service band N; what a completion and a `condition` step are worth; do the three growth terms stack or take the highest; does tier drive level or level tier | `SPEC_npc_level_balance` | its ROUND 2 |
+| **Q7** | `meaningDensity` — derived or stored; what two grounds do to a metaphysical roll | `SPEC_meaning_density` | its ROUND 2 |
+| **Q8** | the holdings economy's smallest version — one yield kind, one upkeep, missable | `SPEC_holdings_economy` | its ROUND 2 |
+| **Q9** | party-scale contributions — shape A / B / C; and what suppresses the HARM default | `SPEC_party_contributions` §4, R25a slots 5–6 | its ROUND 2 |
+| **Q10** | `soma` — does a holder get both restored halves or the nearer one; population C of the sect un-merge | `SPEC_undo_sect_merge` | §R2.2 |
+| **Q11** | the generator — emit ONE honest rank marked `wantsAuthoring` instead of three template ranks (changes what a minted craft is; six saves hold the old shape) | `SPEC_generative_pipeline` §5.2 | §R2.7 |
+| **Q12** | do Sovereigns advance an arc's stage, or is their feeding the stage's effect; is an agent marked or GM-run | the Sovereign arc | `BUILD_BACKLOG` §5 |
+| **Q13** | marcher → body and the somatic per-craft split (all 39 declare `metaphysical`); per-rank source | `SPEC_body_source` §3–§4 | its ROUND 2 |
 | `precursor` is not a tradition | `foothills.json` → `notATradition` |
 
 ➡️ ⚠️ **When a content file carries a `_`-prefixed key that states a RULE rather than a fact, it belongs

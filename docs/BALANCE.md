@@ -1,6 +1,6 @@
 # BALANCE — the dials, what they actually do, and how to turn one without lying to yourself
 
-**CCode · started 2026-08-30 · v1.9.344**
+**CCode · started 2026-08-30 · v1.9.345**
 
 > Erik: *"we need to build toward balance and use the dials."*
 
@@ -52,6 +52,8 @@ What balance means here is narrower and testable:
 | `intensity.conserve/standard/surge.mult` | `craft_mechanics` | 0.5 / 1 / 2 | the player's per-cast risk lever |
 | `capabilityByTier` | `resolution` | 0.25 → 3.0 over seven rungs | ⛔ what a rung can **do** — hero swing, command, fold weight |
 | `npcStanding.tierFloor` | `resolution` | riffraff 1 → mythic 85 | what level a rung implies |
+| `npcStanding.healthPerLevel` | `resolution` | ⛔ **UNAUTHORED — code default 3** | a person's health per level. ⚠️ An authored L33 is 99 health |
+| `npcStanding.energyBase` | `resolution` | ⛔ **UNAUTHORED — code default 40, flat** | a person's whole energy pool. ⚠️ A pressure tick costs 22; two people are spent by round four. **The open combat ruling** |
 | `crit.*` · `baseChance.*` · `energy.*` | `resolution` | — | the roll itself, and what a turn costs |
 
 ### 2b · ⛔ Code-only — these need an engine change, which means they are not yet dials

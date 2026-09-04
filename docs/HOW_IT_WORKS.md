@@ -448,8 +448,11 @@ working papers; **this is the answer.**
 | 09-01 | ⛔ **I PUSHED CONTENT THREE TIMES MID-REBASE AND BROKE CCODE'S CERTIFY TWICE** | nine crafts added, then four dropped, then five reworked — none announced, all into files he was certifying against. ⚠️ **His doc counts went stale not through carelessness but because the corpus moved under him**, and he then sat blocked on `fed_wound`, a craft I had already deleted. ⛔ **His local tree says 423; origin is 419** | proposed a coordination rule in `po/REPLY_aevi_gainaxes_and_coordination.md`: content-count changes announced BEFORE he certifies, and Aevi runs `certify_counts.mjs` herself after writing | ⚠️ **`certify_counts.mjs` asserts six claims across four files and ANY craft I add or drop invalidates three. That is a predictable collision and I walked into it three times in one session** |
 | 09-01 | ⛔ **TWO DOC FILES CARRIED UNRESOLVED MERGE-CONFLICT MARKERS ON MAIN** | `docs/HOW_IT_WORKS.md` and `docs/PLAYERS_GUIDE.md` both ended with literal `<<<<<<< HEAD` / `=======` / `>>>>>>> 17b21fbc` blocks around their *Last verified* footers — **committed, on origin, readable by anyone** | resolved both to the measured truth; scanned all **1562** tracked files and confirmed these were the only two | ⚠️ **NEITHER SUITE CAUGHT IT.** The docs are gated on their COUNTS, not on being well-formed — so a file can carry raw conflict syntax and still pass every assertion about what it claims |
 | 09-01 | ✅ **content documentation refreshed to the verified corpus: 419** | `HOW_IT_WORKS` said 414, `PLAYERS_GUIDE` said 423 (CCode's pre-drop number), `FIELD_REFERENCE` said 414 across six field rows. ⚠️ **All three were wrong in different directions at the same moment** | all set to **419**, verified at authenticated `api.github.com` rather than raw CDN | ⛔ **I HAD WRITTEN ZERO §0 ROWS TODAY** — nine crafts, four drops, two reworks, a 50-file sex/gender backfill, Marrow's romance authoring and a standing content policy, none of it logged. Erik asked whether I had been keeping the docs up and the answer was no |
+| 09-04 | ⛔ **THE CRAFT NEVER REACHED A LIVE ROUND — five call-site defects, found by running Aevi’s hand-ruled duel through the resolver** | `sbDeclare`/`sbDeclFromSel`/`battleSkillsFor` built a bare declaration; `mechanicFor` and `authoredBlock` read the DECLARATION and found no craft — family-default dice by tier, no impositions, pierce 0, in every fight ever played. Also: the player’s `tier` carried the owned RANK (keystone_blow 7.0 vs 22.7); energy was a flat 5 × intensity; an authored soak 11 became threat layers of 1; the player seat carried no level or soak. ✅ All five built — `enrichDecl` at the one seam, `rank` beside `tier`, the craft’s cost, `layersFor(soak)`, a body in the seat | `§60` on the LIVE shape (not the fixture’s); `scripts/duel_pell_vs_veth.mjs` before/after; smoke, content_ci re-aimed to declare the rank they meant | ⚠️ **every test had spread the def under the decl — green gates, dark path.** Fights now impose and roll the craft’s dice; what is left is the pools ruling (Q1). Body §3c |
+| 09-04 | ✅ **A HOLDING HAS TWO EXITS** | `release` was a bare `.filter()` reachable by the GM — the undo button the spec warned about. `releaseHolding` (debt stays, unpaid; keeper released; remembered in `formerHoldings`) and `transferHolding` (debt goes with it; keeper stays) in `holdings.js`, wired to `holdingOps` (+`transfer`, `toEntity`) and the Holdings tab; the tick says each once via `takeHoldingEvents` | `§61` — both exits on a fixture, the assignment untouched, the news once | ⚠️ the standing cost of walking away is Erik’s (Q5). Body §7d |
+| 09-04 | ✅ **A RULING NAMES ITS SENTENCE; A SUBJECT IS FINDABLE ACROSS EVERY LAYER** | `po/RULING_*.md` may declare `subject:` + `bodyAnchor:`; a declared anchor must be in the body exactly once, the undeclared count ratchets (25, may only fall); R33 declares first. `scripts/subject.mjs` joins one subject across truth/log/ruling/spec/content/engine/UI/tests/docs and reports the ABSENCES | `§62` (anchor present, once, subject named, ratchet) · `§63` (synonyms resolve; foothills whole; R33’s `_twoAxes` found; `meaningDensity` reads spec-only) | it found R30–R32 indexed-not-enacted — now cited in §7h and ✅ in the index. `docs/RULINGS.md` gains a RULINGS OWED index (Q1–Q13 → `po/DECISIONS_OWED_20260904.md`) |
 
-**Last verified: 2026-09-04 · v1.9.344 · 419 crafts.**
+**Last verified: 2026-09-04 · v1.9.345 · 419 crafts.**
 
 ---
 
@@ -892,6 +895,37 @@ time and wants a consistency pass.**
 
 ---
 
+## 3c · WHAT A ROUND READS — the declaration, and what rides on it (DUEL_pell_vs_veth §C, 2026-09-04)
+
+A skill-battle round resolves two DECLARATIONS. A declaration is `{ function, tier, rank, attribute, intensity, name, id,
+energyCost }`, and **`skillBattleRound` puts the craft's own definition under both of them** (`enrichDecl`) before
+`battleRound` reads a thing — the decl's own fields win, `functions` is dropped, a plain strike or an item move is
+left as it is. ✅ **BUILT.** So the dice are the craft's (`4d6+7`, not a family default by tier), a craft that
+authors `imposes` imposes, pierce and penetration and the per-rank `harmRung` are read.
+
+| what | reads | so |
+|---|---|---|
+| **the chance stack** | `rank` — what is OWNED (falls back to `tier` for a caller that sets none) | *“ability rank 1”* for a rank-1 craft, whatever its tier |
+| **the dice** | `tier` — the CRAFT's tier | a T4 rolls as a T4 at rank 1; measured `keystone_blow` 7.0 → 22.7 |
+| **the energy** | the declaration's own `energyCost` (the menu's effective cost); the default 5 only for a move that has none | `the_cut_thread` costs 14, a plain strike 5 |
+| **an authored soak** | becomes the LAYERS the damage block reads (`layersFor(soak)`), not threat's | Veth's 11 is `[4, 4, 3]`, not `[1]` |
+| **the player seat** | carries `level`, `health`, `maxHealth`, `soak` | the wielder term scales; ⚠️ `soak` reads a field nothing writes yet |
+
+⚠️ **What a round does NOT read:** the ground. No substrate term enters a skill-battle roll; `substrateForAction` gates
+and penalises FREE actions only. `harmRung` moves no number inside a round — it grants finishing potential, spent
+only by the deliberate ⚡ Finish it, which ends a fight by the momentum swing against the foe's collapse floor. A fight
+ends by **health ≤ 0** or by **being driven back twice** (`breakAtPressure`).
+
+⛔ **HOW THIS WAS DARK WITH EVERY GATE GREEN:** every test spread the def under the declaration; play never did. The
+test built the input production did not. **The standing check, now a rule (`PIPELINE.md`): does the SUITE build the
+input, or does PRODUCTION?** §60 asserts the live shape.
+
+⚠️ **THE POOLS ARE THE OPEN RULING.** A person's sheet is level × 3 health and **40 energy flat** (`npcsheet.sheetFor`);
+a pressure tick costs the opponent 22. Two authored people are at 0 energy by round four and bare-hand each other
+for twenty. `resolution.npcStanding.healthPerLevel` / `energyBase` are the dials and nobody has authored them.
+
+---
+
 ## 4 · WHAT STOPS IT: WARDS
 
 **A ward answers a FAMILY, or one TYPE inside a family.** *An elemental ward* stops heat and cold and
@@ -1136,6 +1170,20 @@ rather than the category, with a generated image the player can re-roll, rebuild
 **Both surfaces, doing different jobs:** the Holdings tab is where the player goes **looking**; the
 world-tick news, beside the delegated work, is where they are **told** — once, ever.
 
+### ✅ A HOLDING HAS TWO EXITS, AND THEY ARE NOT THE SAME EXIT (SPEC_holding_release_transfer, 2026-09-04)
+
+**The place always persists; what changes is who answers for it.** `releaseHolding` — you walk away: the obligation
+stays with you **unpaid**, the keeper is released, the record moves to `formerHoldings` with a `formerHolder` trace and
+a `reason`. `transferHolding` — someone else takes it up: the obligation **goes with it**, the keeper may stay
+(assignments key on `npcId::charge` and never named the holder). Both are reachable by the GM (`holdingOps`
+`release` / `transfer` with `toEntity`) and by the player (the Holdings tab, per holding). ⚠️ **Neither is a
+celebration** — each queues one line the world-tick says once, beside the delegated work.
+
+⛔ **This replaced a bare `.filter()`** that removed the record, discharged nothing, un-charged the keeper silently and
+said nothing. ⚠️ **The standing cost of walking away is Erik's ruling, not built** — the record carries `reason` and
+`obligationUnpaid` so whichever instrument he picks has something to read. A named person is the supported holder; a
+community transfer is news and history, because nothing in the world model can hold property yet.
+
 ---
 
 ## 7h · A PERSON HAS A SHEET, AND A MASS HAS A NUMBER
@@ -1160,6 +1208,18 @@ lifecycle** (`REGISTRY_CAP` is 150, and a sheet goes when its person does), and 
 **Authored beats derived, and the sheet says which.** A record carrying its own `subAttributes` IS an
 authored sheet — that is the one thing derivation cannot produce. ⚠️ **A stranger derives to level 1, and
 that is correct**: the level is a claim about what the story has shown, not a courtesy.
+
+**R30 — the bridge is THE WHOLE SHEET, not its `skills[]`. R31 — the first caller is the GM block, not a dark mint.
+R32 — accepted from measurement.** All three are what the paragraphs above and below describe, in present tense.
+
+✅ **THE DIALS REACH BOTH LIVE CALLERS (2026-09-04).** `resolution.npcStanding` — tier floors, level per meeting — is
+passed by the narrator's sheet block and by the fight path. ⛔ Before that it was read by one file, the test that gates
+it, and in play a legendary with no authored level was level 1 with 3 health. **An authored sheet is a FLOOR:** growth
+adds above an authored `abilities[]` and never prunes below it; `growthFor` reports `floor` and `room`, `kitFor`'s cap
+rises to the floor. **`closed: […]` is read** — an authored absence survives the domain draw. **`growthFor` is called**
+from the narrator's block, so what the story has shown that the catalogue cannot express reaches the prompt as a
+fact about the record (*“seen doing, not yet a craft anyone can resolve”*), which is the mechanical answer to a
+person with one word to reach for.
 
 ### ⛔ THE BRIDGE WAS A FALLBACK PRETENDING TO BE A DEFERRAL
 

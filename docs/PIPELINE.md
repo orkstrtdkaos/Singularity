@@ -125,6 +125,9 @@ CONCLUDING ABOUT THE WHOLE IS THE SHAPE**, and it has now produced four incident
    have looked.**
 3. ⚠️ **AND WHEN THE TWO SOURCES DISAGREE, THE ONE WITH MORE CARRIERS WINS.** A three-tier list in one file
    loses to a seven-rung ladder with an engine reader.
+4. ⛔ **DOES THE SUITE BUILD THE INPUT, OR DOES PRODUCTION?** Before calling a mechanic built, find the live caller and
+   diff what it passes against the fixture. The duel of 2026-09-04 found five readers whose only correct input came
+   from tests. ⚠️ **If only the suite builds it, the feature is dark and green at the same time.**
 
 ✅ **AND FIX THE CAUSE, NOT THE INSTANCE:** `legends.json` now **references** the ladder from
 `arc_response.attentionByTier` instead of restating it. ⛔ **A restated list is a stored copy of a derived

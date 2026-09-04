@@ -2623,12 +2623,17 @@ for (const pack of PACKS) {
     oppDecl: { name: "S", function: "strike", intensity: "standard", tier: 1 },
     playerSheet: shc("you"), oppSheet: opp || shc("them"),
     state: { momentum: 0, round: 1, playerEnergy: 40, opponentEnergy: 40, opponentHealth: 20, effects: [], pressure: { player: 0, opponent: 0 } },
-    rules: CC.rules, sb: CC.skillBattle, rng: () => 0.5, kind: "fight" });
+    // DUEL §C.2: the chance stack reads the RANK now (these probes declare rank 1 → +5, not the tier’s +10/+15), so a
+    // 0.5 roll fell from success to partial on the weaker-attribute crafts. The probes are about dice and impositions
+    // reaching the round, not the knife-edge; roll clean.
+    rules: CC.rules, sb: CC.skillBattle, rng: () => 0.3, kind: "fight" });
   const withDice = (pred, fn, dice) => {
     const ab = Object.values(CC.abilities).find(pred);
     if (!ab) return null;
     return runc(Object.assign({}, ab, { name: ab.name, function: fn, intensity: "standard", tier: ab.levelReq || 1,
-      rank: 1, mechanic: Object.assign({}, ab.mechanic, { dice }) }));
+      // DUEL §C.2: the chance stack reads `rank` now; this fixture always meant the craft’s own tier (it sets tier =
+      // levelReq), and at rank 1 a practical-3 healer TIES a practical-3 striker (35 vs 35 → no winner → no heal).
+      rank: ab.levelReq || 1, mechanic: Object.assign({}, ab.mechanic, { dice }) }));
   };
 
   const measured = {};
@@ -2682,7 +2687,9 @@ for (const pack of PACKS) {
         playerSheet: sh("you", { physical: 9, mental: 9, social: 9, practical: 9 }),
         oppSheet: sh("them", { physical: 1, mental: 1, social: 1, practical: 1 }),
         state: { momentum: 0, round: 1, playerEnergy: 40, opponentEnergy: 40, opponentHealth: 20, effects: [], pressure: { player: 0, opponent: 0 } },
-        rules: C240.rules, sb: sbE, rng: () => 0.95, kind: "fight" });
+        // DUEL §C.2: the chance stack reads the RANK now (this fixture declares rank 1 → +5, not the tier’s +10), so a
+        // 0.95 roll sat one point past the partial band. The probe is about the GUARD, not the knife-edge; roll clean.
+        rules: C240.rules, sb: sbE, rng: () => 0.85, kind: "fight" });
       return (r.landed || []).find(e => e.kind === "guard") ?? null;
     };
     const weak = guard(2), strong = guard(20);

@@ -4219,7 +4219,7 @@ console.log("\n── §62 · declared ruling anchors land in the body exactly o
     const txt = rd("po/" + f);
     // ⚠️ Aevi writes the declaration in bold (`**bodyAnchor:** "…"`); it is the same declaration and reads the same.
     const m = txt.match(/^\*{0,2}bodyAnchor:?\*{0,2}:?\s*"([^"\n]+)"/m);
-    if (m) declared.push({ f, anchor: m[1], subject: (txt.match(/^\*{0,2}subject:?\*{0,2}:?\s*(\S+)/m) || [])[1] || null }); else undeclared.push(f);
+    if (m) declared.push({ f, anchor: m[1], subject: (txt.match(/(?:^|\s)\*{0,2}subject\*{0,2}:\s*(\S+)/m) || [])[1] || null }); else undeclared.push(f);
   }
   check("§62: the scan sees the rulings — not vacuous", rulingFiles.length >= 20, `${rulingFiles.length} ruling papers`);
   // ⛔ THE HARD HALF: every declared anchor is in the body, and exactly once.

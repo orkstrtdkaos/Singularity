@@ -1,81 +1,92 @@
 {
-  "schemaVersion": 1,
-  "items": [
+ "schemaVersion": 1,
+ "items": [
+  {
+   "id": "marcher_blade",
+   "name": "Marcher's Blade",
+   "kind": "weapon",
+   "description": "A duelist's blade of the Redline — perfectly balanced, honestly deadly, carried openly because hiding it would be dishonor. Eases the Edge; marks you as someone who knows the forms.",
+   "bonusTags": [
+    "melee",
+    "edge",
+    "honor"
+   ],
+   "consumable": false,
+   "worth": "valuable",
+   "goods": "arms"
+  },
+  {
+   "id": "truce_token",
+   "name": "Truce-Token",
+   "kind": "focus",
+   "description": "A split stone whose halves are held by two parties to a Stillcraft truce — while both halves exist and are kept, the truce is witnessed. Breaking your half breaks your word visibly. Eases Stillcraft binding.",
+   "bonusTags": [
+    "bind",
+    "truce",
+    "witness",
+    "substrate-suppressing"
+   ],
+   "consumable": false,
+   "substrateCharge": -0.05,
+   "substrateNote": "A split stone of the Stillhold accord — quiet in the hand and quiet around it.",
+   "worth": "valuable",
+   "goods": "worked_light"
+  },
+  {
+   "id": "marchward_ledger",
+   "name": "Marchward Ledger",
+   "kind": "tool",
+   "description": "A mediator's book of who owes whom what across the two cultures — grievances, debts, standing. Read it and you can walk into a dispute already knowing its shape. Corran keeps the master copy.",
+   "bonusTags": [
+    "mediate",
+    "knowledge",
+    "standing"
+   ],
+   "consumable": false,
+   "worth": "useful",
+   "goods": "raw_material"
+  },
+  {
+   "id": "stillhold_veil",
+   "name": "Stillhold Veil",
+   "kind": "armor",
+   "description": "A fine woven veil of the peace-city — wearing it reads as 'I hold the peace,' and in the Stillhold that is real protection. Elsewhere it marks you as someone who was let inside, for good or ill.",
+   "bonusTags": [
+    "peace",
+    "social",
+    "protection",
+    "substrate-suppressing"
+   ],
+   "consumable": false,
+   "substrateCharge": -0.1,
+   "substrateNote": "Woven in the peace-city, which gave the lattice up with the war. The veil reads as a refusal and thins the ground around its wearer.",
+   "worth": "valuable",
+   "goods": "arms",
+   "soakLayers": [
     {
-      "id": "marcher_blade",
-      "name": "Marcher's Blade",
-      "kind": "weapon",
-      "description": "A duelist's blade of the Redline — perfectly balanced, honestly deadly, carried openly because hiding it would be dishonor. Eases the Edge; marks you as someone who knows the forms.",
-      "bonusTags": [
-        "melee",
-        "edge",
-        "honor"
-      ],
-      "consumable": false,
-      "worth": "valuable",
-      "goods": "arms"
+     "type": "deception",
+     "value": 3
     },
     {
-      "id": "truce_token",
-      "name": "Truce-Token",
-      "kind": "focus",
-      "description": "A split stone whose halves are held by two parties to a Stillcraft truce — while both halves exist and are kept, the truce is witnessed. Breaking your half breaks your word visibly. Eases Stillcraft binding.",
-      "bonusTags": [
-        "bind",
-        "truce",
-        "witness",
-        "substrate-suppressing"
-      ],
-      "consumable": false,
-      "substrateCharge": -0.05,
-      "substrateNote": "A split stone of the Stillhold accord — quiet in the hand and quiet around it.",
-      "worth": "valuable",
-      "goods": "worked_light"
-    },
-    {
-      "id": "marchward_ledger",
-      "name": "Marchward Ledger",
-      "kind": "tool",
-      "description": "A mediator's book of who owes whom what across the two cultures — grievances, debts, standing. Read it and you can walk into a dispute already knowing its shape. Corran keeps the master copy.",
-      "bonusTags": [
-        "mediate",
-        "knowledge",
-        "standing"
-      ],
-      "consumable": false,
-      "worth": "useful",
-      "goods": "raw_material"
-    },
-    {
-      "id": "stillhold_veil",
-      "name": "Stillhold Veil",
-      "kind": "armor",
-      "description": "A fine woven veil of the peace-city — wearing it reads as 'I hold the peace,' and in the Stillhold that is real protection. Elsewhere it marks you as someone who was let inside, for good or ill.",
-      "bonusTags": [
-        "peace",
-        "social",
-        "protection",
-        "substrate-suppressing"
-      ],
-      "consumable": false,
-      "substrateCharge": -0.1,
-      "substrateNote": "Woven in the peace-city, which gave the lattice up with the war. The veil reads as a refusal and thins the ground around its wearer.",
-      "worth": "valuable",
-      "goods": "arms"
-    },
-    {
-      "id": "forms_manual",
-      "name": "The Forms",
-      "kind": "tool",
-      "description": "A Redline training-scroll of the Edge's disciplines — studying it teaches the etiquette of challenge and refusal as much as the strike. Knowing the forms can end a fight before it starts.",
-      "bonusTags": [
-        "edge",
-        "etiquette",
-        "learn"
-      ],
-      "consumable": false,
-      "worth": "useful",
-      "goods": "raw_material"
+     "type": "feeling",
+     "value": 2
     }
-  ]
+   ],
+   "_soakWhy": "⚠️ SOCIAL ARMOUR, AND THE TYPES SAY SO. 'Wearing it reads as I HOLD THE PEACE, and in the Stillhold that is real protection.' ⛔ ZERO physical — it stops nothing thrown at you. It answers `deception` and `feeling`, which is what a peace-city veil is for. ⛔ CCODE 2026-09-04: 'the player seat now carries `soak` and NOTHING WRITES IT — Pell's brigandine does nothing anywhere.' ⚠️ Four items were `kind: armor` and only `oiled_leathers` carried a value. ✅ SHAPE COPIED FROM IT — typed `soakLayers`, because a layer that names a type answers ONLY that type and is transparent to everything else (CCODE-290). ⛔ NEVER SEVERAL LAYERS FOR ONE GARMENT: three layers of 5 would be 15 soak. ⚠️ VALUES DELIBERATELY SMALL — soak is a FLAT subtraction against a median craft of 7 damage, so 2 physical is a real third of an ordinary blow, and `minHit` guarantees nothing is ever immune."
+  },
+  {
+   "id": "forms_manual",
+   "name": "The Forms",
+   "kind": "tool",
+   "description": "A Redline training-scroll of the Edge's disciplines — studying it teaches the etiquette of challenge and refusal as much as the strike. Knowing the forms can end a fight before it starts.",
+   "bonusTags": [
+    "edge",
+    "etiquette",
+    "learn"
+   ],
+   "consumable": false,
+   "worth": "useful",
+   "goods": "raw_material"
+  }
+ ]
 }

@@ -70,6 +70,31 @@ their own crafts, at their own ranks. **The targeting was right; the contributio
 
 ---
 
+---
+
+## ⛔ R36a — HOW MANY ACT FULLY: EARNED, AND CAPPED AT 3 FOR NOW
+
+> Erik, 2026-09-04: *"the number of party members who also act fully are **limited and built up over
+> time** to about a **max of 3 for right now**. Playtesting will tell if that's right."*
+
+| | |
+|---|---|
+| ⚑ **act fully from their sheet** | ⛔ **up to 3** — their own crafts, ranks and energy |
+| **folded** | the rest — contribution families, as today |
+| ⚠️ **party capacity** | **6** (R25a: rapport to 4, presence 10 and 14 for the 5th and 6th) |
+
+⛔ **SO A FULL PARTY OF SIX HAS THREE ACTING AND THREE FOLDED**, and **which three** is a real choice that
+changes with the fight.
+
+⚠️ **"BUILT UP OVER TIME" — the slots are EARNED, not granted at capacity.** ⬜ **What earns them is not
+ruled.** Aevi's reading: **bond depth and time served**, since `bondStage` and `joinedDay` already exist and
+R25a keyed party CAPACITY to rapport and presence. ⚠️ **Stated as a reading — Erik has not set it.**
+
+✅ **AND THE NUMBER IS EXPLICITLY PROVISIONAL: *"playtesting will tell if that's right."*** ⛔ **It must be a
+content dial, never a constant in code.**
+
+---
+
 ## ⬜ FOR CCODE
 
 1. ⚠️ **`intercept.js::spendProtection` is in the test-only export list** — CCode's note calls it *"the
@@ -80,8 +105,7 @@ their own crafts, at their own ranks. **The targeting was right; the contributio
 3. **Does a folded member DECLARE, or does the engine pick from their kit?** ⬜ Aevi's read: **the engine
    picks, weighted by their `assistTags` and the situation** — ⚠️ *the player declares; the party acts.*
    **Stated as a reading.**
-4. ⚠️ **Turn order and count.** ⛔ 3 turn-by-turn and the rest folded was the old shape (R25a). ⬜ **Does R36
-   change how many act, or only how well?**
+4. ✅ **ANSWERED BY R36a — 3 act fully, the rest fold, and the 3 slots are EARNED.** ⬜ **What earns a slot is still open.**
 5. **What does a folded member's failure look like?** ⬜ They can be `downed`, `outOfAction`, `woundedUntilDay`
    — ⚠️ **all three exist and none is written by the fold.**
 

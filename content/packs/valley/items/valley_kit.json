@@ -58,7 +58,18 @@
    ],
    "consumable": false,
    "worth": "valuable",
-   "goods": "arms"
+   "goods": "arms",
+   "soakLayers": [
+    {
+     "type": "cold",
+     "value": 4
+    },
+    {
+     "type": "physical",
+     "value": 1
+    }
+   ],
+   "_soakWhy": "A heavy oiled cloak answers WEATHER, not weapons. 4 cold because that is what it is for; 1 physical because a thick wet cloak turns a graze and nothing more. ⛔ CCODE 2026-09-04: 'the player seat now carries `soak` and NOTHING WRITES IT — Pell's brigandine does nothing anywhere.' ⚠️ Four items were `kind: armor` and only `oiled_leathers` carried a value. ✅ SHAPE COPIED FROM IT — typed `soakLayers`, because a layer that names a type answers ONLY that type and is transparent to everything else (CCODE-290). ⛔ NEVER SEVERAL LAYERS FOR ONE GARMENT: three layers of 5 would be 15 soak. ⚠️ VALUES DELIBERATELY SMALL — soak is a FLAT subtraction against a median craft of 7 damage, so 2 physical is a real third of an ordinary blow, and `minHit` guarantees nothing is ever immune."
   },
   {
    "id": "channel_pole",
@@ -100,7 +111,8 @@
    ],
    "consumable": false,
    "worth": "valuable",
-   "goods": "arms"
+   "goods": "arms",
+   "_soakWhy": "⬜ NO SOAK, DELIBERATELY. Boots that make no sound are not armour — their whole value is `stealth`/`grip` in `bonusTags`. ⚠️ Authoring soak here would make every armour SLOT a damage slot, which is how a kit becomes a spreadsheet. ⛔ CCODE 2026-09-04: 'the player seat now carries `soak` and NOTHING WRITES IT — Pell's brigandine does nothing anywhere.' ⚠️ Four items were `kind: armor` and only `oiled_leathers` carried a value. ✅ SHAPE COPIED FROM IT — typed `soakLayers`, because a layer that names a type answers ONLY that type and is transparent to everything else (CCODE-290). ⛔ NEVER SEVERAL LAYERS FOR ONE GARMENT: three layers of 5 would be 15 soak. ⚠️ VALUES DELIBERATELY SMALL — soak is a FLAT subtraction against a median craft of 7 damage, so 2 physical is a real third of an ordinary blow, and `minHit` guarantees nothing is ever immune."
   },
   {
    "id": "storm_glass",

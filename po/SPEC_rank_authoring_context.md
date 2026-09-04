@@ -50,6 +50,35 @@ say so.**
 
 ---
 
+## §2b — ⚑ AND IT TAKES USER INPUT
+
+> Erik, 2026-09-04: *"it can take user input."*
+
+⛔ **THE PLAYER IS A TERM IN THE GENERATION, NOT A SPECTATOR OF IT.** ⚠️ Use evidence says what the craft
+HAS been; the player says what they were REACHING FOR — and those are different facts.
+
+✅ **THE SURFACE ALREADY EXISTS.** `showBraidMoment` carries *"…or name it yourself"* and **"Make it mine"**
+— ➡️ **a rank-up is the same moment one rung up.** ⚠️ `DESIGN_celebrations.md`: *"the player is not shown a
+thing they received — they are INVITED TO OWN IT."*
+
+| the player may give | the generator treats it as |
+|---|---|
+| ⚑ **a name** | ⛔ **authoritative — it is theirs.** Already true at mint |
+| **a sentence on what they were doing with it** | ⚠️ **the strongest single signal** — it disambiguates a use history that reads two ways |
+| **what they want it to become** | an aim, weighed against the evidence |
+| ⬜ **nothing at all** | ✅ **fully valid — the evidence alone must produce a good rank** |
+
+⛔ **BUT THE EVIDENCE IS NOT OVERRIDDEN.** ⚠️ **A player who asks for a strike on a craft cast 22 times as a
+sense should not simply get one.** ➡️ **The honest output is the intersection: what it has been, pointed the
+way they are pointing.** ⚑ **That tension is the interesting part — a craft that has become something you
+did not intend is a better story than one that obeys.**
+
+⬜ **AND IT MUST NOT BECOME A FORM.** ⚠️ One optional line, at a moment that is already happening. ⛔ **Never
+a required field, never a wizard** — Erik's standing preference is one-click, and a rank-up the player must
+fill in is a chore attached to a reward.
+
+---
+
 ## §3 — THE CRAFT'S OWN INHERITANCE
 
 | context | why |
@@ -112,5 +141,6 @@ that distribution herself; a generator with the same brief and no list will prod
 4. **What happens on a bad evolution?** ⬜ Erik has not ruled whether a braid can evolve WRONGLY.
    ⚠️ **Aevi's instinct is yes and that it is the point — but the generator needs to know whether it is
    optimising or reflecting.**
-5. ⬜ **Does the same package serve bond-taught crafts?** ⚠️ `marrow-s-wings` was taught, not braided, and
+5. ⚠️ **How is the player's line weighed against the evidence (§2b)?** ⬜ Aevi's read: **the intersection**, never an override — but the balance is a design call.
+6. ⬜ **Does the same package serve bond-taught crafts?** ⚠️ `marrow-s-wings` was taught, not braided, and
    has no parents to inherit from.

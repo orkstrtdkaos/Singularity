@@ -1,6 +1,6 @@
 # BALANCE — the dials, what they actually do, and how to turn one without lying to yourself
 
-**CCode · started 2026-08-30 · v1.9.346**
+**CCode · started 2026-08-30 · v1.9.347**
 
 > Erik: *"we need to build toward balance and use the dials."*
 
@@ -52,8 +52,13 @@ What balance means here is narrower and testable:
 | `intensity.conserve/standard/surge.mult` | `craft_mechanics` | 0.5 / 1 / 2 | the player's per-cast risk lever |
 | `capabilityByTier` | `resolution` | 0.25 → 3.0 over seven rungs | ⛔ what a rung can **do** — hero swing, command, fold weight |
 | `npcStanding.tierFloor` | `resolution` | riffraff 1 → mythic 85 | what level a rung implies |
-| `npcStanding.healthPerLevel` | `resolution` | ⛔ **UNAUTHORED — code default 3** | a person's health per level. ⚠️ An authored L33 is 99 health |
-| `npcStanding.energyBase` | `resolution` | ⛔ **UNAUTHORED — code default 40, flat** | a person's whole energy pool. ⚠️ A pressure tick costs 22; two people are spent by round four. **The open combat ruling** |
+| `npcStanding.healthBase` / `healthPerLevel` | `resolution` | **30 / 5** (v1.9.347) | a person's health: base + per level. Pell L27 165, Veth L33 195 — near the PC curve |
+| `npcStanding.energyBase` / `energyPerLevel` | `resolution` | **100 / 5** (v1.9.347) | a person's energy: base + per level (was 40 flat). Veth 265 |
+| `momentum.pressure.{player,opponent}HealthLoss` | `skill_battle_system` | **3 / 3** | R34a — a tick costs both sides health, priced alike |
+| `momentum.pressure.{player,opponent}EnergyLoss` | `skill_battle_system` | **8 / 8** (was 0 / 22) | R34a — and energy; `opponentEnergyLoss` may go to 0 (pressure purely positional) |
+| `momentum.pressure.breakAtLevelFraction` | `skill_battle_system` | **0.5** | R34b — break at `ceil(level × f)` of the side being broken; L33 → 17, L5 → 3 |
+| `deathSave.saveBonus` | `skill_battle_system` | **20** | R35 — the target's weight on the save. 0 → 66% of landed lethal hits kill a fresh equal · 10 → 58% · **20 → 48%** · 30 → 38% |
+| `deathSave.rungs` / `saveOn` / `notForClasses` / `defaultKillCost` | `skill_battle_system` | lethal, atrocity / strength, presence / [] / null | which rungs offer the kill; what the target rolls; ⬜ Aevi fills the classes (`notFor` prose); ⬜ a default price for the 52 lethal crafts with no `killCost` (Q15) |
 | `crit.*` · `baseChance.*` · `energy.*` | `resolution` | — | the roll itself, and what a turn costs |
 
 ### 2b · ⛔ Code-only — these need an engine change, which means they are not yet dials

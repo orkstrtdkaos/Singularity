@@ -454,8 +454,9 @@ working papers; **this is the answer.**
 | 09-04 | ⛔ **THE RATCHET WAVED A DEAD SUITE THROUGH** | `run_tests --ratchet` counted a suite by its own “N FAILURE(S)” line or its FAIL lines; a suite that CRASHES prints neither, so `null ?? 0 ?? 1` was 0 and `tradition_matrix` read as green for a day while dead. A non-zero exit is now at least one failure | `§64` on the source; the first honest run surfaced `verification_ledger`, which exits 1 BY DESIGN when the ledger has red rows — baselined at 1 deliberately, not hidden again | ⚠️ the hook can no longer be fooled by a throw; a new red now needs a FAIL line or a crash, and both count |
 | 09-04 | ✅ **THREE READERS FOR THINGS THAT WERE AUTHORED AND DARK** | (1) SPEC_holding_attributes pass one — `holdingsAt` (the join), `holdingSentence` (“the mine is running; the watchtower is eating it”), `provides`/`upkeep` read before authored, the narrator told when you stand in a place you hold; (2) the PC's armour — `wornSoakLayers` reads SNG-521's item `soakLayers[]`, best per type, into the fight seat; (3) `byTradition[t].mix` — 26 authored blends with zero consumers — reaches the ground card as `lineageMix` and the wheel's ground row | `§65` (join, sentence, here-mark, registry passes the location) · `§66` (best per type on real items; the seat carries the layers) · `§67` (abyssal card carries the blend; an unauthored lineage carries none; the row renders it) | body §7d, §4, §3c. ⚠️ No magnitude moved for holdings (Q14); armour now soaks for the PC exactly as it does for a foe |
 | 09-04 | ✅ **TRUTH ↔ DATA — a body section names its subject and the fields it describes, and they must exist** | `<!-- subject: X · fields: a, b · state: c -->` under a body heading; every `fields:` name must be a key somewhere in content, every `state:` name (a save-record field) must be named in engine/; the subject must be one `scripts/subject.mjs` knows | `§64` — three sections marked (§3c, §7d, §7h); sections without a marker ratchet at 20 and may only fall | the second half of SPEC_associativity §4 — the join that would have caught 31 crafts carrying a forbidden `tradition`; a body that describes a field nobody authors is now red |
+| 09-04 | ✅ **THE COMBAT FLOOR — one landing (R34 · R35 · Q1)** | NPC pools on the player's shape (`healthBase`/`energyPerLevel` readers, `npcStanding` authored 30 + 5/level · 100 + 5/level); a pressure tick costs BOTH sides health and energy, priced alike (3 · 8), and the opponent's health loss is finally APPLIED; `breakAtPressure = ceil(level × 0.5)` of the side being broken, `level` on every opponent seat; the DEATH SAVE — a landed lethal hit is an opposed contest (caster's landed roll + the finisher's situational dials vs the target's strength/presence save + `saveBonus` 20), kill → the target stops and the caster pays `mechanic.killCost` (the Cut Thread's bound, transcribed: pool to zero, `craftSealedUntilRest` until a night's rest), hold → the dice at the standard cost | `§68` (pools · tick alike/applied/carried · 15/3/flat/chase · both seat paths · kill/hold/wounding/barred/sealed · seeded 35–65% · seams) · `scripts/duel_pell_vs_veth.mjs` LIVE Pell wins 11.1% (by health 222 of 222 decided, by pressure 0) · mean rounds 7.1 · Veth never spent-out (was 91.6% Pell, 1,832 by pressure, spent by round four) | body §3c (floor), §7h. R36–R38 are indexed ⬜ in RULINGS (sequenced behind the floor by the GO list) and enter the body when built. ⛔ 53 lethal crafts, one `killCost` — Q15 logged. `§62`'s declaration regex now reads Aevi's bold form |
 
-**Last verified: 2026-09-04 · v1.9.346 · 419 crafts.**
+**Last verified: 2026-09-04 · v1.9.347 · 419 crafts.**
 
 ---
 
@@ -916,9 +917,10 @@ authors `imposes` imposes, pierce and penetration and the per-rank `harmRung` ar
 | **the player seat** | carries `level`, `health`, `maxHealth`, `soak` | the wielder term scales; ⚠️ `soak` reads a field nothing writes yet |
 
 ⚠️ **What a round does NOT read:** the ground. No substrate term enters a skill-battle roll; `substrateForAction` gates
-and penalises FREE actions only. `harmRung` moves no number inside a round — it grants finishing potential, spent
-only by the deliberate ⚡ Finish it, which ends a fight by the momentum swing against the foe's collapse floor. A fight
-ends by **health ≤ 0** or by **being driven back twice** (`breakAtPressure`).
+and penalises FREE actions only. ✅ **`harmRung` now moves a number inside a round (R35, below):** a landed hit at a
+lethal rung is offered the insta-kill through a DEATH SAVE, and the dice are the fallback. The other rungs still only
+grant finishing potential, spent by the deliberate ⚡ Finish it. A fight ends by **health ≤ 0** or by **being driven back
+`ceil(level / 2)` times** (`breakAtLevelFraction`, R34b) — a flat `breakAtPressure` is the fallback for a sheet with no level.
 
 ✅ **The ground CARD (not the round) also carries the lineage's authored blend** — `power_sources.json`'s `byTradition[t].mix`,
 26 blends with Erik's reasons that had no reader since the day they landed — as `lineageMix` in the band vocabulary
@@ -928,9 +930,65 @@ ends by **health ≤ 0** or by **being driven back twice** (`breakAtPressure`).
 test built the input production did not. **The standing check, now a rule (`PIPELINE.md`): does the SUITE build the
 input, or does PRODUCTION?** §60 asserts the live shape.
 
-⚠️ **THE POOLS ARE THE OPEN RULING.** A person's sheet is level × 3 health and **40 energy flat** (`npcsheet.sheetFor`);
-a pressure tick costs the opponent 22. Two authored people are at 0 energy by round four and bare-hand each other
-for twenty. `resolution.npcStanding.healthPerLevel` / `energyBase` are the dials and nobody has authored them.
+### ✅ THE COMBAT FLOOR (GO_LIST_20260904 §1 · R34 · R35 · Q1 — one landing, 2026-09-04)
+<!-- subject: combat-pressure · fields: healthBase, healthPerLevel, energyBase, energyPerLevel, playerHealthLoss, playerEnergyLoss, opponentHealthLoss, opponentEnergyLoss, breakAtLevelFraction, breakAtPressure, deathSave, rungs, saveOn, saveBonus, notForClasses, killCost, sealedUntilRest · state: craftSealedUntilRest -->
+
+Erik's build order was the floor first, because *"40-flat energy and break-at-3 make every other change unmeasurable."*
+Three changes, one landing, each a dial the engine reads and content now authors.
+
+**Q1 — the pools run on the player's shape.** `npcsheet.sheetFor` is `healthBase + level × healthPerLevel` and
+`energyBase + level × energyPerLevel` (`resolution.npcStanding`: **30 + 5/level · 100 + 5/level**). Pell L27 is 165 / 235,
+Veth L33 195 / 265 — a near-equal body to a PC of that level (PC: 15 + physical × 5 + 5/level · 100 + 5/level). Before: level × 3
+and 40 flat, so two authored people were spent by round four and bare-handed each other for twenty. Unauthored, the
+code defaults are the old numbers exactly.
+
+**R34a — BEING DRIVEN BACK COSTS BOTH SIDES THE SAME KIND OF THING.** A pressure tick takes health AND energy from
+whichever side is driven back: `momentum.pressure.{player,opponent}{Health,Energy}Loss` — **3 health · 8 energy, both
+sides**, none zero, and `opponentEnergyLoss` may be turned to zero (pressure then purely positional). ⛔ The opponent's
+health loss was computed by `lossFor`, carried on the receipt, and **applied to nobody** — only the energy line wrote;
+the round now applies it where the opponent's pool is declared (`pressureEvent.applied`). The player's health loss stays
+the caller's (the app owns the body; `deltas.health`).
+
+**R34b — the break is `ceil(level × breakAtLevelFraction)` of the side being broken** (0.5 → a level-33 figure takes
+17 ticks, a level-5 novice 3). A kind that authors its own flat `breakAtPressure` (a chase 1, a standoff 2) keeps it: the
+ruling is about fights. `level` now rides on every opponent seat — `personOpponent` passes the person's, and a threat-built
+foe reads `threat / 2` (the inverse of `threat = level × 2`). `state.breakAt` carries the threshold so the panel can show it.
+
+**R35 — a landed hit at a lethal rung OFFERS THE INSTA-KILL, and the dice are the fallback.** There was no death save
+(`resolve.js`'s `opposed` is a difficulty term, not a contest), so one was built the way every contest here is built: two
+`rollSide` margins compared.
+
+| side | rolls | terms |
+|---|---|---|
+| **the caster** | the roll that just landed (`winRoll.margin`) | + the finisher's own situational dials on the target: `pressureBonus` × ticks driven back, `wornDownBonus` when run down, `perTierGap` × the tier gap |
+| **the target** | a fresh `rollSide` on the higher of `strength` / `presence` — *the body's refusal or the person's* — with no craft behind it (`rank: 0`) | + `deathSave.saveBonus` (20) |
+
+`killMargin = caster + terms − save`. **Kill:** the target STOPS — the damage becomes their whole remaining pool, `slain`
+rides on the receipt, the opponent resolves, the player's exit stays `checkIncapacitation` (the aggressor table decides what
+"stopped" means for them). The caster pays the craft's **`mechanic.killCost`** — `the_cut_thread`'s authored bound
+transcribed: `{ energy: "all", sealedUntilRest: true }` — pool to zero and a seal on the sheet (`craftSealedUntilRest`) that
+a full night's rest lifts and a breather does not; a sealed side's crafts fall back as a spent side's do. **Hold:** the dice
+already rolled are the damage, at the standard cost already charged (14 for the Cut Thread). A `notForClasses` target or a
+static thing is never offered the save; a non-lethal rung is untouched (the ⚡ finisher path stands).
+
+**Measured (5,000 rounds each, equal level and tier, fresh):** `saveBonus` 0 → **66%** of landed lethal hits kill · 10 → 58% ·
+**20 → 48%** · 30 → 38%. A run-down, pressed×3 target dies ~94–99%; a physical-20 / strength-24 target is barely hit and
+almost never dies fresh. Set at 20 to meet Erik's own calibration for the rung (CCODE-42: *"against a healthy foe of equal
+level it might be a 50/50"*; `finisher.odds.baseByRung.lethal` is 48). ⚠️ **The tier does not weigh on the save by itself** —
+a T1 and a T5 at rank 1 kill alike against an equal; only the finisher's tier GAP term separates them.
+
+⛔ **WHAT THIS EXPOSES, AND IT IS A CONTENT DECISION:** **53 crafts carry `lethal`/`atrocity`** — 22 of them T1
+(`sling_and_stone`, `plain_weight`, `hunters_strike`, `levelled_crossbow`…) — and **one** carries a `killCost`. Under
+the ruling as written every one of them offers the ~50% insta-kill on a landed hit, and 52 of them for nothing beyond
+the standard cost. The rung was authored when it meant *"can end a fight by the ⚡ button at 48%"*; it now means *"kills
+on a hit half the time"*. ⬜ Which crafts keep the rung, and whether `deathSave.defaultKillCost` should price the rest,
+is Aevi's and Erik's — logged in `DECISIONS_OWED` as Q15. ⚠️ The ⚡ Finish it button still offers at lethal too
+(`finisher.alwaysAtHarmRung`); two ends on one rung is a UI ruling, logged with it.
+
+`§68` gates all of it: the four pool dials and the L30 body; the tick's four dials alike and nonzero, the opponent's health
+applied, the player's carried; 15 / 3 / flat / chase thresholds and both seat paths; kill → stop + bound, hold → dice +
+standard cost, no save for a wounding rung or a barred class, the seal degrading a craft; a seeded 35–65% kill share on
+a fresh equal; and every seam by source.
 
 ---
 
@@ -1214,7 +1272,7 @@ two, RULINGS OWED Q14.
 ---
 
 ## 7h · A PERSON HAS A SHEET, AND A MASS HAS A NUMBER
-<!-- subject: npc-sheets · fields: level, tier, subAttributes, abilities, assistTags, closed, tierFloor, levelPerMeetings, healthPerLevel, energyBase -->
+<!-- subject: npc-sheets · fields: level, tier, subAttributes, abilities, assistTags, closed, tierFloor, levelPerMeetings, healthBase, healthPerLevel, energyBase, energyPerLevel -->
 
 **There are two sheet producers and they are the two directions of ONE ladder, not rivals.**
 

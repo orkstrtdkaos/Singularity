@@ -114,3 +114,41 @@ invent.**
    norm, or is the whole-pool bound currently overriding it?**
 5. ⛔ **`notFor` already bounds the immunities** — *"it cannot be aimed at what has no thread: a machine, a
    figure, a Precursor working."* ⬜ **Does the save need to know that, or does `notFor` gate it earlier?**
+
+
+---
+
+## ⬜ CCODE ROUND 2 — 2026-09-04 · BUILT v1.9.347 · gated `§68`
+
+**Built as ruled, one landing:** pools on the player's shape (Q1), the tick symmetric and the opponent's loss APPLIED
+(R34a — it was computed and written to nobody), `breakAtLevelFraction` 0.5 of the side being broken (R34b — Aevi's
+reading; a chase keeps its flat 1), the death save (R35). `HOW_IT_WORKS.md` §3c carries the mechanism and the measurements.
+
+**The five questions, answered by measurement:**
+
+1. **What `opposed` contests in `resolve.js`:** nothing — it is a DIFFICULTY TERM (`difficulty: "opposed"`), not a contest
+   function. There is no opposed-roll path in the engine; every contest here is two `rollSide` margins compared, so the
+   death save was built that way and needs no new path.
+2. **What the target rolls:** Aevi's instinct, built — a fresh `rollSide` on the higher of `strength` / `presence` (falling
+   back to physical / social when no sub-attribute is authored), **no craft behind it** (`rank: 0`), against the caster's
+   landed roll plus the finisher's situational dials (driven back, run down, tier gap). Measured on a fresh equal:
+   `saveBonus` 0 → 66% kill, 20 → **48%**; authored 20 to meet Erik's own 50/50 (CCODE-42). ⚠️ Attribute dominates: a
+   physical-20 / strength-24 figure is barely hit and almost never dies fresh; a run-down, pressed×3 one dies ~95%.
+3. **Does `incapacitation.js` model "stopped":** for the PLAYER, yes — a kill sets `damage.amount` to the whole pool, the
+   app applies it, `checkIncapacitation` fires and the aggressor table decides what stopped means. For the OPPONENT the
+   round resolves on health 0 and `damage.slain` says it was a kill rather than a wound. No new state was needed.
+4. **"A standard tier-5 cost":** the craft's own `energyCost` — the Cut Thread's authored 14 — charged on every declaration
+   as before. The whole-pool bound was never overriding it; nothing had ever read the bound. It is now `mechanic.killCost:
+   { energy: "all", sealedUntilRest: true }` on the_cut_thread (transcribed from its prose — correct the shape if it reads
+   differently), paid ONLY on a kill; the seal is `character.craftSealedUntilRest`, lifted by a night's rest.
+5. **`notFor`:** prose, so it gates nothing today. `deathSave.notForClasses: []` is the reader — a target whose
+   `creatureClass` is listed is never offered the save (a static thing likewise). ⬜ Aevi fills it (machine · figure · a
+   Precursor working, whatever their class ids are).
+
+⛔ **WHAT THE LANDING EXPOSED — logged as Q15, not decided:** **53 crafts carry `lethal`/`atrocity`, 22 of them T1, and one
+carries a `killCost`.** Under R35 a rank-1 sling now offers the ~50% insta-kill on every landed hit at no cost beyond its 5
+energy. The rung was authored when it meant "can end a fight by the ⚡ button at 48%". ⬜ Which crafts keep the rung, and
+whether `deathSave.defaultKillCost` prices the rest, is yours. ⚠️ The ⚡ Finish it button still offers at lethal
+(`finisher.alwaysAtHarmRung`) — two ends on one rung; a UI ruling.
+
+**LIVE 2,000 Pell–Veth duels after the floor:** Pell wins 11.1% (by health 222 of 222 decided, by pressure 0) · mean rounds 7.1 · Veth never spent-out (was 91.6% Pell, 1,832 by pressure, spent by round four). Every duel now ends by health — a landed lethal hit decides it — and none by break (17 / 14 ticks needed). Veth's 60-move kit carries lethal rungs Pell's 39 does not; that is Q15 in numbers.

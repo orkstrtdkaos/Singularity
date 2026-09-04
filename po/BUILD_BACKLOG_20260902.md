@@ -29,7 +29,7 @@ supplies what production omits. ⛔ **Same shape as `sheetFor`'s `authored` flag
 | # | question | blocks |
 |---|---|---|
 | **1** | ⛔ **DAMAGE vs HP CURVES DIVERGE.** Damage scales ~5× across tiers; pools ~10× by level. Median craft **7 dmg** vs **191 HP**. ⚠️ **`the_cut_thread` — *"it simply stops"* — needs 8 castings.** ⬜ Is `harmRung` the kill condition and dice only erosion? | all combat |
-| **2** | **NPC pool dials** — an NPC is `level×3` health, **40 energy FLAT**. ⚠️ Nobody has authored `healthPerLevel`/`energyBase`. ⛔ **40 energy is the whole fight: a pressure tick costs 22** | all NPC combat |
+| **2** | **NPC pool dials** — an NPC is `level×3` health, **40 energy FLAT**. ⚠️ Nobody has authored `healthPerLevel`/`energyBase`. ⛔ **40 energy is the whole fight: a pressure tick costs 22** | all NPC combat · ✅ **v1.9.347 — authored 30 + 5/level · 100 + 5/level (`§68`); the floor also landed R34 (symmetric tick, break at half your level) and R35 (the death save)** |
 | **3** | ⛔ **WHICH OF THREE GROUND TABLES IS THE TRUTH.** The card reads the CRAFT; the roll reads the TRADITION; ⚠️ **and no substrate term enters a skill-battle roll at all** | `SPEC_body_source.md`, `SPEC_meaning_density.md` |
 | **4** | **service band N** — how far below the player may someone in your service fall | `SPEC_npc_level_balance.md` |
 | **5** | **charge rate** — what a completion and a `condition` step are worth | ↑ |

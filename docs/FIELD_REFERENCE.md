@@ -39,7 +39,7 @@ file is replaced.**
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **93** | a play-path file names it outside a comment |
+| ✅ **READ** | **94** | a play-path file names it outside a comment |
 | ⛔ **DARK** | **15** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **3** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
@@ -254,6 +254,9 @@ its own config. Take the object the caller takes.**
 | `reachOf(rank, intensity)` | r1→0 · r2→1 · r3→2 · r4+→2 · surge +1 capped at 2 | — |
 | a battle **declaration** | ⛔ `{ function, tier, rank, attribute, intensity, name, id, energyCost }` — **`tier` is the CRAFT's, `rank` is what is OWNED**; the chance stack reads `rank`, the dice read `tier`; `skillBattleRound` runs it through `enrichDecl(decl, abilities)` so the craft's `mechanic`/`imposes`/`pierce`/`tree` sit under it (decl fields win, `functions` dropped) | a bare `{function, tier, …}` with the owned rank in `tier` — which is what play sent for months |
 | `battleRound(...)`'s `playerSheet` | carries `level`, `health`, `maxHealth`, `soak` beside attributes/energy — the wielder term and the defender's soak read them | attributes and energy only |
+| a **pressure tick** (`pressureEvent`) | `{ side, healthLoss, energyLoss, pressure, label, applied? }` — both sides lose BOTH currencies (R34a); the OPPONENT's health loss is applied in-round (`applied: { health }`), the PLAYER's is the caller's (`deltas.health`); `state.breakAt = { opponent, player }` is `ceil(level × breakAtLevelFraction)` of that side, a kind's own flat `breakAtPressure` winning | an opponent health loss computed, reported, and written to nobody |
+| the **death save** (`deathSave`, also on `damage.deathSave`) | `{ by, rung, on, saveOn, saveValue, caster, save, mods[], killMargin, kill, held, cost, why }` — `by` is the caster's side, `on` the target's; `cost` is the craft's `mechanic.killCost` on a kill and `"standard"` on a hold; a kill sets `damage.slain` and `damage.amount` = the target's whole remaining pool; the wrapper returns `deathSave` and `sealed` | a lethal rung that moved no number |
+| `character.craftSealedUntilRest` | set by the app when a kill's `killCost.sealedUntilRest` fires on the player; rides into the round as `state.playerSealed` (crafts fall back as spent); `rest("sleep")` deletes it, a breather does not | — |
 | `releaseHolding` / `transferHolding` | move the record to `character.formerHoldings[]` with `formerHolder`, `reason` / `transferredTo`, `obligationUnpaid`, and queue `character.holdingEvents[]` for the tick (`takeHoldingEvents`) | a filter |
 | `holdingsAt(character, locationId)` · `holdingSentence(h)` | the join and the sentence; a holding may carry `provides: […]` and `upkeep: […]` (read, not yet authored); `holdingsForGM(…, { hereId, nameOf })` marks the one you stand in | a holding with no idea where it is |
 | `wornSoakLayers(character)` | reads `soakLayers[]` off inventory items (SNG-521's authored typed soak); what is carried counts; per type the single BEST layer, never a sum; rides into the player seat as `soakLayers` | `character.soak`, a field nothing writes |
@@ -719,6 +722,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `awaitingEngine` | 1 | `mechanic`×1 | ⛔ DARK | — |
 | `questions` | 1 | `mechanic`×1 | ✅ READ | `app.js` |
 | `reachesDepth` | 1 | `mechanic`×1 | ⛔ DARK | — |
+| `killCost` | 1 | `mechanic`×1 | ✅ READ | `skill_battle.js` |
 | `wornBenefits` | 1 | `mechanic`×1 | ⛔ DARK | — |
 | `accord` | 1 | `root`×1 | ✅ READ | `progression.js`, `state.js`, `app.js` |
 | `emotions` | 1 | `mechanic`×1 | ⛔ DARK | — |

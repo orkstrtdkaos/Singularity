@@ -113,6 +113,10 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
     return { name: opponent.name || "the opponent", attributes: opponent.attributes || { practical: attr, physical: attr, mental: attr, social: attr },
       energy: opponent.energy ?? energy, maxEnergy: opponent.energy ?? energy, tacticTags: tags, skills: opponent.skills,
       health: opponent.health ?? health, soak: opponent.soak ?? soak,
+      // ✅ R34b: LEVEL RIDES ON THE SHEET — the break threshold is `ceil(level / 2)` of the side being broken. A
+      // person's sheet carries its level; a threat-built foe's level is the inverse of `personOpponent`'s
+      // `threat = level × 2`, so the two paths agree about how hard a threat-60 thing is to drive off.
+      ...(Number.isFinite(Number(opponent.level)) ? { level: Number(opponent.level) } : (Number.isFinite(Number(opponent.threat)) ? { level: Math.max(1, Math.round(Number(opponent.threat) / 2)) } : {})),
       soakLayers: opponent.soakLayers ?? (opponent.soak != null ? layersFor(Math.max(0, Math.round(Number(opponent.soak) || 0))) : soakLayers),
     // CCODE-83: the creature's authored AFFINITY must reach the sheet, or a typed bestiary is prose again.
     ...(opponent.affinity ? { affinity: opponent.affinity } : {}), ...(opponent.class ? { creatureClass: opponent.class } : {}), authored: true };
@@ -138,7 +142,8 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
     energy, maxEnergy: energy, tacticTags: tags, skills,
     health: opponent.health ?? health, soak: opponent.soak ?? soak, soakLayers: opponent.soakLayers ?? soakLayers,
     // CCODE-83: the creature's authored AFFINITY must reach the sheet, or a typed bestiary is prose again.
-    ...(opponent.affinity ? { affinity: opponent.affinity } : {}), ...(opponent.class ? { creatureClass: opponent.class } : {}), synthesized: true };
+    ...(opponent.affinity ? { affinity: opponent.affinity } : {}), ...(opponent.class ? { creatureClass: opponent.class } : {}),
+    level: Number.isFinite(Number(opponent.level)) ? Number(opponent.level) : Math.max(1, Math.round(threat / 2)), synthesized: true };
 }
 
 /** The opponent's move for this round — DETERMINISTIC engine policy (not GM invention). Behind on momentum
@@ -536,7 +541,10 @@ function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = [], momM
     // the NPC's sent the tier, so one side rolled tier-1 dice on a T4 and the other got a T2's rank bonus for
     // a r1 craft. A declaration now carries both; `rank` feeds the roll and falls back to `tier` for callers
     // that never set it, which is byte-identical to before for every one of them.
-    action: { attribute: decl.attribute || "practical", abilityLevel: (decl.rank ?? tier), label: decl.name || decl.function, axes: {} },
+    action: { attribute: decl.attribute || "practical", abilityLevel: (decl.rank ?? tier), label: decl.name || decl.function, axes: {},
+      // ✅ R35: a declaration may name the SUB-attribute it rolls on (the death save rolls strength or presence).
+      // Absent, the parent attribute rolls exactly as before.
+      ...(decl.subAttribute ? { subAttribute: decl.subAttribute } : {}) },
     rules,
     contestMods: [
       { label: `matchup (${decl.function} vs ${oppDecl.function})`, value: mu },
@@ -907,8 +915,10 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // CCODE-39: a side with nothing left in the pool cannot pay for a craft — its declaration DEGRADES to a plain
   // effort (steel and wit: a bare strike or a raised guard, tier 1, conserve, no weave). You fight on; you just
   // fight without your crafts until you find energy again. Enforced here so it binds both sides equally.
-  playerDecl = degradeIfSpent(playerDecl, state.playerEnergy ?? playerSheet.energy ?? 0, sb, steps, rules);
-  oppDecl = degradeIfSpent(oppDecl, state.opponentEnergy ?? oppSheet.energy ?? 0, sb, steps, rules);
+  // ✅ R35: a side that PAID THE KILL is sealed — "unable to use any craft until a full night's rest". A seal
+  // reads as an empty pool here, so the craft falls back exactly as a spent one does; the state carries it out.
+  playerDecl = degradeIfSpent(playerDecl, state.playerSealed ? 0 : (state.playerEnergy ?? playerSheet.energy ?? 0), sb, steps, rules);
+  oppDecl = degradeIfSpent(oppDecl, state.opponentSealed ? 0 : (state.opponentEnergy ?? oppSheet.energy ?? 0), sb, steps, rules);
   const standing = state.effects || [];
   // ⛔ CCODE-250 — WHO IS THIS AIMED AT. Erik: "Yes a foe chooses who to hit... you need to sense who's
   // getting attacked so you can intervene if you want." Until now `oppDecl` resolved against `playerSheet`
@@ -1093,7 +1103,18 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   const harmFns = new Set(dcfg.harmFunctions || sb.persistentEffects?.attackFunctions || ["strike", "break"]);
   const healFns = new Set(dcfg.healFunctions || ["heal", "mend", "restore"]);
   let opponentHealth = state.opponentHealth ?? oppSheet.health ?? null;
+  // ✅ R34a (Erik 2026-09-04): BEING DRIVEN BACK COSTS BOTH SIDES THE SAME KIND OF THING. The tick's health
+  // loss was computed for the opponent and applied to nobody — `lossFor` returned it, the receipt carried it,
+  // and the only write was the energy line above. The player's health stays the caller's (the app owns the
+  // body); the opponent's pool is this round's, so the round applies it here, once, where the pool is declared.
+  if (pressureEvent && pressureEvent.side === "opponent" && opponentHealth != null && pressureEvent.healthLoss > 0) {
+    opponentHealth = Math.max(0, opponentHealth - pressureEvent.healthLoss);
+    pressureEvent.applied = { health: pressureEvent.healthLoss };
+  }
   let damage = null, healing = null;
+  // ✅ R35: the death save's receipt and the seal it may leave — declared beside the locals they ride with.
+  let deathSave = null;
+  const sealedNow = { player: state.playerSealed === true, opponent: state.opponentSealed === true };
   // ⛔ CCODE-207: HEALING WAS NEVER GUARDED OUT OF THIS BLOCK - IT WAS NEVER LET IN. The branch below is
   // gated on `harmFns`, and `heal`/`mend`/`restore` are not harm functions, so 25 crafts with authored dice
   // could win a round and produce nothing at all. Authored beside `harmFunctions` for the same reason that
@@ -1563,6 +1584,76 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // but `Math.max(0, ...)` bounds only the floor, and an absorbing foe would have healed WITHOUT LIMIT,
       // becoming unkillable by anyone who kept hitting it with the thing it eats. Thematic; still a bug.
       // Feeding is capped at the creature's OWN maximum: it can be restored, never inflated.
+      // ✅ R35 (Erik 2026-09-04): A LANDED HIT AT A LETHAL RUNG OFFERS THE INSTA-KILL, AND THE DICE ARE THE FALLBACK.
+      // "The dice on a lethal skill are the fallback damage if the thing resists insta-kill. Otherwise the Cut
+      // Thread would drop someone instantly — and that's what it's designed to do." There was no death save in
+      // the engine (`resolve.js`'s `opposed` is a difficulty TERM, not a contest), so this is one, built the way
+      // every contest here is built: two `rollSide` margins compared. The caster's side is the roll that just
+      // landed; the target answers with a save on the higher of strength or presence — the body's refusal or
+      // the person's — with no craft behind it. The finisher's own situational dials (driven back, run down)
+      // weigh on the target, so a run-down, pressed foe is the "near certainty" Erik described and a fresh
+      // equal is close to even. Kill: the target STOPS (health to zero — the caller's incapacitation table
+      // decides what "stopped" means for the player) and the caster pays the craft's authored KILL COST.
+      // Hold: the dice already rolled are the damage, at the standard cost already charged. A target the craft
+      // cannot be aimed at (`deathSave.notForClasses`, a static thing) is never offered the save.
+      const dsCfg = sb?.deathSave || {};
+      const dsRungs = dsCfg.rungs || ["lethal", "atrocity"];
+      const winRung = String(winDecl?.harmRung || winDecl?.def?.harmRung || "none");
+      const dsTargetSheet = roundWinner === "player" ? oppSheet : playerSheet;
+      const dsNotFor = (dsCfg.notForClasses || []).map(String);
+      const dsBarred = !!dsTargetSheet?.static || (dsTargetSheet?.creatureClass && dsNotFor.includes(String(dsTargetSheet.creatureClass)));
+      if (dsCfg.enabled !== false && damage && damage.amount > 0 && !damage.intercepted && dsRungs.includes(winRung) && !dsBarred) {
+        const subs = dsTargetSheet?.subAttributes || {}, attrs = dsTargetSheet?.attributes || {};
+        const saveOn = (dsCfg.saveOn || ["strength", "presence"]).map(String);
+        const parentOf = { strength: "physical", presence: "social" };
+        const ranked = saveOn.map(k => ({ sub: k, value: Number(subs[k]), parent: parentOf[k] || "physical" }))
+          .map(x => Number.isFinite(x.value) ? x : { ...x, value: Number(attrs[x.parent]) || 0, sub: null })
+          .sort((a, b) => b.value - a.value);
+        const pick = ranked[0] || { parent: "physical", sub: null, value: 0 };
+        const saveDecl = { function: "resist", tier: 1, rank: 0, attribute: pick.parent, ...(pick.sub ? { subAttribute: pick.sub } : {}),
+          intensity: "standard", name: "a death save" };
+        const targetSide = roundWinner === "player" ? "opponent" : "player";
+        const save = rollSide(dsTargetSheet, saveDecl, winDecl, sb, steps, rules, rng, [], momentumModifier(momentum, targetSide, sb), 0);
+        // the finisher's situational terms, on the caster's side — existing dials, the same words Erik used for them
+        const fo = sb?.finisher?.odds || {};
+        const mods = [];
+        const pressedT = pressure[targetSide] || 0;
+        if (pressedT) mods.push({ label: `driven back ${pressedT}×`, value: pressedT * (fo.pressureBonus ?? 12) });
+        const tMaxE = dsTargetSheet?.maxEnergy || dsTargetSheet?.energy || 0;
+        const tNowE = targetSide === "opponent" ? opponentEnergy : playerEnergy;
+        if (tMaxE > 0 && tNowE / tMaxE <= (fo.wornDownAtEnergyPct ?? 0.3)) mods.push({ label: "run down", value: fo.wornDownBonus ?? 30 });
+        // the tier gap, as `finishOdds` measures it: the craft's tier against the sharpest craft the target carries
+        const myTier = Number(winDecl?.tier) || 1;
+        // ⚠️ the PLAYER seat carries `skills` as the character's MAP, not an array — read the array form only
+        const theirTier = Math.max(1, ...((Array.isArray(dsTargetSheet?.skills) ? dsTargetSheet.skills : []).map(x => Number(x.tier) || 1)));
+        if (myTier !== theirTier) mods.push({ label: myTier > theirTier ? "you out-class them" : "they out-class you", value: (myTier - theirTier) * (fo.perTierGap ?? 7) });
+        // `saveBonus` is the target's own weight on the save — a content dial (0 unauthored), the knob that sets how
+        // often a landed lethal hit on a fresh equal kills. Measured at 0: 66% (HOW_IT_WORKS §3c carries the table).
+        const saveBonus = Number(dsCfg.saveBonus) || 0;
+        if (saveBonus) mods.push({ label: "the save's own weight", value: -saveBonus });
+        const casterMargin = Number(winRoll?.margin) || 0, saveMargin = Number(save?.margin) || 0;
+        const killMargin = casterMargin + mods.reduce((a, m) => a + m.value, 0) - saveMargin;
+        const kill = killMargin > 0;
+        const killCost = winDecl?.killCost || winDecl?.mechanic?.killCost || winDecl?.def?.mechanic?.killCost || dsCfg.defaultKillCost || null;
+        const ds = { by: roundWinner, rung: winRung, on: targetSide, saveOn: pick.sub || pick.parent, saveValue: pick.value,
+          caster: casterMargin, save: saveMargin, mods, killMargin, kill, held: !kill, cost: kill ? (killCost || null) : "standard",
+          why: kill ? `the thread is cut — ${winDecl.name || winDecl.function} ends it outright`
+                    : `the save holds on ${pick.sub || pick.parent} — the dice are the fallback` };
+        if (kill) {
+          const targetHealth = targetSide === "opponent" ? (opponentHealth ?? landed) : (Number(playerSheet?.health) || landed);
+          landed = Math.max(landed, targetHealth);
+          damage = { ...damage, amount: landed, slain: true, deathSave: ds };
+          // the caster pays the authored bound — a whole pool goes to zero, and a seal outlives the round
+          if (killCost) {
+            const eAll = killCost.energy === "all";
+            const eNum = Number(killCost.energy);
+            if (roundWinner === "player") playerEnergy = eAll ? 0 : Math.max(0, playerEnergy - (Number.isFinite(eNum) ? eNum : 0));
+            else opponentEnergy = eAll ? 0 : Math.max(0, opponentEnergy - (Number.isFinite(eNum) ? eNum : 0));
+            if (killCost.sealedUntilRest) sealedNow[roundWinner] = true;
+          }
+        } else damage = { ...damage, deathSave: ds };
+        deathSave = ds;
+      }
       if (roundWinner === "player" && opponentHealth != null) {
         const ceiling = Number(oppSheet?.maxHealth ?? oppSheet?.health);
         const next = opponentHealth - landed;
@@ -1576,8 +1667,21 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // Health reaching zero ENDS it — a foe can be put down. Whether that reads as FELL or YIELDED is the caller's
   // call (encounters.js already owns `def.opponent.yieldAt`), so the engine only reports that they are finished.
   // This is the exit Erik was looking for and could not reach: "test out what happens when I kill an opponent."
+  // ✅ R34b (Erik 2026-09-04): `breakAtPressure = ceil(level / 2)` OF THE SIDE BEING BROKEN — how hard is THIS
+  // person to drive off the field. A flat 2 ended 1,595 of 2,000 duels by break; a level-33 figure now takes
+  // 17 ticks and a novice 1–3. `breakAtLevelFraction` is the content dial; a kind that authors its own flat
+  // `breakAtPressure` (a chase, a standoff) keeps it, and a sheet with no level falls back to the flat number.
+  const breakAtFor = (side) => {
+    const kindFlat = Number((kcfg.pressure || {}).breakAtPressure);
+    if (Number.isFinite(kindFlat)) return kindFlat;
+    const frac = Number(pcfg.breakAtLevelFraction);
+    const lvl = Number(side === "opponent" ? oppSheet?.level : playerSheet?.level);
+    if (Number.isFinite(frac) && frac > 0 && Number.isFinite(lvl) && lvl > 0) return Math.max(1, Math.ceil(lvl * frac));
+    return pcfg.breakAtPressure ?? 3;
+  };
+  const breakAt = { opponent: breakAtFor("opponent"), player: breakAtFor("player") };
   if (opponentHealth != null && opponentHealth <= 0) resolved = "player";
-  else if (pressure.opponent >= (pcfg.breakAtPressure ?? 3)) resolved = "player";                  // or they finally break
+  else if (pressure.opponent >= breakAt.opponent) resolved = "player";                              // or they finally break
   // SNG-247 Tier 2b: a kind where LOSING COSTS NO HEALTH needs its own player-break condition, or the player can
   // never lose it — a chase would run forever because being run down isn't damage. A FIGHT deliberately has none:
   // health owns the player's exit there (CCODE-39), and adding one would take that back from them.
@@ -1586,7 +1690,10 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // does an empty energy pool.
 
   // CCODE-45: a sense step doesn't advance the ROUND counter either — the whole turn is one round.
-  const newState = { ...state, round: (state.round || 0) + (senseStep ? 0 : 1), momentum, playerEnergy, opponentEnergy, effects, pressure, spent, resolved, opponentHealth, status: resolved ? "resolved" : "active" };
+  const newState = { ...state, round: (state.round || 0) + (senseStep ? 0 : 1), momentum, playerEnergy, opponentEnergy, effects, pressure, spent, resolved, opponentHealth,
+    // ✅ R34b/R35: the threshold the meter is measured against, and the seals a kill left — both ride on state so
+    // the panel and the next round read them (this seam has eaten a value five times; see CCODE-277).
+    breakAt, ...(sealedNow.player ? { playerSealed: true } : {}), ...(sealedNow.opponent ? { opponentSealed: true } : {}), status: resolved ? "resolved" : "active" };
   // ⛔ CCODE-208 — AND A WINNING CRAFT MAY IMPOSE. Aevi's correction is the whole design: Keening does not
   // need a new state, it needs a way to put someone into the one that already exists. Resolved AFTER the
   // exchange because only a winner imposes, and read off the SUBJECT's resistance so it is contested.
@@ -1732,7 +1839,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // character who obscured themselves simply never sees the field. Absent with no allies — so a 1v1 receipt
   // is byte-identical to the one this engine produced yesterday.
   if (aimedAt) o.targetChoice = aimedAt;
-  const out = { state: newState, unsettled, cooled, player: p, opponent: o, roundWinner, ...(aimedAt ? { aimedAt } : {}), ...(blindStrike ? { blindStrike } : {}), delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, ...(unreachable ? { unreachable } : {}), deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
+  const out = { state: newState, unsettled, cooled, player: p, opponent: o, roundWinner, ...(deathSave ? { deathSave } : {}), ...(aimedAt ? { aimedAt } : {}), ...(blindStrike ? { blindStrike } : {}), delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, ...(unreachable ? { unreachable } : {}), deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback },
     // CCODE-80: an evaded blow must SAY it was evaded. An attack that quietly does less is indistinguishable
     // from a bad roll, and the whole point of the three defensive logics is that they read differently.

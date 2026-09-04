@@ -34,6 +34,8 @@ cannot be lost; when one is ruled it gets a `po/RULING_*.md` with a `bodyAnchor:
 
 ### Q1 · NPC pools — `npcStanding.healthPerLevel` / `energyBase` ⛔ blocks all NPC combat
 
+✅ **RULED 2026-09-04 (GO list §1) · BUILT v1.9.347 `§68`** — option (a) with a per-level energy term: `healthBase` 30 + `healthPerLevel` 5 · `energyBase` 100 + `energyPerLevel` 5 (Veth 195 / 265). The tick is 3 health · 8 energy both sides (R34a).
+
 **Measured.** A person's sheet is `level × 3` health and **40 energy flat** (`npcsheet.sheetFor`, code defaults; the two
 dials are unauthored). A pressure tick costs the opponent **22** energy. In 2,000 seeded Pell–Veth duels both are at 0
 energy by round four and bare-hand each other for twenty rounds: **91.6% Pell, 1,832 by pressure, 0 by health.** The
@@ -44,6 +46,8 @@ NPCs fight as long as PCs; (b) keep 40 and lower `opponentEnergyLoss` — pressu
 scales with level like health. ⚠️ The dials exist and are read by both live callers since v1.9.343; **nothing to build.**
 
 ### Q2 · damage vs HP curves ⛔ blocks all combat
+
+✅ **RULED 2026-09-04 (R35) · BUILT v1.9.347 `§68`** — `harmRung: lethal` IS the kill condition: a landed hit offers the insta-kill through an opposed death save (48% on a fresh equal at `saveBonus` 20); the dice are the fallback. Pools keep scaling. ⬜ It opened Q15 below.
 
 **Measured (DUEL §C.7):** 102 dice-bearing crafts, mean EV 10.6, median 7; T1 4.6 → T5 28.3 (≈6×); `the_cut_thread` is
 5d6+14 (EV 31.5, max 44). A PC at L30 has ~191 health. **Fights end by pressure, not health.** Is `harmRung` the kill
@@ -121,3 +125,12 @@ the change is content — per craft — and it is yours and Aevi's.
   (R33). It works through the origin-id fallback; it is authored wrong. Aevi's.
 - ⚠️ `tests/tradition_matrix.mjs` crashes at HEAD (`trad.length` on null) and the ratchet cannot see a crash — no `FAIL`
   line, so it counts as 0. Mine, next pass.
+
+
+### Q15 · which crafts keep `harmRung: lethal` under R35, and what the other 52 pay ⛔ blocks nothing, shapes every fight
+
+**Measured (v1.9.347).** 53 crafts carry `lethal`/`atrocity` — T1 22 · T2 7 · T3 10 · T4 6 · T5 8 — and **one** (`the_cut_thread`)
+carries a `mechanic.killCost`. R35 makes the rung an insta-kill offer on every landed hit (48% on a fresh equal at `saveBonus`
+20); the other 52 kill for their standard cost. ⬜ (a) prune the rung to the crafts that mean it; (b) author
+`deathSave.defaultKillCost`; (c) both. ⚠️ And the ⚡ Finish it button still offers at lethal (`finisher.alwaysAtHarmRung`) —
+two ends on one rung. Engine: nothing to build; content decides.

@@ -487,9 +487,13 @@
     "max": 8
    },
    "pressure": {
+    "_symmetry": "✅ R34a (Erik 2026-09-04): BEING DRIVEN BACK COSTS BOTH SIDES THE SAME KIND OF THING — all four dials nonzero and priced alike. opponentEnergyLoss is tunable to zero (then pressure is purely positional). breakAtLevelFraction: the break threshold is ceil(level × fraction) of the side being broken (R34b); breakAtPressure is the flat fallback for a sheet with no level, and a kind that authors its own breakAtPressure keeps it.",
     "resetTo": 0.35,
     "playerHealthLoss": 3,
-    "opponentEnergyLoss": 22,
+    "playerEnergyLoss": 8,
+    "opponentHealthLoss": 3,
+    "opponentEnergyLoss": 8,
+    "breakAtLevelFraction": 0.5,
     "breakAtPressure": 2
    },
    "redesignNote": "CCODE-38 (Erik, decisive): 'momentum should be a MODIFIER mechanic, not the primary exit encounter metric.' He ended a fight at 37/45 hp and 90/115 energy — beaten by a meter while holding every real resource. So momentum no longer ENDS anything. It does two things now: (1) asModifier — whoever is ahead carries a named roll bonus (pressure/advantage), the side behind carries the penalty, capped at ±max; (2) filling the meter is a PRESSURE EVENT, not a death — the dominated side takes real attrition (the player loses health, the opponent loses energy/composure), a pressure counter ticks, and the meter resets to resetTo so they are driven back but still IN it. The fight now ends only on things the player can feel and manage: health gone, energy gone, the opponent breaking after breakAtPressure pressure events, a stalemate of mutual exhaustion, or a deliberate exit (Yield / Break away / Finish it).",
@@ -754,6 +758,21 @@
     "ceiling": 95,
     "wornDownAtEnergyPct": 0.3
    }
+  },
+  "deathSave": {
+   "note": "✅ R35 (Erik 2026-09-04): a landed hit at a lethal rung OFFERS THE INSTA-KILL, resolved by an opposed death save — the caster's landed roll (plus the finisher's situational terms: driven back, run down) against the target's save on the higher of strength/presence, no craft behind it. Kill: the target stops and the caster pays the craft's authored killCost (mechanic.killCost — the_cut_thread: whole pool, sealed until a night's rest). Hold: the dice are the fallback at the standard cost. notForClasses is Aevi's to fill (the_cut_thread's notFor prose: a machine, a figure, a Precursor working).",
+   "rungs": [
+    "lethal",
+    "atrocity"
+   ],
+   "saveOn": [
+    "strength",
+    "presence"
+   ],
+   "notForClasses": [],
+   "_saveBonus": "the target's own weight on the save. Measured 2026-09-04 (5,000 rounds, equal fresh foes, equal tier): 0 → 66% of landed lethal hits kill · 10 → 58% · 20 → 48% · 30 → 38%. Set to 20 to meet Erik's own calibration for the lethal rung (CCODE-42: 'against a healthy foe of equal level it might be a 50/50'; finisher.odds.baseByRung.lethal is 48). A run-down, pressed×3 target dies ~94%; a physical-20/strength-24 target is barely hit and never dies fresh.",
+   "saveBonus": 20,
+   "defaultKillCost": null
   },
   "turn": {
    "note": "CCODE-45 (Erik): a TURN is sense -> action -> bonus, not a single exchange. 'the sense action, the main action, then the bonus action - for each player and opponent get tallied up and then narrated - the net result sets up the next round.' The sense step is OPTIONAL (skip to conserve energy, if you have no sense skill, or if a craft has blinded you), carries the cost of the ability used, and is LOCKED once its GM narration lands. A good sense buys a NAMED bonus on the action roll — never a hidden fudge. CCode's calls, all dials: senseMovesMomentum false (else momentum swings 3x/turn and the measured CCODE-38 pacing is void); the bonus step grant threshold was MEASURED, not guessed — CCode first proposed crit-only, and the simulation overturned it: crit-only left 20% of peer fights UNRESOLVED at 30 turns (median 21). crit+success gives median 13 turns, 0% unresolved, 82% player win / 18% down. The sim also proved the sense step is worth taking at all: sensing every turn raises the peer win-rate from 53% to 71%.",

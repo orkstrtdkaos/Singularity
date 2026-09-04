@@ -34,6 +34,9 @@ export const SYNONYMS = {
   // ⚠️ NARROW ON PURPOSE: `sacred`/`locus` are location tags with their own readers and would make a spec-only
   // idea look built. The report should say ORPHAN until an engine reader names the field.
   "meaning-density":    ["meaningDensity", "meaningCharge", "meaningAura"],
+  // ✅ 2026-09-04 — the combat floor (R34/R35): the tick's four dials, the level break, the death save and its seal.
+  "combat-pressure":    ["pressureEvent", "breakAtLevelFraction", "breakAtPressure", "opponentHealthLoss", "deathSave", "killCost", "saveBonus", "craftSealedUntilRest", "R34", "R35"],
+  "lethal-harm":        ["deathSave", "killCost", "harmRung", "saveBonus", "R35"],
 };
 
 const esc = (n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

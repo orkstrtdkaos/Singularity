@@ -178,10 +178,14 @@ function sheetFrom(entry, { day = null, cfg = {}, roleAttributes = null, levelOv
     level,
     attributes,
     subAttributes: {},
-    health: level * num(cfg.healthPerLevel, 3),
-    maxHealth: level * num(cfg.healthPerLevel, 3),
-    energy: num(cfg.energyBase, 40),
-    maxEnergy: num(cfg.energyBase, 40),
+    // ✅ R34/Q1 (GO_LIST_20260904 §1, Erik 2026-09-04): the pools run on the SAME shape as the player's curve —
+    // a base plus a per-level term for BOTH currencies. `healthBase`/`energyPerLevel` were the two terms the
+    // old formula did not have (`level × 3` health, `40` flat energy), which is why a level-33 figure carried
+    // the wind of a level-1 one. Unauthored, every default is the old number, so nothing moves until content says so.
+    health: num(cfg.healthBase, 0) + level * num(cfg.healthPerLevel, 3),
+    maxHealth: num(cfg.healthBase, 0) + level * num(cfg.healthPerLevel, 3),
+    energy: num(cfg.energyBase, 40) + level * num(cfg.energyPerLevel, 0),
+    maxEnergy: num(cfg.energyBase, 40) + level * num(cfg.energyPerLevel, 0),
     soak: Math.max(0, Math.round(level / 3)),
     skills: [],
     conditions: entry?.conditions || [],

@@ -4217,15 +4217,28 @@ console.log("\n── §62 · declared ruling anchors land in the body exactly o
   const declared = [], undeclared = [];
   for (const f of rulingFiles) {
     const txt = rd("po/" + f);
-    const m = txt.match(/^bodyAnchor:\s*"([^"\n]+)"/m);
-    if (m) declared.push({ f, anchor: m[1], subject: (txt.match(/^subject:\s*(\S+)/m) || [])[1] || null }); else undeclared.push(f);
+    // ⚠️ Aevi writes the declaration in bold (`**bodyAnchor:** "…"`); it is the same declaration and reads the same.
+    const m = txt.match(/^\*{0,2}bodyAnchor:?\*{0,2}:?\s*"([^"\n]+)"/m);
+    if (m) declared.push({ f, anchor: m[1], subject: (txt.match(/^\*{0,2}subject:?\*{0,2}:?\s*(\S+)/m) || [])[1] || null }); else undeclared.push(f);
   }
   check("§62: the scan sees the rulings — not vacuous", rulingFiles.length >= 20, `${rulingFiles.length} ruling papers`);
   // ⛔ THE HARD HALF: every declared anchor is in the body, and exactly once.
   const count = (needle) => body62.split(needle).length - 1;
-  const missing = declared.filter(d => count(d.anchor) === 0), doubled = declared.filter(d => count(d.anchor) > 1);
+  // ⚠️ A DECLARED ANCHOR IS OWED ONCE THE INDEX SAYS THE RULING IS BUILT. The GO list sequences rulings (R36 waits
+  // for the floor); a paper may declare its sentence weeks before the engine lands, and §56 forbids the body
+  // carrying a ⬜ ruling. So: the RULINGS index row is the state — ✅ there means the body must carry the sentence;
+  // ⬜ there means it is sequenced, and the anchor is reported as owed rather than failed.
+  const idx62 = rd("docs/RULINGS.md");
+  const built62 = new Set([...idx62.matchAll(/^\|\s*\*\*R(\d+)\*\*\s*\|[^\n]*?\|\s*✅/gm)].map(m => Number(m[1])));
+  const rNums = (txt) => [...txt.matchAll(/^#{2,3}\s*R(\d+)[a-z]?\b/gm)].map(m => Number(m[1]));  // R37a, R38b: a lettered sub-ruling is the same number
+  for (const d of declared) { const ns = rNums(rd("po/" + d.f)); d.owed = ns.length === 0 || ns.some(n => built62.has(n)); }
+  const sequenced = declared.filter(d => !d.owed && count(d.anchor) === 0);
+  if (sequenced.length) console.log("      ⬜ declared, sequenced (index ⬜), not yet in the body: " + sequenced.map(d => d.f).join(" · "));
+  const missing = declared.filter(d => d.owed && count(d.anchor) === 0), doubled = declared.filter(d => count(d.anchor) > 1);
   check("§62: ⛔ every DECLARED anchor is carried by the body — a ruling that names its sentence has landed",
-    declared.length >= 1 && missing.length === 0, missing.map(d => d.f + " → " + d.anchor).join(" · ") || `${declared.length} declared, all present`);
+    declared.length >= 1 && missing.length === 0, missing.map(d => d.f + " → " + d.anchor).join(" · ") || `${declared.length} declared, ${declared.filter(d => d.owed).length} owed, all owed present`);
+  check("§62: …a sequenced ruling (index ⬜) that already declares its sentence is seen, not failed — the GO list's order is legal", declared.some(d => !d.owed) || sequenced.length === 0,
+    sequenced.map(d => d.f).join(" · "));
   check("§62: ⛔ …and exactly ONCE — two sections carrying one subject is the contradiction class",
     doubled.length === 0, doubled.map(d => d.f).join(" · "));
   check("§62: …a declared anchor names its subject too, so the join has a key", declared.every(d => !!d.subject), declared.filter(d => !d.subject).map(d => d.f).join(" · "));
@@ -4368,6 +4381,127 @@ console.log("\n── §67 · the lineage blend reaches the card and the row ─
   check("§67: …and a lineage with no authored blend carries none — absent, never a pure mean", !none || card(none)?.lineageMix === null, none?.tradition);
   check("§67: …and the ground row renders it", /lineage leans/.test(rd("app.js")));
 }
+/* ═════ §68 — THE COMBAT FLOOR: pools on the player's curve · pressure symmetric and breaking at half your level · the death save ═════ */
+// ⛔ GO_LIST_20260904 §1 — three changes, one landing, because "40-flat energy and break-at-3 make every other change
+// unmeasurable". Q1: an NPC's pools run on the player's shape (base + per-level, both currencies). R34a: BEING DRIVEN
+// BACK costs both sides health AND energy, priced alike, and the opponent's health loss is APPLIED (it was computed and
+// written to nobody). R34b: the break threshold is ceil(level × fraction) of the side being broken. R35: a landed hit at
+// a lethal rung offers the insta-kill through an opposed death save; a kill stops the target and costs the caster the
+// craft's authored killCost; a held save falls back to the dice at the standard cost.
+console.log("\n── §68 · the combat floor — pools, symmetric pressure, break at half your level, the death save ──");
+{
+  const SB68 = await import("../engine/skill_battle.js");
+  const NS68 = await import("../engine/npcsheet.js");
+  const rules68 = rj("content/packs/core/rules/resolution.json");
+  const sb68 = rj("content/packs/core/rules/skill_battle_system.json").engine;
+  const steps68 = rj("content/packs/core/rules/intensity_scaling.json").steps;
+  const cfg68 = rules68.npcStanding || {};
+  // ── Q1 · the pools
+  check("§68: ⛔ the four pool dials are authored (healthBase · healthPerLevel · energyBase · energyPerLevel), all positive",
+    [cfg68.healthBase, cfg68.healthPerLevel, cfg68.energyBase, cfg68.energyPerLevel].every(n => Number.isFinite(n) && n > 0),
+    JSON.stringify([cfg68.healthBase, cfg68.healthPerLevel, cfg68.energyBase, cfg68.energyPerLevel]));
+  const s30 = NS68.sheetFor({ id: "x68", name: "X" }, { cfg: cfg68, levelOverride: 30 });
+  check("§68: …and a level-30 person carries them — health = base + 30×perLevel, energy likewise",
+    s30?.health === cfg68.healthBase + 30 * cfg68.healthPerLevel && s30?.energy === cfg68.energyBase + 30 * cfg68.energyPerLevel,
+    `health ${s30?.health} energy ${s30?.energy} (level ${s30?.level})`);
+  const s30old = NS68.sheetFor({ id: "x68", name: "X" }, { cfg: {}, levelOverride: 30 });
+  check("§68: …and unauthored is byte-identical to before (level×3 health, 40 flat)", s30old?.health === 90 && s30old?.energy === 40, `${s30old?.health}/${s30old?.energy}`);
+  check("§68: …near the PC curve — an equal-level person is within 20% of a physical-3 PC's pools at L30",
+    Math.abs(s30.health - (30 + 5 * 29)) / (30 + 5 * 29) < 0.2 && Math.abs(s30.energy - (100 + 5 * 29)) / (100 + 5 * 29) < 0.2,
+    `${s30.health} vs 175 · ${s30.energy} vs 245`);
+
+  // ── fixtures: two equal level-30 bodies, each carrying a T5 craft so the tier gap is 0
+  const seq68 = (arr) => { let i = 0; return () => arr[(i++) % arr.length]; };
+  const mk68 = (o = {}) => ({ attributes: { physical: 6, mental: 6, social: 6, practical: 6 }, subAttributes: { strength: 8, presence: 4 },
+    energy: 200, maxEnergy: 200, health: 120, maxHealth: 120, level: 30, skills: [{ function: "strike", tier: 5, name: "t5" }], ...o });
+  const guard68 = { function: "shield", tier: 1, name: "g" };
+  const plain68 = { function: "strike", tier: 4, rank: 1, attribute: "physical", intensity: "standard", name: "hammer", mechanic: { dice: { n: 4, d: 6 }, damageType: "physical" } };
+  const round68 = (pd, od, extra = {}, state = {}, sb = sb68) => SB68.battleRound({ playerDecl: pd, oppDecl: od, playerSheet: mk68(), oppSheet: mk68(extra.opp || {}),
+    state: { momentum: 0, round: 1, ...state }, rules: rules68, sb, steps: steps68, rng: extra.rng || seq68([0.5]), ...(extra.kind ? { kind: extra.kind } : {}) });
+
+  // ── R34a · a pressure tick costs both sides the same kind of thing, and the opponent's health loss is APPLIED
+  const pc68 = sb68.momentum?.pressure || {};
+  check("§68: ⛔ R34a — the four tick dials are content, none zero, and the two sides are priced alike",
+    [pc68.playerHealthLoss, pc68.playerEnergyLoss, pc68.opponentHealthLoss, pc68.opponentEnergyLoss].every(n => Number.isFinite(n) && n > 0)
+      && pc68.playerHealthLoss === pc68.opponentHealthLoss && pc68.playerEnergyLoss === pc68.opponentEnergyLoss, JSON.stringify(pc68));
+  const tickO = round68(plain68, guard68, { rng: seq68([0.02, 0.99, 0.98, 0.99]) }, { momentum: 44 });
+  check("§68: ⛔ …the opponent driven back loses HEALTH in-round (it was computed and applied to nobody) and energy",
+    tickO.pressureEvent?.side === "opponent" && tickO.pressureEvent.healthLoss === pc68.opponentHealthLoss && tickO.pressureEvent.applied?.health === pc68.opponentHealthLoss
+      && tickO.state.opponentHealth === 120 - pc68.opponentHealthLoss - (tickO.damage?.amount || 0) && tickO.state.opponentEnergy < 200 - pc68.opponentEnergyLoss,
+    JSON.stringify({ pe: tickO.pressureEvent, h: tickO.state.opponentHealth, e: tickO.state.opponentEnergy }));
+  const tickP = round68(guard68, plain68, { rng: seq68([0.98, 0.99, 0.02, 0.99]) }, { momentum: -44 });
+  check("§68: …the player driven back is charged the same currencies — energy in-round, health carried to the caller",
+    tickP.pressureEvent?.side === "player" && tickP.pressureEvent.healthLoss === pc68.playerHealthLoss && tickP.pressureEvent.energyLoss === pc68.playerEnergyLoss
+      && tickP.state.playerEnergy <= 200 - pc68.playerEnergyLoss && tickP.state.playerHealth === undefined,
+    JSON.stringify({ pe: tickP.pressureEvent, e: tickP.state.playerEnergy }));
+  check("§68: …and the wrapper applies the player's tick to deltas", /deltas\.health -= r\.pressureEvent\.healthLoss/.test(rd("engine/encounters.js")));
+
+  // ── R34b · the break threshold is ceil(level × fraction) of the side being broken
+  check("§68: ⛔ R34b — `breakAtLevelFraction` is authored (0.5) and the round reads it",
+    pc68.breakAtLevelFraction === 0.5 && /breakAtLevelFraction/.test(rd("engine/skill_battle.js")));
+  check("§68: …a level-30 side breaks at 15, a level-5 side at 3", tickO.state.breakAt?.opponent === 15
+    && round68(plain68, guard68, { opp: { level: 5 } }).state.breakAt?.opponent === 3, JSON.stringify(tickO.state.breakAt));
+  check("§68: …a sheet with no level falls back to the flat dial", round68(plain68, guard68, { opp: { level: undefined } }).state.breakAt?.opponent === pc68.breakAtPressure);
+  check("§68: …a kind that authors its own flat break (a chase) keeps it — the ruling is about fights",
+    round68(plain68, guard68, { kind: "chase" }).state.breakAt?.opponent === (sb68.kinds?.chase?.pressure?.breakAtPressure ?? -1));
+  check("§68: …the level rides on both opponent-sheet paths — threat 60 reads as level 30; an authored level passes through",
+    SB68.synthesizeOpponentSheet({ threat: 60 }, sb68).level === 30
+      && SB68.synthesizeOpponentSheet({ skills: [{ function: "strike", tier: 1 }], attributes: {}, health: 10, energy: 10, level: 27 }, sb68).level === 27);
+  check("§68: …and `personOpponent` passes the person's level to the seat", /level: sheet\.level,/.test(rd("app.js")));
+
+  // ── R35 · the death save
+  const cutFile = rj("content/packs/core/abilities/reach_death_life.json");
+  const cutList = Array.isArray(cutFile) ? cutFile : Array.isArray(cutFile.abilities) ? cutFile.abilities : Object.values(cutFile.abilities || {});
+  const cut68 = cutList.find(a => a.id === "the_cut_thread");
+  check("§68: ⛔ R35 — the_cut_thread carries its authored bound as `mechanic.killCost` (whole pool, sealed until rest)",
+    cut68?.harmRung === "lethal" && cut68?.mechanic?.killCost?.energy === "all" && cut68?.mechanic?.killCost?.sealedUntilRest === true);
+  check("§68: …`deathSave` is content — rungs include lethal, the save reads strength/presence, saveBonus is a number",
+    Array.isArray(sb68.deathSave?.rungs) && sb68.deathSave.rungs.includes("lethal") && (sb68.deathSave.saveOn || []).includes("strength")
+      && Number.isFinite(sb68.deathSave.saveBonus) && Array.isArray(sb68.deathSave.notForClasses));
+  const lethal68 = { function: "strike", tier: 5, rank: 1, attribute: "mental", intensity: "standard", name: "the Cut Thread", id: "the_cut_thread", energyCost: 14,
+    harmRung: "lethal", mechanic: cut68.mechanic };
+  const KILL = [0.02, 0.99, 0.98, 0.99, 0.99, 0.99, 0.5], HOLD = [0.30, 0.99, 0.98, 0.99, 0.01, 0.99, 0.5];
+  const k = round68(lethal68, guard68, { rng: seq68(KILL) });
+  check("§68: ⛔ save FAILS → the target STOPS: health irrelevant, the damage is the whole pool, `slain`, the fight resolves",
+    k.deathSave?.kill === true && k.damage?.slain === true && k.damage.amount === 120 - (k.pressureEvent?.healthLoss || 0) && k.state.opponentHealth === 0 && k.state.resolved === "player",
+    JSON.stringify({ ds: k.deathSave && { c: k.deathSave.caster, s: k.deathSave.save, on: k.deathSave.saveOn, kill: k.deathSave.kill }, amt: k.damage?.amount, h: k.state.opponentHealth }));
+  check("§68: …and the caster pays the AUTHORED bound only then — whole pool to zero, sealed until a night's rest",
+    k.state.playerEnergy === 0 && k.state.playerSealed === true && k.deathSave.cost?.energy === "all");
+  check("§68: …the save rolled the higher of strength/presence (strength 8 over presence 4), with no craft behind it",
+    k.deathSave.saveOn === "strength" && k.deathSave.saveValue === 8);
+  const h = round68(lethal68, guard68, { rng: seq68(HOLD) });
+  const hPlain = round68({ ...lethal68, harmRung: "wounding" }, guard68, { rng: seq68(HOLD) });
+  check("§68: ⛔ save HOLDS → the dice are the fallback at the STANDARD cost, not the pool",
+    h.deathSave?.held === true && !h.damage?.slain && h.damage.amount > 0 && h.damage.amount < 120 && h.state.opponentHealth === 120 - h.damage.amount - (h.pressureEvent?.healthLoss || 0)
+      && h.state.playerEnergy === hPlain.state.playerEnergy && h.state.playerEnergy > 150 && !h.state.playerSealed,
+    JSON.stringify({ amt: h.damage?.amount, e: h.state.playerEnergy, plainE: hPlain.state.playerEnergy }));
+  check("§68: …a non-lethal rung is offered no save (the ⚡ finisher path is untouched)", !hPlain.deathSave && !hPlain.damage?.deathSave);
+  const sbBar = { ...sb68, deathSave: { ...sb68.deathSave, notForClasses: ["machine"] } };
+  check("§68: …a class the craft cannot be aimed at (`notForClasses`) gets no save, and takes the dice",
+    (() => { const b = round68(lethal68, guard68, { rng: seq68(KILL), opp: { creatureClass: "machine" } }, {}, sbBar); return !b.deathSave && b.damage?.amount > 0 && !b.damage?.slain; })());
+  const sealed = round68(lethal68, guard68, {}, { playerSealed: true });
+  check("§68: ⛔ a SEALED side's crafts do not answer — the declaration falls back as a spent one does, and the seal rides out",
+    sealed.degraded?.player === true && sealed.state.playerSealed === true);
+  // the situational terms are the finisher's own dials, on the caster's side
+  const pressed = round68(lethal68, guard68, { rng: seq68(HOLD) }, { opponentEnergy: 30, pressure: { player: 0, opponent: 3 } });
+  check("§68: …a run-down, driven-back target is the 'near certainty' — pressure ×3 and worn-down weigh on the save",
+    pressed.deathSave?.kill === true && pressed.deathSave.mods.some(m => /driven back/.test(m.label)) && pressed.deathSave.mods.some(m => /run down/.test(m.label)),
+    JSON.stringify(pressed.deathSave?.mods));
+  // distributional truth, seeded: a landed lethal hit on a fresh equal kills about half the time
+  let s68 = 20260904; const rng68 = () => { s68 |= 0; s68 = (s68 + 0x6D2B79F5) | 0; let t = Math.imul(s68 ^ (s68 >>> 15), 1 | s68); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  let kills68 = 0, landed68 = 0;
+  for (let i = 0; i < 600; i++) { const r = round68(lethal68, guard68, { rng: rng68 }); if (!r.deathSave) continue; landed68++; if (r.deathSave.kill) kills68++; }
+  check("§68: ⛔ seeded — a landed lethal hit on a fresh equal kills between 35% and 65% of the time (Erik: 'a 50/50')",
+    landed68 > 150 && kills68 / landed68 >= 0.35 && kills68 / landed68 <= 0.65, `${kills68}/${landed68} = ${Math.round(100 * kills68 / Math.max(1, landed68))}%`);
+  // the seams carry it
+  const enc68 = rd("engine/encounters.js"), app68 = rd("app.js");
+  check("§68: …the wrapper passes the sheet's seal in and the death save + seal out", /playerSealed: true/.test(enc68) && /deathSave: r\.deathSave \|\| null, sealed: r\.state\?\.playerSealed === true/.test(enc68));
+  check("§68: …the kill is EVENT-VISIBLE both ways it falls", /THE THREAD IS CUT/.test(enc68) && /holds against the kill/.test(enc68));
+  check("§68: …the app persists the seal on the sheet and a night's rest lifts it", /if \(rr\.sealed\) character\.craftSealedUntilRest = true;/.test(app68)
+    && /if \(character\.craftSealedUntilRest\) delete character\.craftSealedUntilRest;/.test(app68) && /Death save: /.test(app68));
+  check("§68: …the body carries the death save and the floor", /death save/i.test(rd("docs/HOW_IT_WORKS.md")) && /healthBase/.test(rd("docs/HOW_IT_WORKS.md")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

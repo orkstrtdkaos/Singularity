@@ -238,7 +238,9 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
       // it has to come back in on the very next call or the read it just made is forgotten before it is used.
       // ⚠️ `?? null` IS LOAD-BEARING: null means "no read has happened", which the round treats as PERFECT
       // knowledge — today's behaviour, and what keeps every non-adopting caller unchanged.
-      foeReadTier: state.foeReadTier ?? null }, rules, sb, steps, rng,
+      foeReadTier: state.foeReadTier ?? null,
+      // ✅ R35: the seal a kill left on the player outlives the encounter — it lives on the sheet and rides in here.
+      ...(character.craftSealedUntilRest ? { playerSealed: true } : {}) }, rules, sb, steps, rng,
     phase, tickEffects, setupBonus,
     // SNG-247: DERIVED here, never passed in. This wrapper has now silently eaten a forwarded option twice
     // (CCODE-35 `effects`, CCODE-45 `phase`) — a value the wrapper computes from what it already holds cannot be
@@ -327,6 +329,15 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     const hpLeft = s.opponentHealth, of = def.opponent?.health;
     if (r.damage.side === "opponent") events.push(`Your ${r.damage.by} LANDS — ${def.opponent.name} takes ${r.damage.amount}${of ? ` (${Math.max(0, hpLeft)}/${of} left)` : ""}.`);
     else { deltas.health -= r.damage.amount; events.push(`${def.opponent.name}'s ${r.damage.by} LANDS on you — ${r.damage.amount} taken.`); }
+    // ✅ R35: the death save is EVENT-VISIBLE either way it falls — a kill that reads as a big number is the
+    // silent-arithmetic failure again, and a save that held has to say what the dice were falling back from.
+    const ds = r.damage.deathSave;
+    if (ds) {
+      if (ds.kill && ds.on === "opponent") events.push(`THE THREAD IS CUT — ${def.opponent.name} simply stops.${ds.cost && ds.cost !== "standard" ? " It cost you everything you had left." : ""}`);
+      else if (ds.kill) events.push(`${def.opponent.name}'s ${r.damage.by} — and your ${ds.saveOn} fails you. You stop.`);
+      else if (ds.on === "opponent") events.push(`${def.opponent.name}'s ${ds.saveOn} holds against the kill — the blow lands as a wound instead.`);
+      else events.push(`Your ${ds.saveOn} holds against the kill — it lands as a wound instead.`);
+    }
   }
   // ⛔ CCODE-237 (Aevi's §0) — A HEAL REACHES A SHEET. `battleRound` has computed `healing` since CCODE-207
   // and read the authored dice correctly the whole time — `dawn_surgery` rolls its 3d4 and reports 12 —
@@ -367,6 +378,8 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   }
   s.log = [...(state.log || []), `r${state.round}: ${playerDecl.function} vs ${oppDecl.function} → momentum ${Math.round(s.momentum)}${outcome ? " — " + outcome : ""}`].slice(-12);
   return { state: s, player: r.player, opponent: r.opponent, oppDecl, ended, outcome, deltas, events, roundWinner: r.roundWinner, effects: r.effects || [], landed: r.landed || [], pressure: r.pressure, pressureEvent: r.pressureEvent, spent: r.spent, degraded: r.degraded, setupBonus: r.setupBonus, bonusEarned: r.bonusEarned, senseTier: r.senseTier, senseResist: r.senseResist, damage: r.damage,
+    // ✅ R35: the death save and the seal it may have left on the player — the ninth and tenth things this seam carries.
+    deathSave: r.deathSave || null, sealed: r.state?.playerSealed === true,
     // ⛔ CCODE-228 — THE FIFTH THROUGH EIGHTH THING THIS SEAM HAS EATEN. The comment above this wrapper already
     // names `effects`, `pressure`, `phase` and `health` as values it silently dropped. `imposed`, `inflicted`,
     // `opened` and `deniedAct` were the next four: `battleRound` computes an imposition on EVERY round, and

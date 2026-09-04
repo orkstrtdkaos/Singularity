@@ -1768,7 +1768,12 @@
       "chance": -3
      }
     },
-    "damageType": "vitality"
+    "damageType": "vitality",
+    "_killCost": "✅ R35: the mechanical form of the bound authored below ('it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until a full night's rest'). Paid ONLY when the death save fails and the target stops; a held save costs the standard energyCost above. Transcribed by CCode 2026-09-04 — Aevi, correct the shape if the bound reads differently.",
+    "killCost": {
+     "energy": "all",
+     "sealedUntilRest": true
+    }
    },
    "rankDeltas": [
     {

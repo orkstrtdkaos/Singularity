@@ -47,6 +47,11 @@ exercise that produced three wrong reports on one subject on 2026-09-02. | colum
 | **R31** | NPC sheets | R31 — the first caller is the GM BLOCK, not a dark mint | ✅ | `RULING_sheet_architecture.md` |
 | **R33** | lineage vs access | ⛔ **`tradition` is LINEAGE · `learnedAt` is ACCESS. A foothill is a PLACE, not an ancestry** (SNG-443) | ✅ | `RULING_two_axes.md` → **source: `content/packs/core/rules/foothills.json` `_twoAxes`** |
 | **R32** | NPC sheets | R32 — accepted from measurement ✅ from measurement | ✅ | `RULING_sheet_architecture.md` |
+| **R34** | combat pressure | R34 — pressure is SYMMETRIC (both sides lose health and energy, priced alike) and breaks at `ceil(level / 2)` of the side being broken | ✅ v1.9.347 `§68` | `RULING_pressure_and_death_save.md` |
+| **R35** | lethal harm | R35 — a landed hit at a lethal rung offers the INSTA-KILL through an opposed death save; the dice are the fallback; the caster pays the authored bound only on the kill | ✅ v1.9.347 `§68` | `RULING_pressure_and_death_save.md` |
+| **R36** | party contribution | R36/R36a — a party member fights from their OWN SHEET; up to 3 act fully (content dial), the rest fold; what earns a slot is NOT ruled | ⬜ sequenced behind the floor (GO list) | `RULING_party_from_sheets.md` |
+| **R37** | growth rates | R37a–c — completion = 1 level, condition step = 1, the three terms STACK; a gained craft starts r1; the service band unset | ⬜ next landing | `RULING_growth_rates.md` |
+| **R38** | meaning density | R38a–b — `meaningDensity` derived never stored; for metaphysical crafts MEANING sets the ceiling and SUBSTRATE the penalty | ⬜ next landing | `RULING_meaning_density.md` |
 
 ---
 
@@ -70,8 +75,8 @@ evidence and the measured options for each. When one is ruled it gets a paper, a
 
 | # | question | blocks | evidence |
 |---|---|---|---|
-| **Q1** | NPC pools — `npcStanding.healthPerLevel` / `energyBase` are unauthored (code: 3 / 40 flat); a pressure tick costs 22 | all NPC combat | `DUEL_pell_vs_veth.md` §A.1, §E |
-| **Q2** | damage vs HP curves — is `harmRung` the kill condition and dice the erosion, or do pools stop scaling? | all combat | `DUEL` §C.7: 102 dice crafts, mean EV 10.6, T5 EV 31.5 vs PC 191 HP |
+| ~~**Q1**~~ | ✅ **RULED 09-04 (GO list) — pools authored on the player's shape: 30 + 5/level health · 100 + 5/level energy; tick 3 health · 8 energy both sides** | v1.9.347 `§68` | `RULING_pressure_and_death_save.md`, `DECISIONS_OWED` Q1 |
+| ~~**Q2**~~ | ✅ **RULED 09-04 — R35: `harmRung: lethal` IS the kill condition (an opposed death save on a landed hit) and the dice are the fallback; pools keep scaling** | v1.9.347 `§68` | `RULING_pressure_and_death_save.md` · ⬜ Q15 (which crafts keep the rung) |
 | **Q3** | which of three ground tables is the truth — the card reads the craft's `powerSystem`, the roll reads `substrateBand[tradition]`, a schooled card's band comes from the tradition | `SPEC_body_source` §2–§4, `SPEC_meaning_density` | `DUEL` §C.6 |
 | **Q4** | should a craft's own declaration override an explicit `primary: null` deferral? (no live case since Abyssal was settled) | — | §58 |
 | **Q5** | the standing cost of RELEASING a holding — a standing op against the granting authority, or a payable debt record? | `SPEC_holding_release_transfer` §3 | §R2.3 |
@@ -84,6 +89,7 @@ evidence and the measured options for each. When one is ruled it gets a paper, a
 | **Q12** | do Sovereigns advance an arc's stage, or is their feeding the stage's effect; is an agent marked or GM-run | the Sovereign arc | `BUILD_BACKLOG` §5 |
 | **Q13** | marcher → body and the somatic per-craft split (all 39 declare `metaphysical`); per-rank source | `SPEC_body_source` §3–§4 | its ROUND 2 |
 | **Q14** | holdings, pass two — how many attribute types a hold may carry per size tier (`tier`: settlement 96 · region 25 · site 14), magnitude per type and whether it scales with `condition`, upkeep per type, which types require a steward (R25 presence 14/18 already bounds an unkept hold) | `SPEC_holding_attributes` §5, the holdings economy (Q8) | its ROUND 2: every delta it names already exists on locations |
+| **Q15** | which of the 53 `lethal`/`atrocity` crafts keep the rung now that R35 makes it a ~50% insta-kill on a landed hit, and whether `deathSave.defaultKillCost` prices the 52 with no `killCost`; the ⚡ button still offers at lethal | every fight | `DECISIONS_OWED` Q15 · `HOW_IT_WORKS` §3c |
 | `precursor` is not a tradition | `foothills.json` → `notATradition` |
 
 ➡️ ⚠️ **When a content file carries a `_`-prefixed key that states a RULE rather than a fact, it belongs

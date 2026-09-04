@@ -119,7 +119,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.346";
+const APP_VERSION = "1.9.347";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7780,6 +7780,8 @@ function personOpponent(target) {
   if (!skills.length) return null;                       // nothing to fight with — let the threat path have them
   return {
     name: sheet.name, attributes: sheet.attributes, health: sheet.health, energy: sheet.energy,
+    // ✅ R34b: the level rides to the seat — the break threshold is `ceil(level / 2)` of the person being broken.
+    level: sheet.level,
     soak: sheet.soak, skills, tacticTags: rec.tacticTags || [],
     // ⚠️ THREAT RIDES ALONG so anything that still reads it — the encounter frame, the warn offer — has a
     // number, but every field above wins over it. A person is not a difficulty; they merely have one.
@@ -8450,6 +8452,8 @@ async function rest(kind = "sleep") {
     return;
   }
   sceneTurns = [];
+  // ✅ R35: a full night's rest lifts the seal a kill left (the_cut_thread's authored bound).
+  if (character.craftSealedUntilRest) delete character.craftSealedUntilRest;
   sceneState = null; // hours pass — the old scene has dissolved
   advanceClock(character.clock, r.hours);
   // ⛔ A NIGHT CLEARS WHAT A NIGHT CAN, AND THE PLAYER IS TOLD WHAT IT COULD NOT. `persisted` is the whole
@@ -12852,6 +12856,8 @@ function sbLogRound(enc, decl, rr, beforeMom, scouting, receipt = sbLastRoundRec
       ...(rr.damage?.intercepted ? [`${rr.damage.intercepted.caughtBy} took the blow meant for ${rr.damage.intercepted.onBehalfOf}`] : []),
       // ⚠️ AND WHO IT LANDED ON, when it was not you — otherwise an ally's wound reads as a miss.
       ...(rr.damage?.onName && rr.damage.side === "player" ? [`It lands on ${rr.damage.onName}, not you.`] : []),
+      // ✅ R35: the death save's arithmetic, visible — who rolled what against what, and which way it fell.
+      ...(rr.deathSave ? [`Death save: ${rr.deathSave.caster}${rr.deathSave.mods.length ? " " + rr.deathSave.mods.map(m => `+${m.value} (${m.label})`).join(" ") : ""} vs ${rr.deathSave.saveOn} ${rr.deathSave.save} — ${rr.deathSave.kill ? "THE KILL" : "the save holds"}.`] : []),
     ],
     // CCODE-35: the effects in play — what modified THIS roll (each side's named contestMods) and what the
     // round left standing. This is the part that makes a "why did that roll land?" question answerable.
@@ -13715,6 +13721,9 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
   rr.state.transcript = [...(enc.state.transcript || []), sbFightBeat(rr, decl, beforeMom, scouting)].slice(-24);
   character.health = Math.max(0, Math.min(character.maxHealth, character.health + (rr.deltas?.health || 0)));
   character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
+  // ✅ R35: the seal a kill leaves — "unable to use any craft until a full night's rest" — lives on the SHEET,
+  // because it outlives the fight. `rest("sleep")` lifts it; a breather does not.
+  if (rr.sealed) character.craftSealedUntilRest = true;
   // ⛔ CCODE-228 — AN IMPOSITION LANDS ON A SHEET. `battleRound` has computed `imposed` on every round since
   // CCODE-216 and NOTHING consumed it: `character.conditions` was written by no code path in the game, so a
   // craft authored to stagger someone staggered nobody and the rest-clearing rules governed an empty list.

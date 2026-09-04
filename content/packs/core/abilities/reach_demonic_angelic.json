@@ -2377,7 +2377,7 @@
    "levelReq": 5,
    "tier": 5,
    "energyCost": 13,
-   "powerSystem": "precursor",
+   "powerSystem": "veil",
    "tradition": "abyssal",
    "attribute": "social",
    "axes": {
@@ -2389,13 +2389,13 @@
     "sustain"
    ],
    "narrationHints": "You open the hollow in yourself — the one your people never filled, never closed, never gave up — and for a moment it is not an absence but a MOUTH, and the substrate pours through it, and you are the deepest thing in any room.",
-   "description": "The Abyssal capstone that IS a precursor act — the deep hollow the Abyssals kept, where their ancestors declined to give the nanites up, opened as a channel to the substrate itself. Where the Seraphs keep the light, the Abyssals kept the depth; both drink from the same well, and neither can stop.",
+   "description": "⛔ THE ABYSSAL CAPSTONE, AND IT IS A FAR-SIDE ACT. The deep hollow the Abyssals kept — where their ancestors declined to give up what was theirs — opened not as a channel to the lattice but as AN OPEN LINE TO ONE OF THE SATIATED SOVEREIGNS. ⚠️ Something answers. It is courteous. It is not interested in you, and it is being fed by someone.",
    "notFor": "It draws the substrate through the kept hollow — power past the ordinary tiers, at a standing cost, and let it lapse and the hollow does not simply close, it HUNGERS. Only a people who kept the deep can channel it without being swallowed by it.",
    "tree": [
     {
      "rank": 1,
      "name": "Hollow That Holds",
-     "grants": "Channel the fabricated substrate through the kept Abyssal hollow — a precursor-tier working innate to your kind.",
+     "grants": "Hold the kept hollow open and draw through it. ⛔ WHAT COMES THROUGH IS NOT SUBSTRATE — it is the attention of a thing on the far side, lent for as long as it costs that thing nothing. ⚠️ Name which Sovereign at the moment of opening; you are borrowing from a power that refused one half of existence, and it lends in that half only.",
      "cannot": "It carries an ongoing upkeep while open, it can swallow one who is not abyssal-born, and it marks you to anything that reads the substrate — the deep calls to the deep, and not all of it is on your side.",
      "functions": [
       "open",
@@ -2451,7 +2451,8 @@
    "_nameWas": "The Hollow That Holds",
    "_idWas": "the_hollow_that_holds",
    "_powerSystemWas": "reach_demonic_angelic",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_demonic_angelic` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_capstoneRuling_20260902": "⛔ ERIK 2026-09-02: 'the capstone needs an update — that's channeling the power on the other side of the veil and is an Other side act.' ⚠️ IT PREVIOUSLY READ 'channel the FABRICATED SUBSTRATE… a precursor-tier working', which described the wrong power entirely. ✅ The Abyssal capstone is not 'we kept the old technology' — it is 'WE OPENED THE DOOR AND SOMETHING ANSWERS'. See `lore/the_satiated_sovereigns.md`."
   },
   {
    "schemaVersion": 1,

@@ -1422,7 +1422,6 @@ ancestry.
 | ⛔ **party scale reads one contribution family, and it is a default** | `PROTECT` has no party-scale reader at all; `RESTORE` only makes you a target. §7b |
 | ⛔ **`HARM` is a DEFAULT, so the fold's filter passes everyone** | `contributionsOf` adds it to every record not explicitly `canStrike: false`. ⚠️ Tagging someone a restorer does not stop them counting as a striker — Pell is now tagged `RESTORE·KNOW` **and still carries HARM** |
 | ⚠️ **a holding has no income, defence, resource or capability** | the record carries none of them; `po/SPEC_holdings_estate.md` |
-| ⚠️ **`releaseHolding` is a bare filter** | it drops the record and says nothing — no obligation, no standing, no news. `po/SPEC_holding_release_transfer.md` |
 **Each gap above is asserted OPEN by `how_it_works.mjs`.** ⛔ **Closing one turns its check RED, which is
 the signal to edit this table.** A gap that quietly closes is a doc that quietly rots.
 

@@ -770,8 +770,10 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
     const hold = rd("engine/holdings.js");
     gap("§10: a holding still has no income, defence, resource or capability",
       !/income|defence|defense|resources|capabilit/i.test(hold));
-    gap("§10: releaseHolding is still a bare filter with no cost, news or record",
-      !/export function releaseHolding/.test(hold) && /kind === "release"/.test(rd("app.js")));
+    // ✅ GAP CLOSED 2026-09-04 (§61): release is an operation with a cost trace, news and a record. Asserted CLOSED now,
+    // so a regression to the bare filter goes red the way the open gap used to.
+    check("§10: ⛔ releaseHolding is no longer a bare filter — the gap closed (§61) and stays closed",
+      /export function releaseHolding/.test(hold) && !/character\.holdings = \(character\.holdings \|\| \[\]\)\.filter\(x => x\.id !== id\)/.test(rd("app.js")));
   }
   gap("§10: method (psionics / song / blade) is still recorded nowhere",
     abilities.every(a => a.method == null));

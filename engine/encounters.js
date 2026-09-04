@@ -103,6 +103,27 @@ export function duelRound(state, def, resolution, rules, opts = {}) {
  *  mapping to the familiar outcomes (opponent_fell/opponent_yielded/yielded/fled/player_overcome/stalemate).
  *  yield & flee reuse the classic exits. The returned `opponent` receipt is the TRUE round — the caller gates
  *  its display with senseOpponent (fog). Never advances beyond a resolution the engine actually computed. */
+/** ⛔ DUEL_pell_vs_veth §C.1 — THE CRAFT NEVER REACHED A LIVE ROUND. `sbDeclare` and `sbDeclFromSel` build a bare
+ *  `{function, tier, attribute, intensity, name, rank, id}`; `battleSkillsFor` builds the same for a person. Every
+ *  reader in the damage block — `mechanicFor` for the dice, `authoredBlock` for imposes / pierce / penetration /
+ *  the per-rank harmRung — reads the DECLARATION, and found nothing: family-default dice by tier, no impositions,
+ *  pierce 0, for every craft in every fight. ⚠️ The gates were green because every test spreads the def under
+ *  the decl (`playerDecl: { ...gs, function, tier, rank }`). This is that contract, applied once, at the one
+ *  seam both sides pass through. The declaration's own fields win over the def's, so a chosen rank, intensity
+ *  or effective energy cost is never overwritten by the catalogue; `functions` is dropped because a decl names
+ *  ONE function and the plural would shadow it in `resolvedDamageType`. A decl with no `id`, or an id the
+ *  catalogue does not carry (`_strike`, `_guard`, an item move), comes back untouched. */
+export function enrichDecl(decl, abilities) {
+  if (!decl || !abilities) return decl;
+  const id = decl.id || decl.abilityId || null;
+  const def = id ? abilities[id] : null;
+  if (!def) return decl;
+  const { functions: _fns, ...body } = def;
+  const out = { ...body, ...decl, abilityId: def.id };
+  if (decl.woven) out.woven = enrichDecl(decl.woven, abilities);
+  return out;
+}
+
 export function skillBattleRound(state, def, playerDecl, { character, rules, sb, steps, seenTendency = null, rng = Math.random, flee = false, yield: doYield = false, fleeResolution = null,
   // CCODE-45: the TURN options must be ACCEPTED here and FORWARDED below. This wrapper hand-builds its call to
   // battleRound, so an option it does not name is silently dropped — which is exactly how the sense step ran as a
@@ -124,7 +145,10 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     return { state, ended: false, outcome: null, deltas: { health: -(cfg.fleeFailFreeHit ?? 1) * (cfg.playerHealthPerHit ?? 4), energy: 0 }, events: ["The escape fails — you take a hit breaking off."], player: null, opponent: null };
   }
   const oppSheet = state.opponentSheet;
-  const oppDecl = opponentPolicy(oppSheet, state, seenTendency, sb);
+  // ⛔ DUEL_pell_vs_veth §C.1 — the def under BOTH declarations, here, where both pass. See `enrichDecl`.
+  const abilities = content?.abilities || null;
+  playerDecl = enrichDecl(playerDecl, abilities);
+  const oppDecl = enrichDecl(opponentPolicy(oppSheet, state, seenTendency, sb), abilities);
   const before = character.energy ?? 0;
   // ⛔ CCODE-253 — DERIVED HERE, NEVER PASSED IN, because this wrapper's own comment (three lines down)
   // records that it has silently eaten a forwarded option TWICE. I made it three: CCODE-250 gave
@@ -193,7 +217,12 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     creatureClasses: content?.bestiary?.classes || null,
     // ⛔ CCODE-316 — WHO THE MENDING IS FOR. Erik: "the intent is to be able to heal anyone you want."
     healTarget: state.healTarget || null,
-    playerSheet: { attributes: character.attributes || {}, subAttributes: character.subAttributes || {}, alignment: character.alignment || {}, skills: character.skills || {}, energy: before },
+    // ⛔ DUEL_pell_vs_veth §C.5 — THE PLAYER SEAT CARRIED NO LEVEL AND NO SOAK. `scaling.perLevel × wielder.level`
+    // was 0 for the player every time, and `defenderSheet.soak` read undefined — the PC's armour never soaked a blow
+    // in a fight. Level and health come from the character; `soak` reads a field nothing writes yet (reader before
+    // field — an armour writer lands on it the day one exists), so it is 0 today and byte-identical.
+    playerSheet: { attributes: character.attributes || {}, subAttributes: character.subAttributes || {}, alignment: character.alignment || {}, skills: character.skills || {}, energy: before,
+      level: Number(character.level) || 1, health: character.health, maxHealth: character.maxHealth, soak: Math.max(0, Number(character.soak) || 0) },
     // CCODE-35: `effects` must ride BOTH ways — into the round (they modify this roll) and back out onto the
     // encounter state (they persist). This hand-built state object is the seam where they would silently drop.
     // CCODE-35/38: `effects` and `pressure` must ride BOTH ways — into the round (they modify this roll / carry the

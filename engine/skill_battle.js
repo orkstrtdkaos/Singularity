@@ -69,17 +69,23 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
   // penetration is meant to beat guard BY DEGREE. The total is unchanged; this decides how it is DISTRIBUTED,
   // and therefore what a penetrating craft can bypass. A riffraff has no layer at all; an epic has two.
   const rankAt = syn.soakRankAt || [0, 3, 6];
-  const soakLayers = [];
-  { let left = soak;
+  // ⛔ DUEL_pell_vs_veth §C.4 — THE LAYERS WERE BUILT FROM THREAT BEFORE THE AUTHORED SOAK COULD OVERRIDE, and
+  // the damage block prefers layers when they exist. Veth's authored soak 11 arrived as one layer of 1. The
+  // layers are now built from whichever soak WINS — the authored one when a person carries it.
+  const layersFor = (total) => {
+    const out = [];
+    let left = total;
     for (let i = 0; i < rankAt.length && left > 0; i++) {
-      if (soak < (rankAt[i] ?? Infinity)) break;
-      const take = (i === rankAt.length - 1) ? left : Math.ceil(soak / rankAt.length);
+      if (total < (rankAt[i] ?? Infinity)) break;
+      const take = (i === rankAt.length - 1) ? left : Math.ceil(total / rankAt.length);
       const value = Math.min(left, Math.max(1, take));
-      soakLayers.push({ rank: i + 1, value });
+      out.push({ rank: i + 1, value });
       left -= value;
     }
-    if (left > 0 && soakLayers.length) soakLayers[soakLayers.length - 1].value += left;
-  }
+    if (left > 0 && out.length) out[out.length - 1].value += left;
+    return out;
+  };
+  const soakLayers = layersFor(soak);
   const tags = opponent.tacticTags || [];
   // ⛔ AN AUTHORED SHEET OVERRIDES THE SYNTHESIS — AND UNTIL NOW IT ONLY OVERRODE THE SKILLS.
   //
@@ -106,7 +112,8 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
     }
     return { name: opponent.name || "the opponent", attributes: opponent.attributes || { practical: attr, physical: attr, mental: attr, social: attr },
       energy: opponent.energy ?? energy, maxEnergy: opponent.energy ?? energy, tacticTags: tags, skills: opponent.skills,
-      health: opponent.health ?? health, soak: opponent.soak ?? soak, soakLayers: opponent.soakLayers ?? soakLayers,
+      health: opponent.health ?? health, soak: opponent.soak ?? soak,
+      soakLayers: opponent.soakLayers ?? (opponent.soak != null ? layersFor(Math.max(0, Math.round(Number(opponent.soak) || 0))) : soakLayers),
     // CCODE-83: the creature's authored AFFINITY must reach the sheet, or a typed bestiary is prose again.
     ...(opponent.affinity ? { affinity: opponent.affinity } : {}), ...(opponent.class ? { creatureClass: opponent.class } : {}), authored: true };
   }
@@ -524,7 +531,12 @@ function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = [], momM
   const step = steps[decl.intensity] || steps.standard || {};
   const ctx = {
     character: { attributes: sheet.attributes || {}, subAttributes: sheet.subAttributes || {}, alignment: sheet.alignment || {}, skills: sheet.skills || {}, energy: sheet.energy ?? 0 },
-    action: { attribute: decl.attribute || "practical", abilityLevel: tier, label: decl.name || decl.function, axes: {} },
+    // ⛔ DUEL_pell_vs_veth §C.2 — `tier` DID TWO JOBS. The chance stack's “ability rank” term and the crit dials
+    // read it as the OWNED RANK; the dice read it as the CRAFT TIER. The player's menu sent the rank in it and
+    // the NPC's sent the tier, so one side rolled tier-1 dice on a T4 and the other got a T2's rank bonus for
+    // a r1 craft. A declaration now carries both; `rank` feeds the roll and falls back to `tier` for callers
+    // that never set it, which is byte-identical to before for every one of them.
+    action: { attribute: decl.attribute || "practical", abilityLevel: (decl.rank ?? tier), label: decl.name || decl.function, axes: {} },
     rules,
     contestMods: [
       { label: `matchup (${decl.function} vs ${oppDecl.function})`, value: mu },
@@ -681,8 +693,11 @@ export function momentumModifier(momentum, side, sb) {
 
 // CCODE-37: a WOVEN round pays for both crafts — doing two things in one turn is a real cost, not a free upgrade.
 // (Once the pairing is EARNED as a braid it becomes one craft at one craft's price — that's the payoff.)
+// ⛔ DUEL_pell_vs_veth §C.3 — A ROUND CHARGED A FLAT 5 × INTENSITY FOR EVERY CRAFT. The menu computed
+// `effectiveEnergyCost` onto each entry and this function never read it, so `the_cut_thread` (14) cost what
+// a plain strike costs. The declaration's own `energyCost` wins; the default is for moves that have none.
 const energyCost = (decl, sb, steps, rules) => Math.round(
-  (rules.energy?.defaultActionCost ?? 5)
+  (Number.isFinite(Number(decl?.energyCost)) ? Number(decl.energyCost) : (rules.energy?.defaultActionCost ?? 5))
   * ((steps[decl.intensity] || steps.standard || {}).energyMult ?? 1)
   * (decl.woven ? (sb?.weave?.energyMultiplier ?? 1.8) : 1)
 );

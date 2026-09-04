@@ -349,10 +349,13 @@ export function kitFor(entry, { catalog = {}, traditionIndex = null, domainAcces
  *  is the same thing `playerBattleSkills` reads off a PC. */
 export function battleSkillsFor(entry, opts = {}) {
   const { crafts, level } = kitFor(entry, opts);
+  const rankOf = (id) => Math.max(1, Number((entry?.abilities || []).find(a => (a?.abilityId || a) === id)?.level) || 1);
   const out = [];
   for (const ab of crafts) {
     for (const fn of (ab.functions || [])) {
-      out.push({ id: ab.id, function: fn, name: ab.name || ab.id, tier: abilityTier(ab),   // CCODE-341d: a THIRD shape of the levelReq-as-tier defect — assigning it to a field NAMED tier
+      // ⛔ DUEL_pell_vs_veth §C.2 — the RANK rides beside the tier, so the roll's rank term and the dice's tier
+      // term stop sharing one field. An authored `abilities[]` entry names it; an observed craft is rank 1.
+      out.push({ id: ab.id, function: fn, name: ab.name || ab.id, tier: abilityTier(ab), rank: rankOf(ab.id),   // CCODE-341d: a THIRD shape of the levelReq-as-tier defect — assigning it to a field NAMED tier
         attribute: ab.attribute || "practical", energyCost: ab.energyCost ?? null });
     }
   }

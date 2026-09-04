@@ -18568,7 +18568,10 @@ await (async () => {
       // ⛔ AND THE CALLERS MUST NOT COLLAPSE IT EITHER — `|| 1` swallows a real 0 one layer up.
       const appSrc245 = readFileSync(join(root, "app.js"), "utf8");
       check("CCODE-245: app.js passes the rank through with `??`, so a genuine 0 survives to the module",
-        /capabilityMenu\(def, a\.level \?\? 1/.test(appSrc245) && /resolveTier\(cdef, want, skill\.tier \?\? 1\)/.test(appSrc245));
+        // DUEL §C.2: the owned rank now comes from the character (`?.level ?? …`), not from a field named tier;
+        // the `??` is the property, and no `|| 1` may sit on that line.
+        /capabilityMenu\(def, a\.level \?\? 1/.test(appSrc245) && /\?\.level \?\? \(skill\.rank \?\? 1\)/.test(appSrc245)
+        && /resolveTier\(cdef, want, ownedRank\)/.test(appSrc245) && !/ownedRank = [^\n]*\|\| 1/.test(appSrc245));
 
       // ⛔ HER §4.2 — r1 WAS FILTERED FROM THE MENU ON MOST OF THE CORPUS, because `tierDeclaresSomething`
       // compared r1 against a tier that does not exist and found nothing new. With r0 as the identity

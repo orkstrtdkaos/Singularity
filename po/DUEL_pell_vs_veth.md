@@ -203,3 +203,19 @@ Pell in the player seat, Veth in the opponent seat, Aevi's six declarations as d
 ## §D — WHAT I DID NOT DO
 
 No engine change. Every item in §C is a defect or a ruling, and this file is a **report**. ⬜ **C.1, C.2, C.3, C.4, C.5 are mine to fix on a word** — each is a call site handing a reader half of what it reads. **C.6 and the pools (§A.1) are rulings.** The runner stays in `scripts/` so the next hand-played fight can be checked the same way.
+
+## ✅ §E — BUILT · 2026-09-04 · v1.9.344 · gated `§60`
+
+Erik: *"build the five."* All five, at the seams named above, each asserted on the live shape (not the test's):
+
+| | where | what |
+|---|---|---|
+| **C.1** | `encounters.js` → `enrichDecl`, applied to **both** declarations in `skillBattleRound` | the craft def sits under the decl; the decl's own fields win; `functions` dropped; `_strike`/`_guard`/items untouched |
+| **C.2** | `playerBattleSkills` · `battleSkillsFor` · `rollSide` · `sbDeclare` · `sbDeclFromSel` | `tier` is the craft's, `rank` is what is owned and rides beside it; the chance stack reads the rank, the dice read the tier; the owned rank comes from the character, not from a field named tier |
+| **C.3** | `skill_battle.js` → `energyCost` | a round charges the declaration's own `energyCost` (the menu's effective cost); the default 5 only for a move that has none |
+| **C.4** | `synthesizeOpponentSheet` | layers are built from the soak that wins — Veth's 11 → `[4, 4, 3]`, not threat's `[1]` |
+| **C.5** | `encounters.js` player seat | `level`, `health`, `maxHealth`, `soak` ride; `soak` reads a field nothing writes yet — **armour for the PC still has no writer** |
+
+**The same six rounds, live seam (seed 7):** r2 *Pell staggered by Grey Hand* · r3 *Keystone Blow rolled 24 into soak 11 → −13* · r4 *Plain Weight 27 → −16, Veth driven back (2)* — **over in four rounds at 70/99.** Before: 40 rounds of bare hands at 54/99.
+
+⚠️ **And the batch says what is left is the ruling, not a defect.** 2,000 duels: **91.6% Pell, 1,832 by pressure, 0 by health, 528 impositions** (before: 0). Both sides are at **0 energy by round 4** and bare-hand each other into soak 9 / 11 for twenty rounds — landed means 1.0 and 3.9. ⬜ **§A.1 stands: 40 energy on an authored L33 is the fight.** `healthPerLevel` / `energyBase` in `resolution.npcStanding` are the dials, and nobody has authored them.

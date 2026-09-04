@@ -4074,6 +4074,98 @@ console.log("\n── §59 · sheets fill in through play; an authored sheet is 
       authored.length >= 40 && authored.every(n => n.domains), `${authored.filter(n => !n.domains).length} of ${authored.length} without`);
   }
 }
+/* ═════ §60 — THE CRAFT REACHES THE ROUND: the five call-site defects the duel surfaced ═════ */
+// ⛔ po/DUEL_pell_vs_veth.md §C — Aevi hand-ruled a duel; running it through `battleRound` found that the fight the
+// engine actually plays never sees the craft: a bare declaration reaches the damage block, the player's `tier`
+// field carries the owned rank, energy is a flat 5 × intensity, an authored soak becomes threat-derived layers,
+// and the player seat carries no level or soak. ⚠️ EVERY GATE WAS GREEN because every test spreads the def under
+// the declaration — the test handed the reader a richer object than play does. These assert the LIVE shape.
+console.log("\n── §60 · the craft reaches the round — def under the decl, rank beside tier, the craft's cost, the authored soak, a body in the player seat ──");
+{
+  const SB60 = await import("../engine/skill_battle.js");
+  const EN60 = await import("../engine/encounters.js");
+  const NS60 = await import("../engine/npcsheet.js");
+  const { loadContentHeadless: lch60 } = await import("./headless_content.mjs");
+  const C60 = await lch60();
+  const sb60 = C60.skillBattle.engine, steps60 = C60.intensity.steps, rules60 = C60.rules;
+  const seeded = (a) => () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const appSrc = rd("app.js"), encSrc = rd("engine/encounters.js"), sbSrc = rd("engine/skill_battle.js");
+
+  // ── F1 · the def under the decl, at the one seam both sides pass ──
+  {
+    check("§60: ⛔ `enrichDecl` exists and `skillBattleRound` runs BOTH declarations through it",
+      typeof EN60.enrichDecl === "function" && /playerDecl = enrichDecl\(playerDecl/.test(encSrc) && /enrichDecl\(opponentPolicy\(/.test(encSrc));
+    const bare = { id: "keystone_blow", function: "break", tier: 4, rank: 1, attribute: "practical", intensity: "standard", name: "Keystone Blow" };
+    const rich = EN60.enrichDecl(bare, C60.abilities);
+    check("§60: …a declaration with a catalogue id comes back carrying the craft — mechanic, harmRung, tradition",
+      !!rich.mechanic && !!rich.harmRung && !!rich.tradition && rich.abilityId === "keystone_blow", Object.keys(rich).length + " keys");
+    check("§60: …and the declaration's own fields WIN — tier, rank, intensity, name are the decl's, and `functions` is dropped",
+      rich.tier === 4 && rich.rank === 1 && rich.intensity === "standard" && rich.name === "Keystone Blow" && rich.functions === undefined);
+    const plain = { id: "_strike", function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "A plain strike" };
+    check("§60: …a plain strike, a guard or an item move (no catalogue id) is returned untouched",
+      EN60.enrichDecl(plain, C60.abilities) === plain && EN60.enrichDecl({ function: "strike", tier: 1 }, C60.abilities).mechanic === undefined);
+    // ⛔ AND IT MOVES THE DICE — the whole point. Same seed, same guard, bare vs enriched.
+    const guard = { function: "shield", tier: 1, attribute: "physical", intensity: "conserve", name: "a raised guard" };
+    const opp = SB60.synthesizeOpponentSheet({ name: "them", threat: 40 }, sb60);
+    const seat = { attributes: { practical: 12, physical: 10, mental: 10, social: 10 }, subAttributes: {}, alignment: {}, skills: {}, energy: 40, level: 20 };
+    const landed = (decl, seed) => { const rng = seeded(seed); let sum = 0, n = 0, mx = 0, imposed = 0; for (let i = 0; i < 600; i++) { const rr = SB60.battleRound({ playerDecl: decl, oppDecl: guard, playerSheet: seat, oppSheet: opp, state: { momentum: 0, playerEnergy: 40, opponentEnergy: 40, effects: [], pressure: { player: 0, opponent: 0 }, opponentHealth: 999 }, rules: rules60, sb: sb60, steps: steps60, rng }); if (rr.damage?.side === "opponent") { const a = rr.damage.rolled ?? rr.damage.amount; sum += a; n++; mx = Math.max(mx, a); } if (rr.imposed && !rr.imposed.refused) imposed++; } return { mean: n ? sum / n : 0, mx, imposed }; };
+    const rBare = landed(bare, 5), rRich = landed(rich, 5);
+    // ⚠️ THE PROOF IS THE IMPOSITION, NOT A DAMAGE GAP: at tier 4 the family default already rolls 4d6-ish, so the
+    // means sit close (23 vs 26). What a bare declaration can NEVER do is impose — keystone_blow authors `staggered`.
+    check("§60: ⛔ keystone_blow imposes `staggered` only when its def is under the decl — a bare declaration never can",
+      rBare.imposed === 0 && rRich.imposed > 100, `bare ${rBare.imposed} · enriched ${rRich.imposed} of 600`);
+    check("§60: …and the enriched blow rolls the craft's own dice — above the family default, never past 4d6+7 plus the wielder",
+      rRich.mean > rBare.mean && rRich.mx <= 4 * 6 + 7 + 6, `bare ${rBare.mean.toFixed(1)} → enriched ${rRich.mean.toFixed(1)}, max ${rRich.mx}`);
+  }
+
+  // ── F2 · rank beside tier: the roll reads the rank, the dice read the tier ──
+  {
+    check("§60: ⛔ `rollSide` feeds the chance stack the RANK (falling back to tier for callers that set none)", /abilityLevel: \(decl\.rank \?\? tier\)/.test(sbSrc));
+    check("§60: ⛔ the player's menu puts the CRAFT's tier in `tier` and the owned rank in `rank`",
+      /tier: abilityTier\(def\), rank: a\.level \?\? 1/.test(appSrc) && !/tier: a\.level \|\| 1, attribute: def\.attribute/.test(appSrc));
+    check("§60: …both live declaration builders carry `rank` and `energyCost`",
+      (appSrc.match(/rank: (lead|skill)\.rank \?\? (lead|skill)\.tier \?\? 1/g) || []).length >= 2 && (appSrc.match(/energyCost: (lead|skill|picked\[1\])\.energyCost \?\? null/g) || []).length >= 3);
+    const pell = C60.npcs.pell;
+    const kb = NS60.battleSkillsFor(pell, { catalog: C60.abilities, cfg: C60.rules.npcStanding }).skills.find(s => s.id === "keystone_blow");
+    check("§60: …and a person's kit carries both — Pell's keystone_blow is tier 4, rank 1", !!kb && kb.tier === 4 && kb.rank === 1, JSON.stringify({ tier: kb?.tier, rank: kb?.rank }));
+    // the breakdown says which it read
+    const rng = seeded(3);
+    const rr = SB60.battleRound({ playerDecl: { function: "break", tier: 4, rank: 1, attribute: "practical", intensity: "standard", name: "x" }, oppDecl: { function: "shield", tier: 1, attribute: "physical", intensity: "standard", name: "g" },
+      playerSheet: { attributes: { practical: 6 }, subAttributes: {}, alignment: {}, skills: {}, energy: 40 }, oppSheet: SB60.synthesizeOpponentSheet({ name: "t", threat: 20 }, sb60),
+      state: { momentum: 0, playerEnergy: 40, opponentEnergy: 40, effects: [], pressure: { player: 0, opponent: 0 }, opponentHealth: 50 }, rules: rules60, sb: sb60, steps: steps60, rng });
+    const labels = (rr.player.breakdown?.components || []).map(c => c.label);
+    check("§60: …the chance stack names \"ability rank 1\" for a rank-1 T4 craft, not rank 4", labels.includes("ability rank 1") && !labels.includes("ability rank 4"), labels.join(" · "));
+  }
+
+  // ── F3 · the craft's own energy cost ──
+  {
+    const opp = SB60.synthesizeOpponentSheet({ name: "t", threat: 20 }, sb60);
+    const seat = { attributes: { practical: 6 }, subAttributes: {}, alignment: {}, skills: {}, energy: 40 };
+    const st = { momentum: 0, playerEnergy: 40, opponentEnergy: 40, effects: [], pressure: { player: 0, opponent: 0 }, opponentHealth: 50 };
+    const run = (decl) => SB60.battleRound({ playerDecl: decl, oppDecl: { function: "shield", tier: 1, attribute: "physical", intensity: "standard", name: "g" }, playerSheet: seat, oppSheet: opp, state: st, rules: rules60, sb: sb60, steps: steps60, rng: seeded(1) }).state.playerEnergy;
+    const costly = run({ function: "strike", tier: 5, rank: 1, attribute: "mental", intensity: "standard", name: "cut", energyCost: 14 });
+    const surged = run({ function: "strike", tier: 5, rank: 1, attribute: "mental", intensity: "surge", name: "cut", energyCost: 14 });
+    const costless = run({ function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "plain" });
+    check("§60: ⛔ a round charges the craft's own cost — 14 standard, 22 surged — and the default 5 only for a move that has none",
+      costly === 40 - 14 && surged === 40 - Math.round(14 * 1.6) && costless === 40 - 5, `${costly} / ${surged} / ${costless}`);
+  }
+
+  // ── F4 · an authored soak is the soak the damage block reads ──
+  {
+    const veth = C60.npcs["veth-ondra"];
+    const sheet = NS60.sheetFor(veth, { cfg: C60.rules.npcStanding });
+    const kit = NS60.battleSkillsFor(veth, { catalog: C60.abilities, cfg: C60.rules.npcStanding }).skills;
+    const o = SB60.synthesizeOpponentSheet({ name: sheet.name, attributes: sheet.attributes, health: sheet.health, energy: sheet.energy, soak: sheet.soak, skills: kit, threat: sheet.level * 2 }, sb60);
+    const sum = (o.soakLayers || []).reduce((a, l) => a + l.value, 0);
+    check("§60: ⛔ Veth's authored soak reaches her layers whole — layers sum to the sheet's soak, not to threat's", sheet.soak >= 10 && sum === sheet.soak, `soak ${sheet.soak} → layers ${JSON.stringify(o.soakLayers)}`);
+    const synth = SB60.synthesizeOpponentSheet({ name: "raider", threat: 60 }, sb60);
+    check("§60: …and a synthesised foe's layers still sum to its threat-derived soak — nothing else moved", synth.soakLayers.reduce((a, l) => a + l.value, 0) === synth.soak);
+  }
+
+  // ── F5 · the player seat has a level and a body ──
+  check("§60: ⛔ the player seat passed to `battleRound` carries level, health and soak",
+    /playerSheet: \{ attributes: character\.attributes[\s\S]{0,400}level: Number\(character\.level\) \|\| 1, health: character\.health, maxHealth: character\.maxHealth, soak:/.test(encSrc));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

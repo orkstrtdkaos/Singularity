@@ -119,7 +119,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.343";
+const APP_VERSION = "1.9.344";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12625,7 +12625,10 @@ function playerBattleSkills() {
       // so the model was never offered a rank to choose — it could not have picked one if it tried.
       // ⚠️ ONLY THE TIERS THAT DIFFER. One option per craft × function × rank takes a 6-craft kit from 14
       // options to 42, and two thirds of ranks declare nothing of their own. This is a list of CHOICES.
-      out.push({ id: a.abilityId, function: fn, tier: a.level || 1, attribute: def.attribute || "practical", name: def.name || a.abilityId, energyCost: effectiveEnergyCost(def, character, CONTENT.rules), multi: fns.length > 1,
+      // ⛔ DUEL_pell_vs_veth §C.2 — `tier: a.level` put the OWNED RANK in the field the dice read as the craft's
+      // TIER (the CCODE-341d note on this line named it). Measured: keystone_blow at tier 1 landed 7.0, at its
+      // real tier 4, 22.7. The tier is the craft's; the rank rides beside it and feeds the roll.
+      out.push({ id: a.abilityId, function: fn, tier: abilityTier(def), rank: a.level ?? 1, attribute: def.attribute || "practical", name: def.name || a.abilityId, energyCost: effectiveEnergyCost(def, character, CONTENT.rules), multi: fns.length > 1,
         ...(() => { // ⚠️ `??`, NOT `||` — CCODE-245. `a.level || 1` turns a genuine rank 0 into 1 BEFORE the module
         // sees it, which re-creates the exact permission bug r0 exists to close, one layer up. It is
         // latent today (an unlearned craft is ABSENT from `character.abilities`, never present at 0)
@@ -12857,9 +12860,11 @@ function sbDeclFromSel(sel, skills, intensity) {
   const picked = (sel || []).map(i => skills[i]).filter(Boolean);
   if (!picked.length) return null;
   const lead = picked[0];
-  const d = { function: lead.function, tier: lead.tier || 1, attribute: lead.attribute || "practical",
-              intensity, name: lead.name, id: lead.id };
-  if (picked[1]) d.woven = { function: picked[1].function, tier: picked[1].tier || 1, name: picked[1].name, id: picked[1].id };
+  // ⛔ DUEL_pell_vs_veth §C.1–C.3 — the rank and the effective energy cost ride on the declaration; the def is
+  // put under it by `skillBattleRound` (enrichDecl) from the id.
+  const d = { function: lead.function, tier: lead.tier || 1, rank: lead.rank ?? lead.tier ?? 1, attribute: lead.attribute || "practical",
+              intensity, name: lead.name, id: lead.id, energyCost: lead.energyCost ?? null };
+  if (picked[1]) d.woven = { function: picked[1].function, tier: picked[1].tier || 1, rank: picked[1].rank ?? picked[1].tier ?? 1, name: picked[1].name, id: picked[1].id, energyCost: picked[1].energyCost ?? null };
   // CCODE-43: what you are WIELDING rides on the declaration, so the engine can put it in the roll as its own
   // named line. A dagger and an axe suit different verbs — that is the choice Erik wanted to be real.
   const wield = wieldBonusFor(character, d.function, CONTENT.skillBattle?.engine?.items || {});
@@ -12913,7 +12918,7 @@ function sbPriceMove(allSkills, fog, st, sb) {
   const theirStack = theirAttr * 16 + theirTier * 5;
   return (s) => {
     const myAttr = Number((character.attributes || {})[s.attribute]) || 0;
-    const mine = myAttr * 16 + (s.tier || 1) * 5 + matchupBonus(s.function, theirFn, sb);
+    const mine = myAttr * 16 + ((s.rank ?? s.tier) || 1) * 5 + matchupBonus(s.function, theirFn, sb);   // DUEL §C.2: the rank term, not the tier
     const est = estimateExchange({ myStack: mine, theirStack, fogTier, counterCraft: counter, sb });
     est.tip = est.show === "none"
       ? `Your senses do not reach this yet — read them first. ${counter ? "" : "A craft that counters what they are doing would also let you judge it."}`
@@ -13111,7 +13116,7 @@ function skillBattlePanel() {
           // control for a craft you have not chosen is clutter that teaches players to ignore the panel.
           const lead = (turn.sel.action || []).map(k => skills[k]).filter(Boolean)[0];
           if (!lead) return "";
-          const g = sbGuardBlockFor({ id: lead.id, rank: lead.tier || 1 });
+          const g = sbGuardBlockFor({ id: lead.id, rank: lead.rank ?? lead.tier ?? 1 });   // DUEL §C.2
           if (!g) return "";
           const room = Math.max(1, Number(g.spec?.allies) || 1);
           const chosen = new Set(st.guardPick || []);
@@ -13201,7 +13206,7 @@ function skillBattlePanel() {
       const t = fog?.tier ?? 0;
       const chips = sk.map(s => {
         const showName = t >= 3 && s.name;
-        const body = showName ? `${esc(s.name)} <span class="hint">(${esc(s.function)}${s.tier ? ` t${s.tier}` : ""})</span>`
+        const body = showName ? `${esc(s.name)} <span class="hint">(${esc(s.function)}${s.rank ? ` r${s.rank}` : s.tier ? ` t${s.tier}` : ""})</span>`
           : t >= 1 ? esc(s.function)
           : "▨";
         const why = t >= 1 ? `They can ${esc(s.function)} — matchup applies when they use it.` : "Unread — you know they have a craft here, not what it is.";
@@ -13612,7 +13617,7 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
   const enc = activeEnc(); if (!enc) return;
   const beforeMom = enc.state?.momentum ?? 0; // SNG-246: for the per-round receipt (the swing this round)
   const sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
-  const decl = { function: skill.function, tier: skill.tier || 1, attribute: skill.attribute || "practical", intensity, name: skill.name };
+  const decl = { function: skill.function, tier: skill.tier || 1, rank: skill.rank ?? skill.tier ?? 1, attribute: skill.attribute || "practical", intensity, name: skill.name, id: skill.id, energyCost: skill.energyCost ?? null };
   // ⛔ CCODE-244 — THE RANK RIDES ON THE DECLARATION, VALIDATED. `authoredBlock` has always taken a rank
   // and nothing ever put one here, so every craft resolved at rank 1 no matter what the character owns or
   // what the narrator meant. `skill.rank` is what the model chose from the tiers; absent, the owned rank
@@ -13620,8 +13625,11 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
   {
     const cdef = fullCatalog()[skill.id];
     if (cdef) {
-      const want = Number(skill.rank) || (skill.tier || 1);
-      const v = resolveTier(cdef, want, skill.tier ?? 1);   // ⚠️ `??` — see CCODE-245; `||` would swallow a real 0
+      // ⛔ DUEL_pell_vs_veth §C.2 — `skill.tier` was the owned rank in disguise; it is the craft's tier now, so
+      // the owned rank is read from the character, which is where it has always lived.
+      const ownedRank = (character.abilities || []).find(a => a.abilityId === skill.id)?.level ?? (skill.rank ?? 1);
+      const want = Number(skill.rank) || ownedRank || 1;
+      const v = resolveTier(cdef, want, ownedRank);   // ⚠️ `??` above — see CCODE-245; `||` would swallow a real 0
       // ⚠️ AN OVERREACH IS NOT AN ERROR, IT IS A TIER DOWN. The additive model means the lower capability
       // is always still there, so reaching too high resolves at the best you have rather than refusing —
       // and the receipt says which, so the player is never silently given less than they asked for.

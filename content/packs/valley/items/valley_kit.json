@@ -248,6 +248,48 @@
    "substrateNote": "Stone from the drowned tiers of a pre-Transition work. It came out of a pool and it kept some.",
    "worth": "valuable",
    "goods": "worked_light"
+  },
+  {
+   "id": "smiths_brigandine",
+   "kind": "armor",
+   "worth": "valuable",
+   "goods": "arms",
+   "name": "Smith's Brigandine",
+   "description": "Plates riveted between layers of canvas, made by the wearer and refitted twice since. Heavy across the shoulders, easy at the hip, and worn often enough that it has taken her shape rather than the other way round.",
+   "soakLayers": [
+    {
+     "type": "physical",
+     "value": 3
+    },
+    {
+     "type": "force",
+     "value": 2
+    }
+   ],
+   "bonusTags": [
+    "melee",
+    "worn-in",
+    "maker-made"
+   ],
+   "consumable": false,
+   "_soakWhy": "⛔ REAL ARMOUR, AND THE ONLY ITEM AUTHORED TO STOP A WEAPON. 3 physical against a median craft of 7 is a real fraction of an ordinary blow without making her untouchable; 2 force because riveted plate spreads an impact. ⚠️ NO decay, cold or feeling layer — it is metal and canvas and answers only what is swung at it.",
+   "_authored_20260904": "⛔ ERIK, 2026-08-26: 'Pell fights too… she uses a spear, hammer, shortsword, BRIGANDINE, etc.' ⚠️ THAT LINE LIVED ONLY IN HER REGISTRY NOTE — the brigandine was never an item, so CCode's finding is exact: 'Pell's brigandine does nothing anywhere.' ✅ Now it exists and carries soak."
+  },
+  {
+   "id": "smiths_hammer",
+   "kind": "weapon",
+   "worth": "valuable",
+   "goods": "arms",
+   "name": "Smith's Hammer",
+   "description": "A cross-peen she made her second year and has never replaced. It shapes iron all day and answers a threshold at night, and she has never treated those as different uses.",
+   "bonusTags": [
+    "melee",
+    "force",
+    "structural",
+    "maker-made"
+   ],
+   "consumable": false,
+   "_authored_20260904": "⚑ The working tool as the weapon — `plain_weight` in her hand. ⬜ NO damage value: weapons carry `bonusTags` and the CRAFT carries the dice. ⚠️ Aevi nearly authored damage here and it would have been a second, competing source of numbers."
   }
  ]
 }

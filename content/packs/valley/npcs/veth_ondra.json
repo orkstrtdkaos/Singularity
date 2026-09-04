@@ -6,7 +6,7 @@
  "gender": "female",
  "romanceEligible": false,
  "_romanceNote": "⛔ NOT ROMANCEABLE — not for want of a sex, but because she is Silas's TEACHER and the whole relationship is a standard she holds him to. `romanceEligible` is an author decision per R24 and this is one.",
- "role": "Former Ashwarden warden of the March; teacher. Keeps a market stall at the crossroads.",
+ "role": "Former Ashwarden warden of the March; teacher of the attending craft, and a Grave-Caller who does not advertise it. Keeps a market stall at the crossroads.",
  "homeLocation": "gen-waygate",
  "people": "Valleyfolk",
  "domains": [
@@ -26,14 +26,15 @@
  },
  "voiceHints": "⚠️ SPARE. She asks rather than tells, and the questions are hard ones. 'It will serve.' 'This is rightly made.' Four words where another teacher would use forty, and the four carry weight BECAUSE she does not give them freely. ⛔ WHEN SHE IS ANGRY SHE GETS COLDER AND MORE PRECISE, never louder — she names exactly what was got wrong and why it matters to the craft.",
  "knowledge": [
-  "The Ashwarden discipline, whole",
-  "What a true warden post requires — water, sight-line, threshold, and the understanding that a warden's defence is standing witness rather than walls",
-  "Eleven years of the March's judgment",
-  "Structures: what is load-bearing and whether a place knows what it is built for",
-  "Why her post was dissolved"
+  "The Ashwarden discipline entire — the attending face and the raising beneath it",
+  "What a true warden post requires: water, sight-line, threshold, and standing witness in place of walls",
+  "Eleven years of the March's judgment, and what it costs to hold a post alone",
+  "Raising, and why the March dissolved a post that was working",
+  "The Cut Thread — she has had it a long time and has taught it to almost no one",
+  "Structures: what is load-bearing and whether a place knows what it is built for"
  ],
  "wants": "To see Silas become a TRUE Ashwarden — not powerful, RIGHT. To be heeded as a teacher. To see the March's discipline carried forward in him: she lost her post, and he could be what it was for.",
- "fears": "That Silas gets the core judgment wrong — death given where he should have witnessed, or witness where he should have given room. ⚠️ To her that is not a mistake, it is a CORRUPTION OF THE CRAFT. And: being a stall-keeper and nothing more, the eleven years wasted.",
+ "fears": "That Silas gets the core judgment wrong — death given where he should have witnessed, or witness where he should have given room. ⚠️ To her that is not a mistake, it is a CORRUPTION OF THE CRAFT. ⛔ And that the ugly half dies with her because she found no one willing to hold it.",
  "reactsToReputation": {
   "callous": "means a great deal, and none of it good. Careless endings are the thing she watches for.",
   "patient": "the only standing she credits — conduct over time, not power.",
@@ -128,9 +129,54 @@
    "abilityId": "read_the_room",
    "level": 2,
    "why": "⚠️ 'Reading the moment when presence matters more than words' — `skillsObserved`, verbatim. Stillhold, adjacent to Death; caps at tier 3 under R21 and she is nowhere near it."
+  },
+  {
+   "abilityId": "set_hand",
+   "level": 2,
+   "why": "⛔ RAISING. THE GRAVE-CALLERS' CRAFT, AND SHE HAS IT. Erik: 'I'd like her to know the Necromancy side for sure.' ⚠️ Eleven years alone at a post over an Afterling — attending alone does not hold a thing that old. She raised what she needed to and did not put it in a report."
+  },
+  {
+   "abilityId": "given_errand",
+   "level": 1,
+   "why": "⛔ One body, one purpose, and it finds another way in. The deeper Grave-Caller work — held low because she used it rarely, not because she flinched."
+  },
+  {
+   "abilityId": "bone_lance",
+   "level": 2,
+   "why": "⛔ CALL BONE OUT OF THE AIR AND SEND IT. ⚠️ Aevi first excluded this because 'fifteen recorded meetings and she has never struck anything' — Erik: 'that's because she was never authored. DON'T TAKE THAT AS HER NOT BEING ABLE TO STRIKE OR EVEN WANTING TO STRIKE.'"
+  },
+  {
+   "abilityId": "reaping_sickle",
+   "level": 2,
+   "why": "⛔ Conjure the sickle and swing it. A warden of the March held a threshold for eleven years; thresholds are held with something in your hands."
+  },
+  {
+   "abilityId": "the_cut_thread",
+   "level": 1,
+   "why": "⛔ T5. END ONE LIVING THING — no wound, no struggle. ⚠️ ERIK: 'I want her to teach him the Cut Thread at some point.' ⚑ SILAS HAS ALREADY PRACTISED SENSING IT. She has it, she has had it a long time, and she has been deciding whether he is ready."
+  },
+  {
+   "abilityId": "dread",
+   "level": 1,
+   "why": "⚠️ 'STOP CARRYING IT DISCREETLY.' Aevi excluded this on the reasoning that 'she carries everything discreetly' — ⛔ which was reading her stillness as timidity. She carries it discreetly BY CHOICE, which means she can stop."
+  },
+  {
+   "abilityId": "grey_hand",
+   "level": 2,
+   "why": "Enfeeblement by touch. The quiet end of the necromantic ladder and the one a warden uses most."
+  },
+  {
+   "abilityId": "deathless",
+   "level": 1,
+   "why": "⛔ T4. Wear the ending inward. ⚠️ Eleven years standing over an accumulation that does not stop — she did not survive that by attending alone."
+  },
+  {
+   "abilityId": "draw_down",
+   "level": 1,
+   "why": "⚠️ Take the life out of a thing and put it into yourself. THE CLASSIC BARGAIN. Held at r1: she knows it, she does not lean on it, and knowing it is why she can name it in someone else."
   }
  ],
- "_notHers": "⛔ WHAT SHE DELIBERATELY DOES NOT HAVE, AND THE ABSENCES ARE THE CHARACTERISATION. `bone_lance`, `reaping_sickle`, `the_cut_thread` — conjured weapons and clean killing; ⚠️ FIFTEEN RECORDED MEETINGS AND SHE HAS NEVER STRUCK ANYTHING. `set_hand` and `given_errand` — raising, the Grave-Callers' craft, which a March warden would regard as the corruption she fears in Silas. `calling_back` — retrieval; she teaches that an ending given room is not a failure. `dread` — 'stop carrying it discreetly'; she carries EVERYTHING discreetly. `draw_down`, `deathless` — taking life into yourself, the exact inversion of attending.",
+ "_notHers": "⛔ WHAT SHE STILL DOES NOT HAVE, AND NOW FOR A REASON RATHER THAN AN ABSENCE: `calling_back` (retrieval). ⚠️ She teaches that an ending given room is not a failure; walking someone back is the one necromantic act that contradicts her own doctrine. ⬜ That is a JUDGEMENT she holds, not a gap in her training.",
  "_teacherNote": "⚠️ SHE IS A TEACHER AND THE SHEET SHOULD BE READ THAT WAY. Her `curriculum` is the Ashwarden judgment: a witnessed ending versus one given room, and getting it wrong is A FAILURE OF CRAFT, not merely of feeling. ⛔ Her rank-3 crafts are the four she would TEACH — `deathsense`, `the_attended_end`, `kept_vigil`, `true_account`, `palework`. The rest she can do; those she can hand on.",
  "_metNote": "⚠️ ERIK 2026-09-02: 'she's supposed to be a teacher and he met her at a market stall in the crossroads.' ✅ Save agrees — firstMet `gen-waygate` day 6, and the registry description says it outright: 'The stall is cover; the teaching kit is the door.' ⛔ THE STALL WAS NEVER A LIVING. It is how a dissolved warden waits at a crossroads for someone worth teaching.",
  "_authored": "⚠️ AUTHORED SHEET — wins over `engine/npcsheet.js` derivation per that module's own rule. ⛔ Veth previously existed ONLY in `npc_interiority.json` and the save's `npcRegistry`, with no NPC file. Her drive layer stays in the interiority file and is NOT duplicated here.",
@@ -145,5 +191,6 @@
  "_assistWhy": "⛔ VETH IS THE CASE THAT PROVES THE DEFECT. Untagged she read as a pure striker; she is a warden whose craft is standing witness. `deathsense` → KNOW (⚠️ THE LITERAL TAG EXISTS IN `DEFAULT_TAG_FAMILIES` and it is her rank-3 signature). `watch` + `guard` → PROTECT (⛔ 'a warden's defence is not walls but standing witness at the threshold' — her own words to Silas, and `kept_vigil` at r3 is that craft). `study` + `sense-danger` → KNOW (`true_account` at r3, reading whether a place will serve). `tend` → RESTORE (`kept_breath`: refuse an ending that has already begun). ⚠️ HARM STILL ARRIVES BY DEFAULT and that is CORRECT — Erik 2026-09-02: 'don't take that as her not being able to strike or even wanting to strike.' ⛔ Aevi's earlier reading of her non-striking as characterisation was a DATA GAP misread as a person; see R29.",
  "physicality": "Past forty, tall and long-boned, weathered from eleven years standing outdoors at a threshold. Grey coming in at the temples, kept short. Strong through the shoulders from a warden's work and unremarkable everywhere else — she has never had time to be decorative and would not know what it was for. WHAT CATCHES THE EYE: the stillness. She does not shift, fidget or fill a silence, and once you have been on the receiving end of that attention it stops reading as coldness.",
  "intimacyNotes": "⛔ SHE IS SILAS'S TEACHER and `romanceEligible: false` reflects that — an author decision per R24, not an omission. ⚠️ THIS ENTRY EXISTS BECAUSE A GM STILL NEEDS TO DESCRIBE HER BODY — in a fight, at a forge, wet from a river — and the absence of it was why she read as furniture. ⛔ FOR ANOTHER CHARACTER she would be a hard, slow, entirely honest proposition. ⚠️ AND A CORRECTION: Aevi first built her whole sheet around 'she has never struck anything' and called the absences characterisation. NOBODY HAD AUTHORED HER. A data gap is not a personality.",
- "_physWhy": "⚠️ Authored per `po/CONTENT_POLICY_physicality.md`. ⛔ ADULT. The attraction comes OUT of who this person is rather than being applied on top, character bounds hold in intimacy, consent is authored in their own voice, and each entry names something intimacy must NOT resolve."
+ "_physWhy": "⚠️ Authored per `po/CONTENT_POLICY_physicality.md`. ⛔ ADULT. The attraction comes OUT of who this person is rather than being applied on top, character bounds hold in intimacy, consent is authored in their own voice, and each entry names something intimacy must NOT resolve.",
+ "_rebuild_20260902": "⛔ SHEET REBUILT. THE FIRST VERSION WAS BUILT ON A DATA GAP READ AS CHARACTER. Aevi wrote 'the absences are the characterisation' and excluded every necromantic craft because the save showed fifteen meetings with no strike. ⚠️ ERIK: 'she was never authored so the GM didn't know what to do with her — that's why she never strikes. Don't take that as her not being able to strike or even wanting to strike. I'd like her to know the Necromancy side FOR SURE — although she's been teaching the Marrow attend-a-death side too. I THINK THAT'S JUST THE NICE FACE.' ✅ SO THE ATTENDING IS REAL AND IT IS ALSO THE PRESENTABLE HALF. Her rank-3s stay what she TEACHES; the raising, the conjured weapons and the Cut Thread are what she KNOWS and does not advertise. ⚑ AND THE BONES ARE THE TEST FOR IT: a sequence laid out at a market stall with pieces INTENTIONALLY MISSING, to find someone who notices an absence and asks the right question instead of recoiling. ⛔ SHE WAS NOT LOOKING FOR A STUDENT OF ATTENDING. She was looking for someone who could hold the ugly half."
 }

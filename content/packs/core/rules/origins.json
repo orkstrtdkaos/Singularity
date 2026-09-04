@@ -34,7 +34,7 @@
   {
    "id": "harmonic",
    "name": "Harmonic Heights",
-   "nativeTradition": "harmonic",
+   "nativeTradition": null,
    "homeRegion": "valley",
    "description": "Raised in the resonance-halls of the Heights — tuned stone, sung joints, sound as a working craft. A Valley folk-tradition, a foothill of the great mechanical and ordered peoples.",
    "whyYouAreHere": "You came down. Something in the Heights stopped ringing true and you wanted to know why.",
@@ -43,12 +43,16 @@
    "startsAtHome": true,
    "pole": "Order · Sound",
    "homeRegionName": "the Valley",
-   "displayLabel": "Harmonic Heights — Order · Sound · of the Valley"
+   "displayLabel": "Harmonic Heights — Order · Sound · of the Valley",
+   "_nativeTraditionWas": "harmonic",
+   "nativeKind": "foothill",
+   "learnedAt": "harmonic",
+   "_r33_20260902": "⛔ R33 (SNG-443) — `nativeTradition` NAMED A PLACE, NOT A LINEAGE. It read `harmonic`, which is a FOOTHILL: the Harmonic Heights. ⚠️ `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — where a person can be taught it. ⛔ A FOOTHILL IS A PLACE OF ACCESS, NOT A NEW ANCESTRY: 'Hardline teaches the Edge; it does not own it.' ✅ `valleyfolk` was already corrected this way on 2026-08-30 — `nativeTradition: null` + `nativeKind: folk` — and these two never got the same pass. ⚑ THE CRAFTS TAUGHT THERE CARRY THEIR OWN REAL LINEAGES: threnodist .3 / lattice .3 / mason .4 — re-derived from the crafts 2026-09-02. ⚠️ SO AN ORIGIN FROM THIS PLACE HAS NO SINGLE NATIVE POLE — it begins where several meet, which is what a foothill IS. `learnedAt` records the place; the lineage comes with each craft."
   },
   {
    "id": "radiant_plateau",
    "name": "Radiant Plateau",
-   "nativeTradition": "radiant_folk",
+   "nativeTradition": null,
    "homeRegion": "valley",
    "description": "Raised on the Plateau among prisms and worked light — revelation as a craft, not as a burning. Folk-Radiance, the gentle cousin of the Blaze.",
    "whyYouAreHere": "You came down the Plateau road and did not go back up it.",
@@ -57,7 +61,11 @@
    "startsAtHome": true,
    "pole": "Light · Order",
    "homeRegionName": "the Valley",
-   "displayLabel": "Radiant Plateau — Light · Order · of the Valley"
+   "displayLabel": "Radiant Plateau — Light · Order · of the Valley",
+   "_nativeTraditionWas": "radiant_folk",
+   "nativeKind": "foothill",
+   "learnedAt": "radiant_folk",
+   "_r33_20260902": "⛔ R33 (SNG-443) — `nativeTradition` NAMED A PLACE, NOT A LINEAGE. It read `radiant_folk`, which is a FOOTHILL: the Radiant Plateau. ⚠️ `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — where a person can be taught it. ⛔ A FOOTHILL IS A PLACE OF ACCESS, NOT A NEW ANCESTRY: 'Hardline teaches the Edge; it does not own it.' ✅ `valleyfolk` was already corrected this way on 2026-08-30 — `nativeTradition: null` + `nativeKind: folk` — and these two never got the same pass. ⚑ THE CRAFTS TAUGHT THERE CARRY THEIR OWN REAL LINEAGES: blazeborn .5 / wright .35 / lattice .15 — re-derived from the crafts 2026-09-02. ⚠️ SO AN ORIGIN FROM THIS PLACE HAS NO SINGLE NATIVE POLE — it begins where several meet, which is what a foothill IS. `learnedAt` records the place; the lineage comes with each craft."
   },
   {
    "id": "umbral",
@@ -411,5 +419,6 @@
    "displayLabel": "The Wrights of the New — Creation · of the Making"
   }
  ],
- "renderRule": "CCode: render `origin.displayLabel` VERBATIM. Do NOT build the label by concatenating 'of the ' + homeRegion — that produced Erik's live bug 'The Rootkin — of the the quickwood' (region ids already begin with 'the_'). `pole` is the helper word Erik asked for (Life / Death / Dark / Light…). `homeRegionName` is the proper display name."
+ "renderRule": "CCode: render `origin.displayLabel` VERBATIM. Do NOT build the label by concatenating 'of the ' + homeRegion — that produced Erik's live bug 'The Rootkin — of the the quickwood' (region ids already begin with 'the_'). `pole` is the helper word Erik asked for (Life / Death / Dark / Light…). `homeRegionName` is the proper display name.",
+ "_r33Sweep_20260902": "⛔ R33 SWEEP. Two origins named a FOOTHILL in `nativeTradition`, which confused access with ancestry — the error R33 names by name. ✅ 25 of 27 origins correctly name a real pole; `valleyfolk` was already `null`+`nativeKind: folk`. ⚠️ Now 25 poles + 2 foothills + 1 folk, and NO ORIGIN NAMES A PLACE AS A LINEAGE. ⬜ CCode: `nativeKind: \"foothill\"` and `learnedAt` are new here — reader before field, so nothing reads them yet."
 }

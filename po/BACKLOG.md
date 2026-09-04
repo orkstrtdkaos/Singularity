@@ -1413,3 +1413,37 @@ five keepers land there, which is the one place the thinness was real.
 
 **Corpus: 414 → 423 → 419.** Gate re-run against origin: **0 fail, 0 warn.**
 **Commits:** `a34c4f1e`, `956e955c` (drops) · `4a3743be`, `cadef0e9` (T5 rework)
+
+---
+
+## ⬜ STANDING ITEM — GEAR AUTHORING (open, revisit periodically)
+
+**Erik 2026-09-04:** *"keep this subject open to return to occasionally to author new weapons, armor, and
+items as we move along."*
+
+⚑ **Corpus: 44 items** — 16 tool · 7 consumable · 7 weapon · 5 armor · 5 focus · 3 relic · 2 misc.
+
+### ✅ The contract, settled 2026-09-04
+
+| kind | carries |
+|---|---|
+| **armor** | ⚑ **`soakLayers: [{type, value}]` — TYPED.** One layer per type it genuinely answers. ⛔ **Never several layers of one value: three layers of 5 would be 15 soak** (CCODE-290) |
+| **weapon** | ⚑ **`bonusTags` only.** ⛔ **THE CRAFT CARRIES THE DICE.** ⚠️ A damage value on an item is a second competing source of numbers |
+| **any** | `worth` (42 carry it) · `goods` for the economy · `substrateCharge` where it carries a source |
+
+⚠️ **VALUES STAY SMALL.** Soak is a FLAT subtraction against a median craft of **7 damage**, so `physical 3`
+is already a third of an ordinary blow. ✅ `minHit` guarantees nothing is ever fully immune.
+
+⛔ **AND NOT EVERY ARMOUR SLOT GETS SOAK.** `quiet_boots` has none on purpose — stealth and grip are its
+whole value. ⚠️ **Giving every slot a number is how a kit becomes a spreadsheet.**
+
+### ⬜ Owed / wanted
+
+| | |
+|---|---|
+| **Silas's kit** | ⚠️ `the_unfinished_spear` is authored and growing; ⬜ **what else does he actually carry?** |
+| **Veth's kit** | ⛔ **nothing authored.** A warden of eleven years has gear — ⬜ and the BONES are an item |
+| ⬜ **`meaningCharge` items** | ⚠️ **`SPEC_meaning_density.md` §3** — heirlooms, holy books, a founder's tool, a name-keeping. ⛔ **Meaning is INTRINSIC: a stolen holy book is exactly as holy** (Erik's correction) |
+| ⬜ **`warden_ash`** | ⚠️ carries `substrateCharge` and is *literally the ash of something that died* — **Erik: a Warden carries it as a MOBILE power source.** Likely wants `meaningCharge` instead |
+| **companion gear** | ⚠️ companions carry `substrateAura`; ⬜ **do they carry items?** |
+| **hold-made goods** | ⬜ **`SPEC_hold_store.md`** — what a thriving forge or mine actually produces as an item |

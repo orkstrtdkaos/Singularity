@@ -223,7 +223,15 @@ export function craftsOf(entry, catalog = {}, { limit = 8 } = {}) {
     if (hit) { if (!matched.some(m => m.id === hit.id)) matched.push(hit); }
     else unmatched.push(s);
   }
-  return { crafts: matched.slice(0, limit), unmatched };
+  // ⛔ SPEC_progressive_sheets §2 — AN AUTHORED SHEET IS A FLOOR, NOT A CEILING. `limit` used to slice the
+  // whole list, authored entries first, so Pell's 17 crafts came back as 8 here and 14 from `kitFor` — the
+  // engine pruning a human's list to its own formula. The limit now bounds what is ADDED from observation;
+  // what was written down is returned whole, and named, so a caller can keep it whole too.
+  const authoredSet = new Set(authoredIds);
+  const authored = matched.filter(m => authoredSet.has(String(m.id).toLowerCase()));
+  const observed = matched.filter(m => !authoredSet.has(String(m.id).toLowerCase()));
+  return { crafts: [...authored, ...observed.slice(0, Math.max(0, limit - authored.length))], unmatched,
+    authored: authored.map(m => m.id) };
 }
 
 /** ⛔ GROWTH. Erik: "as the NPC grows they should gain levels and skills just like the PC."
@@ -236,13 +244,22 @@ export function craftsOf(entry, catalog = {}, { limit = 8 } = {}) {
  *  doing something the catalogue cannot express" — which is a prompt to author, not licence to mint. That
  *  is the difference between growing a character and hallucinating one. */
 export function growthFor(entry, catalog = {}, { day = null, cfg = {} } = {}) {
-  const { crafts, unmatched } = craftsOf(entry, catalog);
   const level = derivedLevel(entry, { day, cfg });
   const capacity = Math.max(1, Math.round(level / Math.max(1, num(cfg.craftsPerLevels, 2))));
+  // ⛔ SPEC_progressive_sheets §2 — growth ADDS above an authored list and never prunes below it. The
+  // default `limit: 8` here cut an authored 17 to 8; capacity bounds the observed additions, not the floor.
+  const { crafts, unmatched, authored } = craftsOf(entry, catalog, { limit: capacity });
   return {
     level,
     crafts,
     capacity,
+    // ⚠️ THE FLOOR IS WHAT A HUMAN WROTE; ROOM IS HOW MUCH THE STORY MAY STILL ADD. An authored sheet above
+    // formula has room 0 and that is CORRECT, not an error — §2's Pell case (17 crafts, capacity 14).
+    floor: authored.length,
+    room: Math.max(0, capacity - crafts.length),
+    // ⛔ §5 / Q5 — `closed: [...]` is an AUTHORED ABSENCE: this person will not learn these. Reader before
+    // field: nobody authors it yet, and the moment someone does the kit honours it (see kitFor).
+    closed: Array.isArray(entry?.closed) ? entry.closed.map(String) : [],
     // what the story has shown that the catalogue cannot yet express
     wantsAuthoring: unmatched,
     // ⚠️ NAMED SO IT IS ACTIONABLE: a person the story keeps showing doing one thing has one thing.
@@ -290,9 +307,15 @@ export function isPermanent(entry, { at = 3 } = {}) {
 export function kitFor(entry, { catalog = {}, traditionIndex = null, domainAccess = null,
   day = null, cfg = {}, capacity = null } = {}) {
   const level = derivedLevel(entry, { day, cfg });
-  const cap = Math.max(1, num(capacity, Math.max(1, Math.round(level / Math.max(1, num(cfg.craftsPerLevels, 2))))));
-  const seen = craftsOf(entry, catalog, { limit: cap });
+  const formula = Math.max(1, num(capacity, Math.max(1, Math.round(level / Math.max(1, num(cfg.craftsPerLevels, 2))))));
+  const seen = craftsOf(entry, catalog, { limit: formula });
+  // ⛔ SPEC_progressive_sheets §2 — the cap is the formula OR the authored count, whichever is higher. Pell
+  // is L27 with 17 crafts and a capacity of 14; the old `slice(0, cap)` dropped three she was written with.
+  const cap = Math.max(formula, (seen.authored || []).length);
   const kit = [...seen.crafts];
+  // ⛔ §5 — NEVER INVENT THE ABSENCES. An authored `closed` list is a fact about the person; the domain draw
+  // below may not hand it back. (Veth has no bone_lance, set_hand or reaping_sickle, and those are her.)
+  const closed = new Set((Array.isArray(entry?.closed) ? entry.closed : []).map(String));
 
   // what their place on the circle opens — the same question the creation screen asks
   const domains = entry?.domains || null;
@@ -301,6 +324,7 @@ export function kitFor(entry, { catalog = {}, traditionIndex = null, domainAcces
       if (kit.length >= cap) break;
       if (abilityTier(ab) > Math.max(1, Math.ceil(level / 5))) continue;
       if (kit.some(k => k.id === ab.id)) continue;
+      if (closed.has(ab.id)) continue;
       let v = null;
       try { v = domainAccess(ab, abilityTier(ab), domains, traditionIndex); } catch { v = null; }
       // ⚠️ NEAR GROUND ONLY. An NPC reaches across the circle only where the story has SHOWN them doing it
@@ -315,6 +339,8 @@ export function kitFor(entry, { catalog = {}, traditionIndex = null, domainAcces
     // ⛔ NAMED SO IT IS ACTIONABLE: a permanent person with no domains cannot draw a kit at all, and that
     // is a gap in the record rather than a person with no talents.
     needsDomains: !domains,
+    floor: (seen.authored || []).length,
+    closed: [...closed],
   };
 }
 
@@ -412,7 +438,7 @@ export function sheetsForGM(people = [], { catalog = {}, day = null, cfg = {}, r
   for (const entry of people) {
     if (!entry?.id && !entry?.name) continue;
     const sheet = sheetFor(entry, { day, cfg, roleAttributes });
-    const { skills } = battleSkillsFor(entry, { catalog });
+    const { skills } = battleSkillsFor(entry, { catalog, day, cfg });
     // ⚠️ ONE ROW PER CRAFT, NOT PER FUNCTION. `battleSkillsFor` emits an entry per function, so Pell's
     // 17 crafts arrive as 32 rows — useful to a resolver, unreadable in a prompt.
     const byCraft = new Map();
@@ -424,10 +450,19 @@ export function sheetsForGM(people = [], { catalog = {}, day = null, cfg = {}, r
     const crafts = [...byCraft.values()].slice(0, maxCrafts)
       .map(c => `${c.name} (${c.fns.slice(0, 3).join("/")})`);
     const more = byCraft.size - crafts.length;
-    const how = sheet.authored ? "authored" : "as the story has shown them";
+    // ⚠️ THE LINE SAYS WHICH. A tier-only person (the 70 on the legends roster) gets their level from an AUTHORED
+    // tier floor, not from what the player has seen — telling the narrator otherwise would understate a legend.
+    const how = sheet.authored ? "authored" : (entry?.tier && entry?.level == null ? "by their standing in the world" : "as the story has shown them");
     const lean = sheet.leans?.length ? `, ${sheet.leans.slice(0, 2).join(" then ")}` : "";
     lines.push(`- ${sheet.name} — level ${sheet.level} (${how})${lean}`);
     if (crafts.length) lines.push(`    knows: ${crafts.join(" · ")}${more > 0 ? ` and ${more} more` : ""}`);
+    // ⛔ SPEC_progressive_sheets §1/§4 — `growthFor` had no caller in play; this is it, and it READS. What the
+    // story has shown that the catalogue cannot express reaches the narrator as a fact about the RECORD,
+    // which is the mechanical answer to “ironsense gets overdone”: the model stops reaching for one word
+    // because the block says the word is all the record holds. Nothing resolves differently.
+    const g = growthFor(entry, catalog, { day, cfg });
+    if (g.wantsAuthoring.length) lines.push(`    seen doing, not yet a craft anyone can resolve: ${g.wantsAuthoring.slice(0, 3).join(" · ")}`);
+    if (g.thin) lines.push(`    (the record is thin — one thing to reach for — not the person)`);
     // ⛔ WHAT THEY BRING, AND WHAT THEY CANNOT. `canStrike: false` is an authored fact about a body and
     // the only thing that suppresses the HARM default — a narrator that does not know it will have a
     // scholar swinging.

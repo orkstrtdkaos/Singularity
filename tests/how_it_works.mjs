@@ -3951,12 +3951,20 @@ console.log("\n── §58 · the craft's own source is read; the deferral survi
       cs?.source === "metaphysical" && cs?.via === "craft", `${cs?.source} via ${cs?.via}`);
   }
 
-  // ⛔ THE DEFERRAL SURVIVES. Every abyssal craft carries a `powerSystem`; the card must still decline.
+  // ⛔ THE DEFERRAL MECHANISM SURVIVES — AND THE ABYSSAL CASE ITSELF IS GONE. This gate first asserted “every
+  // abyssal craft still declines”; Erik settled abyssal on 2026-09-03 (primary veil, fc2aa49c) and the row is no
+  // longer null, so that assertion became a gate defending a superseded state — the exact class §54 exists for.
+  // What must still hold is the RULE: an explicit `primary: null` wins over a craft's own declaration.
   {
+    const ps58 = { byTradition: { held_back: { primary: null } } };
+    const cs = sub58.craftSource({ id: "syn_held", tradition: "held_back", powerSystem: "veil" }, {}, {}, ps58, null);
+    check("§58: ⛔ an explicit `primary: null` still DECLINES even when the craft declares a source — the rule, on a fixture",
+      cs?.via === "deferred" && cs?.source === null, JSON.stringify(cs));
+    // ⚠️ REPORTED, NOT FAILED: the ruling landed on the tradition row, which the craft's own field now outranks.
     const aby = Object.values(C58.abilities).filter(a => a.tradition === "abyssal");
-    const leaked = aby.filter(a => src58(a)?.source !== null);
-    check("§58: ⛔ every abyssal craft still DECLINES (source null, via deferred) despite carrying its own `powerSystem`",
-      aby.length > 0 && leaked.length === 0 && aby.every(a => !!a.powerSystem), `${aby.length} abyssal, ${leaked.length} leaked`);
+    const ruled = C58.powerSources?.byTradition?.abyssal?.primary || null;
+    const off = aby.filter(a => (alias58[a.powerSystem] || a.powerSystem) !== ruled);
+    console.log(`      ⚠️ abyssal ruled \`${ruled}\`; ${off.length} of ${aby.length} abyssal crafts declare something else and ground on THAT — content follow-up, not a gate`);
   }
 
   // ⚠️ THE CORPUS, WHOLE: every tradition-bearing craft resolves via `craft` or `deferred` — the tradition
@@ -3972,6 +3980,88 @@ console.log("\n── §58 · the craft's own source is read; the deferral survi
     const fb = sub58.craftSource({ id: "syn_fallback", tradition: "ashwarden" }, { domains: { primary: "ashwarden" }, schools: {} }, C58.schools, C58.powerSources, C58.foothills);
     check("§58: …and the tradition fallback is dormant, not dead — a craft with no declaration still reaches it",
       fb?.via === "tradition" && !!fb?.source, `via ${fb?.via} → ${fb?.source}`);
+  }
+}
+/* ═════ §59 — SHEETS THAT FILL THEMSELVES IN THROUGH PLAY, AND THE DIALS THAT NEVER ARRIVED ═════ */
+// ⛔ SPEC_progressive_sheets.md — Erik: “we write a few key ones and the engine is able to fill in the rest.”
+// Verifying it found the dial gap first: `resolution.npcStanding` (tier floors, level per meeting) was read by
+// ONE file — this one, line ~895 — and by neither live caller. In play the Lightless Seraph (legendary, no
+// authored level) was level 1 with 3 health. CCODE-309's fix passed its gate with the dial handed in by the test.
+//
+// ⚠️ AND THE UNWIRED GROWTH PRUNED. `craftsOf` sliced authored + observed to 8; `kitFor` sliced to capacity.
+// Pell (L27, 17 authored crafts, capacity 14) lost three she was written with. An authored sheet is a FLOOR.
+console.log("\n── §59 · sheets fill in through play; an authored sheet is a floor; the dials reach the callers ──");
+{
+  const NS59 = await import("../engine/npcsheet.js");
+  const { domainAccess: da59 } = await import("../engine/traditions.js");
+  const { loadContentHeadless: lch59 } = await import("./headless_content.mjs");
+  const C59 = await lch59();
+  const cfg59 = C59.rules?.npcStanding || null;
+  const npcs59 = Object.values(C59.npcs || {});
+
+  // ⛔ THE DIALS REACH BOTH LIVE CALLERS — asserted on the SOURCE, because the defect was a call site.
+  {
+    const gm = rd("engine/gm_registry.js"), app = rd("app.js");
+    const gmSlice = gm.slice(gm.indexOf("sheetsForGM(present"), gm.indexOf("sheetsForGM(present") + 220);
+    check("§59: ⛔ the narrator's sheet block passes `resolution.npcStanding`", /npcStanding/.test(gmSlice), gmSlice.replace(/\s+/g, " ").slice(0, 120));
+    const appSlice = app.slice(app.indexOf("personSheetFor(rec"), app.indexOf("personSheetFor(rec") + 120);
+    check("§59: ⛔ …and so does the fight path (`personOpponent`)", /cfg: npcCfg|npcStanding/.test(appSlice), appSlice.slice(0, 100));
+    check("§59: …and the dial block is authored where the callers now read it", !!cfg59 && !!cfg59.tierFloor && Number(cfg59.tierFloor.legendary) > 1);
+  }
+
+  // ⛔ THE MEASURED CASE, BY NAME: a legendary with no authored level is not level 1 once the dial arrives.
+  {
+    const seraph = C59.npcs?.the_lightless_seraph;
+    const bare = seraph && NS59.sheetFor(seraph, {}), dialed = seraph && NS59.sheetFor(seraph, { cfg: cfg59 });
+    check("§59: ⛔ the Lightless Seraph is level 1 WITHOUT the dial and its tier floor WITH it — the gap was real",
+      !!seraph && seraph.level == null && bare.level === 1 && dialed.level >= Number(cfg59.tierFloor[String(seraph.tier).toLowerCase()] || 999),
+      `bare ${bare?.level} → dialed ${dialed?.level} (tier ${seraph?.tier})`);
+    const tierOnly = npcs59.filter(n => n.tier && n.level == null);
+    const still1 = tierOnly.filter(n => NS59.sheetFor(n, { cfg: cfg59 }).level === 1 && /epic|legend|mythic|heroic/i.test(n.tier));
+    check(`§59: …and none of the ${tierOnly.length} tier-only people above riffraff is level 1 with the dial`, tierOnly.length > 50 && still1.length === 0, still1.map(n => n.id).slice(0, 5).join(" · "));
+  }
+
+  // ⛔ AN AUTHORED SHEET IS A FLOOR. Pell: 17 written, capacity 14 — every one of the 17 survives both readers.
+  {
+    const pell = npcs59.find(n => /^pell/i.test(n.name || n.id));
+    const authoredIds = (pell?.abilities || []).map(a => a.abilityId || a);
+    const g = pell && NS59.growthFor(pell, C59.abilities, { day: 400, cfg: cfg59 });
+    const k = pell && NS59.kitFor(pell, { catalog: C59.abilities, traditionIndex: C59.traditionIndex, domainAccess: da59, day: 400, cfg: cfg59 });
+    check("§59: ⛔ Pell is the §2 case — authored above formula (17 > capacity)", !!pell && authoredIds.length > (g?.capacity || 0), `${authoredIds.length} vs capacity ${g?.capacity}`);
+    check("§59: ⛔ …and `growthFor` returns every authored craft — floor 17, room 0, nothing pruned",
+      !!g && g.floor === authoredIds.length && g.room === 0 && authoredIds.every(id => g.crafts.some(c => c.id === id)), `crafts ${g?.crafts.length} floor ${g?.floor} room ${g?.room}`);
+    check("§59: ⛔ …and `kitFor` drops none of them either — the cap rises to the floor",
+      !!k && authoredIds.every(id => k.crafts.some(c => c.id === id)) && k.capacity >= authoredIds.length, `kit ${k?.crafts.length} cap ${k?.capacity}`);
+  }
+
+  // ⛔ NEVER INVENT THE ABSENCES — `closed: [...]` is honoured by the domain draw. Reader before field: no
+  // record authors it yet, so the fixture supplies it; the day Aevi writes one it is already read.
+  {
+    const veth = npcs59.find(n => /veth/i.test(n.name || n.id));
+    const open = veth && NS59.kitFor(veth, { catalog: C59.abilities, traditionIndex: C59.traditionIndex, domainAccess: da59, day: 400, cfg: cfg59 });
+    const authored = new Set((veth?.abilities || []).map(a => a.abilityId || a));
+    const drawn = (open?.crafts || []).filter(c => !authored.has(c.id)).map(c => c.id);
+    check("§59: ⚠️ the domain draw DOES add unauthored crafts to an authored person — the §5 risk is real, measured", drawn.length > 0, drawn.join(" · "));
+    const shut = veth && NS59.kitFor({ ...veth, closed: drawn }, { catalog: C59.abilities, traditionIndex: C59.traditionIndex, domainAccess: da59, day: 400, cfg: cfg59 });
+    check("§59: ⛔ …and closing exactly those keeps them out — an authored absence survives growth",
+      !!shut && drawn.every(id => !shut.crafts.some(c => c.id === id)) && shut.closed.length === drawn.length, `closed ${shut?.closed.join(" · ")}`);
+    check("§59: …`growthFor` carries the same list so a caller can see what is closed", NS59.growthFor({ ...veth, closed: drawn }, C59.abilities, { day: 400, cfg: cfg59 }).closed.length === drawn.length);
+  }
+
+  // ⛔ GROWTH HAS A CALLER, AND IT READS. The narrator's block carries the queue and the thin flag.
+  {
+    const tam = { id: "t59", name: "Tam", role: "smith", met: 9, firstMet: { day: 1 }, skillsObserved: ["ironsense"] };
+    const out = NS59.sheetsForGM([tam], { catalog: C59.abilities, day: 400, cfg: cfg59 });
+    check("§59: ⛔ `growthFor` is called from the narrator's sheet block — its first caller in play", /growthFor\(/.test(rd("engine/npcsheet.js").split("export function sheetsForGM")[1] || ""));
+    check("§59: …and an observation the catalogue cannot express reaches the narrator as a fact about the RECORD", /ironsense/.test(out) && /not yet a craft/.test(out), out.split("\n").slice(1).join(" | "));
+    check("§59: …and the thin case is named as a record problem, not a person", /thin/.test(out));
+  }
+
+  // ⚠️ THE SPEC'S OWN NUMBERS, CORRECTED BY MEASUREMENT (reported in the ROUND 2 reply):
+  {
+    const authored = npcs59.filter(n => n.schemaVersion != null);
+    check("§59: ⚠️ Q4's premise is wrong — every authored person HAS `domains` (it is the generated roster that lacks them)",
+      authored.length >= 40 && authored.every(n => n.domains), `${authored.filter(n => !n.domains).length} of ${authored.length} without`);
   }
 }
 /* ══════════ REPORT ══════════ */

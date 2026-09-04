@@ -17602,8 +17602,9 @@ await (async () => {
     // ⛔ DEFERRED IS NOT STALE. Erik deferred abyssal to its own audit; the row carries `primary: null` and
     // the card must DECLINE rather than answer from parents that are not its parents.
     check("CCODE-221: a deferred tradition declines, and says it is deferred rather than absent",
-      srcOf("abyssal")?.via === "deferred" && srcOf("abyssal")?.source === null,
-      JSON.stringify(srcOf("abyssal")));
+      // ⚠️ abyssal was the live case until Erik settled it (2026-09-03, primary veil); the RULE is what must hold
+      (() => { const d = SU.craftSource({ id: "syn_deferred", tradition: "held_back", powerSystem: "veil" }, noSchool, C199.schools, { byTradition: { held_back: { primary: null } } }, fh221); return d?.via === "deferred" && d?.source === null; })(),
+      "a synthetic `primary: null` row, with the craft declaring veil");
 
     // ⚠️ §2b — AN UNAUTHORED MIX IS DISTINGUISHABLE FROM A PURE ONE. Aevi's own precedent quoted back:
     // "an absent value doing double duty was the actual trap."

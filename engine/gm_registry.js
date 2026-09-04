@@ -123,7 +123,11 @@ export const GM_CONTEXT = [
       ).filter(Boolean);
       // ⚠️ CONTENT FIRST, REGISTRY SECOND — the same precedence the NPC block already uses: what the
       // player has learned about someone beats the authored stub only where content has nothing.
-      return present.length ? sheetsForGM(present, { catalog: env.CONTENT.abilities, day: env.time?.day }) : "";
+      // ⛔ SPEC_progressive_sheets §3 / CCODE-309 — THE DIALS NEVER REACHED THIS CALL. `resolution.npcStanding`
+      // (tier floors, level per meeting) was read by exactly one file: the test that gates it. In play a
+      // legendary with no authored level was LEVEL 1, 3 health, soak 0 — the Lightless Seraph, measured.
+      return present.length ? sheetsForGM(present, { catalog: env.CONTENT.abilities, day: env.time?.day,
+        cfg: env.CONTENT.rules?.npcStanding || {} }) : "";
     } },
   { key: "rules", builder: "CONTENT.rules", carries: ["world rules", "recovery", "precursor bands"],
     reachedBy: "always", spec: "§7", views: ALL,

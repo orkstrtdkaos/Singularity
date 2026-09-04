@@ -508,6 +508,7 @@ blast radius includes every structure keyed to the thing being migrated.**
 | ⛔ `docs/PLAYERS_GUIDE.md` | **what is it like to play** — nouns and verbs, not fields | ⛔ **the player** |
 | ⛔ `docs/ARCS.md` | ⛔ **the same arcs WITH the answers** — Erik: *"it is NOT OK to leave it at 'we don't know what's underneath'"* | us, never the player |
 | `docs/APPARATUS.md` | ⛔ **every harness, what it is for, and whether it RUNS** | us |
+| `docs/ROSTER.md` | **where every authored person lives, and who still needs a sheet** — five places, generated counts | us |
 | ⛔ `docs/BALANCE.md` | ⛔ **which numbers can be turned, what each one moves, and HOW TO KNOW A MEASUREMENT IS REAL** — Erik: *"we need to build toward balance and use the dials"*. ⚠️ Its §5 is the hard-won half: four confounds in one session, each a strong and stable correlation that was an artefact | us |
 | `docs/PIPELINE.md` | how work moves | us |
 | `po/*.md` | working papers — proposals, reviews, replies | us, in flight |

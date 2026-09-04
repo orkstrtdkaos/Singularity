@@ -119,7 +119,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.342";
+const APP_VERSION = "1.9.343";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7766,8 +7766,12 @@ function personOpponent(target) {
     || (name && (Object.values(character?.npcRegistry || {}).find(n => n?.name === name)
       || Object.values(CONTENT.npcs || {}).find(n => n?.name === name)));
   if (!rec) return null;
-  const sheet = personSheetFor(rec, { day: absoluteWorldDay() });
-  const { skills } = battleSkillsFor(rec, { catalog: fullCatalog() });
+  // ⛔ SPEC_progressive_sheets §3 / CCODE-309 — the same dials the narrator's block reads. Without them a
+  // legendary the player swings at was level 1 with 3 health; the fix was gated with the dial handed in by
+  // the TEST and never by either live caller.
+  const npcCfg = CONTENT.rules?.npcStanding || {};
+  const sheet = personSheetFor(rec, { day: absoluteWorldDay(), cfg: npcCfg });
+  const { skills } = battleSkillsFor(rec, { catalog: fullCatalog(), day: absoluteWorldDay(), cfg: npcCfg });
   if (!skills.length) return null;                       // nothing to fight with — let the threat path have them
   return {
     name: sheet.name, attributes: sheet.attributes, health: sheet.health, energy: sheet.energy,

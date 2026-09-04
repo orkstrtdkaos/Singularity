@@ -65,7 +65,7 @@ supplies what production omits. ⛔ **Same shape as `sheetFor`'s `authored` flag
 | # | item | note |
 |---|---|---|
 | 1 | **50 NPC sheets** (`docs/ROSTER.md`) | ⚠️ companions first — they fight beside you |
-| 2 | ⛔ **Veth's crafts still declare `metaphysical`** | ⚠️ **CCode: `ashwarden → veil` is FALSE.** Aevi set the ABYSSAL crafts and never the ashwarden ones |
+| 2 | ✅ ~~Veth's crafts~~ — **WITHDRAWN, NO WORK OWED** | ⛔ **THE CONTENT IS CORRECT AND AEVI'S DUEL WAS WRONG.** `ashwarden` is authored `primary: metaphysical` **0.94** — *"palework tends endings; what tends endings does not hold a charge."* ⚠️ **And Erik's own Abyssal line settles it: *"they ALONE reach for what is on the far side."* If the Abyssals are alone in it, Ashwarden works THIS side.** Conjuring a bone spike is mind-past-matter, not the far side answering. ⛔ **Aevi invented `ashwarden → veil` for the duel and never checked it** |
 | 3 | **six Sovereign seats** | ⛔ **do not fill in one pass** |
 | 4 | **Threnody emotional crafts** (R23) | blocked on the attraction gate |
 | 5 | **`physicality` for epics/legends** | 73 figures, none has one |
@@ -101,3 +101,26 @@ supplies what production omits. ⛔ **Same shape as `sheetFor`'s `authored` flag
 
 ➡️ ⚠️ **THE STANDING CHECK, FROM CCODE'S OWN WORK:** *does the SUITE build the input, or does PRODUCTION?*
 **If only the suite builds it, the feature is dark and green at the same time.**
+
+---
+
+## §7 — ⛔ AND THE DUEL'S REAL LESSON
+
+**Aevi's hand-played duel got SEVEN of seven mechanics wrong**, and CCode measured every one:
+
+| she assumed | the engine |
+|---|---|
+| pools 171/248 and 214/309 | ⛔ **81/40 and 99/40** — an NPC is `level×3` health, **40 energy flat** |
+| the forge at density 0.88 | ⛔ **the forge does not exist.** Millbrook resolves **0.47** |
+| `ashwarden → veil`, four crafts gated off | ⛔ **false** — every Veth craft declares `metaphysical` |
+| ground penalises the roll | ⛔ **NO SUBSTRATE TERM ENTERS A SKILL-BATTLE ROLL AT ALL.** Ground decides free actions only |
+| a gated craft spends its energy | ⛔ refused **before** the cost |
+| surge backlash on crit-fail | ⛔ **any degree** — 50/37.5/25/7.5% — and **free-action path only** |
+| a critical doubles the dice | ⛔ **never.** The margin raises the floor, capped at the dice ceiling |
+| `harmRung: lethal` kills | ⛔ **does nothing in a round.** And `keystone_blow` is `damaging`, not lethal |
+
+⚠️ **2,000 seeded duels: Pell wins 80%, 1,595 by PRESSURE, 8 by health. NOBODY DIES OF DICE.**
+
+⛔ **THE LESSON IS THE SESSION'S LESSON: Aevi read the CONTENT and inferred the RULE.** Every one of those
+eight is a thing she could have run and instead reasoned about. ➡️ **The fiction was fine. The mechanics
+were invented, and they were invented CONFIDENTLY.**

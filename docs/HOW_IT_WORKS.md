@@ -451,8 +451,11 @@ working papers; **this is the answer.**
 | 09-04 | ⛔ **THE CRAFT NEVER REACHED A LIVE ROUND — five call-site defects, found by running Aevi’s hand-ruled duel through the resolver** | `sbDeclare`/`sbDeclFromSel`/`battleSkillsFor` built a bare declaration; `mechanicFor` and `authoredBlock` read the DECLARATION and found no craft — family-default dice by tier, no impositions, pierce 0, in every fight ever played. Also: the player’s `tier` carried the owned RANK (keystone_blow 7.0 vs 22.7); energy was a flat 5 × intensity; an authored soak 11 became threat layers of 1; the player seat carried no level or soak. ✅ All five built — `enrichDecl` at the one seam, `rank` beside `tier`, the craft’s cost, `layersFor(soak)`, a body in the seat | `§60` on the LIVE shape (not the fixture’s); `scripts/duel_pell_vs_veth.mjs` before/after; smoke, content_ci re-aimed to declare the rank they meant | ⚠️ **every test had spread the def under the decl — green gates, dark path.** Fights now impose and roll the craft’s dice; what is left is the pools ruling (Q1). Body §3c |
 | 09-04 | ✅ **A HOLDING HAS TWO EXITS** | `release` was a bare `.filter()` reachable by the GM — the undo button the spec warned about. `releaseHolding` (debt stays, unpaid; keeper released; remembered in `formerHoldings`) and `transferHolding` (debt goes with it; keeper stays) in `holdings.js`, wired to `holdingOps` (+`transfer`, `toEntity`) and the Holdings tab; the tick says each once via `takeHoldingEvents` | `§61` — both exits on a fixture, the assignment untouched, the news once | ⚠️ the standing cost of walking away is Erik’s (Q5). Body §7d |
 | 09-04 | ✅ **A RULING NAMES ITS SENTENCE; A SUBJECT IS FINDABLE ACROSS EVERY LAYER** | `po/RULING_*.md` may declare `subject:` + `bodyAnchor:`; a declared anchor must be in the body exactly once, the undeclared count ratchets (25, may only fall); R33 declares first. `scripts/subject.mjs` joins one subject across truth/log/ruling/spec/content/engine/UI/tests/docs and reports the ABSENCES | `§62` (anchor present, once, subject named, ratchet) · `§63` (synonyms resolve; foothills whole; R33’s `_twoAxes` found; `meaningDensity` reads spec-only) | it found R30–R32 indexed-not-enacted — now cited in §7h and ✅ in the index. `docs/RULINGS.md` gains a RULINGS OWED index (Q1–Q13 → `po/DECISIONS_OWED_20260904.md`) |
+| 09-04 | ⛔ **THE RATCHET WAVED A DEAD SUITE THROUGH** | `run_tests --ratchet` counted a suite by its own “N FAILURE(S)” line or its FAIL lines; a suite that CRASHES prints neither, so `null ?? 0 ?? 1` was 0 and `tradition_matrix` read as green for a day while dead. A non-zero exit is now at least one failure | `§64` on the source; the first honest run surfaced `verification_ledger`, which exits 1 BY DESIGN when the ledger has red rows — baselined at 1 deliberately, not hidden again | ⚠️ the hook can no longer be fooled by a throw; a new red now needs a FAIL line or a crash, and both count |
+| 09-04 | ✅ **THREE READERS FOR THINGS THAT WERE AUTHORED AND DARK** | (1) SPEC_holding_attributes pass one — `holdingsAt` (the join), `holdingSentence` (“the mine is running; the watchtower is eating it”), `provides`/`upkeep` read before authored, the narrator told when you stand in a place you hold; (2) the PC's armour — `wornSoakLayers` reads SNG-521's item `soakLayers[]`, best per type, into the fight seat; (3) `byTradition[t].mix` — 26 authored blends with zero consumers — reaches the ground card as `lineageMix` and the wheel's ground row | `§65` (join, sentence, here-mark, registry passes the location) · `§66` (best per type on real items; the seat carries the layers) · `§67` (abyssal card carries the blend; an unauthored lineage carries none; the row renders it) | body §7d, §4, §3c. ⚠️ No magnitude moved for holdings (Q14); armour now soaks for the PC exactly as it does for a foe |
+| 09-04 | ✅ **TRUTH ↔ DATA — a body section names its subject and the fields it describes, and they must exist** | `<!-- subject: X · fields: a, b · state: c -->` under a body heading; every `fields:` name must be a key somewhere in content, every `state:` name (a save-record field) must be named in engine/; the subject must be one `scripts/subject.mjs` knows | `§64` — three sections marked (§3c, §7d, §7h); sections without a marker ratchet at 20 and may only fall | the second half of SPEC_associativity §4 — the join that would have caught 31 crafts carrying a forbidden `tradition`; a body that describes a field nobody authors is now red |
 
-**Last verified: 2026-09-04 · v1.9.345 · 419 crafts.**
+**Last verified: 2026-09-04 · v1.9.346 · 419 crafts.**
 
 ---
 
@@ -896,6 +899,7 @@ time and wants a consistency pass.**
 ---
 
 ## 3c · WHAT A ROUND READS — the declaration, and what rides on it (DUEL_pell_vs_veth §C, 2026-09-04)
+<!-- subject: battle-declaration · fields: function, tier, rank, attribute, intensity, energyCost, mechanic, imposes, pierce, penetration, harmRung, soakLayers -->
 
 A skill-battle round resolves two DECLARATIONS. A declaration is `{ function, tier, rank, attribute, intensity, name, id,
 energyCost }`, and **`skillBattleRound` puts the craft's own definition under both of them** (`enrichDecl`) before
@@ -916,6 +920,10 @@ and penalises FREE actions only. `harmRung` moves no number inside a round — i
 only by the deliberate ⚡ Finish it, which ends a fight by the momentum swing against the foe's collapse floor. A fight
 ends by **health ≤ 0** or by **being driven back twice** (`breakAtPressure`).
 
+✅ **The ground CARD (not the round) also carries the lineage's authored blend** — `power_sources.json`'s `byTradition[t].mix`,
+26 blends with Erik's reasons that had no reader since the day they landed — as `lineageMix` in the band vocabulary
+(*abyssal leans metaphysical 55%, veil 35%, combination 10%*); an unauthored mix stays absent, never a pure mean.
+
 ⛔ **HOW THIS WAS DARK WITH EVERY GATE GREEN:** every test spread the def under the declaration; play never did. The
 test built the input production did not. **The standing check, now a rule (`PIPELINE.md`): does the SUITE build the
 input, or does PRODUCTION?** §60 asserts the live shape.
@@ -927,6 +935,13 @@ for twenty. `resolution.npcStanding.healthPerLevel` / `energyBase` are the dials
 ---
 
 ## 4 · WHAT STOPS IT: WARDS
+
+✅ **THE PLAYER WEARS WHAT THE ITEMS AUTHOR (2026-09-04).** Items carry typed soak — `soakLayers[]` on `oiled_leathers`
+(decay 5, physical 1), `lattice_token` (precursor 6) — and until now the player seat read `character.soak`, a field
+nothing writes: the PC's armour never soaked a blow. `wornSoakLayers` reads the pack: what is carried counts (there is no
+equipped flag — the same rule `equipmentBonus` uses), and **per damage type the single best layer stands, never a sum**,
+so three habits cannot stack into immunity. The layers ride into `battleRound` as the player's `soakLayers` and answer
+the same ranked, typed arithmetic a foe's do.
 
 **A ward answers a FAMILY, or one TYPE inside a family.** *An elemental ward* stops heat and cold and
 lightning; *a cold ward* stops only cold and is cheaper and sharper.
@@ -1135,6 +1150,7 @@ effect's own magnitude, which is what *"the highest reached wins"* always meant.
 ---
 
 ## 7d · HOLDINGS — a place that answers to you
+<!-- subject: holdings · fields: kind, name, locationId, condition, history, provides, upkeep · state: steward, obligation, claimedDay, formerHoldings, holdingEvents -->
 
 A holding is `{ id, kind: "post"|"enterprise", name, locationId, steward, obligation, condition, claimedDay,
 history[] }`. **`condition` moves both ways** — `failing · strained · holding · thriving` — on the same four
@@ -1184,9 +1200,21 @@ said nothing. ⚠️ **The standing cost of walking away is Erik's ruling, not b
 `obligationUnpaid` so whichever instrument he picks has something to read. A named person is the supported holder; a
 community transfer is news and history, because nothing in the world model can hold property yet.
 
+### ✅ A HOLDING IS LEGIBLE AT THE PLACE IT SITS (SPEC_holding_attributes pass one, 2026-09-04)
+
+**A holding is a MODIFIER on a place** — every delta the attribute list reaches for already lives on locations
+(`substrateSource`, `dangerLevel`, `waygate`, `learnedAt`) with a reader, and none of those readers could ask whether a
+holding sat on their place. `holdingsAt(character, locationId)` is that join. A holding may carry `provides: […]` and
+`upkeep: […]` (strings from the list's families); nobody authors them yet and they are read anyway. ⛔ **A hold reports
+in a SENTENCE** — `holdingSentence`: *“The Mill is running under Edvar Crane; it provides worked timber; it eats a
+steward's wage.”* — and the narrator's block says **YOU ARE STANDING IN IT** when the character is at a place they hold.
+⚠️ **No number moves yet.** How many kinds a hold may carry, how much, what each costs, which need a keeper — pass
+two, RULINGS OWED Q14.
+
 ---
 
 ## 7h · A PERSON HAS A SHEET, AND A MASS HAS A NUMBER
+<!-- subject: npc-sheets · fields: level, tier, subAttributes, abilities, assistTags, closed, tierFloor, levelPerMeetings, healthPerLevel, energyBase -->
 
 **There are two sheet producers and they are the two directions of ONE ladder, not rivals.**
 

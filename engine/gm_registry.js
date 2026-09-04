@@ -210,7 +210,9 @@ export const GM_CONTEXT = [
     reachedBy: "always", spec: "SNG-358", views: ["turn", "ask"],
     // ⛔ SNG-356 presence 20 — the obligation clause inverts, so the GM must be handed the live effects.
     build: (env) => holdingsForGM(env.character,
-      env.CONTENT?.rules?.subAttributeLadder ? milestoneEffects(env.CONTENT.rules.subAttributeLadder, env.character).live : null) },
+      env.CONTENT?.rules?.subAttributeLadder ? milestoneEffects(env.CONTENT.rules.subAttributeLadder, env.character).live : null,
+      // SPEC_holding_attributes: the join — the narrator knows when you are standing in a place you hold
+      { hereId: env.location?.id || env.character?.currentLocationId || null, nameOf: (id) => env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id }) },
   { key: "abilityLawDetail", builder: "progression.abilitiesForGM", carries: ["abilities", "ranks", "energy", "harmRung"],
     reachedBy: "always", spec: "§7", views: ["turn", "ask", "gambit"],
     build: (env) => abilitiesForGM(env.character, env.app.fullCatalog(), env.CONTENT.branchForks, env.CONTENT.rules) },

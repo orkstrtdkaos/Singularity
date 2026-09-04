@@ -39,9 +39,9 @@ file is replaced.**
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **92** | a play-path file names it outside a comment |
+| ✅ **READ** | **93** | a play-path file names it outside a comment |
 | ⛔ **DARK** | **15** | **no literal reader anywhere** — see the four lies below |
-| ⚠️ **CI-ONLY** | **4** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
+| ⚠️ **CI-ONLY** | **3** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
 
 ### ⛔ THE FOUR WAYS "UNREAD" LIES — all four produced a false finding here inside one day
@@ -255,6 +255,9 @@ its own config. Take the object the caller takes.**
 | a battle **declaration** | ⛔ `{ function, tier, rank, attribute, intensity, name, id, energyCost }` — **`tier` is the CRAFT's, `rank` is what is OWNED**; the chance stack reads `rank`, the dice read `tier`; `skillBattleRound` runs it through `enrichDecl(decl, abilities)` so the craft's `mechanic`/`imposes`/`pierce`/`tree` sit under it (decl fields win, `functions` dropped) | a bare `{function, tier, …}` with the owned rank in `tier` — which is what play sent for months |
 | `battleRound(...)`'s `playerSheet` | carries `level`, `health`, `maxHealth`, `soak` beside attributes/energy — the wielder term and the defender's soak read them | attributes and energy only |
 | `releaseHolding` / `transferHolding` | move the record to `character.formerHoldings[]` with `formerHolder`, `reason` / `transferredTo`, `obligationUnpaid`, and queue `character.holdingEvents[]` for the tick (`takeHoldingEvents`) | a filter |
+| `holdingsAt(character, locationId)` · `holdingSentence(h)` | the join and the sentence; a holding may carry `provides: […]` and `upkeep: […]` (read, not yet authored); `holdingsForGM(…, { hereId, nameOf })` marks the one you stand in | a holding with no idea where it is |
+| `wornSoakLayers(character)` | reads `soakLayers[]` off inventory items (SNG-521's authored typed soak); what is carried counts; per type the single BEST layer, never a sum; rides into the player seat as `soakLayers` | `character.soak`, a field nothing writes |
+| `groundCardFor(…).lineageMix` | `[{ source, share }]` from `byTradition[t].mix` in the band vocabulary, sorted; `null` when the row authors none | a field with 26 authored rows and no reader |
 
 ---
 
@@ -417,6 +420,7 @@ the next field of this shape gets the right name at authoring time**, which is t
 | ⛔ **A closed loop** | fixture, assertion and engine share an invented vocabulary | `braids.js` HARM_ORDER; the five SNG-193b gates |
 | ⛔ **A scanner reading its own prose** | the tool names what it measures | 3× — the last one in `safe_delete.mjs` itself |
 | ⛔ **A suite that exits early** | pass count drops, failure count does not move | 4× — **the tell is always the PASS COUNT** |
+| ⛔ **A suite that crashes reads as green** | no “N FAILURE(S)” line, no FAIL line, so the ratchet counted 0 | `tradition_matrix` for a day; `verification_ledger` invisible since it was written — fixed by counting a non-zero exit as ≥ 1 |
 | ⛔ **A formatter travelling with a content edit** | 2 lines become 8,000 | `json.dumps(indent=2)` on `reach_death_life.json` |
 | ⛔ **A name with two owners** | one word, two fields | `operativeAxis`; `blind` (policy vs receipt) |
 | ⛔ **A logged change never made** | the record says corrected, the text is unchanged | §8 blind/taunt |
@@ -669,7 +673,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `conserveSuppresses` | 23 | `root`×23 | ✅ READ | `app.js` |
 | `traditionV2` | 21 | `root`×21 | ⛔ DARK | — |
 | `imposes` | 21 | `tree`×21 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
-| `upkeep` | 18 | `root`×18 | ⚠️ CI-ONLY | _1 test/script only_ |
+| `upkeep` | 18 | `root`×18 | ✅ READ | `holdings.js` |
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |
 | `obscure` | 16 | `root`×16 | ✅ READ | `skill_battle.js` |
 | `variance` | 15 | `mechanic`×15 | ✅ READ | `craftmechanics.js`, `app.js` |

@@ -25,6 +25,7 @@ cannot be lost; when one is ruled it gets a `po/RULING_*.md` with a `bodyAnchor:
 | `SPEC_undo_sect_merge` | ✅ the `{bySect}` / `{byRank}` mechanism exists (R27); ⬜ the authoring is Aevi's; `soma` is Q10 |
 | `SPEC_party_contributions` | ⬜ Q9 — shape A/B/C is Erik's; Pell and Veth now carry `assistTags`, the other 41 do not |
 | `SPEC_holding_attributes` (landed 09-04, `design_open`) | ✅ pass one is a LIST and it is right: a holding is a MODIFIER on a place, and the deltas already exist on locations. ⬜ **Q14 — pass two** (types per size tier, magnitudes, upkeep per type, steward-required types) is Erik's. Nothing to build before it except the shape that lets a holding carry a delta at all — see its ROUND 2 |
+| the five follow-ups (Erik 09-04: *“build your whole list”*) | ✅ **built, gated `§64`–`§67`**: the ratchet counts a crash (and surfaced `verification_ledger`, baselined at 1 deliberately); the holdings join + sentence + `provides`/`upkeep` read + the narrator's here-mark; the PC's authored armour reaches the fight seat (best per type); TRUTH ↔ DATA subject markers on body sections (`§3c`, `§7d`, `§7h`, ratchet 20); `byTradition.mix` has a reader (the ground card's `lineageMix`) |
 | docs | `HOW_IT_WORKS` body §3c (what a round reads), §7d (the two exits), §7h (R30–R32, the dials, growth); `FIELD_REFERENCE` §5 (the declaration contract) and §11 (the new defect class + countermeasure 9); `PIPELINE` rule 4 (the standing check); `BALANCE` (the two unauthored pool dials); `RULINGS` (R30–R32 ✅, the OWED index) |
 
 ---

@@ -6,6 +6,7 @@
 // Incapacitation, never engine-imposed death.
 
 import { battleRound, opponentPolicy } from "./skill_battle.js";
+import { wornSoak, wornSoakLayers } from "./inventory.js";   // 2026-09-04: the PC’s authored armour reaches the fight seat
 import { targetableAllies, alliesOf } from "./combatants.js";
 import { commandSlots, bringForward, theatresOf, overmatchOf, answersOvermatch, scaleRank } from "./melee.js";   // CCODE-274: how many you lead is earned; who comes forward is chosen
 import { currentStage } from "./evolution.js";   // CCODE-265: an earned item stage can lift a companion's canStrike:false   // CCODE-253: who a foe may aim at — DERIVED here, per this seam's own rule
@@ -222,7 +223,9 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // in a fight. Level and health come from the character; `soak` reads a field nothing writes yet (reader before
     // field — an armour writer lands on it the day one exists), so it is 0 today and byte-identical.
     playerSheet: { attributes: character.attributes || {}, subAttributes: character.subAttributes || {}, alignment: character.alignment || {}, skills: character.skills || {}, energy: before,
-      level: Number(character.level) || 1, health: character.health, maxHealth: character.maxHealth, soak: Math.max(0, Number(character.soak) || 0) },
+      // ✅ 2026-09-04 — and the armour the items author reaches the seat: `wornSoakLayers` (SNG-521’s `soakLayers[]`, best per type).
+      level: Number(character.level) || 1, health: character.health, maxHealth: character.maxHealth,
+      soak: Math.max(0, Number(character.soak) || 0, wornSoak(character)), soakLayers: (() => { const w = wornSoakLayers(character); return w.length ? w : undefined; })() },
     // CCODE-35: `effects` must ride BOTH ways — into the round (they modify this roll) and back out onto the
     // encounter state (they persist). This hand-built state object is the seam where they would silently drop.
     // CCODE-35/38: `effects` and `pressure` must ride BOTH ways — into the round (they modify this roll / carry the

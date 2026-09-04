@@ -560,7 +560,15 @@ export function groundCardFor(ability, character, { schools, substrate, location
     : v.side === "starved" ? "starved here — the ground is too thin"
     : v.side === "crowded" ? "crowded here — the ground is too loud"
     : "unaffected by the ground";
-  return { source: cs.source, school: cs.school, via: cs.via, density, because, field: fieldOfSource(cs.source, substrate), nanite: nan, localGround, verdict: word,
+  // ⛔ DARK FIELD, GIVEN A READER (2026-09-04): `byTradition[t].mix` — 26 authored blends with Erik’s reasons — had ZERO consumers
+  // since the day it landed; `craftSource` returned it and nothing looked. The card now carries the LINEAGE’s blend whenever the
+  // row authors one (whatever `via` says — a craft that declares veil is still of a people that leans veil .5 / metaphysical .45),
+  // in the band vocabulary, as a readable list. `mixAuthored` guards the “the mean is pure” trap (§2b): an unauthored mix is absent.
+  const row = powerSources?.byTradition?.[cs.traditionId];
+  const lineageMix = row?.mix && !row._mixUnauthored
+    ? Object.entries(row.mix).filter(([, w]) => Number(w) > 0).sort((a, b) => b[1] - a[1]).map(([k, w]) => ({ source: toBandVocab(k), share: Math.round(Number(w) * 100) }))
+    : null;
+  return { source: cs.source, school: cs.school, via: cs.via, density, because, field: fieldOfSource(cs.source, substrate), nanite: nan, localGround, verdict: word, lineageMix,
     strength: Math.max(0, Math.min(4, Math.round(v.factor * 4))), percent: v.percent,
     chancePenalty: v.chancePenalty, energyMult: v.energyMult, off: v.off, grounded: true };
 }

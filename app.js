@@ -119,7 +119,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.345";
+const APP_VERSION = "1.9.346";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3377,8 +3377,10 @@ function groundRow(ability) {
       ? `${g.percent}% of its full strength here` + (g.chancePenalty ? ` · −${g.chancePenalty} to the roll` : "")
         + (g.energyMult > 1 ? ` · +${Math.round((g.energyMult - 1) * 100)}% energy` : "")
       : "the ground does not touch this one";
+    // the lineage’s authored blend, when there is one (a dark field until 2026-09-04)
+    const blend = Array.isArray(g.lineageMix) && g.lineageMix.length ? " · lineage leans " + g.lineageMix.map(m => `${m.source} ${m.share}%`).join(", ") : "";
     const cls = !g.grounded ? "neutral" : g.off ? "off" : g.strength >= 4 ? "full" : g.strength <= 1 ? "starved" : "part";
-    return `<div class="ground-row ground-row-${cls}" title="${esc(detail + (g.because ? " — " + g.because : ""))}">`
+    return `<div class="ground-row ground-row-${cls}" title="${esc(detail + blend + (g.because ? " — " + g.because : ""))}">`
       + `<span class="ground-pips">${pips}</span> <span class="ground-verdict">${esc(g.verdict)}</span>`
       + (g.because ? ` <span class="hint ground-because">· ${esc(g.because)}</span>` : "") + `</div>`;
   } catch { return ""; }   // a readout is never worth breaking the card for

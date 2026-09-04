@@ -4164,7 +4164,7 @@ console.log("\n── §60 · the craft reaches the round — def under the decl
 
   // ── F5 · the player seat has a level and a body ──
   check("§60: ⛔ the player seat passed to `battleRound` carries level, health and soak",
-    /playerSheet: \{ attributes: character\.attributes[\s\S]{0,400}level: Number\(character\.level\) \|\| 1, health: character\.health, maxHealth: character\.maxHealth, soak:/.test(encSrc));
+    /playerSheet: \{ attributes: character\.attributes[\s\S]{0,400}level: Number\(character\.level\) \|\| 1, health: character\.health, maxHealth: character\.maxHealth,[\s\S]{0,240}soak:/.test(encSrc));
 }
 /* ═════ §61 — A HOLDING HAS TWO EXITS, AND THEY ARE NOT THE SAME EXIT ═════ */
 // ⛔ SPEC_holding_release_transfer — release lived in app.js as a bare filter reachable by the GM: the obligation vanished,
@@ -4263,6 +4263,108 @@ console.log("\n── §63 · the subject instrument runs, its synonyms resolve,
   const md = SJ.report("meaning-density");
   check("§63: a spec-only subject is reported as absent from TRUTH and ENGINE — the instrument does not flatter",
     md.hits.TRUTH.length === 0 && md.hits.ENGINE.length === 0 && md.hits.SPEC.length > 0);
+}
+const SJ64_SYN = (await import("../scripts/subject.mjs")).SYNONYMS;
+/* ═════ §64 — A CRASH IS AT LEAST ONE FAILURE, AND THE TRUTH NAMES FIELDS THAT EXIST ═════ */
+// ⛔ THE RATCHET WAVED A DEAD SUITE THROUGH. `tradition_matrix` threw on a null for a day; a suite that throws prints no
+// "N FAILURE(S)" and no FAIL line, so `countOf` computed `null ?? 0 ?? 1` = 0 and a crash read as green. A non-zero exit
+// is now at least one. ⚠️ The first honest run surfaced `verification_ledger`, which exits 1 BY DESIGN when the ledger
+// has red rows — it had been invisible; it is baselined at 1 deliberately rather than hidden again.
+//
+// ⛔ TRUTH ↔ DATA (SPEC_associativity §4.2 / SPEC_one_source_of_truth §B2): a body section may declare
+// `<!-- subject: X · fields: a, b · state: c -->`. Every `fields:` name must be a key somewhere in content; every
+// `state:` name (a save-record field) must be named in engine/. A body that describes a field nobody authors is the
+// “enacted but not built” class. Sections without a marker are a COUNT that may only fall.
+console.log("\n── §64 · a crash counts; the truth’s named fields exist in content or in the engine ──");
+{
+  const rt = rd("scripts/run_tests.mjs");
+  check("§64: ⛔ the ratchet counts a non-zero exit as AT LEAST one failure — a crash can no longer read as green",
+    /const countOf = \(r\) => \(r\.ok \? 0 : Math\.max\(1, r\.fails \?\? r\.lineCount \?\? 0\)\)/.test(rt));
+  const base64 = JSON.parse(rd("tests/suite_baseline.json"));
+  check("§64: …and `verification_ledger` is baselined as a KNOWN red, not hidden", Number(base64.suites?.verification_ledger) >= 1, `baseline ${base64.suites?.verification_ledger}`);
+
+  // TRUTH ↔ DATA
+  const { readdirSync: rd64, statSync: st64, readFileSync: rf64 } = await import("node:fs");
+  const keys64 = new Set();
+  const walk64 = (d) => { for (const e of rd64(d)) { const p = join(d, e); if (st64(p).isDirectory()) walk64(p); else if (e.endsWith(".json")) { let j; try { j = JSON.parse(rf64(p, "utf8")); } catch { continue; } const scan = (o) => { if (!o || typeof o !== "object") return; if (Array.isArray(o)) { o.forEach(scan); return; } for (const [k, v] of Object.entries(o)) { keys64.add(k); scan(v); } }; scan(j); } } };
+  walk64(join(root, "content"));
+  const engSrc64 = rd64(join(root, "engine")).filter(f => f.endsWith(".js")).map(f => rd("engine/" + f)).join("\n");
+  const dl64 = doc.split(String.fromCharCode(10));
+  let last64 = -1; dl64.forEach((l, i) => { if (/^\|\s*\d\d-\d\d\s*\|/.test(l)) last64 = i; });
+  const bodyLines = dl64.slice(last64 + 1);
+  const sections = bodyLines.filter(l => /^## /.test(l)).length;
+  // ⚠️ the doc carries CRLF on these lines; strip the CR or the marker never matches (the first run found 0 markers)
+  const markers = bodyLines.map(l => l.replace(new RegExp(String.fromCharCode(13) + "$"), "").match(/^<!-- subject: ([a-z0-9-]+)(?: · fields: ([^·]*?))?(?: · state: ([^-]*?))? -->$/)).filter(Boolean)
+    .map(m => ({ subject: m[1], fields: (m[2] || "").split(",").map(x => x.trim()).filter(Boolean), state: (m[3] || "").split(",").map(x => x.trim()).filter(Boolean) }));
+  check("§64: the body carries subject markers — not vacuous", markers.length >= 3 && sections >= 15, `${markers.length} markers over ${sections} sections`);
+  const badF = markers.flatMap(m => m.fields.filter(f => !keys64.has(f)).map(f => m.subject + ":" + f));
+  const badS = markers.flatMap(m => m.state.filter(f => !new RegExp("\\b" + f + "\\b").test(engSrc64)).map(f => m.subject + ":" + f));
+  check("§64: ⛔ every `fields:` name the truth declares is a key somewhere in content — the truth may not describe a field nobody authors", badF.length === 0, badF.join(" · "));
+  check("§64: ⛔ every `state:` name is named in engine/ — a save-record field the body describes has a reader", badS.length === 0, badS.join(" · "));
+  check("§64: …and a subject named on a body section is one the instrument knows", markers.every(m => !!(SJ64_SYN[m.subject])), markers.filter(m => !SJ64_SYN[m.subject]).map(m => m.subject).join(" · "));
+  const BASELINE_UNMARKED = 20;   // measured 2026-09-04: 23 body sections, 3 marked (§3c, §7d, §7h)
+  check(`§64: ratchet — body sections without a subject marker = ${sections - markers.length} (baseline ${BASELINE_UNMARKED}) — may only go DOWN`, sections - markers.length <= BASELINE_UNMARKED);
+}
+
+/* ═════ §65 — A HOLDING IS A MODIFIER ON A PLACE: THE JOIN, THE SENTENCE, THE NARRATOR KNOWS WHERE YOU STAND ═════ */
+// ⛔ SPEC_holding_attributes — every delta the list names exists on locations and none of their readers could ask whether a
+// holding sits on the place. `holdingsAt` is the join; `provides`/`upkeep` are read before anyone authors them; the hard
+// constraint (a hold reports in a SENTENCE) is `holdingSentence`. Magnitudes are pass two (RULINGS OWED Q14).
+console.log("\n── §65 · a holding is legible at the place it sits ──");
+{
+  const H65 = await import("../engine/holdings.js");
+  check("§65: ⛔ `holdingsAt` and `holdingSentence` exist", typeof H65.holdingsAt === "function" && typeof H65.holdingSentence === "function");
+  const c = { id: "c65", holdings: [] };
+  H65.addHolding(c, { id: "mill", kind: "enterprise", name: "The Mill", locationId: "millbrook", steward: "edvar", day: 1 });
+  c.holdings[0].provides = ["worked timber"]; c.holdings[0].upkeep = ["a steward's wage"];
+  H65.addHolding(c, { id: "post", kind: "post", name: "The Post", locationId: "the_old_warden_post", day: 1 });
+  check("§65: ⛔ the join — the holdings AT a place, and nothing for a place you hold nothing at", H65.holdingsAt(c, "millbrook").map(h => h.id).join() === "mill" && H65.holdingsAt(c, "nowhere").length === 0 && H65.holdingsAt(c, null).length === 0);
+  const sent = H65.holdingSentence(c.holdings[0], { nameOf: id => id === "edvar" ? "Edvar Crane" : id });
+  check("§65: ⛔ the sentence reads condition, keeper, what it provides and what it eats — Erik's hard constraint",
+    /^The Mill is running under Edvar Crane; it provides worked timber; it eats a steward's wage\.$/.test(sent), sent);
+  check("§65: …and with nothing authored it still speaks — condition and keeper alone", /^The Post is running with nobody keeping it\.$/.test(H65.holdingSentence(c.holdings[1])));
+  const gm = H65.holdingsForGM(c, null, { hereId: "millbrook", nameOf: id => id });
+  check("§65: ⛔ the narrator is told when the character is STANDING IN a place they hold, and hears the sentence", /The Mill[^\n]*YOU ARE STANDING IN IT[^\n]*it provides worked timber/.test(gm) && !/The Post[^\n]*STANDING/.test(gm), gm.split("\n")[0].slice(0, 120));
+  check("§65: …and the GM registry passes where the character is", /hereId: env\.location\?\.id/.test(rd("engine/gm_registry.js")));
+}
+
+/* ═════ §66 — THE PC WEARS WHAT THE ITEMS AUTHOR: SNG-521's soakLayers REACH THE FIGHT SEAT ═════ */
+// ⛔ Items authored typed soak (`oiled_leathers` decay 5 / physical 1, `lattice_token` precursor 6) and the player seat read
+// `character.soak`, a field nothing writes — the PC's armour never soaked a blow. `wornSoakLayers` is the reader: what is
+// carried counts (there is no equipped flag, the same rule `equipmentBonus` uses), and per type the single BEST layer
+// stands — two coats are not two coats, so carrying three habits cannot stack into immunity.
+console.log("\n── §66 · the PC’s authored armour reaches the seat, best per type ──");
+{
+  const INV66 = await import("../engine/inventory.js");
+  const { loadContentHeadless: lch66 } = await import("./headless_content.mjs");
+  const C66 = await lch66();
+  const leathers = C66.items.oiled_leathers, token = C66.items.lattice_token;
+  check("§66: the authored items exist and carry typed layers — not vacuous", !!leathers?.soakLayers?.length && !!token?.soakLayers?.length);
+  const ch = { inventory: [leathers, token, { id: "coat2", name: "Second Coat", soakLayers: [{ type: "physical", value: 3 }, { type: "decay", value: 2 }] }] };
+  const w = INV66.wornSoakLayers(ch);
+  const of = (t) => w.find(l => l.types?.includes(t));
+  check("§66: ⛔ best per type, never a sum — decay 5 (the leathers), physical 3 (the coat), precursor 6 (the token)",
+    of("decay")?.value === 5 && of("physical")?.value === 3 && of("precursor")?.value === 6 && w.length === 3, JSON.stringify(w.map(l => [l.types, l.value])));
+  check("§66: …an empty pack wears nothing, and a typed layer is not a flat soak", INV66.wornSoakLayers({ inventory: [] }).length === 0 && INV66.wornSoak(ch) === 0);
+  check("§66: ⛔ the player seat passes `soakLayers` from what is worn", /soakLayers: \(\(\) => \{ const w = wornSoakLayers\(character\); return w\.length \? w : undefined; \}\)\(\)/.test(rd("engine/encounters.js")));
+}
+
+/* ═════ §67 — THE LINEAGE’S AUTHORED BLEND HAS A READER ═════ */
+// ⛔ `byTradition[t].mix` — 26 blends with Erik's reasons — had zero consumers since it landed. The ground card carries it
+// as `lineageMix` in the band vocabulary, and the wheel's ground row shows it. Unauthored stays absent (§2b).
+console.log("\n── §67 · the lineage blend reaches the card and the row ──");
+{
+  const SUB67 = await import("../engine/substrate.js");
+  const { loadContentHeadless: lch67 } = await import("./headless_content.mjs");
+  const C67 = await lch67();
+  const card = (ab) => SUB67.groundCardFor(ab, { domains: { primary: ab.tradition }, schools: {} }, { schools: C67.schools, substrate: C67.substrateModel, location: C67.locations.millbrook, powerSources: C67.powerSources, locations: C67.locations, foothills: C67.foothills });
+  const aby = Object.values(C67.abilities).find(a => a.tradition === "abyssal");
+  const g = card(aby);
+  check("§67: ⛔ an authored lineage blend reaches the card, in the band vocabulary, sorted, as shares",
+    Array.isArray(g?.lineageMix) && g.lineageMix.length >= 2 && g.lineageMix[0].share >= g.lineageMix[1].share && g.lineageMix.every(m => /^[a-z_]+$/.test(m.source) && !/_nanite$/.test(m.source)), JSON.stringify(g?.lineageMix));
+  const none = Object.values(C67.abilities).find(a => a.tradition && !C67.powerSources?.byTradition?.[a.tradition]?.mix);
+  check("§67: …and a lineage with no authored blend carries none — absent, never a pure mean", !none || card(none)?.lineageMix === null, none?.tradition);
+  check("§67: …and the ground row renders it", /lineage leans/.test(rd("app.js")));
 }
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));

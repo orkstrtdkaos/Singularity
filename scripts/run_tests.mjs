@@ -97,7 +97,10 @@ for (const [name, cmd, args] of run) {
 const ratchet = process.argv.includes("--ratchet");
 const rebase = process.argv.includes("--rebaseline");
 const BASELINE = new URL("../tests/suite_baseline.json", import.meta.url);
-const countOf = (r) => (r.ok ? 0 : (r.fails ?? r.lineCount ?? 1));
+// ⛔ A CRASH COUNTED AS ZERO. `tradition_matrix` died on a null at HEAD for a day: a suite that throws prints no
+// "N FAILURE(S)" and no FAIL line, so `fails` was null, `lineCount` was 0, and `null ?? 0 ?? 1` is 0 — a dead suite
+// read as a green one, and the ratchet waved it through. A non-zero exit is AT LEAST one failure, whatever it printed.
+const countOf = (r) => (r.ok ? 0 : Math.max(1, r.fails ?? r.lineCount ?? 0));
 if (rebase) {
   const { writeFileSync } = await import("node:fs");
   const out = {

@@ -614,3 +614,27 @@ export function usableCombatItems(character, cfg = {}) {
   }
   return out.slice(0, cfg.maxItemMovesShown ?? 6);
 }
+
+/** ⛔ SNG-521 AUTHORED TYPED SOAK ON ITEMS (`soakLayers[]` on `oiled_leathers`, `lattice_token`, …) AND NOTHING READ IT FOR THE
+ *  PLAYER — the fight seat took `character.soak`, a field nothing writes. This is the reader. ⚠️ THE RULE IS THE ONE
+ *  `equipmentBonus` ALREADY USES: what is in the pack counts (there is no equipped flag), BUT two coats are not two
+ *  coats — per damage TYPE (or untyped) the single BEST layer stands, never a sum, so carrying three habits does not
+ *  stack into immunity. Items author no `rank`; a layer defaults to rank 1 exactly as the damage block reads it. */
+export function wornSoakLayers(character) {
+  const best = new Map();   // key: type (or "*" for untyped) → the strongest layer of that type carried
+  for (const item of character?.inventory || []) {
+    for (const l of (Array.isArray(item?.soakLayers) ? item.soakLayers : [])) {
+      const v = Number(l?.value) || 0; if (v <= 0) continue;
+      const types = Array.isArray(l.types) ? l.types : (l.type ? [l.type] : null);
+      const key = types ? types.slice().sort().join("+") : "*";
+      const cur = best.get(key);
+      if (!cur || v > cur.value) best.set(key, { rank: Math.max(1, Number(l.rank) || 1), value: v, ...(types ? { types } : {}), from: item.name || item.id });
+    }
+  }
+  return [...best.values()];
+}
+
+/** The flat number, for a reader that takes one — the untyped layer, or 0. Typed layers answer only their type. */
+export function wornSoak(character) {
+  return wornSoakLayers(character).filter(l => !l.types).reduce((a, l) => Math.max(a, l.value), 0);
+}

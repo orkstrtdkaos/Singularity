@@ -127,11 +127,14 @@ export function holdingNews(holding, before, effects = null) {
 /** ⛔ SNG-356 · PRESENCE 20 — THE OBLIGATION INVERTS. `— owes: X` becomes `— X draws standing from your
  *  holding of it`. ⚠️ NARRATIVE, NOT NUMERIC: nothing is discharged mechanically and no cost is removed.
  *  What changes is who is beholden, which is the whole of "the name is a power in the world". */
-export function holdingsForGM(character, effects = null) {
+export function holdingsForGM(character, effects = null, { hereId = null, nameOf = null } = {}) {
+  // ⛔ SPEC_holding_attributes — the narrator is told when the character is STANDING IN a place they hold, and each
+  // holding arrives as its sentence. A messenger from the post is one thing; being at the post is another.
+  const here = new Set(holdingsAt(character, hereId).map(h => h.id));
   ensureHoldings(character);
   if (!character.holdings.length) return null;
   return character.holdings.map(h =>
-    `- ${h.name} (${h.kind}, ${h.condition}${h.steward ? `, kept by ${h.steward}` : (effects?.unstewardedCeiling ? ", kept by your name" : ", UNKEPT")})`
+    `- ${h.name} (${h.kind}, ${h.condition}${h.steward ? `, kept by ${h.steward}` : (effects?.unstewardedCeiling ? ", kept by your name" : ", UNKEPT")})${here.has(h.id) ? " — YOU ARE STANDING IN IT" : ""} · ${holdingSentence(h, { nameOf })}`
     + (h.obligation
       ? (effects?.obligationDischarged
         ? ` — ${h.obligation}: they draw standing from your holding of it, not the reverse`
@@ -207,4 +210,34 @@ export function transferHolding(character, id, { toEntity = null, toName = null,
   character.formerHoldings = [...(character.formerHoldings || []), rec];
   queueHoldingEvent(character, `${h.name || h.id} is ${toName || toEntity}'s to keep now${h.obligation ? ", and what it owes goes with it" : ""}.`);
   return rec;
+}
+
+/* ═══ SPEC_holding_attributes — A HOLDING IS A MODIFIER ON A PLACE, AND THIS IS THE JOIN ═══
+ *
+ * ⛔ EVERY DELTA THE SPEC LISTS ALREADY EXISTS ON LOCATIONS (`substrateSource`, `dangerLevel`, `waygate`, `learnedAt`) and
+ * every reader it names exists — and NONE of them can ask whether a holding sits on the place. That was the whole gap.
+ * `holdingsAt` is the join. `provides` and `upkeep` are READ here before anyone authors them (reader before field):
+ * a holding may carry `provides: […]` (strings from the spec's families — "worked timber", "safe harbor", "a forge") and
+ * `upkeep: […]` ("a steward's wage"); with neither, the sentence is condition and keeper alone. ⚠️ NO MAGNITUDES:
+ * how many kinds a hold may carry, how much, and what each costs is pass two (RULINGS OWED Q14). Nothing here
+ * changes a number; it makes a holding LEGIBLE at the place it sits, which is what pass two lands on. */
+
+/** The holdings that sit on a place. Empty for a place you hold nothing at, and for no location. */
+export function holdingsAt(character, locationId) {
+  if (!locationId) return [];
+  ensureHoldings(character);
+  return character.holdings.filter(h => h && h.locationId === locationId);
+}
+
+/** ⛔ ERIK'S HARD CONSTRAINT: a hold must be reportable in a SENTENCE. “The mine is running; the watchtower is eating it.”
+ *  Built from what the record actually carries — condition, keeper, and (when authored) what it provides and what it eats. */
+export function holdingSentence(h, { nameOf = null } = {}) {
+  if (!h) return "";
+  const name = h.name || h.id;
+  const state = h.condition === "thriving" ? "is thriving" : h.condition === "holding" ? "is running"
+    : h.condition === "strained" ? "is strained" : h.condition === "failing" ? "is failing" : "stands";
+  const keeper = h.steward ? ` under ${nameOf ? nameOf(h.steward) : h.steward}` : " with nobody keeping it";
+  const gives = Array.isArray(h.provides) && h.provides.length ? `; it provides ${h.provides.join(", ")}` : "";
+  const eats = Array.isArray(h.upkeep) && h.upkeep.length ? `; it eats ${h.upkeep.join(", ")}` : "";
+  return `${name} ${state}${keeper}${gives}${eats}.`;
 }

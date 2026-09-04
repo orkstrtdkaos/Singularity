@@ -83,6 +83,7 @@ evidence and the measured options for each. When one is ruled it gets a paper, a
 | **Q11** | the generator — emit ONE honest rank marked `wantsAuthoring` instead of three template ranks (changes what a minted craft is; six saves hold the old shape) | `SPEC_generative_pipeline` §5.2 | §R2.7 |
 | **Q12** | do Sovereigns advance an arc's stage, or is their feeding the stage's effect; is an agent marked or GM-run | the Sovereign arc | `BUILD_BACKLOG` §5 |
 | **Q13** | marcher → body and the somatic per-craft split (all 39 declare `metaphysical`); per-rank source | `SPEC_body_source` §3–§4 | its ROUND 2 |
+| **Q14** | holdings, pass two — how many attribute types a hold may carry per size tier (`tier`: settlement 96 · region 25 · site 14), magnitude per type and whether it scales with `condition`, upkeep per type, which types require a steward (R25 presence 14/18 already bounds an unkept hold) | `SPEC_holding_attributes` §5, the holdings economy (Q8) | its ROUND 2: every delta it names already exists on locations |
 | `precursor` is not a tradition | `foothills.json` → `notATradition` |
 
 ➡️ ⚠️ **When a content file carries a `_`-prefixed key that states a RULE rather than a fact, it belongs

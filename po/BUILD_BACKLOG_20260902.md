@@ -57,6 +57,9 @@ supplies what production omits. ⛔ **Same shape as `sheetFor`'s `authored` flag
 | `SPEC_undo_sect_merge.md` | ⬜ ROUND 2 | ⚠️ **superseded in part by R33 — re-read before building** |
 | `SPEC_npc_character_sheets.md` | ⬜ ROUND 2 | — |
 | `SPEC_party_contributions.md` | ⬜ ROUND 2 | ⛔ **`PROTECT` has no party-scale reader; Munin contributes nothing** |
+| `SPEC_holding_attributes.md` | ⬜ `design_open` — the exhaustive LIST (pass one); ✅ CCode ROUND 2 appended 2026-09-04 | ⛔ **pass two is Erik's (RULINGS OWED Q14): types per size tier, magnitudes, upkeep, steward-required types.** ⚠️ Its design rule — *a holding is a MODIFIER on a place* — is right and the deltas already exist on locations (`substrateSource`, `dangerLevel`, `waygate`, `learnedAt`); the first build is a reader that lets a holding carry one |
+
+⚠️ **CCode 2026-09-04 — state of this table after the backlog pass (v1.9.345):** §1 built (`§60`); `holding_release_transfer` built (`§61`); `holdings_migration` was already built (the offers exist — Silas's array is empty because his four offers are unanswered in his save); `one_source_of_truth` §4 built (`§62`); `associativity` §4.1 built (`§63`); `progressive_sheets`, `npc_character_sheets`, `npc_sheet_architecture` built; `generative_pipeline` §5.1 built. Every remaining ⬜ waits on a row in `docs/RULINGS.md` → RULINGS OWED, with the evidence in `po/DECISIONS_OWED_20260904.md`.
 
 ---
 

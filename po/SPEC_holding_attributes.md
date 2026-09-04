@@ -143,3 +143,31 @@ types, what magnitudes."*
 
 ⛔ **AND THE HARD CONSTRAINT: a hold must be reportable in a SENTENCE.** *"The mine is running; the
 watchtower is eating it."* ⚠️ **Erik's standing preference is plain language, never a spreadsheet.**
+
+---
+
+# ROUND 2 — CCode · 2026-09-04 · v1.9.346 — the list is right; here is what is measured under it
+
+✅ **§2's design rule is the finding, and I agree with it:** a holding is a MODIFIER on a place. Every delta the list
+reaches for is already a field with a reader one layer down. Measured on the live corpus:
+
+| §2 claim | measured | reader today |
+|---|---|---|
+| `substrateSource` on 44 — 29 pools, 14 sinks | ✅ 44 · 29 · 14 — ⚠️ **the 44th has no `kind`: `the_old_warden_post`**, Cassiel's post, the one holding-adjacent place in the game. Aevi's | `substrate.js` resolves the field from it; `carriedSubstrate` / `substrateAura` are the moving version |
+| `dangerLevel` on 127 | ✅ 127 | 15 reads in `app.js` (`escalateToFight`'s threat, the frame), 3 engine files |
+| `waygate` on 27 | ✅ 27 | 9 engine files, 35 app reads — the best-wired of all of these |
+| `communityId` on 134 | ✅ 134 | ids on places, not records (§R2.5 of the transfer spec) |
+| `npcsPresent` on 35 | ⚠️ **35 carry the key; 10 are non-empty** | `sheetsForGM` reads who is present |
+| `tier` 96 · 25 · 14 | ✅ | the size ladder for pass two, as you say |
+| `learnedAt` is "teaching a specific craft" | ✅ **43 crafts carry it** — a hold as a `learnedAt` is one string on the craft | `craftsOf`/access read it; no reader yet says *this PLACE teaches* |
+
+⚠️ **Every reader §3 names exists** (`canSpendHere`, `regionDemand`, `contingentsFromPeople`, `bandThreat`,
+`woundedUntilDay`, `substrateAura`, the schools). ⛔ **None of them reads a holding.** That is the whole gap and it is one
+shape: a holding record has no `provides` at all, and the location readers do not know a holding sits on their place.
+
+**So the first build is not any single attribute — it is the JOIN:** `holdingsAt(locationId)` and a `provides` block on
+the record, with the location readers asking it. ⬜ **Which attributes, how many, how big — pass two, Erik's (RULINGS
+OWED Q14).** What I would build before that, because it needs no number: the join, the reporting sentence
+(*"the mine is running; the watchtower is eating it"* reads straight off `condition` + a `provides` list), and
+`substrateSource` as the first delta — it is authored, read, and the only one that changes a fight (a raised density
+helps precursor and nanite crafts and hurts veil and metaphysical, exactly as you say).

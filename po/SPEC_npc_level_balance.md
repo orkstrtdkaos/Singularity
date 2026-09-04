@@ -42,7 +42,30 @@ brought into the party."*
 
 ## §2 — OF YOU: charge, missions, and a floor
 
-### 2a · ⛔ CHARGE PAYS ON COMPLETION AND CONDITION-CHANGE, NEVER ON ELAPSED TIME
+### 2a · ⚠️ CORRECTED BY ERIK — 15 LEVELS IS FINE, JUST NOT FROM SITTING STILL
+
+> Erik 2026-09-02: *"I actually think 15 levels for Cassiel is probably fine — it's just that he's not
+> getting them all from sitting still. He's **building, negotiating, acting for Silas.** That includes some
+> fights most likely — and the act of his building is likely **pushing some Arc.** So the few levels the
+> building itself gives shouldn't be the only way a delegate levels up."*
+
+⛔ **AEVI'S FIRST DRAFT CAPPED A DELEGATE AT COMPLETIONS AND THAT WAS WRONG.** It read a charge as *waiting
+somewhere* when a charge is **a job**, and a job is full of deeds.
+
+➡️ ✅ **A DELEGATE ACCRUES ON THE AWAY TERMS (§3) *PLUS* CHARGE — NEVER INSTEAD OF THEM.**
+
+| what Cassiel is doing | which term pays |
+|---|---|
+| the reconstruction advancing | **charge** — completion and `condition` steps |
+| negotiating for materials, labour, right-of-way | ⚑ **deeds** (`figureCareer`) |
+| defending the site | ⚑ **deeds** — wins, losses, `outOfAction` |
+| ⚠️ **the building itself pushing an arc** | ⚑ **`epicArcPushes` / `arcTurnings`** |
+
+⚠️ **So ~15 levels over half the game's elapsed generation is REASONABLE — because four terms are paying,
+not one.** ⛔ **The charge term alone stays small (one or two levels). That is the point: holding is worth
+little, DOING THE JOB is worth a lot, and the job is mostly not the holding.**
+
+### 2b · charge pays on completion and condition-change, never on elapsed time
 
 **Cassiel Ord has held the Raven's Home since world-count 566 of ~1093 — about HALF the game's elapsed
 generation.** ⚠️ **At Silas's 1.5 days/level that is ~15 levels for standing still**, which would make
@@ -53,7 +76,7 @@ sitting still the best progression in the game.
 ⚠️ **Cassiel's steady progress on one reconstruction is ONE OR TWO levels, not fifteen** — and `progress`
 and `condition` are already written.
 
-### 2b · ⚑ MISSIONS ARE THE CATCH-UP, AND THE DANGER IS THE POINT
+### 2c · ⚑ MISSIONS ARE THE CATCH-UP, AND THE DANGER IS THE POINT
 
 Erik: *"Silas can send them or a party on missions — that's dangerous and beneficial in multiple ways."*
 
@@ -66,7 +89,7 @@ risks and should.** ⚠️ **The danger earns the level, not the elapsed time.**
 ⚠️ **AND IT MUST BE ABLE TO GO WRONG.** Sending Cassiel to close the gap risks the person doing the
 reconstruction. ⛔ **A catch-up with no downside is free levelling with extra steps.**
 
-### 2c · ⛔ THE SERVICE BAND — a floor, not a rate
+### 2d · ⛔ THE SERVICE BAND — a floor, not a rate
 
 **Nobody in your service may fall more than N levels below you.** Erik: *"at high risk if brought into the
 party"* is the failure being prevented.
@@ -124,7 +147,7 @@ nine contests while you were elsewhere HAS BECOME**, and the save already knows 
 
 1. ⛔ **Does `figureCareer` already imply a level?** ⚠️ 71 figures with weighted deeds — ⬜ **is there a
    defensible function from career to level, or does it need a rate Erik sets?**
-2. **What is a completion worth, and a condition step?** ⬜ §2a says one or two levels for Cassiel.
+2. **What is a completion worth, and a condition step?** ⬜ §2b says one or two levels for the CHARGE TERM ALONE — ⚠️ the deeds terms carry the rest.
    ⚠️ **Erik's number.**
 3. **The service band N.** ⬜ Aevi guessed 5. ⚠️ **Erik's number.**
 4. ⛔ **Where does a mission's DANGER resolve?** Is there an existing offscreen-risk path, or does sending

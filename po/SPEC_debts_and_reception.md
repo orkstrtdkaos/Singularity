@@ -90,6 +90,57 @@ clear is a story.**
 
 ---
 
+---
+
+## §4b — ⛔ A DEBT IS HELD BY A PERSON, AND THEY DECIDE
+
+> Erik: *"Tie in the local authority NPC as well — it's THEM that will remember what you did, either way,
+> and they would choose to act on it or not, **depending on who they are.**"*
+
+⚠️ **THIS REPLACES THE ABSTRACT HOLDER IN §3.** `heldBy` is not a place or a people — ⚑ **it is a named NPC
+with a `communityId`.** ➡️ **A debt is remembered by somebody, and escalation is THEIR decision, not a
+threshold.**
+
+### ✅ AND THE FIELD ALREADY EXISTS: `reactsToReputation`
+
+**Tag → response, authored on the NPCs.** Tags in use: `any` ×8 · `kind` ×7 · `patient` ×5 · `honest` ×4 ·
+`violent` ×4 · `truthful` ×4 · `reliable` ×3 · `callous` ×3 · `dismissive` ×3 · `threatening` ×2.
+
+⛔ **AND ONE IS AUTHORED FOR EXACTLY THIS CASE:**
+
+> **The Kestrel** — *"Keeper of the pass-ledger; unofficial law of Kestrel's Roost"* —
+> `reactsToReputation`: **`reliable` · `debtor` · `dangerous`**
+
+⚑ **She has a `debtor` response and a LEDGER.** ➡️ **She is the worked example and needs no new authoring.**
+
+### ⚠️ THE SAME DEBT, FOUR DIFFERENT WORLDS
+
+| holder | reacts to | what the debt becomes |
+|---|---|---|
+| **The Kestrel** | `debtor` | ⛔ **it goes in the ledger, and she is unofficial law — this is where a bounty comes from** |
+| **Corran of the Marchward** | `fair` · `honest` · `partisan` | ⚠️ a mediator: he wants it **SETTLED**, not punished. He may broker it |
+| **Ceriad of the Harborward** | `any` · `judging` · `harbored` | *"she takes in"* — ⚠️ **she may shelter you anyway and think less of you** |
+| **Greta** | `kind` · `menacing` · `traveler` | alone at altitude. She feeds you and remembers |
+| **Ilma, Keeper of the Boards** | `truthful` · `evasive` · `any` | ⚑ **thirty years of the Edge District's accounts.** She does not forget and does not tell |
+
+➡️ ⛔ **SO ESCALATION IS NOT A LADDER THE WORLD CLIMBS — IT IS A CHOICE A PERSON MAKES**, and the same act
+in two towns produces a bounty in one and a brokered settlement in the other. ⚠️ **That is the content.**
+
+### ⬜ WHAT THIS CHANGES IN THE SPEC
+
+1. ⛔ **`heldBy` is an NPC id.** The place is `communityId`, derived from them — **not the other way round.**
+2. ⚠️ **Escalation reads `reactsToReputation`.** ⬜ A holder with no `debtor`-shaped tag may simply **not act**
+   — and *"nothing happens and they remember"* **is a legitimate outcome**, not a gap.
+3. ⚑ **If the holder DIES or departs, the debt goes with them** — ⬜ inherited by a successor, or forgotten.
+   ⚠️ **`unavenged` already models a grievance outliving its moment; this can too.**
+4. ⛔ **A debt is settleable BY TALKING TO THEM.** ➡️ That is what makes B a redemption arc rather than a
+   payment screen — ⚠️ **and Corran would broker one where the Kestrel would not.**
+
+⬜ **CCode: this answers §5 Q3 (who holds it) and reshapes Q4 — a hit squad is sent BY SOMEONE, so
+`contingentsFromPeople` should draw from THEIR community.**
+
+---
+
 ## §5 — ROUND 2 QUESTIONS
 
 1. ⛔ **`settlementStanding` has no reader — is that the real gap?** ⚠️ `peopleDisposition` covers a PEOPLE

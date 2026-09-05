@@ -190,11 +190,11 @@
    "description": "⛔ Without these `contributionsOf` defaults everyone to HARM — a master smith counts as a striker. Read at band AND party scale."
   },
   "domains": {
-   "type": "array",
-   "items": {
-    "type": "string"
-   },
-   "description": "Which domains they draw from — `kitFor` reads this when growth adds a craft."
+   "type": [
+    "object",
+    "array"
+   ],
+   "description": "⚑ `{primary, secondary, tertiary}` — R25's STANDING structure, and what `kitFor` draws from. ⚠️ 41 of 43 are objects; the two arrays are Pell and Veth, authored by Aevi in the wrong shape and owed a fix."
   },
   "sex": {
    "type": [
@@ -246,15 +246,15 @@
    "description": "⬜ Crafts this person will NOT learn, with a reason. ⚠️ For a stated judgement (Veth refuses `calling_back`), NEVER for a gap in what got authored — a data gap is not a personality."
   },
   "people": {
-   "type": "array",
-   "description": "Named relationships."
+   "type": "string",
+   "description": "⚠️ THE SPECIES, not a relationship list — 'human', 'rootkin', 'ent'. ⛔ Aevi read the field NAME and declared an array; 43 of 43 carry a string."
   },
   "teaches": {
-   "type": "array",
-   "items": {
-    "type": "string"
-   },
-   "description": "⚑ R33 `learnedAt`'s other end — crafts they can hand on."
+   "type": [
+    "string",
+    "array"
+   ],
+   "description": "⚑ R33 `learnedAt`'s other end. ⚠️ 22 carry a STRING (prose: 'the attending craft, to those who ask properly'); an array of craft ids is the machine-readable form and both are accepted."
   },
   "canStrike": {
    "type": "boolean",
@@ -282,5 +282,6 @@
    "type": "string"
   }
  },
- "_schemaGap_20260905": "⛔ THE SCHEMA DECLARED 25 PROPERTIES AND KNEW ABOUT NONE OF THE WORK OF THE LAST TWO WEEKS. Added 22: level, subAttributes, abilities, assistTags, domains, sex, romanceEligible, physicality, intimacyNotes, gear, inventory, practice, closed, people, teaches, canStrike, status, statusNote, image, aliases, bondType, bondStage. ⚠️ BOTH AUTHORED SHEETS (Pell, Veth) CARRIED TEN UNDECLARED FIELDS INCLUDING `abilities` — the sheet itself. ⛔ `additionalProperties` is unset, so JSON Schema defaults PERMISSIVE and nothing ever failed: THE VALIDATOR HAS NEVER CHECKED A SINGLE FIELD THAT MATTERS FOR COMBAT. Pell could have carried `abilties: []` and passed. ⬜ DELIBERATELY STILL PERMISSIVE — closing it would red-line 43 existing files at once. ⚠️ The value here is that a typo in `abilityId` or a rank of 5 now FAILS, and that the fields are DOCUMENTED where an author will look. ⚑ ASKED BY ERIK 2026-09-05: 'make sure the sheet schemas are sufficient for all the new updates we just made to holds, etc.' They were not."
+ "_schemaGap_20260905": "⛔ THE SCHEMA DECLARED 25 PROPERTIES AND KNEW ABOUT NONE OF THE WORK OF THE LAST TWO WEEKS. Added 22: level, subAttributes, abilities, assistTags, domains, sex, romanceEligible, physicality, intimacyNotes, gear, inventory, practice, closed, people, teaches, canStrike, status, statusNote, image, aliases, bondType, bondStage. ⚠️ BOTH AUTHORED SHEETS (Pell, Veth) CARRIED TEN UNDECLARED FIELDS INCLUDING `abilities` — the sheet itself. ⛔ `additionalProperties` is unset, so JSON Schema defaults PERMISSIVE and nothing ever failed: THE VALIDATOR HAS NEVER CHECKED A SINGLE FIELD THAT MATTERS FOR COMBAT. Pell could have carried `abilties: []` and passed. ⬜ DELIBERATELY STILL PERMISSIVE — closing it would red-line 43 existing files at once. ⚠️ The value here is that a typo in `abilityId` or a rank of 5 now FAILS, and that the fields are DOCUMENTED where an author will look. ⚑ ASKED BY ERIK 2026-09-05: 'make sure the sheet schemas are sufficient for all the new updates we just made to holds, etc.' They were not.",
+ "_typesCorrected_20260905": "⛔ AEVI'S FIRST PASS DECLARED TYPES FROM THE FIELD NAMES RATHER THAN FROM THE FILES, AND RED-LINED ALL 43 NPCs. `people` is the SPECIES ('human'), not relationships. `domains` is `{primary, secondary, tertiary}` — R25's standing structure — not a list. `teaches` is prose in 22 files. ⚠️ MEASURED AND CORRECTED. ⛔ The same failure the whole project keeps finding: SHE READ THE NAME AND INFERRED THE SHAPE. ✅ The one real finding stands — the schema knew nothing about `abilities`, `assistTags`, `sex`, `physicality` or the R45c bearer record."
 }

@@ -9,9 +9,11 @@
  "role": "Former Ashwarden warden of the March; teacher of the attending craft, and a Grave-Caller who does not advertise it. Keeps a market stall at the crossroads.",
  "homeLocation": "gen-waygate",
  "people": "Valleyfolk",
- "domains": [
-  "Death"
- ],
+ "domains": {
+  "primary": "ashwarden",
+  "secondary": "threnodist",
+  "tertiary": "umbral"
+ },
  "appearance": "A still, direct woman past forty. Grey coming in at the temples, kept short. Weathered from eleven years of standing outdoors at a threshold. She holds a market stall at the crossroads and does not work it — the goods are laid out plainly and she watches the road over them. ⚠️ WHAT YOU NOTICE IS THE STILLNESS: she does not shift, fidget, or fill a silence, and it reads as attention rather than coldness once you have been on the receiving end of it.",
  "personality": {
   "warmth": 3,
@@ -192,5 +194,9 @@
  "physicality": "Past forty, tall and long-boned, weathered from eleven years standing outdoors at a threshold. Grey coming in at the temples, kept short. Strong through the shoulders from a warden's work and unremarkable everywhere else — she has never had time to be decorative and would not know what it was for. WHAT CATCHES THE EYE: the stillness. She does not shift, fidget or fill a silence, and once you have been on the receiving end of that attention it stops reading as coldness.",
  "intimacyNotes": "⛔ SHE IS SILAS'S TEACHER and `romanceEligible: false` reflects that — an author decision per R24, not an omission. ⚠️ THIS ENTRY EXISTS BECAUSE A GM STILL NEEDS TO DESCRIBE HER BODY — in a fight, at a forge, wet from a river — and the absence of it was why she read as furniture. ⛔ FOR ANOTHER CHARACTER she would be a hard, slow, entirely honest proposition. ⚠️ AND A CORRECTION: Aevi first built her whole sheet around 'she has never struck anything' and called the absences characterisation. NOBODY HAD AUTHORED HER. A data gap is not a personality.",
  "_physWhy": "⚠️ Authored per `po/CONTENT_POLICY_physicality.md`. ⛔ ADULT. The attraction comes OUT of who this person is rather than being applied on top, character bounds hold in intimacy, consent is authored in their own voice, and each entry names something intimacy must NOT resolve.",
- "_rebuild_20260902": "⛔ SHEET REBUILT. THE FIRST VERSION WAS BUILT ON A DATA GAP READ AS CHARACTER. Aevi wrote 'the absences are the characterisation' and excluded every necromantic craft because the save showed fifteen meetings with no strike. ⚠️ ERIK: 'she was never authored so the GM didn't know what to do with her — that's why she never strikes. Don't take that as her not being able to strike or even wanting to strike. I'd like her to know the Necromancy side FOR SURE — although she's been teaching the Marrow attend-a-death side too. I THINK THAT'S JUST THE NICE FACE.' ✅ SO THE ATTENDING IS REAL AND IT IS ALSO THE PRESENTABLE HALF. Her rank-3s stay what she TEACHES; the raising, the conjured weapons and the Cut Thread are what she KNOWS and does not advertise. ⚑ AND THE BONES ARE THE TEST FOR IT: a sequence laid out at a market stall with pieces INTENTIONALLY MISSING, to find someone who notices an absence and asks the right question instead of recoiling. ⛔ SHE WAS NOT LOOKING FOR A STUDENT OF ATTENDING. She was looking for someone who could hold the ugly half."
+ "_rebuild_20260902": "⛔ SHEET REBUILT. THE FIRST VERSION WAS BUILT ON A DATA GAP READ AS CHARACTER. Aevi wrote 'the absences are the characterisation' and excluded every necromantic craft because the save showed fifteen meetings with no strike. ⚠️ ERIK: 'she was never authored so the GM didn't know what to do with her — that's why she never strikes. Don't take that as her not being able to strike or even wanting to strike. I'd like her to know the Necromancy side FOR SURE — although she's been teaching the Marrow attend-a-death side too. I THINK THAT'S JUST THE NICE FACE.' ✅ SO THE ATTENDING IS REAL AND IT IS ALSO THE PRESENTABLE HALF. Her rank-3s stay what she TEACHES; the raising, the conjured weapons and the Cut Thread are what she KNOWS and does not advertise. ⚑ AND THE BONES ARE THE TEST FOR IT: a sequence laid out at a market stall with pieces INTENTIONALLY MISSING, to find someone who notices an absence and asks the right question instead of recoiling. ⛔ SHE WAS NOT LOOKING FOR A STUDENT OF ATTENDING. She was looking for someone who could hold the ugly half.",
+ "_domainsWas": [
+  "Death"
+ ],
+ "_domainsFix_20260905": "⛔ `domains` IS `{primary, secondary, tertiary}` — R25's standing structure, and what `kitFor` draws from when growth adds a craft. ⚠️ Aevi authored it as an ARRAY on both sheets she wrote; 41 of 43 existing NPCs had it right. ✅ Corrected from the craft lists actually on the sheet."
 }

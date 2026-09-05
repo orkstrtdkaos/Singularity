@@ -555,7 +555,8 @@
    "_powerSystemWas": "reach_violence_peace",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "touchTier": {
-    "why": "one word, close enough to be heard by them and nobody else."
+    "why": "one word, close enough to be heard by them and nobody else.",
+    "contactOnly": true
    },
    "_touchTierWhy": "⛔ AUTHORED `touchTier` — the flavour form, per `CORRECTION_R47_touch_tier.md`. ⚠️ THE DERIVED DEFAULT IS THE MECHANISM; this is the IMPROVEMENT, never the prerequisite. ⚑ THE STRIPPING IS THE POINT (CCODE-266): one target, at contact, no dice, no ongoing, no area — 'the craft with no power behind it — you have to be there, and it is barely anything.' ⛔ A touch that kept a die would be r1 at a discount."
   },

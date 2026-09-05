@@ -65,17 +65,31 @@ PRECURSOR : ORDERED NANITE   ::   VEIL : METAPHYSICAL
 **PRECURSOR** is the lattice itself — structure, density, the old apparatus still running. It wants **dense
 ground** and works best where the works are thick.
 
-**NANITE** is the made copy: ordered where someone maintains it, **wild** where nobody does. It is the one
-source with no favourite ground at all — it goes where its makers put it and where people carry it.
+**NANITE** is the made copy — and **ordered and wild are one source in two states, not two materials.**
+
+⛔ **WILD IS NOT NEGLECT. IT IS SOMEBODY'S WORK.** Rootkin and Churnfolk break ordered nanite back to wild.
+Seraphim and Enginewrights order wild nanite into ordered. ⚑ **That conversion is a live argument between
+four traditions over which direction the same material should run**, and it is going on right now, in
+several places at once, without anybody calling it a war.
+
+**Ordered nanite has no favourite ground** — it goes where its makers put it and where people carry it.
+⚠️ **Wild nanite has one: the gaps.** It thrives in the places nobody is maintaining, which is why the
+argument is really about who gets to decide what a place is for.
 
 **THE VEIL** is the pure absence. ⚑ **The far side is the VOID** — not a place with different rules but the
 absence of the rules. Veil craft is not dark magic. **It is subtraction.** It wants **thin ground**, because
 it draws on the lack of a thing rather than the thing.
 
 **METAPHYSICAL** is the Veil reached from the human side — mind past matter, will made effective. It asks
-little of the place and everything of the practitioner. ⚠️ **And it is the only source that reads TWO
-grounds**: it needs **meaning** to work on and **thin apparatus** to work through, and those pull against
-each other.
+everything of the practitioner, ⚠️ **and it is the only source that reads TWO grounds at once.**
+
+⛔ **It needs MEANING to work on and THIN APPARATUS to work through, and those pull against each other.**
+Meaning is a ceiling, not a penalty: **in a place that means nothing to anyone, a metaphysical craft is
+capped rather than merely made harder.** And lattice in the ground gets in the way of the reaching.
+
+⚠️ **Which is the Numinous's whole problem.** The places thick with meaning — old shrines, ground people
+have died on, somewhere a thing was decided — **are usually thick with lattice too**, so they live where the
+meaning is and are permanently, slightly obstructed by the floor they must stand on to reach it.
 
 Meaning gathers where people are. A shrine has it. A temple has more. **A village has it simply by being
 lived in — and a place that empties loses it.**
@@ -193,7 +207,7 @@ it is courteous, and it is not interested. ⛔ **Nobody has proved they exist.**
 
 ⛔ **AND THEN THERE ARE THE PEOPLE WHERE YOU ARE — and who they are depends entirely on where you started.**
 
-Exesa has a hundred and thirty-five authored places across more than a dozen regions, and **most of the
+Exesa has a hundred and thirty-five authored places across **thirty-eight regions**, and **most of the
 people you meet will be neither famous nor written down in advance.** Some are authored. Many are made by
 the world as you go, and the ones who matter get remembered, given a name, and kept.
 

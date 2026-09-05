@@ -769,10 +769,14 @@
     "strength",
     "presence"
    ],
-   "notForClasses": [],
+   "notForClasses": [
+    "feral_construct",
+    "made_weapon"
+   ],
    "_saveBonus": "the target's own weight on the save. Measured 2026-09-04 (5,000 rounds, equal fresh foes, equal tier): 0 → 66% of landed lethal hits kill · 10 → 58% · 20 → 48% · 30 → 38%. Set to 20 to meet Erik's own calibration for the lethal rung (CCODE-42: 'against a healthy foe of equal level it might be a 50/50'; finisher.odds.baseByRung.lethal is 48). A run-down, pressed×3 target dies ~94%; a physical-20/strength-24 target is barely hit and never dies fresh.",
    "saveBonus": 20,
-   "defaultKillCost": null
+   "defaultKillCost": null,
+   "_notForClassesWhy": "⛔ AUTHORED BY AEVI 2026-09-05, six days after R35 shipped with this EMPTY — until now the death save could be aimed at anything. ⚑ THE TEST IS THE CRAFT'S OWN PROSE: `the_cut_thread` notFor — 'it cannot be aimed at what has no thread: A MACHINE, A FIGURE, A PRECURSOR WORKING.' A thread is a life that RUNS and can be ENDED. ⛔ BARRED — `feral_construct` (hollow-pace · rust-choir gnats · lantern ambusher · the Kept Hunger · the Gearfather): a MACHINE still running its errand. No thread — a mechanism, and you BREAK a mechanism rather than end it. ⛔ BARRED — `made_weapon` (the Unrefusing Blade · the Pure of Ash · the Severed Choir): a PRECURSOR WORKING. It was never alive to stop. ✅ NOT BARRED — `manifested_creature` · `substrate_warped_beast` · `great_manifestation`: they live, however strangely, and a life that runs can be cut. ⚠️ A great manifestation is HARD to stop, and that is what the opposed save is for — DIFFICULTY IS NOT IMMUNITY. ⛔ NOT BARRED — `narrowed_dead`, AND THIS IS THE DELIBERATE ONE. R29: attending preserves personhood across the crossing, so what comes back is LESS OF SOMEONE, not nothing. ⚑ THERE IS STILL A THREAD THERE — which is the horror and the mercy both — and the Cut Thread in an Ashwarden's hands is exactly the craft that should be able to answer it. `the_gathering` is `narrowed_dead` and its authored counter is WARD, not a blade; barring the save would not have protected it and would have made a mercy impossible. ⚠️ `static` ALREADY BARS THE INERT and is checked separately — this list is for things that MOVE and still have no thread."
   },
   "turn": {
    "note": "CCODE-45 (Erik): a TURN is sense -> action -> bonus, not a single exchange. 'the sense action, the main action, then the bonus action - for each player and opponent get tallied up and then narrated - the net result sets up the next round.' The sense step is OPTIONAL (skip to conserve energy, if you have no sense skill, or if a craft has blinded you), carries the cost of the ability used, and is LOCKED once its GM narration lands. A good sense buys a NAMED bonus on the action roll — never a hidden fudge. CCode's calls, all dials: senseMovesMomentum false (else momentum swings 3x/turn and the measured CCODE-38 pacing is void); the bonus step grant threshold was MEASURED, not guessed — CCode first proposed crit-only, and the simulation overturned it: crit-only left 20% of peer fights UNRESOLVED at 30 turns (median 21). crit+success gives median 13 turns, 0% unresolved, 82% player win / 18% down. The sim also proved the sense step is worth taking at all: sensing every turn raises the peer win-rate from 53% to 71%.",

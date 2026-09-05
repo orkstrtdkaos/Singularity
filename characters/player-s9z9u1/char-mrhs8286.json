@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 31,
-  "xp": 3002,
+  "xp": 3007,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -206,7 +206,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.01425942345328658,
+    "spectrumId": -0.06354645228062225,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
@@ -222,7 +222,7 @@
   "maxHealth": 196,
   "health": 196,
   "maxEnergy": 287,
-  "energy": 287,
+  "energy": 281,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2180,56 +2180,28 @@
         "player": "Wake before dawn and step out to check the moorland approach — something in the network's quiet is different.",
         "summary": "Silas wakes at dawn to find the relay network silent—and spots an urgent courier approaching from the south on the morning road.",
         "narration": "You wake before the moorland stirs—not to urgency, but to the particular silence that comes when something changes. Pell sleeps deep beside you, her breathing steady, the child settled beneath her ribs. Huginn is already awake on the shelf, utterly still, which is its own form of attention.\n\nYou rise careful and quiet, leaving her the warmth of the bed. The post's interior is still dark—the lamp burned down hours ago—but your eyes have learned this space. You dress quick and step through the threshold into the pre-dawn grey.\n\nThe moorland air bites cold. Nothing is wrong—that's the clarity that stops you. The relay mechanism should have sung in the night. Deni's music-box carries messages across the whistle-mark network; the last three nights, it answered something on the far side of the moor every few hours. Regular as tide. Tonight it stayed silent. You walk the perimeter slowly, reading the ground, the wards, the marked boundary stones—all of it solid, all of it held. The ward at the threshold is unbroken. But the silence from the network is absolute.\n\nThen you catch it: a different kind of signal. Not the relay mechanism. Not the whistle-marks. Something on the road to the south—a faint runner's rhythm, measured and fast. Not panicked. Not slow. *Urgent.* A courier on the relay circuit, moving between posts. And the fact that they're running hard toward the Whistling Woman at dawn, toward YOU, means news has come that would not wait for daylight.\n\n*You feel it settle into you — a new steadiness. (Level 31: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
+      },
+      {
+        "player": "Send Huginn out to get a sense of if the runner is alone, or in trouble, or bringing trouble.. Use order and pattern sense.",
+        "summary": "A courier approaches Whistling Woman at dawn carrying urgent news—alone, patterned wrong, carrying something the relay network refused.",
+        "narration": "You step back into the threshold's shadow and catch Huginn's eye with a look—the bird lifts without ceremony, wings catching the pre-dawn grey, and wheels out toward the southern road.\n\nIt is back in less than a minute, landing hard on the post's stone step. Not panicked—Huginn does not panic—but the angle of its body reads clear: attention. Urgent attention.\n\nYou lean down and the bird tilts its head. What you read in the set of its eye and the cant of its attention is plain: the runner comes alone. One horse, one person. But the ORDER around her is wrong—the pattern she carries is fractured, scattered like something that was supposed to hold together has come apart in her hands. Huginn has seen a lot of endings; what it reads in this runner is someone carrying news that has broken something. Not her body. Something else.\n\nShe is maybe fifty yards out now, moving fast but not panic-fast. A professional rider who knows the moorland. But whatever message she carries has cost her something—you can read it in the way she sits the saddle, in the urgency that is not quite flight.\n\nPell is stirring behind you in the post. The relay network's silence now has a shape: this runner, this message, something the chain could not carry and needed a body to bring instead."
       }
     ],
     "lastTurn": {
-      "narration": "You wake before the moorland stirs—not to urgency, but to the particular silence that comes when something changes. Pell sleeps deep beside you, her breathing steady, the child settled beneath her ribs. Huginn is already awake on the shelf, utterly still, which is its own form of attention.\n\nYou rise careful and quiet, leaving her the warmth of the bed. The post's interior is still dark—the lamp burned down hours ago—but your eyes have learned this space. You dress quick and step through the threshold into the pre-dawn grey.\n\nThe moorland air bites cold. Nothing is wrong—that's the clarity that stops you. The relay mechanism should have sung in the night. Deni's music-box carries messages across the whistle-mark network; the last three nights, it answered something on the far side of the moor every few hours. Regular as tide. Tonight it stayed silent. You walk the perimeter slowly, reading the ground, the wards, the marked boundary stones—all of it solid, all of it held. The ward at the threshold is unbroken. But the silence from the network is absolute.\n\nThen you catch it: a different kind of signal. Not the relay mechanism. Not the whistle-marks. Something on the road to the south—a faint runner's rhythm, measured and fast. Not panicked. Not slow. *Urgent.* A courier on the relay circuit, moving between posts. And the fact that they're running hard toward the Whistling Woman at dawn, toward YOU, means news has come that would not wait for daylight.\n\n*You feel it settle into you — a new steadiness. (Level 31: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
-      "sceneSummary": "Silas wakes at dawn to find the relay network silent—and spots an urgent courier approaching from the south on the morning road.",
+      "narration": "You step back into the threshold's shadow and catch Huginn's eye with a look—the bird lifts without ceremony, wings catching the pre-dawn grey, and wheels out toward the southern road.\n\nIt is back in less than a minute, landing hard on the post's stone step. Not panicked—Huginn does not panic—but the angle of its body reads clear: attention. Urgent attention.\n\nYou lean down and the bird tilts its head. What you read in the set of its eye and the cant of its attention is plain: the runner comes alone. One horse, one person. But the ORDER around her is wrong—the pattern she carries is fractured, scattered like something that was supposed to hold together has come apart in her hands. Huginn has seen a lot of endings; what it reads in this runner is someone carrying news that has broken something. Not her body. Something else.\n\nShe is maybe fifty yards out now, moving fast but not panic-fast. A professional rider who knows the moorland. But whatever message she carries has cost her something—you can read it in the way she sits the saddle, in the urgency that is not quite flight.\n\nPell is stirring behind you in the post. The relay network's silence now has a shape: this runner, this message, something the chain could not carry and needed a body to bring instead.",
+      "sceneSummary": "A courier approaches Whistling Woman at dawn carrying urgent news—alone, patterned wrong, carrying something the relay network refused.",
       "choices": [
         {
-          "label": "Step to the roadside and signal the courier to stop—read their approach with The Attended End to know what kind of news they carry",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "scout",
-            "study"
-          ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Wait at the threshold with Huginn visible—let the courier come in on their own terms and read who they are by how they move and what they carry",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "careful",
-            "study"
-          ],
-          "abilityId": "order-sense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Wake Pell and Veth—get the post's people alert and ready before the courier arrives, so you meet them with full company",
+          "label": "Step into the open and raise your hand — meet her at the threshold, ready to receive",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
+          "axes": {
+            "spectrumId": -0.01
+          },
           "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "rally",
-            "lead"
+            "rally"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2238,18 +2210,55 @@
           "emergenceId": null
         },
         {
-          "label": "Move to high ground where you can see the whole approach and read the moorland around the courier—something that breaks the network's silence might not be coming alone",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
+          "label": "Use Order-Sense to read the message's weight before she arrives — what pattern is she holding",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "spectrumId": 0.31
+          },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout",
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Wait until she dismounts — let her come to you, let her speak first",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {
+            "spectrumId": 0.31
+          },
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Shadowstep to the southern approach and intercept her before the post — read her face before she knows you're there",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "spectrumId": -0.17
+          },
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "sneak"
+          ],
+          "abilityId": "shadowstep",
+          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -2257,11 +2266,8 @@
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": -1,
+        "health": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
@@ -2270,34 +2276,58 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "A courier on the relay circuit, running hard toward the post at dawn with urgent news",
-        "from": "The relay network's sudden silence—something has shifted in the connected posts, and word is coming fast"
+        "thing": "A runner on the morning road carrying a message the relay network could not carry",
+        "from": "The relay network's silence—something broke the chain and needed a body instead"
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Whistling Woman post's exterior at pre-dawn grey—moorland breathing slow, the warded threshold solid behind you, and a figure on the southern road moving fast toward the post",
+        "setting": "The Whistling Woman post's threshold and moorland approach at pre-dawn grey—the sun still below the ridge, the air cold and clear, the road south visible for a long distance, a lone rider approaching from the south",
         "npcsPresent": [
           {
+            "name": "The courier",
+            "state": "Approaching on horseback from the south, moving with purpose, pattern fractured"
+          },
+          {
             "name": "Pell Ran Marsh",
-            "state": "Asleep inside the post, deep and settled"
+            "state": "Stirring inside the post from sleep, aware something has changed"
           },
           {
             "name": "Huginn",
-            "state": "Roosted on the shelf inside, awake and attending"
+            "state": "Landed on the stone step, having just returned from scouting, alert and attending"
           }
         ],
         "objects": [
-          "The Whistling Woman post structure—stone and timber, warded at the threshold",
-          "Deni Cors's relay mechanism, silent on the shelf",
-          "The moorland road to the south, where a courier approaches"
+          "The Whistling Woman post structure — warded, stone and timber, warmth still inside",
+          "Deni Cors's relay mechanism — silent on its shelf",
+          "The moorland road to the south — clear sight-line, the courier visible at distance"
         ],
         "threads": [
           "Why the relay network went silent through the night",
-          "What news the courier carries that could not wait for daylight",
-          "Whether the silence means a broken link in the chain or something more deliberate"
+          "What message broke the chain and required a body to carry it",
+          "Whether this news changes the work at the ridge threshold or the expanding network"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "courier_whistling_woman",
+          "name": "—",
+          "role": "Runner on the relay network, arriving with urgent news",
+          "sex": "unknown",
+          "gender": "unknown",
+          "pronouns": "—",
+          "description": "A lone rider on horseback, approaching from the south at dawn with a fractured pattern about them",
+          "note": "Arriving at Whistling Woman post at dawn with news that could not wait for the relay network's chain",
+          "learned": [],
+          "skillsObserved": [
+            "Professional horsemanship",
+            "Moorland navigation"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "En route to the post, minutes away"
+        }
+      ],
       "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
@@ -2314,44 +2344,52 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 7,
-        "why": "slept through the full night, from deep night to pre-dawn"
+        "hoursPassed": 0.5,
+        "why": "pre-dawn to dawn — the courier arrives as first light breaks"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "Pre-dawn moorland: a figure in running clothes on the southern road, moving fast toward the Whistling Woman post in the grey light, Silas standing at the threshold with Huginn visible on the post's roofline behind him.",
+      "imagePrompt": "A lone courier on horseback approaching a warded moorland post at dawn, the pre-dawn grey giving way to first light—a figure carrying urgent news, the pattern around them broken and scattered",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/Pre-dawn%20moorland%3A%20a%20figure%20in%20running%20clothes%20on%20the%20southern%20road%2C%20moving%20fast%20toward%20the%20Whistling%20Woman%20post%20in%20the%20grey%20light%2C%20Silas%20standing%20at%20the%20threshold%20with%20Huginn%20visible%20on%20the%20post's%20roofline%20behind%20him.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=85228&nologo=true"
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Whistling Woman post's exterior at pre-dawn grey—moorland breathing slow, the warded threshold solid behind you, and a figure on the southern road moving fast toward the post",
+      "setting": "The Whistling Woman post's threshold and moorland approach at pre-dawn grey—the sun still below the ridge, the air cold and clear, the road south visible for a long distance, a lone rider approaching from the south",
       "npcsPresent": [
         {
+          "name": "The courier",
+          "state": "Approaching on horseback from the south, moving with purpose, pattern fractured"
+        },
+        {
           "name": "Pell Ran Marsh",
-          "state": "Asleep inside the post, deep and settled"
+          "state": "Stirring inside the post from sleep, aware something has changed"
         },
         {
           "name": "Huginn",
-          "state": "Roosted on the shelf inside, awake and attending"
+          "state": "Landed on the stone step, having just returned from scouting, alert and attending"
         }
       ],
       "objects": [
-        "The Whistling Woman post structure—stone and timber, warded at the threshold",
-        "Deni Cors's relay mechanism, silent on the shelf",
-        "The moorland road to the south, where a courier approaches"
+        "The Whistling Woman post structure — warded, stone and timber, warmth still insi",
+        "Deni Cors's relay mechanism — silent on its shelf",
+        "The moorland road to the south — clear sight-line, the courier visible at distan"
       ],
       "threads": [
         "Why the relay network went silent through the night",
-        "What news the courier carries that could not wait for daylight",
-        "Whether the silence means a broken link in the chain or something more deliberate"
+        "What message broke the chain and required a body to carry it",
+        "Whether this news changes the work at the ridge threshold or the expanding network"
       ]
     },
-    "beats": 3
+    "beats": 4
   },
   "clock": {
     "schemaVersion": 1,
@@ -5082,6 +5120,35 @@
         "day": 14
       },
       "met": 2
+    },
+    "courier-whistling-woman": {
+      "id": "courier-whistling-woman",
+      "name": "—",
+      "role": "Runner on the relay network, arriving with urgent news",
+      "description": "A lone rider on horseback, approaching from the south at dawn with a fractured pattern about them",
+      "firstMet": {
+        "locationId": "gen-whistling-woman-post",
+        "day": 16
+      },
+      "relationship": 0,
+      "history": [
+        "[d16] Arriving at Whistling Woman post at dawn with news that could not wait for the relay network's chain"
+      ],
+      "knownFacts": [],
+      "skillsObserved": [
+        "Professional horsemanship",
+        "Moorland navigation"
+      ],
+      "status": "active",
+      "sex": "unknown",
+      "gender": "unknown",
+      "pronouns": "—",
+      "statusNote": "En route to the post, minutes away",
+      "lastSeen": {
+        "locationId": "gen-whistling-woman-post",
+        "day": 16
+      },
+      "met": 1
     }
   },
   "placeMemory": {
@@ -6252,10 +6319,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "The music-box mechanism—a carrier for Deni's whistle-song in physical form, a tool for the relay network",
-        "from": "Deni Cors's methodical care in building the post; the infrastructure of the waystation network she has begun; the recognition that relay…"
-      },
-      {
         "thing": "The relay mechanism—Deni's working vocabulary of melodies built into the network",
         "from": "Deni Cors's design and Pell's presence beside you, reading craft the way you do"
       },
@@ -6270,6 +6333,10 @@
       {
         "thing": "A courier on the relay circuit, running hard toward the post at dawn with urgent news",
         "from": "The relay network's sudden silence—something has shifted in the connected posts, and word is coming fast"
+      },
+      {
+        "thing": "A runner on the morning road carrying a message the relay network could not carry",
+        "from": "The relay network's silence—something broke the chain and needed a body instead"
       }
     ],
     "wantProgress": {
@@ -14258,22 +14325,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 16.286406982684568,
-    "cerebral": 16.633862643142617,
-    "social": 10.74316674355606,
-    "generous": 4.580739913714316,
-    "cautious": 6.203055785071034,
-    "physical": 0.42580632255640444,
-    "risky": 0.10213099834738182,
-    "ruthless": 0.22229644842922114,
-    "carousing": 0.036142620640365934,
-    "amorous": 3.912797973905413,
-    "patient": 0.7474293748117475,
-    "stealth": 0.000007769061150481945,
-    "devotion": 0.3174694892517469,
-    "craft": 3.509135886923286,
-    "leadership": 1.0334310820766215,
-    "deception": 0.03720489136807784
+    "strategic": 16.879246808117454,
+    "cerebral": 17.21801607706405,
+    "social": 10.474587574967158,
+    "generous": 4.466221415871458,
+    "cautious": 6.047979390444258,
+    "physical": 0.4151611644924943,
+    "risky": 0.09957772338869728,
+    "ruthless": 0.2167390372184906,
+    "carousing": 0.03523905512435679,
+    "amorous": 3.8149780245577776,
+    "patient": 0.7287436404414538,
+    "stealth": 0.000007574834621719897,
+    "devotion": 0.3095327520204532,
+    "craft": 3.421407489750204,
+    "leadership": 1.007595305024706,
+    "deception": 0.0362747690838759
   },
   "aptitudes": [
     "strategist",
@@ -14282,7 +14349,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 952,
+  "actionCount": 953,
   "grantsVersion": 1,
   "reconcileVersion": 33,
   "gallery": [
@@ -15020,8 +15087,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1788649640125,
-  "rev": 1817,
+  "updatedAt": 1788650253900,
+  "rev": 1818,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18349,7 +18416,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 98,
+      "order_sense": 99,
       "palework": 31,
       "deathsense": 49,
       "shadowstep": 25,
@@ -18446,7 +18513,7 @@
     "lastUsed": {
       "deathsense": 42,
       "the-attended-end": 28,
-      "order_sense": 41,
+      "order_sense": 67,
       "boundary_stone": 28,
       "palework": 25,
       "the_shadow_work": 25,
@@ -19128,7 +19195,7 @@
     "valley": 646,
     "the_palelands": 6,
     "the_center": 151,
-    "the_echo_vale": 14
+    "the_echo_vale": 15
   },
   "foreclosed": [
     "rootkin",
@@ -19413,10 +19480,10 @@
     {
       "id": "sess-30",
       "startedAt": "2026-09-05T23:07:20.107Z",
-      "lastAt": "2026-09-05T23:07:20.107Z",
+      "lastAt": "2026-09-05T23:17:33.892Z",
       "startDay": 67,
       "endDay": 67,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -19904,20 +19971,20 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 328,
-    "choices": 327,
-    "characterDeltas": 161,
-    "scene": 328,
-    "npcUpdates": 293,
+    "sceneSummary": 329,
+    "choices": 328,
+    "characterDeltas": 162,
+    "scene": 329,
+    "npcUpdates": 294,
     "factUpdates": 27,
     "placeUpdates": 73,
     "codexUpdates": 195,
-    "timeOps": 304,
-    "imagePrompt": 26,
-    "sceneEnded": 108,
+    "timeOps": 305,
+    "imagePrompt": 27,
+    "sceneEnded": 109,
     "itemUpdates": 7,
     "questUpdates": 42,
-    "offer": 41,
+    "offer": 42,
     "moveTo": 20,
     "delegateOps": 4,
     "deeds": 12,
@@ -19931,11 +19998,11 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 38,
+    "gambitApt": 39,
     "markDefiningMoment": 1,
     "_engineClosedScene": 3
   },
-  "_opTurns": 328,
+  "_opTurns": 329,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -19943,7 +20010,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 45,
+      "applied": 46,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },
@@ -20655,13 +20722,13 @@
     "travel": 9,
     "careful": 4,
     "study": 10,
-    "scout": 5,
+    "scout": 6,
     "lead": 2,
     "ask": 1,
     "plan": 6,
     "negotiate": 2,
     "prepare": 5,
-    "investigate": 1,
+    "investigate": 2,
     "craft": 5,
     "help": 5,
     "discipline": 1,
@@ -20758,6 +20825,14 @@
       "day": 16,
       "worldDay": 67,
       "actionCount": 951
+    },
+    {
+      "companionId": "marrow",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 16,
+      "worldDay": 67,
+      "actionCount": 952
     }
   ],
   "_standingOpRefusals": [

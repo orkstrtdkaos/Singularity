@@ -2683,7 +2683,9 @@
    "_powerSystemWas": "reach_mechanical_spiritual",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10.",
-   "tier": 1
+   "tier": 1,
+   "levelReq": 1,
+   "_levelReqFix_20260904": "⛔ `levelReq` WAS ABSENT — it read as tier None in every audit. Set to 1: it is the Numinous starting sense, alongside `hallowed_ground` and `steady_soul` at T1."
   },
   {
    "id": "mech_sense",
@@ -3106,6 +3108,165 @@
    "_t5Fix_20260901": "⛔ T5 — RANK IS MASTERY. The first authoring put a NEW COST at rank 3 on every craft (Erik: 'that was quite the cavalier authoring'). ⚠️ The gate missed it — its SELFTAX regex targets self-harm phrasings and these were world-consequence costs. ✅ Rank 3 now LIFTS the rank-1 limitation; the consequence moved to `intensity.surge`, which the player CHOOSES.",
    "_t7Fix_20260901": "⛔ T7 — SECOND-TURN TEST, applied after Erik: 'make sure the way you wrote these is clearly something a player would WANT to do.' ⚠️ FAILURES FOUND: `hallowed_ground` was passive (stand still) and narrowly conditional (shadow+appetite only) — now it names a CONCRETE effect (one rung lower), widens to four ward types, and the wielder ACTS NORMALLY while it holds. `thin_step`'s precondition was GM-owned and unknowable — the player can now always tell whether the step is there BEFORE spending. `administered_mercy`'s 'it takes the time it takes' was atmosphere, not adjudicable — now it costs a full turn, stated.",
    "_gainAxesFix_20260901": "⛔ CCode's ratchet caught `gainAxes: ['magnitude']` at rank 3 — `magnitude` is NOT one of the nine (range · duration · damage · scope · targets · quality · autonomy · conditions · tempo). ⚠️ CCode correctly REFUSED to guess the replacement — deriving it is authoring, not wiring. ✅ Derived per SNG-468 from the rank's own text: r3 text: 'Cross to a thin place you KNOW rather than one you can see. THE SIGHT REQUIREMENT IS GONE.' → `range` (reach extends past line of sight) + `conditions` (the must-see precondition lifts). NOT magnitude — nothing about the step gets bigger, it gets FARTHER and less conditional."
+  },
+  {
+   "id": "plain_seeming",
+   "name": "Plain Seeming",
+   "levelReq": 2,
+   "tier": 2,
+   "energyCost": 6,
+   "powerSystem": "metaphysical",
+   "attribute": "social",
+   "tradition": "numinous",
+   "axes": {
+    "mechanical_spiritual": 0.5
+   },
+   "functions": [
+    "conceal"
+   ],
+   "harmRung": "none",
+   "gated": "learned",
+   "challengeTypes": [
+    "SUBTERFUGE",
+    "SOCIAL"
+   ],
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "narrationHints": "A shrine that reads as a shed. The awe does not arrive, and nobody can say why they walked past.",
+   "description": "Numenwork obscure-craft. Take the significance off a thing until it reads as ordinary.",
+   "notFor": "Hiding an OBJECT — it hides what a thing MEANS, not where it is. A watchman still sees the door; he simply does not care about it.",
+   "mechanic": {
+    "range": 10,
+    "note": "SOCIAL attribute — meaning is social, and so is its absence"
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Plain Seeming",
+     "grants": "Lay ordinariness over a place, an object or a moment, and it stops registering as significant. The eye passes. ⚠ IT DOES NOT HIDE THE THING — it hides that the thing MATTERS.",
+     "cannot": "Sight is unaffected; anyone actively searching for that specific object finds it. It thins with every person who already knows what this is.",
+     "functions": [
+      "conceal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Unremarked",
+     "grants": "It holds without you present, and it survives being LOOKED AT — a Numen-Sense reading the ground comes back empty rather than blocked.",
+     "cannot": "⚠ A BLANK WHERE MEANING SHOULD BE IS ITSELF A SIGN to anyone who knows the place had some. You cannot make an absence look like a presence.",
+     "functions": [
+      "conceal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "quality"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Nothing Here",
+     "grants": "⛔ THE KNOWING LIMIT IS GONE: rank 1 thinned against anyone who already knew what this was, and this does not. It takes the meaning out from under THEM too — a pilgrim stands in the shrine they walked a year to reach and feels nothing, and goes home.",
+     "cannot": "It does not last past a season, and what you unmade does not come back on its own. ⚠ SOMEBODY HAS TO MEAN IT AGAIN.",
+     "functions": [
+      "conceal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ]
+    }
+   ],
+   "_authored_20260904": "⛔ SPIRIT HAD NO OBSCURE. TRACKER: 'no sense, no obscure, no social verb.' The sense claim is now false (`numen_sense` reveals) but this one held — `conceal` did not appear in the domain at all, and Dark holds five. ⚑ THE SPIRIT OBSCURE IS NOT INVISIBILITY: it takes the MEANING off a thing, which is the exact inverse of `hallowed_ground` (meaning laid ON a place until the place holds it). ⚠️ R38 makes it load-bearing — meaning is the CEILING for metaphysical craft, so unmaking meaning starves the ground itself."
+  },
+  {
+   "id": "the_answering",
+   "name": "The Answering",
+   "levelReq": 2,
+   "tier": 2,
+   "energyCost": 7,
+   "powerSystem": "metaphysical",
+   "attribute": "social",
+   "tradition": "numinous",
+   "axes": {
+    "mechanical_spiritual": 0.7
+   },
+   "functions": [
+    "soothe",
+    "persuade"
+   ],
+   "harmRung": "none",
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "operativeAxis": [
+    "quality",
+    "targets"
+   ],
+   "narrationHints": "You do not tell them anything. You are simply there before they finish asking, and they stop needing to.",
+   "description": "Numenwork attending-craft. Be present to what someone is carrying, so completely that the carrying eases.",
+   "notFor": "Changing what they want, or what they will do. It eases the weight; it does not move the person. And it cannot be used on someone who has not, in some way, asked.",
+   "mechanic": {
+    "range": 3,
+    "note": "SOCIAL attribute. ⚠ REQUIRES AN ASK — spoken, or plain in the body"
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Answering",
+     "grants": "Attend one person completely and what they are carrying gets lighter — fear, grief, a compulsion, the pressure of a working on them. They resist their next hostile influence one rung better.",
+     "cannot": "⚠ THEY MUST HAVE ASKED, in some fashion. It does not reach someone closed. And it eases; it does not remove.",
+     "functions": [
+      "soothe"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Answered Early",
+     "grants": "You are there BEFORE the asking finishes — it lands on someone mid-fear rather than after, and it reaches everyone in arm's reach who is carrying the same thing.",
+     "cannot": "⚠ ANSWERING EARLY MEANS YOU KNEW. People notice, and not everyone is glad to have been read.",
+     "functions": [
+      "soothe",
+      "persuade"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "tempo"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Standing Answer",
+     "grants": "⛔ THE ASKING LIMIT IS GONE: rank 1 could not reach someone closed, and this can. You attend what a person will not admit to carrying, and it eases anyway. ⚠ A tradition, a household or a whole watch can be attended at once.",
+     "cannot": "It never becomes command. They are eased, not moved, and they may spend the ease on something you would not choose. ⛔ AND IT COSTS YOU: what you attend, you carry a little of, until you set it down.",
+     "functions": [
+      "soothe",
+      "persuade"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "quality"
+     ]
+    }
+   ],
+   "_authored_20260904": "⛔ SPIRIT HAD NO SOCIAL VERB — only `command`, which is the wrong one for this domain. ⚑ AND THE LORE ALREADY NAMED THE CRAFT: `the_three.md` on PARAKLETOS — 'it never had a shape to appear in. IT APPEARS AS ANSWERING… it does not speak — IT RESPONDS EARLY.' ⚠️ Rank 2 is that line made mechanical. ➡️ It is also the anti-Sovereign act in craft form: a Sovereign is a thing that stopped asking, and this is a craft that cannot work unless someone asks."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

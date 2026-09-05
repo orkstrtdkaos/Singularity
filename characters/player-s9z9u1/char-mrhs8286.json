@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 30,
-  "xp": 2974,
+  "xp": 2979,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -218,7 +218,7 @@
   "maxHealth": 191,
   "health": 191,
   "maxEnergy": 282,
-  "energy": 242,
+  "energy": 239,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2179,53 +2179,43 @@
         "player": "Arrive at the Whistling Woman post and assess what Deni Cors began",
         "summary": "Silas and Pell arrive at the Whistling Woman post—a small moorland waystation built by Deni Cors. The post is well-made, provisioned, and ready to serve as a rest-point on the relay network.",
         "narration": "The made gate falls away behind you as the moorland path narrows toward the north, Deni Cors's whistle-marks still faint in the gathering dusk—stone cairns set at intervals, each one catching the last light before it fades entirely. Pell walks steady beside you, her breathing even, one hand trailing along the rope-guide someone has strung between the marks. Huginn circles back from ahead, landing on your shoulder without ceremony—the message delivered, and nothing urgent in his bearing.\n\nThe Whistling Woman post materializes from the mist slowly: a low stone structure with a slate roof, built into the moorland itself rather than rising from it. Smoke curls from a small chimney, thin and steady. The windows are unshuttered, showing amber lamplight inside. A warded threshold sits at the entry—nothing aggressive, just a marked place. Deni Cors's work, plainly. The post is small, built for function: a single room for rest, a shelf of supplies, a slate board by the door with chalk marks you cannot yet read in the failing light.\n\nYou push open the door. Warmth meets you—a small stove burns at the far corner, tended carefully. There is a ledger on a rough table, a bed with folded blankets, oil lamps with full reservoirs, and a water barrel with a dipper. On the shelf: preserved goods, salt, a first-aid kit wrapped in cloth, and a small wooden music-box with a mechanism inside that—when you look closer—is made to hold a specific whistle-shape. Deni's mark is on everything: efficient, small, and made to outlast its maker. A message waits on the table, written in chalk on a flat stone: *For the one who tends the gate. Water is good. The whistle-path holds through the high mist. Deni.*"
+      },
+      {
+        "player": "Examine the music-box and the whistle-mechanism—understand how Deni's relay carries",
+        "summary": "Silas and Pell arrive at the Whistling Woman post on the moorland relay network and examine Deni Cors's music-box relay mechanism—discovering it is not a fixed signal but a working vocabulary of melodies that carry messages across the network.",
+        "narration": "You step into the post's warmth and close the warded threshold behind you. The stove's heat radiates steadily from the far corner, and the small space settles around you both—intimate, provisional, the kind of shelter that announces itself as temporary the moment you enter it.\n\nPell moves to the shelf where the music-box sits, her movements deliberate. You join her there, and the box is smaller than you expected—palm-wide, dark wood with a simple catch. You open it. Inside, the mechanism is neat, wound tight: a cylinder of pinned brass, springs, and a striker-arm set to sing on a fixed sequence. But what catches your attention is the *other* box tucked beneath it—shallow, layered, containing a second set of pins and a small brass key marked with Deni's hand.\n\nThe music-box plays one song. The second set plays another. The mechanism is built to be *changed*—the cylinder lifts free, the pins can be reset or swapped, and a new pattern can be laid down in minutes. Deni has left the instructions clear: this is not a fixed signal. It's a working vocabulary. A series of simple melodies, each one carrying a message the relay-network knows how to read. Play the song that means *passage clear*. Play the one that means *warden present*. Play the one that means *attend the watch*. The whistle-marks on the moorland are set to listen, and they will carry the tone forward to whatever network-post lies beyond.\n\nPell's hand rests on the edge of the shelf, reading the mechanism with her fingertips the way she reads iron. \"She built it to last,\" Pell says quietly. \"And to mean something.\" You nod. Deni Cors does not make things that sit unused."
       }
     ],
     "lastTurn": {
-      "narration": "The made gate falls away behind you as the moorland path narrows toward the north, Deni Cors's whistle-marks still faint in the gathering dusk—stone cairns set at intervals, each one catching the last light before it fades entirely. Pell walks steady beside you, her breathing even, one hand trailing along the rope-guide someone has strung between the marks. Huginn circles back from ahead, landing on your shoulder without ceremony—the message delivered, and nothing urgent in his bearing.\n\nThe Whistling Woman post materializes from the mist slowly: a low stone structure with a slate roof, built into the moorland itself rather than rising from it. Smoke curls from a small chimney, thin and steady. The windows are unshuttered, showing amber lamplight inside. A warded threshold sits at the entry—nothing aggressive, just a marked place. Deni Cors's work, plainly. The post is small, built for function: a single room for rest, a shelf of supplies, a slate board by the door with chalk marks you cannot yet read in the failing light.\n\nYou push open the door. Warmth meets you—a small stove burns at the far corner, tended carefully. There is a ledger on a rough table, a bed with folded blankets, oil lamps with full reservoirs, and a water barrel with a dipper. On the shelf: preserved goods, salt, a first-aid kit wrapped in cloth, and a small wooden music-box with a mechanism inside that—when you look closer—is made to hold a specific whistle-shape. Deni's mark is on everything: efficient, small, and made to outlast its maker. A message waits on the table, written in chalk on a flat stone: *For the one who tends the gate. Water is good. The whistle-path holds through the high mist. Deni.*",
-      "sceneSummary": "Silas and Pell arrive at the Whistling Woman post—a small moorland waystation built by Deni Cors. The post is well-made, provisioned, and ready to serve as a rest-point on the relay network.",
+      "narration": "You step into the post's warmth and close the warded threshold behind you. The stove's heat radiates steadily from the far corner, and the small space settles around you both—intimate, provisional, the kind of shelter that announces itself as temporary the moment you enter it.\n\nPell moves to the shelf where the music-box sits, her movements deliberate. You join her there, and the box is smaller than you expected—palm-wide, dark wood with a simple catch. You open it. Inside, the mechanism is neat, wound tight: a cylinder of pinned brass, springs, and a striker-arm set to sing on a fixed sequence. But what catches your attention is the *other* box tucked beneath it—shallow, layered, containing a second set of pins and a small brass key marked with Deni's hand.\n\nThe music-box plays one song. The second set plays another. The mechanism is built to be *changed*—the cylinder lifts free, the pins can be reset or swapped, and a new pattern can be laid down in minutes. Deni has left the instructions clear: this is not a fixed signal. It's a working vocabulary. A series of simple melodies, each one carrying a message the relay-network knows how to read. Play the song that means *passage clear*. Play the one that means *warden present*. Play the one that means *attend the watch*. The whistle-marks on the moorland are set to listen, and they will carry the tone forward to whatever network-post lies beyond.\n\nPell's hand rests on the edge of the shelf, reading the mechanism with her fingertips the way she reads iron. \"She built it to last,\" Pell says quietly. \"And to mean something.\" You nod. Deni Cors does not make things that sit unused.",
+      "sceneSummary": "Silas and Pell arrive at the Whistling Woman post on the moorland relay network and examine Deni Cors's music-box relay mechanism—discovering it is not a fixed signal but a working vocabulary of melodies that carry messages across the network.",
       "choices": [
         {
-          "label": "Read the ledger—see who has passed through and what they left",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Walk the post's perimeter and check Deni's warding—assess its strength and intent",
+          "label": "Play the music-box—test which melody Deni left as 'all is well'",
           "attribute": "practical",
           "subAttribute": "craft",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout"
+            "craft",
+            "study"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Settle Pell into the post for the night—tend the stove, prepare the bed, check her steadiness",
+          "label": "Ask Pell what she reads in the box's construction—her ironsense may see what the mechanism is built for",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "care"
+            "romantic"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2234,18 +2224,16 @@
           "emergenceId": null
         },
         {
-          "label": "Examine the music-box and the whistle-mechanism—understand how Deni's relay carries",
+          "label": "Settle in for the night—the post is provisioned and warded, and the road north can wait for morning",
           "attribute": "practical",
-          "subAttribute": "craft",
+          "subAttribute": "wits",
           "axes": {},
-          "difficulty": "normal",
+          "difficulty": "easy",
           "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "working_model",
-          "energyCost": 3,
-          "trivial": false,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -2263,100 +2251,68 @@
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": {},
+      "adoptSchool": null,
       "offer": {
-        "thing": "The music-box mechanism—a carrier for Deni's whistle-song in physical form, a tool for the relay network",
-        "from": "Deni Cors's methodical care in building the post; the infrastructure of the waystation network she has begun; the recognition that relay posts need something to carry the pattern forward"
+        "thing": "The relay mechanism—Deni's working vocabulary of melodies built into the network",
+        "from": "Deni Cors's design and Pell's presence beside you, reading craft the way you do"
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Whistling Woman post—a low moorland waystation built into the high ground, slate roof, amber light in the windows. Evening fading to night. The air is cool and the mist clings to the grass beyond the threshold.",
+        "setting": "Inside the Whistling Woman post—a low moorland waystation with a warm stove, a simple bed, a shelf of provisions, oil lamps, and a warded threshold. Evening has faded to full night outside. The air is cool and still.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "standing inside the warmth of the post, hand still on her belly, reading the small space with a blacksmith's eye for how things are built"
+            "state": "Standing at the shelf beside you, hand resting on the music-box, reading the mechanism with her fingertips"
           },
           {
             "name": "Huginn",
-            "state": "perched on the low shelf near the stove, warming itself by the heat, watching the room with complete calm"
+            "state": "Perched on the low shelf near the stove, wings folded, watching with complete calm"
           }
         ],
         "objects": [
-          "A small stone stove burning steadily at the far corner",
-          "A rough table with the ledger and a chalk-stone message",
+          "The music-box with removable cylinder and striker-arm",
+          "The shallow brass-key box beneath it with spare pins",
+          "The stove burning steadily in the corner",
+          "A rough table with the ledger and chalk-stone message",
           "A bed with folded blankets",
-          "A shelf with preserved goods, salt, first-aid kit, and the wooden music-box",
-          "Oil lamps (full reservoirs)",
+          "A shelf with preserved goods, salt, first-aid kit",
+          "Oil lamps with full reservoirs",
           "A water barrel with a dipper",
-          "A warded threshold at the entry"
+          "The warded threshold at the entry"
         ],
         "threads": [
-          "What the ledger will tell you about previous travelers and the post's history",
-          "The strength and purpose of Deni's warding",
-          "How the music-box mechanism connects to the relay network",
-          "The road ahead to the next post or waypoint on the network"
+          "What message Deni left as 'all is well' for the relay network",
+          "How the melody-signals connect to the larger network beyond this post",
+          "Whether the night can be safely spent here before moving on",
+          "The road north from this point and what lies ahead on the relay circuit"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "meet",
-          "npcId": "deni-cors",
-          "name": "Deni Cors",
-          "role": "Waystation builder and relay-network architect",
-          "sex": "female",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "A methodical builder and relay-keeper—her work speaks louder than her voice. Every nail is placed for purpose; every post carries her mark.",
-          "note": "Left the Whistling Woman post fully provisioned and warded. Her message to the warden is plain and direct.",
-          "learned": [
-            "Deni Cors builds waystation infrastructure for the relay network",
-            "Her method is efficiency and preparation—the posts are made to outlast their maker and to serve whoever tends them next",
-            "She uses whistle-paths and whistle-marks to navigate the moorland; the music-box mechanism at the post is built to carry her pattern forward"
-          ],
-          "skillsObserved": [
-            "Waystation construction and provisioning",
-            "Relay network design",
-            "Warding and threshold-marking"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Departed before your arrival; her work at the post is complete and waiting for the warden to take it up"
-        }
-      ],
+      "npcUpdates": [],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "The Whistling Woman post is fully built, provisioned, and warded—a waystation on the moorland relay network with shelter, supplies, and Deni Cors's relay mechanism in place",
+          "note": "The music-box relay mechanism is a working vocabulary of melodies—each song carries a message across the whistle-mark network. Cylinder and pins can be swapped to change the signal.",
+          "flag": null,
           "subPlace": {
             "name": "Whistling Woman Post interior",
-            "parent": "gen-whistling-woman-post",
-            "note": "A single warm room with stove, bed, table, shelf of supplies, water barrel, and oil lamps. Warded at the threshold.",
+            "parent": "Whistling Woman Post",
+            "note": "A single warm room with stove, bed, table, shelf of supplies, water barrel, and oil lamps. Warded at the threshold. Contains Deni Cors's relay mechanism.",
             "visited": true
           }
         }
       ],
-      "discovery": {},
+      "discovery": null,
       "codexUpdates": [
-        {
-          "topic": "deni-cors",
-          "label": "Deni Cors",
-          "kind": "person",
-          "entityId": "deni-cors",
-          "fact": "Waystation builder and relay-network keeper—builds small posts into the moorland for the expanding relay network. Her method is preparation and efficiency; every post is provisioned and warded for whoever tends it next. She leaves clear instructions and marks the path with whistle-songs.",
-          "links": [
-            "gen-whistling-woman-post",
-            "the-relay-network",
-            "the-threshold-post"
-          ]
-        },
         {
           "topic": "the-relay-network",
           "label": "The Relay Network",
           "kind": "lore",
-          "fact": "A growing infrastructure of waystation posts connected by warded thresholds and relay mechanisms. Deni Cors is building the physical waypoints; the network connects the ridge Threshold Post (north) to the mill gate (south) and extends both directions. The Whistling Woman post is the northernmost point so far, serving as a rest-point and relay-carrier for the network's growing reach.",
+          "entityId": null,
+          "fact": "The relay network uses melody-based signals—a music-box mechanism with interchangeable cylinders and pins, each melody carrying a specific message. The Whistling Woman post is built into the moorland and uses whistle-marks (stone cairns) to carry signals to the next network station.",
           "links": [
-            "the-threshold-post",
+            "whistling-woman-post",
             "deni-cors",
+            "the-threshold-post",
             "millbrook"
           ]
         }
@@ -2369,53 +2325,59 @@
       "projectOps": [],
       "bandOps": [],
       "deathOps": [],
-      "newEncounter": {},
-      "unlockPrecursor": {},
-      "unlockSubstrate": {},
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 2,
-        "why": "walked the moorland path from the ridge Threshold Post to the Whistling Woman post as evening faded to night"
+        "hoursPassed": 0.5,
+        "why": "Arriving at the post and examining the mechanism—a brief assessment"
       },
-      "moveTo": {
-        "location": "gen-whistling-woman-post",
-        "why": "traveled north on the moorland path through Deni Cors's whistle-marks, arriving at the newly built relay waystation"
-      },
+      "moveTo": null,
       "stateOps": [],
-      "imagePrompt": "A small stone waystation built into moorland at dusk—smoke curling from a chimney, warm light spilling from an unshuttered window. The building is solid, built to last, with a warded threshold marked by cairns. Mist clings to the grass beyond. Inside, the glow of a stove and the rough comfort of a maker's careful work.",
-      "gambitOps": {},
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "The music-box sits open on a weathered wooden shelf in lamplight—a palm-wide dark wood mechanism with its cylinder exposed, pins catching the flame-glow. Beside it, the shallow brass-key box with swappable pins. Through the window behind, moorland mist and the faint line of whistle-mark cairns disappearing into night.",
+      "newAbility": null,
+      "gambitOps": null,
       "gambitApt": false,
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/A%20small%20stone%20waystation%20built%20into%20moorland%20at%20dusk%E2%80%94smoke%20curling%20from%20a%20chimney%2C%20warm%20light%20spilling%20from%20an%20unshuttered%20window.%20The%20building%20is%20solid%2C%20built%20to%20last%2C%20with%20a%20warded%20threshold%20marked%20by%20cairns.%20Mist%20clings%20to%20the%20grass%20beyond.%20Inside%2C%20the%20glow%20of%20a%20stove%20and%20the%20rough%20comfort%20of%20a%20m%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=50900&nologo=true"
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Whistling Woman post—a low moorland waystation built into the high ground, slate roof, amber light in the windows. Evening fading to night. The air is cool and the mist clings to the grass beyond the threshold.",
+      "setting": "Inside the Whistling Woman post—a low moorland waystation with a warm stove, a simple bed, a shelf of provisions, oil lamps, and a warded threshold. Evening has faded to full night outside. The air is cool and still.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "standing inside the warmth of the post, hand still on her belly, reading the small space with a blacksmith's eye for how"
+          "state": "Standing at the shelf beside you, hand resting on the music-box, reading the mechanism with her fingertips"
         },
         {
           "name": "Huginn",
-          "state": "perched on the low shelf near the stove, warming itself by the heat, watching the room with complete calm"
+          "state": "Perched on the low shelf near the stove, wings folded, watching with complete calm"
         }
       ],
       "objects": [
-        "A small stone stove burning steadily at the far corner",
-        "A rough table with the ledger and a chalk-stone message",
+        "The music-box with removable cylinder and striker-arm",
+        "The shallow brass-key box beneath it with spare pins",
+        "The stove burning steadily in the corner",
+        "A rough table with the ledger and chalk-stone message",
         "A bed with folded blankets",
-        "A shelf with preserved goods, salt, first-aid kit, and the wooden music-box",
-        "Oil lamps (full reservoirs)",
+        "A shelf with preserved goods, salt, first-aid kit",
+        "Oil lamps with full reservoirs",
         "A water barrel with a dipper",
-        "A warded threshold at the entry"
+        "The warded threshold at the entry"
       ],
       "threads": [
-        "What the ledger will tell you about previous travelers and the post's history",
-        "The strength and purpose of Deni's warding",
-        "How the music-box mechanism connects to the relay network",
-        "The road ahead to the next post or waypoint on the network"
+        "What message Deni left as 'all is well' for the relay network",
+        "How the melody-signals connect to the larger network beyond this post",
+        "Whether the night can be safely spent here before moving on",
+        "The road north from this point and what lies ahead on the relay circuit"
       ]
     },
-    "beats": 6
+    "beats": 7
   },
   "clock": {
     "schemaVersion": 1,
@@ -6130,7 +6092,8 @@
     "gen-whistling-woman-post": {
       "visits": 1,
       "notes": [
-        "[d15] The Whistling Woman post is fully built, provisioned, and warded—a waystation on the moorland relay network with shelter, supplies, and Deni Cors's relay mechanism in place"
+        "[d15] The Whistling Woman post is fully built, provisioned, and warded—a waystation on the moorland relay network with shelter, supplies, and Deni Cors's relay mechanism in place",
+        "[d15] The music-box relay mechanism is a working vocabulary of melodies—each song carries a message across the whistle-mark network. Cylinder and pins can be swapped to change the signal."
       ],
       "flags": {},
       "lastVisit": 15,
@@ -6141,7 +6104,7 @@
           "parentId": "gen-whistling-woman-post",
           "day": 15,
           "visited": true,
-          "note": "A single warm room with stove, bed, table, shelf of supplies, water barrel, and oil lamps. Warded at the threshold."
+          "note": "A single warm room with stove, bed, table, shelf of supplies, water barrel, and oil lamps. Warded at the threshold. Contains Deni Cors's relay mechanism."
         }
       }
     }
@@ -6329,10 +6292,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "Veth's quiet acknowledgment that the structure is 'rightly made'—a warden's approval earned through honest craft, not words",
-        "from": "her own discipline: judgment of sound structure and sound purpose, the mark of teaching taking hold"
-      },
-      {
         "thing": "Veth's quiet readiness to teach you what a true post requires—the standards of the craft, not just the structure",
         "from": "Veth's own want: to see Silas become a TRUE Ashwarden, right in his judgment, sound in his discipline"
       },
@@ -6347,6 +6306,10 @@
       {
         "thing": "The music-box mechanism—a carrier for Deni's whistle-song in physical form, a tool for the relay network",
         "from": "Deni Cors's methodical care in building the post; the infrastructure of the waystation network she has begun; the recognition that relay…"
+      },
+      {
+        "thing": "The relay mechanism—Deni's working vocabulary of melodies built into the network",
+        "from": "Deni Cors's design and Pell's presence beside you, reading craft the way you do"
       }
     ],
     "wantProgress": {
@@ -14316,22 +14279,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 19.19834875252507,
-    "cerebral": 18.813051019126227,
-    "social": 10.02497248817666,
-    "generous": 4.646419533582527,
-    "cautious": 7.7904787192999265,
-    "physical": 0.5347743449934237,
-    "risky": 0.12826732448884834,
-    "ruthless": 0.2791842941396293,
-    "carousing": 0.04539187244392592,
-    "amorous": 0.16686028423789515,
-    "patient": 0.9387038969832332,
-    "stealth": 0.00000975724024720766,
-    "devotion": 0.39871305139559193,
-    "craft": 2.248641991963066,
-    "leadership": 1.297896251740516,
-    "deception": 0.04672598869003349
+    "strategic": 18.718390033711945,
+    "cerebral": 19.34272474364807,
+    "social": 9.774348175972243,
+    "generous": 4.530259045242964,
+    "cautious": 7.595716751317428,
+    "physical": 0.5214049863685881,
+    "risky": 0.12506064137662712,
+    "ruthless": 0.27220468678613857,
+    "carousing": 0.04425707563282777,
+    "amorous": 0.16268877713194776,
+    "patient": 0.9152362995586524,
+    "stealth": 0.000009513309241027468,
+    "devotion": 0.38874522511070214,
+    "craft": 2.192425942163989,
+    "leadership": 1.265448845447003,
+    "deception": 0.045557838972782656
   },
   "aptitudes": [
     "strategist",
@@ -14340,7 +14303,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 943,
+  "actionCount": 944,
   "grantsVersion": 1,
   "reconcileVersion": 32,
   "gallery": [
@@ -14952,8 +14915,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1788583403007,
-  "rev": 1750,
+  "updatedAt": 1788583578785,
+  "rev": 1751,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18310,7 +18273,8 @@
       "braid_order_sense_palework": 1,
       "the_open_material": 1,
       "the_called_form": 1,
-      "brace": 1
+      "brace": 1,
+      "working_model": 1
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -18366,7 +18330,7 @@
       {
         "abilityId": "hunters_strike",
         "since": "2026-07-12T16:27:52.479Z",
-        "progress": 6
+        "progress": 7
       },
       {
         "abilityId": "pattern_sense",
@@ -18401,7 +18365,8 @@
       "braid_order_sense_palework": 26,
       "the_open_material": 28,
       "the_called_form": 28,
-      "brace": 42
+      "brace": 42,
+      "working_model": 67
     }
   },
   "companionBonds": {
@@ -19058,7 +19023,7 @@
     "valley": 646,
     "the_palelands": 6,
     "the_center": 151,
-    "the_echo_vale": 3
+    "the_echo_vale": 4
   },
   "foreclosed": [
     "rootkin",
@@ -19335,10 +19300,10 @@
     {
       "id": "sess-29",
       "startedAt": "2026-09-05T04:40:35.570Z",
-      "lastAt": "2026-09-05T04:43:22.982Z",
+      "lastAt": "2026-09-05T04:46:18.770Z",
       "startDay": 67,
       "endDay": 67,
-      "beats": 2
+      "beats": 3
     }
   ],
   "company": [
@@ -19826,20 +19791,20 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 318,
-    "choices": 317,
-    "characterDeltas": 151,
-    "scene": 318,
+    "sceneSummary": 319,
+    "choices": 318,
+    "characterDeltas": 152,
+    "scene": 319,
     "npcUpdates": 286,
     "factUpdates": 27,
-    "placeUpdates": 70,
-    "codexUpdates": 193,
-    "timeOps": 294,
-    "imagePrompt": 21,
-    "sceneEnded": 98,
+    "placeUpdates": 71,
+    "codexUpdates": 194,
+    "timeOps": 295,
+    "imagePrompt": 22,
+    "sceneEnded": 99,
     "itemUpdates": 7,
     "questUpdates": 42,
-    "offer": 38,
+    "offer": 39,
     "moveTo": 20,
     "delegateOps": 4,
     "deeds": 12,
@@ -19853,11 +19818,11 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 29,
+    "gambitApt": 30,
     "markDefiningMoment": 1,
     "_engineClosedScene": 2
   },
-  "_opTurns": 318,
+  "_opTurns": 319,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -19865,7 +19830,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 41,
+      "applied": 42,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },
@@ -20226,7 +20191,7 @@
   "skillUses": {
     "travel": 9,
     "careful": 4,
-    "study": 8,
+    "study": 9,
     "scout": 4,
     "lead": 2,
     "ask": 1,

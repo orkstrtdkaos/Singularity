@@ -62,11 +62,11 @@ check("§2: …and naming the craft it came from", prot?.fromCraft === "step_bet
 }
 
 /* ══ §3 — THE WRITER DOOR, which is the one that did not exist ═══════════════════════════════════ */
-const appSrc = rd("app.js");
+const appSrc = rd("app.js") + "\n" + rd("engine/battle_turn.js");   // §71 (2026-09-05): openGuards lives in the engine; app.js delegates
 check("§3: app.js CALLS protectionFromCraft — the caller it never had",
   appSrc.includes("protectionFromCraft(g.ability"));
 check("§3: …and WRITES state.protections — the assignment that existed nowhere",
-  appSrc.includes("enc.state.protections = list"));
+  appSrc.includes("encState.protections = list") && appSrc.includes("openGuards(character, enc?.state, decl"));
 // ⛔ AND THE DECAY, or a rank-2 guard stands forever and becomes the wall the action cost prevents.
 check("§3: tickProtections is called each round", appSrc.includes("tickProtections(enc.state.protections)"));
 // ⚠️ DISPATCHED ON THE AUTHORED BLOCK, NOT A CRAFT NAME — `step_between` has no single `function`, and a

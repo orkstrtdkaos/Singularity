@@ -4801,7 +4801,15 @@ console.log("\n── §71 · the harness drives the production path (engine/bat
   // ── the character fixture is the app's shape, and the menu is the app's menu
   check("§71: a character built from a person carries the app's fields (abilities at their ranks, pools, level) and the menu reads them",
     pc71.level === 27 && pc71.abilities.length >= 10 && pc71.abilities.every(a => a.abilityId && a.level >= 1) && pc71.health === pc71.maxHealth && pc71.energy === pc71.maxEnergy
-    && (() => { const m = BT71.battleSkillsForCharacter(pc71, { catalog: C71.abilities, rules: rules71, sb: sb71 }); return m.some(s => s.id === "_strike") && m.some(s => s.id === "_guard") && m.filter(s => !s.id.startsWith("_")).every(s => Number.isFinite(s.energyCost) && s.rank >= 1 && s.tier >= 1); })());
+    && (() => { const m = BT71.battleSkillsForCharacter(pc71, { catalog: C71.abilities, rules: rules71, sb: sb71 }); return m.length <= 40 && m.filter(s => !s.id.startsWith("_")).every(s => Number.isFinite(s.energyCost) && s.rank >= 1 && s.tier >= 1); })());
+  // ⚠️ A FINDING THE REAL PATH SURFACED (2026-09-05): the menu is capped at 40 entries and a craft occupies a slot PER FUNCTION, so
+  // Pell's 23 crafts fill it and the bare moves, the items and the generic senses — pushed after the crafts — fall off the end. The
+  // engine still degrades a spent craft to a bare effort, but the panel would not OFFER "A plain strike" or a drink to a big kit.
+  // Asserted as the truth it is (a small kit carries both bare moves); the cap is a design call, logged in DECISIONS_OWED Q16.
+  check("§71: …the menu cap is REAL — a 23-craft kit fills 40 slots and loses the bare moves; a 3-craft kit carries both (Q16)",
+    (() => { const big = BT71.battleSkillsForCharacter(pc71, { catalog: C71.abilities, rules: rules71, sb: sb71 });
+      const small = BT71.battleSkillsForCharacter({ ...pc71, abilities: pc71.abilities.slice(0, 3), inventory: [] }, { catalog: C71.abilities, rules: rules71, sb: sb71 });
+      return big.length === 40 && !big.some(s => s.id === "_strike") && small.some(s => s.id === "_strike") && small.some(s => s.id === "_guard"); })());
   // ── a duel played through the production path: deterministic, ends in the vocabulary, the knockout reaches the table
   const play71 = (seed) => { const c = RG71.characterFromPerson(pell71, { catalog: C71.abilities, cfg: cfg71, day: 1 }); return RG71.playDuel({ character: c, target: { id: "veth-ondra", name: veth71.name }, content: C71, rng: RG71.mulberry32(seed), day: 1, maxTurns: 40 }); };
   const d1 = play71(7), d2 = play71(7);

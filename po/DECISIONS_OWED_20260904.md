@@ -135,6 +135,14 @@ the change is content — per craft — and it is yours and Aevi's.
   line, so it counts as 0. Mine, next pass.
 
 
+### Q16 · the battle menu is capped at 40 slots, one per craft FUNCTION — a big kit loses its bare moves, items and senses ⛔ found by the real-game harness (2026-09-05)
+
+**Measured (`§71`).** `battleSkillsForCharacter` pushes crafts first (a slot per function), then "A plain strike" and "Raise a
+guard", then the usable items, then the generic senses, and slices to 40. Pell's 23 crafts fill the 40 and everything after
+falls off: no bare strike, no drink, no generic sense on the menu. The engine still degrades a spent craft to a bare effort,
+so the FIGHT works; the PANEL would not offer the costless move or the item to a character with a big kit. ⬜ Raise the cap,
+collapse a craft's functions into one slot, or put the bare moves and items FIRST — a menu decision, Erik's. Nothing built.
+
 ### Q15 · which crafts keep `harmRung: lethal` under R35, and what the other 52 pay ⛔ blocks nothing, shapes every fight
 
 **Measured (v1.9.347).** 53 crafts carry `lethal`/`atrocity` — T1 22 · T2 7 · T3 10 · T4 6 · T5 8 — and **one** (`the_cut_thread`)

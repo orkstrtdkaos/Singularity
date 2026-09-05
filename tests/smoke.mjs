@@ -9788,7 +9788,7 @@ await (async () => {
   check("228 GUARD: a plain new place name (no person signal) mints as a place", personDestination("Cairnhold", { label: "set out for Cairnhold" }, { npcRegistry: {}, locations: locs228 }).isPerson === false);
 
   // wiring: travelIntentOf calls the belt only when the trusted travelTo resolves to no real place.
-  const appSrc228 = readFileSync(join(root, "app.js"), "utf8");
+  const appSrc228 = readFileSync(join(root, "app.js"), "utf8") + "\n" + readFileSync(join(root, "engine/battle_turn.js"), "utf8");   // §71: the apply lives in engine/battle_turn.js
   check("228: travelIntentOf runs the person belt when a trusted travelTo can't place (rejects/redirects, never phantom-mints a person)", /const person = personDestination\(ref, action, \{ npcRegistry: character\.npcRegistry, locations: CONTENT\.locations \}\)/.test(appSrc228) && /if \(person\.isPerson\) return person\.destId \?/.test(appSrc228));
 }
 
@@ -9970,7 +9970,7 @@ await (async () => {
 
   // WIRED into play (not a dead/test-only export): app.js imports frameModel/frameSize, renders the header, and
   // routes takeover-vs-banner; the size signal is stamped onto the def at fire time.
-  const appSrc230 = readFileSync(join(root, "app.js"), "utf8");
+  const appSrc230 = readFileSync(join(root, "app.js"), "utf8") + "\n" + readFileSync(join(root, "engine/battle_turn.js"), "utf8");   // §71: the skill-battle collapse is collapseIfFinished
   check("230: frameModel + frameSize are WIRED into renderPlay (imported + header rendered + size-routed), not dead exports",
     /import \{ frameModel, frameSize.*\} from "\.\/engine\/encounterFrame\.js"/.test(appSrc230) && /const fm = frameModel\(d, e\.state/.test(appSrc230) && /class="enc-frame/.test(appSrc230));
   check("230 P1b: renderPlay routes takeover-vs-banner via frameSize; fireEncounter stamps the size signal (danger) on the def",
@@ -10040,7 +10040,7 @@ await (async () => {
   check("230 §6b WIRING: onChoice applies a finisher COLLAPSE on the non-skill-battle path (guard §89), reading family + degree + the foe's floor",
     /collapseMode\(familiesOfAbility\(fullCatalog\(\)\[choice\.abilityId\], FN_INDEX\), encounterKind\(enc\.def\)\)/.test(appSrc230) && /collapseResult\(resolution\.degree, \{ floor: collapseFloor\(enc\.def, frameContent\.collapseEligibility\) \}\)/.test(appSrc230) && /if \(res === "collapse"\)/.test(appSrc230) && /resolution\.collapse = \{ mode, result: "collapse"/.test(appSrc230));
   check("230 §6b WIRING: a decisive HARM finisher can END the SKILL-BATTLE early (Erik) — momentum swing → degree → floor, meter otherwise untouched",
-    /collapseMode\(\[fam\], "fight"\) === "finish" && swing > 0 && collapseResult\(swingDegree\(swing, meterMax\), \{ floor: collapseFloor\(enc\.def, frameContent\.collapseEligibility\) \}\) === "collapse"/.test(appSrc230) && /outcome: "opponent_fell", state: \{ \.\.\.rr\.state, status: "ended" \}, _collapse: true/.test(appSrc230));
+    /collapseMode\(\[family\], "fight"\) === "finish" && swing > 0\s*&& collapseResult\(swingDegree\(swing, meterMax\), \{ floor: collapseFloor\(def, frameContent\.collapseEligibility\) \}\) === "collapse"/.test(appSrc230) && /outcome: "opponent_fell", state: \{ \.\.\.rr\.state, status: "ended" \}, _collapse: true/.test(appSrc230));
   check("230 §6b: the finisher gamble is surfaced in the frame (collapsible vs too-great)",
     /enc-frame-collapse/.test(appSrc230) && /A decisive finisher could end this in one beat/.test(appSrc230));
 
@@ -10086,7 +10086,7 @@ await (async () => {
 
   // WIRING (source-asserted): both are additive on the existing paths, and do nothing absent Aevi's content.
   check("230 §7b WIRING: the collapse path checks a denying ward FIRST — a held ward blocks the instant-end (onChoice + skill-battle)",
-    /const ward = wardAgainst\(enc\.def, mode, frameContent\.wardDenials\)/.test(appSrc230) && /ward\.denied && !wardBroken\(resolution\.degree, margin, ward\.breakDC\)/.test(appSrc230) && /result: "warded"/.test(appSrc230) && /const ward = wardAgainst\(enc\.def, "finish", frameContent\.wardDenials\)/.test(appSrc230));
+    /const ward = wardAgainst\(enc\.def, mode, frameContent\.wardDenials\)/.test(appSrc230) && /ward\.denied && !wardBroken\(resolution\.degree, margin, ward\.breakDC\)/.test(appSrc230) && /result: "warded"/.test(appSrc230) && /const ward = wardAgainst\(def, "finish", frameContent\.wardDenials\)/.test(appSrc230));
   check("230 §7c WIRING: onChoice trivializes a challenge when the kit voids its premise (trivial bypass or opposed roll)",
     /const triv = trivializes\(enc\.def, kitKeys, frameContent\.challengePremises\)/.test(appSrc230) && /triv === "trivial" \|\| \(triv === "opposed" && \["success", "crit_success"\]\.includes\(resolution\.degree\)\)/.test(appSrc230) && /resolution\.trivialize = \{ craft/.test(appSrc230));
 }
@@ -10621,7 +10621,7 @@ await (async () => {
 // end the fight and never saw the one that does — and a round reported as "neither gains — it's even" was
 // followed by the fight ending, with the cause never stated.
 {
-  const appE = readFileSync(join(root, "app.js"), "utf8");
+  const appE = readFileSync(join(root, "app.js"), "utf8");   // sbEnd stays in app.js; R34b: the threshold is state.breakAt
   const mom = JSON.parse(readFileSync(join(root, "content/packs/core/rules/skill_battle_system.json"), "utf8")).engine.momentum;
   check("ERIK-BUG: the PRESSURE counter — the thing that actually ends a fight — is rendered to the player",
     /class="sb-pressure"/.test(appE) && /driven back \$\{pip\(theirs, brk\)\}/.test(appE),
@@ -10630,9 +10630,9 @@ await (async () => {
     /momentum\?\.pressure\?\.breakAtPressure \?\? 2/.test(appE) && mom?.pressure?.breakAtPressure != null,
     "a hardcoded threshold would silently disagree with the dial Erik and Aevi tune");
   check("ERIK-BUG: an ending says WHY — a pressure-break is named, not left as a non-sequitur after 'it's even'",
-    /brokeOnPressure/.test(appE) && /driven back \$\{brkAt\} times and will not come again/.test(appE));
+    /brokeOnPressure/.test(appE) && /driven back \$\{brkNeeded\} times and will not come again/.test(appE));
   check("ERIK-BUG: the cause is read from the ROUND RESULT, not the pre-round state (which misses the tick that ended it)",
-    /rr\?\.pressure\?\.opponent \|\| 0\) >= brkAt/.test(appE));
+    /rr\?\.pressure\?\.opponent \|\| 0\) >= brkNeeded/.test(appE) && /brkNeeded = rr\?\.state\?\.breakAt\?\.opponent \?\? brkAt/.test(appE));
 }
 
 // ---------- ERIK'S BUG (2026-08-01, Machine log): every round reported "neither gains — it's even" ----------
@@ -10656,7 +10656,8 @@ await (async () => {
     !/sbLogRound\(enc, d, r, enc\.state\.momentum \?\? 0, false\)/.test(appM) && /sbLogRound\(enc, d, r, beforeMom, false\)/.test(appM));
   check("ERIK-BUG: before-momentum is captured BEFORE activeEncounter is overwritten with the new state",
     (() => { const i = appM.indexOf("const beforeMom = character.activeEncounter?.state?.momentum");
-      const j = appM.indexOf("character.activeEncounter = { defId: enc.def.id, state: r.state }");
+      // §71: the write-through is inside applyRoundToCharacter now — the apply call is the write
+      const j = appM.indexOf("applyRoundToCharacter(character, r, d");
       return i > 0 && j > i; })(),
     "captured after the write, it would read the new state and be pinned to 0 all over again");
   check("ERIK-BUG: all three reporters share ONE before-value, so receipt / log / beat cannot disagree",
@@ -10965,7 +10966,7 @@ await (async () => {
 
 // --- SNG-271: the three remaining items from Erik's fight log ------------------------------------------
 {
-  const appSrc271 = readFileSync(join(root, "app.js"), "utf8");
+  const appSrc271 = readFileSync(join(root, "app.js"), "utf8") + "\n" + readFileSync(join(root, "engine/battle_turn.js"), "utf8");   // §71: two of the health writes moved with the apply
   check("271: a margin says WHICH WAY it went — `missed by 33` beats `(margin -33)` beside a roll of 98",
     /const marginText = m => \(Number\(m\) < 0 \? `missed by \$\{Math\.abs\(Number\(m\)\)\}` : `beat by/.test(appSrc271)
     && !/\(margin \$\{r\.you\.roll\.margin\}/.test(appSrc271));
@@ -13706,10 +13707,10 @@ await (async () => {
 
 // --- SNG-272: the two P0/P1 gates the ledger also found missing --------------------------------------
 {
-  const appL = readFileSync(join(root, "app.js"), "utf8");
+  const appL = readFileSync(join(root, "app.js"), "utf8") + "\n" + readFileSync(join(root, "engine/battle_turn.js"), "utf8");   // §71: endBattle owns the XP map
   const encR = JSON.parse(readFileSync(join(root, "content/packs/core/rules/encounters.json"), "utf8"));
   check("272/266: an unknown encounter type falls back to `default` rather than paying zero",
-    /const t = encXp\[enc\.def\.type\] \|\| encXp\.default \|\| \{\}/.test(appL) && Number(encR.default && encR.default.winXp) > 0);
+    /const t = encXp\[def\?\.type\] \|\| encXp\.default \|\| \{\}/.test(appL) && Number(encR.default && encR.default.winXp) > 0);
   check("272/271: a downed player does not take a bonus action",
     /if \(!ended && checkIncapacitation\(character\)\)/.test(appL));
 }
@@ -17926,7 +17927,7 @@ await (async () => {
 
     // ⛔ AND THE OTHER HALF: something has to APPLY it. Forwarding a value nobody consumes is the same bug
     // one step later — which is exactly how conditions.js shipped green with six dead exports.
-    const appSrc228 = readFileSync(join(root, "app.js"), "utf8");
+    const appSrc228 = readFileSync(join(root, "app.js"), "utf8") + "\n" + readFileSync(join(root, "engine/battle_turn.js"), "utf8");   // §71
     check("CCODE-228: sbDeclare CONSUMES rr.imposed and writes a condition to the sheet",
       /if \(rr\.imposed && !rr\.imposed\.refused\)/.test(appSrc228) && /applyCondition\(character, cond\)/.test(appSrc228));
     check("CCODE-228: a PLAYER-side imposition goes on the SHEET (it outlives the fight); an OPPONENT-side one rides the encounter",
@@ -18566,11 +18567,11 @@ await (async () => {
       check("CCODE-245: omitting the rank is NOT the same as passing 0",
         CAP.capabilityMenu(unlearned).tiers.length > 0 && CAP.capabilityMenu(unlearned, 0).tiers.length === 0);
       // ⛔ AND THE CALLERS MUST NOT COLLAPSE IT EITHER — `|| 1` swallows a real 0 one layer up.
-      const appSrc245 = readFileSync(join(root, "app.js"), "utf8");
+      const appSrc245 = readFileSync(join(root, "app.js"), "utf8") + "\n" + readFileSync(join(root, "engine/battle_turn.js"), "utf8");   // §71: the menu and the rank live in the module
       check("CCODE-245: app.js passes the rank through with `??`, so a genuine 0 survives to the module",
         // DUEL §C.2: the owned rank now comes from the character (`?.level ?? …`), not from a field named tier;
         // the `??` is the property, and no `|| 1` may sit on that line.
-        /capabilityMenu\(def, a\.level \?\? 1/.test(appSrc245) && /\?\.level \?\? \(skill\.rank \?\? 1\)/.test(appSrc245)
+        /capabilityMenu\(def, a\.level \?\? 1/.test(appSrc245) && /\?\.level \?\? \(decl\.rank \?\? 1\)/.test(appSrc245)
         && /resolveTier\(cdef, want, ownedRank\)/.test(appSrc245) && !/ownedRank = [^\n]*\|\| 1/.test(appSrc245));
 
       // ⛔ HER §4.2 — r1 WAS FILTERED FROM THE MENU ON MOST OF THE CORPUS, because `tierDeclaresSomething`
@@ -18590,11 +18591,11 @@ await (async () => {
     }
 
     // ⛔ AND THE WIRING: the rank must reach the declaration, or none of this is real in play.
-    const appSrc244 = readFileSync(join(root, "app.js"), "utf8");
+    const appSrc244 = readFileSync(join(root, "app.js"), "utf8") + "\n" + readFileSync(join(root, "engine/battle_turn.js"), "utf8");   // §71
     check("CCODE-244: the skill list carries the TIERS, so the narrator is offered a rank to choose",
       /capabilityMenu\(def, a\.level \?\? 1/.test(appSrc244) && /tiers: menu\.tiers\.map/.test(appSrc244));
     check("CCODE-244: …and sbDeclare puts a VALIDATED rank on the declaration — authoredBlock has always taken one and nothing ever set it",
-      /decl\.rank = v\.ok \? v\.rank/.test(appSrc244) && /resolveTier\(cdef, want/.test(appSrc244));
+      /rank: v\.ok \? v\.rank/.test(appSrc244) && /resolveTier\(cdef, want/.test(appSrc244));
   }
 
 

@@ -236,6 +236,11 @@
   "playerVisibleSurface": "The POSSIBLE ERROR advisory in the prompt and the Repair panel; the ✦ receipt when a correction lands.",
   "whatMakesItFire": "An anomaly detected at assembly (detectAnomalies), or the player opening the Repair panel — the GM emits stateOps, the engine adjudicates."
  },
+ "battle_turn.js": {
+  "purpose": "THE ONE PATH a skill battle takes, in play and in a harness — the menu, the declaration, the rank, the guards, sense → action → bonus, the apply to the character, and the end (XP, the incapacitation table). app.js delegates to it; tests/lib/realgame.mjs drives it.",
+  "playerVisibleSurface": "Every fight turn the panel resolves; the aftermath of a knockout (gear taken, days down, death) — which a skill battle never reached before 2026-09-05.",
+  "whatMakesItFire": "A player's violence against a target (duelFromTarget), each resolved step of a fight turn (playTurn), the end of a contest (endBattle)."
+ },
  "encounters.js": {
   "purpose": "Typed multi-round structures — duels, challenges, puzzles — that CONSUME the d100 resolution and map receipts onto encounter state through data tables; the GM narrates the state, never advances it.",
   "playerVisibleSurface": "The ACTIVE ENCOUNTER receipt each round and the AVAILABLE ENCOUNTERS the GM may offer here.",

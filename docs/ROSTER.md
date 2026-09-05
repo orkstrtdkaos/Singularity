@@ -160,3 +160,27 @@ rather than a thing. Coil's r3 reaches the eleven procedures for things that no 
 
 ⬜ **`craft_lint` caught four leading articles minutes after the first three were written** — ⛔ **Erik has
 corrected that rule five times now.** ⚠️ **Run the lint before touching the source of truth, every time.**
+
+---
+
+## ⚑ SESSION CLOSE 2026-09-05 — WHAT MOVED
+
+| | |
+|---|---|
+| ✅ **companion content CLOSED** | all nine bond grants are real abilities. Corpus **421 → 429** |
+| ✅ **`deathSave.notForClasses`** | authored — `feral_construct` and `made_weapon` barred; ⚑ **`narrowed_dead` deliberately NOT** (R29: there is still a thread there) |
+| ✅ **`npc.schema.json`** | **+22 properties.** ⛔ It had declared 25 and knew about NONE of `abilities`, `assistTags`, `sex`, `physicality`, or R45c's bearer record |
+| ✅ **Pell** | 17 → **27 crafts**, 4 → 10 with a harm rung. Marcher/somatic pass per Erik: *"she is probably learning more marcher or somatic crafts these days"* |
+| ✅ **Tal** | ⚑ tagged `becomesNpc: {atBondStage: 3}` — ⬜ `SPEC_companion_becomes_person.md` |
+
+### ⬜ NEXT: THE INTERIORITY SEVEN
+
+⚠️ **Pell and Veth were 2 of the 7 — so FIVE sheets**, and they are half-authored already: each carries
+`driveSummary`, `wants` and `pushesBackWhen`.
+
+⛔ **AND THE TWO TRAPS ARE NOW KNOWN:**
+1. ⚑ **`domains` is `{primary, secondary, tertiary}`** — ⚠️ **an array returns `band: "open"` and `kitFor`
+   draws from THE ENTIRE CATALOGUE.** Aevi authored Pell and Veth wrong and they were the only two in the
+   corpus.
+2. ⛔ **RUN `po/craft_lint.mjs` BEFORE TOUCHING THE SOURCE OF TRUTH.** ⚠️ **It caught four leading articles
+   minutes after the first three bond grants were written — Erik has corrected that rule five times.**

@@ -26,6 +26,38 @@ their leavings still work.**
 
 ---
 
+## ⛔ THE VEIL SIDE IS THE VOID
+
+> **Erik, 2026-09-04:** *"The Veil side of the great battle is the VOID."*
+
+⚠️ **This names what has been described only by its shape until now.** The Veil is *"the gap that opens when
+a thing refuses hard enough"* — ⛔ **and what is on the other side of that gap is not a place with different
+rules. It is the ABSENCE OF THE RULES.**
+
+| | |
+|---|---|
+| **the lattice** | ⚑ what the Precursors BUILT — density, structure, an apparatus that runs |
+| ⛔ **the Void** | ⚑ **what is left where nothing was built and nothing refused to stop** |
+
+➡️ ⚠️ **AND IT EXPLAINS THE BANDS.** Precursor craft wants **dense** ground `{0.90}`; veil craft wants
+**thin** `{0.10}` — ⛔ **because veil craft is not drawing on a THING, it is drawing on the absence of one.**
+✅ *"Thinning one strengthens the other"* stops being a tuning note and becomes a statement about what the
+two sources ARE.
+
+➡️ ⛔ **AND IT IS WHY THE SOVEREIGNS ARE THERE.** They refused every constraint including having a body to be
+constrained in. ⚠️ **The only place a thing like that can persist is where there are no constraints to
+refuse** — **so they did not go to the Void. THE VOID IS WHAT THEIR REFUSING LEFT, and they live in it.**
+
+⚑ **A VEIL CRAFT IS THEREFORE NOT "DARK MAGIC". IT IS SUBTRACTION.** `stopped_breath` r2 does not hide the
+world from someone — ⛔ **it puts a little of the Void where the world was, and a little of it stays in the
+room afterwards.**
+
+⚠️ **Kenosis is the exact inverse and now reads clearly:** a being that *"emptied itself and took a body
+capable of loss."* ⛔ **It emptied itself INTO limit. The Sovereigns emptied themselves OUT of it.** ✅ **Same
+act, opposite direction — which is why what remains of Kenosis IS the Veil.**
+
+---
+
 ## The Deep has a floor, and under the floor there is no floor
 
 The Abyssals never called it hell. They call it **the Deep**, and they go down because the going-down is

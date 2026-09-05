@@ -142,3 +142,11 @@ carries a `mechanic.killCost`. R35 makes the rung an insta-kill offer on every l
 20); the other 52 kill for their standard cost. ⬜ (a) prune the rung to the crafts that mean it; (b) author
 `deathSave.defaultKillCost`; (c) both. ⚠️ And the ⚡ Finish it button still offers at lethal (`finisher.alwaysAtHarmRung`) —
 two ends on one rung. Engine: nothing to build; content decides.
+
+**The Pell–Veth census (v1.9.349, 2,000 seeded duels per row):** LIVE Pell 11.8% (Veth kills by death save 1,424 · Pell worn
+down 339 · Pell kills 237); without the Cut Thread 14.7%; without ANY lethal craft on Veth 51.5% (836 duels cap at 60 rounds —
+nobody can finish by dice); death save OFF 0.1% (attrition over 41 rounds). ⛔ **The Cut Thread is never cast (0 of 14,889)** —
+`opponentPolicy` knows matchup, momentum, repetition and variety, not rungs, costs or tiers. Veth's killers are `hastened_grey`
+(a T1 lethal, 645), `bone_lance` (494), `grey_ground` (285); Pell's only wins are Plain Weight (T1 lethal) kills. ⬜ Two more
+parts of this question: (d) should the NPC policy reach for a lethal craft when the save odds favour it (a design choice about
+what NPCs know), and (e) is `hastened_grey`/`plain_weight` at T1 meant to kill on a hit.

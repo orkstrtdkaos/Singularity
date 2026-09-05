@@ -1625,7 +1625,9 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         // the tier gap, as `finishOdds` measures it: the craft's tier against the sharpest craft the target carries
         const myTier = Number(winDecl?.tier) || 1;
         // ⚠️ the PLAYER seat carries `skills` as the character's MAP, not an array — read the array form only
-        const theirTier = Math.max(1, ...((Array.isArray(dsTargetSheet?.skills) ? dsTargetSheet.skills : []).map(x => Number(x.tier) || 1)));
+        // `maxTier` first (the player seat names it — its `skills` is a map, not a kit), else the kit's sharpest craft
+        const theirTier = Number.isFinite(Number(dsTargetSheet?.maxTier)) && Number(dsTargetSheet.maxTier) > 0 ? Number(dsTargetSheet.maxTier)
+          : Math.max(1, ...((Array.isArray(dsTargetSheet?.skills) ? dsTargetSheet.skills : []).map(x => Number(x.tier) || 1)));
         if (myTier !== theirTier) mods.push({ label: myTier > theirTier ? "you out-class them" : "they out-class you", value: (myTier - theirTier) * (fo.perTierGap ?? 7) });
         // `saveBonus` is the target's own weight on the save — a content dial (0 unauthored), the knob that sets how
         // often a landed lethal hit on a fresh equal kills. Measured at 0: 66% (HOW_IT_WORKS §3c carries the table).

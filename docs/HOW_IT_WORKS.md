@@ -456,8 +456,9 @@ working papers; **this is the answer.**
 | 09-04 | ✅ **TRUTH ↔ DATA — a body section names its subject and the fields it describes, and they must exist** | `<!-- subject: X · fields: a, b · state: c -->` under a body heading; every `fields:` name must be a key somewhere in content, every `state:` name (a save-record field) must be named in engine/; the subject must be one `scripts/subject.mjs` knows | `§64` — three sections marked (§3c, §7d, §7h); sections without a marker ratchet at 20 and may only fall | the second half of SPEC_associativity §4 — the join that would have caught 31 crafts carrying a forbidden `tradition`; a body that describes a field nobody authors is now red |
 | 09-04 | ✅ **THE COMBAT FLOOR — one landing (R34 · R35 · Q1)** | NPC pools on the player's shape (`healthBase`/`energyPerLevel` readers, `npcStanding` authored 30 + 5/level · 100 + 5/level); a pressure tick costs BOTH sides health and energy, priced alike (3 · 8), and the opponent's health loss is finally APPLIED; `breakAtPressure = ceil(level × 0.5)` of the side being broken, `level` on every opponent seat; the DEATH SAVE — a landed lethal hit is an opposed contest (caster's landed roll + the finisher's situational dials vs the target's strength/presence save + `saveBonus` 20), kill → the target stops and the caster pays `mechanic.killCost` (the Cut Thread's bound, transcribed: pool to zero, `craftSealedUntilRest` until a night's rest), hold → the dice at the standard cost | `§68` (pools · tick alike/applied/carried · 15/3/flat/chase · both seat paths · kill/hold/wounding/barred/sealed · seeded 35–65% · seams) · `scripts/duel_pell_vs_veth.mjs` LIVE Pell wins 11.1% (by health 222 of 222 decided, by pressure 0) · mean rounds 7.1 · Veth never spent-out (was 91.6% Pell, 1,832 by pressure, spent by round four) | body §3c (floor), §7h. R36–R38 are indexed ⬜ in RULINGS (sequenced behind the floor by the GO list) and enter the body when built. ⛔ 53 lethal crafts, one `killCost` — Q15 logged. `§62`'s declaration regex now reads Aevi's bold form |
 | 09-04 | ✅ **THE FIVE BEHIND THE FLOOR (Q3 · R38 · R37 · Q5-B · Q8)** | the roll reads the CRAFT — `substrateForAction` is the ground card (one source, one tuning, the site's per-source field, the carried and presence terms; 204 of 416 crafts read differently than by tradition); `meaningDensity` derived from tags/tier/community/presence, never stored, and for metaphysical crafts MEANING is the ceiling and SUBSTRATE the penalty (min, not product; `mechanic.meaning: "none"` opts out); growth stacks completions (+1) and condition steps (+1) on acquaintance, the tick stamps the record, and `commitGrowth` writes an observed craft at r1; a debt is `worldState.debts[holderId]` held by a named NPC, written by `releaseHolding` and `debtOps`, escalated only by a holder who reacts to debtors (1 colder · 2 refused), cleared by pay/deed/holder gone; the hold store yields by condition into `holding.store`, pays upkeep from the purse, fills, gets raided, sells where it stands | `§69` (the divergence census · roll=card by source · ceiling/min/opt-out/absent · stacking and the r1 write · the Kestrel escalates, Greta does not, three clears, coin refused · the steep curve, arrears, raid/garrison, sell-where-you-stand, forfeit/carry, the tick) · `§63` refixtured on `settlement-standing` | body §7g (ground), §7h (R37), §7d (debts, store), §9. §10's holdings-economy gap CLOSED. ⬜ Q15 (lethal census), Q13 (somatic split), escalation 3–4, goods to market: logged, not built |
+| 09-04 | ⚠️ **THE PELL–VETH CENSUS — the Cut Thread is never cast; the death save's tier term read the player as tier 1** | Erik asked whether Veth wins by the Cut Thread. 2,000 duels × 5 configurations: 0 casts of it (the policy has no notion of a lethal rung); Veth wins 99.9% even with the save off; her killers are a T1 lethal (`hastened_grey`) and two T3s; Pell's only wins are Plain Weight (T1 lethal) kills. Defect: the tier-gap term read `skills[]` and the player seat carries a map → +28 on every NPC lethal hit; the seat now names `maxTier` (95% → 88% kills) | `§68` (a T5-carrying player is no out-class; a T1 is +28; the seat names it from the character's crafts) · `scripts/duel_pell_vs_veth.mjs` | body §3c (the census table). Q15 widened: the NPC policy's blindness to lethal rungs is part of it |
 
-**Last verified: 2026-09-05 · v1.9.348 · 421 crafts.**
+**Last verified: 2026-09-05 · v1.9.349 · 421 crafts.**
 
 ---
 
@@ -977,6 +978,28 @@ static thing is never offered the save; a non-lethal rung is untouched (the ⚡ 
 almost never dies fresh. Set at 20 to meet Erik's own calibration for the rung (CCODE-42: *"against a healthy foe of equal
 level it might be a 50/50"*; `finisher.odds.baseByRung.lethal` is 48). ⚠️ **The tier does not weigh on the save by itself** —
 a T1 and a T5 at rank 1 kill alike against an equal; only the finisher's tier GAP term separates them.
+
+**The Pell–Veth census (2,000 seeded duels per row, same seeds, same policy — asked by Erik: "does Veth usually win because
+of the Cut Thread?"):**
+
+| configuration | Pell wins | ends by | rounds |
+|---|---|---|---|
+| LIVE, Veth's full kit | 11.8% | Veth kills Pell by death save 1,424 · Pell worn down 339 · Pell kills Veth 237 | 7.4 |
+| Veth without the Cut Thread | 14.7% | the same shape | 7.3 |
+| Veth without any lethal craft | 51.5% | Pell kills Veth 1,030 (all by Plain Weight) · 836 cap at 60 rounds | 36.4 |
+| death save OFF | 0.1% | Pell worn down by dice and ticks 1,609 · 390 cap | 41.2 |
+
+⛔ **The Cut Thread is never cast — 0 of 14,889 Veth declarations.** `opponentPolicy` scores a move by matchup, by
+momentum (press when behind, guard when ahead), by not repeating, and by a rotating variety term; **it has no notion of a
+lethal rung, a cost, or a tier**, so a 60-move kit reaches the same handful of moves and the capstone sits unused. Veth
+wins because she is L33 to Pell's L27 with physical 20 to his 15 — **with the death save switched off she still wins 99.9%**,
+by attrition over 41 rounds. What R35 changed is the SHAPE: her killers are `hastened_grey` (*Necrotic Strike*, **a T1
+lethal**, 645 kills), `bone_lance` (494) and `grey_ground` (285), and **Pell's only wins are Plain Weight kills — a T1 hammer
+blow that carries `lethal`**. 17 of Veth's 60 moves are lethal-rung (8 distinct crafts); 2 of Pell's 39. ⚠️ The measurement
+also caught a defect: the tier-gap term read the target's sharpest craft from `skills[]`, and the player seat carries
+`skills` as a map, so every NPC lethal hit out-classed the player by tier − 1 (95% kills). The seat now names `maxTier`
+from the character's own crafts (88% after; the rest is attributes and being driven back). ⬜ Whether the NPC policy should
+reach for a lethal craft when the odds favour it is part of Q15, not a tuning.
 
 ⛔ **WHAT THIS EXPOSES, AND IT IS A CONTENT DECISION:** **53 crafts carry `lethal`/`atrocity`** — 22 of them T1
 (`sling_and_stone`, `plain_weight`, `hunters_strike`, `levelled_crossbow`…) — and **one** carries a `killCost`. Under

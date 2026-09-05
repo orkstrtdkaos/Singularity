@@ -225,6 +225,8 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     playerSheet: { attributes: character.attributes || {}, subAttributes: character.subAttributes || {}, alignment: character.alignment || {}, skills: character.skills || {}, energy: before,
       // ✅ 2026-09-04 — and the armour the items author reaches the seat: `wornSoakLayers` (SNG-521’s `soakLayers[]`, best per type).
       level: Number(character.level) || 1, health: character.health, maxHealth: character.maxHealth,
+      // R35: `skills` here is a MAP — name the sharpest craft for the tier term (§68)
+      maxTier: Math.max(1, ...(character.abilities || []).map(a => Number(abilities?.[a?.abilityId]?.tier) || 1)),
       soak: Math.max(0, Number(character.soak) || 0, wornSoak(character)), soakLayers: (() => { const w = wornSoakLayers(character); return w.length ? w : undefined; })() },
     // CCODE-35: `effects` must ride BOTH ways — into the round (they modify this roll) and back out onto the
     // encounter state (they persist). This hand-built state object is the seam where they would silently drop.

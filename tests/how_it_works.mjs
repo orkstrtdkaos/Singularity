@@ -4510,6 +4510,18 @@ console.log("\n── §68 · the combat floor — pools, symmetric pressure, br
   check("§68: …the app persists the seal on the sheet and a night's rest lifts it", /if \(rr\.sealed\) character\.craftSealedUntilRest = true;/.test(app68)
     && /if \(character\.craftSealedUntilRest\) delete character\.craftSealedUntilRest;/.test(app68) && /Death save: /.test(app68));
   check("§68: …the body carries the death save and the floor", /death save/i.test(rd("docs/HOW_IT_WORKS.md")) && /healthBase/.test(rd("docs/HOW_IT_WORKS.md")));
+  // ⛔ MEASURED 2026-09-04 (the Pell–Veth census): the tier-gap term read the TARGET's sharpest craft from `skills[]`, and the
+  // player seat carries `skills` as a MAP — so every NPC lethal hit out-classed the player by tier − 1 (Veth killed Pell on
+  // 95% of landed lethal hits against a 48% calibration). The seat now names `maxTier`; the term reads it first.
+  const oppLethal68 = { ...lethal68, name: "their cut" };
+  const asTarget68 = (seat) => SB68.battleRound({ playerDecl: guard68, oppDecl: oppLethal68, playerSheet: mk68(seat), oppSheet: mk68(),
+    state: { momentum: 0, round: 1 }, rules: rules68, sb: sb68, steps: steps68, rng: seq68([0.98, 0.99, 0.02, 0.99, 0.99, 0.99, 0.5]) });
+  const mapSeat = asTarget68({ skills: {}, maxTier: 5 }), bareSeat = asTarget68({ skills: {}, maxTier: 1 });
+  check("§68: ⛔ the death save's tier-gap term reads the PLAYER seat's `maxTier` — a T5 craft against a T5-carrying player is no out-class; against a T1 it is +28",
+    mapSeat.deathSave && !mapSeat.deathSave.mods.some(m => /out-class/.test(m.label))
+    && bareSeat.deathSave && bareSeat.deathSave.mods.some(m => /you out-class them/.test(m.label) && m.value === 4 * (sb68.finisher?.odds?.perTierGap ?? 7)),
+    JSON.stringify({ map: mapSeat.deathSave?.mods, bare: bareSeat.deathSave?.mods }));
+  check("§68: …and the wrapper's player seat names it from the character's own crafts", /maxTier: Math\.max\(1, \.\.\.\(character\.abilities \|\| \[\]\)\.map\(a => Number\(abilities\?\.\[a\?\.abilityId\]\?\.tier\) \|\| 1\)\)/.test(rd("engine/encounters.js")));
 }
 
 /* ═════ §69 — THE FIVE THAT NEEDED NO DECISION: the roll reads the craft · meaning sets the ceiling · the three terms stack · a debt held by a person · the hold store on the tick ═════ */

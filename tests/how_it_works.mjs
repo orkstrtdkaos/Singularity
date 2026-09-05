@@ -5358,7 +5358,7 @@ console.log("\n── §79 · the spread reads its dial · a busy pass is bounde
     deeds: Array.from({ length: 7 }, (_, i) => ({ description: `an old deed ${i}`, weight: 3, day: 1, communityId: "valley.a", spread: [] })) };
   const content79 = { locations: { a: { id: "a", communityId: "valley.a", regionId: "r" }, b: { id: "b", communityId: "valley.b", regionId: "r" },
       c: { id: "c", communityId: "valley.c", regionId: "r" }, d: { id: "d", communityId: "valley.d", regionId: "r" } },
-    rules: { arcResponse: cfg79 }, npcs: {}, items: {}, abilities: {} };
+    rules: { arcResponse: cfg79 }, npcs: {}, items: {}, abilities: {}, region: { activeEvents: [] }, events: {} };
   const out79 = await WT79.runWorldTick({ character: c79, content: content79, currentDay: 40, advanceAssignments: async () => ({ advancements: [] }), rng: () => 0.01 });
   const spreadLines = (out79.news || []).filter(n => /^As far as |^Word travelled on /.test(n.text));
   check("§79: ⛔ …SEVEN OLD DEEDS, AND THE DIGEST STAYS BOUNDED — at most the dial's lines plus one that counts the rest",

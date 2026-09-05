@@ -518,8 +518,10 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // 1. event advancement — and SNG-191 §4.2: a crisis RESPONDS to the delegated work. Ignoring a
   //    crisis worsens it (this always worked); the missing half is that DOING something measurably
   //    helps, and the mechanism is a charge set against it. A crisis nothing can affect is theatre.
-  for (const { eventId, stage } of content.region.activeEvents || []) {
-    const ev = content.events[eventId];
+  // ⚠️ 2026-09-05: OPTIONAL, like every other content read in this function. A world with no active events is legitimate —
+  // a fresh save, a pack that authors none, a test of one other pass — and this line crashed the whole tick for it.
+  for (const { eventId, stage } of content?.region?.activeEvents || []) {
+    const ev = content?.events?.[eventId];
     if (!ev) continue;
     let st = ws.eventStages[eventId] || (ws.eventStages[eventId] = { stage, sinceDay: ws.lastTickDay });
     let guard = 0;

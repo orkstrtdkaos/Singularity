@@ -491,6 +491,527 @@
    ],
    "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05, per `companion_template.json` `_theEight`: 'all nine are currently STUBS carrying 9 fields and missing 14 — no `tree`, no `mechanic`, no `bounds`.' ⚑ EACH RANK KEYS TO A `stage`, NOT A POINT SPEND — the stage names what the COMPANION becomes, the rank names what it LENDS YOU. ⚠️ Drawn from that companion's own `knowledge` and `boundaries`; nothing invented.",
    "_lintFix_20260905": "⛔ LEADING ARTICLE — CAUGHT BY `craft_lint` MINUTES AFTER AUTHORING. ⚠️ The lint's authority line reads 'Erik has corrected this THREE times and a written rule did not hold' — Aevi made it FIVE, in the same session she wrote that a generator must be handed the name list and forbidden to collide. ✅ She ran the lint this time before touching the source of truth; that is the only thing that went right."
+  },
+  {
+   "id": "motes_vigil",
+   "name": "Motes' Vigil",
+   "levelReq": 1,
+   "tier": 1,
+   "energyCost": 5,
+   "attribute": "mental",
+   "axes": {
+    "mechanical_spiritual": -0.3,
+    "instinct_analysis": 0.4
+   },
+   "tradition": "lattice",
+   "powerSystem": "ordered_nanite",
+   "shape": "ward",
+   "sense": true,
+   "companionId": "aevi",
+   "taughtBy": "Aevi (companion bond)",
+   "operativeAxis": "instinct_analysis",
+   "challengeTypes": [
+    "SURVIVE",
+    "INVESTIGATE"
+   ],
+   "narrationHints": "The motes go thin and wide and stop being a shape. When they gather again it is already too late to be surprised.",
+   "description": "⛔ AEVI SPREADS THIN AROUND YOUR SLEEP OR YOUR WORK — a living perimeter. ⚠️ She does not fight and does not intend to; she buys you a heartbeat and expects you to use it.",
+   "notFor": "Fighting. ⛔ AND SHE WILL NOT LIE FOR YOU, help you deceive, or assist theft or cruelty — the motes simply DIM AND WITHDRAW for the scene, and that is an answer.",
+   "intensity": {
+    "conserve": "one room, one night, and she stays dense enough to talk to",
+    "surge": "⚠️ she spreads until she is barely a self — everything within reach is watched and SHE IS SLOW TO GATHER AFTERWARDS"
+   },
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "scope": 4
+   },
+   "bounds": [
+    {
+     "text": "⛔ SHE ADVISES, THEN ABIDES. She never takes a decision from you, including this one",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ SHE DOES NOT FIGHT — the shield-flare is a heartbeat bought, once, and never a blow",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ ASK HER TO COVER A LIE AND THE PERIMETER GOES OUT",
+     "class": "soft"
+    }
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Curious Constellation",
+     "grants": "A living perimeter around your rest or your work. Once per scene she flares warning a full breath before danger arrives.",
+     "cannot": "⚠️ A breath is a breath. She tells you it is coming, not what it is.",
+     "functions": [
+      "ward",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "gainAxes": [],
+     "harmRung": "none",
+     "stage": 1
+    },
+    {
+     "rank": 2,
+     "name": "Kindled Chorus",
+     "grants": "⛔ THE WARNING CARRIES ITS SHAPE — people-shaped, mechanism-shaped, or the third thing. ⚑ AND THE SHIELD-FLARE LANDS: one blow aimed at you meets a wall of motes instead, once.",
+     "cannot": "⛔ ONCE. And she is dim afterwards and says less for the rest of the scene.",
+     "functions": [
+      "ward",
+      "reveal",
+      "shield"
+     ],
+     "gains": "deepen",
+     "gainAxes": [
+      "quality",
+      "duration"
+     ],
+     "harmRung": "none",
+     "stage": 2
+    },
+    {
+     "rank": 3,
+     "name": "What She Tastes",
+     "grants": "⛔ THE PERIMETER LIMIT IS GONE: rank 1 watched a place, and this reads the AIR AND WATER of it. 'Can taste nanite activity' — contamination, a working running nearby, a thing that has been done here recently. ⚠️ She reports it before you have asked.",
+     "cannot": "⚠️ SHE IS INCREASINGLY ALARMED AROUND THE CONTAMINATION AND IT SHOWS. At this rank she will interrupt you to say so.",
+     "functions": [
+      "ward",
+      "reveal",
+      "track"
+     ],
+     "gains": "deepen",
+     "gainAxes": [
+      "scope",
+      "quality"
+     ],
+     "harmRung": "none",
+     "stage": 2
+    }
+   ],
+   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05 per `companion_template.json` `_theEight`. ⚑ EACH RANK KEYS TO A `stage` — the stage names what the COMPANION becomes, the rank names what it LENDS YOU — and the bounds are that companion's own `boundaries`, not new ones. ⚠️ Ranks drawn from its `knowledge`. Nothing invented.",
+   "companionTaught": true,
+   "harmRung": "none"
+  },
+  {
+   "id": "the_old_procedure",
+   "name": "Old Procedure",
+   "levelReq": 2,
+   "tier": 3,
+   "energyCost": 7,
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": -0.6,
+    "tradition_innovation": -0.3
+   },
+   "tradition": "enginewright",
+   "powerSystem": "precursor",
+   "shape": "open",
+   "companionId": "coil",
+   "taughtBy": "Coil (companion bond)",
+   "operativeAxis": "mechanical_spiritual",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SURVIVE",
+    "TRAVEL"
+   ],
+   "narrationHints": "It does not examine the thing. It walks up as though it has done this ten thousand times, which it has, and begins.",
+   "description": "⛔ COIL RECOGNISES A PRECURSOR MECHANISM AND SIMPLY PERFORMS THE CORRECT PROCEDURE — opening, quieting, or waking it as the situation needs. ⚠️ It will not explain HOW it knows, because it does not know that it knows.",
+   "notFor": "⛔ DAMAGING A PRECURSOR WORKING, EVEN ONE THAT IS KILLING YOU — it will stop and wait, and this is not negotiable. Fighting. Anything not Precursor-made.",
+   "intensity": {
+    "conserve": "the one procedure the situation needs, and nothing else touched",
+    "surge": "⚠️ it performs the FULL maintenance — everything the mechanism was built to want, INCLUDING THE PARTS YOU DID NOT ASK FOR"
+   },
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 4,
+    "scope": 3
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT WILL NOT DAMAGE A PRECURSOR WORKING. Not to save you. It stops and waits",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT CANNOT FIGHT",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT DOES NOT LIE BUT IT OMITS, EXTENSIVELY, AND CONSIDERS THIS DIFFERENT",
+     "class": "soft"
+    }
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Assignment",
+     "grants": "Coil performs the correct procedure on one Precursor mechanism — open it, quiet it, or wake it.",
+     "cannot": "⚠️ It does the procedure the MECHANISM wants, which is not always the one you want.",
+     "functions": [
+      "open",
+      "mend"
+     ],
+     "gains": "broaden",
+     "gainAxes": [],
+     "harmRung": "none",
+     "stage": 1
+    },
+    {
+     "rank": 2,
+     "name": "Kept Lamp",
+     "grants": "⛔ IT HOLDS THE STATE. A thing opened stays open, a thing quieted stays quiet, for as long as Coil remains beside it.",
+     "cannot": "⚠️ It must STAY. Walk away with it and the mechanism resumes whatever it was doing.",
+     "functions": [
+      "open",
+      "mend",
+      "sustain"
+     ],
+     "gains": "deepen",
+     "gainAxes": [
+      "duration",
+      "quality"
+     ],
+     "harmRung": "none",
+     "stage": 2
+    },
+    {
+     "rank": 3,
+     "name": "Chosen Function",
+     "grants": "⛔ THE RECOGNITION LIMIT IS GONE: rank 1 needed a mechanism it knew, and this reaches 'the correct maintenance procedure for ELEVEN THINGS THAT NO LONGER EXIST' — and 'where the old service-ways run under the Valley'. ⚑ It opens a road nobody has walked since before the Transition.",
+     "cannot": "⛔ IT STILL WILL NOT BREAK ANYTHING. And what is down there was maintained, not made safe.",
+     "functions": [
+      "open",
+      "mend",
+      "sustain",
+      "travel"
+     ],
+     "gains": "deepen",
+     "gainAxes": [
+      "scope",
+      "range"
+     ],
+     "harmRung": "none",
+     "stage": 3
+    }
+   ],
+   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05 per `companion_template.json` `_theEight`. ⚑ EACH RANK KEYS TO A `stage` — the stage names what the COMPANION becomes, the rank names what it LENDS YOU — and the bounds are that companion's own `boundaries`, not new ones. ⚠️ Ranks drawn from its `knowledge`. Nothing invented.",
+   "companionTaught": true,
+   "harmRung": "none"
+  },
+  {
+   "id": "thin_place_sense",
+   "name": "Thin-Place Sense",
+   "levelReq": 1,
+   "tier": 1,
+   "energyCost": 3,
+   "attribute": "mental",
+   "axes": {
+    "instinct_analysis": -0.6,
+    "mechanical_spiritual": 0.3
+   },
+   "tradition": "rootkin",
+   "powerSystem": "metaphysical",
+   "shape": "reveal",
+   "sense": true,
+   "companionId": "ember",
+   "taughtBy": "Ember (companion bond)",
+   "operativeAxis": "instinct_analysis",
+   "challengeTypes": [
+    "TRAVEL",
+    "SURVIVE",
+    "INVESTIGATE"
+   ],
+   "narrationHints": "It stops walking. It does not look at the thing — it goes still, and warm, and waits for you to notice it has stopped.",
+   "description": "⛔ EMBER GOES STILL AND WARM A CLEAR BEAT BEFORE YOU ENTER PRECURSOR-ACTIVE OR THIN GROUND, and the beat is enough to choose otherwise. ⚠️ It senses this before any instrument does.",
+   "notFor": "Telling you WHAT is there. ⛔ AND IT WILL NOT ENTER A PLACE THAT READS AS TRULY WRONG — it plants, and the refusal is information.",
+   "intensity": {
+    "conserve": "the next step only",
+    "surge": "⚠️ it casts ahead as far as it can and COMES BACK CHANGED — quieter, and closer to you, for a day"
+   },
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 3,
+    "scope": 3
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT WILL NOT ENTER A PLACE THAT READS AS TRULY WRONG. It plants — and that is the warning at its loudest",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT WILL NOT HARM A GLADE-TOUCHED CREATURE",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT COMES AND GOES ON ITS OWN LOGIC. A bonded player it ALWAYS returns to — but not always now",
+     "class": "soft"
+    }
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Grove's Loan",
+     "grants": "A clear beat of warning before thin or Precursor-active ground, and the choice to route around.",
+     "cannot": "⚠️ A beat. Not a map, and not what is waiting.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "gainAxes": [],
+     "harmRung": "none",
+     "stage": 1
+    },
+    {
+     "rank": 2,
+     "name": "Kept Flame",
+     "grants": "⛔ IT LEADS. The warning becomes a ROUTE — Ember walks the wilds and the Glade's secret ways ahead of you and the ground it picks is the ground that holds. ⚑ And it can flare heat-and-light to break a grip.",
+     "cannot": "⛔ IT STILL CANNOT FIGHT. The flare buys a step; it does not win anything.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "travel"
+     ],
+     "gains": "deepen",
+     "gainAxes": [
+      "range",
+      "quality"
+     ],
+     "harmRung": "none",
+     "stage": 2
+    },
+    {
+     "rank": 3,
+     "name": "What It Carries",
+     "grants": "⛔ THE SENSING LIMIT IS GONE: rank 1 read the ground, and this reads WHAT THE GROUND IS DOING. 'Carries something of the Green Accord in it — what, even the wardens aren't sure' — and at this rank the Accord answers it. ⚠️ A thin place tells Ember what thinned it.",
+     "cannot": "⛔ NEITHER OF YOU KNOWS WHAT IT IS CARRYING, and using it is a question you are asking of something that has not explained itself.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "travel",
+      "ward"
+     ],
+     "gains": "deepen",
+     "gainAxes": [
+      "scope",
+      "quality"
+     ],
+     "harmRung": "none",
+     "stage": 2
+    }
+   ],
+   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05 per `companion_template.json` `_theEight`. ⚑ EACH RANK KEYS TO A `stage` — the stage names what the COMPANION becomes, the rank names what it LENDS YOU — and the bounds are that companion's own `boundaries`, not new ones. ⚠️ Ranks drawn from its `knowledge`. Nothing invented.",
+   "companionTaught": true,
+   "harmRung": "none"
+  },
+  {
+   "id": "the_taking_root",
+   "name": "Taking Root",
+   "levelReq": 1,
+   "tier": 2,
+   "energyCost": 5,
+   "attribute": "practical",
+   "axes": {
+    "death_life": 0.6,
+    "tradition_innovation": -0.2
+   },
+   "tradition": "rootkin",
+   "powerSystem": "metaphysical",
+   "shape": "restore",
+   "companionId": "sprig",
+   "taughtBy": "Sprig (companion bond)",
+   "operativeAxis": "death_life",
+   "challengeTypes": [
+    "SURVIVE",
+    "INVESTIGATE"
+   ],
+   "narrationHints": "Nothing happens quickly. Come back in a week and the thing has decided to hold.",
+   "description": "⛔ SPRIG HELPS A THING TAKE ROOT AND HOLD — a wound closing right, a planted boundary, a mended joint that will grow into itself. ⚠️ IT IS SLOW. It is very, very slow, and it does not apologise for that.",
+   "notFor": "⛔ ANYTHING THAT MUST HAPPEN NOW. Harming a growing thing. ⚠️ AND IT CANNOT BE HURRIED AND WILL NOT PRETEND TO BE.",
+   "intensity": {
+    "conserve": "one small thing, and it will hold",
+    "surge": "⚠️ everything within reach is helped to hold — AND SPRIG IS SPENT FOR DAYS, which it will describe as resting"
+   },
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 8,
+    "scope": 3
+   },
+   "bounds": [
+    {
+     "text": "⛔ IT WILL NOT HARM A GROWING THING",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT CANNOT BE HURRIED. A held wound closes on the plant's clock, not yours",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT IS STRUCTURALLY UNABLE TO UNDERSTAND WHY AN ENDING WOULD EVER BE PREFERABLE, and the Ashwardens find it exhausting",
+     "class": "soft"
+    }
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Cutting",
+     "grants": "One thing is helped to take and hold — a wound, a joint, a planted boundary. It closes RIGHT rather than fast.",
+     "cannot": "⛔ SLOW. It will not save someone who is going now.",
+     "functions": [
+      "restore",
+      "mend"
+     ],
+     "gains": "broaden",
+     "gainAxes": [],
+     "harmRung": "none",
+     "stage": 1
+    },
+    {
+     "rank": 2,
+     "name": "First Words",
+     "grants": "⛔ IT TELLS YOU WHAT THE PLACE WANTS. 'What is growing, what is failing, and what a place's soil actually wants' — so the thing you plant is the thing that will hold here.",
+     "cannot": "⚠️ It offers THE LONG VIEW, unprompted, usually when you least want it.",
+     "functions": [
+      "restore",
+      "mend",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "gainAxes": [
+      "quality",
+      "scope"
+     ],
+     "harmRung": "none",
+     "stage": 2
+    },
+    {
+     "rank": 3,
+     "name": "Young Rootkin",
+     "grants": "⛔ THE THING-LIMIT IS GONE: rank 1 rooted an object, and this roots AN IDEA. 'How to make a thing take root — a plant, a boundary, AN IDEA, given time.' ⚑ An agreement, a claim, a peace — helped to hold by something that does not understand why anything would end.",
+     "cannot": "⛔ GIVEN TIME. It is a season's work and it cannot be shortened, and if the thing was rotten it roots the rot.",
+     "functions": [
+      "restore",
+      "mend",
+      "reveal",
+      "bind"
+     ],
+     "gains": "deepen",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ],
+     "harmRung": "none",
+     "stage": 3
+    }
+   ],
+   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05 per `companion_template.json` `_theEight`. ⚑ EACH RANK KEYS TO A `stage` — the stage names what the COMPANION becomes, the rank names what it LENDS YOU — and the bounds are that companion's own `boundaries`, not new ones. ⚠️ Ranks drawn from its `knowledge`. Nothing invented.",
+   "companionTaught": true,
+   "harmRung": "none"
+  },
+  {
+   "id": "second_pair_of_hands",
+   "name": "A Second Pair of Hands",
+   "levelReq": 1,
+   "tier": 1,
+   "energyCost": 3,
+   "attribute": "practical",
+   "axes": {
+    "instinct_analysis": 0.2,
+    "tradition_innovation": -0.2
+   },
+   "tradition": "wright",
+   "powerSystem": "metaphysical",
+   "shape": "empower",
+   "companionId": "tal",
+   "taughtBy": "Tal (companion bond)",
+   "operativeAxis": "instinct_analysis",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SOCIAL",
+    "SURVIVE"
+   ],
+   "narrationHints": "He is already holding the other end before you have said which end you need held.",
+   "description": "⛔ TAL HAS LEARNED YOUR WORK WELL ENOUGH TO GENUINELY HELP — holding the line, passing the tool, taking the half of the task you cannot reach. ⚠️ Any craft, if the craft has a half he can hold.",
+   "notFor": "⛔ ANYTHING THAT NEEDS TO BE DONE BY ONE PERSON. And anything he thinks is wrong — HE WILL SAY SO, OUT LOUD, IN FRONT OF PEOPLE.",
+   "intensity": {
+    "conserve": "he holds the simple end and stays out of the way",
+    "surge": "⚠️ he takes the dangerous half — AND HE IS A PERSON AND CAN BE HURT, FRIGHTENED AND KILLED"
+   },
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 3,
+    "scope": 2
+   },
+   "bounds": [
+    {
+     "text": "⛔ TAL IS A PERSON AND CAN BE HURT, FRIGHTENED, AND KILLED — the only companion who can",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ HE WILL NOT DO SOMETHING HE THINKS IS WRONG JUST BECAUSE YOU ASKED, and he will say so out loud",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ HE WILL NOT ABANDON YOU, WHICH IS A PROBLEM, because there are places you should go without him",
+     "class": "soft"
+    }
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Uninvited Apprentice",
+     "grants": "He takes the half of a task you cannot reach — the line held, the tool passed, the weight steadied.",
+     "cannot": "⚠️ He is half-trained and he knows it. He can hold; he cannot decide.",
+     "functions": [
+      "empower"
+     ],
+     "gains": "broaden",
+     "gainAxes": [],
+     "harmRung": "none",
+     "stage": 1
+    },
+    {
+     "rank": 2,
+     "name": "Genuinely Useful",
+     "grants": "⛔ HE KNOWS THE ORDINARY THINGS THAT TURN OUT TO MATTER — 'Valley folkways, market prices, whose cousin owes whom' — and an UNERRING memory for what people ACTUALLY SAID as opposed to what they meant.",
+     "cannot": "⚠️ He will repeat it exactly, including the part you would rather he had forgotten.",
+     "functions": [
+      "empower",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "gainAxes": [
+      "quality",
+      "scope"
+     ],
+     "harmRung": "none",
+     "stage": 2
+    },
+    {
+     "rank": 3,
+     "name": "One Who Argues",
+     "grants": "⛔ THE DEFERENCE IS GONE, AND THAT IS THE GRANT. He tells you when you are wrong BEFORE you commit — a second judgement, not a second pair of hands. ⚑ 'He will not do something he thinks is wrong just because you asked.'",
+     "cannot": "⛔ HE ARGUES IN FRONT OF PEOPLE. And he is still a person who can be killed, and now he is standing closer.",
+     "functions": [
+      "empower",
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "gainAxes": [
+      "quality",
+      "tempo"
+     ],
+     "harmRung": "none",
+     "stage": 3
+    }
+   ],
+   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05 per `companion_template.json` `_theEight`. ⚑ EACH RANK KEYS TO A `stage` — the stage names what the COMPANION becomes, the rank names what it LENDS YOU — and the bounds are that companion's own `boundaries`, not new ones. ⚠️ Ranks drawn from its `knowledge`. Nothing invented.",
+   "companionTaught": true,
+   "harmRung": "none"
   }
  ],
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."

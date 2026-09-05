@@ -469,7 +469,11 @@
    "_powerSystemWas": "reach_dark_light",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_portableDark_20260829": "⛔ ERIK 2026-08-29, CORRECTING MY OVER-READING: 'although they work in true absence they DON'T REQUIRE IT in general. CLOSE YOUR EYES AND YOU HAVE DARKNESS — in fact you'll see many umbrals on the surface WEARING BLINDFOLDS for that purpose.' ⚠️ I had filed these as VOID crafts and concluded that every Umbral begins as an Unlit. ⛔ WRONG: DARKNESS IS PORTABLE. An umbral does not need the world dark, only their own sight closed — which is why these are the FIRST GIFTS and belong to no school. **A blindfolded umbral on a lit street is not deprived; they are working.**",
-   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves.",
+   "touchTier": {
+    "why": "eyes closed, a hand on the wall, and the room arrives through your fingers."
+   },
+   "_touchTierWhy": "⛔ AUTHORED `touchTier` — the flavour form, per `CORRECTION_R47_touch_tier.md`. ⚠️ THE DERIVED DEFAULT IS THE MECHANISM; this is the IMPROVEMENT, never the prerequisite. ⚑ THE STRIPPING IS THE POINT (CCODE-266): one target, at contact, no dice, no ongoing, no area — 'the craft with no power behind it — you have to be there, and it is barely anything.' ⛔ A touch that kept a die would be r1 at a discount."
   },
   {
    "id": "dim",

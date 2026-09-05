@@ -1,18 +1,18 @@
 # SINGULARITY — THE ARCS OF EXESA · a player's guide
 
-**What it is like to play, from the first screen to the far end.** ⛔ **This is the nouns-and-verbs manual,
+**What it is like to play, from the first screen to the far end. This is the nouns-and-verbs manual,
 not the machine one.** If you want to know which JSON field carries a number, that is
 [`FIELD_REFERENCE.md`](FIELD_REFERENCE.md) and it is not written for you.
 
-⚠️ **STATUS.** CCode owns Parts I–IX (what things are and how they work). **Aevi owns Parts X–XII — the
-world, its people, and its traditions**, ✅ **now written.** ⛔ **Nothing in this file invents lore:** every
+**STATUS.** CCode owns Parts I–IX (what things are and how they work). **Aevi owns Parts X–XII — the
+world, its people, and its traditions**, **now written. Nothing in this file invents lore:** every
 place, person and belief in X–XII is drawn from authored content — , ,
-, the nine companion files and  — and where the world has not decided
+, the nine companion files and — and where the world has not decided
 something, the guide says so rather than filling it in.
 
 **Last verified: 2026-09-05 · v1.9.363 · 438 crafts · 135 places · 116 people · 9 companions.**
 
-⚑ **Every craft in the game, by domain and sect, is listed in [`SKILLS.md`](SKILLS.md)** — what each
+**Every craft in the game, by domain and sect, is listed in [`SKILLS.md`](SKILLS.md)** — what each
 one costs, what it does, and what its three ranks give you.
 
 ---
@@ -26,11 +26,11 @@ roll shows you its terms, and every blow shows you what stopped it.
 **Three things are always true:**
 
 - ⛔ **The world remembers.** People you meet stay met. Places you change stay changed. What you did is
-  recorded and other people find out.
+ recorded and other people find out.
 - ⛔ **You are not the only thing happening.** The world moves on a clock whether you act or not. Rivals
-  advance. Work continues. Someone else takes the thing you were slow about.
+ advance. Work continues. Someone else takes the thing you were slow about.
 - ⚠️ **Nothing is free and nothing is impossible.** A craft you cannot afford is a craft you cannot use
-  today. A foe too strong is a foe you should not meet head-on — not one you cannot ever beat.
+ today. A foe too strong is a foe you should not meet head-on — not one you cannot ever beat.
 
 ---
 
@@ -41,7 +41,7 @@ the usual sense.** It has **places you go**, and each one answers a different qu
 
 ## The one you are in most
 
-⛔ **THE PLAY SCREEN.** You type what you do; the world answers. Everything else is somewhere you step out
+**The play screen.** You type what you do; the world answers. Everything else is somewhere you step out
 to and come back from. **When in doubt, you are meant to be here.**
 
 ## When it turns into a fight — or a contest
@@ -55,8 +55,8 @@ order:**
 | **⚔ ACTION** | your actual move | this is the one you always get |
 | **✦ BONUS** | ⛔ **a FULL extra action** | ⛔ **earned by a good read — this is what sensing buys** |
 
-✅ **THAT IS THE WHOLE COMBAT ECONOMY.** Spend energy to look, and a good look pays for a second move.
-⚠️ **Most players never sense, and most players never see the bonus.** They are the same sentence.
+**That is the whole combat economy.** Spend energy to look, and a good look pays for a second move.
+**Most players never sense, and most players never see the bonus.** They are the same sentence.
 
 ## The places you step out to
 
@@ -77,21 +77,12 @@ order:**
 - **Something has changed about you** — a promotion, a level. ⚠️ **This is a choice, not a notification.**
 - **A fork** — the story could go two ways and it is asking which.
 
-## ⚠️ WHAT THE GAME CANNOT YET ASK YOU
+## One thing the game cannot yet ask you
 
-**Three things the engine knows how to do and has no way to ask you about.** They are listed here rather
-than hidden, because finding out by being surprised is worse:
+**You cannot name which ally a protecting craft is protecting** — it chooses for you.
 
-- **You cannot yet name which ally** a protecting craft is protecting — it chooses.
-
-✅ **AND TWO THINGS THIS GUIDE BRIEFLY CLAIMED YOU COULD NOT DO, YOU CAN.** You *can* choose who steps
-forward — tap a companion's name in a fight and they swap into the front, and it sticks between rounds.
-And provoking needs no pick: **it works by making *you* the thing they cannot ignore**, which is the
-whole point of the verb. ⚠️ **That now actually reaches the fight** — until this build the taunt was
-calculated and quietly dropped, so provoking read as though it did nothing. **It does something.**
-
-⛔ **THESE ARE MISSING QUESTIONS, NOT MISSING FEATURES.** The mechanics behind them work; nothing on the
-screen asks you. They are tracked as open gaps, and when the game learns to ask, this section shrinks.
+The mechanic works; there is simply nothing on the screen that asks. It is here rather than hidden, because
+finding out by being surprised is worse.
 
 ---
 
@@ -104,12 +95,10 @@ You are asked three questions and they are the only three that matter at the sta
 **PHYSICAL · MENTAL · SOCIAL · PRACTICAL.** Everything you attempt is tagged to one of them, and the
 attribute it is tagged to is the biggest single term in whether you succeed.
 
-⚠️ **THIS IS WHY A BUILD COHERES OR DOES NOT.** A kit whose crafts are tagged to your strong attribute
+**This is why a build coheres or does not.** A kit whose crafts are tagged to your strong attribute
 rolls strong; one scattered across all four rolls average at everything. **You are not punished for being
-broad — you are simply never excellent at it.**
-
-⛔ **THERE IS A KNEE AT 4.** Up to 4 in an attribute, each point is worth a great deal. Past 4, each point
-is worth much less. **The knee is deliberate: it makes the fifth point in your best attribute worse than
+broad — you are simply never excellent at it. There is a knee at 4.** Up to 4 in an attribute, each point is worth a great deal. Past 4, each point
+is worth much less. **The knee is deliberate: It makes the fifth point in your best attribute worse than
 the first point in your second-best, and that is the shape of a well-rounded person.**
 
 ## Where you come from
@@ -117,39 +106,37 @@ the first point in your second-best, and that is the shape of a well-rounded per
 **An ORIGIN** — 27 of them — says what people you were born to and what that gave you.
 **A BACKGROUND** — 40 — says what you did before the story starts, and grants what that taught you.
 
-⚠️ **Neither is a class.** Neither locks anything. They open doors and they tilt you; they do not fence you.
+**Neither is a class.** Neither locks anything. They open doors and they tilt you; they do not fence you.
 
 ## What you practise
 
 **A TRADITION** is a way of working — a body of craft with a shared idea behind it. ⛔ **There are 24
 pole-traditions standing on a ring, in 12 opposed pairs**, gathered into **14 domains**.
 
-⛔ **THE RING IS THE MAP AND THE MAP IS THE RING.** Two traditions beside each other on the ring are kin —
+**The ring is the map and the map is the ring.** Two traditions beside each other on the ring are kin —
 their crafts sit comfortably together. Directly across the ring is your **ANTIPODE**. **How far apart two
 traditions are on the ring is how far apart they are in disposition, in geography, and in what it costs you
-to learn the other one.**
-
-⚠️ **YOUR ANTIPODE IS NOT CLOSED TO YOU.** It is expensive, and it is capped shallow while you only dabble
+to learn the other one. Your antipode is not closed to you.** It is expensive, and it is capped shallow while you only dabble
 in it. ⛔ **Carry enough of that far pole and BOTH recede together** — the price falls and the ceiling
 rises. **The barrier is to dabbling, not to crossing.**
 
 ### Where a craft comes from, and where you learn it
 
-⛔ **THESE ARE TWO DIFFERENT QUESTIONS AND THE GAME KEEPS THEM APART.**
+**These are two different questions and the game keeps them apart.**
 
 - **LINEAGE** — whose craft this descends from. It is permanent, and it decides how the craft is powered and
-  where it sits on the ring.
+ where it sits on the ring.
 - **ACCESS** — where you can actually be taught it: a school, a place, a person, or the wilds.
 
-⚑ **A FOOTHILL IS A PLACE, NOT A PEOPLE.** The Harmonic Heights and the Radiant Plateau teach crafts they
+**A foothill is a place, not a people.** The Harmonic Heights and the Radiant Plateau teach crafts they
 did not invent — *"Hardline teaches the Edge; it does not own it."* ⚠️ **That is what makes a foothill worth
 travelling to.**
 
-**And some crafts are FOLK-ACCESSIBLE** — open to anyone in the Valley, whoever their people are. ⛔ **That
-is a fact about the LEARNING, never about the lineage.**
+And some crafts are **folk-accessible** — open to anyone in the valley, whoever their people are. That is a
+fact about the **learning**, never about the lineage.
 
-⚠️ **NO TRADITION IS STRUCTURALLY BETTER.** Every one has exactly two neighbours and exactly one opposite.
-**That is fairness by geometry rather than by balance patching.**
+**No tradition is structurally better.** Every one has exactly two neighbours and exactly one opposite —
+fairness by geometry rather than by balance patching.
 
 ---
 
@@ -158,15 +145,15 @@ is a fact about the LEARNING, never about the lineage.**
 You say what you want to do, in your own words. The GM answers. **Underneath, a turn has a shape:**
 
 ```
-    SENSE   →   ACTION   →   BONUS
+ SENSE → ACTION → BONUS
 ```
 
 - ⛔ **SENSE is free and it is the most under-used thing in the game.** Reading a situation before you act
-  buys you a real, named bonus on what you do next. **It does not cost your action.**
+ buys you a real, named bonus on what you do next. **It does not cost your action.**
 - **ACTION is the thing you do.**
 - **BONUS is what you get to do as well**, when something you have grants it.
 
-⚠️ **AND SENSING IS CONTESTED.** The other side is reading you too. **Hiding protects you and blinds you** —
+**And sensing is contested.** The other side is reading you too. **Hiding protects you and blinds you** —
 a character who obscures cannot see who the enemy is about to hit, and a character who reads is exposed and
 can intervene. **That is a decision every round, not a setting.**
 
@@ -174,7 +161,7 @@ can intervene. **That is a decision every round, not a setting.**
 
 You roll **d100** and you succeed if you roll **at or under** your chance.
 
-⛔ **EVERY TERM IN THAT CHANCE IS NAMED AND SHOWN TO YOU.** Your attribute, the craft's tier, how the
+**Every term in that chance is named and shown to you.** Your attribute, the craft's tier, how the
 matchup sits, how hard you are pushing, any standing effect. **The engine never hides a modifier.** If you
 want to know why a roll was 62 and not 80, the answer is on the screen.
 
@@ -191,7 +178,7 @@ different outcomes and the fiction reflects all three.
 
 You learn a craft at **rank 1** and grow into **2** and **3**.
 
-⛔ **RANKS ARE ADDITIVE. YOU NEVER LOSE A LOWER RANK'S USE.** You do not learn to burn down a hall and
+**RANKS ARE ADDITIVE — you never lose a lower rank's use.** You do not learn to burn down a hall and
 thereby forget how to light a candle.
 
 **Each rank says how it grows you** — it may **ADD** something new you can do, **DEEPEN** what you already
@@ -199,16 +186,16 @@ did, or **EXTEND** its reach: further, longer, wider, more of them at once.
 
 ## What it costs
 
-⛔ **ENERGY, AND ENERGY ONLY.** No vows, no debts, no exhaustion tracks. A craft has a price, and reaching
+**Energy, and energy only.** No vows, no debts, no exhaustion tracks. A craft has a price, and reaching
 higher costs more: **+3 energy for each rank of reach above the first.** A craft that costs 4 at rank 1
 costs 7 at rank 2 and 10 at rank 3.
 
-⛔ **AND A CRAFT THAT CAN STOP SOMEONE OUTRIGHT COSTS DOUBLE WHEN IT DOES.** Not your whole pool — twice the
+**And a craft that can stop someone outright costs double when it does.** Not your whole pool — twice the
 ordinary price, paid only when the thing actually stops. ⚠️ **A resisted attempt costs the ordinary price.**
 
 ## The floor that costs nothing
 
-⛔ **AT ZERO ENERGY YOU STILL HAVE YOUR CRAFT.** Every craft has a floor beneath rank 1 that costs
+**At zero energy you still have your craft.** Every craft has a floor beneath rank 1 that costs
 **nothing** — and it is nearly useless, which is the point.
 
 **The floor keeps what the craft IS and loses what it DOES.** A craft that reaches across a room still
@@ -218,7 +205,7 @@ reaches across a room. What goes is the dice, the lasting harm, the area, and ev
 - `kept vigil` — *a hand on them, and you simply do not leave.*
 - `hunter's strike` — *the strike with no craft in it. It lands, and that is all it does.*
 
-⚠️ **A CHARACTER AT ZERO IS NOT A CHARACTER WITH NO TRADITION.** Everything that makes you who you are is
+**A character at zero is not a character with no tradition.** Everything that makes you who you are is
 still there; it is just very small.
 
 ## What a craft tells you
@@ -226,7 +213,7 @@ still there; it is just very small.
 When you choose one you see exactly three things per rank: ⛔ **what it DOES · what it CANNOT do · what it
 COSTS.** Everything else on a craft is for us.
 
-⚠️ **"CANNOT" IS A SCOPE LIMIT, NOT A BILL.** It tells you what the craft will not produce — not what it
+**"CANNOT" IS A SCOPE LIMIT, NOT A BILL.** It tells you what the craft will not produce — not what it
 will charge you for producing it.
 
 ---
@@ -235,10 +222,8 @@ will charge you for producing it.
 
 ## What lands
 
-⛔ **A blow is a MIX, not a single thing.** A psionic strike is part force and part mind. A smite is
-radiance and judgement and impact. **The word people use for an effect is the mix.**
-
-**Every kind of harm belongs to one of four families:**
+**A blow is a MIX, not a single thing.** A psionic strike is part force and part mind. A smite is
+radiance and judgement and impact. **The word people use for an effect is the mix. Every kind of harm belongs to one of four families:**
 
 | family | what it is |
 |---|---|
@@ -247,25 +232,21 @@ radiance and judgement and impact. **The word people use for an effect is the mi
 | **VITAL** | life ended, grown, or moved |
 | ⛔ **INTRINSIC** | ⚠️ **harm that requires a WILL to make it.** A rockfall cannot do this |
 
-⚠️ **HEAT AND COLD ARE SIBLINGS, NOT OPPOSITES.** A ward against fire is not a ward against ice, and it
+**Heat and cold are siblings, not opposites.** A ward against fire is not a ward against ice, and it
 never will be.
 
 ## What stops it
 
 **A WARD answers a family, or one kind inside a family.** An elemental ward stops heat and cold and
-lightning. A cold ward stops only cold — **and is cheaper and sharper for it.**
-
-**Wards have DEPTH as well as breadth, and they are three different answers rather than three sizes of
+lightning. A cold ward stops only cold — **and is cheaper and sharper for it. Wards have DEPTH as well as breadth, and they are three different answers rather than three sizes of
 one:**
 
 - **RESIST** — you are harder to land on. It moves the roll.
 - **SOAK** — it lands and takes less off you. It moves the damage.
 - **IMMUNITY** — that kind does not touch you.
 
-⛔ **PARTIAL WARDING IS THE POINT.** A shield answers the physical half of a psionic strike and **the mind
-half goes straight through.** ⚠️ **The interesting thing about a ward is the list of what it does NOT stop.**
-
-⛔ **AND A BLOW WHOSE EVERY PART IS ANSWERED LANDS NOTHING.** Armour can fully answer. Immunity means
+**Partial warding is the point.** A shield answers the physical half of a psionic strike and **the mind
+half goes straight through.** ⚠️ **The interesting thing about a ward is the list of what it does NOT stop. And a blow whose every part is answered lands nothing.** Armour can fully answer. Immunity means
 immunity. **A receipt tells you what stopped it and why**, so a zero reads as *answered* rather than as
 *broken*.
 
@@ -277,41 +258,39 @@ a blow entirely.**
 
 ## Being driven back
 
-⛔ **MOST FIGHTS ARE NOT DECIDED BY DAMAGE.** They are decided by **PRESSURE** — a meter that fills as one
+**Most fights are not decided by damage.** They are decided by **PRESSURE** — a meter that fills as one
 side wins exchanges. When it fills, the other side is **DRIVEN BACK**: they lose ground, they lose a little
 blood and a little wind, and the meter resets.
 
-⚠️ **AND EACH TIME YOU HAVE DRIVEN THEM BACK, YOU ROLL BETTER AGAINST THEM.** It compounds.
+**And each time you have driven them back, you roll better against them.** It compounds.
 
-⛔ **DRIVE THEM BACK ENOUGH TIMES AND THEY BREAK** — they leave the field. **How many times is half their
+**Drive them back enough times and they break** — they leave the field. **How many times is half their
 level**, so a novice breaks in three and someone formidable takes far longer. ⚠️ **You can be broken the
 same way.**
 
 ## Killing, and being killed
 
-⛔ **SOME CRAFTS CAN KILL YOU. A FEW CAN SIMPLY STOP YOU.** They are not the same thing.
+**Some crafts can kill you. A few can simply stop you.** They are not the same thing.
 
 **A craft that CAN kill** does it the ordinary way — it wounds you, and you run out. Most weapons and most
 strikes are this, and the game asks you to confirm before you cast one at a person.
 
-⛔ **A craft that STOPS you bypasses all of that.** *"No wound, no struggle, no argument — it simply
-stops."* ⚠️ **These are rare, and every one of them has a price the caster pays.**
-
-**When one lands, you get a SAVE** — your own body's refusal or your own presence, whichever is greater,
-against the blow. ⚑ **Hold it and the dice are the fallback: you are badly hurt and you are alive.** Fail
+**A craft that STOPS you bypasses all of that.** *"No wound, no struggle, no argument — it simply
+stops."* ⚠️ **These are rare, and every one of them has a price the caster pays. When one lands, you get a SAVE** — your own body's refusal or your own presence, whichever is greater,
+against the blow. **Hold it and the dice are the fallback: You are badly hurt and you are alive.** Fail
 it and you stop.
 
-⚠️ **AND THE ODDS ARE NOT FIXED.** A fresh opponent is close to even. **Someone who has been run down and
+**And the odds are not fixed.** A fresh opponent is close to even. **Someone who has been run down and
 driven back three times is nearly gone**, which is what all that pressure was for.
 
-⛔ **AND SOME THINGS CANNOT BE STOPPED THIS WAY AT ALL** — a machine, a Precursor working. **There is no
+**And some things cannot be stopped this way at all** — a machine, a Precursor working. **There is no
 thread in them to cut.**
 
 ## Being stopped without being hurt
 
 Some crafts do not wound you. They **STOP** you — stagger you, cost you your action, put you out.
 
-⛔ **A FAILED RESIST DEGRADES; IT DOES NOT NEGATE.** You do not shrug it off. **You take the lesser
+**A failed resist degrades; It does not negate.** You do not shrug it off. **You take the lesser
 version** — the thing that would have knocked you out costs you your turn instead.
 
 ---
@@ -320,10 +299,10 @@ version** — the thing that would have knocked you out costs you your turn inst
 
 **Nine companions.** They are people, not equipment.
 
-⛔ **EVERYTHING PARTICIPATES.** Being able to swing is not the same as taking part. Four of the nine do not
+**EVERYTHING PARTICIPATES.** Being able to swing is not the same as taking part. Four of the nine do not
 fight and **all nine contribute** — healing is acting, distracting is acting, knowing something is acting.
 
-⚠️ **AND LOSING ONE COSTS SOMETHING SPECIFIC.** Not "you are down a body" — each of them, when they go
+**And losing one costs something specific.** Not "you are down a body" — each of them, when they go
 down, takes a named thing out of the world with them.
 
 ## Bringing people forward
@@ -331,22 +310,20 @@ down, takes a named thing out of the world with them.
 **You can only pay attention to so many people.** The ones you bring FORWARD act blow by blow. The rest are
 **FOLDED** — still in the fight, still contributing, just not narrated one swing at a time.
 
-⛔ **A FOLDED COMPANION IS NOT SAFE.** They add to your blows when you are winning and **they take losses
+**A folded companion is not safe.** They add to your blows when you are winning and **they take losses
 when you are not.** ⚠️ **Including the ones who cannot fight — being unable to swing is not being
 protected**, and the reverse would make non-combatants the smart thing to hide behind.
 
 ## Playing with other people
 
-⛔ **OTHER PLAYERS CAN SHARE A SCENE WITH YOU** — same place, same beat log, and each of you sees what the
+**Other players can share a scene with you** — same place, same beat log, and each of you sees what the
 others did. The GM's narration for your turn carries the others as present, acting people.
 
 **Turns rotate.** When it is yours, you act; when it is not, you watch what your friends do and it lands in
-the same record. ⚠️ **A scene holds up to six.**
-
-**Someone else's fight is something you WITNESS** — you see it happen, in your own narration, from where
+the same record. ⚠️ **A scene holds up to six. Someone else's fight is something you WITNESS** — you see it happen, in your own narration, from where
 you are standing.
 
-⚠️ **AND THAT IS THE HONEST EDGE OF IT TODAY.** ⛔ **Joining a fight someone else is in, striking the same
+**AND THAT IS THE HONEST EDGE OF IT TODAY. Joining a fight someone else is in, striking the same
 opponent together, and a round where everyone acts at once are DESIGNED AND NOT BUILT.** They are written
 down in full; they are not in your hands yet.
 
@@ -362,7 +339,7 @@ single assassin can still find you in the middle of your own legion.
 
 **Some crafts are WORKS, not workings.** They take days. You come back to them.
 
-⛔ **A PROJECT FINISHES ON A THRESHOLD, NEVER ON A DATE.** A date can only be waited out. **A threshold can
+**A project finishes on a threshold, never on a date.** A date can only be waited out. **A threshold can
 be:**
 
 - **INTERRUPTED** — something stops the work. What you banked is kept.
@@ -376,28 +353,24 @@ be:**
 
 # PART VII½ · PLACES OF YOUR OWN
 
-⛔ **YOU CAN COME TO HOLD PLACES.** A post, a mine, a mill, a forge — and they are not trophies. **They
-produce, they cost, and they can be taken.**
-
-**What a hold gives you depends on what is BUILT on it.** A mine yields ore into a store at the hold. A
+**You can come to hold places.** A post, a mine, a mill, a forge — and they are not trophies. **They
+produce, they cost, and they can be taken. What a hold gives you depends on what is BUILT on it.** A mine yields ore into a store at the hold. A
 temple draws pilgrims. A wall and a watch make it hard to rob. ⚠️ **A bare post with nothing on it yields
 nothing** — and a post is the cheapest place to build, because a post costs nothing to keep.
 
-⛔ **A HOLD NEEDS SOMEONE TO KEEP IT.** Left unkept it **slips**, and it can never rise above *holding* —
-nobody is there to make it thrive. **Kept and worked, it climbs.**
-
-⚠️ **AND HOW FAR IT CAN FALL DEPENDS ON YOUR STANDING.** Early on, an unkept hold slides all the way to
-failing. ⚑ **Once your name carries enough weight, it stops at *holding* and goes no further** — the place
+**A hold needs someone to keep it.** Left unkept it **slips**, and it can never rise above *holding* —
+nobody is there to make it thrive. **Kept and worked, it climbs. And how far it can fall depends on your standing.** Early on, an unkept hold slides all the way to
+failing. **Once your name carries enough weight, it stops at *holding* and goes no further** — the place
 keeps standing because of who is known to hold it, even when nobody is there.
 
-⚑ **AND YOUR STORE IS THE FIRST THING YOU OWN THAT IS WORTH STEALING AND CANNOT RUN AWAY.** A raid that
+**And your store is the first thing you own that is worth stealing and cannot run away.** A raid that
 goes unnoticed takes what it came for. ⛔ **A raid that is SEEN is a fight** — and if you win, they take
 nothing and what they carried is yours.
 
-⚠️ **SMALL CLAIMS ARE DIFFERENT.** A room, a shop, a shrine you were given on the road.
+**Small claims are different.** A room, a shop, a shrine you were given on the road.
 
-⛔ **WHAT IS LIMITED IS NOT PLACES — IT IS PEOPLE.** You can only have so many named people running things
-in your name, and one person keeping two holds is still **one** of them. ⚑ **So a small claim with nobody
+**What is limited is not places — it is people.** You can only have so many named people running things
+in your name, and one person keeping two holds is still **one** of them. **So a small claim with nobody
 keeping it costs you nothing.** They are the reward of travelling, and **they can be taken from you, and you
 can go and take them back.**
 
@@ -405,17 +378,17 @@ can go and take them back.**
 
 # PART VIII · DYING
 
-⛔ **DEATH IS A LADDER, NOT A SWITCH.**
+**Death is a ladder, not a switch.**
 
 | how far gone | what it means | who can still reach |
 |---|---|---|
 | **the Threshold** | dead about a day | a rank-1 working |
 | **the Near Dark** | about a month | rank 2 |
-| **the Deep Dark** | months; the road is nearly closed | rank 3 |
+| **the Deep Dark** | months; The road is nearly closed | rank 3 |
 | ⛔ **SEALED** | ⛔ **nothing, at any rank** | — |
 
-⚠️ **AND THE LADDER MOVES.** A failed retrieval **sinks them a rung.** A failed reach at the Deep Dark
-**seals them permanently.** ⛔ **Using the craft badly is how a person becomes unreachable** — which means
+**And the ladder moves.** A failed retrieval **sinks them a rung.** A failed reach at the Deep Dark
+**seals them permanently. Using the craft badly is how a person becomes unreachable** — which means
 trying and failing is a real risk and not a free attempt.
 
 **Five traditions answer this ladder differently and share one set of verbs** — retrieve, sink, seal, hold,
@@ -429,52 +402,56 @@ slow. Ashwardens drag you back. The Numinous invite. Threnody delays the sinking
 
 - **LEVEL** is capability. It opens ranks and crafts.
 - ⛔ **NOTORIETY is what the world has heard.** It is earned by DEEDS — things you actually did, that people
-  actually found out about.
+ actually found out about.
 
-⚠️ **STANDING IS WHAT LETS YOU LEAD.** How many named people will act alongside you is earned, not bought:
+**Standing is what lets you lead.** How many named people will act alongside you is earned, not bought:
 **it rises with your level, your presence, and what you are known for.** At the top of that arc you hold
 ground, raise a band, and the game stops being about one person's arm.
 
-⛔ **AND THE PEOPLE AROUND YOU GROW TOO — INCLUDING THE ONES YOU ARE NOT WITH.** Someone keeping a charge
+**And the people around you grow too — including the ones you are not with.** Someone keeping a charge
 for you is negotiating, defending and building while you are elsewhere, and it counts. ⚠️ **So does anyone
-out in the world doing their own work.** ⚑ **The trickster you brushed past in a market may be a gang
+out in the world doing their own work. The trickster you brushed past in a market may be a gang
 leader when you meet again, and nobody arranged that** — the world grew while you were not looking.
 
 ---
 
-# PART X · THE VALLEY
+# PART X · WHERE YOU BEGIN
 
-## Where you start
+Exesa has a hundred and thirty-five authored places across thirty-eight regions, and **you do not all begin
+in the same one.** Where you start decides which of the world's troubles is *yours* — the water crisis
+belongs to the valley, and someone who begins in the Deepwood will meet a different quarrel entirely.
 
-**Millbrook.** A riverside farming village on the Echo, water wheels turning along the bank, a fen to the
-south that the road has to go round. Ordinary ground, and it is ordinary **on purpose** — farms, a river,
-and a road to somewhere worse.
-
-Nothing has happened to Millbrook. That is the point of it. You begin somewhere that has not yet been
-made into a story, seven kilometres from a place that has.
-
-## The shape of the valley
-
-The valley floor is where play lives, and it is deliberately the part of the world that is **not a
-statement**. Crossing it is unremarkable. That is why what sits at its eastern end reads as loudly as it
-does.
-
-**The places you are likely to meet first, and what each is FOR in a life:**
+**What a starting place has in common with every other one:**
 
 | | |
 |---|---|
-| **Millbrook** | home, and the thing you are from. Grain, wheels, a lane east |
+| **somewhere ordinary** | a village, a crossing, a stilt-town. **Nothing has happened there yet**, and that is the point of it |
+| **somewhere close that is not ordinary** | a few hours' walk. You will hear about it before you see it |
+| **people who were there before you** | ⚠️ **with their own work, their own debts, and their own opinion of you** |
+| **a road** | going somewhere worse, and somewhere better, and the choice is not marked |
+
+## The valley, as an example of one
+
+**If you begin in the valley:** Millbrook is a riverside farming village on the Echo, water wheels along the
+bank, a fen to the south the road has to go round. **Ordinary on purpose.**
+
+| | |
+|---|---|
 | **Echo River Crossing** | the old stone-and-cable bridge where the Echo narrows. **Everyone crosses here**, which is why everyone meets here |
-| **Waystone** | bridge-builders and road-walkers. **The Masons build the crossing** — a bridge needs a road, and a road needs somebody who will keep it |
-| **Greywater Stilts** | a town built **on stilts over the southern marsh**. Dead flat, and the water is the only direction that matters |
-| **Archive Hollow** | a collapsed limestone sink upstream, **opened by spring floods.** Something was under there and now it is not under there |
-| **The Disputed Zone fringe** | seven kilometres east of home, and **the dispute it is named for is 113 walking days away**. The fringe is where you feel a quarrel you are not part of |
-| **The Quiet Ground** | still grey water and wide windows. ⚠️ **The water is what the dying look at.** People are brought here |
+| **Waystone** | bridge-builders and road-walkers. **A bridge needs a road, and a road needs somebody who will keep it** |
+| **Greywater Stilts** | a town on stilts over the southern marsh. Dead flat, and **the water is the only direction that matters** |
+| **Archive Hollow** | a collapsed limestone sink, **opened by spring floods.** Something was under there and now it is not |
+| **The Quiet Ground** | still grey water and wide windows. ⚠️ **The water is what the dying look at** |
 | **Thinwater** | *"the water runs thin here, and so does everything else"* |
+
+**And seven kilometres east, the fringe of a Disputed Zone** — where you feel a quarrel that is 113 walking
+days away and not yours.
+
+**Every region has its own version of this list.** Yours will not be these places.
 
 ## What is pressing, where you are
 
-⛔ **THERE IS NO SINGLE STORY WAITING FOR YOU.** The valley carries **six live arcs** at once, and they move
+**There is no single story waiting for you.** The valley carries **six live arcs** at once, and they move
 whether you touch them or not. ⚠️ **The one nearest your hand depends on where you are standing** — start in
 the Deepwood and the water is somebody else's problem, and stays that way.
 
@@ -487,11 +464,11 @@ the Deepwood and the water is somebody else's problem, and stays that way.
 | **What Sleeps Under** | slow-building | the Precursor lattice stirring beneath the valley |
 | **The Failing Accord** | slow-building | the Green Accord failing as the Old Stag dies |
 
-⛔ **ARCS RESOLVE.** Not "advance" — **finish.** One way or another, and the result is permanent: a valley
+**ARCS RESOLVE.** Not "advance" — **finish.** One way or another, and the result is permanent: a valley
 where the Second River was answered is a different valley from one where it was not, and neither goes back.
 
-⚠️ **AND CLOSED ARCS LEAVE WAKES.** What a resolution changes becomes the ground the next arc rises from.
-**The list above is not the game's plot; it is the weather at one moment**, and it will not be the same
+**And closed arcs leave wakes.** What a resolution changes becomes the ground the next arc rises from.
+**The list above is not the game's plot; It is the weather at one moment**, and it will not be the same
 list a season in.
 
 ## What you should expect to know
@@ -500,7 +477,7 @@ list a season in.
 behaving.** A Deepwood walker knows the Moot has been arguing for a very long time and that the argument has
 started to have a winner.
 
-⛔ **YOU ARE NOT OWED THE SHAPE OF IT.** Which arc you meet, whether you engage, and whether it resolves for
+**You are not owed the shape of it.** Which arc you meet, whether you engage, and whether it resolves for
 good or ill is play — **and an arc you ignore does not wait politely.**
 
 ## Who you deal with
@@ -508,13 +485,11 @@ good or ill is play — **and an arc you ignore does not wait politely.**
 Ten accords hold the valley together and they are **things you deal with**, not factions you join:
 
 - **The Water Authority** decides who gets the river. ⚠️ **Since the shoreline moved, that decision is
-  worth more than it was, and everyone knows it.**
+ worth more than it was, and everyone knows it.**
 - **The Masons' road-and-bridge accord** keeps the crossings open. They are the reason you can get
-  anywhere, and they are owed by everyone.
+ anywhere, and they are owed by everyone.
 - **The burying trades at Greyhearth** handle every road's dead. ⛔ **Nobody finds it grim. Everyone there
-  has handled it.**
-
-⚠️ **An accord is a standing arrangement, not a membership.** You do not sign up. You come to it with
+ has handled it. An accord is a standing arrangement, not a membership.** You do not sign up. You come to it with
 something it wants, or you come to it needing something, and either way it remembers which.
 
 ---
@@ -538,32 +513,32 @@ one goes down, **you lose the specific thing they were doing**, not a percentage
 | **Sprig** | a Rootkin cutting slowly becoming someone | the rooting stops and **what it had rooted is at risk** — a wound it was closing right may close wrong |
 | **Tal** | a road-met apprentice who would not be shaken off | ⛔ a second pair of hands becomes one. ⚠️ **They went down doing your work, beside you** |
 
-⚠️ **Four of the nine cannot swing** — Aevi, Coil, Marrow and Sprig. **They are still in the fight**, because
+**Four of the nine cannot swing** — Aevi, Coil, Marrow and Sprig. **They are still in the fight**, because
 healing is acting and watching is acting, ⛔ **and they can still be hurt.** Being unable to fight is not
 being safe.
 
-⛔ **Marrow will not hasten an ending. Ever. For any reason, including mercy.** That is a choice it holds,
+**Marrow will not hasten an ending. Ever. For any reason, including mercy.** That is a choice it holds,
 not a limit it has — and a choice implies somebody else made the other one.
 
 ## People you will meet
 
 - **Ama**, in Millbrook. She finishes what she is doing before she turns.
 - **Mara Wells**, who runs the supply store — a close-ledger woman who reacts to what a person is actually
-  worth to her, and remembers.
+ worth to her, and remembers.
 - **Calvar**, past sixty, a **pre-Transition filtration engineer**. ⚠️ **Decades at a drafting surface, in a
-  valley whose water is moving.** He is the most important person in Millbrook and does not think so.
+ valley whose water is moving.** He is the most important person in Millbrook and does not think so.
 - **Veth Ondra**, eleven years a warden, still and direct. ⛔ **She teaches by refusing to soften a
-  reckoning**, which is not the same as being unkind.
+ reckoning**, which is not the same as being unkind.
 - **Siol**, a tall Elven traveller, quiet-attention rather than indifference. Has been on the road a long
-  time and is not lost.
+ time and is not lost.
 
 ## What can go wrong
 
-⛔ **Relationships here are held by attention, not by status.** A companion's bond deepens because you
+**Relationships here are held by attention, not by status.** A companion's bond deepens because you
 kept using what they gave you, and it thins because you stopped.
 
-⚠️ **The specific way it breaks is different for each of them**, and two are worth knowing up front:
-**Ember is half-wild and can decline to come back.** **Hush had not finished deciding about you**, and
+**The specific way it breaks is different for each of them**, and two are worth knowing up front:
+**Ember is half-wild and can decline to come back. Hush had not finished deciding about you**, and
 being made abruptly present in front of everyone does not help it decide well.
 
 ---
@@ -574,7 +549,7 @@ being made abruptly present in front of everyone does not help it decide well.
 axis and lose the other** — you learn where you can reach, and reaching against your own grain is where
 the interesting crafts come from.
 
-⛔ **What each one BELIEVES is not decoration.** A tradition is a claim about what the world is, and its
+**What each one BELIEVES is not decoration.** A tradition is a claim about what the world is, and its
 craft is that claim applied until it works.
 
 | tradition | craft | what its people hold | what the craft feels like |
@@ -614,11 +589,11 @@ craft is that claim applied until it works.
 
 ## What this means at a table
 
-⛔ **A tradition is not a class and it is not a faction.** It is a way of working that a place teaches.
-⚠️ **Two Ashwardens from different valleys will disagree about mercy**, and both will be practising
+**A tradition is not a class and it is not a faction.** It is a way of working that a place teaches.
+**Two Ashwardens from different valleys will disagree about mercy**, and both will be practising
 correctly.
 
-**And the axes are real oppositions, not flavours.** ⛔ **A Verist and a Veilwright cannot both be right
+**And the axes are real oppositions, not flavours. A Verist and a Veilwright cannot both be right
 about what a truth IS**, and when they meet, that is the scene.
 
 ---
@@ -627,5 +602,5 @@ about what a truth IS**, and when they meet, that is the scene.
 
 - **Field names, JSON shapes, engine internals** — [`FIELD_REFERENCE.md`](FIELD_REFERENCE.md).
 - **What is built versus proposed** — [`HOW_IT_WORKS.md`](HOW_IT_WORKS.md). ⛔ **Everything described in
-  Parts I–IX is BUILT. If something here stops being true, a gate goes red.**
+ Parts I–IX is BUILT. If something here stops being true, a gate goes red.**
 - **Why the design is this way** — `SYSTEM_SPEC.md`.

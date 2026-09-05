@@ -1769,10 +1769,9 @@
      }
     },
     "damageType": "vitality",
-    "_killCost": "✅ R35: the mechanical form of the bound authored below ('it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until a full night's rest'). Paid ONLY when the death save fails and the target stops; a held save costs the standard energyCost above. Transcribed by CCode 2026-09-04 — Aevi, correct the shape if the bound reads differently.",
+    "_killCost": "⛔ ERIK 2026-09-04, REVISING HIS OWN AUTHORED BOUND: 'the Cut Thread's cost — I'm rethinking it. It should just be DOUBLE COST if it lands, not your whole pool. It doesn't make sense for a high level PC to use it against someone and have it drain their whole pool.' ⚠️ THE SCALING ARGUMENT IS THE PROOF: whole-pool is a FIXED penalty against a GROWING pool — crippling at L20 and trivial at L100. ✅ `energyMultiplier: 2` is proportional: 28 at the base cost, a real bite at every level. ⛔ And 'unable to use any craft until a full night's rest' was never in the craft's fiction — only in its bound. Paid ONLY when the death save fails and the target stops; a held save costs the standard 14.",
     "killCost": {
-     "energy": "all",
-     "sealedUntilRest": true
+     "energyMultiplier": 2
     }
    },
    "rankDeltas": [
@@ -1786,11 +1785,11 @@
    ],
    "intensity": {
     "conserve": "REFUSED — there is no half-cut thread.",
-    "surge": "REFUSED — it already costs almost everything you have."
+    "surge": "REFUSED — it is already the whole of the act."
    },
    "bounds": [
     {
-     "text": "it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until a full night's rest",
+     "text": "⛔ IT COSTS DOUBLE WHEN IT LANDS — 28 energy, paid only if the thing stops",
      "class": "hard"
     },
     {

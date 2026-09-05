@@ -122,13 +122,31 @@ the first point in your second-best, and that is the shape of a well-rounded per
 ## What you practise
 
 **A TRADITION** is a way of working — a body of craft with a shared idea behind it. ⛔ **There are 24
-pole-traditions standing on a ring, in 12 opposed pairs**, and three folk traditions near the centre that
-are **open to anyone**.
+pole-traditions standing on a ring, in 12 opposed pairs**, gathered into **14 domains**.
 
 ⛔ **THE RING IS THE MAP AND THE MAP IS THE RING.** Two traditions beside each other on the ring are kin —
-their crafts sit comfortably together. Directly across the ring is your **antipode**, and its crafts fight
-yours. **How far apart two traditions are on the ring is how far apart they are in disposition, in
-geography, and in how hard it is for you to learn the other one.**
+their crafts sit comfortably together. Directly across the ring is your **ANTIPODE**. **How far apart two
+traditions are on the ring is how far apart they are in disposition, in geography, and in what it costs you
+to learn the other one.**
+
+⚠️ **YOUR ANTIPODE IS NOT CLOSED TO YOU.** It is expensive, and it is capped shallow while you only dabble
+in it. ⛔ **Carry enough of that far pole and BOTH recede together** — the price falls and the ceiling
+rises. **The barrier is to dabbling, not to crossing.**
+
+### Where a craft comes from, and where you learn it
+
+⛔ **THESE ARE TWO DIFFERENT QUESTIONS AND THE GAME KEEPS THEM APART.**
+
+- **LINEAGE** — whose craft this descends from. It is permanent, and it decides how the craft is powered and
+  where it sits on the ring.
+- **ACCESS** — where you can actually be taught it: a school, a place, a person, or the wilds.
+
+⚑ **A FOOTHILL IS A PLACE, NOT A PEOPLE.** The Harmonic Heights and the Radiant Plateau teach crafts they
+did not invent — *"Hardline teaches the Edge; it does not own it."* ⚠️ **That is what makes a foothill worth
+travelling to.**
+
+**And some crafts are FOLK-ACCESSIBLE** — open to anyone in the Valley, whoever their people are. ⛔ **That
+is a fact about the LEARNING, never about the lineage.**
 
 ⚠️ **NO TRADITION IS STRUCTURALLY BETTER.** Every one has exactly two neighbours and exactly one opposite.
 **That is fairness by geometry rather than by balance patching.**
@@ -185,8 +203,11 @@ did, or **EXTEND** its reach: further, longer, wider, more of them at once.
 higher costs more: **+3 energy for each rank of reach above the first.** A craft that costs 4 at rank 1
 costs 7 at rank 2 and 10 at rank 3.
 
-⚠️ **TWO CRAFTS IN THE WHOLE GAME BREAK THIS**, and they say so plainly: they take everything you have left
-and leave you at nothing until a full night's rest.
+⚠️ **ONE CRAFT IN THE WHOLE GAME BREAKS THIS**, and it says so plainly: it takes everything you have left
+and leaves you at nothing until a full night's rest.
+
+⛔ **AND A CRAFT THAT CAN STOP SOMEONE OUTRIGHT COSTS DOUBLE WHEN IT DOES.** Not your whole pool — twice the
+ordinary price, paid only when the thing actually stops. ⚠️ **A resisted attempt costs the ordinary price.**
 
 ## The floor that costs nothing
 
@@ -414,6 +435,11 @@ slow. Ashwardens drag you back. The Numinous invite. Threnody delays the sinking
 ⚠️ **STANDING IS WHAT LETS YOU LEAD.** How many named people will act alongside you is earned, not bought:
 **it rises with your level, your presence, and what you are known for.** At the top of that arc you hold
 ground, raise a band, and the game stops being about one person's arm.
+
+⛔ **AND THE PEOPLE AROUND YOU GROW TOO — INCLUDING THE ONES YOU ARE NOT WITH.** Someone keeping a charge
+for you is negotiating, defending and building while you are elsewhere, and it counts. ⚠️ **So does anyone
+out in the world doing their own work.** ⚑ **The trickster you brushed past in a market may be a gang
+leader when you meet again, and nobody arranged that** — the world grew while you were not looking.
 
 ---
 

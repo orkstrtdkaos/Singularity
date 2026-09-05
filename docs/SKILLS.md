@@ -44,7 +44,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 |---|---|---|---|---|---|---|---|---|---|
 | 0 | **Mind** | Body | Noesis, Logos, Formcraft | **31** | 12 | 6 | 6 | 4 | 3 |
 | 1 | **Light** | Dark | Radiance, Verity | **37** | 14 | 13 | 5 | 1 | 4 |
-| 2 | **Life** | Death | Vivimancy | **22** | 6 | 5 | 6 | 4 | 1 |
+| 2 | **Life** | Death | Vivimancy | **24** | 7 | 6 | 6 | 4 | 1 |
 | 3 | **Angelic** | Demonic | Ascent | **24** | 8 | 5 | 4 | 4 | 3 |
 | 4 | **Breaking** | Building | The Edge, Ruinwork | **39** | 12 | 12 | 7 | 5 | 3 |
 | 5 | **Chaos** | Order | Wildcraft | **14** | 6 | 3 | 2 | 2 | 1 |
@@ -53,8 +53,8 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | 8 | **Dark** | Light | Umbracraft, Falsecraft | **42** | 13 | 15 | 7 | 4 | 3 |
 | 9 | **Death** | Life | Palework, Pathos | **44** | 13 | 14 | 10 | 3 | 4 |
 | 10 | **Demonic** | Angelic | Descent | **23** | 9 | 6 | 2 | 3 | 3 |
-| 11 | **Building** | Breaking | Makecraft, Stillcraft | **32** | 14 | 11 | 3 | 3 | 1 |
-| 12 | **Order** | Chaos | Enginecraft, Latticework | **36** | 10 | 11 | 6 | 6 | 3 |
+| 11 | **Building** | Breaking | Makecraft, Stillcraft | **33** | 15 | 11 | 3 | 3 | 1 |
+| 12 | **Order** | Chaos | Enginecraft, Latticework | **38** | 11 | 11 | 7 | 6 | 3 |
 | 13 | **Spirit** | Span | Numenwork | **13** | 6 | 4 | 1 | 1 | 1 |
 
 ---
@@ -255,9 +255,9 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 ---
 
-## Life — ring 2, opposite **Death** · 22 crafts
+## Life — ring 2, opposite **Death** · 24 crafts
 
-### Vivimancy (`rootkin`) — 22 crafts
+### Vivimancy (`rootkin`) — 24 crafts
 
 **Tier 1**
 
@@ -269,6 +269,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `pack_sense` | **Pack-Sense** | 4 | social |  | Stray's Read · Pack · What It Remembers |
 | `snaring_green` | **Snaring Green** | 6 | practical | bind,hinder,make,strike | Green Comes Up · Thorn Turns In · Long Green Death  ⚑ harm:lethal · backlash:damaging |
 | `staunch` | **Staunch** | 4 | practical | heal,sustain | Staunch · Held Wound · Refused Bleed |
+| `thin_place_sense` | **Thin-Place Sense** | 3 | mental |  | Grove's Loan · Kept Flame · What It Carries |
 
 **Tier 2**
 
@@ -279,6 +280,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `quickening` | **Quickening** | 6 | practical | heal,make,restore,sustain | Green Touch · Quick Return · Unstoppable Spring |
 | `root_road` | **Root Road** | 5 | practical | move,open,travel | Between the Roots · Opened Way · Root Network |
 | `speaking_grove` | **Speaking Grove** | 4 | mental | command,reveal,track | A Word to the Green · Asking · Grove Speaks |
+| `the_taking_root` | **Taking Root** | 5 | practical |  | Cutting · First Words · Young Rootkin |
 
 **Tier 3**
 
@@ -936,9 +938,9 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 ---
 
-## Building — ring 11, opposite **Breaking** · 32 crafts
+## Building — ring 11, opposite **Breaking** · 33 crafts
 
-### Makecraft (`wright`) — 19 crafts
+### Makecraft (`wright`) — 20 crafts
 
 **Tier 1**
 
@@ -951,6 +953,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `makers_eye` | **Maker's-Eye** | 3 | mental | make,reveal | Maker's-Eye · Better Shape · Thing It Wants to Be |
 | `quick_work` | **Quick Work** | 4 | practical | make | Thing Made · Larger Build · Built Answer |
 | `raised_thing` | **Raised Thing** | 4 | practical | make,mend | Raised Thing · Sound Work · Thing That Outlasts |
+| `second_pair_of_hands` | **A Second Pair of Hands** | 3 | practical |  | Uninvited Apprentice · Genuinely Useful · One Who Argues |
 | `sudden_work` | **Sudden Work** | 6 | practical | break,make,strike | Driven Spar · Raised Work · Thing That Was Not There  ⚑ harm:lethal · backlash:incapacitating |
 | `tinkers_hand` | **Tinker's Hand** | 5 | practical | make,mend,open | Field Fix · Coaxing Function · Speaker to Machines  ⚑ folk |
 
@@ -1021,9 +1024,9 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 ---
 
-## Order — ring 12, opposite **Chaos** · 36 crafts
+## Order — ring 12, opposite **Chaos** · 38 crafts
 
-### Enginecraft (`enginewright`) — 11 crafts
+### Enginecraft (`enginewright`) — 12 crafts
 
 **Tier 1**
 
@@ -1048,6 +1051,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 |---|---|---|---|---|---|
 | `enginecraft` | **Enginecraft** | 8 | practical | command,make,mend | Wright's Eye · System-Speaker · Master of the Works |
 | `shortfold` | **Shortfold** | 7 | mental | move,travel | Shortfold · Longer Fold · Folded Road |
+| `the_old_procedure` | **Old Procedure** | 7 | practical |  | Assignment · Kept Lamp · Chosen Function |
 
 **Tier 4**
 
@@ -1061,7 +1065,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 |---|---|---|---|---|---|
 | `deep_works` | **Deep Works** | 13 | practical | make | Deep Works |
 
-### Latticework (`lattice`) — 25 crafts
+### Latticework (`lattice`) — 26 crafts
 
 **Tier 1**
 
@@ -1069,6 +1073,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 |---|---|---|---|---|---|
 | `carrying_call` | **Carrying Call** | 3 | practical | command,travel | Call That Carries · Worked Line · Whole Valley Hears  ⚑ folk · learnedAt:harmonic |
 | `established_route` | **Established Route** | 3 | practical | move,open,travel | Protocol Path · Seam-Walker · Inside Line |
+| `motes_vigil` | **Motes' Vigil** | 5 | mental |  | Curious Constellation · Kindled Chorus · What She Tastes |
 | `order_sense` | **Order-Sense** | 3 | mental | reveal | Order-Sense · Pattern Beneath · Whole Design |
 | `ordered_record` | **Ordered Record** | 3 | mental | bind,foresee,reveal | Departure Named · Held Order · City's Order |
 | `predicted_man` | **Predicted Man** | 5 | mental | bind,break,hinder,strike | Closed Line · Solved Position · Resolved Man  ⚑ harm:lethal · backlash:damaging |

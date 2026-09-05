@@ -188,6 +188,21 @@ costs 7 at rank 2 and 10 at rank 3.
 ⚠️ **TWO CRAFTS IN THE WHOLE GAME BREAK THIS**, and they say so plainly: they take everything you have left
 and leave you at nothing until a full night's rest.
 
+## The floor that costs nothing
+
+⛔ **AT ZERO ENERGY YOU STILL HAVE YOUR CRAFT.** Every craft has a floor beneath rank 1 that costs
+**nothing** — and it is nearly useless, which is the point.
+
+**The floor keeps what the craft IS and loses what it DOES.** A craft that reaches across a room still
+reaches across a room. What goes is the dice, the lasting harm, the area, and everything the ranks added.
+
+- `deathsense` — *a look, from wherever you are standing. You get one fact: how long.*
+- `kept vigil` — *a hand on them, and you simply do not leave.*
+- `hunter's strike` — *the strike with no craft in it. It lands, and that is all it does.*
+
+⚠️ **A CHARACTER AT ZERO IS NOT A CHARACTER WITH NO TRADITION.** Everything that makes you who you are is
+still there; it is just very small.
+
 ## What a craft tells you
 
 When you choose one you see exactly three things per rank: ⛔ **what it DOES · what it CANNOT do · what it
@@ -242,6 +257,38 @@ immunity. **A receipt tells you what stopped it and why**, so a zero reads as *a
 death-ward answers decay and cold and the draining of life, and nothing else. **A big enough guard can stop
 a blow entirely.**
 
+## Being driven back
+
+⛔ **MOST FIGHTS ARE NOT DECIDED BY DAMAGE.** They are decided by **PRESSURE** — a meter that fills as one
+side wins exchanges. When it fills, the other side is **DRIVEN BACK**: they lose ground, they lose a little
+blood and a little wind, and the meter resets.
+
+⚠️ **AND EACH TIME YOU HAVE DRIVEN THEM BACK, YOU ROLL BETTER AGAINST THEM.** It compounds.
+
+⛔ **DRIVE THEM BACK ENOUGH TIMES AND THEY BREAK** — they leave the field. **How many times is half their
+level**, so a novice breaks in three and someone formidable takes far longer. ⚠️ **You can be broken the
+same way.**
+
+## Killing, and being killed
+
+⛔ **SOME CRAFTS CAN KILL YOU. A FEW CAN SIMPLY STOP YOU.** They are not the same thing.
+
+**A craft that CAN kill** does it the ordinary way — it wounds you, and you run out. Most weapons and most
+strikes are this, and the game asks you to confirm before you cast one at a person.
+
+⛔ **A craft that STOPS you bypasses all of that.** *"No wound, no struggle, no argument — it simply
+stops."* ⚠️ **These are rare, and every one of them has a price the caster pays.**
+
+**When one lands, you get a SAVE** — your own body's refusal or your own presence, whichever is greater,
+against the blow. ⚑ **Hold it and the dice are the fallback: you are badly hurt and you are alive.** Fail
+it and you stop.
+
+⚠️ **AND THE ODDS ARE NOT FIXED.** A fresh opponent is close to even. **Someone who has been run down and
+driven back three times is nearly gone**, which is what all that pressure was for.
+
+⛔ **AND SOME THINGS CANNOT BE STOPPED THIS WAY AT ALL** — a machine, a Precursor working. **There is no
+thread in them to cut.**
+
 ## Being stopped without being hurt
 
 Some crafts do not wound you. They **STOP** you — stagger you, cost you your action, put you out.
@@ -270,6 +317,26 @@ down, takes a named thing out of the world with them.
 when you are not.** ⚠️ **Including the ones who cannot fight — being unable to swing is not being
 protected**, and the reverse would make non-combatants the smart thing to hide behind.
 
+## Playing with other people
+
+⛔ **OTHER PLAYERS CAN SHARE A SCENE WITH YOU** — same place, same beats, and each of you sees what the
+others did.
+
+⚠️ **OUTSIDE A FIGHT the party has a LEADER**, and the leader decides where you go and what you try.
+⚑ **Everyone else states what they WANT** — *"I'm keeping an eye on the woman by the fire"* — and the GM
+tells the leader what their people are reaching for before they choose. ⛔ **The leader never chooses
+someone else's ACTION.**
+
+⛔ **IN A FIGHT THERE IS NO LEADER.** Everyone picks from their own menu, everyone locks in, and then the
+whole round resolves at once. ⚑ **Because every declaration is known before anything happens, a ward
+declared in the same instant actually catches the blow** — which is not true when people take turns.
+
+⚠️ **AND UP TO THREE OF YOU ACT FULLY**; the rest are folded, as companions are. **Which three is a real
+choice.**
+
+**If someone has not locked in, the leader chooses:** wait, skip them (they guard), or let the GM play them
+from their own sheet.
+
 ## Bigger than a party
 
 **As you gain standing you lead more than a handful.** A band, then units, then something that meets an
@@ -291,6 +358,28 @@ be:**
 - **INHERITED** — the work passes to someone else and continues in their hands.
 
 **More hands make it go faster.** The GM will not promise you a completion day, because there is not one.
+
+---
+
+# PART VII½ · PLACES OF YOUR OWN
+
+⛔ **YOU CAN COME TO HOLD PLACES.** A post, a mine, a mill, a forge — and they are not trophies. **They
+produce, they cost, and they can be taken.**
+
+**What a hold gives you depends on what is BUILT on it.** A mine yields ore into a store at the hold. A
+temple draws pilgrims. A wall and a watch make it hard to rob. ⚠️ **A bare post with nothing on it yields
+nothing** — and a post that keeps a road safe can be paid for that by the people who use the road.
+
+⛔ **A HOLD NEEDS SOMEONE TO KEEP IT.** Left unkept it slips — slowly, and never past *holding* if your name
+still stands over it. **Kept and worked, it climbs.**
+
+⚑ **AND YOUR STORE IS THE FIRST THING YOU OWN THAT IS WORTH STEALING AND CANNOT RUN AWAY.** A raid that
+goes unnoticed takes what it came for. ⛔ **A raid that is SEEN is a fight** — and if you win, they take
+nothing and what they carried is yours.
+
+⚠️ **SMALL CLAIMS ARE DIFFERENT.** A room, a shop, a shrine you were given on the road — **those do not
+count against how many places you can attend to.** They are the reward of travelling, and **they can be
+taken from you, and you can go and take them back.**
 
 ---
 

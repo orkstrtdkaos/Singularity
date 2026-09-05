@@ -23,6 +23,7 @@ import { debit, credit } from "./purse.js";        // Q8: upkeep leaves the purs
 import { regionDemand } from "./economy.js";       // Q8: a unit is worth what THIS Reach wants it for
 import { sheetFor as personSheetFor, tierOf as tierOfLevel } from "./npcsheet.js";   // Q18: the keeper's tier sets the ceiling
 import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
+import { legionClash, contingentsFromPeople } from "./melee.js";   // R46a: a detected raid is a FIGHT, resolved unattended
 
 export const HOLDING_KINDS = ["post", "enterprise"];
 
@@ -427,6 +428,71 @@ export function yieldFor(holding, cfg, { density = null } = {}) {
 }
 /** A hold is guarded by an authored `defence`, or by a garrison — the list of people on watch (`setGarrison`), or the older
  *  boolean an author may still write. */
+/** ✅ R46a (Erik 2026-09-05): A RAID IS A FIGHT, NOT A SUBTRACTION.
+ *
+ *  ⛔ **UNDETECTED — they take what they came for.** *"That is what a watch is FOR, and having none is the loss."* Walls still
+ *  cut the take (`defenceShareStep`), and `minTakeShare` is RETIRED: a hold with enough stone can lose nothing to a raid
+ *  nobody saw, and a hold with none can lose everything.
+ *
+ *  ⚑ **DETECTED — A FIGHT**, resolved unattended on the tick the way a band clash is (`legionClash`), with the garrison as
+ *  its actual crew (`contingentsFromPeople`) and the raiders drawn from the danger of the place. ⛔ **Win and they take
+ *  NOTHING — and you GAIN something:** what they were carrying goes into your store. *"Not merely the absence of loss."*
+ *
+ *  ⚠️ A WATCH IS WHAT DETECTS: people on the garrison, or a feature that keeps one (sentries, a tower). Stone alone does not
+ *  see. Returns the receipt the news reads, or null when nothing came of it. */
+export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {} } = {}) {
+  const fcfg = cfg?.features || {};
+  const step = Number.isFinite(Number(fcfg.defenceShareStep)) ? Number(fcfg.defenceShareStep) : 0.15;
+  const baseShare = Number.isFinite(Number(cfg?.raid?.takeShare)) ? Number(cfg.raid.takeShare) : 0.5;
+  const take = (share) => {
+    const taken = {};
+    for (const [g, n] of Object.entries(holding.store || {})) {
+      const t = Math.floor((Number(n) || 0) * share);
+      if (t > 0) { holding.store[g] = (Number(n) || 0) - t; taken[g] = t; }
+    }
+    return taken;
+  };
+  const note = (t) => { holding.history = [...(holding.history || []), { at: null, from: holding.condition, to: holding.condition, note: t }].slice(-12); };
+  if (!watchOf(holding, cfg).length) {
+    // ⛔ nobody saw them coming. Stone still slows them; nothing stops them.
+    const share = Math.max(0, Math.min(1, baseShare - step * defenceOf(holding, cfg)));
+    const taken = take(share);
+    if (!Object.keys(taken).length) return { detected: false, taken: {}, day, why: "they found nothing worth the carrying" };
+    note(`raided unseen — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ")} taken`);
+    return { detected: false, taken, day };
+  }
+  // ⚑ the watch saw them: a fight, at band scale, unattended
+  const defenders = contingentsFromPeople(watchOf(holding, cfg).map(id => people?.[id] || character?.npcRegistry?.[id] || { id, name: id }),
+    { levelOf: (p) => Number(p?.level) || 1 });
+  const stone = defenceOf(holding, cfg);
+  if (stone > 0) defenders.push({ n: 1, quality: stone, what: "the walls" });
+  const raiders = [{ n: Math.max(1, Math.round(dangerLevel)), quality: Math.max(1, Math.round(dangerLevel / 2)), what: "raiders" }];
+  const clash = legionClash(defenders, raiders, { rng, cfg: cfg?.raid?.clash || {} });
+  const held = clash.tide > 0.05;
+  if (held) {
+    // ⛔ NOT MERELY THE ABSENCE OF LOSS — what they carried is yours now.
+    const spoilKind = String(cfg?.raid?.spoils?.goods || "raw_material");
+    const spoils = Math.max(1, Math.round((Number(cfg?.raid?.spoils?.perDanger) || 1) * dangerLevel));
+    holding.store = holding.store && typeof holding.store === "object" ? holding.store : {};
+    holding.store[spoilKind] = (Number(holding.store[spoilKind]) || 0) + spoils;
+    note(`raid beaten off — ${spoils} ${spoilKind} taken from them`);
+    return { detected: true, held: true, taken: {}, spoils: { [spoilKind]: spoils }, outcome: clash.outcome, day };
+  }
+  const taken = take(Math.max(0, Math.min(1, baseShare - step * stone)));
+  note(`raid fought and lost — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} taken`);
+  return { detected: true, held: false, taken, outcome: clash.outcome, day };
+}
+
+/** Who is WATCHING: people posted on the garrison, plus a feature that keeps a watch (sentries, a tower). Stone does not see. */
+export function watchOf(holding, cfg = null) {
+  const ids = Array.isArray(holding?.garrison) ? [...holding.garrison] : [];
+  for (const f of featuresOf(holding)) {
+    const def = featureDef(f.kind, cfg);
+    if (def?.watch) for (let i = 0; i < (Number(f.count) || 1); i++) ids.push(`${f.kind}:${i}`);
+  }
+  return ids;
+}
+
 export function isGuarded(holding, cfg = null) {
   return !!(holding?.defence || (Array.isArray(holding?.garrison) ? holding.garrison.length > 0 : holding?.garrison) || defenceOf(holding, cfg) > 0);
 }
@@ -457,7 +523,7 @@ export function storeWorth(holding, { economy = null, regionId = null, cfg = nul
   }
   return any ? Math.round(total) : null;
 }
-export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null } = {}) {
+export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {} } = {}) {
   if (!holding || !cfg) return null;
   const out = { yielded: null, upkeep: 0, short: 0, raid: null, full: false, justFull: false };
   // ✅ features: a post with a mine yields — every material feature adds its goods beside the hold's own kind
@@ -469,6 +535,9 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   }
   out.yielded = ys.length ? ys[0] : null;
   out.yields = ys;
+  // ✅ R46b: what the pilgrims leave, before the keep is paid — attendance is an earning shape beside production.
+  const alms = pilgrimIncome(holding, { cfg, meaning });
+  if (alms > 0) { const c = credit(character, cfg.upkeepCurrency || "crystal", alms, { origin: "gift" }); if (c.ok) out.pilgrims = alms; }
   const up = upkeepFor(holding, cfg);
   if (up > 0) {
     const r = debit(character, cfg.upkeepCurrency || "crystal", up, {});
@@ -483,23 +552,7 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   if (raid && total > 0 && dangerLevel > 0) {
     let p = (Number(raid.base) || 0) * dangerLevel * Math.min(1, total / fullAt);
     if (isGuarded(holding, cfg)) p *= Number.isFinite(Number(raid.defendedMult)) ? Number(raid.defendedMult) : 0.5;
-    if (rng() < p) {
-      // each defence point (a wall, a barrier, sentries, a tower's two) cuts what a raid can carry off
-      const fcfg = cfg.features || {};
-      const step = Number.isFinite(Number(fcfg.defenceShareStep)) ? Number(fcfg.defenceShareStep) : 0.15;
-      const floor = Number.isFinite(Number(fcfg.minTakeShare)) ? Number(fcfg.minTakeShare) : 0.1;
-      const share = Math.max(floor, Math.min(1, (Number.isFinite(Number(raid.takeShare)) ? Number(raid.takeShare) : 0.5) - step * defenceOf(holding, cfg)));
-      const taken = {};
-      for (const [g, n] of Object.entries(holding.store || {})) {
-        const t = Math.floor((Number(n) || 0) * share);
-        if (t > 0) { holding.store[g] = (Number(n) || 0) - t; taken[g] = t; }
-      }
-      if (Object.keys(taken).length) {
-        out.raid = { taken, day };
-        holding.history = [...(holding.history || []), { at: null, from: holding.condition, to: holding.condition,
-          note: `raided — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ")} taken` }].slice(-12);
-      }
-    }
+    if (rng() < p) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people });
   }
   return out;
 }
@@ -508,7 +561,16 @@ export function storeNews(holding, st) {
   if (!holding || !st) return [];
   const where = holding.name || holding.id;
   const lines = [];
-  if (st.raid) lines.push(`Raiders hit ${where} — ${Object.entries(st.raid.taken).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ")} taken.${isGuarded(holding) ? " The watch was not enough." : " Nobody was there to stop them."}`);
+  // ✅ R46a: three endings, and they do not read alike
+  if (st.raid) {
+    const r = st.raid;
+    const list = (o) => Object.entries(o || {}).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ");
+    if (r.detected && r.held) lines.push(`Raiders came at ${where} and the watch met them — they took nothing, and left ${list(r.spoils)} behind them.`);
+    else if (r.detected) lines.push(`Raiders came at ${where}, the watch met them and lost — ${list(r.taken) || "nothing"} taken.`);
+    else if (Object.keys(r.taken || {}).length) lines.push(`${where} was robbed in the night — ${list(r.taken)} gone, and nobody saw them.`);
+    else lines.push(`Something came at ${where} in the night and found nothing worth the carrying.`);
+  }
+  if (st.pilgrims) lines.push(`${st.pilgrims} crystal left at ${where} by those who came to it.`);
   if (Array.isArray(st.yields) && st.yields.length > 1) { /* several goods — the store line on the tab says which */ }
   if (st.grew) lines.push(`${where} has come up to ${holding.condition}${st.grew.keeper ? ` under ${st.grew.keeper}` : ""}.`);
   if (st.short) lines.push(`${where} could not pay its keep this pass (${st.short} owed) — the arrears sit on the place.`);
@@ -743,6 +805,41 @@ export function yieldsFor(holding, cfg, { density = null } = {}) {
   return out;
 }
 /** The meaning a hold's temples and shrines add to the place it stands in (SPEC_meaning_density: a hold IS people living somewhere). */
+/** ✅ R46b: a meaning feature may carry a POWER-SOURCE FIELD — `substrateSource: {kind: "pool"|"sink", delta}` on the
+ *  catalogue kind — and a hold is a STATIONARY aura (SPEC_holding_attributes §3c: "companions already carry substrateAura;
+ *  a hold is a stationary aura"). The delta rides the same term a carried charge does, so a temple thickens or thins the
+ *  apparatus under it exactly as a Waystaff does in a hand. ⚠️ And a hold may be BOTH — dense in meaning, thin in
+ *  apparatus — which is the Numinous's authored problem (R38: meaning is the ceiling, substrate the penalty). */
+export function holdingFieldDelta(character, locationId, cfg = null) {
+  let d = 0;
+  for (const h of holdingsAt(character, locationId)) for (const f of featuresOf(h)) {
+    const def = featureDef(f.kind, cfg);
+    const src = def?.substrateSource;
+    if (!src) continue;
+    const sign = String(src.kind) === "sink" ? -1 : 1;
+    d += sign * Math.abs(Number(src.delta) || 0) * (Number(f.count) || 1);
+  }
+  return Math.round(d * 1000) / 1000;
+}
+
+/** ✅ R46b: REVENUE FROM PILGRIMS — a hold that earns from ATTENDANCE rather than production. *"A temple yields because
+ *  people come, not because it makes a good."* The take scales with the MEANING of the place, which is the thing they come
+ *  for; it is paid into the purse, because a pilgrim leaves coin and not ore. */
+export function pilgrimIncome(holding, { cfg = null, meaning = 0 } = {}) {
+  // ⚠️ the dials sit with the KINDS that name the pilgrims (economy.holdFeatures), not with the store's own numbers
+  const p = cfg?.features?.pilgrims || cfg?.pilgrims || null;
+  const rate = Number(p?.perPilgrim);
+  if (!Number.isFinite(rate) || rate <= 0) return 0;
+  let heads = 0;
+  for (const f of featuresOf(holding)) {
+    const def = featureDef(f.kind, cfg);
+    heads += (Number(def?.pilgrims) || 0) * (Number(f.count) || 1);
+  }
+  if (!heads) return 0;
+  const draw = 1 + Math.max(0, Number(meaning) || 0) * (Number(p.perMeaning) || 0);
+  return Math.max(0, Math.round(heads * rate * draw));
+}
+
 export function holdingMeaningAura(character, locationId, cfg = null) {
   let aura = 0;
   for (const h of holdingsAt(character, locationId)) for (const f of featuresOf(h)) { const def = featureDef(f.kind, cfg); if (def?.family === "meaning") aura += (Number(def.aura) || 0) * (Number(f.count) || 1); }

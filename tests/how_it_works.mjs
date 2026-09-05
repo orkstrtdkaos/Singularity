@@ -772,7 +772,7 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
     // ✅ GAP CLOSED 2026-09-04 (§69): a holding has INCOME (the store yields and sells), a RESOURCE (goods at the hold) and a
     // DEFENCE reader (`defence`/`garrison` halve a raid). Capability is still Q14. Asserted CLOSED so a regression goes red.
     check("§10: ⛔ the holdings-economy gap CLOSED (§69) — a holding has income, a resource and a defence reader; stays closed",
-      /export function tickStore/.test(hold) && /export function sellStore/.test(hold) && /export function isGuarded/.test(hold) && /isGuarded\(holding\)/.test(hold));
+      /export function tickStore/.test(hold) && /export function sellStore/.test(hold) && /export function isGuarded/.test(hold) && /isGuarded\(holding, cfg\)/.test(hold));
     // ✅ GAP CLOSED 2026-09-04 (§61): release is an operation with a cost trace, news and a record. Asserted CLOSED now,
     // so a regression to the bare filter goes red the way the open gap used to.
     check("§10: ⛔ releaseHolding is no longer a bare filter — the gap closed (§61) and stays closed",
@@ -4685,9 +4685,12 @@ console.log("\n── §69 · the five — roll=card, meaning ceiling, stacking 
     const st = H69.tickStore(c, h, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 4, rng: () => 0, day: 7 });
     const h2 = mine69("thriving"); h2.store = { raw_material: 40 }; h2.garrison = true;
     let open = 0, kept = 0; for (let i = 0; i < 600; i++) { const a = { ...mine69("thriving"), store: { raw_material: 40 } }; if (H69.tickStore(mk69(), a, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 4, rng: mkRng69(i), day: 7 }).raid) open++; const b = { ...h2, store: { raw_material: 40 } }; if (H69.tickStore(mk69(), b, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 4, rng: mkRng69(i), day: 7 }).raid) kept++; }
-    check("§69: ⛔ …A FULL STORE IS A TARGET — a raid takes a share and arrives as news; a garrison halves the chance; no danger, no raid",
-      st.raid?.taken?.raw_material === 24 && h.store.raw_material === 24 /* 40 + the pass yield 8, halved */ && H69.storeNews(h, st).some(t => /Raiders hit/.test(t)) && open > kept && kept > 0
-      && !H69.tickStore(mk69(), { ...mine69("thriving"), store: { raw_material: 40 } }, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 0, rng: () => 0, day: 7 }).raid, `open ${open} kept ${kept} of 600`); }
+    // ⚠️ R46a (2026-09-05) SUPERSEDES THE SUBTRACTION THIS ASSERTED. An unwatched store is still taken from — that half
+    // stands and is the one this check exists for — but a GARRISON no longer halves a loss, it MEETS them (§78). What is
+    // asserted here now: the store is a target, an unwatched raid takes and says so, and no danger means no raid.
+    check("§69: ⛔ …A FULL STORE IS A TARGET — an unwatched raid takes a share and arrives as news; no danger, no raid",
+      st.raid?.taken?.raw_material === 24 && h.store.raw_material === 24 /* 40 + the pass yield 8, unwatched */ && H69.storeNews(h, st).some(t => /robbed in the night/.test(t)) && open > 0
+      && !H69.tickStore(mk69(), { ...mine69("thriving"), store: { raw_material: 40 } }, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 0, rng: () => 0, day: 7 }).raid, `${open} of 600 unwatched raids landed`); }
   { const c = mk69(); c.holdings = [mine69("thriving")]; c.holdings[0].store = { raw_material: 20 };
     const away = H69.sellStore(c, "mine", { economy: eco69, cfg: sCfg, hereId: "greyhearth", regionId: "the_center", day: 9 });
     const here = H69.sellStore(c, "mine", { economy: eco69, cfg: sCfg, hereId: "choirheight", regionId: null, day: 9 });
@@ -5067,13 +5070,16 @@ console.log("\n── §75 · features — a mine yields, a temple carries meani
   const h3 = c3.holdings[0]; h3.store = { raw_material: 40 };
   check("§75: ⛔ a wall and sentries make the hold GUARDED with nobody on the garrison list, and count as defence points",
     H75.isGuarded(h3, cfgAll) && !H75.isGuarded({ id: "x", kind: "post" }, cfgAll) && H75.defenceOf(h3, cfgAll) === 1 + 4 && H75.upkeepFor(h3, cfgAll) === 0);
+  // ⚠️ R46a (2026-09-05) SUPERSEDES THE FLOOR THIS ONCE ASSERTED: sentries keep a WATCH, so this hold does not get
+  // subtracted from — it FIGHTS. §78 carries the three endings; here we assert only that a watched hold is never quietly
+  // robbed, which is what the wall-and-sentries fixture is for.
   const st3 = H75.tickStore(c3, h3, { cfg: cfgAll, economy: eco, dangerLevel: 4, rng: () => 0, day: 5 });
-  // a post with no mine yields nothing, so the raid works on the 40 in store
-  check("§75: ⛔ …a raid that lands takes less for every defence point, never below the floor (5 points: 0.5 − 0.75 → the floor 0.1 of 40 = 4)",
-    st3.raid && st3.raid.taken.raw_material === Math.floor(40 * eco.holdFeatures.minTakeShare) && h3.store.raw_material === 40 - Math.floor(40 * eco.holdFeatures.minTakeShare), JSON.stringify(st3.raid));
+  check("§75: ✅ …a hold with a watch is never quietly robbed — it meets them (R46a), win or lose",
+    st3.raid && st3.raid.detected === true, JSON.stringify(st3.raid));
   const open = mk(); open.holdings[0].store = { raw_material: 40 };
   const stO = H75.tickStore(open, open.holdings[0], { cfg: cfgAll, economy: eco, dangerLevel: 4, rng: () => 0, day: 5 });
-  check("§75: …an unguarded hold still loses the full share", stO.raid && stO.raid.taken.raw_material === Math.floor(40 * eco.holdStore.raid.takeShare));
+  check("§75: …an unguarded hold, unseen, still loses the full share (R46a: having no watch IS the loss)",
+    stO.raid && stO.raid.detected === false && stO.raid.taken.raw_material === Math.floor(40 * eco.holdStore.raid.takeShare));
   // ── quarters house and raise the hands
   const c4 = mk();
   H75.addFeature(c4, "threshold", { kind: "quarters", by: "fendt", cfg: cfgAll });
@@ -5242,6 +5248,83 @@ console.log("\n── §77 · a bearer record · the object moves · co-use is a
     && /giveItemTo\(character, u\.npcId, nm/.test(app77) && /takeItemFrom\(character, u\.npcId, nm\)/.test(app77)
     && /carriedDetail/.test(reg77) && /bearers: bearersOf\(character\)/.test(app77));
   check("§77: …the body says so", /A PERSON CAN HOLD A THING/.test(rd("docs/HOW_IT_WORKS.md")));
+}
+/* ═════ §78 — R46a A RAID IS A FIGHT, NOT A SUBTRACTION · R46b A TEMPLE POOLS, AURAS AND DRAWS PILGRIMS (2026-09-05) ═════ */
+// ⛔ A raid was a dice roll and a subtraction. Now: UNDETECTED they take what they came for (stone still cuts it, and
+// `minTakeShare` is retired — "that is what a watch is FOR, and having none is the loss"); DETECTED it is a FIGHT, resolved
+// unattended at band scale with the garrison as its actual crew; win and they take NOTHING and leave spoils — "not merely
+// the absence of loss". And a temple is not defined by what it attends: it may pool or sink the apparatus under it, it
+// carries a meaning aura, and it DRAWS PILGRIMS — a hold that earns from attendance rather than production.
+console.log("\n── §78 · unseen they take · seen it is a fight · won they leave spoils · a temple pools and draws pilgrims ──");
+{
+  const H78 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch78 } = await import("./headless_content.mjs");
+  const C78 = await lch78();
+  const eco78 = C78.rules.economy, cfg78 = { ...eco78.holdStore, features: eco78.holdFeatures };
+  const kinds78 = eco78.holdFeatures.kinds;
+  check("§78: ⛔ R46a — `minTakeShare` is RETIRED, and a raid that is won pays (spoils authored)",
+    eco78.holdFeatures.minTakeShare === undefined && eco78.holdStore.raid.spoils?.goods && Number(eco78.holdStore.raid.spoils.perDanger) > 0);
+  const mk78 = (extra = {}) => { const c = { id: "pc", purse: { crystal: 100 }, holdings: [], npcRegistry: { gil: { id: "gil", name: "Gil", level: 12 } }, holdingEvents: [] };
+    H78.addHolding(c, { id: "mine", kind: "enterprise", name: "the mine", locationId: "ridge", steward: "gil", day: 1 });
+    Object.assign(c.holdings[0], { condition: "thriving", store: { raw_material: 40 }, ...extra }); return c; };
+  const raidOn = (c, { rng = () => 0.5, danger = 4 } = {}) => H78.resolveRaid(c, c.holdings[0], { cfg: cfg78, dangerLevel: danger, rng, day: 5, people: c.npcRegistry });
+  // ── a watch is what SEES
+  const bare = mk78();
+  const walled = mk78(); H78.addFeature(walled, "mine", { kind: "wall", cfg: cfg78 }); H78.addFeature(walled, "mine", { kind: "wall", cfg: cfg78 });
+  const sentried = mk78(); H78.addFeature(sentried, "mine", { kind: "sentries", count: 3, cfg: cfg78 });
+  const manned = mk78(); H78.setGarrison(manned, "mine", ["gil"], {});
+  check("§78: ⛔ …a WATCH is what sees — people on the garrison or a feature that keeps one; STONE DOES NOT SEE",
+    H78.watchOf(bare.holdings[0], cfg78).length === 0 && H78.watchOf(walled.holdings[0], cfg78).length === 0
+    && H78.watchOf(sentried.holdings[0], cfg78).length === 3 && H78.watchOf(manned.holdings[0], cfg78).length === 1,
+    JSON.stringify({ bare: 0, walled: H78.watchOf(walled.holdings[0], cfg78).length, sentried: H78.watchOf(sentried.holdings[0], cfg78).length }));
+  // ── undetected: they take, and stone alone can reduce it to nothing
+  const rb = raidOn(bare), rw = raidOn(walled);
+  const step = eco78.holdFeatures.defenceShareStep, share = eco78.holdStore.raid.takeShare;
+  check("§78: ⛔ …UNDETECTED they take what they came for, and walls cut it — no floor under it any more (minTakeShare retired)",
+    rb.detected === false && rb.taken.raw_material === Math.floor(40 * share)
+    && rw.detected === false && rw.taken.raw_material === Math.floor(40 * (share - step * 2)) && rw.taken.raw_material < rb.taken.raw_material,
+    JSON.stringify({ bare: rb.taken, walled: rw.taken }));
+  const fortress = mk78(); for (let i = 0; i < 4; i++) H78.addFeature(fortress, "mine", { kind: "wall", cfg: cfg78 });
+  const rf = raidOn(fortress);
+  check("§78: …and enough stone leaves them nothing even unseen — the floor is gone, not merely lowered",
+    Object.keys(rf.taken).length === 0 && fortress.holdings[0].store.raw_material === 40, JSON.stringify(rf));
+  // ── detected: a fight, resolved unattended
+  const win = mk78(); H78.setGarrison(win, "mine", ["gil"], {}); H78.addFeature(win, "mine", { kind: "tower", cfg: cfg78 });
+  const rWin = raidOn(win, { rng: () => 0.99, danger: 1 });
+  check("§78: ⛔ …DETECTED it is a FIGHT — won, they take NOTHING and leave spoils behind them (not merely the absence of loss)",
+    rWin.detected === true && rWin.held === true && Object.keys(rWin.taken).length === 0
+    && win.holdings[0].store.raw_material > 40 && !!rWin.outcome && !!rWin.spoils,
+    JSON.stringify({ held: rWin.held, spoils: rWin.spoils, store: win.holdings[0].store }));
+  const lose = mk78(); H78.setGarrison(lose, "mine", ["gil"], {});
+  const rLose = raidOn(lose, { rng: () => 0.01, danger: 12 });
+  check("§78: …lost, they take — and the history says the watch met them and lost",
+    rLose.detected === true && rLose.held === false && rLose.taken.raw_material > 0
+    && /raid fought and lost/.test(lose.holdings[0].history.slice(-1)[0]?.note || ""), JSON.stringify(rLose));
+  check("§78: …and the three endings do not read alike",
+    (() => { const w = H78.storeNews(win.holdings[0], { raid: rWin }), l = H78.storeNews(lose.holdings[0], { raid: rLose }), u = H78.storeNews(bare.holdings[0], { raid: rb });
+      return /took nothing, and left/.test(w[0] || "") && /met them and lost/.test(l[0] || "") && /robbed in the night/.test(u[0] || ""); })());
+  // ── R46b · a temple pools, auras, draws pilgrims
+  const temple = Object.entries(kinds78).find(([k, d]) => d.family === "meaning" && /temple/i.test(k));
+  check("§78: ⛔ R46b — a meaning kind carries all three: an aura, a power-source FIELD, and PILGRIMS; `attends` is one optional flag among them",
+    !!temple && Number(temple[1].aura) > 0 && !!temple[1].substrateSource && Number(temple[1].pilgrims) > 0
+    && Object.values(kinds78).some(d => d.family === "meaning" && d.attends) && Object.values(kinds78).some(d => d.family === "meaning" && !d.attends),
+    JSON.stringify(temple));
+  const t78 = mk78(); H78.addFeature(t78, "mine", { kind: temple[0], cfg: cfg78 });
+  check("§78: …the FIELD is a stationary aura — a pool thickens the apparatus under it, a sink thins it, and elsewhere is untouched",
+    H78.holdingFieldDelta(t78, "ridge", cfg78) > 0 && H78.holdingFieldDelta(t78, "elsewhere", cfg78) === 0
+    && /holdingFieldDelta\(character, location\?\.id/.test(rd("app.js")));
+  const alms0 = H78.pilgrimIncome(t78.holdings[0], { cfg: cfg78, meaning: 0 });
+  const alms1 = H78.pilgrimIncome(t78.holdings[0], { cfg: cfg78, meaning: 0.8 });
+  check("§78: ⛔ …and PILGRIMS are a new earning shape — a hold that earns because people COME, and more of them where the meaning is deep",
+    alms0 > 0 && alms1 > alms0 && H78.pilgrimIncome(mk78().holdings[0], { cfg: cfg78, meaning: 0.8 }) === 0,
+    JSON.stringify({ plain: alms0, meaningful: alms1 }));
+  const paid = mk78(); H78.addFeature(paid, "mine", { kind: temple[0], cfg: cfg78 });
+  const st78 = H78.tickStore(paid, paid.holdings[0], { cfg: cfg78, economy: eco78, dangerLevel: 0, rng: () => 0.99, day: 1, meaning: 0.5 });
+  check("§78: …the alms reach the PURSE on the tick, and the news says they were left",
+    st78.pilgrims > 0 && paid.purse.crystal === 100 + st78.pilgrims - H78.upkeepFor(paid.holdings[0], cfg78)
+    && H78.storeNews(paid.holdings[0], st78).some(t => /left at the mine by those who came to it/.test(t)),
+    JSON.stringify({ alms: st78.pilgrims, purse: paid.purse.crystal }));
+  check("§78: …the body says so", /A RAID IS A FIGHT/.test(rd("docs/HOW_IT_WORKS.md")) && /PILGRIMS/.test(rd("docs/HOW_IT_WORKS.md")));
 }
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));

@@ -465,8 +465,9 @@ working papers; **this is the answer.**
 | 09-05 | ✅ **A HOLD CARRIES FEATURES — what a post becomes; and a re-claim no longer renames it** | Erik by example: a mine and a Temple to Attending at the Threshold Post; barriers, a wall and skeletal sentries at Stillwater's Trouble; "it reverted back to Raven's Home almost immediately". `economy.holdFeatures.kinds` in Aevi's families (material yields into the store — a post with a mine produces; martial guards and cuts a raid's take; meaning is an aura on the ground; people raise hands and count as homes; craft is a facility on the record); `addFeature`/`removeFeature`/`renameHolding`; `holdingOps feature/rename` and `claim` keeps a known hold's name unless `rename: true`; the tab's *Add what was built* / *Rename*; `who lives here` answered | `§75` (a post with a mine yields on the tick; a temple's aura reaches the card; a wall cuts the take and sentries guard without keep; quarters raise the hands cap and count homes; a re-claim keeps the name; the ops and the tab by source) | body §7d. Aevi extends the catalogue; Erik turns the numbers. ⬜ what a facility gates (pass three) |
 | 09-05 | ✅ **R47 the universal fallbacks retire behind the free touch · R46c no cap on the menu, a row is a CRAFT** | Erik: *"eliminating the universal fallbacks… he should just rely on the zero-cost fallbacks of his T1 skills"* and *"no cap"* (Q16). `offersFreeTouch` is the one test both menus ask; the panel groups rows by craft with a button per verb. ⛔ **The census corrected the ruling within the hour:** `touchTier` was authored on 0 of 421 crafts, so the floor is now DERIVED (a T1 craft with a contact-plausible verb has one; 120 of 153 T1 crafts qualify), it KEEPS the craft's native reach and form and strips only the force (`contactOnly` was never questioned and would have made Silas walk up and touch someone to use his own tradition), and the field is `freeTier` with `touchTier` a read-only alias | `§76` (the derived floor and the authored override; `false` excludes; a kit with a floor loses the bare moves and a bare kit keeps them; the same rule in both menus; no cap; a multi-verb craft is one row; the census counts what derives AND what is authored) | body §11. Schema declares `freeTier`; `energy.freeFloor` carries the dials |
 | 09-05 | ✅ **R45c — a person can HOLD a thing, and it wakes in their hands** | Erik: *"you'll need to wire that into the engine so it evolves itself when the time comes."* The gap was deeper than evolution being player-seat: **0 of 35 registry entries carried an inventory**, nothing wrote one, and `npcUpdates` had no items channel — Memory in Pell's hands was fiction with no record. `ensureBearer` gives a registry entry `inventory` + `practice`; `giveItemTo`/`takeItemFrom` move the object; `npcUpdates.carries`/`.returns` are the GM's channel; `carriedForGM` tells the narrator what others hold of yours. `evolution.js` now takes a BEARER with `bonds` read separately (Memory answers to Huginn, who is Silas's companion), **co-use is a fact about a SCENE not a seat** (or a spear in Pell's hands could never earn a stage again), and the world tick wakes it unattended | `§77` (a registry entry becomes a bearer; the object moves and only what you hold can be handed over; an NPC's item advances on the player's bond and the scene's co-use; the tick wakes it and says so; every player call byte-identical) | body §7h. ⬜ Aevi: evolution on the sword and the brigandine, or the claim goes |
+| 09-05 | ✅ **R46a a raid is a FIGHT · R46b a temple pools, auras and draws PILGRIMS** | a raid was a roll and a subtraction: now a WATCH is what sees (garrison people or a feature that keeps one — stone does not see), UNDETECTED they take what they came for with `minTakeShare` retired (enough stone leaves them nothing, none leaves you everything), DETECTED it is a fight resolved unattended at band scale with the garrison as its crew, and WON they take nothing and leave spoils — *"not merely the absence of loss"*. A meaning feature pools or sinks the apparatus under it (`holdingFieldDelta`, the stationary aura), carries its meaning aura, and DRAWS PILGRIMS — a hold that earns from attendance rather than production, paid in crystal and scaled by the meaning they came for; `attends` is one optional flag | `§78` (a watch sees and stone does not; unseen they take and enough stone leaves nothing; seen it is a fight, won it pays and lost it costs; the three endings read differently; a temple pools, auras and draws; the alms reach the purse) | body §7d. ⬜ what a visitor GETS — Erik: not now |
 
-**Last verified: 2026-09-05 · v1.9.359 · 421 crafts.**
+**Last verified: 2026-09-05 · v1.9.360 · 421 crafts.**
 
 ---
 
@@ -1746,6 +1747,38 @@ an NPC bearer is passed the player. She carries it; it answers to the bond he ho
 company, not of whose bag the thing is in. ⛔ Under a bearer-only rule a spear in Pell's hands could never earn a stage
 again, because Huginn walks with Silas. **The world tick then advances the stage unattended, the way a hold grows**, and the
 news says so: *"Memory has woken further in Pell's hands."* `§77`.
+
+### ✅ R46a · A RAID IS A FIGHT, NOT A SUBTRACTION (2026-09-05)
+<!-- subject: hold-store · fields: spoils, perDanger, defenceShareStep · state: garrison, features -->
+
+A raid was a dice roll and a subtraction, and a wall was a discount on being robbed. ⚑ **A WATCH IS WHAT SEES** — people
+posted on the garrison, or a feature that keeps one (sentries, a tower). ⛔ **Stone does not see.**
+
+| | |
+|---|---|
+| **undetected** | ⚑ **they take what they came for.** Walls still cut the take (`defenceShareStep`) and `minTakeShare` is **RETIRED** — enough stone leaves them nothing, none leaves you everything to lose. *"That is what a watch is FOR, and having none is the loss."* |
+| ⛔ **detected** | ⚑ **A FIGHT**, resolved unattended on the tick at band scale (`legionClash`), the garrison as its actual crew (`contingentsFromPeople`) and the raiders drawn from the danger of the place |
+| **you lose** | they take, and the history says the watch met them and lost |
+| ⛔ **you win** | ⚑ **THEY TAKE NOTHING — and what they carried is yours.** *"Not merely the absence of loss."* |
+
+⚠️ **AND IT JOINS THE DEBT WORK:** a hit squad (`SPEC_debts_and_reception` escalation 4) is a raid with a reason — same
+resolution path, two ways to arrive. `§78`.
+
+### ✅ R46b · A TEMPLE IS NOT DEFINED BY WHAT IT ATTENDS (2026-09-05)
+<!-- subject: hold-store · fields: substrateSource, pilgrims, perPilgrim, perMeaning, attends -->
+
+A meaning feature does **three** things, and `attends` is an optional fourth:
+
+- ⚑ **it may POOL or SINK the apparatus under it** — `substrateSource: {kind, delta}` on the kind, read as a **stationary
+  aura** (`holdingFieldDelta`) through the same term a carried charge uses. ⛔ **And a hold may be BOTH** — dense in meaning,
+  thin in apparatus — **which is the Numinous's authored problem exactly** (R38: meaning is the ceiling, substrate the penalty).
+- ⚑ **it carries an AURA** — meaning density, R38.
+- ⛔ **it DRAWS PILGRIMS — a new earning shape.** A hold that earns from **attendance** rather than production: the alms
+  scale with the MEANING of the place, because that is what they came for, and they are paid into the **purse**, because a
+  pilgrim leaves coin and not ore.
+
+✅ **A Temple to Attending carries `attends`; a Temple to Radiance does not; both still pool, aura and draw.** ⬜ What a
+visitor GETS is worth authoring later — Erik: *"not now."* `§78`.
 
 ## 12 · THE INTERFACE — what the player actually operates
 

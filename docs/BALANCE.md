@@ -1,6 +1,6 @@
 # BALANCE — the dials, what they actually do, and how to turn one without lying to yourself
 
-**CCode · started 2026-08-30 · v1.9.359**
+**CCode · started 2026-08-30 · v1.9.360**
 
 > Erik: *"we need to build toward balance and use the dials."*
 
@@ -65,7 +65,9 @@ What balance means here is narrower and testable:
 | `holdStore.fullAt` / `raid.base` / `takeShare` / `defendedMult` | `economy` | **40 / 0.03 / 0.5 / 0.5** | a full store at danger 4: ~12% raided per pass, ~6% with a garrison |
 | `holdStore.growth.passesPerClimb` / `ceilingByKeeperTier` | `economy` | **4** · notable → holding, regional+ → thriving | Q18 — a kept hold climbs a rung every 4 passes (12 days) to its keeper's ceiling |
 | `holdFeatures.kinds.*` (yields · defence · aura · hands · residents) | `economy` | mine → raw_material · wall 1 / tower 2 · temple 0.2 / shrine 0.1 · quarters +2 hands, 4 homes | what a post becomes — a feature's ONE effect; Aevi extends the kinds |
-| `holdFeatures.defenceShareStep` / `minTakeShare` | `economy` | **0.15 / 0.1** | each defence point cuts a raid's take; a fortress still loses a tenth |
+| `holdFeatures.defenceShareStep` | `economy` | **0.15** | R46a — each defence point cuts an UNSEEN raid's take; `minTakeShare` retired, so enough stone leaves them nothing |
+| `holdStore.raid.spoils` | `economy` | raw_material, 1 per danger | R46a — what a beaten raid leaves behind: winning PAYS |
+| `holdFeatures.pilgrims` (`perPilgrim` / `perMeaning`) | `economy` | **2 / 1** | R46b — alms per pilgrim per pass, doubled where the meaning is full. A temple draws 2, a shrine 1 |
 | `holdStore.growth.handsYieldBonus` / `maxHands` / `garrisonUpkeepPerHand` / `groundYieldWeight` | `economy` | **0.25 / 3 / 3 / 0.5** | hands +25% each; a guard costs 3 a pass and halves raids; ground ×(1 + 0.5 × (density − 0.5)) |
 | `debts.escalatingTags` / `escalateAfterDays` / `maxEscalation` | `economy` | **[debtor] / 30 / 2** | Q5-B — only a holder who reacts to debtors escalates; 3 (bounty) and 4 (hit squad) not built |
 | `crit.*` · `baseChance.*` · `energy.*` | `resolution` | — | the roll itself, and what a turn costs |

@@ -16,14 +16,14 @@
  "priceModel": {
   "formula": "price = worthBands[item.worth] × need × scarcity",
   "need": {
-   "none": 0.0,
+   "none": 0,
    "little": 0.3,
-   "ordinary": 1.0,
-   "high": 2.0
+   "ordinary": 1,
+   "high": 2
   },
   "scarcity": {
    "abundant": 0.5,
-   "ordinary": 1.0,
+   "ordinary": 1,
    "scarce": 1.8,
    "absent": 2.5
   },
@@ -197,7 +197,15 @@
   "raid": {
    "base": 0.03,
    "takeShare": 0.5,
-   "defendedMult": 0.5
+   "defendedMult": 0.5,
+   "spoils": {
+    "goods": "raw_material",
+    "perDanger": 1
+   },
+   "clash": {
+    "legionVariance": 0.3,
+    "legionFloorRisk": 0.12
+   }
   },
   "growth": {
    "note": "✅ Q18 (Erik 2026-09-05: 'please build it'; SPEC_hold_store §5): a hold grows by ONE-TIME ACTS WITH LASTING EFFECTS, never a per-tick chore. A KEPT hold climbs one rung every passesPerClimb passes (4 passes = 12 world days) up to the rung its keeper's TIER allows — a notable keeper holds a place, a regional one and above can bring it to thriving. A craft the character carries, applied to the place (the tab, or holdingOps improve), lifts it a rung at once, once per craft per hold, when the craft SHAPES or MENDS (improveFunctions). Each extra hand adds handsYieldBonus to the yield, to maxHands. A garrison halves a raid (raid.defendedMult) and costs garrisonUpkeepPerHand each pass. The ground scales an enterprise's yield by 1 + groundYieldWeight × (density − 0.5): dense lattice 0.9 → ×1.2, thin 0.2 → ×0.85. Priced by CCode; Erik turns them. What a POST can become is not built.",
@@ -237,7 +245,6 @@
  "holdFeatures": {
   "note": "✅ SPEC_holding_attributes pass two, first cut (Erik 2026-09-05 by example: 'the Threshold Post is supposed to have a mine… a Temple to Attending… Stillwater's Trouble has barriers, a wall, skeletal sentries'). A hold carries FEATURES from this catalogue; each kind names its family (§3 of the spec) and the ONE effect the engine reads for it. material → yields the goods into the store at the hold's condition; martial → the hold is guarded (raids halved) and each defence point cuts a raid's take by defenceShareStep; sentries are a watch that costs no keep; meaning → an aura added to the place's meaningDensity (SPEC_meaning_density — 'a hold IS people living somewhere'); people → quarters raise the hands a hold can work and count as residents; craft → a facility recorded on the place (what it gates is pass three). Priced by CCode; Aevi extends the kinds and their flavour; Erik turns the numbers. A feature is added through play (holdingOps feature) or on the Holdings tab; it records who built it and the crafts used.",
   "defenceShareStep": 0.15,
-  "minTakeShare": 0.1,
   "kinds": {
    "mine": {
     "family": "material",
@@ -288,12 +295,18 @@
    "temple": {
     "family": "meaning",
     "aura": 0.2,
-    "label": "a temple"
+    "label": "a temple",
+    "pilgrims": 2,
+    "substrateSource": {
+     "kind": "pool",
+     "delta": 0.05
+    }
    },
    "shrine": {
     "family": "meaning",
     "aura": 0.1,
-    "label": "a shrine"
+    "label": "a shrine",
+    "pilgrims": 1
    },
    "quarters": {
     "family": "people",
@@ -361,23 +374,31 @@
     "family": "meaning",
     "aura": 0.25,
     "attends": true,
-    "label": "a Temple to Attending"
+    "label": "a Temple to Attending",
+    "pilgrims": 2,
+    "substrateSource": {
+     "kind": "pool",
+     "delta": 0.05
+    }
    },
    "memorial": {
     "family": "meaning",
     "aura": 0.15,
-    "label": "a memorial — names kept"
+    "label": "a memorial — names kept",
+    "pilgrims": 1
    },
    "grave_ground": {
     "family": "meaning",
     "aura": 0.15,
     "attends": true,
-    "label": "tended grave-ground"
+    "label": "tended grave-ground",
+    "pilgrims": 1
    },
    "hearth": {
     "family": "meaning",
     "aura": 0.1,
-    "label": "a hearth nobody lets go out"
+    "label": "a hearth nobody lets go out",
+    "pilgrims": 1
    },
    "longhouse": {
     "family": "people",
@@ -413,7 +434,13 @@
     "label": "a stable or a boat-house"
    }
   },
-  "_kindsExtended_20260905": "⚑ AEVI EXTENDED THE KINDS, per CCode: 'Aevi extends the kinds and their flavour; Erik turns the numbers.' +18 kinds, taking the catalogue to 33. ⛔ EVERY ONE NAMES ONE EFFECT THE ENGINE ALREADY READS — nothing here needs a new reader. ⚠️ THREE ADDITIONS CARRY A FLAG THAT DOES: `attends: true` on `temple_to_attending` and `grave_ground`. ⛔ R29 MADE ATTENDING THE MECHANISM AND `the_gathering` STARVES WHERE ENDINGS ARE ATTENDED — so a hold that attends its dead should starve it in its reach. That is the ONE new reader worth asking for, and it is a bestiary term, not an economy one. ⚑ `temple_to_attending` IS ERIK'S OWN EXAMPLE from the Threshold Post. `ward_line` and `sentries` are the Stillwater's Trouble pair — 'barriers, a wall, skeletal undead sentries.' ⚠️ `market` carries `trade: true` and `infirmary`/`longhouse` carry `residents: true`; both are flags for pass three, not readers yet. ⬜ `keep` at defence 3 is the ceiling on purpose — a hold should never be un-raidable, and `minTakeShare: 0.1` already guarantees a raid takes something."
+  "_kindsExtended_20260905": "⚑ AEVI EXTENDED THE KINDS, per CCode: 'Aevi extends the kinds and their flavour; Erik turns the numbers.' +18 kinds, taking the catalogue to 33. ⛔ EVERY ONE NAMES ONE EFFECT THE ENGINE ALREADY READS — nothing here needs a new reader. ⚠️ THREE ADDITIONS CARRY A FLAG THAT DOES: `attends: true` on `temple_to_attending` and `grave_ground`. ⛔ R29 MADE ATTENDING THE MECHANISM AND `the_gathering` STARVES WHERE ENDINGS ARE ATTENDED — so a hold that attends its dead should starve it in its reach. That is the ONE new reader worth asking for, and it is a bestiary term, not an economy one. ⚑ `temple_to_attending` IS ERIK'S OWN EXAMPLE from the Threshold Post. `ward_line` and `sentries` are the Stillwater's Trouble pair — 'barriers, a wall, skeletal undead sentries.' ⚠️ `market` carries `trade: true` and `infirmary`/`longhouse` carry `residents: true`; both are flags for pass three, not readers yet. ⬜ `keep` at defence 3 is the ceiling on purpose — a hold should never be un-raidable, and `minTakeShare: 0.1` already guarantees a raid takes something.",
+  "_raid": "✅ R46a (Erik 2026-09-05): A RAID IS A FIGHT, NOT A SUBTRACTION. Undetected, they take what they came for — defenceShareStep still cuts it, and minTakeShare is RETIRED, so stone alone can reduce a take to nothing and a hold with none can lose everything. Detected (a watch: people on the garrison, or a feature that keeps one — sentries, a tower; stone does not see), it is a FIGHT resolved unattended at band scale (melee.legionClash) with the garrison as its actual crew and the raiders drawn from the danger of the place. Win and they take NOTHING and leave spoils behind them — 'not merely the absence of loss'.",
+  "_meaning": "✅ R46b (Erik 2026-09-05): A TEMPLE IS NOT DEFINED BY WHAT IT ATTENDS. A meaning feature does three things and `attends` is an optional fourth: it may carry a POWER-SOURCE FIELD (substrateSource {kind: pool|sink, delta} — a hold is a stationary aura, and it may be dense in meaning while thin in apparatus, which is the Numinous's authored problem); it carries an AURA (meaning density, R38); and it DRAWS PILGRIMS, which is a new earning shape — a hold that earns from attendance rather than production, paid in crystal because a pilgrim leaves coin and not ore.",
+  "pilgrims": {
+   "perPilgrim": 2,
+   "perMeaning": 1
+  }
  },
  "regions": [
   {

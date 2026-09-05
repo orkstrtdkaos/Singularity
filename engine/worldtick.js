@@ -15,7 +15,8 @@ import { advanceSeeking } from "./seeking.js"; // CCODE-222: a reason for the en
 import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
-import { advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround } from "./holdings.js";   // SNG-358: holdings ride the same world-gated pass
+import { advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura } from "./holdings.js";
+import { meaningDensity, peoplePresentAt } from "./substrate.js";   // R46b: what the pilgrims come for   // SNG-358: holdings ride the same world-gated pass
 import { commitGrowth } from "./npcsheet.js";   // ✅ R37: growth writes, on the tick
 import { bearersOf } from "./npcs.js";           // ✅ R45c: what other people carry
 import { refreshEvolvingItems } from "./evolution.js";   // ✅ R45c: "so it evolves itself when the time comes"
@@ -453,7 +454,12 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
       worldCount: count, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), nameOf: (id) => character?.npcRegistry?.[id]?.name || content?.npcs?.[id]?.name || id });
     const st = tickStore(character, h, { cfg: holdCfg, economy: content?.rules?.economy || null,
       regionId: loc?.regionId || null, dangerLevel: Number(loc?.dangerLevel) || 0, rng, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
-      density: holdingGround(h, { locations: content?.locations || {}, substrate: content?.substrateModel || null }) });
+      density: holdingGround(h, { locations: content?.locations || {}, substrate: content?.substrateModel || null }),
+      people: { ...(content?.npcs || {}), ...(character?.npcRegistry || {}) },
+      // ✅ R46b: pilgrims come for the MEANING of the place, the hold's own aura included
+      meaning: loc ? (meaningDensity(loc, { data: content?.substrateModel || null,
+        present: peoplePresentAt(loc.id, { registry: character?.npcRegistry || {}, npcs: content?.npcs || {} }),
+        aura: holdingMeaningAura(character, loc.id, holdCfg) }) || 0) : 0 });
     if (st && grew) st.grew = grew;
     for (const t of storeNews(h, st)) news.push(t);
     moved++;

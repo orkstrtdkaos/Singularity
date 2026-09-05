@@ -4879,6 +4879,47 @@ console.log("\n── §72 · a keeper is a delegate, not a companion; the wiped
   check("§72: …and the pin writes the place you stand in onto the hold, with history", /h\.locationId = here\.id;/.test(app72) && /note: `placed at \$\{here\.name \|\| here\.id\}`/.test(app72));
   check("§72: …the body says a keeper is a delegate, and Q17 names the unclaimed post", /keeperGone/.test(rd("docs/HOW_IT_WORKS.md")) && /Q17/.test(rd("docs/RULINGS.md")) && /Whistling Woman/.test(rd("po/DECISIONS_OWED_20260904.md")));
 }
+/* ═════ §73 — THE TAB CAN APPOINT A KEEPER, AND A HOLD HANDED AWAY BY MISTAKE COMES BACK (Erik, 2026-09-05) ═════ */
+// ⛔ "now it says I gave them to the stewards!" — the only person selector on a hold sat beside "Hand it over", a one-way
+// transfer with no confirm, and nothing on the tab appointed a keeper; former holdings were shown nowhere. `appointKeeper`
+// and `reclaimHolding` are the verbs that were missing; the transfer confirms and names ownership. And a finding, asserted as
+// the truth it is: nothing in play raises a hold's condition — the tick is the only writer, and it only stalls or slips (Q18).
+console.log("\n── §73 · appoint a keeper · take a handed-over hold back · a hold does not grow in play (Q18) ──");
+{
+  const H73 = await import("../engine/holdings.js");
+  const mk = () => { const c = { id: "pc", holdings: [], formerHoldings: [], holdingEvents: [], npcRegistry: { fendt: { name: "Fendt", status: "active" }, ossian: { name: "Ossian", status: "active" } } };
+    H73.addHolding(c, { id: "hold-x", kind: "post", name: "Threshold Post", locationId: "ridge", steward: "fendt", obligation: null, day: 3 }); return c; };
+  const nm = (x) => ({ fendt: "Fendt", ossian: "Ossian" })[x] || x;
+  // appoint
+  const a = mk();
+  const r = H73.appointKeeper(a, "hold-x", "ossian", { day: 5, worldCount: 100, nameOf: nm });
+  check("§73: ⛔ `appointKeeper` sets the steward, keeps the hold YOURS, writes history, and queues an event naming both",
+    r && a.holdings.length === 1 && a.holdings[0].steward === "ossian" && /Ossian appointed keeper \(was Fendt\)/.test(a.holdings[0].history.slice(-1)[0]?.note || "")
+    && H73.takeHoldingEvents(a).some(t => /Ossian keeps Threshold Post now; Fendt is released/.test(t)), JSON.stringify({ s: a.holdings[0].steward, h: a.holdings[0].history }));
+  check("§73: …appointing the same keeper again changes nothing; an unknown hold returns null", H73.appointKeeper(a, "hold-x", "ossian", { nameOf: nm }) === a.holdings[0] && a.holdings[0].history.length === 1 && H73.appointKeeper(a, "nope", "ossian") === null);
+  // the accident, and its reversal
+  const b = mk();
+  H73.transferHolding(b, "hold-x", { toEntity: "ossian", toName: "Ossian", day: 6, worldCount: 120 });
+  check("§73: a transfer moves the hold OUT of your holdings — the shape Erik hit", b.holdings.length === 0 && b.formerHoldings.length === 1 && b.formerHoldings[0].transferredTo === "ossian");
+  H73.takeHoldingEvents(b);
+  const back = H73.reclaimHolding(b, "hold-x", { day: 7, worldCount: 140, nameOf: nm });
+  check("§73: ⛔ `reclaimHolding` brings it back with its history, the person it was handed to keeping it, and says so",
+    back && b.holdings.length === 1 && b.formerHoldings.length === 0 && b.holdings[0].steward === "ossian" && b.holdings[0].locationId === "ridge"
+    && b.holdings[0].history.some(x => /handed to Ossian/.test(x.note || "")) && /taken back from Ossian, who keeps it/.test(b.holdings[0].history.slice(-1)[0]?.note || "")
+    && !("transferredTo" in b.holdings[0]) && H73.takeHoldingEvents(b).some(t => /Threshold Post is yours again; Ossian keeps it/.test(t)), JSON.stringify(b.holdings[0]));
+  check("§73: …a RELEASED hold is not reclaimable this way (what it owed is still owed — the GM re-claims it in play)",
+    (() => { const c = mk(); H73.releaseHolding(c, "hold-x", { reason: "gone", day: 6, worldCount: 120 }); return H73.reclaimHolding(c, "hold-x", {}) === null && c.formerHoldings.length === 1; })());
+  // the tab
+  const app73 = rd("app.js");
+  check("§73: ⛔ the tab's selector appoints FIRST (*Make them keeper*), the transfer CONFIRMS and names ownership, and former holdings are listed with *Take it back*",
+    /data-hold-keeper=/.test(app73) && /Make them keeper/.test(app73) && /appointKeeper\(character, id, to/.test(app73)
+    && /confirm\(`Hand OWNERSHIP of \$\{h\?\.name \|\| id\} to \$\{nm\}\?/.test(app73) && /No longer yours/.test(app73) && /data-hold-reclaim=/.test(app73) && /reclaimHolding\(character, btn\.dataset\.holdReclaim/.test(app73)
+    && app73.indexOf('data-hold-keeper="${esc(h.id)}"') < app73.indexOf('data-hold-transfer="${esc(h.id)}"'));
+  // the finding
+  const writers = [...rd("engine/worldtick.js").matchAll(/advanceHolding\(h, ([^,]+),/g)].map(m => m[1]);
+  check("§73: ⚠️ Q18, as the truth it is — the tick is the ONLY writer of a hold's condition and it only stalls or slips; nothing in play raises one",
+    writers.length === 1 && /"stall" : "problem"/.test(writers[0]) && !/advanceHolding\(/.test(app73) && /Q18/.test(rd("docs/RULINGS.md")));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

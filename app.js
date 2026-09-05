@@ -60,7 +60,7 @@ import { enterDeathState } from "./engine/death.js";
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
-import { addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, upkeepFor } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, upkeepFor, appointKeeper, reclaimHolding } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
@@ -122,7 +122,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.352";
+const APP_VERSION = "1.9.353";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10667,13 +10667,29 @@ function wireHoldingOffers() {
     if (!r.ok) { alert(r.why); return; }
     saveCharacter(character); again();
   };
+  // ✅ 2026-09-05 (Erik: "now it says I gave them to the stewards!"): the selector's PRIMARY verb appoints a keeper; a transfer
+  // of ownership confirms and says what it is; a handed-over hold can be taken back.
+  for (const btn of app.querySelectorAll("[data-hold-keeper]")) btn.onclick = () => {
+    const id = btn.dataset.holdKeeper;
+    const sel = app.querySelector(`[data-hold-to="${id}"]`);
+    const to = sel?.value || null;
+    if (!to) return;
+    appointKeeper(character, id, to, { day: absoluteWorldDay(), worldCount: worldCount(), nameOf: (x) => character?.npcRegistry?.[x]?.name || CONTENT.npcs?.[x]?.name || x });
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-hold-transfer]")) btn.onclick = () => {
     const id = btn.dataset.holdTransfer;
     const sel = app.querySelector(`[data-hold-to="${id}"]`);
     const to = sel?.value || null;
     if (!to) return;
     const nm = character?.npcRegistry?.[to]?.name || CONTENT.npcs?.[to]?.name || to;
+    const h = (character.holdings || []).find(x => x.id === id);
+    if (!confirm(`Hand OWNERSHIP of ${h?.name || id} to ${nm}? It stops being yours${h?.obligation ? ", and what it owes goes with it" : ""}. To keep it and have ${nm} run it, use "Make them keeper" instead.`)) return;
     transferHolding(character, id, { toEntity: to, toName: nm, day: absoluteWorldDay(), worldCount: worldCount() });
+    saveCharacter(character); again();
+  };
+  for (const btn of app.querySelectorAll("[data-hold-reclaim]")) btn.onclick = () => {
+    reclaimHolding(character, btn.dataset.holdReclaim, { day: absoluteWorldDay(), worldCount: worldCount(), nameOf: (x) => character?.npcRegistry?.[x]?.name || CONTENT.npcs?.[x]?.name || x });
     saveCharacter(character); again();
   };
   for (const btn of app.querySelectorAll("[data-hold-dismiss]")) btn.onclick = () => {
@@ -10745,7 +10761,7 @@ function renderHoldingsTab() {
         ${storeTotal(h) > 0 ? `<div class="hint">store: ${esc(Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", "))}${(() => { const w = storeWorth(h, { economy: CONTENT.rules?.economy, regionId: CONTENT.locations?.[h.locationId]?.regionId || null, cfg: CONTENT.rules?.economy?.holdStore }); return w ? ` · worth ~${w} crystal here` : ""; })()}${h.arrears ? ` · in arrears ${h.arrears}` : ""}</div>` : ""}
         ${h.fromAssignment ? `<div class="hint">from work you delegated</div>` : ""}
         <div class="opt-row" style="margin-top:4px;gap:6px;flex-wrap:wrap">
-          ${handTo.length ? `<select data-hold-to="${esc(h.id)}">${handTo.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-transfer="${esc(h.id)}" title="Hand it to them — what it owes goes with it">Hand it over</button>` : ""}
+          ${handTo.length ? `<select data-hold-to="${esc(h.id)}">${handTo.map(id => `<option value="${esc(id)}"${id === h.steward ? " selected" : ""}>${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-keeper="${esc(h.id)}" title="Appoint them keeper — the place stays yours; they run it">Make them keeper</button><button class="opt" data-hold-transfer="${esc(h.id)}" title="Hand OWNERSHIP to them — it stops being yours, and what it owes goes with it">Hand it over</button>` : ""}
           ${storeTotal(h) > 0 && hereNow()?.id === h.locationId ? `<button class="opt" data-hold-sell="${esc(h.id)}" title="Sell what is stored, at this Reach's prices — you sell where it stands">Sell the store</button>` : ""}
           <button class="opt" data-hold-release="${esc(h.id)}" title="Walk away — what it owes stays with you, unpaid">Give it up</button>
         </div>
@@ -10767,6 +10783,9 @@ function renderHoldingsTab() {
     ${offers.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">To review</h3>
       <p class="hint">${offers.length} thing${offers.length === 1 ? "" : "s"} you have people working on may be ${offers.length === 1 ? "a place" : "places"} you hold. Only you can say.</p>
       ${offerRows}</div>` : ""}
+    ${(character.formerHoldings || []).length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">No longer yours</h3>
+      ${(character.formerHoldings || []).map(f => `<div class="codex-f"><strong>${esc(f.name || f.id)}</strong> <span class="hint">${f.transferredTo ? `handed to ${esc(f.transferredToName || nameOf(f.transferredTo))}${f.transferredDay != null ? ` on day ${f.transferredDay}` : ""}` : `given up${f.reason ? ` — ${esc(f.reason)}` : ""}${f.obligationUnpaid ? " · what it owed is still owed" : ""}`}</span>
+        ${f.transferredTo ? `<button class="opt" data-hold-reclaim="${esc(f.id)}" title="Take it back — it is yours again; they keep it for you">Take it back</button>` : ""}</div>`).join("")}</div>` : ""}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Capacity</h3>
       ${meter("At your side", company.length, places, "Rapport carries the first four places; presence carries the fifth and sixth. Rapport is who will follow you — presence is who will follow a name.")}
       ${meter("Running things for you", delegates.length, delegCap, delegCap === 0 ? "Nobody yet runs work in your name — that comes with level, and with rapport at 14." : "People who hold a charge while you are elsewhere. A second errand for someone you already trust costs nothing more.")}

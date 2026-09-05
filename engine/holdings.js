@@ -508,3 +508,34 @@ export function sellStore(character, holdingId, { economy = null, cfg = null, he
   h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `sold the store — ${total} crystal` }].slice(-12);
   return { ok: true, crystal: total, sold, day };
 }
+
+/* ═══ 2026-09-05 — APPOINT A KEEPER; TAKE A HANDED-OVER HOLD BACK (Erik: "now it says I gave them to the stewards!") ═══
+ * The tab's only person selector sat beside "Hand it over" — a transfer of OWNERSHIP with no confirm — and nothing on the tab
+ * could appoint a keeper, so the player who meant to assign a steward handed the place away. These are the verbs that were
+ * missing. `appointKeeper` sets the steward the GM's `holdingOps steward` op sets, with history and an event. `reclaimHolding`
+ * reverses a transfer the player made: the record comes back with its history, the person it was handed to keeps it. */
+export function appointKeeper(character, id, npcId, { day = null, worldCount = null, nameOf = null } = {}) {
+  ensureHoldings(character);
+  const h = character.holdings.find(x => x && x.id === id);
+  if (!h || !npcId) return null;
+  const was = h.steward || null;
+  if (was === npcId) return h;
+  h.steward = npcId;
+  const who = nameOf ? nameOf(npcId) : npcId;
+  h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `${who} appointed keeper${was ? ` (was ${nameOf ? nameOf(was) : was})` : ""}` }].slice(-12);
+  queueHoldingEvent(character, `${who} keeps ${h.name || h.id} now${was ? `; ${nameOf ? nameOf(was) : was} is released from it` : ""}.`);
+  return h;
+}
+
+export function reclaimHolding(character, id, { day = null, worldCount = null, nameOf = null } = {}) {
+  ensureHoldings(character);
+  const i = (character.formerHoldings || []).findIndex(h => h && h.id === id && h.transferredTo);
+  if (i < 0) return null;
+  const [rec] = character.formerHoldings.splice(i, 1);
+  const { formerHolder, transferredTo, transferredToName, transferredDay, transferredAt, stewardStays, storeCarried, obligationUnpaid, ...h } = rec;
+  h.steward = transferredTo;   // the person it was handed to is at the place; they keep it
+  h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `taken back from ${transferredToName || transferredTo}, who keeps it` }].slice(-12);
+  character.holdings.push(h);
+  queueHoldingEvent(character, `${h.name || h.id} is yours again; ${transferredToName || (nameOf ? nameOf(transferredTo) : transferredTo)} keeps it.`);
+  return h;
+}

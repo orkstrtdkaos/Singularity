@@ -135,6 +135,16 @@ the change is content — per craft — and it is yours and Aevi's.
   line, so it counts as 0. Mine, next pass.
 
 
+### Q18 · how a hold GROWS — nothing in play raises a condition ⛔ found answering Erik's "do the holds evolve as you add things?" (2026-09-05)
+
+**Measured.** `advanceHolding` has one caller — the world tick — and it passes `stall` for a kept hold and `problem` for an
+unkept one: a condition can hold or slip, never climb. R25's presence milestones stop an unkept hold falling; nothing lifts
+one. The store fills (enterprises only); the keeper is a name; `provides`/`upkeep` are read but unauthored; residents,
+buildings, defence and capability are not on the record (Q14 pass two). ⬜ SPEC_hold_store §5 lists the boosts — a better
+steward, your own craft applied to the place, delegates, a garrison, the ground — each a one-time act with a lasting effect,
+never a per-tick chore. Which of those raise `condition`, by how much, and what a post (as against an enterprise) can become,
+is Erik's. Nothing built; the tab now says so where a player would look.
+
 ### Q17 · a post the fiction names but the GM never claims — the Whistling Woman ⛔ found in Silas's save (2026-09-05)
 
 **Measured.** Silas stands at `gen-whistling-woman-post` (a generated place); his chronicle says *"a waypost is coming — named

@@ -182,6 +182,312 @@
    "_companionId": "⚠️ SNG-501, CCode: 'the teacher resolves from your `taughtBy` PROSE — that is a weak link. Author `companionId` next time you touch the file and it stops depending on the first word of a sentence.' ⛔ AGREED AND DONE.",
    "_flairPass_20260823": "⛔ ERIK 2026-08-23: 'Marrow's loaned skill does not have enough flair to be more than Deathsense right now — it needs to give more.' ⚠️ THE FIX FOLLOWS FROM WHAT MARROW IS. Deathsense is PERCEPTION (your body reads another body); this is TESTIMONY (a witness names a category it knows from the inside). So it now gives three things perception cannot: PRECEDENT (r1 — how the last one like this went, memory not prophecy), THE QUIET ROADS (r2 — `track`, from Marrow's own knowledge entry 'the paths carrion takes, which is to say every quiet road in the Valley'), and EMPOWER (r3 — acting on its word is mechanically better, and function_vocabulary flags `empower` as 'THIS SPACE WAS EMPTY'). ⛔ Erik ruled Deathsense r3 MAY approximate this; the crafts are distinguished by SOURCE, not by width.",
    "_lintFix_20260824": "⚠️ `intensity` was the bare string 'moderate' — a harm word in the intensity field, from an older schema. Authored as a real conserve/surge pair."
+  },
+  {
+   "id": "pack_sense",
+   "name": "Pack-Sense",
+   "levelReq": 1,
+   "tier": 1,
+   "energyCost": 4,
+   "attribute": "social",
+   "axes": {
+    "instinct_analysis": -0.5,
+    "falsehood_truth": 0.3
+   },
+   "tradition": "rootkin",
+   "powerSystem": "metaphysical",
+   "harmRung": "none",
+   "shape": "reveal",
+   "sense": true,
+   "companionTaught": true,
+   "companionId": "bristle",
+   "taughtBy": "Bristle (companion bond)",
+   "operativeAxis": "instinct_analysis",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE",
+    "SURVIVE"
+   ],
+   "narrationHints": "It does not bark. It goes still, or it leans, and you have known this dog long enough to read which.",
+   "description": "⛔ BRISTLE READS INTENT FASTER THAN ANY CHECK — 'growls at hidden hostility, warms to hidden kindness.' ⚠️ THE READ IS THE DOG'S, LENT: you are told whether a danger is PEOPLE-SHAPED or PLACE-SHAPED, and nothing about what to do with that.",
+   "notFor": "Reading Precursor threat — it has no scent for that. Replacing your own judgement on what to DO with the read. ⛔ AND IT CANNOT BE MADE TO LIKE SOMEONE IT DISTRUSTS: that read is not for sale.",
+   "intensity": {
+    "conserve": "one read, on one person, and it costs the dog nothing",
+    "surge": "the whole room at once — ⚠️ AND BRISTLE PLANTS ITSELF IN FRONT OF YOU WHILE IT DOES IT, which everyone present notices"
+   },
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 2,
+    "scope": 2
+   },
+   "bounds": [
+    {
+     "text": "⛔ BRISTLE MUST BE PRESENT AND ABLE TO SMELL THEM — a read through a door is a read of the door",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT WILL NOT ATTACK SOMEONE IT READS AS INNOCENT, no matter the command — it plants and growls instead",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ A FIGHT CAN GET IT HURT, AND IT REMEMBERS WHO LET THAT HAPPEN",
+     "class": "soft"
+    }
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Stray's Read",
+     "grants": "Once per scene, before you commit to trusting or entering something, Bristle tells you plainly — a growl or a lean — whether the danger here is PEOPLE-SHAPED or PLACE-SHAPED.",
+     "cannot": "⚠️ It does not say WHO, or how much, or what to do. And it keeps a body-length of distance while it tells you.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "stage": 1
+    },
+    {
+     "rank": 2,
+     "name": "Pack",
+     "grants": "⛔ THE DISTANCE IS GONE. It reads a person rather than a room: hidden hostility, hidden kindness, and whether they have hurt someone before. ⚑ AND IT FIGHTS BESIDE YOU WITHOUT BEING ASKED.",
+     "cannot": "It still cannot tell you what they want, only what they are. ⚠️ And it grieves your hurts as its own, which is not always convenient.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "targets"
+     ],
+     "stage": 2
+    },
+    {
+     "rank": 3,
+     "name": "What It Remembers",
+     "grants": "⛔ THE KNOWING LIMIT IS GONE: rank 1 read the present, and this reads the RECORD. 'It remembers everyone who ever hurt it, and everyone who ever fed it' — and now that memory is a thing it can hand you about a stranger it has met once, years ago, in another town.",
+     "cannot": "⚠️ It forgives slowly and it will not pretend otherwise. Someone in its book stays in its book, and you will be told about them every single time.",
+     "functions": [
+      "reveal",
+      "track",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ],
+     "stage": 2
+    }
+   ],
+   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05, per `companion_template.json` `_theEight`: 'all nine are currently STUBS carrying 9 fields and missing 14 — no `tree`, no `mechanic`, no `bounds`.' ⚑ EACH RANK KEYS TO A `stage`, NOT A POINT SPEND — the stage names what the COMPANION becomes, the rank names what it LENDS YOU. ⚠️ Drawn from that companion's own `knowledge` and `boundaries`; nothing invented."
+  },
+  {
+   "id": "scholars_margin",
+   "name": "Scholar's Margin",
+   "levelReq": 1,
+   "tier": 2,
+   "energyCost": 4,
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.4,
+    "tradition_innovation": 0.2
+   },
+   "tradition": "cogitant",
+   "powerSystem": "metaphysical",
+   "harmRung": "none",
+   "shape": "reveal",
+   "sense": true,
+   "companionTaught": true,
+   "companionId": "quill",
+   "taughtBy": "Quill (companion bond)",
+   "operativeAxis": "concrete_abstract",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SOCIAL"
+   ],
+   "narrationHints": "She is already talking before she has decided whether it is relevant, and about a third of the time it is.",
+   "description": "⛔ QUILL HAS READ AROUND THE EDGES OF ALMOST EVERYTHING. On a lore, Precursor or history question she surfaces a REAL FRAGMENT that opens an approach you would not have found. ⚠️ Sometimes it is even relevant.",
+   "notFor": "Combat, physical tasks, or anything requiring Quill to be brief. ⚠️ THE FRAGMENT INFORMS; IT DOES NOT GUARANTEE.",
+   "intensity": {
+    "conserve": "one fragment, and she stops when you raise a hand",
+    "surge": "⚠️ SHE FOLLOWS IT ALL THE WAY DOWN — you get everything she has and the scene has moved on without you"
+   },
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 3,
+    "scope": 4
+   },
+   "bounds": [
+    {
+     "text": "⛔ QUILL MUST BE PRESENT AND WILLING TO TALK — and she has gone silent when hurt before",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ SHE WILL NOT BETRAY A CONFIDENCE, having been betrayed by the loss of her own",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ HER CURIOSITY OVERRIDES HER CAUTION. A bonded player is the brake, and she knows it and is grateful",
+     "class": "soft"
+    }
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Margin Note",
+     "grants": "Once per scene, on a lore, Precursor or history question, Quill surfaces a real fragment that opens an approach.",
+     "cannot": "⚠️ She is guarded and testing whether you are another person who will tell her to stop asking. The fragment is real; the CONTEXT she keeps to herself.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "stage": 1
+    },
+    {
+     "rank": 2,
+     "name": "Thinking Out Loud",
+     "grants": "⛔ THE GUARDEDNESS IS GONE. She thinks out loud in your presence, so the fragment arrives WITH its reasoning — you can tell how much weight it bears and what it rests on.",
+     "cannot": "⚠️ She talks too much when excited and the scene does not always wait.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "duration"
+     ],
+     "stage": 2
+    },
+    {
+     "rank": 3,
+     "name": "The Dangerous Half",
+     "grants": "⛔ THE SAFETY LIMIT IS GONE: rank 1 gave you what she had read, and this gives you WHAT SHE WORKED OUT AND DID NOT PUBLISH — 'the question that got her expelled', and the partial, dangerous reading of Precursor inscription. ⚑ She trusts you with the half she has never said aloud.",
+     "cannot": "⛔ IT IS PARTIAL AND IT IS DANGEROUS AND SHE SAYS SO. A wrong reading of an inscription is not a wrong answer; it is a working you have just done wrong.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "open"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "quality"
+     ],
+     "stage": 2
+    }
+   ],
+   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05, per `companion_template.json` `_theEight`: 'all nine are currently STUBS carrying 9 fields and missing 14 — no `tree`, no `mechanic`, no `bounds`.' ⚑ EACH RANK KEYS TO A `stage`, NOT A POINT SPEND — the stage names what the COMPANION becomes, the rank names what it LENDS YOU. ⚠️ Drawn from that companion's own `knowledge` and `boundaries`; nothing invented."
+  },
+  {
+   "id": "the_kept_dark",
+   "name": "The Kept Dark",
+   "levelReq": 2,
+   "tier": 2,
+   "energyCost": 6,
+   "attribute": "mental",
+   "axes": {
+    "dark_light": -0.5,
+    "falsehood_truth": -0.2
+   },
+   "tradition": "umbral",
+   "powerSystem": "veil",
+   "harmRung": "none",
+   "shape": "conceal",
+   "companionTaught": true,
+   "companionId": "hush",
+   "taughtBy": "Hush (companion bond)",
+   "operativeAxis": "dark_light",
+   "challengeTypes": [
+    "SUBTERFUGE",
+    "SURVIVE"
+   ],
+   "narrationHints": "Nothing dims. The dark simply stops reporting you, and a watchman's eye passes over the place you are standing without catching on anything.",
+   "description": "⛔ HUSH LENDS YOU ITS OWN CONCEALMENT. For one scene you and what you carry read as ABSENCE rather than presence. ⚠️ The dark does not merely hide you — IT DECLINES TO HAVE CONTAINED YOU AT ALL.",
+   "notFor": "True light. ⛔ CONCEALING WHAT SHOULD BE WITNESSED — Hush will simply refuse, and the refusal is a judgement.",
+   "intensity": {
+    "conserve": "you alone, and only while you keep still",
+    "surge": "you and everyone touching you — ⚠️ AND HUSH IS SPENT AFTERWARDS AND WILL NOT SAY FOR HOW LONG"
+   },
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 5,
+    "scope": 3
+   },
+   "bounds": [
+    {
+     "text": "⛔ HUSH WILL NOT ENTER TRUE LIGHT WILLINGLY, and this is its craft — the grant goes where it will go",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ IT WILL NOT COMFORT YOU AND WILL NOT PRETEND TO. It harbours; it does not reassure",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT CANNOT FIGHT — but it can take a shadow away from someone, and the loss of one's own shadow is a very bad moment for most people",
+     "class": "soft"
+    }
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Uninvited Dark",
+     "grants": "For one scene you read as absence rather than presence — the dark declines to have contained you.",
+     "cannot": "⚠️ It has not decided about you. It lends this from the edge of the firelight and takes it back without warning if it chooses.",
+     "functions": [
+      "conceal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [],
+     "stage": 1
+    },
+    {
+     "rank": 2,
+     "name": "The Kept Watch",
+     "grants": "⛔ IT HOLDS WHILE YOU SLEEP. Hush wakes before you do, every time, and is already looking at what woke it — the concealment persists through your own unconsciousness.",
+     "cannot": "It still will not enter true light, and it still will not tell you what it saw unless you ask precisely.",
+     "functions": [
+      "conceal",
+      "ward"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "quality"
+     ],
+     "stage": 2
+    },
+    {
+     "rank": 3,
+     "name": "The Harbor",
+     "grants": "⛔ THE OBJECT LIMIT IS GONE: rank 1 concealed you and what you carried, and this conceals WHAT YOU HAVE DONE. A thing you would rather not have kept is kept anyway, and the dark does not report it either. ⚑ 'You have told it something you have told nobody. It has not reacted and it has not left, and that is the whole of its answer.'",
+     "cannot": "⛔ IT WILL NOT CONCEAL WHAT SHOULD BE WITNESSED — and at this rank Hush's judgement about which is which is one you have invited and cannot appeal.",
+     "functions": [
+      "conceal",
+      "ward",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "quality"
+     ],
+     "stage": 3
+    }
+   ],
+   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05, per `companion_template.json` `_theEight`: 'all nine are currently STUBS carrying 9 fields and missing 14 — no `tree`, no `mechanic`, no `bounds`.' ⚑ EACH RANK KEYS TO A `stage`, NOT A POINT SPEND — the stage names what the COMPANION becomes, the rank names what it LENDS YOU. ⚠️ Drawn from that companion's own `knowledge` and `boundaries`; nothing invented."
   }
  ],
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."

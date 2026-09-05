@@ -1,0 +1,110 @@
+{
+ "id": "ama",
+ "name": "Ama",
+ "level": 18,
+ "role": "Silas's mother — the cairn-line house on Cairnhold's centre lane, and the keeper of a stopped work",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "communityId": "valley.cairnhold",
+ "homeLocation": "cairnhold",
+ "domains": {
+  "primary": "ashwarden",
+  "secondary": "stillhold",
+  "tertiary": "mason"
+ },
+ "spectrum": {
+  "death_life": -0.3,
+  "falsehood_truth": 0.5
+ },
+ "subAttributes": {
+  "strength": 6,
+  "agility": 5,
+  "reason": 8,
+  "insight": 11,
+  "presence": 9,
+  "rapport": 9,
+  "craft": 8,
+  "wits": 6
+ },
+ "knowledge": [
+  "⚑ The Waymarker holds a SECOND UNFINISHED LAYER — her husband stopped the work deliberately and left room in it",
+  "Why he stopped, which she has never been asked in the right way",
+  "Cairnhold's ward-marks, and which are load-bearing"
+ ],
+ "wants": [
+  "Silas WHOLE AND WELL — not powerful, not a hero. She watches him for cost, not achievement",
+  "The father's choice understood rather than mourned"
+ ],
+ "fears": "⛔ That Silas reads his father's stopping as failure. ⚠️ And that he becomes the kind of man who cannot stop.",
+ "appearance": "A woman who finishes what she is doing before she turns. Flour on both hands. A face that knows the difference between surprise and recognition — and this is the second one.",
+ "voiceHints": "Quiet, level, and immovable. She corrects without raising anything, and does not repeat herself.",
+ "reactsToReputation": {
+  "any": "feeds you first",
+  "harried": "makes you sit down",
+  "careless": "corrects you quietly and once"
+ },
+ "assistTags": [
+  "tend",
+  "warm",
+  "study",
+  "talk",
+  "guard"
+ ],
+ "abilities": [
+  {
+   "abilityId": "hearthbinding",
+   "level": 3,
+   "why": "⚑ the cairn-line house. A place that holds because she keeps it"
+  },
+  {
+   "abilityId": "kept_vigil",
+   "level": 3,
+   "why": "she has kept one for years and nobody asked her to"
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 3,
+   "why": "⚑ 'she watches him for COST, not achievement' — the whole craft in one line"
+  },
+  {
+   "abilityId": "deathsense",
+   "level": 2,
+   "why": "⚑ 'carries the father's stopped work' — she knows what an unfinished ending feels like"
+  },
+  {
+   "abilityId": "boundary_stone",
+   "level": 2,
+   "why": "⚑ Cairnhold's ward-marks, and which are load-bearing"
+  },
+  {
+   "abilityId": "stone_read",
+   "level": 2,
+   "why": "she read the Waymarker's second layer before anyone told her it was there"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 2,
+   "why": "⚑ 'she was there' — and she corrects the record quietly and immovably"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 1,
+   "why": "one word, at the table, and the room settles"
+  }
+ ],
+ "closed": [
+  "hastened_grey",
+  "given_errand"
+ ],
+ "personality": {
+  "steadiness": "absolute",
+  "grief": "carried, not displayed"
+ },
+ "physicality": "ADULT. Sixties, sturdy, flour to the wrist, grey worn back plainly. WHAT CATCHES THE EYE: she finishes what she is doing before she turns, every time, and it is not slowness — it is that nothing has hurried her since the day her husband stopped.",
+ "intimacyNotes": "⛔ SHE IS SILAS'S MOTHER AND `romanceEligible: false` REFLECTS THAT — an author decision per R24. ⚠️ THIS ENTRY EXISTS BECAUSE A GM STILL NEEDS TO DESCRIBE HER: at the table, at the cairn-line, standing in a doorway deciding whether to say the thing. ⚑ TOUCH IS A HAND ON A FOREARM AND A PLATE PUT DOWN IN FRONT OF YOU. ⛔ AND THE THING SHE WILL NOT DISCUSS UNBIDDEN IS WHY HE STOPPED — she has never been asked in the right way, and a GM should let that stay closed until it is.",
+ "schemaVersion": 1,
+ "_authoredWhy": "⛔ AUTHORED 2026-09-05 — PROMOTED FROM THE REGISTRY, NOT INVENTED. This person existed only as a GENERATED registry entry with `skillsObserved`; R28: 'generated is promotable to authored.' ⚑ THE CRAFTS ARE DRAWN FROM WHAT THE STORY ALREADY SHOWED — `skillsObserved` is `growthFor`'s own evidence field, and Pell's 'ironsense' turned out to be three crafts when it was read properly. ⚠️ `domains` is `{primary, secondary, tertiary}` — an ARRAY returns band 'open' and lets `kitFor` draw from the whole catalogue. ⛔ Nothing here reaches across the circle."
+}

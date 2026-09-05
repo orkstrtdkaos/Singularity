@@ -5997,6 +5997,71 @@ console.log("\n── §86 · a derived pool · a fold that conserves the sum ·
   check("§86: …and a scene with no shared fight says nothing about one",
     !/A SHARED FIGHT IS OPEN/.test(P86.partyBlockForGM({ ...base, beats: [{ by: "a", name: "Silas", label: "l", summary: "s", at: "t" }] }, "b") || ""));
 }
+
+/* ═════ §87 — THE SIMULTANEOUS LOCK, AND THE RULED RESOLUTION ORDER (BUILD_LIST §2b, 2026-09-05) ═════ */
+// ⛔ The spec's own argument, and it is mechanical rather than about pacing: because every declaration is
+// known before anything happens, A WARD DECLARED IN THE SAME INSTANT ACTUALLY CATCHES THE BLOW. Under
+// rotating turns it cannot — the blow has landed before the warder's turn comes round.
+// ⚠️ A LOCK IS A ROW, NOT A BOOLEAN, and that is the ledger ruling applied to a second kind of state:
+// keyed `(by, round)`, first write wins. ⛔ A lock that could be overwritten would let a player read the
+// others' declarations and then change theirs, which is the one thing simultaneity exists to prevent.
+// ⚑ ORDER RULED BY AEVI: PROTECT and wards first, then KNOW, then HARM, then RESTORE — a ruling about
+// FICTION, not tuning: a guard must be up before the blow, and mending answers harm that already happened.
+console.log("\n── §87 · everyone declares, nobody can change their mind, and the round resolves in the ruled order ──");
+{
+  const P87 = await import("../engine/party.js");
+  const party = [{ characterId: "a", name: "Silas" }, { characterId: "b", name: "Colten" }, { characterId: "c", name: "Mara" }];
+  let sc = P87.openSharedEncounter({ sceneId: "s", party, beats: [] }, { defId: "r", name: "a reaver", max: 60, at: "t0" });
+  for (const id of ["a", "b", "c"]) sc = P87.joinFight(sc, id, "t1");
+
+  check("§87: ⚠️ a round with NOBODY in the fight never resolves — a stray tick must not advance a fight nobody is having",
+    P87.allLocked(P87.openSharedEncounter({ sceneId: "x", party, beats: [] }, { defId: "d", max: 10, at: "t" })) === false);
+  sc = P87.lockDeclaration(sc, "a", { family: "HARM", name: "the Cut Thread" }, { at: "t4" });
+  sc = P87.lockDeclaration(sc, "c", { family: "RESTORE", name: "Carried Weight" }, { at: "t5" });
+  check("§87: ⛔ two of three locked — not all, and the STRAGGLER is named (what §5's timer acts on)",
+    P87.allLocked(sc) === false && P87.unlockedFighters(sc).join() === "b", JSON.stringify(P87.unlockedFighters(sc)));
+  sc = P87.lockDeclaration(sc, "b", { family: "PROTECT", name: "Shieldwork" }, { at: "t6" });
+  check("§87: …and the third closes it", P87.allLocked(sc) === true);
+
+  check("§87: ⛔ THE RULED ORDER — the ward resolves before the blow it catches, and mending answers what landed",
+    P87.resolveOrder(sc).map(l => l.family).join(" ") === "PROTECT HARM RESTORE",
+    P87.resolveOrder(sc).map(l => `${l.family}(${l.by})`).join(" → "));
+  check("§87: …and the authored order is the engine's, not a second copy of it",
+    P87.RESOLVE_ORDER.join(" ") === "PROTECT KNOW HARM RESTORE");
+
+  // ⛔ THE PROPERTY SIMULTANEITY EXISTS FOR.
+  const before = JSON.stringify(sc.encounter.locks.a);
+  check("§87: ⛔ A LOCK CANNOT BE CHANGED ONCE THE OTHERS ARE VISIBLE — first write wins, keyed `(by, round)`",
+    JSON.stringify(P87.lockDeclaration(sc, "a", { family: "RESTORE", name: "changed my mind" }, { at: "t7" }).encounter.locks.a) === before);
+  check("§87: …and someone not IN the fight cannot lock into it at all",
+    Object.keys(P87.lockDeclaration(sc, "stranger", { family: "HARM" }, { at: "t" }).encounter.locks).sort().join() === "a,b,c");   // sorted: object key order is INSERTION order, and asserting on it tests the fixture
+
+  // ── the round ends; the fight does not
+  const next = P87.advanceRound(P87.mergeStrike(sc, { by: "a", at: "t8", amount: 14 }), "t9");
+  check("§87: ⛔ a round ends and A FIGHT DOES NOT — locks clear, the round steps, and what was taken off the opponent STAYS OFF",
+    next.encounter.round === 2 && Object.keys(next.encounter.locks).length === 0
+    && P87.sharedPool(next).remaining === 46, `round ${next.encounter.round} · pool ${P87.sharedPool(next).remaining}`);
+
+  // ⚠️ AND AN UNKNOWN FAMILY MUST NOT SILENTLY SORT FIRST.
+  let n2 = next;
+  n2 = P87.lockDeclaration(n2, "a", { family: "WEIRD", name: "?" }, { at: "u1" });
+  n2 = P87.lockDeclaration(n2, "b", { family: "HARM", name: "hit" }, { at: "u2" });
+  n2 = P87.lockDeclaration(n2, "c", { family: "KNOW", name: "read" }, { at: "u3" });
+  check("§87: ⚠️ a family the vocabulary does not know resolves LAST, never first — an unknown verb is not a ward",
+    P87.resolveOrder(n2).map(l => l.family).join(" ") === "KNOW HARM WEIRD",
+    P87.resolveOrder(n2).map(l => l.family).join(" → "));
+  check("§87: …and the order is TOTAL — same locks, same sequence, every time (two clients must agree)",
+    P87.resolveOrder(n2).map(l => l.by).join() === P87.resolveOrder(n2).map(l => l.by).join()
+    && P87.resolveOrder(n2).length === 3);
+
+  // ⛔ AND WHAT IS STILL OWED, STATED HERE SO IT CANNOT BE MISTAKEN FOR DONE: the locks exist and NOTHING
+  // RESOLVES THEM YET. `resolveRound` is the missing half and the app wire is the half after that — which is
+  // why §85 still has the guide disclaiming "everyone acts at once". ⚠️ A gate that let this read as finished
+  // would be the four doors again, in the file that exists to catch them.
+  check("§87: ⚠️ …and `resolveRound` is NOT built — the locks are the input to a resolution that does not exist yet",
+    typeof P87.resolveRound !== "function",
+    "when this goes red the feature is done and the guide is owed its third clause");
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

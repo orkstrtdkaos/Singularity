@@ -227,6 +227,81 @@ export function closeSharedEncounter(scene, at = new Date().toISOString()) {
   return { ...rest, updatedAt: at };
 }
 
+// ═══ THE SIMULTANEOUS LOCK (SPEC_party_mode_phase2 §4b) ═══
+//
+// ⛔ THE MECHANICAL REASON IS BETTER THAN THE PACING ONE, and it is the spec's own argument: because every
+// declaration is known before anything happens, A WARD DECLARED IN THE SAME INSTANT ACTUALLY CATCHES THE
+// BLOW. Under rotating turns it cannot — the blow has already landed by the time the warder's turn comes.
+//
+// ⚠️ A LOCK IS A ROW, NOT A BOOLEAN ANYONE CAN FLIP. Aevi's ledger ruling applies here exactly as it does
+// to the pool: keyed `(by, round)`, first write wins, a retry after a lost response changes nothing. ⛔ A
+// lock that could be overwritten would let a player see the others' declarations and then change theirs,
+// which is the one thing simultaneity exists to prevent.
+
+// ⛔ THE RULED ORDER (Aevi, BUILD_LIST §2b): PROTECT and wards first, then KNOW, then HARM, then RESTORE.
+// ⚠️ IT IS A RULING ABOUT FICTION, NOT A TUNING: a guard has to be up before the blow, what you learn has
+// to be known before you act on it, and mending answers harm that has already happened. ⚑ Anything whose
+// family is none of the four resolves after the four, in declaration order — an unknown verb must not
+// silently sort first.
+export const RESOLVE_ORDER = ["PROTECT", "KNOW", "HARM", "RESTORE"];
+
+/** PURE + IDEMPOTENT. Lock one member's declaration for a round. ⛔ FIRST WRITE WINS — see above. */
+export function lockDeclaration(scene, characterId, decl, { round = null, at = new Date().toISOString() } = {}) {
+  if (!scene?.encounter || !characterId || !decl) return scene;
+  if (!(scene.encounter.fighting || []).includes(characterId)) return scene;   // you are not in this fight
+  // ⚠️ AN EXPLICIT NULL CHECK, NOT `Number.isFinite`. `Number(null)` is 0 AND FINITE, so the default
+  // branch never ran and every lock was filed under round 0 while `allLocked` looked at round 1 — nobody was
+  // ever all-locked. ⛔ The same coercion that scaled every unmeasured hold's yield by ×0.75 in §74.
+  const n = round == null ? (Number(scene.encounter.round) || 1) : (Number(round) || 1);
+  const locks = { ...(scene.encounter.locks || {}) };
+  if (locks[characterId] && Number(locks[characterId].round) === n) return scene;   // keyed (by, round)
+  locks[characterId] = {
+    round: n, at,
+    family: String(decl.family || "").toUpperCase() || null,
+    name: String(decl.name || "").slice(0, 40),
+    label: smartClamp(String(decl.label || ""), 120),   // SNG-152: this crosses into another player's prompt
+    abilityId: decl.abilityId || null,
+  };
+  return { ...scene, encounter: { ...scene.encounter, round: n, locks }, updatedAt: at };
+}
+
+/** PURE. Have all the fighters locked in for this round? ⚠️ An empty fight is NOT 'all locked' — a round
+ *  with nobody in it must never resolve, or a stray tick would advance a fight nobody is having. */
+export function allLocked(scene) {
+  const on = scene?.encounter?.fighting || [];
+  if (!on.length) return false;
+  const n = Number(scene.encounter.round) || 1;
+  const locks = scene.encounter.locks || {};
+  return on.every(id => locks[id] && Number(locks[id].round) === n);
+}
+
+/** PURE. Who has not declared yet — the straggler list §5 acts on. */
+export function unlockedFighters(scene) {
+  const on = scene?.encounter?.fighting || [];
+  const n = Number(scene?.encounter?.round) || 1;
+  const locks = scene?.encounter?.locks || {};
+  return on.filter(id => !(locks[id] && Number(locks[id].round) === n));
+}
+
+/** PURE. This round's locks in the RULED order. ⚠️ Ties inside a family keep DECLARATION order (`at`), so
+ *  the result is total and deterministic — two clients resolving the same round agree on the sequence. */
+export function resolveOrder(scene) {
+  const n = Number(scene?.encounter?.round) || 1;
+  const locks = Object.entries(scene?.encounter?.locks || {})
+    .filter(([, l]) => Number(l.round) === n)
+    .map(([by, l]) => ({ by, ...l }));
+  const rank = (f) => { const i = RESOLVE_ORDER.indexOf(String(f || "").toUpperCase()); return i < 0 ? RESOLVE_ORDER.length : i; };
+  return locks.sort((a, b) => (rank(a.family) - rank(b.family)) || String(a.at).localeCompare(String(b.at)) || String(a.by).localeCompare(String(b.by)));
+}
+
+/** PURE. Clear the locks and step to the next round. ⛔ THE LEDGER IS NOT TOUCHED — a round ends, a fight
+ *  does not, and what was taken off the opponent stays off. */
+export function advanceRound(scene, at = new Date().toISOString()) {
+  if (!scene?.encounter) return scene;
+  const n = (Number(scene.encounter.round) || 1) + 1;
+  return { ...scene, encounter: { ...scene.encounter, round: n, locks: {} }, updatedAt: at };
+}
+
 /** PURE + IDEMPOTENT. Step into the shared fight. ⛔ THIS IS WHAT THE LEDGER IS FOR — until two people can
  *  be on one opponent, a shared pool has one writer and `activeEncounter` already does that correctly.
  *  ⚠️ A member not in the SCENE cannot join its fight; joining twice is a no-op, which the retry loop needs. */

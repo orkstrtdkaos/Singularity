@@ -4630,7 +4630,7 @@
    "energyCost": 5,
    "attribute": "practical",
    "shape": "damage",
-   "harmRung": "lethal",
+   "harmRung": "incapacitating",
    "challengeTypes": [
     "STEALTH",
     "SOCIAL",
@@ -4689,7 +4689,16 @@
      "failure": "They taste it, say nothing, and finish the cup while watching you."
     },
     "note": "damage/ongoing. ⛔ ERIK 2026-08-29: 'also you'd find POISONS here… maybe a CORROSIVE.' ⚠️ `corrosive`, ELEMENTAL family — and it gives the type a second carrier: it was in `shaped_body`'s ward list and almost nothing dealt it. ⛔ THE SLOWNESS IS THE MECHANIC, NOT A LIMITATION: a poison that kills in the room is a murder with witnesses; this is what a people who cannot walk in daylight use instead.",
-    "_ongoingHarmShape": "⛔ CORRECTED 2026-08-29 while checking my own work against the schema. I authored `mechanic.ongoingHarm: \"corrosive\"` — A STRING, IN THE WRONG SCOPE. ⚠️ THE ESTABLISHED SHAPE IS `tree[].ongoingHarm: {type}` ON THE RANK NODE, used by six crafts (`stopped_breath`, `drowning_deep`, `answered_motion`, `sustained_regard`, `grief_strike`). ⛔ MY VERSION WOULD HAVE BEEN A SECOND SHAPE FOR ONE IDEA — the exact split I flagged to CCode a week ago, authored by me. ⚠️ Found only because the field showed TWO schema entries and I checked whether that was a duplicate."
+    "_ongoingHarmShape": "⛔ CORRECTED 2026-08-29 while checking my own work against the schema. I authored `mechanic.ongoingHarm: \"corrosive\"` — A STRING, IN THE WRONG SCOPE. ⚠️ THE ESTABLISHED SHAPE IS `tree[].ongoingHarm: {type}` ON THE RANK NODE, used by six crafts (`stopped_breath`, `drowning_deep`, `answered_motion`, `sustained_regard`, `grief_strike`). ⛔ MY VERSION WOULD HAVE BEEN A SECOND SHAPE FOR ONE IDEA — the exact split I flagged to CCode a week ago, authored by me. ⚠️ Found only because the field showed TWO schema entries and I checked whether that was a duplicate.",
+    "ongoing": {
+     "perRound": {
+      "n": 1,
+      "d": 6
+     },
+     "damageType": "corrosive",
+     "endsOn": "treated"
+    },
+    "_ongoingWhy": "⛔ ERIK 2026-09-04: 'slow_cup is more of a NARRATIVE skill and is questionable. I could see it being a DAMAGE EVERY ROUND skill.' ✅ 2d6 on landing, then 1d6 corrosive per round until TREATED. ⚠️ AND ITS OWN BOUNDS ALREADY SAID SO: '⛔ SLOW BY DESIGN. NOTHING HERE KILLS IN THE ROOM, and speed cannot be bought' · 'a decay-ward or a good physician answers it'. ⛔ SO IT MUST NOT OFFER A DEATH SAVE: R35 fires on a landed hit, and this craft's whole design is that the landing is not the killing. `harmRung` → `incapacitating`; the ONGOING condition is where the lethality lives, and it is answerable by treatment — which is the craft."
    },
    "tree": [
     {
@@ -4700,7 +4709,7 @@
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "lethal",
+     "harmRung": "incapacitating",
      "gainAxes": [],
      "grants": "⛔ PREPARE A WORKING POISON — it wounds for 2d6 CORROSIVE when it lands, and returns each day until treated. ⚠️ In a cup, on an edge, or in the air of a closed room.",
      "cannot": "It must get inside them. ⚠️ A careful drinker tastes it. ⛔ And it takes real time to prepare.",
@@ -4717,7 +4726,7 @@
       "hinder"
      ],
      "gains": "deepen",
-     "harmRung": "lethal",
+     "harmRung": "incapacitating",
      "gainAxes": [
       "quality",
       "duration"
@@ -4737,7 +4746,7 @@
       "hinder"
      ],
      "gains": "deepen",
-     "harmRung": "lethal",
+     "harmRung": "incapacitating",
      "gainAxes": [
       "damage",
       "duration"

@@ -4017,7 +4017,10 @@ await (async () => {
   check("SNG-143: the npcUpdates op captures gender + pronouns, and the contract demands them on meet", (() => {
     const at = gmSrc.indexOf('"npcUpdates":');
     if (at < 0) return false;
-    const schema = gmSrc.slice(at, gmSrc.indexOf("]", at) + 1);
+    // ⚠️ 2026-09-05: TO THE END OF THE LINE, not to the first "]" — R45c gave npcUpdates an ARRAY field (`carries`), and a
+    // slice that stopped at the first bracket then cut the op in half and lost `gender` entirely. The gate's own note says
+    // it must not pin an author's prose; it must not pin their structure either.
+    const schema = gmSrc.slice(at, gmSrc.indexOf("\n", at) + 1);
     const schemaHasBoth = /"gender":/.test(schema) && /"pronouns":/.test(schema);
     // The obligation, wherever it lives and however it is phrased: "meet" + gender + a MUST-flavoured word.
     const demandsIt = gmSrc.split(/(?=\d+[A-Z]?\. )/).some(rule =>

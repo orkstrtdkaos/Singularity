@@ -91,3 +91,21 @@ no other tradition has.**
 5. ⚠️ **Does the ceiling apply to all metaphysical crafts, or only those that reach for significance?**
    ⛔ `ki_wield` is metaphysical and is a body craft; ⬜ **a shrine should probably not make someone punch
    harder.**
+
+---
+
+## ✅ CCODE ROUND 2 — 2026-09-04 · BUILT v1.9.348 · gated `§69`
+
+1. **Where it lives:** `substrate.meaningDensity(location, { present, data })` beside `locationDensity`, plus
+   `peoplePresentAt` for the dynamic half and `meaningCeiling` for the shape. Never written to a location.
+2. **The card carries a second term** — no shape change: `groundCardFor` returns `meaning`, `ceiling`, `meaningBound` for a
+   source in `meaning.appliesTo`, and the craft's `factor` is `min(ceiling, band factor)`. And since Q3 made the ROLL this
+   card, the two-ground read reaches the roll for free.
+3. **Weights (crude, yours to turn — `the_substrate.meaning`):** base 0.1 · sacred 0.35 · locus 0.2 · cult 0.15 · home 0.1 ·
+   settlement 0.15 / region 0.1 / site 0.05 · a community 0.1 · 0.04 per person present (cap 0.2) · `ceilingFloor` 0.35.
+   Choirheight 0.75 → ceiling 84%; a fringe 0.20 → ceiling 48%.
+4. **Does anything else want meaning?** Not wired. `the_gathering`'s attendance (R29) is the natural next signal — an
+   attended ending could raise a place's meaning for a season. ⬜ Logged.
+5. **All metaphysical crafts, or only those that reach for significance?** All, by default — and a craft opts out with
+   `mechanic.meaning: "none"` (reader before field). ⬜ `ki_wield` and the other body crafts under a metaphysical source
+   are yours to tag; until then a shrine does, in fact, let someone punch harder.

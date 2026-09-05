@@ -33,8 +33,8 @@ supplies what production omits. ⛔ **Same shape as `sheetFor`'s `authored` flag
 | **3** | ⛔ **WHICH OF THREE GROUND TABLES IS THE TRUTH.** The card reads the CRAFT; the roll reads the TRADITION; ⚠️ **and no substrate term enters a skill-battle roll at all** | `SPEC_body_source.md`, `SPEC_meaning_density.md` |
 | **4** | **service band N** — how far below the player may someone in your service fall | `SPEC_npc_level_balance.md` |
 | **5** | **charge rate** — what a completion and a `condition` step are worth | ↑ |
-| **6** | **`meaningDensity`** — derived or stored; what two grounds do to a metaphysical roll | `SPEC_meaning_density.md` |
-| **7** | **holdings economy smallest version** — one yield, one upkeep, missable | `SPEC_holdings_economy.md` |
+| **6** | **`meaningDensity`** — derived or stored; what two grounds do to a metaphysical roll | `SPEC_meaning_density.md` · ✅ **v1.9.348 — R38 built (`§69`)** |
+| **7** | **holdings economy smallest version** — one yield, one upkeep, missable | `SPEC_holdings_economy.md` · ✅ **v1.9.348 — the hold store (`SPEC_hold_store`, `§69`); the debt record (`SPEC_debts_and_reception`)** |
 | **8** | ⬜ **do Sovereigns advance an arc's stage, or is their feeding the stage's EFFECT?** | the Sovereign arc |
 
 ---

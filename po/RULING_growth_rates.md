@@ -80,3 +80,13 @@ unneeded floor is free levelling with a justification.**
 
 ⚠️ **STILL OPEN AND SEPARATE:** what earns one of R36a's three full-action party slots. ⬜ Aevi's reading is
 bond depth and time served; **Erik has not ruled it.**
+
+---
+
+## ✅ CCODE ROUND 2 — 2026-09-04 · BUILT v1.9.348 · gated `§69`
+
+**Built as ruled.** `derivedLevel` = floor + meetings + seasons + standing **+ completions × 1 + conditionSteps × 1**
+(`npcStanding.levelPerCompletion`, `levelPerConditionStep`); the record carries the counts and the tick stamps them (a
+done assignment; a condition climb on a hold the person keeps). R37c: no service-band dial exists, and the body says so.
+**Growth writes:** `commitGrowth` puts an observed, matched craft on the record at rank 1 with `gainedDay`; never `closed`,
+never above an authored rank; the tick runs it and the news says *"X has taken up Y"*. `HOW_IT_WORKS.md` §7h.

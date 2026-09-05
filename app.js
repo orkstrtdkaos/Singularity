@@ -39,7 +39,7 @@ import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItem
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
-import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
+import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
@@ -57,7 +57,7 @@ import { enterDeathState } from "./engine/death.js";
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
-import { addHolding, holdingsForGM, releaseHolding, transferHolding } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
@@ -119,7 +119,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.347";
+const APP_VERSION = "1.9.348";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3370,6 +3370,8 @@ function groundRow(ability) {
       // foothill traditions fell straight through, so the harmonic 50/50-tie rule and the parent-derived
       // source ran in the tests that hand the data in and nowhere else.
       foothills: CONTENT.foothills,
+      // ✅ R38: who is here weighs on the meaning a metaphysical craft can reach
+      present: peoplePresentAt(hereNow()?.id, { registry: character?.npcRegistry || {}, npcs: CONTENT.npcs || {} }),
     });
     if (!g) return "";
     const pips = "◉".repeat(g.strength) + "◎".repeat(4 - g.strength);
@@ -3379,8 +3381,10 @@ function groundRow(ability) {
       : "the ground does not touch this one";
     // the lineage’s authored blend, when there is one (a dark field until 2026-09-04)
     const blend = Array.isArray(g.lineageMix) && g.lineageMix.length ? " · lineage leans " + g.lineageMix.map(m => `${m.source} ${m.share}%`).join(", ") : "";
+    // ✅ R38b: MEANING SETS THE CEILING — a second ground on the row, only for a source that reads it
+    const meaningBit = g.meaning !== undefined && g.meaning !== null ? ` · meaning ${Math.round(g.meaning * 100)}% (ceiling ${Math.round((g.ceiling ?? 1) * 100)}%${g.meaningBound ? " — binding" : ""})` : "";
     const cls = !g.grounded ? "neutral" : g.off ? "off" : g.strength >= 4 ? "full" : g.strength <= 1 ? "starved" : "part";
-    return `<div class="ground-row ground-row-${cls}" title="${esc(detail + blend + (g.because ? " — " + g.because : ""))}">`
+    return `<div class="ground-row ground-row-${cls}" title="${esc(detail + meaningBit + blend + (g.because ? " — " + g.because : ""))}">`
       + `<span class="ground-pips">${pips}</span> <span class="ground-verdict">${esc(g.verdict)}</span>`
       + (g.because ? ` <span class="hint ground-because">· ${esc(g.because)}</span>` : "") + `</div>`;
   } catch { return ""; }   // a readout is never worth breaking the card for
@@ -6522,7 +6526,17 @@ function applyTurn(turn, resolution, playerWords = null) {
       // un-charged, nothing was said. Both exits are operations now, recorded and announced once by the tick.
       else if (kind === "release") releaseHolding(character, id, { reason: op.reason || op.why || null, day: absoluteWorldDay(), worldCount: worldCount() });
       else if (kind === "transfer") transferHolding(character, id, { toEntity: op.toEntity || op.steward || null, toName: op.toName || null, day: absoluteWorldDay(), worldCount: worldCount() });
+      // ✅ Q8: sell what is stored, where the character stands, at this Reach's prices — refused elsewhere, and said so
+      else if (kind === "sell") {
+        const r = sellStore(character, id, { economy: CONTENT.rules?.economy, cfg: CONTENT.rules?.economy?.holdStore, hereId: location.id, regionId: location.regionId || null, day: absoluteWorldDay() });
+        if (!r.ok) console.warn("[holdingOps] sell refused:", r.why);
+      }
     }
+  });
+  // ✅ Q5-B: a debt the fiction leaves — recorded to a HOLDER, settled by the purse, forgiven by a deed.
+  applyStep("debtOps", () => {
+    const rec = applyDebtOps(character, turn.debtOps || [], { day: absoluteWorldDay(), regionId: location?.regionId || null });
+    character._debtReceipts = rec.filter(r => r && r.ok === false);
   });
   const partyResult = applyStep("partyOps", () => applyPartyOps(character, turn.partyOps || [], { day: absoluteWorldDay(), ladder: CONTENT.rules.subAttributeLadder })) || { departed: [], proposed: [], notes: [] };
   if (partyResult.proposed?.length) character.pendingCompanyOffers = partyResult.proposed;
@@ -7202,18 +7216,22 @@ function substrateForAction(choice, location) {
   const abId = choice.abilityId || (choice.comboAbilities || [])[0];
   if (!abId) return null;
   const ab = fullCatalog()[abId];
-  const tradition = ab ? abilityGroupKey(ab, null) : null;
-  if (!tradition) return null;
-  const density = locationDensity(location, CONTENT.substrateModel);
-  if (density == null) return null;
+  if (!ab) return null;
   const comps = activeCompanions(character, CONTENT.companions);
   const carried = carriedSubstrate(character, CONTENT.items, comps);
-  // SNG-193b §3.3: the band reads the character's SCHOOL for this tradition (its extension source), not
-  // the tradition — two practitioners of one tradition get opposite best-grounds. Floored by the material
-  // root. Un-schooled saves fall back to the pure/root school silently (schoolForTradition), so no shift.
-  const school = schoolForTradition(character, tradition, CONTENT.schools);
-  const root = CONTENT.schools?.traditionSchools?.[tradition]?.root || null;
-  const verdict = substrateVerdict({ tradition, school, root, density, carried, data: CONTENT.substrateModel });
+  // ✅ Q3 (GO_LIST_20260904 §2, Erik): THE ROLL READS THE CRAFT, NOT THE TRADITION. This used to build its own band from
+  // the tradition (`substrateBand[tradition]`) while the wheel's card read the craft's SOURCE (`craftSource` → the
+  // school's extension, the craft's `powerSystem`, the tradition's primary, a foothill's parents) — two answers to
+  // "what is this craft worth here". The roll is now the CARD, with the carried term and R38's presence term added,
+  // so the number on the wheel is the number in the roll.
+  const g = groundCardFor(ab, character, {
+    schools: CONTENT.schools, substrate: CONTENT.substrateModel, location, locations: CONTENT.locations,
+    powerSources: CONTENT.powerSources, foothills: CONTENT.foothills, carried,
+    present: peoplePresentAt(location?.id, { registry: character?.npcRegistry || {}, npcs: CONTENT.npcs || {} }),
+  });
+  if (!g || !g.grounded) return null;
+  const verdict = { factor: g.factor, side: g.side, percent: g.percent, chancePenalty: g.chancePenalty, energyMult: g.energyMult, off: g.off,
+    source: g.source, via: g.via, ...(g.meaning !== undefined ? { meaning: g.meaning, ceiling: g.ceiling, meaningBound: g.meaningBound } : {}) };
   // §9b invariant 5: when something CARRIED is why the ground reads differently, the receipt must
   // say which thing. A ward that quietly halves your craft — or a staff that quietly saves it — is
   // the "cruellest possible bug" the SNG-090 round-2 note names. Attribution rides the verdict.
@@ -7527,8 +7545,11 @@ async function onChoice(choice) {
   // SNG-090: surface the substrate when it bit (starved/crowded) — a receipt line + a note the GM
   // narrates so the fiction matches ("the lattice is thin here; your craft runs at a fraction").
   if (substrate && substrate.side !== "full" && substrate.side !== "neutral") {
-    resolution.substrate = { percent: substrate.percent, side: substrate.side, carriedBy: substrate.carriedBy || null };
-    pendingSubstrateNote = substrate.side === "starved"
+    resolution.substrate = { percent: substrate.percent, side: substrate.side, carriedBy: substrate.carriedBy || null,
+      ...(substrate.meaningBound ? { meaningBound: true, meaning: substrate.meaning } : {}) };
+    pendingSubstrateNote = substrate.side === "meaningless"
+      ? `There is little MEANING here for the character's craft to take hold of — it runs at ~${substrate.percent}% (capped by the place, not the lattice). Let it read as reaching for significance the place does not hold.`
+      : substrate.side === "starved"
       ? `The lattice is THIN here — the character's craft is running at ~${substrate.percent}% (starved of substrate). Let the effort show the strain; a weapon or mundane means is unaffected.`
       : `The lattice is DENSE and CROWDS the character's craft here — it runs at ~${substrate.percent}% (too much signal is noise). Let it read as interference, not weakness.`;
   }
@@ -10701,6 +10722,13 @@ function wireHoldingOffers() {
     releaseHolding(character, id, { reason: "given up", day: absoluteWorldDay(), worldCount: worldCount() });
     saveCharacter(character); again();
   };
+  for (const btn of app.querySelectorAll("[data-hold-sell]")) btn.onclick = () => {
+    const id = btn.dataset.holdSell;
+    const here = hereNow();
+    const r = sellStore(character, id, { economy: CONTENT.rules?.economy, cfg: CONTENT.rules?.economy?.holdStore, hereId: here?.id || null, regionId: here?.regionId || null, day: absoluteWorldDay() });
+    if (!r.ok) { alert(r.why); return; }
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-hold-transfer]")) btn.onclick = () => {
     const id = btn.dataset.holdTransfer;
     const sel = app.querySelector(`[data-hold-to="${id}"]`);
@@ -10764,9 +10792,11 @@ function renderHoldingsTab() {
         <strong>${esc(h.name || h.id)}</strong>
         <div class="hint">${esc(h.kind || "post")} · ${esc(h.condition || "holding")}${loc ? " · " + esc(loc) : ""}${h.steward ? " · kept by " + esc(nameOf(h.steward)) : " · <em>unkept</em>"}</div>
         ${h.obligation ? `<div class="hint">owes: ${esc(h.obligation)}</div>` : ""}
+        ${storeTotal(h) > 0 ? `<div class="hint">store: ${esc(Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", "))}${(() => { const w = storeWorth(h, { economy: CONTENT.rules?.economy, regionId: CONTENT.locations?.[h.locationId]?.regionId || null, cfg: CONTENT.rules?.economy?.holdStore }); return w ? ` · worth ~${w} crystal here` : ""; })()}${h.arrears ? ` · in arrears ${h.arrears}` : ""}</div>` : ""}
         ${h.fromAssignment ? `<div class="hint">from work you delegated</div>` : ""}
         <div class="opt-row" style="margin-top:4px;gap:6px;flex-wrap:wrap">
           ${handTo.length ? `<select data-hold-to="${esc(h.id)}">${handTo.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-transfer="${esc(h.id)}" title="Hand it to them — what it owes goes with it">Hand it over</button>` : ""}
+          ${storeTotal(h) > 0 && hereNow()?.id === h.locationId ? `<button class="opt" data-hold-sell="${esc(h.id)}" title="Sell what is stored, at this Reach's prices — you sell where it stands">Sell the store</button>` : ""}
           <button class="opt" data-hold-release="${esc(h.id)}" title="Walk away — what it owes stays with you, unpaid">Give it up</button>
         </div>
       </div></div>`;

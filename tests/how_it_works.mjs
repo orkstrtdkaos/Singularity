@@ -768,8 +768,10 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
 
 
     const hold = rd("engine/holdings.js");
-    gap("§10: a holding still has no income, defence, resource or capability",
-      !/income|defence|defense|resources|capabilit/i.test(hold));
+    // ✅ GAP CLOSED 2026-09-04 (§69): a holding has INCOME (the store yields and sells), a RESOURCE (goods at the hold) and a
+    // DEFENCE reader (`defence`/`garrison` halve a raid). Capability is still Q14. Asserted CLOSED so a regression goes red.
+    check("§10: ⛔ the holdings-economy gap CLOSED (§69) — a holding has income, a resource and a defence reader; stays closed",
+      /export function tickStore/.test(hold) && /export function sellStore/.test(hold) && /holding\.defence \|\| holding\.garrison/.test(hold));
     // ✅ GAP CLOSED 2026-09-04 (§61): release is an operation with a cost trace, news and a record. Asserted CLOSED now,
     // so a regression to the bare filter goes red the way the open gap used to.
     check("§10: ⛔ releaseHolding is no longer a bare filter — the gap closed (§61) and stays closed",
@@ -1566,6 +1568,9 @@ console.log("\n── §29 · the balance doc's dial list is checked against the
     skill_battle_system: rj("content/packs/core/rules/skill_battle_system.json").engine,
     craft_mechanics: rj("content/packs/core/rules/craft_mechanics.json"),
     resolution: rj("content/packs/core/rules/resolution.json"),
+    // ✅ 2026-09-04: two more homes the doc names — the hold store and the debts (economy), the meaning weights (the_substrate)
+    economy: rj("content/packs/core/rules/economy.json"),
+    the_substrate: rj("content/packs/core/rules/the_substrate.json"),
   };
   const resolves = (path) => {
     const parts = path.replace(/\.\*$/, "").split(".");
@@ -4274,10 +4279,15 @@ console.log("\n── §63 · the subject instrument runs, its synonyms resolve,
     fh.flags.join(" | ") || "no absences");
   check("§63: …and it finds the ruling that lived in a content-file `_` key — the shape that hid R33 for seven days",
     fh.contentRulings.some(c => /_twoAxes/.test(c.key)), fh.contentRulings.map(c => c.key).slice(0, 3).join(" · "));
-  // ⚠️ A SPEC-ONLY IDEA READS AS ONE. `meaningDensity` has no reader and no body section; the report must say so.
-  const md = SJ.report("meaning-density");
+  // ⚠️ A SPEC-ONLY IDEA READS AS ONE. `settlementStanding` (SPEC_debts_and_reception §1: "no reader — how a PLACE receives
+  // you is not modelled at all") has no reader and no body section; the report must say so. (`meaningDensity` was this
+  // fixture until R38 built it on 2026-09-04 — and the instrument now shows it in ENGINE and TRUTH, which is the point.)
+  const md = SJ.report("settlement-standing");
   check("§63: a spec-only subject is reported as absent from TRUTH and ENGINE — the instrument does not flatter",
     md.hits.TRUTH.length === 0 && md.hits.ENGINE.length === 0 && md.hits.SPEC.length > 0);
+  const md2 = SJ.report("meaning-density");
+  check("§63: …and a subject that was built stops reading as absent — meaning-density reaches ENGINE and TRUTH now (R38)",
+    md2.hits.ENGINE.length > 0 && md2.hits.TRUTH.length > 0, JSON.stringify({ engine: md2.hits.ENGINE.length, truth: md2.hits.TRUTH.length }));
 }
 const SJ64_SYN = (await import("../scripts/subject.mjs")).SYNONYMS;
 /* ═════ §64 — A CRASH IS AT LEAST ONE FAILURE, AND THE TRUTH NAMES FIELDS THAT EXIST ═════ */
@@ -4502,6 +4512,159 @@ console.log("\n── §68 · the combat floor — pools, symmetric pressure, br
   check("§68: …the body carries the death save and the floor", /death save/i.test(rd("docs/HOW_IT_WORKS.md")) && /healthBase/.test(rd("docs/HOW_IT_WORKS.md")));
 }
 
+/* ═════ §69 — THE FIVE THAT NEEDED NO DECISION: the roll reads the craft · meaning sets the ceiling · the three terms stack · a debt held by a person · the hold store on the tick ═════ */
+// ⛔ GO_LIST_20260904 §2, one landing behind the floor. Q3: `substrateForAction` is the CARD (one source, one tuning, the
+// per-source field at the site) — 204 crafts read differently from their tradition's band at one place. R38: `meaningDensity`
+// is derived on demand from tags/tier/community/presence and never stored; a metaphysical craft gets min(ceiling, band).
+// R37: completions and condition steps stack onto acquaintance; a gained craft is written at r1 by the tick. Q5-B: a debt
+// is held by a NAMED NPC and escalation is their choice (`reactsToReputation`). Q8: the store runs on the tick — yield by
+// condition, upkeep from the purse, a full store a target, sold where it stands.
+console.log("\n── §69 · the five — roll=card, meaning ceiling, stacking growth, a held debt, the hold store ──");
+{
+  const SUB69 = await import("../engine/substrate.js");
+  const NS69 = await import("../engine/npcsheet.js");
+  const H69 = await import("../engine/holdings.js");
+  const WT69 = await import("../engine/worldtick.js");
+  const { loadContentHeadless: lch69 } = await import("./headless_content.mjs");
+  const C69 = await lch69();
+  const sub69 = C69.substrateModel, locs69 = C69.locations;
+  const ch69 = (t) => ({ domains: { primary: t }, schools: {}, npcRegistry: {} });
+  const cardAt = (ab, loc, extra = {}) => SUB69.groundCardFor(ab, ch69(ab.tradition), { schools: C69.schools, substrate: sub69, location: loc, locations: locs69, powerSources: C69.powerSources, foothills: C69.foothills, ...extra });
+
+  // ── Q3 · the roll reads the craft
+  const anyLoc = Object.values(locs69).find(l => typeof l.substrateDensity === "number") || Object.values(locs69)[0];
+  let diverged69 = 0, grounded69 = 0;
+  for (const ab of Object.values(C69.abilities)) {
+    if (!ab.tradition) continue;
+    const card = cardAt(ab, anyLoc);
+    if (!card?.grounded) continue;
+    grounded69++;
+    const old = SUB69.substrateVerdict({ tradition: ab.tradition, school: null, root: null, density: SUB69.locationDensity(anyLoc, sub69), carried: 0, data: sub69 });
+    if (Math.abs((old.factor ?? 1) - card.factor) > 0.02) diverged69++;
+  }
+  check("§69: ⛔ Q3 — the craft's own source and the tradition's band DISAGREE for a large share of grounded crafts (the reason the ruling exists)",
+    grounded69 > 200 && diverged69 / grounded69 > 0.3, `${diverged69} of ${grounded69} differ at ${anyLoc?.id}`);
+  const app69 = rd("app.js");
+  check("§69: ⛔ …and the ROLL is the CARD — `substrateForAction` builds its verdict from `groundCardFor`, not from `substrateBand[tradition]`",
+    /function substrateForAction\(choice, location\) \{[\s\S]{0,1600}groundCardFor\(ab, character, \{/.test(app69)
+    && !/function substrateForAction\(choice, location\) \{[\s\S]{0,1600}bandFor\(tradition/.test(app69));
+  const c1 = cardAt(Object.values(C69.abilities).find(a => a.tradition), anyLoc);
+  check("§69: …the card carries `factor` and `side` so the roll can read them, and the carried term reaches it",
+    c1 && Number.isFinite(c1.factor) && typeof c1.side === "string"
+    && (() => { const a = Object.values(C69.abilities).find(x => x.tradition && cardAt(x, anyLoc)?.grounded && cardAt(x, anyLoc).side === "starved"); if (!a) return true; const lifted = cardAt(a, anyLoc, { carried: 0.3 }); return lifted.factor >= cardAt(a, anyLoc).factor; })());
+  check("§69: …one tuning — the unschooled card no longer carries its own −30/×0.5/0.2 constants", !/chancePenalty: Math\.round\(\(1 - eff\) \* 30\)/.test(rd("engine/substrate.js")));
+
+  // ── R38 · meaning
+  const sacred69 = Object.values(locs69).find(l => (l.tags || []).includes("sacred"));
+  const plain69 = Object.values(locs69).find(l => !(l.tags || []).some(t => ["sacred", "locus", "cult", "home"].includes(t)) && !l.communityId);
+  const mS = SUB69.meaningDensity(sacred69, { data: sub69 }), mP = SUB69.meaningDensity(plain69, { data: sub69 });
+  check("§69: ⛔ R38a — `meaningDensity` is DERIVED from what a place authors — a sacred place outweighs a plain one, and nothing stores it",
+    Number.isFinite(mS) && Number.isFinite(mP) && mS > mP + 0.3 && Object.values(locs69).every(l => !("meaningDensity" in l)), `${sacred69?.id} ${mS} · ${plain69?.id} ${mP}`);
+  check("§69: …and it is DYNAMIC — people present raise it, and leave it when they go",
+    SUB69.meaningDensity(plain69, { present: 3, data: sub69 }) > mP && SUB69.meaningDensity(plain69, { present: 0, data: sub69 }) === mP
+    && SUB69.peoplePresentAt("x69", { registry: { a: { lastSeen: { locationId: "x69" }, status: "active" }, b: { lastSeen: { locationId: "x69" }, status: "dead" } }, npcs: { c: { homeLocation: "x69" } } }) === 2);
+  check("§69: …unauthored dials → null, never a number nobody chose", SUB69.meaningDensity(sacred69, { data: {} }) === null && SUB69.meaningCeiling(0.5, {}) === null);
+  const meta69 = Object.values(C69.abilities).find(a => a.tradition && SUB69.craftSource(a, ch69(a.tradition), C69.schools, C69.powerSources, C69.foothills)?.source === "metaphysical");
+  const cP = cardAt(meta69, plain69), cS = cardAt(meta69, sacred69);
+  check("§69: ⛔ R38b — MEANING SETS THE CEILING, SUBSTRATE SETS THE PENALTY: a metaphysical craft at a meaning-poor place is CAPPED (side `meaningless`), and the cap is min(ceiling, band), never a product",
+    cP?.meaningBound === true && cP.side === "meaningless" && cP.percent === Math.round(cP.ceiling * 100) && cS?.meaning > cP.meaning && (cS.meaningBound === false || cS.percent >= cP.percent),
+    JSON.stringify({ plain: cP && [cP.percent, cP.meaning, cP.ceiling, cP.side], sacred: cS && [cS.percent, cS.meaning, cS.ceiling, cS.meaningBound] }));
+  const cX = cardAt({ ...meta69, mechanic: { ...(meta69.mechanic || {}), meaning: "none" } }, plain69);
+  check("§69: …a craft may opt OUT (`mechanic.meaning: \"none\"` — the body-craft case) and reads no meaning", cX && cX.meaning === undefined && !cX.meaningBound);
+  const nonMeta69 = Object.values(C69.abilities).find(a => a.tradition && (() => { const c = cardAt(a, plain69); return c?.grounded && c.source !== "metaphysical"; })());
+  check("§69: …and a non-metaphysical source carries no second ground at all (absent, not zero)", nonMeta69 && cardAt(nonMeta69, plain69).meaning === undefined, nonMeta69?.id);
+  check("§69: …the ground row and the roll's note read it", /meaning \$\{Math\.round\(g\.meaning \* 100\)\}%/.test(app69) && /substrate\.side === "meaningless"/.test(app69));
+
+  // ── R37 · growth
+  const cfg69 = C69.rules.npcStanding;
+  check("§69: ⛔ R37 — the dials are authored (completion 1 · condition step 1) and the service band is NOT (R37c)",
+    cfg69.levelPerCompletion === 1 && cfg69.levelPerConditionStep === 1 && !("levelPerDaysServed" in cfg69) && !("levelPerServiceDays" in cfg69));
+  const e69 = { id: "e69", name: "E", met: 1 };
+  check("§69: …THE THREE TERMS STACK — acquaintance + completions + condition steps, and an unauthored dial adds nothing",
+    NS69.derivedLevel({ ...e69, completions: 2, conditionSteps: 1 }, { cfg: cfg69 }) === NS69.derivedLevel(e69, { cfg: cfg69 }) + 3
+    && NS69.derivedLevel({ ...e69, completions: 2 }, { cfg: {} }) === NS69.derivedLevel(e69, { cfg: {} }));
+  const craft69 = Object.values(C69.abilities).find(a => a.name);
+  const obs69 = { id: "o69", name: "O", met: 12, skillsObserved: [craft69.name] };
+  const gained69 = NS69.commitGrowth(obs69, C69.abilities, { day: 10, cfg: cfg69 });
+  check("§69: ⛔ …growth WRITES — a craft the story showed is on the record at RANK 1 with the day, and a second pass writes nothing",
+    gained69.length === 1 && gained69[0].id === craft69.id && obs69.abilities?.[0]?.abilityId === craft69.id && obs69.abilities[0].level === 1 && obs69.abilities[0].gainedDay === 10
+    && NS69.commitGrowth(obs69, C69.abilities, { day: 11, cfg: cfg69 }).length === 0);
+  check("§69: …a `closed` craft is never written", NS69.commitGrowth({ id: "z", name: "Z", met: 12, skillsObserved: [craft69.name], closed: [craft69.id] }, C69.abilities, { day: 1, cfg: cfg69 }).length === 0);
+  const wt69 = rd("engine/worldtick.js");
+  check("§69: …the tick STAMPS the record — a done assignment adds a completion, a condition step on a kept hold adds a step, and `commitGrowth` runs",
+    /n\.completions = \(Number\(n\.completions\) \|\| 0\) \+ 1;/.test(wt69) && /n\.conditionSteps = \(Number\(n\.conditionSteps\) \|\| 0\) \+ 1;/.test(wt69) && /commitGrowth\(n, content\?\.abilities/.test(wt69));
+
+  // ── Q5-B · debts
+  const mk69 = () => ({ id: "pc", purse: { crystal: 100 }, holdings: [], worldState: {}, npcRegistry: { the_kestrel: { id: "the_kestrel", name: "The Kestrel", status: "active" }, greta: { id: "greta", name: "Greta", status: "active" } } });
+  const dCfg = C69.rules.economy?.debts;
+  check("§69: ⛔ Q5-B — the dials are content (escalatingTags · escalateAfterDays · maxEscalation ≤ 2: a bounty and a hit squad are NOT built)",
+    Array.isArray(dCfg?.escalatingTags) && dCfg.escalatingTags.includes("debtor") && Number.isFinite(dCfg.escalateAfterDays) && dCfg.maxEscalation === 2);
+  const k = mk69();
+  H69.addHolding(k, { id: "toll", kind: "post", name: "the pass toll", locationId: "kestrels_roost", steward: "the_kestrel", obligation: "a tenth to the Roost", day: 1 });
+  H69.releaseHolding(k, "toll", { reason: "walked away", day: 5, worldCount: 100 });
+  const d = k.worldState.debts?.the_kestrel;
+  check("§69: ⛔ …releasing a holding with an obligation writes a DEBT held by the person who kept it", d && d.kind === "abandoned-holding" && d.heldBy === "the_kestrel" && d.holdingId === "toll" && d.sinceDay === 5 && d.escalation === 0, JSON.stringify(d));
+  const s20 = H69.advanceDebts(k, { npcs: C69.npcs, cfg: dCfg, day: 20 }), s40 = H69.advanceDebts(k, { npcs: C69.npcs, cfg: dCfg, day: 40 }), s80 = H69.advanceDebts(k, { npcs: C69.npcs, cfg: dCfg, day: 80 });
+  check("§69: ⛔ …escalation is the HOLDER's choice — the Kestrel (reactsToReputation.debtor) escalates after the dial's days, to 2 and no further, with news each step and her community on the record",
+    s20.moved === 0 && s40.moved === 1 && /colder/.test(s40.news[0] || "") && s80.moved === 1 && /not be sold to/.test(s80.news[0] || "") && k.worldState.debts.the_kestrel.escalation === 2
+    && k.worldState.debts.the_kestrel.communityId === C69.npcs.the_kestrel.communityId && H69.advanceDebts(k, { npcs: C69.npcs, cfg: dCfg, day: 200 }).moved === 0
+    && H69.debtRefusalAt(k, C69.npcs.the_kestrel.communityId)?.holder === "the_kestrel", JSON.stringify([s20, s40, s80]));
+  const g = mk69(); H69.recordDebt(g, { holderId: "greta", kind: "unpaid-price", amount: 30, reason: "a bed", day: 1 });
+  check("§69: …a holder with no debtor-shaped tag (Greta) remembers and does NOT act — a legitimate outcome, not a gap",
+    !Object.keys(C69.npcs.greta?.reactsToReputation || {}).some(t => dCfg.escalatingTags.includes(t)) && H69.advanceDebts(g, { npcs: C69.npcs, cfg: dCfg, day: 400 }).moved === 0 && g.worldState.debts.greta.escalation === 0);
+  const paid = H69.applyDebtOps(g, [{ op: "settle", holderId: "greta" }], { day: 2 });
+  check("§69: ⛔ …it clears THREE ways — paid (the purse is debited), a deed (forgive), the holder gone — and never in coin",
+    paid[0]?.ok === true && g.purse.crystal === 70 && !g.worldState.debts.greta
+    && (() => { const f = mk69(); H69.recordDebt(f, { holderId: "the_kestrel", kind: "broken-terms", amount: 500, day: 1 }); const short = H69.applyDebtOps(f, [{ op: "settle", holderId: "the_kestrel" }], { day: 2 }); const forgave = H69.applyDebtOps(f, [{ op: "forgive", holderId: "the_kestrel", why: "held the pass" }], { day: 3 }); return short[0].ok === false && forgave[0].ok === true && !f.worldState.debts.the_kestrel; })()
+    && (() => { k.npcRegistry.the_kestrel.status = "dead"; const r = H69.advanceDebts(k, { npcs: C69.npcs, cfg: dCfg, day: 90 }); return r.news.length === 1 && !k.worldState.debts.the_kestrel; })()
+    && H69.recordDebt(mk69(), { holderId: "greta", kind: "x", amount: 1, currency: "coin", day: 1 }) === null);
+  const g2 = mk69(); H69.recordDebt(g2, { holderId: "greta", kind: "unpaid-price", amount: 30, reason: "a bed", day: 1 });
+  check("§69: …the narrator is told (a WHAT YOU OWE block), the GM has `debtOps`, and the app applies them",
+    /you owe greta: 30 crystal — a bed/.test(H69.debtsForGM(g2, { nameOf: id => id }) || "") && /debtsDetail/.test(rd("engine/gm_registry.js")) && /WHAT YOU OWE/.test(rd("engine/gm.js"))
+    && /"debtOps": \[\{"op": "record\|settle\|forgive"/.test(rd("engine/gm.js")) && /applyStep\("debtOps"/.test(app69) && /"holdingOps", "debtOps",/.test(rd("engine/gm.js")));
+
+  // ── Q8 · the store
+  const eco69 = C69.rules.economy, sCfg = eco69?.holdStore;
+  check("§69: ⛔ Q8 — the store dials are content: a steep yield curve (thriving > 2× holding), an upkeep, a full mark, a raid",
+    sCfg && sCfg.yieldByCondition.thriving >= 2 * sCfg.yieldByCondition.holding && sCfg.yieldByCondition.failing === 0 && sCfg.upkeepByKind.enterprise > 0 && sCfg.fullAt > 0 && sCfg.raid?.base > 0);
+  const mine69 = (cond) => ({ id: "mine", kind: "enterprise", name: "the mine", locationId: "choirheight", condition: cond, steward: "greta", history: [] });
+  const nets = {};
+  for (const cond of ["thriving", "holding", "strained", "failing"]) {
+    const c = mk69(); const h = mine69(cond);
+    const st = H69.tickStore(c, h, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 0, rng: () => 0.99, day: 1 });
+    nets[cond] = (H69.storeWorth(h, { economy: eco69, regionId: null, cfg: sCfg }) || 0) - st.upkeep;
+  }
+  check("§69: ⛔ …THE CURVE IS STEEP: thriving strongly positive, holding near break-even, strained a subsidy, failing a drain (ordinary demand)",
+    nets.thriving >= 15 && nets.holding >= -2 && nets.holding <= 6 && nets.strained < 0 && nets.failing < nets.strained, JSON.stringify(nets));
+  { const c = mk69(); const h = mine69("thriving"); const st = H69.tickStore(c, h, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 0, rng: () => 0.99, day: 1 });
+    check("§69: …yield lands AT the hold and upkeep leaves the purse", h.store?.raw_material === sCfg.yieldByCondition.thriving && c.purse.crystal === 100 - sCfg.upkeepByKind.enterprise && st.upkeep === sCfg.upkeepByKind.enterprise); }
+  { const c = mk69(); c.purse.crystal = 3; const h = mine69("holding"); const st = H69.tickStore(c, h, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 0, rng: () => 0.99, day: 1 });
+    check("§69: …a purse that cannot pay leaves ARREARS on the place, and the news says so", st.short > 0 && h.arrears === st.short && c.purse.crystal === 3 && H69.storeNews(h, st).some(t => /could not pay its keep/.test(t))); }
+  { const c = mk69(); const h = mine69("thriving"); h.store = { raw_material: 40 };
+    const st = H69.tickStore(c, h, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 4, rng: () => 0, day: 7 });
+    const h2 = mine69("thriving"); h2.store = { raw_material: 40 }; h2.garrison = true;
+    let open = 0, kept = 0; for (let i = 0; i < 600; i++) { const a = { ...mine69("thriving"), store: { raw_material: 40 } }; if (H69.tickStore(mk69(), a, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 4, rng: mkRng69(i), day: 7 }).raid) open++; const b = { ...h2, store: { raw_material: 40 } }; if (H69.tickStore(mk69(), b, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 4, rng: mkRng69(i), day: 7 }).raid) kept++; }
+    check("§69: ⛔ …A FULL STORE IS A TARGET — a raid takes a share and arrives as news; a garrison halves the chance; no danger, no raid",
+      st.raid?.taken?.raw_material === 24 && h.store.raw_material === 24 /* 40 + the pass yield 8, halved */ && H69.storeNews(h, st).some(t => /Raiders hit/.test(t)) && open > kept && kept > 0
+      && !H69.tickStore(mk69(), { ...mine69("thriving"), store: { raw_material: 40 } }, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 0, rng: () => 0, day: 7 }).raid, `open ${open} kept ${kept} of 600`); }
+  { const c = mk69(); c.holdings = [mine69("thriving")]; c.holdings[0].store = { raw_material: 20 };
+    const away = H69.sellStore(c, "mine", { economy: eco69, cfg: sCfg, hereId: "greyhearth", regionId: "the_center", day: 9 });
+    const here = H69.sellStore(c, "mine", { economy: eco69, cfg: sCfg, hereId: "choirheight", regionId: null, day: 9 });
+    check("§69: ⛔ …you SELL WHERE IT STANDS — refused away from the hold, credited in crystal at the Reach's price, the store emptied",
+      away.ok === false && here.ok === true && here.crystal === 20 * eco69.worthBands[sCfg.unitWorthBand] && c.purse.crystal === 100 + here.crystal && H69.storeTotal(c.holdings[0]) === 0, JSON.stringify({ away: away.why, here: here.crystal })); }
+  { const c = mk69(); c.holdings = [mine69("holding")]; c.holdings[0].store = { raw_material: 9 }; const rec = H69.releaseHolding(c, "mine", { reason: "gone", day: 1, worldCount: 5 });
+    const c4 = mk69(); c4.holdings = [mine69("holding")]; c4.holdings[0].store = { raw_material: 9 }; const t = H69.transferHolding(c4, "mine", { toEntity: "greta", day: 1, worldCount: 5 });
+    check("§69: …the store goes WITH the place — forfeited on release (recorded), carried on transfer", rec.storeForfeited?.raw_material === 9 && t.storeCarried === true); }
+  { const c = mk69(); c.holdings = [mine69("thriving")]; c.holdings[0].store = { raw_material: 12 };
+    check("§69: …the narrator's holding line carries the store; the Holdings tab shows it and sells it where you stand", /store: 12 raw_material/.test(H69.holdingsForGM(c, null, { hereId: null, nameOf: id => id })) && /data-hold-sell=/.test(app69) && /storeWorth\(h, \{ economy: CONTENT\.rules\?\.economy/.test(app69)); }
+  { const c = mk69(); c.holdings = [mine69("thriving")]; c.holdings[0].lastMovedWorldCount = 0; c.company = [{ npcId: "greta" }]; c.holdingOffers = [];
+    const r = WT69.advanceHoldings({ character: c, content: C69, now: Date.now(), rng: () => 0.99 });
+    check("§69: ⛔ …and it runs on the TICK unattended — one pass yields into the store and pays the keep; a caller without content sees the old tick", r.moved === 1 && c.holdings[0].store?.raw_material > 0 && c.purse.crystal < 100
+      && (() => { const c0 = mk69(); c0.holdings = [mine69("thriving")]; c0.holdings[0].lastMovedWorldCount = 0; c0.company = [{ npcId: "greta" }]; WT69.advanceHoldings({ character: c0 }); return !c0.holdings[0].store && c0.purse.crystal === 100; })()); }
+  // seeded rng helper for the raid share
+  function mkRng69(seed) { let s = (seed + 1) * 2654435761; return () => { s |= 0; s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  check("§69: …the body carries the five", /THE THREE TERMS STACK/.test(rd("docs/HOW_IT_WORKS.md")) && /MEANING SETS THE CEILING, SUBSTRATE SETS THE PENALTY/.test(rd("docs/HOW_IT_WORKS.md")) && /holdStore/.test(rd("docs/HOW_IT_WORKS.md")) && /escalatingTags/.test(rd("docs/HOW_IT_WORKS.md")));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -56,6 +56,8 @@ the deliberate ⚡ Finish it. ⬜ A ruling here changes `finisher` and possibly 
 
 ### Q3 · which ground table is the truth ⛔ blocks `SPEC_body_source` §2–§4 and `SPEC_meaning_density`
 
+✅ **RULED (GO list §2: "the roll reads the craft not the tradition") · BUILT v1.9.348 `§69`** — the roll IS the card (`craftSource` → source → `sourceBands`, one tuning, the site's per-source field); 204 of 416 grounded crafts read differently at one place. The schooled card's precedence stands; Q13 (the somatic split) still owed.
+
 **Measured.** Three readers: the CARD (`craftSource` → the craft's `powerSystem` → `sourceBands.sources`), the ROLL
 (`substrateForAction` → `substrateBand[tradition]`), and a schooled card's BAND (`bandForSchool` → the pure school →
 the tradition band). None of them touches a skill-battle round. ⬜ Which table, and should the roll read the craft?
@@ -66,6 +68,8 @@ Abyssal was settled (primary veil, 09-03) and 19 of its crafts now declare veil;
 (`§58`). ⬜ Only matters if a tradition is deferred again.
 
 ### Q5 · the standing cost of RELEASING a holding ⛔ blocks the last line of `SPEC_holding_release_transfer`
+
+✅ **RULED B (SPEC_debts_and_reception) · BUILT v1.9.348 `§69`** — `worldState.debts[holderId]` held by a named NPC; escalation the holder's choice (`reactsToReputation` debtor tag), to 2; cleared by pay / deed / holder gone. ⬜ 3–4 (bounty, hit squad) not built.
 
 **Built without it:** the record carries `reason` and `obligationUnpaid: true`. **Options:** a standing op against the
 granting authority with the reason in the ledger (`standing.js` has `applyStandingOps` + `note()`; recovers with time,
@@ -81,11 +85,15 @@ the service band N (Aevi: 5), and whether the three terms stack or take the high
 
 ### Q7 · `meaningDensity` — derived or stored; two grounds ⛔ blocks `SPEC_meaning_density`
 
+✅ **RULED (R38) · BUILT v1.9.348 `§69`** — derived from tags/tier/community/presence, never stored; metaphysical reads min(ceiling, band). Opt-out `mechanic.meaning: "none"` is Aevi's to tag.
+
 **Measured (its ROUND 2):** no engine reader, no body section — a spec-only subject (`scripts/subject.mjs
 meaning-density` says ORPHAN). Derivation is cheap (135 locations, tags already authored). ⬜ What a metaphysical craft
 DOES with two grounds is a resolution change and needs your shape first.
 
 ### Q8 · the holdings economy's smallest version ⛔ blocks `SPEC_holdings_economy`
+
+✅ **RULED (SPEC_hold_store) · BUILT v1.9.348 `§69`** — the store on the tick: yield by condition, upkeep from the purse, full = target, sold where it stands; release forfeits, transfer carries. ⬜ Goods to market, trade contracts, raid-as-fight logged in the spec's ROUND 2.
 
 **Measured (its ROUND 2):** `economy.js` already has a goods taxonomy (`regionDemand(economy, regionId, goods)` —
 `mech_parts`, `living_stock`, `raw_material`, `cut_stone`, `medicines`, `arms`, …), `bargainReach(rank)` exists, and

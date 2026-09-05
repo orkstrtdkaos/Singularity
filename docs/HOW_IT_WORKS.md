@@ -455,8 +455,9 @@ working papers; **this is the answer.**
 | 09-04 | ✅ **THREE READERS FOR THINGS THAT WERE AUTHORED AND DARK** | (1) SPEC_holding_attributes pass one — `holdingsAt` (the join), `holdingSentence` (“the mine is running; the watchtower is eating it”), `provides`/`upkeep` read before authored, the narrator told when you stand in a place you hold; (2) the PC's armour — `wornSoakLayers` reads SNG-521's item `soakLayers[]`, best per type, into the fight seat; (3) `byTradition[t].mix` — 26 authored blends with zero consumers — reaches the ground card as `lineageMix` and the wheel's ground row | `§65` (join, sentence, here-mark, registry passes the location) · `§66` (best per type on real items; the seat carries the layers) · `§67` (abyssal card carries the blend; an unauthored lineage carries none; the row renders it) | body §7d, §4, §3c. ⚠️ No magnitude moved for holdings (Q14); armour now soaks for the PC exactly as it does for a foe |
 | 09-04 | ✅ **TRUTH ↔ DATA — a body section names its subject and the fields it describes, and they must exist** | `<!-- subject: X · fields: a, b · state: c -->` under a body heading; every `fields:` name must be a key somewhere in content, every `state:` name (a save-record field) must be named in engine/; the subject must be one `scripts/subject.mjs` knows | `§64` — three sections marked (§3c, §7d, §7h); sections without a marker ratchet at 20 and may only fall | the second half of SPEC_associativity §4 — the join that would have caught 31 crafts carrying a forbidden `tradition`; a body that describes a field nobody authors is now red |
 | 09-04 | ✅ **THE COMBAT FLOOR — one landing (R34 · R35 · Q1)** | NPC pools on the player's shape (`healthBase`/`energyPerLevel` readers, `npcStanding` authored 30 + 5/level · 100 + 5/level); a pressure tick costs BOTH sides health and energy, priced alike (3 · 8), and the opponent's health loss is finally APPLIED; `breakAtPressure = ceil(level × 0.5)` of the side being broken, `level` on every opponent seat; the DEATH SAVE — a landed lethal hit is an opposed contest (caster's landed roll + the finisher's situational dials vs the target's strength/presence save + `saveBonus` 20), kill → the target stops and the caster pays `mechanic.killCost` (the Cut Thread's bound, transcribed: pool to zero, `craftSealedUntilRest` until a night's rest), hold → the dice at the standard cost | `§68` (pools · tick alike/applied/carried · 15/3/flat/chase · both seat paths · kill/hold/wounding/barred/sealed · seeded 35–65% · seams) · `scripts/duel_pell_vs_veth.mjs` LIVE Pell wins 11.1% (by health 222 of 222 decided, by pressure 0) · mean rounds 7.1 · Veth never spent-out (was 91.6% Pell, 1,832 by pressure, spent by round four) | body §3c (floor), §7h. R36–R38 are indexed ⬜ in RULINGS (sequenced behind the floor by the GO list) and enter the body when built. ⛔ 53 lethal crafts, one `killCost` — Q15 logged. `§62`'s declaration regex now reads Aevi's bold form |
+| 09-04 | ✅ **THE FIVE BEHIND THE FLOOR (Q3 · R38 · R37 · Q5-B · Q8)** | the roll reads the CRAFT — `substrateForAction` is the ground card (one source, one tuning, the site's per-source field, the carried and presence terms; 204 of 416 crafts read differently than by tradition); `meaningDensity` derived from tags/tier/community/presence, never stored, and for metaphysical crafts MEANING is the ceiling and SUBSTRATE the penalty (min, not product; `mechanic.meaning: "none"` opts out); growth stacks completions (+1) and condition steps (+1) on acquaintance, the tick stamps the record, and `commitGrowth` writes an observed craft at r1; a debt is `worldState.debts[holderId]` held by a named NPC, written by `releaseHolding` and `debtOps`, escalated only by a holder who reacts to debtors (1 colder · 2 refused), cleared by pay/deed/holder gone; the hold store yields by condition into `holding.store`, pays upkeep from the purse, fills, gets raided, sells where it stands | `§69` (the divergence census · roll=card by source · ceiling/min/opt-out/absent · stacking and the r1 write · the Kestrel escalates, Greta does not, three clears, coin refused · the steep curve, arrears, raid/garrison, sell-where-you-stand, forfeit/carry, the tick) · `§63` refixtured on `settlement-standing` | body §7g (ground), §7h (R37), §7d (debts, store), §9. §10's holdings-economy gap CLOSED. ⬜ Q15 (lethal census), Q13 (somatic split), escalation 3–4, goods to market: logged, not built |
 
-**Last verified: 2026-09-04 · v1.9.347 · 419 crafts.**
+**Last verified: 2026-09-05 · v1.9.348 · 419 crafts.**
 
 ---
 
@@ -1269,6 +1270,38 @@ steward's wage.”* — and the narrator's block says **YOU ARE STANDING IN IT**
 ⚠️ **No number moves yet.** How many kinds a hold may carry, how much, what each costs, which need a keeper — pass
 two, RULINGS OWED Q14.
 
+### ✅ A DEBT IS HELD BY A PERSON, AND THEY DECIDE (SPEC_debts_and_reception · Erik: option B, 2026-09-04)
+<!-- subject: debts · fields: escalatingTags, escalateAfterDays, maxEscalation, reactsToReputation, communityId · state: debts, escalation, heldBy -->
+
+`worldState.debts[holderId]` — `{ kind, amount, currency (never coin), reason, sinceDay, heldBy, communityId, holdingId,
+escalation, history }`, keyed by who is OWED: a named NPC. `releaseHolding` writes one when an obligation is walked away
+from, held by the steward who kept it — the person who remembers (with no steward it is recorded unheld and nobody
+escalates it); the GM records one by `debtOps` (`record · settle · forgive`). ⛔ **Escalation is the holder's choice, not a
+ladder the world climbs.** On the tick (`advanceDebts`, `economy.debts`) only a holder whose `reactsToReputation` carries a
+debtor-shaped tag (`escalatingTags`) acts, one step per `escalateAfterDays` (30): **1 · spoken of** — received colder;
+**2 · refused** — no trade, hire or shelter (the narrator hears it; `debtRefusalAt` names the community). The Kestrel
+(`debtor: "cold, watched, cut off"`) escalates; Greta remembers and does nothing — a legitimate outcome, not a gap.
+⬜ **3 (a bounty) and 4 (a hit squad) are NOT built** — they need an encounter and `contingentsFromPeople` drawing from the
+holder's community; Aevi's and Erik's to shape. **It clears three ways, like `unavenged`:** paid (`settle` — the purse is
+debited, refused when short), a deed (`forgive` — the GM says what outweighed it), or the holder dies or departs (*"what
+you owed them went with them"*). The narrator gets a WHAT YOU OWE block. `§69`.
+
+### ✅ THE HOLD STORE RUNS ITSELF (SPEC_hold_store · Q8, 2026-09-04)
+<!-- subject: hold-store · fields: holdStore, yieldByCondition, defaultYield, upkeepByKind, upkeepCurrency, unitWorthBand, fullAt, raid, takeShare, defendedMult · state: store, arrears, storeForfeited, storeCarried -->
+
+`holding.store = { goods: units }` accumulates AT the hold on the world tick (`tickStore`, `economy.holdStore`): **yield by
+condition** (thriving 8 · holding 4 · strained 2 · failing 0 units of `raw_material` for an enterprise, nothing for a post)
+and **upkeep from the purse** (enterprise 14 crystal per pass, post 0; a purse that cannot pay leaves ARREARS on the place
+and the news says so). ⛔ **THE CURVE IS STEEP** — at ordinary demand a pass nets thriving +18, holding +2, strained −6,
+failing −14; where the ore is wanted (the Ascent: high need, scarce) thriving nets +101. A unit is worth
+`worthBands[useful] × need × scarcity` where it is SOLD (`regionDemand`), so the same ore is worth more where it is wanted.
+**A full store is a target** (`fullAt` 40): a raid's chance is `raid.base × dangerLevel × fill` (danger 4, full: ~12% per
+pass; a hold that authors `defence` or `garrison` halves it), it takes `takeShare` and arrives as news. **Four exits:**
+`sellStore` (the Holdings tab when you stand there, or `holdingOps sell`) — you sell where it stands, refused elsewhere;
+release forfeits the store (recorded); transfer carries it; let it sit and it is a target. Readers before fields:
+`holding.yields`, `upkeepCost`, `defence`, `garrison` — authored on a record, they win. ⬜ Moving goods to market, trade
+contracts as an `obligation`, and a raid resolved as a fight are the spec's open questions, answered in its ROUND 2. `§69`.
+
 ---
 
 ## 7h · A PERSON HAS A SHEET, AND A MASS HAS A NUMBER
@@ -1306,6 +1339,18 @@ rises to the floor. **`closed: […]` is read** — an authored absence survives
 from the narrator's block, so what the story has shown that the catalogue cannot express reaches the prompt as a
 fact about the record (*“seen doing, not yet a craft anyone can resolve”*), which is the mechanical answer to a
 person with one word to reach for.
+
+### ✅ R37 — THE THREE TERMS STACK (2026-09-04)
+<!-- subject: npc-growth · fields: levelPerCompletion, levelPerConditionStep, closed · state: completions, conditionSteps, gainedDay, skillsObserved -->
+
+`derivedLevel` adds what a person has DONE to what the story has shown: a completed assignment is one level
+(`npcStanding.levelPerCompletion`), a condition step on a hold they keep is one (`levelPerConditionStep`), on top of
+meetings, seasons and standing. The RECORD carries the counts (`completions`, `conditionSteps`) and the world tick stamps
+them where the work happens — the done outcome, the condition climb. ⛔ **R37c: no service-band term, deliberately** — a
+level per day served is exactly the term Erik declined to set. ✅ **And growth WRITES:** `commitGrowth` puts a craft the
+story showed (`skillsObserved`, matched to a real craft) on the record at **rank 1** with the day — never a `closed` craft,
+never above an authored rank — and the tick runs it and says so (*"The Kestrel has taken up Ki Wield — the story showed it,
+and now it is theirs."*). `growthFor` stays the view; this is the one writer. `§69`.
 
 ### ⛔ THE BRIDGE WAS A FALLBACK PRETENDING TO BE A DEFERRAL
 
@@ -1350,6 +1395,34 @@ the generator computes differently stops mattering.
 than broken, exactly as the region tier already does for the 34 of 38 regions with no authored layer.
 
 ⛔ **NOTHING DRAWS IT.** There is a world globe and a region map and no place tier. §10.
+
+### ✅ THE ROLL READS THE CRAFT, AND A METAPHYSICAL CRAFT READS TWO GROUNDS (Q3 · R38, 2026-09-04)
+<!-- subject: meaning-density · fields: meaning, appliesTo, ceilingFloor, perPerson, presentCap, powerSystem, sourceBands -->
+
+**Q3 — one ground table.** Three readers answered *"what is this craft worth here"* and two of them disagreed: the wheel's
+CARD read the craft's SOURCE (`craftSource` → the school's extension, the craft's `powerSystem`, the tradition's primary, a
+foothill's parents) and the ROLL read `substrateBand[tradition]`. Measured at one place: **204 of 416 grounded crafts read
+differently by the two** (`ki_wield`: somatic's band 97%, its metaphysical source 58%). ✅ `substrateForAction` is now the
+card — `groundCardFor` with the carried term (a Waystaff, a companion's aura) and R38's presence term added — and the
+unschooled card runs on the SAME tuning as the roll (it carried its own −30 / ×0.5 / 0.2 constants). **The number on the
+wheel is the number in the roll.** The schooled card's precedence stands as before; SPEC_body_source Q13 (marcher → body,
+the somatic split) is still owed.
+
+**R38a — `meaningDensity` is DERIVED, never stored.** `substrate.meaningDensity(location, { present })` sums content
+weights (`the_substrate.meaning`) from a place's `tags` (sacred · locus · cult · home), its `tier`, its `communityId`, and
+who is THERE (`peoplePresentAt`: registry people last seen here and still with us, plus the people whose home it is — a
+place gains meaning as people live there and loses it when they leave). Choirheight (sacred, a community, a region) reads
+0.75; a fringe with none reads 0.20, and 0.32 with three people present. No location carries the field; unauthored dials
+return null, never a number nobody chose.
+
+**R38b — MEANING SETS THE CEILING, SUBSTRATE SETS THE PENALTY.** For the sources in `meaning.appliesTo` (metaphysical)
+the card reads two grounds: the substrate band as before (the PENALTY — apparatus in the way) and a CEILING =
+`ceilingFloor + (1 − ceilingFloor) × meaning` (what there is to reach). The craft gets **min(ceiling, band factor)** — shape 1
+of three; never the product Erik rejected. `ki_wield` at the fringe: band 100%, ceiling 48% → capped, side `meaningless`,
+the row says *capped here — little meaning to work with* and the narrator is told why; at Choirheight the ceiling is 84%
+and the band's 60% binds instead. A craft opts out with `mechanic.meaning: "none"` (a body craft under a metaphysical
+source — Aevi's ki_wield case; reader before field, nothing tagged yet). ⚠️ The weights are a first pass and crude on
+purpose — the SHAPE is what was ruled. `§69`.
 
 ---
 ## 7e · BRAIDS TAKE ANY NUMBER OF PARENTS, AND ARITY IS HALF A RUNG (Erik, R26)
@@ -1433,6 +1506,7 @@ CONTENT, and two were.** Both halves are now stated, and both are asserted by `h
   row in `byTradition`**. A tie resolves to `combination` rather than a coin flip.
 - **summoned creature sheets** — from the caster's level plus the craft's `tierGap`, **and the roll: a crit
   raises something stronger than the craft promises**
+- **`meaningDensity`** — from a place's tags, tier, community and who is present (R38a); **no location carries it**
 
 ### ⚠️ AN AUTHORED SHEET BEATS A DERIVED ONE — and for a long time it could not
 
@@ -1479,7 +1553,6 @@ ancestry.
 
 | ⛔ **party scale reads one contribution family, and it is a default** | `PROTECT` has no party-scale reader at all; `RESTORE` only makes you a target. §7b |
 | ⛔ **`HARM` is a DEFAULT, so the fold's filter passes everyone** | `contributionsOf` adds it to every record not explicitly `canStrike: false`. ⚠️ Tagging someone a restorer does not stop them counting as a striker — Pell is now tagged `RESTORE·KNOW` **and still carries HARM** |
-| ⚠️ **a holding has no income, defence, resource or capability** | the record carries none of them; `po/SPEC_holdings_estate.md` |
 **Each gap above is asserted OPEN by `how_it_works.mjs`.** ⛔ **Closing one turns its check RED, which is
 the signal to edit this table.** A gap that quietly closes is a doc that quietly rots.
 

@@ -50,8 +50,8 @@ exercise that produced three wrong reports on one subject on 2026-09-02. | colum
 | **R34** | combat pressure | R34 — pressure is SYMMETRIC (both sides lose health and energy, priced alike) and breaks at `ceil(level / 2)` of the side being broken | ✅ v1.9.347 `§68` | `RULING_pressure_and_death_save.md` |
 | **R35** | lethal harm | R35 — a landed hit at a lethal rung offers the INSTA-KILL through an opposed death save; the dice are the fallback; the caster pays the authored bound only on the kill | ✅ v1.9.347 `§68` | `RULING_pressure_and_death_save.md` |
 | **R36** | party contribution | R36/R36a — a party member fights from their OWN SHEET; up to 3 act fully (content dial), the rest fold; what earns a slot is NOT ruled | ⬜ sequenced behind the floor (GO list) | `RULING_party_from_sheets.md` |
-| **R37** | growth rates | R37a–c — completion = 1 level, condition step = 1, the three terms STACK; a gained craft starts r1; the service band unset | ⬜ next landing | `RULING_growth_rates.md` |
-| **R38** | meaning density | R38a–b — `meaningDensity` derived never stored; for metaphysical crafts MEANING sets the ceiling and SUBSTRATE the penalty | ⬜ next landing | `RULING_meaning_density.md` |
+| **R37** | growth rates | R37a–c — completion = 1 level, condition step = 1, the three terms STACK; a gained craft starts r1; the service band unset | ✅ v1.9.348 `§69` | `RULING_growth_rates.md` |
+| **R38** | meaning density | R38a–b — `meaningDensity` derived never stored; for metaphysical crafts MEANING sets the ceiling and SUBSTRATE the penalty | ✅ v1.9.348 `§69` | `RULING_meaning_density.md` |
 
 ---
 
@@ -77,12 +77,12 @@ evidence and the measured options for each. When one is ruled it gets a paper, a
 |---|---|---|---|
 | ~~**Q1**~~ | ✅ **RULED 09-04 (GO list) — pools authored on the player's shape: 30 + 5/level health · 100 + 5/level energy; tick 3 health · 8 energy both sides** | v1.9.347 `§68` | `RULING_pressure_and_death_save.md`, `DECISIONS_OWED` Q1 |
 | ~~**Q2**~~ | ✅ **RULED 09-04 — R35: `harmRung: lethal` IS the kill condition (an opposed death save on a landed hit) and the dice are the fallback; pools keep scaling** | v1.9.347 `§68` | `RULING_pressure_and_death_save.md` · ⬜ Q15 (which crafts keep the rung) |
-| **Q3** | which of three ground tables is the truth — the card reads the craft's `powerSystem`, the roll reads `substrateBand[tradition]`, a schooled card's band comes from the tradition | `SPEC_body_source` §2–§4, `SPEC_meaning_density` | `DUEL` §C.6 |
+| ~~**Q3**~~ | ✅ **RULED 09-04 (GO list) — the roll reads the CRAFT: `substrateForAction` is the ground card (one source, one tuning, the site's field)** | v1.9.348 `§69` | `DECISIONS_OWED` Q3 · Q13 (somatic split) still owed |
 | **Q4** | should a craft's own declaration override an explicit `primary: null` deferral? (no live case since Abyssal was settled) | — | §58 |
-| **Q5** | the standing cost of RELEASING a holding — a standing op against the granting authority, or a payable debt record? | `SPEC_holding_release_transfer` §3 | §R2.3 |
+| ~~**Q5**~~ | ✅ **RULED B (SPEC_debts_and_reception) — a payable debt held by a named NPC; escalation their choice (to 2); 3–4 not built** | v1.9.348 `§69` | the spec's ROUND 2 |
 | **Q6** | the service band N; what a completion and a `condition` step are worth; do the three growth terms stack or take the highest; does tier drive level or level tier | `SPEC_npc_level_balance` | its ROUND 2 |
-| **Q7** | `meaningDensity` — derived or stored; what two grounds do to a metaphysical roll | `SPEC_meaning_density` | its ROUND 2 |
-| **Q8** | the holdings economy's smallest version — one yield kind, one upkeep, missable | `SPEC_holdings_economy` | its ROUND 2 |
+| ~~**Q7**~~ | ✅ **RULED (R38) — derived never stored; meaning the ceiling, substrate the penalty** | v1.9.348 `§69` | `RULING_meaning_density.md` ROUND 2 |
+| ~~**Q8**~~ | ✅ **RULED (SPEC_hold_store) — the store on the tick: yield by condition, upkeep, full = target, sold where it stands** | v1.9.348 `§69` | the spec's ROUND 2 · goods to market / trade contracts / raid-as-fight logged |
 | **Q9** | party-scale contributions — shape A / B / C; and what suppresses the HARM default | `SPEC_party_contributions` §4, R25a slots 5–6 | its ROUND 2 |
 | **Q10** | `soma` — does a holder get both restored halves or the nearer one; population C of the sect un-merge | `SPEC_undo_sect_merge` | §R2.2 |
 | **Q11** | the generator — emit ONE honest rank marked `wantsAuthoring` instead of three template ranks (changes what a minted craft is; six saves hold the old shape) | `SPEC_generative_pipeline` §5.2 | §R2.7 |

@@ -32,7 +32,7 @@
 // a key gm.js consumes that no row provides can never land — that is the exact
 // failure §23 exists to stop (challengeTypes: 45 values, read by nothing).
 
-import { holdingsForGM } from "./holdings.js";
+import { holdingsForGM, debtsForGM } from "./holdings.js";
 import { loreForLocation, eventsForGM, traditionMotivationsForGM } from "./state.js";
 import { buildRegionView, newsForGM, worldArcsForGM } from "./worldtick.js";
 import { inventoryForGM } from "./inventory.js";
@@ -213,6 +213,10 @@ export const GM_CONTEXT = [
       env.CONTENT?.rules?.subAttributeLadder ? milestoneEffects(env.CONTENT.rules.subAttributeLadder, env.character).live : null,
       // SPEC_holding_attributes: the join — the narrator knows when you are standing in a place you hold
       { hereId: env.location?.id || env.character?.currentLocationId || null, nameOf: (id) => env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id }) },
+  // ✅ Q5-B (SPEC_debts_and_reception): what the character OWES, and who remembers it.
+  { key: "debtsDetail", builder: "holdings.debtsForGM", carries: ["debts", "heldBy", "escalation"],
+    reachedBy: "always", spec: "SPEC_debts_and_reception", views: ["turn", "ask"],
+    build: (env) => debtsForGM(env.character, { nameOf: (id) => env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id }) },
   { key: "abilityLawDetail", builder: "progression.abilitiesForGM", carries: ["abilities", "ranks", "energy", "harmRung"],
     reachedBy: "always", spec: "§7", views: ["turn", "ask", "gambit"],
     build: (env) => abilitiesForGM(env.character, env.app.fullCatalog(), env.CONTENT.branchForks, env.CONTENT.rules) },

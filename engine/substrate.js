@@ -322,6 +322,43 @@ export function locationDensity(location, data) {
 // invariant 2 ate invariant 1. The ~0.05 residual drift is emergent and healthy. `pools rise / sinks
 // fall` is now STRUCTURAL — a source keeps its own signed delta and nothing can flip it.
 
+/** ✅ R38a (Erik 2026-09-04): `meaningDensity` is DERIVED, never stored — computed on demand from what a place already
+ *  authors (`tags`: sacred · locus · cult · home, `tier`, `communityId`) and from who is THERE (people living somewhere
+ *  carries meaning; a place loses it when they leave). The weights are content (`the_substrate.meaning`) and a first pass
+ *  is deliberately crude — the SHAPE is what was ruled. Returns null when no dials are authored, so nothing reads a
+ *  number nobody chose. Pure. */
+export function meaningDensity(location, { present = 0, data = null } = {}) {
+  const m = data?.meaning;
+  if (!location || !m) return null;
+  let v = Number(m.base) || 0;
+  const tags = new Set((Array.isArray(location.tags) ? location.tags : []).map(String));
+  for (const [tag, w] of Object.entries(m.tags || {})) if (tags.has(tag)) v += Number(w) || 0;
+  v += Number((m.tier || {})[String(location.tier || "")]) || 0;
+  if (location.communityId) v += Number(m.community) || 0;
+  v += Math.min(Number(m.presentCap) || 0, (Number(present) || 0) * (Number(m.perPerson) || 0));
+  return Math.max(0, Math.min(1, v));
+}
+
+/** Who is THERE, for the dynamic half of R38a: registry people last seen at the place and still with us, plus the
+ *  content people whose home it is. A count, deduplicated — the crude weight is per person. Pure. */
+export function peoplePresentAt(locationId, { registry = {}, npcs = {} } = {}) {
+  if (!locationId) return 0;
+  const gone = new Set(["dead", "departed"]);
+  const ids = new Set();
+  for (const [id, n] of Object.entries(registry || {})) if (n && n.lastSeen?.locationId === locationId && !gone.has(String(n.status || ""))) ids.add(id);
+  for (const [id, n] of Object.entries(npcs || {})) if (n && n.homeLocation === locationId && !gone.has(String(registry?.[id]?.status || ""))) ids.add(id);
+  return ids.size;
+}
+
+/** R38b: the CEILING meaning sets — a place with no meaning caps a metaphysical craft at `ceilingFloor`, a place full of
+ *  it caps nothing. `meaning` null → no ceiling (unauthored dials, or a place the derivation cannot read). Pure. */
+export function meaningCeiling(meaning, data = null) {
+  const m = data?.meaning;
+  if (meaning === null || meaning === undefined || !m) return null;
+  const floor = Math.max(0, Math.min(1, Number(m.ceilingFloor) || 0));
+  return Math.max(0, Math.min(1, floor + (1 - floor) * meaning));
+}
+
 const FIELD_SUPPORT = 2.5;   // compact support: nothing past radius × this
 
 /** Resolve the geographic substrate field. Returns Map<locationId, density>. Pure — no I/O, no
@@ -517,7 +554,12 @@ export function craftSource(ability, character, schoolsData, powerSources = null
  *
  *  `strength` is 0–4 pips for scanning; `verdict` is the word; `because` is the authored ground line.
  *  Returns null when the source is unknown — a card that cannot answer must not render a confident row. */
-export function groundCardFor(ability, character, { schools, substrate, location, powerSources = null, locations = null, foothills = null } = {}) {
+export function groundCardFor(ability, character, { schools, substrate, location, powerSources = null, locations = null, foothills = null,
+  // ✅ Q3 (GO_LIST_20260904 §2): THE ROLL READS THE CRAFT, NOT THE TRADITION. `substrateForAction` now builds its verdict
+  // from THIS card — the craft's own source, the per-source field at the site, one tuning — so the card and the roll can
+  // never disagree about what a craft is worth here. `carried` is the roll's term (a Waystaff, a companion's aura) and
+  // `present` is R38's (who is there); a card caller that passes neither sees the card it saw before.
+  carried = 0, present = 0 } = {}) {
   const cs = craftSource(ability, character, schools, powerSources, foothills);
   if (!cs) return null;
   // ⛔ SNG-385 — THE CARD READS THE SOURCE'S OWN FIELD. A nanite craft scored against lattice density
@@ -546,15 +588,37 @@ export function groundCardFor(ability, character, { schools, substrate, location
              verdict: nan ? `in ${nan.state} nanite country` : "unaffected by the ground",
              strength: 4, percent: null, chancePenalty: 0, energyMult: 1, off: false, grounded: false };
   }
+  const tuning = SUBSTRATE_TUNING;
   const v = cs.school
     ? substrateVerdict({ tradition: cs.traditionId, school: cs.school,
-        root: schools?.traditionSchools?.[cs.traditionId]?.root, density, data: substrate })
-    // No school to read: score the SOURCE's own band directly, which is what the mix names.
-    : (() => { const eff = bandFactor(band, density);
-        return { factor: eff, side: eff >= 1 ? "full" : density < band.center ? "starved" : "crowded",
-                 percent: Math.round(eff * 100), chancePenalty: Math.round((1 - eff) * 30),
-                 energyMult: 1 + 0.5 * (1 - eff), off: eff < 0.2 }; })();
+        root: schools?.traditionSchools?.[cs.traditionId]?.root, density, carried, data: substrate })
+    // ⛔ Q3: the unschooled branch used to carry its OWN constants (−30 max, ×0.5 energy, off under 0.2) while the roll
+    // used the tuning (−65, ×0.6, 0.18) — two arithmetics for one ground. One tuning now, and the source's own floor.
+    : (() => { const eff = effectiveDensity(density, carried);
+        let factor = bandFactor(band, eff, tuning);
+        let side = eff < band.center - band.width ? "starved" : eff > band.center + band.width ? "crowded" : "full";
+        if (sourceHasFloor(cs.source, substrate) && side === "starved" && factor < tuning.materialFloor) { factor = tuning.materialFloor; side = "floored"; }
+        return { factor, side, percent: Math.round(factor * 100), chancePenalty: Math.round((1 - factor) * tuning.maxChancePenalty),
+                 energyMult: 1 + tuning.energyK * (1 - factor), off: factor < tuning.gateBelow }; })();
+  // ✅ R38b (Erik 2026-09-04): MEANING SETS THE CEILING, SUBSTRATE SETS THE PENALTY. A metaphysical craft reads TWO grounds:
+  // how much there is to work with (meaning → the ceiling) and how cleanly it can be reached (substrate → the penalty
+  // above). Shape 1 of three: `min(ceiling, factor)`, never a product — a place with both is not worse than a place with
+  // neither. Which sources read meaning is content (`meaning.appliesTo`); a craft may opt out with `mechanic.meaning:
+  // "none"` (a body craft under a metaphysical source — Aevi's ki_wield case) — reader before field.
+  const meaningSources = new Set((substrate?.meaning?.appliesTo || []).map(String));
+  const readsMeaning = meaningSources.has(String(cs.source)) && ability?.mechanic?.meaning !== "none";
+  const meaning = readsMeaning && location ? meaningDensity(location, { present, data: substrate }) : null;
+  const ceiling = readsMeaning ? meaningCeiling(meaning, substrate) : null;
+  let meaningBound = false;
+  if (ceiling !== null && v.factor > ceiling) {
+    v.factor = ceiling; v.percent = Math.round(ceiling * 100); meaningBound = true;
+    v.chancePenalty = Math.round((1 - ceiling) * tuning.maxChancePenalty);
+    v.energyMult = 1 + tuning.energyK * (1 - ceiling);
+    v.off = ceiling < tuning.gateBelow;
+    v.side = "meaningless";
+  }
   const word = v.off ? "will not answer here"
+    : v.side === "meaningless" ? "capped here — little meaning to work with"
     : v.side === "full" ? "at full strength here"
     : v.side === "floored" ? "holding at its floor here"
     : v.side === "starved" ? "starved here — the ground is too thin"
@@ -569,7 +633,9 @@ export function groundCardFor(ability, character, { schools, substrate, location
     ? Object.entries(row.mix).filter(([, w]) => Number(w) > 0).sort((a, b) => b[1] - a[1]).map(([k, w]) => ({ source: toBandVocab(k), share: Math.round(Number(w) * 100) }))
     : null;
   return { source: cs.source, school: cs.school, via: cs.via, density, because, field: fieldOfSource(cs.source, substrate), nanite: nan, localGround, verdict: word, lineageMix,
-    strength: Math.max(0, Math.min(4, Math.round(v.factor * 4))), percent: v.percent,
+    strength: Math.max(0, Math.min(4, Math.round(v.factor * 4))), percent: v.percent, factor: v.factor, side: v.side,
+    // R38: the second ground, when this source reads it — absent otherwise, never a default
+    ...(readsMeaning ? { meaning, ceiling, meaningBound } : {}),
     chancePenalty: v.chancePenalty, energyMult: v.energyMult, off: v.off, grounded: true };
 }
 

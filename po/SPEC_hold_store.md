@@ -124,3 +124,33 @@ is exposed at the hold. ⛔ **Neither is safe, and that is the game.**
    is that thriving must be clearly profitable; the numbers are CCode's to price.**
 6. ⛔ **What happens to the store when a hold is RELEASED or TRANSFERRED?** ⚠️ `releaseHolding` and
    `transferHolding` shipped yesterday and neither knows about goods.
+
+---
+
+## ✅ CCODE ROUND 2 — 2026-09-04 · BUILT v1.9.348 · gated `§69`
+
+**Built as specced:** `holding.store = { goods: units }` fills on the world tick — `yieldByCondition` (8 / 4 / 2 / 0) of
+`raw_material` for an enterprise, upkeep 14 crystal from the purse (arrears when it cannot pay), a full store (40) a
+target, raids as news, `sellStore` where you stand. Release forfeits, transfer carries. `HOW_IT_WORKS.md` §7d.
+
+**The curve, priced (§6 Q5):** a unit is `worthBands[useful] = 4 × need × scarcity` where it is SOLD. At ordinary demand a
+pass nets **thriving +18 · holding +2 · strained −6 · failing −14** — an asset, break-even, a subsidy, a drain. Where the ore
+is wanted (the Ascent reads raw_material as high need, scarce → 14.4 a unit) thriving nets **+101** a pass; a season of
+32 passes is a real fortune. ⚠️ Erik turns `upkeepByKind` and `unitWorthBand`; the shape holds at any setting because
+yield is the steep term.
+
+**§6, answered:**
+1. **`regionDemand`:** it prices well enough to make WHERE you sell a decision already — the same 20 units are 80 crystal
+   at ordinary demand and 288 at the Ascent. Demand that MOVES (`shiftNeed` from arc stages) is already read by `priceOf`;
+   the store's `unitWorth` reads the static row today. ⬜ Wire `shiftNeed` in when an arc should move ore prices.
+2. **How it gets to market:** ⛔ NOT built — you sell where the store stands, and `sellStore` refuses elsewhere and says so.
+   Your first shape (a delegate hauls it — an assignment) is the right one and reuses `assignments`; it needs a decision on
+   what a haul costs and risks on the road. Logged, not decided.
+3. **Trade contracts as an `obligation`:** plausible — `obligation` is "what this place owes" and a standing sale is that.
+   ⬜ Not built; needs the Bargainers' `struck_term` shape.
+4. **Where a raid resolves:** as NEWS today — chance `raid.base × dangerLevel × fill`, halved by an authored `defence` or
+   `garrison`, taking `takeShare`. ⬜ A raid as a PARTY from a hostile community (`contingentsFromPeople`) is the same
+   decision as the debt spec's escalation 4 — one shape for both.
+5. **How steep:** 8 / 4 / 2 / 0 against 14, above. Thriving is 2× holding in yield and ~9× in net.
+6. **Release / transfer:** release FORFEITS the store (`storeForfeited` on the former record — the loss is a fact); transfer
+   CARRIES it with the place (`storeCarried`). ⚠️ Arrears go with the place on transfer too.

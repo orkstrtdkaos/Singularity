@@ -33,7 +33,14 @@ export const SYNONYMS = {
   "backlash":           ["backlash", "backlashRung", "shouldBacklash", "applyBacklash", "R5", "R18"],
   // ⚠️ NARROW ON PURPOSE: `sacred`/`locus` are location tags with their own readers and would make a spec-only
   // idea look built. The report should say ORPHAN until an engine reader names the field.
-  "meaning-density":    ["meaningDensity", "meaningCharge", "meaningAura"],
+  "meaning-density":    ["meaningDensity", "meaningCeiling", "meaningCharge", "meaningAura", "R38"],
+  // ⛔ SPEC-ONLY, deliberately: how a PLACE receives you has no reader (SPEC_debts_and_reception §1). §63's fixture.
+  "settlement-standing": ["settlementStanding", "hitSquad"],   // not "bounty" — a plain word encounterFrame.js uses in prose
+  // ✅ 2026-09-04 — the five behind the floor (GO_LIST §2)
+  "growth-rates":       ["levelPerCompletion", "levelPerConditionStep", "commitGrowth", "conditionSteps", "R37"],
+  "npc-growth":         ["levelPerCompletion", "levelPerConditionStep", "commitGrowth", "conditionSteps", "R37"],   // the ruling paper's own subject word
+  "debts":              ["recordDebt", "advanceDebts", "debtOps", "escalatingTags", "debtsForGM", "worldState.debts"],
+  "hold-store":         ["holdStore", "tickStore", "sellStore", "storeWorth", "yieldByCondition", "storeNews"],
   // ✅ 2026-09-04 — the combat floor (R34/R35): the tick's four dials, the level break, the death save and its seal.
   "combat-pressure":    ["pressureEvent", "breakAtLevelFraction", "breakAtPressure", "opponentHealthLoss", "deathSave", "killCost", "saveBonus", "craftSealedUntilRest", "R34", "R35"],
   "lethal-harm":        ["deathSave", "killCost", "harmRung", "saveBonus", "R35"],

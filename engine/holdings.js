@@ -19,6 +19,9 @@
  *  never say. It is authored with Erik directly, separately, and it is not modelled here.
  */
 
+import { debit, credit } from "./purse.js";        // Q8: upkeep leaves the purse, a sold store enters it · Q5-B: settling pays
+import { regionDemand } from "./economy.js";       // Q8: a unit is worth what THIS Reach wants it for
+
 export const HOLDING_KINDS = ["post", "enterprise"];
 
 /** ⚠️ ORDERED WORST TO BEST — the index IS the condition, so "better"/"worse" is arithmetic rather than a
@@ -134,7 +137,7 @@ export function holdingsForGM(character, effects = null, { hereId = null, nameOf
   ensureHoldings(character);
   if (!character.holdings.length) return null;
   return character.holdings.map(h =>
-    `- ${h.name} (${h.kind}, ${h.condition}${h.steward ? `, kept by ${h.steward}` : (effects?.unstewardedCeiling ? ", kept by your name" : ", UNKEPT")})${here.has(h.id) ? " — YOU ARE STANDING IN IT" : ""} · ${holdingSentence(h, { nameOf })}`
+    `- ${h.name} (${h.kind}, ${h.condition}${h.steward ? `, kept by ${h.steward}` : (effects?.unstewardedCeiling ? ", kept by your name" : ", UNKEPT")})${here.has(h.id) ? " — YOU ARE STANDING IN IT" : ""}${storeTotal(h) > 0 ? ` · store: ${Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${g}`).join(", ")}` : ""}${h.arrears ? ` · in arrears ${h.arrears}` : ""} · ${holdingSentence(h, { nameOf })}`
     + (h.obligation
       ? (effects?.obligationDischarged
         ? ` — ${h.obligation}: they draw standing from your holding of it, not the reverse`
@@ -188,8 +191,14 @@ export function releaseHolding(character, id, { reason = null, day = null, world
   const rec = { ...h, formerHolder: character.id || null, releasedDay: day, releasedAt: worldCount, reason: reason || null,
     // ⛔ WHAT YOU OWED IS STILL OWED. Walking away does not pay it; the record says so until something does.
     obligationUnpaid: !!h.obligation, stewardReleased: h.steward || null,
+    // ✅ Q8: the store goes with the place — forfeited on release, recorded so the loss is a fact and not a mystery
+    storeForfeited: h.store && Object.keys(h.store).length ? { ...h.store } : null,
     history: [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `released${reason ? ` — ${reason}` : ""}` }].slice(-12) };
   character.formerHoldings = [...(character.formerHoldings || []), rec];
+  // ✅ Q5-B: what it owed is now a DEBT with a holder — the steward who kept it is the person who remembers. With no
+  // steward it is recorded unheld (nobody to escalate it); the GM may name a holder by `debtOps`.
+  if (h.obligation) recordDebt(character, { holderId: h.obligationHolder || h.steward || null, kind: "abandoned-holding", amount: null,
+    reason: `${h.name || h.id} — ${h.obligation}`, day, holdingId: h.id });
   queueHoldingEvent(character, `You have given up ${h.name || h.id}${h.obligation ? " — what it owed is still owed" : ""}${h.steward ? `, and ${h.steward} is released from keeping it` : ""}.`);
   return rec;
 }
@@ -206,6 +215,7 @@ export function transferHolding(character, id, { toEntity = null, toName = null,
     transferredDay: day, transferredAt: worldCount,
     // ✅ THE OBLIGATION GOES WITH IT — that is the whole difference from release, and why a player would prefer it.
     obligationUnpaid: false, stewardStays: !!h.steward,
+    storeCarried: !!(h.store && Object.keys(h.store).length),   // ✅ Q8: the store goes with the place
     history: [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `handed to ${toName || toEntity}` }].slice(-12) };
   character.formerHoldings = [...(character.formerHoldings || []), rec];
   queueHoldingEvent(character, `${h.name || h.id} is ${toName || toEntity}'s to keep now${h.obligation ? ", and what it owes goes with it" : ""}.`);
@@ -240,4 +250,245 @@ export function holdingSentence(h, { nameOf = null } = {}) {
   const gives = Array.isArray(h.provides) && h.provides.length ? `; it provides ${h.provides.join(", ")}` : "";
   const eats = Array.isArray(h.upkeep) && h.upkeep.length ? `; it eats ${h.upkeep.join(", ")}` : "";
   return `${name} ${state}${keeper}${gives}${eats}.`;
+}
+
+/* ═══ Q5-B — A DEBT IS HELD BY A PERSON, AND THEY DECIDE (SPEC_debts_and_reception · Erik: option B, a PAYABLE debt) ═══
+ * `worldState.debts[holderId]` — keyed by who is OWED, a named NPC. `releaseHolding` writes one when an obligation is walked
+ * away from (held by the steward who kept it — the person who remembers); the GM records one by `debtOps`. Escalation
+ * is the HOLDER's choice (`advanceDebts`): only a holder whose `reactsToReputation` carries a debtor-shaped tag acts, one
+ * step per `escalateAfterDays` — the Kestrel writes it in the ledger; Ceriad shelters you anyway and thinks less of you.
+ * "Nothing happens and they remember" is a legitimate outcome. It clears three ways, like `unavenged`: paid, a deed the GM
+ * says outweighs it, or the holder gone. ⛔ NEVER coin — a fixed supply cannot be minted by settling. */
+export function ensureDebts(character) {
+  if (!character) return {};
+  if (!character.worldState || typeof character.worldState !== "object") character.worldState = {};
+  if (!character.worldState.debts || typeof character.worldState.debts !== "object") character.worldState.debts = {};
+  return character.worldState.debts;
+}
+
+export function recordDebt(character, { holderId = null, kind = "unpaid-price", amount = null, currency = "crystal", reason = null, day = null, communityId = null, holdingId = null } = {}) {
+  const debts = ensureDebts(character);
+  if (!kind) return null;
+  const cur = String(currency || "crystal");
+  if (cur === "coin") return null;
+  const key = holderId || (holdingId ? `unheld:${holdingId}` : null);
+  if (!key) return null;
+  const prev = debts[key] || null;
+  const amt = amount === null || amount === undefined ? null : Number(amount);
+  const nextAmount = amt !== null && Number.isFinite(amt)
+    ? (prev && Number.isFinite(prev.amount) ? prev.amount + amt : amt)
+    : (prev?.amount ?? null);
+  const rec = {
+    kind, amount: nextAmount, currency: cur, reason: reason || prev?.reason || null,
+    sinceDay: prev?.sinceDay ?? day ?? null, heldBy: holderId || null,
+    communityId: communityId || prev?.communityId || null, holdingId: holdingId || prev?.holdingId || null,
+    escalation: prev?.escalation || 0, lastMovedDay: prev?.lastMovedDay ?? day ?? null,
+    history: [...(prev?.history || []), { day: day ?? null, note: `${prev ? "added to" : "owed"}: ${kind}${reason ? ` — ${reason}` : ""}` }].slice(-12),
+  };
+  debts[key] = rec;
+  return rec;
+}
+
+export function settleDebt(character, key, { how = "paid", day = null, why = null } = {}) {
+  const debts = ensureDebts(character);
+  const rec = debts[key];
+  if (!rec) return null;
+  delete debts[key];
+  return { ...rec, settled: how, settledDay: day ?? null, why: why || null };
+}
+
+/** Does THIS community refuse you? An escalation-2 debt held by one of its people. The GM block reads it; `canSpendHere`
+ *  is scrip-shaped and a community is not a Reach, so the refusal is narrated rather than enforced at the purse. */
+export function debtRefusalAt(character, communityId) {
+  if (!communityId) return null;
+  for (const [key, d] of Object.entries(character?.worldState?.debts || {})) {
+    if (d && d.communityId === communityId && (d.escalation || 0) >= 2) return { key, holder: d.heldBy, why: d.reason || d.kind };
+  }
+  return null;
+}
+
+/** The tick's pass. Pure over its inputs except the escalation it writes; returns the news it made. */
+export function advanceDebts(character, { npcs = {}, cfg = null, day = null } = {}) {
+  const debts = character?.worldState?.debts;
+  const news = []; let moved = 0;
+  if (!debts || !cfg) return { news, moved };
+  const tags = new Set((cfg.escalatingTags || ["debtor"]).map(String));
+  const after = Number(cfg.escalateAfterDays) || 30;
+  const max = Number.isFinite(Number(cfg.maxEscalation)) ? Number(cfg.maxEscalation) : 2;
+  const gone = new Set(["dead", "departed"]);
+  for (const [key, d] of Object.entries(debts)) {
+    if (!d || !d.heldBy) continue;                                  // nobody remembers it — it sits
+    const reg = character?.npcRegistry?.[d.heldBy] || null;
+    const def = npcs?.[d.heldBy] || null;
+    const name = reg?.name || def?.name || d.heldBy;
+    if (!d.communityId && def?.communityId) d.communityId = def.communityId;
+    if (reg && gone.has(String(reg.status || ""))) {
+      delete debts[key]; moved++;
+      news.push(`${name} is gone, and what you owed them went with them.`);
+      continue;
+    }
+    const react = def?.reactsToReputation || reg?.reactsToReputation || {};
+    if (!Object.keys(react).some(k => tags.has(String(k)))) continue;   // they remember; they do not act
+    if ((d.escalation || 0) >= max) continue;
+    if (day === null || day === undefined) continue;
+    if (day - (d.lastMovedDay ?? d.sinceDay ?? day) < after) continue;
+    d.escalation = (d.escalation || 0) + 1; d.lastMovedDay = day; moved++;
+    d.history = [...(d.history || []), { day, note: `escalation ${d.escalation}` }].slice(-12);
+    const where = d.communityId ? String(d.communityId).split(".").pop().replace(/_/g, " ") : "their people";
+    news.push(d.escalation === 1
+      ? `${name} has not forgotten what you owe (${d.reason || d.kind}). Word of it has gone round ${where} — you will be received colder there.`
+      : `${name} has had enough of waiting. You will not be sold to, hired, or sheltered in ${where} while it stands.`);
+  }
+  return { news, moved };
+}
+
+export function debtsForGM(character, { nameOf = null } = {}) {
+  const debts = character?.worldState?.debts || {};
+  const rows = Object.entries(debts).filter(([, d]) => d);
+  if (!rows.length) return null;
+  const word = (e) => e >= 2 ? "REFUSED there — no trade, hire or shelter" : e === 1 ? "spoken of — received colder there" : "owed, and remembered";
+  return rows.map(([key, d]) => {
+    const who = d.heldBy ? (nameOf ? nameOf(d.heldBy) : d.heldBy) : "nobody in particular (the place was walked away from)";
+    const what = Number.isFinite(d.amount) && d.amount !== null ? `${d.amount} ${d.currency}` : d.kind;
+    return `- you owe ${who}: ${what}${d.reason ? ` — ${d.reason}` : ""}${d.sinceDay != null ? ` · since day ${d.sinceDay}` : ""} · ${word(d.escalation || 0)}${d.communityId ? ` (${d.communityId})` : ""}`;
+  }).join("\n");
+}
+
+/** The GM's ops: record · settle (the purse pays) · forgive (a deed outweighed it). Returns receipts, refusals said. */
+export function applyDebtOps(character, ops = [], { day = null, regionId = null } = {}) {
+  const out = [];
+  for (const op of (Array.isArray(ops) ? ops : []).slice(0, 4)) {
+    const kind = String(op?.op || "").toLowerCase();
+    const key = op?.holderId || op?.npcId || null;
+    if (kind === "record") {
+      const r = recordDebt(character, { holderId: key, kind: op.kind || "unpaid-price", amount: op.amount ?? null, currency: op.currency || "crystal",
+        reason: op.reason || op.why || null, day, communityId: op.communityId || null });
+      out.push({ op: kind, ok: !!r, key, ...(r ? {} : { why: "a debt needs a holder and is never in coin" }) });
+    } else if (kind === "settle") {
+      const d = character?.worldState?.debts?.[key];
+      if (!d) { out.push({ op: kind, ok: false, key, why: "no such debt" }); continue; }
+      if (Number.isFinite(d.amount) && d.amount > 0) {
+        const paid = debit(character, d.currency || "crystal", d.amount, { regionId });
+        if (!paid.ok) { out.push({ op: kind, ok: false, key, why: paid.why }); continue; }
+      }
+      settleDebt(character, key, { how: "paid", day });
+      out.push({ op: kind, ok: true, key, paid: Number.isFinite(d.amount) ? d.amount : 0 });
+    } else if (kind === "forgive") {
+      const r = settleDebt(character, key, { how: "deed", day, why: op.why || op.reason || null });
+      out.push({ op: kind, ok: !!r, key, ...(r ? {} : { why: "no such debt" }) });
+    }
+  }
+  return out;
+}
+
+/* ═══ Q8 — THE HOLD STORE: it runs itself, you boost it, and it can be robbed (SPEC_hold_store) ═══
+ * `holding.store = { goods: units }` accumulates AT the hold on the tick — yield by condition (the curve is steep: thriving
+ * is an asset, holding near break-even, strained a subsidy, failing a drain), upkeep from the purse, and a full store is a
+ * target (a raid arrives as news and takes a share; an authored `defence`/`garrison` halves the chance). A unit is worth
+ * `worthBands[unitWorthBand] × need × scarcity` where it is SOLD, so the same ore is worth more where it is wanted. You
+ * sell where the store stands; moving it is the spec's open question and nothing models it yet. Readers before fields:
+ * `holding.yields` (a goods kind), `holding.upkeepCost`, `holding.defence`/`garrison` — authored on a record, they win. */
+export function yieldFor(holding, cfg) {
+  if (!holding || !cfg) return null;
+  const goods = holding.yields || (cfg.defaultYield || {})[holding.kind] || null;
+  if (!goods) return null;
+  const units = Number((cfg.yieldByCondition || {})[holding.condition]);
+  return Number.isFinite(units) ? { goods: String(goods), units } : null;
+}
+export function upkeepFor(holding, cfg) {
+  if (!holding || !cfg) return 0;
+  const u = holding.upkeepCost ?? (cfg.upkeepByKind || {})[holding.kind];
+  return Math.max(0, Number(u) || 0);
+}
+export function storeTotal(holding) {
+  return Object.values(holding?.store || {}).reduce((a, n) => a + (Number(n) || 0), 0);
+}
+export function unitWorth(goods, { economy = null, regionId = null, cfg = null } = {}) {
+  const base = Number(economy?.worthBands?.[cfg?.unitWorthBand || "useful"]);
+  if (!Number.isFinite(base)) return null;
+  const d = (regionId && regionDemand(economy, regionId, goods)) || { need: "ordinary", scarcity: "ordinary" };
+  const nm = Number(economy?.priceModel?.need?.[d.need]), sm = Number(economy?.priceModel?.scarcity?.[d.scarcity]);
+  if (!Number.isFinite(nm) || !Number.isFinite(sm)) return null;
+  return { each: Math.round(base * nm * sm * 100) / 100, need: d.need, scarcity: d.scarcity };
+}
+export function storeWorth(holding, { economy = null, regionId = null, cfg = null } = {}) {
+  let total = 0, any = false;
+  for (const [g, n] of Object.entries(holding?.store || {})) {
+    const w = unitWorth(g, { economy, regionId, cfg });
+    if (!w) continue;
+    any = true; total += (Number(n) || 0) * w.each;
+  }
+  return any ? Math.round(total) : null;
+}
+export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null } = {}) {
+  if (!holding || !cfg) return null;
+  const out = { yielded: null, upkeep: 0, short: 0, raid: null, full: false, justFull: false };
+  const y = yieldFor(holding, cfg);
+  if (y && y.units > 0) {
+    holding.store = holding.store && typeof holding.store === "object" ? holding.store : {};
+    holding.store[y.goods] = (Number(holding.store[y.goods]) || 0) + y.units;
+    out.yielded = y;
+  }
+  const up = upkeepFor(holding, cfg);
+  if (up > 0) {
+    const r = debit(character, cfg.upkeepCurrency || "crystal", up, {});
+    if (r.ok) out.upkeep = up; else { out.short = up; holding.arrears = (Number(holding.arrears) || 0) + up; }
+  }
+  const total = storeTotal(holding);
+  const fullAt = Math.max(1, Number(cfg.fullAt) || 40);
+  out.full = total >= fullAt;
+  out.justFull = out.full && !holding.storeFullAnnounced;
+  if (out.full) holding.storeFullAnnounced = true; else if (holding.storeFullAnnounced) delete holding.storeFullAnnounced;
+  const raid = cfg.raid || null;
+  if (raid && total > 0 && dangerLevel > 0) {
+    let p = (Number(raid.base) || 0) * dangerLevel * Math.min(1, total / fullAt);
+    if (holding.defence || holding.garrison) p *= Number.isFinite(Number(raid.defendedMult)) ? Number(raid.defendedMult) : 0.5;
+    if (rng() < p) {
+      const share = Math.max(0, Math.min(1, Number.isFinite(Number(raid.takeShare)) ? Number(raid.takeShare) : 0.5));
+      const taken = {};
+      for (const [g, n] of Object.entries(holding.store || {})) {
+        const t = Math.floor((Number(n) || 0) * share);
+        if (t > 0) { holding.store[g] = (Number(n) || 0) - t; taken[g] = t; }
+      }
+      if (Object.keys(taken).length) {
+        out.raid = { taken, day };
+        holding.history = [...(holding.history || []), { at: null, from: holding.condition, to: holding.condition,
+          note: `raided — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ")} taken` }].slice(-12);
+      }
+    }
+  }
+  return out;
+}
+/** Only what deserves telling: a raid, a keep unpaid, a store that has just filled. A store that simply grows is not news. */
+export function storeNews(holding, st) {
+  if (!holding || !st) return [];
+  const where = holding.name || holding.id;
+  const lines = [];
+  if (st.raid) lines.push(`Raiders hit ${where} — ${Object.entries(st.raid.taken).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ")} taken.${holding.defence || holding.garrison ? " The watch was not enough." : " Nobody was there to stop them."}`);
+  if (st.short) lines.push(`${where} could not pay its keep this pass (${st.short} owed) — the arrears sit on the place.`);
+  if (st.justFull) lines.push(`The store at ${where} is full — ${Object.entries(holding.store || {}).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ")} sit waiting for a road, a buyer, or a thief.`);
+  return lines;
+}
+/** Sell what is stored, where it stands, at this Reach's prices. Refuses away from the hold and where nothing is wanted. */
+export function sellStore(character, holdingId, { economy = null, cfg = null, hereId = null, regionId = null, day = null, goods = null } = {}) {
+  const h = (character?.holdings || []).find(x => x && x.id === holdingId);
+  if (!h) return { ok: false, why: "no such holding" };
+  if (hereId && h.locationId && hereId !== h.locationId) return { ok: false, why: "the store is at the hold — you sell where it stands, and nothing moves it yet" };
+  const sold = {}; let total = 0;
+  for (const [g, n] of Object.entries(h.store || {})) {
+    if (goods && g !== goods) continue;
+    if (!(Number(n) > 0)) continue;
+    const w = unitWorth(g, { economy, regionId, cfg });
+    if (!w) continue;
+    const val = Math.round(Number(n) * w.each);
+    if (val <= 0) continue;
+    sold[g] = { units: Number(n), crystal: val, need: w.need, scarcity: w.scarcity };
+    total += val; delete h.store[g];
+  }
+  if (!total) return { ok: false, why: storeTotal(h) > 0 ? "nobody here wants what is stored — this Reach has no need of it" : "the store is empty" };
+  const cr = credit(character, "crystal", total, { origin: "traded", regionId });
+  if (!cr.ok) return { ok: false, why: cr.why };
+  if (h.storeFullAnnounced && storeTotal(h) < Math.max(1, Number(cfg?.fullAt) || 40)) delete h.storeFullAnnounced;
+  h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `sold the store — ${total} crystal` }].slice(-12);
+  return { ok: true, crystal: total, sold, day };
 }

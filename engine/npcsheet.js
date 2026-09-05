@@ -54,7 +54,14 @@ export function derivedLevel(entry, { day = null, cfg = {}, authored = null } = 
   const fromDeeds = Math.floor(met / Math.max(1, perMeet));
   const fromTime = Math.floor(known / Math.max(1, perSeason));
   const standing = Math.max(0, Math.round(num(entry?.standing, 0) / Math.max(1, num(cfg.levelPerStanding, 25))));
-  const growth = fromDeeds + fromTime + standing;
+  // ✅ R37a/b (Erik 2026-09-04): THE THREE TERMS STACK — acquaintance (above) and what the person has DONE: a completed
+  // assignment is one level (`levelPerCompletion`), a condition step on a hold they keep is one (`levelPerConditionStep`).
+  // The RECORD carries the counts (`completions`, `conditionSteps`, stamped by the world tick where the work happens);
+  // unauthored dials are 0, so a save that predates the ruling derives exactly as before. ⛔ R37c: NO service-band term —
+  // the band is deliberately unset, and a level per day served would be exactly the term Erik declined to set.
+  const fromWork = num(entry?.completions, 0) * num(cfg.levelPerCompletion, 0)
+    + num(entry?.conditionSteps, 0) * num(cfg.levelPerConditionStep, 0);
+  const growth = fromDeeds + fromTime + standing + fromWork;
 
   // ⛔ AEVI'S CORRECTION, AND SHE IS RIGHT: "do not replace it with 100 — a Mythical is NEAR 100 and the
   // number is a CONSEQUENCE of the ladder, not a cap on it. If a bound is needed for arithmetic safety,
@@ -247,6 +254,26 @@ export function craftsOf(entry, catalog = {}, { limit = 8 } = {}) {
  *  ⛔ IT DOES NOT INVENT CRAFTS. An unmatched observation returns as a REQUEST — "this person has been seen
  *  doing something the catalogue cannot express" — which is a prompt to author, not licence to mint. That
  *  is the difference between growing a character and hallucinating one. */
+/** ✅ R37 — GROWTH WRITES. What the story has SHOWN a person doing (`skillsObserved`, matched to a real craft) becomes a
+ *  craft on their record at RANK 1 (`{ abilityId, level: 1, gainedDay }`), never above an authored rank and never a
+ *  `closed` craft. `growthFor` stays the reader (a view); this is the one writer, run by the tick, and it returns what
+ *  it gained so the world can say so — a gained craft is news. Idempotent: a craft already on the record is skipped. */
+export function commitGrowth(entry, catalog = {}, { day = null, cfg = {} } = {}) {
+  if (!entry || typeof entry !== "object") return [];
+  const g = growthFor(entry, catalog, { day, cfg });
+  const have = new Set((entry.abilities || []).map(a => String(a?.abilityId || a || "").toLowerCase()));
+  const closed = new Set((g.closed || []).map(s => String(s).toLowerCase()));
+  const gained = [];
+  for (const c of g.crafts || []) {
+    const id = String(c?.id || "").toLowerCase();
+    if (!id || have.has(id) || closed.has(id)) continue;
+    entry.abilities = [...(entry.abilities || []), { abilityId: c.id, level: 1, gainedDay: day }];
+    have.add(id);
+    gained.push(c);
+  }
+  return gained;
+}
+
 export function growthFor(entry, catalog = {}, { day = null, cfg = {} } = {}) {
   const level = derivedLevel(entry, { day, cfg });
   const capacity = Math.max(1, Math.round(level / Math.max(1, num(cfg.craftsPerLevels, 2))));

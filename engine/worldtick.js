@@ -15,7 +15,8 @@ import { advanceSeeking } from "./seeking.js"; // CCODE-222: a reason for the en
 import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
-import { advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents } from "./holdings.js";   // SNG-358: holdings ride the same world-gated pass
+import { advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts } from "./holdings.js";   // SNG-358: holdings ride the same world-gated pass
+import { commitGrowth } from "./npcsheet.js";   // ✅ R37: growth writes, on the tick
 import { spreadDeeds } from "./reputation.js";
 import { titleFor } from "./titles.js";   // SNG-287: a name from the material, not from a menu   // SNG-281: news travels, and that is a promotion source
 import { applyCodexUpdates } from "./codex.js";
@@ -295,6 +296,11 @@ export async function advanceDelegatedWork({ character, content, advanceAssignme
       const a = ws.assignments[adv?.assignmentId];
       if (!a) continue;
       advanceAssignment(a, adv.outcome, count);
+      // ✅ R37a: A COMPLETION IS WORTH ONE LEVEL — stamped on the person's record, read by `derivedLevel`.
+      if (adv.outcome === "done" && a.npcId && character?.npcRegistry?.[a.npcId]) {
+        const n = character.npcRegistry[a.npcId];
+        n.completions = (Number(n.completions) || 0) + 1;
+      }
       moved.push({ a, outcome: adv.outcome, note: adv.note });
       if (adv.note && a.npcId) statusUpdates.push({ op: "update", npcId: a.npcId, statusNote: smartClamp(adv.note, 200) });
     }
@@ -391,7 +397,7 @@ export function clashNewsItem(line, { worldDay = null, arcId = null, regionId = 
  *  nothing behind them. `ladder` is the sub-attribute ladder from the rules bag; absent, every holding
  *  drifts exactly as it did before, which is the correct behaviour for a caller that has not been
  *  updated rather than a silent loss of the milestone. */
-export function advanceHoldings({ character, now = Date.now(), ladder = null }) {
+export function advanceHoldings({ character, now = Date.now(), ladder = null, content = null, rng = Math.random }) {
   const holdEffects = ladder ? milestoneEffects(ladder, character).live : null;
   const news = [];
   // ⛔ DESIGN_celebrations §5.2 — WHERE THE PLAYER IS TOLD. Erik ruled BOTH surfaces and gave them
@@ -431,6 +437,17 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null }) 
     advanceHolding(h, h.steward ? "stall" : "problem", count, null, holdEffects);
     const line = holdingNews(h, before, holdEffects);
     if (line) news.push(line);
+    // ✅ R37a: A CONDITION STEP ON A HOLD THEY KEEP IS ONE LEVEL — stamped on the keeper's record.
+    if (h.steward && CONDITIONS.indexOf(h.condition) > CONDITIONS.indexOf(before) && character?.npcRegistry?.[h.steward]) {
+      const n = character.npcRegistry[h.steward];
+      n.conditionSteps = (Number(n.conditionSteps) || 0) + 1;
+    }
+    // ✅ Q8 (SPEC_hold_store): the store runs itself on the tick — yield by condition, upkeep from the purse, a full
+    // store a target. Needs the economy dials and the place; a caller without content sees the tick it saw before.
+    const loc = content?.locations?.[h.locationId] || null;
+    const st = tickStore(character, h, { cfg: content?.rules?.economy?.holdStore || null, economy: content?.rules?.economy || null,
+      regionId: loc?.regionId || null, dangerLevel: Number(loc?.dangerLevel) || 0, rng, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })() });
+    for (const t of storeNews(h, st)) news.push(t);
     moved++;
   }
   return { news: news.map(t => ({ text: t, section: "yours" })), moved };
@@ -444,15 +461,25 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // that early return is what Silas has been parked on for 915 actions. Only THIS block is lifted.
   const delegated = await advanceDelegatedWork({ character, content, advanceAssignments, currentDay });
   // ⛔ SNG-356 — the ladder rides in, or presence 14/18/20 are three sentences with nothing behind them.
-  const holdings358 = advanceHoldings({ character, ladder: content?.rules?.subAttributeLadder });
+  const holdings358 = advanceHoldings({ character, ladder: content?.rules?.subAttributeLadder, content, rng });
+  // ✅ Q5-B (SPEC_debts_and_reception): a debt is held by a PERSON and escalation is THEIR decision — the same cadence as
+  // `unavenged`, one pass, its own news. ✅ R37: and growth WRITES — what the story showed a person doing becomes a craft
+  // on their record at r1, and the world says so.
+  const debtsPass = advanceDebts(character, { npcs: content?.npcs || {}, cfg: content?.rules?.economy?.debts || null, day: currentDay });
+  const grown = [];
+  for (const [id, n] of Object.entries(character?.npcRegistry || {})) {
+    if (!n || typeof n !== "object" || String(id).startsWith("companion-")) continue;
+    for (const c of commitGrowth(n, content?.abilities || {}, { day: currentDay, cfg: content?.rules?.npcStanding || {} })) grown.push({ text: `${n.name || id} has taken up ${c.name || c.id} — the story showed it, and now it is theirs.` });
+  }
+  const extraNews = [...debtsPass.news.map(t => ({ text: t, section: "yours" })), ...grown.slice(0, 3)];
 
   // ⚠️ SNG-368: the RETURN is stamped too, on BOTH paths. The early return handed back raw entries
   // while the normal path handed back stamped ones, so a caller reading `.news[0].section` got a section on
   // one path and `undefined` on the other — a difference that only shows up for a player whose character
   // clock has not moved, which is precisely the state SNG-366 found every live save parked in.
-  if (elapsed <= 0) return { ticked: delegated.moved + holdings358.moved > 0,
-    news: [...delegated.news, ...holdings358.news].map(n => stampNews(n, { day: currentDay, worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() })) };
-  const news = [...delegated.news, ...holdings358.news];
+  if (elapsed <= 0) return { ticked: delegated.moved + holdings358.moved + debtsPass.moved + grown.length > 0,
+    news: [...delegated.news, ...holdings358.news, ...extraNews].map(n => stampNews(n, { day: currentDay, worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() })) };
+  const news = [...delegated.news, ...holdings358.news, ...extraNews];
   // ⛔ CCODE-222 — AND SOMEBODY COMES LOOKING. The driven-NPC directive has always fired for a person who
   // is already in the scene; this is the half that puts them there. Pressure builds while you are apart and
   // empties when you meet, so an NPC with an authored want walks up on their own schedule rather than

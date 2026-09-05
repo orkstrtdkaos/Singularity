@@ -156,3 +156,34 @@ in two towns produces a bounty in one and a brokered settlement in the other. �
    against the amount. ⬜ `unavenged` clears on *"they recovered on their own"* — **is there an equivalent?**
 6. ⬜ **Does the tick already have a place to escalate from?** `worldtick.js` runs `unavenged` on a schedule
    with `avengeWithin`; ⚠️ **a debt wants the same cadence and probably the same loop.**
+
+---
+
+## ✅ CCODE ROUND 2 — 2026-09-04 · BUILT v1.9.348 · gated `§69`
+
+**Built as specced, §4b's shape:** `worldState.debts[holderId]` held by a NAMED NPC; `releaseHolding` writes it (held by the
+steward who kept the place); the GM records/settles/forgives by `debtOps`; the tick (`advanceDebts`, `economy.debts`)
+escalates only when the holder's `reactsToReputation` carries a debtor-shaped tag — the Kestrel goes cold (1) then refuses
+(2); Greta remembers and does nothing. Cleared three ways: paid (the purse is debited), a deed (forgive), the holder gone.
+Never in coin. `HOW_IT_WORKS.md` §7d carries it.
+
+**§5, answered:**
+1. **`settlementStanding` — is it the real gap?** It is a PROJECTION, not a third axis: a place receives you as its people
+   do (`peopleDisposition`) and as its holders remember you (`debts`, keyed by `communityId`). `debtRefusalAt(character,
+   communityId)` is the first reader of "how does THIS town receive me"; the purse's `canSpendHere` is scrip-shaped
+   (a Reach, not a community), so refusal is narrated (the WHAT YOU OWE block says REFUSED there) rather than enforced at
+   the purse. ⬜ Enforcing it at trade needs the community ↔ region join — yours to rule whether a town's refusal should
+   bite the purse.
+2. **An op?** Yes — `debtOps: record | settle | forgive`, the `standingOps` discipline: the GM names it, the engine adjudicates
+   (a settle the purse cannot cover is refused and said).
+3. **Who holds an abandoned-holding debt?** The STEWARD who kept it (the person who remembers); a hold with no steward is
+   recorded unheld (`unheld:<holdingId>`) and nobody escalates it until the GM names a holder. A reader-before-field
+   `holding.obligationHolder` wins when authored.
+4. **Escalation 4 — a hit squad.** NOT built. `maxEscalation` is 2. A bounty needs an encounter and a hit squad needs
+   `contingentsFromPeople` drawing from the holder's community — both are shapes you and Erik should set; the engine has
+   the hook (`escalation` on the record, the holder's `communityId`).
+5. **What clears it besides paying:** a DEED — `debtOps forgive` with `why`, the GM's call on what outweighed it (Corran
+   brokers, the Kestrel would not); and the holder's own fortunes — dead or departed, *"what you owed them went with them"*.
+   ⬜ A successor inheriting it is not modelled.
+6. **The tick's cadence:** its own pass beside `unavenged`, one step per `escalateAfterDays` (30), read from the holder's
+   record — not the `avengeWithin` loop, which is figure-to-figure.

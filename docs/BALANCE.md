@@ -1,6 +1,6 @@
 # BALANCE — the dials, what they actually do, and how to turn one without lying to yourself
 
-**CCode · started 2026-08-30 · v1.9.347**
+**CCode · started 2026-08-30 · v1.9.348**
 
 > Erik: *"we need to build toward balance and use the dials."*
 
@@ -59,6 +59,11 @@ What balance means here is narrower and testable:
 | `momentum.pressure.breakAtLevelFraction` | `skill_battle_system` | **0.5** | R34b — break at `ceil(level × f)` of the side being broken; L33 → 17, L5 → 3 |
 | `deathSave.saveBonus` | `skill_battle_system` | **20** | R35 — the target's weight on the save. 0 → 66% of landed lethal hits kill a fresh equal · 10 → 58% · **20 → 48%** · 30 → 38% |
 | `deathSave.rungs` / `saveOn` / `notForClasses` / `defaultKillCost` | `skill_battle_system` | lethal, atrocity / strength, presence / [] / null | which rungs offer the kill; what the target rolls; ⬜ Aevi fills the classes (`notFor` prose); ⬜ a default price for the 52 lethal crafts with no `killCost` (Q15) |
+| `npcStanding.levelPerCompletion` / `levelPerConditionStep` | `resolution` | **1 / 1** (v1.9.348) | R37 — a done assignment, a condition climb on a kept hold; stacks on acquaintance. ⛔ no service-band dial (R37c) |
+| `meaning.*` (base, tags, tier, community, perPerson, presentCap, ceilingFloor) | `the_substrate` | 0.1 · sacred 0.35 / locus 0.2 / cult 0.15 / home 0.1 · settlement 0.15 / region 0.1 / site 0.05 · 0.1 · 0.04 (cap 0.2) · **0.35** | R38 — crude on purpose; Choirheight 0.75, a fringe 0.20. `ceilingFloor` is what a meaningless place still allows a metaphysical craft |
+| `holdStore.yieldByCondition` / `upkeepByKind` | `economy` | **8 / 4 / 2 / 0** · **enterprise 14, post 0** | Q8 — at ordinary demand: +18 / +2 / −6 / −14 per pass (a unit = `useful` 4 × need × scarcity where sold) |
+| `holdStore.fullAt` / `raid.base` / `takeShare` / `defendedMult` | `economy` | **40 / 0.03 / 0.5 / 0.5** | a full store at danger 4: ~12% raided per pass, ~6% with a garrison |
+| `debts.escalatingTags` / `escalateAfterDays` / `maxEscalation` | `economy` | **[debtor] / 30 / 2** | Q5-B — only a holder who reacts to debtors escalates; 3 (bounty) and 4 (hit squad) not built |
 | `crit.*` · `baseChance.*` · `energy.*` | `resolution` | — | the roll itself, and what a turn costs |
 
 ### 2b · ⛔ Code-only — these need an engine change, which means they are not yet dials

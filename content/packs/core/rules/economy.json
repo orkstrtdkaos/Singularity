@@ -175,6 +175,39 @@
    "from": "everywhere; the universal soft good"
   }
  ],
+ "holdStore": {
+  "note": "✅ Q8 (SPEC_hold_store, Erik: 'it should run itself while you're not looking… a thriving mine should make quite a bit of profit'): the store runs on the world tick — yield by condition into holding.store[goods], upkeep from the purse, a full store a target. THE CURVE IS STEEP: thriving is an asset, holding near break-even, strained a subsidy, failing a drain. A unit is worth worthBands[unitWorthBand] × need × scarcity where it is SOLD (regionDemand — the same ore is worth more where it is wanted); you sell where the store stands (holdingOps sell, or the Holdings tab when you are there). Raids: chance = raid.base × dangerLevel × fill, × defendedMult when the hold authors a defence or garrison; a raid takes takeShare and arrives as news. Per tick (72 world hours): thriving 8 × useful 4 = 32 in, 14 out; holding 16 in, 14 out.",
+  "yieldByCondition": {
+   "thriving": 8,
+   "holding": 4,
+   "strained": 2,
+   "failing": 0
+  },
+  "defaultYield": {
+   "enterprise": "raw_material",
+   "post": null
+  },
+  "upkeepByKind": {
+   "enterprise": 14,
+   "post": 0
+  },
+  "upkeepCurrency": "crystal",
+  "unitWorthBand": "useful",
+  "fullAt": 40,
+  "raid": {
+   "base": 0.03,
+   "takeShare": 0.5,
+   "defendedMult": 0.5
+  }
+ },
+ "debts": {
+  "note": "✅ Q5-B (SPEC_debts_and_reception, Erik: option B — a PAYABLE debt, and 'tie in the local authority NPC… THEM that will remember what you did… depending on who they are'). worldState.debts[holderId] is held by a NAMED NPC; escalation is THEIR choice: only a holder whose reactsToReputation carries one of escalatingTags acts, one step per escalateAfterDays, up to maxEscalation (1: received colder · 2: refused — no trade, hire or shelter). 3 (a bounty) and 4 (a hit squad) are NOT built — they need an encounter and contingentsFromPeople, and are Aevi's and Erik's to shape. A debt clears three ways: paid (debtOps settle — the purse is debited), a deed (debtOps forgive — the GM says what outweighed it), or the holder dies or departs. Never in coin.",
+  "escalatingTags": [
+   "debtor"
+  ],
+  "escalateAfterDays": 30,
+  "maxEscalation": 2
+ },
  "regions": [
   {
    "regionId": "the_crossing",

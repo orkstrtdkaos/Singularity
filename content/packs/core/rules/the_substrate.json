@@ -243,6 +243,28 @@
   "theBet": "Stay in your country and you are meaningfully stronger than a pure practitioner. Travel widely and you would have been better off plain. Both answers are real, which is what makes it a choice.",
   "constraint": "⛔ The ceiling applies to the EXTENSION's contribution, not the whole craft. The root supplies 1.0; the extension adds up to 0.25 on top when the ground agrees. Applied to the whole factor, a LATTICE-rooted augmented school would reach 1.25 while carrying no material floor to pay for it — strictly better than everything."
  },
+ "meaning": {
+  "note": "✅ R38a/b (Erik 2026-09-04, RULING_meaning_density): meaningDensity is DERIVED, never stored — substrate.meaningDensity() sums these weights from a place's tags, tier, community and who is present (people living somewhere carries meaning; it leaves when they do), clamped 0..1. For the sources in appliesTo the card reads TWO grounds: MEANING SETS THE CEILING (ceilingFloor + (1−ceilingFloor)×meaning), SUBSTRATE SETS THE PENALTY (the band, as before); the craft gets min(ceiling, band factor) — shape 1 of three, never a product. A craft opts out with mechanic.meaning: \"none\" (a body craft under a metaphysical source — ki_wield, Aevi's case). The weights are a first pass and deliberately crude — the SHAPE is what was ruled; Erik turns them.",
+  "appliesTo": [
+   "metaphysical"
+  ],
+  "base": 0.1,
+  "tags": {
+   "sacred": 0.35,
+   "locus": 0.2,
+   "cult": 0.15,
+   "home": 0.1
+  },
+  "tier": {
+   "settlement": 0.15,
+   "region": 0.1,
+   "site": 0.05
+  },
+  "community": 0.1,
+  "perPerson": 0.04,
+  "presentCap": 0.2,
+  "ceilingFloor": 0.35
+ },
  "sourceBands": {
   "note": "SNG-380 — THE BAND A SOURCE FAVOURS, AUTHORED HERE RATHER THAN HARD-CODED IN substrate.js. It lived in code as SOURCE_BAND, keyed on the pre-SNG-378 vocabulary, and when the schools were rebased onto the ratified source list the table silently stopped matching: 44 of 48 augmented schools fell back to their tradition's band, the §4 floor matched 0 of 74, and nothing errored. ⛔ THE VOCABULARY LIVES IN CONTENT, SO ITS TABLE MUST TOO — a future rebase now breaks a join gate, loudly, instead of routing through a fallback.",
   "shapeNote": "⚠️ `band: null` AND `floor: true` ARE SEPARATE FACTS, and conflating them is what hid the regression. The old table wrote `material: null` to mean BOTH 'no best-ground' and 'never starved' — so the §4 protection was a side effect of an absent value rather than a stated one. `body` has no band AND keeps the floor; `nanite` has no band and does NOT. That distinction is Aevi's, stated explicitly on request, and it is now impossible to lose by renaming.",

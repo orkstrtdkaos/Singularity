@@ -250,32 +250,6 @@
    "goods": "worked_light"
   },
   {
-   "id": "smiths_brigandine",
-   "kind": "armor",
-   "worth": "valuable",
-   "goods": "arms",
-   "name": "Smith's Brigandine",
-   "description": "Plates riveted between layers of canvas, made by the wearer and refitted twice since. Heavy across the shoulders, easy at the hip, and worn often enough that it has taken her shape rather than the other way round.",
-   "soakLayers": [
-    {
-     "type": "physical",
-     "value": 3
-    },
-    {
-     "type": "force",
-     "value": 2
-    }
-   ],
-   "bonusTags": [
-    "melee",
-    "worn-in",
-    "maker-made"
-   ],
-   "consumable": false,
-   "_soakWhy": "⛔ REAL ARMOUR, AND THE ONLY ITEM AUTHORED TO STOP A WEAPON. 3 physical against a median craft of 7 is a real fraction of an ordinary blow without making her untouchable; 2 force because riveted plate spreads an impact. ⚠️ NO decay, cold or feeling layer — it is metal and canvas and answers only what is swung at it.",
-   "_authored_20260904": "⛔ ERIK, 2026-08-26: 'Pell fights too… she uses a spear, hammer, shortsword, BRIGANDINE, etc.' ⚠️ THAT LINE LIVED ONLY IN HER REGISTRY NOTE — the brigandine was never an item, so CCode's finding is exact: 'Pell's brigandine does nothing anywhere.' ✅ Now it exists and carries soak."
-  },
-  {
    "id": "smiths_hammer",
    "kind": "weapon",
    "worth": "valuable",
@@ -289,7 +263,71 @@
     "maker-made"
    ],
    "consumable": false,
-   "_authored_20260904": "⚑ The working tool as the weapon — `plain_weight` in her hand. ⬜ NO damage value: weapons carry `bonusTags` and the CRAFT carries the dice. ⚠️ Aevi nearly authored damage here and it would have been a second, competing source of numbers."
+   "_authored_20260904": "⚑ The working tool as the weapon — `plain_weight` in her hand. ⬜ NO damage value: weapons carry `bonusTags` and the CRAFT carries the dice. ⚠️ Aevi nearly authored damage here and it would have been a second, competing source of numbers.",
+   "_supersededNote": "⚠️ KEPT — the hammer is not in the staged record and is her working tool. ⛔ BUT `smiths_brigandine` WAS REMOVED: Aevi authored it 2026-09-04 while `po/staged_content/pell_fell_pell_gear.json` already held a canon-sourced, bestiary-MEASURED brigandine record. She did not look. ✅ `pells_brigandine` is the real one."
+  },
+  {
+   "id": "pells_short_sword",
+   "name": "Pell's Short Sword",
+   "kind": "weapon",
+   "owner": "pell_ran_marsh",
+   "description": "A short, plain-hilted blade of Pell's own making, rune-bound at the Fell Pell with four threads — Huginn's Ashwarden ending-sense laid along the edge, Pell's own ironsense seated through the tang, and two more closed into the ricasso. It is not a showpiece. It is a smith's sword, bound by the smith who made it.",
+   "provenance": "Forged and rune-bound by Pell Ran Marsh at the Fell Pell gathering, the night the fellowship formally opened.",
+   "canonQuote": "Pell's short sword rune-bound with four threads including Huginn's ending-sense and her own ironsense.",
+   "damageType": "decay",
+   "damageTypeWhy": "The first bound thread that carries a kind is Huginn's Ashwarden ending-sense → decay. Same resolution, same reason, as Silas's Memory spear from the same working. If the intended lead thread is the ironsense instead, this becomes untyped-by-tradition and the sword strikes as plain steel — which is a real difference against anything immune to physical, so it is worth deciding rather than defaulting.",
+   "threads": [
+    {
+     "tradition": "wright",
+     "what": "Pell's own ironsense, seated through the tang — the anchor"
+    },
+    {
+     "tradition": "ashwarden",
+     "what": "Huginn's ending-sense, laid along the edge"
+    }
+   ],
+   "threadsNote": "Canon says FOUR threads and names TWO. The other two are deliberately left unauthored rather than invented — Aevi or Erik should name them, and until they do the sword resolves off the two that are canon.",
+   "bonusTags": [
+    "strike"
+   ],
+   "consumable": false,
+   "_promoted_20260904": "✅ PROMOTED FROM `po/staged_content/pell_fell_pell_gear.json` 2026-09-04 (staged CCODE-86/87, never landed). ⛔ THE CANON IS SILAS'S OWN CHRONICLE, entry 1, the Fell Pell gathering — quoted on the record. ⚠️ AND IT WAS ALREADY MEASURED AGAINST THE REAL BESTIARY: the sword does 14.34 mean vs `the_unmoored_choir` where a BARE blade does 0.00, because the choir is immune to physical and she BOUND it. ⚑ SISTER WEAPON TO SILAS'S MEMORY — same working, same four-thread construction, Huginn's ending-sense in both, so it resolves `decay` for the same reason. A fact about the fiction, not a coincidence of the tables."
+  },
+  {
+   "id": "pells_brigandine",
+   "name": "Pell's Warded Brigandine",
+   "kind": "armor",
+   "owner": "pell_ran_marsh",
+   "description": "A working brigandine, its plates set close and its rune-work run unbroken from collar to hem. One radiant mark sits at the chest, scraped from the last of the vial. In the outer ring a Shielding Word is seated — begun, not finished, and the gap in it is visible to anyone who can read the work.",
+   "provenance": "Finished by Pell Ran Marsh at the Fell Pell gathering, the radiant mark taken from the vial's last scraping.",
+   "canonQuote": "Pell's brigandine finished with full protective rune-work collar to hem, one radiant mark at the chest from the vial's last scraping, and a partial Shielding Word seated in its outer ring with the promise of completion.",
+   "wardLayers": [
+    {
+     "rank": 2,
+     "value": 5,
+     "what": "the full protective rune-work, collar to hem — it answers everything"
+    },
+    {
+     "rank": 1,
+     "value": 3,
+     "type": "light",
+     "what": "the single radiant mark at the chest"
+    }
+   ],
+   "wardTypes": [
+    "light"
+   ],
+   "incomplete": {
+    "what": "the Shielding Word seated in the outer ring, partial",
+    "canonQuote": "with the promise of completion",
+    "mechanicalProposal": "It is NOT a layer yet. A partial working that already soaked would make finishing it a formality, and the chronicle plainly frames completion as a thing still owed. Proposed: finishing it adds a rank-3 layer — the first rank-3 ward in the world — which is why it is worth a scene rather than a line.",
+    "whoDecides": "Erik — whether the finished Word is a third layer, a rank promotion of the existing rune-work, or something that is not soak at all."
+   },
+   "bonusTags": [
+    "ward"
+   ],
+   "consumable": false,
+   "_promoted_20260904": "✅ PROMOTED FROM `po/staged_content/pell_fell_pell_gear.json` 2026-09-04 (staged CCODE-86/87, never landed). ⛔ THE CANON IS SILAS'S OWN CHRONICLE, entry 1, the Fell Pell gathering — quoted on the record. ⚠️ AND IT WAS ALREADY MEASURED AGAINST THE REAL BESTIARY: the sword does 14.34 mean vs `the_unmoored_choir` where a BARE blade does 0.00, because the choir is immune to physical and she BOUND it. ⚑ SISTER WEAPON TO SILAS'S MEMORY — same working, same four-thread construction, Huginn's ending-sense in both, so it resolves `decay` for the same reason. A fact about the fiction, not a coincidence of the tables."
   }
  ]
 }

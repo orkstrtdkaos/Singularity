@@ -202,7 +202,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.015009919424512191,
+    "spectrumId": -0.01425942345328658,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
@@ -2148,7 +2148,179 @@
     "Deep night at the Whistling Woman post: Silas and Pell share an intimate night—fed, present, and at rest together in the warded waystation."
   ],
   "currentLocationId": "gen-whistling-woman-post",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-whistling-woman-post",
+    "turns": [
+      {
+        "player": "Silas takes a few moments to trace the curves of his wife's body - appreciating her in full nude glory and telling her what he loves about her.",
+        "summary": "Deep night at the Whistling Woman post: Silas lies with Pell in the warded waystation and speaks his love plainly, naming what he sees in her body and her will. She receives it as she receives all true things—directly, without ornament, and asks for more tomorrows.",
+        "narration": "The oil lamp burns low, casting Pell in warm copper and shadow. You take your time—there is no hurry in this, and she has made clear she does not want hurry. Your hand follows the line of her shoulder, the ridge of collarbone, the plain strong shape of her. You speak as you move: the strength in her arms, the iron in her grip, the way her body knows exactly what it wants and takes it without apology. Her breasts, full with the child she carries, the belly beneath them—all of it you name plainly because she has earned plainness from you. \"I love what you are,\" you say, and mean it exactly as you say it. No softening, no poetry to distance it. The thing itself. She lies still under your hand, watching your face more than feeling the touch—reading whether you mean it, and finding that you do. Her mouth is not smiling; it is something closer to satisfaction. She reaches up and pulls your face down to hers without ceremony, a kiss that tastes of salt and smoke and the day's work. When she lets you go, she says only: \"Again,\" and you understand she means tomorrow and every day after, not just tonight. This is what she wanted—to be met with the same plainness she gives, to be kept by someone who does not look away."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The oil lamp burns low, casting Pell in warm copper and shadow. You take your time—there is no hurry in this, and she has made clear she does not want hurry. Your hand follows the line of her shoulder, the ridge of collarbone, the plain strong shape of her. You speak as you move: the strength in her arms, the iron in her grip, the way her body knows exactly what it wants and takes it without apology. Her breasts, full with the child she carries, the belly beneath them—all of it you name plainly because she has earned plainness from you. \"I love what you are,\" you say, and mean it exactly as you say it. No softening, no poetry to distance it. The thing itself. She lies still under your hand, watching your face more than feeling the touch—reading whether you mean it, and finding that you do. Her mouth is not smiling; it is something closer to satisfaction. She reaches up and pulls your face down to hers without ceremony, a kiss that tastes of salt and smoke and the day's work. When she lets you go, she says only: \"Again,\" and you understand she means tomorrow and every day after, not just tonight. This is what she wanted—to be met with the same plainness she gives, to be kept by someone who does not look away.",
+      "sceneSummary": "Deep night at the Whistling Woman post: Silas lies with Pell in the warded waystation and speaks his love plainly, naming what he sees in her body and her will. She receives it as she receives all true things—directly, without ornament, and asks for more tomorrows.",
+      "choices": [
+        {
+          "label": "Sleep, holding her the way she settles best.",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {},
+          "difficulty": "trivial",
+          "opposedDifficulty": null,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Rise quietly and step outside to check the ward's hold against the night.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "craft"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Speak to her about the child—what she reads in the little one's settling, what she needs from you in the months ahead.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
+      "scene": {
+        "setting": "The Whistling Woman post's single warm room at deep night—stone walls, roof joists bare but sound, a stove cooling slowly in the corner. Deni Cors's relay mechanism sits silent on the shelf. Oil lamp burning low on the table beside the bed.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Nude, satisfied, watching Silas's face with the attention of someone reading something true. Her hand rests on her belly where the child settles."
+          },
+          {
+            "name": "Huginn",
+            "state": "Roosted on the shelf above the relay mechanism, head tucked, present but sleeping."
+          }
+        ],
+        "objects": [
+          "The bed, made and warm",
+          "The oil lamp",
+          "Memory—the spear—propped against the wall within reach",
+          "Deni Cors's relay mechanism on the shelf",
+          "Both sets of clothes folded neat on the chair"
+        ],
+        "threads": []
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "role": "traveling companion, partner",
+          "sex": "female",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Deep night at the Whistling Woman post—Silas traced the shape of her with plain words and plain touch. She received it the way she receives true things: without ornament, and asking for more tomorrows. The child she carries is steady; she is at rest.",
+          "learned": [
+            "She reads Silas's plainness as the truest form of love—meeting her the way she meets the world, without performance or distance",
+            "She will ask him for this again and again; it settles something in her that nothing else does"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the Whistling Woman post, pregnant and strong, present without reserve—asleep now, one hand on her belly, the other on Silas's chest."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "night continues; sleep will come"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "A woman's body in lamplight—strong shoulders, full breasts heavy with pregnancy, belly marked with the child she carries—and a man's hands tracing the shape of her with the attention usually given only to finished craft. His face is intent, reading her the way she reads iron. Behind them, a grey-black bird sleeps on a shelf. Outside: moorland dark, the ward holding soft against the night.",
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The Whistling Woman post's single warm room at deep night—stone walls, roof joists bare but sound, a stove cooling slowly in the corner. Deni Cors's relay mechanism sits silent on the shelf. Oil lamp burning low on the table beside the bed.",
+      "npcsPresent": [
+        {
+          "name": "Pell Ran Marsh",
+          "state": "Nude, satisfied, watching Silas's face with the attention of someone reading something true. Her hand rests on her belly"
+        },
+        {
+          "name": "Huginn",
+          "state": "Roosted on the shelf above the relay mechanism, head tucked, present but sleeping."
+        }
+      ],
+      "objects": [
+        "The bed, made and warm",
+        "The oil lamp",
+        "Memory—the spear—propped against the wall within reach",
+        "Deni Cors's relay mechanism on the shelf",
+        "Both sets of clothes folded neat on the chair"
+      ],
+      "threads": []
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 16,
@@ -3589,7 +3761,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d15] At dawn on the ridge, caught Silas mid-run and held him with the grip of someone who reads his back the way she reads iron. Named plainly that they face what comes next together, not apart. Her hand is warm. She is asking, not telling.",
         "[d15] At the ridge temple, held Silas through the novel raising—her ironsense steadying the structure's load, her grip keeping him grounded when the surge began to pull. She felt the Raised Thing push past its known limits and understood what it meant. She is still holding him, not moving, reading him…",
         "[d15] Held the raising of the death-warden temple with Silas through partnership and strain—her ironsense steadying the structure's load, her grip keeping him grounded when the surge began to pull. Now stands inside the completed space, reading it with the attention of someone who understands what was…",
         "[d15] At the ridge temple, shared breakfast after the meditation—reports the child is strong and settled, responding to the novel-depth work with steadiness, not fear. Her own reserves are holding.",
@@ -3598,17 +3769,18 @@
         "[d15] At the Whistling Woman post, evening settling to night—Pell has named what the child needs and what she needs from Silas. Present, steady, reaching for more.",
         "[d16] At the Whistling Woman post in deep night—Silas named what the child feels like, and Pell answered plainly. Present, reaching, her grip on his hand steady and complete.",
         "[d16] At the Whistling Woman post in deep night—Pell has eaten well and is moving toward rest, present and unhurried. The child she carries is steady beneath the novel-depth work.",
-        "[d16] Deep night at the Whistling Woman post—Pell took what she wanted from Silas without hesitation or performance. Steady, certain, unashamed. Appetite satisfied and present together."
+        "[d16] Deep night at the Whistling Woman post—Pell took what she wanted from Silas without hesitation or performance. Steady, certain, unashamed. Appetite satisfied and present together.",
+        "[d16] Deep night at the Whistling Woman post—Silas traced the shape of her with plain words and plain touch. She received it the way she receives true things: without ornament, and asking for more tomorrows. The child she carries is steady; she is at rest."
       ],
       "knownFacts": [
-        "The temple stands sound and ready",
-        "The deep seam carries weight she read through ironsense—deliberately engineered, now sealed and honest",
         "The child she carries is strong and steady—felt the weight of the novel-depth raising and settled deeper in response",
         "Pell reads the child's movement through her own body the way she reads iron—as a craft-sense, a weight distributing rightly",
         "She reads the child's state through her own body the way she reads iron—as a craft-sense, a weight distributing rightly or wrongly",
         "The child settles better when Silas is present without the network-weight in his mind",
         "She wants him physically, plainly, without apology—and she takes that want as seriously as any craft-work she does",
-        "Her grip and her certainty both leave marks; she is not gentle, but she is complete"
+        "Her grip and her certainty both leave marks; she is not gentle, but she is complete",
+        "She reads Silas's plainness as the truest form of love—meeting her the way she meets the world, without performance or distance",
+        "She will ask him for this again and again; it settles something in her that nothing else does"
       ],
       "skillsObserved": [
         "reading a person's craft-sense and understanding what it mea",
@@ -3619,7 +3791,7 @@
         "Partnership-binding through physical presence and craft-sens"
       ],
       "status": "active",
-      "statusNote": "At the Whistling Woman post, pregnant and strong, present without reserve—now settling toward sleep.",
+      "statusNote": "At the Whistling Woman post, pregnant and strong, present without reserve—asleep now, one hand on her belly, the other on Silas's chest.",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
         "day": 16
@@ -3638,7 +3810,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 27
+      "met": 28
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -6064,7 +6236,7 @@
     "lastTickWorldDay": 67,
     "lastCanonWorldDay": 67,
     "lastGenCount": 1615,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "The ordinary work of feeding—Aldric's fish, hard bread, cheese from Pell's pack—grounding after the novel-depth work",
@@ -14041,30 +14213,31 @@
     ]
   },
   "tendencies": {
-    "strategic": 16.080375524191528,
-    "cerebral": 17.497817376086907,
-    "social": 10.275520571788098,
-    "generous": 4.81866131620178,
-    "cautious": 6.525239484624362,
-    "physical": 0.4479224957858298,
-    "risky": 0.1074356327125647,
-    "ruthless": 0.23384241780851664,
-    "carousing": 0.03801985077224556,
-    "amorous": 3.090385771366641,
-    "patient": 0.7862504928986168,
-    "stealth": 0.000008172582406818614,
-    "devotion": 0.3339587000675839,
-    "craft": 3.691398697618184,
-    "leadership": 1.0871069896926986,
-    "deception": 0.03913729532473672
+    "strategic": 15.678366136086739,
+    "cerebral": 17.060371941684735,
+    "social": 11.018632557493396,
+    "generous": 4.698194783296735,
+    "cautious": 6.3621084975087525,
+    "physical": 0.43672443339118405,
+    "risky": 0.10474974189475059,
+    "ruthless": 0.22799635736330373,
+    "carousing": 0.03706935450293942,
+    "amorous": 4.013126127082475,
+    "patient": 0.7665942305761514,
+    "stealth": 0.00000796826784664815,
+    "devotion": 0.32560973256589426,
+    "craft": 3.5991137301777294,
+    "leadership": 1.059929314950381,
+    "deception": 0.0381588629416183
   },
   "aptitudes": [
     "strategist",
+    "silver_tongue",
     "scholar",
     "tactician",
     "sage"
   ],
-  "actionCount": 950,
+  "actionCount": 951,
   "grantsVersion": 1,
   "reconcileVersion": 32,
   "gallery": [
@@ -14684,8 +14857,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1788592903936,
-  "rev": 1762,
+  "updatedAt": 1788593444822,
+  "rev": 1763,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18792,7 +18965,7 @@
     "valley": 646,
     "the_palelands": 6,
     "the_center": 151,
-    "the_echo_vale": 11
+    "the_echo_vale": 12
   },
   "foreclosed": [
     "rootkin",
@@ -19069,10 +19242,10 @@
     {
       "id": "sess-29",
       "startedAt": "2026-09-05T04:40:35.570Z",
-      "lastAt": "2026-09-05T07:21:43.914Z",
+      "lastAt": "2026-09-05T07:30:44.801Z",
       "startDay": 67,
       "endDay": 67,
-      "beats": 10
+      "beats": 11
     }
   ],
   "company": [
@@ -19560,17 +19733,17 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 325,
-    "choices": 324,
-    "characterDeltas": 158,
-    "scene": 325,
-    "npcUpdates": 291,
+    "sceneSummary": 326,
+    "choices": 325,
+    "characterDeltas": 159,
+    "scene": 326,
+    "npcUpdates": 292,
     "factUpdates": 27,
     "placeUpdates": 73,
     "codexUpdates": 195,
-    "timeOps": 301,
-    "imagePrompt": 24,
-    "sceneEnded": 105,
+    "timeOps": 302,
+    "imagePrompt": 25,
+    "sceneEnded": 106,
     "itemUpdates": 7,
     "questUpdates": 42,
     "offer": 40,
@@ -19587,11 +19760,11 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 35,
+    "gambitApt": 36,
     "markDefiningMoment": 1,
     "_engineClosedScene": 3
   },
-  "_opTurns": 325,
+  "_opTurns": 326,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -19976,12 +20149,14 @@
     "meditate": 1,
     "sustain": 1,
     "discuss": 1,
-    "comfort": 2,
-    "romantic": 2,
+    "comfort": 3,
+    "romantic": 3,
     "presence": 1,
     "flirt": 1
   },
-  "aptitudeEarnCount": {},
+  "aptitudeEarnCount": {
+    "silver_tongue": 1
+  },
   "bondLog": [
     {
       "companionId": "marrow",

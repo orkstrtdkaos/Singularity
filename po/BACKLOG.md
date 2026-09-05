@@ -1507,3 +1507,49 @@ and probably better than authoring Spirit up to parity.**
 cited it as *"a contest mechanism to build on rather than invent"* — **it is not one.**
 ✅ **The death save was built correctly as two rolled margins compared, the way every contest here is
 built.** ⚑ **Her strength-or-presence instinct was right; her reading of the existing machinery was not.**
+
+---
+
+## ⛔ NEWS PANEL — two defects, from Erik's play 2026-09-05
+
+> Erik: *"My news is still popping up old stuff… and it **cuts off instead of becoming a scrollable**."*
+
+**Screenshot: Whistling Woman Post, Day 16, world count 1624.** ⚠️ **ONE genuinely new line** (*"Calvar has
+been asking after you"*) **and SEVEN "Word has spread beyond its own valley"** — the kiss at the forge bench,
+naming Memory, the badger's ending, Edvar Crane's commission. ⛔ **All old deeds.**
+
+### ⛔ DEFECT 1 — `rate: 1` MAKES EVERY DEED HOP EVERY PASS
+
+⚑ **`spreadDeeds` IS CORRECT.** It tracks `d.spread`, caps reach by weight (`{1:2, 2:5, 3:12}` communities),
+and skips a deed at its cap. ✅ **The bookkeeping exists and works.**
+
+⛔ **THE CALLER IS WRONG.** `worldtick.js:562`:
+```js
+const hops = spreadDeeds({ deeds: ready }, { …, rng, rate: 1 });
+```
+⚠️ **Every other caller uses the default `0.35`.** This one passes **1**, so `if (rng() >= rate) continue`
+**NEVER FIRES** — ➡️ ⛔ **EVERY ELIGIBLE DEED TAKES A GUARANTEED HOP ON EVERY TICK, and each hop prints a
+news line.**
+
+⚠️ **A weight-3 deed keeps going until it has reached TWELVE communities — twelve news lines, one per pass.**
+
+⛔ **AND THE COMMENT TWO LINES ABOVE STATES THE INTENT IT BREAKS:** *"`spreadDeeds` now owns it for the
+player exactly as it does for figures: **ONE HOP PER PASS**."* ➡️ ⚠️ **`rate: 1` turns that into ONE HOP PER
+DEED PER PASS.**
+
+⬜ **Fix: drop `rate: 1`** (take the 0.35 default), **or cap total hops per pass at one.** ⚠️ **The comment
+says the latter was the intent.**
+
+### ⛔ DEFECT 2 — THE PANEL CUTS OFF INSTEAD OF SCROLLING
+
+**The "while you were away" block is a fixed height and the content is clipped mid-list.** ⚠️ With seven
+spread lines it overflows on the first screen.
+
+⬜ **Fix: scrollable region with a max height.** ⛔ **Both halves matter — fixing defect 1 alone still
+overflows on a busy return, and fixing 2 alone hides a real bug behind a scrollbar.**
+
+### ⚠️ AND A THIRD, SMALLER
+**Every spread line opens with the same 11 words** — *"Word has spread beyond its own valley, as far as X:"*
+⛔ **Seven identical openings is why it reads as repetition even where the deeds differ.** ⬜ The section is
+already headed **WORD FROM ELSEWHERE**, so the prefix is redundant — *"As far as kestrel's roost: …"* would
+do.

@@ -884,3 +884,56 @@ export function personArtSeed(character, handles = {}) {
   const id = canonicalPersonId(character, handles);
   return `whois-${id || handles.entityId || handles.npcId || handles.topicId || normName(handles.label) || "someone"}`;
 }
+
+/* ═══ R45c — A PERSON CAN HOLD A THING (2026-09-05) ═══
+ * ⛔ MEASURED on Silas's save: 0 of 35 registry entries carried an inventory, nothing in the engine ever wrote one, and
+ * `npcUpdates` had no items channel — so "Silas lends Memory to Pell" was fiction with no record. ⚑ A registry entry is the
+ * character-analogue and now carries the same two fields an evolving item needs: `inventory` and `practice`. The BOND stays
+ * the player's (Memory answers to Huginn, and Huginn is Silas's companion), which is why `evolution.js` reads bonds
+ * separately from the bearer. */
+export function ensureBearer(entry) {
+  if (!entry || typeof entry !== "object") return entry;
+  if (!Array.isArray(entry.inventory)) entry.inventory = [];
+  if (!entry.practice || typeof entry.practice !== "object") entry.practice = { schemaVersion: 1, uses: {}, coActivations: {}, coUse: {} };
+  return entry;
+}
+
+/** Every person in the registry who is holding something — the bearers a scene's co-use and the tick's refresh walk. */
+export function bearersOf(character) {
+  return Object.values(character?.npcRegistry || {}).filter(n => n && Array.isArray(n.inventory) && n.inventory.length);
+}
+
+const sameItem = (it, name) => {
+  const want = String(name || "").toLowerCase().trim();
+  return String(it?.customName || it?.name || "").toLowerCase().trim() === want || String(it?.id || "").toLowerCase() === want;
+};
+
+/** Hand an item the character holds to a person. The OBJECT moves — there is one of it, and it is now hers. */
+export function giveItemTo(character, npcId, itemName, { day = null } = {}) {
+  const n = character?.npcRegistry?.[npcId];
+  if (!n) return { ok: false, why: "you know nobody by that id" };
+  const at = (character.inventory || []).findIndex(it => sameItem(it, itemName));
+  if (at < 0) return { ok: false, why: `you are not carrying ${itemName}` };
+  const [item] = character.inventory.splice(at, 1);
+  ensureBearer(n);
+  n.inventory.push({ ...item, lentBy: character.id || "you", lentDay: day });
+  return { ok: true, item, to: npcId, name: n.name || npcId };
+}
+
+/** Take it back. `lentBy`/`lentDay` come off — it is yours again. */
+export function takeItemFrom(character, npcId, itemName) {
+  const n = character?.npcRegistry?.[npcId];
+  if (!n || !Array.isArray(n.inventory)) return { ok: false, why: "they are carrying nothing of yours" };
+  const at = n.inventory.findIndex(it => sameItem(it, itemName));
+  if (at < 0) return { ok: false, why: `${n.name || npcId} is not carrying ${itemName}` };
+  const [item] = n.inventory.splice(at, 1);
+  const { lentBy, lentDay, ...clean } = item;
+  character.inventory = [...(character.inventory || []), clean];
+  return { ok: true, item: clean, from: npcId, name: n.name || npcId };
+}
+
+/** What each person is carrying, for the narrator — absent when nobody carries anything. */
+export function carriedForGM(character) {
+  const rows = bearersOf(character).map(n => `${n.name || n.id} carries ${n.inventory.map(i => i.customName || i.name).join(", ")}`);
+  return rows.length ? rows.join("\n") : null;
+}

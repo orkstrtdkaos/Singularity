@@ -464,8 +464,9 @@ working papers; **this is the answer.**
 | 09-05 | ✅ **A HOLD GROWS (Q18 — Erik: "please build it")** | one-time acts with lasting effects, never a chore (SPEC_hold_store §5): a kept hold climbs a rung every 4 passes to the ceiling its keeper's tier allows (`growHolding`, `ceilingByKeeperTier`); a carried craft applied to the place lifts it a rung once (`improveHolding`, `improveFunctions`); hands raise the yield (`setCrew`, +25% each to 3); a garrison halves raids and costs 3 a pass (`setGarrison`); the ground scales an enterprise's yield (`holdingGround`, ±); the GM's `holdingOps improve/crew/garrison`; the tab's *Apply a craft* / *Add hands* / *Post a guard* | `§74` (a notable keeper stops at holding and a regional reaches thriving on the schedule; unkept never climbs; a non-shaping craft refused, a craft once; hands and ground in the yield; the garrison in the keep and the raid; the ops and the tab by source) | body §7d. Priced by CCode — Erik turns `economy.holdStore.growth`. ⬜ what a post can become |
 | 09-05 | ✅ **A HOLD CARRIES FEATURES — what a post becomes; and a re-claim no longer renames it** | Erik by example: a mine and a Temple to Attending at the Threshold Post; barriers, a wall and skeletal sentries at Stillwater's Trouble; "it reverted back to Raven's Home almost immediately". `economy.holdFeatures.kinds` in Aevi's families (material yields into the store — a post with a mine produces; martial guards and cuts a raid's take; meaning is an aura on the ground; people raise hands and count as homes; craft is a facility on the record); `addFeature`/`removeFeature`/`renameHolding`; `holdingOps feature/rename` and `claim` keeps a known hold's name unless `rename: true`; the tab's *Add what was built* / *Rename*; `who lives here` answered | `§75` (a post with a mine yields on the tick; a temple's aura reaches the card; a wall cuts the take and sentries guard without keep; quarters raise the hands cap and count homes; a re-claim keeps the name; the ops and the tab by source) | body §7d. Aevi extends the catalogue; Erik turns the numbers. ⬜ what a facility gates (pass three) |
 | 09-05 | ✅ **R47 the universal fallbacks retire behind the free touch · R46c no cap on the menu, a row is a CRAFT** | Erik: *"eliminating the universal fallbacks… he should just rely on the zero-cost fallbacks of his T1 skills"* and *"no cap"* (Q16). `offersFreeTouch` is the one test both menus ask; the panel groups rows by craft with a button per verb. ⛔ **The census corrected the ruling within the hour:** `touchTier` was authored on 0 of 421 crafts, so the floor is now DERIVED (a T1 craft with a contact-plausible verb has one; 120 of 153 T1 crafts qualify), it KEEPS the craft's native reach and form and strips only the force (`contactOnly` was never questioned and would have made Silas walk up and touch someone to use his own tradition), and the field is `freeTier` with `touchTier` a read-only alias | `§76` (the derived floor and the authored override; `false` excludes; a kit with a floor loses the bare moves and a bare kit keeps them; the same rule in both menus; no cap; a multi-verb craft is one row; the census counts what derives AND what is authored) | body §11. Schema declares `freeTier`; `energy.freeFloor` carries the dials |
+| 09-05 | ✅ **R45c — a person can HOLD a thing, and it wakes in their hands** | Erik: *"you'll need to wire that into the engine so it evolves itself when the time comes."* The gap was deeper than evolution being player-seat: **0 of 35 registry entries carried an inventory**, nothing wrote one, and `npcUpdates` had no items channel — Memory in Pell's hands was fiction with no record. `ensureBearer` gives a registry entry `inventory` + `practice`; `giveItemTo`/`takeItemFrom` move the object; `npcUpdates.carries`/`.returns` are the GM's channel; `carriedForGM` tells the narrator what others hold of yours. `evolution.js` now takes a BEARER with `bonds` read separately (Memory answers to Huginn, who is Silas's companion), **co-use is a fact about a SCENE not a seat** (or a spear in Pell's hands could never earn a stage again), and the world tick wakes it unattended | `§77` (a registry entry becomes a bearer; the object moves and only what you hold can be handed over; an NPC's item advances on the player's bond and the scene's co-use; the tick wakes it and says so; every player call byte-identical) | body §7h. ⬜ Aevi: evolution on the sword and the brigandine, or the claim goes |
 
-**Last verified: 2026-09-05 · v1.9.358 · 421 crafts.**
+**Last verified: 2026-09-05 · v1.9.359 · 421 crafts.**
 
 ---
 
@@ -1721,6 +1722,30 @@ The menu was capped at 40 entries with **one entry per craft FUNCTION**, so Sila
 the items and the generic senses fell off the end — a menu silently dropping what the player owns. ✅ **The cap is gone**,
 and the panel now renders **one row per CRAFT** with a button per verb inside it, so the row count falls instead of the
 content. A single-verb craft renders exactly as before. Any bound a caller still wants is its own, and exempts the fallbacks.
+
+### ✅ R45c · A PERSON CAN HOLD A THING, AND IT WAKES IN THEIR HANDS (2026-09-05)
+<!-- subject: npc-sheets · state: inventory, practice, lentBy, lentDay -->
+
+Erik: *"as it's hers I can't use the evolve feature for an item on it… you'll need to wire that into the engine **so it
+evolves itself when the time comes**."* ⛔ **The gap was a layer deeper than `evolution.js` being player-seat: 0 of 35
+registry entries carried an inventory, nothing in the engine ever wrote one, and `npcUpdates` had no items channel — so
+*"Silas lends Memory to Pell"* was fiction with no record.** Evolution was the second problem; the first was that there was
+nothing to evolve.
+
+✅ **A registry entry is the character-analogue and now carries the two fields an evolving item needs** — `inventory` and
+`practice` (`npcs.ensureBearer`). `giveItemTo` / `takeItemFrom` MOVE the object, so there is one of it; the GM hands it over
+with `npcUpdates.carries` and takes it back with `.returns`, and the narrator is told what others carry of yours
+(`carriedForGM`) so the next scene cannot hand a lent blade back to a character who never had it.
+
+✅ **`evolution.js` takes a BEARER, not a character.** It always read exactly three fields, so it was bearer-shaped from the
+day it was written; what it lacked was anyone else who had them. ⚑ **AND THE BOND IS READ WHERE THE BOND LIVES:** Memory
+answers to Huginn, and Huginn is SILAS's companion — `bonds` defaults to the bearer (so every player call is unchanged) and
+an NPC bearer is passed the player. She carries it; it answers to the bond he holds.
+
+⚑ **AND CO-USE IS A FACT ABOUT A SCENE, NOT A SEAT.** The item was USED and the bond source was PRESENT — true of the
+company, not of whose bag the thing is in. ⛔ Under a bearer-only rule a spear in Pell's hands could never earn a stage
+again, because Huginn walks with Silas. **The world tick then advances the stage unattended, the way a hold grows**, and the
+news says so: *"Memory has woken further in Pell's hands."* `§77`.
 
 ## 12 · THE INTERFACE — what the player actually operates
 

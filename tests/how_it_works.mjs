@@ -5161,6 +5161,88 @@ console.log("\n── §76 · the fallbacks defer to the free touch (unauthored 
     && /verbs\.slice\(1\)\.map\(\(\{ s: v, i: vi \}\) =>/.test(app76) && /data-sbskill="\$\{vi\}"/.test(app76));
   check("§76: …the body carries both rulings", /R47 · THE UNIVERSAL FALLBACKS ARE RETIRED/.test(rd("docs/HOW_IT_WORKS.md")) && /NO CAP ON THE BATTLE MENU/.test(rd("docs/HOW_IT_WORKS.md")));
 }
+/* ═════ §77 — A PERSON CAN HOLD A THING, AND IT WAKES IN THEIR HANDS (R45c, 2026-09-05) ═════ */
+// ⛔ Erik: "as it's hers I can't use the evolve feature for an item on it… wire that into the engine so it evolves itself when
+// the time comes." The gap was deeper than evolution.js being player-seat: 0 of 35 registry entries carried an inventory,
+// nothing wrote one, and npcUpdates had no items channel — Memory in Pell's hands was fiction with no record. ⚑ And co-use is
+// a fact about a SCENE, not a seat: Memory answers to Huginn, who walks with Silas, so a bearer-only rule would have meant a
+// spear in Pell's hands could never earn a stage again.
+console.log("\n── §77 · a bearer record · the object moves · co-use is a scene · the tick wakes it unattended ──");
+{
+  const NPC77 = await import("../engine/npcs.js");
+  const EV77 = await import("../engine/evolution.js");
+  const WT77 = await import("../engine/worldtick.js");
+  const cat77 = { memory: { id: "memory", name: "Memory", evolution: { bondSource: "huginn", stages: [
+    { stage: 1, name: "Carried", unlockBond: 0, unlockCoUse: 0, bonusTags: ["carried"] },
+    { stage: 2, name: "Answering", unlockBond: 5, unlockCoUse: 2, bonusTags: ["answering"], narrationHints: "it answers" } ] } },
+    plainthing: { id: "plainthing", name: "A Plain Thing" } };
+  const mk77 = () => ({ id: "pc", name: "Silas", companionBonds: { huginn: 9 }, practice: { coUse: {} },
+    inventory: [{ id: "memory", name: "Memory", qty: 1 }, { id: "plainthing", name: "A Plain Thing", qty: 1 }],
+    npcRegistry: { pell: { id: "pell", name: "Pell" }, huginn: { id: "huginn", name: "Huginn" } }, worldState: {}, holdings: [], company: [] });
+  // ── the bearer record
+  const c1 = mk77();
+  NPC77.ensureBearer(c1.npcRegistry.pell);
+  check("§77: ⛔ `ensureBearer` gives a registry entry the two fields an evolving item needs, and nothing else",
+    Array.isArray(c1.npcRegistry.pell.inventory) && c1.npcRegistry.pell.inventory.length === 0 && !!c1.npcRegistry.pell.practice
+    && NPC77.bearersOf(c1).length === 0, JSON.stringify(Object.keys(c1.npcRegistry.pell)));
+  // ── the object MOVES, and only what you hold can be handed over
+  const gave = NPC77.giveItemTo(c1, "pell", "Memory", { day: 12 });
+  const nope = NPC77.giveItemTo(c1, "pell", "A Sword You Do Not Have");
+  const noOne = NPC77.giveItemTo(c1, "nobody", "Memory");
+  check("§77: ⛔ …the object MOVES — one Memory, now hers, stamped with who lent it and when; what you do not hold cannot be handed over",
+    gave.ok && c1.inventory.length === 1 && !c1.inventory.some(i => i.id === "memory")
+    && c1.npcRegistry.pell.inventory.length === 1 && c1.npcRegistry.pell.inventory[0].id === "memory"
+    && c1.npcRegistry.pell.inventory[0].lentBy === "pc" && c1.npcRegistry.pell.inventory[0].lentDay === 12
+    && nope.ok === false && noOne.ok === false && NPC77.bearersOf(c1).length === 1,
+    JSON.stringify({ mine: c1.inventory.map(i => i.id), hers: c1.npcRegistry.pell.inventory.map(i => i.id) }));
+  check("§77: …and the narrator is told what others carry of yours — a lent blade cannot be handed back to someone who never had it",
+    /Pell carries Memory/.test(NPC77.carriedForGM(c1) || ""), NPC77.carriedForGM(c1));
+  // ── the bond is read WHERE THE BOND LIVES
+  const pell77 = c1.npcRegistry.pell;
+  const st0 = EV77.currentStage("memory", pell77, cat77, { bonds: c1 });
+  const stNoBond = EV77.currentStage("memory", pell77, cat77);   // bonds default to the bearer — she has none
+  EV77.recordCoUse(pell77, "memory", "huginn", 2);
+  const st2 = EV77.currentStage("memory", pell77, cat77, { bonds: c1 });
+  check("§77: ⛔ …the BOND is read where the bond lives — Memory answers to Huginn, and Huginn is SILAS's companion; with her own (absent) bonds it cannot rise",
+    st0.stage === 1 && st2.stage === 2 && stNoBond.stage === 1, JSON.stringify({ withHis: st2.stage, withHers: stNoBond.stage }));
+  // ── co-use is a fact about a SCENE
+  const c2 = mk77();
+  NPC77.giveItemTo(c2, "pell", "Memory", { day: 12 });
+  const adv = EV77.noteCoUseAndRefresh(c2, { usedAbilityIds: ["some_craft"], activeCompanionIds: ["huginn"], catalog: cat77, bearers: NPC77.bearersOf(c2) });
+  const co = EV77.coUseCount(c2.npcRegistry.pell, "memory", "huginn");
+  check("§77: ⛔ …CO-USE IS A FACT ABOUT A SCENE, NOT A SEAT — the item was used and Huginn was present, so it counts on the tally of the person CARRYING it",
+    co === 1 && EV77.coUseCount(c2, "memory", "huginn") === 0, JSON.stringify({ hers: co, his: EV77.coUseCount(c2, "memory", "huginn") }));
+  const c3 = mk77();
+  NPC77.giveItemTo(c3, "pell", "Memory", { day: 12 });
+  EV77.recordCoUse(c3.npcRegistry.pell, "memory", "huginn", 2);
+  const adv3 = EV77.noteCoUseAndRefresh(c3, { usedAbilityIds: ["x"], activeCompanionIds: [], catalog: cat77, bearers: NPC77.bearersOf(c3) });
+  check("§77: …an advance in someone else's hands names the bearer, so the news can say whose", adv3.some(a => a.itemId === "memory" && a.bearerName === "Pell"), JSON.stringify(adv3));
+  // ── every player call is byte-identical
+  const solo = mk77();
+  const soloAdv = EV77.noteCoUseAndRefresh(solo, { usedAbilityIds: ["x"], activeCompanionIds: ["huginn"], catalog: cat77 });
+  check("§77: ⛔ …and a caller that passes no bearers is the player alone, exactly as before",
+    EV77.coUseCount(solo, "memory", "huginn") === 1 && soloAdv.every(a => !a.bearerId) && solo.inventory.find(i => i.id === "memory").evoStage === 1);
+  // ── the tick wakes it unattended
+  const c4 = mk77();
+  NPC77.giveItemTo(c4, "pell", "Memory", { day: 12 });
+  EV77.recordCoUse(c4.npcRegistry.pell, "memory", "huginn", 2);
+  const out = await WT77.runWorldTick({ character: c4, content: { items: cat77, abilities: {}, npcs: {}, rules: {} }, currentDay: 20, advanceAssignments: async () => ({ advancements: [] }), rng: () => 0.99 });
+  check("§77: ⛔ …and the WORLD TICK wakes it UNATTENDED, the way a hold grows — Erik's \"so it evolves itself when the time comes\" — and the news says whose hands",
+    c4.npcRegistry.pell.inventory[0].evoStage === 2 && (out.news || []).some(n => /Memory has woken further in Pell's hands/.test(n.text)),
+    JSON.stringify({ stage: c4.npcRegistry.pell.inventory[0].evoStage, news: (out.news || []).map(n => n.text).filter(t => /Memory/.test(t)) }));
+  // ── it comes back
+  const back = NPC77.takeItemFrom(c4, "pell", "Memory");
+  check("§77: …taking it back returns the object with what it became, and drops the lending marks",
+    back.ok && c4.inventory.some(i => i.id === "memory" && i.evoStage === 2 && !("lentBy" in i)) && c4.npcRegistry.pell.inventory.length === 0
+    && NPC77.takeItemFrom(c4, "pell", "Memory").ok === false);
+  // ── the seams
+  const gm77 = rd("engine/gm.js"), app77 = rd("app.js"), reg77 = rd("engine/gm_registry.js");
+  check("§77: …the GM has the channel, the app moves the object, and the narrator gets the block",
+    /"carries": \["the exact name of an item the CHARACTER holds/.test(gm77) && /"returns"/.test(gm77) && /WHAT OTHERS CARRY OF YOURS/.test(gm77)
+    && /giveItemTo\(character, u\.npcId, nm/.test(app77) && /takeItemFrom\(character, u\.npcId, nm\)/.test(app77)
+    && /carriedDetail/.test(reg77) && /bearers: bearersOf\(character\)/.test(app77));
+  check("§77: …the body says so", /A PERSON CAN HOLD A THING/.test(rd("docs/HOW_IT_WORKS.md")));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

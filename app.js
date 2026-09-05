@@ -53,6 +53,7 @@ import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf,
 // ⛔ 2026-09-05 (Erik: "I want our test harnesses to simulate the real game"): THE ONE PATH a skill battle takes — the menu, the
 // declaration, the rank, the guards, the turn, the apply, the end — lives in the engine now and the harness drives the same functions.
 import { battleSkillsForCharacter, declFromSelection, resolveDeclRank, guardBlockFor, openGuards, applyRoundToCharacter, collapseIfFinished, personOpponentFor, duelFromTarget, freshTurn, playTurn, endBattle } from "./engine/battle_turn.js";
+import { bearersOf, giveItemTo, takeItemFrom } from "./engine/npcs.js";   // R45c: a person can hold a thing
 import { incapacitationOutcome, playerDeathState, deathStopsPlay, deathLine, wireDeathModel } from "./engine/incapacitation.js";
 import * as DeathModel from "./engine/death.js";
 import { enterDeathState } from "./engine/death.js";
@@ -122,7 +123,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.358";
+const APP_VERSION = "1.9.359";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6508,6 +6509,18 @@ function applyTurn(turn, resolution, playerWords = null) {
   ensureBondPortraits(character); // SNG-136: a bond that crossed a high milestone this turn earns a portrait
   // §2 engagement: interacting with a grown NPC or accreting a fact about a grown entity is
   // attention — it keeps them real + surfacing. (Revisiting a grown place is signaled in travelTo.)
+  // ✅ R45c: the fiction hands something over, and the object MOVES — one of it, and it stays with them across scenes.
+  for (const u of turn.npcUpdates || []) {
+    if (!u?.npcId) continue;
+    for (const nm of (Array.isArray(u.carries) ? u.carries : []).slice(0, 4)) {
+      const r = giveItemTo(character, u.npcId, nm, { day: absoluteWorldDay() });
+      if (!r.ok) console.warn("[npcUpdates] carries refused:", r.why);
+    }
+    for (const nm of (Array.isArray(u.returns) ? u.returns : []).slice(0, 4)) {
+      const r = takeItemFrom(character, u.npcId, nm);
+      if (!r.ok) console.warn("[npcUpdates] returns refused:", r.why);
+    }
+  }
   for (const u of turn.npcUpdates || []) noteGeneratedAttention(u.npcId, "interact", memCtx.day);
   for (const u of turn.codexUpdates || []) if (u.entityId) noteGeneratedAttention(u.entityId, "fact", memCtx.day);
   if (character.activeEncounter && turn.encounterOps) {
@@ -7570,7 +7583,7 @@ async function onChoice(choice) {
     const usedIds = [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean);
     if (usedIds.length) { recordUse(character, usedIds, { day: absoluteWorldDay() }); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex })); }
     // SNG-010C: a cast channeled with a bond-source companion present wakes evolving gear
-    itemsAdvanced = noteCoUseAndRefresh(character, { usedAbilityIds: usedIds, activeCompanionIds: activeCompanions(character, CONTENT.companions).map(c => c.id), catalog: CONTENT.items });
+    itemsAdvanced = noteCoUseAndRefresh(character, { bearers: bearersOf(character), usedAbilityIds: usedIds, activeCompanionIds: activeCompanions(character, CONTENT.companions).map(c => c.id), catalog: CONTENT.items });
     if (usedIds.length) notePerception(character, character.currentLocationId, hereNow(), { visited: true, usedAbilityIds: usedIds }, CONTENT.rules);
     recordAspirationProgress(character, action, fullCatalog());
     // SNG-011: precursor peril — using these changes you (extra alignment drift along the ability's axes)

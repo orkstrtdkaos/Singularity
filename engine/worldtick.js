@@ -17,6 +17,8 @@ import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
 import { advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround } from "./holdings.js";   // SNG-358: holdings ride the same world-gated pass
 import { commitGrowth } from "./npcsheet.js";   // ✅ R37: growth writes, on the tick
+import { bearersOf } from "./npcs.js";           // ✅ R45c: what other people carry
+import { refreshEvolvingItems } from "./evolution.js";   // ✅ R45c: "so it evolves itself when the time comes"
 import { spreadDeeds } from "./reputation.js";
 import { titleFor } from "./titles.js";   // SNG-287: a name from the material, not from a menu   // SNG-281: news travels, and that is a promotion source
 import { applyCodexUpdates } from "./codex.js";
@@ -472,12 +474,20 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // `unavenged`, one pass, its own news. ✅ R37: and growth WRITES — what the story showed a person doing becomes a craft
   // on their record at r1, and the world says so.
   const debtsPass = advanceDebts(character, { npcs: content?.npcs || {}, cfg: content?.rules?.economy?.debts || null, day: currentDay });
+  // ✅ R45c (Erik: "you'll need to wire that into the engine so it evolves itself when the time comes") — UNATTENDED, on
+  // the tick, the way a hold does. The bond is the PLAYER's; the item is in someone else's hands.
+  const woke = [];
+  for (const b of bearersOf(character)) {
+    for (const a of refreshEvolvingItems(b, content?.items || {}, { bonds: character })) {
+      woke.push({ text: `${a.itemName} has woken further in ${b.name || b.id}'s hands — ${a.stageName}.`, section: "yours" });
+    }
+  }
   const grown = [];
   for (const [id, n] of Object.entries(character?.npcRegistry || {})) {
     if (!n || typeof n !== "object" || String(id).startsWith("companion-")) continue;
     for (const c of commitGrowth(n, content?.abilities || {}, { day: currentDay, cfg: content?.rules?.npcStanding || {} })) grown.push({ text: `${n.name || id} has taken up ${c.name || c.id} — the story showed it, and now it is theirs.` });
   }
-  const extraNews = [...debtsPass.news.map(t => ({ text: t, section: "yours" })), ...grown.slice(0, 3)];
+  const extraNews = [...debtsPass.news.map(t => ({ text: t, section: "yours" })), ...grown.slice(0, 3), ...woke.slice(0, 3)];
 
   // ⚠️ SNG-368: the RETURN is stamped too, on BOTH paths. The early return handed back raw entries
   // while the normal path handed back stamped ones, so a caller reading `.news[0].section` got a section on

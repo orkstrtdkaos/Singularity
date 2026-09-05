@@ -43,7 +43,7 @@ import { wakesForGM } from "./wake.js"; // SNG-204: the aftermath waiting to bec
 import { priceLine } from "./economy.js";   // SNG-302: what a thing fetches HERE, so the GM can be honest about it
 import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NOT gone — reachable in the death state, latent hooks
 import { threatToPlayer, guardiansFor, worldRoster } from "./worldtick.js"; // SNG-310: the mark the world engine leaves for the GM to narrate
-import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
+import { npcRegistryForGM, npcQuestSeedBlock, bearersOf, carriedForGM } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { sheetsForGM } from "./npcsheet.js";     // the person-keyed sheet, first live caller
 import { groundForGM } from "./places.js";       // R28: authored ground is canon
@@ -217,6 +217,11 @@ export const GM_CONTEXT = [
   { key: "debtsDetail", builder: "holdings.debtsForGM", carries: ["debts", "heldBy", "escalation"],
     reachedBy: "always", spec: "SPEC_debts_and_reception", views: ["turn", "ask"],
     build: (env) => debtsForGM(env.character, { nameOf: (id) => env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id }) },
+  // ✅ R45c (2026-09-05): what OTHER PEOPLE carry of yours — a lent blade is a fact the narrator must hold, or the next
+  // scene hands it back to a character who never had it.
+  { key: "carriedDetail", builder: "npcs.carriedForGM", carries: ["inventory", "lentBy"],
+    reachedBy: "always", spec: "R45c", views: ["turn", "ask"],
+    build: (env) => carriedForGM(env.character) },
   { key: "abilityLawDetail", builder: "progression.abilitiesForGM", carries: ["abilities", "ranks", "energy", "harmRung"],
     reachedBy: "always", spec: "§7", views: ["turn", "ask", "gambit"],
     build: (env) => abilitiesForGM(env.character, env.app.fullCatalog(), env.CONTENT.branchForks, env.CONTENT.rules) },
@@ -356,7 +361,7 @@ export const GM_CONTEXT = [
     build: (env) => factsForGM(env.character) },
   { key: "evolvedItemsDetail", builder: "evolution.evolvedItemsForGM", carries: ["evolving items' stages"],
     reachedBy: "item use", spec: "§12", views: ["turn"],
-    build: (env) => evolvedItemsForGM(env.character, env.CONTENT.items) },
+    build: (env) => evolvedItemsForGM(env.character, env.CONTENT.items, { bearers: bearersOf(env.character) }) },
   { key: "opLossNote", builder: "character.opLossPending (SNG-009)", carries: ["restate lost ops directive"],
     reachedBy: "always (self-heal)", spec: "§11", views: ["turn"],
     build: (env) => env.character.opLossPending ? "The previous turn's structured updates failed to apply. Restate NOW, as ops, any quest/npc/place/codex/FACT updates that occurred last beat — INCLUDING any name reveal (revealName) or established fact the fiction set. The narration advanced; the state did not." : null },

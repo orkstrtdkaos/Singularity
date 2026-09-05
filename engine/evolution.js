@@ -12,20 +12,27 @@ import { ensurePractice } from "./practice.js";
 export function coUseKey(itemId, companionId) { return `${itemId}+${companionId}`; } // registry:internal
 
 /** Count a shared cast (item × companion co-activation) in the practice ledger. */
-export function recordCoUse(character, itemId, companionId, n = 1) {
-  ensurePractice(character);
-  if (!character.practice.coUse) character.practice.coUse = {};
+/** ✅ R45c (2026-09-05) — EVERY FUNCTION HERE TAKES A BEARER, NOT A CHARACTER. It always read exactly three fields
+ *  (`practice.coUse`, `inventory`, `companionBonds`) so it was bearer-shaped from the day it was written; what it lacked
+ *  was anyone else who had them. A registry entry now can (`npcs.ensureBearer`), so a spear in Pell's hands is a record.
+ *
+ *  ⚑ AND THE BOND IS READ WHERE THE BOND LIVES. Memory answers to Huginn, and Huginn is SILAS's companion — the bond is
+ *  his, not Pell's. `bonds` defaults to the bearer, so every existing player call is byte-identical; an NPC bearer is
+ *  passed the player, which is the fiction: she carries it, and it answers to the bond he holds. */
+export function recordCoUse(bearer, itemId, companionId, n = 1) {
+  ensurePractice(bearer);
+  if (!bearer.practice.coUse) bearer.practice.coUse = {};
   const k = coUseKey(itemId, companionId);
-  character.practice.coUse[k] = (character.practice.coUse[k] || 0) + n;
-  return character.practice.coUse[k];
+  bearer.practice.coUse[k] = (bearer.practice.coUse[k] || 0) + n;
+  return bearer.practice.coUse[k];
 }
 
-export function coUseCount(character, itemId, companionId) {
-  return character.practice?.coUse?.[coUseKey(itemId, companionId)] || 0;
+export function coUseCount(bearer, itemId, companionId) {
+  return bearer?.practice?.coUse?.[coUseKey(itemId, companionId)] || 0;
 }
 
-function bondValue(character, companionId) {
-  return character.companionBonds?.[companionId] ?? 0;
+function bondValue(bonds, companionId) {
+  return bonds?.companionBonds?.[companionId] ?? 0;
 }
 
 export function evolutionOf(itemId, catalog = {}) { // registry:internal
@@ -34,12 +41,12 @@ export function evolutionOf(itemId, catalog = {}) { // registry:internal
 
 /** The highest currently-unlocked stage object for an evolving item, or null. A stage
  *  unlocks only when BOTH the bond band AND the co-use count are met. */
-export function currentStage(itemId, character, catalog = {}) {
+export function currentStage(itemId, bearer, catalog = {}, { bonds = bearer } = {}) {
   const evo = evolutionOf(itemId, catalog);
   if (!evo || !Array.isArray(evo.stages) || !evo.stages.length) return null;
   const companionId = evo.bondSource;
-  const bond = bondValue(character, companionId);
-  const co = coUseCount(character, itemId, companionId);
+  const bond = bondValue(bonds, companionId);
+  const co = coUseCount(bearer, itemId, companionId);
   let best = evo.stages[0];
   for (const s of evo.stages) {
     if (bond >= (s.unlockBond || 0) && co >= (s.unlockCoUse || 0) && (s.stage || 0) >= (best.stage || 0)) best = s;
@@ -49,12 +56,12 @@ export function currentStage(itemId, character, catalog = {}) {
 
 /** Stamp each evolving inventory item with its current stage + effective bonusTags.
  *  Idempotent. Returns the items that ADVANCED this pass (for a waking narration). */
-export function refreshEvolvingItems(character, catalog = {}) {
+export function refreshEvolvingItems(bearer, catalog = {}, { bonds = bearer } = {}) {
   const advanced = [];
-  for (const item of character.inventory || []) {
+  for (const item of bearer?.inventory || []) {
     const evo = evolutionOf(item.id, catalog);
     if (!evo) continue;
-    const stage = currentStage(item.id, character, catalog);
+    const stage = currentStage(item.id, bearer, catalog, { bonds });
     if (!stage) continue;
     const prev = item.evoStage || 0;
     if ((stage.stage || 0) !== prev) {
@@ -75,33 +82,45 @@ export function refreshEvolvingItems(character, catalog = {}) {
 /** On a cast (any ability use), count a co-use for every evolving item whose bond-source
  *  companion is currently travelling with the character, then refresh stages. Returns
  *  the items that advanced. */
-export function noteCoUseAndRefresh(character, { usedAbilityIds = [], activeCompanionIds = [], catalog = {} }) {
-  ensurePractice(character);
+/** ⚑ CO-USE IS A FACT ABOUT A SCENE, NOT A SEAT (R45c). The item was used and the bond source was present — that is the
+ *  fact, and it is true of everyone in the company. `bearers` is who else was there holding things; absent, this is the
+ *  player alone and byte-identical to before. Returns the advances across every bearer, each naming who carried it. */
+export function noteCoUseAndRefresh(character, { usedAbilityIds = [], activeCompanionIds = [], catalog = {}, bearers = [] }) {
+  const all = [character, ...(bearers || []).filter(b => b && b !== character)];
   const cast = (usedAbilityIds || []).length > 0;
-  if (cast) {
-    for (const item of character.inventory || []) {
-      const evo = evolutionOf(item.id, catalog);
-      if (evo && activeCompanionIds.includes(evo.bondSource)) recordCoUse(character, item.id, evo.bondSource);
+  const out = [];
+  for (const b of all) {
+    ensurePractice(b);
+    if (cast) {
+      for (const item of b.inventory || []) {
+        const evo = evolutionOf(item.id, catalog);
+        if (evo && activeCompanionIds.includes(evo.bondSource)) recordCoUse(b, item.id, evo.bondSource);
+      }
+    }
+    for (const a of refreshEvolvingItems(b, catalog, { bonds: character })) {
+      out.push(b === character ? a : { ...a, bearerId: b.id || null, bearerName: b.name || null });
     }
   }
-  return refreshEvolvingItems(character, catalog);
+  return out;
 }
 
 /** GM context: the current stage + narration for each evolving item the character holds,
  *  including how close it is to waking further (so the GM can foreshadow). */
-export function evolvedItemsForGM(character, catalog = {}) {
+export function evolvedItemsForGM(character, catalog = {}, { bearers = [] } = {}) {
   const lines = [];
-  for (const item of character.inventory || []) {
+  for (const b of [character, ...(bearers || []).filter(x => x && x !== character)])
+  for (const item of b.inventory || []) {
     const evo = evolutionOf(item.id, catalog);
     if (!evo) continue;
-    const stage = currentStage(item.id, character, catalog);
+    const stage = currentStage(item.id, b, catalog, { bonds: character });
     if (!stage) continue;
     const companionId = evo.bondSource;
     const bond = bondValue(character, companionId);
-    const co = coUseCount(character, item.id, companionId);
+    const co = coUseCount(b, item.id, companionId);
+    const held = b === character ? "" : ` (carried by ${b.name || b.id})`;
     const next = (evo.stages || []).find(s => (s.stage || 0) > (stage.stage || 0));
     lines.push(
-      `${item.name} — Stage ${stage.stage} "${stage.name}": ${stage.narrationHints || stage.description}` +
+      `${item.name}${held} — Stage ${stage.stage} "${stage.name}": ${stage.narrationHints || stage.description}` +
       (stage.grant ? ` GRANT: ${stage.grant}` : "") +
       (next ? ` [waking toward "${next.name}" when ${companionId}'s bond reaches ${next.unlockBond} and you've cast through it together ${next.unlockCoUse}× — now bond ${bond}, ${co} shared casts]` : " [fully awake]")
     );

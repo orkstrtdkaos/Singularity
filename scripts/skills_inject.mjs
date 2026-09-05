@@ -179,6 +179,18 @@ if (hasMarkers) {
   next = existing.slice(0, at) + BEGIN + eol + generated + eol + END + eol;
 }
 
+// THE HEADER IS DERIVED TOO, AND NOTHING DERIVED IT. Five numbers sat ABOVE the generated markers in a
+// file whose second line reads "This file is DERIVED. Do not hand-edit — regenerate it." They were kept
+// by hand, they went stale the moment a craft landed, and `how_it_works` §55 gates all five — so the
+// staleness was noisy rather than prevented. That is this project's most-repeated defect, sitting in the
+// document that calls itself the source of truth. The generator that computes these numbers now writes them.
+const headerLine = `**${placed} crafts · ${domains.length} domains · ${Object.keys(idx.ringPos || {}).length} poles · `
+  + `${abilities.filter(a => a.folkAccessible).length} folk-accessible`
+  + (pending.length ? ` · ${pending.reduce((n, t) => n + byTrad[t].length, 0)} pending R33` : "") + "**";
+const HEADER_RE = /^\*\*\d+ crafts · \d+ domains · \d+ poles · \d+ folk-accessible[^\n]*\*\*$/m;
+if (!HEADER_RE.test(next)) { console.log("⛔ the header claim line was not found — REFUSING to guess where it is"); process.exit(1); }
+next = next.replace(HEADER_RE, () => headerLine);
+
 const noTrad = abilities.filter(a => !a.tradition).length;
 const summary = `${domains.length} domains · ${Object.keys(idx.ringPos || {}).length} poles · `
   + `${pending.length} lineage(s) pending R33 (${pending.reduce((n, t) => n + byTrad[t].length, 0)} crafts) · ${placed} crafts placed`

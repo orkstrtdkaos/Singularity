@@ -17785,7 +17785,13 @@ await (async () => {
     // "level 1 and not granted", which would offer the whole rank-1 corpus regardless of who you are.
     check("CCODE-224: every craft offered passes domainAccess for those domains — the band rule is really applied",
       pool.every(a => TR.domainAccess(a, 1, dom224, idx224).allowed === true));
-    const rank1All = Object.values(cat224).filter(a => (a.levelReq || 1) === 1).length;
+    // ⚠️ 2026-09-05 — THE ENGINE'S OWN READER, ON BOTH SIDES. This counted `levelReq === 1` while the pool
+    // bounds by `abilityTier` (`tier ?? levelReq`). The two readings coincide only while every record agrees
+    // with itself, so the day three crafts landed carrying a `tier` that differs from their `levelReq`, this
+    // check fired at the POOL for a disagreement in the CONTENT. A guard that asserts an identity between two
+    // readings of one fact is measuring the corpus's self-consistency and calling it an engine defect.
+    const { abilityTier: tier224 } = await import("../engine/skilltree.js");
+    const rank1All = Object.values(cat224).filter(a => tier224(a) === 1).length;
     // ⛔ THE POOL STOPPED BEING A FILTER, DELIBERATELY. This asserted `pool.length < rank1All` — that
     // creation refuses something. Under CCODE-339b it refuses NOTHING at rank 1, and asserting otherwise
     // would re-impose the wall Erik just removed.
@@ -17794,7 +17800,19 @@ await (async () => {
     check(`CCODE-224: every rank-1 craft is offered (${pool.length} of ${rank1All}) — the antipode included`,
       pool.length === rank1All, `${pool.length}/${rank1All}`);
     check("CCODE-224: …and NOTHING above rank 1 is, whatever the domains say",
-      pool.every(a => (a.levelReq || 1) === 1));
+      pool.every(a => tier224(a) === 1));
+    // ⛔ AND THE QUESTION THE OLD CHECK WAS ACCIDENTALLY ASKING, ASKED ON PURPOSE. `tier` and `levelReq` carry
+    // ONE fact — how deep a craft is — and a record that answers it twice can answer it two ways. Three do,
+    // all landed 2026-09-05 with the bond grants. ⚠️ WHICH NUMBER IS RIGHT IS AUTHORING, NOT ENGINEERING:
+    // `scholars_margin` and `the_taking_root` read levelReq 1 / tier 2, `the_old_procedure` levelReq 2 / tier 3.
+    // The engine believes `tier`, so today those three are one rung deeper than their own levelReq claims.
+    // ⚑ A RATCHET, NOT A WALL — it may only go DOWN, so the three are visible until they are reconciled and
+    // a fourth cannot arrive unnoticed.
+    const TIER_LEVELREQ_SPLIT = 3;   // 2026-09-05: scholars_margin · the_taking_root · the_old_procedure
+    const split224 = Object.values(cat224).filter(a => a.tier != null && a.levelReq != null && Number(a.tier) !== Number(a.levelReq));
+    check(`CCODE-224: ⚠️ ratchet — crafts whose \`tier\` and \`levelReq\` disagree = ${split224.length} (baseline ${TIER_LEVELREQ_SPLIT}) — may only go DOWN`,
+      split224.length <= TIER_LEVELREQ_SPLIT,
+      split224.map(a => `${a.id} tier=${a.tier}/levelReq=${a.levelReq}`).join(" · "));
 
     // ⛔ AND THE TWO SURFACES ARE HELD TO IT BY SOURCE: app.js must not grow a second copy of the rule.
     const appSrc224 = readFileSync(join(root, "app.js"), "utf8");

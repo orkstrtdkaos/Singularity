@@ -574,23 +574,39 @@ console.log("\n── FR · the field reference — measured claims stay measure
       /323 rank-resolutions changed kind/.test(fr) && new RegExp(`${rdRoot}`).test(fr));
   }
 
-  // ⚠️ THE FIVE RANK LADDERS ARE THE ENTIRE EMPIRICAL BASIS FOR THE PROPOSED CURVE. If a sixth appears,
+  // ⚠️ THE MAGNITUDE LADDERS ARE THE ENTIRE EMPIRICAL BASIS FOR THE PROPOSED CURVE. If a new one appears,
   // the curve should be re-fitted before it ships, and §3 must say so.
+  //
+  // ⛔ 2026-09-05 — AND THIS TRIPWIRE COUNTED ORDINALS AS LADDERS, WHICH ITS OWN DOCUMENT FORBIDS. §3's
+  // table has a KIND column; two rows are marked ORDINAL and ZERO-BASED INDEX, and its prose calls a
+  // percentage curve over them "a CATEGORY ERROR, not a tuning miss". The detector read neither. So nine
+  // bond grants landed, each carrying `tree.stage=[1,2,3]` — a bond BAND, an identity — and the count went
+  // 5 → 13 while nothing about the curve moved. ⚠️ MEASURED AT 34f42789: the ORIGINAL five were the four
+  // mechanical ladders plus `the_attended_end`'s stage, the first bond grant. The basis has been FOUR all
+  // along and the fifth was a miscount that arrived with the first companion.
+  // ⚑ The tripwire now watches magnitudes. Ordinals are counted and REPORTED — a change there must be
+  // visible without being an alarm, because authoring a tenth companion is not a balance event.
   const SKIP = new Set(["rank", "levelReq", "cost", "xp", "n", "d", "plus", "marginFloorPer"]);
-  let ladders = 0;
+  const ORDINAL = new Set(["stage", "reachesDepth"]);   // §3's own KIND column: an identity and a zero-based index
+  let ladders = 0, ordinals = 0;
   for (const a of abilities) {
     const scan = (blk) => { if (!blk || typeof blk !== "object") return;
       for (const [k, v] of Object.entries(blk)) { if (SKIP.has(k) || k.startsWith("_")) continue;
-        if (Array.isArray(v) && v.length >= 2 && v.every(x => typeof x === "number")) ladders++;
+        if (Array.isArray(v) && v.length >= 2 && v.every(x => typeof x === "number")) (ORDINAL.has(k) ? ordinals++ : ladders++);
         else if (v && typeof v === "object" && !Array.isArray(v)) scan(v); } };
     scan(a.mechanic);
     const pf = {};
     for (const t of (a.tree || [])) for (const [k, v] of Object.entries({ ...(t.mechanic || {}), ...t }))
       if (!SKIP.has(k) && !k.startsWith("_") && typeof v === "number") (pf[k] = pf[k] || []).push(v);
-    for (const vs of Object.values(pf)) if (vs.length >= 2 && new Set(vs).size >= 2) ladders++;
+    for (const [k, vs] of Object.entries(pf)) if (vs.length >= 2 && new Set(vs).size >= 2) (ORDINAL.has(k) ? ordinals++ : ladders++);
   }
-  check("FR: ⛔ still exactly FIVE rank ladders — the whole basis for the proposed curve",
-    ladders === 5, `live ${ladders} — a sixth means the curve must be re-fitted, UPDATE §3`);
+  check("FR: ⛔ still exactly THREE magnitude ladders — the whole basis for the proposed curve",
+    ladders === 3, `live ${ladders} magnitude(s) — a fourth means the curve must be re-fitted, UPDATE §3`);
+  // ⚠️ NOT AN ALARM, A READING. `stage` rides on every bond grant, so this number tracks the companion
+  // roster; it is here so that a change is SEEN rather than silently folded into the ladder count.
+  check("FR: …and the ordinals are counted separately — one `stage` per bond grant, plus `reachesDepth`",
+    ordinals >= 1 && ordinals === (await (async () => { let n = 0; for (const a of abilities) { if ((a.tree || []).filter(t => typeof t?.stage === "number").length >= 2) n++; if (Array.isArray(a.mechanic?.reachesDepth)) n++; } return n; })()),
+    `${ordinals} ordinal ladder(s) — stage on the bond grants, reachesDepth on ask_the_dead`);
 
   // ⛔ AND THE ONE THAT PROTECTS A CRAFT: wayfinding's timeReach is the template for a bad deletion.
   const wf = abilities.find(a => a.id === "wayfinding");
@@ -3781,18 +3797,35 @@ console.log("\n── §55 · the skill source of truth ──");
     // Asserting “every ### is a pole” across the whole file would fail on the honest section and pass on
     // a dishonest one that hid its non-poles under a domain. Gate the property: poles above the line,
     // non-poles below it, and the line itself present.
-    const outsideAt = sk.indexOf("## Outside the ring");
+    // ⚠️ 2026-09-05 — THIS PINNED A HEADING STRING AND I RENAMED IT MYSELF. The R33 landing replaced
+    // "## Outside the ring" with "## Pending R33 lineage assignment", which says something truer, and this
+    // check went red on a document that was correct. ⛔ The divider is found by EITHER name, and the check
+    // below asks the PROPERTY — no non-pole above the line, every non-pole below it — measured against the
+    // corpus, so that when the last lineage is assigned and the section rightly disappears this goes GREEN.
+    const dividerRe = /^## (?:Outside the ring|Pending R33 lineage assignment)\b/m;
+    const dividerM = sk.match(dividerRe);
+    const outsideAt = dividerM ? sk.indexOf(dividerM[0]) : -1;
     const ringPart = outsideAt >= 0 ? sk.slice(0, outsideAt) : sk;
     const outsidePart = outsideAt >= 0 ? sk.slice(outsideAt) : "";
+    // ⚠️ TWO HEADING SHAPES, because the generator writes two. A pole section is "### Name (`id`)"; the
+    // non-pole section is "### `id` — N crafts (prose)". One matcher for the first shape found NOTHING in
+    // the second and reported the section absent — a matcher that silently finds zero fails in one
+    // direction and passes vacuously in the other, and it did both today.
     const hdr = /^###\s+.*?\(`([a-z_]+)`\)/gm;
+    const hdrEither = /^###\s+(?:.*?\(`([a-z_]+)`\)|`([a-z_]+)`)/gm;
     const named = [...ringPart.matchAll(hdr)].map(m => m[1]);
-    const outsideNamed = [...outsidePart.matchAll(hdr)].map(m => m[1]);
+    const outsideNamed = [...outsidePart.matchAll(hdrEither)].map(m => m[1] || m[2]).filter(Boolean);
     const TR55 = await import("../engine/traditions.js");
     const notPole = named.filter(t => !TR55.isPoleTradition(t, idx55));
     check("§55: ⛔ every sect the doc names is a POLE — no folk lineage is listed as a sect",
       notPole.length === 0, notPole.join(" · "));
-    check("§55: …and everything under \"Outside the ring\" really is outside it — the honest label is true",
-      outsideNamed.length > 0 && outsideNamed.every(t => !TR55.isPoleTradition(t, idx55)), outsideNamed.join(" · ") || "(section absent)");
+    // ⛔ THE CORPUS DECIDES WHETHER THERE SHOULD BE A SECTION AT ALL. A doc with no non-poles left and no
+    // section is CORRECT; a doc with non-poles and no section is hiding them. Both are checked here.
+    const corpusNonPoles = [...new Set(A55.map(a => a.tradition).filter(Boolean))].filter(t => !TR55.isPoleTradition(t, idx55));
+    check("§55: …and everything below the divider really is outside the ring — and there is a divider exactly when the corpus needs one",
+      (corpusNonPoles.length === 0 ? outsideAt < 0 : outsideAt >= 0 && outsideNamed.length > 0)
+      && outsideNamed.every(t => !TR55.isPoleTradition(t, idx55)),
+      `corpus non-poles: ${corpusNonPoles.join(" · ") || "none"} · doc lists: ${outsideNamed.join(" · ") || "(no section)"}`);
     const missing = Object.keys(idx55.ringPos || {}).filter(t => !named.includes(t));
     check("§55: …and every pole on the ring has a section — none is missing from the source of truth",
       missing.length === 0, missing.join(" · "));

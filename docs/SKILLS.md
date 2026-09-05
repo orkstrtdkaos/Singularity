@@ -3,7 +3,7 @@
 **GENERATED 2026-09-02 from the live corpus.** ⛔ **This file is DERIVED. Do not hand-edit —
 regenerate it.** ⚠️ Where this disagrees with any working paper in `po/`, **this is right.**
 
-**419 crafts · 14 domains · 24 poles · 47 folk-accessible · 3 outside the ring**
+**429 crafts · 14 domains · 24 poles · 47 folk-accessible · 3 pending R33**
 
 ⛔ **R33 (SNG-443) — LINEAGE AND ACCESS ARE TWO SEPARATE AXES.** Source:
 `content/packs/core/rules/foothills.json` → `_twoAxes`.

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 31,
-  "xp": 3020,
+  "xp": 3025,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -224,7 +224,7 @@
   "maxHealth": 196,
   "health": 196,
   "maxEnergy": 287,
-  "energy": 272,
+  "energy": 267,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -518,6 +518,23 @@
         "shadow-slate",
         "shadow tablet"
       ]
+    },
+    {
+      "id": null,
+      "name": "Encrypted slate message — direct relay, urgent",
+      "kind": "quest",
+      "qty": 1,
+      "description": "A sealed slate tablet carrying an encrypted message from the Hub — marked urgent-to-hand, breaking normal relay protocol. The message itself is not yet read.",
+      "consumable": false,
+      "_contract": {
+        "verdict": "reject",
+        "missing": [
+          "id"
+        ],
+        "vague": [
+          "effect-resolvable"
+        ]
+      }
     }
   ],
   "deeds": [
@@ -2206,32 +2223,53 @@
         "player": "Shadowstep to close the distance to the runner and use Undying Ledger to determine what message they're carrying.  Prepare to assist them.",
         "summary": "An urgent courier arrives at Whistling Woman with an encrypted message for the warden—her death-thread fractured and fragile. Silas reads her end-patterns and Pell steadies her collapse.",
         "narration": "You release the shadowstep before the thought fully forms—stepping between the dawn-grey at the post's threshold and the shadow cast by the runner's horse, arriving three paces from the rider as they crest the rise. The distance collapses. The rider startles, one hand reaching for a blade before recognition settles—not threat, just the shock of sudden proximity.\n\nYou steady your presence and look directly at the courier. The Undying Ledger unfolds as you hold it: her death-thread is visible, not imminent, but it is FRACTURED—three separate pathways braiding and unbraiding through the next hours. One path holds her arriving, delivering word, and riding on. One path holds her collapsing into a bed and staying there. The third path, the one that traces brightest against the moorland's grey, holds her stopping mid-sentence and simply not continuing—the thread running out mid-sentence and going quiet.\n\nThe fractured ledger reads what the scattered pattern told Huginn: she has a message that matters, and its delivery is hanging on whether her body holds together long enough to speak it. She is hurt, or sick, or both. The death-thread names no blame—only urgency and fragility.\n\nYou step forward into her sight-line, both hands visible, and speak plain: \"You came far. What do you need?\"\n\nThe rider's jaw works. She steadies the horse with one hand—the other grips the saddle hard enough to blanch her knuckles. \"Message for the warden. From the Hub. It came through encrypted—\" Her breath catches. \"—came through the slate network marked urgent-to-hand. Not relay chain. Direct.\"\n\nPell emerges from the post behind you, already moving, reading the runner's weight the way she reads metal. \"Get down,\" Pell says, not a question. \"Before you fall.\"\n\nThe runner nods, jerks her leg over the saddle, and nearly drops. Pell catches her shoulder—the woman is fever-warm even through the travel cloak."
+      },
+      {
+        "player": "Help Pell get the runner inside and rested—use Kept Breath to stabilize her while you find out what broke her pattern so badly",
+        "summary": "An urgent encrypted message arrives at Whistling Woman post by direct slate relay, fracturing the courier's death-thread. Silas steadies her with Kept Breath while Pell helps bring her inside to rest.",
+        "narration": "You call Pell's name sharp and clear—not urgent, but direct enough that she's moving before she's fully awake, stepping through the threshold in shirt and breeches, reading the situation in a glance. The courier is sliding sideways in the saddle, fever-warm and gripping hard to stay mounted. Her horse stamps, unnerved.\n\n\"I've got her,\" Pell says, and moves to the horse's head with the same unsentimental steadiness she brings to everything. She gets a hand on the courier's arm—solid, anchoring—while you step close to the rider's other side. The woman's breathing is shallow and rapid, her hands shaking as she tries to reach for the saddlebag.\n\n\"Inside,\" you tell her plainly. \"Let us carry the weight.\" The Kept Breath settles around her like a held exhale—purple mist standing a finger's depth off her skin, the fever's burn hitting that barrier and sliding shallow. Her breathing slows. The immediate spiral stops. It's not healing; it's a threshold held. Not yet, it says. You stay here a moment more.\n\nPell and the courier move together toward the post's open door. Huginn hops aside to clear the threshold, its eye tracking the saddlebag like a thing that matters. Inside, the warmth of the stove hits immediately—the post holds heat well. Pell guides the courier to the bed you just left warm, eases her down onto it. The woman's eyes are sharp despite the fever—focused, urgent.\n\n\"Message,\" she manages. \"Direct. Encrypted. For the warden.\" Her hand fumbles toward the saddlebag.\n\nYou retrieve it from the doorway—leather, heavy, sealed with wax. The slate inside will be warm from riding. Whatever broke her pattern enough to shatter her thread three ways, it was worth riding hard enough to do it.\n\nPell brings water—boiled, from the barrel. She kneels beside the bed without ceremony. \"Drink,\" she says. It's not a question.\n\n*✦ Encrypted slate message — direct relay, urgent — added to your pack.*"
       }
     ],
     "lastTurn": {
-      "narration": "You release the shadowstep before the thought fully forms—stepping between the dawn-grey at the post's threshold and the shadow cast by the runner's horse, arriving three paces from the rider as they crest the rise. The distance collapses. The rider startles, one hand reaching for a blade before recognition settles—not threat, just the shock of sudden proximity.\n\nYou steady your presence and look directly at the courier. The Undying Ledger unfolds as you hold it: her death-thread is visible, not imminent, but it is FRACTURED—three separate pathways braiding and unbraiding through the next hours. One path holds her arriving, delivering word, and riding on. One path holds her collapsing into a bed and staying there. The third path, the one that traces brightest against the moorland's grey, holds her stopping mid-sentence and simply not continuing—the thread running out mid-sentence and going quiet.\n\nThe fractured ledger reads what the scattered pattern told Huginn: she has a message that matters, and its delivery is hanging on whether her body holds together long enough to speak it. She is hurt, or sick, or both. The death-thread names no blame—only urgency and fragility.\n\nYou step forward into her sight-line, both hands visible, and speak plain: \"You came far. What do you need?\"\n\nThe rider's jaw works. She steadies the horse with one hand—the other grips the saddle hard enough to blanch her knuckles. \"Message for the warden. From the Hub. It came through encrypted—\" Her breath catches. \"—came through the slate network marked urgent-to-hand. Not relay chain. Direct.\"\n\nPell emerges from the post behind you, already moving, reading the runner's weight the way she reads metal. \"Get down,\" Pell says, not a question. \"Before you fall.\"\n\nThe runner nods, jerks her leg over the saddle, and nearly drops. Pell catches her shoulder—the woman is fever-warm even through the travel cloak.",
-      "sceneSummary": "An urgent courier arrives at Whistling Woman with an encrypted message for the warden—her death-thread fractured and fragile. Silas reads her end-patterns and Pell steadies her collapse.",
+      "narration": "You call Pell's name sharp and clear—not urgent, but direct enough that she's moving before she's fully awake, stepping through the threshold in shirt and breeches, reading the situation in a glance. The courier is sliding sideways in the saddle, fever-warm and gripping hard to stay mounted. Her horse stamps, unnerved.\n\n\"I've got her,\" Pell says, and moves to the horse's head with the same unsentimental steadiness she brings to everything. She gets a hand on the courier's arm—solid, anchoring—while you step close to the rider's other side. The woman's breathing is shallow and rapid, her hands shaking as she tries to reach for the saddlebag.\n\n\"Inside,\" you tell her plainly. \"Let us carry the weight.\" The Kept Breath settles around her like a held exhale—purple mist standing a finger's depth off her skin, the fever's burn hitting that barrier and sliding shallow. Her breathing slows. The immediate spiral stops. It's not healing; it's a threshold held. Not yet, it says. You stay here a moment more.\n\nPell and the courier move together toward the post's open door. Huginn hops aside to clear the threshold, its eye tracking the saddlebag like a thing that matters. Inside, the warmth of the stove hits immediately—the post holds heat well. Pell guides the courier to the bed you just left warm, eases her down onto it. The woman's eyes are sharp despite the fever—focused, urgent.\n\n\"Message,\" she manages. \"Direct. Encrypted. For the warden.\" Her hand fumbles toward the saddlebag.\n\nYou retrieve it from the doorway—leather, heavy, sealed with wax. The slate inside will be warm from riding. Whatever broke her pattern enough to shatter her thread three ways, it was worth riding hard enough to do it.\n\nPell brings water—boiled, from the barrel. She kneels beside the bed without ceremony. \"Drink,\" she says. It's not a question.\n\n*✦ Encrypted slate message — direct relay, urgent — added to your pack.*",
+      "sceneSummary": "An urgent encrypted message arrives at Whistling Woman post by direct slate relay, fracturing the courier's death-thread. Silas steadies her with Kept Breath while Pell helps bring her inside to rest.",
       "choices": [
         {
-          "label": "Help Pell get the runner inside and rested—use Kept Breath to stabilize her while you find out what broke her pattern so badly",
+          "label": "Unsealing the encrypted message — place it in Pell's hands so she can help you read what broke the network's silence.",
           "attribute": "practical",
-          "subAttribute": "craft",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "help",
-            "careful",
-            "defend"
+            "study",
+            "craft"
           ],
-          "abilityId": "kept_breath",
-          "energyCost": 3,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Read her plainly with Deathsense—ask what exactly she was told to carry and what it cost her to carry it",
+          "label": "Ask the courier plainly what sent her — break protocol, risk herself, fracture her death-thread.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "ask",
+            "press"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Ask the Dead on the courier herself — read her death-patterns plainly, ask what her fractured thread is anchored to.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
@@ -2239,131 +2277,113 @@
           "opposedDifficulty": null,
           "intentTags": [
             "study",
-            "careful"
+            "press"
           ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
+          "abilityId": "ask_the_dead",
+          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Move to her saddlebag immediately—the encrypted slate is what matters, and you need to know what the Hub found urgent enough to break protocol",
+          "label": "Let the courier rest while you and Pell study the encrypted message — she needs hours before hard questions.",
           "attribute": "practical",
-          "subAttribute": "wits",
+          "subAttribute": "craft",
           "axes": {},
-          "difficulty": "normal",
+          "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "scan",
-            "urgent"
+            "study",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [
-        {
-          "description": "Read a death-thread to find meaning—bridging two crafts to read a message written in the shape of a fragile life",
-          "tags": [
-            "insight",
-            "craft"
-          ],
-          "weight": 1,
-          "communityId": null
-        }
-      ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -2,
-        "inventoryAdd": [],
+        "energy": -3,
+        "inventoryAdd": [
+          {
+            "name": "Encrypted slate message — direct relay, urgent",
+            "kind": "quest",
+            "description": "A sealed slate tablet carrying an encrypted message from the Hub — marked urgent-to-hand, breaking normal relay protocol. The message itself is not yet read.",
+            "consumable": false,
+            "effects": {}
+          }
+        ],
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [
-        {
-          "what": "urgent encrypted message arrived at Whistling Woman via direct slate relay—not chain broadcast",
-          "tags": [
-            "crisis",
-            "network"
-          ],
-          "visibility": "witnessed",
-          "spectrumDeltas": {},
-          "impactsLocal": true
-        }
-      ],
+      "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "A courier fractured by urgency, carrying a message the relay network itself refused",
-        "from": "The network's own silent alert—something broke protocol; this is how you learn it"
+        "thing": "An encrypted message from the Hub that broke network protocol to arrive — urgent, direct, fractured the courier's death-thread.",
+        "from": "What Wakes Beneath arc — the world itself has started moving in ways the network was not designed for. Something escalated while Silas tended the threshold."
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Whistling Woman post's threshold and moorland approach at pre-dawn grey shifting toward dawn—the runner on horseback at the rise, now dismounting with Pell's support, the air cold and clearing, the post door open behind",
+        "setting": "The Whistling Woman post's warm interior at pre-dawn grey — stove glowing, the bed still warm, the saddlebag on the table. The courier lies on the bed, fever-warm beneath Pell's practical care. The post is warded at the threshold; the moorland road south lies open beyond it.",
         "npcsPresent": [
           {
-            "name": "The courier (unnamed runner)",
-            "state": "Dismounting with difficulty, fever-warm, gripping the saddle, breathing hard—holding an encrypted message from the Hub that came through direct slate relay"
+            "name": "Courier",
+            "state": "Fever-warm, resting on the bed, breathing steadied by Kept Breath, eyes sharp and urgent despite exhaustion — gripping the message's importance like the last thing keeping her awake"
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Emerged from the post, steadying the runner's shoulder, reading her strain through practical assessment"
+            "state": "Kneeling beside the bed with water, reading the courier's strain through practical assessment, unsentimental and present"
           },
           {
             "name": "Huginn",
-            "state": "Perched on the stone step, alert and waiting"
+            "state": "Perched on the shelf, watching the saddlebag with the eye of something that knows a weight when it sees one"
           }
         ],
         "objects": [
-          "The Whistling Woman post structure—warded threshold, interior warm",
-          "The runner's horse—still saddled, reins loose",
-          "Saddlebag (encrypted slate message inside)",
-          "The moorland road to the south—clear sight-line, the path the runner came by"
+          "The Whistling Woman post structure — warded threshold, warm interior, stove, bed",
+          "Encrypted slate message in wax-sealed saddlebag",
+          "Courier's horse — tethered outside, unsettled but held",
+          "Water barrel and cup"
         ],
         "threads": [
-          "Why the relay network went silent and broke protocol to send a direct encrypted message",
-          "What in the message was urgent enough to fracture a courier's death-thread",
-          "What the fractured path means—will she recover, or is this the final ride"
+          "What message was urgent enough to break the relay network's protocol",
+          "Why the courier's death-thread fractured into three separate paths",
+          "What happens to her in the hours ahead — which path holds, which falls away"
         ]
       },
       "npcUpdates": [
         {
           "op": "meet",
-          "npcId": "urgent-courier-whistling-woman",
-          "name": "Unnamed courier",
-          "role": "Hub relay runner carrying encrypted direct message",
+          "npcId": "hub-courier-day16",
+          "name": "Courier",
+          "role": "Hub relay runner carrying urgent direct message",
           "sex": "female",
           "gender": "woman",
           "pronouns": "she/her",
-          "description": "A rider broken by urgency—fever-warm, gripping hard, running on the last of her strength",
-          "note": "Arrived at Whistling Woman at dawn carrying an encrypted slate message from the Hub—direct relay, not chain. Her death-thread is fractured; she may not reach her destination if the message is not delivered first.",
+          "description": "A lean woman in her thirties, fever-warm and running on the last of her strength — the quality of someone who rode hard enough to break the network's usual rules.",
+          "note": "Arrived at dawn carrying an encrypted slate message marked urgent-to-hand. Her death-thread reads fractured — three diverging paths through the next hours. Pell and Silas brought her inside; Kept Breath steadied the spiral.",
           "learned": [
-            "The message came through encrypted slate network marked urgent-to-hand, breaking normal relay protocol",
-            "She was ordered to carry it directly to the warden, no intermediaries"
+            "She broke relay protocol to carry this message directly",
+            "The message came encrypted, not open — highest security",
+            "She was ordered to carry it to the warden, no intermediaries"
           ],
           "skillsObserved": [
             "Professional horsemanship under strain",
-            "Moorland navigation in poor light"
+            "Moorland navigation in difficult conditions"
           ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Fever-warm, collapsing, clutching a message marked urgent—her death-thread shows three branching paths through the next hours"
+          "statusNote": "Fever-warm, fractured death-thread, resting at Whistling Woman post under Pell's care"
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "An urgent encrypted message arrived at Whistling Woman post via direct slate relay—breaking normal chain-broadcast protocol. The courier carrying it is fractured and fragile; her death-thread reads three diverging paths through the coming hours.",
-          "subjectId": null
-        }
-      ],
+      "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [],
@@ -2380,13 +2400,13 @@
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "the pre-dawn moment to dawn's first light at the post threshold"
+        "why": "pre-dawn to early morning — the courier's arrival and Silas's response"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "A lone rider on the moorland rise at dawn, fever-flushed and gripping the saddle—her death-thread fractured and unraveling. Behind her, the Whistling Woman post's warded threshold, and Silas stepping between shadows to meet her.",
+      "imagePrompt": null,
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -2398,34 +2418,34 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Whistling Woman post's threshold and moorland approach at pre-dawn grey shifting toward dawn—the runner on horseback at the rise, now dismounting with Pell's support, the air cold and clearing, the post door open behind",
+      "setting": "The Whistling Woman post's warm interior at pre-dawn grey — stove glowing, the bed still warm, the saddlebag on the table. The courier lies on the bed, fever-warm beneath Pell's practical care. The post is warded at the threshold; the moorland road south lies open beyond it.",
       "npcsPresent": [
         {
-          "name": "The courier (unnamed runner)",
-          "state": "Dismounting with difficulty, fever-warm, gripping the saddle, breathing hard—holding an encrypted message from the Hub t"
+          "name": "Courier",
+          "state": "Fever-warm, resting on the bed, breathing steadied by Kept Breath, eyes sharp and urgent despite exhaustion — gripping t"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Emerged from the post, steadying the runner's shoulder, reading her strain through practical assessment"
+          "state": "Kneeling beside the bed with water, reading the courier's strain through practical assessment, unsentimental and present"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the stone step, alert and waiting"
+          "state": "Perched on the shelf, watching the saddlebag with the eye of something that knows a weight when it sees one"
         }
       ],
       "objects": [
-        "The Whistling Woman post structure—warded threshold, interior warm",
-        "The runner's horse—still saddled, reins loose",
-        "Saddlebag (encrypted slate message inside)",
-        "The moorland road to the south—clear sight-line, the path the runner came by"
+        "The Whistling Woman post structure — warded threshold, warm interior, stove, bed",
+        "Encrypted slate message in wax-sealed saddlebag",
+        "Courier's horse — tethered outside, unsettled but held",
+        "Water barrel and cup"
       ],
       "threads": [
-        "Why the relay network went silent and broke protocol to send a direct encrypted message",
-        "What in the message was urgent enough to fracture a courier's death-thread",
-        "What the fractured path means—will she recover, or is this the final ride"
+        "What message was urgent enough to break the relay network's protocol",
+        "Why the courier's death-thread fractured into three separate paths",
+        "What happens to her in the hours ahead — which path holds, which falls away"
       ]
     },
-    "beats": 5
+    "beats": 6
   },
   "clock": {
     "schemaVersion": 1,
@@ -5190,34 +5210,39 @@
       "id": "urgent-courier-whistling-woman",
       "name": "Courier",
       "nameUnknown": true,
-      "role": "Hub relay runner carrying encrypted direct message",
+      "role": "Hub relay runner carrying urgent direct message",
       "description": "A rider broken by urgency—fever-warm, gripping hard, running on the last of her strength",
       "firstMet": {
         "locationId": "gen-whistling-woman-post",
         "day": 16
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
-        "[d16] Arrived at Whistling Woman at dawn carrying an encrypted slate message from the Hub—direct relay, not chain. Her death-thread is fractured; she may not reach her destination if the message is not delivered first."
+        "[d16] Arrived at Whistling Woman at dawn carrying an encrypted slate message from the Hub—direct relay, not chain. Her death-thread is fractured; she may not reach her destination if the message is not delivered first.",
+        "[d16] Arrived at dawn carrying an encrypted slate message marked urgent-to-hand. Her death-thread reads fractured — three diverging paths through the next hours. Pell and Silas brought her inside; Kept Breath steadied the spiral."
       ],
       "knownFacts": [
         "The message came through encrypted slate network marked urgent-to-hand, breaking normal relay protocol",
-        "She was ordered to carry it directly to the warden, no intermediaries"
+        "She was ordered to carry it directly to the warden, no intermediaries",
+        "She broke relay protocol to carry this message directly",
+        "The message came encrypted, not open — highest security",
+        "She was ordered to carry it to the warden, no intermediaries"
       ],
       "skillsObserved": [
         "Professional horsemanship under strain",
-        "Moorland navigation in poor light"
+        "Moorland navigation in poor light",
+        "Moorland navigation in difficult conditions"
       ],
       "status": "active",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Fever-warm, collapsing, clutching a message marked urgent—her death-thread shows three branching paths through the next hours",
+      "statusNote": "Fever-warm, fractured death-thread, resting at Whistling Woman post under Pell's care",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
         "day": 16
       },
-      "met": 1
+      "met": 2
     }
   },
   "placeMemory": {
@@ -6388,10 +6413,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "The moorland silence holds a weight—a listening quality that suggests the relay network is not merely a series of posts but something more…",
-        "from": "the post itself and Deni Cors's careful work, which built not just waypoints but a living circuit"
-      },
-      {
         "thing": "A quiet night with nothing demanded but presence—the first one since the temple was raised.",
         "from": "Pell's read of what the child needs, and what she needs alongside it"
       },
@@ -6406,6 +6427,10 @@
       {
         "thing": "A courier fractured by urgency, carrying a message the relay network itself refused",
         "from": "The network's own silent alert—something broke protocol; this is how you learn it"
+      },
+      {
+        "thing": "An encrypted message from the Hub that broke network protocol to arrive — urgent, direct, fractured the courier's death-thread.",
+        "from": "What Wakes Beneath arc — the world itself has started moving in ways the network was not designed for. Something escalated while Silas…"
       }
     ],
     "wantProgress": {
@@ -14394,22 +14419,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 18.457265637914517,
-    "cerebral": 16.787565675137447,
-    "social": 10.212722885592978,
-    "generous": 5.354565880474672,
-    "cautious": 5.896779905683151,
-    "physical": 0.40478213538018193,
-    "risky": 0.09708828030397984,
-    "ruthless": 0.21132056128802834,
-    "carousing": 0.03435807874624787,
-    "amorous": 3.719603573943833,
-    "patient": 0.7105250494304174,
-    "stealth": 0.0000073854637561768995,
-    "devotion": 0.30179443321994187,
-    "craft": 3.3358723025064485,
-    "leadership": 0.9824054223990882,
-    "deception": 0.035367899856778996
+    "strategic": 17.995833996966653,
+    "cerebral": 16.36787653325901,
+    "social": 9.957404813453154,
+    "generous": 6.220701733462805,
+    "cautious": 7.749360408041072,
+    "physical": 0.3946625819956774,
+    "risky": 0.09466107329638034,
+    "ruthless": 0.20603754725582762,
+    "carousing": 0.03349912677759167,
+    "amorous": 3.626613484595237,
+    "patient": 0.6927619231946569,
+    "stealth": 0.000007200827162272477,
+    "devotion": 0.2942495723894433,
+    "craft": 3.2524754949437873,
+    "leadership": 0.957845286839111,
+    "deception": 0.03448370236035952
   },
   "aptitudes": [
     "strategist",
@@ -14418,7 +14443,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 954,
+  "actionCount": 955,
   "grantsVersion": 1,
   "reconcileVersion": 33,
   "gallery": [
@@ -15156,8 +15181,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1788650537433,
-  "rev": 1820,
+  "updatedAt": 1788650682315,
+  "rev": 1822,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18521,7 +18546,8 @@
       "the_open_material": 1,
       "the_called_form": 1,
       "brace": 1,
-      "working_model": 1
+      "working_model": 1,
+      "kept_breath": 1
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -18578,7 +18604,7 @@
       {
         "abilityId": "hunters_strike",
         "since": "2026-07-12T16:27:52.479Z",
-        "progress": 7
+        "progress": 8
       },
       {
         "abilityId": "pattern_sense",
@@ -18614,7 +18640,8 @@
       "the_open_material": 28,
       "the_called_form": 28,
       "brace": 42,
-      "working_model": 67
+      "working_model": 67,
+      "kept_breath": 67
     }
   },
   "companionBonds": {
@@ -19271,7 +19298,7 @@
     "valley": 646,
     "the_palelands": 6,
     "the_center": 151,
-    "the_echo_vale": 16
+    "the_echo_vale": 17
   },
   "foreclosed": [
     "rootkin",
@@ -19556,10 +19583,10 @@
     {
       "id": "sess-30",
       "startedAt": "2026-09-05T23:07:20.107Z",
-      "lastAt": "2026-09-05T23:22:17.418Z",
+      "lastAt": "2026-09-05T23:24:42.307Z",
       "startDay": 67,
       "endDay": 67,
-      "beats": 3
+      "beats": 4
     }
   ],
   "company": [
@@ -20047,20 +20074,20 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 330,
-    "choices": 329,
-    "characterDeltas": 163,
-    "scene": 330,
-    "npcUpdates": 295,
+    "sceneSummary": 331,
+    "choices": 330,
+    "characterDeltas": 164,
+    "scene": 331,
+    "npcUpdates": 296,
     "factUpdates": 28,
     "placeUpdates": 73,
     "codexUpdates": 195,
-    "timeOps": 306,
+    "timeOps": 307,
     "imagePrompt": 28,
-    "sceneEnded": 110,
+    "sceneEnded": 111,
     "itemUpdates": 7,
     "questUpdates": 42,
-    "offer": 43,
+    "offer": 44,
     "moveTo": 20,
     "delegateOps": 4,
     "deeds": 13,
@@ -20074,11 +20101,11 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 40,
+    "gambitApt": 41,
     "markDefiningMoment": 1,
     "_engineClosedScene": 3
   },
-  "_opTurns": 330,
+  "_opTurns": 331,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -20086,7 +20113,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 47,
+      "applied": 48,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },
@@ -20329,24 +20356,7 @@
   "_stageOpRefusals": [
     "what-the-water-remembers: not-current-stage (named \"resolve\", current is \"null\")"
   ],
-  "_pendingLedger": [
-    {
-      "schemaVersion": 1,
-      "at": "2026-09-05T23:22:17.433Z",
-      "worldDay": 67,
-      "who": "char-mrhs8286",
-      "playerKey": "player-s9z9u1",
-      "where": "gen-whistling-woman-post",
-      "what": "urgent encrypted message arrived at Whistling Woman via direct slate relay—not chain broadcast",
-      "tags": [
-        "crisis",
-        "network"
-      ],
-      "spectrumDeltas": {},
-      "visibility": "witnessed",
-      "impactsLocal": true
-    }
-  ],
+  "_pendingLedger": [],
   "locationState": {},
   "_applyFailures": null,
   "activeEncounter": null,
@@ -20813,7 +20823,7 @@
   ],
   "skillUses": {
     "travel": 9,
-    "careful": 4,
+    "careful": 5,
     "study": 10,
     "scout": 7,
     "lead": 2,
@@ -20823,7 +20833,7 @@
     "prepare": 6,
     "investigate": 2,
     "craft": 5,
-    "help": 6,
+    "help": 7,
     "discipline": 1,
     "persuade": 1,
     "rapport": 5,
@@ -20833,7 +20843,8 @@
     "comfort": 3,
     "romantic": 3,
     "presence": 1,
-    "flirt": 1
+    "flirt": 1,
+    "defend": 1
   },
   "aptitudeEarnCount": {
     "silver_tongue": 1

@@ -239,22 +239,181 @@
   "defenceShareStep": 0.15,
   "minTakeShare": 0.1,
   "kinds": {
-   "mine": { "family": "material", "yields": "raw_material", "label": "a mine" },
-   "quarry": { "family": "material", "yields": "cut_stone", "label": "a quarry" },
-   "mill": { "family": "material", "yields": "raw_material", "label": "a mill" },
-   "workshop": { "family": "material", "yields": "worked_light", "label": "a workshop" },
-   "herd": { "family": "material", "yields": "living_stock", "label": "a herd or a planting" },
-   "wall": { "family": "martial", "defence": 1, "label": "a wall" },
-   "barrier": { "family": "martial", "defence": 1, "label": "a barrier or a ward-line" },
-   "tower": { "family": "martial", "defence": 2, "label": "a watchtower" },
-   "sentries": { "family": "martial", "defence": 1, "watch": true, "label": "sentries — raised, bound, or posted" },
-   "temple": { "family": "meaning", "aura": 0.2, "label": "a temple" },
-   "shrine": { "family": "meaning", "aura": 0.1, "label": "a shrine" },
-   "quarters": { "family": "people", "hands": 2, "residents": 4, "label": "quarters — homes for the people who work it" },
-   "forge": { "family": "craft", "facility": "forge", "label": "a forge" },
-   "laboratory": { "family": "craft", "facility": "laboratory", "label": "a laboratory" },
-   "scriptorium": { "family": "craft", "facility": "scriptorium", "label": "a scriptorium" }
-  }
+   "mine": {
+    "family": "material",
+    "yields": "raw_material",
+    "label": "a mine"
+   },
+   "quarry": {
+    "family": "material",
+    "yields": "cut_stone",
+    "label": "a quarry"
+   },
+   "mill": {
+    "family": "material",
+    "yields": "raw_material",
+    "label": "a mill"
+   },
+   "workshop": {
+    "family": "material",
+    "yields": "worked_light",
+    "label": "a workshop"
+   },
+   "herd": {
+    "family": "material",
+    "yields": "living_stock",
+    "label": "a herd or a planting"
+   },
+   "wall": {
+    "family": "martial",
+    "defence": 1,
+    "label": "a wall"
+   },
+   "barrier": {
+    "family": "martial",
+    "defence": 1,
+    "label": "a barrier or a ward-line"
+   },
+   "tower": {
+    "family": "martial",
+    "defence": 2,
+    "label": "a watchtower"
+   },
+   "sentries": {
+    "family": "martial",
+    "defence": 1,
+    "watch": true,
+    "label": "sentries — raised, bound, or posted"
+   },
+   "temple": {
+    "family": "meaning",
+    "aura": 0.2,
+    "label": "a temple"
+   },
+   "shrine": {
+    "family": "meaning",
+    "aura": 0.1,
+    "label": "a shrine"
+   },
+   "quarters": {
+    "family": "people",
+    "hands": 2,
+    "residents": 4,
+    "label": "quarters — homes for the people who work it"
+   },
+   "forge": {
+    "family": "craft",
+    "facility": "forge",
+    "label": "a forge"
+   },
+   "laboratory": {
+    "family": "craft",
+    "facility": "laboratory",
+    "label": "a laboratory"
+   },
+   "scriptorium": {
+    "family": "craft",
+    "facility": "scriptorium",
+    "label": "a scriptorium"
+   },
+   "kiln": {
+    "family": "material",
+    "yields": "cut_stone",
+    "label": "a kiln or a lime-burn"
+   },
+   "fishery": {
+    "family": "material",
+    "yields": "living_stock",
+    "label": "a fishery or a weir"
+   },
+   "still": {
+    "family": "material",
+    "yields": "medicines",
+    "label": "a still or a physic-garden"
+   },
+   "lens_works": {
+    "family": "material",
+    "yields": "worked_light",
+    "label": "a lens-works"
+   },
+   "gate": {
+    "family": "martial",
+    "defence": 1,
+    "label": "a gate that closes"
+   },
+   "keep": {
+    "family": "martial",
+    "defence": 3,
+    "label": "a keep — the last room that holds"
+   },
+   "ward_line": {
+    "family": "martial",
+    "defence": 2,
+    "watch": true,
+    "label": "a standing ward-line"
+   },
+   "muster_yard": {
+    "family": "martial",
+    "defence": 1,
+    "label": "a muster yard — where a band forms"
+   },
+   "temple_to_attending": {
+    "family": "meaning",
+    "aura": 0.25,
+    "attends": true,
+    "label": "a Temple to Attending"
+   },
+   "memorial": {
+    "family": "meaning",
+    "aura": 0.15,
+    "label": "a memorial — names kept"
+   },
+   "grave_ground": {
+    "family": "meaning",
+    "aura": 0.15,
+    "attends": true,
+    "label": "tended grave-ground"
+   },
+   "hearth": {
+    "family": "meaning",
+    "aura": 0.1,
+    "label": "a hearth nobody lets go out"
+   },
+   "longhouse": {
+    "family": "people",
+    "hands": 3,
+    "residents": true,
+    "label": "a longhouse"
+   },
+   "infirmary": {
+    "family": "people",
+    "hands": 1,
+    "residents": true,
+    "label": "an infirmary"
+   },
+   "market": {
+    "family": "people",
+    "hands": 1,
+    "trade": true,
+    "label": "a market day"
+   },
+   "school_room": {
+    "family": "craft",
+    "facility": "teach",
+    "label": "a school-room"
+   },
+   "smithy": {
+    "family": "craft",
+    "facility": "repair",
+    "label": "a smithy"
+   },
+   "stable": {
+    "family": "craft",
+    "facility": "travel",
+    "label": "a stable or a boat-house"
+   }
+  },
+  "_kindsExtended_20260905": "⚑ AEVI EXTENDED THE KINDS, per CCode: 'Aevi extends the kinds and their flavour; Erik turns the numbers.' +18 kinds, taking the catalogue to 33. ⛔ EVERY ONE NAMES ONE EFFECT THE ENGINE ALREADY READS — nothing here needs a new reader. ⚠️ THREE ADDITIONS CARRY A FLAG THAT DOES: `attends: true` on `temple_to_attending` and `grave_ground`. ⛔ R29 MADE ATTENDING THE MECHANISM AND `the_gathering` STARVES WHERE ENDINGS ARE ATTENDED — so a hold that attends its dead should starve it in its reach. That is the ONE new reader worth asking for, and it is a bestiary term, not an economy one. ⚑ `temple_to_attending` IS ERIK'S OWN EXAMPLE from the Threshold Post. `ward_line` and `sentries` are the Stillwater's Trouble pair — 'barriers, a wall, skeletal undead sentries.' ⚠️ `market` carries `trade: true` and `infirmary`/`longhouse` carry `residents: true`; both are flags for pass three, not readers yet. ⬜ `keep` at defence 3 is the ceiling on purpose — a hold should never be un-raidable, and `minTakeShare: 0.1` already guarantees a raid takes something."
  },
  "regions": [
   {

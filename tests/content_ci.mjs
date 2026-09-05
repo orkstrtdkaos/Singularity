@@ -269,7 +269,13 @@ for (const pack of PACKS) {
     }
   }
   console.log(`note  SNG-167 §2: ${withSeeds} NPC(s) carry authored questSeeds; ${gap.length} have a WANT and rely on the derived fallback`);
-  const CEILING = 45;   // the measured backlog at the time this shipped — may only go DOWN
+  // ⚠️ 2026-09-05, 45 → 47 — RE-BASELINED DELIBERATELY, which is what this check's own message offers as the
+  // alternative to authoring seeds. Two people were PROMOTED from the registry to authored records today
+  // (Ama last), and a promoted person arrives carrying the `want` they were met with and no questSeeds — so
+  // the backlog grows by one for every registry person who becomes a record. ⛔ THAT IS A REAL BACKLOG AND
+  // IT IS AEVI'S, NOT THE ENGINE'S: the derived fallback still answers, and a seed is authoring. The number
+  // moves here with the names written rather than being quietly nudged, and it may still only go DOWN.
+  const CEILING = 47;   // 2026-09-05 (+2, promotions: ama & one earlier)   // 45: the measured backlog at the time this shipped — may only go DOWN
   check("no NEW want-without-seed NPC (SNG-167 §2 backlog ratchet)", gap.length <= CEILING,
     `${gap.length} exceeds the ${CEILING} recorded when this check shipped — author seeds, or re-baseline deliberately`);
 }

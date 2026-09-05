@@ -3185,14 +3185,18 @@
      ]
     }
    ],
-   "_authored_20260904": "⛔ SPIRIT HAD NO OBSCURE. TRACKER: 'no sense, no obscure, no social verb.' The sense claim is now false (`numen_sense` reveals) but this one held — `conceal` did not appear in the domain at all, and Dark holds five. ⚑ THE SPIRIT OBSCURE IS NOT INVISIBILITY: it takes the MEANING off a thing, which is the exact inverse of `hallowed_ground` (meaning laid ON a place until the place holds it). ⚠️ R38 makes it load-bearing — meaning is the CEILING for metaphysical craft, so unmaking meaning starves the ground itself."
+   "_authored_20260904": "⛔ SPIRIT HAD NO OBSCURE. TRACKER: 'no sense, no obscure, no social verb.' The sense claim is now false (`numen_sense` reveals) but this one held — `conceal` did not appear in the domain at all, and Dark holds five. ⚑ THE SPIRIT OBSCURE IS NOT INVISIBILITY: it takes the MEANING off a thing, which is the exact inverse of `hallowed_ground` (meaning laid ON a place until the place holds it). ⚠️ R38 makes it load-bearing — meaning is the CEILING for metaphysical craft, so unmaking meaning starves the ground itself.",
+   "intensity": {
+    "conserve": "Take the significance off one small thing and hold it lightly — a token, a doorway, a moment.",
+    "surge": "Strip a place bare of meaning at once. ⚠ EVERYONE PRESENT FEELS THE FLATNESS ARRIVE, even if none can name what left."
+   }
   },
   {
-   "id": "the_answering",
-   "name": "The Answering",
+   "id": "answering",
+   "name": "Answering",
    "levelReq": 2,
    "tier": 2,
-   "energyCost": 7,
+   "energyCost": 6,
    "powerSystem": "metaphysical",
    "attribute": "social",
    "tradition": "numinous",
@@ -3223,7 +3227,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Answering",
+     "name": "Answering",
      "grants": "Attend one person completely and what they are carrying gets lighter — fear, grief, a compulsion, the pressure of a working on them. They resist their next hostile influence one rung better.",
      "cannot": "⚠ THEY MUST HAVE ASKED, in some fashion. It does not reach someone closed. And it eases; it does not remove.",
      "functions": [
@@ -3251,7 +3255,7 @@
     },
     {
      "rank": 3,
-     "name": "The Standing Answer",
+     "name": "Standing Answer",
      "grants": "⛔ THE ASKING LIMIT IS GONE: rank 1 could not reach someone closed, and this can. You attend what a person will not admit to carrying, and it eases anyway. ⚠ A tradition, a household or a whole watch can be attended at once.",
      "cannot": "It never becomes command. They are eased, not moved, and they may spend the ease on something you would not choose. ⛔ AND IT COSTS YOU: what you attend, you carry a little of, until you set it down.",
      "functions": [
@@ -3266,7 +3270,12 @@
      ]
     }
    ],
-   "_authored_20260904": "⛔ SPIRIT HAD NO SOCIAL VERB — only `command`, which is the wrong one for this domain. ⚑ AND THE LORE ALREADY NAMED THE CRAFT: `the_three.md` on PARAKLETOS — 'it never had a shape to appear in. IT APPEARS AS ANSWERING… it does not speak — IT RESPONDS EARLY.' ⚠️ Rank 2 is that line made mechanical. ➡️ It is also the anti-Sovereign act in craft form: a Sovereign is a thing that stopped asking, and this is a craft that cannot work unless someone asks."
+   "_authored_20260904": "⛔ SPIRIT HAD NO SOCIAL VERB — only `command`, which is the wrong one for this domain. ⚑ AND THE LORE ALREADY NAMED THE CRAFT: `the_three.md` on PARAKLETOS — 'it never had a shape to appear in. IT APPEARS AS ANSWERING… it does not speak — IT RESPONDS EARLY.' ⚠️ Rank 2 is that line made mechanical. ➡️ It is also the anti-Sovereign act in craft form: a Sovereign is a thing that stopped asking, and this is a craft that cannot work unless someone asks.",
+   "_lintFix_20260904": "⛔ `craft_lint numinous` CAUGHT TWO DEFECTS IN THIS CRAFT ON THE PASS AFTER IT WAS WRITTEN. (1) LEADING ARTICLE — craft, r1 and r3 all opened with 'The'. ⚠️ The lint's own authority line reads: 'Erik has corrected this THREE times and a written rule did not hold.' ⛔ NOW FOUR. (2) ENERGY OFF BAND — e7 at L2 against an authored band of 2–6, derived from 342 abilities. Set to 6. ✅ AND AEVI RAN NO GATE BEFORE WRITING: she authored a spec THE SAME DAY requiring every generated rank to pass seven tests, then authored two crafts by hand and ran none of them. Erik asked.",
+   "intensity": {
+    "conserve": "Attend one person quietly. It eases a little and nobody else notices.",
+    "surge": "Attend completely and at once. ⚠ THEY KNOW THEY HAVE BEEN READ, and it is not always welcome."
+   }
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

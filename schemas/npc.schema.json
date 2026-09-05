@@ -1,53 +1,286 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "NPC",
-  "description": "One non-player character. DERIVED from the authored valley/npcs corpus (SNG-BATCH-9 build-step-1) so generate('npc', ctx) can validate its output against the same shape the hand-authored people have. `required` is the load-bearing core every authored single-NPC carries; the fuller set below (wants/knowledge/voiceHints/personality/homeLocation/communityId/reactsToReputation) is what a WELL-FORMED npc should have — the generator is prompted for all of it and generate()'s repair step fills any the model omits from context defaults. The legends registry (npcs/legends.json) is NOT a single NPC and is excluded from this schema.",
-  "type": "object",
-  "required": ["schemaVersion", "id", "name", "role", "spectrum", "fears"],
-  "properties": {
-    "schemaVersion": { "type": "integer" },
-    "id": { "type": "string", "description": "stable slug; for generated NPCs minted via the SNG-019 resolver (resolve-before-mint)" },
-    "name": { "type": "string" },
-    "role": { "type": "string", "description": "one-line who-they-are + what-they-do, in-grain for their locale" },
-    "homeLocation": { "type": "string" },
-    "communityId": { "type": ["string", "null"] },
-    "personality": {
-      "type": "object",
-      "description": "affect dials, each roughly -1..1",
-      "properties": {
-        "warmth": { "type": "number" }, "trust": { "type": "number" },
-        "candor": { "type": "number" }, "patience": { "type": "number" }
-      }
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "NPC",
+ "description": "One non-player character. DERIVED from the authored valley/npcs corpus (SNG-BATCH-9 build-step-1) so generate('npc', ctx) can validate its output against the same shape the hand-authored people have. `required` is the load-bearing core every authored single-NPC carries; the fuller set below (wants/knowledge/voiceHints/personality/homeLocation/communityId/reactsToReputation) is what a WELL-FORMED npc should have — the generator is prompted for all of it and generate()'s repair step fills any the model omits from context defaults. The legends registry (npcs/legends.json) is NOT a single NPC and is excluded from this schema.",
+ "type": "object",
+ "required": [
+  "schemaVersion",
+  "id",
+  "name",
+  "role",
+  "spectrum",
+  "fears"
+ ],
+ "properties": {
+  "schemaVersion": {
+   "type": "integer"
+  },
+  "id": {
+   "type": "string",
+   "description": "stable slug; for generated NPCs minted via the SNG-019 resolver (resolve-before-mint)"
+  },
+  "name": {
+   "type": "string"
+  },
+  "role": {
+   "type": "string",
+   "description": "one-line who-they-are + what-they-do, in-grain for their locale"
+  },
+  "homeLocation": {
+   "type": "string"
+  },
+  "communityId": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "personality": {
+   "type": "object",
+   "description": "affect dials, each roughly -1..1",
+   "properties": {
+    "warmth": {
+     "type": "number"
     },
-    "spectrum": {
-      "type": "object",
-      "description": "disposition fingerprint: axisId -> [-1,1]. Known axes: body_mind, mechanical_spiritual, emotional_logical, concrete_abstract, falsehood_truth, dark_light, space_time, chaos_order, individual_collective, death_life, violence_peace, destruction_creation, tradition_innovation, demonic_angelic. Generated in-grain from the locale's poleIntensity.",
-      "additionalProperties": { "type": "number" }
+    "trust": {
+     "type": "number"
     },
-    "poleIntensity": {
-      "type": "object",
-      "description": "optional single-ended intensities (pole -> 0..1), derivable from spectrum by SNG-022",
-      "additionalProperties": { "type": "number" }
+    "candor": {
+     "type": "number"
     },
-    "voiceHints": { "type": "string", "description": "how they talk + a tell; the taste-carrier for in-character voice" },
-    "knowledge": { "type": "array", "items": { "type": "string" }, "description": "what they know that a player could learn" },
-    "wants": { "type": ["string", "array"], "items": { "type": "string" }, "description": "the active desire that makes them move; a generated NPC gets one at birth (SNG-021 world-tick advances it). A richly-authored legendary NPC (SNG-132) may carry an ARRAY of layered wants." },
-    "fears": { "type": ["string", "array"], "items": { "type": "string" }, "description": "what they fear; a string, or an array of layered fears for a richly-authored NPC" },
-    "reactsToReputation": {
-      "type": ["object", "boolean"],
-      "description": "reputationTag -> how they respond to a character carrying it; or `true` when a legendary NPC (SNG-132) reacts to reputation via its own GM notes rather than a tag map",
-      "additionalProperties": { "type": "string" }
-    },
-    "universalRole": { "type": "string", "description": "loose worldwide role (mediator/warrior/warden/keeper/maker/seeker/healer/...) whose METHOD comes from locale+disposition (universal_roles.json)" },
-    "roleMethod": { "type": "string", "description": "how this locale's grain bends the universal role" },
-    "age": { "type": "integer" },
-    "gender": { "type": "string", "description": "SNG-143: explicit sex/gender — inclusive free string (woman|man|nonbinary|…); read by the portrait seed + narration so it is never inferred at render" },
-    "pronouns": { "type": "string", "description": "SNG-143: she/her, he/him, they/them — what narration uses" },
-    "appearance": { "type": "string" },
-    "disposition": { "type": "string" },
-    "poleSignature": { "type": "object", "description": "SNG-027 social-contest lever profile (movedBy/hardenedBy/immovableBy/patience/tell)" },
-    "note": { "type": "string" },
-    "rating": { "type": "string", "description": "content-rating tag (G/PG/PG-13/R/R+) stamped at generation to the requesting player's ceiling (SNG-BATCH-9 Phase 1 §3); absent on authored core (treated as world-default)" },
-    "isMinor": { "type": "boolean", "description": "true if a child/adolescent. FLOOR: a minor NPC is NEVER eligible for romantic/sexual content at any rating tier for any player (birth-validator, absolute)." }
+    "patience": {
+     "type": "number"
+    }
+   }
+  },
+  "spectrum": {
+   "type": "object",
+   "description": "disposition fingerprint: axisId -> [-1,1]. Known axes: body_mind, mechanical_spiritual, emotional_logical, concrete_abstract, falsehood_truth, dark_light, space_time, chaos_order, individual_collective, death_life, violence_peace, destruction_creation, tradition_innovation, demonic_angelic. Generated in-grain from the locale's poleIntensity.",
+   "additionalProperties": {
+    "type": "number"
+   }
+  },
+  "poleIntensity": {
+   "type": "object",
+   "description": "optional single-ended intensities (pole -> 0..1), derivable from spectrum by SNG-022",
+   "additionalProperties": {
+    "type": "number"
+   }
+  },
+  "voiceHints": {
+   "type": "string",
+   "description": "how they talk + a tell; the taste-carrier for in-character voice"
+  },
+  "knowledge": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "what they know that a player could learn"
+  },
+  "wants": {
+   "type": [
+    "string",
+    "array"
+   ],
+   "items": {
+    "type": "string"
+   },
+   "description": "the active desire that makes them move; a generated NPC gets one at birth (SNG-021 world-tick advances it). A richly-authored legendary NPC (SNG-132) may carry an ARRAY of layered wants."
+  },
+  "fears": {
+   "type": [
+    "string",
+    "array"
+   ],
+   "items": {
+    "type": "string"
+   },
+   "description": "what they fear; a string, or an array of layered fears for a richly-authored NPC"
+  },
+  "reactsToReputation": {
+   "type": [
+    "object",
+    "boolean"
+   ],
+   "description": "reputationTag -> how they respond to a character carrying it; or `true` when a legendary NPC (SNG-132) reacts to reputation via its own GM notes rather than a tag map",
+   "additionalProperties": {
+    "type": "string"
+   }
+  },
+  "universalRole": {
+   "type": "string",
+   "description": "loose worldwide role (mediator/warrior/warden/keeper/maker/seeker/healer/...) whose METHOD comes from locale+disposition (universal_roles.json)"
+  },
+  "roleMethod": {
+   "type": "string",
+   "description": "how this locale's grain bends the universal role"
+  },
+  "age": {
+   "type": "integer"
+  },
+  "gender": {
+   "type": "string",
+   "description": "SNG-143: explicit sex/gender — inclusive free string (woman|man|nonbinary|…); read by the portrait seed + narration so it is never inferred at render"
+  },
+  "pronouns": {
+   "type": "string",
+   "description": "SNG-143: she/her, he/him, they/them — what narration uses"
+  },
+  "appearance": {
+   "type": "string"
+  },
+  "disposition": {
+   "type": "string"
+  },
+  "poleSignature": {
+   "type": "object",
+   "description": "SNG-027 social-contest lever profile (movedBy/hardenedBy/immovableBy/patience/tell)"
+  },
+  "note": {
+   "type": "string"
+  },
+  "rating": {
+   "type": "string",
+   "description": "content-rating tag (G/PG/PG-13/R/R+) stamped at generation to the requesting player's ceiling (SNG-BATCH-9 Phase 1 §3); absent on authored core (treated as world-default)"
+  },
+  "isMinor": {
+   "type": "boolean",
+   "description": "true if a child/adolescent. FLOOR: a minor NPC is NEVER eligible for romantic/sexual content at any rating tier for any player (birth-validator, absolute)."
+  },
+  "level": {
+   "type": "integer",
+   "minimum": 1,
+   "maximum": 100,
+   "description": "⚑ The authored level. A FLOOR, never a ceiling (SPEC_progressive_sheets): growth adds above it and must never prune below it."
+  },
+  "subAttributes": {
+   "type": "object",
+   "description": "strength · agility · reason · insight · presence · rapport · craft · wits. ⚠️ Read by the death save (higher of strength/presence) and by battleSkillsFor."
+  },
+  "abilities": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "abilityId",
+     "level"
+    ],
+    "properties": {
+     "abilityId": {
+      "type": "string"
+     },
+     "level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3
+     },
+     "why": {
+      "type": "string"
+     }
+    }
+   },
+   "description": "⛔ THE SHEET. Crafts by id at an owned rank. R36: a party member fights from this. An authored list WINS over the derived kit and is a floor, not a cap."
+  },
+  "assistTags": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "⛔ Without these `contributionsOf` defaults everyone to HARM — a master smith counts as a striker. Read at band AND party scale."
+  },
+  "domains": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "Which domains they draw from — `kitFor` reads this when growth adds a craft."
+  },
+  "sex": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "enum": [
+    "male",
+    "female",
+    null
+   ],
+   "description": "⛔ R24: set at generation, documented at first materialisation. Gates romance. `null` = undiscovered or genuinely neither."
+  },
+  "romanceEligible": {
+   "type": "boolean",
+   "description": "⚠️ An explicit decision, never an omission. R24: opposite-sex only; a teacher or a minor is false BY AUTHORING."
+  },
+  "physicality": {
+   "type": "string",
+   "description": "⛔ ADULTS ONLY (po/CONTENT_POLICY_physicality.md). How they are in a body — a GM needs this to describe someone in a fight, at a forge, wet from a river."
+  },
+  "intimacyNotes": {
+   "type": "string",
+   "description": "⛔ ADULTS ONLY. What intimacy must NOT resolve; consent in their own voice."
+  },
+  "gear": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "⚠️ PROSE UNTIL THE BEARER RECORD CARRIES IT. The live object is `npcRegistry[id].inventory` (R45c, `ensureBearer`) — this is authoring intent, not state."
+  },
+  "inventory": {
+   "type": "array",
+   "items": {
+    "type": "object"
+   },
+   "description": "⚑ R45c BEARER RECORD — what this person is actually holding. Written by `giveItemTo`/`takeItemFrom`, never authored by hand."
+  },
+  "practice": {
+   "type": "object",
+   "description": "⚑ R45c — `{schemaVersion, uses, coActivations, coUse}`. Feeds item evolution and R39's rank evolution. ⛔ Engine-written."
+  },
+  "closed": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "⬜ Crafts this person will NOT learn, with a reason. ⚠️ For a stated judgement (Veth refuses `calling_back`), NEVER for a gap in what got authored — a data gap is not a personality."
+  },
+  "people": {
+   "type": "array",
+   "description": "Named relationships."
+  },
+  "teaches": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "⚑ R33 `learnedAt`'s other end — crafts they can hand on."
+  },
+  "canStrike": {
+   "type": "boolean",
+   "description": "⚠️ PER-CHARACTER and narrow: 'adds no damage in the fold'. ⛔ Does NOT stop a GM running a scene with them."
+  },
+  "status": {
+   "type": "string"
+  },
+  "statusNote": {
+   "type": "string"
+  },
+  "image": {
+   "type": "string"
+  },
+  "aliases": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "bondType": {
+   "type": "string"
+  },
+  "bondStage": {
+   "type": "string"
   }
+ },
+ "_schemaGap_20260905": "⛔ THE SCHEMA DECLARED 25 PROPERTIES AND KNEW ABOUT NONE OF THE WORK OF THE LAST TWO WEEKS. Added 22: level, subAttributes, abilities, assistTags, domains, sex, romanceEligible, physicality, intimacyNotes, gear, inventory, practice, closed, people, teaches, canStrike, status, statusNote, image, aliases, bondType, bondStage. ⚠️ BOTH AUTHORED SHEETS (Pell, Veth) CARRIED TEN UNDECLARED FIELDS INCLUDING `abilities` — the sheet itself. ⛔ `additionalProperties` is unset, so JSON Schema defaults PERMISSIVE and nothing ever failed: THE VALIDATOR HAS NEVER CHECKED A SINGLE FIELD THAT MATTERS FOR COMBAT. Pell could have carried `abilties: []` and passed. ⬜ DELIBERATELY STILL PERMISSIVE — closing it would red-line 43 existing files at once. ⚠️ The value here is that a typo in `abilityId` or a rank of 5 now FAILS, and that the fields are DOCUMENTED where an author will look. ⚑ ASKED BY ERIK 2026-09-05: 'make sure the sheet schemas are sufficient for all the new updates we just made to holds, etc.' They were not."
 }

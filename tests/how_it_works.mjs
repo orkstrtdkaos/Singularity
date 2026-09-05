@@ -5794,6 +5794,114 @@ console.log("\n── §83 · the setting doc's counts are measured, and its six
     wrongScale.length === 0,
     wrongScale.map(a => `${a.name} is ${a.scale}`).join(" · ") || "all scales agree");
 }
+
+/* ═════ §84 — A CRAFT WITH NO VERBS IS INVISIBLE TO FIVE READERS (2026-09-05) ═════ */
+// ⛔ FOUND WHILE ANSWERING AEVI'S SNG-504 QUESTION, AND IT IS BIGGER THAN THE QUESTION. `functions` is the
+// verb array every family reader resolves through, and EIGHT OF THE NINE BOND GRANTS DO NOT HAVE ONE.
+// ⚠️ MEASURED CONSEQUENCE, not inferred: a party member whose whole kit is those eight reads
+// `["HARM"]` — the stub R36 removed from the CODE yesterday, reintroduced through CONTENT today. Add one
+// verbed craft to the same kit and it reads `["KNOW","RESTORE","HARM"]`.
+//
+// ⚑ AND THE FIELD IS LOAD-BEARING IN FIVE PLACES: `familiesOfAbility` (what a craft engages),
+// `familiesOfKit` (what a person contributes — the party seat), `functionCoverage` (which of the eight
+// families a kit covers), `freeTierOf` (R47's floor needs a contact-plausible VERB, so a verbless craft
+// gets no floor), and the wheel's badge (SNG-504: a verb in no family renders grey; NO verb renders
+// nothing at all). ⛔ Nothing in any suite checked for it.
+console.log("\n── §84 · a craft with no `functions` is invisible to the family readers, and the seat falls back to HARM ──");
+{
+  const { loadContentHeadless: lch84 } = await import("./headless_content.mjs");
+  const C84 = await lch84();
+  const FN84 = await import("../engine/functions.js");
+  const CB84 = await import("../engine/combatants.js");
+  const CAP84 = await import("../engine/capabilities.js");
+  const idx84 = FN84.buildFunctionIndex(C84.functionVocabulary);
+  const all84 = Object.values(C84.abilities);
+  const verbless = all84.filter(a => !Array.isArray(a.functions) || !a.functions.length);
+
+  check("§84: ⚠️ the fixture reads a real corpus and a real index — not vacuous",
+    all84.length > 300 && (idx84.families || []).length === 8, `${all84.length} crafts · ${(idx84.families || []).length} families`);
+
+  // ── the AUTHORED corpus. A craft that belongs to a people and says nothing about what it DOES.
+  // ⚑ A RATCHET: eight today, all of them bond grants, and it may only go DOWN. Aevi authors the verbs.
+  const VERBLESS_AUTHORED = 8;   // 2026-09-05: the bond grants — po/CCODE_20260905_three_answers.md
+  const authoredVerbless = verbless.filter(a => a.tradition);
+  check(`§84: ⛔ ratchet — AUTHORED crafts with no \`functions\` = ${authoredVerbless.length} (baseline ${VERBLESS_AUTHORED}) — may only go DOWN`,
+    authoredVerbless.length <= VERBLESS_AUTHORED,
+    authoredVerbless.map(a => `${a.id}(${a.tradition})`).join(" · ") || "none");
+
+  // ── the MARTIAL FLOOR is a separate, older set and it is named rather than folded in, because one
+  // number over two causes hides both. These nine are merged into the catalogue by the rules loader.
+  const floorVerbless = verbless.filter(a => !a.tradition);
+  check("§84: ⚠️ …and the martial floor's nine are a SEPARATE, older gap — named here so one number never hides two causes",
+    floorVerbless.length <= 9, `${floorVerbless.length}: ${floorVerbless.map(a => a.id).join(", ")}`);
+
+  // ── ⛔ THE COST, MEASURED. This is the check that makes the ratchet mean something.
+  const grantIds = authoredVerbless.map(a => a.id);
+  if (grantIds.length) {
+    const bare = CB84.alliesOf({ id: "me", level: 20 }, {
+      party: [{ id: "g", name: "A Bonded Ally", presence: { level: 14, abilities: grantIds } }],
+      catalog: C84.abilities, fnIndex: idx84,
+    }).filter(x => x.kind === "party")[0];
+    check("§84: ⛔ THE COST — a party member whose whole kit is verbless reads a bare HARM: the stub, reintroduced through content",
+      bare && bare.contributions.join() === "HARM",
+      `${grantIds.length} craft(s) → ${JSON.stringify(bare?.contributions)}`);
+    const verbed = all84.find(a => Array.isArray(a.functions) && a.functions.length >= 2 && a.tradition);
+    const better = CB84.alliesOf({ id: "me", level: 20 }, {
+      party: [{ id: "g", name: "Same, plus one verbed craft", presence: { level: 14, abilities: [...grantIds, verbed.id] } }],
+      catalog: C84.abilities, fnIndex: idx84,
+    }).filter(x => x.kind === "party")[0];
+    check("§84: ⚑ …and ONE verbed craft in the same kit fixes it — which is the proof the defect is the FIELD, not the reader",
+      better && better.contributions.length > 1,
+      `+${verbed.id} → ${JSON.stringify(better?.contributions)}`);
+    check("§84: …and a verbless craft gets no free floor either — R47 derives from a VERB, so eight companion grants have none",
+      CAP84.freeTierOf(C84.abilities[grantIds[0]], { cfg: C84.rules }) === null);
+  }
+
+  // ── AEVI'S SNG-504 QUESTION, ANSWERED AND KEPT ANSWERED. The four social verbs are in INFLUENCE already.
+  check("§84: ⚠️ SNG-504 is LANDED, not pending — the four social verbs are already in INFLUENCE",
+    ["persuade", "bargain", "provoke", "soothe"].every(v => FN84.familyOfVerb(v, idx84) === "INFLUENCE"),
+    ["persuade", "bargain", "provoke", "soothe"].map(v => `${v}→${FN84.familyOfVerb(v, idx84)}`).join(" · "));
+  // ⛔ AND THE THING SHE FEARED, CHECKED DIRECTLY: a craft that HEALS must not read as INFLUENCE alone.
+  const healers = all84.filter(a => (a.functions || []).some(v => ["heal", "mend", "restore"].includes(v)));
+  check("§84: ⛔ …and no craft that HEALS reads as INFLUENCE without RESTORE — a mender stays findable",
+    healers.length > 20 && healers.every(a => FN84.familiesOfAbility(a, idx84).includes("RESTORE")),
+    `${healers.length} healing crafts, all carrying RESTORE`);
+}
+
+/* ═════ §85 — THE GUIDE'S "NOT BUILT" SENTENCE IS A TWO-WAY RATCHET (Aevi's 3a, 2026-09-05) ═════ */
+// ⛔ Aevi asked the right question: "Is §81 shaped to catch a guide that UNDER-promises, or only one that
+// over-promises? A guide that describes a feature the game no longer has and a guide that omits one it
+// gained are the same defect." ⚠️ THE HONEST ANSWER IS NO — §81 checks that a NAMED craft does what its
+// section claims, and nothing about a named craft can notice an absence.
+//
+// ⚑ BUT THE SECTION SHE REWROTE NAMES ITS OWN BOUNDARY — "…are DESIGNED AND NOT BUILT" — and a boundary
+// stated in prose IS a marker, without asking her to write BUILT/PROPOSED tags in a player's document.
+// So: while the engine lacks the phase-2 surface the sentence must STAND; the day `party.js` grows it, the
+// sentence must GO. That is `HOW_IT_WORKS`'s two-way ratchet, in her voice instead of ours.
+console.log("\n── §85 · while phase 2 is unbuilt the guide must say so — and the day it ships, the sentence must go ──");
+{
+  const pg85 = rd("docs/PLAYERS_GUIDE.md"), party85 = rd("engine/party.js");
+  const sec = pg85.slice(pg85.indexOf("## Playing with other people"));
+  const body85 = sec.slice(0, sec.search(/^## /m) > 0 ? sec.slice(1).search(/^## /m) + 1 : undefined);
+  check("§85: ⚠️ the fixture found the section — never vacuous",
+    pg85.includes("## Playing with other people") && body85.length > 200, `${body85.length} chars`);
+
+  // ⚑ THE PHASE-2 SURFACE, named by what it would have to export. None of these exist today.
+  const PHASE2 = ["setLeader", "stateIntent", "lockDeclaration", "resolveRound", "joinFight", "mergeStrike"];
+  const shipped = PHASE2.filter(n => new RegExp(`export (async )?(function|const) ${n}\\b`).test(party85));
+  const saysNotBuilt = /DESIGNED AND NOT BUILT/i.test(body85);
+  check("§85: ⛔ the guide and the engine agree about phase 2 — the sentence stands while the surface is absent, and must GO when it ships",
+    shipped.length === 0 ? saysNotBuilt : !saysNotBuilt,
+    shipped.length
+      ? `⛔ SHIPPED: ${shipped.join(", ")} — the "designed and not built" sentence must be REMOVED and the section rewritten`
+      : `nothing of phase 2 exported yet; the guide says so: ${saysNotBuilt}`);
+
+  // ⚠️ AND WHAT IT DOES DESCRIBE MUST BE TRUE — the over-promise half, for this section.
+  check("§85: …and what it DOES describe is what the engine does — rotating turns, a scene of six, a beat log",
+    /turns rotate/i.test(body85) && /up to six/i.test(body85)
+    && /export function nextTurn/.test(party85) && /party: 6/.test(party85),
+    "`nextTurn` is round-robin and `CAPS.party` is 6");
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

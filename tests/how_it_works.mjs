@@ -5569,6 +5569,157 @@ console.log("\n── §81 · every craft the guide names as a free-floor exampl
     Array.isArray(ff81.functions) && ff81.functions.length >= 8 && Number(ff81.tierAtMost) >= 1,
     `tierAtMost ${ff81.tierAtMost} · ${(ff81.functions || []).length} verbs: ${(ff81.functions || []).join(", ")}`);
 }
+
+/* ═════ §82 — TWO PLAYERS JOIN ONE SCENE, END TO END (Aevi's one ask for tomorrow, 2026-09-05) ═════ */
+// ⛔ Aevi, ruling: "Two characters joining one scene has never happened, and it is the first thing three
+// people at a table will do. GATE THE JOIN ROUND-TRIP AGAINST A FAKE REMOTE BEFORE TOMORROW."
+// ⚑ MEASURED FIRST: no scene file in the repository has ever carried two members, and `openScenes`/
+// `joinScene` had ZERO direct coverage. The concurrency layer was well covered (146a/b/c, 18 checks) and
+// the FLOW THROUGH IT was not — which is the shape of every four-doors failure this project keeps finding.
+//
+// ⚠️ AND IT NEEDED NO PRODUCTION CHANGE. Every GitHub call funnels through one `ghFetch`, which calls the
+// global `fetch`; replacing the global runs `ghGet`, `ghPut`, `fetchRepoJSON`, `pushMergedFile`,
+// `pushSceneWithMerge`, `updateOpenIndex` and `listScenesAt` FOR REAL. No seam, no stub, no second
+// implementation of the thing under test. The fake enforces real sha semantics, so a 409 is a real 409.
+console.log("\n── §82 · A opens a scene · B finds it and JOINS · two writers · a lost response · B's crafts reach A's fight seat ──");
+{
+  const { fakeRemote, settle } = await import("./lib/fake_remote.mjs");
+  const remote82 = fakeRemote();
+  const restore82 = remote82.install();
+  try {
+    const P82 = await import("../engine/party.js");
+    const CB82 = await import("../engine/combatants.js");
+    const FN82 = await import("../engine/functions.js");
+    const { loadContentHeadless: lch82 } = await import("./headless_content.mjs");
+    const C82 = await lch82();
+    const idx82 = FN82.buildFunctionIndex(rj("content/packs/core/rules/function_vocabulary.json").functionVocabulary
+      || rj("content/packs/core/rules/function_vocabulary.json"));
+
+    // ⚠️ TWO REAL PLAYERS, and B is deliberately NOT a striker: `long_watch` is resist/sustain, so if the
+    // join carries his kit he reads as a warder and if it does not he reads as a generic attacker. That one
+    // difference is R36 measured through the whole pipe rather than at the seat.
+    const A82 = { id: "char-A", name: "Silas", playerKey: "pk-A", level: 30, attributes: { physical: 5, mental: 7 },
+      health: 120, maxHealth: 120, abilities: [{ abilityId: "hunters_strike" }], inventory: [{ kind: "weapon" }, { kind: "tool" }] };
+    const B82 = { id: "char-B", name: "Colten", playerKey: "pk-B", level: 12, attributes: { physical: 6 },
+      health: 40, maxHealth: 40, abilities: [{ abilityId: "long_watch" }], inventory: [] };
+
+    // ── 1 · A OPENS A SCENE, and the index learns about it
+    const seed82 = P82.newSharedScene("millbrook", A82, new Date().toISOString().replace(/[:.]/g, "-"));
+    const made82 = await P82.pushSceneWithMerge(seed82.sceneId, (sc) => sc, seed82);
+    await settle();
+    const idxAfter1 = remote82.read(P82.OPEN_INDEX_PATH);
+    check("§82: ⛔ A opens a scene — the FILE lands on the remote and the OPEN INDEX learns about it",
+      !!made82 && remote82.has(P82.scenePath(seed82.sceneId))
+      && idxAfter1?.scenes?.[seed82.sceneId]?.locationId === "millbrook" && idxAfter1.scenes[seed82.sceneId].party === 1,
+      JSON.stringify(idxAfter1?.scenes || {}));
+    check("§82: ⚠️ …and the member carries a PRESENCE, not just a name — the producer runs on the real path",
+      Array.isArray(made82.party) && made82.party[0]?.presence?.level === 30
+      && (made82.party[0].presence.abilities || []).includes("hunters_strike"),
+      JSON.stringify(made82.party[0]?.presence || null).slice(0, 120));
+
+    // ── 2 · B FINDS IT through the index, exactly as the join path does
+    const found82 = await P82.listScenesAt("millbrook");
+    check("§82: ⛔ B FINDS IT — `listScenesAt` reads the index, re-checks the FILE, and returns the open scene",
+      found82.length === 1 && found82[0].sceneId === seed82.sceneId, `${found82.length} scene(s)`);
+    check("§82: …and a location with nothing open returns nothing — not everything",
+      (await P82.listScenesAt("harmonic_heights_terrace")).length === 0);
+
+    // ── 3 · B JOINS. ⛔ THIS HAS NEVER HAPPENED IN THIS REPOSITORY.
+    const two82 = await P82.pushSceneWithMerge(found82[0].sceneId, (sc) => P82.addMember(sc, B82));
+    await settle();
+    const onRemote82 = remote82.read(P82.scenePath(seed82.sceneId));
+    check("§82: ⛔ B JOINS — TWO MEMBERS IN ONE SCENE, on the remote, with both presences",
+      onRemote82.party.length === 2 && onRemote82.party.map(m => m.characterId).join(",") === "char-A,char-B"
+      && onRemote82.party[1].presence?.level === 12 && (onRemote82.party[1].presence.abilities || []).includes("long_watch"),
+      onRemote82.party.map(m => `${m.name}:${m.presence ? "presence" : "⛔ NO PRESENCE"}`).join(" + "));
+    check("§82: …and the index says two — the join path's own hint stays true",
+      remote82.read(P82.OPEN_INDEX_PATH)?.scenes?.[seed82.sceneId]?.party === 2);
+    check("§82: ⚠️ …and joining TWICE changes nothing — `addMember` is idempotent, which the retry loop relies on",
+      P82.addMember(onRemote82, B82).party.length === 2);
+
+    // ── 4 · TWO WRITERS, and a real sha conflict between them
+    const t82 = new Date().toISOString();
+    const conflictsBefore = remote82.state.conflicts;
+    await P82.pushSceneWithMerge(seed82.sceneId, (sc) => P82.mergeBeat(sc, { by: "char-A", at: t82, name: "Silas", label: "strikes" }));
+    await P82.pushSceneWithMerge(seed82.sceneId, (sc) => P82.mergeBeat(sc, { by: "char-B", at: t82, name: "Colten", label: "wards" }));
+    await settle();
+    check("§82: ⛔ TWO WRITERS, TWO BEATS — neither is lost (146a's whole reason, now exercised end to end)",
+      remote82.read(P82.scenePath(seed82.sceneId)).beats.length === 2,
+      remote82.read(P82.scenePath(seed82.sceneId)).beats.map(b => b.by).join(","));
+    await P82.pushSceneWithMerge(seed82.sceneId, (sc) => P82.mergeBeat(sc, { by: "char-A", at: t82, name: "Silas", label: "strikes" }));
+    await settle();
+    check("§82: …and the SAME beat pushed again appears once — `(by, at)` is the key",
+      remote82.read(P82.scenePath(seed82.sceneId)).beats.length === 2);
+
+    // ── 5 · ⛔ THE LOST RESPONSE — the case Aevi ruled on. The PUT SUCCEEDS and the reply dies.
+    const t82b = new Date(Date.now() + 1000).toISOString();
+    remote82.state.dropNextPutResponse = true;
+    await P82.pushSceneWithMerge(seed82.sceneId, (sc) => P82.mergeBeat(sc, { by: "char-B", at: t82b, name: "Colten", label: "holds" }));
+    await settle();
+    const afterLost = remote82.read(P82.scenePath(seed82.sceneId));
+    check("§82: ⛔ A LOST RESPONSE DOES NOT DOUBLE-APPLY — the write landed, the reply died, the retry re-read a remote that already had it",
+      afterLost.beats.filter(b => b.at === t82b).length === 1 && afterLost.beats.length === 3,
+      `${afterLost.beats.length} beats · that one appears ${afterLost.beats.filter(b => b.at === t82b).length}×`);
+    check("§82: ⚑ …and THAT is why a shared counter must be a LEDGER — `hp -= 12` here would have run twice",
+      /b\.by === beat\.by && b\.at === beat\.at/.test(rd("engine/party.js")));
+
+    // ── 5b · ⛔ AND THE DEFECT, KEPT MEASURABLE. Aevi's rule is that any shared mutable number must be a
+    // derived sum over an idempotent ledger. Asserting only that the LEDGER survives proves half of it — so
+    // a BARE COUNTER goes through the SAME dropped response, in a scratch scene, and is watched to break.
+    // ⚠️ A rule with no number under it stops mattering the first time somebody is in a hurry.
+    {
+      const scratch = P82.newSharedScene("ledger-probe", A82, "t0");
+      await P82.pushSceneWithMerge(scratch.sceneId, (sc) => sc, scratch); await settle();
+      await P82.pushSceneWithMerge(scratch.sceneId, (sc) => ({ ...sc, hp: 100 })); await settle();
+      remote82.state.dropNextPutResponse = true;
+      await P82.pushSceneWithMerge(scratch.sceneId, (sc) => ({ ...sc, hp: (sc.hp ?? 100) - 12 }));
+      await settle();
+      const bare = remote82.read(P82.scenePath(scratch.sceneId)).hp;
+      check("§82: ⛔ A BARE COUNTER DOUBLE-APPLIES ON A LOST RESPONSE — 100 − 12 lands as 76, not 88",
+        bare === 76, `hp ${bare} (88 would be correct; 76 is the defect the ruling names)`);
+
+      // …and the ledger shape, through the identical failure, is right.
+      await P82.pushSceneWithMerge(scratch.sceneId, (sc) => ({ ...sc, strikes: [] })); await settle();
+      const at82 = new Date().toISOString();
+      const mergeStrike = (sc, k) => (sc.strikes || []).some(x => x.by === k.by && x.at === k.at)
+        ? sc : { ...sc, strikes: [...(sc.strikes || []), k] };
+      remote82.state.dropNextPutResponse = true;
+      await P82.pushSceneWithMerge(scratch.sceneId, (sc) => mergeStrike(sc, { by: "char-A", at: at82, amount: 12 }));
+      await settle();
+      const rows = remote82.read(P82.scenePath(scratch.sceneId)).strikes || [];
+      check("§82: ⚑ …and THE SAME FAILURE over an idempotent ledger gives 88 — one row, keyed `(by, at)` exactly as the beats are",
+        rows.length === 1 && 100 - rows.reduce((n, x) => n + x.amount, 0) === 88,
+        `${rows.length} row(s) → hp ${100 - rows.reduce((n, x) => n + x.amount, 0)}`);
+    }
+    // ── 6 · B'S CRAFTS REACH A'S FIGHT SEAT — R36 through the whole pipe, not at the seat
+    const seat82 = afterLost.party.filter(m => m.characterId !== A82.id)
+      .map(m => ({ id: m.characterId, characterId: m.characterId, name: m.name, presence: m.presence }));
+    const allies82 = CB82.alliesOf(A82, { party: seat82, catalog: C82.abilities, fnIndex: idx82 }).filter(a => a.kind === "party");
+    check("§82: ⛔ B'S KIT REACHES A'S FIGHT SEAT — a warder joined and a warder is what fights, at his own level and health",
+      allies82.length === 1 && allies82[0].contributions.includes("PROTECT") && !allies82[0].contributions.includes("MARTIAL")
+      && allies82[0].sheet.level === 12 && allies82[0].sheet.maxHealth === 40,
+      allies82.map(a => `${a.name} ${JSON.stringify(a.contributions)} lvl ${a.sheet.level} hp ${a.sheet.maxHealth}`).join(" · "));
+
+    // ── 7 · LEAVING, and the index self-prunes
+    await P82.pushSceneWithMerge(seed82.sceneId, (sc) => P82.removeMember(sc, "char-A"));
+    await settle();
+    check("§82: …one leaving does NOT close a two-party scene, and the index counts down",
+      remote82.read(P82.OPEN_INDEX_PATH)?.scenes?.[seed82.sceneId]?.party === 1
+      && !remote82.read(P82.scenePath(seed82.sceneId)).closedAt);
+    await P82.pushSceneWithMerge(seed82.sceneId, (sc) => P82.removeMember(sc, "char-B"));
+    await settle();
+    check("§82: ⛔ …the LAST member leaving closes the scene and DROPS it from the index — the join path cannot offer a dead scene",
+      !!remote82.read(P82.scenePath(seed82.sceneId)).closedAt
+      && !remote82.read(P82.OPEN_INDEX_PATH)?.scenes?.[seed82.sceneId],
+      JSON.stringify(remote82.read(P82.OPEN_INDEX_PATH)?.scenes || {}));
+
+    // ⚠️ THE FIXTURE'S OWN GROUND: if the transport were never reached, every check above would be testing
+    // nothing and several would still pass. This is the check that says the pipe was real.
+    check("§82: ⚠️ the fixture really drove the transport — not vacuous",
+      remote82.state.gets > 10 && remote82.state.puts > 8,
+      `${remote82.state.gets} GETs · ${remote82.state.puts} PUTs · ${remote82.state.conflicts} real sha conflict(s)`);
+  } finally { restore82(); }
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -149,8 +149,8 @@
   },
   {
    "abilityId": "shieldwork",
-   "level": 2,
-   "why": "⚠️ She fights beside people and always has. Shield-and-strike is the Marcher's ordinary bar-work, and `read_the_fight` already says her father was one."
+   "level": 3,
+   "why": "⚑ r2 → r3. She fights beside people constantly now; shield-and-strike is what she does most."
   },
   {
    "abilityId": "whats_at_hand",
@@ -169,8 +169,28 @@
   },
   {
    "abilityId": "dressed_edge",
+   "level": 3,
+   "why": "⚑ ERIK 2026-09-05: 'Pell is probably learning more marcher or somatic crafts these days.' ⛔ r2 → r3 — the craft that is also a MAKING is the one she would deepen first, and she has been at the forge with Silas."
+  },
+  {
+   "abilityId": "perfect_motion",
    "level": 2,
-   "why": "⚑ make + empower + strike — she PREPARES a weapon and then uses it. ⚠️ The only harm craft in the game that is also a making, and she is the only person on the roster who should have it."
+   "why": "⚑ NEW — somatic. Move, resist, shield, strike: the trained body. ⚠️ She is L27 and carries a spear, a hammer and a shortsword; this is the craft that makes those one thing."
+  },
+  {
+   "abilityId": "ki_thorns",
+   "level": 1,
+   "why": "⚑ NEW — somatic, T3, held at r1. ⚠️ Draw the body's own force out to answer what touches you. Held LOW because it is a reach for her, not a habit."
+  },
+  {
+   "abilityId": "read_field",
+   "level": 2,
+   "why": "⚑ NEW — marcher. Read a fight's shape and lend it: `empower, reveal`. ⚠️ Her father 'called himself a clerk' and was likely a Marcher, and `read_the_fight` is already on her sheet."
+  },
+  {
+   "abilityId": "held_line",
+   "level": 2,
+   "why": "⚑ NEW — marcher. `ward, shield, sustain` — hold a line and do not move off it. ⛔ The mechanical form of what she did in the forge."
   }
  ],
  "_fatherThread": "⚠️ ERIK 2026-09-02, pondering: 'Pell has a father in the story — I was pondering if he was a Marcher, so she might have some Violence hereditary tendencies.' ✅ Mechanically clean: Breaking is adjacent to Body, so `read_the_fight` sits at her ceiling without a choice ever being made. ⛔ AND IT PAYS OFF HER CODEX: '[d3] Pell's father told her he had been a clerk — made his departure from the Plateau sound small and personal.' A man who called himself a clerk and taught his daughter the specification method so she would have the language when she reached the Edge District. ⚠️ A MARCHER HIDING AS A CLERK IS A BETTER ANSWER TO THAT THAN AN ACTUAL CLERK. ⬜ Not ruled — held as the live reading.",
@@ -197,5 +217,6 @@
  "_domainsWas": [
   "Body"
  ],
- "_domainsFix_20260905": "⛔ `domains` IS `{primary, secondary, tertiary}` — R25's standing structure, and what `kitFor` draws from when growth adds a craft. ⚠️ Aevi authored it as an ARRAY on both sheets she wrote; 41 of 43 existing NPCs had it right. ✅ Corrected from the craft lists actually on the sheet."
+ "_domainsFix_20260905": "⛔ `domains` IS `{primary, secondary, tertiary}` — R25's standing structure, and what `kitFor` draws from when growth adds a craft. ⚠️ Aevi authored it as an ARRAY on both sheets she wrote; 41 of 43 existing NPCs had it right. ✅ Corrected from the craft lists actually on the sheet.",
+ "_marcherSomaticPass_20260905": "⛔ ERIK 2026-09-05: 'Pell is probably learning more marcher or somatic crafts these days.' ⚑ SHE IS L27, CARRIES A SPEAR, A HAMMER AND A SHORTSWORD, AND HAS BEEN FIGHTING BESIDE SILAS FOR SIXTY-SEVEN DAYS. ⚠️ Two deepened (`dressed_edge`, `shieldwork` → r3) and four added. ✅ AND IT IS WITHIN HER REACH BY THE MODEL: her domains are mason primary / somatic secondary / marcher tertiary, so `domainAccess` returns primary or adjacent for all of these — ⛔ NOTHING HERE REACHES ACROSS THE CIRCLE, which is what `kitFor` warns against: 'filling a kit from the far side would invent a biography.' ⚠️ STILL NOTHING LETHAL: she is a smith who fights, not a killer."
 }

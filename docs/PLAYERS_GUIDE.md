@@ -203,9 +203,6 @@ did, or **EXTEND** its reach: further, longer, wider, more of them at once.
 higher costs more: **+3 energy for each rank of reach above the first.** A craft that costs 4 at rank 1
 costs 7 at rank 2 and 10 at rank 3.
 
-⚠️ **ONE CRAFT IN THE WHOLE GAME BREAKS THIS**, and it says so plainly: it takes everything you have left
-and leaves you at nothing until a full night's rest.
-
 ⛔ **AND A CRAFT THAT CAN STOP SOMEONE OUTRIGHT COSTS DOUBLE WHEN IT DOES.** Not your whole pool — twice the
 ordinary price, paid only when the thing actually stops. ⚠️ **A resisted attempt costs the ordinary price.**
 
@@ -340,23 +337,18 @@ protected**, and the reverse would make non-combatants the smart thing to hide b
 
 ## Playing with other people
 
-⛔ **OTHER PLAYERS CAN SHARE A SCENE WITH YOU** — same place, same beats, and each of you sees what the
-others did.
+⛔ **OTHER PLAYERS CAN SHARE A SCENE WITH YOU** — same place, same beat log, and each of you sees what the
+others did. The GM's narration for your turn carries the others as present, acting people.
 
-⚠️ **OUTSIDE A FIGHT the party has a LEADER**, and the leader decides where you go and what you try.
-⚑ **Everyone else states what they WANT** — *"I'm keeping an eye on the woman by the fire"* — and the GM
-tells the leader what their people are reaching for before they choose. ⛔ **The leader never chooses
-someone else's ACTION.**
+**Turns rotate.** When it is yours, you act; when it is not, you watch what your friends do and it lands in
+the same record. ⚠️ **A scene holds up to six.**
 
-⛔ **IN A FIGHT THERE IS NO LEADER.** Everyone picks from their own menu, everyone locks in, and then the
-whole round resolves at once. ⚑ **Because every declaration is known before anything happens, a ward
-declared in the same instant actually catches the blow** — which is not true when people take turns.
+**Someone else's fight is something you WITNESS** — you see it happen, in your own narration, from where
+you are standing.
 
-⚠️ **AND UP TO THREE OF YOU ACT FULLY**; the rest are folded, as companions are. **Which three is a real
-choice.**
-
-**If someone has not locked in, the leader chooses:** wait, skip them (they guard), or let the GM play them
-from their own sheet.
+⚠️ **AND THAT IS THE HONEST EDGE OF IT TODAY.** ⛔ **Joining a fight someone else is in, striking the same
+opponent together, and a round where everyone acts at once are DESIGNED AND NOT BUILT.** They are written
+down in full; they are not in your hands yet.
 
 ## Bigger than a party
 
@@ -389,18 +381,25 @@ produce, they cost, and they can be taken.**
 
 **What a hold gives you depends on what is BUILT on it.** A mine yields ore into a store at the hold. A
 temple draws pilgrims. A wall and a watch make it hard to rob. ⚠️ **A bare post with nothing on it yields
-nothing** — and a post that keeps a road safe can be paid for that by the people who use the road.
+nothing** — and a post is the cheapest place to build, because a post costs nothing to keep.
 
-⛔ **A HOLD NEEDS SOMEONE TO KEEP IT.** Left unkept it slips — slowly, and never past *holding* if your name
-still stands over it. **Kept and worked, it climbs.**
+⛔ **A HOLD NEEDS SOMEONE TO KEEP IT.** Left unkept it **slips**, and it can never rise above *holding* —
+nobody is there to make it thrive. **Kept and worked, it climbs.**
+
+⚠️ **AND HOW FAR IT CAN FALL DEPENDS ON YOUR STANDING.** Early on, an unkept hold slides all the way to
+failing. ⚑ **Once your name carries enough weight, it stops at *holding* and goes no further** — the place
+keeps standing because of who is known to hold it, even when nobody is there.
 
 ⚑ **AND YOUR STORE IS THE FIRST THING YOU OWN THAT IS WORTH STEALING AND CANNOT RUN AWAY.** A raid that
 goes unnoticed takes what it came for. ⛔ **A raid that is SEEN is a fight** — and if you win, they take
 nothing and what they carried is yours.
 
-⚠️ **SMALL CLAIMS ARE DIFFERENT.** A room, a shop, a shrine you were given on the road — **those do not
-count against how many places you can attend to.** They are the reward of travelling, and **they can be
-taken from you, and you can go and take them back.**
+⚠️ **SMALL CLAIMS ARE DIFFERENT.** A room, a shop, a shrine you were given on the road.
+
+⛔ **WHAT IS LIMITED IS NOT PLACES — IT IS PEOPLE.** You can only have so many named people running things
+in your name, and one person keeping two holds is still **one** of them. ⚑ **So a small claim with nobody
+keeping it costs you nothing.** They are the reward of travelling, and **they can be taken from you, and you
+can go and take them back.**
 
 ---
 

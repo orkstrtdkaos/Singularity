@@ -5643,7 +5643,8 @@
    "_t7Fix_20260901": "⛔ T7 — SECOND-TURN TEST, applied after Erik: 'make sure the way you wrote these is clearly something a player would WANT to do.' ⚠️ FAILURES FOUND: `hallowed_ground` was passive (stand still) and narrowly conditional (shadow+appetite only) — now it names a CONCRETE effect (one rung lower), widens to four ward types, and the wielder ACTS NORMALLY while it holds. `thin_step`'s precondition was GM-owned and unknowable — the player can now always tell whether the step is there BEFORE spending. `administered_mercy`'s 'it takes the time it takes' was atmosphere, not adjudicable — now it costs a full turn, stated.",
    "_gainAxesFix_20260901": "⛔ CCode's ratchet caught `gainAxes: ['magnitude']` at rank 3 — `magnitude` is NOT one of the nine (range · duration · damage · scope · targets · quality · autonomy · conditions · tempo). ⚠️ CCode correctly REFUSED to guess the replacement — deriving it is authoring, not wiring. ✅ Derived per SNG-468 from the rank's own text: r3 text: 'The order runs at speed — what took an Order-house an hour takes a breath, and what was taken comes back rather than merely closing.' → `tempo` (the full-turn cost lifts) + `quality` (restored, not merely closed). NOT magnitude — the dice do not grow; the SPEED and the KIND of mending change.",
    "touchTier": {
-    "why": "a hand on the wound. The pain steps back a pace and waits."
+    "why": "a hand on the wound. The pain steps back a pace and waits.",
+    "contactOnly": true
    },
    "_touchTierWhy": "⛔ AUTHORED `touchTier` — the flavour form, per `CORRECTION_R47_touch_tier.md`. ⚠️ THE DERIVED DEFAULT IS THE MECHANISM; this is the IMPROVEMENT, never the prerequisite. ⚑ THE STRIPPING IS THE POINT (CCODE-266): one target, at contact, no dice, no ongoing, no area — 'the craft with no power behind it — you have to be there, and it is barely anything.' ⛔ A touch that kept a die would be r1 at a discount."
   },

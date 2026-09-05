@@ -5508,6 +5508,67 @@ console.log("\n── §80 · a human ally's crafts say what they bring · the p
     && (app80.match(/party: seatParty\(\)/g) || []).length >= 5,
     ` ${(app80.match(/party: seatParty\(\)/g) || []).length} seats`);
 }
+
+/* ═════ §81 — THE PLAYER'S GUIDE NAMES CRAFTS, AND THE CRAFT MUST DO WHAT THE SECTION SAYS (2026-09-05) ═════ */
+// ⛔ The guide is the promise a player reads. Its version and its counts were gated; ⚠️ **the CRAFTS IT NAMES
+// AS WORKED EXAMPLES WERE NOT.** "The floor that costs nothing" lists three by name, and one of them —
+// `kept vigil` (`long_watch`) — has NO free floor: its verbs are `resist`/`sustain` and the authored
+// `energy.freeFloor.functions` list carries neither. ⚑ THE ENGINE IS RIGHT AND THE DIAL IS SHORT — R47
+// derives a floor only for an authored verb — so this is a gate on the AGREEMENT between the two, which is
+// the only place the defect could ever have shown.
+// ⚠️ AND IT IS THE CHEAP HALF OF A REAL PROBLEM: a guide section can describe a system that does not exist
+// (party mode's leader, lock and simultaneous round are all phase-2 SPEC), and no gate can catch prose about
+// a system by reading prose. A NAMED CRAFT is checkable, so the named crafts are checked.
+console.log("\n── §81 · every craft the guide names as a free-floor example really has one ──");
+{
+  const CAP81 = await import("../engine/capabilities.js");
+  const { loadContentHeadless: lch81 } = await import("./headless_content.mjs");
+  const C81 = await lch81();
+  const pg81 = rd("docs/PLAYERS_GUIDE.md");
+
+  // the section, by its heading — and if the heading ever moves, this FAILS rather than passing on an empty set.
+  const head81 = pg81.indexOf("## The floor that costs nothing");
+  // past the heading LINE, not past one character — slicing at head81+1 leaves the rest of the heading, and
+  // the "next heading" search then matches at position 0 and yields an EMPTY section that passes nothing.
+  const rest81 = head81 >= 0 ? pg81.slice(head81).replace(/^[^\r\n]*\r?\n/, "") : "";
+  const end81 = rest81.search(/^#{1,2} /m);
+  const sec81 = head81 >= 0 ? rest81.slice(0, end81 >= 0 ? end81 : undefined) : "";
+  check("§81: ⚠️ the fixture FOUND the section and its examples — never vacuous",
+    head81 >= 0 && sec81.length > 200, `heading at ${head81}, ${sec81.length} chars`);
+
+  // a bullet that names a craft in backticks. Resolve by id OR by name, because the guide writes the NAME.
+  const named81 = [...sec81.matchAll(/^\s*[-*]\s+`([^`]+)`/gm)].map(m => m[1].trim());
+  const byName81 = {};
+  for (const a of Object.values(C81.abilities)) byName81[String(a.name || "").toLowerCase()] = a;
+  const resolve81 = (t) => C81.abilities[t] || byName81[t.toLowerCase()]
+    || C81.abilities[t.toLowerCase().replace(/[^a-z0-9]+/g, "_")] || null;
+  // ⚠️ `C81.rules` IS the resolution document, flattened by the loader — `rules.energy.freeFloor`, not
+  // `rules.resolution.energy`. A cfg read at the wrong depth is silently undefined and every craft then
+  // reads as having no floor, which is a fixture that fails everything for one reason: itself.
+  check("§81: ⛔ …and every craft it names RESOLVES — a guide that names a craft the game does not have is worse than silence",
+    named81.length >= 2 && named81.every(t => resolve81(t)),
+    `${named81.length} named: ${named81.map(t => `${t}${resolve81(t) ? "" : " ⛔MISSING"}`).join(" · ")}`);
+
+  // ⛔ THE CHECK THAT MATTERS. The section is about the free floor, so each example must HAVE one.
+  const floors81 = named81.map(t => { const a = resolve81(t); return { t, a, floor: a ? CAP81.freeTierOf(a, { cfg: C81.rules }) : null }; });
+  // ⛔ A RATCHET, NOT A WALL, AND DELIBERATELY. `kept vigil` (`long_watch`) is named in this section with a
+  // floor line of its own — *"a hand on them, and you simply do not leave"* — and it HAS NO FLOOR: its verbs
+  // are `resist`/`sustain` and the authored dial carries neither. ⛑ THE ENGINE IS RIGHT; R47 derives a floor
+  // only for an authored verb. ⚠️ THE REPAIR IS ONE OF THREE THINGS AND ALL THREE ARE AEVI'S — add `sustain`
+  // to the dial, author a `freeTier` on the craft, or drop the example — so this is a count that may only go
+  // DOWN, with the name written, rather than a red that blocks everyone until she reads it.
+  const UNFLOORED = 1;   // 2026-09-05: `kept vigil` — po/CCODE_20260905_guide_check.md
+  const bad81 = floors81.filter(x => !x.floor);
+  check(`§81: ⛔ ratchet — named free-floor examples with NO free floor = ${bad81.length} (baseline ${UNFLOORED}) — may only go DOWN`,
+    floors81.length >= 2 && bad81.length <= UNFLOORED,
+    floors81.map(x => `${x.t}${x.floor ? " ✅" : " ⛔ no floor (verbs " + JSON.stringify(x.a?.functions) + ")"}`).join(" · "));
+
+  // ⚠️ AND THE DIAL IS THE REASON, so the dial is named here — the repair is one entry, and it is Aevi's.
+  const ff81 = C81.rules?.energy?.freeFloor || {};
+  check("§81: …the free-floor dial is CONTENT and the section's verbs are in it — this is where the repair goes",
+    Array.isArray(ff81.functions) && ff81.functions.length >= 8 && Number(ff81.tierAtMost) >= 1,
+    `tierAtMost ${ff81.tierAtMost} · ${(ff81.functions || []).length} verbs: ${(ff81.functions || []).join(", ")}`);
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

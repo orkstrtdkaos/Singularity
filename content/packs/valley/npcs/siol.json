@@ -1,0 +1,112 @@
+{
+ "id": "siol",
+ "name": "Siol",
+ "level": 26,
+ "role": "Traveler and warden of the Pale March — has been on this side before, and does not say when",
+ "people": "elven",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": true,
+ "domains": {
+  "primary": "ashwarden",
+  "secondary": "threnodist",
+  "tertiary": "rootkin"
+ },
+ "spectrum": {
+  "death_life": -0.5,
+  "falsehood_truth": 0.6
+ },
+ "subAttributes": {
+  "strength": 7,
+  "agility": 8,
+  "reason": 8,
+  "insight": 12,
+  "presence": 10,
+  "rapport": 6,
+  "craft": 6,
+  "wits": 8
+ },
+ "knowledge": [
+  "What the deep crafts require, from having required it",
+  "The Pale March's rules, precisely, and which of them are actually enforced",
+  "⚠️ Something about having been on this side before, which she declines to place in time"
+ ],
+ "wants": [
+  "To witness the thing unfolding CORRECTLY",
+  "To see a deep working done truly rather than performed"
+ ],
+ "fears": "⛔ A deep craft treated as casual. ⚠️ And being asked to explain how she knows.",
+ "appearance": "Tall, perhaps forty apparent years, long pale coat, hair braided with a dark cord. The stillness of attention held very quiet — never indifference, and people misread it as such exactly once.",
+ "voiceHints": "Few words, placed exactly. When she goes stiller, that is the judgement and she will not elaborate.",
+ "reactsToReputation": {
+  "true": "stays, and watches properly",
+  "performative": "goes stiller, and it is a judgement",
+  "any": "regards you"
+ },
+ "assistTags": [
+  "deathsense",
+  "watch",
+  "study",
+  "guard",
+  "sense-danger"
+ ],
+ "abilities": [
+  {
+   "abilityId": "deathsense",
+   "level": 3,
+   "why": "⚑ `skillsObserved`: 'accurate qualification of a living entity's nature without over-claiming'"
+  },
+  {
+   "abilityId": "kept_vigil",
+   "level": 3,
+   "why": "⚑ 'sustained regard of a quality that another would have looked away from'"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 3,
+   "why": "⚑ 'plain comparative assessment of two fighters' methods without flattery'"
+  },
+  {
+   "abilityId": "bound_witness",
+   "level": 2,
+   "why": "⚑ she names what she sees and it does not proceed as though unseen"
+  },
+  {
+   "abilityId": "the_attended_end",
+   "level": 2,
+   "why": "a warden of the March"
+  },
+  {
+   "abilityId": "grey_road",
+   "level": 2,
+   "why": "she has walked where the walking is bad"
+  },
+  {
+   "abilityId": "held_line",
+   "level": 2,
+   "why": "warden work"
+  },
+  {
+   "abilityId": "read_the_fight",
+   "level": 2,
+   "why": "⚑ 'plain comparative assessment of two fighters' methods'"
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 1,
+   "why": "quietly, and only when asked"
+  }
+ ],
+ "closed": [
+  "hastened_grey"
+ ],
+ "personality": {
+  "stillness": "total",
+  "judgement": "withheld until it matters, then absolute"
+ },
+ "physicality": "ADULT. Tall and long-lined, unhurried, the pale coat worn to the shape of the road. WHAT CATCHES THE EYE: she does not fidget, ever, and the stillness reads as coldness right up until she is the only one who has not looked away.",
+ "intimacyNotes": "⚠️ SHE WATCHES AND SHE DOES NOT TOUCH, and the first is not a substitute for the second — it is her whole register until she chooses otherwise. ⛔ DO NOT ASK HER WHEN SHE WAS LAST ON THIS SIDE. She will not answer and the asking costs something. ⚠️ Attention is what she gives and what she wants given; ⛔ being performed at is the one thing that ends it. CONSENT: given by stillness rather than words, and a GM must not read that as hesitation — ⚠️ ASK OUT LOUD, and she will answer out loud.",
+ "schemaVersion": 1,
+ "_authoredWhy": "⛔ AUTHORED 2026-09-05 — PROMOTED FROM THE REGISTRY, NOT INVENTED. This person existed only as a GENERATED registry entry with `skillsObserved`; R28: 'generated is promotable to authored.' ⚑ THE CRAFTS ARE DRAWN FROM WHAT THE STORY ALREADY SHOWED — `skillsObserved` is `growthFor`'s own evidence field, and Pell's 'ironsense' turned out to be three crafts when it was read properly. ⚠️ `domains` is `{primary, secondary, tertiary}` — an ARRAY returns band 'open' and lets `kitFor` draw from the whole catalogue. ⛔ Nothing here reaches across the circle."
+}

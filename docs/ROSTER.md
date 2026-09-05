@@ -184,3 +184,36 @@ corrected that rule five times now.** ⚠️ **Run the lint before touching the 
    corpus.
 2. ⛔ **RUN `po/craft_lint.mjs` BEFORE TOUCHING THE SOURCE OF TRUTH.** ⚠️ **It caught four leading articles
    minutes after the first three bond grants were written — Erik has corrected that rule five times.**
+
+---
+
+## ✅ THE INTERIORITY SHEETS — DONE 2026-09-05
+
+**Seven entries in `npc_interiority.json`. Pell and Veth already had sheets; `huginn` is Marrow and is a
+COMPANION.** ⛔ **The other four had no NPC file at all** — they existed only as GENERATED registry entries.
+
+| | level | crafts | |
+|---|---|---|---|
+| **Mara Wells** | 14 | 6 | Millbrook's supply store — ⚑ **the person a village routes through without noticing it does** |
+| **Calvar** | 22 | 8 | pre-Transition filtration, twenty years of solitary watch |
+| **Siol** | 26 | 9 | warden of the Pale March — ⚠️ **has been on this side before and declines to say when** |
+| **Ama** | 18 | 8 | Silas's mother, and the keeper of a stopped work |
+
+⚑ **31 CRAFTS, AND NONE INVENTED — every one drawn from that person's `skillsObserved`**, which is
+`growthFor`'s own evidence field. ⚠️ **R28: *"generated is promotable to authored."*** Mara's *"reading a
+technical expert's reaction as diagnostic data"* became `keen_appraisal` r3; Siol's *"plain comparative
+assessment of two fighters' methods without flattery"* became `true_account` and `read_the_fight`.
+
+⛔ **AND TWO CARRY A `closed` LIST FOR A STATED REASON, WHICH IS WHAT THE FIELD IS FOR:** Siol and Ama both
+refuse `hastened_grey`. ⚠️ **NOT a gap in what got authored — a judgement they hold.**
+
+### ⚠️ THREE THINGS THE PROCESS CAUGHT, AND ALL THREE WERE AEVI'S
+
+| | |
+|---|---|
+| ⛔ **`personality` is FOUR NUMERIC DIALS** (`warmth · trust · candor · patience`) | ⚠️ **She authored prose on all four sheets.** ✅ The schema caught it — **and could not have yesterday**, before the +22 |
+| ⛔ **`the_fixed_point` does not exist** | the craft is `fixed_point`. ⚠️ **She added the definite article that `craft_lint` has been catching on her NAMES all day, this time to an ID** — and an unresolvable id is silently dropped |
+| ✅ **`domains` authored as `{primary, secondary, tertiary}` on all four** | ⚑ **the trap that caught Pell and Veth, avoided because it was written down** |
+
+⬜ **NEXT: the naming guard, `penetration: 3` crafts (R45b), and the tradition narrative pass — 11 of 14
+traditions still unaudited.**

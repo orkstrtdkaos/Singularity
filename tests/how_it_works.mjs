@@ -5115,8 +5115,10 @@ console.log("\n── §76 · the fallbacks defer to the free touch (unauthored 
   // ── the rule is ONE function, and both menus ask it
   const touched = { id: "t1", name: "Touchable", tier: 1, functions: ["strike"], touchTier: true, attribute: "physical" };
   const plain = Object.values(C76.abilities).find(a => (a.functions || []).length && !a.touchTier);
-  check("§76: ⛔ R47 — `offersFreeTouch` is the rule: a kit with an authored touch answers true, a kit without answers false, an empty kit false",
-    CAP76.offersFreeTouch([touched]) === true && CAP76.offersFreeTouch([plain]) === false && CAP76.offersFreeTouch([]) === false);
+  check("§76: ⛔ R47 — `offersFreeFloor` is the rule: a kit whose craft DERIVES a floor answers true, one that cannot answers false, an empty kit false",
+    CAP76.offersFreeFloor([touched], { cfg: rules76.energy }) === true
+    && CAP76.offersFreeFloor([{ id: "x", name: "X", tier: 5, functions: ["summon"] }], { cfg: rules76.energy }) === false
+    && CAP76.offersFreeFloor([], { cfg: rules76.energy }) === false);
   // ── the census, asserted so it cannot rot
   const all76 = Object.values(C76.abilities);
   const withTouch = all76.filter(a => a && a.touchTier);

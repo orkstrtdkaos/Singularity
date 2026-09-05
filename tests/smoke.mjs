@@ -19946,15 +19946,17 @@ await (async () => {
   {
     const CP266 = await import("../engine/capabilities.js");
     const working = { id: "keening", name: "Keening", energyCost: 6, tree: [{ rank: 1, grants: "x" }, { rank: 2, grants: "y" }] };
-    const contact = { id: "necrotic_touch", name: "Necrotic Touch", energyCost: 5, touchTier: true,
+    // ⚠️ R47 (2026-09-05): `contactOnly` is the EXCEPTION now, not the default — the floor strips force, not reach — so a
+    // craft that IS the contact says so. Authored under the DEPRECATED field name on purpose: the alias must keep reading.
+    const contact = { id: "necrotic_touch", name: "Necrotic Touch", energyCost: 5, touchTier: { contactOnly: true },
       tree: [{ rank: 1, grants: "x" }, { rank: 2, grants: "y" }] };
 
     // ⛔ A CRAFT WITHOUT THE FIELD BEHAVES EXACTLY AS TODAY. Aevi's acceptance, and the additive floor this
     // whole project runs on — a new tier that changed every craft would be a rebalance wearing a feature.
     check("CCODE-266: a craft that was always a WORKING gains no touch tier — absent means absent",
-      CP266.touchTierOf(working) === null && CP266.capabilityMenu(working, 2).touch === undefined);
+      CP266.freeTierOf(working) === null && CP266.capabilityMenu(working, 2).touch === undefined);
 
-    const t = CP266.touchTierOf(contact);
+    const t = CP266.freeTierOf(contact);
     check("CCODE-266: a craft that IS contact declares a free floor at zero energy",
       !!t && t.energyCost === 0 && t.contactOnly === true);
     // ⛔ STRIPPED, NOT DISCOUNTED. A touch that kept a die would be r1 at a discount, which is a different

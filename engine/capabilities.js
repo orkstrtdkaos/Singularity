@@ -203,9 +203,6 @@ export function freeTierOf(ability, { cfg = {} } = {}) {
   };
 }
 
-/** The old name, kept so nothing that already calls it breaks. ⚠️ Deprecated: the floor is not a touch. */
-export function touchTierOf(ability, opts = {}) { return freeTierOf(ability, opts); }   // registry:internal
-
 /** ✅ R47 step 2: does this KIT yield a free floor? A sheet that has one is not handed "A plain strike" or "Raise a guard";
  *  a bare sheet still is, which is what Erik kept them for. ⚑ Derived, so it is true for most kits the moment R47 lands —
  *  which is the point of the correction: the opt-in version would have been true for nobody. */
@@ -222,8 +219,6 @@ export function offersFreeFloor(abilities = [], { cfg = {} } = {}) {
  *  written, so today this answers false for every character in the game and the fallbacks stay — which is the safe end of
  *  the ruling, not a defeat of it. The moment a craft authors a touch, its bearer stops being handed a bare strike, with
  *  no further code. ⚠️ Reader before field, and the field is Aevi's. */
-export function offersFreeTouch(abilities = [], opts = {}) { return offersFreeFloor(abilities, opts); }   // registry:internal
-
 export function capabilityMenu(ability, ownedRank = 1, opts = {}) {
   // ⚠️ CCODE-266: the free floor sits BELOW r1 in the menu, so a player meets it before they need it.
   const touch = freeTierOf(ability, opts);

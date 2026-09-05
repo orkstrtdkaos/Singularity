@@ -21,6 +21,8 @@
 
 import { debit, credit } from "./purse.js";        // Q8: upkeep leaves the purse, a sold store enters it · Q5-B: settling pays
 import { regionDemand } from "./economy.js";       // Q8: a unit is worth what THIS Reach wants it for
+import { sheetFor as personSheetFor, tierOf as tierOfLevel } from "./npcsheet.js";   // Q18: the keeper's tier sets the ceiling
+import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
 
 export const HOLDING_KINDS = ["post", "enterprise"];
 
@@ -137,7 +139,7 @@ export function holdingsForGM(character, effects = null, { hereId = null, nameOf
   ensureHoldings(character);
   if (!character.holdings.length) return null;
   return character.holdings.map(h =>
-    `- ${h.name} (${h.kind}, ${h.condition}${h.steward ? `, kept by ${h.steward}` : (effects?.unstewardedCeiling ? ", kept by your name" : ", UNKEPT")})${here.has(h.id) ? " — YOU ARE STANDING IN IT" : ""}${storeTotal(h) > 0 ? ` · store: ${Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${g}`).join(", ")}` : ""}${h.arrears ? ` · in arrears ${h.arrears}` : ""} · ${holdingSentence(h, { nameOf })}`
+    `- ${h.name} (${h.kind}, ${h.condition}${h.steward ? `, kept by ${h.steward}` : (effects?.unstewardedCeiling ? ", kept by your name" : ", UNKEPT")})${here.has(h.id) ? " — YOU ARE STANDING IN IT" : ""}${storeTotal(h) > 0 ? ` · store: ${Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${g}`).join(", ")}` : ""}${h.arrears ? ` · in arrears ${h.arrears}` : ""}${(h.crew || []).length ? ` · hands: ${h.crew.map(id => nameOf ? nameOf(id) : id).join(", ")}` : ""}${(h.garrison || []).length ? ` · guarded by ${h.garrison.map(id => nameOf ? nameOf(id) : id).join(", ")}` : ""}${(h.improvements || []).length ? ` · improved by ${h.improvements.map(i => i.name || i.abilityId).join(", ")}` : ""} · ${holdingSentence(h, { nameOf })}`
     + (h.obligation
       ? (effects?.obligationDischarged
         ? ` — ${h.obligation}: they draw standing from your holding of it, not the reverse`
@@ -404,17 +406,33 @@ export function applyDebtOps(character, ops = [], { day = null, regionId = null 
  * `worthBands[unitWorthBand] × need × scarcity` where it is SOLD, so the same ore is worth more where it is wanted. You
  * sell where the store stands; moving it is the spec's open question and nothing models it yet. Readers before fields:
  * `holding.yields` (a goods kind), `holding.upkeepCost`, `holding.defence`/`garrison` — authored on a record, they win. */
-export function yieldFor(holding, cfg) {
+export function yieldFor(holding, cfg, { density = null } = {}) {
   if (!holding || !cfg) return null;
   const goods = holding.yields || (cfg.defaultYield || {})[holding.kind] || null;
   if (!goods) return null;
-  const units = Number((cfg.yieldByCondition || {})[holding.condition]);
-  return Number.isFinite(units) ? { goods: String(goods), units } : null;
+  const base = Number((cfg.yieldByCondition || {})[holding.condition]);
+  if (!Number.isFinite(base)) return null;
+  // ✅ Q18 (SPEC_hold_store §5): more hands, more capacity; a hold on good ground yields better. Both are content.
+  const g = cfg.growth || {};
+  const hands = Math.min(Number(g.maxHands) || 0, (holding.crew || []).length);
+  const handsMult = 1 + hands * (Number(g.handsYieldBonus) || 0);
+  // ⚠️ null is "unmeasured", not 0 — `Number(null)` is 0 and would scale every hold with no known ground by ×0.75
+  const groundMult = density !== null && density !== undefined && Number.isFinite(Number(density)) && Number.isFinite(Number(g.groundYieldWeight))
+    ? Math.max(0.5, 1 + Number(g.groundYieldWeight) * (Number(density) - 0.5)) : 1;
+  const units = base > 0 ? Math.max(1, Math.round(base * handsMult * groundMult)) : 0;
+  return { goods: String(goods), units, base, hands, handsMult, groundMult: Math.round(groundMult * 100) / 100 };
+}
+/** A hold is guarded by an authored `defence`, or by a garrison — the list of people on watch (`setGarrison`), or the older
+ *  boolean an author may still write. */
+export function isGuarded(holding) {
+  return !!(holding?.defence || (Array.isArray(holding?.garrison) ? holding.garrison.length > 0 : holding?.garrison));
 }
 export function upkeepFor(holding, cfg) {
   if (!holding || !cfg) return 0;
   const u = holding.upkeepCost ?? (cfg.upkeepByKind || {})[holding.kind];
-  return Math.max(0, Number(u) || 0);
+  const guards = Array.isArray(holding.garrison) ? holding.garrison.length : 0;
+  const perGuard = Number(cfg.growth?.garrisonUpkeepPerHand) || 0;
+  return Math.max(0, (Number(u) || 0) + guards * perGuard);
 }
 export function storeTotal(holding) {
   return Object.values(holding?.store || {}).reduce((a, n) => a + (Number(n) || 0), 0);
@@ -436,10 +454,10 @@ export function storeWorth(holding, { economy = null, regionId = null, cfg = nul
   }
   return any ? Math.round(total) : null;
 }
-export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null } = {}) {
+export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null } = {}) {
   if (!holding || !cfg) return null;
   const out = { yielded: null, upkeep: 0, short: 0, raid: null, full: false, justFull: false };
-  const y = yieldFor(holding, cfg);
+  const y = yieldFor(holding, cfg, { density });
   if (y && y.units > 0) {
     holding.store = holding.store && typeof holding.store === "object" ? holding.store : {};
     holding.store[y.goods] = (Number(holding.store[y.goods]) || 0) + y.units;
@@ -458,7 +476,7 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   const raid = cfg.raid || null;
   if (raid && total > 0 && dangerLevel > 0) {
     let p = (Number(raid.base) || 0) * dangerLevel * Math.min(1, total / fullAt);
-    if (holding.defence || holding.garrison) p *= Number.isFinite(Number(raid.defendedMult)) ? Number(raid.defendedMult) : 0.5;
+    if (isGuarded(holding)) p *= Number.isFinite(Number(raid.defendedMult)) ? Number(raid.defendedMult) : 0.5;
     if (rng() < p) {
       const share = Math.max(0, Math.min(1, Number.isFinite(Number(raid.takeShare)) ? Number(raid.takeShare) : 0.5));
       const taken = {};
@@ -480,7 +498,8 @@ export function storeNews(holding, st) {
   if (!holding || !st) return [];
   const where = holding.name || holding.id;
   const lines = [];
-  if (st.raid) lines.push(`Raiders hit ${where} — ${Object.entries(st.raid.taken).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ")} taken.${holding.defence || holding.garrison ? " The watch was not enough." : " Nobody was there to stop them."}`);
+  if (st.raid) lines.push(`Raiders hit ${where} — ${Object.entries(st.raid.taken).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ")} taken.${isGuarded(holding) ? " The watch was not enough." : " Nobody was there to stop them."}`);
+  if (st.grew) lines.push(`${where} has come up to ${holding.condition}${st.grew.keeper ? ` under ${st.grew.keeper}` : ""}.`);
   if (st.short) lines.push(`${where} could not pay its keep this pass (${st.short} owed) — the arrears sit on the place.`);
   if (st.justFull) lines.push(`The store at ${where} is full — ${Object.entries(holding.store || {}).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ")} sit waiting for a road, a buyer, or a thief.`);
   return lines;
@@ -538,4 +557,94 @@ export function reclaimHolding(character, id, { day = null, worldCount = null, n
   character.holdings.push(h);
   queueHoldingEvent(character, `${h.name || h.id} is yours again; ${transferredToName || (nameOf ? nameOf(transferredTo) : transferredTo)} keeps it.`);
   return h;
+}
+
+/* ═══ Q18 — A HOLD GROWS (Erik 2026-09-05: "please build it"; SPEC_hold_store §5) ═══
+ * One-time acts with lasting effects, never a per-tick chore. The dials live in `economy.holdStore.growth`:
+ *   · a KEPT hold climbs one rung every `passesPerClimb` passes (`growHolding`, on the tick), up to the rung its keeper's
+ *     TIER allows (`ceilingByKeeperTier` — a notable keeper holds a place; a regional one can bring it to thriving);
+ *   · a CRAFT the character carries, applied to the place (`improveHolding` — the tab, or `holdingOps improve`), lifts it a
+ *     rung at once, once per craft per hold, when the craft's functions are the kind that shape or mend (`improveFunctions`);
+ *   · HANDS (`setCrew`) raise the yield by `handsYieldBonus` each, to `maxHands`;
+ *   · a GARRISON (`setGarrison`) halves a raid (`raid.defendedMult`) and costs `garrisonUpkeepPerHand` each pass;
+ *   · the GROUND scales an enterprise's yield: 1 + `groundYieldWeight` × (density − 0.5).
+ * What a POST can become is not built — a post holds ground, keeps a garrison and hands, and climbs; it does not produce. */
+export function keeperTierOf(character, holding, { npcs = {}, npcCfg = {}, day = null } = {}) {
+  const id = holding?.steward;
+  if (!id) return null;
+  const rec = character?.npcRegistry?.[id] || npcs?.[id] || null;
+  if (!rec) return null;
+  try { const sheet = personSheetFor(rec, { day, cfg: npcCfg }); return tierOfLevel(sheet.level, { cfg: npcCfg }) || rec.tier || null; }
+  catch { return rec.tier || null; }
+}
+
+export function growHolding(character, holding, { cfg = null, npcs = {}, npcCfg = {}, worldCount = null, day = null, nameOf = null } = {}) {
+  const g = cfg?.growth;
+  if (!holding || !g || !holding.steward) return null;
+  if (keeperGone(character, holding.steward)) return null;
+  const per = Math.max(1, Number(g.passesPerClimb) || 4);
+  holding.growthPasses = (Number(holding.growthPasses) || 0) + 1;
+  const tier = keeperTierOf(character, holding, { npcs, npcCfg, day });
+  const ceiling = (g.ceilingByKeeperTier || {})[tier] || (g.ceilingByKeeperTier || {})._default || "holding";
+  const at = CONDITIONS.indexOf(holding.condition), cap = CONDITIONS.indexOf(ceiling);
+  if (holding.growthPasses < per || at < 0 || cap < 0 || at >= cap) return null;
+  holding.growthPasses = 0;
+  const before = holding.condition;
+  holding.condition = CONDITIONS[at + 1];
+  const keeper = nameOf ? nameOf(holding.steward) : holding.steward;
+  holding.history = [...(holding.history || []), { at: worldCount, from: before, to: holding.condition, note: `grew under ${keeper} (${tier || "a keeper"})` }].slice(-12);
+  return { from: before, to: holding.condition, keeper, tier, ceiling };
+}
+
+export function improveHolding(character, id, abilityId, { catalog = {}, cfg = null, day = null, worldCount = null } = {}) {
+  ensureHoldings(character);
+  const h = character.holdings.find(x => x && x.id === id);
+  if (!h) return { ok: false, why: "no such holding" };
+  const g = cfg?.growth;
+  if (!g) return { ok: false, why: "no growth dials authored" };
+  const owned = (character?.abilities || []).find(a => (a?.abilityId || a) === abilityId);
+  const def = catalog?.[abilityId];
+  if (!owned || !def) return { ok: false, why: "you do not carry that craft" };
+  const fns = new Set((g.improveFunctions || []).map(String));
+  const verbs = Array.isArray(def.functions) ? def.functions : (def.function ? [def.function] : []);
+  if (!verbs.some(v => fns.has(String(v)))) return { ok: false, why: `${def.name || abilityId} does not shape or mend a place — it ${verbs.join("/") || "does something else"}` };
+  if ((h.improvements || []).some(i => i.abilityId === abilityId)) return { ok: false, why: `${def.name || abilityId} has already been applied here — a lasting effect, once` };
+  const before = h.condition;
+  const at = CONDITIONS.indexOf(h.condition);
+  h.improvements = [...(h.improvements || []), { abilityId, name: def.name || abilityId, day }];
+  if (at >= 0 && at < CONDITIONS.length - 1) h.condition = CONDITIONS[at + 1];
+  h.history = [...(h.history || []), { at: worldCount, from: before, to: h.condition, note: `improved with ${def.name || abilityId}` }].slice(-12);
+  queueHoldingEvent(character, `You put ${def.name || abilityId} to ${h.name || h.id}${h.condition !== before ? ` — it comes up to ${h.condition}` : " — it is as good as it gets"}.`);
+  return { ok: true, holding: h, from: before, to: h.condition };
+}
+
+export function setCrew(character, id, npcIds = [], { cfg = null, worldCount = null, nameOf = null } = {}) {
+  ensureHoldings(character);
+  const h = character.holdings.find(x => x && x.id === id);
+  if (!h) return null;
+  const max = Number(cfg?.growth?.maxHands) || 0;
+  const list = [...new Set((npcIds || []).filter(Boolean).filter(n => n !== h.steward))].slice(0, max);
+  const before = (h.crew || []).slice();
+  h.crew = list;
+  if (JSON.stringify(before) !== JSON.stringify(list)) h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `hands: ${list.map(n => nameOf ? nameOf(n) : n).join(", ") || "none"}` }].slice(-12);
+  return h;
+}
+
+export function setGarrison(character, id, npcIds = [], { worldCount = null, nameOf = null } = {}) {
+  ensureHoldings(character);
+  const h = character.holdings.find(x => x && x.id === id);
+  if (!h) return null;
+  const list = [...new Set((npcIds || []).filter(Boolean))];
+  const before = (h.garrison || []).slice();
+  h.garrison = list;
+  if (JSON.stringify(before) !== JSON.stringify(list)) h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `guarded by ${list.map(n => nameOf ? nameOf(n) : n).join(", ") || "nobody"}` }].slice(-12);
+  return h;
+}
+
+/** The ground under a hold, for the yield: the place's substrate density (null when unknown). */
+export function holdingGround(holding, { locations = {}, substrate = null } = {}) {
+  const loc = holding?.locationId ? locations?.[holding.locationId] : null;
+  if (!loc || !substrate) return null;
+  const d = locationDensity(loc, substrate);
+  return Number.isFinite(d) ? d : null;
 }

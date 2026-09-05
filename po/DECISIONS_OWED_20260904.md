@@ -145,6 +145,12 @@ steward, your own craft applied to the place, delegates, a garrison, the ground 
 never a per-tick chore. Which of those raise `condition`, by how much, and what a post (as against an enterprise) can become,
 is Erik's. Nothing built; the tab now says so where a player would look.
 
+✅ **RULED 2026-09-05 (Erik: "excellent. please build it.") · BUILT v1.9.354 `§74`** — the five boosts as one-time acts:
+a kept hold climbs a rung every 4 passes to its keeper's tier ceiling (notable → holding; regional and above → thriving); a
+carried shaping/mending craft applied once lifts a rung; hands +25% yield each (to 3); a garrison halves raids at 3 a pass
+per guard; the ground scales an enterprise's yield. `economy.holdStore.growth` carries the numbers — mine to price, Erik's
+to turn. ⬜ Still open: what a POST can become (it climbs, keeps hands and a watch, produces nothing).
+
 ### Q17 · a post the fiction names but the GM never claims — the Whistling Woman ⛔ found in Silas's save (2026-09-05)
 
 **Measured.** Silas stands at `gen-whistling-woman-post` (a generated place); his chronicle says *"a waypost is coming — named

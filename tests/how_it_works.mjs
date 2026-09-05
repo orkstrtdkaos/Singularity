@@ -772,7 +772,7 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
     // ✅ GAP CLOSED 2026-09-04 (§69): a holding has INCOME (the store yields and sells), a RESOURCE (goods at the hold) and a
     // DEFENCE reader (`defence`/`garrison` halve a raid). Capability is still Q14. Asserted CLOSED so a regression goes red.
     check("§10: ⛔ the holdings-economy gap CLOSED (§69) — a holding has income, a resource and a defence reader; stays closed",
-      /export function tickStore/.test(hold) && /export function sellStore/.test(hold) && /holding\.defence \|\| holding\.garrison/.test(hold));
+      /export function tickStore/.test(hold) && /export function sellStore/.test(hold) && /export function isGuarded/.test(hold) && /isGuarded\(holding\)/.test(hold));
     // ✅ GAP CLOSED 2026-09-04 (§61): release is an operation with a cost trace, news and a record. Asserted CLOSED now,
     // so a regression to the bare filter goes red the way the open gap used to.
     check("§10: ⛔ releaseHolding is no longer a bare filter — the gap closed (§61) and stays closed",
@@ -4875,7 +4875,7 @@ console.log("\n── §72 · a keeper is a delegate, not a companion; the wiped
   }
   const app72 = rd("app.js");
   check("§72: …the Holdings tab shows what is REAL per hold — where (or *It's here*), the keeper, what it produces per pass, the keep, who is at work, and that residents are not modelled",
-    /data-hold-here=/.test(app72) && /yieldFor\(h, cfgS\)/.test(app72) && /produces: \$\{esc\(produces\)\}/.test(app72) && /at work here:/.test(app72) && /who lives here:/.test(app72) && /RULINGS OWED Q14/.test(app72));
+    /data-hold-here=/.test(app72) && /yieldFor\(h, cfgS/.test(app72) && /produces: \$\{esc\(produces\)\}/.test(app72) && /at work here:/.test(app72) && /who lives here:/.test(app72) && /RULINGS OWED Q14/.test(app72));
   check("§72: …and the pin writes the place you stand in onto the hold, with history", /h\.locationId = here\.id;/.test(app72) && /note: `placed at \$\{here\.name \|\| here\.id\}`/.test(app72));
   check("§72: …the body says a keeper is a delegate, and Q17 names the unclaimed post", /keeperGone/.test(rd("docs/HOW_IT_WORKS.md")) && /Q17/.test(rd("docs/RULINGS.md")) && /Whistling Woman/.test(rd("po/DECISIONS_OWED_20260904.md")));
 }
@@ -4919,6 +4919,76 @@ console.log("\n── §73 · appoint a keeper · take a handed-over hold back �
   const writers = [...rd("engine/worldtick.js").matchAll(/advanceHolding\(h, ([^,]+),/g)].map(m => m[1]);
   check("§73: ⚠️ Q18, as the truth it is — the tick is the ONLY writer of a hold's condition and it only stalls or slips; nothing in play raises one",
     writers.length === 1 && /"stall" : "problem"/.test(writers[0]) && !/advanceHolding\(/.test(app73) && /Q18/.test(rd("docs/RULINGS.md")));
+}
+/* ═════ §74 — A HOLD GROWS (Q18, Erik: "please build it", 2026-09-05) ═════ */
+// One-time acts with lasting effects, never a per-tick chore (SPEC_hold_store §1, §5): a kept hold climbs on its own to the
+// ceiling its keeper's tier allows; a carried craft applied lifts a rung once; hands raise the yield; a garrison costs keep and
+// halves raids; the ground scales an enterprise's yield. The dials are content; the GM has the ops; the tab has the buttons.
+console.log("\n── §74 · a hold grows — the keeper's ceiling, a craft applied, hands, a watch, the ground ──");
+{
+  const H74 = await import("../engine/holdings.js");
+  const WT74 = await import("../engine/worldtick.js");
+  const { loadContentHeadless: lch74 } = await import("./headless_content.mjs");
+  const C74 = await lch74();
+  const eco = C74.rules.economy, cfgS = eco.holdStore, g = cfgS.growth, npcCfg = C74.rules.npcStanding;
+  check("§74: ⛔ the growth dials are content — a climb schedule, a ceiling by keeper tier (notable holds, regional reaches thriving), the shaping functions, hands, a watch's keep, the ground's weight",
+    g && g.passesPerClimb === 4 && g.ceilingByKeeperTier?.notable === "holding" && g.ceilingByKeeperTier?.regional === "thriving" && Array.isArray(g.improveFunctions) && g.improveFunctions.includes("mend")
+    && g.handsYieldBonus > 0 && g.maxHands >= 1 && g.garrisonUpkeepPerHand > 0 && Number.isFinite(g.groundYieldWeight));
+  const mk74 = (steward, keeperLevel, extra = {}) => ({ id: "pc", purse: { crystal: 500 }, company: [], holdingOffers: [], worldState: { assignments: {} }, abilities: [],
+    npcRegistry: steward ? { [steward]: { id: steward, name: "Keeper", status: "active", level: keeperLevel } } : {},
+    holdings: [{ id: "mine", kind: "enterprise", name: "the mine", locationId: null, steward, condition: "holding", history: [], lastMovedWorldCount: 0, ...extra }] });
+  // ── the keeper's ceiling, on the schedule
+  const regional = mk74("k", 15), notable = mk74("k", 6), unkept = mk74(null, 0);
+  const passes = (c, n) => { let last = null; for (let i = 0; i < n; i++) last = H74.growHolding(c, c.holdings[0], { cfg: cfgS, npcs: {}, npcCfg, worldCount: 100 + i, nameOf: (x) => "Keeper" }); return last; };
+  const r3 = passes(regional, 3);
+  check("§74: ⛔ a kept hold does not climb before the schedule (3 passes: still holding)", r3 === null && regional.holdings[0].condition === "holding" && regional.holdings[0].growthPasses === 3);
+  const r4 = passes(regional, 1);
+  check("§74: ⛔ …on the 4th pass a REGIONAL keeper brings it up to thriving, with history naming the keeper and the tier",
+    r4 && r4.to === "thriving" && regional.holdings[0].condition === "thriving" && regional.holdings[0].growthPasses === 0 && /grew under Keeper \(regional\)/.test(regional.holdings[0].history.slice(-1)[0]?.note || ""), JSON.stringify(r4));
+  check("§74: …a NOTABLE keeper holds a place and cannot bring it past holding (the ceiling); an unkept hold never climbs (R25 stands)",
+    passes(notable, 8) === null && notable.holdings[0].condition === "holding" && passes(unkept, 8) === null && unkept.holdings[0].condition === "holding");
+  const gone = mk74("k", 15); gone.npcRegistry.k.status = "departed";
+  check("§74: …a departed keeper grows nothing", passes(gone, 4) === null && gone.holdings[0].condition === "holding");
+  // ── the tick runs it and says so
+  const tickC = mk74("k", 15); tickC.holdings[0].condition = "holding";
+  let grewNews = null;
+  for (let i = 0; i < 4; i++) { tickC.holdings[0].lastMovedWorldCount = 0; const out = WT74.advanceHoldings({ character: tickC, content: C74, rng: () => 0.99 }); grewNews = out.news.find(n => /has come up to/.test(n.text)) || grewNews; }
+  check("§74: ⛔ the TICK grows a kept hold on the schedule and the news says so", tickC.holdings[0].condition === "thriving" && !!grewNews && /the mine has come up to thriving under Keeper/.test(grewNews.text), JSON.stringify({ c: tickC.holdings[0].condition, n: grewNews?.text }));
+  // ── a craft applied
+  const mender = Object.values(C74.abilities).find(a => (a.functions || []).some(v => g.improveFunctions.includes(v)));
+  const striker = Object.values(C74.abilities).find(a => (a.functions || []).length && !(a.functions || []).some(v => g.improveFunctions.includes(v)));
+  const c1 = mk74("k", 15); c1.abilities = [{ abilityId: mender.id, level: 1 }, { abilityId: striker.id, level: 1 }]; c1.holdings[0].condition = "strained";
+  const i1 = H74.improveHolding(c1, "mine", mender.id, { catalog: C74.abilities, cfg: cfgS, day: 3, worldCount: 50 });
+  const i2 = H74.improveHolding(c1, "mine", mender.id, { catalog: C74.abilities, cfg: cfgS, day: 4, worldCount: 51 });
+  const i3 = H74.improveHolding(c1, "mine", striker.id, { catalog: C74.abilities, cfg: cfgS, day: 4, worldCount: 51 });
+  const i4 = H74.improveHolding(c1, "mine", "not_a_craft_i_carry", { catalog: C74.abilities, cfg: cfgS });
+  check("§74: ⛔ a carried craft that shapes or mends lifts the hold a rung at once, with history and an event; the same craft twice is refused; a craft that only strikes is refused; a craft not carried is refused",
+    i1.ok && i1.from === "strained" && i1.to === "holding" && c1.holdings[0].improvements.length === 1 && /improved with/.test(c1.holdings[0].history.slice(-1)[0]?.note || "") && H74.takeHoldingEvents(c1).some(t => /comes up to holding/.test(t))
+    && i2.ok === false && /already been applied/.test(i2.why) && i3.ok === false && /does not shape or mend/.test(i3.why) && i4.ok === false, JSON.stringify({ i1, i2: i2.why, i3: i3.why, i4: i4.why, mender: mender.id, striker: striker.id }));
+  // ── hands and the ground in the yield
+  const h2 = { id: "m", kind: "enterprise", condition: "thriving", crew: ["a", "b"] };
+  const y0 = H74.yieldFor({ id: "m", kind: "enterprise", condition: "thriving" }, cfgS), y2 = H74.yieldFor(h2, cfgS), yG = H74.yieldFor({ id: "m", kind: "enterprise", condition: "thriving" }, cfgS, { density: 0.9 }), yT = H74.yieldFor({ id: "m", kind: "enterprise", condition: "thriving" }, cfgS, { density: 0.2 });
+  check("§74: ⛔ hands raise the yield (two hands: 8 → 12) and the ground scales it (dense ×1.2, thin ×0.85); the cap holds",
+    y0.units === 8 && y2.units === 12 && y2.hands === 2 && yG.units === Math.round(8 * 1.2) && yT.units === Math.round(8 * 0.85)
+    && H74.yieldFor({ id: "m", kind: "enterprise", condition: "thriving", crew: ["a", "b", "c", "d", "e"] }, cfgS).hands === g.maxHands, JSON.stringify({ y0, y2, yG, yT }));
+  // ── a watch: keep and the raid
+  const guarded = { id: "m", kind: "enterprise", condition: "thriving", garrison: ["g1", "g2"], store: { raw_material: 40 } };
+  check("§74: ⛔ a garrison costs its keep (14 + 2 × 3) and halves a raid — a raid roll of 0.08 hits an open hold (12%) and misses a guarded one (6%)",
+    H74.upkeepFor(guarded, cfgS) === cfgS.upkeepByKind.enterprise + 2 * g.garrisonUpkeepPerHand
+    && !!H74.tickStore(mk74("k", 15), { id: "m", kind: "enterprise", condition: "thriving", store: { raw_material: 40 } }, { cfg: cfgS, economy: eco, dangerLevel: 4, rng: () => 0.08, day: 1 }).raid
+    && !H74.tickStore(mk74("k", 15), { ...guarded, store: { raw_material: 40 } }, { cfg: cfgS, economy: eco, dangerLevel: 4, rng: () => 0.08, day: 1 }).raid);
+  // ── the setters
+  const c2 = mk74("k", 15);
+  H74.setCrew(c2, "mine", ["k", "a", "b", "c", "d"], { cfg: cfgS, worldCount: 9, nameOf: (x) => x });
+  H74.setGarrison(c2, "mine", ["w"], { worldCount: 10, nameOf: (x) => x });
+  check("§74: …`setCrew` caps at maxHands and never counts the keeper; `setGarrison` sets the watch; both leave history",
+    c2.holdings[0].crew.length === g.maxHands && !c2.holdings[0].crew.includes("k") && c2.holdings[0].garrison[0] === "w" && c2.holdings[0].history.some(x => /hands:/.test(x.note)) && c2.holdings[0].history.some(x => /guarded by w/.test(x.note)));
+  // ── the ops and the tab
+  const gm74 = rd("engine/gm.js"), app74 = rd("app.js");
+  check("§74: …the GM has `improve` / `crew` / `garrison` and the app applies them; the tab has *Apply a craft* / *Add hands* / *Post a guard* and says how the hold grows",
+    /claim\|steward\|release\|transfer\|sell\|improve\|crew\|garrison/.test(gm74) && /kind === "improve"/.test(app74) && /kind === "crew"/.test(app74) && /kind === "garrison"/.test(app74)
+    && /data-hold-improve=/.test(app74) && /data-hold-crew=/.test(app74) && /data-hold-guard=/.test(app74) && /grows: /.test(app74) && /improveHolding\(character, id, sel\.value/.test(app74));
+  check("§74: …the body and the index say so", /growHolding/.test(rd("docs/HOW_IT_WORKS.md")) && /~~\*\*Q18\*\*~~/.test(rd("docs/RULINGS.md")));
 }
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));

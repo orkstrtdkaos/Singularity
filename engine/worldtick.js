@@ -15,7 +15,7 @@ import { advanceSeeking } from "./seeking.js"; // CCODE-222: a reason for the en
 import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
-import { advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts } from "./holdings.js";   // SNG-358: holdings ride the same world-gated pass
+import { advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround } from "./holdings.js";   // SNG-358: holdings ride the same world-gated pass
 import { commitGrowth } from "./npcsheet.js";   // ✅ R37: growth writes, on the tick
 import { spreadDeeds } from "./reputation.js";
 import { titleFor } from "./titles.js";   // SNG-287: a name from the material, not from a menu   // SNG-281: news travels, and that is a promotion source
@@ -445,8 +445,13 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     // ✅ Q8 (SPEC_hold_store): the store runs itself on the tick — yield by condition, upkeep from the purse, a full
     // store a target. Needs the economy dials and the place; a caller without content sees the tick it saw before.
     const loc = content?.locations?.[h.locationId] || null;
+    // ✅ Q18: a KEPT hold climbs on its own, one rung per passesPerClimb, to the ceiling its keeper's tier allows.
+    const grew = growHolding(character, h, { cfg: content?.rules?.economy?.holdStore || null, npcs: content?.npcs || {}, npcCfg: content?.rules?.npcStanding || {},
+      worldCount: count, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), nameOf: (id) => character?.npcRegistry?.[id]?.name || content?.npcs?.[id]?.name || id });
     const st = tickStore(character, h, { cfg: content?.rules?.economy?.holdStore || null, economy: content?.rules?.economy || null,
-      regionId: loc?.regionId || null, dangerLevel: Number(loc?.dangerLevel) || 0, rng, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })() });
+      regionId: loc?.regionId || null, dangerLevel: Number(loc?.dangerLevel) || 0, rng, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
+      density: holdingGround(h, { locations: content?.locations || {}, substrate: content?.substrateModel || null }) });
+    if (st && grew) st.grew = grew;
     for (const t of storeNews(h, st)) news.push(t);
     moved++;
   }

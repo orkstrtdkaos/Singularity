@@ -1,6 +1,6 @@
 # BALANCE — the dials, what they actually do, and how to turn one without lying to yourself
 
-**CCode · started 2026-08-30 · v1.9.353**
+**CCode · started 2026-08-30 · v1.9.354**
 
 > Erik: *"we need to build toward balance and use the dials."*
 
@@ -63,6 +63,8 @@ What balance means here is narrower and testable:
 | `meaning.*` (base, tags, tier, community, perPerson, presentCap, ceilingFloor) | `the_substrate` | 0.1 · sacred 0.35 / locus 0.2 / cult 0.15 / home 0.1 · settlement 0.15 / region 0.1 / site 0.05 · 0.1 · 0.04 (cap 0.2) · **0.35** | R38 — crude on purpose; Choirheight 0.75, a fringe 0.20. `ceilingFloor` is what a meaningless place still allows a metaphysical craft |
 | `holdStore.yieldByCondition` / `upkeepByKind` | `economy` | **8 / 4 / 2 / 0** · **enterprise 14, post 0** | Q8 — at ordinary demand: +18 / +2 / −6 / −14 per pass (a unit = `useful` 4 × need × scarcity where sold) |
 | `holdStore.fullAt` / `raid.base` / `takeShare` / `defendedMult` | `economy` | **40 / 0.03 / 0.5 / 0.5** | a full store at danger 4: ~12% raided per pass, ~6% with a garrison |
+| `holdStore.growth.passesPerClimb` / `ceilingByKeeperTier` | `economy` | **4** · notable → holding, regional+ → thriving | Q18 — a kept hold climbs a rung every 4 passes (12 days) to its keeper's ceiling |
+| `holdStore.growth.handsYieldBonus` / `maxHands` / `garrisonUpkeepPerHand` / `groundYieldWeight` | `economy` | **0.25 / 3 / 3 / 0.5** | hands +25% each; a guard costs 3 a pass and halves raids; ground ×(1 + 0.5 × (density − 0.5)) |
 | `debts.escalatingTags` / `escalateAfterDays` / `maxEscalation` | `economy` | **[debtor] / 30 / 2** | Q5-B — only a holder who reacts to debtors escalates; 3 (bounty) and 4 (hit squad) not built |
 | `crit.*` · `baseChance.*` · `energy.*` | `resolution` | — | the roll itself, and what a turn costs |
 

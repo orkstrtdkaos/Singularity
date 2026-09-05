@@ -154,3 +154,16 @@ yield is the steep term.
 5. **How steep:** 8 / 4 / 2 / 0 against 14, above. Thriving is 2× holding in yield and ~9× in net.
 6. **Release / transfer:** release FORFEITS the store (`storeForfeited` on the former record — the loss is a fact); transfer
    CARRIES it with the place (`storeCarried`). ⚠️ Arrears go with the place on transfer too.
+
+---
+
+## ✅ §5 BUILT — 2026-09-05 (Erik: "please build it") · v1.9.354 · `§74`
+
+Each boost is a one-time act with a lasting effect, as §1 demands: **a better steward** — a kept hold climbs one rung every
+`passesPerClimb` (4) passes, to the ceiling the keeper's TIER allows (`ceilingByKeeperTier`: notable holds a place, regional
+and above can bring it to thriving; unkept never climbs — R25 stands); **your own craft** — `improveHolding`: a carried craft
+whose functions shape or mend (make · mend · restore · transform · sustain · empower) lifts the hold a rung at once, once per
+craft per hold; **delegates** — `setCrew`: up to 3 extra hands, +25% yield each; **defence** — `setGarrison`: a watch halves
+a raid (`raid.defendedMult`) and costs 3 crystal a pass per guard; **the ground** — an enterprise's yield × (1 + ½ × (density
+− ½)). The GM has `holdingOps improve / crew / garrison`; the tab has *Apply a craft* / *Add hands* / *Post a guard* and says
+how the hold grows. ⬜ What a POST can become is not built. ⬜ §6 Q2 (goods to market) and Q4 (a raid as a party) still open.

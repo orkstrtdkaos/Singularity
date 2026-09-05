@@ -1,6 +1,6 @@
 # SPEC — NPC growth (REWRITTEN 2026-09-02 against the real premise)
 
-**Author:** Aevi (PO) · **Status:** `spec_ready` — supersedes the 2026-09-02 first draft entirely
+**Author:** Aevi (PO) · **Status:** `built` v1.9.348 — R37 (was `spec_ready` — marked 2026-09-04; `§69`) — supersedes the 2026-09-02 first draft entirely
 **Unblocks:** CCode's step 5, the last of the sheet-architecture build
 
 ⛔ **THE FIRST DRAFT'S PREMISE WAS FALSE AND IS WITHDRAWN.** It claimed `sheetFor` was live via `worldtick`

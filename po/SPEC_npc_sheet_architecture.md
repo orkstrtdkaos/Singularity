@@ -1,6 +1,6 @@
 # SPEC — One sheet architecture: person-keyed primary, threat-keyed fast path
 
-**Author:** Aevi (PO) · **Date:** 2026-09-02 · **Status:** `spec_ready` — ROUND 2 requested
+**Author:** Aevi (PO) · **Date:** 2026-09-02 · **Status:** `built` v1.9.345 — R30–R32 (was `spec_ready` — marked 2026-09-04) — ROUND 2 requested
 **Blocks:** `SPEC_npc_growth.md` (CCode: *"one decision is yours and it blocks that build"*)
 **Origin:** Erik — NPCs need sheets at mint; unit/legion/army sheets derive from them.
 

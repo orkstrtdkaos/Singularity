@@ -39,7 +39,7 @@ file is replaced.**
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **94** | a play-path file names it outside a comment |
+| ✅ **READ** | **95** | a play-path file names it outside a comment |
 | ⛔ **DARK** | **15** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **3** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
@@ -256,7 +256,8 @@ its own config. Take the object the caller takes.**
 | `battleRound(...)`'s `playerSheet` | carries `level`, `health`, `maxHealth`, `soak` beside attributes/energy — the wielder term and the defender's soak read them | attributes and energy only |
 | a **pressure tick** (`pressureEvent`) | `{ side, healthLoss, energyLoss, pressure, label, applied? }` — both sides lose BOTH currencies (R34a); the OPPONENT's health loss is applied in-round (`applied: { health }`), the PLAYER's is the caller's (`deltas.health`); `state.breakAt = { opponent, player }` is `ceil(level × breakAtLevelFraction)` of that side, a kind's own flat `breakAtPressure` winning | an opponent health loss computed, reported, and written to nobody |
 | the **death save** (`deathSave`, also on `damage.deathSave`) | `{ by, rung, on, saveOn, saveValue, caster, save, mods[], killMargin, kill, held, cost, why }` — `by` is the caster's side, `on` the target's; `cost` is the craft's `mechanic.killCost` on a kill and `"standard"` on a hold; a kill sets `damage.slain` and `damage.amount` = the target's whole remaining pool; the wrapper returns `deathSave` and `sealed` | a lethal rung that moved no number |
-| `character.craftSealedUntilRest` | set by the app when a kill's `killCost.sealedUntilRest` fires on the player; rides into the round as `state.playerSealed` (crafts fall back as spent); `rest("sleep")` deletes it, a breather does not | — |
+| `mechanic.killCost` | `{ energyMultiplier }` (the Cut Thread: 2 — a kill costs twice the standard cost) or `{ energy: "all" \| n, sealedUntilRest }`; paid only on a kill; the receipt's `deathSave.cost` carries `paid` and `standard` | a bound that was prose |
+| `character.craftSealedUntilRest` | set by the app when a kill's `killCost.sealedUntilRest` fires on the player (no craft authors it today; the reader stays); rides into the round as `state.playerSealed` (crafts fall back as spent); `rest("sleep")` deletes it, a breather does not | — |
 | a **debt** (`worldState.debts[holderId]`) | `{ kind, amount, currency (never coin), reason, sinceDay, heldBy (npcId), communityId, holdingId, escalation 0–2, lastMovedDay, history[] }` — written by `releaseHolding` (held by the steward) and `debtOps record`; `advanceDebts` escalates only when the holder's `reactsToReputation` carries an `escalatingTags` key; `settle` debits the purse, `forgive` clears, a dead/departed holder clears | a standing hit nobody could pay off |
 | the **hold store** (`holding.store`) | `{ goods: units }` — `tickStore` adds `yieldByCondition[condition]` of `holding.yields ?? defaultYield[kind]` and debits `upkeepByKind[kind]` crystal (`arrears` when short); a raid (`raid.base × dangerLevel × fill`, halved by `defence`/`garrison`) takes `takeShare`; `sellStore` credits `units × worthBands[unitWorthBand] × need × scarcity` at the Reach and refuses away from the hold; release → `storeForfeited`, transfer → `storeCarried` | a yield that went to the purse and could not be stolen |
 | the **ground card** (`groundCardFor`) | now also `factor`, `side` (`full · starved · crowded · floored · meaningless`), and for a source in `meaning.appliesTo`: `meaning`, `ceiling`, `meaningBound`; takes `carried` and `present` — `substrateForAction` IS this card plus attribution | a card with one arithmetic and a roll with another |
@@ -632,6 +633,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `delta` | 512 | `rankDeltas`×512 | ✅ READ | `arceffects.js`, `companions.js`, `economy.js` |
 | `from` | 512 | `rankDeltas`×512 | ✅ READ | `affiliation.js`, `art.js`, `assignments.js` |
 | `kind` | 490 | `rankDeltas`×490 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
+| `powerSystem` | 423 | `root`×421 `tree`×2 | ✅ READ | `art.js`, `backfill.js`, `braids.js` |
 | `id` | 421 | `root`×421 | ✅ READ | `affinities.js`, `arceffects.js`, `art.js` |
 | `tier` | 421 | `root`×421 | ✅ READ | `backfill.js`, `borncontract.js`, `braids.js` |
 | `axes` | 421 | `root`×421 | ✅ READ | `affinities.js`, `craftmechanics.js`, `encounters.js` |
@@ -640,7 +642,6 @@ contribute to authored dice without recreating the double-scaling bug.
 | `description` | 421 | `root`×421 | ✅ READ | `affiliation.js`, `art.js`, `authormode.js` |
 | `notFor` | 421 | `root`×421 | ✅ READ | `braids.js`, `entityDetail.js`, `generate.js` |
 | `tradition` | 421 | `root`×421 | ✅ READ | `arceffects.js`, `art.js`, `braids.js` |
-| `powerSystem` | 421 | `root`×421 | ✅ READ | `art.js`, `backfill.js`, `braids.js` |
 | `operativeAxis` | 421 | `root`×421 | ⚠️ COLLISION | only as `cfg.operativeAxis` |
 | `intensity` | 421 | `root`×421 | ✅ READ | `canon.js`, `craftmechanics.js`, `death.js` |
 | `tree` | 421 | `root`×421 | ✅ READ | `backfill.js`, `braids.js`, `capabilities.js` |
@@ -660,7 +661,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `scope` | 147 | `mechanic`×147 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `app.js` |
 | `targets` | 146 | `mechanic`×146 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `reconcile.js` |
 | `gated` | 110 | `root`×110 | ✅ READ | `borncontract.js`, `generate.js`, `gm_registry.js` |
-| `damageType` | 107 | `mechanic`×107 | ✅ READ | `damagetypes.js`, `gm.js`, `skill_battle.js` |
+| `damageType` | 107 | `mechanic`×107 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
 | `dice` | 105 | `mechanic`×105 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
 | `crit` | 93 | `mechanic`×93 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
 | `range` | 81 | `mechanic`×81 | ✅ READ | `capabilities.js`, `craftmechanics.js` |
@@ -708,6 +709,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `interceptCondition` | 3 | `tree`×3 | ✅ READ | `intercept.js`, `app.js` |
 | `opensAccess` | 2 | `tree`×2 | ✅ READ | `progression.js` |
 | `downtime` | 2 | `root`×2 | ⚠️ CI-ONLY | _1 test/script only_ |
+| `ongoing` | 2 | `mechanic`×2 | ✅ READ | `craftmechanics.js`, `gm.js`, `gm_registry.js` |
 | `pierce` | 2 | `tree`×1 `mechanic`×1 | ✅ READ | `capabilities.js`, `skill_battle.js` |
 | `innatePrecursor` | 2 | `root`×2 | ✅ READ | `progression.js`, `app.js` |
 | `taughtBy` | 1 | `root`×1 | ✅ READ | `companions.js`, `gm.js`, `progression.js` |

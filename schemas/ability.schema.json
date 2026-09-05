@@ -111,7 +111,21 @@
           "additionalProperties": false,
           "properties": {
             "energy": { "oneOf": [ { "const": "all" }, { "type": "number", "minimum": 0 } ] },
-            "sealedUntilRest": { "type": "boolean" }
+            "sealedUntilRest": { "type": "boolean" },
+            "energyMultiplier": { "type": "number", "minimum": 1, "description": "Erik 2026-09-04: a kill costs this × the craft's standard energy cost (the Cut Thread: 2 — 'DOUBLE, not whole-pool')." }
+          }
+        },
+        "ongoing": {
+          "description": "Damage that resolves over rounds rather than on the hit (slow_cup, stopped_breath, 2026-09-04). Read by ongoingHarmOf: magnitude = the per-round dice's mean, type = damageType, endsOn carried.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "perRound": { "type": "object" },
+            "damageType": { "type": "string" },
+            "endsOn": { "type": "string" },
+            "magnitude": { "type": "number" },
+            "id": { "type": "string" },
+            "note": { "type": "string" }
           }
         },
         "crit": {
@@ -283,6 +297,10 @@
         "properties": {
           "rank": {
             "type": "number"
+          },
+          "powerSystem": {
+            "type": "string",
+            "description": "SPEC_body_source §4 (2026-09-04): the source THIS RANK draws on (band vocabulary); craftSource reads the owned rank's entry first, then the school, then the tradition."
           },
           "name": {
             "type": "string"

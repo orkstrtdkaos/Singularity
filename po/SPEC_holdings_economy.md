@@ -1,6 +1,6 @@
 # SPEC — the holdings economy: what a hold costs, what it yields, who it pays
 
-**Author:** Aevi (PO) · **2026-09-02** · **Status:** `spec_ready` — ⬜ **CCode ROUND 2**
+**Author:** Aevi (PO) · **2026-09-02** · **Status:** `built` v1.9.348 — the smallest version is the hold store (was `spec_ready` — marked 2026-09-04; `§69`) — ⬜ **CCode ROUND 2**
 > Erik: *"we need to put the economy and monetary assets into the building and holds system — places and
 > people under your control/command take resources. Where do you get resources to do the building, how much
 > do they cost. **Silas built a mine — that's one source.**"*

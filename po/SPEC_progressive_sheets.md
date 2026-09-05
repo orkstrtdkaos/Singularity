@@ -1,6 +1,6 @@
 # SPEC — sheets that fill themselves in through play
 
-**Author:** Aevi (PO) · **2026-09-02** · **Status:** `spec_ready` — ⬜ **CCode ROUND 2**
+**Author:** Aevi (PO) · **2026-09-02** · **Status:** `built` v1.9.343 (was `spec_ready` — marked 2026-09-04; `§59`) — ⬜ **CCode ROUND 2**
 > Erik: *"On the sheets — they progressively get more fully populated throughout the game. We need to make
 > sure the generative engine is capable of doing that. That way we write a few key ones and the engine is
 > able to fill in the rest when needed through play."*

@@ -1,6 +1,6 @@
 # SPEC — debts, grievances, and how a place receives you
 
-**Author:** Aevi (PO) · **2026-09-04** · **Status:** `spec_ready` — ⬜ **CCode ROUND 2**
+**Author:** Aevi (PO) · **2026-09-04** · **Status:** `built` v1.9.348 (was `spec_ready` — marked 2026-09-04; `§69`) — ⬜ **CCode ROUND 2**
 **Answers:** `DECISIONS_OWED_20260904.md` **Q5 — Erik rules OPTION B, a payable debt record.**
 > Erik: *"Your standing, obligation, bonds, reputation etc. are and can be tied to and influence how areas
 > receive you. If you burn bridges with some places they might put out a bounty on you, or send hit squads

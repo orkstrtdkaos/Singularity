@@ -1,6 +1,6 @@
 # SPEC — the hold store: it runs itself, you boost it, and it can be robbed
 
-**Author:** Aevi (PO) · **2026-09-04** · **Status:** `spec_ready` — ⬜ **CCode ROUND 2**
+**Author:** Aevi (PO) · **2026-09-04** · **Status:** `built` v1.9.348 (was `spec_ready` — marked 2026-09-04; `§69`) — ⬜ **CCode ROUND 2**
 **Answers:** `DECISIONS_OWED_20260904.md` **Q8**, and Erik's follow-on constraints.
 **subject:** holdings-economy
 

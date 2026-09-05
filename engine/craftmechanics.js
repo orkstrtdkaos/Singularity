@@ -621,6 +621,18 @@ export function antisoakLanded(hit, soak = 0, antisoak = 0) {
  *
  *  Returns `{ id, type, magnitude }` or null. */
 export function ongoingHarmOf(ability, rank = 1) {
+  // ✅ 2026-09-04: Aevi authors `mechanic.ongoing` — { perRound: {n, d, plus}, damageType, endsOn } — for damage that resolves over
+  // rounds (slow_cup, stopped_breath: "an ATTRITION kill, not a landed one"). It is the same thing this reader already answers
+  // for, in a richer shape: magnitude from the per-round dice, the type from damageType, and the end condition carried.
+  const og = authoredBlock(ability, "ongoing", rank);
+  const fromOngoing = og && typeof og === "object" ? (() => {
+    const pr = og.perRound || {};
+    const mean = Math.round((num(pr.n, 1) * (num(pr.d, 6) + 1)) / 2 + num(pr.plus, 0));
+    return { id: og.id || ability?.id || "ongoing", type: og.damageType || og.type || null, magnitude: Math.max(0, num(og.magnitude, 0) || mean), endsOn: og.endsOn || null };
+  })() : null;
+  // ⚠️ THE NEWER SHAPE WINS. slow_cup carries an older `ongoingHarm` beside the 09-04 `ongoing`; the one Aevi authored last is
+  // the intent, and reading the old one first would report 7 corrosive with no end where she wrote 1d6 until treated.
+  if (fromOngoing) return fromOngoing;
   const oh = authoredBlock(ability, "ongoingHarm", rank);
   if (!oh) return null;
   const m = authoredBlock(ability, "magnitude", rank);

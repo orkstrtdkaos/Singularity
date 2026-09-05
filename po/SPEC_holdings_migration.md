@@ -1,6 +1,6 @@
 # SPEC — Bring existing holdings into the holdings system
 
-**Author:** Aevi (PO) · **Date:** 2026-09-02 · **Status:** `spec_ready` — ROUND 2 requested
+**Author:** Aevi (PO) · **Date:** 2026-09-02 · **Status:** `built` v1.9.345 — the offers exist; an empty array is unanswered offers (was `spec_ready` — marked 2026-09-04) — ROUND 2 requested
 **Origin:** Erik — *"Let's make sure we have a spec for CCode to bring the current holdings into the
 system properly."*
 **Supersedes the framing of:** the SNG-358 §0 finding, which Aevi described as *"the post leaves state when

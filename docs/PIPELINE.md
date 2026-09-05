@@ -558,3 +558,17 @@ CCode documents what it DOES  →  Aevi fills in what it IS  →  the guide tell
 ```
 
 ⛔ **The last arrow is the one that has been missing, and `PLAYERS_GUIDE.md` is it.**
+
+## Rule 5 — a spec's status is a claim the suite reads (2026-09-04, Aevi's ask)
+
+A ruling that never reached the body was invisible; a spec that never gets marked built is the same defect the other way —
+**the record says work is owed when it isn't.** Eight of the named specs said `spec_ready` and were shipped. So `§70` reads
+every `po/SPEC_*.md` status the way `§62` reads a ruling's anchor:
+
+- a spec whose own text says **BUILT v1.9.x** while its status says `spec_ready` is a hard failure;
+- a spec may declare **`builds:`** `a, b` — the engine exports its build should create; `spec_ready` with every one of them
+  present is stale (hard);
+- without a declaration the count of `spec_ready` specs that name an existing export is a **ratchet** that may only fall.
+
+**Mark a spec when it ships:** `**Status:** \`built\` v1.9.NNN (was \`spec_ready\` — marked YYYY-MM-DD; \`§N\`)`, or `part_built`
+with what landed and what waits. The version is the one `bump_version` stamped in the commit that shipped it.

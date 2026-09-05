@@ -457,8 +457,9 @@ working papers; **this is the answer.**
 | 09-04 | ✅ **THE COMBAT FLOOR — one landing (R34 · R35 · Q1)** | NPC pools on the player's shape (`healthBase`/`energyPerLevel` readers, `npcStanding` authored 30 + 5/level · 100 + 5/level); a pressure tick costs BOTH sides health and energy, priced alike (3 · 8), and the opponent's health loss is finally APPLIED; `breakAtPressure = ceil(level × 0.5)` of the side being broken, `level` on every opponent seat; the DEATH SAVE — a landed lethal hit is an opposed contest (caster's landed roll + the finisher's situational dials vs the target's strength/presence save + `saveBonus` 20), kill → the target stops and the caster pays `mechanic.killCost` (the Cut Thread's bound, transcribed: pool to zero, `craftSealedUntilRest` until a night's rest), hold → the dice at the standard cost | `§68` (pools · tick alike/applied/carried · 15/3/flat/chase · both seat paths · kill/hold/wounding/barred/sealed · seeded 35–65% · seams) · `scripts/duel_pell_vs_veth.mjs` LIVE Pell wins 11.1% (by health 222 of 222 decided, by pressure 0) · mean rounds 7.1 · Veth never spent-out (was 91.6% Pell, 1,832 by pressure, spent by round four) | body §3c (floor), §7h. R36–R38 are indexed ⬜ in RULINGS (sequenced behind the floor by the GO list) and enter the body when built. ⛔ 53 lethal crafts, one `killCost` — Q15 logged. `§62`'s declaration regex now reads Aevi's bold form |
 | 09-04 | ✅ **THE FIVE BEHIND THE FLOOR (Q3 · R38 · R37 · Q5-B · Q8)** | the roll reads the CRAFT — `substrateForAction` is the ground card (one source, one tuning, the site's per-source field, the carried and presence terms; 204 of 416 crafts read differently than by tradition); `meaningDensity` derived from tags/tier/community/presence, never stored, and for metaphysical crafts MEANING is the ceiling and SUBSTRATE the penalty (min, not product; `mechanic.meaning: "none"` opts out); growth stacks completions (+1) and condition steps (+1) on acquaintance, the tick stamps the record, and `commitGrowth` writes an observed craft at r1; a debt is `worldState.debts[holderId]` held by a named NPC, written by `releaseHolding` and `debtOps`, escalated only by a holder who reacts to debtors (1 colder · 2 refused), cleared by pay/deed/holder gone; the hold store yields by condition into `holding.store`, pays upkeep from the purse, fills, gets raided, sells where it stands | `§69` (the divergence census · roll=card by source · ceiling/min/opt-out/absent · stacking and the r1 write · the Kestrel escalates, Greta does not, three clears, coin refused · the steep curve, arrears, raid/garrison, sell-where-you-stand, forfeit/carry, the tick) · `§63` refixtured on `settlement-standing` | body §7g (ground), §7h (R37), §7d (debts, store), §9. §10's holdings-economy gap CLOSED. ⬜ Q15 (lethal census), Q13 (somatic split), escalation 3–4, goods to market: logged, not built |
 | 09-04 | ⚠️ **THE PELL–VETH CENSUS — the Cut Thread is never cast; the death save's tier term read the player as tier 1** | Erik asked whether Veth wins by the Cut Thread. 2,000 duels × 5 configurations: 0 casts of it (the policy has no notion of a lethal rung); Veth wins 99.9% even with the save off; her killers are a T1 lethal (`hastened_grey`) and two T3s; Pell's only wins are Plain Weight (T1 lethal) kills. Defect: the tier-gap term read `skills[]` and the player seat carries a map → +28 on every NPC lethal hit; the seat now names `maxTier` (95% → 88% kills) | `§68` (a T5-carrying player is no out-class; a T1 is +28; the seat names it from the character's crafts) · `scripts/duel_pell_vs_veth.mjs` | body §3c (the census table). Q15 widened: the NPC policy's blindness to lethal rungs is part of it |
+| 09-04 | ✅ **THE ENGINE FOLLOWS THE AFTERNOON'S CONTENT, AND A SPEC REACHES BUILT** | per-rank source: `craftSource` reads `tree[].powerSystem` at the owned rank (rank → school → tradition; stopped_breath metaphysical r1 / veil r2 — SPEC_body_source §4); Erik's revised bound: `killCost.energyMultiplier` (the Cut Thread costs double on a kill, not the pool); `mechanic.ongoing` reads as ongoing harm; the closed schema declares all three. Aevi's ask: eight named specs said `spec_ready` and were shipped — thirteen statuses now say `built`/`part_built` with the version; a `builds:` field for a spec to name its exports | `§70` (r1/r2 source; a craft without one unchanged; the schema; 28 of 200 on a kill and no seal, the pool shape still read; slow_cup reads 4 corrosive until treated; no spec says ready while saying BUILT; `builds:` declared-and-present is stale; the derived count ratchets) | body §3c, §7g, §4. `PIPELINE.md` rule 5. Owed: a per-round ticker for `ongoing` on a sheet |
 
-**Last verified: 2026-09-05 · v1.9.349 · 421 crafts.**
+**Last verified: 2026-09-05 · v1.9.350 · 421 crafts.**
 
 ---
 
@@ -621,8 +622,9 @@ COSTS.** Everything else on a craft is for the engine or for us.
 reach** above rank 1 — so a rank-1 use of an e4 craft costs 4 and a rank-3 use costs 10.
 
 ⛔ **There are no other costs.** Not vows, not exhaustion, not narrative debts. **The single exception is an
-extreme capstone** — `the_cut_thread` and `last_lament` take your whole remaining pool and leave you at zero
-until a full night's rest, and they say so.
+extreme capstone** — `last_lament` takes your whole remaining pool and leaves you at zero until a full night's rest,
+and says so. (`the_cut_thread` did too until 2026-09-04, when Erik revised its price to double the standard cost on a
+kill — R35, §3c.)
 
 ⚠️ **A `cannot` is a SCOPE LIMIT, not a bill.** It says what the craft will not produce.
 
@@ -933,7 +935,7 @@ test built the input production did not. **The standing check, now a rule (`PIPE
 input, or does PRODUCTION?** §60 asserts the live shape.
 
 ### ✅ THE COMBAT FLOOR (GO_LIST_20260904 §1 · R34 · R35 · Q1 — one landing, 2026-09-04)
-<!-- subject: combat-pressure · fields: healthBase, healthPerLevel, energyBase, energyPerLevel, playerHealthLoss, playerEnergyLoss, opponentHealthLoss, opponentEnergyLoss, breakAtLevelFraction, breakAtPressure, deathSave, rungs, saveOn, saveBonus, notForClasses, killCost, sealedUntilRest · state: craftSealedUntilRest -->
+<!-- subject: combat-pressure · fields: healthBase, healthPerLevel, energyBase, energyPerLevel, playerHealthLoss, playerEnergyLoss, opponentHealthLoss, opponentEnergyLoss, breakAtLevelFraction, breakAtPressure, deathSave, rungs, saveOn, saveBonus, notForClasses, killCost, energyMultiplier · state: craftSealedUntilRest -->
 
 Erik's build order was the floor first, because *"40-flat energy and break-at-3 make every other change unmeasurable."*
 Three changes, one landing, each a dial the engine reads and content now authors.
@@ -967,11 +969,18 @@ foe reads `threat / 2` (the inverse of `threat = level × 2`). `state.breakAt` c
 
 `killMargin = caster + terms − save`. **Kill:** the target STOPS — the damage becomes their whole remaining pool, `slain`
 rides on the receipt, the opponent resolves, the player's exit stays `checkIncapacitation` (the aggressor table decides what
-"stopped" means for them). The caster pays the craft's **`mechanic.killCost`** — `the_cut_thread`'s authored bound
-transcribed: `{ energy: "all", sealedUntilRest: true }` — pool to zero and a seal on the sheet (`craftSealedUntilRest`) that
-a full night's rest lifts and a breather does not; a sealed side's crafts fall back as a spent side's do. **Hold:** the dice
+"stopped" means for them). The caster pays the craft's **`mechanic.killCost`**. ⚠️ Erik revised his own bound the same
+afternoon — *"DOUBLE, not whole-pool; whole-pool is fixed against a growing pool"* — so the Cut Thread now authors
+`{ energyMultiplier: 2 }`: a kill costs twice the standard cost (28 of a 200 pool), a held save the standard 14. The
+whole-pool shape (`energy: "all"`) and the seal (`sealedUntilRest` → `craftSealedUntilRest`, lifted by a full night's rest,
+not a breather; a sealed side's crafts fall back as a spent side's do) stay READ for any craft that authors them. **Hold:** the dice
 already rolled are the damage, at the standard cost already charged (14 for the Cut Thread). A `notForClasses` target or a
 static thing is never offered the save; a non-lethal rung is untouched (the ⚡ finisher path stands).
+
+**Two crafts left the rung the same afternoon** (Aevi acting on Q15): `slow_cup` and `stopped_breath` are `incapacitating`
+now, with `mechanic.ongoing` — `{ perRound: 1d6, damageType, endsOn: treated | reached }` — *"an ATTRITION kill, not a landed
+one"*. It reads through the ongoing-harm reader (`ongoingHarmOf`: magnitude from the per-round dice, the type, the end carried),
+so the inflict path CCODE-214 built applies it; nothing yet TICKS it per round on a sheet — that reader is owed. `§70`.
 
 **Measured (5,000 rounds each, equal level and tier, fresh):** `saveBonus` 0 → **66%** of landed lethal hits kill · 10 → 58% ·
 **20 → 48%** · 30 → 38%. A run-down, pressed×3 target dies ~94–99%; a physical-20 / strength-24 target is barely hit and
@@ -1429,7 +1438,11 @@ differently by the two** (`ki_wield`: somatic's band 97%, its metaphysical sourc
 card — `groundCardFor` with the carried term (a Waystaff, a companion's aura) and R38's presence term added — and the
 unschooled card runs on the SAME tuning as the roll (it carried its own −30 / ×0.5 / 0.2 constants). **The number on the
 wheel is the number in the roll.** The schooled card's precedence stands as before; SPEC_body_source Q13 (marcher → body,
-the somatic split) is still owed.
+the somatic split) is still owed. ✅ **§4 — the source is per-rank where authored (2026-09-04):** a craft's `tree[]` may carry a
+per-rank `powerSystem`, and `craftSource` reads the OWNED rank's entry first — **rank → school → tradition**, each falling
+through. Erik's case is on the record: `stopped_breath` is *metaphysical at r1, veil at r2* (a person hiding a person's breath;
+then the Veil's own reach). The rank is the character's (`abilities[].level`), so no call site changed and a craft with no
+per-rank source resolves exactly as before. `§70`.
 
 **R38a — `meaningDensity` is DERIVED, never stored.** `substrate.meaningDensity(location, { present })` sums content
 weights (`the_substrate.meaning`) from a place's `tags` (sacred · locus · cult · home), its `tier`, its `communityId`, and

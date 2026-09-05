@@ -150,3 +150,8 @@ nobody can finish by dice); death save OFF 0.1% (attrition over 41 rounds). ⛔ 
 (a T1 lethal, 645), `bone_lance` (494), `grey_ground` (285); Pell's only wins are Plain Weight (T1 lethal) kills. ⬜ Two more
 parts of this question: (d) should the NPC policy reach for a lethal craft when the save odds favour it (a design choice about
 what NPCs know), and (e) is `hastened_grey`/`plain_weight` at T1 meant to kill on a hit.
+
+**Acted on the same afternoon (Aevi, Erik):** `slow_cup` and `stopped_breath` moved off the rung to `incapacitating` with
+`mechanic.ongoing` (per-round damage until treated / reached — the engine reads it, v1.9.350); Erik revised the Cut Thread's
+bound to DOUBLE the standard cost on a kill (`killCost.energyMultiplier: 2`), not the pool. ⬜ The census above predates both;
+re-measure with `scripts/duel_pell_vs_veth.mjs` once the rung audit is done.

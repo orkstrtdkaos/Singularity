@@ -1,6 +1,6 @@
 # SPEC — associativity: every subject findable across every layer
 
-**Author:** Aevi (PO) · **2026-09-02** · **Status:** `spec_ready` — ⬜ **CCode ROUND 2**
+**Author:** Aevi (PO) · **2026-09-02** · **Status:** `part_built` — the instrument and the markers v1.9.346 (`§63`–`§64`); the rest open (was `spec_ready` — marked 2026-09-04) — ⬜ **CCode ROUND 2**
 > Erik: *"spec something for CCode to wikilink everything so we can easily find subjects that are the
 > same but have different scope — data fields, engine readers/writers, design intent, UI locations, how
 > it works, pipeline documentation. Everything needs associativity so we can root out the old when we

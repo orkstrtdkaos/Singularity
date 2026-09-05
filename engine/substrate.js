@@ -483,6 +483,13 @@ export function craftSource(ability, character, schoolsData, powerSources = null
   // no source at all while reporting `via: "school"` as though it had answered.
   // ⚠️ The school is still RETURNED — it is true and the card should say it — the SOURCE just comes from
   // the tradition, which is what "leans on nothing new" means.
+  // ✅ SPEC_body_source §4 (Erik: "the r3 multistrike might want metaphysical"; 2026-09-04: "make it METAPHYSICAL r1 and VEIL
+  // r2" on stopped_breath). A craft's tree may carry a per-rank `powerSystem`; the OWNED rank's entry wins, then the school,
+  // then the tradition — rank → school → tradition, each falling through. The rank is the character's own (`abilities[].level`),
+  // so no call site changes; a craft with no per-rank source resolves exactly as before.
+  const owned = Math.max(1, Number((character?.abilities || []).find(a => (a?.abilityId || a) === ability?.id)?.level) || 1);
+  const rankRow = (Array.isArray(ability?.tree) ? ability.tree : []).find(t => t && Number(t.rank) === owned);
+  if (rankRow?.powerSystem) return { traditionId: tid, school: school || null, source: toBandVocab(rankRow.powerSystem), mix: null, mixAuthored: false, via: "rank", rank: owned };
   if (school?.extension) return { traditionId: tid, school, source: school.extension, via: "school" };
   // ⛔ SNG-382 — THE TRADITION MIX IS THE FALLBACK, AND WIRING IT IS WHAT GAVE IT A READER. Aevi
   // authored 26 weighted mixes with Erik's reasons into `power_sources.json`; the file was registered,

@@ -1,6 +1,6 @@
 # SPEC — one source of truth, and a ruling that actually supersedes
 
-**Author:** Aevi (PO) · **2026-09-02** · **Status:** `spec_ready` — ⬜ **CCode: audit §4 and §5**
+**Author:** Aevi (PO) · **2026-09-02** · **Status:** `part_built` — §4 the anchor gate v1.9.336, `§62`; §5 open (was `spec_ready` — marked 2026-09-04) — ⬜ **CCode: audit §4 and §5**
 > Erik: *"I want to make sure when we make a ruling it supersedes all other references of that thing it's
 > ruling about… I want 1 source of truth to reconcile against."*
 

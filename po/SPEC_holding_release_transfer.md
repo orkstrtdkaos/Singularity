@@ -1,6 +1,6 @@
 # SPEC — Releasing and transferring a holding
 
-**Author:** Aevi (PO) · **Date:** 2026-09-02 · **Status:** `spec_ready` — ROUND 2 requested
+**Author:** Aevi (PO) · **Date:** 2026-09-02 · **Status:** `built` v1.9.345 (was `spec_ready` — marked 2026-09-04; `§61`) — ROUND 2 requested
 **Origin:** Erik — *"We need a way to abandon or transfer a holding to another entity… that way if you
 need to you can swap your resources."*
 

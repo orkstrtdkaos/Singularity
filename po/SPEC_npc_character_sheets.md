@@ -1,6 +1,6 @@
 # SPEC — NPC character sheets
 
-**Author:** Aevi (PO) · **Date:** 2026-09-01 · **Status:** `round_2_requested`
+**Author:** Aevi (PO) · **Date:** 2026-09-01 · **Status:** `built` v1.9.345 (was `round_2_requested` — marked 2026-09-04)
 **Unblocked by:** R1–R24. The PC starting shape is ruled (sense + danger-response + 2 chosen), so
 the reduction is now knowable. ⛔ **This was blocked on exactly that and is no longer.**
 **Driving case:** Erik — *"Pell needs to be more than an interiority."*

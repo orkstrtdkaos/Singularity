@@ -1,6 +1,6 @@
 # SPEC — `meaningDensity`: the second ground, and the things that carry it
 
-**Author:** Aevi (PO) · **2026-09-02** · **Status:** `spec_ready` — ⬜ **CCode ROUND 2**
+**Author:** Aevi (PO) · **2026-09-02** · **Status:** `built` v1.9.348 — R38 (was `spec_ready` — marked 2026-09-04; `§69`) — ⬜ **CCode ROUND 2**
 **Closes:** `RULING_REQUEST_power_sources_open_20260815.md` §1 — open **18 days**, blocking everything
 about metaphysical.
 

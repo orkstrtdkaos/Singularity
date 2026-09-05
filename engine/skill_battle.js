@@ -1647,11 +1647,19 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
           damage = { ...damage, amount: landed, slain: true, deathSave: ds };
           // the caster pays the authored bound — a whole pool goes to zero, and a seal outlives the round
           if (killCost) {
+            // ✅ Erik 2026-09-04, revising his own bound: the Cut Thread costs DOUBLE, not the pool — "whole-pool is fixed against
+            // a growing pool". `energyMultiplier` m: the kill costs m × the standard cost (the standard cost is already charged, so
+            // the extra is (m − 1) × it). `energy: "all"` / a number and `sealedUntilRest` stay readable for a craft that authors them.
             const eAll = killCost.energy === "all";
             const eNum = Number(killCost.energy);
-            if (roundWinner === "player") playerEnergy = eAll ? 0 : Math.max(0, playerEnergy - (Number.isFinite(eNum) ? eNum : 0));
-            else opponentEnergy = eAll ? 0 : Math.max(0, opponentEnergy - (Number.isFinite(eNum) ? eNum : 0));
+            const mult = Number(killCost.energyMultiplier);
+            const standard = energyCost(winDecl, sb, steps, rules);
+            const extra = Number.isFinite(mult) && mult > 1 ? Math.round((mult - 1) * standard) : 0;
+            const before = roundWinner === "player" ? playerEnergy : opponentEnergy;
+            const after = eAll ? 0 : Math.max(0, before - (Number.isFinite(eNum) ? eNum : 0) - extra);
+            if (roundWinner === "player") playerEnergy = after; else opponentEnergy = after;
             if (killCost.sealedUntilRest) sealedNow[roundWinner] = true;
+            ds.cost = { ...killCost, paid: (eAll ? before : Math.min(before, (Number.isFinite(eNum) ? eNum : 0) + extra)) + (extra ? standard : 0), standard };
           }
         } else damage = { ...damage, deathSave: ds };
         deathSave = ds;

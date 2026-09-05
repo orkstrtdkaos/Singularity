@@ -1,6 +1,6 @@
 # SPEC — ground is read from the wrong field, `body` as floor, and per-rank sources
 
-**Author:** Aevi (PO) · **2026-09-02** · **Status:** `spec_ready` — ⬜ **CCode ROUND 2 before any content moves**
+**Author:** Aevi (PO) · **2026-09-02** · **Status:** `part_built` — §0 v1.9.342, §4 per-rank source v1.9.350 (`§70`); §2 the somatic split waits on Q13 (was `spec_ready` — marked 2026-09-04) — ⬜ **CCode ROUND 2 before any content moves**
 **Blocks:** `SPEC_meaning_density.md`
 
 ---

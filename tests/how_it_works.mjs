@@ -3982,8 +3982,8 @@ console.log("\n── §58 · the craft's own source is read; the deferral survi
     for (const a of all) { const cs = src58(a); via[cs?.via ?? "null"] = (via[cs?.via ?? "null"] || 0) + 1; }
     check("§58: every tradition-bearing craft carries a `powerSystem` — the read is total, not a partial patch",
       all.every(a => !!a.powerSystem), `${all.filter(a => !a.powerSystem).length} without`);
-    check("§58: …so the whole corpus resolves via `craft` or `deferred`, nothing via `tradition`",
-      (via.craft || 0) + (via.deferred || 0) === all.length && !via.tradition, JSON.stringify(via));
+    check("§58: …so the whole corpus resolves via `craft`, `deferred` or a per-rank `rank` (§70), nothing via `tradition`",
+      (via.craft || 0) + (via.deferred || 0) + (via.rank || 0) === all.length && !via.tradition, JSON.stringify(via));
     const fb = sub58.craftSource({ id: "syn_fallback", tradition: "ashwarden" }, { domains: { primary: "ashwarden" }, schools: {} }, C58.schools, C58.powerSources, C58.foothills);
     check("§58: …and the tradition fallback is dormant, not dead — a craft with no declaration still reaches it",
       fb?.via === "tradition" && !!fb?.source, `via ${fb?.via} → ${fb?.source}`);
@@ -4463,13 +4463,14 @@ console.log("\n── §68 · the combat floor — pools, symmetric pressure, br
   const cutFile = rj("content/packs/core/abilities/reach_death_life.json");
   const cutList = Array.isArray(cutFile) ? cutFile : Array.isArray(cutFile.abilities) ? cutFile.abilities : Object.values(cutFile.abilities || {});
   const cut68 = cutList.find(a => a.id === "the_cut_thread");
-  check("§68: ⛔ R35 — the_cut_thread carries its authored bound as `mechanic.killCost` (whole pool, sealed until rest)",
-    cut68?.harmRung === "lethal" && cut68?.mechanic?.killCost?.energy === "all" && cut68?.mechanic?.killCost?.sealedUntilRest === true);
+  // ⚠️ Erik revised the bound the same afternoon (double cost, not the pool — §70 measures that shape); this section keeps the
+  // whole-pool + seal PATH under test with an explicit fixture, because a craft may still author it.
+  check("§68: ⛔ R35 — the_cut_thread carries an authored `mechanic.killCost`", cut68?.harmRung === "lethal" && !!cut68?.mechanic?.killCost);
   check("§68: …`deathSave` is content — rungs include lethal, the save reads strength/presence, saveBonus is a number",
     Array.isArray(sb68.deathSave?.rungs) && sb68.deathSave.rungs.includes("lethal") && (sb68.deathSave.saveOn || []).includes("strength")
       && Number.isFinite(sb68.deathSave.saveBonus) && Array.isArray(sb68.deathSave.notForClasses));
   const lethal68 = { function: "strike", tier: 5, rank: 1, attribute: "mental", intensity: "standard", name: "the Cut Thread", id: "the_cut_thread", energyCost: 14,
-    harmRung: "lethal", mechanic: cut68.mechanic };
+    harmRung: "lethal", mechanic: { ...cut68.mechanic, killCost: { energy: "all", sealedUntilRest: true } } };   // the whole-pool shape, explicitly
   const KILL = [0.02, 0.99, 0.98, 0.99, 0.99, 0.99, 0.5], HOLD = [0.30, 0.99, 0.98, 0.99, 0.01, 0.99, 0.5];
   const k = round68(lethal68, guard68, { rng: seq68(KILL) });
   check("§68: ⛔ save FAILS → the target STOPS: health irrelevant, the damage is the whole pool, `slain`, the fight resolves",
@@ -4676,6 +4677,73 @@ console.log("\n── §69 · the five — roll=card, meaning ceiling, stacking 
   // seeded rng helper for the raid share
   function mkRng69(seed) { let s = (seed + 1) * 2654435761; return () => { s |= 0; s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
   check("§69: …the body carries the five", /THE THREE TERMS STACK/.test(rd("docs/HOW_IT_WORKS.md")) && /MEANING SETS THE CEILING, SUBSTRATE SETS THE PENALTY/.test(rd("docs/HOW_IT_WORKS.md")) && /holdStore/.test(rd("docs/HOW_IT_WORKS.md")) && /escalatingTags/.test(rd("docs/HOW_IT_WORKS.md")));
+}
+/* ═════ §70 — THE CONTENT CAUGHT UP WITH THE ENGINE, AND A SPEC MARKED READY THAT IS BUILT IS A LIE THE OTHER WAY ═════ */
+// ⛔ 2026-09-04, the afternoon: Aevi authored per-rank sources (SPEC_body_source §4 — "nothing reads them"), Erik revised his own
+// bound (the Cut Thread costs DOUBLE, not the pool), and two crafts left the lethal rung for ongoing damage. Each is a reader the
+// engine owed. And Aevi's second ask: §62 checks a ruling reaches the body; nothing checked a spec reaches BUILT — eight named
+// specs said `spec_ready` and were shipped. A spec whose own text says BUILT while its status says ready is the hard half; the
+// count of `spec_ready` specs that already name engine exports is the ratchet half.
+console.log("\n── §70 · per-rank source · the revised kill cost · ongoing damage · a spec reaches built ──");
+{
+  const SUB70 = await import("../engine/substrate.js");
+  const CM70 = await import("../engine/craftmechanics.js");
+  const SB70 = await import("../engine/skill_battle.js");
+  const { loadContentHeadless: lch70 } = await import("./headless_content.mjs");
+  const C70 = await lch70();
+  // ── per-rank source: rank → school → tradition (SPEC_body_source §4; Erik: "METAPHYSICAL r1 and VEIL r2")
+  const sb70 = C70.abilities.stopped_breath;
+  const owner = (lvl) => ({ domains: { primary: sb70.tradition }, schools: {}, abilities: [{ abilityId: "stopped_breath", level: lvl }] });
+  const src1 = SUB70.craftSource(sb70, owner(1), C70.schools, C70.powerSources, C70.foothills);
+  const src2 = SUB70.craftSource(sb70, owner(2), C70.schools, C70.powerSources, C70.foothills);
+  check("§70: ⛔ stopped_breath reads its per-rank source — metaphysical at r1, veil at r2 (`tree[].powerSystem`, via `rank`)",
+    src1?.source === "metaphysical" && src1.via === "rank" && src2?.source === "veil" && src2.via === "rank" && src2.rank === 2, JSON.stringify([src1, src2]));
+  const plain70 = Object.values(C70.abilities).find(a => a.tradition && !(a.tree || []).some(t => t && t.powerSystem));
+  check("§70: …a craft with no per-rank source resolves exactly as before (no `rank` branch fires)",
+    plain70 && SUB70.craftSource(plain70, { domains: { primary: plain70.tradition }, schools: {}, abilities: [{ abilityId: plain70.id, level: 2 }] }, C70.schools, C70.powerSources, C70.foothills)?.via !== "rank");
+  check("§70: …the schema declares `tree[].powerSystem`", /"powerSystem"/.test(JSON.stringify(rj("schemas/ability.schema.json").properties.tree.items.properties)));
+  // ── the revised bound: DOUBLE the standard cost on a kill, no seal unless authored
+  const cut70 = C70.abilities.the_cut_thread;
+  check("§70: ⛔ Erik's revision is on the record — `killCost.energyMultiplier` 2, no whole-pool, no seal", cut70?.mechanic?.killCost?.energyMultiplier === 2 && cut70.mechanic.killCost.energy === undefined && !cut70.mechanic.killCost.sealedUntilRest);
+  const rules70 = rj("content/packs/core/rules/resolution.json"), sbe70 = rj("content/packs/core/rules/skill_battle_system.json").engine, steps70 = rj("content/packs/core/rules/intensity_scaling.json").steps;
+  const seq70 = (arr) => { let i = 0; return () => arr[(i++) % arr.length]; };
+  const mk70 = (o = {}) => ({ attributes: { physical: 6, mental: 6, social: 6, practical: 6 }, subAttributes: { strength: 8, presence: 4 }, energy: 200, maxEnergy: 200, health: 120, maxHealth: 120, level: 30, skills: [{ function: "strike", tier: 5, name: "t5" }], ...o });
+  const lethal70 = { function: "strike", tier: 5, rank: 1, attribute: "mental", intensity: "standard", name: "the Cut Thread", id: "the_cut_thread", energyCost: 14, harmRung: "lethal", mechanic: cut70.mechanic };
+  const kill70 = SB70.battleRound({ playerDecl: lethal70, oppDecl: { function: "shield", tier: 1, name: "g" }, playerSheet: mk70(), oppSheet: mk70(), state: { momentum: 0, round: 1 }, rules: rules70, sb: sbe70, steps: steps70, rng: seq70([0.02, 0.99, 0.98, 0.99, 0.99, 0.99, 0.5]) });
+  check("§70: ⛔ …a kill costs DOUBLE the standard cost (28 of 200 → 172) and leaves no seal; a held save still costs 14",
+    kill70.deathSave?.kill === true && kill70.state.playerEnergy === 200 - 2 * 14 && !kill70.state.playerSealed && kill70.deathSave.cost?.paid === 2 * 14, JSON.stringify({ e: kill70.state.playerEnergy, cost: kill70.deathSave?.cost }));
+  const poolDecl = { ...lethal70, mechanic: { ...cut70.mechanic, killCost: { energy: "all", sealedUntilRest: true } } };
+  const kp = SB70.battleRound({ playerDecl: poolDecl, oppDecl: { function: "shield", tier: 1, name: "g" }, playerSheet: mk70(), oppSheet: mk70(), state: { momentum: 0, round: 1 }, rules: rules70, sb: sbe70, steps: steps70, rng: seq70([0.02, 0.99, 0.98, 0.99, 0.99, 0.99, 0.5]) });
+  check("§70: …and the whole-pool + seal shape is still READ when a craft authors it (last_lament may)", kp.deathSave?.kill === true && kp.state.playerEnergy === 0 && kp.state.playerSealed === true);
+  // ── ongoing damage: `mechanic.ongoing` (per-round dice, a type, an end) reads through the ongoing-harm reader
+  const cup70 = C70.abilities.slow_cup;
+  const oh = CM70.ongoingHarmOf(cup70, 1);
+  check("§70: ⛔ slow_cup's `mechanic.ongoing` (1d6 corrosive until treated) reads as ongoing harm — magnitude from the per-round dice, the type, the end",
+    cup70?.harmRung === "incapacitating" && oh && oh.magnitude === 4 && oh.type === "corrosive" && oh.endsOn === "treated", JSON.stringify(oh));
+  check("§70: …a craft with neither field reads none; the schema declares `mechanic.ongoing`", CM70.ongoingHarmOf({ id: "x", mechanic: { dice: { n: 2, d: 6 } } }, 1) === null && !!rj("schemas/ability.schema.json").properties.mechanic.properties.ongoing);
+  // ── a spec reaches BUILT (Aevi's ask, §62's family)
+  const { readdirSync: rd70 } = await import("node:fs");
+  const specs70 = rd70(join(root, "po")).filter(f => /^SPEC_.*\.md$/.test(f) && !/^SPEC_SNG-/.test(f));
+  const exports70 = new Set();
+  for (const f of rd70(join(root, "engine")).filter(x => x.endsWith(".js"))) for (const m of rd("engine/" + f).matchAll(/export (?:async )?function ([A-Za-z_][A-Za-z0-9_]*)/g)) exports70.add(m[1]);
+  const statusOf = (txt) => { const head = txt.split("\n").slice(0, 14).join("\n"); const m = head.match(/Status:?\*{0,2}:?\s*`?([a-z_0-9]+)/); return m ? m[1] : null; };
+  const rows70 = specs70.map(f => { const txt = rd("po/" + f); const status = statusOf(txt);
+    const builds = (txt.match(/^\*{0,2}builds:?\*{0,2}:?\s*([^\n]+)/m) || [])[1]?.split(/[,\s·]+/).map(s => s.replace(/`/g, "").trim()).filter(Boolean) || null;
+    const named = [...new Set([...txt.matchAll(/`([a-z][A-Za-z0-9_]{3,})(?:\(\))?`/g)].map(m => m[1]))].filter(x => exports70.has(x));
+    const saysBuilt = /BUILT v1\.9\.\d+/.test(txt);
+    return { f, status, builds, named, saysBuilt }; });
+  check("§70: the scan sees the named specs and reads their statuses — not vacuous (57 named, 21 carry a status on 2026-09-04)", rows70.length >= 40 && rows70.filter(r => r.status).length >= 15, `${rows70.length} specs, ${rows70.filter(r => r.status).length} with a status`);
+  const lying = rows70.filter(r => r.status === "spec_ready" && r.saysBuilt);
+  check("§70: ⛔ no spec says `spec_ready` in its status while its own text says BUILT — the record must not say work is owed when it is not",
+    lying.length === 0, lying.map(r => r.f).join(" · "));
+  const declaredStale = rows70.filter(r => r.status === "spec_ready" && r.builds && r.builds.length && r.builds.every(b => exports70.has(b)));
+  check("§70: ⛔ a `spec_ready` spec that DECLARES `builds:` and whose every named export exists is stale — mark it built", declaredStale.length === 0, declaredStale.map(r => r.f).join(" · "));
+  const derivedStale = rows70.filter(r => r.status === "spec_ready" && r.named.length >= 1);
+  const BASELINE_DERIVED = 4;   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
+  check(`§70: ratchet — \`spec_ready\` specs naming an existing engine export = ${derivedStale.length} (baseline ${BASELINE_DERIVED}) — may only go DOWN`,
+    derivedStale.length <= BASELINE_DERIVED, derivedStale.map(r => `${r.f}:${r.named.slice(0, 3).join(",")}`).join(" · "));
+  const built70 = rows70.filter(r => r.status === "built" || r.status === "part_built");
+  check("§70: …and a spec marked built names the version that shipped it", built70.length >= 8 && built70.every(r => /Status:?\*{0,2}:?\s*`(built|part_built)`[^\n]*v1\.9\.\d+/.test(rd("po/" + r.f))), built70.filter(r => !/v1\.9\.\d+/.test(rd("po/" + r.f).split("\n").slice(0, 14).join("\n"))).map(r => r.f).join(" · "));
 }
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));

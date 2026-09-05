@@ -1,6 +1,6 @@
 # SPEC — one growth system, three proximities
 
-**Author:** Aevi (PO) · **2026-09-02** · **Status:** `spec_ready` — ⬜ **CCode ROUND 2**
+**Author:** Aevi (PO) · **2026-09-02** · **Status:** `built` v1.9.348 — pools v1.9.347, R37 v1.9.348 (was `spec_ready` — marked 2026-09-04; `§68`–`§69`) — ⬜ **CCode ROUND 2**
 **Supersedes** the growth §3 of `SPEC_progressive_sheets.md`. **Answers** its Q2 and Q3.
 > Erik: *"a level balancing system keyed off how close the NPC is to the player… and a way for them to
 > catch up — Silas can send them on missions."* · *"the NPCs that are not of you or with you also need to

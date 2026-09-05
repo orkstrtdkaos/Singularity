@@ -50,6 +50,9 @@ import { sheetFor as personSheetFor, battleSkillsFor } from "./engine/npcsheet.j
 import { companyPlaces, delegationCapacity } from "./engine/ladder.js";   // SNG-390: how many places rapport has earned · R25b: how many can run things in your name
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds, shareAtOrAbove, syncStageTaughtRanks, stageTaughtBy } from "./engine/companions.js";
 // SNG-309: what happens when the player goes down — and the SAME death ladder every figure is on.
+// ⛔ 2026-09-05 (Erik: "I want our test harnesses to simulate the real game"): THE ONE PATH a skill battle takes — the menu, the
+// declaration, the rank, the guards, the turn, the apply, the end — lives in the engine now and the harness drives the same functions.
+import { battleSkillsForCharacter, declFromSelection, resolveDeclRank, guardBlockFor, openGuards, applyRoundToCharacter, collapseIfFinished, personOpponentFor, duelFromTarget, freshTurn, playTurn, endBattle } from "./engine/battle_turn.js";
 import { incapacitationOutcome, playerDeathState, deathStopsPlay, deathLine, wireDeathModel } from "./engine/incapacitation.js";
 import * as DeathModel from "./engine/death.js";
 import { enterDeathState } from "./engine/death.js";
@@ -119,7 +122,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.350";
+const APP_VERSION = "1.9.351";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4170,57 +4173,11 @@ function wardDenialFor(def, family, ability) {
 function endEncounter(outcome) {
   const enc = activeEnc();
   if (!enc) return;
-  // SNG-271/1a: `rules/encounters.json` was NEVER REGISTERED — 43 rules keys and `encounters` not among them —
-  // so this lookup was always undefined and `?? 0` paid nothing. Winning, solving, fleeing, walking away:
-  // every encounter in the game has awarded ZERO XP, always. Now registered, loaded, and falling back to
-  // `default` so a NEW encounter type can never silently pay zero the same way again.
-  const encXp = CONTENT.rules.encounters || {};
-  const t = encXp[enc.def.type] || encXp.default || {};
-  const xpMap = { opponent_fell: t.winXp, opponent_yielded: t.winXp, fled: t.fleeXp, yielded: t.yieldXp, completed: t.completeXp, abandoned: t.abandonXp, solved: t.solveXp, walked_away: t.walkAwayXp, incapacitated: 0 };
-  character.xp += Math.max(0, xpMap[outcome] ?? 0);
-  for (const c of activeCompanions(character, CONTENT.companions)) growBond(character, c.id, "encounter", CONTENT.rules, c.stages, { catalog: fullCatalog(), companions: CONTENT.companions, worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() }); // SNG-361: the log. ⚠️ c.stages passed for consistency ONLY — this site DISCARDS the events, and a bond that crosses grantAt during an encounter is recovered by backfill.js, not by this line.
-  character.activeEncounter = null;
+  // ✅ 2026-09-05: `endBattle` is the one end — XP, the companions' bond, the encounter cleared, and the incapacitation
+  // table when the player went down. The skill-battle path never reached this until `sbEnd` called it too.
+  endBattle(character, { outcome, def: enc.def, rules: CONTENT.rules, content: CONTENT, catalog: fullCatalog(),
+    worldDay: (() => { try { return absoluteWorldDay(); } catch { return character.clock?.day ?? 0; } })() });
   movesOpen = false; // SNG-252b §2a: reset to COLLAPSED, so the next encounter opens clean
-  if (outcome === "incapacitated") {
-    // SNG-309 — GOING DOWN IS NOT THE END, AND IT IS NOT NOTHING EITHER.
-    //
-    // This used to be two lines: `lethal` set `character.dead = true` (a TERMINUS — the roster says "their
-    // story is over" and refuses to load them), and every other defeat restored you to 1 hp at no cost at
-    // all. Two of nineteen encounter defs are lethal, so in practice a player could be killed by a wild boar
-    // or a greatcat and by nothing else in the game — not by an assassin, not by a legend.
-    //
-    // Now what happens next depends on WHO put you there and who was with you, and death — when it comes —
-    // enters the SAME ladder every figure in the valley is on (SNG-209), so a party can come after you.
-    const plan = incapacitationOutcome({
-      // ⚠️ THE DERIVED LETHALITY, not the hand-set flag — the same answer `lethalOfferClamp` warned on.
-      // If the warning and the consequence read different fields, the game warns about one thing and does
-      // another, which is worse than not warning at all.
-      character, aggressor: enc.def?.opponent || enc.opponent || {},
-      encounter: { ...enc.def, lethal: isLethalEncounter(enc.def, CONTENT.rules) },
-      companions: activeCompanions(character, CONTENT.companions), rules: CONTENT.rules,
-    });
-    character.lastIncapacitation = { ...plan, day: character.clock?.day ?? null };
-    if (plan.gearTaken.length) {
-      const gone = new Set(plan.gearTaken);
-      character.inventory = (character.inventory || []).filter(i => !gone.has(i?.customName || i?.name));
-    }
-    if (plan.slain) {
-      // ⛔ NOT `character.dead`. That flag is the TERMINUS and belongs only to a SEALED death — while a death
-      // is retrievable the character is dead and STILL ON THE BOARD, which is the whole of SNG-209.
-      // ⚠️ THE WORLD DAY, NOT `character.clock.day`. `deathDepth` subtracts `diedDay` from whatever day it
-      // is handed, and the deepening pass runs on `absoluteWorldDay` — stamping this with the character's
-      // own story clock would compare two different clocks and produce a depth that means nothing. The same
-      // units trap as stepping a world harness by hours instead of days.
-      let deathDay = 0; try { deathDay = absoluteWorldDay(); } catch { deathDay = character.clock?.day ?? 0; }
-      enterDeathState(character, playerDeathState(plan, { worldDay: deathDay }));
-      character.health = 0;
-    } else {
-      character.health = Math.max(1, character.health);
-      character.energy = Math.max(5, character.energy);
-      character.clock = character.clock || { day: 1 };
-      character.clock.day = (character.clock.day || 1) + (plan.daysDown || 0);   // time passes while you are down
-    }
-  }
   saveCharacter(character);
 }
 
@@ -7792,41 +7749,13 @@ function personOpponent(target) {
     || (name && (Object.values(character?.npcRegistry || {}).find(n => n?.name === name)
       || Object.values(CONTENT.npcs || {}).find(n => n?.name === name)));
   if (!rec) return null;
-  // ⛔ SPEC_progressive_sheets §3 / CCODE-309 — the same dials the narrator's block reads. Without them a
-  // legendary the player swings at was level 1 with 3 health; the fix was gated with the dial handed in by
-  // the TEST and never by either live caller.
   const npcCfg = CONTENT.rules?.npcStanding || {};
-  const sheet = personSheetFor(rec, { day: absoluteWorldDay(), cfg: npcCfg });
-  const { skills } = battleSkillsFor(rec, { catalog: fullCatalog(), day: absoluteWorldDay(), cfg: npcCfg });
-  if (!skills.length) return null;                       // nothing to fight with — let the threat path have them
-  return {
-    name: sheet.name, attributes: sheet.attributes, health: sheet.health, energy: sheet.energy,
-    // ✅ R34b: the level rides to the seat — the break threshold is `ceil(level / 2)` of the person being broken.
-    level: sheet.level,
-    soak: sheet.soak, skills, tacticTags: rec.tacticTags || [],
-    // ⚠️ THREAT RIDES ALONG so anything that still reads it — the encounter frame, the warn offer — has a
-    // number, but every field above wins over it. A person is not a difficulty; they merely have one.
-    threat: Math.max(10, Math.round(sheet.level * 2)),
-    _person: rec.id || null,
-  };
+  return personOpponentFor(rec, { catalog: fullCatalog(), cfg: npcCfg, day: absoluteWorldDay() });
 }
 
 function escalateToFight(target, choice) {
-  const here = hereNow();
-  const threat = Number(target.threat) || Math.max(20, Math.min(70, Math.round((Number(here?.dangerLevel) || 3) * 12)));
-  const entry = { id: `harm-${slugify(target.name || "foe")}-${(character.activeEncounter?.state?.round || 0)}`,
-    flavor: "fight", seed: `You have committed to violence against ${target.name}.`,
-    // ⛔ A PERSON FIGHTS AS THEMSELVES WHERE WE KNOW ONE; a stranger falls to the threat curve.
-    opponent: personOpponent(target) || { name: target.name, threat, tacticTags: [] } };
-  const def = synthesizeDuelDef(entry);
-  def.opponent.name = target.name;              // synthesizeDuelDef keeps the entry's opponent; be explicit
-  def.lethal = choice?.intentRung === "lethal"; // the rung the player just answered with
-  if (here?.dangerLevel != null) def.danger = here.dangerLevel;
-  character.customEncounters = character.customEncounters || {};
-  character.customEncounters[def.id] = def;
-  const sb = CONTENT.skillBattle?.engine;
-  const oppSheet = sb ? synthesizeOpponentSheet(withKind(def.opponent, def), sb) : null; // SNG-253: kind-aware opponent vocab
-  character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
+  duelFromTarget(character, target, { catalog: fullCatalog(), npcs: CONTENT.npcs || {}, cfg: CONTENT.rules?.npcStanding || {}, day: absoluteWorldDay(),
+    sb: CONTENT.skillBattle?.engine, here: hereNow(), lethal: choice?.intentRung === "lethal" });
   saveCharacter(character);
   renderSkillBattle();
 }
@@ -12675,56 +12604,8 @@ let sbLastPlayerFn = null;        // the last function the player showed — the
 /** The player's declarable contest skills: their abilities (function + tier + energy), plus the steel-and-wit
  *  fallbacks that always work (a plain strike, a raised guard) so a caster stripped of the lattice still fights. */
 function playerBattleSkills() {
-  const out = [];
-  for (const a of character.abilities || []) {
-    const def = fullCatalog()[a.abilityId];
-    const fns = def?.functions || [];
-    if (!fns.length) continue;
-    // CCODE-38 (Erik: "I can use harmonic voice to mend… will it show up in the mend options?"): YES — a craft is
-    // listed under EVERY function it has, not just functions[0]. Harmonic Voice is command+empower+HEAL, so it
-    // belongs in mend as well as hinder/sway; the old functions[0] read hid every secondary use a craft had.
-    // Each entry declares with THAT function, so picking it from MEND actually mends.
-    for (const fn of fns) {
-      // ⛔ CCODE-244 — THE TIERS RIDE ALONG, so the narrator can pick WHICH capability the player just
-      // described. Erik: "I want the player to just say use X skill this way and the engine should know
-      // which rank it takes." Until now this list sent one entry per craft carrying only the OWNED rank,
-      // so the model was never offered a rank to choose — it could not have picked one if it tried.
-      // ⚠️ ONLY THE TIERS THAT DIFFER. One option per craft × function × rank takes a 6-craft kit from 14
-      // options to 42, and two thirds of ranks declare nothing of their own. This is a list of CHOICES.
-      // ⛔ DUEL_pell_vs_veth §C.2 — `tier: a.level` put the OWNED RANK in the field the dice read as the craft's
-      // TIER (the CCODE-341d note on this line named it). Measured: keystone_blow at tier 1 landed 7.0, at its
-      // real tier 4, 22.7. The tier is the craft's; the rank rides beside it and feeds the roll.
-      out.push({ id: a.abilityId, function: fn, tier: abilityTier(def), rank: a.level ?? 1, attribute: def.attribute || "practical", name: def.name || a.abilityId, energyCost: effectiveEnergyCost(def, character, CONTENT.rules), multi: fns.length > 1,
-        ...(() => { // ⚠️ `??`, NOT `||` — CCODE-245. `a.level || 1` turns a genuine rank 0 into 1 BEFORE the module
-        // sees it, which re-creates the exact permission bug r0 exists to close, one layer up. It is
-        // latent today (an unlearned craft is ABSENT from `character.abilities`, never present at 0)
-        // and it should stay impossible rather than merely unreached.
-        const menu = capabilityMenu(def, a.level ?? 1, { cfg: CONTENT.rules?.energy });
-          return menu.tiers.length > 1
-            ? { tiers: menu.tiers.map(t => ({ rank: t.rank, does: smartClamp(t.does, 160), cost: t.cost })) }
-            : {}; })() });
-    }
-  }
-  out.push({ id: "_strike", function: "strike", tier: 1, attribute: "physical", name: "A plain strike" });
-  out.push({ id: "_guard", function: "shield", tier: 1, attribute: "physical", name: "Raise a guard" });
-  // CCODE-43 (Erik): "Item use itself needs to be weaved in as well... throw a chemical at them or drink a potion."
-  // A consumable is a MOVE you spend a step on. Drinking is also the honest answer to being spent — your crafts
-  // have gone quiet, but a flask has not. Item moves are reveal-less, so the sense-step filter drops them naturally.
-  for (const u of usableCombatItems(character, CONTENT.skillBattle?.engine?.items || {})) {
-    const icfg = CONTENT.skillBattle?.engine?.items || {};
-    out.push({ id: `_item_${slugify(u.item.name)}`, itemMove: u,
-      function: u.mode === "throw" ? (icfg.throwFunction || "strike") : (icfg.drinkFunction || "restore"),
-      tier: u.mode === "throw" ? (icfg.throwTier || 2) : 1, attribute: "practical",
-      name: u.label, finds: null, itemNote: u.note });
-  }
-  // CCODE-46 (Erik): "or an attribute based generic type sense... a wits sense could find a solution that a Reason
-  // based sense might miss." You can always LOOK, craft or no craft — and the attribute you look WITH changes what
-  // you find. These are reveal-function, so they qualify for the SENSE step and cost nothing but the round.
-  for (const g of (CONTENT.skillBattle?.engine?.senseStep?.genericSenses || [])) {
-    out.push({ id: `_sense_${g.sub}`, function: "reveal", tier: 1, attribute: SUB_OF?.[g.sub] || "mental",
-      subAttribute: g.sub, name: g.name, finds: g.finds, generic: true });
-  }
-  return out.slice(0, 40); // was 12 — a multi-function craft now occupies a slot per function; groups collapse
+  // ✅ 2026-09-05: the menu is `battleSkillsForCharacter` — the harness builds the same list from the same character.
+  return battleSkillsForCharacter(character, { catalog: fullCatalog(), rules: CONTENT.rules, sb: CONTENT.skillBattle?.engine });
 }
 
 // SNG-246 BUG1: the skill battle no longer takes over a SEPARATE screen — it renders IN the play surface (the
@@ -12915,8 +12796,7 @@ const SB_STEPS = [
   { key: "bonus",  label: "Bonus",  glyph: "\u2726", hint: "Earned by a good read — a FULL extra action. The payoff." }
 ];
 function sbFreshTurn() {
-  return { phase: "sense", sel: { sense: [], action: [], bonus: [] },
-    text: { sense: "", action: "", bonus: "" }, setupBonus: 0, bonusEarned: false, senseDone: false, senseLine: "" };
+  return freshTurn();
 }
 function sbTurn() {
   const e = activeEnc(); if (!e || e.state?.mode !== "skill_battle") return null;
@@ -12925,21 +12805,7 @@ function sbTurn() {
 }
 /** The declaration a step's selection makes: the first craft leads, a second is WOVEN in (CCODE-37 mechanics). */
 function sbDeclFromSel(sel, skills, intensity) {
-  const picked = (sel || []).map(i => skills[i]).filter(Boolean);
-  if (!picked.length) return null;
-  const lead = picked[0];
-  // ⛔ DUEL_pell_vs_veth §C.1–C.3 — the rank and the effective energy cost ride on the declaration; the def is
-  // put under it by `skillBattleRound` (enrichDecl) from the id.
-  const d = { function: lead.function, tier: lead.tier || 1, rank: lead.rank ?? lead.tier ?? 1, attribute: lead.attribute || "practical",
-              intensity, name: lead.name, id: lead.id, energyCost: lead.energyCost ?? null };
-  if (picked[1]) d.woven = { function: picked[1].function, tier: picked[1].tier || 1, rank: picked[1].rank ?? picked[1].tier ?? 1, name: picked[1].name, id: picked[1].id, energyCost: picked[1].energyCost ?? null };
-  // CCODE-43: what you are WIELDING rides on the declaration, so the engine can put it in the roll as its own
-  // named line. A dagger and an axe suit different verbs — that is the choice Erik wanted to be real.
-  const wield = wieldBonusFor(character, d.function, CONTENT.skillBattle?.engine?.items || {});
-  if (wield) d.wield = wield;
-  // CCODE-43: an ITEM move (drink / throw) carries what spending it does.
-  if (lead.itemMove) { d.itemMove = lead.itemMove; d.name = lead.name; }
-  return d;
+  return declFromSelection(sel, skills, intensity, { character, sb: CONTENT.skillBattle?.engine });
 }
 /** The step tracker: where you are in the turn, and what is already locked behind you. */
 function sbStepTracker(turn) {
@@ -13468,14 +13334,12 @@ async function sbResolveSense() {
   turn.senseDone = true;
   if (!decl) { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); return; }
   sbBusy = true; sbBusyLabel = `Reading ${enc.def?.opponent?.name || "them"}…`; sbQuickBeat = ""; renderSkillBattle(sbLastRound);
-  const rr = skillBattleRound(character.activeEncounter.state, enc.def, decl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps,
-    seenTendency: sbLastPlayerFn, rng: Math.random, phase: "sense", tickEffects: false });
-  character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
-  // activeEnc() hands back a FRESH wrapper each call, so `enc.state = ...` writes to a throwaway — the resolved
-  // state (effects, energy, pressure) would be silently discarded. Write through to the character, as sbDeclare does.
-  character.activeEncounter = { defId: enc.def.id, state: rr.state };
+  // ✅ 2026-09-05: the sense step is `playTurn` with only a sense — the harness plays the same step through the same function.
+  const played = playTurn(character, enc.def, { sense: decl, content: CONTENT, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random,
+    day: absoluteWorldDay(), catalog: fullCatalog() });
+  const rr = played.rr;
   const t = sbTurn();
-  t.senseDone = true; t.setupBonus = rr.setupBonus || 0; t.bonusEarned = !!rr.bonusEarned?.player;
+  t.senseDone = true; t.setupBonus = played.turn.setupBonus || 0; t.bonusEarned = !!played.turn.bonusEarned;
   t.sel = turn.sel; t.text = turn.text;
   t.readPayoff = sbReadPayoff(rr.player?.degree, character.activeEncounter.state.opponentSheet, character.activeEncounter.state, enc.def);
   t.senseLine = `You read with ${decl.name}${decl.woven ? ` \u22c8 ${decl.woven.name}` : ""} \u2014 ${(rr.player?.degree || "").replace("_", " ")}. ${t.setupBonus > 0 ? `You have the read (+${t.setupBonus} to your action).` : t.setupBonus < 0 ? `They read you better (${t.setupBonus} to your action).` : "Neither of you learns much."}${t.bonusEarned ? " The opening is there \u2014 you have earned a BONUS action." : ""} ${t.readPayoff}`;
@@ -13515,37 +13379,12 @@ async function sbResolveSense() {
  *  (it is `["move","shield"]`), and any future craft that authors an intercept should open one too. A
  *  name-based branch would have worked for exactly one craft and silently ignored the next. */
 function sbGuardBlockFor(decl) {
-  const ab = decl && decl.id ? CONTENT.abilities?.[decl.id] : null;
-  if (!ab) return null;
-  const rank = Math.max(1, Number(decl.rank) || 1);
-  // ⚠️ BOTH DOORS. `interceptCondition` catches bindings, `interceptDamage` catches blows — different
-  // verbs on the same machinery, and a reader that checked one would miss whichever is authored next.
-  const dmg = authoredBlock(ab, "interceptDamage", rank);
-  const cond = authoredBlock(ab, "interceptCondition", rank);
-  return (dmg || cond) ? { ability: ab, rank, spec: dmg || cond } : null;
+  return guardBlockFor(decl, { catalog: fullCatalog() });
 }
 
 /** Open the guards a declaration buys, and persist them on the ENCOUNTER so they outlive the round. */
 function sbOpenGuards(enc, decl) {
-  const g = sbGuardBlockFor(decl);
-  if (!g || !enc || !enc.state) return 0;
-  const me = character?.id || "player";
-  const room = Math.max(1, Number(g.spec?.allies) || 1);
-  const picked = (enc.state.guardPick || []).slice(0, room);
-  if (!picked.length) return 0;
-  const list = Array.isArray(enc.state.protections) ? enc.state.protections : [];
-  let opened = 0;
-  for (const allyId of picked) {
-    // ⚠️ ONE STANDING GUARD PER (PROTECTOR, ALLY). Re-declaring REFRESHES rather than stacking, or three
-    // turns would make you three walls in front of the same person.
-    const prot = protectionFromCraft(g.ability, g.rank, { protectorId: me, allyId, authoredBlock });
-    if (!prot) continue;
-    const at = list.findIndex(x => x && x.protectorId === me && x.allyId === allyId);
-    if (at >= 0) list[at] = prot; else list.push(prot);
-    opened++;
-  }
-  enc.state.protections = list;
-  return opened;
+  return openGuards(character, enc?.state, decl, { catalog: fullCatalog() });
 }
 
 async function sbExecuteTurn() {
@@ -13576,46 +13415,17 @@ async function sbExecuteTurn() {
     enc.state.protections = tickProtections(enc.state.protections);
   }
   const applyRR = (r, d, label) => {
-    // ERIK (2026-08-01, from the Machine log): EVERY round reported "neither gains — it's even", including a
-    // roll of 1/95 (margin 102) against a margin of 25. The receipt was being handed the round's AFTER momentum
-    // as its BEFORE — `sbRoundReceipt(r, d, (r.state?.momentum ?? 0) - 0, …)`, that stray `- 0` a leftover from
-    // an edit — so `swing = after - before` was ALWAYS 0 and the line read "even" and "4→4" no matter what
-    // happened. The receipt has been lying about every round in every fight.
-    //
-    // The same value has to be captured HERE, before the line below overwrites activeEncounter with the new
-    // state: applyRR runs once per STEP (action, then bonus), so `enc.state` is the pre-TURN momentum and is
-    // already stale for the bonus step — which is why the log showed the bonus starting from 0 when the action
-    // had already moved the meter to 3.5. The mechanics chained correctly throughout; only the reporting lied.
     const beforeMom = character.activeEncounter?.state?.momentum ?? enc.state?.momentum ?? 0;
-    character.health = Math.max(0, Math.min(character.maxHealth, character.health + (r.deltas?.health || 0)));
-    character.energy = Math.max(0, character.energy + (r.deltas?.energy || 0));
-    character.activeEncounter = { defId: enc.def.id, state: r.state }; // write THROUGH the activeEnc() wrapper
-    const ids = [d.id, d.woven?.id].filter(x => x && !String(x).startsWith("_"));
-    if (ids.length) { recordUse(character, ids, { day: absoluteWorldDay() }); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex })); }
-    // CCODE-43: an ITEM move is SPENT here — drinking restores, throwing is gone. The item leaves the pack either
-    // way; a consumable that survives its own use would make inventory decorative again.
-    if (d.itemMove) {
-      const it = d.itemMove.item, nm = it.customName || it.name;
-      if (d.itemMove.mode === "drink") {
-        const g = d.itemMove.restores || {};
-        // cap at maxEnergy — a drink tops you up, it never overfills you past your own pool
-        if (g.energy) character.energy = Math.max(0, Math.min(character.maxEnergy ?? 100, character.energy + g.energy));
-        if (g.health) character.health = Math.max(0, Math.min(character.maxHealth, character.health + g.health));
-        beats.push(`You drank ${nm} — ${[g.energy ? `+${g.energy} energy` : "", g.health ? `+${g.health} hp` : ""].filter(Boolean).join(", ")}.`);
-      } else {
-        beats.push(`You threw ${nm} at them.`);
-      }
-      try { consumeItem(character, it.customName || it.name); } catch { removeItem(character, it.name, 1); }
-    }
+    // ✅ 2026-09-05: the apply is the engine's (`applyRoundToCharacter`) — health, energy, the seal, an imposed condition,
+    // practice and rank advances, a drunk or thrown item, the state written through. What stays here is the telling.
+    const applied = applyRoundToCharacter(character, r, d, { catalog: fullCatalog(), rules: CONTENT.rules, branchForks: CONTENT.branchForks, traditionIndex: CONTENT.traditionIndex, day: absoluteWorldDay(), defId: enc.def.id });
+    pendingRankAdvances.push(...applied.advances);
+    beats.push(...applied.beats);
     sbLastRoundRolls = { you: r.player || null, them: r.opponent || null };
     sbLastRound = { opponent: r.opponent };
     character.activeEncounter.state.lastOppReceipt = r.opponent || null;
     character.activeEncounter.state.lastReadWasSense = false;
     character.activeEncounter.state.senseTierEarned = null;   // CCODE-51: a read is SPENT when the turn resolves
-    // All three reporters get the SAME true before-value, so the receipt, the machine log and the transcript
-    // beat can never disagree about what a round did. `label` ("Action" / "Bonus action") is already on the
-    // beat — with a real swing behind it, the two steps are now separately legible, which is the other half of
-    // Erik's "the main action and the bonus action… i'm never sure they are both narrated".
     sbLastRoundReceipt = sbRoundReceipt(r, d, beforeMom, false);
     sbLogRound(enc, d, r, beforeMom, false);
     beats.push(`${label}: ${sbFightBeat(r, d, beforeMom, false)}`);
@@ -13690,24 +13500,7 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
   // and nothing ever put one here, so every craft resolved at rank 1 no matter what the character owns or
   // what the narrator meant. `skill.rank` is what the model chose from the tiers; absent, the owned rank
   // stands, which is exactly today's behaviour.
-  {
-    const cdef = fullCatalog()[skill.id];
-    if (cdef) {
-      // ⛔ DUEL_pell_vs_veth §C.2 — `skill.tier` was the owned rank in disguise; it is the craft's tier now, so
-      // the owned rank is read from the character, which is where it has always lived.
-      const ownedRank = (character.abilities || []).find(a => a.abilityId === skill.id)?.level ?? (skill.rank ?? 1);
-      const want = Number(skill.rank) || ownedRank || 1;
-      const v = resolveTier(cdef, want, ownedRank);   // ⚠️ `??` above — see CCODE-245; `||` would swallow a real 0
-      // ⚠️ AN OVERREACH IS NOT AN ERROR, IT IS A TIER DOWN. The additive model means the lower capability
-      // is always still there, so reaching too high resolves at the best you have rather than refusing —
-      // and the receipt says which, so the player is never silently given less than they asked for.
-      decl.rank = v.ok ? v.rank : (v.rank || 1);
-      if (!v.ok && v.overreach) decl.rankNote = v.why;
-      else if (v.ok && v.rank !== want) decl.rankNote = `resolved at rank ${v.rank}`;
-    }
-  }
-  // CCODE-37: a WOVEN second craft rides on the declaration — the engine adds its named roll line, lands its
-  // effect, and charges for both. The lead craft's function still drives the matchup.
+  Object.assign(decl, resolveDeclRank(decl, { character, catalog: fullCatalog() }));   // CCODE-244/245: what is OWNED bounds what is WANTED
   if (woven) decl.woven = { function: woven.function, tier: woven.tier || 1, name: woven.name, id: woven.id };
   let rr = skillBattleRound(enc.state, enc.def, decl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random });
   // SNG-230 §6b (Erik: a good roll can end a fight too, easier vs weaker foes): a decisive HARM FINISHER can
@@ -13717,29 +13510,13 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
   // ones (epic/regional) have no floor, so they never collapse). Skipped while scouting (a read isn't a strike).
   // SNG-246 (Erik: "chose hunter's strike and the fight ended — so frustrating"): the one-beat collapse now fires
   // ONLY on the DELIBERATE "⚡ Finish it" (finisher), never a normal strike — so ordinary combat is turn-by-turn.
-  if (!rr.ended && !scouting && finisher && frameCollapsible(enc.def)) {
-    const fam = FN_INDEX?.verbToFamily?.[skill.function] || null;
-    const swing = (rr.state?.momentum ?? 0) - (enc.state?.momentum ?? 0);
-    const meterMax = sb.momentum?.meterMax ?? 10;
-    // §7b: a WARD denying "finish" forbids the early end unless a demolishing swing breaks it (Aevi content).
-    const frameContent = CONTENT.encounterFrameContent || {};
-    const ward = wardAgainst(enc.def, "finish", frameContent.wardDenials);
-    const wardHolds = ward.denied && !wardBroken(swingDegree(swing, meterMax), swing, ward.breakDC);
-    if (!wardHolds && collapseMode([fam], "fight") === "finish" && swing > 0 && collapseResult(swingDegree(swing, meterMax), { floor: collapseFloor(enc.def, frameContent.collapseEligibility) }) === "collapse") {
-      rr = { ...rr, ended: true, outcome: "opponent_fell", state: { ...rr.state, status: "ended" }, _collapse: true };
-    }
-  }
+  if (!rr.ended && !scouting && finisher) rr = collapseIfFinished(rr, enc.def, { swingBefore: enc.state?.momentum ?? 0, family: FN_INDEX?.verbToFamily?.[skill.function] || null, sb, frameContent: CONTENT.encounterFrameContent || {} });
   if (!scouting) sbLastPlayerFn = skill.function; // reading doesn't show them a real tendency
   // CCODE-37 — THE GAP: a skill-battle round never recorded PRACTICE. recordUse (the single counting site) was
   // called only from the classic-choice path and the gambit runner, so every craft used in a fight counted for
   // NOTHING: no rank progress, no co-activations, no braid progress. Combat — where you lean on your crafts most —
   // was invisible to the ledger, which is the real reason braids never showed up there. A woven round records
   // BOTH ids, so the pair's co-activation climbs toward BRAID_RIPEN_AT and the pairing can be earned as a braid.
-  const usedIds = [skill.id, woven?.id].filter(id => id && !String(id).startsWith("_")); // _strike/_guard aren't real crafts
-  if (usedIds.length) {
-    recordUse(character, usedIds, { day: absoluteWorldDay() });
-    pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex }));
-  }
   sbLastRoundReceipt = sbRoundReceipt(rr, decl, beforeMom, scouting); // SNG-246: SHOW what happened this round
   // CCODE-36 (Erik: "let the player see the rolls and modifiers… a popup off of the action you chose"): keep BOTH
   // sides' full breakdowns from this round so the receipt can open the same math popover normal play uses.
@@ -13749,24 +13526,7 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
   // we need the entire narration at the end"): accumulate a round-by-round record ON THE ENCOUNTER STATE so sbEnd
   // can hand the GM the WHOLE fight to narrate, not just the final exchange. Capped so a long fight stays bounded.
   rr.state.transcript = [...(enc.state.transcript || []), sbFightBeat(rr, decl, beforeMom, scouting)].slice(-24);
-  character.health = Math.max(0, Math.min(character.maxHealth, character.health + (rr.deltas?.health || 0)));
-  character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
-  // ✅ R35: the seal a kill leaves — "unable to use any craft until a full night's rest" — lives on the SHEET,
-  // because it outlives the fight. `rest("sleep")` lifts it; a breather does not.
-  if (rr.sealed) character.craftSealedUntilRest = true;
-  // ⛔ CCODE-228 — AN IMPOSITION LANDS ON A SHEET. `battleRound` has computed `imposed` on every round since
-  // CCODE-216 and NOTHING consumed it: `character.conditions` was written by no code path in the game, so a
-  // craft authored to stagger someone staggered nobody and the rest-clearing rules governed an empty list.
-  // ⚠️ A PLAYER-SIDE imposition goes on the SHEET, because that is what outlives the fight — persist-until-
-  // healed is meaningless if the condition dies with the encounter. An OPPONENT-SIDE one rides the encounter
-  // state, because the opponent does not survive it.
-  if (rr.imposed && !rr.imposed.refused) {
-    const cond = { id: rr.imposed.condition, name: rr.imposed.name || rr.imposed.condition,
-      persistUntilHealed: !!rr.imposed.persistUntilHealed, sinceDay: character.clock?.day ?? null };
-    if (rr.imposed.side === "player") applyCondition(character, cond);
-    else rr.state.opponentConditions = [...(rr.state.opponentConditions || []).filter(c => c.id !== cond.id), cond];
-  }
-  character.activeEncounter = { defId: enc.def.id, state: rr.state };
+  pendingRankAdvances.push(...applyRoundToCharacter(character, rr, decl, { catalog: fullCatalog(), rules: CONTENT.rules, branchForks: CONTENT.branchForks, traditionIndex: CONTENT.traditionIndex, day: absoluteWorldDay(), defId: enc.def.id }).advances);
   saveCharacter(character);
   if (checkIncapacitation(character)) { sbEnd({ ...rr, ended: true, outcome: "incapacitated" }); return; }
   if (rr.ended) { sbEnd(rr); return; }
@@ -13783,7 +13543,11 @@ async function sbEnd(rr) {
       && ["player_overcome", "incapacitated"].includes(rr.outcome)) {
     await beginFightFromChase(def); return;
   }
-  character.activeEncounter = null; saveCharacter(character);
+  // ✅ 2026-09-05: a skill-battle end now reaches `endBattle` — XP, the bond, and the INCAPACITATION TABLE when you went
+  // down. Before this the fight was cleared and narrated with no gear taken, no days lost, no death, no XP.
+  endBattle(character, { outcome: rr.outcome, def, rules: CONTENT.rules, content: CONTENT, catalog: fullCatalog(),
+    worldDay: (() => { try { return absoluteWorldDay(); } catch { return character.clock?.day ?? 0; } })() });
+  movesOpen = false; saveCharacter(character);
   sbLastPlayerFn = null; sbIntensity = "standard"; sbWeaveArmed = null; sbLastRound = null; // CCODE-46: never leak a read into the next fight // CCODE-37: never carry a weave into the next fight
   const nm = def?.opponent?.name || "your opponent";
   // SNG-138: a resolved PRESTIGE-CHALLENGE duel feeds renown — band-scaled (beating a renowned duelist
@@ -13803,8 +13567,9 @@ async function sbEnd(rr) {
   const brkAt = CONTENT.skillBattle?.engine?.momentum?.pressure?.breakAtPressure ?? 2;
   // `rr` is the ROUND RESULT — its pressure is the post-round value that actually resolved the fight. Reading
   // enc.state here would read the PRE-round state and miss the very tick that ended it.
-  const brokeOnPressure = (rr?.pressure?.opponent || 0) >= brkAt;
-  const why = brokeOnPressure ? ` They have been driven back ${brkAt} times and will not come again.` : "";
+  const brkNeeded = rr?.state?.breakAt?.opponent ?? brkAt;   // R34b: half their level, not the flat dial
+  const brokeOnPressure = (rr?.pressure?.opponent || 0) >= brkNeeded;
+  const why = brokeOnPressure ? ` They have been driven back ${brkNeeded} times and will not come again.` : "";
   const outLine = {
     opponent_fell: `You have beaten ${nm} — they go down.`,
     opponent_yielded: `${nm} yields to you.${why}`,

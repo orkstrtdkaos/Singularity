@@ -458,8 +458,9 @@ working papers; **this is the answer.**
 | 09-04 | ✅ **THE FIVE BEHIND THE FLOOR (Q3 · R38 · R37 · Q5-B · Q8)** | the roll reads the CRAFT — `substrateForAction` is the ground card (one source, one tuning, the site's per-source field, the carried and presence terms; 204 of 416 crafts read differently than by tradition); `meaningDensity` derived from tags/tier/community/presence, never stored, and for metaphysical crafts MEANING is the ceiling and SUBSTRATE the penalty (min, not product; `mechanic.meaning: "none"` opts out); growth stacks completions (+1) and condition steps (+1) on acquaintance, the tick stamps the record, and `commitGrowth` writes an observed craft at r1; a debt is `worldState.debts[holderId]` held by a named NPC, written by `releaseHolding` and `debtOps`, escalated only by a holder who reacts to debtors (1 colder · 2 refused), cleared by pay/deed/holder gone; the hold store yields by condition into `holding.store`, pays upkeep from the purse, fills, gets raided, sells where it stands | `§69` (the divergence census · roll=card by source · ceiling/min/opt-out/absent · stacking and the r1 write · the Kestrel escalates, Greta does not, three clears, coin refused · the steep curve, arrears, raid/garrison, sell-where-you-stand, forfeit/carry, the tick) · `§63` refixtured on `settlement-standing` | body §7g (ground), §7h (R37), §7d (debts, store), §9. §10's holdings-economy gap CLOSED. ⬜ Q15 (lethal census), Q13 (somatic split), escalation 3–4, goods to market: logged, not built |
 | 09-04 | ⚠️ **THE PELL–VETH CENSUS — the Cut Thread is never cast; the death save's tier term read the player as tier 1** | Erik asked whether Veth wins by the Cut Thread. 2,000 duels × 5 configurations: 0 casts of it (the policy has no notion of a lethal rung); Veth wins 99.9% even with the save off; her killers are a T1 lethal (`hastened_grey`) and two T3s; Pell's only wins are Plain Weight (T1 lethal) kills. Defect: the tier-gap term read `skills[]` and the player seat carries a map → +28 on every NPC lethal hit; the seat now names `maxTier` (95% → 88% kills) | `§68` (a T5-carrying player is no out-class; a T1 is +28; the seat names it from the character's crafts) · `scripts/duel_pell_vs_veth.mjs` | body §3c (the census table). Q15 widened: the NPC policy's blindness to lethal rungs is part of it |
 | 09-04 | ✅ **THE ENGINE FOLLOWS THE AFTERNOON'S CONTENT, AND A SPEC REACHES BUILT** | per-rank source: `craftSource` reads `tree[].powerSystem` at the owned rank (rank → school → tradition; stopped_breath metaphysical r1 / veil r2 — SPEC_body_source §4); Erik's revised bound: `killCost.energyMultiplier` (the Cut Thread costs double on a kill, not the pool); `mechanic.ongoing` reads as ongoing harm; the closed schema declares all three. Aevi's ask: eight named specs said `spec_ready` and were shipped — thirteen statuses now say `built`/`part_built` with the version; a `builds:` field for a spec to name its exports | `§70` (r1/r2 source; a craft without one unchanged; the schema; 28 of 200 on a kill and no seal, the pool shape still read; slow_cup reads 4 corrosive until treated; no spec says ready while saying BUILT; `builds:` declared-and-present is stale; the derived count ratchets) | body §3c, §7g, §4. `PIPELINE.md` rule 5. Owed: a per-round ticker for `ongoing` on a sheet |
+| 09-05 | ⛔ **THE HARNESS DRIVES THE PRODUCTION PATH — `engine/battle_turn.js`, and two defects the old harness could not see** | Erik: *"simulate the real game as much as possible"*. The skill-battle turn moved out of app.js into one engine module (menu · declaration · rank · guards · sense → action → bonus · apply · end) and app.js delegates to it; `tests/lib/realgame.mjs` plays a duel through the same functions with a character built from a person. Found on the way: `escalateToFight` dropped the person's sheet (Veth entered play with 7 health and no crafts) — `duelFromTarget` keeps the body on the def; a skill-battle knockout never reached the incapacitation table — `sbEnd` calls `endBattle` now. Through the real path Pell goes down 85% and dies in a quarter of those | `§71` (delegation by source; the dropped sheet measured old vs new; a seeded duel deterministic; every knockout reaches the table; the harness never calls battleRound) · `scripts/duel_pell_vs_veth.mjs` REAL GAME batch | body §11 RULE 4. `PIPELINE.md` rule 6. §51/§59/§68 repointed to the module |
 
-**Last verified: 2026-09-05 · v1.9.350 · 421 crafts.**
+**Last verified: 2026-09-05 · v1.9.351 · 421 crafts.**
 
 ---
 
@@ -1625,6 +1626,28 @@ receiver, not the name.**
 copy.** ⛔ **The signal is identical to cruft; only the diagnosis differs, and only a person can make it.**
 `scripts/safe_delete.mjs` sorts candidates and **refuses to output "delete"** for that reason.
 ---
+
+### ⛔ RULE 4 — A HARNESS DRIVES THE PRODUCTION PATH, NEVER A SIMPLER FIGHT BESIDE IT (Erik, 2026-09-05)
+<!-- subject: battle-declaration -->
+
+*"I want our test harnesses to simulate the real game as much as possible so we can get it right."* The skill-battle TURN
+— the menu, the declaration, the rank, the guards, sense → action → bonus, the apply, the end — lived in app.js with the
+DOM, so the harnesses called `battleRound` directly with a hand-built seat and a random hand: no sense step, no bonus,
+no items, no guards, no conditions, no incapacitation table, no XP. ⛔ **Two defects lived in that gap and every gate was
+green:** a named person entered play as a threat-curve body with 3–8 health, because `escalateToFight` handed the person
+to `synthesizeDuelDef`, which rebuilds `opponent` from scratch (§51 read the SOURCE of the call and saw the person being
+passed); and a skill-battle knockout never reached the incapacitation table, because `endEncounter` was called from the
+classic path only — `sbEnd` cleared the fight and narrated *"you fall"* with no gear taken, no days lost, no death, no XP.
+
+✅ **`engine/battle_turn.js` is the one path.** `battleSkillsForCharacter` (the menu), `declFromSelection`,
+`resolveDeclRank`, `openGuards`, `playTurn` (the app's two calls: the sense, then the action and the bonus it earned),
+`applyRoundToCharacter`, `collapseIfFinished`, `personOpponentFor`, `duelFromTarget` (the person's body stays on the def),
+`endBattle` (XP, the bond, the incapacitation table — and `sbEnd` calls it now). app.js delegates to every one of them;
+`tests/lib/realgame.mjs` drives the same functions with a character built from a person and a documented stand-in hand.
+**Through the real path the Pell–Veth duel reads differently:** Pell goes down 85% of the time and **dies in a quarter of
+those** (the aggressor table: slain · left for dead · spared), in 12 turns, and his single-craft hand never reaches for
+Plain Weight — the "Pell wins by a T1 lethal" of the direct probe was an artefact of a random hand. `§71` asserts the
+delegation by source and the behaviour by playing the game headless; the duel runner's REAL GAME batch prints it.
 
 ## 12 · THE INTERFACE — what the player actually operates
 

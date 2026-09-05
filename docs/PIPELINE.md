@@ -572,3 +572,16 @@ every `po/SPEC_*.md` status the way `§62` reads a ruling's anchor:
 
 **Mark a spec when it ships:** `**Status:** \`built\` v1.9.NNN (was \`spec_ready\` — marked YYYY-MM-DD; \`§N\`)`, or `part_built`
 with what landed and what waits. The version is the one `bump_version` stamped in the commit that shipped it.
+
+## Rule 6 — a harness drives the production path (Erik, 2026-09-05)
+
+*"I want our test harnesses to simulate the real game as much as possible so we can get it right."* A harness that
+rebuilds a simpler fight beside the app's — a hand-built seat, no sense step, no items, no incapacitation table — is the
+rule-4 failure at the harness level: the suite builds the input production omits, and the defects live in the gap (the
+dropped person sheet, the knockout that never reached the table — both found the day the harness switched paths).
+
+**So the turn is an engine module (`engine/battle_turn.js`) and both the app and the harness call it.** When a piece of
+play logic is needed by a harness, MOVE it out of app.js into the engine and have app.js delegate — never copy it into the
+test. `tests/lib/realgame.mjs` is the pattern: `characterFromPerson` builds the app's character shape, `playDuel` runs
+`duelFromTarget` → `playTurn` (sense, then action + bonus) → `endBattle`. A policy stands in for the player's hand and
+says so; it is not a claim about players. `§71` gates the delegation by source and the play by outcome.

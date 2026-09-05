@@ -85,8 +85,9 @@ console.log("\n── §1 · a craft, its ranks, its cost ──");
   check("§1: …and a rank-3 use costs 10 (+3 per rank of reach)", r3 === 10, `got ${r3}`);
   // ⛔ AND THE WIRING, WHICH IS THE HALF A UNIT TEST CANNOT SEE: the menu the player reads must be built
   // with that same config object, or the arithmetic above is true only inside this file.
+  // ✅ 2026-09-05: the menu is `battleSkillsForCharacter` in engine/battle_turn.js (§71); app.js hands it `rules: CONTENT.rules`.
   check("§1: the capability menu is built with the ENERGY config, so the surcharge reaches play",
-    /capabilityMenu\([^)]*cfg:\s*CONTENT\.rules\?\.energy/.test(rd("app.js")));
+    /capabilityMenu\([^)]*cfg:\s*rules\?\.energy/.test(rd("engine/battle_turn.js")) && /battleSkillsForCharacter\(character, \{ catalog: fullCatalog\(\), rules: CONTENT\.rules/.test(rd("app.js")));
 
   // "There are no other costs… The single exception is an extreme capstone."
   const CAPSTONES = new Set(["the_cut_thread", "last_lament"]);
@@ -3423,14 +3424,16 @@ console.log("\n── §51 · the person-keyed sheet, live ──");
   // ⛔ STEP 3 — A NAMED PERSON FIGHTS AS THEMSELVES. Committing violence against Pell used to build
   // `{ name, threat, tacticTags: [] }`: a difficulty rating, with her level and seventeen crafts nowhere.
   {
-    const app51 = rd("app.js");
+    // ✅ 2026-09-05: the body of `personOpponent` and of `escalateToFight` moved to engine/battle_turn.js (§71) — app.js keeps the
+    // wrappers; the shape is asserted where it lives now.
+    const app51 = rd("app.js"), bt51 = rd("engine/battle_turn.js");
     check("§51: ⛔ a named person fights as themselves, not as a difficulty rating",
-      /function personOpponent\(/.test(app51) &&
-      /opponent: personOpponent\(target\) \|\| \{ name: target\.name, threat/.test(app51));
+      /function personOpponent\(/.test(app51) && /personOpponentFor\(rec/.test(app51) &&
+      /opponent: person \|\| \{ name: target\?\.name, threat: fallbackThreat/.test(bt51));
     check("§51: …and it hands over the WHOLE sheet, never skills alone",
-      /attributes: sheet\.attributes, health: sheet\.health, energy: sheet\.energy/.test(app51));
+      /attributes: sheet\.attributes, health: sheet\.health, energy: sheet\.energy/.test(bt51));
     check("§51: ⚠️ …while a stranger still falls to the threat curve — 112 people is not everyone",
-      /if \(!rec\) return null;/.test(app51) && /if \(!skills\.length\) return null;/.test(app51));
+      /if \(!rec\) return null;/.test(app51) && /if \(!skills\.length\) return null;/.test(bt51));
   }
   // ⛔ THE BRIDGE. A half-passed sheet is refused rather than silently completed at threat 20.
   {
@@ -4011,8 +4014,10 @@ console.log("\n── §59 · sheets fill in through play; an authored sheet is 
     const gm = rd("engine/gm_registry.js"), app = rd("app.js");
     const gmSlice = gm.slice(gm.indexOf("sheetsForGM(present"), gm.indexOf("sheetsForGM(present") + 220);
     check("§59: ⛔ the narrator's sheet block passes `resolution.npcStanding`", /npcStanding/.test(gmSlice), gmSlice.replace(/\s+/g, " ").slice(0, 120));
-    const appSlice = app.slice(app.indexOf("personSheetFor(rec"), app.indexOf("personSheetFor(rec") + 120);
-    check("§59: ⛔ …and so does the fight path (`personOpponent`)", /cfg: npcCfg|npcStanding/.test(appSlice), appSlice.slice(0, 100));
+    // ✅ 2026-09-05: the fight path's sheet call lives in engine/battle_turn.js now (§71); the dial reaches it as `cfg`, handed by app.js.
+    const bt59 = rd("engine/battle_turn.js");
+    const appSlice = bt59.slice(bt59.indexOf("personSheetFor(rec"), bt59.indexOf("personSheetFor(rec") + 120);
+    check("§59: ⛔ …and so does the fight path (`personOpponentFor`)", /cfg/.test(appSlice) && /cfg: npcCfg/.test(app), appSlice.slice(0, 100));
     check("§59: …and the dial block is authored where the callers now read it", !!cfg59 && !!cfg59.tierFloor && Number(cfg59.tierFloor.legendary) > 1);
   }
 
@@ -4128,10 +4133,12 @@ console.log("\n── §60 · the craft reaches the round — def under the decl
   // ── F2 · rank beside tier: the roll reads the rank, the dice read the tier ──
   {
     check("§60: ⛔ `rollSide` feeds the chance stack the RANK (falling back to tier for callers that set none)", /abilityLevel: \(decl\.rank \?\? tier\)/.test(sbSrc));
+    // ✅ 2026-09-05: the menu and the declaration builder live in engine/battle_turn.js (§71); the LIVE path is app.js + the module.
+    const liveSrc = appSrc + "\n" + rd("engine/battle_turn.js");
     check("§60: ⛔ the player's menu puts the CRAFT's tier in `tier` and the owned rank in `rank`",
-      /tier: abilityTier\(def\), rank: a\.level \?\? 1/.test(appSrc) && !/tier: a\.level \|\| 1, attribute: def\.attribute/.test(appSrc));
+      /tier: abilityTier\(def\), rank: a\.level \?\? 1/.test(liveSrc) && !/tier: a\.level \|\| 1, attribute: def\.attribute/.test(liveSrc));
     check("§60: …both live declaration builders carry `rank` and `energyCost`",
-      (appSrc.match(/rank: (lead|skill)\.rank \?\? (lead|skill)\.tier \?\? 1/g) || []).length >= 2 && (appSrc.match(/energyCost: (lead|skill|picked\[1\])\.energyCost \?\? null/g) || []).length >= 3);
+      (liveSrc.match(/rank: (lead|skill)\.rank \?\? (lead|skill)\.tier \?\? 1/g) || []).length >= 2 && (liveSrc.match(/energyCost: (lead|skill|picked\[1\])\.energyCost \?\? null/g) || []).length >= 3);
     const pell = C60.npcs.pell;
     const kb = NS60.battleSkillsFor(pell, { catalog: C60.abilities, cfg: C60.rules.npcStanding }).skills.find(s => s.id === "keystone_blow");
     check("§60: …and a person's kit carries both — Pell's keystone_blow is tier 4, rank 1", !!kb && kb.tier === 4 && kb.rank === 1, JSON.stringify({ tier: kb?.tier, rank: kb?.rank }));
@@ -4457,7 +4464,7 @@ console.log("\n── §68 · the combat floor — pools, symmetric pressure, br
   check("§68: …the level rides on both opponent-sheet paths — threat 60 reads as level 30; an authored level passes through",
     SB68.synthesizeOpponentSheet({ threat: 60 }, sb68).level === 30
       && SB68.synthesizeOpponentSheet({ skills: [{ function: "strike", tier: 1 }], attributes: {}, health: 10, energy: 10, level: 27 }, sb68).level === 27);
-  check("§68: …and `personOpponent` passes the person's level to the seat", /level: sheet\.level,/.test(rd("app.js")));
+  check("§68: …and `personOpponentFor` passes the person's level to the seat", /level: sheet\.level,/.test(rd("engine/battle_turn.js")));
 
   // ── R35 · the death save
   const cutFile = rj("content/packs/core/abilities/reach_death_life.json");
@@ -4508,7 +4515,7 @@ console.log("\n── §68 · the combat floor — pools, symmetric pressure, br
   const enc68 = rd("engine/encounters.js"), app68 = rd("app.js");
   check("§68: …the wrapper passes the sheet's seal in and the death save + seal out", /playerSealed: true/.test(enc68) && /deathSave: r\.deathSave \|\| null, sealed: r\.state\?\.playerSealed === true/.test(enc68));
   check("§68: …the kill is EVENT-VISIBLE both ways it falls", /THE THREAD IS CUT/.test(enc68) && /holds against the kill/.test(enc68));
-  check("§68: …the app persists the seal on the sheet and a night's rest lifts it", /if \(rr\.sealed\) character\.craftSealedUntilRest = true;/.test(app68)
+  check("§68: …the app persists the seal on the sheet and a night's rest lifts it", /if \(rr\.sealed\) character\.craftSealedUntilRest = true;/.test(app68 + rd("engine/battle_turn.js"))
     && /if \(character\.craftSealedUntilRest\) delete character\.craftSealedUntilRest;/.test(app68) && /Death save: /.test(app68));
   check("§68: …the body carries the death save and the floor", /death save/i.test(rd("docs/HOW_IT_WORKS.md")) && /healthBase/.test(rd("docs/HOW_IT_WORKS.md")));
   // ⛔ MEASURED 2026-09-04 (the Pell–Veth census): the tier-gap term read the TARGET's sharpest craft from `skills[]`, and the
@@ -4744,6 +4751,71 @@ console.log("\n── §70 · per-rank source · the revised kill cost · ongoin
     derivedStale.length <= BASELINE_DERIVED, derivedStale.map(r => `${r.f}:${r.named.slice(0, 3).join(",")}`).join(" · "));
   const built70 = rows70.filter(r => r.status === "built" || r.status === "part_built");
   check("§70: …and a spec marked built names the version that shipped it", built70.length >= 8 && built70.every(r => /Status:?\*{0,2}:?\s*`(built|part_built)`[^\n]*v1\.9\.\d+/.test(rd("po/" + r.f))), built70.filter(r => !/v1\.9\.\d+/.test(rd("po/" + r.f).split("\n").slice(0, 14).join("\n"))).map(r => r.f).join(" · "));
+}
+/* ═════ §71 — THE HARNESS DRIVES THE PRODUCTION PATH: one turn module for play and for the suite ═════ */
+// ⛔ ERIK 2026-09-05: "I want our test harnesses to simulate the real game as much as possible so we can get it right."
+// The skill-battle TURN — menu, declaration, rank, guards, sense → action → bonus, the apply, the end — lived in app.js
+// with the DOM; the harnesses rebuilt a simpler fight beside it and two defects lived in the gap: a named person entered
+// play as a threat-curve body with 3–8 health (`synthesizeDuelDef` dropped the sheet), and a skill-battle knockout never
+// reached the incapacitation table. `engine/battle_turn.js` is the one path; app.js delegates to it; `tests/lib/realgame.mjs`
+// drives it. This section asserts the delegation by source and the behaviour by playing the game headless.
+console.log("\n── §71 · the harness drives the production path (engine/battle_turn.js) ──");
+{
+  const BT71 = await import("../engine/battle_turn.js");
+  const RG71 = await import("./lib/realgame.mjs");
+  const { synthesizeDuelDef: sdd71 } = await import("../engine/random_encounters.js");
+  const { loadContentHeadless: lch71 } = await import("./headless_content.mjs");
+  const C71 = await lch71();
+  const rules71 = C71.rules, sb71 = C71.skillBattle.engine, cfg71 = rules71.npcStanding;
+  const app71 = rd("app.js"), bt71 = rd("engine/battle_turn.js"), rg71 = rd("tests/lib/realgame.mjs");
+  // ── the delegation, by source: app.js no longer carries its own copy of the turn
+  check("§71: ⛔ app.js imports the turn from the engine and delegates every piece of it",
+    /from "\.\/engine\/battle_turn\.js"/.test(app71)
+    && /function playerBattleSkills\(\) \{[\s\S]{0,300}battleSkillsForCharacter\(character/.test(app71)
+    && /function sbDeclFromSel\(sel, skills, intensity\) \{[\s\S]{0,200}declFromSelection\(sel, skills, intensity/.test(app71)
+    && /function personOpponent\(target\) \{[\s\S]{0,900}personOpponentFor\(rec/.test(app71)
+    && /function escalateToFight\(target, choice\) \{[\s\S]{0,600}duelFromTarget\(character, target/.test(app71)
+    && /function endEncounter\(outcome\) \{[\s\S]{0,700}endBattle\(character/.test(app71)
+    && /async function sbResolveSense\(\) \{[\s\S]{0,1600}playTurn\(character, enc\.def, \{ sense: decl/.test(app71)
+    && /const applyRR = \(r, d, label\) => \{[\s\S]{0,600}applyRoundToCharacter\(character, r, d/.test(app71)
+    && /resolveDeclRank\(decl, \{ character, catalog: fullCatalog\(\) \}\)/.test(app71) && /collapseIfFinished\(rr, enc\.def/.test(app71));
+  check("§71: ⛔ …and a skill-battle END reaches the incapacitation table — `sbEnd` calls `endBattle` (it never called `endEncounter`)",
+    /async function sbEnd\(rr\) \{[\s\S]{0,1200}endBattle\(character, \{ outcome: rr\.outcome, def,/.test(app71)
+    && !/async function sbEnd\(rr\) \{[\s\S]{0,400}character\.activeEncounter = null; saveCharacter\(character\);/.test(app71));
+  check("§71: …the duplicated logic is GONE from app.js (no second menu, no second apply)",
+    !/for \(const a of character\.abilities \|\| \[\]\) \{\s*const def = fullCatalog\(\)\[a\.abilityId\];\s*const fns = def\?\.functions/.test(app71)
+    && !/incapacitationOutcome\(\{/.test(app71) && /plan = incapacitationOutcome\(\{/.test(bt71));
+  check("§71: …the harness drives `playTurn` and `duelFromTarget`, never `battleRound` by hand",
+    /playTurn\(character, def, \{ sense:/.test(rg71) && /playTurn\(character, def, \{ action:/.test(rg71) && /duelFromTarget\(character, target/.test(rg71) && !/battleRound\(/.test(rg71) && /endBattle\(/.test(rg71));
+  // ── the first defect, measured: the person's body rides on the def
+  const veth71 = C71.npcs["veth-ondra"], pell71 = C71.npcs.pell;
+  const pc71 = RG71.characterFromPerson(pell71, { catalog: C71.abilities, cfg: cfg71, day: 1 });
+  const old71 = sdd71({ id: "x", flavor: "fight", seed: "", opponent: BT71.personOpponentFor(veth71, { catalog: C71.abilities, cfg: cfg71, day: 1 }) });
+  const { def: def71, oppSheet: os71, state: st71 } = BT71.duelFromTarget(pc71, { id: "veth-ondra", name: veth71.name }, { catalog: C71.abilities, npcs: C71.npcs, cfg: cfg71, day: 1, sb: sb71, here: null });
+  check("§71: ⛔ `synthesizeDuelDef` alone DROPS a person — a handful of health and no crafts (the defect, kept measurable)",
+    old71.opponent.health <= 8 && !(old71.opponent.skills || []).length, JSON.stringify({ health: old71.opponent.health, skills: (old71.opponent.skills || []).length }));
+  check("§71: ⛔ …`duelFromTarget` keeps the body on the def — Veth enters play at her own health, level and kit, and the sheet is AUTHORED",
+    def71.opponent.health === os71.health && def71.opponent.health > 100 && (def71.opponent.skills || []).length >= 30 && def71.opponent.level === 33 && os71.authored === true && st71.opponentHealth === def71.opponent.health && st71.mode === "skill_battle",
+    JSON.stringify({ h: def71.opponent.health, k: (def71.opponent.skills || []).length, lvl: def71.opponent.level, authored: os71.authored, stH: st71.opponentHealth }));
+  check("§71: …a stranger still falls to the threat curve", (() => { const c = RG71.characterFromPerson(pell71, { catalog: C71.abilities, cfg: cfg71, day: 1 }); const r = BT71.duelFromTarget(c, { name: "a nameless brigand" }, { catalog: C71.abilities, npcs: C71.npcs, cfg: cfg71, day: 1, sb: sb71, here: { dangerLevel: 3 } }); return r.oppSheet && !r.oppSheet.authored && r.def.opponent.threat > 0; })());
+  // ── the character fixture is the app's shape, and the menu is the app's menu
+  check("§71: a character built from a person carries the app's fields (abilities at their ranks, pools, level) and the menu reads them",
+    pc71.level === 27 && pc71.abilities.length >= 10 && pc71.abilities.every(a => a.abilityId && a.level >= 1) && pc71.health === pc71.maxHealth && pc71.energy === pc71.maxEnergy
+    && (() => { const m = BT71.battleSkillsForCharacter(pc71, { catalog: C71.abilities, rules: rules71, sb: sb71 }); return m.some(s => s.id === "_strike") && m.some(s => s.id === "_guard") && m.filter(s => !s.id.startsWith("_")).every(s => Number.isFinite(s.energyCost) && s.rank >= 1 && s.tier >= 1); })());
+  // ── a duel played through the production path: deterministic, ends in the vocabulary, the knockout reaches the table
+  const play71 = (seed) => { const c = RG71.characterFromPerson(pell71, { catalog: C71.abilities, cfg: cfg71, day: 1 }); return RG71.playDuel({ character: c, target: { id: "veth-ondra", name: veth71.name }, content: C71, rng: RG71.mulberry32(seed), day: 1, maxTurns: 40 }); };
+  const d1 = play71(7), d2 = play71(7);
+  check("§71: ⛔ a duel played through `playTurn` is DETERMINISTIC under a seed and ends in the app's outcome vocabulary",
+    JSON.stringify(d1.transcript) === JSON.stringify(d2.transcript) && d1.turns >= 1 && ["opponent_fell", "opponent_yielded", "incapacitated", "player_overcome", "stalemate", "cap"].includes(d1.outcome), `${d1.outcome} in ${d1.turns} turns`);
+  check("§71: …the transcript carries the sense step and the action step of one turn, with the receipt's fields", d1.transcript.some(t => t.step === "sense" && t.decl) && d1.transcript.some(t => t.step === "action" && "momentum" in t && "hp" in t && "oppHp" in t));
+  let plans71 = 0, downs71 = 0, cleared71 = 0;
+  let ended71 = 0;
+  for (let s = 1; s <= 40; s++) { const r = play71(s); if (r.outcome !== "cap") { ended71++; if (!r.character.activeEncounter) cleared71++; }
+    if (r.outcome === "incapacitated") { downs71++; if (r.plan && r.character.lastIncapacitation && (r.plan.slain ? (r.character.status === "dead" && !!r.character.deathState && r.character.health === 0) : r.character.health >= 1)) plans71++; } }
+  check("§71: ⛔ …and EVERY knockout reaches the incapacitation table — a plan on the record, the floor or the death applied, every ended fight cleared",
+    downs71 >= 5 && plans71 === downs71 && cleared71 === ended71, `${downs71} knockouts, ${plans71} with a plan, ${cleared71} cleared of ${ended71} ended`);
+  check("§71: …the incapacitation table is content-driven and the harness sees its outcomes", (() => { const seen = new Set(); for (let s = 1; s <= 60; s++) { const r = play71(s); if (r.plan) seen.add(r.plan.outcome); } return seen.size >= 2; })());
+  check("§71: …the body says so", /battle_turn/.test(rd("docs/HOW_IT_WORKS.md")) && /RULE 4/.test(rd("docs/HOW_IT_WORKS.md")));
 }
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));

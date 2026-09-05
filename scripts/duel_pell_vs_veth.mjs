@@ -128,3 +128,28 @@ console.log("\n=== BEFORE THE FIX (bare declaration, tier = owned rank, flat 5 e
 const t7b = runScript(7, { log: false });
 console.log("ended:", t7b[t7b.length - 1].resolved || "cap", "after", t7b.length, "rounds");
 batch("BEFORE");
+
+/* ═══ 2026-09-05 — THE REAL GAME (Erik: "simulate the real game as much as possible") ═══
+ * The two batches above call `battleRound` directly with a hand-built seat and a random hand. This one plays the fight the
+ * way app.js plays it: `duelFromTarget` (a player's violence against a named person), the menu, a declaration, the sense
+ * step, the action and the bonus it may earn, the apply, and `endBattle` — XP and the incapacitation table. Pell is a
+ * CHARACTER built from his record (`characterFromPerson`); the hand is `simplePlayerPolicy`, a documented stand-in. */
+{
+  const { characterFromPerson, playDuel, mulberry32: seeded } = await import("../tests/lib/realgame.mjs");
+  const N = 2000;
+  const tally = {}, plans = {}, kills = { veth: 0, pell: 0 }, finisher = {};
+  let turns = 0, dead = 0;
+  for (let seed = 1; seed <= N; seed++) {
+    const pc = characterFromPerson(pellRec, { catalog: C.abilities, cfg, day: 1 });
+    const r = playDuel({ character: pc, target: { id: vethRec.id || "veth-ondra", name: vethRec.name }, content: C, rng: seeded(seed), day: 1 });
+    tally[r.outcome] = (tally[r.outcome] || 0) + 1; turns += r.turns;
+    if (r.plan) { plans[r.plan.outcome] = (plans[r.plan.outcome] || 0) + 1; if (r.plan.slain) dead++; }
+    const last = r.transcript.filter(t => t.damage).slice(-1)[0];
+    if (last) finisher[last.damage.by] = (finisher[last.damage.by] || 0) + 1;
+    for (const t of r.transcript) if (t.deathSave?.kill) kills[t.deathSave.by === "player" ? "pell" : "veth"]++;
+  }
+  console.log("\n=== REAL GAME: " + N + " seeded duels through engine/battle_turn.js (the app's own path) ===");
+  console.log("outcomes:", JSON.stringify(tally), "· mean turns", (turns / N).toFixed(1));
+  console.log("incapacitation table:", JSON.stringify(plans), "· Pell DIES in", dead, "of", N);
+  console.log("death-save kills — Veth", kills.veth, "· Pell", kills.pell, "· finishing blows:", Object.entries(finisher).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([k, v]) => k + " " + v).join(" · "));
+}

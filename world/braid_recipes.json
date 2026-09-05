@@ -252,6 +252,32 @@
         "characterName": "Silas Weir"
       },
       "foundWorldDay": 26
+    },
+    "the_shadow_work+the_warding_mark+the_working_model": {
+      "braidKey": "the_shadow_work+the_warding_mark+the_working_model",
+      "name": "The Declared Threshold",
+      "description": "Shadow Work and The Warding Mark run as one craft: a shadow-field is drawn around any opening or passage and then told its purpose via a warding declaration. The resulting frame is not visible in ordinary light but is structurally present — it carries a specific ward (a named intent, a category of…",
+      "notFor": "What lies outside this craft's own reach — the single new move your discovery made, no wider.",
+      "emergentFunction": null,
+      "tree": [
+        {
+          "name": "The Declared Threshold",
+          "grants": "Shadow Work and The Warding Mark run as one craft: a shadow-field is drawn around any opening or passage and then told its purpose via a warding declaration. The resulting frame is not visible in…",
+          "cannot": "What it has not yet grown to do."
+        }
+      ],
+      "namedBy": "gm",
+      "sourceNames": [
+        "the_working_model",
+        "the_shadow_work",
+        "the_warding_mark"
+      ],
+      "contributedBy": {
+        "playerKey": "player-s9z9u1",
+        "characterId": "char-mrhs8286",
+        "characterName": "Silas Weir"
+      },
+      "foundWorldDay": 67
     }
   },
   "canonPairing": "⛔ SNG-344: THE PAIR IS CANON — this file and content/packs/core/rules/combination_recipes.json are NOT competitors and neither supersedes the other. Zero ids in common, and they key differently (braidKey 'a+b' here vs parts:[a,b] there). This file is the NAMING authority; content/packs/core/rules/combination_recipes.json is the MECHANICAL authority. One NAMES a braid, the other RESOLVES it. Do not merge, do not delete, do not 'reconcile' by dropping either — the join is an authored crosswalk (Aevi, SNG-344), not an engine merge. ⚠️ THREE OF THE SEVEN NAMED BRAIDS ALREADY HAVE A MECHANICAL RECIPE HERE UNDER A DIFFERENT NAME: Undying Ledger = the_double_register, Shatterlight = the_sounding, The Hollowing Sight = the_counted_end. Those are naming COLLISIONS to resolve, not blanks to fill — one pairing must not surface two names to the player.",

@@ -1,25 +1,25 @@
 {
-  "schemaVersion": 1,
-  "id": "duel_redline_challenge",
-  "type": "duel",
-  "name": "The Redline Challenge",
-  "locationId": "the_redline",
-  "setup": "On the Redline a challenge is issued in front of witnesses and declining is a matter of public record. This one has been issued to you. The witnesses are already gathering.",
-  "lethal": false,
-  "opponent": {
-    "name": "a Redline duelist",
-    "health": 5,
-    "threat": 42,
-    "yieldAt": 1,
-    "fleeDifficulty": 20,
-    "spectrum": {
-      "violence_peace": -0.5
-    },
-    "tacticTags": [
-      "makes-it-public",
-      "escalates-if-you-hedge",
-      "fights-to-first-yield",
-      "plays-to-the-witnesses"
-    ]
-  }
+ "schemaVersion": 1,
+ "id": "duel_redline_challenge",
+ "type": "duel",
+ "name": "The Redline Challenge",
+ "locationId": "the_redline",
+ "setup": "On the Redline a challenge is issued in front of witnesses and declining is a matter of public record. This one has been issued to you. The witnesses are already gathering.",
+ "lethal": false,
+ "opponent": {
+  "name": "a Redline duelist",
+  "threat": 42,
+  "fleeDifficulty": 20,
+  "spectrum": {
+   "violence_peace": -0.5
+  },
+  "tacticTags": [
+   "makes-it-public",
+   "escalates-if-you-hedge",
+   "fights-to-first-yield",
+   "plays-to-the-witnesses"
+  ],
+  "yieldAtFraction": 0.2,
+  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free."
+ }
 }

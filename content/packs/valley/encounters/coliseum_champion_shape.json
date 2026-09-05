@@ -1,25 +1,25 @@
 {
-  "schemaVersion": 1,
-  "id": "coliseum_champion_shape",
-  "type": "duel",
-  "name": "The Bout: The Made Ground",
-  "locationId": "the_great_coliseum",
-  "setup": "Bricke arrives with a satchel and permission to use it. By the third exchange the sand has a wall in it that was not there, and the terms of the bout have quietly changed.",
-  "lethal": false,
-  "opponent": {
-    "name": "Bricke of the Making",
-    "health": 5,
-    "threat": 36,
-    "yieldAt": 1,
-    "fleeDifficulty": 15,
-    "spectrum": {
-      "destruction_creation": 0.5
-    },
-    "tacticTags": [
-      "builds-the-ground",
-      "changes-the-terms",
-      "makes-a-tool-from-nothing",
-      "fights-you-in-a-room-he-built"
-    ]
-  }
+ "schemaVersion": 1,
+ "id": "coliseum_champion_shape",
+ "type": "duel",
+ "name": "The Bout: The Made Ground",
+ "locationId": "the_great_coliseum",
+ "setup": "Bricke arrives with a satchel and permission to use it. By the third exchange the sand has a wall in it that was not there, and the terms of the bout have quietly changed.",
+ "lethal": false,
+ "opponent": {
+  "name": "Bricke of the Making",
+  "threat": 36,
+  "fleeDifficulty": 15,
+  "spectrum": {
+   "destruction_creation": 0.5
+  },
+  "tacticTags": [
+   "builds-the-ground",
+   "changes-the-terms",
+   "makes-a-tool-from-nothing",
+   "fights-you-in-a-room-he-built"
+  ],
+  "yieldAtFraction": 0.2,
+  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free."
+ }
 }

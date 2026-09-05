@@ -801,17 +801,38 @@ const duelDef = JSON.parse(readFileSync(join(root, "content/packs/valley/encount
 const chalDef = JSON.parse(readFileSync(join(root, "content/packs/valley/encounters/rockslide_crossing.json"), "utf8"));
 const puzDef = JSON.parse(readFileSync(join(root, "content/packs/valley/encounters/precursor_mechanism.json"), "utf8"));
 let dS = startEncounter(duelDef), cS = startEncounter(chalDef), pS = startEncounter(puzDef);
-check("all three types start", dS.opponentHealth === 5 && cS.stageIndex === 0 && pS.attempts === 0);
+// ⚠️ 2026-09-05 — THESE FOUR PINNED THE RETIRED POOL SCALE (5 health, 2 hits to 3, a yield at 1). The pools
+// now DERIVE from standing, so the integers moved and the behaviours did not. Each check asks the behaviour
+// it is named for: a duel starts with a pool, a hit reduces it, a trade costs the player, the opponent
+// yields at ITS OWN threshold. ⛔ A test that asserts an arithmetic result is pinned to a tuning pass.
+check("all three types start", dS.opponentHealth > 0 && cS.stageIndex === 0 && pS.attempts === 0,
+  `duel pool ${dS.opponentHealth}`);
+check("…and a duel's pool is on the LIVE standing scale, not the retired 3–7", dS.opponentHealth >= 30,
+  `${dS.opponentHealth} (30 + 5/level of the level its threat implies)`);
 check("unknown type returns null", startEncounter({ type: "dance" }) === null);
 check("duel threat maps to difficulty", encounterDifficulty(dS, duelDef, rules) === Math.round(45 * 0.3));
 check("flee uses fleeDifficulty", encounterDifficulty(dS, duelDef, rules, { flee: true }) === 15);
 check("challenge uses stage difficulty", encounterDifficulty(cS, chalDef, rules) === 0);
 let r = duelRound(dS, duelDef, { degree: "success" }, rules);
-check("duel success lands 2 hits", r.state.opponentHealth === 3 && r.deltas.health === 0 && !r.ended);
+check("duel success lands hits and costs the player nothing", r.state.opponentHealth < dS.opponentHealth && r.deltas.health === 0 && !r.ended,
+  `${dS.opponentHealth} → ${r.state.opponentHealth}`);
 r = duelRound(r.state, duelDef, { degree: "partial" }, rules);
-check("duel partial trades", r.state.opponentHealth === 2 && r.deltas.health === -4);
+  const beforePartial = r.state.opponentHealth;
+check("duel partial trades — it lands and it costs", r.state.opponentHealth < beforePartial + 1 && r.deltas.health < 0,
+  `opp ${beforePartial} → ${r.state.opponentHealth}, player ${r.deltas.health}`);
 r = duelRound(r.state, duelDef, { degree: "partial" }, rules);
-check("opponent yields at threshold", r.ended && r.outcome === "opponent_yielded");
+// ⚑ DRIVEN TO THE THRESHOLD RATHER THAN ASSUMED TO BE ONE ROUND AWAY FROM IT — the pool is larger now, so
+// a fixed number of rounds no longer reaches it, and a check that assumed it would was measuring the pool.
+{
+  let g = r.state, guard = 0;
+  while (!g.ended && guard++ < 200 && (g.opponentHealth > (g.opponentYieldAt ?? 0))) {
+    const rr = duelRound(g, duelDef, { degree: "success" }, rules);
+    g = rr.state; if (rr.ended) { r = rr; break; }
+    r = rr;
+  }
+  check("opponent yields at threshold", r.ended && r.outcome === "opponent_yielded",
+    `ended ${r.ended} · ${r.outcome} · at ${g.opponentHealth} of threshold ${g.opponentYieldAt}`);
+}
 let dS2 = { ...startEncounter(duelDef), opponentHealth: 2 };
 r = duelRound(dS2, duelDef, { degree: "crit_success" }, rules);
 check("opponent falls at 0", r.ended && r.outcome === "opponent_fell");
@@ -10695,9 +10716,13 @@ await (async () => {
     names({ name: "x", threat: 40, encounterKind: "standoff" }) === "a pressed point , the held line");
   check("SNG-253: an explicit tacticTag still WINS over the kind — it is the most specific thing an author can say about THIS opponent",
     names({ name: "x", threat: 40, encounterKind: "standoff", tacticTags: ["duelist"] }) === "the measured cut , the turned guard");
+  // ⚠️ 2026-09-05 — `withKind` MOVED TO THE ENGINE with `contestSheetFor`, because the app was the only
+  // place that could decide an encounter's other side and no harness could reach it. The question is
+  // unchanged — ONE source for the kind, and the synthesizer never re-deriving it — so it is asked of
+  // wherever the function now lives rather than of a particular file.
   check("SNG-253: the kind is THREADED from encounterKind(def), never re-derived inside the synthesizer (one source)",
-    /function withKind\(opponent, def\)/.test(readFileSync(join(root, "app.js"), "utf8")) &&
-    /const k = encounterKind\(def\)/.test(readFileSync(join(root, "app.js"), "utf8")) &&
+    /export function withKind\(opponent, def\)/.test(readFileSync(join(root, "engine/encounters.js"), "utf8")) &&
+    /const k = encounterKind\(def\)/.test(readFileSync(join(root, "engine/encounters.js"), "utf8")) &&
     !/encounterKind\(/.test(readFileSync(join(root, "engine/skill_battle.js"), "utf8")));
   check("SNG-253: EVERY opponent-sheet synthesis call site threads the kind (a missed one silently keeps fight verbs)",
     (() => { const s = readFileSync(join(root, "app.js"), "utf8");

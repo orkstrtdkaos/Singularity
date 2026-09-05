@@ -1,23 +1,23 @@
 {
-  "schemaVersion": 1,
-  "id": "wild_greatcat_quickwood",
-  "type": "duel",
-  "name": "Something in the Eaves",
-  "locationId": "the_greenward",
-  "setup": "You did not see it arrive. That is the whole of the problem — a Quickwood greatcat picks its moment first and reveals itself second, and it has already picked.",
-  "lethal": true,
-  "opponent": {
-    "name": "a Quickwood greatcat",
-    "health": 5,
-    "threat": 44,
-    "yieldAt": 0,
-    "fleeDifficulty": 22,
-    "tacticTags": [
-      "was-already-behind-you",
-      "waits-for-you-to-turn",
-      "takes-the-slower-one",
-      "leaves-when-it-is-done"
-    ]
-  },
-  "lethalNote": "Erik's ruling 2026-07-19: wild animals are lethal — they are. Defeat here is not incapacitation. The stakes dial (SNG-170) governs whether a profile meets them at all, not whether a boar can kill."
+ "schemaVersion": 1,
+ "id": "wild_greatcat_quickwood",
+ "type": "duel",
+ "name": "Something in the Eaves",
+ "locationId": "the_greenward",
+ "setup": "You did not see it arrive. That is the whole of the problem — a Quickwood greatcat picks its moment first and reveals itself second, and it has already picked.",
+ "lethal": true,
+ "opponent": {
+  "name": "a Quickwood greatcat",
+  "threat": 44,
+  "yieldAt": 0,
+  "fleeDifficulty": 22,
+  "tacticTags": [
+   "was-already-behind-you",
+   "waits-for-you-to-turn",
+   "takes-the-slower-one",
+   "leaves-when-it-is-done"
+  ],
+  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free."
+ },
+ "lethalNote": "Erik's ruling 2026-07-19: wild animals are lethal — they are. Defeat here is not incapacitation. The stakes dial (SNG-170) governs whether a profile meets them at all, not whether a boar can kill."
 }

@@ -1,25 +1,25 @@
 {
-  "schemaVersion": 1,
-  "id": "duel_hall_of_mirrors",
-  "type": "duel",
-  "name": "The Duel in the Hall",
-  "locationId": "the_hall_of_mirrors",
-  "setup": "You have been challenged in the Hall of Mirrors, which means you have been challenged by someone who may not be standing where you can see them, using a face that may not be theirs.",
-  "lethal": false,
-  "opponent": {
-    "name": "a Veilwright",
-    "health": 4,
-    "threat": 40,
-    "yieldAt": 1,
-    "fleeDifficulty": 15,
-    "spectrum": {
-      "falsehood_truth": -0.6
-    },
-    "tacticTags": [
-      "is-not-where-you-thought",
-      "wears-another-face",
-      "lets-you-hit-the-wrong-one",
-      "admits-nothing"
-    ]
-  }
+ "schemaVersion": 1,
+ "id": "duel_hall_of_mirrors",
+ "type": "duel",
+ "name": "The Duel in the Hall",
+ "locationId": "the_hall_of_mirrors",
+ "setup": "You have been challenged in the Hall of Mirrors, which means you have been challenged by someone who may not be standing where you can see them, using a face that may not be theirs.",
+ "lethal": false,
+ "opponent": {
+  "name": "a Veilwright",
+  "threat": 40,
+  "fleeDifficulty": 15,
+  "spectrum": {
+   "falsehood_truth": -0.6
+  },
+  "tacticTags": [
+   "is-not-where-you-thought",
+   "wears-another-face",
+   "lets-you-hit-the-wrong-one",
+   "admits-nothing"
+  ],
+  "yieldAtFraction": 0.25,
+  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free."
+ }
 }

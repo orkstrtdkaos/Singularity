@@ -223,7 +223,10 @@ export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg
     // the whole body rides on the def — the sheet is authored, the health is theirs
     def.opponent = { ...def.opponent, attributes: person.attributes, ...(person.subAttributes ? { subAttributes: person.subAttributes } : {}),
       health: person.health, energy: person.energy, soak: person.soak, level: person.level, skills: person.skills, tacticTags: person.tacticTags, _person: person._person };
-    def.yieldAt = def.opponent.yieldAt = 0;   // a person fights to their own end, not to a synthesized fraction of 3–8
+    // a person fights to their own end, not to a synthesized fraction. ⚠️ AND THE RATIO MUST GO WITH IT:
+    // clearing only the absolute would leave `yieldAtFraction` standing and make every person yield.
+    def.yieldAt = def.opponent.yieldAt = 0;
+    delete def.opponent.yieldAtFraction;
   }
   def.lethal = !!lethal;
   if (here?.dangerLevel != null) def.danger = here.dangerLevel;

@@ -1,25 +1,25 @@
 {
-  "schemaVersion": 1,
-  "id": "coliseum_champion_restore",
-  "type": "duel",
-  "name": ".The Bout: The Standing Wound",
-  "locationId": "the_great_coliseum",
-  "setup": "Oreth attends rather than attacks. Whatever you do on this sand, he undoes — and the crowd scores the undoing, not the doing. He has never in his career put a competitor down and has never once lost badly.",
-  "lethal": false,
-  "opponent": {
-    "name": "Oreth of the Quiet Ground",
-    "health": 6,
-    "threat": 30,
-    "yieldAt": 2,
-    "fleeDifficulty": 15,
-    "spectrum": {
-      "death_life": 0.4
-    },
-    "tacticTags": [
-      "undoes-what-you-did",
-      "refuses-to-be-hurried",
-      "tends-you-mid-bout",
-      "yields-nothing-by-conceding"
-    ]
-  }
+ "schemaVersion": 1,
+ "id": "coliseum_champion_restore",
+ "type": "duel",
+ "name": ".The Bout: The Standing Wound",
+ "locationId": "the_great_coliseum",
+ "setup": "Oreth attends rather than attacks. Whatever you do on this sand, he undoes — and the crowd scores the undoing, not the doing. He has never in his career put a competitor down and has never once lost badly.",
+ "lethal": false,
+ "opponent": {
+  "name": "Oreth of the Quiet Ground",
+  "threat": 30,
+  "fleeDifficulty": 15,
+  "spectrum": {
+   "death_life": 0.4
+  },
+  "tacticTags": [
+   "undoes-what-you-did",
+   "refuses-to-be-hurried",
+   "tends-you-mid-bout",
+   "yields-nothing-by-conceding"
+  ],
+  "yieldAtFraction": 0.33,
+  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free."
+ }
 }

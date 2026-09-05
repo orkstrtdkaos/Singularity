@@ -6124,6 +6124,99 @@ console.log("\n── §88 · a craft that says what it does at every rank must 
     underCovering.length <= RANK_ADDS_A_VERB,
     underCovering.slice(0, 5).map(a => `${a.id} +${[...new Set((a.tree || []).flatMap(verbsAt).filter(v => !new Set(verbsAt(a)).has(v)))].join("/")}`).join(" · "));
 }
+
+/* ═════ §89 — AN ENCOUNTER'S POOL IS ON THE LIVE SCALE, AND A BOUT LASTS (POLISH_encounters §2a) ═════ */
+// ⛔ Aevi: "duel opponents `health: 3–7`… what an NPC is worth today is 30 + 5 × level… these end in one."
+// ⚑ MEASURED THROUGH THE PRODUCTION PATH AND SHE WAS EXACTLY RIGHT: a coliseum bout ended in a MEDIAN OF
+// ONE TURN over 30 runs. It is 3–5 now, against the Pell–Veth census's 7.4 rounds.
+//
+// ⛔ AND THE ROOT WAS NOT THE THIRTEEN AUTHORED NUMBERS. `opponentSheetSynthesis` carried its OWN health
+// curve, so a synthesised foe had x5 a person's health at threat 10 and x12.7 at threat 100 — THE GAP
+// WIDENED WITH THREAT, so the more dangerous the thing the more wrong it got, and a threat-100 creature had
+// 22 hit points where a level-50 person has 280. ⚠️ Two dials describing one thing on two scales.
+//
+// ⚑ AND THE REASON NOBODY HAD MEASURED IT: `contestSheetFor` — THE ONE PLACE that decides an encounter's
+// other side — lived in `app.js`. `startEncounter` with no sheet yields a state with no `opponentSheet`,
+// and `opponentPolicy` crashes on it. ⛔ NINETEEN ENCOUNTERS WERE UNPLAYABLE OUTSIDE THE BROWSER. §71 moved
+// the battle TURN into the engine for exactly this reason and stopped one seam short.
+console.log("\n── §89 · one pool rule for a foe and a person · a bout that lasts · a yield that scales ──");
+{
+  const { loadContentHeadless: lch89 } = await import("./headless_content.mjs");
+  const C89 = await lch89();
+  const E89 = await import("../engine/encounters.js");
+  const SB89 = await import("../engine/skill_battle.js");
+  const RG89 = await import("./lib/realgame.mjs");
+  const ns = C89.rules.npcStanding, eng = C89.skillBattle?.engine;
+
+  check("§89: ⛔ the decider is IN THE ENGINE — an authored encounter can be opened without a browser",
+    typeof E89.contestSheetFor === "function" && typeof E89.withKind === "function"
+    && !/function contestSheetFor\(def\) \{/.test(rd("app.js")));
+
+  // ── ONE RULE FOR BOTH SIDES. This is the check that stops the two scales drifting apart again.
+  const rows = [10, 20, 40, 60, 100].map(t => {
+    const sh = SB89.synthesizeOpponentSheet({ threat: t }, eng, { standing: ns });
+    return { t, lvl: sh.level, foe: sh.health, person: ns.healthBase + ns.healthPerLevel * sh.level };
+  });
+  check("§89: ⛔ A SYNTHESISED FOE AND A PERSON OF THE SAME STANDING HAVE THE SAME POOL — one rule, no second curve",
+    rows.every(r => Math.abs(r.foe - r.person) <= 1),
+    rows.map(r => `t${r.t}→lvl${r.lvl}: foe ${r.foe} vs person ${r.person}`).join(" · "));
+  check("§89: ⚠️ …and the defect is kept measurable — the OLD curve is still reachable as a dial, and still wrong",
+    (() => { const old = SB89.synthesizeOpponentSheet({ threat: 100 }, { ...eng, opponentSheetSynthesis: { ...(eng.opponentSheetSynthesis || {}), healthFromThreat: true } }, { standing: ns });
+      return old.health < 40 && rows[rows.length - 1].foe > 200; })(),
+    "threat 100: the retired curve gives a fraction of what standing gives");
+
+  // ── NO ENCOUNTER STILL CARRIES A RETIRED POOL
+  const authored = Object.values(C89.encounters || {}).filter(e => e?.opponent);
+  const stale = authored.filter(e => Number.isFinite(Number(e.opponent.health)) && Number(e.opponent.health) <= 20);
+  check("§89: ⛔ no encounter carries a pool on the retired 3–7 scale — the sheet is the source now",
+    authored.length >= 10 && stale.length === 0,
+    `${authored.length} with an opponent · stale: ${stale.map(e => `${e.id}:${e.opponent.health}`).join(", ") || "none"}`);
+  const opened = authored.map(e => ({ e, st: E89.startEncounter(e, { oppSheet: E89.contestSheetFor(e, { content: C89 }) }) }));
+  const opens = opened.filter(x => x.st);
+  check("§89: …and every encounter that OPENS does so with a live pool and a resolved yield",
+    opens.length >= 10 && opens.every(x => Number(x.st.opponentHealth) >= 30 && Number.isFinite(Number(x.st.opponentYieldAt))),
+    opens.map(x => x.st.opponentHealth).join(", "));
+  // ⚠️ AND THE ONE THAT DOES NOT OPEN IS NAMED RATHER THAN COUNTED AWAY. `sunk_assay_warden` carries a full
+  // opponent record — threat, role, tactics — and NO `type`, so `startEncounter` returns null and it can never
+  // be entered. ⛔ Authored to be fought and unreachable, which is the four doors wearing content's clothes.
+  // ⬜ Aevi's: either it is a duel and should say so, or the opponent block is narrative and should say THAT.
+  const typeless = opened.filter(x => !x.st).map(x => x.e.id);
+  check("§89: ⚠️ ratchet — encounters carrying an opponent that cannot be entered = " + typeless.length + " (baseline 1) — may only go DOWN",
+    typeless.length <= 1, typeless.join(" · ") || "none");
+
+  // ── ⛔ A RATIO IS SCALE-FREE. An absolute yield could not survive a derived pool.
+  check("§89: ⛔ `yieldAtFraction` is a RATIO — 1 of 5 was a fifth; 1 of 130 is nothing, and the same number meant both",
+    typeof E89.yieldThreshold === "function"
+    && E89.yieldThreshold({ opponent: { yieldAtFraction: 0.2 } }, { opponentMaxHealth: 130 }) === 26
+    && E89.yieldThreshold({ opponent: { yieldAtFraction: 0.2 } }, { opponentMaxHealth: 5 }) === 1);
+  check("§89: …and an absolute still works where one is meant, and 0 still means 'to their own end'",
+    E89.yieldThreshold({ opponent: { yieldAt: 7 } }, { opponentMaxHealth: 130 }) === 7
+    && E89.yieldThreshold({ opponent: {} }, { opponentMaxHealth: 130 }) === 0);
+
+  // ── ⛔ AND THE FIGHT ITSELF, PLAYED. The only check here that cannot be satisfied by arithmetic.
+  const play = (id, n = 12) => {
+    const def = C89.encounters[id], turns = [], outs = {};
+    for (let i = 0; i < n; i++) {
+      const ch = RG89.characterFromPerson(C89.npcs.veth_ondra || C89.npcs.pell, { catalog: C89.abilities, cfg: ns, day: 1, id: "pc" });
+      const r = RG89.playDuel({ character: ch, content: C89, rng: RG89.mulberry32(700 + i), def, maxTurns: 60, day: 1 });
+      turns.push(r.turns); outs[r.outcome] = (outs[r.outcome] || 0) + 1;
+    }
+    turns.sort((a, b) => a - b);
+    return { med: turns[Math.floor(turns.length / 2)], outs };
+  };
+  const bout = play("coliseum_champion_harm");
+  check("§89: ⛔ A COLISEUM BOUT IS A FIGHT — median 3–8 turns, where the retired pool ended it in ONE",
+    bout.med >= 3 && bout.med <= 8, `median ${bout.med} turns · ${JSON.stringify(bout.outs)}`);
+  check("§89: ⚑ …and a FORMAL bout ends in a YIELD — 'they are not here for blood', and now the engine agrees",
+    Object.keys(bout.outs).join() === "opponent_yielded", JSON.stringify(bout.outs));
+  const beast = play("wild_boar_valley");
+  check("§89: ⚠️ …while a BOAR does not yield — it fights to its own end, which is what `yieldAtFraction`'s absence says",
+    Object.keys(beast.outs).join() === "opponent_fell", JSON.stringify(beast.outs));
+
+  // ⚠️ AND THE HARNESS TAKES THE PRODUCTION PATH TO GET THERE — the whole reason this was measurable at all.
+  check("§89: …and the harness opens the encounter through the ENGINE's decider, not one of its own",
+    /contestSheetFor\(def, \{ content \}\)/.test(rd("tests/lib/realgame.mjs")));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

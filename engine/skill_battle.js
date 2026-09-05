@@ -39,7 +39,7 @@ export function matchupBonus(attackerFn, defenderFn, sb) {
 
 /** Synthesize a modest skill sheet for a duel opponent from its threat + tacticTags (it carries no
  *  skills[] at spawn). An authored `opponent.skills[]` overrides the synthesis entirely. */
-export function synthesizeOpponentSheet(opponent = {}, sb) {
+export function synthesizeOpponentSheet(opponent = {}, sb, { standing = null } = {}) {
   const syn = sb?.opponentSheetSynthesis || {};
   const threat = Number(opponent.threat) || 20;
   // CCODE-52 (Erik: "opponent stats need to not be capped like that. We need a threat system for the world that
@@ -58,8 +58,20 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
   // attribute, tier and energy from threat and carried no health term at all, so every synthesised foe fell
   // back to the hardcoded 5 in encounters.js — an epic and a rat had the same five hit points, and no amount
   // of damage tuning could ever make a legendary fight feel unlike a rat's.
-  const health = Math.max(syn.healthFloor ?? 3,
-    Math.round((syn.healthBase ?? 4) + curve(threat * (syn.threatToHealth ?? 0.09), syn.healthKnee ?? 12)));
+  // ⛔ 2026-09-05 — AND THE HEALTH TERM WAS A SECOND SCALE FOR A THING Q1 ALREADY RULED. Measured against
+  // `npcStanding` (30 + 5/level, v1.9.347): a synthesised foe had **x5 the standing's health at threat 10
+  // and x12.7 at threat 100** — the gap WIDENED, so the higher the threat the more wrong it got, and a
+  // threat-100 thing had 22 hit points where a level-50 person has 280. ⚠️ That is why a coliseum bout
+  // ended in a MEDIAN OF ONE TURN and why "run from this" could never be the right answer.
+  // ⚑ SO IT DERIVES FROM ITS OWN LEVEL THROUGH THE ONE AUTHORITATIVE SOURCE. The synthesizer already
+  // computes `level`; a foe of that standing now has the pool a PERSON of that standing has, and there is
+  // no second curve to drift. ⬜ The old curve stays reachable — author `healthFromThreat: true` to get it
+  // back — because a reversal must be a dial, not a revert.
+  const lvlForPools = Math.max(1, Math.round(threat * (syn.threatToLevel ?? 0.5)));
+  const health = (standing && syn.healthFromThreat !== true)
+    ? Math.max(1, Math.round(num(standing.healthBase, 30) + lvlForPools * num(standing.healthPerLevel, 5)))
+    : Math.max(syn.healthFloor ?? 3,
+      Math.round((syn.healthBase ?? 4) + curve(threat * (syn.threatToHealth ?? 0.09), syn.healthKnee ?? 12)));
   // GAP2: SOAK is what a landed hit must overcome. Nothing in the engine reduced damage — no armour, no
   // damage reduction, no temporary hit points — so there was nothing to overcome, and nothing for ward or
   // shield to actually DO.

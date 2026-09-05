@@ -97,7 +97,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
-import { lethalOfferClamp, isLethalEncounter, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
+import { lethalOfferClamp, isLethalEncounter, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps, contestSheetFor as engineContestSheetFor, withKind } from "./engine/encounters.js";
 // ⛔ CCODE-227 (Erik backlog 7, step 1): conditions.js was built, gated, shipped — and imported by NOTHING.
 // Six exports reachable only from smoke.mjs. A rest cleared nothing because the module that decides what a
 // rest clears was never in the room. Wired at `rest()`, which is the one door both kinds of rest go through.
@@ -123,7 +123,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.366";
+const APP_VERSION = "1.9.367";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4154,15 +4154,6 @@ function movesSummaryLine(copy = {}) {
   return String(c.summary || "⚙ Your moves — {summary} · tap to open").replace("{summary}", summary);
 }
 
-/** SNG-253 (engine half): stamp the encounter KIND onto the opponent before its sheet is synthesized, so the
- *  opponent's move VOCABULARY can be kind-native ("press a point" in a standoff, "cut you off" in a chase)
- *  instead of falling to the fight default. The kind comes from `encounterKind(def)` — the ONE source
- *  (seam_encounter_kind_single_source), never re-derived here — and rides on the opponent because that is what
- *  the synthesizer receives. Additive: with no per-kind archetypes authored yet, nothing changes. */
-function withKind(opponent, def) {
-  try { const k = encounterKind(def); return k ? { ...(opponent || {}), encounterKind: k } : opponent; }
-  catch { return opponent; }
-}
 
 /** SNG-252b §2a: the family's plain word for the collapsed summary — "4 reads", not "4 KNOW". */
 const FAMILY_PLAIN_WORD = { HARM: "strike", PROTECT: "guard", KNOW: "read", INFLUENCE: "press", SHAPE: "shaping", MOVE: "move", RESTORE: "mend", SUSTAIN: "steadying" };
@@ -13777,21 +13768,10 @@ async function sbEnd(rr) {
   else renderPlay(character.activeScene?.lastTurn || null, { aside: reason });
 }
 
-/** SNG-247 Tier 3: THE ONE PLACE that decides whether an encounter runs on the contest engine, and with what other
- *  side. A duel gets the opponent's sheet; a PUZZLE gets a STATIC sheet — a thing that resists at one number and
- *  never chooses. Centralised because the `isSB` derivation had been hand-copied at four call sites already, and a
- *  fifth divergence is how a kind ends up half-promoted (engine here, classic path there). Returns null when the
- *  encounter stays on its classic path, which is also the safe answer for anything unrecognised. */
-function contestSheetFor(def) {
-  const eng = CONTENT.skillBattle?.engine;
-  if (!eng || !def || def.skillBattle === false) return null;
-  if (def.type === "duel") return synthesizeOpponentSheet(withKind(def.opponent, def), eng);
-  if (def.type === "puzzle" && eng.kinds?.puzzle) {
-    return synthesizeStaticSheet({ resist: def.resist ?? def.difficulty, tier: def.holdTier,   // CCODE-53: the NUMERIC craft tier, not the bestiary word
-      holdName: def.holdName || "it holds", give: def.give }, eng);
-  }
-  return null;
-}
+// ⛔ `contestSheetFor` NOW LIVES IN THE ENGINE (`encounters.js`). It decided THE OTHER SIDE of every
+// authored encounter from in here, so no harness could open one — which is why nineteen encounters had
+// never been measured. The app passes the engine and the content in; it does not own the decision.
+const contestSheetFor = (def) => engineContestSheetFor(def, { sb: CONTENT.skillBattle?.engine, content: CONTENT });
 
 /** SNG-230 §6a (behavior): FLEE a fight → you enter a CHASE, not a teleport. Build the chase from the fight
  *  (chaseFromFight), keep the fight def around so a caught chase can drop back into it, start the chase, and hand

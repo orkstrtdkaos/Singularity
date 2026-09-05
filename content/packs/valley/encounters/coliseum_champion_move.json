@@ -1,25 +1,25 @@
 {
-  "schemaVersion": 1,
-  "id": "coliseum_champion_move",
-  "type": "duel",
-  "name": "The Bout: The Long Yard",
-  "locationId": "the_great_coliseum",
-  "setup": "Aro has never been hit in this arena. Not blocked — hit. The bout is a hundred paces of open sand and the entire question is whether you can close it.",
-  "lethal": false,
-  "opponent": {
-    "name": "Aro of the Horizon Reach",
-    "health": 3,
-    "threat": 44,
-    "yieldAt": 1,
-    "fleeDifficulty": 10,
-    "spectrum": {
-      "space_time": 0.4
-    },
-    "tacticTags": [
-      "never-where-you-swing",
-      "closes-in-one-step",
-      "turns-the-sand",
-      "makes-you-chase"
-    ]
-  }
+ "schemaVersion": 1,
+ "id": "coliseum_champion_move",
+ "type": "duel",
+ "name": "The Bout: The Long Yard",
+ "locationId": "the_great_coliseum",
+ "setup": "Aro has never been hit in this arena. Not blocked — hit. The bout is a hundred paces of open sand and the entire question is whether you can close it.",
+ "lethal": false,
+ "opponent": {
+  "name": "Aro of the Horizon Reach",
+  "threat": 44,
+  "fleeDifficulty": 10,
+  "spectrum": {
+   "space_time": 0.4
+  },
+  "tacticTags": [
+   "never-where-you-swing",
+   "closes-in-one-step",
+   "turns-the-sand",
+   "makes-you-chase"
+  ],
+  "yieldAtFraction": 0.33,
+  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free."
+ }
 }

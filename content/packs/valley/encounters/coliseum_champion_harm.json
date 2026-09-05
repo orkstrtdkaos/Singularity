@@ -1,25 +1,25 @@
 {
-  "schemaVersion": 1,
-  "id": "coliseum_champion_harm",
-  "type": "duel",
-  "name": "The Bout: Forms",
-  "locationId": "the_great_coliseum",
-  "setup": "Kestrin fights under Marcher forms — salute, engage, and a clean stop when it is over. She has read your stance since you walked out and the crowd knows it. They are not here for blood; they are here to see whether you can be read.",
-  "lethal": false,
-  "opponent": {
-    "name": "Kestrin of the Riven Marches",
-    "health": 5,
-    "threat": 40,
-    "yieldAt": 1,
-    "fleeDifficulty": 15,
-    "spectrum": {
-      "violence_peace": -0.3
-    },
-    "tacticTags": [
-      "reads-your-stance",
-      "punishes-hesitation",
-      "formal-salute",
-      "strikes-the-old-injury"
-    ]
-  }
+ "schemaVersion": 1,
+ "id": "coliseum_champion_harm",
+ "type": "duel",
+ "name": "The Bout: Forms",
+ "locationId": "the_great_coliseum",
+ "setup": "Kestrin fights under Marcher forms — salute, engage, and a clean stop when it is over. She has read your stance since you walked out and the crowd knows it. They are not here for blood; they are here to see whether you can be read.",
+ "lethal": false,
+ "opponent": {
+  "name": "Kestrin of the Riven Marches",
+  "threat": 40,
+  "fleeDifficulty": 15,
+  "spectrum": {
+   "violence_peace": -0.3
+  },
+  "tacticTags": [
+   "reads-your-stance",
+   "punishes-hesitation",
+   "formal-salute",
+   "strikes-the-old-injury"
+  ],
+  "yieldAtFraction": 0.2,
+  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free."
+ }
 }

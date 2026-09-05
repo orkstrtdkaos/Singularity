@@ -1,23 +1,23 @@
 {
-  "schemaVersion": 1,
-  "id": "wild_boar_valley",
-  "type": "duel",
-  "name": "The Boar",
-  "locationId": "the_quickwood_eaves",
-  "setup": "A safe village does not mean a safe boar. It has not run and it is not going to, and the distance between you is now its decision rather than yours.",
-  "lethal": true,
-  "opponent": {
-    "name": "a valley boar",
-    "health": 5,
-    "threat": 40,
-    "yieldAt": 0,
-    "fleeDifficulty": 18,
-    "tacticTags": [
-      "does-not-yield",
-      "charges-the-noise",
-      "turns-faster-than-it-should",
-      "is-not-afraid-of-you"
-    ]
-  },
-  "lethalNote": "Erik's ruling 2026-07-19: wild animals are lethal — they are. Defeat here is not incapacitation. The stakes dial (SNG-170) governs whether a profile meets them at all, not whether a boar can kill."
+ "schemaVersion": 1,
+ "id": "wild_boar_valley",
+ "type": "duel",
+ "name": "The Boar",
+ "locationId": "the_quickwood_eaves",
+ "setup": "A safe village does not mean a safe boar. It has not run and it is not going to, and the distance between you is now its decision rather than yours.",
+ "lethal": true,
+ "opponent": {
+  "name": "a valley boar",
+  "threat": 40,
+  "yieldAt": 0,
+  "fleeDifficulty": 18,
+  "tacticTags": [
+   "does-not-yield",
+   "charges-the-noise",
+   "turns-faster-than-it-should",
+   "is-not-afraid-of-you"
+  ],
+  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free."
+ },
+ "lethalNote": "Erik's ruling 2026-07-19: wild animals are lethal — they are. Defeat here is not incapacitation. The stakes dial (SNG-170) governs whether a profile meets them at all, not whether a boar can kill."
 }

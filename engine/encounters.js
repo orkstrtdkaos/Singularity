@@ -5,7 +5,7 @@
 // narrates round receipts and proposes choices — it never advances state.
 // Incapacitation, never engine-imposed death.
 
-import { battleRound, opponentPolicy } from "./skill_battle.js";
+import { battleRound, opponentPolicy, synthesizeOpponentSheet, synthesizeStaticSheet } from "./skill_battle.js";
 import { wornSoak, wornSoakLayers } from "./inventory.js";   // 2026-09-04: the PC’s authored armour reaches the fight seat
 import { targetableAllies, alliesOf } from "./combatants.js";
 import { commandSlots, bringForward, theatresOf, overmatchOf, answersOvermatch, scaleRank } from "./melee.js";   // CCODE-274: how many you lead is earned; who comes forward is chosen
@@ -31,7 +31,68 @@ function fnIndexFor(content) {
 
 // ---------- lifecycle ----------
 
-export function startEncounter(def, { oppSheet = null } = {}) {
+/** SNG-253 (engine half): stamp the encounter KIND onto the opponent before its sheet is synthesized, so
+ *  the opponent's move VOCABULARY can be kind-native ("press a point" in a standoff, "cut you off" in a
+ *  chase) instead of falling to the fight default. The kind comes from `encounterKind(def)` — the ONE
+ *  source, never re-derived here — and rides on the opponent because that is what the synthesizer receives. */
+export function withKind(opponent, def) {
+  try { const k = encounterKind(def); return k ? { ...(opponent || {}), encounterKind: k } : opponent; }
+  catch { return opponent; }
+}
+
+/** SNG-247 Tier 3: THE ONE PLACE that decides whether an encounter runs on the contest engine, and with what
+ *  other side. A duel gets the opponent's sheet; a PUZZLE gets a STATIC sheet — a thing that resists at one
+ *  number and never chooses. Centralised because the `isSB` derivation had been hand-copied at four call
+ *  sites already. Returns null when the encounter stays on its classic path, the safe answer for anything
+ *  unrecognised.
+ *
+ *  ⛔ MOVED OUT OF `app.js` 2026-09-05, AND THE MOVE IS THE FINDING. This decides THE OTHER SIDE of every
+ *  authored encounter, and while it lived in the app NO HARNESS COULD OPEN ONE — `startEncounter(def,
+ *  {oppSheet: null})` yields a state with no `opponentSheet`, and `opponentPolicy` crashes on it. ⚠️ That is
+ *  why nineteen encounters have never been measured: not neglect, they were UNPLAYABLE outside the browser.
+ *  ⚑ §71 moved the battle TURN into the engine for exactly this reason and stopped one seam short.
+ *
+ *  ⚠️ `sb` and `content` are PASSED, not reached for — this file must not know about a global CONTENT. */
+export function contestSheetFor(def, { sb = null, content = null, standing = null } = {}) {
+  const eng = sb || content?.skillBattle?.engine || null;
+  if (!eng || !def || def.skillBattle === false) return null;
+  // ⚠️ THE STANDING DIALS RIDE THROUGH so a synthesised foe has the pool a person of that standing has.
+  // A caller that passes no content gets the old curve — degrading, not crashing.
+  const st = standing || content?.rules?.npcStanding || null;
+  if (def.type === "duel") return synthesizeOpponentSheet(withKind(def.opponent, def), eng, { standing: st });
+  if (def.type === "puzzle" && eng.kinds?.puzzle) {
+    return synthesizeStaticSheet({ resist: def.resist ?? def.difficulty, tier: def.holdTier,   // the NUMERIC craft tier, not the bestiary word
+      holdName: def.holdName || "it holds", give: def.give }, eng);
+  }
+  return null;
+}
+
+/** PURE. The pool an opponent starts with, when no synthesised sheet decided it. ⛔ ONE RULE, NOT A SECOND
+ *  ONE: the level the threat implies, at standing's pool — the same arithmetic `synthesizeOpponentSheet`
+ *  uses, so the two paths cannot disagree. An authored `health` still wins where one is written. */
+export function poolFor(def, standing = null) {
+  const o = def?.opponent || {};
+  if (Number.isFinite(Number(o.opponentHealthOverride))) return Number(o.opponentHealthOverride);
+  if (Number.isFinite(Number(o.health))) return Number(o.health);
+  const lvl = Math.max(1, Math.round((Number(o.threat) || 20) * 0.5));
+  const base = Number.isFinite(Number(standing?.healthBase)) ? Number(standing.healthBase) : 30;
+  const per = Number.isFinite(Number(standing?.healthPerLevel)) ? Number(standing.healthPerLevel) : 5;
+  return Math.max(1, Math.round(base + lvl * per));
+}
+
+/** PURE. What health an opponent yields at. A FRACTION of the pool they started with when one is authored
+ *  (scale-free, so a derived pool cannot silently turn a bout into a death match), else the absolute. */
+export function yieldThreshold(def, state = null) {
+  const o = def?.opponent || {};
+  const frac = Number(o.yieldAtFraction);
+  if (Number.isFinite(frac) && frac > 0) {
+    const max = Number(state?.opponentMaxHealth) || Number(state?.opponentSheet?.maxHealth) || Number(state?.opponentSheet?.health) || Number(o.health) || 0;
+    if (max > 0) return Math.max(1, Math.round(max * frac));
+  }
+  return Number(o.yieldAt) || 0;
+}
+
+export function startEncounter(def, { oppSheet = null, standing = null } = {}) {
   const base = { schemaVersion: 1, encounterId: def.id, type: def.type, status: "active", round: 1, log: [] };
   if (def.type === "duel") {
     // SNG-098: when the app hands us a synthesized/authored opponent SHEET, this duel runs as a two-sided
@@ -40,8 +101,15 @@ export function startEncounter(def, { oppSheet = null } = {}) {
     // than whatever the def happened to carry. Until now a synthesised foe had no health rule at all, so
     // everything unauthored fell to a flat 5 — an epic and a rat were equally durable, which is why no amount
     // of damage tuning could make a legendary fight feel different from a rat's.
-    if (oppSheet) return { ...base, opponentHealth: def.opponent.health ?? oppSheet.health ?? 5, tactic: null, mode: "skill_battle", opponentSheet: oppSheet, momentum: 0, opponentEnergy: oppSheet.energy ?? 40 };
-    return { ...base, opponentHealth: def.opponent.health, tactic: null };
+    // ⛔ THE AUTHORED POOL NO LONGER WINS OVER A SYNTHESISED SHEET. Thirteen encounters carry `health: 3-7`
+    // from the retired scale, and that number overriding a live sheet is what made a bout a formality.
+    // ⚑ THE SHEET IS THE SOURCE; an authored pool is an override only when it is on the LIVE scale, which
+    // `opponentHealthOverride` says explicitly rather than being inferred from a number nobody re-checked.
+    if (oppSheet) return { ...base, opponentHealth: def.opponent.opponentHealthOverride ?? oppSheet.health ?? def.opponent.health ?? 5, opponentYieldAt: yieldThreshold(def, { opponentMaxHealth: def.opponent.opponentHealthOverride ?? oppSheet.health ?? def.opponent.health ?? 5 }), opponentMaxHealth: def.opponent.opponentHealthOverride ?? oppSheet.health ?? def.opponent.health ?? 5, tactic: null, mode: "skill_battle", opponentSheet: oppSheet, momentum: 0, opponentEnergy: oppSheet.energy ?? 40 };
+    // ⚠️ THE CLASSIC PATH DERIVES TOO. It used to read the authored pool and nothing else, so an encounter
+    // that lets its pool derive left this branch `undefined` — a fallback that silently stopped falling back.
+    const cp = poolFor(def, standing);
+    return { ...base, opponentHealth: cp, opponentMaxHealth: cp, opponentYieldAt: yieldThreshold(def, { opponentMaxHealth: cp }), tactic: null };
   }
   if (def.type === "challenge") return { ...base, stageIndex: 0, stagesDone: [] };
   if (def.type === "puzzle") {
@@ -105,7 +173,12 @@ export function duelRound(state, def, resolution, rules, opts = {}) {
     if (s.opponentHealth <= 0) {
       s.status = "ended"; ended = true; outcome = "opponent_fell";
       events.push(`${def.opponent.name} goes down.`);
-    } else if (s.opponentHealth <= (def.opponent.yieldAt ?? 0)) {
+    // ⛔ `yieldAt` IS AN ABSOLUTE, AND AN ABSOLUTE CANNOT SURVIVE A DERIVED POOL. `yieldAt: 1` against the
+    // retired `health: 5` meant "a fifth left"; against a live 130 it means 0.8% — the same authored number
+    // turning a formal bout into a fight to the death without anyone editing it.
+    // ⚑ `yieldAtFraction` SAYS THE RATIO INSTEAD, and a ratio is scale-free. The absolute stays supported
+    // for anything that means a literal number of points, and 0 still means "fights to their own end".
+    } else if (s.opponentHealth <= (s.opponentYieldAt ?? yieldThreshold(def, s))) {
       s.status = "ended"; ended = true; outcome = "opponent_yielded";
       events.push(`${def.opponent.name} yields.`);
     }
@@ -339,9 +412,13 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // line asked only "does this def have a yieldAt", so every contest reported "yields" — including one you won by
     // putting them down, which is why Erik could not find the kill.
     const hpLeft = s.opponentHealth;
-    outcome = (hpLeft != null && hpLeft <= 0 && (def.opponent.yieldAt ?? 0) <= 0) ? "opponent_fell"
+    // ⚠️ 2026-09-05 — THIS READ THE ABSOLUTE `yieldAt` AND ONLY THAT, so an encounter that says its yield as
+    // a scale-free RATIO reported "fell" every time: a formal bout under Marcher forms, fought to the death,
+    // because the field it asked about was no longer the field that answers.
+    const yAt = yieldThreshold(def, state);
+    outcome = (hpLeft != null && hpLeft <= 0 && yAt <= 0) ? "opponent_fell"
       : (hpLeft != null && hpLeft <= 0) ? "opponent_yielded"
-      : (def.opponent.yieldAt ?? 0) > 0 ? "opponent_yielded" : "opponent_fell";
+      : yAt > 0 ? "opponent_yielded" : "opponent_fell";
     events.push(say(outcome === "opponent_yielded" ? kOut.opponentYields : kOut.opponentBreaks,
       `You prevail — ${def.opponent.name} ${outcome === "opponent_yielded" ? "yields" : "breaks"}.`));
   }
@@ -628,6 +705,9 @@ export function sanitizeNewEncounter(raw) {
     lethal: !!raw.lethal,
     opponent: { name: String(o.name).slice(0, 60), health: Math.max(2, Math.min(8, o.health | 0 || 4)),
       threat: Math.max(10, Math.min(70, o.threat | 0 || 35)), yieldAt: Math.max(0, Math.min(3, o.yieldAt | 0)),
+      // ⚠️ THE RATIO IS SANITISED TOO, and as a ratio: 0–0.9 of the pool. An unsanitised field on a
+      // GM-authored opponent is a field a prompt can set to anything.
+      ...(Number.isFinite(Number(o.yieldAtFraction)) ? { yieldAtFraction: Math.max(0, Math.min(0.9, Number(o.yieldAtFraction))) } : {}),
       fleeDifficulty: Math.max(0, Math.min(30, o.fleeDifficulty | 0 || 15)),
       tacticTags: (Array.isArray(o.tacticTags) ? o.tacticTags : []).slice(0, 4).map(t => String(t).slice(0, 30)),
       // SNG-098: optional AUTHORED skill sheet — a set-piece opponent can carry real, tradition-specific

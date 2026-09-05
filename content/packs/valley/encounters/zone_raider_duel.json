@@ -1,27 +1,27 @@
 {
-  "schemaVersion": 1,
-  "id": "zone_raider_duel",
-  "type": "duel",
-  "name": "The Hook-Pole Raider",
-  "locationId": "disputed_zone_fringe",
-  "setup": "A scavenger-raider with a hooked salvage pole has decided your pack is worth more than your goodwill. The interference shimmer makes distance hard to judge — this will be close work.",
-  "opponent": {
-    "name": "Vess, hook-pole raider",
-    "health": 5,
-    "threat": 45,
-    "yieldAt": 1,
-    "fleeDifficulty": 15,
-    "spectrum": {
-      "chaos_order": -0.4,
-      "violence_peace": -0.3
-    },
-    "tacticTags": [
-      "hook-and-pull",
-      "circle-left",
-      "feint-high",
-      "use-the-shimmer"
-    ],
-    "notes": "Fights to rob, not to kill. Yields when badly hurt; accepts a yield gracefully — the Zone has its own code."
+ "schemaVersion": 1,
+ "id": "zone_raider_duel",
+ "type": "duel",
+ "name": "The Hook-Pole Raider",
+ "locationId": "disputed_zone_fringe",
+ "setup": "A scavenger-raider with a hooked salvage pole has decided your pack is worth more than your goodwill. The interference shimmer makes distance hard to judge — this will be close work.",
+ "opponent": {
+  "name": "Vess, hook-pole raider",
+  "threat": 45,
+  "fleeDifficulty": 15,
+  "spectrum": {
+   "chaos_order": -0.4,
+   "violence_peace": -0.3
   },
-  "stakes": "Loss means waking bruised with your pack lighter. Victory or a clean flee keeps everything — and Vess remembers either way."
+  "tacticTags": [
+   "hook-and-pull",
+   "circle-left",
+   "feint-high",
+   "use-the-shimmer"
+  ],
+  "notes": "Fights to rob, not to kill. Yields when badly hurt; accepts a yield gracefully — the Zone has its own code.",
+  "yieldAtFraction": 0.2,
+  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free."
+ },
+ "stakes": "Loss means waking bruised with your pack lighter. Victory or a clean flee keeps everything — and Vess remembers either way."
 }

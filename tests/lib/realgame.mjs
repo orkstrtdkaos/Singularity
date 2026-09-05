@@ -12,6 +12,7 @@
 // the app's two calls), `endBattle` for XP and the incapacitation table. A policy stands in for the player's hand; it is a
 // documented stand-in, not a claim about how players play.
 import { battleSkillsForCharacter, declFromSelection, duelFromTarget, playTurn, endBattle } from "../../engine/battle_turn.js";
+import { startEncounter, contestSheetFor } from "../../engine/encounters.js";   // an authored encounter file already IS a def
 import { sheetFor, battleSkillsFor } from "../../engine/npcsheet.js";
 import { mulberry32 } from "./fightharness.mjs";
 
@@ -63,10 +64,19 @@ export function simplePlayerPolicy({ rng = Math.random, meterMax = 16 } = {}) {
 }
 
 /** One duel, the way the game plays it. Returns { outcome, turns, transcript, plan, character, def }. */
-export function playDuel({ character, target, content, rng = Math.random, policy = null, maxTurns = 40, day = 1 } = {}) {
+export function playDuel({ character, target, content, rng = Math.random, policy = null, maxTurns = 40, day = 1, def: givenDef = null } = {}) {
   const rules = content.rules, sb = content.skillBattle?.engine, steps = content.intensity?.steps, catalog = { ...(content.abilities || {}), ...(character.customAbilities || {}) };
   const pick = policy || simplePlayerPolicy({ rng, meterMax: sb?.momentum?.meterMax ?? 16 });
-  const { def } = duelFromTarget(character, target, { catalog, npcs: content.npcs || {}, cfg: rules?.npcStanding || {}, day, sb, here: null, lethal: false });
+  // ⚑ AN AUTHORED ENCOUNTER CAN BE DRIVEN TOO. `duelFromTarget` builds a def from a PERSON; an encounter
+  // file already IS a def, and measuring one required the same production path rather than a second one.
+  // ⚠️ The seat is identical either way — that is the whole point of this file.
+  const { def } = givenDef
+    ? { def: givenDef }
+    : duelFromTarget(character, target, { catalog, npcs: content.npcs || {}, cfg: rules?.npcStanding || {}, day, sb, here: null, lethal: false });
+  // ⚠️ THE OTHER SIDE COMES FROM THE ENGINE'S OWN DECIDER, exactly as the app gets it. A harness that
+  // built its own opponent would be measuring a fight the game never runs — and `startEncounter` with a null
+  // sheet yields a state with no `opponentSheet` at all, which `opponentPolicy` then crashes on.
+  if (givenDef) character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet: contestSheetFor(def, { content }) }) };
   const transcript = [];
   let outcome = null, ended = false, turns = 0, lastFn = null;
   for (let t = 0; t < maxTurns && !ended; t++) {

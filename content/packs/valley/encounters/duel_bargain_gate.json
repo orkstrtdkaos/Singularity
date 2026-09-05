@@ -1,25 +1,25 @@
 {
-  "schemaVersion": 1,
-  "id": "duel_bargain_gate",
-  "type": "duel",
-  "name": "The Bargain and the Blade",
-  "locationId": "the_bargain_gate",
-  "setup": "The Abyssal offers you terms before the first exchange, and will offer again after each one. Every offer is genuine and fairly priced. That is what makes it a duel and not a mugging.",
-  "lethal": false,
-  "opponent": {
-    "name": "an Abyssal of the Descent",
-    "health": 5,
-    "threat": 38,
-    "yieldAt": 1,
-    "fleeDifficulty": 15,
-    "spectrum": {
-      "demonic_angelic": -0.6
-    },
-    "tacticTags": [
-      "offers-terms-each-round",
-      "prices-your-yielding",
-      "never-lies-about-the-cost",
-      "wins-either-way"
-    ]
-  }
+ "schemaVersion": 1,
+ "id": "duel_bargain_gate",
+ "type": "duel",
+ "name": "The Bargain and the Blade",
+ "locationId": "the_bargain_gate",
+ "setup": "The Abyssal offers you terms before the first exchange, and will offer again after each one. Every offer is genuine and fairly priced. That is what makes it a duel and not a mugging.",
+ "lethal": false,
+ "opponent": {
+  "name": "an Abyssal of the Descent",
+  "threat": 38,
+  "fleeDifficulty": 15,
+  "spectrum": {
+   "demonic_angelic": -0.6
+  },
+  "tacticTags": [
+   "offers-terms-each-round",
+   "prices-your-yielding",
+   "never-lies-about-the-cost",
+   "wins-either-way"
+  ],
+  "yieldAtFraction": 0.2,
+  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free."
+ }
 }

@@ -56,8 +56,44 @@ export function newSharedScene(locationId, character, stamp) {
   };
 }
 
+/** WHAT A MEMBER CARRIES INTO SOMEONE ELSE'S SEAT.
+ *
+ *  A member record used to be a name and a key. That is enough to show a roster and nothing like enough to
+ *  STAND IN A FIGHT — and `alliesOf`'s party branch, which decides what an ally contributes, read a field
+ *  no code in this repo ever wrote. This is the missing producer.
+ *
+ *  Each player writes their OWN presence at join time, from their own save; nobody reads anybody else's
+ *  file. It is deliberately the minimum a combatant needs: what you resist with, what you can lose, and
+ *  the IDS of your crafts, which is what says whether you are a warder or a healer or a striker. No prose,
+ *  no inventory, no history — a sheet, not a save.
+ */
+function presenceOf(c) {
+  const a = c?.attributes || {};
+  const lvl = Math.max(1, Number(c?.level) || 1);
+  const half = Math.max(1, Math.round(lvl / 2));
+  const n = (v, d) => (Number.isFinite(Number(v)) ? Number(v) : d);
+  return {
+    level: lvl,
+    attributes: {
+      physical: n(a.physical, half), mental: n(a.mental, half),
+      social: n(a.social, half), practical: n(a.practical, half),
+    },
+    subAttributes: c?.subAttributes || {},
+    health: n(c?.health, lvl * 2), maxHealth: n(c?.maxHealth, lvl * 2),
+    // ids only — the other player's seat resolves them against its own catalogue, so a craft they own and
+    // you do not still reads correctly, and nothing about their sheet has to be trusted as a number.
+    abilities: (c?.abilities || []).map(x => x?.abilityId || x).filter(v => typeof v === "string").slice(0, 40),
+    // WHETHER THEY CARRY A WEAPON, and nothing else about what they own. `contributionsOf` already decides
+    // MARTIAL from exactly this — a weapon in the pack, a fighting role, or an authored `combatant` — and it
+    // has decided it for every companion since CCODE-259. A human ally used to be handed MARTIAL outright,
+    // which said a bare-handed scholar looked as dangerous as Pell with her spear. Bare kinds, no names, no
+    // prose: these records cross into another player's prompts and only the fact is needed.
+    inventory: (c?.inventory || []).filter(i => String(i?.kind || "").toLowerCase() === "weapon").map(() => ({ kind: "weapon" })).slice(0, 1),
+  };
+}
+
 function memberOf(c) {
-  return { characterId: c.id, name: c.name, playerKey: c.playerKey, joinedAt: new Date().toISOString() };
+  return { characterId: c.id, name: c.name, playerKey: c.playerKey, joinedAt: new Date().toISOString(), presence: presenceOf(c) };
 }
 
 export function addMember(scene, character) {

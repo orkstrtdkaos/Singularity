@@ -246,7 +246,10 @@ export function freshTurn() {
  *  checks incapacitation after each, collapses on a finisher when asked. Returns the last round's receipt with `ended`,
  *  `outcome`, the beats, and the turn record. Was `sbResolveSense` + `sbExecuteTurn`, minus the narration. */
 export function playTurn(character, def, { sense = null, action = null, bonus = null, intensity = "standard", content = null, rules = {}, sb = null, steps = null,
-  rng = Math.random, day = null, seenTendency = null, finisher = false, family = null, frameContent = {}, catalog = {}, turnState = null } = {}) {
+  rng = Math.random, day = null, seenTendency = null, finisher = false, family = null, frameContent = {}, catalog = {}, turnState = null,
+  // ACCEPTED AND FORWARDED to every round below — the human party for the length of this contest. This file
+  // exists so play and the harness take ONE path, so an option only the app knew about would defeat its purpose.
+  party = null } = {}) {
   const turn = freshTurn();
   // the app resolves the sense in one call and the action later; the read it earned rides in as `turnState`
   if (turnState) { turn.setupBonus = Number(turnState.setupBonus) || 0; turn.bonusEarned = !!turnState.bonusEarned; turn.senseDone = !!turnState.senseDone; }
@@ -262,7 +265,7 @@ export function playTurn(character, def, { sense = null, action = null, bonus = 
   let last = null, lastFn = seenTendency;
   if (sense) {
     const sd = resolveDeclRank(sense, { character, catalog });
-    const rr = skillBattleRound(state(), def, sd, { character, content, rules, sb, steps, seenTendency: lastFn, rng, phase: "sense", tickEffects: false });
+    const rr = skillBattleRound(state(), def, sd, { character, content, rules, sb, steps, seenTendency: lastFn, rng, party, phase: "sense", tickEffects: false });
     character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
     character.activeEncounter = { defId: def.id, state: rr.state };
     turn.senseDone = true; turn.setupBonus = rr.setupBonus || 0; turn.bonusEarned = !!rr.bonusEarned?.player;
@@ -278,7 +281,7 @@ export function playTurn(character, def, { sense = null, action = null, bonus = 
   const st = state();
   if (openGuards(character, st, ad, { catalog })) st.guardPick = [];
   const swingBefore = st?.momentum ?? 0;
-  let rr = skillBattleRound(st, def, ad, { character, content, rules, sb, steps, seenTendency: lastFn, rng, phase: "action", tickEffects: !(turn.bonusEarned && bonus), setupBonus: turn.setupBonus || 0 });
+  let rr = skillBattleRound(st, def, ad, { character, content, rules, sb, steps, seenTendency: lastFn, rng, party, phase: "action", tickEffects: !(turn.bonusEarned && bonus), setupBonus: turn.setupBonus || 0 });
   if (finisher) rr = collapseIfFinished(rr, def, { swingBefore, family, sb, frameContent });
   lastFn = ad.function;
   if (Array.isArray(st?.protections) && st.protections.length) rr.state.protections = tickProtections(st.protections);
@@ -287,7 +290,7 @@ export function playTurn(character, def, { sense = null, action = null, bonus = 
   if (!ended && checkIncapacitation(character)) { ended = true; outcome = "incapacitated"; }
   if (!ended && turn.bonusEarned && bonus) {
     const bd = resolveDeclRank(bonus, { character, catalog });
-    const br = skillBattleRound(state(), def, bd, { character, content, rules, sb, steps, seenTendency: lastFn, rng, phase: "bonus", tickEffects: true });
+    const br = skillBattleRound(state(), def, bd, { character, content, rules, sb, steps, seenTendency: lastFn, rng, party, phase: "bonus", tickEffects: true });
     apply(br, bd, "bonus");
     ended = br.ended; outcome = br.outcome || null; endRR = br;
     if (!ended && checkIncapacitation(character)) { ended = true; outcome = "incapacitated"; }

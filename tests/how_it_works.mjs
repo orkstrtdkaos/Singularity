@@ -4774,7 +4774,7 @@ console.log("\n── §70 · per-rank source · the revised kill cost · ongoin
   // growthFor as CONTEXT for what it proposes. The derived count is a proxy — the hard half is the declared builds: field
   // — and a new unbuilt spec raises the proxy without anything being stale. The population grew; the baseline moves with
   // it, and the reason is written here rather than the number quietly nudged.
-  const BASELINE_DERIVED = 6;   // 2026-09-05 (2): four more specs landed unbuilt with the brief   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
+  const BASELINE_DERIVED = 7;   // 2026-09-05 (3): SPEC_party_mode_phase2.md landed today, unbuilt, naming five exports as context   // (2): four more specs landed unbuilt with the brief   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
   check(`§70: ratchet — \`spec_ready\` specs naming an existing engine export = ${derivedStale.length} (baseline ${BASELINE_DERIVED}) — may only go DOWN`,
     derivedStale.length <= BASELINE_DERIVED, derivedStale.map(r => `${r.f}:${r.named.slice(0, 3).join(",")}`).join(" · "));
   const built70 = rows70.filter(r => r.status === "built" || r.status === "part_built");
@@ -5370,6 +5370,110 @@ console.log("\n── §79 · the spread reads its dial · a busy pass is bounde
   check("§79: ⛔ …and the digest SCROLLS — the body has a height of its own and the title stays outside it",
     /<div class="news-body">\$\{body\}<\/div>/.test(app79) && /\.news-body \{[^}]*max-height:[^}]*overflow-y: auto/.test(css79)
     && /news-title[^]{0,80}news-body/.test(app79));
+}
+
+/* ═════ §80 — A PARTY MEMBER FIGHTS FROM THEIR OWN SHEET (SPEC_party_mode_phase2 §6 / R36, 2026-09-05) ═════ */
+// ⛔ Aevi, measured: "A PARTY MEMBER FIGHTS AS A STUB — combatants.js:287 — a human ally gets hardcoded
+// contributions: ['HARM','MARTIAL'] and sheet: p.sheet || p. This is R36's defect, unfixed for actual players."
+// ⚑ TRUE, AND WORSE THAN SHE SAID. The branch read `character.party` — A FIELD NOTHING IN THIS REPO EVER WROTE.
+// The roster lives on the shared SCENE, and a scene member carried {characterId, name, playerKey, joinedAt}: a
+// name and a key, nothing to stand in a fight with. So the fix needed all four doors, not one — a PRODUCER (a
+// combat presence written at join time), a CARRIER (an explicit option, because a fight roster is not save
+// state), a READER (the crafts, not a hardcode) and a CALLER (every seat in app.js).
+console.log("\n── §80 · a human ally's crafts say what they bring · the presence that carries them · every seat hands it over ──");
+{
+  const CB80 = await import("../engine/combatants.js");
+  const FN80 = await import("../engine/functions.js");
+  const cb80 = rd("engine/combatants.js"), pt80 = rd("engine/party.js");
+  const enc80 = rd("engine/encounters.js"), bt80 = rd("engine/battle_turn.js"), app80 = rd("app.js");
+
+  // ── DOOR 1 · THE READER. The hardcode is gone and a kit is read instead.
+  // ⚠️ THE PARTY BRANCH, AND ONLY IT — comments stripped, and the player's own seat left alone.
+  // Two ways this check asked the wrong question before it asked the right one, and both are worth naming:
+  // the line that REMOVED the hardcode quotes it in the note saying why it is gone, and the PLAYER'S OWN
+  // seat still carries it on purpose — "MARTIAL here has never meant 'has a high physical' — it means this
+  // one fights on purpose, and the person the whole contest is built around always does." That is a ruling.
+  // A gate that cannot tell code from prose, or a defect from a ruling, is not measuring what it claims to.
+  const code80 = cb80.replace(/^\s*\/\/[^\n]*$/gm, "");
+  const branch80 = code80.slice(code80.indexOf("for (const p of (party ||")).split("\n  }")[0];
+  check("§80: ⚠️ the fixture found the party branch to read — not vacuous",
+    branch80.length > 200 && /out\.push\(/.test(branch80), `${branch80.length} chars`);
+  check("§80: ⛔ the hardcoded ['HARM','MARTIAL'] for every human ally is GONE from the party branch",
+    !/contributions: \["HARM", "MARTIAL"\]/.test(branch80) && /familiesOfKit\(rec, catalog, fnIndex\)/.test(branch80));
+  check("§80: ⚠️ …and the PLAYER'S own seat still carries it, untouched — a ruling is not a defect",
+    /isPlayer: true,\s*\n\s*present: true, canAct: true, contributions: \["HARM", "MARTIAL"\], record: character/.test(cb80.replace(/\r\n/g, "\n")));
+  check("§80: …and `familiesOfKit` is REAL — the same reader the ability system uses, not a second rule",
+    typeof CB80.familiesOfKit === "function" && /import \{ familiesOfAbility \} from "\.\/functions\.js"/.test(cb80));
+
+  const vocab80 = rj("content/packs/core/rules/function_vocabulary.json");
+  const idx80 = FN80.buildFunctionIndex(vocab80.functionVocabulary || vocab80);
+  const cat80 = {
+    ward_a: { id: "ward_a", functions: ["shield"] }, ward_b: { id: "ward_b", functions: ["ward"] },
+    mend_a: { id: "mend_a", functions: ["mend"] }, hit_a: { id: "hit_a", functions: ["strike"] },
+  };
+  const famOf = (id) => FN80.familiesOfAbility(cat80[id], idx80)[0] || null;
+  // ⚠️ THE FIXTURE ASSERTS ITS OWN GROUND. If the authored vocabulary ever stops mapping these verbs this gate
+  // must FAIL LOUDLY rather than pass on empty sets — a check whose input silently emptied proves nothing, and
+  // that is precisely the failure this suite exists to catch.
+  check("§80: ⚠️ the fixture's own verbs still map — shield/ward → PROTECT, mend → RESTORE, strike → HARM",
+    famOf("ward_a") === "PROTECT" && famOf("ward_b") === "PROTECT" && famOf("mend_a") === "RESTORE" && famOf("hit_a") === "HARM",
+    ` shield→${famOf("ward_a")} ward→${famOf("ward_b")} mend→${famOf("mend_a")} strike→${famOf("hit_a")}`);
+
+  const me80 = { id: "me", name: "Me", level: 20 };
+  const party80 = [
+    { id: "w", characterId: "w", name: "A Warder", presence: { level: 12, attributes: { physical: 6 }, health: 24, maxHealth: 24, abilities: ["ward_a", "ward_b"] } },
+    { id: "m", characterId: "m", name: "A Mender", presence: { level: 9, health: 18, maxHealth: 18, abilities: ["mend_a"] } },
+    { id: "n", characterId: "n", name: "Nobody" },
+  ];
+  const seat = (opts) => Object.fromEntries(CB80.alliesOf(me80, opts).filter(a => a.kind === "party").map(a => [a.id, a]));
+  const after = seat({ party: party80, catalog: cat80, fnIndex: idx80 });
+  check("§80: ⛔ A WARDER READS AS A WARDER — from their crafts, not from a hardcode",
+    after.w.contributions.includes("PROTECT"), ` warder: ${JSON.stringify(after.w.contributions)}`);
+  check("§80: ⛔ …AND A MENDER AS A MENDER — the case R36 named, and the one `targeting.js` looks for by RESTORE",
+    after.m.contributions.includes("RESTORE"), ` mender: ${JSON.stringify(after.m.contributions)}`);
+  check("§80: ⚠️ …and MARTIAL is no longer HANDED OUT — a bare-handed ally no longer reads as dangerous as one with a spear",
+    !after.w.contributions.includes("MARTIAL") && !after.m.contributions.includes("MARTIAL")
+    && seat({ party: [{ id: "s", name: "Spear", presence: { level: 5, inventory: [{ kind: "weapon" }] } }], catalog: cat80, fnIndex: idx80 }).s.contributions.includes("MARTIAL"),
+    " a weapon still earns MARTIAL, by `contributionsOf`'s own long-standing rule");
+  // ⚑ AND IT DEGRADES HONESTLY — a caller that has not adopted the catalog sees exactly what it saw before.
+  const before = seat({ party: party80 });
+  check("§80: ⚑ with NO catalog handed in, HARM is still the floor — an unadopted caller is not broken by this",
+    before.w.contributions.join() === "HARM" && before.m.contributions.join() === "HARM" && before.n.contributions.join() === "HARM");
+  check("§80: ⚠️ …and a member with no presence at all is still present and still able — anyone with hands can swing",
+    after.n.contributions.join() === "HARM" && after.n.canAct === true && after.n.present === true);
+  check("§80: ⛔ a member's PRESENCE reaches the sheet — the health they can lose is theirs, not a floor derived from mine",
+    after.w.sheet.maxHealth === 24 && after.w.sheet.level === 12 && after.m.sheet.maxHealth === 18,
+    ` warder ${after.w.sheet.level}/${after.w.sheet.maxHealth} · mender ${after.m.sheet.level}/${after.m.sheet.maxHealth}`);
+
+  // ── DOOR 2 · THE PRODUCER. Nothing wrote a party record with anything in it. Now the joiner writes their own.
+  check("§80: ⛔ THE MISSING PRODUCER — a scene member now carries a combat PRESENCE, written from their own save",
+    /function presenceOf\(c\)/.test(pt80) && /presence: presenceOf\(c\)/.test(pt80)
+    && /abilities: \(c\?\.abilities \|\| \[\]\)/.test(pt80));
+  check("§80: ⚠️ …and it is a SHEET, NOT A SAVE — ability ids and a bare weapon marker, no prose crossing into another player's prompts",
+    /map\(\(\) => \(\{ kind: "weapon" \}\)\)/.test(pt80)
+    && !/description|name:/.test(pt80.split("function presenceOf")[1].split("function memberOf")[0]));
+
+  // ── DOOR 3 · THE CARRIER. A fight roster is not save state, so it is an OPTION, never written to a character.
+  check("§80: ⛔ `character.party` was a field with a reader and NO WRITER — the roster now arrives as an option",
+    /party = null \} = \{\}\) \{/.test(cb80) && /for \(const p of \(party \|\| character\?\.party \|\| \[\]\)\)/.test(cb80));
+  check("§80: ⚠️ …and NOTHING PERSISTS IT — no assignment to `character.party` in the engine or the app",
+    !/character\.party\s*=[^=]/.test(cb80) && !/character\.party\s*=[^=]/.test(app80) && !/character\.party\s*=[^=]/.test(enc80));
+
+  // ── DOOR 4 · THE CALLERS. Accepted at the top and dropped below is this seam's signature failure; both halves.
+  check("§80: ⛔ `skillBattleRound` ACCEPTS the party AND FORWARDS it — to the full roster and the filtered one alike",
+    /^\s*party = null,/m.test(enc80)
+    && (enc80.match(/catalog: abilityCatalog, fnIndex, party,/g) || []).length === 2,
+    ` forwarded to ${(enc80.match(/catalog: abilityCatalog, fnIndex, party,/g) || []).length} of 2 readers`);
+  check("§80: …and the CRAFT READING has an index to read with — derived from the vocabulary on content, memoised",
+    /function fnIndexFor\(content\)/.test(enc80) && /FN_INDEX_CACHE = new WeakMap\(\)/.test(enc80)
+    && /const fnIndex = fnIndexFor\(content\)/.test(enc80));
+  check("§80: ⛔ `playTurn` — the ONE path play and the harness share — accepts it and forwards it to every phase",
+    /party = null \} = \{\}\) \{/.test(bt80) && (bt80.match(/rng, party, phase:/g) || []).length === 3,
+    ` ${(bt80.match(/rng, party, phase:/g) || []).length} of 3 phases`);
+  check("§80: ⛔ AND THE APP ACTUALLY CALLS IT — `seatParty` derives the live scene's other players, per call",
+    /function seatParty\(\)/.test(app80) && /m\.characterId !== character\?\.id/.test(app80)
+    && (app80.match(/party: seatParty\(\)/g) || []).length >= 5,
+    ` ${(app80.match(/party: seatParty\(\)/g) || []).length} seats`);
 }
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));

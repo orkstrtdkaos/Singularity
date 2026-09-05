@@ -123,7 +123,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.362";
+const APP_VERSION = "1.9.363";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -598,6 +598,18 @@ let lastPlayerText = ""; // last freeform/ask input — restored into the box if
 let sharedScene = null;  // SNG-001: the shared scene object (party play), null when solo
 let partyPoll = null;    // poll timer while a shared scene is active
 let seenBeats = 0;       // remote beats already rendered
+
+/** THE HUMAN PARTY, FOR A FIGHT SEAT. The other players in the live shared scene — never me, never a
+ *  member with no presence to stand on. Each member carries the combat presence THEY wrote at join time
+ *  (party.js `presenceOf`), so their crafts decide what they contribute and nobody reads anybody's save.
+ *
+ *  Returns null when solo, which is every single-player fight, and null is what the engine treats as
+ *  "no party". This is DERIVED PER CALL and never written to the character — a fight roster is not save state. */
+function seatParty() {
+  const mem = (sharedScene?.party || []).filter(m => m && m.characterId && m.characterId !== character?.id);
+  if (!mem.length) return null;
+  return mem.map(m => ({ id: m.characterId, characterId: m.characterId, name: m.name || m.characterId, presence: m.presence || null }));
+}
 // SNG-075: encounters in narrative play — an encounter selected by the narrative-time roll waits
 // here to be WOVEN into the next GM turn (never a modal). One per scene + a turn cooldown.
 let pendingWeave = null;        // { seed, flavor, perilous, loreTier } to inject next turn
@@ -13156,7 +13168,9 @@ function skillBattlePanel() {
   // other people's work, committed at the layer where it is most visible.
   const sbParty = (() => {
     try {
-      const all = alliesOf(character, { companions: CONTENT.companions || {},
+      // R36 for a human: an ally's CRAFTS say what they bring, so the forward/folded pips are labelled by what
+      // each person actually does rather than by a hardcoded "HARM, MARTIAL" for everyone.
+      const all = alliesOf(character, { catalog: fullCatalog(), fnIndex: FN_INDEX, party: seatParty(), companions: CONTENT.companions || {},
         npcs: { ...(CONTENT.npcs || {}), ...(character.npcRegistry || {}) }, company: character.company || null });
       if (all.length < 2) return "";
       const lead = commandSlots(character, { cfg: meleeCfg() });
@@ -13478,7 +13492,7 @@ function wireSkillBattlePanel() {
     renderPlay(character.activeScene?.lastTurn || null, {});
   };
   const fl = document.getElementById("sb-flee"); if (fl) fl.onclick = () => beginChaseFromFight(activeEnc()?.def); // SNG-230 §6a: FLEE a fight → a real CHASE
-  const yl = document.getElementById("sb-yield"); if (yl) yl.onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, yield: true }));
+  const yl = document.getElementById("sb-yield"); if (yl) yl.onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(), yield: true }));
 }
 
 /** CCODE-45 · GM CALL #1 — resolve the SENSE step, then narrate what you sensed and what they did. Skipping the
@@ -13493,7 +13507,7 @@ async function sbResolveSense() {
   sbBusy = true; sbBusyLabel = `Reading ${enc.def?.opponent?.name || "them"}…`; sbQuickBeat = ""; renderSkillBattle(sbLastRound);
   // ✅ 2026-09-05: the sense step is `playTurn` with only a sense — the harness plays the same step through the same function.
   const played = playTurn(character, enc.def, { sense: decl, content: CONTENT, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random,
-    day: absoluteWorldDay(), catalog: fullCatalog() });
+    day: absoluteWorldDay(), catalog: fullCatalog(), party: seatParty() });
   const rr = played.rr;
   const t = sbTurn();
   t.senseDone = true; t.setupBonus = played.turn.setupBonus || 0; t.bonusEarned = !!played.turn.bonusEarned;
@@ -13563,7 +13577,7 @@ async function sbExecuteTurn() {
   // ⚠️ AND THE PICK IS SPENT. A guard is placed on the people you named THIS turn; leaving it set would
   // silently re-place it every round for free, which is the wall the action cost is supposed to prevent.
   if (guardsOpened) enc.state.guardPick = [];
-  let rr = skillBattleRound(character.activeEncounter.state, enc.def, aDecl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps,
+  let rr = skillBattleRound(character.activeEncounter.state, enc.def, aDecl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(),
     seenTendency: sbLastPlayerFn, rng: Math.random, phase: "action", tickEffects: !bDecl, setupBonus: turn.setupBonus || 0 });
   sbLastPlayerFn = aDecl.function;
   // ⛔ AND THE DECAY. `tickProtections` has existed since CCODE-260 and was CALLED BY NOTHING, so a
@@ -13605,7 +13619,7 @@ async function sbExecuteTurn() {
   }
   // BONUS — a FULL action; it ticks the turn's effects, being the last step.
   if (!ended && bDecl) {
-    const br = skillBattleRound(character.activeEncounter.state, enc.def, bDecl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps,
+    const br = skillBattleRound(character.activeEncounter.state, enc.def, bDecl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(),
       seenTendency: sbLastPlayerFn, rng: Math.random, phase: "bonus", tickEffects: true });
     applyRR(br, bDecl, "Bonus action");
     saveCharacter(character);
@@ -13659,7 +13673,7 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
   // stands, which is exactly today's behaviour.
   Object.assign(decl, resolveDeclRank(decl, { character, catalog: fullCatalog() }));   // CCODE-244/245: what is OWNED bounds what is WANTED
   if (woven) decl.woven = { function: woven.function, tier: woven.tier || 1, name: woven.name, id: woven.id };
-  let rr = skillBattleRound(enc.state, enc.def, decl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random });
+  let rr = skillBattleRound(enc.state, enc.def, decl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(), seenTendency: sbLastPlayerFn, rng: Math.random });
   // SNG-230 §6b (Erik: a good roll can end a fight too, easier vs weaker foes): a decisive HARM FINISHER can
   // COLLAPSE the skill-battle EARLY — the round's momentum SWING is mapped to a degree and checked against the
   // foe's collapse floor. A strong swing on the right craft ends it; a lesser swing runs the meter unchanged

@@ -21,6 +21,10 @@
 // things in the game much easier or even possible." That roster already exists — `engine/company.js`,
 // COMPANY_ROLES including `ally` — and my first version never read it. It does now.
 
+// R36 FOR A HUMAN: a party member's CRAFTS say what they bring to a contest. `familiesOfAbility` is the same
+// reader the ability system uses, so a warder reads as PROTECT here for exactly the reason it does everywhere else.
+import { familiesOfAbility } from "./functions.js";
+
 const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) ? d : Number(v));
 
 /** ⛔ WHAT AN ENTITY BRINGS TO A CONTEST, from the tags its record already carries.
@@ -217,7 +221,21 @@ export function withdrawalOf(record) {
   return { manner: w.manner || "gets clear", auto: w.auto === true, ...(w.why ? { why: w.why } : {}) };
 }
 
-export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = null, company = null, stageOf = null } = {}) {
+/** ⚑ R36 FOR A HUMAN: what a character's KIT does is what they bring. Their crafts' families ARE their contribution
+ *  families — a person who carries three warding crafts is a warder, and nothing had to be tagged to say so. Pure; an
+ *  absent catalog or an empty kit returns nothing, and the caller falls back to HARM. */
+export function familiesOfKit(record, catalog = null, fnIndex = null) {
+  if (!catalog) return [];
+  const out = new Set();
+  for (const a of (record?.abilities || [])) {
+    const def = catalog[a?.abilityId || a];
+    if (!def) continue;
+    for (const f of (familiesOfAbility(def, fnIndex) || [])) if (f) out.add(f);
+  }
+  return [...out];
+}
+
+export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = null, company = null, stageOf = null, catalog = null, fnIndex = null, party = null } = {}) {
   // ⚠️ CCODE-265: `stageOf` rides through to `contributionsOf` or the override is reader-only — the exact
   // defect the override exists to fix, reproduced one level up.
   const opts = { tagFamilies, stageOf };
@@ -280,14 +298,41 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
     });
   }
 
-  // party members are other CHARACTERS — the multiplayer half. A character always brings HARM.
-  for (const p of (character?.party || [])) {
+  // ⛔ SPEC_party_mode_phase2 §6 / R36 — A PARTY MEMBER IS NOT A STUB. This branch hardcoded
+  // `contributions: ["HARM", "MARTIAL"]` for every human ally, which is R36's defect unfixed for the one
+  // population it matters most for: real players. ⚠️ **A HUMAN'S SHEET IS THEIR CRAFTS** — what their kit
+  // DOES is what they bring — so a warder reads PROTECT and a mender reads RESTORE.
+  //
+  // ⚠️ MEASURED, AND NOT ALL OF IT IS A GIFT. `targeting.js` finds a healer by RESTORE, so a mender who
+  // was invisible to that policy is now findable by it; and MARTIAL is no longer handed out, so a person
+  // reads as dangerous only where `contributionsOf`'s existing rule says so — a weapon, a fighting role, or
+  // an authored `combatant`. That is the point. The old line said a bare-handed scholar looked exactly as
+  // dangerous as Pell with her spear, and being read correctly is what R36 asked for, not being read well.
+  //
+  // ⚑ AND IT DEGRADES HONESTLY. With no catalog handed in, or a member who is a bare {id, name} with no
+  // crafts, HARM is the default exactly as before — "anyone with hands can swing" — so a caller that has
+  // not adopted this sees what it saw yesterday.
+  // The roster is HANDED IN, or falls back to the character. `character.party` was the only reader of a
+  // field nothing in this repo ever wrote — the party lives on the shared SCENE — and a fight roster is not
+  // save state, so the caller passes it for the length of the contest and nothing is persisted.
+  for (const p of (party || character?.party || [])) {
     if (!p) continue;
+    // `presence` is what a shared-scene member carries (party.js `presenceOf`); `sheet` is what a local or
+    // test-built ally carries. Either is a sheet, both merge over the record, and a bare {id, name} still works.
+    const own = (p.sheet && typeof p.sheet === "object" && p.sheet) || (p.presence && typeof p.presence === "object" && p.presence) || null;
+    const rec = own ? { ...p, ...own } : p;
+    const fromCrafts = catalog ? familiesOfKit(rec, catalog, fnIndex) : [];
+    const tagged = contributionsOf(rec, opts);
+    const contrib = [...new Set([...fromCrafts, ...tagged])];
     out.push({
       id: p.id || p.characterId || null, name: p.name || p.id || "an ally", kind: "party",
       // a human party member is a player too — same rule as above.
       isPlayer: true,   // a human party member is a player too
-      present: true, canAct: true, contributions: ["HARM", "MARTIAL"], record: p, sheet: p.sheet || p,
+      // a person with no crafts on record is not a bystander — anyone with hands can swing, which is why
+      // HARM is the floor and canAct does not ride on the kit reading anything at all.
+      present: p.present !== false, canAct: p.canAct !== false && !p.downed,
+      contributions: contrib.length ? contrib : ["HARM"],
+      record: rec, sheet: presenceSheet(rec, { level: Number(rec.level) || level }),
       downed: p.downed || null,
     });
   }

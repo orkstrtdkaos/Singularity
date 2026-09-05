@@ -10,8 +10,24 @@ import { wornSoak, wornSoakLayers } from "./inventory.js";   // 2026-09-04: the 
 import { targetableAllies, alliesOf } from "./combatants.js";
 import { commandSlots, bringForward, theatresOf, overmatchOf, answersOvermatch, scaleRank } from "./melee.js";   // CCODE-274: how many you lead is earned; who comes forward is chosen
 import { currentStage } from "./evolution.js";   // CCODE-265: an earned item stage can lift a companion's canStrike:false   // CCODE-253: who a foe may aim at — DERIVED here, per this seam's own rule
+import { buildFunctionIndex } from "./functions.js";   // R36 for a human: a party member's crafts say what they bring
 import { encounterKind } from "./encounterFrame.js"; // SNG-247: which bounded thing this is — it picks the exit rule
 import { smartClamp } from "./namematch.js"; // SNG-152
+
+// The verb-to-family index, derived once per vocabulary document. `content.functionVocabulary` is loaded by
+// `state.js` and the built index lives only in the app's own module scope, so a pure engine seam has to build
+// its own. A WeakMap keyed on the vocabulary means one build per load, not one per encounter.
+const FN_INDEX_CACHE = new WeakMap();
+function fnIndexFor(content) {
+  const vocab = content?.functionVocabulary;
+  if (content?.functionIndex) return content.functionIndex;   // a caller that already built one wins
+  if (!vocab || typeof vocab !== "object") return null;
+  if (FN_INDEX_CACHE.has(vocab)) return FN_INDEX_CACHE.get(vocab);
+  let idx = null;
+  try { idx = buildFunctionIndex(vocab); } catch { idx = null; }
+  FN_INDEX_CACHE.set(vocab, idx);
+  return idx;
+}
 
 // ---------- lifecycle ----------
 
@@ -133,6 +149,10 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // AND FORWARDED — the failure this seam keeps repeating is an option accepted at the top and dropped below,
   // or (my version) used below and never accepted at all.
   content = null,
+  // THE HUMAN PARTY, handed in for the length of the contest. `character.party` is a field nothing in this
+  // repo ever wrote — the roster lives on the shared SCENE — and a fight roster is not save state, so it
+  // arrives as an option and is never persisted. Null means solo, which is every single-player fight.
+  party = null,
   phase = "action", tickEffects = true, setupBonus = 0 } = {}) {
   const cfg = rules.encounters?.duel || {};
   // SNG-247 Tier 3: a PUZZLE promoted onto the contest engine has no `opponent` block — the thing itself is the
@@ -164,13 +184,22 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // ⚠️ CONTENT FIRST, REGISTRY SECOND: what the player has actually learned about someone beats the
   // authored stub, which is the same precedence `sheetFor` already uses for an authored sheet.
   const npcLookup = { ...(content?.npcs || {}), ...(character?.npcRegistry || {}) };
+  // R36 FOR A HUMAN PARTY MEMBER. `alliesOf` reads a member's CRAFTS to decide what they contribute, and that
+  // reading needs the verb-to-family index. The app builds one at load and never puts it on `content`, so this
+  // seam derives it from the vocabulary that IS on content, memoised per vocabulary object. Without it every
+  // ally would fall back to HARM and this whole fix would be a reader with no input — the four doors again.
+  const fnIndex = fnIndexFor(content);
+  const abilityCatalog = content?.abilities || null;
   // ⛔ THE FULL ROSTER, not the targetable slice — `alliesOf` includes the withdrawn, and `targetableAllies`
   // is exactly the filter that removes them. Deriving the party split from the filtered list made the
   // `withdrawn` array on the receipt permanently empty: a list that can never populate.
   const partyAll = alliesOf(character, {
+    catalog: abilityCatalog, fnIndex, party,
     companions: content?.companions || {}, npcs: npcLookup, company: character?.company || null,
     stageOf: (itemId) => { try { return currentStage(itemId, character, content?.items || {})?.stage ?? null; } catch { return null; } } });
   const partyPresent = targetableAllies(character, {
+    // the same reading as `partyAll` above — a filtered view of a roster must not be built from a different rule.
+    catalog: abilityCatalog, fnIndex, party,
     companions: content?.companions || {}, npcs: npcLookup, company: character?.company || null,
     // ⛔ CCODE-265 — THE WORLD'S ANSWER TO "what stage is that item at". Without it a companion whose
     // `canStrike: false` is liftable by an earned item can never actually lift it in a real fight, and the

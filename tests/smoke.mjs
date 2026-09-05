@@ -360,9 +360,13 @@ const wanderer = {
   name: "Kaelen", worldState: initWorldState(1), npcRegistry: {},
   deeds: [{ description: "Pulled two children from the flooded channel", tags: ["child-rescuer"], weight: 3, communityId: deedHome, day: 1, spread: [] }]
 };
-await runWorldTick({ character: wanderer, content: tickContent, currentDay: 1, evolveNpcs: null });
+// ⚠️ 2026-09-05 (BUG_news_rebroadcast): `alwaysHops` is the point of this fixture. The player's spread call used to pass
+// `rate: 1`, which made `spreadDeeds`' throttle unreachable — so these checks were driven by the DEFECT and would now be a
+// coin flip on the authored 0.35. A test of the MODEL (one hop, local first, never twice) must not ride on the RATE.
+const alwaysHops = () => 0;   // `spreadDeeds` skips on `rng() >= rate`; zero never skips
+await runWorldTick({ character: wanderer, content: tickContent, currentDay: 1, evolveNpcs: null, rng: alwaysHops });
 check("same-day tick is a no-op", wanderer.worldState.news.length === 0);
-await runWorldTick({ character: wanderer, content: tickContent, currentDay: 14, evolveNpcs: null });
+await runWorldTick({ character: wanderer, content: tickContent, currentDay: 14, evolveNpcs: null, rng: alwaysHops });
 check("event advances after stage days (12)", wanderer.worldState.eventStages.water_crisis.stage === 2);
 check("stage shift drifts the spectrum", wanderer.worldState.spectrumDrift.death_life < 0);
 // SNG-289 (Erik): ONE spread model, graded by weight. This asserted the old all-at-once behaviour — a deed
@@ -381,14 +385,14 @@ check("news block for GM renders", newsForGM(wanderer).includes("First Sickness"
 // running one before `news.length === 2` made a test about the spread model fail a test about the news.
 {
   const before = wanderer.deeds[0].spread.length;
-  await runWorldTick({ character: wanderer, content: tickContent, currentDay: 21, evolveNpcs: null });
+  await runWorldTick({ character: wanderer, content: tickContent, currentDay: 21, evolveNpcs: null, rng: alwaysHops });
   check("…and it keeps travelling on later passes", wanderer.deeds[0].spread.length > before);
   check("…without ever being heard twice in the same place",
     new Set(wanderer.deeds[0].spread).size === wanderer.deeds[0].spread.length);
 }
-await runWorldTick({ character: wanderer, content: tickContent, currentDay: 30, evolveNpcs: null });
+await runWorldTick({ character: wanderer, content: tickContent, currentDay: 30, evolveNpcs: null, rng: alwaysHops });
 check("event advances again (12+15=27 < 30)", wanderer.worldState.eventStages.water_crisis.stage === 3);
-await runWorldTick({ character: wanderer, content: tickContent, currentDay: 200, evolveNpcs: null });
+await runWorldTick({ character: wanderer, content: tickContent, currentDay: 200, evolveNpcs: null, rng: alwaysHops });
 check("final stage holds (999 days)", wanderer.worldState.eventStages.water_crisis.stage === 4);
 const region2 = buildRegionView(tickContent, wanderer);
 check("region view reflects campaign stage", region2.activeEvents[0].stage === 4);
@@ -2478,8 +2482,11 @@ await (async () => {
     region: { activeEvents: [] }, events: {},
     locations: { l1: { communityId: "valley.alpha" }, l2: { communityId: "valley.beta" } }
   };
-  const res = await runWorldTick({ character, content, currentDay: 6, evolveNpcs: null });
-  const spread = (character.worldState.news || []).find(n => /spread beyond/i.test(n.text));
+  // ⚠️ 2026-09-05: by SECTION, not by prose — the spread line's wording changed (BUG_news_rebroadcast §3) and this check is
+  // about the STAMP. And the tick gets an rng that always hops, because the restored throttle (0.35) would otherwise make a
+  // test of stamping into a coin flip on the spread rate.
+  const res = await runWorldTick({ character, content, currentDay: 6, evolveNpcs: null, rng: () => 0 });
+  const spread = (character.worldState.news || []).find(n => n.section === "elsewhere");
   check("41b: world-tick news is stamped with the absolute world-day", !!spread && Number.isFinite(spread.worldDay));
   check("41b: the same news keeps the local journey-day too", !!spread && spread.day === 6);
 

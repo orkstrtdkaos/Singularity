@@ -49,8 +49,10 @@
     "ward",
     "bind",
     "hinder",
-    "break"
-   ]
+    "break",
+    "sustain"
+   ],
+   "_sustainAdded_20260905": "⛔ CCODE'S GUIDE CHECK: `kept_vigil` is named as a free-floor EXAMPLE in the player's guide, with a floor line written for it — and it HAD NO FLOOR. Its verbs are `resist` and `sustain` and neither was on this dial. ✅ `sustain` added, and CCode's reasoning is the right one: 'a vigil at a hand's reach that costs nothing is the clearest free floor in your three.' ⚠️ AND IT IS THE CRAFT R47 WAS ARGUED FROM — Aevi's original case was 'a warden at 4 health and 0 energy putting a bare hand on a body, because the craft IS the contact.' ⛔ THE CRAFT THAT MOTIVATED THE WHOLE MECHANISM DID NOT QUALIFY FOR IT. ⬜ `resist` deliberately NOT added: a free floor on resistance would touch every defensive craft in the game and that is a balance decision, not a repair."
   },
   "max": 100,
   "regenPerRest": 40,
@@ -262,11 +264,26 @@
   "trainingUnlockLevel": 10,
   "_trainingUnlockLevel": "⛔ R20 (Erik 2026-09-01) — R19's TIER GATE IS RETRACTED. It gated training on tier N+2 opening, which under R12's bands meant T1 at L21, T2 at L35, T3 at L48. Measured against Silas at L30 it reached 3% of his 31 stuck rank-1 crafts; the N+1 variant reached 16%. ⚠️ NEITHER TIER GATE WORKS, BECAUSE A PLAYED SHEET IS NOT TIER-SORTED — his stuck crafts span T1–T5 plus 13 custom records carrying no tier at all. R17's whole case was those 31 crafts. What R20 keeps from R19's intent: you cannot deepen at level 1, so acquisition still leads (R14: 1–10 personal). What it drops: the pretence that a shelf sorts by tier.",
   "tierUnlockBands": {
-    "1": {"start": 1,  "end": 1},
-    "2": {"start": 8,  "end": 20},
-    "3": {"start": 21, "end": 34},
-    "4": {"start": 35, "end": 47},
-    "5": {"start": 48, "end": 60}
+   "1": {
+    "start": 1,
+    "end": 1
+   },
+   "2": {
+    "start": 8,
+    "end": 20
+   },
+   "3": {
+    "start": 21,
+    "end": 34
+   },
+   "4": {
+    "start": 35,
+    "end": 47
+   },
+   "5": {
+    "start": 48,
+    "end": 60
+   }
   },
   "_tierUnlockBands": "⛔ R12/R13 (Erik 2026-09-01) — OPTION 2. TIER SETS THE BAND; `energyCost` PLACES THE CRAFT INSIDE IT. Both fields exist on all 414 crafts, so the corpus arrives as a curve rather than a staircase and no authoring is needed. R13 sets the top at 60: the whole corpus is open by then, and past it progression is depth, not acquisition. ⚠️ TIER 1 IS DELIBERATELY FLAT AT LEVEL 1 (start === end) — R15 rules that a level-1 character sees every tier-1 craft they could pick; spreading them would contradict it.",
   "_unlockTopLevel": "R13 — L60, not L100. Erik, from play: 1–10 personal · 10–30 party building · 30–60 Band/outpost/army · 60–85 Epic→Legendary · 85–100 Mythic. Acquisition should stop being the progression at 60 and depth take over.",
@@ -290,21 +307,50 @@
   "backlashHealth": 4,
   "backlashEnergy": 10,
   "discoveryBonus": 20,
-  "harmRungOrder": ["none", "damaging", "incapacitating", "lethal"],
+  "harmRungOrder": [
+   "none",
+   "damaging",
+   "incapacitating",
+   "lethal"
+  ],
   "_harmRungOrder": "⛔ THE LADDER, lightest → harshest, as DATA. `engine/braids.js` holds a private copy of the same order (HARM_ORDER) used to pick the harsher parent rung; that duplicate should read this instead — it cannot today because braids.js imports progression.js and the reverse would cycle. Flagged, not silently left.",
   "backlashByRung": {
-    "none":           {"health": 0.00, "energy": 0.00},
-    "damaging":       {"health": 0.07, "energy": 0.11},
-    "incapacitating": {"health": 0.13, "energy": 0.22},
-    "lethal":         {"health": 0.20, "energy": 0.33}
+   "none": {
+    "health": 0.0,
+    "energy": 0.0
+   },
+   "damaging": {
+    "health": 0.07,
+    "energy": 0.11
+   },
+   "incapacitating": {
+    "health": 0.13,
+    "energy": 0.22
+   },
+   "lethal": {
+    "health": 0.2,
+    "energy": 0.33
+   }
   },
-  "_backlashByRung": "⛔ R18/R18b (Erik 2026-09-01) — FRACTIONS OF THE WIELDER'S MAX POOL, not flat numbers. The flat table had the inversion Erik has caught repeatedly: `damaging` was 2% of Silas's health at L30 (irrelevant) and 13% at level 1 (landing hardest on the weakest). ✅ Pool-relative moves BOTH ends the right way at once — Silas 2%→7%, level 1 13%→7%. ⚠️ Values are FRACTIONS: 0.07 = 7%.",
-  "intensityBacklashMult": {"conserve":0.6,"standard":1,"surge":1.6},
+  "_backlashByRung": "⛔ R5 CORRECTED (Erik 2026-09-01) — `backlashRung` is an ABSOLUTE rung NAME, authored one rung MILDER than the craft's own harmRung: the craft's nature turns inward, muted. ⚠️ R5 said 'land that rung on the wielder' but NO MACHINERY EXISTED to turn a rung into an amount — harmRung only ever fed finisher ODDS and GM prose. This table is that machinery, shaped after `intensity_scaling.surgeBacklashByTier`, the game's existing 'backlash scaled by a key' idiom. ⬜ `damaging` deliberately equals the old flat 4/10, so 15 of the 20 authored crafts are UNCHANGED and only the 5 `incapacitating` ones move. ⬜ THE MAGNITUDES ARE ERIK'S TO SET — at level 1 (30 health) these are 13% / 23% / 37%. `lethal` is defined but unused: no craft authors it, because backlash is always milder than harm.",
+  "intensityBacklashMult": {
+   "conserve": 0.6,
+   "standard": 1,
+   "surge": 1.6
+  },
   "_intensityBacklashMult": "⛔ R18 — INTENSITY MOVES THE MAGNITUDE, not only the chance. Mirrors `intensity_scaling.energyMult` (0.6 / 1.0 / 1.6): you pushed, so it bites harder; you held back, so it bites less.",
-  "backlashTriggers": {"critFailure":{"chance":1,"multiplier":1},"surgedSlip":{"chance":0.25,"multiplier":0.6}},
-  "_backlashTriggers": "⛔ R18 — ONE MAGNITUDE FUNCTION, TWO TRIGGERS. `surgeBacklashByTier` (a surged slip, by TIER) and `backlashByRung` (a crit failure, by RUNG) were two tables for one fiction. They are now one function keyed on rung × rank × intensity × pool; the events differ only in when they fire and how hard. ⛔ R18b: TIER DROPS OUT ENTIRELY, surge included — `harmRung` already scales per rank, so tier would double-count depth, and R5's principle is that the CRAFT'S OWN nature turns inward. `sustained_regard` is tier I carrying `harmRung: lethal`; under tier-scaling it would backlash like a beginner's craft while doing lethal work. ⚠️ Knowingly lost: a dear tier-V craft with a mild authored backlash now bites less on a surge than it used to. Accepted.",
-  "_backlashByRung": "⛔ R5 CORRECTED (Erik 2026-09-01) — `backlashRung` is an ABSOLUTE rung NAME, authored one rung MILDER than the craft's own harmRung: the craft's nature turns inward, muted. ⚠️ R5 said 'land that rung on the wielder' but NO MACHINERY EXISTED to turn a rung into an amount — harmRung only ever fed finisher ODDS and GM prose. This table is that machinery, shaped after `intensity_scaling.surgeBacklashByTier`, the game's existing 'backlash scaled by a key' idiom. ⬜ `damaging` deliberately equals the old flat 4/10, so 15 of the 20 authored crafts are UNCHANGED and only the 5 `incapacitating` ones move. ⬜ THE MAGNITUDES ARE ERIK'S TO SET — at level 1 (30 health) these are 13% / 23% / 37%. `lethal` is defined but unused: no craft authors it, because backlash is always milder than harm."
-},
+  "backlashTriggers": {
+   "critFailure": {
+    "chance": 1,
+    "multiplier": 1
+   },
+   "surgedSlip": {
+    "chance": 0.25,
+    "multiplier": 0.6
+   }
+  },
+  "_backlashTriggers": "⛔ R18 — ONE MAGNITUDE FUNCTION, TWO TRIGGERS. `surgeBacklashByTier` (a surged slip, by TIER) and `backlashByRung` (a crit failure, by RUNG) were two tables for one fiction. They are now one function keyed on rung × rank × intensity × pool; the events differ only in when they fire and how hard. ⛔ R18b: TIER DROPS OUT ENTIRELY, surge included — `harmRung` already scales per rank, so tier would double-count depth, and R5's principle is that the CRAFT'S OWN nature turns inward. `sustained_regard` is tier I carrying `harmRung: lethal`; under tier-scaling it would backlash like a beginner's craft while doing lethal work. ⚠️ Knowingly lost: a dear tier-V craft with a mild authored backlash now bites less on a surge than it used to. Accepted."
+ },
  "wild": {
   "critSuccessWiden": 6,
   "critFailWiden": 3,

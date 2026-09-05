@@ -7,8 +7,8 @@
   "nativeTradition": "wright",
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
-  "level": 30,
-  "xp": 2994,
+  "level": 31,
+  "xp": 3002,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -199,6 +199,10 @@
       "abilityId": "raise_alarm",
       "level": 1,
       "baseline": true
+    },
+    {
+      "abilityId": "reaping_sickle",
+      "level": 1
     }
   ],
   "alignment": {
@@ -214,11 +218,11 @@
     "value": 0.053420408281249956,
     "spectrum": 0.11337499999999998
   },
-  "attunement": 30,
-  "maxHealth": 191,
-  "health": 191,
-  "maxEnergy": 282,
-  "energy": 262,
+  "attunement": 31,
+  "maxHealth": 196,
+  "health": 196,
+  "maxEnergy": 287,
+  "energy": 287,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -633,7 +637,8 @@
       ],
       "weight": 1,
       "spread": [
-        "valley.kestrels_roost"
+        "valley.kestrels_roost",
+        "valley.sunken_choir"
       ],
       "day": 1,
       "worldDay": 12
@@ -758,7 +763,8 @@
       ],
       "weight": 1,
       "spread": [
-        "valley.disputed_zone_fringe"
+        "valley.disputed_zone_fringe",
+        "valley.kestrels_roost"
       ],
       "_bonusApplied": 0.25,
       "day": 1,
@@ -776,7 +782,8 @@
       ],
       "weight": 1,
       "spread": [
-        "valley.disputed_zone_fringe"
+        "valley.disputed_zone_fringe",
+        "valley.kestrels_roost"
       ],
       "_bonusApplied": 0.25,
       "day": 1,
@@ -901,7 +908,8 @@
       ],
       "weight": 1,
       "spread": [
-        "valley.sunken_choir"
+        "valley.sunken_choir",
+        "valley.kestrels_roost"
       ],
       "_bonusApplied": 0.25,
       "day": 2,
@@ -919,7 +927,8 @@
       ],
       "weight": 1,
       "spread": [
-        "valley.kestrels_roost"
+        "valley.kestrels_roost",
+        "valley.sunken_choir"
       ],
       "_bonusApplied": 0.25,
       "day": 2,
@@ -1835,7 +1844,9 @@
         "devote"
       ],
       "weight": 1,
-      "spread": [],
+      "spread": [
+        "ashwarden.quiet_ground"
+      ],
       "day": 13,
       "worldDay": 23
     },
@@ -1850,7 +1861,9 @@
         "sustain"
       ],
       "weight": 2,
-      "spread": [],
+      "spread": [
+        "valley.sunken_choir"
+      ],
       "day": 13,
       "worldDay": 24
     },
@@ -1865,7 +1878,9 @@
         "water-crisis"
       ],
       "weight": 2,
-      "spread": [],
+      "spread": [
+        "valley.kestrels_roost"
+      ],
       "day": 13,
       "worldDay": 24
     },
@@ -2160,37 +2175,61 @@
         "player": "Sleep, holding her the way she settles best.",
         "summary": "Deep night at the Whistling Woman post — Silas and Pell rest together, the child they carry steady between them, the warded waystation holding them safe and whole.",
         "narration": "You settle into the dark beside her, your body fitting against hers the way it has learned to fit. Your hand finds its place on her belly—not demanding, just present—and she shifts her weight back into you with the ease of someone who knows exactly where she wants to be. Her fingers close over yours, holding it there. The child stirs once, twice, then settles. You feel it through both the bond and through her skin, and the weight of that—her, the child, the three of you held in one moment in a room made safe by work and warding—is enough to pull you down into sleep.\n\nThe oil lamp flickers and steadies. The Whistling Woman post holds its warmth. Outside, the moorland breathes its slow night-breath, and inside, nothing moves but the breathing of three lives, two of them already joined, one waiting to be.\n\nWhen sleep takes you, it is complete."
+      },
+      {
+        "player": "Wake before dawn and step out to check the moorland approach — something in the network's quiet is different.",
+        "summary": "Silas wakes at dawn to find the relay network silent—and spots an urgent courier approaching from the south on the morning road.",
+        "narration": "You wake before the moorland stirs—not to urgency, but to the particular silence that comes when something changes. Pell sleeps deep beside you, her breathing steady, the child settled beneath her ribs. Huginn is already awake on the shelf, utterly still, which is its own form of attention.\n\nYou rise careful and quiet, leaving her the warmth of the bed. The post's interior is still dark—the lamp burned down hours ago—but your eyes have learned this space. You dress quick and step through the threshold into the pre-dawn grey.\n\nThe moorland air bites cold. Nothing is wrong—that's the clarity that stops you. The relay mechanism should have sung in the night. Deni's music-box carries messages across the whistle-mark network; the last three nights, it answered something on the far side of the moor every few hours. Regular as tide. Tonight it stayed silent. You walk the perimeter slowly, reading the ground, the wards, the marked boundary stones—all of it solid, all of it held. The ward at the threshold is unbroken. But the silence from the network is absolute.\n\nThen you catch it: a different kind of signal. Not the relay mechanism. Not the whistle-marks. Something on the road to the south—a faint runner's rhythm, measured and fast. Not panicked. Not slow. *Urgent.* A courier on the relay circuit, moving between posts. And the fact that they're running hard toward the Whistling Woman at dawn, toward YOU, means news has come that would not wait for daylight.\n\n*You feel it settle into you — a new steadiness. (Level 31: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "You settle into the dark beside her, your body fitting against hers the way it has learned to fit. Your hand finds its place on her belly—not demanding, just present—and she shifts her weight back into you with the ease of someone who knows exactly where she wants to be. Her fingers close over yours, holding it there. The child stirs once, twice, then settles. You feel it through both the bond and through her skin, and the weight of that—her, the child, the three of you held in one moment in a room made safe by work and warding—is enough to pull you down into sleep.\n\nThe oil lamp flickers and steadies. The Whistling Woman post holds its warmth. Outside, the moorland breathes its slow night-breath, and inside, nothing moves but the breathing of three lives, two of them already joined, one waiting to be.\n\nWhen sleep takes you, it is complete.",
-      "sceneSummary": "Deep night at the Whistling Woman post — Silas and Pell rest together, the child they carry steady between them, the warded waystation holding them safe and whole.",
+      "narration": "You wake before the moorland stirs—not to urgency, but to the particular silence that comes when something changes. Pell sleeps deep beside you, her breathing steady, the child settled beneath her ribs. Huginn is already awake on the shelf, utterly still, which is its own form of attention.\n\nYou rise careful and quiet, leaving her the warmth of the bed. The post's interior is still dark—the lamp burned down hours ago—but your eyes have learned this space. You dress quick and step through the threshold into the pre-dawn grey.\n\nThe moorland air bites cold. Nothing is wrong—that's the clarity that stops you. The relay mechanism should have sung in the night. Deni's music-box carries messages across the whistle-mark network; the last three nights, it answered something on the far side of the moor every few hours. Regular as tide. Tonight it stayed silent. You walk the perimeter slowly, reading the ground, the wards, the marked boundary stones—all of it solid, all of it held. The ward at the threshold is unbroken. But the silence from the network is absolute.\n\nThen you catch it: a different kind of signal. Not the relay mechanism. Not the whistle-marks. Something on the road to the south—a faint runner's rhythm, measured and fast. Not panicked. Not slow. *Urgent.* A courier on the relay circuit, moving between posts. And the fact that they're running hard toward the Whistling Woman at dawn, toward YOU, means news has come that would not wait for daylight.\n\n*You feel it settle into you — a new steadiness. (Level 31: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Silas wakes at dawn to find the relay network silent—and spots an urgent courier approaching from the south on the morning road.",
       "choices": [
         {
-          "label": "Wake before dawn and step out to check the moorland approach — something in the network's quiet is different.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Step to the roadside and signal the courier to stop—read their approach with The Attended End to know what kind of news they carry",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
-          "difficulty": "normal",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout"
+            "scout",
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Stay until true morning — let Pell sleep as long as she needs, and tend the post's quiet work: oil the mechanisms, check the stores.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Wait at the threshold with Huginn visible—let the courier come in on their own terms and read who they are by how they move and what they carry",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "careful",
+            "study"
+          ],
+          "abilityId": "order-sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Wake Pell and Veth—get the post's people alert and ready before the courier arrives, so you meet them with full company",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {},
           "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "craft"
+            "rally",
+            "lead"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2199,14 +2238,15 @@
           "emergenceId": null
         },
         {
-          "label": "Open the shadow-sheet and check what word Mara has sent overnight — the message-board may hold something that changes the day's path.",
-          "attribute": "social",
-          "subAttribute": "insight",
+          "label": "Move to high ground where you can see the whole approach and read the moorland around the courier—something that breaks the network's silence might not be coming alone",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
-          "difficulty": "easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "scout",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2217,8 +2257,8 @@
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": 3,
-        "energy": 90,
+        "health": 0,
+        "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -2229,58 +2269,35 @@
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": null,
+      "offer": {
+        "thing": "A courier on the relay circuit, running hard toward the post at dawn with urgent news",
+        "from": "The relay network's sudden silence—something has shifted in the connected posts, and word is coming fast"
+      },
       "stageOps": [],
       "scene": {
-        "setting": "The Whistling Woman post's single warm room at deep night turning toward dawn—stone walls holding the last of the stove's heat, the oil lamp burned nearly to stillness. Deni Cors's relay mechanism sits silent on the shelf. The bed is warm and close.",
+        "setting": "The Whistling Woman post's exterior at pre-dawn grey—moorland breathing slow, the warded threshold solid behind you, and a figure on the southern road moving fast toward the post",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Asleep beside Silas, one hand resting on her belly, the other still holding his wrist—her grip loose but present even in sleep. The child beneath her skin is quiet and settled."
+            "state": "Asleep inside the post, deep and settled"
           },
           {
             "name": "Huginn",
-            "state": "Roosted on the shelf above the relay mechanism, head tucked into its wing, present but completely still—the kind of sleep that can end in an instant if it needs to."
+            "state": "Roosted on the shelf inside, awake and attending"
           }
         ],
         "objects": [
-          "The bed, made and warm",
-          "The oil lamp, burning low",
-          "Memory—the spear—propped against the wall within reach",
-          "Both sets of clothes folded neat on the chair",
-          "The relay mechanism, silent on the shelf",
-          "The shadow-sheet, folded in Silas's pack"
+          "The Whistling Woman post structure—stone and timber, warded at the threshold",
+          "Deni Cors's relay mechanism, silent on the shelf",
+          "The moorland road to the south, where a courier approaches"
         ],
-        "threads": []
+        "threads": [
+          "Why the relay network went silent through the night",
+          "What news the courier carries that could not wait for daylight",
+          "Whether the silence means a broken link in the chain or something more deliberate"
+        ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "role": "traveling companion, partner",
-          "sex": "female",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Sleeping deeply, settled and present, her grip on Silas's hand holding even in rest—asking for more tomorrows, and the three of them held together in the dark.",
-          "learned": [
-            "She can rest completely when Silas is present and the work is near—the child settles, and so does she",
-            "The little one moves in response to the novel-depth work, and settles when Silas is close"
-          ],
-          "statusNote": "At the Whistling Woman post, resting, pregnant and strong—the child steady and responding to presence"
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "role": "Companion — an Ashwarden-touched carrion bird that attends endings",
-          "sex": "none",
-          "gender": "nonbinary",
-          "pronouns": "they/them",
-          "note": "Roosted and sleeping, present in the room but completely still—the kind of alert rest that ends in an instant if needed.",
-          "statusNote": "At the Whistling Woman post, roosted and resting"
-        }
-      ],
+      "npcUpdates": [],
       "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
@@ -2297,52 +2314,49 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 8,
-        "why": "a full night's sleep—the warded room holding warmth, Pell settled beside him, the work complete and the child steady"
+        "hoursPassed": 7,
+        "why": "slept through the full night, from deep night to pre-dawn"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": null,
+      "imagePrompt": "Pre-dawn moorland: a figure in running clothes on the southern road, moving fast toward the Whistling Woman post in the grey light, Silas standing at the threshold with Huginn visible on the post's roofline behind him.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/Pre-dawn%20moorland%3A%20a%20figure%20in%20running%20clothes%20on%20the%20southern%20road%2C%20moving%20fast%20toward%20the%20Whistling%20Woman%20post%20in%20the%20grey%20light%2C%20Silas%20standing%20at%20the%20threshold%20with%20Huginn%20visible%20on%20the%20post's%20roofline%20behind%20him.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=85228&nologo=true"
     },
     "sceneState": {
-      "setting": "The Whistling Woman post's single warm room at deep night turning toward dawn—stone walls holding the last of the stove's heat, the oil lamp burned nearly to stillness. Deni Cors's relay mechanism sits silent on the shelf. The bed is warm and close.",
+      "setting": "The Whistling Woman post's exterior at pre-dawn grey—moorland breathing slow, the warded threshold solid behind you, and a figure on the southern road moving fast toward the post",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Asleep beside Silas, one hand resting on her belly, the other still holding her wrist—her grip loose but present even in"
+          "state": "Asleep inside the post, deep and settled"
         },
         {
           "name": "Huginn",
-          "state": "Roosted on the shelf above the relay mechanism, head tucked into its wing, present but completely still—the kind of slee"
+          "state": "Roosted on the shelf inside, awake and attending"
         }
       ],
       "objects": [
-        "The bed, made and warm",
-        "The oil lamp, burning low",
-        "Memory—the spear—propped against the wall within reach",
-        "Both sets of clothes folded neat on the chair",
-        "The relay mechanism, silent on the shelf",
-        "The shadow-sheet, folded in Silas's pack"
+        "The Whistling Woman post structure—stone and timber, warded at the threshold",
+        "Deni Cors's relay mechanism, silent on the shelf",
+        "The moorland road to the south, where a courier approaches"
       ],
-      "threads": []
+      "threads": [
+        "Why the relay network went silent through the night",
+        "What news the courier carries that could not wait for daylight",
+        "Whether the silence means a broken link in the chain or something more deliberate"
+      ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
     "day": 16,
-    "hour": 8,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -6076,7 +6090,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 15,
+    "lastTickDay": 16,
     "eventStages": {
       "water_crisis": {
         "stage": 2,
@@ -6089,88 +6103,6 @@
       "falsehood_truth": -0.05
     },
     "news": [
-      {
-        "day": 15,
-        "worldDay": 46,
-        "text": "Neth, Who Has Buried More Than She Has Known held Morvane of the Harvest Hand at The Long Grey — The Kept Vigil — and Morvane's design is stalled, not stopped.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "winnerId": "neth_the_stayed",
-        "loserId": "morvane_the_harvest",
-        "outcome": "stopped",
-        "abilityId": "the_kept_vigil",
-        "locationId": "the_long_grey"
-      },
-      {
-        "day": 15,
-        "worldDay": 46,
-        "text": "Neth, Who Has Buried More Than She Has Known: Word reached Neth of an elderly shepherd on the outer edge of her reach dying alone in a hillside hut; she walked through the night and arrived before dawn, in time to sit with him until he passed.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 15,
-        "worldDay": 67,
-        "text": "Word reaches you that Two families whose herds have shared the western pastures without conflict for a generation are beginning to graze into each other's unspoken boundaries, and the first cold words have been exchanged. — settled, it seems, without you.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 15,
-        "worldDay": 67,
-        "text": "Word reaches you that The Vale's characteristic echoes are subtly shortening — sounds that once rang three times now ring twice — and a shepherd who noticed first has begun marking stones where the silence starts. — settled, it seems, without you.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 15,
-        "worldDay": 67,
-        "text": "Word reaches you that Two families contracted to supply the Domain's expansion work are underbidding each other into ruin, and the younger sons on each side have begun meeting at boundaries to exchange hard words. — settled, it seems, without you.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 15,
-        "worldDay": 67,
-        "text": "Word reaches you that A low officer has been quietly assigning the same three households to every corvée rotation, and those households are beginning to talk to one another. — settled, it seems, without you.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 15,
-        "worldDay": 67,
-        "text": "Word reaches you that A mid-ranking functionary responsible for certifying land-use rights has been delaying renewals for holdings on the Domain's periphery, letting them lapse quietly rather than ruling on contested… — settled, it seems, without you.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 15,
-        "worldDay": 67,
-        "text": "The Deep Lantern, Who Walks Where Light Won't broke Cinder Vael, the Wright Who Would Not Stop at The Ceaseless — a stranger, and now an enemy. Cinder Vael is out of the reckoning while the wound holds.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "winnerId": "the_deep_lantern",
-        "loserId": "cinder_vael",
-        "outcome": "wounded",
-        "abilityId": "dim",
-        "locationId": "the_ceaseless",
-        "arcId": "arc_manifestation_storm"
-      },
-      {
-        "day": 15,
-        "worldDay": 67,
-        "text": "Valen Sunwrack, Who Left No Shadow Standing turned The Hundred Hands back at The Blaze. The Hundred Hands learned something, which is worse for everyone else.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "winnerId": "sunwrack_valen",
-        "loserId": "the_hundred_hands",
-        "outcome": "stopped",
-        "abilityId": "daybreak_mantle",
-        "locationId": "the_blaze"
-      },
       {
         "day": 15,
         "worldDay": 67,
@@ -6247,19 +6179,78 @@
         "text": "Archive Guardian: The Guardian has quietly drafted a short list of categories — not rules yet, just named distinctions — and left copies with two valley elders, asking only that they sit with it before any meeting is called.",
         "tier": "ambient",
         "section": "world"
+      },
+      {
+        "day": 16,
+        "worldDay": 67,
+        "text": "Calvar has been asking after you. More than once.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 16,
+        "worldDay": 67,
+        "text": "Word has spread beyond its own valley, as far as sunken_choir: Struck a fair provisioning arrangement with Aldric the smokehouse man — hunting for the village in exchange for food and supplies, and offered to keep watch on what's damaging the river catch.",
+        "tier": "event",
+        "section": "elsewhere"
+      },
+      {
+        "day": 16,
+        "worldDay": 67,
+        "text": "Word has spread beyond its own valley, as far as kestrels_roost: Coordinated a clean boar kill in the north wood — Corvin landed the strike, Silas held the line and read the ending with a bound spear",
+        "tier": "event",
+        "section": "elsewhere"
+      },
+      {
+        "day": 16,
+        "worldDay": 67,
+        "text": "Word has spread beyond its own valley, as far as kestrels_roost: Brought down the bull boar on the scrub oak ridge with Pell — a clean hunt despite a misfire in the rune-work.",
+        "tier": "event",
+        "section": "elsewhere"
+      },
+      {
+        "day": 16,
+        "worldDay": 67,
+        "text": "Word has spread beyond its own valley, as far as kestrels_roost: Named the repaired death-bound spear Memory in Pell's forge at dawn — a word that held.",
+        "tier": "event",
+        "section": "elsewhere"
+      },
+      {
+        "day": 16,
+        "worldDay": 67,
+        "text": "Word has spread beyond its own valley, as far as sunken_choir: Kissed Pell Marsh at the forge bench at dawn — after a full night repairing Memory together and naming it over old wine.",
+        "tier": "event",
+        "section": "elsewhere"
+      },
+      {
+        "day": 16,
+        "worldDay": 67,
+        "text": "Word has spread beyond its own valley, as far as quiet_ground: Attended the ending of an old badger in the hollow below the Raven's Home post — sat with it in the plain Ashwarden way, no craft past the clean reading, no ceremony past the presence.",
+        "tier": "event",
+        "section": "elsewhere"
+      },
+      {
+        "day": 16,
+        "worldDay": 67,
+        "text": "Word has spread beyond its own valley, as far as sunken_choir: Commissioned Edvar Crane as an agent of Stillwater's Trouble — ending his twenty-year solitary watch and bringing his filtration knowledge into the fellowship's network.",
+        "tier": "event",
+        "section": "elsewhere"
+      },
+      {
+        "day": 16,
+        "worldDay": 67,
+        "text": "Word has spread beyond its own valley, as far as kestrels_roost: Bound a complete four-stage community filtration cascade — including a detail the shadow found before any of them thought to draw it — into the Waymarker's memory",
+        "tier": "event",
+        "section": "elsewhere"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-05T07:12:33.205Z",
+    "lastSharedReadAt": "2026-09-05T22:37:11.583Z",
     "lastTickWorldDay": 67,
     "lastCanonWorldDay": 67,
-    "lastGenCount": 1615,
-    "turnsSinceOffer": 6,
+    "lastGenCount": 1630,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The ordinary work of feeding—Aldric's fish, hard bread, cheese from Pell's pack—grounding after the novel-depth work",
-        "from": "The character's own need and Pell's steadiness—the meal that follows the meditation the way rest follows effort"
-      },
       {
         "thing": "The music-box mechanism—a carrier for Deni's whistle-song in physical form, a tool for the relay network",
         "from": "Deni Cors's methodical care in building the post; the infrastructure of the waystation network she has begun; the recognition that relay…"
@@ -6275,6 +6266,10 @@
       {
         "thing": "A quiet night with nothing demanded but presence—the first one since the temple was raised.",
         "from": "Pell's read of what the child needs, and what she needs alongside it"
+      },
+      {
+        "thing": "A courier on the relay circuit, running hard toward the post at dawn with urgent news",
+        "from": "The relay network's sudden silence—something has shifted in the connected posts, and word is coming fast"
       }
     ],
     "wantProgress": {
@@ -6817,6 +6812,19 @@
     },
     "pressureQueue": [
       {
+        "source": "npc-want",
+        "kind": "npc-want",
+        "subjectId": "calvar",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "Calvar, unseen for 7 days, has come looking for you — driven by an unmet want: The filtration work done CORRECTLY — he came out of a solitary twenty-year watch for this; sloppiness offends him more than danger.. They arrive now, not content to keep waiting.",
+        "becomes": {
+          "type": "scene",
+          "who": "calvar"
+        },
+        "addedDay": 16
+      },
+      {
         "source": "threat-attack",
         "kind": "threat-attack",
         "subjectId": "beast_cinder_mote_drift",
@@ -6828,8 +6836,21 @@
           "encounterId": "beast_cinder_mote_drift",
           "name": "a cinder-mote drift"
         },
-        "addedDay": 15,
+        "addedDay": 16,
         "locationId": "gen-whistling-woman-post"
+      },
+      {
+        "source": "npc-want",
+        "kind": "npc-want",
+        "subjectId": "tane-solr",
+        "aimedAtPlayer": true,
+        "urgency": 2,
+        "oneLineHook": "Tane Solr, unseen for 10 days, has come looking for you — driven by an unmet want: A bout that is true — not won or lost but honest, where both fighters come to the center-line having brought everything they actually are and no more.. They arrive now, not content to keep waiting.",
+        "becomes": {
+          "type": "scene",
+          "who": "tane-solr"
+        },
+        "addedDay": 16
       }
     ],
     "offscreenCursor": 32,
@@ -12734,7 +12755,13 @@
           "PEOPLE": "The Marchers"
         }
       }
-    }
+    },
+    "seeking": [
+      {
+        "id": "calvar",
+        "since": 9
+      }
+    ]
   },
   "domains": {
     "primary": "ashwarden",
@@ -12756,7 +12783,7 @@
     "craft": 10,
     "wits": 6
   },
-  "pendingSubPoints": 0,
+  "pendingSubPoints": 1,
   "skillPoints": 2,
   "discoveries": [
     {
@@ -14231,22 +14258,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 15.678366136086739,
-    "cerebral": 17.060371941684735,
-    "social": 11.018632557493396,
-    "generous": 4.698194783296735,
-    "cautious": 6.3621084975087525,
-    "physical": 0.43672443339118405,
-    "risky": 0.10474974189475059,
-    "ruthless": 0.22799635736330373,
-    "carousing": 0.03706935450293942,
-    "amorous": 4.013126127082475,
-    "patient": 0.7665942305761514,
-    "stealth": 0.00000796826784664815,
-    "devotion": 0.32560973256589426,
-    "craft": 3.5991137301777294,
-    "leadership": 1.059929314950381,
-    "deception": 0.0381588629416183
+    "strategic": 16.286406982684568,
+    "cerebral": 16.633862643142617,
+    "social": 10.74316674355606,
+    "generous": 4.580739913714316,
+    "cautious": 6.203055785071034,
+    "physical": 0.42580632255640444,
+    "risky": 0.10213099834738182,
+    "ruthless": 0.22229644842922114,
+    "carousing": 0.036142620640365934,
+    "amorous": 3.912797973905413,
+    "patient": 0.7474293748117475,
+    "stealth": 0.000007769061150481945,
+    "devotion": 0.3174694892517469,
+    "craft": 3.509135886923286,
+    "leadership": 1.0334310820766215,
+    "deception": 0.03720489136807784
   },
   "aptitudes": [
     "strategist",
@@ -14255,10 +14282,128 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 951,
+  "actionCount": 952,
   "grantsVersion": 1,
-  "reconcileVersion": 32,
+  "reconcileVersion": 33,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Pre-dawn moorland: a figure in running clothes on the southern road, moving fast toward the Whistling Woman post in the grey light, Silas standing at the threshold with Huginn visible on the post's ro",
+      "url": "https://image.pollinations.ai/prompt/Pre-dawn%20moorland%3A%20a%20figure%20in%20running%20clothes%20on%20the%20southern%20road%2C%20moving%20fast%20toward%20the%20Whistling%20Woman%20post%20in%20the%20grey%20light%2C%20Silas%20standing%20at%20the%20threshold%20with%20Huginn%20visible%20on%20the%20post's%20roofline%20behind%20him.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=85228&nologo=true",
+      "caption": "Silas wakes at dawn to find the relay network silent—and spots an urgent courier approachi",
+      "worldDay": 67,
+      "at": "2026-09-05T23:07:20.125Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "A Second Pair of Hands",
+      "url": "https://image.pollinations.ai/prompt/A%20Second%20Pair%20of%20Hands%3A%20%E2%9B%94%20TAL%20HAS%20LEARNED%20YOUR%20WORK%20WELL%20ENOUGH%20TO%20GENUINELY%20HELP%20%E2%80%94%20holding%20the%20line%2C%20passing%20the%20tool%2C%20taking%20the%20half%20of%20the%20task%20you%20cannot%20reach.%20%E2%9A%A0%EF%B8%8F%20Any%20craft%2C%20if%20the%20craft%20has%20a%20half%20he%20can%20hold.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20wright%20tradition%3A%20scaffold-timber%2C%20fresh-cut%20stone%2C%20work-lamp%20amber%3B%20scaffolds%20forever%2C%20half-built%20cathedrals%2C%20tools%20mid-use%3B%20work-light%20on%20the%20unfinished%2C%20the%20joy%20and%20waste%20of%20it%3B%20never%20finished%2C%20and%20that's%20the%20point%20%E2%80%94%20becoming%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20scaffold-timber%2C%20fresh-cut%20stone%2C%20work-lamp%20amber%2C%20work-light%20on%20the%20unfinished%2C%20the%20joy%20and%20waste%20of%20it%2C%20never%20finished%2C%20and%20that's%20the%20point?width=1024&height=512&seed=14329&nologo=true",
+      "caption": "A Second Pair of Hands",
+      "worldDay": 67,
+      "at": "2026-09-05T23:05:55.831Z",
+      "subjectKind": "ability",
+      "subjectId": "second_pair_of_hands"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Built Way",
+      "url": "https://image.pollinations.ai/prompt/Built%20Way%3A%20Build%20a%20path%20where%20none%20existed%20%E2%80%94%20bridge%20a%20gap%2C%20span%20a%20drop%2C%20cut%20a%20stair%20into%20a%20cliff%20%E2%80%94%20fast%20enough%20to%20matter.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20wright%20tradition%3A%20scaffold-timber%2C%20fresh-cut%20stone%2C%20work-lamp%20amber%3B%20scaffolds%20forever%2C%20half-built%20cathedrals%2C%20tools%20mid-use%3B%20work-light%20on%20the%20unfinished%2C%20the%20joy%20and%20waste%20of%20it%3B%20never%20finished%2C%20and%20that's%20the%20point%20%E2%80%94%20becoming%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20scaffold-timber%2C%20fresh-cut%20stone%2C%20work-lamp%20amber%2C%20work-light%20on%20the%20unfinished%2C%20the%20joy%20and%20waste%20of%20it%2C%20never%20finished%2C%20and%20that's%20the%20point?width=1024&height=512&seed=30475&nologo=true",
+      "caption": "Built Way",
+      "worldDay": 67,
+      "at": "2026-09-05T23:04:53.801Z",
+      "subjectKind": "ability",
+      "subjectId": "built_way"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Clean Taking",
+      "url": "https://image.pollinations.ai/prompt/Clean%20Taking%3A%20Take%20a%20made%20object%20apart%20in%20minutes%20and%20recover%20its%20parts%20intact%20%E2%80%94%20a%20lock%20into%20its%20pins%2C%20a%20wagon%20into%20timber%20and%20iron%2C%20a%20lantern%20into%20glass%2C%20wick%20and%20frame.%20The%20Unmakers'%20first%20craft%2C%20and%20the%20one%20that%20pays.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20unmaker%20tradition%3A%20dust-grey%2C%20controlled-rubble%2C%20clean%20break-line%3B%20beautiful%20demolition%2C%20ordered%20ruin%2C%20the%20cleared%20space%3B%20light%20entering%20a%20thing%20just%20opened%3B%20an%20ethic%20of%20clearing%20%E2%80%94%20ruin%20made%20beautiful%20and%20deliberate%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20dust-grey%2C%20controlled-rubble%2C%20clean%20break-line%2C%20light%20entering%20a%20thing%20just%20opened%2C%20an%20ethic%20of%20clearing?width=1024&height=512&seed=72669&nologo=true",
+      "caption": "Clean Taking",
+      "worldDay": 67,
+      "at": "2026-09-05T23:04:26.617Z",
+      "subjectKind": "ability",
+      "subjectId": "clean_taking"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Reaping Sickle",
+      "url": "https://image.pollinations.ai/prompt/Reaping%20Sickle%3A%20%E2%9B%94%20CONJURE%20THE%20SICKLE%20AND%20SWING%20IT.%20A%20scythe%20of%20cold%20dark%20metal%20that%20was%20not%20there%20a%20moment%20ago%2C%20taken%20in%20both%20hands%20and%20reaped%20through%20everything%20standing%20within%20its%20arc.%20%E2%9A%A0%EF%B8%8F%20IT%20IS%20NOT%20SUBTLE%2C%20IT%20IS%20NOT%20DENIABLE%2C%20AND%20IT%20IS%20THE%20ONLY%20THING%20THIS%20TRADITION%20DOES%20THA%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20ashwarden%20tradition%3A%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%3B%20ash%2C%20grave-stone%2C%20worn%20iron%2C%20chalk%3B%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%3B%20the%20mercy%20of%20stopping%20%E2%80%94%20solemn%2C%20tender%2C%20kept%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%2C%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%2C%20the%20mercy%20of%20stopping?width=1024&height=512&seed=52153&nologo=true",
+      "caption": "Reaping Sickle",
+      "worldDay": 67,
+      "at": "2026-09-05T23:02:51.990Z",
+      "subjectKind": "ability",
+      "subjectId": "reaping_sickle"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Psychic Lance",
+      "url": "https://image.pollinations.ai/prompt/Psychic%20Lance%3A%20Drive%20a%20spike%20of%20focused%20thought%20straight%20into%20a%20mind%20at%20range%20%E2%80%94%20no%20vector%2C%20no%20contact%2C%20nothing%20to%20block%2C%20and%20it%20hurts%20exactly%20as%20much%20as%20being%20hit.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20cogitant%20tradition%3A%20cool%20slate%2C%20parchment%2C%20ink-blue%3B%20thin%20frames%2C%20vast%20implied%20interiors%2C%20memory-palaces%3B%20dim%2C%20inward%2C%20the%20glow%20of%20thought%20not%20sun%3B%20still%20body%2C%20immense%20interior%20%E2%80%94%20thought%20as%20force%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20cool%20slate%2C%20parchment%2C%20ink-blue%2C%20dim%2C%20inward%2C%20the%20glow%20of%20thought%20not%20sun%2C%20still%20body%2C%20immense%20interior?width=1024&height=512&seed=72754&nologo=true",
+      "caption": "Psychic Lance",
+      "worldDay": 67,
+      "at": "2026-09-05T23:01:15.126Z",
+      "subjectKind": "ability",
+      "subjectId": "psychic_lance"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Memory-Palace",
+      "url": "https://image.pollinations.ai/prompt/Memory-Palace%3A%20Search%20your%20own%20memory%20for%20something%20that%20bears%20on%20what%20you%20are%20doing%20%E2%80%94%20and%20let%20it%20sharpen%20the%20attempt.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20cogitant%20tradition%3A%20cool%20slate%2C%20parchment%2C%20ink-blue%3B%20thin%20frames%2C%20vast%20implied%20interiors%2C%20memory-palaces%3B%20dim%2C%20inward%2C%20the%20glow%20of%20thought%20not%20sun%3B%20still%20body%2C%20immense%20interior%20%E2%80%94%20thought%20as%20force%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20cool%20slate%2C%20parchment%2C%20ink-blue%2C%20dim%2C%20inward%2C%20the%20glow%20of%20thought%20not%20sun%2C%20still%20body%2C%20immense%20interior?width=1024&height=512&seed=13277&nologo=true",
+      "caption": "Memory-Palace",
+      "worldDay": 67,
+      "at": "2026-09-05T23:01:12.042Z",
+      "subjectKind": "ability",
+      "subjectId": "memory_palace"
+    },
+    {
+      "kind": "figure",
+      "prompt": "Red haired middle aged man, intelligent, driven, capable. Thin frame. Filtration machinery and an iron mine behind him.",
+      "url": "https://image.pollinations.ai/prompt/Red%20haired%20middle%20aged%20man%2C%20intelligent%2C%20driven%2C%20capable.%20Thin%20frame.%20Filtration%20machinery%20and%20an%20iron%20mine%20behind%20him.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=21545&nologo=true",
+      "caption": "Fendt",
+      "worldDay": 67,
+      "at": "2026-09-05T16:39:47.387Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-fendt"
+    },
+    {
+      "kind": "figure",
+      "prompt": "",
+      "url": "https://image.pollinations.ai/prompt/Keeper%20of%20the%20Raven's%20Home%20warden%20post%20threshold%2C%20character%20portrait%2C%20named%20Cassiel%20Ord%2C%20man%2C%20Keeper%20of%20the%20Raven's%20Home%20warden%20post%20threshold%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=78017&nologo=true",
+      "caption": "Cassiel Ord",
+      "worldDay": 67,
+      "at": "2026-09-05T16:37:31.154Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-cassiel-ord"
+    },
+    {
+      "kind": "figure",
+      "prompt": "",
+      "url": "https://image.pollinations.ai/prompt/Agent%20of%20Stillwater's%20Trouble%3B%20filtration%20engineer%3B%20named%20delegate%20to%20Mara%20Wells%20and%20the%20Hub%20committ%2C%20character%20portrait%2C%20named%20Edvar%20Crane%2C%20man%2C%20Agent%20of%20Stillwater's%20Trouble%3B%20filtration%20engineer%3B%20named%20delegate%20to%20Mara%20Wells%20and%20the%20Hub%20committ%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=45281&nologo=true",
+      "caption": "Edvar Crane",
+      "worldDay": 67,
+      "at": "2026-09-05T16:36:48.439Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-edvar-crane"
+    },
+    {
+      "kind": "figure",
+      "prompt": "young man, farmhad, boar hunting spear, Corvin",
+      "url": "https://image.pollinations.ai/prompt/young%20man%2C%20farmhad%2C%20boar%20hunting%20spear%2C%20Corvin%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=97176&nologo=true",
+      "caption": "Corvin",
+      "worldDay": 67,
+      "at": "2026-09-05T16:34:51.944Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-corvin"
+    },
+    {
+      "kind": "figure",
+      "prompt": "",
+      "url": "https://image.pollinations.ai/prompt/Corvin%2C%20character%20portrait%2C%20named%20Corvin%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=69210&nologo=true",
+      "caption": "Corvin",
+      "worldDay": 67,
+      "at": "2026-09-05T16:34:26.959Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-corvin"
+    },
     {
       "kind": "moment",
       "prompt": "Two figures in firelight on a narrow bed—lamp-dimmed and warm, the stove's embers casting shadow and gold across bare skin and deliberate closeness. Huginn on the shelf, one eye open, unfazed. The war",
@@ -14875,8 +15020,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1788593527240,
-  "rev": 1764,
+  "updatedAt": 1788649640125,
+  "rev": 1817,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18977,13 +19122,13 @@
       "at": "2026-07-19T12:49:09.209Z"
     }
   ],
-  "syncedAt": 1786537830770,
+  "syncedAt": 1788593527240,
   "teachers": {},
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
     "the_center": 151,
-    "the_echo_vale": 13
+    "the_echo_vale": 14
   },
   "foreclosed": [
     "rootkin",
@@ -19264,6 +19409,14 @@
       "startDay": 67,
       "endDay": 67,
       "beats": 12
+    },
+    {
+      "id": "sess-30",
+      "startedAt": "2026-09-05T23:07:20.107Z",
+      "lastAt": "2026-09-05T23:07:20.107Z",
+      "startDay": 67,
+      "endDay": 67,
+      "beats": 1
     }
   ],
   "company": [
@@ -19751,20 +19904,20 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 327,
-    "choices": 326,
-    "characterDeltas": 160,
-    "scene": 327,
+    "sceneSummary": 328,
+    "choices": 327,
+    "characterDeltas": 161,
+    "scene": 328,
     "npcUpdates": 293,
     "factUpdates": 27,
     "placeUpdates": 73,
     "codexUpdates": 195,
-    "timeOps": 303,
-    "imagePrompt": 25,
-    "sceneEnded": 107,
+    "timeOps": 304,
+    "imagePrompt": 26,
+    "sceneEnded": 108,
     "itemUpdates": 7,
     "questUpdates": 42,
-    "offer": 40,
+    "offer": 41,
     "moveTo": 20,
     "delegateOps": 4,
     "deeds": 12,
@@ -19778,11 +19931,11 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 37,
+    "gambitApt": 38,
     "markDefiningMoment": 1,
     "_engineClosedScene": 3
   },
-  "_opTurns": 327,
+  "_opTurns": 328,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -19790,7 +19943,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 44,
+      "applied": 45,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },
@@ -20011,7 +20164,13 @@
     "braid_deathsense_palework": "https://image.pollinations.ai/prompt/Pale%20Reckoning%3A%20Five%20times%20the%20ashwarden%20stood%20at%20the%20threshold%20where%20death%20whispers%20and%20pale%20force%20strikes%2C%20and%20the%20two%20crafts%20listened%20to%20each%20other%20until%20they%20became%20one.%20Deathsense%20no%20longer%20merely%20foresees%20endings%20%E2%80%94%20it%20feeds%20them%20to%20Palework%20like%20coordinates.%20Palework%20no%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20ashwarden%20tradition%3A%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%3B%20ash%2C%20grave-stone%2C%20worn%20iron%2C%20chalk%3B%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%3B%20the%20mercy%20of%20stopping%20%E2%80%94%20solemn%2C%20tender%2C%20kept%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=90006&nologo=true",
     "scatter": "https://image.pollinations.ai/prompt/Scatter%3A%20Introduce%20sharp%20disorder%20%E2%80%94%20scatter%20a%20formation%2C%20foul%20a%20mechanism%2C%20open%20a%20gap%20in%20order.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20churnfolk%20tradition%3A%20clashing%20brights%2C%20mismatched%20everything%2C%20dust-gold%3B%20improvised%20gear%2C%20patched%20cloth%2C%20lucky%20junk%3B%20loose%2C%20sunlit%2C%20catch-as-catch-can%3B%20joyous%20mess%2C%20luck-riding%2C%20never%20twice%20the%20same%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=99739&nologo=true",
     "braid_deathsense_order_sense": "https://image.pollinations.ai/prompt/Undying%20Ledger%3A%20Where%20Deathsense%20reads%20the%20cold%20signatures%20of%20endings%20and%20Order-Sense%20traces%20the%20rigid%20lattice%20of%20what-must-be%2C%20The%20Undying%20Ledger%20fuses%20both%20into%20a%20single%20sovereign%20perception%3A%20the%20practitioner%20sees%20not%20merely%20that%20death%20approaches%2C%20nor%20merely%20that%20patterns%20h%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20ashwarden%20tradition%3A%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%3B%20ash%2C%20grave-stone%2C%20worn%20iron%2C%20chalk%3B%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%3B%20the%20mercy%20of%20stopping%20%E2%80%94%20solemn%2C%20tender%2C%20kept%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=48974&nologo=true",
-    "last_form": "https://image.pollinations.ai/prompt/The%20Last%20Form%3A%20The%20duel%20capstone%3A%20read%20a%20single%20opponent%20so%20completely%20and%20strike%20so%20precisely%20that%20a%20formal%20fight%20ends%20in%20one%20decisive%20exchange.%20The%20Marcher's%20highest%20art%20%E2%80%94%20the%20fight%20already%20over%20when%20it%20begins.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20marcher%20tradition%3A%20steel-grey%2C%20blood-rust%2C%20weathered%20leather%3B%20honed%20blades%2C%20scarred%20armor%2C%20the%20held%20line%3B%20hard%20edge-light%2C%20a%20blade%20catching%20the%20sun%3B%20disciplined%2C%20scarred%2C%20holding%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=29546&nologo=true"
+    "last_form": "https://image.pollinations.ai/prompt/The%20Last%20Form%3A%20The%20duel%20capstone%3A%20read%20a%20single%20opponent%20so%20completely%20and%20strike%20so%20precisely%20that%20a%20formal%20fight%20ends%20in%20one%20decisive%20exchange.%20The%20Marcher's%20highest%20art%20%E2%80%94%20the%20fight%20already%20over%20when%20it%20begins.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20marcher%20tradition%3A%20steel-grey%2C%20blood-rust%2C%20weathered%20leather%3B%20honed%20blades%2C%20scarred%20armor%2C%20the%20held%20line%3B%20hard%20edge-light%2C%20a%20blade%20catching%20the%20sun%3B%20disciplined%2C%20scarred%2C%20holding%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=29546&nologo=true",
+    "memory_palace": "https://image.pollinations.ai/prompt/Memory-Palace%3A%20Search%20your%20own%20memory%20for%20something%20that%20bears%20on%20what%20you%20are%20doing%20%E2%80%94%20and%20let%20it%20sharpen%20the%20attempt.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20cogitant%20tradition%3A%20cool%20slate%2C%20parchment%2C%20ink-blue%3B%20thin%20frames%2C%20vast%20implied%20interiors%2C%20memory-palaces%3B%20dim%2C%20inward%2C%20the%20glow%20of%20thought%20not%20sun%3B%20still%20body%2C%20immense%20interior%20%E2%80%94%20thought%20as%20force%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20cool%20slate%2C%20parchment%2C%20ink-blue%2C%20dim%2C%20inward%2C%20the%20glow%20of%20thought%20not%20sun%2C%20still%20body%2C%20immense%20interior?width=1024&height=512&seed=13277&nologo=true",
+    "psychic_lance": "https://image.pollinations.ai/prompt/Psychic%20Lance%3A%20Drive%20a%20spike%20of%20focused%20thought%20straight%20into%20a%20mind%20at%20range%20%E2%80%94%20no%20vector%2C%20no%20contact%2C%20nothing%20to%20block%2C%20and%20it%20hurts%20exactly%20as%20much%20as%20being%20hit.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20cogitant%20tradition%3A%20cool%20slate%2C%20parchment%2C%20ink-blue%3B%20thin%20frames%2C%20vast%20implied%20interiors%2C%20memory-palaces%3B%20dim%2C%20inward%2C%20the%20glow%20of%20thought%20not%20sun%3B%20still%20body%2C%20immense%20interior%20%E2%80%94%20thought%20as%20force%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20cool%20slate%2C%20parchment%2C%20ink-blue%2C%20dim%2C%20inward%2C%20the%20glow%20of%20thought%20not%20sun%2C%20still%20body%2C%20immense%20interior?width=1024&height=512&seed=72754&nologo=true",
+    "reaping_sickle": "https://image.pollinations.ai/prompt/Reaping%20Sickle%3A%20%E2%9B%94%20CONJURE%20THE%20SICKLE%20AND%20SWING%20IT.%20A%20scythe%20of%20cold%20dark%20metal%20that%20was%20not%20there%20a%20moment%20ago%2C%20taken%20in%20both%20hands%20and%20reaped%20through%20everything%20standing%20within%20its%20arc.%20%E2%9A%A0%EF%B8%8F%20IT%20IS%20NOT%20SUBTLE%2C%20IT%20IS%20NOT%20DENIABLE%2C%20AND%20IT%20IS%20THE%20ONLY%20THING%20THIS%20TRADITION%20DOES%20THA%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20ashwarden%20tradition%3A%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%3B%20ash%2C%20grave-stone%2C%20worn%20iron%2C%20chalk%3B%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%3B%20the%20mercy%20of%20stopping%20%E2%80%94%20solemn%2C%20tender%2C%20kept%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%2C%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%2C%20the%20mercy%20of%20stopping?width=1024&height=512&seed=52153&nologo=true",
+    "clean_taking": "https://image.pollinations.ai/prompt/Clean%20Taking%3A%20Take%20a%20made%20object%20apart%20in%20minutes%20and%20recover%20its%20parts%20intact%20%E2%80%94%20a%20lock%20into%20its%20pins%2C%20a%20wagon%20into%20timber%20and%20iron%2C%20a%20lantern%20into%20glass%2C%20wick%20and%20frame.%20The%20Unmakers'%20first%20craft%2C%20and%20the%20one%20that%20pays.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20unmaker%20tradition%3A%20dust-grey%2C%20controlled-rubble%2C%20clean%20break-line%3B%20beautiful%20demolition%2C%20ordered%20ruin%2C%20the%20cleared%20space%3B%20light%20entering%20a%20thing%20just%20opened%3B%20an%20ethic%20of%20clearing%20%E2%80%94%20ruin%20made%20beautiful%20and%20deliberate%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20dust-grey%2C%20controlled-rubble%2C%20clean%20break-line%2C%20light%20entering%20a%20thing%20just%20opened%2C%20an%20ethic%20of%20clearing?width=1024&height=512&seed=72669&nologo=true",
+    "built_way": "https://image.pollinations.ai/prompt/Built%20Way%3A%20Build%20a%20path%20where%20none%20existed%20%E2%80%94%20bridge%20a%20gap%2C%20span%20a%20drop%2C%20cut%20a%20stair%20into%20a%20cliff%20%E2%80%94%20fast%20enough%20to%20matter.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20wright%20tradition%3A%20scaffold-timber%2C%20fresh-cut%20stone%2C%20work-lamp%20amber%3B%20scaffolds%20forever%2C%20half-built%20cathedrals%2C%20tools%20mid-use%3B%20work-light%20on%20the%20unfinished%2C%20the%20joy%20and%20waste%20of%20it%3B%20never%20finished%2C%20and%20that's%20the%20point%20%E2%80%94%20becoming%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20scaffold-timber%2C%20fresh-cut%20stone%2C%20work-lamp%20amber%2C%20work-light%20on%20the%20unfinished%2C%20the%20joy%20and%20waste%20of%20it%2C%20never%20finished%2C%20and%20that's%20the%20point?width=1024&height=512&seed=30475&nologo=true",
+    "second_pair_of_hands": "https://image.pollinations.ai/prompt/A%20Second%20Pair%20of%20Hands%3A%20%E2%9B%94%20TAL%20HAS%20LEARNED%20YOUR%20WORK%20WELL%20ENOUGH%20TO%20GENUINELY%20HELP%20%E2%80%94%20holding%20the%20line%2C%20passing%20the%20tool%2C%20taking%20the%20half%20of%20the%20task%20you%20cannot%20reach.%20%E2%9A%A0%EF%B8%8F%20Any%20craft%2C%20if%20the%20craft%20has%20a%20half%20he%20can%20hold.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20wright%20tradition%3A%20scaffold-timber%2C%20fresh-cut%20stone%2C%20work-lamp%20amber%3B%20scaffolds%20forever%2C%20half-built%20cathedrals%2C%20tools%20mid-use%3B%20work-light%20on%20the%20unfinished%2C%20the%20joy%20and%20waste%20of%20it%3B%20never%20finished%2C%20and%20that's%20the%20point%20%E2%80%94%20becoming%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20scaffold-timber%2C%20fresh-cut%20stone%2C%20work-lamp%20amber%2C%20work-light%20on%20the%20unfinished%2C%20the%20joy%20and%20waste%20of%20it%2C%20never%20finished%2C%20and%20that's%20the%20point?width=1024&height=512&seed=14329&nologo=true"
   },
   "authorEdits": [
     {
@@ -20110,9 +20269,9 @@
       "kind": "post",
       "name": "Threshold Post",
       "locationId": null,
-      "steward": null,
+      "steward": "fendt",
       "obligation": null,
-      "condition": "strained",
+      "condition": "thriving",
       "claimedDay": 67,
       "lastMovedWorldCount": 1612,
       "history": [
@@ -20121,38 +20280,382 @@
           "from": "holding",
           "to": "strained",
           "note": null
+        },
+        {
+          "at": null,
+          "from": "strained",
+          "to": "strained",
+          "note": "keeper restored — the tick had wiped a delegate for not travelling with you"
+        },
+        {
+          "at": 1630,
+          "from": "strained",
+          "to": "strained",
+          "note": "built Threshold Post Iron Mine (you)"
+        },
+        {
+          "at": 1630,
+          "from": "strained",
+          "to": "strained",
+          "note": "built Threshold Pos Ashwarden Temple (you)"
+        },
+        {
+          "at": 1630,
+          "from": "strained",
+          "to": "strained",
+          "note": "built Granite Seam Attended End Shrine (you)"
+        },
+        {
+          "at": 1630,
+          "from": "strained",
+          "to": "strained",
+          "note": "built quarters — homes for the people who work it (you)"
+        },
+        {
+          "at": 1630,
+          "from": "strained",
+          "to": "strained",
+          "note": "built a barrier or a ward-line (you)"
+        },
+        {
+          "at": 1630,
+          "from": "strained",
+          "to": "strained",
+          "note": "built Threshold Post Ashwarden Temple (you)"
+        },
+        {
+          "at": 1630,
+          "from": "strained",
+          "to": "strained",
+          "note": "Threshold Pos Ashwarden Temple torn down"
+        },
+        {
+          "at": 1630,
+          "from": "strained",
+          "to": "holding",
+          "note": "improved with The Declared Threshold"
+        },
+        {
+          "at": 1630,
+          "from": "holding",
+          "to": "thriving",
+          "note": "improved with Raised Thing"
+        },
+        {
+          "at": 1630,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "improved with Working Model"
         }
       ],
       "fromAssignment": "fendt::warden-of-the-threshold-post-at-the-ridg",
-      "image": "https://image.pollinations.ai/prompt/Threshold%20Post%3A%20a%20standing%20post%2C%20steady%2C%20kept%20up.%20warden%20of%20the%20Threshold%20Post%20at%20the%20ridge%20node%E2%80%94hold%20the%20network's%20sentinel%20watch%20and%20tend%20the%20site's%20modest%E2%80%A6.%20Kept%20by%20Fendt%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=5696&nologo=true"
+      "image": "https://image.pollinations.ai/prompt/Threshold%20Post%3A%20a%20standing%20post%2C%20steady%2C%20kept%20up.%20warden%20of%20the%20Threshold%20Post%20at%20the%20ridge%20node%E2%80%94hold%20the%20network's%20sentinel%20watch%20and%20tend%20the%20site's%20modest%E2%80%A6.%20Kept%20by%20Fendt%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=5696&nologo=true",
+      "features": [
+        {
+          "kind": "mine",
+          "family": "material",
+          "name": "Threshold Post Iron Mine",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "shrine",
+          "family": "meaning",
+          "name": "Granite Seam Attended End Shrine",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "quarters",
+          "family": "people",
+          "name": "quarters — homes for the people who work it",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "barrier",
+          "family": "martial",
+          "name": "a barrier or a ward-line",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "temple_to_attending",
+          "family": "meaning",
+          "name": "Threshold Post Ashwarden Temple",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        }
+      ],
+      "improvements": [
+        {
+          "abilityId": "the-declared-threshold",
+          "name": "The Declared Threshold",
+          "day": 67
+        },
+        {
+          "abilityId": "raised_thing",
+          "name": "Raised Thing",
+          "day": 67
+        },
+        {
+          "abilityId": "working_model",
+          "name": "Working Model",
+          "day": 67
+        }
+      ]
     },
     {
       "id": "hold-cassiel-ord::full-reconstruction-of-the-raven-s-home-",
       "kind": "post",
       "name": "Raven's Home",
       "locationId": null,
-      "steward": null,
+      "steward": "cassiel-ord",
       "obligation": null,
-      "condition": "strained",
+      "condition": "thriving",
       "claimedDay": 67,
       "lastMovedWorldCount": 1612,
       "history": [
         {
-          "at": 1612,
-          "from": "holding",
-          "to": "strained",
-          "note": null
+          "at": 1630,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built Shadow Necrotic Ward Wall (you)"
+        },
+        {
+          "at": 1630,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built Three Undead Animal Sentries (you)"
+        },
+        {
+          "at": 1630,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built Stillwater's Trouble Forge (you)"
+        },
+        {
+          "at": 1630,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built Veth's Lab (you)"
+        },
+        {
+          "at": 1630,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built a muster yard — where a band forms (you)"
+        },
+        {
+          "at": 1630,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built a longhouse (you)"
+        },
+        {
+          "at": 1630,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built a smithy (you)"
+        },
+        {
+          "at": 1630,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built tended grave-ground (you)"
+        },
+        {
+          "at": 1630,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built quarters — homes for the people who work it (you)"
+        },
+        {
+          "at": 1630,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built a keep — the last room that holds (you)"
+        },
+        {
+          "at": 1630,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built Huginn's Watch (you)"
+        },
+        {
+          "at": 1630,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built a market day (you)"
         }
       ],
       "fromAssignment": "cassiel-ord::full-reconstruction-of-the-raven-s-home-",
-      "image": "https://image.pollinations.ai/prompt/Raven's%20Home%3A%20a%20standing%20post%2C%20steady%2C%20kept%20up.%20full%20reconstruction%20of%20the%20Raven's%20Home%20post%20%E2%80%94%20laboratory%2C%20workshop%2C%20Watch%2C%20forge%2C%20keeper's%20hut%20%E2%80%94%20funded%20and%20staffed%E2%80%A6.%20Kept%20by%20Cassiel%20Ord%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=70152&nologo=true"
+      "image": "https://image.pollinations.ai/prompt/Raven's%20Home%3A%20a%20standing%20post%2C%20steady%2C%20kept%20up.%20full%20reconstruction%20of%20the%20Raven's%20Home%20post%20%E2%80%94%20laboratory%2C%20workshop%2C%20Watch%2C%20forge%2C%20keeper's%20hut%20%E2%80%94%20funded%20and%20staffed%E2%80%A6.%20Kept%20by%20Cassiel%20Ord%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=70152&nologo=true",
+      "improvements": [
+        {
+          "abilityId": "raised_thing",
+          "name": "Raised Thing",
+          "day": 67
+        },
+        {
+          "abilityId": "shadow_work",
+          "name": "Shadow Work",
+          "day": 67
+        },
+        {
+          "abilityId": "the-declared-threshold",
+          "name": "The Declared Threshold",
+          "day": 67
+        }
+      ],
+      "garrison": [
+        "siol"
+      ],
+      "features": [
+        {
+          "kind": "workshop",
+          "family": "material",
+          "name": "a workshop",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "wall",
+          "family": "martial",
+          "name": "a wall",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "barrier",
+          "family": "martial",
+          "name": "Shadow Necrotic Ward Wall",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "sentries",
+          "family": "martial",
+          "name": "Three Undead Animal Sentries",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "forge",
+          "family": "craft",
+          "name": "Stillwater's Trouble Forge",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "laboratory",
+          "family": "craft",
+          "name": "Veth's Lab",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "muster_yard",
+          "family": "martial",
+          "name": "a muster yard — where a band forms",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "longhouse",
+          "family": "people",
+          "name": "a longhouse",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "smithy",
+          "family": "craft",
+          "name": "a smithy",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "grave_ground",
+          "family": "meaning",
+          "name": "tended grave-ground",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "quarters",
+          "family": "people",
+          "name": "quarters — homes for the people who work it",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "keep",
+          "family": "martial",
+          "name": "a keep — the last room that holds",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "tower",
+          "family": "martial",
+          "name": "Huginn's Watch",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        },
+        {
+          "kind": "market",
+          "family": "people",
+          "name": "a market day",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 67
+        }
+      ]
     }
   ],
   "skillUses": {
     "travel": 9,
     "careful": 4,
     "study": 10,
-    "scout": 4,
+    "scout": 5,
     "lead": 2,
     "ask": 1,
     "plan": 6,
@@ -20247,6 +20750,14 @@
       "day": 15,
       "worldDay": 42,
       "actionCount": 931
+    },
+    {
+      "companionId": "marrow",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 16,
+      "worldDay": 67,
+      "actionCount": 951
     }
   ],
   "_standingOpRefusals": [
@@ -20287,7 +20798,7 @@
     }
   },
   "holdingOffers": [],
-  "_lastProjectDay": 15,
+  "_lastProjectDay": 16,
   "likeness": {
     "battle:the_hundred_hands|sunwrack_valen|daybreak_mantle|67|stopped": {
       "keeps": [
@@ -20332,6 +20843,68 @@
           "at": 67
         }
       ]
+    },
+    "figure:whois-corvin": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Corvin%2C%20character%20portrait%2C%20named%20Corvin%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=69210&nologo=true",
+          "prompt": "young man, farmhad, boar hunting spear",
+          "note": "young man, farmhad, boar hunting spear",
+          "seedKey": null,
+          "at": 67
+        },
+        {
+          "url": "https://image.pollinations.ai/prompt/young%20man%2C%20farmhad%2C%20boar%20hunting%20spear%2C%20Corvin%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=97176&nologo=true",
+          "prompt": "young man, farmhad, boar hunting spear, Corvin",
+          "note": null,
+          "seedKey": "whois-corvin#r1",
+          "at": 67
+        }
+      ]
+    },
+    "figure:whois-edvar-crane": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Agent%20of%20Stillwater's%20Trouble%3B%20filtration%20engineer%3B%20named%20delegate%20to%20Mara%20Wells%20and%20the%20Hub%20committ%2C%20character%20portrait%2C%20named%20Edvar%20Crane%2C%20man%2C%20Agent%20of%20Stillwater's%20Trouble%3B%20filtration%20engineer%3B%20named%20delegate%20to%20Mara%20Wells%20and%20the%20Hub%20committ%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=45281&nologo=true",
+          "prompt": "",
+          "note": null,
+          "seedKey": null,
+          "at": 67
+        }
+      ]
+    },
+    "figure:whois-cassiel-ord": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Keeper%20of%20the%20Raven's%20Home%20warden%20post%20threshold%2C%20character%20portrait%2C%20named%20Cassiel%20Ord%2C%20man%2C%20Keeper%20of%20the%20Raven's%20Home%20warden%20post%20threshold%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=78017&nologo=true",
+          "prompt": "",
+          "note": null,
+          "seedKey": null,
+          "at": 67
+        }
+      ]
+    },
+    "figure:whois-fendt": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Red%20haired%20middle%20aged%20man%2C%20intelligent%2C%20driven%2C%20capable.%20Thin%20frame.%20Filtration%20machinery%20and%20an%20iron%20mine%20behind%20him.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=21545&nologo=true",
+          "prompt": "Red haired middle aged man, intelligent, driven, capable. Thin frame. Filtration machinery and an iron mine behind him.",
+          "note": null,
+          "seedKey": "whois-fendt#r2",
+          "at": 67
+        }
+      ]
+    },
+    "ability:reaping_sickle": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Reaping%20Sickle%3A%20%E2%9B%94%20CONJURE%20THE%20SICKLE%20AND%20SWING%20IT.%20A%20scythe%20of%20cold%20dark%20metal%20that%20was%20not%20there%20a%20moment%20ago%2C%20taken%20in%20both%20hands%20and%20reaped%20through%20everything%20standing%20within%20its%20arc.%20%E2%9A%A0%EF%B8%8F%20IT%20IS%20NOT%20SUBTLE%2C%20IT%20IS%20NOT%20DENIABLE%2C%20AND%20IT%20IS%20THE%20ONLY%20THING%20THIS%20TRADITION%20DOES%20THA%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20ashwarden%20tradition%3A%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%3B%20ash%2C%20grave-stone%2C%20worn%20iron%2C%20chalk%3B%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%3B%20the%20mercy%20of%20stopping%20%E2%80%94%20solemn%2C%20tender%2C%20kept%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%2C%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%2C%20the%20mercy%20of%20stopping?width=1024&height=512&seed=52153&nologo=true",
+          "prompt": "",
+          "note": null,
+          "seedKey": null,
+          "at": 67
+        }
+      ]
     }
   },
   "purse": {
@@ -20345,5 +20918,115 @@
     "edvar-crane::silas-s-named-delegate-to-mara-wells-and",
     "edvar-crane::the-millbrook-filtration-thread-repair-s"
   ],
-  "_debtReceipts": []
+  "_debtReceipts": [],
+  "figureImages": {
+    "whois-corvin": "https://image.pollinations.ai/prompt/Corvin%2C%20character%20portrait%2C%20named%20Corvin%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=69210&nologo=true",
+    "whois-fendt": "https://image.pollinations.ai/prompt/Red%20haired%20middle%20aged%20man%2C%20intelligent%2C%20driven%2C%20capable.%20Thin%20frame.%20Filtration%20machinery%20and%20an%20iron%20mine%20behind%20him.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=21545&nologo=true"
+  },
+  "holdingEvents": [
+    {
+      "text": "Threshold Post has Threshold Post Iron Mine now.",
+      "announced": false
+    },
+    {
+      "text": "Threshold Post has Threshold Pos Ashwarden Temple now.",
+      "announced": false
+    },
+    {
+      "text": "Threshold Post has Granite Seam Attended End Shrine now.",
+      "announced": false
+    },
+    {
+      "text": "Threshold Post has quarters — homes for the people who work it now.",
+      "announced": false
+    },
+    {
+      "text": "Threshold Post has a barrier or a ward-line now.",
+      "announced": false
+    },
+    {
+      "text": "Threshold Post has Threshold Post Ashwarden Temple now.",
+      "announced": false
+    },
+    {
+      "text": "You put The Declared Threshold to Threshold Post — it comes up to holding.",
+      "announced": false
+    },
+    {
+      "text": "You put Raised Thing to Threshold Post — it comes up to thriving.",
+      "announced": false
+    },
+    {
+      "text": "You put Working Model to Threshold Post — it is as good as it gets.",
+      "announced": false
+    },
+    {
+      "text": "You put Raised Thing to Raven's Home — it comes up to holding.",
+      "announced": false
+    },
+    {
+      "text": "You put Shadow Work to Raven's Home — it comes up to thriving.",
+      "announced": false
+    },
+    {
+      "text": "You put The Declared Threshold to Raven's Home — it is as good as it gets.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has a workshop now.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has a wall now.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has Shadow Necrotic Ward Wall now.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has Three Undead Animal Sentries now.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has Stillwater's Trouble Forge now.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has Veth's Lab now.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has a muster yard — where a band forms now.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has a longhouse now.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has a smithy now.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has tended grave-ground now.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has quarters — homes for the people who work it now.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has a keep — the last room that holds now.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has Huginn's Watch now.",
+      "announced": false
+    },
+    {
+      "text": "Raven's Home has a market day now.",
+      "announced": false
+    }
+  ]
 }

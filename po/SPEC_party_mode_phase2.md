@@ -142,10 +142,17 @@ a sheet weighted by their `assistTags`** — `battleSkillsFor` yields 32 skills 
 ✅ **SO "LET THE GM PLAY THEM" IS THE FOLD PATH POINTED AT A HUMAN'S CHARACTER**, and it is the same code
 whether the sheet belongs to Cade or to Veth.
 
-⚠️ **AND IT MUST BE CONSERVATIVE.** ⛔ **The GM playing someone else's character should never spend a
-capstone, never take a lethal-rung action, and never spend the last of their energy.** ⬜ **It plays them
-COMPETENTLY AND UNAMBITIOUSLY** — ⚑ **a player returning to find their character alive and their best craft
-unspent has lost nothing; one returning to a spent pool and a dead rival has lost the scene.**
+⬜ **HOW BOLDLY IT PLAYS THEM IS ERIK'S — NOT AEVI'S TO FIX.** ⚠️ **She wrote this as a hard rule (never a
+capstone, never a lethal-rung action, never the last of their energy) and Erik pulled it: *"don't make that
+a hard rule."***
+
+⚑ **The consideration, offered rather than imposed:** a player returning to find their character alive and
+their best craft unspent has lost nothing; ⚠️ one returning to a spent pool and a dead rival has lost the
+scene — **including the CHOICE of whether to kill someone, which under R35 is now a real decision with a
+real cost.**
+
+⬜ **But a timid auto-play is its own failure** — a character who guards while the party is overrun has also
+been played badly. ⚠️ **Erik sets the boldness; it may want to be a dial rather than a rule.**
 
 ⬜ **`autoPlayed: true` on the beat**, so the narration can say so and the player can see what was done in
 their name.

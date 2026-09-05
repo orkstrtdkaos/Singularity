@@ -139,6 +139,36 @@
    "abilityId": "read_the_fight",
    "level": 1,
    "why": "⚠️ THE FATHER. Breaking is ADJACENT to Body, so under R21 she caps at tier 3 there without ever having chosen it. She reads a fight the way she reads iron and did not learn it on purpose."
+  },
+  {
+   "abilityId": "edge",
+   "level": 3,
+   "why": "⚑ THE WEAPON CRAFT. Erik 2026-08-26: 'Pell fights too — she uses a SPEAR, HAMMER, SHORTSWORD, brigandine.' ⛔ She had FOUR harm crafts of seventeen and none of them was simply KNOWING HOW TO USE A WEAPON. r3 because a smith who has carried a blade for twenty years is not a novice with it."
+  },
+  {
+   "abilityId": "shieldwork",
+   "level": 2,
+   "why": "⚠️ She fights beside people and always has. Shield-and-strike is the Marcher's ordinary bar-work, and `read_the_fight` already says her father was one."
+  },
+  {
+   "abilityId": "whats_at_hand",
+   "level": 3,
+   "why": "⛔ THE CRAFT THAT IS MOST HERS: make, shield, strike — arm yourself from whatever the room contains. ⚑ A smith in her own forge is never unarmed, and this is the mechanical form of the fight she won by dropping her own roof."
+  },
+  {
+   "abilityId": "hurled_weight",
+   "level": 2,
+   "why": "The hammer leaving her hand. `plain_weight` is the blow that lands; this is the one thrown."
+  },
+  {
+   "abilityId": "disarm",
+   "level": 2,
+   "why": "⚠️ Incapacitating, not lethal. ⛔ SHE IS NOT A KILLER AND THIS IS THE POINT — the craft that ends a fight without ending a person, and the reason she is a good person to have between you and someone angry."
+  },
+  {
+   "abilityId": "dressed_edge",
+   "level": 2,
+   "why": "⚑ make + empower + strike — she PREPARES a weapon and then uses it. ⚠️ The only harm craft in the game that is also a making, and she is the only person on the roster who should have it."
   }
  ],
  "_fatherThread": "⚠️ ERIK 2026-09-02, pondering: 'Pell has a father in the story — I was pondering if he was a Marcher, so she might have some Violence hereditary tendencies.' ✅ Mechanically clean: Breaking is adjacent to Body, so `read_the_fight` sits at her ceiling without a choice ever being made. ⛔ AND IT PAYS OFF HER CODEX: '[d3] Pell's father told her he had been a clerk — made his departure from the Plateau sound small and personal.' A man who called himself a clerk and taught his daughter the specification method so she would have the language when she reached the Edge District. ⚠️ A MARCHER HIDING AS A CLERK IS A BETTER ANSWER TO THAT THAN AN ACTUAL CLERK. ⬜ Not ruled — held as the live reading.",
@@ -153,5 +183,13 @@
   "warm"
  ],
  "_assistWhy": "⛔ CCODE: 42 authored NPCs carry ZERO `assistTags`, so `contributionsOf` falls to its HARM default and a master smith counts as a striker. ✅ THIS IS THE FIX FOR PELL. `craft` → SHAPE (she is a master smith; the whole character). `mend` → RESTORE ('co-cast reinforcement of the secondary fault complete'; `sound_repair` at r2). `sense-danger` + `study` → KNOW (⚠️ THE IRONSENSE FAMILY — `stone_read`/`stonewise`/`thingcraft`, reading what holds and what is about to fail). `carry` → MOVE (forge work, and `near_way` through built space). `warm` → RESTORE (`steady_hands`: steadying work AND steadying a person). ⚠️ SHE ALSO STRIKES — Erik: 'Pell fights too, spear, hammer, shortsword, brigandine' — and HARM still arrives via the default, so no tag is needed to keep it. ⛔ The tags ADD the four families she was silently missing; they do not take the fifth away.",
- "_physExclusion": "⚠️ `physicality` AND `intimacyNotes` FOR PELL LIVE IN `npc_interiority.json`, authored 2026-09-01 before this NPC file existed. ⛔ NOT DUPLICATED HERE — one record, one home. An audit of `npcs/*.json` alone will report her as missing; she is not."
+ "_physExclusion": "⚠️ `physicality` AND `intimacyNotes` FOR PELL LIVE IN `npc_interiority.json`, authored 2026-09-01 before this NPC file existed. ⛔ NOT DUPLICATED HERE — one record, one home. An audit of `npcs/*.json` alone will report her as missing; she is not.",
+ "_harmPass_20260904": "⛔ ERIK 2026-09-04: 'make sure Pell has some decent harm skills. She also has the Memory spear to use.' ⚠️ MEASURED BEFORE AUTHORING: 4 of her 17 crafts carried a harm rung at her owned rank, and her only real killer was `plain_weight` at incapacitating. ⛔ THE 2,000-DUEL CENSUS SHOWED WHY IT MATTERED: 17 of Veth's 60 moves are lethal-rung against 2 of Pell's 39, and Pell's ONLY wins were Plain Weight kills. ✅ DRAWN FROM HER OWN RECORD, NOT INVENTED: the gear Erik authored in prose (spear, hammer, shortsword), `read_the_fight` (her father 'called himself a clerk' and was likely a Marcher), and `keystone_blow` T4 which she already held. ⚑ ALL SIX ALREADY EXISTED IN `marcher`/`somatic` — nothing new was written. ⚠️ AND NOTHING LETHAL WAS ADDED: `disarm` is incapacitating on purpose. She is a smith who fights, not a killer.",
+ "gear": [
+  "pells_short_sword",
+  "pells_brigandine",
+  "smiths_hammer",
+  "the_unfinished_spear (maker's mark — Silas carries it)"
+ ],
+ "_gearNote": "✅ `pells_short_sword` and `pells_brigandine` PROMOTED 2026-09-04 from `po/staged_content/pell_fell_pell_gear.json`, staged as CCODE-86/87 and never landed. ⛔ Canon is Silas's own chronicle, Fell Pell gathering. ⚑ HER SWORD IS THE SISTER WEAPON TO SILAS'S MEMORY — same working, Huginn's ending-sense in both, `damageType: decay`, which is why it does 14.34 against `the_unmoored_choir` where a bare blade does 0.00."
 }

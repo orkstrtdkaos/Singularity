@@ -5868,39 +5868,134 @@ console.log("\n── §84 · a craft with no `functions` is invisible to the fa
     `${healers.length} healing crafts, all carrying RESTORE`);
 }
 
-/* ═════ §85 — THE GUIDE'S "NOT BUILT" SENTENCE IS A TWO-WAY RATCHET (Aevi's 3a, 2026-09-05) ═════ */
-// ⛔ Aevi asked the right question: "Is §81 shaped to catch a guide that UNDER-promises, or only one that
-// over-promises? A guide that describes a feature the game no longer has and a guide that omits one it
-// gained are the same defect." ⚠️ THE HONEST ANSWER IS NO — §81 checks that a NAMED craft does what its
-// section claims, and nothing about a named craft can notice an absence.
+/* ═════ §85 — THE GUIDE'S "NOT BUILT" SENTENCE IS A TWO-WAY RATCHET, PER CAPABILITY (Aevi's 3a) ═════ */
+// ⛔ Aevi: "Is §81 shaped to catch a guide that UNDER-promises, or only one that over-promises? A guide
+// that describes a feature the game no longer has and a guide that omits one it gained are the same defect."
+// ⚠️ §81 could not — it checks that a NAMED craft does what its section claims, and nothing about a named
+// thing can notice an absence. ⚑ But the section names its own boundary in prose, and a boundary stated in
+// prose IS a marker — the `HOW_IT_WORKS` two-way ratchet, in her voice, with no developer tags in a
+// player's document.
 //
-// ⚑ BUT THE SECTION SHE REWROTE NAMES ITS OWN BOUNDARY — "…are DESIGNED AND NOT BUILT" — and a boundary
-// stated in prose IS a marker, without asking her to write BUILT/PROPOSED tags in a player's document.
-// So: while the engine lacks the phase-2 surface the sentence must STAND; the day `party.js` grows it, the
-// sentence must GO. That is `HOW_IT_WORKS`'s two-way ratchet, in her voice instead of ours.
-console.log("\n── §85 · while phase 2 is unbuilt the guide must say so — and the day it ships, the sentence must go ──");
+// ⚠️ AND MY FIRST VERSION WAS TOO COARSE, WHICH I FOUND BY SHIPPING AGAINST IT. It was ONE boolean over a
+// list of exports, so the day the first of three capabilities landed it demanded the WHOLE sentence be
+// deleted — trading an over-promise for an under-promise, which is the same defect wearing the other coat.
+// ⛔ A SENTENCE THAT NAMES THREE THINGS NEEDS THREE CHECKS, and each one must be able to fail in both
+// directions on its own.
+console.log("\n── §85 · each phase-2 capability, claimed or disclaimed, checked against the engine that would provide it ──");
 {
   const pg85 = rd("docs/PLAYERS_GUIDE.md"), party85 = rd("engine/party.js");
-  const sec = pg85.slice(pg85.indexOf("## Playing with other people"));
-  const body85 = sec.slice(0, sec.search(/^## /m) > 0 ? sec.slice(1).search(/^## /m) + 1 : undefined);
-  check("§85: ⚠️ the fixture found the section — never vacuous",
-    pg85.includes("## Playing with other people") && body85.length > 200, `${body85.length} chars`);
+  const at = pg85.indexOf("## Playing with other people");
+  const after = at >= 0 ? pg85.slice(at + 4) : "";
+  const body85 = at >= 0 ? pg85.slice(at, after.search(/^## /m) >= 0 ? at + 4 + after.search(/^## /m) : undefined) : "";
+  check("§85: ⚠️ the fixture found the section — never vacuous", body85.length > 300, `${body85.length} chars`);
 
-  // ⚑ THE PHASE-2 SURFACE, named by what it would have to export. None of these exist today.
-  const PHASE2 = ["setLeader", "stateIntent", "lockDeclaration", "resolveRound", "joinFight", "mergeStrike"];
-  const shipped = PHASE2.filter(n => new RegExp(`export (async )?(function|const) ${n}\\b`).test(party85));
-  const saysNotBuilt = /DESIGNED AND NOT BUILT/i.test(body85);
-  check("§85: ⛔ the guide and the engine agree about phase 2 — the sentence stands while the surface is absent, and must GO when it ships",
-    shipped.length === 0 ? saysNotBuilt : !saysNotBuilt,
-    shipped.length
-      ? `⛔ SHIPPED: ${shipped.join(", ")} — the "designed and not built" sentence must be REMOVED and the section rewritten`
-      : `nothing of phase 2 exported yet; the guide says so: ${saysNotBuilt}`);
-
-  // ⚠️ AND WHAT IT DOES DESCRIBE MUST BE TRUE — the over-promise half, for this section.
+  const exported = (n) => new RegExp(`export (async )?(function|const) ${n}\\b`).test(party85);
+  // ⚑ EACH CAPABILITY: what the guide says it is, the exports that would make it true, and the phrase the
+  // guide uses when it is still owed. ⚠️ `disclaim` is matched inside the NOT-BUILT sentence only, so a
+  // section that describes a thing AND lists it as missing fails rather than passing on both readings.
+  // ⚠️ THE WHOLE SENTENCE, AND WHITESPACE FLATTENED. My first capture began at the LINE holding the phrase —
+  // and the sentence spans a line break, so two of its three clauses sat above the window and both checks
+  // PASSED ON AN EMPTY READ. ⛔ That is the vacuous match, inside the gate written to catch vacuous claims,
+  // found by shipping against it. The check below is why it cannot happen a third time.
+  const flat85 = body85.replace(/\s+/g, " ");
+  // ⚠️ CASE-INSENSITIVE. Aevi de-shouted the guide the same hour this landed, and a case-sensitive
+  // indexOf turned "designed and not built" into no sentence at all — a capture that fails on a copy edit.
+  const nbAt = flat85.toUpperCase().indexOf("DESIGNED AND NOT BUILT");
+  const notBuiltLine = nbAt < 0 ? "" : flat85.slice(Math.max(0, nbAt - 400), nbAt + 240);
+  const CAPS85 = [
+    { what: "joining someone else's fight", needs: ["joinFight"], disclaim: /joining a fight someone else is in/i },
+    { what: "striking the same opponent together", needs: ["mergeStrike", "sharedPool"], disclaim: /striking the same opponent together/i },
+    { what: "a round where everyone acts at once", needs: ["lockDeclaration", "resolveRound"], disclaim: /everyone acts at once/i },
+  ];
+  check("§85: ⚠️ the not-built window really holds the clauses it is asked about — the check that stops a vacuous pass",
+    nbAt < 0 || CAPS85.filter(c => c.disclaim.test(notBuiltLine)).length === CAPS85.filter(c => !c.needs.every(exported)).length,
+    nbAt < 0 ? "no not-built sentence — every capability must therefore be built"
+      : `${CAPS85.filter(c => c.disclaim.test(notBuiltLine)).length} clause(s) found in a ${notBuiltLine.length}-char window · ${CAPS85.filter(c => !c.needs.every(exported)).length} capability(ies) still owed`);
+  for (const c of CAPS85) {
+    const built = c.needs.every(exported);
+    const disclaimed = c.disclaim.test(notBuiltLine);
+    check(`§85: ⛔ "${c.what}" — the guide and the engine agree`,
+      built ? !disclaimed : disclaimed,
+      built
+        ? (disclaimed ? `⛔ BUILT (${c.needs.join(", ")}) and the guide still calls it not built — REMOVE that clause` : `built, and the guide no longer disclaims it`)
+        : (disclaimed ? `not built (missing ${c.needs.filter(n => !exported(n)).join(", ")}), and the guide says so` : `⛔ NOT BUILT and the guide does not say so — the clause must go back`));
+  }
+  check("§85: ⚠️ …and the not-built sentence still exists while ANY capability is owed — the marker is the mechanism",
+    CAPS85.every(c => c.needs.every(exported)) ? true : /DESIGNED AND NOT BUILT/i.test(flat85),   // flattened: the phrase may straddle a line break, and it does
+    notBuiltLine ? "present" : "⛔ absent");
   check("§85: …and what it DOES describe is what the engine does — rotating turns, a scene of six, a beat log",
     /turns rotate/i.test(body85) && /up to six/i.test(body85)
-    && /export function nextTurn/.test(party85) && /party: 6/.test(party85),
-    "`nextTurn` is round-robin and `CAPS.party` is 6");
+    && /export function nextTurn/.test(party85) && /party: 6/.test(party85));
+}
+
+/* ═════ §86 — THE SHARED POOL IS A LEDGER, AND TWO PLAYERS CAN BE ON ONE OPPONENT (2026-09-05) ═════ */
+// ⛔ Aevi ruled it: "`encounter.strikes: [{by, at, amount}]` with `hp = max − sum(...)`, keyed `(by, at)`
+// exactly as `mergeBeat` already is… ANY SHARED MUTABLE NUMBER IN THIS SYSTEM MUST BE A DERIVED SUM OVER
+// AN IDEMPOTENT LEDGER."
+// ⚑ AND `joinFight` IS BUILT IN THE SAME BREATH ON PURPOSE: until two people can be on one opponent, a
+// shared pool has ONE writer and `activeEncounter` already does that correctly. A ledger with one writer
+// would have been a primitive with nothing pointing at it — this project's signature defect, shipped by the
+// person who has spent the week naming it.
+console.log("\n── §86 · a derived pool · a fold that conserves the sum · two on one opponent · a withdrawal is not a win ──");
+{
+  const P86 = await import("../engine/party.js");
+  const A = { characterId: "a", name: "Silas" }, B = { characterId: "b", name: "Colten" };
+  const base = { sceneId: "s", party: [A, B], beats: [], updatedAt: "t0" };
+  let sc = P86.openSharedEncounter(base, { defId: "reaver", name: "a Marcher reaver", max: 60, at: "t1" });
+
+  check("§86: ⛔ the pool is DERIVED, never stored — nothing on the scene holds an hp number",
+    P86.sharedPool(sc).remaining === 60 && sc.encounter.hp === undefined && !("hp" in sc.encounter),
+    JSON.stringify(sc.encounter));
+  check("§86: …re-opening the SAME fight does not reset a pool people have spent against",
+    P86.sharedPool(P86.openSharedEncounter(P86.mergeStrike(sc, { by: "a", at: "x", amount: 20 }), { defId: "reaver", max: 60 })).remaining === 40);
+
+  // ── two writers, one opponent
+  sc = P86.joinFight(sc, "a", "t2");
+  sc = P86.joinFight(sc, "b", "t3");
+  check("§86: ⛔ TWO PLAYERS ARE ON ONE OPPONENT — the thing the ledger exists for",
+    (sc.encounter.fighting || []).join() === "a,b");
+  check("§86: …joining twice is a no-op (the retry loop needs it) and a non-member cannot join at all",
+    P86.joinFight(sc, "b").encounter.fighting.length === 2 && P86.joinFight(sc, "stranger").encounter.fighting.length === 2);
+  sc = P86.mergeStrike(sc, { by: "a", at: "t4", amount: 14, name: "Silas", label: "the Cut Thread" });
+  sc = P86.mergeStrike(sc, { by: "b", at: "t4", amount: 9, name: "Colten", label: "a ward turned edge" });
+  check("§86: ⛔ …and BOTH strikes count at the SAME instant — the key is `(by, at)`, so simultaneity is two rows",
+    P86.sharedPool(sc).remaining === 37 && P86.sharedPool(sc).rows === 2, JSON.stringify(P86.sharedPool(sc)));
+  check("§86: …the same strike arriving twice changes nothing — idempotent, which is the whole point",
+    P86.sharedPool(P86.mergeStrike(sc, { by: "a", at: "t4", amount: 14 })).remaining === 37);
+  check("§86: ⚑ …and a HEAL IS A NEGATIVE ROW — the ledger runs both ways, so a fight cannot be reversed by writing a number",
+    P86.sharedPool(P86.mergeStrike(sc, { by: "c", at: "t5", amount: -10 })).remaining === 47);
+
+  // ── ⛔ THE CORRECTION TO THE RULING, KEPT MEASURABLE
+  let many = P86.openSharedEncounter(base, { defId: "d", max: 100, at: "t0" });
+  for (let i = 0; i < 60; i++) many = P86.mergeStrike(many, { by: i % 2 ? "a" : "b", at: `u${i}`, amount: 1 });
+  check("§86: ⛔ SIXTY STRIKES OF 1 AGAINST 100 READS 40 — a truncating cap would read 60 and heal the opponent by 20",
+    P86.sharedPool(many).remaining === 40 && many.encounter.strikes.length <= 40,
+    `${many.encounter.strikes.length} rows on file · remaining ${P86.sharedPool(many).remaining}`);
+  const fold = many.encounter.strikes[0];
+  check("§86: …the fold carries the SUM and an honest count of what it stands for",
+    fold.by === "__folded" && fold.amount === fold.folded && fold.folded === 21,
+    JSON.stringify(fold));
+  // ⚠️ THE PROPERTY, not the instance: compaction conserves the sum over anything, negatives included.
+  let mixed = P86.openSharedEncounter(base, { defId: "d", max: 1000, at: "t0" });
+  let expect = 0;
+  for (let i = 0; i < 200; i++) { const a = (i % 7) - 3; expect += a; mixed = P86.mergeStrike(mixed, { by: `x${i % 3}`, at: `v${i}`, amount: a }); }
+  check("§86: ⛔ …AND THE FOLD CONSERVES THE SUM OVER 200 MIXED ROWS, negatives included — the only property that matters",
+    P86.sharedPool(mixed).spent === expect, `expected ${expect} · derived ${P86.sharedPool(mixed).spent}`);
+
+  // ── leaving
+  const left = P86.leaveFight(sc, "a", "t9");
+  check("§86: ⛔ A WITHDRAWAL IS NOT A WIN — Silas steps out, Colten is still in it, and the pool is untouched",
+    (left.encounter.fighting || []).join() === "b" && P86.sharedPool(left).remaining === 37);
+  check("§86: …and closing takes the ledger with it — a finished fight is not state anyone should still derive from",
+    P86.closeSharedEncounter(left).encounter === undefined && P86.sharedPool(P86.closeSharedEncounter(left)) === null);
+
+  // ── ⛔ A READER. A pool nobody is told about is a number in a file.
+  const block = P86.partyBlockForGM(sc, "b");
+  check("§86: ⛔ …and the OTHER PLAYER IS TOLD — the GM block carries the shared opponent and the derived number",
+    /A SHARED FIGHT IS OPEN/.test(block) && /37 of 60 left/.test(block) && /Silas is on it/.test(block),
+    (block.match(/A SHARED FIGHT IS OPEN[^\n]*/) || ["⛔ absent"])[0]);
+  check("§86: …and a scene with no shared fight says nothing about one",
+    !/A SHARED FIGHT IS OPEN/.test(P86.partyBlockForGM({ ...base, beats: [{ by: "a", name: "Silas", label: "l", summary: "s", at: "t" }] }, "b") || ""));
 }
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));

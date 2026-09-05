@@ -135,6 +135,125 @@ export function mergeBeat(scene, beat) {
   return { ...scene, beats, turn: nextTurn(scene, beat.by), updatedAt: beat.at };
 }
 
+// ═══ THE SHARED POOL IS A LEDGER, NEVER A COUNTER (Aevi's ruling, 2026-09-05) ═══
+//
+// ⛔ THE CASE THAT FORCED IT is not a lost WRITE — `pushMergedFile`'s CAS already handles those. It is a
+// LOST RESPONSE: the PUT succeeds on the server and the reply dies on the way back. From the client that is
+// indistinguishable from a failure, so the retry re-reads a remote that ALREADY HAS the change and applies
+// it again. ⚠️ `hp -= 12` runs twice and the opponent takes 24. Measured: 100 − 12 lands as 76 (§82).
+//
+// ⚑ SO THE POOL IS DERIVED AND NEVER STORED: `hp = max − sum(strikes)`. A row that arrives twice is
+// recognised by `(by, at)` — the same key `mergeBeat` has always used — and a derived value cannot
+// double-apply because there is nothing to apply. A HEAL IS A NEGATIVE ROW.
+//
+// ⛔ AEVI RULED THE GENERAL FORM AND IT IS WIDER THAN HEALTH: *"ANY SHARED MUTABLE NUMBER IN THIS SYSTEM
+// MUST BE A DERIVED SUM OVER AN IDEMPOTENT LEDGER. Momentum, pressure, energy — every one, not only
+// health."* Hence `ledgerSum` is generic and the pool is one caller of it.
+
+// ⚠️ AND ONE CORRECTION TO THE RULING, MEASURED. She wrote: *"Cap it at `CAPS.beats` (40) with the same
+// slice."* ⛔ THE SAME SLICE IS A BUG HERE, AND BEATS ARE WHY IT LOOKS SAFE: a beat log is a DISPLAY, so
+// dropping the oldest costs a line of history. A ledger is the STATE, so dropping the oldest changes the
+// number it derives. Measured: sixty strikes of 1 against a pool of 100 leaves 40 rows and reads **60 —
+// the opponent silently heals 20**.
+// ⚑ SO IT COMPACTS INSTEAD OF TRUNCATING: the overflow folds into ONE row carrying their SUM. The file
+// stays bounded, the derived number is identical, and the fold is a PURE FUNCTION OF THE ROW LIST — two
+// clients that see the same list produce the same folded row, so it merges by `(by, at)` like any other.
+const LEDGER_FOLD_KEY = "__folded";
+
+/** PURE. The sum of a ledger. Non-numeric amounts are zero — a malformed row must not poison the total. */
+export function ledgerSum(rows) {
+  return (Array.isArray(rows) ? rows : []).reduce((n, r) => n + (Number.isFinite(Number(r?.amount)) ? Number(r.amount) : 0), 0);
+}
+
+/** PURE. Fold everything past the cap into one row that carries their sum. ⛔ SUM-CONSERVING BY
+ *  CONSTRUCTION — that is the property the gate asserts, because it is the only one that matters. */
+export function compactLedger(rows, cap = CAPS.beats) {
+  const list = Array.isArray(rows) ? rows : [];
+  if (list.length <= cap) return list;
+  const keep = list.slice(-(cap - 1));            // one slot reserved for the fold
+  const folded = list.slice(0, list.length - keep.length);
+  return [{
+    by: LEDGER_FOLD_KEY,
+    // ⚠️ DETERMINISTIC KEY: the newest row it swallowed. Two clients folding the same prefix agree, so the
+    // folded row itself dedupes through `mergeStrike` exactly like a real one.
+    at: folded[folded.length - 1]?.at || "0",
+    amount: ledgerSum(folded),
+    // ⚠️ THE RUNNING TOTAL, not this fold's length. Compaction runs on every merge past the cap, so it
+    // usually folds [the previous fold row, one new row] — and reporting 2 for a row standing in for twenty-one
+    // is a field that lies to whoever reads it. A count is a measurement like any other.
+    folded: folded.reduce((n, r) => n + (Number(r?.folded) || 1), 0),
+  }, ...keep];
+}
+
+/** PURE + IDEMPOTENT. Add one row unless `(by, at)` is already present. Compacts past the cap. */
+export function mergeStrike(scene, strike) {
+  if (!scene || !scene.encounter || !strike?.by || !strike?.at) return scene;
+  const rows = Array.isArray(scene.encounter.strikes) ? scene.encounter.strikes : [];
+  if (rows.some(r => r.by === strike.by && r.at === strike.at)) return scene;   // the same key mergeBeat uses
+  const row = {
+    by: strike.by, at: strike.at,
+    amount: Number.isFinite(Number(strike.amount)) ? Number(strike.amount) : 0,   // a HEAL is a negative row
+    name: String(strike.name || "").slice(0, 40),
+    label: smartClamp(String(strike.label || ""), 120),   // SNG-152: this crosses into another player's prompt
+  };
+  return {
+    ...scene,
+    encounter: { ...scene.encounter, strikes: compactLedger([...rows, row]) },
+    updatedAt: strike.at,
+  };
+}
+
+/** PURE. What the shared opponent has left — DERIVED, never stored. Null when no shared encounter is open. */
+export function sharedPool(scene) {
+  const e = scene?.encounter;
+  if (!e || !Number.isFinite(Number(e.max))) return null;
+  const max = Number(e.max);
+  const spent = ledgerSum(e.strikes);
+  return { max, spent, remaining: Math.max(0, max - spent), down: max - spent <= 0, rows: (e.strikes || []).length };
+}
+
+/** PURE. Open the one shared encounter a scene may carry. ⚠️ IDEMPOTENT on `defId` — a second opener
+ *  joining the same fight must not reset the pool someone has already spent against. */
+export function openSharedEncounter(scene, { defId, name = null, max, at = new Date().toISOString() }) {
+  if (!scene || !defId || !Number.isFinite(Number(max))) return scene;
+  if (scene.encounter?.defId === defId) return scene;
+  return { ...scene, encounter: { defId, name: String(name || defId).slice(0, 60), max: Number(max), strikes: [], openedAt: at }, updatedAt: at };
+}
+
+/** PURE. Close it. ⛔ The ledger goes with it — a finished fight is not state anyone should still derive from. */
+export function closeSharedEncounter(scene, at = new Date().toISOString()) {
+  if (!scene?.encounter) return scene;
+  const { encounter, ...rest } = scene;
+  return { ...rest, updatedAt: at };
+}
+
+/** PURE + IDEMPOTENT. Step into the shared fight. ⛔ THIS IS WHAT THE LEDGER IS FOR — until two people can
+ *  be on one opponent, a shared pool has one writer and `activeEncounter` already does that correctly.
+ *  ⚠️ A member not in the SCENE cannot join its fight; joining twice is a no-op, which the retry loop needs. */
+export function joinFight(scene, characterId, at = new Date().toISOString()) {
+  if (!scene?.encounter || !characterId) return scene;
+  if (!scene.party?.some(m => m.characterId === characterId)) return scene;   // you are not in this scene
+  const on = Array.isArray(scene.encounter.fighting) ? scene.encounter.fighting : [];
+  if (on.includes(characterId)) return scene;
+  return { ...scene, encounter: { ...scene.encounter, fighting: [...on, characterId] }, updatedAt: at };
+}
+
+/** PURE + IDEMPOTENT. Step out. ⚠️ THE FIGHT DOES NOT END WHEN YOU LEAVE IT — the others are still in it,
+ *  and the pool is theirs. Only `closeSharedEncounter` ends a fight, and the last one out is the caller's
+ *  decision to make, not this function's: withdrawing is not the same as winning. */
+export function leaveFight(scene, characterId, at = new Date().toISOString()) {
+  if (!scene?.encounter || !characterId) return scene;
+  const on = (scene.encounter.fighting || []).filter(id => id !== characterId);
+  if (on.length === (scene.encounter.fighting || []).length) return scene;
+  return { ...scene, encounter: { ...scene.encounter, fighting: on }, updatedAt: at };
+}
+
+/** PURE. Who is on the shared opponent right now. */
+export function fightersOf(scene) {
+  const ids = (scene?.encounter?.fighting || []);
+  return ids.map(id => scene.party?.find(m => m.characterId === id) || { characterId: id, name: id });
+}
+
 /** Serialize a member's active encounter so others WITNESS it (phase 1: no joint participation). */
 export function setEncounterState(scene, characterId, receipt) {
   const encounters = { ...(scene.encounters || {}) };
@@ -155,8 +274,17 @@ export function partyBlockForGM(scene, myCharacterId) {
       (last ? `Their last action: ${last.label}${last.degree ? ` (${last.degree.replace("_", " ")})` : ""} — ${last.summary}` : "They just arrived.") +
       (enc ? `\n  ${m.name} is mid-encounter (witnessed, not joined): ${enc}` : "");
   });
+  // ⛔ THE SHARED FIGHT, IF ONE IS OPEN. The pool is DERIVED here the way it is derived everywhere —
+  // `sharedPool` reads the ledger — so this paragraph can never disagree with the number the strikes say.
+  const pool = sharedPool(scene);
+  const onIt = fightersOf(scene).filter(m => m.characterId !== myCharacterId);
+  const sharedLine = pool
+    ? `\n\nA SHARED FIGHT IS OPEN: ${scene.encounter.name} — ${pool.remaining} of ${pool.max} left`
+      + (onIt.length ? `, and ${onIt.map(m => m.name).join(", ")} ${onIt.length === 1 ? "is" : "are"} on it.` : ", and nobody is on it yet.")
+      + (pool.down ? " IT IS DOWN." : "")
+    : "";
   const recent = scene.beats.slice(-4).map(b => `[${b.name}] ${b.summary}`).join("\n");
-  return `${lines.join("\n")}\n\nRecent party beats (all members, oldest first):\n${recent}\nWeave party members into the narration as present, active companions controlled by OTHER PLAYERS — never decide their actions, never voice major choices for them.`;
+  return `${lines.join("\n")}${sharedLine}\n\nRecent party beats (all members, oldest first):\n${recent}\nWeave party members into the narration as present, active companions controlled by OTHER PLAYERS — never decide their actions, never voice major choices for them.`;
 }
 
 // ---------- transport (thin; every failure degrades to solo play) ----------

@@ -13669,7 +13669,16 @@ await (async () => {
     const fresh = { abilities: [], level: 1 };
     const g1 = grantMartialKit(fresh, martial);
     const g2 = grantMartialKit(fresh, martial);
-    check("345: a character with nothing is granted the whole floor", g1.granted.length === 4);
+    // ⛔ RETIRED 2026-09-05 (Erik: "no one needs them anymore"). R47's free floor is the same principle done
+    // better, and these four never reached a battle menu anyway — they are verbless, so
+    // `battleSkillsForCharacter` skipped them. ⚠️ THE CHECK IS NOT DELETED: it now asserts the grant STOPS,
+    // and that it stops ON A DIAL, so the day someone wants the floor back it is one field and not a revert.
+    check("345: the baseline kit is RETIRED — a character with nothing is granted none of it",
+      g1.granted.filter(id => (martial.baselineDefense.kit || []).some(e => e.id === id)).length === 0,
+      `granted: ${JSON.stringify(g1.granted)}`);
+    check("345: …and it is retired on a DIAL, reversible without a code change",
+      martial.baselineDefense.retired === true
+      && baselineAbilityIds({ ...martial, baselineDefense: { ...martial.baselineDefense, retired: false } }).length === 4);
     check("345: …and a second pass grants NOTHING — reconcile runs on every login", g2.granted.length === 0);
 
     // ⛔ THE CAP BUG THAT WOULD HAVE BROKEN EVERY NEW CHARACTER. Level-1 breadth cap is 2; the floor is
@@ -13678,8 +13687,11 @@ await (async () => {
     check("345: the free kit does NOT consume build capacity", breadthUsed(fresh) === 0);
     check("345: …so a level-1 character holding the whole floor can still learn",
       atCapacity({ ...fresh, level: 1 }, C345.skillCapacity) === false);
-    check("345: a baseline ability is recognised as baseline, and an authored one is not",
-      isBaselineAbility(baselineAbilityIds(martial)[0], martial) === true
+    // ⚠️ AND IT IS STILL RECOGNISED, WHICH IS THE HALF A DELETION WOULD HAVE LOST. A save that already
+    // carries these must not start paying build capacity for them because the GRANT stopped — "is this a
+    // baseline craft" and "is one granted today" are two questions, and this asks the first.
+    check("345: a baseline craft is still RECOGNISED as baseline though it is no longer granted",
+      isBaselineAbility(martial.baselineDefense.kit[0].id, martial) === true
       && isBaselineAbility("prism_sight", martial) === false);
 
     // ⚠️ FORM PROSE IS NOT AN ENUM. character.form is free text, so a form kit is resolved by an
@@ -13705,12 +13717,20 @@ await (async () => {
       const owed = baselineAbilityIds(martial).filter(id => !ids.has(id));
       check("345: an EXISTING save gains the floor on login, through the ctx app.js really passes",
         owed.length === 0, `still missing after reconcile: ${owed.join(", ")}`);
-      check("345: …and the granted records are flagged baseline, so they never eat build capacity",
-        (old.abilities || []).filter(a => a.baseline).length === 4);
+      // ⚠️ REWRITTEN WITH THE RETIREMENT: the reconcile now REMOVES these rather than granting them, so what
+      // this asserts is that the save comes out clean and that whatever a FORM kit grants is still flagged.
+      check("345: …and an existing save is CLEANED of the retired four on login",
+        (old.abilities || []).filter(a => (martial.baselineDefense.kit || []).some(e => e.id === a.abilityId)).length === 0,
+        (old.abilities || []).map(a => a.abilityId).join(", "));
     }
 
     const entKit = grantMartialKit({ abilities: [], form: "a towering treefolk of bark and heartwood" }, martial);
-    check("345: an Ent is granted the floor AND its form kit — Erik's branch-club", entKit.granted.length > 4 && entKit.kit === "ent");
+    // ⛔ THE FORM KIT SURVIVES THE RETIREMENT AND THAT IS THE POINT. Erik's branch-club is a fact about being an
+    // Ent — characterful, chosen by the FORM — which is exactly what the generic four were not.
+    check("345: an Ent still gets its FORM kit — Erik's branch-club — though the generic floor is retired",
+      entKit.kit === "ent" && entKit.granted.length > 0
+      && entKit.granted.every(id => !(martial.baselineDefense.kit || []).some(e => e.id === id)),
+      `granted: ${JSON.stringify(entKit.granted)}`);
   }
 
   // SNG-342 — THE GATE THAT WOULD HAVE CAUGHT MY OWN REGRESSION.

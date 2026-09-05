@@ -13,7 +13,7 @@
 // backfill.js remains the XP/bonds/practice credit pass (extend, don't replace) —
 // reconcile is the umbrella for everything schema/feature-shaped that came after.
 
-import { grantMartialKit } from "./martial.js";
+import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
 import { mergeCodexTopics, ensureCodex, applyCodexUpdates } from "./codex.js";
 import { dedupeQuests, normalizeProse } from "./quests.js";
@@ -1106,6 +1106,27 @@ export const CHARACTER_STEPS = [
       }
       if (!restored.length) return {};
       return { notes: [`${restored.join(" and ")} ${restored.length === 1 ? "is" : "are"} back at ${restored.length === 1 ? "the post they keep" : "the posts they keep"} — the world had counted them gone for not travelling with you.`] };
+    }
+  },
+  {
+    version: 34, id: "baseline-kit-retired", playerFacing: true,
+    // ⛔ ERIK 2026-09-05: "we should remove those basic granted skills from saves too. no one needs them anymore."
+    // ⚑ R47's free floor replaced them: every T1 craft has a zero-cost form, so a drained character keeps their own
+    // tradition instead of four generic verbs. ⚠️ MEASURED BEFORE REMOVING — at zero energy Silas had seven
+    // zero-cost moves and none was from this kit: the four are verbless, so the battle menu skipped them and they
+    // have never been playable. Removing them takes nothing away that was reaching him.
+    // ⬜ A REMOVAL, NOT A MIGRATION: only entries the kit itself granted, only while the dial says retired, and a
+    // craft the player has RANKED UP is left alone — that is theirs now, however it arrived.
+    apply: (c, ctx) => {
+      // the SAME path step 33's neighbour uses — `martialPaths`, not `martial`. A ctx key guessed rather than
+      // copied is how a step silently does nothing.
+      const ids = retiredBaselineIds(ctx?.rules?.martialPaths || ctx?.content?.rules?.martialPaths);
+      if (!ids.length || !Array.isArray(c.abilities)) return {};
+      const drop = new Set(ids);
+      const removed = c.abilities.filter(a => a && drop.has(a.abilityId) && (Number(a.level) || 1) <= 1).map(a => a.abilityId);
+      if (!removed.length) return {};
+      c.abilities = c.abilities.filter(a => !(a && drop.has(a.abilityId) && (Number(a.level) || 1) <= 1));
+      return { notes: [`The four basic moves are gone from your sheet — every craft you carry now has its own free form beneath rank one.`] };
     }
   },
   {    version: 30, id: "restore-generated-teacher-roles", playerFacing: true,

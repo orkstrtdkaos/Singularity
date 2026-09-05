@@ -69,9 +69,19 @@ export function martialAbilityRecords(martial) {
   return out;
 }
 
-/** The universal four — everyone, always. No form, no origin, no level, no points. */
+/** The universal four — everyone, always. ⛔ RETIRED 2026-09-05 (`baselineDefense.retired`): R47's free floor
+ *  is the same principle done better, and these four never reached a battle menu in the first place — they
+ *  are verbless, so `battleSkillsForCharacter` skipped them. ⚠️ THE IDS STILL RESOLVE for `isBaselineAbility`
+ *  and for the braid recipes that need them; only the GRANT stops, and it stops on a dial. */
 export function baselineAbilityIds(martial) {
+  if (martial?.baselineDefense?.retired === true) return [];
   return (martial?.baselineDefense?.kit || []).map(e => e.id);
+}
+
+/** The four the kit USED to grant, retired or not — what a save must be cleaned of, and what a recipe may
+ *  still name. ⚠️ Deliberately separate from `baselineAbilityIds`, which answers "what is granted TODAY". */
+export function retiredBaselineIds(martial) {
+  return martial?.baselineDefense?.retired === true ? (martial?.baselineDefense?.kit || []).map(e => e.id) : [];
 }
 
 /** ⚠️ `character.form` IS FREE PROSE — "a towering treefolk of bark and heartwood" — not an enum. Nothing
@@ -127,7 +137,10 @@ export function grantMartialKit(character, martial) {
  *  would be charged for the ability to raise its arms. */
 export function isBaselineAbility(abilityId, martial) {
   if (!martial) return false;
-  if (baselineAbilityIds(martial).includes(abilityId)) return true;
+  // ⚠️ THE KIT LIST, NOT THE GRANT LIST. Retiring the grant must not reclassify a craft a save already
+  // carries — "is this a baseline craft" and "is one granted today" are two questions, and answering the
+  // first with the second would start charging build capacity for four moves the player never chose.
+  if ((martial?.baselineDefense?.kit || []).some(e => e.id === abilityId)) return true;
   return (martial.formKits?.kits || []).some(k => (k.grants || []).some(g => g.id === abilityId));
 }
 

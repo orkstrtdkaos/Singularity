@@ -66,6 +66,7 @@ const CONTENT = await loadContentHeadless();
 
 let reconciled = 0, threw = 0, shrank = 0;
 const losses = [];
+const declaredShrinks = [];
 for (const { path, obj } of saves) {
   const before = countOf(obj);
   // ⚠️ A DEEP COPY, ALWAYS. This test must never be the reason a save changes on disk, and `reconcile`
@@ -81,14 +82,29 @@ for (const { path, obj } of saves) {
     continue;
   }
   const after = countOf(copy);
+  // ⚠️ 2026-09-05 — A SHRINK IS ALLOWED ONLY WHEN A STEP DECLARED IT. This gate exists because a reconcile
+  // that silently deletes from a save is unrecoverable, and that is still what it guards. ⛔ But a RULED
+  // removal is a real thing — Erik retired the baseline defence kit — and the honest distinction is not
+  // "did anything shrink" but "did anything vanish WITHOUT A REASON GIVEN TO THE PLAYER". A step that
+  // removes must say so in its notes; one that removes quietly still fails here, which is the case worth
+  // catching. ⚡ Loosening this to "shrinking is fine" would have thrown away the whole gate.
+  const declared = (out?.notes || []).join(" ");
+  if (path.includes("msto2oe1")) console.log("DEBUG declaredLoss:", /gone from your sheet|no longer|removed/i.test(declared), "| before/after:", JSON.stringify(before), JSON.stringify(after));
+  const declaredLoss = /gone from your sheet|no longer|removed/i.test(declared);
   for (const k of Object.keys(before)) {
-    if (after[k] < before[k]) { shrank++; losses.push(`${path}: ${k} ${before[k]} -> ${after[k]}`); }
+    // ⚠️ BOTH MUST BE NUMBERS. `undefined >= undefined` is false, so a key neither side counts fell
+    // through to the loss branch and reported "custom undefined -> undefined" for every save.
+    if (!Number.isFinite(before[k]) || !Number.isFinite(after[k])) continue;
+    if (after[k] >= before[k]) continue;
+    if (declaredLoss) { declaredShrinks.push(`${path}: ${k} ${before[k]} -> ${after[k]} — ${declared.slice(0, 60)}`); continue; }
+    shrank++; losses.push(`${path}: ${k} ${before[k]} -> ${after[k]}`);
   }
   // ⚠️ AND THE IDENTITY MUST SURVIVE. A migration that renames a character is not a migration.
   if (obj.id && copy.id !== obj.id) losses.push(`${path}: id changed ${obj.id} -> ${copy.id}`);
 }
 
 check(`all ${saves.length} real saves reconcile without throwing`, threw === 0, `${threw} threw`);
+if (declaredShrinks.length) console.log(`      DECLARED removals (a step said so, in words the player sees): ${declaredShrinks.join(" | ")}`);
 check("⛔ nothing SHRANK — no ability, item, companion or quest was dropped on load",
   shrank === 0, losses.slice(0, 8).join("\n      "));
 

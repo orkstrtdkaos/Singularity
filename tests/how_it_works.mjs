@@ -6217,6 +6217,80 @@ console.log("\n── §89 · one pool rule for a foe and a person · a bout tha
   check("§89: …and the harness opens the encounter through the ENGINE's decider, not one of its own",
     /contestSheetFor\(def, \{ content \}\)/.test(rd("tests/lib/realgame.mjs")));
 }
+
+/* ═════ §90 — THE BASELINE KIT IS RETIRED, AND THE FLOOR THAT REPLACES IT IS LEGIBLE (2026-09-05) ═════ */
+// ⛔ Erik: "ensuring those basic default skills are gone. Silas still has them" · "we should remove those
+// basic granted skills from saves too. no one needs them anymore."
+// ⚑ R47's FREE FLOOR IS THE SAME PRINCIPLE DONE BETTER — *"no character is helpless"* is still true, and it
+// is now true because every T1 craft has a zero-cost form that keeps its native reach and loses its force.
+// Generic where the floor is characterful, granted where the floor is earned.
+//
+// ⚠️ AND THE MEASUREMENT THAT MADE THE REMOVAL SAFE, taken BEFORE removing anything: at zero energy Silas
+// had seven zero-cost moves and NOT ONE came from the kit. The four are verbless, so
+// `battleSkillsForCharacter`'s `if (!fns.length) continue` skipped them — they were on the sheet and have
+// never once reached a battle menu.
+console.log("\n── §90 · the kit is retired on a dial · a save is cleaned at load · and the floor finally reads ──");
+{
+  const { loadContentHeadless: lch90 } = await import("./headless_content.mjs");
+  const C90 = await lch90();
+  const M90 = await import("../engine/martial.js");
+  const RC90 = await import("../engine/reconcile.js");
+  const BT90 = await import("../engine/battle_turn.js");
+  const CAP90 = await import("../engine/capabilities.js");
+  const mp = C90.rules.martialPaths;
+
+  check("§90: ⚠️ the fixture reads the real martial rules — not vacuous",
+    Array.isArray(mp?.baselineDefense?.kit) && mp.baselineDefense.kit.length === 4,
+    JSON.stringify((mp?.baselineDefense?.kit || []).map(e => e.id)));
+
+  // ── RETIRED, AND ON A DIAL
+  check("§90: ⛔ the kit grants NOTHING — retired",
+    mp.baselineDefense.retired === true && M90.baselineAbilityIds(mp).length === 0);
+  check("§90: ⚑ …and it is a DIAL, not a deletion — flip it and the four come back, no code change",
+    M90.baselineAbilityIds({ ...mp, baselineDefense: { ...mp.baselineDefense, retired: false } }).length === 4);
+  check("§90: ⚠️ …the CRAFTS stay in the catalogue — `unraveling_blow` braids from `strike_basic`, so deleting them would break a recipe",
+    mp.baselineDefense.kit.every(e => !!C90.abilities[e.id]));
+  check("§90: ⛔ …and a baseline craft is still RECOGNISED, so a save that carries one does not start paying build capacity for it",
+    M90.isBaselineAbility(mp.baselineDefense.kit[0].id, mp) === true && M90.isBaselineAbility("prism_sight", mp) === false);
+  check("§90: …and the PRINCIPLE was rewritten rather than deleted — it is still true, for a different reason",
+    /FREE FLOOR/i.test(String(mp.baselineDefense.principle)) && !!mp.baselineDefense._principleWas);
+
+  // ── AN EXISTING SAVE IS CLEANED AT LOAD, which is what survives an in-memory session
+  {
+    const save = { id: "x", level: 8, abilities: [
+      ...mp.baselineDefense.kit.map(e => ({ abilityId: e.id, level: 1, baseline: true })),
+      { abilityId: "deathsense", level: 2 },
+    ] };
+    RC90.reconcile(save, "character", { content: C90, rules: C90.rules });
+    const left = save.abilities.map(a => a.abilityId);
+    check("§90: ⛔ AN EXISTING SAVE LOSES THEM ON LOAD — a reconcile step, so an in-memory session cannot undo it",
+      mp.baselineDefense.kit.every(e => !left.includes(e.id)) && left.includes("deathsense"),
+      `left: ${left.join(", ")}`);
+  }
+  {
+    // ⚠️ AND IT IS A REMOVAL, NOT A PURGE: a craft the player RANKED UP is theirs now, however it arrived.
+    const ranked = { id: "y", level: 8, abilities: [{ abilityId: mp.baselineDefense.kit[0].id, level: 3 }] };
+    RC90.reconcile(ranked, "character", { content: C90, rules: C90.rules });
+    check("§90: ⚠️ …but a baseline craft the player RANKED UP is left alone — that is theirs now, however it arrived",
+      ranked.abilities.length === 1 && ranked.abilities[0].level === 3);
+  }
+
+  // ── ⛔ AND THE THING THAT MAKES THE REMOVAL HONEST: the floor is READABLE.
+  // It reached the menu all along — 14 of Silas's 77 rows — and rendered with NO COST AND NO TEXT, because a
+  // paid rung carries `does`/`cost` and the rung `freeTierOf` builds carries `why`/`energyCost`.
+  {
+    const withFloor = Object.values(C90.abilities).filter(a => CAP90.freeTierOf(a, { cfg: C90.rules.energy }));
+    check("§90: ⚠️ the corpus really derives floors — not vacuous", withFloor.length > 50, `${withFloor.length} crafts`);
+    const ch = { id: "z", level: 10, energy: 0, maxEnergy: 100, abilities: withFloor.slice(0, 6).map(a => ({ abilityId: a.id, level: 1 })) };
+    const rows = BT90.battleSkillsForCharacter(ch, { catalog: C90.abilities, rules: C90.rules, sb: C90.skillBattle?.engine });
+    const floors = rows.flatMap(r => (r.tiers || []).filter(t => t.free));
+    check("§90: ⛔ THE FREE FLOOR REACHES THE MENU AND READS — a cost of 0 and its own words, not a blank rung",
+      floors.length > 0 && floors.every(t => Number(t.cost) === 0 && String(t.does || "").length > 10),
+      floors.slice(0, 2).map(t => `cost ${t.cost}: ${String(t.does).slice(0, 44)}`).join(" · ") || "⛔ no floor rung on any row");
+    check("§90: …and it is PREPENDED, never appended — a free floor listed after the paid tiers reads as a footnote",
+      rows.filter(r => (r.tiers || []).some(t => t.free)).every(r => r.tiers[0].free === true));
+  }
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

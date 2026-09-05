@@ -53,7 +53,11 @@ export function battleSkillsForCharacter(character, { catalog = {}, rules = {}, 
         ...(() => { // ⚠️ `??`, NOT `||` — CCODE-245: a genuine rank 0 must reach the module
           const menu = capabilityMenu(def, a.level ?? 1, { cfg: rules?.energy });
           return menu.tiers.length > 1
-            ? { tiers: menu.tiers.map(t => ({ rank: t.rank, does: smartClamp(t.does, 160), cost: t.cost })) }
+            // ⛔ THE FREE FLOOR SPEAKS A DIFFERENT DIALECT AND THIS MAPPING ONLY KNEW ONE. A paid rung carries
+            // `does`/`cost`; the rung `freeTierOf` builds carries `why`/`energyCost`. ⚠️ So the floor DID reach
+            // the menu — 14 of Silas's 77 rows — and rendered as a rank-0.5 row with NO COST AND NO TEXT: the
+            // one rung a drained player most needs to read, blank. R47 built, wired, and illegible.
+            ? { tiers: menu.tiers.map(t => ({ rank: t.rank, does: smartClamp(t.does ?? t.why ?? "", 160), cost: t.cost ?? t.energyCost ?? 0, free: Number(t.rank) === 0.5 || undefined })) }
             : {}; })() });
     }
   }

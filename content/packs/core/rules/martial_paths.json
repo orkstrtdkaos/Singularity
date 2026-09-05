@@ -4,7 +4,7 @@
  "kind": "world_structure",
  "note": "Three linked pieces (Erik 2026-07-07): (1) BASELINE DEFENSE — every character can defend itself, no build required; (2) MARTIAL BACKGROUNDS — warrior paths exist across ALL the axes: a chaos-warrior and an order-warrior share the same basic martial functions (strike/shield/move) expressed utterly differently through their Reach; (3) RACIAL/FORM KITS — a body brings its own weapons: an Ent fights with branch-clubs and root-work. Access model included. Extends universal_roles (Warrior role) + skill_functions (strike/shield by domain). Authored by Aevi (PO).",
  "baselineDefense": {
-  "principle": "No character is helpless. Every character gets a BASELINE DEFENSE KIT free at creation — not a class, a floor: the universal animal competence of protecting yourself. Small numbers, always available, never gated.",
+  "principle": "No character is helpless — and as of R47 that is true because of the FREE FLOOR, not because of this kit. Every T1 craft has a zero-cost form that keeps its native reach and loses its force, so a character at zero energy still has THEIR OWN TRADITION rather than four generic verbs nobody chose. Generic where the floor is characterful, granted where the floor is earned, and on the sheet where the floor is underneath it.",
   "kit": [
    {
     "id": "brace",
@@ -45,7 +45,10 @@
    }
   ],
   "formModifier": "The kit expresses through the FORM: a human's Strike is a fist or staff; an ENT's Strike is a BRANCH-CLUB (a limb swung like a beam) and its Brace is BARKSKIN (the body IS armor); a Blocklands-native braces by raising a quick wall. Form-kits below.",
-  "engineNote": "Baseline kit = 4 free zero-cost abilities at creation, powerSystem 'baseline', excluded from skill-point costs and caps. SNG-022 reconciliation grants them to existing characters on login (your Ent gets its branch-club next login)."
+  "engineNote": "Baseline kit = 4 free zero-cost abilities at creation, powerSystem 'baseline', excluded from skill-point costs and caps. SNG-022 reconciliation grants them to existing characters on login (your Ent gets its branch-club next login).",
+  "_principleWas": "No character is helpless. Every character gets a BASELINE DEFENSE KIT free at creation — not a class, a floor: the universal animal competence of protecting yourself. Small numbers, always available, never gated.",
+  "retired": true,
+  "_retiredWhy": "⛔ ERIK 2026-09-05: \"we should remove those basic granted skills from saves too. no one needs them anymore.\" ⚠️ THE FOUR CRAFTS STAY IN THE CATALOGUE — `unraveling_blow` braids from `strike_basic`, so deleting the definitions would break a recipe. Only the GRANT stops. ⚑ Measured before removing: at zero energy Silas has seven zero-cost moves and NOT ONE of them came from this kit — the four are verbless, so `battleSkillsForCharacter` skipped them and they have never reached a battle menu at all. They were on the sheet and nowhere else. ⬜ Set `retired: false` to bring the grant back; nothing else has to change."
  },
  "formKits": {
   "note": "A body brings its own weapons and defenses — form-kits are small racial/physiology ability sets granted by ORIGIN FORM, on top of baseline. Manifest-race characters especially.",

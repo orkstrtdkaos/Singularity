@@ -237,7 +237,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Stray's Read",
+     "name": "Stray's Read",
      "grants": "Once per scene, before you commit to trusting or entering something, Bristle tells you plainly — a growl or a lean — whether the danger here is PEOPLE-SHAPED or PLACE-SHAPED.",
      "cannot": "⚠️ It does not say WHO, or how much, or what to do. And it keeps a body-length of distance while it tells you.",
      "functions": [
@@ -284,7 +284,8 @@
      "stage": 2
     }
    ],
-   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05, per `companion_template.json` `_theEight`: 'all nine are currently STUBS carrying 9 fields and missing 14 — no `tree`, no `mechanic`, no `bounds`.' ⚑ EACH RANK KEYS TO A `stage`, NOT A POINT SPEND — the stage names what the COMPANION becomes, the rank names what it LENDS YOU. ⚠️ Drawn from that companion's own `knowledge` and `boundaries`; nothing invented."
+   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05, per `companion_template.json` `_theEight`: 'all nine are currently STUBS carrying 9 fields and missing 14 — no `tree`, no `mechanic`, no `bounds`.' ⚑ EACH RANK KEYS TO A `stage`, NOT A POINT SPEND — the stage names what the COMPANION becomes, the rank names what it LENDS YOU. ⚠️ Drawn from that companion's own `knowledge` and `boundaries`; nothing invented.",
+   "_lintFix_20260905": "⛔ LEADING ARTICLE — CAUGHT BY `craft_lint` MINUTES AFTER AUTHORING. ⚠️ The lint's authority line reads 'Erik has corrected this THREE times and a written rule did not hold' — Aevi made it FIVE, in the same session she wrote that a generator must be handed the name list and forbidden to collide. ✅ She ran the lint this time before touching the source of truth; that is the only thing that went right."
   },
   {
    "id": "scholars_margin",
@@ -339,7 +340,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Margin Note",
+     "name": "Margin Note",
      "grants": "Once per scene, on a lore, Precursor or history question, Quill surfaces a real fragment that opens an approach.",
      "cannot": "⚠️ She is guarded and testing whether you are another person who will tell her to stop asking. The fragment is real; the CONTEXT she keeps to herself.",
      "functions": [
@@ -369,7 +370,7 @@
     },
     {
      "rank": 3,
-     "name": "The Dangerous Half",
+     "name": "Dangerous Half",
      "grants": "⛔ THE SAFETY LIMIT IS GONE: rank 1 gave you what she had read, and this gives you WHAT SHE WORKED OUT AND DID NOT PUBLISH — 'the question that got her expelled', and the partial, dangerous reading of Precursor inscription. ⚑ She trusts you with the half she has never said aloud.",
      "cannot": "⛔ IT IS PARTIAL AND IT IS DANGEROUS AND SHE SAYS SO. A wrong reading of an inscription is not a wrong answer; it is a working you have just done wrong.",
      "functions": [
@@ -386,11 +387,12 @@
      "stage": 2
     }
    ],
-   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05, per `companion_template.json` `_theEight`: 'all nine are currently STUBS carrying 9 fields and missing 14 — no `tree`, no `mechanic`, no `bounds`.' ⚑ EACH RANK KEYS TO A `stage`, NOT A POINT SPEND — the stage names what the COMPANION becomes, the rank names what it LENDS YOU. ⚠️ Drawn from that companion's own `knowledge` and `boundaries`; nothing invented."
+   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05, per `companion_template.json` `_theEight`: 'all nine are currently STUBS carrying 9 fields and missing 14 — no `tree`, no `mechanic`, no `bounds`.' ⚑ EACH RANK KEYS TO A `stage`, NOT A POINT SPEND — the stage names what the COMPANION becomes, the rank names what it LENDS YOU. ⚠️ Drawn from that companion's own `knowledge` and `boundaries`; nothing invented.",
+   "_lintFix_20260905": "⛔ LEADING ARTICLE — CAUGHT BY `craft_lint` MINUTES AFTER AUTHORING. ⚠️ The lint's authority line reads 'Erik has corrected this THREE times and a written rule did not hold' — Aevi made it FIVE, in the same session she wrote that a generator must be handed the name list and forbidden to collide. ✅ She ran the lint this time before touching the source of truth; that is the only thing that went right."
   },
   {
    "id": "the_kept_dark",
-   "name": "The Kept Dark",
+   "name": "Kept Dark",
    "levelReq": 2,
    "tier": 2,
    "energyCost": 6,
@@ -440,7 +442,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Uninvited Dark",
+     "name": "Uninvited Dark",
      "grants": "For one scene you read as absence rather than presence — the dark declines to have contained you.",
      "cannot": "⚠️ It has not decided about you. It lends this from the edge of the firelight and takes it back without warning if it chooses.",
      "functions": [
@@ -453,7 +455,7 @@
     },
     {
      "rank": 2,
-     "name": "The Kept Watch",
+     "name": "Kept Watch",
      "grants": "⛔ IT HOLDS WHILE YOU SLEEP. Hush wakes before you do, every time, and is already looking at what woke it — the concealment persists through your own unconsciousness.",
      "cannot": "It still will not enter true light, and it still will not tell you what it saw unless you ask precisely.",
      "functions": [
@@ -470,7 +472,7 @@
     },
     {
      "rank": 3,
-     "name": "The Harbor",
+     "name": "Harbor",
      "grants": "⛔ THE OBJECT LIMIT IS GONE: rank 1 concealed you and what you carried, and this conceals WHAT YOU HAVE DONE. A thing you would rather not have kept is kept anyway, and the dark does not report it either. ⚑ 'You have told it something you have told nobody. It has not reacted and it has not left, and that is the whole of its answer.'",
      "cannot": "⛔ IT WILL NOT CONCEAL WHAT SHOULD BE WITNESSED — and at this rank Hush's judgement about which is which is one you have invited and cannot appeal.",
      "functions": [
@@ -487,7 +489,8 @@
      "stage": 3
     }
    ],
-   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05, per `companion_template.json` `_theEight`: 'all nine are currently STUBS carrying 9 fields and missing 14 — no `tree`, no `mechanic`, no `bounds`.' ⚑ EACH RANK KEYS TO A `stage`, NOT A POINT SPEND — the stage names what the COMPANION becomes, the rank names what it LENDS YOU. ⚠️ Drawn from that companion's own `knowledge` and `boundaries`; nothing invented."
+   "_authoredWhy": "⛔ AUTHORED TO THE FULL ABILITY SCHEMA 2026-09-05, per `companion_template.json` `_theEight`: 'all nine are currently STUBS carrying 9 fields and missing 14 — no `tree`, no `mechanic`, no `bounds`.' ⚑ EACH RANK KEYS TO A `stage`, NOT A POINT SPEND — the stage names what the COMPANION becomes, the rank names what it LENDS YOU. ⚠️ Drawn from that companion's own `knowledge` and `boundaries`; nothing invented.",
+   "_lintFix_20260905": "⛔ LEADING ARTICLE — CAUGHT BY `craft_lint` MINUTES AFTER AUTHORING. ⚠️ The lint's authority line reads 'Erik has corrected this THREE times and a written rule did not hold' — Aevi made it FIVE, in the same session she wrote that a generator must be handed the name list and forbidden to collide. ✅ She ran the lint this time before touching the source of truth; that is the only thing that went right."
   }
  ],
  "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."

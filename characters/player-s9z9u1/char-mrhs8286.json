@@ -8,11 +8,11 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 31,
-  "xp": 3025,
+  "xp": 3027,
   "attributes": {
     "physical": 5,
     "mental": 7,
-    "social": 8,
+    "social": 9,
     "practical": 8
   },
   "skills": {
@@ -210,8 +210,8 @@
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
-    "concrete_abstract": -0.03496367597441142,
-    "death_life": -0.17787615557957992,
+    "concrete_abstract": 0.015036324025588584,
+    "death_life": -0.12787615557957993,
     "emotional_logical": 0.008330843749999983,
     "falsehood_truth": 0.31186470452944887,
     "demonic_angelic": 0.013499999999999998,
@@ -222,9 +222,9 @@
   },
   "attunement": 31,
   "maxHealth": 196,
-  "health": 196,
+  "health": 188,
   "maxEnergy": 287,
-  "energy": 267,
+  "energy": 240,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2228,94 +2228,82 @@
         "player": "Help Pell get the runner inside and rested—use Kept Breath to stabilize her while you find out what broke her pattern so badly",
         "summary": "An urgent encrypted message arrives at Whistling Woman post by direct slate relay, fracturing the courier's death-thread. Silas steadies her with Kept Breath while Pell helps bring her inside to rest.",
         "narration": "You call Pell's name sharp and clear—not urgent, but direct enough that she's moving before she's fully awake, stepping through the threshold in shirt and breeches, reading the situation in a glance. The courier is sliding sideways in the saddle, fever-warm and gripping hard to stay mounted. Her horse stamps, unnerved.\n\n\"I've got her,\" Pell says, and moves to the horse's head with the same unsentimental steadiness she brings to everything. She gets a hand on the courier's arm—solid, anchoring—while you step close to the rider's other side. The woman's breathing is shallow and rapid, her hands shaking as she tries to reach for the saddlebag.\n\n\"Inside,\" you tell her plainly. \"Let us carry the weight.\" The Kept Breath settles around her like a held exhale—purple mist standing a finger's depth off her skin, the fever's burn hitting that barrier and sliding shallow. Her breathing slows. The immediate spiral stops. It's not healing; it's a threshold held. Not yet, it says. You stay here a moment more.\n\nPell and the courier move together toward the post's open door. Huginn hops aside to clear the threshold, its eye tracking the saddlebag like a thing that matters. Inside, the warmth of the stove hits immediately—the post holds heat well. Pell guides the courier to the bed you just left warm, eases her down onto it. The woman's eyes are sharp despite the fever—focused, urgent.\n\n\"Message,\" she manages. \"Direct. Encrypted. For the warden.\" Her hand fumbles toward the saddlebag.\n\nYou retrieve it from the doorway—leather, heavy, sealed with wax. The slate inside will be warm from riding. Whatever broke her pattern enough to shatter her thread three ways, it was worth riding hard enough to do it.\n\nPell brings water—boiled, from the barrel. She kneels beside the bed without ceremony. \"Drink,\" she says. It's not a question.\n\n*✦ Encrypted slate message — direct relay, urgent — added to your pack.*"
+      },
+      {
+        "player": "Use Dawn sugury and The Kept Breath togeter with Pell's assistance on the Runner to heal her and keep the pain from her.",
+        "summary": "An urgent courier arrives fever-fractured at Whistling Woman post; Silas attempts combined surgery and stabilizing magic but the thin lattice forces a raw, painful cautery instead of clean healing.",
+        "narration": "You kneel beside the courier on the warded post's bed, Pell steadying the woman's shoulder with one hand while you bring the light forward. The Kept Breath settles first—that purple mist rising off skin, the familiar anchor that will hold her against the worst of what's coming. She gasps at the sensation, her fever-bright eyes tracking your hands.\n\nYou reach for the Dawn Surgery next, calling the light close enough to cauterize without the blade—a cleaner way, a faster way. The two crafts should braid, should hold together the way they have before. But as you press the light down toward the infection blooming at her wrist, something fractures in the lattice beneath them both. The substrate here is thin—thinner than you need—and the Surgery flares bright and uncertain, burning *wrong*. Not deep enough to seal, not controlled enough to spare her. The woman screams, arching, and Pell's grip tightens as the mist sputters and gaps.\n\nThe light fades. The purple mist thins to nothing. What you've done is cauterized the infection, yes—but left her shaking and raw, the pain *worse* before it settles into something numb. The Kept Breath resets, slower this time, but it's a second-best holding now. She's stabilized, but not healed. Not the clean work you needed.\n\nPell meets your eyes over the courier's trembling form, reading what went wrong in the set of your shoulders. \"The substrate,\" she says quietly. It's not a question."
       }
     ],
     "lastTurn": {
-      "narration": "You call Pell's name sharp and clear—not urgent, but direct enough that she's moving before she's fully awake, stepping through the threshold in shirt and breeches, reading the situation in a glance. The courier is sliding sideways in the saddle, fever-warm and gripping hard to stay mounted. Her horse stamps, unnerved.\n\n\"I've got her,\" Pell says, and moves to the horse's head with the same unsentimental steadiness she brings to everything. She gets a hand on the courier's arm—solid, anchoring—while you step close to the rider's other side. The woman's breathing is shallow and rapid, her hands shaking as she tries to reach for the saddlebag.\n\n\"Inside,\" you tell her plainly. \"Let us carry the weight.\" The Kept Breath settles around her like a held exhale—purple mist standing a finger's depth off her skin, the fever's burn hitting that barrier and sliding shallow. Her breathing slows. The immediate spiral stops. It's not healing; it's a threshold held. Not yet, it says. You stay here a moment more.\n\nPell and the courier move together toward the post's open door. Huginn hops aside to clear the threshold, its eye tracking the saddlebag like a thing that matters. Inside, the warmth of the stove hits immediately—the post holds heat well. Pell guides the courier to the bed you just left warm, eases her down onto it. The woman's eyes are sharp despite the fever—focused, urgent.\n\n\"Message,\" she manages. \"Direct. Encrypted. For the warden.\" Her hand fumbles toward the saddlebag.\n\nYou retrieve it from the doorway—leather, heavy, sealed with wax. The slate inside will be warm from riding. Whatever broke her pattern enough to shatter her thread three ways, it was worth riding hard enough to do it.\n\nPell brings water—boiled, from the barrel. She kneels beside the bed without ceremony. \"Drink,\" she says. It's not a question.\n\n*✦ Encrypted slate message — direct relay, urgent — added to your pack.*",
-      "sceneSummary": "An urgent encrypted message arrives at Whistling Woman post by direct slate relay, fracturing the courier's death-thread. Silas steadies her with Kept Breath while Pell helps bring her inside to rest.",
+      "narration": "You kneel beside the courier on the warded post's bed, Pell steadying the woman's shoulder with one hand while you bring the light forward. The Kept Breath settles first—that purple mist rising off skin, the familiar anchor that will hold her against the worst of what's coming. She gasps at the sensation, her fever-bright eyes tracking your hands.\n\nYou reach for the Dawn Surgery next, calling the light close enough to cauterize without the blade—a cleaner way, a faster way. The two crafts should braid, should hold together the way they have before. But as you press the light down toward the infection blooming at her wrist, something fractures in the lattice beneath them both. The substrate here is thin—thinner than you need—and the Surgery flares bright and uncertain, burning *wrong*. Not deep enough to seal, not controlled enough to spare her. The woman screams, arching, and Pell's grip tightens as the mist sputters and gaps.\n\nThe light fades. The purple mist thins to nothing. What you've done is cauterized the infection, yes—but left her shaking and raw, the pain *worse* before it settles into something numb. The Kept Breath resets, slower this time, but it's a second-best holding now. She's stabilized, but not healed. Not the clean work you needed.\n\nPell meets your eyes over the courier's trembling form, reading what went wrong in the set of your shoulders. \"The substrate,\" she says quietly. It's not a question.",
+      "sceneSummary": "An urgent courier arrives fever-fractured at Whistling Woman post; Silas attempts combined surgery and stabilizing magic but the thin lattice forces a raw, painful cautery instead of clean healing.",
       "choices": [
         {
-          "label": "Unsealing the encrypted message — place it in Pell's hands so she can help you read what broke the network's silence.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "craft"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask the courier plainly what sent her — break protocol, risk herself, fracture her death-thread.",
+          "label": "Let her rest and ask the encrypted message's contents—it matters more than her comfort right now.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "ask",
-            "press"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Ask the Dead on the courier herself — read her death-patterns plainly, ask what her fractured thread is anchored to.",
-          "attribute": "mental",
-          "subAttribute": "insight",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "press"
+            "careful"
           ],
-          "abilityId": "ask_the_dead",
-          "energyCost": 3,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Let the courier rest while you and Pell study the encrypted message — she needs hours before hard questions.",
+          "label": "Use simple water, cloth, and time to tend what the Surgery left raw—tend her properly, even if it takes hours.",
           "attribute": "practical",
           "subAttribute": "craft",
           "axes": {},
-          "difficulty": "very easy",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "careful"
+            "careful",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Huginn what it reads in the courier's end-patterns now—has the fracture shifted? Is one path closing?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "easy",
           "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step outside the warded threshold and test the moorland's lattice—confirm whether the thinning extends beyond the post, or if the substrate is starved here alone.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": 0,
-        "energy": -3,
-        "inventoryAdd": [
-          {
-            "name": "Encrypted slate message — direct relay, urgent",
-            "kind": "quest",
-            "description": "A sealed slate tablet carrying an encrypted message from the Hub — marked urgent-to-hand, breaking normal relay protocol. The message itself is not yet read.",
-            "consumable": false,
-            "effects": {}
-          }
-        ],
+        "health": -8,
+        "energy": -18,
+        "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
@@ -2326,67 +2314,84 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "An encrypted message from the Hub that broke network protocol to arrive — urgent, direct, fractured the courier's death-thread.",
-        "from": "What Wakes Beneath arc — the world itself has started moving in ways the network was not designed for. Something escalated while Silas tended the threshold."
+        "thing": "The thinness of the substrate itself—something is wrong with the lattice's density here, and it is making craft-work strained and unpredictable.",
+        "from": "The failure itself—the craft reached for more than the moorland's thin lattice could carry. The world is telling Silas something about this place."
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Whistling Woman post's warm interior at pre-dawn grey — stove glowing, the bed still warm, the saddlebag on the table. The courier lies on the bed, fever-warm beneath Pell's practical care. The post is warded at the threshold; the moorland road south lies open beyond it.",
+        "setting": "Whistling Woman post interior, afternoon grey light filtering through the warded threshold. The bed is the center of attention—the courier lying fever-warm and trembling, raw from the failed cautery. Pell kneeling beside her with water and cloth. Huginn perched on the shelf, watching with that unchanging eye.",
         "npcsPresent": [
           {
             "name": "Courier",
-            "state": "Fever-warm, resting on the bed, breathing steadied by Kept Breath, eyes sharp and urgent despite exhaustion — gripping the message's importance like the last thing keeping her awake"
+            "state": "Fever-warm, trembling from the botched surgery, stabilized by Kept Breath but in real pain. Eyes still sharp with urgency despite her body's fracture. The saddlebag with the encrypted slate message remains on the table, untouched."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Kneeling beside the bed with water, reading the courier's strain through practical assessment, unsentimental and present"
+            "state": "Kneeling beside the bed with water and cloth, reading Silas's shoulders and the failed work. Present, steady, and waiting for what comes next."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the shelf, watching the saddlebag with the eye of something that knows a weight when it sees one"
+            "state": "Perched on the shelf, watching the courier and the saddlebag with that old, knowing eye."
           }
         ],
         "objects": [
-          "The Whistling Woman post structure — warded threshold, warm interior, stove, bed",
-          "Encrypted slate message in wax-sealed saddlebag",
-          "Courier's horse — tethered outside, unsettled but held",
-          "Water barrel and cup"
+          "The warded threshold, holding the moorland at bay",
+          "Encrypted slate message in wax-sealed saddlebag (on the table)",
+          "Water barrel and cup",
+          "Cloth strips",
+          "The bed, now the courier's temporary hold"
         ],
         "threads": [
-          "What message was urgent enough to break the relay network's protocol",
-          "Why the courier's death-thread fractured into three separate paths",
-          "What happens to her in the hours ahead — which path holds, which falls away"
+          "What urgent message broke the relay network's protocol and fractured the courier's death-thread",
+          "Why the lattice is thin here and whether that thinning extends beyond the post",
+          "Which of the courier's three death-paths will hold—arrival, collapse, or something else"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "hub-courier-day16",
+          "op": "update",
+          "npcId": "courier-hub-relay-runner",
           "name": "Courier",
-          "role": "Hub relay runner carrying urgent direct message",
-          "sex": "female",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "A lean woman in her thirties, fever-warm and running on the last of her strength — the quality of someone who rode hard enough to break the network's usual rules.",
-          "note": "Arrived at dawn carrying an encrypted slate message marked urgent-to-hand. Her death-thread reads fractured — three diverging paths through the next hours. Pell and Silas brought her inside; Kept Breath steadied the spiral.",
+          "note": "Failed surgery left her raw but stabilized. The cautery burned wrong—Kept Breath holding, but she's in real pain. Still urgent about delivering the message despite her body's fracture.",
           "learned": [
-            "She broke relay protocol to carry this message directly",
-            "The message came encrypted, not open — highest security",
-            "She was ordered to carry it to the warden, no intermediaries"
+            "She broke relay protocol to carry this message—it came encrypted, not open chain",
+            "She was ordered direct to the warden, no intermediaries",
+            "She knew her death-thread was fractured before she left, but came anyway"
           ],
-          "skillsObserved": [
-            "Professional horsemanship under strain",
-            "Moorland navigation in difficult conditions"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Fever-warm, fractured death-thread, resting at Whistling Woman post under Pell's care"
+          "status": "injured",
+          "statusNote": "Fever-warm, stabilized by Kept Breath after failed surgical mending, in pain from the raw cautery. Three diverging death-paths still braiding through the coming hours."
+        },
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "note": "Present for the failed surgery, reading the lattice-strain in Silas's shoulders. Steady. Waiting.",
+          "learned": [
+            "The moorland's substrate is too thin for complex braided-craft work"
+          ]
         }
       ],
       "factUpdates": [],
-      "placeUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "The substrate lattice at Whistling Woman post is thin—craft-work runs at roughly 56% efficiency. Combined or novel-depth workings strain visibly and fail unpredictably.",
+          "flag": {
+            "substrate_thin": true
+          }
+        }
+      ],
       "discovery": null,
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "The moorland's substrate lattice is measurably thin—craft-work here runs starved and unpredictable. Unknown cause or extent.",
+          "links": [
+            "whistling-woman-post",
+            "the-poles-pull"
+          ]
+        }
+      ],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -2399,8 +2404,8 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "pre-dawn to early morning — the courier's arrival and Silas's response"
+        "hoursPassed": 1,
+        "why": "failed surgical work, stabilization, and the aftermath of raw pain settling into numb shock"
       },
       "moveTo": null,
       "stateOps": [],
@@ -2410,47 +2415,43 @@
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Whistling Woman post's warm interior at pre-dawn grey — stove glowing, the bed still warm, the saddlebag on the table. The courier lies on the bed, fever-warm beneath Pell's practical care. The post is warded at the threshold; the moorland road south lies open beyond it.",
+      "setting": "Whistling Woman post interior, afternoon grey light filtering through the warded threshold. The bed is the center of attention—the courier lying fever-warm and trembling, raw from the failed cautery. Pell kneeling beside her with water and cloth. Huginn perched on the shelf, watching with that unchanging eye.",
       "npcsPresent": [
         {
           "name": "Courier",
-          "state": "Fever-warm, resting on the bed, breathing steadied by Kept Breath, eyes sharp and urgent despite exhaustion — gripping t"
+          "state": "Fever-warm, trembling from the botched surgery, stabilized by Kept Breath but in real pain. Eyes still sharp with urgenc"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Kneeling beside the bed with water, reading the courier's strain through practical assessment, unsentimental and present"
+          "state": "Kneeling beside the bed with water and cloth, reading Silas's shoulders and the failed work. Present, steady, and waitin"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the shelf, watching the saddlebag with the eye of something that knows a weight when it sees one"
+          "state": "Perched on the shelf, watching the courier and the saddlebag with that old, knowing eye."
         }
       ],
       "objects": [
-        "The Whistling Woman post structure — warded threshold, warm interior, stove, bed",
-        "Encrypted slate message in wax-sealed saddlebag",
-        "Courier's horse — tethered outside, unsettled but held",
-        "Water barrel and cup"
+        "The warded threshold, holding the moorland at bay",
+        "Encrypted slate message in wax-sealed saddlebag (on the table)",
+        "Water barrel and cup",
+        "Cloth strips",
+        "The bed, now the courier's temporary hold"
       ],
       "threads": [
-        "What message was urgent enough to break the relay network's protocol",
-        "Why the courier's death-thread fractured into three separate paths",
-        "What happens to her in the hours ahead — which path holds, which falls away"
+        "What urgent message broke the relay network's protocol and fractured the courier's death-thread",
+        "Why the lattice is thin here and whether that thinning extends beyond the post",
+        "Which of the courier's three death-paths will hold—arrival, collapse, or something else"
       ]
     },
-    "beats": 6
+    "beats": 7
   },
   "clock": {
     "schemaVersion": 1,
     "day": 16,
-    "hour": 15,
+    "hour": 16,
     "realAnchor": null
   },
   "companions": [
@@ -3887,7 +3888,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d15] Held the raising of the death-warden temple with Silas through partnership and strain—her ironsense steadying the structure's load, her grip keeping him grounded when the surge began to pull. Now stands inside the completed space, reading it with the attention of someone who understands what was…",
         "[d15] At the ridge temple, shared breakfast after the meditation—reports the child is strong and settled, responding to the novel-depth work with steadiness, not fear. Her own reserves are holding.",
         "[d15] Departed the Threshold Post with Silas at evening—calm and steady on the road north toward the Whistling Woman post. The child she carries is present in her movement, a weight she carries with deliberate care.",
         "[d15] Named plainly what she needs from the night: food, rest, and Silas present without the weight of the work running through his head. The child responds to whether he is carrying the problem or carrying her.",
@@ -3896,17 +3896,18 @@
         "[d16] At the Whistling Woman post in deep night—Pell has eaten well and is moving toward rest, present and unhurried. The child she carries is steady beneath the novel-depth work.",
         "[d16] Deep night at the Whistling Woman post—Pell took what she wanted from Silas without hesitation or performance. Steady, certain, unashamed. Appetite satisfied and present together.",
         "[d16] Deep night at the Whistling Woman post—Silas traced the shape of her with plain words and plain touch. She received it the way she receives true things: without ornament, and asking for more tomorrows. The child she carries is steady; she is at rest.",
-        "[d16] Sleeping deeply, settled and present, her grip on Silas's hand holding even in rest—asking for more tomorrows, and the three of them held together in the dark."
+        "[d16] Sleeping deeply, settled and present, her grip on Silas's hand holding even in rest—asking for more tomorrows, and the three of them held together in the dark.",
+        "[d16] Present for the failed surgery, reading the lattice-strain in Silas's shoulders. Steady. Waiting."
       ],
       "knownFacts": [
-        "She reads the child's state through her own body the way she reads iron—as a craft-sense, a weight distributing rightly or wrongly",
         "The child settles better when Silas is present without the network-weight in his mind",
         "She wants him physically, plainly, without apology—and she takes that want as seriously as any craft-work she does",
         "Her grip and her certainty both leave marks; she is not gentle, but she is complete",
         "She reads Silas's plainness as the truest form of love—meeting her the way she meets the world, without performance or distance",
         "She will ask him for this again and again; it settles something in her that nothing else does",
         "She can rest completely when Silas is present and the work is near—the child settles, and so does she",
-        "The little one moves in response to the novel-depth work, and settles when Silas is close"
+        "The little one moves in response to the novel-depth work, and settles when Silas is close",
+        "The moorland's substrate is too thin for complex braided-craft work"
       ],
       "skillsObserved": [
         "reading a person's craft-sense and understanding what it mea",
@@ -3936,7 +3937,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 29
+      "met": 30
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -5219,30 +5220,34 @@
       "relationship": 1,
       "history": [
         "[d16] Arrived at Whistling Woman at dawn carrying an encrypted slate message from the Hub—direct relay, not chain. Her death-thread is fractured; she may not reach her destination if the message is not delivered first.",
-        "[d16] Arrived at dawn carrying an encrypted slate message marked urgent-to-hand. Her death-thread reads fractured — three diverging paths through the next hours. Pell and Silas brought her inside; Kept Breath steadied the spiral."
+        "[d16] Arrived at dawn carrying an encrypted slate message marked urgent-to-hand. Her death-thread reads fractured — three diverging paths through the next hours. Pell and Silas brought her inside; Kept Breath steadied the spiral.",
+        "[d16] Failed surgery left her raw but stabilized. The cautery burned wrong—Kept Breath holding, but she's in real pain. Still urgent about delivering the message despite her body's fracture."
       ],
       "knownFacts": [
         "The message came through encrypted slate network marked urgent-to-hand, breaking normal relay protocol",
         "She was ordered to carry it directly to the warden, no intermediaries",
         "She broke relay protocol to carry this message directly",
         "The message came encrypted, not open — highest security",
-        "She was ordered to carry it to the warden, no intermediaries"
+        "She was ordered to carry it to the warden, no intermediaries",
+        "She broke relay protocol to carry this message—it came encrypted, not open chain",
+        "She was ordered direct to the warden, no intermediaries",
+        "She knew her death-thread was fractured before she left, but came anyway"
       ],
       "skillsObserved": [
         "Professional horsemanship under strain",
         "Moorland navigation in poor light",
         "Moorland navigation in difficult conditions"
       ],
-      "status": "active",
+      "status": "injured",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Fever-warm, fractured death-thread, resting at Whistling Woman post under Pell's care",
+      "statusNote": "Fever-warm, stabilized by Kept Breath after failed surgical mending, in pain from the raw cautery. Three diverging death-paths still braiding through the coming hours.",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
         "day": 16
       },
-      "met": 2
+      "met": 3
     }
   },
   "placeMemory": {
@@ -6230,11 +6235,13 @@
         "[d15] The Whistling Woman post is fully built, provisioned, and warded—a waystation on the moorland relay network with shelter, supplies, and Deni Cors's relay mechanism in place",
         "[d15] The music-box relay mechanism is a working vocabulary of melodies—each song carries a message across the whistle-mark network. Cylinder and pins can be swapped to change the signal.",
         "[d15] The music-box relay mechanism is confirmed working—the first melody carries 'all is well' across the moorland network and receives an answer from an unseen listener",
-        "[d15] The Whistling Woman post is now confirmed operational as a warden-staffed waystation—Silas Weir has arrived and the relay mechanism's first test melody was answered from across the moorland network."
+        "[d15] The Whistling Woman post is now confirmed operational as a warden-staffed waystation—Silas Weir has arrived and the relay mechanism's first test melody was answered from across the moorland network.",
+        "[d16] The substrate lattice at Whistling Woman post is thin—craft-work runs at roughly 56% efficiency. Combined or novel-depth workings strain visibly and fail unpredictably."
       ],
       "flags": {
         "status": "active",
-        "warden": "silas_weir"
+        "warden": "silas_weir",
+        "substrate_thin": true
       },
       "lastVisit": 15,
       "vectorsKnown": [],
@@ -6413,10 +6420,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "A quiet night with nothing demanded but presence—the first one since the temple was raised.",
-        "from": "Pell's read of what the child needs, and what she needs alongside it"
-      },
-      {
         "thing": "A courier on the relay circuit, running hard toward the post at dawn with urgent news",
         "from": "The relay network's sudden silence—something has shifted in the connected posts, and word is coming fast"
       },
@@ -6431,6 +6434,10 @@
       {
         "thing": "An encrypted message from the Hub that broke network protocol to arrive — urgent, direct, fractured the courier's death-thread.",
         "from": "What Wakes Beneath arc — the world itself has started moving in ways the network was not designed for. Something escalated while Silas…"
+      },
+      {
+        "thing": "The thinness of the substrate itself—something is wrong with the lattice's density here, and it is making craft-work strained and…",
+        "from": "The failure itself—the craft reached for more than the moorland's thin lattice could carry. The world is telling Silas something about…"
       }
     ],
     "wantProgress": {
@@ -6972,19 +6979,6 @@
       }
     },
     "pressureQueue": [
-      {
-        "source": "npc-want",
-        "kind": "npc-want",
-        "subjectId": "calvar",
-        "aimedAtPlayer": true,
-        "urgency": 3,
-        "oneLineHook": "Calvar, unseen for 7 days, has come looking for you — driven by an unmet want: The filtration work done CORRECTLY — he came out of a solitary twenty-year watch for this; sloppiness offends him more than danger.. They arrive now, not content to keep waiting.",
-        "becomes": {
-          "type": "scene",
-          "who": "calvar"
-        },
-        "addedDay": 16
-      },
       {
         "source": "threat-attack",
         "kind": "threat-attack",
@@ -12939,12 +12933,12 @@
     "agility": 5,
     "reason": 7,
     "insight": 7,
-    "presence": 9,
+    "presence": 10,
     "rapport": 7,
     "craft": 10,
     "wits": 6
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 2,
   "discoveries": [
     {
@@ -13352,7 +13346,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d13] Silas named Mara Wells to the Hub Council water committee as Millbrook's relay contact and pressed for a meeting sooner than their scheduled three days — the committee now has a named contact and a named urgency, delivered via the morning run.",
           "[d13] Warden Coll confirmed: the committee can move on a named authority and a signed witness account without a full council vote. He asked for the document roll, a signed statement naming Grael, and a check-in protocol before Silas enters the Zone. Formal aid requests to the Rootkin and Cogitants are…",
           "[d13] Warden Coll witnessed the shadow-architecture of the valley's water infrastructure raised from the Waymarker and The Shadow Work on his desk — the conduit-lines, intake sleeves, and Disputed Zone survey-grid fringe all visible for thirty seconds before the detail at the failure points blurred. He…",
           "[d13] Silas signed the witness statement with his Post Master mark on Day 13 afternoon. The design of the aid framework is clear: the Rootkin ask carries implicit expectation of return — Stillwater's Trouble offered as staging; the Cogitants will want a named accountable contact in the Zone. Both…",
@@ -13375,21 +13368,22 @@
           "[d14] Mara Wells informed via shadow-sheet on Day 14 at dawn — the work is complete, the downstream wells will clear first, the watershed will follow on its own schedule.",
           "[d15] The deep seam beneath the Threshold Post is engineered — its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
           "[d15] The deep seam beneath the Threshold Post is engineered—its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
-          "[d15] Warden Coll filed an amended petition on Day 15 morning naming pole-pull (The Poles Pull arc) as the underlying cause of the water crisis, replacing the Radiant readings conspiracy theory. The Radiant leadership has responded with silence—a dangerous sign that suggests either acceptance or deeper…"
+          "[d15] Warden Coll filed an amended petition on Day 15 morning naming pole-pull (The Poles Pull arc) as the underlying cause of the water crisis, replacing the Radiant readings conspiracy theory. The Radiant leadership has responded with silence—a dangerous sign that suggests either acceptance or deeper…",
+          "[d16] The moorland's substrate lattice is measurably thin—craft-work here runs starved and unpredictable. Unknown cause or extent."
         ],
         "links": [
-          "the-second-thread",
           "what-the-water-remembers",
           "the-actor-with-a-list",
           "the-threshold-post",
           "warden-coll",
           "millbrook",
           "the-poles-pull",
-          "the-light-that-will-not-dim"
+          "the-light-that-will-not-dim",
+          "whistling-woman-post"
         ],
         "aliases": [],
         "createdDay": 2,
-        "updatedDay": 15,
+        "updatedDay": 16,
         "entityId": "the-water-crisis"
       },
       "dara-holt-the-ditch-mother": {
@@ -14419,22 +14413,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.995833996966653,
-    "cerebral": 16.36787653325901,
-    "social": 9.957404813453154,
-    "generous": 6.220701733462805,
-    "cautious": 7.749360408041072,
-    "physical": 0.3946625819956774,
-    "risky": 0.09466107329638034,
-    "ruthless": 0.20603754725582762,
-    "carousing": 0.03349912677759167,
-    "amorous": 3.626613484595237,
-    "patient": 0.6927619231946569,
-    "stealth": 0.000007200827162272477,
-    "devotion": 0.2942495723894433,
-    "craft": 3.2524754949437873,
-    "leadership": 0.957845286839111,
-    "deception": 0.03448370236035952
+    "strategic": 17.545938147042484,
+    "cerebral": 15.958679619927535,
+    "social": 9.708469693116825,
+    "generous": 8.065184190126235,
+    "cautious": 7.5556263978400455,
+    "physical": 0.38479601744578545,
+    "risky": 0.09229454646397083,
+    "ruthless": 0.20088660857443194,
+    "carousing": 0.03266164860815188,
+    "amorous": 3.5359481474803562,
+    "patient": 0.6754428751147905,
+    "stealth": 0.000007020806483215664,
+    "devotion": 0.2868933330797072,
+    "craft": 3.1711636075701923,
+    "leadership": 0.9338991546681332,
+    "deception": 0.03362160980135053
   },
   "aptitudes": [
     "strategist",
@@ -14443,7 +14437,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 955,
+  "actionCount": 956,
   "grantsVersion": 1,
   "reconcileVersion": 33,
   "gallery": [
@@ -15181,8 +15175,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1788650682315,
-  "rev": 1822,
+  "updatedAt": 1788652480632,
+  "rev": 1824,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18547,7 +18541,8 @@
       "the_called_form": 1,
       "brace": 1,
       "working_model": 1,
-      "kept_breath": 1
+      "kept_breath": 2,
+      "dawn_surgery": 1
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -18598,13 +18593,14 @@
       "the_shadow_work+the_shielding_word": 1,
       "the_raised_thing+the_shielding_word": 1,
       "the-declared-threshold+the_raised_thing": 1,
-      "braid_deathsense_order_sense+shadowstep": 1
+      "braid_deathsense_order_sense+shadowstep": 1,
+      "dawn_surgery+kept_breath": 1
     },
     "aspirations": [
       {
         "abilityId": "hunters_strike",
         "since": "2026-07-12T16:27:52.479Z",
-        "progress": 8
+        "progress": 9
       },
       {
         "abilityId": "pattern_sense",
@@ -18641,7 +18637,8 @@
       "the_called_form": 28,
       "brace": 42,
       "working_model": 67,
-      "kept_breath": 67
+      "kept_breath": 67,
+      "dawn_surgery": 67
     }
   },
   "companionBonds": {
@@ -19298,7 +19295,7 @@
     "valley": 646,
     "the_palelands": 6,
     "the_center": 151,
-    "the_echo_vale": 17
+    "the_echo_vale": 18
   },
   "foreclosed": [
     "rootkin",
@@ -19583,10 +19580,10 @@
     {
       "id": "sess-30",
       "startedAt": "2026-09-05T23:07:20.107Z",
-      "lastAt": "2026-09-05T23:24:42.307Z",
+      "lastAt": "2026-09-05T23:54:40.623Z",
       "startDay": 67,
       "endDay": 67,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [
@@ -20074,20 +20071,20 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 331,
-    "choices": 330,
-    "characterDeltas": 164,
-    "scene": 331,
-    "npcUpdates": 296,
+    "sceneSummary": 332,
+    "choices": 331,
+    "characterDeltas": 165,
+    "scene": 332,
+    "npcUpdates": 297,
     "factUpdates": 28,
-    "placeUpdates": 73,
-    "codexUpdates": 195,
-    "timeOps": 307,
+    "placeUpdates": 74,
+    "codexUpdates": 196,
+    "timeOps": 308,
     "imagePrompt": 28,
-    "sceneEnded": 111,
+    "sceneEnded": 112,
     "itemUpdates": 7,
     "questUpdates": 42,
-    "offer": 44,
+    "offer": 45,
     "moveTo": 20,
     "delegateOps": 4,
     "deeds": 13,
@@ -20101,11 +20098,11 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 41,
+    "gambitApt": 42,
     "markDefiningMoment": 1,
     "_engineClosedScene": 3
   },
-  "_opTurns": 331,
+  "_opTurns": 332,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -20113,7 +20110,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 48,
+      "applied": 49,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },
@@ -20833,7 +20830,7 @@
     "prepare": 6,
     "investigate": 2,
     "craft": 5,
-    "help": 7,
+    "help": 8,
     "discipline": 1,
     "persuade": 1,
     "rapport": 5,
@@ -20844,7 +20841,8 @@
     "romantic": 3,
     "presence": 1,
     "flirt": 1,
-    "defend": 1
+    "defend": 1,
+    "heal": 1
   },
   "aptitudeEarnCount": {
     "silver_tongue": 1

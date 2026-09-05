@@ -234,6 +234,28 @@
   "escalateAfterDays": 30,
   "maxEscalation": 2
  },
+ "holdFeatures": {
+  "note": "✅ SPEC_holding_attributes pass two, first cut (Erik 2026-09-05 by example: 'the Threshold Post is supposed to have a mine… a Temple to Attending… Stillwater's Trouble has barriers, a wall, skeletal sentries'). A hold carries FEATURES from this catalogue; each kind names its family (§3 of the spec) and the ONE effect the engine reads for it. material → yields the goods into the store at the hold's condition; martial → the hold is guarded (raids halved) and each defence point cuts a raid's take by defenceShareStep; sentries are a watch that costs no keep; meaning → an aura added to the place's meaningDensity (SPEC_meaning_density — 'a hold IS people living somewhere'); people → quarters raise the hands a hold can work and count as residents; craft → a facility recorded on the place (what it gates is pass three). Priced by CCode; Aevi extends the kinds and their flavour; Erik turns the numbers. A feature is added through play (holdingOps feature) or on the Holdings tab; it records who built it and the crafts used.",
+  "defenceShareStep": 0.15,
+  "minTakeShare": 0.1,
+  "kinds": {
+   "mine": { "family": "material", "yields": "raw_material", "label": "a mine" },
+   "quarry": { "family": "material", "yields": "cut_stone", "label": "a quarry" },
+   "mill": { "family": "material", "yields": "raw_material", "label": "a mill" },
+   "workshop": { "family": "material", "yields": "worked_light", "label": "a workshop" },
+   "herd": { "family": "material", "yields": "living_stock", "label": "a herd or a planting" },
+   "wall": { "family": "martial", "defence": 1, "label": "a wall" },
+   "barrier": { "family": "martial", "defence": 1, "label": "a barrier or a ward-line" },
+   "tower": { "family": "martial", "defence": 2, "label": "a watchtower" },
+   "sentries": { "family": "martial", "defence": 1, "watch": true, "label": "sentries — raised, bound, or posted" },
+   "temple": { "family": "meaning", "aura": 0.2, "label": "a temple" },
+   "shrine": { "family": "meaning", "aura": 0.1, "label": "a shrine" },
+   "quarters": { "family": "people", "hands": 2, "residents": 4, "label": "quarters — homes for the people who work it" },
+   "forge": { "family": "craft", "facility": "forge", "label": "a forge" },
+   "laboratory": { "family": "craft", "facility": "laboratory", "label": "a laboratory" },
+   "scriptorium": { "family": "craft", "facility": "scriptorium", "label": "a scriptorium" }
+  }
+ },
  "regions": [
   {
    "regionId": "the_crossing",

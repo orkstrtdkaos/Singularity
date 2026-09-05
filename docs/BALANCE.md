@@ -1,6 +1,6 @@
 # BALANCE — the dials, what they actually do, and how to turn one without lying to yourself
 
-**CCode · started 2026-08-30 · v1.9.354**
+**CCode · started 2026-08-30 · v1.9.355**
 
 > Erik: *"we need to build toward balance and use the dials."*
 
@@ -64,6 +64,8 @@ What balance means here is narrower and testable:
 | `holdStore.yieldByCondition` / `upkeepByKind` | `economy` | **8 / 4 / 2 / 0** · **enterprise 14, post 0** | Q8 — at ordinary demand: +18 / +2 / −6 / −14 per pass (a unit = `useful` 4 × need × scarcity where sold) |
 | `holdStore.fullAt` / `raid.base` / `takeShare` / `defendedMult` | `economy` | **40 / 0.03 / 0.5 / 0.5** | a full store at danger 4: ~12% raided per pass, ~6% with a garrison |
 | `holdStore.growth.passesPerClimb` / `ceilingByKeeperTier` | `economy` | **4** · notable → holding, regional+ → thriving | Q18 — a kept hold climbs a rung every 4 passes (12 days) to its keeper's ceiling |
+| `holdFeatures.kinds.*` (yields · defence · aura · hands · residents) | `economy` | mine → raw_material · wall 1 / tower 2 · temple 0.2 / shrine 0.1 · quarters +2 hands, 4 homes | what a post becomes — a feature's ONE effect; Aevi extends the kinds |
+| `holdFeatures.defenceShareStep` / `minTakeShare` | `economy` | **0.15 / 0.1** | each defence point cuts a raid's take; a fortress still loses a tenth |
 | `holdStore.growth.handsYieldBonus` / `maxHands` / `garrisonUpkeepPerHand` / `groundYieldWeight` | `economy` | **0.25 / 3 / 3 / 0.5** | hands +25% each; a guard costs 3 a pass and halves raids; ground ×(1 + 0.5 × (density − 0.5)) |
 | `debts.escalatingTags` / `escalateAfterDays` / `maxEscalation` | `economy` | **[debtor] / 30 / 2** | Q5-B — only a holder who reacts to debtors escalates; 3 (bounty) and 4 (hit squad) not built |
 | `crit.*` · `baseChance.*` · `energy.*` | `resolution` | — | the roll itself, and what a turn costs |

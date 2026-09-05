@@ -171,3 +171,16 @@ OWED Q14).** What I would build before that, because it needs no number: the joi
 (*"the mine is running; the watchtower is eating it"* reads straight off `condition` + a `provides` list), and
 `substrateSource` as the first delta — it is authored, read, and the only one that changes a fight (a raised density
 helps precursor and nanite crafts and hurts veil and metaphysical, exactly as you say).
+
+---
+
+## ✅ PASS TWO, FIRST CUT — 2026-09-05 (Erik, by example) · v1.9.355 · `§75`
+
+Erik named what his holds have — *"the Threshold Post is supposed to have a mine… It's also a Temple to Attending… Stillwater's
+Trouble has barriers, a wall, skeletal undead sentries"* — and that is the model: a hold carries **features** from a catalogue
+in this spec's families (`economy.holdFeatures.kinds`), each kind naming the ONE effect the engine reads today: material →
+yields into the store (§3a); martial → guarded, and each defence point cuts a raid's take (§3b); meaning → an aura on the place's
+`meaningDensity` (§3c — *a hold IS people living somewhere*); people → hands and homes (§3d); craft → a facility on the record
+(§3e, what it gates is pass three). Built through play (`holdingOps feature` — who built it, the crafts used) or on the tab.
+⬜ **For Aevi:** extend the kinds and their labels; the numbers are placeholders priced by CCode for Erik to turn. ⬜ §4's four
+that are not numbers stand untouched. ⬜ Q14's counts per size tier are still Erik's.

@@ -145,6 +145,13 @@ steward, your own craft applied to the place, delegates, a garrison, the ground 
 never a per-tick chore. Which of those raise `condition`, by how much, and what a post (as against an enterprise) can become,
 is Erik's. Nothing built; the tab now says so where a player would look.
 
+✅ **AND WHAT A POST BECOMES — BUILT v1.9.355 `§75` (Erik 2026-09-05, by example):** a hold carries FEATURES from
+`economy.holdFeatures.kinds` — a mine yields into the store (a post produces), a temple is a meaning aura on the ground, a
+wall or sentries guard and cut a raid's take, quarters raise the hands and count as homes, a forge is a facility on the record.
+Built through play (`holdingOps feature`) or on the tab. ⬜ Pass three: what a facility GATES (items made, repair, research).
+⬜ Q14's numbers per size tier stay Erik's. Aevi: extend the kinds and their flavour; author the features Silas's holds already
+have in the fiction, or let the narrator record them through play.
+
 ✅ **RULED 2026-09-05 (Erik: "excellent. please build it.") · BUILT v1.9.354 `§74`** — the five boosts as one-time acts:
 a kept hold climbs a rung every 4 passes to its keeper's tier ceiling (notable → holding; regional and above → thriving); a
 carried shaping/mending craft applied once lifts a rung; hands +25% yield each (to 3); a garrison halves raids at 3 a pass

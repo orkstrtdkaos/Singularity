@@ -44,7 +44,7 @@ export function ensureHoldings(character) {
 
 /** Take a holding into your keeping. Idempotent on id — re-claiming a place you already hold updates it
  *  rather than minting a second one. */
-export function addHolding(character, { id, kind = "post", name = null, locationId = null, steward = null, obligation = null, day = null, fromAssignment = null } = {}) {
+export function addHolding(character, { id, kind = "post", name = null, locationId = null, steward = null, obligation = null, day = null, fromAssignment = null, rename = false } = {}) {
   ensureHoldings(character);
   if (!id || !HOLDING_KINDS.includes(kind)) return null;
   let h = character.holdings.find(x => x.id === id);
@@ -57,7 +57,10 @@ export function addHolding(character, { id, kind = "post", name = null, location
     h = { id, kind, name: name || id, locationId, steward, obligation, condition: "holding", claimedDay: day, lastMovedWorldCount: null, history: [], ...(fromAssignment ? { fromAssignment } : {}) };
     character.holdings.push(h);
   } else {
-    if (name) h.name = name;
+    // ⛔ Erik 2026-09-05: "Stillwater's Trouble was named such, but it reverted back to Raven's Home almost immediately." The
+    // narrator re-claims a known hold every few turns with the name it sees in its own block, and this line took it. A name
+    // is the player's; a re-claim keeps it unless the op says `rename`.
+    if (name && (rename || !h.name)) h.name = name;
     if (locationId) h.locationId = locationId;
     if (steward !== null) h.steward = steward;
     if (obligation) h.obligation = obligation;
@@ -139,7 +142,7 @@ export function holdingsForGM(character, effects = null, { hereId = null, nameOf
   ensureHoldings(character);
   if (!character.holdings.length) return null;
   return character.holdings.map(h =>
-    `- ${h.name} (${h.kind}, ${h.condition}${h.steward ? `, kept by ${h.steward}` : (effects?.unstewardedCeiling ? ", kept by your name" : ", UNKEPT")})${here.has(h.id) ? " — YOU ARE STANDING IN IT" : ""}${storeTotal(h) > 0 ? ` · store: ${Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${g}`).join(", ")}` : ""}${h.arrears ? ` · in arrears ${h.arrears}` : ""}${(h.crew || []).length ? ` · hands: ${h.crew.map(id => nameOf ? nameOf(id) : id).join(", ")}` : ""}${(h.garrison || []).length ? ` · guarded by ${h.garrison.map(id => nameOf ? nameOf(id) : id).join(", ")}` : ""}${(h.improvements || []).length ? ` · improved by ${h.improvements.map(i => i.name || i.abilityId).join(", ")}` : ""} · ${holdingSentence(h, { nameOf })}`
+    `- ${h.name} (${h.kind}, ${h.condition}${h.steward ? `, kept by ${h.steward}` : (effects?.unstewardedCeiling ? ", kept by your name" : ", UNKEPT")})${here.has(h.id) ? " — YOU ARE STANDING IN IT" : ""}${storeTotal(h) > 0 ? ` · store: ${Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${g}`).join(", ")}` : ""}${h.arrears ? ` · in arrears ${h.arrears}` : ""}${(h.crew || []).length ? ` · hands: ${h.crew.map(id => nameOf ? nameOf(id) : id).join(", ")}` : ""}${(h.garrison || []).length ? ` · guarded by ${h.garrison.map(id => nameOf ? nameOf(id) : id).join(", ")}` : ""}${(h.improvements || []).length ? ` · improved by ${h.improvements.map(i => i.name || i.abilityId).join(", ")}` : ""}${(h.features || []).length ? ` · has ${h.features.map(f => f.name || f.kind).join(", ")}` : ""} · ${holdingSentence(h, { nameOf })}`
     + (h.obligation
       ? (effects?.obligationDischarged
         ? ` — ${h.obligation}: they draw standing from your holding of it, not the reverse`
@@ -414,7 +417,7 @@ export function yieldFor(holding, cfg, { density = null } = {}) {
   if (!Number.isFinite(base)) return null;
   // ✅ Q18 (SPEC_hold_store §5): more hands, more capacity; a hold on good ground yields better. Both are content.
   const g = cfg.growth || {};
-  const hands = Math.min(Number(g.maxHands) || 0, (holding.crew || []).length);
+  const hands = Math.min(handsCap(holding, cfg), (holding.crew || []).length);
   const handsMult = 1 + hands * (Number(g.handsYieldBonus) || 0);
   // ⚠️ null is "unmeasured", not 0 — `Number(null)` is 0 and would scale every hold with no known ground by ×0.75
   const groundMult = density !== null && density !== undefined && Number.isFinite(Number(density)) && Number.isFinite(Number(g.groundYieldWeight))
@@ -424,13 +427,13 @@ export function yieldFor(holding, cfg, { density = null } = {}) {
 }
 /** A hold is guarded by an authored `defence`, or by a garrison — the list of people on watch (`setGarrison`), or the older
  *  boolean an author may still write. */
-export function isGuarded(holding) {
-  return !!(holding?.defence || (Array.isArray(holding?.garrison) ? holding.garrison.length > 0 : holding?.garrison));
+export function isGuarded(holding, cfg = null) {
+  return !!(holding?.defence || (Array.isArray(holding?.garrison) ? holding.garrison.length > 0 : holding?.garrison) || defenceOf(holding, cfg) > 0);
 }
 export function upkeepFor(holding, cfg) {
   if (!holding || !cfg) return 0;
   const u = holding.upkeepCost ?? (cfg.upkeepByKind || {})[holding.kind];
-  const guards = Array.isArray(holding.garrison) ? holding.garrison.length : 0;
+  const guards = Array.isArray(holding.garrison) ? holding.garrison.length : 0;   // people on watch cost keep; sentries (a feature) do not
   const perGuard = Number(cfg.growth?.garrisonUpkeepPerHand) || 0;
   return Math.max(0, (Number(u) || 0) + guards * perGuard);
 }
@@ -457,12 +460,15 @@ export function storeWorth(holding, { economy = null, regionId = null, cfg = nul
 export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null } = {}) {
   if (!holding || !cfg) return null;
   const out = { yielded: null, upkeep: 0, short: 0, raid: null, full: false, justFull: false };
-  const y = yieldFor(holding, cfg, { density });
-  if (y && y.units > 0) {
+  // ✅ features: a post with a mine yields — every material feature adds its goods beside the hold's own kind
+  const ys = yieldsFor(holding, cfg, { density });
+  for (const y of ys) {
+    if (!(y.units > 0)) continue;
     holding.store = holding.store && typeof holding.store === "object" ? holding.store : {};
     holding.store[y.goods] = (Number(holding.store[y.goods]) || 0) + y.units;
-    out.yielded = y;
   }
+  out.yielded = ys.length ? ys[0] : null;
+  out.yields = ys;
   const up = upkeepFor(holding, cfg);
   if (up > 0) {
     const r = debit(character, cfg.upkeepCurrency || "crystal", up, {});
@@ -476,9 +482,13 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   const raid = cfg.raid || null;
   if (raid && total > 0 && dangerLevel > 0) {
     let p = (Number(raid.base) || 0) * dangerLevel * Math.min(1, total / fullAt);
-    if (isGuarded(holding)) p *= Number.isFinite(Number(raid.defendedMult)) ? Number(raid.defendedMult) : 0.5;
+    if (isGuarded(holding, cfg)) p *= Number.isFinite(Number(raid.defendedMult)) ? Number(raid.defendedMult) : 0.5;
     if (rng() < p) {
-      const share = Math.max(0, Math.min(1, Number.isFinite(Number(raid.takeShare)) ? Number(raid.takeShare) : 0.5));
+      // each defence point (a wall, a barrier, sentries, a tower's two) cuts what a raid can carry off
+      const fcfg = cfg.features || {};
+      const step = Number.isFinite(Number(fcfg.defenceShareStep)) ? Number(fcfg.defenceShareStep) : 0.15;
+      const floor = Number.isFinite(Number(fcfg.minTakeShare)) ? Number(fcfg.minTakeShare) : 0.1;
+      const share = Math.max(floor, Math.min(1, (Number.isFinite(Number(raid.takeShare)) ? Number(raid.takeShare) : 0.5) - step * defenceOf(holding, cfg)));
       const taken = {};
       for (const [g, n] of Object.entries(holding.store || {})) {
         const t = Math.floor((Number(n) || 0) * share);
@@ -499,6 +509,7 @@ export function storeNews(holding, st) {
   const where = holding.name || holding.id;
   const lines = [];
   if (st.raid) lines.push(`Raiders hit ${where} — ${Object.entries(st.raid.taken).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ")} taken.${isGuarded(holding) ? " The watch was not enough." : " Nobody was there to stop them."}`);
+  if (Array.isArray(st.yields) && st.yields.length > 1) { /* several goods — the store line on the tab says which */ }
   if (st.grew) lines.push(`${where} has come up to ${holding.condition}${st.grew.keeper ? ` under ${st.grew.keeper}` : ""}.`);
   if (st.short) lines.push(`${where} could not pay its keep this pass (${st.short} owed) — the arrears sit on the place.`);
   if (st.justFull) lines.push(`The store at ${where} is full — ${Object.entries(holding.store || {}).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ")} sit waiting for a road, a buyer, or a thief.`);
@@ -622,7 +633,7 @@ export function setCrew(character, id, npcIds = [], { cfg = null, worldCount = n
   ensureHoldings(character);
   const h = character.holdings.find(x => x && x.id === id);
   if (!h) return null;
-  const max = Number(cfg?.growth?.maxHands) || 0;
+  const max = handsCap(h, cfg?.growth ? { growth: cfg.growth, features: cfg.features } : cfg);
   const list = [...new Set((npcIds || []).filter(Boolean).filter(n => n !== h.steward))].slice(0, max);
   const before = (h.crew || []).slice();
   h.crew = list;
@@ -647,4 +658,93 @@ export function holdingGround(holding, { locations = {}, substrate = null } = {}
   if (!loc || !substrate) return null;
   const d = locationDensity(loc, substrate);
   return Number.isFinite(d) ? d : null;
+}
+
+/* ═══ FEATURES — what a hold HAS (SPEC_holding_attributes pass two, first cut; Erik 2026-09-05 by example) ═══
+ * `holding.features[] = { kind, name, family, by, craftIds[], count, day }` from the catalogue `economy.holdStore.features`
+ * (`kinds`): a mine yields into the store, a temple is a meaning aura on the ground, a wall or sentries guard the place and
+ * cut a raid's take, quarters raise the hands a hold can work and count as residents, a forge is recorded as a facility.
+ * A feature is added through play (`holdingOps feature`) or on the tab; it records who built it and the crafts used. The
+ * catalogue is the content Aevi extends; the numbers are Erik's to turn. */
+export function featureKinds(cfg) { return (cfg?.features?.kinds) || {}; }
+export function featureDef(kind, cfg) { const k = featureKinds(cfg)[String(kind || "")]; return k ? { kind: String(kind), ...k } : null; }
+export function featuresOf(holding) { return Array.isArray(holding?.features) ? holding.features : []; }
+
+export function addFeature(character, id, { kind, name = null, by = null, craftIds = [], count = 1, day = null, worldCount = null, cfg = null } = {}) {
+  ensureHoldings(character);
+  const h = character.holdings.find(x => x && x.id === id);
+  if (!h) return { ok: false, why: "no such holding" };
+  const def = featureDef(kind, cfg);
+  if (!def) return { ok: false, why: `"${kind}" is not a feature the catalogue knows — Aevi authors kinds in economy.holdStore.features` };
+  const f = { kind: def.kind, family: def.family, name: name || def.label || def.kind, by: by || null, craftIds: (craftIds || []).filter(Boolean), count: Math.max(1, Number(count) || 1), day };
+  h.features = [...featuresOf(h), f];
+  h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `built ${f.name}${f.by ? ` (${f.by})` : ""}${f.craftIds.length ? ` with ${f.craftIds.join(", ")}` : ""}` }].slice(-12);
+  queueHoldingEvent(character, `${h.name || h.id} has ${f.name} now${f.by && f.by !== "you" ? `, ${f.by}'s work` : ""}.`);
+  return { ok: true, feature: f, holding: h };
+}
+
+export function removeFeature(character, id, index, { worldCount = null } = {}) {
+  ensureHoldings(character);
+  const h = character.holdings.find(x => x && x.id === id);
+  if (!h) return null;
+  const list = featuresOf(h);
+  const f = list[index];
+  if (!f) return null;
+  h.features = list.filter((_, i) => i !== index);
+  h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `${f.name} torn down` }].slice(-12);
+  return f;
+}
+
+export function renameHolding(character, id, name, { worldCount = null } = {}) {
+  ensureHoldings(character);
+  const h = character.holdings.find(x => x && x.id === id);
+  const next = String(name || "").trim();
+  if (!h || !next || next === h.name) return h || null;
+  const was = h.name;
+  h.name = next;
+  h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `renamed from ${was} to ${next}` }].slice(-12);
+  queueHoldingEvent(character, `${was} is called ${next} now.`);
+  return h;
+}
+
+/** Defence points: every martial feature's `defence` × its count. */
+export function defenceOf(holding, cfg = null) {
+  let d = 0;
+  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "martial") d += (Number(def.defence) || 0) * (Number(f.count) || 1); }
+  return d;
+}
+/** The hands a hold can work: the growth cap plus what its quarters add. */
+export function handsCap(holding, cfg = null) {
+  let cap = Number(cfg?.growth?.maxHands) || 0;
+  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "people") cap += (Number(def.hands) || 0) * (Number(f.count) || 1); }
+  return cap;
+}
+/** Who lives here: quarters' capacity, the people at work, the watch, the keeper. */
+export function residentsOf(holding, cfg = null) {
+  let homes = 0;
+  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "people") homes += (Number(def.residents) || 0) * (Number(f.count) || 1); }
+  const people = [...new Set([holding?.steward, ...(holding?.crew || []), ...(holding?.garrison || [])].filter(Boolean))];
+  return { homes, people };
+}
+/** Every yield a hold makes this pass: its own kind's, then each material feature's. */
+export function yieldsFor(holding, cfg, { density = null } = {}) {
+  const out = [];
+  const own = yieldFor(holding, cfg, { density });
+  if (own) out.push(own);
+  const base = Number((cfg?.yieldByCondition || {})[holding?.condition]);
+  if (!Number.isFinite(base) || base <= 0) return out;
+  for (const f of featuresOf(holding)) {
+    const def = featureDef(f.kind, cfg);
+    if (def?.family !== "material" || !def.yields) continue;
+    const proto = { ...holding, kind: "enterprise", yields: def.yields };
+    const y = yieldFor(proto, cfg, { density });
+    if (y) out.push({ ...y, units: y.units * (Number(f.count) || 1), feature: f.name || f.kind });
+  }
+  return out;
+}
+/** The meaning a hold's temples and shrines add to the place it stands in (SPEC_meaning_density: a hold IS people living somewhere). */
+export function holdingMeaningAura(character, locationId, cfg = null) {
+  let aura = 0;
+  for (const h of holdingsAt(character, locationId)) for (const f of featuresOf(h)) { const def = featureDef(f.kind, cfg); if (def?.family === "meaning") aura += (Number(def.aura) || 0) * (Number(f.count) || 1); }
+  return Math.round(aura * 1000) / 1000;
 }

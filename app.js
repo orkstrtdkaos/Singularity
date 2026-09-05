@@ -60,7 +60,7 @@ import { enterDeathState } from "./engine/death.js";
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
-import { addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
@@ -122,7 +122,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.354";
+const APP_VERSION = "1.9.355";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3375,6 +3375,7 @@ function groundRow(ability) {
       foothills: CONTENT.foothills,
       // ✅ R38: who is here weighs on the meaning a metaphysical craft can reach
       present: peoplePresentAt(hereNow()?.id, { registry: character?.npcRegistry || {}, npcs: CONTENT.npcs || {} }),
+      meaningAura: holdingMeaningAura(character, hereNow()?.id, holdCfgNow()),   // a temple you hold here is meaning on the ground
     });
     if (!g) return "";
     const pips = "◉".repeat(g.strength) + "◎".repeat(4 - g.strength);
@@ -6477,7 +6478,7 @@ function applyTurn(turn, resolution, playerWords = null) {
       const kind = String(op?.op || "").toLowerCase();
       const id = String(op?.id || "").trim();
       if (!id) continue;
-      if (kind === "claim") addHolding(character, { id, kind: op.kind || "post", name: op.name, locationId: op.locationId || location.id, steward: op.steward || null, obligation: op.obligation || null, day: absoluteWorldDay() });
+      if (kind === "claim") addHolding(character, { id, kind: op.kind || "post", name: op.name, rename: op.rename === true, locationId: op.locationId || location.id, steward: op.steward || null, obligation: op.obligation || null, day: absoluteWorldDay() });
       else if (kind === "steward") { const h = (character.holdings || []).find(x => x.id === id); if (h) h.steward = op.steward || null; }
       // ⛔ SPEC_holding_release_transfer — this was a bare filter: the obligation vanished, the steward was silently
       // un-charged, nothing was said. Both exits are operations now, recorded and announced once by the tick.
@@ -6492,6 +6493,9 @@ function applyTurn(turn, resolution, playerWords = null) {
       else if (kind === "improve") { const r = improveHolding(character, id, op.abilityId, { catalog: fullCatalog(), cfg: CONTENT.rules?.economy?.holdStore, day: absoluteWorldDay(), worldCount: worldCount() }); if (!r.ok) console.warn("[holdingOps] improve refused:", r.why); }
       else if (kind === "crew") setCrew(character, id, op.npcIds || (op.npcId ? [op.npcId] : []), { cfg: CONTENT.rules?.economy?.holdStore, worldCount: worldCount() });
       else if (kind === "garrison") setGarrison(character, id, op.npcIds || (op.npcId ? [op.npcId] : []), { worldCount: worldCount() });
+      // ✅ features and names — what a hold HAS, and what it is called
+      else if (kind === "feature") { const r = addFeature(character, id, { kind: op.kind, name: op.name || null, by: op.by || null, craftIds: op.craftIds || (op.abilityId ? [op.abilityId] : []), count: op.count || 1, day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow() }); if (!r.ok) console.warn("[holdingOps] feature refused:", r.why); }
+      else if (kind === "rename") renameHolding(character, id, op.name, { worldCount: worldCount() });
     }
   });
   // ✅ Q5-B: a debt the fiction leaves — recorded to a HOLDER, settled by the purse, forgiven by a deed.
@@ -7189,6 +7193,7 @@ function substrateForAction(choice, location) {
     schools: CONTENT.schools, substrate: CONTENT.substrateModel, location, locations: CONTENT.locations,
     powerSources: CONTENT.powerSources, foothills: CONTENT.foothills, carried,
     present: peoplePresentAt(location?.id, { registry: character?.npcRegistry || {}, npcs: CONTENT.npcs || {} }),
+    meaningAura: holdingMeaningAura(character, location?.id, holdCfgNow()),
   });
   if (!g || !g.grounded) return null;
   const verdict = { factor: g.factor, side: g.side, percent: g.percent, chancePenalty: g.chancePenalty, energyMult: g.energyMult, off: g.off,
@@ -10655,6 +10660,29 @@ function wireHoldingOffers() {
     releaseHolding(character, id, { reason: "given up", day: absoluteWorldDay(), worldCount: worldCount() });
     saveCharacter(character); again();
   };
+  // ✅ features and the name
+  for (const btn of app.querySelectorAll("[data-hold-feature]")) btn.onclick = () => {
+    const id = btn.dataset.holdFeature, sel = app.querySelector(`[data-hold-kind="${id}"]`), nameEl = app.querySelector(`[data-hold-fname="${id}"]`);
+    if (!sel?.value) return;
+    const r = addFeature(character, id, { kind: sel.value, name: (nameEl?.value || "").trim() || null, by: "you", day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow() });
+    if (!r.ok) { alert(r.why); return; }
+    saveCharacter(character); again();
+  };
+  for (const btn of app.querySelectorAll("[data-hold-unfeature]")) btn.onclick = () => {
+    const h = (character.holdings || []).find(x => x.id === btn.dataset.holdUnfeature);
+    const f = h?.features?.[Number(btn.dataset.index)];
+    if (!f || !confirm(`Tear down ${f.name || f.kind}?`)) return;
+    removeFeature(character, btn.dataset.holdUnfeature, Number(btn.dataset.index), { worldCount: worldCount() });
+    saveCharacter(character); again();
+  };
+  for (const btn of app.querySelectorAll("[data-hold-rename]")) btn.onclick = () => {
+    const h = (character.holdings || []).find(x => x.id === btn.dataset.holdRename);
+    if (!h) return;
+    const next = prompt("Call it:", h.name || "");
+    if (next == null) return;
+    renameHolding(character, h.id, next, { worldCount: worldCount() });
+    saveCharacter(character); again();
+  };
   // ✅ Q18: the boosts
   const nmOf = (x) => character?.npcRegistry?.[x]?.name || CONTENT.npcs?.[x]?.name || x;
   for (const btn of app.querySelectorAll("[data-hold-improve]")) btn.onclick = () => {
@@ -10748,6 +10776,11 @@ function wireHoldingOffers() {
  *  is the first surface any of them have had), the PERSONNEL actually recorded, and what holdings already
  *  DO — `canRaiseBand` has tied a following to holding two places since it was written, and no screen
  *  ever said so. ⬜ The other five are specced in po/SPEC_holdings_estate.md rather than mocked here. */
+/** The hold dials the engine reads, with the feature catalogue beside them (economy.holdStore + economy.holdFeatures). */
+function holdCfgNow() {
+  const hs = CONTENT.rules?.economy?.holdStore;
+  return hs ? { ...hs, features: CONTENT.rules?.economy?.holdFeatures || null } : null;
+}
 function renderHoldingsTab() {
   const rules = CONTENT.rules;
   const ladder = rules.subAttributeLadder;
@@ -10780,9 +10813,10 @@ function renderHoldingsTab() {
         <div class="hint">${esc(h.kind || "post")} · ${esc(h.condition || "holding")}${loc ? " · " + esc(loc) : ""}${h.steward ? " · kept by " + esc(nameOf(h.steward)) : " · <em>unkept</em>"}</div>
         ${h.obligation ? `<div class="hint">owes: ${esc(h.obligation)}</div>` : ""}
         ${(() => { // ✅ 2026-09-05 (Erik: "I can't open them to see what they produce and who is assigned, who lives there"): what is REAL, per hold
-          const cfgS = CONTENT.rules?.economy?.holdStore || null;
-          const y = yieldFor(h, cfgS, { density: holdingGround(h, { locations: CONTENT.locations || {}, substrate: CONTENT.substrateModel || null }) }), up = upkeepFor(h, cfgS);
-          const produces = y ? `${y.units} ${String(y.goods).replace(/_/g, " ")} per pass while ${h.condition}${y.hands ? ` (${y.hands} extra hand${y.hands === 1 ? "" : "s"})` : ""}${y.groundMult && y.groundMult !== 1 ? ` (ground ×${y.groundMult})` : ""}` : (h.kind === "post" ? "nothing — a post holds ground, it does not produce" : "nothing yet");
+          const cfgS = holdCfgNow();
+          const ys = yieldsFor(h, cfgS, { density: holdingGround(h, { locations: CONTENT.locations || {}, substrate: CONTENT.substrateModel || null }) }), up = upkeepFor(h, cfgS);
+          const y = ys[0] || null;
+          const produces = ys.length ? ys.map(yy => `${yy.units} ${String(yy.goods).replace(/_/g, " ")}${yy.feature ? ` (${yy.feature})` : ""}`).join(" + ") + ` per pass while ${h.condition}${y.hands ? ` (${y.hands} extra hand${y.hands === 1 ? "" : "s"})` : ""}${y.groundMult && y.groundMult !== 1 ? ` (ground ×${y.groundMult})` : ""}` : (h.kind === "post" ? "nothing yet — a post holds ground; a mine, a mill or a herd built here would" : "nothing yet");
           const here = hereNow();
           const where = h.locationId ? esc(CONTENT.locations?.[h.locationId]?.name || h.locationId)
             : `<em>not recorded</em>${here?.id ? ` <button class="opt" data-hold-here="${esc(h.id)}" title="Record that this hold is the place you are standing in">It's here — ${esc(here.name || here.id)}</button>` : ""}`;
@@ -10790,7 +10824,7 @@ function renderHoldingsTab() {
           return `<div class="hint">where: ${where}</div>
         <div class="hint">keeper: ${h.steward ? esc(nameOf(h.steward)) : "<em>nobody</em>"} · produces: ${esc(produces)}${up > 0 ? ` · keep: ${up} crystal per pass` : ""}</div>
         ${crew.length ? `<div class="hint">at work here: ${crew.join("; ")}</div>` : ""}
-        <div class="hint">who lives here: <em>not recorded — a hold carries no residents yet (RULINGS OWED Q14)</em></div>
+        <div class="hint">who lives here: ${(() => { const r = residentsOf(h, holdCfgNow()); return r.homes || r.people.length ? `${r.people.map(id => esc(nameOf(id))).join(", ") || "nobody named"}${r.homes ? ` · homes for ${r.homes}` : ""}` : "<em>nobody yet — quarters would house the people who work it</em>"; })()}</div>
         ${(() => { // ✅ Q18: the boosts — a craft put to the place, hands, a watch; and how it grows on its own
           const g = CONTENT.rules?.economy?.holdStore?.growth || null;
           if (!g) return "";
@@ -10806,6 +10840,15 @@ function renderHoldingsTab() {
           ${(h.crew || []).length || (h.garrison || []).length ? `<button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button>` : ""}
         </div>`; })()}
         `; })()}
+        ${(() => { // ✅ FEATURES — what the hold HAS (SPEC_holding_attributes pass two): built through play or here, read every pass
+          const cfgF = holdCfgNow(); const kinds = featureKinds(cfgF);
+          const list = (h.features || []).map((f, i) => `<span>${esc(f.name || f.kind)}${f.count > 1 ? ` ×${f.count}` : ""}${f.by && f.by !== "you" ? ` (${esc(nameOf(f.by))})` : ""} <button class="opt" data-hold-unfeature="${esc(h.id)}" data-index="${i}" title="Tear it down" style="padding:0 4px">×</button></span>`).join(" · ");
+          const opts = Object.entries(kinds).map(([k, d]) => `<option value="${esc(k)}">${esc(d.label || k)}</option>`).join("");
+          return `<div class="hint">has: ${list || "<em>nothing built yet</em>"}</div>
+        <div class="opt-row" style="margin-top:4px;gap:6px;flex-wrap:wrap">
+          ${opts ? `<select data-hold-kind="${esc(h.id)}">${opts}</select><input data-hold-fname="${esc(h.id)}" placeholder="what it is called (optional)" style="max-width:220px"><button class="opt" data-hold-feature="${esc(h.id)}" title="Record something built here — a mine, a wall, a temple, sentries, quarters">Add what was built</button>` : ""}
+          <button class="opt" data-hold-rename="${esc(h.id)}" title="Name it — a re-claim will not change it back">Rename</button>
+        </div>`; })()}
         ${storeTotal(h) > 0 ? `<div class="hint">store: ${esc(Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", "))}${(() => { const w = storeWorth(h, { economy: CONTENT.rules?.economy, regionId: CONTENT.locations?.[h.locationId]?.regionId || null, cfg: CONTENT.rules?.economy?.holdStore }); return w ? ` · worth ~${w} crystal here` : ""; })()}${h.arrears ? ` · in arrears ${h.arrears}` : ""}</div>` : ""}
         ${h.fromAssignment ? `<div class="hint">from work you delegated</div>` : ""}
         <div class="opt-row" style="margin-top:4px;gap:6px;flex-wrap:wrap">

@@ -327,7 +327,7 @@ export function locationDensity(location, data) {
  *  carries meaning; a place loses it when they leave). The weights are content (`the_substrate.meaning`) and a first pass
  *  is deliberately crude — the SHAPE is what was ruled. Returns null when no dials are authored, so nothing reads a
  *  number nobody chose. Pure. */
-export function meaningDensity(location, { present = 0, data = null } = {}) {
+export function meaningDensity(location, { present = 0, data = null, aura = 0 } = {}) {
   const m = data?.meaning;
   if (!location || !m) return null;
   let v = Number(m.base) || 0;
@@ -336,6 +336,7 @@ export function meaningDensity(location, { present = 0, data = null } = {}) {
   v += Number((m.tier || {})[String(location.tier || "")]) || 0;
   if (location.communityId) v += Number(m.community) || 0;
   v += Math.min(Number(m.presentCap) || 0, (Number(present) || 0) * (Number(m.perPerson) || 0));
+  v += Number(aura) || 0;   // a hold's temple or shrine standing here (holdings.holdingMeaningAura)
   return Math.max(0, Math.min(1, v));
 }
 
@@ -566,7 +567,7 @@ export function groundCardFor(ability, character, { schools, substrate, location
   // from THIS card — the craft's own source, the per-source field at the site, one tuning — so the card and the roll can
   // never disagree about what a craft is worth here. `carried` is the roll's term (a Waystaff, a companion's aura) and
   // `present` is R38's (who is there); a card caller that passes neither sees the card it saw before.
-  carried = 0, present = 0 } = {}) {
+  carried = 0, present = 0, meaningAura = 0 } = {}) {
   const cs = craftSource(ability, character, schools, powerSources, foothills);
   if (!cs) return null;
   // ⛔ SNG-385 — THE CARD READS THE SOURCE'S OWN FIELD. A nanite craft scored against lattice density
@@ -614,7 +615,7 @@ export function groundCardFor(ability, character, { schools, substrate, location
   // "none"` (a body craft under a metaphysical source — Aevi's ki_wield case) — reader before field.
   const meaningSources = new Set((substrate?.meaning?.appliesTo || []).map(String));
   const readsMeaning = meaningSources.has(String(cs.source)) && ability?.mechanic?.meaning !== "none";
-  const meaning = readsMeaning && location ? meaningDensity(location, { present, data: substrate }) : null;
+  const meaning = readsMeaning && location ? meaningDensity(location, { present, data: substrate, aura: meaningAura }) : null;
   const ceiling = readsMeaning ? meaningCeiling(meaning, substrate) : null;
   let meaningBound = false;
   if (ceiling !== null && v.factor > ceiling) {

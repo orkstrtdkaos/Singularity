@@ -4874,8 +4874,9 @@ console.log("\n── §72 · a keeper is a delegate, not a companion; the wiped
     check("§72: ⛔ the repair step exists (holdings-keeper-restored) and restores from the assignment's person", /id: "holdings-keeper-restored"/.test(rd("engine/reconcile.js")) && /h\.steward = npcId;/.test(rd("engine/reconcile.js")));
   }
   const app72 = rd("app.js");
-  check("§72: …the Holdings tab shows what is REAL per hold — where (or *It's here*), the keeper, what it produces per pass, the keep, who is at work, and that residents are not modelled",
-    /data-hold-here=/.test(app72) && /yieldFor\(h, cfgS/.test(app72) && /produces: \$\{esc\(produces\)\}/.test(app72) && /at work here:/.test(app72) && /who lives here:/.test(app72) && /RULINGS OWED Q14/.test(app72));
+  // ⚠️ §75 (the same day) answered "who lives here" with quarters and the people at the hold — the line no longer says "not modelled".
+  check("§72: …the Holdings tab shows what is REAL per hold — where (or *It's here*), the keeper, what it produces per pass, the keep, who is at work, who lives here",
+    /data-hold-here=/.test(app72) && /yieldsFor\(h, cfgS/.test(app72) && /produces: \$\{esc\(produces\)\}/.test(app72) && /at work here:/.test(app72) && /who lives here:/.test(app72) && /residentsOf\(h, holdCfgNow\(\)\)/.test(app72));
   check("§72: …and the pin writes the place you stand in onto the hold, with history", /h\.locationId = here\.id;/.test(app72) && /note: `placed at \$\{here\.name \|\| here\.id\}`/.test(app72));
   check("§72: …the body says a keeper is a delegate, and Q17 names the unclaimed post", /keeperGone/.test(rd("docs/HOW_IT_WORKS.md")) && /Q17/.test(rd("docs/RULINGS.md")) && /Whistling Woman/.test(rd("po/DECISIONS_OWED_20260904.md")));
 }
@@ -4989,6 +4990,88 @@ console.log("\n── §74 · a hold grows — the keeper's ceiling, a craft app
     /claim\|steward\|release\|transfer\|sell\|improve\|crew\|garrison/.test(gm74) && /kind === "improve"/.test(app74) && /kind === "crew"/.test(app74) && /kind === "garrison"/.test(app74)
     && /data-hold-improve=/.test(app74) && /data-hold-crew=/.test(app74) && /data-hold-guard=/.test(app74) && /grows: /.test(app74) && /improveHolding\(character, id, sel\.value/.test(app74));
   check("§74: …the body and the index say so", /growHolding/.test(rd("docs/HOW_IT_WORKS.md")) && /~~\*\*Q18\*\*~~/.test(rd("docs/RULINGS.md")));
+}
+/* ═════ §75 — A HOLD CARRIES FEATURES: what a post becomes; and a re-claim no longer renames it (Erik, 2026-09-05) ═════ */
+// By example: the Threshold Post "is supposed to have a mine" and is "a Temple to Attending"; Stillwater's Trouble has "barriers,
+// a wall, skeletal sentries" and "reverted back to Raven's Home almost immediately". A catalogue of feature KINDS in Aevi's
+// families, each with the ONE effect the engine reads; a name that is the player's.
+console.log("\n── §75 · features — a mine yields, a temple carries meaning, a wall guards, quarters house; the name stands ──");
+{
+  const H75 = await import("../engine/holdings.js");
+  const WT75 = await import("../engine/worldtick.js");
+  const SUB75 = await import("../engine/substrate.js");
+  const { loadContentHeadless: lch75 } = await import("./headless_content.mjs");
+  const C75 = await lch75();
+  const eco = C75.rules.economy, kinds = eco.holdFeatures?.kinds || {};
+  const cfgAll = { ...eco.holdStore, features: eco.holdFeatures };
+  check("§75: ⛔ the catalogue is content, in Aevi's families — a mine yields raw material, a temple is an aura, a wall is a defence point, sentries a watch, quarters hands and homes, a forge a facility",
+    kinds.mine?.family === "material" && kinds.mine.yields === "raw_material" && kinds.temple?.family === "meaning" && kinds.temple.aura > 0 && kinds.wall?.family === "martial" && kinds.wall.defence === 1
+    && kinds.sentries?.watch === true && kinds.quarters?.family === "people" && kinds.quarters.hands > 0 && kinds.quarters.residents > 0 && kinds.forge?.family === "craft" && Number.isFinite(eco.holdFeatures.defenceShareStep));
+  const mk = () => { const c = { id: "pc", purse: { crystal: 500 }, company: [], holdingOffers: [], worldState: { assignments: {} }, abilities: [], npcRegistry: { fendt: { name: "Fendt", status: "active", level: 15 } }, holdings: [], holdingEvents: [] };
+    H75.addHolding(c, { id: "threshold", kind: "post", name: "Threshold Post", locationId: "ridge", steward: "fendt", day: 1 }); c.holdings[0].condition = "thriving"; c.holdings[0].lastMovedWorldCount = 0; return c; };
+  // ── a post with a mine PRODUCES
+  const c1 = mk();
+  const bad = H75.addFeature(c1, "threshold", { kind: "casino", cfg: cfgAll });
+  const mine = H75.addFeature(c1, "threshold", { kind: "mine", by: "fendt", craftIds: ["stonewise"], day: 3, worldCount: 10, cfg: cfgAll });
+  check("§75: ⛔ a kind the catalogue does not know is refused (Aevi authors kinds); a mine is recorded with who built it and the craft used",
+    bad.ok === false && /not a feature the catalogue knows/.test(bad.why) && mine.ok && c1.holdings[0].features.length === 1 && c1.holdings[0].features[0].by === "fendt" && c1.holdings[0].features[0].craftIds[0] === "stonewise"
+    && /built a mine \(fendt\) with stonewise/.test(c1.holdings[0].history.slice(-1)[0]?.note || "") && H75.takeHoldingEvents(c1).some(t => /Threshold Post has a mine now/.test(t)));
+  const ys = H75.yieldsFor(c1.holdings[0], cfgAll);
+  check("§75: ⛔ …and the POST now yields — raw material at its condition, from the mine, where its own kind yields nothing",
+    H75.yieldFor(c1.holdings[0], cfgAll) === null && ys.length === 1 && ys[0].goods === "raw_material" && ys[0].units === eco.holdStore.yieldByCondition.thriving && ys[0].feature === "a mine", JSON.stringify(ys));
+  const t = WT75.advanceHoldings({ character: c1, content: C75, rng: () => 0.99 });
+  check("§75: …the TICK puts the mine's ore in the post's store", (c1.holdings[0].store?.raw_material || 0) >= eco.holdStore.yieldByCondition.holding && t.moved === 1, JSON.stringify(c1.holdings[0].store));
+  // ── a temple is meaning on the ground
+  const c2 = mk();
+  H75.addFeature(c2, "threshold", { kind: "temple", name: "the Temple to Attending", by: "you", cfg: cfgAll });
+  const aura = H75.holdingMeaningAura(c2, "ridge", cfgAll);
+  const plain = Object.values(C75.locations).find(l => !(l.tags || []).some(x => ["sacred", "locus", "cult", "home"].includes(x)) && !l.communityId);
+  const m0 = SUB75.meaningDensity(plain, { data: C75.substrateModel }), m1 = SUB75.meaningDensity(plain, { data: C75.substrateModel, aura });
+  const meta = Object.values(C75.abilities).find(a => a.tradition && SUB75.craftSource(a, { domains: { primary: a.tradition }, schools: {} }, C75.schools, C75.powerSources, C75.foothills)?.source === "metaphysical");
+  const chr = { domains: { primary: meta.tradition }, schools: {}, npcRegistry: {} };
+  const card0 = SUB75.groundCardFor(meta, chr, { schools: C75.schools, substrate: C75.substrateModel, location: plain, locations: C75.locations, powerSources: C75.powerSources, foothills: C75.foothills });
+  const card1 = SUB75.groundCardFor(meta, chr, { schools: C75.schools, substrate: C75.substrateModel, location: plain, locations: C75.locations, powerSources: C75.powerSources, foothills: C75.foothills, meaningAura: aura });
+  check("§75: ⛔ a temple at the hold is an AURA on the place — meaningDensity rises by it, and the metaphysical card's meaning and ceiling rise with it",
+    aura === kinds.temple.aura && m1 > m0 && Math.abs(m1 - Math.min(1, m0 + aura)) < 1e-9 && card1.meaning > card0.meaning && card1.ceiling > card0.ceiling && H75.holdingMeaningAura(c2, "elsewhere", cfgAll) === 0,
+    JSON.stringify({ aura, m0, m1, c0: [card0.meaning, card0.ceiling], c1: [card1.meaning, card1.ceiling] }));
+  check("§75: …the wheel's row and the roll hand the hold's aura to the card", /meaningAura: holdingMeaningAura\(character, hereNow\(\)\?\.id/.test(rd("app.js")) && /meaningAura: holdingMeaningAura\(character, location\?\.id/.test(rd("app.js")));
+  // ── walls and sentries guard, and cut the take
+  const c3 = mk();
+  H75.addFeature(c3, "threshold", { kind: "wall", by: "you", craftIds: ["stonewise", "keystone_blow"], cfg: cfgAll });
+  H75.addFeature(c3, "threshold", { kind: "sentries", name: "skeletal sentries", by: "you", count: 4, cfg: cfgAll });
+  const h3 = c3.holdings[0]; h3.store = { raw_material: 40 };
+  check("§75: ⛔ a wall and sentries make the hold GUARDED with nobody on the garrison list, and count as defence points",
+    H75.isGuarded(h3, cfgAll) && !H75.isGuarded({ id: "x", kind: "post" }, cfgAll) && H75.defenceOf(h3, cfgAll) === 1 + 4 && H75.upkeepFor(h3, cfgAll) === 0);
+  const st3 = H75.tickStore(c3, h3, { cfg: cfgAll, economy: eco, dangerLevel: 4, rng: () => 0, day: 5 });
+  // a post with no mine yields nothing, so the raid works on the 40 in store
+  check("§75: ⛔ …a raid that lands takes less for every defence point, never below the floor (5 points: 0.5 − 0.75 → the floor 0.1 of 40 = 4)",
+    st3.raid && st3.raid.taken.raw_material === Math.floor(40 * eco.holdFeatures.minTakeShare) && h3.store.raw_material === 40 - Math.floor(40 * eco.holdFeatures.minTakeShare), JSON.stringify(st3.raid));
+  const open = mk(); open.holdings[0].store = { raw_material: 40 };
+  const stO = H75.tickStore(open, open.holdings[0], { cfg: cfgAll, economy: eco, dangerLevel: 4, rng: () => 0, day: 5 });
+  check("§75: …an unguarded hold still loses the full share", stO.raid && stO.raid.taken.raw_material === Math.floor(40 * eco.holdStore.raid.takeShare));
+  // ── quarters house and raise the hands
+  const c4 = mk();
+  H75.addFeature(c4, "threshold", { kind: "quarters", by: "fendt", cfg: cfgAll });
+  H75.setCrew(c4, "threshold", ["a", "b", "c", "d", "e", "f"], { cfg: cfgAll, worldCount: 20, nameOf: (x) => x });
+  const res = H75.residentsOf(c4.holdings[0], cfgAll);
+  check("§75: ⛔ quarters raise the hands a hold can work (3 → 5) and answer 'who lives here' with homes and the people at it",
+    H75.handsCap(c4.holdings[0], cfgAll) === eco.holdStore.growth.maxHands + kinds.quarters.hands && c4.holdings[0].crew.length === eco.holdStore.growth.maxHands + kinds.quarters.hands
+    && res.homes === kinds.quarters.residents && res.people.includes("fendt") && res.people.includes("a"), JSON.stringify({ cap: H75.handsCap(c4.holdings[0], cfgAll), res }));
+  // ── the name is the player's
+  const c5 = mk();
+  H75.renameHolding(c5, "threshold", "Stillwater's Trouble", { worldCount: 30 });
+  H75.addHolding(c5, { id: "threshold", kind: "post", name: "Raven's Home", locationId: "ridge", day: 9 });
+  const kept = c5.holdings[0].name;
+  H75.addHolding(c5, { id: "threshold", kind: "post", name: "Raven's Home", rename: true, day: 9 });
+  check("§75: ⛔ a re-claim of a known hold does NOT rename it (the revert Erik saw); only `rename: true` does; the tab's rename writes history and an event",
+    kept === "Stillwater's Trouble" && c5.holdings[0].name === "Raven's Home" && c5.holdings[0].history.some(x => /renamed from Threshold Post to Stillwater's Trouble/.test(x.note || "")) && H75.takeHoldingEvents(c5).some(t => /is called Stillwater's Trouble now/.test(t)));
+  check("§75: …torn down is gone, with history", (() => { const c = mk(); H75.addFeature(c, "threshold", { kind: "wall", cfg: cfgAll }); const f = H75.removeFeature(c, "threshold", 0, { worldCount: 40 }); return f && f.kind === "wall" && c.holdings[0].features.length === 0 && /a wall torn down/.test(c.holdings[0].history.slice(-1)[0]?.note || ""); })());
+  // ── the ops and the tab
+  const app75 = rd("app.js"), gm75 = rd("engine/gm.js");
+  check("§75: …the GM has `feature` and `rename`, a claim carries `rename`, and the tab has *Add what was built* / *Rename* and lists what the hold has",
+    /sell\|improve\|crew\|garrison\|feature\|rename/.test(gm75) && /kind === "feature"/.test(app75) && /kind === "rename"/.test(app75) && /rename: op\.rename === true/.test(app75)
+    && /data-hold-feature=/.test(app75) && /data-hold-rename=/.test(app75) && /data-hold-unfeature=/.test(app75) && /has: \$\{list/.test(app75) && /residentsOf\(h, holdCfgNow\(\)\)/.test(app75));
+  check("§75: …the body and the spec say so", /holdFeatures/.test(rd("docs/HOW_IT_WORKS.md")) && /PASS TWO, FIRST CUT/.test(rd("po/SPEC_holding_attributes.md")));
 }
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));

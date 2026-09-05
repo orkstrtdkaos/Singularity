@@ -446,9 +446,10 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     // store a target. Needs the economy dials and the place; a caller without content sees the tick it saw before.
     const loc = content?.locations?.[h.locationId] || null;
     // ✅ Q18: a KEPT hold climbs on its own, one rung per passesPerClimb, to the ceiling its keeper's tier allows.
-    const grew = growHolding(character, h, { cfg: content?.rules?.economy?.holdStore || null, npcs: content?.npcs || {}, npcCfg: content?.rules?.npcStanding || {},
+    const holdCfg = content?.rules?.economy?.holdStore ? { ...content.rules.economy.holdStore, features: content.rules.economy.holdFeatures || null } : null;
+    const grew = growHolding(character, h, { cfg: holdCfg, npcs: content?.npcs || {}, npcCfg: content?.rules?.npcStanding || {},
       worldCount: count, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), nameOf: (id) => character?.npcRegistry?.[id]?.name || content?.npcs?.[id]?.name || id });
-    const st = tickStore(character, h, { cfg: content?.rules?.economy?.holdStore || null, economy: content?.rules?.economy || null,
+    const st = tickStore(character, h, { cfg: holdCfg, economy: content?.rules?.economy || null,
       regionId: loc?.regionId || null, dangerLevel: Number(loc?.dangerLevel) || 0, rng, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
       density: holdingGround(h, { locations: content?.locations || {}, substrate: content?.substrateModel || null }) });
     if (st && grew) st.grew = grew;

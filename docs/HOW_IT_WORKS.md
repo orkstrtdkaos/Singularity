@@ -462,8 +462,9 @@ working papers; **this is the answer.**
 | 09-05 | ⛔ **A KEEPER IS A DELEGATE, NOT A COMPANION — Silas's two holds lost their keepers on the first tick** | Erik: *"I assigned them… but I can't open them to see what they produce and who is assigned, who lives there; the Whistling Woman post is missing."* Measured on his save: both holds `steward: null` since world count 1612 (the tick wiped a delegate for not travelling with you), `locationId: null` (the charge named no known place), a post produces nothing by content, residents not modelled, the Whistling Woman never claimed by the GM. Fixed: `keeperGone` (dead · departed · left the company), a reconcile step restores the wiped keepers, the tab shows where / keeper / produces / keep / at work here and offers *It's here* to pin a hold; the missing claim is Q17 | `§72` (a delegate keeps, a departed one does not; the repair restores from the assignment; the tab's lines and the pin by source) · smoke 358 reads the corrected rule | body §7d. ⬜ Q17: a post the fiction names but the GM never claims |
 | 09-05 | ⛔ **THE TAB COULD NOT APPOINT A KEEPER — its only selector handed the hold AWAY** | Erik: *"now it says I gave them to the stewards! … it doesn't have me own them."* The person selector sat beside *Hand it over* (a one-way transfer, no confirm), so assigning a steward transferred ownership ("X is Y's to keep now") and the hold left the list; former holdings were shown nowhere. Fixed: *Make them keeper* (`appointKeeper`), a confirm on *Hand it over* that names ownership, a *No longer yours* list with *Take it back* (`reclaimHolding` — history kept, the person keeps it). Finding: nothing in play raises a hold's condition (the tick only stalls or slips) — Q18 | `§73` (appoint sets and logs; a transfer round-trips through reclaim with history; the tab's verbs and the confirm by source; the only condition writer is the tick) | body §7d. ⬜ Q18: how a hold grows |
 | 09-05 | ✅ **A HOLD GROWS (Q18 — Erik: "please build it")** | one-time acts with lasting effects, never a chore (SPEC_hold_store §5): a kept hold climbs a rung every 4 passes to the ceiling its keeper's tier allows (`growHolding`, `ceilingByKeeperTier`); a carried craft applied to the place lifts it a rung once (`improveHolding`, `improveFunctions`); hands raise the yield (`setCrew`, +25% each to 3); a garrison halves raids and costs 3 a pass (`setGarrison`); the ground scales an enterprise's yield (`holdingGround`, ±); the GM's `holdingOps improve/crew/garrison`; the tab's *Apply a craft* / *Add hands* / *Post a guard* | `§74` (a notable keeper stops at holding and a regional reaches thriving on the schedule; unkept never climbs; a non-shaping craft refused, a craft once; hands and ground in the yield; the garrison in the keep and the raid; the ops and the tab by source) | body §7d. Priced by CCode — Erik turns `economy.holdStore.growth`. ⬜ what a post can become |
+| 09-05 | ✅ **A HOLD CARRIES FEATURES — what a post becomes; and a re-claim no longer renames it** | Erik by example: a mine and a Temple to Attending at the Threshold Post; barriers, a wall and skeletal sentries at Stillwater's Trouble; "it reverted back to Raven's Home almost immediately". `economy.holdFeatures.kinds` in Aevi's families (material yields into the store — a post with a mine produces; martial guards and cuts a raid's take; meaning is an aura on the ground; people raise hands and count as homes; craft is a facility on the record); `addFeature`/`removeFeature`/`renameHolding`; `holdingOps feature/rename` and `claim` keeps a known hold's name unless `rename: true`; the tab's *Add what was built* / *Rename*; `who lives here` answered | `§75` (a post with a mine yields on the tick; a temple's aura reaches the card; a wall cuts the take and sentries guard without keep; quarters raise the hands cap and count homes; a re-claim keeps the name; the ops and the tab by source) | body §7d. Aevi extends the catalogue; Erik turns the numbers. ⬜ what a facility gates (pass three) |
 
-**Last verified: 2026-09-05 · v1.9.354 · 421 crafts.**
+**Last verified: 2026-09-05 · v1.9.355 · 421 crafts.**
 
 ---
 
@@ -1353,8 +1354,22 @@ a craft the character carries, put to the place (`improveHolding` — *Apply a c
 lifts it a rung at once, once per craft per hold, when the craft shapes or mends (make · mend · restore · transform · sustain ·
 empower); each extra HAND (`setCrew`, up to 3) adds a quarter to the yield; a GARRISON (`setGarrison`) halves a raid and costs
 3 crystal a pass per guard; the GROUND scales an enterprise's yield by ½ × (density − ½) — dense lattice ×1.2, thin ×0.85.
-The GM has the three ops; the tab has the three buttons and says how the hold grows. ⬜ What a post can BECOME is not built:
-a post climbs, keeps hands and a watch, and produces nothing. `§74`.
+The GM has the three ops; the tab has the three buttons and says how the hold grows. `§74`.
+
+✅ **AND A HOLD CARRIES FEATURES — what a post becomes (Erik, 2026-09-05, by example: the Threshold Post "is supposed to
+have a mine" and is "a Temple to Attending"; Stillwater's Trouble has "barriers, a wall, skeletal sentries").** A hold's
+`features[]` come from a catalogue in Aevi's families (`economy.holdFeatures.kinds` — material · martial · meaning · people ·
+craft), each kind naming the ONE effect the engine reads: a **mine / quarry / mill / workshop / herd** yields its goods into
+the store at the hold's condition (`yieldsFor` — a post with a mine produces); a **wall / barrier / tower / sentries** make
+the hold guarded and each defence point cuts a raid's take by 0.15 (sentries are a watch that costs no keep — raised, bound
+or posted); a **temple / shrine** is a meaning AURA on the place (`holdingMeaningAura` → `meaningDensity` → the ground card
+and the roll — SPEC_meaning_density's *"a hold IS people living somewhere"*); **quarters** raise the hands a hold can work
+and count as homes (`residentsOf` answers "who lives here"); a **forge / laboratory / scriptorium** is a facility on the
+record (what it gates is pass three). A feature is built through play (`holdingOps feature` — kind, who, the crafts used) or
+on the tab (*Add what was built*), and torn down there. ⛔ **And the name is the player's:** *Stillwater's Trouble* reverted
+to *Raven's Home* because the narrator re-claims a known hold every few turns with the name in its own block and `addHolding`
+took it; a re-claim keeps the name now unless the op says `rename`, and the tab has *Rename*. `§75`. Aevi extends the kinds
+and their flavour; the numbers are Erik's.
 Readers before fields:
 `holding.yields`, `upkeepCost`, `defence`, `garrison` — authored on a record, they win. ⬜ Moving goods to market, trade
 contracts as an `obligation`, and a raid resolved as a fight are the spec's open questions, answered in its ROUND 2. `§69`.

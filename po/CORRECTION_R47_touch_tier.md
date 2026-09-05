@@ -62,3 +62,53 @@ a touch tier that kept a die would be r1 at a discount, which is a different and
 
 ⛔ **CCODE WAS RIGHT TO STOP AND REPORT RATHER THAN BUILD ON IT.** ⚠️ **The premise was the whole of the
 ruling's justification, and it was false.**
+
+---
+
+## ⛔ SECOND CORRECTION — `contactOnly` IS WRONG, AND IT WAS WRONG FROM THE START
+
+> Erik 2026-09-05: *"I don't think it's appropriate for all skills to have to touch. **Silas isn't a physical
+> guy.** So a T1 zero-cost could still be a **ranged attack**."*
+
+⚠️ **`contactOnly: true` HAS BEEN IN `touchTierOf` SINCE CCODE-266 AND AEVI NEVER QUESTIONED IT** — she wrote
+the spec it came from and quoted it back twice today as though it were settled.
+
+### ⛔ THE MEASUREMENT MAKES THE POINT
+
+**Silas — 28 crafts:**
+
+| | |
+|---|---|
+| attributes | ⚑ **mental 15 · practical 8 · social 2 · physical 3** |
+| sub-attributes | ⛔ **strength 4, agility 5** against **craft 10, presence 9** |
+| his T1 crafts | `order_sense` · `deathsense` (⚑ **range 20**) · `palework` · `raised_thing` · `named_exclusion` · `hunters_strike` |
+
+➡️ ⛔ **UNDER `contactOnly` THE LEAST PHYSICAL CHARACTER IN THE GAME MUST WALK UP AND TOUCH SOMEONE TO USE HIS
+OWN TRADITION AT ZERO ENERGY.** ⚠️ **A `deathsense` that reaches twenty paces at full price would reach zero
+at no price. That is not a floor, it is a different craft.**
+
+### ✅ THE RULE, RESTATED
+
+⛔ **THE FREE FLOOR STRIPS FORCE, NOT REACH.**
+
+| the floor KEEPS | the floor LOSES |
+|---|---|
+| ⚑ **the craft's native reach** — a ranged craft stays ranged, a touch craft stays touch | ⛔ **the dice** |
+| ⚑ **its native form** — a whisper is still a whisper, a look is still a look | ⛔ **ongoing harm** |
+| **one target** | ⛔ **area** |
+| | ⛔ **anything the ranks added** |
+
+⚠️ **WHAT MAKES IT FREE IS THAT IT DOES ALMOST NOTHING — not that you are adjacent.**
+
+✅ **`contactOnly` SURVIVES ONLY WHERE THE CRAFT IS CONTACT-NATIVE.** ⚑ `kept_vigil` is a hand on someone
+because **that craft is the contact** — Aevi's original case, and it stands. ⛔ **`deathsense` is not.**
+
+### ⚠️ AND THE FIFTEEN AUTHORED THIS MORNING NEED RE-READING
+
+**Several assume a hand where the craft does not:** `deathsense` (*"a hand on the cooling skin"* — ⛔ **it
+reaches 20**), `read_the_fight`, `darksight`, `makers_eye`. ⬜ **Aevi re-authors them at the craft's own
+reach.** ✅ `kept_vigil`, `steady_hands`, `held_repair`, `carried_name` are correct as written — **those are
+contact crafts.**
+
+⛔ **AND THE FIELD NAME IS NOW WRONG.** `touchTier` says contact in its name. ⬜ **`freeTier` or `floorTier`
+is what it is.** ⚠️ **CCode's call — a rename touches the reader; the concept is what matters.**

@@ -156,22 +156,62 @@ export function resolveTier(ability, wantRank, ownedRank = 1) {
  *  dice, no ongoing, no area. A touch tier that kept a die would be r1 at a discount, which is a different
  *  and much worse idea.
  */
-export function touchTierOf(ability, { cfg = {} } = {}) {
-  const declared = ability?.touchTier;
-  if (!declared) return null;
+/** ✅ R47 CORRECTED (Erik via Aevi, 2026-09-05 — po/CORRECTION_R47_touch_tier.md). Two errors, both hers, both reported by
+ *  the census this reader's own gate printed:
+ *
+ *  ⛔ **IT WAS OPT-IN AND NOTHING OPTED IN.** `touchTier` was authored on 0 of 421 crafts, so *"every craft already offers a
+ *  free move"* was a ladder with no rungs. ⚑ **The floor is DERIVED:** 153 crafts are T1 and 120 carry a contact-plausible
+ *  function, and Erik's words were *"the zero-cost fallbacks of his T1 skills"* — broad, not curated. An opt-in field 120
+ *  records must each restate is a stored copy of a derivable fact, which this project has ruled against twice
+ *  (`ringDistance`, `meaningDensity`). An authored block OVERRIDES and carries the prose; `false` excludes outright.
+ *
+ *  ⛔ **AND `contactOnly` WAS IN THE MECHANISM FROM CCODE-266 AND WAS NEVER QUESTIONED.** ⚑ **THE FLOOR STRIPS FORCE, NOT
+ *  REACH:** it keeps the craft's native reach and its native form and one target; it loses the dice, ongoing harm, area, and
+ *  everything the ranks added. ⚠️ *"What makes it free is that it does almost nothing — not that you are adjacent."* Under
+ *  the old rule Silas — mental 15, `deathsense` reaching 20 — had to walk up and touch someone to use his own tradition at
+ *  zero cost. `contactOnly` now survives ONLY where a craft authors it, because that craft IS the contact (`kept_vigil`).
+ *
+ *  ⚠️ **THE FIELD IS `freeTier`.** `touchTier` named the delivery, and the delivery is the exception; the old name is read
+ *  as a deprecated alias so the blocks authored this morning keep working. */
+export function freeTierOf(ability, { cfg = {} } = {}) {
+  const declared = ability?.freeTier ?? ability?.touchTier;
+  if (declared === false) return null;                       // authored OUT — a craft whose whole act is range or scale
   const spec = (declared === true || typeof declared === "string") ? {} : (declared || {});
+  if (!declared) {
+    // the derived default: a T1 craft whose verb can be done with almost nothing behind it
+    const f = cfg?.freeFloor || {};
+    const at = Number(f.tierAtMost);
+    const verbs = new Set((f.functions || []).map(String));
+    if (!verbs.size || !Number.isFinite(at)) return null;    // no dials, no floor — the content decides this
+    if ((Number(ability?.tier) || 1) > at) return null;
+    const fns = Array.isArray(ability?.functions) ? ability.functions : (ability?.function ? [ability.function] : []);
+    if (!fns.some(v => verbs.has(String(v)))) return null;
+  }
+  const contactOnly = spec.contactOnly === true;             // ⛔ the exception, never the default
   return {
     rank: 0.5,                       // beneath r1 and above r0 — it is LEARNED, unlike the unlearned state
-    name: spec.name || `${ability?.name || "it"}, by hand`,
+    name: spec.name || `${ability?.name || "it"}, with nothing behind it`,
     energyCost: 0,
-    contactOnly: true,
+    ...(contactOnly ? { contactOnly: true } : {}),
+    derived: !declared,
     targets: 1,
     // ⛔ THE STRIPPING IS THE MECHANIC. Named explicitly so a reader can SEE that a touch carries none of it,
     // rather than inferring absence from a missing field — this project has shipped that mistake repeatedly.
     dice: null, ongoingHarm: null, area: null, range: null,
-    why: spec.why || "the craft with no power behind it — you have to be there, and it is barely anything",
+    why: spec.why || "the craft with no power behind it — the shape of the thing and none of the force",
     ...(typeof declared === "string" ? { why: declared } : {}),
   };
+}
+
+/** The old name, kept so nothing that already calls it breaks. ⚠️ Deprecated: the floor is not a touch. */
+export function touchTierOf(ability, opts = {}) { return freeTierOf(ability, opts); }   // registry:internal
+
+/** ✅ R47 step 2: does this KIT yield a free floor? A sheet that has one is not handed "A plain strike" or "Raise a guard";
+ *  a bare sheet still is, which is what Erik kept them for. ⚑ Derived, so it is true for most kits the moment R47 lands —
+ *  which is the point of the correction: the opt-in version would have been true for nobody. */
+export function offersFreeFloor(abilities = [], { cfg = {} } = {}) {
+  for (const ab of abilities) if (ab && freeTierOf(ab, { cfg })) return true;
+  return false;
 }
 
 /** ✅ R47 (Erik 2026-09-05: "eliminating the universal fallbacks… he should just rely on the zero-cost fallbacks of his T1
@@ -182,14 +222,11 @@ export function touchTierOf(ability, { cfg = {} } = {}) {
  *  written, so today this answers false for every character in the game and the fallbacks stay — which is the safe end of
  *  the ruling, not a defeat of it. The moment a craft authors a touch, its bearer stops being handed a bare strike, with
  *  no further code. ⚠️ Reader before field, and the field is Aevi's. */
-export function offersFreeTouch(abilities = [], { cfg = {} } = {}) {
-  for (const ab of abilities) if (ab && touchTierOf(ab, { cfg })) return true;
-  return false;
-}
+export function offersFreeTouch(abilities = [], opts = {}) { return offersFreeFloor(abilities, opts); }   // registry:internal
 
 export function capabilityMenu(ability, ownedRank = 1, opts = {}) {
-  // ⚠️ CCODE-266: the free touch sits BELOW r1 in the menu, so a player meets it before they need it.
-  const touch = touchTierOf(ability, opts);
+  // ⚠️ CCODE-266: the free floor sits BELOW r1 in the menu, so a player meets it before they need it.
+  const touch = freeTierOf(ability, opts);
   const all = capabilitiesOf(ability, ownedRank, opts);
   const distinct = all.filter(c => c.distinct);
   // ⛔ ALWAYS OFFER AT LEAST ONE. A craft whose ranks declare nothing mechanical still has a rank-1 use,

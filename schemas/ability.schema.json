@@ -86,6 +86,38 @@
         "object"
       ]
     },
+    "freeTier": {
+      "description": "R47 (2026-09-05): the craft's FREE FLOOR — zero energy, one target, none of the force. DERIVED for a craft at or below energy.freeFloor.tierAtMost whose verb is in energy.freeFloor.functions; author this to carry the prose or to override, or false for a craft whose whole act is range or scale. The floor keeps the craft's native reach and form — contactOnly is the exception, for a craft that IS the contact.",
+      "oneOf": [
+        { "type": "boolean" },
+        { "type": "string" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string" },
+            "why": { "type": "string" },
+            "contactOnly": { "type": "boolean" }
+          }
+        }
+      ]
+    },
+    "touchTier": {
+      "description": "DEPRECATED alias for freeTier — the old name said contact, and contact is the exception. Read, never written: author freeTier.",
+      "oneOf": [
+        { "type": "boolean" },
+        { "type": "string" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string" },
+            "why": { "type": "string" },
+            "contactOnly": { "type": "boolean" }
+          }
+        }
+      ]
+    },
     "mechanic": {
       "type": "object",
       "additionalProperties": false,

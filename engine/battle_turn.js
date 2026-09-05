@@ -26,7 +26,7 @@ import { synthesizeDuelDef } from "./random_encounters.js";
 import { encounterKind, frameCollapsible, collapseMode, collapseResult, collapseFloor, wardAgainst, wardBroken, swingDegree } from "./encounterFrame.js";
 import { abilityTier } from "./skilltree.js";
 import { effectiveEnergyCost, autoAdvancePracticedRanks, SUB_OF } from "./progression.js";
-import { capabilityMenu, resolveTier, offersFreeTouch } from "./capabilities.js";
+import { capabilityMenu, resolveTier, offersFreeFloor } from "./capabilities.js";
 import { usableCombatItems, wieldBonusFor, consumeItem, removeItem } from "./inventory.js";
 import { recordUse } from "./practice.js";
 import { applyCondition } from "./conditions.js";
@@ -59,7 +59,7 @@ export function battleSkillsForCharacter(character, { catalog = {}, rules = {}, 
   }
   // ✅ R47: the universal fallbacks are RETIRED for anyone whose own crafts carry a free touch — "he should just rely on
   // the zero-cost fallbacks of his T1 skills as we designed". They remain for the bare sheet, which is what they were for.
-  if (!offersFreeTouch((character?.abilities || []).map(a => catalog[a?.abilityId]).filter(Boolean), { cfg: rules?.energy })) {
+  if (!offersFreeFloor((character?.abilities || []).map(a => catalog[a?.abilityId]).filter(Boolean), { cfg: rules?.energy })) {
     out.push({ id: "_strike", function: "strike", tier: 1, attribute: "physical", name: "A plain strike" });
     out.push({ id: "_guard", function: "shield", tier: 1, attribute: "physical", name: "Raise a guard" });
   }

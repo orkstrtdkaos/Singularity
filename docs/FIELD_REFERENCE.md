@@ -39,7 +39,7 @@ file is replaced.**
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **95** | a play-path file names it outside a comment |
+| ✅ **READ** | **96** | a play-path file names it outside a comment |
 | ⛔ **DARK** | **15** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **3** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
@@ -624,7 +624,7 @@ contribute to authored dice without recreating the double-scaling bug.
 |---|---|---|---|---|
 | `rank` | 1694 | `tree`×1182 `rankDeltas`×512 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
 | `name` | 1603 | `root`×421 `tree`×1182 | ✅ READ | `affiliation.js`, `arceffects.js`, `art.js` |
-| `functions` | 1603 | `root`×421 `tree`×1182 | ✅ READ | `battle_turn.js`, `braids.js`, `coliseum.js` |
+| `functions` | 1603 | `root`×421 `tree`×1182 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
 | `harmRung` | 1530 | `root`×421 `tree`×1109 | ✅ READ | `braids.js`, `gm_registry.js`, `intent.js` |
 | `grants` | 1182 | `tree`×1182 | ✅ READ | `braids.js`, `capabilities.js`, `earnedpower.js` |
 | `cannot` | 1182 | `tree`×1182 | ✅ READ | `authormode.js`, `braids.js`, `capabilities.js` |
@@ -653,7 +653,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `energyCost` | 403 | `root`×403 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
 | `levelReq` | 397 | `root`×397 | ✅ READ | `backfill.js`, `braids.js`, `company.js` |
 | `nativeOrCombination` | 394 | `root`×394 | ✅ READ | `braids.js`, `functions.js`, `practice.js` |
-| `shape` | 394 | `root`×394 | ✅ READ | `battleprompt.js`, `company.js`, `craftmechanics.js` |
+| `shape` | 394 | `root`×394 | ✅ READ | `battleprompt.js`, `capabilities.js`, `company.js` |
 | `duration` | 319 | `mechanic`×319 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `npcsheet.js` |
 | `magnitude` | 308 | `mechanic`×308 | ✅ READ | `capabilities.js`, `conditions.js`, `craftmechanics.js` |
 | `rankDeltas` | 284 | `root`×284 | ✅ READ | `craftmechanics.js` |
@@ -681,6 +681,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `conserveSuppresses` | 23 | `root`×23 | ✅ READ | `app.js` |
 | `traditionV2` | 21 | `root`×21 | ⛔ DARK | — |
 | `imposes` | 21 | `tree`×21 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
+| `touchTier` | 18 | `root`×18 | ✅ READ | `capabilities.js` |
 | `upkeep` | 18 | `root`×18 | ✅ READ | `holdings.js` |
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |
 | `obscure` | 16 | `root`×16 | ✅ READ | `skill_battle.js` |

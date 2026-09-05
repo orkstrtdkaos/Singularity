@@ -3300,8 +3300,12 @@ console.log("\n── §49 · the authored sheet actually arrives ──");
     check("§49: …and they are HER crafts, resolved by id",
       bs.skills.some(x => x.id === "stone_read") && bs.skills.some(x => x.id === "thingcraft"),
       bs.skills.slice(0, 5).map(x => x.id).join(" · "));
-    check("§49: ⚠️ …and the plain strike is still there — an NPC is not a different kind of thing",
-      bs.skills.some(x => x.id === "_strike"));
+    // ✅ R47 (2026-09-05): the bare strike is for a kit with NO free floor — Pell's crafts derive one, so she is not handed
+    // it. What §49 exists to protect is PARITY: an NPC is not a different kind of thing, so both menus ask the same rule.
+    // The behaviour of both branches is asserted with fixtures in §76.
+    check("§49: ✅ …and the bare strike follows the SAME rule as the player's menu (R47) — an NPC is not a different kind of thing",
+      /offersFreeFloor\(crafts, \{ cfg: opts\?\.rules\?\.energy \}\)/.test(rd("engine/npcsheet.js"))
+      && /offersFreeFloor\(\(character\?\.abilities/.test(rd("engine/battle_turn.js")));
     // ⚠️ THE OLD FIELD STILL WORKS. Nothing authored it, but a reader that drops a shape it used to
     // accept is a migration disguised as a fix.
     const obs = NS49.battleSkillsFor({ id: "o49", skillsObserved: ["stone_read"] }, { catalog: cat49 });
@@ -4767,7 +4771,7 @@ console.log("\n── §70 · per-rank source · the revised kill cost · ongoin
   // growthFor as CONTEXT for what it proposes. The derived count is a proxy — the hard half is the declared builds: field
   // — and a new unbuilt spec raises the proxy without anything being stale. The population grew; the baseline moves with
   // it, and the reason is written here rather than the number quietly nudged.
-  const BASELINE_DERIVED = 5;   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
+  const BASELINE_DERIVED = 6;   // 2026-09-05 (2): four more specs landed unbuilt with the brief   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
   check(`§70: ratchet — \`spec_ready\` specs naming an existing engine export = ${derivedStale.length} (baseline ${BASELINE_DERIVED}) — may only go DOWN`,
     derivedStale.length <= BASELINE_DERIVED, derivedStale.map(r => `${r.f}:${r.named.slice(0, 3).join(",")}`).join(" · "));
   const built70 = rows70.filter(r => r.status === "built" || r.status === "part_built");
@@ -4830,7 +4834,7 @@ console.log("\n── §71 · the harness drives the production path (engine/bat
     (() => { const big = BT71.battleSkillsForCharacter(pc71, { catalog: C71.abilities, rules: rules71, sb: sb71 });
       const verbs = pc71.abilities.reduce((n, a) => n + ((C71.abilities[a.abilityId]?.functions || []).length), 0);
       const small = BT71.battleSkillsForCharacter({ ...pc71, abilities: pc71.abilities.slice(0, 3), inventory: [] }, { catalog: C71.abilities, rules: rules71, sb: sb71 });
-      return big.length >= verbs && big.length > 40 && big.some(s => s.id === "_strike") && small.some(s => s.id === "_strike") && small.some(s => s.id === "_guard"); })());
+      return big.length >= verbs && big.length > 40; })());
   // ── a duel played through the production path: deterministic, ends in the vocabulary, the knockout reaches the table
   const play71 = (seed) => { const c = RG71.characterFromPerson(pell71, { catalog: C71.abilities, cfg: cfg71, day: 1 }); return RG71.playDuel({ character: c, target: { id: "veth-ondra", name: veth71.name }, content: C71, rng: RG71.mulberry32(seed), day: 1, maxTurns: 40 }); };
   const d1 = play71(7), d2 = play71(7);
@@ -5116,15 +5120,19 @@ console.log("\n── §76 · the fallbacks defer to the free touch (unauthored 
   // ── the census, asserted so it cannot rot
   const all76 = Object.values(C76.abilities);
   const withTouch = all76.filter(a => a && a.touchTier);
-  check(`§76: ⚠️ …and the CENSUS travels with it — \`touchTier\` is authored on ${withTouch.length} of ${all76.length} crafts (0 on 2026-09-05: the ladder built, the rungs unwritten)`,
-    all76.length > 400 && withTouch.length >= 0, withTouch.length === 0 ? "0 — the fallbacks stay for every sheet until Aevi authors a touch" : `${withTouch.length} authored: ${withTouch.slice(0, 4).map(a => a.id).join(", ")}`);
+  // ⛔ THE CENSUS IS WHAT CORRECTED THE RULING. It printed 0 of 421 on the morning R47 was written — the opt-in field
+  // nothing opted into — and Aevi rewrote R47 to DERIVE the floor within the hour. It now counts BOTH: what derives (the
+  // rule) and what is authored (the prose on top of it), so neither half can quietly go to zero again.
+  const derives76 = all76.filter(a => a && CAP76.freeTierOf(a, { cfg: rules76.energy }));
+  check(`§76: ⛔ …and the CENSUS travels with it — ${derives76.length} of ${all76.length} crafts DERIVE a free floor, ${withTouch.length} author its prose`,
+    derives76.length >= 100 && all76.length > 400, `${derives76.length} derive · ${withTouch.length} authored: ${withTouch.slice(0, 4).map(a => a.id).join(", ")}`);
   // ── the player's menu
   const pcNo = { abilities: [{ abilityId: plain.id, level: 1 }] };
   const pcYes = { abilities: [{ abilityId: "t1", level: 1 }] };
   const catT = { ...C76.abilities, t1: touched };
   const mNo = BT76.battleSkillsForCharacter(pcNo, { catalog: C76.abilities, rules: rules76, sb: sb76 });
   const mYes = BT76.battleSkillsForCharacter(pcYes, { catalog: catT, rules: rules76, sb: sb76 });
-  check("§76: ⛔ …a sheet with NO free touch still carries the bare strike and guard (the basic sheet Erik kept them for); a sheet WITH one carries neither",
+  check("§76: ⛔ …a sheet with NO free floor still carries the bare strike and guard (the basic sheet Erik kept them for); a sheet WITH one carries neither",
     mNo.some(s => s.id === "_strike") && mNo.some(s => s.id === "_guard")
     && !mYes.some(s => s.id === "_strike") && !mYes.some(s => s.id === "_guard") && mYes.some(s => s.id === "t1"),
     JSON.stringify({ no: mNo.map(s => s.id), yes: mYes.map(s => s.id) }));
@@ -5141,8 +5149,8 @@ console.log("\n── §76 · the fallbacks defer to the free touch (unauthored 
   const big = { abilities: Object.values(C76.abilities).filter(a => (a.functions || []).length).slice(0, 30).map(a => ({ abilityId: a.id, level: 1 })) };
   const menu = BT76.battleSkillsForCharacter(big, { catalog: C76.abilities, rules: rules76, sb: sb76 });
   const verbs = big.abilities.reduce((n, a) => n + (C76.abilities[a.abilityId].functions || []).length, 0);
-  check("§76: ⛔ R46c — NO CAP: a 30-craft kit's every verb reaches the menu (it stopped at 40 before), and the bare moves are still there at the end",
-    menu.length >= verbs && menu.length > 40 && menu.some(s => s.id === "_strike"), `${menu.length} entries for ${verbs} verbs`);
+  check("§76: ⛔ R46c — NO CAP: a 30-craft kit's every verb reaches the menu (it stopped at 40 before)",
+    menu.length >= verbs && menu.length > 40, `${menu.length} entries for ${verbs} verbs`);
   check("§76: …a caller that still wants a bound gets one only by asking", BT76.battleSkillsForCharacter(big, { catalog: C76.abilities, rules: rules76, sb: sb76, limit: 12 }).length === 12);
   // ── R46c · the panel groups by craft
   const app76 = rd("app.js");

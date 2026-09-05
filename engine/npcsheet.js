@@ -22,7 +22,7 @@
 // exists it is the truth and this file fills nothing in. Derivation is for the ones nobody wrote down.
 
 import { abilityTier } from "./skilltree.js";
-import { offersFreeTouch } from "./capabilities.js";   // R47: a kit with a free touch needs no bare strike
+import { offersFreeFloor } from "./capabilities.js";   // R47: a kit with a free floor needs no bare strike
 const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) ? d : Number(v));
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
@@ -395,7 +395,7 @@ export function battleSkillsFor(entry, opts = {}) {
   // the line that makes "Pell fights too" true without any authoring at all.
   // ✅ R47 (Erik 2026-09-05): "the same for any NPC" — the bare strike is for the most basic sheet, and a kit whose crafts
   // carry a free touch already has a zero-cost move. Today `touchTier` is authored nowhere, so this holds for everyone.
-  if (entry?.canStrike !== false && entry?.incorporeal !== true && !offersFreeTouch(crafts, { cfg: opts?.rules?.energy })) {
+  if (entry?.canStrike !== false && entry?.incorporeal !== true && !offersFreeFloor(crafts, { cfg: opts?.rules?.energy })) {
     out.push({ id: "_strike", function: "strike", name: "a plain strike", tier: 1, attribute: "physical" });
   }
   return { skills: out, level };

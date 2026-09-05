@@ -35,6 +35,23 @@
   "minTotal": -25
  },
  "energy": {
+  "_freeFloor": "✅ R47 (Erik 2026-09-05: 'he should just rely on the zero-cost fallbacks of his T1 skills as we designed' — broad, not curated). A craft at or below tierAtMost whose verb is in functions HAS a free floor, DERIVED: zero energy, one target, no dice, no ongoing harm, no area, nothing the ranks added — and it KEEPS the craft's native reach and form (the floor strips force, not reach). A craft may author freeTier to override and carry the prose, or freeTier: false to have none (a craft whose whole act is range or scale). Measured 2026-09-05: 153 crafts are T1 and 120 carry one of these verbs.",
+  "freeFloor": {
+   "tierAtMost": 1,
+   "functions": [
+    "strike",
+    "mend",
+    "heal",
+    "soothe",
+    "restore",
+    "reveal",
+    "shield",
+    "ward",
+    "bind",
+    "hinder",
+    "break"
+   ]
+  },
   "max": 100,
   "regenPerRest": 40,
   "defaultActionCost": 5,

@@ -1447,3 +1447,63 @@ whole value. ⚠️ **Giving every slot a number is how a kit becomes a spreadsh
 | ⬜ **`warden_ash`** | ⚠️ carries `substrateCharge` and is *literally the ash of something that died* — **Erik: a Warden carries it as a MOBILE power source.** Likely wants `meaningCharge` instead |
 | **companion gear** | ⚠️ companions carry `substrateAura`; ⬜ **do they carry items?** |
 | **hold-made goods** | ⬜ **`SPEC_hold_store.md`** — what a thriving forge or mine actually produces as an item |
+
+---
+
+## ⛔ SPIRIT MAY NOT SURVIVE AS A DOMAIN — measure before authoring in it again
+
+**Erik 2026-09-04:** *"we had also discussed the fact that Spirit might be absorbed into the other
+domains… remember?"* ⚠️ **Aevi did not, and authored two new Spirit crafts the same day.**
+
+### The two open rows, both `HOW_IT_WORKS` log, 2026-08-30
+
+> ⬜ **SPIRIT MAY BE THE SUBSTRATE UNDER ALL FOUR POWER SYSTEMS.** Erik: *"perhaps the precursor war is
+> ABOUT and POWERED BY spirit — the thing the nanotechnology and lattice and veil and metaphysical are all
+> **EXPRESSING**."* ⚠️ **It would make Parakletos literal: if spirit is what the substrate IS, *"what
+> answers every craft in the world"* stops being a metaphor — and THE VEIL BECOMES A HOLE IN THE FIELD
+> RATHER THAN A WALL.**
+
+> ⬜ **SPIRIT AS A PERMEATING FIELD.** Erik: *"I could see some spirit skills in Death, Light, Dark… it's
+> kind of a **PERMEATING FIELD**, tied to the precursor/veil entity powers."*
+> ⛔ **And the cosmology already says so: `the_three.md` — PARAKLETOS DISTRIBUTED ITSELF INTO THE
+> SUBSTRATE.** ⚠️ **A distributed entity is not a tradition. It is a field.**
+
+### ⛔ THE OWED ACTION, and Aevi's own note already stated it
+
+> ⚠️ *"**MEASURE BEFORE AUTHORING**: `uttered_name` is already a `veil`-powered UMBRAL craft. This may be a
+> RECLASSIFICATION that fixes Spirit's 10-vs-32 imbalance **WITH NO NEW CONTENT**."*
+
+⬜ **THE MEASUREMENT: how many crafts OUTSIDE Spirit are already doing spirit-work?** `uttered_name` is one.
+➡️ **If that number is large, Spirit dissolves into a field and its 15 crafts redistribute** — ⚠️ **cheaper
+and probably better than authoring Spirit up to parity.**
+
+### ⚠️ WHAT THIS MEANS FOR THE TWO CRAFTS AUTHORED 2026-09-04
+
+✅ **`plain_seeming` and `answering` are good and correctly authored** (lint-clean after two fixes).
+⛔ **WHETHER THEY STAY IN `numinous` IS UNDECIDED.**
+
+- **`answering`** is named for Parakletos appearing *as answering*. ⚠️ **Under the field reading it is not a
+  Numinous specialty — it is THE FIELD BEING REACHED, and belongs wherever someone attends.**
+- **`plain_seeming`** takes meaning off a place. ⬜ **Field manipulation; sits equally well in Dark or Death.**
+
+⛔ **DO NOT AUTHOR FURTHER SPIRIT CONTENT UNTIL THE MEASUREMENT IS RUN.**
+
+---
+
+## ⬜ OWED BY AEVI — from CCode's 2026-09-04 landing
+
+| # | item | why |
+|---|---|---|
+| **1** | ⛔ **Q15 — the lethal-rung sweep** | ⚠️ **53 crafts carry `lethal` or atrocity, 22 of them TIER 1, and only `the_cut_thread` has a `killCost`.** ➡️ **Under R35 a rank-1 sling now offers the same insta-kill on a landed hit.** ⛔ **This is a consequence of Aevi's own ruling and hers to sweep** |
+| **2** | `notForClasses` for the death save | which targets cannot be stopped at all — ⚠️ `the_cut_thread`'s `notFor` already says *"what has no thread: a machine, a figure, a Precursor working"* |
+| **3** | `mechanic.meaning: "none"` on body crafts | ⚠️ **Aevi raised it herself: a shrine should not make someone punch harder.** `ki_wield` is metaphysical and is a body craft |
+| **4** | ⚠️ **the Finish-it overlap** | ⛔ **`lethal` now offers BOTH a death save and the ⚡ Finish it button — two ends on one rung.** ⬜ Design call |
+
+---
+
+## ⚠️ CCODE CORRECTION TO ACCEPT
+
+⛔ **`resolve.js`'s `opposed` is a DIFFICULTY TERM, not a contest.** Aevi's `RULING_pressure_and_death_save.md`
+cited it as *"a contest mechanism to build on rather than invent"* — **it is not one.**
+✅ **The death save was built correctly as two rolled margins compared, the way every contest here is
+built.** ⚑ **Her strength-or-presence instinct was right; her reading of the existing machinery was not.**

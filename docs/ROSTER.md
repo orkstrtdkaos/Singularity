@@ -87,3 +87,57 @@ days-known. ⛔ **It cannot invent:**
 ⚠️ **AND THE STANDING WARNING:** Aevi built Veth's first sheet around *"she has never struck anything"* when
 **nobody had authored her.** ⛔ **A DATA GAP IS NOT A PERSONALITY.** Check whether anyone wrote the presence
 before reading the absence as intent.
+
+---
+
+## ⛔ CORRECTION 2026-09-05 — COMPANIONS DO NOT WANT NPC SHEETS
+
+⚠️ **This file's §2 put *"9 companions"* first in the sheet-authoring order. ⛔ MEASURED, THAT IS THE WRONG
+SHAPE FOR THEM.**
+
+| | |
+|---|---|
+| ✅ **companions already fight** | `alliesOf` derives their level from the character's — *"a companion of a level-9 character is not a level-1 bystander"* — and reads their `assistTags` for contributions |
+| ⛔ **their progression is `stages[]`, NOT craft ranks** | `companion_template.json`: *"stages are the spine… bond 0–2 → stage 1, 3–9 → 2, 10 → 3."* ⚠️ **A companion does not spend points** |
+| ⛔ **AND THE TEMPLATE RECORDS AEVI MAKING THIS EXACT MISTAKE BEFORE** | *"I wrote Attended End with its own r1/r2/r3 ladder because I did not know `stages[]` was the progression — which is stated nowhere except in nine examples"* |
+
+### ⚑ WHAT THEY ACTUALLY OWE: THE BOND GRANTS
+
+`companion_template.json` `_theEight`: ⛔ ***"all nine are currently STUBS carrying 9 fields and missing 14 —
+no `tree`, no `mechanic`, no `bounds`, no `plainly`, no `challengeTypes`."***
+
+| | |
+|---|---|
+| ✅ **done** | `the_attended_end` (Marrow) — the exemplar |
+| ✅ **done 2026-09-05** | ⚑ **`pack_sense` (Bristle) · `scholars_margin` (Quill) · `the_kept_dark` (Hush)** |
+| ⬜ **owed — 5** | Motes' Vigil (Aevi) · The Old Procedure (Coil) · Thin-Place Sense (Ember) · The Taking Root (Sprig) · A Second Pair of Hands (Tal) |
+
+⚑ **EACH RANK KEYS TO A `stage`** — the stage names what the COMPANION becomes, the rank names what it LENDS
+YOU — **and its bounds come from that companion's own `boundaries`.** ⛔ **Nothing invented.**
+
+### ⬜ SO THE ORDER IS NOW
+
+| # | who | what |
+|---|---|---|
+| **1** | **companions** | ⚑ **bond grants (5 left)**, not sheets |
+| **2** | the interiority 7 | ⚑ full sheets — half-authored already |
+| **3** | hinge NPCs | the arcs move through them |
+| **4** | teachers | |
+| **5** | the rest of the 43 | |
+
+---
+
+## ✅ AND THE SCHEMA NOW DECLARES THE SHEET (2026-09-05)
+
+⛔ **`schemas/npc.schema.json` declared 25 properties and knew about NONE of the last two weeks** — not
+`abilities`, not `assistTags`, not `sex`, not `physicality`, and not R45c's `inventory`/`practice`.
+⚠️ **`additionalProperties` unset → JSON Schema defaults PERMISSIVE, so nothing ever failed and the validator
+had never checked a single field that matters for combat.**
+
+✅ **+22 properties, each documented where an author will look.**
+
+⚠️ **AND AEVI'S FIRST PASS DECLARED TYPES FROM THE FIELD NAMES AND RED-LINED ALL 43:** `people` is the
+**SPECIES** (*"human"*), not relationships; `domains` is **`{primary, secondary, tertiary}`** — R25's
+standing structure that `kitFor` draws from — not a list; `teaches` is prose in 22 files.
+⛔ **It also caught two sheets Aevi authored wrong: Pell and Veth were the ONLY two files in the corpus with
+`domains` as an array. Corrected.**

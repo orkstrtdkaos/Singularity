@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 30,
-  "xp": 2984,
+  "xp": 2989,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -218,7 +218,7 @@
   "maxHealth": 191,
   "health": 191,
   "maxEnergy": 282,
-  "energy": 234,
+  "energy": 227,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2189,77 +2189,83 @@
         "player": "Play the music-box—test which melody Deni left as 'all is well'",
         "summary": "Silas and Pell arrive at the Whistling Woman post and test Deni Cors's music-box relay—discovering the first melody is 'all is well', and it carries across the moorland network to an unseen listener who answers back.",
         "narration": "You reach for the music-box with deliberate care, your fingers settling on the catch. The mechanism is simple enough—wind, release, listen. But Deni would have left it marked somehow, some signal that the post is sound and ready, waiting only for its warden. You wind the key slowly, feeling the tension build in the springs, and release.\n\nThe first melody unfolds bright and clean—a short sequence of notes that climb and settle, climb and settle again. High and bell-like, it fills the small room with a clarity that makes the stove's warmth feel solid by contrast. Pell's hand stills on the shelf beside the box. Huginn's head tilts, the black eye tracking the sound. The melody completes, winds down, and stops.\n\nSilence settles. Then—from somewhere outside, distant but unmistakable—an answering whistle. Not Deni's. The tone is rougher, weathered, but the pattern is *exactly* the melody you just played. Someone out on the moorland has heard it and answered back in kind. The relay network is listening. The post is alive on the circuit.\n\nPell meets your eyes. \"She left it working,\" she says simply. \"All the way through.\"\n\nThe melody hangs in your memory now—the shape of 'all is well' written in brass and spring and song. Whatever comes next, the Whistling Woman post knows it is connected."
+      },
+      {
+        "player": "Write a brief message to Mara Wells via shadow-sheet—confirm your arrival at the post and ask after the day's developments.",
+        "summary": "Silas arrives at the Whistling Woman post on the moorland relay network, tests Deni Cors's music-box relay mechanism and receives an answer from across the network, then exchanges shadow-sheet messages with Mara Wells to confirm the post is operational and learn that Warden Coll has filed an amended petition naming the pole-pull as the real issue behind the water crisis.",
+        "narration": "You find the shadow-sheet tucked in the message-box beneath the relay mechanism's shelf—a thin dark plane already bearing Mara's morning hand at its edge: 'Threshold crew staging materials. Fendt arrived yesterday evening. No word from the Center yet on Grael's board.' Simple, efficient, exactly what you needed.\n\nYou take up the sheet's writing surface and compose your reply in the fading lamplight: the post is built and provisioned, the relay mechanism tested and answering, the moorland network holding its first confirmed message intact. The melody carried. You are here, the watch is beginning, and the circuit is live.\n\nAs you finish, the sheet's far edge catches light—Mara's hand already moving, receiving your words before you have quite finished writing them. The response comes quickly: 'Good. Coll filed the amended petition this morning. Pole-pull named plain. Radiant leadership is quiet—the dangerous kind. Calvar's crew moves to the secondary sleeves tomorrow. Watch the shadow if the Center replies.'\n\nYou set the sheet aside. The night is deep now, the fire steady in the stove, and the post around you holds the weight of its own purpose—a waystation that matters, a relay that carries, a warden who arrived. Pell has settled on the bed's edge, one hand resting on her belly, the other steady at her side. Huginn's eyes have closed, though the bird does not sleep—merely rests in the way carrion does, present and ready should the night require attention."
       }
     ],
     "lastTurn": {
-      "narration": "You reach for the music-box with deliberate care, your fingers settling on the catch. The mechanism is simple enough—wind, release, listen. But Deni would have left it marked somehow, some signal that the post is sound and ready, waiting only for its warden. You wind the key slowly, feeling the tension build in the springs, and release.\n\nThe first melody unfolds bright and clean—a short sequence of notes that climb and settle, climb and settle again. High and bell-like, it fills the small room with a clarity that makes the stove's warmth feel solid by contrast. Pell's hand stills on the shelf beside the box. Huginn's head tilts, the black eye tracking the sound. The melody completes, winds down, and stops.\n\nSilence settles. Then—from somewhere outside, distant but unmistakable—an answering whistle. Not Deni's. The tone is rougher, weathered, but the pattern is *exactly* the melody you just played. Someone out on the moorland has heard it and answered back in kind. The relay network is listening. The post is alive on the circuit.\n\nPell meets your eyes. \"She left it working,\" she says simply. \"All the way through.\"\n\nThe melody hangs in your memory now—the shape of 'all is well' written in brass and spring and song. Whatever comes next, the Whistling Woman post knows it is connected.",
-      "sceneSummary": "Silas and Pell arrive at the Whistling Woman post and test Deni Cors's music-box relay—discovering the first melody is 'all is well', and it carries across the moorland network to an unseen listener who answers back.",
+      "narration": "You find the shadow-sheet tucked in the message-box beneath the relay mechanism's shelf—a thin dark plane already bearing Mara's morning hand at its edge: 'Threshold crew staging materials. Fendt arrived yesterday evening. No word from the Center yet on Grael's board.' Simple, efficient, exactly what you needed.\n\nYou take up the sheet's writing surface and compose your reply in the fading lamplight: the post is built and provisioned, the relay mechanism tested and answering, the moorland network holding its first confirmed message intact. The melody carried. You are here, the watch is beginning, and the circuit is live.\n\nAs you finish, the sheet's far edge catches light—Mara's hand already moving, receiving your words before you have quite finished writing them. The response comes quickly: 'Good. Coll filed the amended petition this morning. Pole-pull named plain. Radiant leadership is quiet—the dangerous kind. Calvar's crew moves to the secondary sleeves tomorrow. Watch the shadow if the Center replies.'\n\nYou set the sheet aside. The night is deep now, the fire steady in the stove, and the post around you holds the weight of its own purpose—a waystation that matters, a relay that carries, a warden who arrived. Pell has settled on the bed's edge, one hand resting on her belly, the other steady at her side. Huginn's eyes have closed, though the bird does not sleep—merely rests in the way carrion does, present and ready should the night require attention.",
+      "sceneSummary": "Silas arrives at the Whistling Woman post on the moorland relay network, tests Deni Cors's music-box relay mechanism and receives an answer from across the network, then exchanges shadow-sheet messages with Mara Wells to confirm the post is operational and learn that Warden Coll has filed an amended petition naming the pole-pull as the real issue behind the water crisis.",
       "choices": [
         {
-          "label": "Rest here tonight—the post is provisioned and warded, and the road ahead can wait for dawn.",
+          "label": "Rest here tonight—settle into the post's quiet and let the road's weight ease.",
           "attribute": "practical",
           "subAttribute": "craft",
           "axes": {},
-          "difficulty": "trivial",
-          "opposedDifficulty": null,
-          "intentTags": [],
-          "abilityId": null,
-          "energyCost": null,
+          "difficulty": "very easy",
           "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step outside and return the whistle—find out who answered and where they stand on the circuit.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
           "intentTags": [
-            "scout"
+            "guard",
+            "sustain",
+            "endure"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "opposedDifficulty": null
         },
         {
-          "label": "Examine the spare cylinders and pins in the brass-key box—learn what other melodies Deni left in the post for the network to carry.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Examine the spare cylinders and pins beneath the music-box—understand what other messages Deni left for the network to carry.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
           "difficulty": "easy",
-          "opposedDifficulty": null,
+          "trivial": false,
           "intentTags": [
-            "study"
+            "study",
+            "craft"
           ],
-          "abilityId": "working_model",
+          "abilityId": "order_sense",
           "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "opposedDifficulty": null
         },
         {
-          "label": "Write a brief message to Mara Wells via shadow-sheet—confirm your arrival at the post and ask after the day's developments.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Step outside into the moorland night and listen for other whistle-marks answering—trace the relay network's reach and hear what the network carries.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [],
+          "difficulty": "hard",
+          "trivial": false,
+          "intentTags": [
+            "scout",
+            "study",
+            "track"
+          ],
+          "abilityId": "echo_memory",
+          "energyCost": 9,
+          "opposedDifficulty": null
+        },
+        {
+          "label": "Ask Pell plainly what she needs from the night—food, rest, presence, or something else entirely.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "very easy",
+          "trivial": true,
+          "intentTags": [
+            "comfort"
+          ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "opposedDifficulty": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -2,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -2270,46 +2276,94 @@
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": null,
+      "offer": {
+        "thing": "The moorland silence holds a weight—a listening quality that suggests the relay network is not merely a series of posts but something more coherent, more aware.",
+        "from": "the post itself and Deni Cors's careful work, which built not just waypoints but a living circuit"
+      },
       "stageOps": [],
       "scene": {
-        "setting": "Inside the Whistling Woman post—a low moorland waystation with a warm stove, a simple bed, a shelf of provisions, oil lamps, and a warded threshold. Evening has faded to full night outside. The air is cool and still.",
+        "setting": "Inside the Whistling Woman post at full night—a small stone waystation on the moorland with a warm stove burning steady in the corner, oil lamps lit, the message-box open on the shelf beside the music-box relay. The warded threshold holds the night at bay.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing at the shelf beside you, hand still resting near the music-box, listening to the answering whistle fade into the moorland"
+            "state": "Seated on the bed's edge, one hand resting on her belly, watching the post settle into its first night of occupation. Steady and present."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the low shelf near the stove, wings folded, the black eye tracking the direction the answering whistle came from"
+            "state": "Perched on the low shelf near the stove, black eye closed in apparent rest, but alert to any movement or sound."
           }
         ],
         "objects": [
           "The music-box with removable cylinder and striker-arm",
-          "The shallow brass-key box beneath it with spare pins and alternate cylinders",
-          "The stove burning steadily in the corner",
-          "A rough table with the ledger and chalk-stone message",
-          "A bed with folded blankets",
-          "A shelf with preserved goods, salt, first-aid kit",
+          "The shallow brass-key box with spare pins and alternate cylinders",
+          "The shadow-sheet message-plane with Mara's and Silas's most recent exchange",
+          "The stove burning steadily",
+          "A rough table with ledger and chalk-stone message",
+          "The bed with folded blankets",
+          "Shelf with preserved goods, salt, first-aid kit",
           "Oil lamps with full reservoirs",
-          "A water barrel with a dipper",
+          "Water barrel with dipper",
           "The warded threshold at the entry"
         ],
         "threads": [
-          "Who answered the whistle from the moorland, and where they stand on the relay circuit",
-          "What other melodies and messages Deni left in the spare cylinders for the network to carry",
-          "The road ahead north from this point and what the relay network holds beyond this post"
+          "What other melodies Deni left in the spare cylinders and what messages they carry across the relay network",
+          "The identity and location of whoever answered the first melody from across the moorland",
+          "How far the relay network extends and what posts or listeners lie beyond this waystation",
+          "Warden Coll's amended petition and the Center's response to the naming of pole-pull",
+          "The secondary sleeve repairs Calvar's crew is staging at Millbrook",
+          "What message the shadow-sheet will carry next, and whether the Center will reply"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "note": "Exchanged shadow-sheet messages at night on Day 15—confirmed the Whistling Woman post is operational and the relay mechanism tested. Mara reported Coll filed the amended petition naming pole-pull, the Radiant leadership is quiet (dangerous kind), and Calvar's crew moves to secondary sleeve repairs tomorrow.",
+          "learned": [
+            "Warden Coll filed the amended petition on Day 15 morning, naming pole-pull as the real issue",
+            "The Radiant leadership's silence is more dangerous than open response",
+            "Calvar's crew is staging for the secondary valve and sleeve repairs at the secondary sites"
+          ]
+        }
+      ],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "The music-box relay mechanism is confirmed working—the first melody carries 'all is well' across the moorland network and receives an answer from an unseen listener"
+          "note": "The Whistling Woman post is now confirmed operational as a warden-staffed waystation—Silas Weir has arrived and the relay mechanism's first test melody was answered from across the moorland network.",
+          "flag": {
+            "status": "active",
+            "warden": "silas_weir",
+            "relay_tested": true
+          }
         }
       ],
       "discovery": null,
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "the-relay-network",
+          "label": "The Moorland Relay Network",
+          "kind": "place",
+          "fact": "The relay network carries messages via whistle-melodies—Deni Cors built a working vocabulary where each melody sequence carries a discrete message. The music-box at the Whistling Woman post tested its first melody ('all is well') and received an answer from an unseen listener across the moorland.",
+          "links": [
+            "whistling-woman-post",
+            "deni-cors",
+            "the-threshold-post"
+          ],
+          "entityId": "whistling-woman-post"
+        },
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "Warden Coll filed an amended petition on Day 15 morning naming pole-pull (The Poles Pull arc) as the underlying cause of the water crisis, replacing the Radiant readings conspiracy theory. The Radiant leadership has responded with silence—a dangerous sign that suggests either acceptance or deeper strategy.",
+          "links": [
+            "warden-coll",
+            "millbrook",
+            "the-poles-pull",
+            "the-light-that-will-not-dim"
+          ]
+        }
+      ],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -2323,53 +2377,52 @@
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "a brief examination and the music-box's time"
+        "why": "a quiet evening exchange of messages and settling into the post for the night"
       },
       "moveTo": null,
       "stateOps": [],
-      "imagePrompt": "A low moorland waystation lit from within by lantern and stove-glow, its threshold marked by shadow and warded peace. In the foreground, a small dark wood music-box sits open on a shelf, its brass mechanism catching the warm light. Beyond the warded window, the moorland night stretches away, and a single answering whistle-mark shimmers on a distant stone cairn—the relay network listening, awake, alive.",
       "itemUpdates": [],
       "deriveItem": null,
+      "imagePrompt": null,
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
       "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Inside the Whistling Woman post—a low moorland waystation with a warm stove, a simple bed, a shelf of provisions, oil lamps, and a warded threshold. Evening has faded to full night outside. The air is cool and still.",
+      "setting": "Inside the Whistling Woman post at full night—a small stone waystation on the moorland with a warm stove burning steady in the corner, oil lamps lit, the message-box open on the shelf beside the music-box relay. The warded threshold holds the night at bay.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing at the shelf beside you, hand still resting near the music-box, listening to the answering whistle fade into th"
+          "state": "Seated on the bed's edge, one hand resting on her belly, watching the post settle into its first night of occupation. St"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the low shelf near the stove, wings folded, the black eye tracking the direction the answering whistle came f"
+          "state": "Perched on the low shelf near the stove, black eye closed in apparent rest, but alert to any movement or sound."
         }
       ],
       "objects": [
         "The music-box with removable cylinder and striker-arm",
-        "The shallow brass-key box beneath it with spare pins and alternate cylinders",
-        "The stove burning steadily in the corner",
-        "A rough table with the ledger and chalk-stone message",
-        "A bed with folded blankets",
-        "A shelf with preserved goods, salt, first-aid kit",
+        "The shallow brass-key box with spare pins and alternate cylinders",
+        "The shadow-sheet message-plane with Mara's and Silas's most recent exchange",
+        "The stove burning steadily",
+        "A rough table with ledger and chalk-stone message",
+        "The bed with folded blankets",
+        "Shelf with preserved goods, salt, first-aid kit",
         "Oil lamps with full reservoirs",
-        "A water barrel with a dipper",
+        "Water barrel with dipper",
         "The warded threshold at the entry"
       ],
       "threads": [
-        "Who answered the whistle from the moorland, and where they stand on the relay circuit",
-        "What other melodies and messages Deni left in the spare cylinders for the network to carry",
-        "The road ahead north from this point and what the relay network holds beyond this post"
+        "What other melodies Deni left in the spare cylinders and what messages they carry across the relay network",
+        "The identity and location of whoever answered the first melody from across the moorland",
+        "How far the relay network extends and what posts or listeners lie beyond this waystation",
+        "Warden Coll's amended petition and the Center's response to the naming of pole-pull",
+        "The secondary sleeve repairs Calvar's crew is staging at Millbrook"
       ]
     },
-    "beats": 8
+    "beats": 9
   },
   "clock": {
     "schemaVersion": 1,
@@ -3873,7 +3926,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d13] Received the four-stage filtration cascade from Crane's spoken account, wrote it out herself, corrected two numbers, and staged materials for the day after tomorrow. Named the Radiant factor's four-day-ago visit (looked, wrote, left nothing) and the Harmonic's formal note (monitoring, no person or…",
         "[d13] Named Crane's records-case and Gweth Callow's unspoken fury as the two levers that might move the Radiant or Harmonic to real action.",
         "[d13] Took Silas's instruction without argument — wrote the note for Gweth Callow herself and set it with the morning errands. Her read of Gweth as the human lever that can move smallholders is now in play.",
         "[d13] Sealed a message for the march road waystation without hesitation — a water-reading request, leave it on the hook if the post is dark. Efficient, no ceremony.",
@@ -3882,17 +3934,18 @@
         "[d14] Named by Silas as the Millbrook anchor — told plainly she stays, holds Crane and Dara steady, and sends word if the committee moves early.",
         "[d14] Received a shadow-sheet linked privately to Silas's own — placed behind the counter between the salt block and the receipt tin.",
         "[d14] Received the shadow-sheet message — the work is done, the wells will clear first, the watershed will follow.",
-        "[d14] Shadow-message received at the supply store counter—Fendt and crew ordered to the ridge node to begin construction of the Threshold Post. The network's northern anchor is now Mara's responsibility to stage."
+        "[d14] Shadow-message received at the supply store counter—Fendt and crew ordered to the ridge node to begin construction of the Threshold Post. The network's northern anchor is now Mara's responsibility to stage.",
+        "[d15] Exchanged shadow-sheet messages at night on Day 15—confirmed the Whistling Woman post is operational and the relay mechanism tested. Mara reported Coll filed the amended petition naming pole-pull, the Radiant leadership is quiet (dangerous kind), and Calvar's crew moves to secondary sleeve repairs…"
       ],
       "knownFacts": [
-        "The four-stage filtration cascade: settle, cloth, limestone bed, boil — materials staged within two days, Crane directing.",
-        "Gweth Callow watches the March Road and its flocks with long attention — when she stands up at a gathering, smallholders who have never cared about politics start caring; she has not stood up yet",
-        "Gweth Callow needs the full truth, not a softened version, to act effectively — and Mara has committed to delivering it before morning",
         "Silas has read the design and assigned her to hold the Millbrook thread while the party enters the Zone.",
         "The shadow-sheet carries plain text only — no voice, no drawings. Writing appears on Silas's end immediately. Cleared by a slow palm-pass. The link is private between Mara and Silas alone.",
         "The reclamation work is complete — wells will clear in a week or two, watershed will follow after.",
         "Fendt is being assigned as warden of the Threshold Post—a new post at the ridge relay node",
-        "Mara Wells now holds the dispatch coordination for the post's construction crew and materials"
+        "Mara Wells now holds the dispatch coordination for the post's construction crew and materials",
+        "Warden Coll filed the amended petition on Day 15 morning, naming pole-pull as the real issue",
+        "The Radiant leadership's silence is more dangerous than open response",
+        "Calvar's crew is staging for the secondary valve and sleeve repairs at the secondary sites"
       ],
       "skillsObserved": [
         "proactive expedition resupply from personal stock without pr",
@@ -3905,14 +3958,14 @@
       "status": "active",
       "statusNote": "At Millbrook, receipt of shadow-message ordering Fendt's assignment and post construction",
       "lastSeen": {
-        "locationId": "the_crossing",
-        "day": 14
+        "locationId": "gen-whistling-woman-post",
+        "day": 15
       },
       "gender": "woman",
       "pronouns": "she/her",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Mara%20Wells%2C%20woman%2C%20Village%20supply%20store%20operator%2C%20Millbrook%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=8967&nologo=true",
       "_portraitTier": "devoted",
-      "met": 1
+      "met": 2
     },
     "corvin": {
       "id": "corvin",
@@ -6086,9 +6139,13 @@
       "notes": [
         "[d15] The Whistling Woman post is fully built, provisioned, and warded—a waystation on the moorland relay network with shelter, supplies, and Deni Cors's relay mechanism in place",
         "[d15] The music-box relay mechanism is a working vocabulary of melodies—each song carries a message across the whistle-mark network. Cylinder and pins can be swapped to change the signal.",
-        "[d15] The music-box relay mechanism is confirmed working—the first melody carries 'all is well' across the moorland network and receives an answer from an unseen listener"
+        "[d15] The music-box relay mechanism is confirmed working—the first melody carries 'all is well' across the moorland network and receives an answer from an unseen listener",
+        "[d15] The Whistling Woman post is now confirmed operational as a warden-staffed waystation—Silas Weir has arrived and the relay mechanism's first test melody was answered from across the moorland network."
       ],
-      "flags": {},
+      "flags": {
+        "status": "active",
+        "warden": "silas_weir"
+      },
       "lastVisit": 15,
       "vectorsKnown": [],
       "subPlaces": {
@@ -6282,12 +6339,8 @@
     "lastTickWorldDay": 67,
     "lastCanonWorldDay": 67,
     "lastGenCount": 1612,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Veth's quiet readiness to teach you what a true post requires—the standards of the craft, not just the structure",
-        "from": "Veth's own want: to see Silas become a TRUE Ashwarden, right in his judgment, sound in his discipline"
-      },
       {
         "thing": "Siol, unseen for nine days, arrives at the ridge Threshold Post—not by the made gate path, but by the moorland approach. She moves with…",
         "from": "The world's own agenda (SNG-080): Siol has been waiting to witness whether Silas Weir's work would resolve rightly. She recognizes the…"
@@ -6303,6 +6356,10 @@
       {
         "thing": "The relay mechanism—Deni's working vocabulary of melodies built into the network",
         "from": "Deni Cors's design and Pell's presence beside you, reading craft the way you do"
+      },
+      {
+        "thing": "The moorland silence holds a weight—a listening quality that suggests the relay network is not merely a series of posts but something more…",
+        "from": "the post itself and Deni Cors's careful work, which built not just waypoints but a living circuit"
       }
     ],
     "wantProgress": {
@@ -13176,7 +13233,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d13] Dara Holt's relay confirms a third sleeve junction at the east-bend intake is showing the same iron-oxide seep as the others — repair materials staged in sequence by Dara, Calvar walking the line.",
           "[d13] Silas named Mara Wells to the Hub Council water committee as Millbrook's relay contact and pressed for a meeting sooner than their scheduled three days — the committee now has a named contact and a named urgency, delivered via the morning run.",
           "[d13] Warden Coll confirmed: the committee can move on a named authority and a signed witness account without a full council vote. He asked for the document roll, a signed statement naming Grael, and a check-in protocol before Silas enters the Zone. Formal aid requests to the Rootkin and Cogitants are…",
           "[d13] Warden Coll witnessed the shadow-architecture of the valley's water infrastructure raised from the Waymarker and The Shadow Work on his desk — the conduit-lines, intake sleeves, and Disputed Zone survey-grid fringe all visible for thirty seconds before the detail at the failure points blurred. He…",
@@ -13199,17 +13255,18 @@
           "[d14] The reclamation site's closing instruction was amended on Day 14 at dawn — complete the task, push clean water through the substrate-thread to the lower wells, then stop. Both the watershed and the downstream wells will clear. The substrate-thread goes quiet when the site closes, but the wells…",
           "[d14] Mara Wells informed via shadow-sheet on Day 14 at dawn — the work is complete, the downstream wells will clear first, the watershed will follow on its own schedule.",
           "[d15] The deep seam beneath the Threshold Post is engineered — its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
-          "[d15] The deep seam beneath the Threshold Post is engineered—its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule."
+          "[d15] The deep seam beneath the Threshold Post is engineered—its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
+          "[d15] Warden Coll filed an amended petition on Day 15 morning naming pole-pull (The Poles Pull arc) as the underlying cause of the water crisis, replacing the Radiant readings conspiracy theory. The Radiant leadership has responded with silence—a dangerous sign that suggests either acceptance or deeper…"
         ],
         "links": [
-          "millbrook",
-          "the-edge-district-ledger",
-          "mara-wells",
-          "veth-stillwater-ondra",
           "the-second-thread",
           "what-the-water-remembers",
           "the-actor-with-a-list",
-          "the-threshold-post"
+          "the-threshold-post",
+          "warden-coll",
+          "millbrook",
+          "the-poles-pull",
+          "the-light-that-will-not-dim"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -14879,8 +14936,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1788583685208,
-  "rev": 1752,
+  "updatedAt": 1788586535973,
+  "rev": 1753,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18987,7 +19044,7 @@
     "valley": 646,
     "the_palelands": 6,
     "the_center": 151,
-    "the_echo_vale": 5
+    "the_echo_vale": 6
   },
   "foreclosed": [
     "rootkin",
@@ -19264,10 +19321,10 @@
     {
       "id": "sess-29",
       "startedAt": "2026-09-05T04:40:35.570Z",
-      "lastAt": "2026-09-05T04:48:05.198Z",
+      "lastAt": "2026-09-05T05:35:35.954Z",
       "startDay": 67,
       "endDay": 67,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [
@@ -19755,20 +19812,20 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 320,
-    "choices": 319,
-    "characterDeltas": 153,
-    "scene": 320,
-    "npcUpdates": 286,
+    "sceneSummary": 321,
+    "choices": 320,
+    "characterDeltas": 154,
+    "scene": 321,
+    "npcUpdates": 287,
     "factUpdates": 27,
-    "placeUpdates": 72,
-    "codexUpdates": 194,
-    "timeOps": 296,
+    "placeUpdates": 73,
+    "codexUpdates": 195,
+    "timeOps": 297,
     "imagePrompt": 23,
-    "sceneEnded": 100,
+    "sceneEnded": 101,
     "itemUpdates": 7,
     "questUpdates": 42,
-    "offer": 39,
+    "offer": 40,
     "moveTo": 20,
     "delegateOps": 4,
     "deeds": 12,
@@ -19782,11 +19839,11 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 31,
+    "gambitApt": 32,
     "markDefiningMoment": 1,
     "_engineClosedScene": 2
   },
-  "_opTurns": 320,
+  "_opTurns": 321,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -19794,7 +19851,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 42,
+      "applied": 43,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },

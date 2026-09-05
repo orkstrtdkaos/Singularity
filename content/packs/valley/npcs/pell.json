@@ -9,9 +9,11 @@
  "homeLocation": "millbrook",
  "communityId": "millbrook",
  "people": "Valleyfolk",
- "domains": [
-  "Body"
- ],
+ "domains": {
+  "primary": "mason",
+  "secondary": "somatic",
+  "tertiary": "marcher"
+ },
  "appearance": "Not tall — built low and strong and deliberate, with a smith's shoulders and forearms. Dark hair tied back and escaping by midday, damp at the temples from the heat of the shop. Warm-toned skin, forge-flushed at the throat. Old burn-flecks scattered up both forearms, small and white and permanent. She looks at your hands before your face.",
  "personality": {
   "warmth": 6,
@@ -191,5 +193,9 @@
   "pells_brigandine",
   "smiths_hammer"
  ],
- "_gearNote": "✅ `pells_short_sword` and `pells_brigandine` PROMOTED 2026-09-04 from `po/staged_content/pell_fell_pell_gear.json`, staged as CCODE-86/87 and never landed. ⛔ Canon is Silas's own chronicle, Fell Pell gathering. ⚑ HER SWORD IS THE SISTER WEAPON TO SILAS'S MEMORY — same working, Huginn's ending-sense in both, `damageType: decay`, which is why it does 14.34 against `the_unmoored_choir` where a bare blade does 0.00. ⚑ UPDATED 2026-09-05: Erik — 'Pell now holds and uses the spear named MEMORY. Silas can summon and use the Shadow Twin, so he lets Pell use the original.' ⚠️ Her sword is named THE WARDEN'S CHARGE. ⛔ CCODE 2026-09-05: 'AN NPC CANNOT HOLD AN ITEM AT ALL — 0 of 35 registry entries carry an inventory; nothing in engine/ or app.js ever writes one; `npcUpdates` has no items channel.' ⚠️ SO THIS `gear` ARRAY IS PROSE — *'Memory is carried by Pell'* has no record in the engine. ✅ ACCEPTED (R45c): the BEARER RECORD lands first — `inventory`, `practice`, `bonds` on a registry entry — then this becomes real. ⛔ Aevi asserted the carry before checking there was anywhere to put it."
+ "_gearNote": "✅ `pells_short_sword` and `pells_brigandine` PROMOTED 2026-09-04 from `po/staged_content/pell_fell_pell_gear.json`, staged as CCODE-86/87 and never landed. ⛔ Canon is Silas's own chronicle, Fell Pell gathering. ⚑ HER SWORD IS THE SISTER WEAPON TO SILAS'S MEMORY — same working, Huginn's ending-sense in both, `damageType: decay`, which is why it does 14.34 against `the_unmoored_choir` where a bare blade does 0.00. ⚑ UPDATED 2026-09-05: Erik — 'Pell now holds and uses the spear named MEMORY. Silas can summon and use the Shadow Twin, so he lets Pell use the original.' ⚠️ Her sword is named THE WARDEN'S CHARGE. ⛔ CCODE 2026-09-05: 'AN NPC CANNOT HOLD AN ITEM AT ALL — 0 of 35 registry entries carry an inventory; nothing in engine/ or app.js ever writes one; `npcUpdates` has no items channel.' ⚠️ SO THIS `gear` ARRAY IS PROSE — *'Memory is carried by Pell'* has no record in the engine. ✅ ACCEPTED (R45c): the BEARER RECORD lands first — `inventory`, `practice`, `bonds` on a registry entry — then this becomes real. ⛔ Aevi asserted the carry before checking there was anywhere to put it.",
+ "_domainsWas": [
+  "Body"
+ ],
+ "_domainsFix_20260905": "⛔ `domains` IS `{primary, secondary, tertiary}` — R25's standing structure, and what `kitFor` draws from when growth adds a craft. ⚠️ Aevi authored it as an ARRAY on both sheets she wrote; 41 of 43 existing NPCs had it right. ✅ Corrected from the craft lists actually on the sheet."
 }

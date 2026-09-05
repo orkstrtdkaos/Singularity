@@ -3909,7 +3909,11 @@
    "_autonomous_20260823": "⛔ ERIK 2026-08-23: the craft no longer requires attendance. Every 'while you hold it' / 'you can do almost nothing else' clause is gone from description, hints, bounds and all three ranks. ⚠️ `intensity.conserve` was 'hold a moment longer', which assumed a person present — now 'let it lapse a little early and keep the difference'. ⛔ ALSO: challengeTypes were PUZZLE/SOCIAL for a craft about a wound or a beam — now ENDURANCE/INVESTIGATION; and `plainly` restated the attendance model and has been corrected.",
    "_sourceChanged_20260823": "⛔ ERIK 2026-08-23: 'the maintenance nanites (the same ones seraphs use to be immortal) are used to hold the wound and body at the state it's in, just like the hull. I don't think there's any canon problem with death having ordered nanite powered skills.' ⚠️ ASHWARDEN'S MIX HAD NO NANITE AT ALL (metaphysical .85 / precursor .15) — this craft is the tradition's first ordered-nanite carrier and the mix is updated to admit it. ⛔ A DISTRIBUTION HAS A MEAN AND DEVIATIONS (Erik, earlier today); this is a deviation, and `perAbilityOverrides` is what it is for.",
    "_challengeTypesNormalised_20260824": "⛔ I INTRODUCED NON-CANONICAL TYPES DURING THE DEATH WALKTHROUGH AND THE LINT CAUGHT ME. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND. ⚠️ I authored INVESTIGATION, ENDURANCE, INTELLECTUAL, HARDSHIP and COMBAT — plausible English, not the vocabulary. Seven of the eight crafts carrying them were mine, from this session. Normalised ['ENDURANCE', 'INVESTIGATION'] -> ['SURVIVE', 'INVESTIGATE'].",
-   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves.",
+   "touchTier": {
+    "why": "a hand on them, and you simply do not leave. It holds nothing back that was leaving — it only means they are not alone while it goes."
+   },
+   "_touchTierWhy": "⛔ AUTHORED `touchTier` — the flavour form, per `CORRECTION_R47_touch_tier.md`. ⚠️ THE DERIVED DEFAULT IS THE MECHANISM; this is the IMPROVEMENT, never the prerequisite. ⚑ THE STRIPPING IS THE POINT (CCODE-266): one target, at contact, no dice, no ongoing, no area — 'the craft with no power behind it — you have to be there, and it is barely anything.' ⛔ A touch that kept a die would be r1 at a discount."
   },
   {
    "id": "true_account",
@@ -4150,7 +4154,11 @@
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_tidied_20260823": "⚠️ r2/r3 carried no `gains` and no `harmRung`, and r3 had no `cannot` at all — the first-gift cohort's thin tail, where the template supplies ability-level fields and nothing per-rank. ⛔ r3's ceiling is the Ashwarden's own weight and the reason they need the bird: perception reaches the ending, testimony reaches the way out.",
-   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ THIS TRADITION WAS AUDITED BEFORE THE GATE EXISTED, which is why the first pass reported clean."
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ THIS TRADITION WAS AUDITED BEFORE THE GATE EXISTED, which is why the first pass reported clean.",
+   "touchTier": {
+    "why": "a hand on the cooling skin. You know how long, and nothing else."
+   },
+   "_touchTierWhy": "⛔ AUTHORED `touchTier` — the flavour form, per `CORRECTION_R47_touch_tier.md`. ⚠️ THE DERIVED DEFAULT IS THE MECHANISM; this is the IMPROVEMENT, never the prerequisite. ⚑ THE STRIPPING IS THE POINT (CCODE-266): one target, at contact, no dice, no ongoing, no area — 'the craft with no power behind it — you have to be there, and it is barely anything.' ⛔ A touch that kept a die would be r1 at a discount."
   },
   {
    "id": "lifesense",

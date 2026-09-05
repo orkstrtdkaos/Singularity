@@ -42,26 +42,26 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 | pos | domain | antipode | sects | crafts | T1 | T2 | T3 | T4 | T5 |
 |---|---|---|---|---|---|---|---|---|---|
-| 0 | **Mind** | Body | Noesis, Logos, Formcraft | **30** | 12 | 5 | 6 | 4 | 3 |
-| 1 | **Light** | Dark | Radiance, Verity | **36** | 14 | 13 | 4 | 1 | 4 |
-| 2 | **Life** | Death | Vivimancy | **21** | 5 | 5 | 6 | 4 | 1 |
+| 0 | **Mind** | Body | Noesis, Logos, Formcraft | **31** | 12 | 6 | 6 | 4 | 3 |
+| 1 | **Light** | Dark | Radiance, Verity | **37** | 14 | 13 | 5 | 1 | 4 |
+| 2 | **Life** | Death | Vivimancy | **22** | 6 | 5 | 6 | 4 | 1 |
 | 3 | **Angelic** | Demonic | Ascent | **24** | 8 | 5 | 4 | 4 | 3 |
 | 4 | **Breaking** | Building | The Edge, Ruinwork | **39** | 12 | 12 | 7 | 5 | 3 |
 | 5 | **Chaos** | Order | Wildcraft | **14** | 6 | 3 | 2 | 2 | 1 |
 | 6 | **Span** | Spirit | Spanwork, Hourcraft | **30** | 12 | 9 | 3 | 3 | 3 |
 | 7 | **Body** | Mind | Soma, Thingcraft | **34** | 19 | 6 | 5 | 2 | 2 |
-| 8 | **Dark** | Light | Umbracraft, Falsecraft | **41** | 13 | 14 | 7 | 4 | 3 |
+| 8 | **Dark** | Light | Umbracraft, Falsecraft | **42** | 13 | 15 | 7 | 4 | 3 |
 | 9 | **Death** | Life | Palework, Pathos | **44** | 13 | 14 | 10 | 3 | 4 |
-| 10 | **Demonic** | Angelic | Descent | **22** | 8 | 6 | 2 | 3 | 3 |
+| 10 | **Demonic** | Angelic | Descent | **23** | 9 | 6 | 2 | 3 | 3 |
 | 11 | **Building** | Breaking | Makecraft, Stillcraft | **32** | 14 | 11 | 3 | 3 | 1 |
 | 12 | **Order** | Chaos | Enginecraft, Latticework | **36** | 10 | 11 | 6 | 6 | 3 |
-| 13 | **Spirit** | Span | Numenwork | **13** | 7 | 2 | 2 | 1 | 1 |
+| 13 | **Spirit** | Span | Numenwork | **13** | 6 | 4 | 1 | 1 | 1 |
 
 ---
 
-## Mind — ring 0, opposite **Body** · 30 crafts
+## Mind — ring 0, opposite **Body** · 31 crafts
 
-### Noesis (`cogitant`) — 14 crafts
+### Noesis (`cogitant`) — 15 crafts
 
 **Tier 1**
 
@@ -78,6 +78,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 |---|---|---|---|---|---|
 | `deduced_strike` | **Deduced Strike** | 4 | mental | strike,reveal,hinder | Aimed Thought · Called Effect · Strike in the Reading  ⚑ harm:damaging |
 | `force_the_move` | **Force the Move** | 4 | mental | provoke | Make Them Answer · Shove the Rank · On the Record |
+| `scholars_margin` | **Scholar's Margin** | 4 | mental |  | Margin Note · Thinking Out Loud · Dangerous Half |
 | `solved_route` | **Solved Route** | 3 | mental | move,travel | Route · Moving Space · Designed Scene |
 
 **Tier 3**
@@ -164,7 +165,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 ---
 
-## Light — ring 1, opposite **Dark** · 36 crafts
+## Light — ring 1, opposite **Dark** · 37 crafts
 
 ### Radiance (`blazeborn`) — 24 crafts
 
@@ -174,32 +175,32 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 |---|---|---|---|---|---|
 | `kept_fire` | **Kept Fire** | 3 | practical | sustain,make | Fire Held · Several Fires · Long Burning |
 | `kindle` | **Kindle** | 4 | mental | make,strike | Kindle · Flare · Struck Match  ⚑ harm:damaging |
-| `light_bending` | **Light Bending** | 8 | practical | conceal,deceive,hinder,move | Haze Veil · Drawn Curtain · Second Sun  ⚑ folk · harm:incapacitating |
+| `light_bending` | **Light Bending** | 8 | practical | conceal,deceive,hinder,move | Haze Veil · Drawn Curtain · Second Sun  ⚑ folk · learnedAt:radiant_folk · harm:incapacitating |
 | `lightsense` | **Lightsense** | 3 | mental | reveal,track | Lightsense · Spectrum-Read · Unbroken Beam |
-| `prism_sight` | **Prism Sight** | 4 | mental | reveal | True Spectrum · Layered Reading · Light Beneath  ⚑ folk |
+| `prism_sight` | **Prism Sight** | 4 | mental | reveal | True Spectrum · Layered Reading · Light Beneath  ⚑ folk · learnedAt:radiant_folk |
 | `radiant_ground` | **Radiant Ground** | 3 | mental | resist,sustain | Light as Fuel · Radiant Meal · In the Full Blaze |
 | `read_burn` | **Read Burn** | 3 | practical | empower,foresee,reveal | Heat Read · Whole Burn · Fire's Whole Course |
-| `sun_coax` | **Sun Coax** | 6 | practical | heal,mend,sustain | Warm Patch · Kind Season · Harvest-Hand  ⚑ folk |
+| `sun_coax` | **Sun Coax** | 6 | practical | heal,mend,sustain | Warm Patch · Kind Season · Harvest-Hand  ⚑ folk · learnedAt:radiant_folk |
 
 **Tier 2**
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `afterimage` | **Afterimage** | 8 | practical | conceal,deceive,move | Slip-Frame · Double Walk · Crowd of One  ⚑ folk |
+| `afterimage` | **Afterimage** | 8 | practical | conceal,deceive,move | Slip-Frame · Double Walk · Crowd of One  ⚑ folk · learnedAt:radiant_folk |
 | `beacon_chain` | **Beacon Chain** | 4 | mental | reveal,sustain,make | Set Beacon · Chain · Standing Waymark |
 | `blaze_wall` | **Blaze Wall** | 5 | mental | shield,ward | Dazzle Wall · Radiant Barrier · Blaze Itself |
 | `blazing_word` | **Blazing Word** | 4 | mental | bind,command | Open Word · Binding Light · Spoken In Blaze |
 | `cleansing_light` | **Cleansing Light** | 4 | mental | break,heal,restore | Exposed to Light · Burn-Out · Full Restoration |
-| `daybreak_mantle` | **Daybreak Mantle** | 6 | practical | command,empower,shield | Kindled Presence · Rallying Light · Standard of Dawn  ⚑ folk |
+| `daybreak_mantle` | **Daybreak Mantle** | 6 | practical | command,empower,shield | Kindled Presence · Rallying Light · Standard of Dawn  ⚑ folk · learnedAt:radiant_folk |
 | `glass_work` | **Glass Work** | 5 | mental | make,transform | Glass Form · Any Heat-Made Thing · Light as Material |
 | `radiance` | **Radiance** | 6 | mental | break,reveal,strike | Revealing Light · Unshadowed · Blaze  ⚑ harm:lethal |
-| `radiant_lance` | **Radiant Lance** | 12 | practical | break,strike | Needle Beam · Cutting Line · Sunlance  ⚑ folk · harm:lethal |
+| `radiant_lance` | **Radiant Lance** | 12 | practical | break,strike | Needle Beam · Cutting Line · Sunlance  ⚑ folk · learnedAt:radiant_folk · harm:lethal |
 
 **Tier 3**
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `dawn_surgery` | **Dawn Surgery** | 12 | practical | heal,mend,restore | Sealing Touch · Fine Blade · Light in the Wound  ⚑ folk |
+| `dawn_surgery` | **Dawn Surgery** | 12 | practical | heal,mend,restore | Sealing Touch · Fine Blade · Light in the Wound  ⚑ folk · learnedAt:radiant_folk |
 | `focused_array` | **Focused Array** | 6 | practical | empower,make,command | Set Lens · Array · Lensward |
 | `line_of_light` | **Line of Light** | 5 | mental | move,travel | Lit Crossing · Light the Target · Anywhere the Light Reaches |
 | `unshadow` | **Unshadow** | 6 | mental | break,hinder,reveal | Unshadow · Stripping Light · Nothing Hidden  ⚑ harm:incapacitating |
@@ -215,16 +216,16 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
 | `last_light` | **Last Light** | 14 | mental | strike | Last Light  ⚑ harm:damaging |
-| `light_borne` | **Light-Borne** | 12 | practical | move,travel | Light-Borne  ⚑ folk |
+| `light_borne` | **Light-Borne** | 12 | practical | move,travel | Light-Borne  ⚑ folk · learnedAt:radiant_folk |
 
-### Verity (`verist`) — 12 crafts
+### Verity (`verist`) — 13 crafts
 
 **Tier 1**
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
 | `held_truth` | **Held Truth** | 3 | mental | resist,sustain | Anchored Self · What Is True Holds · Real Is Enough |
-| `honest_price` | **Honest Price** | 4 | social | bargain,bind,empower,make | Price Named · Kept Terms · Standing Table |
+| `honest_price` | **Honest Price** | 4 | social | bargain,bind,empower,make | Price Named · Kept Terms · Standing Table  ⚑ learnedAt:bargainers |
 | `standing_word` | **Standing Word** | 5 | social | bind,sustain | Word Set · Kept Account · Standing Truth |
 | `the_plain_seeing` | **Plain Seeing** | 4 | mental | reveal | Cleared Look · Held Clarity · Unobstructed |
 | `true_ground` | **True Ground** | 3 | mental | resist,shield | Lie Doesn't Stick · Protected Circle · Real as Defense |
@@ -239,6 +240,12 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `verity` | **Verity** | 6 | mental | bind,restore,reveal | Piercing Eye · Unmasking · Word That Holds |
 | `weight_of_truth` | **Weight of Truth** | 4 | mental | break,command | Reliable Word · Plain Account · Record Commands |
 
+**Tier 3**
+
+| id | name | energy | attr | functions | ranks |
+|---|---|---|---|---|---|
+| `numenwork` | **Numenwork** | 8 | social | heal,restore,summon,sustain | True Attention · Negotiable World · Standing Presence |
+
 **Tier 5**
 
 | id | name | energy | attr | functions | ranks |
@@ -248,9 +255,9 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 ---
 
-## Life — ring 2, opposite **Death** · 21 crafts
+## Life — ring 2, opposite **Death** · 22 crafts
 
-### Vivimancy (`rootkin`) — 21 crafts
+### Vivimancy (`rootkin`) — 22 crafts
 
 **Tier 1**
 
@@ -259,6 +266,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `beastfriend` | **Beastfriend** | 6 | social | bind,command,reveal,strike,summon | Gentle Presence · Working Trust · Old Accord  ⚑ folk · harm:damaging |
 | `greenlore` | **Greenlore** | 5 | mental | heal,hinder,sustain | Hedge Remedy · Deep Pharmacopeia · Old Recipes  ⚑ folk · harm:incapacitating |
 | `lifesense` | **Lifesense** | 3 | mental | reveal,track | Lifesense · Green Read · Whole Living Field |
+| `pack_sense` | **Pack-Sense** | 4 | social |  | Stray's Read · Pack · What It Remembers |
 | `snaring_green` | **Snaring Green** | 6 | practical | bind,hinder,make,strike | Green Comes Up · Thorn Turns In · Long Green Death  ⚑ harm:lethal · backlash:damaging |
 | `staunch` | **Staunch** | 4 | practical | heal,sustain | Staunch · Held Wound · Refused Bleed |
 
@@ -310,8 +318,8 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 |---|---|---|---|---|---|
 | `administered_mercy` | **Administered Mercy** | 4 | social | heal | Administered Mercy · Ordered Restoration · The Full Form |
 | `measured_sentence` | **Measured Sentence** | 6 | social | break,reveal,strike | Weighing Light · Sentence Read · Unfallen Light  ⚑ harm:lethal · backlash:damaging |
-| `name_invoked` | **Name Invoked** | 6 | social | command,empower,hinder,strike | Spoken Name · Weight of It · Name in Full  ⚑ harm:lethal |
-| `sheltering_name` | **Sheltering Name** | 4 | social | ward,shield | Name Laid Over · Kept Household · Sanctuary Declared |
+| `name_invoked` | **Name Invoked** | 6 | social | command,empower,hinder,strike | Spoken Name · Weight of It · Name in Full  ⚑ learnedAt:god_named · harm:lethal |
+| `sheltering_name` | **Sheltering Name** | 4 | social | ward,shield | Name Laid Over · Kept Household · Sanctuary Declared  ⚑ learnedAt:god_named |
 | `shielding_light` | **Shielding Light** | 4 | social | shield,ward,resist | Light Interposed · Held Ground · Standing Light |
 | `sustained_order` | **Sustained Order** | 3 | mental | empower,sustain | Order Holds · What the Order Provides · Part of What the Order Can Do |
 | `the_measuring_eye` | **Weighing Look** | 3 | mental | reveal | Weighing Look · Clear Ledger · Unblinking Measure |
@@ -366,11 +374,11 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `disarm` | **Disarming Strike** | 4 | physical | break,hinder | Disarming Strike · Emptied Hand · Ended Fight  ⚑ harm:incapacitating |
 | `held_line` | **Held Line** | 4 | physical | ward,shield,sustain | Set Stance · Long Hold · Line That Held |
 | `hunters_strike` | **Hunter's Strike** | 4 | physical | strike | Hunter's Strike · Clean Kill · Strike That Feeds  ⚑ folk · harm:lethal |
-| `levelled_crossbow` | **Levelled Crossbow** | 5 | physical | strike | Spanned and Levelled · Belt Claw · Windlass  ⚑ harm:lethal |
+| `levelled_crossbow` | **Levelled Crossbow** | 5 | physical | strike | Spanned and Levelled · Belt Claw · Windlass  ⚑ learnedAt:hardline / anywhere · harm:lethal |
 | `read_field` | **Read Field** | 4 | practical | empower,reveal | Ground Read · Ground Read · Whole Field |
 | `read_the_fight` | **Read the Fight** | 3 | physical | foresee,reveal | Read the Fight · Whole Field · Three Moves Ahead |
-| `sling_and_stone` | **Sling and Stone** | 2 | physical | break,strike | Loosed Stone · Aimed Stone · Skull-Weight  ⚑ folk · harm:lethal |
-| `thrown_edge` | **Thrown Edge** | 3 | physical | strike | Underhand · Second Knife · Full Belt  ⚑ harm:damaging |
+| `sling_and_stone` | **Sling and Stone** | 2 | physical | break,strike | Loosed Stone · Aimed Stone · Skull-Weight  ⚑ folk · learnedAt:the wilds · harm:lethal |
+| `thrown_edge` | **Thrown Edge** | 3 | physical | strike | Underhand · Second Knife · Full Belt  ⚑ learnedAt:hardline / the wilds · harm:damaging |
 
 **Tier 2**
 
@@ -389,7 +397,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
 | `chosen_ground` | **Chosen Ground** | 7 | mental | provoke,deceive,foresee | Chosen Ground · Which Road · Prepared Beforehand |
-| `drawn_bow` | **Drawn Bow** | 4 | physical | strike | Long Draw · Kept Rhythm · Heavy Head  ⚑ harm:lethal |
+| `drawn_bow` | **Drawn Bow** | 4 | physical | strike | Long Draw · Kept Rhythm · Heavy Head  ⚑ learnedAt:hardline · harm:lethal |
 | `in_the_way` | **In the Way** | 6 | physical | move,hinder,strike | In the Way · That One · Not Him Either  ⚑ harm:lethal |
 | `shieldwork` | **Shieldwork** | 6 | physical | shield,strike,empower | Shieldwork · Cover the Open Side · Wall  ⚑ harm:damaging |
 | `small_company` | **Small Company** | 6 | mental | empower,command,foresee | Small Company · On the Road · They Keep the Shape |
@@ -596,9 +604,9 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `answered_motion` | **Answered Motion** | 5 | physical | break,strike | Turned Joint · Given Fall · Taken Apart  ⚑ harm:incapacitating · backlash:damaging |
 | `body_read` | **Body-Read** | 3 | mental | foresee,reveal | Body-Read · Whole Tell · Body Cannot Lie |
 | `false_stance` | **False Stance** | 3 | physical | deceive,conceal | False Stance · Wrong Fight · Nothing True |
-| `hurled_weight` | **Hurled Weight** | 4 | physical | break,strike | Get Under It · Committed Throw · Scattering  ⚑ harm:damaging |
+| `hurled_weight` | **Hurled Weight** | 4 | physical | break,strike | Get Under It · Committed Throw · Scattering  ⚑ learnedAt:hardline / the wilds · harm:damaging |
 | `loose_limbed` | **Loose-Limbed** | 3 | physical | move,travel,resist | Run and Vault · Slip Anything · Nothing Holds |
-| `quick_hands` | **Quick Hands** | 2 | physical | hinder,strike | Early Hands · Turned Catch · Both Hands  ⚑ harm:damaging |
+| `quick_hands` | **Quick Hands** | 2 | physical | hinder,strike | Early Hands · Turned Catch · Both Hands  ⚑ learnedAt:anywhere · harm:damaging |
 | `second_wind` | **Second Wind** | 4 | physical | sustain,resist,empower,heal | Embrace the Suck · Third Wind · Dream Breath |
 | `steady_hands` | **Steady Hands** | 2 | physical | soothe | Hand On Them · Held Together · Everyone Standing |
 
@@ -628,16 +636,16 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `drumline_stride` | **Drumline Stride** | 7 | practical | empower,move | Catch the Beat · Carried Cadence · Thunder-Step  ⚑ folk |
-| `echo_sense` | **Echo Sense** | 4 | mental | reveal | Near Echo · Carried Echo · Deep Listening  ⚑ folk |
+| `drumline_stride` | **Drumline Stride** | 7 | practical | empower,move | Catch the Beat · Carried Cadence · Thunder-Step  ⚑ folk · learnedAt:harmonic |
+| `echo_sense` | **Echo Sense** | 4 | mental | reveal | Near Echo · Carried Echo · Deep Listening  ⚑ folk · learnedAt:harmonic |
 | `keen_appraisal` | **Keen Appraisal** | 4 | mental | reveal | True Worth · Provenance · Nothing Hidden  ⚑ folk |
 | `near_way` | **Near Way** | 3 | practical | make,move,open | Seam · Material Passage · Way In |
 | `plain_weight` | **Plain Weight** | 6 | physical | break,strike | True Weight · Settled Fact · Leaden Word  ⚑ harm:lethal · backlash:incapacitating |
-| `sonic_resonance` | **Sonic Resonance** | 8 | practical | break,move,strike | Focused Push · Standing Wave · Resonant Break  ⚑ folk · harm:damaging |
+| `sonic_resonance` | **Sonic Resonance** | 8 | practical | break,move,strike | Focused Push · Standing Wave · Resonant Break  ⚑ folk · learnedAt:harmonic · harm:damaging |
 | `sound_read` | **Sound Read** | 3 | practical | empower,foresee,reveal | Hand On It · Whole Fabric · Prepare the Ground |
 | `stone_read` | **Stone-Read** | 3 | mental | reveal,track | Stone-Read · Long Grain · Given Word |
 | `stonewise` | **Stonewise** | 5 | mental | break,mend,reveal | Sound Footing · Mason's Eye · Bones of the World  ⚑ folk · harm:damaging |
-| `tremor_sense` | **Tremor Sense** | 4 | mental | reveal | Ground Ear · Deep Tread · Valley's Pulse  ⚑ folk |
+| `tremor_sense` | **Tremor Sense** | 4 | mental | reveal | Ground Ear · Deep Tread · Valley's Pulse  ⚑ folk · learnedAt:harmonic |
 | `worth_the_work` | **Worth the Work** | 3 | practical | bargain | Days and Stone · Paid in Work · Standing Account |
 
 **Tier 2**
@@ -645,7 +653,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
 | `boundary_stone` | **Boundary-Stone** | 4 | practical | bind,ward | Boundary-Stone · Kept Boundary · Old Boundary  ⚑ folk |
-| `chord_of_mending` | **Chord of Mending** | 10 | practical | empower,heal,mend,restore | Re-seat · True the Frame · Songwright  ⚑ folk |
+| `chord_of_mending` | **Chord of Mending** | 10 | practical | empower,heal,mend,restore | Re-seat · True the Frame · Songwright  ⚑ folk · learnedAt:harmonic |
 | `set_word` | **Set Word** | 4 | social | bind,command | Plain Statement · Word That Holds · Word As Stone |
 | `sound_repair` | **Made Whole** | 4 | practical | mend,restore | Correct Fix · Sound Again · As It Was |
 | `thingcraft` | **Thingcraft** | 6 | practical | bind,make,reveal,shield | Weighed Thing · Set Stone · Denial |
@@ -655,7 +663,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
 | `reduction` | **Reduction** | 8 | mental | break,reveal | Plain Fact · Reduction · Nothing Left Standing  ⚑ harm:incapacitating |
-| `shatterpoint` | **Shatterpoint** | 8 | mental | break,reveal,strike | Flaw-Note · Read the Load · Thin Song  ⚑ folk |
+| `shatterpoint` | **Shatterpoint** | 8 | mental | break,reveal,strike | Flaw-Note · Read the Load · Thin Song  ⚑ folk · learnedAt:harmonic |
 
 **Tier 4**
 
@@ -672,9 +680,9 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 ---
 
-## Dark — ring 8, opposite **Light** · 41 crafts
+## Dark — ring 8, opposite **Light** · 42 crafts
 
-### Umbracraft (`umbral`) — 25 crafts
+### Umbracraft (`umbral`) — 26 crafts
 
 **Tier 1**
 
@@ -698,7 +706,8 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `premeditate` | **Premeditate** | 5 | practical | foresee,empower,conceal | Premeditate · Set For Others · Set For Anything |
 | `shadowed_mending` | **Shadowed Mending** | 4 | mental | heal,mend | Sure Hands · Dark Aids · Dark Heals |
 | `shroud` | **Shroud** | 5 | mental | conceal,deceive | Shroud · Shroudwork · Long Shroud |
-| `slow_cup` | **Slow Cup** | 5 | practical | strike,hinder,make | Slow Cup · No Taste At All · Wasting  ⚑ harm:lethal |
+| `slow_cup` | **Slow Cup** | 5 | practical | strike,hinder,make | Slow Cup · No Taste At All · Wasting  ⚑ harm:incapacitating |
+| `the_kept_dark` | **Kept Dark** | 6 | mental |  | Uninvited Dark · Kept Watch · Harbor |
 | `umbracraft` | **Umbracraft** | 6 | mental | command,conceal,move,ward | Seeing Dark · Past Finding · Deep Umbral |
 
 **Tier 3**
@@ -716,7 +725,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `stopped_breath` | **Stopped Breath** | 12 | mental | strike,conceal | Stopped Breath · Unlit Room  ⚑ harm:lethal |
+| `stopped_breath` | **Stopped Breath** | 12 | mental | strike,conceal | Stopped Breath · Unlit Room  ⚑ harm:incapacitating |
 | `unlit_step` | **Unlit Step** | 12 | mental | conceal,travel | Unlit Step · Long Fall |
 | `uttered_name` | **Uttered Name** | 10 | mental | bind,command,reveal | Uttered Name · Held Without Speaking · Called and Answered  ⚑ harm:incapacitating |
 
@@ -733,7 +742,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
 | `blend_in` | **Blend In** | 3 | social | conceal,deceive | Blend In · One of Them · Nobody At All  ⚑ folk |
-| `borrowed_certainty` | **Borrowed Certainty** | 4 | social | empower,sustain | Word Given · Steady Company · Named Cause |
+| `borrowed_certainty` | **Borrowed Certainty** | 4 | social | empower,sustain | Word Given · Steady Company · Named Cause  ⚑ learnedAt:god_named |
 | `ordinary_face` | **Ordinary Face** | 4 | social | conceal,deceive | Expected Person · Held Face · Long Belonging |
 | `see_the_made_thing` | **See the Made Thing** | 3 | mental | foresee,reveal | Construction · All the Seams · Unfinished Lie |
 | `useful_absence` | **Useful Absence** | 5 | practical | conceal,deceive | Uncounted Thing · Quiet Yard · Missing Wing |
@@ -833,7 +842,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `carried_name` | **Carried Name** | 4 | social | restore | Name Held · Kept Shape · True Shape |
 | `keening` | **Keening** | 4 | social | strike,hinder | Wail · Dark Wail · Oblivion Pulse  ⚑ harm:incapacitating · backlash:damaging |
 | `shared_weight` | **Shared Weight** | 5 | social | shield,resist,ward | Portion Taken · Steady Hand · Borne Grief |
-| `stillness_field` | **Stillness Field** | 6 | practical | bind,conceal,resist,ward | Stilled Air · Long Quiet · Unspoken  ⚑ folk |
+| `stillness_field` | **Stillness Field** | 6 | practical | bind,conceal,resist,ward | Stilled Air · Long Quiet · Unspoken  ⚑ folk · learnedAt:harmonic |
 | `storykeeper` | **Storykeeper** | 4 | mental | foresee,reveal,track | Long Memory · Threads Between · Keeper of the Deep Stock  ⚑ folk |
 | `the_true_feeling` | **Feeling-Sense** | 3 | social | reveal,track | Actual State · Feeling Trail · Emotional History |
 | `wellspring` | **Wellspring** | 3 | social | sustain,empower | More in the Depth · Carried Weight · Wellspring Holds |
@@ -844,17 +853,17 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 |---|---|---|---|---|---|
 | `felt_wall` | **Felt Wall** | 4 | social | reveal,shield | Early Feel · Feeling Guard · Felt Ward |
 | `grief_strike` | **Grief Strike** | 6 | social | strike,hinder | True Feeling · Unguarded Place · Shattered Fortification  ⚑ harm:damaging |
-| `harmonic_voice` | **Harmonic Voice** | 6 | practical | command,empower,heal | Calming Undertone · Carrying Tone · Concord  ⚑ folk |
+| `harmonic_voice` | **Harmonic Voice** | 6 | practical | command,empower,heal | Calming Undertone · Carrying Tone · Concord  ⚑ folk · learnedAt:harmonic |
 | `made_elegy` | **Made Elegy** | 4 | social | bind,make | Feeling Held · Acting Elegy · Lasting Work |
 | `pathos` | **Pathos** | 6 | social | command,empower,heal | Open Heart · Shared Fire · Deep Chord |
 | `public_grief` | **Public Grief** | 4 | social | conceal | Open Weeping · Shared Mourning · Grief-House |
-| `voice_of_the_flock` | **Voice of the Flock** | 6 | practical | command,empower | Work-Rhythm · Hunting Chord · One Body  ⚑ folk |
+| `voice_of_the_flock` | **Voice of the Flock** | 6 | practical | command,empower | Work-Rhythm · Hunting Chord · One Body  ⚑ folk · learnedAt:harmonic |
 
 **Tier 3**
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `echo_memory` | **Echo Memory** | 11 | mental | reveal,track | Lingering Note · Stone Remembers · Long Echo  ⚑ folk |
+| `echo_memory` | **Echo Memory** | 11 | mental | reveal,track | Lingering Note · Stone Remembers · Long Echo  ⚑ folk · learnedAt:harmonic |
 | `shared_grief` | **Under-Song** | 7 | social | reveal,provoke | Under-Song · Named Sorrow · Long Lament |
 
 **Tier 4**
@@ -869,13 +878,13 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 |---|---|---|---|---|---|
 | `grief_that_stops` | **Grief That Stops** | 13 | mental | bind | Grief That Stops · All Of It  ⚑ harm:lethal |
 | `last_lament` | **Last Lament** | 13 | social | empower,restore | Last Lament |
-| `worldsong` | **Worldsong** | 13 | practical | empower | Worldsong  ⚑ folk |
+| `worldsong` | **Worldsong** | 13 | practical | empower | Worldsong  ⚑ folk · learnedAt:harmonic |
 
 ---
 
-## Demonic — ring 10, opposite **Angelic** · 22 crafts
+## Demonic — ring 10, opposite **Angelic** · 23 crafts
 
-### Descent (`abyssal`) — 22 crafts
+### Descent (`abyssal`) — 23 crafts
 
 **Tier 1**
 
@@ -886,9 +895,10 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `hungry_step` | **Hungry Step** | 3 | practical | move,reveal | Hungry Step · Shared Way · Deep Current |
 | `offered_lesser` | **Offered Lesser** | 4 | social | ward,bind | Lesser Given · Standing Offering · Turned Appetite |
 | `offered_mouth` | **Offered Mouth** | 6 | social | strike,summon | Introduction · Shown Table · Devouring Introduced  ⚑ harm:lethal · backlash:incapacitating |
-| `struck_term` | **Struck Term** | 5 | social | bargain,strike | Terms Offered · Exact Price · Standing Term  ⚑ harm:lethal |
+| `struck_term` | **Struck Term** | 5 | social | bargain,strike | Terms Offered · Exact Price · Standing Term  ⚑ learnedAt:bargainers · harm:lethal |
 | `the_read_hunger` | **Read Hunger** | 3 | mental | reveal,foresee | Shape of Its Eating · Fed and Starving · Great Appetite |
-| `the_read_want` | **Read Want** | 4 | social | reveal,foresee | Want Under It · Table Read · Whole Appetite |
+| `the_read_want` | **Read Want** | 4 | social | reveal,foresee | Want Under It · Table Read · Whole Appetite  ⚑ learnedAt:bargainers |
+| `veil_stroke` | **Veil Stroke** | 4 | mental | break,strike,summon | Claw Through · Wider Gap · What Comes Most Of The Way  ⚑ harm:lethal · backlash:incapacitating |
 
 **Tier 2**
 
@@ -934,10 +944,10 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `glasswork` | **Glasswork** | 3 | practical | conceal,make | Caught Light · Set Piece · Valley Glass  ⚑ folk |
-| `glimmer_script` | **Glimmer Script** | 4 | practical | conceal,make,ward | Fingerlight · Keyed Hand · Written In Light  ⚑ folk |
+| `glasswork` | **Glasswork** | 3 | practical | conceal,make | Caught Light · Set Piece · Valley Glass  ⚑ folk · learnedAt:radiant_folk |
+| `glimmer_script` | **Glimmer Script** | 4 | practical | conceal,make,ward | Fingerlight · Keyed Hand · Written In Light  ⚑ folk · learnedAt:radiant_folk |
 | `held_repair` | **Held Repair** | 3 | practical | mend,sustain | Thing Persuaded · Long Persuasion · Kept Machine |
-| `light_well` | **Light Well** | 5 | practical | bind,heal,hinder,ward | Carried Coal · Banked Noon · Bottled Summer  ⚑ folk |
+| `light_well` | **Light Well** | 5 | practical | bind,heal,hinder,ward | Carried Coal · Banked Noon · Bottled Summer  ⚑ folk · learnedAt:radiant_folk |
 | `makers_eye` | **Maker's-Eye** | 3 | mental | make,reveal | Maker's-Eye · Better Shape · Thing It Wants to Be |
 | `quick_work` | **Quick Work** | 4 | practical | make | Thing Made · Larger Build · Built Answer |
 | `raised_thing` | **Raised Thing** | 4 | practical | make,mend | Raised Thing · Sound Work · Thing That Outlasts |
@@ -949,7 +959,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
 | `built_way` | **Built Way** | 5 | practical | make,open,travel | Crossing · Made Passage · Road That Wasn't |
-| `clarity_lens` | **Clarity Lens** | 5 | mental | empower,reveal,track | Jeweler's Air · Far Glass · Patient Eye  ⚑ folk |
+| `clarity_lens` | **Clarity Lens** | 5 | mental | empower,reveal,track | Jeweler's Air · Far Glass · Patient Eye  ⚑ folk · learnedAt:radiant_folk |
 | `makecraft` | **Makecraft** | 6 | practical | make,mend,shield,sustain | Quickmake · Made Better · Unfinished |
 | `ongoing_work` | **Ongoing Work** | 4 | physical | empower,sustain | Hands Moving · Built Through It · Left in Motion |
 | `weapon_at_hand` | **Weapon at Hand** | 4 | practical | make,strike | Improvised · Made to Harm · Right Tool  ⚑ harm:damaging |
@@ -959,7 +969,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `sun_seal` | **Sun-Seal** | 6 | practical | bind,shield,ward | Sun-Seal · Deeper Seal · Seal That Holds  ⚑ folk |
+| `sun_seal` | **Sun-Seal** | 6 | practical | bind,shield,ward | Sun-Seal · Deeper Seal · Seal That Holds  ⚑ folk · learnedAt:radiant_folk |
 | `true_making` | **True Making** | 7 | practical | make,mend | True Making · Set Sound · Work That Outlasts |
 
 **Tier 4**
@@ -1057,7 +1067,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `carrying_call` | **Carrying Call** | 3 | practical | command,travel | Call That Carries · Worked Line · Whole Valley Hears  ⚑ folk |
+| `carrying_call` | **Carrying Call** | 3 | practical | command,travel | Call That Carries · Worked Line · Whole Valley Hears  ⚑ folk · learnedAt:harmonic |
 | `established_route` | **Established Route** | 3 | practical | move,open,travel | Protocol Path · Seam-Walker · Inside Line |
 | `order_sense` | **Order-Sense** | 3 | mental | reveal | Order-Sense · Pattern Beneath · Whole Design |
 | `ordered_record` | **Ordered Record** | 3 | mental | bind,foresee,reveal | Departure Named · Held Order · City's Order |
@@ -1068,12 +1078,12 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `beacon_thread` | **Beacon Thread** | 7 | practical | bind | Hearth-Line · Woven Watch · Constellation  ⚑ folk |
+| `beacon_thread` | **Beacon Thread** | 7 | practical | bind | Hearth-Line · Woven Watch · Constellation  ⚑ folk · learnedAt:radiant_folk |
 | `latticework` | **Latticework** | 6 | practical | break,make | Sure Plan · Binding Frame · Grand Order |
 | `maintained_order` | **Maintained Order** | 4 | practical | bind,sustain | Kept Running · Against Entropy · Standing Order |
 | `old_roads` | **Old Roads** | 4 | mental | reveal,travel | Straight Feeling · Reading the Bones · Where They Walked  ⚑ folk |
-| `resonant_anchor` | **Resonant Anchor** | 9 | practical | bind,resist,shield,ward | Set Stance · Breakwater · Mountain's Patience  ⚑ folk |
-| `resonant_shield` | **Resonant Shield** | 12 | practical | resist,shield | Flicker Guard · Held Chord · Bulwark Harmony  ⚑ folk |
+| `resonant_anchor` | **Resonant Anchor** | 9 | practical | bind,resist,shield,ward | Set Stance · Breakwater · Mountain's Patience  ⚑ folk · learnedAt:harmonic |
+| `resonant_shield` | **Resonant Shield** | 12 | practical | resist,shield | Flicker Guard · Held Chord · Bulwark Harmony  ⚑ folk · learnedAt:harmonic |
 | `set_to_rights` | **Set to Rights** | 2 | practical | heal,mend,restore | Correct Assessment · Structural Repair · Full Restoration |
 | `truename_order` | **Set in Order** | 4 | practical | bind,command,restore | Set in Order · Righted Thing · As It Should Be |
 
@@ -1084,16 +1094,16 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `address_sense` | **Address-Sense** | 8 | mental | reveal,track | Standing Vector · Coordinate Read · Address Itself |
 | `fixed_point` | **Fixed Point** | 6 | practical | bind,resist,shield | Fixed Point · Anchor · Point That Does Not Move |
 | `latticespeak` | **Latticespeak** | 8 | practical | bind,reveal | Handshake · Deeper Grammar · Fluent in the Old Tongue |
-| `prism_ward` | **Prism Ward** | 10 | mental | resist,shield,ward | Threshold Eye · Woven Rooms · Bright Fence  ⚑ folk |
+| `prism_ward` | **Prism Ward** | 10 | mental | resist,shield,ward | Threshold Eye · Woven Rooms · Bright Fence  ⚑ folk · learnedAt:radiant_folk |
 
 **Tier 4**
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `carrying_note` | **Carrying Note** | 12 | mental | travel,transform | Carrying Note · Long Carry  ⚑ folk |
+| `carrying_note` | **Carrying Note** | 12 | mental | travel,transform | Carrying Note · Long Carry  ⚑ folk · learnedAt:harmonic |
 | `foreclose` | **Foreclose** | 13 | mental | bind,break | Close the Door · Standing Denial · It Will Not Be  ⚑ harm:incapacitating |
 | `riding_order` | **Riding Order** | 9 | practical | break | Riding Order · Long Riding |
-| `sustained_chord` | **Sustained Chord** | 12 | practical | empower,sustain | Sustained Chord · Standing Chord  ⚑ folk |
+| `sustained_chord` | **Sustained Chord** | 12 | practical | empower,sustain | Sustained Chord · Standing Chord  ⚑ folk · learnedAt:harmonic |
 | `wake_the_line` | **Wake the Line** | 12 | practical | command,open,summon | Stir the Buried · Line Runs · Road Remembers |
 
 **Tier 5**
@@ -1118,21 +1128,21 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `numen_sense` | **Numen-Sense** | 3 | social | reveal | Numen-Sense · Thinning · Numen Plain |
 | `steady_soul` | **Steady the Soul** | 4 | social | empower,heal,resist | Steady the Soul · Steadied Hand · Unshaken |
 | `thin_step` | **Thin Step** | 3 | practical | move | Thin Step · Taken Through · Long Thin |
-| `thinned_veil` | **Thinned Veil** | 4 | mental | break,strike,summon | Claw Through · Wider Gap · What Comes Most Of The Way  ⚑ harm:lethal · backlash:incapacitating |
 | `unbroken_practice` | **Unbroken Practice** | 3 | social | resist,sustain | Form Holds · Endurance of Attendance · As Long as the Practice Continues |
 
 **Tier 2**
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
+| `answering` | **Answering** | 6 | social | soothe,persuade | Answering · Answered Early · Standing Answer |
 | `dimmed_meaning` | **Dimmed Meaning** | 4 | social | break,hinder | Weight Withdrawn · Broken Meaning · Voided Place  ⚑ harm:incapacitating |
+| `plain_seeming` | **Plain Seeming** | 6 | social | conceal | Plain Seeming · Unremarked · Nothing Here |
 | `weight_of_practice` | **Weight of Practice** | 4 | social | bind,command | Settled Presence · Deep Pull · Organizing Presence |
 
 **Tier 3**
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `numenwork` | **Numenwork** | 8 | social | heal,restore,summon,sustain | True Attention · Negotiable World · Standing Presence |
 | `thin_place` | **Open the Thin Place** | 6 | social | make,open,strike,summon,sustain | Open the Thin Place · Held Thin Place · Open Door  ⚑ harm:lethal |
 
 **Tier 4**
@@ -1149,12 +1159,18 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 ---
 
-## Outside the ring · 3 crafts
+## Pending R33 lineage assignment · 3 crafts
 
-⚠️ **Lineages that are neither a pole nor a foothill.** Listed so nothing in the corpus is absent
-from the source of truth.
+⛔ **R33 (SNG-443): `tradition` is LINEAGE, `learnedAt` is ACCESS.** Every craft below still
+carries a PLACE (or an unresolved value) in its `tradition` field where a real pole belongs.
+⚠️ **This is not a corrected state — it is the error R33 names, not yet re-authored.** A foothill
+craft has a lineage and therefore a domain; only the PLACE has no ring position. ⛔ **This
+generator does not assign the lineage** — `foothills.json`'s blends are weights across a whole
+foothill, and which parent one craft actually descends from is authoring, not arithmetic. Once
+`tradition` is corrected to the real pole (with `learnedAt` carrying the place), these crafts
+fall into their domain section automatically on the next run.
 
-### cross_pole_braid (`cross_pole_braid`) — 3 crafts
+### `cross_pole_braid` — 3 crafts (not in foothills.json — genuinely unresolved, not a place-lineage confusion)
 
 **Tier 4**
 

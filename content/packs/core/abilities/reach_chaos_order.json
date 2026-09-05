@@ -2918,7 +2918,12 @@
    "_powerSystemWas": "reach_chaos_order",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10.",
-   "tier": 1
+   "tier": 1,
+   "touchTier": {
+    "why": "you notice the pattern is there. Not what it is.",
+    "contactOnly": false
+   },
+   "_touchTierWhy": "⛔ RE-AUTHORED 2026-09-05. Erik: 'I don't think it's appropriate for all skills to have to touch. Silas isn't a physical guy — so a T1 zero cost could still be a RANGED attack.' ⚠️ AEVI'S FIRST PASS ASSUMED A HAND ON EVERY CRAFT, INCLUDING ONE THAT REACHES TWENTY PACES. ✅ THE FREE FLOOR STRIPS FORCE, NOT REACH: the craft keeps its native reach and form and loses the dice, the ongoing, the area and everything the ranks added. ⚑ `contactOnly` survives only where the craft IS the contact — `kept_vigil`, `steady_hands`, `held_repair`, `carried_name`."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -176,8 +176,11 @@ export function creationPickable(ability, { domains, grantIds = [], traditionInd
   // ✅ AND THE DEPTH LIMIT WAS ALREADY HERE: the `levelReq > 1` line above caps creation at rank 1, so
   // "antipode L1 open" is exactly what asking `allowed` gives. No new rule was needed to bound it.
   //
-  // ⛔ IT IS STILL NOT CASTABLE. A character can begin holding their antipode's first craft as BRAID
-  // MATERIAL, and the sheet says so (`braid material only — you cannot cast this`).
+  // ⚠️ AND THAT PARAGRAPH USED TO END "IT IS STILL NOT CASTABLE — braid material only". ⛔ R16 RETIRED
+  // THAT RULE and this comment outlived it by weeks, in the module that decides what a new character may
+  // pick. ⚑ MEASURED 2026-09-05: `castable: false` has ZERO producers across the whole catalogue for any
+  // primary — an antipode craft is expensive and shallow while you dabble (`leanSurcharge`, `tierCap`), and
+  // it is CASTABLE. A comment that states a retired rule is read as the rule.
   return domainAccess(ability, null, domains, traditionIndex).allowed === true;
 }
 

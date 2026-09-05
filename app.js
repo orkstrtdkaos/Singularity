@@ -123,7 +123,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.365";
+const APP_VERSION = "1.9.366";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4097,7 +4097,7 @@ function encounterMovesPanel(fm = null) {
   // ⛔ CCODE-339 — AN ANTIPODE CRAFT IS HELD AND NOT CAST. Erik: "you can't use the skill itself, ONLY THE
   // BRAIDABLE PART." So it is owned, it shows on the sheet, and it never reaches the action menu.
   // ⚠️ FILTERED HERE RATHER THAN GREYED: an option a player can see and never pick is a question the
-  // interface asks and refuses to answer. The CARD is where it says why (see `braid material only`).
+  // interface asks and refuses to answer. The CARD is where it says why (it reads the verdict's own `reason`).
   const owned = (character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(Boolean)
     .filter(ab => domainVerdict(ab).castable !== false);
   const byFam = {};
@@ -11024,7 +11024,7 @@ function renderCharacterScreen() {
       ${character.pendingMasteryFork ? (() => { const fb = fullCatalog()[character.pendingMasteryFork]; return `<div class="cs-ability" style="border-left:3px solid var(--accent)"><strong>⑂ A defining moment for ${esc(fb?.name || character.pendingMasteryFork)}</strong> — choose its path to master it. <button class="grow-btn practiced" data-masteryfork="${esc(character.pendingMasteryFork)}">Choose path</button></div>`; })() : ""}
       ${character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; if (!ab) return ""; const cost = effectiveEnergyCost(ab, character, rules);
         const p = rankProgress(character, a.abilityId);
-        return `<div class="cs-ability"><span class="tier-badge">${tierOf(abilityTier(ab))}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${esc(sheetCraftLabel(ab))})${domainVerdict(ab).castable === false ? ` · <strong class="not-castable">braid material only — you cannot cast this</strong>` : ""} · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
+        return `<div class="cs-ability"><span class="tier-badge">${tierOf(abilityTier(ab))}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${esc(sheetCraftLabel(ab))})${domainVerdict(ab).castable === false ? ` · <strong class="not-castable">${esc(domainVerdict(ab).reason || "you cannot cast this")}</strong>` : ""} · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
           <span class="cs-ranks">${[1, 2, 3].map(r => `<span class="${r <= a.level ? "cs-rank-on" : "cs-rank-off"}" title="${esc(ab.tree?.[r - 1]?.name || "")}">${r <= a.level ? "●" : "○"}</span>`).join("")}</span>
           ${ab.tree?.[a.level - 1] ? `<div class="hint">${esc(ab.tree[a.level - 1].name)}: ${esc(ab.tree[a.level - 1].grants)}</div>` : ""}
           <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div></div>`; }).join("")}

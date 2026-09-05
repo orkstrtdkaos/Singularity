@@ -2052,8 +2052,14 @@ console.log("\n── §32 · the antipode is learnable, and it cannot be cast �
   const appA = rd("app.js");
   check("§32: the action menu filters what cannot be cast",
     /castable !== false\)/.test(appA));
+  // ⚠️ 2026-09-05 — THIS PINNED THE RETIRED RULE'S EXACT WORDING. It asserted the sheet still said "braid
+  // material only — you cannot cast this", which R16 retired: a green gate standing behind a ruling, holding
+  // the old sentence in place. ⛑ The QUESTION is whether the sheet SAYS WHY rather than the craft silently
+  // vanishing — so it now asserts the branch reports the VERDICT'S OWN REASON, which cannot go stale when a
+  // rule changes because it is not a copy of one.
   check("§32: …and the sheet says WHY, rather than the craft just disappearing",
-    /braid material only/.test(appA) && /castable === false/.test(appA));
+    /castable === false/.test(appA) && /domainVerdict\(ab\)\.reason/.test(appA)
+    && !/braid material only/.test(appA));
 
   // ⚠️ AND THE BRAID ROAD IS STILL OPEN — the whole point of holding it. If braiding ever consulted
   // castability, the ruling would collapse into the wall it replaced.
@@ -6061,6 +6067,62 @@ console.log("\n── §87 · everyone declares, nobody can change their mind, a
   check("§87: ⚠️ …and `resolveRound` is NOT built — the locks are the input to a resolution that does not exist yet",
     typeof P87.resolveRound !== "function",
     "when this goes red the feature is done and the guide is owed its third clause");
+}
+
+/* ═════ §88 — A CRAFT WHOSE RANKS DECLARE VERBS AND WHOSE TOP LEVEL DOES NOT (BUILD_LIST §5) ═════ */
+// ⛔ Aevi: "§84 ratchets the COUNT; this would catch the SHAPE." ⚠️ THE DIFFERENCE MATTERS. A ratchet says
+// how many crafts are verbless and can be re-baselined by anyone in a hurry; this says the corpus is
+// INTERNALLY INCONSISTENT — the craft's own ranks name what it does and its top level says nothing, so the
+// author has already answered the question the readers ask and the answer never reached them.
+//
+// ⚑ THAT IS THE SHAPE OF THE BOND-GRANT DEFECT, and it is why the repair was a transcription rather than a
+// design pass: every rank already declared its verbs. ⛔ A shape check catches the next one on the day it
+// is authored, before anybody has to notice a party member reading as a bare HARM.
+console.log("\n── §88 · a craft that says what it does at every rank must say it at the top ──");
+{
+  const { loadContentHeadless: lch88 } = await import("./headless_content.mjs");
+  const C88 = await lch88();
+  const all88 = Object.values(C88.abilities);
+  const verbsAt = (n) => { const v = n?.functions ?? n?.mechanic?.functions; return Array.isArray(v) ? v.filter(Boolean) : []; };
+  // the inconsistent shape: SOME rank declares verbs, the top level declares none.
+  const inconsistent = all88.filter(a => {
+    const top = verbsAt(a);
+    if (top.length) return false;
+    return (a.tree || []).some(t => verbsAt(t).length);
+  });
+
+  check("§88: ⚠️ the fixture reads a real corpus with real trees — not vacuous",
+    all88.length > 300 && all88.filter(a => (a.tree || []).length).length > 200,
+    `${all88.length} crafts · ${all88.filter(a => (a.tree || []).length).length} with a tree`);
+  check("§88: ⛔ NO craft declares verbs at a rank and none at the top — the author already answered; the readers never saw it",
+    inconsistent.length === 0,
+    inconsistent.map(a => `${a.id}: ranks say ${JSON.stringify([...new Set((a.tree || []).flatMap(verbsAt))])}, top says nothing`).join(" · "));
+
+  // ⚠️ AND THE CHECK MUST BE ABLE TO GO RED. A shape gate that cannot fail is a comment.
+  const fake = { id: "probe", functions: undefined, tree: [{ rank: 1, functions: ["sustain"] }, { rank: 2 }] };
+  check("§88: ⚠️ …and the shape check FIRES on that shape — proven against a probe, not assumed",
+    !verbsAt(fake).length && (fake.tree || []).some(t => verbsAt(t).length));
+
+  // ⛔ AND THE UNION IS WHAT THE REPAIR SHOULD BE, so the rule is stated where it can be checked: a craft's
+  // top-level verbs must COVER what its ranks declare. ⚠️ A craft may name more at the top than any single
+  // rank does (rank 1 is not the whole craft); it may never name FEWER than its own ranks between them.
+  const underCovering = all88.filter(a => {
+    const top = new Set(verbsAt(a));
+    if (!top.size) return false;   // the empty case is the check above
+    return (a.tree || []).flatMap(verbsAt).some(v => !top.has(v));
+  });
+  // ⚠️ A RATCHET, NOT A RULE — because nobody has ruled it yet and I am not going to invent the ruling by
+  // writing a gate. ⛔ MEASURED: 35 crafts declare a verb at a rank that their top level never names, and
+  // `familiesOfAbility` reads ONLY the top level. `false_stance` gains `hinder` at rank 2 and reads as
+  // INFLUENCE alone, so a rank-2 holder's kit under-reads by a whole family.
+  // ⬜ TWO WAYS OUT AND BOTH BELONG TO SOMEONE ELSE: make each top level the union of its own ranks
+  // (content, 35 records, mechanical), or make the reading RANK-AWARE the way `tree[].powerSystem` already
+  // is (engine, better fiction — you gain verbs as you deepen — and it moves what every reader sees).
+  // ⚑ Until then the number is visible and may only go DOWN. po/CCODE_20260905_build_pass.md
+  const RANK_ADDS_A_VERB = 35;   // 2026-09-05
+  check(`§88: ⚠️ ratchet — crafts whose RANKS declare a verb their top level does not = ${underCovering.length} (baseline ${RANK_ADDS_A_VERB}) — may only go DOWN`,
+    underCovering.length <= RANK_ADDS_A_VERB,
+    underCovering.slice(0, 5).map(a => `${a.id} +${[...new Set((a.tree || []).flatMap(verbsAt).filter(v => !new Set(verbsAt(a)).has(v)))].join("/")}`).join(" · "));
 }
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));

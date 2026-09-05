@@ -2981,7 +2981,7 @@
    "levelReq": 4,
    "tier": 4,
    "energyCost": 12,
-   "powerSystem": "precursor",
+   "powerSystem": "metaphysical",
    "tradition": "umbral",
    "attribute": "mental",
    "axes": {
@@ -3005,36 +3005,38 @@
       "conceal"
      ],
      "gains": "broaden",
-     "harmRung": "lethal",
+     "harmRung": "incapacitating",
      "_nameWas": "The Stopped Breath",
      "gainAxes": [],
      "ongoingHarm": {
       "type": "shadow"
      },
-     "_ongoingHarm": "⛔ SNG-513. Breath stopped is not a wound that mends while it is stopped.\n⚠️ `mechanic.ongoingHarm` reduces a heal. healing_intent.json §5: A HEAL IS REDUCED BY ACTIVE ONGOING HARM, NEVER BY ARMOUR. Nobody armours against being mended; a wound held open resists it."
+     "_ongoingHarm": "⛔ SNG-513. Breath stopped is not a wound that mends while it is stopped.\n⚠️ `mechanic.ongoingHarm` reduces a heal. healing_intent.json §5: A HEAL IS REDUCED BY ACTIVE ONGOING HARM, NEVER BY ARMOUR. Nobody armours against being mended; a wound held open resists it.",
+     "powerSystem": "metaphysical"
     },
     {
      "rank": 2,
      "name": "Unlit Room",
      "grants": "Take sight and sound with it, so they cannot find help or be found calling.",
-     "cannot": "Anyone already being attended to.",
+     "cannot": "Anyone already being attended to. ⛔ AND IT IS NO LONGER CONCEALMENT — what fills the space where their sight and hearing were is not darkness, it is the Void, and a little of it stays in the room afterwards.",
      "functions": [
       "strike",
       "conceal"
      ],
      "gains": "deepen",
-     "harmRung": "lethal",
+     "harmRung": "incapacitating",
      "_nameWas": "The Unlit Room",
      "gainAxes": [
       "scope"
-     ]
+     ],
+     "powerSystem": "veil"
     }
    ],
    "challengeTypes": [
     "STEALTH",
     "FIGHT"
    ],
-   "harmRung": "lethal",
+   "harmRung": "incapacitating",
    "nativeOrCombination": "native",
    "shape": "damage",
    "operativeAxis": [
@@ -3049,7 +3051,16 @@
     "plus": 1,
     "targets": 1,
     "damageType": "shadow",
-    "note": "⚠️ SLOW damage — resolves over minutes, and a healer reaching them in time answers it. That makes it an ATTRITION kill, not a craft-kill, if anyone is watching."
+    "note": "⚠️ SLOW damage — resolves over minutes, and a healer reaching them in time answers it. That makes it an ATTRITION kill, not a craft-kill, if anyone is watching.",
+    "ongoing": {
+     "perRound": {
+      "n": 1,
+      "d": 6
+     },
+     "damageType": "shadow",
+     "endsOn": "reached"
+    },
+    "_ongoingWhy": "⛔ R43d SIBLING CASE. The record said this THREE times and the rung contradicted all three: bound — 'IT IS SLOW; A HEALER WHO REACHES THEM IN TIME UNDOES IT' · notFor — 'it is SLOW: they have time to be found' · mechanic note — '⚠️ SLOW damage… AN ATTRITION KILL, NOT A CRAFT-KILL'. ✅ 3d6+1 shadow on landing, then 1d6 per round, `endsOn: reached`. ⚑ AND THE EXIT IS *BEING REACHED*, NOT TREATMENT — which is what makes r2 vicious: `Unlit Room` 'takes sight and sound with it, so they cannot find help or be found calling.' ⛔ THE RANK-2 GRANT IS THE REMOVAL OF THE EXIT, which is the T5 pattern — a rank that lifts a limit rather than adding a cost. ⬜ CCode: r2 should SUPPRESS `endsOn: reached`."
    },
    "rankDeltas": [
     {
@@ -3083,7 +3094,8 @@
    "_idWas": "the_stopped_breath",
    "_notForWas": "Anything that does not breathe. A braced target who knows you are there — this needs them unaware, which is why it is a back-line craft and not a duelling one. And it is SLOW: they have time to be found.",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_perRankSource_20260904": "⛔ ERIK 2026-09-04: 'make it METAPHYSICAL r1 and VEIL r2.' ⚑ r1 is a person hiding a person's breath from them — mind past matter, this side. ⛔ r2 TAKES SIGHT AND SOUND AWAY, and that is not concealment any more, it is SUBTRACTION. ⚠️ ERIK, SAME TURN: 'THE VEIL SIDE OF THE GREAT BATTLE IS THE VOID.' ➡️ So r2 does not hide the world from them — it puts a little of the Void where the world was. ⬜ NEEDS THE PER-RANK SOURCE READER (`SPEC_body_source.md` §4, feasible, unbuilt). Until then the top-level `metaphysical` grounds the whole craft and r2's `veil` is authored-but-unread. ⚠️ WAS `precursor`, which wanted DENSE ground while every other Dark craft wants thin — likely the same stale-source class found in the Abyssal set."
   },
   {
    "schemaVersion": 1,

@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Singularity — the Arcs of Exesa</title>
+<style>
+:root{--bg:#0b0b10;--panel:#13131b;--line:#262630;--ink:#e9e7de;--dim:#8f8d83;--acc:#c9a227;--warn:#d98c3a;--stop:#c05a52;--go:#6fa87a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 ui-serif,Georgia,'Times New Roman',serif}
+header{position:sticky;top:0;z-index:9;background:#0b0b10ee;backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:14px 22px;display:flex;gap:18px;align-items:baseline;flex-wrap:wrap}
+h1{margin:0;font-size:17px;font-weight:600;letter-spacing:.02em;font-family:ui-sans-serif,system-ui,sans-serif}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+nav a{color:var(--dim);text-decoration:none;font:13px/1 ui-sans-serif,system-ui,sans-serif;border:1px solid var(--line);padding:6px 12px;border-radius:20px}
+nav a:hover,nav a.on{color:var(--acc);border-color:var(--acc)}
+main{max-width:760px;margin:0 auto;padding:34px 22px 100px}
+#doc h1{font-size:30px;margin:0 0 6px;line-height:1.2;font-family:ui-serif,Georgia,serif;font-weight:600}
+#doc h2{font-size:22px;margin:44px 0 12px;padding-top:20px;border-top:1px solid var(--line);font-family:ui-serif,Georgia,serif;font-weight:600}
+#doc h3{font-size:17px;margin:28px 0 8px;color:var(--acc);font-family:ui-sans-serif,system-ui,sans-serif;font-weight:600;letter-spacing:.01em}
+#doc p{margin:0 0 14px}
+#doc em{color:var(--dim);font-style:italic}
+#doc strong{color:#fff;font-weight:600}
+#doc ul,#doc ol{margin:0 0 16px;padding-left:22px}
+#doc li{margin:0 0 7px}
+#doc hr{border:0;border-top:1px solid var(--line);margin:34px 0}
+#doc code{background:#1b1b24;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:#d8cfa8}
+#doc blockquote{margin:0 0 18px;padding:2px 0 2px 18px;border-left:2px solid var(--acc);color:#cfcbbe}
+#doc table{border-collapse:collapse;width:100%;margin:0 0 20px;font-size:15px}
+#doc th{text-align:left;color:var(--dim);font:12px/1.4 ui-sans-serif,system-ui,sans-serif;text-transform:uppercase;letter-spacing:.06em;padding:6px 12px 6px 0;border-bottom:1px solid var(--line);font-weight:600}
+#doc td{padding:9px 12px 9px 0;border-bottom:1px solid #1a1a22;vertical-align:top}
+#doc tr:last-child td{border-bottom:0}
+.mk{font-style:normal}
+.hint{color:var(--dim);font:13px/1.6 ui-sans-serif,system-ui,sans-serif;margin:0 0 26px}
+footer{max-width:760px;margin:0 auto;padding:0 22px 60px;color:var(--dim);font:13px/1.7 ui-sans-serif,system-ui,sans-serif;border-top:1px solid var(--line);padding-top:20px}
+@media(max-width:620px){main{padding:22px 16px 80px}#doc h1{font-size:25px}#doc table{font-size:14px}}
+</style></head><body>
+<header>
+  <h1>Singularity <span style="color:var(--dim);font-weight:400">— the Arcs of Exesa</span></h1>
+  <nav>
+    <a href="#" data-d="docs/EXESA.md" class="on">The World</a>
+    <a href="#" data-d="docs/PLAYERS_GUIDE.md">Player's Guide</a>
+    <a href="singularity_world.html">Map</a>
+    <a href="index.html">Play</a>
+  </nav>
+</header>
+<main><div id="doc"><p class="hint">loading…</p></div></main>
+<footer>Singularity — the Arcs of Exesa. These pages are generated from the game's own documentation and change as the game does.</footer>
+<script>
+// a small markdown renderer — enough for these two documents, and no dependencies
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function inline(s){
+  s=esc(s);
+  s=s.replace(/`([^`]+)`/g,(m,a)=>'<code>'+a+'</code>');
+  s=s.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  s=s.replace(/(^|[^*])\*([^*][^*]*?)\*(?!\*)/g,'$1<em>$2</em>');
+  s=s.replace(/(⛔|⚠️|⚑|✅|⬜)/g,'<span class="mk">$1</span>');
+  return s;
+}
+function render(md){
+  const out=[]; const L=md.split('\n'); let i=0;
+  while(i<L.length){
+    let l=L[i];
+    if(/^\s*$/.test(l)){i++;continue}
+    if(/^---+\s*$/.test(l)){out.push('<hr>');i++;continue}
+    let h=l.match(/^(#{1,4})\s+(.*)$/);
+    if(h){const n=Math.min(h[1].length,3);out.push(`<h${n}>${inline(h[2])}</h${n}>`);i++;continue}
+    if(/^\s*\|/.test(l)&&i+1<L.length&&/^\s*\|[\s:|-]+\|\s*$/.test(L[i+1])){
+      const cells=r=>r.trim().replace(/^\||\|$/g,'').split('|').map(c=>c.trim());
+      const head=cells(l); i+=2; const rows=[];
+      while(i<L.length&&/^\s*\|/.test(L[i])){rows.push(cells(L[i]));i++}
+      out.push('<table><thead><tr>'+head.map(c=>'<th>'+inline(c)+'</th>').join('')+'</tr></thead><tbody>'
+        +rows.map(r=>'<tr>'+r.map(c=>'<td>'+inline(c)+'</td>').join('')+'</tr>').join('')+'</tbody></table>');
+      continue;
+    }
+    if(/^>\s?/.test(l)){const b=[];while(i<L.length&&/^>\s?/.test(L[i])){b.push(L[i].replace(/^>\s?/,''));i++}
+      out.push('<blockquote>'+inline(b.join(' '))+'</blockquote>');continue}
+    if(/^\s*[-*]\s+/.test(l)){const b=[];while(i<L.length&&/^\s*[-*]\s+/.test(L[i])){b.push(L[i].replace(/^\s*[-*]\s+/,''));i++}
+      out.push('<ul>'+b.map(x=>'<li>'+inline(x)+'</li>').join('')+'</ul>');continue}
+    if(/^\s*\d+\.\s+/.test(l)){const b=[];while(i<L.length&&/^\s*\d+\.\s+/.test(L[i])){b.push(L[i].replace(/^\s*\d+\.\s+/,''));i++}
+      out.push('<ol>'+b.map(x=>'<li>'+inline(x)+'</li>').join('')+'</ol>');continue}
+    const p=[];while(i<L.length&&!/^\s*$/.test(L[i])&&!/^(#{1,4}\s|>|\s*[-*]\s|\s*\d+\.\s|\s*\||---+\s*$)/.test(L[i])){p.push(L[i]);i++}
+    if(p.length)out.push('<p>'+inline(p.join(' '))+'</p>');
+  }
+  return out.join('\n');
+}
+const doc=document.getElementById('doc');
+async function load(path,el){
+  document.querySelectorAll('nav a[data-d]').forEach(a=>a.classList.toggle('on',a===el));
+  doc.innerHTML='<p class="hint">loading…</p>';
+  try{
+    const r=await fetch(path+'?t='+Date.now());
+    if(!r.ok) throw new Error(r.status);
+    doc.innerHTML=render(await r.text());
+    window.scrollTo(0,0);
+  }catch(e){doc.innerHTML='<p class="hint">Could not load '+esc(path)+'.</p>'}
+}
+document.querySelectorAll('nav a[data-d]').forEach(a=>a.addEventListener('click',ev=>{
+  ev.preventDefault(); load(a.dataset.d,a); history.replaceState(null,'','?d='+encodeURIComponent(a.dataset.d));
+}));
+const want=new URLSearchParams(location.search).get('d');
+const start=[...document.querySelectorAll('nav a[data-d]')].find(a=>a.dataset.d===want)||document.querySelector('nav a[data-d]');
+load(start.dataset.d,start);
+</script></body></html>

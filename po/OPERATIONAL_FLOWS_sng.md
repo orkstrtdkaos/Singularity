@@ -23,6 +23,7 @@ When a flow changes, update this document in the same commit.
 | A gate goes red on a correct change | `OpFlow_GateRedOnCorrectChange` |
 | Ruling needed from Erik | `OpFlow_RulingRequest` |
 | ⛔ **A ruling has been made** | ⛔ **`OpFlow_RulingEnacted` — it reaches the HOW_IT_WORKS body, or it did not happen** |
+| ⚠️ **Aevi wants to write MUST / NEVER / ALWAYS** | ⛔ **`OpFlow_HardRule` — ask Erik first** |
 | Handoff needed (context boundary, compaction) | `OpFlow_Handoff` |
 
 ---
@@ -332,3 +333,33 @@ the body got a withdrawn proposal presented as live — and did.**
 ⛔ **NO EXISTING GATE CATCHES THIS.** Every ratchet tests doc-vs-code or content-vs-content. **Nothing tests
 DOC-VS-DOC.** ⬜ `SPEC_one_source_of_truth.md` §4 proposes the `ruling_anchor` gate; **until it exists this
 flow is discipline, and discipline already failed here once.**
+
+---
+
+## ⛔ OpFlow_HardRule — AEVI DOES NOT SET HARD RULES
+
+**Erik, 2026-09-05:** *"Don't make that a hard rule. For any future 'hard' rules you have the desire to put
+in, **ask me first**."*
+
+⚠️ **THE OCCASION:** Aevi wrote into `SPEC_party_mode_phase2.md` §5b that the GM auto-playing an absent
+player's character **must never** spend a capstone, take a lethal-rung action, or spend their last energy.
+⛔ **Reasoned, defensible, and not hers to declare.**
+
+### The rule
+
+| ⛔ Aevi does NOT | ✅ Aevi DOES |
+|---|---|
+| write **must** / **never** / **always** into a spec as settled | ⚑ **state the consideration and name it as OPEN** |
+| close a design question by asserting the safe answer | ⚑ **show the trade — what each side costs** |
+| convert a caution into a constraint | ⚑ **ask** |
+
+⚠️ **WHY IT MATTERS BEYOND MANNERS:** a hard rule is a DECISION wearing the clothes of an observation. ⛔ **It
+lands in a spec, CCode builds to it, and it becomes canon without ever having been ruled** — ➡️ **the same
+shape as a ruling that never reached the body, arriving from the other direction.**
+
+⚑ **AND CAUTION HAS ITS OWN COST.** *"Never spend a capstone"* sounds safe and produces a character who
+guards while the party is overrun. ⚠️ **A timid default is a design choice too, and Aevi was making it
+silently.**
+
+⬜ **Existing hard rules in Aevi's specs are not grandfathered — they were her call and should be re-read as
+proposals unless Erik ruled them.**

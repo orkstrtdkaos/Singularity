@@ -12656,8 +12656,13 @@ await (async () => {
       !HOLDING_KINDS.includes("household") && addHolding({}, { id: "h", kind: "household" }) === null);
 
     // A departed steward leaves the post behind — expressible only because SNG-355 made departure a status.
-    check("358: a holding whose keeper has left is reported as unkept",
-      unstewardedHoldings({ holdings: [h] }, []).length === 1 && unstewardedHoldings({ holdings: [h] }, ["cassiel"]).length === 0);
+    // ✅ 2026-09-05 (Erik, Silas's save): a keeper is a DELEGATE at the hold, not a companion — "not in the company" wiped
+    // Fendt and Cassiel Ord on the first tick. Gone means gone: dead or departed in the registry, or a companion who LEFT.
+    check("358: a holding whose keeper has LEFT the company is reported as unkept; a delegate who never travelled with you is NOT",
+      unstewardedHoldings({ holdings: [h], company: [{ npcId: "cassiel", leftDay: 3 }] }, []).length === 1
+      && unstewardedHoldings({ holdings: [h], npcRegistry: { cassiel: { status: "active" } } }, []).length === 0
+      && unstewardedHoldings({ holdings: [h], npcRegistry: { cassiel: { status: "departed" } } }, []).length === 1
+      && unstewardedHoldings({ holdings: [h] }, ["cassiel"]).length === 0);
     check("358: the GM is told what you hold, who keeps it, and how it fares",
       /Raven's Home \(post, .*kept by cassiel\)/.test(holdingsForGM({ holdings: [h] }) || ""));
 

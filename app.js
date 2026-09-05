@@ -60,7 +60,7 @@ import { enterDeathState } from "./engine/death.js";
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
-import { addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, upkeepFor } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
@@ -122,7 +122,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.351";
+const APP_VERSION = "1.9.352";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10651,6 +10651,15 @@ function wireHoldingOffers() {
     releaseHolding(character, id, { reason: "given up", day: absoluteWorldDay(), worldCount: worldCount() });
     saveCharacter(character); again();
   };
+  for (const btn of app.querySelectorAll("[data-hold-here]")) btn.onclick = () => {
+    const id = btn.dataset.holdHere;
+    const h = (character.holdings || []).find(x => x.id === id);
+    const here = hereNow();
+    if (!h || !here?.id) return;
+    h.locationId = here.id;
+    h.history = [...(h.history || []), { at: worldCount(), from: h.condition, to: h.condition, note: `placed at ${here.name || here.id}` }].slice(-12);
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-hold-sell]")) btn.onclick = () => {
     const id = btn.dataset.holdSell;
     const here = hereNow();
@@ -10721,6 +10730,18 @@ function renderHoldingsTab() {
         <strong>${esc(h.name || h.id)}</strong>
         <div class="hint">${esc(h.kind || "post")} · ${esc(h.condition || "holding")}${loc ? " · " + esc(loc) : ""}${h.steward ? " · kept by " + esc(nameOf(h.steward)) : " · <em>unkept</em>"}</div>
         ${h.obligation ? `<div class="hint">owes: ${esc(h.obligation)}</div>` : ""}
+        ${(() => { // ✅ 2026-09-05 (Erik: "I can't open them to see what they produce and who is assigned, who lives there"): what is REAL, per hold
+          const cfgS = CONTENT.rules?.economy?.holdStore || null;
+          const y = yieldFor(h, cfgS), up = upkeepFor(h, cfgS);
+          const produces = y ? `${y.units} ${String(y.goods).replace(/_/g, " ")} per pass while ${h.condition}` : (h.kind === "post" ? "nothing — a post holds ground, it does not produce" : "nothing yet");
+          const here = hereNow();
+          const where = h.locationId ? esc(CONTENT.locations?.[h.locationId]?.name || h.locationId)
+            : `<em>not recorded</em>${here?.id ? ` <button class="opt" data-hold-here="${esc(h.id)}" title="Record that this hold is the place you are standing in">It's here — ${esc(here.name || here.id)}</button>` : ""}`;
+          const crew = Object.values(character.worldState?.assignments || {}).filter(a => a && a.status !== "done" && (a.npcId === h.steward || a.id === h.fromAssignment)).map(a => `${esc(a.npcName || a.npcId)} — ${esc(String(a.charge || "").slice(0, 70))} (${esc(a.status || "working")})`);
+          return `<div class="hint">where: ${where}</div>
+        <div class="hint">keeper: ${h.steward ? esc(nameOf(h.steward)) : "<em>nobody</em>"} · produces: ${esc(produces)}${up > 0 ? ` · keep: ${up} crystal per pass` : ""}</div>
+        ${crew.length ? `<div class="hint">at work here: ${crew.join("; ")}</div>` : ""}
+        <div class="hint">who lives here: <em>not recorded — a hold carries no residents yet (RULINGS OWED Q14)</em></div>`; })()}
         ${storeTotal(h) > 0 ? `<div class="hint">store: ${esc(Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", "))}${(() => { const w = storeWorth(h, { economy: CONTENT.rules?.economy, regionId: CONTENT.locations?.[h.locationId]?.regionId || null, cfg: CONTENT.rules?.economy?.holdStore }); return w ? ` · worth ~${w} crystal here` : ""; })()}${h.arrears ? ` · in arrears ${h.arrears}` : ""}</div>` : ""}
         ${h.fromAssignment ? `<div class="hint">from work you delegated</div>` : ""}
         <div class="opt-row" style="margin-top:4px;gap:6px;flex-wrap:wrap">

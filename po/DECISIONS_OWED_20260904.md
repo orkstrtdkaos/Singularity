@@ -135,6 +135,16 @@ the change is content — per craft — and it is yours and Aevi's.
   line, so it counts as 0. Mine, next pass.
 
 
+### Q17 · a post the fiction names but the GM never claims — the Whistling Woman ⛔ found in Silas's save (2026-09-05)
+
+**Measured.** Silas stands at `gen-whistling-woman-post` (a generated place); his chronicle says *"a waypost is coming — named
+the Whistling Woman… named and intended"*; no `holdingOps claim` was ever emitted, so no record exists and the tab cannot show
+it. The GM contract says to claim a post the fiction gives; the narrator did not. ⬜ Three shapes, Erik's call: (a) a player
+affordance — *Claim this place* on the Holdings tab when standing somewhere the fiction has named yours; (b) a nudge in the
+narrator's block — *you are standing in a place you may hold and have not claimed*; (c) an offer minted from the chronicle
+when a place is named as yours. (a) is the smallest and never invents; (c) is the migration path already used for
+assignments. Nothing built.
+
 ### Q16 · the battle menu is capped at 40 slots, one per craft FUNCTION — a big kit loses its bare moves, items and senses ⛔ found by the real-game harness (2026-09-05)
 
 **Measured (`§71`).** `battleSkillsForCharacter` pushes crafts first (a slot per function), then "A plain strike" and "Raise a

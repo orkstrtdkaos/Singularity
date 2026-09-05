@@ -423,7 +423,7 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
   // ⛔ A DEPARTED STEWARD LEAVES THE POST UNKEPT, and this is the line that makes SNG-355 cost something.
   // Departure stopped being a deletion there precisely so it could be OBSERVED here: a castellan who turns
   // back toward the March does not silently keep running your station from the road.
-  for (const h of unstewardedHoldings(character, activeCompany(character).map(m => m.npcId))) {
+  for (const h of unstewardedHoldings(character, activeCompany(character).map(m => m.npcId), { registry: character?.npcRegistry || {}, company: character?.company || [] })) {
     news.push(`${h.name || h.id} has lost its keeper.`);
     h.steward = null;
   }

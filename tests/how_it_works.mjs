@@ -4825,6 +4825,60 @@ console.log("\n── §71 · the harness drives the production path (engine/bat
   check("§71: …the incapacitation table is content-driven and the harness sees its outcomes", (() => { const seen = new Set(); for (let s = 1; s <= 60; s++) { const r = play71(s); if (r.plan) seen.add(r.plan.outcome); } return seen.size >= 2; })());
   check("§71: …the body says so", /battle_turn/.test(rd("docs/HOW_IT_WORKS.md")) && /RULE 4/.test(rd("docs/HOW_IT_WORKS.md")));
 }
+/* ═════ §72 — A KEEPER IS A DELEGATE, NOT A COMPANION (Erik, Silas's save, 2026-09-05) ═════ */
+// ⛔ Both of Silas's accepted holds lost their keepers on the world tick's FIRST pass: `unstewardedHoldings` read "not in the
+// active company" as "gone", and a steward is a delegate who stays at the hold — never a companion. `keeperGone` is the rule
+// now (dead · departed · a companion who LEFT); a reconcile step restores what the old rule wiped; the Holdings tab shows what
+// is real per hold and lets the player pin a hold to where they stand. The Whistling Woman — a post the fiction named that the
+// GM never claimed — is Q17, not built.
+console.log("\n── §72 · a keeper is a delegate, not a companion; the wiped keepers come back; the tab shows what is real ──");
+{
+  const H72 = await import("../engine/holdings.js");
+  const WT72 = await import("../engine/worldtick.js");
+  const R72 = await import("../engine/reconcile.js");
+  const mk = (steward, extra = {}) => ({ id: "pc", holdings: [{ id: "hold-x", kind: "post", name: "the post", locationId: null, steward, condition: "holding", history: [], lastMovedWorldCount: 0 }],
+    company: [], npcRegistry: {}, holdingOffers: [], worldState: { assignments: {} }, ...extra });
+  check("§72: ⛔ `keeperGone` — dead or departed in the registry is gone; a companion who LEFT is gone; a delegate who never travelled with you is NOT; no record at all is NOT",
+    H72.keeperGone(mk("a", { npcRegistry: { a: { status: "dead" } } }), "a") === true
+    && H72.keeperGone(mk("a", { npcRegistry: { a: { status: "departed" } } }), "a") === true
+    && H72.keeperGone(mk("a", { company: [{ npcId: "a", leftDay: 4 }] }), "a") === true
+    && H72.keeperGone(mk("a", { npcRegistry: { a: { status: "active" } } }), "a") === false
+    && H72.keeperGone(mk("a"), "a") === false);
+  check("§72: …`unstewardedHoldings` reports only the gone — a delegate at the hold keeps it even with an empty company",
+    H72.unstewardedHoldings(mk("fendt", { npcRegistry: { fendt: { status: "active" } } }), []).length === 0
+    && H72.unstewardedHoldings(mk("fendt", { npcRegistry: { fendt: { status: "departed" } } }), []).length === 1
+    && H72.unstewardedHoldings(mk("fendt", { company: [{ npcId: "fendt", leftDay: 2 }] }), []).length === 1);
+  const kept = mk("fendt", { npcRegistry: { fendt: { status: "active" } } });
+  const t1 = WT72.advanceHoldings({ character: kept });
+  const gone = mk("fendt", { npcRegistry: { fendt: { status: "departed" } } });
+  const t2 = WT72.advanceHoldings({ character: gone });
+  check("§72: ⛔ …the TICK keeps a delegate's post kept (no 'lost its keeper', the keeper still on the record) and fires only for the gone",
+    kept.holdings[0].steward === "fendt" && !t1.news.some(n => /lost its keeper/.test(n.text)) && gone.holdings[0].steward === null && t2.news.some(n => /lost its keeper/.test(n.text)),
+    JSON.stringify({ kept: kept.holdings[0].steward, n1: t1.news.map(n => n.text), gone: gone.holdings[0].steward }));
+  // the repair, on Silas's own shape
+  const silas = { id: "pc", holdings: [
+      { id: "hold-fendt::warden", kind: "post", name: "Threshold Post", locationId: null, steward: null, condition: "strained", fromAssignment: "fendt::warden", history: [] },
+      { id: "hold-dead::x", kind: "post", name: "a lost post", locationId: null, steward: null, condition: "strained", fromAssignment: "dead::x", history: [] },
+      { id: "hold-kept", kind: "post", name: "kept", locationId: null, steward: "ossian", condition: "holding", fromAssignment: "ossian::y", history: [] } ],
+    company: [], npcRegistry: { fendt: { name: "Fendt", status: "active" }, dead: { name: "Gone", status: "dead" }, ossian: { name: "Ossian", status: "active" } },
+    worldState: { assignments: { "fendt::warden": { id: "fendt::warden", npcId: "fendt", npcName: "Fendt", status: "problem" }, "dead::x": { id: "dead::x", npcId: "dead", status: "working" } } } };
+  const stepsAll = R72.STEPS || R72.steps || R72.RECONCILE_STEPS || R72.default || null;
+  const list = Array.isArray(stepsAll) ? stepsAll : (stepsAll && typeof stepsAll === "object" ? Object.values(stepsAll) : []);
+  const step = list.find(s => s && s.id === "holdings-keeper-restored");
+  if (step) {
+    const out = step.apply(silas, {});
+    check("§72: ⛔ the repair restores a wiped keeper from the assignment (Fendt), leaves a dead one wiped, leaves a kept one alone, and says so",
+      silas.holdings[0].steward === "fendt" && /keeper restored/.test(silas.holdings[0].history[0]?.note || "") && silas.holdings[1].steward === null && silas.holdings[2].steward === "ossian"
+      && Array.isArray(out.notes) && /Fendt/.test(out.notes[0]), JSON.stringify({ s: silas.holdings.map(h => h.steward), notes: out.notes }));
+  } else {
+    check("§72: ⛔ the repair step exists (holdings-keeper-restored) and restores from the assignment's person", /id: "holdings-keeper-restored"/.test(rd("engine/reconcile.js")) && /h\.steward = npcId;/.test(rd("engine/reconcile.js")));
+  }
+  const app72 = rd("app.js");
+  check("§72: …the Holdings tab shows what is REAL per hold — where (or *It's here*), the keeper, what it produces per pass, the keep, who is at work, and that residents are not modelled",
+    /data-hold-here=/.test(app72) && /yieldFor\(h, cfgS\)/.test(app72) && /produces: \$\{esc\(produces\)\}/.test(app72) && /at work here:/.test(app72) && /who lives here:/.test(app72) && /RULINGS OWED Q14/.test(app72));
+  check("§72: …and the pin writes the place you stand in onto the hold, with history", /h\.locationId = here\.id;/.test(app72) && /note: `placed at \$\{here\.name \|\| here\.id\}`/.test(app72));
+  check("§72: …the body says a keeper is a delegate, and Q17 names the unclaimed post", /keeperGone/.test(rd("docs/HOW_IT_WORKS.md")) && /Q17/.test(rd("docs/RULINGS.md")) && /Whistling Woman/.test(rd("po/DECISIONS_OWED_20260904.md")));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

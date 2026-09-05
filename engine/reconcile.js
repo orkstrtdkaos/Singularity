@@ -1083,6 +1083,31 @@ export const CHARACTER_STEPS = [
       return { offers, notes: [`${n} assignment${n === 1 ? "" : "s"} may describe a place you hold — review ${n === 1 ? "it" : "them"} in your holdings.`] };
     }
   },
+  {
+    version: 33, id: "holdings-keeper-restored", playerFacing: true,
+    // ⛔ ERIK 2026-09-05 — "I assigned them… but I can't see who is assigned." Silas's two accepted holds lost their keepers
+    // on the world tick's FIRST pass (world count 1612): `unstewardedHoldings` read "not in the active company" as "gone",
+    // and a steward is a delegate who stays at the hold — never a companion. The rule is fixed (`keeperGone`); this puts
+    // back what it wiped: a hold with no keeper that came from an assignment gets that assignment's person, when the
+    // registry does not say dead or departed. History says it happened. Nothing else moves — the condition it slipped to
+    // stays, because a pass DID go by unkept; the keeper is simply back at their post.
+    apply: (c) => {
+      const restored = [];
+      for (const h of c.holdings || []) {
+        if (!h || h.steward || !h.fromAssignment) continue;
+        const a = c.worldState?.assignments?.[h.fromAssignment];
+        const npcId = a?.npcId || String(h.fromAssignment).split("::")[0] || null;
+        if (!npcId) continue;
+        const status = String(c.npcRegistry?.[npcId]?.status || "").toLowerCase();
+        if (status === "dead" || status === "departed") continue;
+        h.steward = npcId;
+        h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: "keeper restored — the tick had wiped a delegate for not travelling with you" }].slice(-12);
+        restored.push(c.npcRegistry?.[npcId]?.name || a?.npcName || npcId);
+      }
+      if (!restored.length) return {};
+      return { notes: [`${restored.join(" and ")} ${restored.length === 1 ? "is" : "are"} back at ${restored.length === 1 ? "the post they keep" : "the posts they keep"} — the world had counted them gone for not travelling with you.`] };
+    }
+  },
   {    version: 30, id: "restore-generated-teacher-roles", playerFacing: true,
     // SNG-355 §1c — ERIK'S SAVE NEEDS THIS AND CANNOT HEAL ITSELF. `recruit()` read `teaches` from the
     // AUTHORED catalog only, so a GENERATED NPC returned {} and the teacher role was dropped at the moment

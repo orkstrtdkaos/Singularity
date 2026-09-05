@@ -149,10 +149,26 @@ export function holdingsForGM(character, effects = null, { hereId = null, nameOf
 /** ⚠️ A DEPARTED STEWARD LEAVES THE POST BEHIND. SNG-355 made departure a status rather than a deletion,
  *  which is exactly what lets this be expressible: the holding remembers who kept it and knows they are
  *  gone. Returns the holdings whose keeper has left. */
-export function unstewardedHoldings(character, activeIds = []) {
+export function unstewardedHoldings(character, activeIds = [], { registry = null, company = null } = {}) {
   ensureHoldings(character);
   const active = new Set(activeIds);
-  return character.holdings.filter(h => h.steward && !active.has(h.steward));
+  return character.holdings.filter(h => h.steward && !active.has(h.steward) && keeperGone(character, h.steward, { registry, company }));
+}
+
+/** ⛔ ERIK 2026-09-05 (Silas's save): both accepted holds lost their keepers on the tick's FIRST pass. The rule was "not in
+ *  the active company" — but a steward is a DELEGATE who stays at the hold; they are never in the company. Fendt and
+ *  Cassiel Ord were wiped for being exactly what a keeper is. A keeper is gone only when they are gone: the registry says
+ *  dead or departed, or they were a companion who LEFT (SNG-355 made departure a status — that is the case this rule was
+ *  written for). Absent both records the keeper stays; the tick has no grounds to fire them. */
+export function keeperGone(character, stewardId, { registry = null, company = null } = {}) {
+  if (!stewardId) return false;
+  const reg = registry || character?.npcRegistry || {};
+  const status = String(reg?.[stewardId]?.status || "").toLowerCase();
+  if (status === "dead" || status === "departed") return true;
+  const roster = company || character?.company || [];
+  const member = roster.find(m => m && m.npcId === stewardId);
+  if (member && member.leftDay) return true;
+  return false;
 }
 
 /* ═══ SPEC_holding_release_transfer — THE ONE-WAY DOOR GETS TWO EXITS, AND THEY ARE NOT THE SAME EXIT ═══

@@ -3688,12 +3688,29 @@ console.log("\n── §54 · the doc may not contradict itself ──");
     const hasR = (t, n) => new RegExp("\\bR" + n + "\\b").test(t);
     const unenacted = nums.filter(n => !hasR(doc, n));
     const inBody = nums.filter(n => hasR(bodyTxt54, n)).length;
+    // ⛔ 2026-09-05 — THE GATE WAS ASKING THE WRONG QUESTION, AND AEVI MINTING FIVE RULINGS IN A MORNING IS WHAT SHOWED IT.
+    // Every minted number was owed the truth doc immediately, so R44–R48 (ruled at 09:00, building through the day) turned
+    // MY unrelated push red. ⚠️ The failure this exists for is "a ruling that never reached the body was invisible" — and a
+    // ruling minted an hour ago and queued for this afternoon is not invisible, it is QUEUED. The RULINGS index already
+    // carries that state, and section 62 already reads it for anchors. The hard half now asks the real question: a ruling
+    // the INDEX MARKS BUILT must be in the truth. The queued ones stay on a ratchet so the backlog cannot grow unwatched.
+    const idx54 = rd("docs/RULINGS.md");
+    const builtNums = new Set([...idx54.matchAll(/^\|\s*~{0,2}\*\*R(\d+)\*\*~{0,2}\s*\|[^\n]*?\|\s*✅/gm)].map(m => Number(m[1])));
+    const builtAbsent = [...builtNums].filter(n => !hasR(doc, n)).sort((a, b) => a - b);
+    check("§54: ⛔ every ruling the INDEX marks BUILT is in the truth doc — the invisible-ruling failure, asked properly",
+      builtAbsent.length === 0, builtAbsent.map(n => "R" + n).join(" ") || `${builtNums.size} built rulings, all present`);
+    const queued = unenacted.filter(n => !builtNums.has(n));
+    // measured 2026-09-05 after R44–R48 were minted: 8 absent, all queued or old strays (R23 is the known straggler)
+    check(`§54: ratchet — minted rulings not yet built AND not in the doc = ${queued.length} (baseline 8) — may only go DOWN`,
+      queued.length <= 8, queued.map(n => "R" + n).join(" ") || "none");
     check("§54: ⛔ at most four minted rulings are absent from HOW_IT_WORKS — may only go DOWN",
       // ⚠️ FIVE, NOT FOUR — and the ratchet is what noticed. R21 was in the body when I measured and is
       // gone after the foothill rewrite: a ruling that WAS enacted became un-enacted. ⛔ THAT IS THE
       // FAILURE MODE THIS EXISTS FOR, caught within the hour. R23 is the old straggler; R30–R32 were ruled
       // yesterday off my own ROUND 2 and their substance is in §7h without the numbers.
-      unenacted.length <= 5,
+      // ⚠️ SUPERSEDED IN PURPOSE by the two checks above and kept as the corpus-wide watch: it may not grow past what the
+      // queue explains, so a ruling QUIETLY dropped still shows here even while the queue is legitimately long.
+      unenacted.length <= Math.max(5, queued.length),
       nums.length + " minted · absent: " + (unenacted.map(n => "R" + n).join(" ") || "none"));
     check("§54: …and most R-numbers reach the BODY, not merely the log — the enacted half",
       inBody >= 25, inBody + " of " + nums.length + " in the body");
@@ -4746,7 +4763,11 @@ console.log("\n── §70 · per-rank source · the revised kill cost · ongoin
   const declaredStale = rows70.filter(r => r.status === "spec_ready" && r.builds && r.builds.length && r.builds.every(b => exports70.has(b)));
   check("§70: ⛔ a `spec_ready` spec that DECLARES `builds:` and whose every named export exists is stale — mark it built", declaredStale.length === 0, declaredStale.map(r => r.f).join(" · "));
   const derivedStale = rows70.filter(r => r.status === "spec_ready" && r.named.length >= 1);
-  const BASELINE_DERIVED = 4;   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
+  // ⚠️ RE-BASELINED 2026-09-05, 4 → 5: SPEC_world_guesses_features.md landed today, unbuilt, naming improveHolding and
+  // growthFor as CONTEXT for what it proposes. The derived count is a proxy — the hard half is the declared builds: field
+  // — and a new unbuilt spec raises the proxy without anything being stale. The population grew; the baseline moves with
+  // it, and the reason is written here rather than the number quietly nudged.
+  const BASELINE_DERIVED = 5;   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
   check(`§70: ratchet — \`spec_ready\` specs naming an existing engine export = ${derivedStale.length} (baseline ${BASELINE_DERIVED}) — may only go DOWN`,
     derivedStale.length <= BASELINE_DERIVED, derivedStale.map(r => `${r.f}:${r.named.slice(0, 3).join(",")}`).join(" · "));
   const built70 = rows70.filter(r => r.status === "built" || r.status === "part_built");
@@ -4801,15 +4822,15 @@ console.log("\n── §71 · the harness drives the production path (engine/bat
   // ── the character fixture is the app's shape, and the menu is the app's menu
   check("§71: a character built from a person carries the app's fields (abilities at their ranks, pools, level) and the menu reads them",
     pc71.level === 27 && pc71.abilities.length >= 10 && pc71.abilities.every(a => a.abilityId && a.level >= 1) && pc71.health === pc71.maxHealth && pc71.energy === pc71.maxEnergy
-    && (() => { const m = BT71.battleSkillsForCharacter(pc71, { catalog: C71.abilities, rules: rules71, sb: sb71 }); return m.length <= 40 && m.filter(s => !s.id.startsWith("_")).every(s => Number.isFinite(s.energyCost) && s.rank >= 1 && s.tier >= 1); })());
-  // ⚠️ A FINDING THE REAL PATH SURFACED (2026-09-05): the menu is capped at 40 entries and a craft occupies a slot PER FUNCTION, so
-  // Pell's 23 crafts fill it and the bare moves, the items and the generic senses — pushed after the crafts — fall off the end. The
-  // engine still degrades a spent craft to a bare effort, but the panel would not OFFER "A plain strike" or a drink to a big kit.
-  // Asserted as the truth it is (a small kit carries both bare moves); the cap is a design call, logged in DECISIONS_OWED Q16.
-  check("§71: …the menu cap is REAL — a 23-craft kit fills 40 slots and loses the bare moves; a 3-craft kit carries both (Q16)",
+    && (() => { const m = BT71.battleSkillsForCharacter(pc71, { catalog: C71.abilities, rules: rules71, sb: sb71 }); return m.length > 0 && m.filter(s => !s.id.startsWith("_")).every(s => Number.isFinite(s.energyCost) && s.rank >= 1 && s.tier >= 1); })());
+  // ✅ THE FINDING THIS SURFACED IS CLOSED (R46c, 2026-09-05). It read: the menu caps at 40 and a craft takes a slot per FUNCTION,
+  // so Pell's 23 crafts filled it and the bare moves, the items and the senses fell off the end. Erik ruled no cap; the check is
+  // inverted so the closure is asserted and a regression to the cap goes red. §76 carries the rest of the ruling.
+  check("§71: ✅ …and the menu cap is GONE (R46c) — a 23-craft kit keeps every verb AND the bare moves a small kit gets",
     (() => { const big = BT71.battleSkillsForCharacter(pc71, { catalog: C71.abilities, rules: rules71, sb: sb71 });
+      const verbs = pc71.abilities.reduce((n, a) => n + ((C71.abilities[a.abilityId]?.functions || []).length), 0);
       const small = BT71.battleSkillsForCharacter({ ...pc71, abilities: pc71.abilities.slice(0, 3), inventory: [] }, { catalog: C71.abilities, rules: rules71, sb: sb71 });
-      return big.length === 40 && !big.some(s => s.id === "_strike") && small.some(s => s.id === "_strike") && small.some(s => s.id === "_guard"); })());
+      return big.length >= verbs && big.length > 40 && big.some(s => s.id === "_strike") && small.some(s => s.id === "_strike") && small.some(s => s.id === "_guard"); })());
   // ── a duel played through the production path: deterministic, ends in the vocabulary, the knockout reaches the table
   const play71 = (seed) => { const c = RG71.characterFromPerson(pell71, { catalog: C71.abilities, cfg: cfg71, day: 1 }); return RG71.playDuel({ character: c, target: { id: "veth-ondra", name: veth71.name }, content: C71, rng: RG71.mulberry32(seed), day: 1, maxTurns: 40 }); };
   const d1 = play71(7), d2 = play71(7);
@@ -5072,6 +5093,63 @@ console.log("\n── §75 · features — a mine yields, a temple carries meani
     /sell\|improve\|crew\|garrison\|feature\|rename/.test(gm75) && /kind === "feature"/.test(app75) && /kind === "rename"/.test(app75) && /rename: op\.rename === true/.test(app75)
     && /data-hold-feature=/.test(app75) && /data-hold-rename=/.test(app75) && /data-hold-unfeature=/.test(app75) && /has: \$\{list/.test(app75) && /residentsOf\(h, holdCfgNow\(\)\)/.test(app75));
   check("§75: …the body and the spec say so", /holdFeatures/.test(rd("docs/HOW_IT_WORKS.md")) && /PASS TWO, FIRST CUT/.test(rd("po/SPEC_holding_attributes.md")));
+}
+/* ═════ §76 — R47 THE UNIVERSAL FALLBACKS RETIRE BEHIND THE FREE TOUCH · R46c NO CAP, AND A ROW IS A CRAFT ═════ */
+// ⛔ Erik 2026-09-05 (WORK_ORDER_20260905b): "we are eliminating the universal fallbacks… Only keeping them if needed for an
+// NPC with the most basic sheet. Silas should just rely on the zero-cost fallbacks of his T1 skills as we designed" — and Q16,
+// "no cap on the battle menu; group by craft". The replacement (a free touch below rank 1) was built in CCODE-266 and its
+// FIELD was never authored: `touchTier` is on 0 of 421 crafts. The rule is live and answers false for everyone today, which
+// is the safe end of the ruling — nobody loses their zero-cost move — and the census is asserted so it cannot rot silently.
+console.log("\n── §76 · the fallbacks defer to the free touch (unauthored today) · no cap, one row per craft ──");
+{
+  const CAP76 = await import("../engine/capabilities.js");
+  const BT76 = await import("../engine/battle_turn.js");
+  const NS76 = await import("../engine/npcsheet.js");
+  const { loadContentHeadless: lch76 } = await import("./headless_content.mjs");
+  const C76 = await lch76();
+  const rules76 = C76.rules, sb76 = C76.skillBattle.engine;
+  // ── the rule is ONE function, and both menus ask it
+  const touched = { id: "t1", name: "Touchable", tier: 1, functions: ["strike"], touchTier: true, attribute: "physical" };
+  const plain = Object.values(C76.abilities).find(a => (a.functions || []).length && !a.touchTier);
+  check("§76: ⛔ R47 — `offersFreeTouch` is the rule: a kit with an authored touch answers true, a kit without answers false, an empty kit false",
+    CAP76.offersFreeTouch([touched]) === true && CAP76.offersFreeTouch([plain]) === false && CAP76.offersFreeTouch([]) === false);
+  // ── the census, asserted so it cannot rot
+  const all76 = Object.values(C76.abilities);
+  const withTouch = all76.filter(a => a && a.touchTier);
+  check(`§76: ⚠️ …and the CENSUS travels with it — \`touchTier\` is authored on ${withTouch.length} of ${all76.length} crafts (0 on 2026-09-05: the ladder built, the rungs unwritten)`,
+    all76.length > 400 && withTouch.length >= 0, withTouch.length === 0 ? "0 — the fallbacks stay for every sheet until Aevi authors a touch" : `${withTouch.length} authored: ${withTouch.slice(0, 4).map(a => a.id).join(", ")}`);
+  // ── the player's menu
+  const pcNo = { abilities: [{ abilityId: plain.id, level: 1 }] };
+  const pcYes = { abilities: [{ abilityId: "t1", level: 1 }] };
+  const catT = { ...C76.abilities, t1: touched };
+  const mNo = BT76.battleSkillsForCharacter(pcNo, { catalog: C76.abilities, rules: rules76, sb: sb76 });
+  const mYes = BT76.battleSkillsForCharacter(pcYes, { catalog: catT, rules: rules76, sb: sb76 });
+  check("§76: ⛔ …a sheet with NO free touch still carries the bare strike and guard (the basic sheet Erik kept them for); a sheet WITH one carries neither",
+    mNo.some(s => s.id === "_strike") && mNo.some(s => s.id === "_guard")
+    && !mYes.some(s => s.id === "_strike") && !mYes.some(s => s.id === "_guard") && mYes.some(s => s.id === "t1"),
+    JSON.stringify({ no: mNo.map(s => s.id), yes: mYes.map(s => s.id) }));
+  // ── the NPC's kit follows the same rule
+  const npcPlain = { id: "n1", name: "N", abilities: [{ abilityId: plain.id, level: 1 }] };
+  const npcTouch = { id: "n2", name: "N2", abilities: [{ abilityId: "t1", level: 1 }] };
+  const kNo = NS76.battleSkillsFor(npcPlain, { catalog: C76.abilities, cfg: rules76.npcStanding }).skills;
+  const kYes = NS76.battleSkillsFor(npcTouch, { catalog: catT, cfg: rules76.npcStanding }).skills;
+  check("§76: …\"the same for any NPC\" — the bare strike goes when the kit carries a touch, stays when it does not, and `canStrike: false` still refuses it",
+    kNo.some(s => s.id === "_strike") && !kYes.some(s => s.id === "_strike")
+    && !NS76.battleSkillsFor({ ...npcPlain, canStrike: false }, { catalog: C76.abilities, cfg: rules76.npcStanding }).skills.some(s => s.id === "_strike"),
+    JSON.stringify({ no: kNo.length, yes: kYes.map(s => s.id) }));
+  // ── R46c · no cap
+  const big = { abilities: Object.values(C76.abilities).filter(a => (a.functions || []).length).slice(0, 30).map(a => ({ abilityId: a.id, level: 1 })) };
+  const menu = BT76.battleSkillsForCharacter(big, { catalog: C76.abilities, rules: rules76, sb: sb76 });
+  const verbs = big.abilities.reduce((n, a) => n + (C76.abilities[a.abilityId].functions || []).length, 0);
+  check("§76: ⛔ R46c — NO CAP: a 30-craft kit's every verb reaches the menu (it stopped at 40 before), and the bare moves are still there at the end",
+    menu.length >= verbs && menu.length > 40 && menu.some(s => s.id === "_strike"), `${menu.length} entries for ${verbs} verbs`);
+  check("§76: …a caller that still wants a bound gets one only by asking", BT76.battleSkillsForCharacter(big, { catalog: C76.abilities, rules: rules76, sb: sb76, limit: 12 }).length === 12);
+  // ── R46c · the panel groups by craft
+  const app76 = rd("app.js");
+  check("§76: ⛔ …and the PANEL renders one row per CRAFT with a button per verb — the row count falls, not the content",
+    /const byCraft = \[\];/.test(app76) && /byCraft\.findIndex\(g => g\[0\]\.s\.id === e\.s\.id\)/.test(app76) && /const chips = byCraft\.map\(\(entries\) => \{/.test(app76)
+    && /verbs\.slice\(1\)\.map\(\(\{ s: v, i: vi \}\) =>/.test(app76) && /data-sbskill="\$\{vi\}"/.test(app76));
+  check("§76: …the body carries both rulings", /R47 · THE UNIVERSAL FALLBACKS ARE RETIRED/.test(rd("docs/HOW_IT_WORKS.md")) && /NO CAP ON THE BATTLE MENU/.test(rd("docs/HOW_IT_WORKS.md")));
 }
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));

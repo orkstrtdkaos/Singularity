@@ -122,7 +122,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.355";
+const APP_VERSION = "1.9.356";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13083,7 +13083,14 @@ function skillBattlePanel() {
     // makes IT different. Mixed-verb groups keep their per-row lines, since there is nothing to hoist.
     const famDoes = [...new Set(byFam[f].map(({ s }) => SB_DOES[s.function] || ""))];
     const sharedDoes = famDoes.length === 1 && famDoes[0] ? famDoes[0] : "";
-    const chips = byFam[f].map(({ s, i }) => {
+    // ✅ R46c: ONE ROW PER CRAFT. A multi-function craft used to take a row per verb — three "Keystone Blow" rows with
+    // different verbs — which is what made a 23-craft kit overflow a 40-slot menu. The row is now the craft, and the verbs
+    // are the buttons inside it; a single-verb craft renders exactly as it always did.
+    const byCraft = [];
+    for (const e of byFam[f]) { const at = byCraft.findIndex(g => g[0].s.id === e.s.id); if (at >= 0) byCraft[at].push(e); else byCraft.push([e]); }
+    const chips = byCraft.map((entries) => {
+      const verbs = entries.length > 1 ? entries : null;
+      const { s, i } = entries[0];
       const does = sharedDoes ? "" : (SB_DOES[s.function] || "");
       const known = !!fullCatalog()[s.id];
       const info = known
@@ -13113,6 +13120,11 @@ function skillBattlePanel() {
         + (s.itemNote ? `<span class="sb-skill-does sb-item-note">${esc(s.itemNote)}</span>` : "");
       return `<div class="sb-skill-row${on ? " picked" : ""}" style="border-left:3px solid ${FAMILY_COLOR[f]}">
         <button class="btn secondary sb-skill${on ? " on" : ""}" data-sbskill="${i}" title="${on ? "Deselect" : selFull ? "Two crafts already chosen for this step — deselect one first" : "Choose this for the " + step.label.toLowerCase() + " step"}">${on ? `<span class="sb-pick-n">${pick + 1}</span> ` : ""}${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span>${does ? `<span class="sb-skill-does">${esc(does)}</span>` : ""}${findsLine}${oddsTag}${guardTag}${finTag}</button>${info}
+        ${verbs ? verbs.slice(1).map(({ s: v, i: vi }) => {
+          const vOn = sel.indexOf(vi) >= 0, vPick = sel.indexOf(vi);
+          const vOdds = priceOf(v), vFin = finisherPotential(v, fullCatalog()[v.id], sb);
+          return `<button class="btn secondary sb-skill${vOn ? " on" : ""}" data-sbskill="${vi}" title="${vOn ? "Deselect" : "Use ${esc(v.name)} as a ${esc(v.function)}"}">${vOn ? `<span class="sb-pick-n">${vPick + 1}</span> ` : ""}${esc(v.function)} <span class="cost">T${v.tier}${v.energyCost ? ` · ${v.energyCost}e` : ""}</span>${vOdds ? `<span class="sb-odds sb-odds-${vOdds.show}" title="${esc(vOdds.tip)}">${esc(vOdds.label)}</span>` : ""}${vFin?.can ? `<span class="sb-fin" title="FINISHING POTENTIAL">\u26a1</span>` : ""}</button>`;
+        }).join("") : ""}
       </div>`;
     }).join("");
     // CCODE-38 (Erik: "can we make the categories collapsible?"): each family is a <details> — open by default,

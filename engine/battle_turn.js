@@ -26,7 +26,7 @@ import { synthesizeDuelDef } from "./random_encounters.js";
 import { encounterKind, frameCollapsible, collapseMode, collapseResult, collapseFloor, wardAgainst, wardBroken, swingDegree } from "./encounterFrame.js";
 import { abilityTier } from "./skilltree.js";
 import { effectiveEnergyCost, autoAdvancePracticedRanks, SUB_OF } from "./progression.js";
-import { capabilityMenu, resolveTier } from "./capabilities.js";
+import { capabilityMenu, resolveTier, offersFreeTouch } from "./capabilities.js";
 import { usableCombatItems, wieldBonusFor, consumeItem, removeItem } from "./inventory.js";
 import { recordUse } from "./practice.js";
 import { applyCondition } from "./conditions.js";
@@ -41,7 +41,7 @@ import { activeCompanions, growBond } from "./companions.js";
 
 /** The player's battle menu — one entry per craft FUNCTION, then the two bare moves, the usable items, the generic senses.
  *  `catalog` is the merged catalog (content + the character's own crafts). Was `playerBattleSkills()` in app.js. */
-export function battleSkillsForCharacter(character, { catalog = {}, rules = {}, sb = null, limit = 40 } = {}) {
+export function battleSkillsForCharacter(character, { catalog = {}, rules = {}, sb = null, limit = null } = {}) {
   const out = [];
   for (const a of character?.abilities || []) {
     const def = catalog[a.abilityId];
@@ -57,8 +57,12 @@ export function battleSkillsForCharacter(character, { catalog = {}, rules = {}, 
             : {}; })() });
     }
   }
-  out.push({ id: "_strike", function: "strike", tier: 1, attribute: "physical", name: "A plain strike" });
-  out.push({ id: "_guard", function: "shield", tier: 1, attribute: "physical", name: "Raise a guard" });
+  // ✅ R47: the universal fallbacks are RETIRED for anyone whose own crafts carry a free touch — "he should just rely on
+  // the zero-cost fallbacks of his T1 skills as we designed". They remain for the bare sheet, which is what they were for.
+  if (!offersFreeTouch((character?.abilities || []).map(a => catalog[a?.abilityId]).filter(Boolean), { cfg: rules?.energy })) {
+    out.push({ id: "_strike", function: "strike", tier: 1, attribute: "physical", name: "A plain strike" });
+    out.push({ id: "_guard", function: "shield", tier: 1, attribute: "physical", name: "Raise a guard" });
+  }
   const icfg = sb?.items || {};
   for (const u of usableCombatItems(character, icfg)) {
     out.push({ id: `_item_${slugify(u.item.name)}`, itemMove: u,
@@ -70,7 +74,10 @@ export function battleSkillsForCharacter(character, { catalog = {}, rules = {}, 
     out.push({ id: `_sense_${g.sub}`, function: "reveal", tier: 1, attribute: SUB_OF?.[g.sub] || "mental",
       subAttribute: g.sub, name: g.name, finds: g.finds, generic: true });
   }
-  return out.slice(0, limit); // a multi-function craft occupies a slot per function; groups collapse in the panel
+  // ✅ R46c (Erik, Q16): NO CAP. A 23-craft kit lost its bare moves, its items and its senses off the end of 40 slots — a
+  // menu that silently drops what the player owns is worse than a long menu. The panel groups by CRAFT so the ROW count
+  // falls instead, and any bound a caller still wants is its own and exempts the fallbacks.
+  return Number.isFinite(limit) && limit > 0 ? out.slice(0, limit) : out;
 }
 
 /** The declaration a step's selection makes: the first craft leads, a second is WOVEN in (CCODE-37). Was `sbDeclFromSel`. */

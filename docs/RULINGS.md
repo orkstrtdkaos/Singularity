@@ -52,6 +52,8 @@ exercise that produced three wrong reports on one subject on 2026-09-02. | colum
 | **R36** | party contribution | R36/R36a — a party member fights from their OWN SHEET; up to 3 act fully (content dial), the rest fold; what earns a slot is NOT ruled | ⬜ sequenced behind the floor (GO list) | `RULING_party_from_sheets.md` |
 | **R37** | growth rates | R37a–c — completion = 1 level, condition step = 1, the three terms STACK; a gained craft starts r1; the service band unset | ✅ v1.9.348 `§69` | `RULING_growth_rates.md` |
 | **R38** | meaning density | R38a–b — `meaningDensity` derived never stored; for metaphysical crafts MEANING sets the ceiling and SUBSTRATE the penalty | ✅ v1.9.348 `§69` | `RULING_meaning_density.md` |
+| **R46c** | combat menus | R46c — no cap on the battle menu; the panel groups by craft, any bound is on rendered rows with the fallbacks exempt | ✅ v1.9.356 `§76` | `WORK_ORDER_20260905b` §3 |
+| **R47** | combat menus | R47 — the universal fallbacks retire behind each craft's free touch; kept only for a sheet that has none | ✅ v1.9.356 `§76` — live, and false for every sheet today: `touchTier` is authored on 0 of 421 crafts | `WORK_ORDER_20260905b` §1 |
 
 ---
 
@@ -91,7 +93,7 @@ evidence and the measured options for each. When one is ruled it gets a paper, a
 | **Q14** | holdings, pass two — how many attribute types a hold may carry per size tier (`tier`: settlement 96 · region 25 · site 14), magnitude per type and whether it scales with `condition`, upkeep per type, which types require a steward (R25 presence 14/18 already bounds an unkept hold) | `SPEC_holding_attributes` §5, the holdings economy (Q8) | its ROUND 2: every delta it names already exists on locations |
 | ~~**Q18**~~ | ✅ **RULED 09-05 ("please build it") — a hold grows by one-time acts: the keeper's tier caps a climb every 4 passes, a craft applied lifts a rung once, hands raise yield, a garrison halves raids, the ground scales yield** | v1.9.354 `§74` | `economy.holdStore.growth` · ⬜ what a post can become |
 | **Q17** | a post the fiction names but the GM never claims (the Whistling Woman): a player *Claim this place* affordance, a narrator nudge, or an offer minted from the chronicle | holdings | `DECISIONS_OWED` Q17 |
-| **Q16** | the battle menu caps at 40 slots, one per craft function — a 23-craft kit loses the bare moves, items and senses off the end; raise the cap, collapse functions, or order the bare moves first (found by the real-game harness, `§71`) | the fight panel | `DECISIONS_OWED` Q16 |
+| ~~**Q16**~~ | ✅ **RULED 09-05 (R46c) — no cap; the panel groups by craft and any bound exempts the fallbacks** | v1.9.356 `§76` | `WORK_ORDER_20260905b` §3 |
 | **Q15** | which of the 53 `lethal`/`atrocity` crafts keep the rung now that R35 makes it a ~50% insta-kill on a landed hit, and whether `deathSave.defaultKillCost` prices the 52 with no `killCost`; the ⚡ button still offers at lethal | every fight | `DECISIONS_OWED` Q15 · `HOW_IT_WORKS` §3c |
 | `precursor` is not a tradition | `foothills.json` → `notATradition` |
 

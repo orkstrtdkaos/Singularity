@@ -463,8 +463,9 @@ working papers; **this is the answer.**
 | 09-05 | ⛔ **THE TAB COULD NOT APPOINT A KEEPER — its only selector handed the hold AWAY** | Erik: *"now it says I gave them to the stewards! … it doesn't have me own them."* The person selector sat beside *Hand it over* (a one-way transfer, no confirm), so assigning a steward transferred ownership ("X is Y's to keep now") and the hold left the list; former holdings were shown nowhere. Fixed: *Make them keeper* (`appointKeeper`), a confirm on *Hand it over* that names ownership, a *No longer yours* list with *Take it back* (`reclaimHolding` — history kept, the person keeps it). Finding: nothing in play raises a hold's condition (the tick only stalls or slips) — Q18 | `§73` (appoint sets and logs; a transfer round-trips through reclaim with history; the tab's verbs and the confirm by source; the only condition writer is the tick) | body §7d. ⬜ Q18: how a hold grows |
 | 09-05 | ✅ **A HOLD GROWS (Q18 — Erik: "please build it")** | one-time acts with lasting effects, never a chore (SPEC_hold_store §5): a kept hold climbs a rung every 4 passes to the ceiling its keeper's tier allows (`growHolding`, `ceilingByKeeperTier`); a carried craft applied to the place lifts it a rung once (`improveHolding`, `improveFunctions`); hands raise the yield (`setCrew`, +25% each to 3); a garrison halves raids and costs 3 a pass (`setGarrison`); the ground scales an enterprise's yield (`holdingGround`, ±); the GM's `holdingOps improve/crew/garrison`; the tab's *Apply a craft* / *Add hands* / *Post a guard* | `§74` (a notable keeper stops at holding and a regional reaches thriving on the schedule; unkept never climbs; a non-shaping craft refused, a craft once; hands and ground in the yield; the garrison in the keep and the raid; the ops and the tab by source) | body §7d. Priced by CCode — Erik turns `economy.holdStore.growth`. ⬜ what a post can become |
 | 09-05 | ✅ **A HOLD CARRIES FEATURES — what a post becomes; and a re-claim no longer renames it** | Erik by example: a mine and a Temple to Attending at the Threshold Post; barriers, a wall and skeletal sentries at Stillwater's Trouble; "it reverted back to Raven's Home almost immediately". `economy.holdFeatures.kinds` in Aevi's families (material yields into the store — a post with a mine produces; martial guards and cuts a raid's take; meaning is an aura on the ground; people raise hands and count as homes; craft is a facility on the record); `addFeature`/`removeFeature`/`renameHolding`; `holdingOps feature/rename` and `claim` keeps a known hold's name unless `rename: true`; the tab's *Add what was built* / *Rename*; `who lives here` answered | `§75` (a post with a mine yields on the tick; a temple's aura reaches the card; a wall cuts the take and sentries guard without keep; quarters raise the hands cap and count homes; a re-claim keeps the name; the ops and the tab by source) | body §7d. Aevi extends the catalogue; Erik turns the numbers. ⬜ what a facility gates (pass three) |
+| 09-05 | ✅ **R47 the universal fallbacks retire behind the free touch · R46c no cap on the menu, a row is a CRAFT** | Erik: *"eliminating the universal fallbacks… he should just rely on the zero-cost fallbacks of his T1 skills"* and *"no cap"* (Q16). `offersFreeTouch` is the one test both menus ask; the panel groups rows by craft with a button per verb. ⛔ **Measured with it: `touchTier` is authored on 0 of 421 crafts** — the ladder built, the rungs unwritten — so the rule answers false for everyone today and the fallbacks stay until Aevi authors a touch | `§76` (the rule is one function both menus call; a kit with a touch loses the bare moves and a bare kit keeps them; no cap on the menu; a multi-verb craft is one row; the corpus census reported) | body §11. ⬜ Aevi owes `touchTier` on the T1 crafts |
 
-**Last verified: 2026-09-05 · v1.9.355 · 421 crafts.**
+**Last verified: 2026-09-05 · v1.9.356 · 421 crafts.**
 
 ---
 
@@ -1687,6 +1688,28 @@ classic path only — `sbEnd` cleared the fight and narrated *"you fall"* with n
 those** (the aggressor table: slain · left for dead · spared), in 12 turns, and his single-craft hand never reaches for
 Plain Weight — the "Pell wins by a T1 lethal" of the direct probe was an artefact of a random hand. `§71` asserts the
 delegation by source and the behaviour by playing the game headless; the duel runner's REAL GAME batch prints it.
+
+### ✅ R47 · THE UNIVERSAL FALLBACKS ARE RETIRED — AND THE RUNGS THEY DEFER TO ARE UNAUTHORED (2026-09-05)
+<!-- subject: battle-declaration -->
+
+Erik: *"we are eliminating the universal fallbacks for NPCs and PCs. Only keeping them if needed for an NPC with the most
+basic sheet. Silas should just rely on the zero-cost fallbacks of his T1 skills as we designed."* ✅ **The replacement is
+built:** `capabilities.touchTierOf` (CCODE-266) puts a **free touch** below rank 1 — *"the ladder now reads r0 nothing →
+touch free → r1 paid"* — and `offersFreeTouch` is the one test both menus ask: a kit that carries a free touch is not handed
+"A plain strike" or "Raise a guard"; a bare sheet still is. The player's menu and `npcsheet.battleSkillsFor` follow the same rule.
+
+⛔ **AND THE MEASUREMENT THAT MUST TRAVEL WITH IT: `touchTier` IS AUTHORED ON 0 OF 421 CRAFTS.** The ladder was built and
+the rungs were never written — the four-doors failure with the reader in place and the field missing, for the third time
+this week. ⚠️ **So the rule is live and answers false for everyone today, and the fallbacks stay** (the safe end of the
+ruling: nobody loses their zero-cost move). ⚑ **The moment Aevi authors a touch on a T1 craft, its bearer stops being handed
+a bare strike, with no further code.** `§76`.
+
+### ✅ R46c · NO CAP ON THE BATTLE MENU, AND A ROW IS A CRAFT (R46, Q16, 2026-09-05)
+
+The menu was capped at 40 entries with **one entry per craft FUNCTION**, so Silas's 23 crafts filled it and the bare moves,
+the items and the generic senses fell off the end — a menu silently dropping what the player owns. ✅ **The cap is gone**,
+and the panel now renders **one row per CRAFT** with a button per verb inside it, so the row count falls instead of the
+content. A single-verb craft renders exactly as before. Any bound a caller still wants is its own, and exempts the fallbacks.
 
 ## 12 · THE INTERFACE — what the player actually operates
 

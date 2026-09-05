@@ -174,6 +174,19 @@ export function touchTierOf(ability, { cfg = {} } = {}) {
   };
 }
 
+/** ✅ R47 (Erik 2026-09-05: "eliminating the universal fallbacks… he should just rely on the zero-cost fallbacks of his T1
+ *  skills as we designed. Only keeping them if needed for an NPC with the most basic sheet"): does this KIT already offer a
+ *  move that costs nothing? The free touch (CCODE-266) is that move, and a sheet that has one needs no bare strike.
+ *
+ *  ⛔ MEASURED 2026-09-05: `touchTier` is authored on **0 of 421 crafts**. The ladder was built and the rungs were never
+ *  written, so today this answers false for every character in the game and the fallbacks stay — which is the safe end of
+ *  the ruling, not a defeat of it. The moment a craft authors a touch, its bearer stops being handed a bare strike, with
+ *  no further code. ⚠️ Reader before field, and the field is Aevi's. */
+export function offersFreeTouch(abilities = [], { cfg = {} } = {}) {
+  for (const ab of abilities) if (ab && touchTierOf(ab, { cfg })) return true;
+  return false;
+}
+
 export function capabilityMenu(ability, ownedRank = 1, opts = {}) {
   // ⚠️ CCODE-266: the free touch sits BELOW r1 in the menu, so a player meets it before they need it.
   const touch = touchTierOf(ability, opts);

@@ -573,12 +573,33 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
       (commsByRegion[r] ||= []).includes(c) || commsByRegion[r].push(c);
       regionOfComm[c] = r;
     }
+    // ⛔ BUG_news_rebroadcast (Erik: "my news is still popping up old stuff"). ⚠️ TWO SEPARATE MISTAKES, one line apart.
+    //
+    // 1 · `rate: 1` MADE THE THROTTLE UNREACHABLE. `spreadDeeds` skips on `rng() >= rate`, so at 1 every eligible deed took
+    //   a GUARANTEED hop every pass, and every hop printed a line — seven old deeds re-broadcast on Erik's screen while one
+    //   genuinely new line fought for room. ⚑ The authored dial is `arcResponse.deedSpreadRate` (0.35) and the FIGURE path
+    //   two thousand lines below already reads it: the player's deeds were spreading three times faster than any NPC's, by
+    //   certainty rather than by chance. ⚠️ The comment above this block claims parity with figures; now it has it.
+    //
+    // 2 · AND A HOP IS NOT A HEADLINE. Even at 0.35, seven eligible deeds average two to three lines a pass, which with
+    //   NEWS_CAP at 20 pushes genuinely new items out within three passes. ⛔ The SPREAD is world state and must run at its
+    //   own rate; the DIGEST is a report and is bounded. Beyond the cap the count is told, because "and word travelled on
+    //   three other counts" is true and short, where three more identical sentences are neither.
+    //
+    // ⛔ AND NOTHING TRIMS `d.spread` ON AN EXISTING SAVE — the file's own rule four lines up: rewriting a player's history
+    // to match a new model is a retcon, not a migration. Erik's over-spread deeds stay spread; they simply stop re-announcing.
+    const spreadRate = Number.isFinite(content?.rules?.arcResponse?.deedSpreadRate) ? content.rules.arcResponse.deedSpreadRate : 0.35;
     const ready = (character.deeds || []).filter(d => (currentDay - (d.day ?? 0)) >= NEWS_TRAVEL_DAYS);
     const hops = spreadDeeds({ deeds: ready }, {
-      communitiesByRegion: commsByRegion, regionOfCommunity: regionOfComm, rng, rate: 1,
+      communitiesByRegion: commsByRegion, regionOfCommunity: regionOfComm, rng, rate: spreadRate,
     });
-    for (const h of hops) {
-      news.push({ text: `Word has spread beyond its own valley, as far as ${String(h.to).split(".").pop()}: ${h.description}`, section: "elsewhere" });
+    const shown = Math.max(1, Number(content?.rules?.arcResponse?.deedSpreadLinesPerPass) || 2);
+    for (const h of hops.slice(0, shown)) {
+      news.push({ text: `As far as ${String(h.to).split(".").pop()}: ${h.description}`, section: "elsewhere" });
+    }
+    if (hops.length > shown) {
+      const more = hops.length - shown;
+      news.push({ text: `Word travelled on ${more} other count${more === 1 ? "" : "s"} besides.`, section: "elsewhere" });
     }
   }
   // 3. → the delegated-work pass now runs on WORLD time, ABOVE this early-return (see advanceDelegatedWork).

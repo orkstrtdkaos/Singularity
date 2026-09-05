@@ -5326,6 +5326,51 @@ console.log("\n── §78 · unseen they take · seen it is a fight · won they
     JSON.stringify({ alms: st78.pilgrims, purse: paid.purse.crystal }));
   check("§78: …the body says so", /A RAID IS A FIGHT/.test(rd("docs/HOW_IT_WORKS.md")) && /PILGRIMS/.test(rd("docs/HOW_IT_WORKS.md")));
 }
+/* ═════ §79 — THE NEWS RE-BROADCAST OLD DEEDS, AND THE DIGEST CLIPPED (BUG_news_rebroadcast, 2026-09-05) ═════ */
+// ⛔ Erik: "my news is still popping up old stuff… it cuts off instead of becoming a scrollable." The player's spread call
+// hardcoded `rate: 1`, which makes `spreadDeeds`' own throttle (`rng() >= rate`) unreachable — every eligible deed took a
+// GUARANTEED hop every pass and every hop printed a line, while the figure path two thousand lines below already read the
+// authored 0.35. ⚑ And a hop is not a headline: the spread is world state, the digest is a report, and the report is bounded.
+console.log("\n── §79 · the spread reads its dial · a busy pass is bounded · no save is rewritten · the digest scrolls ──");
+{
+  const WT79 = await import("../engine/worldtick.js");
+  const REP79 = await import("../engine/reputation.js");
+  const wt79 = rd("engine/worldtick.js");
+  const arc79 = rj("content/packs/core/rules/arc_response.json");
+  const cfg79 = arc79.arcResponse || arc79;
+  check("§79: ⛔ the rate comes from CONTENT and the hardcoded `rate: 1` is gone — the player's deeds spread as a figure's do",
+    !/rate: 1,/.test(wt79) && /rate: spreadRate,/.test(wt79) && /deedSpreadRate\) \? content\.rules\.arcResponse\.deedSpreadRate : 0\.35/.test(wt79)
+    && Number(cfg79.deedSpreadRate) > 0 && Number(cfg79.deedSpreadRate) < 1, `authored rate ${cfg79.deedSpreadRate}`);
+  check("§79: …and the DIGEST is bounded by its own dial, with the remainder counted rather than repeated",
+    Number(cfg79.deedSpreadLinesPerPass) >= 1 && /hops\.slice\(0, shown\)/.test(wt79) && /Word travelled on \$\{more\} other count/.test(wt79));
+  // ⛔ THE THROTTLE IS REACHABLE — the property `rate: 1` destroyed, proved against the real function.
+  const deeds = () => Array.from({ length: 8 }, (_, i) => ({ description: `deed ${i}`, weight: 3, day: 0, communityId: "valley.a", spread: [] }));
+  const opts = { communitiesByRegion: { r: ["valley.a", "valley.b", "valley.c", "valley.d"] }, regionOfCommunity: { "valley.a": "r", "valley.b": "r", "valley.c": "r", "valley.d": "r" } };
+  const at1 = REP79.spreadDeeds({ deeds: deeds() }, { ...opts, rng: () => 0.99, rate: 1 }).length;
+  const atDial = REP79.spreadDeeds({ deeds: deeds() }, { ...opts, rng: () => 0.99, rate: cfg79.deedSpreadRate }).length;
+  check("§79: ⛔ …the defect itself, kept measurable — at `rate: 1` a pass that should skip EVERYTHING hops everything; at the dial it skips",
+    at1 === 8 && atDial === 0, `rate 1 → ${at1} hops · rate ${cfg79.deedSpreadRate} → ${atDial}`);
+  // ⚠️ AND NO SAVE IS REWRITTEN — the over-spread deeds Erik already carries stay spread.
+  check("§79: ⚠️ …and nothing trims `d.spread` on an existing save — a retcon is not a migration",
+    !/\.spread\s*=\s*\[\]/.test(wt79) && !/spread\.length\s*=\s*/.test(wt79) && /retcon, not a migration/.test(wt79));
+  // the tick, end to end: many old deeds, one bounded report
+  const c79 = { id: "pc", clock: { day: 40 }, worldState: { lastTickDay: 39, news: [], unseenNews: [] }, holdings: [], company: [], npcRegistry: {},
+    deeds: Array.from({ length: 7 }, (_, i) => ({ description: `an old deed ${i}`, weight: 3, day: 1, communityId: "valley.a", spread: [] })) };
+  const content79 = { locations: { a: { id: "a", communityId: "valley.a", regionId: "r" }, b: { id: "b", communityId: "valley.b", regionId: "r" },
+      c: { id: "c", communityId: "valley.c", regionId: "r" }, d: { id: "d", communityId: "valley.d", regionId: "r" } },
+    rules: { arcResponse: cfg79 }, npcs: {}, items: {}, abilities: {} };
+  const out79 = await WT79.runWorldTick({ character: c79, content: content79, currentDay: 40, advanceAssignments: async () => ({ advancements: [] }), rng: () => 0.01 });
+  const spreadLines = (out79.news || []).filter(n => /^As far as |^Word travelled on /.test(n.text));
+  check("§79: ⛔ …SEVEN OLD DEEDS, AND THE DIGEST STAYS BOUNDED — at most the dial's lines plus one that counts the rest",
+    spreadLines.length <= Number(cfg79.deedSpreadLinesPerPass) + 1
+    && !spreadLines.some(n => /Word has spread beyond its own valley/.test(n.text)),
+    `${spreadLines.length} spread line(s) of ${(out79.news || []).length}: ${spreadLines.map(n => n.text.slice(0, 40)).join(" | ")}`);
+  // the panel
+  const app79 = rd("app.js"), css79 = rd("style.css");
+  check("§79: ⛔ …and the digest SCROLLS — the body has a height of its own and the title stays outside it",
+    /<div class="news-body">\$\{body\}<\/div>/.test(app79) && /\.news-body \{[^}]*max-height:[^}]*overflow-y: auto/.test(css79)
+    && /news-title[^]{0,80}news-body/.test(app79));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

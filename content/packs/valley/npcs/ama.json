@@ -100,11 +100,18 @@
   "given_errand"
  ],
  "personality": {
-  "steadiness": "absolute",
-  "grief": "carried, not displayed"
+  "warmth": 9,
+  "trust": 8,
+  "candor": 8,
+  "patience": 10
  },
  "physicality": "ADULT. Sixties, sturdy, flour to the wrist, grey worn back plainly. WHAT CATCHES THE EYE: she finishes what she is doing before she turns, every time, and it is not slowness — it is that nothing has hurried her since the day her husband stopped.",
  "intimacyNotes": "⛔ SHE IS SILAS'S MOTHER AND `romanceEligible: false` REFLECTS THAT — an author decision per R24. ⚠️ THIS ENTRY EXISTS BECAUSE A GM STILL NEEDS TO DESCRIBE HER: at the table, at the cairn-line, standing in a doorway deciding whether to say the thing. ⚑ TOUCH IS A HAND ON A FOREARM AND A PLATE PUT DOWN IN FRONT OF YOU. ⛔ AND THE THING SHE WILL NOT DISCUSS UNBIDDEN IS WHY HE STOPPED — she has never been asked in the right way, and a GM should let that stay closed until it is.",
  "schemaVersion": 1,
- "_authoredWhy": "⛔ AUTHORED 2026-09-05 — PROMOTED FROM THE REGISTRY, NOT INVENTED. This person existed only as a GENERATED registry entry with `skillsObserved`; R28: 'generated is promotable to authored.' ⚑ THE CRAFTS ARE DRAWN FROM WHAT THE STORY ALREADY SHOWED — `skillsObserved` is `growthFor`'s own evidence field, and Pell's 'ironsense' turned out to be three crafts when it was read properly. ⚠️ `domains` is `{primary, secondary, tertiary}` — an ARRAY returns band 'open' and lets `kitFor` draw from the whole catalogue. ⛔ Nothing here reaches across the circle."
+ "_authoredWhy": "⛔ AUTHORED 2026-09-05 — PROMOTED FROM THE REGISTRY, NOT INVENTED. This person existed only as a GENERATED registry entry with `skillsObserved`; R28: 'generated is promotable to authored.' ⚑ THE CRAFTS ARE DRAWN FROM WHAT THE STORY ALREADY SHOWED — `skillsObserved` is `growthFor`'s own evidence field, and Pell's 'ironsense' turned out to be three crafts when it was read properly. ⚠️ `domains` is `{primary, secondary, tertiary}` — an ARRAY returns band 'open' and lets `kitFor` draw from the whole catalogue. ⛔ Nothing here reaches across the circle.",
+ "_personalityWas": {
+  "steadiness": "absolute",
+  "grief": "carried, not displayed"
+ },
+ "_personalityWhy": "⛔ `personality` IS FOUR NUMERIC DIALS — `warmth · trust · candor · patience`, roughly -1..1 in the schema's words and 0-10 in practice (Pell: 6/7/9/5). ⚠️ AEVI AUTHORED IT AS PROSE ON ALL FOUR SHEETS ('warmth: high, unsentimental') and the schema caught two of them. ✅ THAT IS THE SCHEMA DOING THE JOB IT COULD NOT DO YESTERDAY — before today's +22 it declared 25 properties and would have passed all four."
 }

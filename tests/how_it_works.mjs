@@ -5720,6 +5720,80 @@ console.log("\n── §82 · A opens a scene · B finds it and JOINS · two wri
       `${remote82.state.gets} GETs · ${remote82.state.puts} PUTs · ${remote82.state.conflicts} real sha conflict(s)`);
   } finally { restore82(); }
 }
+
+/* ═════ §83 — EXESA's COUNTS ARE DERIVED, AND ITS ARCS ARE THE AUTHORED ONES (2026-09-05) ═════ */
+// ⛔ `docs/EXESA.md` is the setting end to end, and it states counts in WORDS — "sixty-six great figures",
+// "a hundred and thirty-five authored places". ⚠️ A number written in prose is still a stored copy of a
+// derived value, and this project's most-repeated defect does not care what font it is in: the figure count
+// was already wrong when the ink dried (70, not 66) and nothing could have told anyone.
+// ⚑ SO THE WORDS ARE PARSED AND MEASURED. `certify_counts` cannot stamp English numerals without writing
+// Aevi's prose for her, so this gates instead of stamping — she keeps the voice, the number stays honest.
+// ⚠️ AND THE SIX ARCS ARE CHECKED AGAINST THE AUTHORED ONES, name and SCALE, because a reader's guide that
+// promises a cosmic arc the engine runs regionally is a promise about pacing.
+console.log("\n── §83 · the setting doc's counts are measured, and its six arcs are the authored six ──");
+{
+  const { loadContentHeadless: lch83 } = await import("./headless_content.mjs");
+  const C83 = await lch83();
+  const ex83 = rd("docs/EXESA.md");
+
+  // a small words→number reader. Bounded and boring on purpose: it exists to read a sentence, not to be a library.
+  const ONES = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10,
+    eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19 };
+  const TENS = { twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60, seventy: 70, eighty: 80, ninety: 90 };
+  const wordsToNumber = (phrase) => {
+    const w = String(phrase).toLowerCase().replace(/-/g, " ").split(/[\s,]+/).filter(Boolean);
+    let total = 0, cur = 0, saw = false;
+    // ⚠️ READ THE TRAILING RUN, not the whole phrase — a capture like "Exesa has a hundred and thirty-five"
+    // must not be defeated by its own first word. Unknown words BEFORE the numerals reset; one after ends it.
+    for (const t of w) {
+      if (t === "and" || t === "a") continue;
+      if (ONES[t] != null) { cur += ONES[t]; saw = true; }
+      else if (TENS[t] != null) { cur += TENS[t]; saw = true; }
+      else if (t === "hundred") { cur = (cur || 1) * 100; saw = true; }
+      else if (/^\d+$/.test(t)) { cur += Number(t); saw = true; }
+      else if (saw) break;
+      else { cur = 0; }
+    }
+    total += cur;
+    return saw ? total : null;
+  };
+  check("§83: ⚠️ the numeral reader works — not a parser that returns null and passes everything",
+    wordsToNumber("sixty-six") === 66 && wordsToNumber("Exesa has a hundred and thirty-five") === 135
+    && wordsToNumber("seventy") === 70 && wordsToNumber("nothing") === null,
+    `66→${wordsToNumber("sixty-six")} · 135→${wordsToNumber("a hundred and thirty-five")}`);
+
+  // ── the great figures: a person the world tracks a CAREER for, which is what `tier` marks
+  const figures83 = Object.values(C83.npcs || {}).filter(n => n && (n.tier || n.legendTier));
+  const figClaim = (ex83.match(/^([A-Za-z\- ]+?) great figures/mi) || [])[1];
+  check("§83: ⛔ the doc's GREAT FIGURE count is the measured one — a number in prose is still a stored copy of a derived value",
+    figClaim != null && wordsToNumber(figClaim) === figures83.length,
+    `doc says "${(figClaim || "").trim()}" (${wordsToNumber(figClaim || "")}) · measured ${figures83.length}`
+    + ` — ${Object.entries(figures83.reduce((m, n) => ({ ...m, [n.tier || n.legendTier]: (m[n.tier || n.legendTier] || 0) + 1 }), {})).map(([k, v]) => `${v} ${k}`).join(" · ")}`);
+
+  // ── the places
+  const places83 = Object.keys(C83.locations || {}).length;
+  const placeClaim = (ex83.match(/([A-Za-z\- ]+?) authored places/mi) || [])[1];
+  check("§83: …and the authored-place count is the corpus's",
+    placeClaim != null && wordsToNumber(placeClaim) === places83,
+    `doc says "${(placeClaim || "").trim()}" (${wordsToNumber(placeClaim || "")}) · measured ${places83}`);
+
+  // ── the six arcs, by NAME and by SCALE
+  const arcs83 = Object.values(C83.greaterArcs?.arcs || C83.greaterArcs || {}).filter(a => a && a.id && a.name);
+  check("§83: ⚠️ the fixture found the authored arcs — never vacuous", arcs83.length >= 4, `${arcs83.length} arc(s)`);
+  const namedInDoc = arcs83.filter(a => ex83.toUpperCase().includes(String(a.name).toUpperCase()));
+  check("§83: ⛔ EVERY authored greater arc appears in the doc — a setting guide that omits one is a map with a blank quarter",
+    namedInDoc.length === arcs83.length,
+    arcs83.filter(a => !namedInDoc.includes(a)).map(a => a.name).join(" · ") || `all ${arcs83.length} named`);
+  // ⚠️ AND AT THE RIGHT SCALE. The doc italicises a scale beside each arc's heading; a cosmic arc sold as
+  // regional is a promise about how fast the world moves.
+  const wrongScale = arcs83.filter(a => {
+    const m = ex83.match(new RegExp("###[^\\n]*" + String(a.name).replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "[^\\n]*\\*(.*?)\\*", "i"));
+    return m ? !String(m[1]).toLowerCase().includes(String(a.scale || "").toLowerCase()) : false;
+  });
+  check("§83: …and each one at the SCALE it is authored at",
+    wrongScale.length === 0,
+    wrongScale.map(a => `${a.name} is ${a.scale}`).join(" · ") || "all scales agree");
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -513,7 +513,7 @@ blast radius includes every structure keyed to the thing being migrated.**
 | `docs/APPARATUS.md` | ⛔ **every harness, what it is for, and whether it RUNS** | us |
 | `docs/ROSTER.md` | **where every authored person lives, and who still needs a sheet** — five places, generated counts | us |
 | ⛔ `docs/BALANCE.md` | ⛔ **which numbers can be turned, what each one moves, and HOW TO KNOW A MEASUREMENT IS REAL** — Erik: *"we need to build toward balance and use the dials"*. ⚠️ Its §5 is the hard-won half: four confounds in one session, each a strong and stable correlation that was an artefact | us |
-| ⛔ `docs/THE_WORLD.md` | ⛔ **what is out there and who is moving in it** — the setting end to end: the Three, the four sources, the six arcs. ⚠️ **A READER'S GUIDE, NOT RULES** — the companion to `PLAYERS_GUIDE` (how it feels to play) and the front door to `ARCS.md` (the same arcs *with* the answers) | ⛔ **the player**, and us |
+| ⛔ `docs/EXESA.md` | ⛔ **what is out there and who is moving in it** — the setting end to end: the Three, the four sources, the six arcs. ⚠️ **A READER'S GUIDE, NOT RULES** — the companion to `PLAYERS_GUIDE` (how it feels to play) and the front door to `ARCS.md` (the same arcs *with* the answers) | ⛔ **the player**, and us |
 | `docs/PIPELINE.md` | how work moves | us |
 | `po/*.md` | working papers — proposals, reviews, replies | us, in flight |
 

@@ -424,9 +424,10 @@
    "_powerSystemWas": "reach_destruction_creation",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_destruction_creation` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `wright` — Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "touchTier": {
-    "why": "a thumb along the join. You can tell who made it and whether they were tired."
+    "why": "a look at the join from across the shop. You can tell it was made, and not by whom.",
+    "contactOnly": false
    },
-   "_touchTierWhy": "⛔ AUTHORED `touchTier` — the flavour form, per `CORRECTION_R47_touch_tier.md`. ⚠️ THE DERIVED DEFAULT IS THE MECHANISM; this is the IMPROVEMENT, never the prerequisite. ⚑ THE STRIPPING IS THE POINT (CCODE-266): one target, at contact, no dice, no ongoing, no area — 'the craft with no power behind it — you have to be there, and it is barely anything.' ⛔ A touch that kept a die would be r1 at a discount."
+   "_touchTierWhy": "⛔ RE-AUTHORED 2026-09-05. Erik: 'I don't think it's appropriate for all skills to have to touch. Silas isn't a physical guy — so a T1 zero cost could still be a RANGED attack.' ⚠️ AEVI'S FIRST PASS ASSUMED A HAND ON EVERY CRAFT, INCLUDING ONE THAT REACHES TWENTY PACES. ✅ THE FREE FLOOR STRIPS FORCE, NOT REACH: the craft keeps its native reach and form and loses the dice, the ongoing, the area and everything the ranks added. ⚑ `contactOnly` survives only where the craft IS the contact — `kept_vigil`, `steady_hands`, `held_repair`, `carried_name`."
   },
   {
    "id": "raised_thing",

@@ -1585,3 +1585,26 @@ must stop citing a rule that is gone.**
 
 ⚑ **AEVI QUOTED THE SUPERSEDED HALFWAY STEP AS CURRENT TODAY**, off a stale comment block twelve lines above
 the correction. ⛔ **Same failure, one more time: read to the end of the file.**
+
+---
+
+## ✅ CLOSED 2026-09-05
+
+| | |
+|---|---|
+| ⛔ **`deathSave.notForClasses` was `[]` for six days** | ✅ authored. ⚠️ **Until today the death save could be aimed at a machine** |
+| ⛔ **eight of nine bond grants were STUBS** | ✅ **all authored to the full ability schema** — `tree`, `mechanic`, `bounds`, `intensity` |
+| ⛔ **the NPC schema knew nothing about the sheet** | ✅ **+22 properties.** ⚠️ `additionalProperties` unset → permissive → **the validator had NEVER checked a field that matters for combat** |
+
+## ⬜ STILL OPEN — AEVI
+
+`penetration: 3` crafts (R45b) · `mechanic.meaning: "none"` on body crafts · the `market` `trade` field ·
+evolution on the Warden's Charge and the brigandine **or the claim goes** · **five interiority sheets** ·
+the naming guard · **11 of 14 traditions unaudited** (`SPEC_tradition_narrative_npc_pass`, promoted 08-31)
+
+## ⬜ STILL OPEN — CCODE
+
+⛔ **the two stale antipode readers** (`app.js:11015`'s UI string, `progression.js:466`) ·
+⚑ **`becomesNpc` has no reader** (`SPEC_companion_becomes_person.md`) ·
+⛔ **multiplayer before tomorrow: the empty `_open_index.json`, and R36 extended to the party seat so a human
+ally stops fighting as a hardcoded `HARM, MARTIAL` stub**

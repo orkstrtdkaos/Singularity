@@ -113,9 +113,42 @@ pacing AND lower cost.**
 | | |
 |---|---|
 | ⚑ **a lock TIMEOUT** | ⬜ per-scene, generous. ⛔ **A missing player must never stall a fight** |
-| ⚑ **the honest default for an unlocked player** | ⛔ **GUARD** — ⚠️ not a strike they did not choose, and not nothing |
+| ⚑ **and the LEADER chooses what happens to a straggler** | ⬜ **three options, Erik 2026-09-05** — see §5b |
 | **and it must be VISIBLE** | *"Cade has not locked in — resolving in 30s"* |
 | ⬜ **a member idle past the TTL** | ⚠️ **leaves the scene**, as `sceneIsOpen` already does |
+
+### 5b · ⚑ THE LEADER DECIDES WHAT A STRAGGLER DOES
+
+> Erik: *"I agree with the timer — with the **leader being able to skip them, or wait, or have AI decide
+> what they do.**"*
+
+⛔ **THE TIMER DOES NOT DECIDE. IT ASKS THE LEADER.** ⚠️ Which keeps the leader's job the same in and out of
+a fight — ➡️ **they never choose a party member's ACTION, only whether the party moves without them.**
+
+| the leader picks | what happens |
+|---|---|
+| ⚑ **WAIT** | the round holds. ⬜ Repeatable, and it should say how long it has been held |
+| ⚑ **SKIP** | ⛔ **they GUARD** — ⚠️ not a strike nobody chose, and not nothing. They are still in the fight and still targetable |
+| ⛔ **LET THE GM PLAY THEM** | ⚑ **their character acts FROM THEIR OWN SHEET** |
+
+### ⚑ AND THE THIRD OPTION NEEDS NOTHING NEW — IT IS R36
+
+**R36: *a party member fights from their own sheet*, and R36a folds the ones who are not acting fully.**
+
+➡️ ⛔ **AN ABSENT PLAYER IS SIMPLY A FOLDED MEMBER.** ⚠️ **The engine already knows how to run a person from
+a sheet weighted by their `assistTags`** — `battleSkillsFor` yields 32 skills for Pell and 40 for Veth, and
+`personOpponent` already builds a fighter from a person.
+
+✅ **SO "LET THE GM PLAY THEM" IS THE FOLD PATH POINTED AT A HUMAN'S CHARACTER**, and it is the same code
+whether the sheet belongs to Cade or to Veth.
+
+⚠️ **AND IT MUST BE CONSERVATIVE.** ⛔ **The GM playing someone else's character should never spend a
+capstone, never take a lethal-rung action, and never spend the last of their energy.** ⬜ **It plays them
+COMPETENTLY AND UNAMBITIOUSLY** — ⚑ **a player returning to find their character alive and their best craft
+unspent has lost nothing; one returning to a spent pool and a dead rival has lost the scene.**
+
+⬜ **`autoPlayed: true` on the beat**, so the narration can say so and the player can see what was done in
+their name.
 
 ⛔ **AND SCENE MODE MUST NOT TIME OUT.** ⚠️ **A leader waiting on intents is a group at a table; a fight
 waiting on a lock is three people staring at a screen.**
@@ -140,7 +173,8 @@ waiting on a lock is three people staring at a screen.**
 1. ⛔ **Can `scene.encounter` carry a live opponent through `pushMergedFile`?** ⚠️ **The merge is idempotent by
    `(by, at)` for beats; ⬜ a shared health pool is a COUNTER and counters do not merge that way.**
    ⚑ **This is the hardest question in the spec.**
-2. **Does the lock live on the scene or per-member?** ⬜ Aevi reads it as `scene.round.locks[characterId]`.
+2. ⚠️ **Does the GM-plays-them path (§5b) reuse the fold directly**, or does a human's character need a different weighting? ⬜ Aevi reads it as the SAME path with a conservative policy.
+3. **Does the lock live on the scene or per-member?** ⬜ Aevi reads it as `scene.round.locks[characterId]`.
 3. ⚠️ **What happens when one player is in a fight and another is not?** ⛔ Today they witness. ⬜ **Can a
    member JOIN a round in progress, or only at the next one?**
 4. **Is the leader a scene field or a party-member flag?** ⬜ Scene field, passable.

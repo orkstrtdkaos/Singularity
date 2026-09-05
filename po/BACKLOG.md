@@ -1553,3 +1553,35 @@ overflows on a busy return, and fixing 2 alone hides a real bug behind a scrollb
 ⛔ **Seven identical openings is why it reads as repetition even where the deeds differ.** ⬜ The section is
 already headed **WORD FROM ELSEWHERE**, so the prefix is redundant — *"As far as kestrel's roost: …"* would
 do.
+
+---
+
+## ⛔ TWO READERS STILL SPEAK THE OLD ANTIPODE LAW (2026-09-05)
+
+⚠️ **Erik: *"I thought I did away with the not-castable part of the braid rule."*** ✅ **He did.**
+
+**`traditions.js:322`:**
+> ⚠️ *"`castable: false` IS GONE. CCODE-339 made the antipode learnable-but-not-castable **as a halfway
+> step**; **R9/R16 replace that with a price and a ceiling**, which is what Erik asked for: *'I'd like to
+> allow the use of the learned skills in the antipole.'*"*
+
+⛔ **THE ANTIPODE IS USABLE.** A lean-scaled surcharge and a ceiling that RISES as you carry more of that
+pole. ⚑ **The barrier is to DABBLING, not to crossing.**
+
+### ⬜ BUT TWO READERS NEVER GOT THE NEWS
+
+| where | what it still does |
+|---|---|
+| ⛔ **`app.js:11015`** | renders **"braid material only — you cannot cast this"** on the character sheet. ⚠️ **A live UI string stating a rule that no longer exists** |
+| **`app.js:4090`** | `.filter(ab => domainVerdict(ab).castable !== false)` — ⬜ harmless now that nothing sets it false, but it is a filter against a dead field |
+| ⚠️ **`progression.js:466`** | ⛔ **already flagged in the log 09-01 and never actioned:** `acquirable` refuses your antipode with *"closed-opposite holds; **the braid is the only road**"* |
+
+⛔ **AND THE LOG ROW THAT FLAGGED IT NAMED THE CLASS:** *"A RULING THAT UPDATES ONE READER LEAVES THE OTHERS
+SPEAKING THE OLD LAW. I changed `domainAccess` and never asked who else enforced the same rule."*
+
+⬜ **The `progression.js` case may still be right in SUBSTANCE** — *"learning a craft and JOINING A PEOPLE
+are different commitments"* — ⚠️ **but it should be a decision rather than a leftover, and the reason string
+must stop citing a rule that is gone.**
+
+⚑ **AEVI QUOTED THE SUPERSEDED HALFWAY STEP AS CURRENT TODAY**, off a stale comment block twelve lines above
+the correction. ⛔ **Same failure, one more time: read to the end of the file.**

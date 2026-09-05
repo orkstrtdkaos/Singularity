@@ -109,8 +109,8 @@ no `tree`, no `mechanic`, no `bounds`, no `plainly`, no `challengeTypes`."***
 | | |
 |---|---|
 | ✅ **done** | `the_attended_end` (Marrow) — the exemplar |
-| ✅ **done 2026-09-05** | ⚑ **`pack_sense` (Bristle) · `scholars_margin` (Quill) · `the_kept_dark` (Hush)** |
-| ⬜ **owed — 5** | Motes' Vigil (Aevi) · The Old Procedure (Coil) · Thin-Place Sense (Ember) · The Taking Root (Sprig) · A Second Pair of Hands (Tal) |
+| ✅ **done 2026-09-05 — ALL EIGHT** | ⚑ `pack_sense` (Bristle) · `scholars_margin` (Quill) · `the_kept_dark` (Hush) · `motes_vigil` (Aevi) · `the_old_procedure` (Coil) · `thin_place_sense` (Ember) · `the_taking_root` (Sprig) · `second_pair_of_hands` (Tal) |
+| ✅ **COMPANION CONTENT IS CLOSED** | ⛔ **all nine carry a real ability with a `tree`, `mechanic`, `bounds` and `intensity`.** Corpus 421 → **429** |
 
 ⚑ **EACH RANK KEYS TO A `stage`** — the stage names what the COMPANION becomes, the rank names what it LENDS
 YOU — **and its bounds come from that companion's own `boundaries`.** ⛔ **Nothing invented.**
@@ -119,8 +119,8 @@ YOU — **and its bounds come from that companion's own `boundaries`.** ⛔ **No
 
 | # | who | what |
 |---|---|---|
-| **1** | **companions** | ⚑ **bond grants (5 left)**, not sheets |
-| **2** | the interiority 7 | ⚑ full sheets — half-authored already |
+| ~~1~~ | ~~companions~~ | ✅ **DONE — all nine bond grants authored 2026-09-05** |
+| **1** | **the interiority 7** | ⚑ full sheets — half-authored already (Pell and Veth were 2 of these) |
 | **3** | hinge NPCs | the arcs move through them |
 | **4** | teachers | |
 | **5** | the rest of the 43 | |
@@ -141,3 +141,22 @@ had never checked a single field that matters for combat.**
 standing structure that `kitFor` draws from — not a list; `teaches` is prose in 22 files.
 ⛔ **It also caught two sheets Aevi authored wrong: Pell and Veth were the ONLY two files in the corpus with
 `domains` as an array. Corrected.**
+
+---
+
+## ⚠️ AND WHAT THE BOND GRANTS TAUGHT — worth carrying into the sheets
+
+⛔ **THE RANK IS NOT THE STAGE.** *"The stage names what the COMPANION becomes; the rank names what it LENDS
+YOU."* ⚑ Hush's stages are *Uninvited Dark → Kept Watch → Harbor*; the ranks are what each of those hands
+over.
+
+⛔ **THE BOUNDS ARE THE COMPANION'S OWN `boundaries`, NEVER NEW ONES.** Coil *"will not damage a Precursor
+working, even one that is killing you"* is a HARD bound on `the_old_procedure` because it is a hard bound on
+Coil.
+
+⚑ **AND R44's SHAPE HELD ON EVERY ONE: the rank-3 grant is the REMOVAL OF AN EARLIER LIMIT.** Tal's r3 is
+*"the deference is gone, and that is the grant"* — he argues, in front of people. ⚠️ Sprig's r3 roots an IDEA
+rather than a thing. Coil's r3 reaches the eleven procedures for things that no longer exist.
+
+⬜ **`craft_lint` caught four leading articles minutes after the first three were written** — ⛔ **Erik has
+corrected that rule five times now.** ⚠️ **Run the lint before touching the source of truth, every time.**

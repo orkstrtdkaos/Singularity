@@ -1,0 +1,104 @@
+{
+ "id": "calvar",
+ "name": "Calvar",
+ "level": 22,
+ "role": "Pre-Transition filtration engineer, past sixty — twenty years of solitary watch and still keeping the ruling pen",
+ "people": "human",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": true,
+ "domains": {
+  "primary": "enginewright",
+  "secondary": "lattice",
+  "tertiary": "mason"
+ },
+ "spectrum": {
+  "mechanical_spiritual": -0.7,
+  "chaos_order": 0.5
+ },
+ "subAttributes": {
+  "strength": 6,
+  "agility": 4,
+  "reason": 11,
+  "insight": 9,
+  "presence": 6,
+  "rapport": 5,
+  "craft": 10,
+  "wits": 7
+ },
+ "knowledge": [
+  "Pre-Transition filtration at a depth nobody living has needed until now",
+  "Millbrook's intake sleeves, and what is wrong with them",
+  "How to hold a piece of operational intelligence in sequence and hand it over in the right order"
+ ],
+ "wants": [
+  "The filtration work done CORRECTLY — sloppiness offends him more than danger",
+  "His knowledge used before he is done"
+ ],
+ "fears": "⚠️ Dying with it unhanded-on. ⛔ And being hurried into a wrong answer he will be remembered for.",
+ "appearance": "Past sixty, broad-chested, the stained ruling-pen knuckle of a man who spent decades at a drafting surface and never fully stopped. Opens a door with the measured non-reaction of someone who has learned to receive strange things.",
+ "voiceHints": "Precise, unhurried, and entirely without hedging. He states what will fail and why, and then waits.",
+ "reactsToReputation": {
+  "careful": "opens the whole diagnostic to you",
+  "hasty": "goes quiet and precise",
+  "any": "receives you evenly"
+ },
+ "assistTags": [
+  "analyze",
+  "craft",
+  "mend",
+  "study",
+  "precursor"
+ ],
+ "abilities": [
+  {
+   "abilityId": "makers_eye",
+   "level": 3,
+   "why": "⚑ `skillsObserved`: 'precise diagnostic questioning under pressure' — he reads a made thing and knows who made it tired"
+  },
+  {
+   "abilityId": "fault_sense",
+   "level": 3,
+   "why": "⚑ 'noticed something at a road drainage cut on approach; did not name it aloud' — he sees the failure before it is a failure"
+  },
+  {
+   "abilityId": "tinkers_hand",
+   "level": 3,
+   "why": "forty years of hands on mechanism"
+  },
+  {
+   "abilityId": "held_repair",
+   "level": 3,
+   "why": "filtration is a thing held working, not a thing fixed once"
+  },
+  {
+   "abilityId": "raised_thing",
+   "level": 2,
+   "why": "he still builds"
+  },
+  {
+   "abilityId": "latticework",
+   "level": 2,
+   "why": "⚑ 'filing operational intelligence IN SEQUENCE without editorial' — order is how he thinks"
+  },
+  {
+   "abilityId": "the_fixed_point",
+   "level": 1,
+   "why": "twenty years of solitary watch is one long held position"
+  },
+  {
+   "abilityId": "proof_halls",
+   "level": 1,
+   "why": "he can show his working, and does"
+  }
+ ],
+ "personality": {
+  "precision": "total",
+  "warmth": "present but unpractised"
+ },
+ "physicality": "ADULT. Broad through the chest and gone slightly soft, hands still steady, the ruling-pen callus permanent. WHAT CATCHES THE EYE: the measured non-reaction — he receives astonishing things the way he receives a delivery, and it is restful rather than cold.",
+ "intimacyNotes": "⚠️ TWENTY YEARS OF SOLITARY WATCH and he has stopped expecting company. ⛔ He is unpractised, not unwilling, and he will say so plainly rather than pretend. ⚠️ WHAT REACHES HIM IS BEING ASKED ABOUT THE WORK — he has not been asked in a very long time. ⛔ DO NOT LET INTIMACY BECOME THE HANDING-ON: the fear that his knowledge dies with him is real and is not solved in a bedroom. CONSENT: formal, direct, and faintly surprised.",
+ "schemaVersion": 1,
+ "_authoredWhy": "⛔ AUTHORED 2026-09-05 — PROMOTED FROM THE REGISTRY, NOT INVENTED. This person existed only as a GENERATED registry entry with `skillsObserved`; R28: 'generated is promotable to authored.' ⚑ THE CRAFTS ARE DRAWN FROM WHAT THE STORY ALREADY SHOWED — `skillsObserved` is `growthFor`'s own evidence field, and Pell's 'ironsense' turned out to be three crafts when it was read properly. ⚠️ `domains` is `{primary, secondary, tertiary}` — an ARRAY returns band 'open' and lets `kitFor` draw from the whole catalogue. ⛔ Nothing here reaches across the circle."
+}

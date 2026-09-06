@@ -200,7 +200,15 @@
    "defendedMult": 0.5,
    "keeperMult": {
     "_note": "⛔ v2 §1 (Erik: 'successful places that don't have a strong leader are targets'): the KEEPER joins the raid product — chance = base × danger × fill × defendedMult × keeperMult[tier]. _none is an UNKEPT hold; _default is a keeper of unknown tier (never read as absent). A full store under Deni Cors is exactly the shape of a target. Priced by CCode; Erik turns.",
-    "_none": 1.4, "_default": 1, "riffraff": 1.25, "notable": 1, "regional": 0.85, "heroic": 0.7, "epic": 0.6, "legendary": 0.5, "mythic": 0.4
+    "_none": 1.4,
+    "_default": 1,
+    "riffraff": 1.25,
+    "notable": 1,
+    "regional": 0.85,
+    "heroic": 0.7,
+    "epic": 0.6,
+    "legendary": 0.5,
+    "mythic": 0.4
    },
    "_watches": "⛔ ERIK_holds_features §5 — 'he built the Whistling Woman to watch over it': a hold may carry `watches: <holdId>`. The watched hold's raid chance × watchedMult while the watcher STANDS (not failing, and keeping a watch of its own — stone does not see); × watcherLostMult when the watcher is lost. A reason to defend a post that produces nothing. Priced by CCode; Erik turns.",
    "watchedMult": 0.6,
@@ -216,7 +224,10 @@
   },
   "delegates": {
    "note": "⛔ PROPOSAL_delegate_tiers v2 §4 — MY PEOPLE'S PEOPLE (Erik: 'Veth knew him and vouched for him, so that should count too'). A vouch is an ACT in a scene (npcUpdates.vouchedBy), never derived; it needs the voucher's own standing (vouchMinStanding); it is transitive ONCE — a vouched-for person cannot vouch (no chains); the trust it carries is the voucher's standing less vouchDiscount and sits BESIDE the person's own relationship (Aevi §6.1: trusted is not known); it COSTS the voucher vouchFallCost standing when a hold the vouched-for keeps slips on their watch (§6.2 — priced, not ruled). chargeStanding: the trust at which a keeper is a CHARGE-holder (v2 §2, breadth not height) rather than merely keeping — read and said; a charge-holder ACTING on world days is SNG-366's next spec. Priced by CCode; Erik turns.",
-   "vouchMinStanding": 6, "vouchDiscount": 1, "chargeStanding": 6, "vouchFallCost": 1
+   "vouchMinStanding": 6,
+   "vouchDiscount": 1,
+   "chargeStanding": 6,
+   "vouchFallCost": 1
   },
   "growth": {
    "note": "✅ Q18 (Erik 2026-09-05: 'please build it'; SPEC_hold_store §5): a hold grows by ONE-TIME ACTS WITH LASTING EFFECTS, never a per-tick chore. A KEPT hold climbs one rung every passesPerClimb passes (4 passes = 12 world days) to thriving — and its keeper's TIER sets the FLOOR it will not drop below (floorByKeeperTier; v2 §1: floors, not ceilings). A craft the character carries, applied to the place (the tab, or holdingOps improve), lifts it a rung at once, once per craft per hold, when the craft SHAPES or MENDS (improveFunctions). Each extra hand adds handsYieldBonus to the yield, to maxHands. A garrison halves a raid (raid.defendedMult) and costs garrisonUpkeepPerHand each pass. The ground scales an enterprise's yield by 1 + groundYieldWeight × (density − 0.5): dense lattice 0.9 → ×1.2, thin 0.2 → ×0.85. Priced by CCode; Erik turns them. What a POST can become is not built.",
@@ -368,7 +379,8 @@
     "facility": "waygate",
     "transit": true,
     "label": "a waygate — made, not found",
-    "_note": "⛔ ERIK 2026-09-06: 'A waygate is a huge deal. There aren't many in the world and they let you travel vast distances.' Twenty-seven in the world, and this one was MADE. The effect the engine reads is the PLACE's — journey.gatesUsableBy/routeBetween read `waygate: true` on the location — so the kind marks that the hold KEEPS a gate; nothing new is read. Aevi: the flavour is yours."
+    "_note": "⛔ ERIK 2026-09-06: 'A waygate is a huge deal. There aren't many in the world and they let you travel vast distances.' Twenty-seven in the world, and this one was MADE. The effect the engine reads is the PLACE's — journey.gatesUsableBy/routeBetween read `waygate: true` on the location — so the kind marks that the hold KEEPS a gate; nothing new is read. Aevi: the flavour is yours.",
+    "_flavour_20260906": "⛑ THE FLAVOUR, AEVI'S, PER CCODE 2026-09-06: 'a `waygate` feature kind now exists — Erik ruled its weight; the flavour is yours.' ⚑ WHAT IT IS TO HOLD ONE: twenty-seven exist in the world and the Precursors made the rest. This one was made by a person, which is either the most reassuring fact in Exesa or the least. ⚠️ A HELD WAYGATE IS NOT A DOOR YOU OWN — IT IS A DOOR THAT OPENS ON YOUR GROUND. The traffic is not yours. People arrive who were not coming to see you, and leave from somewhere you are standing. ⛔ Trade is gated behind wayfaring (`docs/EXESA.md`), so a hold with a gate is not merely richer — it is CONNECTED, and connected places are where things happen to you. ⚑ AND THE KEEPING IS THE POINT, WHICH IS WHY THIS IS A FEATURE AND NOT A LOCATION FLAG: the gate belongs to the world and reads from the place; the FEATURE says somebody is responsible for it. ⛔ A gate nobody keeps is a hole in the world with weather coming through it. ⚠️ NARRATION: it does not hum, glow, or announce itself. The arch is there and the distance on the other side is wrong, and everyone who uses it stops noticing within a week — which is the strangest thing about it."
    },
    "gate": {
     "family": "martial",

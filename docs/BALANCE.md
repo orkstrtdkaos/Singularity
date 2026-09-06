@@ -1,6 +1,6 @@
 # BALANCE — the dials, what they actually do, and how to turn one without lying to yourself
 
-**CCode · started 2026-08-30 · v1.9.395**
+**CCode · started 2026-08-30 · v1.9.396**
 
 > Erik: *"we need to build toward balance and use the dials."*
 
@@ -63,7 +63,10 @@ What balance means here is narrower and testable:
 | `meaning.*` (base, tags, tier, community, perPerson, presentCap, ceilingFloor) | `the_substrate` | 0.1 · sacred 0.35 / locus 0.2 / cult 0.15 / home 0.1 · settlement 0.15 / region 0.1 / site 0.05 · 0.1 · 0.04 (cap 0.2) · **0.35** | R38 — crude on purpose; Choirheight 0.75, a fringe 0.20. `ceilingFloor` is what a meaningless place still allows a metaphysical craft |
 | `holdStore.yieldByCondition` / `upkeepByKind` | `economy` | **8 / 4 / 2 / 0** · **enterprise 14, post 0** | Q8 — at ordinary demand: +18 / +2 / −6 / −14 per pass (a unit = `useful` 4 × need × scarcity where sold) |
 | `holdStore.fullAt` / `raid.base` / `takeShare` / `defendedMult` | `economy` | **40 / 0.03 / 0.5 / 0.5** | a full store at danger 4: ~12% raided per pass, ~6% with a garrison |
-| `holdStore.growth.passesPerClimb` / `ceilingByKeeperTier` | `economy` | **4** · notable → holding, regional+ → thriving | Q18 — a kept hold climbs a rung every 4 passes (12 days) to its keeper's ceiling |
+| `holdStore.growth.passesPerClimb` / `floorByKeeperTier` | `economy` | **4** · riffraff → strained, notable–heroic → holding, epic+ → thriving | Q18 → v2 §1 — a kept hold climbs a rung every 4 passes (12 days) to thriving; its keeper's tier is the FLOOR a raid cannot drop it below |
+| `holdStore.raid.keeperMult` | `economy` | unkept 1.4 · riffraff 1.25 · notable 1 · regional 0.85 · heroic 0.7 · epic 0.6 | v2 §1 — the keeper joins the raid product: a full store under a weak keeper is the target on the map |
+| `holdStore.raid.watchedMult` / `watcherLostMult` | `economy` | **0.6** / **1.25** | ERIK_holds_features §5 — a hold that `watches` another: raided less while the watcher stands, more when the watcher is lost |
+| `holdStore.delegates.*` | `economy` | vouchMinStanding 6 · vouchDiscount 1 · chargeStanding 6 · vouchFallCost 1 | v2 §4 — a vouch needs the voucher's standing, carries it less one, makes a charge-holder at 6, and costs the voucher one when the vouched-for's hold slips |
 | `holdFeatures.kinds.*` (yields · defence · aura · hands · residents) | `economy` | mine → raw_material · wall 1 / tower 2 · temple 0.2 / shrine 0.1 · quarters +2 hands, 4 homes | what a post becomes — a feature's ONE effect; Aevi extends the kinds |
 | `holdFeatures.defenceShareStep` | `economy` | **0.15** | R46a — each defence point cuts an UNSEEN raid's take; `minTakeShare` retired, so enough stone leaves them nothing |
 | `holdStore.raid.spoils` | `economy` | raw_material, 1 per danger | R46a — what a beaten raid leaves behind: winning PAYS |

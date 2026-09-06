@@ -318,6 +318,20 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     if (typeof u.relationshipDelta === "number") {
       n.relationship = Math.max(-10, Math.min(10, n.relationship + Math.max(-2, Math.min(2, u.relationshipDelta))));
     }
+    // ⛔ PROPOSAL_delegate_tiers v2 §4 — MY PEOPLE'S PEOPLE (Erik: "Veth knew him and vouched for him, so that should
+    // count too"). A vouch is an ACT in a scene, never derived: someone KNOWN, with standing of their own, says so.
+    // ⚠️ Transitive ONCE — a person who was themselves vouched for cannot pass it on, or everyone is trusted through
+    // two hops. It sits BESIDE relationship (Aevi §6.1) and it is theirs to lose (holdings.voucherPays).
+    if (u.vouchedBy) {
+      const vid = slugify(String(u.vouchedBy));
+      const v = vid && vid !== n.id ? findExistingNpc(reg, vid, "") : null;
+      const dl = ctx.rules?.economy?.holdStore?.delegates || {};
+      const min = Number.isFinite(Number(dl.vouchMinStanding)) ? Number(dl.vouchMinStanding) : 6;
+      if (v && v.id !== n.id && !v.vouchedBy && (Number(v.relationship) || 0) >= min && n.vouchedBy !== v.id) {
+        n.vouchedBy = v.id; n.vouchedDay = ctx.day ?? null;
+        n.history = [...n.history, `[d${ctx.day ?? "?"}] ${v.name || v.id} vouched for them — their word carries, and it is theirs to lose.`].slice(-CAPS.history);
+      }
+    }
     // SNG-108: bond KIND + romantic STAGE — applied AFTER the score so the stage floor sees the fresh value.
     if (u.bondType || u.bondStage) {
       advanceBond(n, { bondType: u.bondType, bondStage: u.bondStage }, ctx.rules, ctx.day);

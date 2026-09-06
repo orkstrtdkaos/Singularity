@@ -4827,7 +4827,7 @@ console.log("\n── §70 · per-rank source · the revised kill cost · ongoin
   // growthFor as CONTEXT for what it proposes. The derived count is a proxy — the hard half is the declared builds: field
   // — and a new unbuilt spec raises the proxy without anything being stale. The population grew; the baseline moves with
   // it, and the reason is written here rather than the number quietly nudged.
-  const BASELINE_DERIVED = 11;   // 2026-09-06 (10→11): SPEC_codex_summaries_and_merging.md — Aevi, landed today, UNBUILT, naming codex readers as context for the summaries it asks for   // 2026-09-06 (9→10): SPEC_npc_presence_cadence.md — Aevi, landed today, UNBUILT, naming npcsPresent/attentionByTier/worldRoster as context for the roster it asks for; the population grew, nothing went stale, and `declaredStale` is still 0   // 2026-09-05 (5): SPEC_quest_snapshot.md landed unbuilt, naming ringDistance/meaningDensity as context   // (4): SPEC_companion_becomes_person.md, same case   // (3): SPEC_party_mode_phase2.md, same case   // (2): four more specs landed unbuilt with the brief   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
+  const BASELINE_DERIVED = 12;   // 2026-09-06 (11→12): SPEC_holdings_screen.md — Aevi, landed today, UNBUILT (CCode round 2), naming ensureHoldingImage/renameHolding/holdingSentence as the exports it asks to CHANGE — the next landing builds it and the count comes back down   // 2026-09-06 (10→11): SPEC_codex_summaries_and_merging.md — Aevi, landed today, UNBUILT, naming codex readers as context for the summaries it asks for   // 2026-09-06 (9→10): SPEC_npc_presence_cadence.md — Aevi, landed today, UNBUILT, naming npcsPresent/attentionByTier/worldRoster as context for the roster it asks for; the population grew, nothing went stale, and `declaredStale` is still 0   // 2026-09-05 (5): SPEC_quest_snapshot.md landed unbuilt, naming ringDistance/meaningDensity as context   // (4): SPEC_companion_becomes_person.md, same case   // (3): SPEC_party_mode_phase2.md, same case   // (2): four more specs landed unbuilt with the brief   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
   check(`§70: ratchet — \`spec_ready\` specs naming an existing engine export = ${derivedStale.length} (baseline ${BASELINE_DERIVED}) — may only go DOWN`,
     derivedStale.length <= BASELINE_DERIVED, derivedStale.map(r => `${r.f}:${r.named.slice(0, 3).join(",")}`).join(" · "));
   const built70 = rows70.filter(r => r.status === "built" || r.status === "part_built");
@@ -5020,8 +5020,8 @@ console.log("\n── §74 · a hold grows — the keeper's ceiling, a craft app
   const { loadContentHeadless: lch74 } = await import("./headless_content.mjs");
   const C74 = await lch74();
   const eco = C74.rules.economy, cfgS = eco.holdStore, g = cfgS.growth, npcCfg = C74.rules.npcStanding;
-  check("§74: ⛔ the growth dials are content — a climb schedule, a ceiling by keeper tier (notable holds, regional reaches thriving), the shaping functions, hands, a watch's keep, the ground's weight",
-    g && g.passesPerClimb === 4 && g.ceilingByKeeperTier?.notable === "holding" && g.ceilingByKeeperTier?.regional === "thriving" && Array.isArray(g.improveFunctions) && g.improveFunctions.includes("mend")
+  check("§74: ⛔ the growth dials are content — a climb schedule, a FLOOR by keeper tier (v2 §1: notable keeps it at holding, epic and above keep it thriving; no ceiling), the shaping functions, hands, a watch's keep, the ground's weight",
+    g && g.passesPerClimb === 4 && !g.ceilingByKeeperTier && g.floorByKeeperTier?.notable === "holding" && g.floorByKeeperTier?.epic === "thriving" && Array.isArray(g.improveFunctions) && g.improveFunctions.includes("mend")
     && g.handsYieldBonus > 0 && g.maxHands >= 1 && g.garrisonUpkeepPerHand > 0 && Number.isFinite(g.groundYieldWeight));
   const mk74 = (steward, keeperLevel, extra = {}) => ({ id: "pc", purse: { crystal: 500 }, company: [], holdingOffers: [], worldState: { assignments: {} }, abilities: [],
     npcRegistry: steward ? { [steward]: { id: steward, name: "Keeper", status: "active", level: keeperLevel } } : {},
@@ -5034,8 +5034,10 @@ console.log("\n── §74 · a hold grows — the keeper's ceiling, a craft app
   const r4 = passes(regional, 1);
   check("§74: ⛔ …on the 4th pass a REGIONAL keeper brings it up to thriving, with history naming the keeper and the tier",
     r4 && r4.to === "thriving" && regional.holdings[0].condition === "thriving" && regional.holdings[0].growthPasses === 0 && /grew under Keeper \(regional\)/.test(regional.holdings[0].history.slice(-1)[0]?.note || ""), JSON.stringify(r4));
-  check("§74: …a NOTABLE keeper holds a place and cannot bring it past holding (the ceiling); an unkept hold never climbs (R25 stands)",
-    passes(notable, 8) === null && notable.holdings[0].condition === "holding" && passes(unkept, 8) === null && unkept.holdings[0].condition === "holding");
+  // ⛔ v2 §1 — FLOORS, NOT CEILINGS. This pinned "a notable keeper cannot bring it past holding"; Erik: "poor Deni might
+  // just be keeping it, but the place might be thriving anyway." A kept hold climbs whoever keeps it; the tier is the floor.
+  check("§74: …a NOTABLE keeper's hold CLIMBS too — floors, not ceilings (v2 §1); an unkept hold never climbs (R25 stands)",
+    passes(notable, 4)?.to === "thriving" && notable.holdings[0].condition === "thriving" && passes(unkept, 8) === null && unkept.holdings[0].condition === "holding");
   const gone = mk74("k", 15); gone.npcRegistry.k.status = "departed";
   check("§74: …a departed keeper grows nothing", passes(gone, 4) === null && gone.holdings[0].condition === "holding");
   // ── the tick runs it and says so
@@ -5061,10 +5063,10 @@ console.log("\n── §74 · a hold grows — the keeper's ceiling, a craft app
     y0.units === 8 && y2.units === 12 && y2.hands === 2 && yG.units === Math.round(8 * 1.2) && yT.units === Math.round(8 * 0.85)
     && H74.yieldFor({ id: "m", kind: "enterprise", condition: "thriving", crew: ["a", "b", "c", "d", "e"] }, cfgS).hands === g.maxHands, JSON.stringify({ y0, y2, yG, yT }));
   // ── a watch: keep and the raid
-  const guarded = { id: "m", kind: "enterprise", condition: "thriving", garrison: ["g1", "g2"], store: { raw_material: 40 } };
+  const guarded = { id: "m", kind: "enterprise", condition: "thriving", steward: "k", garrison: ["g1", "g2"], store: { raw_material: 40 } };   // KEPT — an unkept full store is a target (v2 §1)
   check("§74: ⛔ a garrison costs its keep (14 + 2 × 3) and halves a raid — a raid roll of 0.08 hits an open hold (12%) and misses a guarded one (6%)",
     H74.upkeepFor(guarded, cfgS) === cfgS.upkeepByKind.enterprise + 2 * g.garrisonUpkeepPerHand
-    && !!H74.tickStore(mk74("k", 15), { id: "m", kind: "enterprise", condition: "thriving", store: { raw_material: 40 } }, { cfg: cfgS, economy: eco, dangerLevel: 4, rng: () => 0.08, day: 1 }).raid
+    && !!H74.tickStore(mk74("k", 15), { id: "m", kind: "enterprise", condition: "thriving", steward: "k", store: { raw_material: 40 } }, { cfg: cfgS, economy: eco, dangerLevel: 4, rng: () => 0.08, day: 1 }).raid
     && !H74.tickStore(mk74("k", 15), { ...guarded, store: { raw_material: 40 } }, { cfg: cfgS, economy: eco, dangerLevel: 4, rng: () => 0.08, day: 1 }).raid);
   // ── the setters
   const c2 = mk74("k", 15);
@@ -8201,6 +8203,131 @@ console.log("\n── §119 · six hooks, one district, and a reading that arriv
   const app = rd("app.js");
   check("§119: ⛔ SUMMARIES FIRE ONCE PLAY STARTS, off the load path — not only when the codex is opened",
     /hydrateGeneratedIntoContent\(character\);[^\n]*\n(?:[^\n]*\n){0,4}\s*setTimeout\(\(\) => maybeSummariseTopics\(\), 1500\);/.test(app) && (app.match(/maybeSummariseTopics\(\)/g) || []).length >= 2);
+}
+
+/* ═════ §120 — DELEGATES: FLOORS NOT CEILINGS, THE KEEPER IN THE RAID, AND MY PEOPLE'S PEOPLE (PROPOSAL_delegate_tiers v2) ═════ */
+// ⛔ Erik's four corrections: a keeper is why a place does not FALL (floors); a thriving hold with a weak keeper is the
+// most attractive target on the map (the keeper in the raid product); holds are not capped (measured: none was); and
+// "Veth knew him and vouched for him, so that should count" — trust is transitive once, costs the voucher, and is an act.
+console.log("\n── §120 · Deni keeps it, the place thrives anyway, and the raiders know it ──");
+{
+  const H = await import("../engine/holdings.js");
+  const NP = await import("../engine/npcs.js");
+  const { loadContentHeadless: lch120 } = await import("./headless_content.mjs");
+  const C = await lch120();
+  const eco = C.rules.economy, cfgS = eco.holdStore, g = cfgS.growth, npcCfg = C.rules.npcStanding;
+  check("§120: ⛔ THE DIALS ARE CONTENT — a floor by tier, the keeper's multiplier on a raid, the terms of a vouch",
+    !g.ceilingByKeeperTier && g.floorByKeeperTier?.riffraff === "strained" && g.floorByKeeperTier?.notable === "holding" && g.floorByKeeperTier?.epic === "thriving"
+    && cfgS.raid.keeperMult?._none > 1 && cfgS.raid.keeperMult?._default === 1 && cfgS.raid.keeperMult?.regional < 1 && cfgS.delegates?.vouchMinStanding >= 1 && cfgS.delegates?.vouchFallCost >= 1);
+  check("§120: …and keeperFloorFor reads it — riffraff strained, notable holding, an unknown tier the default",
+    H.keeperFloorFor("riffraff", g) === "strained" && H.keeperFloorFor("notable", g) === "holding" && H.keeperFloorFor(null, g) === "strained" && H.keeperFloorFor("notable", null) === null);
+  // ── the floor holds a KEPT hold through a problem; it is the keeper's, not the name's
+  const mkH = (steward) => ({ id: "m", kind: "post", name: "the post", steward, condition: "holding", history: [] });
+  const kept = mkH("k"); H.advanceHolding(kept, "problem", 1, null, { keeperFloor: "holding" });
+  const bare = mkH("k"); H.advanceHolding(bare, "problem", 1, null, null);
+  const unkept = mkH(null); H.advanceHolding(unkept, "problem", 1, null, { keeperFloor: "holding" });
+  check("§120: ⛔ THE KEEPER IS WHY IT DOES NOT FALL — with the floor a kept hold stays at holding through a problem; without it, strained; an unkept hold gets no keeper's floor",
+    kept.condition === "holding" && bare.condition === "strained" && unkept.condition === "strained");
+  const mk = (steward, level, rel = 3) => ({ id: "pc", purse: { crystal: 500 }, company: [], holdingOffers: [], worldState: { assignments: {} }, abilities: [], holdings: [],
+    npcRegistry: steward ? { [steward]: { id: steward, name: "Keeper", status: "active", level, relationship: rel, history: [], knownFacts: [], skillsObserved: [] } } : {} });
+  // ── a raid's slip respects the floor and still takes the goods (Aevi §6.4: the floor is the CONDITION, priced so)
+  const c1 = mk("k", 6); const hold = { id: "m", kind: "post", name: "the post", steward: "k", condition: "holding", store: { raw_material: 40 }, history: [] };
+  const r1 = H.resolveRaid(c1, hold, { cfg: cfgS, dangerLevel: 4, rng: () => 0.5, day: 1, keeperFloor: "holding" });
+  check("§120: ⛔ A RAID CANNOT DROP A KEPT HOLD BELOW ITS KEEPER'S FLOOR — the goods still go, the condition holds",
+    r1.detected === false && Object.keys(r1.taken).length > 0 && hold.condition === "holding", JSON.stringify({ taken: r1.taken, c: hold.condition }));
+  // ── the keeper in the product: at the same roll, an unkept or riffraff-kept full store is raided; a regional keeper's is not
+  const st = (steward, level, roll) => H.tickStore(mk(steward, level), { id: "m", kind: "enterprise", condition: "thriving", steward, store: { raw_material: 40 } }, { cfg: cfgS, economy: eco, dangerLevel: 4, rng: () => roll, day: 1, npcCfg });
+  check("§120: ⛔ A THRIVING HOLD WITH A WEAK KEEPER IS THE TARGET — at one roll: unkept raided, riffraff-kept raided, regional-kept not",
+    !!st(null, 0, 0.13).raid && !!st("k", 1, 0.13).raid && !st("k", 15, 0.13).raid);
+  // ── the vouch is an ACT, and it has terms
+  const c2 = mk("cassiel", 6, 5);
+  c2.npcRegistry.veth = { id: "veth", name: "Veth", status: "active", relationship: 8, history: [], knownFacts: [], skillsObserved: [] };
+  c2.npcRegistry.low = { id: "low", name: "Low", status: "active", relationship: 3, history: [], knownFacts: [], skillsObserved: [] };
+  c2.npcRegistry.newbie = { id: "newbie", name: "Newbie", status: "active", relationship: 0, history: [], knownFacts: [], skillsObserved: [] };
+  NP.applyNpcUpdates(c2, [{ op: "update", npcId: "cassiel", vouchedBy: "veth" }], { day: 20, rules: C.rules });
+  check("§120: ⛔ MY PEOPLE'S PEOPLE — Veth (8) vouches for Cassiel (5, met 3): recorded, with history, and relationship UNMOVED (beside, not into)",
+    c2.npcRegistry.cassiel.vouchedBy === "veth" && c2.npcRegistry.cassiel.relationship === 5 && /Veth vouched for them/.test(c2.npcRegistry.cassiel.history.slice(-1)[0] || ""));
+  NP.applyNpcUpdates(c2, [{ op: "update", npcId: "newbie", vouchedBy: "low" }], { day: 20, rules: C.rules });
+  const lowRefused = !c2.npcRegistry.newbie.vouchedBy;
+  NP.applyNpcUpdates(c2, [{ op: "update", npcId: "newbie", vouchedBy: "cassiel" }], { day: 20, rules: C.rules });
+  check("§120: …a voucher without standing is refused, and a vouch does NOT chain — the vouched-for cannot vouch",
+    lowRefused && !c2.npcRegistry.newbie.vouchedBy);
+  const t = H.trustOf(c2, "cassiel", { cfg: cfgS.delegates });
+  check("§120: ⚑ trust carries the voucher's standing less one (8 → 7), names who carried it, and makes a CHARGE-holder of a man you barely know; Low keeps",
+    t.score === 7 && t.via === "veth" && t.own === 5 && H.delegateScope(c2, "cassiel", { cfg: cfgS.delegates }) === "charge" && H.delegateScope(c2, "low", { cfg: cfgS.delegates }) === "keeping", JSON.stringify(t));
+  // ── and it costs the voucher when the vouched-for's hold slips
+  const hold2 = { id: "p", kind: "post", name: "the post", steward: "cassiel", condition: "thriving", store: { raw_material: 40 }, history: [] };
+  c2.holdings = [hold2];
+  const r2 = H.resolveRaid(c2, hold2, { cfg: cfgS, dangerLevel: 4, rng: () => 0.5, day: 21 });
+  check("§120: ⛔ IT COSTS THE VOUCHER — the post slips on Cassiel's watch and Veth's standing takes it (8 → 7), on the record, and the news says so",
+    hold2.condition === "holding" && r2.voucherCost?.voucher === "veth" && c2.npcRegistry.veth.relationship === 7 && /cost them/.test(c2.npcRegistry.veth.history.slice(-1)[0] || "")
+    && H.storeNews(hold2, { raid: r2 }).some(l => /Veth's word for Keeper cost them/.test(l)), JSON.stringify({ c: hold2.condition, vc: r2.voucherCost }));
+  check("§120: ⚑ THE GM'S HOLDINGS LINE SAYS IT — kept by whom, keeping or in charge, and who vouched",
+    /kept by cassiel \(in charge, vouched by veth\)/.test(H.holdingsForGM(c2, null, {})));
+  check("§120: …and the GM is told the act exists — vouchedBy is in the npcUpdates contract", /"vouchedBy": "npcId of a KNOWN person/.test(rd("engine/gm.js")));
+  check("§120: ⚑ the tick hands the keeper's real tier to the store — the multiplier and the floor come from the same read",
+    /npcCfg: content\?\.rules\?\.npcStanding \|\| \{\},\s*\/\/ v2 §1/.test(rd("engine/worldtick.js")));
+}
+
+/* ═════ §121 — ERIK'S HOLDS: THE FEATURES THE FICTION BUILT, THE MADE GATE AS A HOLD, AND ONE HOLD THAT WATCHES ANOTHER ═════ */
+// ⛔ Measured: four holds, zero features, and the reconstruction Erik funded written into an image prompt. The Made Gate —
+// made, watched, guarded — never a hold. And a workshop's override (instruments, arms) was authored and never read.
+console.log("\n── §121 · the record kept the picture and dropped the buildings ──");
+{
+  const H = await import("../engine/holdings.js");
+  const RC = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch121 } = await import("./headless_content.mjs");
+  const C = await lch121();
+  const eco = C.rules.economy, cfg = { ...eco.holdStore, features: eco.holdFeatures };
+  check("§121: ⛔ THE WATCH DIALS ARE CONTENT — a watched hold raids less, a lost watcher exposes it", cfg.raid.watchedMult < 1 && cfg.raid.watcherLostMult > 1);
+  // ── the override is stored and READ
+  const c0 = { id: "pc", holdings: [{ id: "swt", kind: "post", name: "SwT", condition: "thriving", history: [], features: [] }] };
+  const a = H.addFeature(c0, "swt", { kind: "workshop", yields: "instruments", by: "you", day: 1, cfg });
+  const ys = JSON.stringify(H.yieldsFor(c0.holdings[0], cfg, {}));
+  check("§121: ⛔ A FEATURE MAY OVERRIDE ITS GOOD — a laboratory post's workshop yields instruments, not the kind's mech_parts",
+    a.ok && a.feature.yields === "instruments" && /instruments/.test(ys) && !/mech_parts/.test(ys), ys);
+  // ── one hold watches another
+  const mk = (watcher) => ({ id: "pc", purse: { crystal: 500 }, company: [], holdingOffers: [], worldState: { assignments: {} }, abilities: [], npcRegistry: {},
+    holdings: [{ id: "gate", kind: "post", name: "the gate", steward: null, condition: "holding", store: { raw_material: 40 }, history: [] }, ...(watcher ? [watcher] : [])] });
+  const standing = { id: "ww", kind: "post", name: "the post", condition: "holding", watches: "gate", history: [], features: [{ kind: "watch", family: "martial", name: "a Watch", count: 1 }] };
+  const lost = { ...standing, condition: "failing" };
+  const blind = { ...standing, features: [] };
+  const raided = (w, roll) => { const c = mk(w); return !!H.tickStore(c, c.holdings[0], { cfg, economy: eco, dangerLevel: 4, rng: () => roll, day: 1 }).raid; };
+  check("§121: ⛔ A WATCHED HOLD IS RAIDED LESS — at one roll: alone raided, watched not; a failing watcher or one with no watch of its own exposes it",
+    raided(null, 0.13) && !raided(standing, 0.13) && raided(lost, 0.13) && raided(blind, 0.13));
+  // ── step 44, through the engine's doors
+  const step = RC.CHARACTER_STEPS.find(x => x.id === "holds-features-and-the-made-gate");
+  const fx = () => ({ id: "char-mrhs8286", purse: { crystal: 50 }, company: [], holdingOffers: [], worldState: { assignments: {} },
+    npcRegistry: { logana: { id: "logana", name: "Logana", status: "active" } }, generated: { location: { "gen-the-made-gate": { id: "gen-the-made-gate", name: "The Made Gate" } } },
+    holdings: [
+      { id: "hold-cassiel-ord::full-reconstruction-of-the-raven-s-home-", kind: "post", name: "Stillwater's Trouble", condition: "thriving", steward: "cassiel-ord", history: [] },
+      { id: "hold-fendt::warden-of-the-threshold-post-at-the-ridg", kind: "post", name: "Threshold Post", condition: "thriving", steward: "fendt", history: [] },
+      { id: "whistling-woman-post", kind: "post", name: "Whistling Woman Post", condition: "holding", steward: "deni-cors", history: [] },
+      { id: "the-fell-pell", kind: "enterprise", name: "The Fell Pell", condition: "holding", steward: "pell", history: [] },
+    ] });
+  check("§121: ⛔ STEP 44 IS REGISTERED at its version", !!step && step.version === 44 && RC.topReconcileVersion("character") >= 44);
+  const c = fx(); const out = step.apply(c, { content: C });
+  const byId = (id) => c.holdings.find(h => h.id === id);
+  const kinds = (id) => (byId(id)?.features || []).map(f => f.kind).sort().join(",");
+  check("§121: ⛔ EVERY FEATURE IN ERIK'S NOTE IS ON THE RECORD — six on Stillwater's Trouble, three on each post, three on the forge, with the overrides",
+    kinds("hold-cassiel-ord::full-reconstruction-of-the-raven-s-home-") === "forge,keepers_hut,laboratory,ward_line,watch,workshop"
+    && kinds("hold-fendt::warden-of-the-threshold-post-at-the-ridg") === "keepers_hut,relay_station,watch" && kinds("whistling-woman-post") === "keepers_hut,relay_station,watch"
+    && kinds("the-fell-pell") === "forge,smithy,workshop" && byId("hold-cassiel-ord::full-reconstruction-of-the-raven-s-home-").features.find(f => f.kind === "workshop").yields === "instruments"
+    && byId("the-fell-pell").features.find(f => f.kind === "workshop").yields === "arms", c.holdings.map(h => h.id + ":" + kinds(h.id)).join(" | "));
+  const mg = byId("hold-made-gate");
+  check("§121: ⛔ THE MADE GATE IS A HOLD — kept by no one but the name, guarded by Logana, a gate and a ward-line, and the Whistling Woman watches it",
+    !!mg && mg.kind === "post" && mg.steward === null && (mg.garrison || []).includes("logana") && kinds("hold-made-gate") === "gate,ward_line" && mg.locationId === "gen-the-made-gate"
+    && byId("whistling-woman-post").watches === "hold-made-gate" && /Logana/.test(mg.history.map(x => x.note).join(" ")), JSON.stringify({ mg: !!mg, g: mg?.garrison, w: byId("whistling-woman-post").watches }));
+  check("§121: …and it is SAID — the notes name the gate, the watch, and the buildings", Array.isArray(out.notes) && out.notes.length === 3 && /Made Gate is yours/.test(out.notes[0]));
+  const snap = JSON.stringify(c.holdings); const again = step.apply(c, { content: C });
+  check("§121: …idempotent — twice builds nothing and says nothing", JSON.stringify(c.holdings) === snap && !again.notes);
+  const o = fx(); o.id = "someone-else"; step.apply(o, { content: C });
+  check("§121: ⛔ …never another character, and never without the catalogue", !o.holdings.some(h => h.id === "hold-made-gate") && !(o.holdings[0].features || []).length && !step.apply(fx(), {}).notes);
+  const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const dmg = disk.holdings.find(h => h.id === "hold-made-gate");
+  check("§121: ⚑ the repo copy carries all of it and keeps its rev lead",
+    !!dmg && (dmg.garrison || []).includes("logana") && disk.holdings.every(h => (h.features || []).length >= 2) && disk.holdings.find(h => h.id === "whistling-woman-post").watches === "hold-made-gate" && disk.rev >= 3300 && disk.reconcileVersion >= 44);
+  check("§121: ⚑ the GM's holdings line says who watches whom", /watches over the gate/.test(H.holdingsForGM(mk(standing), null, {})));
 }
 
 /* ══════════ REPORT ══════════ */

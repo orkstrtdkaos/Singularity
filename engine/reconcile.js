@@ -13,7 +13,7 @@
 // backfill.js remains the XP/bonds/practice credit pass (extend, don't replace) —
 // reconcile is the umbrella for everything schema/feature-shaped that came after.
 
-import { addHolding } from "./holdings.js";        // R49: the forge the fiction built and the sheet never held
+import { addHolding, addFeature, setGarrison } from "./holdings.js";        // R49: the forge the fiction built; step 44: the features and the gate
 import { canRaiseBand, raiseBand } from "./melee.js";   // R49: the fellowship the fiction already named
 import { worldPosForGenerated } from "./worldmap.js";
 import { grantMartialKit, retiredBaselineIds } from "./martial.js";
@@ -1465,6 +1465,50 @@ export const CHARACTER_STEPS = [
       if (!folded.length) return {};
       console.log(`[reconcile] edge-district-folded: ${folded.join(", ")} → radiant-plateau-edge`);
       return { notes: [`${folded.length} Edge District hooks are filed under the district itself now — nothing was dropped, and the district's reading is due again.`] };
+    }
+  },
+  {
+    version: 44, id: "holds-features-and-the-made-gate", playerFacing: true,
+    // ⛔ ERIK (po/ERIK_holds_features_and_the_made_gate.md, applied on his word 2026-09-06): all four holds carried ZERO
+    // features while the fiction was written into their image prompts — "laboratory, workshop, Watch, forge, keeper's
+    // hut — funded and staffed". And the Made Gate — a place Silas MADE, posted a watch over, set a guardian at — had
+    // never been a hold. Through the engine's own doors (addHolding, setGarrison, addFeature with the catalogue), so
+    // every event and history line a built thing gets, these get. Idempotent by record; Silas only. Needs the catalogue
+    // in ctx.content — absent, it waits for a load that has one rather than minting kinds nothing can read.
+    apply: (c, ctx = {}) => {
+      if (c?.id !== "char-mrhs8286") return {};
+      const hs = ctx.content?.rules?.economy?.holdStore;
+      const cfg = hs ? { ...hs, features: ctx.content.rules.economy.holdFeatures || null } : null;
+      if (!cfg?.features) return {};
+      const notes = [];
+      const has = (h, kind) => (h.features || []).some(f => f && f.kind === kind);
+      const want = {
+        "hold-cassiel-ord::full-reconstruction-of-the-raven-s-home-": [{ kind: "laboratory" }, { kind: "workshop", yields: "instruments" }, { kind: "watch" }, { kind: "forge" }, { kind: "keepers_hut" }, { kind: "ward_line" }],
+        "hold-fendt::warden-of-the-threshold-post-at-the-ridg": [{ kind: "watch" }, { kind: "relay_station" }, { kind: "keepers_hut" }],
+        "whistling-woman-post": [{ kind: "watch" }, { kind: "relay_station" }, { kind: "keepers_hut" }],
+        "the-fell-pell": [{ kind: "forge" }, { kind: "smithy" }, { kind: "workshop", yields: "arms" }],
+      };
+      // §3 — the Made Gate, a hold: "he built the Whistling Woman to watch over it and raised Logana to guard it"
+      if (!(c.holdings || []).some(h => h && h.id === "hold-made-gate")) {
+        addHolding(c, { id: "hold-made-gate", kind: "post", name: "The Made Gate", locationId: "gen-the-made-gate", steward: null, day: 16 });
+        const mg = (c.holdings || []).find(h => h && h.id === "hold-made-gate");
+        if (mg) { mg.describedAs = "a gate that was made rather than found"; if (!mg.condition) mg.condition = "holding"; notes.push("The Made Gate is yours on the record now — kept by your name, guarded by Logana, watched from the Whistling Woman."); }
+      }
+      const mg = (c.holdings || []).find(h => h && h.id === "hold-made-gate");
+      if (mg) {
+        if (c.npcRegistry?.logana && !(mg.garrison || []).includes("logana")) setGarrison(c, "hold-made-gate", [...(mg.garrison || []), "logana"], { nameOf: (id) => c.npcRegistry?.[id]?.name || id });
+        want["hold-made-gate"] = [{ kind: "gate" }, { kind: "ward_line" }];   // `waygate` is not a catalogue kind — Aevi's lane
+      }
+      let built = 0;
+      for (const [id, feats] of Object.entries(want)) {
+        const h = (c.holdings || []).find(x => x && x.id === id);
+        if (!h) continue;
+        for (const f of feats) if (!has(h, f.kind)) { const r = addFeature(c, id, { ...f, by: "you", day: 16, cfg }); if (r.ok) built++; }
+      }
+      const ww = (c.holdings || []).find(h => h && h.id === "whistling-woman-post");
+      if (ww && mg && ww.watches !== "hold-made-gate") { ww.watches = "hold-made-gate"; notes.push("The Whistling Woman Post watches over the Made Gate — while it stands, the gate is raided less; lose it and the gate is exposed."); }
+      if (built) notes.push(`${built} feature${built === 1 ? "" : "s"} the fiction already built are on your holds now — the record kept the picture and dropped the buildings.`);
+      return notes.length ? { notes } : {};
     }
   },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content

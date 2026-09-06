@@ -198,6 +198,13 @@
    "base": 0.03,
    "takeShare": 0.5,
    "defendedMult": 0.5,
+   "keeperMult": {
+    "_note": "⛔ v2 §1 (Erik: 'successful places that don't have a strong leader are targets'): the KEEPER joins the raid product — chance = base × danger × fill × defendedMult × keeperMult[tier]. _none is an UNKEPT hold; _default is a keeper of unknown tier (never read as absent). A full store under Deni Cors is exactly the shape of a target. Priced by CCode; Erik turns.",
+    "_none": 1.4, "_default": 1, "riffraff": 1.25, "notable": 1, "regional": 0.85, "heroic": 0.7, "epic": 0.6, "legendary": 0.5, "mythic": 0.4
+   },
+   "_watches": "⛔ ERIK_holds_features §5 — 'he built the Whistling Woman to watch over it': a hold may carry `watches: <holdId>`. The watched hold's raid chance × watchedMult while the watcher STANDS (not failing, and keeping a watch of its own — stone does not see); × watcherLostMult when the watcher is lost. A reason to defend a post that produces nothing. Priced by CCode; Erik turns.",
+   "watchedMult": 0.6,
+   "watcherLostMult": 1.25,
    "spoils": {
     "goods": "raw_material",
     "perDanger": 1
@@ -207,16 +214,21 @@
     "legionFloorRisk": 0.12
    }
   },
+  "delegates": {
+   "note": "⛔ PROPOSAL_delegate_tiers v2 §4 — MY PEOPLE'S PEOPLE (Erik: 'Veth knew him and vouched for him, so that should count too'). A vouch is an ACT in a scene (npcUpdates.vouchedBy), never derived; it needs the voucher's own standing (vouchMinStanding); it is transitive ONCE — a vouched-for person cannot vouch (no chains); the trust it carries is the voucher's standing less vouchDiscount and sits BESIDE the person's own relationship (Aevi §6.1: trusted is not known); it COSTS the voucher vouchFallCost standing when a hold the vouched-for keeps slips on their watch (§6.2 — priced, not ruled). chargeStanding: the trust at which a keeper is a CHARGE-holder (v2 §2, breadth not height) rather than merely keeping — read and said; a charge-holder ACTING on world days is SNG-366's next spec. Priced by CCode; Erik turns.",
+   "vouchMinStanding": 6, "vouchDiscount": 1, "chargeStanding": 6, "vouchFallCost": 1
+  },
   "growth": {
-   "note": "✅ Q18 (Erik 2026-09-05: 'please build it'; SPEC_hold_store §5): a hold grows by ONE-TIME ACTS WITH LASTING EFFECTS, never a per-tick chore. A KEPT hold climbs one rung every passesPerClimb passes (4 passes = 12 world days) up to the rung its keeper's TIER allows — a notable keeper holds a place, a regional one and above can bring it to thriving. A craft the character carries, applied to the place (the tab, or holdingOps improve), lifts it a rung at once, once per craft per hold, when the craft SHAPES or MENDS (improveFunctions). Each extra hand adds handsYieldBonus to the yield, to maxHands. A garrison halves a raid (raid.defendedMult) and costs garrisonUpkeepPerHand each pass. The ground scales an enterprise's yield by 1 + groundYieldWeight × (density − 0.5): dense lattice 0.9 → ×1.2, thin 0.2 → ×0.85. Priced by CCode; Erik turns them. What a POST can become is not built.",
+   "note": "✅ Q18 (Erik 2026-09-05: 'please build it'; SPEC_hold_store §5): a hold grows by ONE-TIME ACTS WITH LASTING EFFECTS, never a per-tick chore. A KEPT hold climbs one rung every passesPerClimb passes (4 passes = 12 world days) to thriving — and its keeper's TIER sets the FLOOR it will not drop below (floorByKeeperTier; v2 §1: floors, not ceilings). A craft the character carries, applied to the place (the tab, or holdingOps improve), lifts it a rung at once, once per craft per hold, when the craft SHAPES or MENDS (improveFunctions). Each extra hand adds handsYieldBonus to the yield, to maxHands. A garrison halves a raid (raid.defendedMult) and costs garrisonUpkeepPerHand each pass. The ground scales an enterprise's yield by 1 + groundYieldWeight × (density − 0.5): dense lattice 0.9 → ×1.2, thin 0.2 → ×0.85. Priced by CCode; Erik turns them. What a POST can become is not built.",
    "passesPerClimb": 4,
    "passesPerSlip": 10,
-   "ceilingByKeeperTier": {
-    "_default": "holding",
-    "riffraff": "holding",
+   "floorByKeeperTier": {
+    "_note": "⛔ PROPOSAL_delegate_tiers v2 §1 (Erik: 'floors not ceilings — poor Deni might just be keeping it, but the place might be thriving anyway due to circumstance'). A keeper sets what the place will NOT DROP BELOW while they are there; circumstance sets the rest. A strong keeper's floor is high — the reward is not permission to climb but that it stays climbed. Read where a hold FALLS (a raid's slip, resolveRaid → advanceHolding); a kept hold climbs to thriving regardless of tier. _default is an unknown tier. Priced by CCode; Erik turns.",
+    "_default": "strained",
+    "riffraff": "strained",
     "notable": "holding",
-    "regional": "thriving",
-    "heroic": "thriving",
+    "regional": "holding",
+    "heroic": "holding",
     "epic": "thriving",
     "legendary": "thriving",
     "mythic": "thriving"

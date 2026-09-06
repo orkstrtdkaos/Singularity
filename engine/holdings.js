@@ -21,7 +21,7 @@
 
 import { debit, credit } from "./purse.js";        // Q8: upkeep leaves the purse, a sold store enters it · Q5-B: settling pays
 import { regionDemand } from "./economy.js";       // Q8: a unit is worth what THIS Reach wants it for
-import { sheetFor as personSheetFor, tierOf as tierOfLevel } from "./npcsheet.js";   // Q18: the keeper's tier sets the ceiling
+import { sheetFor as personSheetFor, tierOf as tierOfLevel } from "./npcsheet.js";   // Q18 → v2 §1: the keeper's tier sets the FLOOR
 import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
 import { legionClash, contingentsFromPeople } from "./melee.js";   // R46a: a detected raid is a FIGHT, resolved unattended
 import { smartClamp } from "./namematch.js";   // an evidence quote is prose — cut at a word, never mid-word
@@ -128,6 +128,10 @@ export function advanceHolding(holding, outcome, worldCount = null, note = null,
     next = Math.max(next, CONDITIONS.indexOf(effects.unstewardedFloor.condition || "holding"));
   }
   if (unstewarded && !mayClimb) next = Math.min(next, CONDITIONS.indexOf("holding"));
+  // ⛔ THE KEEPER IS THE REASON IT DOES NOT FALL (PROPOSAL_delegate_tiers v2 §1, Erik: "floors not ceilings"). A kept
+  // hold does not drop below its keeper's floor — a notable keeper holds a place at `holding` through a raid; a
+  // riffraff keeper's floor is `strained`. The tick computes it from the keeper's tier and hands it in as an effect.
+  if (!unstewarded && effects?.keeperFloor && CONDITIONS.includes(effects.keeperFloor)) next = Math.max(next, CONDITIONS.indexOf(effects.keeperFloor));
   const before = holding.condition;
   holding.condition = CONDITIONS[next];
   holding.lastMovedWorldCount = worldCount;
@@ -166,7 +170,7 @@ export function holdingsForGM(character, effects = null, { hereId = null, nameOf
   ensureHoldings(character);
   if (!character.holdings.length) return null;
   return character.holdings.map(h =>
-    `- ${h.name} (${h.kind}, ${h.condition}${h.steward ? `, kept by ${h.steward}` : (effects?.unstewardedCeiling ? ", kept by your name" : ", UNKEPT")})${here.has(h.id) ? " — YOU ARE STANDING IN IT" : ""}${storeTotal(h) > 0 ? ` · store: ${Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${g}`).join(", ")}` : ""}${h.arrears ? ` · in arrears ${h.arrears}` : ""}${(h.crew || []).length ? ` · hands: ${h.crew.map(id => nameOf ? nameOf(id) : id).join(", ")}` : ""}${(h.garrison || []).length ? ` · guarded by ${h.garrison.map(id => nameOf ? nameOf(id) : id).join(", ")}` : ""}${(h.improvements || []).length ? ` · improved by ${h.improvements.map(i => i.name || i.abilityId).join(", ")}` : ""}${(h.features || []).length ? ` · has ${h.features.map(f => f.name || f.kind).join(", ")}` : ""} · ${holdingSentence(h, { nameOf })}`
+    `- ${h.name} (${h.kind}, ${h.condition}${h.steward ? `, kept by ${h.steward} (${delegateScope(character, h.steward) === "charge" ? "in charge" : "keeping"}${character?.npcRegistry?.[h.steward]?.vouchedBy ? `, vouched by ${character.npcRegistry[h.steward].vouchedBy}` : ""})` : (effects?.unstewardedCeiling ? ", kept by your name" : ", UNKEPT")})${here.has(h.id) ? " — YOU ARE STANDING IN IT" : ""}${storeTotal(h) > 0 ? ` · store: ${Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${g}`).join(", ")}` : ""}${h.arrears ? ` · in arrears ${h.arrears}` : ""}${(h.crew || []).length ? ` · hands: ${h.crew.map(id => nameOf ? nameOf(id) : id).join(", ")}` : ""}${(h.garrison || []).length ? ` · guarded by ${h.garrison.map(id => nameOf ? nameOf(id) : id).join(", ")}` : ""}${(h.improvements || []).length ? ` · improved by ${h.improvements.map(i => i.name || i.abilityId).join(", ")}` : ""}${(h.features || []).length ? ` · has ${h.features.map(f => f.name || f.kind).join(", ")}` : ""}${h.watches ? ` · watches over ${(character?.holdings || []).find(o => o && o.id === h.watches)?.name || h.watches}` : ""} · ${holdingSentence(h, { nameOf })}`
     + (h.obligation
       ? (effects?.obligationDischarged
         ? ` — ${h.obligation}: they draw standing from your holding of it, not the reverse`
@@ -463,7 +467,9 @@ export function yieldFor(holding, cfg, { density = null } = {}) {
  *
  *  ⚠️ A WATCH IS WHAT DETECTS: people on the garrison, or a feature that keeps one (sentries, a tower). Stone alone does not
  *  see. Returns the receipt the news reads, or null when nothing came of it. */
-export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {} } = {}) {
+export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, keeperFloor = null } = {}) {
+  const wasAt = holding.condition;
+  const paid = () => { const r = voucherPays(character, holding, cfg, wasAt, day); return r ? { voucherCost: r } : {}; };
   const fcfg = cfg?.features || {};
   const step = Number.isFinite(Number(fcfg.defenceShareStep)) ? Number(fcfg.defenceShareStep) : 0.15;
   const baseShare = Number.isFinite(Number(cfg?.raid?.takeShare)) ? Number(cfg.raid.takeShare) : 0.5;
@@ -481,9 +487,9 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     const share = Math.max(0, Math.min(1, baseShare - step * defenceOf(holding, cfg)));
     const taken = take(share);
     if (!Object.keys(taken).length) return { detected: false, taken: {}, day, why: "they found nothing worth the carrying" };
-    if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided");   // ⚑ SLIP FIRST, THEN NOTE — the raid's own line stays the last entry (§78). AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
+    if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided", keeperFloor ? { keeperFloor } : null);   // ⚑ SLIP FIRST, THEN NOTE — the raid's own line stays the last entry (§78). AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
     note(`raided unseen — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ")} taken`);
-    return { detected: false, taken, day };
+    return { detected: false, taken, day, ...paid() };
   }
   // ⚑ the watch saw them: a fight, at band scale, unattended
   const defenders = contingentsFromPeople(watchOf(holding, cfg).map(id => people?.[id] || character?.npcRegistry?.[id] || { id, name: id }),
@@ -503,9 +509,9 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     return { detected: true, held: true, taken: {}, spoils: { [spoilKind]: spoils }, outcome: clash.outcome, day };
   }
   const taken = take(Math.max(0, Math.min(1, baseShare - step * stone)));
-  if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided");   // ⚑ AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
+  if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided", keeperFloor ? { keeperFloor } : null);   // ⚑ AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
   note(`raid fought and lost — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} taken`);
-  return { detected: true, held: false, taken, outcome: clash.outcome, day };
+  return { detected: true, held: false, taken, outcome: clash.outcome, day, ...paid() };
 }
 
 /** Who is WATCHING: people posted on the garrison, plus a feature that keeps a watch (sentries, a tower). Stone does not see. */
@@ -548,7 +554,7 @@ export function storeWorth(holding, { economy = null, regionId = null, cfg = nul
   }
   return any ? Math.round(total) : null;
 }
-export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {} } = {}) {
+export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {} } = {}) {
   if (!holding || !cfg) return null;
   const out = { yielded: null, upkeep: 0, short: 0, raid: null, full: false, justFull: false };
   // ✅ features: a post with a mine yields — every material feature adds its goods beside the hold's own kind
@@ -608,7 +614,22 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   if (raid && total > 0 && dangerLevel > 0) {
     let p = (Number(raid.base) || 0) * dangerLevel * Math.min(1, total / fullAt);
     if (isGuarded(holding, cfg)) p *= Number.isFinite(Number(raid.defendedMult)) ? Number(raid.defendedMult) : 0.5;
-    if (rng() < p) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people });
+    // ⛔ v2 §1 — "successful places that don't have a strong leader are targets": the KEEPER joins the product. An
+    // unkept hold reads `_none`; a keeper of unknown tier reads `_default`, never as absent.
+    const tier = holding.steward ? keeperTierOf(character, holding, { npcs: people, npcCfg, day }) : null;
+    const km = raid.keeperMult || null;
+    if (km) { const m = Number(holding.steward ? (tier && km[tier]) ?? km._default : km._none); if (Number.isFinite(m)) p *= m; }
+    // ⛔ ERIK_holds_features §5 — A HOLD THAT WATCHES ANOTHER. "He built the Whistling Woman to watch over it": while the
+    // watcher stands (not failing, and keeps a watch of its own — stone does not see) the watched hold raids less; a
+    // watcher that is lost leaves it MORE exposed. A reason to defend a post that produces nothing.
+    const watcher = (character?.holdings || []).find(o => o && o !== holding && o.watches === holding.id);
+    if (watcher) {
+      const standing = watcher.condition !== "failing" && watchOf(watcher, cfg).length > 0;
+      const m = Number(standing ? raid.watchedMult : raid.watcherLostMult);
+      if (Number.isFinite(m)) p *= m;
+    }
+    const keeperFloor = holding.steward ? keeperFloorFor(tier, cfg?.growth) : null;
+    if (rng() < p) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, keeperFloor });
   }
   return out;
 }
@@ -626,6 +647,7 @@ export function storeNews(holding, st) {
     else if (Object.keys(r.taken || {}).length) lines.push(`${where} was robbed in the night — ${list(r.taken)} gone, and nobody saw them.`);
     else lines.push(`Something came at ${where} in the night and found nothing worth the carrying.`);
   }
+  if (st.raid?.voucherCost) lines.push(`${st.raid.voucherCost.voucherName}'s word for ${st.raid.voucherCost.keeper} cost them — ${where} slipped on that watch.`);
   if (st.pilgrims) lines.push(`${st.pilgrims} crystal left at ${where} by those who came to it.`);
   if (Array.isArray(st.yields) && st.yields.length > 1) { /* several goods — the store line on the tab says which */ }
   if (st.grew) lines.push(`${where} has come up to ${holding.condition}${st.grew.keeper ? ` under ${st.grew.keeper}` : ""}.`);
@@ -707,6 +729,49 @@ export function keeperTierOf(character, holding, { npcs = {}, npcCfg = {}, day =
   catch { return rec.tier || null; }
 }
 
+/** v2 §1 — the condition a keeper of this tier will not let the place drop below. `_default` is an unknown tier. */
+export function keeperFloorFor(tier, growthCfg = null) {
+  const f = growthCfg?.floorByKeeperTier || null;
+  if (!f) return null;
+  const v = (tier && f[tier]) || f._default || null;
+  return v && CONDITIONS.includes(v) ? v : null;
+}
+
+/** ⛔ v2 §4 — MY PEOPLE'S PEOPLE. What a person's word is worth to you: their own relationship, or — if someone
+ *  vouched for them — the voucher's standing less a discount, whichever is higher. ⚠️ BESIDE relationship, never
+ *  moving it (Aevi §6.1: trusted is not known). `via` names the voucher when the vouch is what carries. */
+export function trustOf(character, npcId, { cfg = null } = {}) {
+  const reg = character?.npcRegistry || {};
+  const n = npcId ? reg[npcId] : null;
+  if (!n) return { score: 0, own: 0, via: null };
+  const own = Number(n.relationship) || 0;
+  const v = n.vouchedBy ? reg[n.vouchedBy] : null;
+  const discount = Number.isFinite(Number(cfg?.vouchDiscount)) ? Number(cfg.vouchDiscount) : 1;
+  const carried = v ? (Number(v.relationship) || 0) - discount : -Infinity;
+  return carried > own ? { score: carried, own, via: v.id } : { score: own, own, via: null };
+}
+
+/** v2 §2 — KEEPING or CHARGE: breadth of action, not a better number. A charge-holder is a player-shaped person
+ *  ("just like you can"); today the scope is READ and SAID — a charge-holder acting on world days is SNG-366's spec. */
+export function delegateScope(character, npcId, { cfg = null } = {}) {
+  const bar = Number.isFinite(Number(cfg?.chargeStanding)) ? Number(cfg.chargeStanding) : 6;
+  return trustOf(character, npcId, { cfg }).score >= bar ? "charge" : "keeping";
+}
+
+/** v2 §4 — "IT COSTS THE VOUCHER": when a hold kept by a vouched-for person slips, the voucher's standing takes it.
+ *  Priced at `delegates.vouchFallCost` (Aevi §6.2: ruled that it costs, not how much — Erik turns). Once per slip. */
+function voucherPays(character, holding, cfg, wasAt, day = null) {
+  const reg = character?.npcRegistry || {};
+  const k = holding?.steward ? reg[holding.steward] : null;
+  if (!k?.vouchedBy || CONDITIONS.indexOf(holding.condition) >= CONDITIONS.indexOf(wasAt)) return null;
+  const v = reg[k.vouchedBy];
+  if (!v) return null;
+  const cost = Number.isFinite(Number(cfg?.delegates?.vouchFallCost)) ? Number(cfg.delegates.vouchFallCost) : 1;
+  v.relationship = Math.max(-10, Math.min(10, (Number(v.relationship) || 0) - cost));
+  v.history = [...(v.history || []), `[d${day ?? "?"}] their word for ${k.name || k.id} cost them — ${holding.name || holding.id} slipped on that watch.`].slice(-30);
+  return { voucher: v.id, voucherName: v.name || v.id, keeper: k.name || k.id, cost };
+}
+
 export function growHolding(character, holding, { cfg = null, npcs = {}, npcCfg = {}, worldCount = null, day = null, nameOf = null } = {}) {
   const g = cfg?.growth;
   if (!holding || !g || !holding.steward) return null;
@@ -714,15 +779,17 @@ export function growHolding(character, holding, { cfg = null, npcs = {}, npcCfg 
   const per = Math.max(1, Number(g.passesPerClimb) || 4);
   holding.growthPasses = (Number(holding.growthPasses) || 0) + 1;
   const tier = keeperTierOf(character, holding, { npcs, npcCfg, day });
-  const ceiling = (g.ceilingByKeeperTier || {})[tier] || (g.ceilingByKeeperTier || {})._default || "holding";
-  const at = CONDITIONS.indexOf(holding.condition), cap = CONDITIONS.indexOf(ceiling);
-  if (holding.growthPasses < per || at < 0 || cap < 0 || at >= cap) return null;
+  // ⛔ FLOORS, NOT CEILINGS (v2 §1). This capped a notable keeper's hold at `holding` — "poor Deni might just be keeping
+  // it, but the place might be thriving anyway." A kept hold climbs to thriving whoever keeps it; what the keeper's
+  // tier sets is the FLOOR (keeperFloorFor), read where the hold FALLS. "Not permission to climb, but that it stays climbed."
+  const at = CONDITIONS.indexOf(holding.condition);
+  if (holding.growthPasses < per || at < 0 || at >= CONDITIONS.length - 1) return null;
   holding.growthPasses = 0;
   const before = holding.condition;
   holding.condition = CONDITIONS[at + 1];
   const keeper = nameOf ? nameOf(holding.steward) : holding.steward;
   holding.history = [...(holding.history || []), { at: worldCount, from: before, to: holding.condition, note: `grew under ${keeper} (${tier || "a keeper"})` }].slice(-12);
-  return { from: before, to: holding.condition, keeper, tier, ceiling };
+  return { from: before, to: holding.condition, keeper, tier, floor: keeperFloorFor(tier, g) };
 }
 
 export function improveHolding(character, id, abilityId, { catalog = {}, cfg = null, day = null, worldCount = null } = {}) {
@@ -788,13 +855,16 @@ export function featureKinds(cfg) { return (cfg?.features?.kinds) || {}; }
 export function featureDef(kind, cfg) { const k = featureKinds(cfg)[String(kind || "")]; return k ? { kind: String(kind), ...k } : null; }
 export function featuresOf(holding) { return Array.isArray(holding?.features) ? holding.features : []; }
 
-export function addFeature(character, id, { kind, name = null, by = null, craftIds = [], count = 1, day = null, worldCount = null, cfg = null } = {}) {
+export function addFeature(character, id, { kind, name = null, by = null, craftIds = [], count = 1, day = null, worldCount = null, cfg = null, yields = null } = {}) {
   ensureHoldings(character);
   const h = character.holdings.find(x => x && x.id === id);
   if (!h) return { ok: false, why: "no such holding" };
   const def = featureDef(kind, cfg);
   if (!def) return { ok: false, why: `"${kind}" is not a feature the catalogue knows — Aevi authors kinds in economy.holdStore.features` };
-  const f = { kind: def.kind, family: def.family, name: name || def.label || def.kind, by: by || null, craftIds: (craftIds || []).filter(Boolean), count: Math.max(1, Number(count) || 1), day };
+  // ⚑ ERIK 2026-09-06: "a workshop can be for lots of finished goods" — a feature may OVERRIDE its kind's good (Aevi's
+  // catalogue said so; nothing stored or read it). A laboratory post's workshop makes instruments; Pell's makes arms.
+  const f = { kind: def.kind, family: def.family, name: name || def.label || def.kind, by: by || null, craftIds: (craftIds || []).filter(Boolean), count: Math.max(1, Number(count) || 1), day,
+    ...(yields && def.family === "material" ? { yields: String(yields) } : {}) };
   h.features = [...featuresOf(h), f];
   h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `built ${f.name}${f.by ? ` (${f.by})` : ""}${f.craftIds.length ? ` with ${f.craftIds.join(", ")}` : ""}` }].slice(-12);
   queueHoldingEvent(character, `${h.name || h.id} has ${f.name} now${f.by && f.by !== "you" ? `, ${f.by}'s work` : ""}.`);
@@ -1013,8 +1083,9 @@ export function yieldsFor(holding, cfg, { density = null } = {}) {
   if (!Number.isFinite(base) || base <= 0) return out;
   for (const f of featuresOf(holding)) {
     const def = featureDef(f.kind, cfg);
-    if (def?.family !== "material" || !def.yields) continue;
-    const proto = { ...holding, kind: "enterprise", yields: def.yields };
+    const good = f.yields || def?.yields;   // the feature's own override first, then the kind's default
+    if (def?.family !== "material" || !good) continue;
+    const proto = { ...holding, kind: "enterprise", yields: good };
     const y = yieldFor(proto, cfg, { density });
     if (y) out.push({ ...y, units: y.units * (Number(f.count) || 1), feature: f.name || f.kind });
   }

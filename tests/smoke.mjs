@@ -12708,7 +12708,7 @@ await (async () => {
       && unstewardedHoldings({ holdings: [h], npcRegistry: { cassiel: { status: "departed" } } }, []).length === 1
       && unstewardedHoldings({ holdings: [h] }, ["cassiel"]).length === 0);
     check("358: the GM is told what you hold, who keeps it, and how it fares",
-      /Raven's Home \(post, .*kept by cassiel\)/.test(holdingsForGM({ holdings: [h] }) || ""));
+      /Raven's Home \(post, .*kept by cassiel \((keeping|in charge)/.test(holdingsForGM({ holdings: [h] }) || ""));   // v2 §2: keeping or in charge is said after the keeper
 
     // ⛔ HOLDINGS TURN ON THEIR OWN PASS. My first cut sat them INSIDE advanceDelegatedWork, behind its
     // `!due.length` early return — so a holding only moved if an ASSIGNMENT happened to be due at the same

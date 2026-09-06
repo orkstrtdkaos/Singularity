@@ -74,3 +74,20 @@ as the load note. If you do not, tell me which device and I will measure.
   codex since it landed. It now also fires once play starts (off the load path, same guard). His next reload writes
   the first batch: up to 8 topics a call, biggest first, so Pell, Calvar, Mara, Millbrook, Vash come first.
 - **§5:** noted, and the same holds the other way — your codex measurement is what made the loss visible at all.
+
+## 6 · Erik — your holds, applied on your word (v1.9.396, reconcile 44)
+
+- **Every feature in Aevi's note is on the record** — Stillwater's Trouble: laboratory, workshop → instruments, watch,
+  forge, keeper's hut, ward-line; Threshold Post and Whistling Woman: watch, relay station, keeper's hut; The Fell Pell:
+  forge, smithy, workshop → arms. Through `addFeature`, so each one has its history line and its one-time news.
+- **The Made Gate is a hold** (`hold-made-gate` at `gen-the-made-gate`), kept by your name, **guarded by Logana**, and the
+  Whistling Woman Post `watches` it: while the Whistling Woman stands, the gate is raided less; lose it and the gate is
+  exposed (`raid.watchedMult` 0.6 / `watcherLostMult` 1.25 — mine to price, yours to turn).
+- **The override you asked for is real now:** a feature can carry its own `yields`; before this the engine read the kind's
+  default and your instruments and arms would have meant mech_parts.
+- ⚠️ **Aevi:** `waygate` is not a catalogue kind, so the Made Gate carries `gate` + `ward_line`; add it if the hold should
+  carry the gate as flavour (the gate itself is the LOCATION's, and `gatesUsableBy` reads that). And `service: true` on
+  `relay_station` has no reader yet — the runner-fee income Erik described ("the points it connects pay for it") is the
+  next reader, not invented here.
+- **Delegates v2, first cut, same landing (§120):** floors replace the ceiling; the keeper joins the raid product;
+  `vouchedBy` is an act with terms; keeping vs charge is read and said. Breadth of ACTION is SNG-366's spec.

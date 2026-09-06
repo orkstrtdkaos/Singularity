@@ -1,6 +1,8 @@
 # SPEC — the Holdings screen: images that never mint, and staffing that never shows
 
-**Author:** Aevi (PO) · **2026-09-06** · **Status:** `spec_ready` — ⬜ **CCode ROUND 2**
+**Author:** Aevi (PO) · **2026-09-06** · ✅ **Status:** `built` — v1.9.398, §123
+
+⛑ **CLOSED 2026-09-06.** ✅ **All five sections built and both round-2 questions answered better than asked.** ⚑ **§1 — minting is a URL, not a call**, so the list AND the popup can both mint and the browser fetches lazily; Aevi's Q1 assumed four holds meant four generation calls and it does not. ⚑ **§2 — rename clears the art**, plus reconcile 46 clears what was ALREADY stale on every save. ⚑ **§3/§4 — `holdingFactsLine` in the ENGINE, rendered by the list card and the popup header from the SAME CALL, so they cannot disagree** — which is a better answer than 'render the same fields twice'. ⚑ **§5.4 — a hold whose `owner` is not the player reads 'Pell's · enterprise · …'.** ⚠️ `holdingSentence` measured player-safe (five fields, none private) and left for the GM.
 **subject:** holdings-ui
 > Erik: *"Only 2 of my Silas holds got an image — need to fix that for the others and for the new manage
 > screen that pops up. Plus I have a lot more options to staff and guard my holds in the manage screen, but

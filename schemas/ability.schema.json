@@ -343,6 +343,13 @@
     "requiresSelf": {
      "type": "boolean",
      "description": "⛔ CCODE-315 — this craft needs a SELF to take hold of. Answered by the target creature class's `hasSelf`. ⚠️ Six crafts stated this in FOUR different phrasings in prose before it was a field; the engine now reads it once and a gate asserts craft and creature agree."
+    },
+    "meaning": {
+     "type": "string",
+     "enum": [
+      "none"
+     ],
+     "description": "⛔ R38b's OPT-OUT. `meaning.appliesTo` is `[\"metaphysical\"]`, so a metaphysical craft reads a place's MEANING as a ceiling. ⚑ `\"none\"` opts out — for a craft whose source is metaphysical but whose ACT is a trained body: a crossbow shot, a shield-wall, a thrown stone. ⚠️ 31 crafts carry it. ⛔ NOT for metaphysical crafts with a mental or social attribute — those read meaning correctly. ⬜ The reader was built 2026-09-04 and nothing authored it until 09-06."
     }
    }
   },

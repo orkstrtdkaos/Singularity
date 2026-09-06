@@ -6906,6 +6906,112 @@ console.log("\n── §98 · hubward is toward balance, and the engine says so 
     /no north, south, east or west/i.test(gm98) && /HUBWARD[\s\S]{0,200}BALANCE/.test(gm98));
 }
 
+/* ═════ §99 — TWO NAMED OPTIONS OVER ROADS AND GATES (SNG-331 §1 / SNG-386 §4.4) ═════ */
+// ⚑ AEVI'S RULE AND HER REASON: *"four days through the Wend, or seven around it"* is a DECISION; a single
+// best route is an ANSWER, and an answer is not gameplay. ⛔ BUT A SECOND OPTION THAT IS 653% WORSE IS A TRAP,
+// NOT A CHOICE — measured, banning `the_axis_gate` turns a 53-day walk to the Crossing into a 402-day one,
+// because that gate is a chokepoint the world genuinely has. So a second option is offered when it is real,
+// and when the world has one way through, the route SAYS SO instead of manufacturing a decision.
+//
+// ⚠️ AND TWO OF MY OWN MISTAKES ARE PINNED HERE. Building this I replaced a slice of `routeBetween` to make
+// it 85x faster and the slice INCLUDED the gate option's `options.push` — so the feature got fast and stopped
+// offering the thing it exists for. Nothing caught it: this section did not exist yet, and only comparing the
+// printed output against the previous run showed "2.2 days through the Echo River Crossing gate" had become
+// "53.3 days on foot".
+console.log("\n── §99 · four days through the Wend, or seven around it ──");
+{
+  const J99 = await import("../engine/journey.js");
+  const WM99 = await import("../engine/worldmap.js");
+  const { loadContentHeadless: lch99b } = await import("./headless_content.mjs");
+  const C99 = await lch99b();
+  const locs99 = C99.locations;
+
+  // ⛔ THE OPTIMISATION RESTS ON THIS. `routeBetween` runs ONE search from the origin and ONE from the
+  // destination, and reads the second backwards — which is only sound while every road goes both ways. A
+  // single authored one-way road would make every gate route quietly wrong, so it fails here instead.
+  const oneWay = [];
+  for (const l of Object.values(locs99)) for (const o of (l.connections || [])) {
+    if (locs99[o] && !(locs99[o].connections || []).includes(l.id)) oneWay.push(`${l.id}→${o}`);
+  }
+  check("§99: ⛔ EVERY ROAD GOES BOTH WAYS — the two-search route depends on it and would lie without it",
+    oneWay.length === 0, oneWay.slice(0, 3).join(" · "));
+
+  // ⚑ THE GATE LEG IS THE WHOLE POINT — and it is the exact thing my own optimisation silently deleted.
+  const anyone = J99.routeBetween("millbrook", "the_crossing", locs99);
+  const gateOpt = anyone?.options.find(o => o.kind === "gate");
+  check("§99: ⛔ A GATE ROUTE IS OFFERED — the leg an 85x speed-up deleted, caught by reading output not a gate",
+    !!gateOpt, JSON.stringify(anyone?.options.map(o => o.kind)));
+  check("§99: ⚑ …and it is the transformation Aevi described — a season becomes days",
+    gateOpt && gateOpt.days < 10 && anyone.options.some(o => o.kind === "road" && o.days > 40),
+    `gate ${gateOpt?.days}d vs road ${anyone?.options.find(o => o.kind === "road")?.days}d`);
+  check("§99: …and it carries what it COSTS — a gate is infrastructure, never a free teleport",
+    gateOpt?.energy > 0 && gateOpt?.gate?.hours > 0);
+  check("§99: ⚠️ …and the label does not stutter — this world names many places \"The something\"",
+    !/the The /i.test(J99.routeLine(J99.routeBetween("kindlerow", "the_blaze", locs99), locs99) || ""));
+
+  // ⛔ DISCOVERY IS WHAT KEEPS WALKING REAL. Unrestricted, the network wins 80-98% of every journey; a
+  // traveller who has found nothing must walk. Measured on the real save: Silas can aim at 2 of 26.
+  const greenhorn = { knownPlaces: [], abilities: [] };
+  const theirs = J99.routeBetween("millbrook", "the_gearlands_verge", locs99, { traveller: greenhorn });
+  check("§99: ⛔ A TRAVELLER'S ROUTE USES ONLY GATES THEY HAVE FOUND — never a road that does not exist for them",
+    !theirs.options.some(o => o.kind === "gate" && o.gate.from !== "the_crossing"),
+    JSON.stringify(theirs.options.map(o => o.label)));
+  check("§99: …and the unrestricted view reaches gates the greenhorn cannot — so the filter is doing work",
+    J99.gatesUsableBy(null, locs99).length > J99.gatesUsableBy(greenhorn, locs99).length,
+    `${J99.gatesUsableBy(null, locs99).length} vs ${J99.gatesUsableBy(greenhorn, locs99).length}`);
+  check("§99: ⚑ …and the hub is always findable — everyone can find the centre, which is why it is the centre",
+    J99.gatesUsableBy(greenhorn, locs99).includes("the_crossing"));
+
+  // ⚠️ WEIGHTED BY DAYS, NOT BY HOPS. Kindlerow → the Blaze is ONE leg and 150 days; a hop count would call
+  // it the shortest road in the world.
+  const long1 = J99.roadRoute("kindlerow", "the_blaze", locs99);
+  check("§99: ⚠️ the road is weighted by DAYS, not by hops — one 150-day leg is not \"close\"",
+    long1.legs === 1 && long1.days > 100, `${long1.legs} leg, ${long1.days.toFixed(0)}d`);
+
+  // ⛑ AND THE WORLD IS WALKABLE END TO END: one connected component, measured, so no pair is unroutable.
+  const ids99 = Object.keys(locs99);
+  let unroutable = 0, sole = 0, both = 0;
+  for (let i = 0; i < 120; i++) {
+    const a = ids99[i % ids99.length], b = ids99[(i * 7 + 13) % ids99.length];
+    if (a === b) continue;
+    const r = J99.routeBetween(a, b, locs99);
+    if (!r || !r.options.length) unroutable++;
+    else if (r.soleOption) sole++; else both++;
+  }
+  check("§99: ⛑ every place can be reached from every other — the road graph is one connected world",
+    unroutable === 0, String(unroutable));
+  check("§99: ⚑ …and a real decision is the common case, not the exception", both > sole, `${both} two-option vs ${sole} sole`);
+  check("§99: ⚠️ …and `soleOption` is HONEST — it is set exactly when there is one option, never inferred",
+    (() => { for (let i = 0; i < 60; i++) { const a = ids99[i], b = ids99[(i * 11 + 5) % ids99.length];
+      if (a === b) continue; const r = J99.routeBetween(a, b, locs99);
+      if (r && r.options.length && r.soleOption !== (r.options.length < 2)) return false; } return true; })());
+
+  // ⛔ A WAY ROUND IS ONLY OFFERED WHEN IT IS ONE. `altFactor` is the ceiling.
+  const trap = J99.routeBetween("millbrook", "the_crossing", locs99, { traveller: greenhorn, altFactor: 1.6 });
+  check("§99: ⛔ a 653%-worse detour is NOT offered — a trap dressed as a choice is worse than one road",
+    !trap.options.some(o => o.avoids) && trap.soleOption, JSON.stringify(trap.options.map(o => o.label)));
+  check("§99: …and raising the ceiling DOES surface it — so the refusal is the threshold, not a missing feature",
+    J99.routeBetween("millbrook", "the_crossing", locs99, { traveller: greenhorn, altFactor: 99 })
+      .options.some(o => o.avoids));
+
+  check("§99: …the ends are never banned — banning them is a refusal, not a route",
+    !!J99.roadRoute("millbrook", "the_crossing", locs99, { banned: ["millbrook", "the_crossing"] }));
+  check("§99: …and you are already where you are",
+    J99.routeBetween("millbrook", "millbrook", locs99).note === "you are already there");
+  check("§99: …and an unknown place is null, not a throw or an empty route that reads as 'no way there'",
+    J99.routeBetween("nope", "millbrook", locs99) === null && J99.routeLine(null) === null);
+
+  // ⛔ AND THE FOUR DOORS. §97 was caught by wiring_audit for exactly this class.
+  const app99 = rd("app.js");
+  check("§99: ⛔ THE GM IS HANDED THE REAL WAYS THERE — wired where travel actually happens",
+    /import \{[^}]*routeBetween[^}]*\} from "\.\/engine\/journey\.js"/.test(app99)
+    && /function buildTravelDirective[\s\S]{0,1200}?routeBetween\(/.test(app99));
+  check("§99: …with the TRAVELLER passed, so it never offers a gate this character has not found",
+    /routeBetween\(character\.currentLocationId, ti\.destId, CONTENT\.locations, \{ traveller: character \}\)/.test(app99));
+  check("§99: …and the directive tells the GM not to invent a different duration",
+    /do not invent a different one/.test(app99) && /THE WAYS THERE/.test(app99));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

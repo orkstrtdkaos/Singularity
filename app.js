@@ -69,7 +69,8 @@ import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
-import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
+import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost } from "./engine/waygate.js";
+import { routeBetween, routeLine } from "./engine/journey.js";   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { canonicalPersonId, personArtSeed, applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
@@ -123,7 +124,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.378";
+const APP_VERSION = "1.9.379";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8130,7 +8131,17 @@ function buildTravelDirective(ti) {
   const adj = (here?.connections || []).map(id => CONTENT.locations[id]).filter(Boolean)
     .filter(l => isPlaceKnown(character, l.id, CONTENT.locations)).map(l => `${l.name} (${l.id})`);
   const dest = ti.destId ? `${CONTENT.locations[ti.destId].name} (id ${ti.destId})` : `"${ti.ref}"`;
-  return `The player INTENDS to travel to ${dest}. If the fiction actually DEPARTS this beat — they set out, are led, or the trip is a montage with time passing on the road — emit "moveTo": {"location": "${ti.destId || ti.ref}", "why": "…"} so they arrive, and narrate the journey (with timeOps if far). But if this beat is still PLANNING or discussing the trip and they have NOT left yet, do NOT move them — keep the scene where it is and offer the road as the next step. Never relocate a character who only spoke about going (SNG-188). ${adj.length ? `Places reachable from ${here?.name || "here"}: ${adj.join(", ")}. ⛔ If the destination is one of THESE, use its exact name/id — do not coin a new synonym for a place you can already reach (it mints a duplicate).` : ""}`;
+  // ⚑ SNG-331 §1 — TWO NAMED OPTIONS BEAT ONE OPTIMAL ONE. Aevi: *"four days through the Wend, or seven
+  // around it"* is a DECISION; a single best route is an ANSWER. This hands the GM the real ones so it can
+  // offer the road as a choice instead of inventing a duration. ⚠️ Restricted to gates THIS character has
+  // found — a route through a gate they have never heard of is a road that does not exist for them.
+  const routeNote = (() => {
+    if (!ti.destId || ti.destId === character.currentLocationId) return "";
+    const r = routeBetween(character.currentLocationId, ti.destId, CONTENT.locations, { traveller: character });
+    const line = r ? routeLine(r, CONTENT.locations) : null;
+    return line ? ` THE WAYS THERE (engine-measured — use these durations and names; do not invent a different one, and do not offer a gate that is not listed): ${line}.` : "";
+  })();
+  return `${routeNote ? routeNote.trim() + " " : ""}The player INTENDS to travel to ${dest}. If the fiction actually DEPARTS this beat — they set out, are led, or the trip is a montage with time passing on the road — emit "moveTo": {"location": "${ti.destId || ti.ref}", "why": "…"} so they arrive, and narrate the journey (with timeOps if far). But if this beat is still PLANNING or discussing the trip and they have NOT left yet, do NOT move them — keep the scene where it is and offer the road as the next step. Never relocate a character who only spoke about going (SNG-188). ${adj.length ? `Places reachable from ${here?.name || "here"}: ${adj.join(", ")}. ⛔ If the destination is one of THESE, use its exact name/id — do not coin a new synonym for a place you can already reach (it mints a duplicate).` : ""}`;
 }
 
 /** SNG-122: the one-tap safety net — the travel beat didn't move the player, so arrive now via the SAME

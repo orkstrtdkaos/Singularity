@@ -4,11 +4,11 @@
  "_derivation": "⛔ THE THREE GRADIENTS THE WORLD ALREADY KNOWS, measured at each settlement: (1) RIVER BEARING and distance — from the traced hydrology; (2) UPHILL BEARING — sample the generator's raw elevation around the point; (3) ROAD BEARINGS — from connections' worldPos. ⚠️ Water trades go riverward. Terraces and orchards go uphill. Fields take the flat. Gates and markets sit on the road bearings. Everything else fills the middle.",
  "millbrook": {
   "_measured": {
-   "riverBearing": -134,
-   "riverDistanceMi": 2.2,
+   "riverBearing": -11,
+   "riverDistanceMi": 311.2,
    "riverFlowBearing": 162,
-   "uphillBearing": 300,
-   "relief": 0.062,
+   "uphillBearing": -75,
+   "relief": 0.067,
    "roadsOut": [
     {
      "to": "echo_river_crossing",
@@ -26,7 +26,16 @@
      "mi": 503
     }
    ],
-   "_refreshed": "⛔ SNG-434: roadsOut re-derived after the SNG-427 cluster move and the waystone region fix. ⚠️ WAYSTONE IS NOW 29 MI AWAY — a real neighbour, where before it was in another region 2600 miles off."
+   "_refreshed": "⛔ SNG-434: roadsOut re-derived after the SNG-427 cluster move and the waystone region fix. ⚠️ WAYSTONE IS NOW 29 MI AWAY — a real neighbour, where before it was in another region 2600 miles off.",
+   "_wasAuthored": {
+    "riverBearing": -134,
+    "riverDistanceMi": 2.2,
+    "uphillBearing": 300,
+    "relief": 0.062,
+    "riverFlowBearing": 162
+   },
+   "riverDistanceDeg": 4.51,
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_rebuiltNote": "⛔ SNG-427 REBUILT. Erik: 'you have the Well IN the river.' He was right — the well sat at 0,0 while the river ran 11 miles away, so the dock at 300 m reached water it could not reach. ⚠️ MILLBROOK IS NOW 2.2 MILES FROM THE ECHO, 14 MILES ABOVE THE CROSSING. The layout is rebuilt on the measured channel: river at −134°, flowing 162°, uphill at 300°.",
   "radiusMetres": 900,
@@ -183,10 +192,10 @@
  },
  "echo_river_crossing": {
   "_measured": {
-   "riverBearing": 168,
-   "riverDistanceDeg": 3.83,
-   "uphillBearing": 75,
-   "relief": 0.017,
+   "riverBearing": -11,
+   "riverDistanceDeg": 5.06,
+   "uphillBearing": -75,
+   "relief": 0.06,
    "roadsOut": [
     {
      "to": "millbrook",
@@ -204,7 +213,14 @@
      "to": "greywater_stilts",
      "bearing": 116
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": 168,
+    "riverDistanceDeg": 3.83,
+    "uphillBearing": 75,
+    "relief": 0.017
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_dataFlag": "⛔ ITS NEAREST TRACED RIVER IS 3.83° AWAY — about 425 km — AND ITS ENTIRE IDENTITY IS A BRIDGE OVER THE ECHO. `waterauth.json` authors a river here and the built hydrology does not carry one to it. ⚠️ I am placing the bridge on the fiction, not on the measurement, and flagging the gap rather than quietly bending the layout around bad data. SNG-403b.",
   "radiusMetres": 300,
@@ -282,10 +298,10 @@
  },
  "greyhearth": {
   "_measured": {
-   "riverBearing": -61,
-   "riverDistanceDeg": 2.57,
+   "riverBearing": -85,
+   "riverDistanceDeg": 2.24,
    "uphillBearing": 135,
-   "relief": 0.104,
+   "relief": 0.236,
    "roadsOut": [
     {
      "to": "the_crossing",
@@ -295,7 +311,14 @@
      "to": "the_quiet_ground",
      "bearing": 30
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": -61,
+    "riverDistanceDeg": 2.57,
+    "uphillBearing": 135,
+    "relief": 0.104
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_reading": "'A town that buries for every road that meets here — the Crossing's dead and the Palelands' both.' ⛔ A BURYING TOWN'S LAYOUT IS ITS TRAFFIC: the dead arrive by road and go uphill.",
   "radiusMetres": 380,
@@ -362,10 +385,10 @@
  },
  "the_cogitarium": {
   "_measured": {
-   "riverBearing": 118,
-   "riverDistanceDeg": 12.29,
+   "riverBearing": 119,
+   "riverDistanceDeg": 12.45,
    "uphillBearing": 30,
-   "relief": 0.567,
+   "relief": 1.043,
    "roadsOut": [
     {
      "to": "the_middle_way",
@@ -375,7 +398,14 @@
      "to": "the_held_yard",
      "bearing": -60
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": 118,
+    "riverDistanceDeg": 12.29,
+    "uphillBearing": 30,
+    "relief": 0.567
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_verticalFinding": "⛔ THIS ONE BREAKS THE HORIZONTAL FRAME AND IT SHOULD. Its two promoted places are an ENTRANCE HALL and a THIRD TERRACE — the same footprint at different heights. ⚠️ AN INTERIOR NEEDS A VERTICAL AXIS. `localMap` needs an optional `level`: 0 ground, positive up, negative below. Without it the Cogitarium's two rooms land on top of each other and the map says they are the same place.",
   "radiusMetres": 160,
@@ -411,10 +441,10 @@
  "_generalisation": "⛔ EIGHT LAYOUTS, 38 SITES, AND THE RULE SET GREW BY MEASURING RATHER THAN BY GUESSING. The four Valley towns gave: water trades riverward, terraces uphill, fields on the flat, markets on the roads. The four contrast towns broke that usefully — ⚠️ GREYWATER (relief 0.002) proved UPHILL IS NOISE ON FLAT GROUND; ⚠️ KINDLEROW (relief 0.541, no water within 9°) is the mirror, and its cistern EXISTS BECAUSE THE TERRAIN FORCED IT; ⛔ THE SERVICE WAYS broke the horizontal frame entirely — a tunnel network has depth, not a radius; ⚠️ THE FIGURE WORKS had NO strong gradient at all, and there the TRADITION carried the layout. ⛔ THAT IS THE ENGINE'S PRECEDENCE ORDER: strong gradient first, tradition aesthetic second, and never free invention.",
  "greywater_stilts": {
   "_measured": {
-   "riverBearing": -12,
-   "riverDistanceDeg": 6.94,
-   "uphillBearing": 90,
-   "relief": 0.002,
+   "riverBearing": -23,
+   "riverDistanceDeg": 6.03,
+   "uphillBearing": 60,
+   "relief": 0.009,
    "roadsOut": [
     {
      "to": "millbrook",
@@ -428,7 +458,14 @@
      "to": "echo_river_crossing",
      "bearing": -58
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": -12,
+    "riverDistanceDeg": 6.94,
+    "uphillBearing": 90,
+    "relief": 0.002
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_ruleFinding": "⛔ RELIEF 0.002 — DEAD FLAT. 'Uphill' is a MEANINGLESS AXIS here and the engine must not use it: bearing 90 is noise, not a slope. ⚠️ THE ORGANISING AXIS IS THE WATER — the marsh is 0.37° away and the town stands ON it. New rule: WHEN RELIEF < ~0.05, DROP THE UPHILL GRADIENT AND ORGANISE ON WATER AND ROADS. Millbrook's terraces exist because Millbrook has a slope; here there is nothing to climb.",
   "radiusMetres": 340,
@@ -495,10 +532,10 @@
  },
  "kindlerow": {
   "_measured": {
-   "riverBearing": 92,
-   "riverDistanceDeg": 8.99,
-   "uphillBearing": 330,
-   "relief": 0.541,
+   "riverBearing": 179,
+   "riverDistanceDeg": 6.47,
+   "uphillBearing": -30,
+   "relief": 0.645,
    "roadsOut": [
     {
      "to": "the_crossing",
@@ -508,7 +545,14 @@
      "to": "the_blaze",
      "bearing": -55
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": 92,
+    "riverDistanceDeg": 8.99,
+    "uphillBearing": 330,
+    "relief": 0.541
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_ruleFinding": "⚠️ RELIEF 0.541 — the STEEPEST of the eight, and no water within 9°. ⛔ THE MIRROR OF GREYWATER: here uphill is the dominant axis and water is unusable. The Kindlespine runs behind the town (SNG-393). A forge town with no river gets its water from the hill, which is a fact the layout should state.",
   "radiusMetres": 300,
@@ -581,8 +625,8 @@
   "_measured": {
    "riverBearing": 129,
    "riverDistanceDeg": 6.73,
-   "uphillBearing": 285,
-   "relief": 0.018,
+   "uphillBearing": -75,
+   "relief": 0.048,
    "roadsOut": [
     {
      "to": "pressureholt",
@@ -596,7 +640,14 @@
      "to": "the_gearlands_verge",
      "bearing": 146
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": 129,
+    "riverDistanceDeg": 6.73,
+    "uphillBearing": 285,
+    "relief": 0.018
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_ruleFinding": "⛔ THIS ONE BREAKS THE HORIZONTAL FRAME ENTIRELY. 'Precursor tunnels… THEY RUN UNDER EVERYTHING — under the Gearlands, under the Valley, under places the Wrights have not admitted to.' ⚠️ A TUNNEL NETWORK IS NOT A TOWN WITH A CENTRE. Its extent is measured in DAYS, not metres, and its axis is DEPTH. This is the second vertical case after the Cogitarium and it is a stronger one: `localMap.level` is not optional, and for places like this `radiusMetres` is the wrong unit.",
   "radiusMetres": null,
@@ -647,16 +698,23 @@
  },
  "the_figure_works": {
   "_measured": {
-   "riverBearing": -37,
+   "riverBearing": -38,
    "riverDistanceDeg": 6.82,
    "uphillBearing": 165,
-   "relief": 0.053,
+   "relief": 0.268,
    "roadsOut": [
     {
      "to": "cloudform",
      "bearing": 26
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": -37,
+    "riverDistanceDeg": 6.82,
+    "uphillBearing": 165,
+    "relief": 0.053
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_ruleFinding": "⚠️ ONE ROAD OUT, middling relief, no water. ⛔ WHEN THE GRADIENTS ARE ALL WEAK THE TRADITION HAS TO CARRY THE LAYOUT — and for the Figurists that is legible: they are geometric, so the town is laid out ON a figure. This is the case where the engine should fall back to the TRADITION'S AESTHETIC rather than inventing terrain reasons.",
   "radiusMetres": 260,
@@ -713,10 +771,10 @@
  "_driftAudit": "⛔ RE-MEASURED AFTER SNG-407. Four of eight towns had a river bearing drift past 25° — Echo River Crossing 68°, Greyhearth 84°, Kindlerow 92°, the Figure-Works 87°. ⚠️ BUT ONLY 1 OF 38 PLACEMENTS ACTUALLY MOVED, because `basis` says which gradient each one used: 14 are `road` and roads move WITH the town, 5 are `prose`, 3 `tradition`, 3 `between`. Only the `river` and `uphill` ones were exposed. ⛔ THAT IS THE FIELD EARNING ITSELF. Without `basis` I would have had to re-derive all 38 by hand or leave all 38 suspect; with it the audit was five placements and a measurement.",
  "harmonic_heights_terrace": {
   "_measured": {
-   "riverBearing": -126,
-   "riverDistanceDeg": 7.4,
+   "riverBearing": -164,
+   "riverDistanceDeg": 6.08,
    "uphillBearing": 45,
-   "relief": 0.001,
+   "relief": 0.013,
    "roadsOut": [
     {
      "to": "millbrook",
@@ -730,7 +788,14 @@
      "to": "sunken_choir",
      "bearing": 82
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": -126,
+    "riverDistanceDeg": 7.4,
+    "uphillBearing": 45,
+    "relief": 0.001
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_ruleFinding": "⛔ RELIEF 0.001 — the flattest reading in the corpus, flatter than Greywater. ⚠️ AND YET IT IS A TERRACE, on a Heights. The world layer is measuring the VALLEY FLOOR the terrace meets; the terrace itself is below the generator's floor. ⛔ THIS IS THE CASE WHERE PROSE MUST OUTRANK GRADIENT OUTRIGHT: 'the lowest terrace… where the sonic civilization MEETS THE VALLEY FLOOR' says the slope direction, and no measurement here can.",
   "radiusMetres": 380,
@@ -802,10 +867,10 @@
  },
  "the_thinning": {
   "_measured": {
-   "riverBearing": -10,
-   "riverDistanceDeg": 4.3,
-   "uphillBearing": 330,
-   "relief": 0.05,
+   "riverBearing": -16,
+   "riverDistanceDeg": 4.43,
+   "uphillBearing": -30,
+   "relief": 0.09,
    "roadsOut": [
     {
      "to": "the_lampless_hermitage",
@@ -819,7 +884,14 @@
      "to": "the_axis_gate",
      "bearing": 154
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": -10,
+    "riverDistanceDeg": 4.3,
+    "uphillBearing": 330,
+    "relief": 0.05
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_ruleFinding": "⚠️ RELIEF 0.05 sits exactly ON the bracket I could not narrow (0.053–0.541). ⛔ AND IT DOES NOT MATTER HERE, because the prose overrides anyway: 'buildings are PROVISIONAL — the Numinous find permanent architecture a slightly embarrassing attachment.' A town that does not commit to buildings does not commit to a slope either.",
   "radiusMetres": 300,
@@ -876,12 +948,19 @@
  },
  "the_crossing": {
   "_measured": {
-   "riverBearing": 0,
-   "riverDistanceDeg": 3.6,
-   "uphillBearing": 165,
-   "relief": 0.01,
+   "riverBearing": 14,
+   "riverDistanceDeg": 3.75,
+   "uphillBearing": 15,
+   "relief": 0.026,
    "roadsOut": [],
-   "_roadNote": "⛔ `roadsOut` IS EMPTY ON PURPOSE. Every connection the Crossing has is one of its own SITES, at identical coordinates, so the computed bearings all read 0° — CCode's 'a room's position is a duplicate, not an observation', arriving in the road maths. ⚠️ THE TWELVE ROADS ARE FICTION, NOT GRAPH: 'twelve roads leave the Crossing, one per axis.' They are placed at 30° intervals below."
+   "_roadNote": "⛔ `roadsOut` IS EMPTY ON PURPOSE. Every connection the Crossing has is one of its own SITES, at identical coordinates, so the computed bearings all read 0° — CCode's 'a room's position is a duplicate, not an observation', arriving in the road maths. ⚠️ THE TWELVE ROADS ARE FICTION, NOT GRAPH: 'twelve roads leave the Crossing, one per axis.' They are placed at 30° intervals below.",
+   "_wasAuthored": {
+    "riverBearing": 0,
+    "riverDistanceDeg": 3.6,
+    "uphillBearing": 165,
+    "relief": 0.01
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "radiusMetres": 520,
   "sites": [
@@ -940,9 +1019,9 @@
  "the_marchward": {
   "_measured": {
    "riverBearing": -176,
-   "riverDistanceDeg": 13.8,
+   "riverDistanceDeg": 13.29,
    "uphillBearing": 75,
-   "relief": 0.346,
+   "relief": 0.678,
    "roadsOut": [
     {
      "to": "the_redline",
@@ -960,7 +1039,14 @@
      "to": "the_axis_gate",
      "bearing": -123
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": -176,
+    "riverDistanceDeg": 13.8,
+    "uphillBearing": 75,
+    "relief": 0.346
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_ruleFinding": "⛔ RELIEF 0.346 — real ground, and the second-steepest town in the corpus after Kindlerow. ⚠️ BUT THE LAYOUT IS POLITICAL, NOT TOPOGRAPHIC: the Redline road (3°) and the Stillhold road (−10°) arrive only 13° apart, so the town's whole problem is that BOTH SIDES COME IN THE SAME GATE.",
   "radiusMetres": 400,
@@ -1032,9 +1118,9 @@
  "grovehome": {
   "_measured": {
    "riverBearing": 37,
-   "riverDistanceDeg": 2.8,
+   "riverDistanceDeg": 2.83,
    "uphillBearing": 120,
-   "relief": 0.025,
+   "relief": 0.031,
    "roadsOut": [
     {
      "to": "the_heartroot",
@@ -1048,7 +1134,14 @@
      "to": "the_quickwood_eaves",
      "bearing": 160
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": 37,
+    "riverDistanceDeg": 2.8,
+    "uphillBearing": 120,
+    "relief": 0.025
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_ruleFinding": "⚠️ relief 0.025 — below the 0.08 threshold and the prose names no slope, so uphill is unused. Roads and prose carry it, as the corpus says they carry two-thirds of everything.",
   "radiusMetres": 360,
@@ -1120,9 +1213,9 @@
  "the_stillhold": {
   "_measured": {
    "riverBearing": 45,
-   "riverDistanceDeg": 3.9,
-   "uphillBearing": 225,
-   "relief": 0.007,
+   "riverDistanceDeg": 3.89,
+   "uphillBearing": -135,
+   "relief": 0.016,
    "roadsOut": [
     {
      "to": "the_marchward",
@@ -1132,7 +1225,14 @@
      "to": "the_held_yard",
      "bearing": 117
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": 45,
+    "riverDistanceDeg": 3.9,
+    "uphillBearing": 225,
+    "relief": 0.007
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_ruleFinding": "⚠️ relief 0.007 — near-flat, so uphill is noise. ⛔ AND THAT SUITS IT: a walled city of absolute peace on ground with no feature is a place that has REMOVED its variables. The flatness is consonant with the fiction rather than incidental to it.",
   "radiusMetres": 400,
@@ -1185,10 +1285,10 @@
  },
  "radiant_plateau_edge": {
   "_measured": {
-   "riverBearing": -146,
-   "riverDistanceDeg": 2.1,
+   "riverBearing": -130,
+   "riverDistanceDeg": 1.2,
    "uphillBearing": 0,
-   "relief": 0.029,
+   "relief": 0.667,
    "roadsOut": [
     {
      "to": "millbrook",
@@ -1198,7 +1298,14 @@
      "to": "kestrels_roost",
      "bearing": 92
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": -146,
+    "riverDistanceDeg": 2.1,
+    "uphillBearing": 0,
+    "relief": 0.029
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_stackNote": "⛔ `the-low-lamp-inn` sits at 0.00° from this location — it is a SITE of the Edge District and is authored below as one, not as a peer.",
   "radiusMetres": 420,
@@ -1264,10 +1371,17 @@
  },
  "gen-cogitarium-entrance-hall": {
   "_measured": {
-   "riverDistanceDeg": 12.3,
+   "riverDistanceDeg": 12.45,
    "uphillBearing": 30,
-   "relief": 0.567,
-   "roadsOut": []
+   "relief": 1.043,
+   "roadsOut": [],
+   "_wasAuthored": {
+    "riverDistanceDeg": 12.3,
+    "uphillBearing": 30,
+    "relief": 0.567
+   },
+   "riverBearing": 119,
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_nestingCase": "⛔ THIS IS THE TEST CASE. It is `tier: site`, parent `the_cogitarium`, and it is STACKED at 0.00° with both the Cogitarium and the third terrace. It has NO connections of its own, so `roadsOut` is empty — the same shape as the Crossing.\n⚠️ SO A LOCAL LAYOUT FOR A SITE IS REALLY A LAYOUT INSIDE A BUILDING, AND ITS FRAME IS ITS PARENT'S. I have authored it at a 60 m radius with levels, and its bearings are measured FROM THE HALL, not from the Cogitarium.\n⛔ THE QUESTION FOR CCODE: does `localMap` nest, so a site's sites resolve inside the site's frame? If yes this is correct as authored. If the frame must always be the settlement, these three rooms need re-expressing from the Cogitarium's centre and the metres get larger.",
   "radiusMetres": 60,
@@ -1309,10 +1423,10 @@
  },
  "old_switchback": {
   "_measured": {
-   "riverBearing": 115,
-   "riverDistanceDeg": 5.1,
-   "uphillBearing": 345,
-   "relief": 0.01,
+   "riverBearing": -50,
+   "riverDistanceDeg": 5.44,
+   "uphillBearing": -15,
+   "relief": 0.019,
    "roadsOut": [
     {
      "to": "kestrels_roost",
@@ -1326,7 +1440,14 @@
      "to": "gen-cogitarium-third-terrace",
      "bearing": 10
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": 115,
+    "riverDistanceDeg": 5.1,
+    "uphillBearing": 345,
+    "relief": 0.01
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_ruleFinding": "⛔ RELIEF 0.01 AND IT IS A MOUNTAIN ROAD. Second case after the Harmonic terrace where the world layer measures the ground the feature MEETS rather than the feature: switchbacks are cut into a face whose scale is below the generator's floor. ⚠️ PROSE CARRIES IT ENTIRELY — 'stone-cut switchbacks CLINGING TO THE MOUNTAINSIDE', 'up toward the HIGH PASS'.",
   "radiusMetres": 700,
@@ -1403,11 +1524,11 @@
  },
  "thornwake_glade": {
   "_measured": {
-   "riverBearing": -51,
-   "riverDistanceDeg": 5.4,
+   "riverBearing": -125,
+   "riverDistanceDeg": 7.41,
    "marshDistanceDeg": 4.9,
    "uphillBearing": 15,
-   "relief": 0.011,
+   "relief": 0.018,
    "roadsOut": [
     {
      "to": "disputed_zone_fringe",
@@ -1421,7 +1542,14 @@
      "to": "ent_deepwood",
      "bearing": 47
     }
-   ]
+   ],
+   "_wasAuthored": {
+    "riverBearing": -51,
+    "riverDistanceDeg": 5.4,
+    "uphillBearing": 15,
+    "relief": 0.011
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
   },
   "_ruleFinding": "⚠️ relief 0.011, no usable gradient, no water within 5°. ⛔ PROSE CARRIES ALL OF IT — and the prose is unusually specific about ARRANGEMENT, which is the layout instruction.",
   "radiusMetres": 320,

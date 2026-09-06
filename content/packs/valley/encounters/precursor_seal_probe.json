@@ -1,20 +1,26 @@
 {
-  "schemaVersion": 1,
-  "id": "precursor_seal_probe",
-  "type": "puzzle",
-  "name": "The Reluctant Seal",
-  "locationId": "the_hollowing",
-  "setup": "A precursor seal, intact, and the purpose-shadow on it reads PRISON rather than vault. It is not locked so much as decided. Probing it is permitted; opening it is a different question and a worse one.",
-  "difficulty": 35,
-  "attribute": "mental",
-  "subAttribute": "reason",
-  "axes": {
-    "mechanical_spiritual": -0.4,
-    "concrete_abstract": 0.3
-  },
-  "hintTiers": [
-    "The seam does not respond to force, pressure, or heat. It responded, once, to being addressed.",
-    "The shadow on it is not decoration — it is a label, and it was left by someone who expected to be read.",
-    "It can be opened. Everything about how it was made is an argument that it should not be."
-  ]
+ "schemaVersion": 1,
+ "id": "precursor_seal_probe",
+ "type": "puzzle",
+ "name": "The Reluctant Seal",
+ "locationId": "the_hollowing",
+ "setup": "A precursor seal, intact, and the purpose-shadow on it reads PRISON rather than vault. It is not locked so much as decided. Probing it is permitted; opening it is a different question and a worse one.",
+ "difficulty": 35,
+ "attribute": "mental",
+ "subAttribute": "reason",
+ "axes": {
+  "mechanical_spiritual": -0.4,
+  "concrete_abstract": 0.3
+ },
+ "hintTiers": [
+  "The seam does not respond to force, pressure, or heat. It responded, once, to being addressed.",
+  "The shadow on it is not decoration — it is a label, and it was left by someone who expected to be read.",
+  "It can be opened. Everything about how it was made is an argument that it should not be."
+ ],
+ "party": {
+  "ifYouBringPeople": "⛔ *THE PURPOSE-SHADOW READS PRISON RATHER THAN VAULT.* ⚠️ A party makes probing SAFER and opening WORSE — more people to catch a mistake, and more people present when a decided thing stops being decided. ⚑ It is not locked so much as decided, and a party can decide back at it.",
+  "whatItAsksOfAParty": "⛔ Whether you will stop. ⚑ The failure state is a party in which one member keeps probing after the others have understood.",
+  "foldNote": "⚠️ A folded PROTECT ally is what you want and will not be enough — ⛔ and the cell should say so before it is opened."
+ },
+ "_partyClauseWhy": "⛔ THE PARTY CLAUSE — R36/R36a, authored 2026-09-05. Every encounter in the corpus was written when a fight was ONE PERSON AGAINST ONE OPPONENT. ⚑ R36 makes a party member fight from their own sheet; R36a caps three acting fully and folds the rest. ⚠️ THE CLAUSE IS ADDITIVE — no prose changed. It is what a GM reads when more than one person is present."
 }

@@ -459,6 +459,92 @@ export function worldPosForGenerated(id, lookup, { nearbyDays = 1, maxHops = 8 }
   };
 }
 
+/** ⚑ AEVI'S FOUR WORDS, AND THEY ARE BETTER THAN NORTH (SNG-386). Her ruling: *"Colatitude is distance from
+ *  the Crossing. Longitude is which disposition's quarter you are in. So the two natural directions are
+ *  hubward / outward and spinward / widdershins."* ⛔ `hubward` means toward the Crossing, which means toward
+ *  BALANCE; `outward` means toward a pole, which means toward commitment — **the compass and the disposition
+ *  are the same axis**, so a player who learns "we are going outward" has learned something true about where
+ *  they are going and not only which way.
+ *
+ *  ⚠️ THE VOCABULARY IS HERS. Her spec says so in as many words — *"do not invent words for it; the four
+ *  above are the canon"* — and these four are the only strings this returns.
+ *
+ *  ⛔ IT IS PER-AXIS, NOT A GREAT-CIRCLE BEARING, and her own measurements are what settle that: two of her
+ *  four rows run TO the Crossing, which sits at colatitude 0 where longitude is undefined and a true bearing
+ *  has no lateral component at all — yet she reads a spin word on both. Her model compares the two
+ *  coordinates, because in this world they mean two different things rather than two components of one
+ *  heading.
+ *
+ *  ⚑ THE LATERAL AXIS IS MEASURED IN GROUND, NOT DEGREES. A degree of longitude near the hub is almost no
+ *  walking, so a raw degree threshold would call a step past the Crossing a great lateral journey. Scaling
+ *  by sin(colatitude) makes "alongside" mean the same amount of walking everywhere in the world.
+ *
+ *  ⚠️ AND THE THRESHOLD IS A SHARE OF THE JOURNEY, NOT A FIXED DISTANCE, so it reads the same on a two-day
+ *  errand and a hundred-day crossing. An axis is named only if it carries `minShare` of the whole. ⛑ 0.25 is
+ *  MEASURED, not chosen: across all 135 placed locations it names both axes on 47.9% of pairs and exactly one
+ *  — Aevi's *"alongside"* — on 51.8%, with 0% naming neither. She asked for thresholds *"tuned so alongside
+ *  is a real answer"*, and an even split is that answer. All four of her authored rows reproduce anywhere
+ *  from 0.15 to 0.35, so they do not pin it; the distribution does.
+ *
+ *  Returns null when either end is unplaced — the same honest null `geodesic` gives. PURE. */
+export function bearingBetween(a, b, { minShare = 0.25, restDays = 0.5 } = {}) {
+  const pa = a?.worldPos || a, pb = b?.worldPos || b;
+  if (!pa || !pb) return null;
+  const ac = Number(pa.colatitude), bc = Number(pb.colatitude);
+  const al = Number(pa.longitude), bl = Number(pb.longitude);
+  if (![ac, bc, al, bl].every(Number.isFinite)) return null;
+
+  const perDegree = 300 / 180;                       // the inverse of walkingDays' scale, in days per degree
+  let dLon = bl - al;
+  dLon = ((dLon % 360) + 540) % 360 - 180;           // the SHORT way round, so 350° east is 10° widdershins
+  const hubDays = (bc - ac) * perDegree;             // negative is toward the Crossing
+  const spinDays = dLon * perDegree * Math.sin(((ac + bc) / 2) * Math.PI / 180);
+  const mag = Math.hypot(hubDays, spinDays);
+
+  // ⛑ "YOU ARE ALREADY THERE" IS A REAL ANSWER TOO, and it is not the same as having no direction: a share
+  // test on a journey of nearly no length would name an axis off pure floating-point noise.
+  if (!(mag > restDays)) return { radial: null, lateral: null, phrase: null, hubDays, spinDays, days: mag };
+
+  const radial = Math.abs(hubDays) >= minShare * mag ? (hubDays < 0 ? "hubward" : "outward") : null;
+  const lateral = Math.abs(spinDays) >= minShare * mag ? (spinDays > 0 ? "spinward" : "widdershins") : null;
+  return {
+    radial, lateral,
+    // ⚑ JOINED THE WAY SHE WROTE THEM — "hubward and spinward", "outward" — so the GM can say the sentence
+    // without composing it, which is the whole reason SNG-331 called this the cheapest high-value item.
+    phrase: [radial, lateral].filter(Boolean).join(" and ") || null,
+    hubDays, spinDays, days: mag,
+  };
+}
+
+/** ⚑ SNG-386 §4.3 — SO THE GM CAN SAY IT WITHOUT INVENTING IT. Aevi: *"`ctx.location.bearingsToKnown` so
+ *  the GM can say 'the road runs outward from here' without inventing it — which is the whole reason
+ *  SNG-331 flagged this as the cheapest high-value item."*
+ *
+ *  ⛔ ONLY PLACES THE CHARACTER KNOWS. A bearing to somewhere they have never heard of is a leak, not a
+ *  fact — it would let the GM point confidently at a place the player has no business knowing exists.
+ *  `isKnown` is the same predicate the map and the recall block already use.
+ *
+ *  ⚠️ THE DISTANCE IS `walkingDays`, NOT the bearing's own magnitude. The bearing's `days` is the size of
+ *  its two axis components, which is a fair thing to threshold on and the WRONG thing to tell a player:
+ *  what they want to know is how long the walk is. Nearest first, because that is the order a road
+ *  actually offers them. PURE. */
+export function bearingsToKnown(from, locations = {}, { isKnown = null, limit = 8 } = {}) {
+  const here = (typeof from === "string") ? locations[from] : from;
+  if (!here?.worldPos) return [];
+  const rows = [];
+  for (const l of Object.values(locations || {})) {
+    if (!l || !l.id || l.id === here.id || !l.worldPos) continue;
+    if (typeof isKnown === "function" && !isKnown(l.id)) continue;
+    const b = bearingBetween(here, l);
+    if (!b || !b.phrase) continue;                     // 'you are already there' has no direction to give
+    const days = walkingDays(here, l);
+    if (days == null) continue;
+    rows.push({ id: l.id, name: l.name || l.id, phrase: b.phrase, days: Math.round(days * 10) / 10 });
+  }
+  rows.sort((a, b) => a.days - b.days);
+  return rows.slice(0, Math.max(0, limit));
+}
+
 /** Geodesic distance in WALKING DAYS, at Erik's year-to-walk scale: antipode-to-antipode (πR) is
  *  300 days, so a radius is 300/π days. Waygates become infrastructure and a pilgrimage to your
  *  antipode is a life event, which is the point. */

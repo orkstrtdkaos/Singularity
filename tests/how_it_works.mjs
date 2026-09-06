@@ -6784,6 +6784,128 @@ console.log("\n── §97 · a place found in play is somewhere, exactly a day 
     JSON.stringify(genA.worldPos) === was);
 }
 
+/* ═════ §98 — THE WORLD'S OWN COMPASS, IN AEVI'S FOUR WORDS (SNG-386) ═════ */
+// ⚑ HER RULING, AND IT IS BETTER THAN NORTH: *"Colatitude is distance from the Crossing. Longitude is which
+// disposition's quarter you are in. So the two natural directions are hubward / outward and spinward /
+// widdershins."* ⛔ `hubward` is toward the Crossing, which is toward BALANCE; `outward` is toward a pole,
+// which is toward COMMITMENT — the compass and the disposition are the same axis, so *"direction in this
+// world carries meaning that north never could."*
+// ⚠️ THE VOCABULARY IS HERS AND HER SPEC SAYS SO: *"do not invent words for it; the four above are the
+// canon."* ⛑ AND SHE AUTHORED FOUR MEASURED ROWS, which are gated here exactly the way SNG-404 gates her
+// hand-authored layouts: her measurements are the specification, and the engine reproduces them or it is wrong.
+console.log("\n── §98 · hubward is toward balance, and the engine says so in her words ──");
+{
+  const WM98 = await import("../engine/worldmap.js");
+  const { loadContentHeadless: lch98 } = await import("./headless_content.mjs");
+  const C98 = await lch98();
+  const at = (colatitude, longitude) => ({ worldPos: { colatitude, longitude, depth: 0 } });
+
+  // ⛑ AEVI'S OWN FOUR ROWS, from SNG-386 §2. These are the specification.
+  const AUTHORED = [
+    ["millbrook", "the_crossing", "hubward and spinward"],
+    ["millbrook", "the_heartroot", "outward"],
+    ["kindlerow", "the_blaze", "outward and widdershins"],
+    ["the_old_warden_post", "the_crossing", "hubward and widdershins"],
+  ];
+  const wrong = AUTHORED.filter(([a, b, want]) => WM98.bearingBetween(C98.locations[a], C98.locations[b])?.phrase !== want);
+  check("§98: ⛔ THE ENGINE REPRODUCES ALL FOUR OF AEVI'S AUTHORED BEARINGS — her measurements are the spec",
+    wrong.length === 0, wrong.map(([a, b, want]) => `${a}→${b}: got "${WM98.bearingBetween(C98.locations[a], C98.locations[b])?.phrase}" want "${want}"`).join(" · "));
+
+  // ⚠️ AND NO WORD OUTSIDE THE FOUR, over every placed pair in the world — the one thing her spec asked for
+  // in as many words, and the one a future edit is most likely to break by 'improving' the vocabulary.
+  const placed98 = Object.values(C98.locations).filter(l => l.worldPos && Number.isFinite(Number(l.worldPos.colatitude)));
+  const said = new Set();
+  let both = 0, alongside = 0, neither = 0, atRest = 0, total = 0;
+  for (const a of placed98) for (const b of placed98) {
+    if (a === b) continue;
+    const r = WM98.bearingBetween(a, b);
+    if (!r) continue;
+    total++;
+    if (r.radial) said.add(r.radial);
+    if (r.lateral) said.add(r.lateral);
+    if (r.radial && r.lateral) both++; else if (r.radial || r.lateral) alongside++;
+    // ⛑ NAMING NEITHER IS ONLY HONEST FOR A JOURNEY OF NO LENGTH. Split the two apart, because they mean
+    // opposite things: "you are already there" is an answer, "I cannot tell you which way" is a bug.
+    else if (r.days > 0.5) neither++; else atRest++;
+  }
+  check("§98: ⛔ THE FOUR WORDS ARE THE ONLY WORDS IT EMITS — across every placed pair in the world",
+    [...said].sort().join(",") === "hubward,outward,spinward,widdershins", [...said].sort().join(","));
+  check("§98: ⚑ …and this world has NO north — the retired vocabulary appears nowhere in what it says",
+    ![...said].some(w => /north|south|east|west/i.test(w)));
+
+  // ⚑ SHE ASKED FOR THRESHOLDS "TUNED SO ALONGSIDE IS A REAL ANSWER", and 0.25 is measured rather than
+  // chosen: a near-even split, with every journey still having a direction.
+  check("§98: ⚑ \"ALONGSIDE\" IS A REAL ANSWER — a third to two-thirds of pairs name exactly one axis",
+    alongside / total > 0.33 && alongside / total < 0.67, `${(100 * alongside / total).toFixed(1)}% of ${total}`);
+  check("§98: …and every journey WITH A LENGTH has a direction — \"I cannot tell you which way\" is not an outcome",
+    neither === 0, String(neither));
+  // ⛑ AND THE ZERO-LENGTH CASE IS CORRECT, NOT A GAP. 26 of the world's locations share a position with the
+  // place they are INSIDE — Mara Well's Store is in Millbrook, the Made Gate is at the Crossing. An interior
+  // sits at its building's position, and giving one the §97 offset would put an entrance hall a day's walk
+  // from the building it opens. ⚠️ This asserts those exist, so a future edit cannot quietly "fix" them.
+  check("§98: ⛑ …and a room INSIDE a place is AT that place — no distance, and rightly no direction",
+    atRest > 0 && WM98.bearingBetween(C98.locations.millbrook, C98.locations["gen-mara-wells-store"])?.phrase === null,
+    `${atRest} zero-length pairs`);
+  check("§98: …and both axes are still named often enough to be worth having",
+    both / total > 0.33, `${(100 * both / total).toFixed(1)}%`);
+
+  // ⛑ THE INVERSE IS THE INVERSE. Cheap to state, and it is what makes the words trustworthy: if going there
+  // is hubward, coming back is outward, or one of the two directions is lying.
+  const OPP = { hubward: "outward", outward: "hubward", spinward: "widdershins", widdershins: "spinward" };
+  const asym = [];
+  for (const a of placed98.slice(0, 40)) for (const b of placed98.slice(0, 40)) {
+    if (a === b) continue;
+    const f = WM98.bearingBetween(a, b), r = WM98.bearingBetween(b, a);
+    if (!f?.radial || !r?.radial) continue;
+    if (OPP[f.radial] !== r.radial) asym.push(`${a.id}→${b.id}`);
+  }
+  check("§98: ⛑ going there and coming back are opposites — if out is hubward, back is outward",
+    asym.length === 0, asym.slice(0, 3).join(" · "));
+
+  // ⚠️ THE LATERAL AXIS IS MEASURED IN GROUND, NOT DEGREES. Near the hub a degree of longitude is almost no
+  // walking, so a raw-degree threshold would call a step past the Crossing a great lateral journey — the same
+  // convergence that put two places on top of each other in §97.
+  const nearPole = WM98.bearingBetween(at(2, 0), at(2, 90));
+  check("§98: ⚠️ a quarter of the world's longitude NEAR THE HUB is a few days, not 150 — ground, not degrees",
+    Math.abs(nearPole.spinDays) < 15, `${nearPole.spinDays.toFixed(1)} days for 90° of longitude at colatitude 2`);
+  check("§98: …and the SAME 90° out at the equator is the long journey it really is",
+    Math.abs(WM98.bearingBetween(at(90, 0), at(90, 90)).spinDays) > 100);
+  check("§98: …and it takes the SHORT way round — 350° spinward is 10° widdershins",
+    WM98.bearingBetween(at(90, 0), at(90, 350)).lateral === "widdershins");
+
+  check("§98: ⚠️ an unplaced end is null, the same honest null `geodesic` gives — never a guessed direction",
+    WM98.bearingBetween({ worldPos: null }, C98.locations.millbrook) === null
+    && WM98.bearingBetween(C98.locations.millbrook, {}) === null);
+  check("§98: …and a place has no direction to itself — \"you are already there\" is its own answer",
+    WM98.bearingBetween(C98.locations.millbrook, C98.locations.millbrook).phrase === null);
+
+  // ── bearingsToKnown — SNG-386 §4.3, "so the GM can say it WITHOUT INVENTING IT"
+  const known = new Set(["the_crossing", "kindlerow"]);
+  const rows98 = WM98.bearingsToKnown(C98.locations.millbrook, C98.locations, { isKnown: (id) => known.has(id) });
+  check("§98: ⛔ ONLY PLACES THE CHARACTER KNOWS — a bearing to somewhere unheard-of is a leak, not a fact",
+    rows98.length === 2 && rows98.every(r => known.has(r.id)), rows98.map(r => r.id).join(","));
+  check("§98: …and the filter is doing real work — unfiltered reaches far more than two",
+    WM98.bearingsToKnown(C98.locations.millbrook, C98.locations, { limit: 999 }).length > 50);
+  check("§98: …nearest first, which is the order a road actually offers them",
+    rows98.every((r, i) => i === 0 || rows98[i - 1].days <= r.days));
+  check("§98: ⚠️ …and the DAYS are `walkingDays`, not the bearing's own magnitude — the player wants the walk",
+    Math.abs(rows98.find(r => r.id === "the_crossing").days - WM98.walkingDays(C98.locations.millbrook, C98.locations.the_crossing)) < 0.1);
+  check("§98: …and an unplaced origin gives no rows rather than throwing",
+    Array.isArray(WM98.bearingsToKnown({ worldPos: null }, C98.locations)) && WM98.bearingsToKnown({ worldPos: null }, C98.locations).length === 0);
+
+  // ⛔ AND THE FOUR DOORS AGAIN, because §97 was caught by wiring_audit for exactly this: a function nothing
+  // calls passes every test above and cannot fire in play. The registry is the DECLARED table gm.js reads,
+  // so a row without a consumer — or a consumer without a row — never lands.
+  const reg98 = rd("engine/gm_registry.js"), gm98 = rd("engine/gm.js");
+  check("§98: ⛔ THE REGISTRY DECLARES THE ROW — the GM context is a declared table, never hand-listed",
+    /key: "bearingsDetail"/.test(reg98) && /bearingsToKnown\(/.test(reg98)
+    && /import \{[^}]*bearingsToKnown/.test(reg98));
+  check("§98: …and gm.js CONSUMES it — a row nothing destructures reaches the model never",
+    /bearingsDetail \} = ctx;/.test(gm98) && /if \(bearingsDetail\) world\.push/.test(gm98));
+  check("§98: ⛑ …and the block FORBIDS the retired compass by name, where the GM will actually read it",
+    /no north, south, east or west/i.test(gm98) && /HUBWARD[\s\S]{0,200}BALANCE/.test(gm98));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

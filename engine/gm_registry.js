@@ -32,6 +32,7 @@
 // a key gm.js consumes that no row provides can never land — that is the exact
 // failure §23 exists to stop (challengeTypes: 45 values, read by nothing).
 
+import { bearingsToKnown } from "./worldmap.js";   // SNG-386 §4.3: which way the road runs
 import { holdingsForGM, debtsForGM } from "./holdings.js";
 import { loreForLocation, eventsForGM, traditionMotivationsForGM } from "./state.js";
 import { buildRegionView, newsForGM, worldArcsForGM } from "./worldtick.js";
@@ -179,6 +180,23 @@ export const GM_CONTEXT = [
     build: (env) => recallForGM(env.character, `${env.playerInput || ""} ${env.exactWords || ""}`, {
       locations: env.CONTENT.locations, isKnown: env.app.isPlaceKnown || null
     }) },
+
+  // ⚑ SNG-386 §4.3 — WHICH WAY THE ROAD RUNS, IN AEVI'S FOUR WORDS. Her ruling: hubward means toward the
+  // Crossing, which means toward BALANCE; outward means toward a pole, which means toward COMMITMENT — so
+  // *"direction in this world carries meaning that north never could"*, and a player who learns "we are
+  // going outward" has learned something true about where they are going and not only which way.
+  // ⛔ ONLY KNOWN PLACES, through the same predicate the map uses: a bearing to somewhere the character has
+  // never heard of would let the GM point confidently at a place they have no business knowing exists.
+  { key: "bearingsDetail", builder: "worldmap.bearingsToKnown (SNG-386 §4.3)", carries: ["which way known places lie", "how many days"],
+    reachedBy: "always (empty until the character knows a second placed place)", spec: "SNG-386", views: ALL,
+    build: (env) => {
+      const rows = bearingsToKnown(env.location, env.CONTENT.locations, { isKnown: env.app.isPlaceKnown || null });
+      if (!rows.length) return null;
+      // "1 day's walk" / "1.4 days' walk" — the possessive moves with the number, because the GM reads
+      // this line out as a sentence and "about 1 days' walk" is a thing no person has ever said.
+      const walk = (d) => `${d} ${d === 1 ? "day's" : "days'"} walk`;
+      return rows.map(r => `- ${r.name}: ${r.phrase} — about ${walk(r.days)}`).join("\n");
+    } },
 
   // ---- shared by turn + ask + gambit ----
   // SNG-302 — WHAT IT FETCHES HERE. Aevi: "traders are NPCs not shops — the price model exists so the GM has

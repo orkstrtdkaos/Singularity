@@ -440,5 +440,10 @@
     "purpose": "Merges a recovery snapshot back into a save, losing nothing from either. The sync kept the losing copy of every both-advanced conflict in localStorage and nothing ever listed, read or merged one — a player who lost a branch had it saved and unreachable.",
     "playerVisibleSurface": "Settings → Recovery copies: each snapshot the sync kept, with when and what it holds, and one verb — Merge into my save — that adds what the copy has and this save lacks, and removes nothing.",
     "whatMakesItFire": "A both-advanced sync conflict writes a snapshot; the player merges it from Settings. Merge is idempotent, refuses another character's snapshot, and treats level and xp as floors."
+  },
+  "recovery_snapshots.js": {
+    "purpose": "Diffs of save branches the sync overwrote, carried in code so reconcile step 41 can merge them into every copy of the save at its next load — a committed save file loses the race against an open tab; a step runs inside it.",
+    "playerVisibleSurface": "The reconcile note on load: what was recovered — items, people, topics, facts, holdings — and that nothing was removed.",
+    "whatMakesItFire": "Step 41 on any character whose id matches an entry's forId; mergeRecovery is idempotent, so a copy already whole gets no note."
   }
 }

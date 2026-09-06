@@ -20,6 +20,8 @@ import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
 import { credit } from "./purse.js";   // R48: the purse has ONE door in, and it records an origin
 import { mergeCodexTopics, ensureCodex, applyCodexUpdates } from "./codex.js";
+import { mergeRecovery, mergeReceiptLine } from "./recovery.js";   // step 41: the Settings door's merge, run where every copy passes
+import { SNAPSHOTS } from "./recovery_snapshots.js";              // step 41: the overwritten branch, as a diff
 import { dedupeQuests, normalizeProse } from "./quests.js";
 import { dedupeInventory } from "./inventory.js";
 import { inferDomains } from "./traditions.js";
@@ -1394,6 +1396,27 @@ export const CHARACTER_STEPS = [
       if (!fixed.length) return {};
       console.log(`[reconcile] sng-355: restored ${fixed.length} teacher role(s) lost at recruit: ${fixed.join(", ")}`);
       return { notes: [`You remember who taught you: ${fixed.join(", ")}.`] };
+    }
+  },
+  {
+    version: 41, id: "slate-branch-restored", playerFacing: true,
+    // ⛔ THE BRANCH THE SYNC OVERWROTE, MERGED BACK IN EVERY COPY. Measured in git: 4a50f0cf (rev 2500) held the
+    // encrypted slate, both couriers at Whistling Woman Post and the post as a holding; browser pushes at 11:43,
+    // 11:48 and 15:20 (revs 1853, 1858, 1794 — each LOWER) overwrote it, and Erik's phone asked the GM how the
+    // runner was doing from a copy that had no runner. A committed save lost that race three times today;
+    // this runs inside the tab. ⚑ mergeRecovery ADDS what the copy lacks and REMOVES nothing — idempotent by
+    // version and by record, refuses any other character. The receipt is said out loud.
+    apply: (c) => {
+      const notes = [];
+      for (const sn of SNAPSHOTS) {
+        if (!sn || sn.forId !== c?.id) continue;
+        const r = mergeRecovery(c, JSON.parse(JSON.stringify(sn.snap)));
+        const line = mergeReceiptLine(r);
+        if (!r.items.length && !r.people.length && !r.topics.length && !r.facts && !r.holdings.length && !r.quests.length && !r.bands.length) continue;
+        console.log(`[reconcile] slate-branch-restored: ${line}`);
+        notes.push(`${line} — the branch the sync overwrote on 2026-09-06, merged back; nothing you had since was removed.`);
+      }
+      return notes.length ? { notes } : {};
     }
   },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content

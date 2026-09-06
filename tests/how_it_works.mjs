@@ -8025,6 +8025,87 @@ console.log("\n── §113 · a reference, not a log — and nothing on the flo
     /mergeCodexTopics\(c, \{ entities: codexEntities\(c\) \}\)/.test(rd("app.js")));
 }
 
+/* ═════ §114 — THE ASK CHANNEL: A PROSE ANSWER IS AN ANSWER (Erik's phone, 2026-09-06: "The GM stumbled: NO_JSON_FOUND") ═════ */
+// ⛔ gmAsk's own prompt says "Plain prose by default" — and the code THREW on prose. parseLooseJSON sat inside
+// the outer try; NO_JSON_FOUND became {ok:false}; every plain answer since the repair-ops landing stumbled.
+// ⚑ The function the app calls is the function under test — `call` is injected, the logic is not copied.
+console.log("\n── §114 · ask the GM how the runner is, and get an answer ──");
+{
+  const GM = await import("../engine/gm.js");
+  const reply = (text) => async () => text;
+  // ⚠️ buildTurnContext runs BEFORE gmAsk's try and reads location/region/rules unguarded — a bare ctx must carry them
+  const ctx = { character: { id: "t", name: "T", origin: "valley", background: "smith", level: 1, attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, health: 10, maxHealth: 10, energy: 5, maxEnergy: 5, abilities: [], alignment: {}, inventory: [], quests: [] },
+    location: { id: "millbrook", name: "Millbrook", descriptionSeed: "a mill town", spectrum: {}, encounterFlavor: "quiet" }, region: { id: "valley", name: "The Valley" },
+    rules: {}, lore: "", timeLabel: "Day 1", recentTurns: [], sceneState: {}, resolution: null, playerInput: null };
+  const prose = await GM.gmAsk(ctx, "How is the runner doing now that I healed her?", { call: reply("She is resting at the post, and mending.") });
+  check("§114: ⛔ A PROSE ANSWER IS AN ANSWER — no stumble, the words reach the player",
+    prose.ok === true && /resting at the post/.test(prose.text) && !prose.ops, JSON.stringify(prose));
+  const ops = await GM.gmAsk(ctx, "record my post", { call: reply('{"text":"Recorded.","ops":{"holdingOps":[{"op":"rename","to":"x"}],"xp":50}}') });
+  check("§114: …a well-formed op block still changes things — and only keys on the ask list survive (xp is not one)",
+    ops.ok === true && ops.text === "Recorded." && Array.isArray(ops.ops?.holdingOps) && !("xp" in (ops.ops || {})), JSON.stringify(ops));
+  const brace = await GM.gmAsk(ctx, "q", { call: reply("The rule is {roughly} this: you roll under.") });
+  check("§114: …a stray brace in prose is still prose, not a stumble", brace.ok === true && /roll under/.test(brace.text), JSON.stringify(brace));
+  const down = await GM.gmAsk(ctx, "q", { call: async () => { throw new Error("NETWORK"); } });
+  check("§114: …and a real failure still says so", down.ok === false && down.error === "NETWORK");
+  check("§114: ⚑ the app's ask button reaches this function, with the registry's ask view",
+    /await gmAsk\(assembleGMContext\("ask", gmEnv\(\)\), text\)/.test(rd("app.js")));
+}
+
+/* ═════ §116 — THE WALL KEEPS ITS FOUNDATION: OVER THE CAP, FACTS RETIRE, THEY ARE NEVER TRIMMED ═════ */
+// ⛔ Measured 2026-09-06 while verifying the slate restore: absorb() cut Mara Wells from 43 facts to 24 — nineteen
+// on the floor — and the fact-add did the same one at a time. §109's law: nothing is deleted; the archive holds it.
+console.log("\n── §116 · the twenty-fifth fact retires the first, it does not erase it ──");
+{
+  const CX = await import("../engine/codex.js");
+  const facts = (n) => Array.from({ length: n }, (_, i) => `[d${i + 1}] fact number ${i + 1} about the subject`);
+  const c = { clock: { day: 40 }, codex: { topics: { pell: { id: "pell", label: "Pell", kind: "person", entityId: "pell", facts: facts(24), links: [], aliases: [] } } } };
+  CX.applyCodexUpdates(c, [{ topic: "pell", label: "Pell", kind: "person", fact: "a twenty-fifth thing" }], { day: 40, entities: { people: { pell: "Pell" }, places: {} } });
+  const t = c.codex.topics.pell;
+  check("§116: ⛔ A NEW FACT INTO A CAPPED TOPIC retires the OLDEST to the archive — 24 live, 1 archived, and it is fact number 1",
+    t.facts.length === 24 && (t.archive || []).length === 1 && /fact number 1 /.test(t.archive[0]) && /twenty-fifth/.test(t.facts[23]), `${t.facts.length} live · ${(t.archive || []).length} archived`);
+  const m = { codex: { topics: {
+    mara: { id: "mara", label: "Mara Wells", kind: "person", entityId: "mara", facts: facts(24), links: [], aliases: ["the Water Keeper"] },
+    keeper: { id: "keeper", label: "the Water Keeper", kind: "person", facts: Array.from({ length: 10 }, (_, i) => `[d${30 + i}] keeper fact ${i}`), links: [], aliases: [] },
+  } } };
+  CX.mergeCodexTopics(m, { entities: null });
+  const mm = m.codex.topics.mara;
+  check("§116: ⛔ AN ABSORB OVER THE CAP retires, never trims — 34 facts are 24 live and 10 archived, none gone",
+    !m.codex.topics.keeper && mm.facts.length === 24 && (mm.archive || []).length === 10 && mm.facts.some(f => /keeper fact 9/.test(f)) && mm.archive.some(f => /fact number 1 /.test(f)),
+    `${mm.facts.length} live · ${(mm.archive || []).length} archived · keeper ${m.codex.topics.keeper ? "still there" : "absorbed"}`);
+}
+
+/* ═════ §115 — THE OVERWRITTEN BRANCH COMES BACK IN EVERY COPY (reconcile 41, recovery_snapshots.js) ═════ */
+// ⛔ Measured in git: 4a50f0cf held the slate, both couriers and the post; three pushes with a LOWER rev overwrote
+// it. A committed save lost that race three times in one day. A step runs inside the tab, and merges — never
+// restores — through the same mergeRecovery the Settings door uses.
+console.log("\n── §115 · the runner is at the post again, on the phone too ──");
+{
+  const RS = await import("../engine/recovery_snapshots.js");
+  const RC = await import("../engine/reconcile.js");
+  const sn = RS.SNAPSHOTS.find(x => x.forId === "char-mrhs8286");
+  check("§115: ⛔ THE SNAPSHOT CARRIES THE BRANCH — the encrypted slate, both couriers, the post as a holding",
+    !!sn && sn.snap.inventory.some(i => /Encrypted slate/.test(i.name)) && !!sn.snap.npcRegistry["urgent-courier-whistling-woman"]
+    && sn.snap.holdings.some(h => h.id === "whistling-woman-post") && Object.keys(sn.snap.codex.topics).length > 0);
+  const step = RC.CHARACTER_STEPS.find(x => x.id === "slate-branch-restored");
+  check("§115: ⛔ STEP 41 IS REGISTERED and is the newest — every copy below it runs it once",
+    !!step && step.version === 41 && RC.topReconcileVersion("character") === 41 && step.playerFacing === true);
+  const fx = () => ({ id: "char-mrhs8286", level: 31, inventory: [{ id: "x", name: "a rope" }], npcRegistry: {}, codex: { topics: {} }, holdings: [] });
+  const c = fx(); const out = step.apply(c);
+  check("§115: ⛔ IT MERGES — the slate is in the pack, the runner is in the registry, the post is a holding, the rope is still there",
+    c.inventory.some(i => /Encrypted slate/.test(i.name)) && c.inventory.some(i => i.name === "a rope") && !!c.npcRegistry["urgent-courier-whistling-woman"]
+    && c.holdings.some(h => h.id === "whistling-woman-post"), JSON.stringify(out).slice(0, 200));
+  check("§115: …and it is SAID — a player-facing note names what came back and that nothing was removed",
+    Array.isArray(out.notes) && /Encrypted slate/.test(out.notes[0]) && /nothing you had since was removed/.test(out.notes[0]));
+  const n1 = c.inventory.length, f1 = JSON.stringify(c); const again = step.apply(c);
+  check("§115: …twice changes nothing and says nothing — idempotent by record, not only by version",
+    c.inventory.length === n1 && JSON.stringify(c) === f1 && !again.notes);
+  const o = { id: "someone-else", inventory: [], npcRegistry: {}, codex: { topics: {} }, holdings: [] }; const oo = step.apply(o);
+  check("§115: ⛔ …and NEVER another character — Silas's slate does not appear in anyone else's pack", !o.inventory.length && !oo.notes);
+  const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  check("§115: ⚑ the repo copy is ALSO whole, stamped to win under both rules — rev 3000 and a fresh clock",
+    disk.inventory.some(i => /Encrypted slate/.test(i.name)) && disk.rev >= 3000 && !!disk.npcRegistry["urgent-courier-whistling-woman"] && disk.reconcileVersion >= 41);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

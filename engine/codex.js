@@ -64,6 +64,15 @@ export function resolveTopic(character, u, ctx = {}) {
   return { topic: null, entityId };
 }
 
+/** ⛔ NOTHING OFF THE FLOOR. A topic over its cap retires its OLDEST facts to the archive — exactly as a summary
+ *  does — never slices them away. Measured 2026-09-06: an absorb of 10 facts into a topic at 33 cut 43 to 24. */
+function retireOverCap(t) {
+  const cap = t.entityId ? CAPS.factsPerPrimary : CAPS.factsPerTopic;
+  if (!Array.isArray(t.facts) || t.facts.length <= cap) return;
+  t.archive = [...(t.archive || []), ...t.facts.slice(0, t.facts.length - cap)].slice(-CAPS.archivePerTopic);
+  t.facts = t.facts.slice(-cap);
+}
+
 /** Record what the GM called this entity, so future phrasings resolve here too. */
 function recordAlias(t, raw) {
   if (!raw) return;
@@ -267,8 +276,7 @@ export function applyCodexUpdates(character, updates = [], ctx = {}) {
     if (u.fact) {
       const fact = `[d${ctx.day ?? "?"}] ${smartClamp(String(u.fact), 300)}`; // SNG-152: the reported mid-word cut ("…specification and understo")
       const isDup = t.facts.some(f => f.slice(f.indexOf("]") + 2) === fact.slice(fact.indexOf("]") + 2));
-      const cap = t.entityId ? CAPS.factsPerPrimary : CAPS.factsPerTopic;
-      if (!isDup) t.facts = [...t.facts, fact].slice(-cap);
+      if (!isDup) { t.facts = [...t.facts, fact]; retireOverCap(t); }   // the wall keeps its foundation in the archive
     }
     for (const link of (Array.isArray(u.links) ? u.links : []).slice(0, 4)) {
       const lid = slugify(link);
@@ -342,7 +350,7 @@ function absorb(topics, p, s, character = null) {
   for (const f of s.facts) if (!p.facts.some(x => bare(x) === bare(f))) p.facts.push(f);
   const dayOf = f => { const m = /^\[d(\d+)\]/.exec(f); return m ? Number(m[1]) : 0; };
   p.facts.sort((x, y) => dayOf(x) - dayOf(y)); // stable: same-day facts keep insertion order
-  p.facts = p.facts.slice(-(p.entityId ? CAPS.factsPerPrimary : CAPS.factsPerTopic));
+  retireOverCap(p);   // ⛔ a merge over the cap retires, never trims — 19 of Mara Wells's facts went this way once
   for (const l of s.links) if (l !== p.id && !p.links.includes(l)) p.links.push(l);
   p.links = p.links.slice(-CAPS.linksPerTopic);
   recordAlias(p, s.label);
@@ -431,12 +439,11 @@ export function mergeCodexTopics(character, { entities = null } = {}) {
     const n = normName(t.label);
     const parent = Object.values(topics).find(o => o && o !== t && o.label && normName(o.label).length >= 5 && n.startsWith(normName(o.label) + " "));
     if (!parent) continue;
-    const cap = parent.entityId ? CAPS.factsPerPrimary : CAPS.factsPerTopic;
     let moved = 0;
     for (const f of (t.facts || [])) if (!parent.facts.some(x => x.slice(x.indexOf("]") + 2) === f.slice(f.indexOf("]") + 2))) { parent.facts = [...parent.facts, f]; moved++; }
     if (t.archive?.length) parent.archive = [...(parent.archive || []), ...t.archive];
     // ⛔ NOTHING OFF THE FLOOR: a parent over its cap retires its OLDEST to the archive, exactly as a summary does
-    if (parent.facts.length > cap) { parent.archive = [...(parent.archive || []), ...parent.facts.slice(0, parent.facts.length - cap)]; parent.facts = parent.facts.slice(-cap); parent.summarisedAt = 0; }
+    retireOverCap(parent);
     if (parent.archive) parent.archive = parent.archive.slice(-CAPS.archivePerTopic);
     const sw = character.codex.swept || (character.codex.swept = []);
     sw.push({ from: t.id, label: t.label, to: parent.id, moved });

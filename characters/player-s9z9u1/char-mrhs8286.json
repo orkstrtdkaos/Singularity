@@ -492,6 +492,23 @@
         "shadow-slate",
         "shadow tablet"
       ]
+    },
+    {
+      "id": null,
+      "name": "Encrypted slate message — direct relay, urgent",
+      "kind": "quest",
+      "qty": 1,
+      "description": "A sealed slate tablet carrying an encrypted message from the Hub — marked urgent-to-hand, breaking normal relay protocol. The message itself is not yet read.",
+      "consumable": false,
+      "_contract": {
+        "verdict": "reject",
+        "missing": [
+          "id"
+        ],
+        "vague": [
+          "effect-resolvable"
+        ]
+      }
     }
   ],
   "deeds": [
@@ -5172,6 +5189,82 @@
         "day": 16
       },
       "met": 1
+    },
+    "courier-whistling-woman": {
+      "id": "courier-whistling-woman",
+      "name": "—",
+      "role": "Runner on the relay network, arriving with urgent news",
+      "description": "A lone rider on horseback, approaching from the south at dawn with a fractured pattern about them",
+      "firstMet": {
+        "locationId": "gen-whistling-woman-post",
+        "day": 16
+      },
+      "relationship": 0,
+      "history": [
+        "[d16] Arriving at Whistling Woman post at dawn with news that could not wait for the relay network's chain",
+        "[d16] Silas read her death-thread and learned she chose the direct route knowing it would fracture her path—she knew the cost and ran hot anyway because the message could not wait. Her grip on the saddlebag has not unclenched."
+      ],
+      "knownFacts": [
+        "She broke relay protocol deliberately, sent direct by someone at the Hub",
+        "She was already fever-fractured when she left—the Hub chose to fracture her further rather than delay",
+        "The message matters more to her than her own pathway holds"
+      ],
+      "skillsObserved": [
+        "Professional horsemanship",
+        "Moorland navigation"
+      ],
+      "status": "active",
+      "sex": "unknown",
+      "gender": "unknown",
+      "pronouns": "—",
+      "statusNote": "Fever-fractured, stabilized by Kept Breath but in real pain; three diverging death-paths braiding through the coming hours; grip on the encrypted message will not release",
+      "lastSeen": {
+        "locationId": "gen-whistling-woman-post",
+        "day": 16
+      },
+      "met": 2
+    },
+    "urgent-courier-whistling-woman": {
+      "id": "urgent-courier-whistling-woman",
+      "name": "Courier",
+      "nameUnknown": true,
+      "role": "Hub relay runner carrying urgent direct message",
+      "description": "A rider broken by urgency—fever-warm, gripping hard, running on the last of her strength",
+      "firstMet": {
+        "locationId": "gen-whistling-woman-post",
+        "day": 16
+      },
+      "relationship": 1,
+      "history": [
+        "[d16] Arrived at Whistling Woman at dawn carrying an encrypted slate message from the Hub—direct relay, not chain. Her death-thread is fractured; she may not reach her destination if the message is not delivered first.",
+        "[d16] Arrived at dawn carrying an encrypted slate message marked urgent-to-hand. Her death-thread reads fractured — three diverging paths through the next hours. Pell and Silas brought her inside; Kept Breath steadied the spiral.",
+        "[d16] Failed surgery left her raw but stabilized. The cautery burned wrong—Kept Breath holding, but she's in real pain. Still urgent about delivering the message despite her body's fracture."
+      ],
+      "knownFacts": [
+        "The message came through encrypted slate network marked urgent-to-hand, breaking normal relay protocol",
+        "She was ordered to carry it directly to the warden, no intermediaries",
+        "She broke relay protocol to carry this message directly",
+        "The message came encrypted, not open — highest security",
+        "She was ordered to carry it to the warden, no intermediaries",
+        "She broke relay protocol to carry this message—it came encrypted, not open chain",
+        "She was ordered direct to the warden, no intermediaries",
+        "She knew her death-thread was fractured before she left, but came anyway"
+      ],
+      "skillsObserved": [
+        "Professional horsemanship under strain",
+        "Moorland navigation in poor light",
+        "Moorland navigation in difficult conditions"
+      ],
+      "status": "injured",
+      "sex": "female",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "statusNote": "Fever-warm, stabilized by Kept Breath after failed surgical mending, in pain from the raw cautery. Three diverging death-paths still braiding through the coming hours.",
+      "lastSeen": {
+        "locationId": "gen-whistling-woman-post",
+        "day": 16
+      },
+      "met": 3
     }
   },
   "placeMemory": {
@@ -13248,24 +13341,6 @@
   "codex": {
     "schemaVersion": 1,
     "topics": {
-      "fendt-falsified-ledger": {
-        "id": "fendt-falsified-ledger",
-        "label": "Fendt and the Falsified Ledger",
-        "kind": "event",
-        "facts": [
-          "[d1] Someone named Fendt had their name marked in red chalk on the Radiant Plateau Edge District accountability board by their own supervisor. Three weeks of falsified water-purity readings under Fendt's i…",
-          "[d3] The seven removed readings were spread unevenly across three weeks — four in the first two weeks, three in the last, with a nine-day gap between the fifth and sixth. Not random, not consecutive: a pat…"
-        ],
-        "links": [
-          "millbrook",
-          "radiant-plateau-edge",
-          "overseer-grael",
-          "the-water-crisis"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "updatedDay": 3
-      },
       "millbrook": {
         "id": "millbrook",
         "label": "Millbrook",
@@ -13294,7 +13369,14 @@
           "[d13] The Crossing mill-gate keeper's last four days of readings have been worse, not better — and he chose not to write it down. The rate is accelerating and the keeper knows it.",
           "[d14] A Boundary-Stone ward now seats at the south threshold — a marked staging point on the road to the Disputed Zone, warded against weather, animals, and casual intrusion.",
           "[d14] The mill gate is an active relay hub — not a dormant node like the wayhouse, but presently channeling signal north, south, and inward through a branched network. The keeper's lodge beside it remains closed and occupied, holding silence about the water.",
-          "[d14] Mara Wells now coordinates dispatch of Fendt and construction crew to the Threshold Post at the ridge node—the network's expansion northward runs through her hands."
+          "[d14] Mara Wells now coordinates dispatch of Fendt and construction crew to the Threshold Post at the ridge node—the network's expansion northward runs through her hands.",
+          "[d1] The Deathbound Runic Spear's blade came out of the bull dry and clean — no blood on the rune-channels despite the depth of the wound. The binding closed rather than passed the Palework channel: a refu",
+          "[d2] The deeper chamber's two stand-positions are operator and confirmer — a built-in error-check. The grid records modes or states of the object in the cradle-recess, not raw measurements. The calibration",
+          "[d2] The deeper chamber's operator/confirmer design: one person called the state from the farther position, one confirmed from the nearer. The grid is an operational log, not a measurement surface — it rec",
+          "[d2] The deeper chamber's function concluded generations ago — forty years to two hundred, Attended End cannot resolve further. The room's job ended (not the structure); it has been waiting in the stillnes",
+          "[d2] The deeper chamber's grid filled marks record a last stable state — three consecutive confirmations that the object in the cradle-recess was operating correctly. Removal was deliberate and at completi",
+          "[d2] The deeper chamber grid holds thirty-one filled marks in four distinct clusters — each cluster follows a three-beat verification grammar (condition present, condition held, condition checked). Four ep",
+          "[d2] Palework on the cradle-recess confirms: the contact stain is a stationed working piece — tall, load-bearing, regularly attended, removed cleanly with no fracture or drag-scarring. Age bracket 40–200 y"
         ],
         "links": [
           "mara-wells",
@@ -13326,7 +13408,9 @@
         "kind": "mystery",
         "facts": [
           "[d1] Silas resurrected a cleaned rabbit in the upper meadow — not through any known ability, but through something prior to understanding. The valley's old grain answered. The mechanism is unknown even to…",
-          "[d1] An attempt to maintain a tether to the resurrected rabbit after release failed cleanly — the seam in the animal is not addressable from outside. Whatever authored the second pattern does not answer Si…"
+          "[d1] An attempt to maintain a tether to the resurrected rabbit after release failed cleanly — the seam in the animal is not addressable from outside. Whatever authored the second pattern does not answer Si…",
+          "[d1] Silas resurrected a cleaned rabbit in the upper meadow — not through any known ability, but through something prior to understanding. The valley's old grain answered. The mechanism is unknown even to ",
+          "[d1] An attempt to maintain a tether to the resurrected rabbit after release failed cleanly — the seam in the animal is not addressable from outside. Whatever authored the second pattern does not answer Si"
         ],
         "links": [
           "millbrook",
@@ -13353,7 +13437,14 @@
           "[d3] Huginn's ending-texture can be extended outward through Memory's collar rune with deliberate conserved attention — it reads a living person's current presence without searching for endings. Pell read…",
           "[d12] The Ashwarden explanation given to Silas's mother: not trained, drawn — present at endings because that is its work, not because it was directed there. Veth confirmed this framing as accurate from the inside.",
           "[d?] The One Who Stays — You were dying, once, and it did not leave, and it did not lie to you, and you have not spoken of it since.",
-          "[d13] When Huginn looks at Silas, it sees what it sees in dying things. Not a warning, not a prophecy — a description. It has been looking at him this way since the day they met, and it has not left. The staying is the answer."
+          "[d13] When Huginn looks at Silas, it sees what it sees in dying things. Not a warning, not a prophecy — a description. It has been looking at him this way since the day they met, and it has not left. The staying is the answer.",
+          "[d1] Asked directly, Huginn landed and gave one croak — directional (northwest), felt like 'soon' or 'already'. Will not specify what is ending up there, only that the heading is north and the matter is pr",
+          "[d2] When Silas named Pell's futures plainly — tinkers, the pass, the spear-thread — Huginn did not orient toward any horizon-ending. It stayed still. From Huginn, stillness is the answer: she is not concl",
+          "[d3] Accepts a learning-bond when approached through threshold-attention rather than reaching. Teaches by texture-transfer — the feel of reading an ending's approach while its subject is still alive. The p",
+          "[d3] Huginn reads endings not as discrete events but as a field condition — a thickening in the air around a living thing long before the ending arrives. This texture has been transferred to Silas: the fee",
+          "[d3] The Attended End confirms Huginn's teaching is real and present in Silas's grain — the texture of accumulated endings sits in him as felt knowledge, not yet organized into reliable use. The craft can ",
+          "[d3] Huginn's ending-texture can be threaded through Memory's rune alongside The Attended End — held lightly, it reads a living person's current hour without searching for an ending. Pell read as rooted, d",
+          "[d3] Huginn's ending-texture can be extended outward through Memory's collar rune with deliberate conserved attention — it reads a living person's current presence without searching for endings. Pell read "
         ],
         "links": [
           "the-water-crisis",
@@ -13397,7 +13488,10 @@
           "[d2] Accepted thirty cord-weight in standing credit — the provisioning relationship now has a live balance in Silas's favor.",
           "[d2] Briefed on the vault-failure timeline and east-channel surge — connected fish-count decline to the water crisis immediately. Committed to watching the downstream end while Silas searches beyond the va…",
           "[d1] Smokehouse operator, Millbrook",
-          "[d14] [while away] Aldric has been tending his smokehouse as usual, no notable change in his situation over the past two days."
+          "[d14] [while away] Aldric has been tending his smokehouse as usual, no notable change in his situation over the past two days.",
+          "[d1] Smokehouse operator and village provisioner — runs fixed accounts for preserved fish, has noticed the upstream contamination, wants information about its cause. Struck a provisioning deal with Silas o",
+          "[d1] Aldric noted boar were working the riverside reed-beds every morning three weeks ago and have since pushed uphill away from the water — correlates exactly with the start of the gray-green discoloratio",
+          "[d2] Briefed on the vault-failure timeline and east-channel surge — connected fish-count decline to the water crisis immediately. Committed to watching the downstream end while Silas searches beyond the va"
         ],
         "links": [
           "millbrook",
@@ -13439,7 +13533,20 @@
           "[d12] The soul bond between Silas and Pell carries craft-readings as information across its link — Pell felt the quality of the Deathsense exhale at the gate without knowing the result, received it as information rather than emotion, and accepted it cleanly. The bond's character: not Deathsense, not…",
           "[d1] Village blacksmith, traveling companion",
           "[d14] At dawn on Day 14, standing at the forge bench with Memory between them, Silas named his love plainly — and Pell named it back. The declaration and its answer are both spoken, both complete.",
-          "[d14] [while away] Pell finished a minor repair job for a local farmer, quietly setting aside a small bit of coin — not enough to act on, but the seed of readiness is there."
+          "[d14] [while away] Pell finished a minor repair job for a local farmer, quietly setting aside a small bit of coin — not enough to act on, but the seed of readiness is there.",
+          "[d3] Pell's father told her he had been a clerk — made his departure from the Plateau sound small and personal. She is not angry at him. The specification method is the living piece of him she can hold wit",
+          "[d3] Named the shape of her father in Calvar's room: he planned for her without disclosing the plan — taught her the specification method first so she would have the language when she reached the Edge Dist",
+          "[d3] Under Huginn's witness, Memory received Calvar's three-year private refusal and Pell's father's protective silence as finished things — named, settled, held. The collar rune is live to both Silas and ",
+          "[d3] Memory's rune-thread carries warmth in both directions now — Silas returned what she sent without meaning to, and she received it without closing the door. The thread is a fact between them, not a wor",
+          "[d3] The Raised Thing cannot build new structure over what is already structured — the thread between Silas and Pell via Memory's collar rune is already alive to both of them. Adding a conduit to a living ",
+          "[d3] Memory's rune-thread restored as a threshold on World-day 17 evening — warmth and presence cross, sensation does not. Pell received the corrected form without alarm; went quiet in a new way, attending",
+          "[d3] Pell's ironsense can cross Memory's rune-threshold deliberately — not warmth, but the specific grain of accumulated craft: grip-wear, heat-memory, the physical corrections of two hundred heats. She se",
+          "[d3] The Ashwarden-Wright mark of Weir was sent through Memory's rune-threshold on World-day 17 evening — offered as grain, not claim. Pell received it and went still with the breath of recognition. The ex",
+          "[d3] The Ashwarden-Wright mark of Weir has been received without management — the ledger is down, not because the column is resolved but because this cannot be entered by hand. The stillness on the other s",
+          "[d3] Named soul wife aloud on World-day 17 evening — she received it without management, said alright in the register that goes all the way in, and took his wrist. The habit is down in every sense. The bon",
+          "[d4] The consummation — World-day 17 midday, the bath trough, the habit entirely gone. She pays attention in return the way ironsense reads worked metal: finding the grain, the flaw-lines, the places where",
+          "[d4] Calvar cannot confirm Pell's father was marked by Grael — the board was clean when he left. But Calvar checked because he already suspected. A man who filed the seventh-band specification and understo",
+          "[d5] Pell named Silas's middle name — Fell — from the grain of the spear-binding: 'the shape of someone who crossed something high and open and didn't look back.' Ran is her own middle name; Silas Fell Wei"
         ],
         "links": [
           "deathsense",
@@ -13478,7 +13585,13 @@
           "[d1] Committed to the hunt on World-day 14 morning — north gate, before the light gets high. The reframe from 'arrangement' to 'going north together' resolved his hesitation. Modified light spear-tip now i…",
           "[d1] Confirmed the boar sounder's displacement pattern — driven higher by river smell on low air. Has been watching the north wood ground closely for weeks. Noted it without alarm, the way he notes a fence…",
           "[d2] Received twenty cord-weight from the hunt proceeds — a small thing, but the first time Silas paid him directly. Departed for his furlong without ceremony.",
-          "[d1] Farmer, east furlong — hunt companion"
+          "[d1] Farmer, east furlong — hunt companion",
+          "[d1] A farmer's son from Millbrook's east furlong — visits Pell's forge repeatedly to handle the mid-weight spear-tip without buying. Can't afford it; light point won't serve what he has in mind (boar). Pe",
+          "[d1] Corvin wants to take a boar from a sounder reportedly working the north wood — his repeated handling of the mid-weight spear-tip confirms the ambition. The light point won't stop a boar at the shoulde",
+          "[d1] Pell named a specific concern: Corvin will be brave in the wrong moment. She agreed to supply the spear modification at cost only because a capable person will be beside him. His location: east furlon",
+          "[d1] Pell gave exact directions — east furlong, past the second fence-line, left fork at the willow. He'll be mending something he broke or building something not fully thought through. She expects him to ",
+          "[d1] Committed to the hunt on World-day 14 morning — north gate, before the light gets high. The reframe from 'arrangement' to 'going north together' resolved his hesitation. Modified light spear-tip now i",
+          "[d1] Confirmed the boar sounder's displacement pattern — driven higher by river smell on low air. Has been watching the north wood ground closely for weeks. Noted it without alarm, the way he notes a fence"
         ],
         "links": [
           "millbrook",
@@ -13513,7 +13626,9 @@
         "kind": "place",
         "facts": [
           "[d1] Pell's memory: dense in the middle, wet lower ground fed by slope springs (prime boar territory), a granite shelf a quarter-mile north of the fence line where game trails run east-west. The granite sh…",
-          "[d1] Pell hunted the lower north wood solo for several years — wet ground from slope springs, best trail-reading in the valley floor section. A granite shelf sits roughly a quarter-mile north of the fence…"
+          "[d1] Pell hunted the lower north wood solo for several years — wet ground from slope springs, best trail-reading in the valley floor section. A granite shelf sits roughly a quarter-mile north of the fence…",
+          "[d1] Pell's memory: dense in the middle, wet lower ground fed by slope springs (prime boar territory), a granite shelf a quarter-mile north of the fence line where game trails run east-west. The granite sh",
+          "[d1] Pell hunted the lower north wood solo for several years — wet ground from slope springs, best trail-reading in the valley floor section. A granite shelf sits roughly a quarter-mile north of the fence "
         ],
         "links": [
           "millbrook",
@@ -13532,7 +13647,8 @@
         "label": "The Missing Bridge",
         "kind": "mystery",
         "facts": [
-          "[d1] Combining Deathsense and Order-Sense to fix death-knowledge into a worked object is not currently possible — the two abilities have no shared grammar. Order-Sense reads what holds; Deathsense reads wh…"
+          "[d1] Combining Deathsense and Order-Sense to fix death-knowledge into a worked object is not currently possible — the two abilities have no shared grammar. Order-Sense reads what holds; Deathsense reads wh…",
+          "[d1] Combining Deathsense and Order-Sense to fix death-knowledge into a worked object is not currently possible — the two abilities have no shared grammar. Order-Sense reads what holds; Deathsense reads wh"
         ],
         "links": [
           "the-unnamed-gift",
@@ -13549,7 +13665,8 @@
         "label": "Palework's Relay Limit",
         "kind": "lore",
         "facts": [
-          "[d1] Palework reads endings already underway — it cannot be routed outward through a bound object as a sensing relay. The death-binding's thread to Huginn is present and mutual but does not run in that dir…"
+          "[d1] Palework reads endings already underway — it cannot be routed outward through a bound object as a sensing relay. The death-binding's thread to Huginn is present and mutual but does not run in that dir…",
+          "[d1] Palework reads endings already underway — it cannot be routed outward through a bound object as a sensing relay. The death-binding's thread to Huginn is present and mutual but does not run in that dir"
         ],
         "links": [
           "millbrook",
@@ -13589,7 +13706,8 @@
           "[d15] The deep seam beneath the Threshold Post is engineered — its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
           "[d15] The deep seam beneath the Threshold Post is engineered—its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
           "[d15] Warden Coll filed an amended petition on Day 15 morning naming pole-pull (The Poles Pull arc) as the underlying cause of the water crisis, replacing the Radiant readings conspiracy theory. The Radiant leadership has responded with silence—a dangerous sign that suggests either acceptance or deeper…",
-          "[d16] Day 15: Warden Coll filed amended petition naming pole-pull (The Poles Pull arc) as root cause, replacing conspiracy theory. Radiant leadership silent—dangerous sign. Calvar's crew staged at secondary sites with materials sequenced. Third sleeve failure pattern identified at east-bend intake."
+          "[d16] Day 15: Warden Coll filed amended petition naming pole-pull (The Poles Pull arc) as root cause, replacing conspiracy theory. Radiant leadership silent—dangerous sign. Calvar's crew staged at secondary sites with materials sequenced. Third sleeve failure pattern identified at east-bend intake.",
+          "[d16] The moorland's substrate lattice is measurably thin—craft-work here runs starved and unpredictable. Unknown cause or extent."
         ],
         "links": [
           "the-threshold-post",
@@ -13622,7 +13740,15 @@
           "[d2] Her clay pipe-sections are staged longest-to-shortest, largest bore on the bottom — a repair schedule already counted by seat and sequence, prepared in silence before the mechanism was named to her. S…",
           "[d2] Given the six-week vault-failure window and surge scope on World-day 15 dawn — folded the timeline note into her apron, confirmed the figure to herself as operational, and returned her gaze to the pip…",
           "[d2] Accepted the division of labor on World-day 15 dawn — she leads east-channel mitigation while Silas and Pell seek a pre-Transition expert. Set a fifth-week arrival deadline. First mitigation target: e…",
-          "[d2] Senior east-channel irrigator, Millbrook"
+          "[d2] Senior east-channel irrigator, Millbrook",
+          "[d2] Senior east-channel irrigator, twenty-two years. Lives at the bend before the upper meadow — house with the blue gate-post, on the path north. Shares a water-right with Fen on the east bend. Mara advi",
+          "[d2] Pell's read: Dara has filed no report to the elder panel despite three weeks of sleeve blank failures — either she has no working theory or she has one she won't say aloud until someone else confirms ",
+          "[d2] Named World-day minus-nine herself before being shown Mara's note — has held an unvoiced theory about the sleeve failures for at least a week; filed nothing because she lacked a mechanism to attach th",
+          "[d2] Heard World-day minus-eighteen and recognized it rather than learning it fresh — the gap between the two dates is what her unvoiced theory could not account for. Asked whether both failure sites share",
+          "[d2] Ordered clay pipe-sections six days ago as a precautionary measure — she has been preparing for something without knowing what. Asked how long before the next valve failure, accepting the buried mecha",
+          "[d2] Her clay pipe-sections are staged longest-to-shortest, largest bore on the bottom — a repair schedule already counted by seat and sequence, prepared in silence before the mechanism was named to her. S",
+          "[d2] Given the six-week vault-failure window and surge scope on World-day 15 dawn — folded the timeline note into her apron, confirmed the figure to herself as operational, and returned her gaze to the pip",
+          "[d2] Accepted the division of labor on World-day 15 dawn — she leads east-channel mitigation while Silas and Pell seek a pre-Transition expert. Set a fifth-week arrival deadline. First mitigation target: e"
         ],
         "links": [
           "the-water-crisis",
@@ -13675,7 +13801,8 @@
         "label": "The Channel-House — Near Chamber",
         "kind": "place",
         "facts": [
-          "[d2] Three iron ring-hooks, three empty rectangular recesses below them, cut into the ashlar — deliberate storage or mounting positions. Whatever was housed here is absent. The column stain on the right wa…"
+          "[d2] Three iron ring-hooks, three empty rectangular recesses below them, cut into the ashlar — deliberate storage or mounting positions. Whatever was housed here is absent. The column stain on the right wa…",
+          "[d2] Three iron ring-hooks, three empty rectangular recesses below them, cut into the ashlar — deliberate storage or mounting positions. Whatever was housed here is absent. The column stain on the right wa"
         ],
         "links": [
           "the-water-crisis",
@@ -13692,7 +13819,8 @@
         "label": "The Deeper Chamber",
         "kind": "place",
         "facts": [
-          "[d2] Fixed-purpose room: two worn stand-positions, a hip-height ring-hook with wide cradle-recess (the object sat here and worked from here or was worked upon — it did not leave), and a calibration surface…"
+          "[d2] Fixed-purpose room: two worn stand-positions, a hip-height ring-hook with wide cradle-recess (the object sat here and worked from here or was worked upon — it did not leave), and a calibration surface…",
+          "[d2] Fixed-purpose room: two worn stand-positions, a hip-height ring-hook with wide cradle-recess (the object sat here and worked from here or was worked upon — it did not leave), and a calibration surface"
         ],
         "links": [
           "the-water-crisis",
@@ -13710,7 +13838,8 @@
         "kind": "mystery",
         "facts": [
           "[d2] An unknown dog follows Fen's niece in from the upper meadow path on some mornings. Not a local animal — Pell has no record of it. Huginn watched it leave with notable attention.",
-          "[d2] First appeared approximately three weeks ago — same span as Mara's first sleeve blank sale and the boar displacement from the riverside sedge. Arrives from the upper meadow path with Fen's niece; neve…"
+          "[d2] First appeared approximately three weeks ago — same span as Mara's first sleeve blank sale and the boar displacement from the riverside sedge. Arrives from the upper meadow path with Fen's niece; neve…",
+          "[d2] First appeared approximately three weeks ago — same span as Mara's first sleeve blank sale and the boar displacement from the riverside sedge. Arrives from the upper meadow path with Fen's niece; neve"
         ],
         "links": [
           "millbrook",
@@ -13730,7 +13859,9 @@
         "kind": "mystery",
         "facts": [
           "[d2] The pass did not open by accident — the footprints on the far side, the cradle-recess removal, and the contamination signal are connected. Something on the far side is linked to what is under the vall…",
-          "[d2] The rock overhang two miles below the far crest holds a waypoint fire-ring — same hand built it at least twice, most recently two to three weeks ago, before the pass officially opened. Single occupant…"
+          "[d2] The rock overhang two miles below the far crest holds a waypoint fire-ring — same hand built it at least twice, most recently two to three weeks ago, before the pass officially opened. Single occupant…",
+          "[d2] The pass did not open by accident — the footprints on the far side, the cradle-recess removal, and the contamination signal are connected. Something on the far side is linked to what is under the vall",
+          "[d2] The rock overhang two miles below the far crest holds a waypoint fire-ring — same hand built it at least twice, most recently two to three weeks ago, before the pass officially opened. Single occupant"
         ],
         "links": [
           "precursor-signs-in-the-valley",
@@ -13748,7 +13879,8 @@
         "label": "Edge District Contacts",
         "kind": "person",
         "facts": [
-          "[d2] Mara named two old pass circuit traders with Edge District knowledge: Sorel, a spice-broker who wintered there two years running (not heard from in a season), and Leth, an archivist type who kept care…"
+          "[d2] Mara named two old pass circuit traders with Edge District knowledge: Sorel, a spice-broker who wintered there two years running (not heard from in a season), and Leth, an archivist type who kept care…",
+          "[d2] Mara named two old pass circuit traders with Edge District knowledge: Sorel, a spice-broker who wintered there two years running (not heard from in a season), and Leth, an archivist type who kept care"
         ],
         "links": [
           "mara-wells",
@@ -13820,7 +13952,10 @@
           "[d2] The Attended End (partial) through the smokehouse wall: something is ending for Sorel — texture of a finishing road, a season closing. Something compressed and withheld. Cause and whether it is chosen…",
           "[d2] Pell's read (unconfirmed): Sorel may have the engineer's name and is filing him as 'reluctant contact' rather than naming him as a witness — to avoid being the one responsible for what Silas does with…",
           "[d2] Spice-broker, old pass circuit — Edge District contact",
-          "[d15] [while away] Sorel's contact in the Edge District sent no word back, and the day passed in the ordinary friction of waiting — nothing gained, nothing lost yet."
+          "[d15] [while away] Sorel's contact in the Edge District sent no word back, and the day passed in the ordinary friction of waiting — nothing gained, nothing lost yet.",
+          "[d2] Observed through Order-Sense at Aldric's smokehouse — standing, pack not yet down, in a long circling conversation with Aldric where news is withheld on both ends. Arrived recently. Not armed, not cor",
+          "[d2] The Attended End (partial) through the smokehouse wall: something is ending for Sorel — texture of a finishing road, a season closing. Something compressed and withheld. Cause and whether it is chosen",
+          "[d2] Pell's read (unconfirmed): Sorel may have the engineer's name and is filing him as 'reluctant contact' rather than naming him as a witness — to avoid being the one responsible for what Silas does with"
         ],
         "links": [
           "mara-wells",
@@ -13841,7 +13976,8 @@
         "label": "The Difficult Man — Pre-Transition Hydraulic Engineer",
         "kind": "person",
         "facts": [
-          "[d2] An unnamed man, reached through Leth in the Edge District — ran pressurized systems through the Plateau's foundation array before the photonic overlay was finished. Difficult; unlikely to want to come…"
+          "[d2] An unnamed man, reached through Leth in the Edge District — ran pressurized systems through the Plateau's foundation array before the photonic overlay was finished. Difficult; unlikely to want to come…",
+          "[d2] An unnamed man, reached through Leth in the Edge District — ran pressurized systems through the Plateau's foundation array before the photonic overlay was finished. Difficult; unlikely to want to come"
         ],
         "links": [
           "leth",
@@ -13858,7 +13994,8 @@
         "label": "The Person With a List",
         "kind": "mystery",
         "facts": [
-          "[d2] Someone has been moving deliberately through old pre-Transition infrastructure — removing the operator's instrument from the wash-room cradle-recess and, separately, removing targeted material from th…"
+          "[d2] Someone has been moving deliberately through old pre-Transition infrastructure — removing the operator's instrument from the wash-room cradle-recess and, separately, removing targeted material from th…",
+          "[d2] Someone has been moving deliberately through old pre-Transition infrastructure — removing the operator's instrument from the wash-room cradle-recess and, separately, removing targeted material from th"
         ],
         "links": [
           "the-water-crisis",
@@ -13876,7 +14013,8 @@
         "kind": "mystery",
         "facts": [
           "[d2] Someone moved through the Edge District archive before the pass opened, knew the exact shape of what to remove, left no method trace. Then accessed the valley's buried hydraulic system at multiple poi…",
-          "[d2] Sorel named it plainly at departure: whoever moved through the Edge District archive is ahead of Silas and Pell on the road north. Direction established — through the pass. Name unknown."
+          "[d2] Sorel named it plainly at departure: whoever moved through the Edge District archive is ahead of Silas and Pell on the road north. Direction established — through the pass. Name unknown.",
+          "[d2] Someone moved through the Edge District archive before the pass opened, knew the exact shape of what to remove, left no method trace. Then accessed the valley's buried hydraulic system at multiple poi"
         ],
         "links": [
           "the-water-crisis",
@@ -13894,7 +14032,8 @@
         "label": "The Mountain Pass",
         "kind": "place",
         "facts": [
-          "[d2] Crossed on World-day 16 — a limestone notch barely wide enough for a cart in its tightest section, iron-veined stone, wind through every gap. The far side smells of pine and open air, not mineral. Old…"
+          "[d2] Crossed on World-day 16 — a limestone notch barely wide enough for a cart in its tightest section, iron-veined stone, wind through every gap. The far side smells of pine and open air, not mineral. Old…",
+          "[d2] Crossed on World-day 16 — a limestone notch barely wide enough for a cart in its tightest section, iron-veined stone, wind through every gap. The far side smells of pine and open air, not mineral. Old"
         ],
         "links": [
           "the-water-crisis",
@@ -13928,7 +14067,8 @@
         "label": "The Unknown Traveler's Route",
         "kind": "mystery",
         "facts": [
-          "[d2] The overhang fire-ring was used twice by the same person — three weeks between visits, one pre-pass and one post-pass. A deliberate waypoint on a known route, not a chance camp. The traveler moved wit…"
+          "[d2] The overhang fire-ring was used twice by the same person — three weeks between visits, one pre-pass and one post-pass. A deliberate waypoint on a known route, not a chance camp. The traveler moved wit…",
+          "[d2] The overhang fire-ring was used twice by the same person — three weeks between visits, one pre-pass and one post-pass. A deliberate waypoint on a known route, not a chance camp. The traveler moved wit"
         ],
         "links": [
           "the-water-crisis",
@@ -13944,7 +14084,8 @@
         "label": "Silas — The Two Holds",
         "kind": "lore",
         "facts": [
-          "[d2] Silas named the fracture plainly to Pell: grew up a Wright, came to Ashwarden craft without choosing it, and the rabbit's resurrection sits between the two as something he cannot yet name. His fear: t…"
+          "[d2] Silas named the fracture plainly to Pell: grew up a Wright, came to Ashwarden craft without choosing it, and the rabbit's resurrection sits between the two as something he cannot yet name. His fear: t…",
+          "[d2] Silas named the fracture plainly to Pell: grew up a Wright, came to Ashwarden craft without choosing it, and the rabbit's resurrection sits between the two as something he cannot yet name. His fear: t"
         ],
         "links": [
           "pell",
@@ -13961,7 +14102,8 @@
         "label": "Edge District — Outer Settlement",
         "kind": "place",
         "facts": [
-          "[d3] Visible from the pass overhang at dawn: gray stone buildings, two or three chimney-smokes, a pale worn track. Huginn marked the leftmost chimney smoke at dawn — quiet, not urgent, something running th…"
+          "[d3] Visible from the pass overhang at dawn: gray stone buildings, two or three chimney-smokes, a pale worn track. Huginn marked the leftmost chimney smoke at dawn — quiet, not urgent, something running th…",
+          "[d3] Visible from the pass overhang at dawn: gray stone buildings, two or three chimney-smokes, a pale worn track. Huginn marked the leftmost chimney smoke at dawn — quiet, not urgent, something running th"
         ],
         "links": [
           "huginn",
@@ -13986,7 +14128,17 @@
           "[d5] Aldric extended an informal vouch for Fendt at the Fell Pell gathering — named him as someone who arrived with Silas Weir's name and offered to speak for him to Mara's thread. First foundation of stan…",
           "[d3] Filtration engineer, Edge District",
           "[d14] Named as warden of the Threshold Post at the ridge relay node—given charge of the network's sentinel watch and the modest infrastructure that will surround it. A chance to tend something that outlasts the weight he carried.",
-          "[d15] [while away] Fendt spent the evening repeating his account to a dockworker who had no reason to listen, and the man didn't leave — sat with it, nodded once; small, but Fendt held onto it."
+          "[d15] [while away] Fendt spent the evening repeating his account to a dockworker who had no reason to listen, and the man didn't leave — sat with it, nodded once; small, but Fendt held onto it.",
+          "[d1] Someone named Fendt had their name marked in red chalk on the Radiant Plateau Edge District accountability board by their own supervisor. Three weeks of falsified water-purity readings under Fendt's i…",
+          "[d3] The seven removed readings were spread unevenly across three weeks — four in the first two weeks, three in the last, with a nine-day gap between the fifth and sixth. Not random, not consecutive: a pat…",
+          "[d3] Mid-forties filtration engineer — hollow-cheeked, coat slept-in, hand on a latched traveling case. Was expecting someone to come, just not before the council board acted. Came through the back; he not",
+          "[d3] The paper in Fendt's coat contains his own real filtration readings — three weeks of actual river data. Someone replaced the formal ledger with false figures under his initials after he had already re",
+          "[d3] Knows Leth and has a copy of her archive breach complaint. Recognized immediately that the two threads — the ledger falsification and the archive removal — are connected. The removed material includes",
+          "[d3] The Attended End reads his ending: six weeks, one path. Exile via administrative machinery — Grael does not need to move again. One window remains: the paper formally lodged outside the Radiant hierar",
+          "[d3] Agreed to walk to Millbrook with the dried starfruit as introduction to Mara Wells. Wrote and surrendered a full page of testimony — dates, band designations, nine-day gap, Grael named with the prelim",
+          "[d5] Aldric extended an informal vouch for Fendt at the Fell Pell gathering — named him as someone who arrived with Silas Weir's name and offered to speak for him to Mara's thread. First foundation of stan",
+          "[d1] Someone named Fendt had their name marked in red chalk on the Radiant Plateau Edge District accountability board by their own supervisor. Three weeks of falsified water-purity readings under Fendt's i",
+          "[d3] The seven removed readings were spread unevenly across three weeks — four in the first two weeks, three in the last, with a nine-day gap between the fifth and sixth. Not random, not consecutive: a pat"
         ],
         "links": [
           "radiant-plateau-edge",
@@ -14004,7 +14156,8 @@
         ],
         "createdDay": 3,
         "entityId": "fendt",
-        "updatedDay": 15
+        "updatedDay": 15,
+        "summarisedAt": 0
       },
       "overseer-grael": {
         "id": "overseer-grael",
@@ -14018,7 +14171,14 @@
           "[d4] The watch-net has a readable seam: the warden pair on the lower tier runs a fixed loop that turns west at the second lamp-post, giving a ninety-second window of blind coverage at the lane-mouth. Order…",
           "[d4] Grael holds a third-tier Radiant council overseer appointment, renewable on a five-year cycle. His authority to mark the accountability board is real but procedurally bounded: the mark must be logged…",
           "[d4] Grael marked Fendt himself — no external order. Fendt asked about the seven-band readings to the wrong person (Grael's keeper); the keeper filed nothing, and Grael put the name on the board the next m…",
-          "[d4] Shadow-residue from Deathsense in the board's shadow-space confirms at least three prior marks using the identical method — keeper's silence pre-arranged, question closed, pattern practiced and refine…"
+          "[d4] Shadow-residue from Deathsense in the board's shadow-space confirms at least three prior marks using the identical method — keeper's silence pre-arranged, question closed, pattern practiced and refine…",
+          "[d3] Fendt's supervisor in the filtration array hierarchy. Named as the person who received Fendt's preliminary concern notice — three days later the formal ledger was rewritten under Fendt's initials. Whe",
+          "[d3] Grael received Fendt's preliminary concern notice naming the seventh band by band designation — meaning his subsequent suppression of those exact readings was surgical and deliberate, not approximate ",
+          "[d3] Grael's runner is named Rennic (initials R.V.) — appears in the optics array intake collection log at every first-and-third-morning slot for six unbroken weeks, including the week Calvar's calibration",
+          "[d4] The watch-net has a readable seam: the warden pair on the lower tier runs a fixed loop that turns west at the second lamp-post, giving a ninety-second window of blind coverage at the lane-mouth. Order",
+          "[d4] Grael holds a third-tier Radiant council overseer appointment, renewable on a five-year cycle. His authority to mark the accountability board is real but procedurally bounded: the mark must be logged ",
+          "[d4] Grael marked Fendt himself — no external order. Fendt asked about the seven-band readings to the wrong person (Grael's keeper); the keeper filed nothing, and Grael put the name on the board the next m",
+          "[d4] Shadow-residue from Deathsense in the board's shadow-space confirms at least three prior marks using the identical method — keeper's silence pre-arranged, question closed, pattern practiced and refine"
         ],
         "links": [
           "find-the-engineer",
@@ -14045,7 +14205,11 @@
           "[d3] Huginn's attention fixed on Leth's unopened document roll — preservation-weight paper, tied with dark waxed cord, set deliberately on the desk rather than filed with the others. The bird attends to en…",
           "[d3] Order-Sense confirms the diagram shows only the seventh-band section — deliberate exclusion of the upper bands, primary intake, and northeastern branching conduit. The larger design is present in its…",
           "[d3] Palework confirms the fresher ink at the lower-right corner was added within forty-eight hours of this reading — after Calvar left the diagram with Leth three days ago. The hand was working fast under…",
-          "[d3] Leth did not add the fresher notation — confirmed. An unknown actor entered her archive room during one of the two nights after Calvar left the diagram. The entry was undetected; the room was accessib…"
+          "[d3] Leth did not add the fresher notation — confirmed. An unknown actor entered her archive room during one of the two nights after Calvar left the diagram. The entry was undetected; the room was accessib…",
+          "[d3] Huginn's attention fixed on Leth's unopened document roll — preservation-weight paper, tied with dark waxed cord, set deliberately on the desk rather than filed with the others. The bird attends to en",
+          "[d3] Order-Sense confirms the diagram shows only the seventh-band section — deliberate exclusion of the upper bands, primary intake, and northeastern branching conduit. The larger design is present in its ",
+          "[d3] Palework confirms the fresher ink at the lower-right corner was added within forty-eight hours of this reading — after Calvar left the diagram with Leth three days ago. The hand was working fast under",
+          "[d3] Leth did not add the fresher notation — confirmed. An unknown actor entered her archive room during one of the two nights after Calvar left the diagram. The entry was undetected; the room was accessib"
         ],
         "links": [
           "find-the-engineer",
@@ -14085,7 +14249,17 @@
           "[d13] [while away] A gap opened in the cloud cover at an hour when it shouldn't have, and the readings it produced don't match the model he has been trusting — not wrong enough to act on yet, but wrong enough that he wrote the discrepancy down, which is the first crack in his reason to stay.",
           "[d14] [while away] A gap in the cloud cover last night gave Calvar an unusually clean read, and the numbers came out slightly wrong — not wrong enough to be certain, but wrong enough that he wrote the figure down twice and underlined it.",
           "[d14] [while away] A gap in the cloud cover this morning gave him the clearest read he has had in six days, and the numbers from it do not match the numbers from this window — not wildly, but enough that he wrote it down twice and underlined it.",
-          "[d14] [while away] A second instrument recorded a pressure differential Calvar had previously dismissed as sensor drift — the numbers now form a pattern he cannot attribute to noise, and he has been sitting with it for three hours without finding a counter-reading."
+          "[d14] [while away] A second instrument recorded a pressure differential Calvar had previously dismissed as sensor drift — the numbers now form a pattern he cannot attribute to noise, and he has been sitting with it for three hours without finding a counter-reading.",
+          "[d3] Calvar was taught the seventh-band specification method directly by Pell's father — a mentor relationship. He believed Pell's father dead. The name landing in the room visibly moved him: seven years o",
+          "[d3] Calvar wrote to Pell's father after the Great Transition — letters that eventually stopped. He read the silence as death, held that assumption for seven years. The two men had a genuine mentor-student",
+          "[d3] Calvar filed a copy of the seventh-band calibration files as personal correspondence — Pell's father's own letters with margin notations in his hand. Rennic missed it. Calvar sent copies to three loca",
+          "[d3] The third copy of the seventh-band calibration files was sent by Calvar to the Filtration Council annex in the lower Plateau district approximately fourteen years ago — before the administrative chang",
+          "[d3] Filed the third copy of the seventh-band calibration files as personal correspondence bound with Pell's father's letters — deliberately obscured to survive Rennic's collection. Located in the Filtrati",
+          "[d4] [while away] Reviewing last night's seventh-band log, Calvar found a seventeen-minute gap in the low-frequency baseline that his specification explicitly flags as instrument drift — but the gap's edge",
+          "[d4] Calvar's departure lamp is absent from the window on World-day 18 afternoon; a watcher with dry boots is stationed under the tallow-chandler's awning opposite the cooperage. The agreed signal has not ",
+          "[d4] The Ended Threat reads the watcher outside his cooperage window as patient and reporting — no trigger imminent, no action yet dispatched. The threat is real but upstream of its own edge. A window exis",
+          "[d5] Calvar brought to Mara Wells's store on World-day 18 mid-morning — she recognized his purpose immediately, used Dara's phrase back unprompted, and extended her hand to him first. The briefing chain be",
+          "[d5] Calvar placed the document roll on Mara's counter and named himself witness, not authority — deferring to local knowledge on whose hands it belongs in. His first diagnostic question was intake sleeve "
         ],
         "links": [
           "vash-lens-grinder-east-room",
@@ -14115,7 +14289,12 @@
           "[d5] Calvar briefed on Millbrook's layout, key people, and the water crisis stakes on the first hour of the road south. He asked one precise question — intake sleeve material — and filed the rest without c…",
           "[d5] Calvar arrived in Millbrook mid-morning on World-day 18 — he read the drainage cut on the road approach and said nothing. The document roll is intact. The chain is in the valley.",
           "[d5] Evening gathering called at Pell's forge — Dara, Aldric, Fendt, Mara, and Calvar all summoned. The chain is complete and in the valley; the meeting tonight ends one thread and will open others.",
-          "[d5] Valley response formally delegated at the Fell Pell on World-day 18 evening: Calvar leads east-channel repair crews, Dara Holt runs logistics, Mara runs resupply and communications, Aldric anchors dow…"
+          "[d5] Valley response formally delegated at the Fell Pell on World-day 18 evening: Calvar leads east-channel repair crews, Dara Holt runs logistics, Mara runs resupply and communications, Aldric anchors dow…",
+          "[d3] The engineer is Calvar — above the cooperage on the east lane of the Edge District. The removal of his calibration files from Leth's archive has strategically undermined his ability to prove his own a",
+          "[d4] Calvar extracted from the cooperage with the rolled document intact — party now at the Low Lamp Inn, a safe stopping point. The road to Millbrook is next; the Grael chain remains the immediate open qu",
+          "[d4] Pell deduced that the seventh-band specification authorship runs backward from Calvar to his teacher — the original council archive filing may name Pell's father as author. This would reveal the shape",
+          "[d5] Calvar briefed on Millbrook's layout, key people, and the water crisis stakes on the first hour of the road south. He asked one precise question — intake sleeve material — and filed the rest without c",
+          "[d5] Valley response formally delegated at the Fell Pell on World-day 18 evening: Calvar leads east-channel repair crews, Dara Holt runs logistics, Mara runs resupply and communications, Aldric anchors dow"
         ],
         "links": [
           "overseer-grael",
@@ -14136,7 +14315,8 @@
         "label": "Grael's Runner — File Removal Witness",
         "kind": "person",
         "facts": [
-          "[d3] A figure with a cut-cord pack who collects from the optics array on the first and third morning of each week — named by Vash as the person who physically removed Calvar's calibration files from the Ed…"
+          "[d3] A figure with a cut-cord pack who collects from the optics array on the first and third morning of each week — named by Vash as the person who physically removed Calvar's calibration files from the Ed…",
+          "[d3] A figure with a cut-cord pack who collects from the optics array on the first and third morning of each week — named by Vash as the person who physically removed Calvar's calibration files from the Ed"
         ],
         "links": [
           "overseer-grael",
@@ -14153,7 +14333,8 @@
         "label": "Optics Array Intake Collection Log",
         "kind": "lore",
         "facts": [
-          "[d3] A live working document kept in the array-office foyer — not archived, not restricted. Records every collector visit to the optics array by name, date, and initials. Leth believes it holds the name of…"
+          "[d3] A live working document kept in the array-office foyer — not archived, not restricted. Records every collector visit to the optics array by name, date, and initials. Leth believes it holds the name of…",
+          "[d3] A live working document kept in the array-office foyer — not archived, not restricted. Records every collector visit to the optics array by name, date, and initials. Leth believes it holds the name of"
         ],
         "links": [
           "find-the-engineer",
@@ -14189,7 +14370,8 @@
         "label": "Memory's Shared Thread",
         "kind": "mystery",
         "facts": [
-          "[d3] The collar rune on Memory carries a live resonance channel between Silas and Pell — reachable through Order-Sense and Deathsense in combination. At conserved intensity it transmits presence, not words…"
+          "[d3] The collar rune on Memory carries a live resonance channel between Silas and Pell — reachable through Order-Sense and Deathsense in combination. At conserved intensity it transmits presence, not words…",
+          "[d3] The collar rune on Memory carries a live resonance channel between Silas and Pell — reachable through Order-Sense and Deathsense in combination. At conserved intensity it transmits presence, not words"
         ],
         "links": [
           "pell",
@@ -14209,7 +14391,9 @@
           "[d3] The Attended End can anchor a maker's mark — a permanent grain-signature sent as offer rather than claim — through Memory's rune-threshold. The craft stirs and holds it when something acquires permane…",
           "[d5] The Attended End read both men at the limestone bend: no death in either frame. The broad man carries a bruised rib and will bury a sister come summer — the aggression is borrowed from grief not yet a…",
           "[d5] Named a man's coming grief — a sister, come summer — aloud in front of him, and he knew without asking how the Ashwarden knew. The reading, shown on the face, is its own argument.",
-          "[d14] The Zone-changed wolverine at the clearing was not Zone-born. Eleven or twelve years old, mature female, had whelped twice — lived ordinary wolverine years before the Zone changed her slowly, a rewiring rather than a breaking. She was not sick, not failing, not being consumed by whatever had…"
+          "[d14] The Zone-changed wolverine at the clearing was not Zone-born. Eleven or twelve years old, mature female, had whelped twice — lived ordinary wolverine years before the Zone changed her slowly, a rewiring rather than a breaking. She was not sick, not failing, not being consumed by whatever had…",
+          "[d3] The Attended End can anchor a maker's mark — a permanent grain-signature sent as offer rather than claim — through Memory's rune-threshold. The craft stirs and holds it when something acquires permane",
+          "[d5] The Attended End read both men at the limestone bend: no death in either frame. The broad man carries a bruised rib and will bury a sister come summer — the aggression is borrowed from grief not yet a"
         ],
         "links": [
           "pell",
@@ -14234,7 +14418,8 @@
         "facts": [
           "[d4] Innkeeper of the Low Lamp Inn — keeps the ledger without ceremony, reads guests fast, offers practical road-knowledge without being asked. Confirmed Silas's Weir mark settled at check-in. Knows the Mi…",
           "[d4] Innkeeper, Low Lamp Inn — Edge District",
-          "[d15] [while away] Maret secured a small delivery of tallow candles from a chandler passing through, easing the inn's stock shortage that had been quietly worrying her since she opened."
+          "[d15] [while away] Maret secured a small delivery of tallow candles from a chandler passing through, easing the inn's stock shortage that had been quietly worrying her since she opened.",
+          "[d4] Innkeeper of the Low Lamp Inn — keeps the ledger without ceremony, reads guests fast, offers practical road-knowledge without being asked. Confirmed Silas's Weir mark settled at check-in. Knows the Mi"
         ],
         "links": [
           "radiant-plateau-edge",
@@ -14264,7 +14449,8 @@
         "label": "Ended Threat + Wildcraft: Braided Sequence-Break",
         "kind": "lore",
         "facts": [
-          "[d4] The Ended Threat collapsed the relay figure's forming action at its hinge — the whistle never left the pocket. Wildcraft then placed his attention south with thrown gravel. Used in sequence, the two c…"
+          "[d4] The Ended Threat collapsed the relay figure's forming action at its hinge — the whistle never left the pocket. Wildcraft then placed his attention south with thrown gravel. Used in sequence, the two c…",
+          "[d4] The Ended Threat collapsed the relay figure's forming action at its hinge — the whistle never left the pocket. Wildcraft then placed his attention south with thrown gravel. Used in sequence, the two c"
         ],
         "links": [
           "find-the-engineer",
@@ -14280,7 +14466,8 @@
         "label": "Edge District — Craft Interference",
         "kind": "lore",
         "facts": [
-          "[d5] The Edge District's photonic order and layered mineral contamination in its groundwater interfere with death-reading crafts — The Attended End returned static noise rather than a clean read. The place…"
+          "[d5] The Edge District's photonic order and layered mineral contamination in its groundwater interfere with death-reading crafts — The Attended End returned static noise rather than a clean read. The place…",
+          "[d5] The Edge District's photonic order and layered mineral contamination in its groundwater interfere with death-reading crafts — The Attended End returned static noise rather than a clean read. The place"
         ],
         "links": [
           "the-water-crisis",
@@ -14297,7 +14484,8 @@
         "kind": "place",
         "facts": [
           "[d5] A miner's settlement on the south slope, three miles past the lower ford. Two dry seasons running — the dryness pushed at least two men onto the road. Settlement may have direct knowledge of upstream…",
-          "[d5] Bren Thalle and Curis directed north to Mara Wells in Millbrook — two of the settlement's displaced heading toward honest work rather than the road."
+          "[d5] Bren Thalle and Curis directed north to Mara Wells in Millbrook — two of the settlement's displaced heading toward honest work rather than the road.",
+          "[d5] A miner's settlement on the south slope, three miles past the lower ford. Two dry seasons running — the dryness pushed at least two men onto the road. Settlement may have direct knowledge of upstream "
         ],
         "links": [
           "the-water-crisis",
@@ -14314,7 +14502,8 @@
         "label": "Quiet's Ending",
         "kind": "mystery",
         "facts": [
-          "[d5] Huginn named Quiet as ending in Silas. Pell's operational read: three new things since it began — the resurrection in the upper meadow, the spear-binding, the soul-mark exchange. One of these (or thei…"
+          "[d5] Huginn named Quiet as ending in Silas. Pell's operational read: three new things since it began — the resurrection in the upper meadow, the spear-binding, the soul-mark exchange. One of these (or thei…",
+          "[d5] Huginn named Quiet as ending in Silas. Pell's operational read: three new things since it began — the resurrection in the upper meadow, the spear-binding, the soul-mark exchange. One of these (or thei"
         ],
         "links": [
           "the-attended-end",
@@ -14334,7 +14523,8 @@
           "[d5] Order-Sense turned inward: Quiet was predicated on structural solitude — the single-point standing at the boundary. Three change-points loosened it: the resurrection (violation of ordinary sequence re…",
           "[d5] Pell's read: Quiet's ending is not a sickness or a loss — something grew past what it was built for. Three change-points named. The trajectory beyond the loosening has not yet been spoken aloud.",
           "[d5] Pell tested 'Silas Fell Weir' aloud and named it kept — a word for careful use. The middle name is now a settled fact between them, spoken once in full at the forge.",
-          "[d5] Silas said 'Fell' back to Pell in his own voice — the middle name is sealed. The three change-points are named and held; the trajectory past the loosening remains unspoken."
+          "[d5] Silas said 'Fell' back to Pell in his own voice — the middle name is sealed. The three change-points are named and held; the trajectory past the loosening remains unspoken.",
+          "[d5] Order-Sense turned inward: Quiet was predicated on structural solitude — the single-point standing at the boundary. Three change-points loosened it: the resurrection (violation of ordinary sequence re"
         ],
         "links": [
           "pell",
@@ -14371,7 +14561,8 @@
         "label": "The Fellowship of the Fell",
         "kind": "faction",
         "facts": [
-          "[d5] Sealed on World-day 18 evening at the Fell Pell — Silas Weir, Pell, Calvar, Dara Holt, Mara Wells, Aldric, and Fendt. Named aloud: 'Thus begins the fellowship of the Fell.' The deathwork closing was p…"
+          "[d5] Sealed on World-day 18 evening at the Fell Pell — Silas Weir, Pell, Calvar, Dara Holt, Mara Wells, Aldric, and Fendt. Named aloud: 'Thus begins the fellowship of the Fell.' The deathwork closing was p…",
+          "[d5] Sealed on World-day 18 evening at the Fell Pell — Silas Weir, Pell, Calvar, Dara Holt, Mara Wells, Aldric, and Fendt. Named aloud: 'Thus begins the fellowship of the Fell.' The deathwork closing was p"
         ],
         "links": [
           "millbrook",
@@ -14441,7 +14632,17 @@
           "[d3] The original calibration files would have proven the seventh-band monitoring blind spot was a deliberate design specification written into the filtration array at setup — not an oversight. Whoever too…",
           "[d3] The traveling case is not a flight kit — it is a staged handoff. Fendt positioned himself here deliberately, waiting for someone outside the Radiant hierarchy to arrive and carry the real paper somewh…",
           "[d3] The Plateau's nanite lattice does not extend meaningfully to outsiders — Calvar confirms it took three years of residence before it even acknowledged him, and it never spoke clearly. Ashwarden craft r…",
-          "[d3] you have walked here"
+          "[d3] you have walked here",
+          "[d3] A narrow-colonnaded administrative building, second from the corner on the main light-guide street of the Edge District. Huginn has been watching it with fixed attention since arrival — something in t",
+          "[d3] The building has a rear service door in the parallel service lane — iron-banded, not latched. A cloth-wrapped bundle (working-kit or records-sized, tied with a single cord) leans beside it. Huginn wat",
+          "[d3] Interior rear storage room: mostly-bare shelves (recently disturbed), one oil lamp burning, open staircase to upper floor. The room smells of water-treatment solvent — filtration array provenance. One",
+          "[d3] The figure's departure is voluntary and self-scheduled — he believes he has hours. The ending is institutional (the role closes in 3–4 days from outside pressure), not personal. The paper pocketed is ",
+          "[d3] The seventh-band monitoring blind spot was not an oversight — someone at original array setup deliberately excluded it from active monitoring windows, and then structured the documentation so that era",
+          "[d3] Fendt's eleven years of readings flagged elevated particulate in the seventh band — consistent and directional, trending upstream over three weeks. Not natural sediment behavior. These are the figures",
+          "[d3] Fendt names the implication: whoever targeted the seventh-band calibration files knew that band would matter before the readings started — the breach was preparation, not reaction. The sequence begins",
+          "[d3] The original calibration files would have proven the seventh-band monitoring blind spot was a deliberate design specification written into the filtration array at setup — not an oversight. Whoever too",
+          "[d3] The traveling case is not a flight kit — it is a staged handoff. Fendt positioned himself here deliberately, waiting for someone outside the Radiant hierarchy to arrive and carry the real paper somewh",
+          "[d3] The Plateau's nanite lattice does not extend meaningfully to outsiders — Calvar confirms it took three years of residence before it even acknowledged him, and it never spoke clearly. Ashwarden craft r"
         ],
         "links": [
           "pell",
@@ -14473,7 +14674,11 @@
           "[d3] Leth is physically present at her archive room in the Edge District — Sorel's letter arrived this morning. She refers to the engineer as 'Grael's engineer', a framing that suggests she knows the polit…",
           "[d3] Leth dates the breach precisely at six weeks ago. The taker knew the working layout — secondary stack, third tier, east corner — not the public-facing organization. This is insider knowledge or prior…",
           "[d3] Entry was made through a shared rear corridor — an east-wall door flush with the shelving in Leth's room, connecting three rooms in the same row. The intruder knew the building's interior layout: this…",
-          "[d3] Archivist, Edge District"
+          "[d3] Archivist, Edge District",
+          "[d3] Leth filed a formal breach complaint two weeks ago to the district records office. The removed material was historical calibration files — old array-setup records, pre-Transition provenance documentat",
+          "[d3] Leth is physically present at her archive room in the Edge District — Sorel's letter arrived this morning. She refers to the engineer as 'Grael's engineer', a framing that suggests she knows the polit",
+          "[d3] Leth dates the breach precisely at six weeks ago. The taker knew the working layout — secondary stack, third tier, east corner — not the public-facing organization. This is insider knowledge or prior ",
+          "[d3] Entry was made through a shared rear corridor — an east-wall door flush with the shelving in Leth's room, connecting three rooms in the same row. The intruder knew the building's interior layout: this"
         ],
         "links": [
           "overseer-grael",
@@ -14488,7 +14693,8 @@
         "aliases": [
           "Leth — Edge District Archivist",
           "Leth's Archive Complaint",
-          "leth archive complaint"
+          "leth archive complaint",
+          "Leth"
         ],
         "createdDay": 2,
         "updatedDay": 3,
@@ -14522,7 +14728,16 @@
           "[d13] Pip Cotter left a general notice at the Hub message post naming Fendt at the Fell Pell as a man who knows his trade — quietly advertising his standing to anyone asking after a filtration engineer at the hub level.",
           "[d13] Grael named formally to Warden Coll on Day 13 afternoon in the Registry office — on the record, with the document roll in hand. Coll needs a signed witness statement in Silas's hand with his Post Master mark before the committee can act.",
           "[d13] Hub committee has issued a formal summons for a named representative in three days — Mara Wells wrote Silas Weir's name on the reply without being asked.",
-          "[d14] Holds a shadow-sheet privately linked to Silas's own — plain-text only, immediate relay, cleared by palm-pass. Her primary communication channel while the party is in the Zone."
+          "[d14] Holds a shadow-sheet privately linked to Silas's own — plain-text only, immediate relay, cleared by palm-pass. Her primary communication channel while the party is in the Zone.",
+          "[d3] Authorship chain closed: Pell's father built the seventh-band blind-spot monitoring into the filtration specification at foundation. Fendt's copied notation — a three with the loop closing before the ",
+          "[d3] Written testimony secured from Fendt — names Grael, the seven falsified entries, and the nine-day gap. One copy with Silas; one in Fendt's case lining. Fendt on the road to Mara Wells. The remaining g",
+          "[d3] The formal lodgment path is now mapped: Fendt's testimony, Leth's breach complaint, Vash's eyewitness account, and Rennic in the intake log form the chain. A second copy of the calibration files — fro",
+          "[d4] The complete accountability chain is now closed: Grael marked Fendt himself to close a question Fendt asked his keeper about the seven-band readings. The keeper filed nothing. Grael's motive — protect",
+          "[d4] Grael's runner is Rendic Vael — confirmed in the optics array intake collection log, first-and-third-morning schedule, initials R.V. across four entries in two weeks. He is the keeper whose silence cl",
+          "[d4] The accountability chain is now sealed in a document roll: Grael's marking authority, Rendic Vael as the keeper whose silence closed the record, the seven-band inquiry as the triggering question, and ",
+          "[d5] Mara Wells named the document roll's destination and carrier at the Fell Pell gathering on World-day 18 evening — delivery to the district records office arranged before week's end. The accountability",
+          "[d5] Silas's witness statement added to the roll on World-day 18 evening — the complete chain now in his hand under Calvar's wax seal. Fendt formally named to the fellowship. The gathering sealed: 'Thus be",
+          "[d1] Village supply store operator, Millbrook"
         ],
         "links": [
           "fendt",
@@ -14535,7 +14750,8 @@
           "pell"
         ],
         "aliases": [
-          "The Edge District Ledger"
+          "The Edge District Ledger",
+          "Mara Wells"
         ],
         "createdDay": 1,
         "updatedDay": 14,
@@ -14566,7 +14782,14 @@
           "[d14] [while away] She turned the overheard words over again through a long, quiet shift and still cannot place what kind of thing they were a piece of — the shape of it won't resolve.",
           "[d14] [while away] She found someone who was in the corridor at the same time and, without revealing what she heard, asked a careful sideways question — the answer confirmed that what she overheard was not routine, and the weight of that has settled into something she can no longer defer.",
           "[d14] [while away] Vash spent the evening quietly tracing the words she overheard against what she's since learned, and one piece locked into another — she now understands whose name was missing from what was said, and why its absence mattered.",
-          "[d14] [while away] Alone with the fragment long enough, Vash finally placed the overheard words in their right sequence and understood what she had been holding — not a conspiracy, not a warning, but a private grief made briefly audible, and the weight she felt was not guilt but the ordinary ache of…"
+          "[d14] [while away] Alone with the fragment long enough, Vash finally placed the overheard words in their right sequence and understood what she had been holding — not a conspiracy, not a warning, but a private grief made briefly audible, and the weight she felt was not guilt but the ordinary ache of…",
+          "[d3] Occupies the east room of the same three-room row as Leth's archive. Does piecework for the optics weavers — in before first light, gone by midday. Was on the grinding wheel the morning Calvar came an",
+          "[d3] Leth confirmed the rear corridor access does not lock from the archive side — Vash could have entered during either night after Calvar left the diagram. Leth has agreed to lead Silas to the corridor d",
+          "[d3] Vash's east room contains four thin glass circles on a cord and a folded page in the same fast-pressed hand as the characters added to Calvar's diagram — confirming Vash as the diagram-marker and sugg",
+          "[d3] The folded page is three days old — written the same morning Calvar left the diagram with Leth, within hours of the corridor conversation. The hand is even, the pressure controlled. Vash was not frigh",
+          "[d3] Vash is an eyewitness to the file removal — Grael's runner (cut-cord pack, optics array collector, first and third mornings) took the calibration files from the secondary stack six weeks ago. Vash add",
+          "[d3] Vash's testimony relayed to Leth — confirmed: the four characters added to Calvar's diagram are authentication marks from a binding receipt, and the folded page explicitly names Grael's runner (cut-co",
+          "[d4] [while away] While dressing her wheel's edge before first light, Vash reconstructed the overheard phrase word by word and realized the term she couldn't place was a pre-Transition calibration interval"
         ],
         "links": [
           "leth",
@@ -14595,7 +14818,8 @@
           "[d3] Asked what it sees ending in Silas, Huginn chose one word after three breaths: 'Quiet.' It did not elaborate. The work has begun.",
           "[d14] Veth named the next lesson plainly at the reclamation bowl at dawn: sit with something dying that cannot be helped. Not to read it, not to fix it — to be the one who stays. Silas has been good at finding the thing that can be turned aside; the lesson he has not yet taken is the one where nothing…",
           "[d14] Veth received the badger and the warden as real attended endings — then named plainly what remains: a death that does not choose and cannot be turned aside. Both prior attendances had an element of completion or willingness. The missing lesson is the plain arrival.",
-          "[d14] On Day 14 morning, Silas gave a Zone-changed creature a directed purpose — south to the hollow, find the badger — and the instruction took partially. Veth named the limit plainly: the instruction was given; whether it holds is the next question. Attending is not the same as commanding."
+          "[d14] On Day 14 morning, Silas gave a Zone-changed creature a directed purpose — south to the hollow, find the badger — and the instruction took partially. Veth named the limit plainly: the instruction was given; whether it holds is the next question. Attending is not the same as commanding.",
+          "[d3] Silas named aloud — to Calvar, Pell, and Huginn — that the Ashwarden work is his own track on the road. Huginn acknowledged it without denying it. The bird has not objected to being called his tie to "
         ],
         "links": [
           "huginn",
@@ -14625,6 +14849,54 @@
         "createdDay": 16,
         "entityId": "hub-runner-relay",
         "updatedDay": 16
+      },
+      "water-keeper": {
+        "id": "water-keeper",
+        "label": "Mara Wells",
+        "kind": "person",
+        "facts": [
+          "[d1] Runs the village supply store east of the well — red door. Stocks rope, hardware, and occasional traded-in traps. Telling her the smokehouse sent you avoids a finder's fee. Named by Aldric as the firs",
+          "[d1] Runs the village supply store east of the well — red door. Stocks rope (three weights), sorted hardware, and occasional traded-in tools. Keeps a close ledger. Reacted to Huginn's presence without alar",
+          "[d1] Order-Sense surge revealed her store runs on a deliberate inventory logic — weight-sorted, frequency-ordered, ledger-spined. She has undisplayed wire stock (same gauge as the snare frames) and a fresh",
+          "[d1] Runs a standing trade account with Aldric's smokehouse — can credit goods against it. Keeps seasoned ash shafts in the back (not displayed); had three, foresters took one last week, two remain.",
+          "[d1] Keeps reserve stock not on display — including a fine-grit river whetstone she'd held three weeks for Pell, never delivered. Treats gift logistics the same as inventory. Sold two ash shafts: one on Al",
+          "[d2] Stocks a bottle of resin mountain wine from an Adaptor settlement south of the Disputed Zone, and sealed dried starfruit from the old pass circuit — both unusual goods, kept in back reserve.",
+          "[d2] Registered that the wine and starfruit are a gift for Pell without reaction — noted the whetstone connection and moved the goods across the counter. Treats gift logistics the same as any other transac",
+          "[d2] Keeps cross-referenced sales logs precise enough to reconstruct a failure timeline three weeks back without prompting. Tore a note page for Silas without naming a price — treating civic information di",
+          "[d2] Assembled expedition kit (tallow, oilcloth, pine-tar salve) without being prompted for a list — priced at eight cord-weight or Aldric offset. Flagged Aldric as a source for cured bladder waterskins fr",
+          "[d2] Holds pre-Transition river-purification tabs in personal stock — sent a vial with Pip as a follow-up expedition supply. One of the last stocks in the world, by her own estimate."
+        ],
+        "links": [
+          "millbrook",
+          "aldric",
+          "aldric-provisioning-deal",
+          "pell",
+          "the-water-crisis"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "water-keeper",
+        "updatedDay": 2
+      },
+      "leth-edge-district": {
+        "id": "leth-edge-district",
+        "label": "Leth — Edge District Archivist",
+        "kind": "person",
+        "facts": [
+          "[d2] Leth is a records-keeper in the Edge District — cross-referenced, annotated, nothing lost. She is not the engineer Silas needs, but she knows one: a difficult man who ran pressurized pre-Transition sy",
+          "[d2] Leth wrote to Sorel last month reporting that someone had been through the Edge District archive room — not to study but to remove. The absence was specific and targeted. Leth knew the shape of what w"
+        ],
+        "links": [
+          "the-water-crisis",
+          "precursor-signs-in-the-valley",
+          "sorel",
+          "millbrook",
+          "the-person-with-a-list",
+          "pell"
+        ],
+        "aliases": [],
+        "createdDay": 2,
+        "updatedDay": 2
       }
     },
     "notSame": [
@@ -14752,6 +15024,14 @@
           "unnamed-hydraulic-engineer"
         ]
       }
+    ],
+    "swept": [
+      {
+        "from": "fendt-falsified-ledger",
+        "label": "Fendt and the Falsified Ledger",
+        "to": "fendt",
+        "moved": 2
+      }
     ]
   },
   "tendencies": {
@@ -14781,7 +15061,7 @@
   ],
   "actionCount": 952,
   "grantsVersion": 1,
-  "reconcileVersion": 40,
+  "reconcileVersion": 41,
   "gallery": [
     {
       "kind": "moment",
@@ -15391,8 +15671,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1788726015925,
-  "rev": 1794,
+  "updatedAt": 1788726682333,
+  "rev": 3000,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -20822,6 +21102,26 @@
         "raw_material": 2
       },
       "lastFeatureOfferCount": 1652
+    },
+    {
+      "id": "whistling-woman-post",
+      "kind": "post",
+      "name": "Whistling Woman Post",
+      "locationId": "gen-whistling-woman-post",
+      "steward": "deni-cors",
+      "obligation": null,
+      "condition": "holding",
+      "claimedDay": 16,
+      "lastMovedWorldCount": null,
+      "history": [
+        {
+          "at": null,
+          "from": "holding",
+          "to": "holding",
+          "note": "claimed — the fiction had given it four times over: warded threshold, relay music-box, shelter and provisions; Deni Cors keeps it"
+        }
+      ],
+      "describedAs": "a warden-staffed waystation on the moorland relay network"
     }
   ],
   "skillUses": {

@@ -660,7 +660,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `tree` | 429 | `root`×429 | ✅ READ | `backfill.js`, `braids.js`, `capabilities.js` |
 | `bounds` | 427 | `root`×427 | ✅ READ | `gm.js` |
 | `mechanic` | 422 | `root`×422 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
-| `plainly` | 419 | `root`×419 | ✅ READ | `gm.js`, `narration_voice.js`, `app.js` |
+| `plainly` | 419 | `root`×419 | ✅ READ | `gm.js`, `narration_voice.js`, `recovery_snapshots.js` |
 | `challengeTypes` | 414 | `root`×414 | ⚠️ CI-ONLY | _4 test/script only_ |
 | `energyCost` | 411 | `root`×411 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
 | `levelReq` | 405 | `root`×405 | ✅ READ | `backfill.js`, `braids.js`, `company.js` |
@@ -671,7 +671,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `rankDeltas` | 284 | `root`×284 | ✅ READ | `craftmechanics.js` |
 | `note` | 236 | `mechanic`×236 | ✅ READ | `art.js`, `assignments.js`, `authormode.js` |
 | `effectTags` | 190 | `root`×190 | ✅ READ | `battleprompt.js`, `braids.js`, `martial.js` |
-| `scope` | 155 | `mechanic`×155 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `app.js` |
+| `scope` | 155 | `mechanic`×155 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `recovery_snapshots.js` |
 | `targets` | 146 | `mechanic`×146 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `reconcile.js` |
 | `gated` | 110 | `root`×110 | ✅ READ | `borncontract.js`, `generate.js`, `gm_registry.js` |
 | `damageType` | 107 | `mechanic`×107 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
@@ -739,7 +739,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `uses` | 1 | `mechanic`×1 | ✅ READ | `backfill.js`, `corrections.js`, `craftmechanics.js` |
 | `type` | 1 | `mechanic`×1 | ✅ READ | `battle_turn.js`, `borncontract.js`, `canon.js` |
 | `status` | 1 | `root`×1 | ✅ READ | `assignments.js`, `authormode.js`, `backfill.js` |
-| `trails` | 1 | `mechanic`×1 | ✅ READ | `gm.js` |
+| `trails` | 1 | `mechanic`×1 | ✅ READ | `gm.js`, `recovery_snapshots.js` |
 | `awaitingEngine` | 1 | `mechanic`×1 | ⛔ DARK | — |
 | `questions` | 1 | `mechanic`×1 | ✅ READ | `app.js` |
 | `reachesDepth` | 1 | `mechanic`×1 | ⛔ DARK | — |

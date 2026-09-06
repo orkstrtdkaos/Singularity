@@ -851,7 +851,7 @@ function fallbackTurn(narration) {
 /** Out-of-character question to the GM. Answers about the world, the scene, the
  *  rules, the character's own knowledge — WITHOUT advancing the story, rolling
  *  dice, or changing any state. Strict no-spoiler rule for GM-EYES-ONLY content. */
-export async function gmAsk(ctx, question) {
+export async function gmAsk(ctx, question, { call = callClaude } = {}) {   // `call` injectable: a gate feeds THIS function a reply
   const sys = `You are the Game Master of SINGULARITY answering an OUT-OF-CHARACTER question from the player. This is a meta channel for TALKING, and it is also THE PLACE A PLAYER COMES TO GET SOMETHING FIXED. The story does not advance here and no dice are rolled — there is no beat, no encounter, no damage. But it is NOT read-only: when the player asks you to record or correct something on your op list, you DO IT HERE. Sending them somewhere else for a thing you can do is the one wrong answer in this channel.
 - Answer helpfully about: the current scene, what the CHARACTER would plausibly know or remember, the world's lore as provided, how the game's mechanics work (d100 vs shown chance, spectrum alignment, reputation from deeds, energy, quests), and what the choices on offer would generally entail.
 - NEVER reveal GM-EYES-ONLY content, hidden truths, NPC secrets, or true odds beyond what the character's sense already showed. If asked, say the character doesn't know that yet — finding out is play.
@@ -873,10 +873,13 @@ REPLY FORMAT. Plain prose by default. If — and only if — you are emitting op
 Any op key not on the list above is ignored, so do not reach for one.`;
   const content = buildTurnContext({ ...ctx, resolution: null, playerInput: null }) + `\n\n## PLAYER ASKS (out of character)\n${question}`;
   try {
-    const raw = await callClaude([{ role: "user", content }], { task: "gm-meta", system: sys, maxTokens: 1024 });
+    const raw = await call([{ role: "user", content }], { task: "gm-meta", system: sys, maxTokens: 1024 });
     // ⚠️ PROSE IS STILL THE DEFAULT AND THE SAFE READ. A reply that is not JSON, or is JSON without `ops`, is
     // an answer — exactly as this channel has always behaved. Only a well-formed op block changes anything.
-    const parsed = parseLooseJSON(raw);
+    // ⛔ AND NO_JSON_FOUND IS NOT AN ERROR HERE — it is the prose answer this channel promised. The parse used
+    // to sit in the outer try, so every plain answer became "The GM stumbled" (Erik's phone, 2026-09-06).
+    let parsed = null;
+    try { parsed = parseLooseJSON(raw); } catch { parsed = null; }
     if (!parsed || typeof parsed !== "object" || !parsed.ops) return { ok: true, text: String(parsed?.text || raw) };
     const ops = {};
     for (const k of ASK_OPS) {

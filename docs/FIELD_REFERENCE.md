@@ -39,7 +39,7 @@ file is replaced.**
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **96** | a play-path file names it outside a comment |
+| ✅ **READ** | **97** | a play-path file names it outside a comment |
 | ⛔ **DARK** | **16** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **3** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
@@ -687,6 +687,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `learnedAt` | 43 | `root`×43 | ⚠️ CI-ONLY | _3 test/script only_ |
 | `soak` | 33 | `mechanic`×33 | ✅ READ | `battle_turn.js`, `craftmechanics.js`, `damagetypes.js` |
 | `soakRank` | 32 | `mechanic`×32 | ✅ READ | `skill_battle.js`, `app.js` |
+| `meaning` | 31 | `mechanic`×31 | ✅ READ | `gm.js`, `holdings.js`, `reconcile.js` |
 | `sense` | 31 | `root`×31 | ✅ READ | `battle_turn.js`, `combatants.js`, `encounters.js` |
 | `stage` | 27 | `tree`×27 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
 | `push` | 26 | `mechanic`×26 | ✅ READ | `affinities.js`, `arceffects.js`, `art.js` |
@@ -714,6 +715,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `evasionRank` | 7 | `mechanic`×7 | ✅ READ | `skill_battle.js` |
 | `requiresSelf` | 6 | `mechanic`×6 | ✅ READ | `skill_battle.js` |
 | `peril` | 6 | `root`×6 | ✅ READ | `art.js`, `gm.js` |
+| `penetration` | 6 | `mechanic`×6 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `persistUntilHealed` | 6 | `tree`×6 | ✅ READ | `battle_turn.js`, `capabilities.js`, `conditions.js` |
 | `summon` | 5 | `root`×5 | ✅ READ | `gm.js`, `npcsheet.js`, `roundreceipt.js` |
 | `wildVariance` | 5 | `root`×5 | ✅ READ | `resolve.js`, `app.js` |
@@ -733,7 +735,6 @@ contribute to authored dice without recreating the double-scaling bug.
 | `progression` | 1 | `root`×1 | ✅ READ | `authormode.js`, `backfill.js`, `battle_turn.js` |
 | `resistDrop` | 1 | `mechanic`×1 | ⛔ DARK | — |
 | `theNames` | 1 | `root`×1 | ⛔ DARK | — |
-| `penetration` | 1 | `mechanic`×1 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `penetrationNote` | 1 | `mechanic`×1 | ⛔ DARK | — |
 | `uses` | 1 | `mechanic`×1 | ✅ READ | `backfill.js`, `corrections.js`, `craftmechanics.js` |
 | `type` | 1 | `mechanic`×1 | ✅ READ | `battle_turn.js`, `borncontract.js`, `canon.js` |

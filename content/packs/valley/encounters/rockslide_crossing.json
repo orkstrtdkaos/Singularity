@@ -1,51 +1,57 @@
 {
-  "schemaVersion": 1,
-  "id": "rockslide_crossing",
-  "type": "challenge",
-  "name": "The Rockslide Crossing",
-  "locationId": "echo_river_crossing",
-  "setup": "A slab of the granite shoulder has let go above the bridge path — a live rockslide field between you and the far bank, still ticking and settling.",
-  "stages": [
-    {
-      "name": "Read the fall line",
-      "attribute": "mental",
-      "subAttribute": "insight",
-      "axes": {
-        "chaos_order": 0.3
-      },
-      "difficulty": 0,
-      "failureCost": {
-        "energy": 4,
-        "hours": 1
-      }
-    },
-    {
-      "name": "Cross the loose field",
-      "attribute": "physical",
-      "subAttribute": "agility",
-      "axes": {
-        "body_mind": -0.3
-      },
-      "difficulty": 15,
-      "failureCost": {
-        "health": 4,
-        "energy": 5
-      }
-    },
-    {
-      "name": "Clear the choke point",
-      "attribute": "physical",
-      "subAttribute": "strength",
-      "axes": {
-        "destruction_creation": -0.2
-      },
-      "difficulty": 15,
-      "failureCost": {
-        "health": 3,
-        "energy": 6,
-        "hours": 1
-      }
-    }
-  ],
-  "stakes": "Each slip costs blood, breath, or daylight — but the slide can be beaten a stage at a time."
+ "schemaVersion": 1,
+ "id": "rockslide_crossing",
+ "type": "challenge",
+ "name": "The Rockslide Crossing",
+ "locationId": "echo_river_crossing",
+ "setup": "A slab of the granite shoulder has let go above the bridge path — a live rockslide field between you and the far bank, still ticking and settling.",
+ "stages": [
+  {
+   "name": "Read the fall line",
+   "attribute": "mental",
+   "subAttribute": "insight",
+   "axes": {
+    "chaos_order": 0.3
+   },
+   "difficulty": 0,
+   "failureCost": {
+    "energy": 4,
+    "hours": 1
+   }
+  },
+  {
+   "name": "Cross the loose field",
+   "attribute": "physical",
+   "subAttribute": "agility",
+   "axes": {
+    "body_mind": -0.3
+   },
+   "difficulty": 15,
+   "failureCost": {
+    "health": 4,
+    "energy": 5
+   }
+  },
+  {
+   "name": "Clear the choke point",
+   "attribute": "physical",
+   "subAttribute": "strength",
+   "axes": {
+    "destruction_creation": -0.2
+   },
+   "difficulty": 15,
+   "failureCost": {
+    "health": 3,
+    "energy": 6,
+    "hours": 1
+   }
+  }
+ ],
+ "stakes": "Each slip costs blood, breath, or daylight — but the slide can be beaten a stage at a time.",
+ "party": {
+  "ifYouBringPeople": "⚑ A LIVE SLIDE IS EASIER WITH HANDS AND WORSE WITH BODIES. More people can belay, spot and haul — ⚠️ and more people are more weight on ground that is still ticking. ⛔ The field does not care which of you it takes.",
+  "whatItAsksOfAParty": "⛔ Order and spacing. ⚑ A party that crosses together crosses once; a party that crosses as three people crosses three times.",
+  "foldNote": "⚑ Folded MOVE and PROTECT both pay here, which is rare — ⚠️ one gets you across, one gets you back."
+ },
+ "_partyClauseWhy": "⛔ THE PARTY CLAUSE — R36/R36a, authored 2026-09-05. Every encounter in the corpus was written when a fight was ONE PERSON AGAINST ONE OPPONENT. ⚑ R36 makes a party member fight from their own sheet; R36a caps three acting fully and folds the rest. ⚠️ THE CLAUSE IS ADDITIVE — no prose changed. It is what a GM reads when more than one person is present."
 }

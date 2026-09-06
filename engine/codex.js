@@ -418,6 +418,46 @@ export function mergeInto(character, sourceId, targetId) {
 /** SNG-019 merge tool: collapse duplicate topics into their primary node — high-confidence
  *  only (same entityId, or matching label/alias with compatible kind). Respects the
  *  player's not-same verdicts. Idempotent. Returns [{into, absorbed}] for reporting. */
+/** ⚑ ONE FOLD, TWO CALLERS. A child topic folds into its parent: facts move (deduped on text), archive carries,
+ *  overflow RETIRES (never trims), label and aliases become aliases, links carry, the parent's summary falls due,
+ *  the fold is on the record, the child is gone. The standing sweep calls this on a label prefix; a reconcile
+ *  step calls it with the parent NAMED — Aevi: "a standing id-prefix rule would need to guess a parent, and
+ *  guessing is how a fold becomes a deletion." */
+function foldTopicInto(character, topics, t, parent) {
+  let moved = 0;
+  for (const f of (t.facts || [])) if (!parent.facts.some(x => x.slice(x.indexOf("]") + 2) === f.slice(f.indexOf("]") + 2))) { parent.facts = [...parent.facts, f]; moved++; }
+  if (t.archive?.length) parent.archive = [...(parent.archive || []), ...t.archive];
+  // ⛔ NOTHING OFF THE FLOOR: a parent over its cap retires its OLDEST to the archive, exactly as a summary does
+  retireOverCap(parent);
+  if (parent.archive) parent.archive = parent.archive.slice(-CAPS.archivePerTopic);
+  const sw = character.codex.swept || (character.codex.swept = []);
+  sw.push({ from: t.id, label: t.label, to: parent.id, moved });
+  character.codex.swept = sw.slice(-12);
+  recordAlias(parent, t.label); for (const a of (t.aliases || [])) recordAlias(parent, a);
+  for (const l of (t.links || [])) if (l !== parent.id && !parent.links.includes(l)) parent.links = [...parent.links, l].slice(-CAPS.linksPerTopic);
+  parent.summarisedAt = 0;   // a fold is a merge: the reading never saw what moved — facts, archive, the child's own summary — so it falls due, as absorb does
+  delete topics[t.id];
+  return moved;
+}
+
+/** ⛔ THE NAMED FOLD (Aevi, REPLY_admission_landing §2). Every unanchored topic whose ID starts with `prefix` folds
+ *  into `parentId` — which the caller NAMES, because only a human can say that `edge-district-*` means the place
+ *  labelled "Huginn's Building — Edge District". Measured: `edge-district` is the only id-prefix family of 3+ on the
+ *  save, so this is a one-off with a name, not a heuristic. Returns the folded ids; nothing if the parent is absent. */
+export function foldTopicsByIdPrefix(character, prefix, parentId) {
+  ensureCodex(character);
+  const topics = character.codex.topics;
+  const parent = topics[parentId];
+  if (!parent || !prefix) return [];
+  const folded = [];
+  for (const t of Object.values(topics)) {
+    if (!t || t.id === parentId || t.entityId || !String(t.id).startsWith(prefix)) continue;
+    foldTopicInto(character, topics, t, parent);
+    folded.push(t.id);
+  }
+  return folded;
+}
+
 export function mergeCodexTopics(character, { entities = null } = {}) {
   ensureCodex(character);
   const topics = character.codex.topics;
@@ -438,20 +478,7 @@ export function mergeCodexTopics(character, { entities = null } = {}) {
     if (!t || t.entityId || !t.label) continue;
     const n = normName(t.label);
     const parent = Object.values(topics).find(o => o && o !== t && o.label && normName(o.label).length >= 5 && n.startsWith(normName(o.label) + " "));
-    if (!parent) continue;
-    let moved = 0;
-    for (const f of (t.facts || [])) if (!parent.facts.some(x => x.slice(x.indexOf("]") + 2) === f.slice(f.indexOf("]") + 2))) { parent.facts = [...parent.facts, f]; moved++; }
-    if (t.archive?.length) parent.archive = [...(parent.archive || []), ...t.archive];
-    // ⛔ NOTHING OFF THE FLOOR: a parent over its cap retires its OLDEST to the archive, exactly as a summary does
-    retireOverCap(parent);
-    if (parent.archive) parent.archive = parent.archive.slice(-CAPS.archivePerTopic);
-    const sw = character.codex.swept || (character.codex.swept = []);
-    sw.push({ from: t.id, label: t.label, to: parent.id, moved });
-    character.codex.swept = sw.slice(-12);
-    recordAlias(parent, t.label); for (const a of (t.aliases || [])) recordAlias(parent, a);
-    for (const l of (t.links || [])) if (l !== parent.id && !parent.links.includes(l)) parent.links = [...parent.links, l].slice(-CAPS.linksPerTopic);
-    parent.summarisedAt = 0;   // a fold is a merge: the reading never saw what moved — facts, archive, the child's own summary — so it falls due, as absorb does
-    delete topics[t.id];
+    if (parent) foldTopicInto(character, topics, t, parent);
   }
   const merged = [];
   const kindRank = { person: 3, place: 3, faction: 2, event: 2, mystery: 1, lore: 0 };

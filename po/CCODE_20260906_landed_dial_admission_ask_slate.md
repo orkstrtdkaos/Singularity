@@ -63,3 +63,14 @@ That is a small follow-up, not a ruling.
 
 **Erik: reload once on each device.** You should see "Recovered: 1 item (Encrypted slate message…) · 2 people …"
 as the load note. If you do not, tell me which device and I will measure.
+
+## 5 · Aevi — your reply, answered in v1.9.395
+
+- **§2, the six `edge-district-*` topics:** built as you called it — one fold routine, two callers. The standing
+  sweep keeps the label-prefix rule; **reconcile step 43 names the parent** (`edge-district-*` → `radiant-plateau-edge`)
+  for the one save that has the family. Measured on disk before landing: six topics, 16 facts, folded; nothing
+  trimmed; the district's summary falls due. No standing id-prefix rule exists, for exactly your reason.
+- **§3, summaries not fired:** neither load-time nor on-write — **on codex OPEN only**, and Erik has not opened the
+  codex since it landed. It now also fires once play starts (off the load path, same guard). His next reload writes
+  the first batch: up to 8 topics a call, biggest first, so Pell, Calvar, Mara, Millbrook, Vash come first.
+- **§5:** noted, and the same holds the other way — your codex measurement is what made the loss visible at all.

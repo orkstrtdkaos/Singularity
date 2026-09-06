@@ -8087,8 +8087,8 @@ console.log("\n── §115 · the runner is at the post again, on the phone too
     !!sn && sn.snap.inventory.some(i => /Encrypted slate/.test(i.name)) && !!sn.snap.npcRegistry["urgent-courier-whistling-woman"]
     && sn.snap.holdings.some(h => h.id === "whistling-woman-post") && Object.keys(sn.snap.codex.topics).length > 0);
   const step = RC.CHARACTER_STEPS.find(x => x.id === "slate-branch-restored");
-  check("§115: ⛔ STEP 41 IS REGISTERED and is the newest — every copy below it runs it once",
-    !!step && step.version === 41 && RC.topReconcileVersion("character") === 41 && step.playerFacing === true);
+  check("§115: ⛔ STEP 41 IS REGISTERED at its version — every copy below it runs it once (never pinned as 'newest': that is a running number)",
+    !!step && step.version === 41 && RC.topReconcileVersion("character") >= 41 && step.playerFacing === true);
   const fx = () => ({ id: "char-mrhs8286", level: 31, inventory: [{ id: "x", name: "a rope" }], npcRegistry: {}, codex: { topics: {} }, holdings: [] });
   const c = fx(); const out = step.apply(c);
   check("§115: ⛔ IT MERGES — the slate is in the pack, the runner is in the registry, the post is a holding, the rope is still there",
@@ -8132,6 +8132,75 @@ console.log("\n── §117 · the stale tab may not push over the copy that got
   check("§117: …no remote at all — the first push of a character still goes", r.ok === true && t.pushed.length === 1);
   check("§117: ⚑ the guard is the ONE door the autosave backup uses — and it consults the resolver, not the clock",
     /const r = await pushCharacterGuarded\(character\)/.test(rd("engine/sync.js")) && /resolveSaveConflict\(character, remote\)\.reason === "remote-newer"/.test(rd("engine/sync.js")));
+}
+
+/* ═════ §118 — THE THRESHOLD POST STANDS WHERE THE SAVE SAYS IT STANDS (reconcile 42) ═════ */
+// ⛔ Read from the save, not guessed: "north of the mill gate at the ridge relay node", "the network's northern
+// anchor", "something high on the ridge" seen from the Crossing's draw-well, raised on days 14–15 at the Crossing.
+console.log("\n── §118 · a hill overlooking the Crossing, a day and a half out ──");
+{
+  const RC = await import("../engine/reconcile.js");
+  const WM = await import("../engine/worldmap.js");
+  const step = RC.CHARACTER_STEPS.find(x => x.id === "threshold-post-placed");
+  check("§118: ⛔ STEP 42 IS REGISTERED at its version", !!step && step.version === 42 && RC.topReconcileVersion("character") >= 42);
+  const fx = () => ({ id: "char-mrhs8286", generated: { location: {} }, placeEdges: { the_crossing: ["gen-the-temple"] }, holdings: [{ id: "hold-fendt::warden-of-the-threshold-post-at-the-ridg", name: "Threshold Post", kind: "post", locationId: null, steward: "fendt" }] });
+  const c = fx(); const out = step.apply(c); const rec = c.generated.location["gen-threshold-post"];
+  const crossing = { colatitude: 0, longitude: 0, depth: 0 };
+  const days = WM.walkingDays({ worldPos: crossing }, rec || { worldPos: crossing });   // geodesic reads .worldPos from a RECORD
+  check("§118: ⛔ THE POST IS PLACED — a real record, a day or two outward from the Crossing, and the holding points at it",
+    !!rec && rec.connections.includes("the_crossing") && days > 1 && days < 2.5 && c.holdings[0].locationId === "gen-threshold-post", `${days.toFixed(2)} days`);
+  check("§118: …on the north-gate side — the registry office sits at longitude 19, the ridge at 30, not across the pole",
+    rec.worldPos.longitude > 15 && rec.worldPos.longitude < 60 && /ridge/.test(rec.descriptionSeed) && /overlooking/.test(rec.descriptionSeed));
+  check("§118: …the edges are written both ways, and it is said to the player",
+    c.placeEdges.the_crossing.includes("gen-threshold-post") && c.placeEdges["gen-threshold-post"].includes("the_crossing") && Array.isArray(out.notes) && /Threshold Post is on the map/.test(out.notes[0]));
+  const snap = JSON.stringify(c); const again = step.apply(c);
+  check("§118: …idempotent — twice changes nothing and says nothing", JSON.stringify(c) === snap && !again.notes);
+  const o = { id: "someone-else", holdings: [{ name: "Threshold Post", locationId: null }] }; step.apply(o);
+  check("§118: ⛔ …and never another character", o.holdings[0].locationId === null && !o.generated);
+  const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  check("§118: ⚑ the repo copy already carries it, and keeps its rev lead",
+    !!disk.generated.location["gen-threshold-post"] && disk.holdings.some(h => /threshold/i.test(h.name) && h.locationId === "gen-threshold-post") && disk.rev >= 3100 && disk.reconcileVersion >= 42);
+  // ⛔ NOT GUESSED: the Whistling Woman post's 41-day placement contradicts the story; the post carries NO road to it
+  // until Erik rules — a wrong number in the GM's context is worse than a missing edge.
+  check("§118: …and no road edge to the Whistling Woman post is written until its placement is ruled", !rec.connections.includes("gen-whistling-woman-post"));
+}
+
+/* ═════ §119 — THE NAMED FOLD, AND SUMMARIES THAT FIRE WITHOUT OPENING THE CODEX (Aevi, REPLY_admission_landing) ═════ */
+// ⛔ Six `edge-district-*` topics survived a LABEL-prefix sweep because theirs is an ID prefix under a parent labelled
+// something else. A standing id-prefix rule would guess a parent — "guessing is how a fold becomes a deletion" —
+// so the parent is NAMED, once, by a reconcile step, through the sweep's own fold routine.
+console.log("\n── §119 · six hooks, one district, and a reading that arrives unasked ──");
+{
+  const CX = await import("../engine/codex.js");
+  const RC = await import("../engine/reconcile.js");
+  const mk = () => ({ id: "char-mrhs8286", codex: { topics: {
+    "radiant-plateau-edge": { id: "radiant-plateau-edge", label: "Huginn's Building — Edge District", kind: "place", entityId: "radiant-plateau-edge", facts: ["[d3] the rim"], links: [], aliases: [] },
+    "edge-district-contacts": { id: "edge-district-contacts", label: "Edge District Contacts", kind: "mystery", facts: ["[d4] a list"], links: ["q1"], aliases: [] },
+    "edge-district-route": { id: "edge-district-route", label: "Far Side of the Pass", kind: "lore", facts: ["[d5] the pass", "[d3] the rim"], links: [], aliases: [] },
+    "edge-district-office": { id: "edge-district-office", label: "An Office", kind: "place", entityId: "some-office", facts: ["[d6] anchored"], links: [], aliases: [] },
+    "edgewise": { id: "edgewise", label: "Edgewise", kind: "lore", facts: ["[d7] unrelated"], links: [], aliases: [] },
+  } } });
+  const c = mk(); const folded = CX.foldTopicsByIdPrefix(c, "edge-district-", "radiant-plateau-edge"); const p = c.codex.topics["radiant-plateau-edge"];
+  check("§119: ⛔ THE NAMED FOLD takes the id-prefix family into the NAMED parent — facts moved and deduped, links carried, labels become aliases",
+    folded.length === 2 && !c.codex.topics["edge-district-contacts"] && !c.codex.topics["edge-district-route"] && p.facts.length === 3 && p.links.includes("q1") && p.aliases.some(a => /Far Side of the Pass/.test(a)),
+    `${folded.join(",")} · ${p.facts.length} facts`);
+  check("§119: …an ANCHORED topic under the prefix is not folded, and a near-miss id is not touched",
+    !!c.codex.topics["edge-district-office"] && !!c.codex.topics.edgewise);
+  check("§119: …the fold is on the record and the parent's reading falls due", (c.codex.swept || []).length === 2 && p.summarisedAt === 0);
+  check("§119: …a missing parent folds NOTHING — never a guess", CX.foldTopicsByIdPrefix(mk(), "edge-district-", "nowhere").length === 0);
+  const step = RC.CHARACTER_STEPS.find(x => x.id === "edge-district-folded");
+  const c2 = mk(); const out = step.apply(c2); const again = step.apply(c2);
+  check("§119: ⛔ STEP 43 names the parent for Silas, says it, and is idempotent",
+    !!step && step.version === 43 && Array.isArray(out.notes) && /2 Edge District hooks/.test(out.notes[0]) && !again.notes);
+  const o = mk(); o.id = "someone-else"; step.apply(o);
+  check("§119: …and never another character", !!o.codex.topics["edge-district-contacts"]);
+  const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  check("§119: ⚑ the repo copy has no edge-district-* topic left and keeps its rev lead",
+    !Object.keys(disk.codex.topics).some(k => k.startsWith("edge-district-")) && !!disk.codex.topics["radiant-plateau-edge"] && disk.rev >= 3200 && disk.reconcileVersion >= 43);
+  // ⛔ AND THE READING ARRIVES UNASKED: the summariser fired on codex open only; twenty topics sat over the line.
+  const app = rd("app.js");
+  check("§119: ⛔ SUMMARIES FIRE ONCE PLAY STARTS, off the load path — not only when the codex is opened",
+    /hydrateGeneratedIntoContent\(character\);[^\n]*\n(?:[^\n]*\n){0,4}\s*setTimeout\(\(\) => maybeSummariseTopics\(\), 1500\);/.test(app) && (app.match(/maybeSummariseTopics\(\)/g) || []).length >= 2);
 }
 
 /* ══════════ REPORT ══════════ */

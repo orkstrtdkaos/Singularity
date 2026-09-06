@@ -19,7 +19,7 @@ import { worldPosForGenerated } from "./worldmap.js";
 import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
 import { credit } from "./purse.js";   // R48: the purse has ONE door in, and it records an origin
-import { mergeCodexTopics, ensureCodex, applyCodexUpdates } from "./codex.js";
+import { mergeCodexTopics, ensureCodex, applyCodexUpdates, foldTopicsByIdPrefix } from "./codex.js";   // step 43: the named fold
 import { mergeRecovery, mergeReceiptLine } from "./recovery.js";   // step 41: the Settings door's merge, run where every copy passes
 import { SNAPSHOTS } from "./recovery_snapshots.js";              // step 41: the overwritten branch, as a diff
 import { dedupeQuests, normalizeProse } from "./quests.js";
@@ -1417,6 +1417,54 @@ export const CHARACTER_STEPS = [
         notes.push(`${line} — the branch the sync overwrote on 2026-09-06, merged back; nothing you had since was removed.`);
       }
       return notes.length ? { notes } : {};
+    }
+  },
+  {
+    version: 42, id: "threshold-post-placed", playerFacing: true,
+    // ⛔ A HOLDING WITH NO PLACE. The Threshold Post was claimed from an assignment (`locationId: null`) and step 38
+    // deliberately did not guess where it stood. Erik asked; the save answers: Fendt — "built north of the mill gate
+    // at the ridge relay node"; Mara — "the network's northern anchor"; the chronicle — from the Crossing's
+    // east-side draw-well, "the midrow wayhouse, the mill gate, and something high on the ridge"; the deeds that
+    // raised it are stamped at the Crossing on days 14–15. So: a day and a half outward on the north-gate side, high
+    // on the moorland ridge, overlooking the settlement. Idempotent by record; Silas only.
+    apply: (c) => {
+      if (c?.id !== "char-mrhs8286") return {};
+      const ID = "gen-threshold-post";
+      c.generated = c.generated || {}; c.generated.location = c.generated.location || {};
+      const notes = [];
+      if (!c.generated.location[ID]) {
+        c.generated.location[ID] = {
+          id: ID, name: "Threshold Post", regionId: "the_center",
+          descriptionSeed: "The ridge relay node north of the Crossing's mill gate — a sentinel post high on the moorland ridge, overlooking the settlement, the relay network's northern anchor. A warden post raised from blueprint into standing structure, a working mine of living iron beneath it, a death-warden temple at the sentinel. Three beacon stones cracked in the sentinel array; Fendt keeps it.",
+          tags: ["ridge", "relay", "post", "moorland"], connections: ["the_crossing"], dangerLevel: 2,
+          _gen: { type: "location", tier: "established", engagementScore: 4, birthWeight: 1, rating: null,
+            attentionHistory: [{ kind: "revisit", day: 14 }, { kind: "revisit", day: 15 }], createdDay: 14,
+            provenance: { locationId: "the_crossing", day: 14, hint: "the ridge relay node, north of the mill gate" }, lastAttentionDay: 15 },
+          worldPos: { colatitude: 0.9, longitude: 30, depth: 0 },   // 1.5 days outward, north-gate side (the registry sits at 19°)
+        };
+        notes.push("The Threshold Post is on the map: the ridge relay node a day and a half north of the Crossing's mill gate, overlooking the settlement.");
+      }
+      c.placeEdges = c.placeEdges || {};
+      const cx = c.placeEdges.the_crossing = Array.isArray(c.placeEdges.the_crossing) ? c.placeEdges.the_crossing : [];
+      if (!cx.includes(ID)) cx.push(ID);
+      if (!Array.isArray(c.placeEdges[ID])) c.placeEdges[ID] = ["the_crossing"];
+      const h = (c.holdings || []).find(x => x && !x.locationId && /threshold post/i.test(x.name || ""));
+      if (h) { h.locationId = ID; notes.push("Fendt's post now knows where it stands."); }
+      return notes.length ? { notes } : {};
+    }
+  },
+  {
+    version: 43, id: "edge-district-folded", playerFacing: true,
+    // ⛔ AEVI (REPLY_admission_landing §2): the six `edge-district-*` topics survived the sweep because they share an
+    // ID prefix, not a label prefix, and their parent is labelled "Huginn's Building — Edge District". A standing
+    // id-prefix rule would have to guess a parent — "guessing is how a fold becomes a deletion" — so the parent
+    // is NAMED here, once, for the one save that has the family. Same fold routine as the sweep; nothing trimmed.
+    apply: (c) => {
+      if (c?.id !== "char-mrhs8286") return {};
+      const folded = foldTopicsByIdPrefix(c, "edge-district-", "radiant-plateau-edge");
+      if (!folded.length) return {};
+      console.log(`[reconcile] edge-district-folded: ${folded.join(", ")} → radiant-plateau-edge`);
+      return { notes: [`${folded.length} Edge District hooks are filed under the district itself now — nothing was dropped, and the district's reading is due again.`] };
     }
   },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content

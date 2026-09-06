@@ -163,7 +163,7 @@ export function applyCodexUpdates(character, updates = [], ctx = {}) {
       // place it happened (Erik's own ruling for the seven edge-district hooks), and the STORY is requested.
       if (u.kind === "mystery" && !res.entityId && !linksToStory(u, ctx)) {
         const placeId = ctx.locationId ? slugify(ctx.locationId) : null;
-        if (placeId && u.fact) extra.push({ topic: placeId, label: ctx.entities?.places?.[placeId] || placeId, kind: "place", entityId: placeId,
+        // ⚠️ THE FACT IS NEVER DROPPED. With a place, it is filed there; with none, it is minted as LORE — a fact
           fact: `${raw ? raw + " — " : ""}${u.fact}`, links: u.links });
         const q = character.codex.deferredMysteries || (character.codex.deferredMysteries = []);
         q.push({ label: raw, hint: String(u.fact || raw).slice(0, 240), filedUnder: placeId, day: ctx.day ?? null });

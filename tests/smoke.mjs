@@ -12719,7 +12719,9 @@ await (async () => {
     ch.holdings[0].lastMovedWorldCount = worldCount() - 100;
     const r = await runWorldTick({ character: ch, content: C358, currentDay: 14, advanceAssignments: async () => ({ advancements: [] }) });
     check("358: a holding advances with NO delegated work due and the character clock unmoved",
-      r.ticked === true && ch.holdings[0].condition !== "holding");
+      // ⚠️ WAS `condition !== "holding"` — the old slip-on-every-pass. SPEC_holdings_tempo ruled neglect slow (10
+      // passes), so one pass no longer moves the condition; the tick's having RUN is evidenced by the counter.
+      r.ticked === true && ch.holdings[0].neglectPasses === 1);
     check("358: …and only a CHANGE of condition is news — a holding that goes on holding is not an event",
       holdingNews({ condition: "holding", name: "X" }, "holding") === null);
   }

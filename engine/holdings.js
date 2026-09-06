@@ -803,7 +803,7 @@ export function addFeature(character, id, { kind, name = null, by = null, craftI
 /** ⚑ THE WORDS THAT ASSERT A FEATURE. Each kind's own vocabulary — what a scene says when the thing is
  *  there. ⚠️ Deliberately literal: "wall" not "defence", "mine" not "resources". An inference that
  *  reaches is a guess, and the spec is explicit that this is a READING, not a guess. */
-export const FEATURE_WORDS = {
+const FEATURE_WORDS = {   // module-private: read only by inferFeatures; the audit caught it exported to nothing
   mine: /\b(mine|mineshaft|ore|seam|lode|living iron)\b/i,
   quarry: /\bquarr(y|ies)\b/i,
   mill: /\b(mill|millstone|millwheel)\b/i,

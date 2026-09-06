@@ -1131,6 +1131,11 @@ export function recoveryKeys(characterId = null) {
 }
 
 /** Drop all but the newest `keep` snapshots for a character. Returns the keys removed. */
+/** Read one recovery snapshot back. ⛔ The sync wrote these for every conflict and nothing ever read one. */
+export function loadRecovery(key) {
+  try { const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : null; } catch { return null; }
+}
+
 export function pruneRecovery(characterId, keep = RECOVERY_KEEP) { // registry:internal
   const keys = recoveryKeys(characterId);
   const drop = keys.slice(0, Math.max(0, keys.length - keep));

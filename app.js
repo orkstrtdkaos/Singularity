@@ -123,7 +123,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.372";
+const APP_VERSION = "1.9.373";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6493,8 +6493,15 @@ function applyTurn(turn, resolution, playerWords = null) {
   applyStep("holdingOps", () => {
     for (const op of (turn.holdingOps || []).slice(0, 4)) {
       const kind = String(op?.op || "").toLowerCase();
-      const id = String(op?.id || "").trim();
-      if (!id) continue;
+      // ⚑ AN ID IS A SLUG OF A NAME. Refusing a claim that named the place but not a kebab id is pedantry,
+      // and it is what silently ate Erik's Whistling Woman Post: the GM said "Done", the applier dropped it,
+      // and nothing anywhere disagreed.
+      const id = String(op?.id || "").trim() || slugify(String(op?.name || "").trim());
+      if (!id) {
+        console.warn("[holdingOps] DROPPED — no id and no name to make one from:", JSON.stringify(op).slice(0, 160));   // prose-cap-ok: a console diagnostic, not player-facing prose
+        character._applyFailures = [...(character._applyFailures || []), { op: "holdingOps", at: new Date().toISOString(), message: "a holding op carried neither an id nor a name" }].slice(-10);
+        continue;
+      }
       if (kind === "claim") addHolding(character, { id, kind: op.kind || "post", name: op.name, rename: op.rename === true, locationId: op.locationId || location.id, steward: op.steward || null, obligation: op.obligation || null, day: absoluteWorldDay() });
       else if (kind === "steward") { const h = (character.holdings || []).find(x => x.id === id); if (h) h.steward = op.steward || null; }
       // ⛔ SPEC_holding_release_transfer — this was a bare filter: the obligation vanished, the steward was silently
@@ -8488,9 +8495,18 @@ async function onAsk(text) {
   let askOpsNote = "";
   if (result.ok && result.ops && Object.keys(result.ops).length) {
     try {
+      // ⛔ MEASURE THE CHANGE, DO NOT ANNOUNCE THE CALL. The first version said "the GM changed: holdingOps"
+      // whenever `applyTurn` did not throw — so a dropped op read exactly like an applied one, and Erik was
+      // told his post was recorded when it was not. ⚠️ That is the refusal failure wearing the opposite coat.
+      const before = JSON.stringify({ h: (character.holdings || []).length, q: (character.quests || []).length,
+        n: Object.keys(character.npcRegistry || {}).length, f: (character.facts || []).length });
       applyTurn({ ...result.ops, narration: "" }, null, null);
       saveCharacter(character);
-      askOpsNote = `\n\n— *the GM changed: ${Object.keys(result.ops).join(", ")}*`;
+      const after = JSON.stringify({ h: (character.holdings || []).length, q: (character.quests || []).length,
+        n: Object.keys(character.npcRegistry || {}).length, f: (character.facts || []).length });
+      askOpsNote = before === after
+        ? `\n\n— *the GM tried to change ${Object.keys(result.ops).join(", ")} and NOTHING MOVED. Say so and I will look.*`
+        : `\n\n— *the GM changed: ${Object.keys(result.ops).join(", ")}*`;
     } catch (err) {
       console.error("[ask] repair ops failed:", err);
       askOpsNote = "\n\n— *the GM tried to change something and it did not take; nothing was written.*";

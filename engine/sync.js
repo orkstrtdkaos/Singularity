@@ -196,14 +196,18 @@ export function resolveSaveConflict(local, remote) {
 /** PUSH GUARD: never let a stale local overwrite a fresher remote. Re-reads remote and
  *  refuses the write if remote is newer than what we're about to push. Returns
  *  { ok, reason, remote? }. */
-export async function pushCharacterGuarded(character) { // registry:internal
-  if (!syncEnabled()) return { ok: false, reason: "sync-off" };
+export async function pushCharacterGuarded(character, { fetch = fetchRepoJSON, push = pushOwnedFile, enabled = syncEnabled } = {}) { // registry:internal
+  if (!enabled()) return { ok: false, reason: "sync-off" };
   const path = charPath(character.playerKey, character.id);
-  const remote = await fetchRepoJSON(path);
-  if (remote && (remote.updatedAt || 0) > (character.updatedAt || 0)) {
+  const remote = await fetch(path);
+  // ⛔ THE SAME RESOLVER AS THE LOAD, OR THE LOAD'S RULE MEANS NOTHING. This guard judged "fresher" by the
+  // clock alone, and a tab being played always has the newer clock — so a stale copy with a LOWER rev pushed
+  // over a higher-rev remote three times on 2026-09-06 (1853 over 2500, then 1858, then 1794 over 1858).
+  // A decisive rev lead now refuses here exactly as it adopts there; inside the margin, the clock decides as before.
+  if (remote && resolveSaveConflict(character, remote).reason === "remote-newer") {
     return { ok: false, reason: "remote-newer", remote }; // guard fires: don't clobber a fresher remote
   }
-  await pushOwnedFile(path, character, `save: ${character.name}`);
+  await push(path, character, `save: ${character.name}`);
   return { ok: true, reason: "pushed" };
 }
 

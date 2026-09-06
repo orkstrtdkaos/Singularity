@@ -8106,6 +8106,34 @@ console.log("\n── §115 · the runner is at the post again, on the phone too
     disk.inventory.some(i => /Encrypted slate/.test(i.name)) && disk.rev >= 3000 && !!disk.npcRegistry["urgent-courier-whistling-woman"] && disk.reconcileVersion >= 41);
 }
 
+/* ═════ §117 — THE PUSH GUARD USES THE LOAD'S RULE: A LOWER REV NEVER OVERWRITES A HIGHER ONE ═════ */
+// ⛔ Measured in git on 2026-09-06: three browser pushes with a LOWER rev (1853, 1858, 1794) overwrote the
+// higher-rev repo copy that held the slate. The load resolver had the rev-lead rule; the push guard judged
+// by the clock alone, and a tab being played always has the newer clock. One resolver, both doors.
+console.log("\n── §117 · the stale tab may not push over the copy that got further ──");
+{
+  const SY = await import("../engine/sync.js");
+  const io = (remote) => { const pushed = []; return { pushed, opts: { enabled: () => true, fetch: async () => remote, push: async (path, c) => { pushed.push(c.rev); } } }; };
+  const local = { playerKey: "p", id: "c", name: "Silas", rev: 1794, updatedAt: 2_000_000 };
+  let t = io({ id: "c", rev: 3000, updatedAt: 1_000_000 });
+  let r = await SY.pushCharacterGuarded(local, t.opts);
+  check("§117: ⛔ A NEWER CLOCK WITH A LOWER REV IS REFUSED — the repo copy that got further is not clobbered",
+    r.ok === false && r.reason === "remote-newer" && t.pushed.length === 0, JSON.stringify(r));
+  t = io({ id: "c", rev: 1790, updatedAt: 1_000_000 });
+  r = await SY.pushCharacterGuarded(local, t.opts);
+  check("§117: …inside the margin the clock decides as before — a genuinely newer local still pushes",
+    r.ok === true && t.pushed[0] === 1794);
+  t = io({ id: "c", rev: 1795, updatedAt: 3_000_000 });
+  r = await SY.pushCharacterGuarded(local, t.opts);
+  check("§117: …and a remote with the newer clock inside the margin is still respected — nothing loosened",
+    r.ok === false && r.reason === "remote-newer" && t.pushed.length === 0);
+  t = io(null);
+  r = await SY.pushCharacterGuarded(local, t.opts);
+  check("§117: …no remote at all — the first push of a character still goes", r.ok === true && t.pushed.length === 1);
+  check("§117: ⚑ the guard is the ONE door the autosave backup uses — and it consults the resolver, not the clock",
+    /const r = await pushCharacterGuarded\(character\)/.test(rd("engine/sync.js")) && /resolveSaveConflict\(character, remote\)\.reason === "remote-newer"/.test(rd("engine/sync.js")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

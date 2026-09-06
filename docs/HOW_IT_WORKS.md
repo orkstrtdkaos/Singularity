@@ -1286,8 +1286,8 @@ does not know), **named people** — `hingeNpcs` may not be empty — **objectiv
 grow as the player meets parts of it; it may not start empty.
 
 A stub is right for an npc or a location: a face at a gate becomes real by being met. **A mystery is not like
-that.** A mystery whose answer does not exist cannot be solved, and the player will pull on it. The hook is a
-promise, and an unbacked promise is the one thing the codex must not store.
+that.** A mystery whose answer does not exist cannot be solved, and the player will pull on it — **A HOOK
+WITHOUT A STORY BEHIND IT IS A DEBT**, and an unbacked promise is the one thing the codex must not store.
 
 `the-person-with-a-list` is the live case: one fact, four links, kind `mystery`, and nobody behind it. And the
 arc generator cannot yet answer this — `generate.js` returns `hingeNpcs: []` and *"it festers, unwatched"* for

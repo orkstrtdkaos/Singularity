@@ -1,28 +1,34 @@
 {
-  "schemaVersion": 1,
-  "id": "ruin_delve_collapse",
-  "type": "challenge",
-  "name": "The Delve",
-  "locationId": "dw_the_thinedge",
-  "setup": "The ruin has been settling for four hundred years and it has opinions about being entered. This is not a fight; it is a negotiation with a building that is losing an argument with gravity.",
-  "stages": [
-    {
-      "id": "the_descent",
-      "difficulty": 20,
-      "objective": "Get down into the first gallery without bringing the shaft with you",
-      "change": "You are in, and the way you came is narrower than it was."
-    },
-    {
-      "id": "the_gallery",
-      "difficulty": 25,
-      "objective": "Cross the gallery floor, which is a lid rather than a floor",
-      "change": "The gallery is crossed. Something below registered the weight."
-    },
-    {
-      "id": "the_way_back",
-      "difficulty": 30,
-      "objective": "Leave, carrying whatever you came for",
-      "change": "Out, with the ruin substantially more closed than you found it."
-    }
-  ]
+ "schemaVersion": 1,
+ "id": "ruin_delve_collapse",
+ "type": "challenge",
+ "name": "The Delve",
+ "locationId": "dw_the_thinedge",
+ "setup": "The ruin has been settling for four hundred years and it has opinions about being entered. This is not a fight; it is a negotiation with a building that is losing an argument with gravity.",
+ "stages": [
+  {
+   "id": "the_descent",
+   "difficulty": 20,
+   "objective": "Get down into the first gallery without bringing the shaft with you",
+   "change": "You are in, and the way you came is narrower than it was."
+  },
+  {
+   "id": "the_gallery",
+   "difficulty": 25,
+   "objective": "Cross the gallery floor, which is a lid rather than a floor",
+   "change": "The gallery is crossed. Something below registered the weight."
+  },
+  {
+   "id": "the_way_back",
+   "difficulty": 30,
+   "objective": "Leave, carrying whatever you came for",
+   "change": "Out, with the ruin substantially more closed than you found it."
+  }
+ ],
+ "party": {
+  "ifYouBringPeople": "⚠️ *'THIS IS NOT A FIGHT; IT IS A NEGOTIATION.'* ⛔ A party negotiates worse: four hundred years of settling answers to load and vibration, and three people are more of both. ⚑ The ruin has opinions about being entered and a party is a larger entering.",
+  "whatItAsksOfAParty": "⛔ Whether you can move as one weight. ⚠️ Splitting up is correct here and it is also how you lose someone.",
+  "foldNote": "⚑ A folded SHAPE ally can hold what is going — the clearest case in the corpus for bringing a mason."
+ },
+ "_partyClauseWhy": "⛔ THE PARTY CLAUSE — R36/R36a, authored 2026-09-05. Every encounter in the corpus was written when a fight was ONE PERSON AGAINST ONE OPPONENT. ⚑ R36 makes a party member fight from their own sheet; R36a caps three acting fully and folds the rest. ⚠️ THE CLAUSE IS ADDITIVE — no prose changed. It is what a GM reads when more than one person is present."
 }

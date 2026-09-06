@@ -170,8 +170,84 @@ export function dedupeQuests(character) {
   return merged;
 }
 
+/** ⛔ THE SAVE AND THE CONTENT DISAGREE ABOUT ID SHAPE, and every lookup between them has to know it. A
+ *  record carries `the-mercy-that-wont-ask`; the def is `the_mercy_that_wont_ask`. ⚠️ MEASURED: matching
+ *  raw finds NOTHING for any of the ten quests on Erik's save. */
+const normQuestId = (id) => String(id || "").toLowerCase().replace(/[^a-z0-9]+/g, "_");
+
+/** PURE. Index a quest-def collection by normalised id. Accepts the array `content.quests` really is, or a
+ *  map, because both shapes exist in this codebase and guessing wrong is how a lookup silently finds none. */
+export function questDefIndex(defs) {
+  const list = Array.isArray(defs) ? defs : Object.values(defs || {});
+  const out = {};
+  for (const d of list) if (d && d.id) out[normQuestId(d.id)] = d;
+  return out;
+}
+
+/** ⛔ A STARTED QUEST CARRIES PROGRESS, NOT A COPY OF THE CONTENT — SPEC_quest_snapshot §4a, and the rule
+ *  this project has now ruled four times: *a stored copy of a derived value is the failure that produced
+ *  this ticket.* `ringDistance`'s 552 rows, `meaningDensity`, the shared health pool, and now this.
+ *
+ *  ⚠️ THE SNAPSHOT WAS A WHITELIST, so `title` and `imagePrompt` were dropped on every copy and the stage-art
+ *  feature read a field the record never had; and it was FROZEN, so a content fix never reached a save that
+ *  had already started. ⛔ AND WHEN THE MAPPER MET A STAGE IT COULD NOT READ IT PRODUCED `{id: undefined,
+ *  objective: undefined, …}` — which JSON drops to `{}`. Three live quests on Erik's save are blank that way.
+ *
+ *  ⚑ SO THE DEF IS THE SOURCE AT READ TIME, and the record wins only where it carries something the def
+ *  cannot know: progress, and anything play changed. ⬜ WHERE THE DEF IS GONE — content retired under a live
+ *  save — the snapshot IS the answer, which is the argument for keeping one thin rather than none at all.
+ *
+ *  ⚠️ Stages are matched by ID where the record has one and by INDEX where it does not (a blank stage has
+ *  neither), and a record with MORE stages than its def keeps the extras: `the-mercy-that-wont-ask` carries
+ *  four against a def of three, and dropping one would be losing progress to fix prose. PURE. */
+export function hydrateQuest(record, defs) {
+  if (!record) return record;
+  const def = questDefIndex(defs)[normQuestId(record.id || record.questId)];
+  if (!def) return record;                                   // retired content — the snapshot is all there is
+  const defStages = Array.isArray(def.stages) ? def.stages : [];
+  const byId = {};
+  for (const d of defStages) if (d && d.id) byId[d.id] = d;
+  const stages = (record.stages || []).map((s, i) => {
+    const d = (s && s.id && byId[s.id]) || defStages[i] || null;
+    if (!d) return s;                                        // an extra stage the def does not have — keep it
+    // the DEF supplies the words; the RECORD keeps anything play wrote onto the stage.
+    return { ...d, ...Object.fromEntries(Object.entries(s || {}).filter(([, v]) => v != null && v !== "")) };
+  });
+  // ⚠️ A TRAILING EMPTY EXTRA IS DROPPED, and only a trailing empty one. `the-mercy-that-wont-ask` carries
+  // FOUR stages against a def of three, and the fourth is `{}` — it preserves nothing and renders as nothing.
+  // ⛔ But only from the END, and never below `stageIndex`: a stage the player has already passed is progress
+  // even when its words are gone, and re-indexing under a live quest would move where they are standing.
+  const floor = Math.max(defStages.length, Number(record.stageIndex) || 0, (record.completedStages || []).length);
+  while (stages.length > floor && !Object.keys(stages[stages.length - 1] || {}).length) stages.pop();
+  // a def with MORE stages than the record: the content grew under a started quest, so the new ones appear.
+  for (let i = stages.length; i < defStages.length; i++) stages.push({ ...defStages[i] });
+  // ⚠️ THE DEF CALLS IT `name` AND THE RECORD CALLS IT `title` — the same family of mismatch as the id
+  // shape, and it left the GM reading the literal word `undefined` as a quest's name. ⛔ Every field the
+  // snapshot used to copy is listed here, because a whitelist that forgets one is exactly how this started.
+  const fromDef = (recKey, defKey = recKey) => (record[recKey] != null && record[recKey] !== "" ? record[recKey] : def[defKey]);
+  return {
+    ...record,
+    title: record.title || def.name || def.title || null,
+    axis: fromDef("axis"),
+    region: fromDef("region"), tier: fromDef("tier"), giver: fromDef("giver"),
+    traditions: record.traditions?.length ? record.traditions : (def.traditions || []),
+    // ⛑ THE DEF WINS on the prose: that is the whole point — a content fix must reach a started quest.
+    premise: def.premise ?? record.premise,
+    stakes: def.stakes ?? record.stakes,
+    routes: def.routes ?? record.routes,
+    outcomes: def.outcomes ?? record.outcomes,
+    stages,
+  };
+}
+
+/** PURE. Every quest on a character, read through the def. The one call a consumer should make. */
+export function questsFor(character, defs) {
+  return (character?.quests || []).map(q => hydrateQuest(q, defs));
+}
 /** Active-quest block for the GM prompt. */
-export function questsForGM(character) {
+export function questsForGM(character, defs = null) {
+  // the same rule as `structuredQuestsForGM`: progress from the record, words from the def.
+  if (defs) character = { ...character, quests: questsFor(character, defs) };
   const active = (character.quests || []).filter(q => q.status === "active");
   if (!active.length) return null;
   return active.map(q =>
@@ -741,7 +817,10 @@ export function routesForCharacter(quest, character) {
  *  SNG-132: for a BOUND legendary arc, also surface its `legend` NPC as a distant, turning-toward-this-
  *  character presence — escalating ONLY as stages complete (pass `opts.npcs` to name the legend). */
 export function structuredQuestsForGM(character, opts = {}) {
-  const active = (character.quests || []).filter(q => q.structured && q.status === "active");
+  // ⛔ READ THROUGH THE DEF. The record is progress; the words are content. Without this the GM was handed
+  // three live quests whose every stage was `{}` and narrated around the hole.
+  const active = (opts.defs ? questsFor(character, opts.defs) : (character.quests || []))
+    .filter(q => q.structured && q.status === "active");
   if (!active.length) return null;
   const npcs = opts.npcs || {};
   return active.map(q => {

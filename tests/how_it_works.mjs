@@ -6360,6 +6360,86 @@ console.log("\n── §91 · the law, its honest exceptions, and a signal — b
     !/throw|return false/.test((app91.match(/applyStep\("refusalSignal"[\s\S]{0,600}?\}\);/) || [""])[0])
     && /slice\(-20\)/.test(app91));
 }
+
+/* ═════ §92 — A QUEST RECORD IS PROGRESS, NOT A COPY OF THE CONTENT (SPEC_quest_snapshot) ═════ */
+// ⛔ Three live quests on Erik's save carry stages that are `{}` — no id, no objective, no condition —
+// while the content is fully authored. ⚠️ MEASURED CONSEQUENCE: the GM's structured-quest block gave the
+// title and the stakes and NO "Now:" line at all, so it has been running three quests with no idea what
+// the current stage asks for.
+//
+// ⚑ AND THE MECHANISM, WHICH THE SPEC ASKED ABOUT: the record mapper is `{id: s.id, objective:
+// normalizeProse(s.objective), …}`. Against a stage it could not read, every field came back `undefined` —
+// and JSON DROPS UNDEFINED, so the object reached the save as `{}`. ⛔ A mapper that silently yields an
+// empty object is the defect underneath the defect.
+//
+// ⛔ AND A SECOND ONE FOUND WHILE FIXING IT: THE SAVE AND THE CONTENT DISAGREE ABOUT ID SHAPE. A record
+// says `the-mercy-that-wont-ask`; the def is `the_mercy_that_wont_ask`. Matching raw finds NOTHING for any
+// of the ten quests on the save, so any repair that looked defs up by id would have healed nothing and
+// reported success.
+console.log("\n── §92 · the def is the source at read time · the snapshot is the fallback · and the GM gets its stage back ──");
+{
+  const Q92 = await import("../engine/quests.js");
+  const { loadContentHeadless: lch92 } = await import("./headless_content.mjs");
+  const C92 = await lch92();
+
+  check("§92: ⚠️ the fixture reads real quest content — not vacuous",
+    (Array.isArray(C92.quests) ? C92.quests.length : Object.keys(C92.quests || {}).length) >= 15);
+
+  // ── THE ID SHAPES DISAGREE, AND THE LOOKUP KNOWS IT
+  const idx = Q92.questDefIndex(C92.quests);
+  check("§92: ⛔ the def index normalises ID SHAPE — a kebab record finds a snake def, which raw matching never did",
+    !!idx["the_mercy_that_wont_ask"] && !!Q92.hydrateQuest({ id: "the-mercy-that-wont-ask", stages: [{}] }, C92.quests).stages[0].objective);
+
+  // ── ⛔ THE BLANKS HEAL, AND PROGRESS SURVIVES
+  const rec = { id: "the-stag-that-wont-die", status: "active", structured: true, stageIndex: 2, completedStages: ["s1", "s2"], stages: [{}, {}, {}] };
+  const hyd = Q92.hydrateQuest(rec, C92.quests);
+  check("§92: ⛔ every blank stage gains its words back — from the def, at read time",
+    hyd.stages.length === 3 && hyd.stages.every(st => st.id && st.objective && st.condition),
+    hyd.stages.map(st => st.id || "⛔").join(", "));
+  check("§92: ⚠️ …and PROGRESS is untouched — the record keeps what the def cannot know",
+    hyd.stageIndex === 2 && hyd.completedStages.join() === "s1,s2");
+  check("§92: ⛔ …and the WHITELIST is gone — `title` and `imagePrompt` were authored on every stage and dropped on every copy",
+    hyd.stages.every(st => st.title) && hyd.stages.some(st => st.imagePrompt));
+
+  // ── ⚑ THE RECORD STILL WINS WHERE PLAY WROTE SOMETHING
+  const played = Q92.hydrateQuest({ id: "the-stag-that-wont-die", stages: [{ id: "s1", objective: "what the player's own beat established" }] }, C92.quests);
+  check("§92: ⚑ …but the RECORD wins where it carries something — the def supplies words, it does not overwrite play",
+    played.stages[0].objective === "what the player's own beat established" && !!played.stages[0].condition);
+
+  // ── ⬜ AND WHERE THE DEF IS GONE, THE SNAPSHOT IS THE ANSWER
+  const orphan = { id: "a-quest-whose-content-was-retired", stages: [{ id: "s1", objective: "the only copy left" }] };
+  check("§92: ⬜ content retired under a live save — the snapshot survives, which is why a thin one is kept",
+    Q92.hydrateQuest(orphan, C92.quests).stages[0].objective === "the only copy left");
+
+  // ── ⚠️ A TRAILING EMPTY EXTRA GOES; ONE THE PLAYER HAS PASSED DOES NOT
+  const extra = Q92.hydrateQuest({ id: "the-mercy-that-wont-ask", stageIndex: 0, stages: [{}, {}, {}, {}] }, C92.quests);
+  check("§92: ⚠️ a TRAILING empty stage the def does not have is dropped — it preserved nothing and rendered as nothing",
+    extra.stages.length === 3 && extra.stages.every(st => st.objective), `${extra.stages.length} stages`);
+  const passed = Q92.hydrateQuest({ id: "the-mercy-that-wont-ask", stageIndex: 4, completedStages: ["a", "b", "c", "d"], stages: [{}, {}, {}, {}] }, C92.quests);
+  check("§92: ⛔ …but NEVER below `stageIndex` — a stage already passed is progress even when its words are gone",
+    passed.stages.length === 4, `${passed.stages.length} stages at stageIndex 4`);
+
+  // ── ⛔ AND THE READERS USE IT, which is the difference between a fix and a function
+  const gmSrc = rd("engine/gm_registry.js"), qSrc = rd("engine/quests.js");
+  check("§92: ⛔ the GM's readers go THROUGH the def — a hydrator nothing calls would be this spec's own defect",
+    /defs: env\.CONTENT\.quests/.test(gmSrc) && /questsForGM\(env\.character, env\.CONTENT\.quests\)/.test(gmSrc)
+    && /opts\.defs \? questsFor\(character, opts\.defs\)/.test(qSrc));
+
+  // ── ⚑ AND THE MEASURED DIFFERENCE, END TO END: the GM's own block gains the stage it was missing.
+  const save92 = { quests: [{ id: "the-stag-that-wont-die", status: "active", structured: true, stageIndex: 0, completedStages: [], stages: [{}, {}, {}], routes: {} }] };
+  const without = String(Q92.structuredQuestsForGM(save92, { npcs: C92.npcs }) || "");
+  const withDefs = String(Q92.structuredQuestsForGM(save92, { npcs: C92.npcs, defs: C92.quests }) || "");
+  // ⚠️ AND IT IS WORSE THAN "no stage line". Unhydrated, the block reads:
+  //     - [the-stag-that-wont-die] undefined (axis: ?) — STAKES: undefined
+  //       Now: resolve
+  // ⛔ The GM was handed the literal word `undefined` as the quest's title AND its stakes, and "resolve" as
+  // the whole of what to do. Hydrated it gets the name, the stakes and the stage's own objective.
+  const wantObjective = "Start at the silent graze";
+  check("§92: ⛔ THE GM WAS RUNNING THESE BLIND — `undefined` for the title and the stakes, and \"Now: resolve\" for the stage",
+    /undefined/.test(without) && /Now: resolve/.test(without)
+    && !without.includes(wantObjective) && withDefs.includes(wantObjective) && !/undefined/.test(withDefs),
+    `without: ${JSON.stringify(without).slice(0, 90)}`);
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

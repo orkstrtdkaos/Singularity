@@ -229,10 +229,10 @@ export const GM_CONTEXT = [
   // ---- shared by turn + ask + quest ----
   { key: "questsDetail", builder: "quests.questsForGM", carries: ["quest log"],
     reachedBy: "quest log screen", spec: "§14", views: ["turn", "ask", "quest"],
-    build: (env) => questsForGM(env.character) },
+    build: (env) => questsForGM(env.character, env.CONTENT.quests) },
   { key: "structuredQuestsDetail", builder: "quests.structuredQuestsForGM", carries: ["active structured quests", "stages", "personalArc once taken"],
     reachedBy: "quest log 'Take it on'", spec: "§14", views: ["turn", "ask", "quest"],
-    build: (env) => structuredQuestsForGM(env.character, { npcs: env.CONTENT.npcs }) },
+    build: (env) => structuredQuestsForGM(env.character, { npcs: env.CONTENT.npcs, defs: env.CONTENT.quests }) },
   // SNG-203 tier-2: the character's live tradition arc (finding→proving→ultimate), gated on teacher standing.
   { key: "traditionArcDetail", builder: "quests.traditionArcForGM", carries: ["tradition arc beat", "teacher", "the beat's quest", "capstone-is-a-scene"],
     reachedBy: "always (a practiced tradition with an authored arc)", spec: "SNG-203 §4", views: ["turn", "ask", "quest"],

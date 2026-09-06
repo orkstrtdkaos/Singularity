@@ -290,6 +290,23 @@ export function holdingsAt(character, locationId) {
 
 /** ⛔ ERIK'S HARD CONSTRAINT: a hold must be reportable in a SENTENCE. “The mine is running; the watchtower is eating it.”
  *  Built from what the record actually carries — condition, keeper, and (when authored) what it provides and what it eats. */
+/** ⚑ SPEC_holdings_screen §3/§4 — THE FACTS A PLAYER SEES, the same on the list and in the popup. Everything the GM's
+ *  own line already carries (holdingsForGM), player-safe: hands and guard by name, what it has, what it holds, what it
+ *  owes, what it watches. Empty when there is nothing to say — a bare hold is not padded. PURE. */
+export function holdingFactsLine(h, { nameOf = null, holdings = [] } = {}) {
+  if (!h) return "";
+  const nm = (id) => (nameOf ? nameOf(id) : null) || id;
+  const parts = [];
+  if ((h.crew || []).length) parts.push(`hands: ${h.crew.map(nm).join(", ")}`);
+  if ((h.garrison || []).length) parts.push(`guarded by ${h.garrison.map(nm).join(", ")}`);
+  if ((h.features || []).length) parts.push(`has ${h.features.map(f => f.name || f.kind).join(", ")}`);
+  const store = Object.entries(h.store || {}).filter(([, n]) => Number(n) > 0);
+  if (store.length) parts.push(`store: ${store.map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", ")}`);
+  if (Number(h.arrears) > 0) parts.push(`in arrears ${h.arrears}`);
+  if (h.watches) parts.push(`watches over ${(holdings || []).find(o => o && o.id === h.watches)?.name || h.watches}`);
+  return parts.join(" · ");
+}
+
 export function holdingSentence(h, { nameOf = null } = {}) {
   if (!h) return "";
   const name = h.name || h.id;
@@ -984,6 +1001,10 @@ export function renameHolding(character, id, name, { worldCount = null } = {}) {
   if (!h || !next || next === h.name) return h || null;
   const was = h.name;
   h.name = next;
+  // ⛔ SPEC_holdings_screen §2 — A CACHED IMAGE SURVIVED A RENAME: Stillwater's Trouble carried art whose prompt read
+  // "Raven's Home". `if (holding.image) return holding.image` is right for never-regenerate and wrong for the-subject-
+  // changed. One clear, at the one moment the subject changes; the next read mints it fresh under the new name.
+  if (h.image) delete h.image;
   h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `renamed from ${was} to ${next}` }].slice(-12);
   queueHoldingEvent(character, `${was} is called ${next} now.`);
   return h;

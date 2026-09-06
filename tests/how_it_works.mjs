@@ -8368,6 +8368,49 @@ console.log("\n── §122 · forty days on foot, or hours through the gate Sil
   check("§122: ⚑ the repo copy carries the cluster and keeps its rev lead", disk.rev >= 3400 && disk.reconcileVersion >= 45 && L["gen-threshold-post"]._placedBy === "erik-2026-09-06-gate-cluster");
 }
 
+/* ═════ §123 — THE HOLDINGS SCREEN: PICTURES THAT MINT ON READ, ART THAT DOES NOT OUTLIVE A RENAME, TWO SURFACES THAT AGREE (SPEC_holdings_screen) ═════ */
+// ⛔ Erik: "Only 2 of my Silas holds got an image… those names don't transfer over to the main holds screen." Measured:
+// ensureHoldingImage had ONE caller (the celebration); the list showed four facts of ten; Stillwater's Trouble's art
+// still said "Raven's Home". One facts line in the engine, both surfaces, the owner named.
+console.log("\n── §123 · the list and the popup say the same thing, with a picture ──");
+{
+  const H = await import("../engine/holdings.js");
+  const RC = await import("../engine/reconcile.js");
+  const nameOf = (id) => ({ a: "Bette Harrow", b: "Dav Cutter", c: "Ilma", gate: "the Made Gate" })[id] || id;
+  const full = { id: "m", name: "the mine", kind: "enterprise", condition: "thriving", crew: ["a", "b"], garrison: ["c"], features: [{ kind: "watch", name: "a Watch" }, { kind: "mine" }], store: { raw_material: 4, worked_light: 0 }, arrears: 12, watches: "g" };
+  const line = H.holdingFactsLine(full, { nameOf, holdings: [full, { id: "g", name: "the Made Gate" }] });
+  check("§123: ⛔ ONE FACTS LINE carries what the GM's line carries — hands and guard by NAME, what it has, holds, owes, watches",
+    /hands: Bette Harrow, Dav Cutter/.test(line) && /guarded by Ilma/.test(line) && /has a Watch, mine/.test(line) && /store: 4 raw material/.test(line) && !/worked light/.test(line) && /in arrears 12/.test(line) && /watches over the Made Gate/.test(line), line);
+  check("§123: …and a bare hold says nothing — no padding", H.holdingFactsLine({ id: "x", name: "x" }) === "");
+  check("§123: …holdingSentence is player-safe — it reads name, state, keeper, provides, eats, and nothing marked private",
+    !/PRIVATE|secret/i.test(H.holdingSentence({ id: "x", name: "X", condition: "holding", gmNotes: "[PRIVATE] the keeper is a spy", secret: "yes" })));
+  // ── the rename clears the art, once
+  const c = { id: "pc", holdings: [{ id: "h", name: "Raven's Home", condition: "holding", image: "https://x/prompt/Raven%27s%20Home%3A%20a%20post", history: [] }] };
+  H.renameHolding(c, "h", "Raven's Home"); const kept = !!c.holdings[0].image;
+  H.renameHolding(c, "h", "Stillwater's Trouble");
+  check("§123: ⛔ A RENAME CLEARS THE ART — the same name keeps it; a new name puts it away so the next read draws it fresh",
+    kept && !c.holdings[0].image && c.holdings[0].name === "Stillwater's Trouble");
+  // ── step 46: art whose prompt names a former name is cleared, on every save
+  const step = RC.CHARACTER_STEPS.find(x => x.id === "stale-hold-art-cleared");
+  const fx = () => ({ id: "anyone", holdings: [
+    { id: "swt", name: "Stillwater's Trouble", image: "https://image.pollinations.ai/prompt/Raven%27s%20Home%3A%20a%20standing%20post?width=1024" },
+    { id: "tp", name: "Threshold Post", image: "https://image.pollinations.ai/prompt/Threshold%20Post%3A%20a%20standing%20post?width=1024" },
+    { id: "au", name: "The Fell Pell", image: "https://cdn.example/authored/forge.png" },
+  ] });
+  const c2 = fx(); const out = step.apply(c2); const again = step.apply(c2);
+  check("§123: ⛔ STEP 46 clears the picture of an old name, keeps one that matches, never touches authored art, says it, and is idempotent — for every character",
+    !!step && step.version === 46 && !c2.holdings[0].image && !!c2.holdings[1].image && !!c2.holdings[2].image && Array.isArray(out.notes) && /Stillwater's Trouble/.test(out.notes[0]) && !again.notes);
+  // ── the app: both surfaces mint, both render the one line, the owner is named
+  const app = rd("app.js");
+  check("§123: ⛔ ensureHoldingImage has MORE THAN ONE CALLER now — the celebration, the list, the popup", (app.match(/ensureHoldingImage\(/g) || []).length >= 4);
+  check("§123: ⛔ THE LIST AND THE POPUP RENDER THE SAME FACTS LINE from the same engine call, and name the owner",
+    (app.match(/\$\{factsOf\(h\)\}/g) || []).length === 2 && (app.match(/\$\{ownerOf\(h\)\}/g) || []).length === 2 && /holdingFactsLine\(h, \{ nameOf, holdings: character\.holdings/.test(app)
+    && /import \{ holdingFactsLine, /.test(app));
+  const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  check("§123: ⚑ on the repo copy the stale Raven's Home art is gone from Stillwater's Trouble, and no hold carries art of another name",
+    disk.reconcileVersion >= 46 && disk.holdings.every(h => { const m = typeof h.image === "string" && /\/prompt\/([^?]+)/.exec(h.image); if (!m) return true; try { return decodeURIComponent(m[1]).startsWith(h.name); } catch { return true; } }));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

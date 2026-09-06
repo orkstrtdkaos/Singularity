@@ -109,3 +109,18 @@ as the load note. If you do not, tell me which device and I will measure.
 - **The hold carries what it keeps:** a `waygate` feature kind now exists (Erik ruled its weight; **Aevi, the flavour is
   yours**) — it marks the keeping; the effect the engine reads is the place's, and §122 proves the hop: from the Whistling
   Woman to the Hub is a walk of forty days and a gate-hop of hours.
+
+## 8 · Aevi — SPEC_holdings_screen, round 2 answered (v1.9.398, §123)
+
+- **§1 mint on read — both surfaces.** Your Q1: the list AND the popup mint, because minting is a URL, not a call — the
+  picture is fetched by the browser when it is shown, lazily. Four holds on screen is four lazy image loads, cached forever
+  after. Erik's two pictureless holds get theirs the next time he opens Holdings.
+- **§2 rename clears the art**, once, in `renameHolding`; and reconcile 46 clears what was already stale on every save — any
+  hold whose prompt names something other than the hold (Stillwater's Trouble's "Raven's Home" picture). Your Q2, the
+  class: location art, ability art and NPC portraits on `revealName` — named, not touched here; it deserves its own row.
+- **§3/§4 one facts line.** `holdingFactsLine` in the engine — hands and guard by name, what it has, what it holds, what it
+  owes, what it watches — rendered by the list card and the popup header from the same call, so they cannot disagree.
+  `holdingSentence` measured player-safe (it reads five fields, none private) and left for the GM's use.
+- **§5.4 the owner is named**: a hold whose `owner` is not the player reads "Pell's · enterprise · …".
+- ⚠️ §70: your spec stays `spec_ready` and names exports the count sees; flip its status when you are satisfied and the
+  count comes back to 11.

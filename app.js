@@ -62,7 +62,7 @@ import { enterDeathState } from "./engine/death.js";
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
-import { answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
@@ -126,7 +126,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.397";
+const APP_VERSION = "1.9.398";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10969,13 +10969,19 @@ function renderHoldingsTab(manageId = null) {
     ${used >= total && total > 0 ? `<span class="hint" style="color:var(--warn,#e0b25a)">full</span>` : ""}
     <span class="hint" style="width:100%">${esc(why)}</span></div>`;
 
+  // ⛔ SPEC_holdings_screen §3/§4 — ONE line of facts, the SAME on the list and in the popup (hands, guard, features, store,
+  // arrears, what it watches), composed in the engine so the two surfaces cannot disagree. §5.4 — whose it is, when not yours.
+  const ownerOf = (h) => (h.owner && h.owner !== character.id && h.owner !== "you") ? esc(nameOf(h.owner)) + "'s · " : "";
+  const factsOf = (h) => { const line = holdingFactsLine(h, { nameOf, holdings: character.holdings || [] }); return line ? `<div class="hint">${esc(line)}</div>` : ""; };
   const holdingRows = hs.map(h => {
     const loc = h.locationId ? (CONTENT.locations?.[h.locationId]?.name || h.locationId) : null;
+    const art = ensureHoldingImage(h) || h.image || null;   // §1: MINT ON READ — a hold claimed by any path gets its picture here, not only at the celebration
     return `<div class="cs-ability" style="display:flex;gap:10px;align-items:flex-start">
-      ${h.image ? `<img src="${esc(h.image)}" alt="${esc(h.name || h.id)}" style="width:64px;height:64px;object-fit:cover;border-radius:4px;flex:0 0 auto;cursor:zoom-in" data-lightbox="${esc(h.image)}" data-regen-kind="holding" data-regen-subject="${esc(h.id)}">` : ""}
+      ${art ? `<img src="${esc(art)}" loading="lazy" alt="${esc(h.name || h.id)}" style="width:64px;height:64px;object-fit:cover;border-radius:4px;flex:0 0 auto;cursor:zoom-in" data-lightbox="${esc(art)}" data-regen-kind="holding" data-regen-subject="${esc(h.id)}">` : ""}
       <div style="flex:1 1 auto;min-width:0">
         <strong>${esc(h.name || h.id)}</strong>
-        <div class="hint">${esc(h.kind || "post")} · ${esc(h.condition || "holding")}${loc ? " · " + esc(loc) : ""}${h.steward ? " · kept by " + esc(nameOf(h.steward)) : " · <em>unkept</em>"}</div>
+        <div class="hint">${ownerOf(h)}${esc(h.kind || "post")} · ${esc(h.condition || "holding")}${loc ? " · " + esc(loc) : ""}${h.steward ? " · kept by " + esc(nameOf(h.steward)) : " · <em>unkept</em>"}</div>
+        ${factsOf(h)}
         ${h.obligation ? `<div class="hint">owes: ${esc(h.obligation)}</div>` : ""}
         ${(() => { // ⚑ THE FOUR ERIK NAMED, as a grid he can scan rather than six sentences he must parse.
           const L = holdingLedger(h, { economy: CONTENT.rules?.economy, cfg: holdCfgNow(),
@@ -11091,10 +11097,13 @@ function renderHoldingsTab(manageId = null) {
       const folk = [...new Set([...company.map(m => m.npcId), ...delegates, ...Object.keys(character.npcRegistry || {})])].filter(Boolean).slice(0, 60);
       const folkOpts = folk.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("");
       const head = (t) => `<div class="hint" style="font-size:10px;text-transform:uppercase;letter-spacing:.6px;margin-top:12px">${t}</div>`;
+      const art = ensureHoldingImage(h) || h.image || null;   // §1: the manage screen mints too — Erik: "and for the new manage screen that pops up"
       return `<div class="item-detail-modal" id="hold-modal"><div class="item-detail-sheet" style="max-width:520px;text-align:left">
         <button class="item-modal-close" id="hold-modal-close" title="Close">\u2715</button>
         <h3 class="codex-title" style="font-size:15px;margin-bottom:2px">${esc(h.name || h.id)}</h3>
-        <div class="hint">${esc(h.kind || "post")} \u00b7 ${esc(h.condition || "holding")}${h.steward ? " \u00b7 kept by " + esc(nameOf(h.steward)) : " \u00b7 unkept"}</div>
+        ${art ? `<img src="${esc(art)}" loading="lazy" alt="${esc(h.name || h.id)}" style="width:100%;max-height:180px;object-fit:cover;border-radius:6px;margin:6px 0;cursor:zoom-in" data-lightbox="${esc(art)}" data-regen-kind="holding" data-regen-subject="${esc(h.id)}">` : ""}
+        <div class="hint">${ownerOf(h)}${esc(h.kind || "post")} \u00b7 ${esc(h.condition || "holding")}${h.steward ? " \u00b7 kept by " + esc(nameOf(h.steward)) : " \u00b7 unkept"}</div>
+        ${factsOf(h)}
         ${head("Who is here")}
         <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
           ${folkOpts ? `<select data-hold-hand="${esc(h.id)}">${folkOpts}</select><button class="opt" data-hold-crew="${esc(h.id)}" title="Put them to work here \u2014 crew add to what it makes">Add hands</button><button class="opt" data-hold-guard="${esc(h.id)}" title="Post them on watch \u2014 a watch is what SEES a raid coming">Post a guard</button>` : ""}

@@ -1566,6 +1566,27 @@ export const CHARACTER_STEPS = [
       return notes.length ? { notes } : {};
     }
   },
+  {
+    version: 46, id: "stale-hold-art-cleared", playerFacing: true,
+    // ⛔ SPEC_holdings_screen §2 — a hold's picture is minted from a prompt that begins with its NAME, cached forever, and a
+    // rename never touched it: Stillwater's Trouble carries art captioned "Raven's Home". renameHolding clears it from now
+    // on; this clears what was already stale — any hold whose decodable prompt names something other than the hold. An
+    // authored image (no prompt in the url) is never touched. The next read mints it fresh. Every character; idempotent.
+    apply: (c) => {
+      const cleared = [];
+      for (const h of c?.holdings || []) {
+        if (!h || typeof h.image !== "string" || !h.name) continue;
+        const m = /\/prompt\/([^?]+)/.exec(h.image);
+        if (!m) continue;
+        let prompt = ""; try { prompt = decodeURIComponent(m[1]); } catch { continue; }
+        if (prompt.startsWith(h.name + ":") || prompt.startsWith(h.name + " ")) continue;
+        delete h.image;
+        cleared.push(h.name);
+      }
+      if (!cleared.length) return {};
+      return { notes: [`${cleared.join(", ")}: the picture was of an old name and is put away — it will be drawn again under the name it has now.`] };
+    }
+  },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];

@@ -558,6 +558,37 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   out.yielded = ys.length ? ys[0] : null;
   out.yields = ys;
   // ✅ R46b: what the pilgrims leave, before the keep is paid — attendance is an earning shape beside production.
+  // ⛔ A KEEPER SELLS — that is what a keeper IS. Measured before this: a thriving enterprise kept by a
+  // steward drained 14 crystal a pass forever while its entire output sat in a shed, because `tickStore`
+  // debited upkeep and credited nothing. 100 raw material worth 400 crystal, stranded, and the purse falling.
+  // ⚑ Erik: "that should be far outweighed by what she would bring in from selling her wares and labor."
+  // ⚠️ NOT THE WHOLE STORE, ON PURPOSE: 8 raw material is 32 in the valley and 115 in the Gearlands, and a
+  // keeper who cleared the shelves every pass would make a caravan pointless. She sells the week's work here
+  // and keeps stock back — the surplus is what a caravan carries somewhere better.
+  // ⛑ AND NO KEEPER MEANS NO SALE, which is the whole meaning of having none.
+  if (holding.steward && regionId) {
+    // ⛑ HALF, MEASURED. Every share fixes the drain; the choice is between a hold that pays and a hold with
+    // stock worth carrying. Over ten passes of the Fell Pell: 0.9 nets +256 and leaves 1 unit (14 crystal in
+    // the Gearlands); 0.5 nets +224 and leaves 9 (130); 0.25 nets +148 and leaves 28 (403). ⚑ Half is where
+    // the hold is clearly profitable AND the surplus is worth a caravan — which is the whole point of both.
+    const share = Math.max(0, Math.min(1, Number(cfg?.keeperSells ?? 0.5)));
+    const sold = {}; let earned = 0;
+    for (const [g, n] of Object.entries(holding.store || {})) {
+      const units = Math.round((Number(n) || 0) * share);
+      if (units <= 0) continue;
+      const w = unitWorth(g, { economy, regionId, cfg });
+      if (!w) continue;
+      const val = Math.round(units * w.each);
+      if (val <= 0) continue;
+      holding.store[g] = (Number(n) || 0) - units;
+      if (!(holding.store[g] > 0)) delete holding.store[g];
+      sold[g] = units; earned += val;
+    }
+    if (earned > 0) {
+      const cr = credit(character, cfg?.upkeepCurrency || "crystal", earned, { origin: "traded", regionId });
+      if (cr.ok) out.keeperSold = { by: holding.steward, goods: sold, crystal: earned };
+    }
+  }
   const alms = pilgrimIncome(holding, { cfg, meaning });
   if (alms > 0) { const c = credit(character, cfg.upkeepCurrency || "crystal", alms, { origin: "gift" }); if (c.ok) out.pilgrims = alms; }
   const up = upkeepFor(holding, cfg);

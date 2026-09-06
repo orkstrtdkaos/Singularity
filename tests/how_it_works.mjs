@@ -4742,7 +4742,7 @@ console.log("\n── §69 · the five — roll=card, meaning ceiling, stacking 
     check("§69: …the narrator's holding line carries the store; the Holdings tab shows it and sells it where you stand", /store: 12 raw_material/.test(H69.holdingsForGM(c, null, { hereId: null, nameOf: id => id })) && /data-hold-sell=/.test(app69) && /storeWorth\(h, \{ economy: CONTENT\.rules\?\.economy/.test(app69)); }
   { const c = mk69(); c.holdings = [mine69("thriving")]; c.holdings[0].lastMovedWorldCount = 0; c.company = [{ npcId: "greta" }]; c.holdingOffers = [];
     const r = WT69.advanceHoldings({ character: c, content: C69, now: Date.now(), rng: () => 0.99 });
-    check("§69: ⛔ …and it runs on the TICK unattended — one pass yields into the store and pays the keep; a caller without content sees the old tick", r.moved === 1 && c.holdings[0].store?.raw_material > 0 && c.purse.crystal < 100
+    check("§69: ⛔ …and it runs on the TICK unattended — one pass yields into the store and SETTLES the money; a caller without content sees the old tick", r.moved === 1 && c.holdings[0].store?.raw_material > 0 && c.purse.crystal !== 100 && c.purse.crystal > 100   // ⚠️ was `< 100`, which pinned the DEFECT: a kept enterprise drained the purse every pass and credited nothing. Erik ruled otherwise on the Fell Pell (§103), and a keeper who sells is what a keeper IS — so the tick still settles, and a KEPT place now comes out ahead
       && (() => { const c0 = mk69(); c0.holdings = [mine69("thriving")]; c0.holdings[0].lastMovedWorldCount = 0; c0.company = [{ npcId: "greta" }]; WT69.advanceHoldings({ character: c0 }); return !c0.holdings[0].store && c0.purse.crystal === 100; })()); }
   // seeded rng helper for the raid share
   function mkRng69(seed) { let s = (seed + 1) * 2654435761; return () => { s |= 0; s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
@@ -7275,6 +7275,52 @@ console.log("\n── §102 · a revision counter cannot go backwards on a genui
   const both = SY.resolveSaveConflict({ rev: 100, syncedAt: 500, updatedAt: 1000 }, { rev: 140, updatedAt: 900 });
   check("§102: ⚑ …and a both-advanced conflict is STILL a conflict, so the losing copy is never just dropped",
     both.conflict === true && !!both.loser);
+}
+
+/* ═════ §103 — A KEEPER SELLS, WHICH IS WHAT A KEEPER IS FOR (Erik 2026-09-06) ═════ */
+// ⛔ A KEPT ENTERPRISE WAS A PURE CASH DRAIN. Measured over ten passes of the Fell Pell — thriving, kept by
+// Pell, at zero wages: the purse fell 14 a pass, every pass, forever, while 100 raw material worth 400
+// crystal piled up in a shed nothing could sell. `tickStore` debited upkeep and credited only pilgrim alms;
+// the output became coin ONLY if the player walked to the hold and sold it by hand.
+// ⚑ ERIK: "that seems ridiculously expensive for a forge run by my wife at zero wages… that should be far
+// outweighed by what she would bring in from selling her wares and labor." He is right, and selling what the
+// place makes is not a new mechanic — it is the job the keeper already has.
+console.log("\n── §103 · the person who runs the place while you are elsewhere also sells what it makes ──");
+{
+  const H103 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch103 } = await import("./headless_content.mjs");
+  const C103 = await lch103();
+  const econ103 = C103.rules?.economy;
+  const cfg103 = { ...econ103.holdStore, features: econ103.holdFeatures || null };
+  const forge = (steward) => ({ purse: { crystal: 500 },
+    holdings: [{ id: "f", name: "The Fell Pell", kind: "enterprise", condition: "thriving", locationId: "millbrook", steward, store: {} }],
+    npcRegistry: { pell: { id: "pell", name: "Pell", level: 8 } } });
+  const passes = (c, n = 10) => { for (let i = 1; i <= n; i++) H103.tickStore(c, c.holdings[0],
+    { cfg: cfg103, economy: econ103, regionId: "valley", dangerLevel: 0, rng: () => 0.99, day: i, density: 1, people: c.npcRegistry, meaning: 0 }); return c; };
+
+  const kept = passes(forge("pell"));
+  check("§103: ⛔ A KEPT ENTERPRISE PAYS — it drained 14 a pass forever and credited nothing at all",
+    kept.purse.crystal > 500, `${kept.purse.crystal - 500} over ten passes`);
+  check("§103: ⚑ …and clearly, not marginally — Erik's \"far outweighed\" is the standard",
+    kept.purse.crystal - 500 > 100, String(kept.purse.crystal - 500));
+
+  // ⚠️ AND NOT THE WHOLE STORE, ON PURPOSE. 8 raw material is 32 in the valley and 115 in the Gearlands; a
+  // keeper who cleared the shelves every pass would make a caravan pointless.
+  check("§103: ⚠️ …and stock still BUILDS, or the 3.6x differential has nothing to carry",
+    (kept.holdings[0].store.raw_material || 0) > 0, `${kept.holdings[0].store.raw_material || 0} left standing`);
+
+  // ⛑ NO KEEPER MEANS NO SALE, which is the entire meaning of having none.
+  const unkept = passes(forge(null));
+  check("§103: ⛑ …and a hold with NO keeper still only accumulates — that is what having none MEANS",
+    unkept.purse.crystal < 500 && (unkept.holdings[0].store.raw_material || 0) > (kept.holdings[0].store.raw_material || 0),
+    `${unkept.purse.crystal - 500} and ${unkept.holdings[0].store.raw_material} stranded`);
+
+  check("§103: …the coin comes through `credit`, so a keeper's sale MOVES coin and never mints it",
+    /credit\(character, cfg\?\.upkeepCurrency \|\| "crystal", earned/.test(rd("engine/holdings.js")));
+  check("§103: …and the share is a NAMED dial, not a number buried in an expression",
+    /cfg\?\.keeperSells \?\? 0\.5/.test(rd("engine/holdings.js")));
+  check("§103: ⚑ …and the receipt says who sold what, so the world can speak of it",
+    /out\.keeperSold = \{ by: holding\.steward/.test(rd("engine/holdings.js")));
 }
 
 /* ══════════ REPORT ══════════ */

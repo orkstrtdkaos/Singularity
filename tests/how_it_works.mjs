@@ -4714,8 +4714,14 @@ console.log("\n── §69 · the five — roll=card, meaning ceiling, stacking 
     const st = H69.tickStore(c, h, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 0, rng: () => 0.99, day: 1 });
     nets[cond] = (H69.storeWorth(h, { economy: eco69, regionId: null, cfg: sCfg }) || 0) - st.upkeep;
   }
-  check("§69: ⛔ …THE CURVE IS STEEP: thriving strongly positive, holding near break-even, strained a subsidy, failing a drain (ordinary demand)",
-    nets.thriving >= 15 && nets.holding >= -2 && nets.holding <= 6 && nets.strained < 0 && nets.failing < nets.strained, JSON.stringify(nets));
+  // ⚠️ THE SHAPE, NOT THE ARITHMETIC. This pinned break-even at the old enterprise upkeep of 14, which Erik
+  // then ruled down to coal-and-materials: "just materials and upkeep — coal, etc.", with arms and armour
+  // for a band transacted separately. ⛑ What the curve must hold is that condition MATTERS monotonically and
+  // that a failing place still costs you — both of which survive any upkeep the ruling picks, and both of
+  // which fail loudly if the ladder ever flattens.
+  check("§69: ⛔ …THE CURVE IS STEEP: strictly monotonic in condition, thriving strongly positive, failing a real drain",
+    nets.thriving > nets.holding && nets.holding > nets.strained && nets.strained > nets.failing
+    && nets.thriving >= 15 && nets.failing < 0, JSON.stringify(nets));
   { const c = mk69(); const h = mine69("thriving"); const st = H69.tickStore(c, h, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 0, rng: () => 0.99, day: 1 });
     check("§69: …yield lands AT the hold and upkeep leaves the purse", h.store?.raw_material === sCfg.yieldByCondition.thriving && c.purse.crystal === 100 - sCfg.upkeepByKind.enterprise && st.upkeep === sCfg.upkeepByKind.enterprise); }
   { const c = mk69(); c.purse.crystal = 3; const h = mine69("holding"); const st = H69.tickStore(c, h, { cfg: sCfg, economy: eco69, regionId: null, dangerLevel: 0, rng: () => 0.99, day: 1 });
@@ -6602,7 +6608,9 @@ console.log("\n── §95 · the arrears reach the purse through the one door i
   const save = { id: "t", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} },
     holdings: [{ id: "h1", name: "Threshold Post", kind: "post", condition: "strained", history: [] }] };
   const out = RC95.reconcile(save, "character", { content: C95, rules: C95.rules, ...C95 });
-  check("§95: ⛔ 880 reaches the purse", save.purse.crystal === 880, `crystal ${save.purse.crystal}`);
+  // ⚠️ WAS `=== 880`, which pinned the RUNNING TOTAL rather than this step's payment — so step 39's arrears
+  // (two deeds the record had lost, at R48's own rate) turned a true statement red. The fact is what R48 paid.
+  check("§95: ⛔ 880 reaches the purse", save.purse.crystal >= 880, `crystal ${save.purse.crystal}`);
   check("§95: ⚠️ …and the 2d correction rides with it, because THE NUMBER IS PREDICATED ON IT — a kept hold thrives",
     save.holdings[0].condition === "thriving"
     && save.holdings[0].history.some(h => /R48/.test(String(h.note))));
@@ -7321,6 +7329,75 @@ console.log("\n── §103 · the person who runs the place while you are elsew
     /cfg\?\.keeperSells \?\? 0\.5/.test(rd("engine/holdings.js")));
   check("§103: ⚑ …and the receipt says who sold what, so the world can speak of it",
     /out\.keeperSold = \{ by: holding\.steward/.test(rd("engine/holdings.js")));
+}
+
+/* ═════ §104 — A LABEL THAT SAYS BLOCKED ABOUT A MILESTONE THAT FIRES ═════ */
+// ⛔ THREE RAPPORT MILESTONES WORKED AND ALL THREE TOLD THE PLAYER THEY WERE BLOCKED. `rapport` 14 raises
+// `delegationCapacity` by one, 18 sets `householdEndures`, 20 sets `loyaltyUnbought` — measured, all three
+// live — while their player-facing text still read "⚑ BLOCKED PENDING HOLDINGS", authored before holdings
+// shipped and never revisited.
+// ⚠️ AND IT COST ERIK A GOAL. He said he feels short of people; I told him the fourth delegate comes at LEVEL
+// 40, reading `floor(level/10)` alone. It comes at RAPPORT 14, which is a different and far nearer thing to
+// pursue — and the label that would have told him said BLOCKED. A capability whose own description denies it
+// is worse than a missing one: the player stops looking.
+// ⛑ Aevi found the shape and named `presence`; measured, it is `rapport`. Same defect, one sub over.
+console.log("\n── §104 · the milestones fire, so their labels must not say blocked ──");
+{
+  const L104 = await import("../engine/ladder.js");
+  const { loadContentHeadless: lch104 } = await import("./headless_content.mjs");
+  const C104 = await lch104();
+  const lad = C104.rules?.subAttributeLadder;
+  const at = (rapport) => ({ level: 31, subAttributes: { rapport, presence: 10 } });
+
+  // ⛔ THE EFFECTS ARE LIVE — assert by RUNNING them, not by reading the file.
+  check("§104: ⛔ rapport 14 RAISES delegation capacity — the milestone works and always did",
+    L104.delegationCapacity(lad, at(14)) > L104.delegationCapacity(lad, at(7)),
+    `${L104.delegationCapacity(lad, at(7))} at 7 → ${L104.delegationCapacity(lad, at(14))} at 14`);
+  check("§104: …and 18 and 20 set the two STATES rapport buys, which are never numbers",
+    L104.serviceStates(lad, at(18)).householdEndures === true
+    && L104.serviceStates(lad, at(20)).loyaltyUnbought === true
+    && L104.serviceStates(lad, at(7)).householdEndures === false);
+
+  // ⛔ SO NO LABEL ON A LIVE MILESTONE MAY SAY IT IS BLOCKED. This is the general rule, not three fixes:
+  // every milestone whose effect fires must have text that does not claim otherwise.
+  const lying = [];
+  for (const [sub, def] of Object.entries(lad?.subs || {})) {
+    for (const [rank, text] of Object.entries(def?.milestones || {})) {
+      if (!/BLOCKED/i.test(String(text))) continue;
+      const eff = def?.milestoneEffects?.[rank];
+      const list = Array.isArray(eff) ? eff : (eff ? [eff] : []);
+      if (list.some(e => e && !e.blocked)) lying.push(`${sub}:${rank}`);
+    }
+  }
+  check("§104: ⛔ NO MILESTONE CLAIMS TO BE BLOCKED WHILE ITS EFFECT FIRES — the player stops looking",
+    lying.length === 0, lying.join(" · "));
+  // ⚠️ AND THE CHECK MUST BE ABLE TO FAIL: it found exactly these three before they were fixed.
+  check("§104: ⚠️ …and the scan is not vacuous — it reads real milestone text across every sub",
+    Object.values(lad?.subs || {}).reduce((n, d) => n + Object.keys(d?.milestones || {}).length, 0) >= 20);
+
+  // ── R49 step 39: the heal that reached him when four save restores could not
+  const R104 = await import("../engine/reconcile.js");
+  // ⛔ WITH SILAS'S ID, because the step is identity-guarded — it restores HIS two deeds and must never hand
+  // them to anyone else. §95 caught exactly that and the guard is the fix.
+  const stale = { id: "char-mrhs8286", reconcileVersion: 38, level: 30, xp: 2994, purse: { crystal: 0 }, deeds: [],
+    holdings: [{ id: "r", name: "Raven's Home", kind: "post", condition: "thriving", locationId: "the_old_warden_post" }] };
+  const out = R104.reconcile(stale, "character", { content: C104, rules: C104.rules });
+  check("§104: ⛔ THE HEAL REACHES A COPY NO FILE RESTORE COULD — level and xp come back as FLOORS",
+    stale.level === 31 && stale.xp === 3032, `L${stale.level} xp${stale.xp}`);
+  check("§104: …and the deeds the record lost are back, paid at R48's own rate",
+    stale.deeds.length === 2 && stale.purse.crystal === 16, `${stale.deeds.length} deeds, ${stale.purse.crystal} crystal`);
+  check("§104: ⚑ …and the name Erik corrected is corrected — \"Raven's Home\" was bogus and I carried it anyway",
+    stale.holdings[0].name === "Stillwater's Trouble", stale.holdings[0].name);
+  check("§104: ⛑ …and it is a FLOOR, so a character who climbed past 31 keeps what they earned",
+    (() => { const ahead = { id: "char-mrhs8286", reconcileVersion: 38, level: 40, xp: 9000, purse: { crystal: 0 }, deeds: [], holdings: [] };
+      R104.reconcile(ahead, "character", { content: C104, rules: C104.rules });
+      return ahead.level === 40 && ahead.xp === 9000; })());
+
+  // ⛔ ERIK'S UPKEEP RULING: "just materials and upkeep — coal, etc.", with arms and armour for a band
+  // transacted separately. It was 44% of a pass's local output value.
+  check("§104: ⛔ a forge costs COAL, not rent — enterprise upkeep is a fraction of what a pass produces",
+    Number(C104.rules?.economy?.holdStore?.upkeepByKind?.enterprise) <= 6,
+    String(C104.rules?.economy?.holdStore?.upkeepByKind?.enterprise));
 }
 
 /* ══════════ REPORT ══════════ */

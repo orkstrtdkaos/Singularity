@@ -1241,7 +1241,7 @@ export const CHARACTER_STEPS = [
       const raven = (c.holdings || []).find(h => h && /raven/i.test(String(h.name || "")) && !h.locationId);
       if (raven && locs.the_old_warden_post) {
         raven.locationId = "the_old_warden_post";
-        notes.push(`${raven.name} is on the map at last — the Old Warden Post, where the story always had it.`);
+        notes.push("Stillwater's Trouble is on the map at last — the Old Warden Post, where the story always had it.");   // ⚠️ NOT "Raven's Home": Erik called that name bogus and I carried it anyway
       }
       const stillNowhere = (c.holdings || []).filter(h => h && !h.locationId).map(h => h.name || h.id);
       if (stillNowhere.length) warnings.push(`holding(s) with no place, and none guessed: ${stillNowhere.join(", ")}`);
@@ -1286,6 +1286,59 @@ export const CHARACTER_STEPS = [
         } else warnings.push(`the Fell Pell fellowship is in the fiction but only ${roster.length} of its named people are on the registry`);
       }
       return { notes, warnings };
+    }
+  },
+  {
+    version: 39, id: "r49-heal-the-overwrite", playerFacing: true,
+    // ⛔ A STALE TAB ATE A LEVEL, TWICE, AND EVERY FILE-SIDE RESTORE LOST THE RACE BACK. `resolveSaveConflict`
+    // decided by wall clock, so a browser copy saved later — with FEWER writes behind it — won each time. The
+    // guard is fixed (§102), but a client that never re-pulls still holds the old copy, and the one channel
+    // that demonstrably reaches it is a reconcile step: step 38 landed on that very copy.
+    //
+    // ⚑ MEASURED BY DEED IDENTITY, THE LOST COPY IS A CLEAN SUPERSET — two deeds it holds that the stale one
+    // lacks, and NONE the other way. So this heals rather than overwrites, and nothing played is at risk.
+    // ⚠️ FLOORS, NEVER ASSIGNMENTS: `Math.max` on level and xp, and a deed added only when its `at` is absent.
+    // A character who has since climbed past 31 keeps it; a second run changes nothing.
+    apply: (c, ctx) => {
+      const notes = [];
+      // ⛔ THIS ONE IS PERSONAL, AND §95 CAUGHT ME NOT SAYING SO. R48 could be universal because it COUNTED
+      // each character's own deeds; this restores TWO SPECIFIC DEEDS Silas played, and without an identity
+      // guard it handed them — and their arrears — to every character who ever loads. That is the exact
+      // defect §95 exists to prevent, in the step written next to it.
+      if (c?.id !== "char-mrhs8286") return {};
+      const LOST = { level: 31, xp: 3032 };
+      const before = { level: Number(c.level) || 0, xp: Number(c.xp) || 0 };
+      c.level = Math.max(before.level, LOST.level);
+      c.xp = Math.max(before.xp, LOST.xp);
+
+      const deeds = Array.isArray(c.deeds) ? c.deeds : (c.deeds = []);
+      const seen = new Set(deeds.map(d => d && d.at).filter(Boolean));
+      const RESTORED = [{"at":"2026-09-05T23:22:17.418Z","locationId":"gen-whistling-woman-post","communityId":null,"description":"Read a death-thread to find meaning—bridging two crafts to read a message written in the shape of a fragile life","tags":["insight","craft"],"weight":1,"spread":[],"day":16,"worldDay":67},{"at":"2026-09-06T00:27:44.201Z","locationId":"gen-whistling-woman-post","communityId":null,"description":"Refused to let a fractured courier slip past unanswered—read her death-thread to know what brought her, and held her steady through the breaking.","tags":["mercy","attending","clarity"],"weight":1,"spread":[],"day":16,"worldDay":68}];
+      const added = RESTORED.filter(d => !seen.has(d.at));
+      for (const d of added) deeds.push(d);
+
+      // ⛑ AND THE LEDGER FOLLOWS THE DEEDS. R48 paid 8 a deed off the COUNT; two deeds arriving after that
+      // settlement are two deeds it never counted, so they are paid at the same rate rather than left owed.
+      if (added.length) {
+        const cur = ctx?.rules?.economy?.holdStore?.upkeepCurrency || "crystal";
+        const owed = added.length * 8;
+        const r = credit(c, cur, owed, { origin: "arrears" });
+        if (r?.ok) notes.push(`${added.length} deed${added.length === 1 ? "" : "s"} the record had lost are back on it, and ${owed} ${cur} with them.`);
+      }
+      if (c.level > before.level || c.xp > before.xp) {
+        notes.push(`You are level ${c.level} again — ${c.xp} experience. A stale window had written an older you back over the real one; it will not happen again.`);
+      }
+
+      // ⛔ AND THE NAME ERIK ALREADY CORRECTED ONCE. He called "Raven's Home" bogus and named it Stillwater's
+      // Trouble, and I carried the wrong one into a holding and a reconcile note anyway. His own history says
+      // it: "Named and claimed the Raven's Home warden post as an Ashwarden base — Stillwater's Trouble".
+      for (const h of (c.holdings || [])) {
+        if (h && /raven'?s home/i.test(String(h.name || ""))) {
+          h.name = "Stillwater's Trouble";
+          notes.push("The warden post carries its right name now — Stillwater's Trouble.");
+        }
+      }
+      return { notes };
     }
   },
   {    version: 30, id: "restore-generated-teacher-roles", playerFacing: true,

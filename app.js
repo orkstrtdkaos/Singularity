@@ -123,7 +123,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.371";
+const APP_VERSION = "1.9.372";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8471,6 +8471,20 @@ async function onAsk(text) {
   // refused and sent the player to a panel. ⚑ THE OPS GO THROUGH `applyTurn` — the same applier a beat uses,
   // never a second copy of it — so every guard, refusal and history write that a beat gets, a repair gets.
   // ⚠️ AND IT IS SAID OUT LOUD: a state change the player cannot see is worse than one that did not happen.
+  // ⛔ AND THE REFUSAL DETECTOR WATCHES THIS CHANNEL TOO. It lived only in `applyTurn`, which a refusal
+  // never reaches — a refusal emits no ops by definition, so the one path that could have caught it was the
+  // one path it could not take. ⚠️ Same shape as §91's own miss: the right instrument, pointed elsewhere.
+  if (result.ok) {
+    const askRefusal = refusalSignal({ narration: result.text, ...(result.ops || {}) });
+    if (askRefusal) {
+      character._gmRefusals = [...(character._gmRefusals || []), {
+        at: new Date().toISOString(), channel: "ask", kind: askRefusal.kind,
+        phrase: String(askRefusal.phrase).slice(0, 60), opsEmitted: askRefusal.opsEmitted.slice(0, 6),   // prose-cap-ok: a REGEX MATCH in a diagnostic log, not prose anyone reads
+        asked: String(text).slice(0, 120), locationId: character?.currentLocationId || null,   // prose-cap-ok: the PLAYER's own words in a log line
+      }].slice(-20);
+      console.warn(`[ask] REFUSAL SIGNAL (${askRefusal.kind}): "${askRefusal.phrase}" — ops: ${askRefusal.opsEmitted.join(", ") || "NONE"}`);
+    }
+  }
   let askOpsNote = "";
   if (result.ok && result.ops && Object.keys(result.ops).length) {
     try {

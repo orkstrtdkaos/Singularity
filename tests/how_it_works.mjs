@@ -6565,6 +6565,17 @@ console.log("\n── §94 · repair requests are welcome here AND this channel 
     && /saveCharacter\(character\);/.test(app94));
   check("§94: ⚑ …and the player is TOLD what changed — a state change nobody can see is worse than one that did not happen",
     /the GM changed: \$\{Object\.keys\(result\.ops\)\.join/.test(app94));
+  // ⛔ AND THE DETECTOR WATCHES THIS CHANNEL. It lived only in `applyTurn`, which a refusal never reaches —
+  // a refusal emits no ops by definition, so the one path that could have caught it was the one path it could
+  // not take. ⚠️ Erik's own screenshot is the proof: "the Repair panel isn't the right tool", "in your next
+  // turn", zero ops — and nothing would have logged it. Same shape as §91's miss: right instrument, wrong channel.
+  check("§94: ⛔ the refusal detector watches the ASK channel — where the failure actually happens",
+    /const askRefusal = refusalSignal\(\{ narration: result\.text/.test(app94)
+    && /channel: "ask"/.test(app94) && /asked: String\(text\)/.test(app94));
+  check("§94: …and it fires on the refusal Erik was actually given",
+    G94.refusalSignal({ narration: "That's not something I can do from here — the Repair panel isn't the right tool. In your next turn, make a beat of formally claiming the post." })?.kind === "refused-with-no-ops");
+  check("§94: …and stays quiet when the same request is GRANTED",
+    G94.refusalSignal({ narration: "Done — the Whistling Woman Post is on your sheet.", holdingOps: [{ op: "claim", id: "w" }] }) === null);
   check("§94: ⚠️ …and a failed repair says so and writes nothing",
     /did not take; nothing was written/.test(app94));
 }

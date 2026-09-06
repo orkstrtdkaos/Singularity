@@ -4056,7 +4056,16 @@ await (async () => {
     return schemaHasBoth && demandsIt;
   })());
   check("SNG-143: correctNpcGender is in the stateOps repair vocabulary", /correctNpcGender \(a known person shown as the wrong sex\/gender/.test(gmSrc));
-  check("SNG-143 (P2): the OOC channel routes an item EVOLUTION to in-play itemUpdates, not the sheet editor", /DISTINGUISH A CREATION-REPAIR FROM AN ITEM GROWING IN PLAY/.test(gmSrc) && /Route the second to play, never to the editor/.test(gmSrc) && /DO NOT send them to the Repair panel/.test(gmSrc));
+  // ⚠️ 2026-09-05 — THIS PINNED A SENTENCE WHOSE REMEDY WAS THE DEFECT. The old line told the OOC channel to
+  // route an item evolution away from the sheet editor and INTO A LATER BEAT — "Bring it into the next beat…
+  // and I'll evolve it" — and the model generalised that idiom to everything, which is exactly the refusal
+  // Erik was handed for a HOLDING. ⛔ The question is unchanged (never the sheet editor); the answer is now
+  // "do it here", so the check asks for the DISTINCTION and the ABSENCE OF DEFERRAL rather than for a phrase.
+  check("SNG-143 (P2): the OOC channel does not send a growing thing to the sheet editor — and does not defer it either",
+    /A CREATION-REPAIR AND A THING GROWING IN PLAY ARE DIFFERENT/.test(gmSrc)
+    && /DO NOT DEFER IT/.test(gmSrc)
+    && /do not say "bring it into the next beat"/i.test(gmSrc)
+    && /THE PLACE A PLAYER COMES TO GET SOMETHING FIXED/.test(gmSrc));
   const schema143 = JSON.parse(readFileSync(join(root, "schemas/npc.schema.json"), "utf8"));
   check("SNG-143: the NPC schema declares gender", !!schema143.properties.gender);
 })();

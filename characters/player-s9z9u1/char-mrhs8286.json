@@ -2157,19 +2157,20 @@
       "holdingOps": [
         {
           "op": "upsert",
-          "id": "whistling_woman_post",
+          "id": "whistling-woman-post",
           "name": "Whistling Woman Post",
-          "kind": "post",
+          "type": "post",
           "status": "active",
-          "warden": "silas_weir",
-          "kept": true,
+          "keptBy": null,
           "features": [
-            "The made gate — the first wright-made passage since the Transition, built in the left-branch hollow; the post watches over it and its circuit.",
-            "Deni Cors's relay mechanism: a music-box vocabulary of melodies carrying messages across the whistle-mark moorland network.",
-            "Logana — a skeletal guardian, known presence attached to the site.",
-            "Single warm room: stove, bed, table, shelf of supplies, water barrel, oil lamps. Warded at the threshold."
+            "single warm room with stove and bed",
+            "provisioned shelf and water barrel",
+            "oil lamps",
+            "Deni Cors's music-box relay mechanism",
+            "whistle-mark warding at threshold",
+            "moorland relay network connection"
           ],
-          "notes": "Named by Silas Weir after Deni Cors's song. First operational warden-staffed waystation on the moorland relay network. The relay mechanism's first test melody was answered from across the network."
+          "notes": "Silas Weir is warden of record. Built and provisioned by Deni Cors. Relay mechanism carries a working vocabulary of melodies across the whistle-mark network. No named keeper assigned."
         }
       ],
       "narration": "",
@@ -2202,7 +2203,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 16,
-    "hour": 9,
+    "hour": 10,
     "realAnchor": null
   },
   "companions": [
@@ -6097,11 +6098,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-06T01:25:21.135Z",
+    "lastSharedReadAt": "2026-09-06T02:08:59.076Z",
     "lastTickWorldDay": 68,
     "lastCanonWorldDay": 68,
-    "lastGenCount": 1633,
-    "turnsSinceOffer": 7,
+    "lastGenCount": 1634,
+    "turnsSinceOffer": 8,
     "recentOffers": [
       {
         "thing": "The ordinary work of feeding—Aldric's fish, hard bread, cheese from Pell's pack—grounding after the novel-depth work",
@@ -14444,7 +14445,7 @@
   ],
   "actionCount": 951,
   "grantsVersion": 1,
-  "reconcileVersion": 34,
+  "reconcileVersion": 35,
   "gallery": [
     {
       "kind": "moment",
@@ -15054,8 +15055,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1788658062664,
-  "rev": 1790,
+  "updatedAt": 1788660658829,
+  "rev": 1797,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -19156,7 +19157,7 @@
       "at": "2026-07-19T12:49:09.209Z"
     }
   ],
-  "syncedAt": 1786537830770,
+  "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
     "valley": 646,
@@ -19447,10 +19448,10 @@
     {
       "id": "sess-30",
       "startedAt": "2026-09-06T01:27:42.616Z",
-      "lastAt": "2026-09-06T01:27:42.616Z",
+      "lastAt": "2026-09-06T02:10:58.815Z",
       "startDay": 68,
       "endDay": 68,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -20299,7 +20300,7 @@
       "locationId": null,
       "steward": "fendt",
       "obligation": null,
-      "condition": "strained",
+      "condition": "thriving",
       "claimedDay": 67,
       "lastMovedWorldCount": 1612,
       "history": [
@@ -20320,6 +20321,12 @@
           "from": "strained",
           "to": "strained",
           "note": "taken back from Fendt, who keeps it"
+        },
+        {
+          "at": null,
+          "from": "strained",
+          "to": "thriving",
+          "note": "R48 §2d — restored: the tick had wiped its keeper, and a kept hold would have climbed"
         }
       ],
       "fromAssignment": "fendt::warden-of-the-threshold-post-at-the-ridg",
@@ -20332,7 +20339,7 @@
       "locationId": null,
       "steward": "cassiel-ord",
       "obligation": null,
-      "condition": "strained",
+      "condition": "thriving",
       "claimedDay": 67,
       "lastMovedWorldCount": 1612,
       "history": [
@@ -20353,6 +20360,12 @@
           "from": "strained",
           "to": "strained",
           "note": "taken back from Cassiel Ord, who keeps it"
+        },
+        {
+          "at": null,
+          "from": "strained",
+          "to": "thriving",
+          "note": "R48 §2d — restored: the tick had wiped its keeper, and a kept hold would have climbed"
         }
       ],
       "fromAssignment": "cassiel-ord::full-reconstruction-of-the-raven-s-home-",
@@ -20557,7 +20570,7 @@
     }
   },
   "purse": {
-    "crystal": 0,
+    "crystal": 880,
     "coin": 0,
     "paper": 0,
     "marks": 0,

@@ -383,6 +383,82 @@ export function geodesic(a, b, { depthScale = 0.05 } = {}) {
   return Math.hypot(surface, vertical);
 }
 
+/** ⛔ A PLACE MADE IN PLAY MUST STILL BE SOMEWHERE. Fourteen generated locations on Erik's save carry no
+ *  `worldPos` — including the Whistling Woman Post, which he is standing in and holds — so `geodesic`
+ *  returns null for them and every distance, bearing and route is unreachable. ⚠️ `geodesic`'s null is the
+ *  RIGHT answer to a missing position; this supplies the position instead of teaching it to guess.
+ *
+ *  ⚑ DERIVED FROM THE PARENT IT WAS MADE OFF, which is what `connections[0]` records — the same shape
+ *  `coordForGenerated` uses for the 2D map, one dimension up. The chain is walked because a generated place
+ *  can hang off another generated place (the post off the gate clearing off the plateau edge).
+ *
+ *  ⚠️ THE OFFSET IS DETERMINISTIC, FROM THE ID. The same place lands in the same spot every time — a
+ *  position that moved between loads would make a route flicker — and two children of one parent do not
+ *  stack on each other.
+ *
+ *  ⛔ AND IT IS SMALL BY DESIGN: `nearbyDays` (default 1) is how far a place found off another one sits. A
+ *  clearing off a road, a post by a gate, a shop in a town are all within a day's walk, and inventing a
+ *  larger number would put a hold somewhere the fiction never said it was. Returns null when no ancestor is
+ *  placed — a chain that reaches nothing is still honestly unplaced. PURE. */
+export function worldPosForGenerated(id, lookup, { nearbyDays = 1, maxHops = 8 } = {}) {
+  const get = typeof lookup === "function" ? lookup : ((k) => lookup?.[k]);
+  const seen = new Set();
+  let cur = get(id), hops = 0;
+  // ⛔ A PLACE THAT IS ALREADY SOMEWHERE IS NOT MOVED. The walk-up below stops at the first PLACED node, and
+  // that node can be the one asked about — measured, it returned a position 1.000 days from itself. ⚑ The
+  // offset is for a place with NO position; applied to one that has a position it invents a move, and
+  // authored geography would drift a day every time a caller forgot to check first. `derivedFrom` is null
+  // because nothing was derived: this position is the world's own.
+  if (cur?.worldPos && Number.isFinite(Number(cur.worldPos.colatitude))) return { ...cur.worldPos, derivedFrom: null };
+  while (cur && hops++ < maxHops) {
+    if (cur.worldPos && Number.isFinite(Number(cur.worldPos.colatitude))) break;
+    const parentId = (cur.connections || [])[0];
+    if (!parentId || seen.has(parentId)) return null;   // no parent, or a cycle
+    seen.add(parentId);
+    cur = get(parentId);
+  }
+  const base = cur?.worldPos;
+  if (!base || !Number.isFinite(Number(base.colatitude))) return null;
+  // a stable hash of the id → an angle and a sign, so the offset is reproducible and spread out
+  let h = 2166136261;
+  for (let i = 0; i < String(id).length; i++) { h ^= String(id).charCodeAt(i); h = Math.imul(h, 16777619); }
+  const angle = ((h >>> 0) % 3600) / 3600 * Math.PI * 2;
+  const radians = Math.max(0, Number(nearbyDays)) * (Math.PI / 300);   // the inverse of walkingDays' scale
+  // ⛔ THE POLE IS NOT A WALL, AND A FLAT OFFSET DIES AT IT. The Crossing sits at colatitude 0 — it IS the
+  // hub pole — so half the offset angles went negative, clamped back to 0, and both places made off the
+  // Crossing landed EXACTLY on it: 0.00 days away, measured. ⚠️ A clamp that eats the offset silently makes
+  // two places one place, and a route between them would be free.
+  // ⚑ SO WALK THE SPHERE PROPERLY: the great-circle destination from a point, a bearing and a distance. It
+  // needs no pole case (going past a pole comes out the far side, which is what walking does) and no
+  // convergence correction, and the offset is EXACTLY `nearbyDays` by construction rather than nearly.
+  const lat0 = (90 - Number(base.colatitude)) * Math.PI / 180;
+  const lon0 = Number(base.longitude) * Math.PI / 180;
+  let colat, lon;
+  if (Math.abs(Math.cos(lat0)) < 1e-9) {
+    // ⛔ ON A POLE THE BEARING VANISHES FROM THE FORMULA. cos(lat0) is 0 there, zeroing the longitude term,
+    // so every child of the Crossing came out at ONE point: the made gate and the temple measured 0.000 days
+    // apart while each sat exactly 1 day from the hub. ⚑ Longitude is undefined ON a pole, so the bearing you
+    // leave by IS the longitude you arrive at — exact, not an epsilon nudge away from the singularity.
+    // ⚠️ The Crossing is colatitude 0. This is the hub, not an edge case.
+    colat = lat0 > 0 ? (radians * 180 / Math.PI) : (180 - radians * 180 / Math.PI);
+    lon = angle * 180 / Math.PI;
+  } else {
+    const lat1 = Math.asin(Math.min(1, Math.max(-1,
+      Math.sin(lat0) * Math.cos(radians) + Math.cos(lat0) * Math.sin(radians) * Math.cos(angle))));
+    const lon1 = lon0 + Math.atan2(
+      Math.sin(angle) * Math.sin(radians) * Math.cos(lat0),
+      Math.cos(radians) - Math.sin(lat0) * Math.sin(lat1));
+    colat = 90 - (lat1 * 180 / Math.PI);
+    lon = lon1 * 180 / Math.PI;
+  }
+  return {
+    colatitude: Math.max(0, Math.min(180, Math.round(colat * 1000) / 1000)),
+    longitude: ((Math.round(lon * 1000) / 1000) % 360 + 360) % 360,
+    depth: Number(base.depth) || 0,
+    derivedFrom: cur.id || null,
+  };
+}
+
 /** Geodesic distance in WALKING DAYS, at Erik's year-to-walk scale: antipode-to-antipode (πR) is
  *  300 days, so a radius is 300/π days. Waygates become infrastructure and a pilgrimage to your
  *  antipode is a life event, which is the point. */

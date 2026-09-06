@@ -13,6 +13,7 @@
 // backfill.js remains the XP/bonds/practice credit pass (extend, don't replace) —
 // reconcile is the umbrella for everything schema/feature-shaped that came after.
 
+import { worldPosForGenerated } from "./worldmap.js";
 import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
 import { credit } from "./purse.js";   // R48: the purse has ONE door in, and it records an origin
@@ -1178,6 +1179,38 @@ export const CHARACTER_STEPS = [
       const r = credit(c, cur, owed, { origin: "arrears" });
       if (!r?.ok) return {};
       return { notes: [`${owed} ${cur} for ${deeds} deed${deeds === 1 ? "" : "s"} on your record — a valley pays for a service rendered, and nobody had ever counted.`] };
+    }
+  },
+  {
+    version: 37, id: "place-generated-locations", playerFacing: false,
+    // ⛔ FOURTEEN PLACES ON SILAS'S SAVE WERE NOWHERE, and one of them is the Whistling Woman Post — the
+    // hold he spent four rounds getting granted and the ground he is standing on. A location with no
+    // `worldPos` makes `geodesic` return null, which is the RIGHT answer to a missing position and the
+    // wrong state for a world to be in: nothing can be routed to or from a place that is nowhere.
+    //
+    // ⚑ THE MINT PATH NOW PLACES NEW ONES, but a creation-path fix alone leaves these fourteen nowhere
+    // forever — they were written before the fix existed. ⚠️ This is NOT a stored copy of a derived value:
+    // `worldPos` is the authoritative field every one of the 135 authored locations already carries, and
+    // this gives a generated place the same standing rather than caching a computation.
+    //
+    // ⚠️ It derives from `connections[0]` — the place this one was made off — and SKIPS any location it
+    // cannot anchor. A place with no placed ancestor stays honestly unplaced.
+    apply: (c, ctx) => {
+      const gen = c?.generated?.location;
+      if (!gen || typeof gen !== "object") return {};
+      const authored = ctx?.content?.locations || {};
+      const look = (k) => gen[k] || authored[k] || null;
+      const placed = [];
+      for (const [id, rec] of Object.entries(gen)) {
+        if (!rec || typeof rec !== "object") continue;
+        if (rec.worldPos && Number.isFinite(Number(rec.worldPos.colatitude))) continue;
+        const pos = worldPosForGenerated(id, look);
+        if (!pos) continue;
+        rec.worldPos = { colatitude: pos.colatitude, longitude: pos.longitude, depth: pos.depth };
+        if (authored[id]) authored[id].worldPos = rec.worldPos;   // the live session reads this copy
+        placed.push(id);
+      }
+      return placed.length ? { warnings: [`placed ${placed.length} generated location(s) that had no worldPos: ${placed.join(", ")}`] } : {};
     }
   },
   {    version: 30, id: "restore-generated-teacher-roles", playerFacing: true,

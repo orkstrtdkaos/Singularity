@@ -6671,6 +6671,119 @@ console.log("\n── §96 · the fiction's word is kept, the record is filed, a
     /CLAIM REFUSED by addHolding/.test(app96) && /DROPPED — no id and no name/.test(app96));
 }
 
+/* ═════ §97 — A PLACE MADE IN PLAY IS STILL SOMEWHERE, AND THE HUB IS A POLE ═════ */
+// ⛔ FOURTEEN OF ERIK'S LOCATIONS HAD NO POSITION, and one of them is the Whistling Woman Post — the hold he
+// spent four rounds getting granted, and the ground he is standing on. `geodesic` returns null for an
+// unplaced place, which is the RIGHT answer to a missing position and the wrong state for the world to be
+// in: nothing can be routed to or from a place that is nowhere, so the whole journey and trade build was
+// unreachable from where the player actually is.
+// ⚑ THE POSITION IS DERIVED, NOT INVENTED: a place made in play hangs off the place it was made from, which
+// is what `connections[0]` already records. ⚠️ Three separate silent bugs were measured out of this while
+// building it, and all three are pinned below — the pole ones because THE CROSSING IS AT COLATITUDE 0, so
+// the singularity is the hub every road in the world runs to rather than an edge case.
+console.log("\n── §97 · a place found in play is somewhere, exactly a day from where it was found ──");
+{
+  const WM97 = await import("../engine/worldmap.js");
+  const { loadContentHeadless: lch97 } = await import("./headless_content.mjs");
+  const C97 = await lch97();
+  const at = (colatitude, longitude) => ({ colatitude, longitude, depth: 0 });
+  const days = (a, b) => WM97.walkingDays({ worldPos: a }, { worldPos: b });
+
+  // a placed root, a child of it, and a grandchild — the exact shape of gen-whistling-woman-post
+  const world = {
+    root: { id: "root", worldPos: at(40, 10) },
+    kid: { id: "kid", connections: ["root"] },
+    grandkid: { id: "grandkid", connections: ["kid"] },
+  };
+  const kid = WM97.worldPosForGenerated("kid", world);
+  const grandkid = WM97.worldPosForGenerated("grandkid", world);
+
+  check("§97: ⛔ a place with no position gets one, derived from the place it was made off",
+    !!kid && Number.isFinite(kid.colatitude) && kid.derivedFrom === "root", JSON.stringify(kid));
+  check("§97: ⚑ …and it is EXACTLY a day's walk away — the offset is a real distance, not a nudge in degrees",
+    Math.abs(days(kid, world.root.worldPos) - 1) < 0.001, String(days(kid, world.root.worldPos)));
+  check("§97: …the chain is walked, so a place off a place off a placed place still lands",
+    !!grandkid && grandkid.derivedFrom === "root");
+  check("§97: ⚠️ …and it is DETERMINISTIC — a position that moved between loads would make a route flicker",
+    JSON.stringify(WM97.worldPosForGenerated("kid", world)) === JSON.stringify(kid));
+  check("§97: …and `nearbyDays` means days, so a caller can say how far 'nearby' is",
+    Math.abs(days(WM97.worldPosForGenerated("kid", world, { nearbyDays: 5 }), world.root.worldPos) - 5) < 0.005);
+
+  // ⛔ THE POLE, TWICE. First a flat offset went negative and `Math.max(0, …)` clamped it back onto the pole;
+  // then the great-circle formula that replaced it lost the bearing entirely, because cos(lat0) is 0 there.
+  // Both bugs put EVERY child of the Crossing at one point, and both measured 0.0000 days apart.
+  check("§97: ⚠️ THE CROSSING IS AT COLATITUDE 0 — the pole case is the hub, not an edge case",
+    Number(C97.locations.the_crossing.worldPos.colatitude) === 0);
+  const pole = { p: { id: "p", worldPos: at(0, 0) }, x: { id: "x", connections: ["p"] }, y: { id: "y", connections: ["p"] } };
+  const px = WM97.worldPosForGenerated("x", pole), py = WM97.worldPosForGenerated("y", pole);
+  check("§97: ⛔ two places made off the HUB are two places — they stacked into one, silently, twice",
+    days(px, py) > 0.05, `${days(px, py)} days apart`);
+  check("§97: …and each is still exactly a day from the hub, so the fix did not buy separation with distance",
+    Math.abs(days(px, at(0, 0)) - 1) < 0.001 && Math.abs(days(py, at(0, 0)) - 1) < 0.001);
+  // ⚠️ THE THRESHOLD ABOVE IS 0.05 AND NOT 1e-6 ON PURPOSE: `walkingDays` reads 1.4e-6 for two IDENTICAL
+  // points (floating point in the acos), so a check tighter than that floor can never fail and would be
+  // vacuous. My first version of this check used 1e-6 and proved nothing.
+  check("§97: ⚑ …and the check above discriminates — identical points read above 0, below the threshold",
+    days(at(40, 10), at(40, 10)) < 0.05, String(days(at(40, 10), at(40, 10))));
+
+  check("§97: ⛔ a place that is ALREADY somewhere is not moved — this displaced one a full day off itself",
+    days(WM97.worldPosForGenerated("root", world), world.root.worldPos) < 0.05
+    && WM97.worldPosForGenerated("root", world).derivedFrom === null);
+
+  // ⚑ AND A NULL IS STILL THE HONEST ANSWER when there is nothing to derive from. This does not guess.
+  check("§97: …a chain that reaches no placed ancestor is honestly unplaced, not guessed",
+    WM97.worldPosForGenerated("lonely", { lonely: { id: "lonely", connections: [] } }) === null);
+  check("§97: …a cycle terminates rather than hanging the load",
+    WM97.worldPosForGenerated("a", { a: { id: "a", connections: ["b"] }, b: { id: "b", connections: ["a"] } }) === null);
+  check("§97: …and an id nothing knows about is null, not a throw",
+    WM97.worldPosForGenerated("nope", {}) === null);
+
+  // ⛔ AND NOW THE DOOR THAT WAS SHUT. Everything above passed while the function was reachable ONLY from
+  // this file — `wiring_audit` counted it as a test-only export and was right: it would have passed CI
+  // forever and never fired in play. ⚠️ The suite ratchet did not catch it either, because wiring_audit was
+  // already red at 2 and my addition raised the MAGNITUDE inside an already-red bucket while the COUNT of
+  // failures held. ⚑ A green ratchet is not a green change, so the wire is asserted here too.
+  const app97 = rd("app.js");
+  check("§97: ⛔ THE MINT PATH DERIVES A POSITION — at the one door every minted place goes through",
+    /function commitGeneratedLocation/.test(app97)
+    && /if \(!rec\.worldPos\) \{[\s\S]{0,400}?worldPosForGenerated\(/.test(app97));
+  check("§97: …and it is IMPORTED, not merely named — a call to a function nobody imported is a throw",
+    /import \{[^}]*worldPosForGenerated[^}]*\} from "\.\/engine\/worldmap\.js"/.test(app97));
+
+  // ⚠️ AND A CREATION-PATH FIX ALONE LEAVES THE FOURTEEN NOWHERE FOREVER, because they were written before
+  // it existed — including the hold Erik is standing in. The step is asserted by RUNNING it, not by reading
+  // the source: a registered step that never fires is this project's most-repeated defect.
+  const { reconcile: rec97 } = await import("../engine/reconcile.js");
+  const savelike = {
+    reconcileVersion: 36,
+    generated: { location: {
+      "gen-a": { id: "gen-a", name: "A", connections: ["millbrook"] },
+      "gen-b": { id: "gen-b", name: "B", connections: ["gen-a"] },
+      "gen-lost": { id: "gen-lost", name: "Lost", connections: [] },
+    } },
+  };
+  const out97 = rec97(savelike, "character", { content: C97 });
+  const genA = savelike.generated.location["gen-a"], genB = savelike.generated.location["gen-b"];
+  check("§97: ⛔ THE RECONCILE STEP RUNS AND PLACES THE ONES ALREADY ON DISK — asserted by running it",
+    !!genA.worldPos && !!genB.worldPos && Number.isFinite(Number(genA.worldPos.colatitude)),
+    JSON.stringify(genA.worldPos));
+  check("§97: …and the placed record is what `walkingDays` reads, so a route can finally reach a hold",
+    Math.abs(WM97.walkingDays(genA, C97.locations.millbrook) - 1) < 0.005,
+    String(WM97.walkingDays(genA, C97.locations.millbrook)));
+  check("§97: ⚠️ …and a place with no placed ancestor is SKIPPED, not given a position it never had",
+    !savelike.generated.location["gen-lost"].worldPos);
+  check("§97: …the step announces what it moved — a silent backfill of geography would be unauditable",
+    (out97?.warnings || []).some(w => /placed 2 generated location/.test(String(w))));
+
+  // ⛑ AND IT IS IDEMPOTENT, which for geography means something sharper than 'runs once': a second pass
+  // must not re-derive and DRIFT a place a further day from where the first pass put it.
+  const was = JSON.stringify(genA.worldPos);
+  savelike.reconcileVersion = 36;
+  rec97(savelike, "character", { content: C97 });
+  check("§97: ⛑ …and a second pass does not drift it another day — a placed place is never re-derived",
+    JSON.stringify(genA.worldPos) === was);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

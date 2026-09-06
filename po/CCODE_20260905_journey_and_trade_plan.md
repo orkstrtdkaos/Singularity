@@ -6,6 +6,22 @@ party travel."*** ⬜ **A plan, not a build. Nothing here is written yet.**
 
 ---
 
+## §0 — ⛔ **A CORRECTION TO MY OWN §2, BEFORE ANYTHING ELSE**
+
+⚠️ **I told you distance did not exist. It does, and it is Erik's scale, and it is already wired.** Three
+claims in §2 below were false and I have struck them in place:
+
+| I wrote | ⛔ the measurement |
+|---|---|
+| *"any distance function at all: **absent**"* | **`walkingDays(a, b)` — `engine/worldmap.js:465`.** Built, pure, correct |
+| *"`gateHopCost` TAKES `overlandDays` and **nothing in the repo computes it**"* | ⛔ **`app.js:9511` passes `walkingDays` into `networkGatesFrom`, which computes it at `waygate.js:92`.** The hop has been priced on both sides the whole time |
+| *"the year-to-walk scale — **Erik's number**, still to rule"* | ⚑ **Already ruled and already in the code:** *"antipode-to-antipode (πR) is 300 days"*. **One fewer ruling I need from you** |
+
+➡️ **So step 1 as I named it was not work at all.** ⚑ **But there WAS a real step 1, and measuring for this
+correction is what found it** — see §2b. ⬜ **I have built it; the rest of the order below stands.**
+
+---
+
 ## §1 — ⛔ THE FINDING THAT SHOULD DECIDE THE ORDER: THE PRICES ALREADY EXIST AND ARE UNREACHABLE
 
 **Measured today, on the real economy tables:**
@@ -42,11 +58,56 @@ every piece below earns its place by serving that.
 | ⛔ absent | |
 |---|---|
 | **any bearing** | and it must come from `worldPos` — **never `map.x/y`, which correlates with real travel at r = 0.443** |
-| ⛔ **any distance function at all** | ⚠️ **`gateHopCost` TAKES `overlandDays` and nothing in the repo computes it.** A priced hop with no price on the other side |
+| ✅ ~~any distance function at all~~ | ⛔ **WRONG — see §0. `walkingDays` is built AND wired into `gateHopCost` already** |
 | **routes** | no pathfinder over `connections` |
+| ⛔ **a position for places MADE IN PLAY** | ⚑ **THE REAL STEP 1 — see §2b** |
 | **provisions** | `dried_rations` and `waterskin` are consumed by nothing |
-| **`walkingDays`** | ⚠️ **authored on zero legs.** SNG-331 assumed it existed; it does not, and it does not need to — it derives |
+| ✅ ~~`walkingDays` authored nowhere~~ | ⛔ **WRONG — `worldmap.js:465`, at 300 days antipode-to-antipode. SNG-331 assumed it exists because it does** |
 | **trade / caravans** | nothing |
+
+---
+
+## §2b — ⚑ **THE REAL STEP 1, FOUND BY MEASURING THE CORRECTION ABOVE** · ✅ built, v1.9.377
+
+⛔ **Erik's holds are at places the game MADE IN PLAY, and none of those places were anywhere.** Measured on
+his save: **14 generated locations, ZERO carrying a `worldPos`** — including `gen-whistling-woman-post`,
+**the hold he spent four rounds getting granted and the ground he is standing on.**
+
+➡️ ⚠️ **`walkingDays` was never the problem. It returned null because its ARGUMENTS were nowhere** — which
+is the honest answer to a missing position, and exactly the wrong state for the world to be in. **Nothing
+could be routed to or from any of the fourteen, so the entire journey build was unreachable from where the
+player actually stands.**
+
+⚑ **`worldPosForGenerated(id, lookup)` — the position is DERIVED, never invented:** a place found in play
+hangs off the place it was found from, which `connections[0]` already records, and the chain is walked
+because a generated place can hang off another one *(the post → the gate clearing → the plateau edge)*. The
+offset is **exactly one day's walk**, deterministic from the id, and **null when nothing in the chain is
+placed — a place with no anchor stays honestly unplaced.**
+
+| measured, after | |
+|---|---|
+| **14 of 14 placed** | zero nulls, worst deviation from exactly 1 day: **4.8 × 10⁻⁴** |
+| ⚑ **the Whistling Woman Post** | **74.3 days from Millbrook** — the number a real load produces, chained through the gate clearing |
+| **no two places stacked** | closest of all 91 pairs: **0.28 days** |
+
+### ⚠️ **AND THREE SILENT BUGS CAME OUT OF IT — TWO OF THEM AT THE HUB**
+
+⛔ **The Crossing is at colatitude 0. It IS the pole**, so the singularity in the maths is *the one place
+every road in the world runs to*, not an edge case:
+
+1. ⛔ **A flat offset clamped at the pole.** Half the bearings went negative, `Math.max(0, …)` pushed them
+   back, and **both places made off the Crossing landed exactly ON it — 0.00 days away.**
+2. ⛔ **The great-circle formula that replaced it lost the bearing there.** `cos(lat0)` is 0 at a pole, which
+   zeroes the whole longitude term — **every child of the hub arrived at one identical point.** Fixed
+   exactly rather than nudged: standing *on* a pole, the bearing you leave by **is** the longitude you
+   arrive at.
+3. ⛔ **A place that already had a position was displaced a day off itself**, because the walk-up stops at
+   the first placed node and that node can be the one you asked about.
+
+⚠️ **And a fourth, in my own gate rather than the engine:** my first coincidence check used `< 1e-6`, but
+`walkingDays` reads **1.4 × 10⁻⁶ for two identical points** (floating point in the `acos`). **The threshold
+sat below the floor, so it could never have failed.** It is 0.05 now, and §97 asserts that identical points
+fall under it — **a check that proves it can still fail.**
 
 ---
 
@@ -55,11 +116,11 @@ every piece below earns its place by serving that.
 ⚑ **Aevi's own order stands, with one correction and one addition.** Her SNG-386 ruling supersedes SNG-331's
 compass and I will not build the retired one.
 
-### 1 · `overlandDays(a, b)` — ⛔ THE MISSING PRIMITIVE, AND IT IS FIRST BECAUSE EVERYTHING ELSE TAKES IT
+### 1 · ~~`overlandDays(a, b)`~~ → ✅ **PUT THE PLACES MADE IN PLAY ON THE MAP** — done, v1.9.377
 
-⚠️ **`gateHopCost` already prices a hop as a fraction of the overland journey and has never been given one.**
-A great-circle distance over `worldPos`, divided by Erik's year-to-walk scale. ⬜ **Pure, ~15 lines, and it
-turns a dead argument into a live one.**
+⛔ **The primitive I named was already built and already wired (§0).** ⚑ **The real first step was that its
+arguments were nowhere:** 14 of Erik's locations had no position, and one of them is his newest hold. **§2b
+has the finding, the fix and the three bugs it hid.** ➡️ Everything below now has something to measure.
 
 ### 2 · `bearingBetween(a, b)` — ⚑ **HUBWARD/OUTWARD · SPINWARD/WIDDERSHINS**, per SNG-386
 
@@ -105,17 +166,17 @@ COSTS, it does not kill.** ⚑ It also prices a caravan honestly once it exists.
 | ⛔ **the direction vocabulary** | **Aevi's**, and SNG-386 already fixed the four words. I will use exactly those |
 | ⛔ **what a caravan RISKS** | ⚠️ a lost load is real loss. **Is a robbed caravan a total loss, a share, or a debt?** `resolveRaid`'s `takeShare` is the obvious model and the ruling is Erik's |
 | ⛔ **whether a carrier can DIE on the road** | ⚠️ **`legionClash` can kill.** A delegate lost to a trade run is a consequence the game should be able to have — **and it must be a choice, not a side effect** |
-| **the year-to-walk scale** | ⬜ Erik's number. Distance falls out of it and everything downstream is sized by it |
+| ~~the year-to-walk scale~~ | ✅ **ALREADY RULED AND ALREADY BUILT — 300 days antipode-to-antipode. Not a decision I need** |
 | **whether trade is TAXED** | a Reach that lets you sell at 3.6× may want a cut. ⬜ Not mine |
 
 ---
 
 ## §5 — ⚠️ AND TWO THINGS TO SETTLE BEFORE STEP 1
 
-⛔ **`walkingDays` IS AUTHORED NOWHERE, and SNG-331 assumed it.** ⚑ **That is fine and I would not author it:**
-distance derives from `worldPos`, so a leg's length is a fact about the world rather than a number somebody
-typed. ⚠️ **But it means SNG-331's "weight by days" reads on data that has to be computed first** — which is
-why `overlandDays` is step 1 rather than an implementation detail.
+⛔ ~~**`walkingDays` IS AUTHORED NOWHERE**~~ — **false, and struck: see §0.** ⚑ **SNG-331 assumed it exists
+because it does**, at `worldmap.js:465`, deriving from `worldPos` so a leg's length is a fact about the world
+rather than a number somebody typed. ⚠️ **What SNG-331's "weight by days" actually needed was for the places
+to BE somewhere**, which is §2b — and that is now true for all fourteen.
 
 ⬜ **AEVI ASKED ME A DIRECT QUESTION IN SNG-386 §5 AND I OWE HER THE ANSWER: is renaming
 `content/packs/valley/` feasible?** ⚑ **Yes, and it is a two-line change plus a migration** — every path is

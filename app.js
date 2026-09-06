@@ -43,7 +43,7 @@ import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSo
 import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
-import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
+import { walkingDays, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
 import { sheetFor as personSheetFor, battleSkillsFor } from "./engine/npcsheet.js";  // the person-keyed sheet
@@ -123,7 +123,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.376";
+const APP_VERSION = "1.9.377";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8270,6 +8270,17 @@ function commitGeneratedLocation(id, rec) {
     return null;
   }
   ensureGenerated(character);
+  // ⛔ AND A PLACE MADE IN PLAY MUST STILL BE SOMEWHERE. Fourteen of Silas's generated locations carried no
+  // `worldPos` — including the Whistling Woman Post, the hold he was standing in — so `geodesic` returned
+  // null for every one of them and nothing could be routed to or from a place the player actually was.
+  // ⚑ THE DERIVE BELONGS AT THE WRITE for exactly the reason the name guard above is here: there were two
+  // mint paths when I thought there was one, and a future third is covered without anyone remembering this.
+  // ⚠️ It is DERIVED from the place this one was made off, never invented, and stays absent when there is
+  // nothing to derive from — an unplaced place is better than a place in the wrong world.
+  if (!rec.worldPos) {
+    const pos = worldPosForGenerated(id, (k) => (k === id ? rec : (CONTENT.locations[k] || character.generated?.location?.[k] || null)));
+    if (pos) rec.worldPos = { colatitude: pos.colatitude, longitude: pos.longitude, depth: pos.depth };
+  }
   character.generated.location[id] = rec;   // persists on the save (hydrateGeneratedIntoContent revives it)
   CONTENT.locations[id] = rec;              // live this session
   return id;

@@ -435,5 +435,10 @@
     "purpose": "Who is around today — the half of the world the GM was never shown. 117 authored figures exist and nothing offered them, because npcsPresent comes back IN the turn, KNOWN PEOPLE is only who the player has already met, and generateRequest is reactive by rule.",
     "playerVisibleSurface": "Strangers who turn up and are worth knowing: someone needing a hand, someone with news, someone owed — and, more rarely, a figure of real standing who has somewhere else to be.",
     "whatMakesItFire": "Every turn, as ambient context. A per-person daily chance = their tier's rate x how near they are, with reach scaling by standing, so a market town is crowded and a remote post is quiet — and when nobody is near, it offers nobody."
+  },
+  "recovery.js": {
+    "purpose": "Merges a recovery snapshot back into a save, losing nothing from either. The sync kept the losing copy of every both-advanced conflict in localStorage and nothing ever listed, read or merged one — a player who lost a branch had it saved and unreachable.",
+    "playerVisibleSurface": "Settings → Recovery copies: each snapshot the sync kept, with when and what it holds, and one verb — Merge into my save — that adds what the copy has and this save lacks, and removes nothing.",
+    "whatMakesItFire": "A both-advanced sync conflict writes a snapshot; the player merges it from Settings. Merge is idempotent, refuses another character's snapshot, and treats level and xp as floors."
   }
 }

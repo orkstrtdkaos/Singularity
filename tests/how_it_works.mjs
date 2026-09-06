@@ -7856,6 +7856,70 @@ console.log("\n── §110 · neglect is slow, a raid is not; the record is rea
     /fromMystery/.test(app) && /R49 — a mystery must arrive with its story/.test(app));
 }
 
+/* ═════ §111 — THE SYNC KEPT EVERY LOSING COPY AND OFFERED NO DOOR TO IT ═════ */
+// ⛔ ERIK LOST THE RIDER RUNNER'S ENCRYPTED SLATE AND THE EVENTS AROUND IT. Measured: no copy of the save in
+// git ever held the slate — it was acquired on a branch played between 21:11 and morning, never pushed, and
+// replaced when the rev-2500 repo copy won. `preserveRecovery` keeps the losing copy of every both-advanced
+// conflict in localStorage, and until now NOTHING listed one, read one, or merged one.
+// ⚠️ AND I OWN THE CAUSE. I told him "nothing you played is at risk" on a diff of DEEDS ALONE; inventory,
+// codex, people and chronicle had diverged and I had not measured them. §104's floors healed level and xp and
+// could never have healed a slate.
+// ⚑ MERGE, NOT RESTORE: what the snapshot HAS that the save LACKS is added; nothing is removed; level never
+// regresses; twice changes nothing.
+console.log("\n── §111 · what a lost branch had comes back, and nothing played since is lost for it ──");
+{
+  const RV = await import("../engine/recovery.js");
+  const cur = () => ({ id: "c", level: 31, xp: 3032, inventory: [{ id: "knife", name: "Belt Knife" }],
+    npcRegistry: { pell: { id: "pell", name: "Pell" } }, quests: [{ id: "q1" }], holdings: [{ id: "h1" }], bands: [],
+    chronicle: ["A morning at the forge."], deeds: [{ at: "t1" }],
+    codex: { topics: { pell: { id: "pell", label: "Pell", kind: "person", facts: ["[d3] she is a smith"], links: [], aliases: [] } } } });
+  const snap = () => ({ id: "c", level: 30, xp: 2994, inventory: [{ id: "knife", name: "Belt Knife" }, { name: "Encrypted Slate" }],
+    npcRegistry: { pell: { id: "pell", name: "Pell (older record)" }, "rider-runner": { id: "rider-runner", name: "The Rider Runner" } },
+    quests: [{ id: "q1" }, { id: "q-slate" }], holdings: [{ id: "h1" }], bands: [],
+    chronicle: ["A morning at the forge.", "A rider came with an urgent slate."], deeds: [{ at: "t1" }, { at: "t2" }],
+    codex: { topics: { pell: { id: "pell", label: "Pell", kind: "person", facts: ["[d3] she is a smith", "[d9] she read the slate"], links: [], aliases: ["the smith"] },
+      "the-slate-hook": { id: "the-slate-hook", label: "The Slate", kind: "lore", facts: ["[d9] encrypted, urgent"], links: [], aliases: [] } } } });
+
+  const c = cur(); const r = RV.mergeRecovery(c, snap());
+  check("§111: ⛔ THE SLATE COMES BACK — an item the snapshot had and the save lacked is added, by name",
+    c.inventory.some(i => i.name === "Encrypted Slate") && r.items.includes("Encrypted Slate"), JSON.stringify(r.items));
+  check("§111: …and the rider runner — a person met on the lost branch — is back in the registry",
+    !!c.npcRegistry["rider-runner"] && r.people.includes("rider-runner"));
+  check("§111: …the hook's codex topic, the fact Pell gained, the quest, the chronicle line and the deed all return",
+    !!c.codex.topics["the-slate-hook"] && c.codex.topics.pell.facts.length === 2 && c.quests.some(q => q.id === "q-slate")
+    && c.chronicle.length === 2 && c.deeds.length === 2 && r.facts === 1 && r.chronicle === 1 && r.deeds === 1);
+  check("§111: ⚑ NOTHING IS REMOVED AND NOTHING REGRESSES — the save keeps its level, its record of Pell, its knife",
+    c.level === 31 && c.xp === 3032 && c.npcRegistry.pell.name === "Pell" && c.inventory.filter(i => i.name === "Belt Knife").length === 1);
+  check("§111: …and an item present in both is not doubled", c.inventory.length === 2);
+  check("§111: …and a fact the save already had is not doubled — deduped on its text, not its day stamp",
+    c.codex.topics.pell.facts.filter(f => /she is a smith/.test(f)).length === 1);
+  const snap2 = JSON.stringify(c); const r2 = RV.mergeRecovery(c, snap());
+  check("§111: ⛑ merging twice changes nothing", JSON.stringify(c) === snap2 && !r2.items.length && !r2.people.length && r2.facts === 0);
+  check("§111: …a snapshot that got FURTHER lifts level and xp as a floor — a branch's progress is not lost either",
+    (() => { const x = cur(); x.level = 29; x.xp = 100; const rr = RV.mergeRecovery(x, snap()); return x.level === 30 && x.xp === 2994 && !!rr.level; })());
+  check("§111: ⛔ …and it refuses a DIFFERENT character's snapshot outright",
+    (() => { const x = cur(); const rr = RV.mergeRecovery(x, { ...snap(), id: "someone-else" }); return x.inventory.length === 1 && !rr.items.length; })());
+  check("§111: …and the receipt reads as a sentence the player can act on",
+    /Recovered: .*Encrypted Slate/.test(RV.mergeReceiptLine(r) || "") && RV.mergeReceiptLine(r2) === null);
+
+  // ⛔ THE DOOR: Settings lists the copies and merges one; state.js can read a snapshot back.
+  const app = rd("app.js"), st = rd("engine/state.js");
+  check("§111: ⛔ THE DOOR EXISTS — Settings lists recovery copies and offers to merge one",
+    /Recovery copies/.test(app) && /data-recover-merge/.test(app) && /mergeRecovery\(character, snap\)/.test(app) && /recoveryKeys\(character\.id\)/.test(app));
+  check("§111: …and a snapshot can be READ BACK — the sync wrote these for months and nothing ever read one",
+    /export function loadRecovery/.test(st) && /import \{[^}]*loadRecovery[^}]*\} from "\.\/engine\/state\.js"/.test(app));
+
+  // ── two fixes the ratchet demanded in the same landing
+  const CX = await import("../engine/codex.js");
+  const bare = { codex: { topics: {} } };
+  CX.applyCodexUpdates(bare, [{ topic: "the-gray-water", label: "The Gray Water", kind: "mystery", fact: "not natural", links: ["millbrook"] }], { day: 4, entities: { people: {}, places: {}, aliases: {} }, questIds: new Set(), arcIds: new Set() });
+  check("§111: ⚠️ R49 NEVER DROPS A FACT — a bare mystery with no place to file under is minted as LORE, and the story still queued",
+    bare.codex.topics["the-gray-water"]?.kind === "lore" && bare.codex.topics["the-gray-water"].facts.some(f => /not natural/.test(f))
+    && bare.codex.deferredMysteries?.length === 1, JSON.stringify(Object.keys(bare.codex.topics)));
+  check("§111: …and the feature vocabulary is module-private — an export read by nothing outside is what the audit catches",
+    /^const FEATURE_WORDS = \{/m.test(rd("engine/holdings.js")) && !/export const FEATURE_WORDS/.test(rd("engine/holdings.js")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

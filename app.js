@@ -2,7 +2,8 @@
 // Engine does the math (resolve/sense/reputation/profile); GM model does the words.
 
 import { grantMartialKit } from "./engine/martial.js";
-import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId, canTravelBetween, locationRefToString, isCoercedObjectName } from "./engine/state.js";
+import { loadRecovery, recoveryKeys, loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId, canTravelBetween, locationRefToString, isCoercedObjectName } from "./engine/state.js";
+import { mergeRecovery, mergeReceiptLine } from "./engine/recovery.js";   // the door to the snapshots the sync kept and nobody could reach
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier, senseOpponent, appraiseOpponent } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it
 import { synthesizeOpponentSheet, synthesizeStaticSheet, estimateExchange, finisherPotential, finishOdds, hasCounterCraft, matchupBonus, phaseDenied } from "./engine/skill_battle.js"; // CCODE-46/42: priced moves + situational finisher odds
@@ -125,7 +126,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.390";
+const APP_VERSION = "1.9.391";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2798,6 +2799,16 @@ function renderSettings(note = "") {
   const artMode = getArtMode();
   chrome(`<div class="screen">
     <h2>Settings</h2>
+    ${(() => { // ⛔ RECOVERY — the sync kept the losing copy of every conflict here, and no screen ever showed it.
+      // MERGE, not restore: takes what the snapshot has that this save lacks, removes nothing, never regresses level.
+      if (!character) return "";
+      let keys = []; try { keys = recoveryKeys(character.id).slice().reverse(); } catch { keys = []; }
+      if (!keys.length) return "";
+      const rows = keys.map(k => { const m = k.match(/\.(\d+)(?:\.(\w+))?$/); const when = m ? new Date(Number(m[1])) : null; const snap = loadRecovery(k);
+        return `<div class="codex-f" style="margin-top:4px"><span>${when ? when.toLocaleString() : esc(k)}${m?.[2] ? ` · ${esc(m[2])}` : ""}${snap ? ` · L${esc(String(snap.level ?? "?"))}, ${(snap.inventory || []).length} items, ${Object.keys(snap.npcRegistry || {}).length} people` : ""}</span>`
+          + `<button class="opt" data-recover-merge="${esc(k)}" title="Add what this copy has that your save lacks — nothing is removed">Merge into my save</button></div>`; }).join("");
+      return `<div class="cs-block" style="margin-top:10px"><h3 class="codex-title" style="font-size:15px">Recovery copies</h3>
+        <p class="hint">Saved automatically when two devices both advanced this character. Merging adds what a copy has that your save lacks — items, people, codex, chronicle — and removes nothing.</p>${rows}</div>`; })()}
     ${note ? `<p class="hint" style="margin-bottom:12px">${esc(note)}</p>` : ""}
     <div class="field"><label>Your name (player, not character)</label>
       <input id="set-player" value="${esc(profile.displayName || "")}" placeholder="e.g. Erik"></div>
@@ -2885,6 +2896,13 @@ function renderSettings(note = "") {
     if (v) { u.voice = v; u.lang = v.lang || "en"; }
     u.rate = Number(profile?.ttsRate) || 0.98;
     try { window.speechSynthesis.speak(u); } catch { /* tier 0 */ }
+  };
+  for (const b of document.querySelectorAll("[data-recover-merge]")) b.onclick = () => {
+    const snap = loadRecovery(b.dataset.recoverMerge);
+    if (!snap) { renderSettings("That recovery copy could not be read."); return; }
+    const r = mergeRecovery(character, snap);
+    saveCharacter(character);
+    renderSettings(mergeReceiptLine(r) || "Nothing in that copy was missing from your save.");
   };
   document.getElementById("set-save").onclick = () => {
     profile.displayName = document.getElementById("set-player").value.trim();

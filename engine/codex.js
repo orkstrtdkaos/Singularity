@@ -164,9 +164,12 @@ export function applyCodexUpdates(character, updates = [], ctx = {}) {
       if (u.kind === "mystery" && !res.entityId && !linksToStory(u, ctx)) {
         const placeId = ctx.locationId ? slugify(ctx.locationId) : null;
         // ⚠️ THE FACT IS NEVER DROPPED. With a place, it is filed there; with none, it is minted as LORE — a fact
+        // without a story is lore, not a mystery — and the story is requested either way.
+        if (!placeId && u.fact) extra.push({ ...u, kind: "lore" });
+        if (placeId && u.fact) extra.push({ topic: placeId, label: ctx.entities?.places?.[placeId] || placeId, kind: "place", entityId: placeId,
           fact: `${raw ? raw + " — " : ""}${u.fact}`, links: u.links });
         const q = character.codex.deferredMysteries || (character.codex.deferredMysteries = []);
-        q.push({ label: raw, hint: String(u.fact || raw).slice(0, 240), filedUnder: placeId, day: ctx.day ?? null });
+        q.push({ label: raw, hint: smartClamp(String(u.fact || raw), 240), filedUnder: placeId, day: ctx.day ?? null });
         character.codex.deferredMysteries = q.slice(-6);
         continue;
       }

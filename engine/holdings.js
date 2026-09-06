@@ -24,6 +24,7 @@ import { regionDemand } from "./economy.js";       // Q8: a unit is worth what T
 import { sheetFor as personSheetFor, tierOf as tierOfLevel } from "./npcsheet.js";   // Q18: the keeper's tier sets the ceiling
 import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
 import { legionClash, contingentsFromPeople } from "./melee.js";   // R46a: a detected raid is a FIGHT, resolved unattended
+import { smartClamp } from "./namematch.js";   // an evidence quote is prose — cut at a word, never mid-word
 
 export const HOLDING_KINDS = ["post", "enterprise"];
 /** ⚠️ WHICH SIDE AN UNKNOWN WORD FALLS ON. A holding that PRODUCES is an enterprise; everything else holds
@@ -853,7 +854,7 @@ export function inferFeatures(holding, { location = null, chronicle = [], cfg = 
     // offer for a rebuilt post quoted its opening line, which contained none of the words that fired.
     const src = hitOwn[0] || hitPlace[0] || hitProse[0] || "";
     const at = src.search(re);
-    const quote = at < 0 ? src.slice(0, 140) : (at > 60 ? "…" : "") + src.slice(Math.max(0, at - 60), at + 80).trim() + (at + 80 < src.length ? "…" : "");
+    const quote = at < 0 ? smartClamp(src, 140) : (at > 60 ? "…" : "") + src.slice(Math.max(0, at - 60), at + 80).trim() + (at + 80 < src.length ? "…" : "");
     out.push({ kind, why: sacred && !quote ? "this place is authored as sacred" : `the record reads: “${quote}”`,
       from: hitOwn.length ? "its own record" : hitPlace.length ? "its place" : sacred ? "the place's authored tags" : "the chronicle",
       strength: (hitOwn.length * 3) + (hitPlace.length * 2) + (sacred ? 2 : 0) + hitProse.length });

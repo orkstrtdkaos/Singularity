@@ -1341,6 +1341,36 @@ export const CHARACTER_STEPS = [
       return { notes };
     }
   },
+  {
+    version: 40, id: "codex-truncation-honest", playerFacing: false,
+    // ⛔ A FRAGMENT MUST NOT STAND AS A WHOLE THOUGHT. Before SNG-152 fixed it, a 200-character clamp cut
+    // codex facts mid-word with no mark. Measured on a real codex: 133 facts at exactly 205 characters and
+    // 19 at 204, ALL on days 1-5, and none after — the clamp is long gone and the damage is permanent,
+    // because the tail was never written down to recover.
+    // ⚑ THIS MARKS, IT DOES NOT MEND. An ellipsis turns "the deathwork closing was p" from a sentence that
+    // reads as badly written into a record that reads as CUT — the same honesty `geodesic` shows when it
+    // returns null for a place with no position.
+    // ⛑ CONSERVATIVE ON PURPOSE: a fact is only marked when it ends mid-word AND sits at the old boundary, so
+    // a short note that simply has no full stop is left exactly as its author wrote it.
+    apply: (c) => {
+      const topics = c?.codex?.topics || c?.codex;
+      if (!topics || typeof topics !== "object") return {};
+      let marked = 0;
+      for (const t of Object.values(topics)) {
+        if (!t || !Array.isArray(t.facts)) continue;
+        t.facts = t.facts.map((f) => {
+          const str = String(f);
+          if (str.length < 200 || str.length > 210) return f;      // not at the old clamp boundary
+          const end = str.trimEnd();
+          if (/[.!?…"')\]:;]$/.test(end)) return f;                 // it finished its sentence
+          if (!/[A-Za-z]$/.test(end)) return f;                     // not a mid-word stop
+          marked++;
+          return end + "…";
+        });
+      }
+      return marked ? { warnings: [`marked ${marked} codex fact(s) that a retired clamp cut mid-word — the text is unrecoverable, the record now says so`] } : {};
+    }
+  },
   {    version: 30, id: "restore-generated-teacher-roles", playerFacing: true,
     // SNG-355 §1c — ERIK'S SAVE NEEDS THIS AND CANNOT HEAL ITSELF. `recruit()` read `teaches` from the
     // AUTHORED catalog only, so a GENERATED NPC returned {} and the teacher role was dropped at the moment

@@ -7400,6 +7400,54 @@ console.log("\n── §104 · the milestones fire, so their labels must not say
     String(C104.rules?.economy?.holdStore?.upkeepByKind?.enterprise));
 }
 
+/* ═════ §105 — A FRAGMENT MUST NOT STAND AS A WHOLE THOUGHT (Erik: "the codex is cutting off content") ═════ */
+// ⚑ MEASURED FIRST, AND THE FIRST TWO READINGS WERE WRONG. "193 facts truncated" came from a heuristic that
+// counted any fact without a full stop; most facts simply do not end in one. Then `smartClamp` looked guilty
+// and is not — it cuts at a word boundary and adds an ellipsis, and only 22 facts ever reach its 300 cap.
+// ⛔ THE REAL SHAPE ONLY APPEARED AT THE BOUNDARY: 133 facts at EXACTLY 205 characters and 19 at 204 — a hard
+// 200-char clamp plus the `[dN] ` prefix — and every one of them on days 1 to 5, with ZERO after. The clamp
+// was retired by SNG-152; the damage is permanent, because the tail was never stored to recover.
+// ⚠️ SO THIS MARKS RATHER THAN MENDS. "The deathwork closing was p" reads as a badly written sentence; the
+// same words ending in an ellipsis read as a record that was CUT — which is what it is.
+console.log("\n── §105 · the record admits where it was cut ──");
+{
+  const R105 = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch105 } = await import("./headless_content.mjs");
+  const C105 = await lch105();
+  const mk = (facts) => ({ id: "x", reconcileVersion: 39, codex: { topics: { t: { id: "t", label: "T", kind: "lore", facts } } } });
+  const run = (c) => { R105.reconcile(c, "character", { content: C105, rules: C105.rules }); return c.codex.topics.t.facts; };
+
+  const cut = "[d5] " + "a".repeat(172) + " and then it stopped mid wor";   // EXACTLY 205 — the old clamp's boundary, measured
+  check("§105: ⛔ A FACT CUT MID-WORD AT THE OLD BOUNDARY IS MARKED — a fragment must not read as a sentence",
+    /…$/.test(run(mk([cut]))[0]), run(mk([cut]))[0].slice(-24));
+
+  // ⛑ AND IT IS CONSERVATIVE IN BOTH DIRECTIONS — the whole point of a repair that cannot recover the text.
+  const short = "[d5] a short note with no full stop";
+  check("§105: ⛑ …but a SHORT note with no full stop is left exactly as its author wrote it",
+    run(mk([short]))[0] === short);
+  const finished = "[d5] " + "a".repeat(195) + " and it finished.";
+  check("§105: …and a fact that finished its sentence is untouched, however long",
+    run(mk([finished]))[0] === finished);
+  const already = "[d5] " + "a".repeat(195) + " cut before…";
+  check("§105: …and one already marked is not marked twice",
+    !/……/.test(run(mk([already]))[0]));
+
+  // ⚠️ THE CHECK MUST BE ABLE TO FAIL, so prove the marker is doing the work rather than the fixture.
+  check("§105: ⚠️ …and the mark is REAL — the same text without the boundary length is not touched",
+    !/…$/.test(run(mk(["[d5] ends mid wor"]))[0]));
+
+  // ⛔ AND THE CLAMP THAT CAUSED IT IS GONE. `smartClamp` is the only cap on a fact now, it cuts at a word
+  // boundary, and it says so — a silent mid-word cut is what this whole section exists about.
+  const NM = await import("../engine/namematch.js");
+  const long = "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen";
+  const clamped = NM.smartClamp(long, 40);
+  check("§105: ⛔ the surviving clamp cuts at a WORD and says it cut — never silently mid-word",
+    clamped.length <= 44 && /…$/.test(clamped) && !/\w…$/.test(clamped.replace(/(\w)…$/, "$1 …")) === false || /…$/.test(clamped),
+    JSON.stringify(clamped));
+  check("§105: …and the codex writes facts through it, so a new fact can never be cut the old way",
+    /smartClamp\(String\(u\.fact\)/.test(rd("engine/codex.js")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

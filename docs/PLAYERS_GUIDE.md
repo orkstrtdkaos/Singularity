@@ -10,7 +10,7 @@ place, person and belief in X–XII is drawn from authored content — , ,
 , the nine companion files and — and where the world has not decided
 something, the guide says so rather than filling it in.
 
-**Last verified: 2026-09-06 · v1.9.399 · 438 crafts · 135 places · 117 people · 9 companions.**
+**Last verified: 2026-09-06 · v1.9.400 · 438 crafts · 135 places · 117 people · 9 companions.**
 
 **Every craft in the game, by domain and sect, is listed in [`SKILLS.md`](SKILLS.md)** — what each
 one costs, what it does, and what its three ranks give you.

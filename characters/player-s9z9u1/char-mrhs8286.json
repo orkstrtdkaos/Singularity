@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 31,
-  "xp": 3032,
+  "xp": 3037,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -182,12 +182,12 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.01425942345328658,
+    "spectrumId": 0.036453547719377755,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
-    "concrete_abstract": -0.03496367597441142,
-    "death_life": -0.17787615557957992,
+    "concrete_abstract": 0.015036324025588584,
+    "death_life": -0.12787615557957993,
     "emotional_logical": 0.008330843749999983,
     "falsehood_truth": 0.31186470452944887,
     "demonic_angelic": 0.013499999999999998,
@@ -198,7 +198,7 @@
   "maxHealth": 191,
   "health": 191,
   "maxEnergy": 282,
-  "energy": 262,
+  "energy": 244,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2180,52 +2180,184 @@
         "player": "Sleep, holding her the way she settles best.",
         "summary": "Deep night at the Whistling Woman post — Silas and Pell rest together, the child they carry steady between them, the warded waystation holding them safe and whole.",
         "narration": "You settle into the dark beside her, your body fitting against hers the way it has learned to fit. Your hand finds its place on her belly—not demanding, just present—and she shifts her weight back into you with the ease of someone who knows exactly where she wants to be. Her fingers close over yours, holding it there. The child stirs once, twice, then settles. You feel it through both the bond and through her skin, and the weight of that—her, the child, the three of you held in one moment in a room made safe by work and warding—is enough to pull you down into sleep.\n\nThe oil lamp flickers and steadies. The Whistling Woman post holds its warmth. Outside, the moorland breathes its slow night-breath, and inside, nothing moves but the breathing of three lives, two of them already joined, one waiting to be.\n\nWhen sleep takes you, it is complete."
+      },
+      {
+        "player": "Use Dawn surgery to heal the runner.",
+        "summary": "A runner arrives injured at the Whistling Woman waystation; Silas tends her wounds with Dawn Surgery. She'll recover, but will need to rest before riding on.",
+        "narration": "The runner lies gasping on the waystation floor, one arm cradled across her ribs—a fall from hard riding, from the look of it, and something inside has shifted wrong. You kneel beside her without asking, already moving into the light-work. Your hands glow soft and steady; you've done this enough times now that the glow comes without strain, even here where the lattice runs thin.\n\nYou find the damage—a rib cracked, maybe two, the muscles around it torn and bleeding into the cavity beneath. Not life-threatening if it's tended now, but if she rides hard again before it's mended, it will be. The light from your palms warms the skin; you work slowly, cauterizing the bleed, sealing the muscle-tears from the inside out. It's precise work and it takes time—fifteen minutes of steady, careful light while she lies still and breathes shallow.\n\nWhen you're finished, the bleeding has stopped and the worst of the damage is sealed. Her breathing comes easier. She'll be sore for weeks, and she won't be riding hard for at least three days—but she'll ride. You sit back, and the glow fades from your hands. Pell, watching from the bench, nods once. It's enough.\n\nThe runner, still lying down, opens her eyes. \"Thank you,\" she says, and means it. \"I didn't think I could make it to the next post.\""
       }
     ],
     "lastTurn": {
-      "holdingOps": [
+      "narration": "The runner lies gasping on the waystation floor, one arm cradled across her ribs—a fall from hard riding, from the look of it, and something inside has shifted wrong. You kneel beside her without asking, already moving into the light-work. Your hands glow soft and steady; you've done this enough times now that the glow comes without strain, even here where the lattice runs thin.\n\nYou find the damage—a rib cracked, maybe two, the muscles around it torn and bleeding into the cavity beneath. Not life-threatening if it's tended now, but if she rides hard again before it's mended, it will be. The light from your palms warms the skin; you work slowly, cauterizing the bleed, sealing the muscle-tears from the inside out. It's precise work and it takes time—fifteen minutes of steady, careful light while she lies still and breathes shallow.\n\nWhen you're finished, the bleeding has stopped and the worst of the damage is sealed. Her breathing comes easier. She'll be sore for weeks, and she won't be riding hard for at least three days—but she'll ride. You sit back, and the glow fades from your hands. Pell, watching from the bench, nods once. It's enough.\n\nThe runner, still lying down, opens her eyes. \"Thank you,\" she says, and means it. \"I didn't think I could make it to the next post.\"",
+      "sceneSummary": "A runner arrives injured at the Whistling Woman waystation; Silas tends her wounds with Dawn Surgery. She'll recover, but will need to rest before riding on.",
+      "choices": [
         {
-          "op": "create",
-          "id": "whistling_woman_post",
-          "name": "Whistling Woman Post",
-          "type": "post",
-          "status": "active",
-          "keeper": null,
-          "features": [
-            "Whistling Woman Post interior — single warm room with stove, bed, table, shelf of supplies, water barrel, and oil lamps",
-            "Deni Cors's relay mechanism — a music-box with swappable cylinders carrying whistle-mark messages across the moorland network",
-            "Threshold warding — laid by Deni Cors at the post's opening",
-            "Moorland whistle-mark network connection — the post is a confirmed operational node"
+          "label": "Ask her where she's coming from and where she's headed—find out what news she carries",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "ask"
           ],
-          "notes": "A warded waystation on the moorland relay network, named by Silas Weir on Day 15. Fully provisioned and relay-tested. Keeper position currently vacant."
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Help her to the cot to rest properly—get her comfortable and settled while her body finishes mending",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "help",
+            "care"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Order-Sense to read the runner's path and passage—find out what route she took and whether it was safe",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "track"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "narration": "",
-      "sceneSummary": null
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -9
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
+      "scene": {
+        "setting": "The Whistling Woman post's single warm room at morning—stone walls, the stove cooling from the night's heat, oil lamp still burning. The runner is now resting on the cot, breath easier, one arm wrapped careful across her ribs. The waystation holds its quiet.",
+        "npcsPresent": [
+          {
+            "name": "The Runner",
+            "state": "Lying on the cot, breathing shallow but steady, eyes open and grateful"
+          },
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Seated on the bench, watching the runner with the plain attention of someone assessing recovery"
+          },
+          {
+            "name": "Huginn",
+            "state": "Roosted on the shelf above the relay mechanism, head tucked but aware"
+          }
+        ],
+        "objects": [
+          "The cot, now occupied",
+          "The oil lamp, still burning",
+          "Memory — the spear — propped against the wall",
+          "The relay mechanism, silent on the shelf",
+          "Water barrel and cup within reach of the cot"
+        ],
+        "threads": [
+          "Who is this runner and what message does she carry?",
+          "Where has she come from, and is the route still safe?",
+          "How long will she need to rest before moving on?"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "runner-whistling-woman-d16",
+          "name": "The Runner",
+          "role": "Relay courier",
+          "sex": "female",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "A lean woman in her early thirties, dust-covered and marked by hard riding. Quick-eyed and steady-handed despite the pain.",
+          "note": "Arrived at the Whistling Woman waystation with cracked ribs from a fall. Tended by Silas Weir with Dawn Surgery. Grateful and resting.",
+          "status": "active",
+          "statusNote": "Injured but mending. Needs 3 days rest before hard riding."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "The surgery took careful time—about thirty minutes of precise light-work."
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Whistling Woman post's single warm room at deep night turning toward dawn—stone walls holding the last of the stove's heat, the oil lamp burned nearly to stillness. Deni Cors's relay mechanism sits silent on the shelf. The bed is warm and close.",
+      "setting": "The Whistling Woman post's single warm room at morning—stone walls, the stove cooling from the night's heat, oil lamp still burning. The runner is now resting on the cot, breath easier, one arm wrapped careful across her ribs. The waystation holds its quiet.",
       "npcsPresent": [
         {
+          "name": "The Runner",
+          "state": "Lying on the cot, breathing shallow but steady, eyes open and grateful"
+        },
+        {
           "name": "Pell Ran Marsh",
-          "state": "Asleep beside Silas, one hand resting on her belly, the other still holding her wrist—her grip loose but present even in"
+          "state": "Seated on the bench, watching the runner with the plain attention of someone assessing recovery"
         },
         {
           "name": "Huginn",
-          "state": "Roosted on the shelf above the relay mechanism, head tucked into its wing, present but completely still—the kind of slee"
+          "state": "Roosted on the shelf above the relay mechanism, head tucked but aware"
         }
       ],
       "objects": [
-        "The bed, made and warm",
-        "The oil lamp, burning low",
-        "Memory—the spear—propped against the wall within reach",
-        "Both sets of clothes folded neat on the chair",
+        "The cot, now occupied",
+        "The oil lamp, still burning",
+        "Memory — the spear — propped against the wall",
         "The relay mechanism, silent on the shelf",
-        "The shadow-sheet, folded in Silas's pack"
+        "Water barrel and cup within reach of the cot"
       ],
-      "threads": []
+      "threads": [
+        "Who is this runner and what message does she carry?",
+        "Where has she come from, and is the route still safe?",
+        "How long will she need to rest before moving on?"
+      ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
@@ -4956,6 +5088,32 @@
         "day": 14
       },
       "met": 2
+    },
+    "runner-whistling-woman-d16": {
+      "id": "runner-whistling-woman-d16",
+      "name": "The Runner",
+      "role": "Relay courier",
+      "description": "A lean woman in her early thirties, dust-covered and marked by hard riding. Quick-eyed and steady-handed despite the pain.",
+      "firstMet": {
+        "locationId": "gen-whistling-woman-post",
+        "day": 16
+      },
+      "relationship": 0,
+      "history": [
+        "[d16] Arrived at the Whistling Woman waystation with cracked ribs from a fall. Tended by Silas Weir with Dawn Surgery. Grateful and resting."
+      ],
+      "knownFacts": [],
+      "skillsObserved": [],
+      "status": "active",
+      "sex": "female",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "statusNote": "Injured but mending. Needs 3 days rest before hard riding.",
+      "lastSeen": {
+        "locationId": "gen-whistling-woman-post",
+        "day": 16
+      },
+      "met": 1
     }
   },
   "placeMemory": {
@@ -6129,7 +6287,7 @@
     "lastTickWorldDay": 68,
     "lastCanonWorldDay": 68,
     "lastGenCount": 1648,
-    "turnsSinceOffer": 9,
+    "turnsSinceOffer": 10,
     "recentOffers": [
       {
         "thing": "The ordinary work of feeding—Aldric's fish, hard bread, cheese from Pell's pack—grounding after the novel-depth work",
@@ -13629,13 +13787,16 @@
           "[d13] [while away] Pip completed the delivery and, on the return leg, talked her way into carrying a folded notice back to Mara's quarter — small, but the journey now has weight in both directions.",
           "[d13] [while away] Pip reached the halfway waypoint ahead of schedule and, while waiting for the gate-keeper to log her passage, talked her way into carrying a sealed reply-note back — the return trip now has its small purpose, and she is quietly pleased with herself.",
           "[d14] [while away] Pip delivered the package to the right door and, on the way back, was handed a folded note by the recipient's housekeeper to carry to a tailor two streets over — the return trip now has its own small purpose.",
-          "[d14] [while away] Pip delivered the errand correctly and, on the return leg, was asked to carry a folded note to the chandler on Cress Lane — small, real, and enough to make the whole trip feel used twice over."
+          "[d14] [while away] Pip delivered the errand correctly and, on the return leg, was asked to carry a folded note to the chandler on Cress Lane — small, real, and enough to make the whole trip feel used twice over.",
+          "[d16] Relay courier"
         ],
         "links": [],
-        "aliases": [],
+        "aliases": [
+          "The Runner"
+        ],
         "createdDay": 2,
         "entityId": "pip-cotter-mara-s-errand-runner",
-        "updatedDay": 14
+        "updatedDay": 16
       },
       "sorel": {
         "id": "sorel",
@@ -14461,22 +14622,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 15.678366136086739,
-    "cerebral": 17.060371941684735,
-    "social": 11.018632557493396,
-    "generous": 4.698194783296735,
-    "cautious": 6.3621084975087525,
-    "physical": 0.43672443339118405,
-    "risky": 0.10474974189475059,
-    "ruthless": 0.22799635736330373,
-    "carousing": 0.03706935450293942,
-    "amorous": 4.013126127082475,
-    "patient": 0.7665942305761514,
-    "stealth": 0.00000796826784664815,
-    "devotion": 0.32560973256589426,
-    "craft": 3.5991137301777294,
-    "leadership": 1.059929314950381,
-    "deception": 0.0381588629416183
+    "strategic": 15.28640698268457,
+    "cerebral": 16.633862643142617,
+    "social": 10.74316674355606,
+    "generous": 5.580739913714316,
+    "cautious": 6.203055785071034,
+    "physical": 0.42580632255640444,
+    "risky": 0.10213099834738182,
+    "ruthless": 0.22229644842922114,
+    "carousing": 0.036142620640365934,
+    "amorous": 3.912797973905413,
+    "patient": 0.7474293748117475,
+    "stealth": 0.000007769061150481945,
+    "devotion": 0.3174694892517469,
+    "craft": 3.509135886923286,
+    "leadership": 1.0334310820766215,
+    "deception": 0.03720489136807784
   },
   "aptitudes": [
     "strategist",
@@ -14485,10 +14646,30 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 951,
+  "actionCount": 952,
   "grantsVersion": 1,
   "reconcileVersion": 40,
   "gallery": [
+    {
+      "kind": "figure",
+      "prompt": "elk woman, capable armed and armored., Siol",
+      "url": "https://image.pollinations.ai/prompt/elk%20woman%2C%20capable%20armed%20and%20armored.%2C%20Siol%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=49899&nologo=true",
+      "caption": "Siol",
+      "worldDay": 68,
+      "at": "2026-09-06T16:47:04.398Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-siol"
+    },
+    {
+      "kind": "figure",
+      "prompt": "",
+      "url": "https://image.pollinations.ai/prompt/Traveler%20and%20warden%20of%20the%20Pale%20March%2C%20character%20portrait%2C%20named%20Siol%2C%20woman%2C%20Traveler%20and%20warden%20of%20the%20Pale%20March%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=92344&nologo=true",
+      "caption": "Siol",
+      "worldDay": 68,
+      "at": "2026-09-06T16:45:52.274Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-siol"
+    },
     {
       "kind": "holding",
       "prompt": "small chapel next to an iron mine entrance on a hillside., a dark chapel on a barren hill, an iron mine nearby and a low wall around, Threshold Post: a standing post, thriving, busy and well-found",
@@ -15147,8 +15328,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1788713025885,
-  "rev": 1853,
+  "updatedAt": 1788713302067,
+  "rev": 1858,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18576,7 +18757,8 @@
       "the_open_material": 1,
       "the_called_form": 1,
       "brace": 1,
-      "working_model": 1
+      "working_model": 1,
+      "dawn_surgery": 1
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -18668,7 +18850,8 @@
       "the_open_material": 28,
       "the_called_form": 28,
       "brace": 42,
-      "working_model": 67
+      "working_model": 67,
+      "dawn_surgery": 68
     }
   },
   "companionBonds": {
@@ -19325,7 +19508,7 @@
     "valley": 646,
     "the_palelands": 6,
     "the_center": 151,
-    "the_echo_vale": 13
+    "the_echo_vale": 14
   },
   "foreclosed": [
     "rootkin",
@@ -19618,10 +19801,10 @@
     {
       "id": "sess-31",
       "startedAt": "2026-09-06T16:43:45.872Z",
-      "lastAt": "2026-09-06T16:43:45.872Z",
+      "lastAt": "2026-09-06T16:48:22.060Z",
       "startDay": 68,
       "endDay": 68,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -20109,17 +20292,17 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 327,
-    "choices": 326,
-    "characterDeltas": 160,
-    "scene": 327,
-    "npcUpdates": 293,
+    "sceneSummary": 328,
+    "choices": 327,
+    "characterDeltas": 161,
+    "scene": 328,
+    "npcUpdates": 294,
     "factUpdates": 27,
     "placeUpdates": 73,
     "codexUpdates": 195,
-    "timeOps": 303,
+    "timeOps": 304,
     "imagePrompt": 25,
-    "sceneEnded": 107,
+    "sceneEnded": 108,
     "itemUpdates": 7,
     "questUpdates": 42,
     "offer": 40,
@@ -20136,11 +20319,11 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 37,
+    "gambitApt": 38,
     "markDefiningMoment": 1,
     "_engineClosedScene": 3
   },
-  "_opTurns": 327,
+  "_opTurns": 328,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -20947,7 +21130,8 @@
     "comfort": 3,
     "romantic": 3,
     "presence": 1,
-    "flirt": 1
+    "flirt": 1,
+    "heal": 1
   },
   "aptitudeEarnCount": {
     "silver_tongue": 1
@@ -21168,6 +21352,24 @@
           "at": 68
         }
       ]
+    },
+    "figure:whois-siol": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Traveler%20and%20warden%20of%20the%20Pale%20March%2C%20character%20portrait%2C%20named%20Siol%2C%20woman%2C%20Traveler%20and%20warden%20of%20the%20Pale%20March%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=92344&nologo=true",
+          "prompt": "Elk woman, capable armed and armored.",
+          "note": "Elk woman, capable armed and armored.",
+          "seedKey": null,
+          "at": 68
+        },
+        {
+          "url": "https://image.pollinations.ai/prompt/elk%20woman%2C%20capable%20armed%20and%20armored.%2C%20Siol%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=49899&nologo=true",
+          "prompt": "elk woman, capable armed and armored., Siol",
+          "note": null,
+          "seedKey": "whois-siol#r2",
+          "at": 68
+        }
+      ]
     }
   },
   "purse": {
@@ -21376,5 +21578,9 @@
         }
       ]
     }
-  ]
+  ],
+  "figureImages": {
+    "whois-siol": "https://image.pollinations.ai/prompt/elk%20woman%2C%20capable%20armed%20and%20armored.%2C%20Siol%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=49899&nologo=true"
+  },
+  "precursorAxes": []
 }

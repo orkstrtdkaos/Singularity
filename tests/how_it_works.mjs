@@ -6579,6 +6579,49 @@ console.log("\n── §94 · repair requests are welcome here AND this channel 
   check("§94: ⚠️ …and a failed repair says so and writes nothing",
     /did not take; nothing was written/.test(app94));
 }
+
+/* ═════ §95 — R48, THE BACK PAY, RULED AND PAID (Erik: "the larger number from Aevi") ═════ */
+// ⛔ SIXTY-SEVEN DAYS WITH NO INCOME PATH AT ALL, and that was never a tuning problem: the hold store
+// landed v1.9.354 and pilgrims v1.9.360 — both AFTER the span in question. Every pass before that produced
+// nothing because nothing produced.
+// ⚑ Erik ruled Aevi's larger figure: 880 — the Threshold Post at `thriving` for 22 passes (704) plus its
+// temple's alms at meaning 1.0 (176). ⚠️ The 35-deed ledger's 280 is a SEPARATE line and is not in this.
+// ⚠️ A RECONCILE STEP, NOT A FILE EDIT — he is playing, and the app's next save would overwrite a file edit.
+console.log("\n── §95 · the arrears reach the purse through the one door in, and the keeper bug's cost is undone ──");
+{
+  const RC95 = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch95 } = await import("./headless_content.mjs");
+  const C95 = await lch95();
+  const rec = rd("engine/reconcile.js");
+
+  check("§95: ⛔ it goes through `credit` — the purse has ONE door in, and coin may be moved or found, never made",
+    /import \{ credit \} from/.test(rec)
+    && /credit\(c, cur, 880, \{ origin: "arrears" \}\)/.test(rec)
+    && !/c\.purse\.crystal\s*[+]?=/.test(rec));
+
+  const save = { id: "t", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} },
+    holdings: [{ id: "h1", name: "Threshold Post", kind: "post", condition: "strained", history: [] }] };
+  const out = RC95.reconcile(save, "character", { content: C95, rules: C95.rules, ...C95 });
+  check("§95: ⛔ 880 reaches the purse", save.purse.crystal === 880, `crystal ${save.purse.crystal}`);
+  check("§95: ⚠️ …and the 2d correction rides with it, because THE NUMBER IS PREDICATED ON IT — a kept hold thrives",
+    save.holdings[0].condition === "thriving"
+    && save.holdings[0].history.some(h => /R48/.test(String(h.note))));
+  check("§95: …and the player is told, in both halves",
+    (out.notes || []).some(n => /880 crystal reaches your purse/.test(n))
+    && (out.notes || []).some(n => /thriving/.test(n)));
+
+  // ⛔ ONCE. A settlement that paid on every login would be a mint.
+  const again = RC95.reconcile(save, "character", { content: C95, rules: C95.rules, ...C95 });
+  check("§95: ⛔ IT PAYS ONCE — a reconcile step runs once by version, and a settlement that repeated would be a mint",
+    save.purse.crystal === 880 && !(again.notes || []).some(n => /880 crystal/.test(n)),
+    `after a second pass: ${save.purse.crystal}`);
+
+  const clean = { id: "u", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} },
+    holdings: [{ id: "h", name: "A Good Post", kind: "post", condition: "thriving", history: [] }] };
+  RC95.reconcile(clean, "character", { content: C95, rules: C95.rules, ...C95 });
+  check("§95: …and a hold already thriving gains no history it did not earn", clean.holdings[0].history.length === 0);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

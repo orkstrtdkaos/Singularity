@@ -15,6 +15,7 @@
 
 import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
+import { credit } from "./purse.js";   // R48: the purse has ONE door in, and it records an origin
 import { mergeCodexTopics, ensureCodex, applyCodexUpdates } from "./codex.js";
 import { dedupeQuests, normalizeProse } from "./quests.js";
 import { dedupeInventory } from "./inventory.js";
@@ -1127,6 +1128,36 @@ export const CHARACTER_STEPS = [
       if (!removed.length) return {};
       c.abilities = c.abilities.filter(a => !(a && drop.has(a.abilityId) && (Number(a.level) || 1) <= 1));
       return { notes: [`The four basic moves are gone from your sheet — every craft you carry now has its own free form beneath rank one.`] };
+    }
+  },
+  {
+    version: 35, id: "r48-back-pay", playerFacing: true,
+    // ⛔ R48 — SIXTY-SEVEN DAYS WITH NO INCOME PATH AT ALL, and that was never a tuning problem: the hold
+    // store landed v1.9.354 and pilgrims v1.9.360, both AFTER the span in question. Every pass before that
+    // produced nothing because nothing produced.
+    // ⚑ ERIK RULED THE LARGER NUMBER — Aevi's 880: the Threshold Post at `thriving` for 22 passes (704) plus
+    // its temple's alms at meaning 1.0 (176). ⚠️ The 35-deed ledger's 280 is NOT in this figure; it is a
+    // separate line and Erik has not called for it.
+    // ⚠️ AND THE 2d CORRECTION RIDES WITH IT, because the number is PREDICATED on it: both holds slipped to
+    // `strained` only because `unstewardedHoldings` wiped their keepers (§72). Erik: "they should have only
+    // grown." 22 passes under constant keepers reaches `thriving` and stays there.
+    apply: (c, ctx) => {
+      const notes = [];
+      const cur = ctx?.rules?.economy?.holdStore?.upkeepCurrency || "crystal";
+      const r = credit(c, cur, 880, { origin: "arrears" });
+      if (!r?.ok) return {};
+      notes.push(`880 ${cur} reaches your purse — arrears the world owed you for sixty-seven days it had no way to pay.`);
+      // the two holds the keeper bug cost: restored to what constant keepers would have reached.
+      const grown = [];
+      for (const h of c.holdings || []) {
+        if (!h || h.condition === "thriving") continue;
+        h.history = [...(h.history || []), { at: null, from: h.condition, to: "thriving",
+          note: "R48 §2d — restored: the tick had wiped its keeper, and a kept hold would have climbed" }].slice(-12);
+        h.condition = "thriving";
+        grown.push(h.name || h.id);
+      }
+      if (grown.length) notes.push(`${grown.join(" and ")} ${grown.length === 1 ? "is" : "are"} thriving — what they would have reached had the tick not taken their keepers.`);
+      return { notes };
     }
   },
   {    version: 30, id: "restore-generated-teacher-roles", playerFacing: true,

@@ -4302,7 +4302,11 @@ console.log("\n── §62 · declared ruling anchors land in the body exactly o
   // ⬜ there means it is sequenced, and the anchor is reported as owed rather than failed.
   const idx62 = rd("docs/RULINGS.md");
   const built62 = new Set([...idx62.matchAll(/^\|\s*\*\*R(\d+)\*\*\s*\|[^\n]*?\|\s*✅/gm)].map(m => Number(m[1])));
-  const rNums = (txt) => [...txt.matchAll(/^#{2,3}\s*R(\d+)[a-z]?\b/gm)].map(m => Number(m[1]));  // R37a, R38b: a lettered sub-ruling is the same number
+  // ⚠️ AND THE TITLE COUNTS TOO. This read only `##`/`###` headings, so a ruling whose number sits in its
+  // LEVEL-1 TITLE ("# RULING R49 — …") returned NO number, and no number is treated as OWED — which told
+  // Aevi her brand-new, deliberately unbuilt ruling had shipped and forgotten its prose. The number is the
+  // number wherever the document writes it.
+  const rNums = (txt) => [...txt.matchAll(/^#{1,3}\s*(?:RULING\s+)?R(\d+)[a-z]?\b/gm)].map(m => Number(m[1]));  // R37a, R38b: a lettered sub-ruling is the same number
   for (const d of declared) { const ns = rNums(rd("po/" + d.f)); d.owed = ns.length === 0 || ns.some(n => built62.has(n)); }
   const sequenced = declared.filter(d => !d.owed && count(d.anchor) === 0);
   if (sequenced.length) console.log("      ⬜ declared, sequenced (index ⬜), not yet in the body: " + sequenced.map(d => d.f).join(" · "));

@@ -38,6 +38,16 @@ export const TIER_RATE = { riffraff: 1, notable: 1, regional: 0.5, heroic: 1 / 7
 // Crossing it gives heroic 1/8d, epic 1/15d, legendary 1/42d and a notable most days, against his
 // "heroic probably weekly, epics every couple weeks, legends more rarely". ⚠️ The FIRST values I tried
 // (8/20/60) made a legendary MORE common than an epic, which is the one ordering that must never happen.
+/** ⚑ THE PLAYER'S DIAL — SPEC_npc_presence §6, "How crowded the world is", beside World pacing. A pure
+ *  resolver with a hardcoded fallback, exactly as `resolvePacing` is. ⛔ It scales HOW OFTEN and never WHO:
+ *  the multiplier lands on each person's daily chance, so a thronged moor is still a moor. Default `peopled`
+ *  is Erik's own cadence — someone most days, a heroic weekly — which the roster already ships. */
+export const PRESENCE_MODES = { solitary: 0.35, occasional: 0.7, peopled: 1, thronged: 1.6 };
+export function resolvePresence(key) {
+  const k = (typeof key === "string" && Object.prototype.hasOwnProperty.call(PRESENCE_MODES, key)) ? key : "peopled";
+  return { key: k, mult: PRESENCE_MODES[k] };
+}
+
 export const TIER_REACH = { riffraff: 1, notable: 1, regional: 3, heroic: 11, epic: 17, legendary: 24 };
 
 /** ⚠️ HOW MUCH BEING FAR AWAY COSTS. A day or two is nothing — people travel. Eighty days is another world,
@@ -69,7 +79,7 @@ function seedOf(str) {
  *  it is already talking to.
  *
  *  PURE over content + the character's own registry. */
-export function presentToday(character, content = {}, { day = 0, hereId = null, want = null, exclude = [] } = {}) {
+export function presentToday(character, content = {}, { day = 0, hereId = null, want = null, exclude = [], crowd = 1 } = {}) {
   const locs = content.locations || {};
   const here = locs[hereId || character?.currentLocationId] || null;
   const met = new Set(Object.keys(character?.npcRegistry || {}));
@@ -95,7 +105,8 @@ export function presentToday(character, content = {}, { day = 0, hereId = null, 
     // ⚑ A REAL PER-PERSON DAILY CHANCE. `rate` is how often their tier crosses a path at all; `nearness` is
     // how much of that survives the distance. The product is a probability, and the roll is stable for this
     // person on this day so the roster does not flicker between turns.
-    const chance = Math.min(0.9, weight);
+    // ⚑ the dial lands HERE and nowhere else — on how often, never on who
+    const chance = Math.min(0.9, weight * Math.max(0, Number(crowd) || 1));
     const roll = seedOf(`${character?.id || "x"}|${day}|${id}`);
     if (roll >= chance) continue;              // not today
     pool.push({ id, name: n.name || id, tier, met: met.has(id), days: days == null ? null : Math.round(days * 10) / 10,

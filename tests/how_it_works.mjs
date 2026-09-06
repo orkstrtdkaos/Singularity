@@ -7677,16 +7677,16 @@ console.log("\n── §109 · a paragraph before it is a wall, and the wall sta
   const facts = (n) => Array.from({ length: n }, (_, i) => `[d${i + 1}] fact number ${i + 1} about the subject`);
   const mk = () => ({ clock: { day: 30 }, codex: { topics: {
     wall: { id: "wall", label: "Pell", kind: "person", entityId: "pell", facts: facts(24), links: [], aliases: [] },
-    mid: { id: "mid", label: "The Mill", kind: "place", facts: facts(7), links: [], aliases: [] },
+    mid: { id: "mid", label: "The Mill", kind: "place", facts: facts(8), links: [], aliases: [] },
     thin: { id: "thin", label: "A Rumour", kind: "lore", facts: facts(3), links: [], aliases: [] },
     done: { id: "done", label: "Settled", kind: "event", facts: facts(9), links: [], aliases: [], summary: "Already read.", summarisedAt: 9 },
   } } });
 
-  // ⚑ A THRESHOLD, NOT A TURN. Due at 6, then every 6 NEW facts; a thin topic and a fresh summary are not due.
+  // ⚑ A THRESHOLD, NOT A TURN. Due at 8, then every 4 NEW facts (DESIGN_codex_admission §3); a thin topic and a fresh summary are not due.
   const due = CX.topicsNeedingSummary(mk());
-  check("§109: ⚑ SUMMARIES ARE DUE AT A THRESHOLD — 6 facts, biggest first, never a 3-fact rumour",
+  check("§109: ⚑ SUMMARIES ARE DUE AT A THRESHOLD — 8 facts, biggest first, never a 3-fact rumour",
     due[0] === "wall" && due.includes("mid") && !due.includes("thin"), due.join(","));
-  check("§109: …and a topic already summarised over its facts is NOT due again until 6 more arrive",
+  check("§109: …and a topic already summarised over its facts is NOT due again until 4 more arrive",
     !due.includes("done"));
 
   // ⛔ REDERIVED FROM EVERYTHING. The prompt carries all facts, numbered so answers match by n, and forbids
@@ -7712,15 +7712,15 @@ console.log("\n── §109 · a paragraph before it is a wall, and the wall sta
     `${(w.archive || []).length} archived`);
   check("§109: …the newest facts stay LIVE as evidence, oldest first in the archive — order is preserved end to end",
     w.facts[w.facts.length - 1].includes("fact number 24 ") && w.archive[w.archive.length - 1].includes("fact number 16 "));
-  check("§109: …a topic under `keepFacts` retires nothing — the mill keeps all seven",
-    c.codex.topics.mid.facts.length === 7 && !(c.codex.topics.mid.archive || []).length);
+  check("§109: …a topic at `keepFacts` retires nothing — the mill keeps all eight",
+    c.codex.topics.mid.facts.length === 8 && !(c.codex.topics.mid.archive || []).length);
   check("§109: …and an answer with the wrong n, or none, writes nothing rather than the wrong summary",
     CX.applySummaries(mk(), ["wall"], { summaries: [{ n: 7, summary: "x" }] }).length === 0
     && CX.applySummaries(mk(), ["wall"], null).length === 0);
 
-  // ⛔ DUE AGAIN AFTER SIX MORE, not six total — and the archive is what the next summary is rederived over.
-  for (let i = 0; i < 6; i++) w.facts.push(`[d${40 + i}] later fact ${i}`);
-  check("§109: ⛑ six NEW facts after a summary make it due again — rederived, never appended",
+  // ⛔ DUE AGAIN AFTER FOUR MORE, not four total — and the archive is what the next summary is rederived over.
+  for (let i = 0; i < 4; i++) w.facts.push(`[d${40 + i}] later fact ${i}`);
+  check("§109: ⛑ four NEW facts after a summary make it due again — rederived, never appended",
     CX.topicsNeedingSummary(c).includes("wall") && /fact number 1 about/.test(CX.buildSummaryPrompt(c, ["wall"])));
 
   // ⚑ Q3 — THE GM IS FED THE SUMMARY, NOT 24 FACTS, plus only what is newer than the reading.
@@ -7918,6 +7918,111 @@ console.log("\n── §111 · what a lost branch had comes back, and nothing pl
     && bare.codex.deferredMysteries?.length === 1, JSON.stringify(Object.keys(bare.codex.topics)));
   check("§111: …and the feature vocabulary is module-private — an export read by nothing outside is what the audit catches",
     /^const FEATURE_WORDS = \{/m.test(rd("engine/holdings.js")) && !/export const FEATURE_WORDS/.test(rd("engine/holdings.js")));
+}
+
+/* ═════ §112 — HOW CROWDED THE WORLD IS: A SIBLING DIAL, NEVER A SHARE OF PACING (SPEC_npc_presence §6) ═════ */
+// ⛔ AEVI: "a busy village is not a dangerous one." Tying presence to pacing would make a player who wants a
+// crowded, peaceful market accept a world that keeps throwing hooks — two preferences, two dials. ⚑ And the
+// dial scales HOW OFTEN, never WHO: the place decides who is plausible; the cadence only decides how often.
+console.log("\n── §112 · turn the crowd down and the moor is still a moor ──");
+{
+  const PR = await import("../engine/presence.js");
+  const { loadContentHeadless: lch112 } = await import("./headless_content.mjs");
+  const C = await lch112();
+  const who = { id: "t", npcRegistry: {}, currentLocationId: "millbrook" };
+  const perDay = (crowd) => { let n = 0; for (let d = 0; d < 300; d++) n += PR.presentToday(who, C, { day: d, hereId: "millbrook", crowd }).length; return n / 300; };
+  const sol = perDay(PR.resolvePresence("solitary").mult), peo = perDay(PR.resolvePresence("peopled").mult), thr = perDay(PR.resolvePresence("thronged").mult);
+  check("§112: ⛔ THE DIAL TURNS — solitary < peopled < thronged, measured in people a day at Millbrook",
+    sol < peo && peo < thr, `${sol.toFixed(2)} < ${peo.toFixed(2)} < ${thr.toFixed(2)}`);
+  check("§112: …and `peopled` IS the standing cadence — the default changes nothing the roster already did",
+    PR.resolvePresence(undefined).key === "peopled" && PR.resolvePresence("nonsense").key === "peopled" && Math.abs(perDay(1) - peo) < 1e-9);
+  // ⛔ HOW OFTEN, NEVER WHO. The same day at the same place offers a SUBSET of the same people, in the same
+  // order — never a different pool. A thronged moor is still a moor.
+  const ids = (crowd, d) => PR.presentToday(who, C, { day: d, hereId: "the_blaze", crowd }).map(r => r.id);
+  let subset = true; for (let d = 0; d < 60; d++) { const lo = ids(0.35, d), hi = ids(1.6, d); if (!lo.every(id => hi.includes(id))) subset = false; }
+  check("§112: ⛔ …and it changes HOW OFTEN, never WHO — a quiet day's people are always among a crowded day's", subset);
+  check("§112: …a remote place stays remote under `thronged` — the crowd cannot summon what is not near",
+    perDay.call(null, 1.6) > (() => { let n = 0; for (let d = 0; d < 300; d++) n += PR.presentToday(who, C, { day: d, hereId: "the_blaze", crowd: 1.6 }).length; return n / 300; })());
+  const app = rd("app.js"), reg = rd("engine/gm_registry.js");
+  check("§112: ⛔ THE DIAL EXISTS beside World pacing, is saved to the profile, and the roster reads it",
+    /id="set-presence"/.test(app) && /profile\.presence = document\.getElementById\("set-presence"\)\.value/.test(app)
+    && /crowd: resolvePresence\(env\.profile\?\.presence\)\.mult/.test(reg));
+  check("§112: …and it says what it is not — a busy village is not a dangerous one, in the player's own settings",
+    /A busy village is not a dangerous one/.test(app));
+}
+
+/* ═════ §113 — THE ADMISSION TEST: A REFUSED TOPIC IS A KEPT FACT (DESIGN_codex_admission_and_summaries) ═════ */
+// ⛔ AEVI: "the Codex is a reference, not a log." 26 topics in 22 days; seven edge-district-* hooks for one
+// place; a beat with a title. And the codex's own floor: at 60 topics a NEW FACT WAS DROPPED. The test asks
+// every unresolved topic four questions before it is minted — and when it refuses, the fact lands anyway.
+console.log("\n── §113 · a reference, not a log — and nothing on the floor ──");
+{
+  const CX = await import("../engine/codex.js");
+  const ents = { people: { "dara-holt": "Dara Holt" }, places: { millbrook: "Millbrook", "radiant-plateau-edge": "Edge District" }, aliases: {} };
+  const mk = () => { const c = { clock: { day: 22 }, codex: { topics: {} } }; CX.ensureCodex(c); return c; };
+  const ctx = { day: 22, locationId: "radiant-plateau-edge", entities: ents };
+  // 1 · PREFIX — the seven edge-district-* hooks are ONE place
+  const c1 = mk();
+  CX.applyCodexUpdates(c1, [{ topic: "radiant-plateau-edge", label: "Edge District", kind: "place", fact: "a district on the rim" }], ctx);
+  CX.applyCodexUpdates(c1, [{ label: "Edge District Contacts", kind: "mystery", fact: "a list of names changes hands" }], ctx);
+  CX.applyCodexUpdates(c1, [{ label: "Edge District Ledger", kind: "lore", fact: "the ledger is kept in two hands" }], ctx);
+  const edge = c1.codex.topics["radiant-plateau-edge"];
+  check("§113: ⛔ A LABEL THAT STARTS WITH A TOPIC'S LABEL IS A FACET OF IT — one place, not three topics",
+    Object.keys(c1.codex.topics).length === 1 && edge.facts.length === 3, Object.keys(c1.codex.topics).join(","));
+  check("§113: …and the refused labels are ALIASES there, so the GM's next phrasing resolves without the test",
+    edge.aliases.some(a => /Contacts/.test(a)) && edge.aliases.some(a => /Ledger/.test(a))
+    && CX.resolveTopic(c1, { label: "Edge District Contacts" }, ctx).topic?.id === "radiant-plateau-edge");
+  // 2 · BEAT — a sentence about a thing is a fact of the thing
+  const c2 = mk();
+  CX.applyCodexUpdates(c2, [{ label: "The Seam in the Returned Animal", kind: "mystery", fact: "a hairline seam along the rabbit's spine, too straight for a wound", links: [] }], ctx);
+  check("§113: ⛔ A LABEL THAT READS LIKE A BEAT IS NOT A TOPIC — it is filed where it happened, the label kept as the fact's first clause",
+    !c2.codex.topics["the-seam-in-the-returned-animal"] && c2.codex.topics["radiant-plateau-edge"]?.facts.some(f => /Seam in the Returned Animal — a hairline seam/.test(f)),
+    Object.keys(c2.codex.topics).join(","));
+  check("§113: …a beat that LINKS a known topic lands on that topic, not on the place",
+    (() => { const c = mk(); CX.applyCodexUpdates(c, [{ topic: "dara-holt", label: "Dara Holt", kind: "person", fact: "keeps the ditches" }], ctx);
+      CX.applyCodexUpdates(c, [{ label: "The Person With A List", kind: "mystery", fact: "someone is keeping a list of who comes and goes", links: ["dara-holt"] }], ctx);
+      return !c.codex.topics["the-person-with-a-list"] && c.codex.topics["dara-holt"].facts.length === 2; })());
+  check("§113: …and a short, plain name is ADMITTED — the test refuses beats, not subjects",
+    (() => { const c = mk(); CX.applyCodexUpdates(c, [{ label: "The Ditch-Mother", kind: "person", fact: "keeps the ditches" }], ctx);
+      return !!c.codex.topics["the-ditch-mother"] && !CX.readsLikeBeat("The Ditch-Mother") && CX.readsLikeBeat("The Seam in the Returned Animal") && CX.readsLikeBeat("Boar at the North Wood"); })());
+  // 3 · FULL — the floor is gone
+  const c3 = mk();
+  for (let i = 0; i < 60; i++) c3.codex.topics[`t${i}`] = { id: `t${i}`, label: `Subject ${i}`, kind: i % 2 ? "lore" : "event", facts: [], links: [], aliases: [], updatedDay: i };
+  c3.codex.topics.millbrook = { id: "millbrook", label: "Millbrook", kind: "place", entityId: "millbrook", facts: [], links: [], aliases: [] };
+  const before = Object.keys(c3.codex.topics).length;
+  CX.applyCodexUpdates(c3, [{ label: "Whistling Woman", kind: "person", fact: "she was seen at the mill at dusk" }], { ...ctx, locationId: "millbrook" });
+  check("§113: ⛔ A FULL CODEX NO LONGER DROPS THE FACT — it lands on the place it happened, and the count does not grow",
+    Object.keys(c3.codex.topics).length === before && c3.codex.topics.millbrook.facts.some(f => /Whistling Woman — she was seen/.test(f)));
+  CX.applyCodexUpdates(c3, [{ label: "Whistling Woman", kind: "person", fact: "a second sighting" }], { ...ctx, locationId: null });
+  check("§113: …and with no place at all it lands on the newest lore rather than the floor — a fact without a home is still a fact",
+    Object.keys(c3.codex.topics).length === before && Object.values(c3.codex.topics).some(t => t.facts.some(f => /a second sighting/.test(f))));
+  check("§113: …every refusal is on the record — label, where it went, why",
+    (c3.codex.refused || []).length === 2 && c3.codex.refused.every(r => r.why === "full" && r.to));
+  // 4 · TITLES — "Dara Holt, the Ditch-Mother" answers to both halves
+  const c4 = mk();
+  CX.applyCodexUpdates(c4, [{ label: "Dara Holt, the Ditch-Mother", kind: "person", fact: "keeps the ditches" }], ctx);
+  CX.applyCodexUpdates(c4, [{ label: "the Ditch-Mother", kind: "person", fact: "was seen at the sluice" }], ctx);
+  check("§113: ⚑ A TITLE IN A LABEL IS AN ALIAS — the second phrasing finds the first person, and no second topic is minted",
+    Object.keys(c4.codex.topics).length === 1 && Object.values(c4.codex.topics)[0].facts.length === 2
+    && Object.values(c4.codex.topics)[0].aliases.some(a => /Ditch-Mother/i.test(a)), Object.keys(c4.codex.topics).join(","));
+  // 5 · THE SWEEP — what was admitted before the test existed folds, once, and stays folded
+  const c5 = mk();
+  c5.codex.topics["radiant-plateau-edge"] = { id: "radiant-plateau-edge", label: "Edge District", kind: "place", entityId: "radiant-plateau-edge", facts: ["[d1] the rim"], links: [], aliases: [] };
+  c5.codex.topics["edge-district-contacts"] = { id: "edge-district-contacts", label: "Edge District Contacts", kind: "mystery", facts: ["[d2] a list"], links: ["q1"], aliases: ["the contacts"] };
+  c5.codex.topics["edge-district-ledger"] = { id: "edge-district-ledger", label: "Edge District Ledger", kind: "lore", facts: ["[d3] two hands"], links: [], aliases: [], summary: "A ledger.", summarisedAt: 1 };
+  c5.codex.topics["the-seam"] = { id: "the-seam", label: "The Seam in the Returned Animal", kind: "mystery", facts: ["[d4] a seam"], links: [], aliases: [] };
+  CX.mergeCodexTopics(c5, { entities: ents });
+  const swept = c5.codex.topics["radiant-plateau-edge"];
+  check("§113: ⛔ THE SWEEP FOLDS THE PREFIX CLASS on load — facts, aliases and links move to the place, the fold marks the summary due",
+    !c5.codex.topics["edge-district-contacts"] && !c5.codex.topics["edge-district-ledger"] && swept.facts.length === 3
+    && swept.aliases.some(a => /Contacts/.test(a)) && swept.aliases.includes("the contacts") && swept.links.includes("q1") && swept.summarisedAt === 0,
+    Object.keys(c5.codex.topics).join(","));
+  check("§113: …and it does NOT judge a beat-shaped label on a real save — that class is the test's at admission, not the sweep's",
+    !!c5.codex.topics["the-seam"]);
+  const snap = JSON.stringify(c5.codex.topics); CX.mergeCodexTopics(c5, { entities: ents });
+  check("§113: …idempotent — a second pass changes nothing", JSON.stringify(c5.codex.topics) === snap);
+  check("§113: ⚑ …and the sweep runs where every save passes — the load-time tidy, no reconcile step to forget",
+    /mergeCodexTopics\(c, \{ entities: codexEntities\(c\) \}\)/.test(rd("app.js")));
 }
 
 /* ══════════ REPORT ══════════ */

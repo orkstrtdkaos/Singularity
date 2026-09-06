@@ -13,10 +13,10 @@ const KINDS = ["mystery", "faction", "lore", "event", "person", "place"];
 // SNG-019: a PRIMARY node (anchored to a known entity via entityId) holds more facts —
 // a major NPC warrants 20+; ordinary topics keep the original cap.
 const CAPS = { topics: 60, factsPerTopic: 12, factsPerPrimary: 24, linksPerTopic: 8, aliasesPerTopic: 8,
-  // SPEC_codex §3a — Aevi's read: summarise at 6 facts and re-summarise every 6 after, so a topic is a
-  // paragraph long before it is a wall. `keepFacts` is how many stay in `facts` as live evidence after a
-  // summary; the rest retire to `archive` so the topic drops under its ceiling and accepts again.
-  summariseEvery: 6, keepFacts: 8, archivePerTopic: 48, summaryChars: 700 };
+  // DESIGN_codex_admission §3 (supersedes SPEC_codex §3a): the FIRST summary at 8 facts, rederived every 4
+  // after, so a topic is a paragraph long before it is a wall. `keepFacts` is how many stay in `facts` as live
+  // evidence after a summary; the rest retire to `archive` so the topic drops under its ceiling and accepts again.
+  summariseAt: 8, summariseEvery: 4, keepFacts: 8, archivePerTopic: 48, summaryChars: 700 };
 
 export function ensureCodex(character) {
   if (!character.codex) character.codex = { schemaVersion: 1, topics: {} };
@@ -66,10 +66,63 @@ export function resolveTopic(character, u, ctx = {}) {
 
 /** Record what the GM called this entity, so future phrasings resolve here too. */
 function recordAlias(t, raw) {
-  if (!raw || normName(raw) === normName(t.label)) return;
+  if (!raw) return;
+  harvestTitle(t, raw);   // before the identity check — a label that IS the label can still carry a title
+  if (normName(raw) === normName(t.label)) return;
   if (!(t.aliases || []).some(a => normName(a) === normName(raw))) {
     t.aliases = [...(t.aliases || []), String(raw).slice(0, 60)].slice(-CAPS.aliasesPerTopic);
   }
+}
+
+/** DESIGN_codex_admission §4 — A TITLE IN A LABEL IS AN ALIAS. "Dara Holt, the Ditch-Mother" is one person
+ *  who will be called "the Ditch-Mother" next scene; without this the second phrasing mints a second topic. */
+const TITLE_IN_LABEL = /^(.{2,}?),\s*((?:the|of)\s.{3,})$/i;
+function harvestTitle(t, raw) {
+  const m = TITLE_IN_LABEL.exec(String(raw || "").trim());
+  if (!m) return;
+  for (const part of [m[1], m[2]]) {
+    const a = part.trim();
+    if (!a || normName(a) === normName(t.label) || (t.aliases || []).some(x => normName(x) === normName(a))) continue;
+    t.aliases = [...(t.aliases || []), a.slice(0, 60)].slice(-CAPS.aliasesPerTopic);
+  }
+}
+
+/** ⛔ THE ADMISSION TEST (DESIGN_codex_admission §2). Asked of every topic that resolved to NOTHING existing,
+ *  BEFORE it is minted. It answers with the topic the fact belongs to instead — or null to let the mint proceed.
+ *  Refuses when: the label starts with an existing topic's label (edge-district-* under Edge District), or the
+ *  label reads like a sentence about a beat ("The Seam in the Returned Animal" is a fact about the rabbit), or
+ *  the codex is FULL and the fact has any home at all. ⚠️ A refusal is never a drop: the caller files the fact
+ *  on what this returns, and the refused label becomes an alias there so the next phrasing resolves too. */
+const BEAT_JOINERS = /\b(in|with|at|from|after|before|who|that|which|when|where|under|behind)\b/i;
+export function readsLikeBeat(label) {
+  const words = String(label || "").trim().split(/\s+/).filter(Boolean);
+  return words.length >= 5 || (words.length >= 4 && BEAT_JOINERS.test(label));
+}
+function admitTopic(character, u, raw, ctx = {}) {
+  const topics = character.codex.topics;
+  const n = normName(raw);
+  // 1 · a label that STARTS with an existing topic's label is a facet of it, not a new subject
+  const parent = Object.values(topics).find(t => t && t.label && normName(t.label).length >= 5 && n !== normName(t.label)
+    && n.startsWith(normName(t.label) + " "));
+  if (parent) return { topic: parent, why: "prefix" };
+  // 2 · a label that reads like a beat is a FACT — filed where it happened, or on who it names
+  const full = Object.keys(topics).length >= CAPS.topics;
+  if (readsLikeBeat(raw) || full) {
+    for (const l of (Array.isArray(u.links) ? u.links : [])) {
+      const lid = slugify(String(l));
+      if (lid && topics[lid]) return { topic: topics[lid], why: full ? "full" : "beat" };
+    }
+    const placeId = ctx.locationId ? slugify(ctx.locationId) : null;
+    if (placeId && topics[placeId]) return { topic: topics[placeId], why: full ? "full" : "beat" };
+    if (placeId && !full) return { mint: { id: placeId, label: ctx.entities?.places?.[placeId] || placeId, kind: "place", entityId: placeId }, why: "beat" };
+    // 3 · FULL and no home — the fact still lands: on the newest lore topic, never on the floor
+    if (full) {
+      const lore = Object.values(topics).filter(t => t && t.kind === "lore").sort((a, b) => (b.updatedDay ?? 0) - (a.updatedDay ?? 0))[0]
+        || Object.values(topics).sort((a, b) => (b.updatedDay ?? 0) - (a.updatedDay ?? 0))[0];
+      if (lore) return { topic: lore, why: "full" };
+    }
+  }
+  return null;
 }
 
 /** ⛔ THE TOPIC ID FOLLOWS THE ENTITY, ALWAYS (SPEC_codex §3b). A topic born from a label and anchored LATER
@@ -142,11 +195,12 @@ export function applyCodexUpdates(character, updates = [], ctx = {}) {
   const topics = character.codex.topics;
   const touched = [];
   const extra = [];                       // R49: facts re-filed under a place, applied once after the loop
-  for (const u of [...(updates || []).slice(0, 4)]) {
+  for (let u of [...(updates || []).slice(0, 4)]) {   // `let`: a refused beat folds its label into its fact
     const raw = String(u.label || u.topic || "").slice(0, 60);
     // SNG-019: resolve against existing nodes (entityId → known-entity anchor → alias)
     const res = resolveTopic(character, u, ctx);
     let t = res.topic;
+    const adm = (!t && !res.entityId) ? admitTopic(character, u, raw, ctx) : null;   // DESIGN_codex_admission §2
     if (t) {
       recordAlias(t, raw);
       if (res.entityId && !t.entityId) {
@@ -157,6 +211,21 @@ export function applyCodexUpdates(character, updates = [], ctx = {}) {
         kindFromEntity(t, ctx.entities);
         seedAliasesFromEntity(t, ctx.entities);
       }
+    } else if (adm) {
+      // ⛔ DESIGN_codex_admission §2 — REFUSED AS A TOPIC, KEPT AS A FACT. The label goes on as an alias so the
+      // GM's next phrasing resolves here; the fact is written below as if the topic had always been this one.
+      if (adm.mint) {
+        t = topics[adm.mint.id] = { ...adm.mint, facts: [], links: [], aliases: [], createdDay: ctx.day ?? null };
+        kindFromEntity(t, ctx.entities);
+        seedAliasesFromEntity(t, ctx.entities);
+      } else t = adm.topic;
+      if (adm.why === "prefix") recordAlias(t, raw);
+      // a beat's label is the first clause of the fact — the subject is the topic, so the label is not lost either
+      if (adm.why !== "prefix" && u.fact && raw && !String(u.fact).toLowerCase().includes(raw.toLowerCase())) u = { ...u, fact: `${raw} — ${u.fact}` };
+      if (adm.why !== "prefix" && !u.fact && raw) u = { ...u, fact: raw };
+      const q = character.codex.refused || (character.codex.refused = []);
+      q.push({ label: raw, to: t.id, why: adm.why, day: ctx.day ?? null });
+      character.codex.refused = q.slice(-12);
     } else {
       // ⛔ R49 — A MYSTERY MAY NOT BE MINTED WITHOUT A STORY BEHIND IT. A bare one — anchored to nothing,
       // linked to no known quest or arc — is a promise the codex cannot keep. The FACT is filed under the
@@ -175,7 +244,7 @@ export function applyCodexUpdates(character, updates = [], ctx = {}) {
       }
       const id = res.entityId || slugify(u.topic || u.label || "");
       if (!id) continue;
-      if (Object.keys(topics).length >= CAPS.topics) continue;
+      if (Object.keys(topics).length >= CAPS.topics) continue;   // only a FACTLESS label reaches this full codex — admitTopic homed every fact
       const canonical = res.entityId
         ? (ctx.entities?.people?.[res.entityId] || ctx.entities?.places?.[res.entityId] || raw)
         : raw;
@@ -353,6 +422,30 @@ export function mergeCodexTopics(character, { entities = null } = {}) {
     kindFromEntity(t, entities);
     seedAliasesFromEntity(t, entities);
   }
+  // DESIGN_codex_admission §5 — THE SWEEP OF WHAT WAS ADMITTED BEFORE THE TEST EXISTED. An unanchored topic whose
+  // label starts with another topic's label (the seven edge-district-* hooks) folds into it: its facts move,
+  // its label and aliases become aliases there. ⚠️ Only the prefix class — a beat-shaped label is a judgement
+  // the sweep does not make on a real save. Idempotent: a folded topic is gone, so a second pass finds nothing.
+  for (const t of Object.values(topics)) {
+    if (!t || t.entityId || !t.label) continue;
+    const n = normName(t.label);
+    const parent = Object.values(topics).find(o => o && o !== t && o.label && normName(o.label).length >= 5 && n.startsWith(normName(o.label) + " "));
+    if (!parent) continue;
+    const cap = parent.entityId ? CAPS.factsPerPrimary : CAPS.factsPerTopic;
+    let moved = 0;
+    for (const f of (t.facts || [])) if (!parent.facts.some(x => x.slice(x.indexOf("]") + 2) === f.slice(f.indexOf("]") + 2))) { parent.facts = [...parent.facts, f]; moved++; }
+    if (t.archive?.length) parent.archive = [...(parent.archive || []), ...t.archive];
+    // ⛔ NOTHING OFF THE FLOOR: a parent over its cap retires its OLDEST to the archive, exactly as a summary does
+    if (parent.facts.length > cap) { parent.archive = [...(parent.archive || []), ...parent.facts.slice(0, parent.facts.length - cap)]; parent.facts = parent.facts.slice(-cap); parent.summarisedAt = 0; }
+    if (parent.archive) parent.archive = parent.archive.slice(-CAPS.archivePerTopic);
+    const sw = character.codex.swept || (character.codex.swept = []);
+    sw.push({ from: t.id, label: t.label, to: parent.id, moved });
+    character.codex.swept = sw.slice(-12);
+    recordAlias(parent, t.label); for (const a of (t.aliases || [])) recordAlias(parent, a);
+    for (const l of (t.links || [])) if (l !== parent.id && !parent.links.includes(l)) parent.links = [...parent.links, l].slice(-CAPS.linksPerTopic);
+    parent.summarisedAt = 0;   // a fold is a merge: the reading never saw what moved — facts, archive, the child's own summary — so it falls due, as absorb does
+    delete topics[t.id];
+  }
   const merged = [];
   const kindRank = { person: 3, place: 3, faction: 2, event: 2, mystery: 1, lore: 0 };
   const compatible = compatibleKinds;
@@ -490,14 +583,15 @@ function normNameTokens(s) {
 
 /** Topics relevant right now: linked to this location, tied to active quests,
  *  or freshly updated. This is how "accumulated knowledge" comes BACK to you. */
-/** ⚑ WHICH TOPICS HAVE EARNED A SUMMARY. A topic qualifies when it has `summariseEvery` facts it has not yet
- *  been summarised over — first at 6, then every 6 after — so this fires at a threshold and never every turn.
+/** ⚑ WHICH TOPICS HAVE EARNED A SUMMARY. A topic qualifies at `summariseAt` facts, then every `summariseEvery` it has not yet
+ *  been summarised over — first at 8, then every 4 after — so this fires at a threshold and never every turn.
  *  Biggest first, because the wall of 24 is the one the player is actually suffering. PURE. */
-export function topicsNeedingSummary(character, { every = CAPS.summariseEvery, max = 8 } = {}) {
+export function topicsNeedingSummary(character, { at = CAPS.summariseAt, every = CAPS.summariseEvery, max = 8 } = {}) {
   const topics = Object.values(character?.codex?.topics || {});
   const due = topics.filter(t => t && Array.isArray(t.facts)
-    && t.facts.length >= every
-    && (t.facts.length - (Number(t.summarisedAt) || 0)) >= every);
+    && (Number(t.summarisedAt) > 0
+      ? (t.facts.length - Number(t.summarisedAt)) >= every      // rederived every `every` NEW facts
+      : t.facts.length >= at));                                 // earned the first at `at`
   return due.sort((a, b) => b.facts.length - a.facts.length).slice(0, max).map(t => t.id);
 }
 

@@ -126,7 +126,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.391";
+const APP_VERSION = "1.9.392";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2826,7 +2826,12 @@ function renderSettings(note = "") {
       <select id="set-pacing">
         ${[["calm", "Calm — the world is mostly quiet"], ["balanced", "Balanced — something turns up now and then"], ["eventful", "Eventful — the world is busy around you"], ["relentless", "Relentless — barely a quiet moment"]].map(([v, label]) => `<option value="${v}" ${(profile.pacing || "eventful") === v ? "selected" : ""}>${esc(label)}</option>`).join("")}
       </select>
-      <div class="hint">How often random encounters (a windfall, a stranger, a chase, a fight) surface in play — a per-character preference. Danger still skews dangerous places toward trouble and kind places toward grace; this only sets the frequency. <strong>Quiet, intimate, and intense scenes stay uninterrupted no matter how high this is set</strong> — the world waits, so a tender or charged moment is never broken by a chance encounter. A new player or a family member might enjoy <em>Eventful</em>.</div></div>
+      <div class="hint">How often random encounters (a windfall, a stranger, a chase, a fight) surface in play — a per-character preference. Danger still skews dangerous places toward trouble and kind places toward grace; this only sets the frequency. <strong>Quiet, intimate, and intense scenes stay uninterrupted no matter how high this is set</strong> — the world waits, so a tender or charged moment is never broken by a chance encounter. A new player or a family member might enjoy <em>Eventful</em>.</div>
+    <div class="field"><label>How crowded the world is</label>
+      <select id="set-presence">
+        ${[["solitary", "Solitary — you mostly travel alone"], ["occasional", "Occasional — people turn up when there is reason"], ["peopled", "Peopled — someone most days, a figure of standing now and then"], ["thronged", "Thronged — you are never the only one who matters in the room"]].map(([v, label]) => `<option value="${v}" ${(profile.presence || "peopled") === v ? "selected" : ""}>${esc(label)}</option>`).join("")}
+      </select>
+      <span class="hint" style="display:block;margin-top:4px">A busy village is not a dangerous one — this is who you meet, not what happens to you. World pacing is the other dial.</span></div></div>
     <div class="field"><label>Narration — plainness</label>
       <select id="set-plainness">
         ${[["plain", "Plain — say what's there, first-read words"], ["balanced", "Balanced — the place sets the voice"], ["lyrical", "Lyrical — reach for image and the felt-unnamed"]].map(([v, label]) => `<option value="${v}" ${(profile.plainness || "balanced") === v ? "selected" : ""}>${esc(label)}</option>`).join("")}
@@ -2907,6 +2912,7 @@ function renderSettings(note = "") {
   document.getElementById("set-save").onclick = () => {
     profile.displayName = document.getElementById("set-player").value.trim();
     profile.pacing = document.getElementById("set-pacing").value; // SNG-127: world-liveliness preference
+    profile.presence = document.getElementById("set-presence").value; // SPEC_npc_presence §6: how crowded — a sibling dial, never a share of pacing
     // SNG-155: per-profile voice + the read-aloud prose signal
     const tv = document.getElementById("set-ttsvoice"); if (tv) profile.ttsVoice = tv.value || null;
     const ra = document.getElementById("set-readaloud"); if (ra) profile.readAloud = !!ra.checked;
@@ -12360,7 +12366,7 @@ async function renderLibrary(catIdx = 0, entryId = null) {
 // ones with a receipt, permanently records the rejects, and leaves only genuine coin-flips.
 // Runs on codex OPEN, never in the play loop, never blocking, at most once per session per shape.
 // ⚑ SPEC_codex §3a — SUMMARISE, THE SAME WAY MERGES ARE ADJUDICATED: on codex open, off the play loop, one
-// batched call, once per shape per session. ⛔ It fires at a THRESHOLD (6 facts, then every 6), never every
+// batched call, once per shape per session. ⛔ It fires at a THRESHOLD (8 facts, then every 4), never every
 // turn, and every summary is REDERIVED from all the facts — Aevi: "a summary that grows by accretion is the
 // log again with better margins." ⚠️ Measured before this: four subjects sat at the 24-fact ceiling and
 // accepted nothing; summarising retires their oldest facts into the archive and they accept again.

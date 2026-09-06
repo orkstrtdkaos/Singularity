@@ -47,7 +47,7 @@ import { priceLine } from "./economy.js";   // SNG-302: what a thing fetches HER
 import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NOT gone — reachable in the death state, latent hooks
 import { threatToPlayer, guardiansFor, worldRoster } from "./worldtick.js"; // SNG-310: the mark the world engine leaves for the GM to narrate
 import { npcRegistryForGM, npcQuestSeedBlock, bearersOf, carriedForGM } from "./npcs.js";
-import { presenceForGM } from "./presence.js";   // SPEC_npc_presence_cadence: who the day could offer
+import { presenceForGM, resolvePresence } from "./presence.js";   // SPEC_npc_presence_cadence: who the day could offer
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { sheetsForGM } from "./npcsheet.js";     // the person-keyed sheet, first live caller
 import { groundForGM } from "./places.js";       // R28: authored ground is canon
@@ -243,6 +243,7 @@ export const GM_CONTEXT = [
       day: (() => { try { return env.time?.worldDay ?? env.character?.clock?.day ?? 0; } catch { return 0; } })(),
       hereId: env.location?.id || env.character?.currentLocationId || null,
       exclude: (env.sceneState?.npcsPresent || []).map(n => n && (n.id || n.npcId)).filter(Boolean),
+      crowd: resolvePresence(env.profile?.presence).mult,   // §6: the player's own dial — how often, never who
     }) },
 
   // ---- shared by turn + ask + gambit ----

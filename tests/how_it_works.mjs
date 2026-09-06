@@ -6440,6 +6440,134 @@ console.log("\n── §92 · the def is the source at read time · the snapshot
     && !without.includes(wantObjective) && withDefs.includes(wantObjective) && !/undefined/.test(withDefs),
     `without: ${JSON.stringify(without).slice(0, 90)}`);
 }
+
+/* ═════ §93 — THE LEADER, THE DIGEST, AND THE STRAGGLER TIMER (BUILD_LIST §2c + §2d) ═════ */
+// ⛔ THE LEADER NEVER CHOOSES SOMEONE ELSE'S ACTION. That is the whole shape of the role, and it is the
+// same in and out of a fight: outside one they decide where the party goes; inside one there is NO leader,
+// and the only thing they may decide about a straggler is whether the party MOVES WITHOUT THEM.
+// ⚠️ There is deliberately no function that sets another member's declaration, and this gates that there
+// never is one.
+//
+// ⚑ AND A LEADER IS A SCALAR, NOT A LEDGER — correct rather than an oversight. A role is one value with one
+// writer and last-writer-wins is its right merge; a COUNTER would double-apply, a role cannot. The same is
+// true of an intent: a person may change their mind about what they want, which is exactly what a LOCK may
+// not do. ⛔ The two look alike and merge oppositely, which is why both are gated here.
+console.log("\n── §93 · a leader who never picks your action · an intent you may change · a timer that ASKS ──");
+{
+  const P93 = await import("../engine/party.js");
+  const party = [{ characterId: "a", name: "Silas" }, { characterId: "b", name: "Colten" }, { characterId: "c", name: "Mara" }];
+  const base = { sceneId: "s", createdBy: "a", party, beats: [], updatedAt: "t0" };
+
+  // ── THE LEADER
+  check("§93: ⛔ the leader defaults to whoever OPENED the scene — never assigned by the engine",
+    P93.leaderOf(base) === "a" && !base.leader);
+  check("§93: …and is PASSABLE, and a non-member can never hold it",
+    P93.leaderOf(P93.setLeader(base, "b", "t1")) === "b"
+    && P93.leaderOf(P93.setLeader(P93.setLeader(base, "b"), "stranger")) === "b");
+  check("§93: ⚠️ …and a leader who LEAVES does not leave the scene leaderless",
+    P93.leaderOf({ ...P93.setLeader(base, "b"), party: party.filter(m => m.characterId !== "b") }) === "a");
+
+  // ── ⛔ THE PROPERTY THAT MATTERS MOST, ASSERTED AS AN ABSENCE
+  const src = rd("engine/party.js");
+  check("§93: ⛔ NOTHING lets a leader set another member's DECLARATION — the one thing this role may never do",
+    !/export function (setDeclarationFor|declareFor|actFor|chooseFor)\b/.test(src)
+    && /leaderOf\(scene\) !== leaderId\) return scene;/.test(src));
+
+  // ── AN INTENT IS REPLACEABLE; A LOCK IS NOT. The pair is the point.
+  let sc = P93.stateIntent(P93.stateIntent(base, "a", "watching the woman by the fire", "t2"), "c", "the ridge before dark", "t3");
+  check("§93: an intent is stated by a member, clamped, and ordered by when it was said",
+    P93.intentsOf(sc).map(i => i.by).join() === "a,c" && P93.intentsOf(sc)[0].name === "Silas");
+  check("§93: ⚑ …and REPLACEABLE ON PURPOSE — you may change your mind about what you want",
+    P93.intentsOf(P93.stateIntent(sc, "a", "watching the door instead", "t4")).find(i => i.by === "a").text === "watching the door instead");
+  check("§93: …and clearing it removes it; a non-member cannot state one",
+    !P93.intentsOf(P93.stateIntent(sc, "a", "", "t5")).some(i => i.by === "a")
+    && !P93.intentsOf(P93.stateIntent(sc, "stranger", "anything", "t6")).some(i => i.by === "stranger"));
+
+  // ── THE DIGEST: the GM tells the LEADER before they choose
+  const asLeader = P93.partyBlockForGM(P93.setLeader(sc, "b"), "b");
+  const asOther = P93.partyBlockForGM(P93.setLeader(sc, "b"), "a");
+  check("§93: ⛔ THE DIGEST REACHES THE LEADER — what their people are reaching for, before the choice",
+    /YOU LEAD HERE/.test(asLeader) && /Silas wants: watching the woman/.test(asLeader)
+    && /NEVER decide their actions for them/.test(asLeader));
+  check("§93: ⚠️ …and a non-leader is told who leads, without the instruction meant for them",
+    /Colten leads here/.test(asOther) && !/NEVER decide their actions/.test(asOther));
+  check("§93: …and your own intent is not read back to you",
+    !/Silas wants/.test(P93.partyBlockForGM(P93.setLeader(sc, "a"), "a")));
+
+  // ── ⛔ THE STRAGGLER TIMER ASKS THE LEADER; IT DOES NOT DECIDE
+  let fight = P93.openSharedEncounter(sc, { defId: "r", name: "a reaver", max: 60, at: "t7" });
+  for (const id of ["a", "b", "c"]) fight = P93.joinFight(fight, id, "t8");
+  fight = P93.setLeader(fight, "b", "t9");
+  fight = P93.lockDeclaration(fight, "b", { family: "HARM", name: "strikes" }, { at: "t10" });
+  check("§93: ⚠️ a NON-leader's call does nothing — the timer asks one person",
+    !P93.stragglerCall(fight, "a", "c", "guard", { at: "t11" }).encounter.locks.c);
+  check("§93: ⛔ SKIP means they GUARD — not a strike nobody chose, and not nothing; they are still in the fight",
+    P93.stragglerCall(fight, "b", "c", "guard", { at: "t11" }).encounter.locks.c?.family === "PROTECT");
+  const waited = P93.stragglerCall(P93.stragglerCall(fight, "b", "a", "wait", { at: "t12" }), "b", "a", "wait", { at: "t13" });
+  check("§93: ⚑ WAIT is counted — \"we waited\" must be visible or it is indistinguishable from a stall",
+    P93.heldRounds(waited).a === 2 && /THE ROUND HAS BEEN HELD FOR: Silas \(2×\)/.test(P93.partyBlockForGM(waited, "b")));
+  check("§93: …and LET THE GM PLAY THEM marks them for the fold — R36, their own sheet, no new mechanism",
+    !!P93.stragglerCall(fight, "b", "a", "gm", { at: "t14" }).encounter.gmPlayed?.a);
+  check("§93: ⛔ …and a call on someone who ALREADY declared is REFUSED — that would be overriding them",
+    P93.stragglerCall(fight, "b", "b", "guard", { at: "t15" }).encounter.locks.b.name === "strikes");
+  check("§93: …and an unknown choice does nothing at all",
+    P93.stragglerCall(fight, "b", "c", "attack-with-everything", { at: "t16" }) === fight
+    && P93.STRAGGLER_CHOICES.join() === "wait,guard,gm");
+}
+
+/* ═════ §94 — THE ASK CHANNEL CAN REPAIR, NARROWLY AND ONLY WHEN ASKED (Erik, 2026-09-05) ═════ */
+// ⛔ Erik found the half §91 missed: *"it's an instruction that it's only a meta/OOC channel — which it IS,
+// but it's THE way to talk to the GM to fix things."* ⚠️ `gmAsk`'s own prompt said **"REPAIR REQUESTS ARE
+// WELCOME HERE — and this channel cannot make them"**, and `gmAsk` returned `{ok, text}` with no ops parsed
+// at all. ⚑ THE GM WAS OBEYING ITS CONTRACT, not ducking.
+//
+// ⚠️ AND §91's ANSWER WAS RIGHT ABOUT THE WRONG CHANNEL. `holdingOps.claim` IS reachable from a normal beat
+// — that gate still holds — but Erik was never on a normal beat. A measurement can be correct and answer a
+// question nobody asked.
+//
+// ⛔ THE SURFACE IS NARROW ON PURPOSE. This is a chat box, and a chat box that can move health, energy or xp
+// is where an exploit lives. Widening it is a decision, not a fix.
+console.log("\n── §94 · repair requests are welcome here AND this channel can make them ──");
+{
+  const G94 = await import("../engine/gm.js");
+  const gm94 = rd("engine/gm.js"), app94 = rd("app.js");
+
+  check("§94: ⛔ the refusal is GONE from the contract — the channel no longer says it cannot repair",
+    !/this channel cannot make them/i.test(gm94)
+    && /REPAIR REQUESTS ARE WELCOME HERE AND THIS CHANNEL CAN MAKE THEM/.test(gm94));
+  check("§94: …and the anti-refusal law reaches this channel too — no repair panel, no 'a normal turn'",
+    /YOU DO NOT DECLINE STATE HERE EITHER/.test(gm94)
+    && /Never send them to a repair panel/i.test(gm94));
+
+  // ── ⛔ THE BAR, WHICH IS THE OTHER HALF OF MAKING THIS SAFE
+  check("§94: ⛔ the bar is an EXPLICIT REQUEST — a question gets an answer and no ops, and so does a hypothetical",
+    /THE BAR IS EXPLICIT REQUEST/.test(gm94)
+    && /A QUESTION gets an answer and no ops/.test(gm94)
+    && /HYPOTHETICAL/.test(gm94));
+
+  // ── THE SURFACE
+  check("§94: ⚠️ the surface is NARROW — the repair channels, and `holdingOps` among them (Erik's case)",
+    Array.isArray(G94.ASK_OPS) && G94.ASK_OPS.includes("holdingOps") && G94.ASK_OPS.length <= 14);
+  check("§94: ⛔ …and PLAY is not on it — a chat box that can move health, energy or xp is where an exploit lives",
+    ["characterDeltas", "newEncounter", "deathOps", "bandOps", "discovery", "unlockPrecursor", "unlockSubstrate", "deeds", "ledgerEvents"]
+      .every(k => !G94.ASK_OPS.includes(k)),
+    G94.ASK_OPS.join(", "));
+
+  // ── ⚠️ PROSE IS STILL THE DEFAULT AND THE SAFE READ
+  check("§94: ⚠️ a plain-prose reply is unchanged — only a well-formed op block changes anything",
+    /if \(!parsed \|\| typeof parsed !== "object" \|\| !parsed\.ops\) return \{ ok: true, text/.test(gm94));
+  check("§94: …and an op key OFF the list is dropped rather than trusted",
+    /for \(const k of ASK_OPS\)/.test(gm94));
+
+  // ── ⛔ AND IT GOES THROUGH THE REAL APPLIER, NOT A SECOND COPY
+  check("§94: ⛔ the ops run through `applyTurn` — every guard, refusal and history write a beat gets, a repair gets",
+    /applyTurn\(\{ \.\.\.result\.ops, narration: "" \}, null, null\)/.test(app94)
+    && /saveCharacter\(character\);/.test(app94));
+  check("§94: ⚑ …and the player is TOLD what changed — a state change nobody can see is worse than one that did not happen",
+    /the GM changed: \$\{Object\.keys\(result\.ops\)\.join/.test(app94));
+  check("§94: ⚠️ …and a failed repair says so and writes nothing",
+    /did not take; nothing was written/.test(app94));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

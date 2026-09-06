@@ -123,7 +123,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.370";
+const APP_VERSION = "1.9.371";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8466,8 +8466,24 @@ async function onAsk(text) {
   renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, thinking: "The GM leans back…" });
   // BATCH-11 §23: assembled from the registry's "ask" view (same rows, no turn ephemera).
   const result = await gmAsk(assembleGMContext("ask", gmEnv()), text);
+  // ⛔ THE ASK CHANNEL CAN REPAIR NOW (Erik 2026-09-05: "it's THE way to talk to the GM to fix things"). Its
+  // prompt used to say repair requests were welcome AND that it could not make them, so the GM correctly
+  // refused and sent the player to a panel. ⚑ THE OPS GO THROUGH `applyTurn` — the same applier a beat uses,
+  // never a second copy of it — so every guard, refusal and history write that a beat gets, a repair gets.
+  // ⚠️ AND IT IS SAID OUT LOUD: a state change the player cannot see is worse than one that did not happen.
+  let askOpsNote = "";
+  if (result.ok && result.ops && Object.keys(result.ops).length) {
+    try {
+      applyTurn({ ...result.ops, narration: "" }, null, null);
+      saveCharacter(character);
+      askOpsNote = `\n\n— *the GM changed: ${Object.keys(result.ops).join(", ")}*`;
+    } catch (err) {
+      console.error("[ask] repair ops failed:", err);
+      askOpsNote = "\n\n— *the GM tried to change something and it did not take; nothing was written.*";
+    }
+  }
   busy = false;
-  renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, gmAside: result.ok ? result.text : "The GM stumbled: " + result.error });
+  renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, gmAside: result.ok ? result.text + askOpsNote : "The GM stumbled: " + result.error });
 }
 
 // ---------- world map ----------

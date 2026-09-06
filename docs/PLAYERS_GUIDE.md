@@ -10,7 +10,7 @@ place, person and belief in X–XII is drawn from authored content — , ,
 , the nine companion files and — and where the world has not decided
 something, the guide says so rather than filling it in.
 
-**Last verified: 2026-09-06 · v1.9.370 · 438 crafts · 135 places · 116 people · 9 companions.**
+**Last verified: 2026-09-06 · v1.9.371 · 438 crafts · 135 places · 116 people · 9 companions.**
 
 **Every craft in the game, by domain and sect, is listed in [`SKILLS.md`](SKILLS.md)** — what each
 one costs, what it does, and what its three ranks give you.
@@ -322,10 +322,19 @@ others did. The GM's narration for your turn carries the others as present, acti
 **Turns rotate.** When it is yours, you act; when it is not, you watch what your friends do and it lands in
 the same record. ⚠️ **A scene holds up to six.**
 
+**Outside a fight, the party has a leader** — whoever opened the scene, and it can be handed to someone else.
+The leader decides where you go and what the party tries. Everyone else says what they *want* — "I'm keeping an
+eye on the woman by the fire" — and the GM tells the leader what their people are reaching for before they
+choose. You can change what you want at any time. **The leader never chooses your action.**
+
 **You can step into a fight someone else is in** — one opponent, and everyone who has stepped in is swinging
 at the same one. What they have taken off it, you can see: the number in your narration is counted from every
 blow anyone has landed, and a mender's work counts the same way in the other direction. You can also just
 watch. Stepping out again does not end it — the others are still in it, and what you took off it stays off.
+
+**If someone has not declared, the leader chooses** — wait for them, skip them (they guard, which still keeps
+them in the fight), or let the GM play them from their own sheet. Waiting is counted, so everyone can see the
+round was held rather than stalled.
 
 **And that is the honest edge of it today. A round where everyone acts at once is designed and not built** —
 for now you still take your turn in order, even when you are both on the same opponent. It is written down in

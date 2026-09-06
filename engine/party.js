@@ -227,6 +227,89 @@ export function closeSharedEncounter(scene, at = new Date().toISOString()) {
   return { ...rest, updatedAt: at };
 }
 
+// ═══ THE LEADER, AND WHAT THEY MAY DECIDE (SPEC_party_mode_phase2 §3 + §5b) ═══
+//
+// ⛔ THE LEADER NEVER CHOOSES SOMEONE ELSE'S ACTION. That is the whole shape of the role, in and out of a
+// fight: outside one they decide where the party goes and what it tries; inside one there is NO LEADER at
+// all, and the only thing they may decide about a straggler is whether the party MOVES WITHOUT THEM.
+// ⚠️ There is deliberately no function here that sets another member's declaration, and there must never be.
+//
+// ⚑ A LEADER IS A SCALAR, NOT A LEDGER, and that is correct rather than an oversight: a role is one value
+// with one writer, and last-writer-wins is the right merge for it. A COUNTER would double-apply; a role
+// cannot. The same is true of an intent — a person may change their mind about what they want, which is
+// exactly what a lock may NOT do.
+
+/** PURE + IDEMPOTENT. Set (or pass) the leader. ⛔ NEVER ASSIGNED BY THE ENGINE — a caller does it, and only
+ *  to someone actually in the scene. Defaults are the caller's business: `newSharedScene` may seed it. */
+export function setLeader(scene, characterId, at = new Date().toISOString()) {
+  if (!scene || !characterId) return scene;
+  if (!scene.party?.some(m => m.characterId === characterId)) return scene;
+  if (scene.leader === characterId) return scene;
+  return { ...scene, leader: characterId, updatedAt: at };
+}
+
+/** PURE. Who leads, falling back to whoever opened the scene — never to nobody while a party exists. */
+export function leaderOf(scene) {
+  const on = (scene?.party || []).map(m => m.characterId);
+  if (scene?.leader && on.includes(scene.leader)) return scene.leader;
+  return on.includes(scene?.createdBy) ? scene.createdBy : (on[0] || null);
+}
+
+/** PURE. State what you WANT. ⚠️ REPLACEABLE ON PURPOSE — an intent is not a lock. You may change your mind
+ *  about what you are reaching for; you may not change a declaration after seeing everyone else's. */
+export function stateIntent(scene, characterId, text, at = new Date().toISOString()) {
+  if (!scene || !characterId) return scene;
+  if (!scene.party?.some(m => m.characterId === characterId)) return scene;
+  const t = smartClamp(String(text || "").trim(), 160);   // SNG-152: this crosses into another player's prompt
+  const intents = { ...(scene.intents || {}) };
+  if (!t) delete intents[characterId]; else intents[characterId] = { text: t, at };
+  return { ...scene, intents, updatedAt: at };
+}
+
+/** PURE. The intents, with names attached — the digest the GM narrates to the leader. */
+export function intentsOf(scene) {
+  return Object.entries(scene?.intents || {}).map(([by, v]) => ({
+    by, name: scene.party?.find(m => m.characterId === by)?.name || by, text: v?.text || "", at: v?.at || null,
+  })).sort((a, b) => String(a.at).localeCompare(String(b.at)));
+}
+
+// ═══ THE STRAGGLER TIMER (§5b) ═══
+//
+// ⛔ THE TIMER DOES NOT DECIDE. IT ASKS THE LEADER — which keeps the leader's job identical in and out of a
+// fight: they never choose a party member's ACTION, only whether the party moves without them.
+// ⚑ AND THE THIRD OPTION NEEDS NOTHING NEW: "let the GM play them" is R36 — their character acts from their
+// OWN sheet, through the same `alliesOf` reading everything else uses.
+export const STRAGGLER_CHOICES = ["wait", "guard", "gm"];
+
+/** PURE. The leader's call on someone who has not locked in. ⛔ ONLY THE LEADER, and only for someone who is
+ *  in the fight and actually unlocked — a call on a person who already declared would be overriding them,
+ *  which is the one thing this role may never do.
+ *
+ *  ⚠️ `guard` LOCKS A GUARD, not nothing and not a strike nobody chose: they are still in the fight and still
+ *  targetable. `gm` marks them for the fold. `wait` records that the round was HELD, and how many times —
+ *  because "we waited" needs to be visible or it becomes indistinguishable from a stall. */
+export function stragglerCall(scene, leaderId, characterId, choice, { at = new Date().toISOString() } = {}) {
+  if (!scene?.encounter || !leaderId || !characterId) return scene;
+  if (leaderOf(scene) !== leaderId) return scene;                       // only the leader
+  if (!STRAGGLER_CHOICES.includes(String(choice))) return scene;
+  if (!unlockedFighters(scene).includes(characterId)) return scene;      // they already declared, or are not in it
+  if (String(choice) === "wait") {
+    const held = { ...(scene.encounter.held || {}) };
+    held[characterId] = (Number(held[characterId]) || 0) + 1;
+    return { ...scene, encounter: { ...scene.encounter, held }, updatedAt: at };
+  }
+  if (String(choice) === "guard") {
+    return lockDeclaration(scene, characterId, { family: "PROTECT", name: "They guard", label: "holds their guard" }, { at });
+  }
+  // "gm" — their character acts from their own sheet, resolved by the caller through the ordinary fold.
+  const played = { ...(scene.encounter.gmPlayed || {}) };
+  played[characterId] = at;
+  return { ...scene, encounter: { ...scene.encounter, gmPlayed: played }, updatedAt: at };
+}
+
+/** PURE. How long the round has been held for each straggler — so "we waited" is visible rather than a stall. */
+export function heldRounds(scene) { return { ...(scene?.encounter?.held || {}) }; }
+
 // ═══ THE SIMULTANEOUS LOCK (SPEC_party_mode_phase2 §4b) ═══
 //
 // ⛔ THE MECHANICAL REASON IS BETTER THAN THE PACING ONE, and it is the spec's own argument: because every
@@ -351,6 +434,27 @@ export function partyBlockForGM(scene, myCharacterId) {
   });
   // ⛔ THE SHARED FIGHT, IF ONE IS OPEN. The pool is DERIVED here the way it is derived everywhere —
   // `sharedPool` reads the ledger — so this paragraph can never disagree with the number the strikes say.
+  // ⛔ THE DIGEST (§3b): the GM tells the LEADER what their people are reaching for BEFORE they choose —
+  // which is the whole point of having a leader, and the reason the leader never picks anyone's action.
+  // ⚠️ An intent is what someone WANTS, not what they will do; narrate it as a person leaning, not an order.
+  const lead = leaderOf(scene);
+  const leadName = scene.party?.find(m => m.characterId === lead)?.name || "The leader";
+  const wants = intentsOf(scene).filter(i => i.by !== myCharacterId);
+  const intentLine = wants.length
+    ? "\n\n" + (lead === myCharacterId
+        ? "YOU LEAD HERE, AND YOUR PEOPLE ARE REACHING FOR THINGS:"
+        : leadName + " leads here. What the others are reaching for:")
+      + wants.map(i => "\n  - " + i.name + " wants: " + i.text).join("")
+      + (lead === myCharacterId
+        ? "\n  Narrate what they are reaching for BEFORE the character chooses. NEVER decide their actions for them."
+        : "")
+    : "";
+  // ⚠️ AND "WE WAITED" MUST BE VISIBLE, or holding a round is indistinguishable from a stall.
+  const heldPairs = Object.entries(heldRounds(scene)).filter(([id]) => id !== myCharacterId);
+  const heldLine = heldPairs.length
+    ? "\n\nTHE ROUND HAS BEEN HELD FOR: " + heldPairs.map(([id, n]) =>
+        (scene.party?.find(m => m.characterId === id)?.name || id) + " (" + n + "\u00d7)").join(", ") + "."
+    : "";
   const pool = sharedPool(scene);
   const onIt = fightersOf(scene).filter(m => m.characterId !== myCharacterId);
   const sharedLine = pool
@@ -359,7 +463,7 @@ export function partyBlockForGM(scene, myCharacterId) {
       + (pool.down ? " IT IS DOWN." : "")
     : "";
   const recent = scene.beats.slice(-4).map(b => `[${b.name}] ${b.summary}`).join("\n");
-  return `${lines.join("\n")}${sharedLine}\n\nRecent party beats (all members, oldest first):\n${recent}\nWeave party members into the narration as present, active companions controlled by OTHER PLAYERS — never decide their actions, never voice major choices for them.`;
+  return `${lines.join("\n")}${intentLine}${heldLine}${sharedLine}\n\nRecent party beats (all members, oldest first):\n${recent}\nWeave party members into the narration as present, active companions controlled by OTHER PLAYERS — never decide their actions, never voice major choices for them.`;
 }
 
 // ---------- transport (thin; every failure degrades to solo play) ----------

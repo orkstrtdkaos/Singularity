@@ -566,6 +566,14 @@ export function refusalSignal(turn, { narration = null } = {}) {
   return null;
 }
 
+/** ⛔ WHAT THE ASK CHANNEL MAY WRITE. Deliberately NOT the whole contract: this is a chat box, and a chat
+ *  box that can move health, energy or xp is where an exploit lives. ⚑ These are the channels a REPAIR
+ *  needs — recording what the fiction already established, or correcting what the game got wrong.
+ *  ⚠️ `characterDeltas`, `newEncounter`, `deathOps`, `bandOps`, `discovery` and the unlocks are ALL absent
+ *  on purpose: those are PLAY, and play happens on a beat. ⬜ Widening this is a decision, not a fix. */
+export const ASK_OPS = ["holdingOps", "factUpdates", "npcUpdates", "codexUpdates", "placeUpdates",
+  "questUpdates", "stageOps", "debtOps", "partyOps", "standingOps", "delegateOps", "projectOps"];
+
 export const SALVAGEABLE_OPS = ["holdingOps", "debtOps", "partyOps", "choices", "questUpdates", "stageOps", "standingOps", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "projectOps", "deathOps", "bandOps", "characterDeltas", "scene", "timeOps", "moveTo", "stateOps", "itemUpdates", "gambitOps", "markDefiningMoment", "markTeacher", "offerPromotion", "offerAcquisition", "offerIntent", "generateRequest", "imagePrompt", "unlockSubstrate", "unlockPrecursor", "factUpdates", "discovery", "newEncounter", "newAbility", "delegateOps", "arcOps", "adoptSchool", "offer", "deriveItem"];
 
 export function salvageOps(raw) {
@@ -834,13 +842,35 @@ export async function gmAsk(ctx, question) {
   const sys = `You are the Game Master of SINGULARITY answering an OUT-OF-CHARACTER question from the player. This is a meta channel: the story does not advance, no dice are rolled, nothing in the world changes.
 - Answer helpfully about: the current scene, what the CHARACTER would plausibly know or remember, the world's lore as provided, how the game's mechanics work (d100 vs shown chance, spectrum alignment, reputation from deeds, energy, quests), and what the choices on offer would generally entail.
 - NEVER reveal GM-EYES-ONLY content, hidden truths, NPC secrets, or true odds beyond what the character's sense already showed. If asked, say the character doesn't know that yet — finding out is play.
-- REPAIR REQUESTS ARE WELCOME HERE — and this channel cannot make them. If the player asks to FIX something the game got wrong at creation (a domain the game guessed, an ability off the wrong pole, a background/origin/form they never chose, a stuck quest, a companion they never met), DO NOT refuse and DO NOT treat it as a jailbreak. Point them to the tool built for exactly this: "Open Character → 🔧 Repair character. You can change your domains, background, origin, and form there, and strip an ability you never chose — no need to ask me. It's the same guardrails I'd use, and it's logged." Confirm briefly what a correct fix would look like if they ask (e.g. "an Ashwarden would take the death-pole as primary; the two Blazeborn abilities would come off"), but the doing is theirs in the panel. Never promise to edit the sheet yourself from here.
+- REPAIR REQUESTS ARE WELCOME HERE AND THIS CHANNEL CAN MAKE THEM. You have a NARROW op surface: holdingOps,
+factUpdates, npcUpdates, codexUpdates, placeUpdates, questUpdates, stageOps, debtOps, partyOps, standingOps,
+delegateOps, projectOps. YOU DO NOT DECLINE STATE HERE EITHER — if the player asks you to record or correct
+something these channels cover, EMIT THE OP. Never send them to a repair panel, a settings screen or "a normal
+in-character turn" for something on that list.
+- BUT THE BAR IS EXPLICIT REQUEST, AND IT IS HIGH. Emit ops ONLY when the player is plainly asking you to record
+or fix something. A QUESTION gets an answer and no ops. A HYPOTHETICAL ("what would happen if…") gets an answer
+and no ops. Speculation, planning, and asking what a rule means are all answers with no ops. The story does not
+advance here: no beat, no dice, no encounter, no health, no xp — those live on a normal turn and are not yours
+to emit from this channel.
 - BUT DISTINGUISH A CREATION-REPAIR FROM AN ITEM GROWING IN PLAY. Evolving an item the character OWNS — a truer name it has earned, an evolved description, what it has become through the story — is NOT a sheet repair; it is normal in-play storytelling I handle every turn (the itemUpdates action, "items grow with the story"). So if the player asks (even out of character) to update/rename/re-describe an item they carry, DO NOT send them to the Repair panel. Instead offer to do it in play: "That's not a sheet edit — it's your story. Bring it into the next beat — turn it over in your hands, use it, name what it's become — and I'll evolve it." Or simply do it as the next in-fiction beat, emitting the item's change. Repair panel = a mistake made at CREATION; play = an item GROWING. Route the second to play, never to the editor.
-- Be concise: a short paragraph or two. Plain, friendly, spoiler-safe.`;
+- Be concise: a short paragraph or two. Plain, friendly, spoiler-safe.
+
+REPLY FORMAT. Plain prose by default. If — and only if — you are emitting ops, reply with ONLY JSON:
+{"text": "what you say to the player, including WHAT YOU CHANGED, in plain words", "ops": { "holdingOps": [...], ... }}
+Any op key not on the list above is ignored, so do not reach for one.`;
   const content = buildTurnContext({ ...ctx, resolution: null, playerInput: null }) + `\n\n## PLAYER ASKS (out of character)\n${question}`;
   try {
-    const text = await callClaude([{ role: "user", content }], { task: "gm-meta", system: sys, maxTokens: 1024 });
-    return { ok: true, text };
+    const raw = await callClaude([{ role: "user", content }], { task: "gm-meta", system: sys, maxTokens: 1024 });
+    // ⚠️ PROSE IS STILL THE DEFAULT AND THE SAFE READ. A reply that is not JSON, or is JSON without `ops`, is
+    // an answer — exactly as this channel has always behaved. Only a well-formed op block changes anything.
+    const parsed = parseLooseJSON(raw);
+    if (!parsed || typeof parsed !== "object" || !parsed.ops) return { ok: true, text: String(parsed?.text || raw) };
+    const ops = {};
+    for (const k of ASK_OPS) {
+      const v = parsed.ops[k];
+      if (Array.isArray(v) ? v.length : (v && typeof v === "object" && Object.keys(v).length)) ops[k] = v;
+    }
+    return { ok: true, text: String(parsed.text || raw), ...(Object.keys(ops).length ? { ops } : {}) };
   } catch (err) {
     return { ok: false, error: err.message };
   }

@@ -1644,3 +1644,34 @@ never find**, and it fails silently: the file loads, validates, and is never rea
 ⬜ **CCode's questions, unanswered:** does anything else match content to save by raw id — items, holdings,
 locations? ⛔ **`locations` is mixed at the CONTENT level, which is the one family where both conventions are
 authored.**
+
+---
+
+## ⬜ OPEN — 2026-09-06
+
+### ⛔ RULED, UNBUILT
+
+| ruling | spec | the finding |
+|---|---|---|
+| ⛔ **R49 — a mystery must come with its story** | `po/RULING_R49_no_nebulous_mysteries.md` | ⚠️ **`generate.js:155` produces an arc STUB — `hingeNpcs: []`, *"it festers, unwatched"*.** A mystery whose answer does not exist cannot be solved, and the player will pull on it. ⬜ **`the-person-with-a-list` is live on Erik's save and wants an arc generated FOR it, retroactively** |
+| ⛔ **the codex admission test** | `po/DESIGN_codex_admission_and_summaries.md` | ⚑ **The defect is ADMISSION, not tidying.** 26 singles are mostly beats with titles; **seven `edge-district-*` topics are one place.** ⚠️ The merger could never have caught them — `suggestMerges` compares things that might be the SAME, and a fact about a rabbit is not the same as anything |
+| ⛔ **delegate tiers, floors, vouching** | `po/PROPOSAL_delegate_tiers.md` v2 | ⚑ **A keeper is why a place does not FALL, not why it climbs.** Holds uncapped. ⛔ **`vouchedBy` — nothing in the game records one NPC knowing another** |
+| **NPC presence cadence** | `po/SPEC_npc_presence_cadence.md` | ⛔ **138 authored figures Silas has never met**, because nothing offers the GM a roster |
+| **holdings tempo** | `po/SPEC_holdings_tempo_and_scale.md` | a hold falls 4× faster than it rises |
+| **the world guesses its features** | `po/SPEC_world_guesses_features.md` | *a hold that yields ore HAS a mine — that is a reading* |
+
+### ⬜ AND THE FOUR CASE-BY-CASE RULINGS FROM R49
+
+| | |
+|---|---|
+| ✅ **`edge-district-contacts`** | not a topic — the fact logs under **`radiant-plateau-edge` as information gained**. ⚑ Seven topics collapse this way |
+| ⚑ **`rabbit-structural-seam`** | not a topic — ⛔ **BUT THE RABBIT PERSISTS.** Erik: *"I'm always hoping I run back into that rabbit."* ⚠️ Folding the FACT must not delete the CREATURE — ⬜ **it wants a registry entry, and then it can recur** |
+| ✅ **`dav-cutter`** | stays. ⚑ **Being on the list is itself a reason to reappear** — the presence cadence doing its job |
+| ⛔ **`the-person-with-a-list`** | ⚠️ **retroactive arc, not deletion** |
+
+### ⚑ AEVI'S CONTENT QUEUE
+
+⬜ **`penetration: 3` crafts (R45b)** · `mechanic.meaning: "none"` on body crafts · the `market` `trade`
+field · **evolution on the Warden's Charge and the brigandine, or the claim goes** · **the naming guard** ·
+⛔ **the tradition narrative pass — 11 of 14 traditions unaudited** (`SPEC_tradition_narrative_npc_pass`,
+promoted 08-31, ⚠️ **the largest content item we have**)

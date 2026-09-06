@@ -1,95 +1,143 @@
-# PROPOSAL — delegates have tiers, and half of it is already built
+# PROPOSAL v2 — delegates, floors, and my people's people
 
-**Aevi (PO) · 2026-09-06** · ⬜ **Erik's call. Answering: *"perhaps we should allow for multiple levels of
-quality of delegates."***
-> Erik: *"Sure he has 3 at high quality (roughly his level and abilities), but he likely has many more of
-> slightly lower capability. **Deni Cors is an example** — he barely knew her but delegated the Whistling
-> Woman to her care; through his presence alone she built the post and started running it. **I'm sure she's
-> great but not likely an equivalent to Pell at the forge or Mara Wells.**"*
+**Aevi (PO) · 2026-09-06** · ⬜ **Erik's corrections, folded. v1 had ceilings, a cap on holds, and no
+vouching — all three were wrong.**
 
 ---
 
-## §1 — ⛔ THE SAVE ALREADY SHOWS THE DISTINCTION, AND THE ENGINE ALREADY CAUSED IT
+## §1 — ⛔ FLOORS, NOT CEILINGS
 
-| keeper | relationship | met | the hold |
-|---|---|---|---|
-| **Fendt** | 9 | 3 | ⚑ **thriving** |
-| **Cassiel Ord** | 5 | 3 | ⚑ **thriving** |
-| ⛔ **Deni Cors** | ⛔ **2** | ⛔ **1** | ⚠️ **holding** |
+> Erik: *"I would want floors not ceilings — **poor Deni might just be keeping it, but the place might be
+> thriving anyway due to circumstance.**"*
 
-⚑ **`ceilingByKeeperTier` IS ALREADY THIS DESIGN, ALREADY AUTHORED, AND ALREADY FIRING:**
+⚠️ **v1 read `ceilingByKeeperTier` as the design. It is the wrong shape and it is currently authored as a
+CAP:** `notable → holding` means **a place with a modest keeper CANNOT rise**, whatever else is true.
 
-```
-riffraff → holding   ·   notable → holding   ·   regional and above → thriving
-```
+⛔ **A place thrives for reasons that are not its keeper** — a good year, a road that opened, ore that ran
+richer than anyone expected, a war somewhere else. ⚑ **The keeper is not the reason it climbs. THE KEEPER IS
+THE REASON IT DOES NOT FALL.**
 
-⚠️ **The engine's own words: *"a notable keeper holds a place; a regional one can bring it to thriving."***
-➡️ ⛔ **DENI CORS IS AT `holding` BECAUSE HER TIER CAPS HER THERE — and Erik read that from play without
-being told.**
+| ⬜ | |
+|---|---|
+| **a keeper sets a FLOOR** | ⚑ **what the place will not drop below while they are there** |
+| **circumstance sets the rest** | ground, features, crew, the season, the road |
+| ⛔ **and a strong keeper's floor is HIGH** | ⚠️ which is the real reward — **not permission to climb, but that it stays climbed** |
+
+### ⚑ AND THE RISK ERIK NAMED IS THE BEST PART
+
+> *"That's also risky to the hold, because **successful places that don't have a strong leader are
+> targets**."*
+
+⛔ **A THRIVING HOLD WITH A WEAK KEEPER IS THE MOST ATTRACTIVE THING ON THE MAP.** ⚠️ **And the raid rules
+already price it** — R46a: a raid is a fight, `raid.base × dangerLevel × store fullness`, halved by a
+garrison.
+
+➡️ ⬜ **Add the keeper to that product.** ⚑ **A full store, a rich hold, and Deni Cors is exactly the shape
+of a target** — and the player will feel it before anyone explains it.
 
 ---
 
-## §2 — ⚑ SO THE MECHANISM EXISTS. IT CAPS THE PLACE AND NOT THE COUNT.
+## §2 — ⛔ A GOOD KEEPER DOES MORE THINGS, NOT HIGHER THINGS
 
-⛔ **`delegationCapacity` treats all three identically: Fendt, Cassiel and Deni each consume one of three
-slots.** ⚠️ **But they are not the same thing, and the engine already knows it — it just knows it about the
-HOLD rather than about the PERSON.**
+> Erik: *"The same with higher quality Keepers — they can have a place thrive **AND send people on trades
+> and missions, build and expand the territory, and go on missions themselves** as they become higher level
+> and more capable, **just like you can**."*
 
-### ⬜ PROPOSED: TIER THE SLOTS, NOT ONLY THE CEILING
+⚑ **THE DIFFERENCE IS BREADTH OF ACTION, NOT A BETTER NUMBER.**
 
-| tier | ⬜ how many | what they can do |
+| ⬜ what a keeper can do | keeping | charge |
 |---|---|---|
-| ⚑ **CHARGE** — genuinely yours | ⛔ **`floor(level/10) + presence milestones`** — *the current cap, unchanged* | ⚠️ **anything.** They can bring a place to `thriving`, take a mission, hold a real charge |
-| ⚑ **KEEPING** — in your service, not close | ⬜ **a wider allowance** — Aevi's read: **presence-derived, roughly double** | ⛔ **they KEEP.** A place does not slip while they are there, and it does not climb past `holding` |
+| **hold the floor** | ✅ | ✅ |
+| **run crew, take upkeep, ship what is made** | ✅ | ✅ |
+| ⚑ **send a caravan** | ⛔ | ✅ |
+| ⚑ **send people on missions** | ⛔ | ✅ |
+| ⚑ **build a feature, claim adjacent ground** | ⛔ | ✅ |
+| ⛔ **GO THEMSELVES** | ⛔ | ✅ |
 
-⚑ **AND THE SPLIT IS ALREADY MEASURABLE FROM `relationship` AND `met`** — ⚠️ **no new field.** Fendt at 9 and
-Pell at 10 are one thing; **Deni at 2, met once, is plainly another, and the game has been treating them as
-equals in the only place it counts.**
-
-### ⛔ WHY THIS IS BETTER THAN RAISING THE CAP
-
-⚠️ **Raising `floor(level/10)` says a level-40 hermit deserves four of anybody.** ⛑ **This says: the people
-who are truly YOURS are scarce, and that scarcity is real — but PRESENCE ALONE GETS THINGS KEPT.**
-
-⚑ **Which is exactly what Erik described happening:** *"he barely knew her… **through his presence alone**
-she built the post and started running it."* ➡️ ⛔ **THAT IS NOT A HIGH-QUALITY DELEGATE. THAT IS A REACH.**
+⚠️ **AND *"just like you can"* IS THE RULING UNDER IT: a charge-holder is a PLAYER-SHAPED PERSON.**
+✅ **R37 already grows them** — completions, condition steps, and deeds, all stacking — ➡️ ⚑ **so a delegate
+who campaigns becomes more capable by the same arithmetic the player does, and the ceiling on what they may
+attempt should rise with them rather than with your opinion of them.**
 
 ---
 
-## §3 — ⬜ AND IT MAKES THE PRESENCE TRACK MEAN ONE THING
+## §3 — ⛔ AND THE NUMBER OF HOLDS IS NOT CAPPED
 
-**`sub_attribute_ladder` presence: 14 · 18 · 20, and 18 and 20 are still marked `BLOCKED PENDING HOLDINGS`
-though holdings shipped.**
+> Erik: *"I'm also thinking that **the number of holds doesn't really need to be limited** — they will fall
+> out of how many people you have that can hold and run them **plus the ones you can hold just because of
+> your presence and power, which don't need keepers**."*
 
-| presence | authored line | ⬜ under this proposal |
-|---|---|---|
-| **14** | *"people in your service you do not travel with"* | ✅ **+1 CHARGE** (R25c, live) |
-| **18** | *"a household, and it holds without you"* | ⚑ **the KEEPING allowance opens — and `unstewardedCeiling` already lives here** |
-| **20** | *"they are yours and they would not be talked out of it"* | ⛔ **+1 CHARGE.** ⚠️ *"Would not be talked out of it"* is the definition of the higher tier |
+✅ **AGREED, AND IT REMOVES A DIAL RATHER THAN ADDING ONE.** ⚑ **The constraint is already real and already
+two-sided:**
 
-⚑ **THE AUTHORED LINES ALREADY DESCRIBE TWO DIFFERENT KINDS OF PERSON**, and 18 is plainly the lower one:
-⚠️ **a household holds; it does not campaign.**
+| | |
+|---|---|
+| ⚑ **people** | how many will keep a place for you |
+| ⚑ **presence** | ⛔ **`unstewardedCeiling` (presence 18) ALREADY DOES THIS** — *"an unkept holding advances like a kept one; the name climbs it"* |
 
----
+⚠️ **SO A HIGH-PRESENCE PLAYER GENUINELY HOLDS GROUND WITH NOBODY ON IT** — the authored line is *"a
+household, and it holds without you"* — ➡️ ⛔ **and there is no reason to also count those against a cap.**
 
-## §4 — ⬜ WHAT AEVI WOULD NOT DO
-
-- ⛔ **Do not let a KEEPING delegate take a mission.** ⚠️ **`SPEC_npc_level_balance` made missions the
-  catch-up that costs something** — a person you barely know should not be sent somewhere they can die.
-- ⛔ **Do not let them grow into the higher tier by tenure alone.** ⚑ **`relationship` is the gate, and that
-  means going back and knowing them** — which is the story Erik is describing wanting.
-- ⚠️ **Do not add a `delegateTier` field.** ⛔ **It is derivable from `relationship` and `met`, and a stored
-  copy of a derived value is the failure this project has ruled against three times.**
+⬜ **What replaces the cap is the floor:** ⚠️ **an unkept hold's floor is your PRESENCE, and a kept one's
+floor is the keeper's.** ⛔ **Claim more than your name can carry and they start slipping — which is a
+consequence rather than a refusal.**
 
 ---
 
-## §5 — ⬜ FOR ERIK
+## §4 — ⚑ MY PEOPLE'S PEOPLE
 
-1. ⛔ **Two tiers or three?** ⚑ Aevi proposes **two** — *charge* and *keeping*. ⚠️ **Three invites a middle
-   nobody can describe.**
-2. **Where is the line?** ⬜ Aevi's read: **`relationship >= 6` or `met >= 4`** is a charge-holder; below it
-   they keep. ⚠️ **Fendt 9 and Cassiel 5/met-3 both currently hold `thriving` posts, so the line matters —
-   ⛔ Cassiel would fall to KEEPING under `>= 6`, and his post is thriving.**
-3. ⚑ **Or key it on the hold's own outcome instead:** ⬜ **a keeper who has ALREADY brought a place to
-   `thriving` has proven they are a charge-holder.** ⚠️ **That is evidence rather than a threshold, and this
-   project keeps landing on evidence.**
+> Erik: *"I agree with your Cassiel problem, but **Veth knew him and vouched for him**, so that should count
+> too. **My people's people.**"*
+
+⛔ **MEASURED: NOTHING MODELS THIS.** No `vouchedBy`, no `introducedBy`, no record anywhere of one NPC
+knowing another. ⚠️ **Every relationship in the game is a spoke to the player and there are no edges between
+the others.**
+
+### ⬜ AND IT FIXES v1's REAL FAULT
+
+**v1 proposed `relationship >= 6` and Cassiel Ord at 5, met 3, would have dropped to *keeping* — while
+running a thriving post.** ⛔ **The threshold was wrong because it was measuring the wrong edge.**
+
+⬜ **Proposed: `vouchedBy` — an npcId, and the voucher's standing carries.**
+
+| | |
+|---|---|
+| ⚑ **trust is transitive, once** | ⛔ **Veth at 8 vouching for Cassiel makes him a charge-holder without the player having met him four times** |
+| ⚠️ **and it does not chain** | ⛔ **a vouch from someone who was themselves vouched for does not pass it on** — otherwise everyone is trusted through two hops |
+| ⛔ **AND IT COSTS THE VOUCHER** | ⚑ **if the vouched-for fails badly, the voucher's standing takes it.** ⚠️ **That is what makes a vouch worth something and worth asking for** |
+| ⬜ **a vouch is an ACT** | ⚑ **someone offers it, in a scene** — ⛔ not a derived fact |
+
+⚑ **AND IT IS THE ANSWER TO THE PEOPLE PROBLEM ERIK STARTED WITH.** ⚠️ **You are not short of delegates
+because the cap is low. You are short because the only way to trust someone has been to spend thirty scenes
+with them** — ➡️ ⛔ **and a person with three good people should be able to reach thirty through them.**
+
+---
+
+## §5 — ⬜ AND THE PRESENCE TRACK IS OPEN
+
+> Erik: *"We'll have to take a look at the presence track — **it was a guess when we put it in**, we can
+> adjust it."*
+
+⚠️ **Aevi will not redesign it in the same paper that changed three other things.** ⬜ **What this proposal
+needs from it:**
+
+| presence | wants to mean |
+|---|---|
+| **14** | *people in your service you do not travel with* — ⚑ **the KEEPING allowance** |
+| **18** | *a household, and it holds without you* — ⛔ **`unstewardedCeiling`, already live: hold ground with nobody on it** |
+| **20** | *they are yours and they would not be talked out of it* — ⚑ **a charge-holder who will campaign for you** |
+
+⛔ **AND THE THREE AUTHORED LINES ALREADY SAY EXACTLY THAT**, which is a good sign the guess was closer than
+Erik remembers.
+
+---
+
+## §6 — ⬜ WHAT AEVI STILL WANTS RULED
+
+1. ⛔ **Does a vouch move `relationship`, or sit beside it?** ⚑ **Aevi's read: BESIDE.** ⚠️ **A vouched-for
+   person is TRUSTED, not KNOWN, and the difference should stay visible.**
+2. **How far does the voucher's fall go?** ⬜ *"Costs the voucher"* is ruled; **how much is not.**
+3. ⚠️ **Can a keeper vouch for their own replacement?** ⛔ **That is succession, and it is a good story.**
+4. ⬜ **Does the floor apply to a hold's STORE as well as its condition?** ⚑ **A weak keeper who cannot stop
+   a raid is a different failure from one who lets the place slip** — ⚠️ **and Erik's target-risk suggests
+   both are real.**

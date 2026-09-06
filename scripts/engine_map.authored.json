@@ -430,5 +430,10 @@
     "purpose": "Trade as a ROAD to prices the game already has, not a new economy: a load leaves a hold's store, travels a real route, can be robbed on the way, and is sold where it lands. The differential is authored — 8 raw material is 32 in the valley and 115 in the Gearlands.",
     "playerVisibleSurface": "News from the road while you are elsewhere: a load arriving and what it fetched, a caravan robbed, or people who did not walk on. The GM is told what is on the road and whether anyone is walking with it.",
     "whatMakesItFire": "A holdingOps \"caravan\" op sends one; the world tick moves it, rolls the road's own danger, and sells it on arrival — it runs itself while you are not looking, the same promise a hold's store makes."
+  },
+  "presence.js": {
+    "purpose": "Who is around today — the half of the world the GM was never shown. 117 authored figures exist and nothing offered them, because npcsPresent comes back IN the turn, KNOWN PEOPLE is only who the player has already met, and generateRequest is reactive by rule.",
+    "playerVisibleSurface": "Strangers who turn up and are worth knowing: someone needing a hand, someone with news, someone owed — and, more rarely, a figure of real standing who has somewhere else to be.",
+    "whatMakesItFire": "Every turn, as ambient context. A per-person daily chance = their tier's rate x how near they are, with reach scaling by standing, so a market town is crowded and a remote post is quiet — and when nobody is near, it offers nobody."
   }
 }

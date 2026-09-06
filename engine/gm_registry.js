@@ -47,6 +47,7 @@ import { priceLine } from "./economy.js";   // SNG-302: what a thing fetches HER
 import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NOT gone — reachable in the death state, latent hooks
 import { threatToPlayer, guardiansFor, worldRoster } from "./worldtick.js"; // SNG-310: the mark the world engine leaves for the GM to narrate
 import { npcRegistryForGM, npcQuestSeedBlock, bearersOf, carriedForGM } from "./npcs.js";
+import { presenceForGM } from "./presence.js";   // SPEC_npc_presence_cadence: who the day could offer
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { sheetsForGM } from "./npcsheet.js";     // the person-keyed sheet, first live caller
 import { groundForGM } from "./places.js";       // R28: authored ground is canon
@@ -229,6 +230,20 @@ export const GM_CONTEXT = [
       lines.push("LEGION — bands meet bands. What decides it is NUMBERS AND QUALITY, not one hero's roll; a hero bends a battle, and never by more than their rung allows.");
       return lines.join("\n");
     } },
+
+  // ⛔ WHO IS AROUND TODAY — the half of the world the GM has never been shown. `npcsPresent` comes back IN
+  // the turn, so it is the GM's own invention; KNOWN PEOPLE is who the player has already met, so a
+  // STRANGER CAN NEVER ARRIVE FROM IT; and `generateRequest` is reactive by rule. ⚠️ Measured: 117 authored
+  // figures, 110 of whom Silas has never met, because nothing ever offered them.
+  // ⚑ OFFERED, NEVER FORCED — and never a quota: when the world genuinely has nobody near, this is empty,
+  // which is how a remote moorland post differs from a market town.
+  { key: "presenceDetail", builder: "presence.presenceForGM (SPEC_npc_presence_cadence)", carries: ["who the day could offer", "their tier", "whether the player has met them"],
+    reachedBy: "always — it is who is around, and being nobody is an answer too", spec: "SPEC_npc_presence_cadence", views: ["turn"],
+    build: (env) => presenceForGM(env.character, env.CONTENT, {
+      day: (() => { try { return env.time?.worldDay ?? env.character?.clock?.day ?? 0; } catch { return 0; } })(),
+      hereId: env.location?.id || env.character?.currentLocationId || null,
+      exclude: (env.sceneState?.npcsPresent || []).map(n => n && (n.id || n.npcId)).filter(Boolean),
+    }) },
 
   // ---- shared by turn + ask + gambit ----
   // SNG-302 — WHAT IT FETCHES HERE. Aevi: "traders are NPCs not shops — the price model exists so the GM has

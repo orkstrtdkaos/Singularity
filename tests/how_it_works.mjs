@@ -7510,6 +7510,78 @@ console.log("\n── §106 · a hold says what it costs, and every control does
     && /hmBack\.onclick = \(e\) => \{ if \(e\.target === hmBack\)/.test(app106));
 }
 
+/* ═════ §107 — THE WORLD SHOULD BE CROWDED, AND NOTHING EVER OFFERED IT (SPEC_npc_presence_cadence) ═════ */
+// ⛔ NOTHING CHOSE WHO WAS THERE. `npcsPresent` comes back IN the turn, so it is the GM's own invention;
+// KNOWN PEOPLE is the player's registry, so A STRANGER COULD NEVER ARRIVE FROM IT; and `generateRequest` is
+// reactive by rule. ⚠️ Measured on Silas: 117 authored figures, 37 met, and 110 he had never met because
+// nothing had ever offered them.
+// ⚑ ERIK'S CADENCE: "riff raff or notables… pretty much every day… a heroic probably weekly, epics every
+// couple weeks, legends and mythics more rarely, but definitely at special events."
+console.log("\n── §107 · who is around today, offered and never forced ──");
+{
+  const PR = await import("../engine/presence.js");
+  const { loadContentHeadless: lch107 } = await import("./headless_content.mjs");
+  const C107 = await lch107();
+  const who = { id: "t", npcRegistry: {}, currentLocationId: "the_crossing" };
+  const over = (loc, days = 400) => { const t = {}; let n = 0;
+    for (let d = 0; d < days; d++) for (const r of PR.presentToday(who, C107, { day: d, hereId: loc })) { t[r.tier] = (t[r.tier] || 0) + 1; n++; }
+    return { t, perDay: n / days }; };
+  const hub = over("the_crossing");
+
+  check("§107: ⛔ THE GM IS OFFERED PEOPLE AT ALL — 110 authored figures were unreachable because nothing did",
+    hub.perDay > 0.3, `${hub.perDay.toFixed(2)} a day`);
+  // ⚑ ERIK'S ORDERING IS THE SPEC: a notable is common, a heroic is weekly-ish, an epic rarer, a legend
+  // rarer still. ⛔ MY FIRST REACH VALUES MADE A LEGENDARY MORE COMMON THAN AN EPIC, which is the one
+  // ordering that must never happen — this is the check that caught it.
+  check("§107: ⛔ THE TIERS ARE ORDERED — notable > heroic > epic > legendary, never inverted",
+    (hub.t.notable || 0) > (hub.t.heroic || 0) && (hub.t.heroic || 0) > (hub.t.epic || 0)
+    && (hub.t.epic || 0) > (hub.t.legendary || 0), JSON.stringify(hub.t));
+  check("§107: ⚑ …and roughly at Erik's rates — a heroic about weekly, an epic about fortnightly",
+    400 / (hub.t.heroic || 1) >= 4 && 400 / (hub.t.heroic || 1) <= 14
+    && 400 / (hub.t.epic || 1) >= 9 && 400 / (hub.t.epic || 1) <= 30,
+    `heroic 1/${(400 / (hub.t.heroic || 1)).toFixed(0)}d · epic 1/${(400 / (hub.t.epic || 1)).toFixed(0)}d`);
+  check("§107: ⛔ A MYTHIC IS NEVER OFFERED ON A TIMER — \"a mythic appearing IS the event\"",
+    !("mythic" in hub.t) && !("mythic" in PR.TIER_RATE));
+
+  // ⛔ NOT A QUOTA. Aevi: "'you have not met a heroic this week' is not a reason for one to appear in an
+  // empty fen." The count must fall OUT of who is near, so a remote place is quieter than a market town.
+  const town = over("millbrook").perDay, far = over("the_blaze").perDay;
+  check("§107: ⛔ NOT A QUOTA — a remote place is quieter than a town, because the count falls out of the world",
+    town > far, `Millbrook ${town.toFixed(2)}/day vs the Blaze ${far.toFixed(2)}/day`);
+  check("§107: ⚠️ …and a place with nobody near offers NOBODY rather than reaching across the world for six",
+    PR.presentToday(who, C107, { day: 3, hereId: "the_blaze" }).length < 6);
+
+  // ⛑ STABLE WITHIN A DAY, or the roster flickers between turns and the GM cannot build on it.
+  // ⚠️ DAY 12 OFFERS NOBODY AT MILLBROOK — quiet days are correct, and my first fixture picked one, which
+  // made two checks below vacuous. Find a day that actually has people and use that.
+  const busy = (() => { for (let d = 0; d < 60; d++) if (PR.presentToday(who, C107, { day: d, hereId: "millbrook" }).length) return d; return 0; })();
+  const a = PR.presentToday(who, C107, { day: busy, hereId: "millbrook" });
+  const b = PR.presentToday(who, C107, { day: busy, hereId: "millbrook" });
+  check("§107: ⛑ the same day offers the same people, however many turns it takes",
+    JSON.stringify(a) === JSON.stringify(b));
+  check("§107: …and a different day offers different people",
+    JSON.stringify(a) !== JSON.stringify(PR.presentToday(who, C107, { day: busy + 1, hereId: "millbrook" })));
+
+  // ⚑ A STRANGER CAN FINALLY ARRIVE — the whole point, since KNOWN PEOPLE could only ever return the met.
+  const strangers = over("millbrook", 60), anyUnmet = (() => {
+    for (let d = 0; d < 60; d++) if (PR.presentToday(who, C107, { day: d, hereId: "millbrook" }).some(r => !r.met)) return true;
+    return false; })();
+  check("§107: ⚑ A STRANGER CAN ARRIVE — KNOWN PEOPLE could only ever hand back someone already met", anyUnmet);
+  check("§107: …and whether they are a stranger is SAID, so the GM introduces them properly",
+    a.length > 0 && /a stranger to you/.test(PR.presenceForGM(who, C107, { day: busy, hereId: "millbrook" }) || ""));
+  check("§107: …and someone already in the scene is not offered again",
+    a.length > 0 && !PR.presentToday(who, C107, { day: busy, hereId: "millbrook", exclude: a.map(r => r.id) }).some(r => a.some(x => x.id === r.id)));
+
+  // ⛔ AND THE FOUR DOORS, plus the framing — a roster with no framing is a threat table with names.
+  const reg = rd("engine/gm_registry.js"), gm = rd("engine/gm.js");
+  check("§107: ⛔ THE GM IS TOLD — declared in the registry and consumed in gm.js, or it reaches the model never",
+    /key: "presenceDetail"/.test(reg) && /presenceForGM\(/.test(reg)
+    && /const \{[^}]*\bpresenceDetail\b[^}]*\} = ctx;/.test(gm) && /if \(presenceDetail\) world\.push/.test(gm));
+  check("§107: ⚑ …with Erik's verb, which is the whole framing — HELPING or being helped, not encountering",
+    /HELPING OR BEING HELPED/.test(gm) && /Combat is the exception/.test(gm)
+    && /offered, never forced/i.test(gm));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

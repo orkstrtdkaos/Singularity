@@ -6620,6 +6620,19 @@ console.log("\n── §95 · the arrears reach the purse through the one door i
     holdings: [{ id: "h", name: "A Good Post", kind: "post", condition: "thriving", history: [] }] };
   RC95.reconcile(clean, "character", { content: C95, rules: C95.rules, ...C95 });
   check("§95: …and a hold already thriving gains no history it did not earn", clean.holdings[0].history.length === 0);
+
+  // ⛔ R48's SECOND LINE, ruled separately — and COUNTED, never typed. A stored 280 would be a copy of a
+  // derived value, and a character with a different ledger would be paid Silas's arrears.
+  const ledger = { id: "v", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} }, holdings: [],
+    deeds: Array.from({ length: 35 }, (_, i) => ({ description: `deed ${i}` })) };
+  RC95.reconcile(ledger, "character", { content: C95, rules: C95.rules, ...C95 });
+  check("§95: ⛑ …and the deed ledger pays 8 a deed, COUNTED off the record rather than typed",
+    ledger.purse.crystal === 880 + 280, `crystal ${ledger.purse.crystal} (880 arrears + 35×8)`);
+  const fewer = { id: "w", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} }, holdings: [],
+    deeds: [{ description: "one" }, { description: "two" }] };
+  RC95.reconcile(fewer, "character", { content: C95, rules: C95.rules, ...C95 });
+  check("§95: ⚠️ …so a character with a different ledger is paid THEIR number, not Silas's",
+    fewer.purse.crystal === 880 + 16, `crystal ${fewer.purse.crystal} (880 + 2×8)`);
 }
 
 /* ══════════ REPORT ══════════ */

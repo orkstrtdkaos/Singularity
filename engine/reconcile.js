@@ -1160,6 +1160,26 @@ export const CHARACTER_STEPS = [
       return { notes };
     }
   },
+  {
+    version: 36, id: "r48-deed-ledger", playerFacing: true,
+    // ⛔ R48's SECOND LINE, ruled separately (Erik: "add the 280 deed ledger too"). ⚑ 35 deeds at 8 crystal —
+    // two `useful` goods, what a valley pays for a service rendered — against a ledger that already exists.
+    // ⚠️ IT NEEDS NO NEW MECHANISM: it is a one-time settlement against deeds the world already recorded.
+    //
+    // ⚑ AND IT COUNTS THE DEEDS ON THE SAVE rather than paying a stored 280. A number typed here would be a
+    // copy of a derived value — this project's most-repeated defect — and a character with a different ledger
+    // would be paid Silas's arrears. ⚠️ The RATE is the ruling; the COUNT is the character's own.
+    apply: (c, ctx) => {
+      const deeds = Array.isArray(c.deeds) ? c.deeds.length : 0;
+      if (!deeds) return {};
+      const perDeed = 8;
+      const cur = ctx?.rules?.economy?.holdStore?.upkeepCurrency || "crystal";
+      const owed = deeds * perDeed;
+      const r = credit(c, cur, owed, { origin: "arrears" });
+      if (!r?.ok) return {};
+      return { notes: [`${owed} ${cur} for ${deeds} deed${deeds === 1 ? "" : "s"} on your record — a valley pays for a service rendered, and nobody had ever counted.`] };
+    }
+  },
   {    version: 30, id: "restore-generated-teacher-roles", playerFacing: true,
     // SNG-355 §1c — ERIK'S SAVE NEEDS THIS AND CANNOT HEAL ITSELF. `recruit()` read `teaches` from the
     // AUTHORED catalog only, so a GENERATED NPC returned {} and the teacher role was dropped at the moment

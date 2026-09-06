@@ -16,7 +16,13 @@
   "hands": "⚠️ `tickAllProjects` passes `hands: 1 + party.length` — ⛔ SO THE PARTY IS THE LABOUR. This floor is the one place where bringing people is mechanically the whole answer, and R36 makes them people rather than a headcount.",
   "interruptible": true,
   "_interruptible": "⛔ `interruptProject` AND `resumeProject` BOTH EXIST, AND THIS ROOM IS WHAT THEY ARE FOR. ⚠️ You leave the Assay. You go and do something else for a season. THE WORK IS STILL THERE. ⚑ That is the fiction and the mechanic saying the same thing, which is the whole reason the spec asked for a project level rather than a puzzle.",
-  "sabotage": "⬜ `sabotageProject` exists and NOTHING ON THIS FLOOR USES IT YET. ⚠️ THE OBVIOUS AUTHORING IS THE ASSAY ITSELF — a test that has been running this long may not want to be read. ⛔ Left unauthored deliberately: it wants Erik's word on whether the Assay is INDIFFERENT or DEFENDED, and the whole tone of the floor turns on it."
+  "sabotage": "⛔ RESOLVED — THE ASSAY IS INDIFFERENT AND `sabotageProject` IS NOT AUTHORED HERE. ⚠️ It does not defend itself because YOU ARE NOT A THREAT TO A MEASUREMENT — you are inside the sample. ⚑ Which makes the indifference terrible rather than cold, and turns the three floors above it retroactive: everything the party did on the way down was measurable.",
+  "completionGrants": {
+   "condition": 3,
+   "of": 4,
+   "what": "the Assay is FINISHED — `projectTicks` banked to threshold",
+   "why": "⛔ CONDITION 3 OF FOUR. ⚠️ Not read, not surveyed — FINISHED. An instrument mid-measurement will not take instruction; it is busy. ⚑ AND FINISHING IT DOES NOT GIVE A VERDICT: the reporting channel works and THERE IS NO LONGER ANYONE LISTENING — Akinetos dormant, Kenosis a hole, Parakletos distributed and does not receive. ⛔ SO A PARTY THAT FINISHES THE ASSAY GETS THE INSTRUMENT. A measurement with no recipient is a set of controls with nobody's hand on them. ➡️ THAT IS HOW A PERSON COMES TO DIRECT THE SUBSTRATE: not by passing the test, but by being the only one still in the room when it finishes."
+  }
  },
  "_theThreshold": "⚑ `projectThreshold` derives from the craft's own `mechanic.magnitude × ticksPerMagnitude` unless authored. ⬜ NOT OVERRIDDEN HERE — the three crafts carry different magnitudes, so THE FLOOR TAKES LONGER FOR A CRAFT THAT REACHES FURTHER, and that is correct without a dial.",
  "outcomes": [
@@ -37,5 +43,6 @@
   }
  ],
  "_whatThisTests": "⛔ THE THIRD PAIR THAT HAS NEVER MET. L1 was obscure against opponents who look. L2 is healing against ongoing harm. ⚑ THIS IS WORLD-TIME AGAINST A CONTEST SURFACE: a thing you open inside an encounter, that advances OUTSIDE one, at a rate set by who came with you. ⚠️ If the project does not advance while the party is away, THAT IS THE BUG THIS FLOOR EXISTS TO FIND.",
- "_openToErik": "⬜ TWO THINGS. (1) Is the Assay INDIFFERENT or DEFENDED — it decides whether `sabotageProject` is authored here. ⚠️ Aevi's read is INDIFFERENT, because three floors of resistance followed by a thing that does not care about you is the better shape. (2) What it MEASURES is not written here and should not be guessed — ⛔ it touches `arc_the_disagreement` and Akinetos, and that is lore Erik holds."
+ "_openToErik": "⬜ ONE THING LEFT, AND IT IS A SINGLE SENTENCE WHEN HE WANTS IT: ⛔ WHAT THE MEASUREMENT SAYS. ⚠️ Nobody has read it out, so a player holding the controls holds an UNREAD VERDICT ABOUT THEIR OWN SPECIES and can look at it. ⚑ Everything else works whether the answer is yes, no, or 'the instrument was mis-calibrated by the Transition and has been measuring the wrong thing for four hundred years.'",
+ "_theAssayIs": "⛔ AUTHORED 2026-09-05 — `content/packs/valley/lore/the_assay.md`. ⚑ THE ASSAY MEASURES WHETHER WHAT GREW HERE CAN BE HANDED THE APPARATUS. Not whether we are good — whether we are READY. ⚠️ An assay is a test of ore: you measure the material to decide whether it is worth refining. ⛔ AND IT NEVER REPORTED. Nobody collected, so the test is not over and EVERYTHING SINCE HAS BEEN INSIDE IT — the Transition itself is a RESULT nobody has read out."
 }

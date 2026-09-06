@@ -106,12 +106,67 @@ they wield — narrate the change."* ⛔ **This is that, at the largest scale th
 
 ---
 
-## IV · WHAT THIS DOES NOT DECIDE
+## IV · THE VERDICT IS THE REACHING
+
+> ⛔ **Erik, 2026-09-05: *"THE SYSTEM IS POWER. If someone is able to achieve the ability to use it, they
+> have theoretically passed the assay."***
+
+⚑ **THE VERDICT IS NOT A REPORT SOMEBODY READS. IT IS A DEMONSTRATION.**
+
+The Assay measures whether what grew here can be handed the apparatus — ⚠️ **and the only way to find out is
+to watch something grown here reach the controls.** ⛔ **Arriving IS the answer.**
+
+➡️ **Which is why it never reported, and why that is not a fault.** ⚑ **There was never a message to send.
+The instrument was always going to be collected or not, and BEING COLLECTED IS THE READING.**
+
+---
+
+## V · THE THREE DOORS
+
+> ⛔ **Erik: *"That gives them a choice about how to use the power — create, destroy, ascend? These seem like
+> pretty end game decisions we could tie in."***
+
+✅ **They tie in exactly, because the Mythical Rung already had two of them.** `legends.json`
+`_theMythicalRung`: at ~L100 a character **ascends or falls**, and either way joins
+`arc_the_disagreement` — *"the endgame is not defeating the Precursors, it is BECOMING ONE OF THE
+PARTIES."*
+
+⚠️ **The rung had two doors because only two of the Three took a direction a person could follow.**
+⛔ **Parakletos distributed itself into the substrate and left no door — and THE APPARATUS IS THE DOOR IT
+DID NOT LEAVE.**
+
+| door | whose act | what it costs |
+|---|---|---|
+| ⚑ **ASCEND** | **Akinetos.** Hold the pause. Keep the lattice as it is and become the reason it stays that way | ⛔ **Not passivity — the enormous permanent effort of NOT MOVING**, and everything you might otherwise have done |
+| ⚑ **DESTROY** | ⛔ **the Sovereigns' direction, and the only one that is not one of the Three's.** Refuse an axis and unmake what runs on it | ⚠️ **Every Sovereign was once a thing that reached this point and chose this.** *"The greatest thing that ever refused"* |
+| ⚑ **CREATE** | **Kenosis.** Empty yourself INTO the world rather than out of it — spend the apparatus on what has not been made yet | ⛔ **The only door that ends with you SMALLER than you were** — which is why the cosmology calls what Kenosis did a gift rather than a defeat |
+
+### ⬜ AND THE FOURTH THING NOBODY CALLS A CHOICE
+**Leave it running and walk away.** ⚠️ Level 4 already authors this as an outcome — *"nothing bad happens;
+the Assay goes on measuring."* ⛔ **At the rung it is not nothing: it is deciding that NOBODY should hold
+this** — and it is the only choice that can be unmade by whoever comes next.
+
+### ⛔ WHAT MAKES IT A CHOICE RATHER THAN A CLASS
+
+⚑ **All three are reached by the same four conditions.** ⚠️ **Nothing gates one door behind a tradition, an
+alignment, or a domain.** ➡️ **A person arrives with the controls and the world does not tell them which way
+to turn** — ⛔ **which is the only shape under which the Assay's question has an honest answer.**
+
+⚠️ **AND NPCs ARRIVE TOO.** The rung's own text: *the arcs move mainly from NPCs who climbed the ladder.*
+⛔ **A Mythical who reached the controls and chose DESTROY is a Sovereign in its first year** — and a player
+may meet one on the way up.
+
+---
+
+## VI · WHAT THIS DOES NOT DECIDE
 
 ⚠️ **The Assay's RESULT is still unwritten, and deliberately.** ⛔ **Nobody has read it out, so nobody knows
 whether what grew here passed.** ⚑ **A player holding the controls holds an unread verdict about their own
 species, and can look at it.**
 
-⬜ **THAT IS THE ONE THING LEFT FOR ERIK**, and it is a single sentence when he wants it: ⛔ **what the
-measurement SAYS.** ⚠️ **Everything above works whether the answer is yes, no, or *the instrument was
-mis-calibrated by the Transition and has been measuring the wrong thing for four hundred years*.**
+✅ **ANSWERED 2026-09-05 — AND THE QUESTION DISSOLVED RATHER THAN BEING ANSWERED.** ⛔ **There is no stored
+verdict to find.** The Assay does not hold a yes or a no; ⚑ **it holds a threshold, and someone either
+reaches it or does not.**
+
+⚠️ **So a party at Level 4 is not uncovering a judgement about their species. THEY ARE TAKING IT** — and
+what they do next is the judgement.

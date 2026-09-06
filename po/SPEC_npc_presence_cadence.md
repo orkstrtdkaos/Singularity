@@ -98,6 +98,58 @@ attends.**
 
 ---
 
+---
+
+## §6 — ⚑ THE SETTING: RAISE IT NOW, AND GIVE IT ITS OWN DIAL
+
+> Erik 2026-09-05: *"Increase it for now, but we can tie it to the encounter setting, or **add another
+> setting next to that one**."*
+
+### ✅ THE SIBLING SETTING ALREADY EXISTS AND IS THE RIGHT NEIGHBOUR
+
+**Settings carries *"World pacing — how often things happen"*: `calm · balanced · eventful · relentless`,
+defaulting to `eventful`.** ⚑ **And `engine/pacing.js` opens with the same complaint this spec does:**
+
+> ⛔ *"SNG-080: **THE WORLD MUST PUSH.** Erik sat in the safest village and nothing happened, because the
+> world is REACTIVE — it waits. **The player must never have to ask the world to be interesting.**"*
+
+⚠️ **BUT PACING AND PRESENCE ARE DIFFERENT THINGS AND SHOULD NOT SHARE A DIAL:**
+
+| | fires on | produces |
+|---|---|---|
+| ⚑ **pacing** | ⛔ **QUIET** — `quietTurns >= 3`, escalating 1→4 | ⚠️ **PRESSURE**: a rumour, a problem, a hook that will not wait, *something arrives* |
+| ⚑ **presence** | ⛔ **A CADENCE** — most days, weekly, fortnightly | ⚠️ **PEOPLE**, mostly not as pressure at all — *"helping or being helped"* |
+
+➡️ ⛔ **A BUSY VILLAGE IS NOT A DANGEROUS ONE.** ⚠️ **Tying presence to pacing would mean a player who wants
+a crowded, peaceful market has to accept a world that keeps throwing hooks at them** — ⛔ **and one who
+wants a tense, lonely game gets an empty street.** ⚑ **Those are two different preferences and they should
+be two dials.**
+
+### ⬜ PROPOSED — *"How crowded the world is"*, beside World pacing
+
+| | |
+|---|---|
+| **solitary** | ⚠️ **you mostly travel alone.** Roughly today's rate |
+| **occasional** | people turn up when there is reason |
+| ⚑ **peopled** ← **DEFAULT** | ⛔ **Erik's cadence: someone most days, a heroic weekly, an epic every couple of weeks** |
+| **thronged** | ⚠️ **you are never the only one who matters in the room** |
+
+### ⛔ AND RAISE IT NOW, AHEAD OF THE DIAL
+
+**Erik: *"increase it for now."*** ⬜ **Ship the cadence at `peopled` as the standing behaviour**, ⚠️ **and
+add the setting when the roster block lands.** ⛔ **The dial is worth nothing until there is something to
+turn down.**
+
+### ⚑ AND ONE THING PACING ALREADY GETS RIGHT THAT PRESENCE MUST INHERIT
+
+⛔ **`pressureDirective` RESPECTS THE PLACE:** *"This is a SAFE place — pressure here is human and small: a
+frightened neighbour, a rumor off the road. **NEVER a bandit ambush here.**"*
+
+➡️ ⚠️ **Presence needs the same discipline pointed the other way: a quiet fen does not produce a heroic
+because a week elapsed.** ⛔ **The place decides WHO is plausible; the cadence only decides HOW OFTEN.**
+
+---
+
 ## §5 — ROUND 2 QUESTIONS
 
 1. ⛔ **Where does the roster get built?** ⬜ `gm_registry.js` assembles KNOWN PEOPLE; ⚠️ **this is a sibling
@@ -108,6 +160,9 @@ attends.**
 4. ⬜ **Does the cadence run on world days or on passes?** ⚑ **One pass ≈ 3 days, so *"weekly"* is roughly
    every other pass** — ⚠️ **and that is close enough to *"every pass or two"* that it may be simpler to
    author in passes.**
-5. ⛔ **Erik's 73 meetings in 67 days is the baseline. What is the target?** ⬜ *"Pretty much every day"*
-   for the local layer suggests **2–4 a day**, which is a 2–3× increase — ⚠️ **and that is a pacing change
-   the GM's turn length has to survive.**
+5. ✅ **ANSWERED — raise it now, dial later (§6).** ⚠️ Target is **2–4 a day** for the local layer against
+   today's ~1, and ⛔ **that is a pacing change the GM's turn length has to survive** — ⬜ which is the one
+   risk worth measuring before it ships.
+6. ⬜ **Does `profile.pacing` want a sibling `profile.crowding`**, or is presence a second axis on the same
+   record? ⚑ **Aevi reads it as a separate field for the reason in §6: a busy village is not a dangerous
+   one.**

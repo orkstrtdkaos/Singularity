@@ -8,20 +8,29 @@ defensive, and where a gate was wrong rather than the content, this says so — 
 
 ---
 
-## §0 — ⚑ THE WHOLE THING IN FOUR COMMANDS
+## §0 — ⚑ **THE PROCEDURE IS AEVI'S OWN, AND IT IS BETTER THAN THE ONE I WROTE**
 
-```
-node scripts/atlas_inject.mjs        # if you touched a field, a mechanic key, or an ability
-node scripts/certify_counts.mjs      # if you added or removed ANY authored record
-node tests/how_it_works.mjs          # the doc-truth suite — must be 0 FAILURES
-node scripts/run_tests.mjs --ratchet # everything, ~5 min — what the push hook runs
-```
+⛔ **She wrote this before I did** — `po/AEVI_20260906_procedural_fixes.md` §3 — **and it names three things
+mine did not: the linter, `skills_inject`, and declaring the field in the schema.** ⚑ **So it is the spine
+here rather than a second opinion beside it.** ⚠️ **Two competing checklists is worse than one.**
 
-➡️ ⛔ **If the ratchet is green, the push will land.** ⚠️ **If you skip straight to the push, the hook runs
-the same five minutes and you find out then — so it is not faster, only later.**
+| # | after ANY content write, before saying it is done |
+|---|---|
+| **1** | ⚑ **`node po/craft_lint.mjs`** — ⚠️ **before touching the source of truth, not after** |
+| **2** | ⛔ **ENACT IT: a BODY section rewritten in present tense + a LOG row.** ⚠️ *"A ruling that lives only in a working paper is a rumour with a commit hash."* `po/` is never authoritative |
+| **3** | ⛔ **if the ruling declares a `bodyAnchor`, the body carries it VERBATIM, ON ONE LINE** — ⚠️ §62 matches per line, so a soft-wrapped anchor is not carried |
+| **4** | ⚑ **new field? DECLARE IT IN THE SCHEMA.** ⚠️ The ability schema is CLOSED — 31 crafts failed validation until `mechanic.meaning` was declared |
+| **5** | **regenerate what derives:** `skills_inject` · `atlas_inject` · `certify_counts` |
+| **6** | ⚑ **run `content_ci` AND `how_it_works`, and READ THE FAILURES — not the count** |
+
+⛔ **Her own note on step 6 is the sharpest line either of us wrote today:** *"I have been reporting '13
+pre-existing' for three days without reading the list — and when Erik asked what they were, three of them
+named ME."* ⚠️ **A count is not a reading.**
+
+➡️ **Then the push hook runs `run_tests --ratchet` (~5 min) and lands it.** ⚑ Running it yourself first is
+not faster — it is the same five minutes, earlier, where the output is easier to act on.
 
 ---
-
 ## §1 — ⛔ THE FOUR THAT BIT TODAY, AND WHAT EACH ONE MEANS
 
 | what went red | why | ⚑ the fix |
@@ -38,17 +47,24 @@ the same five minutes and you find out then — so it is not faster, only later.
 > ⛔ **YOUR 31 `mechanic.meaning: "none"` OPT-OUTS DID NOT BREAK THE ENGINE. THEY BROKE TWO GATE FIXTURES
 > THAT PICKED "ANY METAPHYSICAL CRAFT".**
 
-⚑ **You found this yourself and you were right that it was mine to fix** — the fixtures now say
-`&& a.mechanic?.meaning !== "none"`. ⚠️ **But the shape generalises and it is worth naming:**
+⚑ **You found this yourself, and you were right that it was mine to fix.**
 
-➡️ ⛔ **WHEN YOU ADD AN OPT-OUT, A NULL, OR AN EXCEPTION TO A CLASS OF RECORDS, SOME GATE IS PICKING A
-FIXTURE FROM THAT CLASS BY `.find()`.** ⚑ It was true when it was written and your exception makes it
-false — silently, because `.find()` still returns *something*.
+➡️ ⛔ **AND HER DIAGNOSIS WAS SHARPER THAN MY FIRST FIX.** I added `&& a.mechanic?.meaning !== "none"`, which
+narrows the pool from 165 crafts to 134 — ⚠️ **and leaves it exactly as order-dependent as it was.** ⚑ Her
+actual finding: *"the fixture is NON-DETERMINISTIC — it was always 'whichever craft happens to be first',
+and my change moved which one that is."* ⛑ **Both now sort by id and take the first, which no authoring
+change can move.**
+
+⚠️ **THE SHAPE GENERALISES:** ⛔ **when you add an opt-out, a null, or an exception to a class of records,
+some gate is picking a fixture from that class by `.find()`.** ⚑ It was true when written, and your
+exception makes it false **silently**, because `.find()` still returns *something*.
 
 ⬜ **What to do: after any sweep that tags N records with an exception, run `how_it_works` and read the
-failures for the word your exception uses.** ⚠️ If a gate fails on a fixture rather than on a claim, say so
-and hand it to me — **that is exactly what you did, and it was the fastest path.**
+failures for the word your exception uses.** ⚠️ If a gate fails on a FIXTURE rather than on a CLAIM, say so
+and hand it to me — ⚑ **which is exactly what you did, and it was the fastest path.**
 
+⛑ **And you were right not to touch `tests/how_it_works.mjs`.** *"A content author editing the gate that
+judges her content is the shape this project has ruled against."*
 ---
 
 ## §3 — ⛑ WHERE A GATE WAS WRONG, NOT THE CONTENT

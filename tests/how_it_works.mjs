@@ -4648,10 +4648,11 @@ console.log("\n── §69 · the five — roll=card, meaning ceiling, stacking 
     SUB69.meaningDensity(plain69, { present: 3, data: sub69 }) > mP && SUB69.meaningDensity(plain69, { present: 0, data: sub69 }) === mP
     && SUB69.peoplePresentAt("x69", { registry: { a: { lastSeen: { locationId: "x69" }, status: "active" }, b: { lastSeen: { locationId: "x69" }, status: "dead" } }, npcs: { c: { homeLocation: "x69" } } }) === 2);
   check("§69: …unauthored dials → null, never a number nobody chose", SUB69.meaningDensity(sacred69, { data: {} }) === null && SUB69.meaningCeiling(0.5, {}) === null);
-  // ⚠️ AND IT MUST NOT OPT OUT. Aevi tagged 31 crafts `mechanic.meaning: "none"`, and this fixture picked
-  // "any metaphysical craft" — so it started choosing one that reads NO meaning, and a check about meaning
-  // setting a ceiling failed on a craft that has no ceiling to set. Her find, and the fix is hers too.
-  const meta69 = Object.values(C69.abilities).find(a => a.tradition && SUB69.craftSource(a, ch69(a.tradition), C69.schools, C69.powerSources, C69.foothills)?.source === "metaphysical" && a.mechanic?.meaning !== "none");
+  // ⚠️ AND IT MUST BE DETERMINISTIC. Aevi’s diagnosis is sharper than my first fix: `.find()` here means
+  // WHICHEVER CRAFT HAPPENS TO BE FIRST IN ITERATION ORDER, so ANY content edit can move which one the gate
+  // judges. Excluding her 31 `meaning: "none"` opt-outs narrows the pool from 165 to 134 and leaves it just
+  // as order-dependent — so it sorts by id and takes the first, which no authoring change can move.
+  const meta69 = Object.values(C69.abilities).filter(a => a.tradition && SUB69.craftSource(a, ch69(a.tradition), C69.schools, C69.powerSources, C69.foothills)?.source === "metaphysical" && a.mechanic?.meaning !== "none").sort((x, y) => String(x.id).localeCompare(String(y.id)))[0];
   const cP = cardAt(meta69, plain69), cS = cardAt(meta69, sacred69);
   check("§69: ⛔ R38b — MEANING SETS THE CEILING, SUBSTRATE SETS THE PENALTY: a metaphysical craft at a meaning-poor place is CAPPED (side `meaningless`), and the cap is min(ceiling, band), never a product",
     cP?.meaningBound === true && cP.side === "meaningless" && cP.percent === Math.round(cP.ceiling * 100) && cS?.meaning > cP.meaning && (cS.meaningBound === false || cS.percent >= cP.percent),
@@ -5107,7 +5108,7 @@ console.log("\n── §75 · features — a mine yields, a temple carries meani
   const aura = H75.holdingMeaningAura(c2, "ridge", cfgAll);
   const plain = Object.values(C75.locations).find(l => !(l.tags || []).some(x => ["sacred", "locus", "cult", "home"].includes(x)) && !l.communityId);
   const m0 = SUB75.meaningDensity(plain, { data: C75.substrateModel }), m1 = SUB75.meaningDensity(plain, { data: C75.substrateModel, aura });
-  const meta = Object.values(C75.abilities).find(a => a.tradition && SUB75.craftSource(a, { domains: { primary: a.tradition }, schools: {} }, C75.schools, C75.powerSources, C75.foothills)?.source === "metaphysical" && a.mechanic?.meaning !== "none");
+  const meta = Object.values(C75.abilities).filter(a => a.tradition && SUB75.craftSource(a, { domains: { primary: a.tradition }, schools: {} }, C75.schools, C75.powerSources, C75.foothills)?.source === "metaphysical" && a.mechanic?.meaning !== "none").sort((x, y) => String(x.id).localeCompare(String(y.id)))[0];
   const chr = { domains: { primary: meta.tradition }, schools: {}, npcRegistry: {} };
   const card0 = SUB75.groundCardFor(meta, chr, { schools: C75.schools, substrate: C75.substrateModel, location: plain, locations: C75.locations, powerSources: C75.powerSources, foothills: C75.foothills });
   const card1 = SUB75.groundCardFor(meta, chr, { schools: C75.schools, substrate: C75.substrateModel, location: plain, locations: C75.locations, powerSources: C75.powerSources, foothills: C75.foothills, meaningAura: aura });

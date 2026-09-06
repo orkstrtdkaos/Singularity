@@ -15011,7 +15011,7 @@
   ],
   "actionCount": 952,
   "grantsVersion": 1,
-  "reconcileVersion": 46,
+  "reconcileVersion": 47,
   "gallery": [
     {
       "kind": "moment",
@@ -15621,8 +15621,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1788732627172,
-  "rev": 3500,
+  "updatedAt": 1788736423786,
+  "rev": 3600,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18087,19 +18087,18 @@
       },
       "gen-waygate": {
         "id": "gen-waygate",
-        "name": "Waygate",
+        "name": "The Pale March Waygate",
         "regionId": "valley",
         "parentId": "gen-ashwarden-march-road",
         "_promotedFromSubPlace": true,
-        "descriptionSeed": "A place the road led to — Waygate. The fiction brought you here before the map knew its name.",
+        "descriptionSeed": "The waygate the Hub's crossroads opens onto the Pale March. A couple of hours' walk to the fork in the road, and Stillwater's Trouble beyond it.",
         "tags": [
-          "transitional"
+          "transitional",
+          "waygate"
         ],
         "connections": [
-          "millbrook",
-          "gen-center",
-          "gen-the-ent-grove",
-          "gen-ashwarden-march-road"
+          "gen-ashwarden-march-road",
+          "millbrook"
         ],
         "_gen": {
           "entityId": "gen-waygate",
@@ -18132,46 +18131,15 @@
         },
         "dangerLevel": 2,
         "worldPos": {
-          "colatitude": 19.939,
-          "longitude": 250.524,
+          "colatitude": 20.2,
+          "longitude": 251.63,
           "depth": 0
-        }
-      },
-      "gen-center": {
-        "id": "gen-center",
-        "name": "Center",
-        "regionId": "valley",
-        "descriptionSeed": "A place the road led to — Center. The fiction brought you here before the map knew its name.",
-        "tags": [
-          "transitional"
-        ],
-        "connections": [
-          "gen-waygate"
-        ],
-        "_gen": {
-          "entityId": "gen-center",
-          "type": "location",
-          "birthWeight": 1,
-          "engagementScore": 0,
-          "tier": "fresh",
-          "rating": null,
-          "attentionHistory": [],
-          "createdDay": null,
-          "provenance": {
-            "healed": "sng-216-backfill"
-          }
         },
-        "_mintedAs": "transit",
-        "map": {
-          "x": 483.2482839825773,
-          "y": 379.03253576244833
-        },
-        "dangerLevel": 2,
-        "worldPos": {
-          "colatitude": 19.462,
-          "longitude": 251.60500000000002,
-          "depth": 0
-        }
+        "waygate": true,
+        "waygateTier": 2,
+        "networkCapable": true,
+        "waygateDefaultTo": "the_crossing",
+        "_placedBy": "erik-2026-09-06-hub-is-the-crossing"
       },
       "gen-the-ent-grove": {
         "id": "gen-the-ent-grove",
@@ -18247,10 +18215,11 @@
         },
         "dangerLevel": 2,
         "worldPos": {
-          "colatitude": 19.687,
-          "longitude": 252.13,
+          "colatitude": 20.24,
+          "longitude": 251.72,
           "depth": 0
-        }
+        },
+        "_placedBy": "erik-2026-09-06-hub-is-the-crossing"
       },
       "gen-stillwater-s-trouble": {
         "id": "gen-stillwater-s-trouble",
@@ -18635,8 +18604,7 @@
         ],
         "connections": [
           "gen-left-branch-gate-clearing",
-          "gen-the-made-gate",
-          "gen-threshold-post"
+          "gen-the-made-gate"
         ],
         "_mintedAs": "transit",
         "dangerLevel": 1,
@@ -18674,7 +18642,7 @@
       "gen-threshold-post": {
         "id": "gen-threshold-post",
         "name": "Threshold Post",
-        "regionId": "valley",
+        "regionId": "the_center",
         "descriptionSeed": "The ridge relay node north of the Crossing's mill gate — a sentinel post high on the moorland ridge, overlooking the settlement, the relay network's northern anchor. A warden post raised from blueprint into standing structure, a working mine of living iron beneath it, a death-warden temple at the sentinel. Three beacon stones cracked in the sentinel array; Fendt keeps it.",
         "tags": [
           "ridge",
@@ -18683,8 +18651,7 @@
           "moorland"
         ],
         "connections": [
-          "echo_river_crossing",
-          "gen-whistling-woman-post"
+          "the_crossing"
         ],
         "dangerLevel": 2,
         "_gen": {
@@ -18705,18 +18672,18 @@
           ],
           "createdDay": 14,
           "provenance": {
-            "locationId": "echo_river_crossing",
+            "locationId": "the_crossing",
             "day": 14,
             "hint": "the ridge relay node, north of the mill gate"
           },
           "lastAttentionDay": 15
         },
         "worldPos": {
-          "colatitude": 20.05,
-          "longitude": 252.05,
+          "colatitude": 0.9,
+          "longitude": 30,
           "depth": 0
         },
-        "_placedBy": "erik-2026-09-06-gate-cluster"
+        "_placedBy": "erik-2026-09-06-hub-is-the-crossing"
       }
     },
     "arc": {
@@ -19886,12 +19853,11 @@
     "the-low-lamp-inn",
     "old_switchback",
     "gen-waygate",
-    "gen-center",
+    "the_crossing",
     "gen-the-ent-grove",
     "gen-ashwarden-march-road",
     "the_old_warden_post",
     "cairnhold",
-    "the_crossing",
     "gen-stillwater-s-trouble",
     "gen-north-gate-registry-ossian-office",
     "gen-hub-north-gate-district-street",
@@ -20968,9 +20934,6 @@
       "gen-mara-wells-store",
       "gen-disputed-zone-left-branch-entrance"
     ],
-    "gen-center": [
-      "gen-waygate"
-    ],
     "gen-the-ent-grove": [
       "gen-waygate"
     ],
@@ -20979,7 +20942,6 @@
       "gen-stillwater-s-trouble"
     ],
     "gen-waygate": [
-      "gen-center",
       "gen-the-ent-grove",
       "gen-ashwarden-march-road"
     ],
@@ -20990,7 +20952,8 @@
     "the_crossing": [
       "gen-north-gate-registry-ossian-office",
       "gen-the-made-gate",
-      "gen-the-temple"
+      "gen-the-temple",
+      "gen-threshold-post"
     ],
     "gen-hub-north-gate-district-street": [
       "gen-north-gate-registry-ossian-office"
@@ -21003,20 +20966,16 @@
       "gen-the-made-gate"
     ],
     "gen-threshold-post": [
-      "gen-whistling-woman-post",
-      "echo_river_crossing"
+      "the_crossing"
     ],
     "gen-the-made-gate": [
       "gen-left-branch-gate-clearing",
       "gen-stillwater-s-trouble"
     ],
     "gen-whistling-woman-post": [
-      "gen-left-branch-gate-clearing",
-      "gen-threshold-post"
+      "gen-left-branch-gate-clearing"
     ],
-    "echo_river_crossing": [
-      "gen-threshold-post"
-    ]
+    "echo_river_crossing": []
   },
   "ladderPaid": {
     "strength": 4,

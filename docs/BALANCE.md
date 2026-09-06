@@ -1,6 +1,6 @@
 # BALANCE — the dials, what they actually do, and how to turn one without lying to yourself
 
-**CCode · started 2026-08-30 · v1.9.398**
+**CCode · started 2026-08-30 · v1.9.399**
 
 > Erik: *"we need to build toward balance and use the dials."*
 
@@ -66,6 +66,7 @@ What balance means here is narrower and testable:
 | `holdStore.growth.passesPerClimb` / `floorByKeeperTier` | `economy` | **4** · riffraff → strained, notable–heroic → holding, epic+ → thriving | Q18 → v2 §1 — a kept hold climbs a rung every 4 passes (12 days) to thriving; its keeper's tier is the FLOOR a raid cannot drop it below |
 | `holdStore.raid.keeperMult` | `economy` | unkept 1.4 · riffraff 1.25 · notable 1 · regional 0.85 · heroic 0.7 · epic 0.6 | v2 §1 — the keeper joins the raid product: a full store under a weak keeper is the target on the map |
 | `holdStore.raid.watchedMult` / `watcherLostMult` | `economy` | **0.6** / **1.25** | ERIK_holds_features §5 — a hold that `watches` another: raided less while the watcher stands, more when the watcher is lost |
+| `holdStore.relay.*` | `economy` | fee 4 · +0.5 per other station · gate within 2 days ×2 over 20 passes | Erik 2026-09-06 — runner fees: enough to keep a relay post minimally, more with traffic, and the waygate nearby brings more as word gets out |
 | `holdStore.delegates.*` | `economy` | vouchMinStanding 6 · vouchDiscount 1 · chargeStanding 6 · vouchFallCost 1 | v2 §4 — a vouch needs the voucher's standing, carries it less one, makes a charge-holder at 6, and costs the voucher one when the vouched-for's hold slips |
 | `holdFeatures.kinds.*` (yields · defence · aura · hands · residents) | `economy` | mine → raw_material · wall 1 / tower 2 · temple 0.2 / shrine 0.1 · quarters +2 hands, 4 homes | what a post becomes — a feature's ONE effect; Aevi extends the kinds |
 | `holdFeatures.defenceShareStep` | `economy` | **0.15** | R46a — each defence point cuts an UNSEEN raid's take; `minTakeShare` retired, so enough stone leaves them nothing |

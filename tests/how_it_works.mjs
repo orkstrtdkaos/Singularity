@@ -8145,16 +8145,16 @@ console.log("\n── §118 · a hill overlooking the Crossing, a day and a half
   const WM = await import("../engine/worldmap.js");
   const step = RC.CHARACTER_STEPS.find(x => x.id === "threshold-post-placed");
   check("§118: ⛔ STEP 42 IS REGISTERED at its version", !!step && step.version === 42 && RC.topReconcileVersion("character") >= 42);
-  const fx = () => ({ id: "char-mrhs8286", generated: { location: {} }, placeEdges: { echo_river_crossing: [] }, holdings: [{ id: "hold-fendt::warden-of-the-threshold-post-at-the-ridg", name: "Threshold Post", kind: "post", locationId: null, steward: "fendt" }] });
+  const fx = () => ({ id: "char-mrhs8286", generated: { location: {} }, placeEdges: { the_crossing: ["gen-the-temple"] }, holdings: [{ id: "hold-fendt::warden-of-the-threshold-post-at-the-ridg", name: "Threshold Post", kind: "post", locationId: null, steward: "fendt" }] });
   const c = fx(); const out = step.apply(c); const rec = c.generated.location["gen-threshold-post"];
-  const crossing = { colatitude: 19.763, longitude: 252.054, depth: 0 };   // ECHO RIVER CROSSING — the mill, the well, downstream of the Zone (Erik 2026-09-06)
+  const crossing = { colatitude: 0, longitude: 0, depth: 0 };   // THE HUB — Erik: "the crossing where all the waygates are located"
   const days = WM.walkingDays({ worldPos: crossing }, rec || { worldPos: crossing });   // geodesic reads .worldPos from a RECORD
-  check("§118: ⛔ THE POST IS PLACED — a real record, within a day north of Echo River Crossing, and the holding points at it",
-    !!rec && rec.connections.includes("echo_river_crossing") && days > 0.2 && days < 1 && c.holdings[0].locationId === "gen-threshold-post", `${days.toFixed(2)} days`);
-  check("§118: …in the valley on the March — not at the Hub the app's id stamp pointed to",
-    rec.regionId === "valley" && /ridge/.test(rec.descriptionSeed) && /overlooking/.test(rec.descriptionSeed));
+  check("§118: ⛔ THE POST IS PLACED — a real record, a day or two outward from the Hub, and the holding points at it",
+    !!rec && rec.connections.includes("the_crossing") && days > 1 && days < 2.5 && c.holdings[0].locationId === "gen-threshold-post", `${days.toFixed(2)} days`);
+  check("§118: …on the north-gate side — the registry office sits at longitude 19, the ridge at 30, not across the pole",
+    rec.regionId === "the_center" && rec.worldPos.longitude > 15 && rec.worldPos.longitude < 60 && /ridge/.test(rec.descriptionSeed) && /overlooking/.test(rec.descriptionSeed));
   check("§118: …the edges are written both ways, and it is said to the player",
-    c.placeEdges.echo_river_crossing.includes("gen-threshold-post") && c.placeEdges["gen-threshold-post"].includes("echo_river_crossing") && Array.isArray(out.notes) && /Threshold Post is on the map/.test(out.notes[0]));
+    c.placeEdges.the_crossing.includes("gen-threshold-post") && c.placeEdges["gen-threshold-post"].includes("the_crossing") && Array.isArray(out.notes) && /Threshold Post is on the map/.test(out.notes[0]));
   const snap = JSON.stringify(c); const again = step.apply(c);
   check("§118: …idempotent — twice changes nothing and says nothing", JSON.stringify(c) === snap && !again.notes);
   const o = { id: "someone-else", holdings: [{ name: "Threshold Post", locationId: null }] }; step.apply(o);
@@ -8162,7 +8162,7 @@ console.log("\n── §118 · a hill overlooking the Crossing, a day and a half
   const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
   check("§118: ⚑ the repo copy already carries it, and keeps its rev lead",
     !!disk.generated.location["gen-threshold-post"] && disk.holdings.some(h => /threshold/i.test(h.name) && h.locationId === "gen-threshold-post") && disk.rev >= 3100 && disk.reconcileVersion >= 42);
-  // the road north to the Whistling Woman is step 45's, once the gate cluster stands (§122) — ruled by Erik the same evening
+  // the road north to the Whistling Woman is the GATE Silas made (§122) — Erik: the Crossing is the Hub, and the gate leads to the March
 }
 
 /* ═════ §119 — THE NAMED FOLD, AND SUMMARIES THAT FIRE WITHOUT OPENING THE CODEX (Aevi, REPLY_admission_landing) ═════ */
@@ -8264,7 +8264,7 @@ console.log("\n── §120 · Deni keeps it, the place thrives anyway, and the 
     /kept by cassiel \(in charge, vouched by veth\)/.test(H.holdingsForGM(c2, null, {})));
   check("§120: …and the GM is told the act exists — vouchedBy is in the npcUpdates contract", /"vouchedBy": "npcId of a KNOWN person/.test(rd("engine/gm.js")));
   check("§120: ⚑ the tick hands the keeper's real tier to the store — the multiplier and the floor come from the same read",
-    /npcCfg: content\?\.rules\?\.npcStanding \|\| \{\},\s*\/\/ v2 §1/.test(rd("engine/worldtick.js")));
+    /tickStore\(character, h, \{[^\n]*npcCfg: content\?\.rules\?\.npcStanding \|\| \{\},/.test(rd("engine/worldtick.js")));
 }
 
 /* ═════ §121 — ERIK'S HOLDS: THE FEATURES THE FICTION BUILT, THE MADE GATE AS A HOLD, AND ONE HOLD THAT WATCHES ANOTHER ═════ */
@@ -8345,9 +8345,17 @@ console.log("\n── §122 · forty days on foot, or hours through the gate Sil
   check("§122: ⛔ THE CLUSTER IS ONE LOCAL AREA — the Whistling Woman a quarter-day from the gate, the gate a half-day from Stillwater's Trouble",
     d("gen-whistling-woman-post", "gen-the-made-gate") < 0.5 && d("gen-the-made-gate", "gen-stillwater-s-trouble") < 0.6 && d("gen-left-branch-gate-clearing", "gen-the-made-gate") < 0.3,
     `ww→gate ${d("gen-whistling-woman-post", "gen-the-made-gate")?.toFixed(2)} · gate→SwT ${d("gen-the-made-gate", "gen-stillwater-s-trouble")?.toFixed(2)}`);
-  check("§122: …the ridge post is a night's road from the Whistling Woman and half a day above Echo River Crossing; Millbrook's runner is a day out",
-    d("gen-threshold-post", "gen-whistling-woman-post") < 1 && d("echo_river_crossing", "gen-threshold-post") < 1 && d("millbrook", "gen-whistling-woman-post") < 2,
-    `tp→ww ${d("gen-threshold-post", "gen-whistling-woman-post")?.toFixed(2)} · erc→tp ${d("echo_river_crossing", "gen-threshold-post")?.toFixed(2)} · mill→ww ${d("millbrook", "gen-whistling-woman-post")?.toFixed(2)}`);
+  // ⛔ ERIK: "the Crossing is the Hub" — the ridge post is north of the Hub's gate, and Pell's "road north toward the Whistling
+  // Woman" at evening, arriving by morning, is the gate Silas made: a walk of weeks, a hop of hours.
+  const tpWalk = d("gen-threshold-post", "gen-whistling-woman-post");
+  const tpRoute = J.routeBetween("gen-threshold-post", "gen-whistling-woman-post", L, { traveller: null });
+  const tpHop = (tpRoute.options || []).find(o => o.kind === "gate");
+  check("§122: …the ridge post is a day or two north of the Hub, and its road north to the Whistling Woman is the gate — five weeks on foot, three days by the gate (a day and a half to the Hub, hours through, a quarter-day out)",
+    d("the_crossing", "gen-threshold-post") > 1 && d("the_crossing", "gen-threshold-post") < 2.5 && tpWalk > 25 && !!tpHop && tpHop.days < 4 && tpHop.days < tpWalk / 8 && [tpHop.gate.from, tpHop.gate.to].includes("gen-the-made-gate") && !L["gen-threshold-post"].connections.includes("gen-whistling-woman-post"),
+    JSON.stringify({ hub: d("the_crossing", "gen-threshold-post")?.toFixed(2), walk: tpWalk?.toFixed(1), hop: tpHop && { days: tpHop.days, from: tpHop.gate.from, to: tpHop.gate.to } }));
+  check("§122: ⛔ THE PALE MARCH WAYGATE IS A GATE the Hub opens onto — two hours to the fork, two more to Stillwater's Trouble — and \"Center\", the Hub made twice, is gone",
+    J.gatesUsableBy(null, L).includes("gen-waygate") && d("gen-waygate", "gen-ashwarden-march-road") < 0.15 && d("gen-ashwarden-march-road", "gen-stillwater-s-trouble") < 0.15 && !L["gen-center"] && !(disk.knownPlaces || []).includes("gen-center") && (disk.knownPlaces || []).includes("the_crossing"),
+    `wg→fork ${d("gen-waygate", "gen-ashwarden-march-road")?.toFixed(2)} · fork→SwT ${d("gen-ashwarden-march-road", "gen-stillwater-s-trouble")?.toFixed(2)}`);
   check("§122: ⛔ THE MADE GATE IS A NETWORK GATE the engine will route through — one of the few",
     J.gatesUsableBy(null, L).includes("gen-the-made-gate") && J.gatesUsableBy(null, L).length >= 20);
   const walk = WM.walkingDays(L["gen-whistling-woman-post"], L["the_crossing"]);
@@ -8357,15 +8365,15 @@ console.log("\n── §122 · forty days on foot, or hours through the gate Sil
     walk > 25 && !!hop && hop.gate.from === "gen-the-made-gate" && hop.days < 3, JSON.stringify({ walk: walk?.toFixed(1), hop: hop && { days: hop.days, from: hop.gate.from, to: hop.gate.to, hours: hop.gate.hours } }));
   check("§122: ⚑ the hold carries what it keeps — a waygate — and the Whistling Woman watches it",
     (disk.holdings.find(h => h.id === "hold-made-gate")?.features || []).some(f => f.kind === "waygate") && disk.holdings.find(h => h.id === "whistling-woman-post")?.watches === "hold-made-gate" && !!C.rules.economy.holdFeatures.kinds.waygate);
-  check("§122: …the 41-day guesses are out of the edges — no ridge post by the Hub, no clearing by the Edge",
-    !(disk.placeEdges.the_crossing || []).includes("gen-threshold-post") && !(disk.placeEdges["gen-left-branch-gate-clearing"] || []).includes("radiant_plateau_edge") && !L["gen-left-branch-gate-clearing"].connections.includes("radiant_plateau_edge"));
+  check("§122: …the 41-day guesses are out of the edges — no clearing by the Edge, and the ridge post's edge is the Hub's, not Echo River Crossing's",
+    (disk.placeEdges.the_crossing || []).includes("gen-threshold-post") && !(disk.placeEdges.echo_river_crossing || []).includes("gen-threshold-post") && !(disk.placeEdges["gen-left-branch-gate-clearing"] || []).includes("radiant_plateau_edge") && !L["gen-left-branch-gate-clearing"].connections.includes("radiant_plateau_edge"));
   const step = RC.CHARACTER_STEPS.find(x => x.id === "gate-cluster-on-the-march");
   const fx = () => ({ id: "char-mrhs8286", generated: { location: { "gen-the-made-gate": { id: "gen-the-made-gate", worldPos: { colatitude: 0.6, longitude: 182.5, depth: 0 }, connections: ["the_crossing"], _gen: {} }, "gen-whistling-woman-post": { id: "gen-whistling-woman-post", worldPos: { colatitude: 25.4, longitude: 47.2, depth: 0 }, connections: ["gen-left-branch-gate-clearing"], _gen: {} } } }, placeEdges: {}, holdings: [] });
   const c = fx(); const out = step.apply(c, { content: C }); const again = step.apply(c, { content: C });
   check("§122: ⛔ STEP 45 MOVES ONCE — a marker, not a version: the second pass moves nothing and says nothing; Silas only",
     !!step && step.version === 45 && c.generated.location["gen-the-made-gate"].worldPos.colatitude > 20 && c.generated.location["gen-whistling-woman-post"].worldPos.longitude > 250 && Array.isArray(out.notes) && !again.notes
     && (() => { const o = fx(); o.id = "x"; step.apply(o, { content: C }); return o.generated.location["gen-the-made-gate"].worldPos.colatitude === 0.6; })());
-  check("§122: ⚑ the repo copy carries the cluster and keeps its rev lead", disk.rev >= 3400 && disk.reconcileVersion >= 45 && L["gen-threshold-post"]._placedBy === "erik-2026-09-06-gate-cluster");
+  check("§122: ⚑ the repo copy carries the cluster and keeps its rev lead", disk.rev >= 3600 && disk.reconcileVersion >= 47 && L["gen-threshold-post"]._placedBy === "erik-2026-09-06-hub-is-the-crossing" && L["gen-waygate"]._placedBy === "erik-2026-09-06-hub-is-the-crossing");
 }
 
 /* ═════ §123 — THE HOLDINGS SCREEN: PICTURES THAT MINT ON READ, ART THAT DOES NOT OUTLIVE A RENAME, TWO SURFACES THAT AGREE (SPEC_holdings_screen) ═════ */
@@ -8409,6 +8417,48 @@ console.log("\n── §123 · the list and the popup say the same thing, with a
   const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
   check("§123: ⚑ on the repo copy the stale Raven's Home art is gone from Stillwater's Trouble, and no hold carries art of another name",
     disk.reconcileVersion >= 46 && disk.holdings.every(h => { const m = typeof h.image === "string" && /\/prompt\/([^?]+)/.exec(h.image); if (!m) return true; try { return decodeURIComponent(m[1]).startsWith(h.name); } catch { return true; } }));
+}
+
+/* ═════ §124 — RUNNER FEES: A RELAY POST KEEPS ITSELF, AND THE GATE BRINGS TRAFFIC AS WORD GETS OUT (Erik 2026-09-06) ═════ */
+// ⛔ "enough to maintain the post minimally… the more traffic, the more revenue… the waygate here will bring a lot more
+// runner traffic as word gets out." `service: true` had no reader. A post's upkeep is authored at 0, so 'minimally' is
+// the garrison's keep; the fee is the larger of a base and that; traffic is other stations and a network gate nearby.
+console.log("\n── §124 · the relay pays for its own guard, and then some ──");
+{
+  const H = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch124 } = await import("./headless_content.mjs");
+  const C = await lch124();
+  const eco = C.rules.economy, cfg = { ...eco.holdStore, features: eco.holdFeatures };
+  check("§124: ⛔ THE DIALS ARE CONTENT, and relay_station carries service", cfg.relay?.feePerPass > 0 && cfg.relay?.wordPasses > 0 && cfg.relay?.gateWithinDays > 0 && !!cfg.features.kinds.relay_station?.service);
+  const locs = { ww: { id: "ww", worldPos: { colatitude: 20.36, longitude: 252.10, depth: 0 } }, gate: { id: "gate", waygate: true, waygateTier: 2, networkCapable: true, worldPos: { colatitude: 20.40, longitude: 251.95, depth: 0 } }, far: { id: "far", worldPos: { colatitude: 40, longitude: 100, depth: 0 } } };
+  const post = (locationId, extra = {}) => ({ id: "p", kind: "post", name: "the post", condition: "holding", locationId, garrison: ["g"], features: [{ kind: "relay_station", name: "a relay station" }], ...extra });
+  const ch = (holds) => ({ id: "pc", purse: { crystal: 100 }, company: [], holdingOffers: [], worldState: { assignments: {} }, abilities: [], npcRegistry: {}, holdings: holds });
+  const keep = H.upkeepFor(post("ww"), cfg);
+  const s0 = H.serviceIncome(ch([post("ww")]), post("ww"), { cfg, locations: locs, passes: 0 });
+  const s20 = H.serviceIncome(ch([post("ww")]), post("ww"), { cfg, locations: locs, passes: 20 });
+  const sFar = H.serviceIncome(ch([post("far")]), post("far"), { cfg, locations: locs, passes: 20 });
+  const two = ch([post("ww"), { ...post("far"), id: "q" }]);
+  const s2 = H.serviceIncome(two, two.holdings[0], { cfg, locations: locs, passes: 20 });
+  check("§124: ⛔ MINIMALLY KEPT — the fee is never less than the post's own keep, and the gate beside it is seen but pays nothing until word gets out",
+    s0 && s0.crystal >= keep && s0.crystal === Math.max(cfg.relay.feePerPass, keep) && s0.gate === "gate" && s0.ramp === 0, JSON.stringify({ keep, s0 }));
+  check("§124: ⛔ WORD GETS OUT — after wordPasses beside a network gate the fee has doubled; a post with no gate within reach never ramps",
+    s20.ramp === 1 && s20.crystal === Math.round(Math.max(cfg.relay.feePerPass, keep) * (1 + cfg.relay.gateTraffic)) && sFar.gate === null && sFar.ramp === 0, JSON.stringify({ s20, sFar }));
+  check("§124: …a second relay post you keep adds traffic to the first; a hold with no service feature earns nothing",
+    s2.traffic > s20.traffic && H.serviceIncome(ch([post("ww", { features: [] })]), post("ww", { features: [] }), { cfg, locations: locs }) === null);
+  // ── the tick: credited before the keep, the counter climbs, the news says it twice and no more
+  const c1 = ch([post("ww")]); const h1 = c1.holdings[0]; const before = c1.purse.crystal;
+  const st1 = H.tickStore(c1, h1, { cfg, economy: eco, dangerLevel: 0, rng: () => 0.99, day: 1, locations: locs });
+  const st2 = H.tickStore(c1, h1, { cfg, economy: eco, dangerLevel: 0, rng: () => 0.99, day: 2, locations: locs });
+  check("§124: ⛔ THE TICK PAYS THE FEE INTO THE PURSE before the keep, counts the passes beside the gate, and says it once when it begins",
+    st1.relay?.crystal > 0 && st1.relay.first === true && c1.purse.crystal === before + st1.relay.crystal + st2.relay.crystal - (st1.upkeep || 0) - (st2.upkeep || 0) && h1.relayPasses === 2 && st2.relay.first === false
+    && H.storeNews(h1, st1).some(l => /has begun to pay/.test(l)) && !H.storeNews(h1, st2).some(l => /has begun to pay|Word of the gate/.test(l)), JSON.stringify({ st1: st1.relay, st2: st2.relay, purse: c1.purse.crystal, before }));
+  h1.relayPasses = cfg.relay.wordPasses;
+  const st3 = H.tickStore(c1, h1, { cfg, economy: eco, dangerLevel: 0, rng: () => 0.99, day: 3, locations: locs });
+  const st4 = H.tickStore(c1, h1, { cfg, economy: eco, dangerLevel: 0, rng: () => 0.99, day: 4, locations: locs });
+  check("§124: …and once, when word is out", st3.relay?.wordOut === true && H.storeNews(h1, st3).some(l => /Word of the gate has got out/.test(l)) && st4.relay?.wordOut === false && !H.storeNews(h1, st4).length);
+  const L1 = H.holdingLedger(h1, { economy: eco, cfg, character: c1, locations: locs });
+  check("§124: ⚑ the Holdings ledger feels it — fees on the line, and in the net", L1.perPass.fees > 0 && L1.perPass.net === L1.perPass.sells + L1.perPass.fees - L1.perPass.upkeep);
+  check("§124: ⚑ the tick and the tab hand the places to the reader", /locations: content\?\.locations \|\| \{\},/.test(rd("engine/worldtick.js")) && /character, locations: CONTENT\.locations \|\| \{\} \}\);/.test(rd("app.js")));
 }
 
 /* ══════════ REPORT ══════════ */

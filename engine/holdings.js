@@ -25,6 +25,8 @@ import { sheetFor as personSheetFor, tierOf as tierOfLevel } from "./npcsheet.js
 import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
 import { legionClash, contingentsFromPeople } from "./melee.js";   // R46a: a detected raid is a FIGHT, resolved unattended
 import { smartClamp } from "./namematch.js";   // an evidence quote is prose — cut at a word, never mid-word
+import { isNetworkGate } from "./waygate.js";   // runner fees: a NETWORK gate near a relay post brings traffic
+import { walkingDays } from "./worldmap.js";     // …within gateWithinDays of it
 
 export const HOLDING_KINDS = ["post", "enterprise"];
 /** ⚠️ WHICH SIDE AN UNKNOWN WORD FALLS ON. A holding that PRODUCES is an enterprise; everything else holds
@@ -571,7 +573,27 @@ export function storeWorth(holding, { economy = null, regionId = null, cfg = nul
   }
   return any ? Math.round(total) : null;
 }
-export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {} } = {}) {
+/** ⛔ ERIK 2026-09-06 — RUNNER FEES. "Enough to maintain the post minimally; the more traffic, the more revenue; the
+ *  waygate here will bring a lot more runner traffic as word gets out." A hold with a `service: true` feature (a relay
+ *  station) earns max(feePerPass, its own upkeep) — a post's upkeep is authored at 0, so 'minimally' means the garrison's
+ *  keep — times traffic: 1 + trafficPerStation per other service hold you keep + gateTraffic × ramp, the ramp climbing
+ *  over wordPasses while a NETWORK waygate stands within gateWithinDays. PURE: the tick owns the pass counter. */
+export function serviceIncome(character, holding, { cfg = null, locations = {}, passes = 0 } = {}) {
+  const r = cfg?.relay;
+  if (!r || !holding) return null;
+  const stations = featuresOf(holding).filter(f => featureDef(f.kind, cfg)?.service);
+  if (!stations.length) return null;
+  const others = (character?.holdings || []).filter(o => o && o.id !== holding.id && featuresOf(o).some(f => featureDef(f.kind, cfg)?.service)).length;
+  const here = holding.locationId ? locations?.[holding.locationId] : null;
+  const within = Number.isFinite(Number(r.gateWithinDays)) ? Number(r.gateWithinDays) : 2;
+  const gate = here ? Object.values(locations || {}).find(l => l && isNetworkGate(l) && (walkingDays(here, l) ?? Infinity) <= within) : null;
+  const ramp = gate ? Math.min(1, Math.max(0, Number(passes) || 0) / Math.max(1, Number(r.wordPasses) || 20)) : 0;
+  const traffic = 1 + (Number(r.trafficPerStation) || 0) * others + (Number(r.gateTraffic) || 0) * ramp;
+  const base = Math.max(Number(r.feePerPass) || 0, upkeepFor(holding, cfg) || 0);
+  return { crystal: Math.round(base * traffic), traffic, gate: gate?.id || null, ramp, stations: stations.length };
+}
+
+export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {} } = {}) {
   if (!holding || !cfg) return null;
   const out = { yielded: null, upkeep: 0, short: 0, raid: null, full: false, justFull: false };
   // ✅ features: a post with a mine yields — every material feature adds its goods beside the hold's own kind
@@ -617,6 +639,18 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   }
   const alms = pilgrimIncome(holding, { cfg, meaning });
   if (alms > 0) { const c = credit(character, cfg.upkeepCurrency || "crystal", alms, { origin: "gift" }); if (c.ok) out.pilgrims = alms; }
+  // ⛔ RUNNER FEES, BEFORE THE KEEP — so a relay post pays for itself in the same pass (Erik: "maintain the post minimally").
+  const svc = serviceIncome(character, holding, { cfg, locations, passes: Number(holding.relayPasses) || 0 });
+  if (svc) {
+    if (svc.gate) holding.relayPasses = (Number(holding.relayPasses) || 0) + 1; else if (holding.relayPasses) delete holding.relayPasses;
+    if (svc.crystal > 0) {
+      const c = credit(character, cfg.upkeepCurrency || "crystal", svc.crystal, { origin: "relay" });
+      if (c.ok) {
+        out.relay = { crystal: svc.crystal, traffic: svc.traffic, gate: svc.gate, ramp: svc.ramp, first: !holding.relayAnnounced, wordOut: svc.ramp >= 1 && !holding.relayWordAnnounced };
+        holding.relayAnnounced = true; if (svc.ramp >= 1) holding.relayWordAnnounced = true;
+      }
+    }
+  }
   const up = upkeepFor(holding, cfg);
   if (up > 0) {
     const r = debit(character, cfg.upkeepCurrency || "crystal", up, {});
@@ -665,6 +699,9 @@ export function storeNews(holding, st) {
     else lines.push(`Something came at ${where} in the night and found nothing worth the carrying.`);
   }
   if (st.raid?.voucherCost) lines.push(`${st.raid.voucherCost.voucherName}'s word for ${st.raid.voucherCost.keeper} cost them — ${where} slipped on that watch.`);
+  // ⚑ runner fees are news TWICE — when they begin, and when word of the gate has got out — never every pass
+  if (st.relay?.first) lines.push(`The relay at ${where} has begun to pay: ${st.relay.crystal} crystal in runner fees this pass${st.relay.gate ? ", and the gate nearby will bring more as word gets out" : ""}.`);
+  else if (st.relay?.wordOut) lines.push(`Word of the gate has got out — runner traffic at ${where} is at its height: ${st.relay.crystal} crystal in fees this pass.`);
   if (st.pilgrims) lines.push(`${st.pilgrims} crystal left at ${where} by those who came to it.`);
   if (Array.isArray(st.yields) && st.yields.length > 1) { /* several goods — the store line on the tab says which */ }
   if (st.grew) lines.push(`${where} has come up to ${holding.condition}${st.grew.keeper ? ` under ${st.grew.keeper}` : ""}.`);
@@ -1042,7 +1079,7 @@ export function residentsOf(holding, cfg = null) {
  *  what it made and pays its keep; an unkept one pays the keep and banks everything, which reads as a
  *  NEGATIVE net and a rising `banked` — the exact shape a player should be able to see before it costs them.
  *  PURE. */
-export function holdingLedger(holding, { economy = null, cfg = null, regionId = null, density = null, character = null } = {}) {
+export function holdingLedger(holding, { economy = null, cfg = null, regionId = null, density = null, character = null, locations = {} } = {}) {
   if (!holding) return null;
   const yields = yieldsFor(holding, cfg, { density }) || [];
   const upkeep = upkeepFor(holding, cfg) || 0;
@@ -1085,7 +1122,8 @@ export function holdingLedger(holding, { economy = null, cfg = null, regionId = 
       sells,                // what the keeper turns into coin
       soldUnits,
       upkeep,
-      net: sells - upkeep,  // ⛑ what the purse actually feels
+      fees: serviceIncome(character, holding, { cfg, locations, passes: Number(holding.relayPasses) || 0 })?.crystal || 0,   // runner fees (Erik 2026-09-06)
+      net: sells + (serviceIncome(character, holding, { cfg, locations, passes: Number(holding.relayPasses) || 0 })?.crystal || 0) - upkeep,  // ⛑ what the purse actually feels
       banks: madeUnits - soldUnits,
     },
     store: { units: storeTotal(holding), worth: storeWorth(holding, { economy, regionId, cfg }) || 0 },

@@ -229,6 +229,10 @@
    "chargeStanding": 6,
    "vouchFallCost": 1
   },
+  "relay": {
+   "note": "⛔ ERIK 2026-09-06: 'the relay station income should be enough to maintain the post minimally. The more important the runner post — more messages and traffic — the more revenue; the waygate here will likely bring a lot more runner traffic as word gets out.' A hold with a feature carrying `service: true` (relay_station) earns runner fees each pass: max(feePerPass, its own upkeep) × (1 + trafficPerStation × the other service holds you keep + gateTraffic × ramp), where ramp climbs from 0 to 1 over wordPasses while a NETWORK waygate stands within gateWithinDays of the post. Credited before upkeep as origin 'relay'; said in the news the first time and when word has got out. Priced by CCode; Erik turns.",
+   "feePerPass": 4, "trafficPerStation": 0.5, "gateWithinDays": 2, "gateTraffic": 1, "wordPasses": 20
+  },
   "growth": {
    "note": "✅ Q18 (Erik 2026-09-05: 'please build it'; SPEC_hold_store §5): a hold grows by ONE-TIME ACTS WITH LASTING EFFECTS, never a per-tick chore. A KEPT hold climbs one rung every passesPerClimb passes (4 passes = 12 world days) to thriving — and its keeper's TIER sets the FLOOR it will not drop below (floorByKeeperTier; v2 §1: floors, not ceilings). A craft the character carries, applied to the place (the tab, or holdingOps improve), lifts it a rung at once, once per craft per hold, when the craft SHAPES or MENDS (improveFunctions). Each extra hand adds handsYieldBonus to the yield, to maxHands. A garrison halves a raid (raid.defendedMult) and costs garrisonUpkeepPerHand each pass. The ground scales an enterprise's yield by 1 + groundYieldWeight × (density − 0.5): dense lattice 0.9 → ×1.2, thin 0.2 → ×0.85. Priced by CCode; Erik turns them. What a POST can become is not built.",
    "passesPerClimb": 4,

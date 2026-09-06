@@ -124,3 +124,18 @@ as the load note. If you do not, tell me which device and I will measure.
 - **§5.4 the owner is named**: a hold whose `owner` is not the player reads "Pell's · enterprise · …".
 - ⚠️ §70: your spec stays `spec_ready` and names exports the count sees; flip its status when you are satisfied and the
   count comes back to 11.
+
+## 9 · Erik — the Hub is the Crossing; the March waygate; runner fees (v1.9.399, reconcile 47)
+
+- **I had it backwards in §7.** The Crossing IS the Hub, and the deeds stamped there were right. "Center" — the small
+  settlement the GM described when the gate carried you to the Hub — was the game's mistake, made near Millbrook because it
+  thought you were still there. Center is gone: its one known-place entry and its edges now point at the Hub; nothing
+  narrative referred to it. **The ridge post is back north of the Hub's gate**, overlooking the crossroads; its road to
+  the Whistling Woman is withdrawn, because that road is the gate you made — §122 proves it as a hop of hours.
+- **The Pale March waygate was not a waygate to the engine** (a transit mint, no flag) and stood a day from Stillwater's
+  Trouble. It is a network gate now, leading to the Hub, two hours from the fork; the fork two hours from Stillwater's
+  Trouble. The Whistling Woman stays where you confirmed it.
+- **Runner fees, as ruled:** a relay post earns, before its keep, the larger of a base fee and its own upkeep, times traffic:
+  half again per other relay post you keep, and up to double while a network waygate stands within two days — climbing
+  over twenty passes "as word gets out". Said in the news when it begins and when word is out; shown in the Holdings
+  ledger's net. Numbers are mine to price, yours to turn (`holdStore.relay`).

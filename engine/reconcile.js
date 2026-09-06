@@ -1425,9 +1425,10 @@ export const CHARACTER_STEPS = [
     // deliberately did not guess where it stood. Erik asked; the save answers: Fendt — "built north of the mill gate
     // at the ridge relay node"; Mara — "the network's northern anchor"; the chronicle — from the Crossing's
     // east-side draw-well, "the midrow wayhouse, the mill gate, and something high on the ridge"; the deeds that
-    // raised it are stamped at `the_crossing` — the HUB's id, on a name match; the Crossing with a mill gate, a draw-well and
-    // a creek downstream of the Zone is ECHO RIVER CROSSING (Erik 2026-09-06). So: half a day north of it, high on the
-    // moorland ridge, overlooking the settlement, a night's road short of the Whistling Woman. Idempotent by record; Silas only.
+    // raised it are stamped at `the_crossing` — the HUB, and Erik confirms it: "I was at the crossing where all the waygates are
+    // located (the hub)"; the small settlement the GM described was "Center", a Hub made twice. So: a day and a half outward on
+    // the north-gate side, high on the ridge, overlooking the crossroads. The road north to the Whistling Woman is the gate.
+    // Idempotent by record; Silas only.
     apply: (c) => {
       if (c?.id !== "char-mrhs8286") return {};
       const ID = "gen-threshold-post";
@@ -1435,20 +1436,20 @@ export const CHARACTER_STEPS = [
       const notes = [];
       if (!c.generated.location[ID]) {
         c.generated.location[ID] = {
-          id: ID, name: "Threshold Post", regionId: "valley",
+          id: ID, name: "Threshold Post", regionId: "the_center",
           descriptionSeed: "The ridge relay node north of the Crossing's mill gate — a sentinel post high on the moorland ridge, overlooking the settlement, the relay network's northern anchor. A warden post raised from blueprint into standing structure, a working mine of living iron beneath it, a death-warden temple at the sentinel. Three beacon stones cracked in the sentinel array; Fendt keeps it.",
-          tags: ["ridge", "relay", "post", "moorland"], connections: ["echo_river_crossing"], dangerLevel: 2,
+          tags: ["ridge", "relay", "post", "moorland"], connections: ["the_crossing"], dangerLevel: 2,
           _gen: { type: "location", tier: "established", engagementScore: 4, birthWeight: 1, rating: null,
             attentionHistory: [{ kind: "revisit", day: 14 }, { kind: "revisit", day: 15 }], createdDay: 14,
-            provenance: { locationId: "echo_river_crossing", day: 14, hint: "the ridge relay node, north of the mill gate" }, lastAttentionDay: 15 },
-          worldPos: { colatitude: 20.05, longitude: 252.05, depth: 0 },   // half a day north of Echo River Crossing; a night's road short of the Whistling Woman
+            provenance: { locationId: "the_crossing", day: 14, hint: "the ridge relay node, north of the mill gate" }, lastAttentionDay: 15 },
+          worldPos: { colatitude: 0.9, longitude: 30, depth: 0 },   // a day and a half outward, north-gate side (the registry sits at 19°)
         };
-        notes.push("The Threshold Post is on the map: the ridge relay node half a day north of Echo River Crossing's mill gate, overlooking the settlement.");
+        notes.push("The Threshold Post is on the map: the ridge relay node a day and a half north of the Hub's gate, overlooking the crossroads.");
       }
       c.placeEdges = c.placeEdges || {};
-      const cx = c.placeEdges.echo_river_crossing = Array.isArray(c.placeEdges.echo_river_crossing) ? c.placeEdges.echo_river_crossing : [];
+      const cx = c.placeEdges.the_crossing = Array.isArray(c.placeEdges.the_crossing) ? c.placeEdges.the_crossing : [];
       if (!cx.includes(ID)) cx.push(ID);
-      if (!Array.isArray(c.placeEdges[ID])) c.placeEdges[ID] = ["echo_river_crossing"];
+      if (!Array.isArray(c.placeEdges[ID])) c.placeEdges[ID] = ["the_crossing"];
       const h = (c.holdings || []).find(x => x && !x.locationId && /threshold post/i.test(x.name || ""));
       if (h) { h.locationId = ID; notes.push("Fendt's post now knows where it stands."); }
       return notes.length ? { notes } : {};
@@ -1536,15 +1537,13 @@ export const CHARACTER_STEPS = [
       const moved = [];
       if (place("gen-the-made-gate", { colatitude: 20.40, longitude: 251.95 }, ["gen-left-branch-gate-clearing", "gen-stillwater-s-trouble"], "gen-stillwater-s-trouble")) moved.push("the Made Gate");
       if (place("gen-left-branch-gate-clearing", { colatitude: 20.44, longitude: 251.90 }, ["gen-the-made-gate", "gen-whistling-woman-post", "gen-stillwater-s-trouble"], "gen-the-made-gate")) moved.push("the gate clearing");
-      if (place("gen-whistling-woman-post", { colatitude: 20.36, longitude: 252.10 }, ["gen-left-branch-gate-clearing", "gen-the-made-gate", "gen-threshold-post"], "gen-the-made-gate")) moved.push("the Whistling Woman Post");
-      if (place("gen-threshold-post", { colatitude: 20.05, longitude: 252.05 }, ["echo_river_crossing", "gen-whistling-woman-post"], "echo_river_crossing")) moved.push("the Threshold Post");
+      if (place("gen-whistling-woman-post", { colatitude: 20.36, longitude: 252.10 }, ["gen-left-branch-gate-clearing", "gen-the-made-gate"], "gen-the-made-gate")) moved.push("the Whistling Woman Post");
+      // (the ridge post was moved here once and moved back by step 47 — Erik: the Crossing IS the Hub; the road north is the gate)
       c.placeEdges = c.placeEdges || {};
       const link = (a, b) => { for (const [x, y] of [[a, b], [b, a]]) { const arr = Array.isArray(c.placeEdges[x]) ? c.placeEdges[x] : (c.placeEdges[x] = []); if (!arr.includes(y)) arr.push(y); } };
       link("gen-the-made-gate", "gen-left-branch-gate-clearing"); link("gen-the-made-gate", "gen-stillwater-s-trouble");
-      link("gen-left-branch-gate-clearing", "gen-whistling-woman-post"); link("gen-whistling-woman-post", "gen-threshold-post"); link("gen-threshold-post", "echo_river_crossing");
+      link("gen-left-branch-gate-clearing", "gen-whistling-woman-post");
       // the guesses come out of the edges: the ridge post never stood by the Hub, the clearing never by the Edge
-      if (Array.isArray(c.placeEdges.the_crossing)) c.placeEdges.the_crossing = c.placeEdges.the_crossing.filter(x => x !== "gen-threshold-post");
-      if (Array.isArray(c.placeEdges["gen-threshold-post"])) c.placeEdges["gen-threshold-post"] = c.placeEdges["gen-threshold-post"].filter(x => x !== "the_crossing");
       if (Array.isArray(c.placeEdges["gen-left-branch-gate-clearing"])) c.placeEdges["gen-left-branch-gate-clearing"] = c.placeEdges["gen-left-branch-gate-clearing"].filter(x => x !== "radiant_plateau_edge");
       // ⛔ THE GATE JOINS THE NETWORK. waygate.js: a made gate is routed through only if it declares `networkCapable` —
       // SNG-243 §3 named the Made Gate "the player's first personal spoke" and the record never carried the opt-in, so
@@ -1560,7 +1559,7 @@ export const CHARACTER_STEPS = [
       let gateFeat = false;
       if (mg && cfg?.features && !(mg.features || []).some(f => f && f.kind === "waygate")) { const r = addFeature(c, "hold-made-gate", { kind: "waygate", by: "you", day: 14, cfg }); gateFeat = !!r.ok; }
       const notes = [];
-      if (moved.length) notes.push(`On your word: ${moved.join(", ")} stand on the March now — the gate's mouth at the Left Branch approach by Stillwater's Trouble, the Whistling Woman beside it as its watch, the ridge post a night's road toward Echo River Crossing.`);
+      if (moved.length) notes.push(`On your word: ${moved.join(", ")} stand on the March now — the gate's mouth at the Left Branch approach by Stillwater's Trouble, the Whistling Woman beside it as its watch.`);
       if (gateFeat) notes.push("The Made Gate carries what it is: a waygate, made rather than found — one of a few in the world, and it leads to the Crossing.");
       if (joined) notes.push("And the gate you made is in the network now — it can be aimed at, and aimed from. It never was before.");
       return notes.length ? { notes } : {};
@@ -1585,6 +1584,59 @@ export const CHARACTER_STEPS = [
       }
       if (!cleared.length) return {};
       return { notes: [`${cleared.join(", ")}: the picture was of an old name and is put away — it will be drawn again under the name it has now.`] };
+    }
+  },
+  {
+    version: 47, id: "hub-is-the-crossing", playerFacing: true,
+    // ⛔ ERIK 2026-09-06: "The game created the Hub by mistake. I traveled through the waygate to the Crossing — it thought I
+    // was still near Millbrook and mistakenly created the hub instead of acknowledging that I was at the crossing where all
+    // the waygates are located (the hub)." MEASURED: `gen-center` "Center" is that mistake — five structural references and
+    // nothing narrative. And: "SwT is not far from the waygate in the Pale March… we walked a couple hours to a fork" —
+    // the March waygate was NOT a waygate to the engine (a transit mint, no flag) and stood a day from Stillwater's Trouble.
+    // So: Center folds into the Hub; the Pale March waygate becomes the gate Erik walked out of, two hours from the fork,
+    // the fork two hours from Stillwater's Trouble; the ridge post goes back north of the Hub's gate, where its deeds
+    // were stamped, and its road to the Whistling Woman is withdrawn — that road is the gate Silas made. Silas only.
+    apply: (c) => {
+      if (c?.id !== "char-mrhs8286") return {};
+      const gl = c.generated?.location;
+      if (!gl) return {};
+      const MARK = "erik-2026-09-06-hub-is-the-crossing";
+      const notes = [];
+      c.placeEdges = c.placeEdges || {};
+      const link = (a, b) => { for (const [x, y] of [[a, b], [b, a]]) { const arr = Array.isArray(c.placeEdges[x]) ? c.placeEdges[x] : (c.placeEdges[x] = []); if (!arr.includes(y)) arr.push(y); } };
+      const unlink = (a, b) => { for (const [x, y] of [[a, b], [b, a]]) if (Array.isArray(c.placeEdges[x])) c.placeEdges[x] = c.placeEdges[x].filter(z => z !== y); };
+      // (a) Center → the Hub
+      if (gl["gen-center"]) {
+        delete gl["gen-center"];
+        c.knownPlaces = [...new Set((c.knownPlaces || []).map(x => (x === "gen-center" ? "the_crossing" : x)))];
+        for (const r of Object.values(gl)) if (r && Array.isArray(r.connections)) r.connections = r.connections.filter(x => x !== "gen-center");
+        delete c.placeEdges["gen-center"];
+        for (const k of Object.keys(c.placeEdges)) if (Array.isArray(c.placeEdges[k])) c.placeEdges[k] = c.placeEdges[k].filter(x => x !== "gen-center");
+        notes.push("\"Center\" is gone from the map: it was the Hub, made twice when the gate carried you there and the game thought you were still by Millbrook. The Crossing is the Hub, where all the waygates are.");
+      }
+      // (b) the Pale March waygate is a gate, two hours from the fork; the fork two hours from Stillwater's Trouble
+      const wg = gl["gen-waygate"];
+      if (wg && wg._placedBy !== MARK) {
+        Object.assign(wg, { name: "The Pale March Waygate", waygate: true, waygateTier: 2, networkCapable: true, waygateDefaultTo: "the_crossing",
+          tags: [...new Set([...(wg.tags || []), "waygate"])],
+          descriptionSeed: "The waygate the Hub's crossroads opens onto the Pale March. A couple of hours' walk to the fork in the road, and Stillwater's Trouble beyond it.",
+          worldPos: { colatitude: 20.20, longitude: 251.63, depth: 0 }, connections: ["gen-ashwarden-march-road", "millbrook"], _placedBy: MARK });
+        notes.push("The Pale March waygate is a gate to the engine now — it never was — and it stands where you walked out of it, two hours from the fork.");
+      }
+      const fork = gl["gen-ashwarden-march-road"];
+      if (fork && fork._placedBy !== MARK) Object.assign(fork, { worldPos: { colatitude: 20.24, longitude: 251.72, depth: 0 }, _placedBy: MARK });
+      link("gen-waygate", "gen-ashwarden-march-road"); link("gen-ashwarden-march-road", "gen-stillwater-s-trouble");
+      // (c) the ridge post back north of the Hub's gate; its road to the Whistling Woman is the gate
+      const tp = gl["gen-threshold-post"];
+      if (tp && tp._placedBy !== MARK) {
+        Object.assign(tp, { regionId: "the_center", worldPos: { colatitude: 0.9, longitude: 30, depth: 0 }, connections: ["the_crossing"], _placedBy: MARK });
+        if (tp._gen) tp._gen.provenance = { ...(tp._gen.provenance || {}), locationId: "the_crossing" };
+        const ww = gl["gen-whistling-woman-post"];
+        if (ww && Array.isArray(ww.connections)) ww.connections = ww.connections.filter(x => x !== "gen-threshold-post");
+        link("gen-threshold-post", "the_crossing"); unlink("gen-threshold-post", "echo_river_crossing"); unlink("gen-threshold-post", "gen-whistling-woman-post");
+        notes.push("The Threshold Post stands where it was built: the ridge north of the Hub's gate, overlooking the crossroads. The road north to the Whistling Woman is the gate you made.");
+      }
+      return notes.length ? { notes } : {};
     }
   },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content

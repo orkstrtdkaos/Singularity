@@ -7590,6 +7590,74 @@ console.log("\n── §107 · who is around today, offered and never forced ─
     && /offered, never forced/i.test(gm));
 }
 
+/* ═════ §108 — THE TOPIC ID FOLLOWS THE ENTITY, AND A WRONG KIND IS NOT FOREVER (SPEC_codex §3b-d) ═════ */
+// ⛔ FIVE TOPICS ON SILAS'S SAVE DISAGREED WITH THEIR OWN entityId — a player looking up Mara found a topic
+// called *the Edge District Ledger*. ⚑ MEASURED TO THE LINE: creation already keys a new topic by its entityId;
+// every misfile came through the LATE ANCHOR UPGRADE, where a topic born from a label gains an entityId later
+// and keeps the label's id. And all five had NO twin to merge into — so the every-turn merger was never wrong,
+// it had nothing to merge. The fix is a re-key at the write, not a smarter merge.
+// ⚠️ 26 single-fact topics survived for a different reason: 24 have no entityId and NONE carry an alias —
+// nothing to match on. `revealName` writes the old name into the NPC record; the codex never read it.
+console.log("\n── §108 · a topic is filed under who it is about, and the old name still finds it ──");
+{
+  const CX = await import("../engine/codex.js");
+  const ents = { people: { "mara-wells": "Mara Wells" }, places: { millbrook: "Millbrook" },
+    aliases: { "mara-wells": ["the water-keeper", "water_keeper"] } };
+  const mk = () => ({ codex: { topics: {
+    "the-edge-district-ledger": { id: "the-edge-district-ledger", label: "The Edge District Ledger", kind: "event", entityId: "mara-wells", facts: ["[d3] a"], links: ["millbrook"], aliases: [] },
+    millbrook: { id: "millbrook", label: "Millbrook", kind: "event", entityId: "millbrook", facts: ["[d1] b"], links: ["the-edge-district-ledger"], aliases: [] },
+    orphan: { id: "orphan", label: "An Orphan", kind: "lore", facts: ["[d2] c"], links: ["the-edge-district-ledger"], aliases: [] },
+  } } });
+
+  const c = mk();
+  const merged = CX.mergeCodexTopics(c, { entities: ents });
+  const T = c.codex.topics;
+  check("§108: ⛔ A LATE-ANCHORED TOPIC IS RE-KEYED TO ITS ENTITY — the ledger is filed under mara-wells",
+    !T["the-edge-district-ledger"] && !!T["mara-wells"] && T["mara-wells"].entityId === "mara-wells", Object.keys(T).join(","));
+  check("§108: …and its label becomes who it is ABOUT, not what the first fact was called",
+    T["mara-wells"].label === "Mara Wells", T["mara-wells"].label);
+  // ⛔ THE ORDERING BUG THIS CAUGHT: recording the old name BEFORE the label moved skipped it silently, and
+  // "the Edge District Ledger" resolved to nothing. Measured, then fixed — the label changes first.
+  check("§108: ⛔ …and the OLD NAME SURVIVES AS AN ALIAS, so the old phrasing still finds it",
+    (T["mara-wells"].aliases || []).some(a => /edge district ledger/i.test(a)), JSON.stringify(T["mara-wells"].aliases));
+  check("§108: …and no alias merely repeats the label",
+    !(T["mara-wells"].aliases || []).some(a => CX.namesMatch(a, "Mara Wells")));
+  check("§108: ⚑ …every link that pointed at the old id now points at the new one — nothing dangles",
+    T.millbrook.links.includes("mara-wells") && T.orphan.links.includes("mara-wells")
+    && !Object.values(T).some(t => t.links.includes("the-edge-district-ledger")));
+
+  // ⚠️ 3d — a wrong kind is a PERMANENT barrier to merging, because `compatibleKinds` gates it.
+  check("§108: ⚠️ A KNOWN PLACE IS A PLACE — millbrook stops being an event, so it can merge again",
+    T.millbrook.kind === "place", T.millbrook.kind);
+  check("§108: …and an unanchored topic's kind is left alone — only a KNOWN entity's nature is authoritative",
+    T.orphan.kind === "lore");
+
+  // ⚠️ 3c — aliases are the merge key, and nothing ever fed them.
+  check("§108: ⚑ THE ENTITY'S OWN ALIASES ARE FED IN — \"the water-keeper\" can now resolve to Mara Wells",
+    (T["mara-wells"].aliases || []).some(a => /water.keeper/i.test(a)), JSON.stringify(T["mara-wells"].aliases));
+  check("§108: …and it resolves: a fact filed under the old phrasing lands on the re-keyed topic",
+    CX.resolveTopic(c, { label: "the water-keeper", kind: "person" }, { entities: ents }).topic?.id === "mara-wells");
+
+  // ⛑ A RE-KEY IS A RENAME, NOT A MERGE: it is not reported as one (smoke pins a second pass as returning
+  // nothing), and a second pass changes nothing at all.
+  const snap = JSON.stringify(T);
+  check("§108: ⛑ idempotent — a second tidy reports no merges and moves nothing",
+    CX.mergeCodexTopics(c, { entities: ents }).length === 0 && JSON.stringify(T) === snap);
+  check("§108: …and the re-key itself is not counted as a merge — a rename is lossless and needs no undo",
+    merged.length === 0, `${merged.length} reported`);
+  check("§108: …and it refuses to re-key onto an OCCUPIED id — that is the merger's job, not a rename's",
+    (() => { const t = { topics: { a: { id: "a", entityId: "b", label: "A", facts: [], links: [], aliases: [] }, b: { id: "b", entityId: "b", label: "B", facts: [], links: [], aliases: [] } } };
+      return CX.rekeyToEntity(t.topics, t.topics.a, null) === null && !!t.topics.a && !!t.topics.b; })());
+
+  // ⛔ AND THE TWO DOORS: the late-anchor site calls it, and the load-time tidy receives the entities.
+  const cx = rd("engine/codex.js"), app = rd("app.js");
+  check("§108: ⛔ the LATE-ANCHOR site re-keys — the exact line every misfile came through",
+    /t\.entityId = res\.entityId;\s*rekeyToEntity\(topics, t, ctx\.entities\)/.test(cx));
+  check("§108: …and the load-time tidy is handed the entities, so a real save heals on its next load",
+    /mergeCodexTopics\(c, \{ entities: codexEntities\(c\) \}\)/.test(app) && /function codexEntities\(who = character\)/.test(app)
+    && /aliases\[id\] = /.test(app));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -68,6 +68,62 @@ function recordAlias(t, raw) {
   }
 }
 
+/** ⛔ THE TOPIC ID FOLLOWS THE ENTITY, ALWAYS (SPEC_codex §3b). A topic born from a label and anchored LATER
+ *  kept the label's id — five on Silas's save: a player looking up Mara finds *the Edge District Ledger*.
+ *  ⚑ Re-keys `t` to its entityId when that id is free: the old id becomes an alias (so old links and old
+ *  phrasings still resolve), and every other topic's links are rewritten. A rename, not a merge — lossless,
+ *  so it records no undo. ⚠️ Idempotent: id === entityId does nothing, which is what lets the standing tidy
+ *  call it every load. Returns the new id, or null when nothing moved. */
+export function rekeyToEntity(topics, t, entities = null) {
+  if (!t || !t.entityId || t.id === t.entityId) return null;
+  const to = t.entityId;
+  if (topics[to] && topics[to] !== t) return null;          // occupied — the merger's job, not a rename's
+  const from = t.id;
+  delete topics[from];
+  t.id = to;
+  topics[to] = t;
+  // ⚠️ THE LABEL FOLLOWS TOO, when the entity has a canonical name — "the Edge District Ledger" is what the
+  // first fact was called, not who the topic is about. ⛔ AND IT CHANGES FIRST: `recordAlias` refuses a name
+  // equal to the CURRENT label, so recording the old name before the label moved skipped it silently and
+  // "the Edge District Ledger" stopped resolving to anything. Measured, then fixed.
+  const oldLabel = t.label;
+  const canonical = entities?.people?.[to] || entities?.places?.[to] || null;
+  if (canonical && normName(canonical) !== normName(t.label)) t.label = String(canonical).slice(0, 60);
+  recordAlias(t, oldLabel);                                  // what it used to be called still resolves here
+  recordAlias(t, from.replace(/-/g, " "));                   // and so does the old id, spoken as words
+  // ⛑ an alias equal to the NEW label is no longer an alias — drop it rather than carry "Mara Wells" twice
+  t.aliases = (t.aliases || []).filter(a => normName(a) !== normName(t.label));
+  for (const o of Object.values(topics)) {
+    if (!Array.isArray(o.links)) continue;
+    o.links = o.links.map(l => (l === from ? to : l)).filter((l, k, arr) => l !== o.id && arr.indexOf(l) === k);
+  }
+  return to;
+}
+
+/** ⚠️ 3d — A KNOWN ENTITY'S NATURE IS AUTHORITATIVE OVER WHAT THE GM FIRST CALLED IT. `millbrook` was
+ *  `kind: event`, and because `compatibleKinds` gates merging, a wrong kind is a PERMANENT barrier to
+ *  tidying rather than a cosmetic one. A topic anchored to a known place is a place; to a known person, a
+ *  person. Returns true when the kind moved. */
+export function kindFromEntity(t, entities = null) {
+  if (!t || !t.entityId || !entities) return false;
+  const want = entities.places?.[t.entityId] ? "place" : entities.people?.[t.entityId] ? "person" : null;
+  if (!want || t.kind === want) return false;
+  t.kind = want;
+  return true;
+}
+
+/** ⚠️ 3c — ALIASES ARE THE MERGE KEY, AND NOTHING FED THEM. `revealName` already writes the old name into the
+ *  NPC record's `aliases`; three authored figures carry them; the codex read none of it. Seeds a topic's
+ *  aliases from its entity's, so "the water-keeper" resolves to Mara Wells once her record says so. */
+export function seedAliasesFromEntity(t, entities = null) {
+  if (!t || !t.entityId) return 0;
+  const list = entities?.aliases?.[t.entityId];
+  if (!Array.isArray(list)) return 0;
+  const n = (t.aliases || []).length;
+  for (const a of list) if (a) recordAlias(t, String(a).replace(/[_-]/g, " "));
+  return (t.aliases || []).length - n;
+}
+
 export function applyCodexUpdates(character, updates = [], ctx = {}) {
   ensureCodex(character);
   const topics = character.codex.topics;
@@ -79,7 +135,14 @@ export function applyCodexUpdates(character, updates = [], ctx = {}) {
     let t = res.topic;
     if (t) {
       recordAlias(t, raw);
-      if (res.entityId && !t.entityId) t.entityId = res.entityId; // late anchor upgrade
+      if (res.entityId && !t.entityId) {
+        // ⛔ THE LATE ANCHOR IS WHERE EVERY MISFILE CAME FROM. Stamping the entityId and keeping the label's
+        // id is how `the-edge-district-ledger` ended up anchored to `mara-wells` — so the id follows too.
+        t.entityId = res.entityId;
+        rekeyToEntity(topics, t, ctx.entities);
+        kindFromEntity(t, ctx.entities);
+        seedAliasesFromEntity(t, ctx.entities);
+      }
     } else {
       const id = res.entityId || slugify(u.topic || u.label || "");
       if (!id) continue;
@@ -96,7 +159,11 @@ export function applyCodexUpdates(character, updates = [], ctx = {}) {
         aliases: [],
         createdDay: ctx.day ?? null
       };
-      if (res.entityId) t.entityId = res.entityId;
+      if (res.entityId) {
+        t.entityId = res.entityId;
+        kindFromEntity(t, ctx.entities);
+        seedAliasesFromEntity(t, ctx.entities);
+      }
       recordAlias(t, raw);
     }
     if (u.fact) {
@@ -240,9 +307,18 @@ export function mergeInto(character, sourceId, targetId) {
 /** SNG-019 merge tool: collapse duplicate topics into their primary node — high-confidence
  *  only (same entityId, or matching label/alias with compatible kind). Respects the
  *  player's not-same verdicts. Idempotent. Returns [{into, absorbed}] for reporting. */
-export function mergeCodexTopics(character) {
+export function mergeCodexTopics(character, { entities = null } = {}) {
   ensureCodex(character);
   const topics = character.codex.topics;
+  // ⚑ REPAIR BEFORE MERGE, AND ON EVERY PASS. This runs at every load, so the five misfiled topics on a real
+  // save heal here with no reconcile step — and a wrong kind stops being a permanent barrier. ⚠️ Not counted
+  // in `merged`: a re-key is a rename, and smoke pins a second pass as returning nothing.
+  for (const t of Object.values(topics)) {
+    if (!t || !t.entityId) continue;
+    rekeyToEntity(topics, t, entities);
+    kindFromEntity(t, entities);
+    seedAliasesFromEntity(t, entities);
+  }
   const merged = [];
   const kindRank = { person: 3, place: 3, faction: 2, event: 2, mystery: 1, lore: 0 };
   const compatible = compatibleKinds;

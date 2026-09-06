@@ -125,7 +125,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.387";
+const APP_VERSION = "1.9.388";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3154,7 +3154,7 @@ function migrate(c) {
   ensureSubAttributes(c);
   ensureCodex(c);
   ensureCharacterStyle(c); // SNG-BATCH-7: per-character play-style fields
-  mergeCodexTopics(c); // standing high-confidence tidy — idempotent; player's not-same verdicts respected; manual merges cascade via their new aliases
+  mergeCodexTopics(c, { entities: codexEntities(c) }); // standing high-confidence tidy — and it re-keys, re-kinds and re-aliases anchored topics first (SPEC_codex §3b-d) — idempotent; player's not-same verdicts respected; manual merges cascade via their new aliases
   if (!c.customAbilities) c.customAbilities = {};
   ensureBonds(c);
   ensurePractice(c);
@@ -3457,13 +3457,18 @@ function isGambitApt(turn) {
 
 /** SNG-019: known-entity id→name maps for codex entity resolution — the ids the GM
  *  sees in context (met people from the registry, authored NPCs, world locations). */
-function codexEntities() {
-  const people = {};
-  for (const [id, n] of Object.entries(CONTENT.npcs || {})) people[id] = n.name || id;
-  for (const [id, n] of Object.entries(character?.npcRegistry || {})) people[id] = n.name || id;
+// ⚠️ TAKES THE CHARACTER, because the load-time tidy runs on a `c` that is not yet the module's `character`.
+// ⚑ AND CARRIES ALIASES (SPEC_codex §3c): `revealName` writes the old name into the NPC record and three
+// authored figures carry them, and the codex had read none of it.
+function codexEntities(who = character) {
+  const people = {}, aliases = {};
+  const take = (id, n) => { people[id] = n.name || id; if (Array.isArray(n.aliases) && n.aliases.length) aliases[id] = [...new Set([...(aliases[id] || []), ...n.aliases])]; };
+  for (const [id, n] of Object.entries(CONTENT.npcs || {})) take(id, n);
+  for (const [id, n] of Object.entries(who?.npcRegistry || {})) take(id, n);
   const places = {};
   for (const [id, l] of Object.entries(CONTENT.locations || {})) places[id] = l.name || id;
-  return { people, places };
+  for (const [id, l] of Object.entries(who?.generated?.location || {})) if (!places[id]) places[id] = l?.name || id;
+  return { people, places, aliases };
 }
 
 function senseTierFor() {

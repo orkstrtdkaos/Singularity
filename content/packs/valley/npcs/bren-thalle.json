@@ -1,0 +1,98 @@
+{
+ "schemaVersion": 1,
+ "id": "bren-thalle",
+ "name": "Bren Thalle",
+ "role": "Sheaf and Bowl stall-holder, Crossing market row — and two dry seasons behind on everything",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "communityId": "valley.the_crossing",
+ "homeLocation": "the_crossing",
+ "domains": {
+  "primary": "mason",
+  "secondary": "stillhold",
+  "tertiary": "rootkin"
+ },
+ "spectrum": {
+  "concrete_abstract": -0.5,
+  "falsehood_truth": 0.4
+ },
+ "subAttributes": {
+  "strength": 8,
+  "agility": 5,
+  "reason": 6,
+  "insight": 7,
+  "presence": 6,
+  "rapport": 6,
+  "craft": 6,
+  "wits": 6
+ },
+ "level": 9,
+ "knowledge": [
+  "What a stall on the Crossing row actually clears in a bad season",
+  "Mining work, from before — and what it does to hands",
+  "Which wells in the Crossing cleared first, because she boiled from all of them"
+ ],
+ "wants": [
+  "Her two children through to the far side of this",
+  "One true answer instead of a kind one"
+ ],
+ "fears": "⚠️ Being cornered again into a choice she would not otherwise make. ⛔ And being handled — she asked plainly for one true thing and got it, and remembers who gave it.",
+ "appearance": "Broad through the shoulders, thirties, hands worn to the shape of a mining tool she no longer uses. Grief carried without display.",
+ "voiceHints": "Plain and short. She asks the actual question rather than the polite one, and files the answer without ceremony.",
+ "reactsToReputation": {
+  "truthful": "tells you what a season really cleared",
+  "evasive": "stops asking and serves you anyway",
+  "kind": "lets you see the back house"
+ },
+ "assistTags": [
+  "carry",
+  "bargain",
+  "tend",
+  "talk"
+ ],
+ "abilities": [
+  {
+   "abilityId": "plain_weight",
+   "level": 2,
+   "why": "⚑ mining work. `strength: 8` is the highest of her attributes and it is not decorative"
+  },
+  {
+   "abilityId": "stone_read",
+   "level": 2,
+   "why": "she read rock for a living before she read a market row"
+  },
+  {
+   "abilityId": "keen_appraisal",
+   "level": 2,
+   "why": "⚑ a stall-holder two dry seasons behind knows exactly what everything is worth"
+  },
+  {
+   "abilityId": "steady_hands",
+   "level": 1,
+   "why": "worn hands, still steady"
+  },
+  {
+   "abilityId": "hearthbinding",
+   "level": 1,
+   "why": "⚠️ the back house with two children in it — that is the craft"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 1,
+   "why": "⛔ 'asked plainly for one true thing' — she gives what she asks for"
+  }
+ ],
+ "personality": {
+  "warmth": 6,
+  "trust": 5,
+  "candor": 9,
+  "patience": 7
+ },
+ "physicality": "ADULT. Broad-shouldered and heavy-handed, thirties, the forearms of someone who moved rock for years. WHAT CATCHES THE EYE: she does not perform being alright, and she does not perform being not-alright either.",
+ "intimacyNotes": "⛔ `romanceEligible: false` — she has two children in the back house and is two dry seasons behind, and this entry exists so a GM can DESCRIBE her, not court her. ⚠️ Touch is a hand taken briefly in thanks and a door held open. ⛔ The thing she will not discuss is what the bad choices were.",
+ "_genderFix_20260906": "⛔ THE FILE DISAGREED WITH ITSELF, and CCode flagged it. The registry `description` read 'A BROAD MAN, thirties' while the history says 'HER children in the back house' TWICE, across separate beats. ⚠️ AND THERE WAS NO `gender` FIELD AT ALL — rule 14B: 'IF YOU LEAVE IT OUT THE PORTRAIT IS A COIN TOSS and the game will render them wrong in front of the player.' ✅ RESOLVED AS A WOMAN: the history is the stronger evidence — written across multiple turns, consistent, and ABOUT her rather than a passing adjective in a one-line description. ⚑ 'Broad' is kept in `appearance` and `physicality`, because it was never the part that conflicted.",
+ "_promotedFrom": "⚑ Registry entry `bren-thalle`, relationship 5, first met Millbrook d5. R28: generated is promotable to authored. Crafts drawn from her history — mining work, the stall, the back house, and asking plainly for one true thing."
+}

@@ -1,6 +1,8 @@
 # SPEC — the world should be crowded
 
-**Author:** Aevi (PO) · **2026-09-05** · **Status:** `spec_ready` — ⬜ **CCode ROUND 2**
+**Author:** Aevi (PO) · **2026-09-05** · ✅ **Status:** `built` — v1.9.393, §112
+
+⛑ **CLOSED 2026-09-06.** ✅ **The roster block, the tier cadence, and the `presence` dial beside World pacing, default `peopled` per Erik's 'increase it for now'.** ⛔ **AND §112 IS THE CHECK AEVI DID NOT THINK TO ASK FOR:** *'a quiet day's people are always among a crowded day's, and a thronged moor is still a moor.'* ⚑ **HOW OFTEN, NEVER WHO** — which forecloses the real risk of a crowding dial: that turning it up would change a lonely fen into a market. ⬜ **Open beyond this spec:** the `service: true` reader — the runner-fee income — is named and unbuilt.
 **subject:** npc-presence
 > Erik: *"I want the NPCs to interact with the PCs a LOT more. We have so many of them at lower levels the
 > player should be seeing them fairly frequently and helping or being helped by them **pretty much every

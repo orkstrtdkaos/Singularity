@@ -1608,3 +1608,39 @@ the naming guard · **11 of 14 traditions unaudited** (`SPEC_tradition_narrative
 ⚑ **`becomesNpc` has no reader** (`SPEC_companion_becomes_person.md`) ·
 ⛔ **multiplayer before tomorrow: the empty `_open_index.json`, and R36 extended to the party seat so a human
 ally stops fighting as a hardcoded `HARM, MARTIAL` stub**
+
+---
+
+## ⛔ ID CONVENTION: SAVES WRITE KEBAB, CONTENT AUTHORS SNAKE (2026-09-05)
+
+**CCode's quest repair surfaced it:** *"the save says `the-mercy-that-wont-ask`; the def says
+`the_mercy_that_wont_ask` — **matching raw finds nothing for any of your ten quests**."*
+
+⚠️ **THE SAME SPLIT WAS LIVE IN THE NPC REGISTRY, FROM AEVI'S OWN AUTHORING PASS HOURS EARLIER.**
+
+| measured | |
+|---|---|
+| **content ids** | ⚑ **snake, near-universally** — quests 17/17 · npcs 38/42 · items 43/45 · abilities 355/429 |
+| ⛔ **`locations`** | **MIXED — 17 kebab, 98 snake** |
+| ⛔ **save-side** | **quests 10/10 KEBAB · npcRegistry 20 kebab / 2 snake · holdings 2/2 kebab** |
+
+### ✅ TWO LIVE FAULTS, FIXED AT THE CONTENT END
+
+| | |
+|---|---|
+| `mara_wells` → **`mara-wells`** | the registry key play wrote is kebab |
+| ⛔ `ama` → **`silas-mother`** | ⚠️ **Aevi gave the file the id `ama`, which is her NAME.** The registry key is `silas-mother` — **nothing in the save could ever have matched it** |
+
+⚑ **FIXED AT THE CONTENT END DELIBERATELY: the registry key is written by PLAY and is not safe to move; the
+authored file is the thing that can.** ✅ **All ten authored NPCs that appear in Silas's registry now resolve
+RAW.**
+
+### ⬜ AND THE STANDING RULE FOR PROMOTION
+
+⛔ **WHEN PROMOTING A GENERATED PERSON TO AN AUTHORED FILE, THE ID IS THE REGISTRY KEY — NOT A TIDIER ONE.**
+⚠️ **An authored record whose id does not match the entry it was promoted FROM is a record the game can
+never find**, and it fails silently: the file loads, validates, and is never reached.
+
+⬜ **CCode's questions, unanswered:** does anything else match content to save by raw id — items, holdings,
+locations? ⛔ **`locations` is mixed at the CONTENT level, which is the one family where both conventions are
+authored.**

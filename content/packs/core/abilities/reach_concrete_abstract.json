@@ -1207,7 +1207,9 @@
      },
      "failure": "You unmake the wrong wall."
     },
-    "damageType": "abstraction"
+    "damageType": "abstraction",
+    "penetration": 3,
+    "_penetrationWhy": "⚑ MASON, AND THE MOST LITERAL. 'Take a built structure apart back to its raw material — the join forgets it was a join.' ⛔ A LAYERED WARD IS A BUILT STRUCTURE. It does not go through the wall; it asks the wall to stop being one."
    },
    "rankDeltas": [
     {
@@ -1239,7 +1241,8 @@
    "_powerSystemWas": "reach_concrete_abstract",
    "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it.",
    "_typed_20260829": "⛔ `abstraction` — ⚠️ NOT PHYSICAL: 'the join FORGETS IT WAS A JOIN'. What is destroyed is the RELATION, not the stone — INTRINSIC, and armour is no answer to a thing forgetting what it was. ⚠️ ERIK 2026-08-29: 'DAMAGE SHOULD BE TYPED. RESOLVING TO DEFAULT NEEDS A FLAG AND FIX.' An untyped blow falls back to `physical`, which makes it INVISIBLE to every affinity and unanswerable by any ward on purpose. ✅ Flagged by the new W7 ratchet in `content_which`.",
-   "_rungFix_20260830": "⛔ ability rung -> `none`: r1 is its only rank and it takes a STRUCTURE apart, not a person — 'the join forgets it was a join'. ⚠️ Nobody is harmed at any rank."
+   "_rungFix_20260830": "⛔ ability rung -> `none`: r1 is its only rank and it takes a STRUCTURE apart, not a person — 'the join forgets it was a join'. ⚠️ Nobody is harmed at any rank.",
+   "_r45b_20260906": "⛔ R45b (Erik 2026-09-04): 'rank 3 is NOT absolute — the corpus owes a handful of `penetration: 3` crafts.' ⚠️ MEASURED BEFORE AUTHORING: 421 crafts and exactly ONE carried penetration (`radiant_lance`, 2), while `soakRankAt: [0,3,6]` means ANY foe with soak ≥ 6 already has a rank-3 layer. ⛔ SO THE BEST WARD IN THE GAME WAS UNPIERCEABLE BY EVERY CRAFT IN IT — and so was the third layer of ordinary armour, on foes nobody had noticed it on. ⚑ FIVE, NOT A SWEEP: one per domain at most, T5 only, so answering the best ward is a REAL BUILD CHOICE rather than a default. ⚠️ AND EACH ONE ALREADY DESCRIBED GOING THROUGH RATHER THAN AT — the field is a transcription of what the craft says it does. ⛔ THIS PROJECT HAS RULED THREE TIMES AGAINST A WALL THE GAME CANNOT ROUTE AROUND: `keep` capped at defence 3, `minTakeShare` guaranteeing a raid takes something."
   },
   {
    "schemaVersion": 1,

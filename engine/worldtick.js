@@ -16,6 +16,7 @@ import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // C
 import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
 import { advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura } from "./holdings.js";
+import { tickCaravans } from "./caravan.js";   // R49: the road runs itself, and can be robbed
 import { meaningDensity, peoplePresentAt } from "./substrate.js";   // R46b: what the pilgrims come for   // SNG-358: holdings ride the same world-gated pass
 import { commitGrowth } from "./npcsheet.js";   // ✅ R37: growth writes, on the tick
 import { bearersOf } from "./npcs.js";           // ✅ R45c: what other people carry
@@ -463,6 +464,15 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     if (st && grew) st.grew = grew;
     for (const t of storeNews(h, st)) news.push(t);
     moved++;
+  }
+  // ⚑ R49 — AND THE CARAVANS ON THE ROAD, on the same cadence and for the same reason: a caravan is worth
+  // having rather than a trip you take precisely because it runs while you are not looking. ⛔ It can be
+  // robbed and its carriers can die (Erik 2026-09-06), so it produces news the way a raid does.
+  for (const ev of tickCaravans(character, { day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
+    locations: content?.locations || {}, economy: content?.rules?.economy || null,
+    cfg: content?.rules?.economy?.holdStore || null, rng,
+    people: { ...(content?.npcs || {}), ...(character?.npcRegistry || {}) } })) {
+    if (ev?.note) news.push(ev.note);   // ⚑ the event's OWN note — reaching for the caravan's latest duplicated arrivals
   }
   return { news: news.map(t => ({ text: t, section: "yours" })), moved };
 }

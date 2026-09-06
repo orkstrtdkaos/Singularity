@@ -425,5 +425,10 @@
     "purpose": "Routes over the mixed graph — roads weighted by real walking days, plus the gate network — returning two NAMED options rather than one optimal one, and saying so honestly when the world has only one way through.",
     "playerVisibleSurface": "The ways-there line the GM is handed when the player sets out: \"2.2 days through the Echo River Crossing gate, or 53.3 days on foot by way of the Axis Gate\".",
     "whatMakesItFire": "A travel intent — the same beat that already forces a moveTo. The route is the traveller's own: only gates they have actually found, which on a real save is 2 of the world's 26."
+  },
+  "caravan.js": {
+    "purpose": "Trade as a ROAD to prices the game already has, not a new economy: a load leaves a hold's store, travels a real route, can be robbed on the way, and is sold where it lands. The differential is authored — 8 raw material is 32 in the valley and 115 in the Gearlands.",
+    "playerVisibleSurface": "News from the road while you are elsewhere: a load arriving and what it fetched, a caravan robbed, or people who did not walk on. The GM is told what is on the road and whether anyone is walking with it.",
+    "whatMakesItFire": "A holdingOps \"caravan\" op sends one; the world tick moves it, rolls the road's own danger, and sells it on arrival — it runs itself while you are not looking, the same promise a hold's store makes."
   }
 }

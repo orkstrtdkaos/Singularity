@@ -6901,7 +6901,7 @@ console.log("\n── §98 · hubward is toward balance, and the engine says so 
     /key: "bearingsDetail"/.test(reg98) && /bearingsToKnown\(/.test(reg98)
     && /import \{[^}]*bearingsToKnown/.test(reg98));
   check("§98: …and gm.js CONSUMES it — a row nothing destructures reaches the model never",
-    /bearingsDetail \} = ctx;/.test(gm98) && /if \(bearingsDetail\) world\.push/.test(gm98));
+    /const \{[^}]*\bbearingsDetail\b[^}]*\} = ctx;/.test(gm98) && /if \(bearingsDetail\) world\.push/.test(gm98));   // ⚠️ the NAME is the fact; its position in the list is not
   check("§98: ⛑ …and the block FORBIDS the retired compass by name, where the GM will actually read it",
     /no north, south, east or west/i.test(gm98) && /HUBWARD[\s\S]{0,200}BALANCE/.test(gm98));
 }
@@ -7010,6 +7010,149 @@ console.log("\n── §99 · four days through the Wend, or seven around it ─
     /routeBetween\(character\.currentLocationId, ti\.destId, CONTENT\.locations, \{ traveller: character \}\)/.test(app99));
   check("§99: …and the directive tells the GM not to invent a different duration",
     /do not invent a different one/.test(app99) && /THE WAYS THERE/.test(app99));
+}
+
+/* ═════ §100 — THE LEGION COUNTS THE BAND, AND A CARAVAN CAN BE ROBBED (R49) ═════ */
+// ⛔ THE LEGION HAS NEVER COUNTED. `legionClash`'s strength read `num(u.count, 1)`, and every producer in the
+// engine emits `n`: `contingentsFromPeople` returns `{n: 40, …}`, `bandStrength` returns `{n, …}`, the hold
+// raid builds `{n, quality}` raiders. So every contingent from a real band defaulted to a count of ONE, and
+// FORTY AGAINST SIXTY READ IDENTICALLY TO ONE AGAINST SIXTY — measured, tide 0.00 both.
+// ⚑ THE TESTS COULD NOT SEE IT: every test writes its contingents by hand and spells the field `count`, while
+// every caller in the game spells it `n`. The model was validated on a path nothing in the game takes — the
+// vacuous-gate pattern at the largest scale in this repo. ⚠️ And the function's own comment argues at length
+// about 40-v-60 behaviour it could not have had.
+console.log("\n── §100 · the numbers are read, and a load on the road can be taken ──");
+{
+  const ML100 = await import("../engine/melee.js");
+  const CV100 = await import("../engine/caravan.js");
+  const { loadContentHeadless: lch100 } = await import("./headless_content.mjs");
+  const C100 = await lch100();
+  const locs100 = C100.locations, econ100 = C100.rules?.economy, cfg100 = econ100?.holdStore;
+  const flat = () => 0.5;
+  const band = (k, lvl = 5) => ML100.contingentsFromPeople(
+    Array.from({ length: k }, (_, i) => ({ id: `p${i}`, name: `p${i}`, level: lvl })), { levelOf: (p) => p.level });
+
+  check("§100: ⛔ FORTY IS NOT ONE — a band built from real people is counted, which it never was",
+    ML100.legionClash(band(1), band(60), { rng: flat }).tide < ML100.legionClash(band(40), band(60), { rng: flat }).tide,
+    `1v60 ${ML100.legionClash(band(1), band(60), { rng: flat }).tide} vs 40v60 ${ML100.legionClash(band(40), band(60), { rng: flat }).tide}`);
+  // ⚑ THE FUNCTION'S OWN COMMENT IS THE SPECIFICATION — CCODE-278 states both of these outcomes by name.
+  check("§100: ⚑ …and it reproduces the comment's OWN numbers — 40 v 60 gives ground, 20 v 60 still routs",
+    ML100.legionClash(band(40), band(60), { rng: flat }).outcome === "giving ground"
+    && ML100.legionClash(band(20), band(60), { rng: flat }).outcome === "rout",
+    `${ML100.legionClash(band(40), band(60), { rng: flat }).outcome} · ${ML100.legionClash(band(20), band(60), { rng: flat }).outcome}`);
+  check("§100: …and it is SYMMETRIC — outnumbering reads as well as being outnumbered",
+    ML100.legionClash(band(60), band(40), { rng: flat }).tide > 0.1);
+  check("§100: ⛑ …and the spelling every TEST uses still works, so nothing that said `count` broke",
+    ML100.legionClash([{ count: 600, quality: 1 }], band(60), { rng: flat }).outcome === "breakthrough");
+
+  // ── R49 · the caravan
+  const mk = (store = { raw_material: 8 }, k = 2) => ({
+    purse: { crystal: 0 }, holdings: [{ id: "h", name: "The Post", kind: "post", locationId: "millbrook", store: { ...store } }],
+    npcRegistry: Object.fromEntries(Array.from({ length: k }, (_, i) => [`c${i}`, { id: `c${i}`, name: `c${i}`, level: 6 }])),
+  });
+  const ids = (k) => Array.from({ length: k }, (_, i) => `c${i}`);
+
+  // ⛔ THE FINDING THIS WHOLE FEATURE EXISTS FOR: the prices were already authored and unreachable.
+  const near = mk(); const sN = CV100.sendCaravan(near, { holdingId: "h", toId: "the_crossing", carriers: ids(2), locations: locs100, cfg: cfg100, day: 0 });
+  CV100.arriveCaravan(near, sN.caravan, { locations: locs100, economy: econ100, cfg: cfg100, day: 5 });
+  const far = mk(); const sF = CV100.sendCaravan(far, { holdingId: "h", toId: "the_gearlands_verge", carriers: ids(2), locations: locs100, cfg: cfg100, day: 0 });
+  CV100.arriveCaravan(far, sF.caravan, { locations: locs100, economy: econ100, cfg: cfg100, day: 5 });
+  check("§100: ⛔ THE DIFFERENTIAL IS REACHED — the same 8 units fetch far more where they are wanted",
+    far.purse.crystal > near.purse.crystal * 2 && near.purse.crystal > 0,
+    `${near.purse.crystal} at the Crossing vs ${far.purse.crystal} in the Gearlands`);
+  check("§100: …and the coin comes through `credit`, the purse's one door in — trade MOVES coin, never mints it",
+    /import \{ credit \} from "\.\/purse\.js"/.test(rd("engine/caravan.js")));
+
+  // ⛔ ON THE ROAD OR AT THE HOLD, NEVER BOTH — a load left on the store could be sold twice.
+  const dbl = mk();
+  const sD = CV100.sendCaravan(dbl, { holdingId: "h", toId: "the_crossing", carriers: ids(2), locations: locs100, cfg: cfg100, day: 0 });
+  check("§100: ⛔ the load LEAVES the store at departure — otherwise it could be sold at both ends",
+    Object.keys(dbl.holdings[0].store).length === 0 && sD.caravan.load.raw_material === 8);
+  check("§100: …and an empty store is refused rather than sending an empty cart",
+    CV100.sendCaravan(dbl, { holdingId: "h", toId: "the_crossing", locations: locs100, cfg: cfg100, day: 0 }).why === "the store is empty");
+  check("§100: …and it refuses a hold that is nowhere, or a destination that is nothing",
+    !CV100.sendCaravan(mk(), { holdingId: "h", toId: "nope", locations: locs100, cfg: cfg100 }).ok
+    && !CV100.sendCaravan(mk(), { holdingId: "nope", toId: "the_crossing", locations: locs100, cfg: cfg100 }).ok);
+
+  // ⛔ ERIK'S RULING (2026-09-06): a share on a normal raid; ALL of it when the escort is wiped in a fight
+  // you LOST — "especially if all your people get killed". The total loss follows the fiction, not a die.
+  // ⚠️ LOW ON BOTH AXES: three low draws give a losing tide, and every carrier then dies on rng < risk.
+  // Measured on this exact route (danger 2, escort 2): tide -0.15, personalRisk 0.65.
+  const lostFight = () => 0.01;
+  const wipe = mk({ raw_material: 8 }, 2);
+  const sW = CV100.sendCaravan(wipe, { holdingId: "h", toId: "the_crossing", carriers: ids(2), locations: locs100, cfg: cfg100, day: 0 });
+  const rW = CV100.resolveRoadHazard(wipe, sW.caravan, { rng: lostFight, cfg: cfg100, people: wipe.npcRegistry, day: 3 });
+  check("§100: ⛔ WIPED IN A FIGHT YOU LOST TAKES IT ALL — nobody left to carry it, nobody left to argue",
+    rW.wiped && !rW.held && Object.keys(sW.caravan.load).length === 0,
+    `wiped ${rW.wiped} held ${rW.held} left ${JSON.stringify(sW.caravan.load)}`);
+  check("§100: ⚑ …and the carriers are REALLY dead — Erik ruled they can die, and a death that is not recorded is not one",
+    ids(2).every(id => wipe.npcRegistry[id].status === "dead"));
+
+  // ⚠️ AND WINNING PROTECTS THE LOAD, WHATEVER IT COST. `personalRisk` has a FLOOR — you can die in a battle
+  // you are winning — so "wiped means total loss" alone would take the whole load off a caravan that WON.
+  // ⛑ THREE HIGH DRAWS WIN THE FIGHT, then low ones kill everyone who won it. An escort of 3 is needed:
+  // measured, one carrier cannot reach a winning tide against danger 2 even on the luckiest roll.
+  const wonFight = (() => { let i = 0; return () => (i++ < 3 ? 0.99 : 0.01); })();
+  const won = mk({ raw_material: 8 }, 3);
+  const sV = CV100.sendCaravan(won, { holdingId: "h", toId: "the_crossing", carriers: ids(3), locations: locs100, cfg: cfg100, day: 0 });
+  const rV = CV100.resolveRoadHazard(won, sV.caravan, { rng: wonFight, cfg: cfg100, people: won.npcRegistry, day: 3 });
+  check("§100: ⛔ A WON FIGHT TAKES NOTHING, even when it killed everyone — victory must not lose the load",
+    rV.held && rV.wiped && Object.keys(rV.taken).length === 0 && sV.caravan.load.raw_material === 8,
+    `held ${rV.held} wiped ${rV.wiped} taken ${JSON.stringify(rV.taken)}`);
+
+  // ⚑ A NORMAL LOSS IS A SHARE — Erik's first clause, and the common case.
+  // ⚑ LOW FOR THE TIDE (the fight is lost), then HIGH so every carrier survives it — 0.99 clears a risk of 0.65.
+  const partial = (() => { let i = 0; return () => (i++ < 3 ? 0.01 : 0.99); })();
+  const share = mk({ raw_material: 8 }, 3);
+  const sS = CV100.sendCaravan(share, { holdingId: "h", toId: "the_crossing", carriers: ids(3), locations: locs100, cfg: cfg100, day: 0 });
+  const rS = CV100.resolveRoadHazard(share, sS.caravan, { rng: partial, cfg: cfg100, people: share.npcRegistry, day: 3 });
+  check("§100: ⚑ A NORMAL LOSS TAKES A SHARE — the common case, and the load survives it",
+    !rS.held && !rS.wiped && Object.keys(rS.taken).length > 0 && Object.keys(sS.caravan.load).length > 0,
+    `taken ${JSON.stringify(rS.taken)} left ${JSON.stringify(sS.caravan.load)}`);
+
+  // ⚠️ NOBODY WALKING WITH IT IS ITS OWN ANSWER — a share, not a wipe, because Erik's total loss is PEOPLE
+  // DYING and an unescorted cart has nobody to kill. It is simply a bad way to move goods.
+  const alone = mk({ raw_material: 8 }, 0);
+  const sA = CV100.sendCaravan(alone, { holdingId: "h", toId: "the_crossing", carriers: [], locations: locs100, cfg: cfg100, day: 0 });
+  const rA = CV100.resolveRoadHazard(alone, sA.caravan, { rng: flat, cfg: cfg100, people: {}, day: 3 });
+  check("§100: ⚠️ an unescorted load loses a share and is not WIPED — the total loss is people dying",
+    !rA.fought && !rA.wiped && Object.keys(sA.caravan.load).length > 0, JSON.stringify(rA.taken));
+
+  // ⛔ AND A CARAVAN THAT CANNOT ARRIVE IS OVER. Measured before this: one with an empty load and every
+  // carrier dead stayed "travelling" for two hundred more days, limping toward an arrival nothing could reach.
+  const doomed = mk({ raw_material: 8 }, 2);
+  const sX = CV100.sendCaravan(doomed, { holdingId: "h", toId: "the_gearlands_verge", carriers: ids(2), locations: locs100, cfg: cfg100, day: 0 });
+  const evs = CV100.tickCaravans(doomed, { day: 30, locations: locs100, economy: econ100, cfg: cfg100,
+    rng: () => 0.01, people: doomed.npcRegistry, perDangerChance: 1 });
+  check("§100: ⛔ A CARAVAN THAT CANNOT ARRIVE IS OVER — nobody is walking it and nobody is coming back",
+    sX.caravan.status === "lost" && evs.some(e => e.kind === "lost"),
+    `${sX.caravan.status} · load ${JSON.stringify(sX.caravan.load)}`);
+  check("§100: …and it says so ONCE — a finished caravan stops producing news",
+    CV100.tickCaravans(doomed, { day: 60, locations: locs100, economy: econ100, cfg: cfg100, rng: () => 0.01, people: doomed.npcRegistry }).length === 0);
+
+  // ⛑ `personalRisk` HAD NEVER BEEN READ BY ANYTHING. This is its first consumer in the engine.
+  check("§100: ⛑ `personalRisk` finally has a reader — it was computed and consumed by nothing for its whole life",
+    /personalRisk/.test(rd("engine/caravan.js")));
+
+  // ⛑ AND THE ROAD'S DANGER IS THE ROAD'S OWN — the worst mile, not the region's average.
+  check("§100: ⛑ a road is as safe as its ugliest mile — the WORST place on the path sets the danger",
+    CV100.roadDanger(["millbrook", "the_blaze"], locs100) === Math.max(
+      Number(locs100.millbrook.dangerLevel) || 0, Number(locs100.the_blaze.dangerLevel) || 0));
+  check("§100: …and the dial is NAMED and measured, not a magic number in a signature",
+    CV100.ROAD_HAZARD_PER_DANGER_DAY > 0 && CV100.ROAD_HAZARD_PER_DANGER_DAY < 0.01);
+
+  // ⛔ THE FOUR DOORS: something SENDS one, something TICKS it, and the GM can SEE one.
+  const app100 = rd("app.js"), wt100 = rd("engine/worldtick.js"), reg100 = rd("engine/gm_registry.js"), gm100 = rd("engine/gm.js");
+  check("§100: ⛔ IT CAN BE SENT — a holdingOps verb, where every other hold verb already lives",
+    /kind === "caravan"/.test(app100) && /sendCaravan\(character, \{/.test(app100)
+    && /import \{[^}]*sendCaravan[^}]*\} from "\.\/engine\/caravan\.js"/.test(app100));
+  check("§100: ⛔ IT RUNS ITSELF — on the world tick, the same cadence a hold's store keeps",
+    /tickCaravans\(character, \{/.test(wt100) && /import \{[^}]*tickCaravans[^}]*\} from "\.\/caravan\.js"/.test(wt100));
+  check("§100: ⛔ AND THE GM SEES IT — declared in the registry and consumed in gm.js, or it reaches the model never",
+    /key: "caravansDetail"/.test(reg100) && /const \{[^}]*\bcaravansDetail\b[^}]*\} = ctx;/.test(gm100)
+    && /if \(caravansDetail\) world\.push/.test(gm100));
+  check("§100: ⚠️ …and the GM is told it does NOT decide what became of a load — the engine resolves the road",
+    /You do NOT decide what happens to it/.test(gm100));
 }
 
 /* ══════════ REPORT ══════════ */

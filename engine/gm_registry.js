@@ -34,6 +34,7 @@
 
 import { bearingsToKnown } from "./worldmap.js";   // SNG-386 §4.3: which way the road runs
 import { holdingsForGM, debtsForGM } from "./holdings.js";
+import { caravansForGM } from "./caravan.js";   // R49: loads on the road
 import { loreForLocation, eventsForGM, traditionMotivationsForGM } from "./state.js";
 import { buildRegionView, newsForGM, worldArcsForGM } from "./worldtick.js";
 import { inventoryForGM } from "./inventory.js";
@@ -197,6 +198,13 @@ export const GM_CONTEXT = [
       const walk = (d) => `${d} ${d === 1 ? "day's" : "days'"} walk`;
       return rows.map(r => `- ${r.name}: ${r.phrase} — about ${walk(r.days)}`).join("\n");
     } },
+
+  // ⚑ R49 — WHAT IS ON THE ROAD. A caravan the world never mentions is a number in a panel; one the GM can
+  // ask after is a thread. ⛔ It carries whether anyone is WALKING WITH IT, because that is the difference
+  // between losing a share and losing everything (Erik 2026-09-06) and the player should hear it named.
+  { key: "caravansDetail", builder: "caravan.caravansForGM (R49)", carries: ["loads on the road", "who walks with them", "the danger of that road"],
+    reachedBy: "sending a load out of a hold (holdingOps caravan)", spec: "R49", views: ALL,
+    build: (env) => caravansForGM(env.character, env.CONTENT.locations) },
 
   // ---- shared by turn + ask + gambit ----
   // SNG-302 — WHAT IT FETCHES HERE. Aevi: "traders are NPCs not shops — the price model exists so the GM has

@@ -70,7 +70,8 @@ import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: t
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost } from "./engine/waygate.js";
-import { routeBetween, routeLine } from "./engine/journey.js";   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
+import { routeBetween, routeLine } from "./engine/journey.js";
+import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { canonicalPersonId, personArtSeed, applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
@@ -124,7 +125,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.379";
+const APP_VERSION = "1.9.380";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6523,6 +6524,16 @@ function applyTurn(turn, resolution, playerWords = null) {
       // ✅ features and names — what a hold HAS, and what it is called
       else if (kind === "feature") { const r = addFeature(character, id, { kind: op.kind, name: op.name || null, by: op.by || null, craftIds: op.craftIds || (op.abilityId ? [op.abilityId] : []), count: op.count || 1, day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow() }); if (!r.ok) console.warn("[holdingOps] feature refused:", r.why); }
       else if (kind === "rename") renameHolding(character, id, op.name, { worldCount: worldCount() });
+      // ⛔ R49 — THE LOAD LEAVES THE HOLD. `sellStore` has always refused away from the hold: "you sell where
+      // it stands, and nothing moves it yet." This is the thing that moves it, and the prices it reaches are
+      // already authored — 8 raw material is 32 in the valley and 115 in the Gearlands.
+      // ⚠️ CARRIERS ARE NAMED PEOPLE because Erik ruled they can die, and an anonymous loss is not a consequence.
+      else if (kind === "caravan") {
+        const r = sendCaravan(character, { holdingId: id, toId: op.toId || op.to || op.locationId || null,
+          goods: op.goods || null, carriers: op.npcIds || (op.npcId ? [op.npcId] : []), locations: CONTENT.locations,
+          cfg: holdCfgNow(), day: absoluteWorldDay(), traveller: character });
+        if (!r.ok) console.warn("[holdingOps] caravan refused:", r.why);   // prose-cap-ok: a console diagnostic
+      }
     }
   });
   // ✅ Q5-B: a debt the fiction leaves — recorded to a HOLDER, settled by the purse, forgiven by a deed.

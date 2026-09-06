@@ -271,7 +271,14 @@ export function recoverBand(band, { days = 1, cfg = {} } = {}) {
  *  ⛔ AND THE TIDE CAN TAKE THEM REGARDLESS. Erik: "being a casualty of that melee." A won battle that
  *  cannot cost you anything personally is a number going up. */
 export function legionClash(ours, theirs, { rng = Math.random, heroSwing = 0, heroTier = null, cfg = {} } = {}) {
-  const strength = (units) => units.reduce((s, u) => s + num(u.count, 1) * num(u.quality, 1), 0);
+  // ⛔ `count` OR `n` — AND THE ENGINE ONLY EVER SENT `n`. This read `u.count` alone, while
+  // `contingentsFromPeople` returns `{n: 40, …}`, `bandStrength` returns `{n, …}` and the hold raid builds
+  // `{n, quality}` raiders — so every contingent from a real band defaulted to a count of ONE.
+  // ⚠️ MEASURED: forty against sixty and ONE against sixty both read tide 0.00. Identical.
+  // ⚑ The tests never caught it because every one of them writes the contingents by hand and spells the
+  // field `count`; every caller in the game spells it `n`. The model was validated on a path nothing takes.
+  // ⛑ Accepting both repairs all three production callers at once and cannot break a caller that says `count`.
+  const strength = (units) => units.reduce((s, u) => s + num(u.count ?? u.n, 1) * num(u.quality, 1), 0);
   const us = strength(ours), them = strength(theirs);
   // ⛔ CCODE-321 / ERIK 2026-08-30 — A MYTHICAL IS BOTH, AND THE RULING IS THAT BOTH IS THE ANSWER:
   // "a Mythical, like the other tiers, is both a DIFFERENT KIND OF THING (status that reflects how much

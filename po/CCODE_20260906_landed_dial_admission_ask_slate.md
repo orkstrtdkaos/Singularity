@@ -91,3 +91,21 @@ as the load note. If you do not, tell me which device and I will measure.
   next reader, not invented here.
 - **Delegates v2, first cut, same landing (§120):** floors replace the ceiling; the keeper joins the raid product;
   `vouchedBy` is an act with terms; keeping vs charge is read and said. Breadth of ACTION is SNG-366's spec.
+
+## 7 · Erik — the gate, looked up, and the cluster moved once (v1.9.397, reconcile 45)
+
+- **Looked up:** 27 waygates in the world; the engine recognises one by `waygate: true` and a tier, and **the Made Gate is
+  one** — `_mintedAs: made_waygate`, `waygateDefaultTo: the_crossing`. It LEADS to the Hub, so its one position is its
+  MOUTH — and Deni walked through it and arrived at the Hub to file her registry entry. The mouth is at the Left Branch
+  approach: Logana is "guardian of the left-branch gate", the hollow you sealed is Stillwater's Trouble, the Whistling
+  Woman was raised to watch it, and the runner came "south-bound from the mill station" at Millbrook, a day away.
+- **My reading of "the Crossing":** the one with a mill gate, an east-side draw-well and a creek downstream of the Zone is
+  **Echo River Crossing**, a day from that cluster. The app stamped the deeds with the Hub's id on a name match. If you mean
+  the Hub, say so and the ridge post moves back in one line.
+- **Moved once, on your word** (a marker keeps it from moving again): the gate's mouth by Stillwater's Trouble; the gate
+  clearing beside it; the Whistling Woman a quarter-day from the gate as its watch; the ridge post half a day north of
+  Echo River Crossing and a night's road short of the Whistling Woman. §122 measures every leg. The 41-day placements
+  by the Edge district and the Hub are gone from the edges.
+- **The hold carries what it keeps:** a `waygate` feature kind now exists (Erik ruled its weight; **Aevi, the flavour is
+  yours**) — it marks the keeping; the effect the engine reads is the place's, and §122 proves the hop: from the Whistling
+  Woman to the Hub is a walk of forty days and a gate-hop of hours.

@@ -15011,7 +15011,7 @@
   ],
   "actionCount": 952,
   "grantsVersion": 1,
-  "reconcileVersion": 44,
+  "reconcileVersion": 45,
   "gallery": [
     {
       "kind": "moment",
@@ -15621,8 +15621,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1788731211928,
-  "rev": 3300,
+  "updatedAt": 1788732133279,
+  "rev": 3400,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18489,7 +18489,7 @@
       "gen-the-made-gate": {
         "id": "gen-the-made-gate",
         "name": "The Made Gate",
-        "regionId": "the_center",
+        "regionId": "valley",
         "descriptionSeed": "The first waygate MADE rather than reached-for — cut at the Crossing by a wright who tends endings, standing where the fold once was. Proof that a gate can be made, not only reached.",
         "tags": [
           "waygate",
@@ -18498,7 +18498,8 @@
         "waygate": true,
         "waygateTier": 2,
         "connections": [
-          "the_crossing"
+          "gen-left-branch-gate-clearing",
+          "gen-stillwater-s-trouble"
         ],
         "waygateDefaultTo": "the_crossing",
         "dangerLevel": 2,
@@ -18517,7 +18518,8 @@
           "createdDay": 14,
           "provenance": {
             "hint": "made-waygate",
-            "questMade": true
+            "questMade": true,
+            "locationId": "gen-stillwater-s-trouble"
           },
           "lastAttentionDay": 14
         },
@@ -18527,10 +18529,12 @@
           "y": 297.10793550220046
         },
         "worldPos": {
-          "colatitude": 0.6,
-          "longitude": 182.5,
+          "colatitude": 20.4,
+          "longitude": 251.95,
           "depth": 0
-        }
+        },
+        "_placedBy": "erik-2026-09-06-gate-cluster",
+        "networkCapable": true
       },
       "gen-the-temple": {
         "id": "gen-the-temple",
@@ -18578,14 +18582,15 @@
       "gen-left-branch-gate-clearing": {
         "id": "gen-left-branch-gate-clearing",
         "name": "Left Branch Gate Clearing",
-        "regionId": "the_echo_vale",
+        "regionId": "valley",
         "descriptionSeed": "A place the road led to — Left Branch Gate Clearing. The fiction brought you here before the map knew its name.",
         "tags": [
           "transitional"
         ],
         "connections": [
-          "radiant_plateau_edge",
-          "gen-whistling-woman-post"
+          "gen-the-made-gate",
+          "gen-whistling-woman-post",
+          "gen-stillwater-s-trouble"
         ],
         "_mintedAs": "transit",
         "dangerLevel": 1,
@@ -18603,7 +18608,7 @@
           ],
           "createdDay": 15,
           "provenance": {
-            "locationId": "radiant_plateau_edge",
+            "locationId": "gen-the-made-gate",
             "day": null,
             "hint": "transit"
           },
@@ -18614,21 +18619,24 @@
           "y": 389.64402995026865
         },
         "worldPos": {
-          "colatitude": 25.566,
-          "longitude": 48.53399999999999,
+          "colatitude": 20.44,
+          "longitude": 251.9,
           "depth": 0
-        }
+        },
+        "_placedBy": "erik-2026-09-06-gate-cluster"
       },
       "gen-whistling-woman-post": {
         "id": "gen-whistling-woman-post",
         "name": "Whistling Woman Post",
-        "regionId": "the_echo_vale",
+        "regionId": "valley",
         "descriptionSeed": "A place the road led to — Whistling Woman Post. The fiction brought you here before the map knew its name.",
         "tags": [
           "transitional"
         ],
         "connections": [
-          "gen-left-branch-gate-clearing"
+          "gen-left-branch-gate-clearing",
+          "gen-the-made-gate",
+          "gen-threshold-post"
         ],
         "_mintedAs": "transit",
         "dangerLevel": 1,
@@ -18646,7 +18654,7 @@
           ],
           "createdDay": 15,
           "provenance": {
-            "locationId": "gen-left-branch-gate-clearing",
+            "locationId": "gen-the-made-gate",
             "day": null,
             "hint": "transit"
           },
@@ -18657,15 +18665,16 @@
           "y": 350.2434922699326
         },
         "worldPos": {
-          "colatitude": 25.372,
-          "longitude": 47.214,
+          "colatitude": 20.36,
+          "longitude": 252.1,
           "depth": 0
-        }
+        },
+        "_placedBy": "erik-2026-09-06-gate-cluster"
       },
       "gen-threshold-post": {
         "id": "gen-threshold-post",
         "name": "Threshold Post",
-        "regionId": "the_center",
+        "regionId": "valley",
         "descriptionSeed": "The ridge relay node north of the Crossing's mill gate — a sentinel post high on the moorland ridge, overlooking the settlement, the relay network's northern anchor. A warden post raised from blueprint into standing structure, a working mine of living iron beneath it, a death-warden temple at the sentinel. Three beacon stones cracked in the sentinel array; Fendt keeps it.",
         "tags": [
           "ridge",
@@ -18674,7 +18683,8 @@
           "moorland"
         ],
         "connections": [
-          "the_crossing"
+          "echo_river_crossing",
+          "gen-whistling-woman-post"
         ],
         "dangerLevel": 2,
         "_gen": {
@@ -18695,17 +18705,18 @@
           ],
           "createdDay": 14,
           "provenance": {
-            "locationId": "the_crossing",
+            "locationId": "echo_river_crossing",
             "day": 14,
             "hint": "the ridge relay node, north of the mill gate"
           },
           "lastAttentionDay": 15
         },
         "worldPos": {
-          "colatitude": 0.9,
-          "longitude": 30,
+          "colatitude": 20.05,
+          "longitude": 252.05,
           "depth": 0
-        }
+        },
+        "_placedBy": "erik-2026-09-06-gate-cluster"
       }
     },
     "arc": {
@@ -20973,13 +20984,13 @@
       "gen-ashwarden-march-road"
     ],
     "gen-stillwater-s-trouble": [
-      "gen-ashwarden-march-road"
+      "gen-ashwarden-march-road",
+      "gen-the-made-gate"
     ],
     "the_crossing": [
       "gen-north-gate-registry-ossian-office",
       "gen-the-made-gate",
-      "gen-the-temple",
-      "gen-threshold-post"
+      "gen-the-temple"
     ],
     "gen-hub-north-gate-district-street": [
       "gen-north-gate-registry-ossian-office"
@@ -20988,10 +20999,23 @@
       "gen-hub-north-gate-district-street"
     ],
     "gen-left-branch-gate-clearing": [
-      "gen-whistling-woman-post"
+      "gen-whistling-woman-post",
+      "gen-the-made-gate"
     ],
     "gen-threshold-post": [
-      "the_crossing"
+      "gen-whistling-woman-post",
+      "echo_river_crossing"
+    ],
+    "gen-the-made-gate": [
+      "gen-left-branch-gate-clearing",
+      "gen-stillwater-s-trouble"
+    ],
+    "gen-whistling-woman-post": [
+      "gen-left-branch-gate-clearing",
+      "gen-threshold-post"
+    ],
+    "echo_river_crossing": [
+      "gen-threshold-post"
     ]
   },
   "ladderPaid": {
@@ -21387,6 +21411,12 @@
           "from": "holding",
           "to": "holding",
           "note": "built a standing ward-line (you)"
+        },
+        {
+          "at": null,
+          "from": "holding",
+          "to": "holding",
+          "note": "built a waygate — made, not found (you)"
         }
       ],
       "describedAs": "a gate that was made rather than found",
@@ -21411,6 +21441,15 @@
           "craftIds": [],
           "count": 1,
           "day": 16
+        },
+        {
+          "kind": "waygate",
+          "family": "craft",
+          "name": "a waygate — made, not found",
+          "by": "you",
+          "craftIds": [],
+          "count": 1,
+          "day": 14
         }
       ]
     }
@@ -21708,6 +21747,10 @@
     },
     {
       "text": "The Made Gate has a standing ward-line now.",
+      "announced": false
+    },
+    {
+      "text": "The Made Gate has a waygate — made, not found now.",
       "announced": false
     }
   ],

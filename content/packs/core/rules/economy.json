@@ -363,6 +363,13 @@
     "yields": "worked_light",
     "label": "a lens-works"
    },
+   "waygate": {
+    "family": "craft",
+    "facility": "waygate",
+    "transit": true,
+    "label": "a waygate — made, not found",
+    "_note": "⛔ ERIK 2026-09-06: 'A waygate is a huge deal. There aren't many in the world and they let you travel vast distances.' Twenty-seven in the world, and this one was MADE. The effect the engine reads is the PLACE's — journey.gatesUsableBy/routeBetween read `waygate: true` on the location — so the kind marks that the hold KEEPS a gate; nothing new is read. Aevi: the flavour is yours."
+   },
    "gate": {
     "family": "martial",
     "defence": 1,

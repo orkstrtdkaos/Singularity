@@ -1,0 +1,129 @@
+{
+ "schemaVersion": 1,
+ "id": "sunk_assay_flooded",
+ "kind": "content",
+ "note": "⛔ SNG-521. THE SUNK ASSAY, LEVEL 2 — THE FLOODED ASSAY. Four typed hazards, authored as OPPONENT SHEETS rather than as hazard records. ⚑ CCODE, SNG-515 §2: 'a hazard is an encounter FRAME KIND with no mechanic block — but a hazard that deals typed harm is AN OPPONENT WITH NO NAME, and `synthesizeOpponentSheet` already accepts a fully authored sheet.' ⚠️ So each hazard is one sheet with one skill, and nothing new was invented to carry it.\n⛔ AND THE ANSWERS ARE OBJECTS, NOT WARD CRAFTS (A2a). The spec assumed a party answers `decay` by having Death-Ward up; ⚠️ ward `wardTypes` DO NOT YET FEED THE LAYER WALK. ✅ An authored `soakLayers` on gear IS honoured today — so the room hands you its own answers. ⚑ WHICH IS BETTER FOR A FIRST DUNGEON: the party finds the answer in the room rather than needing to have brought the right tradition.",
+ "_theClock": "⛔ THE WATER IS RISING AND NO ROUND CLOCK EXISTS (CCode §4). ⚠️ AUTHORED AS PRESSURE INSTEAD: every hazard here drives back rather than kills, and `breakAtPressure` is the drowning. ➡️ A party that keeps losing exchanges is pushed off the floor — which is what a rising tide DOES. ⬜ When the clock lands, swap the pressure exit for it; the content does not change.",
+ "opponents": [
+  {
+   "id": "the_grey_damp",
+   "name": "The Grey Damp",
+   "role": "the air itself, gone wrong",
+   "tradition": "ashwarden",
+   "threat": 3,
+   "declarationPool": [
+    "strike"
+   ],
+   "crafts": [
+    "wither"
+   ],
+   "damageType": "decay",
+   "ongoingHarm": "decay",
+   "soakLayers": [
+    {
+     "type": "physical",
+     "value": 40,
+     "source": "⛔ IT IS NOT THERE TO BE HIT — a blade in fog"
+    }
+   ],
+   "targetPolicy": "weakest",
+   "_designNote": "⛔ THE ONE THAT TEACHES THE LESSON. `ongoingHarm: decay` means A WOUND TAKEN HERE DOES NOT CLOSE until the condition is lifted. ⚠️ THIS IS THE FIRST PLACE IN THE GAME WHERE A HEALER MUST END A CONDITION BEFORE MENDING — `resolveHeal` and `staunch` are both built and nothing has ever authored against them. ⚑ The party will discover it by failing: they will mend, watch it reopen, and only then read the room. ✅ ANSWERED BY `oiled_leathers` (decay 5). ⛔ NOT by armour — its `physical: 40` is not toughness, it is the point: you cannot hit weather. `targetPolicy: weakest` because damp finds whoever is already worst off.",
+   "_answeredBy": "oiled_leathers"
+  },
+  {
+   "id": "the_assay_light",
+   "name": "The Assay-Light",
+   "role": "the test, still running",
+   "tradition": "lattice",
+   "threat": 4,
+   "declarationPool": [
+    "strike",
+    "reveal"
+   ],
+   "senseFunctions": [
+    "reveal"
+   ],
+   "crafts": [
+    "order_sense",
+    "predicted_man"
+   ],
+   "damageType": "precursor",
+   "pierce": 3,
+   "soakLayers": [
+    {
+     "type": "physical",
+     "value": 40,
+     "source": "⛔ light"
+    },
+    {
+     "type": "precursor",
+     "value": 8,
+     "source": "it is made of the thing it is made of"
+    }
+   ],
+   "targetPolicy": "strongest",
+   "_designNote": "⛔ THE ONE NO PHYSICAL WARD ANSWERS. It carries `pierce: 3`, so armour is not merely wrong — it is bypassed. ✅ ANSWERED ONLY BY `lattice_token` (precursor 6), which is the only precursor-typed protection in the game. ⚠️ AND IT READS: `senseFunctions: [reveal]` means the party's obscure pays here too, exactly as it does on Level 1. ⚑ `targetPolicy: strongest` — an assay measures the biggest thing in the room.",
+   "_answeredBy": "lattice_token"
+  },
+  {
+   "id": "the_drowned_green",
+   "name": "The Drowned Green",
+   "role": "what grew where nothing should",
+   "tradition": "rootkin",
+   "threat": 3,
+   "declarationPool": [
+    "strike",
+    "hinder"
+   ],
+   "crafts": [
+    "bark_and_briar",
+    "the_taking_root"
+   ],
+   "damageType": "living",
+   "soakLayers": [
+    {
+     "type": "physical",
+     "value": 6,
+     "source": "⚠️ you CAN cut it — it simply grows back"
+    },
+    {
+     "type": "living",
+     "value": 10,
+     "source": "it is the thing"
+    }
+   ],
+   "targetPolicy": "nearest",
+   "_designNote": "⛔ THE ONE A SHIELD MAKES WORSE. Its `physical: 6` is deliberately LOW — cutting works, and cutting is the wrong answer, because it closes again and the round is gone. ✅ ANSWERED BY `cut_stone_and_salt` (living 6), ⚠️ WHICH IS CONSUMABLE — the party must decide where to spend it. ⚑ `hinder` in the pool because it holds you rather than kills you, and being held is how the water reaches you.",
+   "_answeredBy": "cut_stone_and_salt"
+  },
+  {
+   "id": "the_collapsing_gantry",
+   "name": "The Collapsing Gantry",
+   "role": "the floor, leaving",
+   "tradition": "mason",
+   "threat": 4,
+   "declarationPool": [
+    "strike",
+    "break"
+   ],
+   "crafts": [
+    "keystone_blow",
+    "plain_weight"
+   ],
+   "damageType": "physical",
+   "soakLayers": [
+    {
+     "type": "physical",
+     "value": 12,
+     "source": "⛔ it is a structure and it does not care"
+    }
+   ],
+   "targetPolicy": "random",
+   "_designNote": "⛔ THE ONLY ONE ARMOUR ANSWERS, AND THE ONE A STILL MIND DOES NOT. ⚠️ Unmoving Mind does not stop a spar. ✅ Answered by ordinary `physical` soak — every sheet already has some — ⚑ WHICH IS THE POINT OF PUTTING IT LAST: after three hazards that punished the obvious answer, the obvious answer is correct. ✅ `gantry_line` does not soak it — it is a ROUTE PAST it, and with Skydancer r3 it carries the whole party. `targetPolicy: random` because a falling floor does not choose.",
+   "_answeredBy": "gantry_line (as a route, not a ward)"
+  }
+ ],
+ "_theTraverse": "⬜ Loose-Limbed, Skydancer, Near Way and Rising Step each open a different route across. ⚠️ A party with none of them takes the long way and loses exchanges to the pressure — ⛔ which under this authoring is the same thing as losing ground to the water.",
+ "_whatThisTests": "⛔ THE PAIRS THAT HAVE NEVER MET. CCode, SNG-515 §5: 'soak against typed damage, healing against ongoing harm, tempo against a foe that also reads — none of those pairs have met.' ⚑ THIS FLOOR IS THE SECOND: `ongoingHarm: decay` against `resolveHeal` and `staunch`, both built, both never exercised by content. ⚠️ If a heal closes a grey-damp wound without ending the condition first, THAT IS THE BUG THIS ROOM EXISTS TO FIND.",
+ "_notAuthored": "⬜ NO `ongoingHarm` FIELD EXISTS ON A CRAFT YET — CCode §2 says the skill on an authored sheet is where it would ride, and this file authors it at the OPPONENT level as the shape a reader would want. ⛔ IF NOTHING READS `ongoingHarm` HERE, THE GREY DAMP IS AN ORDINARY DECAY HAZARD AND THE LEVEL'S WHOLE LESSON IS INERT. ⚠️ That is the first thing to check when this is run."
+}

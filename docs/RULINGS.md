@@ -57,7 +57,6 @@ exercise that produced three wrong reports on one subject on 2026-09-02. | colum
 | **R46b** | holdings | R46b — a temple pools or sinks, carries an aura, and draws PILGRIMS; `attends` is one optional flag | ✅ v1.9.360 `§78` | `RULING_raid_temple_menu.md` |
 | **R45c** | items · people | R45c — the bearer record lands FIRST: a registry entry can hold an item, evolution takes a bearer, co-use is a fact about a scene, and the tick wakes it unattended | ✅ v1.9.359 `§77` | `BRIEF_20260905_ccode` §2 |
 | **R47** | combat menus | R47 — the universal fallbacks retire behind each craft's free touch; kept only for a sheet that has none | ✅ v1.9.356 `§76` — live, and false for every sheet today: `touchTier` is authored on 0 of 421 crafts | `WORK_ORDER_20260905b` §1 |
-| **R49** | codex, generative-pipeline | R49 — a mystery must come with its story: a generated hook MUST arrive with its facts, people, objectives and challenges, never as a nebulous thread | ⬜ not built — `po/RULING_R49_no_nebulous_mysteries.md`, recorded 2026-09-06 | `RULING_R49_no_nebulous_mysteries` |
 
 ---
 

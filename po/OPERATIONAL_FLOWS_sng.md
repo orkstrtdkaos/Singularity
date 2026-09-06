@@ -24,6 +24,7 @@ When a flow changes, update this document in the same commit.
 | Ruling needed from Erik | `OpFlow_RulingRequest` |
 | ⛔ **A ruling has been made** | ⛔ **`OpFlow_RulingEnacted` — it reaches the HOW_IT_WORKS body, or it did not happen** |
 | ⚠️ **Aevi wants to write MUST / NEVER / ALWAYS** | ⛔ **`OpFlow_HardRule` — ask Erik first** |
+| ⛔ **Aevi authored ANY content** | ⛔ **`OpFlow_ContentLanding` — the six steps, every time** |
 | Handoff needed (context boundary, compaction) | `OpFlow_Handoff` |
 
 ---
@@ -363,3 +364,54 @@ silently.**
 
 ⬜ **Existing hard rules in Aevi's specs are not grandfathered — they were her call and should be re-read as
 proposals unless Erik ruled them.**
+
+---
+
+## ⛔ OpFlow_ContentLanding — THE SIX STEPS, EVERY TIME
+
+**Authority: `po/CCODE_20260906_content_landing_checklist.md`.** ⚠️ **This flow is the trigger-and-pointer;
+that document is the canon.** ⛑ **Erik, 2026-09-06: *"lock this into your PO role."***
+
+⛔ **EVERY ITEM IN IT WENT RED ON 2026-09-06.** ⚠️ Nothing theoretical, nothing defensive.
+
+### The six, after ANY content write, before saying it is done
+
+| # | |
+|---|---|
+| **1** | ⚑ **`node po/craft_lint.mjs`** — ⚠️ **BEFORE touching the source of truth, not after** |
+| **2** | ⛔ **ENACT IT** — a `HOW_IT_WORKS` BODY section rewritten in present tense **+ a LOG row with all FIVE columns** (date · change · intent · tested-by · impacts). ⚠️ For unbuilt work, *"⬜ not yet — unbuilt"* is a real answer |
+| **3** | ⛔ **a declared `bodyAnchor` is carried VERBATIM, ON ONE LINE** — ⚠️ **§62 matches per line, so a soft-wrapped anchor is not carried** |
+| **4** | ⛔ **NEW FIELD? DECLARE IT IN THE SCHEMA.** ⚠️ **The ability schema is CLOSED** — 31 crafts failed until `mechanic.meaning` was declared, and `directsSubstrate` failed the day before |
+| **5** | **regenerate what derives** — `skills_inject` · `atlas_inject` · `certify_counts` |
+| **6** | ⛔ **run `content_ci` AND `how_it_works`, and READ THE FAILURES — not the count.** ⚠️ *"A count is not a reading"* |
+
+### ⚠️ AND THE ONE THAT GENERALISES
+
+⛔ **WHEN YOU ADD AN OPT-OUT, A NULL OR AN EXCEPTION TO A CLASS OF RECORDS, SOME GATE IS PICKING A FIXTURE
+FROM THAT CLASS BY `.find()`.** ⚑ **It was true when written, and the exception makes it false SILENTLY —
+because `.find()` still returns something.**
+
+⬜ **After any sweep that tags N records with an exception: run `how_it_works` and read the failures for the
+word the exception uses.** ⚠️ **If a gate fails on a FIXTURE rather than a CLAIM, say so and hand it over.**
+⛔ **DO NOT EDIT THE GATE.** *"A content author editing the gate that judges her content is the shape this
+project has ruled against."*
+
+### ⛑ WHERE A GATE IS WRONG RATHER THAN THE CONTENT
+
+⚠️ **Four of nine reds on 09-06 were CCode's gates, not Aevi's content.** ⛔ **If a gate seems to demand
+something untrue, it probably is — say so rather than contorting content to satisfy it.**
+⚑ **The rule: a gate that pins prose, a position, a dial or a running total is the wrong gate.** ⬜ **A gate
+asserts a fact about the world that stays true when a number moves.**
+
+### ⛔ AND THE TWO RATCHETS ONLY GO DOWN
+
+**`§70` (`spec_ready` specs naming an existing export)** and **`content_ci` want-without-seed.**
+⚠️ **These fail on the BACKLOG GROWING, not on a change being wrong.** ⛑ **Landing a spec legitimately
+raises §70.** ➡️ **The response is to move the baseline WITH THE REASON AND THE NAME WRITTEN** — ⛔ **a
+number nudged with no note is what is forbidden, not the number moving.**
+
+⚠️ **`tests/how_it_works.mjs` has a baseline of ZERO and must return to zero.** ⛔ **Above zero is a debt
+with a name attached.**
+
+⬜ **If a gate blocks and you cannot tell whether it is content or gate: PUSH NOTHING, send the failing
+line.** ⚑ *"Guessing costs more than asking."*

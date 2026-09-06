@@ -13,6 +13,8 @@
 // backfill.js remains the XP/bonds/practice credit pass (extend, don't replace) —
 // reconcile is the umbrella for everything schema/feature-shaped that came after.
 
+import { addHolding } from "./holdings.js";        // R49: the forge the fiction built and the sheet never held
+import { canRaiseBand, raiseBand } from "./melee.js";   // R49: the fellowship the fiction already named
 import { worldPosForGenerated } from "./worldmap.js";
 import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
@@ -1211,6 +1213,79 @@ export const CHARACTER_STEPS = [
         placed.push(id);
       }
       return placed.length ? { warnings: [`placed ${placed.length} generated location(s) that had no worldPos: ${placed.join(", ")}`] } : {};
+    }
+  },
+  {
+    version: 38, id: "r49-fell-pell", playerFacing: true,
+    // ⛔ THE FICTION BUILT ALL THREE OF THESE AND THE RECORD CAUGHT NONE OF THEM (Erik 2026-09-06).
+    //
+    // ⚑ 1 · A HOLD THAT IS NOWHERE. Two of three holdings carry `locationId: null`, and Raven's Home has an
+    // authored place waiting for it — `the_old_warden_post`, whose name is literally "Raven's Home (the Old
+    // Warden Post)". ⚠️ An unplaced hold cannot be routed to, cannot send a caravan, and does not appear on
+    // the map. ⛑ The Threshold Post is deliberately NOT guessed: the fiction says "the ridge relay node" and
+    // no location matches that, so it is reported rather than invented.
+    //
+    // ⚑ 2 · THE FELL PELL IS A FORGE AND A FORGE IS AN ENTERPRISE. 23 mentions in the save, named in play at
+    // Millbrook, with the fellowship formally opened at it — "The forge named the Fell Pell; the fellowship
+    // formally opened." A place the story built and the sheet never held.
+    //
+    // ⚑ 3 · AND THE FELLOWSHIP IS A BAND. `canRaiseBand` reads READY for this character — 3 command slots,
+    // 3 holdings — and has done for some time, while `character.bands` stayed null because nothing surfaced
+    // it. ⚠️ The contingents are the roles the FICTION assigned, in the engine's own eight families
+    // (FUNCTION_FAMILIES), not a vocabulary I invented for them.
+    apply: (c, ctx) => {
+      const notes = [], warnings = [];
+      const locs = ctx?.content?.locations || {};
+
+      // ── 1 · put Raven's Home where the story put it
+      const raven = (c.holdings || []).find(h => h && /raven/i.test(String(h.name || "")) && !h.locationId);
+      if (raven && locs.the_old_warden_post) {
+        raven.locationId = "the_old_warden_post";
+        notes.push(`${raven.name} is on the map at last — the Old Warden Post, where the story always had it.`);
+      }
+      const stillNowhere = (c.holdings || []).filter(h => h && !h.locationId).map(h => h.name || h.id);
+      if (stillNowhere.length) warnings.push(`holding(s) with no place, and none guessed: ${stillNowhere.join(", ")}`);
+
+      // ── 2 · the forge, through addHolding so its shape is the engine's and not mine
+      let forge = (c.holdings || []).find(h => h && /fell pell/i.test(String(h.name || "")));
+      if (!forge && locs.millbrook) {
+        forge = addHolding(c, { id: "the-fell-pell", kind: "enterprise", name: "The Fell Pell",
+          locationId: "millbrook", steward: (c.npcRegistry || {}).pell ? "pell" : null,
+          obligation: "the fellowship's work, and the road drainage it promised", day: c.clock?.day ?? null });
+        if (forge) {
+          forge.describedAs = "forge";
+          notes.push("The Fell Pell stands in your name — the forge the fellowship opened at, on the sheet where it belongs.");
+        }
+      }
+
+      // ── 3 · the band the fiction already named
+      const gate = canRaiseBand(c, { cfg: ctx?.rules?.martial || {}, renownBand: c.renownBand || null });
+      const has = Array.isArray(c.bands) && c.bands.some(b => b && /fell pell/i.test(String(b.name || "")));
+      if (gate.ready && !has) {
+        // ⚠️ THE ROLES ARE THE FICTION'S OWN — "Calvar took the repair lead, Dara the logistics, Mara supply
+        // and comms, Aldric the accounts; Fendt named to the fellowship" — mapped onto the engine's families.
+        const roster = [
+          ["pell", ["SHAPE", "HARM"], "Pell Ran Marsh — the smith the forge is named for"],
+          ["calvar", ["SHAPE", "RESTORE"], "Calvar — repair lead"],
+          ["dara-holt", ["MOVE", "SUSTAIN"], "Dara Holt, the Ditch-Mother — logistics"],
+          ["mara-wells", ["KNOW", "SUSTAIN"], "Mara Wells — supply and comms"],
+          ["aldric", ["KNOW"], "Aldric — accounts"],
+          ["fendt", ["SHAPE", "KNOW"], "Fendt — filtration"],
+        ].filter(([id]) => (c.npcRegistry || {})[id]);
+        if (roster.length >= 3) {
+          const r = raiseBand(c, { id: "fellowship-of-the-fell-pell", name: "The Fellowship of the Fell Pell",
+            count: roster.length, quality: 2, from: "the-fell-pell", day: c.clock?.day ?? 0 });
+          if (r?.ok) {
+            // ⛔ CONTINGENTS ARE WHAT MAKES A BAND MORE THAN A NUMBER (CCODE-279) — groups of people who each
+            // DO something. Flat `{count, quality}` still works; this says what they are actually for.
+            r.band.contingents = roster.map(([id, does, what]) => ({
+              n: 1, quality: 2, does, what, npcId: id,
+            }));
+            notes.push(`The Fellowship of the Fell Pell rides under your name — ${roster.length} named, and the first band you have ever raised. ${gate.why}.`);
+          }
+        } else warnings.push(`the Fell Pell fellowship is in the fiction but only ${roster.length} of its named people are on the registry`);
+      }
+      return { notes, warnings };
     }
   },
   {    version: 30, id: "restore-generated-teacher-roles", playerFacing: true,

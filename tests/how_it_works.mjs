@@ -7155,6 +7155,87 @@ console.log("\n── §100 · the numbers are read, and a load on the road can 
     /You do NOT decide what happens to it/.test(gm100));
 }
 
+/* ═════ §101 — THE THREE SCALES, AND THE FELLOWSHIP THE FICTION ALREADY NAMED (R49) ═════ */
+// ⛔ EVERY RUNG OF THE COMMAND LADDER IS BUILT AND THE GM HAS NEVER BEEN TOLD ONE OF THEM. `commandSlots`,
+// `canRaiseBand`, `raiseBand`, `bandStrength` and `legionClash` all exist; the only surface any of them ever
+// had is the Holdings tab. ⚠️ Erik has qualified to raise a band for a long time — `canRaiseBand` reads READY
+// on 3 command slots and 3 holdings — and `character.bands` stayed null, because a capability the player can
+// reach but is never TOLD about is permission without initiative, the L2 defect this repo already names.
+console.log("\n── §101 · party, band, legion — and the fellowship the story raised before the sheet did ──");
+{
+  const ML101 = await import("../engine/melee.js");
+  const R101 = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch101 } = await import("./headless_content.mjs");
+  const C101 = await lch101();
+  const cfg101 = C101.rules?.martial || {};
+
+  // ⛑ THE LADDER ITSELF — three scales, and the thresholds a player is meant to be able to aim at.
+  const nobody = { level: 1, subAttributes: { presence: 1 }, holdings: [] };
+  const leader = { level: 31, subAttributes: { presence: 10 }, holdings: [{ id: "a", condition: "thriving" }, { id: "b", condition: "holding" }] };
+  check("§101: ⛔ PARTY — a slot count can never reach zero; +1 is always you",
+    ML101.commandSlots(nobody, { cfg: cfg101 }).slots >= 1);
+  check("§101: …and it is EARNED, by the three sources Erik named — level, presence, renown",
+    ML101.commandSlots(leader, { cfg: cfg101 }).slots > ML101.commandSlots(nobody, { cfg: cfg101 }).slots
+    && ML101.commandSlots(leader, { cfg: cfg101 }).earned.length >= 2);
+  check("§101: ⛑ …and every slot SAYS WHY it was earned — a cap with no reason is a wall, not a goal",
+    ML101.commandSlots(leader, { cfg: cfg101 }).earned.every(e => e.why && e.from));
+  check("§101: ⛔ BAND — a beginner cannot raise one, and the refusal NAMES what it would take",
+    ML101.canRaiseBand(nobody, { cfg: cfg101 }).ready === false
+    && /not yet a following/.test(ML101.canRaiseBand(nobody, { cfg: cfg101 }).why));
+  check("§101: …and HOLDINGS are a second road to it — a post is where a following comes from",
+    ML101.canRaiseBand(leader, { cfg: cfg101 }).ready === true);
+
+  // ⛔ AND THE GM IS TOLD, which is the half that never existed.
+  const reg101 = rd("engine/gm_registry.js"), gm101 = rd("engine/gm.js");
+  check("§101: ⛔ THE GM IS TOLD THE THREE SCALES — declared in the registry and consumed in gm.js",
+    /key: "commandDetail"/.test(reg101) && /commandSlots\(/.test(reg101)
+    && /const \{[^}]*\bcommandDetail\b[^}]*\} = ctx;/.test(gm101) && /if \(commandDetail\) world\.push/.test(gm101));
+  check("§101: ⚑ …and it names all three by name, so a player can aim at the next one",
+    /PARTY —/.test(reg101) && /BAND —/.test(reg101) && /LEGION —/.test(reg101));
+  check("§101: ⛑ …and the GM is told a missing rung is a GOAL, not a refusal",
+    /name what it would take — that is a goal, not a refusal/.test(gm101)
+    && /NEVER invent a fourth scale/.test(gm101));
+
+  // ── R49 step 38: the three things the fiction built that the record never caught
+  const save101 = {
+    reconcileVersion: 37, clock: { day: 20 }, level: 31, subAttributes: { presence: 10 },
+    holdings: [{ id: "raven", name: "Raven's Home", kind: "post", condition: "thriving", locationId: null },
+               { id: "t", name: "Threshold Post", kind: "post", condition: "thriving", locationId: null }],
+    npcRegistry: Object.fromEntries(["pell", "calvar", "dara-holt", "mara-wells", "aldric", "fendt"]
+      .map(id => [id, { id, name: id, level: 6 }])),
+  };
+  const out101 = R101.reconcile(save101, "character", { content: C101, rules: C101.rules });
+  const raven = save101.holdings.find(h => h.id === "raven");
+  check("§101: ⛔ A HOLD THAT IS NOWHERE CANNOT BE REACHED — Raven's Home is put where the story put it",
+    raven.locationId === "the_old_warden_post", String(raven.locationId));
+  check("§101: ⛑ …and the one with no place in the fiction is REPORTED, not guessed at",
+    save101.holdings.find(h => h.id === "t").locationId === null
+    && (out101.warnings || []).some(w => /none guessed/.test(String(w))));
+  check("§101: ⚑ THE FELL PELL IS A HOLDING — a forge the story named and the sheet never held",
+    save101.holdings.some(h => /fell pell/i.test(h.name) && h.kind === "enterprise"),
+    save101.holdings.map(h => `${h.name}:${h.kind}`).join(" · "));
+  const fell = (save101.bands || []).find(b => /fell pell/i.test(b.name));
+  check("§101: ⛔ AND THE FELLOWSHIP IS A BAND — raised through `raiseBand`, not written by hand",
+    !!fell && fell.condition === "fresh" && fell.count >= 3, JSON.stringify(fell && { n: fell.count, c: fell.condition }));
+  check("§101: ⚑ …with CONTINGENTS, because a band is not a number (CCODE-279) — each group DOES something",
+    Array.isArray(fell?.contingents) && fell.contingents.length >= 3
+    && fell.contingents.every(g => Array.isArray(g.does) && g.does.length),
+    (fell?.contingents || []).map(g => g.does.join("/")).join(" · "));
+  // ⚠️ AND THE FAMILIES ARE THE ENGINE'S OWN EIGHT, not a vocabulary invented for this band.
+  const FAM101 = (await import("../engine/functions.js")).FUNCTION_FAMILIES;
+  check("§101: ⚠️ …in the engine's OWN eight families — no vocabulary invented for one band",
+    (fell?.contingents || []).every(g => g.does.every(d => FAM101.includes(d))),
+    [...new Set((fell?.contingents || []).flatMap(g => g.does))].join(","));
+  check("§101: ⛑ …and it is announced — a following raised in silence is a number nobody asked for",
+    (out101.notes || []).some(n => /Fellowship of the Fell Pell/.test(String(n))));
+
+  // ⛔ AND IT RUNS ONCE. A step that re-raised the band every load would mint a following a day.
+  const before101 = (save101.bands || []).length;
+  R101.reconcile(save101, "character", { content: C101, rules: C101.rules });
+  check("§101: ⛔ it runs ONCE — a step that re-raised a band each load would mint a following a day",
+    (save101.bands || []).length === before101 && save101.holdings.filter(h => /fell pell/i.test(h.name)).length === 1);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

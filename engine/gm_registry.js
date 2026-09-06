@@ -32,6 +32,7 @@
 // a key gm.js consumes that no row provides can never land — that is the exact
 // failure §23 exists to stop (challengeTypes: 45 values, read by nothing).
 
+import { commandSlots, canRaiseBand } from "./melee.js";   // the three scales of company
 import { bearingsToKnown } from "./worldmap.js";   // SNG-386 §4.3: which way the road runs
 import { holdingsForGM, debtsForGM } from "./holdings.js";
 import { caravansForGM } from "./caravan.js";   // R49: loads on the road
@@ -205,6 +206,29 @@ export const GM_CONTEXT = [
   { key: "caravansDetail", builder: "caravan.caravansForGM (R49)", carries: ["loads on the road", "who walks with them", "the danger of that road"],
     reachedBy: "sending a load out of a hold (holdingOps caravan)", spec: "R49", views: ALL,
     build: (env) => caravansForGM(env.character, env.CONTENT.locations) },
+
+  // ⛔ THE THREE SCALES OF COMPANY, AND WHERE THIS CHARACTER STANDS ON THEM. Erik: "we need instructions
+  // added about what levels of party/band/legion even exist so a player can pursue building them up."
+  // ⚑ Every rung is built — `commandSlots`, `canRaiseBand`, `raiseBand`, `legionClash` — and the GM has
+  // never been told one of them, so it could not offer a following or name what it would take.
+  { key: "commandDetail", builder: "melee.commandSlots + canRaiseBand (R25/CCODE-272/CCODE-279)", carries: ["the three scales", "where the player stands", "what the next rung costs"],
+    reachedBy: "always — it is a fact about the character, and the rung they cannot yet reach is the point", spec: "§23", views: ALL,
+    build: (env) => {
+      const cfg = env.CONTENT?.rules?.martial || {};
+      const lead = commandSlots(env.character, { cfg, renownBand: env.character?.renownBand || null });
+      const band = canRaiseBand(env.character, { cfg, renownBand: env.character?.renownBand || null });
+      const bands = Array.isArray(env.character?.bands) ? env.character.bands : [];
+      const lines = [
+        `PARTY — you lead ${lead.slots} named ${lead.slots === 1 ? "person" : "people"} into a fight${lead.capped ? " (the most anyone leads for now)" : ""}. ${lead.why}.`,
+        `  earned by: ${lead.earned.map(e => e.why).join(" · ") || "nothing yet — level, presence 7+, and renown each add one"}`,
+        band.ready
+          ? `BAND — you can raise one: ${band.why}. A band is a following that fights as a unit, not as names.`
+          : `BAND — not yet: ${band.why}. It opens at 3 command slots OR 2 holdings that are not failing.`,
+      ];
+      if (bands.length) lines.push(`  raised: ${bands.map(b => `${b.name} (${b.condition}, ${b.count})`).join(" · ")}`);
+      lines.push("LEGION — bands meet bands. What decides it is NUMBERS AND QUALITY, not one hero's roll; a hero bends a battle, and never by more than their rung allows.");
+      return lines.join("\n");
+    } },
 
   // ---- shared by turn + ask + gambit ----
   // SNG-302 — WHAT IT FETCHES HERE. Aevi: "traders are NPCs not shops — the price model exists so the GM has

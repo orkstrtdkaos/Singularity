@@ -230,6 +230,24 @@ presences. ⛔ **What someone will NOT do is usually the most useful thing to kn
 
 ---
 
+### And the roads are why anyone is rich
+
+**The same eight units of raw material fetch 32 in the valley and 115 at the Gearlands Verge.** ⚑ **The
+difference is real, and it is the reason anyone leaves home with a cart.**
+
+⛔ **But the valley to the Verge is two hundred and thirty-six days on foot, through country that is
+dangerous the whole way** — and a road is only as safe as its ugliest mile. ⚠️ **A greenhorn walking it
+arrives with a tenth of what he set out with, and loses the people he brought nine times in ten.**
+
+⚑ **Through a waygate it is four days, and everything arrives.**
+
+➡️ ⛔ **SO TRADE IS NOT GATED BEHIND MONEY. IT IS GATED BEHIND WAYFARING.** ⚠️ **A Reach with a gate is rich
+and one without is poor, and that is not policy — it is distance.** ⚑ **It is why the Horizon-Walkers matter
+out of all proportion to their numbers, why the Precursor gates are the most valuable inheritance in the
+world, and why a road that stays open is worth defending by people who will never trade on it.**
+
+---
+
 ## VII · THE TWENTY-FOUR, AND WHERE THEY LIVE
 
 **Fourteen domains. Twenty-four traditions. Each has a place, and the place is not decoration** — a

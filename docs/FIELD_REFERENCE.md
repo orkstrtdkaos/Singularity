@@ -40,7 +40,7 @@ file is replaced.**
 | bucket | n | means |
 |---|---|---|
 | ✅ **READ** | **96** | a play-path file names it outside a comment |
-| ⛔ **DARK** | **15** | **no literal reader anywhere** — see the four lies below |
+| ⛔ **DARK** | **16** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **3** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
 
@@ -725,6 +725,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `backlashRungNone` | 3 | `root`×3 | ✅ READ | `progression.js`, `app.js` |
 | `interceptCondition` | 3 | `tree`×3 | ✅ READ | `battle_turn.js`, `intercept.js` |
 | `opensAccess` | 2 | `tree`×2 | ✅ READ | `progression.js` |
+| `directsSubstrate` | 2 | `tree`×2 | ⛔ DARK | — |
 | `downtime` | 2 | `root`×2 | ⚠️ CI-ONLY | _1 test/script only_ |
 | `ongoing` | 2 | `mechanic`×2 | ✅ READ | `craftmechanics.js`, `gm.js`, `gm_registry.js` |
 | `pierce` | 2 | `tree`×1 `mechanic`×1 | ✅ READ | `capabilities.js`, `skill_battle.js` |

@@ -2119,7 +2119,9 @@
     "duration": 720,
     "targets": 1,
     "damageType": "truth",
-    "note": "⚠️ HOBBLE, NOT DAMAGE — a CONDITIONAL kill. r1 undoes their standing; r2 makes it public and durable. The lethal outcome is DELAYED and never certain: the engine resolves it as a death only if the target's standing was their whole footing. That is the mechanical path — you do not roll damage, you remove what they were standing on."
+    "note": "⚠️ HOBBLE, NOT DAMAGE — a CONDITIONAL kill. r1 undoes their standing; r2 makes it public and durable. The lethal outcome is DELAYED and never certain: the engine resolves it as a death only if the target's standing was their whole footing. That is the mechanical path — you do not roll damage, you remove what they were standing on.",
+    "penetration": 3,
+    "_penetrationWhy": "⛔ LIGHT, AND THE ONE THAT IS NOT PHYSICAL. 'A Verist finds the one true thing a person has built their whole standing on not knowing — and says it, plainly.' ⚑ NO WARD ANSWERS BEING KNOWN. The penetration here is social and it should read as the same number, because the mechanic is the same: the layer does not apply."
    },
    "rankDeltas": [
     {
@@ -2161,7 +2163,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "reach_falsehood_truth",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ EVERY ONE OF THESE TRADITIONS WAS AUDITED BEFORE THE GATE EXISTED AND REPORTED CLEAN. **The gate found in seconds what four corrections and a written rule did not.**"
+   "_theHabit_20260830": "⚠️ Articles stripped — `craft_lint` check 10. ⛔ EVERY ONE OF THESE TRADITIONS WAS AUDITED BEFORE THE GATE EXISTED AND REPORTED CLEAN. **The gate found in seconds what four corrections and a written rule did not.**",
+   "_r45b_20260906": "⛔ R45b (Erik 2026-09-04): 'rank 3 is NOT absolute — the corpus owes a handful of `penetration: 3` crafts.' ⚠️ MEASURED BEFORE AUTHORING: 421 crafts and exactly ONE carried penetration (`radiant_lance`, 2), while `soakRankAt: [0,3,6]` means ANY foe with soak ≥ 6 already has a rank-3 layer. ⛔ SO THE BEST WARD IN THE GAME WAS UNPIERCEABLE BY EVERY CRAFT IN IT — and so was the third layer of ordinary armour, on foes nobody had noticed it on. ⚑ FIVE, NOT A SWEEP: one per domain at most, T5 only, so answering the best ward is a REAL BUILD CHOICE rather than a default. ⚠️ AND EACH ONE ALREADY DESCRIBED GOING THROUGH RATHER THAN AT — the field is a transcription of what the craft says it does. ⛔ THIS PROJECT HAS RULED THREE TIMES AGAINST A WALL THE GAME CANNOT ROUTE AROUND: `keep` capped at defence 3, `minTakeShare` guaranteeing a raid takes something."
   },
   {
    "schemaVersion": 1,
@@ -2237,7 +2240,9 @@
     "duration": 2160,
     "targets": 1,
     "damageType": "deception",
-    "note": "⚠️ THE SLOWEST KILL IN THE CATALOG — 90 days of held duration. A HOBBLE that becomes lethal by attrition, not by a strike. It is answerable at any point by anyone who restores the record, which is the counterplay."
+    "note": "⚠️ THE SLOWEST KILL IN THE CATALOG — 90 days of held duration. A HOBBLE that becomes lethal by attrition, not by a strike. It is answerable at any point by anyone who restores the record, which is the counterplay.",
+    "penetration": 3,
+    "_penetrationWhy": "⛔ DARK — 'its kill is ADMINISTRATIVE. You do not replace a person for an evening; you replace them until the replacement is the one people mean.' ⚠️ A ward protects a person. It does not protect WHO THEY ARE TAKEN TO BE, and there is nothing to interpose."
    },
    "rankDeltas": [
     {
@@ -2285,7 +2290,8 @@
    "_nameWas": "The Perfect Erasure",
    "_idWas": "the_perfect_erasure",
    "_powerSystemWas": "reach_falsehood_truth",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_r45b_20260906": "⛔ R45b (Erik 2026-09-04): 'rank 3 is NOT absolute — the corpus owes a handful of `penetration: 3` crafts.' ⚠️ MEASURED BEFORE AUTHORING: 421 crafts and exactly ONE carried penetration (`radiant_lance`, 2), while `soakRankAt: [0,3,6]` means ANY foe with soak ≥ 6 already has a rank-3 layer. ⛔ SO THE BEST WARD IN THE GAME WAS UNPIERCEABLE BY EVERY CRAFT IN IT — and so was the third layer of ordinary armour, on foes nobody had noticed it on. ⚑ FIVE, NOT A SWEEP: one per domain at most, T5 only, so answering the best ward is a REAL BUILD CHOICE rather than a default. ⚠️ AND EACH ONE ALREADY DESCRIBED GOING THROUGH RATHER THAN AT — the field is a transcription of what the craft says it does. ⛔ THIS PROJECT HAS RULED THREE TIMES AGAINST A WALL THE GAME CANNOT ROUTE AROUND: `keep` capped at defence 3, `minTakeShare` guaranteeing a raid takes something."
   },
   {
    "id": "wrong_wound",

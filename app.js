@@ -10,7 +10,7 @@ import { recordDeed, standingWith, reputationSummary } from "./engine/reputation
 import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL, aptitudeStandingLine } from "./engine/playerprofile.js";
-import { gmTurn, reNarrateRich, parseIntent, gmAsk, generateBio, suggestBuild, suggestNextCrafts, extractGambit, sanitizeScene, reconcileSceneIdentity, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS } from "./engine/gm.js";
+import { gmTurn, refusalSignal, reNarrateRich, parseIntent, gmAsk, generateBio, suggestBuild, suggestNextCrafts, extractGambit, sanitizeScene, reconcileSceneIdentity, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS } from "./engine/gm.js";
 import { buildBattlePrompt, battleKey } from "./engine/battleprompt.js"; // SNG-400b: the battle image is a prompt BUILD, not a string join
 import { namesToAvoid, namesMatch } from "./engine/namematch.js"; // CCODE-166: the codebase already knew how to match a fuller name to a known one
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185
@@ -123,7 +123,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.368";
+const APP_VERSION = "1.9.369";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6477,6 +6477,19 @@ function applyTurn(turn, resolution, playerWords = null) {
   // ⛔ SNG-358 — THE ENGINE WAS BUILT AND UNREACHABLE. `testOnlyExports` caught it: holdings.js exported a
   // whole model whose only caller was a test, which is precisely the writer-with-no-reader shape SNG-353
   // and SNG-342 were about. The ratchet found my own instance of the bug I spent the day fixing.
+  // ⛔ SPEC_gm_does_not_decline_state §3c — THE ONLY GM FAILURE WITH NO SIGNAL. A refusal resolves cleanly, in
+  // fluent apologetic prose, with no state change anywhere; a wrong op gets fixed and a refusal gets BELIEVED.
+  // ⚠️ A COUNT, NOT A BLOCK. The turn stands — the player keeps their beat — and the rate becomes visible.
+  applyStep("refusalSignal", () => {
+    const sig = refusalSignal(turn);
+    if (!sig) return;
+    character._gmRefusals = [...(character._gmRefusals || []), {
+      at: new Date().toISOString(), kind: sig.kind, phrase: String(sig.phrase).slice(0, 60),
+      opsEmitted: sig.opsEmitted.slice(0, 6), locationId: location?.id || null,
+    }].slice(-20);
+    console.warn(`[gm] REFUSAL SIGNAL (${sig.kind}): "${sig.phrase}" — ops emitted: ${sig.opsEmitted.join(", ") || "NONE"}`);
+  });
+
   applyStep("holdingOps", () => {
     for (const op of (turn.holdingOps || []).slice(0, 4)) {
       const kind = String(op?.op || "").toLowerCase();

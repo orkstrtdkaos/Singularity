@@ -6291,6 +6291,75 @@ console.log("\n── §90 · the kit is retired on a dial · a save is cleaned 
       rows.filter(r => (r.tiers || []).some(t => t.free)).every(r => r.tiers[0].free === true));
   }
 }
+
+/* ═════ §91 — THE GM DOES NOT DECLINE STATE (SPEC_gm_does_not_decline_state, 2026-09-05) ═════ */
+// ⛔ The GM told Erik it could not grant a holding and sent him to the Repair panel — while `holdingOps`
+// with `op: "claim"` sat in the same contract it was reading from, three lines above the instruction that
+// says *"WHAT YOU HOLD IS STATE… emit claim"*. It also named `characterDeltas`, which carries health,
+// energy, xp and inventory and cannot carry a holding.
+//
+// ⚑ ERIK'S INVERTING QUESTION, ANSWERED BY MEASUREMENT: is `holdingOps.claim` reachable from a normal beat?
+// YES, at every link. `GM_SYSTEM` is one unconditional block carrying the schema AND the instruction;
+// `PROSE_SYSTEM` is only the degraded fallback for a broken reply (`opsLost: true`); and `applyTurn` runs
+// `applyStep("holdingOps")` beside `npcUpdates` and `factUpdates`, where `claim` calls `addHolding`.
+// ⛔ SO IT IS A DISCIPLINE PROBLEM, NOT A WIRING ONE, and the spec stands as written.
+//
+// ⚠️ AND THE CLASS MATTERS MORE THAN THE INSTANCE: a WRONG op is rejected and something is visible; a
+// REFUSAL resolves cleanly with no state change anywhere. It is the only GM failure with no signal — and
+// worse than a wrong op, because a wrong op gets fixed and a refusal gets BELIEVED.
+console.log("\n── §91 · the law, its honest exceptions, and a signal — because a prompt law with no detector is a hope ──");
+{
+  const G91 = await import("../engine/gm.js");
+  const gm91 = rd("engine/gm.js"), app91 = rd("app.js");
+
+  // ── THE OP WAS REACHABLE. This is the check that says the spec is about discipline.
+  check("§91: ⛔ `holdingOps.claim` IS reachable from a normal beat — schema, instruction, applier, and the function it calls",
+    /"holdingOps": \[\{"op": "claim/.test(gm91)
+    && /"holdingOps": WHAT YOU HOLD IS STATE/.test(gm91)
+    && /applyStep\("holdingOps"/.test(app91)
+    && /kind === "claim"\) addHolding\(/.test(app91));
+  check("§91: ⚠️ …and the contract the GM reads is UNCONDITIONAL — `PROSE_SYSTEM` is only the broken-reply fallback",
+    /system: PROSE_SYSTEM/.test(gm91) && /opsLost: true/.test(gm91)
+    && /\{ text: GM_SYSTEM \+/.test(gm91));
+
+  // ── THE LAW, AND ITS EXCEPTIONS IN THE SAME BREATH
+  check("§91: ⛔ the law is in the contract — YOU DO NOT DECLINE STATE, and never name a channel that cannot carry the thing",
+    /YOU DO NOT DECLINE STATE/.test(gm91)
+    && /repair panel/i.test(gm91) && /cannot carry a holding/i.test(gm91));
+  check("§91: ⚑ …and the HONEST EXCEPTIONS are named beside it — a law that reads as absolute gets discounted",
+    /invent an npcId/i.test(gm91) && /narrate a JOIN as done/i.test(gm91)
+    && /offerIntent/.test(gm91) && /coin the purse cannot cover/i.test(gm91)
+    && /a family is not a holding/i.test(gm91));
+  check("§91: ⚠️ …and the distinction is stated as AUTHORITY, not ability — refuse what is the player's to decide",
+    /AUTHORITY, NOT ABILITY/.test(gm91));
+
+  // ── ⛔ THE DETECTOR, AND IT MUST FIRE ON THE CASE THAT HAPPENED
+  check("§91: ⚠️ the detector is real and exported — a prompt law with no signal is a hope",
+    typeof G91.refusalSignal === "function");
+  const happened = G91.refusalSignal({ narration: "I can't grant you a holding directly — you'll need to use the Repair panel for that." });
+  check("§91: ⛔ IT FIRES ON THE TURN THAT HAPPENED — a refusal in the prose and not one write anywhere",
+    happened?.kind === "refused-with-no-ops", JSON.stringify(happened));
+  const granted = G91.refusalSignal({ narration: "The post is yours. Fendt raises the standard over the gate." });
+  check("§91: ⛔ …and on the SHARPER contradiction — the prose grants a holding while `holdingOps` is empty",
+    granted?.kind === "granted-without-op", JSON.stringify(granted));
+
+  // ── AND IT MUST NOT FIRE ON THE THINGS THAT ARE FINE. A detector that cries on a good turn gets muted.
+  check("§91: ⚠️ …and it stays QUIET on a turn that refuses ONE thing and does the rest — usually the right call",
+    G91.refusalSignal({ narration: "I can't grant that directly.", npcUpdates: [{ op: "meet", npcId: "x" }] }) === null);
+  check("§91: …quiet when the prose grants AND the op is emitted",
+    G91.refusalSignal({ narration: "The post is yours.", holdingOps: [{ op: "claim", id: "p" }] }) === null);
+  check("§91: …quiet on an ordinary beat, and on a legitimate AUTHORITY refusal that hands the player the choice",
+    G91.refusalSignal({ narration: "You walk the ridge line as the light goes.", deeds: [{ description: "walked" }] }) === null
+    && G91.refusalSignal({ narration: "That is yours to decide — I won't choose it for you.", choices: [{ text: "a" }] }) === null);
+
+  // ── ⛔ AND THE SIGNAL HAS A CALLER, which is the whole point of building it.
+  check("§91: ⛔ the app RECORDS it — a detector nothing calls is the defect this spec is about",
+    /applyStep\("refusalSignal"/.test(app91) && /_gmRefusals/.test(app91)
+    && /import \{ gmTurn, refusalSignal,/.test(app91));
+  check("§91: ⚠️ …as a COUNT, not a block — the turn stands and the player keeps their beat",
+    !/throw|return false/.test((app91.match(/applyStep\("refusalSignal"[\s\S]{0,600}?\}\);/) || [""])[0])
+    && /slice\(-20\)/.test(app91));
+}
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

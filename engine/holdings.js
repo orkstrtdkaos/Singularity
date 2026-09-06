@@ -26,6 +26,14 @@ import { locationDensity } from "./substrate.js";   // Q18: the ground scales an
 import { legionClash, contingentsFromPeople } from "./melee.js";   // R46a: a detected raid is a FIGHT, resolved unattended
 
 export const HOLDING_KINDS = ["post", "enterprise"];
+/** ⚠️ WHICH SIDE AN UNKNOWN WORD FALLS ON. A holding that PRODUCES is an enterprise; everything else holds
+ *  ground and is a post — which is the safe default, because a post costs no upkeep and cannot bankrupt
+ *  someone for a word the GM chose. ⛔ Deliberately short: this is a tiebreaker, not a taxonomy. */
+/** ⛔ WORDS THAT NAME SOMETHING THAT IS NOT A PLACE. Refused outright, never coerced — SNG-358, and Aevi's
+ *  rule that a family is not a holding. ⚠️ This is the line between "the fiction called it a waystation"
+ *  (a description of a place, kept) and "the fiction called it a household" (not a place at all). */
+const NOT_A_HOLDING = ["household", "family", "kin", "person", "people", "company", "band", "retinue"];
+const ENTERPRISE_WORDS = ["mine", "forge", "mill", "quarry", "workshop", "smithy", "kiln", "fishery", "farm", "works", "enterprise"];
 
 /** ⚠️ ORDERED WORST TO BEST — the index IS the condition, so "better"/"worse" is arithmetic rather than a
  *  lookup table that some future caller gets backwards. */
@@ -47,7 +55,20 @@ export function ensureHoldings(character) {
  *  rather than minting a second one. */
 export function addHolding(character, { id, kind = "post", name = null, locationId = null, steward = null, obligation = null, day = null, fromAssignment = null, rename = false } = {}) {
   ensureHoldings(character);
-  if (!id || !HOLDING_KINDS.includes(kind)) return null;
+  if (!id) return null;
+  // ⚠️ AN UNKNOWN KIND IS A DESCRIPTION, NOT A REFUSAL. `post` and `enterprise` are the mechanical
+  // dichotomy — one holds ground, the other produces — and the fiction will always have richer words:
+  // a waystation, a forge, a relay, a shrine-house. ⛔ Dropping a claim because the GM said "waystation"
+  // cost Erik the Whistling Woman Post three times over, silently. The word is KEPT as `describedAs` and
+  // the record is filed under the kind it behaves like.
+  const said = String(kind || "").toLowerCase();
+  // ⛔ AND SOME WORDS ARE STILL REFUSED, because the refusal is about AUTHORITY rather than vocabulary:
+  // SNG-358 — a household is not a holding, and "a family is not a holding" is Aevi's line. These name
+  // something that is NOT A PLACE, and coercing one into a post would let the GM claim a family as ground.
+  if (NOT_A_HOLDING.some(w => said.includes(w))) return null;
+  const describedAs = HOLDING_KINDS.includes(said) ? null : (String(kind || "").trim() || null);
+  if (!HOLDING_KINDS.includes(said)) kind = ENTERPRISE_WORDS.some(w => said.includes(w)) ? "enterprise" : "post";
+  else kind = said;
   let h = character.holdings.find(x => x.id === id);
   if (!h) {
     // ⛔ THE LINK LIVES ON THE HOLDING, NOT THE ASSIGNMENT. The assignment is FINITE — it has a `done` —
@@ -55,13 +76,14 @@ export function addHolding(character, { id, kind = "post", name = null, location
     // becomes interesting: the moment the work completes is the moment you want to know what it built.
     // ⛔ AND NOT A DERIVED JOIN on npcId + charge — that works today and breaks the first time a steward
     // is replaced, which is precisely the event SNG-355 exists to model.
-    h = { id, kind, name: name || id, locationId, steward, obligation, condition: "holding", claimedDay: day, lastMovedWorldCount: null, history: [], ...(fromAssignment ? { fromAssignment } : {}) };
+    h = { id, kind, name: name || id, locationId, steward, obligation, condition: "holding", claimedDay: day, lastMovedWorldCount: null, history: [], ...(describedAs ? { describedAs } : {}), ...(fromAssignment ? { fromAssignment } : {}) };
     character.holdings.push(h);
   } else {
     // ⛔ Erik 2026-09-05: "Stillwater's Trouble was named such, but it reverted back to Raven's Home almost immediately." The
     // narrator re-claims a known hold every few turns with the name it sees in its own block, and this line took it. A name
     // is the player's; a re-claim keeps it unless the op says `rename`.
     if (name && (rename || !h.name)) h.name = name;
+    if (describedAs && !h.describedAs) h.describedAs = describedAs;
     if (locationId) h.locationId = locationId;
     if (steward !== null) h.steward = steward;
     if (obligation) h.obligation = obligation;

@@ -6317,7 +6317,7 @@ console.log("\n── §91 · the law, its honest exceptions, and a signal — b
     /"holdingOps": \[\{"op": "claim/.test(gm91)
     && /"holdingOps": WHAT YOU HOLD IS STATE/.test(gm91)
     && /applyStep\("holdingOps"/.test(app91)
-    && /kind === "claim"\) addHolding\(/.test(app91));
+    && /kind === "claim"\) \{ const made = addHolding\(/.test(app91));   // the call now CAPTURES the return, because a null was being ignored
   check("§91: ⚠️ …and the contract the GM reads is UNCONDITIONAL — `PROSE_SYSTEM` is only the broken-reply fallback",
     /system: PROSE_SYSTEM/.test(gm91) && /opsLost: true/.test(gm91)
     && /\{ text: GM_SYSTEM \+/.test(gm91));
@@ -6633,6 +6633,42 @@ console.log("\n── §95 · the arrears reach the purse through the one door i
   RC95.reconcile(fewer, "character", { content: C95, rules: C95.rules, ...C95 });
   check("§95: ⚠️ …so a character with a different ledger is paid THEIR number, not Silas's",
     fewer.purse.crystal === 880 + 16, `crystal ${fewer.purse.crystal} (880 + 2×8)`);
+}
+
+
+/* ═════ §96 — A CLAIM IS NOT REFUSED OVER A WORD, AND A HOUSEHOLD IS STILL NOT A HOLDING ═════ */
+// ⛔ THREE SILENT REFUSALS STOOD BETWEEN THE GM'S CLAIM AND ERIK'S SHEET, and he hit all three in a row:
+// a missing kebab id, a dropped op nobody logged, and — the last one — `kind` not being "post" or
+// "enterprise". The GM called the Whistling Woman "a warden-staffed waystation on the moorland relay
+// network", which is a true and useful sentence, and the claim died on the word.
+// ⛑ A HOLDING IS A POST OR AN ENTERPRISE — a mechanical dichotomy, not a vocabulary. The fiction will always
+// have richer words, and the honest response is to KEEP the word and file the record under the kind it
+// behaves like. ⚠️ But not every word: SNG-358 holds that a household is not a holding, and my first version
+// accepted one. The line is whether the word names a PLACE.
+console.log("\n── §96 · the fiction's word is kept, the record is filed, and a family is still not a place ──");
+{
+  const H96 = await import("../engine/holdings.js");
+  const mk = (kind) => { const c = { holdings: [] }; return H96.addHolding(c, { id: "p", kind, name: "A Place" }); };
+
+  check("§96: ⛔ a claim survives the fiction's own word — \"waystation\" files as a post and the word is KEPT",
+    mk("waystation")?.kind === "post" && mk("waystation")?.describedAs === "waystation");
+  check("§96: …and a word that PRODUCES falls the other way — a forge is an enterprise",
+    mk("forge")?.kind === "enterprise" && mk("mine")?.kind === "enterprise");
+  check("§96: …and an absent kind is a POST, which is the safe default — a post costs no upkeep",
+    mk(undefined)?.kind === "post" && mk("")?.kind === "post");
+  check("§96: ⚠️ the known kinds still mean themselves and carry no description",
+    mk("post")?.kind === "post" && !mk("post")?.describedAs && mk("enterprise")?.kind === "enterprise");
+
+  check("§96: ⛔ BUT A HOUSEHOLD IS STILL NOT A HOLDING (SNG-358) — the refusal is about AUTHORITY, not vocabulary",
+    mk("household") === null && mk("a family") === null && mk("retinue") === null);
+  check("§96: …and a claim with no id at all is still refused — an id can come from a name, not from nothing",
+    H96.addHolding({ holdings: [] }, { kind: "post", name: "x" }) === null);
+
+  // ⚠️ AND A REFUSAL THAT STILL HAPPENS MUST BE LOUD. Every one of the three was silent, which is why it took
+  // three rounds to find them: a dropped op and an applied one looked identical from outside.
+  const app96 = rd("app.js");
+  check("§96: ⚠️ …and every remaining refusal SAYS SO — a silent drop is why this took three rounds to find",
+    /CLAIM REFUSED by addHolding/.test(app96) && /DROPPED — no id and no name/.test(app96));
 }
 
 /* ══════════ REPORT ══════════ */

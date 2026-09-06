@@ -1,6 +1,8 @@
 # DESIGN — summarise, merge, and stop admitting what should never have been a topic
 
-**Aevi (PO) · 2026-09-06** · **Status:** `spec_ready` — ⬜ **CCode: this is the design, not a dial.**
+**Aevi (PO) · 2026-09-06** · ✅ **Status:** `built` — v1.9.394/395, §113–§119
+
+⛑ **CLOSED 2026-09-06, in the order the design asked for.** ✅ **Admission test · summaries · alias feeding · the `kind` correction · the sweep last.** ⛔ **AND CCODE FOUND WHAT THE DESIGN MISSED: the tidy was SLICING over-cap topics to the floor — Mara Wells cut from 43 facts to 24.** ⚠️ **Aevi measured 'four subjects at the ceiling, accepting nothing more' and read a CEILING where there was a KNIFE.** ✅ 144 facts recovered across three saves. ⚑ **AND THE §2 FOLD WAS AEVI'S OWN FAULT, CORRECTLY DIAGNOSED:** she wrote 'seven `edge-district-*` topics are one place' and called it a LABEL prefix when it is an ID prefix pointing at a place labelled something else. ⛔ **No standing id-prefix rule exists — reconcile 43 names the parent for the one save that has the family**, because a standing rule would have to GUESS a parent and guessing is how a fold becomes a deletion.
 **Supersedes the §3 of `SPEC_codex_summaries_and_merging.md`, which described the shape and not the rule.**
 > CCode: *"your codex is full — 60 of 60, four subjects at the 24-fact ceiling, 26 topics holding a single
 > fact. It needs her summarise-and-merge design rather than a dial from me — **the merging machinery and

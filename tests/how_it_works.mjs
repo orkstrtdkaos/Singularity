@@ -7236,6 +7236,47 @@ console.log("\n── §101 · party, band, legion — and the fellowship the st
     (save101.bands || []).length === before101 && save101.holdings.filter(h => /fell pell/i.test(h.name)).length === 1);
 }
 
+/* ═════ §102 — THE COUNTER THAT EXISTS TO DECIDE THIS WAS NEVER ASKED ═════ */
+// ⛔ `saveCharacter` stamps `rev = (c.rev || 0) + 1` on every write, and its own comment says why: "a
+// monotonic rev so cross-device load-latest can tell which copy is fresher." ⚠️ `resolveSaveConflict` read it
+// ONLY to break a tie on `updatedAt` — two writes landing in the same millisecond — which real writes
+// essentially never produce. The signal was computed, stored, synced across devices, and consulted in the one
+// case where it cannot help.
+// ⛔ MEASURED ON A REAL SAVE, TWICE: the good copy was rev 1834; the stale tab that overwrote it was rev 1790,
+// then 1797 — the counter went BACKWARDS by 44 while the wall clock went FORWARDS by an hour, and the clock
+// won both times. Erik lost a level and two deeds to it twice, and my first restore lost to it a third time
+// because I put the content back carrying its original timestamp.
+console.log("\n── §102 · a revision counter cannot go backwards on a genuine descendant; a clock can ──");
+{
+  const SY = await import("../engine/sync.js");
+  const reason = (l, r) => SY.resolveSaveConflict(l, r).reason;
+
+  // ⛔ THE EXACT SHAPE THAT COST TWO RESTORES: fewer writes, later clock.
+  check("§102: ⛔ A STALE TAB DOES NOT WIN ON ITS CLOCK — fewer writes, later stamp, and it loses",
+    reason({ rev: 1797, updatedAt: 1788660658829 }, { rev: 1884, updatedAt: 1788654464224 }) === "remote-newer");
+  check("§102: …and it holds in the other direction too — a stale REMOTE never beats a live local",
+    reason({ rev: 200, updatedAt: 1000 }, { rev: 100, updatedAt: 9_999_999 }) === "local-newer");
+
+  // ⛑ AND THE MARGIN IS WHAT KEEPS IT HONEST. Two devices at different save rhythms are not evidence of
+  // staleness, so anything under the lead still falls through to the clock exactly as it did before.
+  check("§102: ⛑ a SMALL rev difference is not evidence — the clock still decides, as it always did",
+    reason({ rev: 100, updatedAt: 1000 }, { rev: 103, updatedAt: 2000 }) === "remote-newer"
+    && reason({ rev: 103, updatedAt: 2000 }, { rev: 100, updatedAt: 1000 }) === "local-newer");
+  check("§102: …and the lead is NAMED, not a bare number buried in an expression",
+    Number.isFinite(SY.REV_LEAD) && SY.REV_LEAD > 0, String(SY.REV_LEAD));
+  check("§102: ⚠️ …and it can still FAIL — a lead one under the margin must not flip the answer",
+    reason({ rev: 100, updatedAt: 9_999_999 }, { rev: 100 + SY.REV_LEAD - 1, updatedAt: 1 }) === "local-newer");
+
+  check("§102: …a missing copy on either side is still answered without a comparison",
+    reason(null, { rev: 5, updatedAt: 1 }) === "no-local" && reason({ rev: 5, updatedAt: 1 }, null) === "no-remote");
+
+  // ⚑ AND THE LOSER IS STILL PRESERVED. Deciding differently must not start throwing work away: a genuine
+  // both-advanced conflict is still a conflict, and the caller still keeps the losing copy.
+  const both = SY.resolveSaveConflict({ rev: 100, syncedAt: 500, updatedAt: 1000 }, { rev: 140, updatedAt: 900 });
+  check("§102: ⚑ …and a both-advanced conflict is STILL a conflict, so the losing copy is never just dropped",
+    both.conflict === true && !!both.loser);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

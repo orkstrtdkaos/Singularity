@@ -163,13 +163,31 @@ export async function fetchRemoteCharacter(playerKey, characterId) {
  *  conflict is only flagged when BOTH sides advanced past a known common sync point
  *  (syncedAt) — then the loser must be preserved, never silently dropped.
  *  Returns { winner, loser, conflict, reason }. loser is non-null ONLY on conflict. */
+/** ⚠️ HOW FAR AHEAD IS EVIDENCE RATHER THAN NOISE. Below this, two copies are simply two devices saving at
+ *  different rhythms and the clock decides; above it, one copy demonstrably has writes the other never saw. */
+export const REV_LEAD = 8;
+
 export function resolveSaveConflict(local, remote) {
   if (!remote) return { winner: local, loser: null, conflict: false, reason: "no-remote" };
   if (!local) return { winner: remote, loser: null, conflict: false, reason: "no-local" };
   const lu = local.updatedAt || 0, ru = remote.updatedAt || 0;
   const synced = local.syncedAt || 0;
   const conflict = synced > 0 && lu > synced && ru > synced && lu !== ru; // both moved since last common sync
-  const remoteWins = ru > lu || (ru === lu && (remote.rev || 0) > (local.rev || 0));
+  // ⛔ A DECISIVE REV LEAD BEATS THE CLOCK, because `rev` is the stronger evidence and was never consulted.
+  // `saveCharacter` increments it on every write — "a monotonic rev so cross-device load-latest can tell
+  // which copy is fresher" — and this function only ever read it to break an `updatedAt` TIE, which two real
+  // writes essentially never produce. ⚠️ Measured on a real save: the good copy was rev 1834 and the stale tab
+  // that overwrote it twice was rev 1790 then 1797 — the counter went BACKWARDS by 44 while the clock went
+  // forwards by an hour, and the clock won both times.
+  // ⚑ A COUNTER CANNOT GO BACKWARDS ON A GENUINE DESCENDANT. A clock can: skew, or a tab that resumes from
+  // stale state and stamps `now` over history it never had.
+  // ⛑ THE MARGIN IS WHAT KEEPS THIS HONEST. Two devices that genuinely diverge both increment, and a small
+  // difference means only that one autosaved more often — that is not evidence, so it falls through to the
+  // clock exactly as before.
+  const lr = local.rev || 0, rr = remote.rev || 0;
+  const remoteWins = (rr > lr + REV_LEAD) ? true
+    : (lr > rr + REV_LEAD) ? false
+    : (ru > lu || (ru === lu && rr > lr));
   const winner = remoteWins ? remote : local;
   const loser = remoteWins ? local : remote;
   return { winner, loser: conflict ? loser : null, conflict, reason: remoteWins ? "remote-newer" : "local-newer" };

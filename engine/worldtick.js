@@ -15,7 +15,7 @@ import { advanceSeeking } from "./seeking.js"; // CCODE-222: a reason for the en
 import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
-import { advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura } from "./holdings.js";
+import { queueFeatureOffers, advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura } from "./holdings.js";
 import { tickCaravans } from "./caravan.js";   // R49: the road runs itself, and can be robbed
 import { meaningDensity, peoplePresentAt } from "./substrate.js";   // R46b: what the pilgrims come for   // SNG-358: holdings ride the same world-gated pass
 import { commitGrowth } from "./npcsheet.js";   // ✅ R37: growth writes, on the tick
@@ -438,7 +438,17 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     const before = h.condition;
     // ⚠️ AN UNKEPT HOLDING DRIFTS. That is what makes it a claim on your attention rather than scenery,
     // and what makes a steward's departure (SNG-355) cost something.
-    advanceHolding(h, h.steward ? "stall" : "problem", count, null, holdEffects);
+    // ⛔ TIME ALONE SLIPS SLOWLY. This slipped an unkept hold a rung on EVERY pass while a kept one took
+    // four to climb — a place fell four times faster than it rose, and Erik felt it as "too fast". The
+    // neglect slip now runs the same counter shape the climb does: `passesPerSlip` (10 ≈ 30 days).
+    // ⚑ An EVENT — a raid that takes goods — still slips at once, in `resolveRaid`; that is the difference.
+    let outcome = "stall", why = null;
+    if (!h.steward) {
+      const per = Math.max(1, Number(content?.rules?.economy?.holdStore?.growth?.passesPerSlip) || 10);
+      h.neglectPasses = (Number(h.neglectPasses) || 0) + 1;
+      if (h.neglectPasses >= per) { outcome = "problem"; why = `nobody kept it for ${per} passes`; h.neglectPasses = 0; }
+    } else if (h.neglectPasses) delete h.neglectPasses;
+    advanceHolding(h, outcome, count, why, holdEffects);
     const line = holdingNews(h, before, holdEffects);
     if (line) news.push(line);
     // ✅ R37a: A CONDITION STEP ON A HOLD THEY KEEP IS ONE LEVEL — stamped on the keeper's record.
@@ -464,6 +474,13 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     if (st && grew) st.grew = grew;
     for (const t of storeNews(h, st)) news.push(t);
     moved++;
+  }
+  // ⚑ SPEC_world_guesses — THE RECORD MAY BE MISSING SOMETHING THE FICTION ALREADY SAID. Offered, never
+  // written; at most one per hold per pass; a No is remembered.
+  for (const o of queueFeatureOffers(character, { locations: content?.locations || {},
+    cfg: content?.rules?.economy?.holdStore ? { ...content.rules.economy.holdStore, features: content.rules.economy.holdFeatures || null } : null,
+    worldCount: count })) {
+    news.push(`${o.holdingName} reads as if it has ${o.kind === "sentries" ? "sentries" : "a " + o.kind} — the record does not say so. See Holdings.`);
   }
   // ⚑ R49 — AND THE CARAVANS ON THE ROAD, on the same cadence and for the same reason: a caravan is worth
   // having rather than a trip you take precisely because it runs while you are not looking. ⛔ It can be

@@ -128,11 +128,21 @@ export function seedAliasesFromEntity(t, entities = null) {
   return (t.aliases || []).length - n;
 }
 
+/** R49 — does this update attach to a story that already exists? A link to a quest the character holds or
+ *  an arc the world has is a story; a bare kebab id the GM coined is not. */
+function linksToStory(u, ctx = {}) {
+  const links = (Array.isArray(u.links) ? u.links : []).map(l => slugify(String(l)));
+  const q = ctx.questIds instanceof Set ? ctx.questIds : new Set(ctx.questIds || []);
+  const a = ctx.arcIds instanceof Set ? ctx.arcIds : new Set(ctx.arcIds || []);
+  return links.some(l => q.has(l) || a.has(l));
+}
+
 export function applyCodexUpdates(character, updates = [], ctx = {}) {
   ensureCodex(character);
   const topics = character.codex.topics;
   const touched = [];
-  for (const u of (updates || []).slice(0, 4)) {
+  const extra = [];                       // R49: facts re-filed under a place, applied once after the loop
+  for (const u of [...(updates || []).slice(0, 4)]) {
     const raw = String(u.label || u.topic || "").slice(0, 60);
     // SNG-019: resolve against existing nodes (entityId → known-entity anchor → alias)
     const res = resolveTopic(character, u, ctx);
@@ -148,6 +158,18 @@ export function applyCodexUpdates(character, updates = [], ctx = {}) {
         seedAliasesFromEntity(t, ctx.entities);
       }
     } else {
+      // ⛔ R49 — A MYSTERY MAY NOT BE MINTED WITHOUT A STORY BEHIND IT. A bare one — anchored to nothing,
+      // linked to no known quest or arc — is a promise the codex cannot keep. The FACT is filed under the
+      // place it happened (Erik's own ruling for the seven edge-district hooks), and the STORY is requested.
+      if (u.kind === "mystery" && !res.entityId && !linksToStory(u, ctx)) {
+        const placeId = ctx.locationId ? slugify(ctx.locationId) : null;
+        if (placeId && u.fact) extra.push({ topic: placeId, label: ctx.entities?.places?.[placeId] || placeId, kind: "place", entityId: placeId,
+          fact: `${raw ? raw + " — " : ""}${u.fact}`, links: u.links });
+        const q = character.codex.deferredMysteries || (character.codex.deferredMysteries = []);
+        q.push({ label: raw, hint: String(u.fact || raw).slice(0, 240), filedUnder: placeId, day: ctx.day ?? null });
+        character.codex.deferredMysteries = q.slice(-6);
+        continue;
+      }
       const id = res.entityId || slugify(u.topic || u.label || "");
       if (!id) continue;
       if (Object.keys(topics).length >= CAPS.topics) continue;
@@ -183,6 +205,8 @@ export function applyCodexUpdates(character, updates = [], ctx = {}) {
     t.updatedDay = ctx.day ?? t.updatedDay ?? null;
     touched.push(t.label);
   }
+  // ⚑ the re-filed facts land on their place — one pass, never a mystery, never recursive
+  if (extra.length && !ctx._r49) applyCodexUpdates(character, extra, { ...ctx, _r49: true });
   return touched;
 }
 

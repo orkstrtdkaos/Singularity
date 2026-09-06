@@ -209,7 +209,7 @@
   },
   "growth": {
    "note": "✅ Q18 (Erik 2026-09-05: 'please build it'; SPEC_hold_store §5): a hold grows by ONE-TIME ACTS WITH LASTING EFFECTS, never a per-tick chore. A KEPT hold climbs one rung every passesPerClimb passes (4 passes = 12 world days) up to the rung its keeper's TIER allows — a notable keeper holds a place, a regional one and above can bring it to thriving. A craft the character carries, applied to the place (the tab, or holdingOps improve), lifts it a rung at once, once per craft per hold, when the craft SHAPES or MENDS (improveFunctions). Each extra hand adds handsYieldBonus to the yield, to maxHands. A garrison halves a raid (raid.defendedMult) and costs garrisonUpkeepPerHand each pass. The ground scales an enterprise's yield by 1 + groundYieldWeight × (density − 0.5): dense lattice 0.9 → ×1.2, thin 0.2 → ×0.85. Priced by CCode; Erik turns them. What a POST can become is not built.",
-   "passesPerClimb": 4,
+   "passesPerClimb": 4, "passesPerSlip": 10,
    "ceilingByKeeperTier": {
     "_default": "holding",
     "riffraff": "holding",

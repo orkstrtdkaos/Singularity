@@ -5000,7 +5000,14 @@ console.log("\n── §73 · appoint a keeper · take a handed-over hold back �
   // the finding
   const writers = [...rd("engine/worldtick.js").matchAll(/advanceHolding\(h, ([^,]+),/g)].map(m => m[1]);
   check("§73: ⚠️ Q18, as the truth it is — the tick is the ONLY writer of a hold's condition and it only stalls or slips; nothing in play raises one",
-    writers.length === 1 && /"stall" : "problem"/.test(writers[0]) && !/advanceHolding\(/.test(app73) && /Q18/.test(rd("docs/RULINGS.md")));
+    // ⚠️ THE SHAPE CHANGED, THE FACT DID NOT. SPEC_holdings_tempo replaced the literal ternary with an `outcome`
+    // that is "stall" by default and becomes "problem" only after `passesPerSlip` unkept passes. The tick
+    // still only stalls or slips; nothing in play raises a condition; a RAID may now slip one (an event),
+    // and that lives in holdings.js, which is not a writer this check counts — it counts the tick.
+    writers.length === 1 && writers[0] === "outcome"
+    && /let outcome = "stall"/.test(rd("engine/worldtick.js")) && /outcome = "problem"/.test(rd("engine/worldtick.js"))
+    && !/advanceHolding\(h, "(progress|done)"/.test(rd("engine/worldtick.js"))
+    && !/advanceHolding\(/.test(app73) && /Q18/.test(rd("docs/RULINGS.md")));
 }
 /* ═════ §74 — A HOLD GROWS (Q18, Erik: "please build it", 2026-09-05) ═════ */
 // One-time acts with lasting effects, never a per-tick chore (SPEC_hold_store §1, §5): a kept hold climbs on its own to the
@@ -7740,6 +7747,113 @@ console.log("\n── §109 · a paragraph before it is a wall, and the wall sta
     /codex-summary/.test(app) && /<details class="codex-details">/.test(app) && /older in the archive/.test(app));
   check("§109: …and every new export is reached from the app, not only from here",
     /import \{[^}]*topicsNeedingSummary[^}]*buildSummaryPrompt[^}]*applySummaries[^}]*topicReading[^}]*\} from "\.\/engine\/codex\.js"/.test(app));
+}
+
+/* ═════ §110 — TIME SLIPS SLOWLY, AN EVENT SLIPS AT ONCE; THE WORLD READS ITS OWN RECORD; A HOOK IS A DEBT ═════ */
+// Three specs, one landing, because each is small and each was measured first.
+// ⛔ TEMPO: a kept hold climbed one rung every 4 passes and an unkept one SLIPPED one on EVERY pass — a place
+// fell four times faster than it rose, and Erik felt it as "too fast". Aevi's rule: neglect is slow, an event
+// is immediate. ⚑ And §3 turned out to be already true: the delegation cap counts CHARGES, not holds.
+// ⛔ GUESSES: "the Threshold Post is supposed to have a mine" — true in the fiction, absent from the record.
+// The engine now READS the record and OFFERS, with evidence; it never writes; a No is remembered.
+// ⛔ R49: a mystery with no story behind it is a promise the codex cannot keep. It is not stored bare — the
+// fact is filed under its place and the story is requested, on the same turn.
+console.log("\n── §110 · neglect is slow, a raid is not; the record is read back; a hook is a debt ──");
+{
+  const H = await import("../engine/holdings.js");
+  const WT = await import("../engine/worldtick.js");
+  const AS = await import("../engine/assignments.js");
+  const CX = await import("../engine/codex.js");
+  const { loadContentHeadless: lch110 } = await import("./headless_content.mjs");
+  const C = await lch110();
+  const per = Number(C.rules?.economy?.holdStore?.growth?.passesPerSlip);
+
+  // ── TEMPO
+  check("§110: ⛔ NEGLECT HAS A COUNTER, like the climb — `passesPerSlip` is a dial and it is slower than the climb",
+    Number.isFinite(per) && per > Number(C.rules.economy.holdStore.growth.passesPerClimb), `slip ${per} vs climb ${C.rules.economy.holdStore.growth.passesPerClimb}`);
+  const unkept = () => ({ purse: { crystal: 100 }, npcRegistry: {}, company: [], worldState: { lastTickDay: 0 },
+    // ⚠️ STARTS AT `holding`, NOT `thriving`: an unkept place is clamped to `holding` on ANY pass by the presence-18
+    // ceiling — pre-existing and correct. My first fixture started at thriving and read that clamp as a slip.
+    holdings: [{ id: "u", name: "An Unkept Post", kind: "post", condition: "holding", locationId: "millbrook", steward: null, store: {}, lastMovedWorldCount: -99999 }] });
+  const u1 = unkept(); WT.advanceHoldings({ character: u1, content: C, rng: () => 0.99 });
+  check("§110: ⛔ an unkept hold does NOT slip on the first pass — it slipped on every pass before, four times faster than it rose",
+    u1.holdings[0].condition === "holding" && u1.holdings[0].neglectPasses === 1, `${u1.holdings[0].condition} after 1 pass, neglectPasses ${u1.holdings[0].neglectPasses}`);
+  const u2 = unkept(); for (let i = 0; i < per; i++) { u2.holdings[0].lastMovedWorldCount = -99999; WT.advanceHoldings({ character: u2, content: C, rng: () => 0.99 }); }
+  check("§110: …and it DOES slip once `passesPerSlip` passes have gone by — neglect is slow, not absent",
+    u2.holdings[0].condition === "strained" && u2.holdings[0].neglectPasses === 0, `${u2.holdings[0].condition} after ${per}`);
+  const k = unkept(); k.holdings[0].steward = "x"; k.holdings[0].condition = "thriving"; k.npcRegistry.x = { id: "x", name: "X" }; k.company = [{ npcId: "x" }];
+  for (let i = 0; i < per + 2; i++) { k.holdings[0].lastMovedWorldCount = -99999; WT.advanceHoldings({ character: k, content: C, rng: () => 0.99 }); }
+  check("§110: …and a KEPT hold never slips by neglect, however many passes",
+    k.holdings[0].condition === "thriving" && !k.holdings[0].neglectPasses);
+  // ⚑ AN EVENT SLIPS AT ONCE. A raid that takes goods is a cause, and a cause does not wait thirty days.
+  const r = { purse: { crystal: 0 }, npcRegistry: {}, holdings: [{ id: "r", name: "R", kind: "post", condition: "thriving", steward: null, store: { raw_material: 10 }, garrison: [] }] };
+  const cfgR = { ...C.rules.economy.holdStore, features: C.rules.economy.holdFeatures || null };
+  const raid = H.resolveRaid(r, r.holdings[0], { cfg: cfgR, dangerLevel: 3, rng: () => 0.5, day: 1, people: {} });
+  check("§110: ⚑ A RAID THAT TAKES GOODS SLIPS THE PLACE AT ONCE — time slips slowly, an event does not",
+    Object.keys(raid.taken || {}).length > 0 && r.holdings[0].condition === "holding", `${r.holdings[0].condition}, taken ${JSON.stringify(raid.taken)}`);
+  // ⚑ §3 was already true, and is now asserted: the cap counts CHARGES (people carrying work), not holds.
+  const lad = C.rules?.subAttributeLadder;
+  const capped = { level: 31, subAttributes: { rapport: 7, presence: 10 }, holdings: [{ id: "a" }, { id: "b" }, { id: "c" }, { id: "d", steward: null }] };
+  const ws0 = { assignments: {} };
+  check("§110: ⚑ SMALL HOLDS DO NOT COUNT AGAINST THE CAP — it counts charges, and four stewardless holds use none",
+    AS.delegationRefusal(ws0, "someone", { ladder: lad, character: capped }) === null);
+
+  // ── WORLD GUESSES
+  const loc = { id: "l", name: "L", descriptionSeed: "a quiet place", tags: [] };
+  const hold = (over = {}) => ({ id: "h", name: "Threshold Post", kind: "post", condition: "holding", locationId: "l", features: [], history: [], ...over });
+  check("§110: ⛔ THE RECORD IS READ BACK — \"raised a working mine from living iron\" in a hold's own history offers a mine",
+    H.inferFeatures(hold({ history: [{ note: "Raised a working mine from living iron beneath the post" }] }), { location: loc, cfg: cfgR }).some(o => o.kind === "mine"));
+  check("§110: …and a place authored `sacred` offers a shrine on that alone — an authored tag is an assertion",
+    H.inferFeatures(hold(), { location: { ...loc, tags: ["sacred"] }, cfg: cfgR }).some(o => o.kind === "shrine"));
+  check("§110: …the chronicle is read too, but needs TWO mentions — one line of prose is not strong evidence",
+    !H.inferFeatures(hold(), { location: loc, chronicle: ["At Threshold Post the wall stood."], cfg: cfgR }).some(o => o.kind === "wall")
+    && H.inferFeatures(hold(), { location: loc, chronicle: ["At Threshold Post the wall stood.", "Threshold Post's wall held the wind."], cfg: cfgR }).some(o => o.kind === "wall"));
+  check("§110: …and a clean record offers NOTHING — it is a reading, not a guess",
+    H.inferFeatures(hold(), { location: loc, cfg: cfgR }).length === 0);
+  check("§110: …and a feature already built is not offered again",
+    !H.inferFeatures(hold({ features: [{ kind: "mine" }], history: [{ note: "the mine" }] }), { location: loc, cfg: cfgR }).some(o => o.kind === "mine"));
+  // ⛔ IT PROPOSES; IT NEVER WRITES. And a No is remembered — Erik's "get better at building itself".
+  const g = { holdings: [hold({ history: [{ note: "the old mine shaft" }] })], chronicle: [], featureOffers: [] };
+  const added = H.queueFeatureOffers(g, { locations: { l: loc }, cfg: cfgR, worldCount: 7 });
+  check("§110: ⛔ IT OFFERS, IT DOES NOT WRITE — the offer is queued and the hold has no feature yet",
+    added.length === 1 && added[0].kind === "mine" && g.holdings[0].features.length === 0 && /old mine shaft/.test(added[0].why));
+  check("§110: …at most one per hold per pass — the same pass offers nothing more",
+    H.queueFeatureOffers(g, { locations: { l: loc }, cfg: cfgR, worldCount: 7 }).length === 0);
+  H.answerFeatureOffer(g, 0, false, { cfg: cfgR });
+  check("§110: ⛑ a NO is REMEMBERED — the mine is not offered again for this place",
+    g.holdings[0].notFeature?.includes("mine") && H.queueFeatureOffers(g, { locations: { l: loc }, cfg: cfgR, worldCount: 8 }).length === 0);
+  const y = { holdings: [hold({ history: [{ note: "the old mine shaft" }] })], chronicle: [], featureOffers: [] };
+  H.queueFeatureOffers(y, { locations: { l: loc }, cfg: cfgR, worldCount: 7 });
+  const yes = H.answerFeatureOffer(y, 0, true, { cfg: cfgR, day: 3 });
+  check("§110: …and a YES records it through `addFeature`, attributed to the fiction — the one door a feature enters by",
+    yes.ok && y.holdings[0].features.some(f => f.kind === "mine" && f.by === "the fiction") && y.featureOffers.length === 0);
+
+  // ── R49
+  const ents = { people: {}, places: { millbrook: "Millbrook" }, aliases: {} };
+  const cx = () => ({ codex: { topics: {} } });
+  const bare = cx();
+  CX.applyCodexUpdates(bare, [{ topic: "the-missing-ledger", label: "The Missing Ledger", kind: "mystery", fact: "a ledger went missing", links: ["nowhere"] }],
+    { locationId: "millbrook", day: 4, entities: ents, questIds: new Set(), arcIds: new Set() });
+  check("§110: ⛔ A BARE MYSTERY IS NOT STORED — a hook with no story behind it is a debt, not a topic",
+    !bare.codex.topics["the-missing-ledger"], Object.keys(bare.codex.topics).join(","));
+  check("§110: ⚑ …the FACT is filed under the place it happened — Erik's own ruling for the edge-district hooks",
+    bare.codex.topics.millbrook?.kind === "place" && bare.codex.topics.millbrook.facts.some(f => /ledger went missing/.test(f)), JSON.stringify(bare.codex.topics.millbrook?.facts));
+  check("§110: ⚑ …and the STORY is queued — the hook becomes a request for an arc, with R49 as its reason",
+    bare.codex.deferredMysteries?.length === 1 && /ledger went missing/.test(bare.codex.deferredMysteries[0].hint));
+  const linked = cx();
+  CX.applyCodexUpdates(linked, [{ topic: "the-missing-ledger", label: "The Missing Ledger", kind: "mystery", fact: "x", links: ["the-water-quest"] }],
+    { locationId: "millbrook", day: 4, entities: ents, questIds: new Set(["the-water-quest"]), arcIds: new Set() });
+  check("§110: …but a mystery LINKED to a quest the character holds IS stored — it has a story",
+    !!linked.codex.topics["the-missing-ledger"] && !(linked.codex.deferredMysteries || []).length);
+  const anchored = cx();
+  CX.applyCodexUpdates(anchored, [{ label: "Millbrook", kind: "mystery", entityId: "millbrook", fact: "y" }], { locationId: "millbrook", day: 4, entities: ents, questIds: new Set(), arcIds: new Set() });
+  check("§110: …and an ANCHORED one is stored under its entity — a known thing is not a nebulous hook",
+    !!anchored.codex.topics.millbrook && !(anchored.codex.deferredMysteries || []).length);
+  const app = rd("app.js");
+  check("§110: ⛔ …and the app turns the queue into an arc request on the SAME turn, before the world grows",
+    /dm\.splice\(0\)\.map\(d => \(\{ type: "arc", hint: d\.hint, fromMystery: true/.test(app) && /questIds: new Set\(/.test(app) && /arcIds: new Set\(/.test(app));
+  check("§110: ⚠️ …the boundary is written down: the request carries fromMystery, and the pipeline's own contract must honour it",
+    /fromMystery/.test(app) && /R49 — a mystery must arrive with its story/.test(app));
 }
 
 /* ══════════ REPORT ══════════ */

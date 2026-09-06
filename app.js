@@ -61,7 +61,7 @@ import { enterDeathState } from "./engine/death.js";
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
-import { holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
@@ -125,7 +125,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.389";
+const APP_VERSION = "1.9.390";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6466,7 +6466,10 @@ function applyTurn(turn, resolution, playerWords = null) {
     }
   }
   // people & places remember (typed ops, clamped)
-  const memCtx = { locationId: location.id, day: readClock(character.clock).day, entities: codexEntities(), rules: CONTENT.rules, affiliate: affiliateNpc };
+  const memCtx = { locationId: location.id, day: readClock(character.clock).day, entities: codexEntities(), rules: CONTENT.rules, affiliate: affiliateNpc,
+    // R49: what counts as a story that already exists — the quests this character holds and the arcs the world has
+    questIds: new Set((character.quests || []).map(q => q && q.id).filter(Boolean)),
+    arcIds: new Set([...(CONTENT.greaterArcs || []).map(a => a && a.id), ...Object.keys(character.generated?.arc || {})].filter(Boolean)) };
   applyStep("npcUpdates", () => applyNpcUpdates(character, turn.npcUpdates || [], memCtx));
   // legacy relationshipDeltas: tolerated but may only UPDATE existing people — this path once minted
   // duplicate id-named registry entries. SNG-195 G4: intentionally NOT in the contract or SALVAGEABLE_OPS
@@ -6478,6 +6481,14 @@ function applyTurn(turn, resolution, playerWords = null) {
   // (containment on write, instead of inferring it from wherever we last thought we were standing).
   applyStep("placeUpdates", () => applyPlaceUpdates(character, location.id, turn.placeUpdates || [], { ...memCtx, resolveLocationId, locations: CONTENT.locations }));
   applyStep("codexUpdates", () => applyCodexUpdates(character, turn.codexUpdates || [], memCtx));
+  // ⛔ R49 — A MYSTERY THE CODEX REFUSED TO STORE BARE IS ASKED FOR AS A STORY, on this same turn. The
+  // request rides the turn's own generateRequest list, which handleGenerateRequests reads after apply.
+  { const dm = character.codex?.deferredMysteries || [];
+    if (dm.length) {
+      const have = Array.isArray(turn.generateRequest) ? turn.generateRequest : (turn.generateRequest ? [turn.generateRequest] : []);
+      turn.generateRequest = [...have, ...dm.splice(0).map(d => ({ type: "arc", hint: d.hint, fromMystery: true,
+        why: `R49 — a mystery must arrive with its story, not as a hook: ${d.label}` }))];
+    } }
   applyStep("factUpdates", () => applyFactUpdates(character, turn.factUpdates || [], memCtx));
   // ⛔ SNG-355 — the state finally hears a departure. Applied here with the rest of the world-writes;
   // JOINS are only PROPOSED (consent is the player's), and surface as a choice rather than a fait accompli.
@@ -10748,6 +10759,13 @@ function wireHoldingOffers() {
   // ⛔ SNG-358 — ANSWERING THE MIGRATION QUESTION. Both answers are final for that assignment: accepting
   // mints the holding, dismissing records that it is NOT a place. ⚠️ EITHER WAY THE OFFER GOES AWAY — a
   // question that keeps being asked after it has been answered is nagging.
+  for (const btn of app.querySelectorAll("[data-feat-accept],[data-feat-dismiss]")) btn.onclick = () => {
+    const accept = btn.dataset.featAccept != null;
+    const r = answerFeatureOffer(character, Number(accept ? btn.dataset.featAccept : btn.dataset.featDismiss), accept,
+      { day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow() });
+    if (r && r.ok === false) console.warn("[features] offer refused:", r.why);   // prose-cap-ok: console diagnostic
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-hold-accept]")) btn.onclick = () => {
     const o = (character.holdingOffers || [])[Number(btn.dataset.holdAccept)];
     if (!o) return;
@@ -10950,7 +10968,7 @@ function renderHoldingsTab(manageId = null) {
             ? P.yields.map(y => `${y.units} ${String(y.goods).replace(/_/g, " ")}`).join(" + ")
             : (h.kind === "post" ? "<em>holds ground</em>" : "<em>nothing yet</em>");
           return `<div class="hold-grid">
-            ${cell("keeper", L.keeper ? esc(L.keeper.name) : "<em>nobody — it will not climb</em>")}
+            ${cell("keeper", (L.keeper ? esc(L.keeper.name) : "<em>nobody — it will not climb</em>") + (h.owner ? ` <span class="hint">· ${esc(nameOf(h.owner))}'s own, paying your purse</span>` : ""))}
             ${cell("people", pop)}
             ${cell("per pass", `${benefit}${P.banks > 0 ? ` <span class="hint">· ${P.banks} banked</span>` : ""}`)}
             ${cell("income vs keep", `<span class="${netCls}">${P.net >= 0 ? "+" : ""}${P.net}</span> <span class="hint">(${P.sells} in, ${P.upkeep} out)</span>`)}
@@ -10998,6 +11016,14 @@ function renderHoldingsTab(manageId = null) {
       </div></div>`;
   }).join("");
 
+  // ⚑ SPEC_world_guesses — the world noticed a feature the record lacks, and asks. It never writes.
+  const featRows = (character.featureOffers || []).map((o, i) => `<div class="codex-f" style="border-left:2px solid var(--accent,#b08d57);padding-left:8px;margin-top:6px">
+    <div>${esc(o.holdingName)} reads as if it has <strong>${esc(o.kind)}</strong>.</div>
+    <div class="hint" style="margin-top:2px">${esc(o.why)} — from ${esc(o.from)}</div>
+    <div class="opt-row" style="margin-top:4px">
+      <button class="opt" data-feat-accept="${i}" title="Record it — the fiction already built it">Yes, record it</button>
+      <button class="opt" data-feat-dismiss="${i}" title="No — and it will not be guessed again for this place">No</button>
+    </div></div>`).join("");
   const offerRows = offers.map((o, i) => `<div class="codex-f" style="border-left:2px solid var(--line,#3a3a3a);padding-left:8px;margin-top:6px">
     <div>${esc(o.charge)}</div>
     <div class="hint" style="margin-top:2px">${esc(o.why)}${o.npcName ? " · " + esc(o.npcName) : ""}${o.suggestedLocationName ? " · looks like " + esc(o.suggestedLocationName) : ""}</div>
@@ -11010,7 +11036,7 @@ function renderHoldingsTab(manageId = null) {
     ${characterTabBar("holdings")}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">What stands in your name</h3>
       ${holdingRows || `<p class="hint">Nothing yet. A post or an enterprise becomes yours through play — or through work you have already delegated, below.</p>`}</div>
-    ${offers.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">To review</h3>
+    ${(offers.length || (character.featureOffers || []).length) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">To review</h3>${featRows}
       <p class="hint">${offers.length} thing${offers.length === 1 ? "" : "s"} you have people working on may be ${offers.length === 1 ? "a place" : "places"} you hold. Only you can say.</p>
       ${offerRows}</div>` : ""}
     ${(character.formerHoldings || []).length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">No longer yours</h3>

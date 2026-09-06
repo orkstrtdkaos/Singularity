@@ -480,6 +480,7 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     const share = Math.max(0, Math.min(1, baseShare - step * defenceOf(holding, cfg)));
     const taken = take(share);
     if (!Object.keys(taken).length) return { detected: false, taken: {}, day, why: "they found nothing worth the carrying" };
+    if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided");   // ⚑ SLIP FIRST, THEN NOTE — the raid's own line stays the last entry (§78). AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
     note(`raided unseen — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ")} taken`);
     return { detected: false, taken, day };
   }
@@ -501,6 +502,7 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     return { detected: true, held: true, taken: {}, spoils: { [spoilKind]: spoils }, outcome: clash.outcome, day };
   }
   const taken = take(Math.max(0, Math.min(1, baseShare - step * stone)));
+  if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided");   // ⚑ AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
   note(`raid fought and lost — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} taken`);
   return { detected: true, held: false, taken, outcome: clash.outcome, day };
 }
@@ -796,6 +798,100 @@ export function addFeature(character, id, { kind, name = null, by = null, craftI
   h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `built ${f.name}${f.by ? ` (${f.by})` : ""}${f.craftIds.length ? ` with ${f.craftIds.join(", ")}` : ""}` }].slice(-12);
   queueHoldingEvent(character, `${h.name || h.id} has ${f.name} now${f.by && f.by !== "you" ? `, ${f.by}'s work` : ""}.`);
   return { ok: true, feature: f, holding: h };
+}
+
+/** ⚑ THE WORDS THAT ASSERT A FEATURE. Each kind's own vocabulary — what a scene says when the thing is
+ *  there. ⚠️ Deliberately literal: "wall" not "defence", "mine" not "resources". An inference that
+ *  reaches is a guess, and the spec is explicit that this is a READING, not a guess. */
+export const FEATURE_WORDS = {
+  mine: /\b(mine|mineshaft|ore|seam|lode|living iron)\b/i,
+  quarry: /\bquarr(y|ies)\b/i,
+  mill: /\b(mill|millstone|millwheel)\b/i,
+  workshop: /\bworkshop\b/i,
+  forge: /\b(forge|smithy|anvil)\b/i,
+  kiln: /\bkiln\b/i,
+  still: /\b(still|stillhouse|distill)\b/i,
+  fishery: /\b(fishery|fish-?traps?|weir)\b/i,
+  herd: /\b(herd|flock|pens?)\b/i,
+  wall: /\b(wall|walls|rampart|palisade)\b/i,
+  barrier: /\bbarriers?\b/i,
+  tower: /\b(tower|watchtower)\b/i,
+  sentries: /\b(sentr(y|ies)|watchmen|guards? posted|on watch)\b/i,
+  temple: /\btemple\b/i,
+  shrine: /\bshrine\b/i,
+  quarters: /\b(quarters|barracks|bunkhouse|lodgings)\b/i,
+  laboratory: /\blaborator(y|ies)\b/i,
+  scriptorium: /\bscriptorium\b/i,
+};
+
+/** ⛔ WHAT THE RECORD ALREADY SAYS IS HERE. Reads the hold's OWN record first (history notes, what it was
+ *  called, what it owes), then its place (description, tags — 42 locations are tagged `sacred`), then the
+ *  chronicle — the richest source and, until now, entirely unread. Returns candidate features WITH their
+ *  evidence, skipping kinds already built and kinds the player has said No to. PURE. */
+export function inferFeatures(holding, { location = null, chronicle = [], cfg = null, max = 2 } = {}) {
+  if (!holding) return [];
+  const have = new Set(featuresOf(holding).map(f => f.kind));
+  const refused = new Set(holding.notFeature || []);
+  const known = cfg?.features?.kinds || cfg?.features || {};
+  const own = [holding.describedAs, holding.obligation, ...(holding.history || []).map(h => h && h.note)].filter(Boolean).map(String);
+  const place = [location?.descriptionSeed, location?.description].filter(Boolean).map(String);
+  const nameRe = holding.name ? new RegExp(String(holding.name).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i") : null;
+  const prose = nameRe ? (chronicle || []).filter(e => typeof e === "string" && nameRe.test(e)) : [];
+  const out = [];
+  for (const [kind, re] of Object.entries(FEATURE_WORDS)) {
+    if (have.has(kind) || refused.has(kind)) continue;
+    if (Object.keys(known).length && !known[kind]) continue;          // not a kind the catalogue knows
+    const hitOwn = own.filter(t => re.test(t));
+    const hitPlace = place.filter(t => re.test(t));
+    const hitProse = prose.filter(t => re.test(t));
+    // ⚑ a `sacred` tag is an authored assertion of meaning — it stands as evidence for a shrine on its own
+    const sacred = (kind === "shrine") && Array.isArray(location?.tags) && location.tags.includes("sacred");
+    // ⛔ STRONG EVIDENCE ONLY: the hold's own record or its place says it, or the chronicle says it twice.
+    const strong = hitOwn.length || hitPlace.length || sacred || hitProse.length >= 2;
+    if (!strong) continue;
+    // ⚑ QUOTE THE SENTENCE THAT MATCHED, not the first 140 chars of a long description — measured, the
+    // offer for a rebuilt post quoted its opening line, which contained none of the words that fired.
+    const src = hitOwn[0] || hitPlace[0] || hitProse[0] || "";
+    const at = src.search(re);
+    const quote = at < 0 ? src.slice(0, 140) : (at > 60 ? "…" : "") + src.slice(Math.max(0, at - 60), at + 80).trim() + (at + 80 < src.length ? "…" : "");
+    out.push({ kind, why: sacred && !quote ? "this place is authored as sacred" : `the record reads: “${quote}”`,
+      from: hitOwn.length ? "its own record" : hitPlace.length ? "its place" : sacred ? "the place's authored tags" : "the chronicle",
+      strength: (hitOwn.length * 3) + (hitPlace.length * 2) + (sacred ? 2 : 0) + hitProse.length });
+  }
+  return out.sort((a, b) => b.strength - a.strength).slice(0, max);
+}
+
+/** ⚑ OFFER, ON THE TICK, AT MOST ONE NEW OFFER PER HOLD PER PASS — the chore constraint. Returns the offers
+ *  it added. An offer is `{ holdingId, kind, why, from }` on `character.featureOffers`, and the same
+ *  (hold, kind) is never offered twice while it stands. */
+export function queueFeatureOffers(character, { locations = {}, cfg = null, worldCount = null } = {}) {
+  ensureHoldings(character);
+  const offers = character.featureOffers || (character.featureOffers = []);
+  const added = [];
+  for (const h of character.holdings || []) {
+    if (!h || h.lastFeatureOfferCount === worldCount) continue;
+    const cands = inferFeatures(h, { location: locations[h.locationId] || null, chronicle: character.chronicle || [], cfg, max: 2 });
+    const fresh = cands.find(c => !offers.some(o => o.holdingId === h.id && o.kind === c.kind));
+    if (!fresh) continue;
+    h.lastFeatureOfferCount = worldCount;
+    const o = { holdingId: h.id, holdingName: h.name || h.id, kind: fresh.kind, why: fresh.why, from: fresh.from };
+    offers.push(o); added.push(o);
+  }
+  return added;
+}
+
+/** The player answers. Yes records it through `addFeature` — the one door a feature enters by — attributed
+ *  to the fiction. ⛑ No is REMEMBERED on the hold, so the same wrong guess is never made again: that is
+ *  Erik's "get better at building itself", and it costs one array. */
+export function answerFeatureOffer(character, index, accept, { day = null, worldCount = null, cfg = null } = {}) {
+  const offers = character.featureOffers || [];
+  const o = offers[index];
+  if (!o) return { ok: false, why: "no such offer" };
+  character.featureOffers = offers.filter((_, i) => i !== index);
+  const h = (character.holdings || []).find(x => x && x.id === o.holdingId);
+  if (!h) return { ok: false, why: "the holding is gone" };
+  if (!accept) { h.notFeature = [...new Set([...(h.notFeature || []), o.kind])]; return { ok: true, refused: o.kind }; }
+  return addFeature(character, h.id, { kind: o.kind, by: "the fiction", day, worldCount, cfg });
 }
 
 export function removeFeature(character, id, index, { worldCount = null } = {}) {

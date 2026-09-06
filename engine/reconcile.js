@@ -1254,6 +1254,7 @@ export const CHARACTER_STEPS = [
           obligation: "the fellowship's work, and the road drainage it promised", day: c.clock?.day ?? null });
         if (forge) {
           forge.describedAs = "forge";
+          forge.owner = "pell";   // SPEC_holdings_tempo §4: hers — kept by her, on his sheet, paying the household
           notes.push("The Fell Pell stands in your name — the forge the fellowship opened at, on the sheet where it belongs.");
         }
       }

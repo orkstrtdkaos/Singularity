@@ -841,6 +841,72 @@ export function residentsOf(holding, cfg = null) {
   const people = [...new Set([holding?.steward, ...(holding?.crew || []), ...(holding?.garrison || [])].filter(Boolean))];
   return { homes, people };
 }
+/** ⚑ WHAT THIS PLACE COSTS AND WHAT IT MAKES, IN ONE ANSWER — Erik: *"income vs expense, and per tick
+ *  benefits"*. ⛔ Nothing answered that before: the card showed `keep: 14 crystal per pass` beside
+ *  `produces: 8 raw material` and left the player to do arithmetic that was WRONG, because until a keeper
+ *  sold, the true answer was "it drains forever and the goods strand".
+ *
+ *  ⚠️ IT READS THE SAME DIALS `tickStore` READS. A panel that computed its own economics would be a second
+ *  implementation of the tick and would drift from it; this cannot disagree with the pass, because it is the
+ *  same numbers in the same order.
+ *
+ *  ⛑ `net` IS THE HONEST ONE: what the purse actually feels each pass. A kept place sells `keeperSells` of
+ *  what it made and pays its keep; an unkept one pays the keep and banks everything, which reads as a
+ *  NEGATIVE net and a rising `banked` — the exact shape a player should be able to see before it costs them.
+ *  PURE. */
+export function holdingLedger(holding, { economy = null, cfg = null, regionId = null, density = null, character = null } = {}) {
+  if (!holding) return null;
+  const yields = yieldsFor(holding, cfg, { density }) || [];
+  const upkeep = upkeepFor(holding, cfg) || 0;
+  const share = holding.steward ? Math.max(0, Math.min(1, Number(cfg?.keeperSells ?? 0.5))) : 0;
+
+  // what a pass MAKES, valued where the place stands
+  let made = 0, madeUnits = 0;
+  for (const y of yields) {
+    const w = unitWorth(y.goods, { economy, regionId, cfg });
+    madeUnits += Number(y.units) || 0;
+    if (w) made += Math.round((Number(y.units) || 0) * w.each);
+  }
+  // ⚠️ THE KEEPER SELLS A SHARE OF THE STORE, NOT OF THIS PASS'S YIELD — the same rounding `tickStore` does,
+  // over the store as it will stand once the yield lands, or the panel would promise a number the pass misses.
+  const soldUnits = Math.round((storeTotal(holding) + madeUnits) * share);
+  const sells = share > 0 ? Math.round(made * share) : 0;
+
+  const nameOf = (id) => character?.npcRegistry?.[id]?.name || id;
+  const crew = [...new Set(holding.crew || [])].filter(Boolean);
+  const watch = watchOf(holding, cfg) || [];
+  const res = residentsOf(holding, cfg) || { homes: 0, people: [] };
+
+  return {
+    keeper: holding.steward ? { id: holding.steward, name: nameOf(holding.steward) } : null,
+    // ⛔ BY TYPE, because the types do different things: crew add yield, a garrison is what SEES a raid
+    // coming, and residents are who the place houses. One number would hide the only distinction that matters.
+    people: {
+      keeper: holding.steward ? 1 : 0,
+      crew: crew.length,
+      garrison: [...new Set(holding.garrison || [])].filter(Boolean).length,
+      watch: watch.length,
+      residents: res.people.length,
+      homes: res.homes,
+      named: res.people.map(id => ({ id, name: nameOf(id) })),
+    },
+    perPass: {
+      yields: yields.map(y => ({ goods: y.goods, units: Number(y.units) || 0, feature: y.feature || null })),
+      units: madeUnits,
+      worth: made,          // what a pass makes, valued HERE
+      sells,                // what the keeper turns into coin
+      soldUnits,
+      upkeep,
+      net: sells - upkeep,  // ⛑ what the purse actually feels
+      banks: madeUnits - soldUnits,
+    },
+    store: { units: storeTotal(holding), worth: storeWorth(holding, { economy, regionId, cfg }) || 0 },
+    features: featuresOf(holding).map(f => ({ kind: f.kind, count: Number(f.count) || 1, name: f.name || null })),
+    condition: holding.condition || null,
+    unkept: !holding.steward,
+  };
+}
+
 /** Every yield a hold makes this pass: its own kind's, then each material feature's. */
 export function yieldsFor(holding, cfg, { density = null } = {}) {
   const out = [];

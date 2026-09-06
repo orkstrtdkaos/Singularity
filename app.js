@@ -61,7 +61,7 @@ import { enterDeathState } from "./engine/death.js";
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
-import { addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
@@ -125,7 +125,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.385";
+const APP_VERSION = "1.9.386";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10892,7 +10892,10 @@ function holdCfgNow() {
   const hs = CONTENT.rules?.economy?.holdStore;
   return hs ? { ...hs, features: CONTENT.rules?.economy?.holdFeatures || null } : null;
 }
-function renderHoldingsTab() {
+// ⛔ `manageId` OPENS THE POPUP Erik asked for. The card is for READING — the four things he named — and
+// every control that CHANGES the place lives behind one button, because the two were interleaved and
+// neither could be used.
+function renderHoldingsTab(manageId = null) {
   const rules = CONTENT.rules;
   const ladder = rules.subAttributeLadder;
   const hs = character.holdings || [];
@@ -10923,6 +10926,30 @@ function renderHoldingsTab() {
         <strong>${esc(h.name || h.id)}</strong>
         <div class="hint">${esc(h.kind || "post")} · ${esc(h.condition || "holding")}${loc ? " · " + esc(loc) : ""}${h.steward ? " · kept by " + esc(nameOf(h.steward)) : " · <em>unkept</em>"}</div>
         ${h.obligation ? `<div class="hint">owes: ${esc(h.obligation)}</div>` : ""}
+        ${(() => { // ⚑ THE FOUR ERIK NAMED, as a grid he can scan rather than six sentences he must parse.
+          const L = holdingLedger(h, { economy: CONTENT.rules?.economy, cfg: holdCfgNow(),
+            regionId: CONTENT.locations?.[h.locationId]?.regionId || null,
+            density: holdingGround(h, { locations: CONTENT.locations || {}, substrate: CONTENT.substrateModel || null }),
+            character });
+          if (!L) return "";
+          const P = L.perPass;
+          // ⛑ THE ONE NUMBER HE ASKED FOR AND NEVER HAD: what the purse actually feels each pass. Coloured,
+          // because a hold that quietly drains is the thing a player most needs to notice.
+          const netCls = P.net > 0 ? "good" : P.net < 0 ? "bad" : "";
+          const cell = (label, value) => `<div><span class="hint" style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.6px">${label}</span>${value}</div>`;
+          const pop = [L.people.keeper ? `${L.people.keeper} keeper` : null,
+            L.people.crew ? `${L.people.crew} crew` : null,
+            L.people.garrison ? `${L.people.garrison} on watch` : null,
+            L.people.homes ? `homes for ${L.people.homes}` : null].filter(Boolean).join(" · ") || "<em>nobody</em>";
+          const benefit = P.yields.length
+            ? P.yields.map(y => `${y.units} ${String(y.goods).replace(/_/g, " ")}`).join(" + ")
+            : (h.kind === "post" ? "<em>holds ground</em>" : "<em>nothing yet</em>");
+          return `<div class="hold-grid">
+            ${cell("keeper", L.keeper ? esc(L.keeper.name) : "<em>nobody — it will not climb</em>")}
+            ${cell("people", pop)}
+            ${cell("per pass", `${benefit}${P.banks > 0 ? ` <span class="hint">· ${P.banks} banked</span>` : ""}`)}
+            ${cell("income vs keep", `<span class="${netCls}">${P.net >= 0 ? "+" : ""}${P.net}</span> <span class="hint">(${P.sells} in, ${P.upkeep} out)</span>`)}
+          </div>`; })()}
         ${(() => { // ✅ 2026-09-05 (Erik: "I can't open them to see what they produce and who is assigned, who lives there"): what is REAL, per hold
           const cfgS = holdCfgNow();
           const ys = yieldsFor(h, cfgS, { density: holdingGround(h, { locations: CONTENT.locations || {}, substrate: CONTENT.substrateModel || null }) }), up = upkeepFor(h, cfgS);
@@ -10956,16 +10983,12 @@ function renderHoldingsTab() {
           const list = (h.features || []).map((f, i) => `<span>${esc(f.name || f.kind)}${f.count > 1 ? ` ×${f.count}` : ""}${f.by && f.by !== "you" ? ` (${esc(nameOf(f.by))})` : ""} <button class="opt" data-hold-unfeature="${esc(h.id)}" data-index="${i}" title="Tear it down" style="padding:0 4px">×</button></span>`).join(" · ");
           const opts = Object.entries(kinds).map(([k, d]) => `<option value="${esc(k)}">${esc(d.label || k)}</option>`).join("");
           return `<div class="hint">has: ${list || "<em>nothing built yet</em>"}</div>
-        <div class="opt-row" style="margin-top:4px;gap:6px;flex-wrap:wrap">
-          ${opts ? `<select data-hold-kind="${esc(h.id)}">${opts}</select><input data-hold-fname="${esc(h.id)}" placeholder="what it is called (optional)" style="max-width:220px"><button class="opt" data-hold-feature="${esc(h.id)}" title="Record something built here — a mine, a wall, a temple, sentries, quarters">Add what was built</button>` : ""}
-          <button class="opt" data-hold-rename="${esc(h.id)}" title="Name it — a re-claim will not change it back">Rename</button>
-        </div>`; })()}
+        `; })()}
         ${storeTotal(h) > 0 ? `<div class="hint">store: ${esc(Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", "))}${(() => { const w = storeWorth(h, { economy: CONTENT.rules?.economy, regionId: CONTENT.locations?.[h.locationId]?.regionId || null, cfg: CONTENT.rules?.economy?.holdStore }); return w ? ` · worth ~${w} crystal here` : ""; })()}${h.arrears ? ` · in arrears ${h.arrears}` : ""}</div>` : ""}
         ${h.fromAssignment ? `<div class="hint">from work you delegated</div>` : ""}
-        <div class="opt-row" style="margin-top:4px;gap:6px;flex-wrap:wrap">
-          ${handTo.length ? `<select data-hold-to="${esc(h.id)}">${handTo.map(id => `<option value="${esc(id)}"${id === h.steward ? " selected" : ""}>${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-keeper="${esc(h.id)}" title="Appoint them keeper — the place stays yours; they run it">Make them keeper</button><button class="opt" data-hold-transfer="${esc(h.id)}" title="Hand OWNERSHIP to them — it stops being yours, and what it owes goes with it">Hand it over</button>` : ""}
+        <div class="opt-row" style="margin-top:6px">
+          <button class="opt" data-hold-manage="${esc(h.id)}" title="Add what was built, change who keeps it, sell the store, give it up">⚙ Manage this place</button>
           ${storeTotal(h) > 0 && hereNow()?.id === h.locationId ? `<button class="opt" data-hold-sell="${esc(h.id)}" title="Sell what is stored, at this Reach's prices — you sell where it stands">Sell the store</button>` : ""}
-          <button class="opt" data-hold-release="${esc(h.id)}" title="Walk away — what it owes stays with you, unpaid">Give it up</button>
         </div>
       </div></div>`;
   }).join("");
@@ -10998,10 +11021,48 @@ function renderHoldingsTab() {
       ${company.length ? `<div class="codex-f"><strong>At your side</strong> <span class="hint">${company.map(m => esc(nameOf(m.npcId))).join(" · ")}</span></div>` : ""}
       ${delegates.length ? `<div class="codex-f"><strong>In your service</strong> <span class="hint">${delegates.map(id => esc(nameOf(id))).join(" · ")}</span></div>` : ""}
       ${hs.some(h => !h.steward) ? `<p class="hint" style="margin-top:6px;color:var(--warn,#e0b25a)">${hs.filter(h => !h.steward).length} of your holdings has nobody keeping it.</p>` : ""}</div>` : ""}
+    ${(() => { // ⛔ THE POPUP — every control that CHANGES a place, in one screen, per Erik. The card is for
+      // READING (the four things he named); this is for DOING. They were interleaved, so neither worked.
+      const h = manageId ? hs.find(x => x && x.id === manageId) : null;
+      if (!h) return "";
+      const cfgF = holdCfgNow(); const kinds = featureKinds(cfgF);
+      const built = (h.features || []).map((f, i) => `<span>${esc(f.name || f.kind)}${f.count > 1 ? ` \u00d7${f.count}` : ""} <button class="opt" data-hold-unfeature="${esc(h.id)}" data-index="${i}" title="Tear it down" style="padding:0 4px">\u00d7</button></span>`).join(" \u00b7 ");
+      const opts = Object.entries(kinds).map(([k, d]) => `<option value="${esc(k)}">${esc(d.label || k)}</option>`).join("");
+      const crafts = (character.abilities || []).filter(a => a && a.id).slice(0, 40).map(a => `<option value="${esc(a.id)}">${esc(a.name || a.id)}</option>`).join("");
+      const folk = [...new Set([...company.map(m => m.npcId), ...delegates, ...Object.keys(character.npcRegistry || {})])].filter(Boolean).slice(0, 60);
+      const folkOpts = folk.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("");
+      const head = (t) => `<div class="hint" style="font-size:10px;text-transform:uppercase;letter-spacing:.6px;margin-top:12px">${t}</div>`;
+      return `<div class="item-detail-modal" id="hold-modal"><div class="item-detail-sheet" style="max-width:520px;text-align:left">
+        <button class="item-modal-close" id="hold-modal-close" title="Close">\u2715</button>
+        <h3 class="codex-title" style="font-size:15px;margin-bottom:2px">${esc(h.name || h.id)}</h3>
+        <div class="hint">${esc(h.kind || "post")} \u00b7 ${esc(h.condition || "holding")}${h.steward ? " \u00b7 kept by " + esc(nameOf(h.steward)) : " \u00b7 unkept"}</div>
+        ${head("Who is here")}
+        <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
+          ${folkOpts ? `<select data-hold-hand="${esc(h.id)}">${folkOpts}</select><button class="opt" data-hold-crew="${esc(h.id)}" title="Put them to work here \u2014 crew add to what it makes">Add hands</button><button class="opt" data-hold-guard="${esc(h.id)}" title="Post them on watch \u2014 a watch is what SEES a raid coming">Post a guard</button>` : ""}
+        </div>
+        <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
+          ${handTo.length ? `<select data-hold-to="${esc(h.id)}">${handTo.map(id => `<option value="${esc(id)}"${id === h.steward ? " selected" : ""}>${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-keeper="${esc(h.id)}" title="Appoint them keeper \u2014 the place stays yours; they run it">Make them keeper</button><button class="opt" data-hold-transfer="${esc(h.id)}" title="Hand OWNERSHIP to them">Hand it over</button>` : ""}
+        </div>
+        ${head("What stands here")}
+        <div class="hint" style="margin-top:2px">${built || "nothing built yet"}</div>
+        <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
+          ${opts ? `<select data-hold-kind="${esc(h.id)}">${opts}</select><input data-hold-fname="${esc(h.id)}" placeholder="what it is called (optional)" style="max-width:200px"><button class="opt" data-hold-feature="${esc(h.id)}">Add what was built</button>` : ""}
+        </div>
+        ${crafts ? `<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px"><select data-hold-craft="${esc(h.id)}">${crafts}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft to the place">Apply a craft</button></div>` : ""}
+        ${head("The place itself")}
+        <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
+          <button class="opt" data-hold-rename="${esc(h.id)}">Rename</button>
+          <button class="opt" data-hold-release="${esc(h.id)}" title="Walk away \u2014 what it owes stays with you, unpaid">Give it up</button>
+        </div>
+      </div></div>`; })()}
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
   wireCharacterTabs();
   wireHoldingOffers();
+  // \u26d1 THE POPUP OPENS AND CLOSES THE WAY EVERY OTHER ONE HERE DOES \u2014 the button, the \u2715, and the backdrop.
+  for (const b of document.querySelectorAll("[data-hold-manage]")) b.onclick = () => renderHoldingsTab(b.dataset.holdManage);
+  const hmClose = document.getElementById("hold-modal-close"); if (hmClose) hmClose.onclick = () => renderHoldingsTab(null);
+  const hmBack = document.getElementById("hold-modal"); if (hmBack) hmBack.onclick = (e) => { if (e.target === hmBack) renderHoldingsTab(null); };
   const back = document.getElementById("cs-back"); if (back) back.onclick = () => renderPlay(character.activeScene?.lastTurn || null);
 }
 function renderCharacterScreen() {

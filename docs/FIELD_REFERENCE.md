@@ -695,7 +695,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `traditionV2` | 21 | `root`×21 | ⛔ DARK | — |
 | `imposes` | 21 | `tree`×21 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `touchTier` | 18 | `root`×18 | ✅ READ | `capabilities.js` |
-| `upkeep` | 18 | `root`×18 | ✅ READ | `holdings.js` |
+| `upkeep` | 18 | `root`×18 | ✅ READ | `holdings.js`, `app.js` |
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |
 | `obscure` | 16 | `root`×16 | ✅ READ | `skill_battle.js` |
 | `variance` | 15 | `mechanic`×15 | ✅ READ | `craftmechanics.js`, `app.js` |

@@ -1425,3 +1425,10 @@ img[data-lightbox] { cursor: zoom-in; }
 /* ⚠️ near vs far is the BAND, not a second gate — both are clickable. The paint is the honesty. */
 .create-wheel .create-node.far .create-dot { opacity: .42; }
 .create-wheel .create-node.far:hover .create-dot { opacity: 1; }
+
+/* The four things a holding must answer at a glance: who keeps it, who is there, what a pass makes, and
+   what the purse feels. A grid, because six sentences of prose is what made them unreadable. */
+.hold-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 6px 14px; margin: 6px 0 2px; }
+.hold-grid > div { min-width: 0; font-size: 12px; line-height: 1.35; }
+.hold-grid .good { color: var(--good, #7fb069); }
+.hold-grid .bad { color: var(--warn, #e0b25a); }

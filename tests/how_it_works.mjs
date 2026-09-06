@@ -7448,6 +7448,68 @@ console.log("\n── §105 · the record admits where it was cut ──");
     /smartClamp\(String\(u\.fact\)/.test(rd("engine/codex.js")));
 }
 
+/* ═════ §106 — WHAT A HOLDING COSTS AND MAKES, AND A BUTTON THAT DOES NOTHING ═════ */
+// ⛔ ERIK: "the Holdings should list some key attributes next to their picture — Keeper, population by type,
+// income vs expense, and per tick benefits — then also open a popup screen where you can choose to add
+// things or replace people."
+// ⚠️ THREE OF THE FOUR ALREADY RENDERED, IN PROSE, ACROSS SIX `hint` LINES WITH THE CONTROLS INTERLEAVED —
+// which is why none of them could be read. ⛔ THE FOURTH DID NOT EXIST: nothing anywhere answered "does this
+// place make money or cost money", so he read `keep: 14` beside `produces: 8 raw material` and did the
+// arithmetic himself — and it was wrong, because until this week the keeper never sold.
+// ⚑ AND THE LEDGER IS AN ENGINE FACT, NOT A UI SUM: a panel that computed its own economics would be a
+// second implementation of the tick and would drift from it.
+console.log("\n── §106 · a hold says what it costs, and every control does something ──");
+{
+  const H106 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch106 } = await import("./headless_content.mjs");
+  const C106 = await lch106();
+  const econ = C106.rules?.economy;
+  const cfg = { ...econ.holdStore, features: econ.holdFeatures || null };
+  const forge = (steward) => ({ id: "f", name: "The Fell Pell", kind: "enterprise", condition: "thriving",
+    locationId: "millbrook", steward, store: {}, crew: [], garrison: [] });
+
+  const kept = H106.holdingLedger(forge("pell"), { economy: econ, cfg, regionId: "valley", density: 1 });
+  const unkept = H106.holdingLedger(forge(null), { economy: econ, cfg, regionId: "valley", density: 1 });
+  check("§106: ⛔ A HOLD SAYS WHETHER IT PAYS — nothing answered \"income vs expense\" before, at all",
+    Number.isFinite(kept?.perPass?.net) && Number.isFinite(kept?.perPass?.upkeep) && Number.isFinite(kept?.perPass?.sells),
+    JSON.stringify(kept?.perPass));
+  check("§106: ⚑ …a KEPT enterprise comes out ahead, and an unkept one does not — the keeper is the difference",
+    kept.perPass.net > 0 && unkept.perPass.net < 0, `${kept.perPass.net} vs ${unkept.perPass.net}`);
+  check("§106: ⚠️ …and an unkept hold BANKS everything it makes, which is why its net is negative",
+    unkept.perPass.sells === 0 && unkept.perPass.banks === unkept.perPass.units);
+  check("§106: …population is BY TYPE, because the types do different things",
+    ["keeper", "crew", "garrison", "watch", "residents", "homes"].every(k => k in kept.people));
+
+  // ⛑ IT MUST NOT BE A SECOND IMPLEMENTATION OF THE TICK. The panel and the pass read the same dials, so
+  // what a player is promised and what the pass does cannot disagree — assert by RUNNING both.
+  const c106 = { purse: { crystal: 500 }, holdings: [forge("pell")], npcRegistry: { pell: { id: "pell", level: 8 } } };
+  const promised = H106.holdingLedger(c106.holdings[0], { economy: econ, cfg, regionId: "valley", density: 1 }).perPass.net;
+  H106.tickStore(c106, c106.holdings[0], { cfg, economy: econ, regionId: "valley", dangerLevel: 0, rng: () => 0.99, day: 1, density: 1, people: c106.npcRegistry, meaning: 0 });
+  const actual = c106.purse.crystal - 500;
+  check("§106: ⛑ THE PANEL AND THE PASS AGREE — a ledger that drifted from the tick would promise a lie",
+    Math.abs(promised - actual) <= 1, `panel said ${promised}, the pass did ${actual}`);
+
+  // ⛔ AND EVERY CONTROL MUST DO SOMETHING. I shipped two buttons with invented attribute names in this very
+  // change — `data-hold-person` and `data-hold-hands` — and they rendered, looked live, and did nothing.
+  // ⚑ This is the general rule, not those two: any `data-hold-*` BUTTON must have a handler bound to it.
+  const app106 = rd("app.js");
+  const buttons = new Set([...app106.matchAll(/<button[^>]*data-hold-([a-zA-Z]+)=/g)].map(m => m[1]));
+  const bound = new Set([...app106.matchAll(/querySelectorAll\("\[data-hold-([a-zA-Z-]+)\]"\)/g)]
+    .map(m => m[1].replace(/-([a-z])/g, (_, ch) => ch.toUpperCase())));
+  const dead = [...buttons].filter(b => !bound.has(b) && !bound.has(b.toLowerCase()));
+  check("§106: ⛔ NO HOLDING BUTTON IS DEAD — a control that renders and does nothing is worse than a missing one",
+    dead.length === 0, dead.join(" · "));
+  check("§106: ⚠️ …and the scan is not vacuous — it finds the real buttons on the real screen",
+    buttons.size >= 8, `${buttons.size} data-hold buttons`);
+
+  check("§106: ⚑ the card shows the four Erik named, as a grid rather than six sentences",
+    /hold-grid/.test(app106) && /income vs keep/.test(app106) && /holdingLedger\(h, \{/.test(app106)
+    && /\.hold-grid/.test(rd("style.css")));
+  check("§106: …and the popup opens, closes on the ✕, and closes on the backdrop — the house pattern",
+    /data-hold-manage/.test(app106) && /hold-modal-close/.test(app106)
+    && /hmBack\.onclick = \(e\) => \{ if \(e\.target === hmBack\)/.test(app106));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -1432,3 +1432,9 @@ img[data-lightbox] { cursor: zoom-in; }
 .hold-grid > div { min-width: 0; font-size: 12px; line-height: 1.35; }
 .hold-grid .good { color: var(--good, #7fb069); }
 .hold-grid .bad { color: var(--warn, #e0b25a); }
+
+/* SPEC_codex §3a — the summary is the reading; the facts collapse into Details as evidence. */
+.codex-summary { font-family: var(--font); font-size: 14px; line-height: 1.5; margin: 6px 0 8px; }
+.codex-details { margin-top: 4px; }
+.codex-details > summary { cursor: pointer; font-size: 11px; text-transform: uppercase; letter-spacing: .6px; }
+.codex-details[open] > summary { margin-bottom: 4px; }

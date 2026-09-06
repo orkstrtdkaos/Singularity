@@ -22,6 +22,7 @@ const MODEL_MAP = {
   "intent-parse": "claude-haiku-4-5-20251001",
   "codex-adjudicate": "claude-sonnet-4-6",   // SNG-153: identity judgement — worth Sonnet, one batched call
   "chronicle-compress": "claude-haiku-4-5-20251001",
+  "codex-summarise": "claude-haiku-4-5-20251001",   // SPEC_codex §3a: compression, not judgement — cheap, one batched call on codex open
   // CCODE-190 (Erik): "wire it. Do this for every image because i think it will be hugely valuable."
   // ⛔ THE DETERMINISTIC BUILDER CANNOT COMPOSE. Measured on 269 real fights: median 14 comma clauses,
   // 268 of 269 with eight or more, 248 repeating a word — "a list with a conjunction in it", the exact
@@ -34,7 +35,7 @@ const MODEL_MAP = {
   _default: "claude-sonnet-4-6"
 };
 
-const BUDGETS = { "gm-narrate": 8000, "gm-narrate-fast": 4000, "gm-narrate-rich": 12000, "gm-retell": 4000, "codex-adjudicate": 900, "gm-meta": 1024, "bio-gen": 1024, "world-tick": 1024, "generate": 1500, "intent-parse": 1024, "chronicle-compress": 1024, "chronicle": 768, "image-prompt": 300, _default: 2048 };
+const BUDGETS = { "gm-narrate": 8000, "gm-narrate-fast": 4000, "gm-narrate-rich": 12000, "gm-retell": 4000, "codex-adjudicate": 900, "gm-meta": 1024, "bio-gen": 1024, "world-tick": 1024, "generate": 1500, "intent-parse": 1024, "chronicle-compress": 1024, "codex-summarise": 1600, "chronicle": 768, "image-prompt": 300, _default: 2048 };
 
 // Minimum cacheable prefix, per model (Anthropic silently skips caching below this,
 // with no write premium). A breakpoint on a sub-min block is wasted — we fold small

@@ -84,7 +84,7 @@ import { addAssignment, delegationRefusal, activeDelegates } from "./engine/assi
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { trainableTier, SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
-import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame, buildMergeAdjudicationPrompt, applyMergeVerdicts, mergeDigest, undoLastMerge } from "./engine/codex.js";
+import { topicsNeedingSummary, buildSummaryPrompt, applySummaries, topicReading, ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame, buildMergeAdjudicationPrompt, applyMergeVerdicts, mergeDigest, undoLastMerge } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
@@ -125,7 +125,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.388";
+const APP_VERSION = "1.9.389";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12315,6 +12315,30 @@ async function renderLibrary(catIdx = 0, entryId = null) {
 // already refused the free cases; this judges the rest in ONE batched call, merges the certain
 // ones with a receipt, permanently records the rejects, and leaves only genuine coin-flips.
 // Runs on codex OPEN, never in the play loop, never blocking, at most once per session per shape.
+// ⚑ SPEC_codex §3a — SUMMARISE, THE SAME WAY MERGES ARE ADJUDICATED: on codex open, off the play loop, one
+// batched call, once per shape per session. ⛔ It fires at a THRESHOLD (6 facts, then every 6), never every
+// turn, and every summary is REDERIVED from all the facts — Aevi: "a summary that grows by accretion is the
+// log again with better margins." ⚠️ Measured before this: four subjects sat at the 24-fact ceiling and
+// accepted nothing; summarising retires their oldest facts into the archive and they accept again.
+let _summarisedKey = null, _summarising = false;
+async function maybeSummariseTopics() {
+  if (_summarising || !getApiKey()) return;
+  const ids = topicsNeedingSummary(character, { max: 8 });
+  if (!ids.length) return;
+  const key = ids.map(id => `${id}:${character.codex.topics[id]?.facts?.length || 0}`).join("|");
+  if (key === _summarisedKey) return;                  // this exact shape already summarised this session
+  _summarisedKey = key; _summarising = true;
+  try {
+    const raw = await callClaude([{ role: "user", content: buildSummaryPrompt(character, ids) }],
+      { task: "codex-summarise", maxTokens: 1600 });
+    const parsed = parseLooseJSON(raw);
+    const written = applySummaries(character, ids, parsed, { day: readClock(character.clock).day });
+    if (written.length) { saveCharacter(character); if (document.getElementById("codex-body")) renderCodexScreen(); }
+  } catch (err) {
+    console.warn("[codex] summarise skipped:", err?.message || err);   // prose-cap-ok: a console diagnostic
+  } finally { _summarising = false; }
+}
+
 let _adjudicatedKey = null, _adjudicating = false;
 async function maybeAdjudicateMerges(query = "") {
   if (_adjudicating || !getApiKey()) return;
@@ -12352,6 +12376,7 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
   const suggestions = (!open ? suggestMerges(character) : [])
     .filter(s => !q || String(s.a).toLowerCase().includes(q) || String(s.b).toLowerCase().includes(q));
   if (!open) maybeAdjudicateMerges(query); // SNG-153: tidy the codex itself, off the play loop
+  maybeSummariseTopics();                    // SPEC_codex §3a: write the readings, off the play loop
   chrome(`<div class="screen" style="max-width:720px">
     <h2>Codex — what ${esc(character.name)} knows</h2>
     <div class="field"><input id="codex-search" value="${esc(query)}" placeholder="Search topics, facts, factions, mysteries…"></div>
@@ -12386,7 +12411,14 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
               ${sug.includes(t.id) ? "◈ " : ""}${esc(t.label)} <span class="cost">${esc(t.kind)} · ${t.facts.length} fact${t.facts.length === 1 ? "" : "s"}</span></button>`).join("")}
             <button class="btn secondary" id="codex-merge-cancel" style="margin-top:8px">Cancel</button></div>`;
         })() : `
-        ${open.facts.length ? open.facts.map(f => `<div class="codex-fact">${esc(f)}</div>`).join("") : "<div class='insight'>known of, little learned yet</div>"}
+        ${(() => { // ⛔ SPEC_codex §3a — THE SUMMARY IS THE READING; THE FACTS ARE THE APPARATUS. Erik: "the known
+          // facts should collapse to a details section that isn't really meant to be read by a player."
+          const r = topicReading(open);
+          const facts = r.evidence.length ? r.evidence.map(f => `<div class="codex-fact">${esc(f)}</div>`).join("") : "<div class='insight'>known of, little learned yet</div>";
+          if (!r.summary) return facts;
+          return `<p class="codex-summary">${esc(r.summary)}</p>
+          <details class="codex-details"><summary class="hint">Details — ${r.evidence.length} fact${r.evidence.length === 1 ? "" : "s"} on record${r.archived ? `, ${r.archived} older in the archive` : ""}</summary>${facts}</details>`;
+        })()}
         ${open.links.length ? `<div class="codex-links">linked: ${open.links.map(l => {
           const t = character.codex.topics[l];
           return t ? `<button class="codex-link" data-topic="${esc(l)}">${esc(t.label)}</button>` : `<span class="codex-link dead">${esc(l)}</span>`;

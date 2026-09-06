@@ -12,7 +12,11 @@ export { namesMatch }; // back-compat: callers/tests import namesMatch from code
 const KINDS = ["mystery", "faction", "lore", "event", "person", "place"];
 // SNG-019: a PRIMARY node (anchored to a known entity via entityId) holds more facts —
 // a major NPC warrants 20+; ordinary topics keep the original cap.
-const CAPS = { topics: 60, factsPerTopic: 12, factsPerPrimary: 24, linksPerTopic: 8, aliasesPerTopic: 8 };
+const CAPS = { topics: 60, factsPerTopic: 12, factsPerPrimary: 24, linksPerTopic: 8, aliasesPerTopic: 8,
+  // SPEC_codex §3a — Aevi's read: summarise at 6 facts and re-summarise every 6 after, so a topic is a
+  // paragraph long before it is a wall. `keepFacts` is how many stay in `facts` as live evidence after a
+  // summary; the rest retire to `archive` so the topic drops under its ceiling and accepts again.
+  summariseEvery: 6, keepFacts: 8, archivePerTopic: 48, summaryChars: 700 };
 
 export function ensureCodex(character) {
   if (!character.codex) character.codex = { schemaVersion: 1, topics: {} };
@@ -248,6 +252,9 @@ function absorb(topics, p, s, character = null) {
   recordAlias(p, s.label);
   for (const al of s.aliases || []) recordAlias(p, al);
   if (!p.entityId && s.entityId) p.entityId = s.entityId;
+  // ⚑ a merge adds facts the summary never saw — mark it due, and carry the absorbed archive as evidence
+  if (s.archive?.length) p.archive = [...(p.archive || []), ...s.archive].slice(-CAPS.archivePerTopic);
+  if (p.summary) p.summarisedAt = 0;
   if (s.createdDay != null) p.createdDay = Math.min(p.createdDay ?? s.createdDay, s.createdDay);
   if (s.updatedDay != null) p.updatedDay = Math.max(p.updatedDay ?? 0, s.updatedDay);
   delete topics[s.id];
@@ -456,6 +463,76 @@ function normNameTokens(s) {
 
 /** Topics relevant right now: linked to this location, tied to active quests,
  *  or freshly updated. This is how "accumulated knowledge" comes BACK to you. */
+/** ⚑ WHICH TOPICS HAVE EARNED A SUMMARY. A topic qualifies when it has `summariseEvery` facts it has not yet
+ *  been summarised over — first at 6, then every 6 after — so this fires at a threshold and never every turn.
+ *  Biggest first, because the wall of 24 is the one the player is actually suffering. PURE. */
+export function topicsNeedingSummary(character, { every = CAPS.summariseEvery, max = 8 } = {}) {
+  const topics = Object.values(character?.codex?.topics || {});
+  const due = topics.filter(t => t && Array.isArray(t.facts)
+    && t.facts.length >= every
+    && (t.facts.length - (Number(t.summarisedAt) || 0)) >= every);
+  return due.sort((a, b) => b.facts.length - a.facts.length).slice(0, max).map(t => t.id);
+}
+
+/** ⛔ WHAT THE MODEL IS ASKED — one batched call, numbered like the merge adjudicator so answers match by
+ *  `n`, never by name. It sees EVERY fact, because the summary is REDERIVED from all of them, never grown
+ *  from the last one. ⚠️ And it is told the one thing that matters: no new claims. A summary is a compression
+ *  of the record, not a continuation of it. PURE. */
+export function buildSummaryPrompt(character, ids = []) {
+  const topics = character?.codex?.topics || {};
+  const bare = (f) => String(f).replace(/^\[d\d+\]\s*/, "");
+  const rows = ids.map((id, i) => {
+    const t = topics[id];
+    if (!t) return `${i + 1}. (missing)`;
+    const all = [...(t.archive || []), ...(t.facts || [])].map(bare);
+    return `${i + 1}. "${t.label}" [${t.kind}${t.entityId ? `, anchored to ${t.entityId}` : ""}]${(t.aliases || []).length ? ` (also called ${t.aliases.join(", ")})` : ""}` +
+      `\n   facts, oldest first:\n` + all.map(f => `   - ${f}`).join("\n");
+  });
+  return [
+    "You are compressing a character's codex — what they KNOW about each subject below — into a summary a player will read.",
+    "For each numbered subject, write 2 to 4 sentences in present tense that a reader could take as the whole of what is known.",
+    "⛔ RULES: state only what the facts state — no new claims, no speculation, no softening. Keep every name. If the facts contradict each other, say so in one clause rather than choosing.",
+    "The facts remain on record beneath the summary as evidence; your job is the reading, not the archive.",
+    "Reply with JSON only: {\"summaries\": [{\"n\": 1, \"summary\": \"...\"}, ...]} — one entry per number, in order.",
+    "",
+    ...rows,
+  ].join("\n");
+}
+
+/** ⚑ THE ANSWER LANDS. Sets `summary`, remembers how many facts it covered (`summarisedAt`) so the next one
+ *  is due after `summariseEvery` more, and RETIRES the oldest facts beyond `keepFacts` into `archive`.
+ *  ⛔ Retired, not deleted: "a summary the player cannot audit is a claim." The archive is capped so a
+ *  subject that lives for a year does not grow without bound. Returns the ids it wrote. PURE. */
+export function applySummaries(character, ids = [], verdicts = [], { keepFacts = CAPS.keepFacts, day = null } = {}) {
+  const topics = character?.codex?.topics || {};
+  const written = [];
+  const list = Array.isArray(verdicts) ? verdicts : (verdicts?.summaries || []);
+  for (let i = 0; i < ids.length; i++) {
+    const t = topics[ids[i]];
+    const v = list.find(x => Number(x?.n) === i + 1);
+    const text = String(v?.summary || "").trim();
+    if (!t || !text) continue;
+    t.summary = smartClamp(text, CAPS.summaryChars);
+    t.summarisedAt = (t.facts || []).length;
+    if (day != null) t.summaryDay = day;
+    if ((t.facts || []).length > keepFacts) {
+      const retire = t.facts.slice(0, t.facts.length - keepFacts);
+      t.archive = [...(t.archive || []), ...retire].slice(-CAPS.archivePerTopic);
+      t.facts = t.facts.slice(-keepFacts);
+      t.summarisedAt = t.facts.length;        // due again after `every` NEW facts, not `every` total
+    }
+    written.push(t.id);
+  }
+  return written;
+}
+
+/** What the player reads for a topic: the summary if it has one, else the facts. The facts are always the
+ *  evidence beneath it. */
+export function topicReading(t) {
+  if (!t) return { summary: null, evidence: [], archived: 0 };
+  return { summary: t.summary || null, evidence: t.facts || [], archived: (t.archive || []).length };
+}
+
 export function codexForGM(character, { locationId = null, questTitles = [], playerInput = "" } = {}) {
   const topics = Object.values(character.codex?.topics || {});
   if (!topics.length) return null;
@@ -483,7 +560,11 @@ export function codexForGM(character, { locationId = null, questTitles = [], pla
   // ⚠️ THE MERGE QUEUE WAS NEVER THE BUG. It is the symptom of an allocation that never happened, and no
   // amount of judging pairs downstream repairs a writer that mints a new subject per sentence.
   return pick.map(t =>
-    `- [${t.id}] ${t.label} (${t.kind}): ${t.facts.slice(-3).join(" | ") || "known of, little learned"}` +
+    // ⚑ SPEC_codex Q3 — FEED THE SUMMARY, NOT THE FACTS. A summarised topic hands the GM its reading plus
+    // only the facts newer than that reading; an unsummarised one still hands the last three.
+    `- [${t.id}] ${t.label} (${t.kind}): ${t.summary
+      ? `${t.summary}${(t.facts || []).length > (Number(t.summarisedAt) || 0) ? " | since: " + t.facts.slice(Number(t.summarisedAt) || 0).slice(-2).join(" | ") : ""}`
+      : (t.facts.slice(-3).join(" | ") || "known of, little learned")}` +
     (t.links.length ? ` [linked: ${t.links.join(", ")}]` : "")
   ).join("\n");
 }

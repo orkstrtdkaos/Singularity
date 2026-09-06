@@ -7658,6 +7658,90 @@ console.log("\n── §108 · a topic is filed under who it is about, and the o
     && /aliases\[id\] = /.test(app));
 }
 
+/* ═════ §109 — A TOPIC IS A SUMMARY, AND THE FACTS ARE THE APPARATUS (SPEC_codex §3a) ═════ */
+// ⛔ ERIK: "the known facts should collapse to a details section that isn't really meant to be read by a
+// player." Measured: Pell was a wall of 24 lines, and four of Silas's most important subjects sat AT the
+// 24-fact ceiling accepting nothing more. ⚑ The engine half is PURE — which topics are due, what the model is
+// asked, what happens to the answer — so it is gated here with a fake verdict and no network. The one call
+// that costs money mirrors the merge adjudicator: on codex open, off the play loop, once per shape.
+console.log("\n── §109 · a paragraph before it is a wall, and the wall stays as evidence ──");
+{
+  const CX = await import("../engine/codex.js");
+  const facts = (n) => Array.from({ length: n }, (_, i) => `[d${i + 1}] fact number ${i + 1} about the subject`);
+  const mk = () => ({ clock: { day: 30 }, codex: { topics: {
+    wall: { id: "wall", label: "Pell", kind: "person", entityId: "pell", facts: facts(24), links: [], aliases: [] },
+    mid: { id: "mid", label: "The Mill", kind: "place", facts: facts(7), links: [], aliases: [] },
+    thin: { id: "thin", label: "A Rumour", kind: "lore", facts: facts(3), links: [], aliases: [] },
+    done: { id: "done", label: "Settled", kind: "event", facts: facts(9), links: [], aliases: [], summary: "Already read.", summarisedAt: 9 },
+  } } });
+
+  // ⚑ A THRESHOLD, NOT A TURN. Due at 6, then every 6 NEW facts; a thin topic and a fresh summary are not due.
+  const due = CX.topicsNeedingSummary(mk());
+  check("§109: ⚑ SUMMARIES ARE DUE AT A THRESHOLD — 6 facts, biggest first, never a 3-fact rumour",
+    due[0] === "wall" && due.includes("mid") && !due.includes("thin"), due.join(","));
+  check("§109: …and a topic already summarised over its facts is NOT due again until 6 more arrive",
+    !due.includes("done"));
+
+  // ⛔ REDERIVED FROM EVERYTHING. The prompt carries all facts, numbered so answers match by n, and forbids
+  // new claims — a summary is a compression of the record, not a continuation of it.
+  const prompt = CX.buildSummaryPrompt(mk(), ["wall", "mid"]);
+  check("§109: ⛔ the model is asked over ALL the facts — a summary grown from the last one is the log again",
+    /fact number 1 about/.test(prompt) && /fact number 24 about/.test(prompt) && /^1\. "Pell"/m.test(prompt) && /^2\. "The Mill"/m.test(prompt));
+  check("§109: …and it is told the one rule that matters — no new claims",
+    /no new claims/i.test(prompt) && /JSON only/.test(prompt));
+
+  // ⚑ THE ANSWER LANDS, AND THE CAP OPENS SIDEWAYS. The wall was AT 24 and accepting nothing.
+  const c = mk();
+  const written = CX.applySummaries(c, ["wall", "mid"], { summaries: [
+    { n: 1, summary: "Pell is the smith the forge is named for; the record runs from her father's clerkship to the fellowship's opening." },
+    { n: 2, summary: "The mill stands and turns." } ] }, { day: 30 });
+  const w = c.codex.topics.wall;
+  check("§109: ⛔ THE SUMMARY IS WRITTEN, and the topic remembers how many facts it covered",
+    written.length === 2 && /smith the forge is named for/.test(w.summary) && Number.isFinite(w.summarisedAt));
+  check("§109: ⛔ …and a CAPPED topic drops under its ceiling — the wall accepts facts again",
+    w.facts.length < 24 && w.facts.length === 8, `${w.facts.length} live facts`);
+  check("§109: ⚑ …and NOTHING IS DELETED — the retired facts are in the archive, because a summary you cannot audit is a claim",
+    (w.archive || []).length === 16 && w.archive[0].includes("fact number 1 ") && w.facts[0].includes("fact number 17 "),
+    `${(w.archive || []).length} archived`);
+  check("§109: …the newest facts stay LIVE as evidence, oldest first in the archive — order is preserved end to end",
+    w.facts[w.facts.length - 1].includes("fact number 24 ") && w.archive[w.archive.length - 1].includes("fact number 16 "));
+  check("§109: …a topic under `keepFacts` retires nothing — the mill keeps all seven",
+    c.codex.topics.mid.facts.length === 7 && !(c.codex.topics.mid.archive || []).length);
+  check("§109: …and an answer with the wrong n, or none, writes nothing rather than the wrong summary",
+    CX.applySummaries(mk(), ["wall"], { summaries: [{ n: 7, summary: "x" }] }).length === 0
+    && CX.applySummaries(mk(), ["wall"], null).length === 0);
+
+  // ⛔ DUE AGAIN AFTER SIX MORE, not six total — and the archive is what the next summary is rederived over.
+  for (let i = 0; i < 6; i++) w.facts.push(`[d${40 + i}] later fact ${i}`);
+  check("§109: ⛑ six NEW facts after a summary make it due again — rederived, never appended",
+    CX.topicsNeedingSummary(c).includes("wall") && /fact number 1 about/.test(CX.buildSummaryPrompt(c, ["wall"])));
+
+  // ⚑ Q3 — THE GM IS FED THE SUMMARY, NOT 24 FACTS, plus only what is newer than the reading.
+  const gm = CX.codexForGM(c, { playerInput: "Pell" });
+  check("§109: ⚑ THE GM READS THE SUMMARY — and only the facts newer than it, never the wall",
+    /smith the forge is named for/.test(gm) && /since:/.test(gm) && !/fact number 3 about/.test(gm), gm.slice(0, 160));
+  check("§109: …and an unsummarised topic still hands the GM its last three, exactly as before",
+    /fact number 3 about the subject/.test(CX.codexForGM(mk(), { playerInput: "Rumour" })));
+
+  // ⚑ a merge adds facts the summary never saw — it must fall due again, and carry the absorbed archive
+  const m = mk(); m.codex.topics.done.aliases = ["Settled Matter"]; m.codex.topics.dup = { id: "dup", label: "Settled Matter", kind: "event", facts: facts(2), links: [], aliases: [], archive: ["[d0] old"] };
+  CX.mergeCodexTopics(m);
+  check("§109: ⚑ a merge makes the summary DUE again and carries the absorbed archive as evidence",
+    !m.codex.topics.dup && m.codex.topics.done.summarisedAt === 0 && (m.codex.topics.done.archive || []).includes("[d0] old"));
+
+  // ⛔ THE DOORS: the call exists, is routed cheaply, fires on codex open off the play loop, and the UI reads it.
+  const app = rd("app.js"), cl = rd("engine/claude.js");
+  check("§109: ⛔ THE CALL EXISTS AND MIRRORS THE ADJUDICATOR — on codex open, guarded, once per shape",
+    /async function maybeSummariseTopics\(\)/.test(app) && /_summarisedKey = key; _summarising = true;/.test(app)
+    && /task: "codex-summarise"/.test(app) && /maybeSummariseTopics\(\);\s*\/\/ SPEC_codex/.test(app));
+  check("§109: …routed to the cheap model — compression, not judgement",
+    /"codex-summarise": "claude-haiku/.test(cl) && /"codex-summarise": 1600/.test(cl));
+  check("§109: ⚑ …and the player reads the SUMMARY; the facts collapse into Details, still there, still counted",
+    /codex-summary/.test(app) && /<details class="codex-details">/.test(app) && /older in the archive/.test(app));
+  check("§109: …and every new export is reached from the app, not only from here",
+    /import \{[^}]*topicsNeedingSummary[^}]*buildSummaryPrompt[^}]*applySummaries[^}]*topicReading[^}]*\} from "\.\/engine\/codex\.js"/.test(app));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

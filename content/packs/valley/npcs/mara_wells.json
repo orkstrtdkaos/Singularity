@@ -1,5 +1,5 @@
 {
- "id": "mara_wells",
+ "id": "mara-wells",
  "name": "Mara Wells",
  "level": 14,
  "role": "Millbrook's supply-store operator — a close ledger, and the person a village routes through without noticing it does",
@@ -99,5 +99,7 @@
   "warmth": "high, unsentimental",
   "patience": "long for need, short for performance"
  },
- "_personalityWhy": "⛔ `personality` IS FOUR NUMERIC DIALS — `warmth · trust · candor · patience`, roughly -1..1 in the schema's words and 0-10 in practice (Pell: 6/7/9/5). ⚠️ AEVI AUTHORED IT AS PROSE ON ALL FOUR SHEETS ('warmth: high, unsentimental') and the schema caught two of them. ✅ THAT IS THE SCHEMA DOING THE JOB IT COULD NOT DO YESTERDAY — before today's +22 it declared 25 properties and would have passed all four."
+ "_personalityWhy": "⛔ `personality` IS FOUR NUMERIC DIALS — `warmth · trust · candor · patience`, roughly -1..1 in the schema's words and 0-10 in practice (Pell: 6/7/9/5). ⚠️ AEVI AUTHORED IT AS PROSE ON ALL FOUR SHEETS ('warmth: high, unsentimental') and the schema caught two of them. ✅ THAT IS THE SCHEMA DOING THE JOB IT COULD NOT DO YESTERDAY — before today's +22 it declared 25 properties and would have passed all four.",
+ "_idWas": "mara_wells",
+ "_idFix_20260905": "⛔ ID DID NOT RESOLVE AGAINST THE LIVE SAVE. CCode's quest fix surfaced this class: 'the save says `the-mercy-that-wont-ask`; the def says `the_mercy_that_wont_ask` — matching raw finds nothing.' ⚠️ THE SAME SPLIT WAS LIVE IN THE NPC REGISTRY, from Aevi's own authoring pass hours earlier. ✅ Fixed at the CONTENT end, because the registry key is written by PLAY and the authored file is the thing that can move. ⛔ A promoted NPC whose id does not match the registry entry it was promoted FROM is an authored record the game can never find. ⚑ HERE: the registry key written by play is `mara-wells`."
 }

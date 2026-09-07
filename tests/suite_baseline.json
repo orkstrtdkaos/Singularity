@@ -1,11 +1,11 @@
 {
   "_note": "⛔ KNOWN-RED COUNTS PER SUITE. `run_tests --ratchet` blocks only when a count RISES or a new suite goes red. ⚠️ Numbers may only go DOWN — lower one by FIXING something, then re-baseline deliberately with `--rebaseline` so the improvement lands as a visible commit.",
-  "_updatedAt": "2026-09-04",
+  "_updatedAt": "2026-09-06",
   "suites": {
     "import_integrity": 0,
     "smoke": 0,
     "parse_probe": 0,
-    "content_ci": 14,
+    "content_ci": 12,
     "balance_sim": 0,
     "skill_battle_sim": 0,
     "contest_sim": 0,
@@ -26,6 +26,6 @@
   },
   "_verification_ledger": "⛔ CCode 2026-09-04: this suite exits 1 BY DESIGN whenever the ledger has red rows (it lists the known content_ci reds). It had been counted as 0 because a non-zero exit with no FAIL line read as green — run_tests.mjs now counts a crash or a bare non-zero exit as at least 1. Baselined at 1 deliberately, not hidden. wiring_audit 3 → 2 locked in (the ratchet asked for it on 09-03).",
   "_notes": {
-    "content_ci": "2026-09-06 (13→14): SNG-167 §2 want-without-seed went 47→48 on Aevi content pushed today (precursor party clauses + the Assay lore). Measured at HEAD with my changes stashed: still 14, so it is not mine. Her backlog ratchet, her call to work down."
+    "content_ci": "2026-09-06 (14→12): Aevi’s content pushes tonight (Greywater Stilts moved to flat ground, all 18 local layouts re-measured against the live terrain, Millbrook’s Long Fields authored) closed two of her want-without-seed reds. Measured 12 on two consecutive ratchet runs; locked in deliberately.   // 2026-09-06 (13→14): SNG-167 §2 want-without-seed went 47→48 on Aevi content pushed today (precursor party clauses + the Assay lore). Measured at HEAD with my changes stashed: still 14, so it is not mine. Her backlog ratchet, her call to work down."
   }
 }

@@ -9078,20 +9078,25 @@ console.log("\n── §138 · the beast yielded six times ──");
     /await runGMOrTimeout\(\{ resolution: null, playerInput: ask \}\)/.test(app) && /sbNoteFailure\("end-narration", err\)/.test(app));
   check("§138: ⛔ …and sbEnd CANNOT REJECT — every caller invokes it without await, so a throw would be silent",
     /try \{ return await sbEndInner\(rr\); \}/.test(app) && /catch \(err\) \{ sbNoteFailure\("end-step", err\); character\.activeEncounter = null;/.test(app));
-  // ⚑ AND THE PROOF ON THE ENGINE SIDE: his own opponent ends in one strike, so the app was ignoring a true flag.
+  // ⚑ AND THE PROOF ON THE ENGINE SIDE: the flag the app ignored is REAL and reachable — an opponent at its yield
+  // threshold ends the round, with the very outcome that stood six times in his log while the fight went on.
+  // ⚠️ BUILT FROM CONTENT, NOT FROM HIS SAVE. My first form read `activeEncounter` off the live file; when the fix
+  // landed his fight ENDED, the field went null, and this gate went red BECAUSE THE REPAIR WORKED. A live save is a
+  // running state and a gate asserts a fact — measuring the evidence once was right, keeping it as a fixture was not.
   const EN = await import("../engine/encounters.js");
+  const SBS = await import("../engine/skill_battle.js");
   const { loadContentHeadless: lch138 } = await import("./headless_content.mjs");
   const C138 = await lch138();
-  const c138 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
-  const def138 = C138.encounters?.[c138.activeEncounter?.defId] || c138.customEncounters?.[c138.activeEncounter?.defId];
-  if (def138) {
-    const pick = (c138.abilities || []).map(a => C138.abilities[a.abilityId]).find(d => d && (d.functions || []).includes("strike"));
-    const rr138 = EN.skillBattleRound(JSON.parse(JSON.stringify(c138.activeEncounter.state)), def138,
-      { function: "strike", tier: pick?.tier || 1, rank: 1, attribute: pick?.attribute || "practical", name: pick?.name || "strike", id: pick?.id, intensity: "standard" },
-      { character: JSON.parse(JSON.stringify(c138)), content: C138, rules: C138.rules, sb: C138.skillBattle.engine, steps: C138.intensity.steps, rng: () => 0.5, phase: "action", tickEffects: true });
-    check("§138: ⚑ the engine reports the end on the FIRST strike against his own opponent — the flag was true and the app ignored it",
-      rr138.ended === true && /yield|fell|overcome/.test(String(rr138.outcome || "")), `ended=${rr138.ended} outcome=${rr138.outcome}`);
-  } else check("§138: (his encounter def is on the save, so the engine half can be measured)", false, "def not found");
+  const def138 = { id: "yielded", type: "duel", opponent: { name: "the hollow-pace", health: 4, threat: 30, yieldAt: 3, tacticTags: ["berserker"] } };
+  const st138 = EN.startEncounter(def138, { oppSheet: SBS.synthesizeOpponentSheet(def138.opponent, C138.skillBattle.engine) });
+  const rr138 = EN.skillBattleRound({ ...st138, opponentHealth: 4 }, def138,
+    { function: "strike", tier: 3, attribute: "practical", intensity: "standard", name: "the blow" },
+    { character: { attributes: { practical: 4, mental: 3 }, energy: 100 }, content: C138, rules: C138.rules,
+      sb: C138.skillBattle.engine, steps: C138.intensity.steps, rng: () => 0.05, phase: "action", tickEffects: true });
+  check("§138: ⚑ the engine DOES report the end — the flag was true all along and the app was ignoring it",
+    rr138.ended === true && /yield|fell|overcome/.test(String(rr138.outcome || "")), `ended=${rr138.ended} outcome=${rr138.outcome}`);
+  check("§138: …and the threshold that ends it is the authored one, so the fixture is not a coincidence of zero health",
+    EN.yieldThreshold(def138, st138) === 3);
   // ⛔ AND A STEP TAKEN AWAY MUST SAY WHY. `deniesPhase` shut his sense step and the screen said only "Blinded".
   const SBM = await import("../engine/skill_battle.js");
   const fx = [{ side: "player", deniesPhase: "sense", label: "the hollow-pace's blinding", roundsLeft: 2, kind: "blind" }];
@@ -9116,12 +9121,14 @@ console.log("\n── §139 · the gates are a network whether or not you are st
   const W = await import("../engine/waygate.js");
   const { loadContentHeadless: lch139 } = await import("./headless_content.mjs");
   const C = await lch139();
-  const c = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
-  const L = { ...C.locations, ...(c.generated?.location || {}) };
+  // ⚠️ A FIXTURE, NOT A LIVE SAVE. `knownWaygates` reads `character.knownPlaces`, which moves every time he travels —
+  // the same running-state trap that turned §138 red the moment its fix worked. This gate is about the WORLD.
+  const L = C.locations;
   const hub = W.hubWaygate(L);
+  const c = { id: "fixture", knownPlaces: W.allWaygates(L).map(l => l.id), currentLocationId: "millbrook" };
   check("§139: the world really is a network with a hub — the fixture is not vacuous",
     !!hub && hub.id === "the_crossing" && Object.values(L).filter(W.isNetworkGate).length >= 20);
-  const away = W.waygateTruthForGM({ ...c, currentLocationId: "millbrook" }, L);
+  const away = W.waygateTruthForGM(c, L);
   check("§139: ⛔ A QUESTION IS ANSWERED FROM FACT — away from any gate the GM is told the gates ARE a network and where the hub is",
     !!away && /They ARE a network/.test(away) && /is its HUB/.test(away), String(away).slice(0, 80));
   check("§139: ⛔ …and it is told the three things it got WRONG, in as many words",
@@ -9132,7 +9139,7 @@ console.log("\n── §139 · the gates are a network whether or not you are st
   check("§139: …and the hub's own article is not doubled — this text goes straight into the narrator's mouth", !/the The /.test(away));
   // ⛔ AND SMOKE 148'S RULING IS UNTOUCHED: the TURN still carries a gate paragraph only when standing at one.
   check("§139: ⛔ THE TURN BLOCK IS UNCHANGED — no per-turn waygate spam; the truth is the ASK channel's own line",
-    W.waygateBlockForGM({ ...c, currentLocationId: "millbrook" }, L) === null
+    W.waygateBlockForGM(c, L) === null
     && !!W.waygateBlockForGM({ ...c, currentLocationId: hub.id }, L));
   const reg = rd("engine/gm_registry.js");
   check("§139: ⚑ …and it is wired to the ASK view only, as its own row",

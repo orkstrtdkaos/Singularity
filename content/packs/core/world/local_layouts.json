@@ -187,8 +187,20 @@
     },
     "basis": "river",
     "why": "⛔ NOBODY WROTE THIS DOWN AND THE GEOGRAPHY REQUIRES IT: 14 miles above the Crossing, someone crossed here before the bridge existed. It is why the bridge was built downstream, where the banks are granite."
+   },
+   {
+    "id": "millbrook_fields",
+    "name": "The Long Fields",
+    "kind": "field",
+    "localMap": {
+     "bearing": 105,
+     "metres": 520
+    },
+    "basis": "anti-uphill",
+    "why": "⛔ ERIK NAMED THESE IN THE SEED — 'the docks in Millbrook on the river, the smithy, THE FIELDS' — and they were the one thing never placed. ⚑ THE FLAT GROUND, DEFINED BY THE SLOPE IT IS NOT ON: uphill measures -75°, so the fields take 105°, directly away from it. ⚠️ This layout's own `_derivation` said so all along — 'Terraces and orchards go uphill. FIELDS TAKE THE FLAT.' ⛔ AND IT IS WHY THE VILLAGE IS WHERE IT IS: Millbrook sits on the terrace above the floodplain, so its arable is not the wet meadow by the Echo — it is the dry flat behind the town, away from the rise."
    }
-  ]
+  ],
+  "_antiUphillNote_20260906": "⛑ AUTHORED 2026-09-06 to close SNG-404 §2. ⚠️ THE GATE ASSERTED THE PLACER REPRODUCES FOUR GROUND-DECIDED BASES and `anti-uphill` returned NULL — because NO LAYOUT IN THE CORPUS USED IT. ⛔ A basis with a branch in the engine, a name in `SITE_BASES`, and no content is a reader with no writer, and the gate was asserting agreement on nothing (CCode's own §3 rule). ✅ Fixed from the CONTENT side rather than by narrowing the gate: `anti-uphill` is a real basis, Erik named the fields in the original seed, and Millbrook had every other seed noun placed but not them."
  },
  "echo_river_crossing": {
   "_measured": {

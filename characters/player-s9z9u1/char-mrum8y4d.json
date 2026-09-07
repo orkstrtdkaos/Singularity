@@ -101,7 +101,7 @@
   "maxHealth": 68,
   "health": 68,
   "maxEnergy": 146,
-  "energy": 131,
+  "energy": 125,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -189,179 +189,167 @@
         "player": null,
         "summary": "Breaking from the hollow-pace's path, Loki runs downslope toward the Quickwood Eaves gate—the frame in pursuit, relentless, the ground turning treacherous.",
         "narration": "You break hard left from the patrol-frame's closing arc and run.\n\nThe path narrows sharply where the broken wall cuts downslope—moss slick underfoot, spring mud grabbing at your boots. Behind, the frame's legs rake across stone in metronomic pursuit, untroubled by the footing that tries to kill you. It does not tire. It does not slip. It simply follows its dead route downhill, and you are crossing it.\n\nCy's lamp swings wild at your shoulder. The Quickwood Eaves gate lies ahead—maybe two hundred meters if the path holds. The fork of the March swells to your left where the spring melt has turned the crossing into something that churns, and the old stone ford is still passable if you know where to look. Behind, the frame's lens catches a shaft of early sun and holds it, bright and patient and inexorable.\n\nThe path forks ahead. Left takes you down-slope toward the roaring water—hard footing, slower, but the frame's routing may not follow you off the marked way. Right stays true toward the gate, but it climbs briefly and the frame gains ground on open ground. Cy makes a sharp click-click that might be alarm or might be calculation."
+      },
+      {
+        "player": null,
+        "summary": "The hollow-pace ends its pursuit at the broken wall's edge, and the road to the Quickwood Eaves gate stands open.",
+        "narration": "You break hard left, boots sliding in the mud, and the patrol-frame's arc closes on empty air. Its legs rake across stone—once, twice—then fall silent. The luminous lens dims. The frame stops exactly where the path turns steep, its dead route ending at the edge of the broken wall's final course. It does not follow. It does not turn. It simply ceases, a machine that has completed its pass, and waits in the grey dawn for the next intruder to cross its line.\n\nCy's lamp steadies at your shoulder. Your breathing comes hard. The Quickwood Eaves gate lies two hundred meters ahead where the path levels slightly before the final descent—the true route, clear and direct. To the left, the March fork churns with spring melt, the old stone ford visible spinward if you need it, adding time but avoiding the swollen water. The frame gives no sign of waking again.\n\nAhead, the path forks cleanly: stone and shadow toward the gate, or the longer way around the water."
       }
     ],
     "lastTurn": {
-      "narration": "You break hard left from the patrol-frame's closing arc and run.\n\nThe path narrows sharply where the broken wall cuts downslope—moss slick underfoot, spring mud grabbing at your boots. Behind, the frame's legs rake across stone in metronomic pursuit, untroubled by the footing that tries to kill you. It does not tire. It does not slip. It simply follows its dead route downhill, and you are crossing it.\n\nCy's lamp swings wild at your shoulder. The Quickwood Eaves gate lies ahead—maybe two hundred meters if the path holds. The fork of the March swells to your left where the spring melt has turned the crossing into something that churns, and the old stone ford is still passable if you know where to look. Behind, the frame's lens catches a shaft of early sun and holds it, bright and patient and inexorable.\n\nThe path forks ahead. Left takes you down-slope toward the roaring water—hard footing, slower, but the frame's routing may not follow you off the marked way. Right stays true toward the gate, but it climbs briefly and the frame gains ground on open ground. Cy makes a sharp click-click that might be alarm or might be calculation.",
-      "sceneSummary": "Breaking from the hollow-pace's path, Loki runs downslope toward the Quickwood Eaves gate—the frame in pursuit, relentless, the ground turning treacherous.",
+      "narration": "You break hard left, boots sliding in the mud, and the patrol-frame's arc closes on empty air. Its legs rake across stone—once, twice—then fall silent. The luminous lens dims. The frame stops exactly where the path turns steep, its dead route ending at the edge of the broken wall's final course. It does not follow. It does not turn. It simply ceases, a machine that has completed its pass, and waits in the grey dawn for the next intruder to cross its line.\n\nCy's lamp steadies at your shoulder. Your breathing comes hard. The Quickwood Eaves gate lies two hundred meters ahead where the path levels slightly before the final descent—the true route, clear and direct. To the left, the March fork churns with spring melt, the old stone ford visible spinward if you need it, adding time but avoiding the swollen water. The frame gives no sign of waking again.\n\nAhead, the path forks cleanly: stone and shadow toward the gate, or the longer way around the water.",
+      "sceneSummary": "The hollow-pace ends its pursuit at the broken wall's edge, and the road to the Quickwood Eaves gate stands open.",
       "choices": [
         {
-          "label": "Break left toward the ford—the frame may hold to the marked route",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "flee",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Push for the gate on the true path—speed and endurance against the frame's relentless pace",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": "very hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "flee",
-            "endure"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Wayfinding to read the ground ahead and find a route the frame cannot follow",
+          "label": "Move toward the Quickwood Eaves gate—the direct path, stone underfoot.",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {},
-          "difficulty": "hard",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout",
-            "flee"
+            "travel"
           ],
-          "abilityId": "wayfinding",
-          "energyCost": 4,
-          "trivial": false,
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Stand and cast—use False Target to make the frame strike empty ground while you move",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Turn spinward toward the stone ford—the longer route, but the water was swollen.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
-          "difficulty": "hard",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "defend",
-            "trick"
+            "travel",
+            "careful"
           ],
-          "abilityId": "false_target",
-          "energyCost": 4,
+          "abilityId": "wayfinding",
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Look back at the frame—understand what just happened, what its limits are.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 2,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
       "deeds": [],
-      "characterDeltas": {},
+      "characterDeltas": {
+        "health": 0,
+        "energy": -4,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": null,
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The Waygate Path at dawn, narrowing steeply downslope where the broken wall's foundations cut the ground. Three courses of moss-deep stone. Spring mud treacherous underfoot. The swollen March fork churns to the left; the path splits ahead—left toward the ford, right toward the Quickwood Eaves gate still two hundred meters distant. The hollow-pace frame closes from behind with metronomic precision, its lens luminous in the early sun.",
+        "setting": "The Waygate Path at dawn, the broken wall's foundations behind. Spring mud, moss-deep stone. The patrol-frame stands motionless at the wall's edge, its luminous lens dimmed. The Quickwood Eaves gate lies ahead two hundred meters; the swollen March fork churns spinward.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "At Loki's shoulder, lamp swinging, making sharp calculation-clicks"
+            "state": "Lamp steady now, perched at Loki's shoulder, lens-iris closed"
           }
         ],
         "objects": [
-          "The broken wall—three courses of stone, moss-deep, mud-thick",
-          "The hollow-pace patrol-frame—four articulated legs, dome-top scarred, one lens bright, closing relentlessly",
-          "The swollen March fork—churning water, spring melt, the stone ford passable but hard",
-          "The path ahead, forking sharply"
+          "The hollow-pace patrol-frame—dome-top scarred, one lens faintly luminous, perfectly still at the wall's edge",
+          "The broken wall—three moss-deep courses of stone, foundations cutting the ground",
+          "The swollen March fork—churning water, spring melt, the stone ford visible spinward",
+          "The path ahead—splitting toward the Quickwood Eaves gate (direct, stone) or spinward toward the ford (longer, safer from water)"
         ],
         "threads": [
-          "The frame will not stop; it will strike anything crossing its dead route",
-          "Cy knows Precursor mechanism—but will not damage a working, even one killing you",
-          "Two routes ahead: the ford risks the water; the true path risks open ground where the frame gains speed",
-          "The Quickwood Eaves gate lies ahead—escape, if you can reach it"
+          "The man in the lower Annex who paid for the confluence ambush—still unnamed",
+          "What the frame's stopping means—does it recognize Loki as authorized, or is its route simply ended?",
+          "The Waygate Path ahead—sealed by deliberate interference, waiting to be resolved"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cy",
-          "note": "Running at Loki's shoulder—lamp steady despite the flight, making sharp calculation-clicks. Still will not interfere with the frame's operation.",
-          "statusNote": "Active, in pursuit, traveling with Loki toward the gate"
+          "note": "Lamp steadied as the hollow-pace disengaged. Cy makes no comment; it is waiting."
         }
       ],
       "intentsHeard": [],
       "factUpdates": [],
-      "placeUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "A hollow-pace Precursor patrol-frame stands motionless at the broken wall's edge—its route ended, its mandate expired or satisfied. The frame does not pursue beyond this point."
+        }
+      ],
       "codexUpdates": [],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
       "generateRequest": [],
-      "encounterOps": [
-        {
-          "op": "tactic",
-          "tag": "relentless"
-        }
-      ],
+      "encounterOps": [],
       "projectOps": [],
       "bandOps": [],
       "deathOps": [],
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": null,
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A sharp pursuit down the narrowing path, a stand and a breaking-off"
+      },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "Loki breaks left downslope in the grey-gold dawn light, Cy's lamp swinging at shoulder height, the swollen March fork churning below—behind, the hollow-pace frame's single lens bright and steady, moving with the terrible precision of something that has walked this line ten thousand times and will not stop.",
-      "newAbility": null,
-      "gambitOps": null,
+      "imagePrompt": null,
       "gambitApt": false,
+      "gambitOps": null,
       "markDefiningMoment": null,
       "markTeacher": null,
       "offerPromotion": null,
       "offerAcquisition": null,
       "offerIntent": null,
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/Loki%20breaks%20left%20downslope%20in%20the%20grey-gold%20dawn%20light%2C%20Cy's%20lamp%20swinging%20at%20shoulder%20height%2C%20the%20swollen%20March%20fork%20churning%20below%E2%80%94behind%2C%20the%20hollow-pace%20frame's%20single%20lens%20bright%20and%20steady%2C%20moving%20with%20the%20terrible%20precision%20of%20something%20that%20has%20walked%20this%20line%20ten%20thousand%20times%20and%20will%20no%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=63618&nologo=true"
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Waygate Path at dawn, narrowing steeply downslope where the broken wall's foundations cut the ground. Three courses of moss-deep stone. Spring mud treacherous underfoot. The swollen March fork churns to the left; the path splits ahead—left toward the ford, right toward the Quickwood Eaves gate still two hundred meters distant. The hollow-pace frame closes from behind with metronomic…",
+      "setting": "The Waygate Path at dawn, the broken wall's foundations behind. Spring mud, moss-deep stone. The patrol-frame stands motionless at the wall's edge, its luminous lens dimmed. The Quickwood Eaves gate lies ahead two hundred meters; the swollen March fork churns spinward.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "At Loki's shoulder, lamp swinging, making sharp calculation-clicks"
+          "state": "Lamp steady now, perched at Loki's shoulder, lens-iris closed"
         }
       ],
       "objects": [
-        "The broken wall—three courses of stone, moss-deep, mud-thick",
-        "The hollow-pace patrol-frame—four articulated legs, dome-top scarred, one lens b",
-        "The swollen March fork—churning water, spring melt, the stone ford passable but ",
-        "The path ahead, forking sharply"
+        "The hollow-pace patrol-frame—dome-top scarred, one lens faintly luminous, perfec",
+        "The broken wall—three moss-deep courses of stone, foundations cutting the ground",
+        "The swollen March fork—churning water, spring melt, the stone ford visible spinw",
+        "The path ahead—splitting toward the Quickwood Eaves gate (direct, stone) or spin"
       ],
       "threads": [
-        "The frame will not stop; it will strike anything crossing its dead route",
-        "Cy knows Precursor mechanism—but will not damage a working, even one killing you",
-        "Two routes ahead: the ford risks the water; the true path risks open ground where the frame gains speed",
-        "The Quickwood Eaves gate lies ahead—escape, if you can reach it"
+        "The man in the lower Annex who paid for the confluence ambush—still unnamed",
+        "What the frame's stopping means—does it recognize Loki as authorized, or is its route simply ended?",
+        "The Waygate Path ahead—sealed by deliberate interference, waiting to be resolved"
       ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
@@ -1067,7 +1055,9 @@
     },
     "the_crossing": {
       "visits": 2,
-      "notes": [],
+      "notes": [
+        "[d3] A hollow-pace Precursor patrol-frame stands motionless at the broken wall's edge—its route ended, its mandate expired or satisfied. The frame does not pursue beyond this point."
+      ],
       "flags": {},
       "lastVisit": 3,
       "vectorsKnown": []
@@ -1242,7 +1232,7 @@
     "lastSharedReadAt": "2026-09-07T21:32:00.037Z",
     "lastTickWorldDay": 69,
     "lastCanonWorldDay": 69,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "The marker stake Ossivyn drove in is unlabeled — but Ossivyn's own fear is that the child the tree is for will never be told it exists…",
@@ -6072,8 +6062,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788816831930,
-  "rev": 523,
+  "updatedAt": 1788816984570,
+  "rev": 531,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6935,7 +6925,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 99,
-    "the_center": 5
+    "the_center": 6
   },
   "opLossPending": false,
   "sessions": [
@@ -7006,10 +6996,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-07T19:42:14.907Z",
-      "lastAt": "2026-09-07T21:33:51.908Z",
+      "lastAt": "2026-09-07T21:36:24.564Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 9
+      "beats": 10
     }
   ],
   "establishedFacts": [
@@ -7053,19 +7043,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 169,
-    "choices": 169,
-    "characterDeltas": 67,
-    "scene": 169,
-    "placeUpdates": 19,
+    "sceneSummary": 170,
+    "choices": 170,
+    "characterDeltas": 68,
+    "scene": 170,
+    "placeUpdates": 20,
     "codexUpdates": 99,
-    "timeOps": 157,
+    "timeOps": 158,
     "offer": 13,
     "generateRequest": 6,
-    "sceneEnded": 46,
-    "npcUpdates": 140,
+    "sceneEnded": 47,
+    "npcUpdates": 141,
     "moveTo": 5,
-    "gambitApt": 11,
+    "gambitApt": 12,
     "deeds": 2,
     "questUpdates": 17,
     "standingOps": 1,
@@ -7077,7 +7067,7 @@
     "imagePrompt": 5,
     "scene_ended": 1
   },
-  "_opTurns": 169,
+  "_opTurns": 170,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1.75
@@ -7475,94 +7465,7 @@
       }
     }
   },
-  "activeEncounter": {
-    "defId": "chase-re-beast_hollow_pace",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "chase-re-beast_hollow_pace",
-      "type": "duel",
-      "status": "active",
-      "round": 1,
-      "log": [],
-      "opponentHealth": 4,
-      "opponentYieldAt": 0,
-      "opponentMaxHealth": 4,
-      "tactic": null,
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "a hollow-pace",
-        "attributes": {
-          "practical": 2,
-          "physical": 2,
-          "mental": 2,
-          "social": 2
-        },
-        "energy": 66,
-        "maxEnergy": 66,
-        "tacticTags": [
-          "press-in",
-          "circle",
-          "feint"
-        ],
-        "skills": [
-          {
-            "function": "move",
-            "name": "closes the gap",
-            "tier": 1,
-            "attribute": "physical"
-          },
-          {
-            "function": "track",
-            "name": "cuts off your line",
-            "tier": 1,
-            "attribute": "practical"
-          },
-          {
-            "function": "move",
-            "name": "gains ground",
-            "tier": 1,
-            "attribute": "physical"
-          },
-          {
-            "function": "foresee",
-            "name": "anticipates your turn",
-            "tier": 1,
-            "attribute": "mental"
-          }
-        ],
-        "health": 4,
-        "soak": 0,
-        "soakLayers": [],
-        "level": 11,
-        "synthesized": true
-      },
-      "momentum": 0,
-      "opponentEnergy": 66,
-      "_morphedFrom": {
-        "kind": "fight",
-        "note": "you broke from a hollow-pace — now it is ground, not blades"
-      },
-      "turn": {
-        "phase": "sense",
-        "sel": {
-          "sense": [
-            4
-          ],
-          "action": [],
-          "bonus": []
-        },
-        "text": {
-          "sense": "",
-          "action": "",
-          "bonus": ""
-        },
-        "setupBonus": 0,
-        "bonusEarned": false,
-        "senseDone": false,
-        "senseLine": ""
-      }
-    }
-  },
+  "activeEncounter": null,
   "legendGovernor": {
     "lastDeployDay": 31,
     "lastBeat": "witness_power"
@@ -7740,6 +7643,26 @@
       },
       "busy": true,
       "label": "Resolving the turn…",
+      "message": "Converting circular structure to JSON\n    --> starting at object with constructor 'Object'\n    |     property 'activeEncounter' -> object with constructor 'Object'\n    |     property 'state' -> object",
+      "where": [
+        "--> starting at object with constructor 'Object'",
+        "|     property 'activeEncounter' -> object with constructor 'Object'"
+      ]
+    },
+    {
+      "at": "2026-09-07T21:33:54.393Z",
+      "step": "sense-step",
+      "version": "1.9.412",
+      "defId": "chase-re-beast_hollow_pace",
+      "phase": "action",
+      "senseDone": true,
+      "sel": {
+        "sense": 1,
+        "action": 0,
+        "bonus": 0
+      },
+      "busy": true,
+      "label": "Reading a hollow-pace…",
       "message": "Converting circular structure to JSON\n    --> starting at object with constructor 'Object'\n    |     property 'activeEncounter' -> object with constructor 'Object'\n    |     property 'state' -> object",
       "where": [
         "--> starting at object with constructor 'Object'",

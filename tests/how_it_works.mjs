@@ -8931,6 +8931,76 @@ console.log("\n── §135 · a watchdog does not need to know what broke ─�
   }
 }
 
+/* ═════ §136 — A CRAFT THAT IS YOURS BY RIGHT NEVER COSTS YOU BREADTH, EVEN IF ITS FLAG WAS LOST ═════ */
+// ⛔ Erik 2026-09-07: "Brayden's character only had 3 skills but when he leveled up, it said he was at capacity and
+// couldn't add more… this seems like a leftover from the skills audit." ⚑ MEASURED ON 7 OF 17 REAL SAVES: Adelheid at
+// level 1 was at capacity with ZERO chosen crafts (both of hers by-right and unflagged); Brayden's Brynjar the same
+// with `disarm`; Silas counted 25 against 32 instead of 23.
+// ⚠️ `breadthUsed`'s own comment already described this failure TWICE, about `native` and then about `baseline` — a
+// character who "blew past the level-1 cap of 2 → atCapacity → could learn NOTHING new until level 5." Third time.
+console.log("\n── §136 · what you were given cannot be what you spent ──");
+{
+  const PR = await import("../engine/progression.js");
+  const ST = await import("../engine/skilltree.js");
+  const { loadContentHeadless: lch136 } = await import("./headless_content.mjs");
+  const C = await lch136();
+  const cap = C.rules?.skillCapacity || C.skillCapacity || null;
+  // a character whose by-right craft is owned but UNFLAGGED — the exact shape found on the saves
+  // ⚠️ A REAL PRIMARY, or the character has nothing by right and this whole block tests nothing — which is exactly
+  // what the vacuity check below caught on the first run.
+  const mk = () => ({ id: "t", name: "T", level: 1, domains: { primary: "ashwarden" }, attributes: { mental: 5 }, abilities: [], customAbilities: {} });
+  const seed = (c) => { const ids = PR.nativeGrantIdsFor(c, C.rules) || []; return ids; };
+  const probe = mk();
+  const byRight = seed(probe);
+  check("§136: the fixture is real — this character HAS crafts that are theirs by right", byRight.length > 0, `${byRight.length}`);
+  // owned, but with the flag missing, exactly as an audit or an early purchase leaves it
+  probe.abilities = byRight.slice(0, 2).map(id => ({ abilityId: id, level: 1 }));
+  const before = ST.breadthUsed(probe);
+  const fixed = PR.restampNativeGrants(probe, C.rules);
+  const after = ST.breadthUsed(probe);
+  check("§136: ⛔ AN UNFLAGGED BY-RIGHT CRAFT WAS COUNTED AS CHOSEN, AND IS NOT ANY MORE — the re-stamp frees exactly those",
+    before === probe.abilities.length && fixed.length === probe.abilities.length && after === 0,
+    `breadth ${before} → ${after}, freed ${fixed.join(",")}`);
+  check("§136: …idempotent — a second pass frees nothing and changes nothing",
+    PR.restampNativeGrants(probe, C.rules).length === 0 && ST.breadthUsed(probe) === 0);
+  // ⛔ IT CAN ONLY EVER FREE CAPACITY. A craft that is NOT yours by right must never be flagged free.
+  const spent = mk();
+  const notMine = Object.keys(C.abilities).find(id => !byRight.includes(id));
+  spent.abilities = [{ abilityId: notMine, level: 1 }];
+  const usedBefore = ST.breadthUsed(spent);
+  const none = PR.restampNativeGrants(spent, C.rules);
+  check("§136: ⛔ …AND ONLY THOSE — a craft you actually chose is untouched, so this can never hand out free breadth",
+    none.length === 0 && ST.breadthUsed(spent) === usedBefore && usedBefore === 1 && !spent.abilities[0].native);
+  // ⚑ the rank and every other field survive: this stamps a flag, it does not rebuild an entry
+  const ranked = mk();
+  ranked.abilities = [{ abilityId: byRight[0], level: 3, practiced: 7, note: "mine" }];
+  PR.restampNativeGrants(ranked, C.rules);
+  check("§136: ⚑ …and it stamps a FLAG, never rebuilds the entry — the rank and everything else survive",
+    ranked.abilities[0].level === 3 && ranked.abilities[0].practiced === 7 && ranked.abilities[0].note === "mine" && ranked.abilities[0].native === true);
+  // ⛔ AND IT REACHES EVERY EXISTING SAVE: the retro is versioned FORWARD, or saves that ran v1 never heal.
+  const old = mk(); old.nativeGrantsVersion = 1; old.abilities = byRight.slice(0, 1).map(id => ({ abilityId: id, level: 1 }));
+  const out = PR.retroNativeGrants(old, C.rules);
+  check("§136: ⛔ THE RETRO CARRIES THE REPAIR TO SAVES THAT ALREADY RAN IT — versioned forward, and it says what it corrected",
+    old.nativeGrantsVersion === 2 && Array.isArray(out) && (out.restamped || []).length === 1 && ST.breadthUsed(old) === 0);
+  check("§136: …and a save already on the new version is left alone",
+    PR.retroNativeGrants({ ...old, nativeGrantsVersion: 2, abilities: [] }, C.rules).length === 0);
+  check("§136: ⚑ …and the player is TOLD, because capacity handed back silently is indistinguishable from a bug",
+    /counted against your capacity by mistake/.test(rd("app.js")) && /ng\.restamped\?\.length/.test(rd("app.js")));
+  // ⛔ AND THE REAL SAVES ARE THE PROOF: none of them may still carry an unflagged by-right craft after the repair.
+  const fs136 = await import("node:fs");
+  let stillWrong = [];
+  for (const dir of fs136.readdirSync(join(root, "characters"))) {
+    for (const f of fs136.readdirSync(join(root, "characters", dir))) {
+      const c = JSON.parse(fs136.readFileSync(join(root, "characters", dir, f), "utf8"));
+      if (!(c.abilities || []).length) continue;
+      PR.restampNativeGrants(c, C.rules);   // on a COPY in memory — the file is not written by a test
+      const owned = new Map(c.abilities.map(a => [a.abilityId, a]));
+      for (const id of PR.nativeGrantIdsFor(c, C.rules) || []) { const a = owned.get(id); if (a && !a.native && !a.baseline) stillWrong.push(`${c.name}:${id}`); }
+    }
+  }
+  check("§136: ⛔ …and after the repair NO real save still counts a by-right craft against its breadth", stillWrong.length === 0, stillWrong.join(" · "));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

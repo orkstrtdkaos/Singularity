@@ -127,7 +127,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.409";
+const APP_VERSION = "1.9.410";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3210,7 +3210,10 @@ function migrate(c) {
   if (!c.forkChoices) c.forkChoices = {}; // SNG-BATCH-5 Phase 2: permanent branch-fork picks
   retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
   { const ng = retroNativeGrants(c, CONTENT.rules); // SNG-101b: backfill by-right native basics once (Law-14-safe, survives the sync clobber)
-    if (ng.length) c._reconcileNotes = [...(c._reconcileNotes || []), `By right of your people, basics you always had are yours: ${ng.join(", ")}.`]; }
+    if (ng.length) c._reconcileNotes = [...(c._reconcileNotes || []), `By right of your people, basics you always had are yours: ${ng.join(", ")}.`];
+    // ⛔ AND CAPACITY GIVEN BACK SILENTLY IS INDISTINGUISHABLE FROM A BUG (Erik 2026-09-07: "it said he was at
+    // capacity and couldn't add more"). If the repair freed a slot, the player is told which craft was miscounted.
+    if (ng.restamped?.length) c._reconcileNotes = [...(c._reconcileNotes || []), `${ng.restamped.join(", ")} ${ng.restamped.length === 1 ? "was" : "were"} counted against your capacity by mistake \u2014 ${ng.restamped.length === 1 ? "it is" : "they are"} yours by right, and cost you nothing. You have room to learn again.`]; }
   // SNG-131: seed the substrate-keepers' innate ACCESS (precursor for seraphic/abyssal, living-current for
   // rootkin) + the center's braid discount — idempotent on load, so existing keeper saves get it too.
   { const bgRec = backgroundById(c.background) || {};

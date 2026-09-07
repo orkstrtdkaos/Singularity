@@ -1166,8 +1166,11 @@ check('SNG-111: a genuinely different later name still becomes an alias', warden
   // retroNativeGrants runs ONCE, versioned by a DISTINCT flag (never collides with grantsVersion).
   const retroChar = { domains: { primary: "ashwarden" }, attributes: { mental: 5 }, abilities: [], grantsVersion: 1 };
   const r1 = retroNativeGrants(retroChar, ngRules);
+  // ⚑ VERSION 2 (2026-09-07): the retro also re-stamps by-right crafts that were owned but never flagged, and BUMPING
+  // the version is the mechanism that carries that repair to saves which already ran version 1 (§136). The property
+  // this asserts — versioned, distinct from grantsVersion, one-time — is unchanged.
   check("SNG-101b: retroNativeGrants backfills a bare character + sets nativeGrantsVersion (distinct from grantsVersion)",
-    r1.length > 0 && retroChar.nativeGrantsVersion === 1 && retroChar.grantsVersion === 1);
+    r1.length > 0 && retroChar.nativeGrantsVersion === 2 && retroChar.grantsVersion === 1);
   const r2 = retroNativeGrants(retroChar, ngRules);
   check("SNG-101b: retroNativeGrants is one-time (a second call on a versioned character grants nothing)", r2.length === 0);
 

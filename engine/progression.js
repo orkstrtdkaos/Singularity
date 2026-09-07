@@ -148,14 +148,38 @@ export function applyNativeGrants(character, rules) {
   return granted;
 }
 
+/** ⛔ THE FLAG IS THE ONLY THING THAT MAKES A BY-RIGHT CRAFT FREE, AND IT CAN BE LOST. `applyNativeGrants` stamps
+ *  `native: true` on abilities it ADDS — so a craft you already owned when it became yours by right, or one an audit
+ *  re-created, keeps counting against BREADTH forever. ⚠️ Measured 2026-09-07 on 7 of 17 real saves: Adelheid at
+ *  level 1 was AT CAPACITY with zero chosen crafts, both of hers being unflagged by-right grants; Brayden's Brynjar
+ *  the same with `disarm`; Silas counted 25 against a cap of 32 instead of 23.
+ *  ⚑ THIS RE-STAMPS WHAT IS ALREADY OWNED. It can only ever FREE capacity, never take it: an id must be in the
+ *  character's own by-right set to be touched, and the rank and every other field are left exactly as they are.
+ *  PURE-ish (mutates the entries), idempotent, and it returns what it corrected so the player can be told. */
+export function restampNativeGrants(character, rules) {
+  const owned = new Map((character?.abilities || []).map(a => [a.abilityId, a]));
+  const fixed = [];
+  for (const id of nativeGrantIdsFor(character, rules)) {
+    const a = owned.get(id);
+    if (a && !a.native && !a.baseline) { a.native = true; fixed.push(id); }
+  }
+  return fixed;
+}
+
 /** One-time retro: backfill missing primary-tradition native basics for existing characters. Versioned
  *  via a DISTINCT flag (`nativeGrantsVersion`) so it never collides with `retroLevelGrants`' grantsVersion
- *  (Q3). Law-14-safe (adds only, rank 1); idempotent (a second call grants nothing). Returns granted ids. */
+ *  (Q3). Law-14-safe (adds only, rank 1); idempotent (a second call grants nothing). Returns granted ids.
+ *  ⚑ VERSION 2 (2026-09-07): it also RE-STAMPS by-right crafts that were already owned and never flagged — the
+ *  capacity bug Erik found on Brayden's character. Bumping the version is what carries the repair to saves that
+ *  already ran version 1. `restamped` rides on the returned array so the one caller can tell the player. */
 export function retroNativeGrants(character, rules) {
-  if ((character.nativeGrantsVersion || 0) >= 1) return [];
+  if ((character.nativeGrantsVersion || 0) >= 2) return [];
   const granted = applyNativeGrants(character, rules);
-  character.nativeGrantsVersion = 1;
-  return granted;
+  const restamped = restampNativeGrants(character, rules);
+  character.nativeGrantsVersion = 2;
+  const out = [...granted];
+  out.restamped = restamped;   // ⚠️ the array contract is unchanged for every existing reader
+  return out;
 }
 
 /** SNG-131: seed a substrate-keeper origin's INNATE access base. A `origin.innatePrecursor[]` seeds the

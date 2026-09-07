@@ -8488,6 +8488,24 @@ console.log("\n── §125 · two fords with one name, and the one you meant is
     (rd("app.js").match(/resolveLocationId\([^)]*CONTENT\.locations, \{ here: CONTENT\.locations\?\.\[character\?\.currentLocationId\] \|\| null \}\)/g) || []).length >= 5);
 }
 
+/* ═════ §126 — A REFUSED PUSH IS SAID, NOT LOGGED (the silent half of the day the slate was lost) ═════ */
+// ⛔ §117 made the push guard refuse a stale copy; the refusal reached only the console. A player whose tab was
+// out-raced never learned their save did not go up. Once per session, on the play surface, kept for the next start.
+console.log("\n── §126 · your save did not go up, and you are told so ──");
+{
+  const SY = await import("../engine/sync.js");
+  const local = { playerKey: "p", id: "c", name: "Silas", rev: 1794, updatedAt: 2_000_000 };
+  const r = await SY.pushCharacterGuarded(local, { enabled: () => true, fetch: async () => ({ id: "c", rev: 3600, updatedAt: 1_000_000 }), push: async () => {} });
+  check("§126: ⛔ the guard's refusal has the ONE shape the app listens for — ok:false, reason remote-newer", r.ok === false && r.reason === "remote-newer");
+  const app = rd("app.js");
+  check("§126: ⛔ THE APP LISTENS — applyTurn takes backupSaves' result off the critical path and says the refusal once per session",
+    /backupSaves\(character, profile\)\.then\(r => \{/.test(app) && /r\.reason !== "remote-newer" \|\| _pushRefusedSaid\) return;/.test(app) && /_pushRefusedSaid = true;/.test(app));
+  check("§126: …in the player's words — what happened, that nothing is lost, and what to do — kept for the next start of play",
+    /const PUSH_REFUSED_LINE = "Your save did not go up: another device has a fresher copy\. Reload to take it in — nothing here is lost/.test(app)
+    && /character\._reconcileNotes = \[\.\.\.\(character\._reconcileNotes \|\| \[\]\), line\];/.test(app) && /el\.id = "push-refused"/.test(app));
+  check("§126: …and the turn never waits on the network — the call is not awaited", !/await backupSaves\(character, profile\)/.test(app));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

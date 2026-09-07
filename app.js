@@ -126,7 +126,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.401";
+const APP_VERSION = "1.9.402";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -690,6 +690,10 @@ function loadIdentity() {
 /** SNG-BATCH-7 Phase 2: reconcile a local character against the sync repo's authoritative
  *  copy — NEWER WINS, a stale local is never used, and a genuine both-advanced conflict
  *  preserves the losing copy as a recovery file + surfaces a note. Never blocks play. */
+/** ⛔ THE LINE A PLAYER SEES WHEN THEIR SAVE DID NOT GO UP (push guard, §117). Nothing here is lost: the copy the other
+ *  device has wins on the next load, and this one is kept as a recovery copy when it does. Said once per session. */
+const PUSH_REFUSED_LINE = "Your save did not go up: another device has a fresher copy. Reload to take it in — nothing here is lost; this copy is kept as a recovery copy when you do.";
+let _pushRefusedSaid = false;
 async function syncPullCharacter(local) {
   if (!local || !syncEnabled()) return { character: local, note: null };
   let remote = null;
@@ -7255,7 +7259,17 @@ function applyTurn(turn, resolution, playerWords = null) {
     const { pass, hold } = splitLedgerEvents(events);
     if (hold.length) { character._pendingLedger = [...(character._pendingLedger || []), ...hold].slice(-4); saveCharacter(character); }
     if (pass.length) appendLedger(pass, character.id).catch(err => console.warn("[ledger]", err.message));
-    backupSaves(character, profile);
+    // ⛔ A REFUSED PUSH IS SAID, NOT LOGGED. §117 made the guard refuse a stale copy; the refusal reached only the console,
+    // so a player whose tab was out-raced never learned their save did not go up. Once per session, on the play surface,
+    // and kept for the next start of play. Off the critical path: applyTurn never waits on the network.
+    backupSaves(character, profile).then(r => {
+      if (!r || r.ok || r.reason !== "remote-newer" || _pushRefusedSaid) return;
+      _pushRefusedSaid = true;
+      const line = PUSH_REFUSED_LINE;
+      character._reconcileNotes = [...(character._reconcileNotes || []), line];
+      try { saveCharacter(character); } catch { /* best effort */ }
+      if (!document.getElementById("push-refused")) { const el = document.createElement("div"); el.className = "error-card"; el.id = "push-refused"; el.textContent = line; document.getElementById("app")?.prepend(el); }
+    }).catch(() => { /* the backup already logged */ });
   }
   _applyPhase = "done"; // reached the end cleanly — a throw between the last labelled group and here reads "done"
 }

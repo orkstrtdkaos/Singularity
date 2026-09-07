@@ -258,3 +258,115 @@ and over" and "I can't tell what happened".**
 
 ⚠ **This changes nothing about §§1–7.** The overhaul is still wanted and the rulings are still open — but the
 fight should be legible again first, which is why §7.5 puts §A last.
+
+---
+
+# PART TWO — THE SURFACE
+
+**Author:** Aevi (PO) · **2026-09-07.** ⬜ **CCode owns Part One (the engine). This is the other half Erik
+asked for.**
+> Erik: *"Need to overhaul encounters. **Including the UI.** I want it to flow well — right now there's text
+> everywhere and status applying and rolls messy. Let's make it robust and smooth."*
+
+---
+
+## §9 — ⛔ MEASURED: TWENTY-THREE BLOCKS, ALL SIBLINGS
+
+**One round of a fight renders `sb-panel` at 12,486 characters of markup across TWENTY-THREE distinct
+blocks** — scale · party · opponent · pressure · opponent-crafts · fog · fog-line · aim · receipt · rolls ·
+effects-row · effects-label · log · detail · detail-sum · intensity · waiting · spinner · quick · braid-note
+· skills · step-text · actions.
+
+⛔ **NONE OF THEM OUTRANKS ANY OTHER.** ⚠️ **They are flat siblings in one div, so the pressure counter that
+ENDS THE FIGHT sits at the same visual weight as a note about braid material.**
+
+➡️ ⚑ **THAT IS THE WHOLE OF *"text everywhere."* It is not too much information — it is information with no
+hierarchy**, and every block was added by someone correctly fixing something invisible.
+
+---
+
+## §10 — ⚑ THE SHAPE: FOUR ZONES, AND A ROUND MOVES THROUGH THEM
+
+⛔ **A fight is not a dashboard. It is a LOOP**, and the screen should say where in the loop you are.
+
+| zone | holds | ⛔ rule |
+|---|---|---|
+| ⚑ **1 · THE STATE** — always visible, never moves | ⚠️ **their name · their condition · the pressure counter · your hp/energy** | ⛔ **The pressure counter is the EXIT and belongs at the top.** Erik once read *"neither gains — it's even"* and the fight ended, because the meter he was watching was not the one that ends it |
+| ⚑ **2 · WHAT JUST HAPPENED** — the receipt | one line of prose, ⚠️ **and the rolls FOLDED behind it** | ⛔ **The maths is on request. A player who wants it presses once; a player who does not never sees it** |
+| ⚑ **3 · WHAT YOU CAN SEE** — the fog | their move · their aim · their crafts | ⚠️ **This is the READ, and it should look like a read** — quieter than the state, louder than the log |
+| ⚑ **4 · WHAT YOU DO** — the controls | ⛔ **the menu, the intensity, the button** | ⚠️ **and NOTHING ELSE may live below it.** The thing you act with is the last thing on screen |
+
+⬜ **Everything currently rendered that fits none of these is a LOG entry**, and the log is collapsed by
+default.
+
+---
+
+## §11 — ⛑ STATUS AND ROLLS, WHICH ERIK NAMED SEPARATELY
+
+### *"status applying"*
+⛔ **Conditions currently arrive as prose inside the receipt and vanish next round.** ⚠️ **A player cannot
+see what is ON them.**
+
+⬜ **A condition is a CHIP in zone 1, on whoever carries it** — ⚑ **name, rounds left, and who put it
+there.** ⛔ **It stays until it ends, and when it ends the chip says so once and goes.**
+
+⚑ **AND PART ONE MAKES THIS LEGIBLE FOR THE FIRST TIME:** under §A a condition is a CONTEST, so a chip can
+carry *why* it landed — ⚠️ **`blinded (2) — you beat their resist by 31`.** ⛔ **Today a condition has no
+story at all, which is why *"I can't tell what happened."***
+
+### *"rolls messy"*
+⛔ **`sb-rolls` renders every roll of the round inline.** ⚠️ **A round has up to six.**
+
+⬜ **One line, in the player's words, and the numbers folded:** ⚑ *"You struck true; they turned most of
+it."* ➡️ **`see the math` opens the breakdown that already exists** — `data-breakdown` is built and good, and
+it should be the ONLY way numbers appear.
+
+⛔ **AND ONE ROLL IS NOT LIKE THE OTHERS: the death save.** ⚠️ **R35's opposed contest decides whether a
+person stops.** ⬜ **It gets its own moment — a beat of its own, not a line in a list.**
+
+---
+
+## §12 — ⚠️ WHAT MUST NOT BE LOST
+
+⛔ **Every one of the 23 blocks exists because someone found something invisible.** ⚑ **Folding is not
+deleting, and four of them must stay reachable in one press:**
+
+| ⚑ keep | why |
+|---|---|
+| **the opponent's crafts** (SNG-247) | ⚠️ Erik: *"fighting an NPC should include that the opponent has skills they can use, just like you do."* **Fog-gated, and the gating is the good part** |
+| ⛔ **the aim line** (CCODE-276) | ⚑ *"you need to sense who's getting attacked so you can intervene."* ⚠️ **A read that buys something the player cannot see is the defect that fix repaired** |
+| **the pressure counter** (CCODE-38) | ⛔ **it is the exit** |
+| **`see their math`** | ⚑ the fog's breakdown — **the only honest answer to *"why did that happen"*** |
+
+---
+
+## §13 — ⬜ AND THE ORDER, WHICH FOLLOWS CCODE'S
+
+**Part One §7.5 argues §D → §B → §C → §A so the fight is LEGIBLE before it is REBALANCED.** ✅ **The surface
+belongs in that sequence and not after it:**
+
+| # | |
+|---|---|
+| ⛑ **0** | ⛔ **§8's circular-save fix** — ⚠️ **nothing else can be judged while every save throws** |
+| **1** | ⚑ **the four zones (§10)** — ⛔ **before any balance change**, so a changed number is visible when it changes |
+| **2** | §D · §B · §C — Part One's repairs |
+| **3** | ⚑ **the condition chips (§11)** — ⚠️ **they need §A's contest to have a story to tell** |
+| **4** | §A, the rebalance, ⛔ **last** |
+
+⚠️ **Aevi's reason for putting the surface at step 1 rather than last:** ⛔ **Erik cannot tell us whether
+§A's numbers feel right if he still cannot see what happened.** ⚑ **Legibility is a prerequisite for the
+balance conversation, not a reward for finishing it.**
+
+---
+
+## §14 — ⬜ AEVI'S READ ON PART ONE'S FIVE RULINGS
+
+⛑ **Erik's, not mine — but he asked what I think.**
+
+| # | ⬜ |
+|---|---|
+| **1 · the decisive band** | ⚑ **reuse 25.** `sb.senseStep.decisiveMargin` already means *"you beat them clearly"* — ⛔ **a second number for the same idea is two dials that will drift apart** |
+| **2 · does a lost condition cost the caster** | ⚑ **yes, and the craft already says what it costs** — ⚠️ **surge backlash is the authored answer, and a bind that fails badly is exactly what backlash is for.** ⛔ No new mechanic |
+| **3 · self-buffs unopposed** | ✅ **CCode's read is right.** ⚠️ *"Any condition"* means **imposed on another party** — ⛔ **a guard contested against nobody is a roll with no opponent, and R47's free floor would become a dice roll** |
+| **4 · the four social functions in a fight** | ⚑ **IN, and they are the reason the coliseum has eight cells.** ⚠️ `coliseum_champion_influence` is a whole authored encounter about winning by INFLUENCE — ⛔ **if the fight cannot see the verb, that cell cannot be played** |
+| **5 · order** | ✅ **agreed, with §10 inserted at step 1** — see §13 |

@@ -118,75 +118,101 @@
         "player": null,
         "summary": "A road-worn man steps from the dark to collect a small debt from the Crow and Thistle — two coppers, a roast, a favor owed — with Ragnar and Maret watching.",
         "narration": "The firelight at the Marchward's edge has drawn a small knot of travelers together — a natural thing in early spring when the cold still bites after dark. You, Maret, Ragnar, and Freki have settled near the common pit where a low fire burns down to coals, and the night is quiet enough that you can hear the mud settling in the drainage ditch nearby.\n\nA man steps from the shadow between two post-houses — stocky, road-worn, a patched wool hood pushed back from a broad face. He moves without urgency, but his eyes have already found you. He stops a few paces short and speaks to the fire rather than to any one of you. \"The Crow and Thistle. Three nights ago. You sat at the long table, near the end, and you ate the roast that came out of my pot — the one I'd traded a half-day's wood-splitting to put in there. The innkeep tallied it to the house.\" A pause, calm and without heat. \"House didn't pay me. You did eat, though.\" He holds out one open hand — not aggressive, simply present. A debt, named plainly, in front of witnesses. \"Two coppers covers it, or whatever you think fair. I'm not looking for trouble.\"\n\nFreki has not growled. The hound is sitting with its weight on its haunches, ears easy, watching the man with the flat attention it gives someone it's decided is what they say they are. Ragnar has not moved, but his eyes have — they've done a quick sweep of the shadows behind the man, found nothing, and returned to the fire.\n\nThe sum is small. The claim is real enough — you were at that table. The question is how you want to handle it, and who's watching while you do."
+      },
+      {
+        "player": "Pay him the two coppers — a fair claim, paid without argument.",
+        "summary": "A road-worn man collected a two-copper debt without incident; Maret begins to speak.",
+        "narration": "You reach into your pack and pull out two coppers without ceremony — a fair debt is a fair debt, and arguing over two coppers by firelight is the kind of thing that marks a man. You hold them out flat on your palm. The stranger crosses the last few paces and takes them with a short, satisfied nod, not quite a bow. 'Square,' he says, and turns back toward the shadow between the post-houses without another word. No theater, no grudge. The sound of his boots on mud fades quickly.\n\nFreki watches him go, ears easy, and then swings her head back to the fire. That read — the dismissal, the body settling — tells you what you already assumed: the man was what he said he was.\n\nThe fire ticks quietly. Ragnar has not moved. Maret's eyes came off the stranger the moment he turned away, and now they are on you — the habitual assessment, unhurried. The debt-case is formally closed. The follower's backer is not.\n\nThe firelight holds the four of you. Maret shifts once, a small settling of weight, and when she speaks her voice is even and low enough that it carries no farther than the pit. 'You've been patient,' she says. It is not quite a compliment. It is the beginning of something she's been deciding whether to say."
       }
     ],
     "lastTurn": {
-      "narration": "The firelight at the Marchward's edge has drawn a small knot of travelers together — a natural thing in early spring when the cold still bites after dark. You, Maret, Ragnar, and Freki have settled near the common pit where a low fire burns down to coals, and the night is quiet enough that you can hear the mud settling in the drainage ditch nearby.\n\nA man steps from the shadow between two post-houses — stocky, road-worn, a patched wool hood pushed back from a broad face. He moves without urgency, but his eyes have already found you. He stops a few paces short and speaks to the fire rather than to any one of you. \"The Crow and Thistle. Three nights ago. You sat at the long table, near the end, and you ate the roast that came out of my pot — the one I'd traded a half-day's wood-splitting to put in there. The innkeep tallied it to the house.\" A pause, calm and without heat. \"House didn't pay me. You did eat, though.\" He holds out one open hand — not aggressive, simply present. A debt, named plainly, in front of witnesses. \"Two coppers covers it, or whatever you think fair. I'm not looking for trouble.\"\n\nFreki has not growled. The hound is sitting with its weight on its haunches, ears easy, watching the man with the flat attention it gives someone it's decided is what they say they are. Ragnar has not moved, but his eyes have — they've done a quick sweep of the shadows behind the man, found nothing, and returned to the fire.\n\nThe sum is small. The claim is real enough — you were at that table. The question is how you want to handle it, and who's watching while you do.",
-      "sceneSummary": "A road-worn man steps from the dark to collect a small debt from the Crow and Thistle — two coppers, a roast, a favor owed — with Ragnar and Maret watching.",
+      "narration": "You reach into your pack and pull out two coppers without ceremony — a fair debt is a fair debt, and arguing over two coppers by firelight is the kind of thing that marks a man. You hold them out flat on your palm. The stranger crosses the last few paces and takes them with a short, satisfied nod, not quite a bow. 'Square,' he says, and turns back toward the shadow between the post-houses without another word. No theater, no grudge. The sound of his boots on mud fades quickly.\n\nFreki watches him go, ears easy, and then swings her head back to the fire. That read — the dismissal, the body settling — tells you what you already assumed: the man was what he said he was.\n\nThe fire ticks quietly. Ragnar has not moved. Maret's eyes came off the stranger the moment he turned away, and now they are on you — the habitual assessment, unhurried. The debt-case is formally closed. The follower's backer is not.\n\nThe firelight holds the four of you. Maret shifts once, a small settling of weight, and when she speaks her voice is even and low enough that it carries no farther than the pit. 'You've been patient,' she says. It is not quite a compliment. It is the beginning of something she's been deciding whether to say.",
+      "sceneSummary": "A road-worn man collected a two-copper debt without incident; Maret begins to speak.",
       "choices": [
         {
-          "label": "Pay him the two coppers — a fair claim, paid without argument.",
+          "label": "Say nothing — hold the quiet and let her find her own words",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": "very easy",
-          "intentTags": [
-            "help"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Talk it through — you didn't know the cost fell on him; offer an honest conversation and see if you can find a middle ground.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "axes": {},
           "difficulty": "easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "negotiate",
             "calm"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Look the situation over — use Order-Sense to read whether this claim is what it appears, or whether the structure of it is off.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Ask her plainly: what did the record-hall tell you?",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Order-Sense on the moment — read what she's withholding before she decides to give it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
             "study"
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Work it off — tell him two coppers is more than you have loose, but your hands are good; ask what an hour's work is worth to him tonight.",
+          "label": "Glance at Ragnar — see if he wants to hear this too, or step away",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": "easy",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "negotiate",
-            "help"
+            "scout"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "xp": 0
+      },
       "scene": {
-        "setting": "The common fire-pit at the Marchward's edge, night. A low coal-fire burns in an open pit between post-houses. Cold spring air, mud smell from the drainage ditch nearby. Firelight on four faces and one hound.",
+        "setting": "The common fire-pit at the Marchward's edge, night. A low coal-fire burns in an open pit between post-houses. Cold spring air, mud smell from the drainage ditch. Firelight on four faces and one hound. The road-worn stranger has departed.",
         "npcsPresent": [
           {
             "name": "Maret Threnwick",
-            "state": "Seated across the fire, watching the newcomer with her habitual stillness — no reaction yet."
+            "state": "Watching Brynjar across the fire, weight shifted — beginning to speak."
           },
           {
             "name": "Ragnar Solmyr",
-            "state": "Has done a shadow-sweep, found nothing, returned attention to the fire. Not intervening."
+            "state": "Unmoved; attention on the fire and the scene, not intervening."
           },
           {
             "name": "Freki",
-            "state": "Sitting loose-limbed, ears easy — reading the man as genuine."
-          },
-          {
-            "name": "Road-worn stranger",
-            "state": "Standing three paces off, one open hand extended, eyes on the fire. Calm, waiting."
+            "state": "Ears easy, settled after the stranger left, watching the fire."
           }
         ],
         "objects": [
@@ -195,56 +221,41 @@
           "Shadows between post-houses"
         ],
         "threads": [
-          "The debt-claim is open — the man is waiting for an answer.",
-          "Maret has promised to speak what she learned inside the Stillhold — not yet spoken."
+          "Maret has begun to speak — what she learned inside the Stillhold is about to surface.",
+          "The follower's backer remains unidentified."
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "maret-threnwick",
-          "name": "Maret Threnwick",
-          "note": "Watching the debt encounter with characteristic stillness — no move to intervene.",
-          "statusNote": "Seated at the common fire-pit at the Marchward's edge; holding what she learned in the Stillhold, ready to speak when the moment is right."
-        },
-        {
-          "op": "update",
-          "npcId": "ragnar-solmyr",
-          "name": "Ragnar Solmyr",
-          "note": "Swept the shadows behind the stranger on instinct — found nothing, returned to watching.",
-          "statusNote": "At the common fire-pit, Marchward's edge — present and observant."
+          "note": "Watched the debt paid without comment. Began to speak — 'You've been patient' — signaling she is ready to share what she learned at the record-hall.",
+          "statusNote": "Seated at the common fire-pit, beginning to deliver what she learned inside the Stillhold."
         }
       ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "a stocky, road-worn man, patched wool hood, broad face — came to collect a small honest debt from the Crow and Thistle roast three nights ago, calm and without threat",
-          "why": "He stepped into the scene to name a real debt — needs a stable identity so he can recur if the player doesn't settle it cleanly"
-        }
-      ],
+      "offer": {
+        "thing": "Maret beginning to open — the shape of what she carries is about to become real",
+        "from": "Maret's own read of Brynjar: trustworthy, patient — the two-copper payment without argument is exactly the kind of small, legible honesty that moves her one degree"
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange at the fire-pit — the claim has just been made"
+        "why": "a brief exchange at the fire-pit while a small debt was settled"
       }
     },
     "sceneState": {
-      "setting": "The common fire-pit at the Marchward's edge, night. A low coal-fire burns in an open pit between post-houses. Cold spring air, mud smell from the drainage ditch nearby. Firelight on four faces and one hound.",
+      "setting": "The common fire-pit at the Marchward's edge, night. A low coal-fire burns in an open pit between post-houses. Cold spring air, mud smell from the drainage ditch. Firelight on four faces and one hound. The road-worn stranger has departed.",
       "npcsPresent": [
         {
           "name": "Maret Threnwick",
-          "state": "Seated across the fire, watching the newcomer with her habitual stillness — no reaction yet."
+          "state": "Watching Brynjar across the fire, weight shifted — beginning to speak."
         },
         {
           "name": "Ragnar Solmyr",
-          "state": "Has done a shadow-sweep, found nothing, returned attention to the fire. Not intervening."
+          "state": "Unmoved; attention on the fire and the scene, not intervening."
         },
         {
           "name": "Freki",
-          "state": "Sitting loose-limbed, ears easy — reading the man as genuine."
-        },
-        {
-          "name": "Road-worn stranger",
-          "state": "Standing three paces off, one open hand extended, eyes on the fire. Calm, waiting."
+          "state": "Ears easy, settled after the stranger left, watching the fire."
         }
       ],
       "objects": [
@@ -253,11 +264,11 @@
         "Shadows between post-houses"
       ],
       "threads": [
-        "The debt-claim is open — the man is waiting for an answer.",
-        "Maret has promised to speak what she learned inside the Stillhold — not yet spoken."
+        "Maret has begun to speak — what she learned inside the Stillhold is about to surface.",
+        "The follower's backer remains unidentified."
       ]
     },
-    "beats": 1
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
@@ -879,12 +890,8 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
-        "from": "what Doss fears: the lie she does not catch in time, the guest who reads as safe and is not — and Freki just passed her test by reading true"
-      },
       {
         "thing": "Ragnar volunteered that he saw movement at the east fork before dawn — a detail he'd been holding, waiting for someone who earned it",
         "from": "His nature as a reader of patterns and his days watching the square — he notices, and he gives what he notices to someone who shows up right"
@@ -900,6 +907,10 @@
       {
         "thing": "Maret's eyes have tracked to one of the dark gates — not the lit ones, the one in the north face that hasn't hummed in what looks like…",
         "from": "Maret's learned stillness under pressure and her habit of noting things she doesn't immediately name — something in this hall caught her…"
+      },
+      {
+        "thing": "Maret beginning to open — the shape of what she carries is about to become real",
+        "from": "Maret's own read of Brynjar: trustworthy, patient — the two-copper payment without argument is exactly the kind of small, legible honesty…"
       }
     ],
     "latentArcs": {
@@ -3658,6 +3669,19 @@
         "createdDay": 1,
         "entityId": "gen-the-colosseum",
         "updatedDay": 1
+      },
+      "calwick-pren": {
+        "id": "calwick-pren",
+        "label": "Calwick Pren",
+        "kind": "person",
+        "facts": [
+          "[d1] Small creditor who walks his own ledger — a man who is owed and has come to collect, nothing more and nothing less"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "calwick-pren",
+        "updatedDay": 1
       }
     },
     "mergeUndo": [
@@ -3766,19 +3790,19 @@
     ]
   },
   "tendencies": {
-    "leadership": 5.795714397969321,
-    "cerebral": 6.849600476937569,
-    "strategic": 5.433155386900893,
-    "ruthless": 0.37254609219269774,
-    "social": 9.955243036358505,
-    "cautious": 7.879457480131035,
-    "generous": 0.70155967750146,
-    "patient": 0.7569213803350267
+    "leadership": 5.650821538020088,
+    "cerebral": 6.67836046501413,
+    "strategic": 5.29732650222837,
+    "ruthless": 0.3632324398878803,
+    "social": 9.706361960449541,
+    "cautious": 7.682471043127759,
+    "generous": 1.6840206855639235,
+    "patient": 0.7379983458266509
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 41,
+  "actionCount": 42,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3832,6 +3856,14 @@
   "nativeGrantsVersion": 1,
   "reconcileVersion": 47,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Calwick Pren",
+      "url": "https://image.pollinations.ai/prompt/A%20stocky%20man%20in%20his%20mid-forties%2C%20road-worn%20in%20the%20way%20of%20someone%20who%20has%20never%20left%20a%20fifty-mile%20radius%20but%20has%20walked%20every%20inch%20of%20it.%20A%20patched%20wool%20hood%2C%20faded%20brown-grey%2C%20pushed%20back%20to%20show%20a%20br%2C%20character%20portrait%2C%20named%20Calwick%20Pren%2C%20male%2C%20Small%20creditor%20who%20walks%20his%20own%20ledger%20%E2%80%94%20a%20man%20who%20is%20owed%20and%20has%20come%20to%20collect%2C%20nothing%20more%20an%2C%20Flat%2C%20unhurried%2C%20no%20flourish.%20Names%20amounts%20exactly%20%E2%80%94%20not%20'a%20few%20coins'%20but%20'fourteen%20and%20three.'%20Do%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=95888&nologo=true",
+      "caption": "Calwick Pren",
+      "worldDay": 69,
+      "at": "2026-09-07T14:04:08.585Z"
+    },
     {
       "kind": "location",
       "prompt": "The Colosseum",
@@ -3954,8 +3986,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788789816590,
-  "rev": 111,
+  "updatedAt": 1788789897217,
+  "rev": 113,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4211,6 +4243,103 @@
         "peopleSource": "generated",
         "domainsSource": "generated",
         "image": "https://image.pollinations.ai/prompt/A%20woman%20in%20her%20mid-thirties%2C%20solid%20across%20the%20shoulders%2C%20grey%20wool%20cloak%20road-worn%20at%20the%20hem%20but%20well-kept%20above%20it%20%E2%80%94%20the%20distinction%20deliberate%2C%20not%20neglect.%20Brown%20hair%20pulled%20back%20with%20two%20bone%20pin%2C%20character%20portrait%2C%20named%20Maret%20Threnwick%2C%20Stillhold%20cloth-warden%20and%20road-courier%20who%20carries%20sealed%20records%20stitched%20into%20fabric%20%E2%80%94%20and%20knows%20%2C%20Unhurried%20and%20level%20%E2%80%94%20the%20voice%20of%20someone%20who%20has%20practiced%20keeping%20the%20face%20still%20while%20the%20mind%20r%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=4801&nologo=true"
+      },
+      "calwick-pren": {
+        "schemaVersion": 1,
+        "id": "calwick-pren",
+        "name": "Calwick Pren",
+        "role": "Small creditor who walks his own ledger — a man who is owed and has come to collect, nothing more and nothing less",
+        "homeLocation": "the_center",
+        "communityId": "colosseum.crowd",
+        "personality": {
+          "warmth": 0.4,
+          "trust": 0.2,
+          "candor": 0.8,
+          "patience": 0.6
+        },
+        "spectrum": {
+          "body_mind": -0.4,
+          "emotional_logical": -0.3,
+          "concrete_abstract": -0.6
+        },
+        "voiceHints": "Flat, unhurried, no flourish. Names amounts exactly — not 'a few coins' but 'fourteen and three.' Does not raise his voice to make a point feel bigger. When he is done speaking he stops, and he will wait as long as the debt requires. Has seen enough of the Colosseum's noise to know that silence is the heaviest thing a man can put on a table.",
+        "knowledge": [
+          "The exact debt — what was ordered, what was not paid, and on which night",
+          "The Crow and Thistle by long habit: who runs the back room, which regulars settle and which do not",
+          "The Colosseum's rhythms — he has worked the crowd margin for years, selling small provisions, and he knows when a man is hiding and when he is merely late",
+          "That a debt written nowhere but in two memories is still a debt, and that most people know it"
+        ],
+        "wants": "To walk out of here made whole — the sum, not interest, not punishment. Settlement. Then done.",
+        "fears": "That the player will make this into something it is not — a confrontation, a story, a demonstration — and that he will have to decide whether his dignity is worth more than the coin.",
+        "reactsToReputation": {
+          "honest": "pays him back before he finishes asking; he nods and goes",
+          "evasive": "quieter, not louder; returns the next day and the next",
+          "violent": "does not flinch, but marks you; the Colosseum has a long memory and so does he",
+          "generous": "accepts what is owed and nothing extra; he is not a beggar"
+        },
+        "appearance": "A stocky man in his mid-forties, road-worn in the way of someone who has never left a fifty-mile radius but has walked every inch of it. A patched wool hood, faded brown-grey, pushed back to show a broad face — flat nose broken once and reset badly, heavy brow, eyes the colour of river clay. Short beard coming in uneven with the season. Hands thick and calloused, not a fighter's hands but a carrier's. The kind of man the eye slides past until he speaks.",
+        "people": "human",
+        "domains": {
+          "primary": "somatic",
+          "secondary": "syllogist",
+          "tertiary": "rootkin"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Calwick is a man of body and plain reckoning — somatic by decades of physical labour, syllogist in the narrow sense that he tracks obligation with precision, rootkin by the early-spring habit of a man who knows which season the roads open and which they close. Kind and domain are independent.",
+        "sex": "male",
+        "gender": "male",
+        "assistTags": [
+          "track",
+          "move",
+          "guard",
+          "recall"
+        ],
+        "_assistWhy": "⛔ CCODE 2026-09-02: 42 of 52 authored people carried NO `assistTags`, so `contributionsOf` fell to its HARM default and 'a master smith counts as a striker'. ✅ TAGS DERIVED FROM THIS PERSON'S OWN AUTHORED `role` AND `knowledge` — nothing invented. ⚠️ HARM IS NOT REMOVED: Erik's rule stands — 'a blacksmith with a spear is a person with a spear.' These tags ADD the families each person was silently missing.",
+        "debtRecord": {
+          "creditor": "Calwick Pren",
+          "venue": "Crow and Thistle roast",
+          "nightsAgo": 3,
+          "amountOwed": "fourteen coin and three — two plates, one pitcher, fire-seat fee",
+          "status": "unpaid",
+          "note": "No threat was made at time of purchase. Calwick extended credit as a courtesy and expects the same courtesy returned."
+        },
+        "physicality": "Mid-forties, stocky and low-centred, built for carrying rather than striking. Broad face, flat nose, heavy brow. Patched wool hood, faded to no particular colour by weather and season. The beard is early-spring thin — not a choice, just what winter leaving looks like on him. Mud still on his boots from the road in. WHAT CATCHES THE EYE: nothing, at first — he is designed by his life to be overlooked. Then the stillness. He is not tense. He is simply not going anywhere.",
+        "intimacyNotes": "⛔ NOT APPLICABLE. Calwick is here for a debt and has no other business with the player. Do not open this register.",
+        "romanceEligible": false,
+        "_physWhy": "⚠️ Authored per `po/CONTENT_POLICY_physicality.md`. Calwick is an adult; romance eligibility is false because his role is purely transactional and no romantic grain exists in his authored character.",
+        "_gen": {
+          "entityId": "calwick-pren",
+          "type": "npc",
+          "birthWeight": 2,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-0jwfjo",
+            "characterId": "char-mrrzi63o",
+            "locationId": "gen-the-colosseum",
+            "day": 1,
+            "worldDay": null,
+            "hint": "a stocky, road-worn man, patched wool hood, broad face — came to collect a small honest debt from the Crow and Thistle r",
+            "why": "He stepped into the scene to name a real debt — needs a stable identity so he can recur if the player doesn't settle it "
+          },
+          "attentionHistory": [],
+          "createdDay": 1,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true,
+          "contract": {
+            "verdict": "thin",
+            "worst": "DEGRADED",
+            "missing": [
+              "disposition"
+            ],
+            "vague": [],
+            "why": "npc: THIN — missing disposition"
+          }
+        },
+        "peopleSource": "generated",
+        "domainsSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20stocky%20man%20in%20his%20mid-forties%2C%20road-worn%20in%20the%20way%20of%20someone%20who%20has%20never%20left%20a%20fifty-mile%20radius%20but%20has%20walked%20every%20inch%20of%20it.%20A%20patched%20wool%20hood%2C%20faded%20brown-grey%2C%20pushed%20back%20to%20show%20a%20br%2C%20character%20portrait%2C%20named%20Calwick%20Pren%2C%20male%2C%20Small%20creditor%20who%20walks%20his%20own%20ledger%20%E2%80%94%20a%20man%20who%20is%20owed%20and%20has%20come%20to%20collect%2C%20nothing%20more%20an%2C%20Flat%2C%20unhurried%2C%20no%20flourish.%20Names%20amounts%20exactly%20%E2%80%94%20not%20'a%20few%20coins'%20but%20'fourteen%20and%20three.'%20Do%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=95888&nologo=true"
       }
     },
     "location": {
@@ -4266,7 +4395,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,
-    "the_center": 6
+    "the_center": 7
   },
   "practice": {
     "schemaVersion": 1,
@@ -4346,10 +4475,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-09-07T13:23:54.773Z",
-      "lastAt": "2026-09-07T14:03:36.574Z",
+      "lastAt": "2026-09-07T14:04:57.211Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 17
+      "beats": 18
     }
   ],
   "_pendingArrival": null,
@@ -4365,28 +4494,28 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 38,
-    "choices": 38,
-    "scene": 38,
-    "npcUpdates": 35,
+    "sceneSummary": 39,
+    "choices": 39,
+    "scene": 39,
+    "npcUpdates": 36,
     "placeUpdates": 6,
     "generateRequest": 4,
     "moveTo": 5,
-    "timeOps": 35,
+    "timeOps": 36,
     "codexUpdates": 32,
     "sceneEnded": 9,
-    "characterDeltas": 12,
-    "offer": 5,
+    "characterDeltas": 13,
+    "offer": 6,
     "deeds": 1,
     "standingOps": 1,
     "questUpdates": 4,
     "stageOps": 2,
     "factUpdates": 1
   },
-  "_opTurns": 38,
+  "_opTurns": 39,
   "_opLedger": {
     "offer": {
-      "applied": 5,
+      "applied": 6,
       "rejected": 0,
       "lastWhy": null
     }
@@ -4486,7 +4615,7 @@
   "skillUses": {
     "negotiate": 7,
     "careful": 4,
-    "help": 1,
+    "help": 2,
     "plan": 1,
     "guard": 1,
     "sustain": 1,

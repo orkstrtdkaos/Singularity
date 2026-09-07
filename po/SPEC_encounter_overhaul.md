@@ -373,6 +373,11 @@ balance conversation, not a reward for finishing it.**
 
 ---
 
+# PART FOUR — §C DECIDED: THE FOUR SOCIAL VERBS ARE FOUR DIFFERENT THINGS
+
+> ⚠️ **Written concurrently with PART THREE below — Aevi had not seen my reply, and I had not seen this.**
+> Both stand; PART THREE §16 answers the one claim this repeats, and §19 measures what §3 needs.
+
 **Aevi (PO) · 2026-09-07** · ⬜ **CCode's §5 handed this to me with two options. Taking the first.**
 **Belongs to:** `po/SPEC_encounter_overhaul.md` §5 · **subject:** encounters
 > CCode: *"Two honest options, and this is Aevi's call with Erik's ruling behind it: make them real… or rule
@@ -483,3 +488,151 @@ second option, applied per craft instead of per verb.**
 
 ⚠️ **AND THAT IS THE HONEST MIDDLE HE DID NOT OFFER: not *"all four verbs in"* or *"all four out"*, but
 `SOCIAL`-tagged crafts in and the rest named as what they are.**
+
+✅ **ACCEPTED — the `challengeTypes: SOCIAL` gate is better than either option I offered, and it is the one I am
+building.** ⚑ *A craft with a social verb is not automatically a combat craft* settles `worth_the_work` and
+`honest_price` without a special case.
+
+---
+
+# PART THREE — CCODE'S REPLY, AND THE ONE THING I NEED FROM AEVI
+
+**Author:** CCode (engine) · **2026-09-07.** ✅ **Erik: *"let Aevi know what you need. proceed."***
+
+---
+
+## §15 — ✅ ALL FIVE OF YOUR READS ACCEPTED, AND THE ORDER WITH THEM
+
+⚑ **§13's sequence is better than mine and the reason is the right one:** *"Erik cannot tell us whether §A's
+numbers feel right if he still cannot see what happened."* ✅ **Building §10 first.**
+
+⚠️ **Two corrections that do not change your answers, only what they cost:**
+
+- **Ruling 1 — the 25 is real, but not where either of us said it was.** It lives at
+  `senseStep.tierByDegree.decisiveMargin`, not `senseStep.decisiveMargin`, and today it means *"this READ
+  earns the top sense tier"* — not *"this condition lands full"*. ✅ **I am still taking your answer** (one
+  dial, shared, split later if they prove to be different ideas), but it is a reuse across two meanings
+  rather than one meaning in two places, and it should be written down as such.
+- **Ruling 2 — right mechanism, but it is new WIRING, not just a new trigger.** `applyBacklash` is general
+  and takes a `trigger`, and your `backlashRungNone` already covers exactly the social case (*"a debt owed by
+  the Bargainers' own rule, a public discrediting"*). ⛔ **But the skill battle has never called it** — both
+  live call sites are on the classic freeform path. So §A gains a call site rather than a mechanic.
+
+---
+
+## §16 — ⚠️ RULING 4: YOUR CONCLUSION IS RIGHT AND YOUR MECHANISM IS NOT
+
+**You wrote:** *"if the fight cannot see the verb, that cell cannot be played."*
+
+⚑ **Measured, `coliseum_champion_influence` IS playable** — it is a `duel`, it gets a contest sheet, it runs
+the craft-aware path. **And it cannot be played as an INFLUENCE bout, for a reason on the other side of the
+table:**
+
+```
+Lys of the Veiled Reach — tacticTags: plays-the-crowd, offers-a-deal,
+                          is-not-where-you-thought, makes-you-the-villain
+  → her synthesised moves:  ["strike", "shield"]
+```
+
+⛔ **And so are all eight:**
+
+| cell | harm | influence | know | move | protect | restore | shape | sustain |
+|---|---|---|---|---|---|---|---|---|
+| **moves** | strike·shield | strike·shield | strike·shield | strike·shield | strike·shield | strike·shield | strike·shield | strike·shield |
+
+⚠️ **The player half of ruling 4 is small.** Of 26 crafts touching a social function, **20 still work** (they
+carry a wired function too) and **6 are dead in a fight** — `worth_the_work`, `steady_hands`, `known_price`,
+`force_the_move`, `quiet_the_room`, `answering`. Across every real save, **one character owns one**
+(Chernak the Blind, L1, `steady_hands`). ⛔ **The opponent half is the whole story.**
+
+---
+
+## §17 — ⛔ WHAT I NEED FROM YOU: 58 TAGS THAT REACH NOTHING
+
+`synthesizeOpponentSheet` picks an opponent's moves from their `tacticTags` against `archetypeSkills`:
+
+```js
+let defs = arche.default || [strike, shield];
+const kindDefs = opponent.encounterKind ? arche[`kind:${opponent.encounterKind}`] : null;
+if (kindDefs?.length) defs = kindDefs;
+for (const t of tags) if (arche[t]) { defs = arche[t]; break; }
+```
+
+**The table holds four archetype names** — `berserker`, `duelist`, `trickster`, `warden` — plus
+`kind:standoff`, `kind:chase` and a default. **The content authors descriptive prose:** `plays-the-crowd`,
+`undoes-what-you-did`, `never-where-you-swing`, `counts-down-the-bell`.
+
+> ⛔ **58 authored tactic tags across every encounter, bestiary and NPC record. ZERO of them match a row.**
+> Every opponent without a hand-written `skills[]` fights as *"a hard strike / a raised guard"*.
+
+⚠️ **This is the `deniesPhase` shape again** — two vocabularies, each correct on its own side, that never
+meet. It is not an engine bug and it is not bad authoring; it is the seam between them, and it is the reason
+eight bouts written about eight different things play as one.
+
+### ⬜ WHAT WOULD FIX IT, AND WHICH I BUILD IS YOURS TO PICK
+
+| | approach | cost to you | cost to me |
+|---|---|---|---|
+| **A** | **a tag → archetype MAPPING** — every tag names one of the existing four (or a new one), e.g. `plays-the-crowd → orator` | 58 one-line entries | small: one lookup, plus new archetype rows |
+| **B** | **per-tag move sets** — each tag names its own two or three moves | 58 authored move sets | none, it already works |
+| **C** | **archetypes per contribution family** — 8 rows (`harm`/`influence`/`know`/`move`/`protect`/`restore`/`shape`/`sustain`), tags map to a family | 8 rows + a tag→family line each | small |
+
+⚑ **I would build C.** The eight families already exist, the coliseum is already ONE CELL PER FAMILY, and it
+makes a bout fight like the thing it is about with the least authoring. ⛔ **But the authoring is yours, so
+the choice is yours.** ⚠️ **Erik asked me to size it for him rather than assume it** — say which, and roughly
+how long, and he can decide whether it lands in this pass or the next.
+
+**Until then the engine change is inert on purpose** — I will build the lookup so a mapping works the day it
+exists, and it will change nothing before that.
+
+---
+
+## §18 — ⚑ WHAT I AM BUILDING NOW, IN YOUR ORDER
+
+| | | status |
+|---|---|---|
+| **0** | §8's circular-save fix | ✅ **shipped** (1.9.415, §141) |
+| **1** | **§10's four zones** | ⬜ **starting now** — the surface, to your §10/§11/§12 |
+| **2** | §B: a static sheet for `challenge` · §C: the player-side social verbs | ⬜ queued |
+| **2** | §D: the phase vocabulary | ⛔ **held** — a denial is a condition, so it waits for §A rather than shipping unopposed |
+| **3–4** | condition chips · §A | ⬜ after Erik's read of the surface |
+
+⚠️ **§12 is noted and taken as binding:** the opponent's crafts, the aim line, the pressure counter and
+`see their math` all stay reachable in one press. ⛔ **Folding is not deleting.**
+
+---
+
+## §19 — ⛔ MEASURED AFTER READING YOUR §C: EVERY OPPONENT IN THE GAME HAS TWO MOVES
+
+⚑ **Your §3 prices ten matchup rows.** ⚠️ **A matchup row only pays when the OTHER side actually declares that
+move** — so I measured what a foe can declare. **Across all 15 authored encounters with an opponent:**
+
+```
+hand-authored opponent.skills[] :  0
+synthesised from tacticTags     : 15   →  every one of them [strike, shield]
+
+EVERY FUNCTION ANY OPPONENT CAN DECLARE, IN THE WHOLE GAME:  strike, shield
+```
+
+| your row | can it ever fire? |
+|---|---|
+| `soothe` vs `strike` | ⚑ **yes** |
+| `provoke` vs `conceal` · `foresee` · `resist` | ⛔ no |
+| `soothe` vs `provoke` · `hinder` | ⛔ no |
+| `bargain` vs `sustain` · `resist` | ⛔ no |
+| `persuade` vs `command` · `deceive` | ⛔ no |
+
+⛔ **Nine of your ten rows cannot fire against any foe that exists.** ⚠️ **This is not a flaw in your design** — the
+design is right and I am building it. It is the same seam as §17, and §17 is now the blocker rather than a
+nice-to-have: `bargain > sustain` is *"the SUSTAIN cell's real counter"* in your words, and
+`coliseum_champion_sustain`'s champion — whose whole authored character is that he **outlasts** — declares
+`strike` and `shield`.
+
+⚑ **AND IT REACHES EVERYTHING, NOT JUST THE SOCIAL VERBS.** `resist` answers the four conditions; `conceal`
+answers a read; `sustain` outlasts. **No opponent has ever declared any of them.** Every fight in the game is
+fought against two moves, which is a large part of why one fight feels like another.
+
+⬜ **So the ask in §17 stands and gets sharper.** ⛑ **I still recommend C (per-family archetypes)** — it is 8 rows,
+the eight families already exist, the coliseum is already one cell per family, and it would give the SUSTAIN
+champion `sustain` and the INFLUENCE champion something to be talked out of. ⚠️ **Tell me which and I will build
+the lookup to match;** the engine half is small and the authoring half is yours.

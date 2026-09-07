@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.415";
+const APP_VERSION = "1.9.416";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13808,13 +13808,18 @@ function skillBattlePanel() {
   })();
 
   return `<div class="sb-panel">
-    ${sbScale}
-    ${sbParty}
+    ${/* ⛔ AEVI SPEC PART TWO §10 — FOUR ZONES, IN THE ORDER A ROUND MOVES THROUGH THEM. Every block below is
+              verbatim from the flat version; only the ORDER and the four containers are new. §12 is binding —
+              folding is not deleting, and the opponent's crafts, the aim line, the pressure counter and
+              `see their math` all stay reachable in one press. */""}
+    <div class="sb-zone sb-state" data-zone="1 · the state">
     ${/* ERIK (2026-08-01, live): "this is a weird result to exit the fight." The round said "neither gains —
           it's even" and the fight ENDED. It was not weird — it was INVISIBLE. Momentum stopped being an exit
           at CCODE-38; what actually ends a fight now is the PRESSURE counter, and `breakAtPressure` is 2, so
           a foe breaks on the SECOND time they are overwhelmed. That counter was never rendered anywhere. The
           player watched the one meter that cannot end the fight and never saw the one that does. */""}
+    ${sbScale}
+    ${sbParty}
     <div class="sb-opponent">${esc(def.opponent?.name || sbLex().other)}${fog?.label ? ` — <span class="hint">${esc(fog.label)}</span>` : ""}${oppTired ? ` <span class="cost">(${oppTired})</span>` : ""}${(() => {
       const brk = CONTENT.skillBattle?.engine?.momentum?.pressure?.breakAtPressure ?? 2;
       const mine = st.pressure?.player || 0, theirs = st.pressure?.opponent || 0;
@@ -13825,6 +13830,43 @@ function skillBattlePanel() {
         + (theirs && mine ? " · " : "")
         + (mine ? `you ${pip(mine, brk)} ${mine}/${brk}` : "") + `</span>`;
     })()} <span class="hint">· you ${character.health}/${character.maxHealth} hp · ${character.energy}e</span></div>
+    ${(() => { // CCODE-35: what's STANDING right now — a raised guard, an insight, a bind laid on them. Each
+      // chip carries the exact signed value + rounds left, because that number is really in the next roll.
+      const fx = st.effects || []; if (!fx.length) return "";
+      const chip = f => `<span class="sb-fx sb-fx-${f.value >= 0 ? "boon" : "bane"}" title="${esc(f.label)} — ${f.value >= 0 ? "+" : ""}${f.value} to ${f.side === "player" ? "your" : "their"} roll ${f.applies === "whenAttacked" ? "when they attack" : f.applies === "whenAttacking" ? "when you strike" : "every round"}, ${f.roundsLeft} more round${f.roundsLeft === 1 ? "" : "s"} (from ${esc(f.source)})">${esc(f.label)} ${f.value >= 0 ? "+" : ""}${f.value} · ${f.roundsLeft}r</span>`;
+      const mine = fx.filter(f => f.side === "player"), theirs = fx.filter(f => f.side === "opponent");
+      return `<div class="sb-fx-row">${mine.length ? `<span class="sb-fx-lbl">on you</span>${mine.map(chip).join("")}` : ""}${theirs.length ? `<span class="sb-fx-lbl">on them</span>${theirs.map(chip).join("")}` : ""}</div>`;
+    })()}
+    ${st.spent?.player ? `<div class="sb-spent-bar">🕯 <strong>You are spent</strong> — your crafts will not answer until you find energy. <span class="hint">Steel and wit still work (a plain strike, a raised guard). This is the moment to <strong>Yield</strong> by choice, or use something that restores you — the fight no longer ends itself here.</span></div>` : ""}
+    ${st.spent?.opponent ? `<div class="sb-spent-bar dim">🕯 <strong>${esc(def.opponent?.name || "They")} are spent</strong> — swinging on will alone. <span class="hint">Their crafts are done; press it.</span></div>` : ""}
+    ${turn.senseBlinded ? `<div class="sb-spent-bar">◉ <strong>Blinded</strong> — ${turn.senseBlind ? `${esc(turn.senseBlind.label)} shut your senses \u00b7 <strong>${turn.senseBlind.roundsLeft} round${turn.senseBlind.roundsLeft === 1 ? "" : "s"} left</strong>` : "your senses are shut this turn"}. <span class="hint">It ticks down every turn you take, and lands again if they repeat it \u2014 strike, guard or mend meanwhile. You go straight to your action; the read is denied you.</span></div>` : ""}
+    </div>
+    <div class="sb-zone sb-happened" data-zone="2 · what just happened">
+    ${sbLastRoundReceipt && st.round > 1 ? `<div class="sb-receipt">${esc(sbLastRoundReceipt)}${(() => {
+      // CCODE-36 (Erik): the ROLLS behind this round, in the same breakdown popover normal play uses. Your own math
+      // is always yours to see; THEIR math stays behind the same fog gate the fog-line uses — reading them buys it.
+      const r = sbLastRoundRolls; if (!r) return "";
+      const mk = (side, bd, roll, chance, deg) => bd
+        ? `<button class="data-link" data-breakdown='${attrJson(bd)}' title="The full math for ${side === "you" ? "your" : "their"} roll this round">⚄ ${side === "you" ? "your" : "their"} roll ${roll}/${chance}${deg ? ` · ${String(deg).replace("_", " ")}` : ""}</button>`
+        : "";
+      // CCODE-40: when the ceiling bit, say so plainly — the number that DECIDED the exchange is the raw stack,
+      // not the 95 you rolled against. Otherwise "95 vs 95" reads as a tie when one side was really far ahead.
+      const rawNote = (r.you?.rawChance != null && r.you.rawChance !== r.you.chance)
+        ? `<span class="hint sb-raw-note">your stack totalled <strong>${r.you.rawChance}</strong> before the ${r.you.chance}% ceiling — the contest is decided on the full stack, so every bonus and penalty counts</span>` : "";
+      const yours = mk("you", r.you?.breakdown, r.you?.roll, r.you?.chance, r.you?.degree) + rawNote;
+      // SNG-247 (Erik: "claims you have to read them to see it, but I've already used a read skill and I can't
+      // see it"). The old line was a lie of omission: their math needs sense tier 3, and a read buys only
+      // +revealActionBuysTier. A character whose base tier is 0 can read every turn and never reach it. The fog
+      // must never promise what it cannot deliver — so it now names the tier you are AT, what that bought, and
+      // what the next rung would add.
+      const theirs = fog?.revealed?.breakdown ? mk("them", r.them?.breakdown, r.them?.roll, r.them?.chance, r.them?.degree)
+        : `<span class="hint sb-roll-fog">${esc(fogLadderLine(fog))}</span>`;
+      return `<div class="sb-rolls">${yours}${theirs}</div>`;
+    })()}</div>` : ""}
+    ${sbQuickBeat && !busySB ? `<div class="sb-quick">${esc(sbQuickBeat)}</div>` : ""}
+    ${st.log?.length ? `<details class="sb-log"><summary>Round log (${st.round - 1})</summary>${st.log.map(l => `<div class="hint">${esc(l)}</div>`).join("")}</details>` : ""}
+    </div>
+    <div class="sb-zone sb-seen" data-zone="3 · what you can see">
     ${(() => {
       // SNG-247 (Erik: "I want to see what options the aggressor has for skills too — fighting an NPC or
       // anything should include that the opponent has skills they can use, just like you do"). They always DID —
@@ -13857,35 +13899,8 @@ function skillBattlePanel() {
         ? `⚔ going for <strong>${esc(String(fog.revealed.target.targetName || "someone"))}</strong>${fog.revealed.target.reason ? ` <span class="hint">— ${esc(fog.revealed.target.reason)}</span>` : ""}${fog.revealed.target.canIntervene ? ` <span class="rep-band trusted">you could step in</span>` : ""}`
         : `<span class="hint">${esc(String(fog.revealed.target.why || "you cannot tell who it is looking at"))}</span>`}</div>` : ""}` :
       `<div class="hint">You size each other up. Choose ONE move — or read them first.</div>`}</div>
-    ${sbLastRoundReceipt && st.round > 1 ? `<div class="sb-receipt">${esc(sbLastRoundReceipt)}${(() => {
-      // CCODE-36 (Erik): the ROLLS behind this round, in the same breakdown popover normal play uses. Your own math
-      // is always yours to see; THEIR math stays behind the same fog gate the fog-line uses — reading them buys it.
-      const r = sbLastRoundRolls; if (!r) return "";
-      const mk = (side, bd, roll, chance, deg) => bd
-        ? `<button class="data-link" data-breakdown='${attrJson(bd)}' title="The full math for ${side === "you" ? "your" : "their"} roll this round">⚄ ${side === "you" ? "your" : "their"} roll ${roll}/${chance}${deg ? ` · ${String(deg).replace("_", " ")}` : ""}</button>`
-        : "";
-      // CCODE-40: when the ceiling bit, say so plainly — the number that DECIDED the exchange is the raw stack,
-      // not the 95 you rolled against. Otherwise "95 vs 95" reads as a tie when one side was really far ahead.
-      const rawNote = (r.you?.rawChance != null && r.you.rawChance !== r.you.chance)
-        ? `<span class="hint sb-raw-note">your stack totalled <strong>${r.you.rawChance}</strong> before the ${r.you.chance}% ceiling — the contest is decided on the full stack, so every bonus and penalty counts</span>` : "";
-      const yours = mk("you", r.you?.breakdown, r.you?.roll, r.you?.chance, r.you?.degree) + rawNote;
-      // SNG-247 (Erik: "claims you have to read them to see it, but I've already used a read skill and I can't
-      // see it"). The old line was a lie of omission: their math needs sense tier 3, and a read buys only
-      // +revealActionBuysTier. A character whose base tier is 0 can read every turn and never reach it. The fog
-      // must never promise what it cannot deliver — so it now names the tier you are AT, what that bought, and
-      // what the next rung would add.
-      const theirs = fog?.revealed?.breakdown ? mk("them", r.them?.breakdown, r.them?.roll, r.them?.chance, r.them?.degree)
-        : `<span class="hint sb-roll-fog">${esc(fogLadderLine(fog))}</span>`;
-      return `<div class="sb-rolls">${yours}${theirs}</div>`;
-    })()}</div>` : ""}
-    ${(() => { // CCODE-35: what's STANDING right now — a raised guard, an insight, a bind laid on them. Each
-      // chip carries the exact signed value + rounds left, because that number is really in the next roll.
-      const fx = st.effects || []; if (!fx.length) return "";
-      const chip = f => `<span class="sb-fx sb-fx-${f.value >= 0 ? "boon" : "bane"}" title="${esc(f.label)} — ${f.value >= 0 ? "+" : ""}${f.value} to ${f.side === "player" ? "your" : "their"} roll ${f.applies === "whenAttacked" ? "when they attack" : f.applies === "whenAttacking" ? "when you strike" : "every round"}, ${f.roundsLeft} more round${f.roundsLeft === 1 ? "" : "s"} (from ${esc(f.source)})">${esc(f.label)} ${f.value >= 0 ? "+" : ""}${f.value} · ${f.roundsLeft}r</span>`;
-      const mine = fx.filter(f => f.side === "player"), theirs = fx.filter(f => f.side === "opponent");
-      return `<div class="sb-fx-row">${mine.length ? `<span class="sb-fx-lbl">on you</span>${mine.map(chip).join("")}` : ""}${theirs.length ? `<span class="sb-fx-lbl">on them</span>${theirs.map(chip).join("")}` : ""}</div>`;
-    })()}
-    ${st.log?.length ? `<details class="sb-log"><summary>Round log (${st.round - 1})</summary>${st.log.map(l => `<div class="hint">${esc(l)}</div>`).join("")}</details>` : ""}
+    </div>
+    <div class="sb-zone sb-do" data-zone="4 · what you do">
     ${/* SNG-252b §2c: TURN DETAIL, tucked. Intensity and the Sense→Action→Bonus→Execute chain are ADVANCED
           controls — precise, rarely changed, and they were sitting at the same visual weight as the scene,
           competing with it. Behind a <details> they stay one tap away and stop shouting. Default closed;
@@ -13895,12 +13910,8 @@ function skillBattlePanel() {
       <div class="sb-intensity">Intensity: ${["conserve", "standard", "surge"].map(i => `<button class="opt sb-int ${sbIntensity === i ? "on" : ""}" data-sbint="${i}">${i}</button>`).join("")}</div>
       ${sbStepTracker(turn)}
     </details>
-    ${st.spent?.player ? `<div class="sb-spent-bar">🕯 <strong>You are spent</strong> — your crafts will not answer until you find energy. <span class="hint">Steel and wit still work (a plain strike, a raised guard). This is the moment to <strong>Yield</strong> by choice, or use something that restores you — the fight no longer ends itself here.</span></div>` : ""}
-    ${st.spent?.opponent ? `<div class="sb-spent-bar dim">🕯 <strong>${esc(def.opponent?.name || "They")} are spent</strong> — swinging on will alone. <span class="hint">Their crafts are done; press it.</span></div>` : ""}
     ${busySB ? `<div class="sb-waiting"><span class="sb-spinner"></span> ${esc(sbBusyLabel || "resolving…")}
       <button class="opt sb-escape" id="sb-escape" hidden title="Stop waiting for the narrator. What the engine decided already stands — only the telling is lost">Continue anyway</button></div>` : ""}
-    ${sbQuickBeat && !busySB ? `<div class="sb-quick">${esc(sbQuickBeat)}</div>` : ""}
-    ${turn.senseBlinded ? `<div class="sb-spent-bar">◉ <strong>Blinded</strong> — ${turn.senseBlind ? `${esc(turn.senseBlind.label)} shut your senses \u00b7 <strong>${turn.senseBlind.roundsLeft} round${turn.senseBlind.roundsLeft === 1 ? "" : "s"} left</strong>` : "your senses are shut this turn"}. <span class="hint">It ticks down every turn you take, and lands again if they repeat it \u2014 strike, guard or mend meanwhile. You go straight to your action; the read is denied you.</span></div>` : ""}
     ${turn.phase === "review" ? sbReviewCard(turn, skills) : `
       <div class="sb-step-hint hint">${esc(sbStepHint(step))}${selCount === 2 ? ` <strong class="sb-braid-note">⋈ braided — both crafts, both effects, both costs.</strong>` : selCount === 1 ? ` <span class="hint">Pick a second craft to BRAID them.</span>` : ""}</div>
       <div class="sb-skills">${groups}</div>
@@ -13913,6 +13924,7 @@ function skillBattlePanel() {
       ${turn.phase === "review" ? `<button class="btn" id="sb-execute" ${busySB ? "disabled" : ""}>⚔ Execute the turn</button><button class="btn secondary" id="sb-edit">Edit</button>` : ""}
       <button class="btn secondary" id="sb-flee">Break away</button>
       <button class="btn secondary" id="sb-yield">Yield</button>
+    </div>
     </div>
   </div>`;
 }

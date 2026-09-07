@@ -561,7 +561,6 @@ img[data-lightbox] { cursor: zoom-in; }
   .lightbox-actions { gap: 6px; }
   .lightbox-regen, .lightbox-rebuild, .lightbox-discard, .lightbox-keep, .lightbox-default { font-size: 12px; padding: 0 10px; height: 30px; }
 }
-}
 /* SNG-059 creation v2: the great circle domain picker */
 .great-circle { width: 100%; max-height: 60vh; display: block; }
 .gc-ring { fill: none; stroke: var(--border); stroke-width: 1.5; }
@@ -1008,6 +1007,24 @@ img[data-lightbox] { cursor: zoom-in; }
    the battle engine (Tier 2) its panel follows its border automatically, with no second colour decision. */
 .sb-panel { border: 1px solid var(--enc-hue, var(--danger)); border-radius: 10px; background: linear-gradient(180deg, color-mix(in srgb, var(--enc-hue, var(--danger)) 9%, transparent), var(--panel2)); padding: 10px 12px; margin: 8px 0 10px; }
 .sb-screen h2 { margin-bottom: 4px; }
+
+/* ⛔ AEVI SPEC PART TWO §10 — FOUR ZONES. Twenty-three flat siblings meant the pressure counter that ENDS the
+   fight sat at the same weight as a note about braid material. Hierarchy is the fix, not deletion (§12). */
+.sb-zone { margin-bottom: 10px; }
+.sb-zone:last-child { margin-bottom: 0; }
+/* ⚑ 1 · THE STATE — always visible, never moves. The loudest zone, and it is where the EXIT lives. */
+.sb-state { background: color-mix(in srgb, var(--enc-hue, var(--danger)) 7%, var(--panel2)); border: 1px solid color-mix(in srgb, var(--enc-hue, var(--danger)) 30%, var(--border)); border-radius: 8px; padding: 8px 10px; }
+.sb-state .sb-opponent { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.sb-state .sb-pressure { font-weight: 600; }
+.sb-state > :last-child { margin-bottom: 0; }
+/* ⚑ 3 · WHAT YOU CAN SEE — the read. Quieter than the state, louder than the log. */
+.sb-seen { opacity: .92; }
+.sb-seen .sb-fog { margin-bottom: 6px; }
+/* ⚑ 4 · WHAT YOU DO — and nothing lives below it. The separator says the reading is over and the acting begins. */
+.sb-do { border-top: 1px solid var(--border); padding-top: 10px; }
+/* ⚠️ The zone label is for the DOM and for tests, never for the player — a screen that narrates its own layout
+   is the opposite of the problem being solved here. */
+.sb-zone[data-zone]::before { content: none; }
 .sb-opponent { font-size: 14px; color: var(--ink); margin-bottom: 8px; }
 .sb-meter { position: relative; height: 14px; border: 1px solid var(--border); border-radius: 7px; background: var(--panel2); overflow: hidden; margin-bottom: 6px; }
 .sb-meter-fill { height: 100%; background: linear-gradient(90deg, var(--accent2, #7a9), var(--accent)); transition: width .25s; }

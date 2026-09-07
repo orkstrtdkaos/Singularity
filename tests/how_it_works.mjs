@@ -9296,6 +9296,60 @@ console.log("\n── §141 · a receipt that is saved is a description, not a h
     /\[recovery\] no snapshot for/.test(st141src));
 }
 
+/* ═════ §142 — THE FIGHT PANEL IS FOUR ZONES, AND NOTHING LIVES BELOW THE CONTROLS (Aevi, Part Two §10) ═════ */
+// ⛔ HER MEASUREMENT: one round renders `sb-panel` across TWENTY-THREE flat sibling blocks, so "the pressure
+// counter that ENDS THE FIGHT sits at the same visual weight as a note about braid material." ⚑ Her diagnosis is
+// the part worth keeping: *it is not too much information — it is information with no hierarchy*, and every block
+// was added by someone correctly fixing something invisible.
+// ⚠️ SO THIS IS A REORDER, NEVER A DELETION (§12). The gate asserts BOTH: the four zones exist in order, AND the
+// four things Aevi named as must-stay-reachable are still rendered.
+console.log("\n── §142 · four zones, in the order a round moves through them ──");
+{
+  const app = rd("app.js");
+  const i = app.indexOf("return `<div class=\"sb-panel\">");
+  const panel = app.slice(i, app.indexOf("\n}", i));
+  const zones = [...panel.matchAll(/data-zone="(\d) · ([^"]+)"/g)].map(m => m[1] + ":" + m[2]);
+  check("§142: ⛔ FOUR ZONES, IN ORDER — state, what just happened, what you can see, what you do",
+    zones.join(" | ") === "1:the state | 2:what just happened | 3:what you can see | 4:what you do", zones.join(" | "));
+  // ⛔ THE EXIT IS IN ZONE 1. Erik read "neither gains — it's even" and the fight ended, because the meter he was
+  // watching was not the one that ends it. The pressure counter belongs with the state, at the top.
+  const z = (n) => { const a = panel.indexOf(`data-zone="${n} · `); const b = panel.indexOf("data-zone=", a + 10); return panel.slice(a, b < 0 ? panel.length : b); };
+  check("§142: ⛔ the PRESSURE counter — the real exit — is in zone 1, with their name and your hp",
+    /sb-pressure/.test(z(1)) && /character\.health/.test(z(1)) && /sb-opponent/.test(z(1)));
+  check("§142: ⛔ …and so are the CONDITIONS standing on either side — \"a player cannot see what is ON them\"",
+    /sb-fx-row/.test(z(1)) && /sb-fx-lbl/.test(z(1)));
+  check("§142: ⚑ zone 2 carries the receipt and the rolls FOLDED behind it — the maths is on request",
+    /sb-receipt/.test(z(2)) && /sb-rolls/.test(z(2)) && /data-breakdown/.test(z(2)));
+  check("§142: ⚑ zone 3 is the READ — their move, their aim, their crafts",
+    /sb-fog/.test(z(3)) && /sb-aim/.test(z(3)) && /sb-oppcrafts/.test(z(3)));
+  check("§142: ⛔ zone 4 holds the controls, and NOTHING is rendered after it",
+    /sb-skills/.test(z(4)) && /sb-actions/.test(z(4)) && /sb-intensity/.test(z(4))
+    && panel.indexOf(`data-zone="4 · `) > panel.indexOf(`data-zone="3 · `)
+    && !/data-zone/.test(panel.slice(panel.indexOf("sb-actions"))));
+  // ⛔ §12 — FOLDING IS NOT DELETING. The four Aevi named by name must still be one press away.
+  for (const [what, re] of [["the opponent's crafts (SNG-247)", /sb-oppcrafts/], ["the aim line (CCODE-276)", /sb-aim/],
+    ["the pressure counter (CCODE-38)", /sb-pressure/], ["see their math", /see their math/]])
+    check(`§142: ⚑ §12 keeps ${what}`, re.test(panel));
+  // ⚠️ AND THE REORDER LOST NOTHING ELSE: every block class the flat panel rendered is still rendered.
+  // ⚠ `sbScale` and `sbParty` are VARIABLES built above the return, so their class names are not literals in the
+  // template — my first form looked for `sb-scales` inside the panel and failed on code that had not moved. A probe
+  // that looks in the wrong place reports a defect that is its own.
+  for (const cls of ["sb-log", "sb-detail", "sb-spent-bar", "sb-waiting", "sb-quick", "sb-step-text"])
+    check(`§142: ⚑ …and ${cls} survived the move`, new RegExp(cls).test(panel));
+  for (const v of ["sbScale", "sbParty"])
+    check(`§142: ⚑ …and ${v} is still interpolated — an overmatch warning is STATE, so it sits in zone 1`,
+      z(1).includes("${" + v + "}"));   // ⚠️ a substring test, so no escape level can be eaten
+  // ⛑ AND THE STYLESHEET IS WELL-FORMED. Found while checking my own edit: a stray top-level `}` had been sitting
+  // after the lightbox media query. A browser discards it; one in the wrong place silently eats the next rule.
+  const css = rd("style.css").replace(/\/\*[\s\S]*?\*\//g, "");
+  let depth = 0, min = 0;
+  for (const ch of css) { if (ch === "{") depth++; if (ch === "}") { depth--; if (depth < min) min = depth; } }
+  check("§142: ⛔ style.css braces balance — no stray close can swallow the rule after it", depth === 0 && min === 0,
+    `final ${depth}, min ${min}`);
+  check("§142: ⚑ and the zones are actually STYLED, or the reorder buys nothing",
+    /\.sb-zone \{/.test(rd("style.css")) && /\.sb-state \{/.test(rd("style.css")) && /\.sb-do \{/.test(rd("style.css")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

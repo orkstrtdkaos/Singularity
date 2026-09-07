@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "precursor_marked",
   "level": 1,
-  "xp": 5,
+  "xp": 7,
   "attributes": {
     "physical": 3,
     "mental": 3,
@@ -82,7 +82,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 95,
+  "energy": 90,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -130,61 +130,58 @@
         "player": "find a waygate",
         "summary": "Chernak finds a sealed waygate in the lower passage, marked by a seam in the living wood and a note lower than the hall's ordinary hum.",
         "narration": "You press your palm flat against the living wall and go still — the Heartroot's morning pulse moving up through your hand, warm and faintly wet-wood-smelling, like a forest after rain. You are listening for the place where the hum changes register. Not the wrongness from last evening, something older than that: the gate-frequency, the specific low chord the Heartroot hides its exits in.\n\nMayvee lifts her head from the root-arch shadow and places herself three paces spinward down the passage — not following you, not guiding you exactly, but marking a spot. You have learned enough about her to walk toward where she stood before she moved again.\n\nThe passage widens past the junction. The floor here is older, the grain running in long arcs rather than the even weave of the upper halls, and the root-vault above is denser, roots the size of your arm crossing and re-crossing until they almost block the amber light. Midway down the widening, where two roots have grown together into a single bole and left a shadow between them that is slightly deeper than the ambient light explains, you find it: a seam in the wall, barely a finger's width, but running floor-to-ceiling in a shape that is not accidental. The wood around it is cooler. The hum here is one note lower than the rest of the hall, resonant in your chest rather than your ears.\n\nA waygate. Not open — sealed the way the Heartroot seals things it is not done thinking about — but present, and findable. Whatever is on the other side, the city knows it is there. Whether it wants you to use it is a different question entirely."
+      },
+      {
+        "player": "travel to the crossroads via this waygate",
+        "summary": "Chernak attempts the sealed waygate and finds it simply closed — not locked, not refusing, just not open — while the deeper wrongness in the hum persists.",
+        "narration": "You step up to the joined bole and press both palms against the seam — the wood cooler here, the hum a note lower, a specific hollow register that says *door* in a language older than the Heartroot's current form. You feel for the opening-pattern, the give that should come before a waygate yields. Your hands know this: the Heartroot has gates, the gates have ways, the ways have the Crossing at their far end. It is all true. The gate does not open.\n\nThe wood presses back — not hostile, not locked against you. It is simply closed, the way a mouth is closed after it has finished speaking. The seam does not flex. The hum continues unchanged beneath your palms, patient and unhurried, the Heartroot on its own timescale. You are weather. The gate is four hundred years of grown wood that has not decided to open yet, and whether it will in your lifetime is a question the city is still considering.\n\nMayvee pads over and sits beside you, facing the seam. Not between you and it — beside you, as if she is also looking at it. Her presence is a kind of comment. The wrongness you noticed last evening is still in the hum, and it is not the gate; the gate's low chord is separate from it, intact and indifferent. Whatever is wrong is further in.\n\nThe cooking smell and water-sound from the right side of the passage have not gone anywhere. Somewhere in the Heartroot this morning, people are awake."
       }
     ],
     "lastTurn": {
-      "narration": "You press your palm flat against the living wall and go still — the Heartroot's morning pulse moving up through your hand, warm and faintly wet-wood-smelling, like a forest after rain. You are listening for the place where the hum changes register. Not the wrongness from last evening, something older than that: the gate-frequency, the specific low chord the Heartroot hides its exits in.\n\nMayvee lifts her head from the root-arch shadow and places herself three paces spinward down the passage — not following you, not guiding you exactly, but marking a spot. You have learned enough about her to walk toward where she stood before she moved again.\n\nThe passage widens past the junction. The floor here is older, the grain running in long arcs rather than the even weave of the upper halls, and the root-vault above is denser, roots the size of your arm crossing and re-crossing until they almost block the amber light. Midway down the widening, where two roots have grown together into a single bole and left a shadow between them that is slightly deeper than the ambient light explains, you find it: a seam in the wall, barely a finger's width, but running floor-to-ceiling in a shape that is not accidental. The wood around it is cooler. The hum here is one note lower than the rest of the hall, resonant in your chest rather than your ears.\n\nA waygate. Not open — sealed the way the Heartroot seals things it is not done thinking about — but present, and findable. Whatever is on the other side, the city knows it is there. Whether it wants you to use it is a different question entirely.",
-      "sceneSummary": "Chernak finds a sealed waygate in the lower passage, marked by a seam in the living wood and a note lower than the hall's ordinary hum.",
+      "narration": "You step up to the joined bole and press both palms against the seam — the wood cooler here, the hum a note lower, a specific hollow register that says *door* in a language older than the Heartroot's current form. You feel for the opening-pattern, the give that should come before a waygate yields. Your hands know this: the Heartroot has gates, the gates have ways, the ways have the Crossing at their far end. It is all true. The gate does not open.\n\nThe wood presses back — not hostile, not locked against you. It is simply closed, the way a mouth is closed after it has finished speaking. The seam does not flex. The hum continues unchanged beneath your palms, patient and unhurried, the Heartroot on its own timescale. You are weather. The gate is four hundred years of grown wood that has not decided to open yet, and whether it will in your lifetime is a question the city is still considering.\n\nMayvee pads over and sits beside you, facing the seam. Not between you and it — beside you, as if she is also looking at it. Her presence is a kind of comment. The wrongness you noticed last evening is still in the hum, and it is not the gate; the gate's low chord is separate from it, intact and indifferent. Whatever is wrong is further in.\n\nThe cooking smell and water-sound from the right side of the passage have not gone anywhere. Somewhere in the Heartroot this morning, people are awake.",
+      "sceneSummary": "Chernak attempts the sealed waygate and finds it simply closed — not locked, not refusing, just not open — while the deeper wrongness in the hum persists.",
       "choices": [
         {
-          "label": "Press your hand to the seam and listen — read what the gate is holding back",
+          "label": "Press your palm flat against the passage wall and root-reach toward the wrongness in the hum — feel what is actually there",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": "normal",
           "intentTags": [
             "study"
           ],
-          "abilityId": "pattern_sense",
+          "abilityId": "root_reach",
+          "energyCost": 0,
           "trivial": false
         },
         {
-          "label": "Run your fingers along the seam from floor to ceiling — look for the mark or shape that names what it excludes",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Follow the cooking smell and water-sound — find whoever is awake in the Heartroot and ask about the gate and the wrongness",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": "easy",
           "intentTags": [
-            "scout"
+            "persuade"
           ],
           "trivial": false
         },
         {
-          "label": "Stay still and let Mayvee tell you what the shadow between the roots actually is",
+          "label": "Use Pattern-Sense on the gate itself — read whether this sealed seam is an instance of something you recognize: a barred way, a sleeping lock, or something else",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": "easy",
+          "subAttribute": "reason",
+          "difficulty": "normal",
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
-          "trivial": false
-        },
-        {
-          "label": "Follow the passage past the gate — if the hum is off, there may be more than one thing down here worth finding",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": "easy",
-          "intentTags": [
-            "scout"
-          ],
+          "abilityId": "pattern_sense",
+          "energyCost": 3,
           "trivial": false
         }
       ],
       "scene": {
-        "setting": "Lower passage-hall of the Heartroot, early morning — amber heartwood light, older grain-pattern floor, dense root-vault above. The passage has widened past the root-arch junction. A sealed waygate seam runs floor-to-ceiling where two roots have grown together into a single bole, the wood around it cooler and the hum one note lower.",
+        "setting": "Lower passage-hall of the Heartroot, early morning — amber heartwood light, living hardwood floor, root-vault ceiling. The passage widens past the root-arch junction. The sealed waygate seam runs floor-to-ceiling in the joined bole, wood cooler here, hum one note lower.",
         "npcsPresent": [
           {
             "name": "Mayvee",
-            "state": "Moved three paces spinward to mark a spot, now still again, watching the seam"
+            "state": "Seated beside Chernak, facing the sealed seam — a comment in her stillness"
           }
         ],
         "objects": [
@@ -196,18 +193,17 @@
           "root-arch junction (shadow-heavy, behind)"
         ],
         "threads": [
-          "The sealed waygate — present but not open; the Heartroot knows it is here",
-          "The wrongness in the deep hum noticed since yesterday evening — related to the gate or something else?",
-          "A cooking smell and water-sound suggest inhabited space to the right, still unexplored"
+          "The sealed waygate — present and closed; not locked against you, simply not open yet",
+          "The wrongness in the deep hum — separate from the gate's own low chord; source unknown, further in",
+          "Cooking smell and water-sound from the right — inhabited space, someone awake"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "mayvee",
-          "name": "Mayvee",
-          "note": "Marked the waygate's location by moving to stand before it — a statement, not a word",
-          "statusNote": "Present in the lower passage, watching the sealed gate seam"
+          "note": "Sat beside Chernak facing the sealed seam after the waygate did not open — a comment in her stillness, not between them and it but alongside",
+          "statusNote": "Present in the lower passage-hall; seated beside Chernak at the sealed waygate seam"
         }
       ],
       "codexUpdates": [
@@ -216,30 +212,23 @@
           "label": "The Heartroot",
           "kind": "place",
           "entityId": "the-heartroot",
-          "fact": "A sealed waygate exists in the lower passage-hall, hidden in the joined bole of two grown-together roots — floor-to-ceiling seam, cooler wood, a note lower in the hum. The city knows it is there.",
+          "fact": "The sealed waygate in the joined bole did not open to direct approach — it is closed the way a mouth is closed after speaking, not locked against entry. The Heartroot is still deciding. The wrongness in the hum is separate from the gate's own low chord — its source is further in.",
           "links": [
             "the-green-schism"
           ]
         }
       ],
-      "placeUpdates": [
-        {
-          "note": "A sealed waygate discovered in the lower passage-hall, in the joined bole of two grown-together roots — cooler to the touch, the hum one note lower here.",
-          "subPlace": {
-            "name": "The Joined Bole Gate",
-            "parent": "the-heartroot",
-            "note": "A sealed waygate seam, floor-to-ceiling, in the place where two roots grew together. Not open. The Heartroot is still thinking about it.",
-            "visited": true
-          }
-        }
-      ]
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a brief attempt at the waygate, hands on the seam"
+      }
     },
     "sceneState": {
-      "setting": "Lower passage-hall of the Heartroot, early morning — amber heartwood light, older grain-pattern floor, dense root-vault above. The passage has widened past the root-arch junction. A sealed waygate seam runs floor-to-ceiling where two roots have grown together into a single bole, the wood around it cooler and the hum one note lower.",
+      "setting": "Lower passage-hall of the Heartroot, early morning — amber heartwood light, living hardwood floor, root-vault ceiling. The passage widens past the root-arch junction. The sealed waygate seam runs floor-to-ceiling in the joined bole, wood cooler here, hum one note lower.",
       "npcsPresent": [
         {
           "name": "Mayvee",
-          "state": "Moved three paces spinward to mark a spot, now still again, watching the seam"
+          "state": "Seated beside Chernak, facing the sealed seam — a comment in her stillness"
         }
       ],
       "objects": [
@@ -251,12 +240,12 @@
         "root-arch junction (shadow-heavy, behind)"
       ],
       "threads": [
-        "The sealed waygate — present but not open; the Heartroot knows it is here",
-        "The wrongness in the deep hum noticed since yesterday evening — related to the gate or something else?",
-        "A cooking smell and water-sound suggest inhabited space to the right, still unexplored"
+        "The sealed waygate — present and closed; not locked against you, simply not open yet",
+        "The wrongness in the deep hum — separate from the gate's own low chord; source unknown, further in",
+        "Cooking smell and water-sound from the right — inhabited space, someone awake"
       ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
@@ -343,7 +332,7 @@
     "lastTickWorldDay": 69,
     "lastCanonWorldDay": 69,
     "pressureQueue": [],
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The wrongness in the hum — barely below hearing, but present since yesterday evening, a disruption in the Heartroot's living frequency",
@@ -391,7 +380,8 @@
         "kind": "place",
         "facts": [
           "[d1] The lower halls breathe with morning — living walls, yielding floor, amber heartwood light. A wrongness in the deep hum has been present since yesterday evening, barely below hearing.",
-          "[d1] A sealed waygate exists in the lower passage-hall, hidden in the joined bole of two grown-together roots — floor-to-ceiling seam, cooler wood, a note lower in the hum. The city knows it is there."
+          "[d1] A sealed waygate exists in the lower passage-hall, hidden in the joined bole of two grown-together roots — floor-to-ceiling seam, cooler wood, a note lower in the hum. The city knows it is there.",
+          "[d1] The sealed waygate in the joined bole did not open to direct approach — it is closed the way a mouth is closed after speaking, not locked against entry. The Heartroot is still deciding. The wrongness in the hum is separate from the gate's own low chord — its source is further in."
         ],
         "links": [
           "the-green-schism"
@@ -404,16 +394,16 @@
     }
   },
   "tendencies": {
-    "devotion": 13.65,
-    "cerebral": 20.5,
-    "strategic": 1
+    "devotion": 13.30875,
+    "cerebral": 19.9875,
+    "strategic": 0.975
   },
   "aptitudes": [
     "scholar",
     "sage",
     "faithful"
   ],
-  "actionCount": 1,
+  "actionCount": 2,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -518,8 +508,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788788768363,
-  "rev": 15,
+  "updatedAt": 1788788905698,
+  "rev": 18,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -547,7 +537,7 @@
   "establishedFacts": [],
   "teachers": {},
   "regionsKnown": {
-    "the_quickwood": 2
+    "the_quickwood": 3
   },
   "company": [],
   "foreclosed": [
@@ -563,10 +553,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-09-07T13:42:24.727Z",
-      "lastAt": "2026-09-07T13:46:08.350Z",
+      "lastAt": "2026-09-07T13:48:25.690Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 2
+      "beats": 3
     }
   ],
   "_debtReceipts": [],
@@ -577,7 +567,11 @@
       "lastWhy": null
     }
   },
-  "_pendingArrival": null,
+  "_pendingArrival": {
+    "ref": "the crossroads",
+    "name": "The Crossing",
+    "destId": "the_crossing"
+  },
   "purse": {
     "crystal": 0,
     "coin": 0,
@@ -598,15 +592,18 @@
   ],
   "skillUses": {
     "scout": 1,
-    "investigate": 1
+    "investigate": 1,
+    "travel": 1
   },
   "_opEmitted": {
-    "sceneSummary": 1,
-    "choices": 1,
-    "scene": 1,
-    "npcUpdates": 1,
-    "codexUpdates": 1,
-    "placeUpdates": 1
+    "sceneSummary": 2,
+    "choices": 2,
+    "scene": 2,
+    "npcUpdates": 2,
+    "codexUpdates": 2,
+    "placeUpdates": 1,
+    "timeOps": 1
   },
-  "_opTurns": 1
+  "_opTurns": 2,
+  "_pendingIntent": null
 }

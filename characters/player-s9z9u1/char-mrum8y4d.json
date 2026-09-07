@@ -171,193 +171,118 @@
     "Loki and Vessin slipped out of the alcove in the grey dawn and crossed the empty nave before the scaffold crew filled the landing — stepping into the yard with the Half-Cathedral at their backs and the man with the crooked jaw still the open thread between them.",
     "Shared broth and thanks with a road-warden who carries word of the water-crisis moving downhill faster than any official channel. Exchanged names and parted on the spinward road, heading toward the Waygate Path."
   ],
-  "currentLocationId": "gen-the-waygate-path",
+  "currentLocationId": "the_crossing",
   "activeScene": {
-    "locationId": "gen-the-waygate-path",
+    "locationId": "the_crossing",
     "turns": [
       {
-        "player": "Go to the crossing through the Waygate.",
-        "summary": "The Waygate to the Crossing has altered—the passage that opened before is now locked by a pattern that will not resolve.",
-        "narration": "You step toward the gate as deep night clings to the Waygate Path. Vessin is two paces ahead, reading the stones by starlight. The passage is clear—you have walked it before; you know its shape.\n\nBut the gate itself is closed.\n\nNot locked. Not barred. The lattice of shifting marks that resolves the passage for those who read its order has resolved *wrong*. The pattern you saw clear the last time is now fractured, doubled—two valid reads overlaying each other, neither one settling. The stone hums faintly, a sound at the edge of hearing. Cy's lens irises and clicks once, sharp and troubled. The mechanism is still, but the lock is *changing*.\n\nVessin stops. Her hand moves to the falsecraft's familiar shape—the lie-reading stance, eyes narrowed. \"The gate wasn't like this,\" she says quietly. It is not a question. Behind you, the road you came by is open and dark. Ahead, the Waygate Path continues forward into shadow, but the crossing through is sealed by something that cannot be simply walked around."
+        "player": null,
+        "summary": "At the Waygate Path, an old Precursor patrol-frame wakes to its dying mandate—Loki faces a hollow-pace that will not stop, will not reason, will only strike.",
+        "narration": "The Waygate Path narrows where the old wall's foundations break the ground—three courses of stone running spinward, moss-deep and already claimed by spring mud. The air shifts. A sound like wind through corroded metal, patient and wrong.\n\nIt comes around the corner of the broken wall: a frame, waist-high, built from riveted steel and still-gleaming joints. Four articulated legs, each ending in a foot that sounds like a rake dragged across stone. A dome-top scarred by centuries—sensors dark, one lens still faintly luminous with a purpose no living thing remembers. It moves with the terrible precision of a thing that has walked this line ten thousand times and will walk it ten thousand more.\n\nIt sees you. Not sees—registers. The lens brightens. It does not speed up, does not hesitate. It simply turns toward the path-crossing where you stand and begins its approach, each footfall exact as a metronome.\n\nCy goes very still beside you. The lamp it carries does not flicker.\n\nYou have seconds before it reaches the point where it will strike anything crossing its route. The spring mud around it has not slowed it at all."
       }
     ],
     "lastTurn": {
-      "narration": "You step toward the gate as deep night clings to the Waygate Path. Vessin is two paces ahead, reading the stones by starlight. The passage is clear—you have walked it before; you know its shape.\n\nBut the gate itself is closed.\n\nNot locked. Not barred. The lattice of shifting marks that resolves the passage for those who read its order has resolved *wrong*. The pattern you saw clear the last time is now fractured, doubled—two valid reads overlaying each other, neither one settling. The stone hums faintly, a sound at the edge of hearing. Cy's lens irises and clicks once, sharp and troubled. The mechanism is still, but the lock is *changing*.\n\nVessin stops. Her hand moves to the falsecraft's familiar shape—the lie-reading stance, eyes narrowed. \"The gate wasn't like this,\" she says quietly. It is not a question. Behind you, the road you came by is open and dark. Ahead, the Waygate Path continues forward into shadow, but the crossing through is sealed by something that cannot be simply walked around.",
-      "sceneSummary": "The Waygate to the Crossing has altered—the passage that opened before is now locked by a pattern that will not resolve.",
+      "narration": "The Waygate Path narrows where the old wall's foundations break the ground—three courses of stone running spinward, moss-deep and already claimed by spring mud. The air shifts. A sound like wind through corroded metal, patient and wrong.\n\nIt comes around the corner of the broken wall: a frame, waist-high, built from riveted steel and still-gleaming joints. Four articulated legs, each ending in a foot that sounds like a rake dragged across stone. A dome-top scarred by centuries—sensors dark, one lens still faintly luminous with a purpose no living thing remembers. It moves with the terrible precision of a thing that has walked this line ten thousand times and will walk it ten thousand more.\n\nIt sees you. Not sees—registers. The lens brightens. It does not speed up, does not hesitate. It simply turns toward the path-crossing where you stand and begins its approach, each footfall exact as a metronome.\n\nCy goes very still beside you. The lamp it carries does not flicker.\n\nYou have seconds before it reaches the point where it will strike anything crossing its route. The spring mud around it has not slowed it at all.",
+      "sceneSummary": "At the Waygate Path, an old Precursor patrol-frame wakes to its dying mandate—Loki faces a hollow-pace that will not stop, will not reason, will only strike.",
       "choices": [
         {
-          "label": "Study the gate with See the Made Thing. You know how falsecrafts fail; this one is still working. The question is why it changed.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "mechanical_spiritual": -0.1
-          },
+          "label": "Press forward and meet it—force your way through with muscle and will.",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {},
           "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "craft"
+            "attack",
+            "risky"
           ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 2,
+          "abilityId": "hunters_strike",
+          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Vessin directly what she sees. She was in the lower Annex this morning watching a man in a grey coat. Coincidence is something you learned to read in this work.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "ask"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Try the gate yourself—read the pattern as if it were a falsecraft lock, and look for the thread that opens it. If someone broke it, they left a way.",
-          "attribute": "mental",
-          "subAttribute": "craft",
-          "axes": {
-            "falsehood_truth": 0.2
-          },
-          "difficulty": "very hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "craft",
-            "careful"
-          ],
-          "abilityId": "falsecraft",
-          "energyCost": 6,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Turn back toward Grovehome and take the longer road. This gate is not opening tonight, and you do not know who or what changed it.",
+          "label": "Slip sideways—read the path's own memory and find where it does NOT patrol.",
           "attribute": "practical",
           "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": "wayfinding",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Make it see something else—a false target, a wrong position where it should look instead.",
+          "attribute": "mental",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "deceive",
+            "careful"
+          ],
+          "abilityId": "false_target",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Turn and run—put distance between yourself and its route before it closes the gap.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
             "travel",
-            "careful"
+            "retreat"
           ],
           "abilityId": null,
-          "energyCost": null,
+          "energyCost": 0,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
       "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [
-        {
-          "what": "The Waygate to the Crossing has been altered. The lock resolves with doubled patterns—two valid reads overlaying, neither settling. The passage is sealed.",
-          "tags": [
-            "gate-sealed",
-            "interference",
-            "precursor-mechanism",
-            "contested-passage"
-          ],
-          "visibility": "witnessed",
-          "spectrumDeltas": {},
-          "impactsLocal": false
-        }
-      ],
+      "characterDeltas": {},
+      "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
+      "adoptSchool": {},
+      "offer": {},
       "stageOps": [],
       "scene": {
-        "setting": "The Waygate Path at deep night—the starlit stone of the passage, the gate ahead dark and humming faintly. The lattice of marks that opens the way is locked in a doubled pattern. The road behind lies open into shadow.",
-        "npcsPresent": [
-          {
-            "name": "Vessin Tallow-bark",
-            "state": "Standing two paces forward, reading the gate with the careful stance of someone checking a falsecraft's work. Eyes narrowed. Hand resting near her coat. Quiet and alert."
-          },
-          {
-            "name": "Cy",
-            "state": "At Loki's side, lens irised, clicking once sharply—the precise sound of a mechanism troubled by something it does not understand."
-          }
-        ],
+        "setting": "The Waygate Path at the broken wall's crossing, early dawn light catching on rust. Spring mud, moss on stone, the path narrowing. A Precursor patrol-frame sixty meters away and closing with metronomic precision.",
+        "npcsPresent": [],
         "objects": [
-          "The Waygate lattice—stone marks shifting subtly in starlight, resolving into two overlaying patterns neither one settling",
-          "The Traveler's Pack on Loki's back",
-          "The Waterskin at belt"
+          "The broken wall—three courses of stone, moss-deep",
+          "The hollow-pace frame—four articulated legs, dome-top, one luminous lens",
+          "The path ahead, spinward toward the Quickwood Eaves gate"
         ],
         "threads": [
-          "Who changed the gate, and when—this was not like this before",
-          "The man in the grey coat with the crooked jaw, still unnamed and still moving through the story",
-          "Why now, why this passage, why doubled and not simply closed"
+          "The hollow-pace will not stop; it will strike anything crossing its dead route",
+          "Cy stands very still beside you, lamp steady",
+          "The Waygate to the Crossing is still sealed three reaches back"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "vessin-tallow-bark",
-          "name": "Vessin Tallow-bark",
-          "role": "Lone traveler; reader of falsecrafts",
-          "sex": "female",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Stopped at the gate and read it as wrong. Named plainly that it was not like this before. Standing ready and careful.",
-          "skillsObserved": [
-            "reads gates and false patterns",
-            "stays calm at tampered mechanics"
-          ],
-          "relationshipDelta": 0,
-          "statusNote": "At the Waygate Path with Loki, facing the sealed passage. Alert and steady."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The Waygate to the Crossing has been altered—the lattice lock now resolves with two valid but overlaying patterns, neither settling cleanly. The passage is sealed and the mechanism hums faintly. This is deliberate interference, not decay.",
-          "subjectId": "the_crossing"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "The Waygate lattice is locked in a doubled pattern—two valid reads overlaying, neither resolving. The passage to the Crossing is sealed. This is recent and deliberate.",
-          "flag": {
-            "gateState": "doubled-lock"
-          }
-        }
-      ],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the-annex-sender",
-          "label": "The Man in the Lower Annex",
-          "kind": "mystery",
-          "fact": "The Waygate to the Crossing has been sealed by deliberate interference—a doubled pattern lock. The timeline connects to the morning the man was seen watching the posting board. This is no longer a local problem.",
-          "links": [
-            "gen-the-waygate-path",
-            "the_crossing",
-            "the-taken-person",
-            "water-crisis-pressureholt"
-          ]
-        }
-      ],
+      "npcUpdates": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": {},
+      "codexUpdates": [],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -366,49 +291,59 @@
       "projectOps": [],
       "bandOps": [],
       "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "A short span—you reached the gate and it took only minutes to see what was wrong"
+      "newEncounter": {
+        "type": "duel",
+        "flavor": "fight",
+        "name": "The Hollow-Pace",
+        "setup": "An old Precursor patrol-frame, still executing its centuries-old route. Tireless. No judgment left in it. It registers you as an obstruction and begins its approach.",
+        "lethal": false,
+        "opponent": {
+          "name": "hollow-pace",
+          "health": 4,
+          "threat": 35,
+          "yieldAt": 0,
+          "fleeDifficulty": 12,
+          "pursuit": "always",
+          "tacticTags": [
+            "press-in",
+            "circle",
+            "feint"
+          ]
+        }
       },
-      "moveTo": null,
+      "unlockPrecursor": {},
+      "unlockSubstrate": {},
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "the encounter is beginning"
+      },
+      "moveTo": {},
       "stateOps": [],
       "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": "Deep night on the Waygate Path: a woman and a traveler standing before a gate of stone marked with shifting lattice work. The marks glow faintly with starlight, overlaying into two patterns that do not resolve. Behind them, the road opens dark. Ahead, the passage is sealed. A small brass mechanism clicks in the darkness—a sound of troubled precision.",
-      "newAbility": null,
-      "gambitOps": null,
+      "deriveItem": {},
+      "imagePrompt": "A waist-high Precursor frame of corroded steel and still-gleaming joints, four articulated legs clicking across moss-deep stone, a dome-top with one luminous lens brightening—backlit by the grey dawn at the broken wall's crossing. Spring mud and ruin. A small figure on the path before it, the vast broken landscape behind.",
+      "newAbility": {},
+      "gambitOps": {},
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
+      "markDefiningMoment": {},
+      "markTeacher": {},
+      "offerPromotion": {},
+      "offerAcquisition": {},
+      "offerIntent": {},
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Waygate Path at deep night—the starlit stone of the passage, the gate ahead dark and humming faintly. The lattice of marks that opens the way is locked in a doubled pattern. The road behind lies open into shadow.",
-      "npcsPresent": [
-        {
-          "name": "Vessin Tallow-bark",
-          "state": "Standing two paces forward, reading the gate with the careful stance of someone checking a falsecraft's work. Eyes narro"
-        },
-        {
-          "name": "Cy",
-          "state": "At Loki's side, lens irised, clicking once sharply—the precise sound of a mechanism troubled by something it does not un"
-        }
-      ],
+      "setting": "The Waygate Path at the broken wall's crossing, early dawn light catching on rust. Spring mud, moss on stone, the path narrowing. A Precursor patrol-frame sixty meters away and closing with metronomic precision.",
+      "npcsPresent": [],
       "objects": [
-        "The Waygate lattice—stone marks shifting subtly in starlight, resolving into two",
-        "The Traveler's Pack on Loki's back",
-        "The Waterskin at belt"
+        "The broken wall—three courses of stone, moss-deep",
+        "The hollow-pace frame—four articulated legs, dome-top, one luminous lens",
+        "The path ahead, spinward toward the Quickwood Eaves gate"
       ],
       "threads": [
-        "Who changed the gate, and when—this was not like this before",
-        "The man in the grey coat with the crooked jaw, still unnamed and still moving through the story",
-        "Why now, why this passage, why doubled and not simply closed"
+        "The hollow-pace will not stop; it will strike anything crossing its dead route",
+        "Cy stands very still beside you, lamp steady",
+        "The Waygate to the Crossing is still sealed three reaches back"
       ]
     },
     "beats": 1
@@ -416,7 +351,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 3,
+    "hour": 6,
     "realAnchor": null
   },
   "companions": [
@@ -1116,7 +1051,7 @@
       "vectorsKnown": []
     },
     "the_crossing": {
-      "visits": 1,
+      "visits": 2,
       "notes": [],
       "flags": {},
       "lastVisit": 3,
@@ -1286,11 +1221,11 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1675,
-    "lastSharedReadAt": "2026-09-07T19:49:27.782Z",
+    "lastGenCount": 1676,
+    "lastSharedReadAt": "2026-09-07T20:02:55.394Z",
     "lastTickWorldDay": 69,
     "lastCanonWorldDay": 69,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The marker stake Ossivyn drove in is unlabeled — but Ossivyn's own fear is that the child the tree is for will never be told it exists…",
@@ -1370,7 +1305,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 37,
+        "stage": 38,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1383,7 +1318,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 37,
+        "stage": 38,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1408,7 +1343,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 32,
+        "stage": 33,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -1445,7 +1380,7 @@
         "kind": "shortage",
         "premise": "Certain materials or substances needed for whatever work the Unmade does are being quietly stockpiled by one practitioner at the expense of communal supply, because she no longer trusts the…",
         "cause": "The Unmade is a place where things are taken apart, and grief for what is lost has no formal channel — it is expected to simply disperse, as everything else…",
-        "stage": 0,
+        "stage": 1,
         "seededAtCount": 1675,
         "surfaced": false,
         "fate": "growing",
@@ -1457,7 +1392,7 @@
         "kind": "rot",
         "premise": "A run of subtle flaws has begun appearing in work passing through one bench — small enough to escape immediate notice, deep enough to fail later — and the cause is a senior apprentice who has been…",
         "cause": "The two workshops already contesting the shared tool have each told their apprentices, in different words, that the other side cannot be trusted — and one…",
-        "stage": 0,
+        "stage": 1,
         "seededAtCount": 1675,
         "surfaced": false,
         "fate": "growing",
@@ -5775,6 +5710,16 @@
   "reconcileVersion": 47,
   "gallery": [
     {
+      "kind": "beast",
+      "prompt": "A waist-high walking frame, pre-Transition, still executing a patrol route for a wall that fell centuries ago. Rusted, patient, wrong.",
+      "url": "https://image.pollinations.ai/prompt/a%20dangerous%20creature%2C%20a%20hollow-pace%3A%20A%20waist-high%20walking%20frame%2C%20pre-Transition%2C%20still%20executing%20a%20patrol%20route%20for%20a%20wall%20that%20fell%20centuries%20ago.%20Rusted%2C%20patient%2C%20wrong.%20%E2%80%94%20dark%20fantasy%20creature%20art%2C%20ominous%2C%20no%20text%2C%20ominous%2C%20predatory%2C%20seen%20a%20moment%20too%20late%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=640&height=512&seed=90613&nologo=true",
+      "caption": "a hollow-pace",
+      "worldDay": 69,
+      "at": "2026-09-07T20:02:56.731Z",
+      "subjectKind": "beast",
+      "subjectId": "hollow_pace"
+    },
+    {
       "kind": "moment",
       "prompt": "A moment of parting on the grey road in the earliest light—the traveler turning spinward with their bedroll and their burden of news, Loki and Vessin turning the other way toward the Waygate Path, the",
       "url": "https://image.pollinations.ai/prompt/A%20moment%20of%20parting%20on%20the%20grey%20road%20in%20the%20earliest%20light%E2%80%94the%20traveler%20turning%20spinward%20with%20their%20bedroll%20and%20their%20burden%20of%20news%2C%20Loki%20and%20Vessin%20turning%20the%20other%20way%20toward%20the%20Waygate%20Path%2C%20the%20gap%20between%20them%20opening%20with%20the%20quiet%20finality%20of%20two%20roads%20diverging%20under%20a%20fading%20night%20sky.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=66927&nologo=true",
@@ -6068,8 +6013,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788811362778,
-  "rev": 471,
+  "updatedAt": 1788811445882,
+  "rev": 478,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6931,7 +6876,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 99,
-    "the_center": 3
+    "the_center": 4
   },
   "opLossPending": false,
   "sessions": [
@@ -7002,10 +6947,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-07T19:42:14.907Z",
-      "lastAt": "2026-09-07T20:02:42.769Z",
+      "lastAt": "2026-09-07T20:04:05.872Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 7
+      "beats": 8
     }
   ],
   "establishedFacts": [
@@ -7043,29 +6988,25 @@
   "_opLedger": {
     "offer": {
       "applied": 14,
-      "rejected": 0,
-      "lastWhy": null
+      "rejected": 1,
+      "lastWhy": "rejected-shape"
     }
   },
-  "_pendingArrival": {
-    "ref": "the crossing",
-    "name": "The Crossing",
-    "destId": "the_crossing"
-  },
+  "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 167,
-    "choices": 167,
+    "sceneSummary": 168,
+    "choices": 168,
     "characterDeltas": 67,
-    "scene": 167,
+    "scene": 168,
     "placeUpdates": 19,
     "codexUpdates": 99,
-    "timeOps": 156,
+    "timeOps": 157,
     "offer": 13,
     "generateRequest": 6,
-    "sceneEnded": 44,
+    "sceneEnded": 45,
     "npcUpdates": 139,
     "moveTo": 5,
-    "gambitApt": 9,
+    "gambitApt": 10,
     "deeds": 2,
     "questUpdates": 17,
     "standingOps": 1,
@@ -7073,11 +7014,11 @@
     "stageOps": 7,
     "encounterOps": 7,
     "ledgerEvents": 2,
-    "newEncounter": 1,
-    "imagePrompt": 3,
+    "newEncounter": 2,
+    "imagePrompt": 4,
     "scene_ended": 1
   },
-  "_opTurns": 167,
+  "_opTurns": 168,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1.75
@@ -7383,9 +7324,131 @@
         "notes": "Fights for gain or ground, not to kill — yields when badly hurt, honors a yield."
       },
       "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
+    },
+    "re-beast_hollow_pace": {
+      "schemaVersion": 1,
+      "id": "re-beast_hollow_pace",
+      "type": "duel",
+      "name": "A Hollow-Pace",
+      "tier": "riffraff",
+      "minDanger": 1,
+      "setup": "a hollow-pace — A waist-high walking frame, pre-Transition, still executing a patrol route for a wall that fell centuries ago. Rusted, patient, wrong. Strikes anything that crosses its dead route; relentless, tireless, no judgment left in it.",
+      "lethal": false,
+      "avoidable": true,
+      "fromRandom": true,
+      "flavor": "dangerous",
+      "creatureId": "hollow_pace",
+      "creatureClass": "feral_construct",
+      "opponent": {
+        "name": "a hollow-pace",
+        "health": 4,
+        "threat": 22,
+        "yieldAt": 1,
+        "fleeDifficulty": 15,
+        "spectrum": {
+          "violence_peace": -0.3,
+          "chaos_order": -0.3
+        },
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "notes": "Fights for gain or ground, not to kill — yields when badly hurt, honors a yield."
+      },
+      "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
+    },
+    "gm-the-hollow-pace": {
+      "schemaVersion": 1,
+      "id": "gm-the-hollow-pace",
+      "type": "duel",
+      "name": "The Hollow-Pace",
+      "setup": "An old Precursor patrol-frame, still executing its centuries-old route. Tireless. No judgment left in it. It registers you as an obstruction and begins its approach.",
+      "lethal": false,
+      "opponent": {
+        "name": "hollow-pace",
+        "health": 4,
+        "threat": 35,
+        "yieldAt": 0,
+        "fleeDifficulty": 12,
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ]
+      }
     }
   },
-  "activeEncounter": null,
+  "activeEncounter": {
+    "defId": "re-beast_hollow_pace",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-beast_hollow_pace",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "opponentHealth": 4,
+      "opponentYieldAt": 1,
+      "opponentMaxHealth": 4,
+      "tactic": null,
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "a hollow-pace",
+        "attributes": {
+          "practical": 2,
+          "physical": 2,
+          "mental": 2,
+          "social": 2
+        },
+        "energy": 66,
+        "maxEnergy": 66,
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "skills": [
+          {
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 1,
+            "attribute": "practical"
+          },
+          {
+            "function": "shield",
+            "name": "a raised guard",
+            "tier": 1,
+            "attribute": "practical"
+          }
+        ],
+        "health": 4,
+        "soak": 0,
+        "soakLayers": [],
+        "level": 11,
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 66,
+      "turn": {
+        "phase": "sense",
+        "sel": {
+          "sense": [],
+          "action": [],
+          "bonus": []
+        },
+        "text": {
+          "sense": "",
+          "action": "",
+          "bonus": ""
+        },
+        "setupBonus": 0,
+        "bonusEarned": false,
+        "senseDone": false,
+        "senseLine": ""
+      }
+    }
+  },
   "legendGovernor": {
     "lastDeployDay": 31,
     "lastBeat": "witness_power"
@@ -7544,5 +7607,6 @@
       "worldDay": 69,
       "actionCount": 140
     }
-  ]
+  ],
+  "_exchangeReceipts": []
 }

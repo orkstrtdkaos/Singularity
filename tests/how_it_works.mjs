@@ -4827,7 +4827,7 @@ console.log("\n── §70 · per-rank source · the revised kill cost · ongoin
   // growthFor as CONTEXT for what it proposes. The derived count is a proxy — the hard half is the declared builds: field
   // — and a new unbuilt spec raises the proxy without anything being stale. The population grew; the baseline moves with
   // it, and the reason is written here rather than the number quietly nudged.
-  const BASELINE_DERIVED = 10;   // 2026-09-06 (12→10): Aevi flipped SPEC_holdings_screen, SPEC_npc_presence_cadence and DESIGN_codex_admission_and_summaries to `built` — the ratchet tightens to what is measured   // 2026-09-06 (11→12): SPEC_holdings_screen.md — Aevi, landed today, UNBUILT (CCode round 2), naming ensureHoldingImage/renameHolding/holdingSentence as the exports it asks to CHANGE — the next landing builds it and the count comes back down   // 2026-09-06 (10→11): SPEC_codex_summaries_and_merging.md — Aevi, landed today, UNBUILT, naming codex readers as context for the summaries it asks for   // 2026-09-06 (9→10): SPEC_npc_presence_cadence.md — Aevi, landed today, UNBUILT, naming npcsPresent/attentionByTier/worldRoster as context for the roster it asks for; the population grew, nothing went stale, and `declaredStale` is still 0   // 2026-09-05 (5): SPEC_quest_snapshot.md landed unbuilt, naming ringDistance/meaningDensity as context   // (4): SPEC_companion_becomes_person.md, same case   // (3): SPEC_party_mode_phase2.md, same case   // (2): four more specs landed unbuilt with the brief   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
+  const BASELINE_DERIVED = 11;   // 2026-09-07 (10→11): SPEC_hold_costs_crafts_and_hiring.md — Aevi, spec_ready, naming addFeature/improveHolding/setCrew/setGarrison as the exports it prices; BUILT the same morning (§128–§130) — flips to built and comes down when she marks it   // 2026-09-06 (12→10): Aevi flipped SPEC_holdings_screen, SPEC_npc_presence_cadence and DESIGN_codex_admission_and_summaries to `built` — the ratchet tightens to what is measured   // 2026-09-06 (11→12): SPEC_holdings_screen.md — Aevi, landed today, UNBUILT (CCode round 2), naming ensureHoldingImage/renameHolding/holdingSentence as the exports it asks to CHANGE — the next landing builds it and the count comes back down   // 2026-09-06 (10→11): SPEC_codex_summaries_and_merging.md — Aevi, landed today, UNBUILT, naming codex readers as context for the summaries it asks for   // 2026-09-06 (9→10): SPEC_npc_presence_cadence.md — Aevi, landed today, UNBUILT, naming npcsPresent/attentionByTier/worldRoster as context for the roster it asks for; the population grew, nothing went stale, and `declaredStale` is still 0   // 2026-09-05 (5): SPEC_quest_snapshot.md landed unbuilt, naming ringDistance/meaningDensity as context   // (4): SPEC_companion_becomes_person.md, same case   // (3): SPEC_party_mode_phase2.md, same case   // (2): four more specs landed unbuilt with the brief   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
   check(`§70: ratchet — \`spec_ready\` specs naming an existing engine export = ${derivedStale.length} (baseline ${BASELINE_DERIVED}) — may only go DOWN`,
     derivedStale.length <= BASELINE_DERIVED, derivedStale.map(r => `${r.f}:${r.named.slice(0, 3).join(",")}`).join(" · "));
   const built70 = rows70.filter(r => r.status === "built" || r.status === "part_built");
@@ -5023,7 +5023,7 @@ console.log("\n── §74 · a hold grows — the keeper's ceiling, a craft app
   check("§74: ⛔ the growth dials are content — a climb schedule, a FLOOR by keeper tier (v2 §1: notable keeps it at holding, epic and above keep it thriving; no ceiling), the shaping functions, hands, a watch's keep, the ground's weight",
     g && g.passesPerClimb === 4 && !g.ceilingByKeeperTier && g.floorByKeeperTier?.notable === "holding" && g.floorByKeeperTier?.epic === "thriving" && Array.isArray(g.improveFunctions) && g.improveFunctions.includes("mend")
     && g.handsYieldBonus > 0 && g.maxHands >= 1 && g.garrisonUpkeepPerHand > 0 && Number.isFinite(g.groundYieldWeight));
-  const mk74 = (steward, keeperLevel, extra = {}) => ({ id: "pc", purse: { crystal: 500 }, company: [], holdingOffers: [], worldState: { assignments: {} }, abilities: [],
+  const mk74 = (steward, keeperLevel, extra = {}) => ({ id: "pc", purse: { crystal: 500 }, energy: 40, company: [], holdingOffers: [], worldState: { assignments: {} }, abilities: [],   // energy: a craft on a place costs it now (§129)
     npcRegistry: steward ? { [steward]: { id: steward, name: "Keeper", status: "active", level: keeperLevel } } : {},
     holdings: [{ id: "mine", kind: "enterprise", name: "the mine", locationId: null, steward, condition: "holding", history: [], lastMovedWorldCount: 0, ...extra }] });
   // ── the keeper's ceiling, on the schedule
@@ -5131,7 +5131,7 @@ console.log("\n── §75 · features — a mine yields, a temple carries meani
   H75.addFeature(c3, "threshold", { kind: "sentries", name: "skeletal sentries", by: "you", count: 4, cfg: cfgAll });
   const h3 = c3.holdings[0]; h3.store = { raw_material: 40 };
   check("§75: ⛔ a wall and sentries make the hold GUARDED with nobody on the garrison list, and count as defence points",
-    H75.isGuarded(h3, cfgAll) && !H75.isGuarded({ id: "x", kind: "post" }, cfgAll) && H75.defenceOf(h3, cfgAll) === 1 + 4 && H75.upkeepFor(h3, cfgAll) === 0);
+    H75.isGuarded(h3, cfgAll) && !H75.isGuarded({ id: "x", kind: "post" }, cfgAll) && H75.defenceOf(h3, cfgAll) === 1 + 4 && H75.upkeepFor(h3, cfgAll) === 1 + 4 * 6);   // SPEC_hold_costs §2: stone keeps for 1, a sentry post for 6 each — this pinned 0 before Erik's ruling
   // ⚠️ R46a (2026-09-05) SUPERSEDES THE FLOOR THIS ONCE ASSERTED: sentries keep a WATCH, so this hold does not get
   // subtracted from — it FIGHTS. §78 carries the three endings; here we assert only that a watched hold is never quietly
   // robbed, which is what the wall-and-sentries fixture is for.
@@ -8413,7 +8413,7 @@ console.log("\n── §123 · the list and the popup say the same thing, with a
   check("§123: ⛔ ensureHoldingImage has MORE THAN ONE CALLER now — the celebration, the list, the popup", (app.match(/ensureHoldingImage\(/g) || []).length >= 4);
   check("§123: ⛔ THE LIST AND THE POPUP RENDER THE SAME FACTS LINE from the same engine call, and name the owner",
     (app.match(/\$\{factsOf\(h\)\}/g) || []).length === 2 && (app.match(/\$\{ownerOf\(h\)\}/g) || []).length === 2 && /holdingFactsLine\(h, \{ nameOf, holdings: character\.holdings/.test(app)
-    && /import \{ holdingFactsLine, /.test(app));
+    && /import \{[^}]*\bholdingFactsLine\b/.test(app));
   const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
   check("§123: ⚑ on the repo copy the stale Raven's Home art is gone from Stillwater's Trouble, and no hold carries art of another name",
     disk.reconcileVersion >= 46 && disk.holdings.every(h => { const m = typeof h.image === "string" && /\/prompt\/([^?]+)/.exec(h.image); if (!m) return true; try { return decodeURIComponent(m[1]).startsWith(h.name); } catch { return true; } }));
@@ -8520,6 +8520,105 @@ console.log("\n── §127 · a select never exceeds its container; a grid colu
     /\.freeform \{ display: flex; flex-wrap: wrap;/.test(css) && /\.freeform \.mode-chips \{ flex: 0 0 auto; \}/.test(css) && /\.freeform input \{ flex: 1 1 160px; min-width: 0; \}/.test(css));
   check("§127: …and the banner keeps its bleed — the fix was the column, not a cap on the picture",
     /\.scene-banner \{ width: calc\(100% \+ 48px\);/.test(css) && !/^img \{[^}]*max-width/m.test(css));
+}
+
+/* ═════ §128 — WHAT A HOLD COSTS: BUILT PAYS, INHERITED AND GRANTED ARE FREE, EVERYTHING PAYS ITS KEEP (SPEC_hold_costs §2–§3) ═════ */
+// ⛔ Measured before: addFeature charged nothing on 38 kinds; a post's upkeep was 0; crew were names. Erik: "we shouldn't be
+// adding these for free." Aevi's table, as authored; Q1 store first, purse second, else it STALLS; Q2 a build IS a project.
+console.log("\n── §128 · a keep is not the price of a hearth ──");
+{
+  const H = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch128 } = await import("./headless_content.mjs");
+  const C = await lch128();
+  const eco = C.rules.economy, cfg = { ...eco.holdStore, features: eco.holdFeatures };
+  const kinds = Object.keys(cfg.features.kinds).filter(k => !k.startsWith("_"));
+  const priced = kinds.filter(k => { const c = H.featureCost(k, cfg); return c && Number.isFinite(c.upkeep) && (c.build === null || (c.build && c.build.goods && Number.isFinite(c.build.days))); });
+  check("§128: ⛔ EVERY KIND CARRIES A BUILD AND AN UPKEEP — the cost is what the thing is", kinds.length >= 38 && priced.length === kinds.length, `${priced.length}/${kinds.length}`);
+  check("§128: ⛔ …stone is cheap to keep and a watch is the dearest thing in the game; a waygate cannot be built and costs 12",
+    H.featureCost("wall", cfg).upkeep === 1 && H.featureCost("watch", cfg).upkeep === 8 && H.featureCost("keep", cfg).build.goods.cut_stone === 40 && H.featureCost("waygate", cfg).build === null && !H.featureCost("waygate", cfg).buildable && H.featureCost("waygate", cfg).upkeep === 12 && H.featureCost("hearth", cfg).upkeep === 0);
+  const post = { id: "p", kind: "post", name: "the post", condition: "holding", garrison: ["g"], crew: ["a", "b"], features: [{ kind: "watch" }, { kind: "relay_station" }, { kind: "keepers_hut" }], history: [] };
+  check("§128: ⛔ UPKEEP IS THE FEATURES THAT STAND plus the garrison's keep plus the hands' wage — a post is no longer free (0 + 8 + 3 + 1 + 3 + 2×3)",
+    H.upkeepFor(post, cfg) === 8 + 3 + 1 + 3 + 2 * 3, `${H.upkeepFor(post, cfg)}`);
+  const mk = (store, crystal) => ({ id: "pc", purse: { crystal }, energy: 20, holdings: [{ id: "h", kind: "post", name: "the post", condition: "holding", store, features: [], history: [] }] });
+  // ── built from the store: paid, and it takes its days
+  const c1 = mk({ cut_stone: 12 }, 0); const r1 = H.addFeature(c1, "h", { kind: "wall", by: "you", day: 1, cfg, via: "built", economy: eco, regionId: "valley" });
+  const h1 = c1.holdings[0]; const f1 = h1.features[0];
+  check("§128: ⛔ BUILT FROM THE STORE — ten cut stone leave it, the work begins, and it is NOT a wall yet: no defence until its days have run",
+    r1.ok && h1.store.cut_stone === 2 && f1.building && !Object.keys(f1.building.owed).length && f1.building.passesLeft === 4 && H.defenceOf(h1, cfg) === 0 && H.featuresOf(h1).length === 0 && H.allFeatures(h1).length === 1, JSON.stringify(r1.paid));
+  let built = null; for (let i = 0; i < 4; i++) { const st = H.tickStore(c1, h1, { cfg, economy: eco, dangerLevel: 0, rng: () => 0.99, day: 2 + i }); if (st.built?.length) built = st; }
+  check("§128: …four passes later it STANDS — defence 1, the news says so, and now it costs its keep",
+    !f1.building && H.defenceOf(h1, cfg) === 1 && built && H.storeNews(h1, built).some(l => /stands at the post now/.test(l)) && H.upkeepFor(h1, cfg) === 1);
+  // ── the purse second, at the region's own unit worth
+  const c2 = mk({}, 500); const each = H.unitWorth("raw_material", { economy: eco, regionId: "valley", cfg })?.each || 0;
+  const r2 = H.addFeature(c2, "h", { kind: "hearth", by: "you", day: 1, cfg, via: "built", economy: eco, regionId: "valley" });
+  check("§128: ⛔ THE PURSE SECOND — with an empty store the two raw material are bought at the region's unit worth, no new price",
+    r2.ok && each > 0 && r2.paid.coin === Math.round(2 * each) && c2.purse.crystal === 500 - Math.round(2 * each) && !Object.keys(c2.holdings[0].features[0].building.owed).length, JSON.stringify({ each, paid: r2.paid }));
+  // ── neither: it STALLS, and pays itself off from the store
+  const c3 = mk({}, 0); const r3 = H.addFeature(c3, "h", { kind: "keep", by: "you", day: 1, cfg, via: "built", economy: eco, regionId: "valley" });
+  const f3 = c3.holdings[0].features[0];
+  check("§128: ⛔ NEITHER — the build STALLS on the record, owing forty cut stone, giving nothing", r3.ok && f3.building.owed.cut_stone === 40 && H.defenceOf(c3.holdings[0], cfg) === 0 && /owes 40 cut stone/.test(H.takeHoldingEvents(c3).join(" ")));
+  c3.holdings[0].store = { cut_stone: 40 }; H.tickStore(c3, c3.holdings[0], { cfg, economy: eco, dangerLevel: 0, rng: () => 0.99, day: 2 });
+  check("§128: …and pays itself off when the store can — the stone is gone, the debt is gone, the days still run", c3.holdings[0].store.cut_stone === 0 && !Object.keys(f3.building.owed).length && f3.building.passesLeft === 19);
+  const c4 = mk({}, 0); const r4 = H.addFeature(c4, "h", { kind: "waygate", by: "you", day: 1, cfg, via: "built" });
+  check("§128: ⛔ A WAYGATE CANNOT BE BUILT — you come to hold one, or you make one, and that is a story", r4.ok === false && /cannot be built/.test(r4.why));
+  const c5 = mk({}, 0); const r5 = H.addFeature(c5, "h", { kind: "keep", by: "the story", day: 1, cfg, via: "granted" }); const r5b = H.addFeature(c5, "h", { kind: "mine", by: "the fiction", day: 1, cfg, via: "inherited" });
+  check("§128: ⛔ GRANTED AND INHERITED ARE FREE and stand at once — and still cost their keep (\"you can be given a keep and still not afford to man it\")",
+    r5.ok && r5b.ok && !c5.holdings[0].features.some(f => f.building) && c5.purse.crystal === 0 && H.defenceOf(c5.holdings[0], cfg) === 3 && H.upkeepFor(c5.holdings[0], cfg) === 4 + 4);
+  check("§128: ⚑ the default arrival is GRANTED — no existing caller began charging by accident; only the tab's Build says built",
+    /via = "granted"/.test(rd("engine/holdings.js")) && /data-hold-build=/.test(rd("app.js")) && /via: "built",\s*\n\s*economy: CONTENT/.test(rd("app.js")) && /by: "the story", day: absoluteWorldDay\(\), worldCount: worldCount\(\), cfg: holdCfgNow\(\), via: "granted"/.test(rd("app.js")));
+}
+
+/* ═════ §129 — A CRAFT ON A PLACE COSTS ENERGY, AND WHAT HOLDS GROUND LASTS A SEASON (SPEC_hold_costs §4) ═════ */
+// ⛔ Erik: "crafts applied to cost energy and either have energy upkeep or last certain durations." Before: nothing, forever.
+// Aevi's test: did the craft leave something behind? A cut shaft is a mine; a held ward-line IS the warden, and stops when
+// they stop. Which is which is AUTHORED (lastingFunctions / seasonFunctions). Q3: it warns one pass before it lapses.
+console.log("\n── §129 · the warden is the ward-line, and when they stop, it stops ──");
+{
+  const H = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch129 } = await import("./headless_content.mjs");
+  const C = await lch129();
+  const eco = C.rules.economy, cfg = { ...eco.holdStore, features: eco.holdFeatures }, g = cfg.growth;
+  const catalog = { ward: { id: "ward", name: "Ward-Line", functions: ["sustain"], energyCost: 4 }, shaft: { id: "shaft", name: "Cut Shaft", functions: ["make"], energyCost: 5 } };
+  const mk = (energy) => ({ id: "pc", energy, abilities: [{ abilityId: "ward", level: 1 }, { abilityId: "shaft", level: 1 }], holdings: [{ id: "h", kind: "post", name: "the post", condition: "holding", features: [], history: [] }] });
+  check("§129: ⛔ THE DIALS ARE CONTENT — an energy multiplier, a season, and WHICH crafts last is authored", g.improveEnergyMult >= 1 && g.improveSeasonDays >= 1 && g.lastingFunctions.includes("make") && g.seasonFunctions.includes("sustain"));
+  const c0 = mk(0); const r0 = H.improveHolding(c0, "h", "ward", { catalog, cfg, day: 10 });
+  check("§129: ⛔ AT ZERO ENERGY YOU CANNOT RAISE A WARD (R47) — a real consequence of having spent yourself elsewhere", r0.ok === false && /no energy/.test(r0.why));
+  const c = mk(20); const r = H.improveHolding(c, "h", "ward", { catalog, cfg, day: 10 }); const imp = c.holdings[0].improvements[0];
+  check("§129: ⛔ A CRAFT ON A PLACE COSTS ITS ENERGY × THE MULTIPLIER (4 × 2), lifts the rung, and a craft that HOLDS lasts a season with a refresh price",
+    r.ok && c.energy === 20 - 8 && c.holdings[0].condition === "thriving" && imp.expiresDay === 10 + g.improveSeasonDays && imp.refreshCost === 8, JSON.stringify(imp));
+  const c2 = mk(20); H.improveHolding(c2, "h", "shaft", { catalog, cfg, day: 10 });
+  check("§129: …a craft that MAKES a thing is permanent — no expiry; it is a thing now, and things need keeping, not renewal", c2.holdings[0].improvements[0].expiresDay === undefined);
+  const h = c.holdings[0];
+  const warn = H.tickStore(c, h, { cfg, economy: eco, dangerLevel: 0, rng: () => 0.99, day: imp.expiresDay - 3 });
+  check("§129: ⛔ IT WARNS ONE PASS BEFORE (Q3) — the news says it will go quiet, and nothing has lapsed yet",
+    warn.lapsing?.includes("Ward-Line") && !imp.lapsed && h.condition === "thriving" && H.storeNews(h, warn).some(l => /will go quiet next pass/.test(l)));
+  const lapse = H.tickStore(c, h, { cfg, economy: eco, dangerLevel: 0, rng: () => 0.99, day: imp.expiresDay });
+  check("§129: ⛔ THEN IT GOES QUIET — the rung it gave comes off, the record says so, and the feature is not removed",
+    lapse.lapsed?.includes("Ward-Line") && imp.lapsed === true && imp.tookRung === true && h.condition === "holding" && H.storeNews(h, lapse).some(l => /has gone quiet/.test(l)) && /has gone quiet/.test(h.history.slice(-1)[0]?.note || ""));
+  const again = H.tickStore(c, h, { cfg, economy: eco, dangerLevel: 0, rng: () => 0.99, day: imp.expiresDay + 3 });
+  check("§129: …and says it once — a quiet ward is not news every pass", !(again.lapsed || []).length && !(again.lapsing || []).length);
+  const rf = H.refreshImprovement(c, "h", "ward", { cfg, day: imp.expiresDay + 3 });
+  check("§129: ⛔ REFRESHED — the energy again, the season restarts from today, and the rung comes back", rf.ok && c.energy === 20 - 8 - 8 && !imp.lapsed && h.condition === "thriving" && rf.expiresDay === (10 + g.improveSeasonDays + 3) + g.improveSeasonDays);
+  const rs = H.refreshImprovement(c2, "h", "shaft", { cfg, day: 20 });
+  check("§129: …a made thing has nothing to refresh", rs.ok === false && /needs keeping/.test(rs.why));
+  check("§129: ⚑ the tab offers Refresh, and Wake for a quiet one", /data-hold-refresh=/.test(rd("app.js")) && /↻ Wake/.test(rd("app.js")));
+}
+
+/* ═════ §130 — COME AND WORK: A LOWER BAR THAN TRAVELLING, A WAGE, AND WHO ALREADY KEEPS WHAT (SPEC_hold_costs §5) ═════ */
+// ⛔ Erik: "more of the people I know to be able to be asked to come work them." isRecruitable asked the TRAVELLING question of
+// every ask. The popup's registry list, meanwhile, had no bar at all. Known, here, not hostile — and paid.
+console.log("\n── §130 · Bren Thalle does not need to be devoted to take paid work at a mill ──");
+{
+  const H = await import("../engine/holdings.js");
+  const NP = await import("../engine/company.js");   // isRecruitable — the TRAVELLING bar — lives with the company
+  const w = (o) => H.canBeAskedToWork({ id: "x", name: "X", status: "active", relationship: 0, met: 1, ...o });
+  check("§130: ⛔ COME AND WORK — known and not hostile is enough; devotion is the company's bar, not the mill's",
+    w({}) && w({ relationship: 2 }) && !w({ relationship: -4 }) && !w({ relationship: -7 }) && !w({ status: "dead" }) && !w({ status: "departed" }) && !w({ met: 0, firstMet: null, relationship: 0 }) && w({ met: 0, firstMet: null, relationship: 1 }));
+  check("§130: …and travelling keeps its bar — a stranger who may work may not join the company",
+    typeof NP.isRecruitable === "function" && !NP.isRecruitable({ id: "x", name: "X", status: "active", relationship: 0, met: 1 }) && w({}));
+  const app = rd("app.js");
+  check("§130: ⚑ the popup's pool is the working bar, and it says what they bring and whom they already keep for",
+    /Object\.keys\(character\.npcRegistry \|\| \{\}\)\.filter\(id => canBeAskedToWork\(character\.npcRegistry\[id\]\)\)/.test(app) && /\(keeps \$\{esc\(k\)\}\)/.test(app) && /assistTags \|\| \[\]\)\.slice\(0, 2\)/.test(app));
 }
 
 /* ══════════ REPORT ══════════ */

@@ -62,7 +62,7 @@ import { enterDeathState } from "./engine/death.js";
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
-import { holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
@@ -126,7 +126,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.403";
+const APP_VERSION = "1.9.404";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10837,10 +10837,27 @@ function wireHoldingOffers() {
     saveCharacter(character); again();
   };
   // ✅ features and the name
+  // ⛔ SPEC_hold_costs §3 — TWO VERBS. Build pays the price (store first, purse second, else it stalls as work in progress);
+  // Record is the story's arrival — free, and it still costs its keep. Erik: "we shouldn't be adding these for free… they can
+  // come with features if they arrive narratively."
+  for (const btn of app.querySelectorAll("[data-hold-build]")) btn.onclick = () => {
+    const id = btn.dataset.holdBuild, sel = app.querySelector(`[data-hold-kind="${id}"]`), nameEl = app.querySelector(`[data-hold-fname="${id}"]`);
+    if (!sel?.value) return;
+    const h = (character.holdings || []).find(x => x.id === id);
+    const r = addFeature(character, id, { kind: sel.value, name: (nameEl?.value || "").trim() || null, by: "you", day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow(), via: "built",
+      economy: CONTENT.rules?.economy || null, regionId: CONTENT.locations?.[h?.locationId]?.regionId || null });
+    if (!r.ok) { alert(r.why); return; }
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-hold-feature]")) btn.onclick = () => {
     const id = btn.dataset.holdFeature, sel = app.querySelector(`[data-hold-kind="${id}"]`), nameEl = app.querySelector(`[data-hold-fname="${id}"]`);
     if (!sel?.value) return;
-    const r = addFeature(character, id, { kind: sel.value, name: (nameEl?.value || "").trim() || null, by: "you", day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow() });
+    const r = addFeature(character, id, { kind: sel.value, name: (nameEl?.value || "").trim() || null, by: "the story", day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow(), via: "granted" });
+    if (!r.ok) { alert(r.why); return; }
+    saveCharacter(character); again();
+  };
+  for (const btn of app.querySelectorAll("[data-hold-refresh]")) btn.onclick = () => {
+    const r = refreshImprovement(character, btn.dataset.holdRefresh, btn.dataset.craft, { cfg: holdCfgNow(), day: absoluteWorldDay(), worldCount: worldCount() });
     if (!r.ok) { alert(r.why); return; }
     saveCharacter(character); again();
   };
@@ -11108,8 +11125,11 @@ function renderHoldingsTab(manageId = null) {
       const built = (h.features || []).map((f, i) => `<span>${esc(f.name || f.kind)}${f.count > 1 ? ` \u00d7${f.count}` : ""} <button class="opt" data-hold-unfeature="${esc(h.id)}" data-index="${i}" title="Tear it down" style="padding:0 4px">\u00d7</button></span>`).join(" \u00b7 ");
       const opts = Object.entries(kinds).map(([k, d]) => `<option value="${esc(k)}">${esc(d.label || k)}</option>`).join("");
       const crafts = (character.abilities || []).filter(a => a && a.id).slice(0, 40).map(a => `<option value="${esc(a.id)}">${esc(a.name || a.id)}</option>`).join("");
-      const folk = [...new Set([...company.map(m => m.npcId), ...delegates, ...Object.keys(character.npcRegistry || {})])].filter(Boolean).slice(0, 60);
-      const folkOpts = folk.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("");
+      // ⛔ SPEC_hold_costs §5 — COME AND WORK: known, here, and not hostile (canBeAskedToWork) — a far lower bar than the company's.
+      // The registry alone had no bar at all. Whoever already keeps another place is said so (Q5: visible, not forbidden).
+      const keeps = (id) => (character.holdings || []).find(o => o && o.id !== h.id && o.steward === id)?.name || null;
+      const folk = [...new Set([...company.map(m => m.npcId), ...delegates, ...Object.keys(character.npcRegistry || {}).filter(id => canBeAskedToWork(character.npcRegistry[id]))])].filter(Boolean).slice(0, 80);
+      const folkOpts = folk.map(id => { const k = keeps(id); const tags = (character.npcRegistry?.[id]?.assistTags || []).slice(0, 2).join(", "); return `<option value="${esc(id)}">${esc(nameOf(id))}${tags ? ` — ${esc(tags)}` : ""}${k ? ` (keeps ${esc(k)})` : ""}</option>`; }).join("");
       const head = (t) => `<div class="hint" style="font-size:10px;text-transform:uppercase;letter-spacing:.6px;margin-top:12px">${t}</div>`;
       const art = ensureHoldingImage(h) || h.image || null;   // §1: the manage screen mints too — Erik: "and for the new manage screen that pops up"
       return `<div class="item-detail-modal" id="hold-modal"><div class="item-detail-sheet" style="max-width:520px;text-align:left">
@@ -11128,7 +11148,9 @@ function renderHoldingsTab(manageId = null) {
         ${head("What stands here")}
         <div class="hint" style="margin-top:2px">${built || "nothing built yet"}</div>
         <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
-          ${opts ? `<select data-hold-kind="${esc(h.id)}">${opts}</select><input data-hold-fname="${esc(h.id)}" placeholder="what it is called (optional)" style="max-width:200px"><button class="opt" data-hold-feature="${esc(h.id)}">Add what was built</button>` : ""}
+          ${opts ? `<select data-hold-kind="${esc(h.id)}">${opts}</select><input data-hold-fname="${esc(h.id)}" placeholder="what it is called (optional)" style="max-width:200px"><button class="opt" data-hold-build="${esc(h.id)}" title="Pay the price — goods from the store, then the purse — and the work begins; it stands when its days have run">Build</button><button class="opt" data-hold-feature="${esc(h.id)}" title="The story built it, or the place came with it — free to record, and it still costs its keep">Record what the story built</button>` : ""}
+          <div class="hint" style="width:100%;margin-top:2px">${(() => { const kinds = Object.keys(holdCfgNow()?.features?.kinds || {}).filter(k => !k.startsWith("_")); return kinds.map(k => { const c = featureCost(k, holdCfgNow()); if (!c) return ""; const goods = c.build ? Object.entries(c.build.goods).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ") : null; return `<span style="white-space:nowrap">${esc(holdCfgNow().features.kinds[k].label || k)}: ${goods ? esc(goods) + " · " + c.build.days + " days" : "cannot be built"} · ${c.upkeep}/pass</span>`; }).filter(Boolean).slice(0, 40).join(" &nbsp;·&nbsp; "); })()}</div>
+          ${(h.improvements || []).some(i => i && i.expiresDay != null) ? `<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:6px">${(h.improvements || []).filter(i => i && i.expiresDay != null).map(i => `<button class="opt" data-hold-refresh="${esc(h.id)}" data-craft="${esc(i.abilityId)}" title="${esc(i.name || i.abilityId)} ${i.lapsed ? "has gone quiet" : "lasts until day " + i.expiresDay} — refreshing costs ${i.refreshCost || i.energy || 1} energy">${i.lapsed ? "↻ Wake" : "↻ Refresh"} ${esc(i.name || i.abilityId)} (${i.refreshCost || i.energy || 1} energy)</button>`).join("")}</div>` : ""}
         </div>
         ${crafts ? `<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px"><select data-hold-craft="${esc(h.id)}">${crafts}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft to the place">Apply a craft</button></div>` : ""}
         ${head("The place itself")}

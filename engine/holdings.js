@@ -551,7 +551,13 @@ export function upkeepFor(holding, cfg) {
   const u = holding.upkeepCost ?? (cfg.upkeepByKind || {})[holding.kind];
   const guards = Array.isArray(holding.garrison) ? holding.garrison.length : 0;   // people on watch cost keep; sentries (a feature) do not
   const perGuard = Number(cfg.growth?.garrisonUpkeepPerHand) || 0;
-  return Math.max(0, (Number(u) || 0) + guards * perGuard);
+  // ⛔ SPEC_hold_costs §2: every feature that STANDS costs its keep — inherited and granted included ("you can be given a keep
+  // and still not afford to man it"). §5: a hand asked to come and work is paid (wagePerHand). A build in progress costs nothing yet.
+  let feats = 0;
+  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); feats += (Number(def?.upkeep) || 0) * (Number(f.count) || 1); }
+  const hands = Array.isArray(holding.crew) ? holding.crew.length : 0;
+  const wage = Number(cfg.growth?.wagePerHand) || 0;
+  return Math.max(0, (Number(u) || 0) + guards * perGuard + feats + hands * wage);
 }
 export function storeTotal(holding) {
   return Object.values(holding?.store || {}).reduce((a, n) => a + (Number(n) || 0), 0);
@@ -594,6 +600,7 @@ export function serviceIncome(character, holding, { cfg = null, locations = {}, 
 }
 
 export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {} } = {}) {
+  const keeperFloorEffects = (() => { try { const t = holding?.steward ? keeperTierOf(character, holding, { npcs: people, npcCfg, day }) : null; const fl = holding?.steward ? keeperFloorFor(t, cfg?.growth) : null; return fl ? { keeperFloor: fl } : null; } catch { return null; } })();
   if (!holding || !cfg) return null;
   const out = { yielded: null, upkeep: 0, short: 0, raid: null, full: false, justFull: false };
   // ✅ features: a post with a mine yields — every material feature adds its goods beside the hold's own kind
@@ -640,6 +647,23 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   const alms = pilgrimIncome(holding, { cfg, meaning });
   if (alms > 0) { const c = credit(character, cfg.upkeepCurrency || "crystal", alms, { origin: "gift" }); if (c.ok) out.pilgrims = alms; }
   // ⛔ RUNNER FEES, BEFORE THE KEEP — so a relay post pays for itself in the same pass (Erik: "maintain the post minimally").
+  // ⛔ SPEC_hold_costs §3/Q1–Q2 — A BUILD IN PROGRESS pays itself off from the store each pass and finishes when its days have run.
+  out.built = [];
+  for (const f of allFeatures(holding)) {
+    if (!f.building) continue;
+    holding.store = holding.store && typeof holding.store === "object" ? holding.store : {};
+    for (const g of Object.keys(f.building.owed || {})) { const have = Number(holding.store[g]) || 0; const take = Math.min(have, f.building.owed[g]); if (take > 0) { holding.store[g] = have - take; f.building.owed[g] -= take; if (f.building.owed[g] <= 0) delete f.building.owed[g]; } }
+    f.building.passesLeft = Math.max(0, (Number(f.building.passesLeft) || 0) - 1);
+    if (!Object.keys(f.building.owed || {}).length && f.building.passesLeft <= 0) { delete f.building; out.built.push(f.name || f.kind); holding.history = [...(holding.history || []), { at: null, from: holding.condition, to: holding.condition, note: `${f.name || f.kind} stands` }].slice(-12); }
+  }
+  // ⛔ SPEC_hold_costs §4 — A CRAFT THAT HOLDS GROUND OR DEFENDS LASTS A SEASON: it warns one pass before (Q3), then goes quiet —
+  // the rung it gave comes off, the feature stays, and the record says so. A craft that MADE a thing has no expiry.
+  out.lapsing = []; out.lapsed = [];
+  if (day != null) for (const imp of (holding.improvements || [])) {
+    if (!imp || imp.expiresDay == null || imp.lapsed) continue;
+    if (day >= imp.expiresDay) { imp.lapsed = true; imp.lapsedDay = day; const before = holding.condition; advanceHolding(holding, "problem", null, `${imp.name || imp.abilityId} has gone quiet`, keeperFloorEffects); if (holding.condition !== before) imp.tookRung = true; out.lapsed.push(imp.name || imp.abilityId); }
+    else if (day >= imp.expiresDay - 3 && !imp.warned) { imp.warned = true; out.lapsing.push(imp.name || imp.abilityId); }
+  }
   const svc = serviceIncome(character, holding, { cfg, locations, passes: Number(holding.relayPasses) || 0 });
   if (svc) {
     if (svc.gate) holding.relayPasses = (Number(holding.relayPasses) || 0) + 1; else if (holding.relayPasses) delete holding.relayPasses;
@@ -702,6 +726,9 @@ export function storeNews(holding, st) {
   // ⚑ runner fees are news TWICE — when they begin, and when word of the gate has got out — never every pass
   if (st.relay?.first) lines.push(`The relay at ${where} has begun to pay: ${st.relay.crystal} crystal in runner fees this pass${st.relay.gate ? ", and the gate nearby will bring more as word gets out" : ""}.`);
   else if (st.relay?.wordOut) lines.push(`Word of the gate has got out — runner traffic at ${where} is at its height: ${st.relay.crystal} crystal in fees this pass.`);
+  for (const n of (st.built || [])) lines.push(`${n} stands at ${where} now.`);
+  for (const n of (st.lapsing || [])) lines.push(`${n} at ${where} will go quiet next pass unless it is refreshed.`);
+  for (const n of (st.lapsed || [])) lines.push(`${n} at ${where} has gone quiet.`);
   if (st.pilgrims) lines.push(`${st.pilgrims} crystal left at ${where} by those who came to it.`);
   if (Array.isArray(st.yields) && st.yields.length > 1) { /* several goods — the store line on the tab says which */ }
   if (st.grew) lines.push(`${where} has come up to ${holding.condition}${st.grew.keeper ? ` under ${st.grew.keeper}` : ""}.`);
@@ -846,6 +873,41 @@ export function growHolding(character, holding, { cfg = null, npcs = {}, npcCfg 
   return { from: before, to: holding.condition, keeper, tier, floor: keeperFloorFor(tier, g) };
 }
 
+/** §4 — REFRESH a craft that holds ground or defends: the energy again, the season restarts, and if it had gone quiet the
+ *  rung it gave comes back. A craft that made a thing has nothing to refresh. */
+export function refreshImprovement(character, id, abilityId, { cfg = null, day = null, worldCount = null } = {}) {
+  ensureHoldings(character);
+  const h = character.holdings.find(x => x && x.id === id);
+  const imp = (h?.improvements || []).find(i => i && i.abilityId === abilityId);
+  if (!h || !imp) return { ok: false, why: "no such craft on this place" };
+  if (imp.expiresDay == null) return { ok: false, why: `${imp.name || abilityId} made a thing — it does not need refreshing, it needs keeping` };
+  const cost = Math.max(1, Number(imp.refreshCost) || Number(imp.energy) || 1);
+  if ((Number(character?.energy) || 0) < cost) return { ok: false, why: `refreshing ${imp.name || abilityId} takes ${cost} energy; you have ${character?.energy ?? 0}` };
+  character.energy -= cost;
+  const season = Math.max(1, Number(cfg?.growth?.improveSeasonDays) || 12);
+  const from = day != null ? Math.max(day, Number(imp.expiresDay) || day) : (Number(imp.expiresDay) || 0);
+  imp.expiresDay = (imp.lapsed ? (day ?? from) : from) + season;
+  imp.warned = false;
+  if (imp.lapsed) {
+    delete imp.lapsed; delete imp.lapsedDay;
+    if (imp.tookRung) { const at = CONDITIONS.indexOf(h.condition); if (at >= 0 && at < CONDITIONS.length - 1) h.condition = CONDITIONS[at + 1]; delete imp.tookRung; }
+  }
+  h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `${imp.name || abilityId} refreshed (${cost} energy)` }].slice(-12);
+  return { ok: true, improvement: imp, energy: cost, expiresDay: imp.expiresDay };
+}
+
+/** ⛔ SPEC_hold_costs §5 — WORKING FOR SOMEONE IS NOT TRAVELLING WITH THEM. "Bren Thalle is two dry seasons behind with two
+ *  children — she does not need to be devoted to you to take paid work at a mill." Come and WORK needs a much lower bar
+ *  than the company's: known, here in the world, and not hostile. Travelling keeps `isRecruitable`. Asking costs nothing. */
+export function canBeAskedToWork(npc) {
+  if (!npc || !npc.id) return false;
+  const status = String(npc.status || "active");
+  if (["dead", "departed", "missing"].includes(status)) return false;
+  const rel = Number(npc.relationship) || 0;
+  if (rel <= -4) return false;                      // hostile, enemy — they will not come
+  return (Number(npc.met) || 0) >= 1 || !!npc.firstMet || rel >= 1;
+}
+
 export function improveHolding(character, id, abilityId, { catalog = {}, cfg = null, day = null, worldCount = null } = {}) {
   ensureHoldings(character);
   const h = character.holdings.find(x => x && x.id === id);
@@ -858,10 +920,21 @@ export function improveHolding(character, id, abilityId, { catalog = {}, cfg = n
   const fns = new Set((g.improveFunctions || []).map(String));
   const verbs = Array.isArray(def.functions) ? def.functions : (def.function ? [def.function] : []);
   if (!verbs.some(v => fns.has(String(v)))) return { ok: false, why: `${def.name || abilityId} does not shape or mend a place — it ${verbs.join("/") || "does something else"}` };
-  if ((h.improvements || []).some(i => i.abilityId === abilityId)) return { ok: false, why: `${def.name || abilityId} has already been applied here — a lasting effect, once` };
+  if ((h.improvements || []).some(i => i.abilityId === abilityId && !i.lapsed)) return { ok: false, why: `${def.name || abilityId} has already been applied here — a lasting effect, once` };
+  // ⛔ SPEC_hold_costs §4 — A CRAFT ON A PLACE COSTS ENERGY, the craft's own × improveEnergyMult, and R47's floor holds: at zero
+  // you cannot raise a ward. What it does decides how long it lasts: a craft that MAKES (lastingFunctions) is permanent — it is
+  // a thing now, and things need upkeep, not renewal; one that holds ground or defends (seasonFunctions) lasts a season.
+  const energyCost = Math.max(1, Math.round((Number(def.energyCost) || 0) * (Number(g.improveEnergyMult) || 1)));
+  if ((Number(character?.energy) || 0) <= 0) return { ok: false, why: `you have no energy left to raise ${def.name || abilityId} — spend yourself elsewhere and this is the cost` };
+  if ((Number(character?.energy) || 0) < energyCost) return { ok: false, why: `${def.name || abilityId} on a place takes ${energyCost} energy; you have ${character.energy}` };
+  character.energy -= energyCost;
+  const lasting = new Set((g.lastingFunctions || ["make", "mend", "restore"]).map(String));
+  const seasonal = !verbs.some(v => lasting.has(String(v)));
+  const season = Math.max(1, Number(g.improveSeasonDays) || 12);
   const before = h.condition;
   const at = CONDITIONS.indexOf(h.condition);
-  h.improvements = [...(h.improvements || []), { abilityId, name: def.name || abilityId, day }];
+  h.improvements = [...(h.improvements || []).filter(i => i.abilityId !== abilityId), { abilityId, name: def.name || abilityId, day, energy: energyCost,
+    ...(seasonal && day != null ? { expiresDay: day + season, refreshCost: energyCost } : {}) }];
   if (at >= 0 && at < CONDITIONS.length - 1) h.condition = CONDITIONS[at + 1];
   h.history = [...(h.history || []), { at: worldCount, from: before, to: h.condition, note: `improved with ${def.name || abilityId}` }].slice(-12);
   queueHoldingEvent(character, `You put ${def.name || abilityId} to ${h.name || h.id}${h.condition !== before ? ` — it comes up to ${h.condition}` : " — it is as good as it gets"}.`);
@@ -907,9 +980,25 @@ export function holdingGround(holding, { locations = {}, substrate = null } = {}
  * catalogue is the content Aevi extends; the numbers are Erik's to turn. */
 export function featureKinds(cfg) { return (cfg?.features?.kinds) || {}; }
 export function featureDef(kind, cfg) { const k = featureKinds(cfg)[String(kind || "")]; return k ? { kind: String(kind), ...k } : null; }
-export function featuresOf(holding) { return Array.isArray(holding?.features) ? holding.features : []; }
+/** ⛔ A BUILD IN PROGRESS IS NOT A FEATURE YET — every reader (defence, watch, yields, hands, aura, service) sees only what
+ *  stands. `allFeatures` is for the record and the tab. (SPEC_hold_costs §3 / Q2: a build IS a project.) */
+export function featuresOf(holding) { return (Array.isArray(holding?.features) ? holding.features : []).filter(f => f && !f.building); }
+export function allFeatures(holding) { return Array.isArray(holding?.features) ? holding.features.filter(Boolean) : []; }
+/** What a kind costs to build (goods + labour days; null when it cannot be built) and to keep, per pass. */
+export function featureCost(kind, cfg) {
+  const def = featureDef(kind, cfg);
+  if (!def) return null;
+  const build = def.build && typeof def.build === "object" ? { goods: { ...(def.build.goods || {}) }, days: Math.max(0, Number(def.build.days) || 0) } : null;
+  return { build, upkeep: Math.max(0, Number(def.upkeep) || 0), buildable: def.build !== null && def.build !== undefined };
+}
 
-export function addFeature(character, id, { kind, name = null, by = null, craftIds = [], count = 1, day = null, worldCount = null, cfg = null, yields = null } = {}) {
+/** ⛔ SPEC_hold_costs §3 — FEATURES ARRIVE THREE WAYS. `via: "built"` pays the kind's price: goods from the hold's STORE first,
+ *  then the PURSE at the region's own unit worth (unitWorth — no new price), and what cannot be paid STALLS: the feature is
+ *  added as a build in progress that pays itself off from the store each pass and gives no benefit until it stands. Labour
+ *  days are passes (Q2). `via: "inherited"` (a place that already had it) and `via: "granted"` (the story built it) are
+ *  free and stand at once; all three pay upkeep. Default `granted`, so no existing caller starts charging by accident —
+ *  only the tab's Build verb says `built`. A kind with `build: null` (the waygate) cannot be built at all. */
+export function addFeature(character, id, { kind, name = null, by = null, craftIds = [], count = 1, day = null, worldCount = null, cfg = null, yields = null, via = "granted", economy = null, regionId = null } = {}) {
   ensureHoldings(character);
   const h = character.holdings.find(x => x && x.id === id);
   if (!h) return { ok: false, why: "no such holding" };
@@ -917,12 +1006,44 @@ export function addFeature(character, id, { kind, name = null, by = null, craftI
   if (!def) return { ok: false, why: `"${kind}" is not a feature the catalogue knows — Aevi authors kinds in economy.holdStore.features` };
   // ⚑ ERIK 2026-09-06: "a workshop can be for lots of finished goods" — a feature may OVERRIDE its kind's good (Aevi's
   // catalogue said so; nothing stored or read it). A laboratory post's workshop makes instruments; Pell's makes arms.
-  const f = { kind: def.kind, family: def.family, name: name || def.label || def.kind, by: by || null, craftIds: (craftIds || []).filter(Boolean), count: Math.max(1, Number(count) || 1), day,
+  const f = { kind: def.kind, family: def.family, name: name || def.label || def.kind, by: by || null, craftIds: (craftIds || []).filter(Boolean), count: Math.max(1, Number(count) || 1), day, via,
     ...(yields && def.family === "material" ? { yields: String(yields) } : {}) };
-  h.features = [...featuresOf(h), f];
-  h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `built ${f.name}${f.by ? ` (${f.by})` : ""}${f.craftIds.length ? ` with ${f.craftIds.join(", ")}` : ""}` }].slice(-12);
-  queueHoldingEvent(character, `${h.name || h.id} has ${f.name} now${f.by && f.by !== "you" ? `, ${f.by}'s work` : ""}.`);
-  return { ok: true, feature: f, holding: h };
+  let paid = null;
+  if (via === "built") {
+    const cost = featureCost(def.kind, cfg);
+    if (!cost?.buildable) return { ok: false, why: `${def.label || def.kind} cannot be built — you come to hold one, or you make one, and that is a story` };
+    const owed = {};
+    for (const [g, n] of Object.entries(cost.build.goods)) owed[g] = Math.max(0, Math.round(Number(n) || 0) * f.count);
+    // the STORE first
+    h.store = h.store && typeof h.store === "object" ? h.store : {};
+    const fromStore = {};
+    for (const g of Object.keys(owed)) { const have = Number(h.store[g]) || 0; const take = Math.min(have, owed[g]); if (take > 0) { h.store[g] = have - take; owed[g] -= take; fromStore[g] = take; } }
+    // the PURSE second, at the region's own unit worth — never a new price
+    let coin = 0;
+    for (const g of Object.keys(owed)) {
+      if (owed[g] <= 0) continue;
+      const w = unitWorth(g, { economy, regionId, cfg });
+      const each = Number(w?.each) || 0;
+      if (each <= 0) continue;
+      const price = Math.round(owed[g] * each);
+      const r = debit(character, cfg?.upkeepCurrency || "crystal", price, {});
+      if (r.ok) { coin += price; owed[g] = 0; }
+    }
+    const still = Object.fromEntries(Object.entries(owed).filter(([, n]) => n > 0));
+    const passes = Math.ceil(cost.build.days / 3);   // Q2: a build IS a project — three world days a pass
+    f.building = { owed: still, passesLeft: passes, paid: { store: fromStore, coin } };
+    paid = { store: fromStore, coin, owed: still, passes };
+  }
+  h.features = [...allFeatures(h), f];
+  const owes = f.building && Object.keys(f.building.owed).length ? ` — owes ${Object.entries(f.building.owed).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", ")}` : "";
+  if (f.building) {
+    h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `began ${f.name} (${f.building.passesLeft} passes${owes})` }].slice(-12);
+    queueHoldingEvent(character, `Work has begun on ${f.name} at ${h.name || h.id}${paid.coin ? ` — ${paid.coin} crystal from the purse` : ""}${owes}.`);
+  } else {
+    h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `${via === "inherited" ? "came with" : "built"} ${f.name}${f.by ? ` (${f.by})` : ""}${f.craftIds.length ? ` with ${f.craftIds.join(", ")}` : ""}` }].slice(-12);
+    queueHoldingEvent(character, `${h.name || h.id} has ${f.name} now${f.by && f.by !== "you" ? `, ${f.by}'s work` : ""}.`);
+  }
+  return { ok: true, feature: f, holding: h, paid };
 }
 
 /** ⚑ THE WORDS THAT ASSERT A FEATURE. Each kind's own vocabulary — what a scene says when the thing is

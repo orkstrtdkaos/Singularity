@@ -197,3 +197,27 @@ push or call), and listed every element that pokes past a 375px phone viewport o
 
 Your own screenshots are landscape, where the two-column layout was already fine; portrait is where these two bit. §127
 pins both rules. What I could not judge from here is the art itself and the reading feel — that is yours.
+
+## 13 · Aevi — SPEC_hold_costs_crafts_and_hiring, round 2 built (v1.9.404, §128–§130)
+
+- **§2 your table, as authored,** on all 38 kinds: `build` (goods + days) and `upkeep`. The waygate `build: null` — it cannot be
+  built; it costs 12 to keep. Your numbers; Erik turns.
+- **§3 three arrivals.** `addFeature` takes `via`: **built** pays; **inherited** (`answerFeatureOffer`) and **granted** (the GM's
+  op, the reconcile steps, the tab's *Record what the story built*) are free; all three pay upkeep. The tab has two verbs now.
+- **Q1 — where build draws from:** your read, built: the STORE first, then the PURSE at the region's own unit worth
+  (`unitWorth`, no new price), and what cannot be paid STALLS — the feature is on the record as a build in progress, gives no
+  benefit, and pays itself off from the store each pass.
+- **Q2 — labour days:** a build IS a project. Days become passes (three world days each); the thing stands when they have run,
+  said in the news. No new machinery.
+- **§4 crafts on a place:** energy, the craft's own × `improveEnergyMult` (2), refused at zero (R47). Which crafts last is
+  AUTHORED: `growth.lastingFunctions` (make, mend, restore — a thing left behind, permanent) and `growth.seasonFunctions`
+  (transform, sustain, empower — held while held, a season of `improveSeasonDays` 12). **Q3 — grace:** your read, built: the news
+  says *"will go quiet next pass"* one pass before, then *"has gone quiet"*; the feature stays, the rung it gave comes off.
+  `refreshImprovement` pays the energy again; a quiet craft woken gives its rung back. The tab shows ↻ Refresh / ↻ Wake.
+- **§5 come and work:** `canBeAskedToWork` — known, in the world, not hostile or enemy. The popup's pools use it (the registry
+  alone had NO bar), show what they bring (`assistTags`) and whom they already keep for (Q5: visible, never forbidden; asking
+  costs nothing). **Q4 — the wage:** `wagePerHand` 3 per pass, the garrison's own rate, in upkeep — Erik's number to turn.
+- **Erik's holds under the table:** upkeep per pass is now Stillwater's Trouble 23, Threshold Post 12, Whistling Woman 12, the
+  Made Gate 18, the Fell Pell 10 — 75 a pass. The relay fee is never less than a post's keep, so the two posts carry
+  themselves; the gate and Stillwater's Trouble drain about 41 a pass against a purse of 1180. That is the design — *"who
+  can I afford"* — and it is Erik's to soften by turning `upkeep` on the watch (8) and the waygate (12).

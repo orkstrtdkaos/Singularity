@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 7,
-  "xp": 606,
+  "xp": 609,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -69,7 +69,7 @@
     },
     {
       "abilityId": "harmonic_voice",
-      "level": 1
+      "level": 2
     },
     {
       "abilityId": "umbracraft",
@@ -105,7 +105,7 @@
   "maxHealth": 68,
   "health": 68,
   "maxEnergy": 146,
-  "energy": 125,
+  "energy": 119,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -198,72 +198,61 @@
         "player": "Walk over to the lone traveler and say Hi.",
         "summary": "Loki arrived at the Hub crossing via the Quickwood Eaves waygate and greeted the road-warden, who recognized them by name.",
         "narration": "You cross the Hub's pale stone toward the figure in grey by the western arch. The sound of the gates fades under your footsteps—five waygate arches humming at the edge of hearing, and you moving through it like moving through water. The grey-coated figure doesn't turn until you're close enough to speak.\n\n'Hi,' you say.\n\nThey turn slowly. You recognize them now—the road-warden you met days ago on the road west of the Waygate Path, the one who carries true news and warns families downhill of what's coming. Their face is weathered, lined in the way of someone who spends seasons on open ground. Grey-streaked hair, coat faded to brown. Eyes that read roads and people with the same steady attention.\n\nThey nod—a small, genuine motion. 'Loki,' they say, and their voice carries the same unhurried certainty it did by the fire. 'I didn't expect to find you here. The Hub's not usually a place the road-bound pause.' They glance at Cy, who has positioned itself precisely at your ankle and is making a low, approving click. 'Still carrying your assignment, I see.'\n\nThe courier near the chamber's center has glanced your way once and returned to their slate. The merchants by the bench are oblivious. The grey figure by the western arch—Veln Ashpause—has not moved."
+      },
+      {
+        "player": "Ask the road-warden plainly: who is the grey figure watching the gates, and why do they seem to know something about you",
+        "summary": "At the Hub crossing, the road-warden identifies the watching figure as Veln Ashpause, an Hourkeeper, who arrived this morning asking after someone matching Loki's description and is now waiting with clear foreknowledge.",
+        "narration": "The road-warden's weathered face settles into something careful—not suspicion, but recognition of a question they were half-expecting. They glance toward the grey figure by the western arch, then back to you.\n\n'That,' they say quietly, 'is Veln Ashpause. An Hourkeeper.' They let the word sit. 'I don't know what they know about you specifically—Hourkeepers don't traffic in gossip—but they arrived here this morning asking after someone matching your description. Not hostile. Just... present. Waiting.'\n\nYou follow their gaze. Veln stands exactly where they were, unmoving, grey-coated and still. But now that you're looking directly, you catch it: the way their attention is anchored on you like a weight. Not aggressive. Observant in a way that suggests they've already seen what comes next.\n\nThe road-warden lowers their voice further. 'Hourkeepers keep time in a different way than the rest of us. Past, present, future—they're not always sure which direction they're looking. I'd tread carefully, if I were you. Whatever they're waiting to witness, it likely concerns you.'"
       }
     ],
     "lastTurn": {
-      "narration": "You cross the Hub's pale stone toward the figure in grey by the western arch. The sound of the gates fades under your footsteps—five waygate arches humming at the edge of hearing, and you moving through it like moving through water. The grey-coated figure doesn't turn until you're close enough to speak.\n\n'Hi,' you say.\n\nThey turn slowly. You recognize them now—the road-warden you met days ago on the road west of the Waygate Path, the one who carries true news and warns families downhill of what's coming. Their face is weathered, lined in the way of someone who spends seasons on open ground. Grey-streaked hair, coat faded to brown. Eyes that read roads and people with the same steady attention.\n\nThey nod—a small, genuine motion. 'Loki,' they say, and their voice carries the same unhurried certainty it did by the fire. 'I didn't expect to find you here. The Hub's not usually a place the road-bound pause.' They glance at Cy, who has positioned itself precisely at your ankle and is making a low, approving click. 'Still carrying your assignment, I see.'\n\nThe courier near the chamber's center has glanced your way once and returned to their slate. The merchants by the bench are oblivious. The grey figure by the western arch—Veln Ashpause—has not moved.",
-      "sceneSummary": "Loki arrived at the Hub crossing via the Quickwood Eaves waygate and greeted the road-warden, who recognized them by name.",
+      "narration": "The road-warden's weathered face settles into something careful—not suspicion, but recognition of a question they were half-expecting. They glance toward the grey figure by the western arch, then back to you.\n\n'That,' they say quietly, 'is Veln Ashpause. An Hourkeeper.' They let the word sit. 'I don't know what they know about you specifically—Hourkeepers don't traffic in gossip—but they arrived here this morning asking after someone matching your description. Not hostile. Just... present. Waiting.'\n\nYou follow their gaze. Veln stands exactly where they were, unmoving, grey-coated and still. But now that you're looking directly, you catch it: the way their attention is anchored on you like a weight. Not aggressive. Observant in a way that suggests they've already seen what comes next.\n\nThe road-warden lowers their voice further. 'Hourkeepers keep time in a different way than the rest of us. Past, present, future—they're not always sure which direction they're looking. I'd tread carefully, if I were you. Whatever they're waiting to witness, it likely concerns you.'\n\n*▲ Practiced — **Harmonic Voice** is fluent now (rank 2), earned through use.*",
+      "sceneSummary": "At the Hub crossing, the road-warden identifies the watching figure as Veln Ashpause, an Hourkeeper, who arrived this morning asking after someone matching Loki's description and is now waiting with clear foreknowledge.",
       "choices": [
         {
-          "label": "Ask them what brought them to the Hub—it's not a place road-wardens usually stop",
+          "label": "Approach Veln directly and ask what they know",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "ask"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell them you're heading back to the city, and ask if they've heard anything new about the water crisis moving downhill",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "ask"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Prism Sight to read the last hour of light-history in this chamber—something about the grey figure by the western arch is pulling at you",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "presence",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "confront"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 3,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask the road-warden plainly: who is the grey figure watching the gates, and why do they seem to know something about you",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Step through one of the waygate arches to leave before Veln can act—aim for the Slow Hour",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "ask"
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use False Target to make yourself appear elsewhere in the Hub while you move toward the central arch",
+          "attribute": "mental",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "misdirect"
+          ],
+          "abilityId": "false_target",
+          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -274,24 +263,70 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "lone-traveler-road-warden",
+          "name": "A lone traveler",
+          "role": "Road-warden; one who moves between the reaches and carries true news freely",
+          "note": "Named Veln Ashpause as an Hourkeeper who arrived this morning asking after someone matching Loki's description. Emphasized the Hourkeeper's nature: they see time differently, and their presence suggests foreknowledge of what is coming.",
+          "learned": [
+            "Veln Ashpause is an Hourkeeper with foreknowledge of Loki's arrival at the Hub",
+            "Hourkeepers perceive past, present, and future differently—often uncertain which direction they are looking"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Standing by the western arch at the Hub crossing, speaking plainly and carefully with Loki."
+        },
+        {
+          "op": "update",
+          "npcId": "veln-ashpause",
+          "name": "Veln Ashpause",
+          "role": "Hourkeeper",
+          "note": "Now identified by the road-warden. Present at the Hub crossing, watching the waygate arches with fixed attention on Loki. Arrived this morning asking after someone matching Loki's description. Does not move; does not explain.",
+          "status": "active",
+          "statusNote": "Standing by the western arch at the Hub crossing, utterly still, watching Loki with an expression of terrible sympathy."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "veln-ashpause",
+          "label": "Veln Ashpause",
+          "kind": "person",
+          "entityId": "veln-ashpause",
+          "fact": "An Hourkeeper—a person who perceives time differently from ordinary measure. Past, present, and future are not always certain in which direction they look. Arrived at the Hub crossing this morning asking after someone matching Loki's description. Does not offer explanation but watches with foreknowledge.",
+          "links": [
+            "the-crossing"
+          ]
+        },
+        {
+          "topic": "hourkeepers",
+          "label": "Hourkeepers",
+          "kind": "lore",
+          "fact": "A people or tradition that perceives time in a non-linear fashion—they are uncertain whether they are looking backward, forward, or at the present moment. They arrive at places carrying knowledge they cannot or will not share, and their presence often signals foreknowledge of what is coming.",
+          "links": [
+            "veln-ashpause"
+          ]
+        }
+      ],
       "scene": {
-        "setting": "The Hub crossing — a vast circular chamber where five waygate arches converge, pale stone worn smooth by uncounted arrivals. Morning light falls through high windows. The Crossing's towers visible through the eastern portal. The sound of the gates is a hum just below hearing.",
+        "setting": "The Hub crossing—a vast circular chamber where five waygate arches converge. Pale stone worn smooth by uncounted arrivals. Morning light falls through high windows. The sound of the gates is a hum just below hearing. The Crossing's towers visible through the eastern portal.",
         "npcsPresent": [
           {
             "name": "A lone traveler (road-warden)",
-            "state": "Standing by the western arch, turning to face Loki after being greeted; speaking with recognition and unhurried certainty"
+            "state": "Standing by the western arch, having just explained Veln Ashpause's identity; watching Loki with steady, weathered eyes"
           },
           {
-            "name": "Veln Ashpause (Hourkeeper)",
-            "state": "Standing by the western arch, utterly still, watching the gates — has not moved"
+            "name": "Veln Ashpause",
+            "state": "Standing by the western arch, utterly motionless, fixed attention on Loki; expression of terrible sympathy"
           },
           {
             "name": "A courier",
-            "state": "Checking a slate near the center of the chamber; glanced at Loki briefly, returned attention to slate"
+            "state": "Checking a slate near the center of the chamber; largely unaware of Loki"
           },
           {
             "name": "Two merchants",
-            "state": "Speaking in low voices by a carved bench; unaware of Loki"
+            "state": "Speaking in low voices by a carved bench; conducting business, unaware of Loki"
           }
         ],
         "objects": [
@@ -301,55 +336,33 @@
           "A slate at the courier's desk"
         ],
         "threads": [
-          "Who is the grey figure by the western arch and what is their foreknowledge of Loki",
-          "What brought the road-warden to the Hub",
-          "The man in the lower Annex who hired the striker is still unnamed",
-          "Tessvel Cairn awaits an answer about the personal offer"
+          "What does Veln Ashpause know about Loki, and why have they been waiting?",
+          "Who is the man in the lower Annex, and what is his connection to the waygate tampering?",
+          "Tessvel Cairn awaits an answer about the personal offer",
+          "The regulator's three downstream states need to be acted upon—signal to the terminus, terminus warden action, relay node record"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "lone-traveler-eastfork-warning",
-          "name": "A lone traveler (road-warden)",
-          "pronouns": "they/them",
-          "note": "Recognized Loki at the Hub crossing and greeted them by name. Noted that the Hub is not a place road-wardens usually pause. Observed Cy's presence with familiarity.",
-          "learned": [
-            "The road-warden has traveled to the Hub crossing and paused there",
-            "They know Loki by sight and name after their brief meeting on the road"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the Hub crossing, speaking with Loki"
-        },
-        {
-          "op": "update",
-          "npcId": "veln-ashpause",
-          "note": "Still standing by the western arch, utterly still, watching the gates. Has not acknowledged Loki's arrival.",
-          "status": "active",
-          "statusNote": "At the Hub crossing by the western arch, watching silently"
-        }
-      ],
-      "sceneEnded": false
+      "imagePrompt": "A grey-coated figure stands motionless by a waygate arch in a vast stone chamber, eyes fixed on you across pale worn floor. Five arches hum faintly in the background. The figure's expression carries a terrible, helpless foreknowledge—they know something is coming and cannot stop it.",
+      "momentArt": "https://image.pollinations.ai/prompt/A%20grey-coated%20figure%20stands%20motionless%20by%20a%20waygate%20arch%20in%20a%20vast%20stone%20chamber%2C%20eyes%20fixed%20on%20you%20across%20pale%20worn%20floor.%20Five%20arches%20hum%20faintly%20in%20the%20background.%20The%20figure's%20expression%20carries%20a%20terrible%2C%20helpless%20foreknowledge%E2%80%94they%20know%20something%20is%20coming%20and%20cannot%20stop%20it.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=62297&nologo=true"
     },
     "sceneState": {
-      "setting": "The Hub crossing — a vast circular chamber where five waygate arches converge, pale stone worn smooth by uncounted arrivals. Morning light falls through high windows. The Crossing's towers visible through the eastern portal. The sound of the gates is a hum just below hearing.",
+      "setting": "The Hub crossing—a vast circular chamber where five waygate arches converge. Pale stone worn smooth by uncounted arrivals. Morning light falls through high windows. The sound of the gates is a hum just below hearing. The Crossing's towers visible through the eastern portal.",
       "npcsPresent": [
         {
           "name": "A lone traveler (road-warden)",
-          "state": "Standing by the western arch, turning to face Loki after being greeted; speaking with recognition and unhurried certaint"
+          "state": "Standing by the western arch, having just explained Veln Ashpause's identity; watching Loki with steady, weathered eyes"
         },
         {
-          "name": "Veln Ashpause (Hourkeeper)",
-          "state": "Standing by the western arch, utterly still, watching the gates — has not moved"
+          "name": "Veln Ashpause",
+          "state": "Standing by the western arch, utterly motionless, fixed attention on Loki; expression of terrible sympathy"
         },
         {
           "name": "A courier",
-          "state": "Checking a slate near the center of the chamber; glanced at Loki briefly, returned attention to slate"
+          "state": "Checking a slate near the center of the chamber; largely unaware of Loki"
         },
         {
           "name": "Two merchants",
-          "state": "Speaking in low voices by a carved bench; unaware of Loki"
+          "state": "Speaking in low voices by a carved bench; conducting business, unaware of Loki"
         }
       ],
       "objects": [
@@ -359,18 +372,18 @@
         "A slate at the courier's desk"
       ],
       "threads": [
-        "Who is the grey figure by the western arch and what is their foreknowledge of Loki",
-        "What brought the road-warden to the Hub",
-        "The man in the lower Annex who hired the striker is still unnamed",
-        "Tessvel Cairn awaits an answer about the personal offer"
+        "What does Veln Ashpause know about Loki, and why have they been waiting?",
+        "Who is the man in the lower Annex, and what is his connection to the waygate tampering?",
+        "Tessvel Cairn awaits an answer about the personal offer",
+        "The regulator's three downstream states need to be acted upon—signal to the terminus, terminus warden action, relay node record"
       ]
     },
-    "beats": 3
+    "beats": 4
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 13,
+    "hour": 14,
     "realAnchor": null
   },
   "companions": [
@@ -719,7 +732,7 @@
     "hourkeeper-confluence": {
       "id": "hourkeeper-confluence",
       "name": "Veln Ashpause",
-      "role": "An Hourkeeper present at the confluence — watching Loki with foreknowledge",
+      "role": "Hourkeeper",
       "description": "Grey-coated, motionless, arrived without sound from the brush. Watching with an expression of terrible sympathy that belongs to someone carrying knowledge they cannot share.",
       "firstMet": {
         "locationId": "the_slow_orchard",
@@ -727,7 +740,8 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Appeared from the brush during the encounter — fixed Loki with a look of helpless foreknowledge and has said nothing."
+        "[d1] Appeared from the brush during the encounter — fixed Loki with a look of helpless foreknowledge and has said nothing.",
+        "[d3] Now identified by the road-warden. Present at the Hub crossing, watching the waygate arches with fixed attention on Loki. Arrived this morning asking after someone matching Loki's description. Does not move; does not explain."
       ],
       "knownFacts": [
         "They have pre-remembered something about Loki's situation — they will not say what, and cannot stop knowing it."
@@ -736,20 +750,21 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Standing at the edge of the brush at the confluence — silent, watching, carrying something they cannot explain.",
+      "statusNote": "Standing by the western arch at the Hub crossing, utterly still, watching Loki with an expression of terrible sympathy.",
       "domains": {
         "primary": "hourkeeper"
       },
       "domainsSource": "role",
       "lastSeen": {
-        "locationId": "the_slow_orchard",
-        "day": 1
+        "locationId": "the_crossing",
+        "day": 3
       },
       "_filledFromGenerate": true,
       "_mergedFrom": "veln-ashpause",
       "people": "human",
       "peopleSource": "generated",
-      "appearance": "A human woman, late fifties, with the pale-olive complexion of someone who lives under canopy rather than sky. The grey coat falls to mid-calf, unmarked, unweathered, impossibly clean for the Orchard's mud-season — early spring has not touched it. Her hair is cut short and practical, silver at the temples, darker beneath. She carries no visible instrument of timekeeping; her hands are the instruments, folded at her waist, utterly still. Her eyes are already somewhere past you."
+      "appearance": "A human woman, late fifties, with the pale-olive complexion of someone who lives under canopy rather than sky. The grey coat falls to mid-calf, unmarked, unweathered, impossibly clean for the Orchard's mud-season — early spring has not touched it. Her hair is cut short and practical, silver at the temples, darker beneath. She carries no visible instrument of timekeeping; her hands are the instruments, folded at her waist, utterly still. Her eyes are already somewhere past you.",
+      "met": 1
     },
     "the-stranger-aggressor": {
       "id": "the-stranger-aggressor",
@@ -855,17 +870,18 @@
         "[d3] Met on the bearing toward the Waygate on deep night of day 3. Offered warning about the eastern fork flood and the stone ford crossing, and shared their evening fire freely — no price, no trade, only the gift of knowing.",
         "[d3] Offered broth freely and warned of the water-problem moving downhill from the eastern fork. They carry news from the relay and move it faster — warning families before the wells run bad. Moving with purpose toward the spinward reach.",
         "[d3] Shared broth and fire. Exchanged names—they told Loki theirs, and Loki gave their own. They carry word of the water-crisis downhill faster than any relay, warning families before the wells run bad. Moving spinward with purpose and gratitude given honestly.",
-        "[d3] Recognized Loki at the Hub crossing and greeted them by name. Noted that the Hub is not a place road-wardens usually pause. Observed Cy's presence with familiarity."
+        "[d3] Recognized Loki at the Hub crossing and greeted them by name. Noted that the Hub is not a place road-wardens usually pause. Observed Cy's presence with familiarity.",
+        "[d3] Named Veln Ashpause as an Hourkeeper who arrived this morning asking after someone matching Loki's description. Emphasized the Hourkeeper's nature: they see time differently, and their presence suggests foreknowledge of what is coming."
       ],
       "knownFacts": [
-        "There is a stone ford two reaches spinward from the main pass — less direct but passable",
-        "The upstream water is running wrong in colour and flow — the melt-season is pushing it fast downhill",
         "The relay carries this news, but the relay moves slow; the traveler moves faster",
         "A family three reaches spinward has kin in the city and sent word asking if the problem has reached the well-country yet — it hasn't, but will",
         "This person carries the crisis as their own burden—they do not only relay it, they warn against it with the weight of someone who knows what it means.",
         "They ask questions that root for truth, not for advantage, and they recognize the same when they meet it.",
         "The road-warden has traveled to the Hub crossing and paused there",
-        "They know Loki by sight and name after their brief meeting on the road"
+        "They know Loki by sight and name after their brief meeting on the road",
+        "Veln Ashpause is an Hourkeeper with foreknowledge of Loki's arrival at the Hub",
+        "Hourkeepers perceive past, present, and future differently—often uncertain which direction they are looking"
       ],
       "skillsObserved": [
         "Reads travelers by bearing and gait",
@@ -879,12 +895,12 @@
       "sex": "unknown",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "At the Hub crossing, speaking with Loki",
+      "statusNote": "Standing by the western arch at the Hub crossing, speaking plainly and carefully with Loki.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 3
       },
-      "met": 4
+      "met": 5
     }
   },
   "placeMemory": {
@@ -1272,7 +1288,7 @@
     "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 69,
     "lastCanonWorldDay": 69,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Vessin's unplanned detail — she was in the lower Annex this morning, and she saw the man",
@@ -5319,30 +5335,35 @@
         "facts": [
           "[d1] An Hourkeeper present at the confluence — watching Loki with foreknowledge",
           "[d1] Hourkeeper of the Confluence — she holds the moment before the moment, says nothing of what she carries, and the grey coat has never needed washing because nothing reaches it",
-          "[d2] [while away] Veln Ashpause continues her ordinary rounds, carrying the foreknowledge quietly; the moment she is drawn toward has not yet announced itself, and she does nothing to hasten it."
+          "[d2] [while away] Veln Ashpause continues her ordinary rounds, carrying the foreknowledge quietly; the moment she is drawn toward has not yet announced itself, and she does nothing to hasten it.",
+          "[d3] An Hourkeeper—a person who perceives time differently from ordinary measure. Past, present, and future are not always certain in which direction they look. Arrived at the Hub crossing this morning asking after someone matching Loki's description. Does not offer explanation but watches with…"
         ],
-        "links": [],
+        "links": [
+          "the-crossing"
+        ],
         "aliases": [
           "Veln Ashpause"
         ],
         "createdDay": 1,
         "entityId": "hourkeeper-confluence",
-        "updatedDay": 2
+        "updatedDay": 3
       },
       "hourkeepers": {
         "id": "hourkeepers",
         "label": "The Hourkeepers",
         "kind": "mystery",
         "facts": [
-          "[d1] An Hourkeeper appeared at the confluence without sound, fixed Loki with an expression of terrible sympathy, and said nothing. They have pre-remembered something and cannot stop knowing it — and cannot say what it is."
+          "[d1] An Hourkeeper appeared at the confluence without sound, fixed Loki with an expression of terrible sympathy, and said nothing. They have pre-remembered something and cannot stop knowing it — and cannot say what it is.",
+          "[d3] A people or tradition that perceives time in a non-linear fashion—they are uncertain whether they are looking backward, forward, or at the present moment. They arrive at places carrying knowledge they cannot or will not share, and their presence often signals foreknowledge of what is coming."
         ],
         "links": [
           "the-hostile-meeting",
-          "the-disputed-zone"
+          "the-disputed-zone",
+          "veln-ashpause"
         ],
         "aliases": [],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 3
       },
       "the-stranger-aggressor": {
         "id": "the-stranger-aggressor",
@@ -5719,17 +5740,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.538966620290122,
-    "cerebral": 8.723038945541191,
-    "social": 15.481665997734032,
-    "strategic": 6.23900770695744,
-    "cautious": 6.5404171319087885,
-    "amorous": 18.939089651788514,
-    "generous": 2.2836832423653486,
-    "ruthless": 0.8010662504606499,
-    "risky": 0.6546674771864225,
-    "patient": 0.17877791479209298,
-    "deception": 0.208106753070393
+    "devotion": 1.5004924547828689,
+    "cerebral": 8.50496297190266,
+    "social": 15.094624347790681,
+    "strategic": 6.083032514283504,
+    "cautious": 6.376906703611069,
+    "amorous": 18.4656124104938,
+    "generous": 2.226591161306215,
+    "ruthless": 0.7810395941991337,
+    "risky": 0.6383007902567619,
+    "patient": 0.17430846692229066,
+    "deception": 0.20290408424363318
   },
   "aptitudes": [
     "silver_tongue",
@@ -5740,7 +5761,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 146,
+  "actionCount": 147,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -5803,6 +5824,14 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 48,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A grey-coated figure stands motionless by a waygate arch in a vast stone chamber, eyes fixed on you across pale worn floor. Five arches hum faintly in the background. The figure's expression carries a",
+      "url": "https://image.pollinations.ai/prompt/A%20grey-coated%20figure%20stands%20motionless%20by%20a%20waygate%20arch%20in%20a%20vast%20stone%20chamber%2C%20eyes%20fixed%20on%20you%20across%20pale%20worn%20floor.%20Five%20arches%20hum%20faintly%20in%20the%20background.%20The%20figure's%20expression%20carries%20a%20terrible%2C%20helpless%20foreknowledge%E2%80%94they%20know%20something%20is%20coming%20and%20cannot%20stop%20it.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=62297&nologo=true",
+      "caption": "At the Hub crossing, the road-warden identifies the watching figure as Veln Ashpause, an H",
+      "worldDay": 69,
+      "at": "2026-09-07T22:56:02.681Z"
+    },
     {
       "kind": "ability",
       "prompt": "Veil Stroke",
@@ -6263,8 +6292,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788821564169,
-  "rev": 562,
+  "updatedAt": 1788821762682,
+  "rev": 564,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7126,7 +7155,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 8
+    "the_center": 9
   },
   "opLossPending": false,
   "sessions": [
@@ -7197,10 +7226,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-07T19:42:14.907Z",
-      "lastAt": "2026-09-07T22:52:44.149Z",
+      "lastAt": "2026-09-07T22:56:02.659Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 14
+      "beats": 15
     }
   ],
   "establishedFacts": [
@@ -7244,17 +7273,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 173,
-    "choices": 173,
+    "sceneSummary": 174,
+    "choices": 174,
     "characterDeltas": 69,
-    "scene": 173,
+    "scene": 174,
     "placeUpdates": 21,
-    "codexUpdates": 99,
+    "codexUpdates": 100,
     "timeOps": 160,
     "offer": 14,
     "generateRequest": 6,
     "sceneEnded": 50,
-    "npcUpdates": 142,
+    "npcUpdates": 143,
     "moveTo": 6,
     "gambitApt": 14,
     "deeds": 2,
@@ -7265,10 +7294,10 @@
     "encounterOps": 8,
     "ledgerEvents": 2,
     "newEncounter": 2,
-    "imagePrompt": 5,
+    "imagePrompt": 6,
     "scene_ended": 1
   },
-  "_opTurns": 173,
+  "_opTurns": 174,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1.75
@@ -7282,7 +7311,7 @@
       "the_misdirect": 2,
       "the_better_story": 11,
       "prism_sight": 10,
-      "harmonic_voice": 7,
+      "harmonic_voice": 8,
       "hunters_strike": 3,
       "descent": 8,
       "wayfinding": 1,
@@ -7837,7 +7866,8 @@
     "careful": 2,
     "woo": 1,
     "rapport": 2,
-    "retreat": 1
+    "retreat": 1,
+    "ask": 1
   },
   "aptitudeEarnCount": {
     "faithful": 1

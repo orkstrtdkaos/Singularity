@@ -45,7 +45,7 @@
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 0,
+  "energy": 40,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -112,11 +112,138 @@
     "Brynjar departed the fire-pit with Freki and walked north through the spring dark to the waygate stone, turning the night's revelations over on the road."
   ],
   "currentLocationId": "gen-the-waygate",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-the-waygate",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Brynjar rested at the waygate stone and woke at dawn to find a dead sheep on the track — the first sign the Riven Marches livestock sickness has reached this road.",
+        "narration": "You find a hollow in the lee of the waygate stone — the iron ring above you catching the last of the night wind — and spread your bedroll on ground that is cold but dry enough. Freki circles twice and drops against your side, a warm press of wire coat and slow breath. Sleep comes without argument.\n\nDawn arrives gray and honest. The melt has softened the track overnight; boot-prints from yesterday are deeper now, edges blurred by the slow seep. The waygate stone stands as it did — the broken top, the iron ring hammered in crooked — but the light is different, the shadow thrown spinward across the path rather than widdershins. Your body feels the night's work undone. Freki is already on her feet, nose moving along the ground in widening arcs, reading the night's traffic.\n\nSomething she finds makes her pause — not a growl, not alarm, but the focused stillness she gets when something is worth your attention. A few yards along the track toward the Marchward, there is a dead sheep. Not torn, not dragged. It simply lay down in the night and did not get up, and whoever owns it has not yet come looking. The fleece is patchy in a way you have seen before on animals that stopped eating weeks before they died. You think of the news that has been drifting up the road — the Riven Marches herds, the quiet sickness spreading flock to flock — and the dead animal at a waygate feels less like bad luck and more like a marker."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You find a hollow in the lee of the waygate stone — the iron ring above you catching the last of the night wind — and spread your bedroll on ground that is cold but dry enough. Freki circles twice and drops against your side, a warm press of wire coat and slow breath. Sleep comes without argument.\n\nDawn arrives gray and honest. The melt has softened the track overnight; boot-prints from yesterday are deeper now, edges blurred by the slow seep. The waygate stone stands as it did — the broken top, the iron ring hammered in crooked — but the light is different, the shadow thrown spinward across the path rather than widdershins. Your body feels the night's work undone. Freki is already on her feet, nose moving along the ground in widening arcs, reading the night's traffic.\n\nSomething she finds makes her pause — not a growl, not alarm, but the focused stillness she gets when something is worth your attention. A few yards along the track toward the Marchward, there is a dead sheep. Not torn, not dragged. It simply lay down in the night and did not get up, and whoever owns it has not yet come looking. The fleece is patchy in a way you have seen before on animals that stopped eating weeks before they died. You think of the news that has been drifting up the road — the Riven Marches herds, the quiet sickness spreading flock to flock — and the dead animal at a waygate feels less like bad luck and more like a marker.",
+      "sceneSummary": "Brynjar rested at the waygate stone and woke at dawn to find a dead sheep on the track — the first sign the Riven Marches livestock sickness has reached this road.",
+      "choices": [
+        {
+          "label": "Use Order-Sense on the dead sheep — read whether this is disease, something structural in the water or ground, or something else entirely",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": "normal",
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Let Freki work — follow her nose and see where the sheep came from, and whether there are others",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": "easy",
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Leave the sheep and head back toward the Marchward — bring word of what you found to Halvra Stenn at the Wardhouse",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": "very easy",
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "xp": 0
+      },
+      "timeOps": {
+        "hoursPassed": 8,
+        "why": "slept through the night at the waygate stone"
+      },
+      "scene": {
+        "setting": "The waygate stone at dawn — a broken standing stone with an iron ring, on the track half a morning north of the Marchward. Cold, gray early-spring light; the ground softened by overnight melt, boot-prints from yesterday now blurred. Spinward shadow from the stone across the path.",
+        "npcsPresent": [
+          {
+            "name": "Freki",
+            "state": "On her feet and ranging, nose working the ground in arcs — paused and focused near a dead sheep a few yards down the track"
+          }
+        ],
+        "objects": [
+          "waygate stone with iron ring",
+          "bedroll (packed)",
+          "dead sheep on the track — not torn, fleece patchy, lay down and did not rise"
+        ],
+        "threads": [
+          "The dead sheep — is this the Riven Marches sickness arriving at the waygate road?",
+          "Maret Threnwick is traveling south to the Stillhold alone with the cloth bundle",
+          "The restricted creditor on Maret's debt is still unnamed"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "freki",
+          "name": "Freki",
+          "note": "Woke at dawn and ranged immediately; found the dead sheep and stopped — focused stillness, not alarm. Performing her role as the sharper set of senses.",
+          "statusNote": "At the waygate stone, on point near the dead sheep"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "riven-marches-sickness",
+          "label": "Livestock Sickness of the Riven Marches",
+          "kind": "mystery",
+          "fact": "A dead sheep found at the waygate road at dawn — fleece patchy, no signs of predation, died lying down. The pattern matches what has been said of the Riven Marches herds: animals that stopped eating weeks before they collapsed. The sickness may be moving along the road.",
+          "links": [
+            "the-marchward",
+            "brynjar-andyrsson-thread"
+          ]
+        }
+      ],
+      "offer": {
+        "thing": "A dead sheep on the waygate track — patchy fleece, no signs of violence, the same quiet sickness spreading through the Riven Marches herds",
+        "from": "What is stirring in the world: livestock quietly sickening across the Riven Marches, now visibly present on this road"
+      },
+      "placeUpdates": [
+        {
+          "note": "A dead sheep found on the track at dawn — patchy fleece, no predation. First sign of the Riven Marches livestock sickness at this waygate."
+        }
+      ],
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The waygate stone at dawn — a broken standing stone with an iron ring, on the track half a morning north of the Marchward. Cold, gray early-spring light; the ground softened by overnight melt, boot-prints from yesterday now blurred. Spinward shadow from the stone across the path.",
+      "npcsPresent": [
+        {
+          "name": "Freki",
+          "state": "On her feet and ranging, nose working the ground in arcs — paused and focused near a dead sheep a few yards down the tra"
+        }
+      ],
+      "objects": [
+        "waygate stone with iron ring",
+        "bedroll (packed)",
+        "dead sheep on the track — not torn, fleece patchy, lay down and did not rise"
+      ],
+      "threads": [
+        "The dead sheep — is this the Riven Marches sickness arriving at the waygate road?",
+        "Maret Threnwick is traveling south to the Stillhold alone with the cloth bundle",
+        "The restricted creditor on Maret's debt is still unnamed"
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
-    "day": 1,
-    "hour": 22,
+    "day": 2,
+    "hour": 14,
     "realAnchor": null
   },
   "companions": [
@@ -524,7 +651,9 @@
     },
     "gen-the-waygate": {
       "visits": 1,
-      "notes": [],
+      "notes": [
+        "[d2] A dead sheep found on the track at dawn — patchy fleece, no predation. First sign of the Riven Marches livestock sickness at this waygate."
+      ],
       "flags": {},
       "lastVisit": 1,
       "vectorsKnown": []
@@ -532,7 +661,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 1,
+    "lastTickDay": 2,
     "eventStages": {
       "water_crisis": {
         "stage": 2,
@@ -545,11 +674,6 @@
       "falsehood_truth": -0.05
     },
     "news": [
-      {
-        "day": 1,
-        "worldDay": 19,
-        "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
-      },
       {
         "day": 1,
         "worldDay": 13,
@@ -699,13 +823,20 @@
         "text": "Ragnar Solmyr: Ragnar and Brynjar have covered ground, crossing into the first southern stretch of the Marchward and making camp at a waystone — still far from wherever they're bound, but their boots are worn and the miles are real.",
         "tier": "ambient",
         "section": "world"
+      },
+      {
+        "day": 2,
+        "worldDay": 69,
+        "text": "Something has been building in riven marches: Livestock across the Riven Marches are quietly sickening, and by spring the herds will be too thin to sustain the border steadings through another winter.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-07T14:02:59.807Z",
+    "lastSharedReadAt": "2026-09-07T19:35:50.461Z",
     "lastTickWorldDay": 69,
     "lastCanonWorldDay": 69,
-    "lastGenCount": 1670,
+    "lastGenCount": 1675,
     "wantProgress": {
       "redline-warrior": {
         "progress": 1,
@@ -744,12 +875,8 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Ragnar volunteered that he saw movement at the east fork before dawn — a detail he'd been holding, waiting for someone who earned it",
-        "from": "His nature as a reader of patterns and his days watching the square — he notices, and he gives what he notices to someone who shows up right"
-      },
       {
         "thing": "Freki sitting rather than ranging — the particular stillness that means the trail changed here, not ended, and Freki is waiting to be told…",
         "from": "Freki's established read: it holds trails without being commanded, and its sitting is information the same way a growl is information…"
@@ -765,6 +892,10 @@
       {
         "thing": "Maret beginning to open — the shape of what she carries is about to become real",
         "from": "Maret's own read of Brynjar: trustworthy, patient — the two-copper payment without argument is exactly the kind of small, legible honesty…"
+      },
+      {
+        "thing": "A dead sheep on the waygate track — patchy fleece, no signs of violence, the same quiet sickness spreading through the Riven Marches herds",
+        "from": "What is stirring in the world: livestock quietly sickening across the Riven Marches, now visibly present on this road"
       }
     ],
     "latentArcs": {
@@ -774,11 +905,12 @@
         "kind": "shortage",
         "premise": "Livestock across the Riven Marches are quietly sickening, and by spring the herds will be too thin to sustain the border steadings through another winter.",
         "cause": "The seasonal flooding that replenishes the salt-lick flats has been redirected by a collapsed drainage bank, leaving the mineral deposits buried under…",
-        "stage": 1,
+        "stage": 2,
         "seededAtCount": 1669,
-        "surfaced": false,
+        "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 1669
+        "lastMovedCount": 1669,
+        "surfacedAtCount": 1675
       }
     },
     "newsSpread": {},
@@ -3118,7 +3250,23 @@
         "want": null
       }
     },
-    "pressureQueue": []
+    "pressureQueue": [
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_pale_reader",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a pale reader has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_pale_reader",
+          "name": "a pale reader"
+        },
+        "addedDay": 2,
+        "locationId": "gen-the-waygate"
+      }
+    ]
   },
   "domains": {
     "primary": "marcher",
@@ -3160,7 +3308,8 @@
           "[d?] you have walked here",
           "[d1] All arrivals must present at the Wardhouse within the hour by truce-law; arms are checked on the rack inside. The duty officer logs names, origins, and any declaration of blood business.",
           "[d1] The Wardhouse posts a weekly night-watch vacancy for travelers without permanent standing — meal, floor space, and a half-copper per watch. Road-clearing east toward the Stillhold is already taken.",
-          "[d1] The nearest way gate is half a morning north of the Marchward Wardhouse, marked by a broken stone with an iron ring hammered into it — on the waystone track heading hubward from the town."
+          "[d1] The nearest way gate is half a morning north of the Marchward Wardhouse, marked by a broken stone with an iron ring hammered into it — on the waystone track heading hubward from the town.",
+          "[d2] Livestock Sickness of the Riven Marches — A dead sheep found at the waygate road at dawn — fleece patchy, no signs of predation, died lying down. The pattern matches what has been said of the Riven Marches herds: animals that stopped eating weeks before they collapsed. The sickness may be moving…"
         ],
         "links": [
           "the-redline",
@@ -3177,7 +3326,7 @@
         ],
         "createdDay": 1,
         "entityId": "the-marchward",
-        "updatedDay": 1
+        "updatedDay": 2
       },
       "kjotve-olafsson": {
         "id": "kjotve-olafsson",
@@ -3662,6 +3811,14 @@
         },
         "relinked": []
       }
+    ],
+    "refused": [
+      {
+        "label": "Livestock Sickness of the Riven Marches",
+        "to": "the-marchward",
+        "why": "beat",
+        "day": 2
+      }
     ]
   },
   "tendencies": {
@@ -3870,8 +4027,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788809560826,
-  "rev": 118,
+  "updatedAt": 1788809828380,
+  "rev": 121,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4323,7 +4480,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,
-    "the_center": 12
+    "the_center": 13
   },
   "practice": {
     "schemaVersion": 1,
@@ -4417,10 +4574,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-07T19:32:40.807Z",
-      "lastAt": "2026-09-07T19:32:40.807Z",
+      "lastAt": "2026-09-07T19:37:08.364Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 1
+      "beats": 2
     }
   ],
   "_pendingArrival": null,
@@ -4436,28 +4593,28 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 44,
-    "choices": 44,
-    "scene": 44,
-    "npcUpdates": 41,
-    "placeUpdates": 6,
+    "sceneSummary": 45,
+    "choices": 45,
+    "scene": 45,
+    "npcUpdates": 42,
+    "placeUpdates": 7,
     "generateRequest": 4,
     "moveTo": 6,
-    "timeOps": 40,
-    "codexUpdates": 36,
-    "sceneEnded": 12,
-    "characterDeltas": 15,
-    "offer": 6,
+    "timeOps": 41,
+    "codexUpdates": 37,
+    "sceneEnded": 13,
+    "characterDeltas": 16,
+    "offer": 7,
     "deeds": 1,
     "standingOps": 1,
     "questUpdates": 5,
     "stageOps": 2,
     "factUpdates": 2
   },
-  "_opTurns": 44,
+  "_opTurns": 45,
   "_opLedger": {
     "offer": {
-      "applied": 6,
+      "applied": 7,
       "rejected": 0,
       "lastWhy": null
     }
@@ -4547,7 +4704,7 @@
       "image": "https://image.pollinations.ai/prompt/The%20Fell%20Pell%3A%20a%20working%20enterprise%2C%20steady%2C%20kept%20up%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=26713&nologo=true"
     }
   ],
-  "_lastProjectDay": 1,
+  "_lastProjectDay": 2,
   "featureOffers": [
     {
       "holdingId": "the-fell-pell",
@@ -4579,5 +4736,6 @@
   },
   "_intentAsked": null,
   "_pendingIntent": null,
-  "sharedSceneId": null
+  "sharedSceneId": null,
+  "conditions": []
 }
